@@ -62,7 +62,7 @@ IWRAM_DATA s8 sTVShowMixingCurSlot;
 EWRAM_DATA u16 sPokemonAnglerSpecies = 0;
 EWRAM_DATA u16 sPokemonAnglerAttemptCounters = 0;
 EWRAM_DATA u16 sFindThatGamerCoinsSpent = 0;
-EWRAM_DATA bool8 sFindThatGamerWhichGame = SLOT_MACHINE;
+EWRAM_DATA u8 sFindThatGamerWhichGame = SLOT_MACHINE;
 EWRAM_DATA ALIGNED(4) u8 sRecordMixingPartnersWithoutShowsToShare = 0;
 EWRAM_DATA ALIGNED(4) u8 sTVShowState = 0;
 EWRAM_DATA u8 sTVSecretBaseSecretsRandomValues[3] = {};
@@ -2019,7 +2019,7 @@ void sub_80EDCE8(void)
     }
 }
 
-void reportNewCoinTotal(u16 nCoinsPaidOut)
+void AlertTVOfNewCointTotal(u16 nCoinsPaidOut)
 {
     TVShow *show;
     bool8 flag;
@@ -2072,13 +2072,13 @@ void reportNewCoinTotal(u16 nCoinsPaidOut)
     }
 }
 
-void AlertTVThatYouPlayedSlotMachine(u16 nCoinsSpent)
+void AlertTVThatPlayerPlayedSlotMachine(u16 nCoinsSpent)
 {
     sFindThatGamerWhichGame = SLOT_MACHINE;
     sFindThatGamerCoinsSpent = nCoinsSpent;
 }
 
-void AlertTVThatYouPlayedRoulette(u16 nCoinsSpent)
+void AlertTVThatPlayerPlayedRoulette(u16 nCoinsSpent)
 {
     sFindThatGamerWhichGame = ROULETTE;
     sFindThatGamerCoinsSpent = nCoinsSpent;
