@@ -20,8 +20,8 @@ EverGrandeCity_HallOfFame_EventScript_229850:: @ 8229850
 	applymovement 1, EverGrandeCity_HallOfFame_Movement_229901
 	applymovement EVENT_OBJ_ID_PLAYER, EverGrandeCity_HallOfFame_Movement_229901
 	waitmovement 0
-	applymovement 1, EverGrandeCity_HallOfFame_Movement_2725A8
-	applymovement EVENT_OBJ_ID_PLAYER, EverGrandeCity_HallOfFame_Movement_2725A4
+	applymovement 1, Common_Movement_WalkInPlaceRight
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceLeft
 	waitmovement 0
 	msgbox EverGrandeCity_HallOfFame_Text_22990E, MSGBOX_DEFAULT
 	closemessage
@@ -29,13 +29,13 @@ EverGrandeCity_HallOfFame_EventScript_229850:: @ 8229850
 	applymovement EVENT_OBJ_ID_PLAYER, EverGrandeCity_HallOfFame_Movement_229908
 	waitmovement 0
 	delay 20
-	applymovement 1, EverGrandeCity_HallOfFame_Movement_2725A8
-	applymovement EVENT_OBJ_ID_PLAYER, EverGrandeCity_HallOfFame_Movement_2725A4
+	applymovement 1, Common_Movement_WalkInPlaceRight
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceLeft
 	waitmovement 0
 	msgbox EverGrandeCity_HallOfFame_Text_2299A3, MSGBOX_DEFAULT
 	closemessage
-	applymovement 1, EverGrandeCity_HallOfFame_Movement_2725A6
-	applymovement EVENT_OBJ_ID_PLAYER, EverGrandeCity_HallOfFame_Movement_2725A6
+	applymovement 1, Common_Movement_WalkInPlaceUp
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceUp
 	waitmovement 0
 	delay 20
 	dofieldeffect 62

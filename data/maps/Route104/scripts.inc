@@ -42,7 +42,7 @@ Route104_EventScript_1ECC9D:: @ 81ECC9D
 Route104_EventScript_1ECC9E:: @ 81ECC9E
 	lockall
 	setvar VAR_0x8008, 1
-	applymovement 34, Route104_Movement_27259E
+	applymovement 34, Common_Movement_FacePlayer
 	waitmovement 0
 	goto Route104_EventScript_1ECD33
 
@@ -51,7 +51,7 @@ Route104_EventScript_1ECCB3:: @ 81ECCB3
 	setflag FLAG_HIDE_RUSBORO_CITY_RIVAL
 	setvar VAR_0x405A, 8
 	setvar VAR_0x4063, 2
-	applymovement EVENT_OBJ_ID_PLAYER, Route104_Movement_2725A6
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceUp
 	waitmovement 0
 	delay 10
 	addobject 34
@@ -64,9 +64,9 @@ Route104_EventScript_1ECCB3:: @ 81ECCB3
 	setvar VAR_0x8008, 0
 	call Route104_EventScript_1E0DD1
 	playse SE_PIN
-	applymovement 34, Route104_Movement_272598
+	applymovement 34, Common_Movement_ExclamationMark
 	waitmovement 0
-	applymovement 34, Route104_Movement_27259A
+	applymovement 34, Common_Movement_Delay48
 	waitmovement 0
 	goto Route104_EventScript_1ECD33
 

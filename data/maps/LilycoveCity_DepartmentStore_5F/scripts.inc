@@ -123,7 +123,7 @@ LilycoveCity_DepartmentStore_5F_EventScript_22006C:: @ 822006C
 
 LilycoveCity_DepartmentStore_5F_EventScript_220075:: @ 8220075
 	lockall
-	applymovement 7, LilycoveCity_DepartmentStore_5F_Movement_27259E
+	applymovement 7, Common_Movement_FacePlayer
 	waitmovement 0
 	compare VAR_0x405E, 0
 	goto_if_eq LilycoveCity_DepartmentStore_5F_EventScript_22009C
@@ -141,7 +141,7 @@ LilycoveCity_DepartmentStore_5F_EventScript_22009C:: @ 822009C
 LilycoveCity_DepartmentStore_5F_EventScript_2200A7:: @ 82200A7
 	msgbox LilycoveCity_DepartmentStore_5F_Text_2201C4, MSGBOX_DEFAULT
 	closemessage
-	applymovement 7, LilycoveCity_DepartmentStore_5F_Movement_2725A6
+	applymovement 7, Common_Movement_WalkInPlaceUp
 	waitmovement 0
 	releaseall
 	end

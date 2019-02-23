@@ -67,9 +67,9 @@ LittlerootTown_BrendansHouse_2F_EventScript_1F8497:: @ 81F8497
 	applymovement 1, LittlerootTown_BrendansHouse_2F_Movement_1F85BC
 	waitmovement 0
 	playse SE_PIN
-	applymovement 1, LittlerootTown_BrendansHouse_2F_Movement_272598
+	applymovement 1, Common_Movement_ExclamationMark
 	waitmovement 0
-	applymovement 1, LittlerootTown_BrendansHouse_2F_Movement_27259A
+	applymovement 1, Common_Movement_Delay48
 	waitmovement 0
 	delay 10
 	playbgm MUS_BOY_SUP, 1
@@ -93,7 +93,7 @@ LittlerootTown_BrendansHouse_2F_EventScript_1F8497:: @ 81F8497
 LittlerootTown_BrendansHouse_2F_EventScript_1F8507:: @ 81F8507
 	applymovement 1, LittlerootTown_BrendansHouse_2F_Movement_1F85C0
 	waitmovement 0
-	applymovement EVENT_OBJ_ID_PLAYER, LittlerootTown_BrendansHouse_2F_Movement_2725A8
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceRight
 	waitmovement 0
 	msgbox LittlerootTown_BrendansHouse_2F_Text_1F97B4, MSGBOX_DEFAULT
 	closemessage
@@ -105,7 +105,7 @@ LittlerootTown_BrendansHouse_2F_EventScript_1F8507:: @ 81F8507
 LittlerootTown_BrendansHouse_2F_EventScript_1F8536:: @ 81F8536
 	applymovement 1, LittlerootTown_BrendansHouse_2F_Movement_1F85D7
 	waitmovement 0
-	applymovement EVENT_OBJ_ID_PLAYER, LittlerootTown_BrendansHouse_2F_Movement_2725A8
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceRight
 	waitmovement 0
 	msgbox LittlerootTown_BrendansHouse_2F_Text_1F97B4, MSGBOX_DEFAULT
 	closemessage
@@ -117,7 +117,7 @@ LittlerootTown_BrendansHouse_2F_EventScript_1F8536:: @ 81F8536
 LittlerootTown_BrendansHouse_2F_EventScript_1F8565:: @ 81F8565
 	applymovement 1, LittlerootTown_BrendansHouse_2F_Movement_1F85E8
 	waitmovement 0
-	applymovement EVENT_OBJ_ID_PLAYER, LittlerootTown_BrendansHouse_2F_Movement_2725A8
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceRight
 	waitmovement 0
 	msgbox LittlerootTown_BrendansHouse_2F_Text_1F97B4, MSGBOX_DEFAULT
 	closemessage
@@ -129,7 +129,7 @@ LittlerootTown_BrendansHouse_2F_EventScript_1F8565:: @ 81F8565
 LittlerootTown_BrendansHouse_2F_EventScript_1F8594:: @ 81F8594
 	applymovement 1, LittlerootTown_BrendansHouse_2F_Movement_1F85FD
 	waitmovement 0
-	applymovement EVENT_OBJ_ID_PLAYER, LittlerootTown_BrendansHouse_2F_Movement_2725A6
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceUp
 	waitmovement 0
 	msgbox LittlerootTown_BrendansHouse_2F_Text_1F97B4, MSGBOX_DEFAULT
 	closemessage

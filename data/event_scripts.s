@@ -1280,11 +1280,11 @@ OldaleTown_PokemonCenter_1F_EventScript_27198D:: @ 827198D
 	return
 
 OldaleTown_PokemonCenter_1F_EventScript_271993:: @ 8271993
-	applymovement VAR_0x800B, OldaleTown_PokemonCenter_1F_Movement_2725A4
+	applymovement VAR_0x800B, Common_Movement_WalkInPlaceLeft
 	waitmovement 0
 	dofieldeffect FLDEFF_POKECENTER_HEAL
 	waitfieldeffect FLDEFF_POKECENTER_HEAL
-	applymovement VAR_0x800B, OldaleTown_PokemonCenter_1F_Movement_2725AA
+	applymovement VAR_0x800B, Common_Movement_WalkInPlaceDown
 	waitmovement 0
 	special HealPlayerParty
 	return
@@ -1348,9 +1348,9 @@ OldaleTown_PokemonCenter_1F_EventScript_271A68:: @ 8271A68
 	setflag FLAG_OLDALE_NURSE_MENTIONS_GOLD_CARD
 	msgbox gUnknown_082727F5, MSGBOX_DEFAULT
 	playse SE_PIN
-	applymovement VAR_0x800B, OldaleTown_PokemonCenter_1F_Movement_272598
+	applymovement VAR_0x800B, Common_Movement_ExclamationMark
 	waitmovement 0
-	applymovement VAR_0x800B, OldaleTown_PokemonCenter_1F_Movement_27259A
+	applymovement VAR_0x800B, Common_Movement_Delay48
 	waitmovement 0
 	msgbox gUnknown_08272860, MSGBOX_YESNO
 	compare VAR_RESULT, 1
@@ -2080,7 +2080,7 @@ RusturfTunnel_EventScript_272216:: @ 8272216
 
 EventScript_27222B:: @ 827222B
 	delay 30
-	applymovement EVENT_OBJ_ID_PLAYER, PetalburgCity_Movement_2725A6
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceUp
 	waitmovement 0
 	showobjectat 255, MAP_PETALBURG_CITY
 	delay 30
@@ -2223,7 +2223,7 @@ Route119_EventScript_272350:: @ 8272350
 Route119_EventScript_272365:: @ 8272365
 	msgbox Route119_Text_1F5D63, MSGBOX_DEFAULT
 	closemessage
-	applymovement VAR_LAST_TALKED, Route119_Movement_27259E
+	applymovement VAR_LAST_TALKED, Common_Movement_FacePlayer
 	waitmovement 0
 	applymovement VAR_LAST_TALKED, Route119_Movement_2723C7
 	waitmovement 0
@@ -2370,354 +2370,41 @@ SlateportCity_Movement_272596: @ 8272596
 	emote_question_mark
 	step_end
 
-AquaHideout_B2F_Movement_272598: @ 8272598
-BattleFrontier_BattleTowerBattleRoom_Movement_272598: @ 8272598
-BattleFrontier_ReceptionGate_Movement_272598: @ 8272598
-CaveOfOrigin_B1F_Movement_272598: @ 8272598
-EverGrandeCity_ChampionsRoom_Movement_272598: @ 8272598
-FarawayIsland_Interior_Movement_272598: @ 8272598
-JaggedPass_Movement_272598: @ 8272598
-LavaridgeTown_Movement_272598: @ 8272598
-LilycoveCity_ContestLobby_Movement_272598: @ 8272598
-LilycoveCity_CoveLilyMotel_1F_Movement_272598: @ 8272598
-LilycoveCity_Harbor_Movement_272598: @ 8272598
-LittlerootTown_BrendansHouse_1F_Movement_272598: @ 8272598
-LittlerootTown_BrendansHouse_2F_Movement_272598: @ 8272598
-LittlerootTown_MaysHouse_1F_Movement_272598: @ 8272598
-LittlerootTown_MaysHouse_2F_Movement_272598: @ 8272598
-LittlerootTown_Movement_272598: @ 8272598
-MauvilleCity_House2_Movement_272598: @ 8272598
-MauvilleCity_Movement_272598: @ 8272598
-MeteorFalls_1F_1R_Movement_272598: @ 8272598
-MeteorFalls_StevensCave_Movement_272598: @ 8272598
-MossdeepCity_SpaceCenter_2F_Movement_272598: @ 8272598
-MossdeepCity_StevensHouse_Movement_272598: @ 8272598
-MtChimney_Movement_272598: @ 8272598
-MtPyre_Summit_Movement_272598: @ 8272598
-OldaleTown_PokemonCenter_1F_Movement_272598: @ 8272598
-PetalburgCity_Gym_Movement_272598: @ 8272598
-PetalburgCity_Movement_272598: @ 8272598
-Route103_Movement_272598: @ 8272598
-Route104_Movement_272598: @ 8272598
-Route110_Movement_272598: @ 8272598
-Route110_TrickHouseEnd_Movement_272598: @ 8272598
-Route110_TrickHouseEntrance_Movement_272598: @ 8272598
-Route110_TrickHousePuzzle5_Movement_272598: @ 8272598
-Route119_WeatherInstitute_2F_Movement_272598: @ 8272598
-RustboroCity_DevonCorp_2F_Movement_272598: @ 8272598
-RustboroCity_Movement_272598: @ 8272598
-RusturfTunnel_Movement_272598: @ 8272598
-SeafloorCavern_Entrance_Movement_272598: @ 8272598
-SeafloorCavern_Room9_Movement_272598: @ 8272598
-SlateportCity_Movement_272598: @ 8272598
-SlateportCity_OceanicMuseum_1F_Movement_272598: @ 8272598
-SlateportCity_PokemonFanClub_Movement_272598: @ 8272598
+Common_Movement_ExclamationMark: @ 8272598
 	emote_exclamation_mark
 	step_end
 
-BattleFrontier_BattleTowerBattleRoom_Movement_27259A: @ 827259A
-BattleFrontier_ReceptionGate_Movement_27259A: @ 827259A
-CaveOfOrigin_B1F_Movement_27259A: @ 827259A
-EverGrandeCity_ChampionsRoom_Movement_27259A: @ 827259A
-FarawayIsland_Interior_Movement_27259A: @ 827259A
-JaggedPass_Movement_27259A: @ 827259A
-LavaridgeTown_Movement_27259A: @ 827259A
-LilycoveCity_CoveLilyMotel_1F_Movement_27259A: @ 827259A
-LilycoveCity_Harbor_Movement_27259A: @ 827259A
-LittlerootTown_BrendansHouse_1F_Movement_27259A: @ 827259A
-LittlerootTown_BrendansHouse_2F_Movement_27259A: @ 827259A
-LittlerootTown_MaysHouse_1F_Movement_27259A: @ 827259A
-LittlerootTown_MaysHouse_2F_Movement_27259A: @ 827259A
-MauvilleCity_House2_Movement_27259A: @ 827259A
-MauvilleCity_Movement_27259A: @ 827259A
-MeteorFalls_1F_1R_Movement_27259A: @ 827259A
-MeteorFalls_StevensCave_Movement_27259A: @ 827259A
-MossdeepCity_SpaceCenter_2F_Movement_27259A: @ 827259A
-MossdeepCity_StevensHouse_Movement_27259A: @ 827259A
-MtChimney_Movement_27259A: @ 827259A
-MtPyre_Summit_Movement_27259A: @ 827259A
-OldaleTown_PokemonCenter_1F_Movement_27259A: @ 827259A
-PetalburgCity_Gym_Movement_27259A: @ 827259A
-PetalburgCity_Movement_27259A: @ 827259A
-Route103_Movement_27259A: @ 827259A
-Route104_Movement_27259A: @ 827259A
-Route110_Movement_27259A: @ 827259A
-Route110_TrickHouseEntrance_Movement_27259A: @ 827259A
-Route110_TrickHousePuzzle5_Movement_27259A: @ 827259A
-Route119_WeatherInstitute_2F_Movement_27259A: @ 827259A
-RustboroCity_DevonCorp_2F_Movement_27259A: @ 827259A
-RustboroCity_Movement_27259A: @ 827259A
-RusturfTunnel_Movement_27259A: @ 827259A
-SeafloorCavern_Entrance_Movement_27259A: @ 827259A
-SeafloorCavern_Room9_Movement_27259A: @ 827259A
-SlateportCity_Movement_27259A: @ 827259A
-SlateportCity_OceanicMuseum_1F_Movement_27259A: @ 827259A
-SlateportCity_PokemonFanClub_Movement_27259A: @ 827259A
+Common_Movement_Delay48: @ 827259A
 	delay_16
 	delay_16
 	delay_16
 	step_end
 
-AquaHideout_B2F_Movement_27259E: @ 827259E
-BattleFrontier_BattlePyramidLobby_Movement_27259E: @ 827259E
-BattleFrontier_ScottsHouse_Movement_27259E: @ 827259E
-CaveOfOrigin_B1F_Movement_27259E: @ 827259E
-EverGrandeCity_PokemonLeague_1F_Movement_27259E: @ 827259E
-FallarborTown_House2_Movement_27259E: @ 827259E
-FortreeCity_House4_Movement_27259E: @ 827259E
-JaggedPass_Movement_27259E: @ 827259E
-LilycoveCity_ContestHall_Movement_27259E: @ 827259E
-LilycoveCity_CoveLilyMotel_1F_Movement_27259E: @ 827259E
-LilycoveCity_DepartmentStore_1F_Movement_27259E: @ 827259E
-LilycoveCity_DepartmentStore_5F_Movement_27259E: @ 827259E
-LilycoveCity_Harbor_Movement_27259E: @ 827259E
-LilycoveCity_LilycoveMuseum_1F_Movement_27259E: @ 827259E
-LilycoveCity_LilycoveMuseum_2F_Movement_27259E: @ 827259E
-LilycoveCity_MoveDeletersHouse_Movement_27259E: @ 827259E
-LilycoveCity_Movement_27259E: @ 827259E
-LittlerootTown_BrendansHouse_1F_Movement_27259E: @ 827259E
-LittlerootTown_BrendansHouse_2F_Movement_27259E: @ 827259E
-MagmaHideout_4F_Movement_27259E: @ 827259E
-MauvilleCity_Movement_27259E: @ 827259E
-MeteorFalls_StevensCave_Movement_27259E: @ 827259E
-MossdeepCity_SpaceCenter_2F_Movement_27259E: @ 827259E
-MtChimney_Movement_27259E: @ 827259E
-OldaleTown_Movement_27259E: @ 827259E
-PetalburgCity_Gym_Movement_27259E: @ 827259E
-PetalburgCity_Movement_27259E: @ 827259E
-Route103_Movement_27259E: @ 827259E
-Route104_Movement_27259E: @ 827259E
-Route110_TrickHouseEnd_Movement_27259E: @ 827259E
-Route110_TrickHouseEntrance_Movement_27259E: @ 827259E
-Route110_TrickHousePuzzle5_Movement_27259E: @ 827259E
-Route111_Movement_27259E: @ 827259E
-Route119_Movement_27259E: @ 827259E
-RustboroCity_Flat1_2F_Movement_27259E: @ 827259E
-RustboroCity_Movement_27259E: @ 827259E
-RusturfTunnel_Movement_27259E: @ 827259E
-SeafloorCavern_Room9_Movement_27259E: @ 827259E
-SlateportCity_Movement_27259E: @ 827259E
-SlateportCity_SternsShipyard_1F_Movement_27259E: @ 827259E
-SootopolisCity_Movement_27259E: @ 827259E
+Common_Movement_FacePlayer: @ 827259E
 	face_player
 	step_end
 
-BattleFrontier_OutsideWest_Movement_2725A0: @ 82725A0
+Common_Movement_FaceAwayPlayer: @ 82725A0
 	face_away_player
 	step_end
 
-BattleFrontier_Lounge3_Movement_2725A2: @ 82725A2
-BattleFrontier_OutsideWest_Movement_2725A2: @ 82725A2
-EverGrandeCity_PokemonLeague_1F_Movement_2725A2: @ 82725A2
-JaggedPass_Movement_2725A2: @ 82725A2
-LilycoveCity_ContestHall_Movement_2725A2: @ 82725A2
-LilycoveCity_ContestLobby_Movement_2725A2: @ 82725A2
-LilycoveCity_CoveLilyMotel_1F_Movement_2725A2: @ 82725A2
-LilycoveCity_House3_Movement_2725A2: @ 82725A2
-LilycoveCity_LilycoveMuseum_1F_Movement_2725A2: @ 82725A2
-LilycoveCity_Movement_2725A2: @ 82725A2
-LittlerootTown_Movement_2725A2: @ 82725A2
-MauvilleCity_GameCorner_Movement_2725A2: @ 82725A2
-MauvilleCity_Movement_2725A2: @ 82725A2
-MossdeepCity_Movement_2725A2: @ 82725A2
-MossdeepCity_SpaceCenter_1F_Movement_2725A2: @ 82725A2
-MossdeepCity_SpaceCenter_2F_Movement_2725A2: @ 82725A2
-MtChimney_Movement_2725A2: @ 82725A2
-OldaleTown_Movement_2725A2: @ 82725A2
-PetalburgCity_Movement_2725A2: @ 82725A2
-Route109_Movement_2725A2: @ 82725A2
-Route110_Movement_2725A2: @ 82725A2
-Route111_Movement_2725A2: @ 82725A2
-Route111_WinstrateFamilysHouse_Movement_2725A2: @ 82725A2
-Route112_Movement_2725A2: @ 82725A2
-Route119_Movement_2725A2: @ 82725A2
-RustboroCity_DevonCorp_3F_Movement_2725A2: @ 82725A2
-RustboroCity_Movement_2725A2: @ 82725A2
-RusturfTunnel_Movement_2725A2: @ 82725A2
-SlateportCity_Harbor_Movement_2725A2: @ 82725A2
-SlateportCity_Movement_2725A2: @ 82725A2
-SlateportCity_OceanicMuseum_2F_Movement_2725A2: @ 82725A2
-SlateportCity_SternsShipyard_1F_Movement_2725A2: @ 82725A2
-SootopolisCity_Movement_2725A2: @ 82725A2
-VerdanturfTown_Movement_2725A2: @ 82725A2
+Common_Movement_FaceOriginalDirection: @ 82725A2
 	face_original_direction
 	step_end
 
-AquaHideout_B2F_Movement_2725A4: @ 82725A4
-BattleFrontier_BattleFactoryBattleRoom_Movement_2725A4: @ 82725A4
-BattleFrontier_OutsideWest_Movement_2725A4: @ 82725A4
-BattleFrontier_ScottsHouse_Movement_2725A4: @ 82725A4
-DewfordTown_Hall_Movement_2725A4: @ 82725A4
-EverGrandeCity_ChampionsRoom_Movement_2725A4: @ 82725A4
-EverGrandeCity_HallOfFame_Movement_2725A4: @ 82725A4
-LavaridgeTown_Movement_2725A4: @ 82725A4
-LilycoveCity_Harbor_Movement_2725A4: @ 82725A4
-LilycoveCity_PokemonTrainerFanClub_Movement_2725A4: @ 82725A4
-LittlerootTown_BrendansHouse_1F_Movement_2725A4: @ 82725A4
-LittlerootTown_BrendansHouse_2F_Movement_2725A4: @ 82725A4
-LittlerootTown_MaysHouse_1F_Movement_2725A4: @ 82725A4
-LittlerootTown_MaysHouse_2F_Movement_2725A4: @ 82725A4
-LittlerootTown_Movement_2725A4: @ 82725A4
-LittlerootTown_ProfessorBirchsLab_Movement_2725A4: @ 82725A4
-MeteorFalls_1F_1R_Movement_2725A4: @ 82725A4
-MossdeepCity_SpaceCenter_2F_Movement_2725A4: @ 82725A4
-MossdeepCity_StevensHouse_Movement_2725A4: @ 82725A4
-MtChimney_Movement_2725A4: @ 82725A4
-MtPyre_Summit_Movement_2725A4: @ 82725A4
-OldaleTown_PokemonCenter_1F_Movement_2725A4: @ 82725A4
-PetalburgCity_Gym_Movement_2725A4: @ 82725A4
-PetalburgCity_Movement_2725A4: @ 82725A4
-PetalburgWoods_Movement_2725A4: @ 82725A4
-Route101_Movement_2725A4: @ 82725A4
-Route110_Movement_2725A4: @ 82725A4
-Route110_TrickHouseEnd_Movement_2725A4: @ 82725A4
-Route111_Movement_2725A4: @ 82725A4
-Route112_Movement_2725A4: @ 82725A4
-Route116_Movement_2725A4: @ 82725A4
-Route120_Movement_2725A4: @ 82725A4
-Route128_Movement_2725A4: @ 82725A4
-RustboroCity_Movement_2725A4: @ 82725A4
-SeafloorCavern_Entrance_Movement_2725A4: @ 82725A4
-SeafloorCavern_Room9_Movement_2725A4: @ 82725A4
-SkyPillar_Outside_Movement_2725A4: @ 82725A4
-SlateportCity_Movement_2725A4: @ 82725A4
-SlateportCity_OceanicMuseum_1F_Movement_2725A4: @ 82725A4
-SlateportCity_OceanicMuseum_2F_Movement_2725A4: @ 82725A4
-SootopolisCity_Movement_2725A4: @ 82725A4
+Common_Movement_WalkInPlaceLeft: @ 82725A4
 	walk_in_place_fastest_left
 	step_end
 
-BattleFrontier_BattleTowerCorridor2_Movement_2725A6: @ 82725A6
-BattleFrontier_BattleTowerMultiBattleRoom_Movement_2725A6: @ 82725A6
-BattleFrontier_OutsideWest_Movement_2725A6: @ 82725A6
-BattleFrontier_ReceptionGate_Movement_2725A6: @ 82725A6
-BattleFrontier_ScottsHouse_Movement_2725A6: @ 82725A6
-CaveOfOrigin_B1F_Movement_2725A6: @ 82725A6
-DewfordTown_Hall_Movement_2725A6: @ 82725A6
-EverGrandeCity_ChampionsRoom_Movement_2725A6: @ 82725A6
-EverGrandeCity_HallOfFame_Movement_2725A6: @ 82725A6
-LavaridgeTown_Movement_2725A6: @ 82725A6
-LilycoveCity_DepartmentStore_5F_Movement_2725A6: @ 82725A6
-LilycoveCity_Harbor_Movement_2725A6: @ 82725A6
-LittlerootTown_BrendansHouse_1F_Movement_2725A6: @ 82725A6
-LittlerootTown_BrendansHouse_2F_Movement_2725A6: @ 82725A6
-LittlerootTown_MaysHouse_2F_Movement_2725A6: @ 82725A6
-LittlerootTown_Movement_2725A6: @ 82725A6
-LittlerootTown_ProfessorBirchsLab_Movement_2725A6: @ 82725A6
-MagmaHideout_4F_Movement_2725A6: @ 82725A6
-MeteorFalls_1F_1R_Movement_2725A6: @ 82725A6
-MossdeepCity_SpaceCenter_2F_Movement_2725A6: @ 82725A6
-MtPyre_Summit_Movement_2725A6: @ 82725A6
-NewMauville_Entrance_Movement_2725A6: @ 82725A6
-OldaleTown_PokemonCenter_2F_Movement_2725A6: @ 82725A6
-PetalburgCity_Gym_Movement_2725A6: @ 82725A6
-PetalburgCity_Movement_2725A6: @ 82725A6
-PetalburgWoods_Movement_2725A6: @ 82725A6
-Route104_Movement_2725A6: @ 82725A6
-Route110_TrickHouseEnd_Movement_2725A6: @ 82725A6
-Route110_TrickHouseEntrance_Movement_2725A6: @ 82725A6
-Route111_Movement_2725A6: @ 82725A6
-Route114_FossilManiacsTunnel_Movement_2725A6: @ 82725A6
-Route120_Movement_2725A6: @ 82725A6
-Route121_SafariZoneEntrance_Movement_2725A6: @ 82725A6
-Route128_Movement_2725A6: @ 82725A6
-RustboroCity_Movement_2725A6: @ 82725A6
-RusturfTunnel_Movement_2725A6: @ 82725A6
-SeafloorCavern_Entrance_Movement_2725A6: @ 82725A6
-SeafloorCavern_Room9_Movement_2725A6: @ 82725A6
-SlateportCity_BattleTentCorridor_Movement_2725A6: @ 82725A6
-SlateportCity_Harbor_Movement_2725A6: @ 82725A6
-SlateportCity_Movement_2725A6: @ 82725A6
-SlateportCity_OceanicMuseum_2F_Movement_2725A6: @ 82725A6
-SootopolisCity_MysteryEventsHouse_1F_Movement_2725A6: @ 82725A6
-VerdanturfTown_BattleTentBattleRoom_Movement_2725A6: @ 82725A6
+Common_Movement_WalkInPlaceUp: @ 82725A6
 	walk_in_place_fastest_up
 	step_end
 
-BattleFrontier_BattleFactoryBattleRoom_Movement_2725A8: @ 82725A8
-BattleFrontier_BattlePalaceBattleRoom_Movement_2725A8: @ 82725A8
-BattleFrontier_OutsideWest_Movement_2725A8: @ 82725A8
-BattleFrontier_ScottsHouse_Movement_2725A8: @ 82725A8
-DewfordTown_Hall_Movement_2725A8: @ 82725A8
-EverGrandeCity_ChampionsRoom_Movement_2725A8: @ 82725A8
-EverGrandeCity_HallOfFame_Movement_2725A8: @ 82725A8
-LavaridgeTown_Movement_2725A8: @ 82725A8
-LilycoveCity_DepartmentStore_1F_Movement_2725A8: @ 82725A8
-LilycoveCity_PokemonTrainerFanClub_Movement_2725A8: @ 82725A8
-LittlerootTown_BrendansHouse_1F_Movement_2725A8: @ 82725A8
-LittlerootTown_BrendansHouse_2F_Movement_2725A8: @ 82725A8
-LittlerootTown_MaysHouse_1F_Movement_2725A8: @ 82725A8
-LittlerootTown_Movement_2725A8: @ 82725A8
-LittlerootTown_ProfessorBirchsLab_Movement_2725A8: @ 82725A8
-MagmaHideout_4F_Movement_2725A8: @ 82725A8
-MauvilleCity_Movement_2725A8: @ 82725A8
-MossdeepCity_SpaceCenter_1F_Movement_2725A8: @ 82725A8
-MossdeepCity_SpaceCenter_2F_Movement_2725A8: @ 82725A8
-MtPyre_Summit_Movement_2725A8: @ 82725A8
-OldaleTown_Movement_2725A8: @ 82725A8
-PetalburgCity_Gym_Movement_2725A8: @ 82725A8
-PetalburgCity_Movement_2725A8: @ 82725A8
-Route101_Movement_2725A8: @ 82725A8
-Route110_Movement_2725A8: @ 82725A8
-Route110_TrickHouseEnd_Movement_2725A8: @ 82725A8
-Route112_Movement_2725A8: @ 82725A8
-Route116_Movement_2725A8: @ 82725A8
-Route120_Movement_2725A8: @ 82725A8
-Route128_Movement_2725A8: @ 82725A8
-RustboroCity_Movement_2725A8: @ 82725A8
-SSTidalCorridor_Movement_2725A8: @ 82725A8
-SeafloorCavern_Entrance_Movement_2725A8: @ 82725A8
-SkyPillar_Outside_Movement_2725A8: @ 82725A8
-SlateportCity_Harbor_Movement_2725A8: @ 82725A8
-SlateportCity_Movement_2725A8: @ 82725A8
-SlateportCity_OceanicMuseum_1F_Movement_2725A8: @ 82725A8
-SlateportCity_OceanicMuseum_2F_Movement_2725A8: @ 82725A8
-SootopolisCity_Movement_2725A8: @ 82725A8
-VerdanturfTown_BattleTentBattleRoom_Movement_2725A8: @ 82725A8
+Common_Movement_WalkInPlaceRight: @ 82725A8
 	walk_in_place_fastest_right
 	step_end
 
-BattleFrontier_OutsideWest_Movement_2725AA: @ 82725AA
-BattleFrontier_ScottsHouse_Movement_2725AA: @ 82725AA
-BirthIsland_Harbor_Movement_2725AA: @ 82725AA
-DewfordTown_Hall_Movement_2725AA: @ 82725AA
-EverGrandeCity_ChampionsRoom_Movement_2725AA: @ 82725AA
-FarawayIsland_Entrance_Movement_2725AA: @ 82725AA
-LilycoveCity_CoveLilyMotel_1F_Movement_2725AA: @ 82725AA
-LilycoveCity_DepartmentStoreElevator_Movement_2725AA: @ 82725AA
-LilycoveCity_Harbor_Movement_2725AA: @ 82725AA
-LilycoveCity_Movement_2725AA: @ 82725AA
-LilycoveCity_PokemonTrainerFanClub_Movement_2725AA: @ 82725AA
-LittlerootTown_BrendansHouse_1F_Movement_2725AA: @ 82725AA
-LittlerootTown_MaysHouse_1F_Movement_2725AA: @ 82725AA
-LittlerootTown_Movement_2725AA: @ 82725AA
-MauvilleCity_Movement_2725AA: @ 82725AA
-MeteorFalls_1F_1R_Movement_2725AA: @ 82725AA
-MossdeepCity_SpaceCenter_2F_Movement_2725AA: @ 82725AA
-MtPyre_Summit_Movement_2725AA: @ 82725AA
-NavelRock_Harbor_Movement_2725AA: @ 82725AA
-OldaleTown_PokemonCenter_1F_Movement_2725AA: @ 82725AA
-PetalburgCity_Gym_Movement_2725AA: @ 82725AA
-PetalburgCity_Movement_2725AA: @ 82725AA
-PetalburgWoods_Movement_2725AA: @ 82725AA
-Route110_Movement_2725AA: @ 82725AA
-Route110_TrickHouseEnd_Movement_2725AA: @ 82725AA
-Route114_FossilManiacsTunnel_Movement_2725AA: @ 82725AA
-Route119_Movement_2725AA: @ 82725AA
-Route120_Movement_2725AA: @ 82725AA
-Route128_Movement_2725AA: @ 82725AA
-RustboroCity_Movement_2725AA: @ 82725AA
-RustboroCity_PokemonSchool_Movement_2725AA: @ 82725AA
-RusturfTunnel_Movement_2725AA: @ 82725AA
-SeafloorCavern_Entrance_Movement_2725AA: @ 82725AA
-SeafloorCavern_Room9_Movement_2725AA: @ 82725AA
-SkyPillar_Outside_Movement_2725AA: @ 82725AA
-SlateportCity_Harbor_Movement_2725AA: @ 82725AA
-SlateportCity_Movement_2725AA: @ 82725AA
-SlateportCity_OceanicMuseum_2F_Movement_2725AA: @ 82725AA
-SouthernIsland_Exterior_Movement_2725AA: @ 82725AA
-VerdanturfTown_BattleTentBattleRoom_Movement_2725AA: @ 82725AA
-VictoryRoad_1F_Movement_2725AA: @ 82725AA
+Common_Movement_WalkInPlaceDown: @ 82725AA
 	walk_in_place_fastest_down
 	step_end
 
@@ -2729,17 +2416,11 @@ RustboroCity_Movement_2725AE: @ 82725AE
 	face_left
 	step_end
 
-BattleFrontier_Mart_Movement_2725B0: @ 82725B0
-MeteorFalls_1F_1R_Movement_2725B0: @ 82725B0
+Common_Movement_FaceDown: @ 82725B0
 	face_down
 	step_end
 
-MarineCave_End_Movement_2725B2: @ 82725B2
-MtPyre_Summit_Movement_2725B2: @ 82725B2
-Route118_Movement_2725B2: @ 82725B2
-SkyPillar_Top_Movement_2725B2: @ 82725B2
-SlateportCity_Movement_2725B2: @ 82725B2
-TerraCave_End_Movement_2725B2: @ 82725B2
+Common_Movement_FaceUp: @ 82725B2
 	face_up
 	step_end
 
@@ -3298,12 +2979,12 @@ EventScript_Questionnaire:: @ 827381B
 EventScript_27386D:: @ 827386D
 	goto_if_unset FLAG_SYS_POKEDEX_GET, EventScript_2738FF
 	goto_if_set FLAG_SYS_MYSTERY_EVENT_ENABLE, EventScript_2738FF
-	applymovement VAR_0x8008, BattleFrontier_Mart_Movement_2725B0
+	applymovement VAR_0x8008, Common_Movement_FaceDown
 	waitmovement 0
 	playse SE_PIN
-	applymovement VAR_0x8008, BattleFrontier_ReceptionGate_Movement_272598
+	applymovement VAR_0x8008, Common_Movement_ExclamationMark
 	waitmovement 0
-	applymovement VAR_0x8008, BattleFrontier_ReceptionGate_Movement_27259A
+	applymovement VAR_0x8008, Common_Movement_Delay48
 	waitmovement 0
 	msgbox gUnknown_08273506, MSGBOX_DEFAULT
 	setflag FLAG_SYS_MYSTERY_EVENT_ENABLE
@@ -3314,12 +2995,12 @@ EventScript_27386D:: @ 827386D
 EventScript_2738B5:: @ 82738B5
 	goto_if_unset FLAG_SYS_POKEDEX_GET, EventScript_2738FF
 	goto_if_set FLAG_SYS_MYSTERY_GIFT_ENABLE, EventScript_2738FF
-	applymovement VAR_0x8008, BattleFrontier_Mart_Movement_2725B0
+	applymovement VAR_0x8008, Common_Movement_FaceDown
 	waitmovement 0
 	playse SE_PIN
-	applymovement VAR_0x8008, BattleFrontier_ReceptionGate_Movement_272598
+	applymovement VAR_0x8008, Common_Movement_ExclamationMark
 	waitmovement 0
-	applymovement VAR_0x8008, BattleFrontier_ReceptionGate_Movement_27259A
+	applymovement VAR_0x8008, Common_Movement_Delay48
 	waitmovement 0
 	msgbox gUnknown_08273446, MSGBOX_DEFAULT
 	setflag FLAG_SYS_MYSTERY_GIFT_ENABLE
@@ -3332,7 +3013,7 @@ EventScript_2738FD:: @ 82738FD
 	end
 
 EventScript_2738FF:: @ 82738FF
-	applymovement VAR_0x8008, BattleFrontier_Mart_Movement_2725B0
+	applymovement VAR_0x8008, Common_Movement_FaceDown
 	waitmovement 0
 	msgbox gUnknown_082733D8, MSGBOX_DEFAULT
 	releaseall

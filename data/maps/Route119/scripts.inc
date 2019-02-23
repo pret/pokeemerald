@@ -51,7 +51,7 @@ Route119_EventScript_1F4488:: @ 81F4488
 	call_if_eq Route119_EventScript_1F46C6
 	compare VAR_TEMP_1, 2
 	call_if_eq Route119_EventScript_1F46D1
-	applymovement EVENT_OBJ_ID_PLAYER, Route119_Movement_2725AA
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceDown
 	waitmovement 0
 	delay 30
 	compare VAR_TEMP_1, 1
@@ -459,7 +459,7 @@ Route119_EventScript_1F49A3:: @ 81F49A3
 	faceplayer
 	msgbox Route119_Text_1F50EB, MSGBOX_DEFAULT
 	closemessage
-	applymovement VAR_LAST_TALKED, Route119_Movement_2725A2
+	applymovement VAR_LAST_TALKED, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end
@@ -469,7 +469,7 @@ Route119_EventScript_1F49BA:: @ 81F49BA
 	faceplayer
 	msgbox Route119_Text_1F5147, MSGBOX_DEFAULT
 	closemessage
-	applymovement VAR_LAST_TALKED, Route119_Movement_2725A2
+	applymovement VAR_LAST_TALKED, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end
