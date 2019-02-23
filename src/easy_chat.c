@@ -20,6 +20,7 @@
 #include "string_util.h"
 #include "strings.h"
 #include "task.h"
+#include "text_window.h"
 #include "window.h"
 #include "constants/flags.h"
 #include "constants/songs.h"
@@ -76,11 +77,27 @@ struct EasyChatScreen
 struct Unk203A11C
 {
     u16 unk0;
-    u8 filler2[0x2];
+    u16 windowId;
     u16 unk4;
-    u8 filler6[0x2FA];
-    u8 unk300[BG_SCREEN_SIZE];
-    u8 unkB00[BG_SCREEN_SIZE];
+    u8 unk6;
+    u8 unk7;
+    s8 unk8;
+    u8 filler9[0x1];
+    u8 unkA;
+    u8 unkB[0xC1];
+    u8 unkCC[0x20C];
+    int unk2D8;
+    int unk2DC;
+    int unk2E0;
+    int unk2E4;
+    int unk2E8;
+    int unk2EC;
+    int unk2F0;
+    int unk2F4;
+    int unk2F8;
+    int unk2FC;
+    u16 unk300[BG_SCREEN_SIZE / 2];
+    u16 unkB00[BG_SCREEN_SIZE / 2];
 };
 
 struct Unk08597C30
@@ -174,17 +191,17 @@ static void sub_811B9A0(void);
 static u8 sub_811BA1C(void);
 static int sub_811BF20(void);
 static u16 sub_811BF40(void);
-u8 sub_811CE94(void);
-void sub_811CF64(void);
-void sub_811CF04(void);
-void sub_811D60C(void);
-void sub_811D424(u8 *);
-void sub_811D230(void);
+static bool8 sub_811CE94(void);
+static void sub_811CF64(void);
+static void sub_811CF04(void);
+static void sub_811D60C(void);
+static void sub_811D424(u16 *);
+static void sub_811D230(void);
 void sub_811E948(void);
-void sub_811CFCC(void);
-void sub_811D0BC(void);
-void sub_811D2C8(void);
-void sub_811D684(void);
+static void sub_811CFCC(void);
+static void sub_811D0BC(void);
+static void sub_811D2C8(void);
+static void sub_811D684(void);
 void sub_811DE90(void);
 void sub_811DEC4(void);
 void sub_811DE5C(u8, u8, u8, u8);
@@ -223,16 +240,16 @@ static bool8 sub_811CE54(void);
 void sub_811DF60(u8, u8);
 int sub_811E920(int);
 void sub_811DF90(void);
-void sub_811D104(u8);
-void sub_811D214(u8);
+static void sub_811D104(u8);
+static void sub_811D214(u8);
 void sub_811DFB0(void);
-void sub_811D6D4(void);
-void sub_811D9CC(int);
+static void sub_811D6D4(void);
+static void sub_811D9CC(int);
 void sub_811E3AC(void);
 bool8 sub_811E418(void);
 void sub_811DFC8(void);
 void sub_811E6E0(int);
-bool8 sub_811DAA4(void);
+static bool8 sub_811DAA4(void);
 void sub_811E64C(void);
 void sub_811E050(void);
 void sub_811E4AC(void);
@@ -244,18 +261,27 @@ void sub_811E578(void);
 void sub_811E088(void);
 void sub_811DDAC(s16, u8);
 bool8 sub_811DE10(void);
-void sub_811D9B4(void);
-void sub_811D698(int);
+static void sub_811D9B4(void);
+static void sub_811D698(u32);
 void sub_811E288(void);
 void sub_811E794(void);
 void sub_811E380(void);
 void sub_811E7F8(void);
 void sub_811E30C(void);
-void sub_811D7A4(void);
-void sub_811D7C8(void);
+static void sub_811D7A4(void);
+static void sub_811D7C8(void);
 int sub_811DE48(void);
-void sub_811D7EC(void);
-void sub_811D830(void);
+static void sub_811D7EC(void);
+static void sub_811D830(void);
+void sub_811D058(u8, u8, const u8 *, u8, u8, u8, u8, u8, u8);
+void sub_811DD84(void);
+static void sub_811D6F4(void);
+static void sub_811D758(void);
+static void sub_811D794(void);
+const u8 *sub_811F424(u8);
+static void sub_811D864(u8, u8);
+static void sub_811D950(u8, u8);
+void sub_811DADC(u8);
 u8 *CopyEasyChatWordPadded(u8 *, u16, u16);
 
 extern const struct {
@@ -271,6 +297,13 @@ extern const struct BgTemplate gUnknown_08597C54[4];
 extern const struct WindowTemplate gUnknown_08597C64[];
 extern const u32 gUnknown_08597B54[];
 extern const struct Unk08597C30 gUnknown_08597C30[];
+extern const u16 gUnknown_08597B14[];
+extern const u16 gUnknown_08597B34[];
+extern const u16 gUnknown_08597C1C[];
+extern const u16 gUnknown_08597C24[];
+extern const struct WindowTemplate gUnknown_08597C84;
+extern const u8 gUnknown_08597C8C[4];
+extern const u8 *const gUnknown_08597C90[4];
 
 void sub_811A20C(u8 kind, u16 *words, MainCallback callback, u8 sizeParam)
 {
@@ -2023,19 +2056,19 @@ u8 sub_811BAC4(void)
     return gEasyChatScreen->mainCursorRow;
 }
 
-void sub_811BAD0(const u8 **str1, const u8 **str2)
+static void GetEasyChatInstructionsText(const u8 **str1, const u8 **str2)
 {
     *str1 = gEasyChatScreenTemplates[gEasyChatScreen->templateId].instructionsText1;
     *str2 = gEasyChatScreenTemplates[gEasyChatScreen->templateId].instructionsText2;
 }
 
-void sub_811BB08(const u8 **str1, const u8 **str2)
+static void GetEasyChatConfirmText(const u8 **str1, const u8 **str2)
 {
     *str1 = gEasyChatScreenTemplates[gEasyChatScreen->templateId].confirmText1;
     *str2 = gEasyChatScreenTemplates[gEasyChatScreen->templateId].confirmText2;
 }
 
-void sub_811BB40(const u8 **str1, const u8 **str2)
+static void sub_811BB40(const u8 **str1, const u8 **str2)
 {
     switch (gEasyChatScreen->kind)
     {
@@ -2056,7 +2089,7 @@ void sub_811BB40(const u8 **str1, const u8 **str2)
 
 }
 
-void sub_811BB88(const u8 **str1, const u8 **str2)
+static void GetEasyChatConfirmDeletionText(const u8 **str1, const u8 **str2)
 {
     *str1 = gText_AllTextBeingEditedWill;
     *str2 = gText_BeDeletedThatOkay;
@@ -2133,7 +2166,7 @@ int sub_811BC2C(void)
     return 0;
 }
 
-int sub_811BC70(void)
+static int sub_811BC70(void)
 {
     return sub_811BA3C();
 }
@@ -3186,4 +3219,536 @@ static bool8 sub_811CE54(void)
     }
 
     return TRUE;
+}
+
+static bool8 sub_811CE94(void)
+{
+    gUnknown_0203A11C = Alloc(sizeof(*gUnknown_0203A11C));
+    if (!gUnknown_0203A11C)
+        return FALSE;
+
+    gUnknown_0203A11C->unk0 = 0;
+    gUnknown_0203A11C->unk2D8 = 0;
+    gUnknown_0203A11C->unk2DC = 0;
+    gUnknown_0203A11C->unk2E0 = 0;
+    gUnknown_0203A11C->unk2E4 = 0;
+    gUnknown_0203A11C->unk2E8 = 0;
+    gUnknown_0203A11C->unk2EC = 0;
+    gUnknown_0203A11C->unk2F0 = 0;
+    gUnknown_0203A11C->unk2F4 = 0;
+    gUnknown_0203A11C->unk2F8 = 0;
+    gUnknown_0203A11C->unk2FC = 0;
+    gUnknown_0203A11C->unkA = sub_811BC70();
+    return TRUE;
+}
+
+static void sub_811CF04(void)
+{
+    ChangeBgX(3, 0, 0);
+    ChangeBgY(3, 0, 0);
+    ChangeBgX(1, 0, 0);
+    ChangeBgY(1, 0, 0);
+    ChangeBgX(2, 0, 0);
+    ChangeBgY(2, 0, 0);
+    ChangeBgX(0, 0, 0);
+    ChangeBgY(0, 0, 0);
+    SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_MODE_0 | DISPCNT_OBJ_1D_MAP | DISPCNT_OBJ_ON | DISPCNT_WIN0_ON);
+}
+
+static void sub_811CF64(void)
+{
+    ResetPaletteFade();
+    LoadPalette(gEasyChatMode_Pal, 0, 32);
+    LoadPalette(gUnknown_08597B14, 1 * 16, 32);
+    LoadPalette(gUnknown_08597B34, 4 * 16, 32);
+    LoadPalette(gUnknown_08597C1C, 10 * 16, 8);
+    LoadPalette(gUnknown_08597C24, 11 * 16, 12);
+    LoadPalette(gUnknown_08597C24, 15 * 16, 12);
+    LoadPalette(gUnknown_08597C24, 3 * 16, 12);
+}
+
+static void sub_811CFCC(void)
+{
+    int xOffset;
+    const u8 *titleText = sub_811BA88();
+    if (!titleText)
+        return;
+
+    xOffset = GetStringCenterAlignXOffset(1, titleText, 144);
+    FillWindowPixelBuffer(0, 0);
+    sub_811D058(0, 1, titleText, xOffset, 1, 0xFF, 0, 2, 3);
+    PutWindowTilemap(0);
+    CopyWindowToVram(0, 3);
+}
+
+void sub_811D028(u8 windowId, u8 fontId, const u8 *str, u8 x, u8 y, u8 speed, void (*callback)(struct TextPrinterTemplate *, u16))
+{
+    AddTextPrinterParameterized(windowId, fontId, str, x, y, speed, callback);
+}
+
+void sub_811D058(u8 windowId, u8 fontId, const u8 *str, u8 left, u8 top, u8 speed, u8 red, u8 green, u8 blue)
+{
+    u8 color[3];
+    color[0] = red;
+    color[1] = green;
+    color[2] = blue;
+    AddTextPrinterParameterized3(windowId, fontId, left, top, color, speed, str);
+}
+
+static void sub_811D0BC(void)
+{
+    FillBgTilemapBufferRect(0, 0, 0, 0, 32, 20, 17);
+    LoadUserWindowBorderGfx(1, 1, 0xE0);
+    sub_8098858(1, 1, 14);
+    sub_811D104(0);
+    PutWindowTilemap(1);
+    CopyBgTilemapBufferToVram(0);
+}
+
+static void sub_811D104(u8 arg0)
+{
+    const u8 *text2 = NULL;
+    const u8 *text1 = NULL;
+    switch (arg0)
+    {
+    case 0:
+        GetEasyChatInstructionsText(&text1, &text2);
+        break;
+    case 2:
+        sub_811BB40(&text1, &text2);
+        break;
+    case 3:
+        GetEasyChatConfirmText(&text1, &text2);
+        break;
+    case 1:
+        GetEasyChatConfirmDeletionText(&text1, &text2);
+        break;
+    case 4:
+        text1 = gText_CreateAQuiz;
+        break;
+    case 5:
+        text1 = gText_SelectTheAnswer;
+        break;
+    case 6:
+        text1 = gText_OnlyOnePhrase;
+        text2 = gText_OriginalSongWillBeUsed;
+        break;
+    case 7:
+        text1 = gText_LyricsCantBeDeleted;
+        break;
+    case 8:
+        text1 = gText_CombineTwoWordsOrPhrases3;
+        break;
+    case 9:
+        text1 = gText_YouCannotQuitHere;
+        text2 = gText_SectionMustBeCompleted;
+        break;
+    }
+
+    FillWindowPixelBuffer(1, 0x11);
+    if (text1)
+        sub_811D028(1, 1, text1, 0, 1, 0xFF, 0);
+
+    if (text2)
+        sub_811D028(1, 1, text2, 0, 17, 0xFF, 0);
+
+    CopyWindowToVram(1, 3);
+}
+
+static void sub_811D214(u8 initialCursorPos)
+{
+    CreateYesNoMenu(&gUnknown_08597C84, 1, 14, initialCursorPos);
+}
+
+static void sub_811D230(void)
+{
+    u8 var0;
+    struct WindowTemplate template;
+
+    var0 = sub_811BA68();
+    template.bg = 3;
+    template.tilemapLeft = gUnknown_08597C30[var0].unk0_0;
+    template.tilemapTop = gUnknown_08597C30[var0].unk0_5;
+    template.width = gUnknown_08597C30[var0].unk1;
+    template.height = gUnknown_08597C30[var0].unk2;
+    template.paletteNum = 11;
+    template.baseBlock = 0x6C;
+    gUnknown_0203A11C->windowId = AddWindow(&template);
+    PutWindowTilemap(gUnknown_0203A11C->windowId);
+}
+
+static void sub_811D2C8(void)
+{
+    u8 spC[4];
+    u16 *ecWord;
+    u8 numColumns, numRows;
+    u8 *str;
+    int var0;
+    int var1;
+    int i, j, k;
+
+    ecWord = sub_811BA94();
+    numColumns = sub_811BAAC();
+    numRows = sub_811BAA0();
+    var0 = sub_811BA68();
+    var1 = 0;
+    if (var0 == 7)
+        var1 = 1;
+
+    FillWindowPixelBuffer(gUnknown_0203A11C->windowId, 0x11);
+    for (i = 0; i < numRows; i++)
+    {
+        memcpy(spC, gUnknown_08597C8C, sizeof(gUnknown_08597C8C));
+        if (var1)
+            spC[2] = 6;
+
+        str = gUnknown_0203A11C->unkB;
+        gUnknown_0203A11C->unkB[0] = EOS;
+        str = StringAppend(str, spC);
+        for (j = 0; j < numColumns; j++)
+        {
+            if (*ecWord != 0xFFFF)
+            {
+                str = CopyEasyChatWord(str, *ecWord);
+                ecWord++;
+            }
+            else
+            {
+                ecWord++;
+                if (!var1)
+                {
+                    str = WriteColorChangeControlCode(str, 0, 4);
+                    for (k = 0; k < 12; k++)
+                    {
+                        *str = CHAR_HYPHEN;
+                        str++;
+                    }
+
+                    str = WriteColorChangeControlCode(str, 0, 2);
+                }
+            }
+
+            if (var1)
+                spC[2] = 3;
+
+            str = StringAppend(str, spC);
+            if (var0 == 2 || var0 == 7 || var0 == 8)
+            {
+                if (j == 0 && i == 4)
+                    break;
+            }
+        }
+
+        *str = EOS;
+        sub_811D028(gUnknown_0203A11C->windowId, 1, gUnknown_0203A11C->unkB, 0, i * 16 + 1, 0xFF, 0);
+    }
+
+    CopyWindowToVram(gUnknown_0203A11C->windowId, 3);
+}
+
+static void sub_811D424(u16 *tilemap)
+{
+    u8 var0;
+    int right, bottom;
+    int x, y;
+
+    var0 = sub_811BA68();
+    CpuFastFill(0, tilemap, BG_SCREEN_SIZE);
+    if (var0 == 2 || var0 == 8)
+    {
+        right = gUnknown_08597C30[var0].unk0_0 + gUnknown_08597C30[var0].unk1;
+        bottom = gUnknown_08597C30[var0].unk0_5 + gUnknown_08597C30[var0].unk2;
+        for (y = gUnknown_08597C30[var0].unk0_5; y < bottom; y++)
+        {
+            x = gUnknown_08597C30[var0].unk0_0 - 1;
+            tilemap[y * 32 + x] = 0x1005;
+            x++;
+            for (; x < right; x++)
+                tilemap[y * 32 + x] = 0x1000;
+            
+            tilemap[y* 32 + x] = 0x1007;
+        }
+    }
+    else
+    {
+        y = gUnknown_08597C30[var0].unk0_5 - 1;
+        x = gUnknown_08597C30[var0].unk0_0 - 1;
+        right = gUnknown_08597C30[var0].unk0_0 + gUnknown_08597C30[var0].unk1;
+        bottom = gUnknown_08597C30[var0].unk0_5 + gUnknown_08597C30[var0].unk2;
+        tilemap[y * 32 + x] = 0x1001;
+        x++;
+        for (; x < right; x++)
+            tilemap[y * 32 + x] = 0x1002;
+
+        tilemap[y * 32 + x] = 0x1003;
+        y++;
+        for (; y < bottom; y++)
+        {
+            x = gUnknown_08597C30[var0].unk0_0 - 1;
+            tilemap[y * 32 + x] = 0x1005;
+            x++;
+            for (; x < right; x++)
+                tilemap[y * 32 + x] = 0x1000;
+
+            tilemap[y* 32 + x] = 0x1007;
+        }
+
+        x = gUnknown_08597C30[var0].unk0_0 - 1;
+        tilemap[y * 32 + x] = 0x1009;
+        x++;
+        for (; x < right; x++)
+            tilemap[y * 32 + x] = 0x100A;
+
+        tilemap[y * 32 + x] = 0x100B;
+    }
+}
+
+static void sub_811D60C(void)
+{
+    u8 var0;
+    u16 *tilemap;
+
+    tilemap = GetBgTilemapBuffer(3);
+    var0 = sub_811BA68();
+    switch (gUnknown_08597C30[var0].unk3)
+    {
+    case 2:
+        tilemap += 0x2A0;
+        CopyToBgTilemapBufferRect(3, tilemap, 0, 11, 32, 2);
+        break;
+    case 1:
+        tilemap += 0x300;
+        CopyToBgTilemapBufferRect(3, tilemap, 0, 11, 32, 2);
+        break;
+    case 3:
+        CopyToBgTilemapBufferRect(3, tilemap, 0, 10, 32, 4);
+        break;
+    }
+}
+
+static void sub_811D684(void)
+{
+    PutWindowTilemap(2);
+    CopyBgTilemapBufferToVram(2);
+}
+
+static void sub_811D698(u32 arg0)
+{
+    sub_811DD84();
+    FillWindowPixelBuffer(2, 0x11);
+    switch (arg0)
+    {
+    case 0:
+        sub_811D6F4();
+        break;
+    case 1:
+        sub_811D758();
+        break;
+    case 2:
+        sub_811D794();
+        break;
+    }
+
+    CopyWindowToVram(2, 2);
+}
+
+static void sub_811D6D4(void)
+{
+    if (!sub_811BBB0())
+        sub_811D698(0);
+    else
+        sub_811D698(1);
+}
+
+static void sub_811D6F4(void)
+{
+    int i;
+    int x, y;
+
+    i = 0;
+    y = 97;
+    while (1)
+    {
+        for (x = 0; x < 2; x++)
+        {
+            u8 index = sub_811F3B8(i++);
+            if (index == 22)
+            {
+                sub_811DDAC(sub_811BBBC(), 0);
+                return;
+            }
+
+            sub_811D028(2, 1, sub_811F424(index), x * 84 + 10, y, 0xFF, NULL);
+        }
+
+        y += 16;
+    }
+}
+
+static void sub_811D758(void)
+{
+    u32 i;
+
+    for (i = 0; i < 4; i++)
+        sub_811D028(2, 1, gUnknown_08597C90[i], 10, 97 + i * 16, 0xFF, NULL);
+}
+
+static void sub_811D794(void)
+{
+    sub_811D864(0, 4);
+}
+
+static void sub_811D7A4(void)
+{
+    u8 var0 = sub_811BBDC() + 3;
+    sub_811D950(var0, 1);
+    sub_811D864(var0, 1);
+}
+
+static void sub_811D7C8(void)
+{
+    u8 var0 = sub_811BBDC();
+    sub_811D950(var0, 1);
+    sub_811D864(var0, 1);
+}
+
+static void sub_811D7EC(void)
+{
+    u8 var0 = sub_811BBDC();
+    u8 var1 = var0 + 4;
+    u8 var2 = sub_811BBE8() + 1;
+    if (var1 > var2)
+        var1 = var2;
+
+    if (var0 < var1)
+    {
+        u8 var3 = var1 - var0;
+        sub_811D950(var0, var3);
+        sub_811D864(var0, var3);
+    }
+}
+
+static void sub_811D830(void)
+{
+    u8 var0 = sub_811BBDC();
+    u8 var1 = sub_811DE48();
+    if (var0 < var1)
+    {
+        u8 var2 = var1 - var0;
+        sub_811D950(var0, var2);
+        sub_811D864(var0, var2);
+    }
+}
+
+static void sub_811D864(u8 arg0, u8 arg1)
+{
+    int i, j;
+    u16 easyChatWord;
+    u8 *str;
+    int y;
+    int var0;
+
+    var0 = arg0 * 2;
+    y = (arg0 * 16 + 96) & 0xFF;
+    y++;
+    for (i = 0; i < arg1; i++)
+    {
+        for (j = 0; j < 2; j++)
+        {
+            easyChatWord = sub_811F578(var0++);
+            if (easyChatWord != 0xFFFF)
+            {
+                CopyEasyChatWordPadded(gUnknown_0203A11C->unkCC, easyChatWord, 0);
+                if (!sub_811BF88(easyChatWord))
+                    sub_811D028(2, 1, gUnknown_0203A11C->unkCC, (j * 13 + 3) * 8, y, 0xFF, NULL);
+                else
+                    sub_811D058(2, 1, gUnknown_0203A11C->unkCC, (j * 13 + 3) * 8, y, 0xFF, 1, 5, 3);
+            }
+        }
+
+        y += 16;
+    }
+
+    CopyWindowToVram(2, 2);
+}
+
+static void sub_811D950(u8 arg0, u8 arg1)
+{
+    int y;
+    int var0;
+    int var1;
+    int var2;
+
+    y = (arg0 * 16 + 96) & 0xFF;
+    var2 = arg1 * 16;
+    var0 = y + var2;
+    if (var0 > 255)
+    {
+        var1 = var0 - 256;
+        var2 = 256 - y;
+    }
+    else
+    {
+        var1 = 0;
+    }
+
+    FillWindowPixelRect(2, 0x11, 0, y, 224, var2);
+    if (var1)
+        FillWindowPixelRect(2, 0x11, 0, 0, 224, var1);
+}
+
+static void sub_811D9B4(void)
+{
+    FillWindowPixelBuffer(2, 0x11);
+    CopyWindowToVram(2, 2);
+}
+
+static void sub_811D9CC(int arg0)
+{
+    switch (arg0)
+    {
+    case 0:
+        gUnknown_0203A11C->unk6 = 0;
+        gUnknown_0203A11C->unk7 = 10;
+        break;
+    case 1:
+        gUnknown_0203A11C->unk6 = 9;
+        gUnknown_0203A11C->unk7 = 0;
+        break;
+    case 2:
+        gUnknown_0203A11C->unk6 = 11;
+        gUnknown_0203A11C->unk7 = 17;
+        break;
+    case 3:
+        gUnknown_0203A11C->unk6 = 17;
+        gUnknown_0203A11C->unk7 = 0;
+        break;
+    case 4:
+        gUnknown_0203A11C->unk6 = 17;
+        gUnknown_0203A11C->unk7 = 10;
+        break;
+    case 5:
+        gUnknown_0203A11C->unk6 = 18;
+        gUnknown_0203A11C->unk7 = 22;
+        break;
+    case 6:
+        gUnknown_0203A11C->unk6 = 22;
+        gUnknown_0203A11C->unk7 = 18;
+        break;
+    }
+
+    gUnknown_0203A11C->unk8 = gUnknown_0203A11C->unk6 < gUnknown_0203A11C->unk7 ? 1 : -1;
+}
+
+static bool8 sub_811DAA4(void)
+{
+    u8 var0, var1;
+    if (gUnknown_0203A11C->unk6 == gUnknown_0203A11C->unk7)
+        return FALSE;
+
+    gUnknown_0203A11C->unk6 += gUnknown_0203A11C->unk8;
+    sub_811DADC(gUnknown_0203A11C->unk6);
+    var0 = gUnknown_0203A11C->unk6;
+    var1 = gUnknown_0203A11C->unk7;
+    return (var0 ^ var1) > 0;
 }
