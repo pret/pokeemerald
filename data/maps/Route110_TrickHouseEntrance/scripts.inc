@@ -236,9 +236,9 @@ Route110_TrickHouseEntrance_EventScript_269D3B:: @ 8269D3B
 
 Route110_TrickHouseEntrance_EventScript_269D6E:: @ 8269D6E
 	playse SE_PIN
-	applymovement EVENT_OBJ_ID_PLAYER, Route110_TrickHouseEntrance_Movement_272598
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_ExclamationMark
 	waitmovement 0
-	applymovement EVENT_OBJ_ID_PLAYER, Route110_TrickHouseEntrance_Movement_27259A
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_Delay48
 	waitmovement 0
 	compare VAR_0x4044, 0
 	call_if_eq Route110_TrickHouseEntrance_EventScript_269DEE
@@ -326,21 +326,21 @@ Route110_TrickHouseEntrance_EventScript_269E48:: @ 8269E48
 Route110_TrickHouseEntrance_EventScript_269E51:: @ 8269E51
 	msgbox Route110_TrickHouseEntrance_Text_26A921, MSGBOX_DEFAULT
 	closemessage
-	applymovement 1, Route110_TrickHouseEntrance_Movement_27259E
+	applymovement 1, Common_Movement_FacePlayer
 	waitmovement 0
 	playse SE_PIN
-	applymovement 1, Route110_TrickHouseEntrance_Movement_272598
+	applymovement 1, Common_Movement_ExclamationMark
 	waitmovement 0
-	applymovement 1, Route110_TrickHouseEntrance_Movement_27259A
+	applymovement 1, Common_Movement_Delay48
 	waitmovement 0
 	msgbox Route110_TrickHouseEntrance_Text_26A9AF, MSGBOX_DEFAULT
-	applymovement 1, Route110_TrickHouseEntrance_Movement_2725A6
+	applymovement 1, Common_Movement_WalkInPlaceUp
 	waitmovement 0
 	releaseall
 	end
 
 Route110_TrickHouseEntrance_EventScript_269E8F:: @ 8269E8F
-	applymovement 1, Route110_TrickHouseEntrance_Movement_27259E
+	applymovement 1, Common_Movement_FacePlayer
 	waitmovement 0
 	msgbox Route110_TrickHouseEntrance_Text_26AA82, MSGBOX_DEFAULT
 	compare VAR_0x4044, 1
@@ -432,13 +432,13 @@ Route110_TrickHouseEntrance_EventScript_269FF7:: @ 8269FF7
 Route110_TrickHouseEntrance_EventScript_26A023:: @ 826A023
 	setvar VAR_0x40C1, 0
 	setvar VAR_0x40A7, 3
-	applymovement 1, Route110_TrickHouseEntrance_Movement_2725A6
+	applymovement 1, Common_Movement_WalkInPlaceUp
 	waitmovement 0
 	releaseall
 	end
 
 Route110_TrickHouseEntrance_EventScript_26A039:: @ 826A039
-	applymovement 1, Route110_TrickHouseEntrance_Movement_27259E
+	applymovement 1, Common_Movement_FacePlayer
 	waitmovement 0
 	msgbox Route110_TrickHouseEntrance_Text_26AB2C, MSGBOX_DEFAULT
 	call Route110_TrickHouseEntrance_EventScript_26A070

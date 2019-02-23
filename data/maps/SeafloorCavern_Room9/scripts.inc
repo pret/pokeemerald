@@ -7,7 +7,7 @@ SeafloorCavern_Room9_EventScript_234DC9:: @ 8234DC9
 	setvar VAR_0x8005, 3
 	setvar VAR_0x8006, 4
 	setvar VAR_0x8007, 5
-	applymovement EVENT_OBJ_ID_PLAYER, SeafloorCavern_Room9_Movement_2725A6
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceUp
 	waitmovement 0
 	applymovement EVENT_OBJ_ID_PLAYER, SeafloorCavern_Room9_Movement_23505C
 	waitmovement 0
@@ -15,15 +15,15 @@ SeafloorCavern_Room9_EventScript_234DC9:: @ 8234DC9
 	msgbox SeafloorCavern_Room9_Text_23505F, MSGBOX_DEFAULT
 	closemessage
 	addobject VAR_0x8004
-	applymovement EVENT_OBJ_ID_PLAYER, SeafloorCavern_Room9_Movement_2725A4
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceLeft
 	waitmovement 0
 	applymovement VAR_0x8004, SeafloorCavern_Room9_Movement_23502A
 	waitmovement 0
 	msgbox SeafloorCavern_Room9_Text_23507C, MSGBOX_DEFAULT
-	applymovement VAR_0x8004, SeafloorCavern_Room9_Movement_2725A6
+	applymovement VAR_0x8004, Common_Movement_WalkInPlaceUp
 	waitmovement 0
 	msgbox SeafloorCavern_Room9_Text_2350A6, MSGBOX_DEFAULT
-	applymovement VAR_0x8004, SeafloorCavern_Room9_Movement_27259E
+	applymovement VAR_0x8004, Common_Movement_FacePlayer
 	waitmovement 0
 	msgbox SeafloorCavern_Room9_Text_23512C, MSGBOX_DEFAULT
 	trainerbattle_no_intro TRAINER_ARCHIE, SeafloorCavern_Room9_Text_2351BC
@@ -47,8 +47,8 @@ SeafloorCavern_Room9_EventScript_234DC9:: @ 8234DC9
 	playfanfare MUS_ME_TAMA
 	playse SE_TAMA
 	special sub_80B0534
-	applymovement VAR_0x8004, SeafloorCavern_Room9_Movement_2725A6
-	applymovement EVENT_OBJ_ID_PLAYER, SeafloorCavern_Room9_Movement_2725A6
+	applymovement VAR_0x8004, Common_Movement_WalkInPlaceUp
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceUp
 	waitmovement 0
 	delay 150
 	removeobject 7
@@ -82,7 +82,7 @@ SeafloorCavern_Room9_EventScript_234DC9:: @ 8234DC9
 	setvar VAR_0x8007, 5
 	msgbox SeafloorCavern_Room9_Text_2352A7, MSGBOX_DEFAULT
 	playse SE_PC_LOGIN
-	applymovement EVENT_OBJ_ID_PLAYER, SeafloorCavern_Room9_Movement_2725A4
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceLeft
 	waitmovement 0
 	msgbox SeafloorCavern_Room9_Text_2352F6, MSGBOX_DEFAULT
 	closemessage
@@ -92,7 +92,7 @@ SeafloorCavern_Room9_EventScript_234DC9:: @ 8234DC9
 	closemessage
 	playse SE_PC_OFF
 	delay 20
-	applymovement VAR_0x8004, SeafloorCavern_Room9_Movement_2725AA
+	applymovement VAR_0x8004, Common_Movement_WalkInPlaceDown
 	waitmovement 0
 	msgbox SeafloorCavern_Room9_Text_23546F, MSGBOX_DEFAULT
 	closemessage
@@ -103,13 +103,13 @@ SeafloorCavern_Room9_EventScript_234DC9:: @ 8234DC9
 	applymovement VAR_0x8006, SeafloorCavern_Room9_Movement_235057
 	applymovement VAR_0x8005, SeafloorCavern_Room9_Movement_23504E
 	waitmovement 0
-	applymovement VAR_0x8004, SeafloorCavern_Room9_Movement_2725A4
+	applymovement VAR_0x8004, Common_Movement_WalkInPlaceLeft
 	waitmovement 0
 	msgbox SeafloorCavern_Room9_Text_2354F0, MSGBOX_DEFAULT
 	playse SE_PIN
-	applymovement VAR_0x8004, SeafloorCavern_Room9_Movement_272598
+	applymovement VAR_0x8004, Common_Movement_ExclamationMark
 	waitmovement 0
-	applymovement VAR_0x8004, SeafloorCavern_Room9_Movement_27259A
+	applymovement VAR_0x8004, Common_Movement_Delay48
 	waitmovement 0
 	msgbox SeafloorCavern_Room9_Text_2355C2, MSGBOX_DEFAULT
 	msgbox SeafloorCavern_Room9_Text_235692, MSGBOX_DEFAULT

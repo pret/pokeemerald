@@ -30,7 +30,7 @@ Route101_EventScript_1EBCDE:: @ 81EBCDE
 	applymovement 4, Route101_Movement_1EBD96
 	applymovement 2, Route101_Movement_1EBDC8
 	waitmovement 0
-	applymovement 2, Route101_Movement_2725A8
+	applymovement 2, Common_Movement_WalkInPlaceRight
 	waitmovement 0
 	applymovement 4, Route101_Movement_1EBDBD
 	applymovement 2, Route101_Movement_1EBDEF
@@ -223,7 +223,7 @@ Route101_EventScript_1EBE16:: @ 81EBE16
 	fadescreen 1
 	removeobject 4
 	setobjectxy EVENT_OBJ_ID_PLAYER, 6, 13
-	applymovement EVENT_OBJ_ID_PLAYER, Route101_Movement_2725A4
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceLeft
 	waitmovement 0
 	special ChooseStarter
 	waitstate

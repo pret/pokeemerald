@@ -216,7 +216,7 @@ MossdeepCity_EventScript_1E4C10:: @ 81E4C10
 	lock
 	faceplayer
 	msgbox MossdeepCity_Text_1E5213, MSGBOX_DEFAULT
-	applymovement VAR_LAST_TALKED, MossdeepCity_Movement_2725A2
+	applymovement VAR_LAST_TALKED, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end
