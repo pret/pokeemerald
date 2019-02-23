@@ -19,7 +19,7 @@ ShoalCave_LowTideStairsRoom_EventScript_23711A:: @ 823711A
 	goto_if_set FLAG_RECEIVED_SHOAL_SALT_3, ShoalCave_LowTideStairsRoom_EventScript_23714C
 	giveitem_std ITEM_SHOAL_SALT
 	compare VAR_RESULT, 0
-	goto_if_eq ShoalCave_LowTideStairsRoom_EventScript_272054
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	setmetatile 11, 11, 858, 0
 	special DrawWholeMapView
 	setflag FLAG_RECEIVED_SHOAL_SALT_3

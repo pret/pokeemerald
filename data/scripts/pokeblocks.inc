@@ -602,7 +602,7 @@ EventScript_PblocLink_NoBerries: @ 82940B1
 	end
 
 EventScript_PblocLink_TryConnect: @ 82940BB
-	call LilycoveCity_ContestLobby_EventScript_27134F
+	call Common_EventScript_SaveGame
 	compare VAR_RESULT, 0
 	goto_if_eq EventScript_PblocLink_End
 	specialvar VAR_RESULT, IsWirelessAdapterConnected

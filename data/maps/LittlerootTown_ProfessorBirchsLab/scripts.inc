@@ -5,7 +5,7 @@ LittlerootTown_ProfessorBirchsLab_MapScripts:: @ 81F9C91
 	.byte 0
 
 LittlerootTown_ProfessorBirchsLab_MapScript1_1F9CA1: @ 81F9CA1
-	call LittlerootTown_ProfessorBirchsLab_EventScript_271ED7
+	call Common_EventScript_SetupRivalGender
 	call LittlerootTown_ProfessorBirchsLab_EventScript_2720AD
 	compare VAR_0x40D3, 6
 	goto_if_ge LittlerootTown_ProfessorBirchsLab_EventScript_1F9CF7
@@ -107,7 +107,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_1F9DDB:: @ 81F9DDB
 
 LittlerootTown_ProfessorBirchsLab_EventScript_1F9E07:: @ 81F9E07
 	setvar VAR_0x8004, 0
-	call LittlerootTown_ProfessorBirchsLab_EventScript_2723DD
+	call Common_EventScript_NameReceivedPokemon
 	goto LittlerootTown_ProfessorBirchsLab_EventScript_1F9E17
 	end
 
@@ -351,7 +351,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_1FA0A1:: @ 81FA0A1
 	compare VAR_RESULT, 0
 	goto_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_1FA0FD
 	call LittlerootTown_ProfessorBirchsLab_EventScript_27378B
-	call LittlerootTown_ProfessorBirchsLab_EventScript_2723DD
+	call Common_EventScript_NameReceivedPokemon
 	goto LittlerootTown_ProfessorBirchsLab_EventScript_1FA0FD
 	end
 
@@ -396,7 +396,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_1FA142:: @ 81FA142
 	compare VAR_RESULT, 0
 	goto_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_1FA19E
 	call LittlerootTown_ProfessorBirchsLab_EventScript_27378B
-	call LittlerootTown_ProfessorBirchsLab_EventScript_2723DD
+	call Common_EventScript_NameReceivedPokemon
 	goto LittlerootTown_ProfessorBirchsLab_EventScript_1FA19E
 	end
 
@@ -441,7 +441,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_1FA1E3:: @ 81FA1E3
 	compare VAR_RESULT, 0
 	goto_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_1FA23F
 	call LittlerootTown_ProfessorBirchsLab_EventScript_27378B
-	call LittlerootTown_ProfessorBirchsLab_EventScript_2723DD
+	call Common_EventScript_NameReceivedPokemon
 	goto LittlerootTown_ProfessorBirchsLab_EventScript_1FA23F
 	end
 

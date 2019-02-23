@@ -13,7 +13,7 @@ Route104_EventScript_1ECC47:: @ 81ECC47
 	end
 
 Route104_MapScript1_1ECC4E: @ 81ECC4E
-	call Route104_EventScript_271ED7
+	call Common_EventScript_SetupRivalGender
 	call Route104_EventScript_1ECC78
 	call Route104_EventScript_1ECC5E
 	end
@@ -270,7 +270,7 @@ Route104_EventScript_1ECF8C:: @ 81ECF8C
 	msgbox Route104_Text_2A6D86, MSGBOX_DEFAULT
 	giveitem_std ITEM_CHESTO_BERRY
 	compare VAR_RESULT, 0
-	goto_if_eq Route104_EventScript_272054
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_CHESTO_BERRY_ROUTE_104
 	msgbox Route104_Text_2A6E32, MSGBOX_DEFAULT
 	release
@@ -288,7 +288,7 @@ Route104_EventScript_1ECFCD:: @ 81ECFCD
 	msgbox Route104_Text_1ED96A, MSGBOX_DEFAULT
 	giveitem_std ITEM_WHITE_HERB
 	compare VAR_RESULT, 0
-	goto_if_eq Route104_EventScript_272054
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_WHITE_HERB
 	release
 	end
@@ -341,7 +341,7 @@ Route104_EventScript_1ED057:: @ 81ED057
 	msgbox Route104_Text_1ED838, MSGBOX_DEFAULT
 	giveitem_std ITEM_TM09
 	compare VAR_RESULT, 0
-	goto_if_eq Route104_EventScript_272054
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_TM09
 	release
 	end

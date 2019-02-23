@@ -127,7 +127,7 @@ LilycoveCity_LilycoveMuseum_2F_EventScript_2198EA:: @ 82198EA
 	end
 
 LilycoveCity_LilycoveMuseum_2F_EventScript_219911:: @ 8219911
-	call LilycoveCity_LilycoveMuseum_2F_EventScript_272071
+	call Common_EventScript_NoRoomLeftForAnother
 	msgbox LilycoveCity_LilycoveMuseum_2F_Text_219EED, MSGBOX_DEFAULT
 	closemessage
 	releaseall

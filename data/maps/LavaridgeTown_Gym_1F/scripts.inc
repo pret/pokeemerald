@@ -71,7 +71,7 @@ LavaridgeTown_Gym_1F_EventScript_1FE78C:: @ 81FE78C
 LavaridgeTown_Gym_1F_EventScript_1FE7C1:: @ 81FE7C1
 	message LavaridgeTown_Gym_1F_Text_1FF32F
 	waitmessage
-	call LavaridgeTown_Gym_1F_EventScript_27207E
+	call Common_EventScript_PlayGymBadgeFanfare
 	msgbox LavaridgeTown_Gym_1F_Text_1FF359, MSGBOX_DEFAULT
 	setflag FLAG_FLANNERY_GIVES_BADGE_INFO
 	setflag FLAG_DEFEATED_LAVARIDGE_GYM
@@ -98,7 +98,7 @@ LavaridgeTown_Gym_1F_EventScript_1FE7C1:: @ 81FE7C1
 LavaridgeTown_Gym_1F_EventScript_1FE81D:: @ 81FE81D
 	giveitem_std ITEM_TM50
 	compare VAR_RESULT, 0
-	goto_if_eq LavaridgeTown_Gym_1F_EventScript_272054
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	msgbox LavaridgeTown_Gym_1F_Text_1FF45C, MSGBOX_DEFAULT
 	setflag FLAG_RECEIVED_TM50
 	release
@@ -107,7 +107,7 @@ LavaridgeTown_Gym_1F_EventScript_1FE81D:: @ 81FE81D
 LavaridgeTown_Gym_1F_EventScript_1FE841:: @ 81FE841
 	giveitem_std ITEM_TM50
 	compare VAR_RESULT, 0
-	goto_if_eq LavaridgeTown_Gym_1F_EventScript_27205E
+	goto_if_eq Common_EventScript_BagIsFull
 	msgbox LavaridgeTown_Gym_1F_Text_1FF45C, MSGBOX_DEFAULT
 	setflag FLAG_RECEIVED_TM50
 	return

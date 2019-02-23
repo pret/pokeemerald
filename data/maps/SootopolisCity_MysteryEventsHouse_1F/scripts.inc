@@ -102,7 +102,7 @@ SootopolisCity_MysteryEventsHouse_1F_EventScript_227A58:: @ 8227A58
 	compare VAR_RESULT, 0
 	goto_if_eq SootopolisCity_MysteryEventsHouse_1F_EventScript_227AE2
 	special LoadPlayerParty
-	call SootopolisCity_MysteryEventsHouse_1F_EventScript_27134F
+	call Common_EventScript_SaveGame
 	compare VAR_RESULT, 0
 	goto_if_eq SootopolisCity_MysteryEventsHouse_1F_EventScript_227AE2
 	special SavePlayerParty

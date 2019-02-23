@@ -147,7 +147,7 @@ Route120_EventScript_1F55F6:: @ 81F55F6
 Route120_EventScript_1F5601:: @ 81F5601
 	giveitem_std VAR_0x8004
 	compare VAR_RESULT, 0
-	goto_if_eq Route120_EventScript_272054
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_DAILY_ROUTE_120_RECEIVED_BERRY
 	msgbox Route120_Text_2A71D5, MSGBOX_DEFAULT
 	release

@@ -253,7 +253,7 @@ PetalburgWoods_EventScript_22E222:: @ 822E222
 	msgbox PetalburgWoods_Text_22EAFE, MSGBOX_DEFAULT
 	giveitem_std ITEM_MIRACLE_SEED
 	compare VAR_RESULT, 0
-	goto_if_eq PetalburgWoods_EventScript_272054
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_MIRACLE_SEED
 	release
 	end

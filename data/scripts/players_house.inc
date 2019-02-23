@@ -355,7 +355,7 @@ LittlerootTown_BrendansHouse_1F_EventScript_292A51:: @ 8292A51
 	msgbox LittlerootTown_BrendansHouse_1F_Text_1F7D73, MSGBOX_DEFAULT
 	giveitem_std ITEM_AMULET_COIN
 	compare VAR_RESULT, 0
-	goto_if_eq LittlerootTown_BrendansHouse_1F_EventScript_272054
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	msgbox LittlerootTown_BrendansHouse_1F_Text_1F7DBE, MSGBOX_DEFAULT
 	setflag FLAG_MOM_SAYS_GOODBYE
 	release
@@ -373,7 +373,7 @@ LittlerootTown_BrendansHouse_1F_EventScript_292A94:: @ 8292A94
 
 LittlerootTown_BrendansHouse_1F_EventScript_292A9E:: @ 8292A9E
 	closemessage
-	call LittlerootTown_BrendansHouse_1F_EventScript_272083
+	call Common_EventScript_OutOfCenterPartyHeal
 	incrementgamestat 16
 	msgbox LittlerootTown_BrendansHouse_1F_Text_1F7D5C, MSGBOX_DEFAULT
 	release

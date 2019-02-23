@@ -403,7 +403,7 @@ PetalburgCity_Gym_EventScript_204E17:: @ 8204E17
 PetalburgCity_Gym_EventScript_204E1D:: @ 8204E1D
 	giveitem_std ITEM_ENIGMA_BERRY
 	compare VAR_RESULT, 0
-	goto_if_eq PetalburgCity_Gym_EventScript_272054
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	setvar VAR_ENIGMA_BERRY_AVAILABLE, 0
 	release
 	end
@@ -413,7 +413,7 @@ PetalburgCity_Gym_EventScript_204E3B:: @ 8204E3B
 	trainerbattle_no_intro TRAINER_NORMAN_1, PetalburgCity_Gym_Text_206107
 	message PetalburgCity_Gym_Text_206162
 	waitmessage
-	call PetalburgCity_Gym_EventScript_27207E
+	call Common_EventScript_PlayGymBadgeFanfare
 	msgbox PetalburgCity_Gym_Text_20618A, MSGBOX_DEFAULT
 	setflag FLAG_DEFEATED_PETALBURG_GYM
 	setvar VAR_0x4085, 7
@@ -444,7 +444,7 @@ PetalburgCity_Gym_EventScript_204E3B:: @ 8204E3B
 PetalburgCity_Gym_EventScript_204ED2:: @ 8204ED2
 	giveitem_std ITEM_TM42
 	compare VAR_RESULT, 0
-	goto_if_eq PetalburgCity_Gym_EventScript_27205E
+	goto_if_eq Common_EventScript_BagIsFull
 	setflag FLAG_RECEIVED_TM42
 	msgbox PetalburgCity_Gym_Text_206254, MSGBOX_DEFAULT
 	return

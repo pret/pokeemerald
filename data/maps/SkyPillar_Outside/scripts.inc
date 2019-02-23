@@ -16,7 +16,7 @@ SkyPillar_Outside_EventScript_2392CF:: @ 82392CF
 	return
 
 SkyPillar_Outside_EventScript_2392D3:: @ 82392D3
-	call_if_set FLAG_SYS_WEATHER_CTRL, SkyPillar_Outside_EventScript_27207A
+	call_if_set FLAG_SYS_WEATHER_CTRL, Common_EventScript_SetWeather15
 	return
 
 SkyPillar_Outside_MapScript1_2392DD: @ 82392DD

@@ -256,7 +256,7 @@ DewfordTown_Hall_EventScript_1FD7DA:: @ 81FD7DA
 	msgbox DewfordTown_Hall_Text_1FE142, MSGBOX_DEFAULT
 	giveitem_std ITEM_TM36
 	compare VAR_RESULT, 0
-	goto_if_eq DewfordTown_Hall_EventScript_272054
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_TM36
 	release
 	end

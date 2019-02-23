@@ -5,7 +5,7 @@ Route127_MapScripts:: @ 81F69D9
 	.byte 0
 
 Route127_MapScript1_1F69E9: @ 81F69E9
-	call_if_set FLAG_SYS_WEATHER_CTRL, Route127_EventScript_27207A
+	call_if_set FLAG_SYS_WEATHER_CTRL, Common_EventScript_SetWeather15
 	compare VAR_0x4039, 1
 	call_if_eq Route127_EventScript_273D13
 	compare VAR_0x4037, 13

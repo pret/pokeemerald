@@ -7,8 +7,8 @@ LilycoveCity_MapScript1_1E2B47: @ 81E2B47
 	setflag FLAG_VISITED_LILYCOVE_CITY
 	setvar VAR_0x4086, 0
 	setflag FLAG_HIDE_LILYCOVE_CONTEST_HALL_REPORTER
-	call_if_set FLAG_SYS_WEATHER_CTRL, LilycoveCity_EventScript_27207A
-	call LilycoveCity_EventScript_271ED7
+	call_if_set FLAG_SYS_WEATHER_CTRL, Common_EventScript_SetWeather15
+	call Common_EventScript_SetupRivalGender
 	end
 
 LilycoveCity_MapScript1_1E2B61: @ 81E2B61
@@ -40,7 +40,7 @@ LilycoveCity_EventScript_1E2BD8:: @ 81E2BD8
 	addvar VAR_RESULT, 133
 	giveitem_std VAR_RESULT
 	compare VAR_RESULT, 0
-	goto_if_eq LilycoveCity_EventScript_272054
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_DAILY_LILYCOVE_RECEIVED_BERRY
 	msgbox LilycoveCity_Text_2A72E3, MSGBOX_DEFAULT
 	release

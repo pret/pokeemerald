@@ -5,7 +5,7 @@ RustboroCity_MapScripts:: @ 81E06BD
 
 RustboroCity_MapScript1_1E06C8: @ 81E06C8
 	setflag FLAG_VISITED_RUSTBORO_CITY
-	call RustboroCity_EventScript_271ED7
+	call Common_EventScript_SetupRivalGender
 	compare VAR_0x405A, 6
 	call_if_eq RustboroCity_EventScript_1E0707
 	getplayerxy VAR_TEMP_0, VAR_TEMP_1

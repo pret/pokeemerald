@@ -98,7 +98,7 @@ Route119_WeatherInstitute_2F_EventScript_270085:: @ 8270085
 	compare VAR_RESULT, 0
 	goto_if_eq Route119_WeatherInstitute_2F_EventScript_2700EA
 	call Route119_WeatherInstitute_2F_EventScript_27378B
-	call Route119_WeatherInstitute_2F_EventScript_2723DD
+	call Common_EventScript_NameReceivedPokemon
 	goto Route119_WeatherInstitute_2F_EventScript_2700EA
 	end
 
