@@ -2422,5 +2422,13 @@ extern const u8 gText_AllTextBeingEditedWill[];
 extern const u8 gText_BeDeletedThatOkay[];
 extern const u8 gText_Lady[];
 extern const u8 gText_F700sQuiz[];
+extern const u8 gText_CreateAQuiz[];
+extern const u8 gText_SelectTheAnswer[];
+extern const u8 gText_OriginalSongWillBeUsed[];
+extern const u8 gText_LyricsCantBeDeleted[];
+extern const u8 gText_CombineTwoWordsOrPhrases3[];
+extern const u8 gText_OnlyOnePhrase[];
+extern const u8 gText_YouCannotQuitHere[];
+extern const u8 gText_SectionMustBeCompleted[];
 
 #endif // GUARD_STRINGS_H

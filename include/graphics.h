@@ -4892,5 +4892,6 @@ extern const u16 gFrontierPassMapCursor_Pal[];
 // Easy Chat Screen
 extern const u32 gEasyChatWindow_Gfx[];
 extern const u32 gEasyChatWindow_Tilemap[];
+extern const u16 gEasyChatMode_Pal[];
 
 #endif //GUARD_GRAPHICS_H
