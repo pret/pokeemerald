@@ -54,6 +54,7 @@
 #include "constants/moves.h"
 #include "constants/vars.h"
 #include "constants/battle_frontier.h"
+#include "constants/weather.h"
 
 EWRAM_DATA bool8 gBikeCyclingChallenge = FALSE;
 EWRAM_DATA u8 gBikeCollisions = 0;
@@ -3527,9 +3528,9 @@ bool8 sub_813B3B0(void)
     }
 }
 
-void sub_813B484(void)
+void Unused_SetWeatherSunny(void)
 {
-    sub_80AB104(2);
+    SetCurrentAndNextWeather(WEATHER_SUNNY);
 }
 
 bool32 sub_813B490(void)

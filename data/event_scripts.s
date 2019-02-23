@@ -2031,7 +2031,7 @@ Route130_EventScript_27207A:: @ 827207A
 Route131_EventScript_27207A:: @ 827207A
 SkyPillar_Outside_EventScript_27207A:: @ 827207A
 SootopolisCity_EventScript_27207A:: @ 827207A
-	setweather 15
+	setweather WEATHER_ALTERNATING
 	return
 
 DewfordTown_Gym_EventScript_27207E:: @ 827207E
@@ -3655,14 +3655,14 @@ Route105_EventScript_273D17:: @ 8273D17
 Route125_EventScript_273D17:: @ 8273D17
 Route127_EventScript_273D17:: @ 8273D17
 Route129_EventScript_273D17:: @ 8273D17
-	setweather 13
+	setweather WEATHER_RAIN_HEAVY
 	return
 
 Route114_EventScript_273D1B:: @ 8273D1B
 Route115_EventScript_273D1B:: @ 8273D1B
 Route116_EventScript_273D1B:: @ 8273D1B
 Route118_EventScript_273D1B:: @ 8273D1B
-	setweather 12
+	setweather WEATHER_DROUGHT
 	return
 
 gUnknown_08273D1F:: @ 8273D1F
@@ -3677,7 +3677,7 @@ gUnknown_08273D1F:: @ 8273D1F
 Route105_EventScript_273D31:: @ 8273D31
 	closemessage
 	fadescreenswapbuffers 1
-	setweather 2
+	setweather WEATHER_SUNNY
 	doweather
 	call Route105_EventScript_273D6D
 	special DrawWholeMapView

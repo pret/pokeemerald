@@ -214,7 +214,7 @@ SootopolisCity_EventScript_1E5946:: @ 81E5946
 	special RemoveCameraObject
 	delay 60
 	fadescreenspeed 1, 8
-	setweather WEATHER_15
+	setweather WEATHER_ALTERNATING
 	doweather
 	setvar VAR_0x8004, 0
 	special sub_813B7D8
@@ -314,7 +314,7 @@ SootopolisCity_EventScript_1E5A82:: @ 81E5A82
 	special RemoveCameraObject
 	delay 60
 	fadescreenspeed 1, 8
-	setweather WEATHER_15
+	setweather WEATHER_ALTERNATING
 	doweather
 	setvar VAR_0x8004, 0
 	special sub_813B7D8
