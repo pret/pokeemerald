@@ -307,7 +307,7 @@ LittlerootTown_BrendansHouse_2F_Text_1F877F: @ 81F877F
 	.string "Record your progress with SAVE.\p"
 	.string "The remaining pages are blank…$"
 
-LittlerootTown_BrendansHouse_2F_Text_1F8820: @ 81F8820
+Common_Text_LookCloserAtMap: @ 81F8820
 	.string "{PLAYER} took a closer look at the\n"
 	.string "HOENN region map.$"
 

@@ -13,7 +13,7 @@ Route114_FossilManiacsHouse_EventScript_22AD3A:: @ 822AD3A
 	msgbox Route114_FossilManiacsHouse_Text_22AD85, MSGBOX_DEFAULT
 	giveitem_std ITEM_TM28
 	compare VAR_RESULT, 0
-	goto_if_eq Route114_FossilManiacsHouse_EventScript_272054
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_TM28
 	release
 	end

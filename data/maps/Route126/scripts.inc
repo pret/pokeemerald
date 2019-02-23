@@ -3,7 +3,7 @@ Route126_MapScripts:: @ 81F68C6
 	.byte 0
 
 Route126_MapScript1_1F68CC: @ 81F68CC
-	call_if_set FLAG_SYS_WEATHER_CTRL, Route126_EventScript_27207A
+	call_if_set FLAG_SYS_WEATHER_CTRL, Common_EventScript_SetWeather15
 	end
 
 Route126_EventScript_1F68D6:: @ 81F68D6

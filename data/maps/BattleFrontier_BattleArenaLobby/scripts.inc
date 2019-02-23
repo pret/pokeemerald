@@ -199,7 +199,7 @@ BattleFrontier_BattleArenaLobby_EventScript_255EE8:: @ 8255EE8
 	special LoadPlayerParty
 	closemessage
 	delay 2
-	call BattleFrontier_BattleArenaLobby_EventScript_27134F
+	call Common_EventScript_SaveGame
 	setvar VAR_TEMP_0, 255
 	compare VAR_RESULT, 0
 	goto_if_eq BattleFrontier_BattleArenaLobby_EventScript_255FE1

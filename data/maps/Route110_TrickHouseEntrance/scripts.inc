@@ -364,7 +364,7 @@ Route110_TrickHouseEntrance_EventScript_269EEF:: @ 8269EEF
 	compare VAR_RESULT, 1
 	goto_if_eq Route110_TrickHouseEntrance_EventScript_26A023
 	compare VAR_RESULT, 0
-	call_if_eq Route110_TrickHouseEntrance_EventScript_27205E
+	call_if_eq Common_EventScript_BagIsFull
 	msgbox Route110_TrickHouseEntrance_Text_26AB00, MSGBOX_DEFAULT
 	releaseall
 	end
@@ -374,7 +374,7 @@ Route110_TrickHouseEntrance_EventScript_269F1B:: @ 8269F1B
 	compare VAR_RESULT, 1
 	goto_if_eq Route110_TrickHouseEntrance_EventScript_26A023
 	compare VAR_RESULT, 0
-	call_if_eq Route110_TrickHouseEntrance_EventScript_27205E
+	call_if_eq Common_EventScript_BagIsFull
 	msgbox Route110_TrickHouseEntrance_Text_26AB00, MSGBOX_DEFAULT
 	releaseall
 	end
@@ -384,7 +384,7 @@ Route110_TrickHouseEntrance_EventScript_269F47:: @ 8269F47
 	compare VAR_RESULT, 1
 	goto_if_eq Route110_TrickHouseEntrance_EventScript_26A023
 	compare VAR_RESULT, 0
-	call_if_eq Route110_TrickHouseEntrance_EventScript_27205E
+	call_if_eq Common_EventScript_BagIsFull
 	msgbox Route110_TrickHouseEntrance_Text_26AB00, MSGBOX_DEFAULT
 	releaseall
 	end
@@ -394,7 +394,7 @@ Route110_TrickHouseEntrance_EventScript_269F73:: @ 8269F73
 	compare VAR_RESULT, 1
 	goto_if_eq Route110_TrickHouseEntrance_EventScript_26A023
 	compare VAR_RESULT, 0
-	call_if_eq Route110_TrickHouseEntrance_EventScript_27205E
+	call_if_eq Common_EventScript_BagIsFull
 	msgbox Route110_TrickHouseEntrance_Text_26AB00, MSGBOX_DEFAULT
 	releaseall
 	end
@@ -404,7 +404,7 @@ Route110_TrickHouseEntrance_EventScript_269F9F:: @ 8269F9F
 	compare VAR_RESULT, 1
 	goto_if_eq Route110_TrickHouseEntrance_EventScript_26A023
 	compare VAR_RESULT, 0
-	call_if_eq Route110_TrickHouseEntrance_EventScript_27205E
+	call_if_eq Common_EventScript_BagIsFull
 	msgbox Route110_TrickHouseEntrance_Text_26AB00, MSGBOX_DEFAULT
 	releaseall
 	end
@@ -414,7 +414,7 @@ Route110_TrickHouseEntrance_EventScript_269FCB:: @ 8269FCB
 	compare VAR_RESULT, 1
 	goto_if_eq Route110_TrickHouseEntrance_EventScript_26A023
 	compare VAR_RESULT, 0
-	call_if_eq Route110_TrickHouseEntrance_EventScript_27205E
+	call_if_eq Common_EventScript_BagIsFull
 	msgbox Route110_TrickHouseEntrance_Text_26AB00, MSGBOX_DEFAULT
 	releaseall
 	end
@@ -424,7 +424,7 @@ Route110_TrickHouseEntrance_EventScript_269FF7:: @ 8269FF7
 	compare VAR_RESULT, 1
 	goto_if_eq Route110_TrickHouseEntrance_EventScript_26A023
 	compare VAR_RESULT, 0
-	call_if_eq Route110_TrickHouseEntrance_EventScript_27205E
+	call_if_eq Common_EventScript_BagIsFull
 	msgbox Route110_TrickHouseEntrance_Text_26AB00, MSGBOX_DEFAULT
 	releaseall
 	end
@@ -445,7 +445,7 @@ Route110_TrickHouseEntrance_EventScript_26A039:: @ 826A039
 	compare VAR_RESULT, 1
 	goto_if_eq Route110_TrickHouseEntrance_EventScript_26A09A
 	compare VAR_RESULT, 0
-	call_if_eq Route110_TrickHouseEntrance_EventScript_272071
+	call_if_eq Common_EventScript_NoRoomLeftForAnother
 	msgbox Route110_TrickHouseEntrance_Text_26ABBD, MSGBOX_DEFAULT
 	releaseall
 	end

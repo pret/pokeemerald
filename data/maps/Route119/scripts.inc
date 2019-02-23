@@ -15,8 +15,8 @@ Route119_EventScript_1F4439:: @ 81F4439
 	return
 
 Route119_MapScript1_1F444D: @ 81F444D
-	call Route119_EventScript_271ED7
-	call Route119_EventScript_271EFB
+	call Common_EventScript_SetupRivalGender
+	call Common_EventScript_SetupRivalOnBikeGender
 	compare VAR_WEATHER_INSTITUTE_STATE, 1
 	call_if_eq Route119_EventScript_1F4466
 	special SetRoute119Weather

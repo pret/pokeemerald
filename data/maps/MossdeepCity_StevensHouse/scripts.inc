@@ -99,7 +99,7 @@ MossdeepCity_StevensHouse_EventScript_222895:: @ 8222895
 	compare VAR_RESULT, 0
 	goto_if_eq MossdeepCity_StevensHouse_EventScript_222901
 	call MossdeepCity_StevensHouse_EventScript_27378B
-	call MossdeepCity_StevensHouse_EventScript_2723DD
+	call Common_EventScript_NameReceivedPokemon
 	goto MossdeepCity_StevensHouse_EventScript_222901
 	end
 

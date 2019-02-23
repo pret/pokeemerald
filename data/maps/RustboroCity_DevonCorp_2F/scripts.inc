@@ -171,7 +171,7 @@ RustboroCity_DevonCorp_2F_EventScript_211A6E:: @ 8211A6E
 	compare VAR_RESULT, 0
 	goto_if_eq RustboroCity_DevonCorp_2F_EventScript_211AD7
 	call RustboroCity_DevonCorp_2F_EventScript_27378B
-	call RustboroCity_DevonCorp_2F_EventScript_2723DD
+	call Common_EventScript_NameReceivedPokemon
 	goto RustboroCity_DevonCorp_2F_EventScript_211AD7
 	end
 
@@ -220,7 +220,7 @@ RustboroCity_DevonCorp_2F_EventScript_211B11:: @ 8211B11
 	compare VAR_RESULT, 0
 	goto_if_eq RustboroCity_DevonCorp_2F_EventScript_211B7A
 	call RustboroCity_DevonCorp_2F_EventScript_27378B
-	call RustboroCity_DevonCorp_2F_EventScript_2723DD
+	call Common_EventScript_NameReceivedPokemon
 	goto RustboroCity_DevonCorp_2F_EventScript_211B7A
 	end
 

@@ -425,7 +425,7 @@ OldaleTown_PokemonCenter_2F_EventScript_276F55:: @ 8276F55
 	end
 
 OldaleTown_PokemonCenter_2F_EventScript_276F60:: @ 8276F60
-	call OldaleTown_PokemonCenter_2F_EventScript_27134F
+	call Common_EventScript_SaveGame
 	compare VAR_RESULT, 0
 	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_2772EC
 	message gText_PleaseWaitForLink
@@ -527,7 +527,7 @@ OldaleTown_PokemonCenter_2F_EventScript_2770B2:: @ 82770B2
 	call OldaleTown_PokemonCenter_2F_EventScript_277199
 	compare VAR_RESULT, 0
 	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_2772EC
-	call OldaleTown_PokemonCenter_2F_EventScript_27134F
+	call Common_EventScript_SaveGame
 	compare VAR_RESULT, 0
 	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_2772EC
 	message gText_PleaseWaitForLink
@@ -602,7 +602,7 @@ OldaleTown_PokemonCenter_2F_EventScript_2771CD:: @ 82771CD
 
 OldaleTown_PokemonCenter_2F_EventScript_2771DB:: @ 82771DB
 	copyvar VAR_0x8007, VAR_LAST_TALKED
-	call OldaleTown_PokemonCenter_2F_EventScript_27134F
+	call Common_EventScript_SaveGame
 	compare VAR_RESULT, 0
 	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_2772EC
 	message gText_PleaseWaitForLink
@@ -1023,7 +1023,7 @@ OldaleTown_PokemonCenter_2F_EventScript_27759F:: @ 827759F
 	call OldaleTown_PokemonCenter_2F_EventScript_277626
 	compare VAR_RESULT, 0
 	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_2772EC
-	call OldaleTown_PokemonCenter_2F_EventScript_27134F
+	call Common_EventScript_SaveGame
 	compare VAR_RESULT, 0
 	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_2772EC
 	msgbox OldaleTown_PokemonCenter_2F_Text_27961C, MSGBOX_DEFAULT
@@ -1234,7 +1234,7 @@ OldaleTown_PokemonCenter_2F_EventScript_277923:: @ 8277923
 	end
 
 OldaleTown_PokemonCenter_2F_EventScript_277931:: @ 8277931
-	call OldaleTown_PokemonCenter_2F_EventScript_27134F
+	call Common_EventScript_SaveGame
 	compare VAR_RESULT, 0
 	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_2772EC
 	switch VAR_0x8004
@@ -1513,7 +1513,7 @@ MossdeepCity_GameCorner_1F_EventScript_277CE9:: @ 8277CE9
 	waitstate
 	compare VAR_0x8004, 6
 	goto_if_ge MossdeepCity_GameCorner_1F_EventScript_2772F9
-	call MossdeepCity_GameCorner_1F_EventScript_27134F
+	call Common_EventScript_SaveGame
 	compare VAR_RESULT, 0
 	goto_if_eq MossdeepCity_GameCorner_1F_EventScript_2772F9
 	setvar VAR_0x8004, 4
@@ -1532,7 +1532,7 @@ MossdeepCity_GameCorner_1F_EventScript_277D35:: @ 8277D35
 	waitstate
 	compare VAR_0x8004, 6
 	goto_if_ge MossdeepCity_GameCorner_1F_EventScript_2772F9
-	call MossdeepCity_GameCorner_1F_EventScript_27134F
+	call Common_EventScript_SaveGame
 	compare VAR_RESULT, 0
 	goto_if_eq MossdeepCity_GameCorner_1F_EventScript_2772F9
 	setvar VAR_0x8004, 6

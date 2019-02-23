@@ -99,7 +99,7 @@ SootopolisCity_Gym_1F_EventScript_224F44:: @ 8224F44
 SootopolisCity_Gym_1F_EventScript_224F82:: @ 8224F82
 	message SootopolisCity_Gym_1F_Text_225598
 	waitmessage
-	call SootopolisCity_Gym_1F_EventScript_27207E
+	call Common_EventScript_PlayGymBadgeFanfare
 	msgbox SootopolisCity_Gym_1F_Text_2255BE, MSGBOX_DEFAULT
 	setflag FLAG_DEFEATED_SOOTOPOLIS_GYM
 	setflag FLAG_BADGE08_GET
@@ -125,7 +125,7 @@ SootopolisCity_Gym_1F_EventScript_224F82:: @ 8224F82
 SootopolisCity_Gym_1F_EventScript_224FD4:: @ 8224FD4
 	giveitem_std ITEM_TM03
 	compare VAR_RESULT, 0
-	goto_if_eq SootopolisCity_Gym_1F_EventScript_27205E
+	goto_if_eq Common_EventScript_BagIsFull
 	msgbox SootopolisCity_Gym_1F_Text_2256C1, MSGBOX_DEFAULT
 	setflag FLAG_RECEIVED_TM03
 	return
@@ -133,7 +133,7 @@ SootopolisCity_Gym_1F_EventScript_224FD4:: @ 8224FD4
 SootopolisCity_Gym_1F_EventScript_224FF7:: @ 8224FF7
 	giveitem_std ITEM_TM03
 	compare VAR_RESULT, 0
-	goto_if_eq SootopolisCity_Gym_1F_EventScript_272054
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	msgbox SootopolisCity_Gym_1F_Text_2256C1, MSGBOX_DEFAULT
 	setflag FLAG_RECEIVED_TM03
 	release

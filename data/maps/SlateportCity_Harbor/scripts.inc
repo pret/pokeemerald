@@ -358,7 +358,7 @@ SlateportCity_Harbor_EventScript_20CD7B:: @ 820CD7B
 	goto_if_eq SlateportCity_Harbor_EventScript_20CE05
 	giveitem_std ITEM_DEEP_SEA_TOOTH
 	compare VAR_RESULT, 0
-	goto_if_eq SlateportCity_Harbor_EventScript_272054
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	takeitem ITEM_SCANNER, 1
 	msgbox SlateportCity_Harbor_Text_20D94A, MSGBOX_DEFAULT
 	setflag FLAG_EXCHANGED_SCANNER
@@ -371,7 +371,7 @@ SlateportCity_Harbor_EventScript_20CDBB:: @ 820CDBB
 	goto_if_eq SlateportCity_Harbor_EventScript_20CE05
 	giveitem_std ITEM_DEEP_SEA_SCALE
 	compare VAR_RESULT, 0
-	goto_if_eq SlateportCity_Harbor_EventScript_272054
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	takeitem ITEM_SCANNER, 1
 	msgbox SlateportCity_Harbor_Text_20D94A, MSGBOX_DEFAULT
 	setflag FLAG_EXCHANGED_SCANNER

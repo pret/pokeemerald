@@ -3,7 +3,7 @@ OldaleTown_MapScripts:: @ 81E8EA2
 	.byte 0
 
 OldaleTown_MapScript1_1E8EA8: @ 81E8EA8
-	call OldaleTown_EventScript_271ED7
+	call Common_EventScript_SetupRivalGender
 	setflag FLAG_VISITED_OLDALE_TOWN
 	call_if_unset FLAG_ADVENTURE_STARTED, OldaleTown_EventScript_1E8ED2
 	call_if_unset FLAG_RECEIVED_POTION_OLDALE, OldaleTown_EventScript_1E8EDE
@@ -85,7 +85,7 @@ OldaleTown_EventScript_1E8FB9:: @ 81E8FB9
 	end
 
 OldaleTown_EventScript_1E8FC3:: @ 81E8FC3
-	msgbox gUnknown_08272AD0, MSGBOX_DEFAULT
+	msgbox gText_TooBadBagIsFull, MSGBOX_DEFAULT
 	fadedefaultbgm
 	release
 	end

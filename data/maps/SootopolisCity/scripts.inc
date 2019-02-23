@@ -110,7 +110,7 @@ SootopolisCity_EventScript_1E5805:: @ 81E5805
 	compare VAR_0x40CA, 1
 	goto_if_eq SootopolisCity_EventScript_1E583E
 	compare VAR_0x40CA, 1
-	goto_if_le SootopolisCity_EventScript_27207A
+	goto_if_le Common_EventScript_SetWeather15
 	return
 
 SootopolisCity_EventScript_1E583D:: @ 81E583D
@@ -751,7 +751,7 @@ SootopolisCity_EventScript_1E5F1B:: @ 81E5F1B
 	addvar VAR_RESULT, 133
 	giveitem_std VAR_RESULT
 	compare VAR_RESULT, 0
-	goto_if_eq SootopolisCity_EventScript_272054
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_DAILY_SOOTOPOLIS_RECEIVED_BERRY
 	msgbox SootopolisCity_Text_2A7C7C, MSGBOX_DEFAULT
 	random 2
@@ -764,7 +764,7 @@ SootopolisCity_EventScript_1E5F1B:: @ 81E5F1B
 SootopolisCity_EventScript_1E5F79:: @ 81E5F79
 	giveitem_std ITEM_FIGY_BERRY
 	compare VAR_RESULT, 0
-	goto_if_eq SootopolisCity_EventScript_272054
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	msgbox SootopolisCity_Text_2A7CB7, MSGBOX_DEFAULT
 	release
 	end
@@ -772,7 +772,7 @@ SootopolisCity_EventScript_1E5F79:: @ 81E5F79
 SootopolisCity_EventScript_1E5F9A:: @ 81E5F9A
 	giveitem_std ITEM_IAPAPA_BERRY
 	compare VAR_RESULT, 0
-	goto_if_eq SootopolisCity_EventScript_272054
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	msgbox SootopolisCity_Text_2A7CB7, MSGBOX_DEFAULT
 	release
 	end

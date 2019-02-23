@@ -332,7 +332,7 @@ Route109_EventScript_1EE9B5:: @ 81EE9B5
 	msgbox Route109_Text_1EEFDE, MSGBOX_DEFAULT
 	giveitem_std ITEM_SOFT_SAND
 	compare VAR_RESULT, 0
-	goto_if_eq Route109_EventScript_272054
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	closemessage
 	applymovement VAR_LAST_TALKED, Route109_Movement_2725A2
 	waitmovement 0

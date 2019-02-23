@@ -192,7 +192,7 @@ VerdanturfTown_BattleTentLobby_EventScript_201954:: @ 8201954
 	special LoadPlayerParty
 	closemessage
 	delay 2
-	call VerdanturfTown_BattleTentLobby_EventScript_27134F
+	call Common_EventScript_SaveGame
 	setvar VAR_TEMP_0, 255
 	compare VAR_RESULT, 0
 	goto_if_eq VerdanturfTown_BattleTentLobby_EventScript_201A1D
@@ -281,7 +281,7 @@ VerdanturfTown_BattleTentLobby_EventScript_201A7B:: @ 8201A7B
 	msgbox VerdanturfTown_BattleTentLobby_Text_201D9E, MSGBOX_DEFAULT
 	giveitem_std ITEM_TM45
 	compare VAR_RESULT, 0
-	goto_if_eq VerdanturfTown_BattleTentLobby_EventScript_272054
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_TM45
 	msgbox VerdanturfTown_BattleTentLobby_Text_201E43, MSGBOX_DEFAULT
 	release

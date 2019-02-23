@@ -200,13 +200,13 @@ Route110_TrickHouseEnd_EventScript_26AFCF:: @ 826AFCF
 	return
 
 Route110_TrickHouseEnd_EventScript_26AFEF:: @ 826AFEF
-	call Route110_TrickHouseEnd_EventScript_27205E
+	call Common_EventScript_BagIsFull
 	msgbox Route110_TrickHouseEnd_Text_26B760, MSGBOX_DEFAULT
 	setvar VAR_0x40C1, 1
 	return
 
 Route110_TrickHouseEnd_EventScript_26B002:: @ 826B002
-	call Route110_TrickHouseEnd_EventScript_272071
+	call Common_EventScript_NoRoomLeftForAnother
 	msgbox Route110_TrickHouseEnd_Text_26B615, MSGBOX_DEFAULT
 	setvar VAR_0x40C1, 1
 	return

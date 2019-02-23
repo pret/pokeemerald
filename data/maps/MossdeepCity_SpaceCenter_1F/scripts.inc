@@ -120,7 +120,7 @@ MossdeepCity_SpaceCenter_1F_EventScript_22308E:: @ 822308E
 	msgbox MossdeepCity_SpaceCenter_1F_Text_223540, MSGBOX_DEFAULT
 	giveitem_std ITEM_SUN_STONE
 	compare VAR_RESULT, 0
-	goto_if_eq MossdeepCity_SpaceCenter_1F_EventScript_272054
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_SUN_STONE_MOSSDEEP
 	msgbox MossdeepCity_SpaceCenter_1F_Text_2235A6, MSGBOX_DEFAULT
 	release
@@ -136,7 +136,7 @@ MossdeepCity_SpaceCenter_1F_EventScript_2230DA:: @ 82230DA
 	msgbox MossdeepCity_SpaceCenter_1F_Text_2235F0, MSGBOX_DEFAULT
 	giveitem_std ITEM_SUN_STONE
 	compare VAR_RESULT, 0
-	goto_if_eq MossdeepCity_SpaceCenter_1F_EventScript_272054
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_SUN_STONE_MOSSDEEP
 	msgbox MossdeepCity_SpaceCenter_1F_Text_223664, MSGBOX_DEFAULT
 	applymovement VAR_LAST_TALKED, MossdeepCity_SpaceCenter_1F_Movement_2725A8

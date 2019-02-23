@@ -26,7 +26,7 @@ LilycoveCity_CoveLilyMotel_2F_EventScript_218702:: @ 8218702
 LilycoveCity_CoveLilyMotel_2F_EventScript_21870F:: @ 821870F
 	message LilycoveCity_CoveLilyMotel_2F_Text_21881C
 	waitmessage
-	call LilycoveCity_CoveLilyMotel_2F_EventScript_27207E
+	call Common_EventScript_PlayGymBadgeFanfare
 	special Special_ShowDiploma
 	waitstate
 	release

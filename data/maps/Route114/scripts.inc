@@ -35,7 +35,7 @@ Route114_EventScript_1F2582:: @ 81F2582
 	addvar VAR_RESULT, 133
 	giveitem_std VAR_RESULT
 	compare VAR_RESULT, 0
-	goto_if_eq Route114_EventScript_272054
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_DAILY_ROUTE_114_RECEIVED_BERRY
 	msgbox Route114_Text_2A7034, MSGBOX_DEFAULT
 	release
@@ -53,7 +53,7 @@ Route114_EventScript_1F25D1:: @ 81F25D1
 	msgbox Route114_Text_1F2809, MSGBOX_DEFAULT
 	giveitem_std ITEM_TM05
 	compare VAR_RESULT, 0
-	goto_if_eq Route114_EventScript_272054
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_TM05
 	msgbox Route114_Text_1F2872, MSGBOX_DEFAULT
 	release

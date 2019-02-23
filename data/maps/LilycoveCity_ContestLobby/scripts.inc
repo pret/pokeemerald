@@ -642,7 +642,7 @@ LilycoveCity_ContestLobby_EventScript_21A856:: @ 821A856
 	msgbox LilycoveCity_ContestLobby_Text_27BD17, MSGBOX_YESNO
 	compare VAR_RESULT, 0
 	goto_if_eq LilycoveCity_ContestLobby_EventScript_21A97F
-	call LilycoveCity_ContestLobby_EventScript_27134F
+	call Common_EventScript_SaveGame
 	compare VAR_RESULT, 0
 	goto_if_eq LilycoveCity_ContestLobby_EventScript_21A97F
 	message LilycoveCity_ContestLobby_Text_27C8FD

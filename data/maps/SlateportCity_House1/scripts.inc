@@ -57,7 +57,7 @@ SlateportCity_House1_EventScript_209B50:: @ 8209B50
 
 SlateportCity_House1_EventScript_209B5A:: @ 8209B5A
 	msgbox SlateportCity_House1_Text_209CA4, MSGBOX_DEFAULT
-	call SlateportCity_House1_EventScript_2723DD
+	call Common_EventScript_NameReceivedPokemon
 	specialvar VAR_RESULT, TV_PutNameRaterShowOnTheAirIfNicnkameChanged
 	special TV_CopyNicknameToStringVar1AndEnsureTerminated
 	compare VAR_RESULT, 1

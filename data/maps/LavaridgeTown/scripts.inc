@@ -7,8 +7,8 @@ LavaridgeTown_MapScript1_1EA4DE: @ 81EA4DE
 	setflag FLAG_VISITED_LAVARIDGE_TOWN
 	call_if_set FLAG_FLANNERY_GIVES_BADGE_INFO, LavaridgeTown_EventScript_1EA514
 	call_if_set FLAG_DEFEATED_EVIL_TEAM_MT_CHIMNEY, LavaridgeTown_EventScript_1EA53F
-	call LavaridgeTown_EventScript_271ED7
-	call LavaridgeTown_EventScript_271EFB
+	call Common_EventScript_SetupRivalGender
+	call Common_EventScript_SetupRivalOnBikeGender
 	compare VAR_0x4053, 1
 	call_if_eq LavaridgeTown_EventScript_1EA518
 	compare VAR_0x4053, 1
