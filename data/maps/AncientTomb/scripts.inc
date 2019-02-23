@@ -11,7 +11,7 @@ AncientTomb_MapScript1_238FC3: @ 8238FC3
 AncientTomb_EventScript_238FCD:: @ 8238FCD
 	specialvar VAR_RESULT, GetBattleOutcome
 	compare VAR_RESULT, 7
-	goto_if_ne AncientTomb_EventScript_27374E
+	goto_if_ne Common_EventScript_NopReturn
 	removeobject VAR_LAST_TALKED
 	return
 

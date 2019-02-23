@@ -1205,8 +1205,8 @@ PetalburgCity_PokemonCenter_1F_EventScript_2718DE:: @ 82718DE
 RustboroCity_PokemonCenter_1F_EventScript_2718DE:: @ 82718DE
 SlateportCity_PokemonCenter_1F_EventScript_2718DE:: @ 82718DE
 VerdanturfTown_PokemonCenter_1F_EventScript_2718DE:: @ 82718DE
-	goto_if_unset FLAG_RECEIVED_POKENAV, OldaleTown_PokemonCenter_1F_EventScript_27374E
-	goto_if_set FLAG_DEFEATED_PETALBURG_GYM, OldaleTown_PokemonCenter_1F_EventScript_27374E
+	goto_if_unset FLAG_RECEIVED_POKENAV, Common_EventScript_NopReturn
+	goto_if_set FLAG_DEFEATED_PETALBURG_GYM, Common_EventScript_NopReturn
 	goto_if_unset FLAG_HIDE_ROUTE_104_MR_BRINEY_BOAT, OldaleTown_PokemonCenter_1F_EventScript_27190C
 	goto_if_unset FLAG_HIDE_MR_BRINEY_DEWFORD_TOWN, OldaleTown_PokemonCenter_1F_EventScript_271912
 	goto_if_unset FLAG_HIDE_ROUTE_108_MR_BRINEY, OldaleTown_PokemonCenter_1F_EventScript_271918
@@ -1948,7 +1948,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_2720AD:: @ 82720AD
 Route101_EventScript_2720AD:: @ 82720AD
 Route103_EventScript_2720AD:: @ 82720AD
 	compare VAR_0x4085, 0
-	goto_if_eq Route101_EventScript_27374E
+	goto_if_eq Common_EventScript_NopReturn
 	goto_if_set FLAG_SYS_GAME_CLEAR, Route101_EventScript_27211A
 	compare VAR_BIRCH_STATE, 0
 	call_if_eq Route101_EventScript_27211A
@@ -2029,7 +2029,7 @@ Route101_EventScript_272184:: @ 8272184
 	msgbox gUnknown_082A5D2C, MSGBOX_DEFAULT
 	call Route101_EventScript_272179
 	compare VAR_0x800A, 0
-	goto_if_eq Route101_EventScript_27374E
+	goto_if_eq Common_EventScript_NopReturn
 	setvar VAR_0x8004, 1
 	specialvar VAR_RESULT, ScriptGetPokedexInfo
 	copyvar VAR_0x8008, VAR_0x8005
@@ -2768,28 +2768,7 @@ EventScript_2736F8:: @ 82736F8
 	waitstate
 	end
 
-AncientTomb_EventScript_27374E:: @ 827374E
-AquaHideout_B1F_EventScript_27374E:: @ 827374E
-BattleFrontier_BattleDomeBattleRoom_EventScript_27374E:: @ 827374E
-BattleFrontier_OutsideEast_EventScript_27374E:: @ 827374E
-BirthIsland_Exterior_EventScript_27374E:: @ 827374E
-DesertRuins_EventScript_27374E:: @ 827374E
-EverGrandeCity_PokemonCenter_1F_EventScript_27374E:: @ 827374E
-FarawayIsland_Interior_EventScript_27374E:: @ 827374E
-IslandCave_EventScript_27374E:: @ 827374E
-LilycoveCity_Harbor_EventScript_27374E:: @ 827374E
-MarineCave_End_EventScript_27374E:: @ 827374E
-NavelRock_Bottom_EventScript_27374E:: @ 827374E
-NavelRock_Top_EventScript_27374E:: @ 827374E
-NewMauville_Inside_EventScript_27374E:: @ 827374E
-OldaleTown_PokemonCenter_1F_EventScript_27374E:: @ 827374E
-PacifidlogTown_House2_EventScript_27374E:: @ 827374E
-Route101_EventScript_27374E:: @ 827374E
-Route119_EventScript_27374E:: @ 827374E
-Route120_EventScript_27374E:: @ 827374E
-SkyPillar_Top_EventScript_27374E:: @ 827374E
-SouthernIsland_Interior_EventScript_27374E:: @ 827374E
-TerraCave_End_EventScript_27374E:: @ 827374E
+Common_EventScript_NopReturn:: @ 827374E
 	return
 
 EventScript_27374F:: @ 827374F
@@ -6652,7 +6631,7 @@ SlateportCity_PokemonFanClub_EventScript_2C7F16:: @ 82C7F16
 	goto_if_eq SlateportCity_PokemonFanClub_EventScript_2C7F6A
 	msgbox SlateportCity_PokemonFanClub_Text_2C6F66, MSGBOX_DEFAULT
 	setvar VAR_0x8005, 23
-	call SlateportCity_PokemonFanClub_EventScript_2C8326
+	call EventScript_ShowPartyMenu
 	compare VAR_RESULT, 0
 	goto_if_eq SlateportCity_PokemonFanClub_EventScript_2C7F6A
 	setflag FLAG_MOVE_TUTOR_TAUGHT_SWAGGER
@@ -6681,7 +6660,7 @@ MauvilleCity_EventScript_2C7F7E:: @ 82C7F7E
 	goto_if_eq MauvilleCity_EventScript_2C7FD2
 	msgbox MauvilleCity_Text_2C70F3, MSGBOX_DEFAULT
 	setvar VAR_0x8005, 16
-	call MauvilleCity_EventScript_2C8326
+	call EventScript_ShowPartyMenu
 	compare VAR_RESULT, 0
 	goto_if_eq MauvilleCity_EventScript_2C7FD2
 	setflag FLAG_MOVE_TUTOR_TAUGHT_ROLLOUT
@@ -6710,7 +6689,7 @@ VerdanturfTown_PokemonCenter_1F_EventScript_2C7FE6:: @ 82C7FE6
 	goto_if_eq VerdanturfTown_PokemonCenter_1F_EventScript_2C803A
 	msgbox VerdanturfTown_PokemonCenter_1F_Text_2C7243, MSGBOX_DEFAULT
 	setvar VAR_0x8005, 29
-	call VerdanturfTown_PokemonCenter_1F_EventScript_2C8326
+	call EventScript_ShowPartyMenu
 	compare VAR_RESULT, 0
 	goto_if_eq VerdanturfTown_PokemonCenter_1F_EventScript_2C803A
 	setflag FLAG_MOVE_TUTOR_TAUGHT_FURY_CUTTER
@@ -6739,7 +6718,7 @@ LavaridgeTown_House_EventScript_2C804E:: @ 82C804E
 	goto_if_eq LavaridgeTown_House_EventScript_2C80A2
 	msgbox LavaridgeTown_House_Text_2C73B1, MSGBOX_DEFAULT
 	setvar VAR_0x8005, 7
-	call LavaridgeTown_House_EventScript_2C8326
+	call EventScript_ShowPartyMenu
 	compare VAR_RESULT, 0
 	goto_if_eq LavaridgeTown_House_EventScript_2C80A2
 	setflag FLAG_MOVE_TUTOR_TAUGHT_MIMIC
@@ -6768,7 +6747,7 @@ FallarborTown_Mart_EventScript_2C80B6:: @ 82C80B6
 	goto_if_eq FallarborTown_Mart_EventScript_2C810A
 	msgbox FallarborTown_Mart_Text_2C7582, MSGBOX_DEFAULT
 	setvar VAR_0x8005, 8
-	call FallarborTown_Mart_EventScript_2C8326
+	call EventScript_ShowPartyMenu
 	compare VAR_RESULT, 0
 	goto_if_eq FallarborTown_Mart_EventScript_2C810A
 	setflag FLAG_MOVE_TUTOR_TAUGHT_METRONOME
@@ -6797,7 +6776,7 @@ FortreeCity_House2_EventScript_2C811E:: @ 82C811E
 	goto_if_eq FortreeCity_House2_EventScript_2C8172
 	msgbox FortreeCity_House2_Text_2C7721, MSGBOX_DEFAULT
 	setvar VAR_0x8005, 24
-	call FortreeCity_House2_EventScript_2C8326
+	call EventScript_ShowPartyMenu
 	compare VAR_RESULT, 0
 	goto_if_eq FortreeCity_House2_EventScript_2C8172
 	setflag FLAG_MOVE_TUTOR_TAUGHT_SLEEP_TALK
@@ -6826,7 +6805,7 @@ LilycoveCity_DepartmentStoreRooftop_EventScript_2C8186:: @ 82C8186
 	goto_if_eq LilycoveCity_DepartmentStoreRooftop_EventScript_2C81DA
 	msgbox LilycoveCity_DepartmentStoreRooftop_Text_2C7911, MSGBOX_DEFAULT
 	setvar VAR_0x8005, 14
-	call LilycoveCity_DepartmentStoreRooftop_EventScript_2C8326
+	call EventScript_ShowPartyMenu
 	compare VAR_RESULT, 0
 	goto_if_eq LilycoveCity_DepartmentStoreRooftop_EventScript_2C81DA
 	setflag FLAG_MOVE_TUTOR_TAUGHT_SUBSTITUTE
@@ -6855,7 +6834,7 @@ MossdeepCity_EventScript_2C81EE:: @ 82C81EE
 	goto_if_eq MossdeepCity_EventScript_2C8242
 	msgbox MossdeepCity_Text_2C7B0D, MSGBOX_DEFAULT
 	setvar VAR_0x8005, 15
-	call MossdeepCity_EventScript_2C8326
+	call EventScript_ShowPartyMenu
 	compare VAR_RESULT, 0
 	goto_if_eq MossdeepCity_EventScript_2C8242
 	setflag FLAG_MOVE_TUTOR_TAUGHT_DYNAMICPUNCH
@@ -6884,7 +6863,7 @@ SootopolisCity_PokemonCenter_1F_EventScript_2C8256:: @ 82C8256
 	goto_if_eq SootopolisCity_PokemonCenter_1F_EventScript_2C82AA
 	msgbox SootopolisCity_PokemonCenter_1F_Text_2C7C98, MSGBOX_DEFAULT
 	setvar VAR_0x8005, 4
-	call SootopolisCity_PokemonCenter_1F_EventScript_2C8326
+	call EventScript_ShowPartyMenu
 	compare VAR_RESULT, 0
 	goto_if_eq SootopolisCity_PokemonCenter_1F_EventScript_2C82AA
 	setflag FLAG_MOVE_TUTOR_TAUGHT_DOUBLE_EDGE
@@ -6913,7 +6892,7 @@ PacifidlogTown_PokemonCenter_1F_EventScript_2C82BE:: @ 82C82BE
 	goto_if_eq PacifidlogTown_PokemonCenter_1F_EventScript_2C8312
 	msgbox PacifidlogTown_PokemonCenter_1F_Text_2C7E40, MSGBOX_DEFAULT
 	setvar VAR_0x8005, 12
-	call PacifidlogTown_PokemonCenter_1F_EventScript_2C8326
+	call EventScript_ShowPartyMenu
 	compare VAR_RESULT, 0
 	goto_if_eq PacifidlogTown_PokemonCenter_1F_EventScript_2C8312
 	setflag FLAG_MOVE_TUTOR_TAUGHT_EXPLOSION
@@ -6930,16 +6909,7 @@ PacifidlogTown_PokemonCenter_1F_EventScript_2C831C:: @ 82C831C
 	release
 	end
 
-FallarborTown_Mart_EventScript_2C8326:: @ 82C8326
-FortreeCity_House2_EventScript_2C8326:: @ 82C8326
-LavaridgeTown_House_EventScript_2C8326:: @ 82C8326
-LilycoveCity_DepartmentStoreRooftop_EventScript_2C8326:: @ 82C8326
-MauvilleCity_EventScript_2C8326:: @ 82C8326
-MossdeepCity_EventScript_2C8326:: @ 82C8326
-PacifidlogTown_PokemonCenter_1F_EventScript_2C8326:: @ 82C8326
-SlateportCity_PokemonFanClub_EventScript_2C8326:: @ 82C8326
-SootopolisCity_PokemonCenter_1F_EventScript_2C8326:: @ 82C8326
-VerdanturfTown_PokemonCenter_1F_EventScript_2C8326:: @ 82C8326
+EventScript_ShowPartyMenu:: @ 82C8326
 	special sub_81B892C
 	waitstate
 	lock

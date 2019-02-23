@@ -10,7 +10,7 @@ AquaHideout_B1F_MapScript1_2339B2: @ 82339B2
 AquaHideout_B1F_EventScript_2339BC:: @ 82339BC
 	specialvar VAR_RESULT, GetBattleOutcome
 	compare VAR_RESULT, 7
-	goto_if_ne AquaHideout_B1F_EventScript_27374E
+	goto_if_ne Common_EventScript_NopReturn
 	removeobject VAR_LAST_TALKED
 	return
 
