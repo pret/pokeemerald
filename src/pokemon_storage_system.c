@@ -3927,7 +3927,7 @@ static void SetScrollingBackground(void)
 {
     SetGpuReg(REG_OFFSET_BG3CNT, BGCNT_PRIORITY(3) | BGCNT_CHARBASE(3) | BGCNT_16COLOR | BGCNT_SCREENBASE(31));
     DecompressAndLoadBgGfxUsingHeap(3, gPokemonStorageScrollingBGTileset, 0, 0, 0);
-    LZ77UnCompVram(gPokemonStorageScrollingBGTilemap, (void *)VRAM + 0xF800);
+    LZ77UnCompVram(gPokemonStorageScrollingBGTilemap, (void *)BG_SCREEN_ADDR(31));
 }
 
 static void ScrollBackground(void)

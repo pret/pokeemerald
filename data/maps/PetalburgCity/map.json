@@ -33,8 +33,8 @@
       "movement_type": "MOVEMENT_TYPE_WANDER_AROUND",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": 0,
-      "trainer_sight_or_berry_tree_id": 0,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
       "script": "PetalburgCity_EventScript_1DC3FD",
       "flag": "FLAG_HIDE_PETALBURG_CITY_WALLYS_AUNT"
     },
@@ -46,8 +46,8 @@
       "movement_type": "MOVEMENT_TYPE_FACE_UP",
       "movement_range_x": 0,
       "movement_range_y": 0,
-      "trainer_type": 0,
-      "trainer_sight_or_berry_tree_id": 0,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
       "script": "0x0",
       "flag": "FLAG_HIDE_PETALBURG_CITY_WALLY"
     },
@@ -59,8 +59,8 @@
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 0,
       "movement_range_y": 0,
-      "trainer_type": 0,
-      "trainer_sight_or_berry_tree_id": 0,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
       "script": "PetalburgCity_EventScript_1DC3E6",
       "flag": "0"
     },
@@ -72,8 +72,8 @@
       "movement_type": "MOVEMENT_TYPE_WANDER_UP_AND_DOWN",
       "movement_range_x": 0,
       "movement_range_y": 1,
-      "trainer_type": 0,
-      "trainer_sight_or_berry_tree_id": 0,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
       "script": "PetalburgCity_EventScript_1DC488",
       "flag": "0"
     },
@@ -85,8 +85,8 @@
       "movement_type": "MOVEMENT_TYPE_FACE_UP",
       "movement_range_x": 0,
       "movement_range_y": 0,
-      "trainer_type": 0,
-      "trainer_sight_or_berry_tree_id": 0,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
       "script": "0x0",
       "flag": "FLAG_HIDE_PETALBURG_CITY_WALLYS_UNCLE"
     },
@@ -98,8 +98,8 @@
       "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
       "movement_range_x": 0,
       "movement_range_y": 0,
-      "trainer_type": 0,
-      "trainer_sight_or_berry_tree_id": 0,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
       "script": "PetalburgCity_EventScript_2910B4",
       "flag": "FLAG_ITEM_PETALBURG_CITY_MAX_REVIVE"
     },
@@ -111,8 +111,8 @@
       "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
       "movement_range_x": 0,
       "movement_range_y": 0,
-      "trainer_type": 0,
-      "trainer_sight_or_berry_tree_id": 0,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
       "script": "PetalburgCity_EventScript_2910C1",
       "flag": "FLAG_ITEM_PETALBURG_CITY_ETHER"
     },
@@ -124,8 +124,8 @@
       "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
       "movement_range_x": 0,
       "movement_range_y": 0,
-      "trainer_type": 0,
-      "trainer_sight_or_berry_tree_id": 0,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
       "script": "PetalburgCity_EventScript_1DC82E",
       "flag": "0"
     },
@@ -137,8 +137,8 @@
       "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": 0,
-      "trainer_sight_or_berry_tree_id": 0,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
       "script": "0x0",
       "flag": "FLAG_HIDE_PETALBURG_CITY_SCOTT"
     }
@@ -194,7 +194,7 @@
       "y": 10,
       "elevation": 3,
       "var": "VAR_0x4057",
-      "var_value": 0,
+      "var_value": "0",
       "script": "PetalburgCity_EventScript_1DC49A"
     },
     {
@@ -203,7 +203,7 @@
       "y": 11,
       "elevation": 3,
       "var": "VAR_0x4057",
-      "var_value": 0,
+      "var_value": "0",
       "script": "PetalburgCity_EventScript_1DC4A6"
     },
     {
@@ -212,7 +212,7 @@
       "y": 12,
       "elevation": 3,
       "var": "VAR_0x4057",
-      "var_value": 0,
+      "var_value": "0",
       "script": "PetalburgCity_EventScript_1DC4B2"
     },
     {
@@ -221,7 +221,7 @@
       "y": 13,
       "elevation": 3,
       "var": "VAR_0x4057",
-      "var_value": 0,
+      "var_value": "0",
       "script": "PetalburgCity_EventScript_1DC4BE"
     },
     {
@@ -230,7 +230,7 @@
       "y": 10,
       "elevation": 3,
       "var": "VAR_0x40C9",
-      "var_value": 0,
+      "var_value": "0",
       "script": "PetalburgCity_EventScript_1DC691"
     },
     {
@@ -239,7 +239,7 @@
       "y": 11,
       "elevation": 3,
       "var": "VAR_0x40C9",
-      "var_value": 0,
+      "var_value": "0",
       "script": "PetalburgCity_EventScript_1DC6A7"
     },
     {
@@ -248,7 +248,7 @@
       "y": 12,
       "elevation": 3,
       "var": "VAR_0x40C9",
-      "var_value": 0,
+      "var_value": "0",
       "script": "PetalburgCity_EventScript_1DC6BD"
     },
     {
@@ -257,7 +257,7 @@
       "y": 13,
       "elevation": 3,
       "var": "VAR_0x40C9",
-      "var_value": 0,
+      "var_value": "0",
       "script": "PetalburgCity_EventScript_1DC6D3"
     }
   ],

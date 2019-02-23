@@ -22,8 +22,8 @@
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 0,
       "movement_range_y": 0,
-      "trainer_type": 0,
-      "trainer_sight_or_berry_tree_id": 0,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
       "script": "DewfordTown_Gym_EventScript_1FC7C2",
       "flag": "0"
     },
@@ -35,8 +35,8 @@
       "movement_type": "MOVEMENT_TYPE_FACE_UP",
       "movement_range_x": 0,
       "movement_range_y": 0,
-      "trainer_type": 1,
-      "trainer_sight_or_berry_tree_id": 3,
+      "trainer_type": "1",
+      "trainer_sight_or_berry_tree_id": "3",
       "script": "DewfordTown_Gym_EventScript_1FC8B7",
       "flag": "0"
     },
@@ -48,8 +48,8 @@
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 0,
       "movement_range_y": 0,
-      "trainer_type": 1,
-      "trainer_sight_or_berry_tree_id": 3,
+      "trainer_type": "1",
+      "trainer_sight_or_berry_tree_id": "3",
       "script": "DewfordTown_Gym_EventScript_1FC8D9",
       "flag": "0"
     },
@@ -61,8 +61,8 @@
       "movement_type": "MOVEMENT_TYPE_FACE_UP",
       "movement_range_x": 0,
       "movement_range_y": 0,
-      "trainer_type": 1,
-      "trainer_sight_or_berry_tree_id": 2,
+      "trainer_type": "1",
+      "trainer_sight_or_berry_tree_id": "2",
       "script": "DewfordTown_Gym_EventScript_1FC8FB",
       "flag": "0"
     },
@@ -74,8 +74,8 @@
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 0,
       "movement_range_y": 0,
-      "trainer_type": 0,
-      "trainer_sight_or_berry_tree_id": 0,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
       "script": "DewfordTown_Gym_EventScript_1FC983",
       "flag": "0"
     },
@@ -87,8 +87,8 @@
       "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": 1,
-      "trainer_sight_or_berry_tree_id": 3,
+      "trainer_type": "1",
+      "trainer_sight_or_berry_tree_id": "3",
       "script": "DewfordTown_Gym_EventScript_1FC93F",
       "flag": "0"
     },
@@ -100,8 +100,8 @@
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": 1,
-      "trainer_sight_or_berry_tree_id": 3,
+      "trainer_type": "1",
+      "trainer_sight_or_berry_tree_id": "3",
       "script": "DewfordTown_Gym_EventScript_1FC961",
       "flag": "0"
     },
@@ -113,8 +113,8 @@
       "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": 1,
-      "trainer_sight_or_berry_tree_id": 2,
+      "trainer_type": "1",
+      "trainer_sight_or_berry_tree_id": "2",
       "script": "DewfordTown_Gym_EventScript_1FC91D",
       "flag": "0"
     }

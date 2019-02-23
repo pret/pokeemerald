@@ -940,7 +940,7 @@ EventScript_27149D:: @ 827149D
 	setberrytree 82, 36, 5
 	return
 
-EventScript_2715DE:: @ 82715DE
+EventScript_ResetAllMapFlags:: @ 82715DE
 	setflag FLAG_LINK_CONTEST_POKE_BALL
 	setflag FLAG_HIDE_ROUTE_111_VICTORIA_WINSTRATE
 	setflag FLAG_HIDE_ROUTE_111_VIVI_WINSTRATE
@@ -1748,7 +1748,7 @@ RustboroCity_Gym_EventScript_271E84:: @ 8271E84
 
 DewfordTown_EventScript_271E8B:: @ 8271E8B
 DewfordTown_Hall_EventScript_271E8B:: @ 8271E8B
-	dodailyevents
+	dotimebasedevents
 	setvar VAR_0x8004, 0
 	special BufferTrendyPhraseString
 	return

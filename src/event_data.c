@@ -3,7 +3,7 @@
 #include "pokedex.h"
 
 #define TEMP_FLAGS_SIZE 0x4
-#define TEMP_UPPER_FLAGS_SIZE 0x8
+#define DAILY_FLAGS_SIZE 0x8
 #define TEMP_VARS_SIZE 0x20
 
 EWRAM_DATA u16 gSpecialVar_0x8000 = 0;
@@ -28,8 +28,6 @@ EWRAM_DATA static u8 gUnknown_020375FC[16] = {0};
 
 extern u16 *const gSpecialVars[];
 
-extern void sub_80BB358(void);
-
 void InitEventData(void)
 {
     memset(gSaveBlock1Ptr->flags, 0, sizeof(gSaveBlock1Ptr->flags));
@@ -48,10 +46,9 @@ void ClearTempFieldEventData(void)
     FlagClear(FLAG_NURSE_UNION_ROOM_REMINDER);
 }
 
-// Probably had different flag splits at one point.
-void ClearUpperFlags(void)
+void ClearDailyFlags(void)
 {
-    memset(gSaveBlock1Ptr->flags + 0x124, 0, TEMP_UPPER_FLAGS_SIZE);
+    memset(gSaveBlock1Ptr->flags + 0x124, 0, DAILY_FLAGS_SIZE);
 }
 
 void DisableNationalPokedex(void)
@@ -70,7 +67,7 @@ void EnableNationalPokedex(void)
     FlagSet(FLAG_SYS_NATIONAL_DEX);
     gSaveBlock2Ptr->pokedex.mode = DEX_MODE_NATIONAL;
     gSaveBlock2Ptr->pokedex.order = 0;
-    sub_80BB358();
+    ResetPokedexScrollPositions();
 }
 
 bool32 IsNationalPokedexEnabled(void)

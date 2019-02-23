@@ -22,8 +22,8 @@
       "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
       "movement_range_x": 0,
       "movement_range_y": 0,
-      "trainer_type": 0,
-      "trainer_sight_or_berry_tree_id": 0,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
       "script": "MeteorFalls_1F_1R_EventScript_2911AB",
       "flag": "FLAG_ITEM_METEOR_FALLS_1F_1R_TM_23"
     },
@@ -35,8 +35,8 @@
       "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
       "movement_range_x": 0,
       "movement_range_y": 0,
-      "trainer_type": 0,
-      "trainer_sight_or_berry_tree_id": 0,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
       "script": "MeteorFalls_1F_1R_EventScript_2911C5",
       "flag": "FLAG_ITEM_METEOR_FALLS_1F_1R_MOON_STONE"
     },
@@ -48,8 +48,8 @@
       "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
       "movement_range_x": 0,
       "movement_range_y": 0,
-      "trainer_type": 0,
-      "trainer_sight_or_berry_tree_id": 0,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
       "script": "MeteorFalls_1F_1R_EventScript_2911B8",
       "flag": "FLAG_ITEM_METEOR_FALLS_1F_1R_FULL_HEAL"
     },
@@ -61,8 +61,8 @@
       "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
       "movement_range_x": 0,
       "movement_range_y": 0,
-      "trainer_type": 0,
-      "trainer_sight_or_berry_tree_id": 0,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
       "script": "MeteorFalls_1F_1R_EventScript_2911D2",
       "flag": "FLAG_ITEM_METEOR_FALLS_1F_1R_PP_UP"
     },
@@ -74,8 +74,8 @@
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 0,
       "movement_range_y": 0,
-      "trainer_type": 0,
-      "trainer_sight_or_berry_tree_id": 0,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
       "script": "0x0",
       "flag": "FLAG_HIDE_METEOR_FALLS_TEAM_MAGMA"
     },
@@ -87,8 +87,8 @@
       "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
       "movement_range_x": 0,
       "movement_range_y": 0,
-      "trainer_type": 0,
-      "trainer_sight_or_berry_tree_id": 0,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
       "script": "0x0",
       "flag": "FLAG_HIDE_METEOR_FALLS_TEAM_MAGMA"
     },
@@ -100,8 +100,8 @@
       "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
       "movement_range_x": 0,
       "movement_range_y": 0,
-      "trainer_type": 0,
-      "trainer_sight_or_berry_tree_id": 0,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
       "script": "0x0",
       "flag": "FLAG_HIDE_METEOR_FALLS_TEAM_AQUA"
     },
@@ -113,8 +113,8 @@
       "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
       "movement_range_x": 0,
       "movement_range_y": 0,
-      "trainer_type": 0,
-      "trainer_sight_or_berry_tree_id": 0,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
       "script": "0x0",
       "flag": "FLAG_HIDE_METEOR_FALLS_TEAM_AQUA"
     },
@@ -126,8 +126,8 @@
       "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
       "movement_range_x": 0,
       "movement_range_y": 0,
-      "trainer_type": 0,
-      "trainer_sight_or_berry_tree_id": 0,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
       "script": "0x0",
       "flag": "FLAG_HIDE_METEOR_FALLS_TEAM_AQUA"
     },
@@ -139,8 +139,8 @@
       "movement_type": "MOVEMENT_TYPE_FACE_UP_LEFT_AND_RIGHT",
       "movement_range_x": 0,
       "movement_range_y": 0,
-      "trainer_type": 0,
-      "trainer_sight_or_berry_tree_id": 0,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
       "script": "MeteorFalls_1F_1R_EventScript_22BF25",
       "flag": "FLAG_HIDE_METEOR_FALLS_1F_1R_COZMO"
     }
@@ -196,7 +196,7 @@
       "y": 18,
       "elevation": 4,
       "var": "VAR_0x40BF",
-      "var_value": 0,
+      "var_value": "0",
       "script": "MeteorFalls_1F_1R_EventScript_22BD5F"
     }
   ],

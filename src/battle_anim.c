@@ -1939,13 +1939,13 @@ void MoveBattlerSpriteToBG(u8 battlerId, bool8 toBG_2, bool8 setSpriteInvisible)
 
         if (IsContest() == TRUE)
         {
-            RequestDma3Fill(0, (void*)(VRAM + 0x8000), 0x2000, 1);
-            RequestDma3Fill(0xFF, (void*)(VRAM + 0xF000), 0x1000, 0);
+            RequestDma3Fill(0, (void*)(BG_SCREEN_ADDR(16)), 0x2000, 1);
+            RequestDma3Fill(0xFF, (void*)(BG_SCREEN_ADDR(30)), 0x1000, 0);
         }
         else
         {
-            RequestDma3Fill(0, (void*)(VRAM + 0x4000), 0x2000, 1);
-            RequestDma3Fill(0xFF, (void*)(VRAM + 0xe000), 0x1000, 0);
+            RequestDma3Fill(0, (void*)(BG_SCREEN_ADDR(8)), 0x2000, 1);
+            RequestDma3Fill(0xFF, (void*)(BG_SCREEN_ADDR(28)), 0x1000, 0);
         }
 
         sub_80A6B30(&animBg);
@@ -1984,8 +1984,8 @@ void MoveBattlerSpriteToBG(u8 battlerId, bool8 toBG_2, bool8 setSpriteInvisible)
     }
     else
     {
-        RequestDma3Fill(0, (void*)(VRAM + 0x6000), 0x2000, 1);
-        RequestDma3Fill(0, (void*)(VRAM + 0xF000), 0x1000, 1);
+        RequestDma3Fill(0, (void*)(BG_SCREEN_ADDR(12)), 0x2000, 1);
+        RequestDma3Fill(0, (void*)(BG_SCREEN_ADDR(30)), 0x1000, 1);
         sub_80A6B90(&animBg, 2);
         CpuFill16(0, animBg.bgTiles + 0x1000, 0x1000);
         CpuFill16(0, animBg.bgTilemap + 0x400, 0x800);
@@ -2458,15 +2458,15 @@ static void LoadMoveBg(u16 bgId)
         LZDecompressWram(tilemap, gDecompressionBuffer);
         sub_80A4720(sub_80A6D94(), (void*)(gDecompressionBuffer), 0x100, 0);
         dmaSrc = gDecompressionBuffer;
-        dmaDest = (void *)(VRAM + 0xD000);
+        dmaDest = (void *)(BG_SCREEN_ADDR(26));
         DmaCopy32(3, dmaSrc, dmaDest, 0x800);
-        LZDecompressVram(gBattleAnimBackgroundTable[bgId].image, (void *)(VRAM + 0x2000));
+        LZDecompressVram(gBattleAnimBackgroundTable[bgId].image, (void *)(BG_SCREEN_ADDR(4)));
         LoadCompressedPalette(gBattleAnimBackgroundTable[bgId].palette, sub_80A6D94() * 16, 32);
     }
     else
     {
-        LZDecompressVram(gBattleAnimBackgroundTable[bgId].tilemap, (void *)(VRAM + 0xD000));
-        LZDecompressVram(gBattleAnimBackgroundTable[bgId].image, (void *)(VRAM + 0x8000));
+        LZDecompressVram(gBattleAnimBackgroundTable[bgId].tilemap, (void *)(BG_SCREEN_ADDR(26)));
+        LZDecompressVram(gBattleAnimBackgroundTable[bgId].image, (void *)(BG_CHAR_ADDR(2)));
         LoadCompressedPalette(gBattleAnimBackgroundTable[bgId].palette, 32, 32);
     }
 }

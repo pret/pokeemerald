@@ -22,8 +22,8 @@
       "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
       "movement_range_x": 0,
       "movement_range_y": 0,
-      "trainer_type": 0,
-      "trainer_sight_or_berry_tree_id": 0,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
       "script": "SlateportCity_OceanicMuseum_1F_EventScript_20AD96",
       "flag": "0"
     },
@@ -35,8 +35,8 @@
       "movement_type": "MOVEMENT_TYPE_FACE_UP",
       "movement_range_x": 0,
       "movement_range_y": 0,
-      "trainer_type": 0,
-      "trainer_sight_or_berry_tree_id": 0,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
       "script": "SlateportCity_OceanicMuseum_1F_EventScript_20AE5F",
       "flag": "FLAG_HIDE_SLATEPORT_CITY_OCEANIC_MUSEUM_AQUA_GRUNTS"
     },
@@ -48,8 +48,8 @@
       "movement_type": "MOVEMENT_TYPE_FACE_UP",
       "movement_range_x": 0,
       "movement_range_y": 0,
-      "trainer_type": 0,
-      "trainer_sight_or_berry_tree_id": 0,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
       "script": "SlateportCity_OceanicMuseum_1F_EventScript_20AE68",
       "flag": "FLAG_HIDE_SLATEPORT_CITY_OCEANIC_MUSEUM_AQUA_GRUNTS"
     },
@@ -61,8 +61,8 @@
       "movement_type": "MOVEMENT_TYPE_FACE_UP",
       "movement_range_x": 0,
       "movement_range_y": 0,
-      "trainer_type": 0,
-      "trainer_sight_or_berry_tree_id": 0,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
       "script": "SlateportCity_OceanicMuseum_1F_EventScript_20AE56",
       "flag": "FLAG_HIDE_SLATEPORT_CITY_OCEANIC_MUSEUM_AQUA_GRUNTS"
     },
@@ -74,8 +74,8 @@
       "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
       "movement_range_x": 0,
       "movement_range_y": 0,
-      "trainer_type": 0,
-      "trainer_sight_or_berry_tree_id": 0,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
       "script": "SlateportCity_OceanicMuseum_1F_EventScript_20AE4D",
       "flag": "FLAG_HIDE_SLATEPORT_CITY_OCEANIC_MUSEUM_AQUA_GRUNTS"
     },
@@ -87,8 +87,8 @@
       "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
       "movement_range_x": 0,
       "movement_range_y": 0,
-      "trainer_type": 0,
-      "trainer_sight_or_berry_tree_id": 0,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
       "script": "SlateportCity_OceanicMuseum_1F_EventScript_20AE71",
       "flag": "FLAG_HIDE_SLATEPORT_CITY_OCEANIC_MUSEUM_AQUA_GRUNTS"
     },
@@ -100,8 +100,8 @@
       "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
       "movement_range_x": 0,
       "movement_range_y": 0,
-      "trainer_type": 0,
-      "trainer_sight_or_berry_tree_id": 0,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
       "script": "SlateportCity_OceanicMuseum_1F_EventScript_20AD96",
       "flag": "0"
     },
@@ -113,8 +113,8 @@
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 0,
       "movement_range_y": 0,
-      "trainer_type": 0,
-      "trainer_sight_or_berry_tree_id": 0,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
       "script": "SlateportCity_OceanicMuseum_1F_EventScript_20AE7A",
       "flag": "FLAG_HIDE_SLATEPORT_CITY_OCEANIC_MUSEUM_AQUA_GRUNTS"
     },
@@ -126,8 +126,8 @@
       "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": 0,
-      "trainer_sight_or_berry_tree_id": 0,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
       "script": "SlateportCity_OceanicMuseum_1F_EventScript_20AED4",
       "flag": "FLAG_HIDE_SLATEPORT_MUSEUM_POPULATION"
     },
@@ -139,8 +139,8 @@
       "movement_type": "MOVEMENT_TYPE_FACE_UP",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": 0,
-      "trainer_sight_or_berry_tree_id": 0,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
       "script": "SlateportCity_OceanicMuseum_1F_EventScript_20AEDD",
       "flag": "FLAG_HIDE_SLATEPORT_MUSEUM_POPULATION"
     },
@@ -152,8 +152,8 @@
       "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": 0,
-      "trainer_sight_or_berry_tree_id": 0,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
       "script": "SlateportCity_OceanicMuseum_1F_EventScript_20AEE6",
       "flag": "FLAG_HIDE_SLATEPORT_MUSEUM_POPULATION"
     },
@@ -165,8 +165,8 @@
       "movement_type": "MOVEMENT_TYPE_FACE_UP",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": 0,
-      "trainer_sight_or_berry_tree_id": 0,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
       "script": "SlateportCity_OceanicMuseum_1F_EventScript_20AEEF",
       "flag": "FLAG_HIDE_SLATEPORT_MUSEUM_POPULATION"
     },
@@ -178,8 +178,8 @@
       "movement_type": "MOVEMENT_TYPE_FACE_UP_LEFT_AND_RIGHT",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": 0,
-      "trainer_sight_or_berry_tree_id": 0,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
       "script": "SlateportCity_OceanicMuseum_1F_EventScript_20AEF8",
       "flag": "FLAG_HIDE_SLATEPORT_CITY_OCEANIC_MUSEUM_FAMILIAR_AQUA_GRUNT"
     },
@@ -191,8 +191,8 @@
       "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": 0,
-      "trainer_sight_or_berry_tree_id": 0,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
       "script": "SlateportCity_OceanicMuseum_1F_EventScript_28C883",
       "flag": "FLAG_HIDE_SLATEPORT_MUSEUM_POPULATION"
     }
@@ -227,7 +227,7 @@
       "y": 7,
       "elevation": 3,
       "var": "VAR_0x40AA",
-      "var_value": 0,
+      "var_value": "0",
       "script": "SlateportCity_OceanicMuseum_1F_EventScript_20AD9F"
     },
     {
@@ -236,7 +236,7 @@
       "y": 7,
       "elevation": 3,
       "var": "VAR_0x40AA",
-      "var_value": 0,
+      "var_value": "0",
       "script": "SlateportCity_OceanicMuseum_1F_EventScript_20ADB0"
     }
   ],

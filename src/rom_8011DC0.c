@@ -1687,7 +1687,7 @@ void sub_801440C(u8 taskId)
     case 9 ... 11:
     case 13:
     case 15:
-        sub_800E3A8();
+        RecordMixTrainerNames();
         break;
     }
 
@@ -1800,12 +1800,12 @@ void sub_8014790(u8 taskId)
             sendBuff[1] = GetMonData(&gPlayerParty[gSelectedOrderFromParty[1] - 1], MON_DATA_SPECIES, NULL);
             gMain.savedCallback = NULL;
             data[0] = 4;
-            sub_800E3A8();
+            RecordMixTrainerNames();
             ResetBlockReceivedFlags();
             break;
         case 16:
         case 23 ... 27:
-            sub_800E3A8();
+            RecordMixTrainerNames();
             DestroyTask(taskId);
         default:
             EnableBothScriptContexts();

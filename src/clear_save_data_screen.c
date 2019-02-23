@@ -153,7 +153,7 @@ static bool8 SetupClearSaveDataScreen(void)
             ((u16 *)(VRAM + 0x20))[i] = 0x1111;
 
         for (i = 0; i < 0x400; i++)
-            ((u16 *)(VRAM + 0xF000))[i] = 0x0001;
+            ((u16 *)(BG_SCREEN_ADDR(30)))[i] = 0x0001;
         ResetTasks();
         ResetSpriteData();
         ResetBgsAndClearDma3BusyFlags(0);

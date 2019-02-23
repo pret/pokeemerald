@@ -382,7 +382,7 @@ struct BattleFrontier
     /*0xEBC*/ u32 battlesCount;
     /*0xEC0*/ u16 field_EC0[16];
     /*0xEE0*/ u8 field_EE0;
-    /*0xEE1*/ u8 field_EE1[2][PLAYER_NAME_LENGTH + 1];
+    /*0xEE1*/ u8 opponentName[2][PLAYER_NAME_LENGTH + 1];
     /*0xEF1*/ u8 field_EF1[2][4];
     /*0xEF9*/ u8 field_EF9_0:7;
     /*0xEF9*/ u8 field_EF9_1:1;
@@ -452,7 +452,7 @@ struct SaveBlock2
     /*0x90*/ u8 filler_90[0x8];
     /*0x98*/ struct Time localTimeOffset;
     /*0xA0*/ struct Time lastBerryTreeUpdate;
-    /*0xA8*/ u32 field_A8;
+    /*0xA8*/ u32 field_A8; // Written to, but never read.
     /*0xAC*/ u32 encryptionKey;
     /*0xB0*/ struct PlayersApprentice playerApprentice;
     /*0xDC*/ struct Apprentice apprentices[4]; // From record mixing.
@@ -793,7 +793,7 @@ struct WaldaPhrase
     bool8 patternUnlocked;
 };
 
-struct UnkSaveSubstruct_3b98
+struct TrainerNameRecord
 {
     u32 trainerId;
     u8 trainerName[PLAYER_NAME_LENGTH + 1];
@@ -897,7 +897,7 @@ struct SaveBlock1
     /*0x3B14*/ struct RecordMixingGift recordMixingGift;
     /*0x3B24*/ u8 seen2[DEX_FLAGS_NO];
     /*0x3B58*/ LilycoveLady lilycoveLady;
-    /*0x3B98*/ struct UnkSaveSubstruct_3b98 unk_3B98[20];
+    /*0x3B98*/ struct TrainerNameRecord trainerNameRecords[20];
     /*0x3C88*/ u8 filler_3C88[0xDC];
     /*0x3D64*/ struct SaveTrainerHill trainerHill;
     /*0x3D70*/ struct WaldaPhrase waldaPhrase;

@@ -4007,9 +4007,17 @@ extern const u32 gBerryPalette_Enigma[];
 //credits
 extern const u32 gCreditsCopyrightEnd_Gfx[];
 
-//pokenav condition marker
+//pokenav
 extern const u8 gPokenavConditionMarker_Gfx[];
 extern const u16 gPokenavConditionMarker_Pal[];
+extern const u16 gPokenavHeader_Pal[];
+extern const u32 gPokenavHeader_Gfx[];
+extern const u32 gPokenavHeader_Tilemap[];
+extern const u32 gPokenavLeftHeaderHoennMap_Gfx[];
+extern const u32 gPokenavLeftHeaderMainMenu_Gfx[];
+extern const u32 gPokenavLeftHeaderCondition_Gfx[];
+extern const u32 gPokenavLeftHeaderRibbons_Gfx[];
+extern const u32 gPokenavLeftHeaderMatchCall_Gfx[];
 
 extern const u32 gUnknown_08D9862C[];
 extern const u32 gUnknown_08D98CC8[];
@@ -4886,5 +4894,9 @@ extern const u16 gFrontierPassMedalsGold_Pal[];
 extern const u16 gFrontierPassMedalsSilver_Pal[];
 extern const u16 gFrontierPassMapCursor_Pal[];
 
+// Easy Chat Screen
+extern const u32 gEasyChatWindow_Gfx[];
+extern const u32 gEasyChatWindow_Tilemap[];
+extern const u16 gEasyChatMode_Pal[];
 
 #endif //GUARD_GRAPHICS_H

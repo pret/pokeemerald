@@ -986,6 +986,19 @@ extern const u8 gText_SomeonesPC[];
 extern const u8 gText_PlayersPC[];
 extern const u8 gText_WhichPCShouldBeAccessed[];
 
+extern const u8 gText_Navgear_ClearButtonList[];
+extern const u8 gText_NavgearMap_ZoomedOutButtons[];
+extern const u8 gText_NavgearMap_ZoomedInButtons[];
+extern const u8 gText_NavgearCondition_MonListButtons[];
+extern const u8 gText_NavgearCondition_MonStatusButtons[];
+extern const u8 gText_NavgearCondition_MarkingButtons[];
+extern const u8 gText_NavgearMatchCall_TrainerListButtons[];
+extern const u8 gText_NavgearMatchCall_CallMenuButtons[];
+extern const u8 gText_NavgearMatchCall_CheckTrainerButtons[];
+extern const u8 gText_NavgearRibbons_MonListButtons[];
+extern const u8 gText_NavgearRibbons_RibbonListButtons[];
+extern const u8 gText_NavgearRibbons_RibbonCheckButtons[];
+
 extern const u8 gUnknown_085EAD37[];
 extern const u8 gUnknown_085EAD41[];
 extern const u8 gUnknown_085EAD67[];
@@ -2400,5 +2413,22 @@ extern const u8 gUnknown_085EDC45[];
 extern const u8 gUnknown_085EDB00[];
 extern const u8 gUnknown_085EDC84[];
 
+// Easy Chat Entry
+extern const u8 gText_StopGivingPkmnMail[];
+extern const u8 gText_LikeToQuitQuiz[];
+extern const u8 gText_ChallengeQuestionMark[];
+extern const u8 gText_QuitEditing[];
+extern const u8 gText_AllTextBeingEditedWill[];
+extern const u8 gText_BeDeletedThatOkay[];
+extern const u8 gText_Lady[];
+extern const u8 gText_F700sQuiz[];
+extern const u8 gText_CreateAQuiz[];
+extern const u8 gText_SelectTheAnswer[];
+extern const u8 gText_OriginalSongWillBeUsed[];
+extern const u8 gText_LyricsCantBeDeleted[];
+extern const u8 gText_CombineTwoWordsOrPhrases3[];
+extern const u8 gText_OnlyOnePhrase[];
+extern const u8 gText_YouCannotQuitHere[];
+extern const u8 gText_SectionMustBeCompleted[];
 
 #endif // GUARD_STRINGS_H

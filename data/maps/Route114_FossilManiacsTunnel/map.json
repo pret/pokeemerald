@@ -22,8 +22,8 @@
       "movement_type": "MOVEMENT_TYPE_FACE_UP",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": 0,
-      "trainer_sight_or_berry_tree_id": 0,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
       "script": "Route114_FossilManiacsTunnel_EventScript_22AF87",
       "flag": "0"
     }
@@ -58,7 +58,7 @@
       "y": 4,
       "elevation": 3,
       "var": "VAR_0x40CC",
-      "var_value": 1,
+      "var_value": "1",
       "script": "Route114_FossilManiacsTunnel_EventScript_22AF66"
     },
     {
@@ -67,7 +67,7 @@
       "y": 4,
       "elevation": 3,
       "var": "VAR_0x40CC",
-      "var_value": 1,
+      "var_value": "1",
       "script": "Route114_FossilManiacsTunnel_EventScript_22AF66"
     }
   ],

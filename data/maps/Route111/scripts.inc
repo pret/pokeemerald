@@ -159,7 +159,7 @@ Route111_Movement_1F0EB1:: @ 81F0EB1
 Route111_EventScript_1F0EB9:: @ 81F0EB9
 	lock
 	faceplayer
-	dodailyevents
+	dotimebasedevents
 	goto_if_set FLAG_DAILY_ROUTE_111_RECEIVED_BERRY, Route111_EventScript_1F0EF4
 	msgbox Route111_Text_2A6EBD, MSGBOX_DEFAULT
 	giveitem_std ITEM_RAZZ_BERRY
