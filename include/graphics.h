@@ -4762,6 +4762,11 @@ extern const u32 gBattleAnimBackgroundImageMuddyWater_Pal[];
 
 extern const u32 gBattleAnimFogTilemap[];
 
+extern const u32 gUsePokeblockGraph_Gfx[];
+extern const u32 gUsePokeblockGraph_Tilemap[];
+extern const u16 gUsePokeblockGraph_Pal[];
+extern const u16 gUsePokeblockNatureWin_Pal[];
+
 // Berry blender
 extern const u32 gBerryBlenderArrowTiles[];
 extern const u32 gBerryBlenderStartTiles[];

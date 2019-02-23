@@ -9,6 +9,11 @@ extern const u8 gText_OpenLevel[];
 extern const u8 gText_Mom[];
 extern const u8 gText_Dad[];
 
+extern const u8 gText_GetsAPokeBlockQuestion[];
+extern const u8 gText_WontEatAnymore[];
+extern const u8 gText_WasEnhanced[];
+extern const u8 gText_NothingChanged[];
+
 extern const u8 gText_Cool[];
 extern const u8 gText_Beauty[];
 extern const u8 gText_Cute[];

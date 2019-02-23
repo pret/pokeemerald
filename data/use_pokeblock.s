@@ -48,10 +48,10 @@ sContestStatNames:: @ 85DFD04
 	.4byte gText_Cuteness
 	.4byte gText_Beauty3
 
-gUnknown_085DFD18:: @ 85DFD18
+gSpriteSheet_ConditionUpDown:: @ 85DFD18
 	obj_tiles gUsePokeblockUpDown_Gfx, 0x200, 0
 
-gUnknown_085DFD20:: @ 85DFD20
+gSpritePalette_ConditionUpDown:: @ 85DFD20
 	obj_pal gUsePokeblockUpDown_Pal, 0
 
 gUnknown_085DFD28:: @ 85DFD28
@@ -79,7 +79,7 @@ gUnknown_085DFD54:: @ 85DFD54
 	.4byte gUnknown_085DFD44
 	.4byte gUnknown_085DFD4C
 
-gUnknown_085DFD5C:: @ 85DFD5C
+gSpriteTemplate_085DFD5C:: @ 85DFD5C
 	spr_template 0, 0, gUnknown_085DFD3C, gUnknown_085DFD54, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
 	
 gUnknown_085DFD74:: @ 85DFD74
