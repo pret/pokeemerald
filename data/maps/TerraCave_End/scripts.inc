@@ -10,7 +10,7 @@ TerraCave_End_MapScript1_23B0BB: @ 823B0BB
 TerraCave_End_EventScript_23B0C5:: @ 823B0C5
 	specialvar VAR_RESULT, GetBattleOutcome
 	compare VAR_RESULT, 7
-	goto_if_ne TerraCave_End_EventScript_27374E
+	goto_if_ne Common_EventScript_NopReturn
 	removeobject 1
 	return
 

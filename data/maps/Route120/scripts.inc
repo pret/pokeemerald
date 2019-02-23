@@ -26,7 +26,7 @@ Route120_EventScript_1F5406:: @ 81F5406
 Route120_EventScript_1F5449:: @ 81F5449
 	specialvar VAR_RESULT, GetBattleOutcome
 	compare VAR_RESULT, 7
-	goto_if_ne Route120_EventScript_27374E
+	goto_if_ne Common_EventScript_NopReturn
 	removeobject 30
 	removeobject 36
 	return
@@ -34,7 +34,7 @@ Route120_EventScript_1F5449:: @ 81F5449
 Route120_EventScript_1F5460:: @ 81F5460
 	specialvar VAR_RESULT, GetBattleOutcome
 	compare VAR_RESULT, 7
-	goto_if_ne Route120_EventScript_27374E
+	goto_if_ne Common_EventScript_NopReturn
 	removeobject VAR_LAST_TALKED
 	return
 

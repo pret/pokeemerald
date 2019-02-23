@@ -23,7 +23,7 @@ BirthIsland_Exterior_EventScript_267F4E:: @ 8267F4E
 	return
 
 BirthIsland_Exterior_EventScript_267F55:: @ 8267F55
-	goto_if_set FLAG_DEFEATED_DEOXYS, BirthIsland_Exterior_EventScript_27374E
+	goto_if_set FLAG_DEFEATED_DEOXYS, Common_EventScript_NopReturn
 	clearflag FLAG_HIDE_BIRTH_ISLAND_DEOXYS_TRIANGLE
 	clearflag FLAG_DEOXYS_ROCK_COMPLETE
 	return
@@ -35,7 +35,7 @@ BirthIsland_Exterior_MapScript1_267F65: @ 8267F65
 BirthIsland_Exterior_EventScript_267F6F:: @ 8267F6F
 	specialvar VAR_RESULT, GetBattleOutcome
 	compare VAR_RESULT, 7
-	goto_if_ne BirthIsland_Exterior_EventScript_27374E
+	goto_if_ne Common_EventScript_NopReturn
 	removeobject 2
 	return
 
