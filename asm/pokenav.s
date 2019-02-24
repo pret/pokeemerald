@@ -5,32 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_81C8224
-sub_81C8224: @ 81C8224
-	push {lr}
-	ldr r0, =sub_81C8254
-	bl sub_81C7124
-	pop {r1}
-	bx r1
-	.pool
-	thumb_func_end sub_81C8224
-
-	thumb_func_start sub_81C8234
-sub_81C8234: @ 81C8234
-	push {r4,lr}
-	movs r0, 0x11
-	bl GetSubstructPtr
-	adds r4, r0, 0
-	bl sub_81C8FE0
-	ldrb r0, [r4, 0x8]
-	bl RemoveWindow
-	movs r0, 0x11
-	bl FreeSubstruct
-	pop {r4}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_81C8234
-
 	thumb_func_start sub_81C8254
 sub_81C8254: @ 81C8254
 	push {r4,lr}

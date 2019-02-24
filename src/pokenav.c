@@ -34,7 +34,7 @@ struct UnknownSubSubStruct_0203CF40 {
     u16 unk2;
     u16 unk4;
     u16 unk6;
-    u8 unk8;
+    u8 windowId;
     u8 unk9;
     u16 unkA;
     u16 unkC;
@@ -56,7 +56,8 @@ struct UnknownSubStruct_0203CF40
 
 struct UnknownSubStruct_81C81D4
 {
-    u8 unk0[0x888];
+    struct UnknownSubSubStruct_0203CF40 unk0;
+    u8 unkE[0x878];
     struct UnknownSubSubStruct_0203CF40 unk888;
     u8 unk898[0xC];
 };
@@ -78,6 +79,7 @@ extern void sub_81CAADC(void);
 extern u32 sub_81C99D4(void);
 extern void sub_8199D98(void);
 extern void sub_81C7D28(void);
+extern void sub_81C8FE0(void);
 extern u32 sub_81C9298(void);
 extern u32 sub_81C941C(void);
 extern u32 sub_81C9924(void);
@@ -434,14 +436,14 @@ bool32 sub_81C70D8(u32 a0)
         return FALSE;
 }
 
-bool32 sub_81C7124(u32 a0)
+bool32 sub_81C7124(u32 (*a0)(s32))
 {
     s32 i;
     for (i = 0; i < NUM_TASKS; i++)
     {
         if (gTasks[i].isActive
             && (gTasks[i].func == sub_81C7170 || gTasks[i].func == sub_81C71E4)
-            && GetWordTaskArg(i, 1) == a0)
+            && (void *)GetWordTaskArg(i, 1) == a0)
             return TRUE;
     }
     return FALSE;
@@ -740,7 +742,7 @@ void *AllocSubstruct(u32 index, u32 size)
     return gUnknown_0203CF40->field10[index] = Alloc(size);
 }
 
-struct UnknownSubStruct_0203CF40 *GetSubstructPtr(u32 index)
+void *GetSubstructPtr(u32 index)
 {
     return gUnknown_0203CF40->field10[index];
 }
@@ -1466,3 +1468,15 @@ bool32 sub_81C81D4(const void *arg0, void *arg1, s32 arg2)
     return TRUE;
 }
 
+bool32 sub_81C8224(void) {
+    return sub_81C7124(sub_81C8254);
+}
+
+void sub_81C8234(void) {
+    struct UnknownSubStruct_81C81D4 *structPtr;
+
+    structPtr = GetSubstructPtr(0x11);
+    sub_81C8FE0();
+    RemoveWindow(structPtr->unk0.windowId);
+    FreeSubstruct(0x11);
+}
