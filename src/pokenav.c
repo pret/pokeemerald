@@ -33,7 +33,8 @@ struct UnknownSubSubStruct_0203CF40 {
     u8 unk1;
     u8 unk2;
     u8 unk3;
-    u16 unk4;
+    u8 unk4;
+    u8 unk5;
     u16 unk6;
     u8 windowId;
     u8 unk9;
@@ -76,7 +77,17 @@ struct UnknownSubStruct_81C81D4
     u32 unk14;
     u32 unk18;
     u32 unk1C;
-    u8 unk20[0x68];
+    u32 unk20;
+    u32 unk24;
+    u32 unk28;
+    u32 unk2C;
+    u32 unk30;
+    void (*unk34)(u32, char*);
+    void (*unk38)(u16, u32, u32);
+    u32 unk3C;
+    u32 unk40;
+    u32 unk44;
+    char unk48[0x40];
     u8 tilemapBuffer[0x800];
     struct UnknownSubSubStruct_81C81D4 unk888;
     u8 unk898[0x6];
@@ -159,11 +170,11 @@ extern u32 sub_81CFA04(void);
 extern u32 sub_81CFE08(void);
 extern u32 sub_81C91AC(struct UnknownSubStruct_81C81D4 *a0, const void *a1, void *a2, s32 a3);
 extern u32 sub_81C9160(struct UnknownSubSubStruct_81C81D4 *a0, void *a1);
-extern u32 sub_81C83E0(void);
 extern void sub_81C8ED0(void);
 extern void sub_81C8EF8(struct UnknownSubSubStruct_81C81D4 *a0, struct UnknownSubSubStruct_0203CF40 *a1);
-extern u32 sub_81C83F0(s32);
 
+u32 sub_81C83F0(s32);
+u32 sub_81C83E0(void);
 void sub_81C83AC(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, struct UnknownSubStruct_81C81D4 *a5);
 void sub_81C837C(struct UnknownSubSubStruct_81C81D4 *a0, struct UnknownSubStruct_81C81D4 *a1);
 void sub_81C835C(struct UnknownSubSubStruct_0203CF40 *a0);
@@ -1597,4 +1608,51 @@ void sub_81C83AC(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, struct UnknownSubStruct
     a5->unk14 = a1;
     a5->unk10 = a4;
     sub_81C7078(sub_81C83F0, 5);
+}
+
+u32 sub_81C83E0(void)
+{
+    return sub_81C7124(sub_81C83F0);
+}
+
+u32 sub_81C83F0(s32 a0)
+{
+    struct UnknownSubStruct_81C81D4 *structPtr;
+    u32 v1;
+
+    structPtr = GetSubstructPtr(0x11);
+    switch (a0)
+    {
+    case 0:
+        v1 = (structPtr->unk0.unkA + structPtr->unk0.unkC + structPtr->unk10) & 0xF;
+        structPtr->unk34(structPtr->unk1C, structPtr->unk48);
+        if (structPtr->unk38 != NULL)
+            // Accessing unk0.windowId as if it were a u16...?
+            // It's accessed as a u8 again in the very next line...
+            structPtr->unk38(*(u16*)(&structPtr->unk0.windowId), structPtr->unk14, v1);
+        
+        AddTextPrinterParameterized(structPtr->unk0.windowId, structPtr->unk0.unk5, structPtr->unk48, 8, (v1 << 4) | 1, 255, (void (*)(struct TextPrinterTemplate*, u16))a0);
+        
+        if (++structPtr->unk0.unkC >= structPtr->unk0.unkE)
+        {
+            if (structPtr->unk38 != NULL)
+                CopyWindowToVram(structPtr->unk0.windowId, 3);
+            else
+                CopyWindowToVram(structPtr->unk0.windowId, 2);
+            return 0;
+        }
+        else
+        {
+            structPtr->unk1C += structPtr->unk18;
+            structPtr->unk14++;
+            return 3;
+        }
+    case 1:
+        if (IsDma3ManagerBusyWithBgCopy())
+            return 2;
+        else
+            return 4;
+    default:
+        return 4;
+    }
 }
