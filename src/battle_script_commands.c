@@ -5829,10 +5829,6 @@ static void atk69_setgravity(void)
 
         gFieldStatuses |= STATUS_FIELD_GRAVITY;
         gFieldTimers.gravityTimer = 5;
-
-        for (i = 0; i < MAX_BATTLERS_COUNT; i++)
-            gStatuses3[i] &= ~(STATUS3_MAGNET_RISE | STATUS3_TELEKINESIS | STATUS3_ON_AIR);
-
         gBattlescriptCurrInstr += 5;
     }
 }
@@ -6372,6 +6368,12 @@ static void atk76_various(void)
 
     switch (gBattlescriptCurrInstr[2])
     {
+    case VARIOUS_GRAVITY_ON_AIRBORNE_MONS:
+        if (gStatuses3[gActiveBattler] & STATUS3_ON_AIR)
+            CancelMultiTurnMoves(gActiveBattler);
+        
+        gStatuses3[gActiveBattler] &= ~(STATUS3_MAGNET_RISE | STATUS3_TELEKINESIS | STATUS3_ON_AIR);
+        break;
     case VARIOUS_SPECTRAL_THIEF:
         // Raise stats
         for (i = STAT_ATK; i < NUM_BATTLE_STATS; i++)
