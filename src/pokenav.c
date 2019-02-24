@@ -28,18 +28,32 @@ enum
 
 #define UNKNOWN_OFFSET 100000
 
-// Sizes based tentatively on loads and stores in sub_81C9160
 struct UnknownSubSubStruct_0203CF40 {
-    u16 unk0;
-    u16 unk2;
+    u8 bg;
+    u8 unk1;
+    u8 unk2;
+    u8 unk3;
     u16 unk4;
     u16 unk6;
     u8 windowId;
     u8 unk9;
     u16 unkA;
     u16 unkC;
+    u16 unkE;
 };
 
+struct UnknownSubSubStruct_81C81D4 {
+    u16 unk0;
+    u16 unk2;
+    u16 unk4;
+    u16 unk6;
+    u16 unk8;
+    u16 unkA;
+    u32 unkC;
+    u32 unk10;
+};
+
+// Generally at index 0.
 struct UnknownSubStruct_0203CF40
 {
     void (*unk0)(u32);
@@ -54,12 +68,18 @@ struct UnknownSubStruct_0203CF40
     u8 tilemapBuffer[0x800];
 };
 
+// Generally at index 0x11 (17)
 struct UnknownSubStruct_81C81D4
 {
     struct UnknownSubSubStruct_0203CF40 unk0;
-    u8 unkE[0x878];
-    struct UnknownSubSubStruct_0203CF40 unk888;
-    u8 unk898[0xC];
+    u32 unk10;
+    u32 unk14;
+    u32 unk18;
+    u32 unk1C;
+    u8 unk20[0x68];
+    u8 tilemapBuffer[0x800];
+    struct UnknownSubSubStruct_81C81D4 unk888;
+    u8 unk898[0x6];
 };
 
 #define SUBSTRUCT_COUNT 19
@@ -138,9 +158,17 @@ extern u32 sub_81D09F4(void);
 extern u32 sub_81CFA04(void);
 extern u32 sub_81CFE08(void);
 extern u32 sub_81C91AC(struct UnknownSubStruct_81C81D4 *a0, const void *a1, void *a2, s32 a3);
-extern u32 sub_81C9160(struct UnknownSubSubStruct_0203CF40 *a0, void *a1);
-extern u32 sub_81C8254(s32);
+extern u32 sub_81C9160(struct UnknownSubSubStruct_81C81D4 *a0, void *a1);
+extern u32 sub_81C83E0(void);
+extern void sub_81C8ED0(void);
+extern void sub_81C8EF8(struct UnknownSubSubStruct_81C81D4 *a0, struct UnknownSubSubStruct_0203CF40 *a1);
+extern u32 sub_81C83F0(s32);
 
+void sub_81C83AC(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, struct UnknownSubStruct_81C81D4 *a5);
+void sub_81C837C(struct UnknownSubSubStruct_81C81D4 *a0, struct UnknownSubStruct_81C81D4 *a1);
+void sub_81C835C(struct UnknownSubSubStruct_0203CF40 *a0);
+void sub_81C82E4(struct UnknownSubStruct_81C81D4 *a0);
+u32 sub_81C8254(s32);
 u32 sub_81C791C(s32 a0);
 bool32 sub_81C756C(u32 a0);
 bool32 sub_81C76C4(void);
@@ -1468,15 +1496,105 @@ bool32 sub_81C81D4(const void *arg0, void *arg1, s32 arg2)
     return TRUE;
 }
 
-bool32 sub_81C8224(void) {
+bool32 sub_81C8224(void)
+{
     return sub_81C7124(sub_81C8254);
 }
 
-void sub_81C8234(void) {
+void sub_81C8234(void)
+{
     struct UnknownSubStruct_81C81D4 *structPtr;
 
     structPtr = GetSubstructPtr(0x11);
     sub_81C8FE0();
     RemoveWindow(structPtr->unk0.windowId);
     FreeSubstruct(0x11);
+}
+
+u32 sub_81C8254(s32 a0)
+{
+    struct UnknownSubStruct_81C81D4 *structPtr;
+
+    if (IsDma3ManagerBusyWithBgCopy())
+        return 2;
+    
+    structPtr = GetSubstructPtr(0x11);
+
+    switch (a0)
+    {
+        case 0:
+            sub_81C82E4(structPtr);
+            return 0;
+        case 1:
+            sub_81C835C(&structPtr->unk0);
+            return 0;
+        case 2:
+            sub_81C837C(&structPtr->unk888, structPtr);
+            return 0;
+        case 3:
+            if (sub_81C83E0())
+            {
+                return 2;
+            }
+            else
+            {
+                sub_81C8ED0();
+                return 1;
+            }
+        case 4:
+            sub_81C8EF8(&structPtr->unk888, &structPtr->unk0);
+            return 4;
+        default:
+            return 4;
+    }
+}
+
+void sub_81C82E4(struct UnknownSubStruct_81C81D4 *a0)
+{
+    u16 v1 = (a0->unk0.unk1 << 12) | a0->unk0.unk6;
+    // TODO: When #553 is merged, use a PALETTE_NUM_TO_FILL_VALUE(1) macro here...
+    sub_8199DF0(a0->unk0.bg, 0x11, a0->unk0.unk6, 1);
+    // ...and PALETTE_NUM_TO_FILL_VALUE(4) here.
+    sub_8199DF0(a0->unk0.bg, 0x44, a0->unk0.unk6 + 1, 1);
+    SetBgTilemapBuffer(a0->unk0.bg, a0->tilemapBuffer);
+    FillBgTilemapBufferRect_Palette0(a0->unk0.bg, v1, 0, 0, 32, 32);
+    ChangeBgY(a0->unk0.bg, 0, 0);
+    ChangeBgX(a0->unk0.bg, 0, 0);
+    ChangeBgY(a0->unk0.bg, a0->unk0.unk3 << 11, 2);
+    CopyBgTilemapBufferToVram(a0->unk0.bg);
+}
+
+void sub_81C835C(struct UnknownSubSubStruct_0203CF40 *a0)
+{
+    // TODO: When #553 is merged, use a PALETTE_NUM_TO_FILL_VALUE(1) macro here.
+    FillWindowPixelBuffer(a0->windowId, 0x11);
+    PutWindowTilemap(a0->windowId);
+    CopyWindowToVram(a0->windowId, 1);
+}
+
+void sub_81C837C(struct UnknownSubSubStruct_81C81D4 *a0, struct UnknownSubStruct_81C81D4 *a1)
+{
+    s32 v1;
+    s32 v2;
+
+    // TODO: Clean this up.
+    v1 = a0->unk2 - a0->unk0;
+    v2 = a0->unk8;
+    if (v1 > a0->unk8)
+        v1 = v2;
+    sub_81C83AC(a0->unk10, a0->unk0, v1, a0->unkC, 0, a1);
+}
+
+void sub_81C83AC(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, struct UnknownSubStruct_81C81D4 *a5)
+{
+    if (a2 == 0)
+        return;
+
+    a5->unk1C = a0 + a1 * a3;
+    a5->unk18 = a3;
+    a5->unk0.unkC = 0;
+    a5->unk0.unkE = a2;
+    a5->unk14 = a1;
+    a5->unk10 = a4;
+    sub_81C7078(sub_81C83F0, 5);
 }
