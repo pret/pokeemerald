@@ -112,11 +112,8 @@ static EWRAM_DATA struct PssData
 } *pssData = NULL;
 EWRAM_DATA u8 gLastViewedMonIndex = 0;
 static EWRAM_DATA u8 sUnknown_0203CF21 = 0;
-static EWRAM_DATA u8 sFiller_0203CF22[2] = {0};
-static EWRAM_DATA u8 sUnknownTaskId = 0;
-static EWRAM_DATA u8 sFiller_0203CF25[3] = {0};
-
-extern const struct CompressedSpriteSheet gMonFrontPicTable[];
+ALIGNED(4) static EWRAM_DATA u8 sUnknownTaskId = 0;
+ALIGNED(4) extern const struct CompressedSpriteSheet gMonFrontPicTable[];
 
 struct UnkStruct_61CC04
 {
