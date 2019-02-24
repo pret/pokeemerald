@@ -1264,7 +1264,8 @@ static void atk01_accuracycheck(void)
             else
                 gBattleCommunication[6] = 0;
 
-            CalcTypeEffectivenessMultiplier(move, type, gBattlerAttacker, gBattlerTarget, TRUE);
+            if (gBattleMoves[move].power)
+                CalcTypeEffectivenessMultiplier(move, type, gBattlerAttacker, gBattlerTarget, TRUE);
         }
         JumpIfMoveFailed(7, move);
     }
