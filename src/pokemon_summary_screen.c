@@ -2971,7 +2971,10 @@ static void ClearPageWindowTilemaps(u8 page)
             if (pssData->mode == PSS_MODE_SELECT_MOVE)
             {
                 if (pssData->newMove != MOVE_NONE || pssData->firstMoveIndex != MAX_MON_MOVES)
+                {
                     ClearWindowTilemap(14);
+                    gSprites[pssData->splitIconSpriteId].invisible = TRUE;
+                }
             }
             else
             {
