@@ -113,7 +113,7 @@ static EWRAM_DATA struct PssData
 EWRAM_DATA u8 gLastViewedMonIndex = 0;
 static EWRAM_DATA u8 sUnknown_0203CF21 = 0;
 ALIGNED(4) static EWRAM_DATA u8 sUnknownTaskId = 0;
-ALIGNED(4) extern const struct CompressedSpriteSheet gMonFrontPicTable[];
+extern const struct CompressedSpriteSheet gMonFrontPicTable[];
 
 struct UnkStruct_61CC04
 {
@@ -249,7 +249,7 @@ static void sub_81C4D18(u8 a);
 #include "data/text/move_descriptions.h"
 #include "data/text/nature_names.h"
 
-static const struct BgTemplate sUnknown_0861CBB4[] =
+ALIGNED(4) static const struct BgTemplate sUnknown_0861CBB4[] =
 {
     {
         .bg = 0,
