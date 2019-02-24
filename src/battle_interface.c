@@ -36,124 +36,125 @@ struct TestingBar
 
 enum
 {   // Corresponds to gHealthboxElementsGfxTable (and the tables after it) in graphics.c
-    HEALTHBOX_GFX_0, //hpbar.png
-    HEALTHBOX_GFX_1, //hpbar.png "H"
-    HEALTHBOX_GFX_2, //hpbar.png "P"
-    HEALTHBOX_GFX_HP_BAR_GREEN, //hpbar.png [0 pixels]
-    HEALTHBOX_GFX_4,  //hpbar.png [1 pixels]
-    HEALTHBOX_GFX_5,  //hpbar.png [2 pixels]
-    HEALTHBOX_GFX_6,  //hpbar.png [3 pixels]
-    HEALTHBOX_GFX_7,  //hpbar.png [4 pixels]
-    HEALTHBOX_GFX_8,  //hpbar.png [5 pixels]
-    HEALTHBOX_GFX_9,  //hpbar.png [6 pixels]
-    HEALTHBOX_GFX_10, //hpbar.png [7 pixels]
-    HEALTHBOX_GFX_11, //hpbar.png [8 pixels]
-    HEALTHBOX_GFX_12, //expbar.png [0 pixels]
-    HEALTHBOX_GFX_13, //expbar.png [1 pixels]
-    HEALTHBOX_GFX_14, //expbar.png [2 pixels]
-    HEALTHBOX_GFX_15, //expbar.png [3 pixels]
-    HEALTHBOX_GFX_16, //expbar.png [4 pixels]
-    HEALTHBOX_GFX_17, //expbar.png [5 pixels]
-    HEALTHBOX_GFX_18, //expbar.png [6 pixels]
-    HEALTHBOX_GFX_19, //expbar.png [7 pixels]
-    HEALTHBOX_GFX_20, //expbar.png [8 pixels]
-    HEALTHBOX_GFX_STATUS_PSN_BATTLER0,  //status_psn.png "(P"
-    HEALTHBOX_GFX_22,                   //status_psn.png "SN"
-    HEALTHBOX_GFX_23,                   //status_psn.png "|)""
-    HEALTHBOX_GFX_STATUS_PRZ_BATTLER0,  //status_prz.png
+    // These are indexes into the tables, which are filled with 8x8 square pixel data.
+    HEALTHBOX_GFX_0, //hp bar [black section]
+    HEALTHBOX_GFX_1, //hp bar "H"
+    HEALTHBOX_GFX_2, //hp bar "P"
+    HEALTHBOX_GFX_HP_BAR_GREEN, //hp bar [0 pixels]
+    HEALTHBOX_GFX_4,  //hp bar [1 pixels]
+    HEALTHBOX_GFX_5,  //hp bar [2 pixels]
+    HEALTHBOX_GFX_6,  //hp bar [3 pixels]
+    HEALTHBOX_GFX_7,  //hp bar [4 pixels]
+    HEALTHBOX_GFX_8,  //hp bar [5 pixels]
+    HEALTHBOX_GFX_9,  //hp bar [6 pixels]
+    HEALTHBOX_GFX_10, //hp bar [7 pixels]
+    HEALTHBOX_GFX_11, //hp bar [8 pixels]
+    HEALTHBOX_GFX_12, //exp bar [0 pixels]
+    HEALTHBOX_GFX_13, //exp bar [1 pixels]
+    HEALTHBOX_GFX_14, //exp bar [2 pixels]
+    HEALTHBOX_GFX_15, //exp bar [3 pixels]
+    HEALTHBOX_GFX_16, //exp bar [4 pixels]
+    HEALTHBOX_GFX_17, //exp bar [5 pixels]
+    HEALTHBOX_GFX_18, //exp bar [6 pixels]
+    HEALTHBOX_GFX_19, //exp bar [7 pixels]
+    HEALTHBOX_GFX_20, //exp bar [8 pixels]
+    HEALTHBOX_GFX_STATUS_PSN_BATTLER0,  //status psn "(P"
+    HEALTHBOX_GFX_22,                   //status psn "SN"
+    HEALTHBOX_GFX_23,                   //status psn "|)""
+    HEALTHBOX_GFX_STATUS_PRZ_BATTLER0,  //status prz
     HEALTHBOX_GFX_25,
     HEALTHBOX_GFX_26,
-    HEALTHBOX_GFX_STATUS_SLP_BATTLER0,  //status_slp.png
+    HEALTHBOX_GFX_STATUS_SLP_BATTLER0,  //status slp
     HEALTHBOX_GFX_28,
     HEALTHBOX_GFX_29,
-    HEALTHBOX_GFX_STATUS_FRZ_BATTLER0,  //status_frz.png
+    HEALTHBOX_GFX_STATUS_FRZ_BATTLER0,  //status frz
     HEALTHBOX_GFX_31,
     HEALTHBOX_GFX_32,
-    HEALTHBOX_GFX_STATUS_BRN_BATTLER0,  //status_brn.png
+    HEALTHBOX_GFX_STATUS_BRN_BATTLER0,  //status brn
     HEALTHBOX_GFX_34,
     HEALTHBOX_GFX_35,
-    HEALTHBOX_GFX_36, //misc.png [Black]
-    HEALTHBOX_GFX_37, //misc.png [Black]
-    HEALTHBOX_GFX_38, //misc.png [Black]
-    HEALTHBOX_GFX_39, //misc.png [Blank Health Window]
-    HEALTHBOX_GFX_40, //misc.png [Blank Health Window]
-    HEALTHBOX_GFX_41, //misc.png [Blank Health Window]
-    HEALTHBOX_GFX_42, //misc.png [Blank Health Window]
-    HEALTHBOX_GFX_43, //misc.png [Top of Health Window]
-    HEALTHBOX_GFX_44, //misc.png [Top of Health Window]
-    HEALTHBOX_GFX_45, //misc.png [Top of Health Window]
-    HEALTHBOX_GFX_46, //misc.png [Blank Health Window]
-    HEALTHBOX_GFX_HP_BAR_YELLOW, //hpbar_anim.png [0 pixels]
-    HEALTHBOX_GFX_48, //hpbar_anim.png [1 pixels]
-    HEALTHBOX_GFX_49, //hpbar_anim.png [2 pixels]
-    HEALTHBOX_GFX_50, //hpbar_anim.png [3 pixels]
-    HEALTHBOX_GFX_51, //hpbar_anim.png [4 pixels]
-    HEALTHBOX_GFX_52, //hpbar_anim.png [5 pixels]
-    HEALTHBOX_GFX_53, //hpbar_anim.png [6 pixels]
-    HEALTHBOX_GFX_54, //hpbar_anim.png [7 pixels]
-    HEALTHBOX_GFX_55, //hpbar_anim.png [8 pixels]
-    HEALTHBOX_GFX_HP_BAR_RED,  //hpbar_anim.png [0 pixels yellow]
-    HEALTHBOX_GFX_57, //hpbar_anim.png [1 pixels yellow]
-    HEALTHBOX_GFX_58, //hpbar_anim.png [2 pixels yellow]
-    HEALTHBOX_GFX_59, //hpbar_anim.png [3 pixels yellow]
-    HEALTHBOX_GFX_60, //hpbar_anim.png [4 pixels yellow]
-    HEALTHBOX_GFX_61, //hpbar_anim.png [5 pixels yellow]
-    HEALTHBOX_GFX_62, //hpbar_anim.png [6 pixels yellow]
-    HEALTHBOX_GFX_63, //hpbar_anim.png [7 pixels yellow]
-    HEALTHBOX_GFX_64, //hpbar_anim.png [8 pixels yellow]
-    HEALTHBOX_GFX_65, //misc_frameend.png
-    HEALTHBOX_GFX_66, //ball_display.png [full]
-    HEALTHBOX_GFX_67, //ball_display.png [empty]
-    HEALTHBOX_GFX_68, //ball_display.png [fainted]
-    HEALTHBOX_GFX_69, //ball_display.png [statused]
-    HEALTHBOX_GFX_70, //ball_display_unused_extra.png
-    HEALTHBOX_GFX_STATUS_PSN_BATTLER1, //status2.png "PSN"
+    HEALTHBOX_GFX_36, //misc [Black section]
+    HEALTHBOX_GFX_37, //misc [Black section]
+    HEALTHBOX_GFX_38, //misc [Black section]
+    HEALTHBOX_GFX_39, //misc [Blank Health Window?]
+    HEALTHBOX_GFX_40, //misc [Blank Health Window?]
+    HEALTHBOX_GFX_41, //misc [Blank Health Window?]
+    HEALTHBOX_GFX_42, //misc [Blank Health Window?]
+    HEALTHBOX_GFX_43, //misc [Top of Health Window?]
+    HEALTHBOX_GFX_44, //misc [Top of Health Window?]
+    HEALTHBOX_GFX_45, //misc [Top of Health Window?]
+    HEALTHBOX_GFX_46, //misc [Blank Health Window?]
+    HEALTHBOX_GFX_HP_BAR_YELLOW, //hp bar yellow [0 pixels]
+    HEALTHBOX_GFX_48, //hp bar yellow [1 pixels]
+    HEALTHBOX_GFX_49, //hp bar yellow [2 pixels]
+    HEALTHBOX_GFX_50, //hp bar yellow [3 pixels]
+    HEALTHBOX_GFX_51, //hp bar yellow [4 pixels]
+    HEALTHBOX_GFX_52, //hp bar yellow [5 pixels]
+    HEALTHBOX_GFX_53, //hp bar yellow [6 pixels]
+    HEALTHBOX_GFX_54, //hp bar yellow [7 pixels]
+    HEALTHBOX_GFX_55, //hp bar yellow [8 pixels]
+    HEALTHBOX_GFX_HP_BAR_RED,  //hp bar red [0 pixels]
+    HEALTHBOX_GFX_57, //hp bar red [1 pixels]
+    HEALTHBOX_GFX_58, //hp bar red [2 pixels]
+    HEALTHBOX_GFX_59, //hp bar red [3 pixels]
+    HEALTHBOX_GFX_60, //hp bar red [4 pixels]
+    HEALTHBOX_GFX_61, //hp bar red [5 pixels]
+    HEALTHBOX_GFX_62, //hp bar red [6 pixels]
+    HEALTHBOX_GFX_63, //hp bar red [7 pixels]
+    HEALTHBOX_GFX_64, //hp bar red [8 pixels]
+    HEALTHBOX_GFX_65, //hp bar frame end
+    HEALTHBOX_GFX_66, //status ball [full]
+    HEALTHBOX_GFX_67, //status ball [empty]
+    HEALTHBOX_GFX_68, //status ball [fainted]
+    HEALTHBOX_GFX_69, //status ball [statused]
+    HEALTHBOX_GFX_70, //status ball [unused extra]
+    HEALTHBOX_GFX_STATUS_PSN_BATTLER1, //status2 "PSN"
     HEALTHBOX_GFX_72,
     HEALTHBOX_GFX_73,
-    HEALTHBOX_GFX_STATUS_PRZ_BATTLER1, //status2.png "PRZ"
+    HEALTHBOX_GFX_STATUS_PRZ_BATTLER1, //status2 "PRZ"
     HEALTHBOX_GFX_75,
     HEALTHBOX_GFX_76,
-    HEALTHBOX_GFX_STATUS_SLP_BATTLER1, //status2.png "SLP"
+    HEALTHBOX_GFX_STATUS_SLP_BATTLER1, //status2 "SLP"
     HEALTHBOX_GFX_78,
     HEALTHBOX_GFX_79,
-    HEALTHBOX_GFX_STATUS_FRZ_BATTLER1, //status2.png "FRZ"
+    HEALTHBOX_GFX_STATUS_FRZ_BATTLER1, //status2 "FRZ"
     HEALTHBOX_GFX_81,
     HEALTHBOX_GFX_82,
-    HEALTHBOX_GFX_STATUS_BRN_BATTLER1, //status2.png "BRN"
+    HEALTHBOX_GFX_STATUS_BRN_BATTLER1, //status2 "BRN"
     HEALTHBOX_GFX_84,
     HEALTHBOX_GFX_85,
-    HEALTHBOX_GFX_STATUS_PSN_BATTLER2, //status3.png "PSN"
+    HEALTHBOX_GFX_STATUS_PSN_BATTLER2, //status3 "PSN"
     HEALTHBOX_GFX_87,
     HEALTHBOX_GFX_88,
-    HEALTHBOX_GFX_STATUS_PRZ_BATTLER2, //status3.png "PRZ"
+    HEALTHBOX_GFX_STATUS_PRZ_BATTLER2, //status3 "PRZ"
     HEALTHBOX_GFX_90,
     HEALTHBOX_GFX_91,
-    HEALTHBOX_GFX_STATUS_SLP_BATTLER2, //status3.png "SLP"
+    HEALTHBOX_GFX_STATUS_SLP_BATTLER2, //status3 "SLP"
     HEALTHBOX_GFX_93,
     HEALTHBOX_GFX_94,
-    HEALTHBOX_GFX_STATUS_FRZ_BATTLER2, //status3.png "FRZ"
+    HEALTHBOX_GFX_STATUS_FRZ_BATTLER2, //status3 "FRZ"
     HEALTHBOX_GFX_96,
     HEALTHBOX_GFX_97,
-    HEALTHBOX_GFX_STATUS_BRN_BATTLER2, //status3.png "BRN"
+    HEALTHBOX_GFX_STATUS_BRN_BATTLER2, //status3 "BRN"
     HEALTHBOX_GFX_99,
     HEALTHBOX_GFX_100,
-    HEALTHBOX_GFX_STATUS_PSN_BATTLER3, //status4.png "PSN"
+    HEALTHBOX_GFX_STATUS_PSN_BATTLER3, //status4 "PSN"
     HEALTHBOX_GFX_102,
     HEALTHBOX_GFX_103,
-    HEALTHBOX_GFX_STATUS_PRZ_BATTLER3, //status4.png "PRZ"
+    HEALTHBOX_GFX_STATUS_PRZ_BATTLER3, //status4 "PRZ"
     HEALTHBOX_GFX_105,
     HEALTHBOX_GFX_106,
-    HEALTHBOX_GFX_STATUS_SLP_BATTLER3, //status4.png "SLP"
+    HEALTHBOX_GFX_STATUS_SLP_BATTLER3, //status4 "SLP"
     HEALTHBOX_GFX_108,
     HEALTHBOX_GFX_109,
-    HEALTHBOX_GFX_STATUS_FRZ_BATTLER3, //status4.png "FRZ"
+    HEALTHBOX_GFX_STATUS_FRZ_BATTLER3, //status4 "FRZ"
     HEALTHBOX_GFX_111,
     HEALTHBOX_GFX_112,
-    HEALTHBOX_GFX_STATUS_BRN_BATTLER3, //status4.png "BRN"
+    HEALTHBOX_GFX_STATUS_BRN_BATTLER3, //status4 "BRN"
     HEALTHBOX_GFX_114,
     HEALTHBOX_GFX_115,
-    HEALTHBOX_GFX_116, //unknown_D12FEC.png
-    HEALTHBOX_GFX_117, //unknown_D1300C.png
+    HEALTHBOX_GFX_116, //unknown_D12FEC
+    HEALTHBOX_GFX_117, //unknown_D1300C
 };
 
 extern const u8 *const gNatureNamePointers[];
