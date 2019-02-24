@@ -5,47 +5,6 @@
 
 	.text
 
-
-
-
-
-	thumb_func_start sub_81C81D4
-sub_81C81D4: @ 81C81D4
-	push {r4-r7,lr}
-	adds r6, r0, 0
-	adds r5, r1, 0
-	adds r7, r2, 0
-	ldr r1, =0x000008a4
-	movs r0, 0x11
-	bl AllocSubstruct
-	adds r4, r0, 0
-	cmp r4, 0
-	beq _081C821C
-	ldr r1, =0x00000888
-	adds r0, r4, r1
-	adds r1, r5, 0
-	bl sub_81C9160
-	adds r0, r4, 0
-	adds r1, r6, 0
-	adds r2, r5, 0
-	adds r3, r7, 0
-	bl sub_81C91AC
-	cmp r0, 0
-	beq _081C821C
-	ldr r0, =sub_81C8254
-	movs r1, 0x6
-	bl sub_81C7078
-	movs r0, 0x1
-	b _081C821E
-	.pool
-_081C821C:
-	movs r0, 0
-_081C821E:
-	pop {r4-r7}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_81C81D4
-
 	thumb_func_start sub_81C8224
 sub_81C8224: @ 81C8224
 	push {lr}

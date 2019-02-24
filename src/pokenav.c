@@ -28,6 +28,18 @@ enum
 
 #define UNKNOWN_OFFSET 100000
 
+// Sizes based tentatively on loads and stores in sub_81C9160
+struct UnknownSubSubStruct_0203CF40 {
+    u16 unk0;
+    u16 unk2;
+    u16 unk4;
+    u16 unk6;
+    u8 unk8;
+    u8 unk9;
+    u16 unkA;
+    u16 unkC;
+};
+
 struct UnknownSubStruct_0203CF40
 {
     void (*unk0)(u32);
@@ -39,7 +51,14 @@ struct UnknownSubStruct_0203CF40
     struct Sprite *unk18;
     struct Sprite *unk1C[2];
     struct Sprite *unk24[2];
-    u8 tilemapBuffer[0x1000];
+    u8 tilemapBuffer[0x800];
+};
+
+struct UnknownSubStruct_81C81D4
+{
+    u8 unk0[0x888];
+    struct UnknownSubSubStruct_0203CF40 unk888;
+    u8 unk898[0xC];
 };
 
 #define SUBSTRUCT_COUNT 19
@@ -51,7 +70,7 @@ struct UnknownStruct_0203CF40
     u16 mode;
     u16 fieldA;
     bool32 hasAnyRibbons;
-    struct UnknownSubStruct_0203CF40 *field10[SUBSTRUCT_COUNT];
+    void *field10[SUBSTRUCT_COUNT];
 };
 
 extern u32 sub_81C9430(void);
@@ -116,6 +135,9 @@ extern u32 sub_81D04B8(void);
 extern u32 sub_81D09F4(void);
 extern u32 sub_81CFA04(void);
 extern u32 sub_81CFE08(void);
+extern u32 sub_81C91AC(struct UnknownSubStruct_81C81D4 *a0, const void *a1, void *a2, s32 a3);
+extern u32 sub_81C9160(struct UnknownSubSubStruct_0203CF40 *a0, void *a1);
+extern u32 sub_81C8254(s32);
 
 u32 sub_81C791C(s32 a0);
 bool32 sub_81C756C(u32 a0);
@@ -760,7 +782,9 @@ bool32 CanViewRibbonsMenu(void)
 
 bool32 sub_81C76C4(void)
 {
-    struct UnknownSubStruct_0203CF40 *structPtr = AllocSubstruct(0, 0x82C);
+    struct UnknownSubStruct_0203CF40 *structPtr;
+    
+    structPtr = AllocSubstruct(0, sizeof(struct UnknownSubStruct_0203CF40));
     if (structPtr == NULL)
         return FALSE;
 
@@ -1422,12 +1446,23 @@ void sub_81C817C(struct Sprite *sprite)
     }
 }
 
-/*
-bool32 sub_81C81D4(const void *arg0, void *arg1, s32 arg3)
+bool32 sub_81C81D4(const void *arg0, void *arg1, s32 arg2)
 {
-    struct UnknownSubStruct_0203CF40 *structPtr = AllocSubstruct(0x11, 0x8A4);
+    u32 v1;
+    struct UnknownSubStruct_81C81D4 *structPtr;
+    
+    structPtr = AllocSubstruct(0x11, sizeof(struct UnknownSubStruct_81C81D4));
 
     if (structPtr == NULL)
         return FALSE;
+    
+    sub_81C9160(&structPtr->unk888, arg1);
+
+    v1 = sub_81C91AC(structPtr, arg0, arg1, arg2);
+    if (v1 == 0)
+        return FALSE;
+    
+    sub_81C7078(sub_81C8254, 6);
+    return TRUE;
 }
-*/
+
