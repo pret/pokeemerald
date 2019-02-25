@@ -86,7 +86,7 @@ LilycoveCity_ContestLobby_EventScript_21A314:: @ 821A314
 	applymovement 4, LilycoveCity_ContestLobby_Movement_21A41A
 	waitmovement 0
 	playse SE_PIN
-	applymovement 4, LilycoveCity_ContestLobby_Movement_272598
+	applymovement 4, Common_Movement_ExclamationMark
 	waitmovement 0
 	applymovement 4, LilycoveCity_ContestLobby_Movement_21A41E
 	waitmovement 0
@@ -259,7 +259,7 @@ LilycoveCity_ContestLobby_EventScript_21A4E4:: @ 821A4E4
 	applymovement 11, LilycoveCity_ContestLobby_Movement_21A547
 	waitmovement 0
 	playse SE_PIN
-	applymovement 11, LilycoveCity_ContestLobby_Movement_272598
+	applymovement 11, Common_Movement_ExclamationMark
 	waitmovement 0
 	applymovement 11, LilycoveCity_ContestLobby_Movement_21A54B
 	waitmovement 0
@@ -614,7 +614,7 @@ LilycoveCity_ContestLobby_EventScript_21A7E9:: @ 821A7E9
 
 LilycoveCity_ContestLobby_EventScript_21A7F9:: @ 821A7F9
 	closemessage
-	applymovement VAR_LAST_TALKED, LilycoveCity_ContestLobby_Movement_2725A2
+	applymovement VAR_LAST_TALKED, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end
@@ -642,7 +642,7 @@ LilycoveCity_ContestLobby_EventScript_21A856:: @ 821A856
 	msgbox LilycoveCity_ContestLobby_Text_27BD17, MSGBOX_YESNO
 	compare VAR_RESULT, 0
 	goto_if_eq LilycoveCity_ContestLobby_EventScript_21A97F
-	call LilycoveCity_ContestLobby_EventScript_27134F
+	call Common_EventScript_SaveGame
 	compare VAR_RESULT, 0
 	goto_if_eq LilycoveCity_ContestLobby_EventScript_21A97F
 	message LilycoveCity_ContestLobby_Text_27C8FD

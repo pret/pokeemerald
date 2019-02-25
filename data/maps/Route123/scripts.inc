@@ -17,7 +17,7 @@ Route123_EventScript_1F6151:: @ 81F6151
 	msgbox Route123_Text_1F645D, MSGBOX_DEFAULT
 	giveitem_std ITEM_TM19
 	compare VAR_RESULT, 0
-	goto_if_eq Route123_EventScript_272054
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_TM19
 	msgbox Route123_Text_1F64CF, MSGBOX_DEFAULT
 	release

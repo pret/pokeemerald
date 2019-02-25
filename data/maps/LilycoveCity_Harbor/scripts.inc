@@ -107,45 +107,45 @@ LilycoveCity_Harbor_EventScript_21E171:: @ 821E171
 
 LilycoveCity_Harbor_EventScript_21E194:: @ 821E194
 	setvar VAR_TEMP_E, 0
-	goto_if_unset FLAG_SYS_HAS_EON_TICKET, LilycoveCity_Harbor_EventScript_27374E
+	goto_if_unset FLAG_SYS_HAS_EON_TICKET, Common_EventScript_NopReturn
 	checkitem ITEM_EON_TICKET, 1
 	compare VAR_RESULT, 0
-	goto_if_eq LilycoveCity_Harbor_EventScript_27374E
+	goto_if_eq Common_EventScript_NopReturn
 	setvar VAR_TEMP_E, 1
-	goto_if_set FLAG_HAS_EON_TICKET, LilycoveCity_Harbor_EventScript_27374E
+	goto_if_set FLAG_HAS_EON_TICKET, Common_EventScript_NopReturn
 	setvar VAR_TEMP_E, 2
 	return
 
 LilycoveCity_Harbor_EventScript_21E1C6:: @ 821E1C6
 	setvar VAR_TEMP_D, 0
-	goto_if_unset FLAG_ENABLE_SHIP_BIRTH_ISLAND, LilycoveCity_Harbor_EventScript_27374E
+	goto_if_unset FLAG_ENABLE_SHIP_BIRTH_ISLAND, Common_EventScript_NopReturn
 	checkitem ITEM_AURORA_TICKET, 1
 	compare VAR_RESULT, 0
-	goto_if_eq LilycoveCity_Harbor_EventScript_27374E
+	goto_if_eq Common_EventScript_NopReturn
 	setvar VAR_TEMP_D, 1
-	goto_if_set FLAG_HAS_AURORA_TICKET, LilycoveCity_Harbor_EventScript_27374E
+	goto_if_set FLAG_HAS_AURORA_TICKET, Common_EventScript_NopReturn
 	setvar VAR_TEMP_D, 2
 	return
 
 LilycoveCity_Harbor_EventScript_21E1F8:: @ 821E1F8
 	setvar VAR_TEMP_C, 0
-	goto_if_unset FLAG_ENABLE_SHIP_FARAWAY_ISLAND, LilycoveCity_Harbor_EventScript_27374E
+	goto_if_unset FLAG_ENABLE_SHIP_FARAWAY_ISLAND, Common_EventScript_NopReturn
 	checkitem ITEM_OLD_SEA_MAP, 1
 	compare VAR_RESULT, 0
-	goto_if_eq LilycoveCity_Harbor_EventScript_27374E
+	goto_if_eq Common_EventScript_NopReturn
 	setvar VAR_TEMP_C, 1
-	goto_if_set FLAG_HAS_OLD_SEA_MAP, LilycoveCity_Harbor_EventScript_27374E
+	goto_if_set FLAG_HAS_OLD_SEA_MAP, Common_EventScript_NopReturn
 	setvar VAR_TEMP_C, 2
 	return
 
 LilycoveCity_Harbor_EventScript_21E22A:: @ 821E22A
 	setvar VAR_TEMP_9, 0
-	goto_if_unset FLAG_ENABLE_SHIP_NAVEL_ROCK, LilycoveCity_Harbor_EventScript_27374E
+	goto_if_unset FLAG_ENABLE_SHIP_NAVEL_ROCK, Common_EventScript_NopReturn
 	checkitem ITEM_MYSTIC_TICKET, 1
 	compare VAR_RESULT, 0
-	goto_if_eq LilycoveCity_Harbor_EventScript_27374E
+	goto_if_eq Common_EventScript_NopReturn
 	setvar VAR_TEMP_9, 1
-	goto_if_set FLAG_HAS_MYSTIC_TICKET, LilycoveCity_Harbor_EventScript_27374E
+	goto_if_set FLAG_HAS_MYSTIC_TICKET, Common_EventScript_NopReturn
 	setvar VAR_TEMP_9, 2
 	return
 
@@ -246,12 +246,12 @@ LilycoveCity_Harbor_EventScript_21E350:: @ 821E350
 	call LilycoveCity_Harbor_EventScript_21E4EE
 	msgbox LilycoveCity_Harbor_Text_2C68A5, MSGBOX_DEFAULT
 	closemessage
-	applymovement 4, LilycoveCity_Harbor_Movement_2725A6
+	applymovement 4, Common_Movement_WalkInPlaceUp
 	waitmovement 0
 	playse SE_PIN
-	applymovement 4, LilycoveCity_Harbor_Movement_272598
+	applymovement 4, Common_Movement_ExclamationMark
 	waitmovement 0
-	applymovement 4, LilycoveCity_Harbor_Movement_27259A
+	applymovement 4, Common_Movement_Delay48
 	waitmovement 0
 	compare VAR_FACING, 2
 	call_if_eq LilycoveCity_Harbor_EventScript_21E656
@@ -328,12 +328,12 @@ LilycoveCity_Harbor_EventScript_21E44D:: @ 821E44D
 LilycoveCity_Harbor_EventScript_21E4B6:: @ 821E4B6
 	msgbox LilycoveCity_Harbor_Text_2A6A82, MSGBOX_DEFAULT
 	closemessage
-	applymovement 4, LilycoveCity_Harbor_Movement_2725A6
+	applymovement 4, Common_Movement_WalkInPlaceUp
 	waitmovement 0
 	delay 30
 	removeobject 4
 	delay 30
-	applymovement 1, LilycoveCity_Harbor_Movement_2725AA
+	applymovement 1, Common_Movement_WalkInPlaceDown
 	waitmovement 0
 	showobjectat 1, MAP_LILYCOVE_CITY_HARBOR
 	delay 30
@@ -342,19 +342,19 @@ LilycoveCity_Harbor_EventScript_21E4B6:: @ 821E4B6
 	end
 
 LilycoveCity_Harbor_EventScript_21E4EE:: @ 821E4EE
-	applymovement VAR_LAST_TALKED, LilycoveCity_Harbor_Movement_2725A6
+	applymovement VAR_LAST_TALKED, Common_Movement_WalkInPlaceUp
 	waitmovement 0
 	delay 30
 	hideobjectat VAR_LAST_TALKED, MAP_LILYCOVE_CITY_HARBOR
 	delay 60
 	addobject 4
 	delay 30
-	applymovement 4, LilycoveCity_Harbor_Movement_27259E
+	applymovement 4, Common_Movement_FacePlayer
 	waitmovement 0
 	return
 
 LilycoveCity_Harbor_EventScript_21E514:: @ 821E514
-	applymovement 4, LilycoveCity_Harbor_Movement_2725A6
+	applymovement 4, Common_Movement_WalkInPlaceUp
 	waitmovement 0
 	delay 30
 	removeobject 4
@@ -415,7 +415,7 @@ LilycoveCity_Harbor_EventScript_21E5C0:: @ 821E5C0
 LilycoveCity_Harbor_EventScript_21E5CC:: @ 821E5CC
 	msgbox LilycoveCity_Harbor_Text_21E89D, MSGBOX_DEFAULT
 	closemessage
-	applymovement VAR_LAST_TALKED, LilycoveCity_Harbor_Movement_2725A6
+	applymovement VAR_LAST_TALKED, Common_Movement_WalkInPlaceUp
 	waitmovement 0
 	delay 30
 	hideobjectat VAR_LAST_TALKED, MAP_LILYCOVE_CITY_HARBOR
@@ -494,22 +494,22 @@ LilycoveCity_Harbor_Movement_21E671: @ 821E671
 	step_end
 
 LilycoveCity_Harbor_EventScript_21E675:: @ 821E675
-	applymovement 5, LilycoveCity_Harbor_Movement_2725A4
+	applymovement 5, Common_Movement_WalkInPlaceLeft
 	waitmovement 0
 	return
 
 LilycoveCity_Harbor_EventScript_21E680:: @ 821E680
-	applymovement 5, LilycoveCity_Harbor_Movement_2725AA
+	applymovement 5, Common_Movement_WalkInPlaceDown
 	waitmovement 0
 	return
 
 LilycoveCity_Harbor_EventScript_21E68B:: @ 821E68B
-	applymovement 5, LilycoveCity_Harbor_Movement_2725AA
+	applymovement 5, Common_Movement_WalkInPlaceDown
 	waitmovement 0
 	return
 
 LilycoveCity_Harbor_EventScript_21E696:: @ 821E696
-	applymovement 5, LilycoveCity_Harbor_Movement_2725A4
+	applymovement 5, Common_Movement_WalkInPlaceLeft
 	waitmovement 0
 	return
 

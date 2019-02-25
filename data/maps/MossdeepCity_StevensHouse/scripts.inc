@@ -28,12 +28,12 @@ MossdeepCity_StevensHouse_MapScript2_2227C0: @ 82227C0
 
 MossdeepCity_StevensHouse_EventScript_2227CA:: @ 82227CA
 	lockall
-	applymovement 1, MossdeepCity_StevensHouse_Movement_2725A4
+	applymovement 1, Common_Movement_WalkInPlaceLeft
 	waitmovement 0
 	playse SE_PIN
-	applymovement 1, MossdeepCity_StevensHouse_Movement_272598
+	applymovement 1, Common_Movement_ExclamationMark
 	waitmovement 0
-	applymovement 1, MossdeepCity_StevensHouse_Movement_27259A
+	applymovement 1, Common_Movement_Delay48
 	waitmovement 0
 	applymovement 1, MossdeepCity_StevensHouse_Movement_222833
 	waitmovement 0
@@ -99,7 +99,7 @@ MossdeepCity_StevensHouse_EventScript_222895:: @ 8222895
 	compare VAR_RESULT, 0
 	goto_if_eq MossdeepCity_StevensHouse_EventScript_222901
 	call MossdeepCity_StevensHouse_EventScript_27378B
-	call MossdeepCity_StevensHouse_EventScript_2723DD
+	call Common_EventScript_NameReceivedPokemon
 	goto MossdeepCity_StevensHouse_EventScript_222901
 	end
 

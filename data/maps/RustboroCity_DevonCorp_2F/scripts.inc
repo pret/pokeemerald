@@ -79,9 +79,9 @@ RustboroCity_DevonCorp_2F_EventScript_2118F1:: @ 82118F1
 RustboroCity_DevonCorp_2F_EventScript_211933:: @ 8211933
 	closemessage
 	playse SE_PIN
-	applymovement 5, RustboroCity_DevonCorp_2F_Movement_272598
+	applymovement 5, Common_Movement_ExclamationMark
 	waitmovement 0
-	applymovement 5, RustboroCity_DevonCorp_2F_Movement_27259A
+	applymovement 5, Common_Movement_Delay48
 	waitmovement 0
 	msgbox RustboroCity_DevonCorp_2F_Text_211FA6, MSGBOX_YESNO
 	compare VAR_RESULT, 0
@@ -104,9 +104,9 @@ RustboroCity_DevonCorp_2F_EventScript_211974:: @ 8211974
 RustboroCity_DevonCorp_2F_EventScript_211991:: @ 8211991
 	closemessage
 	playse SE_PIN
-	applymovement 5, RustboroCity_DevonCorp_2F_Movement_272598
+	applymovement 5, Common_Movement_ExclamationMark
 	waitmovement 0
-	applymovement 5, RustboroCity_DevonCorp_2F_Movement_27259A
+	applymovement 5, Common_Movement_Delay48
 	waitmovement 0
 	msgbox RustboroCity_DevonCorp_2F_Text_211FA6, MSGBOX_YESNO
 	compare VAR_RESULT, 0
@@ -171,7 +171,7 @@ RustboroCity_DevonCorp_2F_EventScript_211A6E:: @ 8211A6E
 	compare VAR_RESULT, 0
 	goto_if_eq RustboroCity_DevonCorp_2F_EventScript_211AD7
 	call RustboroCity_DevonCorp_2F_EventScript_27378B
-	call RustboroCity_DevonCorp_2F_EventScript_2723DD
+	call Common_EventScript_NameReceivedPokemon
 	goto RustboroCity_DevonCorp_2F_EventScript_211AD7
 	end
 
@@ -220,7 +220,7 @@ RustboroCity_DevonCorp_2F_EventScript_211B11:: @ 8211B11
 	compare VAR_RESULT, 0
 	goto_if_eq RustboroCity_DevonCorp_2F_EventScript_211B7A
 	call RustboroCity_DevonCorp_2F_EventScript_27378B
-	call RustboroCity_DevonCorp_2F_EventScript_2723DD
+	call Common_EventScript_NameReceivedPokemon
 	goto RustboroCity_DevonCorp_2F_EventScript_211B7A
 	end
 

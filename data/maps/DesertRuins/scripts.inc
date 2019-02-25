@@ -11,7 +11,7 @@ DesertRuins_MapScript1_22D96B: @ 822D96B
 DesertRuins_EventScript_22D975:: @ 822D975
 	specialvar VAR_RESULT, GetBattleOutcome
 	compare VAR_RESULT, 7
-	goto_if_ne DesertRuins_EventScript_27374E
+	goto_if_ne Common_EventScript_NopReturn
 	removeobject VAR_LAST_TALKED
 	return
 

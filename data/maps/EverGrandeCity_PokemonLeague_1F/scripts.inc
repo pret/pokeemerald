@@ -90,11 +90,11 @@ EverGrandeCity_PokemonLeague_1F_EventScript_2296AE:: @ 82296AE
 	end
 
 EverGrandeCity_PokemonLeague_1F_EventScript_2296BB:: @ 82296BB
-	applymovement VAR_LAST_TALKED, EverGrandeCity_PokemonLeague_1F_Movement_27259E
+	applymovement VAR_LAST_TALKED, Common_Movement_FacePlayer
 	waitmovement 0
 	msgbox EverGrandeCity_PokemonLeague_1F_Text_2297EF, MSGBOX_DEFAULT
 	closemessage
-	applymovement VAR_LAST_TALKED, EverGrandeCity_PokemonLeague_1F_Movement_2725A2
+	applymovement VAR_LAST_TALKED, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	releaseall
 	end

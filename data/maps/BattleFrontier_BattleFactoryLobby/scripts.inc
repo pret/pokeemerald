@@ -208,7 +208,7 @@ BattleFrontier_BattleFactoryLobby_EventScript_2586B9:: @ 82586B9
 	special CallFrontierUtilFunc
 	closemessage
 	delay 2
-	call BattleFrontier_BattleFactoryLobby_EventScript_27134F
+	call Common_EventScript_SaveGame
 	setvar VAR_TEMP_0, 255
 	compare VAR_RESULT, 0
 	goto_if_eq BattleFrontier_BattleFactoryLobby_EventScript_258783

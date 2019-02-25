@@ -48,10 +48,10 @@ SlateportCity_Harbor_EventScript_20C9DF:: @ 820C9DF
 	end
 
 SlateportCity_Harbor_EventScript_20C9F5:: @ 820C9F5
-	applymovement 7, SlateportCity_Harbor_Movement_2725AA
+	applymovement 7, Common_Movement_WalkInPlaceDown
 	waitmovement 0
-	applymovement 6, SlateportCity_Harbor_Movement_2725AA
-	applymovement EVENT_OBJ_ID_PLAYER, SlateportCity_Harbor_Movement_2725A6
+	applymovement 6, Common_Movement_WalkInPlaceDown
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceUp
 	waitmovement 0
 	msgbox SlateportCity_Harbor_Text_20D291, MSGBOX_DEFAULT
 	closemessage
@@ -85,21 +85,21 @@ SlateportCity_Harbor_EventScript_20C9F5:: @ 820C9F5
 SlateportCity_Harbor_EventScript_20CA89:: @ 820CA89
 	applymovement 4, SlateportCity_Harbor_Movement_20CAE0
 	waitmovement 0
-	applymovement EVENT_OBJ_ID_PLAYER, SlateportCity_Harbor_Movement_2725AA
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceDown
 	waitmovement 0
 	return
 
 SlateportCity_Harbor_EventScript_20CA9E:: @ 820CA9E
 	applymovement 4, SlateportCity_Harbor_Movement_20CAE6
 	waitmovement 0
-	applymovement EVENT_OBJ_ID_PLAYER, SlateportCity_Harbor_Movement_2725A8
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceRight
 	waitmovement 0
 	return
 
 SlateportCity_Harbor_EventScript_20CAB3:: @ 820CAB3
 	applymovement 4, SlateportCity_Harbor_Movement_20CAEB
 	waitmovement 0
-	applymovement EVENT_OBJ_ID_PLAYER, SlateportCity_Harbor_Movement_2725A8
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceRight
 	waitmovement 0
 	return
 
@@ -226,7 +226,7 @@ SlateportCity_Harbor_EventScript_20CBDD:: @ 820CBDD
 SlateportCity_Harbor_EventScript_20CBE9:: @ 820CBE9
 	msgbox SlateportCity_Harbor_Text_20CFCB, MSGBOX_DEFAULT
 	closemessage
-	applymovement VAR_LAST_TALKED, SlateportCity_Harbor_Movement_2725A6
+	applymovement VAR_LAST_TALKED, Common_Movement_WalkInPlaceUp
 	waitmovement 0
 	delay 30
 	hideobjectat VAR_LAST_TALKED, MAP_SLATEPORT_CITY_HARBOR
@@ -300,7 +300,7 @@ SlateportCity_Harbor_EventScript_20CCA2:: @ 820CCA2
 	goto_if_eq SlateportCity_Harbor_EventScript_20CCDF
 	msgbox SlateportCity_Harbor_Text_20D232, MSGBOX_DEFAULT
 	closemessage
-	applymovement VAR_LAST_TALKED, SlateportCity_Harbor_Movement_2725A2
+	applymovement VAR_LAST_TALKED, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end
@@ -358,7 +358,7 @@ SlateportCity_Harbor_EventScript_20CD7B:: @ 820CD7B
 	goto_if_eq SlateportCity_Harbor_EventScript_20CE05
 	giveitem_std ITEM_DEEP_SEA_TOOTH
 	compare VAR_RESULT, 0
-	goto_if_eq SlateportCity_Harbor_EventScript_272054
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	takeitem ITEM_SCANNER, 1
 	msgbox SlateportCity_Harbor_Text_20D94A, MSGBOX_DEFAULT
 	setflag FLAG_EXCHANGED_SCANNER
@@ -371,7 +371,7 @@ SlateportCity_Harbor_EventScript_20CDBB:: @ 820CDBB
 	goto_if_eq SlateportCity_Harbor_EventScript_20CE05
 	giveitem_std ITEM_DEEP_SEA_SCALE
 	compare VAR_RESULT, 0
-	goto_if_eq SlateportCity_Harbor_EventScript_272054
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	takeitem ITEM_SCANNER, 1
 	msgbox SlateportCity_Harbor_Text_20D94A, MSGBOX_DEFAULT
 	setflag FLAG_EXCHANGED_SCANNER

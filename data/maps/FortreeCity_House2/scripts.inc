@@ -21,7 +21,7 @@ FortreeCity_House2_EventScript_2177CB:: @ 82177CB
 	msgbox FortreeCity_House2_Text_217A28, MSGBOX_DEFAULT
 	giveitem_std ITEM_TM10
 	compare VAR_RESULT, 0
-	goto_if_eq FortreeCity_House2_EventScript_272054
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_TM10
 	msgbox FortreeCity_House2_Text_217A91, MSGBOX_DEFAULT
 	release

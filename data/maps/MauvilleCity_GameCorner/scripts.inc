@@ -215,7 +215,7 @@ MauvilleCity_GameCorner_EventScript_20FE79:: @ 820FE79
 	end
 
 MauvilleCity_GameCorner_EventScript_20FE87:: @ 820FE87
-	call MauvilleCity_GameCorner_EventScript_272071
+	call Common_EventScript_NoRoomLeftForAnother
 	goto MauvilleCity_GameCorner_EventScript_20FD20
 	end
 
@@ -383,7 +383,7 @@ MauvilleCity_GameCorner_EventScript_2100FF:: @ 82100FF
 	end
 
 MauvilleCity_GameCorner_EventScript_21010D:: @ 821010D
-	call MauvilleCity_GameCorner_EventScript_27205E
+	call Common_EventScript_BagIsFull
 	goto MauvilleCity_GameCorner_EventScript_20FECE
 	end
 
@@ -448,7 +448,7 @@ MauvilleCity_GameCorner_EventScript_2101D0:: @ 82101D0
 	end
 
 MauvilleCity_GameCorner_EventScript_2101FA:: @ 82101FA
-	call MauvilleCity_GameCorner_EventScript_272071
+	call Common_EventScript_NoRoomLeftForAnother
 	msgbox MauvilleCity_GameCorner_Text_2107A9, MSGBOX_DEFAULT
 	release
 	end
@@ -513,7 +513,7 @@ MauvilleCity_GameCorner_EventScript_210299:: @ 8210299
 
 MauvilleCity_GameCorner_EventScript_2102A9:: @ 82102A9
 	closemessage
-	applymovement VAR_LAST_TALKED, MauvilleCity_GameCorner_Movement_2725A2
+	applymovement VAR_LAST_TALKED, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end

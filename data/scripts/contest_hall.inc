@@ -35,7 +35,7 @@ LilycoveCity_ContestLobby_EventScript_279D2C:: @ 8279D2C
 	end
 
 LilycoveCity_ContestLobby_EventScript_279D4B:: @ 8279D4B
-	call LilycoveCity_ContestLobby_EventScript_27205E
+	call Common_EventScript_BagIsFull
 	msgbox LilycoveCity_ContestLobby_Text_27B6E7, MSGBOX_DEFAULT
 	release
 	end
@@ -1215,7 +1215,7 @@ LinkContestRoom1_EventScript_27AC77:: @ 827AC77
 
 LinkContestRoom1_EventScript_27ACA8:: @ 827ACA8
 	lockall
-	call LinkContestRoom1_EventScript_27205E
+	call Common_EventScript_BagIsFull
 	msgbox LinkContestRoom1_Text_27BC2F, MSGBOX_DEFAULT
 	releaseall
 	setvar VAR_0x408A, 4

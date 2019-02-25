@@ -58,7 +58,7 @@ RustboroCity_DevonCorp_3F_EventScript_21246E:: @ 821246E
 	setflag FLAG_HIDE_RUSTBORO_CITY_POKEMON_SCHOOL_SCOTT
 	msgbox RustboroCity_DevonCorp_3F_Text_212837, MSGBOX_DEFAULT
 	closemessage
-	call RustboroCity_DevonCorp_3F_EventScript_272083
+	call Common_EventScript_OutOfCenterPartyHeal
 	msgbox RustboroCity_DevonCorp_3F_Text_2129D2, MSGBOX_DEFAULT
 	setflag FLAG_HIDE_ROUTE_116_TUNNELER
 	clearflag FLAG_HIDE_RUSTURF_TUNNEL_LOVER_MAN
@@ -154,7 +154,7 @@ RustboroCity_DevonCorp_3F_EventScript_21256C:: @ 821256C
 	goto_if_set FLAG_DELIVERED_STEVEN_LETTER, RustboroCity_DevonCorp_3F_EventScript_212595
 	msgbox RustboroCity_DevonCorp_3F_Text_212A09, MSGBOX_DEFAULT
 	closemessage
-	applymovement VAR_LAST_TALKED, RustboroCity_DevonCorp_3F_Movement_2725A2
+	applymovement VAR_LAST_TALKED, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end
@@ -163,11 +163,11 @@ RustboroCity_DevonCorp_3F_EventScript_212595:: @ 8212595
 	msgbox RustboroCity_DevonCorp_3F_Text_212A29, MSGBOX_DEFAULT
 	giveitem_std ITEM_EXP_SHARE
 	compare VAR_RESULT, 0
-	goto_if_eq RustboroCity_DevonCorp_3F_EventScript_272054
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_EXP_SHARE
 	msgbox RustboroCity_DevonCorp_3F_Text_212A9E, MSGBOX_DEFAULT
 	closemessage
-	applymovement VAR_LAST_TALKED, RustboroCity_DevonCorp_3F_Movement_2725A2
+	applymovement VAR_LAST_TALKED, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end
@@ -175,7 +175,7 @@ RustboroCity_DevonCorp_3F_EventScript_212595:: @ 8212595
 RustboroCity_DevonCorp_3F_EventScript_2125CC:: @ 82125CC
 	msgbox RustboroCity_DevonCorp_3F_Text_212B78, MSGBOX_DEFAULT
 	closemessage
-	applymovement VAR_LAST_TALKED, RustboroCity_DevonCorp_3F_Movement_2725A2
+	applymovement VAR_LAST_TALKED, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end

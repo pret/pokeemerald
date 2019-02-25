@@ -165,7 +165,7 @@ SlateportCity_BattleTentLobby_EventScript_208950:: @ 8208950
 	special CallFrontierUtilFunc
 	closemessage
 	delay 2
-	call SlateportCity_BattleTentLobby_EventScript_27134F
+	call Common_EventScript_SaveGame
 	setvar VAR_TEMP_0, 255
 	compare VAR_RESULT, 0
 	goto_if_eq SlateportCity_BattleTentLobby_EventScript_208A14
@@ -249,7 +249,7 @@ SlateportCity_BattleTentLobby_EventScript_208A3D:: @ 8208A3D
 	msgbox SlateportCity_BattleTentLobby_Text_208B4E, MSGBOX_DEFAULT
 	giveitem_std ITEM_TM41
 	compare VAR_RESULT, 0
-	goto_if_eq SlateportCity_BattleTentLobby_EventScript_272054
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_TM41
 	msgbox SlateportCity_BattleTentLobby_Text_208C5C, MSGBOX_DEFAULT
 	release

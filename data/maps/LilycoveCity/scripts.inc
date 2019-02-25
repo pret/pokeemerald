@@ -7,8 +7,8 @@ LilycoveCity_MapScript1_1E2B47: @ 81E2B47
 	setflag FLAG_VISITED_LILYCOVE_CITY
 	setvar VAR_0x4086, 0
 	setflag FLAG_HIDE_LILYCOVE_CONTEST_HALL_REPORTER
-	call_if_set FLAG_SYS_WEATHER_CTRL, LilycoveCity_EventScript_27207A
-	call LilycoveCity_EventScript_271ED7
+	call_if_set FLAG_SYS_WEATHER_CTRL, Common_EventScript_SetWeather15
+	call Common_EventScript_SetupRivalGender
 	end
 
 LilycoveCity_MapScript1_1E2B61: @ 81E2B61
@@ -40,7 +40,7 @@ LilycoveCity_EventScript_1E2BD8:: @ 81E2BD8
 	addvar VAR_RESULT, 133
 	giveitem_std VAR_RESULT
 	compare VAR_RESULT, 0
-	goto_if_eq LilycoveCity_EventScript_272054
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_DAILY_LILYCOVE_RECEIVED_BERRY
 	msgbox LilycoveCity_Text_2A72E3, MSGBOX_DEFAULT
 	release
@@ -134,13 +134,13 @@ LilycoveCity_EventScript_1E2CD4:: @ 81E2CD4
 LilycoveCity_EventScript_1E2CDD:: @ 81E2CDD
 	lockall
 	msgbox LilycoveCity_Text_1E494D, MSGBOX_NPC
-	applymovement 20, LilycoveCity_Movement_2725A2
+	applymovement 20, Common_Movement_FaceOriginalDirection
 	end
 
 LilycoveCity_EventScript_1E2CEE:: @ 81E2CEE
 	lockall
 	msgbox LilycoveCity_Text_1E49F4, MSGBOX_NPC
-	applymovement 19, LilycoveCity_Movement_2725A2
+	applymovement 19, Common_Movement_FaceOriginalDirection
 	end
 
 LilycoveCity_EventScript_1E2CFF:: @ 81E2CFF
@@ -197,10 +197,10 @@ LilycoveCity_EventScript_1E2D7D:: @ 81E2D7D
 	lockall
 	goto_if_set FLAG_MET_WAILMER_TRAINER, LilycoveCity_EventScript_1E2DB0
 	msgbox LilycoveCity_Text_1E3D1F, MSGBOX_DEFAULT
-	applymovement VAR_LAST_TALKED, LilycoveCity_Movement_27259E
+	applymovement VAR_LAST_TALKED, Common_Movement_FacePlayer
 	waitmovement 0
 	msgbox LilycoveCity_Text_1E3D4A, MSGBOX_DEFAULT
-	applymovement VAR_LAST_TALKED, LilycoveCity_Movement_2725A2
+	applymovement VAR_LAST_TALKED, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	setflag FLAG_MET_WAILMER_TRAINER
 	releaseall
@@ -387,7 +387,7 @@ LilycoveCity_EventScript_1E2FFD:: @ 81E2FFD
 
 LilycoveCity_EventScript_1E3006:: @ 81E3006
 	closemessage
-	applymovement VAR_LAST_TALKED, LilycoveCity_Movement_2725AA
+	applymovement VAR_LAST_TALKED, Common_Movement_WalkInPlaceDown
 	waitmovement 0
 	delay 50
 	setfieldeffectargument 0, 1

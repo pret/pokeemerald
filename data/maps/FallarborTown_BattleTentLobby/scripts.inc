@@ -191,7 +191,7 @@ FallarborTown_BattleTentLobby_EventScript_2000E2:: @ 82000E2
 	special LoadPlayerParty
 	closemessage
 	delay 2
-	call FallarborTown_BattleTentLobby_EventScript_27134F
+	call Common_EventScript_SaveGame
 	setvar VAR_TEMP_0, 255
 	compare VAR_RESULT, 0
 	goto_if_eq FallarborTown_BattleTentLobby_EventScript_2001AB

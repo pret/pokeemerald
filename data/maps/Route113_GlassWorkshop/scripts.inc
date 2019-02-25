@@ -223,13 +223,13 @@ Route113_GlassWorkshop_EventScript_26F05F:: @ 826F05F
 	return
 
 Route113_GlassWorkshop_EventScript_26F072:: @ 826F072
-	call Route113_GlassWorkshop_EventScript_27205E
+	call Common_EventScript_BagIsFull
 	msgbox Route113_GlassWorkshop_Text_26F6B7, MSGBOX_DEFAULT
 	release
 	end
 
 Route113_GlassWorkshop_EventScript_26F081:: @ 826F081
-	call Route113_GlassWorkshop_EventScript_272071
+	call Common_EventScript_NoRoomLeftForAnother
 	msgbox Route113_GlassWorkshop_Text_26F715, MSGBOX_DEFAULT
 	release
 	end

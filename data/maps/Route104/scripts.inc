@@ -13,7 +13,7 @@ Route104_EventScript_1ECC47:: @ 81ECC47
 	end
 
 Route104_MapScript1_1ECC4E: @ 81ECC4E
-	call Route104_EventScript_271ED7
+	call Common_EventScript_SetupRivalGender
 	call Route104_EventScript_1ECC78
 	call Route104_EventScript_1ECC5E
 	end
@@ -42,7 +42,7 @@ Route104_EventScript_1ECC9D:: @ 81ECC9D
 Route104_EventScript_1ECC9E:: @ 81ECC9E
 	lockall
 	setvar VAR_0x8008, 1
-	applymovement 34, Route104_Movement_27259E
+	applymovement 34, Common_Movement_FacePlayer
 	waitmovement 0
 	goto Route104_EventScript_1ECD33
 
@@ -51,7 +51,7 @@ Route104_EventScript_1ECCB3:: @ 81ECCB3
 	setflag FLAG_HIDE_RUSBORO_CITY_RIVAL
 	setvar VAR_0x405A, 8
 	setvar VAR_0x4063, 2
-	applymovement EVENT_OBJ_ID_PLAYER, Route104_Movement_2725A6
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceUp
 	waitmovement 0
 	delay 10
 	addobject 34
@@ -64,9 +64,9 @@ Route104_EventScript_1ECCB3:: @ 81ECCB3
 	setvar VAR_0x8008, 0
 	call Route104_EventScript_1E0DD1
 	playse SE_PIN
-	applymovement 34, Route104_Movement_272598
+	applymovement 34, Common_Movement_ExclamationMark
 	waitmovement 0
-	applymovement 34, Route104_Movement_27259A
+	applymovement 34, Common_Movement_Delay48
 	waitmovement 0
 	goto Route104_EventScript_1ECD33
 
@@ -270,7 +270,7 @@ Route104_EventScript_1ECF8C:: @ 81ECF8C
 	msgbox Route104_Text_2A6D86, MSGBOX_DEFAULT
 	giveitem_std ITEM_CHESTO_BERRY
 	compare VAR_RESULT, 0
-	goto_if_eq Route104_EventScript_272054
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_CHESTO_BERRY_ROUTE_104
 	msgbox Route104_Text_2A6E32, MSGBOX_DEFAULT
 	release
@@ -288,7 +288,7 @@ Route104_EventScript_1ECFCD:: @ 81ECFCD
 	msgbox Route104_Text_1ED96A, MSGBOX_DEFAULT
 	giveitem_std ITEM_WHITE_HERB
 	compare VAR_RESULT, 0
-	goto_if_eq Route104_EventScript_272054
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_WHITE_HERB
 	release
 	end
@@ -341,7 +341,7 @@ Route104_EventScript_1ED057:: @ 81ED057
 	msgbox Route104_Text_1ED838, MSGBOX_DEFAULT
 	giveitem_std ITEM_TM09
 	compare VAR_RESULT, 0
-	goto_if_eq Route104_EventScript_272054
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_TM09
 	release
 	end

@@ -55,9 +55,9 @@ Route119_WeatherInstitute_2F_EventScript_26FFC8:: @ 826FFC8
 	msgbox Route119_WeatherInstitute_2F_Text_270568, MSGBOX_DEFAULT
 	closemessage
 	playse SE_PIN
-	applymovement 3, Route119_WeatherInstitute_2F_Movement_272598
+	applymovement 3, Common_Movement_ExclamationMark
 	waitmovement 0
-	applymovement 3, Route119_WeatherInstitute_2F_Movement_27259A
+	applymovement 3, Common_Movement_Delay48
 	waitmovement 0
 	msgbox Route119_WeatherInstitute_2F_Text_2705DD, MSGBOX_DEFAULT
 	closemessage
@@ -98,7 +98,7 @@ Route119_WeatherInstitute_2F_EventScript_270085:: @ 8270085
 	compare VAR_RESULT, 0
 	goto_if_eq Route119_WeatherInstitute_2F_EventScript_2700EA
 	call Route119_WeatherInstitute_2F_EventScript_27378B
-	call Route119_WeatherInstitute_2F_EventScript_2723DD
+	call Common_EventScript_NameReceivedPokemon
 	goto Route119_WeatherInstitute_2F_EventScript_2700EA
 	end
 

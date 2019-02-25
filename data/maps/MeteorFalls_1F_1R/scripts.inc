@@ -16,20 +16,20 @@ MeteorFalls_1F_1R_EventScript_22BD3A:: @ 822BD3A
 MeteorFalls_1F_1R_EventScript_22BD5F:: @ 822BD5F
 	lockall
 	playbgm MUS_MGM0, 0
-	applymovement EVENT_OBJ_ID_PLAYER, MeteorFalls_1F_1R_Movement_2725B0
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_FaceDown
 	waitmovement 0
 	delay 30
 	applymovement 5, MeteorFalls_1F_1R_Movement_2725B4
 	waitmovement 0
 	msgbox MeteorFalls_1F_1R_Text_22BF47, MSGBOX_DEFAULT
 	closemessage
-	applymovement 5, MeteorFalls_1F_1R_Movement_2725A6
-	applymovement 6, MeteorFalls_1F_1R_Movement_2725A6
+	applymovement 5, Common_Movement_WalkInPlaceUp
+	applymovement 6, Common_Movement_WalkInPlaceUp
 	waitmovement 0
 	playse SE_PIN
-	applymovement 5, MeteorFalls_1F_1R_Movement_272598
+	applymovement 5, Common_Movement_ExclamationMark
 	waitmovement 0
-	applymovement 5, MeteorFalls_1F_1R_Movement_27259A
+	applymovement 5, Common_Movement_Delay48
 	waitmovement 0
 	msgbox MeteorFalls_1F_1R_Text_22BF84, MSGBOX_DEFAULT
 	closemessage
@@ -37,9 +37,9 @@ MeteorFalls_1F_1R_EventScript_22BD5F:: @ 822BD5F
 	waitmovement 0
 	msgbox MeteorFalls_1F_1R_Text_22BFE4, MSGBOX_DEFAULT
 	closemessage
-	applymovement EVENT_OBJ_ID_PLAYER, MeteorFalls_1F_1R_Movement_2725A4
-	applymovement 5, MeteorFalls_1F_1R_Movement_2725A4
-	applymovement 6, MeteorFalls_1F_1R_Movement_2725A4
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceLeft
+	applymovement 5, Common_Movement_WalkInPlaceLeft
+	applymovement 6, Common_Movement_WalkInPlaceLeft
 	waitmovement 0
 	addobject 7
 	addobject 8
@@ -49,8 +49,8 @@ MeteorFalls_1F_1R_EventScript_22BD5F:: @ 822BD5F
 	applymovement 8, MeteorFalls_1F_1R_Movement_22BEE0
 	applymovement 9, MeteorFalls_1F_1R_Movement_22BEE8
 	waitmovement 0
-	applymovement 5, MeteorFalls_1F_1R_Movement_2725A4
-	applymovement 6, MeteorFalls_1F_1R_Movement_2725A4
+	applymovement 5, Common_Movement_WalkInPlaceLeft
+	applymovement 6, Common_Movement_WalkInPlaceLeft
 	waitmovement 0
 	msgbox MeteorFalls_1F_1R_Text_22C04E, MSGBOX_DEFAULT
 	closemessage
@@ -68,10 +68,10 @@ MeteorFalls_1F_1R_EventScript_22BD5F:: @ 822BD5F
 	applymovement 9, MeteorFalls_1F_1R_Movement_22BF18
 	waitmovement 0
 	msgbox MeteorFalls_1F_1R_Text_22C268, MSGBOX_DEFAULT
-	applymovement 7, MeteorFalls_1F_1R_Movement_2725AA
+	applymovement 7, Common_Movement_WalkInPlaceDown
 	waitmovement 0
 	msgbox MeteorFalls_1F_1R_Text_22C292, MSGBOX_DEFAULT
-	applymovement 7, MeteorFalls_1F_1R_Movement_2725A4
+	applymovement 7, Common_Movement_WalkInPlaceLeft
 	waitmovement 0
 	msgbox MeteorFalls_1F_1R_Text_22C2FC, MSGBOX_DEFAULT
 	closemessage

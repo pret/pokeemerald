@@ -195,7 +195,7 @@ BattleFrontier_BattlePikeLobby_EventScript_25B95C:: @ 825B95C
 	special LoadPlayerParty
 	closemessage
 	delay 2
-	call BattleFrontier_BattlePikeLobby_EventScript_27134F
+	call Common_EventScript_SaveGame
 	setvar VAR_TEMP_0, 255
 	setvar VAR_0x8004, 26
 	special CallBattlePikeFunction
