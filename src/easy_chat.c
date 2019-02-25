@@ -790,47 +790,51 @@ bool32 sub_811AB44(void)
     return FALSE;
 }
 
-#ifdef NONMATCHING
 static u16 sub_811AB68(void)
 {
-    if (gMain.newKeys & A_BUTTON)
+    do
     {
-        sub_811BF78();
-        gEasyChatScreen->state = 2;
-        gEasyChatScreen->unk_0a = 0;
-        gEasyChatScreen->unk_0b = 0;
-        gEasyChatScreen->unk_0c = 0;
-        return 9;
-    }
-    else if (gMain.newKeys & B_BUTTON)
-    {
-        return sub_811B150();
-    }
-    else if (gMain.newKeys & START_BUTTON)
-    {
-        return sub_811B1B4();
-    }
-    else if (gMain.newKeys & DPAD_UP)
-    {
-        gEasyChatScreen->mainCursorRow--;
-    }
-    else if (gMain.newKeys & DPAD_LEFT)
-    {
-        gEasyChatScreen->mainCursorColumn--;
-    }
-    else if (gMain.newKeys & DPAD_DOWN)
-    {
-        gEasyChatScreen->mainCursorRow++;
-    }
-    else if (gMain.newKeys & DPAD_RIGHT)
-    {
-        gEasyChatScreen->mainCursorColumn++;
-    }
-    else
-    {
+        if (gMain.newKeys & A_BUTTON)
+        {
+            sub_811BF78();
+            gEasyChatScreen->state = 2;
+            gEasyChatScreen->unk_0a = 0;
+            gEasyChatScreen->unk_0b = 0;
+            gEasyChatScreen->unk_0c = 0;
+            return 9;
+        }
+        else if (gMain.newKeys & B_BUTTON)
+        {
+            return sub_811B150();
+        }
+        else if (gMain.newKeys & START_BUTTON)
+        {
+            return sub_811B1B4();
+        }
+        else if (gMain.newKeys & DPAD_UP)
+        {
+            gEasyChatScreen->mainCursorRow--;
+            break;
+        }
+        else if (gMain.newKeys & DPAD_LEFT)
+        {
+            gEasyChatScreen->mainCursorColumn--;
+            break;
+        }
+        else if (gMain.newKeys & DPAD_DOWN)
+        {
+            gEasyChatScreen->mainCursorRow++;
+            break;
+        }
+        else if (gMain.newKeys & DPAD_RIGHT)
+        {
+            gEasyChatScreen->mainCursorColumn++;
+            break;
+        }
+
         return 0;
-    }
-    
+    } while (0);
+
     if (gEasyChatScreen->mainCursorRow < 0)
         gEasyChatScreen->mainCursorRow = gEasyChatScreenTemplates[gEasyChatScreen->templateId].numRows;
 
@@ -857,238 +861,61 @@ static u16 sub_811AB68(void)
 
     return 2;
 }
-#else
-NAKED
-static u16 sub_811AB68(void)
-{
-    asm_unified("\n\
-    push {r4-r7,lr}\n\
-    ldr r0, =gMain\n\
-    ldrh r1, [r0, 0x2E]\n\
-    movs r0, 0x1\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    beq _0811ABB8\n\
-    bl sub_811BF78\n\
-    ldr r1, =gEasyChatScreen\n\
-    ldr r3, [r1]\n\
-    movs r2, 0\n\
-    movs r0, 0x2\n\
-    strb r0, [r3, 0x4]\n\
-    ldr r0, [r1]\n\
-    strb r2, [r0, 0xA]\n\
-    ldr r0, [r1]\n\
-    strb r2, [r0, 0xB]\n\
-    ldr r0, [r1]\n\
-    strb r2, [r0, 0xC]\n\
-    movs r0, 0x9\n\
-    b RETURN\n\
-    .pool\n\
-_0811AB9C:\n\
-    movs r0, 0x20\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    bne _0811AC68_dpad_left\n\
-    movs r0, 0x80\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    bne _0811AC58_dpad_down\n\
-    movs r0, 0x10\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    bne _0811AC48_dpad_right\n\
-    movs r0, 0\n\
-    b RETURN\n\
-_0811ABB8:\n\
-    movs r0, 0x2\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    bne _0811AC78_b_button\n\
-    movs r0, 0x8\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    bne _0811AC7E_start_button\n\
-    movs r0, 0x40\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    beq _0811AB9C\n\
-    ldr r2, =gEasyChatScreen\n\
-    ldr r1, [r2]\n\
-    ldrb r0, [r1, 0x6]\n\
-    subs r0, 0x1\n\
-_0811ABD8:\n\
-    strb r0, [r1, 0x6]\n\
-_0811ABDA:\n\
-    adds r7, r2, 0\n\
-    adds r4, r7, 0\n\
-    ldr r2, [r4]\n\
-    movs r0, 0x6\n\
-    ldrsb r0, [r2, r0]\n\
-    ldr r6, =gEasyChatScreenTemplates\n\
-    cmp r0, 0\n\
-    bge _0811ABF8\n\
-    ldrb r0, [r2, 0x1]\n\
-    lsls r1, r0, 1\n\
-    adds r1, r0\n\
-    lsls r1, 3\n\
-    adds r1, r6\n\
-    ldrb r0, [r1, 0x2]\n\
-    strb r0, [r2, 0x6]\n\
-_0811ABF8:\n\
-    ldr r3, [r4]\n\
-    movs r2, 0x6\n\
-    ldrsb r2, [r3, r2]\n\
-    adds r5, r6, 0\n\
-    ldrb r1, [r3, 0x1]\n\
-    lsls r0, r1, 1\n\
-    adds r0, r1\n\
-    lsls r0, 3\n\
-    adds r0, r5\n\
-    ldrb r0, [r0, 0x2]\n\
-    cmp r2, r0\n\
-    ble _0811AC14\n\
-    movs r0, 0\n\
-    strb r0, [r3, 0x6]\n\
-_0811AC14:\n\
-    ldr r3, [r4]\n\
-    movs r2, 0x6\n\
-    ldrsb r2, [r3, r2]\n\
-    ldrb r1, [r3, 0x1]\n\
-    lsls r0, r1, 1\n\
-    adds r0, r1\n\
-    lsls r0, 3\n\
-    adds r1, r0, r5\n\
-    ldrb r0, [r1, 0x2]\n\
-    cmp r2, r0\n\
-    bne _0811AC88\n\
-    movs r0, 0x5\n\
-    ldrsb r0, [r3, r0]\n\
-    cmp r0, 0x2\n\
-    ble _0811AC36\n\
-    movs r0, 0x2\n\
-    strb r0, [r3, 0x5]\n\
-_0811AC36:\n\
-    ldr r1, [r4]\n\
-    movs r0, 0x1\n\
-    strb r0, [r1, 0x4]\n\
-    movs r0, 0x3\n\
-    b RETURN\n\
-    .pool\n\
-_0811AC48_dpad_right:\n\
-    ldr r2, =gEasyChatScreen\n\
-    ldr r1, [r2]\n\
-    ldrb r0, [r1, 0x5]\n\
-    adds r0, 0x1\n\
-    strb r0, [r1, 0x5]\n\
-    b _0811ABDA\n\
-    .pool\n\
-_0811AC58_dpad_down:\n\
-    ldr r2, =gEasyChatScreen\n\
-    ldr r1, [r2]\n\
-    ldrb r0, [r1, 0x6]\n\
-    adds r0, 0x1\n\
-    b _0811ABD8\n\
-    .pool\n\
-_0811AC68_dpad_left:\n\
-    ldr r2, =gEasyChatScreen\n\
-    ldr r1, [r2]\n\
-    ldrb r0, [r1, 0x5]\n\
-    subs r0, 0x1\n\
-    strb r0, [r1, 0x5]\n\
-    b _0811ABDA\n\
-    .pool\n\
-_0811AC78_b_button:\n\
-    bl sub_811B150\n\
-    b _0811AC82\n\
-_0811AC7E_start_button:\n\
-    bl sub_811B1B4\n\
-_0811AC82:\n\
-    lsls r0, 16\n\
-    lsrs r0, 16\n\
-    b RETURN\n\
-_0811AC88:\n\
-    movs r0, 0x5\n\
-    ldrsb r0, [r3, r0]\n\
-    cmp r0, 0\n\
-    bge _0811AC96\n\
-    ldrb r0, [r1, 0x1]\n\
-    subs r0, 0x1\n\
-    strb r0, [r3, 0x5]\n\
-_0811AC96:\n\
-    ldr r3, [r4]\n\
-    movs r2, 0x5\n\
-    ldrsb r2, [r3, r2]\n\
-    ldrb r1, [r3, 0x1]\n\
-    lsls r0, r1, 1\n\
-    adds r0, r1\n\
-    lsls r0, 3\n\
-    adds r0, r6\n\
-    ldrb r0, [r0, 0x1]\n\
-    cmp r2, r0\n\
-    blt _0811ACB0\n\
-    movs r0, 0\n\
-    strb r0, [r3, 0x5]\n\
-_0811ACB0:\n\
-    bl sub_811AB44\n\
-    cmp r0, 0\n\
-    beq _0811ACCA\n\
-    ldr r2, [r7]\n\
-    ldr r0, [r2, 0x4]\n\
-    ldr r1, =0x00ffff00\n\
-    ands r0, r1\n\
-    ldr r1, =0x00040100\n\
-    cmp r0, r1\n\
-    bne _0811ACCA\n\
-    movs r0, 0\n\
-    strb r0, [r2, 0x5]\n\
-_0811ACCA:\n\
-    movs r0, 0x2\n\
-RETURN:\n\
-    pop {r4-r7}\n\
-    pop {r1}\n\
-    bx r1\n\
-    .pool");
-}
-#endif // NONMATCHING
 
-#ifdef NONMATCHING
 static u16 sub_811ACDC(void)
 {
-    int numFooterColumns;
-
-    if (gMain.newKeys & A_BUTTON)
+    do
     {
-        switch (gEasyChatScreen->mainCursorColumn)
+        if (gMain.newKeys & A_BUTTON)
         {
-        case 0:
-            return sub_811B184();
-        case 1:
-            return sub_811B150();
-        case 2:
-            return sub_811B1B4();
-        case 3:
-            return sub_811B264();
+            switch (gEasyChatScreen->mainCursorColumn)
+            {
+            case 0:
+                return sub_811B184();
+            case 1:
+                return sub_811B150();
+            case 2:
+                return sub_811B1B4();
+            case 3:
+                return sub_811B264();
+            }
         }
-    }
 
-    if (gMain.newKeys & B_BUTTON)
-        return sub_811B150();
-    else if (gMain.newKeys & START_BUTTON)
-        return sub_811B1B4();
-    else if (gMain.newKeys & DPAD_UP)
-        gEasyChatScreen->mainCursorRow--;
-    else if (gMain.newKeys & DPAD_LEFT)
-        gEasyChatScreen->mainCursorColumn--;
-    else if (gMain.newKeys & DPAD_DOWN)
-        gEasyChatScreen->mainCursorRow = 0;
-    else if (gMain.newKeys & DPAD_RIGHT)
-        gEasyChatScreen->mainCursorColumn++;
-    else
+        if (gMain.newKeys & B_BUTTON)
+        {
+            return sub_811B150();
+        }
+        else if (gMain.newKeys & START_BUTTON)
+        {
+            return sub_811B1B4();
+        }
+        else if (gMain.newKeys & DPAD_UP)
+        {
+            gEasyChatScreen->mainCursorRow--;
+            break;
+        }
+        else if (gMain.newKeys & DPAD_LEFT)
+        {
+            gEasyChatScreen->mainCursorColumn--;
+            break;
+        }
+        else if (gMain.newKeys & DPAD_DOWN)
+        {
+            gEasyChatScreen->mainCursorRow = 0;
+            break;
+        }
+        else if (gMain.newKeys & DPAD_RIGHT)
+        {
+            gEasyChatScreen->mainCursorColumn++;
+            break;
+        }
+
         return 0;
+    } while (0);
 
     if (gEasyChatScreen->mainCursorRow == gEasyChatScreenTemplates[gEasyChatScreen->templateId].numRows)
     {
-        numFooterColumns = sub_811BA3C() ? 4 : 3;
+        int numFooterColumns = sub_811BA3C() ? 4 : 3;
         if (gEasyChatScreen->mainCursorColumn < 0)
             gEasyChatScreen->mainCursorColumn = numFooterColumns - 1;
 
@@ -1100,198 +927,13 @@ static u16 sub_811ACDC(void)
 
     if (gEasyChatScreen->mainCursorColumn >= gEasyChatScreenTemplates[gEasyChatScreen->templateId].numColumns)
         gEasyChatScreen->mainCursorColumn = gEasyChatScreenTemplates[gEasyChatScreen->templateId].numColumns - 1;
-    
+
     if (sub_811AB44() && gEasyChatScreen->mainCursorColumn == 1 && gEasyChatScreen->mainCursorRow == 4)
         gEasyChatScreen->mainCursorColumn = 0;
 
     gEasyChatScreen->state = 0;
     return 2;
 }
-#else
-NAKED
-static u16 sub_811ACDC(void)
-{
-    asm_unified("\n\
-    push {r4-r6,lr}\n\
-    ldr r2, =gMain\n\
-    ldrh r1, [r2, 0x2E]\n\
-    movs r0, 0x1\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    beq _0811AD4A\n\
-    ldr r0, =gEasyChatScreen\n\
-    ldr r0, [r0]\n\
-    ldrb r0, [r0, 0x5]\n\
-    lsls r0, 24\n\
-    asrs r0, 24\n\
-    cmp r0, 0x1\n\
-    beq _0811AD3E\n\
-    b _0811AD24\n\
-    .pool\n\
-_0811AD04:\n\
-    movs r0, 0x20\n\
-    ands r0, r2\n\
-    lsls r0, 16\n\
-    lsrs r3, r0, 16\n\
-    cmp r3, 0\n\
-    bne _0811ADE0\n\
-    movs r0, 0x80\n\
-    ands r0, r2\n\
-    cmp r0, 0\n\
-    bne _0811ADD0\n\
-    movs r0, 0x10\n\
-    ands r0, r2\n\
-    cmp r0, 0\n\
-    bne _0811ADC0\n\
-    movs r0, 0\n\
-    b _0811AE32\n\
-_0811AD24:\n\
-    cmp r0, 0x1\n\
-    bgt _0811AD2E\n\
-    cmp r0, 0\n\
-    beq _0811AD38\n\
-    b _0811AD4A\n\
-_0811AD2E:\n\
-    cmp r0, 0x2\n\
-    beq _0811ADF6\n\
-    cmp r0, 0x3\n\
-    beq _0811AD44\n\
-    b _0811AD4A\n\
-_0811AD38:\n\
-    bl sub_811B184\n\
-    b _0811ADFA\n\
-_0811AD3E:\n\
-    bl sub_811B150\n\
-    b _0811ADFA\n\
-_0811AD44:\n\
-    bl sub_811B264\n\
-    b _0811ADFA\n\
-_0811AD4A:\n\
-    ldrh r2, [r2, 0x2E]\n\
-    movs r0, 0x2\n\
-    ands r0, r2\n\
-    cmp r0, 0\n\
-    bne _0811ADF0\n\
-    movs r0, 0x8\n\
-    ands r0, r2\n\
-    cmp r0, 0\n\
-    bne _0811ADF6\n\
-    movs r0, 0x40\n\
-    ands r0, r2\n\
-    cmp r0, 0\n\
-    beq _0811AD04\n\
-    ldr r2, =gEasyChatScreen\n\
-    ldr r1, [r2]\n\
-    ldrb r0, [r1, 0x6]\n\
-    subs r0, 0x1\n\
-    strb r0, [r1, 0x6]\n\
-_0811AD6E:\n\
-    adds r6, r2, 0\n\
-_0811AD70:\n\
-    adds r5, r6, 0\n\
-    ldr r4, [r5]\n\
-    movs r3, 0x6\n\
-    ldrsb r3, [r4, r3]\n\
-    ldr r2, =gEasyChatScreenTemplates\n\
-    ldrb r1, [r4, 0x1]\n\
-    lsls r0, r1, 1\n\
-    adds r0, r1\n\
-    lsls r0, 3\n\
-    adds r1, r0, r2\n\
-    ldrb r0, [r1, 0x2]\n\
-    cmp r3, r0\n\
-    bne _0811AE00\n\
-    bl sub_811BA3C\n\
-    movs r2, 0x3\n\
-    cmp r0, 0\n\
-    beq _0811AD96\n\
-    movs r2, 0x4\n\
-_0811AD96:\n\
-    ldr r1, [r5]\n\
-    movs r0, 0x5\n\
-    ldrsb r0, [r1, r0]\n\
-    cmp r0, 0\n\
-    bge _0811ADA4\n\
-    subs r0, r2, 0x1\n\
-    strb r0, [r1, 0x5]\n\
-_0811ADA4:\n\
-    ldr r1, [r5]\n\
-    movs r0, 0x5\n\
-    ldrsb r0, [r1, r0]\n\
-    cmp r0, r2\n\
-    blt _0811ADB2\n\
-    movs r0, 0\n\
-    strb r0, [r1, 0x5]\n\
-_0811ADB2:\n\
-    movs r0, 0x3\n\
-    b _0811AE32\n\
-    .pool\n\
-_0811ADC0:\n\
-    ldr r2, =gEasyChatScreen\n\
-    ldr r1, [r2]\n\
-    ldrb r0, [r1, 0x5]\n\
-    adds r0, 0x1\n\
-    strb r0, [r1, 0x5]\n\
-    b _0811AD6E\n\
-    .pool\n\
-_0811ADD0:\n\
-    ldr r1, =gEasyChatScreen\n\
-    ldr r0, [r1]\n\
-    strb r3, [r0, 0x6]\n\
-    adds r6, r1, 0\n\
-    b _0811AD70\n\
-    .pool\n\
-_0811ADE0:\n\
-    ldr r2, =gEasyChatScreen\n\
-    ldr r1, [r2]\n\
-    ldrb r0, [r1, 0x5]\n\
-    subs r0, 0x1\n\
-    strb r0, [r1, 0x5]\n\
-    b _0811AD6E\n\
-    .pool\n\
-_0811ADF0:\n\
-    bl sub_811B150\n\
-    b _0811ADFA\n\
-_0811ADF6:\n\
-    bl sub_811B1B4\n\
-_0811ADFA:\n\
-    lsls r0, 16\n\
-    lsrs r0, 16\n\
-    b _0811AE32\n\
-_0811AE00:\n\
-    movs r0, 0x5\n\
-    ldrsb r0, [r4, r0]\n\
-    ldrb r1, [r1, 0x1]\n\
-    cmp r0, r1\n\
-    blt _0811AE0E\n\
-    subs r0, r1, 0x1\n\
-    strb r0, [r4, 0x5]\n\
-_0811AE0E:\n\
-    bl sub_811AB44\n\
-    cmp r0, 0\n\
-    beq _0811AE28\n\
-    ldr r2, [r6]\n\
-    ldr r0, [r2, 0x4]\n\
-    ldr r1, =0x00ffff00\n\
-    ands r0, r1\n\
-    ldr r1, =0x00040100\n\
-    cmp r0, r1\n\
-    bne _0811AE28\n\
-    movs r0, 0\n\
-    strb r0, [r2, 0x5]\n\
-_0811AE28:\n\
-    ldr r0, =gEasyChatScreen\n\
-    ldr r1, [r0]\n\
-    movs r0, 0\n\
-    strb r0, [r1, 0x4]\n\
-    movs r0, 0x2\n\
-_0811AE32:\n\
-    pop {r4-r6}\n\
-    pop {r1}\n\
-    bx r1\n\
-    .pool");
-}
-#endif // NONMATCHING
 
 static u16 sub_811AE44(void)
 {
@@ -1617,7 +1259,7 @@ static int sub_811B2B0(void)
     var1 = sub_811F5B0();
     if (var1 == 0)
         return 0;
-    
+
     gEasyChatScreen->unk_0f = (var1 - 1) / 2;
     gEasyChatScreen->unk_0e = 0;
     gEasyChatScreen->unk_10 = 0;
@@ -1984,7 +1626,7 @@ static u16 sub_811B794(u32 arg0)
             gEasyChatScreen->unk_0e += 4;
             if (gEasyChatScreen->unk_0e > gEasyChatScreen->unk_0f - 3)
                 gEasyChatScreen->unk_0e = gEasyChatScreen->unk_0f + 0xFD;
-            
+
             sub_811B9A0();
             return 22;
         }
@@ -2287,7 +1929,7 @@ static int sub_811BD64(void)
 
     if (gEasyChatScreen->kind == 17)
         return sub_811BCF4();
-    
+
     saveBlock1 = gSaveBlock1Ptr;
     for (i = 0; i < 9; i++)
     {
@@ -2401,7 +2043,7 @@ int sub_811BF88(int easyChatWord)
 static bool8 sub_811BF8C(void)
 {
     if (!sub_811CE94())
-        return 0; 
+        return 0;
     else
         return 1;
 }
@@ -2555,7 +2197,7 @@ static bool8 sub_811C30C(void)
     int trueStringWidth;
     u8 var2;
     u8 sp0[64];
-    
+
     ecWordBuffer = sub_811BA94();
     var0 = sub_811BA68();
     cursorColumn = sub_811BAB8();
@@ -2775,7 +2417,7 @@ static bool8 sub_811C6C0(void)
         if (!sub_811DAA4() && !sub_811E5B8())
         {
             sub_811D6D4();
-            gUnknown_0203A11C->unk0++;   
+            gUnknown_0203A11C->unk0++;
         }
         break;
     case 2:
@@ -3517,7 +3159,7 @@ static void sub_811D424(u16 *tilemap)
             x++;
             for (; x < right; x++)
                 tilemap[y * 32 + x] = 0x1000;
-            
+
             tilemap[y* 32 + x] = 0x1007;
         }
     }
@@ -4456,10 +4098,10 @@ u16 EasyChat_GetNumWordsInGroup(u8 groupId)
 {
     if (groupId == EC_GROUP_POKEMON)
         return GetNationalPokedexCount(FLAG_GET_SEEN);
-    
+
     if (sub_811EA28(groupId))
-        return gEasyChatGroups[groupId].numEnabledWords;    
-    
+        return gEasyChatGroups[groupId].numEnabledWords;
+
     return 0;
 }
 
@@ -4472,7 +4114,7 @@ bool8 sub_811EAA4(u16 easyChatWord)
     const u16 *list;
     if (easyChatWord == 0xFFFF)
         return FALSE;
-    
+
     groupId = EC_GROUP(easyChatWord);
     index = EC_INDEX(easyChatWord);
     if (groupId >= EC_NUM_GROUPS)
