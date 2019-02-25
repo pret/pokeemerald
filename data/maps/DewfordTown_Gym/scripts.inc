@@ -169,7 +169,7 @@ DewfordTown_Gym_EventScript_1FC7F7:: @ 81FC7F7
 	call DewfordTown_Gym_EventScript_1FC75D
 	message DewfordTown_Gym_Text_1FD07D
 	waitmessage
-	call DewfordTown_Gym_EventScript_27207E
+	call Common_EventScript_PlayGymBadgeFanfare
 	msgbox DewfordTown_Gym_Text_1FD0A8, MSGBOX_DEFAULT
 	setflag FLAG_DEFEATED_DEWFORD_GYM
 	setflag FLAG_BADGE02_GET
@@ -195,7 +195,7 @@ DewfordTown_Gym_EventScript_1FC7F7:: @ 81FC7F7
 DewfordTown_Gym_EventScript_1FC855:: @ 81FC855
 	giveitem_std ITEM_TM08
 	compare VAR_RESULT, 0
-	goto_if_eq DewfordTown_Gym_EventScript_27205E
+	goto_if_eq Common_EventScript_BagIsFull
 	msgbox DewfordTown_Gym_Text_1FD181, MSGBOX_DEFAULT
 	setflag FLAG_RECEIVED_TM08
 	return
@@ -203,7 +203,7 @@ DewfordTown_Gym_EventScript_1FC855:: @ 81FC855
 DewfordTown_Gym_EventScript_1FC878:: @ 81FC878
 	giveitem_std ITEM_TM08
 	compare VAR_RESULT, 0
-	goto_if_eq DewfordTown_Gym_EventScript_272054
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	msgbox DewfordTown_Gym_Text_1FD181, MSGBOX_DEFAULT
 	setflag FLAG_RECEIVED_TM08
 	release

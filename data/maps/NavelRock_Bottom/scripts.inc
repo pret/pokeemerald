@@ -13,7 +13,7 @@ NavelRock_Bottom_EventScript_269273:: @ 8269273
 	return
 
 NavelRock_Bottom_EventScript_269277:: @ 8269277
-	goto_if_set FLAG_DEFEATED_LUGIA, NavelRock_Bottom_EventScript_27374E
+	goto_if_set FLAG_DEFEATED_LUGIA, Common_EventScript_NopReturn
 	clearflag FLAG_HIDE_LUGIA
 	return
 
@@ -24,7 +24,7 @@ NavelRock_Bottom_MapScript1_269284: @ 8269284
 NavelRock_Bottom_EventScript_26928E:: @ 826928E
 	specialvar VAR_RESULT, GetBattleOutcome
 	compare VAR_RESULT, 7
-	goto_if_ne NavelRock_Bottom_EventScript_27374E
+	goto_if_ne Common_EventScript_NopReturn
 	removeobject 1
 	return
 

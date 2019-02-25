@@ -57,7 +57,7 @@ Route119_WeatherInstitute_1F_EventScript_26FB18:: @ 826FB18
 	lockall
 	msgbox Route119_WeatherInstitute_1F_Text_26FEFC, MSGBOX_DEFAULT
 	closemessage
-	call Route119_WeatherInstitute_1F_EventScript_272083
+	call Common_EventScript_OutOfCenterPartyHeal
 	releaseall
 	end
 

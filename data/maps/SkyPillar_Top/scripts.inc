@@ -11,7 +11,7 @@ SkyPillar_Top_MapScript1_2396C8: @ 82396C8
 SkyPillar_Top_EventScript_2396D2:: @ 82396D2
 	specialvar VAR_RESULT, GetBattleOutcome
 	compare VAR_RESULT, 7
-	goto_if_ne SkyPillar_Top_EventScript_27374E
+	goto_if_ne Common_EventScript_NopReturn
 	removeobject VAR_LAST_TALKED
 	return
 
@@ -94,7 +94,7 @@ SkyPillar_Top_EventScript_239785:: @ 8239785
 SkyPillar_Top_EventScript_23979A:: @ 823979A
 	lockall
 	fadeoutbgm 1
-	applymovement EVENT_OBJ_ID_PLAYER, SkyPillar_Top_Movement_2725B2
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_FaceUp
 	waitmovement 0
 	special SpawnCameraObject
 	applymovement EVENT_OBJ_ID_CAMERA, SkyPillar_Top_Movement_239858

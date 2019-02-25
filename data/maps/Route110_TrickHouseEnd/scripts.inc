@@ -161,7 +161,7 @@ Route110_TrickHouseEnd_EventScript_26AF28:: @ 826AF28
 	delay 30
 	msgbox Route110_TrickHouseEnd_Text_26B3FA, MSGBOX_DEFAULT
 	closemessage
-	applymovement 1, Route110_TrickHouseEnd_Movement_27259E
+	applymovement 1, Common_Movement_FacePlayer
 	waitmovement 0
 	delay 30
 	msgbox Route110_TrickHouseEnd_Text_26B485, MSGBOX_DEFAULT
@@ -200,34 +200,34 @@ Route110_TrickHouseEnd_EventScript_26AFCF:: @ 826AFCF
 	return
 
 Route110_TrickHouseEnd_EventScript_26AFEF:: @ 826AFEF
-	call Route110_TrickHouseEnd_EventScript_27205E
+	call Common_EventScript_BagIsFull
 	msgbox Route110_TrickHouseEnd_Text_26B760, MSGBOX_DEFAULT
 	setvar VAR_TRICK_HOUSE_PRIZE_PICKUP, 1
 	return
 
 Route110_TrickHouseEnd_EventScript_26B002:: @ 826B002
-	call Route110_TrickHouseEnd_EventScript_272071
+	call Common_EventScript_NoRoomLeftForAnother
 	msgbox Route110_TrickHouseEnd_Text_26B615, MSGBOX_DEFAULT
 	setvar VAR_TRICK_HOUSE_PRIZE_PICKUP, 1
 	return
 
 Route110_TrickHouseEnd_EventScript_26B015:: @ 826B015
-	applymovement 1, Route110_TrickHouseEnd_Movement_2725AA
+	applymovement 1, Common_Movement_WalkInPlaceDown
 	waitmovement 0
 	return
 
 Route110_TrickHouseEnd_EventScript_26B020:: @ 826B020
-	applymovement 1, Route110_TrickHouseEnd_Movement_2725A6
+	applymovement 1, Common_Movement_WalkInPlaceUp
 	waitmovement 0
 	return
 
 Route110_TrickHouseEnd_EventScript_26B02B:: @ 826B02B
-	applymovement 1, Route110_TrickHouseEnd_Movement_2725A4
+	applymovement 1, Common_Movement_WalkInPlaceLeft
 	waitmovement 0
 	return
 
 Route110_TrickHouseEnd_EventScript_26B036:: @ 826B036
-	applymovement 1, Route110_TrickHouseEnd_Movement_2725A8
+	applymovement 1, Common_Movement_WalkInPlaceRight
 	waitmovement 0
 	return
 
@@ -235,13 +235,13 @@ Route110_TrickHouseEnd_EventScript_26B041:: @ 826B041
 	lockall
 	turnobject 1, 3
 	playse SE_PIN
-	applymovement 1, Route110_TrickHouseEnd_Movement_272598
+	applymovement 1, Common_Movement_ExclamationMark
 	waitmovement 0
 	delay 20
 	applymovement 1, Route110_TrickHouseEnd_Movement_26B08B
 	waitmovement 0
 	playse SE_W153
-	applymovement EVENT_OBJ_ID_PLAYER, Route110_TrickHouseEnd_Movement_2725AA
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceDown
 	waitmovement 0
 	msgbox Route110_TrickHouseEnd_Text_26B8BD, MSGBOX_DEFAULT
 	closemessage

@@ -300,7 +300,7 @@ BattleFrontier_BattleTowerLobby_EventScript_23EA2A:: @ 823EA2A
 	special LoadPlayerParty
 	closemessage
 	delay 2
-	call BattleFrontier_BattleTowerLobby_EventScript_27134F
+	call Common_EventScript_SaveGame
 	setvar VAR_TEMP_0, 255
 	compare VAR_RESULT, 0
 	goto_if_eq BattleFrontier_BattleTowerLobby_EventScript_23F0D0
@@ -380,7 +380,7 @@ BattleFrontier_BattleTowerLobby_EventScript_23EB93:: @ 823EB93
 	special LoadPlayerParty
 	closemessage
 	delay 2
-	call BattleFrontier_BattleTowerLobby_EventScript_27134F
+	call Common_EventScript_SaveGame
 	setvar VAR_TEMP_0, 255
 	compare VAR_RESULT, 0
 	goto_if_eq BattleFrontier_BattleTowerLobby_EventScript_23F0D0
@@ -461,7 +461,7 @@ BattleFrontier_BattleTowerLobby_EventScript_23ECFF:: @ 823ECFF
 	special LoadPlayerParty
 	closemessage
 	delay 2
-	call BattleFrontier_BattleTowerLobby_EventScript_27134F
+	call Common_EventScript_SaveGame
 	setvar VAR_TEMP_0, 255
 	compare VAR_RESULT, 0
 	goto_if_eq BattleFrontier_BattleTowerLobby_EventScript_23F0D0
@@ -544,7 +544,7 @@ BattleFrontier_BattleTowerLobby_EventScript_23EE68:: @ 823EE68
 	setvar VAR_0x8004, 6
 	setvar VAR_0x8005, 0
 	special sub_8161F74
-	call BattleFrontier_BattleTowerLobby_EventScript_27134F
+	call Common_EventScript_SaveGame
 	setvar VAR_TEMP_0, 255
 	compare VAR_RESULT, 0
 	goto_if_eq BattleFrontier_BattleTowerLobby_EventScript_23F0D0

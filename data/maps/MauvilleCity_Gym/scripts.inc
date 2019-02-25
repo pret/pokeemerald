@@ -88,7 +88,7 @@ MauvilleCity_Gym_EventScript_20DEEB:: @ 820DEEB
 MauvilleCity_Gym_EventScript_20DF2B:: @ 820DF2B
 	message MauvilleCity_Gym_Text_20E77F
 	waitmessage
-	call MauvilleCity_Gym_EventScript_27207E
+	call Common_EventScript_PlayGymBadgeFanfare
 	msgbox MauvilleCity_Gym_Text_20E7AA, MSGBOX_DEFAULT
 	setvar VAR_0x40D2, 3
 	clearflag FLAG_HIDE_VERDANTURF_TOWN_SCOTT
@@ -117,7 +117,7 @@ MauvilleCity_Gym_EventScript_20DF2B:: @ 820DF2B
 MauvilleCity_Gym_EventScript_20DF8D:: @ 820DF8D
 	giveitem_std ITEM_TM34
 	compare VAR_RESULT, 0
-	goto_if_eq MauvilleCity_Gym_EventScript_272054
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	msgbox MauvilleCity_Gym_Text_20E844, MSGBOX_DEFAULT
 	setflag FLAG_RECEIVED_TM34
 	release
@@ -126,7 +126,7 @@ MauvilleCity_Gym_EventScript_20DF8D:: @ 820DF8D
 MauvilleCity_Gym_EventScript_20DFB1:: @ 820DFB1
 	giveitem_std ITEM_TM34
 	compare VAR_RESULT, 0
-	goto_if_eq MauvilleCity_Gym_EventScript_27205E
+	goto_if_eq Common_EventScript_BagIsFull
 	msgbox MauvilleCity_Gym_Text_20E844, MSGBOX_DEFAULT
 	setflag FLAG_RECEIVED_TM34
 	return

@@ -10,7 +10,7 @@ MarineCave_End_MapScript1_23AFEA: @ 823AFEA
 MarineCave_End_EventScript_23AFF4:: @ 823AFF4
 	specialvar VAR_RESULT, GetBattleOutcome
 	compare VAR_RESULT, 7
-	goto_if_ne MarineCave_End_EventScript_27374E
+	goto_if_ne Common_EventScript_NopReturn
 	removeobject 1
 	return
 
@@ -25,7 +25,7 @@ MarineCave_End_EventScript_23B012:: @ 823B012
 
 MarineCave_End_EventScript_23B01B:: @ 823B01B
 	lockall
-	applymovement EVENT_OBJ_ID_PLAYER, MarineCave_End_Movement_2725B2
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_FaceUp
 	waitmovement 0
 	applymovement 1, MarineCave_End_Movement_23B09D
 	waitmovement 0

@@ -539,7 +539,7 @@
       "y": 45,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
-      "script": "RustboroCity_EventScript_271E6A"
+      "script": "Common_EventScript_ShowPokemartSign"
     },
     {
       "type": "sign",
@@ -547,7 +547,7 @@
       "y": 38,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
-      "script": "RustboroCity_EventScript_271E73"
+      "script": "Common_EventScript_ShowPokemonCenterSign"
     },
     {
       "type": "sign",
@@ -563,7 +563,7 @@
       "y": 45,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
-      "script": "RustboroCity_EventScript_271E6A"
+      "script": "Common_EventScript_ShowPokemartSign"
     },
     {
       "type": "sign",
@@ -571,7 +571,7 @@
       "y": 38,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
-      "script": "RustboroCity_EventScript_271E73"
+      "script": "Common_EventScript_ShowPokemonCenterSign"
     },
     {
       "type": "sign",

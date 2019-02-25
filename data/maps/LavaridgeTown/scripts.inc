@@ -7,8 +7,8 @@ LavaridgeTown_MapScript1_1EA4DE: @ 81EA4DE
 	setflag FLAG_VISITED_LAVARIDGE_TOWN
 	call_if_set FLAG_FLANNERY_GIVES_BADGE_INFO, LavaridgeTown_EventScript_1EA514
 	call_if_set FLAG_DEFEATED_EVIL_TEAM_MT_CHIMNEY, LavaridgeTown_EventScript_1EA53F
-	call LavaridgeTown_EventScript_271ED7
-	call LavaridgeTown_EventScript_271EFB
+	call Common_EventScript_SetupRivalGender
+	call Common_EventScript_SetupRivalOnBikeGender
 	compare VAR_LAVARIDGE_RIVAL_STATE, 1
 	call_if_eq LavaridgeTown_EventScript_1EA518
 	compare VAR_LAVARIDGE_RIVAL_STATE, 1
@@ -110,12 +110,12 @@ LavaridgeTown_EventScript_1EA635:: @ 81EA635
 	return
 
 LavaridgeTown_EventScript_1EA63A:: @ 81EA63A
-	applymovement 8, LavaridgeTown_Movement_2725A6
+	applymovement 8, Common_Movement_WalkInPlaceUp
 	waitmovement 0
 	playse SE_PIN
-	applymovement 8, LavaridgeTown_Movement_272598
+	applymovement 8, Common_Movement_ExclamationMark
 	waitmovement 0
-	applymovement 8, LavaridgeTown_Movement_27259A
+	applymovement 8, Common_Movement_Delay48
 	waitmovement 0
 	return
 
@@ -127,14 +127,14 @@ LavaridgeTown_EventScript_1EA65C:: @ 81EA65C
 	waitmovement 0
 	closedoor 12, 15
 	waitdooranim
-	applymovement 8, LavaridgeTown_Movement_2725A4
+	applymovement 8, Common_Movement_WalkInPlaceLeft
 	waitmovement 0
 	playse SE_PIN
-	applymovement 8, LavaridgeTown_Movement_272598
+	applymovement 8, Common_Movement_ExclamationMark
 	waitmovement 0
-	applymovement 8, LavaridgeTown_Movement_27259A
+	applymovement 8, Common_Movement_Delay48
 	waitmovement 0
-	applymovement EVENT_OBJ_ID_PLAYER, LavaridgeTown_Movement_2725A8
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceRight
 	waitmovement 0
 	return
 

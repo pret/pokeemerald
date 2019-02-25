@@ -15,7 +15,7 @@ NewMauville_Inside_MapScript1_2373E7: @ 82373E7
 NewMauville_Inside_EventScript_237407:: @ 8237407
 	specialvar VAR_RESULT, GetBattleOutcome
 	compare VAR_RESULT, 7
-	goto_if_ne NewMauville_Inside_EventScript_27374E
+	goto_if_ne Common_EventScript_NopReturn
 	removeobject VAR_LAST_TALKED
 	return
 

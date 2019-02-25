@@ -9,7 +9,7 @@ NavelRock_Harbor_EventScript_2690BD:: @ 82690BD
 	goto_if_eq NavelRock_Harbor_EventScript_269102
 	msgbox NavelRock_Harbor_Text_2A6A5D, MSGBOX_DEFAULT
 	closemessage
-	applymovement VAR_LAST_TALKED, NavelRock_Harbor_Movement_2725AA
+	applymovement VAR_LAST_TALKED, Common_Movement_WalkInPlaceDown
 	waitmovement 0
 	delay 30
 	hideobjectat 1, MAP_NAVEL_ROCK_HARBOR

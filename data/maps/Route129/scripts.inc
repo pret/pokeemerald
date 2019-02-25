@@ -23,7 +23,7 @@ Route129_MapScript1_1F72AB: @ 81F72AB
 	end
 
 Route129_EventScript_1F72D8:: @ 81F72D8
-	call_if_set FLAG_SYS_WEATHER_CTRL, Route129_EventScript_27207A
+	call_if_set FLAG_SYS_WEATHER_CTRL, Common_EventScript_SetWeather15
 	return
 
 Route129_MapScript2_1F72E2: @ 81F72E2

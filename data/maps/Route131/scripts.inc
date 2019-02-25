@@ -13,7 +13,7 @@ Route131_EventScript_1F741B:: @ 81F741B
 	return
 
 Route131_EventScript_1F741F:: @ 81F741F
-	call_if_set FLAG_SYS_WEATHER_CTRL, Route131_EventScript_27207A
+	call_if_set FLAG_SYS_WEATHER_CTRL, Common_EventScript_SetWeather15
 	return
 
 Route131_EventScript_1F7429:: @ 81F7429

@@ -194,7 +194,7 @@ TrainerHill_Entrance_EventScript_26832E:: @ 826832E
 	setvar VAR_0x8004, 14
 	special CallTrainerHillFunction
 	setvar VAR_TEMP_5, 1
-	call TrainerHill_Entrance_EventScript_27134F
+	call Common_EventScript_SaveGame
 	compare VAR_RESULT, 0
 	goto_if_eq TrainerHill_Entrance_EventScript_26835C
 	setvar VAR_0x8004, 14

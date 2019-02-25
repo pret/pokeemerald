@@ -36,7 +36,7 @@ BattleFrontier_Mart_EventScript_267B02:: @ 8267B02
 
 BattleFrontier_Mart_EventScript_267B0B:: @ 8267B0B
 	lock
-	applymovement 2, BattleFrontier_Mart_Movement_2725B0
+	applymovement 2, Common_Movement_FaceDown
 	waitmovement 0
 	msgbox BattleFrontier_Mart_Text_267B8F, MSGBOX_DEFAULT
 	release

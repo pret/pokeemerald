@@ -4,7 +4,7 @@ Route103_MapScripts:: @ 81EC38E
 	.byte 0
 
 Route103_MapScript1_1EC399: @ 81EC399
-	call Route103_EventScript_271ED7
+	call Common_EventScript_SetupRivalGender
 	call Route103_EventScript_2720AD
 	end
 
@@ -30,11 +30,11 @@ Route103_EventScript_1EC3DA:: @ 81EC3DA
 	msgbox Route103_Text_1EC7A6, MSGBOX_DEFAULT
 	closemessage
 	playbgm MUS_GIRL_SUP, 1
-	applymovement 2, Route103_Movement_27259E
+	applymovement 2, Common_Movement_FacePlayer
 	waitmovement 0
-	applymovement 2, Route103_Movement_272598
+	applymovement 2, Common_Movement_ExclamationMark
 	waitmovement 0
-	applymovement 2, Route103_Movement_27259A
+	applymovement 2, Common_Movement_Delay48
 	waitmovement 0
 	msgbox Route103_Text_1EC7DE, MSGBOX_DEFAULT
 	switch VAR_STARTER_MON
@@ -47,11 +47,11 @@ Route103_EventScript_1EC434:: @ 81EC434
 	msgbox Route103_Text_1EC989, MSGBOX_DEFAULT
 	closemessage
 	playbgm MUS_BOY_SUP, 1
-	applymovement 2, Route103_Movement_27259E
+	applymovement 2, Common_Movement_FacePlayer
 	waitmovement 0
-	applymovement 2, Route103_Movement_272598
+	applymovement 2, Common_Movement_ExclamationMark
 	waitmovement 0
-	applymovement 2, Route103_Movement_27259A
+	applymovement 2, Common_Movement_Delay48
 	waitmovement 0
 	msgbox Route103_Text_1EC9CE, MSGBOX_DEFAULT
 	switch VAR_STARTER_MON

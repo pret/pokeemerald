@@ -15,7 +15,7 @@ NavelRock_Top_EventScript_269131:: @ 8269131
 
 NavelRock_Top_EventScript_26913A:: @ 826913A
 	setvar VAR_TEMP_1, 1
-	goto_if_set FLAG_DEFEATED_HO_OH, NavelRock_Top_EventScript_27374E
+	goto_if_set FLAG_DEFEATED_HO_OH, Common_EventScript_NopReturn
 	setvar VAR_TEMP_1, 0
 	clearflag FLAG_HIDE_HO_OH
 	return
@@ -27,7 +27,7 @@ NavelRock_Top_MapScript1_269151: @ 8269151
 NavelRock_Top_EventScript_26915B:: @ 826915B
 	specialvar VAR_RESULT, GetBattleOutcome
 	compare VAR_RESULT, 7
-	goto_if_ne NavelRock_Top_EventScript_27374E
+	goto_if_ne Common_EventScript_NopReturn
 	removeobject 1
 	return
 

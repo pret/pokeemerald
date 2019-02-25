@@ -5,7 +5,7 @@ LittlerootTown_ProfessorBirchsLab_MapScripts:: @ 81F9C91
 	.byte 0
 
 LittlerootTown_ProfessorBirchsLab_MapScript1_1F9CA1: @ 81F9CA1
-	call LittlerootTown_ProfessorBirchsLab_EventScript_271ED7
+	call Common_EventScript_SetupRivalGender
 	call LittlerootTown_ProfessorBirchsLab_EventScript_2720AD
 	compare VAR_0x40D3, 6
 	goto_if_ge LittlerootTown_ProfessorBirchsLab_EventScript_1F9CF7
@@ -107,7 +107,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_1F9DDB:: @ 81F9DDB
 
 LittlerootTown_ProfessorBirchsLab_EventScript_1F9E07:: @ 81F9E07
 	setvar VAR_0x8004, 0
-	call LittlerootTown_ProfessorBirchsLab_EventScript_2723DD
+	call Common_EventScript_NameReceivedPokemon
 	goto LittlerootTown_ProfessorBirchsLab_EventScript_1F9E17
 	end
 
@@ -167,8 +167,8 @@ LittlerootTown_ProfessorBirchsLab_EventScript_1F9E80:: @ 81F9E80
 	delay 10
 	playse SE_TK_KASYA
 	delay 20
-	applymovement 3, LittlerootTown_ProfessorBirchsLab_Movement_2725A8
-	applymovement EVENT_OBJ_ID_PLAYER, LittlerootTown_ProfessorBirchsLab_Movement_2725A4
+	applymovement 3, Common_Movement_WalkInPlaceRight
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceLeft
 	waitmovement 0
 	checkplayergender
 	compare VAR_RESULT, MALE
@@ -180,8 +180,8 @@ LittlerootTown_ProfessorBirchsLab_EventScript_1F9E80:: @ 81F9E80
 	delay 20
 	applymovement 2, LittlerootTown_ProfessorBirchsLab_Movement_1F9F58
 	waitmovement 0
-	applymovement 3, LittlerootTown_ProfessorBirchsLab_Movement_2725A6
-	applymovement EVENT_OBJ_ID_PLAYER, LittlerootTown_ProfessorBirchsLab_Movement_2725A6
+	applymovement 3, Common_Movement_WalkInPlaceUp
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceUp
 	waitmovement 0
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_1FB419, MSGBOX_DEFAULT
 	playfanfare MUS_FANFA4
@@ -286,7 +286,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_1F9FBB:: @ 81F9FBB
 	release
 	compare VAR_0x40D3, 6
 	goto_if_ge LittlerootTown_ProfessorBirchsLab_EventScript_1FA057
-	applymovement 2, LittlerootTown_ProfessorBirchsLab_Movement_2725A8
+	applymovement 2, Common_Movement_WalkInPlaceRight
 	waitmovement 0
 	drawmonpic SPECIES_CYNDAQUIL, 10, 3
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_1FB7F6, MSGBOX_YESNO
@@ -299,7 +299,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_1F9FEF:: @ 81F9FEF
 	release
 	compare VAR_0x40D3, 6
 	goto_if_ge LittlerootTown_ProfessorBirchsLab_EventScript_1FA057
-	applymovement 2, LittlerootTown_ProfessorBirchsLab_Movement_2725A8
+	applymovement 2, Common_Movement_WalkInPlaceRight
 	waitmovement 0
 	drawmonpic SPECIES_TOTODILE, 10, 3
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_1FB869, MSGBOX_YESNO
@@ -312,7 +312,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_1FA023:: @ 81FA023
 	release
 	compare VAR_0x40D3, 6
 	goto_if_ge LittlerootTown_ProfessorBirchsLab_EventScript_1FA057
-	applymovement 2, LittlerootTown_ProfessorBirchsLab_Movement_2725A8
+	applymovement 2, Common_Movement_WalkInPlaceRight
 	waitmovement 0
 	drawmonpic SPECIES_CHIKORITA, 10, 3
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_1FB8E0, MSGBOX_YESNO
@@ -351,7 +351,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_1FA0A1:: @ 81FA0A1
 	compare VAR_RESULT, 0
 	goto_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_1FA0FD
 	call LittlerootTown_ProfessorBirchsLab_EventScript_27378B
-	call LittlerootTown_ProfessorBirchsLab_EventScript_2723DD
+	call Common_EventScript_NameReceivedPokemon
 	goto LittlerootTown_ProfessorBirchsLab_EventScript_1FA0FD
 	end
 
@@ -396,7 +396,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_1FA142:: @ 81FA142
 	compare VAR_RESULT, 0
 	goto_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_1FA19E
 	call LittlerootTown_ProfessorBirchsLab_EventScript_27378B
-	call LittlerootTown_ProfessorBirchsLab_EventScript_2723DD
+	call Common_EventScript_NameReceivedPokemon
 	goto LittlerootTown_ProfessorBirchsLab_EventScript_1FA19E
 	end
 
@@ -441,7 +441,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_1FA1E3:: @ 81FA1E3
 	compare VAR_RESULT, 0
 	goto_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_1FA23F
 	call LittlerootTown_ProfessorBirchsLab_EventScript_27378B
-	call LittlerootTown_ProfessorBirchsLab_EventScript_2723DD
+	call Common_EventScript_NameReceivedPokemon
 	goto LittlerootTown_ProfessorBirchsLab_EventScript_1FA23F
 	end
 
@@ -530,7 +530,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_1FA2F8:: @ 81FA2F8
 	closemessage
 	applymovement 3, LittlerootTown_ProfessorBirchsLab_Movement_1FA3E0
 	waitmovement 0
-	applymovement EVENT_OBJ_ID_PLAYER, LittlerootTown_ProfessorBirchsLab_Movement_2725A8
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceRight
 	waitmovement 0
 	checkplayergender
 	compare VAR_RESULT, MALE

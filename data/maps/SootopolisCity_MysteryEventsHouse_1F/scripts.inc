@@ -37,7 +37,7 @@ SootopolisCity_MysteryEventsHouse_1F_EventScript_2279B7:: @ 82279B7
 	applymovement 1, SootopolisCity_MysteryEventsHouse_1F_Movement_227A21
 	waitmovement 0
 	moveobjectoffscreen 1
-	applymovement EVENT_OBJ_ID_PLAYER, SootopolisCity_MysteryEventsHouse_1F_Movement_2725A6
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceUp
 	waitmovement 0
 	compare VAR_SOOTOPOLIS_MYSTERY_EVENTS_STATE, 1
 	call_if_eq SootopolisCity_MysteryEventsHouse_1F_EventScript_227A04
@@ -102,7 +102,7 @@ SootopolisCity_MysteryEventsHouse_1F_EventScript_227A58:: @ 8227A58
 	compare VAR_RESULT, 0
 	goto_if_eq SootopolisCity_MysteryEventsHouse_1F_EventScript_227AE2
 	special LoadPlayerParty
-	call SootopolisCity_MysteryEventsHouse_1F_EventScript_27134F
+	call Common_EventScript_SaveGame
 	compare VAR_RESULT, 0
 	goto_if_eq SootopolisCity_MysteryEventsHouse_1F_EventScript_227AE2
 	special SavePlayerParty

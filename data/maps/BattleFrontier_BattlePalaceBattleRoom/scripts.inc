@@ -280,8 +280,8 @@ BattleFrontier_BattlePalaceBattleRoom_EventScript_24FCC7:: @ 824FCC7
 	special CallFrontierUtilFunc
 	applymovement 2, BattleFrontier_BattlePalaceBattleRoom_Movement_2725B6
 	waitmovement 0
-	applymovement 1, BattleFrontier_BattlePalaceBattleRoom_Movement_2725A8
-	applymovement 3, BattleFrontier_BattlePalaceBattleRoom_Movement_2725A8
+	applymovement 1, Common_Movement_WalkInPlaceRight
+	applymovement 3, Common_Movement_WalkInPlaceRight
 	waitmovement 0
 	msgbox BattleFrontier_BattlePalaceBattleRoom_Text_250412, MSGBOX_DEFAULT
 	goto BattleFrontier_BattlePalaceBattleRoom_EventScript_24FB28
@@ -323,8 +323,8 @@ BattleFrontier_BattlePalaceBattleRoom_EventScript_24FD84:: @ 824FD84
 	special CallFrontierUtilFunc
 	applymovement 2, BattleFrontier_BattlePalaceBattleRoom_Movement_2725B6
 	waitmovement 0
-	applymovement 1, BattleFrontier_BattlePalaceBattleRoom_Movement_2725A8
-	applymovement 3, BattleFrontier_BattlePalaceBattleRoom_Movement_2725A8
+	applymovement 1, Common_Movement_WalkInPlaceRight
+	applymovement 3, Common_Movement_WalkInPlaceRight
 	waitmovement 0
 	msgbox BattleFrontier_BattlePalaceBattleRoom_Text_2506C4, MSGBOX_DEFAULT
 	goto BattleFrontier_BattlePalaceBattleRoom_EventScript_24FB28

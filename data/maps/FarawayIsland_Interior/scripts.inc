@@ -33,7 +33,7 @@ FarawayIsland_Interior_MapScript1_267D54: @ 8267D54
 FarawayIsland_Interior_EventScript_267D5E:: @ 8267D5E
 	specialvar VAR_RESULT, GetBattleOutcome
 	compare VAR_RESULT, 7
-	goto_if_ne FarawayIsland_Interior_EventScript_27374E
+	goto_if_ne Common_EventScript_NopReturn
 	removeobject VAR_LAST_TALKED
 	return
 
@@ -44,7 +44,7 @@ FarawayIsland_Interior_MapScript1_267D72: @ 8267D72
 	end
 
 FarawayIsland_Interior_EventScript_267D86:: @ 8267D86
-	goto_if_set FLAG_DEFEATED_MEW, FarawayIsland_Interior_EventScript_27374E
+	goto_if_set FLAG_DEFEATED_MEW, Common_EventScript_NopReturn
 	clearflag FLAG_HIDE_MEW
 	setvar VAR_TEMP_1, 0
 	return
@@ -56,9 +56,9 @@ FarawayIsland_Interior_MapScript2_267D98: @ 8267D98
 FarawayIsland_Interior_EventScript_267DA2:: @ 8267DA2
 	lockall
 	playse SE_PIN
-	applymovement 1, FarawayIsland_Interior_Movement_272598
+	applymovement 1, Common_Movement_ExclamationMark
 	waitmovement 0
-	applymovement 1, FarawayIsland_Interior_Movement_27259A
+	applymovement 1, Common_Movement_Delay48
 	waitmovement 0
 	applymovement 1, FarawayIsland_Interior_Movement_267DCE
 	waitmovement 0

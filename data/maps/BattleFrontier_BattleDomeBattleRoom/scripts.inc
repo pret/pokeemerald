@@ -966,14 +966,14 @@ BattleFrontier_BattleDomeBattleRoom_EventScript_24C919:: @ 824C919
 	random 2
 	copyvar VAR_TEMP_D, VAR_RESULT
 	compare VAR_TEMP_D, 0
-	goto_if_eq BattleFrontier_BattleDomeBattleRoom_EventScript_27374E
+	goto_if_eq Common_EventScript_NopReturn
 	setobjectxyperm 6, 2, 0
 	setobjectmovementtype 6, MOVEMENT_TYPE_FACE_RIGHT
 	return
 
 BattleFrontier_BattleDomeBattleRoom_EventScript_24C938:: @ 824C938
 	compare VAR_TEMP_D, 0
-	goto_if_eq BattleFrontier_BattleDomeBattleRoom_EventScript_27374E
+	goto_if_eq Common_EventScript_NopReturn
 	applymovement 6, BattleFrontier_BattleDomeBattleRoom_Movement_24C95E
 	return
 

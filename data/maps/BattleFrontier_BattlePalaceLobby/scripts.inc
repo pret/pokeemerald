@@ -223,7 +223,7 @@ BattleFrontier_BattlePalaceLobby_EventScript_24DA87:: @ 824DA87
 	special LoadPlayerParty
 	closemessage
 	delay 2
-	call BattleFrontier_BattlePalaceLobby_EventScript_27134F
+	call Common_EventScript_SaveGame
 	setvar VAR_TEMP_0, 255
 	compare VAR_RESULT, 0
 	goto_if_eq BattleFrontier_BattlePalaceLobby_EventScript_24DB7A

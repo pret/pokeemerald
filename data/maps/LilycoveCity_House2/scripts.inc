@@ -8,7 +8,7 @@ LilycoveCity_House2_EventScript_21ED75:: @ 821ED75
 	msgbox LilycoveCity_House2_Text_21EDB6, MSGBOX_DEFAULT
 	giveitem_std ITEM_TM44
 	compare VAR_RESULT, 0
-	goto_if_eq LilycoveCity_House2_EventScript_272054
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_TM44
 	msgbox LilycoveCity_House2_Text_21EDF9, MSGBOX_DEFAULT
 	release

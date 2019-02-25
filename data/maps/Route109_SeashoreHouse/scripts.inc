@@ -75,7 +75,7 @@ Route109_SeashoreHouse_EventScript_2694C8:: @ 82694C8
 	end
 
 Route109_SeashoreHouse_EventScript_2694D5:: @ 82694D5
-	msgbox gUnknown_08272AD0, MSGBOX_DEFAULT
+	msgbox gText_TooBadBagIsFull, MSGBOX_DEFAULT
 	hidemoneybox
 	nop
 	nop

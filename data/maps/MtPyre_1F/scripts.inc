@@ -8,7 +8,7 @@ MtPyre_1F_EventScript_230F3F:: @ 8230F3F
 	msgbox MtPyre_1F_Text_230F8A, MSGBOX_DEFAULT
 	giveitem_std ITEM_CLEANSE_TAG
 	compare VAR_RESULT, 0
-	goto_if_eq MtPyre_1F_EventScript_272054
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_CLEANSE_TAG
 	release
 	end
