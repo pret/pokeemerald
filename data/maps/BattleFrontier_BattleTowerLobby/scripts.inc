@@ -231,7 +231,7 @@ BattleFrontier_BattleTowerLobby_EventScript_23E8EE:: @ 823E8EE
 	end
 
 BattleFrontier_BattleTowerLobby_EventScript_23E930:: @ 823E930
-	setvar VAR_0x40BC, 1
+	setvar VAR_BRAVO_TRAINER_BATTLE_TOWER_ON, 1
 	return
 
 BattleFrontier_BattleTowerLobby_EventScript_23E936:: @ 823E936
@@ -305,7 +305,7 @@ BattleFrontier_BattleTowerLobby_EventScript_23EA2A:: @ 823EA2A
 	compare VAR_RESULT, 0
 	goto_if_eq BattleFrontier_BattleTowerLobby_EventScript_23F0D0
 	incrementgamestat 30
-	setvar VAR_0x40BC, 1
+	setvar VAR_BRAVO_TRAINER_BATTLE_TOWER_ON, 1
 	goto BattleFrontier_BattleTowerLobby_EventScript_23F0F3
 	end
 
@@ -385,7 +385,7 @@ BattleFrontier_BattleTowerLobby_EventScript_23EB93:: @ 823EB93
 	compare VAR_RESULT, 0
 	goto_if_eq BattleFrontier_BattleTowerLobby_EventScript_23F0D0
 	incrementgamestat 30
-	setvar VAR_0x40BC, 0
+	setvar VAR_BRAVO_TRAINER_BATTLE_TOWER_ON, 0
 	goto BattleFrontier_BattleTowerLobby_EventScript_23F0F3
 	end
 
@@ -466,7 +466,7 @@ BattleFrontier_BattleTowerLobby_EventScript_23ECFF:: @ 823ECFF
 	compare VAR_RESULT, 0
 	goto_if_eq BattleFrontier_BattleTowerLobby_EventScript_23F0D0
 	incrementgamestat 30
-	setvar VAR_0x40BC, 0
+	setvar VAR_BRAVO_TRAINER_BATTLE_TOWER_ON, 0
 	goto BattleFrontier_BattleTowerLobby_EventScript_23F0F3
 	end
 
@@ -995,7 +995,7 @@ BattleFrontier_BattleTowerLobby_EventScript_23F3A6:: @ 823F3A6
 
 BattleFrontier_BattleTowerLobby_EventScript_23F3AF:: @ 823F3AF
 	incrementgamestat 30
-	setvar VAR_0x40BC, 0
+	setvar VAR_BRAVO_TRAINER_BATTLE_TOWER_ON, 0
 	message BattleFrontier_BattleTowerLobby_Text_24144D
 	waitmessage
 	setvar VAR_0x8004, 6
@@ -1058,7 +1058,7 @@ BattleFrontier_BattleTowerLobby_EventScript_23F463:: @ 823F463
 
 BattleFrontier_BattleTowerLobby_EventScript_23F496:: @ 823F496
 	incrementgamestat 30
-	setvar VAR_0x40BC, 0
+	setvar VAR_BRAVO_TRAINER_BATTLE_TOWER_ON, 0
 	message BattleFrontier_BattleTowerLobby_Text_24144D
 	waitmessage
 	setvar VAR_0x8004, 6

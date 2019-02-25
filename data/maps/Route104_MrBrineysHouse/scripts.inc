@@ -4,7 +4,7 @@ Route104_MrBrineysHouse_MapScripts:: @ 8229D2E
 
 Route104_MrBrineysHouse_MapScript1_229D34: @ 8229D34
 	setflag FLAG_LANDMARK_MR_BRINEY_HOUSE
-	compare VAR_0x4090, 1
+	compare VAR_BRINEY_HOUSE_STATE, 1
 	call_if_eq Route104_MrBrineysHouse_EventScript_229D50
 	call_if_set FLAG_RECEIVED_POKENAV, Route104_MrBrineysHouse_EventScript_229D4C
 	end
@@ -75,11 +75,11 @@ Route104_MrBrineysHouse_EventScript_229E1D:: @ 8229E1D
 Route104_MrBrineysHouse_EventScript_229E27:: @ 8229E27
 	msgbox Route104_MrBrineysHouse_Text_229FE9, MSGBOX_DEFAULT
 	call Route104_MrBrineysHouse_EventScript_271E95
-	setvar VAR_0x408E, 1
+	setvar VAR_BOARD_BRINEY_BOAT_ROUTE104_STATE, 1
 	clearflag FLAG_HIDE_ROUTE_104_MR_BRINEY
 	setflag FLAG_HIDE_BRINEYS_HOUSE_MR_BRINEY
 	setflag FLAG_HIDE_BRINEYS_HOUSE_PEEKO
-	setvar VAR_0x405A, 8
+	setvar VAR_RUSTBORO_STATE, 8
 	setvar VAR_0x4063, 2
 	setflag FLAG_HIDE_RUSBORO_CITY_RIVAL
 	setflag FLAG_HIDE_ROUTE_104_RIVAL

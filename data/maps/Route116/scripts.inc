@@ -145,7 +145,7 @@ Route116_EventScript_1F2D84:: @ 81F2D84
 	lock
 	faceplayer
 	msgbox Route116_Text_1F309D, MSGBOX_DEFAULT
-	setvar VAR_0x406F, 2
+	setvar VAR_ROUTE116_STATE, 2
 	release
 	end
 
@@ -155,7 +155,7 @@ Route116_EventScript_1F2D95:: @ 81F2D95
 	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceLeft
 	waitmovement 0
 	msgbox Route116_Text_1F309D, MSGBOX_DEFAULT
-	setvar VAR_0x406F, 2
+	setvar VAR_ROUTE116_STATE, 2
 	releaseall
 	end
 

@@ -15,7 +15,7 @@ BattleFrontier_OutsideEast_EventScript_242C19:: @ 8242C19
 	return
 
 BattleFrontier_OutsideEast_MapScript1_242C2D: @ 8242C2D
-	setvar VAR_0x40BC, 0
+	setvar VAR_BRAVO_TRAINER_BATTLE_TOWER_ON, 0
 	setflag FLAG_HIDE_BATTLE_TOWER_REPORTER
 	call_if_unset FLAG_DEFEATED_SUDOWOODO, BattleFrontier_OutsideEast_EventScript_242C3F
 	end

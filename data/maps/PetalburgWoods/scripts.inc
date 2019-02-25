@@ -109,7 +109,7 @@ PetalburgWoods_EventScript_22E18B:: @ 822E18B
 
 PetalburgWoods_EventScript_22E1A7:: @ 822E1A7
 	removeobject 4
-	setvar VAR_0x4098, 1
+	setvar VAR_PETALBURG_WOODS_STATE, 1
 	releaseall
 	end
 

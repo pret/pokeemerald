@@ -156,7 +156,7 @@ Route119_EventScript_1F460F:: @ 81F460F
 	compare VAR_TEMP_1, 2
 	call_if_eq Route119_EventScript_1F46EE
 	removeobject 25
-	setvar VAR_0x4072, 1
+	setvar VAR_ROUTE119_STATE, 1
 	savebgm MUS_DUMMY
 	fadedefaultbgm
 	delay 60

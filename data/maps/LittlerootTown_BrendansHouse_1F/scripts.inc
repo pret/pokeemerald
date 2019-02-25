@@ -5,7 +5,7 @@ LittlerootTown_BrendansHouse_1F_MapScripts:: @ 81F7755
 	.byte 0
 
 LittlerootTown_BrendansHouse_1F_MapScript1_1F7765: @ 81F7765
-	compare VAR_0x4092, 6
+	compare VAR_LITTLEROOT_INTRO_STATE, 6
 	call_if_lt LittlerootTown_BrendansHouse_1F_EventScript_1F777A
 	call_if_set FLAG_RECEIVED_RUNNING_SHOES, LittlerootTown_BrendansHouse_1F_EventScript_1F778D
 	end
@@ -26,11 +26,11 @@ LittlerootTown_BrendansHouse_1F_EventScript_1F779A:: @ 81F779A
 	return
 
 LittlerootTown_BrendansHouse_1F_MapScript1_1F77A4: @ 81F77A4
-	compare VAR_0x4092, 3
+	compare VAR_LITTLEROOT_INTRO_STATE, 3
 	call_if_eq LittlerootTown_BrendansHouse_1F_EventScript_1F77DE
-	compare VAR_0x4092, 5
+	compare VAR_LITTLEROOT_INTRO_STATE, 5
 	call_if_eq LittlerootTown_BrendansHouse_1F_EventScript_1F77C6
-	compare VAR_0x4092, 6
+	compare VAR_LITTLEROOT_INTRO_STATE, 6
 	call_if_eq LittlerootTown_BrendansHouse_1F_EventScript_1F77D2
 	end
 
@@ -50,11 +50,11 @@ LittlerootTown_BrendansHouse_1F_EventScript_1F77DE:: @ 81F77DE
 	return
 
 LittlerootTown_BrendansHouse_1F_MapScript2_1F77EA: @ 81F77EA
-	map_script_2 VAR_0x4092, 3, LittlerootTown_BrendansHouse_1F_EventScript_1F783C
-	map_script_2 VAR_0x4092, 5, LittlerootTown_BrendansHouse_1F_EventScript_1F7814
-	map_script_2 VAR_0x4092, 6, LittlerootTown_BrendansHouse_1F_EventScript_1F784D
-	map_script_2 VAR_0x4082, 1, LittlerootTown_BrendansHouse_1F_EventScript_1F785E
-	map_script_2 VAR_0x4082, 3, LittlerootTown_BrendansHouse_1F_EventScript_292AF2
+	map_script_2 VAR_LITTLEROOT_INTRO_STATE, 3, LittlerootTown_BrendansHouse_1F_EventScript_1F783C
+	map_script_2 VAR_LITTLEROOT_INTRO_STATE, 5, LittlerootTown_BrendansHouse_1F_EventScript_1F7814
+	map_script_2 VAR_LITTLEROOT_INTRO_STATE, 6, LittlerootTown_BrendansHouse_1F_EventScript_1F784D
+	map_script_2 VAR_LITTLEROOT_HOUSES_STATE, 1, LittlerootTown_BrendansHouse_1F_EventScript_1F785E
+	map_script_2 VAR_LITTLEROOT_HOUSES_STATE, 3, LittlerootTown_BrendansHouse_1F_EventScript_292AF2
 	.2byte 0
 
 LittlerootTown_BrendansHouse_1F_EventScript_1F7814:: @ 81F7814
@@ -100,7 +100,7 @@ LittlerootTown_BrendansHouse_1F_EventScript_1F785E:: @ 81F785E
 	special GetRivalSonDaughterString
 	msgbox LittlerootTown_BrendansHouse_1F_Text_1F8BC5, MSGBOX_DEFAULT
 	setflag FLAG_MET_RIVAL_MOM
-	setvar VAR_0x4082, 2
+	setvar VAR_LITTLEROOT_HOUSES_STATE, 2
 	releaseall
 	end
 
@@ -173,7 +173,7 @@ LittlerootTown_BrendansHouse_1F_EventScript_1F78E2:: @ 81F78E2
 	setflag FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F_POKE_BALL
 	clearflag FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_RIVAL_BEDROOM
 	delay 30
-	setvar VAR_0x408D, 3
+	setvar VAR_LITTLEROOT_RIVAL_STATE, 3
 	setvar VAR_0x4050, 1
 	savebgm MUS_DUMMY
 	fadedefaultbgm

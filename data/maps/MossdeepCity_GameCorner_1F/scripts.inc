@@ -5,11 +5,11 @@ MossdeepCity_GameCorner_1F_MapScripts:: @ 8224B27
 	.byte 0
 
 MossdeepCity_GameCorner_1F_MapScript2_224B37: @ 8224B37
-	map_script_2 VAR_0x4087, 8, MossdeepCity_GameCorner_1F_EventScript_276BAE
+	map_script_2 VAR_CABLE_CLUB_STATE, 8, MossdeepCity_GameCorner_1F_EventScript_276BAE
 	.2byte 0
 
 MossdeepCity_GameCorner_1F_MapScript2_224B41: @ 8224B41
-	map_script_2 VAR_0x4087, 8, MossdeepCity_GameCorner_1F_EventScript_276C9D
+	map_script_2 VAR_CABLE_CLUB_STATE, 8, MossdeepCity_GameCorner_1F_EventScript_276C9D
 	.2byte 0
 
 MossdeepCity_GameCorner_1F_EventScript_224B4B:: @ 8224B4B

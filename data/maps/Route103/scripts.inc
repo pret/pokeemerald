@@ -140,10 +140,10 @@ Route103_EventScript_1EC585:: @ 81EC585
 
 Route103_EventScript_1EC5A2:: @ 81EC5A2
 	removeobject 2
-	setvar VAR_0x4084, 4
+	setvar VAR_BIRCH_LAB_STATE, 4
 	clearflag FLAG_HIDE_LITTLEROOT_TOWN_BIRCHS_LAB_RIVAL
 	setflag FLAG_DEFEATED_RIVAL_ROUTE103
-	setvar VAR_0x40C7, 1
+	setvar VAR_OLDALE_STATE, 1
 	clearflag FLAG_HIDE_OLDALE_TOWN_RIVAL
 	savebgm MUS_DUMMY
 	fadedefaultbgm

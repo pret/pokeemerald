@@ -21,7 +21,7 @@ JaggedPass_EventScript_230685:: @ 8230685
 	return
 
 JaggedPass_MapScript1_23068B: @ 823068B
-	compare VAR_0x40BD, 1
+	compare VAR_JAGGED_PASS_ASH_WEATHER, 1
 	call_if_eq JaggedPass_EventScript_230697
 	end
 

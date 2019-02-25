@@ -40,7 +40,7 @@ NewMauville_Inside_EventScript_237449:: @ 8237449
 	return
 
 NewMauville_Inside_MapScript1_23744D: @ 823744D
-	compare VAR_0x40BA, 2
+	compare VAR_NEW_MAUVILLE_STATE, 2
 	call_if_eq NewMauville_Inside_EventScript_23773A
 	end
 
@@ -148,7 +148,7 @@ NewMauville_Inside_EventScript_237725:: @ 8237725
 	lockall
 	msgbox NewMauville_Inside_Text_237932, MSGBOX_DEFAULT
 	call NewMauville_Inside_EventScript_23773A
-	setvar VAR_0x40BA, 2
+	setvar VAR_NEW_MAUVILLE_STATE, 2
 	releaseall
 	end
 
@@ -167,7 +167,7 @@ NewMauville_Inside_EventScript_23773A:: @ 823773A
 
 NewMauville_Inside_EventScript_23778F:: @ 823778F
 	lockall
-	compare VAR_0x40BA, 2
+	compare VAR_NEW_MAUVILLE_STATE, 2
 	goto_if_eq NewMauville_Inside_EventScript_2377A5
 	msgbox NewMauville_Inside_Text_237896, MSGBOX_DEFAULT
 	releaseall

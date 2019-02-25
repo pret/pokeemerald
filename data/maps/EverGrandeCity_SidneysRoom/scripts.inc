@@ -12,7 +12,7 @@ EverGrandeCity_SidneysRoom_MapScript1_227F16: @ 8227F16
 
 EverGrandeCity_SidneysRoom_MapScript1_227F1D: @ 8227F1D
 	call_if_set FLAG_DEFEATED_ELITE_4_SYDNEY, EverGrandeCity_SidneysRoom_EventScript_227F32
-	compare VAR_0x409C, 1
+	compare VAR_ELITE_4_STATE, 1
 	call_if_eq EverGrandeCity_SidneysRoom_EventScript_227F38
 	end
 
@@ -34,13 +34,13 @@ EverGrandeCity_SidneysRoom_EventScript_227F48:: @ 8227F48
 	end
 
 EverGrandeCity_SidneysRoom_MapScript2_227F4D: @ 8227F4D
-	map_script_2 VAR_0x409C, 0, EverGrandeCity_SidneysRoom_EventScript_227F57
+	map_script_2 VAR_ELITE_4_STATE, 0, EverGrandeCity_SidneysRoom_EventScript_227F57
 	.2byte 0
 
 EverGrandeCity_SidneysRoom_EventScript_227F57:: @ 8227F57
 	lockall
 	call EverGrandeCity_SidneysRoom_EventScript_272475
-	setvar VAR_0x409C, 1
+	setvar VAR_ELITE_4_STATE, 1
 	releaseall
 	end
 

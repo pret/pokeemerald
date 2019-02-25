@@ -1,6 +1,6 @@
 LittlerootTown_BrendansHouse_2F_EventScript_2926FE:: @ 82926FE
 LittlerootTown_MaysHouse_2F_EventScript_2926FE:: @ 82926FE
-	setvar VAR_0x4092, 5
+	setvar VAR_LITTLEROOT_INTRO_STATE, 5
 	return
 
 LittlerootTown_BrendansHouse_1F_EventScript_292704:: @ 8292704
@@ -14,7 +14,7 @@ LittlerootTown_MaysHouse_1F_EventScript_292704:: @ 8292704
 	call_if_eq LittlerootTown_BrendansHouse_1F_EventScript_292758
 	msgbox LittlerootTown_BrendansHouse_1F_Text_1F7A46, MSGBOX_DEFAULT
 	closemessage
-	setvar VAR_0x4092, 4
+	setvar VAR_LITTLEROOT_INTRO_STATE, 4
 	applymovement EVENT_OBJ_ID_PLAYER, LittlerootTown_BrendansHouse_1F_Movement_292763
 	applymovement VAR_0x8004, Common_Movement_WalkInPlaceUp
 	waitmovement 0
@@ -63,7 +63,7 @@ LittlerootTown_MaysHouse_2F_EventScript_292799:: @ 8292799
 	msgbox LittlerootTown_BrendansHouse_2F_Text_1F8668, MSGBOX_DEFAULT
 	call LittlerootTown_BrendansHouse_2F_EventScript_292849
 	delay 30
-	setvar VAR_0x4092, 6
+	setvar VAR_LITTLEROOT_INTRO_STATE, 6
 	setflag FLAG_SET_WALL_CLOCK
 	setflag FLAG_HIDE_LITTLEROOT_TOWN_PLAYERS_HOUSE_VIGOROTH_1
 	setflag FLAG_HIDE_LITTLEROOT_TOWN_PLAYERS_HOUSE_VIGOROTH_2
@@ -149,7 +149,7 @@ LittlerootTown_BrendansHouse_2F_Movement_292862: @ 8292862
 
 LittlerootTown_BrendansHouse_1F_EventScript_292866:: @ 8292866
 LittlerootTown_MaysHouse_1F_EventScript_292866:: @ 8292866
-	setvar VAR_0x4092, 7
+	setvar VAR_LITTLEROOT_INTRO_STATE, 7
 	releaseall
 	end
 
@@ -313,15 +313,15 @@ LittlerootTown_BrendansHouse_1F_EventScript_2929C5:: @ 82929C5
 LittlerootTown_MaysHouse_1F_EventScript_2929C5:: @ 82929C5
 	lock
 	faceplayer
-	compare VAR_0x4082, 4
+	compare VAR_LITTLEROOT_HOUSES_STATE, 4
 	goto_if_eq LittlerootTown_BrendansHouse_1F_EventScript_292A0F
-	compare VAR_0x408C, 4
+	compare VAR_LITTLEROOT_HOUSES_STATE_2, 4
 	goto_if_eq LittlerootTown_BrendansHouse_1F_EventScript_292A0F
 	goto_if_set FLAG_HAS_MATCH_CALL, LittlerootTown_BrendansHouse_1F_EventScript_292A19
 	goto_if_set FLAG_RESCUED_BIRCH, LittlerootTown_BrendansHouse_1F_EventScript_292A86
 	compare VAR_TEMP_1, 1
 	goto_if_eq LittlerootTown_BrendansHouse_1F_EventScript_292A94
-	compare VAR_0x4092, 7
+	compare VAR_LITTLEROOT_INTRO_STATE, 7
 	goto_if_eq LittlerootTown_BrendansHouse_1F_EventScript_292AB0
 	msgbox LittlerootTown_BrendansHouse_1F_Text_1F7A1C, MSGBOX_DEFAULT
 	release
@@ -513,8 +513,8 @@ LittlerootTown_MaysHouse_1F_EventScript_292AF2:: @ 8292AF2
 	copyvar VAR_0x40D5, VAR_RESULT
 	msgbox LittlerootTown_BrendansHouse_1F_Text_1F83A1, MSGBOX_DEFAULT
 	closemessage
-	setvar VAR_0x4082, 4
-	setvar VAR_0x408C, 4
+	setvar VAR_LITTLEROOT_HOUSES_STATE, 4
+	setvar VAR_LITTLEROOT_HOUSES_STATE_2, 4
 	releaseall
 	end
 

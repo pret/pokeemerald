@@ -8,7 +8,7 @@ SootopolisCity_MysteryEventsHouse_1F_MapScript1_22795E: @ 822795E
 	special CallFrontierUtilFunc
 	compare VAR_RESULT, 0
 	call_if_eq SootopolisCity_MysteryEventsHouse_1F_EventScript_22797D
-	compare VAR_0x40C0, 0
+	compare VAR_SOOTOPOLIS_MYSTERY_EVENTS_STATE, 0
 	call_if_ne SootopolisCity_MysteryEventsHouse_1F_EventScript_227991
 	end
 
@@ -25,9 +25,9 @@ SootopolisCity_MysteryEventsHouse_1F_EventScript_227991:: @ 8227991
 	return
 
 SootopolisCity_MysteryEventsHouse_1F_MapScript2_22799D: @ 822799D
-	map_script_2 VAR_0x40C0, 1, SootopolisCity_MysteryEventsHouse_1F_EventScript_2279B7
-	map_script_2 VAR_0x40C0, 2, SootopolisCity_MysteryEventsHouse_1F_EventScript_2279B7
-	map_script_2 VAR_0x40C0, 3, SootopolisCity_MysteryEventsHouse_1F_EventScript_2279B7
+	map_script_2 VAR_SOOTOPOLIS_MYSTERY_EVENTS_STATE, 1, SootopolisCity_MysteryEventsHouse_1F_EventScript_2279B7
+	map_script_2 VAR_SOOTOPOLIS_MYSTERY_EVENTS_STATE, 2, SootopolisCity_MysteryEventsHouse_1F_EventScript_2279B7
+	map_script_2 VAR_SOOTOPOLIS_MYSTERY_EVENTS_STATE, 3, SootopolisCity_MysteryEventsHouse_1F_EventScript_2279B7
 	.2byte 0
 
 SootopolisCity_MysteryEventsHouse_1F_EventScript_2279B7:: @ 82279B7
@@ -39,14 +39,14 @@ SootopolisCity_MysteryEventsHouse_1F_EventScript_2279B7:: @ 82279B7
 	moveobjectoffscreen 1
 	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceUp
 	waitmovement 0
-	compare VAR_0x40C0, 1
+	compare VAR_SOOTOPOLIS_MYSTERY_EVENTS_STATE, 1
 	call_if_eq SootopolisCity_MysteryEventsHouse_1F_EventScript_227A04
-	compare VAR_0x40C0, 2
+	compare VAR_SOOTOPOLIS_MYSTERY_EVENTS_STATE, 2
 	call_if_eq SootopolisCity_MysteryEventsHouse_1F_EventScript_227A0D
-	compare VAR_0x40C0, 3
+	compare VAR_SOOTOPOLIS_MYSTERY_EVENTS_STATE, 3
 	call_if_eq SootopolisCity_MysteryEventsHouse_1F_EventScript_227A16
 	special LoadPlayerParty
-	setvar VAR_0x40C0, 0
+	setvar VAR_SOOTOPOLIS_MYSTERY_EVENTS_STATE, 0
 	releaseall
 	end
 

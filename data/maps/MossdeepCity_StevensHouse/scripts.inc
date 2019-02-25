@@ -13,7 +13,7 @@ MossdeepCity_StevensHouse_EventScript_22279E:: @ 822279E
 	return
 
 MossdeepCity_StevensHouse_MapScript1_2227A8: @ 82227A8
-	compare VAR_0x40C6, 2
+	compare VAR_STEVENS_HOUSE_STATE, 2
 	call_if_eq MossdeepCity_StevensHouse_EventScript_2227B4
 	end
 
@@ -23,7 +23,7 @@ MossdeepCity_StevensHouse_EventScript_2227B4:: @ 82227B4
 	return
 
 MossdeepCity_StevensHouse_MapScript2_2227C0: @ 82227C0
-	map_script_2 VAR_0x40C6, 1, MossdeepCity_StevensHouse_EventScript_2227CA
+	map_script_2 VAR_STEVENS_HOUSE_STATE, 1, MossdeepCity_StevensHouse_EventScript_2227CA
 	.2byte 0
 
 MossdeepCity_StevensHouse_EventScript_2227CA:: @ 82227CA
@@ -48,7 +48,7 @@ MossdeepCity_StevensHouse_EventScript_2227CA:: @ 82227CA
 	waitmovement 0
 	setflag FLAG_HIDE_MOSSDEEP_CITY_SCOTT
 	setflag FLAG_HIDE_SEAFLOOR_CAVERN_ENTRANCE_AQUA_GRUNT
-	setvar VAR_0x40C6, 2
+	setvar VAR_STEVENS_HOUSE_STATE, 2
 	releaseall
 	end
 

@@ -4,11 +4,11 @@ LittlerootTown_BrendansHouse_2F_MapScripts:: @ 81F83E3
 	.byte 0
 
 LittlerootTown_BrendansHouse_2F_MapScript1_1F83EE: @ 81F83EE
-	compare VAR_0x408D, 2
+	compare VAR_LITTLEROOT_RIVAL_STATE, 2
 	call_if_lt LittlerootTown_BrendansHouse_2F_EventScript_1F8457
-	compare VAR_0x408D, 3
+	compare VAR_LITTLEROOT_RIVAL_STATE, 3
 	call_if_ge LittlerootTown_BrendansHouse_2F_EventScript_1F841A
-	compare VAR_0x4092, 4
+	compare VAR_LITTLEROOT_INTRO_STATE, 4
 	call_if_eq LittlerootTown_BrendansHouse_2F_EventScript_2926FE
 	call LittlerootTown_BrendansHouse_2F_EventScript_275CE1
 	setvar VAR_0x4089, 0
@@ -16,7 +16,7 @@ LittlerootTown_BrendansHouse_2F_MapScript1_1F83EE: @ 81F83EE
 
 LittlerootTown_BrendansHouse_2F_EventScript_1F841A:: @ 81F841A
 	goto_if_set FLAG_MET_RIVAL_LILYCOVE, LittlerootTown_BrendansHouse_2F_EventScript_1F8433
-	compare VAR_0x4084, 2
+	compare VAR_BIRCH_LAB_STATE, 2
 	goto_if_ge LittlerootTown_BrendansHouse_2F_EventScript_1F8456
 	goto LittlerootTown_BrendansHouse_2F_EventScript_1F8433
 
@@ -40,7 +40,7 @@ LittlerootTown_BrendansHouse_2F_EventScript_1F8457:: @ 81F8457
 	return
 
 LittlerootTown_BrendansHouse_2F_EventScript_1F8464:: @ 81F8464
-	setvar VAR_0x408D, 2
+	setvar VAR_LITTLEROOT_RIVAL_STATE, 2
 	return
 
 LittlerootTown_BrendansHouse_2F_MapScript2_1F846A: @ 81F846A
@@ -55,7 +55,7 @@ LittlerootTown_BrendansHouse_2F_EventScript_1F8474:: @ 81F8474
 
 LittlerootTown_BrendansHouse_2F_EventScript_1F8481:: @ 81F8481
 	lockall
-	compare VAR_0x408D, 2
+	compare VAR_LITTLEROOT_RIVAL_STATE, 2
 	goto_if_eq LittlerootTown_BrendansHouse_2F_EventScript_1F8497
 	msgbox LittlerootTown_BrendansHouse_2F_Text_1F9991, MSGBOX_DEFAULT
 	releaseall
@@ -81,7 +81,7 @@ LittlerootTown_BrendansHouse_2F_EventScript_1F8497:: @ 81F8497
 	call_if_eq LittlerootTown_BrendansHouse_2F_EventScript_1F8565
 	compare VAR_FACING, 4
 	call_if_eq LittlerootTown_BrendansHouse_2F_EventScript_1F8594
-	setvar VAR_0x408D, 3
+	setvar VAR_LITTLEROOT_RIVAL_STATE, 3
 	setflag FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F_POKE_BALL
 	clearflag FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_RIVAL_BEDROOM
 	setvar VAR_0x4050, 1

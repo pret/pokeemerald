@@ -76,13 +76,13 @@ LavaridgeTown_Gym_1F_EventScript_1FE7C1:: @ 81FE7C1
 	setflag FLAG_FLANNERY_GIVES_BADGE_INFO
 	setflag FLAG_DEFEATED_LAVARIDGE_GYM
 	setflag FLAG_BADGE04_GET
-	addvar VAR_0x4085, 1
-	compare VAR_0x4085, 6
+	addvar VAR_PETALBURG_GYM_STATE, 1
+	compare VAR_PETALBURG_GYM_STATE, 6
 	call_if_eq LavaridgeTown_Gym_1F_EventScript_271E84
 	setvar VAR_0x8008, 4
 	call LavaridgeTown_Gym_1F_EventScript_271F43
 	setflag FLAG_HIDE_VERDANTURF_TOWN_WANDAS_HOUSE_WALLY
-	setvar VAR_0x4053, 1
+	setvar VAR_LAVARIDGE_RIVAL_STATE, 1
 	call LavaridgeTown_Gym_1F_EventScript_1FE841
 	closemessage
 	delay 30

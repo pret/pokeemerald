@@ -6,7 +6,7 @@ SlateportCity_PokemonFanClub_EventScript_209E96:: @ 8209E96
 	faceplayer
 	goto_if_unset FLAG_ENTERED_LINK_CONTEST, SlateportCity_PokemonFanClub_EventScript_20A152
 	call_if_unset FLAG_MET_SLATEPORT_FANCLUB_CHAIRMAN, SlateportCity_PokemonFanClub_EventScript_20A172
-	switch VAR_0x40B7
+	switch VAR_SLATEPORT_FAN_CLUB_STATE
 	case 0, SlateportCity_PokemonFanClub_EventScript_209ED2
 	case 1, SlateportCity_PokemonFanClub_EventScript_209EE5
 	case 2, SlateportCity_PokemonFanClub_EventScript_209F3B
@@ -14,7 +14,7 @@ SlateportCity_PokemonFanClub_EventScript_209E96:: @ 8209E96
 	end
 
 SlateportCity_PokemonFanClub_EventScript_209ED2:: @ 8209ED2
-	setvar VAR_0x40B7, 1
+	setvar VAR_SLATEPORT_FAN_CLUB_STATE, 1
 	msgbox SlateportCity_PokemonFanClub_Text_20A445, MSGBOX_DEFAULT
 	goto SlateportCity_PokemonFanClub_EventScript_209F45
 	end
@@ -28,7 +28,7 @@ SlateportCity_PokemonFanClub_EventScript_209EE5:: @ 8209EE5
 	call_if_set FLAG_RECEIVED_RED_SCARF, SlateportCity_PokemonFanClub_EventScript_209FD0
 	compare VAR_TEMP_2, 5
 	call_if_eq SlateportCity_PokemonFanClub_EventScript_209FCA
-	compare VAR_0x40B7, 2
+	compare VAR_SLATEPORT_FAN_CLUB_STATE, 2
 	goto_if_eq SlateportCity_PokemonFanClub_EventScript_209F3B
 	msgbox SlateportCity_PokemonFanClub_Text_20A62A, MSGBOX_DEFAULT
 	goto SlateportCity_PokemonFanClub_EventScript_209F45
@@ -59,7 +59,7 @@ SlateportCity_PokemonFanClub_EventScript_209F45:: @ 8209F45
 	end
 
 SlateportCity_PokemonFanClub_EventScript_209FCA:: @ 8209FCA
-	setvar VAR_0x40B7, 2
+	setvar VAR_SLATEPORT_FAN_CLUB_STATE, 2
 	return
 
 SlateportCity_PokemonFanClub_EventScript_209FD0:: @ 8209FD0

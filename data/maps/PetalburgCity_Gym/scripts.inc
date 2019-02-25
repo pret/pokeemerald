@@ -6,9 +6,9 @@ PetalburgCity_Gym_MapScripts:: @ 8204889
 	.byte 0
 
 PetalburgCity_Gym_MapScript1_20489E: @ 820489E
-	compare VAR_0x4085, 6
+	compare VAR_PETALBURG_GYM_STATE, 6
 	goto_if_eq PetalburgCity_Gym_EventScript_2048B5
-	compare VAR_0x4085, 7
+	compare VAR_PETALBURG_GYM_STATE, 7
 	call_if_ge PetalburgCity_Gym_EventScript_2048FF
 	end
 
@@ -44,9 +44,9 @@ PetalburgCity_Gym_EventScript_2048FF:: @ 82048FF
 	return
 
 PetalburgCity_Gym_MapScript1_20492D: @ 820492D
-	compare VAR_0x4085, 1
+	compare VAR_PETALBURG_GYM_STATE, 1
 	call_if_eq PetalburgCity_Gym_EventScript_20494D
-	compare VAR_0x4085, 6
+	compare VAR_PETALBURG_GYM_STATE, 6
 	call_if_lt PetalburgCity_Gym_EventScript_204955
 	call_if_set FLAG_SYS_GAME_CLEAR, PetalburgCity_Gym_EventScript_20495D
 	end
@@ -64,17 +64,17 @@ PetalburgCity_Gym_EventScript_20495D:: @ 820495D
 	specialvar VAR_RESULT, IsTrainerReadyForRematch
 	compare VAR_RESULT, 1
 	goto_if_eq PetalburgCity_Gym_EventScript_204985
-	compare VAR_0x4085, 8
+	compare VAR_PETALBURG_GYM_STATE, 8
 	goto_if_eq PetalburgCity_Gym_EventScript_204985
 	setobjectxyperm 1, 4, 107
 	return
 
 PetalburgCity_Gym_EventScript_204985:: @ 8204985
-	setvar VAR_0x4085, 8
+	setvar VAR_PETALBURG_GYM_STATE, 8
 	end
 
 PetalburgCity_Gym_MapScript2_20498B: @ 820498B
-	map_script_2 VAR_0x4085, 1, PetalburgCity_Gym_EventScript_204995
+	map_script_2 VAR_PETALBURG_GYM_STATE, 1, PetalburgCity_Gym_EventScript_204995
 	.2byte 0
 
 PetalburgCity_Gym_EventScript_204995:: @ 8204995
@@ -82,7 +82,7 @@ PetalburgCity_Gym_EventScript_204995:: @ 8204995
 	end
 
 PetalburgCity_Gym_MapScript2_20499A: @ 820499A
-	map_script_2 VAR_0x4085, 1, PetalburgCity_Gym_EventScript_2049A4
+	map_script_2 VAR_PETALBURG_GYM_STATE, 1, PetalburgCity_Gym_EventScript_2049A4
 	.2byte 0
 
 PetalburgCity_Gym_EventScript_2049A4:: @ 82049A4
@@ -100,7 +100,7 @@ PetalburgCity_Gym_EventScript_2049A4:: @ 82049A4
 	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceUp
 	waitmovement 0
 	msgbox PetalburgCity_Gym_Text_205C40, MSGBOX_DEFAULT
-	setvar VAR_0x4085, 2
+	setvar VAR_PETALBURG_GYM_STATE, 2
 	releaseall
 	end
 
@@ -114,7 +114,7 @@ PetalburgCity_Gym_Movement_2049EC: @ 82049EC
 PetalburgCity_Gym_EventScript_2049F1:: @ 82049F1
 	lock
 	faceplayer
-	switch VAR_0x4085
+	switch VAR_PETALBURG_GYM_STATE
 	case 2, PetalburgCity_Gym_EventScript_204D4A
 	case 3, PetalburgCity_Gym_EventScript_204D54
 	case 4, PetalburgCity_Gym_EventScript_204D5E
@@ -216,8 +216,8 @@ PetalburgCity_Gym_EventScript_204AAC:: @ 8204AAC
 	call_if_eq PetalburgCity_Gym_EventScript_204CB5
 	removeobject 10
 	setflag FLAG_HIDE_PETALBURG_CITY_WALLYS_AUNT
-	setvar VAR_0x4085, 1
-	setvar VAR_0x4057, 2
+	setvar VAR_PETALBURG_GYM_STATE, 1
+	setvar VAR_PETALBURG_STATE, 2
 	clearflag FLAG_HIDE_PETALBURG_CITY_WALLY
 	clearflag FLAG_HIDE_PETALBURG_GYM_WALLY
 	setflag FLAG_HIDE_LITTLEROOT_TOWN_BIRCHS_LAB_RIVAL
@@ -416,7 +416,7 @@ PetalburgCity_Gym_EventScript_204E3B:: @ 8204E3B
 	call Common_EventScript_PlayGymBadgeFanfare
 	msgbox PetalburgCity_Gym_Text_20618A, MSGBOX_DEFAULT
 	setflag FLAG_DEFEATED_PETALBURG_GYM
-	setvar VAR_0x4085, 7
+	setvar VAR_PETALBURG_GYM_STATE, 7
 	setflag FLAG_BADGE05_GET
 	special sub_813B9A0
 	call PetalburgCity_Gym_EventScript_2721F8
@@ -496,7 +496,7 @@ PetalburgCity_Gym_EventScript_204F13:: @ 8204F13
 	compare VAR_0x8008, 3
 	call_if_eq PetalburgCity_Gym_EventScript_20506C
 	removeobject 11
-	setvar VAR_0x4057, 4
+	setvar VAR_PETALBURG_STATE, 4
 	clearflag FLAG_HIDE_PETALBURG_CITY_WALLYS_UNCLE
 	warp MAP_PETALBURG_CITY, 255, 15, 8
 	waitstate
@@ -783,7 +783,7 @@ PetalburgCity_Gym_EventScript_20512D:: @ 820512D
 
 PetalburgCity_Gym_EventScript_205137:: @ 8205137
 	lockall
-	compare VAR_0x4085, 6
+	compare VAR_PETALBURG_GYM_STATE, 6
 	goto_if_lt PetalburgCity_Gym_EventScript_20517D
 	setvar VAR_0x8008, 7
 	setvar VAR_0x8009, 85
@@ -813,7 +813,7 @@ PetalburgCity_Gym_EventScript_20517D:: @ 820517D
 
 PetalburgCity_Gym_EventScript_205187:: @ 8205187
 	lockall
-	compare VAR_0x4085, 6
+	compare VAR_PETALBURG_GYM_STATE, 6
 	goto_if_lt PetalburgCity_Gym_EventScript_20517D
 	setvar VAR_0x8008, 1
 	setvar VAR_0x8009, 98

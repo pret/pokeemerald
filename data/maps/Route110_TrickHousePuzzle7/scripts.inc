@@ -68,7 +68,7 @@ Route110_TrickHousePuzzle7_EventScript_26E185:: @ 826E185
 	return
 
 Route110_TrickHousePuzzle7_MapScript1_26E198: @ 826E198
-	compare VAR_0x40B6, 1
+	compare VAR_TRICK_HOUSE_PUZZLE_7_STATE_2, 1
 	goto_if_eq Route110_TrickHousePuzzle7_EventScript_26E1B3
 	clearflag FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_1
 	clearflag FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_2
@@ -81,33 +81,33 @@ Route110_TrickHousePuzzle7_EventScript_26E1B3:: @ 826E1B3
 	end
 
 Route110_TrickHousePuzzle7_MapScript1_26E1B4: @ 826E1B4
-	compare VAR_0x40B6, 1
+	compare VAR_TRICK_HOUSE_PUZZLE_7_STATE_2, 1
 	call_if_eq Route110_TrickHousePuzzle7_EventScript_26E0AC
 	end
 
 Route110_TrickHousePuzzle7_MapScript2_26E1C0: @ 826E1C0
-	map_script_2 VAR_0x40B6, 1, Route110_TrickHousePuzzle7_EventScript_26E1CA
+	map_script_2 VAR_TRICK_HOUSE_PUZZLE_7_STATE_2, 1, Route110_TrickHousePuzzle7_EventScript_26E1CA
 	.2byte 0
 
 Route110_TrickHousePuzzle7_EventScript_26E1CA:: @ 826E1CA
-	setvar VAR_0x40B6, 0
+	setvar VAR_TRICK_HOUSE_PUZZLE_7_STATE_2, 0
 	end
 
 Route110_TrickHousePuzzle7_EventScript_26E1D0:: @ 826E1D0
 	lockall
-	compare VAR_0x40B1, 0
+	compare VAR_TRICK_HOUSE_PUZZLE_7_STATE, 0
 	goto_if_eq Route110_TrickHousePuzzle7_EventScript_26E1E2
 	goto Route110_TrickHousePuzzle7_EventScript_26A3DB
 	end
 
 Route110_TrickHousePuzzle7_EventScript_26E1E2:: @ 826E1E2
-	setvar VAR_0x40B1, 1
+	setvar VAR_TRICK_HOUSE_PUZZLE_7_STATE, 1
 	goto Route110_TrickHousePuzzle7_EventScript_26A3E5
 	end
 
 Route110_TrickHousePuzzle7_EventScript_26E1ED:: @ 826E1ED
 	lockall
-	setvar VAR_0x40B6, 1
+	setvar VAR_TRICK_HOUSE_PUZZLE_7_STATE_2, 1
 	warpteleport MAP_ROUTE110_TRICK_HOUSE_PUZZLE7, 255, 3, 19
 	waitstate
 	releaseall
