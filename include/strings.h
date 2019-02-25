@@ -2430,5 +2430,6 @@ extern const u8 gText_CombineTwoWordsOrPhrases3[];
 extern const u8 gText_OnlyOnePhrase[];
 extern const u8 gText_YouCannotQuitHere[];
 extern const u8 gText_SectionMustBeCompleted[];
+extern const u8 gText_ThreeQuestionMarks[];
 
 #endif // GUARD_STRINGS_H
