@@ -1906,7 +1906,7 @@ Common_EventScript_NoRoomLeftForAnother:: @ 8272071
 	return
 
 Common_EventScript_SetWeather15:: @ 827207A
-	setweather WEATHER_15
+	setweather WEATHER_ALTERNATING
 	return
 
 Common_EventScript_PlayGymBadgeFanfare:: @ 827207E
@@ -3174,14 +3174,14 @@ Route105_EventScript_273D17:: @ 8273D17
 Route125_EventScript_273D17:: @ 8273D17
 Route127_EventScript_273D17:: @ 8273D17
 Route129_EventScript_273D17:: @ 8273D17
-	setweather 13
+	setweather WEATHER_RAIN_HEAVY
 	return
 
 Route114_EventScript_273D1B:: @ 8273D1B
 Route115_EventScript_273D1B:: @ 8273D1B
 Route116_EventScript_273D1B:: @ 8273D1B
 Route118_EventScript_273D1B:: @ 8273D1B
-	setweather 12
+	setweather WEATHER_DROUGHT
 	return
 
 gUnknown_08273D1F:: @ 8273D1F
@@ -3196,7 +3196,7 @@ gUnknown_08273D1F:: @ 8273D1F
 Route105_EventScript_273D31:: @ 8273D31
 	closemessage
 	fadescreenswapbuffers 1
-	setweather 2
+	setweather WEATHER_SUNNY
 	doweather
 	call Route105_EventScript_273D6D
 	special DrawWholeMapView
