@@ -2397,7 +2397,7 @@ void DoCurrentWeather(void)
     SetNextWeather(weather);
 }
 
-void DoPausedWeather(void)
+void ResumePausedWeather(void)
 {
     u8 weather = GetSav1Weather();
 
@@ -2435,25 +2435,25 @@ static u8 TranslateWeatherNum(u8 weather)
 {
     switch (weather)
     {
-    case WEATHER_NONE:       return WEATHER_NONE;
-    case WEATHER_CLOUDS:     return WEATHER_CLOUDS;
-    case WEATHER_SUNNY:      return WEATHER_SUNNY;
-    case WEATHER_RAIN_LIGHT: return WEATHER_RAIN_LIGHT;
-    case WEATHER_SNOW:       return WEATHER_SNOW;
-    case WEATHER_RAIN_MED:   return WEATHER_RAIN_MED;
-    case WEATHER_FOG_1:      return WEATHER_FOG_1;
-    case WEATHER_ASH:        return WEATHER_ASH;
-    case WEATHER_SANDSTORM:  return WEATHER_SANDSTORM;
-    case WEATHER_FOG_2:      return WEATHER_FOG_2;
-    case WEATHER_FOG_3:      return WEATHER_FOG_3;
-    case WEATHER_SHADE:      return WEATHER_SHADE;
-    case WEATHER_DROUGHT:    return WEATHER_DROUGHT;
-    case WEATHER_RAIN_HEAVY: return WEATHER_RAIN_HEAVY;
-    case WEATHER_BUBBLES:    return WEATHER_BUBBLES;
-    case WEATHER_ALTERNATING:         return WEATHER_ALTERNATING;
+    case WEATHER_NONE:           return WEATHER_NONE;
+    case WEATHER_CLOUDS:         return WEATHER_CLOUDS;
+    case WEATHER_SUNNY:          return WEATHER_SUNNY;
+    case WEATHER_RAIN_LIGHT:     return WEATHER_RAIN_LIGHT;
+    case WEATHER_SNOW:           return WEATHER_SNOW;
+    case WEATHER_RAIN_MED:       return WEATHER_RAIN_MED;
+    case WEATHER_FOG_1:          return WEATHER_FOG_1;
+    case WEATHER_ASH:            return WEATHER_ASH;
+    case WEATHER_SANDSTORM:      return WEATHER_SANDSTORM;
+    case WEATHER_FOG_2:          return WEATHER_FOG_2;
+    case WEATHER_FOG_3:          return WEATHER_FOG_3;
+    case WEATHER_SHADE:          return WEATHER_SHADE;
+    case WEATHER_DROUGHT:        return WEATHER_DROUGHT;
+    case WEATHER_RAIN_HEAVY:     return WEATHER_RAIN_HEAVY;
+    case WEATHER_BUBBLES:        return WEATHER_BUBBLES;
+    case WEATHER_ALTERNATING:    return WEATHER_ALTERNATING;
     case WEATHER_ROUTE119_CYCLE: return sWeatherCycleRoute119[gSaveBlock1Ptr->weatherCycleStage];
     case WEATHER_ROUTE123_CYCLE: return sWeatherCycleRoute123[gSaveBlock1Ptr->weatherCycleStage];
-    default:                 return WEATHER_NONE;
+    default:                     return WEATHER_NONE;
     }
 }
 

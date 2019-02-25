@@ -2123,7 +2123,7 @@ static void sub_8086988(u32 a1)
 
     FieldEffectActiveListClear();
     StartWeather();
-    DoPausedWeather();
+    ResumePausedWeather();
     if (!a1)
         SetUpFieldTasks();
     mapheader_run_script_with_tag_x5();
