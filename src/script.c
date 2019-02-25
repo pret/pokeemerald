@@ -2,6 +2,7 @@
 #include "script.h"
 #include "event_data.h"
 #include "util.h"
+#include "constants/map_scripts.h"
 
 #define RAM_SCRIPT_MAGIC 51
 
@@ -293,32 +294,32 @@ u8 *MapHeaderCheckScriptTable(u8 tag)
 
 void RunOnLoadMapScript(void)
 {
-    MapHeaderRunScriptType(1);
+    MapHeaderRunScriptType(MAP_SCRIPT_ON_LOAD);
 }
 
 void RunOnTransitionMapScript(void)
 {
-    MapHeaderRunScriptType(3);
+    MapHeaderRunScriptType(MAP_SCRIPT_ON_TRANSITION);
 }
 
 void RunOnResumeMapScript(void)
 {
-    MapHeaderRunScriptType(5);
+    MapHeaderRunScriptType(MAP_SCRIPT_ON_RESUME);
 }
 
 void RunOnReturnToFieldMapScript(void)
 {
-    MapHeaderRunScriptType(7);
+    MapHeaderRunScriptType(MAP_SCRIPT_ON_RETURN_TO_FIELD);
 }
 
 void RunOnDiveWarpMapScript(void)
 {
-    MapHeaderRunScriptType(6);
+    MapHeaderRunScriptType(MAP_SCRIPT_ON_DIVE_WARP);
 }
 
 bool8 TryRunOnFrameMapScript(void)
 {
-    u8 *ptr = MapHeaderCheckScriptTable(2);
+    u8 *ptr = MapHeaderCheckScriptTable(MAP_SCRIPT_ON_FRAME_TABLE);
 
     if (!ptr)
         return FALSE;
@@ -329,7 +330,7 @@ bool8 TryRunOnFrameMapScript(void)
 
 void TryRunOnWarpIntoMapScript(void)
 {
-    u8 *ptr = MapHeaderCheckScriptTable(4);
+    u8 *ptr = MapHeaderCheckScriptTable(MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE);
     if (ptr)
         ScriptContext2_RunNewScript(ptr);
 }
