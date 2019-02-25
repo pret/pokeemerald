@@ -77,10 +77,10 @@ struct UnknownSubStruct_81C81D4
     u32 unk14;
     u32 unk18;
     u32 unk1C;
-    u32 unk20;
+    s32 unk20;
     u32 unk24;
     u32 unk28;
-    u32 unk2C;
+    s32 unk2C;
     u32 unk30;
     void (*unk34)(u32, char*);
     void (*unk38)(u16, u32, u32);
@@ -168,11 +168,13 @@ extern u32 sub_81D04B8(void);
 extern u32 sub_81D09F4(void);
 extern u32 sub_81CFA04(void);
 extern u32 sub_81CFE08(void);
+extern u32 sub_81C85A0(s32);
 extern u32 sub_81C91AC(struct UnknownSubStruct_81C81D4 *a0, const void *a1, void *a2, s32 a3);
 extern u32 sub_81C9160(struct UnknownSubSubStruct_81C81D4 *a0, void *a1);
 extern void sub_81C8ED0(void);
 extern void sub_81C8EF8(struct UnknownSubSubStruct_81C81D4 *a0, struct UnknownSubSubStruct_0203CF40 *a1);
 
+void sub_81C8568(s32 a0, struct UnknownSubStruct_81C81D4 *a1);
 u32 sub_81C83F0(s32);
 u32 sub_81C83E0(void);
 void sub_81C83AC(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, struct UnknownSubStruct_81C81D4 *a5);
@@ -445,7 +447,7 @@ const struct CompressedSpriteSheet gUnknown_0861FA64 =
 extern struct UnknownStruct_0203CF40 *gUnknown_0203CF40;
 extern u8 gUnknown_0203CF3C;
 extern const struct SpriteTemplate gUnknown_0861FB04;
-
+extern u32 gUnknown_0203CF44;
 // code
 u32 sub_81C7078(u32 (*func)(s32), u32 priority)
 {
@@ -1655,4 +1657,153 @@ u32 sub_81C83F0(s32 a0)
     default:
         return 4;
     }
+}
+
+bool32 sub_81C84A4(void)
+{
+    u16 v1;
+    s32 v2;
+    struct UnknownSubStruct_81C81D4 *structPtr;
+    structPtr = GetSubstructPtr(0x11);
+
+    return structPtr->unk888.unk0 != 0;
+}
+
+bool32 sub_81C84C0(void)
+{
+    struct UnknownSubSubStruct_81C81D4 *subPtr;
+    struct UnknownSubStruct_81C81D4 *structPtr;
+    structPtr = GetSubstructPtr(0x11);
+    subPtr = &structPtr->unk888;
+    
+    return subPtr->unk0 + subPtr->unk8 < subPtr->unk2;
+}
+
+
+#ifdef NONMATCHING
+// This has some register renaming issues (r4, r5, and r6 are all switched around), and
+// for some reason it's creating two copies of subPtr->unk0.
+void sub_81C84E8(s32 a0, s32 a1)
+{
+    s32 v1;
+    struct UnknownSubSubStruct_81C81D4 *subPtr;
+    struct UnknownSubStruct_81C81D4 *structPtr;
+    structPtr = GetSubstructPtr(0x11);
+    subPtr = &structPtr->unk888;
+
+    if (a0 < 0)
+    {
+        // This is where the issue is. subPtr->unk0 is being stored in r1 and then copied to
+        // r2... and then r2 is read for the if statement, r1 is read for the function call,
+        // and then both are clobbered as expected. Between those two uses, no writes to r1/r2
+        // happen; it doesn't need to be duplicated/moved at all.
+        if (subPtr->unk0 + a0 < 0)
+            v1 = -1 * subPtr->unk0;
+        else
+            v1 = a0;
+        if (a1 != 0)
+            sub_81C83AC(subPtr->unk10, subPtr->unk0 + v1, v1 * -1, subPtr->unkC, v1, structPtr);
+    }
+    else if (a1 != 0)
+    {
+        
+        gUnknown_0203CF44 = subPtr->unk0 + subPtr->unk8;
+        if ((s32)(gUnknown_0203CF44) + a0 >= (s32)subPtr->unk2)
+            v1 = subPtr->unk2 - gUnknown_0203CF44;
+        else
+            v1 = a0;
+        
+        sub_81C83AC(subPtr->unk10, gUnknown_0203CF44, v1, subPtr->unkC, subPtr->unk8, structPtr);
+        // Needed to prevent GCC from combining the two sub_81C83AC calls.
+        asm("");
+    }
+    else
+    {
+        v1 = a0;
+    }
+    
+    sub_81C8568(v1, structPtr);
+    subPtr->unk0++;
+}
+#else
+NAKED
+void sub_81C84E8(s32 a0, s32 a1)
+{
+    asm(".syntax unified\n\
+	push {r4-r7,lr}\n\
+	sub sp, 0x8\n\
+	adds r6, r0, 0\n\
+	adds r4, r1, 0\n\
+	movs r0, 0x11\n\
+	bl GetSubstructPtr\n\
+	adds r7, r0, 0\n\
+	ldr r0, =0x00000888\n\
+	adds r5, r7, r0\n\
+	cmp r6, 0\n\
+	bge _081C8524\n\
+	ldrh r1, [r5]\n\
+	adds r0, r1, r6\n\
+	cmp r0, 0\n\
+	bge _081C850A\n\
+	negs r6, r1\n\
+_081C850A:\n\
+	cmp r4, 0\n\
+	beq _081C854E\n\
+	ldr r0, [r5, 0x10]\n\
+	adds r1, r6\n\
+	negs r2, r6\n\
+	ldr r3, [r5, 0xC]\n\
+	str r6, [sp]\n\
+	str r7, [sp, 0x4]\n\
+	bl sub_81C83AC\n\
+	b _081C854E\n\
+	.pool\n\
+_081C8524:\n\
+	cmp r4, 0\n\
+	beq _081C854E\n\
+	ldr r2, =gUnknown_0203CF44\n\
+	ldrh r1, [r5]\n\
+	ldrh r0, [r5, 0x8]\n\
+	adds r4, r1, r0\n\
+	str r4, [r2]\n\
+	adds r0, r4, r6\n\
+	ldrh r1, [r5, 0x2]\n\
+	cmp r0, r1\n\
+	blt _081C853C\n\
+	subs r6, r1, r4\n\
+_081C853C:\n\
+	ldr r0, [r5, 0x10]\n\
+	ldr r3, [r5, 0xC]\n\
+	ldrh r1, [r5, 0x8]\n\
+	str r1, [sp]\n\
+	str r7, [sp, 0x4]\n\
+	adds r1, r4, 0\n\
+	adds r2, r6, 0\n\
+	bl sub_81C83AC\n\
+_081C854E:\n\
+	adds r0, r6, 0\n\
+	adds r1, r7, 0\n\
+	bl sub_81C8568\n\
+	ldrh r0, [r5]\n\
+	adds r0, r6\n\
+	strh r0, [r5]\n\
+	add sp, 0x8\n\
+	pop {r4-r7}\n\
+	pop {r0}\n\
+	bx r0\n\
+	.pool\n\
+    .syntax divided");
+}
+#endif
+
+void sub_81C8568(s32 a0, struct UnknownSubStruct_81C81D4 *a1)
+{
+    a1->unk20 = GetBgY(a1->unk0.bg);
+    a1->unk24 = a1->unk20 + (a0 << 12);
+    if (a0 > 0)
+        a1->unk30 = 1;
+    else
+        a1->unk30 = 2;
+    a1->unk2C = a0;
+    a1->unk28 = sub_81C7078(sub_81C85A0, 6);
 }
