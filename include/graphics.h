@@ -4020,22 +4020,22 @@ extern const u32 gPokenavLeftHeaderCondition_Gfx[];
 extern const u32 gPokenavLeftHeaderRibbons_Gfx[];
 extern const u32 gPokenavLeftHeaderMatchCall_Gfx[];
 
-extern const u32 gUnknown_08D9862C[];
+extern const u32 gPageInfoTilemap[];
 extern const u32 gUnknown_08D98CC8[];
-extern const u32 gUnknown_08D987FC[];
-extern const u32 gUnknown_08D9898C[];
-extern const u32 gUnknown_08D98B28[];
-extern const u32 gUnknown_08D9853C[];
+extern const u32 gPageSkillsTilemap[];
+extern const u32 gPageBattleMovesTilemap[];
+extern const u32 gPageContestMovesTilemap[];
+extern const u32 gStatusScreenPalette[];
 extern const u16 gUnknown_08D85620[];
 extern const u16 gSummaryScreenWindow_Tilemap[];
 extern const u32 gMoveTypes_Pal[];
-extern const u32 gUnknown_08D97D0C[];
+extern const u32 gStatusScreenBitmap[];
 
 extern const u16 gSummaryScreenPowAcc_Tilemap[];
 extern const u16 gUnknown_08DC3C34[];
 
 extern const u32 gMoveTypes_Gfx[];
-extern const u32 gUnknown_08D97BEC[];
+extern const u32 gMoveSelectorBitmap[];
 extern const u32 gUnknown_08D97CF4[];
 extern const u32 gStatusGfx_Icons[];
 extern const u32 gStatusPal_Icons[];
