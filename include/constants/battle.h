@@ -150,8 +150,7 @@
 #define STATUS3_GASTRO_ACID             0x10000
 #define STATUS3_EMBARGO                 0x20000
 #define STATUS3_UNDERWATER              0x40000
-#define STATUS3_INTIMIDATE_POKES        0x80000
-#define STATUS3_TRACE                   0x100000
+
 #define STATUS3_SMACKED_DOWN            0x200000
 #define STATUS3_ME_FIRST                0x400000
 #define STATUS3_TELEKINESIS             0x800000
