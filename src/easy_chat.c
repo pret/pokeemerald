@@ -141,9 +141,26 @@ struct EasyChatGroup
     u16 numEnabledWords;
 };
 
+struct Unk203A120
+{
+    u16 unk0;
+    u16 unk2[EC_NUM_GROUPS];
+    u16 unk2E[27];
+    u16 unk64[27][270];
+    u8 filler3958[0x2C];
+    u16 unk3984[0x10E];
+    u16 unk3BA0;
+}; /*size = 0x3BA4*/
+
+struct EasyChatWordsByLetter
+{
+    const u16 *words;
+    int numWords;
+};
+
 EWRAM_DATA struct EasyChatScreen *gEasyChatScreen = NULL;
 EWRAM_DATA struct Unk203A11C *gUnknown_0203A11C = 0;
-EWRAM_DATA void *gUnknown_0203A120 = 0;
+EWRAM_DATA struct Unk203A120 *gUnknown_0203A120 = 0;
 
 static void sub_811A2C0(u8);
 static void sub_811A278(void);
@@ -178,9 +195,9 @@ static bool8 sub_811BFA4(void);
 static void sub_811C13C(void);
 static void sub_811C158(u16);
 static bool8 sub_811C170(void);
-bool8 sub_811F28C(void);
-void sub_811F2B8(void);
-u8 sub_811F3AC(void);
+static bool8 sub_811F28C(void);
+static void sub_811F2B8(void);
+static u8 sub_811F3AC(void);
 int sub_811BA3C(void);
 int sub_811B184(void);
 int sub_811B264(void);
@@ -202,13 +219,13 @@ static int sub_811BDB0(void);
 static int sub_811BD2C(void);
 int sub_811BCF4(void);
 static u16 sub_811B8E8(void);
-int sub_811F3B8(u8);
-void sub_811F548(int, u16);
+static u8 sub_811F3B8(u8);
+static void sub_811F548(int, u16);
 static int sub_811B908(void);
-u16 sub_811F5B0(void);
+static u16 sub_811F5B0(void);
 static void sub_811B488(u16);
 u16 sub_811B940(void);
-u16 sub_811F578(u16);
+static u16 sub_811F578(u16);
 int sub_811BF88(int);
 static u16 sub_811B8C8(void);
 static int sub_811B568(u32);
@@ -310,7 +327,7 @@ static void sub_811DD84(void);
 static void sub_811D6F4(void);
 static void sub_811D758(void);
 static void sub_811D794(void);
-const u8 *sub_811F424(u8);
+static const u8 *GetEasyChatWordGroupName(u8);
 static void sub_811D864(u8, u8);
 static void sub_811D950(u8, u8);
 static void sub_811DADC(u8);
@@ -319,9 +336,16 @@ static void sub_811E0EC(s8, s8);
 static void sub_811E1A4(s8, s8);
 static void sub_811E2DC(struct Sprite *);
 static void sub_811E34C(u8, u8);
-bool8 sub_811F0F8(void);
-u16 sub_811F108(void);
-u8 *CopyEasyChatWordPadded(u8 *, u16, u16);
+static bool8 sub_811F0F8(void);
+static u16 sub_811F108(void);
+static void sub_811F2D4(void);
+static void sub_811F46C(void);
+static u8 *CopyEasyChatWordPadded(u8 *, u16, u16);
+static u8 sub_811F860(u16);
+static u16 sub_811F5C4(u16);
+static u16 sub_811F6B8(u16);
+bool8 sub_811F764(u16, u8);
+static int sub_811F838(u16);
 
 extern const struct {
     u16 word;
@@ -356,6 +380,13 @@ extern const u8 gUnknown_08597D08[];
 extern const u8 gUnknown_08597E60[][4];
 extern const u8 *const gUnknown_08597E6C[][4];
 extern const struct EasyChatGroup gEasyChatGroups[];
+extern const u16 gUnknown_0859E62C[];
+extern const u16 gUnknown_0859E634[];
+extern const u16 gUnknown_0859E640[];
+extern const u16 gUnknown_0859E64C[];
+extern const u8 *const gEasyChatGroupNamePointers[];
+extern const struct EasyChatWordsByLetter gEasyChatWordsByLetterPointers[];
+extern const u16 gUnknown_0859E658[1];
 
 void sub_811A20C(u8 kind, u16 *words, MainCallback callback, u8 sizeParam)
 {
@@ -1248,8 +1279,8 @@ static int sub_811B2B0(void)
 
     if (gEasyChatScreen->unk_09 == 0)
     {
-        u8 var0 = sub_811F3B8(sub_811B8E8());
-        sub_811F548(0, var0);
+        u8 groupId = sub_811F3B8(sub_811B8E8());
+        sub_811F548(0, groupId);
     }
     else
     {
@@ -3265,14 +3296,14 @@ static void sub_811D6F4(void)
     {
         for (x = 0; x < 2; x++)
         {
-            u8 index = sub_811F3B8(i++);
-            if (index == 22)
+            u8 groupId = sub_811F3B8(i++);
+            if (groupId == EC_NUM_GROUPS)
             {
                 sub_811DDAC(sub_811BBBC(), 0);
                 return;
             }
 
-            sub_811D028(2, 1, sub_811F424(index), x * 84 + 10, y, 0xFF, NULL);
+            sub_811D028(2, 1, GetEasyChatWordGroupName(groupId), x * 84 + 10, y, 0xFF, NULL);
         }
 
         y += 16;
@@ -4077,7 +4108,7 @@ static void sub_811E948(void)
     PutWindowTilemap(windowId);
 }
 
-bool8 sub_811EA28(u8 groupId)
+static bool8 sub_811EA28(u8 groupId)
 {
     switch (groupId)
     {
@@ -4397,10 +4428,10 @@ void sub_811EF6C(void)
     CopyEasyChatWord(gStringVar2, easyChatWord);
 }
 
-u8 sub_811EF98(u8 additionalPhraseId)
+static bool8 sub_811EF98(u8 additionalPhraseId)
 {
     int byteOffset = additionalPhraseId / 8;
-    int shift = additionalPhraseId & 0x7;
+    int shift = additionalPhraseId % 8;
     return (gSaveBlock1Ptr->additionalPhrases[byteOffset] >> shift) & 1;
 }
 
@@ -4409,7 +4440,7 @@ void sub_811EFC0(u8 additionalPhraseId)
     if (additionalPhraseId < 33)
     {
         int byteOffset = additionalPhraseId / 8;
-        int shift = additionalPhraseId & 0x7;
+        int shift = additionalPhraseId % 8;
         gSaveBlock1Ptr->additionalPhrases[byteOffset] |= 1 << shift;
     }
 }
@@ -4426,4 +4457,395 @@ u8 sub_811EFF0(void)
     }
 
     return numAdditionalPhrasesUnlocked;
+}
+
+u16 sub_811F01C(void)
+{
+    u16 i;
+    u16 additionalPhraseId;
+    u8 numAdditionalPhrasesUnlocked = sub_811EFF0();
+    if (numAdditionalPhrasesUnlocked == 33)
+        return 0xFFFF;
+
+    additionalPhraseId = Random() % (33 - numAdditionalPhrasesUnlocked);
+    for (i = 0; i < 33; i++)
+    {
+        if (!sub_811EF98(i))
+        {
+            if (additionalPhraseId)
+            {
+                additionalPhraseId--;
+            }
+            else
+            {
+                sub_811EFC0(i);
+                return EC_WORD(EC_GROUP_TRENDY_SAYING, i);
+            }
+        }
+    }
+
+    return 0xFFFF;
+}
+
+u16 sub_811F090(void)
+{
+    u16 i;
+    u16 additionalPhraseId = sub_811EFF0();
+    if (additionalPhraseId == 0)
+        return 0xFFFF;
+
+    additionalPhraseId = Random() % additionalPhraseId;
+    for (i = 0; i < 33; i++)
+    {
+        if (sub_811EF98(i))
+        {
+            if (additionalPhraseId)
+                additionalPhraseId--;
+            else
+                return EC_WORD(EC_GROUP_TRENDY_SAYING, i);
+        }
+    }
+
+    return 0xFFFF;
+}
+
+static bool8 sub_811F0F8(void)
+{
+    return IsNationalPokedexEnabled();
+}
+
+static u16 sub_811F108(void)
+{
+    u16 i;
+    u16 numWords;
+    const u16 *species;
+    u16 index = EasyChat_GetNumWordsInGroup(EC_GROUP_POKEMON);
+    if (index == 0)
+        return 0xFFFF;
+
+    index = Random() % index;
+    species = gEasyChatGroups[EC_GROUP_POKEMON].wordData.valueList;
+    numWords = gEasyChatGroups[EC_GROUP_POKEMON].numWords;
+    for (i = 0; i < numWords; i++)
+    {
+        u16 dexNum = SpeciesToNationalPokedexNum(*species);
+        if (GetSetPokedexFlag(dexNum, FLAG_GET_SEEN))
+        {
+            if (index)
+                index--;
+            else
+                return EC_WORD(EC_GROUP_POKEMON, *species);
+        }
+
+        species++;
+    }
+
+    return 0xFFFF;
+}
+
+void InitEasyChatPhrases(void)
+{
+    u16 i, j;
+
+    for (i = 0; i < 4; i++)
+        gSaveBlock1Ptr->unk2BB0[i] = gUnknown_0859E62C[i];
+    
+    for (i = 0; i < 6; i++)
+        gSaveBlock1Ptr->unk2BBC[i] = gUnknown_0859E634[i];
+    
+    for (i = 0; i < 6; i++)
+        gSaveBlock1Ptr->unk2BC8[i] = gUnknown_0859E640[i];
+    
+    for (i = 0; i < 6; i++)
+        gSaveBlock1Ptr->unk2BD4[i] = gUnknown_0859E64C[i];
+    
+    for (i = 0; i < MAIL_COUNT; i++)
+    {
+        for (j = 0; j < MAIL_WORDS_COUNT; j++)
+            gSaveBlock1Ptr->mail[i].words[j] = 0xFFFF;
+    }
+
+    // BUG: This is supposed to clear 64 bits, but this loop is clearing 64 bytes.
+    // However, this bug has no resulting effect on gameplay because only the
+    // Mauville old man data is corrupted, which is initialized directly after
+    // this function is called when starting a new game.
+    for (i = 0; i < 64; i++)
+        gSaveBlock1Ptr->additionalPhrases[i] = 0;
+}
+
+static bool8 sub_811F28C(void)
+{
+    gUnknown_0203A120 = Alloc(sizeof(*gUnknown_0203A120));
+    if (!gUnknown_0203A120)
+        return FALSE;
+
+    sub_811F2D4();
+    sub_811F46C();
+    return TRUE;
+}
+
+static void sub_811F2B8(void)
+{
+    if (gUnknown_0203A120)
+        FREE_AND_SET_NULL(gUnknown_0203A120);
+}
+
+static void sub_811F2D4(void)
+{
+    int i;
+
+    gUnknown_0203A120->unk0 = 0;
+    if (GetNationalPokedexCount(FLAG_GET_SEEN))
+        gUnknown_0203A120->unk2[gUnknown_0203A120->unk0++] = EC_GROUP_POKEMON;
+    
+    for (i = EC_GROUP_TRAINER; i <= EC_GROUP_ADJECTIVES; i++)
+        gUnknown_0203A120->unk2[gUnknown_0203A120->unk0++] = i;
+    
+    if (FlagGet(FLAG_SYS_GAME_CLEAR))
+    {
+        gUnknown_0203A120->unk2[gUnknown_0203A120->unk0++] = EC_GROUP_EVENTS;
+        gUnknown_0203A120->unk2[gUnknown_0203A120->unk0++] = EC_GROUP_MOVE_1;
+        gUnknown_0203A120->unk2[gUnknown_0203A120->unk0++] = EC_GROUP_MOVE_2;
+    }
+
+    if (FlagGet(FLAG_SYS_HIPSTER_MEET))
+        gUnknown_0203A120->unk2[gUnknown_0203A120->unk0++] = EC_GROUP_TRENDY_SAYING;
+
+    if (IsNationalPokedexEnabled())
+        gUnknown_0203A120->unk2[gUnknown_0203A120->unk0++] = EC_GROUP_POKEMON_2;
+}
+
+static u8 sub_811F3AC(void)
+{
+    return gUnknown_0203A120->unk0;
+}
+
+static u8 sub_811F3B8(u8 index)
+{
+    if (index >= gUnknown_0203A120->unk0)
+        return EC_NUM_GROUPS;
+    else
+        return gUnknown_0203A120->unk2[index];
+}
+
+u8 *unref_sub_811F3E0(u8 *dest, u8 groupId, u16 totalChars)
+{
+    u16 i;
+    u8 *str = StringCopy(dest, gEasyChatGroupNamePointers[groupId]);
+    for (i = str - dest; i < totalChars; i++)
+    {
+        *str = CHAR_SPACE;
+        str++;
+    }
+    
+    *str = EOS;
+    return str;
+}
+
+static const u8 *GetEasyChatWordGroupName(u8 groupId)
+{
+    return gEasyChatGroupNamePointers[groupId];
+}
+
+static u8 *CopyEasyChatWordPadded(u8 *dest, u16 easyChatWord, u16 totalChars)
+{
+    u16 i;
+    u8 *str = CopyEasyChatWord(dest, easyChatWord);
+    for (i = str - dest; i < totalChars; i++)
+    {
+        *str = CHAR_SPACE;
+        str++;
+    }
+    
+    *str = EOS;
+    return str;
+}
+
+static void sub_811F46C(void)
+{
+    int i, j, k;
+    int numWords;
+    const u16 *words;
+    u16 numToProcess;
+    int index;
+
+    for (i = 0; i < 27; i++)
+    {
+        numWords = gEasyChatWordsByLetterPointers[i].numWords;
+        words = gEasyChatWordsByLetterPointers[i].words;
+        gUnknown_0203A120->unk2E[i] = 0;
+        index = 0;
+        for (j = 0; j < numWords; j++)
+        {
+            if (*words == 0xFFFF)
+            {
+                words++;
+                numToProcess = *words;
+                words++;
+                j += 1 + numToProcess;
+            }
+            else
+            {
+                numToProcess = 1;
+            }
+
+            for (k = 0; k < numToProcess; k++)
+            {
+                if (sub_811F860(words[k]))
+                {
+                    gUnknown_0203A120->unk64[i][index++] = words[k];
+                    gUnknown_0203A120->unk2E[i]++;
+                    break;
+                }
+            }
+
+            words += numToProcess;
+        }
+    }
+}
+
+static void sub_811F548(int arg0, u16 groupId)
+{
+    if (!arg0)
+        gUnknown_0203A120->unk3BA0 = sub_811F5C4(groupId);
+    else
+        gUnknown_0203A120->unk3BA0 = sub_811F6B8(groupId);
+}
+
+static u16 sub_811F578(u16 arg0)
+{
+    if (arg0 >= gUnknown_0203A120->unk3BA0)
+        return 0xFFFF;
+    else
+        return gUnknown_0203A120->unk3984[arg0];
+}
+
+static u16 sub_811F5B0(void)
+{
+    return gUnknown_0203A120->unk3BA0;
+}
+
+static u16 sub_811F5C4(u16 groupId)
+{
+    u32 i;
+    int totalWords;
+    const u16 *list;
+    const struct EasyChatWordInfo *wordInfo;
+    u16 numWords = gEasyChatGroups[groupId].numWords;
+
+    if (groupId == EC_GROUP_POKEMON || groupId == EC_GROUP_POKEMON_2
+     || groupId == EC_GROUP_MOVE_1  || groupId == EC_GROUP_MOVE_2)
+    {
+        list = gEasyChatGroups[groupId].wordData.valueList;
+        for (i = 0, totalWords = 0; i < numWords; i++)
+        {
+            if (sub_811F764(list[i], groupId))
+                gUnknown_0203A120->unk3984[totalWords++] = EC_WORD(groupId, list[i]);
+        }
+
+        return totalWords;
+    }
+    else
+    {
+        wordInfo = gEasyChatGroups[groupId].wordData.words;
+        for (i = 0, totalWords = 0; i < numWords; i++)
+        {
+            u16 alphabeticalOrder = wordInfo[i].alphabeticalOrder;
+            if (sub_811F764(alphabeticalOrder, groupId))
+                gUnknown_0203A120->unk3984[totalWords++] = EC_WORD(groupId, alphabeticalOrder);
+        }
+
+        return totalWords;
+    }
+}
+
+static u16 sub_811F6B8(u16 alphabeticalGroup)
+{
+    u16 i;
+    u16 totalWords;
+
+    for (i = 0, totalWords = 0; i < gUnknown_0203A120->unk2E[alphabeticalGroup]; i++)
+        gUnknown_0203A120->unk3984[totalWords++] = gUnknown_0203A120->unk64[alphabeticalGroup][i];
+
+    return totalWords;
+}
+
+static bool8 sub_811F72C(u8 arg0)
+{
+    int i;
+    for (i = 0; i < gUnknown_0203A120->unk0; i++)
+    {
+        if (gUnknown_0203A120->unk2[i] == arg0)
+            return TRUE;
+    }
+
+    return FALSE;
+}
+
+bool8 sub_811F764(u16 wordIndex, u8 groupId)
+{
+    switch (groupId)
+    {
+    case EC_GROUP_POKEMON:
+        return GetSetPokedexFlag(SpeciesToNationalPokedexNum(wordIndex), FLAG_GET_SEEN);
+    case EC_GROUP_POKEMON_2:
+        if (sub_811F838(wordIndex))
+            GetSetPokedexFlag(SpeciesToNationalPokedexNum(wordIndex), FLAG_GET_SEEN);
+        return TRUE;
+    case EC_GROUP_MOVE_1:
+    case EC_GROUP_MOVE_2:
+        return TRUE;
+    case EC_GROUP_TRENDY_SAYING:
+        return sub_811EF98(wordIndex);
+    default:
+        return gEasyChatGroups[groupId].wordData.words[wordIndex].enabled;
+    }
+}
+
+static int sub_811F838(u16 species)
+{
+    u32 i;
+    for (i = 0; i < ARRAY_COUNT(gUnknown_0859E658); i++)
+    {
+        if (gUnknown_0859E658[i] == species)
+            return TRUE;
+    }
+
+    return FALSE;
+}
+
+static u8 sub_811F860(u16 easyChatWord)
+{
+    u8 groupId = EC_GROUP(easyChatWord);
+    u32 index = EC_INDEX(easyChatWord);
+    if (!sub_811F72C(groupId))
+        return FALSE;
+    else
+        return sub_811F764(index, groupId);
+}
+
+void InitializeEasyChatWordArray(u16 *words, u16 length)
+{
+    u16 i;
+    for (i = length - 1; i != 0xFFFF; i--)
+        *(words++) = 0xFFFF;
+}
+
+void sub_811F8BC(void)
+{
+    int i;
+    u16 *words = GetSaveBlock1Field3564();
+    for (i = 0; i < 4; i++)
+        words[i] = 0xFFFF;
+}
+
+bool32 sub_811F8D8(int easyChatWord)
+{
+    int groupId = EC_GROUP(easyChatWord);
+    int mask = 0x7F;
+    int index = EC_INDEX(easyChatWord);
+    if (!sub_811EA28(groupId & mask))
+        return FALSE;
+    else
+        return sub_811F764(index, groupId & mask);
 }
