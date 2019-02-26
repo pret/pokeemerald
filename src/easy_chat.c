@@ -1,5 +1,3 @@
-
-// Includes
 #include "global.h"
 #include "alloc.h"
 #include "bard_music.h"
@@ -33,6 +31,7 @@
 #include "constants/event_objects.h"
 #include "constants/flags.h"
 #include "constants/songs.h"
+#include "constants/species.h"
 
 #define EZCHAT_TASK_STATE        0
 #define EZCHAT_TASK_KIND         1
@@ -40,123 +39,6 @@
 #define EZCHAT_TASK_MAINCALLBACK 4
 #define EZCHAT_TASK_UNK06        6
 #define EZCHAT_TASK_SIZE         7
-
-struct EasyChatScreenTemplate
-{
-    u8 unk_00;
-    u8 numColumns;
-    u8 numRows;
-    u8 unk_03_0:7;
-    u8 unk_03_7:1;
-    const u8 *titleText;
-    const u8 *instructionsText1;
-    const u8 *instructionsText2;
-    const u8 *confirmText1;
-    const u8 *confirmText2;
-};
-
-struct EasyChatScreen
-{
-    /*0x00*/ u8 kind;
-    /*0x01*/ u8 templateId;
-    /*0x02*/ u8 numColumns;
-    /*0x03*/ u8 numRows;
-    /*0x04*/ u8 state;
-    /*0x05*/ s8 mainCursorColumn;
-    /*0x06*/ s8 mainCursorRow;
-    /*0x07*/ u8 unk_07;
-    /*0x08*/ u8 unk_08;
-    /*0x09*/ u8 unk_09;
-    /*0x0A*/ s8 unk_0a;
-    /*0x0B*/ s8 unk_0b;
-    /*0x0C*/ u8 unk_0c;
-    /*0x0D*/ u8 unk_0d;
-    /*0x0E*/ u8 unk_0e;
-    /*0x0F*/ u8 unk_0f;
-    /*0x10*/ s8 unk_10;
-    /*0x11*/ s8 unk_11;
-    /*0x12*/ u8 sizeParam;
-    /*0x13*/ u8 unk_13;
-    /*0x14*/ u8 unk_14[0x20];
-    /*0x34*/ const u8 *titleText;
-    /*0x38*/ u16 *words;
-    /*0x3C*/ u16 ecWordBuffer[9];
-};
-
-struct Unk203A11C
-{
-    u16 unk0;
-    u16 windowId;
-    u16 unk4;
-    u8 unk6;
-    u8 unk7;
-    s8 unk8;
-    u8 unk9;
-    u8 unkA;
-    u8 unkB[0xC1];
-    u8 unkCC[0x202];
-    u16 unk2CE;
-    int unk2D0;
-    int unk2D4;
-    struct Sprite *unk2D8;
-    struct Sprite *unk2DC;
-    struct Sprite *unk2E0;
-    struct Sprite *unk2E4;
-    struct Sprite *unk2E8;
-    struct Sprite *unk2EC;
-    struct Sprite *unk2F0;
-    struct Sprite *unk2F4;
-    struct Sprite *unk2F8;
-    struct Sprite *unk2FC;
-    u16 unk300[BG_SCREEN_SIZE / 2];
-    u16 unkB00[BG_SCREEN_SIZE / 2];
-};
-
-struct Unk08597C30
-{
-    u8 unk0_0:5;
-    u8 unk0_5:3;
-    u8 unk1;
-    u8 unk2;
-    u8 unk3;
-};
-
-struct EasyChatWordInfo
-{
-    const u8 *text;
-    int alphabeticalOrder;
-    int enabled;
-};
-
-typedef union
-{
-    const u16 *valueList;
-    const struct EasyChatWordInfo *words;
-} EasyChatGroupWordData;
-
-struct EasyChatGroup
-{
-    EasyChatGroupWordData wordData;
-    u16 numWords;
-    u16 numEnabledWords;
-};
-
-struct Unk203A120
-{
-    u16 unk0;
-    u16 unk2[EC_NUM_GROUPS];
-    u16 unk2E[27];
-    u16 unk64[27][270];
-    u8 filler3958[0x2C];
-    u16 unk3984[0x10E];
-    u16 unk3BA0;
-}; /*size = 0x3BA4*/
-
-struct EasyChatWordsByLetter
-{
-    const u16 *words;
-    int numWords;
-};
 
 EWRAM_DATA struct EasyChatScreen *gEasyChatScreen = NULL;
 EWRAM_DATA struct Unk203A11C *gUnknown_0203A11C = 0;
@@ -169,7 +51,6 @@ static void sub_811A2FC(u8);
 static void sub_811A4D0(MainCallback);
 static bool32 sub_811A88C(u16);
 static void sub_811A8A4(u16);
-void sub_811A8F0(void);
 static bool8 EasyChat_AllocateResources(u8, u16 *, u8);
 static void EasyChat_FreeResources(void);
 static u16 sub_811AAAC(void);
@@ -185,11 +66,11 @@ static u16 sub_811B0BC(void);
 static u16 sub_811B0E8(void);
 static u16 sub_811B0F8(void);
 static u16 sub_811B150(void);
-u16 sub_811B1B4(void);
-u8 sub_811BA68(void);
+static u16 sub_811B1B4(void);
+static u8 sub_811BA68(void);
 static u8 sub_811BCC8(u8);
 static void sub_811BDF0(u8 *);
-void sub_811BF78(void);
+static void sub_811BF78(void);
 static bool8 sub_811BF8C(void);
 static bool8 sub_811BFA4(void);
 static void sub_811C13C(void);
@@ -198,9 +79,9 @@ static bool8 sub_811C170(void);
 static bool8 sub_811F28C(void);
 static void sub_811F2B8(void);
 static u8 sub_811F3AC(void);
-int sub_811BA3C(void);
-int sub_811B184(void);
-int sub_811B264(void);
+static int sub_811BA3C(void);
+static int sub_811B184(void);
+static int sub_811B264(void);
 static int sub_811B32C(void);
 static int sub_811B2B0(void);
 static int sub_811B33C(void);
@@ -217,16 +98,16 @@ static void sub_811B454(void);
 static int sub_811BD64(void);
 static int sub_811BDB0(void);
 static int sub_811BD2C(void);
-int sub_811BCF4(void);
+static int sub_811BCF4(void);
 static u16 sub_811B8E8(void);
 static u8 sub_811F3B8(u8);
 static void sub_811F548(int, u16);
 static int sub_811B908(void);
 static u16 sub_811F5B0(void);
 static void sub_811B488(u16);
-u16 sub_811B940(void);
+static u16 sub_811B940(void);
 static u16 sub_811F578(u16);
-int sub_811BF88(int);
+static int sub_811BF88(int);
 static u16 sub_811B8C8(void);
 static int sub_811B568(u32);
 static int sub_811B634(u32);
@@ -253,6 +134,7 @@ static void sub_811D2C8(void);
 static void sub_811D684(void);
 static void sub_811DE90(void);
 static void sub_811DEC4(void);
+static void sub_811DF28(struct Sprite *);
 static void sub_811DE5C(u8, u8, u8, u8);
 static void sub_811E5D4(void);
 static void sub_811E720(void);
@@ -322,7 +204,7 @@ static void sub_811D7C8(void);
 static int sub_811DE48(void);
 static void sub_811D7EC(void);
 static void sub_811D830(void);
-void sub_811D058(u8, u8, const u8 *, u8, u8, u8, u8, u8, u8);
+static void sub_811D058(u8, u8, const u8 *, u8, u8, u8, u8, u8, u8);
 static void sub_811DD84(void);
 static void sub_811D6F4(void);
 static void sub_811D758(void);
@@ -344,49 +226,856 @@ static u8 *CopyEasyChatWordPadded(u8 *, u16, u16);
 static u8 sub_811F860(u16);
 static u16 sub_811F5C4(u16);
 static u16 sub_811F6B8(u16);
-bool8 sub_811F764(u16, u8);
+static bool8 sub_811F764(u16, u8);
 static int sub_811F838(u16);
+static void sub_811A8CC(void);
+static void sub_811A8F0(void);
+static void sub_811A914(void);
+static void sub_811A938(void);
 
-extern const struct {
+struct Unk8597530
+{
     u16 word;
     MainCallback callback;
-} gUnknown_08597530[4];
+};
 
-extern const struct EasyChatScreenTemplate gEasyChatScreenTemplates[21];
-extern const u8 gUnknown_08597748[][7];
-extern const u16 gUnknown_08597764[];
-extern const u16 gUnknown_0859776C[][2];
-extern const struct BgTemplate gUnknown_08597C54[4];
-extern const struct WindowTemplate gUnknown_08597C64[];
-extern const u32 gUnknown_08597B54[];
-extern const struct Unk08597C30 gUnknown_08597C30[];
-extern const u16 gUnknown_08597B14[];
-extern const u16 gUnknown_08597B34[];
-extern const u16 gUnknown_08597C1C[];
-extern const u16 gUnknown_08597C24[];
-extern const struct WindowTemplate gUnknown_08597C84;
-extern const u8 gUnknown_08597C8C[4];
-extern const u8 *const gUnknown_08597C90[4];
-extern const struct SpriteSheet gUnknown_08597CA0[];
-extern const struct SpritePalette gUnknown_08597CC0[];
-extern const struct CompressedSpriteSheet gUnknown_08597CE8[];
-extern const struct SpriteTemplate gUnknown_08597D18;
-extern const struct SpriteTemplate gUnknown_08597D68;
-extern const struct SpriteTemplate gUnknown_08597DF0;
-extern const struct SpriteTemplate gUnknown_08597DD0;
-extern const struct SpriteTemplate gUnknown_08597E48;
-extern const struct SpriteTemplate gUnknown_08597E30;
-extern const u8 gUnknown_08597D08[];
-extern const u8 gUnknown_08597E60[][4];
-extern const u8 *const gUnknown_08597E6C[][4];
-extern const struct EasyChatGroup gEasyChatGroups[];
-extern const u16 gUnknown_0859E62C[];
-extern const u16 gUnknown_0859E634[];
-extern const u16 gUnknown_0859E640[];
-extern const u16 gUnknown_0859E64C[];
-extern const u8 *const gEasyChatGroupNamePointers[];
-extern const struct EasyChatWordsByLetter gEasyChatWordsByLetterPointers[];
-extern const u16 gUnknown_0859E658[1];
+static const struct Unk8597530 sUnknown_08597530[] = {
+    {
+        .word = 26,
+        .callback = sub_811A8CC,
+    },
+    {
+        .word = 25,
+        .callback = sub_811A8F0,
+    },
+    {
+        .word = 28,
+        .callback = sub_811A914,
+    },
+    {
+        .word = 27,
+        .callback = sub_811A938,
+    },
+};
+static const struct EasyChatScreenTemplate gEasyChatScreenTemplates[] = {
+    {
+        .unk_00 = 0,
+        .numColumns = 2,
+        .numRows = 2,
+        .unk_03_0 = 0,
+        .unk_03_7 = 0,
+        .titleText = gText_Profile,
+        .instructionsText1 = gText_CombineFourWordsOrPhrases,
+        .instructionsText2 = gText_AndMakeYourProfile,
+        .confirmText1 = gText_YourProfile,
+        .confirmText2 = gText_IsAsShownOkay,
+    },
+    {
+        .unk_00 = 1,
+        .numColumns = 2,
+        .numRows = 3,
+        .unk_03_0 = 1,
+        .unk_03_7 = 0,
+        .titleText = gText_AtTheBattlesStart,
+        .instructionsText1 = gText_CombineSixWordsOrPhrases,
+        .instructionsText2 = gText_AndMakeAMessage,
+        .confirmText1 = gText_YourFeelingAtTheBattlesStart,
+        .confirmText2 = gText_IsAsShownOkay,
+    },
+    {
+        .unk_00 = 2,
+        .numColumns = 2,
+        .numRows = 3,
+        .unk_03_0 = 1,
+        .unk_03_7 = 0,
+        .titleText = gText_UponWinningABattle,
+        .instructionsText1 = gText_CombineSixWordsOrPhrases,
+        .instructionsText2 = gText_AndMakeAMessage,
+        .confirmText1 = gText_WhatYouSayIfYouWin,
+        .confirmText2 = gText_IsAsShownOkay,
+    },
+    {
+        .unk_00 = 3,
+        .numColumns = 2,
+        .numRows = 3,
+        .unk_03_0 = 1,
+        .unk_03_7 = 0,
+        .titleText = gText_UponLosingABattle,
+        .instructionsText1 = gText_CombineSixWordsOrPhrases,
+        .instructionsText2 = gText_AndMakeAMessage,
+        .confirmText1 = gText_WhatYouSayIfYouLose,
+        .confirmText2 = gText_IsAsShownOkay,
+    },
+    {
+        .unk_00 = 4,
+        .numColumns = 2,
+        .numRows = 5,
+        .unk_03_0 = 2,
+        .unk_03_7 = 0,
+        .titleText = NULL,
+        .instructionsText1 = gText_CombineNineWordsOrPhrases,
+        .instructionsText2 = gText_AndMakeAMessage2,
+        .confirmText1 = gText_TheMailMessage,
+        .confirmText2 = gText_IsAsShownOkay,
+    },
+    {
+        .unk_00 = 5,
+        .numColumns = 2,
+        .numRows = 2,
+        .unk_03_0 = 5,
+        .unk_03_7 = 0,
+        .titleText = gText_Interview,
+        .instructionsText1 = gText_CombineFourWordsOrPhrases,
+        .instructionsText2 = gText_LetsReplyToTheInterview,
+        .confirmText1 = gText_TheAnswer,
+        .confirmText2 = gText_IsAsShownOkay,
+    },
+    {
+        .unk_00 = 6,
+        .numColumns = 2,
+        .numRows = 3,
+        .unk_03_0 = 1,
+        .unk_03_7 = 0,
+        .titleText = gText_TheBardsSong,
+        .instructionsText1 = gText_ChangeJustOneWordOrPhrase,
+        .instructionsText2 = gText_AndImproveTheBardsSong,
+        .confirmText1 = gText_TheBardsSong2,
+        .confirmText2 = gText_IsAsShownOkay,
+    },
+    {
+        .unk_00 = 7,
+        .numColumns = 1,
+        .numRows = 1,
+        .unk_03_0 = 4,
+        .unk_03_7 = 0,
+        .titleText = gText_Interview,
+        .instructionsText1 = gText_FindWordsThatDescribeYour,
+        .instructionsText2 = gText_FeelingsRightNow,
+        .confirmText1 = gText_TheAnswer,
+        .confirmText2 = gText_IsAsShownOkay,
+    },
+    {
+        .unk_00 = 9,
+        .numColumns = 2,
+        .numRows = 1,
+        .unk_03_0 = 3,
+        .unk_03_7 = 0,
+        .titleText = gText_WhatsHipAndHappening,
+        .instructionsText1 = gText_CombineTwoWordsOrPhrases,
+        .instructionsText2 = gText_AndMakeATrendySaying,
+        .confirmText1 = gText_TheTrendySaying,
+        .confirmText2 = gText_IsAsShownOkay,
+    },
+    {
+        .unk_00 = 16,
+        .numColumns = 2,
+        .numRows = 5,
+        .unk_03_0 = 7,
+        .unk_03_7 = 1,
+        .titleText = NULL,
+        .instructionsText1 = gText_AfterYouHaveReadTheQuiz,
+        .instructionsText2 = gText_QuestionPressTheAButton,
+        .confirmText1 = NULL,
+        .confirmText2 = NULL,
+    },
+    {
+        .unk_00 = 15,
+        .numColumns = 1,
+        .numRows = 1,
+        .unk_03_0 = 6,
+        .unk_03_7 = 1,
+        .titleText = gText_TheQuizAnswerIs,
+        .instructionsText1 = gText_OutOfTheListedChoices,
+        .instructionsText2 = gText_SelectTheAnswerToTheQuiz,
+        .confirmText1 = gText_TheAnswerColon,
+        .confirmText2 = gText_IsAsShownOkay,
+    },
+    {
+        .unk_00 = 17,
+        .numColumns = 2,
+        .numRows = 5,
+        .unk_03_0 = 8,
+        .unk_03_7 = 1,
+        .titleText = NULL,
+        .instructionsText1 = gText_CombineNineWordsOrPhrases,
+        .instructionsText2 = gText_AndCreateAQuiz,
+        .confirmText1 = gText_IsThisQuizOK,
+        .confirmText2 = NULL,
+    },
+    {
+        .unk_00 = 18,
+        .numColumns = 1,
+        .numRows = 1,
+        .unk_03_0 = 6,
+        .unk_03_7 = 1,
+        .titleText = gText_TheQuizAnswerIs,
+        .instructionsText1 = gText_PickAWordOrPhraseAnd,
+        .instructionsText2 = gText_SetTheQuizAnswer,
+        .confirmText1 = gText_IsThisQuizOK,
+        .confirmText2 = NULL,
+    },
+    {
+        .unk_00 = 6,
+        .numColumns = 2,
+        .numRows = 3,
+        .unk_03_0 = 1,
+        .unk_03_7 = 0,
+        .titleText = gText_TheBardsSong,
+        .instructionsText1 = gText_ChangeJustOneWordOrPhrase,
+        .instructionsText2 = gText_AndImproveTheBardsSong,
+        .confirmText1 = gText_TheBardsSong2,
+        .confirmText2 = gText_IsAsShownOkay,
+    },
+    {
+        .unk_00 = 19,
+        .numColumns = 2,
+        .numRows = 3,
+        .unk_03_0 = 1,
+        .unk_03_7 = 0,
+        .titleText = gText_ApprenticesPhrase,
+        .instructionsText1 = gText_FindWordsWhichFit,
+        .instructionsText2 = gText_TheTrainersImage,
+        .confirmText1 = gText_ApprenticePhrase,
+        .confirmText2 = gText_IsAsShownOkay,
+    },
+    {
+        .unk_00 = 13,
+        .numColumns = 2,
+        .numRows = 1,
+        .unk_03_0 = 3,
+        .unk_03_7 = 0,
+        .titleText = gText_GoodSaying,
+        .instructionsText1 = gText_CombineTwoWordsOrPhrases2,
+        .instructionsText2 = gText_ToTeachHerAGoodSaying,
+        .confirmText1 = gText_TheAnswer,
+        .confirmText2 = gText_IsAsShownOkay,
+    },
+    {
+        .unk_00 = 10,
+        .numColumns = 1,
+        .numRows = 1,
+        .unk_03_0 = 4,
+        .unk_03_7 = 0,
+        .titleText = gText_Interview,
+        .instructionsText1 = gText_FindWordsThatDescribeYour,
+        .instructionsText2 = gText_FeelingsRightNow,
+        .confirmText1 = gText_TheAnswer,
+        .confirmText2 = gText_IsAsShownOkay,
+    },
+    {
+        .unk_00 = 12,
+        .numColumns = 1,
+        .numRows = 1,
+        .unk_03_0 = 4,
+        .unk_03_7 = 0,
+        .titleText = gText_Interview,
+        .instructionsText1 = gText_FindWordsThatDescribeYour,
+        .instructionsText2 = gText_FeelingsRightNow,
+        .confirmText1 = gText_TheAnswer,
+        .confirmText2 = gText_IsAsShownOkay,
+    },
+    {
+        .unk_00 = 11,
+        .numColumns = 1,
+        .numRows = 1,
+        .unk_03_0 = 4,
+        .unk_03_7 = 0,
+        .titleText = gText_Interview,
+        .instructionsText1 = gText_FindWordsThatDescribeYour,
+        .instructionsText2 = gText_FeelingsRightNow,
+        .confirmText1 = gText_TheAnswer,
+        .confirmText2 = gText_IsAsShownOkay,
+    },
+    {
+        .unk_00 = 14,
+        .numColumns = 1,
+        .numRows = 1,
+        .unk_03_0 = 4,
+        .unk_03_7 = 0,
+        .titleText = gText_FansQuestion,
+        .instructionsText1 = gText_FindWordsWhichFit,
+        .instructionsText2 = gText_TheTrainersImage,
+        .confirmText1 = gText_TheImage,
+        .confirmText2 = gText_IsAsShownOkay,
+    },
+    {
+        .unk_00 = 20,
+        .numColumns = 2,
+        .numRows = 2,
+        .unk_03_0 = 0,
+        .unk_03_7 = 0,
+        .titleText = gText_Questionnaire,
+        .instructionsText1 = gText_CombineFourWordsOrPhrases,
+        .instructionsText2 = gText_AndFillOutTheQuestionnaire,
+        .confirmText1 = gText_TheAnswer,
+        .confirmText2 = gText_IsAsShownOkay,
+    },
+};
+
+static const u8 sUnknown_08597748[][7] = {
+    { 1,  2,  3,  4,  5,  6,  0},
+    { 7,  8,  9, 10, 11, 12,  0},
+    {13, 14, 15, 16, 17, 18, 19},
+    {20, 21, 22, 23, 24, 25, 26},
+};
+
+static const u16 sMysteryGiftPhrase[] = {
+    EC_WORD_LINK,
+    EC_WORD_TOGETHER,
+    EC_WORD_WITH,
+    EC_WORD_ALL,
+};
+
+static const u16 sBerryMasterWifePhrases[][2] = {
+    {EC_WORD_GREAT, EC_WORD_BATTLE},
+    {EC_WORD_CHALLENGE, EC_WORD_CONTEST},
+    {EC_WORD_OVERWHELMING, EC_POKEMON(LATIAS)},
+    {EC_WORD_COOL, EC_POKEMON(LATIOS)},
+    {EC_WORD_SUPER, EC_WORD_HUSTLE},
+};
+
+static const u16 sUnknown_08597780[] = INCBIN_U16("graphics/misc/interview_triangle_cursor.gbapal");
+static const u32 sUnknown_085977A0[] = INCBIN_U32("graphics/misc/interview_triangle_cursor.4bpp");
+static const u32 sUnknown_085977C0[] = INCBIN_U32("graphics/misc/interview_arrow.4bpp");
+static const u32 sUnknown_085978C0[] = INCBIN_U32("graphics/misc/interview_buttons.4bpp");
+static const u16 sUnknown_085979C0[] = INCBIN_U16("graphics/misc/interview_frame.gbapal");
+static const u32 sUnknown_085979E0[] = INCBIN_U32("graphics/misc/interview_frame.4bpp.lz");
+static const u16 sUnknown_08597B14[] = INCBIN_U16("graphics/misc/interview_frame_orange.gbapal");
+static const u16 sUnknown_08597B34[] = INCBIN_U16("graphics/misc/interview_frame_green.gbapal");
+static const u32 sUnknown_08597B54[] = INCBIN_U32("graphics/misc/interview_frame_2.4bpp.lz");
+static const u16 sUnknown_08597C1C[] = INCBIN_U16("graphics/misc/8597C1C.gbapal");
+static const u16 sUnknown_08597C24[] = INCBIN_U16("graphics/misc/8597C24.gbapal");
+
+static const struct Unk08597C30 gUnknown_08597C30[] = {
+    {
+        .unk0_0 = 3,
+        .unk0_5 = 4,
+        .unk1 = 24,
+        .unk2 = 4,
+        .unk3 = 0,
+    },
+    {
+        .unk0_0 = 3,
+        .unk0_5 = 3,
+        .unk1 = 24,
+        .unk2 = 6,
+        .unk3 = 0,
+    },
+    {
+        .unk0_0 = 3,
+        .unk0_5 = 0,
+        .unk1 = 24,
+        .unk2 = 10,
+        .unk3 = 0,
+    },
+    {
+        .unk0_0 = 3,
+        .unk0_5 = 5,
+        .unk1 = 24,
+        .unk2 = 2,
+        .unk3 = 0,
+    },
+    {
+        .unk0_0 = 16,
+        .unk0_5 = 5,
+        .unk1 = 12,
+        .unk2 = 2,
+        .unk3 = 0,
+    },
+    {
+        .unk0_0 = 3,
+        .unk0_5 = 4,
+        .unk1 = 24,
+        .unk2 = 4,
+        .unk3 = 0,
+    },
+    {
+        .unk0_0 = 9,
+        .unk0_5 = 4,
+        .unk1 = 12,
+        .unk2 = 2,
+        .unk3 = 1,
+    },
+    {
+        .unk0_0 = 5,
+        .unk0_5 = 3,
+        .unk1 = 0x14,
+        .unk2 = 10,
+        .unk3 = 3,
+    },
+    {
+        .unk0_0 = 3,
+        .unk0_5 = 0,
+        .unk1 = 24,
+        .unk2 = 10,
+        .unk3 = 2,
+    },
+};
+
+static const struct BgTemplate sEasyChatBgTemplates[] = {
+    {
+        .bg = 0,
+        .charBaseIndex = 0,
+        .mapBaseIndex = 28,
+        .screenSize = 0,
+        .paletteMode = 0,
+        .priority = 0,
+        .baseTile = 0,
+    },
+    {
+        .bg = 1,
+        .charBaseIndex = 3,
+        .mapBaseIndex = 29,
+        .screenSize = 0,
+        .paletteMode = 0,
+        .priority = 1,
+        .baseTile = 0,
+    },
+    {
+        .bg = 2,
+        .charBaseIndex = 0,
+        .mapBaseIndex = 30,
+        .screenSize = 0,
+        .paletteMode = 0,
+        .priority = 2,
+        .baseTile = 0x80,
+    },
+    {
+        .bg = 3,
+        .charBaseIndex = 2,
+        .mapBaseIndex = 31,
+        .screenSize = 0,
+        .paletteMode = 0,
+        .priority = 3,
+        .baseTile = 0,
+    },
+};
+
+static const struct WindowTemplate sEasyChatWindowTemplates[] = {
+    {
+        .bg = 1,
+        .tilemapLeft = 6,
+        .tilemapTop = 0,
+        .width = 18,
+        .height = 2,
+        .paletteNum = 10,
+        .baseBlock = 0x10,
+    },
+    {
+        .bg = 0,
+        .tilemapLeft = 3,
+        .tilemapTop = 15,
+        .width = 24,
+        .height = 4,
+        .paletteNum = 15,
+        .baseBlock = 0xA,
+    },
+    {
+        .bg = 2,
+        .tilemapLeft = 1,
+        .tilemapTop = 0,
+        .width = 28,
+        .height = 32,
+        .paletteNum = 3,
+        .baseBlock = 0,
+    },
+    DUMMY_WIN_TEMPLATE,
+};
+
+static  const struct WindowTemplate sEasyChatYesNoWindowTemplate = {
+    .bg = 0,
+    .tilemapLeft = 22,
+    .tilemapTop = 9,
+    .width = 5,
+    .height = 4,
+    .paletteNum = 15,
+    .baseBlock = 0x6A,
+};
+
+static const u8 sText_Clear17[] = _("{CLEAR 17}");
+
+static const u8 *const sUnknown_08597C90[] = {
+    gUnknown_862B810,
+    gUnknown_862B832,
+    gUnknown_862B84B,
+    gUnknown_862B86C,
+};
+
+static const struct SpriteSheet sUnknown_08597CA0[] = {
+    {
+        .data = sUnknown_085977A0,
+        .size = 0x0020,
+        .tag = 0
+    },
+    {
+        .data = sUnknown_085977C0,
+        .size = 0x0100,
+        .tag = 2
+    },
+    {
+        .data = sUnknown_085978C0,
+        .size = 0x0100,
+        .tag = 3
+    },
+    {0}
+};
+
+static const struct SpritePalette sUnknown_08597CC0[] = {
+    {
+        .data = sUnknown_08597780,
+        .tag = 0,
+    },
+    {
+        .data = gEasyChatCursor_Pal,
+        .tag = 1,
+    },
+    {
+        .data = gEasyChatRightWindow_Pal,
+        .tag = 2,
+    },
+    {
+        .data = sUnknown_085979C0,
+        .tag = 3,
+    },
+    {0}
+};
+
+static const struct CompressedSpriteSheet sUnknown_08597CE8[] = {
+    {
+        .data = sUnknown_085979E0,
+        .size = 0x0800,
+        .tag = 5,
+    },
+    {
+        .data = gEasyChatCursor_Gfx,
+        .size = 0x1000,
+        .tag = 1,
+    },
+    {
+        .data = gEasyChatRightWindow_Gfx,
+        .size = 0x0800,
+        .tag = 6,
+    },
+    {
+        .data = gEasyChatMode_Gfx,
+        .size = 0x1000,
+        .tag = 4,
+    },
+};
+
+static const u8 sUnknown_08597D08[] = {0, 12, 24, 56, 68, 80, 92};
+
+static const struct OamData sOamData_8597D10 = {
+    .y = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .mosaic = 0,
+    .bpp = ST_OAM_4BPP,
+    .shape = ST_OAM_SQUARE,
+    .x = 0,
+    .matrixNum = 0,
+    .size = 0,
+    .tileNum = 0,
+    .priority = 3,
+    .paletteNum = 0,
+    .affineParam = 0,
+};
+
+static const struct SpriteTemplate sUnknown_08597D18 = {
+    .tileTag = 0,
+    .paletteTag = 0,
+    .oam = &sOamData_8597D10,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_811DF28,
+};
+
+static const struct OamData sUnknown_08597D30 = {
+    .y = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .mosaic = 0,
+    .bpp = ST_OAM_4BPP,
+    .shape = ST_OAM_H_RECTANGLE,
+    .x = 0,
+    .matrixNum = 0,
+    .size = 3,
+    .tileNum = 0,
+    .priority = 1,
+    .paletteNum = 0,
+    .affineParam = 0,
+};
+
+static const union AnimCmd sUnknown_08597D38[] = {
+    ANIMCMD_FRAME(0, 0),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sUnknown_08597D40[] = {
+    ANIMCMD_FRAME(32, 0),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sUnknown_08597D48[] = {
+    ANIMCMD_FRAME(64, 0),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sUnknown_08597D50[] = {
+    ANIMCMD_FRAME(96, 0),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd *const sUnknown_08597D58[] = {
+    sUnknown_08597D38,
+    sUnknown_08597D40,
+    sUnknown_08597D48,
+    sUnknown_08597D50,
+};
+
+static const struct SpriteTemplate sUnknown_08597D68 = {
+    .tileTag = 1,
+    .paletteTag = 1,
+    .oam = &sUnknown_08597D30,
+    .anims = sUnknown_08597D58,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_811DF28,
+};
+
+static const struct OamData sUnknown_08597D80 = {
+    .y = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .mosaic = 0,
+    .bpp = ST_OAM_4BPP,
+    .shape = ST_OAM_H_RECTANGLE,
+    .x = 0,
+    .matrixNum = 0,
+    .size = 3,
+    .tileNum = 0,
+    .priority = 1,
+    .paletteNum = 0,
+    .affineParam = 0,
+};
+
+static const union AnimCmd sUnknown_08597D88[] = {
+    ANIMCMD_FRAME(96, 0),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sUnknown_08597D90[] = {
+    ANIMCMD_FRAME(64, 4),
+    ANIMCMD_FRAME(32, 4),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sUnknown_08597D9C[] = {
+    ANIMCMD_FRAME(64, 4),
+    ANIMCMD_FRAME(0, 4),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sUnknown_08597DA8[] = {
+    ANIMCMD_FRAME(64, 4),
+    ANIMCMD_FRAME(96, 0),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sUnknown_08597DB4[] = {
+    ANIMCMD_FRAME(64, 4),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd *const sUnknown_08597DBC[] = {
+    sUnknown_08597D88,
+    sUnknown_08597D90,
+    sUnknown_08597D9C,
+    sUnknown_08597DA8,
+    sUnknown_08597DB4,
+};
+
+static const struct SpriteTemplate sUnknown_08597DD0 = {
+    .tileTag = 4,
+    .paletteTag = 2,
+    .oam = &sUnknown_08597D80,
+    .anims = sUnknown_08597DBC,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCallbackDummy,
+};
+
+static const struct OamData sUnknown_08597DE8 = {
+    .y = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .mosaic = 0,
+    .bpp = ST_OAM_4BPP,
+    .shape = ST_OAM_SQUARE,
+    .x = 0,
+    .matrixNum = 0,
+    .size = 3,
+    .tileNum = 0,
+    .priority = 3,
+    .paletteNum = 0,
+    .affineParam = 0,
+};
+
+static const struct SpriteTemplate sUnknown_08597DF0 = {
+    .tileTag = 6,
+    .paletteTag = 2,
+    .oam = &sUnknown_08597DE8,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCallbackDummy,
+};
+
+static const struct OamData sUnknown_08597E08 = {
+    .y = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .mosaic = 0,
+    .bpp = ST_OAM_4BPP,
+    .shape = ST_OAM_H_RECTANGLE,
+    .x = 0,
+    .matrixNum = 0,
+    .size = 1,
+    .tileNum = 0,
+    .priority = 1,
+    .paletteNum = 0,
+    .affineParam = 0,
+};
+
+static const struct OamData gUnknown_08597E10 = {
+    .y = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .mosaic = 0,
+    .bpp = ST_OAM_4BPP,
+    .shape = ST_OAM_SQUARE,
+    .x = 0,
+    .matrixNum = 0,
+    .size = 1,
+    .tileNum = 0,
+    .priority = 1,
+    .paletteNum = 0,
+    .affineParam = 0,
+};
+
+static const union AnimCmd sUnknown_08597E18[] = {
+    ANIMCMD_FRAME(0, 0),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sUnknown_08597E20[] = {
+    ANIMCMD_FRAME(4, 0),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd *const sUnknown_08597E28[] = {
+    sUnknown_08597E18,
+    sUnknown_08597E20,
+};
+
+static const struct SpriteTemplate sUnknown_08597E30 = {
+    .tileTag = 3,
+    .paletteTag = 2,
+    .oam = &sUnknown_08597E08,
+    .anims = sUnknown_08597E28,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCallbackDummy,
+};
+
+static const struct SpriteTemplate sUnknown_08597E48 = {
+    .tileTag = 2,
+    .paletteTag = 2,
+    .oam = &gUnknown_08597E10,
+    .anims = sUnknown_08597E28,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCallbackDummy,
+};
+
+static const u8 sUnknown_08597E60[][4] = {
+    {16, 111, 196,   0},
+    {16,  78, 130, 160},
+    {16,  80, 134, 170},
+};
+
+static const u8 *const sFooterTextOptions[][4] = {
+    {gText_DelAll, gText_Cancel5, gText_Ok2, NULL},
+    {gText_DelAll, gText_Cancel5, gText_Ok2, gText_Quiz},
+    {gText_DelAll, gText_Cancel5, gText_Ok2, gText_Answer},
+};
+
+#include "data/easy_chat/easy_chat_groups.h"
+#include "data/easy_chat/easy_chat_words_by_letter.h"
+
+const u8 *const gEasyChatGroupNamePointers[] = {
+    [EC_GROUP_POKEMON] = gEasyChatGroupName_Pokemon,
+    [EC_GROUP_TRAINER] = gEasyChatGroupName_Trainer,
+    [EC_GROUP_STATUS] = gEasyChatGroupName_Status,
+    [EC_GROUP_BATTLE] = gEasyChatGroupName_Battle,
+    [EC_GROUP_GREETINGS] = gEasyChatGroupName_Greetings,
+    [EC_GROUP_PEOPLE] = gEasyChatGroupName_People,
+    [EC_GROUP_VOICES] = gEasyChatGroupName_Voices,
+    [EC_GROUP_SPEECH] = gEasyChatGroupName_Speech,
+    [EC_GROUP_ENDINGS] = gEasyChatGroupName_Endings,
+    [EC_GROUP_FEELINGS] = gEasyChatGroupName_Feelings,
+    [EC_GROUP_CONDITIONS] = gEasyChatGroupName_Conditions,
+    [EC_GROUP_ACTIONS] = gEasyChatGroupName_Actions,
+    [EC_GROUP_LIFESTYLE] = gEasyChatGroupName_Lifestyle,
+    [EC_GROUP_HOBBIES] = gEasyChatGroupName_Hobbies,
+    [EC_GROUP_TIME] = gEasyChatGroupName_Time,
+    [EC_GROUP_MISC] = gEasyChatGroupName_Misc,
+    [EC_GROUP_ADJECTIVES] = gEasyChatGroupName_Adjectives,
+    [EC_GROUP_EVENTS] = gEasyChatGroupName_Events,
+    [EC_GROUP_MOVE_1] = gEasyChatGroupName_Move1,
+    [EC_GROUP_MOVE_2] = gEasyChatGroupName_Move2,
+    [EC_GROUP_TRENDY_SAYING] = gEasyChatGroupName_TrendySaying,
+    [EC_GROUP_POKEMON_2] = gEasyChatGroupName_Pokemon2,
+};
+
+static const u16 sUnknown_0859E62C[] = {
+    EC_WORD_I_AM,
+    EC_WORD_A,
+    EC_WORD_POKEMON,
+    EC_WORD_FRIEND,
+};
+
+static const u16 sUnknown_0859E634[] = {
+    EC_WORD_ARE,
+    EC_WORD_YOU,
+    EC_WORD_READY,
+    EC_WORD_QUES,
+    EC_WORD_HERE_I_COME,
+    EC_WORD_EXCL,
+};
+
+static const u16 sUnknown_0859E640[] = {
+    EC_WORD_YAY,
+    EC_WORD_YAY,
+    EC_WORD_EXCL_EXCL,
+    EC_WORD_I_VE,
+    EC_WORD_WON,
+    EC_WORD_EXCL_EXCL,
+};
+
+static const u16 sUnknown_0859E64C[] = {
+    EC_WORD_TOO,
+    EC_WORD_BAD,
+    EC_WORD_ELLIPSIS,
+    EC_WORD_WE,
+    EC_WORD_LOST,
+    EC_WORD_ELLIPSIS,
+};
+
+static const u16 sUnknown_0859E658[] = {
+    SPECIES_DEOXYS,
+};
 
 void sub_811A20C(u8 kind, u16 *words, MainCallback callback, u8 sizeParam)
 {
@@ -678,9 +1367,9 @@ static int sub_811A868(u16 word)
 {
     int i;
 
-    for (i = 0; i < ARRAY_COUNT(gUnknown_08597530); i ++)
+    for (i = 0; i < ARRAY_COUNT(sUnknown_08597530); i ++)
     {
-        if (word == gUnknown_08597530[i].word)
+        if (word == sUnknown_08597530[i].word)
             return i;
     }
     return -1;
@@ -697,25 +1386,25 @@ static void sub_811A8A4(u16 word)
 
     i = sub_811A868(word);
     ResetTasks();
-    sub_811A4D0(gUnknown_08597530[i].callback);
+    sub_811A4D0(sUnknown_08597530[i].callback);
 }
 
-void sub_811A8CC(void)
+static void sub_811A8CC(void)
 {
     sub_811A20C(0xF, &gSaveBlock1Ptr->lilycoveLady.quiz.unk_016, CB2_ReturnToFieldContinueScript, 3);
 }
 
-void sub_811A8F0(void)
+static void sub_811A8F0(void)
 {
     sub_811A20C(0x10, gSaveBlock1Ptr->lilycoveLady.quiz.unk_002, CB2_ReturnToFieldContinueScript, 3);
 }
 
-void sub_811A914(void)
+static void sub_811A914(void)
 {
     sub_811A20C(0x12, &gSaveBlock1Ptr->lilycoveLady.quiz.unk_014, CB2_ReturnToFieldContinueScript, 3);
 }
 
-void sub_811A938(void)
+static void sub_811A938(void)
 {
     sub_811A20C(0x11, gSaveBlock1Ptr->lilycoveLady.quiz.unk_002, CB2_ReturnToFieldContinueScript, 3);
 }
@@ -1157,7 +1846,7 @@ static u16 sub_811B150(void)
     }
 }
 
-int sub_811B184(void)
+static int sub_811B184(void)
 {
     gEasyChatScreen->unk_08 = gEasyChatScreen->state;
     if (gEasyChatScreen->kind != 6)
@@ -1173,7 +1862,7 @@ int sub_811B184(void)
     }
 }
 
-u16 sub_811B1B4(void)
+static u16 sub_811B1B4(void)
 {
     gEasyChatScreen->unk_08 = gEasyChatScreen->state;
     if (gEasyChatScreen->kind == 17)
@@ -1250,7 +1939,7 @@ u16 sub_811B1B4(void)
     }
 }
 
-int sub_811B264(void)
+static int sub_811B264(void)
 {
     gEasyChatScreen->unk_08 = gEasyChatScreen->state;
     switch (gEasyChatScreen->kind)
@@ -1681,10 +2370,10 @@ static int sub_811B908(void)
 {
     int var0 = (u8)gEasyChatScreen->unk_0a < 7 ? gEasyChatScreen->unk_0a : 0;
     int var1 = (u8)gEasyChatScreen->unk_0b < 4 ? gEasyChatScreen->unk_0b : 0;
-    return gUnknown_08597748[var1][var0];
+    return sUnknown_08597748[var1][var0];
 }
 
-u16 sub_811B940(void)
+static u16 sub_811B940(void)
 {
     return 2 * (gEasyChatScreen->unk_11 + gEasyChatScreen->unk_0e)  + gEasyChatScreen->unk_10;
 }
@@ -1736,7 +2425,7 @@ static u8 sub_811BA1C(void)
     return sub_811B940() >= sub_811F5B0() ? 1 : 0;
 }
 
-int sub_811BA3C(void)
+static int sub_811BA3C(void)
 {
     return gEasyChatScreenTemplates[gEasyChatScreen->templateId].unk_03_7;
 }
@@ -1746,7 +2435,7 @@ u8 sub_811BA5C(void)
     return gEasyChatScreen->kind;
 }
 
-u8 sub_811BA68(void)
+static u8 sub_811BA68(void)
 {
     return gEasyChatScreenTemplates[gEasyChatScreen->templateId].unk_03_0;
 }
@@ -1927,7 +2616,7 @@ static u8 sub_811BCC8(u8 entryType)
     return 0;
 }
 
-int sub_811BCF4(void)
+static int sub_811BCF4(void)
 {
     int i;
 
@@ -2046,7 +2735,7 @@ static void sub_811BE9C(void)
 
 static int sub_811BF20(void)
 {
-    return sub_811BC7C(gUnknown_08597764, 4) == 0;
+    return sub_811BC7C(sMysteryGiftPhrase, ARRAY_COUNT(sMysteryGiftPhrase)) == 0;
 }
 
 static u16 sub_811BF40(void)
@@ -2054,19 +2743,19 @@ static u16 sub_811BF40(void)
     int i;
     for (i = 0; i < 5; i++)
     {
-        if (!sub_811BC7C(gUnknown_0859776C[i], 2))
+        if (!sub_811BC7C(sBerryMasterWifePhrases[i], ARRAY_COUNT(*sBerryMasterWifePhrases)))
             return i + 1;
     }
 
     return 0;
 }
 
-void sub_811BF78(void)
+static void sub_811BF78(void)
 {
     gEasyChatScreen->unk_13 = 0;
 }
 
-int sub_811BF88(int easyChatWord)
+static int sub_811BF88(int easyChatWord)
 {
     return 0;
 }
@@ -2085,10 +2774,10 @@ static bool8 sub_811BFA4(void)
     {
     case 0:
         ResetBgsAndClearDma3BusyFlags(0);
-        InitBgsFromTemplates(0, gUnknown_08597C54, ARRAY_COUNT(gUnknown_08597C54));
+        InitBgsFromTemplates(0, sEasyChatBgTemplates, ARRAY_COUNT(sEasyChatBgTemplates));
         SetBgTilemapBuffer(3, gUnknown_0203A11C->unkB00);
         SetBgTilemapBuffer(1, gUnknown_0203A11C->unk300);
-        InitWindows(gUnknown_08597C64);
+        InitWindows(sEasyChatWindowTemplates);
         DeactivateAllTextPrinters();
         sub_811CF64();
         sub_811CF04();
@@ -2104,7 +2793,7 @@ static bool8 sub_811BFA4(void)
         CopyBgTilemapBufferToVram(3);
         break;
     case 2:
-        DecompressAndLoadBgGfxUsingHeap(1, gUnknown_08597B54, 0, 0, 0);
+        DecompressAndLoadBgGfxUsingHeap(1, sUnknown_08597B54, 0, 0, 0);
         CopyBgTilemapBufferToVram(1);
         break;
     case 3:
@@ -2984,12 +3673,12 @@ static void sub_811CF64(void)
 {
     ResetPaletteFade();
     LoadPalette(gEasyChatMode_Pal, 0, 32);
-    LoadPalette(gUnknown_08597B14, 1 * 16, 32);
-    LoadPalette(gUnknown_08597B34, 4 * 16, 32);
-    LoadPalette(gUnknown_08597C1C, 10 * 16, 8);
-    LoadPalette(gUnknown_08597C24, 11 * 16, 12);
-    LoadPalette(gUnknown_08597C24, 15 * 16, 12);
-    LoadPalette(gUnknown_08597C24, 3 * 16, 12);
+    LoadPalette(sUnknown_08597B14, 1 * 16, 32);
+    LoadPalette(sUnknown_08597B34, 4 * 16, 32);
+    LoadPalette(sUnknown_08597C1C, 10 * 16, 8);
+    LoadPalette(sUnknown_08597C24, 11 * 16, 12);
+    LoadPalette(sUnknown_08597C24, 15 * 16, 12);
+    LoadPalette(sUnknown_08597C24, 3 * 16, 12);
 }
 
 static void sub_811CFCC(void)
@@ -3011,7 +3700,7 @@ void sub_811D028(u8 windowId, u8 fontId, const u8 *str, u8 x, u8 y, u8 speed, vo
     AddTextPrinterParameterized(windowId, fontId, str, x, y, speed, callback);
 }
 
-void sub_811D058(u8 windowId, u8 fontId, const u8 *str, u8 left, u8 top, u8 speed, u8 red, u8 green, u8 blue)
+static void sub_811D058(u8 windowId, u8 fontId, const u8 *str, u8 left, u8 top, u8 speed, u8 red, u8 green, u8 blue)
 {
     u8 color[3];
     color[0] = red;
@@ -3082,7 +3771,7 @@ static void sub_811D104(u8 arg0)
 
 static void sub_811D214(u8 initialCursorPos)
 {
-    CreateYesNoMenu(&gUnknown_08597C84, 1, 14, initialCursorPos);
+    CreateYesNoMenu(&sEasyChatYesNoWindowTemplate, 1, 14, initialCursorPos);
 }
 
 static void sub_811D230(void)
@@ -3123,7 +3812,7 @@ static void sub_811D2C8(void)
     FillWindowPixelBuffer(gUnknown_0203A11C->windowId, 0x11);
     for (i = 0; i < numRows; i++)
     {
-        memcpy(spC, gUnknown_08597C8C, sizeof(gUnknown_08597C8C));
+        memcpy(spC, sText_Clear17, sizeof(sText_Clear17));
         if (var1)
             spC[2] = 6;
 
@@ -3314,8 +4003,8 @@ static void sub_811D758(void)
 {
     u32 i;
 
-    for (i = 0; i < 4; i++)
-        sub_811D028(2, 1, gUnknown_08597C90[i], 10, 97 + i * 16, 0xFF, NULL);
+    for (i = 0; i < ARRAY_COUNT(sUnknown_08597C90); i++)
+        sub_811D028(2, 1, sUnknown_08597C90[i], 10, 97 + i * 16, 0xFF, NULL);
 }
 
 static void sub_811D794(void)
@@ -3647,10 +4336,10 @@ static void sub_811DE90(void)
 {
     u32 i;
 
-    LoadSpriteSheets(gUnknown_08597CA0);
-    LoadSpritePalettes(gUnknown_08597CC0);
-    for (i = 0; i < 4; i++)
-        LoadCompressedSpriteSheet(&gUnknown_08597CE8[i]);
+    LoadSpriteSheets(sUnknown_08597CA0);
+    LoadSpritePalettes(sUnknown_08597CC0);
+    for (i = 0; i < ARRAY_COUNT(sUnknown_08597CE8); i++)
+        LoadCompressedSpriteSheet(&sUnknown_08597CE8[i]);
 }
 
 static void sub_811DEC4(void)
@@ -3658,12 +4347,12 @@ static void sub_811DEC4(void)
     u8 var0 = sub_811BA68();
     int x = gUnknown_08597C30[var0].unk0_0 * 8 + 13;
     int y = gUnknown_08597C30[var0].unk0_5 * 8 + 8;
-    u8 spriteId = CreateSprite(&gUnknown_08597D18, x, y, 2);
+    u8 spriteId = CreateSprite(&sUnknown_08597D18, x, y, 2);
     gUnknown_0203A11C->unk2D8 = &gSprites[spriteId];
     gSprites[spriteId].data[1] = 1;
 }
 
-void sub_811DF28(struct Sprite *sprite)
+static void sub_811DF28(struct Sprite *sprite)
 {
     if (sprite->data[1])
     {
@@ -3698,11 +4387,11 @@ static void sub_811DFB0(void)
 
 static void sub_811DFC8(void)
 {
-    u8 spriteId = CreateSprite(&gUnknown_08597D68, 0, 0, 3);
+    u8 spriteId = CreateSprite(&sUnknown_08597D68, 0, 0, 3);
     gUnknown_0203A11C->unk2DC = &gSprites[spriteId];
     gUnknown_0203A11C->unk2DC->pos2.x = 32;
 
-    spriteId = CreateSprite(&gUnknown_08597D68, 0, 0, 3);
+    spriteId = CreateSprite(&sUnknown_08597D68, 0, 0, 3);
     gUnknown_0203A11C->unk2E0 = &gSprites[spriteId];
     gUnknown_0203A11C->unk2E0->pos2.x = -32;
 
@@ -3773,7 +4462,7 @@ static void sub_811E1A4(s8 arg0, s8 arg1)
         }
         else
         {
-            x += gUnknown_08597D08[(u8)arg0 < 7 ? arg0 : 0];
+            x += sUnknown_08597D08[arg0 < ARRAY_COUNT(sUnknown_08597D08) ? arg0 : 0];
             anim = 3;
         }
 
@@ -3799,7 +4488,7 @@ static void sub_811E1A4(s8 arg0, s8 arg1)
 
 static void sub_811E288(void)
 {
-    u8 spriteId = CreateSprite(&gUnknown_08597D18, 0, 0, 4);
+    u8 spriteId = CreateSprite(&sUnknown_08597D18, 0, 0, 4);
     gUnknown_0203A11C->unk2E4 = &gSprites[spriteId];
     gUnknown_0203A11C->unk2E4->callback = sub_811E2DC;
     gUnknown_0203A11C->unk2E4->oam.priority = 2;
@@ -3849,11 +4538,11 @@ static void sub_811E380(void)
 
 static void sub_811E3AC(void)
 {
-    u8 spriteId = CreateSprite(&gUnknown_08597DF0, 208, 128, 6);
+    u8 spriteId = CreateSprite(&sUnknown_08597DF0, 208, 128, 6);
     gUnknown_0203A11C->unk2E8 = &gSprites[spriteId];
     gUnknown_0203A11C->unk2E8->pos2.x = -64;
 
-    spriteId = CreateSprite(&gUnknown_08597DD0, 208, 80, 5);
+    spriteId = CreateSprite(&sUnknown_08597DD0, 208, 80, 5);
     gUnknown_0203A11C->unk2EC = &gSprites[spriteId];
     gUnknown_0203A11C->unk9 = 0;
 }
@@ -3940,11 +4629,11 @@ static bool8 sub_811E5B8(void)
 
 static void sub_811E5D4(void)
 {
-    u8 spriteId = CreateSprite(&gUnknown_08597E48, 96, 80, 0);
+    u8 spriteId = CreateSprite(&sUnknown_08597E48, 96, 80, 0);
     if (spriteId != MAX_SPRITES)
         gUnknown_0203A11C->unk2F0 = &gSprites[spriteId];
 
-    spriteId = CreateSprite(&gUnknown_08597E48, 96, 156, 0);
+    spriteId = CreateSprite(&sUnknown_08597E48, 96, 156, 0);
     if (spriteId != MAX_SPRITES)
     {
         gUnknown_0203A11C->unk2F4 = &gSprites[spriteId];
@@ -3982,11 +4671,11 @@ static void sub_811E6E0(int arg0)
 
 static void sub_811E720(void)
 {
-    u8 spriteId = CreateSprite(&gUnknown_08597E30, 220, 84, 1);
+    u8 spriteId = CreateSprite(&sUnknown_08597E30, 220, 84, 1);
     if (spriteId != MAX_SPRITES)
         gUnknown_0203A11C->unk2F8 = &gSprites[spriteId];
 
-    spriteId = CreateSprite(&gUnknown_08597E30, 220, 156, 1);
+    spriteId = CreateSprite(&sUnknown_08597E30, 220, 156, 1);
     if (spriteId != MAX_SPRITES)
     {
         gUnknown_0203A11C->unk2FC = &gSprites[spriteId];
@@ -4072,7 +4761,7 @@ static int sub_811E920(int arg0)
 {
     int var0 = sub_811E8E4();
     if (var0 < 3)
-        return gUnknown_08597E60[var0][arg0] + 4;
+        return sUnknown_08597E60[var0][arg0] + 4;
     else
         return 0;
 }
@@ -4097,10 +4786,10 @@ static void sub_811E948(void)
     FillWindowPixelBuffer(windowId, 0x11);
     for (i = 0; i < 4; i++)
     {
-        const u8 *str = gUnknown_08597E6C[var0][i];
+        const u8 *str = sFooterTextOptions[var0][i];
         if (str)
         {
-            int x = gUnknown_08597E60[var0][i];
+            int x = sUnknown_08597E60[var0][i];
             sub_811D028(windowId, 1, str, x, 1, 0, NULL);
         }
     }
@@ -4548,16 +5237,16 @@ void InitEasyChatPhrases(void)
     u16 i, j;
 
     for (i = 0; i < 4; i++)
-        gSaveBlock1Ptr->unk2BB0[i] = gUnknown_0859E62C[i];
+        gSaveBlock1Ptr->unk2BB0[i] = sUnknown_0859E62C[i];
     
     for (i = 0; i < 6; i++)
-        gSaveBlock1Ptr->unk2BBC[i] = gUnknown_0859E634[i];
+        gSaveBlock1Ptr->unk2BBC[i] = sUnknown_0859E634[i];
     
     for (i = 0; i < 6; i++)
-        gSaveBlock1Ptr->unk2BC8[i] = gUnknown_0859E640[i];
+        gSaveBlock1Ptr->unk2BC8[i] = sUnknown_0859E640[i];
     
     for (i = 0; i < 6; i++)
-        gSaveBlock1Ptr->unk2BD4[i] = gUnknown_0859E64C[i];
+        gSaveBlock1Ptr->unk2BD4[i] = sUnknown_0859E64C[i];
     
     for (i = 0; i < MAIL_COUNT; i++)
     {
@@ -4782,7 +5471,7 @@ static bool8 sub_811F72C(u8 arg0)
     return FALSE;
 }
 
-bool8 sub_811F764(u16 wordIndex, u8 groupId)
+static bool8 sub_811F764(u16 wordIndex, u8 groupId)
 {
     switch (groupId)
     {
@@ -4805,9 +5494,9 @@ bool8 sub_811F764(u16 wordIndex, u8 groupId)
 static int sub_811F838(u16 species)
 {
     u32 i;
-    for (i = 0; i < ARRAY_COUNT(gUnknown_0859E658); i++)
+    for (i = 0; i < ARRAY_COUNT(sUnknown_0859E658); i++)
     {
-        if (gUnknown_0859E658[i] == species)
+        if (sUnknown_0859E658[i] == species)
             return TRUE;
     }
 
