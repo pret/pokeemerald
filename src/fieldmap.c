@@ -383,15 +383,15 @@ u8 MapGridGetZCoordAt(int x, int y)
         i = (x + 1) & 1;
         i += ((y + 1) & 1) * 2;
         block = gMapHeader.mapLayout->border[i];
-        block |= MAP_IMPASSABLE_MASK;
+        block |= METATILE_COLLISION_MASK;
     }
 
-    if (block == MAP_UNDEFINED_METATILE_ID)
+    if (block == METATILE_ID_UNDEFINED)
     {
         return 0;
     }
 
-    return block >> MAP_TILE_ELEVATION_SHIFT;
+    return block >> METATILE_ELEVATION_SHIFT;
 }
 
 u8 MapGridIsImpassableAt(int x, int y)
@@ -411,13 +411,13 @@ u8 MapGridIsImpassableAt(int x, int y)
         i = (x + 1) & 1;
         i += ((y + 1) & 1) * 2;
         block = gMapHeader.mapLayout->border[i];
-        block |= MAP_IMPASSABLE_MASK;
+        block |= METATILE_COLLISION_MASK;
     }
-    if (block == MAP_UNDEFINED_METATILE_ID)
+    if (block == METATILE_ID_UNDEFINED)
     {
         return 1;
     }
-    return (block & MAP_IMPASSABLE_MASK) >> MAP_IMPASSABLE_SHIFT;
+    return (block & METATILE_COLLISION_MASK) >> METATILE_COLLISION_SHIFT;
 }
 
 u32 MapGridGetMetatileIdAt(int x, int y)
@@ -439,19 +439,19 @@ u32 MapGridGetMetatileIdAt(int x, int y)
         mapLayout = gMapHeader.mapLayout;
         i = (x + 1) & 1;
         i += ((y + 1) & 1) * 2;
-        block = mapLayout->border[i] | MAP_IMPASSABLE_MASK;
+        block = mapLayout->border[i] | METATILE_COLLISION_MASK;
     }
-    if (block == MAP_UNDEFINED_METATILE_ID)
+    if (block == METATILE_ID_UNDEFINED)
     {
         border = gMapHeader.mapLayout->border;
         j = (x + 1) & 1;
         j += ((y + 1) & 1) * 2;
         block2 = gMapHeader.mapLayout->border[j];
         // This OR is completely pointless.
-        block2 |= MAP_IMPASSABLE_MASK;
-        return block2 & MAP_METATILE_ID_MASK;
+        block2 |= METATILE_COLLISION_MASK;
+        return block2 & METATILE_ID_MASK;
     }
-    return block & MAP_METATILE_ID_MASK;
+    return block & METATILE_ID_MASK;
 }
 
 u32 MapGridGetMetatileBehaviorAt(int x, int y)
@@ -465,7 +465,7 @@ u8 MapGridGetMetatileLayerTypeAt(int x, int y)
 {
     u16 metatile;
     metatile = MapGridGetMetatileIdAt(x, y);
-    return (GetBehaviorByMetatileId(metatile) & MAP_TILE_ELEVATION_MASK) >> MAP_TILE_ELEVATION_SHIFT;
+    return (GetBehaviorByMetatileId(metatile) & METATILE_ELEVATION_MASK) >> METATILE_ELEVATION_SHIFT;
 }
 
 void MapGridSetMetatileIdAt(int x, int y, u16 metatile)
@@ -475,7 +475,7 @@ void MapGridSetMetatileIdAt(int x, int y, u16 metatile)
      && y >= 0 && y < gBackupMapLayout.height)
     {
         i = x + y * gBackupMapLayout.width;
-        gBackupMapLayout.map[i] = (gBackupMapLayout.map[i] & MAP_TILE_ELEVATION_MASK) | (metatile & ~MAP_TILE_ELEVATION_MASK);
+        gBackupMapLayout.map[i] = (gBackupMapLayout.map[i] & METATILE_ELEVATION_MASK) | (metatile & ~METATILE_ELEVATION_MASK);
     }
 }
 
@@ -655,7 +655,7 @@ int GetMapBorderIdAt(int x, int y)
         i = gBackupMapLayout.width;
         i *= y;
         block = gBackupMapLayout.map[x + i];
-        if (block == MAP_UNDEFINED_METATILE_ID)
+        if (block == METATILE_ID_UNDEFINED)
         {
             goto fail;
         }
@@ -665,8 +665,8 @@ int GetMapBorderIdAt(int x, int y)
         mapLayout = gMapHeader.mapLayout;
         j = (x + 1) & 1;
         j += ((y + 1) & 1) * 2;
-        block2 = MAP_IMPASSABLE_MASK | mapLayout->border[j];
-        if (block2 == MAP_UNDEFINED_METATILE_ID)
+        block2 = METATILE_COLLISION_MASK | mapLayout->border[j];
+        if (block2 == METATILE_ID_UNDEFINED)
         {
             goto fail;
         }
@@ -922,9 +922,9 @@ void sub_8088B94(int x, int y, int a2)
     if (x >= 0 && x < gBackupMapLayout.width && y >= 0 && y < gBackupMapLayout.height)
     {
         if (a2 != 0)
-            gBackupMapLayout.map[x + gBackupMapLayout.width * y] |= MAP_IMPASSABLE_MASK;
+            gBackupMapLayout.map[x + gBackupMapLayout.width * y] |= METATILE_COLLISION_MASK;
         else
-            gBackupMapLayout.map[x + gBackupMapLayout.width * y] &= 0xF3FF;
+            gBackupMapLayout.map[x + gBackupMapLayout.width * y] &= ~METATILE_COLLISION_MASK;
     }
 }
 
@@ -938,7 +938,7 @@ static bool8 SkipCopyingMetatileFromSavedMap(u16* mapMetatilePtr, u16 mapWidth, 
     else
         mapMetatilePtr += mapWidth;
 
-    if (sub_80FADE4(*mapMetatilePtr & MAP_METATILE_ID_MASK, yMode) == 1)
+    if (sub_80FADE4(*mapMetatilePtr & METATILE_ID_MASK, yMode) == 1)
         return TRUE;
     return FALSE;
 }

@@ -259,7 +259,7 @@ void sub_80E8CB0(s16 *xPtr, s16 *yPtr, u16 tile)
     {
         for (x = 0; x < mapLayout->width; x ++)
         {
-            if ((mapLayout->map[y * mapLayout->width + x] & MAP_METATILE_ID_MASK) == tile)
+            if ((mapLayout->map[y * mapLayout->width + x] & METATILE_ID_MASK) == tile)
             {
                 *xPtr = x;
                 *yPtr = y;
@@ -282,7 +282,7 @@ void sub_80E8D4C(void)
     {
         if (gUnknown_0858CFCC[i].tile1 == tile)
         {
-            MapGridSetMetatileIdAt(x, y, gUnknown_0858CFCC[i].tile2 | MAP_IMPASSABLE_MASK);
+            MapGridSetMetatileIdAt(x, y, gUnknown_0858CFCC[i].tile2 | METATILE_COLLISION_MASK);
             CurrentMapDrawMetatileAt(x, y);
             return;
         }
@@ -291,7 +291,7 @@ void sub_80E8D4C(void)
     {
         if (gUnknown_0858CFCC[i].tile2 == tile)
         {
-            MapGridSetMetatileIdAt(x, y, gUnknown_0858CFCC[i].tile1 | MAP_IMPASSABLE_MASK);
+            MapGridSetMetatileIdAt(x, y, gUnknown_0858CFCC[i].tile1 | METATILE_COLLISION_MASK);
             CurrentMapDrawMetatileAt(x, y);
             return;
         }
@@ -352,7 +352,7 @@ void sub_80E8EE0(struct MapEvents const *events)
                     {
                         if (gUnknown_0858CFCC[i].tile1 == tile_id)
                         {
-                            MapGridSetMetatileIdAt(x, y, gUnknown_0858CFCC[i].tile2 | MAP_IMPASSABLE_MASK);
+                            MapGridSetMetatileIdAt(x, y, gUnknown_0858CFCC[i].tile2 | METATILE_COLLISION_MASK);
                             break;
                         }
                     }
@@ -434,7 +434,7 @@ void sub_80E9108(void)
     sub_80E8CB0(&x, &y, 0x220);
     x += 7;
     y += 7;
-    MapGridSetMetatileIdAt(x, y, 0x220 | MAP_IMPASSABLE_MASK);
+    MapGridSetMetatileIdAt(x, y, 0x220 | METATILE_COLLISION_MASK);
     CurrentMapDrawMetatileAt(x, y);
     pal_fill_black();
     CreateTask(sub_80E90C8, 0);
@@ -492,12 +492,12 @@ void sub_80E9238(u8 flagIn)
         if (curBaseId != 0)
         {
             sub_80E8CB0(&x, &y, 0x220);
-            MapGridSetMetatileIdAt(x + 7, y + 7, 0x221 | MAP_IMPASSABLE_MASK);
+            MapGridSetMetatileIdAt(x + 7, y + 7, 0x221 | METATILE_COLLISION_MASK);
         }
         else if (flagIn == 1 && VarGet(VAR_0x4089) == 1)
         {
             sub_80E8CB0(&x, &y, 0x220);
-            MapGridSetMetatileIdAt(x + 7, y + 7, 0x20a | MAP_IMPASSABLE_MASK);
+            MapGridSetMetatileIdAt(x + 7, y + 7, 0x20a | METATILE_COLLISION_MASK);
         }
     }
 }
@@ -791,7 +791,7 @@ void sub_80E9AD0(void)
             {
                 if (gUnknown_0858CFCC[j].tile2 == tile)
                 {
-                    MapGridSetMetatileIdAt(events->bgEvents[i].x + 7, events->bgEvents[i].y + 7, gUnknown_0858CFCC[j].tile1 | MAP_IMPASSABLE_MASK);
+                    MapGridSetMetatileIdAt(events->bgEvents[i].x + 7, events->bgEvents[i].y + 7, gUnknown_0858CFCC[j].tile1 | METATILE_COLLISION_MASK);
                     break;
                 }
             }

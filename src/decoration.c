@@ -1173,7 +1173,7 @@ void sub_8127B90(u16 mapX, u16 mapY, u8 decWidth, u8 decHeight, u16 decor)
             behavior = GetBehaviorByMetatileId(0x200 + gDecorations[decor].tiles[i * decWidth + j]);
             if (MetatileBehavior_IsSecretBaseImpassable(behavior) == TRUE || (gDecorations[decor].permission != DECORPERM_PASS_FLOOR && (behavior >> 12)))
             {
-                impassableFlag = MAP_IMPASSABLE_MASK;
+                impassableFlag = METATILE_COLLISION_MASK;
             }
             else
             {
@@ -1502,7 +1502,7 @@ bool8 sub_812853C(u8 taskId, const struct Decoration *decoration)
                 {
                     curX = gTasks[taskId].data[0] + j;
                     behaviorAt = MapGridGetMetatileBehaviorAt(curX, curY);
-                    behaviorBy = GetBehaviorByMetatileId(0x200 + decoration->tiles[(mapY - 1 - i) * mapX + j]) & MAP_TILE_ELEVATION_MASK;
+                    behaviorBy = GetBehaviorByMetatileId(0x200 + decoration->tiles[(mapY - 1 - i) * mapX + j]) & METATILE_ELEVATION_MASK;
                     if (!sub_81284F4(behaviorAt, decoration))
                     {
                         return FALSE;
@@ -1527,7 +1527,7 @@ bool8 sub_812853C(u8 taskId, const struct Decoration *decoration)
                 {
                     curX = gTasks[taskId].data[0] + j;
                     behaviorAt = MapGridGetMetatileBehaviorAt(curX, curY);
-                    behaviorBy = GetBehaviorByMetatileId(0x200 + decoration->tiles[(mapY - 1 - i) * mapX + j]) & MAP_TILE_ELEVATION_MASK;
+                    behaviorBy = GetBehaviorByMetatileId(0x200 + decoration->tiles[(mapY - 1 - i) * mapX + j]) & METATILE_ELEVATION_MASK;
                     if (!MetatileBehavior_IsNormal(behaviorAt) && !sub_8128484(behaviorAt, behaviorBy))
                     {
                         return FALSE;
@@ -1547,7 +1547,7 @@ bool8 sub_812853C(u8 taskId, const struct Decoration *decoration)
             {
                 curX = gTasks[taskId].data[0] + j;
                 behaviorAt = MapGridGetMetatileBehaviorAt(curX, curY);
-                behaviorBy = GetBehaviorByMetatileId(0x200 + decoration->tiles[j]) & MAP_TILE_ELEVATION_MASK;
+                behaviorBy = GetBehaviorByMetatileId(0x200 + decoration->tiles[j]) & METATILE_ELEVATION_MASK;
                 if (!MetatileBehavior_IsNormal(behaviorAt) && !MetatileBehavior_IsSecretBaseNorthWall(behaviorAt))
                 {
                     return FALSE;
