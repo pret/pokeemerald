@@ -76,13 +76,13 @@ static void sub_80E1444(u8 taskId)
             sub_80E12E8(taskId, gUnknown_08589AC0, 0);
             break;
         case 2:
-            sub_80E12E8(taskId, gUnknown_08589AC6, MAP_IMPASSABLE_MASK);
+            sub_80E12E8(taskId, gUnknown_08589AC6, METATILE_COLLISION_MASK);
             break;
         case 3:
             sub_80E12E8(taskId, gUnknown_08589ACC, 0);
             break;
         case 4:
-            sub_80E12E8(taskId, gUnknown_08589AD2, MAP_IMPASSABLE_MASK);
+            sub_80E12E8(taskId, gUnknown_08589AD2, METATILE_COLLISION_MASK);
             break;
         case 5:
             sub_80E12E8(taskId, gUnknown_08589AD8, 0);

@@ -886,8 +886,8 @@ static void PetalburgGymFunc(u8 a0, u16 a1)
     }
     for (i = 0; i < nDoors; i++)
     {
-        MapGridSetMetatileIdAt(x[i] + 7, y[i] + 7, a1 | MAP_IMPASSABLE_MASK);
-        MapGridSetMetatileIdAt(x[i] + 7, y[i] + 8, (a1 + 8) | MAP_IMPASSABLE_MASK);
+        MapGridSetMetatileIdAt(x[i] + 7, y[i] + 7, a1 | METATILE_COLLISION_MASK);
+        MapGridSetMetatileIdAt(x[i] + 7, y[i] + 8, (a1 + 8) | METATILE_COLLISION_MASK);
     }
     DrawWholeMapView();
 }
@@ -1099,7 +1099,7 @@ static void PCTurnOnEffect_1(s16 flag, s8 dx, s8 dy)
             tileId = 0x27e;
         }
     }
-    MapGridSetMetatileIdAt(gSaveBlock1Ptr->pos.x + dx + 7, gSaveBlock1Ptr->pos.y + dy + 7, tileId | MAP_IMPASSABLE_MASK);
+    MapGridSetMetatileIdAt(gSaveBlock1Ptr->pos.x + dx + 7, gSaveBlock1Ptr->pos.y + dy + 7, tileId | METATILE_COLLISION_MASK);
 }
 
 void DoPCTurnOffEffect(void)
@@ -1140,7 +1140,7 @@ static void PCTurnOffEffect(void)
     {
         tileId = 0x259;
     }
-    MapGridSetMetatileIdAt(gSaveBlock1Ptr->pos.x + dx + 7, gSaveBlock1Ptr->pos.y + dy + 7, tileId | MAP_IMPASSABLE_MASK);
+    MapGridSetMetatileIdAt(gSaveBlock1Ptr->pos.x + dx + 7, gSaveBlock1Ptr->pos.y + dy + 7, tileId | METATILE_COLLISION_MASK);
     DrawWholeMapView();
 }
 
@@ -1891,7 +1891,7 @@ static void sub_8139C80(u8 taskId)
             {
                 for (x = 0; x < 3; x++)
                 {
-                    MapGridSetMetatileIdAt(x + 8, y + 7, gUnknown_085B2BF4[y][data[0] % 3] | MAP_IMPASSABLE_MASK);
+                    MapGridSetMetatileIdAt(x + 8, y + 7, gUnknown_085B2BF4[y][data[0] % 3] | METATILE_COLLISION_MASK);
                 }
             }
         }
@@ -1901,7 +1901,7 @@ static void sub_8139C80(u8 taskId)
             {
                 for (x = 0; x < 3; x++)
                 {
-                    MapGridSetMetatileIdAt(x + 8, y + 7, gUnknown_085B2C06[y][data[0] % 3] | MAP_IMPASSABLE_MASK);
+                    MapGridSetMetatileIdAt(x + 8, y + 7, gUnknown_085B2C06[y][data[0] % 3] | METATILE_COLLISION_MASK);
                 }
             }
         }
