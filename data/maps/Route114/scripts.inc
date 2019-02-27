@@ -8,20 +8,20 @@ Route114_MapScript1_1F253F: @ 81F253F
 	compare VAR_0x4039, 1
 	call_if_eq Route114_EventScript_273D13
 	compare VAR_UNUSUAL_WEATHER_LOCATION, UNUSUAL_WEATHER_ROUTE_114_NORTH
-	call_if_eq Route114_EventScript_273D1B
+	call_if_eq UnusualWeather_StartGroudonWeather
 	compare VAR_UNUSUAL_WEATHER_LOCATION, UNUSUAL_WEATHER_ROUTE_114_SOUTH
-	call_if_eq Route114_EventScript_273D1B
+	call_if_eq UnusualWeather_StartGroudonWeather
 	end
 
 Route114_MapScript1_1F2561: @ 81F2561
 	compare VAR_UNUSUAL_WEATHER_LOCATION, UNUSUAL_WEATHER_ROUTE_114_NORTH
-	call_if_eq Route114_EventScript_273913
+	call_if_eq UnusualWeather_EventScript_PlaceTilesRoute114North
 	compare VAR_UNUSUAL_WEATHER_LOCATION, UNUSUAL_WEATHER_ROUTE_114_SOUTH
-	call_if_eq Route114_EventScript_273926
+	call_if_eq UnusualWeather_EventScript_PlaceTilesRoute114South
 	end
 
 Route114_MapScript2_1F2578: @ 81F2578
-	map_script_2 VAR_0x4039, 1, gUnknown_08273D1F
+	map_script_2 VAR_0x4039, 1, UnusualWeather_EventScript_EndEventAndCleanup_1
 	.2byte 0
 
 Route114_EventScript_1F2582:: @ 81F2582

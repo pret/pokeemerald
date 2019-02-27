@@ -2707,10 +2707,10 @@ gUnknown_08273594:: @ 8273594
 gUnknown_082735F2:: @ 82735F2
 	.string "It appears to be for use at\nthe LILYCOVE CITY port.\pWhy not give it a try and see what\nit is about?$"
 
-gUnknown_08273656:: @ 8273656
+gText_UnusualWeatherEnded_Rain:: @ 8273656
 	.string "The massive downpour appears to\nhave stopped…$"
 
-gUnknown_08273684:: @ 8273684
+gText_UnusualWeatherEnded_Sun:: @ 8273684
 	.string "The intense sunshine appears to\nhave subsided…$"
 
 EventScript_2736B3:: @ 82736B3
@@ -2999,47 +2999,47 @@ EventScript_2738FF:: @ 82738FF
 	releaseall
 	end
 
-Route114_EventScript_273913:: @ 8273913
+UnusualWeather_EventScript_PlaceTilesRoute114North:: @ 8273913
 	setmetatile 7, 3, 839, 1
 	setmetatile 7, 4, 847, 0
 	return
 
-Route114_EventScript_273926:: @ 8273926
+UnusualWeather_EventScript_PlaceTilesRoute114South:: @ 8273926
 	setmetatile 6, 45, 601, 1
 	setmetatile 6, 46, 609, 0
 	return
 
-Route115_EventScript_273939:: @ 8273939
+UnusualWeather_EventScript_PlaceTilesRoute115West:: @ 8273939
 	setmetatile 21, 5, 601, 1
 	setmetatile 21, 6, 609, 0
 	return
 
-Route115_EventScript_27394C:: @ 827394C
+UnusualWeather_EventScript_PlaceTilesRoute115East:: @ 827394C
 	setmetatile 36, 9, 601, 1
 	setmetatile 36, 10, 609, 0
 	return
 
-Route116_EventScript_27395F:: @ 827395F
+UnusualWeather_EventScript_PlaceTilesRoute116North:: @ 827395F
 	setmetatile 59, 12, 159, 1
 	setmetatile 59, 13, 167, 0
 	return
 
-Route116_EventScript_273972:: @ 8273972
+UnusualWeather_EventScript_PlaceTilesRoute116South:: @ 8273972
 	setmetatile 79, 5, 159, 1
 	setmetatile 79, 6, 167, 0
 	return
 
-Route118_EventScript_273985:: @ 8273985
+UnusualWeather_EventScript_PlaceTilesRoute118East:: @ 8273985
 	setmetatile 42, 5, 159, 1
 	setmetatile 42, 6, 167, 0
 	return
 
-Route118_EventScript_273998:: @ 8273998
+UnusualWeather_EventScript_PlaceTilesRoute118West:: @ 8273998
 	setmetatile 9, 5, 159, 1
 	setmetatile 9, 6, 167, 0
 	return
 
-Route105_EventScript_2739AB:: @ 82739AB
+UnusualWeather_EventScript_PlaceTilesRoute105North:: @ 82739AB
 	setmetatile 10, 28, 334, 0
 	setmetatile 11, 28, 334, 0
 	setmetatile 9, 29, 334, 0
@@ -3054,7 +3054,7 @@ Route105_EventScript_2739AB:: @ 82739AB
 	setmetatile 11, 31, 334, 0
 	return
 
-Route105_EventScript_273A18:: @ 8273A18
+UnusualWeather_EventScript_PlaceTilesRoute105South:: @ 8273A18
 	setmetatile 20, 53, 334, 0
 	setmetatile 21, 53, 334, 0
 	setmetatile 19, 54, 334, 0
@@ -3069,7 +3069,7 @@ Route105_EventScript_273A18:: @ 8273A18
 	setmetatile 21, 56, 334, 0
 	return
 
-Route125_EventScript_273A85:: @ 8273A85
+UnusualWeather_EventScript_PlaceTilesRoute125West:: @ 8273A85
 	setmetatile 8, 16, 334, 0
 	setmetatile 9, 16, 334, 0
 	setmetatile 7, 17, 334, 0
@@ -3084,7 +3084,7 @@ Route125_EventScript_273A85:: @ 8273A85
 	setmetatile 9, 19, 334, 0
 	return
 
-Route125_EventScript_273AF2:: @ 8273AF2
+UnusualWeather_EventScript_PlaceTilesRoute125East:: @ 8273AF2
 	setmetatile 53, 18, 334, 0
 	setmetatile 54, 18, 334, 0
 	setmetatile 52, 19, 334, 0
@@ -3099,7 +3099,7 @@ Route125_EventScript_273AF2:: @ 8273AF2
 	setmetatile 54, 21, 334, 0
 	return
 
-Route127_EventScript_273B5F:: @ 8273B5F
+UnusualWeather_EventScript_PlaceTilesRoute127North:: @ 8273B5F
 	setmetatile 57, 9, 334, 0
 	setmetatile 58, 9, 334, 0
 	setmetatile 56, 10, 334, 0
@@ -3114,7 +3114,7 @@ Route127_EventScript_273B5F:: @ 8273B5F
 	setmetatile 58, 12, 334, 0
 	return
 
-Route127_EventScript_273BCC:: @ 8273BCC
+UnusualWeather_EventScript_PlaceTilesRoute127South:: @ 8273BCC
 	setmetatile 61, 30, 334, 0
 	setmetatile 62, 30, 334, 0
 	setmetatile 60, 31, 334, 0
@@ -3129,7 +3129,7 @@ Route127_EventScript_273BCC:: @ 8273BCC
 	setmetatile 62, 33, 334, 0
 	return
 
-Route129_EventScript_273C39:: @ 8273C39
+UnusualWeather_EventScript_PlaceTilesRoute129West:: @ 8273C39
 	setmetatile 16, 14, 334, 0
 	setmetatile 17, 14, 334, 0
 	setmetatile 15, 15, 334, 0
@@ -3144,7 +3144,7 @@ Route129_EventScript_273C39:: @ 8273C39
 	setmetatile 17, 17, 334, 0
 	return
 
-Route129_EventScript_273CA6:: @ 8273CA6
+UnusualWeather_EventScript_PlaceTilesRoute129East:: @ 8273CA6
 	setmetatile 42, 19, 334, 0
 	setmetatile 43, 19, 334, 0
 	setmetatile 41, 20, 334, 0
@@ -3170,35 +3170,27 @@ Route129_EventScript_273D13:: @ 8273D13
 	setflag FLAG_SPECIAL_FLAG_0x4000
 	return
 
-Route105_EventScript_273D17:: @ 8273D17
-Route125_EventScript_273D17:: @ 8273D17
-Route127_EventScript_273D17:: @ 8273D17
-Route129_EventScript_273D17:: @ 8273D17
+UnusualWeather_StartKyogreWeather:: @ 8273D17
 	setweather WEATHER_RAIN_HEAVY
 	return
 
-Route114_EventScript_273D1B:: @ 8273D1B
-Route115_EventScript_273D1B:: @ 8273D1B
-Route116_EventScript_273D1B:: @ 8273D1B
-Route118_EventScript_273D1B:: @ 8273D1B
+UnusualWeather_StartGroudonWeather:: @ 8273D1B
 	setweather WEATHER_DROUGHT
 	return
 
-gUnknown_08273D1F:: @ 8273D1F
-
-gUnknown_08273D1F:: @ 8273D1F
+UnusualWeather_EventScript_EndEventAndCleanup_1:: @ 8273D1F
 	lockall
 	compare VAR_UNUSUAL_WEATHER_LOCATION, UNUSUAL_WEATHER_KYOGRE_LOCATIONS_START
-	goto_if_ge Route105_EventScript_273D51
-	goto Route105_EventScript_273D5F
+	goto_if_ge UnusualWeather_EventScript_ShowRainEndedMessage
+	goto UnusualWeather_EventScript_ShowSunEndedMessage
 	end
 
-Route105_EventScript_273D31:: @ 8273D31
+UnusualWeather_EventScript_EndEventAndCleanup_2:: @ 8273D31
 	closemessage
 	fadescreenswapbuffers 1
 	setweather WEATHER_SUNNY
 	doweather
-	call Route105_EventScript_273D6D
+	call UnusualWeather_EventScript_CleanupMapTiles
 	special DrawWholeMapView
 	setvar VAR_UNUSUAL_WEATHER_LOCATION, UNUSUAL_WEATHER_NONE
 	setvar VAR_0x4039, 0
@@ -3207,77 +3199,77 @@ Route105_EventScript_273D31:: @ 8273D31
 	releaseall
 	end
 
-Route105_EventScript_273D51:: @ 8273D51
-	msgbox gUnknown_08273656, MSGBOX_DEFAULT
-	goto Route105_EventScript_273D31
+UnusualWeather_EventScript_ShowRainEndedMessage:: @ 8273D51
+	msgbox gText_UnusualWeatherEnded_Rain, MSGBOX_DEFAULT
+	goto UnusualWeather_EventScript_EndEventAndCleanup_2
 	end
 
-Route105_EventScript_273D5F:: @ 8273D5F
-	msgbox gUnknown_08273684, MSGBOX_DEFAULT
-	goto Route105_EventScript_273D31
+UnusualWeather_EventScript_ShowSunEndedMessage:: @ 8273D5F
+	msgbox gText_UnusualWeatherEnded_Sun, MSGBOX_DEFAULT
+	goto UnusualWeather_EventScript_EndEventAndCleanup_2
 	end
 
-Route105_EventScript_273D6D:: @ 8273D6D
+UnusualWeather_EventScript_CleanupMapTiles:: @ 8273D6D
 	switch VAR_UNUSUAL_WEATHER_LOCATION
-	case UNUSUAL_WEATHER_ROUTE_114_NORTH, Route105_EventScript_273E23
-	case UNUSUAL_WEATHER_ROUTE_114_SOUTH, Route105_EventScript_273E36
-	case UNUSUAL_WEATHER_ROUTE_115_WEST, Route105_EventScript_273E49
-	case UNUSUAL_WEATHER_ROUTE_115_EAST, Route105_EventScript_273E5C
-	case UNUSUAL_WEATHER_ROUTE_116_NORTH, Route105_EventScript_273E6F
-	case UNUSUAL_WEATHER_ROUTE_116_SOUTH, Route105_EventScript_273E82
-	case UNUSUAL_WEATHER_ROUTE_118_EAST, Route105_EventScript_273E95
-	case UNUSUAL_WEATHER_ROUTE_118_WEST, Route105_EventScript_273EA8
-	case UNUSUAL_WEATHER_ROUTE_105_NORTH, Route105_EventScript_273EBB
-	case UNUSUAL_WEATHER_ROUTE_105_SOUTH, Route105_EventScript_273F28
-	case UNUSUAL_WEATHER_ROUTE_125_WEST, Route105_EventScript_273F95
-	case UNUSUAL_WEATHER_ROUTE_125_EAST, Route105_EventScript_274002
-	case UNUSUAL_WEATHER_ROUTE_127_NORTH, Route105_EventScript_27406F
-	case UNUSUAL_WEATHER_ROUTE_127_SOUTH, Route105_EventScript_2740DC
-	case UNUSUAL_WEATHER_ROUTE_129_WEST, Route105_EventScript_274149
-	case UNUSUAL_WEATHER_ROUTE_129_EAST, Route105_EventScript_2741B6
+	case UNUSUAL_WEATHER_ROUTE_114_NORTH, UnusualWeather_EventScript_CleanupRoute114North
+	case UNUSUAL_WEATHER_ROUTE_114_SOUTH, UnusualWeather_EventScript_CleanupRoute114South
+	case UNUSUAL_WEATHER_ROUTE_115_WEST, UnusualWeather_EventScript_CleanupRoute115West
+	case UNUSUAL_WEATHER_ROUTE_115_EAST, UnusualWeather_EventScript_CleanupRoute115East
+	case UNUSUAL_WEATHER_ROUTE_116_NORTH, UnusualWeather_EventScript_CleanupRoute116North
+	case UNUSUAL_WEATHER_ROUTE_116_SOUTH, UnusualWeather_EventScript_CleanupRoute116South
+	case UNUSUAL_WEATHER_ROUTE_118_EAST, UnusualWeather_EventScript_CleanupRoute118East
+	case UNUSUAL_WEATHER_ROUTE_118_WEST, UnusualWeather_EventScript_CleanupRoute118West
+	case UNUSUAL_WEATHER_ROUTE_105_NORTH, UnusualWeather_EventScript_CleanupRoute105North
+	case UNUSUAL_WEATHER_ROUTE_105_SOUTH, UnusualWeather_EventScript_CleanupRoute105South
+	case UNUSUAL_WEATHER_ROUTE_125_WEST, UnusualWeather_EventScript_CleanupRoute125West
+	case UNUSUAL_WEATHER_ROUTE_125_EAST, UnusualWeather_EventScript_CleanupRoute125East
+	case UNUSUAL_WEATHER_ROUTE_127_NORTH, UnusualWeather_EventScript_CleanupRoute127North
+	case UNUSUAL_WEATHER_ROUTE_127_SOUTH, UnusualWeather_EventScript_CleanupRoute127South
+	case UNUSUAL_WEATHER_ROUTE_129_WEST, UnusualWeather_EventScript_CleanupRoute129West
+	case UNUSUAL_WEATHER_ROUTE_129_EAST, UnusualWeather_EventScript_CleanupRoute129East
 	return
 
-Route105_EventScript_273E23:: @ 8273E23
+UnusualWeather_EventScript_CleanupRoute114North:: @ 8273E23
 	setmetatile 7, 3, 617, 1
 	setmetatile 7, 4, 617, 1
 	return
 
-Route105_EventScript_273E36:: @ 8273E36
+UnusualWeather_EventScript_CleanupRoute114South:: @ 8273E36
 	setmetatile 6, 45, 613, 1
 	setmetatile 6, 46, 613, 1
 	return
 
-Route105_EventScript_273E49:: @ 8273E49
+UnusualWeather_EventScript_CleanupRoute115West:: @ 8273E49
 	setmetatile 21, 5, 613, 1
 	setmetatile 21, 6, 613, 1
 	return
 
-Route105_EventScript_273E5C:: @ 8273E5C
+UnusualWeather_EventScript_CleanupRoute115East:: @ 8273E5C
 	setmetatile 36, 9, 613, 1
 	setmetatile 36, 10, 613, 1
 	return
 
-Route105_EventScript_273E6F:: @ 8273E6F
+UnusualWeather_EventScript_CleanupRoute116North:: @ 8273E6F
 	setmetatile 59, 12, 124, 1
 	setmetatile 59, 13, 124, 1
 	return
 
-Route105_EventScript_273E82:: @ 8273E82
+UnusualWeather_EventScript_CleanupRoute116South:: @ 8273E82
 	setmetatile 79, 5, 124, 1
 	setmetatile 79, 6, 124, 1
 	return
 
-Route105_EventScript_273E95:: @ 8273E95
+UnusualWeather_EventScript_CleanupRoute118East:: @ 8273E95
 	setmetatile 42, 5, 124, 1
 	setmetatile 42, 6, 121, 1
 	return
 
-Route105_EventScript_273EA8:: @ 8273EA8
+UnusualWeather_EventScript_CleanupRoute118West:: @ 8273EA8
 	setmetatile 9, 5, 124, 1
 	setmetatile 9, 6, 121, 1
 	return
 
-Route105_EventScript_273EBB:: @ 8273EBB
+UnusualWeather_EventScript_CleanupRoute105North:: @ 8273EBB
 	setmetatile 10, 28, 368, 0
 	setmetatile 11, 28, 368, 0
 	setmetatile 9, 29, 368, 0
@@ -3292,7 +3284,7 @@ Route105_EventScript_273EBB:: @ 8273EBB
 	setmetatile 11, 31, 368, 0
 	return
 
-Route105_EventScript_273F28:: @ 8273F28
+UnusualWeather_EventScript_CleanupRoute105South:: @ 8273F28
 	setmetatile 20, 53, 368, 0
 	setmetatile 21, 53, 368, 0
 	setmetatile 19, 54, 368, 0
@@ -3307,7 +3299,7 @@ Route105_EventScript_273F28:: @ 8273F28
 	setmetatile 21, 56, 368, 0
 	return
 
-Route105_EventScript_273F95:: @ 8273F95
+UnusualWeather_EventScript_CleanupRoute125West:: @ 8273F95
 	setmetatile 8, 16, 368, 0
 	setmetatile 9, 16, 368, 0
 	setmetatile 7, 17, 368, 0
@@ -3322,7 +3314,7 @@ Route105_EventScript_273F95:: @ 8273F95
 	setmetatile 9, 19, 368, 0
 	return
 
-Route105_EventScript_274002:: @ 8274002
+UnusualWeather_EventScript_CleanupRoute125East:: @ 8274002
 	setmetatile 53, 18, 368, 0
 	setmetatile 54, 18, 368, 0
 	setmetatile 52, 19, 368, 0
@@ -3337,7 +3329,7 @@ Route105_EventScript_274002:: @ 8274002
 	setmetatile 54, 21, 368, 0
 	return
 
-Route105_EventScript_27406F:: @ 827406F
+UnusualWeather_EventScript_CleanupRoute127North:: @ 827406F
 	setmetatile 57, 9, 368, 0
 	setmetatile 58, 9, 368, 0
 	setmetatile 56, 10, 368, 0
@@ -3352,7 +3344,7 @@ Route105_EventScript_27406F:: @ 827406F
 	setmetatile 58, 12, 368, 0
 	return
 
-Route105_EventScript_2740DC:: @ 82740DC
+UnusualWeather_EventScript_CleanupRoute127South:: @ 82740DC
 	setmetatile 61, 30, 368, 0
 	setmetatile 62, 30, 368, 0
 	setmetatile 60, 31, 368, 0
@@ -3367,7 +3359,7 @@ Route105_EventScript_2740DC:: @ 82740DC
 	setmetatile 62, 33, 368, 0
 	return
 
-Route105_EventScript_274149:: @ 8274149
+UnusualWeather_EventScript_CleanupRoute129West:: @ 8274149
 	setmetatile 16, 14, 368, 0
 	setmetatile 17, 14, 368, 0
 	setmetatile 15, 15, 368, 0
@@ -3382,7 +3374,7 @@ Route105_EventScript_274149:: @ 8274149
 	setmetatile 17, 17, 368, 0
 	return
 
-Route105_EventScript_2741B6:: @ 82741B6
+UnusualWeather_EventScript_CleanupRoute129East:: @ 82741B6
 	setmetatile 42, 19, 368, 0
 	setmetatile 43, 19, 368, 0
 	setmetatile 41, 20, 368, 0
@@ -3397,50 +3389,47 @@ Route105_EventScript_2741B6:: @ 82741B6
 	setmetatile 43, 22, 368, 0
 	return
 
-Underwater3_EventScript_274223:: @ 8274223
-Underwater5_EventScript_274223:: @ 8274223
-Underwater6_EventScript_274223:: @ 8274223
-Underwater7_EventScript_274223:: @ 8274223
+UnusualWeather_Underwater_SetupEscapeWarp:: @ 8274223
 	switch VAR_UNUSUAL_WEATHER_LOCATION
-	case UNUSUAL_WEATHER_ROUTE_105_NORTH, Underwater3_EventScript_274281
-	case UNUSUAL_WEATHER_ROUTE_105_SOUTH, Underwater3_EventScript_27428A
-	case UNUSUAL_WEATHER_ROUTE_125_WEST, Underwater3_EventScript_274293
-	case UNUSUAL_WEATHER_ROUTE_125_EAST, Underwater3_EventScript_27429C
-	case UNUSUAL_WEATHER_ROUTE_127_NORTH, Underwater3_EventScript_2742A5
-	case UNUSUAL_WEATHER_ROUTE_127_SOUTH, Underwater3_EventScript_2742AE
-	case UNUSUAL_WEATHER_ROUTE_129_WEST, Underwater3_EventScript_2742B7
-	case UNUSUAL_WEATHER_ROUTE_129_EAST, Underwater3_EventScript_2742C0
+	case UNUSUAL_WEATHER_ROUTE_105_NORTH, UnusualWeather_Underwater_SetupEscapeWarpRoute105North
+	case UNUSUAL_WEATHER_ROUTE_105_SOUTH, UnusualWeather_Underwater_SetupEscapeWarpRoute105South
+	case UNUSUAL_WEATHER_ROUTE_125_WEST, UnusualWeather_Underwater_SetupEscapeWarpRoute125West
+	case UNUSUAL_WEATHER_ROUTE_125_EAST, UnusualWeather_Underwater_SetupEscapeWarpRoute125East
+	case UNUSUAL_WEATHER_ROUTE_127_NORTH, UnusualWeather_Underwater_SetupEscapeWarpRoute127North
+	case UNUSUAL_WEATHER_ROUTE_127_SOUTH, UnusualWeather_Underwater_SetupEscapeWarpRoute127South
+	case UNUSUAL_WEATHER_ROUTE_129_WEST, UnusualWeather_Underwater_SetupEscapeWarpRoute129West
+	case UNUSUAL_WEATHER_ROUTE_129_EAST, UnusualWeather_Underwater_SetupEscapeWarpRoute129East
 	return
 
-Underwater3_EventScript_274281:: @ 8274281
+UnusualWeather_Underwater_SetupEscapeWarpRoute105North:: @ 8274281
 	setescapewarp MAP_ROUTE105, 255, 11, 29
 	return
 
-Underwater3_EventScript_27428A:: @ 827428A
+UnusualWeather_Underwater_SetupEscapeWarpRoute105South:: @ 827428A
 	setescapewarp MAP_ROUTE105, 255, 21, 54
 	return
 
-Underwater3_EventScript_274293:: @ 8274293
+UnusualWeather_Underwater_SetupEscapeWarpRoute125West:: @ 8274293
 	setescapewarp MAP_ROUTE125, 255, 9, 17
 	return
 
-Underwater3_EventScript_27429C:: @ 827429C
+UnusualWeather_Underwater_SetupEscapeWarpRoute125East:: @ 827429C
 	setescapewarp MAP_ROUTE125, 255, 54, 19
 	return
 
-Underwater3_EventScript_2742A5:: @ 82742A5
+UnusualWeather_Underwater_SetupEscapeWarpRoute127North:: @ 82742A5
 	setescapewarp MAP_ROUTE127, 255, 58, 10
 	return
 
-Underwater3_EventScript_2742AE:: @ 82742AE
+UnusualWeather_Underwater_SetupEscapeWarpRoute127South:: @ 82742AE
 	setescapewarp MAP_ROUTE127, 255, 62, 31
 	return
 
-Underwater3_EventScript_2742B7:: @ 82742B7
+UnusualWeather_Underwater_SetupEscapeWarpRoute129West:: @ 82742B7
 	setescapewarp MAP_ROUTE129, 255, 17, 15
 	return
 
-Underwater3_EventScript_2742C0:: @ 82742C0
+UnusualWeather_Underwater_SetupEscapeWarpRoute129East:: @ 82742C0
 	setescapewarp MAP_ROUTE129, 255, 43, 20
 	return
 

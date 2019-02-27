@@ -9,20 +9,20 @@ Route118_MapScript1_1F3DCC: @ 81F3DCC
 	compare VAR_0x4039, 1
 	call_if_eq Route118_EventScript_273D13
 	compare VAR_UNUSUAL_WEATHER_LOCATION, UNUSUAL_WEATHER_ROUTE_118_EAST
-	call_if_eq Route118_EventScript_273D1B
+	call_if_eq UnusualWeather_StartGroudonWeather
 	compare VAR_UNUSUAL_WEATHER_LOCATION, UNUSUAL_WEATHER_ROUTE_118_WEST
-	call_if_eq Route118_EventScript_273D1B
+	call_if_eq UnusualWeather_StartGroudonWeather
 	end
 
 Route118_MapScript1_1F3DF3: @ 81F3DF3
 	compare VAR_UNUSUAL_WEATHER_LOCATION, UNUSUAL_WEATHER_ROUTE_118_EAST
-	call_if_eq Route118_EventScript_273985
+	call_if_eq UnusualWeather_EventScript_PlaceTilesRoute118East
 	compare VAR_UNUSUAL_WEATHER_LOCATION, UNUSUAL_WEATHER_ROUTE_118_WEST
-	call_if_eq Route118_EventScript_273998
+	call_if_eq UnusualWeather_EventScript_PlaceTilesRoute118West
 	end
 
 Route118_MapScript2_1F3E0A: @ 81F3E0A
-	map_script_2 VAR_0x4039, 1, gUnknown_08273D1F
+	map_script_2 VAR_0x4039, 1, UnusualWeather_EventScript_EndEventAndCleanup_1
 	.2byte 0
 
 Route118_EventScript_1F3E14:: @ 81F3E14

@@ -559,7 +559,7 @@ static bool8 TryStartStepCountScript(u16 metatileBehavior)
         }
         if (sub_813B3B0() == TRUE)
         {
-            ScriptContext1_SetupScript(gUnknown_08273D1F);
+            ScriptContext1_SetupScript(UnusualWeather_EventScript_EndEventAndCleanup_1);
             return TRUE;
         }
         if (ShouldDoBrailleRegicePuzzle() == TRUE)

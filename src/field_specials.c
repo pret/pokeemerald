@@ -3446,15 +3446,17 @@ void CreateUnusualWeatherEvent(void)
     }
 }
 
-bool32 sub_813B374(void)
+// Saves the map name for the current unusual weather location in gStringVar1, then
+// returns TRUE if the weather is for Kyogre, and FALSE if it's for Groudon.
+bool32 GetUnusualWeatherMapNameAndType(void)
 {
-    static const u8 gUnknown_085B3400[] = { 0x1d, 0x1d, 0x1e, 0x1e, 0x1f, 0x1f, 0x21, 0x21, 0x14, 0x14, 0x28, 0x28, 0x2a, 0x2a, 0x2c, 0x2c };
+    static const u8 sUnusualWeatherMapNumbers[] = { 0x1d, 0x1d, 0x1e, 0x1e, 0x1f, 0x1f, 0x21, 0x21, 0x14, 0x14, 0x28, 0x28, 0x2a, 0x2a, 0x2c, 0x2c };
 
-    u16 var = VarGet(VAR_UNUSUAL_WEATHER_LOCATION);
+    u16 unusualWeather = VarGet(VAR_UNUSUAL_WEATHER_LOCATION);
 
-    GetMapName(gStringVar1, gUnknown_085B3400[var - 1], 0);
+    GetMapName(gStringVar1, sUnusualWeatherMapNumbers[unusualWeather - 1], 0);
 
-    if (var < 9)
+    if (unusualWeather < UNUSUAL_WEATHER_KYOGRE_LOCATIONS_START)
     {
         return FALSE;
     }
@@ -3466,7 +3468,8 @@ bool32 sub_813B374(void)
 
 bool8 sub_813B3B0(void)
 {
-    static const u8 sUnusualWeatherMapNumbers[] = { 0x1d, 0x1d, 0x1e, 0x1e, 0x1f, 0x1f, 0x21, 0x21, 0x14, 0x14, 0x28, 0x28, 0x2a, 0x2a, 0x2c, 0x2c };
+    // Duplicate array.
+    static const u8 sUnusualWeatherMapNumbers_2[] = { 0x1d, 0x1d, 0x1e, 0x1e, 0x1f, 0x1f, 0x21, 0x21, 0x14, 0x14, 0x28, 0x28, 0x2a, 0x2a, 0x2c, 0x2c };
 
     u16 var1 = VarGet(VAR_0x4038);
     u16 unusualWeather = VarGet(VAR_UNUSUAL_WEATHER_LOCATION);
@@ -3510,7 +3513,7 @@ bool8 sub_813B3B0(void)
             }
         }
 
-        if (gSaveBlock1Ptr->location.mapNum == sUnusualWeatherMapNumbers[unusualWeather - 1] &&
+        if (gSaveBlock1Ptr->location.mapNum == sUnusualWeatherMapNumbers_2[unusualWeather - 1] &&
             gSaveBlock1Ptr->location.mapGroup == 0)
         {
             return TRUE;

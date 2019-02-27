@@ -9,20 +9,20 @@ Route127_MapScript1_1F69E9: @ 81F69E9
 	compare VAR_0x4039, 1
 	call_if_eq Route127_EventScript_273D13
 	compare VAR_UNUSUAL_WEATHER_LOCATION, UNUSUAL_WEATHER_ROUTE_127_NORTH
-	call_if_eq Route127_EventScript_273D17
+	call_if_eq UnusualWeather_StartKyogreWeather
 	compare VAR_UNUSUAL_WEATHER_LOCATION, UNUSUAL_WEATHER_ROUTE_127_SOUTH
-	call_if_eq Route127_EventScript_273D17
+	call_if_eq UnusualWeather_StartKyogreWeather
 	end
 
 Route127_MapScript1_1F6A14: @ 81F6A14
 	compare VAR_UNUSUAL_WEATHER_LOCATION, UNUSUAL_WEATHER_ROUTE_127_NORTH
-	call_if_eq Route127_EventScript_273B5F
+	call_if_eq UnusualWeather_EventScript_PlaceTilesRoute127North
 	compare VAR_UNUSUAL_WEATHER_LOCATION, UNUSUAL_WEATHER_ROUTE_127_SOUTH
-	call_if_eq Route127_EventScript_273BCC
+	call_if_eq UnusualWeather_EventScript_PlaceTilesRoute127South
 	end
 
 Route127_MapScript2_1F6A2B: @ 81F6A2B
-	map_script_2 VAR_0x4039, 1, gUnknown_08273D1F
+	map_script_2 VAR_0x4039, 1, UnusualWeather_EventScript_EndEventAndCleanup_1
 	.2byte 0
 
 Route127_EventScript_1F6A35:: @ 81F6A35

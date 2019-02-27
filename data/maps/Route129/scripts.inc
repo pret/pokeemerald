@@ -6,9 +6,9 @@ Route129_MapScripts:: @ 81F7284
 
 Route129_MapScript1_1F7294: @ 81F7294
 	compare VAR_UNUSUAL_WEATHER_LOCATION, UNUSUAL_WEATHER_ROUTE_129_WEST
-	call_if_eq Route129_EventScript_273C39
+	call_if_eq UnusualWeather_EventScript_PlaceTilesRoute129West
 	compare VAR_UNUSUAL_WEATHER_LOCATION, UNUSUAL_WEATHER_ROUTE_129_EAST
-	call_if_eq Route129_EventScript_273CA6
+	call_if_eq UnusualWeather_EventScript_PlaceTilesRoute129East
 	end
 
 Route129_MapScript1_1F72AB: @ 81F72AB
@@ -17,9 +17,9 @@ Route129_MapScript1_1F72AB: @ 81F72AB
 	compare VAR_0x405E, 4
 	call_if_ge Route129_EventScript_1F72D8
 	compare VAR_UNUSUAL_WEATHER_LOCATION, UNUSUAL_WEATHER_ROUTE_129_WEST
-	call_if_eq Route129_EventScript_273D17
+	call_if_eq UnusualWeather_StartKyogreWeather
 	compare VAR_UNUSUAL_WEATHER_LOCATION, UNUSUAL_WEATHER_ROUTE_129_EAST
-	call_if_eq Route129_EventScript_273D17
+	call_if_eq UnusualWeather_StartKyogreWeather
 	end
 
 Route129_EventScript_1F72D8:: @ 81F72D8
@@ -27,7 +27,7 @@ Route129_EventScript_1F72D8:: @ 81F72D8
 	return
 
 Route129_MapScript2_1F72E2: @ 81F72E2
-	map_script_2 VAR_0x4039, 1, gUnknown_08273D1F
+	map_script_2 VAR_0x4039, 1, UnusualWeather_EventScript_EndEventAndCleanup_1
 	.2byte 0
 
 Route129_EventScript_1F72EC:: @ 81F72EC
