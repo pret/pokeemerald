@@ -3469,7 +3469,7 @@ static void PrintMovePowerAndAccuracy(u16 moveIndex)
     const u8 *text;
     if (moveIndex != 0)
     {
-        FillWindowPixelRect(14, 0, 53, 0, 19, 32);
+        FillWindowPixelRect(14, PALETTE_NUM_TO_FILL_VALUE(0), 53, 0, 19, 32);
 
         if (gBattleMoves[moveIndex].power < 2)
         {
@@ -3619,7 +3619,7 @@ static void PrintNewMoveDetailsOrCancelText(void)
 static void sub_81C4064(void)
 {
     u8 windowId = AddWindowFromTemplateList(sPageMovesTemplate, 0);
-    FillWindowPixelRect(windowId, 0, 0, 66, 72, 16);
+    FillWindowPixelRect(windowId, PALETTE_NUM_TO_FILL_VALUE(0), 0, 66, 72, 16);
     CopyWindowToVram(windowId, 2);
 }
 
@@ -3628,11 +3628,11 @@ static void sub_81C40A0(u8 moveIndex1, u8 moveIndex2)
     u8 windowId1 = AddWindowFromTemplateList(sPageMovesTemplate, 0);
     u8 windowId2 = AddWindowFromTemplateList(sPageMovesTemplate, 1);
 
-    FillWindowPixelRect(windowId1, 0, 0, moveIndex1 * 16, 0x48, 0x10);
-    FillWindowPixelRect(windowId1, 0, 0, moveIndex2 * 16, 0x48, 0x10);
+    FillWindowPixelRect(windowId1, PALETTE_NUM_TO_FILL_VALUE(0), 0, moveIndex1 * 16, 0x48, 0x10);
+    FillWindowPixelRect(windowId1, PALETTE_NUM_TO_FILL_VALUE(0), 0, moveIndex2 * 16, 0x48, 0x10);
 
-    FillWindowPixelRect(windowId2, 0, 0, moveIndex1 * 16, 0x30, 0x10);
-    FillWindowPixelRect(windowId2, 0, 0, moveIndex2 * 16, 0x30, 0x10);
+    FillWindowPixelRect(windowId2, PALETTE_NUM_TO_FILL_VALUE(0), 0, moveIndex1 * 16, 0x30, 0x10);
+    FillWindowPixelRect(windowId2, PALETTE_NUM_TO_FILL_VALUE(0), 0, moveIndex2 * 16, 0x30, 0x10);
 
     PrintMoveNameAndPP(moveIndex1);
     PrintMoveNameAndPP(moveIndex2);

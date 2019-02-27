@@ -3001,7 +3001,7 @@ static void sub_813AA60(u16 a0, u16 a1)
 
     if (a0 > 2 && a0 < 7)
     {
-        FillWindowPixelRect(0, 0x11, 0, 0, 216, 32);
+        FillWindowPixelRect(0, PALETTE_NUM_TO_FILL_VALUE(1), 0, 0, 216, 32);
         switch (a0)
         {
             case 3:
@@ -3140,7 +3140,7 @@ static void sub_813AD34(u8 a0, u16 a1)
 
     if (a0 == 9 || a0 == 10)
     {
-        FillWindowPixelRect(gUnknown_0203AB5E, 0x11, 0, 0, 96, 48);
+        FillWindowPixelRect(gUnknown_0203AB5E, PALETTE_NUM_TO_FILL_VALUE(1), 0, 0, 96, 48);
         if (a0 == 10)
         {
             AddTextPrinterParameterized(gUnknown_0203AB5E, 1, gUnknown_085B3254[a1], 0, 1, 0, NULL);

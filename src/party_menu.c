@@ -3479,8 +3479,9 @@ static void DisplayPartyPokemonHPBar(u16 hp, u16 maxhp, struct Struct203CEDC *pt
     FillWindowPixelRect(ptr->windowId, gUnknown_08615AB8[0], ptr->unk0->unk4[20], ptr->unk0->unk4[21] + 1, hpFraction, 2);
     if (hpFraction != ptr->unk0->unk4[22])
     {
-        FillWindowPixelRect(ptr->windowId, 13, ptr->unk0->unk4[20] + hpFraction, ptr->unk0->unk4[21], ptr->unk0->unk4[22] - hpFraction, 1);
-        FillWindowPixelRect(ptr->windowId, 2, ptr->unk0->unk4[20] + hpFraction, ptr->unk0->unk4[21] + 1, ptr->unk0->unk4[22] - hpFraction, 2);
+        // This appears to be an alternating fill
+        FillWindowPixelRect(ptr->windowId, 0x0D, ptr->unk0->unk4[20] + hpFraction, ptr->unk0->unk4[21], ptr->unk0->unk4[22] - hpFraction, 1);
+        FillWindowPixelRect(ptr->windowId, 0x02, ptr->unk0->unk4[20] + hpFraction, ptr->unk0->unk4[21] + 1, ptr->unk0->unk4[22] - hpFraction, 2);
     }
     CopyWindowToVram(ptr->windowId, 2);
 }

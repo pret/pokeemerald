@@ -804,7 +804,7 @@ static void sub_81C5A98(u8 listMenuTaskId, u8 arg1)
 static void sub_81C5AB8(u8 y, u8 arg1)
 {
     if (arg1 == 0xFF)
-        FillWindowPixelRect(0, 0, 0, y, GetMenuCursorDimensionByFont(1, 0), GetMenuCursorDimensionByFont(1, 1));
+        FillWindowPixelRect(0, PALETTE_NUM_TO_FILL_VALUE(0), 0, y, GetMenuCursorDimensionByFont(1, 0), GetMenuCursorDimensionByFont(1, 1));
     else
         PrintOnWindow_Font1(0, gText_SelectorArrow2, 0, y, 0, 0, 0, arg1);
 }

@@ -1005,7 +1005,7 @@ static void sub_816BFE0(u8 y, u8 b, u8 speed)
 {
     u8 windowId = gUnknown_0203BCC4->windowIds[0];
     if (b == 0xFF)
-        FillWindowPixelRect(windowId, 17, 0, y, GetMenuCursorDimensionByFont(1, 0), GetMenuCursorDimensionByFont(1, 1));
+        FillWindowPixelRect(windowId, PALETTE_NUM_TO_FILL_VALUE(1), 0, y, GetMenuCursorDimensionByFont(1, 0), GetMenuCursorDimensionByFont(1, 1));
     else
         AddTextPrinterParameterized4(windowId, 1, 0, y, 0, 0, gUnknown_085DFF8C, speed, gText_SelectorArrow2);
 }

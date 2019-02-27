@@ -4106,9 +4106,9 @@ static void sub_811D950(u8 arg0, u8 arg1)
         var1 = 0;
     }
 
-    FillWindowPixelRect(2, 0x11, 0, y, 224, var2);
+    FillWindowPixelRect(2, PALETTE_NUM_TO_FILL_VALUE(1), 0, y, 224, var2);
     if (var1)
-        FillWindowPixelRect(2, 0x11, 0, 0, 224, var1);
+        FillWindowPixelRect(2, PALETTE_NUM_TO_FILL_VALUE(1), 0, 0, 224, var1);
 }
 
 static void sub_811D9B4(void)

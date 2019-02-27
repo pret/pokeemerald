@@ -934,7 +934,7 @@ void RedrawMenuCursor(u8 oldPos, u8 newPos)
 
     width = GetMenuCursorDimensionByFont(sMenu.fontId, 0);
     height = GetMenuCursorDimensionByFont(sMenu.fontId, 1);
-    FillWindowPixelRect(sMenu.windowId, 0x11, sMenu.left, sMenu.optionHeight * oldPos + sMenu.top, width, height);
+    FillWindowPixelRect(sMenu.windowId, PALETTE_NUM_TO_FILL_VALUE(1), sMenu.left, sMenu.optionHeight * oldPos + sMenu.top, width, height);
     AddTextPrinterParameterized(sMenu.windowId, sMenu.fontId, gText_SelectorArrow3, sMenu.left, sMenu.optionHeight * newPos + sMenu.top, 0, 0);
 }
 
@@ -1313,7 +1313,7 @@ void sub_8199060(u8 oldCursorPos, u8 newCursorPos)
     u8 xPos = (oldCursorPos % sMenu.horizontalCount) * sMenu.optionWidth + sMenu.left;
     u8 yPos = (oldCursorPos / sMenu.horizontalCount) * sMenu.optionHeight + sMenu.top;
     FillWindowPixelRect(sMenu.windowId,
-                        0x11,
+                        PALETTE_NUM_TO_FILL_VALUE(1),
                         xPos,
                         yPos,
                         cursorWidth,

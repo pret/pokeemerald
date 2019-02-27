@@ -1103,7 +1103,7 @@ static void PrintTimeOnCard(void)
     r10 = width + 30;
     r7 -= r10;
 
-    FillWindowPixelRect(1, 0, r7, r4, r10, 15);
+    FillWindowPixelRect(1, PALETTE_NUM_TO_FILL_VALUE(0), r7, r4, r10, 15);
     ConvertIntToDecimalStringN(gStringVar4, hours, 1, 3);
     AddTextPrinterParameterized3(1, 1, r7, r4, gUnknown_0856FB0C, TEXT_SPEED_FF, gStringVar4);
     r7 += 18;

@@ -896,7 +896,7 @@ void bag_menu_print_cursor_(u8 a, u8 b)
 void bag_menu_print_cursor(u8 a, u8 b)
 {
     if (b == 0xFF)
-        FillWindowPixelRect(0, 0, 0, a, GetMenuCursorDimensionByFont(1, 0), GetMenuCursorDimensionByFont(1, 1));
+        FillWindowPixelRect(0, PALETTE_NUM_TO_FILL_VALUE(0), 0, a, GetMenuCursorDimensionByFont(1, 0), GetMenuCursorDimensionByFont(1, 1));
     else
         bag_menu_print(0, 1, gText_SelectorArrow2, 0, a, 0, 0, 0, b);
 
