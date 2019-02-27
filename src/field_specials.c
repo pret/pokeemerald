@@ -3424,7 +3424,7 @@ bool8 sub_813B260(void)
 void CreateUnusualWeatherEvent(void)
 {
     u16 randomValue = Random();
-    VarSet(VAR_0x4038, 0);
+    VarSet(VAR_UNUSUAL_WEATHER_STEP_COUNTER, 0);
 
     if (FlagGet(FLAG_DEFEATED_KYOGRE) == TRUE)
     {
@@ -3466,12 +3466,12 @@ bool32 GetUnusualWeatherMapNameAndType(void)
     }
 }
 
-bool8 sub_813B3B0(void)
+bool8 UnusualWeatherHasExpired(void)
 {
     // Duplicate array.
     static const u8 sUnusualWeatherMapNumbers_2[] = { 0x1d, 0x1d, 0x1e, 0x1e, 0x1f, 0x1f, 0x21, 0x21, 0x14, 0x14, 0x28, 0x28, 0x2a, 0x2a, 0x2c, 0x2c };
 
-    u16 var1 = VarGet(VAR_0x4038);
+    u16 steps = VarGet(VAR_UNUSUAL_WEATHER_STEP_COUNTER);
     u16 unusualWeather = VarGet(VAR_UNUSUAL_WEATHER_LOCATION);
 
     if (unusualWeather == UNUSUAL_WEATHER_NONE)
@@ -3479,9 +3479,9 @@ bool8 sub_813B3B0(void)
         return FALSE;
     }
 
-    if (++var1 > 999)
+    if (++steps > 999)
     {
-        VarSet(VAR_0x4038, 0);
+        VarSet(VAR_UNUSUAL_WEATHER_STEP_COUNTER, 0);
         if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(UNDERWATER_MARINE_CAVE))
         {
             switch (gSaveBlock1Ptr->location.mapNum)
@@ -3491,7 +3491,7 @@ bool8 sub_813B3B0(void)
                 case MAP_NUM(MARINE_CAVE_END):
                 case MAP_NUM(TERRA_CAVE_ENTRANCE):
                 case MAP_NUM(TERRA_CAVE_END):
-                    VarSet(VAR_0x4039, 1);
+                    VarSet(VAR_SHOULD_END_UNUSUAL_WEATHER, 1);
                     return FALSE;
                 default:
                     break;
@@ -3506,7 +3506,7 @@ bool8 sub_813B3B0(void)
                 case MAP_NUM(UNDERWATER5):
                 case MAP_NUM(UNDERWATER6):
                 case MAP_NUM(UNDERWATER7):
-                    VarSet(VAR_0x4039, 1);
+                    VarSet(VAR_SHOULD_END_UNUSUAL_WEATHER, 1);
                     return FALSE;
                 default:
                     break;
@@ -3526,7 +3526,7 @@ bool8 sub_813B3B0(void)
     }
     else
     {
-        VarSet(VAR_0x4038, var1);
+        VarSet(VAR_UNUSUAL_WEATHER_STEP_COUNTER, steps);
         return FALSE;
     }
 }

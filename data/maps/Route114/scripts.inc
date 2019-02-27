@@ -5,7 +5,7 @@ Route114_MapScripts:: @ 81F252F
 	.byte 0
 
 Route114_MapScript1_1F253F: @ 81F253F
-	compare VAR_0x4039, 1
+	compare VAR_SHOULD_END_UNUSUAL_WEATHER, 1
 	call_if_eq Route114_EventScript_273D13
 	compare VAR_UNUSUAL_WEATHER_LOCATION, UNUSUAL_WEATHER_ROUTE_114_NORTH
 	call_if_eq UnusualWeather_StartGroudonWeather
@@ -21,7 +21,7 @@ Route114_MapScript1_1F2561: @ 81F2561
 	end
 
 Route114_MapScript2_1F2578: @ 81F2578
-	map_script_2 VAR_0x4039, 1, UnusualWeather_EventScript_EndEventAndCleanup_1
+	map_script_2 VAR_SHOULD_END_UNUSUAL_WEATHER, 1, UnusualWeather_EventScript_EndEventAndCleanup_1
 	.2byte 0
 
 Route114_EventScript_1F2582:: @ 81F2582

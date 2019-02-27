@@ -6,7 +6,7 @@ Route125_MapScripts:: @ 81F6748
 
 Route125_MapScript1_1F6758: @ 81F6758
 	call_if_set FLAG_SYS_WEATHER_CTRL, Common_EventScript_SetWeather15
-	compare VAR_0x4039, 1
+	compare VAR_SHOULD_END_UNUSUAL_WEATHER, 1
 	call_if_eq Route125_EventScript_273D13
 	compare VAR_UNUSUAL_WEATHER_LOCATION, UNUSUAL_WEATHER_ROUTE_125_WEST
 	call_if_eq UnusualWeather_StartKyogreWeather
@@ -22,7 +22,7 @@ Route125_MapScript1_1F6783: @ 81F6783
 	end
 
 Route125_MapScript2_1F679A: @ 81F679A
-	map_script_2 VAR_0x4039, 1, UnusualWeather_EventScript_EndEventAndCleanup_1
+	map_script_2 VAR_SHOULD_END_UNUSUAL_WEATHER, 1, UnusualWeather_EventScript_EndEventAndCleanup_1
 	.2byte 0
 
 Route125_EventScript_1F67A4:: @ 81F67A4

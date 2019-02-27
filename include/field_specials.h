@@ -7,7 +7,7 @@ u16 get_unknown_box_id(void);
 bool8 InMultiBattleRoom(void);
 void sub_813BF10(void);
 void IncrementBirthIslandRockStepCount(void);
-bool8 sub_813B3B0(void);
+bool8 UnusualWeatherHasExpired(void);
 bool8 ShouldDoBrailleRegicePuzzle(void);
 bool32 is_tile_that_overrides_player_control(void);
 bool32 sub_8138120(void);

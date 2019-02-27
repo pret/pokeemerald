@@ -18,7 +18,7 @@ Route105_EventScript_1EE20B:: @ 81EE20B
 	return
 
 Route105_MapScript1_1EE21E: @ 81EE21E
-	compare VAR_0x4039, 1
+	compare VAR_SHOULD_END_UNUSUAL_WEATHER, 1
 	call_if_eq Route105_EventScript_273D13
 	compare VAR_UNUSUAL_WEATHER_LOCATION, UNUSUAL_WEATHER_ROUTE_105_NORTH
 	call_if_eq UnusualWeather_StartKyogreWeather
@@ -27,7 +27,7 @@ Route105_MapScript1_1EE21E: @ 81EE21E
 	end
 
 Route105_MapScript2_1EE240: @ 81EE240
-	map_script_2 VAR_0x4039, 1, UnusualWeather_EventScript_EndEventAndCleanup_1
+	map_script_2 VAR_SHOULD_END_UNUSUAL_WEATHER, 1, UnusualWeather_EventScript_EndEventAndCleanup_1
 	.2byte 0
 
 Route105_EventScript_1EE24A:: @ 81EE24A

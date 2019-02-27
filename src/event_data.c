@@ -131,13 +131,13 @@ void sub_809D4D8(void)
 void sub_809D570(void)
 {
     VarSet(VAR_EVENT_PICHU_SLOT, 0);
-    VarSet(VAR_0x40DE, 0);
-    VarSet(VAR_0x40DF, 0);
-    VarSet(VAR_0x40E0, 0);
-    VarSet(VAR_0x40E1, 0);
-    VarSet(VAR_0x40E2, 0);
-    VarSet(VAR_0x40E3, 0);
-    VarSet(VAR_0x40E4, 0);
+    VarSet(VAR_NEVER_READ_0x40DE, 0);
+    VarSet(VAR_NEVER_READ_0x40DF, 0);
+    VarSet(VAR_NEVER_READ_0x40E0, 0);
+    VarSet(VAR_NEVER_READ_0x40E1, 0);
+    VarSet(VAR_NEVER_READ_0x40E2, 0);
+    VarSet(VAR_NEVER_READ_0x40E3, 0);
+    VarSet(VAR_NEVER_READ_0x40E4, 0);
 }
 
 void DisableResetRTC(void)

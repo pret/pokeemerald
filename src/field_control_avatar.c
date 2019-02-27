@@ -557,7 +557,7 @@ static bool8 TryStartStepCountScript(u16 metatileBehavior)
             ScriptContext1_SetupScript(EventScript_EggHatch);
             return TRUE;
         }
-        if (sub_813B3B0() == TRUE)
+        if (UnusualWeatherHasExpired() == TRUE)
         {
             ScriptContext1_SetupScript(UnusualWeather_EventScript_EndEventAndCleanup_1);
             return TRUE;

@@ -12,7 +12,7 @@ Route129_MapScript1_1F7294: @ 81F7294
 	end
 
 Route129_MapScript1_1F72AB: @ 81F72AB
-	compare VAR_0x4039, 1
+	compare VAR_SHOULD_END_UNUSUAL_WEATHER, 1
 	call_if_eq Route129_EventScript_273D13
 	compare VAR_0x405E, 4
 	call_if_ge Route129_EventScript_1F72D8
@@ -27,7 +27,7 @@ Route129_EventScript_1F72D8:: @ 81F72D8
 	return
 
 Route129_MapScript2_1F72E2: @ 81F72E2
-	map_script_2 VAR_0x4039, 1, UnusualWeather_EventScript_EndEventAndCleanup_1
+	map_script_2 VAR_SHOULD_END_UNUSUAL_WEATHER, 1, UnusualWeather_EventScript_EndEventAndCleanup_1
 	.2byte 0
 
 Route129_EventScript_1F72EC:: @ 81F72EC

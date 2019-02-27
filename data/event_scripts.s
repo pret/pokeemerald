@@ -3193,7 +3193,7 @@ UnusualWeather_EventScript_EndEventAndCleanup_2:: @ 8273D31
 	call UnusualWeather_EventScript_CleanupMapTiles
 	special DrawWholeMapView
 	setvar VAR_UNUSUAL_WEATHER_LOCATION, UNUSUAL_WEATHER_NONE
-	setvar VAR_0x4039, 0
+	setvar VAR_SHOULD_END_UNUSUAL_WEATHER, 0
 	clearflag FLAG_SPECIAL_FLAG_0x4000
 	fadescreenswapbuffers 0
 	releaseall

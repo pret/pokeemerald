@@ -71,10 +71,10 @@
 #define VAR_DEOXYS_ROCK_STEP_COUNT           0x4034
 #define VAR_DEOXYS_ROCK_LEVEL                0x4035
 #define VAR_STORAGE_UNKNOWN                  0x4036
-#define VAR_UNUSUAL_WEATHER_LOCATION                           0x4037
-#define VAR_0x4038                           0x4038
-#define VAR_0x4039                           0x4039
-#define VAR_0x403A                           0x403A
+#define VAR_UNUSUAL_WEATHER_LOCATION         0x4037
+#define VAR_UNUSUAL_WEATHER_STEP_COUNTER     0x4038
+#define VAR_SHOULD_END_UNUSUAL_WEATHER       0x4039
+#define VAR_NEVER_READ_0x403A                0x403A // Var is written to, but never checked
 #define VAR_REGICE_STEPS_1                   0x403B
 #define VAR_REGICE_STEPS_2                   0x403C
 #define VAR_REGICE_STEPS_3                   0x403D
@@ -94,60 +94,60 @@
 #define VAR_POKELOT_RND1                     0x404B
 #define VAR_POKELOT_RND2                     0x404C
 #define VAR_0x404D                           0x404D
-#define VAR_0x404E                           0x404E
+#define VAR_UNUSED_0x404E                    0x404E // Unused Var
 #define VAR_LOTAD_SIZE_RECORD                0x404F
 #define VAR_0x4050                           0x4050
 #define VAR_ROUTE102_ACCESSIBLE              0x4051
-#define VAR_0x4052                           0x4052
+#define VAR_UNUSED_0x4052                    0x4052 // Unused Var
 #define VAR_LAVARIDGE_RIVAL_STATE            0x4053
 #define VAR_CURRENT_SECRET_BASE              0x4054
-#define VAR_0x4055                           0x4055
-#define VAR_0x4056                           0x4056
+#define VAR_UNUSED_0x4055                    0x4055 // Unused Var
+#define VAR_UNUSED_0x4056                    0x4056 // Unused Var
 #define VAR_PETALBURG_STATE                  0x4057
 #define VAR_SLATEPORT_STATE                  0x4058
-#define VAR_0x4059                           0x4059
+#define VAR_UNUSED_0x4059                    0x4059 // Unused Var
 #define VAR_RUSTBORO_STATE                   0x405A
-#define VAR_0x405B                           0x405B
-#define VAR_0x405C                           0x405C
+#define VAR_UNUSED_0x405B                    0x405B // Unused Var
+#define VAR_UNUSED_0x405C                    0x405C // Unused Var
 #define VAR_0x405D                           0x405D
 #define VAR_0x405E                           0x405E
-#define VAR_0x405F                           0x405F
+#define VAR_UNUSED_0x405F                    0x405F // Unused Var
 #define VAR_ROUTE101_STATE                   0x4060
-#define VAR_0x4061                           0x4061
-#define VAR_0x4062                           0x4062
+#define VAR_UNUSED_0x4061                    0x4061 // Unused Var
+#define VAR_UNUSED_0x4062                    0x4062 // Unused Var
 #define VAR_0x4063                           0x4063
-#define VAR_0x4064                           0x4064
-#define VAR_0x4065                           0x4065
-#define VAR_0x4066                           0x4066
-#define VAR_0x4067                           0x4067
-#define VAR_0x4068                           0x4068
+#define VAR_UNUSED_0x4064                    0x4064 // Unused Var
+#define VAR_UNUSED_0x4065                    0x4065 // Unused Var
+#define VAR_UNUSED_0x4066                    0x4066 // Unused Var
+#define VAR_UNUSED_0x4067                    0x4067 // Unused Var
+#define VAR_UNUSED_0x4068                    0x4068 // Unused Var
 #define VAR_ROUTE110_STATE                   0x4069
-#define VAR_0x406A                           0x406A
-#define VAR_0x406B                           0x406B
-#define VAR_0x406C                           0x406C
-#define VAR_0x406D                           0x406D
-#define VAR_0x406E                           0x406E
+#define VAR_UNUSED_0x406A                    0x406A // Unused Var
+#define VAR_UNUSED_0x406B                    0x406B // Unused Var
+#define VAR_UNUSED_0x406C                    0x406C // Unused Var
+#define VAR_UNUSED_0x406D                    0x406D // Unused Var
+#define VAR_UNUSED_0x406E                    0x406E // Unused Var
 #define VAR_ROUTE116_STATE                   0x406F
-#define VAR_0x4070                           0x4070
+#define VAR_UNUSED_0x4070                    0x4070 // Unused Var
 #define VAR_ROUTE118_STATE                   0x4071
 #define VAR_ROUTE119_STATE                   0x4072
-#define VAR_0x4073                           0x4073
+#define VAR_UNUSED_0x4073                    0x4073 // Unused Var
 #define VAR_ROUTE121_STATE                   0x4074
-#define VAR_0x4075                           0x4075
-#define VAR_0x4076                           0x4076
-#define VAR_0x4077                           0x4077
-#define VAR_0x4078                           0x4078
-#define VAR_0x4079                           0x4079
-#define VAR_0x407A                           0x407A
+#define VAR_UNUSED_0x4075                    0x4075 // Unused Var
+#define VAR_UNUSED_0x4076                    0x4076 // Unused Var
+#define VAR_UNUSED_0x4077                    0x4077 // Unused Var
+#define VAR_UNUSED_0x4078                    0x4078 // Unused Var
+#define VAR_UNUSED_0x4079                    0x4079 // Unused Var
+#define VAR_UNUSED_0x407A                    0x407A // Unused Var
 #define VAR_ROUTE128_STATE                   0x407B
-#define VAR_0x407C                           0x407C
-#define VAR_0x407D                           0x407D
-#define VAR_0x407E                           0x407E
-#define VAR_0x407F                           0x407F
-#define VAR_0x4080                           0x4080
-#define VAR_0x4081                           0x4081
+#define VAR_UNUSED_0x407C                    0x407C // Unused Var
+#define VAR_UNUSED_0x407D                    0x407D // Unused Var
+#define VAR_UNUSED_0x407E                    0x407E // Unused Var
+#define VAR_UNUSED_0x407F                    0x407F // Unused Var
+#define VAR_UNUSED_0x4080                    0x4080 // Unused Var
+#define VAR_UNUSED_0x4081                    0x4081 // Unused Var
 #define VAR_LITTLEROOT_HOUSES_STATE          0x4082
-#define VAR_0x4083                           0x4083
+#define VAR_UNUSED_0x4083                    0x4083 // Unused Var
 #define VAR_BIRCH_LAB_STATE                  0x4084
 #define VAR_PETALBURG_GYM_STATE              0x4085
 #define VAR_LINK_CONTEST_ROOM_STATE          0x4086
@@ -155,13 +155,13 @@
 #define VAR_CONTEST_LOCATION                 0x4088
 #define VAR_0x4089                           0x4089
 #define VAR_CONTEST_PRIZE_PICKUP             0x408A
-#define VAR_0x408B                           0x408B
+#define VAR_UNUSED_0x408B                    0x408B // Unused Var
 #define VAR_LITTLEROOT_HOUSES_STATE_2        0x408C
 #define VAR_LITTLEROOT_RIVAL_STATE           0x408D
 #define VAR_BOARD_BRINEY_BOAT_ROUTE104_STATE 0x408E
 #define VAR_DEVON_CORP_3F_STATE              0x408F
 #define VAR_BRINEY_HOUSE_STATE               0x4090
-#define VAR_0x4091                           0x4091
+#define VAR_UNUSED_0x4091                    0x4091 // Unused Var
 #define VAR_LITTLEROOT_INTRO_STATE           0x4092
 #define VAR_MAUVILLE_GYM_STATE               0x4093
 #define VAR_LILYCOVE_MUSEUM_2F_STATE         0x4094
@@ -171,20 +171,20 @@
 #define VAR_PETALBURG_WOODS_STATE            0x4098
 #define VAR_LILYCOVE_CONTEST_LOBBY_STATE     0x4099
 #define VAR_RUSTURF_TUNNEL_STATE             0x409A
-#define VAR_0x409B                           0x409B
+#define VAR_UNUSED_0x409B                    0x409B // Unused Var
 #define VAR_ELITE_4_STATE                    0x409C
-#define VAR_0x409D                           0x409D
+#define VAR_UNUSED_0x409D                    0x409D // Unused Var
 #define VAR_0x409E                           0x409E
 #define VAR_0x409F                           0x409F
 #define VAR_SLATEPORT_HARBOR_STATE           0x40A0
-#define VAR_0x40A1                           0x40A1
+#define VAR_UNUSED_0x40A1                    0x40A1 // Unused var
 #define VAR_SEAFLOOR_CAVERN_STATE            0x40A2
 #define VAR_CABLE_CAR_STATION_STATE          0x40A3
 #define VAR_SAFARI_ZONE_STATE                0x40A4
 #define VAR_TRICK_HOUSE_ENTRANCE_STATE_1     0x40A5
 #define VAR_TRICK_HOUSE_ENTRANCE_STATE_2     0x40A6
 #define VAR_TRICK_HOUSE_ENTRANCE_STATE_3     0x40A7
-#define VAR_0x40A8                           0x40A8
+#define VAR_UNUSED_0x40A8                    0x40A8 // Unused Var
 #define VAR_CYCLING_CHALLENGE_STATE          0x40A9
 #define VAR_SLATEPORT_MUSEUM_1F_STATE        0x40AA
 #define VAR_TRICK_HOUSE_PUZZLE_1_STATE       0x40AB
@@ -197,13 +197,13 @@
 #define VAR_TRICK_HOUSE_PUZZLE_8_STATE       0x40B2
 #define VAR_WEATHER_INSTITUTE_STATE          0x40B3
 #define VAR_PORTHOLE_STATE                   0x40B4
-#define VAR_TRICK_HOUSE_STATE                0x40B5  // TODO: needs some further investigation
+#define VAR_TRICK_HOUSE_STATE                0x40B5 // TODO: needs some further investigation
 #define VAR_TRICK_HOUSE_PUZZLE_7_STATE_2     0x40B6
 #define VAR_SLATEPORT_FAN_CLUB_STATE         0x40B7
-#define VAR_0x40B8                           0x40B8
+#define VAR_UNUSED_0x40B8                    0x40B8 // Unused Var
 #define VAR_MT_PYRE_STATE                    0x40B9
 #define VAR_NEW_MAUVILLE_STATE               0x40BA
-#define VAR_0x40BB                           0x40BB
+#define VAR_UNUSED_0x40BB                    0x40BB // Unused Var
 #define VAR_BRAVO_TRAINER_BATTLE_TOWER_ON    0x40BC
 #define VAR_JAGGED_PASS_ASH_WEATHER          0x40BD
 #define VAR_GLASS_WORKSHOP_STATE             0x40BE
@@ -235,17 +235,17 @@
 #define VAR_0x40D8                           0x40D8
 #define VAR_0x40D9                           0x40D9
 #define VAR_0x40DA                           0x40DA
-#define VAR_0x40DB                           0x40DB
-#define VAR_0x40DC                           0x40DC
+#define VAR_UNUSED_0x40DB                    0x40DB // Unused Var
+#define VAR_UNUSED_0x40DC                    0x40DC // Unused Var
 #define VAR_EVENT_PICHU_SLOT                 0x40DD
-#define VAR_0x40DE                           0x40DE
-#define VAR_0x40DF                           0x40DF
-#define VAR_0x40E0                           0x40E0
-#define VAR_0x40E1                           0x40E1
-#define VAR_0x40E2                           0x40E2
-#define VAR_0x40E3                           0x40E3
-#define VAR_0x40E4                           0x40E4
-#define VAR_0x40E5                           0x40E5
+#define VAR_NEVER_READ_0x40DE                0x40DE // Var is written to, but never read
+#define VAR_NEVER_READ_0x40DF                0x40DF // Var is written to, but never read
+#define VAR_NEVER_READ_0x40E0                0x40E0 // Var is written to, but never read
+#define VAR_NEVER_READ_0x40E1                0x40E1 // Var is written to, but never read
+#define VAR_NEVER_READ_0x40E2                0x40E2 // Var is written to, but never read
+#define VAR_NEVER_READ_0x40E3                0x40E3 // Var is written to, but never read
+#define VAR_NEVER_READ_0x40E4                0x40E4 // var is written to, but never read
+#define VAR_UNUSED_0x40E5                    0x40E5 // Unused Var
 #define VAR_DAILY_SLOTS                      0x40E6
 #define VAR_DAILY_WILDS                      0x40E7
 #define VAR_DAILY_BLENDER                    0x40E8
@@ -263,15 +263,15 @@
 #define VAR_0x40F4                           0x40F4
 #define VAR_0x40F5                           0x40F5
 #define VAR_0x40F6                           0x40F6
-#define VAR_0x40F7                           0x40F7
-#define VAR_0x40F8                           0x40F8
-#define VAR_0x40F9                           0x40F9
-#define VAR_0x40FA                           0x40FA
-#define VAR_0x40FB                           0x40FB
-#define VAR_0x40FC                           0x40FC
-#define VAR_0x40FD                           0x40FD
-#define VAR_0x40FE                           0x40FE
-#define VAR_0x40FF                           0x40FF
+#define VAR_UNUSED_0x40F7                    0x40F7 // Unused Var
+#define VAR_UNUSED_0x40F8                    0x40F8 // Unused Var
+#define VAR_UNUSED_0x40F9                    0x40F9 // Unused Var
+#define VAR_UNUSED_0x40FA                    0x40FA // Unused Var
+#define VAR_UNUSED_0x40FB                    0x40FB // Unused Var
+#define VAR_UNUSED_0x40FC                    0x40FC // Unused Var
+#define VAR_UNUSED_0x40FD                    0x40FD // Unused Var
+#define VAR_UNUSED_0x40FE                    0x40FE // Unused Var
+#define VAR_UNUSED_0x40FF                    0x40FF // Unused Var
 
 #define SPECIAL_VARS_START 0x8000
 // special vars
@@ -297,6 +297,6 @@
 #define VAR_MON_BOX_ID             0x8012
 #define VAR_MON_BOX_POS            0x8013
 #define VAR_0x8014                 0x8014
-#define VAR_0x8015                 0x8015
+#define VAR_NEVER_READ_0x8015      0x8015 // Written to, but never read
 
 #endif // GUARD_CONSTANTS_VARS_H
