@@ -1043,7 +1043,7 @@ static void sub_81408A8(u8 taskId)
 
 static void sub_8140914(u8 taskId)
 {
-    DisplayYesNoMenuWithDefault();
+    DisplayYesNoMenuDefaultYes();
     DrawStdWindowFrame(gUnknown_0203AB8C, 0);
     AddTextPrinterParameterized(gUnknown_0203AB8C, 1, gUnknown_082A5C13, 0, 1, TEXT_SPEED_FF, 0);
     CopyWindowToVram(gUnknown_0203AB8C, 3);
@@ -3256,7 +3256,7 @@ static const struct SpriteTemplate gUnknown_085B7AEC =
 
 static void sub_81428C4(u8 r0)
 {
-    DisplayYesNoMenuWithDefault();
+    DisplayYesNoMenuDefaultYes();
     DoYesNoFuncWithChoice(r0, &gUnknown_085B6408);
 }
 

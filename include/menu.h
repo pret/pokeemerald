@@ -32,7 +32,7 @@ void PrintPlayerNameOnWindow(u8, const u8*, u16, u16);
 void DisplayItemMessageOnField(u8 taskId, const u8 *src, TaskFunc callback);
 void ClearDialogWindowAndFrame(u8 windowId, bool8 copyToVram);
 void SetStandardWindowBorderStyle(u8 a0, u8 a1);
-void DisplayYesNoMenuWithDefault(void);
+void DisplayYesNoMenuDefaultYes(void);
 u32 GetPlayerTextSpeed(void);
 u8 GetPlayerTextSpeedDelay(void);
 void sub_81978B0(u16 arg0);
@@ -81,7 +81,7 @@ u8 sub_81983AC(u8 windowId, u8 fontId, u8 left, u8 top, u8 cursorHeight, u8 numC
 void sub_819786C(u8 windowId, bool8 copyToVram);
 void AddTextPrinterForMessage_2(bool8 allowSkippingDelayWithButtonPress);
 void RemoveStartMenuWindow(void);
-void DisplayYesNoMenuWithDefaultDefaultNo(u8 initialCursorPos);
+void DisplayYesNoMenuWithDefault(u8 initialCursorPos);
 void sub_819A344(u8 a0, u8 *dest, u8 color);
 void RemoveMapNamePopUpWindow(void);
 u8 GetMapNamePopUpWindowId(void);

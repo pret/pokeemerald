@@ -1033,7 +1033,7 @@ void sub_80E9FFC(u8 taskId)
 
 void sub_80EA06C(u8 taskId)
 {
-    DisplayYesNoMenuWithDefault();
+    DisplayYesNoMenuDefaultYes();
     DoYesNoFuncWithChoice(taskId, &gUnknown_0858D058);
 }
 

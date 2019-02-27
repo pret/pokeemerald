@@ -563,7 +563,7 @@ _080170CA:
 	negs r0, r0
 	b _08017110
 _080170D4:
-	bl DisplayYesNoMenuWithDefault
+	bl DisplayYesNoMenuDefaultYes
 	ldrb r0, [r4]
 	adds r0, 0x1
 	strb r0, [r4]
@@ -26550,7 +26550,7 @@ _08024246:
 	strb r0, [r5, 0xC]
 	b _080242D8
 _0802426A:
-	bl DisplayYesNoMenuWithDefault
+	bl DisplayYesNoMenuDefaultYes
 	b _080242D0
 _08024270:
 	bl Menu_ProcessInputNoWrapClearOnChoose

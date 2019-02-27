@@ -458,12 +458,12 @@ void DisplayItemMessageOnField(u8 taskId, const u8 *string, TaskFunc callback)
     CopyWindowToVram(0, 3);
 }
 
-void DisplayYesNoMenuWithDefault(void)
+void DisplayYesNoMenuDefaultYes(void)
 {
     CreateYesNoMenu(&sYesNo_WindowTemplates, STD_WINDOW_BASE_TILE_NUM, STD_WINDOW_PALETTE_NUM, 0);
 }
 
-void DisplayYesNoMenuWithDefaultDefaultNo(u8 initialCursorPos)
+void DisplayYesNoMenuWithDefault(u8 initialCursorPos)
 {
     CreateYesNoMenu(&sYesNo_WindowTemplates, STD_WINDOW_BASE_TILE_NUM, STD_WINDOW_PALETTE_NUM, initialCursorPos);
 }

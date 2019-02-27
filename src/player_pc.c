@@ -761,7 +761,7 @@ static void Mailbox_MoveToBag(u8 taskId)
 
 static void Mailbox_DrawYesNoBeforeMove(u8 taskId)
 {
-    DisplayYesNoMenuWithDefault();
+    DisplayYesNoMenuDefaultYes();
     gTasks[taskId].func = Mailbox_MoveToBagYesNoPrompt;
 }
 
