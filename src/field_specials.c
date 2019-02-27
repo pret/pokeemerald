@@ -3421,28 +3421,28 @@ bool8 sub_813B260(void)
     return FALSE;
 }
 
-void sub_813B2E4(void)
+void CreateUnusualWeatherEvent(void)
 {
     u16 randomValue = Random();
     VarSet(VAR_0x4038, 0);
 
     if (FlagGet(FLAG_DEFEATED_KYOGRE) == TRUE)
     {
-        VarSet(VAR_0x4037, (randomValue & 7) + 1);
+        VarSet(VAR_UNUSUAL_WEATHER_LOCATION, (randomValue & (UNUSUAL_WEATHER_COUNT_PER_LEGENDARY - 1)) + UNUSUAL_WEATHER_GROUDON_LOCATIONS_START);
     }
     else if (FlagGet(FLAG_DEFEATED_GROUDON) == TRUE)
     {
-        VarSet(VAR_0x4037, (randomValue & 7) + 9);
+        VarSet(VAR_UNUSUAL_WEATHER_LOCATION, (randomValue & (UNUSUAL_WEATHER_COUNT_PER_LEGENDARY - 1)) + UNUSUAL_WEATHER_KYOGRE_LOCATIONS_START);
     }
     else if ((randomValue & 1) == 0)
     {
         randomValue = Random();
-        VarSet(VAR_0x4037, (randomValue & 7) + 1);
+        VarSet(VAR_UNUSUAL_WEATHER_LOCATION, (randomValue & (UNUSUAL_WEATHER_COUNT_PER_LEGENDARY - 1)) + UNUSUAL_WEATHER_GROUDON_LOCATIONS_START);
     }
     else
     {
         randomValue = Random();
-        VarSet(VAR_0x4037, (randomValue & 7) + 9);
+        VarSet(VAR_UNUSUAL_WEATHER_LOCATION, (randomValue & (UNUSUAL_WEATHER_COUNT_PER_LEGENDARY - 1)) + UNUSUAL_WEATHER_KYOGRE_LOCATIONS_START);
     }
 }
 
@@ -3450,7 +3450,7 @@ bool32 sub_813B374(void)
 {
     static const u8 gUnknown_085B3400[] = { 0x1d, 0x1d, 0x1e, 0x1e, 0x1f, 0x1f, 0x21, 0x21, 0x14, 0x14, 0x28, 0x28, 0x2a, 0x2a, 0x2c, 0x2c };
 
-    u16 var = VarGet(VAR_0x4037);
+    u16 var = VarGet(VAR_UNUSUAL_WEATHER_LOCATION);
 
     GetMapName(gStringVar1, gUnknown_085B3400[var - 1], 0);
 
@@ -3466,12 +3466,12 @@ bool32 sub_813B374(void)
 
 bool8 sub_813B3B0(void)
 {
-    static const u8 gUnknown_085B3410[] = { 0x1d, 0x1d, 0x1e, 0x1e, 0x1f, 0x1f, 0x21, 0x21, 0x14, 0x14, 0x28, 0x28, 0x2a, 0x2a, 0x2c, 0x2c };
+    static const u8 sUnusualWeatherMapNumbers[] = { 0x1d, 0x1d, 0x1e, 0x1e, 0x1f, 0x1f, 0x21, 0x21, 0x14, 0x14, 0x28, 0x28, 0x2a, 0x2a, 0x2c, 0x2c };
 
     u16 var1 = VarGet(VAR_0x4038);
-    u16 var2 = VarGet(VAR_0x4037);
+    u16 unusualWeather = VarGet(VAR_UNUSUAL_WEATHER_LOCATION);
 
-    if (!var2)
+    if (unusualWeather == UNUSUAL_WEATHER_NONE)
     {
         return FALSE;
     }
@@ -3510,14 +3510,14 @@ bool8 sub_813B3B0(void)
             }
         }
 
-        if (gSaveBlock1Ptr->location.mapNum == gUnknown_085B3410[var2 - 1] &&
+        if (gSaveBlock1Ptr->location.mapNum == sUnusualWeatherMapNumbers[unusualWeather - 1] &&
             gSaveBlock1Ptr->location.mapGroup == 0)
         {
             return TRUE;
         }
         else
         {
-            VarSet(VAR_0x4037, 0);
+            VarSet(VAR_UNUSUAL_WEATHER_LOCATION, UNUSUAL_WEATHER_NONE);
             return FALSE;
         }
     }

@@ -5,9 +5,9 @@ Route129_MapScripts:: @ 81F7284
 	.byte 0
 
 Route129_MapScript1_1F7294: @ 81F7294
-	compare VAR_0x4037, 15
+	compare VAR_UNUSUAL_WEATHER_LOCATION, UNUSUAL_WEATHER_ROUTE_129_WEST
 	call_if_eq Route129_EventScript_273C39
-	compare VAR_0x4037, 16
+	compare VAR_UNUSUAL_WEATHER_LOCATION, UNUSUAL_WEATHER_ROUTE_129_EAST
 	call_if_eq Route129_EventScript_273CA6
 	end
 
@@ -16,9 +16,9 @@ Route129_MapScript1_1F72AB: @ 81F72AB
 	call_if_eq Route129_EventScript_273D13
 	compare VAR_0x405E, 4
 	call_if_ge Route129_EventScript_1F72D8
-	compare VAR_0x4037, 15
+	compare VAR_UNUSUAL_WEATHER_LOCATION, UNUSUAL_WEATHER_ROUTE_129_WEST
 	call_if_eq Route129_EventScript_273D17
-	compare VAR_0x4037, 16
+	compare VAR_UNUSUAL_WEATHER_LOCATION, UNUSUAL_WEATHER_ROUTE_129_EAST
 	call_if_eq Route129_EventScript_273D17
 	end
 

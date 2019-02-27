@@ -7,16 +7,16 @@ Route114_MapScripts:: @ 81F252F
 Route114_MapScript1_1F253F: @ 81F253F
 	compare VAR_0x4039, 1
 	call_if_eq Route114_EventScript_273D13
-	compare VAR_0x4037, 1
+	compare VAR_UNUSUAL_WEATHER_LOCATION, UNUSUAL_WEATHER_ROUTE_114_NORTH
 	call_if_eq Route114_EventScript_273D1B
-	compare VAR_0x4037, 2
+	compare VAR_UNUSUAL_WEATHER_LOCATION, UNUSUAL_WEATHER_ROUTE_114_SOUTH
 	call_if_eq Route114_EventScript_273D1B
 	end
 
 Route114_MapScript1_1F2561: @ 81F2561
-	compare VAR_0x4037, 1
+	compare VAR_UNUSUAL_WEATHER_LOCATION, UNUSUAL_WEATHER_ROUTE_114_NORTH
 	call_if_eq Route114_EventScript_273913
-	compare VAR_0x4037, 2
+	compare VAR_UNUSUAL_WEATHER_LOCATION, UNUSUAL_WEATHER_ROUTE_114_SOUTH
 	call_if_eq Route114_EventScript_273926
 	end
 

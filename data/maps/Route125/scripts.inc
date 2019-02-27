@@ -8,16 +8,16 @@ Route125_MapScript1_1F6758: @ 81F6758
 	call_if_set FLAG_SYS_WEATHER_CTRL, Common_EventScript_SetWeather15
 	compare VAR_0x4039, 1
 	call_if_eq Route125_EventScript_273D13
-	compare VAR_0x4037, 11
+	compare VAR_UNUSUAL_WEATHER_LOCATION, UNUSUAL_WEATHER_ROUTE_125_WEST
 	call_if_eq Route125_EventScript_273D17
-	compare VAR_0x4037, 12
+	compare VAR_UNUSUAL_WEATHER_LOCATION, UNUSUAL_WEATHER_ROUTE_125_EAST
 	call_if_eq Route125_EventScript_273D17
 	end
 
 Route125_MapScript1_1F6783: @ 81F6783
-	compare VAR_0x4037, 11
+	compare VAR_UNUSUAL_WEATHER_LOCATION, UNUSUAL_WEATHER_ROUTE_125_WEST
 	call_if_eq Route125_EventScript_273A85
-	compare VAR_0x4037, 12
+	compare VAR_UNUSUAL_WEATHER_LOCATION, UNUSUAL_WEATHER_ROUTE_125_EAST
 	call_if_eq Route125_EventScript_273AF2
 	end
 

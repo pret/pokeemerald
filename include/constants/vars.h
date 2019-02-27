@@ -60,7 +60,7 @@
 #define VAR_POISON_STEP_COUNTER              0x402B
 #define VAR_RESET_RTC_ENABLE                 0x402C
 #define VAR_ENIGMA_BERRY_AVAILABLE           0x402D
-#define VAR_0x402E                           0x402E   // Seems to be unused.
+#define VAR_UNUSED_0x402E                    0x402E // Unused Var
 
 #define VAR_FRONTIER_MANIAC_FACILITY         0x402F
 #define VAR_FRONTIER_GAMBLER_FACILITY        0x4030
@@ -71,7 +71,7 @@
 #define VAR_DEOXYS_ROCK_STEP_COUNT           0x4034
 #define VAR_DEOXYS_ROCK_LEVEL                0x4035
 #define VAR_STORAGE_UNKNOWN                  0x4036
-#define VAR_0x4037                           0x4037
+#define VAR_UNUSUAL_WEATHER_LOCATION                           0x4037
 #define VAR_0x4038                           0x4038
 #define VAR_0x4039                           0x4039
 #define VAR_0x403A                           0x403A

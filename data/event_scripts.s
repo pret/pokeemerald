@@ -3188,7 +3188,7 @@ gUnknown_08273D1F:: @ 8273D1F
 
 gUnknown_08273D1F:: @ 8273D1F
 	lockall
-	compare VAR_0x4037, 9
+	compare VAR_UNUSUAL_WEATHER_LOCATION, UNUSUAL_WEATHER_KYOGRE_LOCATIONS_START
 	goto_if_ge Route105_EventScript_273D51
 	goto Route105_EventScript_273D5F
 	end
@@ -3200,7 +3200,7 @@ Route105_EventScript_273D31:: @ 8273D31
 	doweather
 	call Route105_EventScript_273D6D
 	special DrawWholeMapView
-	setvar VAR_0x4037, 0
+	setvar VAR_UNUSUAL_WEATHER_LOCATION, UNUSUAL_WEATHER_NONE
 	setvar VAR_0x4039, 0
 	clearflag FLAG_SPECIAL_FLAG_0x4000
 	fadescreenswapbuffers 0
@@ -3218,23 +3218,23 @@ Route105_EventScript_273D5F:: @ 8273D5F
 	end
 
 Route105_EventScript_273D6D:: @ 8273D6D
-	switch VAR_0x4037
-	case 1, Route105_EventScript_273E23
-	case 2, Route105_EventScript_273E36
-	case 3, Route105_EventScript_273E49
-	case 4, Route105_EventScript_273E5C
-	case 5, Route105_EventScript_273E6F
-	case 6, Route105_EventScript_273E82
-	case 7, Route105_EventScript_273E95
-	case 8, Route105_EventScript_273EA8
-	case 9, Route105_EventScript_273EBB
-	case 10, Route105_EventScript_273F28
-	case 11, Route105_EventScript_273F95
-	case 12, Route105_EventScript_274002
-	case 13, Route105_EventScript_27406F
-	case 14, Route105_EventScript_2740DC
-	case 15, Route105_EventScript_274149
-	case 16, Route105_EventScript_2741B6
+	switch VAR_UNUSUAL_WEATHER_LOCATION
+	case UNUSUAL_WEATHER_ROUTE_114_NORTH, Route105_EventScript_273E23
+	case UNUSUAL_WEATHER_ROUTE_114_SOUTH, Route105_EventScript_273E36
+	case UNUSUAL_WEATHER_ROUTE_115_WEST, Route105_EventScript_273E49
+	case UNUSUAL_WEATHER_ROUTE_115_EAST, Route105_EventScript_273E5C
+	case UNUSUAL_WEATHER_ROUTE_116_NORTH, Route105_EventScript_273E6F
+	case UNUSUAL_WEATHER_ROUTE_116_SOUTH, Route105_EventScript_273E82
+	case UNUSUAL_WEATHER_ROUTE_118_EAST, Route105_EventScript_273E95
+	case UNUSUAL_WEATHER_ROUTE_118_WEST, Route105_EventScript_273EA8
+	case UNUSUAL_WEATHER_ROUTE_105_NORTH, Route105_EventScript_273EBB
+	case UNUSUAL_WEATHER_ROUTE_105_SOUTH, Route105_EventScript_273F28
+	case UNUSUAL_WEATHER_ROUTE_125_WEST, Route105_EventScript_273F95
+	case UNUSUAL_WEATHER_ROUTE_125_EAST, Route105_EventScript_274002
+	case UNUSUAL_WEATHER_ROUTE_127_NORTH, Route105_EventScript_27406F
+	case UNUSUAL_WEATHER_ROUTE_127_SOUTH, Route105_EventScript_2740DC
+	case UNUSUAL_WEATHER_ROUTE_129_WEST, Route105_EventScript_274149
+	case UNUSUAL_WEATHER_ROUTE_129_EAST, Route105_EventScript_2741B6
 	return
 
 Route105_EventScript_273E23:: @ 8273E23
@@ -3401,15 +3401,15 @@ Underwater3_EventScript_274223:: @ 8274223
 Underwater5_EventScript_274223:: @ 8274223
 Underwater6_EventScript_274223:: @ 8274223
 Underwater7_EventScript_274223:: @ 8274223
-	switch VAR_0x4037
-	case 9, Underwater3_EventScript_274281
-	case 10, Underwater3_EventScript_27428A
-	case 11, Underwater3_EventScript_274293
-	case 12, Underwater3_EventScript_27429C
-	case 13, Underwater3_EventScript_2742A5
-	case 14, Underwater3_EventScript_2742AE
-	case 15, Underwater3_EventScript_2742B7
-	case 16, Underwater3_EventScript_2742C0
+	switch VAR_UNUSUAL_WEATHER_LOCATION
+	case UNUSUAL_WEATHER_ROUTE_105_NORTH, Underwater3_EventScript_274281
+	case UNUSUAL_WEATHER_ROUTE_105_SOUTH, Underwater3_EventScript_27428A
+	case UNUSUAL_WEATHER_ROUTE_125_WEST, Underwater3_EventScript_274293
+	case UNUSUAL_WEATHER_ROUTE_125_EAST, Underwater3_EventScript_27429C
+	case UNUSUAL_WEATHER_ROUTE_127_NORTH, Underwater3_EventScript_2742A5
+	case UNUSUAL_WEATHER_ROUTE_127_SOUTH, Underwater3_EventScript_2742AE
+	case UNUSUAL_WEATHER_ROUTE_129_WEST, Underwater3_EventScript_2742B7
+	case UNUSUAL_WEATHER_ROUTE_129_EAST, Underwater3_EventScript_2742C0
 	return
 
 Underwater3_EventScript_274281:: @ 8274281

@@ -236,7 +236,7 @@
 #define FLAG_MET_WAILMER_TRAINER             0xDA
 #define FLAG_EVIL_LEADER_PLEASE_STOP         0xDB
 
-#define FLAG_UNUSED_0x0DC                    0xDC // Unused Flag
+#define FLAG_NEVER_SET_0x0DC                 0xDC // This flag is read, but never written to
 
 #define FLAG_RECEIVED_GO_GOGGLES             0xDD
 #define FLAG_WINGULL_SENT_ON_ERRAND          0xDE

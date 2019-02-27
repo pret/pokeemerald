@@ -1159,7 +1159,7 @@ static u16 RegionMap_GetTerraCaveMapSecId(void)
 {
     s16 idx;
 
-    idx = VarGet(VAR_0x4037) - 1;
+    idx = VarGet(VAR_UNUSUAL_WEATHER_LOCATION) - 1;
     if (idx < 0 || idx > 15)
     {
         idx = 0;
@@ -1171,7 +1171,7 @@ static void RegionMap_GetMarineCaveCoords(u16 *x, u16 *y)
 {
     u16 idx;
 
-    idx = VarGet(VAR_0x4037);
+    idx = VarGet(VAR_UNUSUAL_WEATHER_LOCATION);
     if (idx < 9 || idx > 16)
     {
         idx = 9;

@@ -8,9 +8,9 @@ Route116_MapScript1_1F2C1C: @ 81F2C1C
 	call_if_set FLAG_RECOVERED_DEVON_GOODS, Route116_EventScript_1F2C47
 	compare VAR_0x4039, 1
 	call_if_eq Route116_EventScript_273D13
-	compare VAR_0x4037, 5
+	compare VAR_UNUSUAL_WEATHER_LOCATION, UNUSUAL_WEATHER_ROUTE_116_NORTH
 	call_if_eq Route116_EventScript_273D1B
-	compare VAR_0x4037, 6
+	compare VAR_UNUSUAL_WEATHER_LOCATION, UNUSUAL_WEATHER_ROUTE_116_SOUTH
 	call_if_eq Route116_EventScript_273D1B
 	end
 
@@ -19,9 +19,9 @@ Route116_EventScript_1F2C47:: @ 81F2C47
 	return
 
 Route116_MapScript1_1F2C4F: @ 81F2C4F
-	compare VAR_0x4037, 5
+	compare VAR_UNUSUAL_WEATHER_LOCATION, UNUSUAL_WEATHER_ROUTE_116_NORTH
 	call_if_eq Route116_EventScript_27395F
-	compare VAR_0x4037, 6
+	compare VAR_UNUSUAL_WEATHER_LOCATION, UNUSUAL_WEATHER_ROUTE_116_SOUTH
 	call_if_eq Route116_EventScript_273972
 	end
 

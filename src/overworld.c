@@ -411,7 +411,7 @@ static void Overworld_ResetStateAfterWhiteOut(void)
     if (VarGet(VAR_0x4039) == 1)
     {
         VarSet(VAR_0x4039, 0);
-        VarSet(VAR_0x4037, 0);
+        VarSet(VAR_UNUSUAL_WEATHER_LOCATION, UNUSUAL_WEATHER_NONE);
     }
 }
 

@@ -137,11 +137,13 @@ Route119_WeatherInstitute_2F_EventScript_2700F7:: @ 82700F7
 	end
 
 Route119_WeatherInstitute_2F_EventScript_27010A:: @ 827010A
+    @ This code uses VAR_0x8004 to count the number of legendaries the player has defeated
+    @ already.
 	setvar VAR_0x8004, 0
-	call_if_set FLAG_DEFEATED_KYOGRE, Route119_WeatherInstitute_2F_EventScript_270160
-	call_if_set FLAG_DEFEATED_GROUDON, Route119_WeatherInstitute_2F_EventScript_270160
+	call_if_set FLAG_DEFEATED_KYOGRE, WeatherInstitute_UnusualWeather_IncrementLegendCount
+	call_if_set FLAG_DEFEATED_GROUDON, WeatherInstitute_UnusualWeather_IncrementLegendCount
 	compare VAR_0x8004, 2
-	goto_if_eq Route119_WeatherInstitute_2F_EventScript_270166
+	goto_if_eq WeatherInstitute_UnusualWeather_LegendariesAlreadyDefeated
 	call_if_unset FLAG_TEMP_2, Route119_WeatherInstitute_2F_EventScript_270159
 	specialvar VAR_RESULT, sub_813B374
 	compare VAR_RESULT, 1
@@ -156,16 +158,16 @@ Route119_WeatherInstitute_2F_EventScript_27014F:: @ 827014F
 	end
 
 Route119_WeatherInstitute_2F_EventScript_270159:: @ 8270159
-	special sub_813B2E4
+	special CreateUnusualWeatherEvent
 	setflag FLAG_TEMP_2
 	return
 
-Route119_WeatherInstitute_2F_EventScript_270160:: @ 8270160
+WeatherInstitute_UnusualWeather_IncrementLegendCount:: @ 8270160
 	addvar VAR_0x8004, 1
 	return
 
-Route119_WeatherInstitute_2F_EventScript_270166:: @ 8270166
-	msgbox Route119_WeatherInstitute_2F_Text_2708FC, MSGBOX_DEFAULT
+WeatherInstitute_UnusualWeather_LegendariesAlreadyDefeated:: @ 8270166
+	msgbox WeatherInstitute_UnusualWeather_LegendariesAlreadyDefeatedText, MSGBOX_DEFAULT
 	release
 	end
 
@@ -325,7 +327,7 @@ Route119_WeatherInstitute_2F_Text_270873: @ 8270873
 	.string "Could that mean, somewhere near\n"
 	.string "{STR_VAR_1}…$"
 
-Route119_WeatherInstitute_2F_Text_2708FC: @ 82708FC
+WeatherInstitute_UnusualWeather_LegendariesAlreadyDefeatedText: @ 82708FC
 	.string "Abnormal weather conditions are\n"
 	.string "no longer being reported.\p"
 	.string "The occasional rainfall is a blessing,\n"

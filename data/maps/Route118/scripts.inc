@@ -8,16 +8,16 @@ Route118_MapScript1_1F3DCC: @ 81F3DCC
 	call Route118_EventScript_28CCC7
 	compare VAR_0x4039, 1
 	call_if_eq Route118_EventScript_273D13
-	compare VAR_0x4037, 7
+	compare VAR_UNUSUAL_WEATHER_LOCATION, UNUSUAL_WEATHER_ROUTE_118_EAST
 	call_if_eq Route118_EventScript_273D1B
-	compare VAR_0x4037, 8
+	compare VAR_UNUSUAL_WEATHER_LOCATION, UNUSUAL_WEATHER_ROUTE_118_WEST
 	call_if_eq Route118_EventScript_273D1B
 	end
 
 Route118_MapScript1_1F3DF3: @ 81F3DF3
-	compare VAR_0x4037, 7
+	compare VAR_UNUSUAL_WEATHER_LOCATION, UNUSUAL_WEATHER_ROUTE_118_EAST
 	call_if_eq Route118_EventScript_273985
-	compare VAR_0x4037, 8
+	compare VAR_UNUSUAL_WEATHER_LOCATION, UNUSUAL_WEATHER_ROUTE_118_WEST
 	call_if_eq Route118_EventScript_273998
 	end
 

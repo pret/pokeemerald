@@ -5,18 +5,18 @@ Route115_MapScripts:: @ 81F2920
 	.byte 0
 
 Route115_MapScript1_1F2930: @ 81F2930
-	compare VAR_0x4037, 3
+	compare VAR_UNUSUAL_WEATHER_LOCATION, UNUSUAL_WEATHER_ROUTE_115_WEST
 	call_if_eq Route115_EventScript_273939
-	compare VAR_0x4037, 4
+	compare VAR_UNUSUAL_WEATHER_LOCATION, UNUSUAL_WEATHER_ROUTE_115_EAST
 	call_if_eq Route115_EventScript_27394C
 	end
 
 Route115_MapScript1_1F2947: @ 81F2947
 	compare VAR_0x4039, 1
 	call_if_eq Route115_EventScript_273D13
-	compare VAR_0x4037, 3
+	compare VAR_UNUSUAL_WEATHER_LOCATION, UNUSUAL_WEATHER_ROUTE_115_WEST
 	call_if_eq Route115_EventScript_273D1B
-	compare VAR_0x4037, 4
+	compare VAR_UNUSUAL_WEATHER_LOCATION, UNUSUAL_WEATHER_ROUTE_115_EAST
 	call_if_eq Route115_EventScript_273D1B
 	end
 
