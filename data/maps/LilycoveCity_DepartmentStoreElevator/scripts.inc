@@ -114,7 +114,7 @@ LilycoveCity_DepartmentStoreElevator_EventScript_2207E0:: @ 82207E0
 LilycoveCity_DepartmentStoreElevator_EventScript_2207E5:: @ 82207E5
 	special sub_8139C10
 	closemessage
-	applymovement VAR_LAST_TALKED, LilycoveCity_DepartmentStoreElevator_Movement_2725AA
+	applymovement VAR_LAST_TALKED, Common_Movement_WalkInPlaceDown
 	waitmovement 0
 	waitse
 	special ShakeScreenInElevator

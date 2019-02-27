@@ -1,7 +1,7 @@
 BattleFrontier_BattlePalaceBattleRoom_MapScripts:: @ 824F815
-	map_script 3, BattleFrontier_BattlePalaceBattleRoom_MapScript1_24F825
-	map_script 2, BattleFrontier_BattlePalaceBattleRoom_MapScript2_24F861
-	map_script 4, BattleFrontier_BattlePalaceBattleRoom_MapScript2_24FE34
+	map_script MAP_SCRIPT_ON_TRANSITION, BattleFrontier_BattlePalaceBattleRoom_MapScript1_24F825
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, BattleFrontier_BattlePalaceBattleRoom_MapScript2_24F861
+	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, BattleFrontier_BattlePalaceBattleRoom_MapScript2_24FE34
 	.byte 0
 
 BattleFrontier_BattlePalaceBattleRoom_MapScript1_24F825: @ 824F825
@@ -280,8 +280,8 @@ BattleFrontier_BattlePalaceBattleRoom_EventScript_24FCC7:: @ 824FCC7
 	special CallFrontierUtilFunc
 	applymovement 2, BattleFrontier_BattlePalaceBattleRoom_Movement_2725B6
 	waitmovement 0
-	applymovement 1, BattleFrontier_BattlePalaceBattleRoom_Movement_2725A8
-	applymovement 3, BattleFrontier_BattlePalaceBattleRoom_Movement_2725A8
+	applymovement 1, Common_Movement_WalkInPlaceRight
+	applymovement 3, Common_Movement_WalkInPlaceRight
 	waitmovement 0
 	msgbox BattleFrontier_BattlePalaceBattleRoom_Text_250412, MSGBOX_DEFAULT
 	goto BattleFrontier_BattlePalaceBattleRoom_EventScript_24FB28
@@ -323,8 +323,8 @@ BattleFrontier_BattlePalaceBattleRoom_EventScript_24FD84:: @ 824FD84
 	special CallFrontierUtilFunc
 	applymovement 2, BattleFrontier_BattlePalaceBattleRoom_Movement_2725B6
 	waitmovement 0
-	applymovement 1, BattleFrontier_BattlePalaceBattleRoom_Movement_2725A8
-	applymovement 3, BattleFrontier_BattlePalaceBattleRoom_Movement_2725A8
+	applymovement 1, Common_Movement_WalkInPlaceRight
+	applymovement 3, Common_Movement_WalkInPlaceRight
 	waitmovement 0
 	msgbox BattleFrontier_BattlePalaceBattleRoom_Text_2506C4, MSGBOX_DEFAULT
 	goto BattleFrontier_BattlePalaceBattleRoom_EventScript_24FB28

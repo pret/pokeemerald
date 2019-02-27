@@ -1,7 +1,7 @@
 VerdanturfTown_BattleTentBattleRoom_MapScripts:: @ 82022FA
-	map_script 3, VerdanturfTown_BattleTentBattleRoom_MapScript1_20230A
-	map_script 2, VerdanturfTown_BattleTentBattleRoom_MapScript2_20233E
-	map_script 4, VerdanturfTown_BattleTentBattleRoom_MapScript2_202541
+	map_script MAP_SCRIPT_ON_TRANSITION, VerdanturfTown_BattleTentBattleRoom_MapScript1_20230A
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, VerdanturfTown_BattleTentBattleRoom_MapScript2_20233E
+	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, VerdanturfTown_BattleTentBattleRoom_MapScript2_202541
 	.byte 0
 
 VerdanturfTown_BattleTentBattleRoom_MapScript1_20230A: @ 820230A
@@ -77,8 +77,8 @@ VerdanturfTown_BattleTentBattleRoom_EventScript_2023C8:: @ 82023C8
 	applymovement 2, VerdanturfTown_BattleTentBattleRoom_Movement_202581
 	waitmovement 0
 	removeobject 2
-	applymovement 3, VerdanturfTown_BattleTentBattleRoom_Movement_2725AA
-	applymovement 1, VerdanturfTown_BattleTentBattleRoom_Movement_2725A6
+	applymovement 3, Common_Movement_WalkInPlaceDown
+	applymovement 1, Common_Movement_WalkInPlaceUp
 	waitmovement 0
 	msgbox VerdanturfTown_BattleTentBattleRoom_Text_24FF00, MSGBOX_DEFAULT
 	special LoadPlayerParty
@@ -121,8 +121,8 @@ VerdanturfTown_BattleTentBattleRoom_EventScript_2024B8:: @ 82024B8
 	case 127, VerdanturfTown_BattleTentBattleRoom_EventScript_20243C
 
 VerdanturfTown_BattleTentBattleRoom_EventScript_2024EA:: @ 82024EA
-	applymovement 3, VerdanturfTown_BattleTentBattleRoom_Movement_2725A8
-	applymovement 1, VerdanturfTown_BattleTentBattleRoom_Movement_2725A8
+	applymovement 3, Common_Movement_WalkInPlaceRight
+	applymovement 1, Common_Movement_WalkInPlaceRight
 	waitmovement 0
 	closemessage
 	goto VerdanturfTown_BattleTentBattleRoom_EventScript_20236F

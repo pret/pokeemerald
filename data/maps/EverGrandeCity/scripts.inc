@@ -1,9 +1,9 @@
 EverGrandeCity_MapScripts:: @ 81E7D1B
-	map_script 3, EverGrandeCity_MapScript1_1E7D21
+	map_script MAP_SCRIPT_ON_TRANSITION, EverGrandeCity_MapScript1_1E7D21
 	.byte 0
 
 EverGrandeCity_MapScript1_1E7D21: @ 81E7D21
-	call_if_set FLAG_SYS_WEATHER_CTRL, EverGrandeCity_EventScript_27207A
+	call_if_set FLAG_SYS_WEATHER_CTRL, Common_EventScript_SetWeather15
 	end
 
 EverGrandeCity_EventScript_1E7D2B:: @ 81E7D2B

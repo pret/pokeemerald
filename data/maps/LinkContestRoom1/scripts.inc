@@ -1,9 +1,9 @@
 LinkContestRoom1_MapScripts:: @ 823B781
-	map_script 4, LinkContestRoom1_MapScript2_23B81F
-	map_script 2, LinkContestRoom1_MapScript2_23B815
-	map_script 3, LinkContestRoom1_MapScript1_23B79F
-	map_script 5, LinkContestRoom1_MapScript1_23B803
-	map_script 7, LinkContestRoom1_MapScript1_23B79B
+	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, LinkContestRoom1_MapScript2_23B81F
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, LinkContestRoom1_MapScript2_23B815
+	map_script MAP_SCRIPT_ON_TRANSITION, LinkContestRoom1_MapScript1_23B79F
+	map_script MAP_SCRIPT_ON_RESUME, LinkContestRoom1_MapScript1_23B803
+	map_script MAP_SCRIPT_ON_RETURN_TO_FIELD, LinkContestRoom1_MapScript1_23B79B
 	.byte 0
 
 LinkContestRoom1_MapScript1_23B79B: @ 823B79B
@@ -61,11 +61,11 @@ LinkContestRoom1_EventScript_23B80F:: @ 823B80F
 	return
 
 LinkContestRoom1_MapScript2_23B815: @ 823B815
-	map_script_2 VAR_0x4086, 1, LinkContestRoom1_EventScript_23B829
+	map_script_2 VAR_LINK_CONTEST_ROOM_STATE, 1, LinkContestRoom1_EventScript_23B829
 	.2byte 0
 
 LinkContestRoom1_MapScript2_23B81F: @ 823B81F
-	map_script_2 VAR_0x4086, 1, LinkContestRoom1_EventScript_23B834
+	map_script_2 VAR_LINK_CONTEST_ROOM_STATE, 1, LinkContestRoom1_EventScript_23B834
 	.2byte 0
 
 LinkContestRoom1_EventScript_23B829:: @ 823B829
@@ -303,7 +303,7 @@ LinkContestRoom1_EventScript_23BB2B:: @ 823BB2B
 	specialvar VAR_RESULT, sub_80F9160
 	compare VAR_RESULT, 1
 	goto_if_eq LinkContestRoom1_EventScript_23BD86
-	switch VAR_0x4088
+	switch VAR_CONTEST_LOCATION
 	case 1, LinkContestRoom1_EventScript_23BB78
 	case 2, LinkContestRoom1_EventScript_23BB8B
 	case 3, LinkContestRoom1_EventScript_23BBE6
@@ -407,7 +407,7 @@ LinkContestRoom1_EventScript_23BD86:: @ 823BD86
 
 LinkContestRoom1_EventScript_23BE44:: @ 823BE44
 	special sub_80F9154
-	switch VAR_0x4088
+	switch VAR_CONTEST_LOCATION
 	case 1, LinkContestRoom1_EventScript_23BE84
 	case 2, LinkContestRoom1_EventScript_23BE8E
 	case 3, LinkContestRoom1_EventScript_23BE98

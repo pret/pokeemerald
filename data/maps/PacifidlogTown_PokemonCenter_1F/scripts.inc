@@ -1,6 +1,6 @@
 PacifidlogTown_PokemonCenter_1F_MapScripts:: @ 82034A7
-	map_script 3, PacifidlogTown_PokemonCenter_1F_MapScript1_2034B2
-	map_script 5, PacifidlogTown_PokemonCenter_1F_MapScript1_277C30
+	map_script MAP_SCRIPT_ON_TRANSITION, PacifidlogTown_PokemonCenter_1F_MapScript1_2034B2
+	map_script MAP_SCRIPT_ON_RESUME, PacifidlogTown_PokemonCenter_1F_MapScript1_277C30
 	.byte 0
 
 PacifidlogTown_PokemonCenter_1F_MapScript1_2034B2: @ 82034B2

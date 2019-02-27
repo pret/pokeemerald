@@ -1,5 +1,5 @@
 MossdeepCity_Gym_MapScripts:: @ 8220800
-	map_script 1, MossdeepCity_Gym_MapScript1_220806
+	map_script MAP_SCRIPT_ON_LOAD, MossdeepCity_Gym_MapScript1_220806
 	.byte 0
 
 MossdeepCity_Gym_MapScript1_220806: @ 8220806
@@ -57,7 +57,7 @@ MossdeepCity_Gym_EventScript_220898:: @ 8220898
 MossdeepCity_Gym_EventScript_2208D1:: @ 82208D1
 	message MossdeepCity_Gym_Text_22196A
 	waitmessage
-	call MossdeepCity_Gym_EventScript_27207E
+	call Common_EventScript_PlayGymBadgeFanfare
 	msgbox MossdeepCity_Gym_Text_221999, MSGBOX_DEFAULT
 	setflag FLAG_DEFEATED_MOSSDEEP_GYM
 	setflag FLAG_BADGE07_GET
@@ -89,7 +89,7 @@ MossdeepCity_Gym_EventScript_2208D1:: @ 82208D1
 MossdeepCity_Gym_EventScript_220937:: @ 8220937
 	giveitem_std ITEM_TM04
 	compare VAR_RESULT, 0
-	goto_if_eq MossdeepCity_Gym_EventScript_272054
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	msgbox MossdeepCity_Gym_Text_221A40, MSGBOX_DEFAULT
 	setflag FLAG_RECEIVED_TM04
 	release
@@ -98,7 +98,7 @@ MossdeepCity_Gym_EventScript_220937:: @ 8220937
 MossdeepCity_Gym_EventScript_22095B:: @ 822095B
 	giveitem_std ITEM_TM04
 	compare VAR_RESULT, 0
-	goto_if_eq MossdeepCity_Gym_EventScript_27205E
+	goto_if_eq Common_EventScript_BagIsFull
 	msgbox MossdeepCity_Gym_Text_221A40, MSGBOX_DEFAULT
 	setflag FLAG_RECEIVED_TM04
 	return

@@ -9,7 +9,7 @@ BirthIsland_Harbor_EventScript_26805D:: @ 826805D
 	goto_if_eq BirthIsland_Harbor_EventScript_2680A2
 	msgbox BirthIsland_Harbor_Text_2A6A5D, MSGBOX_DEFAULT
 	closemessage
-	applymovement VAR_LAST_TALKED, BirthIsland_Harbor_Movement_2725AA
+	applymovement VAR_LAST_TALKED, Common_Movement_WalkInPlaceDown
 	waitmovement 0
 	delay 30
 	hideobjectat 1, MAP_BIRTH_ISLAND_HARBOR

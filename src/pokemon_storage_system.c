@@ -6654,7 +6654,7 @@ static void sub_80CE8E4(void)
     if (sIsMonBeingMoved)
         sub_80CE790();
     else
-        sBoxCursorPosition = gUnknown_0203CF20;
+        sBoxCursorPosition = gLastViewedMonIndex;
 }
 
 s16 CompactPartySlots(void)

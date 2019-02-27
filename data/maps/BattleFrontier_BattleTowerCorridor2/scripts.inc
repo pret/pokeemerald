@@ -1,7 +1,7 @@
 BattleFrontier_BattleTowerCorridor2_MapScripts:: @ 8248D4A
-	map_script 3, BattleFrontier_BattleTowerCorridor2_MapScript1_248D5A
-	map_script 4, BattleFrontier_BattleTowerCorridor2_MapScript2_248D95
-	map_script 2, BattleFrontier_BattleTowerCorridor2_MapScript2_248DB2
+	map_script MAP_SCRIPT_ON_TRANSITION, BattleFrontier_BattleTowerCorridor2_MapScript1_248D5A
+	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, BattleFrontier_BattleTowerCorridor2_MapScript2_248D95
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, BattleFrontier_BattleTowerCorridor2_MapScript2_248DB2
 	.byte 0
 
 BattleFrontier_BattleTowerCorridor2_MapScript1_248D5A: @ 8248D5A
@@ -68,8 +68,8 @@ BattleFrontier_BattleTowerCorridor2_EventScript_248DBC:: @ 8248DBC
 	applymovement 2, BattleFrontier_BattleTowerCorridor2_Movement_248ED5
 	waitmovement 0
 	delay 40
-	applymovement 3, BattleFrontier_BattleTowerCorridor2_Movement_2725A6
-	applymovement 2, BattleFrontier_BattleTowerCorridor2_Movement_2725A6
+	applymovement 3, Common_Movement_WalkInPlaceUp
+	applymovement 2, Common_Movement_WalkInPlaceUp
 	waitmovement 0
 	opendoor 7, 1
 	waitdooranim

@@ -1,6 +1,6 @@
 SootopolisCity_MysteryEventsHouse_B1F_MapScripts:: @ 8227E4F
-	map_script 3, SootopolisCity_MysteryEventsHouse_B1F_MapScript1_227E5A
-	map_script 2, SootopolisCity_MysteryEventsHouse_B1F_MapScript2_227E5E
+	map_script MAP_SCRIPT_ON_TRANSITION, SootopolisCity_MysteryEventsHouse_B1F_MapScript1_227E5A
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, SootopolisCity_MysteryEventsHouse_B1F_MapScript2_227E5E
 	.byte 0
 
 SootopolisCity_MysteryEventsHouse_B1F_MapScript1_227E5A: @ 8227E5A
@@ -40,19 +40,19 @@ SootopolisCity_MysteryEventsHouse_B1F_EventScript_227E68:: @ 8227E68
 	end
 
 SootopolisCity_MysteryEventsHouse_B1F_EventScript_227ECF:: @ 8227ECF
-	setvar VAR_0x40C0, 3
+	setvar VAR_SOOTOPOLIS_MYSTERY_EVENTS_STATE, 3
 	msgbox SootopolisCity_MysteryEventsHouse_B1F_Text_227D40, MSGBOX_DEFAULT
 	return
 
 SootopolisCity_MysteryEventsHouse_B1F_EventScript_227EDD:: @ 8227EDD
-	setvar VAR_0x40C0, 1
+	setvar VAR_SOOTOPOLIS_MYSTERY_EVENTS_STATE, 1
 	special ShowFieldMessageStringVar4
 	waitmessage
 	waitbuttonpress
 	return
 
 SootopolisCity_MysteryEventsHouse_B1F_EventScript_227EE8:: @ 8227EE8
-	setvar VAR_0x40C0, 2
+	setvar VAR_SOOTOPOLIS_MYSTERY_EVENTS_STATE, 2
 	special ShowFieldMessageStringVar4
 	waitmessage
 	waitbuttonpress
