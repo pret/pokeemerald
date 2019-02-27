@@ -6,7 +6,7 @@ SecretBase_YellowCave4_MapScripts:: @ 823B483
 	.byte 0
 
 SecretBase_RedCave1_MapScript2_23B498: @ 823B498
-	map_script_2 VAR_0x4089, 0, EventScript_275D0C
+	map_script_2 VAR_SECRET_BASE_INITIALIZED, 0, EventScript_275D0C
 	.2byte 0
 
 SecretBase_RedCave1_MapScript1_23B4A2: @ 823B4A2
@@ -16,7 +16,7 @@ SecretBase_RedCave1_MapScript1_23B4A2: @ 823B4A2
 	end
 
 SecretBase_RedCave1_MapScript2_23B4AE: @ 823B4AE
-	map_script_2 VAR_0x4097, 0, SecretBase_RedCave1_EventScript_275B81
+	map_script_2 VAR_SECRET_BASE_SHOULD_BE_INIT, 0, SecretBase_RedCave1_EventScript_275B81
 	.2byte 0
 
 SecretBase_RedCave1_MapScript1_23B4B8: @ 823B4B8

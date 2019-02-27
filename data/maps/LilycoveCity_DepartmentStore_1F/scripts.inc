@@ -9,7 +9,7 @@ LilycoveCity_DepartmentStore_1F_EventScript_21F69C:: @ 821F69C
 	lock
 	faceplayer
 	dotimebasedevents
-	compare VAR_POKELOT_PRIZE, 0
+	compare VAR_POKELOT_PRIZE_ITEM, 0
 	goto_if_ne LilycoveCity_DepartmentStore_1F_EventScript_21F7F7
 	goto_if_set FLAG_DAILY_PICKED_LOTO_TICKET, LilycoveCity_DepartmentStore_1F_EventScript_21F78D
 	msgbox LilycoveCity_DepartmentStore_1F_Text_2A6390, MSGBOX_YESNO
@@ -100,8 +100,8 @@ LilycoveCity_DepartmentStore_1F_EventScript_21F7D4:: @ 821F7D4
 	return
 
 LilycoveCity_DepartmentStore_1F_EventScript_21F7DD:: @ 821F7DD
-	copyvar VAR_0x404D, VAR_0x8004
-	copyvar VAR_POKELOT_PRIZE, VAR_0x8005
+	copyvar VAR_POKELOT_PRIZE_PLACE, VAR_0x8004
+	copyvar VAR_POKELOT_PRIZE_ITEM, VAR_0x8005
 	goto LilycoveCity_DepartmentStore_1F_EventScript_21F7ED
 	end
 
@@ -112,14 +112,14 @@ LilycoveCity_DepartmentStore_1F_EventScript_21F7ED:: @ 821F7ED
 
 LilycoveCity_DepartmentStore_1F_EventScript_21F7F7:: @ 821F7F7
 	msgbox LilycoveCity_DepartmentStore_1F_Text_2A67E1, MSGBOX_DEFAULT
-	giveitem_std VAR_POKELOT_PRIZE
+	giveitem_std VAR_POKELOT_PRIZE_ITEM
 	compare VAR_RESULT, 0
 	goto_if_eq LilycoveCity_DepartmentStore_1F_EventScript_21F7ED
-	copyvar VAR_0x8004, VAR_0x404D
-	copyvar VAR_0x8005, VAR_POKELOT_PRIZE
+	copyvar VAR_0x8004, VAR_POKELOT_PRIZE_PLACE
+	copyvar VAR_0x8005, VAR_POKELOT_PRIZE_ITEM
 	special sub_80EE2CC
-	setvar VAR_POKELOT_PRIZE, 0
-	setvar VAR_0x404D, 0
+	setvar VAR_POKELOT_PRIZE_ITEM, 0
+	setvar VAR_POKELOT_PRIZE_PLACE, 0
 	release
 	end
 

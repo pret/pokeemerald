@@ -407,7 +407,7 @@ void sub_80E9068(void)
 
 bool8 sub_80E909C(void)
 {
-    if (gMapHeader.mapType == MAP_TYPE_SECRET_BASE && VarGet(VAR_0x4097) == 0)
+    if (gMapHeader.mapType == MAP_TYPE_SECRET_BASE && VarGet(VAR_SECRET_BASE_SHOULD_BE_INIT) == 0)
     {
         return FALSE;
     }
@@ -494,7 +494,7 @@ void sub_80E9238(u8 flagIn)
             sub_80E8CB0(&x, &y, 0x220);
             MapGridSetMetatileIdAt(x + 7, y + 7, 0x221 | 0xc00);
         }
-        else if (flagIn == 1 && VarGet(VAR_0x4089) == 1)
+        else if (flagIn == 1 && VarGet(VAR_SECRET_BASE_INITIALIZED) == 1)
         {
             sub_80E8CB0(&x, &y, 0x220);
             MapGridSetMetatileIdAt(x + 7, y + 7, 0x20a | 0xc00);

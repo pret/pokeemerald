@@ -79,13 +79,13 @@
 #define VAR_REGICE_STEPS_2                   0x403C
 #define VAR_REGICE_STEPS_3                   0x403D
 #define VAR_ALTERING_CAVE_WILD_SET           0x403E
-#define VAR_0x403F                           0x403F
+#define VAR_ALWAYS_ZERO_0x403F               0x403F // This var is read and written, but is always zero.
 #define VAR_DAYS                             0x4040
 #define VAR_FANCLUB_UNKNOWN_1                0x4041
 #define VAR_FANCLUB_UNKNOWN_2                0x4042
 #define VAR_DEPT_STORE_FLOOR                 0x4043
 #define VAR_0x4044                           0x4044
-#define VAR_POKELOT_PRIZE                    0x4045
+#define VAR_POKELOT_PRIZE_ITEM               0x4045
 #define VAR_NATIONAL_DEX                     0x4046
 #define VAR_SEEDOT_SIZE_RECORD               0x4047
 #define VAR_ASH_GATHER_COUNT                 0x4048
@@ -93,7 +93,7 @@
 #define VAR_CRUISE_STEP_COUNT                0x404A
 #define VAR_POKELOT_RND1                     0x404B
 #define VAR_POKELOT_RND2                     0x404C
-#define VAR_0x404D                           0x404D
+#define VAR_POKELOT_PRIZE_PLACE              0x404D
 #define VAR_UNUSED_0x404E                    0x404E // Unused Var
 #define VAR_LOTAD_SIZE_RECORD                0x404F
 #define VAR_0x4050                           0x4050
@@ -109,8 +109,8 @@
 #define VAR_RUSTBORO_STATE                   0x405A
 #define VAR_UNUSED_0x405B                    0x405B // Unused Var
 #define VAR_UNUSED_0x405C                    0x405C // Unused Var
-#define VAR_0x405D                           0x405D
-#define VAR_0x405E                           0x405E
+#define VAR_MOSSDEEP_STATE                   0x405D
+#define VAR_RAYQUAZA_STATE                   0x405E
 #define VAR_UNUSED_0x405F                    0x405F // Unused Var
 #define VAR_ROUTE101_STATE                   0x4060
 #define VAR_UNUSED_0x4061                    0x4061 // Unused Var
@@ -153,7 +153,7 @@
 #define VAR_LINK_CONTEST_ROOM_STATE          0x4086
 #define VAR_CABLE_CLUB_STATE                 0x4087
 #define VAR_CONTEST_LOCATION                 0x4088
-#define VAR_0x4089                           0x4089
+#define VAR_SECRET_BASE_INITIALIZED          0x4089
 #define VAR_CONTEST_PRIZE_PICKUP             0x408A
 #define VAR_UNUSED_0x408B                    0x408B // Unused Var
 #define VAR_LITTLEROOT_HOUSES_STATE_2        0x408C
@@ -167,15 +167,15 @@
 #define VAR_LILYCOVE_MUSEUM_2F_STATE         0x4094
 #define VAR_LILYCOVE_FAN_CLUB_STATE          0x4095
 #define VAR_BRINEY_LOCATION                  0x4096
-#define VAR_0x4097                           0x4097
+#define VAR_SECRET_BASE_SHOULD_BE_INIT       0x4097
 #define VAR_PETALBURG_WOODS_STATE            0x4098
 #define VAR_LILYCOVE_CONTEST_LOBBY_STATE     0x4099
 #define VAR_RUSTURF_TUNNEL_STATE             0x409A
 #define VAR_UNUSED_0x409B                    0x409B // Unused Var
 #define VAR_ELITE_4_STATE                    0x409C
 #define VAR_UNUSED_0x409D                    0x409D // Unused Var
-#define VAR_0x409E                           0x409E
-#define VAR_0x409F                           0x409F
+#define VAR_MOSSDEEP_SPACE_CENTER_STATE_1    0x409E
+#define VAR_MOSSDEEP_SPACE_CENTER_STATE_2    0x409F
 #define VAR_SLATEPORT_HARBOR_STATE           0x40A0
 #define VAR_UNUSED_0x40A1                    0x40A1 // Unused var
 #define VAR_SEAFLOOR_CAVERN_STATE            0x40A2

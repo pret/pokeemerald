@@ -74,7 +74,7 @@ OldaleTown_PokemonCenter_2F_EventScript_276B23:: @ 8276B23
 	msgbox gUnknown_08273594, MSGBOX_DEFAULT
 	giveitem_std ITEM_EON_TICKET
 	setflag FLAG_SYS_HAS_EON_TICKET
-	setvar VAR_0x403F, 0
+	setvar VAR_ALWAYS_ZERO_0x403F, 0
 	msgbox gUnknown_082735F2, MSGBOX_DEFAULT
 	release
 	end
