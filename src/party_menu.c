@@ -63,6 +63,7 @@
 #include "window.h"
 #include "constants/battle.h"
 #include "constants/battle_frontier.h"
+#include "constants/easy_chat.h"
 #include "constants/field_effects.h"
 #include "constants/flags.h"
 #include "constants/items.h"
@@ -4211,7 +4212,11 @@ static void sub_81B452C(void)
 {
     u8 mail = GetMonData(&gPlayerParty[gUnknown_0203CEC8.unk9], MON_DATA_MAIL);
 
-    sub_811A20C(4, gSaveBlock1Ptr->mail[mail].words, sub_81B4578, 3);
+    DoEasyChatScreen(
+    	EASY_CHAT_TYPE_MAIL,
+    	gSaveBlock1Ptr->mail[mail].words,
+    	sub_81B4578,
+    	EASY_CHAT_PERSON_DISPLAY_NONE);
 }
 
 static void sub_81B4578(void)
@@ -6385,7 +6390,11 @@ static void sub_81B814C(void)
 
     sub_81B1DB8(&gPlayerParty[gUnknown_0203CEC8.unk9], gUnknown_0203CEC8.unkC);
     mail = GetMonData(&gPlayerParty[gUnknown_0203CEC8.unk9], MON_DATA_MAIL);
-    sub_811A20C(4, gSaveBlock1Ptr->mail[mail].words, sub_81B81A8, 3);
+    DoEasyChatScreen(
+    	EASY_CHAT_TYPE_MAIL,
+    	gSaveBlock1Ptr->mail[mail].words,
+    	sub_81B81A8,
+    	EASY_CHAT_PERSON_DISPLAY_NONE);
 }
 
 static void sub_81B81A8(void)

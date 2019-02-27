@@ -1,6 +1,7 @@
 #include "constants/global.h"
 #include "constants/battle_frontier.h"
 #include "constants/battle_setup.h"
+#include "constants/easy_chat.h"
 #include "constants/event_objects.h"
 #include "constants/event_object_movement_constants.h"
 #include "constants/field_effects.h"
@@ -1683,18 +1684,9 @@ Common_EventScript_ShowPokemonCenterSign:: @ 8271E73
 	msgbox gText_PokemonCenterSign, MSGBOX_SIGN
 	end
 
-BattleFrontier_BattleTowerLobby_EventScript_271E7C:: @ 8271E7C
-DewfordTown_EventScript_271E7C:: @ 8271E7C
-LilycoveCity_ContestLobby_EventScript_271E7C:: @ 8271E7C
-LilycoveCity_PokemonTrainerFanClub_EventScript_271E7C:: @ 8271E7C
-MauvilleCity_PokemonCenter_1F_EventScript_271E7C:: @ 8271E7C
-PetalburgCity_PokemonCenter_1F_EventScript_271E7C:: @ 8271E7C
-Route111_EventScript_271E7C:: @ 8271E7C
-Route123_BerryMastersHouse_EventScript_271E7C:: @ 8271E7C
-SlateportCity_OceanicMuseum_1F_EventScript_271E7C:: @ 8271E7C
-SlateportCity_PokemonFanClub_EventScript_271E7C:: @ 8271E7C
+Common_ShowEasyChatScreen:: @ 8271E7C
 	fadescreen 1
-	special easy_chat_input_maybe
+	special ShowEasyChatScreen
 	fadescreen 0
 	return
 
@@ -2941,8 +2933,8 @@ EventScript_Questionnaire:: @ 827381B
 	msgbox gUnknown_0827339F, MSGBOX_YESNO
 	compare VAR_RESULT, 0
 	goto_if_eq EventScript_2738FD
-	setvar VAR_0x8004, 20
-	call MauvilleCity_PokemonCenter_1F_EventScript_271E7C
+	setvar VAR_0x8004, EASY_CHAT_TYPE_QUESTIONNAIRE
+	call Common_ShowEasyChatScreen
 	lock
 	faceplayer
 	specialvar VAR_0x8008, sub_813B490
@@ -3769,10 +3761,10 @@ SlateportCity_PokemonFanClub_EventScript_28C7F0:: @ 828C7F0
 
 SlateportCity_PokemonFanClub_EventScript_28C827:: @ 828C827
 	msgbox SlateportCity_PokemonFanClub_Text_28073B, MSGBOX_DEFAULT
-	setvar VAR_0x8004, 5
+	setvar VAR_0x8004, EASY_CHAT_TYPE_INTERVIEW
 	copyvar VAR_0x8005, VAR_0x8009
-	setvar VAR_0x8006, 1
-	call SlateportCity_PokemonFanClub_EventScript_271E7C
+	setvar VAR_0x8006, EASY_CHAT_PERSON_REPORTER_FEMALE
+	call Common_ShowEasyChatScreen
 	lock
 	faceplayer
 	compare VAR_RESULT, 1
@@ -3824,10 +3816,10 @@ SlateportCity_OceanicMuseum_1F_EventScript_28C8C8:: @ 828C8C8
 
 SlateportCity_OceanicMuseum_1F_EventScript_28C8E7:: @ 828C8E7
 	msgbox SlateportCity_OceanicMuseum_1F_Text_2812F2, MSGBOX_DEFAULT
-	setvar VAR_0x8004, 5
+	setvar VAR_0x8004, EASY_CHAT_TYPE_INTERVIEW
 	copyvar VAR_0x8005, VAR_0x8009
-	setvar VAR_0x8006, 0
-	call SlateportCity_OceanicMuseum_1F_EventScript_271E7C
+	setvar VAR_0x8006, EASY_CHAT_PERSON_REPORTER_MALE
+	call Common_ShowEasyChatScreen
 	lock
 	faceplayer
 	compare VAR_RESULT, 1
@@ -3896,17 +3888,17 @@ SlateportCity_PokemonFanClub_EventScript_28C9DF:: @ 828C9DF
 	end
 
 SlateportCity_PokemonFanClub_EventScript_28C9ED:: @ 828C9ED
-	setvar VAR_0x8004, 7
+	setvar VAR_0x8004, EASY_CHAT_TYPE_FAN_CLUB
 	copyvar VAR_0x8005, VAR_0x8009
 	setvar VAR_0x8006, 0
-	call SlateportCity_PokemonFanClub_EventScript_271E7C
+	call Common_ShowEasyChatScreen
 	lock
 	faceplayer
 	compare VAR_RESULT, 0
 	goto_if_eq SlateportCity_PokemonFanClub_EventScript_28CA45
 	msgbox SlateportCity_PokemonFanClub_Text_2804AC, MSGBOX_DEFAULT
 	setvar VAR_0x8006, 1
-	call SlateportCity_PokemonFanClub_EventScript_271E7C
+	call Common_ShowEasyChatScreen
 	lock
 	faceplayer
 	compare VAR_RESULT, 0
@@ -3945,10 +3937,10 @@ LilycoveCity_ContestLobby_EventScript_28CA59:: @ 828CA59
 
 LilycoveCity_ContestLobby_EventScript_28CA9B:: @ 828CA9B
 	msgbox LilycoveCity_ContestLobby_Text_27EFE7, MSGBOX_DEFAULT
-	setvar VAR_0x8004, 11
+	setvar VAR_0x8004, EASY_CHAT_TYPE_CONTEST_INTERVIEW
 	copyvar VAR_0x8005, VAR_0x8009
 	setvar VAR_0x8006, 0
-	call LilycoveCity_ContestLobby_EventScript_271E7C
+	call Common_ShowEasyChatScreen
 	lock
 	faceplayer
 	compare VAR_RESULT, 1
@@ -3966,10 +3958,10 @@ LilycoveCity_ContestLobby_EventScript_28CADA:: @ 828CADA
 	setvar VAR_0x8004, 24
 	special SetContestCategoryStringVarForInterview
 	msgbox LilycoveCity_ContestLobby_Text_27F03E, MSGBOX_DEFAULT
-	setvar VAR_0x8004, 11
+	setvar VAR_0x8004, EASY_CHAT_TYPE_CONTEST_INTERVIEW
 	copyvar VAR_0x8005, VAR_0x8009
 	setvar VAR_0x8006, 1
-	call LilycoveCity_ContestLobby_EventScript_271E7C
+	call Common_ShowEasyChatScreen
 	lock
 	faceplayer
 	compare VAR_RESULT, 0
@@ -4034,9 +4026,9 @@ BattleFrontier_BattleTowerLobby_EventScript_28CBD8:: @ 828CBD8
 	compare VAR_RESULT, 1
 	call_if_eq BattleFrontier_BattleTowerLobby_EventScript_28CC41
 	msgbox BattleFrontier_BattleTowerLobby_Text_27F97A, MSGBOX_DEFAULT
-	setvar VAR_0x8004, 12
+	setvar VAR_0x8004, EASY_CHAT_TYPE_BATTLE_TOWER_INTERVIEW
 	copyvar VAR_0x8005, VAR_0x8009
-	call BattleFrontier_BattleTowerLobby_EventScript_271E7C
+	call Common_ShowEasyChatScreen
 	lock
 	faceplayer
 	compare VAR_RESULT, 1
@@ -4506,7 +4498,7 @@ LilycoveCity_PokemonCenter_1F_EventScript_2A861C:: @ 82A861C
 	special sub_818E3BC
 	compare VAR_0x8004, 0
 	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A864C
-	compare VAR_0x8004, 15
+	compare VAR_0x8004, EASY_CHAT_TYPE_QUIZ_ANSWER
 	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A8656
 
 LilycoveCity_PokemonCenter_1F_EventScript_2A8635:: @ 82A8635
