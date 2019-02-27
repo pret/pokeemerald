@@ -761,7 +761,7 @@ static bool8 SetDiveWarp(u8 dir, u16 x, u16 y)
     }
     else
     {
-        mapheader_run_script_with_tag_x6();
+        RunOnDiveWarpMapScript();
         if (IsDummyWarp(&gFixedDiveWarp))
             return FALSE;
         SetWarpDestinationToDiveWarp();
@@ -779,7 +779,7 @@ bool8 SetDiveWarpDive(u16 x, u16 y)
     return SetDiveWarp(CONNECTION_DIVE, x, y);
 }
 
-void mliX_load_map(u8 mapGroup, u8 mapNum)
+void LoadMapFromCameraTransition(u8 mapGroup, u8 mapNum)
 {
     s32 paletteIndex;
 
@@ -800,7 +800,7 @@ void mliX_load_map(u8 mapGroup, u8 mapNum)
     ChooseAmbientCrySpecies();
     SetDefaultFlashLevel();
     Overworld_ClearSavedMusic();
-    mapheader_run_script_with_tag_x3();
+    RunOnTransitionMapScript();
     InitMap();
     copy_map_tileset2_to_vram_2(gMapHeader.mapLayout);
     apply_map_tileset2_palette(gMapHeader.mapLayout);
@@ -813,7 +813,7 @@ void mliX_load_map(u8 mapGroup, u8 mapNum)
     RoamerMove();
     DoCurrentWeather();
     ResetFieldTasksArgs();
-    mapheader_run_script_with_tag_x5();
+    RunOnResumeMapScript();
 
     if (gMapHeader.regionMapSectionId != MAPSEC_BATTLE_FRONTIER || gMapHeader.regionMapSectionId != sLastMapSectionId)
         ShowMapNamePopup();
@@ -852,7 +852,7 @@ static void mli0_load_map(u32 a1)
         FlagClear(FLAG_SYS_USE_FLASH);
     SetDefaultFlashLevel();
     Overworld_ClearSavedMusic();
-    mapheader_run_script_with_tag_x3();
+    RunOnTransitionMapScript();
     UpdateLocationHistoryForRoamer();
     RoamerMoveToOtherLocationSet();
     if (gMapHeader.mapLayoutId == LAYOUT_BATTLE_FRONTIER_BATTLE_PYRAMID_EMPTY_SQUARE)
@@ -2123,10 +2123,10 @@ static void sub_8086988(u32 a1)
 
     FieldEffectActiveListClear();
     StartWeather();
-    sub_80AEE84();
+    ResumePausedWeather();
     if (!a1)
         SetUpFieldTasks();
-    mapheader_run_script_with_tag_x5();
+    RunOnResumeMapScript();
     TryStartMirageTowerPulseBlendEffect();
 }
 
@@ -2136,7 +2136,7 @@ static void sub_80869DC(void)
     gTotalCameraPixelOffsetY = 0;
     ResetEventObjects();
     TrySpawnEventObjects(0, 0);
-    mapheader_run_first_tag4_script_list_match();
+    TryRunOnWarpIntoMapScript();
 }
 
 static void mli4_mapscripts_and_other(void)
@@ -2153,14 +2153,14 @@ static void mli4_mapscripts_and_other(void)
     SetPlayerAvatarTransitionFlags(player->transitionFlags);
     ResetInitialPlayerAvatarState();
     TrySpawnEventObjects(0, 0);
-    mapheader_run_first_tag4_script_list_match();
+    TryRunOnWarpIntoMapScript();
 }
 
 static void sub_8086A68(void)
 {
     sub_808E16C(0, 0);
     RotatingGate_InitPuzzleAndGraphics();
-    mapheader_run_script_with_tag_x7();
+    RunOnReturnToFieldMapScript();
 }
 
 static void sub_8086A80(void)

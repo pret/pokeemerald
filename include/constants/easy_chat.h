@@ -23,6 +23,7 @@
 #define EC_GROUP_MOVE_2         0x13
 #define EC_GROUP_TRENDY_SAYING  0x14
 #define EC_GROUP_POKEMON_2      0x15
+#define EC_NUM_GROUPS           0x16
 
 // TRAINER
 #define EC_WORD_I_CHOOSE_YOU  (EC_GROUP_TRAINER << 9) | 0x0
@@ -1075,5 +1076,6 @@
 
 #define EC_GROUP(word) ((word) >> 9)
 #define EC_INDEX(word) ((word) & 0x1FF)
+#define EC_WORD(group, index) ((((group) & 0x7F) << 9) | ((index) & 0x1FF))
 
 #endif  // GUARD_CONSTANTS_EASY_CHAT_H

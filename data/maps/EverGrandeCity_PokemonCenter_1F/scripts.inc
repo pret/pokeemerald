@@ -1,6 +1,6 @@
 EverGrandeCity_PokemonCenter_1F_MapScripts:: @ 8229A34
-	map_script 3, EverGrandeCity_PokemonCenter_1F_MapScript1_229A3F
-	map_script 5, EverGrandeCity_PokemonCenter_1F_MapScript1_277C30
+	map_script MAP_SCRIPT_ON_TRANSITION, EverGrandeCity_PokemonCenter_1F_MapScript1_229A3F
+	map_script MAP_SCRIPT_ON_RESUME, EverGrandeCity_PokemonCenter_1F_MapScript1_277C30
 	.byte 0
 
 EverGrandeCity_PokemonCenter_1F_MapScript1_229A3F: @ 8229A3F
@@ -9,7 +9,7 @@ EverGrandeCity_PokemonCenter_1F_MapScript1_229A3F: @ 8229A3F
 	end
 
 EverGrandeCity_PokemonCenter_1F_EventScript_229A4C:: @ 8229A4C
-	goto_if_unset FLAG_BADGE06_GET, EverGrandeCity_PokemonCenter_1F_EventScript_27374E
+	goto_if_unset FLAG_BADGE06_GET, Common_EventScript_NopReturn
 	clearflag FLAG_HIDE_EVER_GRANDE_POKEMON_CENTER_1F_SCOTT
 	return
 

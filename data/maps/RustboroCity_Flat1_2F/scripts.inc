@@ -59,7 +59,7 @@ RustboroCity_Flat1_2F_EventScript_2151F8:: @ 82151F8
 	msgbox RustboroCity_Flat1_2F_Text_215535, MSGBOX_DEFAULT
 	call RustboroCity_Flat1_2F_EventScript_215238
 	msgbox RustboroCity_Flat1_2F_Text_215565, MSGBOX_DEFAULT
-	applymovement 6, RustboroCity_Flat1_2F_Movement_27259E
+	applymovement 6, Common_Movement_FacePlayer
 	waitmovement 0
 	msgbox RustboroCity_Flat1_2F_Text_215792, MSGBOX_DEFAULT
 	release

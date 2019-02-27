@@ -53,7 +53,7 @@ void InitMap(void)
 {
     InitMapLayoutData(&gMapHeader);
     sub_80E8EE0(gMapHeader.events);
-    mapheader_run_script_with_tag_x1();
+    RunOnLoadMapScript();
 }
 
 void InitMapFromSavedGame(void)
@@ -62,7 +62,7 @@ void InitMapFromSavedGame(void)
     sub_80E9238(0);
     sub_80E8EE0(gMapHeader.events);
     LoadSavedMapView();
-    mapheader_run_script_with_tag_x1();
+    RunOnLoadMapScript();
     UpdateTVScreensOnMap(gBackupMapLayout.width, gBackupMapLayout.height);
 }
 
@@ -776,7 +776,7 @@ bool8 CameraMove(int x, int y)
         old_y = gSaveBlock1Ptr->pos.y;
         connection = sub_8088950(direction, gSaveBlock1Ptr->pos.x, gSaveBlock1Ptr->pos.y);
         sub_80887F8(connection, direction, x, y);
-        mliX_load_map(connection->mapGroup, connection->mapNum);
+        LoadMapFromCameraTransition(connection->mapGroup, connection->mapNum);
         gCamera.active = TRUE;
         gCamera.x = old_x - gSaveBlock1Ptr->pos.x;
         gCamera.y = old_y - gSaveBlock1Ptr->pos.y;

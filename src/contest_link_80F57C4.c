@@ -372,12 +372,12 @@ static void sub_80F5CE4(u8 taskId)
             sub_80DEDA8(0xFE);
             gUnknown_02039F5C = 1;
             gUnknown_02039F5D = sub_80DEFA8(0xFE, 0);
-            var = VarGet(VAR_0x4086);
-            VarSet(VAR_0x4086, 0);
+            var = VarGet(VAR_LINK_CONTEST_ROOM_STATE);
+            VarSet(VAR_LINK_CONTEST_ROOM_STATE, 0);
             SetContinueGameWarpStatusToDynamicWarp();
             TrySavingData(SAVE_LINK);
             ClearContinueGameWarpStatus2();
-            VarSet(VAR_0x4086, var);
+            VarSet(VAR_LINK_CONTEST_ROOM_STATE, var);
             gTasks[taskId].data[0]++;
             break;
         case 1:

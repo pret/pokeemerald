@@ -326,7 +326,7 @@
       "x": 43,
       "y": 11,
       "elevation": 3,
-      "var": "VAR_0x4071",
+      "var": "VAR_ROUTE118_STATE",
       "var_value": "0",
       "script": "Route118_EventScript_1F3E8E"
     },
@@ -335,7 +335,7 @@
       "x": 44,
       "y": 11,
       "elevation": 3,
-      "var": "VAR_0x4071",
+      "var": "VAR_ROUTE118_STATE",
       "var_value": "0",
       "script": "Route118_EventScript_1F3EAE"
     },
@@ -344,7 +344,7 @@
       "x": 45,
       "y": 11,
       "elevation": 3,
-      "var": "VAR_0x4071",
+      "var": "VAR_ROUTE118_STATE",
       "var_value": "0",
       "script": "Route118_EventScript_1F3EC4"
     }

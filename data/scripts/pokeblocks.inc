@@ -333,7 +333,7 @@ EventScript_Pblock1_NoPokeblock: @ 8293D43
 LilycoveCity_ContestLobby_EventScript_293D4D:: @ 8293D4D
 	lockall
 	setvar VAR_0x8009, 2
-	applymovement 10, LilycoveCity_ContestLobby_Movement_2725A2
+	applymovement 10, Common_Movement_FaceOriginalDirection
 	applymovement 3, LilycoveCity_ContestLobby_Movement_294053
 	waitmovement 0
 	msgbox LilycoveCity_ContestLobby_Text_293201, MSGBOX_YESNO
@@ -398,8 +398,8 @@ LilycoveCity_ContestLobby_EventScript_293E1E:: @ 8293E1E
 	lockall
 	setvar VAR_0x8008, 15
 	setvar VAR_0x8009, 3
-	applymovement 9, LilycoveCity_ContestLobby_Movement_2725A2
-	applymovement 17, LilycoveCity_ContestLobby_Movement_2725A2
+	applymovement 9, Common_Movement_FaceOriginalDirection
+	applymovement 17, Common_Movement_FaceOriginalDirection
 	applymovement VAR_0x8008, LilycoveCity_ContestLobby_Movement_294053
 	waitmovement 0
 	msgbox LilycoveCity_ContestLobby_Text_293842, MSGBOX_YESNO
@@ -602,7 +602,7 @@ EventScript_PblocLink_NoBerries: @ 82940B1
 	end
 
 EventScript_PblocLink_TryConnect: @ 82940BB
-	call LilycoveCity_ContestLobby_EventScript_27134F
+	call Common_EventScript_SaveGame
 	compare VAR_RESULT, 0
 	goto_if_eq EventScript_PblocLink_End
 	specialvar VAR_RESULT, IsWirelessAdapterConnected

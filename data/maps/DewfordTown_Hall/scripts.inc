@@ -53,7 +53,7 @@ DewfordTown_Hall_EventScript_1FD547:: @ 81FD547
 	call DewfordTown_Hall_EventScript_271E8B
 	msgbox DewfordTown_Hall_Text_1FDA5C, MSGBOX_DEFAULT
 	closemessage
-	applymovement 4, DewfordTown_Hall_Movement_2725A6
+	applymovement 4, Common_Movement_WalkInPlaceUp
 	waitmovement 0
 	release
 	end
@@ -64,7 +64,7 @@ DewfordTown_Hall_EventScript_1FD563:: @ 81FD563
 	call DewfordTown_Hall_EventScript_271E8B
 	msgbox DewfordTown_Hall_Text_1FDA99, MSGBOX_DEFAULT
 	closemessage
-	applymovement 5, DewfordTown_Hall_Movement_2725A6
+	applymovement 5, Common_Movement_WalkInPlaceUp
 	waitmovement 0
 	release
 	end
@@ -200,7 +200,7 @@ DewfordTown_Hall_EventScript_1FD73A:: @ 81FD73A
 DewfordTown_Hall_EventScript_1FD75B:: @ 81FD75B
 	compare VAR_FACING, 4
 	goto_if_eq DewfordTown_Hall_EventScript_1FD739
-	applymovement EVENT_OBJ_ID_PLAYER, DewfordTown_Hall_Movement_2725A8
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceRight
 	waitmovement 0
 	return
 
@@ -224,19 +224,19 @@ DewfordTown_Hall_EventScript_1FD793:: @ 81FD793
 	return
 
 DewfordTown_Hall_EventScript_1FD7AA:: @ 81FD7AA
-	applymovement EVENT_OBJ_ID_PLAYER, DewfordTown_Hall_Movement_2725A6
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceUp
 	waitmovement 0
 	return
 
 DewfordTown_Hall_EventScript_1FD7B5:: @ 81FD7B5
-	applymovement EVENT_OBJ_ID_PLAYER, DewfordTown_Hall_Movement_2725AA
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceDown
 	waitmovement 0
 	return
 
 DewfordTown_Hall_EventScript_1FD7C0:: @ 81FD7C0
 	compare VAR_FACING, 3
 	goto_if_eq DewfordTown_Hall_EventScript_1FD739
-	applymovement EVENT_OBJ_ID_PLAYER, DewfordTown_Hall_Movement_2725A4
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceLeft
 	waitmovement 0
 	return
 
@@ -256,7 +256,7 @@ DewfordTown_Hall_EventScript_1FD7DA:: @ 81FD7DA
 	msgbox DewfordTown_Hall_Text_1FE142, MSGBOX_DEFAULT
 	giveitem_std ITEM_TM36
 	compare VAR_RESULT, 0
-	goto_if_eq DewfordTown_Hall_EventScript_272054
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_TM36
 	release
 	end
