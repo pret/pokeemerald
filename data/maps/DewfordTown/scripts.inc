@@ -608,8 +608,8 @@ DewfordTown_EventScript_1E9948:: @ 81E9948
 
 DewfordTown_EventScript_1E9952:: @ 81E9952
 	msgbox DewfordTown_Text_1EA242, MSGBOX_DEFAULT
-	setvar VAR_0x8004, 9
-	call DewfordTown_EventScript_271E7C
+	setvar VAR_0x8004, EASY_CHAT_TYPE_TRENDY_PHRASE
+	call Common_ShowEasyChatScreen
 	lock
 	faceplayer
 	compare VAR_RESULT, 1

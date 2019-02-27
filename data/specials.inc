@@ -106,7 +106,7 @@ gSpecials:: @ 81DBA64
 	def_special sub_80B3000
 	def_special SaveGame
 	def_special DoWateringBerryTreeAnim
-	def_special easy_chat_input_maybe
+	def_special ShowEasyChatScreen
 	def_special sub_811EECC
 	def_special ScrSpecial_GetCurrentMauvilleMan
 	def_special ScrSpecial_HasBardSongBeenChanged
