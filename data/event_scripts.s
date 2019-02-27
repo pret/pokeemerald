@@ -1148,7 +1148,7 @@ EventScript_WhiteOut:: @ 8271857
 	goto EventScript_ResetMrBriney
 	end
 
-EventScript_271862:: @ 8271862
+EventScript_ResetMrBriney:: @ 8271862
 	compare VAR_BRINEY_LOCATION, 1
 	goto_if_eq EventScript_MoveMrBrineyToHouse
 	compare VAR_BRINEY_LOCATION, 2
