@@ -21,25 +21,25 @@ FortreeCity_House4_EventScript_217C8A:: @ 8217C8A
 	end
 
 FortreeCity_House4_EventScript_217CC4:: @ 8217CC4
-	applymovement VAR_LAST_TALKED, FortreeCity_House4_Movement_27259E
+	applymovement VAR_LAST_TALKED, Common_Movement_FacePlayer
 	waitmovement 0
 	msgbox FortreeCity_House4_Text_217DD2, MSGBOX_DEFAULT
 	releaseall
 	end
 
 FortreeCity_House4_EventScript_217CD8:: @ 8217CD8
-	applymovement VAR_LAST_TALKED, FortreeCity_House4_Movement_27259E
+	applymovement VAR_LAST_TALKED, Common_Movement_FacePlayer
 	waitmovement 0
 	msgbox FortreeCity_House4_Text_217E05, MSGBOX_DEFAULT
 	giveitem_std ITEM_MENTAL_HERB
 	compare VAR_RESULT, 0
-	goto_if_eq FortreeCity_House4_EventScript_272054
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_MENTAL_HERB
 	releaseall
 	end
 
 FortreeCity_House4_EventScript_217D06:: @ 8217D06
-	applymovement VAR_LAST_TALKED, FortreeCity_House4_Movement_27259E
+	applymovement VAR_LAST_TALKED, Common_Movement_FacePlayer
 	waitmovement 0
 	msgbox FortreeCity_House4_Text_217EA8, MSGBOX_DEFAULT
 	releaseall

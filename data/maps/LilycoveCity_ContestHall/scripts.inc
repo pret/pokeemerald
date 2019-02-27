@@ -22,7 +22,7 @@ LilycoveCity_ContestHall_EventScript_21B4A9:: @ 821B4A9
 	faceplayer
 	msgbox LilycoveCity_ContestHall_Text_21B977, MSGBOX_DEFAULT
 	closemessage
-	applymovement 4, LilycoveCity_ContestHall_Movement_2725A2
+	applymovement 4, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end
@@ -32,7 +32,7 @@ LilycoveCity_ContestHall_EventScript_21B4C0:: @ 821B4C0
 	faceplayer
 	msgbox LilycoveCity_ContestHall_Text_21B9DC, MSGBOX_DEFAULT
 	closemessage
-	applymovement 5, LilycoveCity_ContestHall_Movement_2725A2
+	applymovement 5, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end
@@ -42,7 +42,7 @@ LilycoveCity_ContestHall_EventScript_21B4D7:: @ 821B4D7
 	faceplayer
 	msgbox LilycoveCity_ContestHall_Text_21BA44, MSGBOX_DEFAULT
 	closemessage
-	applymovement 6, LilycoveCity_ContestHall_Movement_2725A2
+	applymovement 6, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end
@@ -52,7 +52,7 @@ LilycoveCity_ContestHall_EventScript_21B4EE:: @ 821B4EE
 	faceplayer
 	msgbox LilycoveCity_ContestHall_Text_21BAD5, MSGBOX_DEFAULT
 	closemessage
-	applymovement 7, LilycoveCity_ContestHall_Movement_2725A2
+	applymovement 7, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end
@@ -62,7 +62,7 @@ LilycoveCity_ContestHall_EventScript_21B505:: @ 821B505
 	faceplayer
 	msgbox LilycoveCity_ContestHall_Text_21BB84, MSGBOX_DEFAULT
 	closemessage
-	applymovement 8, LilycoveCity_ContestHall_Movement_2725A2
+	applymovement 8, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end
@@ -72,7 +72,7 @@ LilycoveCity_ContestHall_EventScript_21B51C:: @ 821B51C
 	faceplayer
 	msgbox LilycoveCity_ContestHall_Text_21BBDD, MSGBOX_DEFAULT
 	closemessage
-	applymovement 9, LilycoveCity_ContestHall_Movement_2725A2
+	applymovement 9, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end
@@ -86,7 +86,7 @@ LilycoveCity_ContestHall_EventScript_21B53C:: @ 821B53C
 	faceplayer
 	msgbox LilycoveCity_ContestHall_Text_21BC89, MSGBOX_DEFAULT
 	closemessage
-	applymovement 12, LilycoveCity_ContestHall_Movement_2725A2
+	applymovement 12, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end
@@ -96,7 +96,7 @@ LilycoveCity_ContestHall_EventScript_21B553:: @ 821B553
 	faceplayer
 	msgbox LilycoveCity_ContestHall_Text_21BD30, MSGBOX_DEFAULT
 	closemessage
-	applymovement 22, LilycoveCity_ContestHall_Movement_2725A2
+	applymovement 22, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end
@@ -106,7 +106,7 @@ LilycoveCity_ContestHall_EventScript_21B56A:: @ 821B56A
 	faceplayer
 	msgbox LilycoveCity_ContestHall_Text_21BD70, MSGBOX_DEFAULT
 	closemessage
-	applymovement 11, LilycoveCity_ContestHall_Movement_2725A2
+	applymovement 11, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end
@@ -116,7 +116,7 @@ LilycoveCity_ContestHall_EventScript_21B581:: @ 821B581
 	faceplayer
 	msgbox LilycoveCity_ContestHall_Text_21BDDD, MSGBOX_DEFAULT
 	closemessage
-	applymovement 13, LilycoveCity_ContestHall_Movement_2725A2
+	applymovement 13, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end
@@ -126,7 +126,7 @@ LilycoveCity_ContestHall_EventScript_21B598:: @ 821B598
 	faceplayer
 	msgbox LilycoveCity_ContestHall_Text_21BE16, MSGBOX_DEFAULT
 	closemessage
-	applymovement 14, LilycoveCity_ContestHall_Movement_2725A2
+	applymovement 14, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end
@@ -136,7 +136,7 @@ LilycoveCity_ContestHall_EventScript_21B5AF:: @ 821B5AF
 	faceplayer
 	msgbox LilycoveCity_ContestHall_Text_21BE77, MSGBOX_DEFAULT
 	closemessage
-	applymovement 15, LilycoveCity_ContestHall_Movement_2725A2
+	applymovement 15, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end
@@ -146,7 +146,7 @@ LilycoveCity_ContestHall_EventScript_21B5C6:: @ 821B5C6
 	faceplayer
 	msgbox LilycoveCity_ContestHall_Text_21BEDE, MSGBOX_DEFAULT
 	closemessage
-	applymovement 16, LilycoveCity_ContestHall_Movement_2725A2
+	applymovement 16, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end
@@ -156,7 +156,7 @@ LilycoveCity_ContestHall_EventScript_21B5DD:: @ 821B5DD
 	faceplayer
 	msgbox LilycoveCity_ContestHall_Text_21BF6E, MSGBOX_DEFAULT
 	closemessage
-	applymovement 17, LilycoveCity_ContestHall_Movement_2725A2
+	applymovement 17, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end
@@ -166,7 +166,7 @@ LilycoveCity_ContestHall_EventScript_21B5F4:: @ 821B5F4
 	faceplayer
 	msgbox LilycoveCity_ContestHall_Text_21BFE3, MSGBOX_DEFAULT
 	closemessage
-	applymovement 18, LilycoveCity_ContestHall_Movement_2725A2
+	applymovement 18, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end
@@ -176,7 +176,7 @@ LilycoveCity_ContestHall_EventScript_21B60B:: @ 821B60B
 	faceplayer
 	msgbox LilycoveCity_ContestHall_Text_21C07F, MSGBOX_DEFAULT
 	closemessage
-	applymovement 19, LilycoveCity_ContestHall_Movement_2725A2
+	applymovement 19, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end
@@ -186,7 +186,7 @@ LilycoveCity_ContestHall_EventScript_21B622:: @ 821B622
 	faceplayer
 	msgbox LilycoveCity_ContestHall_Text_21C0D8, MSGBOX_DEFAULT
 	closemessage
-	applymovement 21, LilycoveCity_ContestHall_Movement_2725A2
+	applymovement 21, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end
@@ -196,7 +196,7 @@ LilycoveCity_ContestHall_EventScript_21B639:: @ 821B639
 	faceplayer
 	msgbox LilycoveCity_ContestHall_Text_21C137, MSGBOX_DEFAULT
 	closemessage
-	applymovement 20, LilycoveCity_ContestHall_Movement_2725A2
+	applymovement 20, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end
@@ -206,7 +206,7 @@ LilycoveCity_ContestHall_EventScript_21B650:: @ 821B650
 	faceplayer
 	msgbox LilycoveCity_ContestHall_Text_21C1A4, MSGBOX_DEFAULT
 	closemessage
-	applymovement 23, LilycoveCity_ContestHall_Movement_2725A2
+	applymovement 23, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end
@@ -216,7 +216,7 @@ LilycoveCity_ContestHall_EventScript_21B667:: @ 821B667
 	faceplayer
 	msgbox LilycoveCity_ContestHall_Text_21C215, MSGBOX_DEFAULT
 	closemessage
-	applymovement 24, LilycoveCity_ContestHall_Movement_2725A2
+	applymovement 24, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end
@@ -226,7 +226,7 @@ LilycoveCity_ContestHall_EventScript_21B67E:: @ 821B67E
 	faceplayer
 	msgbox LilycoveCity_ContestHall_Text_21C27F, MSGBOX_DEFAULT
 	closemessage
-	applymovement 25, LilycoveCity_ContestHall_Movement_2725A2
+	applymovement 25, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end
@@ -236,7 +236,7 @@ LilycoveCity_ContestHall_EventScript_21B695:: @ 821B695
 	faceplayer
 	msgbox LilycoveCity_ContestHall_Text_21C2BB, MSGBOX_DEFAULT
 	closemessage
-	applymovement 26, LilycoveCity_ContestHall_Movement_2725A2
+	applymovement 26, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end
@@ -246,7 +246,7 @@ LilycoveCity_ContestHall_EventScript_21B6AC:: @ 821B6AC
 	faceplayer
 	msgbox LilycoveCity_ContestHall_Text_21C307, MSGBOX_DEFAULT
 	closemessage
-	applymovement 27, LilycoveCity_ContestHall_Movement_2725A2
+	applymovement 27, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end
@@ -256,18 +256,18 @@ LilycoveCity_ContestHall_EventScript_21B6C3:: @ 821B6C3
 	faceplayer
 	msgbox LilycoveCity_ContestHall_Text_21C365, MSGBOX_DEFAULT
 	closemessage
-	applymovement 28, LilycoveCity_ContestHall_Movement_2725A2
+	applymovement 28, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end
 
 LilycoveCity_ContestHall_EventScript_21B6DA:: @ 821B6DA
 	lockall
-	applymovement 29, LilycoveCity_ContestHall_Movement_27259E
+	applymovement 29, Common_Movement_FacePlayer
 	waitmovement 0
 	msgbox LilycoveCity_ContestHall_Text_21C3F4, MSGBOX_DEFAULT
 	closemessage
-	applymovement 29, LilycoveCity_ContestHall_Movement_2725A2
+	applymovement 29, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	delay 25
 	msgbox LilycoveCity_ContestHall_Text_21C411, MSGBOX_DEFAULT
@@ -279,7 +279,7 @@ LilycoveCity_ContestHall_EventScript_21B705:: @ 821B705
 	faceplayer
 	msgbox LilycoveCity_ContestHall_Text_21C4B1, MSGBOX_DEFAULT
 	closemessage
-	applymovement 31, LilycoveCity_ContestHall_Movement_2725A2
+	applymovement 31, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end
@@ -289,7 +289,7 @@ LilycoveCity_ContestHall_EventScript_21B71C:: @ 821B71C
 	faceplayer
 	msgbox LilycoveCity_ContestHall_Text_21C445, MSGBOX_DEFAULT
 	closemessage
-	applymovement 30, LilycoveCity_ContestHall_Movement_2725A2
+	applymovement 30, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end

@@ -8,7 +8,7 @@ SSTidalRooms_EventScript_23C9F2:: @ 823C9F2
 	msgbox SSTidalRooms_Text_23D098, MSGBOX_DEFAULT
 	giveitem_std ITEM_TM49
 	compare VAR_RESULT, 0
-	goto_if_eq SSTidalRooms_EventScript_272054
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_TM49
 	msgbox SSTidalRooms_Text_23D145, MSGBOX_DEFAULT
 	release
@@ -23,7 +23,7 @@ SSTidalRooms_EventScript_23CA33:: @ 823CA33
 	lockall
 	msgbox SSTidalRooms_Text_23CAF2, MSGBOX_DEFAULT
 	closemessage
-	call SSTidalRooms_EventScript_272083
+	call Common_EventScript_OutOfCenterPartyHeal
 	call SSTidalRooms_EventScript_23C0A7
 	releaseall
 	end

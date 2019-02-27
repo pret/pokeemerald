@@ -57,7 +57,7 @@
       "x": 4,
       "y": 7,
       "elevation": 3,
-      "var": "VAR_0x40A5",
+      "var": "VAR_TRICK_HOUSE_ENTRANCE_STATE_1",
       "var_value": "0",
       "script": "Route110_TrickHouseEntrance_EventScript_26A3F8"
     },
@@ -66,7 +66,7 @@
       "x": 5,
       "y": 6,
       "elevation": 3,
-      "var": "VAR_0x40A5",
+      "var": "VAR_TRICK_HOUSE_ENTRANCE_STATE_1",
       "var_value": "0",
       "script": "Route110_TrickHouseEntrance_EventScript_26A3F8"
     },
@@ -75,7 +75,7 @@
       "x": 6,
       "y": 6,
       "elevation": 3,
-      "var": "VAR_0x40A5",
+      "var": "VAR_TRICK_HOUSE_ENTRANCE_STATE_1",
       "var_value": "0",
       "script": "Route110_TrickHouseEntrance_EventScript_26A3F8"
     },
@@ -84,7 +84,7 @@
       "x": 7,
       "y": 7,
       "elevation": 3,
-      "var": "VAR_0x40A5",
+      "var": "VAR_TRICK_HOUSE_ENTRANCE_STATE_1",
       "var_value": "0",
       "script": "Route110_TrickHouseEntrance_EventScript_26A3F8"
     }

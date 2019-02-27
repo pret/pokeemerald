@@ -439,7 +439,7 @@
       "y": 16,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
-      "script": "MossdeepCity_EventScript_271E73"
+      "script": "Common_EventScript_ShowPokemonCenterSign"
     },
     {
       "type": "sign",
@@ -447,7 +447,7 @@
       "y": 18,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
-      "script": "MossdeepCity_EventScript_271E6A"
+      "script": "Common_EventScript_ShowPokemartSign"
     },
     {
       "type": "sign",
@@ -463,7 +463,7 @@
       "y": 16,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
-      "script": "MossdeepCity_EventScript_271E73"
+      "script": "Common_EventScript_ShowPokemonCenterSign"
     },
     {
       "type": "sign",
@@ -471,7 +471,7 @@
       "y": 18,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
-      "script": "MossdeepCity_EventScript_271E6A"
+      "script": "Common_EventScript_ShowPokemartSign"
     },
     {
       "type": "sign",

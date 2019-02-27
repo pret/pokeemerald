@@ -875,8 +875,7 @@ struct SaveBlock1
     /*0x2BC8*/ u16 unk2BC8[6];
     /*0x2BD4*/ u16 unk2BD4[6];
     /*0x2BE0*/ struct MailStruct mail[MAIL_COUNT];
-    /*0x2E20*/ u8 additionalPhrases[5]; // bitfield for 33 additional phrases in easy chat system
-    /*0x2E25*/ u8 unk2E25[3]; // possibly padding?
+    /*0x2E20*/ u8 additionalPhrases[8]; // bitfield for 33 additional phrases in easy chat system
     /*0x2E28*/ OldMan oldMan;
     /*0x2e64*/ struct EasyChatPair easyChatPairs[5]; //Dewford trend [0] and some other stuff
     /*0x2e90*/ struct ContestWinner contestWinners[13]; // 0 - 5 used in contest hall, 6 - 7 unused?, 8 - 12 museum

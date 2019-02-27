@@ -15,7 +15,7 @@ PetalburgWoods_EventScript_22DFD7:: @ 822DFD7
 	closemessage
 	applymovement 3, PetalburgWoods_Movement_22E1F6
 	waitmovement 0
-	applymovement 4, PetalburgWoods_Movement_2725A6
+	applymovement 4, Common_Movement_WalkInPlaceUp
 	waitmovement 0
 	msgbox PetalburgWoods_Text_22E428, MSGBOX_DEFAULT
 	closemessage
@@ -41,7 +41,7 @@ PetalburgWoods_EventScript_22E079:: @ 822E079
 	call PetalburgWoods_EventScript_22E124
 	applymovement 4, PetalburgWoods_Movement_22E1D0
 	waitmovement 0
-	applymovement EVENT_OBJ_ID_PLAYER, PetalburgWoods_Movement_2725A4
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceLeft
 	waitmovement 0
 	msgbox PetalburgWoods_Text_22E34F, MSGBOX_DEFAULT
 	closemessage
@@ -52,14 +52,14 @@ PetalburgWoods_EventScript_22E079:: @ 822E079
 	closemessage
 	applymovement 3, PetalburgWoods_Movement_22E205
 	waitmovement 0
-	applymovement 4, PetalburgWoods_Movement_2725A6
+	applymovement 4, Common_Movement_WalkInPlaceUp
 	waitmovement 0
 	msgbox PetalburgWoods_Text_22E428, MSGBOX_DEFAULT
 	closemessage
 	applymovement 4, PetalburgWoods_Movement_22E1EA
 	waitmovement 0
 	msgbox PetalburgWoods_Text_22E457, MSGBOX_DEFAULT
-	applymovement EVENT_OBJ_ID_PLAYER, PetalburgWoods_Movement_2725A6
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceUp
 	waitmovement 0
 	msgbox PetalburgWoods_Text_22E4A5, MSGBOX_DEFAULT
 	trainerbattle_no_intro TRAINER_GRUNT_8, PetalburgWoods_Text_22E542
@@ -85,7 +85,7 @@ PetalburgWoods_EventScript_22E138:: @ 822E138
 	applymovement 3, PetalburgWoods_Movement_22E1FD
 	waitmovement 0
 	removeobject 3
-	applymovement EVENT_OBJ_ID_PLAYER, PetalburgWoods_Movement_2725AA
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceDown
 	waitmovement 0
 	msgbox PetalburgWoods_Text_22E63D, MSGBOX_DEFAULT
 	giveitem_std ITEM_GREAT_BALL
@@ -109,7 +109,7 @@ PetalburgWoods_EventScript_22E18B:: @ 822E18B
 
 PetalburgWoods_EventScript_22E1A7:: @ 822E1A7
 	removeobject 4
-	setvar VAR_0x4098, 1
+	setvar VAR_PETALBURG_WOODS_STATE, 1
 	releaseall
 	end
 
@@ -253,7 +253,7 @@ PetalburgWoods_EventScript_22E222:: @ 822E222
 	msgbox PetalburgWoods_Text_22EAFE, MSGBOX_DEFAULT
 	giveitem_std ITEM_MIRACLE_SEED
 	compare VAR_RESULT, 0
-	goto_if_eq PetalburgWoods_EventScript_272054
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_MIRACLE_SEED
 	release
 	end

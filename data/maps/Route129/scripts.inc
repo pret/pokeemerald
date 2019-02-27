@@ -1,7 +1,7 @@
 Route129_MapScripts:: @ 81F7284
-	map_script 3, Route129_MapScript1_1F72AB
-	map_script 1, Route129_MapScript1_1F7294
-	map_script 2, Route129_MapScript2_1F72E2
+	map_script MAP_SCRIPT_ON_TRANSITION, Route129_MapScript1_1F72AB
+	map_script MAP_SCRIPT_ON_LOAD, Route129_MapScript1_1F7294
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, Route129_MapScript2_1F72E2
 	.byte 0
 
 Route129_MapScript1_1F7294: @ 81F7294
@@ -23,7 +23,7 @@ Route129_MapScript1_1F72AB: @ 81F72AB
 	end
 
 Route129_EventScript_1F72D8:: @ 81F72D8
-	call_if_set FLAG_SYS_WEATHER_CTRL, Route129_EventScript_27207A
+	call_if_set FLAG_SYS_WEATHER_CTRL, Common_EventScript_SetWeather15
 	return
 
 Route129_MapScript2_1F72E2: @ 81F72E2

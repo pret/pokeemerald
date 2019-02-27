@@ -13,26 +13,45 @@
 #include "bg.h"
 #include "menu.h"
 #include "graphics.h"
+#include "dma3.h"
 #include "gba/macro.h"
 #include "decompress.h"
 #include "strings.h"
 #include "constants/rgb.h"
 
+enum
+{
+    MODE_NORMAL, // Chosen from Start menu.
+    MODE_FORCE_CALL_1, // Used for the script's special. Has to choose Match Call and make a call.
+    MODE_FORCE_CALL_2, // Set after making a call, has to exit Pokenav.
+};
+
 #define UNKNOWN_OFFSET 100000
+
+struct UnknownSubStruct_0203CF40
+{
+    void (*unk0)(u32);
+    u32 (*unk4)(void);
+    u32 unk8;
+    u32 unkC;
+    u32 unk10;
+    u32 unk14;
+    struct Sprite *unk18;
+    struct Sprite *unk1C[2];
+    struct Sprite *unk24[2];
+    u8 tilemapBuffer[0x1000];
+};
+
+#define SUBSTRUCT_COUNT 19
 
 struct UnknownStruct_0203CF40
 {
     u32 (*field0)(void);
     u32 field4;
-    u16 field8;
+    u16 mode;
     u16 fieldA;
-    u32 fieldC;
-    void *field10[19];
-};
-
-struct UnknownStruct_sub_81C76C4
-{
-    u32 data[523];
+    bool32 hasAnyRibbons;
+    struct UnknownSubStruct_0203CF40 *field10[SUBSTRUCT_COUNT];
 };
 
 extern u32 sub_81C9430(void);
@@ -101,34 +120,42 @@ extern u32 sub_81CFE08(void);
 u32 sub_81C791C(s32 a0);
 bool32 sub_81C756C(u32 a0);
 bool32 sub_81C76C4(void);
-u32 AnyMonHasRibbon(void);
+static bool32 AnyMonHasRibbon(void);
 u32 sub_81C75E0(void);
 u32 sub_81C75D4(void);
 u32 sub_81C76FC(void);
 u32 sub_81C786C(void);
 u32 sub_81C7764(s32 a0);
-u32 atk47_cmd47(s32 a0);
+u32 sub_81C78D4(s32 a0);
 bool32 sub_81C7738(void);
 void CopyPaletteIntoBufferUnfaded(const u16 *palette, u32 a1, u32 a2);
-void sub_81C7834(u32 (*a0)(void), u32(*a1)(void));
-void sub_81C7360(struct UnknownStruct_0203CF40 *a0);
-void sub_81C7650(u32 index);
+void sub_81C7834(void *func1, void *func2);
+static void InitMainStruct(struct UnknownStruct_0203CF40 *a0);
+void FreeSubstruct(u32 index);
 void sub_81C7850(u32 a0);
 void sub_81C7BF8(u32 a0);
 void sub_81C71E4(u8 a0);
-void sub_81C7170(u8 a0);
+void sub_81C7170(u8 taskId);
 void sub_81C742C(u8 taskId);
 void sub_81C7710(void);
-void sub_81C75F4(void);
-void sub_81C7334(void);
-void sub_81C7418(void);
-void sub_81C7400(void);
+static void InitKeys_(void);
+static void FreeVars(void);
+static void VblankCb_Pokenav(void);
+static void Cb2_Pokenav(void);
 void sub_81C7C28(void);
 void sub_81C72BC(void);
 void sub_81C7B74(void);
 void sub_81C7C94(void);
+void sub_81C7F24(u32 arg0);
+void sub_81C7E58(u32 arg0);
+void sub_81C8110(bool32 arg0);
+void sub_81C80D4(bool32 arg0);
+void sub_81C803C(u32 arg0, bool32 arg1);
+void sub_81C8088(u32 arg0, bool32 arg1);
+void sub_81C814C(struct Sprite *sprite, s32 arg1, s32 arg2, s32 arg3);
+void sub_81C817C(struct Sprite *sprite);
 
-
+// Const rom data.
 u32 (*const gUnknown_0861F3EC[15][7])(void) =
 {
     {
@@ -272,15 +299,17 @@ const u16 gUnknown_0861F590[] = INCBIN_U16("graphics/pokenav/icon2.gbapal");
 const u32 gUnknown_0861F5B0[] = INCBIN_U32("graphics/pokenav/icon2.4bpp.lz");
 const u32 gUnknown_0861F994[] = INCBIN_U32("graphics/pokenav/icon2_unused.4bpp.lz");
 
-const struct BgTemplate gUnknown_0861FA04 =
+const struct BgTemplate gUnknown_0861FA04[] =
 {
-    .bg = 0,
-    .charBaseIndex = 0,
-    .mapBaseIndex = 5,
-    .screenSize = 0,
-    .paletteMode = 0,
-    .priority = 0,
-    .baseTile = 0,
+    {
+        .bg = 0,
+        .charBaseIndex = 0,
+        .mapBaseIndex = 5,
+        .screenSize = 0,
+        .paletteMode = 0,
+        .priority = 0,
+        .baseTile = 0,
+    }
 };
 
 const struct WindowTemplate gUnknown_0861FA08[2] =
@@ -305,7 +334,7 @@ const struct WindowTemplate gUnknown_0861FA08[2] =
     },
 };
 
-const u8 *const (MenuButtonReminders[12]) =
+const u8 *const (sMenuButtonReminders[12]) =
 {
     gText_Navgear_ClearButtonList,
     gText_NavgearMap_ZoomedOutButtons,
@@ -341,10 +370,6 @@ const struct SpritePalette gUnknown_0861FA54[2] =
         .data = gUnknown_0861F590,
         .tag = 0,
     },
-    {
-        .data = NULL,
-        .tag = 0,
-    }
 };
 
 const struct CompressedSpriteSheet gUnknown_0861FA64 =
@@ -358,16 +383,17 @@ extern struct UnknownStruct_0203CF40 *gUnknown_0203CF40;
 extern u8 gUnknown_0203CF3C;
 extern const struct SpriteTemplate gUnknown_0861FB04;
 
-u32 sub_81C7078(u32 (*a0)(s32), u32 a1)
+// code
+u32 sub_81C7078(u32 (*func)(s32), u32 priority)
 {
     u16 taskId;
 
     if (!IsUpdateLinkStateCBActive())
-        taskId = CreateTask(sub_81C7170, a1);
+        taskId = CreateTask(sub_81C7170, priority);
     else
-        taskId = CreateTask(sub_81C71E4, a1);
+        taskId = CreateTask(sub_81C71E4, priority);
 
-    SetWordTaskArg(taskId, 1, (u32)a0);
+    SetWordTaskArg(taskId, 1, (u32)func);
 
     gTasks[taskId].data[3] = gUnknown_0203CF3C;
     return ((gUnknown_0203CF3C++) << 16) | taskId;
@@ -375,62 +401,52 @@ u32 sub_81C7078(u32 (*a0)(s32), u32 a1)
 
 bool32 sub_81C70D8(u32 a0)
 {
-    u32 v1 = a0 & 0xFFFF;
+    u32 taskId = a0 & 0xFFFF;
     u32 v2 = a0 >> 16;
-    if (gTasks[v1].isActive
-        && (gTasks[v1].func == sub_81C7170 || gTasks[v1].func == sub_81C71E4)
-        && gTasks[v1].data[3] == v2)
-    {
-    
+
+    if (gTasks[taskId].isActive
+        && (gTasks[taskId].func == sub_81C7170 || gTasks[taskId].func == sub_81C71E4)
+        && gTasks[taskId].data[3] == v2)
         return TRUE;
-    }
     else
-    {
         return FALSE;
-    }
 }
 
 bool32 sub_81C7124(u32 a0)
 {
     s32 i;
-    for (i = 0; i < 16; i++)
+    for (i = 0; i < NUM_TASKS; i++)
     {
         if (gTasks[i].isActive
-            && (gTasks[i].func == sub_81C7170 || gTasks[i].func == sub_81C71E4))
-        {
-            u32 arg = GetWordTaskArg((u8)i, 1);
-            if (arg == a0)
-                return TRUE;
-        }
+            && (gTasks[i].func == sub_81C7170 || gTasks[i].func == sub_81C71E4)
+            && GetWordTaskArg(i, 1) == a0)
+            return TRUE;
     }
     return FALSE;
 }
 
 void sub_81C7170(u8 taskId)
 {
-    s16 *dataPtr;
-    u32 (*func)(u32);
-    bool32 exitLoop;
+    u32 (*func)(s32) = (void *)GetWordTaskArg(taskId, 1);
+    s16 *data = gTasks[taskId].data;
+    bool32 exitLoop = FALSE;
 
-    func = (u32 (*)(u32))GetWordTaskArg(taskId, 1);
-    dataPtr = gTasks[taskId].data;
-    exitLoop = FALSE;
     while (!exitLoop)
     {
-        u32 v1 =((u32 (*)(u32))func)(dataPtr[0]); 
-        switch (v1)
+        u32 var = func(data[0]);
+        switch (var)
         {
         case 1:
-            dataPtr[0] = dataPtr[0] + 1;
+            data[0] = data[0] + 1;
             break;
         case 0:
-            dataPtr[0]++;
+            data[0]++;
             return;
         case 4:
             DestroyTask(taskId);
             return;
         default:
-            dataPtr[0] = v1 - 5;
+            data[0] = var - 5;
             break;
         case 3:
             break;
@@ -471,91 +487,81 @@ void sub_81C71E4(u8 taskId)
 
 void CB2_PokeNav(void)
 {
-    gUnknown_0203CF40 = Alloc(sizeof(struct UnknownStruct_0203CF40));
+    gUnknown_0203CF40 = Alloc(sizeof(*gUnknown_0203CF40));
     if (gUnknown_0203CF40 == NULL)
     {
         SetMainCallback2(CB2_ReturnToFieldWithOpenMenu);
     }
     else
     {
-        sub_81C7360(gUnknown_0203CF40);
+        InitMainStruct(gUnknown_0203CF40);
         ResetTasks();
         SetVBlankCallback(NULL);
         CreateTask(sub_81C742C, 0);
-        SetMainCallback2(sub_81C7400);
-        SetVBlankCallback(sub_81C7418);
+        SetMainCallback2(Cb2_Pokenav);
+        SetVBlankCallback(VblankCb_Pokenav);
     }
 }
 
-void sub_81C72A4()
+void sub_81C72A4(void)
 {
     SetMainCallback2(sub_81C72BC);
     FadeScreen(1, 0);
 }
 
-void sub_81C72BC()
+void sub_81C72BC(void)
 {
     UpdatePaletteFade();
-    if (!gPaletteFade.active)
+    if (gPaletteFade.active)
+        return;
+
+    gUnknown_0203CF40 = Alloc(sizeof(*gUnknown_0203CF40));
+    if (gUnknown_0203CF40 == NULL)
     {
-        gUnknown_0203CF40 = Alloc(sizeof(struct UnknownStruct_0203CF40));
-        if (gUnknown_0203CF40 == NULL)
-        {
-            SetMainCallback2(CB2_ReturnToFieldContinueScriptPlayMapMusic);
-        }
-        else
-        {
-            sub_81C7360(gUnknown_0203CF40);
-            gUnknown_0203CF40->field8 = 1;
-            ResetTasks();
-            ResetSpriteData();
-            FreeAllSpritePalettes();
-            SetVBlankCallback(NULL);
-            CreateTask(sub_81C742C, 0);
-            SetMainCallback2(sub_81C7400);
-            SetVBlankCallback(sub_81C7418);
-        }
+        SetMainCallback2(CB2_ReturnToFieldContinueScriptPlayMapMusic);
+    }
+    else
+    {
+        InitMainStruct(gUnknown_0203CF40);
+        gUnknown_0203CF40->mode = MODE_FORCE_CALL_1;
+        ResetTasks();
+        ResetSpriteData();
+        FreeAllSpritePalettes();
+        SetVBlankCallback(NULL);
+        CreateTask(sub_81C742C, 0);
+        SetMainCallback2(Cb2_Pokenav);
+        SetVBlankCallback(VblankCb_Pokenav);
     }
 }
 
-void sub_81C7334()
+static void FreeVars(void)
 {
     s32 i;
-    for (i = 0; i < 19; i++)
-    {
-        sub_81C7650(i);
-    }
 
-    Free(gUnknown_0203CF40);
-    gUnknown_0203CF40 = NULL;
+    for (i = 0; i < SUBSTRUCT_COUNT; i++)
+        FreeSubstruct(i);
+
+    FREE_AND_SET_NULL(gUnknown_0203CF40);
     InitKeys();
 }
 
 // Clears UnknownStruct_0203CF40
-void sub_81C7360(struct UnknownStruct_0203CF40 *a0)
+static void InitMainStruct(struct UnknownStruct_0203CF40 *a0)
 {
     s32 i;
-    void **arrayPtr;
-    void *fill;
 
-    fill = NULL;
-    i = 18;
-    arrayPtr = &(a0->field10[18]);
-    for (i; i >= 0; i--)
-    {
-        *arrayPtr = fill;
-        arrayPtr -= 1;
-    }
-    a0->field8 = 0;
+    for (i = 0; i < SUBSTRUCT_COUNT; i++)
+        a0->field10[i] = NULL;
+
+    a0->mode = MODE_NORMAL;
     a0->field4 = 0;
-    a0->fieldC = AnyMonHasRibbon();
+    a0->hasAnyRibbons = AnyMonHasRibbon();
     a0->field0 = NULL;
 }
 
-bool32 AnyMonHasRibbon()
+static bool32 AnyMonHasRibbon(void)
 {
-    s32 i;
-    s32 j;
+    s32 i, j;
 
     for (i = 0; i < PARTY_SIZE; i++)
     {
@@ -569,7 +575,7 @@ bool32 AnyMonHasRibbon()
 
     for (j = 0; j < TOTAL_BOXES_COUNT; j++)
     {
-        for (i = 0; i < IN_BOX_COUNT; i++) 
+        for (i = 0; i < IN_BOX_COUNT; i++)
         {
             if (CheckBoxMonSanityAt(j, i)
                 && GetBoxMonDataAt(j, i, MON_DATA_RIBBON_COUNT) != 0)
@@ -582,7 +588,7 @@ bool32 AnyMonHasRibbon()
     return FALSE;
 }
 
-void sub_81C7400()
+static void Cb2_Pokenav(void)
 {
     RunTasks();
     AnimateSprites();
@@ -590,7 +596,7 @@ void sub_81C7400()
     UpdatePaletteFade();
 }
 
-void sub_81C7418()
+static void VblankCb_Pokenav(void)
 {
     TransferPlttBuffer();
     LoadOam();
@@ -599,34 +605,31 @@ void sub_81C7418()
 
 void sub_81C742C(u8 taskId)
 {
-    s16 *dataPtr;
     u32 v1;
-    bool32 v2;
+    s16 *data = gTasks[taskId].data;
 
-    dataPtr = gTasks[taskId].data;
-
-    switch (dataPtr[0])
+    switch (data[0])
     {
     case 0:
         sub_81C76C4();
-        dataPtr[0] = 1;
+        data[0] = 1;
         break;
     case 1:
         if (sub_81C76FC())
             break;
         sub_81C756C(UNKNOWN_OFFSET);
-        dataPtr[0] = 4;
+        data[0] = 4;
         break;
     case 2:
         if (sub_81C786C())
             break;
-        dataPtr[0] = 3;
+        data[0] = 3;
     case 3:
         v1 = sub_81C75E0();
         if (v1 == -1)
         {
             sub_81C7710();
-            dataPtr[0] = 5;
+            data[0] = 5;
         }
         else if (v1 >= UNKNOWN_OFFSET)
         {
@@ -634,32 +637,33 @@ void sub_81C742C(u8 taskId)
             gUnknown_0861F3EC[gUnknown_0203CF40->field4][5]();
             if (sub_81C756C(v1))
             {
-                dataPtr[0] = 4;
+                data[0] = 4;
             }
             else
             {
                 sub_81C7710();
-                dataPtr[0] = 5;
+                data[0] = 5;
             }
         }
         else if (v1 != 0)
         {
             sub_81C7850(v1);
             if (sub_81C786C())
-                dataPtr[0] = 2;
+                data[0] = 2;
         }
         break;
     case 4:
         if (!sub_81C75D4())
-            dataPtr[0] = 3;
+            data[0] = 3;
         break;
     case 5:
         if (!sub_81C7738())
         {
-            v2 = gUnknown_0203CF40->field8 != 0;
+            bool32 calledFromScript = (gUnknown_0203CF40->mode != MODE_NORMAL);
+
             sub_81C9430();
-            sub_81C7334();
-            if (v2)
+            FreeVars();
+            if (calledFromScript)
                 SetMainCallback2(CB2_ReturnToFieldContinueScriptPlayMapMusic);
             else
                 SetMainCallback2(CB2_ReturnToFieldWithOpenMenu);
@@ -670,14 +674,14 @@ void sub_81C742C(u8 taskId)
 
 bool32 sub_81C756C(u32 a0)
 {
-    u32 index;
+    u32 index = a0 - UNKNOWN_OFFSET;
 
-    index = a0 - UNKNOWN_OFFSET;
-    sub_81C75F4();
+    InitKeys_();
     if (!gUnknown_0861F3EC[index][0]())
         return FALSE;
     if (!gUnknown_0861F3EC[index][2]())
         return FALSE;
+
     sub_81C7834(gUnknown_0861F3EC[index][3], gUnknown_0861F3EC[index][4]);
     gUnknown_0203CF40->field0 = gUnknown_0861F3EC[index][1];
     gUnknown_0203CF40->field4 = index;
@@ -694,52 +698,52 @@ u32 sub_81C75E0(void)
     return gUnknown_0203CF40->field0();
 }
 
-void sub_81C75F4(void)
+static void InitKeys_(void)
 {
     InitKeys();
 }
 
-void IndirectSetVBlankCallback(IntrCallback callback)
+void SetVBlankCallback_(IntrCallback callback)
 {
     SetVBlankCallback(callback);
 }
 
-void sub_81C760C(void)
+void SetPokenavVBlankCallback(void)
 {
-    SetVBlankCallback(sub_81C7418);
+    SetVBlankCallback(VblankCb_Pokenav);
 }
 
-void *sub_81C761C(u32 index, u32 size)
+void *AllocSubstruct(u32 index, u32 size)
 {
-    return gUnknown_0203CF40->field10[index] = (void*)Alloc(size);
+    return gUnknown_0203CF40->field10[index] = Alloc(size);
 }
 
-void *sub_81C763C(u32 index)
+struct UnknownSubStruct_0203CF40 *GetSubstructPtr(u32 index)
 {
     return gUnknown_0203CF40->field10[index];
 }
 
-void sub_81C7650(u32 index)
+void FreeSubstruct(u32 index)
 {
     if (gUnknown_0203CF40->field10[index] != NULL)
         FREE_AND_SET_NULL(gUnknown_0203CF40->field10[index]);
 }
 
-u16 sub_81C767C(void)
+u16 GetPokenavMode(void)
 {
-    return gUnknown_0203CF40->field8;
+    return gUnknown_0203CF40->mode;
 }
 
-void sub_81C7688(u16 a0)
+void SetPokenavMode(u16 mode)
 {
-    gUnknown_0203CF40->field8 = a0;
+    gUnknown_0203CF40->mode = mode;
 }
 
 void sub_81C7694(u32 a0)
 {
-    u32 value;
-    value = a0;
-    if (a0 > 4)
+    u32 value = a0;
+
+    if (value > 4)
         value = 0;
     gUnknown_0203CF40->fieldA = value;
 }
@@ -749,34 +753,27 @@ u16 sub_81C76AC(void)
     return gUnknown_0203CF40->fieldA;
 }
 
-u32 sub_81C76B8(void)
+bool32 CanViewRibbonsMenu(void)
 {
-    return gUnknown_0203CF40->fieldC;
+    return gUnknown_0203CF40->hasAnyRibbons;
 }
 
 bool32 sub_81C76C4(void)
 {
-    struct UnknownStruct_sub_81C76C4 *v1;
-
-    v1 = (struct UnknownStruct_sub_81C76C4*)sub_81C761C(0, sizeof(struct UnknownStruct_sub_81C76C4));
-    if (v1 == NULL)
-    {
+    struct UnknownSubStruct_0203CF40 *structPtr = AllocSubstruct(0, 0x82C);
+    if (structPtr == NULL)
         return FALSE;
-    }
-    else
-    {
-        ResetSpriteData();
-        FreeAllSpritePalettes();
-        v1->data[3] = sub_81C7078(sub_81C7764, 1);
-        return TRUE;
-    }
+
+    ResetSpriteData();
+    FreeAllSpritePalettes();
+    structPtr->unkC = sub_81C7078(sub_81C7764, 1);
+    return TRUE;
 }
 
 u32 sub_81C76FC(void)
 {
-    u32 *v1;
-    v1 = sub_81C763C(0);
-    return sub_81C70D8(v1[3]);
+    struct UnknownSubStruct_0203CF40 *structPtr = GetSubstructPtr(0);
+    return sub_81C70D8(structPtr->unkC);
 }
 
 void sub_81C7710(void)
@@ -794,15 +791,14 @@ bool32 sub_81C7738(void)
         sub_81C7C94();
         FreeAllWindowBuffers();
         return FALSE;
-    } else
-    {
-        return TRUE;
     }
+
+    return TRUE;
 }
 
 u32 sub_81C7764(s32 a0)
 {
-    u32 *v1;
+    struct UnknownSubStruct_0203CF40 *structPtr;
 
     switch (a0)
     {
@@ -810,14 +806,14 @@ u32 sub_81C7764(s32 a0)
         SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_ON | DISPCNT_OBJ_1D_MAP);
         FreeAllWindowBuffers();
         ResetBgsAndClearDma3BusyFlags(0);
-        InitBgsFromTemplates(0, &gUnknown_0861FA04, 1);
+        InitBgsFromTemplates(0, gUnknown_0861FA04, ARRAY_COUNT(gUnknown_0861FA04));
         sub_8199D98();
         reset_temp_tile_data_buffers();
         return 1;
     case 1:
-        v1 = sub_81C763C(0);
+        structPtr = GetSubstructPtr(0);
         decompress_and_copy_tile_data_to_vram(0, &gPokenavHeader_Gfx, 0, 0, 0);
-        SetBgTilemapBuffer(0, &v1[11]);
+        SetBgTilemapBuffer(0, structPtr->tilemapBuffer);
         CopyToBgTilemapBuffer(0, &gPokenavHeader_Tilemap, 0, 0);
         CopyPaletteIntoBufferUnfaded(gPokenavHeader_Pal, 0, 0x20);
         CopyBgTilemapBufferToVram(0);
@@ -825,7 +821,7 @@ u32 sub_81C7764(s32 a0)
     case 2:
         if (free_temp_tile_data_buffers_if_possible())
             return 2;
-        
+
         sub_81C7B74();
         return 0;
     case 3:
@@ -841,58 +837,46 @@ u32 sub_81C7764(s32 a0)
     }
 }
 
-void sub_81C7834(u32 (*a0)(void), u32(*a1)(void))
+void sub_81C7834(void *func1, void *func2) // Fix types later.
 {
-    u32 (**v1)(void);
-
-    v1 = sub_81C763C(0);
-    v1[0] = a0;
-    v1[1] = a1;
-    v1[2] = NULL;
+    struct UnknownSubStruct_0203CF40 *structPtr = GetSubstructPtr(0);
+    structPtr->unk0 = func1;
+    structPtr->unk4 = func2;
+    structPtr->unk8 = 0;
 }
 
 void sub_81C7850(u32 a0)
 {
-    void (**v1)(u32);
-
-    v1 = sub_81C763C(0);
-    v1[2] = NULL;
-    v1[0](a0);
+    struct UnknownSubStruct_0203CF40 *structPtr = GetSubstructPtr(0);
+    structPtr->unk8 = 0;
+    structPtr->unk0(a0);
 }
 
 u32 sub_81C786C(void)
 {
-    u32 (**v1)(void);
-
-    v1 = sub_81C763C(0);
-    return v1[1]();
+    struct UnknownSubStruct_0203CF40 *structPtr = GetSubstructPtr(0);
+    return structPtr->unk4();
 }
 
 void sub_81C7880(void)
 {
-    u32 *v1;
-    
-    v1 = sub_81C763C(0);
-    v1[3] = sub_81C7078(atk47_cmd47, 4);
+    struct UnknownSubStruct_0203CF40 *structPtr = GetSubstructPtr(0);
+    structPtr->unkC = sub_81C7078(sub_81C78D4, 4);
 }
 
 void sub_81C78A0(void)
 {
-    u32 *v1;
-
-    v1 = sub_81C763C(0);
-    v1[3] = sub_81C7078(sub_81C791C, 4);
+    struct UnknownSubStruct_0203CF40 *structPtr = GetSubstructPtr(0);
+    structPtr->unkC = sub_81C7078(sub_81C791C, 4);
 }
 
 bool32 sub_81C78C0(void)
 {
-    u32 *v1;
-
-    v1 = sub_81C763C(0);
-    return sub_81C70D8(v1[3]);
+    struct UnknownSubStruct_0203CF40 *structPtr = GetSubstructPtr(0);
+    return sub_81C70D8(structPtr->unkC);
 }
 
-u32 atk47_cmd47(s32 a0)
+u32 sub_81C78D4(s32 a0)
 {
     switch (a0)
     {
@@ -903,12 +887,12 @@ u32 atk47_cmd47(s32 a0)
     case 0:
         return 0;
     case 2:
-        if ((u32)ChangeBgY(0, 384, 1) >= 0x2000)
+        if (ChangeBgY(0, 384, 1) >= 0x2000u)
         {
             ChangeBgY(0, 0x2000, 0);
             return 4;
         }
-        
+
         return 2;
     }
 }
@@ -923,7 +907,8 @@ u32 sub_81C791C(s32 a0)
     return 2;
 }
 
-void CopyPaletteIntoBufferUnfaded(const u16 *palette, u32 bufferOffset, u32 size) {
+void CopyPaletteIntoBufferUnfaded(const u16 *palette, u32 bufferOffset, u32 size)
+{
     CpuCopy16(palette, gPlttBufferUnfaded + bufferOffset, size);
 }
 
@@ -932,7 +917,7 @@ void sub_81C795C(const struct SpritePalette *palettes)
     const struct SpritePalette *current;
     u32 index;
 
-    for (current = palettes; current->data != NULL; current++) 
+    for (current = palettes; current->data != NULL; current++)
     {
         index = AllocSpritePalette(current->tag);
         if (index == 0xFF)
@@ -953,7 +938,7 @@ void sub_81C7990(u32 a0, u16 a1)
 }
 
 __attribute__((naked))
-void sub_81C79BC(u16 *a0, u16 *a1, u32 a2, u32 a3, u32 unused, u32 a5, u32 a6)
+void sub_81C79BC(u16 *a0, u16 *a1, u32 a2, u32 a3, u32 a4, u32 a5)
 {
     asm(".syntax unified\n\
     push {r4-r7,lr}\n\
@@ -1090,15 +1075,15 @@ _081C7AAE:\n\
 
 void sub_81C7AC0(s32 a0)
 {
-    u32 *v1;
-    v1 = sub_81C763C(0);
+    struct UnknownSubStruct_0203CF40 *structPtr = GetSubstructPtr(0);
+
     switch (a0)
     {
     case 0:
-        BeginNormalPaletteFade(v1[5], -2, 0, 16, RGB_BLACK);
+        BeginNormalPaletteFade(structPtr->unk14, -2, 0, 16, RGB_BLACK);
         break;
     case 1:
-        BeginNormalPaletteFade(v1[5], -2, 16, 0, RGB_BLACK);
+        BeginNormalPaletteFade(structPtr->unk14, -2, 16, 0, RGB_BLACK);
         break;
     case 2:
         BeginNormalPaletteFade(0xFFFFFFFF, -2, 0, 16, RGB_BLACK);
@@ -1119,93 +1104,330 @@ void sub_81C7B40(void)
     BlendPalettes(0xFFFEFFFE, 16, RGB_BLACK);
 }
 
-void sub_81C7B54(const struct BgTemplate *a0, s32 a1)
+void InitBgTemplates(const struct BgTemplate *templates, s32 count)
 {
     s32 i;
-    if (a1 <= 0)
-        return;
-    for (i = a1; i != 0; i--)
-    {
-        InitBgFromTemplate(a0++);
-    }
+
+    for (i = 0; i < count; i++)
+        InitBgFromTemplate(templates++);
 }
 
 void sub_81C7B74(void)
 {
-    u32 *v1;
+    struct UnknownSubStruct_0203CF40 *structPtr = GetSubstructPtr(0);
 
-    v1 = sub_81C763C(0);
     InitWindows(&gUnknown_0861FA08[0]);
-    v1[4] = 0;
-    sub_81C7BF8(0);
-    PutWindowTilemap(v1[4]);
-    CopyWindowToVram(v1[4], 3); // TODO: Use a defined constant here.
+    structPtr->unk10 = 0;
+    sub_81C7BF8(structPtr->unk10);
+    PutWindowTilemap(structPtr->unk10);
+    CopyWindowToVram(structPtr->unk10, 3); // TODO: Use a defined constant here.
 }
 
 void sub_81C7BA4(u32 a0)
 {
-    u32 *v1;
+    struct UnknownSubStruct_0203CF40 *structPtr = GetSubstructPtr(0);
 
-    v1 = sub_81C763C(0);
-    sub_81C7BF8(v1[4]);
-    AddTextPrinterParameterized3(v1[4], 1, 0, 1, gMenuButtonReminderColor, 0, MenuButtonReminders[a0]);
+    sub_81C7BF8(structPtr->unk10);
+    AddTextPrinterParameterized3(structPtr->unk10, 1, 0, 1, gMenuButtonReminderColor, 0, sMenuButtonReminders[a0]);
 }
 
-bool8 sub_81C7BE8(void)
+bool32 IsDma3ManagerBusyWithBgCopy_(void)
 {
     return IsDma3ManagerBusyWithBgCopy();
 }
 
-void sub_81C7BF8(u32 a0)
+void sub_81C7BF8(u32 windowId)
 {
-    FillWindowPixelBuffer(a0, 0x44);
-    FillWindowPixelRect(a0, 0x55, 0, 0, 0x80, 1);
+    FillWindowPixelBuffer(windowId, 0x44);
+    FillWindowPixelRect(windowId, 0x55, 0, 0, 0x80, 1);
 }
 
 void sub_81C7C28(void)
 {
-    u32 *v1;
-    u32 i;
-    u8 v2;
-    u32 v3;
-    u32 v4;
+    s32 i;
     u8 spriteId;
+    struct UnknownSubStruct_0203CF40 *structPtr = GetSubstructPtr(0);
 
-    v1 = sub_81C763C(0);
     for (i = 0; i < ARRAY_COUNT(gUnknown_0861FA4C); i++)
-    {
         LoadCompressedSpriteSheet(&gUnknown_0861FA4C[i]);
-    }
 
     sub_81C795C(gUnknown_0861FA54);
-    v2 = IndexOfSpritePaletteTag(0);
-    v1[5] = ~1 & ~(0x10000 << v2);
+    structPtr->unk14 = ~1 & ~(0x10000 << IndexOfSpritePaletteTag(0));
     spriteId = CreateSprite(&gUnknown_0861FB04, 220, 12, 0);
-    v1[6] = (u32)(&gSprites[spriteId]);
+    structPtr->unk18 = &gSprites[spriteId];
 }
 
 void sub_81C7C94(void)
 {
-    void **v1;
-    v1 = sub_81C763C(0);
-    DestroySprite(v1[6]);
+    struct UnknownSubStruct_0203CF40 *structPtr = GetSubstructPtr(0);
+
+    DestroySprite(structPtr->unk18);
     FreeSpriteTilesByTag(0);
     FreeSpritePaletteByTag(0);
 }
 
-void sub_81C7CB4(u16 *a0)
+void sub_81C7CB4(struct Sprite *sprite)
 {
-    u32 v1;
-    v1 = GetBgY(0);
-    a0[19] = (v1 >> 8) * -1;
+    sprite->pos2.y = (GetBgY(0) / 256u) * -1;
 }
 
 struct Sprite *sub_81C7CCC(void)
 {
-    struct Sprite **v1;
-    struct Sprite *v2;
-    v1 = sub_81C763C(0);
-    v2 = v1[6];
-    v2->callback = SpriteCallbackDummy;
-    return v2;
+    struct UnknownSubStruct_0203CF40 *structPtr = GetSubstructPtr(0);
+
+    structPtr->unk18->callback = SpriteCallbackDummy;
+    return structPtr->unk18;
 }
+
+void sub_81C7CE4(void)
+{
+    struct UnknownSubStruct_0203CF40 *structPtr = GetSubstructPtr(0);
+
+    structPtr->unk18->pos1.x = 220;
+    structPtr->unk18->pos1.y = 12;
+    structPtr->unk18->callback = sub_81C7CB4;
+    structPtr->unk18->invisible = FALSE;
+    structPtr->unk18->oam.priority = 0;
+    structPtr->unk18->subpriority = 0;
+}
+
+extern const struct SpriteTemplate gUnknown_0861FB2C;
+extern const struct SpriteTemplate gUnknown_0861FB44;
+extern const struct CompressedSpriteSheet gUnknown_0861FA6C[];
+
+void sub_81C7D28(void)
+{
+    s32 i, spriteId;
+    struct UnknownSubStruct_0203CF40 *structPtr = GetSubstructPtr(0);
+
+    LoadCompressedSpriteSheet(&gUnknown_0861FA64);
+    AllocSpritePalette(1);
+    AllocSpritePalette(2);
+    for (i = 0; i < 2; i++)
+    {
+        spriteId = CreateSprite(&gUnknown_0861FB2C, 0, 0, 1);
+        structPtr->unk1C[i] = &gSprites[spriteId];
+        structPtr->unk1C[i]->invisible = TRUE;
+        structPtr->unk1C[i]->pos2.x = i * 64;
+
+        spriteId = CreateSprite(&gUnknown_0861FB44, 0, 0, 2);
+        structPtr->unk24[i] = &gSprites[spriteId];
+        structPtr->unk24[i]->invisible = TRUE;
+        structPtr->unk24[i]->pos2.x = i * 32;
+        structPtr->unk24[i]->pos2.y = 18;
+        structPtr->unk24[i]->oam.tileNum += (i * 8) + 64;
+    }
+}
+
+void sub_81C7DFC(u32 arg0)
+{
+    if (arg0 < 6)
+        sub_81C7E58(arg0);
+    else
+        sub_81C7F24(arg0 - 6);
+}
+
+void sub_81C7E14(u32 arg0)
+{
+    struct UnknownSubStruct_0203CF40 *structPtr = GetSubstructPtr(0);
+
+    if (arg0 == 4)
+        structPtr->unk1C[1]->oam.tileNum = GetSpriteTileStartByTag(2) + 32;
+    else
+        structPtr->unk1C[1]->oam.tileNum = GetSpriteTileStartByTag(2) + 64;
+}
+
+void sub_81C7E58(u32 arg0)
+{
+    struct UnknownSubStruct_0203CF40 *structPtr;
+    u32 size, tag;
+
+    if (arg0 >= 6)
+        return;
+
+    structPtr = GetSubstructPtr(0);
+    tag = gUnknown_0861FA6C[arg0].tag;
+    size = GetDecompressedDataSize(gUnknown_0861FA6C[arg0].data);
+    LoadPalette(&gPokenavLeftHeader_Pal[tag * 16], (IndexOfSpritePaletteTag(1) * 16) + 0x100, 0x20);
+    LZ77UnCompWram(gUnknown_0861FA6C[arg0].data, gDecompressionBuffer);
+    RequestDma3Copy(gDecompressionBuffer, (void *)VRAM + 0x10000 + (GetSpriteTileStartByTag(2) * 32), size, 1);
+    structPtr->unk1C[1]->oam.tileNum = GetSpriteTileStartByTag(2) + gUnknown_0861FA6C[arg0].size;
+
+    if (arg0 == 4 || arg0 == 5)
+        structPtr->unk1C[1]->pos2.x = 56;
+    else
+        structPtr->unk1C[1]->pos2.x = 64;
+}
+
+// Needed to match u32/u16 tag field difference.
+struct CompressedSpritePalette_
+{
+    const u32 *data;  // LZ77 compressed palette data
+    u32 tag;
+};
+
+extern const struct CompressedSpritePalette_ gUnknown_0861FA9C[];
+
+void sub_81C7F24(u32 arg0)
+{
+    u32 size, tag;
+
+    if (arg0 >= 7)
+        return;
+
+    tag = gUnknown_0861FA9C[arg0].tag;
+    size = GetDecompressedDataSize(gUnknown_0861FA9C[arg0].data);
+    LoadPalette(&gPokenavLeftHeader_Pal[tag * 16], (IndexOfSpritePaletteTag(2) * 16) + 0x100, 0x20);
+    LZ77UnCompWram(gUnknown_0861FA9C[arg0].data, &gDecompressionBuffer[0x1000]);
+    RequestDma3Copy(&gDecompressionBuffer[0x1000], (void *)VRAM + 0x10800 + (GetSpriteTileStartByTag(2) * 32), size, 1);
+}
+
+void sub_81C7FA0(u32 arg0, bool32 arg1, bool32 arg2)
+{
+    u32 var;
+
+    if (!arg1)
+        var = 0x30;
+    else
+        var = 0x10;
+
+    if (arg0 < 6)
+        sub_81C803C(var, arg2);
+    else
+        sub_81C8088(var, arg2);
+}
+
+void sub_81C7FC4(u32 arg0, bool32 arg1)
+{
+    if (arg0 < 6)
+        sub_81C80D4(arg1);
+    else
+        sub_81C8110(arg1);
+}
+
+void sub_81C7FDC(void)
+{
+    s32 i;
+    struct UnknownSubStruct_0203CF40 *structPtr = GetSubstructPtr(0);
+
+    for (i = 0; i < 2; i++)
+    {
+        structPtr->unk1C[i]->invisible = TRUE;
+        structPtr->unk24[i]->invisible = TRUE;
+    }
+}
+
+bool32 sub_81C8010(void)
+{
+    struct UnknownSubStruct_0203CF40 *structPtr = GetSubstructPtr(0);
+
+    if (structPtr->unk1C[0]->callback == SpriteCallbackDummy && structPtr->unk24[0]->callback == SpriteCallbackDummy)
+        return FALSE;
+    else
+        return TRUE;
+}
+
+void sub_81C803C(u32 arg0, bool32 arg1)
+{
+    s32 var1, var2, i;
+    struct UnknownSubStruct_0203CF40 *structPtr = GetSubstructPtr(0);
+
+    if (!arg1)
+        var1 = -96, var2 = 32;
+    else
+        var1 = 256, var2 = 160;
+
+    for (i = 0; i < 2; i++)
+    {
+        structPtr->unk1C[i]->pos1.y = arg0;
+        sub_81C814C(structPtr->unk1C[i], var1, var2, 12);
+    }
+}
+
+void sub_81C8088(u32 arg0, bool32 arg1)
+{
+    s32 var1, var2, i;
+    struct UnknownSubStruct_0203CF40 *structPtr = GetSubstructPtr(0);
+
+    if (!arg1)
+        var1 = -96, var2 = 16;
+    else
+        var1 = 256, var2 = 192;
+
+    for (i = 0; i < 2; i++)
+    {
+        structPtr->unk24[i]->pos1.y = arg0;
+        sub_81C814C(structPtr->unk24[i], var1, var2, 12);
+    }
+}
+
+void sub_81C80D4(bool32 arg0)
+{
+    s32 var1, var2, i;
+    struct UnknownSubStruct_0203CF40 *structPtr = GetSubstructPtr(0);
+
+    if (!arg0)
+        var1 = 32, var2 = -96;
+    else
+        var1 = 192, var2 = 256;
+
+    for (i = 0; i < 2; i++)
+    {
+        sub_81C814C(structPtr->unk1C[i], var1, var2, 12);
+    }
+}
+
+void sub_81C8110(bool32 arg0)
+{
+    s32 var1, var2, i;
+    struct UnknownSubStruct_0203CF40 *structPtr = GetSubstructPtr(0);
+
+    if (!arg0)
+        var1 = 16, var2 = -96;
+    else
+        var1 = 192, var2 = 256;
+
+    for (i = 0; i < 2; i++)
+    {
+        sub_81C814C(structPtr->unk24[i], var1, var2, 12);
+    }
+}
+
+void sub_81C814C(struct Sprite *sprite, s32 arg1, s32 arg2, s32 arg3)
+{
+    sprite->pos1.x = arg1;
+    sprite->data[0] = arg1 * 16;
+    sprite->data[1] = (arg2 - arg1) * 16 / arg3;
+    sprite->data[2] = arg3;
+    sprite->data[7] = arg2;
+    sprite->callback = sub_81C817C;
+}
+
+void sub_81C817C(struct Sprite *sprite)
+{
+    if (sprite->data[2] != 0)
+    {
+        sprite->data[2]--;
+        sprite->data[0] += sprite->data[1];
+        sprite->pos1.x = sprite->data[0] >> 4;
+        if (sprite->pos1.x < -16 || sprite->pos1.x > 256)
+            sprite->invisible = TRUE;
+        else
+            sprite->invisible = FALSE;
+    }
+    else
+    {
+        sprite->pos1.x = sprite->data[7];
+        sprite->callback = SpriteCallbackDummy;
+    }
+}
+
+/*
+bool32 sub_81C81D4(const void *arg0, void *arg1, s32 arg3)
+{
+    struct UnknownSubStruct_0203CF40 *structPtr = AllocSubstruct(0x11, 0x8A4);
+
+    if (structPtr == NULL)
+        return FALSE;
+}
+*/

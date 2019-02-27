@@ -1,11 +1,11 @@
 Route112_CableCarStation_MapScripts:: @ 822AABE
-	map_script 3, Route112_CableCarStation_MapScript1_22AAC9
-	map_script 2, Route112_CableCarStation_MapScript2_22AAE9
+	map_script MAP_SCRIPT_ON_TRANSITION, Route112_CableCarStation_MapScript1_22AAC9
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, Route112_CableCarStation_MapScript2_22AAE9
 	.byte 0
 
 Route112_CableCarStation_MapScript1_22AAC9: @ 822AAC9
 	setescapewarp MAP_ROUTE112, 255, 28, 28
-	compare VAR_0x40A3, 2
+	compare VAR_CABLE_CAR_STATION_STATE, 2
 	call_if_eq Route112_CableCarStation_EventScript_22AADD
 	end
 
@@ -15,7 +15,7 @@ Route112_CableCarStation_EventScript_22AADD:: @ 822AADD
 	return
 
 Route112_CableCarStation_MapScript2_22AAE9: @ 822AAE9
-	map_script_2 VAR_0x40A3, 2, Route112_CableCarStation_EventScript_22AAF3
+	map_script_2 VAR_CABLE_CAR_STATION_STATE, 2, Route112_CableCarStation_EventScript_22AAF3
 	.2byte 0
 
 Route112_CableCarStation_EventScript_22AAF3:: @ 822AAF3
@@ -23,7 +23,7 @@ Route112_CableCarStation_EventScript_22AAF3:: @ 822AAF3
 	applymovement EVENT_OBJ_ID_PLAYER, Route112_CableCarStation_Movement_22AB80
 	applymovement 1, Route112_CableCarStation_Movement_22AB76
 	waitmovement 0
-	setvar VAR_0x40A3, 0
+	setvar VAR_CABLE_CAR_STATION_STATE, 0
 	setobjectxyperm 1, 6, 7
 	setobjectmovementtype 1, MOVEMENT_TYPE_FACE_DOWN
 	releaseall
@@ -46,7 +46,7 @@ Route112_CableCarStation_EventScript_22AB38:: @ 822AB38
 	applymovement EVENT_OBJ_ID_PLAYER, Route112_CableCarStation_Movement_22AB7B
 	waitmovement 0
 	setvar VAR_0x8004, 0
-	setvar VAR_0x40A3, 1
+	setvar VAR_CABLE_CAR_STATION_STATE, 1
 	incrementgamestat 48
 	special CableCarWarp
 	special CableCar

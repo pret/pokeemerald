@@ -1,6 +1,6 @@
 SouthernIsland_Interior_MapScripts:: @ 8242A45
-	map_script 5, SouthernIsland_Interior_MapScript1_242A50
-	map_script 3, SouthernIsland_Interior_MapScript1_242A6E
+	map_script MAP_SCRIPT_ON_RESUME, SouthernIsland_Interior_MapScript1_242A50
+	map_script MAP_SCRIPT_ON_TRANSITION, SouthernIsland_Interior_MapScript1_242A6E
 	.byte 0
 
 SouthernIsland_Interior_MapScript1_242A50: @ 8242A50
@@ -10,7 +10,7 @@ SouthernIsland_Interior_MapScript1_242A50: @ 8242A50
 SouthernIsland_Interior_EventScript_242A5A:: @ 8242A5A
 	specialvar VAR_RESULT, GetBattleOutcome
 	compare VAR_RESULT, 7
-	goto_if_ne SouthernIsland_Interior_EventScript_27374E
+	goto_if_ne Common_EventScript_NopReturn
 	removeobject 2
 	return
 

@@ -1,8 +1,8 @@
 BattleFrontier_BattleTowerMultiBattleRoom_MapScripts:: @ 8243D92
-	map_script 5, BattleFrontier_BattleTowerMultiBattleRoom_MapScript1_243DA7
-	map_script 3, BattleFrontier_BattleTowerMultiBattleRoom_MapScript1_243DB0
-	map_script 4, BattleFrontier_BattleTowerMultiBattleRoom_MapScript2_243E14
-	map_script 2, BattleFrontier_BattleTowerMultiBattleRoom_MapScript2_243E23
+	map_script MAP_SCRIPT_ON_RESUME, BattleFrontier_BattleTowerMultiBattleRoom_MapScript1_243DA7
+	map_script MAP_SCRIPT_ON_TRANSITION, BattleFrontier_BattleTowerMultiBattleRoom_MapScript1_243DB0
+	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, BattleFrontier_BattleTowerMultiBattleRoom_MapScript2_243E14
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, BattleFrontier_BattleTowerMultiBattleRoom_MapScript2_243E23
 	.byte 0
 
 BattleFrontier_BattleTowerMultiBattleRoom_MapScript1_243DA7: @ 8243DA7
@@ -64,7 +64,7 @@ BattleFrontier_BattleTowerMultiBattleRoom_EventScript_243E41:: @ 8243E41
 	applymovement 1, BattleFrontier_BattleTowerMultiBattleRoom_Movement_243E77
 	waitmovement 0
 	moveobjectoffscreen 1
-	applymovement EVENT_OBJ_ID_PLAYER, BattleFrontier_BattleTowerMultiBattleRoom_Movement_2725A6
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceUp
 	waitmovement 0
 	msgbox BattleFrontier_BattleTowerMultiBattleRoom_Text_244056, MSGBOX_DEFAULT
 	special HealPlayerParty
@@ -104,7 +104,7 @@ BattleFrontier_BattleTowerMultiBattleRoom_EventScript_243E9D:: @ 8243E9D
 BattleFrontier_BattleTowerMultiBattleRoom_EventScript_243EB5:: @ 8243EB5
 	msgbox BattleFrontier_BattleTowerMultiBattleRoom_Text_244149, MSGBOX_DEFAULT
 	closemessage
-	applymovement 1, BattleFrontier_BattleTowerMultiBattleRoom_Movement_2725A6
+	applymovement 1, Common_Movement_WalkInPlaceUp
 	waitmovement 0
 	opendoor 10, 1
 	waitdooranim
