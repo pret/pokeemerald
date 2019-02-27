@@ -78,7 +78,7 @@ struct UnknownSubStruct_81C81D4
     u32 unk18;
     u32 unk1C;
     s32 unk20;
-    u32 unk24;
+    s32 unk24;
     u32 unk28;
     s32 unk2C;
     u32 unk30;
@@ -90,7 +90,8 @@ struct UnknownSubStruct_81C81D4
     char unk48[0x40];
     u8 tilemapBuffer[0x800];
     struct UnknownSubSubStruct_81C81D4 unk888;
-    u8 unk898[0x6];
+    u32 unk89C;
+    u32 unk8A0;
 };
 
 #define SUBSTRUCT_COUNT 19
@@ -168,15 +169,17 @@ extern u32 sub_81D04B8(void);
 extern u32 sub_81D09F4(void);
 extern u32 sub_81CFA04(void);
 extern u32 sub_81CFE08(void);
-extern u32 sub_81C85A0(s32);
 extern u32 sub_81C91AC(struct UnknownSubStruct_81C81D4 *a0, const void *a1, void *a2, s32 a3);
 extern u32 sub_81C9160(struct UnknownSubSubStruct_81C81D4 *a0, void *a1);
 extern void sub_81C8ED0(void);
 extern void sub_81C8EF8(struct UnknownSubSubStruct_81C81D4 *a0, struct UnknownSubSubStruct_0203CF40 *a1);
+extern u32 sub_81C8870(s32 a0);
+extern u32 sub_81C8958(s32 a0);
 
+u32 sub_81C85A0(s32);
 void sub_81C8568(s32 a0, struct UnknownSubStruct_81C81D4 *a1);
 u32 sub_81C83F0(s32);
-u32 sub_81C83E0(void);
+bool32 sub_81C83E0(void);
 void sub_81C83AC(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, struct UnknownSubStruct_81C81D4 *a5);
 void sub_81C837C(struct UnknownSubSubStruct_81C81D4 *a0, struct UnknownSubStruct_81C81D4 *a1);
 void sub_81C835C(struct UnknownSubSubStruct_0203CF40 *a0);
@@ -1612,7 +1615,7 @@ void sub_81C83AC(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, struct UnknownSubStruct
     sub_81C7078(sub_81C83F0, 5);
 }
 
-u32 sub_81C83E0(void)
+bool32 sub_81C83E0(void)
 {
     return sub_81C7124(sub_81C83F0);
 }
@@ -1806,4 +1809,222 @@ void sub_81C8568(s32 a0, struct UnknownSubStruct_81C81D4 *a1)
         a1->unk30 = 2;
     a1->unk2C = a0;
     a1->unk28 = sub_81C7078(sub_81C85A0, 6);
+}
+
+u32 sub_81C85A0(s32 a0)
+{
+    s32 y;
+    s32 v1;
+    bool32 flag;
+    struct UnknownSubStruct_81C81D4 *structPtr;
+    structPtr = GetSubstructPtr(0x11);
+    
+    switch (a0)
+    {
+    case 0:
+        if (sub_81C83E0() == FALSE)
+            return 1;
+        else
+            return 2;
+    case 1:
+        flag = FALSE;
+        y = GetBgY(structPtr->unk0.bg);
+        v1 = ChangeBgY(structPtr->unk0.bg, 0x1000, structPtr->unk30);
+        if (structPtr->unk30 == 2)
+        {
+            if ((y > structPtr->unk24 || y <= structPtr->unk20) && v1 <= structPtr->unk24)
+            {
+                flag = TRUE;
+            }
+        }
+        else
+        {
+            if ((y < structPtr->unk24 || y >= structPtr->unk20) && v1 >= structPtr->unk24)
+            {
+                flag = TRUE;
+            }
+        }
+        if (flag)
+        {
+            structPtr->unk0.unkA = (structPtr->unk0.unkA + structPtr->unk2C) & 0xF;
+            ChangeBgY(structPtr->unk0.bg, structPtr->unk24, 0);
+            return 4;
+        }
+        else
+        {
+            return 2;
+        }
+    default:
+        return 4;
+    }
+}
+
+bool32 sub_81C8630(void)
+{
+    struct UnknownSubStruct_81C81D4 *structPtr;
+    structPtr = GetSubstructPtr(0x11);
+    return sub_81C70D8(structPtr->unk28);
+}
+
+struct UnknownSubSubStruct_81C81D4 *sub_81C8644(void)
+{
+    struct UnknownSubStruct_81C81D4 *structPtr;
+    structPtr = GetSubstructPtr(0x11);
+    return &structPtr->unk888;
+}
+
+u32 sub_81C8658(void)
+{
+    struct UnknownSubSubStruct_81C81D4 *structPtr;
+    structPtr = sub_81C8644();
+
+    // Using unk6 as a timer.
+    if (structPtr->unk6 != 0)
+    {
+        structPtr->unk6--;
+        return 1;
+    }
+    else
+    {
+        if (sub_81C84A4())
+        {
+            sub_81C84E8(-1, 1);
+            return 2;
+        }
+        else
+        {
+            return 0;
+        }
+    }
+}
+
+u32 sub_81C868C(void)
+{
+    struct UnknownSubSubStruct_81C81D4 *structPtr;
+    structPtr = sub_81C8644();
+
+    if (structPtr->unk0 + structPtr->unk6 < structPtr->unk2 - 1)
+    {
+        if (structPtr->unk6 < structPtr->unk8 - 1)
+        {
+            structPtr->unk6++;
+            return 1;
+        }
+        else if (!sub_81C84C0())
+        {
+            return 0;
+        }
+    }
+    else
+    {
+        return 0;
+    }
+    sub_81C84E8(1, 1);
+    return 2;
+}
+
+u32 sub_81C86CC(void)
+{
+    struct UnknownSubSubStruct_81C81D4 *structPtr;
+    s32 v1;
+    
+    structPtr = sub_81C8644();
+    if (sub_81C84A4())
+    {
+        if (structPtr->unk0 >= structPtr->unk8)
+            v1 = structPtr->unk8;
+        else
+            v1 = structPtr->unk0;
+        sub_81C84E8(v1 * -1, 1);
+        return 2;
+    }
+    else if (structPtr->unk6 != 0)
+    {
+        structPtr->unk6 = 0;
+        return 1;
+    }
+    else
+    {
+        return 0;
+    }
+}
+
+u32 sub_81C870C(void)
+{
+    struct UnknownSubSubStruct_81C81D4 *structPtr;
+    structPtr = sub_81C8644();
+
+    if (sub_81C84C0())
+    {
+        s32 v1;
+        s32 v2;
+        s32 v3;
+        v2 = structPtr->unk0 + structPtr->unk8;
+        v1 = structPtr->unk4 - structPtr->unk0;
+        if (v2 <= structPtr->unk4)
+            v1 = structPtr->unk8;
+        sub_81C84E8(v1, 1);
+        return 2;
+    }
+    else
+    {
+        s32 v1;
+        s32 v2;
+        if (structPtr->unk2 >= structPtr->unk8)
+        {
+            v1 = structPtr->unk6;
+            v2 = structPtr->unk8;
+        }
+        else
+        {
+            v1 = structPtr->unk6;
+            v2 = structPtr->unk2;
+        }
+        v2 -= 1;
+        if (v1 >= v2)
+        {
+            return 0;
+        }
+        else
+        {
+            structPtr->unk6 = v2;
+            return 1;
+        }
+    }
+}
+
+u32 sub_81C875C(void)
+{
+    struct UnknownSubSubStruct_81C81D4 *structPtr;
+    structPtr = sub_81C8644();
+
+    return structPtr->unk0 + structPtr->unk6;
+}
+
+u32 sub_81C8770(void)
+{
+    struct UnknownSubSubStruct_81C81D4 *structPtr;
+    structPtr = sub_81C8644();
+    
+    return structPtr->unk0;
+}
+
+void sub_81C877C(void)
+{
+    struct UnknownSubStruct_81C81D4 *structPtr;
+    structPtr = GetSubstructPtr(0x11);
+    structPtr->unk89C = 0;
+    structPtr->unk8A0 = sub_81C7078(sub_81C8870, 6);
+}
+
+void sub_81C87AC(u16 a0)
+{
+    u16 temp;
+    struct UnknownSubStruct_81C81D4 *structPtr;
+    structPtr = GetSubstructPtr(0x11);
+    temp = structPtr->unk888.unk0;
+    temp += a0;
+    structPtr->unk888.unk0 = temp;
+    structPtr->unk89C = 0;
+    structPtr->unk8A0 = sub_81C7078(sub_81C8958, 6);
 }
