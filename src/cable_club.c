@@ -352,7 +352,7 @@ static void sub_80B2918(u8 taskId)
     else
     {
         gFieldLinkPlayerCount = GetLinkPlayerCount_2();
-        LocalLinkPlayerId = GetMultiplayerId();
+        gLocalLinkPlayerId = GetMultiplayerId();
         sub_800AA04(gFieldLinkPlayerCount);
         card = (struct TrainerCard *)gBlockSendBuffer;
         TrainerCard_GenerateCardForPlayer(card);
@@ -399,7 +399,7 @@ static void sub_80B2A08(u8 taskId)
     else
     {
         gFieldLinkPlayerCount = GetLinkPlayerCount_2();
-        LocalLinkPlayerId = GetMultiplayerId();
+        gLocalLinkPlayerId = GetMultiplayerId();
         sub_800AA04(gFieldLinkPlayerCount);
         card = (struct TrainerCard *)gBlockSendBuffer;
         TrainerCard_GenerateCardForPlayer(card);
@@ -972,7 +972,7 @@ void sub_80B360C(void)
 
     if (gSpecialVar_0x8004 == 1 || gSpecialVar_0x8004 == 2)
     {
-        UpdatePlayerLinkBattleRecords(LocalLinkPlayerId ^ 1);
+        UpdatePlayerLinkBattleRecords(gLocalLinkPlayerId ^ 1);
         if (gWirelessCommType)
         {
             switch (gBattleOutcome)
@@ -1028,7 +1028,7 @@ static void sub_80B3728(u8 taskId)
         if (IsFieldMessageBoxHidden())
         {
             sub_8087288();
-            SetLocalLinkPlayerId(gSpecialVar_0x8005);
+            SetgLocalLinkPlayerId(gSpecialVar_0x8005);
             task->data[0] = 2;
         }
         break;

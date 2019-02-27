@@ -46,7 +46,6 @@
   ],
   "coord_events": [
     {
-      "comment": "This is trade seat #1.",
       "type": "trigger",
       "x": 4,
       "y": 5,

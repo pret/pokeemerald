@@ -203,7 +203,7 @@ u16 *gBGTilemapBuffers3;
 u16 gHeldKeyCodeToSend;
 void (*gFieldCallback)(void);
 bool8 (*gFieldCallback2)(void);
-u8 LocalLinkPlayerId; // This is our player id in a multiplayer mode.
+u8 gLocalLinkPlayerId; // This is our player id in a multiplayer mode.
 u8 gFieldLinkPlayerCount;
 
 // EWRAM vars
@@ -2194,13 +2194,13 @@ static void sub_8086A80(void)
 
 static void SetCameraToTrackGuestPlayer(void)
 {
-    InitCameraUpdateCallback(GetSpriteForLinkedPlayer(LocalLinkPlayerId));
+    InitCameraUpdateCallback(GetSpriteForLinkedPlayer(gLocalLinkPlayerId));
 }
 
 // Duplicate function.
 static void SetCameraToTrackGuestPlayer_2(void)
 {
-    InitCameraUpdateCallback(GetSpriteForLinkedPlayer(LocalLinkPlayerId));
+    InitCameraUpdateCallback(GetSpriteForLinkedPlayer(gLocalLinkPlayerId));
 }
 
 static void sub_8086AE4(void)
@@ -2210,7 +2210,7 @@ static void sub_8086AE4(void)
 
     // This is a hack of some kind; it's undone in sub_8086B14, which is called
     // soon after this function.
-    sub_8088B3C(x + LocalLinkPlayerId, y);
+    sub_8088B3C(x + gLocalLinkPlayerId, y);
 }
 
 static void sub_8086B14(void)
@@ -2219,7 +2219,7 @@ static void sub_8086B14(void)
     u16 x, y;
 
     GetCameraFocusCoords(&x, &y);
-    x -= LocalLinkPlayerId;
+    x -= gLocalLinkPlayerId;
 
     for (i = 0; i < gFieldLinkPlayerCount; i++)
     {
@@ -2242,7 +2242,7 @@ static void CB1_UpdateLinkState(void)
 {
     if (gWirelessCommType == 0 || !IsRfuRecvQueueEmpty() || !IsSendingKeysToLink())
     {
-        u8 selfId = LocalLinkPlayerId;
+        u8 selfId = gLocalLinkPlayerId;
         UpdateAllLinkPlayers(gLinkPartnersHeldKeys, selfId);
 
         // Note: Because guestId is between 0 and 4, while the smallest key code is
@@ -2296,7 +2296,7 @@ static void ResetAllTradingStates(void)
 }
 
 // Returns true if all connected players are in tradingState.
-static bool32 AreAllPlayersInState(u16 tradingState)
+static bool32 AreAllPlayersInTradingState(u16 tradingState)
 {
     s32 i;
     s32 count = gFieldLinkPlayerCount;
@@ -2307,7 +2307,7 @@ static bool32 AreAllPlayersInState(u16 tradingState)
     return TRUE;
 }
 
-static bool32 AreAnyPlayersInTradingState(u16 tradingState)
+static bool32 IsAnyPlayerInTradingState(u16 tradingState)
 {
     s32 i;
     s32 count = gFieldLinkPlayerCount;
@@ -2336,7 +2336,7 @@ static void HandleLinkPlayerKeyInput(u32 playerId, u16 key, struct TradeRoomPlay
             }
             return;
         }
-        if (AreAnyPlayersInTradingState(PLAYER_TRADING_STATE_EXITING_ROOM) == TRUE)
+        if (IsAnyPlayerInTradingState(PLAYER_TRADING_STATE_EXITING_ROOM) == TRUE)
         {
             sPlayerTradingStates[playerId] = PLAYER_TRADING_STATE_BUSY;
             if (trainer->isLocalPlayer)
@@ -2629,7 +2629,7 @@ static u16 KeyInterCB_WaitForPlayersToExit(u32 keyOrPlayerId)
     // CB1_UpdateLinkState.
     if (sPlayerTradingStates[keyOrPlayerId] != PLAYER_TRADING_STATE_EXITING_ROOM)
         CheckRfuKeepAliveTimer();
-    if (AreAllPlayersInState(PLAYER_TRADING_STATE_EXITING_ROOM) == TRUE)
+    if (AreAllPlayersInTradingState(PLAYER_TRADING_STATE_EXITING_ROOM) == TRUE)
     {
         ScriptContext1_SetupScript(EventScript_DoLinkRoomExit);
         SetKeyInterceptCallback(KeyInterCB_SendNothing);
@@ -2651,20 +2651,20 @@ static u16 KeyInterCB_SendNothing_2(u32 key)
 
 u32 sub_8087214(void)
 {
-    if (AreAnyPlayersInTradingState(PLAYER_TRADING_STATE_EXITING_ROOM) == TRUE)
+    if (IsAnyPlayerInTradingState(PLAYER_TRADING_STATE_EXITING_ROOM) == TRUE)
         return 2;
-    if (sPlayerKeyInterceptCallback == sub_8087170 && sPlayerTradingStates[LocalLinkPlayerId] != PLAYER_TRADING_STATE_UNK_2)
+    if (sPlayerKeyInterceptCallback == sub_8087170 && sPlayerTradingStates[gLocalLinkPlayerId] != PLAYER_TRADING_STATE_UNK_2)
         return 0;
-    if (sPlayerKeyInterceptCallback == KeyInterCB_DoNothingAndKeepAlive && sPlayerTradingStates[LocalLinkPlayerId] == PLAYER_TRADING_STATE_BUSY)
+    if (sPlayerKeyInterceptCallback == KeyInterCB_DoNothingAndKeepAlive && sPlayerTradingStates[gLocalLinkPlayerId] == PLAYER_TRADING_STATE_BUSY)
         return 2;
-    if (AreAllPlayersInState(PLAYER_TRADING_STATE_UNK_2) != FALSE)
+    if (AreAllPlayersInTradingState(PLAYER_TRADING_STATE_UNK_2) != FALSE)
         return 1;
     return 0;
 }
 
 bool32 sub_808727C(void)
 {
-    return AreAnyPlayersInTradingState(PLAYER_TRADING_STATE_EXITING_ROOM);
+    return IsAnyPlayerInTradingState(PLAYER_TRADING_STATE_EXITING_ROOM);
 }
 
 u16 sub_8087288(void)

@@ -83,8 +83,8 @@ bool8 sub_8153380(void);
 bool8 sub_81533AC(void);
 u8 sub_81533E0(void);
 u8 sub_8153408(void);
-u8 FullSaveGame(void); //FullSaveGame
-bool8 CheckSaveFile(void); //CheckSaveFile
+u8 FullSaveGame(void);
+bool8 CheckSaveFile(void);
 u8 Save_LoadGameData(u8 a1);
 u16 sub_815355C(void);
 u8 sub_81534D0(u8);

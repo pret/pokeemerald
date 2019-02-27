@@ -299,7 +299,7 @@ extern struct LinkPlayer gLocalLinkPlayer;
 
 bool32 Link_AnyPartnersPlayingRubyOrSapphire(void);
 bool32 sub_800A03C(void);
-void SetLocalLinkPlayerId(u8);
+void SetgLocalLinkPlayerId(u8);
 u8 GetSavedPlayerCount(void);
 void sub_8009FAC(void);
 bool8 sub_800A4D8(u8 a0);

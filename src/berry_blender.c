@@ -34,6 +34,8 @@
 #include "battle_records.h"
 #include "graphics.h"
 #include "new_game.h"
+#include "save.h"
+#include "link.h"
 
 #define BLENDER_SCORE_BEST      0
 #define BLENDER_SCORE_GOOD      1
@@ -140,15 +142,8 @@ extern const u8 gText_Space[];
 extern const u8 gText_BlenderMaxSpeedRecord[];
 extern const u8 gText_234Players[];
 
-extern void sub_800A418(void);
-extern u8 sub_800A9D8(void);
 extern void sub_81AABF0(void (*callback)(void));
 extern void sub_800B4C0(void);
-extern void ClearLinkCallback(void);
-extern void sub_8009F8C(void);
-extern void FullSaveGame(void);
-extern bool8 CheckSaveFile(void);
-extern void sub_80EECEC(void);
 
 // this file's functions
 static void BerryBlender_SetBackgroundsPos(void);

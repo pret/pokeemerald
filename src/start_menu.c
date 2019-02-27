@@ -84,7 +84,7 @@ EWRAM_DATA static bool8 sSavingComplete = FALSE;
 EWRAM_DATA static u8 sSaveInfoWindowId = 0;
 
 // Extern variables.
-extern u8 LocalLinkPlayerId;
+extern u8 gLocalLinkPlayerId;
 
 // Extern functions in not decompiled files.
 extern void sub_80AF688(void);
@@ -734,7 +734,7 @@ static bool8 StartMenuLinkModePlayerNameCallback(void)
     {
         PlayRainSoundEffect();
         CleanupOverworldWindowsAndTilemaps();
-        ShowTrainerCardInLink(LocalLinkPlayerId, CB2_ReturnToFieldWithOpenMenu);
+        ShowTrainerCardInLink(gLocalLinkPlayerId, CB2_ReturnToFieldWithOpenMenu);
 
         return TRUE;
     }

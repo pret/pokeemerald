@@ -4,5 +4,5 @@ gBGTilemapBuffers3
 gHeldKeyCodeToSend
 gFieldCallback
 gFieldCallback2
-LocalLinkPlayerId
+gLocalLinkPlayerId
 gFieldLinkPlayerCount
