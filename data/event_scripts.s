@@ -17,6 +17,7 @@
 #include "constants/vars.h"
 #include "constants/weather.h"
 #include "constants/trainer_hill.h"
+#include "constants/battle.h"
 	.include "asm/macros.inc"
 	.include "asm/macros/event.inc"
 	.include "constants/constants.inc"
@@ -6926,16 +6927,16 @@ TrainerHill_3F_MapScript1_2C8336: @ 82C8336
 TrainerHill_4F_MapScript1_2C8336: @ 82C8336
 TrainerHill_Roof_MapScript1_2C8336: @ 82C8336
 	setvar VAR_TEMP_2, 0
-	setvar VAR_0x8004, TRAINER_HILL_FUNC_4
+	setvar VAR_0x8004, TRAINER_HILL_FUNC_RESUME_TIMER
 	special CallTrainerHillFunction
 	setvar VAR_0x8004, 1
 	setvar VAR_0x8005, 5
 	special CallFrontierUtilFunc
-	compare VAR_RESULT, 2
+	compare VAR_RESULT, B_OUTCOME_LOST
 	goto_if_eq TrainerHill_1F_EventScript_2C83C9
-	compare VAR_RESULT, 3
+	compare VAR_RESULT, B_OUTCOME_DREW
 	goto_if_eq TrainerHill_1F_EventScript_2C83C9
-	compare VAR_RESULT, 9
+	compare VAR_RESULT, B_OUTCOME_FORFEITED
 	goto_if_eq TrainerHill_1F_EventScript_2C83C9
 	end
 
@@ -6981,7 +6982,7 @@ TrainerHill_1F_EventScript_2C83BF:: @ 82C83BF
 TrainerHill_1F_EventScript_2C83C9:: @ 82C83C9
 	setvar VAR_0x8004, TRAINER_HILL_FUNC_12
 	special CallTrainerHillFunction
-	setvar VAR_0x8004, TRAINER_HILL_FUNC_5
+	setvar VAR_0x8004, TRAINER_HILL_FUNC_SET_LOST
 	special CallTrainerHillFunction
 	setvar VAR_TEMP_1, 1
 	end

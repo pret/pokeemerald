@@ -230,7 +230,7 @@
 #define VAR_0x40D3                           0x40D3
 #define VAR_SS_TIDAL_SCOTT_STATE             0x40D4 // Always equal to FLAG_MET_SCOTT_ON_SS_TIDAL
 #define VAR_ROAMER_POKEMON                   0x40D5 // 0 = Latias, 1 = Latios
-#define VAR_0x40D6                           0x40D6
+#define VAR_TRAINER_HILL_IS_ACTIVE           0x40D6
 #define VAR_0x40D7                           0x40D7
 #define VAR_0x40D8                           0x40D8
 #define VAR_0x40D9                           0x40D9

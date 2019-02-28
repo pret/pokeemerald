@@ -38,7 +38,7 @@ Route111_EventScript_1F0CE4:: @ 81F0CE4
 	return
 
 Route111_MapScript1_1F0D87: @ 81F0D87
-	setvar VAR_0x40D6, 0
+	setvar VAR_TRAINER_HILL_IS_ACTIVE, 0
 	special SetMirageTowerVisibility
 	call_if_unset FLAG_MIRAGE_TOWER_VISIBLE, Route111_EventScript_1F0E3C
 	compare VAR_ROUTE_111_STATE, 1

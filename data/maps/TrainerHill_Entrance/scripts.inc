@@ -15,7 +15,7 @@ TrainerHill_Entrance_MapScript1_2680CF: @ 82680CF
 	end
 
 TrainerHill_Entrance_MapScript1_2680D0: @ 82680D0
-	setvar VAR_0x8004, TRAINER_HILL_FUNC_4
+	setvar VAR_0x8004, TRAINER_HILL_FUNC_RESUME_TIMER
 	special CallTrainerHillFunction
 	setvar VAR_TEMP_0, 0
 	setvar VAR_0x8004, TRAINER_HILL_FUNC_9
@@ -74,12 +74,12 @@ TrainerHill_Entrance_EventScript_268160:: @ 8268160
 
 TrainerHill_Entrance_EventScript_268182:: @ 8268182
 	setvar VAR_TEMP_0, 1
-	setvar VAR_0x8004, TRAINER_HILL_FUNC_6
+	setvar VAR_0x8004, TRAINER_HILL_FUNC_GET_CHALLENGE_STATUS
 	special CallTrainerHillFunction
 	switch VAR_RESULT
-	case 0, TrainerHill_Entrance_EventScript_2681B5
-	case 1, TrainerHill_Entrance_EventScript_2681CA
-	case 2, TrainerHill_Entrance_EventScript_2681EE
+	case TRAINER_HILL_PLAYER_STATUS_LOST, TrainerHill_Entrance_EventScript_2681B5
+	case TRAINER_HILL_PLAYER_STATUS_ECARD_SCANNED, TrainerHill_Entrance_EventScript_2681CA
+	case TRAINER_HILL_PLAYER_STATUS_NORMAL, TrainerHill_Entrance_EventScript_2681EE
 
 TrainerHill_Entrance_EventScript_2681B5:: @ 82681B5
 	lockall
@@ -96,7 +96,7 @@ TrainerHill_Entrance_EventScript_2681DA:: @ 82681DA
 	closemessage
 	applymovement EVENT_OBJ_ID_PLAYER, TrainerHill_Entrance_Movement_268381
 	waitmovement 0
-	setvar VAR_0x40D6, 0
+	setvar VAR_TRAINER_HILL_IS_ACTIVE, 0
 	special HealPlayerParty
 	releaseall
 
@@ -168,14 +168,14 @@ TrainerHill_Entrance_EventScript_2682C8:: @ 82682C8
 	switch VAR_RESULT
 	case 4, TrainerHill_Entrance_EventScript_268314
 	case 127, TrainerHill_Entrance_EventScript_268314
-	setvar VAR_0x8004, TRAINER_HILL_FUNC_17
+	setvar VAR_0x8004, TRAINER_HILL_FUNC_SET_TAG
 	copyvar VAR_0x8005, VAR_RESULT
 	special CallTrainerHillFunction
-	setvar VAR_0x40D6, 1
+	setvar VAR_TRAINER_HILL_IS_ACTIVE, 1
 	setvar VAR_TEMP_5, 0
 	special HealPlayerParty
 	msgbox TrainerHill_Entrance_Text_26862A, MSGBOX_DEFAULT
-	setvar VAR_0x8004, TRAINER_HILL_FUNC_0
+	setvar VAR_0x8004, TRAINER_HILL_FUNC_START
 	special CallTrainerHillFunction
 	releaseall
 	end
