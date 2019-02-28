@@ -196,7 +196,7 @@ void sub_80E8B6C(void)
     }
 }
 
-void sub_80E8BC8(void)
+void CheckIfPlayerHasSecretBase(void)
 {
     if (gSaveBlock1Ptr->secretBases[0].secretBaseId != 0)
     {
@@ -298,7 +298,7 @@ void sub_80E8D4C(void)
     }
 }
 
-u8 sub_80E8DF4(const u8 *src)
+u8 GenNameLength(const u8 *src)
 {
     u8 i;
 
@@ -312,7 +312,7 @@ u8 sub_80E8DF4(const u8 *src)
     return 7;
 }
 
-void sub_80E8E18(void)
+void SavePlayerSecretBase(void)
 {
     u16 i;
 
@@ -322,7 +322,7 @@ void sub_80E8E18(void)
         gSaveBlock1Ptr->secretBases[0].trainerId[i] = gSaveBlock2Ptr->playerTrainerId[i];
     }
     VarSet(VAR_CURRENT_SECRET_BASE, 0);
-    StringCopyN(gSaveBlock1Ptr->secretBases[0].trainerName, gSaveBlock2Ptr->playerName, sub_80E8DF4(gSaveBlock2Ptr->playerName));
+    StringCopyN(gSaveBlock1Ptr->secretBases[0].trainerName, gSaveBlock2Ptr->playerName, GenNameLength(gSaveBlock2Ptr->playerName));
     gSaveBlock1Ptr->secretBases[0].gender = gSaveBlock2Ptr->playerGender;
     gSaveBlock1Ptr->secretBases[0].language = GAME_LANGUAGE;
     VarSet(VAR_SECRET_BASE_MAP, gMapHeader.regionMapSectionId);
@@ -630,7 +630,7 @@ bool8 sub_80E9680(void)
     return TRUE;
 }
 
-void sub_80E96A4(u8 taskId)
+void Task_PackUpSecretBase(u8 taskId) //Pack up secret base Task
 {
     switch (gTasks[taskId].data[0])
     {
@@ -655,13 +655,13 @@ void sub_80E96A4(u8 taskId)
     }
 }
 
-void sub_80E9728(void)
+void PackUpSecretBase(void) //Pack up secret base option?
 {
-    CreateTask(sub_80E96A4, 0);
-    FadeScreen(1, 0);
+    CreateTask(Task_PackUpSecretBase, 0);
+    FadeScreen(1, 0); //Fade out screen
 }
 
-void sub_80E9744(void)
+void IsCurrentSecretBaseOwnedByPlayer(void)
 {
     if (gSaveBlock1Ptr->secretBases[0].secretBaseId != sCurSecretBaseId)
     {
@@ -673,27 +673,27 @@ void sub_80E9744(void)
     }
 }
 
-u8 *sub_80E9780(u8 *dest, u8 secretBaseRecordId)
+u8 *GetSecretBaseTrainerName(u8 *dest, u8 secretBaseRecordId)
 {
-    *StringCopyN(dest, gSaveBlock1Ptr->secretBases[secretBaseRecordId].trainerName, sub_80E8DF4(gSaveBlock1Ptr->secretBases[secretBaseRecordId].trainerName)) = EOS;
+    *StringCopyN(dest, gSaveBlock1Ptr->secretBases[secretBaseRecordId].trainerName, GenNameLength(gSaveBlock1Ptr->secretBases[secretBaseRecordId].trainerName)) = EOS;
     ConvertInternationalString(dest, gSaveBlock1Ptr->secretBases[secretBaseRecordId].language);
     return StringAppend(dest, gText_ApostropheSBase);
 }
 
-u8 *GetSecretBaseMapName(u8 *dest)
+u8 *GetCurrentSecretBaseTrainerName(u8 *dest)
 {
-    return sub_80E9780(dest, VarGet(VAR_CURRENT_SECRET_BASE));
+    return GetSecretBaseTrainerName(dest, VarGet(VAR_CURRENT_SECRET_BASE));
 }
 
-void sub_80E980C(void)
+void LoadVar1CurrentSecretBaseTrainerName(void)
 {
-    u8 secretBaseRecordId;
+    u8 secretBaseIdx;
     const u8 *src;
 
-    secretBaseRecordId = VarGet(VAR_CURRENT_SECRET_BASE);
-    src = gSaveBlock1Ptr->secretBases[secretBaseRecordId].trainerName;
-    *StringCopyN(gStringVar1, src, sub_80E8DF4(src)) = EOS;
-    ConvertInternationalString(gStringVar1, gSaveBlock1Ptr->secretBases[secretBaseRecordId].language);
+    secretBaseIdx = VarGet(VAR_CURRENT_SECRET_BASE);
+    src = gSaveBlock1Ptr->secretBases[secretBaseIdx].trainerName;
+    *StringCopyN(gStringVar1, src, GenNameLength(src)) = EOS;
+    ConvertInternationalString(gStringVar1, gSaveBlock1Ptr->secretBases[secretBaseIdx].language);
 }
 
 bool8 sub_80E9878(u8 secretBaseRecordId)
@@ -705,7 +705,7 @@ bool8 sub_80E9878(u8 secretBaseRecordId)
     return FALSE;
 }
 
-u8 sub_80E98AC(struct Pokemon *pokemon)
+u8 GetAverageEVsForMon(struct Pokemon *pokemon)
 {
     u16 evTotal;
 
@@ -718,7 +718,7 @@ u8 sub_80E98AC(struct Pokemon *pokemon)
     return evTotal / 6;
 }
 
-void sub_80E9914(void)
+void SavePartyToPlayersSecretBase(void)
 {
     u16 partyIdx;
     u16 moveIdx;
@@ -751,7 +751,7 @@ void sub_80E9914(void)
                 party->heldItems[sbPartyIdx] = GetMonData(&gPlayerParty[partyIdx], MON_DATA_HELD_ITEM);
                 party->levels[sbPartyIdx] = GetMonData(&gPlayerParty[partyIdx], MON_DATA_LEVEL);
                 party->personality[sbPartyIdx] = GetMonData(&gPlayerParty[partyIdx], MON_DATA_PERSONALITY);
-                party->EVs[sbPartyIdx] = sub_80E98AC(&gPlayerParty[partyIdx]);
+                party->EVs[sbPartyIdx] = GetAverageEVsForMon(&gPlayerParty[partyIdx]);
                 sbPartyIdx++;
             }
         }
@@ -765,10 +765,10 @@ void sub_80E9A90(void)
     sbr_e = gSaveBlock1Ptr->secretBases[0].sbr_field_e;
     ClearSecretBase(&gSaveBlock1Ptr->secretBases[0]);
     gSaveBlock1Ptr->secretBases[0].sbr_field_e = sbr_e;
-    sub_80E9728();
+    PackUpSecretBase();
 }
 
-void sub_80E9AC0(void)
+void PackUpPlayersCurrentSecretBase(void)
 {
     IncrementGameStat(GAME_STAT_MOVED_SECRET_BASE);
     sub_80E9A90();
@@ -852,7 +852,7 @@ void sub_80E9C2C(void)
 
 void sub_80E9C74(void)
 {
-    CreateTask(sub_8126AD8, 0);
+    CreateTask(SecretBasePC_InitSecretBaseDecorateMenuTask, 0);
 }
 
 void sub_80E9C88(void)
@@ -896,7 +896,7 @@ void game_continue(u8 taskId)
     {
         if (sub_80E9878(i))
         {
-            sub_80E9780(gUnknown_0203A020->names[count], i);
+            GetSecretBaseTrainerName(gUnknown_0203A020->names[count], i);
             gUnknown_0203A020->items[count].name = gUnknown_0203A020->names[count];
             gUnknown_0203A020->items[count].id = i;
             count ++;
@@ -1026,7 +1026,7 @@ void sub_80E9FFC(u8 taskId)
     ClearWindowTilemap(data[7]);
     RemoveWindow(data[7]);
     schedule_bg_copy_tilemap_to_vram(0);
-    sub_80E9780(gStringVar1, data[4]);
+    GetSecretBaseTrainerName(gStringVar1, data[4]);
     StringExpandPlaceholders(gStringVar4, gText_OkayToDeleteFromRegistry);
     DisplayItemMessageOnField(taskId, gStringVar4, sub_80EA06C);
 }
@@ -1311,20 +1311,20 @@ void SecretBasePerStepCallback(u8 taskId)
     }
 }
 
-void sub_80EA828(u8 secretBaseRecordId, struct SecretBaseRecord *base, u32 version, u32 language)
+void SaveSecretBaseAtIndex(u8 secretBaseIdx, struct SecretBaseRecord *base, u32 version, u32 language)
 {
     int stringLength;
     u8 *name;
 
-    gSaveBlock1Ptr->secretBases[secretBaseRecordId] = *base;
-    gSaveBlock1Ptr->secretBases[secretBaseRecordId].sbr_field_1_6 = 2;
+    gSaveBlock1Ptr->secretBases[secretBaseIdx] = *base;
+    gSaveBlock1Ptr->secretBases[secretBaseIdx].sbr_field_1_6 = 2;
     if (version == VERSION_SAPPHIRE || version == VERSION_RUBY)
     {
-        gSaveBlock1Ptr->secretBases[secretBaseRecordId].language = LANGUAGE_ENGLISH;
+        gSaveBlock1Ptr->secretBases[secretBaseIdx].language = LANGUAGE_ENGLISH;
     }
     if (version == VERSION_EMERALD && language == LANGUAGE_JAPANESE)
     {
-        name = gSaveBlock1Ptr->secretBases[secretBaseRecordId].trainerName;
+        name = gSaveBlock1Ptr->secretBases[secretBaseIdx].trainerName;
         for (stringLength = 0; stringLength < 7; stringLength ++)
         {
             if (name[stringLength] == EOS)
@@ -1334,12 +1334,12 @@ void sub_80EA828(u8 secretBaseRecordId, struct SecretBaseRecord *base, u32 versi
         }
         if (stringLength > 5)
         {
-            gSaveBlock1Ptr->secretBases[secretBaseRecordId].language = LANGUAGE_ENGLISH;
+            gSaveBlock1Ptr->secretBases[secretBaseIdx].language = LANGUAGE_ENGLISH;
         }
     }
 }
 
-bool8 sub_80EA8D4(struct SecretBaseRecord *sbr1, struct SecretBaseRecord *sbr2)
+bool8 SecretBaseCheckTrainerIdsMatch(struct SecretBaseRecord *sbr1, struct SecretBaseRecord *sbr2)
 {
     u8 i;
     for (i = 0; i < 4; i ++)
@@ -1352,7 +1352,7 @@ bool8 sub_80EA8D4(struct SecretBaseRecord *sbr1, struct SecretBaseRecord *sbr2)
     return TRUE;
 }
 
-bool8 sub_80EA904(struct SecretBaseRecord *sbr1, struct SecretBaseRecord *sbr2)
+bool8 SecretBaseCheckTrainerNamesMatch(struct SecretBaseRecord *sbr1, struct SecretBaseRecord *sbr2)
 {
     u8 i;
 
@@ -1366,16 +1366,16 @@ bool8 sub_80EA904(struct SecretBaseRecord *sbr1, struct SecretBaseRecord *sbr2)
     return TRUE;
 }
 
-bool8 sub_80EA950(struct SecretBaseRecord *sbr1, struct SecretBaseRecord *sbr2)
+bool8 SecretBaseCheckTrainersMatch(struct SecretBaseRecord *sbr1, struct SecretBaseRecord *sbr2)
 {
-    if (sbr1->gender == sbr2->gender && sub_80EA8D4(sbr1, sbr2) && sub_80EA904(sbr1, sbr2))
+    if (sbr1->gender == sbr2->gender && SecretBaseCheckTrainerIdsMatch(sbr1, sbr2) && SecretBaseCheckTrainerNamesMatch(sbr1, sbr2))
     {
         return TRUE;
     }
     return FALSE;
 }
 
-s16 sub_80EA990(u8 secretBaseRecordId)
+s16 GetSecretBaseIndexForID(u8 secretBaseRecordId)
 {
     s16 i;
 
@@ -1417,42 +1417,42 @@ u8 sub_80EAA18(void)
     return 0;
 }
 
-u8 sub_80EAA64(struct SecretBaseRecord *base, u32 version, u32 language)
+u8 SaveSecretBase(struct SecretBaseRecord *base, u32 version, u32 language)
 {
-    s16 secretBaseRecordId;
+    s16 secretBaseIdx;
 
     if (base->secretBaseId == 0)
     {
         return 0;
     }
-    secretBaseRecordId = sub_80EA990(base->secretBaseId);
-    if (secretBaseRecordId != 0)
+    secretBaseIdx = GetSecretBaseIndexForID(base->secretBaseId);
+    if (secretBaseIdx != 0)
     {
-        if (secretBaseRecordId != -1)
+        if (secretBaseIdx != -1)
         {
-            if (gSaveBlock1Ptr->secretBases[secretBaseRecordId].sbr_field_1_0 == 1)
+            if (gSaveBlock1Ptr->secretBases[secretBaseIdx].sbr_field_1_0 == 1)
             {
                 return 0;
             }
-            if (gSaveBlock1Ptr->secretBases[secretBaseRecordId].sbr_field_1_6 != 2 || base->sbr_field_1_0 == 1)
+            if (gSaveBlock1Ptr->secretBases[secretBaseIdx].sbr_field_1_6 != 2 || base->sbr_field_1_0 == 1)
             {
-                sub_80EA828(secretBaseRecordId, base, version, language);
-                return secretBaseRecordId;
+                SaveSecretBaseAtIndex(secretBaseIdx, base, version, language);
+                return secretBaseIdx;
             }
         }
         else
         {
-            secretBaseRecordId = sub_80EA9D8();
-            if (secretBaseRecordId != 0)
+            secretBaseIdx = sub_80EA9D8();
+            if (secretBaseIdx != 0)
             {
-                sub_80EA828(secretBaseRecordId, base, version, language);
-                return secretBaseRecordId;
+                SaveSecretBaseAtIndex(secretBaseIdx, base, version, language);
+                return secretBaseIdx;
             }
-            secretBaseRecordId = sub_80EAA18();
-            if (secretBaseRecordId != 0)
+            secretBaseIdx = sub_80EAA18();
+            if (secretBaseIdx != 0)
             {
-                sub_80EA828(secretBaseRecordId, base, version, language);
-                return secretBaseRecordId;
+                SaveSecretBaseAtIndex(secretBaseIdx, base, version, language);
+                return secretBaseIdx;
             }
         }
     }
@@ -1489,7 +1489,7 @@ void sub_80EABA4(struct SecretBaseRecordMixer *mixer, u8 b)
     {
         if (mixer->records[i].sbr_field_1_6 == b)
         {
-            sub_80EAA64(&mixer->records[i], mixer->version, mixer->language);
+            SaveSecretBase(&mixer->records[i], mixer->version, mixer->language);
         }
     }
 }
@@ -1569,7 +1569,7 @@ bool8 sub_80EAD14(struct SecretBaseRecord *base, struct SecretBaseRecord *secret
     {
         if (secretBases[i].secretBaseId != 0)
         {
-            if (sub_80EA950(base, &secretBases[i]) == TRUE)
+            if (SecretBaseCheckTrainersMatch(base, &secretBases[i]) == TRUE)
             {
                 if (c == 0)
                 {
@@ -1644,7 +1644,7 @@ void sub_80EAE90(struct SecretBaseRecord *base, u32 version, u32 language)
 {
     if (base->sbr_field_1_0 == 1)
     {
-        sub_80EAA64(base, version, language);
+        SaveSecretBase(base, version, language);
         ClearSecretBase(base);
     }
 }
@@ -1666,9 +1666,9 @@ void sub_80EAEF4(struct SecretBaseRecordMixer *mixers)
     DeleteFirstOldBaseFromPlayerInRecordMixingFriendsRecords(mixers[0].records, mixers[1].records, mixers[2].records);
     sub_80EAD94(gSaveBlock1Ptr->secretBases, mixers[0].records, mixers[1].records, mixers[2].records);
     sub_80EAEB4(mixers);
-    sub_80EAA64(mixers[0].records, mixers[0].version, mixers[0].language);
-    sub_80EAA64(mixers[1].records, mixers[1].version, mixers[1].language);
-    sub_80EAA64(mixers[2].records, mixers[2].version, mixers[2].language);
+    SaveSecretBase(mixers[0].records, mixers[0].version, mixers[0].language);
+    SaveSecretBase(mixers[1].records, mixers[1].version, mixers[1].language);
+    SaveSecretBase(mixers[2].records, mixers[2].version, mixers[2].language);
     sub_80EABA4(&mixers[0], 1);
     sub_80EABA4(&mixers[1], 1);
     sub_80EABA4(&mixers[2], 1);
@@ -1765,7 +1765,7 @@ void ReceiveSecretBasesData(void *records, size_t recordSize, u8 linkIdx)
     }
 }
 
-void sub_80EB18C(struct SecretBaseRecord *bases)
+void SecretBaseDeleteJapaneseBases(struct SecretBaseRecord *bases)
 {
     u32 i;
 

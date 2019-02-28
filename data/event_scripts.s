@@ -485,7 +485,7 @@ EventScript_23B568:: @ 823B568
 	compare VAR_RESULT, 0
 	goto_if_eq EventScript_23B4D3
 	closemessage
-	special sub_80E9AC0
+	special PackUpPlayersCurrentSecretBase
 	releaseall
 	end
 
@@ -532,7 +532,7 @@ EventScript_23B5F0:: @ 823B5F0
 	goto_if_eq EventScript_23B62F
 	compare VAR_RESULT, 2
 	goto_if_eq EventScript_23B652
-	special sub_80E980C
+	special LoadVar1CurrentSecretBaseTrainerName
 	msgbox Text_276707, MSGBOX_YESNO
 	compare VAR_RESULT, 0
 	goto_if_eq EventScript_23B5A1

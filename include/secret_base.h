@@ -7,10 +7,10 @@
 
 // Exported ROM declarations
 void sub_80E9578(void);
-void sub_80E980C(void);
-void sub_80EB18C(struct SecretBaseRecord *dest);
-void sub_80E9914(void);
-u8 *GetSecretBaseMapName(u8 *dest);
+void LoadVar1CurrentSecretBaseTrainerName(void);
+void SecretBaseDeleteJapaneseBases(struct SecretBaseRecord *dest);
+void SavePartyToPlayersSecretBase(void);
+u8 *GetCurrentSecretBaseTrainerName(u8 *dest);
 const u8 *GetSecretBaseTrainerLoseText(void);
 void sub_80E8EE0(struct MapEvents const *events);
 void sub_80E9238(u8 flagIn);
@@ -30,7 +30,7 @@ void ResetSecretBases(void);
 void sub_80E9608(const struct MapPosition *position, const struct MapEvents *events);
 // SetCurrentSecretBaseVar
 void sub_80E8B6C(void);
-void sub_80E8BC8(void);
+void CheckIfPlayerHasSecretBase(void);
 void sub_80E8D4C(void);
 void EnableBothScriptContexts(void);
 

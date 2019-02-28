@@ -2567,7 +2567,7 @@ void sub_80EEA70(void)
             show->secretBaseSecrets.active = FALSE;
             StringCopy(show->secretBaseSecrets.playerName, gSaveBlock2Ptr->playerName);
             show->secretBaseSecrets.stepsInBase = VarGet(VAR_0x40EC);
-            sub_80E980C();
+            LoadVar1CurrentSecretBaseTrainerName();
             StringCopy(strbuf, gStringVar1);
             StripExtCtrlCodes(strbuf);
             StringCopy(show->secretBaseSecrets.baseOwnersName, strbuf);

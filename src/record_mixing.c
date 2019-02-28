@@ -209,7 +209,7 @@ static void PrepareUnknownExchangePacket(struct PlayerRecordsRS *dest)
 static void PrepareExchangePacketForRubySapphire(struct PlayerRecordsRS *dest)
 {
     memcpy(dest->secretBases, sSecretBasesSave, sizeof(dest->secretBases));
-    sub_80EB18C(dest->secretBases);
+    SecretBaseDeleteJapaneseBases(dest->secretBases);
     memcpy(dest->tvShows, sTvShowsSave, sizeof(dest->tvShows));
     sub_80F1208(dest->tvShows);
     memcpy(dest->pokeNews, sPokeNewsSave, sizeof(dest->pokeNews));
@@ -227,7 +227,7 @@ static void PrepareExchangePacketForRubySapphire(struct PlayerRecordsRS *dest)
 
 static void PrepareExchangePacket(void)
 {
-    sub_80E9914();
+    SavePartyToPlayersSecretBase();
     sub_80F0BB8();
     SetSrcLookupPointers();
 

@@ -321,7 +321,7 @@ static bool32 RecordedBattleToSave(struct RecordedBattleSave *battleSave, struct
 
     saveSection->checksum = CalcByteArraySum((void*)(saveSection), sizeof(*saveSection) - 4);
 
-    if (sub_8153634(31, (void*)(saveSection)) != 1)
+    if (TrySaveToSpecialSaveSection(31, (void*)(saveSection)) != 1)
         return FALSE;
     else
         return TRUE;

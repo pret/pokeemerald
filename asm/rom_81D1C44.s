@@ -3961,7 +3961,7 @@ _081D3A7E:
 	str r0, [r2, 0x4]
 	movs r0, 0x1E
 	mov r1, r8
-	bl sub_8153634
+	bl TrySaveToSpecialSaveSection
 	cmp r0, 0x1
 	bne _081D3AA4
 	movs r0, 0x1

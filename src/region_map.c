@@ -1480,7 +1480,7 @@ u8 *GetMapName(u8 *dest, u16 regionMapId, u16 padLength)
 
     if (regionMapId == MAPSEC_SECRET_BASE)
     {
-        str = GetSecretBaseMapName(dest);
+        str = GetCurrentSecretBaseTrainerName(dest);
     }
     else if (regionMapId < MAPSEC_NONE)
     {

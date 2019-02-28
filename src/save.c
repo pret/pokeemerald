@@ -872,14 +872,14 @@ u32 TryCopySpecialSaveSection(u8 sector, u8* dst)
     return 1;
 }
 
-u32 sub_8153634(u8 sector, u8* src)
+u32 TrySaveToSpecialSaveSection(u8 sector, u8* src)
 {
     s32 i;
     s32 size;
     u8* savData;
     void* savDataBuffer;
 
-    if (sector != 30 && sector != 31)
+    if (sector != SECTOR_ID_TRAINER_HILL && sector != SECTOR_ID_RECORDED_BATTLE)
         return 0xFF;
 
     savDataBuffer = &gSaveDataBuffer;

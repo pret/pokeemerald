@@ -311,7 +311,7 @@ SecretBase_RedCave1_Text_275944: @ 8275944
 
 EventScript_2759F1:: @ 82759F1
 	special sub_80E8C98
-	special sub_80E8BC8
+	special CheckIfPlayerHasSecretBase
 	compare VAR_RESULT, 1
 	goto_if_eq EventScript_275BE8
 	checkpartymove MOVE_SECRET_POWER
@@ -432,7 +432,7 @@ EventScript_275B5B:: @ 8275B5B
 	playse SE_KAIDAN
 	setvar VAR_0x4097, 0
 	setflag FLAG_DECORATION_0
-	special sub_80E8E18
+	special SavePlayerSecretBase
 	special sub_80E9068
 	setvar VAR_0x8004, 0
 	setvar VAR_0x8005, 0
@@ -469,7 +469,7 @@ EventScript_275BB7:: @ 8275BB7
 	lockall
 	setvar VAR_0x4097, 1
 	playse SE_KAIDAN
-	special sub_80E9744
+	special IsCurrentSecretBaseOwnedByPlayer
 	compare VAR_RESULT, 0
 	goto_if_eq EventScript_275BDB
 	clearflag FLAG_DECORATION_0

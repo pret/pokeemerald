@@ -14,12 +14,12 @@ gSpecials:: @ 81DBA64
 	def_special sub_80AF9F8
 	def_special CleanupLinkRoomState
 	def_special ExitLinkRoom
-	def_special sub_80E8E18
-	def_special sub_80E8BC8
+	def_special SavePlayerSecretBase
+	def_special CheckIfPlayerHasSecretBase
 	def_special sub_80E9068
 	def_special sub_80E9A90
-	def_special sub_80E9AC0
-	def_special sub_80E9744
+	def_special PackUpPlayersCurrentSecretBase
+	def_special IsCurrentSecretBaseOwnedByPlayer
 	def_special sub_80E9BDC
 	def_special sub_80E9C2C
 	def_special sub_80E9C74
@@ -313,7 +313,7 @@ gSpecials:: @ 81DBA64
 	def_special sub_80AFC60
 	def_special PutZigzagoonInPlayerParty
 	def_special IsStarterInParty
-	def_special sub_80E980C
+	def_special LoadVar1CurrentSecretBaseTrainerName
 	def_special ScriptCheckFreePokemonStorageSpace
 	def_special DoSealedChamberShakingEffect1
 	def_special sub_8139B60
