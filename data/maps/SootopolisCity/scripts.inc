@@ -35,7 +35,7 @@ SootopolisCity_MapScript1_1E56EF: @ 81E56EF
 	setflag FLAG_VISITED_SOOTOPOLIS_CITY
 	compare VAR_RAYQUAZA_STATE, 1
 	call_if_eq SootopolisCity_EventScript_1E5781
-	compare VAR_0x40CA, 1
+	compare VAR_SKY_PILLAR_STATE, 1
 	call_if_eq SootopolisCity_EventScript_1E5781
 	call SootopolisCity_EventScript_1E5805
 	call SootopolisCity_EventScript_1E57B2
@@ -89,7 +89,7 @@ SootopolisCity_EventScript_1E57B2:: @ 81E57B2
 	goto_if_eq SootopolisCity_EventScript_1E5801
 	compare VAR_RAYQUAZA_STATE, 4
 	goto_if_eq SootopolisCity_EventScript_1E5801
-	compare VAR_0x40CA, 1
+	compare VAR_SKY_PILLAR_STATE, 1
 	goto_if_le SootopolisCity_EventScript_1E5801
 	return
 
@@ -107,9 +107,9 @@ SootopolisCity_EventScript_1E5805:: @ 81E5805
 	goto_if_ge SootopolisCity_EventScript_1E583D
 	compare VAR_RAYQUAZA_STATE, 1
 	goto_if_eq SootopolisCity_EventScript_1E583E
-	compare VAR_0x40CA, 1
+	compare VAR_SKY_PILLAR_STATE, 1
 	goto_if_eq SootopolisCity_EventScript_1E583E
-	compare VAR_0x40CA, 1
+	compare VAR_SKY_PILLAR_STATE, 1
 	goto_if_le Common_EventScript_SetWeather15
 	return
 
@@ -172,9 +172,9 @@ SootopolisCity_MapScript2_1E58DB: @ 81E58DB
 	.2byte 0
 
 SootopolisCity_EventScript_1E58E5:: @ 81E58E5
-	compare VAR_0x40CA, 1
+	compare VAR_SKY_PILLAR_STATE, 1
 	call_if_eq SootopolisCity_EventScript_1E58FC
-	compare VAR_0x40CA, 2
+	compare VAR_SKY_PILLAR_STATE, 2
 	call_if_eq SootopolisCity_EventScript_1E5901
 	end
 
@@ -184,7 +184,7 @@ SootopolisCity_EventScript_1E58FC:: @ 81E58FC
 
 SootopolisCity_EventScript_1E5901:: @ 81E5901
 	turnobject EVENT_OBJ_ID_PLAYER, 2
-	setvar VAR_0x40CA, 3
+	setvar VAR_SKY_PILLAR_STATE, 3
 	return
 
 SootopolisCity_MapScript1_1E590B: @ 81E590B
@@ -193,7 +193,7 @@ SootopolisCity_MapScript1_1E590B: @ 81E590B
 
 SootopolisCity_MapScript2_1E5914: @ 81E5914
 	map_script_2 VAR_RAYQUAZA_STATE, 1, SootopolisCity_EventScript_1E5926
-	map_script_2 VAR_0x40CA, 1, SootopolisCity_EventScript_1E5BFE
+	map_script_2 VAR_SKY_PILLAR_STATE, 1, SootopolisCity_EventScript_1E5BFE
 	.2byte 0
 
 SootopolisCity_EventScript_1E5926:: @ 81E5926
@@ -540,7 +540,7 @@ SootopolisCity_EventScript_1E5C1E:: @ 81E5C1E
 	special WaitWeather
 	waitstate
 	clearflag FLAG_SYS_WEATHER_CTRL
-	setvar VAR_0x40CA, 3
+	setvar VAR_SKY_PILLAR_STATE, 3
 	clearflag FLAG_LEGENDARIES_IN_SOOTOPOLIS
 	fadenewbgm MUS_RUNECITY
 	delay 120
@@ -593,7 +593,7 @@ SootopolisCity_EventScript_1E5CCE:: @ 81E5CCE
 	special WaitWeather
 	waitstate
 	clearflag FLAG_SYS_WEATHER_CTRL
-	setvar VAR_0x40CA, 2
+	setvar VAR_SKY_PILLAR_STATE, 2
 	clearflag FLAG_LEGENDARIES_IN_SOOTOPOLIS
 	fadenewbgm MUS_NAMINORI
 	delay 120

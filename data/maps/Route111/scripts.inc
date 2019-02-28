@@ -7,7 +7,7 @@ Route111_MapScripts:: @ 81F0CA7
 
 Route111_MapScript1_1F0CBC: @ 81F0CBC
 	call_if_unset FLAG_REGI_DOORS_OPENED, Route111_EventScript_1F0CD1
-	compare VAR_0x40CB, 1
+	compare VAR_ROUTE_111_STATE, 1
 	call_if_eq Route111_EventScript_1F0CE4
 	end
 
@@ -41,9 +41,9 @@ Route111_MapScript1_1F0D87: @ 81F0D87
 	setvar VAR_0x40D6, 0
 	special SetMirageTowerVisibility
 	call_if_unset FLAG_MIRAGE_TOWER_VISIBLE, Route111_EventScript_1F0E3C
-	compare VAR_0x40CB, 1
+	compare VAR_ROUTE_111_STATE, 1
 	call_if_eq Route111_EventScript_1F0DC2
-	compare VAR_0x40CB, 2
+	compare VAR_ROUTE_111_STATE, 2
 	call_if_eq Route111_EventScript_1F0E40
 	call Route111_EventScript_1F0DE6
 	call Route111_EventScript_28CCC7
@@ -101,11 +101,11 @@ Route111_EventScript_1F0E3C:: @ 81F0E3C
 	return
 
 Route111_EventScript_1F0E40:: @ 81F0E40
-	setvar VAR_0x40CB, 3
+	setvar VAR_ROUTE_111_STATE, 3
 	return
 
 Route111_MapScript2_1F0E46: @ 81F0E46
-	map_script_2 VAR_0x40CB, 1, Route111_EventScript_1F0E50
+	map_script_2 VAR_ROUTE_111_STATE, 1, Route111_EventScript_1F0E50
 	.2byte 0
 
 Route111_EventScript_1F0E50:: @ 81F0E50
@@ -113,7 +113,7 @@ Route111_EventScript_1F0E50:: @ 81F0E50
 	end
 
 Route111_MapScript2_1F0E56: @ 81F0E56
-	map_script_2 VAR_0x40CB, 1, Route111_EventScript_1F0E60
+	map_script_2 VAR_ROUTE_111_STATE, 1, Route111_EventScript_1F0E60
 	.2byte 0
 
 Route111_EventScript_1F0E60:: @ 81F0E60
@@ -134,7 +134,7 @@ Route111_EventScript_1F0E60:: @ 81F0E60
 	waitstate
 	special StartMirageTowerFossilFallAndSink
 	waitstate
-	setvar VAR_0x40CB, 2
+	setvar VAR_ROUTE_111_STATE, 2
 	clearflag FLAG_HIDE_DESERT_UNDERPASS_FOSSIL
 	goto_if_set FLAG_CHOSE_ROOT_FOSSIL, Route111_EventScript_1F0EA7
 	msgbox Route111_Text_1F1C74, MSGBOX_DEFAULT
@@ -411,9 +411,9 @@ Route111_EventScript_1F1192:: @ 81F1192
 Route111_EventScript_1F119B:: @ 81F119B
 	lock
 	faceplayer
-	compare VAR_0x40CB, 3
+	compare VAR_ROUTE_111_STATE, 3
 	goto_if_eq Route111_EventScript_1F11C6
-	compare VAR_0x40CB, 2
+	compare VAR_ROUTE_111_STATE, 2
 	goto_if_eq Route111_EventScript_1F11D0
 	goto_if_set FLAG_MIRAGE_TOWER_VISIBLE, Route111_EventScript_1F11DA
 	msgbox Route111_Text_1F1A22, MSGBOX_DEFAULT

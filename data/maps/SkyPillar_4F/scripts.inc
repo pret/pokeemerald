@@ -5,7 +5,7 @@ SkyPillar_4F_MapScripts:: @ 8239671
 	.byte 0
 
 SkyPillar_4F_MapScript1_239681: @ 8239681
-	compare VAR_0x40CA, 2
+	compare VAR_SKY_PILLAR_STATE, 2
 	call_if_lt SkyPillar_4F_EventScript_239692
 	copyvar VAR_ICE_STEP_COUNT, 0x1
 	end

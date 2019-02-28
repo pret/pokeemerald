@@ -1093,7 +1093,7 @@ EverGrandeCity_HallOfFame_EventScript_2717C1:: @ 82717C1
 	special sub_81AFDD0
 	setflag FLAG_IS_CHAMPION
 	call EverGrandeCity_HallOfFame_EventScript_271829
-	compare VAR_0x40CC, 0
+	compare VAR_FOSSIL_MANIAC_STATE, 0
 	call_if_eq EverGrandeCity_HallOfFame_EventScript_271839
 	clearflag FLAG_HIDE_LILCOVE_MOTEL_GAME_DESIGNERS
 	call EverGrandeCity_HallOfFame_EventScript_2718CC
@@ -1126,7 +1126,7 @@ EverGrandeCity_HallOfFame_EventScript_271829:: @ 8271829
 	return
 
 EverGrandeCity_HallOfFame_EventScript_271839:: @ 8271839
-	setvar VAR_0x40CC, 1
+	setvar VAR_FOSSIL_MANIAC_STATE, 1
 	return
 
 EverGrandeCity_HallOfFame_EventScript_27183F:: @ 827183F

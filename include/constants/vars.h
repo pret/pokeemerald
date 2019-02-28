@@ -216,20 +216,20 @@
 #define VAR_WHICH_FOSSIL_REVIVED             0x40C5
 #define VAR_STEVENS_HOUSE_STATE              0x40C6
 #define VAR_OLDALE_STATE                     0x40C7
-#define VAR_0x40C8                           0x40C8
+#define VAR_JAGGED_PASS_STATE                0x40C8
 #define VAR_0x40C9                           0x40C9
-#define VAR_0x40CA                           0x40CA
-#define VAR_0x40CB                           0x40CB
-#define VAR_0x40CC                           0x40CC
-#define VAR_0x40CD                           0x40CD
+#define VAR_SKY_PILLAR_STATE                 0x40CA
+#define VAR_ROUTE_111_STATE                  0x40CB
+#define VAR_FOSSIL_MANIAC_STATE              0x40CC
+#define VAR_CABLE_CLUB_TUTORIAL_STATE        0x40CD
 #define VAR_FRONTIER_BATTLE_MODE             0x40CE
 #define VAR_FRONTIER_FACILITY                0x40CF
-#define VAR_0x40D0                           0x40D0
-#define VAR_0x40D1                           0x40D1
-#define VAR_0x40D2                           0x40D2
+#define VAR_HAS_ENTERED_BATTLE_FRONTIER      0x40D0 // Var is used like a flag.
+#define VAR_SCOTT_STATE                      0x40D1
+#define VAR_SLATEPORT_OUTSIDE_MUSEUM_STATE   0x40D2
 #define VAR_0x40D3                           0x40D3
-#define VAR_0x40D4                           0x40D4
-#define VAR_0x40D5                           0x40D5
+#define VAR_SS_TIDAL_SCOTT_STATE             0x40D4 // Always equal to FLAG_MET_SCOTT_ON_SS_TIDAL
+#define VAR_ROAMER_POKEMON                   0x40D5 // 0 = Latias, 1 = Latios
 #define VAR_0x40D6                           0x40D6
 #define VAR_0x40D7                           0x40D7
 #define VAR_0x40D8                           0x40D8

@@ -510,7 +510,7 @@ LittlerootTown_MaysHouse_1F_EventScript_292AF2:: @ 8292AF2
 	multichoice 22, 8, 108, 1
 	copyvar VAR_0x8004, VAR_RESULT
 	special InitRoamer
-	copyvar VAR_0x40D5, VAR_RESULT
+	copyvar VAR_ROAMER_POKEMON, VAR_RESULT
 	msgbox LittlerootTown_BrendansHouse_1F_Text_1F83A1, MSGBOX_DEFAULT
 	closemessage
 	setvar VAR_LITTLEROOT_HOUSES_STATE, 4
@@ -518,6 +518,7 @@ LittlerootTown_MaysHouse_1F_EventScript_292AF2:: @ 8292AF2
 	releaseall
 	end
 
+@ Never called.
 LittlerootTown_BrendansHouse_1F_EventScript_292C72:: @ 8292C72
 	setflag FLAG_SYS_TV_LATIAS_LATIOS
 	return

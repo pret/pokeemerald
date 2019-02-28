@@ -259,7 +259,7 @@ MossdeepCity_EventScript_1E4C85:: @ 81E4C85
 	call_if_eq MossdeepCity_EventScript_1E4CB0
 	compare VAR_FACING, 4
 	call_if_eq MossdeepCity_EventScript_1E4CC2
-	addvar VAR_0x40D1, 1
+	addvar VAR_SCOTT_STATE, 1
 	removeobject 16
 	release
 	end

@@ -551,7 +551,7 @@ PetalburgCity_EventScript_1DC6E9:: @ 81DC6E9
 	waitmovement 0
 	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceRight
 	waitmovement 0
-	setvar VAR_0x40D1, 1
+	setvar VAR_SCOTT_STATE, 1
 	msgbox PetalburgCity_Text_1DCB31, MSGBOX_DEFAULT
 	closemessage
 	applymovement 9, Common_Movement_WalkInPlaceRight

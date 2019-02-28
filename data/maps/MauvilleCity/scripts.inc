@@ -168,7 +168,7 @@ MauvilleCity_EventScript_1DF593:: @ 81DF593
 	waitmovement 0
 	msgbox MauvilleCity_Text_1DFED5, MSGBOX_DEFAULT
 	closemessage
-	addvar VAR_0x40D1, 1
+	addvar VAR_SCOTT_STATE, 1
 	compare VAR_FACING, 2
 	call_if_eq MauvilleCity_EventScript_1DF616
 	compare VAR_FACING, 4

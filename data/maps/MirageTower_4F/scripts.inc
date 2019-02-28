@@ -52,7 +52,7 @@ MirageTower_4F_EventScript_23ADCA:: @ 823ADCA
 	waitstate
 	special DoMirageTowerCeilingCrumble
 	waitstate
-	setvar VAR_0x40CB, 1
+	setvar VAR_ROUTE_111_STATE, 1
 	clearflag FLAG_LANDMARK_MIRAGE_TOWER
 	warp MAP_ROUTE111, 255, 19, 59
 	waitstate

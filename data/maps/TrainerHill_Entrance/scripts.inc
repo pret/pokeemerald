@@ -91,6 +91,7 @@ TrainerHill_Entrance_EventScript_2681CA:: @ 82681CA
 	lockall
 	applymovement EVENT_OBJ_ID_PLAYER, TrainerHill_Entrance_Movement_26837F
 	msgbox TrainerHill_Entrance_Text_268712, MSGBOX_DEFAULT
+    @ No "end" command; intentional fall-through to TrainerHill_Entrance_EventScript_2681DA.
 
 TrainerHill_Entrance_EventScript_2681DA:: @ 82681DA
 	closemessage

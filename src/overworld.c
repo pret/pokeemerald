@@ -1034,7 +1034,7 @@ static bool16 ShouldLegendaryMusicPlayAtLocation(struct WarpData *warp)
 
 static bool16 NoMusicInSotopolisWithLegendaries(struct WarpData *warp)
 {
-    if (VarGet(VAR_0x40CA) != 1)
+    if (VarGet(VAR_SKY_PILLAR_STATE) != 1)
         return FALSE;
     else if (warp->mapGroup != MAP_GROUP(SOOTOPOLIS_CITY))
         return FALSE;
@@ -1212,7 +1212,7 @@ void TryFadeOutOldMapMusic(void)
     if (FlagGet(FLAG_SPECIAL_FLAG_0x4001) != TRUE && warpMusic != GetCurrentMapMusic())
     {
         if (currentMusic == MUS_NAMINORI
-            && VarGet(VAR_0x40CA) == 2
+            && VarGet(VAR_SKY_PILLAR_STATE) == 2
             && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(SOOTOPOLIS_CITY)
             && gSaveBlock1Ptr->location.mapNum == MAP_NUM(SOOTOPOLIS_CITY)
             && sWarpDestination.mapGroup == MAP_GROUP(SOOTOPOLIS_CITY)
