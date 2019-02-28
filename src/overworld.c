@@ -678,7 +678,7 @@ void UpdateEscapeWarp(s16 x, s16 y)
 {
     u8 currMapType = GetCurrentMapType();
     u8 destMapType = GetMapTypeByGroupAndId(sWarpDestination.mapGroup, sWarpDestination.mapNum);
-    if (is_map_type_1_2_3_5_or_6(currMapType) && is_map_type_1_2_3_5_or_6(destMapType) != TRUE)
+    if (IsMapTypeOutside(currMapType) && IsMapTypeOutside(destMapType) != TRUE)
         SetEscapeWarp(gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum, -1, x - 7, y - 6);
 }
 
@@ -837,7 +837,7 @@ static void mli0_load_map(u32 a1)
             LoadEventObjTemplatesFromHeader();
     }
 
-    v2 = is_map_type_1_2_3_5_or_6(gMapHeader.mapType);
+    v2 = IsMapTypeOutside(gMapHeader.mapType);
     indoors = Overworld_MapTypeIsIndoors(gMapHeader.mapType);
 
     sub_80EB218();
@@ -925,7 +925,7 @@ static u8 GetAdjustedInitialTransitionFlags(struct InitialPlayerAvatarState *pla
 
 static u8 GetAdjustedInitialDirection(struct InitialPlayerAvatarState *playerStruct, u8 transitionFlags, u16 metatileBehavior, u8 mapType)
 {
-    if (FlagGet(FLAG_SYS_CRUISE_MODE) && mapType == MAP_TYPE_6)
+    if (FlagGet(FLAG_SYS_CRUISE_MODE) && mapType == MAP_TYPE_OCEAN_ROUTE)
         return DIR_EAST;
     else if (MetatileBehavior_IsDeepSouthWarp(metatileBehavior) == TRUE)
         return DIR_NORTH;
@@ -1330,13 +1330,13 @@ u8 GetLastUsedWarpMapType(void)
     return GetMapTypeByWarpData(&gLastUsedWarp);
 }
 
-bool8 is_map_type_1_2_3_5_or_6(u8 mapType)
+bool8 IsMapTypeOutside(u8 mapType)
 {
     if (mapType == MAP_TYPE_ROUTE
      || mapType == MAP_TYPE_TOWN
      || mapType == MAP_TYPE_UNDERWATER
      || mapType == MAP_TYPE_CITY
-     || mapType == MAP_TYPE_6)
+     || mapType == MAP_TYPE_OCEAN_ROUTE)
         return TRUE;
     else
         return FALSE;
@@ -1346,7 +1346,7 @@ bool8 Overworld_MapTypeAllowsTeleportAndFly(u8 mapType)
 {
     if (mapType == MAP_TYPE_ROUTE
      || mapType == MAP_TYPE_TOWN
-     || mapType == MAP_TYPE_6
+     || mapType == MAP_TYPE_OCEAN_ROUTE
      || mapType == MAP_TYPE_CITY)
         return TRUE;
     else

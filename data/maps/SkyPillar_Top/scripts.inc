@@ -132,7 +132,7 @@ SkyPillar_Top_EventScript_23979A:: @ 823979A
 	special RemoveCameraObject
 	setvar VAR_RAYQUAZA_STATE, 5
 	setvar VAR_SKY_PILLAR_STATE, 1
-	setvar VAR_0x40D7, 1
+	setvar VAR_SKY_PILLAR_RAQUAZA_CRY_DONE, 1
 	releaseall
 	end
 

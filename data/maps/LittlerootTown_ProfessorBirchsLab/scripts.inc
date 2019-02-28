@@ -195,7 +195,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_1F9E80:: @ 81F9E80
 	setflag FLAG_HIDE_LITTLEROOT_TOWN_BIRCH
 	setflag FLAG_HIDE_LITTLEROOT_TOWN_RIVAL
 	setvar VAR_0x40D3, 2
-	setvar VAR_0x40F5, 0
+	setvar VAR_SCOTT_CALL_STEP_COUNTER, 0
 	setflag FLAG_SCOTT_CALL_NATIONAL_DEX
 	releaseall
 	end

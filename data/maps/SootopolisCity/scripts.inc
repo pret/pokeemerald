@@ -140,11 +140,11 @@ SootopolisCity_EventScript_1E5871:: @ 81E5871
 	setobjectxyperm 7, 29, 33
 	setobjectxyperm 16, 33, 35
 	setobjectxyperm 17, 34, 35
-	compare VAR_0x40D8, 0
+	compare VAR_SOOTOPOLIS_STATE, 0
 	call_if_eq SootopolisCity_EventScript_1E58AF
-	compare VAR_0x40D8, 1
+	compare VAR_SOOTOPOLIS_STATE, 1
 	call_if_eq SootopolisCity_EventScript_1E58BB
-	compare VAR_0x40D8, 2
+	compare VAR_SOOTOPOLIS_STATE, 2
 	call_if_eq SootopolisCity_EventScript_1E58C7
 	return
 
@@ -1367,14 +1367,14 @@ SootopolisCity_EventScript_1E64B2:: @ 81E64B2
 	applymovement 18, SootopolisCity_Movement_1E64EC
 	waitmovement 0
 	moveobjectoffscreen 18
-	setvar VAR_0x40D8, 1
+	setvar VAR_SOOTOPOLIS_STATE, 1
 	return
 
 SootopolisCity_EventScript_1E64C5:: @ 81E64C5
 	applymovement 18, SootopolisCity_Movement_1E64EF
 	waitmovement 0
 	moveobjectoffscreen 18
-	setvar VAR_0x40D8, 2
+	setvar VAR_SOOTOPOLIS_STATE, 2
 	return
 
 SootopolisCity_EventScript_1E64D8:: @ 81E64D8

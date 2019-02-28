@@ -360,17 +360,17 @@ u8 GetSSTidalLocation(s8 *mapGroup, s8 *mapNum, s16 *x, s16 *y)
     return 0;
 }
 
-bool32 is_tile_that_overrides_player_control(void)
+bool32 ShouldDoWallyCall(void)
 {
     if (FlagGet(FLAG_ENABLE_FIRST_WALLY_POKENAV_CALL))
     {
         switch (gMapHeader.mapType)
         {
-            case 1:
-            case 2:
-            case 3:
-            case 6:
-                if (++(*GetVarPointer(VAR_0x40F2)) < 0xFA)
+            case MAP_TYPE_TOWN:
+            case MAP_TYPE_CITY:
+            case MAP_TYPE_ROUTE:
+            case MAP_TYPE_OCEAN_ROUTE:
+                if (++(*GetVarPointer(VAR_WALLY_CALL_STEP_COUNTER)) < 0xFA)
                 {
                     return FALSE;
                 }
@@ -387,7 +387,7 @@ bool32 is_tile_that_overrides_player_control(void)
     return TRUE;
 }
 
-bool32 sub_8138120(void)
+bool32 ShouldDoWinonaCall(void)
 {
     if (FlagGet(FLAG_REGISTER_WINONA_POKENAV))
     {
@@ -396,8 +396,8 @@ bool32 sub_8138120(void)
             case MAP_TYPE_TOWN:
             case MAP_TYPE_CITY:
             case MAP_TYPE_ROUTE:
-            case MAP_TYPE_6:
-                if (++(*GetVarPointer(VAR_0x40F3)) < 10)
+            case MAP_TYPE_OCEAN_ROUTE:
+                if (++(*GetVarPointer(VAR_WINONA_CALL_STEP_COUNTER)) < 10)
                 {
                     return FALSE;
                 }
@@ -414,7 +414,7 @@ bool32 sub_8138120(void)
     return TRUE;
 }
 
-bool32 sub_8138168(void)
+bool32 ShouldDoScottCall(void)
 {
     if (FlagGet(FLAG_SCOTT_CALL_NATIONAL_DEX))
     {
@@ -424,7 +424,7 @@ bool32 sub_8138168(void)
             case 2:
             case 3:
             case 6:
-                if (++(*GetVarPointer(VAR_0x40F5)) < 0xA)
+                if (++(*GetVarPointer(VAR_SCOTT_CALL_STEP_COUNTER)) < 10)
                 {
                     return FALSE;
                 }
@@ -441,7 +441,7 @@ bool32 sub_8138168(void)
     return TRUE;
 }
 
-bool32 sub_81381B0(void)
+bool32 ShouldDoRoxanneCall(void)
 {
     if (FlagGet(FLAG_ENABLE_ROXANNE_FIRST_CALL))
     {
@@ -451,7 +451,7 @@ bool32 sub_81381B0(void)
             case 2:
             case 3:
             case 6:
-                if (++(*GetVarPointer(VAR_0x40F4)) < 0xFA)
+                if (++(*GetVarPointer(VAR_ROXANNE_CALL_STEP_COUNTER)) < 0xFA)
                 {
                     return FALSE;
                 }
@@ -468,7 +468,7 @@ bool32 sub_81381B0(void)
     return TRUE;
 }
 
-bool32 sub_81381F8(void)
+bool32 ShouldDoRivalRayquazaCall(void)
 {
     if (FlagGet(FLAG_DEFEATED_MAGMA_SPACE_CENTER))
     {
@@ -478,7 +478,7 @@ bool32 sub_81381F8(void)
             case 2:
             case 3:
             case 6:
-                if (++(*GetVarPointer(VAR_0x40F6)) < 0xFA)
+                if (++(*GetVarPointer(VAR_RIVAL_RAYQUAZA_CALL_STEP_COUNTER)) < 0xFA)
                 {
                     return FALSE;
                 }
@@ -1516,7 +1516,7 @@ bool8 FoundBlackGlasses(void)
 
 void SetRoute119Weather(void)
 {
-    if (is_map_type_1_2_3_5_or_6(GetLastUsedWarpMapType()) != TRUE)
+    if (IsMapTypeOutside(GetLastUsedWarpMapType()) != TRUE)
     {
         SetSav1Weather(20);
     }
@@ -1524,7 +1524,7 @@ void SetRoute119Weather(void)
 
 void SetRoute123Weather(void)
 {
-    if (is_map_type_1_2_3_5_or_6(GetLastUsedWarpMapType()) != TRUE)
+    if (IsMapTypeOutside(GetLastUsedWarpMapType()) != TRUE)
     {
         SetSav1Weather(21);
     }

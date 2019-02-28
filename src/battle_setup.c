@@ -641,7 +641,7 @@ u8 BattleSetup_GetTerrainId(void)
         return BATTLE_TERRAIN_BUILDING;
     case MAP_TYPE_UNDERWATER:
         return BATTLE_TERRAIN_UNDERWATER;
-    case MAP_TYPE_6:
+    case MAP_TYPE_OCEAN_ROUTE:
         if (MetatileBehavior_IsSurfableWaterOrUnderwater(tileBehavior))
             return BATTLE_TERRAIN_WATER;
         return BATTLE_TERRAIN_PLAIN;

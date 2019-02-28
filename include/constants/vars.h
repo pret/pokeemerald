@@ -231,9 +231,9 @@
 #define VAR_SS_TIDAL_SCOTT_STATE             0x40D4 // Always equal to FLAG_MET_SCOTT_ON_SS_TIDAL
 #define VAR_ROAMER_POKEMON                   0x40D5 // 0 = Latias, 1 = Latios
 #define VAR_TRAINER_HILL_IS_ACTIVE           0x40D6
-#define VAR_0x40D7                           0x40D7
-#define VAR_0x40D8                           0x40D8
-#define VAR_0x40D9                           0x40D9
+#define VAR_SKY_PILLAR_RAQUAZA_CRY_DONE      0x40D7
+#define VAR_SOOTOPOLIS_STATE                 0x40D8
+#define VAR_HAS_TALKED_TO_SEAFLOOR_CAVERN_ENTRANCE_GRUNT 0x40D9
 #define VAR_0x40DA                           0x40DA
 #define VAR_UNUSED_0x40DB                    0x40DB // Unused Var
 #define VAR_UNUSED_0x40DC                    0x40DC // Unused Var
@@ -252,17 +252,17 @@
 #define VAR_DAILY_PLANTED_BERRIES            0x40E9
 #define VAR_DAILY_PICKED_BERRIES             0x40EA
 #define VAR_DAILY_ROULETTE                   0x40EB
-#define VAR_0x40EC                           0x40EC
-#define VAR_0x40ED                           0x40ED
-#define VAR_0x40EE                           0x40EE
-#define VAR_0x40EF                           0x40EF
-#define VAR_0x40F0                           0x40F0
+#define VAR_SECRET_BASE_STEP_COUNTER         0x40EC // Used by Secret Base TV programs
+#define VAR_SECRET_BASE_LAST_ITEM_USED       0x40ED // Used by Secret Base TV programs
+#define VAR_SECRET_BASE_LOW_TV_FLAGS         0x40EE // Used by Secret Base TV programs
+#define VAR_SECRET_BASE_HIGH_TV_FLAGS        0x40EF // Used by Secret Base TV programs
+#define VAR_SECRET_BASE_IS_NOT_LOCAL         0x40F0 // Set to TRUE while in another player's secret base.
 #define VAR_DAILY_BP                         0x40F1
-#define VAR_0x40F2                           0x40F2
-#define VAR_0x40F3                           0x40F3
-#define VAR_0x40F4                           0x40F4
-#define VAR_0x40F5                           0x40F5
-#define VAR_0x40F6                           0x40F6
+#define VAR_WALLY_CALL_STEP_COUNTER          0x40F2
+#define VAR_WINONA_CALL_STEP_COUNTER         0x40F3
+#define VAR_ROXANNE_CALL_STEP_COUNTER        0x40F4
+#define VAR_SCOTT_CALL_STEP_COUNTER          0x40F5
+#define VAR_RIVAL_RAYQUAZA_CALL_STEP_COUNTER 0x40F6
 #define VAR_UNUSED_0x40F7                    0x40F7 // Unused Var
 #define VAR_UNUSED_0x40F8                    0x40F8 // Unused Var
 #define VAR_UNUSED_0x40F9                    0x40F9 // Unused Var
@@ -296,7 +296,7 @@
 #define VAR_CONTEST_CATEGORY       0x8011
 #define VAR_MON_BOX_ID             0x8012
 #define VAR_MON_BOX_POS            0x8013
-#define VAR_0x8014                 0x8014
+#define VAR_UNUSED_0x8014          0x8014
 #define VAR_NEVER_READ_0x8015      0x8015 // Written to, but never read
 
 #endif // GUARD_CONSTANTS_VARS_H
