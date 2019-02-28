@@ -572,7 +572,7 @@ PetalburgCity_EventScript_1DC6E9:: @ 81DC6E9
 	call_if_eq PetalburgCity_EventScript_1DC7B2
 	compare VAR_0x8008, 3
 	call_if_eq PetalburgCity_EventScript_1DC7C4
-	setvar VAR_0x40C9, 1
+	setvar VAR_SCOTT_PETALBURG_ENCOUNTER, 1
 	removeobject 9
 	releaseall
 	end

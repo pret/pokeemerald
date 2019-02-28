@@ -217,7 +217,7 @@
 #define VAR_STEVENS_HOUSE_STATE              0x40C6
 #define VAR_OLDALE_STATE                     0x40C7
 #define VAR_JAGGED_PASS_STATE                0x40C8
-#define VAR_0x40C9                           0x40C9
+#define VAR_SCOTT_PETALBURG_ENCOUNTER        0x40C9
 #define VAR_SKY_PILLAR_STATE                 0x40CA
 #define VAR_ROUTE_111_STATE                  0x40CB
 #define VAR_FOSSIL_MANIAC_STATE              0x40CC
@@ -276,27 +276,27 @@
 #define SPECIAL_VARS_START 0x8000
 // special vars
 // They are commonly used as parameters to commands, or return values from commands.
-#define VAR_0x8000                 0x8000
-#define VAR_0x8001                 0x8001
-#define VAR_0x8002                 0x8002
-#define VAR_0x8003                 0x8003
-#define VAR_0x8004                 0x8004
-#define VAR_0x8005                 0x8005
-#define VAR_0x8006                 0x8006
-#define VAR_0x8007                 0x8007
-#define VAR_0x8008                 0x8008
-#define VAR_0x8009                 0x8009
-#define VAR_0x800A                 0x800A
-#define VAR_0x800B                 0x800B
-#define VAR_FACING                 0x800C
-#define VAR_RESULT                 0x800D
-#define VAR_ITEM_ID                0x800E
-#define VAR_LAST_TALKED            0x800F
-#define VAR_CONTEST_RANK           0x8010
-#define VAR_CONTEST_CATEGORY       0x8011
-#define VAR_MON_BOX_ID             0x8012
-#define VAR_MON_BOX_POS            0x8013
-#define VAR_UNUSED_0x8014          0x8014
-#define VAR_NEVER_READ_0x8015      0x8015 // Written to, but never read
+#define VAR_0x8000                    0x8000
+#define VAR_0x8001                    0x8001
+#define VAR_0x8002                    0x8002
+#define VAR_0x8003                    0x8003
+#define VAR_0x8004                    0x8004
+#define VAR_0x8005                    0x8005
+#define VAR_0x8006                    0x8006
+#define VAR_0x8007                    0x8007
+#define VAR_0x8008                    0x8008
+#define VAR_0x8009                    0x8009
+#define VAR_0x800A                    0x800A
+#define VAR_0x800B                    0x800B
+#define VAR_FACING                    0x800C
+#define VAR_RESULT                    0x800D
+#define VAR_ITEM_ID                   0x800E
+#define VAR_LAST_TALKED               0x800F
+#define VAR_CONTEST_RANK              0x8010
+#define VAR_CONTEST_CATEGORY          0x8011
+#define VAR_MON_BOX_ID                0x8012
+#define VAR_MON_BOX_POS               0x8013
+#define VAR_UNUSED_0x8014             0x8014
+#define VAR_TRAINER_BATTLE_OPPONENT_A 0x8015 // Alias of gTrainerBattleOpponent_A
 
 #endif // GUARD_CONSTANTS_VARS_H
