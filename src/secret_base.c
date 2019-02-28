@@ -552,7 +552,7 @@ void sub_80E933C(void)
                 metatile = MapGridGetMetatileBehaviorAt(gSpecialVar_0x8006 + 7, gSpecialVar_0x8007 + 7);
                 if (MetatileBehavior_IsSecretBaseLargeMatEdge(metatile) == TRUE || MetatileBehavior_IsLargeMatCenter(metatile) == TRUE)
                 {
-                    gSpecialVar_Result = gMapHeader.events->eventObjects[objIdx].graphicsId + VAR_0x3F20;
+                    gSpecialVar_Result = gMapHeader.events->eventObjects[objIdx].graphicsId + UNKNOWN_VAR_OFFSET_3F20;
                     VarSet(gSpecialVar_Result, gDecorations[roomDecor[decorIdx]].tiles[0]);
                     gSpecialVar_Result = gMapHeader.events->eventObjects[objIdx].localId;
                     FlagClear(gSpecialVar_0x8004 + 0xAE);

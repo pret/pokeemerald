@@ -1,7 +1,7 @@
 #ifndef GUARD_CONSTANTS_VARS_H
 #define GUARD_CONSTANTS_VARS_H
 
-#define VAR_0x3F20                 0x3F20
+#define UNKNOWN_VAR_OFFSET_3F20 0x3F20
 
 #define VARS_START 0x4000
 
