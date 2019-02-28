@@ -16,6 +16,7 @@
 #include "constants/trainers.h"
 #include "constants/vars.h"
 #include "constants/weather.h"
+#include "constants/trainer_hill.h"
 	.include "asm/macros.inc"
 	.include "asm/macros/event.inc"
 	.include "constants/constants.inc"
@@ -2758,7 +2759,7 @@ EventScript_2736F8:: @ 82736F8
 	goto_if_eq BattleFrontier_BattlePyramidTop_EventScript_252B42
 	compare VAR_RESULT, 2
 	goto_if_eq BattleFrontier_BattlePyramidTop_EventScript_252B42
-	setvar VAR_0x8004, 10
+	setvar VAR_0x8004, TRAINER_HILL_FUNC_10
 	special CallTrainerHillFunction
 	compare VAR_RESULT, 1
 	goto_if_eq TrainerHill_1F_EventScript_2C83C9
@@ -6925,7 +6926,7 @@ TrainerHill_3F_MapScript1_2C8336: @ 82C8336
 TrainerHill_4F_MapScript1_2C8336: @ 82C8336
 TrainerHill_Roof_MapScript1_2C8336: @ 82C8336
 	setvar VAR_TEMP_2, 0
-	setvar VAR_0x8004, 4
+	setvar VAR_0x8004, TRAINER_HILL_FUNC_4
 	special CallTrainerHillFunction
 	setvar VAR_0x8004, 1
 	setvar VAR_0x8005, 5
@@ -6958,7 +6959,7 @@ TrainerHill_Roof_MapScript2_2C8381: @ 82C8381
 
 EventScript_TrainerHillTimer:: @ 82C8393
 	lockall
-	setvar VAR_0x8004, 7
+	setvar VAR_0x8004, TRAINER_HILL_FUNC_7
 	special CallTrainerHillFunction
 	msgbox TrainerHill_Entrance_Text_268D47, MSGBOX_DEFAULT
 	releaseall
@@ -6966,7 +6967,7 @@ EventScript_TrainerHillTimer:: @ 82C8393
 
 TrainerHill_1F_EventScript_2C83A6:: @ 82C83A6
 	setvar VAR_TEMP_2, 1
-	setvar VAR_0x8004, 9
+	setvar VAR_0x8004, TRAINER_HILL_FUNC_9
 	special CallTrainerHillFunction
 	compare VAR_RESULT, 1
 	goto_if_eq TrainerHill_1F_EventScript_2C83BF
@@ -6978,9 +6979,9 @@ TrainerHill_1F_EventScript_2C83BF:: @ 82C83BF
 	end
 
 TrainerHill_1F_EventScript_2C83C9:: @ 82C83C9
-	setvar VAR_0x8004, 12
+	setvar VAR_0x8004, TRAINER_HILL_FUNC_12
 	special CallTrainerHillFunction
-	setvar VAR_0x8004, 5
+	setvar VAR_0x8004, TRAINER_HILL_FUNC_5
 	special CallTrainerHillFunction
 	setvar VAR_TEMP_1, 1
 	end
@@ -6998,7 +6999,7 @@ TrainerHill_1F_Movement_2C83EE:: @ 82C83EE
 
 EventScript_2C83F0:: @ 82C83F0
 	trainerbattle TRAINER_BATTLE_12, TRAINER_PHILLIP, 0, BattleFacility_TrainerBattle_PlaceholderText, BattleFacility_TrainerBattle_PlaceholderText
-	setvar VAR_0x8004, 11
+	setvar VAR_0x8004, TRAINER_HILL_FUNC_11
 	special CallTrainerHillFunction
 	waitmessage
 	waitbuttonpress

@@ -659,10 +659,10 @@ static void UpdateSaveAddresses(void)
 u8 HandleSavingData(u8 saveType)
 {
     u8 i;
-    u32 *backupVar = gUnknown_0203CF5C;
+    u32 *backupVar = gVBlankCounterPointer;
     u8 *tempAddr;
 
-    gUnknown_0203CF5C = NULL;
+    gVBlankCounterPointer = NULL;
     UpdateSaveAddresses();
     switch (saveType)
     {
@@ -705,7 +705,7 @@ u8 HandleSavingData(u8 saveType)
         save_write_to_flash(0xFFFF, gRamSaveSectionLocations);
         break;
     }
-    gUnknown_0203CF5C = backupVar;
+    gVBlankCounterPointer = backupVar;
     return 0;
 }
 

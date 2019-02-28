@@ -92,15 +92,15 @@ struct TrHillStruct2
 // EWRAM
 static EWRAM_DATA struct TrHillStruct2 *sHillData = NULL;
 static EWRAM_DATA struct TrHillRoomTrainers *sRoomTrainers = NULL;
-EWRAM_DATA u32 *gUnknown_0203CF5C = NULL;
+EWRAM_DATA u32 *gVBlankCounterPointer = NULL;
 
 // This file's functions.
-static void sub_81D581C(void);
+static void TrainerHillStartChallenge(void);
 static void sub_81D58D8(void);
 static void sub_81D5924(void);
 static void sub_81D59D0(void);
-static void sub_81D5A70(void);
-static void sub_81D5AB4(void);
+static void TrainerHillResumeTimer(void);
+static void TrainerHillSetPlayerLost(void);
 static void sub_81D5AD0(void);
 static void sub_81D5B2C(void);
 static void sub_81D5BBC(void);
@@ -263,12 +263,12 @@ static const u8 *const sFloorStrings[] =
 
 static void (* const sHillFunctions[])(void) =
 {
-    sub_81D581C,
+    TrainerHillStartChallenge,
     sub_81D58D8,
     sub_81D5924,
     sub_81D59D0,
-    sub_81D5A70,
-    sub_81D5AB4,
+    TrainerHillResumeTimer,
+    TrainerHillSetPlayerLost,
     sub_81D5AD0,
     sub_81D5B2C,
     sub_81D5BBC,
@@ -371,7 +371,7 @@ void InitTrainerHillBattleStruct(void)
         }
         sRoomTrainers->facilityClass[i] = sHillData->tag.floors[sHillData->floorId].trainers[i].facilityClass;
     }
-    sub_80008DC(&gSaveBlock1Ptr->trainerHill.field_3D64);
+    SetVBlankCounterPointer(&gSaveBlock1Ptr->trainerHill.timer);
     FreeDataStruct();
 }
 
@@ -425,7 +425,7 @@ void CopyTrainerHillTrainerText(u8 which, u16 trainerId)
     FreeDataStruct();
 }
 
-static void sub_81D581C(void)
+static void TrainerHillStartChallenge(void)
 {
     nullsub_2();
     if (!sub_81D3B34())
@@ -434,8 +434,8 @@ static void sub_81D581C(void)
         gSaveBlock1Ptr->trainerHill.field_3D6E_0f = 0;
 
     gSaveBlock1Ptr->trainerHill.field_3D6C = 0;
-    sub_80008DC(&gSaveBlock1Ptr->trainerHill.field_3D64);
-    gSaveBlock1Ptr->trainerHill.field_3D64 = 0;
+    SetVBlankCounterPointer(&gSaveBlock1Ptr->trainerHill.timer);
+    gSaveBlock1Ptr->trainerHill.timer = 0;
     gSaveBlock1Ptr->trainerHill.field_3D6E_0c = 0;
     gSaveBlock1Ptr->trainerHill.field_3D6E_0b = 0;
     gSaveBlock1Ptr->trainerHill.field_3D6E_0e = 0;
@@ -446,7 +446,7 @@ static void sub_81D581C(void)
 
 static void sub_81D58D8(void)
 {
-    sub_80008E8();
+    ClearVBlankCounterPointer();
     gSpecialVar_Result = 0;
     if (gSaveBlock1Ptr->trainerHill.field_3D6E_0c)
         gSpecialVar_Result++;
@@ -483,9 +483,9 @@ static void sub_81D59D0(void)
     {
         gSpecialVar_Result = 2;
     }
-    else if (GetTimerValue(&gSaveBlock1Ptr->trainerHill.field_3D68) > gSaveBlock1Ptr->trainerHill.field_3D64)
+    else if (GetTimerValue(&gSaveBlock1Ptr->trainerHill.field_3D68) > gSaveBlock1Ptr->trainerHill.timer)
     {
-        SetTimerValue(&gSaveBlock1Ptr->trainerHill.field_3D68, gSaveBlock1Ptr->trainerHill.field_3D64);
+        SetTimerValue(&gSaveBlock1Ptr->trainerHill.field_3D68, gSaveBlock1Ptr->trainerHill.timer);
         gSaveBlock1Ptr->trainerHillTimes[gSaveBlock1Ptr->trainerHill.tag] = gSaveBlock1Ptr->trainerHill.field_3D68;
         gSpecialVar_Result = 0;
     }
@@ -497,27 +497,27 @@ static void sub_81D59D0(void)
     gSaveBlock1Ptr->trainerHill.field_3D6E_0b = 1;
 }
 
-static void sub_81D5A70(void)
+static void TrainerHillResumeTimer(void)
 {
     if (!gSaveBlock1Ptr->trainerHill.field_3D6E_0c)
     {
-        if (gSaveBlock1Ptr->trainerHill.field_3D64 >= HILL_MAX_TIME)
-            gSaveBlock1Ptr->trainerHill.field_3D64 = HILL_MAX_TIME;
+        if (gSaveBlock1Ptr->trainerHill.timer >= HILL_MAX_TIME)
+            gSaveBlock1Ptr->trainerHill.timer = HILL_MAX_TIME;
         else
-            sub_80008DC(&gSaveBlock1Ptr->trainerHill.field_3D64);
+            SetVBlankCounterPointer(&gSaveBlock1Ptr->trainerHill.timer);
     }
 }
 
-static void sub_81D5AB4(void)
+static void TrainerHillSetPlayerLost(void)
 {
-    gSaveBlock1Ptr->trainerHill.field_3D6E_0d = 1;
+    gSaveBlock1Ptr->trainerHill.hasLost = 1;
 }
 
 static void sub_81D5AD0(void)
 {
-    if (gSaveBlock1Ptr->trainerHill.field_3D6E_0d)
+    if (gSaveBlock1Ptr->trainerHill.hasLost)
     {
-        gSaveBlock1Ptr->trainerHill.field_3D6E_0d = 0;
+        gSaveBlock1Ptr->trainerHill.hasLost = 0;
         gSpecialVar_Result = 0;
     }
     else if (gSaveBlock1Ptr->trainerHill.field_3D6E_0e)
@@ -535,7 +535,7 @@ static void sub_81D5B2C(void)
 {
     s32 total, minutes, secondsWhole, secondsFraction;
 
-    total = gSaveBlock1Ptr->trainerHill.field_3D64;
+    total = gSaveBlock1Ptr->trainerHill.timer;
     if (total >= HILL_MAX_TIME)
         total = HILL_MAX_TIME;
 
@@ -1048,7 +1048,7 @@ bool32 sub_81D6534(void)
 
 static void sub_81D6568(void)
 {
-    if (gSaveBlock1Ptr->trainerHill.field_3D6E_0d)
+    if (gSaveBlock1Ptr->trainerHill.hasLost)
         gSpecialVar_Result = 0;
     else
         gSpecialVar_Result = 1;
@@ -1103,7 +1103,7 @@ static u16 sub_81D6640(void)
         i = (i + 1) % 10;
 
     ptr = gUnknown_0862A5CC[var2][i];
-    minutes = (signed)(gSaveBlock1Ptr->trainerHill.field_3D64) / (60 * 60);
+    minutes = (signed)(gSaveBlock1Ptr->trainerHill.timer) / (60 * 60);
     if (minutes < 12)
         id = 0;
     else if (minutes < 13)

@@ -163,7 +163,7 @@ static void UpdateLinkAndCallCallbacks(void)
 static void InitMainCallbacks(void)
 {
     gMain.vblankCounter1 = 0;
-    gUnknown_0203CF5C = NULL;
+    gVBlankCounterPointer = NULL;
     gMain.vblankCounter2 = 0;
     gMain.callback1 = NULL;
     SetMainCallback2(CB2_InitCopyrightScreenAfterBootup);
@@ -324,8 +324,8 @@ static void VBlankIntr(void)
 
     gMain.vblankCounter1++;
 
-    if (gUnknown_0203CF5C && *gUnknown_0203CF5C < 0xFFFFFFFF)
-        (*gUnknown_0203CF5C)++;
+    if (gVBlankCounterPointer && *gVBlankCounterPointer < 0xFFFFFFFF)
+        (*gVBlankCounterPointer)++;
 
     if (gMain.vblankCallback)
         gMain.vblankCallback();
@@ -393,14 +393,14 @@ static void WaitForVBlank(void)
         ;
 }
 
-void sub_80008DC(u32 *var)
+void SetVBlankCounterPointer(u32 *var)
 {
-    gUnknown_0203CF5C = var;
+    gVBlankCounterPointer = var;
 }
 
-void sub_80008E8(void)
+void ClearVBlankCounterPointer(void)
 {
-    gUnknown_0203CF5C = NULL;
+    gVBlankCounterPointer = NULL;
 }
 
 void DoSoftReset(void)
