@@ -6155,6 +6155,23 @@ BattleScript_MoveUsedPsychicTerrainPrevents::
 	waitmessage 0x40
 	goto BattleScript_MoveEnd
 
+BattleScript_GrassyTerrainLoop::
+	copyarraywithindex gBattlerAttacker, gBattlerByTurnOrder, gBattleCommunication, 0x1
+	checkgrassyterrainheal BS_ATTACKER, BattleScript_GrassyTerrainLoopIncrement
+	printstring STRINGID_GRASSYTERRAINHEALS
+	waitmessage 0x40
+BattleScript_GrassyTerrainHpChange:
+	orword gHitMarker, HITMARKER_x20 | HITMARKER_IGNORE_SUBSTITUTE | HITMARKER_x100000 | HITMARKER_GRUDGE
+	healthbarupdate BS_ATTACKER
+	datahpupdate BS_ATTACKER
+BattleScript_GrassyTerrainLoopIncrement::
+	jumpifbyte CMP_NOT_EQUAL, gBattleOutcome, 0, BattleScript_GrassyTerrainLoopEnd
+	addbyte gBattleCommunication, 0x1
+	jumpifbytenotequal gBattleCommunication, gBattlersCount, BattleScript_GrassyTerrainLoop
+BattleScript_GrassyTerrainLoopEnd::
+	bicword gHitMarker, HITMARKER_x20 | HITMARKER_IGNORE_SUBSTITUTE | HITMARKER_x100000 | HITMARKER_GRUDGE
+	end2
+    
 BattleScript_AbilityNoSpecificStatLoss::
 	pause 0x20
 	call BattleScript_AbilityPopUp

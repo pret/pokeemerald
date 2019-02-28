@@ -4339,7 +4339,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
         .flags = FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGSROCK_AFFECTED | FLAG_IRON_FIST_BOOST,
-        .split = SPLIT_SPECIAL,
+        .split = SPLIT_PHYSICAL,
     },
 
     [MOVE_ASTONISH] =
@@ -9003,7 +9003,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
         .accuracy = 0,
         .pp = 10,
         .secondaryEffectChance = 0,
-        .target = MOVE_TARGET_SELECTED,
+        .target = MOVE_TARGET_USER,
         .priority = 0,
         .flags = 0,
         .split = SPLIT_STATUS,
