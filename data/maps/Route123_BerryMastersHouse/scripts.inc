@@ -1,5 +1,5 @@
 Route123_BerryMastersHouse_MapScripts:: @ 826F83B
-	map_script 3, Route123_BerryMastersHouse_MapScript1_26F841
+	map_script MAP_SCRIPT_ON_TRANSITION, Route123_BerryMastersHouse_MapScript1_26F841
 	.byte 0
 
 Route123_BerryMastersHouse_MapScript1_26F841: @ 826F841
@@ -17,7 +17,7 @@ Route123_BerryMastersHouse_EventScript_26F845:: @ 826F845
 	addvar VAR_RESULT, 133
 	giveitem_std VAR_RESULT
 	compare VAR_RESULT, 0
-	goto_if_eq Route123_BerryMastersHouse_EventScript_272054
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_DAILY_BERRY_MASTER_RECEIVED_BERRY
 	msgbox Route123_BerryMastersHouse_Text_2A7428, MSGBOX_DEFAULT
 	random 10
@@ -25,7 +25,7 @@ Route123_BerryMastersHouse_EventScript_26F845:: @ 826F845
 	addvar VAR_RESULT, 133
 	giveitem_std VAR_RESULT
 	compare VAR_RESULT, 0
-	goto_if_eq Route123_BerryMastersHouse_EventScript_272054
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	msgbox Route123_BerryMastersHouse_Text_2A7445, MSGBOX_DEFAULT
 	release
 	end
@@ -41,8 +41,8 @@ Route123_BerryMastersHouse_EventScript_26F8C0:: @ 826F8C0
 	dotimebasedevents
 	goto_if_set FLAG_DAILY_BERRY_MASTERS_WIFE, Route123_BerryMastersHouse_EventScript_26FA6F
 	msgbox Route123_BerryMastersHouse_Text_2A74E6, MSGBOX_DEFAULT
-	setvar VAR_0x8004, 13
-	call Route123_BerryMastersHouse_EventScript_271E7C
+	setvar VAR_0x8004, EASY_CHAT_TYPE_GOOD_SAYING
+	call Common_ShowEasyChatScreen
 	lock
 	faceplayer
 	compare VAR_RESULT, 1
@@ -78,7 +78,7 @@ Route123_BerryMastersHouse_EventScript_26F94C:: @ 826F94C
 	addvar VAR_RESULT, 133
 	giveitem_std VAR_RESULT
 	compare VAR_RESULT, 0
-	goto_if_eq Route123_BerryMastersHouse_EventScript_272054
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	goto Route123_BerryMastersHouse_EventScript_26FA79
 	release
 	end
@@ -88,7 +88,7 @@ Route123_BerryMastersHouse_EventScript_26F97A:: @ 826F97A
 	msgbox Route123_BerryMastersHouse_Text_2A7583, MSGBOX_DEFAULT
 	giveitem_std ITEM_SPELON_BERRY
 	compare VAR_RESULT, 0
-	goto_if_eq Route123_BerryMastersHouse_EventScript_272054
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_SPELON_BERRY
 	goto Route123_BerryMastersHouse_EventScript_26FA79
 	end
@@ -98,7 +98,7 @@ Route123_BerryMastersHouse_EventScript_26F9AB:: @ 826F9AB
 	msgbox Route123_BerryMastersHouse_Text_2A7583, MSGBOX_DEFAULT
 	giveitem_std ITEM_PAMTRE_BERRY
 	compare VAR_RESULT, 0
-	goto_if_eq Route123_BerryMastersHouse_EventScript_272054
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_PAMTRE_BERRY
 	goto Route123_BerryMastersHouse_EventScript_26FA79
 	end
@@ -108,7 +108,7 @@ Route123_BerryMastersHouse_EventScript_26F9DC:: @ 826F9DC
 	msgbox Route123_BerryMastersHouse_Text_2A7583, MSGBOX_DEFAULT
 	giveitem_std ITEM_WATMEL_BERRY
 	compare VAR_RESULT, 0
-	goto_if_eq Route123_BerryMastersHouse_EventScript_272054
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_WATMEL_BERRY
 	goto Route123_BerryMastersHouse_EventScript_26FA79
 	end
@@ -118,7 +118,7 @@ Route123_BerryMastersHouse_EventScript_26FA0D:: @ 826FA0D
 	msgbox Route123_BerryMastersHouse_Text_2A7583, MSGBOX_DEFAULT
 	giveitem_std ITEM_DURIN_BERRY
 	compare VAR_RESULT, 0
-	goto_if_eq Route123_BerryMastersHouse_EventScript_272054
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_DURIN_BERRY
 	goto Route123_BerryMastersHouse_EventScript_26FA79
 	end
@@ -128,7 +128,7 @@ Route123_BerryMastersHouse_EventScript_26FA3E:: @ 826FA3E
 	msgbox Route123_BerryMastersHouse_Text_2A7583, MSGBOX_DEFAULT
 	giveitem_std ITEM_BELUE_BERRY
 	compare VAR_RESULT, 0
-	goto_if_eq Route123_BerryMastersHouse_EventScript_272054
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_BELUE_BERRY
 	goto Route123_BerryMastersHouse_EventScript_26FA79
 	end

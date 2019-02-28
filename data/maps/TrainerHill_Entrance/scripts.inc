@@ -1,9 +1,9 @@
 TrainerHill_Entrance_MapScripts:: @ 82680AC
-	map_script 5, TrainerHill_Entrance_MapScript1_2680D0
-	map_script 7, TrainerHill_Entrance_MapScript1_26811B
-	map_script 3, TrainerHill_Entrance_MapScript1_2680C6
-	map_script 1, TrainerHill_Entrance_MapScript1_268128
-	map_script 2, TrainerHill_Entrance_MapScript2_26813E
+	map_script MAP_SCRIPT_ON_RESUME, TrainerHill_Entrance_MapScript1_2680D0
+	map_script MAP_SCRIPT_ON_RETURN_TO_FIELD, TrainerHill_Entrance_MapScript1_26811B
+	map_script MAP_SCRIPT_ON_TRANSITION, TrainerHill_Entrance_MapScript1_2680C6
+	map_script MAP_SCRIPT_ON_LOAD, TrainerHill_Entrance_MapScript1_268128
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, TrainerHill_Entrance_MapScript2_26813E
 	.byte 0
 
 TrainerHill_Entrance_MapScript1_2680C6: @ 82680C6
@@ -194,7 +194,7 @@ TrainerHill_Entrance_EventScript_26832E:: @ 826832E
 	setvar VAR_0x8004, 14
 	special CallTrainerHillFunction
 	setvar VAR_TEMP_5, 1
-	call TrainerHill_Entrance_EventScript_27134F
+	call Common_EventScript_SaveGame
 	compare VAR_RESULT, 0
 	goto_if_eq TrainerHill_Entrance_EventScript_26835C
 	setvar VAR_0x8004, 14

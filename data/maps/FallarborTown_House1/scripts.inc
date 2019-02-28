@@ -20,7 +20,7 @@ FallarborTown_House1_EventScript_200F38:: @ 8200F38
 	msgbox FallarborTown_House1_Text_201159, MSGBOX_DEFAULT
 	giveitem_std ITEM_TM27
 	compare VAR_RESULT, 0
-	goto_if_eq FallarborTown_House1_EventScript_272054
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	setvar VAR_0x8004, 280
 	call FallarborTown_House1_EventScript_2723E4
 	setflag FLAG_RECEIVED_TM27

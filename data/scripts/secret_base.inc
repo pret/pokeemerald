@@ -660,7 +660,7 @@ SecretBase_RedCave1_EventScript_275DD6:: @ 8275DD6
 	goto_if_eq SecretBase_RedCave1_EventScript_275E2F
 	setvar VAR_RESULT, 1
 	special sub_80EA30C
-	call SecretBase_RedCave1_EventScript_27134F
+	call Common_EventScript_SaveGame
 	compare VAR_RESULT, 0
 	goto_if_eq SecretBase_RedCave1_EventScript_275E2F
 	msgbox SecretBase_RedCave1_Text_274939, MSGBOX_DEFAULT
@@ -696,7 +696,7 @@ SecretBase_RedCave1_EventScript_275E4E:: @ 8275E4E
 	goto_if_eq SecretBase_RedCave1_EventScript_275EA7
 	setvar VAR_RESULT, 1
 	special sub_80EA30C
-	call SecretBase_RedCave1_EventScript_27134F
+	call Common_EventScript_SaveGame
 	compare VAR_RESULT, 0
 	goto_if_eq SecretBase_RedCave1_EventScript_275EA7
 	msgbox SecretBase_RedCave1_Text_274CB0, MSGBOX_DEFAULT
@@ -732,7 +732,7 @@ SecretBase_RedCave1_EventScript_275EC6:: @ 8275EC6
 	goto_if_eq SecretBase_RedCave1_EventScript_275F1F
 	setvar VAR_RESULT, 1
 	special sub_80EA30C
-	call SecretBase_RedCave1_EventScript_27134F
+	call Common_EventScript_SaveGame
 	compare VAR_RESULT, 0
 	goto_if_eq SecretBase_RedCave1_EventScript_275F1F
 	msgbox SecretBase_RedCave1_Text_274FCA, MSGBOX_DEFAULT
@@ -768,7 +768,7 @@ SecretBase_RedCave1_EventScript_275F3E:: @ 8275F3E
 	goto_if_eq SecretBase_RedCave1_EventScript_275F97
 	setvar VAR_RESULT, 1
 	special sub_80EA30C
-	call SecretBase_RedCave1_EventScript_27134F
+	call Common_EventScript_SaveGame
 	compare VAR_RESULT, 0
 	goto_if_eq SecretBase_RedCave1_EventScript_275F97
 	msgbox SecretBase_RedCave1_Text_275315, MSGBOX_DEFAULT
@@ -804,7 +804,7 @@ SecretBase_RedCave1_EventScript_275FB6:: @ 8275FB6
 	goto_if_eq SecretBase_RedCave1_EventScript_27600F
 	setvar VAR_RESULT, 1
 	special sub_80EA30C
-	call SecretBase_RedCave1_EventScript_27134F
+	call Common_EventScript_SaveGame
 	compare VAR_RESULT, 0
 	goto_if_eq SecretBase_RedCave1_EventScript_27600F
 	msgbox SecretBase_RedCave1_Text_275679, MSGBOX_DEFAULT
@@ -840,7 +840,7 @@ SecretBase_RedCave1_EventScript_27602E:: @ 827602E
 	goto_if_eq SecretBase_RedCave1_EventScript_276087
 	setvar VAR_RESULT, 1
 	special sub_80EA30C
-	call SecretBase_RedCave1_EventScript_27134F
+	call Common_EventScript_SaveGame
 	compare VAR_RESULT, 0
 	goto_if_eq SecretBase_RedCave1_EventScript_276087
 	msgbox SecretBase_RedCave1_Text_274AFA, MSGBOX_DEFAULT
@@ -876,7 +876,7 @@ SecretBase_RedCave1_EventScript_2760A6:: @ 82760A6
 	goto_if_eq SecretBase_RedCave1_EventScript_2760FF
 	setvar VAR_RESULT, 1
 	special sub_80EA30C
-	call SecretBase_RedCave1_EventScript_27134F
+	call Common_EventScript_SaveGame
 	compare VAR_RESULT, 0
 	goto_if_eq SecretBase_RedCave1_EventScript_2760FF
 	msgbox SecretBase_RedCave1_Text_274E41, MSGBOX_DEFAULT
@@ -912,7 +912,7 @@ SecretBase_RedCave1_EventScript_27611E:: @ 827611E
 	goto_if_eq SecretBase_RedCave1_EventScript_276177
 	setvar VAR_RESULT, 1
 	special sub_80EA30C
-	call SecretBase_RedCave1_EventScript_27134F
+	call Common_EventScript_SaveGame
 	compare VAR_RESULT, 0
 	goto_if_eq SecretBase_RedCave1_EventScript_276177
 	msgbox SecretBase_RedCave1_Text_2751AF, MSGBOX_DEFAULT
@@ -948,7 +948,7 @@ SecretBase_RedCave1_EventScript_276196:: @ 8276196
 	goto_if_eq SecretBase_RedCave1_EventScript_2761EF
 	setvar VAR_RESULT, 1
 	special sub_80EA30C
-	call SecretBase_RedCave1_EventScript_27134F
+	call Common_EventScript_SaveGame
 	compare VAR_RESULT, 0
 	goto_if_eq SecretBase_RedCave1_EventScript_2761EF
 	msgbox SecretBase_RedCave1_Text_2754B2, MSGBOX_DEFAULT
@@ -984,7 +984,7 @@ SecretBase_RedCave1_EventScript_27620E:: @ 827620E
 	goto_if_eq SecretBase_RedCave1_EventScript_276267
 	setvar VAR_RESULT, 1
 	special sub_80EA30C
-	call SecretBase_RedCave1_EventScript_27134F
+	call Common_EventScript_SaveGame
 	compare VAR_RESULT, 0
 	goto_if_eq SecretBase_RedCave1_EventScript_276267
 	msgbox SecretBase_RedCave1_Text_275884, MSGBOX_DEFAULT

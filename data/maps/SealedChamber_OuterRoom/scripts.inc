@@ -1,7 +1,7 @@
 SealedChamber_OuterRoom_MapScripts:: @ 8239106
-	map_script 5, SealedChamber_OuterRoom_MapScript1_239116
-	map_script 3, SealedChamber_OuterRoom_MapScript1_239127
-	map_script 1, SealedChamber_OuterRoom_MapScript1_23912B
+	map_script MAP_SCRIPT_ON_RESUME, SealedChamber_OuterRoom_MapScript1_239116
+	map_script MAP_SCRIPT_ON_TRANSITION, SealedChamber_OuterRoom_MapScript1_239127
+	map_script MAP_SCRIPT_ON_LOAD, SealedChamber_OuterRoom_MapScript1_23912B
 	.byte 0
 
 SealedChamber_OuterRoom_MapScript1_239116: @ 8239116

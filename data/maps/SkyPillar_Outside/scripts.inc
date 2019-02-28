@@ -1,7 +1,7 @@
 SkyPillar_Outside_MapScripts:: @ 82392A8
-	map_script 3, SkyPillar_Outside_MapScript1_2392B8
-	map_script 1, SkyPillar_Outside_MapScript1_2392DD
-	map_script 2, SkyPillar_Outside_MapScript2_2392FA
+	map_script MAP_SCRIPT_ON_TRANSITION, SkyPillar_Outside_MapScript1_2392B8
+	map_script MAP_SCRIPT_ON_LOAD, SkyPillar_Outside_MapScript1_2392DD
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, SkyPillar_Outside_MapScript2_2392FA
 	.byte 0
 
 SkyPillar_Outside_MapScript1_2392B8: @ 82392B8
@@ -16,7 +16,7 @@ SkyPillar_Outside_EventScript_2392CF:: @ 82392CF
 	return
 
 SkyPillar_Outside_EventScript_2392D3:: @ 82392D3
-	call_if_set FLAG_SYS_WEATHER_CTRL, SkyPillar_Outside_EventScript_27207A
+	call_if_set FLAG_SYS_WEATHER_CTRL, Common_EventScript_SetWeather15
 	return
 
 SkyPillar_Outside_MapScript1_2392DD: @ 82392DD
@@ -36,7 +36,7 @@ SkyPillar_Outside_EventScript_239304:: @ 8239304
 	lockall
 	applymovement 1, SkyPillar_Outside_Movement_2393D3
 	waitmovement 0
-	applymovement EVENT_OBJ_ID_PLAYER, SkyPillar_Outside_Movement_2725A4
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceLeft
 	waitmovement 0
 	msgbox SkyPillar_Outside_Text_239416, MSGBOX_DEFAULT
 	closemessage
@@ -60,19 +60,19 @@ SkyPillar_Outside_EventScript_239304:: @ 8239304
 	special sub_8139560
 	waitstate
 	delay 20
-	applymovement 1, SkyPillar_Outside_Movement_2725A4
+	applymovement 1, Common_Movement_WalkInPlaceLeft
 	waitmovement 0
 	delay 10
-	applymovement 1, SkyPillar_Outside_Movement_2725A8
+	applymovement 1, Common_Movement_WalkInPlaceRight
 	waitmovement 0
 	delay 20
-	applymovement 1, SkyPillar_Outside_Movement_2725AA
+	applymovement 1, Common_Movement_WalkInPlaceDown
 	waitmovement 0
 	delay 30
 	msgbox SkyPillar_Outside_Text_23950C, MSGBOX_DEFAULT
 	closemessage
 	setflag FLAG_SYS_WEATHER_CTRL
-	setweather WEATHER_15
+	setweather WEATHER_ALTERNATING
 	doweather
 	special WaitWeather
 	waitstate

@@ -1,6 +1,6 @@
 EverGrandeCity_HallOfFame_MapScripts:: @ 822982C
-	map_script 2, EverGrandeCity_HallOfFame_MapScript2_229846
-	map_script 4, EverGrandeCity_HallOfFame_MapScript2_229837
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, EverGrandeCity_HallOfFame_MapScript2_229846
+	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, EverGrandeCity_HallOfFame_MapScript2_229837
 	.byte 0
 
 EverGrandeCity_HallOfFame_MapScript2_229837: @ 8229837
@@ -20,8 +20,8 @@ EverGrandeCity_HallOfFame_EventScript_229850:: @ 8229850
 	applymovement 1, EverGrandeCity_HallOfFame_Movement_229901
 	applymovement EVENT_OBJ_ID_PLAYER, EverGrandeCity_HallOfFame_Movement_229901
 	waitmovement 0
-	applymovement 1, EverGrandeCity_HallOfFame_Movement_2725A8
-	applymovement EVENT_OBJ_ID_PLAYER, EverGrandeCity_HallOfFame_Movement_2725A4
+	applymovement 1, Common_Movement_WalkInPlaceRight
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceLeft
 	waitmovement 0
 	msgbox EverGrandeCity_HallOfFame_Text_22990E, MSGBOX_DEFAULT
 	closemessage
@@ -29,13 +29,13 @@ EverGrandeCity_HallOfFame_EventScript_229850:: @ 8229850
 	applymovement EVENT_OBJ_ID_PLAYER, EverGrandeCity_HallOfFame_Movement_229908
 	waitmovement 0
 	delay 20
-	applymovement 1, EverGrandeCity_HallOfFame_Movement_2725A8
-	applymovement EVENT_OBJ_ID_PLAYER, EverGrandeCity_HallOfFame_Movement_2725A4
+	applymovement 1, Common_Movement_WalkInPlaceRight
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceLeft
 	waitmovement 0
 	msgbox EverGrandeCity_HallOfFame_Text_2299A3, MSGBOX_DEFAULT
 	closemessage
-	applymovement 1, EverGrandeCity_HallOfFame_Movement_2725A6
-	applymovement EVENT_OBJ_ID_PLAYER, EverGrandeCity_HallOfFame_Movement_2725A6
+	applymovement 1, Common_Movement_WalkInPlaceUp
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceUp
 	waitmovement 0
 	delay 20
 	dofieldeffect 62

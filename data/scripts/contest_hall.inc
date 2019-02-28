@@ -1,7 +1,7 @@
 LilycoveCity_ContestLobby_EventScript_279CC5:: @ 8279CC5
 	lock
 	faceplayer
-	compare VAR_0x408A, 0
+	compare VAR_CONTEST_PRIZE_PICKUP, 0
 	goto_if_ne LilycoveCity_ContestLobby_EventScript_279D13
 	call_if_set FLAG_RECEIVED_POKEBLOCK_CASE, LilycoveCity_ContestLobby_EventScript_279CEA
 	call_if_unset FLAG_RECEIVED_POKEBLOCK_CASE, LilycoveCity_ContestLobby_EventScript_279CF3
@@ -21,7 +21,7 @@ LilycoveCity_ContestLobby_EventScript_279CF3:: @ 8279CF3
 
 LilycoveCity_ContestLobby_EventScript_279D13:: @ 8279D13
 	msgbox LilycoveCity_ContestLobby_Text_27B67B, MSGBOX_DEFAULT
-	switch VAR_0x408A
+	switch VAR_CONTEST_PRIZE_PICKUP
 	case 4, LilycoveCity_ContestLobby_EventScript_279D2C
 	end
 
@@ -29,13 +29,13 @@ LilycoveCity_ContestLobby_EventScript_279D2C:: @ 8279D2C
 	giveitem_std ITEM_LUXURY_BALL
 	compare VAR_RESULT, 0
 	goto_if_eq LilycoveCity_ContestLobby_EventScript_279D4B
-	setvar VAR_0x408A, 0
+	setvar VAR_CONTEST_PRIZE_PICKUP, 0
 	closemessage
 	release
 	end
 
 LilycoveCity_ContestLobby_EventScript_279D4B:: @ 8279D4B
-	call LilycoveCity_ContestLobby_EventScript_27205E
+	call Common_EventScript_BagIsFull
 	msgbox LilycoveCity_ContestLobby_Text_27B6E7, MSGBOX_DEFAULT
 	release
 	end
@@ -181,7 +181,7 @@ LilycoveCity_ContestLobby_EventScript_279F87:: @ 8279F87
 	msgbox LilycoveCity_ContestLobby_Text_27B5E2, MSGBOX_DEFAULT
 	closemessage
 	releaseall
-	setvar VAR_0x4086, 1
+	setvar VAR_LINK_CONTEST_ROOM_STATE, 1
 	return
 
 LinkContestRoom1_EventScript_279F97:: @ 8279F97
@@ -204,7 +204,7 @@ LinkContestRoom1_EventScript_279F97:: @ 8279F97
 	call LinkContestRoom1_EventScript_27A9D4
 	call LinkContestRoom1_EventScript_27AA1B
 	call LinkContestRoom1_EventScript_27AB36
-	setvar VAR_0x4086, 2
+	setvar VAR_LINK_CONTEST_ROOM_STATE, 2
 	return
 
 LinkContestRoom1_EventScript_279FF2:: @ 8279FF2
@@ -271,7 +271,7 @@ LinkContestRoom1_EventScript_27A097:: @ 827A097
 	return
 
 LinkContestRoom1_EventScript_27A0B1:: @ 827A0B1
-	compare VAR_0x4088, 5
+	compare VAR_CONTEST_LOCATION, 5
 	goto_if_eq LinkContestRoom1_EventScript_27A0C7
 	lockall
 	msgbox LinkContestRoom1_Text_27B711, MSGBOX_DEFAULT
@@ -391,7 +391,7 @@ LinkContestRoom1_EventScript_27A1D2:: @ 827A1D2
 	return
 
 LinkContestRoom1_EventScript_27A217:: @ 827A217
-	compare VAR_0x4088, 5
+	compare VAR_CONTEST_LOCATION, 5
 	goto_if_eq LinkContestRoom1_EventScript_27A229
 	message LinkContestRoom1_Text_27B815
 	waitmessage
@@ -419,7 +419,7 @@ LinkContestRoom1_EventScript_27A230:: @ 827A230
 	return
 
 LinkContestRoom1_EventScript_27A26C:: @ 827A26C
-	compare VAR_0x4088, 5
+	compare VAR_CONTEST_LOCATION, 5
 	goto_if_eq LinkContestRoom1_EventScript_27A280
 	msgbox LinkContestRoom1_Text_27B830, MSGBOX_DEFAULT
 	return
@@ -445,7 +445,7 @@ LinkContestRoom1_EventScript_27A297:: @ 827A297
 	return
 
 LinkContestRoom1_EventScript_27A2B9:: @ 827A2B9
-	compare VAR_0x4088, 5
+	compare VAR_CONTEST_LOCATION, 5
 	goto_if_eq LinkContestRoom1_EventScript_27A2CA
 	message LinkContestRoom1_Text_27B8F2
 	return
@@ -483,15 +483,15 @@ LinkContestRoom1_EventScript_27A2D5:: @ 827A2D5
 
 LinkContestRoom1_EventScript_27A34F:: @ 827A34F
 	special sub_80F82FC
-	compare VAR_0x4088, 1
+	compare VAR_CONTEST_LOCATION, 1
 	call_if_eq LinkContestRoom1_EventScript_27A454
-	compare VAR_0x4088, 2
+	compare VAR_CONTEST_LOCATION, 2
 	call_if_eq LinkContestRoom1_EventScript_27A4B2
-	compare VAR_0x4088, 3
+	compare VAR_CONTEST_LOCATION, 3
 	call_if_eq LinkContestRoom1_EventScript_27A510
-	compare VAR_0x4088, 4
+	compare VAR_CONTEST_LOCATION, 4
 	call_if_eq LinkContestRoom1_EventScript_27A56E
-	compare VAR_0x4088, 5
+	compare VAR_CONTEST_LOCATION, 5
 	call_if_eq LinkContestRoom1_EventScript_27A5CC
 	setvar VAR_TEMP_1, 9
 	setvar VAR_TEMP_2, 9
@@ -843,7 +843,7 @@ LinkContestRoom1_EventScript_27A801:: @ 827A801
 	return
 
 LinkContestRoom1_EventScript_27A853:: @ 827A853
-	compare VAR_0x4088, 5
+	compare VAR_CONTEST_LOCATION, 5
 	goto_if_eq LinkContestRoom1_EventScript_27A867
 	msgbox LinkContestRoom1_Text_27B904, MSGBOX_DEFAULT
 	return
@@ -893,7 +893,7 @@ LinkContestRoom1_EventScript_27A8A5:: @ 827A8A5
 	return
 
 LinkContestRoom1_EventScript_27A8FB:: @ 827A8FB
-	compare VAR_0x4088, 5
+	compare VAR_CONTEST_LOCATION, 5
 	goto_if_eq LinkContestRoom1_EventScript_27A90F
 	msgbox LinkContestRoom1_Text_27BA15, MSGBOX_DEFAULT
 	return
@@ -906,7 +906,7 @@ LinkContestRoom1_EventScript_27A90F:: @ 827A90F
 	return
 
 LinkContestRoom1_EventScript_27A91E:: @ 827A91E
-	compare VAR_0x4088, 5
+	compare VAR_CONTEST_LOCATION, 5
 	goto_if_eq LinkContestRoom1_EventScript_27A932
 	msgbox LinkContestRoom1_Text_27BA30, MSGBOX_DEFAULT
 	return
@@ -919,7 +919,7 @@ LinkContestRoom1_EventScript_27A932:: @ 827A932
 	return
 
 LinkContestRoom1_EventScript_27A941:: @ 827A941
-	compare VAR_0x4088, 5
+	compare VAR_CONTEST_LOCATION, 5
 	goto_if_eq LinkContestRoom1_EventScript_27A955
 	msgbox LinkContestRoom1_Text_27BAAC, MSGBOX_DEFAULT
 	return
@@ -932,7 +932,7 @@ LinkContestRoom1_EventScript_27A955:: @ 827A955
 	return
 
 LinkContestRoom1_EventScript_27A964:: @ 827A964
-	compare VAR_0x4088, 5
+	compare VAR_CONTEST_LOCATION, 5
 	goto_if_eq LinkContestRoom1_EventScript_27A978
 	msgbox LinkContestRoom1_Text_27BB25, MSGBOX_DEFAULT
 	return
@@ -983,7 +983,7 @@ LinkContestRoom1_EventScript_27A9D4:: @ 827A9D4
 	return
 
 LinkContestRoom1_EventScript_27AA00:: @ 827AA00
-	compare VAR_0x4088, 5
+	compare VAR_CONTEST_LOCATION, 5
 	goto_if_eq LinkContestRoom1_EventScript_27AA14
 	msgbox LinkContestRoom1_Text_27BB4C, MSGBOX_DEFAULT
 	return
@@ -996,7 +996,7 @@ LinkContestRoom1_EventScript_27AA14:: @ 827AA14
 LinkContestRoom1_EventScript_27AA1B:: @ 827AA1B
 	addvar VAR_TEMP_1, 1
 	lockall
-	compare VAR_0x4088, 1
+	compare VAR_CONTEST_LOCATION, 1
 	call_if_gt LinkContestRoom1_EventScript_27AA6F
 	applymovement 9, LinkContestRoom1_Movement_27AD3B
 	applymovement 12, LinkContestRoom1_Movement_27AD3F
@@ -1081,7 +1081,7 @@ LinkContestRoom1_EventScript_27AA6F:: @ 827AA6F
 	return
 
 LinkContestRoom1_EventScript_27AB36:: @ 827AB36
-	compare VAR_0x4088, 5
+	compare VAR_CONTEST_LOCATION, 5
 	goto_if_eq LinkContestRoom1_EventScript_27ABD8
 	call LinkContestRoom1_EventScript_27AB9E
 	goto_if_set FLAG_TEMP_2, LinkContestRoom1_EventScript_27AB82
@@ -1135,7 +1135,7 @@ LinkContestRoom1_EventScript_27ABCE:: @ 827ABCE
 	return
 
 LinkContestRoom1_EventScript_27ABD2:: @ 827ABD2
-	setvar VAR_0x4099, 1
+	setvar VAR_LILYCOVE_CONTEST_LOBBY_STATE, 1
 	return
 
 LinkContestRoom1_EventScript_27ABD8:: @ 827ABD8
@@ -1149,7 +1149,7 @@ LinkContestRoom1_EventScript_27ABD8:: @ 827ABD8
 	return
 
 LinkContestRoom1_EventScript_27ABF1:: @ 827ABF1
-	setvar VAR_0x4099, 2
+	setvar VAR_LILYCOVE_CONTEST_LOBBY_STATE, 2
 	return
 
 LinkContestRoom1_EventScript_27ABF7:: @ 827ABF7
@@ -1201,7 +1201,7 @@ LinkContestRoom1_EventScript_27AC5E:: @ 827AC5E
 	return
 
 LinkContestRoom1_EventScript_27AC77:: @ 827AC77
-	compare VAR_0x4088, 2
+	compare VAR_CONTEST_LOCATION, 2
 	call_if_eq LinkContestRoom1_EventScript_27ABCE
 	specialvar VAR_RESULT, sub_80F7F7C
 	compare VAR_RESULT, 0
@@ -1215,10 +1215,10 @@ LinkContestRoom1_EventScript_27AC77:: @ 827AC77
 
 LinkContestRoom1_EventScript_27ACA8:: @ 827ACA8
 	lockall
-	call LinkContestRoom1_EventScript_27205E
+	call Common_EventScript_BagIsFull
 	msgbox LinkContestRoom1_Text_27BC2F, MSGBOX_DEFAULT
 	releaseall
-	setvar VAR_0x408A, 4
+	setvar VAR_CONTEST_PRIZE_PICKUP, 4
 	return
 
 LinkContestRoom1_EventScript_27ACBD:: @ 827ACBD

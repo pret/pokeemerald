@@ -1,11 +1,11 @@
 Route125_MapScripts:: @ 81F6748
-	map_script 3, Route125_MapScript1_1F6758
-	map_script 1, Route125_MapScript1_1F6783
-	map_script 2, Route125_MapScript2_1F679A
+	map_script MAP_SCRIPT_ON_TRANSITION, Route125_MapScript1_1F6758
+	map_script MAP_SCRIPT_ON_LOAD, Route125_MapScript1_1F6783
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, Route125_MapScript2_1F679A
 	.byte 0
 
 Route125_MapScript1_1F6758: @ 81F6758
-	call_if_set FLAG_SYS_WEATHER_CTRL, Route125_EventScript_27207A
+	call_if_set FLAG_SYS_WEATHER_CTRL, Common_EventScript_SetWeather15
 	compare VAR_0x4039, 1
 	call_if_eq Route125_EventScript_273D13
 	compare VAR_0x4037, 11

@@ -1,5 +1,5 @@
 Route109_SeashoreHouse_MapScripts:: @ 82693F4
-	map_script 3, Route109_SeashoreHouse_MapScript1_2693FA
+	map_script MAP_SCRIPT_ON_TRANSITION, Route109_SeashoreHouse_MapScript1_2693FA
 	.byte 0
 
 Route109_SeashoreHouse_MapScript1_2693FA: @ 82693FA
@@ -75,7 +75,7 @@ Route109_SeashoreHouse_EventScript_2694C8:: @ 82694C8
 	end
 
 Route109_SeashoreHouse_EventScript_2694D5:: @ 82694D5
-	msgbox gUnknown_08272AD0, MSGBOX_DEFAULT
+	msgbox gText_TooBadBagIsFull, MSGBOX_DEFAULT
 	hidemoneybox
 	nop
 	nop

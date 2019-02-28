@@ -1,7 +1,7 @@
 EverGrandeCity_DrakesRoom_MapScripts:: @ 822869C
-	map_script 2, EverGrandeCity_DrakesRoom_MapScript2_2286BB
-	map_script 1, EverGrandeCity_DrakesRoom_MapScript1_2286D2
-	map_script 4, EverGrandeCity_DrakesRoom_MapScript2_227F3E
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, EverGrandeCity_DrakesRoom_MapScript2_2286BB
+	map_script MAP_SCRIPT_ON_LOAD, EverGrandeCity_DrakesRoom_MapScript1_2286D2
+	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, EverGrandeCity_DrakesRoom_MapScript2_227F3E
 	.byte 0
 
 EverGrandeCity_DrakesRoom_MapScript2_2286AC: @ 82286AC
@@ -13,19 +13,19 @@ EverGrandeCity_DrakesRoom_EventScript_2286B6:: @ 82286B6
 	end
 
 EverGrandeCity_DrakesRoom_MapScript2_2286BB: @ 82286BB
-	map_script_2 VAR_0x409C, 3, EverGrandeCity_DrakesRoom_EventScript_2286C5
+	map_script_2 VAR_ELITE_4_STATE, 3, EverGrandeCity_DrakesRoom_EventScript_2286C5
 	.2byte 0
 
 EverGrandeCity_DrakesRoom_EventScript_2286C5:: @ 82286C5
 	lockall
 	call EverGrandeCity_DrakesRoom_EventScript_272475
-	setvar VAR_0x409C, 4
+	setvar VAR_ELITE_4_STATE, 4
 	releaseall
 	end
 
 EverGrandeCity_DrakesRoom_MapScript1_2286D2: @ 82286D2
 	call_if_set FLAG_DEFEATED_ELITE_4_DRAKE, EverGrandeCity_DrakesRoom_EventScript_2286E7
-	compare VAR_0x409C, 4
+	compare VAR_ELITE_4_STATE, 4
 	call_if_eq EverGrandeCity_DrakesRoom_EventScript_2286ED
 	end
 

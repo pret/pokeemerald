@@ -1161,16 +1161,16 @@ const u32 gStatusPal_Icons[] = INCBIN_U32("graphics/interface/status_icons.gbapa
 const u32 gMoveTypes_Gfx[] = INCBIN_U32("graphics/types/move_types.4bpp.lz");
 const u32 gMoveTypes_Pal[] = INCBIN_U32("graphics/types/move_types.gbapal.lz");
 
-const u32 gUnknown_08D97BEC[] = INCBIN_U32("graphics/interface/summary_frames.4bpp.lz");
+const u32 gMoveSelectorBitmap[] = INCBIN_U32("graphics/interface/summary_frames.4bpp.lz");
 const u32 gUnknown_08D97CF4[] = INCBIN_U32("graphics/interface/summary_frames.gbapal.lz");
 
-const u32 gUnknown_08D97D0C[] = INCBIN_U32("graphics/interface/status_screen.4bpp.lz");
-const u32 gUnknown_08D9853C[] = INCBIN_U32("graphics/interface/status_screen.gbapal.lz");
-const u32 gUnknown_08D9862C[] = INCBIN_U32("graphics/interface/status_screen.bin.lz");
+const u32 gStatusScreenBitmap[] = INCBIN_U32("graphics/interface/status_screen.4bpp.lz");
+const u32 gStatusScreenPalette[] = INCBIN_U32("graphics/interface/status_screen.gbapal.lz");
+const u32 gPageInfoTilemap[] = INCBIN_U32("graphics/interface/status_screen.bin.lz");
 
-const u32 gUnknown_08D987FC[] = INCBIN_U32("graphics/interface/status_tilemap1.bin.lz");
-const u32 gUnknown_08D9898C[] = INCBIN_U32("graphics/interface/status_tilemap2.bin.lz");
-const u32 gUnknown_08D98B28[] = INCBIN_U32("graphics/interface/status_tilemap3.bin.lz");
+const u32 gPageSkillsTilemap[] = INCBIN_U32("graphics/interface/status_tilemap1.bin.lz");
+const u32 gPageBattleMovesTilemap[] = INCBIN_U32("graphics/interface/status_tilemap2.bin.lz");
+const u32 gPageContestMovesTilemap[] = INCBIN_U32("graphics/interface/status_tilemap3.bin.lz");
 const u32 gUnknown_08D98CC8[] = INCBIN_U32("graphics/interface/status_tilemap0.bin.lz");
 
 const u32 gBagMaleTiles[] = INCBIN_U32("graphics/misc/bag_male.4bpp.lz");

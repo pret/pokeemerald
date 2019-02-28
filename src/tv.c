@@ -2448,8 +2448,8 @@ void sub_80EE72C(void)
         show->trainerFanClub.kind = TVSHOW_TRAINER_FAN_CLUB;
         show->trainerFanClub.active = FALSE;
         StringCopy(show->trainerFanClub.playerName, gSaveBlock2Ptr->playerName);
-        show->trainerFanClub.words[0] = gSaveBlock1Ptr->unk2BB0[0];
-        show->trainerFanClub.words[1] = gSaveBlock1Ptr->unk2BB0[1];
+        show->trainerFanClub.words[0] = gSaveBlock1Ptr->easyChatProfile[0];
+        show->trainerFanClub.words[1] = gSaveBlock1Ptr->easyChatProfile[1];
         tv_store_id_3x(show);
         show->trainerFanClub.language = gGameLanguage;
     }
@@ -3603,7 +3603,7 @@ void GetMomOrDadStringForTVMessage(void)
 
 void sub_80F01B8(void)
 {
-    VarSet(VAR_0x40BC, 0);
+    VarSet(VAR_BRAVO_TRAINER_BATTLE_TOWER_ON, 0);
     RemoveEventObjectByLocalIdAndMap(5, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
     FlagSet(FLAG_HIDE_BATTLE_TOWER_REPORTER);
 }
