@@ -15,11 +15,6 @@
 #define LUCKY_BIAS_MIXED_777  (1 << 6)
 #define LUCKY_BIAS_777        (1 << 7)
 
-// Rows
-#define SLOT_TOP_ROW          0x0001
-#define SLOT_MIDDLE_ROW       0x0002
-#define SLOT_BOTTOM_ROW       0x0003
-
 void PlaySlotMachine(u8, void (callback)(void));
 
 #endif // GUARD_SLOT_MACHINE_H
