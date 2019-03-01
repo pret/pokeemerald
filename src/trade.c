@@ -3395,7 +3395,7 @@ static void sub_807A53C(void)
     {
         for (j = 0; j < gUnknown_0203229C->partyCounts[i]; j++)
         {
-            sub_80D32C8(&gSprites[gUnknown_0203229C->partyIcons[i][j]], 4 - gUnknown_0203229C->unk_5D[i][j]);
+            SetPokemonIconAnimationNum(&gSprites[gUnknown_0203229C->partyIcons[i][j]], 4 - gUnknown_0203229C->unk_5D[i][j]);
         }
     }
 }

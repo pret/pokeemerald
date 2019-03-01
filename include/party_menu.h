@@ -33,7 +33,7 @@ struct Struct203CEC8
     u8 unk8_0:4;
     u8 mode:2;
     u8 unk8_2:2;
-    s8 unk9;
+    s8 unk9; //selected party index
     s8 unkA;
     u8 unkB;
     u16 unkC;
@@ -52,7 +52,7 @@ extern void (*gUnknown_03006328)(u8, TaskFunc);
 
 extern const u16 gTutorMoves[];
 
-void sub_81B0FCC(u8 slot, u8 b);
+void UpdatePartyMenuSlotSelected(u8 slot, bool8 b);
 bool8 IsMultiBattle(void);
 u8 GetCursorSelectionMonId(void);
 u8 sub_81B1360(void);

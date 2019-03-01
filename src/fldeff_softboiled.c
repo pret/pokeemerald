@@ -33,7 +33,7 @@ void sub_8161560(u8 taskId)
 {
     gUnknown_0203CEC8.unkB = 0xA;
     gUnknown_0203CEC8.unkA =  gUnknown_0203CEC8.unk9;
-    sub_81B0FCC(GetCursorSelectionMonId(), 0x1);
+    UpdatePartyMenuSlotSelected(GetCursorSelectionMonId(), TRUE);
     display_pokemon_menu_message(0x5);
     gTasks[taskId].func = sub_81B1370;
 }
@@ -83,9 +83,9 @@ static void sub_8161724(u8 taskId)
     if(sub_81B1BD4() == 1)
         return;
     gUnknown_0203CEC8.unkB = 0x0;
-    sub_81B0FCC(gUnknown_0203CEC8.unk9, 0);
+    UpdatePartyMenuSlotSelected(gUnknown_0203CEC8.unk9, FALSE);
     gUnknown_0203CEC8.unk9 = gUnknown_0203CEC8.unkA;
-    sub_81B0FCC(gUnknown_0203CEC8.unkA, 1);
+    UpdatePartyMenuSlotSelected(gUnknown_0203CEC8.unkA, TRUE);
     sub_8198070(0x6, FALSE);
     ClearWindowTilemap(0x6);
     display_pokemon_menu_message(0);

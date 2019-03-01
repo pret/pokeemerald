@@ -92,6 +92,10 @@ struct Unk_Rodata1
     u8 unk1F;
 };
 
+#define RODATA_WINDOW_X 21
+#define RODATA_WINDOW_Y 22
+#define RODATA_WINDOW_WIDTH 23
+
 struct Struct203CEC4
 {
     TaskFunc unk0;
@@ -197,9 +201,9 @@ static u8 sub_81B5F74(u8, u8);
 static void sub_81B120C(void);
 static u8 sub_81B5F34(u8, u8);
 static void AnimateSelectedPartyIcon(u8, u8);
-static void sub_81B5F98(u8, u8);
-static u8 GetPartyBoxPalBitfield(u8, u8);
-static bool8 PartyBoxPal_ParnterOrDisqualifiedInArena(u8);
+static void StartSpriteAnimById(u8, u8);
+static u8 GetPartyBoxPalBitfield(u8, bool8);
+static bool8 PartyBoxPal_PartnerOrDisqualifiedInArena(u8);
 static u8 sub_81B8F38(u8);
 static void c3_0811FAB4(u8);
 static void sub_81B9080(void);
@@ -284,7 +288,7 @@ static void sub_81B56A4(u8);
 static void sub_81B56D8(u8);
 static void task_launch_hm_phase_2(u8);
 static u16 brm_get_selected_species(void);
-static void sub_81B5B38(u8, struct Pokemon*);
+static void SetAnimationBasedOnPokemonHP(u8, struct Pokemon*);
 static void UpdatePartyMonIconFrame(struct Sprite*);
 static void UpdatePartyMonIconFrameAndBounce(struct Sprite*);
 static void sub_81B5CB0(u16, struct Struct203CEDC*);
@@ -923,76 +927,76 @@ static const u8 gUnknown_086159CE[] = {24, 25, 25, 25, 25, 25, 25, 25, 25, 26, 3
 static const u8 gUnknown_08615A14[] = {43, 44, 44, 44, 44, 44, 44, 44, 44, 44, 44, 44, 44, 44, 44, 44, 44, 45, 49, 33, 33, 33, 33, 33, 33, 33, 33, 52, 53, 51, 51, 51, 51, 51, 51, 54, 55, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 57};
 static const u8 gUnknown_08615A4A[] = {43, 44, 44, 44, 44, 44, 44, 44, 44, 44, 44, 44, 44, 44, 44, 44, 44, 45, 49, 33, 33, 33, 33, 33, 33, 33, 33, 33, 33, 33, 33, 33, 33, 33, 33, 50, 55, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 57};
 static const u8 gUnknown_08615A80[] = {21, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 23, 30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 31, 37, 38, 38, 38, 38, 38, 38, 38, 38, 38, 38, 38, 38, 38, 38, 38, 38, 39};
-static const u8 gUnknown_08615AB6[] = {11, 12};
-static const u8 gUnknown_08615AB8[] = {9, 10};
-static const u8 gUnknown_08615ABA[] = {4, 5, 6};
-static const u8 gUnknown_08615ABD[] = {1, 7, 8};
-static const u8 gUnknown_08615AC0[] = {1, 11, 12};
-static const u8 gUnknown_08615AC3[] = {59, 60};
-static const u8 gUnknown_08615AC5[] = {75, 76};
-static const u8 gUnknown_08615AC7[] = {57, 58};
-static const u8 gUnknown_08615AC9[] = {73, 74};
-static const u8 gUnknown_08615ACB[] = {89, 90};
-static const u8 gUnknown_08615ACD[] = {52, 53, 54};
-static const u8 gUnknown_08615AD0[] = {68, 69, 70};
-static const u8 gUnknown_08615AD3[] = {84, 85, 86};
-static const u8 gUnknown_08615AD6[] = {116, 117, 118};
-static const u8 gUnknown_08615AD9[] = {132, 133, 134};
-static const u8 gUnknown_08615ADC[] = {148, 149, 150};
-static const u8 gUnknown_08615ADF[] = {100, 101, 102};
-static const u8 gUnknown_08615AE2[] = {49, 55, 56};
-static const u8 gUnknown_08615AE5[] = {65, 71, 72};
-static const u8 gUnknown_08615AE8[] = {81, 87, 88};
-static const u8 gUnknown_08615AEB[] = {97, 103, 104};
-static const u8 gUnknown_08615AEE[] = {161, 167, 168};
-static const u8 gUnknown_08615AF1[] = {17, 27, 28};
+static const u8 sPaletteBufferOffsets_GenderIcon[] = {11, 12};
+static const u8 sPaletteBufferOffsets_HPBar[] = {9, 10};
+static const u8 sPaletteBufferOffsets_PartySlotBG[] = {4, 5, 6};
+static const u8 sPaletteBufferOffsets_PartySlotBorder[] = {1, 7, 8};
+static const u8 sPaletteBufferOffsets_EmptyPartySlot[] = {1, 11, 12}; //includes border and background
+static const u8 sPaletteBufferIds_MaleGenderIcon[] = {59, 60};
+static const u8 sPaletteBufferIds_FemaleGenderIcon[] = {75, 76};
+static const u8 sPaletteBufferIds_GreenHPBar[] = {57, 58};
+static const u8 sPaletteBufferIds_YellowHPBar[] = {73, 74};
+static const u8 sPaletteBufferIds_RedHPBar[] = {89, 90};
+static const u8 sPaletteBufferIds_NormalPartySlotBG[] = {52, 53, 54};
+static const u8 sPaletteBufferIds_DisqualifiedPartySlotBG[] = {68, 69, 70};
+static const u8 sPaletteBufferIds_FaintedPartySlotBG[] = {84, 85, 86};
+static const u8 sPaletteBufferIds_SelectedPartySlotBG[] = {116, 117, 118};
+static const u8 sPaletteBufferIds_DisqualifiedSelectedPartySlotBG[] = {132, 133, 134};
+static const u8 sPaletteBufferIds_FaintedSelectedPartySlotBG[] = {148, 149, 150};
+static const u8 sPaletteBufferIds_EnteredPartySlotBG[] = {100, 101, 102}; //entered? As in into a contest or battle?
+static const u8 sPaletteBufferIds_BorderNormal[] = {49, 55, 56};
+static const u8 sPaletteBufferIds_BorderDisqualified[] = {65, 71, 72};
+static const u8 sPaletteBufferIds_BorderFainted[] = {81, 87, 88};
+static const u8 sPaletteBufferIds_BorderSelected[] = {97, 103, 104};
+static const u8 sPaletteBufferIds_BorderEntered[] = {161, 167, 168}; //entered? As in into a contest or battle?
+static const u8 sPaletteBufferIds_EmptyPartySlotBG[] = {17, 27, 28};
 
-static const u8 *const gUnknown_08615AF4[] =
+static const u8 *const sPartyMenuDialogStrings[] =
 {
-    gUnknown_085E9E43,
-    gUnknown_085EA010,
-    gUnknown_085EA02A,
-    gUnknown_085E9E55,
-    gUnknown_085E9E64,
-    gUnknown_085E9E79,
-    gUnknown_085E9E8F,
-    gUnknown_085E9EBC,
-    gUnknown_085E9ED4,
-    gUnknown_085E9EE9,
-    gUnknown_085E9FDB,
-    gUnknown_085EA046,
-    gUnknown_085EA05B,
-    gUnknown_085E9F01,
-    gUnknown_085E9F58,
-    gUnknown_085E9F6F,
-    gUnknown_085E9F81,
-    gUnknown_085E9F90,
-    gUnknown_085E9FA7,
-    gUnknown_085E9FC2,
+    gText_PartyMenu_ChoosePkmn,
+    gText_PartyMenu_ChoosePkmnOrCancel,
+    gText_PartyMenu_ChoosePkmnConfirm,
+    gText_PartyMenu_MovePkmnPrompt,
+    gText_PartyMenu_TeachMovePrompt,
+    gText_PartyMenu_UseItemPrompt,
+    gText_PartyMenu_GiveItemPrompt,
+    gText_PartyMenu_CantCut,
+    gText_PartyMenu_CantSurf,
+    gText_PartyMenu_AlreadySurfing,
+    gText_PartyMenu_SurfDisallowed,
+    gText_PartyMenu_CantBecauseCycling,
+    gText_PartyMenu_AlreadyUsing,
+    gText_PartyMenu_CantUse,
+    gText_PartyMenu_NoQualifiedPkmn,
+    gText_PartyMenu_ChoosePkmn2,
+    gText_PartyMenu_NotEnoughHP,
+    gText_PartyMenu_NumPkmnNeeded,
+    gText_PartyMenu_SpeciesClauseError,
+    gText_PartyMenu_ItemClauseError,
     gText_EmptyString2,
-    gUnknown_085E9EA6,
-    gUnknown_085E9F16,
-    gUnknown_085E9F2A,
-    gUnknown_085E9F42,
-    gUnknown_085E9FF9,
-    gUnknown_085EA073,
+    gText_PartyMenu_DoWhatPrompt,
+    gText_PartyMenu_RestorePPPrompt,
+    gText_PartyMenu_BoostPPPrompt,
+    gText_PartyMenu_DoWhatItemPrompt,
+    gText_PartyMenu_DoWhatMailPrompt,
+    gText_PartyMenu_AlreadyHoldingItem,
 };
 
-static const u8 *const gUnknown_08615B60[] =
+static const u8 *const sPartySlotText[] =
 {
-    gUnknown_085EA091,
-    gUnknown_085EA099,
-    gUnknown_085EA09E,
-    gUnknown_085EA0A4,
-    gUnknown_085EA0AB,
-    gUnknown_085EA0E7,
-    gUnknown_085EA0B1,
-    gUnknown_085EA0B6,
-    gUnknown_085EA0BF,
-    gUnknown_085EA0C5,
-    gUnknown_085EA0CF,
-    gUnknown_085EA0D7,
-    gUnknown_085EA0DC,
+    gText_PartyMenu_NoUse,
+    gText_PartyMenu_Qualified,
+    gText_PartyMenu_Entered1,
+    gText_PartyMenu_Entered2,
+    gText_PartyMenu_Entered3,
+    gText_PartyMenu_Entered4,
+    gText_PartyMenu_Able,
+    gText_PartyMenu_NotAble,
+    gText_PartyMenu_AbleBang,
+    gText_PartyMenu_NotAbleBang,
+    gText_PartyMenu_Learned,
+    gText_PartyMenu_Have,
+    gText_PartyMenu_DontHave,
 };
 
 // Unknown unused data. Feel free to remove.
@@ -1903,11 +1907,11 @@ static void RenderPartyMenuBox(u8 slot)
                 DisplayPartyPokemonData(slot);
 
             if (gUnknown_0203CEC8.unk8_0 == 5)
-                sub_81B0FCC(slot, 0);
+                UpdatePartyMenuSlotSelected(slot, FALSE);
             else if (gUnknown_0203CEC8.unk9 == slot)
-                sub_81B0FCC(slot, 1);
+                UpdatePartyMenuSlotSelected(slot, TRUE);
             else
-                sub_81B0FCC(slot, 0);
+                UpdatePartyMenuSlotSelected(slot, FALSE);
         }
         PutWindowTilemap(gUnknown_0203CEDC[slot].windowId);
         schedule_bg_copy_tilemap_to_vram(0);
@@ -2156,26 +2160,26 @@ static void sub_81B0F28(void)
         {
             gUnknown_0203CEC4->unk9_0 = sub_81B5F34(0xC6, 0x94);
         }
-        sub_81B0FCC(gUnknown_0203CEC8.unk9, 1);
+        UpdatePartyMenuSlotSelected(gUnknown_0203CEC8.unk9, 1);
     }
 }
 
-void sub_81B0FCC(u8 slot, u8 b)
+void UpdatePartyMenuSlotSelected(u8 slot, bool8 selected)
 {
     u8 spriteId;
 
     switch (slot)
     {
-    default:
+    default: //Pokemon Slot
         if (GetMonData(&gPlayerParty[slot], MON_DATA_SPECIES) != SPECIES_NONE)
         {
-            UpdateSelectedPartyBox(&gUnknown_0203CEDC[slot], GetPartyBoxPalBitfield(slot, b));
-            AnimateSelectedPartyIcon(gUnknown_0203CEDC[slot].unk9, b);
-            sub_81B5F98(gUnknown_0203CEDC[slot].unkB, b);
+            UpdateSelectedPartyBox(&gUnknown_0203CEDC[slot], GetPartyBoxPalBitfield(slot, selected));
+            AnimateSelectedPartyIcon(gUnknown_0203CEDC[slot].unk9, selected);
+            StartSpriteAnimById(gUnknown_0203CEDC[slot].unkB, selected);
         }
         return;
-    case 6:
-        if (b == 0)
+    case 6: //Cancel Button
+        if (selected == FALSE)
             sub_8199C30(1, 23, 16, 7, 2, 1);
         else
             sub_8199C30(1, 23, 16, 7, 2, 2);
@@ -2184,12 +2188,12 @@ void sub_81B0FCC(u8 slot, u8 b)
     case 7:
         if (!gUnknown_0203CEC4->unk8_0)
         {
-            if (b == 0)
+            if (selected == FALSE)
                 sub_8199C30(1, 23, 17, 7, 2, 1);
             else
                 sub_8199C30(1, 23, 17, 7, 2, 2);
         }
-        else if (b == 0)
+        else if (selected == FALSE)
         {
             sub_8199C30(1, 23, 18, 7, 2, 1);
         }
@@ -2200,34 +2204,34 @@ void sub_81B0FCC(u8 slot, u8 b)
         spriteId = gUnknown_0203CEC4->unk9_0;
         break;
     }
-    sub_81B5F98(spriteId, b);
+    StartSpriteAnimById(spriteId, selected);
     schedule_bg_copy_tilemap_to_vram(1);
 }
 
-static u8 GetPartyBoxPalBitfield(u8 slot, u8 b)
+static u8 GetPartyBoxPalBitfield(u8 slot, bool8 selected)
 {
     u8 returnVar = 0;
 
-    if (b == 1)
+    if (selected == TRUE)
         returnVar |= 1;
     if (GetMonData(&gPlayerParty[slot], MON_DATA_HP) == 0)
         returnVar |= 2;
-    if (PartyBoxPal_ParnterOrDisqualifiedInArena(slot) == TRUE)
+    if (PartyBoxPal_PartnerOrDisqualifiedInArena(slot) == TRUE)
         returnVar |= 8;
     if (gUnknown_0203CEC8.unkB == 9)
-        returnVar |= 16;
+        returnVar |= 16; //entered? As in into a contest or battle?
     if (gUnknown_0203CEC8.unkB == 8)
     {
         if (slot == gUnknown_0203CEC8.unk9 || slot == gUnknown_0203CEC8.unkA)
-            returnVar |= 4;
+            returnVar |= 4; //entered? As in into a contest or battle?
     }
     if (gUnknown_0203CEC8.unkB == 10 && slot == gUnknown_0203CEC8.unk9 )
-        returnVar |= 32;
+        returnVar |= 32; //entered? As in into a contest or battle?
 
     return returnVar;
 }
 
-static bool8 PartyBoxPal_ParnterOrDisqualifiedInArena(u8 slot)
+static bool8 PartyBoxPal_PartnerOrDisqualifiedInArena(u8 slot)
 {
     if (gUnknown_0203CEC8.mode == 2 && (slot == 1 || slot == 4 || slot == 5))
         return TRUE;
@@ -2555,8 +2559,8 @@ static void UpdateCurrentPartySelection(s8 *ptr, s8 movementDir)
     if (*ptr != slot)
     {
         PlaySE(SE_SELECT);
-        sub_81B0FCC(slot, 0);
-        sub_81B0FCC(*ptr, 1);
+        UpdatePartyMenuSlotSelected(slot, FALSE); // deselect old slot
+        UpdatePartyMenuSlotSelected(*ptr, TRUE); //select new slot
     }
 }
 
@@ -3210,126 +3214,126 @@ static void sub_81B2720(u8 windowId)
     BlitBitmapToPartyWindow(windowId, gUnknown_08615A80, 18, 0, 0, 18, 3);
 }
 
-static void UpdateSelectedPartyBox(struct Struct203CEDC *ptr, u8 bitfield)
+static void UpdateSelectedPartyBox(struct Struct203CEDC *ptr, u8 bitfield) //see GetPartyBoxPalBitfield for bitfield
 {
     u8 palNum = GetWindowAttribute(ptr->windowId, WINDOW_PALETTE_NUM) * 16;
 
-    if (bitfield & 0x40)
+    if (bitfield & 0x40) // SPECIES_NONE, load pallets for empty box
     {
-        LoadPalette(GetPartyMenuPaletteFromBuffer(gUnknown_08615AF1[0]), gUnknown_08615AC0[0] + palNum, 2);
-        LoadPalette(GetPartyMenuPaletteFromBuffer(gUnknown_08615AF1[1]), gUnknown_08615AC0[1] + palNum, 2);
-        LoadPalette(GetPartyMenuPaletteFromBuffer(gUnknown_08615AF1[2]), gUnknown_08615AC0[2] + palNum, 2);
+        LoadPalette(GetPartyMenuPaletteFromBuffer(sPaletteBufferIds_EmptyPartySlotBG[0]), sPaletteBufferOffsets_EmptyPartySlot[0] + palNum, 2);
+        LoadPalette(GetPartyMenuPaletteFromBuffer(sPaletteBufferIds_EmptyPartySlotBG[1]), sPaletteBufferOffsets_EmptyPartySlot[1] + palNum, 2);
+        LoadPalette(GetPartyMenuPaletteFromBuffer(sPaletteBufferIds_EmptyPartySlotBG[2]), sPaletteBufferOffsets_EmptyPartySlot[2] + palNum, 2);
     }
     else if (bitfield & 0x20)
     {
-        if (bitfield & 1)
+        if (bitfield & 1) // is selected
         {
-            LoadPalette(GetPartyMenuPaletteFromBuffer(gUnknown_08615ADF[0]), gUnknown_08615ABA[0] + palNum, 2);
-            LoadPalette(GetPartyMenuPaletteFromBuffer(gUnknown_08615ADF[1]), gUnknown_08615ABA[1] + palNum, 2);
-            LoadPalette(GetPartyMenuPaletteFromBuffer(gUnknown_08615ADF[2]), gUnknown_08615ABA[2] + palNum, 2);
-            LoadPalette(GetPartyMenuPaletteFromBuffer(gUnknown_08615AEB[0]), gUnknown_08615ABD[0] + palNum, 2);
-            LoadPalette(GetPartyMenuPaletteFromBuffer(gUnknown_08615AEB[1]), gUnknown_08615ABD[1] + palNum, 2);
-            LoadPalette(GetPartyMenuPaletteFromBuffer(gUnknown_08615AEB[2]), gUnknown_08615ABD[2] + palNum, 2);
+            LoadPalette(GetPartyMenuPaletteFromBuffer(sPaletteBufferIds_EnteredPartySlotBG[0]), sPaletteBufferOffsets_PartySlotBG[0] + palNum, 2);
+            LoadPalette(GetPartyMenuPaletteFromBuffer(sPaletteBufferIds_EnteredPartySlotBG[1]), sPaletteBufferOffsets_PartySlotBG[1] + palNum, 2);
+            LoadPalette(GetPartyMenuPaletteFromBuffer(sPaletteBufferIds_EnteredPartySlotBG[2]), sPaletteBufferOffsets_PartySlotBG[2] + palNum, 2);
+            LoadPalette(GetPartyMenuPaletteFromBuffer(sPaletteBufferIds_BorderSelected[0]), sPaletteBufferOffsets_PartySlotBorder[0] + palNum, 2);
+            LoadPalette(GetPartyMenuPaletteFromBuffer(sPaletteBufferIds_BorderSelected[1]), sPaletteBufferOffsets_PartySlotBorder[1] + palNum, 2);
+            LoadPalette(GetPartyMenuPaletteFromBuffer(sPaletteBufferIds_BorderSelected[2]), sPaletteBufferOffsets_PartySlotBorder[2] + palNum, 2);
         }
         else
         {
-            LoadPalette(GetPartyMenuPaletteFromBuffer(gUnknown_08615ADF[0]), gUnknown_08615ABA[0] + palNum, 2);
-            LoadPalette(GetPartyMenuPaletteFromBuffer(gUnknown_08615ADF[1]), gUnknown_08615ABA[1] + palNum, 2);
-            LoadPalette(GetPartyMenuPaletteFromBuffer(gUnknown_08615ADF[2]), gUnknown_08615ABA[2] + palNum, 2);
-            LoadPalette(GetPartyMenuPaletteFromBuffer(gUnknown_08615AEE[0]), gUnknown_08615ABD[0] + palNum, 2);
-            LoadPalette(GetPartyMenuPaletteFromBuffer(gUnknown_08615AEE[1]), gUnknown_08615ABD[1] + palNum, 2);
-            LoadPalette(GetPartyMenuPaletteFromBuffer(gUnknown_08615AEE[2]), gUnknown_08615ABD[2] + palNum, 2);
+            LoadPalette(GetPartyMenuPaletteFromBuffer(sPaletteBufferIds_EnteredPartySlotBG[0]), sPaletteBufferOffsets_PartySlotBG[0] + palNum, 2);
+            LoadPalette(GetPartyMenuPaletteFromBuffer(sPaletteBufferIds_EnteredPartySlotBG[1]), sPaletteBufferOffsets_PartySlotBG[1] + palNum, 2);
+            LoadPalette(GetPartyMenuPaletteFromBuffer(sPaletteBufferIds_EnteredPartySlotBG[2]), sPaletteBufferOffsets_PartySlotBG[2] + palNum, 2);
+            LoadPalette(GetPartyMenuPaletteFromBuffer(sPaletteBufferIds_BorderEntered[0]), sPaletteBufferOffsets_PartySlotBorder[0] + palNum, 2);
+            LoadPalette(GetPartyMenuPaletteFromBuffer(sPaletteBufferIds_BorderEntered[1]), sPaletteBufferOffsets_PartySlotBorder[1] + palNum, 2);
+            LoadPalette(GetPartyMenuPaletteFromBuffer(sPaletteBufferIds_BorderEntered[2]), sPaletteBufferOffsets_PartySlotBorder[2] + palNum, 2);
         }
     }
     else if (bitfield & 0x10)
     {
-        LoadPalette(GetPartyMenuPaletteFromBuffer(gUnknown_08615ADF[0]), gUnknown_08615ABA[0] + palNum, 2);
-        LoadPalette(GetPartyMenuPaletteFromBuffer(gUnknown_08615ADF[1]), gUnknown_08615ABA[1] + palNum, 2);
-        LoadPalette(GetPartyMenuPaletteFromBuffer(gUnknown_08615ADF[2]), gUnknown_08615ABA[2] + palNum, 2);
-        LoadPalette(GetPartyMenuPaletteFromBuffer(gUnknown_08615AEE[0]), gUnknown_08615ABD[0] + palNum, 2);
-        LoadPalette(GetPartyMenuPaletteFromBuffer(gUnknown_08615AEE[1]), gUnknown_08615ABD[1] + palNum, 2);
-        LoadPalette(GetPartyMenuPaletteFromBuffer(gUnknown_08615AEE[2]), gUnknown_08615ABD[2] + palNum, 2);
+        LoadPalette(GetPartyMenuPaletteFromBuffer(sPaletteBufferIds_EnteredPartySlotBG[0]), sPaletteBufferOffsets_PartySlotBG[0] + palNum, 2);
+        LoadPalette(GetPartyMenuPaletteFromBuffer(sPaletteBufferIds_EnteredPartySlotBG[1]), sPaletteBufferOffsets_PartySlotBG[1] + palNum, 2);
+        LoadPalette(GetPartyMenuPaletteFromBuffer(sPaletteBufferIds_EnteredPartySlotBG[2]), sPaletteBufferOffsets_PartySlotBG[2] + palNum, 2);
+        LoadPalette(GetPartyMenuPaletteFromBuffer(sPaletteBufferIds_BorderEntered[0]), sPaletteBufferOffsets_PartySlotBorder[0] + palNum, 2);
+        LoadPalette(GetPartyMenuPaletteFromBuffer(sPaletteBufferIds_BorderEntered[1]), sPaletteBufferOffsets_PartySlotBorder[1] + palNum, 2);
+        LoadPalette(GetPartyMenuPaletteFromBuffer(sPaletteBufferIds_BorderEntered[2]), sPaletteBufferOffsets_PartySlotBorder[2] + palNum, 2);
     }
     else if (bitfield & 4)
     {
-        if (bitfield & 1)
+        if (bitfield & 1) // is selected
         {
-            LoadPalette(GetPartyMenuPaletteFromBuffer(gUnknown_08615ADF[0]), gUnknown_08615ABA[0] + palNum, 2);
-            LoadPalette(GetPartyMenuPaletteFromBuffer(gUnknown_08615ADF[1]), gUnknown_08615ABA[1] + palNum, 2);
-            LoadPalette(GetPartyMenuPaletteFromBuffer(gUnknown_08615ADF[2]), gUnknown_08615ABA[2] + palNum, 2);
-            LoadPalette(GetPartyMenuPaletteFromBuffer(gUnknown_08615AEB[0]), gUnknown_08615ABD[0] + palNum, 2);
-            LoadPalette(GetPartyMenuPaletteFromBuffer(gUnknown_08615AEB[1]), gUnknown_08615ABD[1] + palNum, 2);
-            LoadPalette(GetPartyMenuPaletteFromBuffer(gUnknown_08615AEB[2]), gUnknown_08615ABD[2] + palNum, 2);
+            LoadPalette(GetPartyMenuPaletteFromBuffer(sPaletteBufferIds_EnteredPartySlotBG[0]), sPaletteBufferOffsets_PartySlotBG[0] + palNum, 2);
+            LoadPalette(GetPartyMenuPaletteFromBuffer(sPaletteBufferIds_EnteredPartySlotBG[1]), sPaletteBufferOffsets_PartySlotBG[1] + palNum, 2);
+            LoadPalette(GetPartyMenuPaletteFromBuffer(sPaletteBufferIds_EnteredPartySlotBG[2]), sPaletteBufferOffsets_PartySlotBG[2] + palNum, 2);
+            LoadPalette(GetPartyMenuPaletteFromBuffer(sPaletteBufferIds_BorderSelected[0]), sPaletteBufferOffsets_PartySlotBorder[0] + palNum, 2);
+            LoadPalette(GetPartyMenuPaletteFromBuffer(sPaletteBufferIds_BorderSelected[1]), sPaletteBufferOffsets_PartySlotBorder[1] + palNum, 2);
+            LoadPalette(GetPartyMenuPaletteFromBuffer(sPaletteBufferIds_BorderSelected[2]), sPaletteBufferOffsets_PartySlotBorder[2] + palNum, 2);
         }
         else
         {
-            LoadPalette(GetPartyMenuPaletteFromBuffer(gUnknown_08615ADF[0]), gUnknown_08615ABA[0] + palNum, 2);
-            LoadPalette(GetPartyMenuPaletteFromBuffer(gUnknown_08615ADF[1]), gUnknown_08615ABA[1] + palNum, 2);
-            LoadPalette(GetPartyMenuPaletteFromBuffer(gUnknown_08615ADF[2]), gUnknown_08615ABA[2] + palNum, 2);
-            LoadPalette(GetPartyMenuPaletteFromBuffer(gUnknown_08615AEE[0]), gUnknown_08615ABD[0] + palNum, 2);
-            LoadPalette(GetPartyMenuPaletteFromBuffer(gUnknown_08615AEE[1]), gUnknown_08615ABD[1] + palNum, 2);
-            LoadPalette(GetPartyMenuPaletteFromBuffer(gUnknown_08615AEE[2]), gUnknown_08615ABD[2] + palNum, 2);
+            LoadPalette(GetPartyMenuPaletteFromBuffer(sPaletteBufferIds_EnteredPartySlotBG[0]), sPaletteBufferOffsets_PartySlotBG[0] + palNum, 2);
+            LoadPalette(GetPartyMenuPaletteFromBuffer(sPaletteBufferIds_EnteredPartySlotBG[1]), sPaletteBufferOffsets_PartySlotBG[1] + palNum, 2);
+            LoadPalette(GetPartyMenuPaletteFromBuffer(sPaletteBufferIds_EnteredPartySlotBG[2]), sPaletteBufferOffsets_PartySlotBG[2] + palNum, 2);
+            LoadPalette(GetPartyMenuPaletteFromBuffer(sPaletteBufferIds_BorderEntered[0]), sPaletteBufferOffsets_PartySlotBorder[0] + palNum, 2);
+            LoadPalette(GetPartyMenuPaletteFromBuffer(sPaletteBufferIds_BorderEntered[1]), sPaletteBufferOffsets_PartySlotBorder[1] + palNum, 2);
+            LoadPalette(GetPartyMenuPaletteFromBuffer(sPaletteBufferIds_BorderEntered[2]), sPaletteBufferOffsets_PartySlotBorder[2] + palNum, 2);
         }
     }
-    else if (bitfield & 2)
+    else if (bitfield & 2) // Pokmeon is fainted
     {
-        if (bitfield & 1)
+        if (bitfield & 1) // is selected
         {
-            LoadPalette(GetPartyMenuPaletteFromBuffer(gUnknown_08615ADC[0]), gUnknown_08615ABA[0] + palNum, 2);
-            LoadPalette(GetPartyMenuPaletteFromBuffer(gUnknown_08615ADC[1]), gUnknown_08615ABA[1] + palNum, 2);
-            LoadPalette(GetPartyMenuPaletteFromBuffer(gUnknown_08615ADC[2]), gUnknown_08615ABA[2] + palNum, 2);
-            LoadPalette(GetPartyMenuPaletteFromBuffer(gUnknown_08615AEB[0]), gUnknown_08615ABD[0] + palNum, 2);
-            LoadPalette(GetPartyMenuPaletteFromBuffer(gUnknown_08615AEB[1]), gUnknown_08615ABD[1] + palNum, 2);
-            LoadPalette(GetPartyMenuPaletteFromBuffer(gUnknown_08615AEB[2]), gUnknown_08615ABD[2] + palNum, 2);
+            LoadPalette(GetPartyMenuPaletteFromBuffer(sPaletteBufferIds_FaintedSelectedPartySlotBG[0]), sPaletteBufferOffsets_PartySlotBG[0] + palNum, 2);
+            LoadPalette(GetPartyMenuPaletteFromBuffer(sPaletteBufferIds_FaintedSelectedPartySlotBG[1]), sPaletteBufferOffsets_PartySlotBG[1] + palNum, 2);
+            LoadPalette(GetPartyMenuPaletteFromBuffer(sPaletteBufferIds_FaintedSelectedPartySlotBG[2]), sPaletteBufferOffsets_PartySlotBG[2] + palNum, 2);
+            LoadPalette(GetPartyMenuPaletteFromBuffer(sPaletteBufferIds_BorderSelected[0]), sPaletteBufferOffsets_PartySlotBorder[0] + palNum, 2);
+            LoadPalette(GetPartyMenuPaletteFromBuffer(sPaletteBufferIds_BorderSelected[1]), sPaletteBufferOffsets_PartySlotBorder[1] + palNum, 2);
+            LoadPalette(GetPartyMenuPaletteFromBuffer(sPaletteBufferIds_BorderSelected[2]), sPaletteBufferOffsets_PartySlotBorder[2] + palNum, 2);
         }
         else
         {
-            LoadPalette(GetPartyMenuPaletteFromBuffer(gUnknown_08615AD3[0]), gUnknown_08615ABA[0] + palNum, 2);
-            LoadPalette(GetPartyMenuPaletteFromBuffer(gUnknown_08615AD3[1]), gUnknown_08615ABA[1] + palNum, 2);
-            LoadPalette(GetPartyMenuPaletteFromBuffer(gUnknown_08615AD3[2]), gUnknown_08615ABA[2] + palNum, 2);
-            LoadPalette(GetPartyMenuPaletteFromBuffer(gUnknown_08615AE8[0]), gUnknown_08615ABD[0] + palNum, 2);
-            LoadPalette(GetPartyMenuPaletteFromBuffer(gUnknown_08615AE8[1]), gUnknown_08615ABD[1] + palNum, 2);
-            LoadPalette(GetPartyMenuPaletteFromBuffer(gUnknown_08615AE8[2]), gUnknown_08615ABD[2] + palNum, 2);
+            LoadPalette(GetPartyMenuPaletteFromBuffer(sPaletteBufferIds_FaintedPartySlotBG[0]), sPaletteBufferOffsets_PartySlotBG[0] + palNum, 2);
+            LoadPalette(GetPartyMenuPaletteFromBuffer(sPaletteBufferIds_FaintedPartySlotBG[1]), sPaletteBufferOffsets_PartySlotBG[1] + palNum, 2);
+            LoadPalette(GetPartyMenuPaletteFromBuffer(sPaletteBufferIds_FaintedPartySlotBG[2]), sPaletteBufferOffsets_PartySlotBG[2] + palNum, 2);
+            LoadPalette(GetPartyMenuPaletteFromBuffer(sPaletteBufferIds_BorderFainted[0]), sPaletteBufferOffsets_PartySlotBorder[0] + palNum, 2);
+            LoadPalette(GetPartyMenuPaletteFromBuffer(sPaletteBufferIds_BorderFainted[1]), sPaletteBufferOffsets_PartySlotBorder[1] + palNum, 2);
+            LoadPalette(GetPartyMenuPaletteFromBuffer(sPaletteBufferIds_BorderFainted[2]), sPaletteBufferOffsets_PartySlotBorder[2] + palNum, 2);
         }
     }
-    else if (bitfield & 8)
+    else if (bitfield & 8) //disqualified or partner pokemon
     {
-        if (bitfield & 1)
+        if (bitfield & 1) // is selected
         {
-            LoadPalette(GetPartyMenuPaletteFromBuffer(gUnknown_08615AD9[0]), gUnknown_08615ABA[0] + palNum, 2);
-            LoadPalette(GetPartyMenuPaletteFromBuffer(gUnknown_08615AD9[1]), gUnknown_08615ABA[1] + palNum, 2);
-            LoadPalette(GetPartyMenuPaletteFromBuffer(gUnknown_08615AD9[2]), gUnknown_08615ABA[2] + palNum, 2);
-            LoadPalette(GetPartyMenuPaletteFromBuffer(gUnknown_08615AEB[0]), gUnknown_08615ABD[0] + palNum, 2);
-            LoadPalette(GetPartyMenuPaletteFromBuffer(gUnknown_08615AEB[1]), gUnknown_08615ABD[1] + palNum, 2);
-            LoadPalette(GetPartyMenuPaletteFromBuffer(gUnknown_08615AEB[2]), gUnknown_08615ABD[2] + palNum, 2);
+            LoadPalette(GetPartyMenuPaletteFromBuffer(sPaletteBufferIds_DisqualifiedSelectedPartySlotBG[0]), sPaletteBufferOffsets_PartySlotBG[0] + palNum, 2);
+            LoadPalette(GetPartyMenuPaletteFromBuffer(sPaletteBufferIds_DisqualifiedSelectedPartySlotBG[1]), sPaletteBufferOffsets_PartySlotBG[1] + palNum, 2);
+            LoadPalette(GetPartyMenuPaletteFromBuffer(sPaletteBufferIds_DisqualifiedSelectedPartySlotBG[2]), sPaletteBufferOffsets_PartySlotBG[2] + palNum, 2);
+            LoadPalette(GetPartyMenuPaletteFromBuffer(sPaletteBufferIds_BorderSelected[0]), sPaletteBufferOffsets_PartySlotBorder[0] + palNum, 2);
+            LoadPalette(GetPartyMenuPaletteFromBuffer(sPaletteBufferIds_BorderSelected[1]), sPaletteBufferOffsets_PartySlotBorder[1] + palNum, 2);
+            LoadPalette(GetPartyMenuPaletteFromBuffer(sPaletteBufferIds_BorderSelected[2]), sPaletteBufferOffsets_PartySlotBorder[2] + palNum, 2);
         }
         else
         {
-            LoadPalette(GetPartyMenuPaletteFromBuffer(gUnknown_08615AD0[0]), gUnknown_08615ABA[0] + palNum, 2);
-            LoadPalette(GetPartyMenuPaletteFromBuffer(gUnknown_08615AD0[1]), gUnknown_08615ABA[1] + palNum, 2);
-            LoadPalette(GetPartyMenuPaletteFromBuffer(gUnknown_08615AD0[2]), gUnknown_08615ABA[2] + palNum, 2);
-            LoadPalette(GetPartyMenuPaletteFromBuffer(gUnknown_08615AE5[0]), gUnknown_08615ABD[0] + palNum, 2);
-            LoadPalette(GetPartyMenuPaletteFromBuffer(gUnknown_08615AE5[1]), gUnknown_08615ABD[1] + palNum, 2);
-            LoadPalette(GetPartyMenuPaletteFromBuffer(gUnknown_08615AE5[2]), gUnknown_08615ABD[2] + palNum, 2);
+            LoadPalette(GetPartyMenuPaletteFromBuffer(sPaletteBufferIds_DisqualifiedPartySlotBG[0]), sPaletteBufferOffsets_PartySlotBG[0] + palNum, 2);
+            LoadPalette(GetPartyMenuPaletteFromBuffer(sPaletteBufferIds_DisqualifiedPartySlotBG[1]), sPaletteBufferOffsets_PartySlotBG[1] + palNum, 2);
+            LoadPalette(GetPartyMenuPaletteFromBuffer(sPaletteBufferIds_DisqualifiedPartySlotBG[2]), sPaletteBufferOffsets_PartySlotBG[2] + palNum, 2);
+            LoadPalette(GetPartyMenuPaletteFromBuffer(sPaletteBufferIds_BorderDisqualified[0]), sPaletteBufferOffsets_PartySlotBorder[0] + palNum, 2);
+            LoadPalette(GetPartyMenuPaletteFromBuffer(sPaletteBufferIds_BorderDisqualified[1]), sPaletteBufferOffsets_PartySlotBorder[1] + palNum, 2);
+            LoadPalette(GetPartyMenuPaletteFromBuffer(sPaletteBufferIds_BorderDisqualified[2]), sPaletteBufferOffsets_PartySlotBorder[2] + palNum, 2);
         }
     }
-    else if (bitfield & 1)
+    else if (bitfield & 1) // is selected
     {
-        LoadPalette(GetPartyMenuPaletteFromBuffer(gUnknown_08615AD6[0]), gUnknown_08615ABA[0] + palNum, 2);
-        LoadPalette(GetPartyMenuPaletteFromBuffer(gUnknown_08615AD6[1]), gUnknown_08615ABA[1] + palNum, 2);
-        LoadPalette(GetPartyMenuPaletteFromBuffer(gUnknown_08615AD6[2]), gUnknown_08615ABA[2] + palNum, 2);
-        LoadPalette(GetPartyMenuPaletteFromBuffer(gUnknown_08615AEB[0]), gUnknown_08615ABD[0] + palNum, 2);
-        LoadPalette(GetPartyMenuPaletteFromBuffer(gUnknown_08615AEB[1]), gUnknown_08615ABD[1] + palNum, 2);
-        LoadPalette(GetPartyMenuPaletteFromBuffer(gUnknown_08615AEB[2]), gUnknown_08615ABD[2] + palNum, 2);
+        LoadPalette(GetPartyMenuPaletteFromBuffer(sPaletteBufferIds_SelectedPartySlotBG[0]), sPaletteBufferOffsets_PartySlotBG[0] + palNum, 2);
+        LoadPalette(GetPartyMenuPaletteFromBuffer(sPaletteBufferIds_SelectedPartySlotBG[1]), sPaletteBufferOffsets_PartySlotBG[1] + palNum, 2);
+        LoadPalette(GetPartyMenuPaletteFromBuffer(sPaletteBufferIds_SelectedPartySlotBG[2]), sPaletteBufferOffsets_PartySlotBG[2] + palNum, 2);
+        LoadPalette(GetPartyMenuPaletteFromBuffer(sPaletteBufferIds_BorderSelected[0]), sPaletteBufferOffsets_PartySlotBorder[0] + palNum, 2);
+        LoadPalette(GetPartyMenuPaletteFromBuffer(sPaletteBufferIds_BorderSelected[1]), sPaletteBufferOffsets_PartySlotBorder[1] + palNum, 2);
+        LoadPalette(GetPartyMenuPaletteFromBuffer(sPaletteBufferIds_BorderSelected[2]), sPaletteBufferOffsets_PartySlotBorder[2] + palNum, 2);
     }
     else
     {
-        LoadPalette(GetPartyMenuPaletteFromBuffer(gUnknown_08615ACD[0]), gUnknown_08615ABA[0] + palNum, 2);
-        LoadPalette(GetPartyMenuPaletteFromBuffer(gUnknown_08615ACD[1]), gUnknown_08615ABA[1] + palNum, 2);
-        LoadPalette(GetPartyMenuPaletteFromBuffer(gUnknown_08615ACD[2]), gUnknown_08615ABA[2] + palNum, 2);
-        LoadPalette(GetPartyMenuPaletteFromBuffer(gUnknown_08615AE2[0]), gUnknown_08615ABD[0] + palNum, 2);
-        LoadPalette(GetPartyMenuPaletteFromBuffer(gUnknown_08615AE2[1]), gUnknown_08615ABD[1] + palNum, 2);
-        LoadPalette(GetPartyMenuPaletteFromBuffer(gUnknown_08615AE2[2]), gUnknown_08615ABD[2] + palNum, 2);
+        LoadPalette(GetPartyMenuPaletteFromBuffer(sPaletteBufferIds_NormalPartySlotBG[0]), sPaletteBufferOffsets_PartySlotBG[0] + palNum, 2);
+        LoadPalette(GetPartyMenuPaletteFromBuffer(sPaletteBufferIds_NormalPartySlotBG[1]), sPaletteBufferOffsets_PartySlotBG[1] + palNum, 2);
+        LoadPalette(GetPartyMenuPaletteFromBuffer(sPaletteBufferIds_NormalPartySlotBG[2]), sPaletteBufferOffsets_PartySlotBG[2] + palNum, 2);
+        LoadPalette(GetPartyMenuPaletteFromBuffer(sPaletteBufferIds_BorderNormal[0]), sPaletteBufferOffsets_PartySlotBorder[0] + palNum, 2);
+        LoadPalette(GetPartyMenuPaletteFromBuffer(sPaletteBufferIds_BorderNormal[1]), sPaletteBufferOffsets_PartySlotBorder[1] + palNum, 2);
+        LoadPalette(GetPartyMenuPaletteFromBuffer(sPaletteBufferIds_BorderNormal[2]), sPaletteBufferOffsets_PartySlotBorder[2] + palNum, 2);
     }
 }
 
@@ -3395,13 +3399,13 @@ static void DisplayPartyPokemonGender(u8 gender, u16 species, u8 *nickname, stru
     switch (gender)
     {
     case MON_MALE:
-        LoadPalette(GetPartyMenuPaletteFromBuffer(gUnknown_08615AC3[0]), gUnknown_08615AB6[0] + palNum, 2);
-        LoadPalette(GetPartyMenuPaletteFromBuffer(gUnknown_08615AC3[1]), gUnknown_08615AB6[1] + palNum, 2);
+        LoadPalette(GetPartyMenuPaletteFromBuffer(sPaletteBufferIds_MaleGenderIcon[0]), sPaletteBufferOffsets_GenderIcon[0] + palNum, 2);
+        LoadPalette(GetPartyMenuPaletteFromBuffer(sPaletteBufferIds_MaleGenderIcon[1]), sPaletteBufferOffsets_GenderIcon[1] + palNum, 2);
         DisplayPartyPokemonBarDetail(ptr->windowId, gText_MaleSymbol, 2, &ptr->unk0->unk4[8]);
         break;
     case MON_FEMALE:
-        LoadPalette(GetPartyMenuPaletteFromBuffer(gUnknown_08615AC5[0]), gUnknown_08615AB6[0] + palNum, 2);
-        LoadPalette(GetPartyMenuPaletteFromBuffer(gUnknown_08615AC5[1]), gUnknown_08615AB6[1] + palNum, 2);
+        LoadPalette(GetPartyMenuPaletteFromBuffer(sPaletteBufferIds_FemaleGenderIcon[0]), sPaletteBufferOffsets_GenderIcon[0] + palNum, 2);
+        LoadPalette(GetPartyMenuPaletteFromBuffer(sPaletteBufferIds_FemaleGenderIcon[1]), sPaletteBufferOffsets_GenderIcon[1] + palNum, 2);
         DisplayPartyPokemonBarDetail(ptr->windowId, gText_FemaleSymbol, 2, &ptr->unk0->unk4[8]);
         break;
     }
@@ -3462,24 +3466,25 @@ static void DisplayPartyPokemonHPBar(u16 hp, u16 maxhp, struct Struct203CEDC *pt
     {
     case HP_BAR_GREEN:
     case HP_BAR_FULL:
-        LoadPalette(GetPartyMenuPaletteFromBuffer(gUnknown_08615AC7[0]), gUnknown_08615AB8[0] + palNum, 2);
-        LoadPalette(GetPartyMenuPaletteFromBuffer(gUnknown_08615AC7[1]), gUnknown_08615AB8[1] + palNum, 2);
+        LoadPalette(GetPartyMenuPaletteFromBuffer(sPaletteBufferIds_GreenHPBar[0]), sPaletteBufferOffsets_HPBar[0] + palNum, 2);
+        LoadPalette(GetPartyMenuPaletteFromBuffer(sPaletteBufferIds_GreenHPBar[1]), sPaletteBufferOffsets_HPBar[1] + palNum, 2);
         break;
     case HP_BAR_YELLOW:
-        LoadPalette(GetPartyMenuPaletteFromBuffer(gUnknown_08615AC9[0]), gUnknown_08615AB8[0] + palNum, 2);
-        LoadPalette(GetPartyMenuPaletteFromBuffer(gUnknown_08615AC9[1]), gUnknown_08615AB8[1] + palNum, 2);
+        LoadPalette(GetPartyMenuPaletteFromBuffer(sPaletteBufferIds_YellowHPBar[0]), sPaletteBufferOffsets_HPBar[0] + palNum, 2);
+        LoadPalette(GetPartyMenuPaletteFromBuffer(sPaletteBufferIds_YellowHPBar[1]), sPaletteBufferOffsets_HPBar[1] + palNum, 2);
         break;
     default:
-        LoadPalette(GetPartyMenuPaletteFromBuffer(gUnknown_08615ACB[0]), gUnknown_08615AB8[0] + palNum, 2);
-        LoadPalette(GetPartyMenuPaletteFromBuffer(gUnknown_08615ACB[1]), gUnknown_08615AB8[1] + palNum, 2);
+        LoadPalette(GetPartyMenuPaletteFromBuffer(sPaletteBufferIds_RedHPBar[0]), sPaletteBufferOffsets_HPBar[0] + palNum, 2);
+        LoadPalette(GetPartyMenuPaletteFromBuffer(sPaletteBufferIds_RedHPBar[1]), sPaletteBufferOffsets_HPBar[1] + palNum, 2);
         break;
     }
 
     hpFraction = GetScaledHPFraction(hp, maxhp, ptr->unk0->unk4[22]);
-    FillWindowPixelRect(ptr->windowId, gUnknown_08615AB8[1], ptr->unk0->unk4[20], ptr->unk0->unk4[21], hpFraction, 1);
-    FillWindowPixelRect(ptr->windowId, gUnknown_08615AB8[0], ptr->unk0->unk4[20], ptr->unk0->unk4[21] + 1, hpFraction, 2);
+    // This draws directly to the sprite window a bar made up of a faded and unfaded palette colors
+    FillWindowPixelRect(ptr->windowId, sPaletteBufferOffsets_HPBar[1], ptr->unk0->unk4[20], ptr->unk0->unk4[21], hpFraction, 1);
+    FillWindowPixelRect(ptr->windowId, sPaletteBufferOffsets_HPBar[0], ptr->unk0->unk4[20], ptr->unk0->unk4[21] + 1, hpFraction, 2);
     if (hpFraction != ptr->unk0->unk4[22])
-    {
+    {   // This fills in the rest of the space with empty bar colors, which are apparently always 2 for unfaded, and 13 for faded
         FillWindowPixelRect(ptr->windowId, 13, ptr->unk0->unk4[20] + hpFraction, ptr->unk0->unk4[21], ptr->unk0->unk4[22] - hpFraction, 1);
         FillWindowPixelRect(ptr->windowId, 2, ptr->unk0->unk4[20] + hpFraction, ptr->unk0->unk4[21] + 1, ptr->unk0->unk4[22] - hpFraction, 2);
     }
@@ -3495,7 +3500,7 @@ static void DisplayPartyPokemonOtherText(u8 stringID, struct Struct203CEDC *ptr,
         ptr->unk0->unk0(ptr->windowId, ptr->unk0->unk1C >> 3, ptr->unk0->unk1D >> 3, unk, unk2, 1);
     }
     if (c != 2)
-        AddTextPrinterParameterized3(ptr->windowId, 1, ptr->unk0->unk1C, ptr->unk0->unk1D, gUnknown_086157FC[0], 0, gUnknown_08615B60[stringID]);
+        AddTextPrinterParameterized3(ptr->windowId, 1, ptr->unk0->unk1C, ptr->unk0->unk1D, gUnknown_086157FC[0], 0, sPartySlotText[stringID]);
 }
 
 static void sub_81B302C(u8 *ptr)
@@ -3548,7 +3553,7 @@ void display_pokemon_menu_message(u32 stringID)
                 stringID = 1;
         }
         SetWindowBorderStyle(*windowPtr, FALSE, 0x4F, 0xD);
-        StringExpandPlaceholders(gStringVar4, gUnknown_08615AF4[stringID]);
+        StringExpandPlaceholders(gStringVar4, sPartyMenuDialogStrings[stringID]);
         AddTextPrinterParameterized(*windowPtr, 1, gStringVar4, 0, 1, 0, 0);
         schedule_bg_copy_tilemap_to_vram(2);
     }
@@ -3845,7 +3850,7 @@ static void CursorCb_Switch(u8 taskId)
     sub_81B302C(&gUnknown_0203CEC4->unkC[1]);
     sub_81B302C(&gUnknown_0203CEC4->unkC[0]);
     display_pokemon_menu_message(3);
-    sub_81B0FCC(gUnknown_0203CEC8.unk9, 1);
+    UpdatePartyMenuSlotSelected(gUnknown_0203CEC8.unk9, TRUE);
     gUnknown_0203CEC8.unkA = gUnknown_0203CEC8.unk9;
     gTasks[taskId].func = sub_81B1370;
 }
@@ -3888,8 +3893,8 @@ static void sub_81B3938(u8 taskId)
         ClearWindowTilemap(windowIds[0]);
         ClearWindowTilemap(windowIds[1]);
         gUnknown_0203CEC8.unkB = 9;
-        sub_81B0FCC(gUnknown_0203CEC8.unk9, 1);
-        sub_81B0FCC(gUnknown_0203CEC8.unkA, 1);
+        UpdatePartyMenuSlotSelected(gUnknown_0203CEC8.unk9, TRUE);
+        UpdatePartyMenuSlotSelected(gUnknown_0203CEC8.unkA, TRUE);
         sub_81B3CC0(taskId);
         gTasks[taskId].func = sub_81B3D48;
     }
@@ -4062,9 +4067,9 @@ static void sub_81B407C(u8 taskId)
 {
     sub_81B302C(&gUnknown_0203CEC4->unkC[1]);
     gUnknown_0203CEC8.unkB = 0;
-    sub_81B0FCC(gUnknown_0203CEC8.unk9, 0);
+    UpdatePartyMenuSlotSelected(gUnknown_0203CEC8.unk9, FALSE); //deselect old slot
     gUnknown_0203CEC8.unk9 = gUnknown_0203CEC8.unkA;
-    sub_81B0FCC(gUnknown_0203CEC8.unkA, 1);
+    UpdatePartyMenuSlotSelected(gUnknown_0203CEC8.unkA, TRUE); //select new slot
     display_pokemon_menu_message(0);
     gTasks[taskId].func = sub_81B1370;
 }
@@ -4544,9 +4549,9 @@ static void CursorCb_Enter(u8 taskId)
 
 static void sub_81B4F88(void)
 {
-    sub_81B0FCC(gUnknown_0203CEC8.unk9, 0);
+    UpdatePartyMenuSlotSelected(gUnknown_0203CEC8.unk9, FALSE); //deselect old slot
     gUnknown_0203CEC8.unk9 = 6;
-    sub_81B0FCC(gUnknown_0203CEC8.unk9, 1);
+    UpdatePartyMenuSlotSelected(gUnknown_0203CEC8.unk9, TRUE); //select new slot
 }
 
 static void CursorCb_NoEntry(u8 taskId)
@@ -4921,7 +4926,7 @@ static void party_menu_icon_anim(struct Pokemon *mon, struct Struct203CEDC *ptr,
         bit = (gUnknown_08616020[a] ^ bit) ? 1 : 0;
     species2 = GetMonData(mon, MON_DATA_SPECIES2);
     party_menu_link_mon_icon_anim(species2, GetMonData(mon, MON_DATA_PERSONALITY), ptr, 1, bit);
-    sub_81B5B38(ptr->unk9, mon);
+    SetAnimationBasedOnPokemonHP(ptr->unk9, mon);
 }
 
 static void party_menu_link_mon_icon_anim(u16 species, u32 pid, struct Struct203CEDC *ptr, u8 priority, u32 bit)
@@ -4933,52 +4938,55 @@ static void party_menu_link_mon_icon_anim(u16 species, u32 pid, struct Struct203
     }
 }
 
-static void sub_81B5A8C(u8 spriteId, u16 hp, u16 maxhp)
+static void SetAnimationBasedOnHP(u8 spriteId, u16 hp, u16 maxhp)
 {
     switch (GetHPBarLevel(hp, maxhp))
     {
     case HP_BAR_FULL:
-        sub_80D32C8(&gSprites[spriteId], 0);
+        SetPokemonIconAnimationNum(&gSprites[spriteId], 0);
         break;
     case HP_BAR_GREEN:
-        sub_80D32C8(&gSprites[spriteId], 1);
+        SetPokemonIconAnimationNum(&gSprites[spriteId], 1);
         break;
     case HP_BAR_YELLOW:
-        sub_80D32C8(&gSprites[spriteId], 2);
+        SetPokemonIconAnimationNum(&gSprites[spriteId], 2);
         break;
     case HP_BAR_RED:
-        sub_80D32C8(&gSprites[spriteId], 3);
+        SetPokemonIconAnimationNum(&gSprites[spriteId], 3);
         break;
     default:
-        sub_80D32C8(&gSprites[spriteId], 4);
+        SetPokemonIconAnimationNum(&gSprites[spriteId], 4);
         break;
     }
 }
 
-static void sub_81B5B38(u8 spriteId, struct Pokemon *mon)
+static void SetAnimationBasedOnPokemonHP(u8 spriteId, struct Pokemon *mon)
 {
-    sub_81B5A8C(spriteId, GetMonData(mon, MON_DATA_HP), GetMonData(mon, MON_DATA_MAX_HP));
+    SetAnimationBasedOnHP(spriteId, GetMonData(mon, MON_DATA_HP), GetMonData(mon, MON_DATA_MAX_HP));
 }
 
-static void AnimateSelectedPartyIcon(u8 spriteId, u8 a)
+static void AnimateSelectedPartyIcon(u8 spriteId, bool8 selected)
 {
     gSprites[spriteId].data[0] = 0;
-    if (a == 0)
+    if (selected == FALSE)
     {
+        // If this pokemon is on the left of the party (x==16 is close to the left of the screen)
         if (gSprites[spriteId].pos1.x == 16)
-        {
+        {   // Return the sprite to normal position for the left of the party
             gSprites[spriteId].pos2.x = 0;
             gSprites[spriteId].pos2.y = -4;
         }
         else
-        {
+        {   //Else return the sprite to normal position for the right of the party
             gSprites[spriteId].pos2.x = -4;
             gSprites[spriteId].pos2.y = 0;
         }
         gSprites[spriteId].callback = UpdatePartyMonIconFrame;
     }
     else
-    {
+    {   // If this pokemon is selected, bounce it.
+        // Note: pos2.y = 0 here, where as pos2.y is set to 1 below. You can see this quirk of the bouncing animation 
+        // in the game sometimes, if you watch the icons closely when you switch between selecting party members.
         gSprites[spriteId].pos2.x = 0;
         gSprites[spriteId].pos2.y = 0;
         gSprites[spriteId].callback = UpdatePartyMonIconFrameAndBounce;
@@ -5132,9 +5140,9 @@ static u8 sub_81B5F74(u8 x, u8 y)
     return CreateSprite(&gSpriteTemplate_8615F78, x, y, 8);
 }
 
-static void sub_81B5F98(u8 spriteId, u8 a)
+static void StartSpriteAnimById(u8 spriteId, u8 animNum)
 {
-    StartSpriteAnim(&gSprites[spriteId], a);
+    StartSpriteAnim(&gSprites[spriteId], animNum);
 }
 
 static void sub_81B5FBC(u8 spriteId, u8 spriteId2, u8 a)
@@ -5422,7 +5430,7 @@ void ItemUseCB_Medicine(u8 taskId, TaskFunc task)
     if (canHeal == TRUE)
     {
         if (hp == 0)
-            sub_81B0FCC(gUnknown_0203CEC8.unk9, 1);
+            UpdatePartyMenuSlotSelected(gUnknown_0203CEC8.unk9, TRUE);
         sub_81B1F18(taskId, gUnknown_0203CEC8.unk9, 1, GetMonData(mon, MON_DATA_HP) - hp, sub_81B672C);
         sub_81B1FA8(taskId, 0, hp);
         return;
@@ -5975,8 +5983,8 @@ static void sub_81B754C(u8 slot, struct Pokemon *mon)
     DisplayPartyPokemonHPCheck(mon, &gUnknown_0203CEDC[slot], 1);
     DisplayPartyPokemonMaxHPCheck(mon, &gUnknown_0203CEDC[slot], 1);
     DisplayPartyPokemonHPBarCheck(mon, &gUnknown_0203CEDC[slot]);
-    sub_81B5B38(gUnknown_0203CEDC[slot].unk9, mon);
-    sub_81B0FCC(slot, 1);
+    SetAnimationBasedOnPokemonHP(gUnknown_0203CEDC[slot].unk9, mon);
+    UpdatePartyMenuSlotSelected(slot, TRUE);
     schedule_bg_copy_tilemap_to_vram(0);
 }
 
@@ -6146,8 +6154,8 @@ static void sub_81B7A28(u8 taskId)
     party_menu_get_status_condition_and_update_object(mon, &gUnknown_0203CEDC[gUnknown_0203CEC8.unk9]);
     if (gSprites[gUnknown_0203CEDC[gUnknown_0203CEC8.unk9].unkC].invisible)
         DisplayPartyPokemonLevelCheck(mon, &gUnknown_0203CEDC[gUnknown_0203CEC8.unk9], 1);
-    sub_81B0FCC(gUnknown_0203CEC4->data[2], 0);
-    sub_81B0FCC(gUnknown_0203CEC8.unk9, 1);
+    UpdatePartyMenuSlotSelected(gUnknown_0203CEC4->data[2], FALSE);
+    UpdatePartyMenuSlotSelected(gUnknown_0203CEC8.unk9, TRUE);
     sub_81B1F18(taskId, gUnknown_0203CEC8.unk9, 1, GetMonData(mon, MON_DATA_HP) - hp, sub_81B7C10);
     sub_81B1FA8(taskId, 0, hp);
     gUnknown_0203CEC4->data[0] = 1;
