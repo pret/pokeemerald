@@ -302,7 +302,7 @@ void LinkTestScreen(void)
     SetMainCallback2(CB2_LinkTest);
 }
 
-void SetgLocalLinkPlayerId(u8 playerId)
+void SetLocalLinkPlayerId(u8 playerId)
 {
     gLocalLinkPlayer.id = playerId;
 }

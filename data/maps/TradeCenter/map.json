@@ -55,7 +55,6 @@
       "script": "EventScript_TradeCenter_Chair0"
     },
     {
-      "comment": "This is trade seat #2.",
       "type": "trigger",
       "x": 7,
       "y": 5,

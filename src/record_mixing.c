@@ -324,7 +324,7 @@ static void Task_RecordMixing_Main(u8 taskId)
     case 0: // init
         sSentRecord = malloc(sizeof(union PlayerRecords));
         sReceivedRecords = malloc(sizeof(union PlayerRecords) * 4);
-        SetgLocalLinkPlayerId(gSpecialVar_0x8005);
+        SetLocalLinkPlayerId(gSpecialVar_0x8005);
         VarSet(VAR_TEMP_0, 1);
         gUnknown_03001130 = FALSE;
         PrepareExchangePacket();
