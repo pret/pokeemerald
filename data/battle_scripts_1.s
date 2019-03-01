@@ -5455,6 +5455,9 @@ BattleScript_EnduredMsg::
 	return
 	
 BattleScript_SturdiedMsg::
+	copybyte gBattlerAbility, gBattlerTarget
+	pause 0x10
+	call BattleScript_AbilityPopUp
 	printstring STRINGID_ENDUREDSTURDY
 	waitmessage 0x40
 	return
