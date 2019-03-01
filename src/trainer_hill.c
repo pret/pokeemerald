@@ -93,7 +93,7 @@ struct TrHillStruct2
 // EWRAM
 static EWRAM_DATA struct TrHillStruct2 *sHillData = NULL;
 static EWRAM_DATA struct TrHillRoomTrainers *sRoomTrainers = NULL;
-EWRAM_DATA u32 *gVBlankCounterPointer = NULL;
+EWRAM_DATA u32 *gTrainerHillVBlankCounter = NULL;
 
 // This file's functions.
 static void TrainerHillStartChallenge(void);
@@ -372,7 +372,7 @@ void InitTrainerHillBattleStruct(void)
         }
         sRoomTrainers->facilityClass[i] = sHillData->tag.floors[sHillData->floorId].trainers[i].facilityClass;
     }
-    SetVBlankCounterPointer(&gSaveBlock1Ptr->trainerHill.timer);
+    SetTrainerHillVBlankCounter(&gSaveBlock1Ptr->trainerHill.timer);
     FreeDataStruct();
 }
 
@@ -435,7 +435,7 @@ static void TrainerHillStartChallenge(void)
         gSaveBlock1Ptr->trainerHill.field_3D6E_0f = 0;
 
     gSaveBlock1Ptr->trainerHill.field_3D6C = 0;
-    SetVBlankCounterPointer(&gSaveBlock1Ptr->trainerHill.timer);
+    SetTrainerHillVBlankCounter(&gSaveBlock1Ptr->trainerHill.timer);
     gSaveBlock1Ptr->trainerHill.timer = 0;
     gSaveBlock1Ptr->trainerHill.field_3D6E_0c = 0;
     gSaveBlock1Ptr->trainerHill.field_3D6E_0b = 0;
@@ -447,7 +447,7 @@ static void TrainerHillStartChallenge(void)
 
 static void sub_81D58D8(void)
 {
-    ClearVBlankCounterPointer();
+    ClearTrainerHillVBlankCounter();
     gSpecialVar_Result = 0;
     if (gSaveBlock1Ptr->trainerHill.field_3D6E_0c)
         gSpecialVar_Result++;
@@ -505,7 +505,7 @@ static void TrainerHillResumeTimer(void)
         if (gSaveBlock1Ptr->trainerHill.timer >= HILL_MAX_TIME)
             gSaveBlock1Ptr->trainerHill.timer = HILL_MAX_TIME;
         else
-            SetVBlankCounterPointer(&gSaveBlock1Ptr->trainerHill.timer);
+            SetTrainerHillVBlankCounter(&gSaveBlock1Ptr->trainerHill.timer);
     }
 }
 

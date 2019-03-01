@@ -2443,7 +2443,7 @@ static void sub_80B8410(struct Task *task)
 bool8 FldEff_FieldMoveShowMon(void)
 {
     u8 taskId;
-    if (IsMapTypeOutside(GetCurrentMapType()) == TRUE)
+    if (IsMapTypeOutdoors(GetCurrentMapType()) == TRUE)
     {
         taskId = CreateTask(sub_80B8554, 0xff);
     } else

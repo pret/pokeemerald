@@ -16,7 +16,7 @@ SecretBase_RedCave1_MapScript1_23B4A2: @ 823B4A2
 	end
 
 SecretBase_RedCave1_MapScript2_23B4AE: @ 823B4AE
-	map_script_2 VAR_SECRET_BASE_SHOULD_BE_INIT, 0, SecretBase_RedCave1_EventScript_275B81
+	map_script_2 VAR_INIT_SECRET_BASE, 0, SecretBase_RedCave1_EventScript_275B81
 	.2byte 0
 
 SecretBase_RedCave1_MapScript1_23B4B8: @ 823B4B8

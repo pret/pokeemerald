@@ -1,7 +1,7 @@
 #ifndef GUARD_TRAINER_HILL_H
 #define GUARD_TRAINER_HILL_H
 
-extern u32 *gVBlankCounterPointer;
+extern u32 *gTrainerHillVBlankCounter;
 
 void CallTrainerHillFunction(void);
 void ResetTrainerHillResults(void);

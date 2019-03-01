@@ -678,7 +678,7 @@ void UpdateEscapeWarp(s16 x, s16 y)
 {
     u8 currMapType = GetCurrentMapType();
     u8 destMapType = GetMapTypeByGroupAndId(sWarpDestination.mapGroup, sWarpDestination.mapNum);
-    if (IsMapTypeOutside(currMapType) && IsMapTypeOutside(destMapType) != TRUE)
+    if (IsMapTypeOutdoors(currMapType) && IsMapTypeOutdoors(destMapType) != TRUE)
         SetEscapeWarp(gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum, -1, x - 7, y - 6);
 }
 
@@ -823,8 +823,8 @@ void LoadMapFromCameraTransition(u8 mapGroup, u8 mapNum)
 
 static void mli0_load_map(u32 a1)
 {
-    bool8 v2;
-    bool8 indoors;
+    bool8 isOutdoors;
+    bool8 isIndoors;
 
     LoadCurrentMapData();
     if (!(sUnknown_020322D8 & 1))
@@ -837,8 +837,8 @@ static void mli0_load_map(u32 a1)
             LoadEventObjTemplatesFromHeader();
     }
 
-    v2 = IsMapTypeOutside(gMapHeader.mapType);
-    indoors = Overworld_MapTypeIsIndoors(gMapHeader.mapType);
+    isOutdoors = IsMapTypeOutdoors(gMapHeader.mapType);
+    isIndoors = Overworld_MapTypeIsIndoors(gMapHeader.mapType);
 
     sub_80EB218();
     TrySetMapSaveWarpStatus();
@@ -850,7 +850,7 @@ static void mli0_load_map(u32 a1)
         DoTimeBasedEvents();
     SetSav1WeatherFromCurrMapHeader();
     ChooseAmbientCrySpecies();
-    if (v2)
+    if (isOutdoors)
         FlagClear(FLAG_SYS_USE_FLASH);
     SetDefaultFlashLevel();
     Overworld_ClearSavedMusic();
@@ -864,7 +864,7 @@ static void mli0_load_map(u32 a1)
     else
         InitMap();
 
-    if (a1 != 1 && indoors)
+    if (a1 != 1 && isIndoors)
     {
         UpdateTVScreensOnMap(gBackupMapLayout.width, gBackupMapLayout.height);
         sub_80E9238(1);
@@ -1330,7 +1330,7 @@ u8 GetLastUsedWarpMapType(void)
     return GetMapTypeByWarpData(&gLastUsedWarp);
 }
 
-bool8 IsMapTypeOutside(u8 mapType)
+bool8 IsMapTypeOutdoors(u8 mapType)
 {
     if (mapType == MAP_TYPE_ROUTE
      || mapType == MAP_TYPE_TOWN

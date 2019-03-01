@@ -370,7 +370,7 @@ bool32 ShouldDoWallyCall(void)
             case MAP_TYPE_CITY:
             case MAP_TYPE_ROUTE:
             case MAP_TYPE_OCEAN_ROUTE:
-                if (++(*GetVarPointer(VAR_WALLY_CALL_STEP_COUNTER)) < 0xFA)
+                if (++(*GetVarPointer(VAR_WALLY_CALL_STEP_COUNTER)) < 250)
                 {
                     return FALSE;
                 }
@@ -451,7 +451,7 @@ bool32 ShouldDoRoxanneCall(void)
             case 2:
             case 3:
             case 6:
-                if (++(*GetVarPointer(VAR_ROXANNE_CALL_STEP_COUNTER)) < 0xFA)
+                if (++(*GetVarPointer(VAR_ROXANNE_CALL_STEP_COUNTER)) < 250)
                 {
                     return FALSE;
                 }
@@ -478,7 +478,7 @@ bool32 ShouldDoRivalRayquazaCall(void)
             case 2:
             case 3:
             case 6:
-                if (++(*GetVarPointer(VAR_RIVAL_RAYQUAZA_CALL_STEP_COUNTER)) < 0xFA)
+                if (++(*GetVarPointer(VAR_RIVAL_RAYQUAZA_CALL_STEP_COUNTER)) < 250)
                 {
                     return FALSE;
                 }
@@ -1516,7 +1516,7 @@ bool8 FoundBlackGlasses(void)
 
 void SetRoute119Weather(void)
 {
-    if (IsMapTypeOutside(GetLastUsedWarpMapType()) != TRUE)
+    if (IsMapTypeOutdoors(GetLastUsedWarpMapType()) != TRUE)
     {
         SetSav1Weather(20);
     }
@@ -1524,7 +1524,7 @@ void SetRoute119Weather(void)
 
 void SetRoute123Weather(void)
 {
-    if (IsMapTypeOutside(GetLastUsedWarpMapType()) != TRUE)
+    if (IsMapTypeOutdoors(GetLastUsedWarpMapType()) != TRUE)
     {
         SetSav1Weather(21);
     }
@@ -3428,21 +3428,21 @@ void CreateUnusualWeatherEvent(void)
 
     if (FlagGet(FLAG_DEFEATED_KYOGRE) == TRUE)
     {
-        VarSet(VAR_UNUSUAL_WEATHER_LOCATION, (randomValue & (UNUSUAL_WEATHER_COUNT_PER_LEGENDARY - 1)) + UNUSUAL_WEATHER_GROUDON_LOCATIONS_START);
+        VarSet(VAR_UNUSUAL_WEATHER_LOCATION, (randomValue % UNUSUAL_WEATHER_COUNT_PER_LEGENDARY) + UNUSUAL_WEATHER_GROUDON_LOCATIONS_START);
     }
     else if (FlagGet(FLAG_DEFEATED_GROUDON) == TRUE)
     {
-        VarSet(VAR_UNUSUAL_WEATHER_LOCATION, (randomValue & (UNUSUAL_WEATHER_COUNT_PER_LEGENDARY - 1)) + UNUSUAL_WEATHER_KYOGRE_LOCATIONS_START);
+        VarSet(VAR_UNUSUAL_WEATHER_LOCATION, (randomValue % UNUSUAL_WEATHER_COUNT_PER_LEGENDARY) + UNUSUAL_WEATHER_KYOGRE_LOCATIONS_START);
     }
     else if ((randomValue & 1) == 0)
     {
         randomValue = Random();
-        VarSet(VAR_UNUSUAL_WEATHER_LOCATION, (randomValue & (UNUSUAL_WEATHER_COUNT_PER_LEGENDARY - 1)) + UNUSUAL_WEATHER_GROUDON_LOCATIONS_START);
+        VarSet(VAR_UNUSUAL_WEATHER_LOCATION, (randomValue % UNUSUAL_WEATHER_COUNT_PER_LEGENDARY) + UNUSUAL_WEATHER_GROUDON_LOCATIONS_START);
     }
     else
     {
         randomValue = Random();
-        VarSet(VAR_UNUSUAL_WEATHER_LOCATION, (randomValue & (UNUSUAL_WEATHER_COUNT_PER_LEGENDARY - 1)) + UNUSUAL_WEATHER_KYOGRE_LOCATIONS_START);
+        VarSet(VAR_UNUSUAL_WEATHER_LOCATION, (randomValue % UNUSUAL_WEATHER_COUNT_PER_LEGENDARY) + UNUSUAL_WEATHER_KYOGRE_LOCATIONS_START);
     }
 }
 
@@ -3450,7 +3450,24 @@ void CreateUnusualWeatherEvent(void)
 // returns TRUE if the weather is for Kyogre, and FALSE if it's for Groudon.
 bool32 GetUnusualWeatherMapNameAndType(void)
 {
-    static const u8 sUnusualWeatherMapNumbers[] = { 0x1d, 0x1d, 0x1e, 0x1e, 0x1f, 0x1f, 0x21, 0x21, 0x14, 0x14, 0x28, 0x28, 0x2a, 0x2a, 0x2c, 0x2c };
+    static const u8 sUnusualWeatherMapNumbers[] = {
+        MAP_NUM(ROUTE114),
+        MAP_NUM(ROUTE114),
+        MAP_NUM(ROUTE115),
+        MAP_NUM(ROUTE115),
+        MAP_NUM(ROUTE116),
+        MAP_NUM(ROUTE116),
+        MAP_NUM(ROUTE118),
+        MAP_NUM(ROUTE118),
+        MAP_NUM(ROUTE105),
+        MAP_NUM(ROUTE105),
+        MAP_NUM(ROUTE125),
+        MAP_NUM(ROUTE125),
+        MAP_NUM(ROUTE127),
+        MAP_NUM(ROUTE127),
+        MAP_NUM(ROUTE129),
+        MAP_NUM(ROUTE129)
+    };
 
     u16 unusualWeather = VarGet(VAR_UNUSUAL_WEATHER_LOCATION);
 
@@ -3469,7 +3486,24 @@ bool32 GetUnusualWeatherMapNameAndType(void)
 bool8 UnusualWeatherHasExpired(void)
 {
     // Duplicate array.
-    static const u8 sUnusualWeatherMapNumbers_2[] = { 0x1d, 0x1d, 0x1e, 0x1e, 0x1f, 0x1f, 0x21, 0x21, 0x14, 0x14, 0x28, 0x28, 0x2a, 0x2a, 0x2c, 0x2c };
+    static const u8 sUnusualWeatherMapNumbers_2[] = {
+        MAP_NUM(ROUTE114),
+        MAP_NUM(ROUTE114),
+        MAP_NUM(ROUTE115),
+        MAP_NUM(ROUTE115),
+        MAP_NUM(ROUTE116),
+        MAP_NUM(ROUTE116),
+        MAP_NUM(ROUTE118),
+        MAP_NUM(ROUTE118),
+        MAP_NUM(ROUTE105),
+        MAP_NUM(ROUTE105),
+        MAP_NUM(ROUTE125),
+        MAP_NUM(ROUTE125),
+        MAP_NUM(ROUTE127),
+        MAP_NUM(ROUTE127),
+        MAP_NUM(ROUTE129),
+        MAP_NUM(ROUTE129)
+    };
 
     u16 steps = VarGet(VAR_UNUSUAL_WEATHER_STEP_COUNTER);
     u16 unusualWeather = VarGet(VAR_UNUSUAL_WEATHER_LOCATION);
