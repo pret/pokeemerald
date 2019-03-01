@@ -6301,8 +6301,9 @@ BattleScript_CuteCharmActivates::
 	waitmessage 0x40
 	return
 
-BattleScript_ApplySecondaryEffect::
+BattleScript_AbilityStatusEffect::
 	waitstate
+	call BattleScript_AbilityPopUp
 	seteffectsecondary
 	return
 
