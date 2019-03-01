@@ -1114,7 +1114,7 @@ static void sub_811A2A4(u8 taskId, TaskFunc taskFunc)
 
 static void sub_811A2C0(u8 taskId)
 {
-    if (!is_c1_link_related_active())
+    if (!IsUpdateLinkStateCBActive())
     {
         while (sub_811A428(taskId));
     }

@@ -388,7 +388,7 @@ u32 sub_81C7078(u32 (*func)(s32), u32 priority)
 {
     u16 taskId;
 
-    if (!is_c1_link_related_active())
+    if (!IsUpdateLinkStateCBActive())
         taskId = CreateTask(sub_81C7170, priority);
     else
         taskId = CreateTask(sub_81C71E4, priority);

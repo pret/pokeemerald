@@ -188,7 +188,7 @@ extern u8 gUnknown_02022C3E;
 extern u16 gUnknown_02022C3C;
 extern u8 gUnknown_02022C20[];
 extern u8 gFieldLinkPlayerCount;
-extern u8 gUnknown_03005DB4;
+extern u8 gLocalLinkPlayerId;
 
 // IWRAM vars
 IWRAM_DATA struct UnkStruct_Leader *gUnknown_03000DA0;
@@ -1641,7 +1641,7 @@ void sub_8014304(s8 mapGroup, s8 mapNum, s32 x, s32 y, u16 arg4)
     gSpecialVar_0x8004 = arg4;
     VarSet(VAR_CABLE_CLUB_STATE, arg4);
     gFieldLinkPlayerCount = GetLinkPlayerCount();
-    gUnknown_03005DB4 = GetMultiplayerId();
+    gLocalLinkPlayerId = GetMultiplayerId();
     SetCableClubWarp();
     SetWarpDestination(mapGroup, mapNum, -1, x, y);
     WarpIntoMap();
@@ -1697,7 +1697,7 @@ void sub_801440C(u8 taskId)
     case 81:
         CleanupOverworldWindowsAndTilemaps();
         gMain.savedCallback = sub_801AC54;
-        sub_81B8518(3);
+        InitChooseHalfPartyForBattle(3);
         break;
     case 1:
         CleanupOverworldWindowsAndTilemaps();

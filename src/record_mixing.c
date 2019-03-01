@@ -106,7 +106,7 @@ static EWRAM_DATA union PlayerRecords *sSentRecord = NULL;
 // Static ROM declarations
 
 static void Task_RecordMixing_Main(u8 taskId);
-static void sub_80E7324(u8 taskId);
+static void Task_MixingRecordsRecv(u8 taskId);
 static void Task_SendPacket(u8 taskId);
 static void Task_CopyReceiveBuffer(u8 taskId);
 static void Task_SendPacket_SwitchToReceive(u8 taskId);
@@ -120,7 +120,7 @@ static void ReceiveLilycoveLadyData(LilycoveLady *, size_t, u8);
 static void sub_80E7B2C(const u8 *);
 static void ReceiveDaycareMailData(struct RecordMixingDayCareMail *, size_t, u8, TVShow *);
 static void ReceiveGiftItem(u16 *item, u8 which);
-static void sub_80E7FF8(u8 taskId);
+static void Task_DoRecordMixing(u8 taskId);
 static void sub_80E8110(struct Apprentice *arg0, struct Apprentice *arg1);
 static void ReceiveApprenticeData(struct Apprentice *arg0, size_t arg1, u32 arg2);
 static void ReceiveRankingHallRecords(struct PlayerHallRecords *hallRecords, size_t arg1, u32 arg2);
@@ -170,7 +170,8 @@ static const u8 gUnknown_0858CFBE[3][4] =
 
 #define BUFFER_CHUNK_SIZE 200
 
-void sub_80E6BE8(void)
+// Note: VAR_0x8005 contains the spotId.
+void RecordMixingPlayerSpotTriggered(void)
 {
     sub_80B37D4(Task_RecordMixing_Main);
 }
@@ -313,6 +314,7 @@ static void Task_RecordMixing_SoundEffect(u8 taskId)
 #define tState        data[0]
 #define tSndEffTaskId data[15]
 
+// Note: Currently, special var 8005 contains the player's spot id.
 static void Task_RecordMixing_Main(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
@@ -322,16 +324,16 @@ static void Task_RecordMixing_Main(u8 taskId)
     case 0: // init
         sSentRecord = malloc(sizeof(union PlayerRecords));
         sReceivedRecords = malloc(sizeof(union PlayerRecords) * 4);
-        sub_8009628(gSpecialVar_0x8005);
+        SetLocalLinkPlayerId(gSpecialVar_0x8005);
         VarSet(VAR_TEMP_0, 1);
         gUnknown_03001130 = FALSE;
         PrepareExchangePacket();
         CreateRecordMixingSprite();
         tState = 1;
-        data[10] = CreateTask(sub_80E7324, 80);
+        data[10] = CreateTask(Task_MixingRecordsRecv, 80);
         tSndEffTaskId = CreateTask(Task_RecordMixing_SoundEffect, 81);
         break;
-    case 1: // wait for sub_80E7324
+    case 1: // wait for Task_MixingRecordsRecv
         if (!gTasks[data[10]].isActive)
         {
             tState = 2;
@@ -341,11 +343,11 @@ static void Task_RecordMixing_Main(u8 taskId)
         }
         break;
     case 2:
-        data[10] = CreateTask(sub_80E7FF8, 10);
+        data[10] = CreateTask(Task_DoRecordMixing, 10);
         tState = 3;
         PlaySE(SE_W226);
         break;
-    case 3: // wait for sub_80E7FF8
+    case 3: // wait for Task_DoRecordMixing
         if (!gTasks[data[10]].isActive)
         {
             tState = 4;
@@ -381,7 +383,7 @@ static void Task_RecordMixing_Main(u8 taskId)
 #undef tState
 #undef tSndEffTaskId
 
-static void sub_80E7324(u8 taskId)
+static void Task_MixingRecordsRecv(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
 
@@ -405,7 +407,7 @@ static void sub_80E7324(u8 taskId)
             u8 players = GetLinkPlayerCount_2();
             if (IsLinkMaster() == TRUE)
             {
-                if (players == sub_800AA48())
+                if (players == GetSavedPlayerCount())
                 {
                     PlaySE(SE_PIN);
                     task->data[0] = 201;
@@ -420,14 +422,15 @@ static void sub_80E7324(u8 taskId)
         }
         break;
     case 201:
-        if (sub_800AA48() == GetLinkPlayerCount_2() && ++task->data[12] > (GetLinkPlayerCount_2() * 30))
+        // We're the link master. Delay for 30 frames per connected player.
+        if (GetSavedPlayerCount() == GetLinkPlayerCount_2() && ++task->data[12] > (GetLinkPlayerCount_2() * 30))
         {
-            sub_800A620();
+            CheckShouldAdvanceLinkState();
             task->data[0] = 1;
         }
         break;
     case 301:
-        if (sub_800AA48() == GetLinkPlayerCount_2())
+        if (GetSavedPlayerCount() == GetLinkPlayerCount_2())
             task->data[0] = 1;
         break;
     case 400: // wait 20 frames
@@ -470,6 +473,7 @@ static void sub_80E7324(u8 taskId)
                 StorePtrInTaskData(sReceivedRecords, (u16 *)&gTasks[subTaskId].data[5]);
                 sRecordStructSize = sizeof(struct PlayerRecordsEmerald);
             }
+            // Note: This task is destroyed by Task_CopyReceiveBuffer when it's done.
         }
         break;
     case 5: // wait 60 frames
@@ -938,7 +942,7 @@ static void ReceiveGiftItem(u16 *item, u8 which)
     }
 }
 
-static void sub_80E7FF8(u8 taskId)
+static void Task_DoRecordMixing(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
 
@@ -953,20 +957,22 @@ static void sub_80E7FF8(u8 taskId)
         else
             task->data[0] = 6;
         break;
+    
+    // Mixing Ruby/Sapphire records.
     case 2:
         SetContinueGameWarpStatusToDynamicWarp();
-        sub_8153430();
+        FullSaveGame();
         task->data[0] ++;
         break;
     case 3:
-        if (sub_8153474())
+        if (CheckSaveFile())
         {
             ClearContinueGameWarpStatus2();
             task->data[0] = 4;
             task->data[1] = 0;
         }
         break;
-    case 4:
+    case 4: // Wait 10 frames
         if (++task->data[1] > 10)
         {
             sub_800AC34();
@@ -974,22 +980,24 @@ static void sub_80E7FF8(u8 taskId)
         }
         break;
     case 5:
-        if (gReceivedRemoteLinkPlayers == 0)
+        if (gReceivedRemoteLinkPlayers == FALSE)
             DestroyTask(taskId);
         break;
+
+    // Mixing Emerald records.
     case 6:
-        if (!sub_801048C(0))
+        if (!sub_801048C(FALSE))
         {
             CreateTask(sub_8153688, 5);
             task->data[0] ++;
         }
         break;
-    case 7:
+    case 7: // wait for sub_8153688 to finish.
         if (!FuncIsActiveTask(sub_8153688))
         {
             if (gWirelessCommType)
             {
-                sub_801048C(1);
+                sub_801048C(TRUE);
                 task->data[0] = 8;
             }
             else

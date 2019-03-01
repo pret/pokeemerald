@@ -1536,7 +1536,7 @@ static void sub_80C48C8(void)
     }
 }
 
-u8 sub_80C4904(u8 cardId)
+u8 GetTrainerCardStars(u8 cardId)
 {
     struct TrainerCard* trainerCards = gTrainerCards;
     return trainerCards[cardId].stars;

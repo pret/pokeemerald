@@ -129,7 +129,7 @@ SootopolisCity_MysteryEventsHouse_1F_EventScript_227AE2:: @ 8227AE2
 SootopolisCity_MysteryEventsHouse_1F_EventScript_227AEF:: @ 8227AEF
 	msgbox SootopolisCity_MysteryEventsHouse_1F_Text_227C84, MSGBOX_DEFAULT
 	fadescreen 1
-	special sub_80F9438
+	special ChooseHalfPartyForBattle
 	waitstate
 	return
 

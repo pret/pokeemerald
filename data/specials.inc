@@ -12,8 +12,8 @@ gSpecials:: @ 81DBA64
 	def_special SetCableClubWarp
 	def_special sub_80AF948
 	def_special sub_80AF9F8
-	def_special sub_80B36EC
-	def_special sub_80B371C
+	def_special CleanupLinkRoomState
+	def_special ExitLinkRoom
 	def_special sub_80E8E18
 	def_special sub_80E8BC8
 	def_special sub_80E9068
@@ -35,14 +35,14 @@ gSpecials:: @ 81DBA64
 	def_special sub_80E91F8
 	def_special sub_80EA30C
 	def_special DoSecretBasePCTurnOffEffect
-	def_special sub_80E6BE8
+	def_special RecordMixingPlayerSpotTriggered
 	def_special sub_80B2DA4
 	def_special sub_80B2E4C
 	def_special sub_80B2E74
 	def_special sub_80B2EA8
 	def_special CloseLink
-	def_special sub_80B3968
-	def_special sub_80B3924
+	def_special ColosseumPlayerSpotTriggered
+	def_special PlayerEnteredTradeSeat
 	def_special nullsub_37
 	def_special sub_80B3254
 	def_special sub_80B2FD8
@@ -50,7 +50,7 @@ gSpecials:: @ 81DBA64
 	def_special SpawnLinkPartnerEventObject
 	def_special SavePlayerParty
 	def_special LoadPlayerParty
-	def_special sub_80F9438
+	def_special ChooseHalfPartyForBattle
 	def_special sp02A_crash_sound
 	def_special EventObjectInteractionGetBerryTreeData
 	def_special EventObjectInteractionGetBerryName

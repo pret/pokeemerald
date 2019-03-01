@@ -1146,19 +1146,19 @@ EverGrandeCity_HallOfFame_EventScript_271851:: @ 8271851
 
 EventScript_WhiteOut:: @ 8271857
 	call EverGrandeCity_HallOfFame_EventScript_2718CC
-	goto EventScript_271862
+	goto EventScript_ResetMrBriney
 	end
 
-EventScript_271862:: @ 8271862
+EventScript_ResetMrBriney:: @ 8271862
 	compare VAR_BRINEY_LOCATION, 1
-	goto_if_eq EverGrandeCity_HallOfFame_EventScript_271884
+	goto_if_eq EventScript_MoveMrBrineyToHouse
 	compare VAR_BRINEY_LOCATION, 2
-	goto_if_eq EverGrandeCity_HallOfFame_EventScript_27189A
+	goto_if_eq EventScript_MoveMrBrineyToDewford
 	compare VAR_BRINEY_LOCATION, 3
-	goto_if_eq EverGrandeCity_HallOfFame_EventScript_2718B3
+	goto_if_eq EventScript_MoveMrBrineyToRoute108
 	end
 
-EverGrandeCity_HallOfFame_EventScript_271884:: @ 8271884
+EventScript_MoveMrBrineyToHouse:: @ 8271884
 	setflag FLAG_HIDE_MR_BRINEY_DEWFORD_TOWN
 	setflag FLAG_HIDE_MR_BRINEY_BOAT_DEWFORD_TOWN
 	setflag FLAG_HIDE_ROUTE_108_MR_BRINEY
@@ -1168,7 +1168,7 @@ EverGrandeCity_HallOfFame_EventScript_271884:: @ 8271884
 	clearflag FLAG_HIDE_BRINEYS_HOUSE_PEEKO
 	end
 
-EverGrandeCity_HallOfFame_EventScript_27189A:: @ 827189A
+EventScript_MoveMrBrineyToDewford:: @ 827189A
 	setflag FLAG_HIDE_ROUTE_108_MR_BRINEY
 	setflag FLAG_HIDE_ROUTE_109_MR_BRINEY_BOAT
 	setflag FLAG_HIDE_ROUTE_104_MR_BRINEY
@@ -1179,7 +1179,7 @@ EverGrandeCity_HallOfFame_EventScript_27189A:: @ 827189A
 	clearflag FLAG_HIDE_MR_BRINEY_BOAT_DEWFORD_TOWN
 	end
 
-EverGrandeCity_HallOfFame_EventScript_2718B3:: @ 82718B3
+EventScript_MoveMrBrineyToRoute108:: @ 82718B3
 	setflag FLAG_HIDE_ROUTE_104_MR_BRINEY
 	setflag FLAG_HIDE_ROUTE_104_MR_BRINEY_BOAT
 	setflag FLAG_HIDE_BRINEYS_HOUSE_MR_BRINEY
@@ -1597,7 +1597,7 @@ EventScript_271D5E:: @ 8271D5E
 	goto EventScript_271D89
 
 EventScript_271D83:: @ 8271D83
-	special sub_80E6BE8
+	special RecordMixingPlayerSpotTriggered
 	waitstate
 	lock
 	faceplayer

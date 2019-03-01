@@ -282,7 +282,7 @@ static void sub_80B2804(u8 taskId)
 
     if (GetFieldMessageBoxMode() == FIELD_MESSAGE_BOX_HIDDEN)
     {
-        if (sub_800AA48() != GetLinkPlayerCount_2())
+        if (GetSavedPlayerCount() != GetLinkPlayerCount_2())
         {
             ShowFieldAutoScrollMessage(gText_ConfirmLinkWhenPlayersReady);
             gTasks[taskId].func = sub_80B270C;
@@ -295,7 +295,7 @@ static void sub_80B2804(u8 taskId)
         else if (gMain.heldKeys & A_BUTTON)
         {
             PlaySE(SE_SELECT);
-            sub_800A620();
+            CheckShouldAdvanceLinkState();
             gTasks[taskId].func = sub_80B28A8;
         }
     }
@@ -310,7 +310,7 @@ static void sub_80B28A8(u8 taskId)
      || sub_80B2D6C(taskId) == TRUE)
         return;
 
-    if (GetLinkPlayerCount_2() != sub_800AA48())
+    if (GetLinkPlayerCount_2() != GetSavedPlayerCount())
     {
         gTasks[taskId].func = sub_80B2D2C;
     }
@@ -352,7 +352,7 @@ static void sub_80B2918(u8 taskId)
     else
     {
         gFieldLinkPlayerCount = GetLinkPlayerCount_2();
-        gUnknown_03005DB4 = GetMultiplayerId();
+        gLocalLinkPlayerId = GetMultiplayerId();
         sub_800AA04(gFieldLinkPlayerCount);
         card = (struct TrainerCard *)gBlockSendBuffer;
         TrainerCard_GenerateCardForPlayer(card);
@@ -399,7 +399,7 @@ static void sub_80B2A08(u8 taskId)
     else
     {
         gFieldLinkPlayerCount = GetLinkPlayerCount_2();
-        gUnknown_03005DB4 = GetMultiplayerId();
+        gLocalLinkPlayerId = GetMultiplayerId();
         sub_800AA04(gFieldLinkPlayerCount);
         card = (struct TrainerCard *)gBlockSendBuffer;
         TrainerCard_GenerateCardForPlayer(card);
@@ -764,9 +764,9 @@ static void sub_80B3194(u8 taskId)
 
 static void sub_80B31E8(u8 taskId)
 {
-    if (sub_800AA48() == GetLinkPlayerCount_2())
+    if (GetSavedPlayerCount() == GetLinkPlayerCount_2())
     {
-        sub_800A620();
+        CheckShouldAdvanceLinkState();
         gTasks[taskId].func = sub_80B3220;
     }
 }
@@ -972,7 +972,7 @@ void sub_80B360C(void)
 
     if (gSpecialVar_0x8004 == 1 || gSpecialVar_0x8004 == 2)
     {
-        UpdatePlayerLinkBattleRecords(gUnknown_03005DB4 ^ 1);
+        UpdatePlayerLinkBattleRecords(gLocalLinkPlayerId ^ 1);
         if (gWirelessCommType)
         {
             switch (gBattleOutcome)
@@ -993,13 +993,13 @@ void sub_80B360C(void)
     }
     else
     {
-        gMain.savedCallback = c2_8056854;
+        gMain.savedCallback = CB2_ReturnToFieldFromMultiplayer;
     }
 
     SetMainCallback2(sub_80A0514);
 }
 
-void sub_80B36EC(void)
+void CleanupLinkRoomState(void)
 {
     if (gSpecialVar_0x8004 == 1 || gSpecialVar_0x8004 == 2 || gSpecialVar_0x8004 == 5 || gSpecialVar_0x8004 == 9)
     {
@@ -1009,9 +1009,9 @@ void sub_80B36EC(void)
     SetWarpDestinationToDynamicWarp(0x7F);
 }
 
-void sub_80B371C(void)
+void ExitLinkRoom(void)
 {
-    sub_80872B0();
+    QueueExitLinkRoomKey();
 }
 
 static void sub_80B3728(u8 taskId)
@@ -1028,7 +1028,7 @@ static void sub_80B3728(u8 taskId)
         if (IsFieldMessageBoxHidden())
         {
             sub_8087288();
-            sub_8009628(gSpecialVar_0x8005);
+            SetLocalLinkPlayerId(gSpecialVar_0x8005);
             task->data[0] = 2;
         }
         break;
@@ -1130,7 +1130,8 @@ static void sub_80B3894(u8 taskId)
     }
 }
 
-void sub_80B3924(void)
+// Note: VAR_0x8005 is set to the ID of the trade seat.
+void PlayerEnteredTradeSeat(void)
 {
     if (gWirelessCommType != 0)
     {
@@ -1152,7 +1153,8 @@ void nullsub_37(void)
 
 }
 
-void sub_80B3968(void)
+// Note: VAR_0x8005 is set to the ID of the player spot.
+void ColosseumPlayerSpotTriggered(void)
 {
     gLinkType = 0x2211;
 
@@ -1166,6 +1168,7 @@ void sub_80B3968(void)
     }
 }
 
+// This function is never called.
 static void sub_80B39A4(void)
 {
     u8 taskId = CreateTask(sub_80B3728, 80);
@@ -1177,14 +1180,16 @@ void sp02A_crash_sound(void)
     ShowTrainerCardInLink(gSpecialVar_0x8006, CB2_ReturnToFieldContinueScriptPlayMapMusic);
 }
 
-bool32 sub_80B39D4(u8 linkPlayerIndex)
+// Returns FALSE if the player has no stars. Returns TRUE otherwise, and puts the name of the
+// color into gStringVar2.
+bool32 GetLinkTrainerCardColor(u8 linkPlayerIndex)
 {
     u32 trainerCardColorIndex;
 
     gSpecialVar_0x8006 = linkPlayerIndex;
     StringCopy(gStringVar1, gLinkPlayers[linkPlayerIndex].name);
 
-    trainerCardColorIndex = sub_80C4904(linkPlayerIndex);
+    trainerCardColorIndex = GetTrainerCardStars(linkPlayerIndex);
     if (trainerCardColorIndex == 0)
         return FALSE;
 
@@ -1263,13 +1268,13 @@ void sub_80B3AF8(u8 taskId)
             }
             break;
         case 2:
-            if (GetLinkPlayerCount_2() >= sub_800AA48())
+            if (GetLinkPlayerCount_2() >= GetSavedPlayerCount())
             {
                 if (IsLinkMaster())
                 {
                     if (++data[1] > 30)
                     {
-                        sub_800A620();
+                        CheckShouldAdvanceLinkState();
                         data[0]++;
                     }
                 }
