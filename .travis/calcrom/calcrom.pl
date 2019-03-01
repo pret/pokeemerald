@@ -35,17 +35,17 @@ while (my $line = <$file>)
 # stdin working for subcommands in perl while still having a timeout.
 my $total_syms_as_string;
 (run (
-	command => "arm-none-eabi-nm pokeemerald.elf | wc -l",
-	buffer => \$total_syms_as_string,
-	timeout => 30
+    command => "arm-none-eabi-nm pokeemerald.elf | wc -l",
+    buffer => \$total_syms_as_string,
+    timeout => 30
 ))
     or die "ERROR: Error while getting all symbols: $?";
 
 my $undocumented_as_string;
 (run (
-	command => "arm-none-eabi-nm pokeemerald.elf | grep \"Unknown_\\|sub_\" | wc -l",
-	buffer => \$undocumented_as_string,
-	timeout => 30
+    command => "arm-none-eabi-nm pokeemerald.elf | grep \"Unknown_\\|sub_\" | wc -l",
+    buffer => \$undocumented_as_string,
+    timeout => 30
 ))
     or die "ERROR: Error while filtering for undocumented symbols: $?";
 
