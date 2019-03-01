@@ -1158,7 +1158,7 @@ void sub_8127B90(u16 mapX, u16 mapY, u8 decWidth, u8 decHeight, u16 decor)
     u16 i;
     u16 j;
     u16 behavior;
-    u16 flags;
+    u16 impassableFlag;
     u16 v0;
     u16 v1;
     s16 decLeft;
@@ -1173,11 +1173,11 @@ void sub_8127B90(u16 mapX, u16 mapY, u8 decWidth, u8 decHeight, u16 decor)
             behavior = GetBehaviorByMetatileId(0x200 + gDecorations[decor].tiles[i * decWidth + j]);
             if (MetatileBehavior_IsSecretBaseImpassable(behavior) == TRUE || (gDecorations[decor].permission != DECORPERM_PASS_FLOOR && (behavior >> 12)))
             {
-                flags = 0xc00;
+                impassableFlag = METATILE_COLLISION_MASK;
             }
             else
             {
-                flags = 0x000;
+                impassableFlag = 0x000;
             }
             if (gDecorations[decor].permission != DECORPERM_NA_WALL && MetatileBehavior_IsSecretBaseNorthWall(MapGridGetMetatileBehaviorAt(decLeft, decBottom)) == TRUE)
             {
@@ -1190,11 +1190,11 @@ void sub_8127B90(u16 mapX, u16 mapY, u8 decWidth, u8 decHeight, u16 decor)
             v1 = sub_8127B54(gDecorations[decor].id, i * decWidth + j);
             if (v1 != 0xFFFF)
             {
-                MapGridSetMetatileEntryAt(decLeft, decBottom, (gDecorations[decor].tiles[i * decWidth + j] + (0x200 | v0)) | flags | v1);
+                MapGridSetMetatileEntryAt(decLeft, decBottom, (gDecorations[decor].tiles[i * decWidth + j] + (0x200 | v0)) | impassableFlag | v1);
             }
             else
             {
-                MapGridSetMetatileIdAt(decLeft, decBottom, (gDecorations[decor].tiles[i * decWidth + j] + (0x200 | v0)) | flags);
+                MapGridSetMetatileIdAt(decLeft, decBottom, (gDecorations[decor].tiles[i * decWidth + j] + (0x200 | v0)) | impassableFlag);
             }
         }
     }
@@ -1502,7 +1502,7 @@ bool8 sub_812853C(u8 taskId, const struct Decoration *decoration)
                 {
                     curX = gTasks[taskId].data[0] + j;
                     behaviorAt = MapGridGetMetatileBehaviorAt(curX, curY);
-                    behaviorBy = GetBehaviorByMetatileId(0x200 + decoration->tiles[(mapY - 1 - i) * mapX + j]) & 0xf000;
+                    behaviorBy = GetBehaviorByMetatileId(0x200 + decoration->tiles[(mapY - 1 - i) * mapX + j]) & METATILE_ELEVATION_MASK;
                     if (!sub_81284F4(behaviorAt, decoration))
                     {
                         return FALSE;
@@ -1527,7 +1527,7 @@ bool8 sub_812853C(u8 taskId, const struct Decoration *decoration)
                 {
                     curX = gTasks[taskId].data[0] + j;
                     behaviorAt = MapGridGetMetatileBehaviorAt(curX, curY);
-                    behaviorBy = GetBehaviorByMetatileId(0x200 + decoration->tiles[(mapY - 1 - i) * mapX + j]) & 0xf000;
+                    behaviorBy = GetBehaviorByMetatileId(0x200 + decoration->tiles[(mapY - 1 - i) * mapX + j]) & METATILE_ELEVATION_MASK;
                     if (!MetatileBehavior_IsNormal(behaviorAt) && !sub_8128484(behaviorAt, behaviorBy))
                     {
                         return FALSE;
@@ -1547,7 +1547,7 @@ bool8 sub_812853C(u8 taskId, const struct Decoration *decoration)
             {
                 curX = gTasks[taskId].data[0] + j;
                 behaviorAt = MapGridGetMetatileBehaviorAt(curX, curY);
-                behaviorBy = GetBehaviorByMetatileId(0x200 + decoration->tiles[j]) & 0xf000;
+                behaviorBy = GetBehaviorByMetatileId(0x200 + decoration->tiles[j]) & METATILE_ELEVATION_MASK;
                 if (!MetatileBehavior_IsNormal(behaviorAt) && !MetatileBehavior_IsSecretBaseNorthWall(behaviorAt))
                 {
                     return FALSE;

@@ -1267,7 +1267,7 @@ static u8 GetPostBattleDirectionHintTextIndex(int *hintType, u8 minDistanceForEx
     {
         for (x = 0; x < 32; x++)
         {
-            if ((map[x] & 0x3FF) == FLOOR_EXIT_METATILE)
+            if ((map[x] & METATILE_ID_MASK) == FLOOR_EXIT_METATILE)
             {
                 x += 7 - gEventObjects[gSelectedEventObject].initialCoords.x;
                 y += 7 - gEventObjects[gSelectedEventObject].initialCoords.y;
@@ -1568,7 +1568,7 @@ void GenerateBattlePyramidFloorLayout(u16 *backupMapData, bool8 setPlayerPositio
         {
             for (x = 0; x < mapLayout->width; x++)
             {
-                if ((layoutMap[x] & 0x3FF) != FLOOR_EXIT_METATILE)
+                if ((layoutMap[x] & METATILE_ID_MASK) != FLOOR_EXIT_METATILE)
                 {
                     map[x] = layoutMap[x];
                 }
