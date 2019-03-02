@@ -8597,14 +8597,14 @@ const struct Item gItems[] =
         .secondaryId = 0,
     },
 	
-	[ITEM_LOPPUNITE] =
+	[ITEM_LOPUNNITE] =
 	{
-        .name = _("Loppunite"),
-        .itemId = ITEM_LOPPUNITE,
+        .name = _("Lopunnite"),
+        .itemId = ITEM_LOPUNNITE,
         .price = 200,
         .holdEffect = HOLD_EFFECT_MEGA_STONE,
         .holdEffectParam = 0,
-        .description = gLoppuniteItemDescription,
+        .description = gLopunniteItemDescription,
         .importance = 0,
         .unk19 = 0,
         .pocket = POCKET_ITEMS,
