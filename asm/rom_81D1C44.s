@@ -6500,7 +6500,7 @@ _081D4F6C:
 	bne _081D4F88
 	movs r0, 0x49
 	bl PlaySE
-	bl sub_800A620
+	bl CheckShouldAdvanceLinkState
 	movs r0, 0
 	strh r0, [r5]
 	b _081D4FE6

@@ -1507,13 +1507,13 @@ static void sub_80773D0(void)
         }
         break;
     case 3:
-        if (GetLinkPlayerCount_2() >= sub_800AA48())
+        if (GetLinkPlayerCount_2() >= GetSavedPlayerCount())
         {
             if (IsLinkMaster())
             {
                 if (++gUnknown_0203229C->unk_A8 > 30)
                 {
-                    sub_800A620();
+                    CheckShouldAdvanceLinkState();
                     gMain.state++;
                 }
             }
@@ -2762,7 +2762,7 @@ static void sub_80794CC(void)
             Free(gUnknown_0203229C);
             FreeAllWindowBuffers();
             sub_800E084();
-            SetMainCallback2(c2_8056854);
+            SetMainCallback2(CB2_ReturnToFieldFromMultiplayer);
         }
     }
     else
@@ -2772,7 +2772,7 @@ static void sub_80794CC(void)
             Free(gUnknown_02032184);
             Free(gUnknown_0203229C);
             FreeAllWindowBuffers();
-            SetMainCallback2(c2_8056854);
+            SetMainCallback2(CB2_ReturnToFieldFromMultiplayer);
         }
     }
 }
@@ -4099,11 +4099,11 @@ void sub_807AE50(void)
         case 3:
             if (IsLinkMaster())
             {
-                if (GetLinkPlayerCount_2() >= sub_800AA48())
+                if (GetLinkPlayerCount_2() >= GetSavedPlayerCount())
                 {
                     if (++gUnknown_020322A0->timer > 30)
                     {
-                        sub_800A620();
+                        CheckShouldAdvanceLinkState();
                         gMain.state++;
                     }
                 }

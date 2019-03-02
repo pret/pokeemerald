@@ -1016,7 +1016,7 @@ static bool32 MapAllowsMatchCall(void)
     
     if (gMapHeader.regionMapSectionId == MAPSEC_SOOTOPOLIS_CITY
      && FlagGet(FLAG_HIDE_SOOTOPOLIS_CITY_RAYQUAZA) == TRUE
-     && FlagGet(FLAG_UNUSED_0x0DC) == FALSE)
+     && FlagGet(FLAG_NEVER_SET_0x0DC) == FALSE)
         return FALSE;
 
     if (gMapHeader.regionMapSectionId == MAPSEC_MT_CHIMNEY

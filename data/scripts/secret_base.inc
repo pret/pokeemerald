@@ -430,21 +430,21 @@ EventScript_275B4D:: @ 8275B4D
 EventScript_275B5B:: @ 8275B5B
 	closemessage
 	playse SE_KAIDAN
-	setvar VAR_0x4097, 0
+	setvar VAR_INIT_SECRET_BASE, 0
 	setflag FLAG_DECORATION_0
 	special sub_80E8E18
 	special sub_80E9068
 	setvar VAR_0x8004, 0
 	setvar VAR_0x8005, 0
 	special sub_80E933C
-	setvar VAR_0x4089, 1
+	setvar VAR_SECRET_BASE_INITIALIZED, 1
 	waitstate
 	end
 
 SecretBase_RedCave1_EventScript_275B81:: @ 8275B81
 	applymovement EVENT_OBJ_ID_PLAYER, SecretBase_RedCave1_Movement_275BB4
 	waitmovement 0
-	setvar VAR_0x4097, 1
+	setvar VAR_INIT_SECRET_BASE, 1
 	msgbox SecretBase_RedCave1_Text_23B759, MSGBOX_YESNO
 	compare VAR_RESULT, 1
 	goto_if_eq SecretBase_RedCave1_EventScript_275BAB
@@ -467,21 +467,21 @@ SecretBase_RedCave1_Movement_275BB4: @ 8275BB4
 
 EventScript_275BB7:: @ 8275BB7
 	lockall
-	setvar VAR_0x4097, 1
+	setvar VAR_INIT_SECRET_BASE, 1
 	playse SE_KAIDAN
 	special sub_80E9744
 	compare VAR_RESULT, 0
 	goto_if_eq EventScript_275BDB
 	clearflag FLAG_DECORATION_0
 	special sub_80E9068
-	setvar VAR_0x4089, 0
+	setvar VAR_SECRET_BASE_INITIALIZED, 0
 	waitstate
 	end
 
 EventScript_275BDB:: @ 8275BDB
 	setflag FLAG_DECORATION_0
 	special sub_80E9068
-	setvar VAR_0x4089, 0
+	setvar VAR_SECRET_BASE_INITIALIZED, 0
 	waitstate
 	end
 
@@ -570,7 +570,7 @@ EventScript_275D0C:: @ 8275D0C
 	setvar VAR_0x8004, 0
 	setvar VAR_0x8005, 0
 	special sub_80E933C
-	setvar VAR_0x4089, 1
+	setvar VAR_SECRET_BASE_INITIALIZED, 1
 	end
 
 EventScript_275D1F:: @ 8275D1F

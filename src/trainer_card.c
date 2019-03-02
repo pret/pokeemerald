@@ -695,7 +695,7 @@ static void SetPlayerCardData(struct TrainerCard *trainerCard, u8 cardType)
     trainerCard->money = GetMoney(&gSaveBlock1Ptr->money);
 
     for (i = 0; i < 4; i++)
-        trainerCard->var_28[i] = gSaveBlock1Ptr->unk2BB0[i];
+        trainerCard->var_28[i] = gSaveBlock1Ptr->easyChatProfile[i];
 
     StringCopy(trainerCard->playerName, gSaveBlock2Ptr->playerName);
 
@@ -1536,7 +1536,7 @@ static void sub_80C48C8(void)
     }
 }
 
-u8 sub_80C4904(u8 cardId)
+u8 GetTrainerCardStars(u8 cardId)
 {
     struct TrainerCard* trainerCards = gTrainerCards;
     return trainerCards[cardId].stars;

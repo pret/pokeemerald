@@ -2401,9 +2401,9 @@ static void sub_8163EE4(void)
 
     for (i = 0; i < 6; i++)
     {
-        playerRecord->greeting[i] = gSaveBlock1Ptr->unk2BBC[i];
-        playerRecord->speechWon[i] = gSaveBlock1Ptr->unk2BC8[i];
-        playerRecord->speechLost[i] = gSaveBlock1Ptr->unk2BD4[i];
+        playerRecord->greeting[i] = gSaveBlock1Ptr->easyChatBattleStart[i];
+        playerRecord->speechWon[i] = gSaveBlock1Ptr->easyChatBattleWon[i];
+        playerRecord->speechLost[i] = gSaveBlock1Ptr->easyChatBattleLost[i];
     }
 
     for (i = 0; i < 4; i++)
@@ -3059,7 +3059,7 @@ static void FillEReaderTrainerWithPlayerData(void)
     j = 7;
     for (i = 0; i < 6; i++)
     {
-        ereaderTrainer->greeting[i] = gSaveBlock1Ptr->unk2BBC[i];
+        ereaderTrainer->greeting[i] = gSaveBlock1Ptr->easyChatBattleStart[i];
         ereaderTrainer->farewellPlayerLost[i] = j;
         ereaderTrainer->farewellPlayerWon[i] = j + 6;
         j++;

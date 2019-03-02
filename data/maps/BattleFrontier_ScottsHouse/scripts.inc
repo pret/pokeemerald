@@ -184,11 +184,11 @@ BattleFrontier_ScottsHouse_EventScript_263943:: @ 8263943
 	applymovement 1, Common_Movement_FacePlayer
 	waitmovement 0
 	msgbox BattleFrontier_ScottsHouse_Text_263BD4, MSGBOX_DEFAULT
-	compare VAR_0x40D1, 13
+	compare VAR_SCOTT_STATE, 13
 	goto_if_eq BattleFrontier_ScottsHouse_EventScript_2639BC
-	compare VAR_0x40D1, 9
+	compare VAR_SCOTT_STATE, 9
 	goto_if_ge BattleFrontier_ScottsHouse_EventScript_2639CB
-	compare VAR_0x40D1, 6
+	compare VAR_SCOTT_STATE, 6
 	goto_if_ge BattleFrontier_ScottsHouse_EventScript_2639DA
 	goto BattleFrontier_ScottsHouse_EventScript_2639E9
 	end

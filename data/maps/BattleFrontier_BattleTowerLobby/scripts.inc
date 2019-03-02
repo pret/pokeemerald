@@ -572,8 +572,8 @@ BattleFrontier_BattleTowerLobby_EventScript_23EEE7:: @ 823EEE7
 
 BattleFrontier_BattleTowerLobby_EventScript_23EF32:: @ 823EF32
 	msgbox BattleFrontier_BattleTowerLobby_Text_23F969, MSGBOX_DEFAULT
-	setvar VAR_0x8004, 1
-	call BattleFrontier_BattleTowerLobby_EventScript_271E7C
+	setvar VAR_0x8004, EASY_CHAT_TYPE_BATTLE_START
+	call Common_ShowEasyChatScreen
 	lock
 	faceplayer
 	goto BattleFrontier_BattleTowerLobby_EventScript_23EF8A
@@ -581,8 +581,8 @@ BattleFrontier_BattleTowerLobby_EventScript_23EF32:: @ 823EF32
 
 BattleFrontier_BattleTowerLobby_EventScript_23EF4C:: @ 823EF4C
 	msgbox BattleFrontier_BattleTowerLobby_Text_23F9AA, MSGBOX_DEFAULT
-	setvar VAR_0x8004, 2
-	call BattleFrontier_BattleTowerLobby_EventScript_271E7C
+	setvar VAR_0x8004, EASY_CHAT_TYPE_BATTLE_WON
+	call Common_ShowEasyChatScreen
 	lock
 	faceplayer
 	goto BattleFrontier_BattleTowerLobby_EventScript_23EF8A
@@ -590,8 +590,8 @@ BattleFrontier_BattleTowerLobby_EventScript_23EF4C:: @ 823EF4C
 
 BattleFrontier_BattleTowerLobby_EventScript_23EF66:: @ 823EF66
 	msgbox BattleFrontier_BattleTowerLobby_Text_23F9D4, MSGBOX_DEFAULT
-	setvar VAR_0x8004, 3
-	call BattleFrontier_BattleTowerLobby_EventScript_271E7C
+	setvar VAR_0x8004, EASY_CHAT_TYPE_BATTLE_LOST
+	call Common_ShowEasyChatScreen
 	lock
 	faceplayer
 	goto BattleFrontier_BattleTowerLobby_EventScript_23EF8A

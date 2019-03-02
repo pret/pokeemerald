@@ -2443,7 +2443,7 @@ static void sub_80B8410(struct Task *task)
 bool8 FldEff_FieldMoveShowMon(void)
 {
     u8 taskId;
-    if (is_map_type_1_2_3_5_or_6(GetCurrentMapType()) == TRUE)
+    if (IsMapTypeOutdoors(GetCurrentMapType()) == TRUE)
     {
         taskId = CreateTask(sub_80B8554, 0xff);
     } else
@@ -2620,7 +2620,7 @@ static void sub_80B8874(u16 offs)
     dest = (u16 *)(VRAM + 0x140 + offs);
     for (i = 0; i < 0x140; i++, dest++)
     {
-        *dest = gFieldMoveStreaksTilemap[i] | 0xf000;
+        *dest = gFieldMoveStreaksTilemap[i] | METATILE_ELEVATION_MASK;
     }
 }
 

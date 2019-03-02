@@ -170,7 +170,7 @@ RustboroCity_PokemonSchool_EventScript_214040:: @ 8214040
 	goto_if_set FLAG_MET_SCOTT_RUSTBORO, RustboroCity_PokemonSchool_EventScript_21406F
 	goto_if_set FLAG_BADGE01_GET, RustboroCity_PokemonSchool_EventScript_214082
 	msgbox RustboroCity_PokemonSchool_Text_2148C0, MSGBOX_DEFAULT
-	addvar VAR_0x40D1, 1
+	addvar VAR_SCOTT_STATE, 1
 	setflag FLAG_MET_SCOTT_RUSTBORO
 	release
 	end
@@ -192,7 +192,7 @@ RustboroCity_PokemonSchool_EventScript_214090:: @ 8214090
 	end
 
 RustboroCity_PokemonSchool_EventScript_21409E:: @ 821409E
-	addvar VAR_0x40D1, 1
+	addvar VAR_SCOTT_STATE, 1
 	setflag FLAG_MET_SCOTT_AFTER_OBTAINING_STONE_BADGE
 	release
 	end

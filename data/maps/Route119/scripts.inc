@@ -167,7 +167,7 @@ Route119_EventScript_1F460F:: @ 81F460F
 	addobject 43
 	applymovement 43, Route119_Movement_1F4752
 	waitmovement 0
-	addvar VAR_0x40D1, 1
+	addvar VAR_SCOTT_STATE, 1
 	msgbox Route119_Text_1F4E60, MSGBOX_DEFAULT
 	closemessage
 	compare VAR_TEMP_1, 1
@@ -491,7 +491,7 @@ Route119_EventScript_1F49EC:: @ 81F49EC
 	pokenavcall Route119_Text_1F4FBA
 	waitmessage
 	clearflag FLAG_REGISTER_WINONA_POKENAV
-	addvar VAR_0x40D1, 1
+	addvar VAR_SCOTT_STATE, 1
 	releaseall
 	end
 

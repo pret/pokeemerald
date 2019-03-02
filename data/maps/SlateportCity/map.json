@@ -571,7 +571,7 @@
       "x": 10,
       "y": 13,
       "elevation": 3,
-      "var": "VAR_0x40D2",
+      "var": "VAR_SLATEPORT_OUTSIDE_MUSEUM_STATE",
       "var_value": "2",
       "script": "SlateportCity_EventScript_1DD5DC"
     }

@@ -28,7 +28,7 @@ SootopolisCity_Mart_Pokemart_2267AC: @ 82267AC
 SootopolisCity_Mart_EventScript_2267C2:: @ 82267C2
 	lock
 	faceplayer
-	compare VAR_0x40CA, 2
+	compare VAR_SKY_PILLAR_STATE, 2
 	goto_if_ge SootopolisCity_Mart_EventScript_2267E2
 	goto_if_unset FLAG_KYOGRE_ESCAPED_SEAFLOOR_CAVERN, SootopolisCity_Mart_EventScript_2267E2
 	msgbox SootopolisCity_Mart_Text_22685D, MSGBOX_DEFAULT
@@ -43,7 +43,7 @@ SootopolisCity_Mart_EventScript_2267E2:: @ 82267E2
 SootopolisCity_Mart_EventScript_2267EC:: @ 82267EC
 	lock
 	faceplayer
-	compare VAR_0x40CA, 2
+	compare VAR_SKY_PILLAR_STATE, 2
 	goto_if_ge SootopolisCity_Mart_EventScript_22680C
 	goto_if_unset FLAG_KYOGRE_ESCAPED_SEAFLOOR_CAVERN, SootopolisCity_Mart_EventScript_22680C
 	msgbox SootopolisCity_Mart_Text_226928, MSGBOX_DEFAULT

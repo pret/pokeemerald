@@ -1,6 +1,9 @@
 #ifndef GUARD_TASK_H
 #define GUARD_TASK_H
 
+#define HEAD_SENTINEL 0xFE
+#define TAIL_SENTINEL 0xFF
+
 #define NUM_TASKS 16
 
 typedef void (*TaskFunc)(u8 taskId);

@@ -5,9 +5,9 @@ SkyPillar_Outside_MapScripts:: @ 82392A8
 	.byte 0
 
 SkyPillar_Outside_MapScript1_2392B8: @ 82392B8
-	compare VAR_0x405E, 3
+	compare VAR_RAYQUAZA_STATE, 3
 	call_if_eq SkyPillar_Outside_EventScript_2392CF
-	compare VAR_0x405E, 4
+	compare VAR_RAYQUAZA_STATE, 4
 	call_if_ge SkyPillar_Outside_EventScript_2392D3
 	end
 
@@ -29,7 +29,7 @@ SkyPillar_Outside_EventScript_2392E7:: @ 82392E7
 	return
 
 SkyPillar_Outside_MapScript2_2392FA: @ 82392FA
-	map_script_2 VAR_0x405E, 3, SkyPillar_Outside_EventScript_239304
+	map_script_2 VAR_RAYQUAZA_STATE, 3, SkyPillar_Outside_EventScript_239304
 	.2byte 0
 
 SkyPillar_Outside_EventScript_239304:: @ 8239304
@@ -82,7 +82,7 @@ SkyPillar_Outside_EventScript_239304:: @ 8239304
 	playse SE_KAIDAN
 	fadescreenswapbuffers 1
 	clearflag FLAG_SPECIAL_FLAG_0x4000
-	setvar VAR_0x405E, 4
+	setvar VAR_RAYQUAZA_STATE, 4
 	removeobject 1
 	clearflag FLAG_HIDE_SOOTOPOLIS_CITY_WALLACE
 	fadescreenswapbuffers 0

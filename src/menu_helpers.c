@@ -293,7 +293,7 @@ bool8 sub_8122148(u16 itemId)
 
 bool8 itemid_80BF6D8_mail_related(u16 itemId)
 {
-    if (is_c1_link_related_active() != TRUE && InUnionRoom() != TRUE)
+    if (IsUpdateLinkStateCBActive() != TRUE && InUnionRoom() != TRUE)
         return TRUE;
     else if (ItemIsMail(itemId) != TRUE)
         return TRUE;
@@ -303,7 +303,7 @@ bool8 itemid_80BF6D8_mail_related(u16 itemId)
 
 bool8 sub_81221AC(void)
 {
-    if (is_c1_link_related_active() == TRUE || gReceivedRemoteLinkPlayers == 1)
+    if (IsUpdateLinkStateCBActive() == TRUE || gReceivedRemoteLinkPlayers == 1)
         return TRUE;
     else
         return FALSE;

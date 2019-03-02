@@ -883,7 +883,7 @@ static void RegionMap_InitializeStateBasedOnPlayerLocation(void)
         case MAP_TYPE_CITY:
         case MAP_TYPE_ROUTE:
         case MAP_TYPE_UNDERWATER:
-        case MAP_TYPE_6:
+        case MAP_TYPE_OCEAN_ROUTE:
             gRegionMap->mapSecId = gMapHeader.regionMapSectionId;
             gRegionMap->playerIsInCave = FALSE;
             mapWidth = gMapHeader.mapLayout->width;
@@ -896,7 +896,7 @@ static void RegionMap_InitializeStateBasedOnPlayerLocation(void)
             }
             break;
         case MAP_TYPE_UNDERGROUND:
-        case MAP_TYPE_7:
+        case MAP_TYPE_UNUSED_2:
             if (gMapHeader.flags & 0x02)
             {
                 mapHeader = Overworld_GetMapHeaderByGroupAndId(gSaveBlock1Ptr->escapeWarp.mapGroup, gSaveBlock1Ptr->escapeWarp.mapNum);
@@ -1159,7 +1159,7 @@ static u16 RegionMap_GetTerraCaveMapSecId(void)
 {
     s16 idx;
 
-    idx = VarGet(VAR_0x4037) - 1;
+    idx = VarGet(VAR_UNUSUAL_WEATHER_LOCATION) - 1;
     if (idx < 0 || idx > 15)
     {
         idx = 0;
@@ -1171,7 +1171,7 @@ static void RegionMap_GetMarineCaveCoords(u16 *x, u16 *y)
 {
     u16 idx;
 
-    idx = VarGet(VAR_0x4037);
+    idx = VarGet(VAR_UNUSUAL_WEATHER_LOCATION);
     if (idx < 9 || idx > 16)
     {
         idx = 9;

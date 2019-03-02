@@ -6,7 +6,7 @@ JaggedPass_MapScripts:: @ 8230656
 
 JaggedPass_MapScript1_230666: @ 8230666
 	setstepcallback 1
-	compare VAR_0x40C8, 0
+	compare VAR_JAGGED_PASS_STATE, 0
 	call_if_eq JaggedPass_EventScript_230674
 	end
 
@@ -17,7 +17,7 @@ JaggedPass_EventScript_230674:: @ 8230674
 	return
 
 JaggedPass_EventScript_230685:: @ 8230685
-	setvar VAR_0x40C8, 1
+	setvar VAR_JAGGED_PASS_STATE, 1
 	return
 
 JaggedPass_MapScript1_23068B: @ 823068B
@@ -31,7 +31,7 @@ JaggedPass_EventScript_230697:: @ 8230697
 	return
 
 JaggedPass_MapScript1_23069C: @ 823069C
-	compare VAR_0x40C8, 1
+	compare VAR_JAGGED_PASS_STATE, 1
 	goto_if_le JaggedPass_EventScript_2306A8
 	end
 
@@ -61,7 +61,7 @@ JaggedPass_EventScript_2306BB:: @ 82306BB
 	setmetatile 16, 18, 606, 0
 	special DrawWholeMapView
 	delay 30
-	setvar VAR_0x40C8, 2
+	setvar VAR_JAGGED_PASS_STATE, 2
 	waitse
 	releaseall
 	end

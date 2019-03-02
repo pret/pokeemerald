@@ -179,7 +179,7 @@ static void CB2_MysteryEventMenu(void)
             if (gMain.newKeys & A_BUTTON)
             {
                 PlaySE(SE_SELECT);
-                sub_800A620();
+                CheckShouldAdvanceLinkState();
                 DrawStdFrameWithCustomTileAndPalette(1, 1, 1, 0xD);
                 PrintMysteryMenuText(1, gText_LoadingEvent, 1, 2, 0);
                 PutWindowTilemap(1);

@@ -158,7 +158,7 @@ MauvilleCity_EventScript_1DF593:: @ 81DF593
 	clearflag FLAG_HIDE_VERDANTURF_TOWN_WANDAS_HOUSE_WALLY
 	clearflag FLAG_HIDE_VERDANTURF_TOWN_WANDAS_HOUSE_WALLYS_UNCLE
 	setflag FLAG_DEFEATED_WALLY_MAUVILLE
-	setvar VAR_0x40F2, 0
+	setvar VAR_WALLY_CALL_STEP_COUNTER, 0
 	setflag FLAG_ENABLE_FIRST_WALLY_POKENAV_CALL
 	compare VAR_FACING, 2
 	call_if_eq MauvilleCity_EventScript_1DF5F3
@@ -168,7 +168,7 @@ MauvilleCity_EventScript_1DF593:: @ 81DF593
 	waitmovement 0
 	msgbox MauvilleCity_Text_1DFED5, MSGBOX_DEFAULT
 	closemessage
-	addvar VAR_0x40D1, 1
+	addvar VAR_SCOTT_STATE, 1
 	compare VAR_FACING, 2
 	call_if_eq MauvilleCity_EventScript_1DF616
 	compare VAR_FACING, 4

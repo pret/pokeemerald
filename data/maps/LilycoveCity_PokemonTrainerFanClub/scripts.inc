@@ -512,9 +512,9 @@ LilycoveCity_PokemonTrainerFanClub_EventScript_21CD90:: @ 821CD90
 	setvar VAR_0x8004, 8
 	special BufferStreakTrainerText
 	msgbox LilycoveCity_PokemonTrainerFanClub_Text_281BCB, MSGBOX_DEFAULT
-	setvar VAR_0x8004, 14
+	setvar VAR_0x8004, EASY_CHAT_TYPE_FAN_QUESTION
 	copyvar VAR_0x8005, VAR_0x800A
-	call LilycoveCity_PokemonTrainerFanClub_EventScript_271E7C
+	call Common_ShowEasyChatScreen
 	lock
 	faceplayer
 	compare VAR_RESULT, 1
@@ -542,9 +542,9 @@ LilycoveCity_PokemonTrainerFanClub_EventScript_21CE15:: @ 821CE15
 	setvar VAR_0x8004, 8
 	special BufferStreakTrainerText
 	msgbox LilycoveCity_PokemonTrainerFanClub_Text_281C65, MSGBOX_DEFAULT
-	setvar VAR_0x8004, 14
+	setvar VAR_0x8004, EASY_CHAT_TYPE_FAN_QUESTION
 	copyvar VAR_0x8005, VAR_0x800A
-	call LilycoveCity_PokemonTrainerFanClub_EventScript_271E7C
+	call Common_ShowEasyChatScreen
 	lock
 	faceplayer
 	compare VAR_RESULT, 1

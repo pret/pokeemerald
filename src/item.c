@@ -539,8 +539,8 @@ bool8 RemoveBagItem(u16 itemId, u16 count)
 
         if (CurrentMapIsSecretBase() == TRUE)
         {
-            VarSet(VAR_0x40EE, VarGet(VAR_0x40EE) | 0x200);
-            VarSet(VAR_0x40ED, itemId);
+            VarSet(VAR_SECRET_BASE_LOW_TV_FLAGS, VarGet(VAR_SECRET_BASE_LOW_TV_FLAGS) | 0x200);
+            VarSet(VAR_SECRET_BASE_LAST_ITEM_USED, itemId);
         }
 
         var = GetItemListPosition(pocket);

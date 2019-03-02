@@ -52,7 +52,7 @@
       "elevation": 3,
       "var": "VAR_TEMP_0",
       "var_value": "0",
-      "script": "gUnknown_082773F5"
+      "script": "EventScript_TradeCenter_Chair0"
     },
     {
       "type": "trigger",
@@ -61,7 +61,7 @@
       "elevation": 3,
       "var": "VAR_TEMP_0",
       "var_value": "0",
-      "script": "gUnknown_082773FF"
+      "script": "EventScript_TradeCenter_Chair1"
     }
   ],
   "bg_events": []

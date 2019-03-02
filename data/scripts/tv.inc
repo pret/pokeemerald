@@ -42,6 +42,9 @@ EventScript_27EE9A:: @ 827EE9A
 
 EventScript_27EEA4:: @ 827EEA4
 	msgbox LittlerootTown_BrendansHouse_1F_Text_1F826F, MSGBOX_DEFAULT
+	@ This is a junk call. Its input var (VAR_0x8004) hasn't been set, and
+	@ It's called again when Mom actually asks for the color, overwriting
+	@ whatever it does here.
 	special InitRoamer
 	clearflag FLAG_SYS_TV_LATIAS_LATIOS
 	setflag FLAG_LATIOS_OR_LATIAS_ROAMING

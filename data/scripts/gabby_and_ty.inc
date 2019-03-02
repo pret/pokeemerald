@@ -313,8 +313,8 @@ Route111_EventScript_28D0A7:: @ 828D0A7
 	compare VAR_RESULT, 0
 	goto_if_eq Route111_EventScript_28D0E1
 	msgbox Route111_Text_28B433, MSGBOX_DEFAULT
-	setvar VAR_0x8004, 10
-	call Route111_EventScript_271E7C
+	setvar VAR_0x8004, EASY_CHAT_TYPE_GABBY_AND_TY
+	call Common_ShowEasyChatScreen
 	lock
 	faceplayer
 	compare VAR_RESULT, 0

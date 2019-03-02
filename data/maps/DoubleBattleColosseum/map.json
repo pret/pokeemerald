@@ -52,7 +52,7 @@
       "elevation": 3,
       "var": "VAR_TEMP_0",
       "var_value": "0",
-      "script": "gUnknown_08277388"
+      "script": "EventScript_DoubleBattleColosseum_PlayerSpot0"
     },
     {
       "type": "trigger",
@@ -61,7 +61,7 @@
       "elevation": 3,
       "var": "VAR_TEMP_0",
       "var_value": "0",
-      "script": "gUnknown_082773BE"
+      "script": "EventScript_DoubleBattleColosseum_PlayerSpot2"
     },
     {
       "type": "trigger",
@@ -70,7 +70,7 @@
       "elevation": 3,
       "var": "VAR_TEMP_0",
       "var_value": "0",
-      "script": "gUnknown_082773A3"
+      "script": "EventScript_DoubleBattleColosseum_PlayerSpot1"
     },
     {
       "type": "trigger",
@@ -79,7 +79,7 @@
       "elevation": 3,
       "var": "VAR_TEMP_0",
       "var_value": "0",
-      "script": "gUnknown_082773D9"
+      "script": "EventScript_DoubleBattleColosseum_PlayerSpot3"
     }
   ],
   "bg_events": []
