@@ -1768,10 +1768,8 @@ sub_81D28FC: @ 81D28FC
 	b _081D2AB6
 	.pool
 _081D29C4:
-	mov r1, r9
-	lsls r0, r1, 1
-	add r0, r9
-	lsls r0, 2
+	mov r0, r9
+	lsls r0, 4
 	ldr r1, =gBattleMoves
 	adds r6, r0, r1
 	ldrb r1, [r6, 0x2]
