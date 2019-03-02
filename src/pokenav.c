@@ -141,7 +141,7 @@ void sub_81C7710(void);
 static void InitKeys_(void);
 static void FreeVars(void);
 static void VblankCb_Pokenav(void);
-static void Cb2_Pokenav(void);
+static void CB2_Pokenav(void);
 void sub_81C7C28(void);
 void sub_81C72BC(void);
 void sub_81C7B74(void);
@@ -485,7 +485,7 @@ void sub_81C71E4(u8 taskId)
     }
 }
 
-void CB2_PokeNav(void)
+void CB2_InitPokeNav(void)
 {
     gUnknown_0203CF40 = Alloc(sizeof(*gUnknown_0203CF40));
     if (gUnknown_0203CF40 == NULL)
@@ -498,7 +498,7 @@ void CB2_PokeNav(void)
         ResetTasks();
         SetVBlankCallback(NULL);
         CreateTask(sub_81C742C, 0);
-        SetMainCallback2(Cb2_Pokenav);
+        SetMainCallback2(CB2_Pokenav);
         SetVBlankCallback(VblankCb_Pokenav);
     }
 }
@@ -529,7 +529,7 @@ void sub_81C72BC(void)
         FreeAllSpritePalettes();
         SetVBlankCallback(NULL);
         CreateTask(sub_81C742C, 0);
-        SetMainCallback2(Cb2_Pokenav);
+        SetMainCallback2(CB2_Pokenav);
         SetVBlankCallback(VblankCb_Pokenav);
     }
 }
@@ -588,7 +588,7 @@ static bool32 AnyMonHasRibbon(void)
     return FALSE;
 }
 
-static void Cb2_Pokenav(void)
+static void CB2_Pokenav(void)
 {
     RunTasks();
     AnimateSprites();

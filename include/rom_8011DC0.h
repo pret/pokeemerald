@@ -18,5 +18,6 @@ void sub_801B990(u32, u32);
 u8 sub_8013F78(void);
 bool32 sub_802C908(u16);
 void nullsub_89(u8 taskId);
+void var_800D_set_xB(void);
 
 #endif //GUARD_rom_8011DC0_H

@@ -1,13 +1,11 @@
-
-// Includes
 #include "global.h"
 #include "battle_setup.h"
 #include "event_data.h"
 #include "string_util.h"
 #include "battle.h"
 #include "gym_leader_rematch.h"
+#include "match_call.h"
 
-extern void sub_8197080(u8 *dest);
 extern const u8 gTrainerClassNames[][13];
 
 // Static type declarations

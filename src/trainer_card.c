@@ -21,6 +21,7 @@
 #include "gpu_regs.h"
 #include "international_string_util.h"
 #include "pokedex.h"
+#include "pokemon_icon.h"
 #include "graphics.h"
 #include "pokemon_icon.h"
 #include "trainer_pokemon_sprites.h"
@@ -88,9 +89,6 @@ struct TrainerCardData
     u16 var_7CA8;
     u8 language;
 };
-
-//external functions
-extern u8 sub_80D30A0(u16);
 
 // EWRAM
 EWRAM_DATA struct TrainerCard gTrainerCards[4] = {0};

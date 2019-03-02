@@ -7,10 +7,12 @@
 #include "event_object_movement.h"
 #include "event_obj_lock.h"
 #include "event_scripts.h"
+#include "fieldmap.h"
 #include "field_effect.h"
 #include "field_player_avatar.h"
 #include "field_specials.h"
 #include "field_weather.h"
+#include "field_screen_effect.h"
 #include "frontier_pass.h"
 #include "frontier_util.h"
 #include "gpu_regs.h"
@@ -26,6 +28,7 @@
 #include "palette.h"
 #include "party_menu.h"
 #include "pokedex.h"
+#include "pokenav.h"
 #include "safari_zone.h"
 #include "save.h"
 #include "scanline_effect.h"
@@ -40,6 +43,7 @@
 #include "trainer_card.h"
 #include "window.h"
 #include "constants/songs.h"
+#include "rom_8011DC0.h"
 
 // Menu actions
 enum
@@ -83,18 +87,6 @@ EWRAM_DATA static u8 (*sSaveDialogCallback)(void) = NULL;
 EWRAM_DATA static u8 sSaveDialogTimer = 0;
 EWRAM_DATA static bool8 sSavingComplete = FALSE;
 EWRAM_DATA static u8 sSaveInfoWindowId = 0;
-
-// Extern variables.
-extern u8 gLocalLinkPlayerId;
-
-// Extern functions in not decompiled files.
-extern void sub_80AF688(void);
-extern void var_800D_set_xB(void);
-extern void sub_808B864(void);
-extern void CB2_Pokedex(void);
-extern void PlayRainStoppingSoundEffect(void);
-extern void CB2_PokeNav(void);
-extern void save_serialize_map(void);
 
 // Menu action callbacks
 static bool8 StartMenuPokedexCallback(void);
@@ -656,7 +648,7 @@ static bool8 StartMenuPokeNavCallback(void)
         PlayRainStoppingSoundEffect();
         RemoveExtraStartMenuWindows();
         CleanupOverworldWindowsAndTilemaps();
-        SetMainCallback2(CB2_PokeNav);  // Display PokeNav
+        SetMainCallback2(CB2_InitPokeNav);  // Display PokeNav
 
         return TRUE;
     }

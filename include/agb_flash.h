@@ -9,5 +9,6 @@
 
 u16 SetFlashTimerIntr(u8 timerNum, void (**intrFunc)(void));
 u16 IdentifyFlash(void);
+u32 ProgramFlashSectorAndVerify(u16 sectorNum, u8 *src);
 
 #endif //GUARD_AGB_FLASH_H

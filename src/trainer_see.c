@@ -17,8 +17,6 @@
 #include "constants/event_object_movement_constants.h"
 #include "constants/field_effects.h"
 
-extern void sub_809BE48(u16 npcId);
-
 // this file's functions
 static u8 CheckTrainer(u8 eventObjectId);
 static u8 GetTrainerApproachDistance(struct EventObject *trainerObj);

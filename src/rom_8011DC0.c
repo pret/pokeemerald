@@ -33,8 +33,7 @@
 #include "start_menu.h"
 #include "data2.h"
 #include "field_screen_effect.h"
-
-extern void HealPlayerParty(void);
+#include "script_pokemon_util_80F87D8.h"
 
 struct UnkStruct_Shared
 {

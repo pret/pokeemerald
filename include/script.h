@@ -61,4 +61,7 @@ bool32 sub_80991F8(void);
 u8 *sub_8099244(void);
 void sub_80992A0(u8 *script, u16 scriptSize);
 
+// srccmd.h
+void sub_809BE48(u16 npcId);
+
 #endif // GUARD_SCRIPT_H

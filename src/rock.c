@@ -12,8 +12,6 @@
 extern const union AnimCmd *const gUnknown_085950E0[];
 extern const union AnimCmd *const gUnknown_085954D0[];
 
-extern void AnimMoveTwisterParticle(struct Sprite *);
-
 void sub_81109F0(struct Sprite *);
 void sub_8110AB4(struct Sprite *);
 void AnimDirtParticleAcrossScreen(struct Sprite *);

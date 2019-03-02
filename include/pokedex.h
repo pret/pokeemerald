@@ -44,5 +44,6 @@ u16 CreateMonSpriteFromNationalDexNumber(u16, s16, s16, u16);
 bool16 HasAllHoennMons(void);
 void ResetPokedexScrollPositions(void);
 u16 sub_80C0944(void);
+void CB2_Pokedex(void);
 
 #endif // GUARD_POKEDEX_H

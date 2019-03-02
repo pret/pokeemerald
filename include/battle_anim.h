@@ -221,6 +221,7 @@ void sub_8117854(u8 taskId, int unused, u16 arg2, u8 battler1, u8 arg4, u8 arg5,
 
 // battle_anim_effects_1.c
 void sub_810310C(u8 battler, struct Sprite* sprite);
+void AnimMoveTwisterParticle(struct Sprite* sprite);
 
 // smokescreen.c
 u8 sub_807521C(s16 x, s16 y, u8 a3);

@@ -1,5 +1,7 @@
 #include "global.h"
+#include "agb_flash.h"
 #include "gba/flash_internal.h"
+#include "fieldmap.h"
 #include "save.h"
 #include "task.h"
 #include "decompress.h"
@@ -8,6 +10,7 @@
 #include "pokemon_storage_system.h"
 #include "main.h"
 #include "trainer_hill.h"
+#include "link.h"
 #include "constants/game_stat.h"
 
 static u16 CalculateChecksum(void *data, u16 size);
@@ -69,12 +72,6 @@ const struct SaveSectionOffsets gSaveSectionOffsets[] =
     SAVEBLOCK_CHUNK(gPokemonStorage, 7),
     SAVEBLOCK_CHUNK(gPokemonStorage, 8),
 };
-
-extern void DoSaveFailedScreen(u8); // save_failed_screen
-extern bool32 ProgramFlashSectorAndVerify(u8 sector, u8 *data);
-extern void save_serialize_map(void);
-extern void sub_800ADF8(void);
-extern bool8 IsLinkTaskFinished(void);
 
 // iwram common
 u16 gLastWrittenSector;

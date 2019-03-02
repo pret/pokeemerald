@@ -15,5 +15,6 @@ void InitMatchCallCounters(void);
 bool32 TryStartMatchCall(void);
 bool32 IsMatchCallTaskActive(void);
 void StartMatchCallFromScript(u8* script);
+void sub_8197080(u8 *destStr);
 
 #endif //GUARD_MATCH_CALL_H
