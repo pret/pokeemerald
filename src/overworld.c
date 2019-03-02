@@ -838,7 +838,7 @@ static void mli0_load_map(u32 a1)
     }
 
     isOutdoors = IsMapTypeOutdoors(gMapHeader.mapType);
-    isIndoors = Overworld_MapTypeIsIndoors(gMapHeader.mapType);
+    isIndoors = IsMapTypeIndoors(gMapHeader.mapType);
 
     sub_80EB218();
     TrySetMapSaveWarpStatus();
@@ -1199,7 +1199,7 @@ void Overworld_ChangeMusicTo(u16 newMusic)
 u8 GetMapMusicFadeoutSpeed(void)
 {
     const struct MapHeader *mapHeader = GetDestinationWarpMapHeader();
-    if (Overworld_MapTypeIsIndoors(mapHeader->mapType) == TRUE)
+    if (IsMapTypeIndoors(mapHeader->mapType) == TRUE)
         return 2;
     else
         return 4;
@@ -1353,7 +1353,7 @@ bool8 Overworld_MapTypeAllowsTeleportAndFly(u8 mapType)
         return FALSE;
 }
 
-bool8 Overworld_MapTypeIsIndoors(u8 mapType)
+bool8 IsMapTypeIndoors(u8 mapType)
 {
     if (mapType == MAP_TYPE_INDOOR
      || mapType == MAP_TYPE_SECRET_BASE)
