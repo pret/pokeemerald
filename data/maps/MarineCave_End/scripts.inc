@@ -47,13 +47,13 @@ MarineCave_End_EventScript_23B01B:: @ 823B01B
 	goto_if_eq MarineCave_End_EventScript_23B092
 	compare VAR_RESULT, 5
 	goto_if_eq MarineCave_End_EventScript_23B092
-	setvar VAR_0x4039, 1
+	setvar VAR_SHOULD_END_UNUSUAL_WEATHER, 1
 	setflag FLAG_DEFEATED_KYOGRE
 	releaseall
 	end
 
 MarineCave_End_EventScript_23B084:: @ 823B084
-	setvar VAR_0x4039, 1
+	setvar VAR_SHOULD_END_UNUSUAL_WEATHER, 1
 	setflag FLAG_DEFEATED_KYOGRE
 	goto MarineCave_End_EventScript_27376D
 	end

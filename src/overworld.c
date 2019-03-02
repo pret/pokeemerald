@@ -430,10 +430,12 @@ static void Overworld_ResetStateAfterWhiteOut(void)
     FlagClear(FLAG_SYS_SAFARI_MODE);
     FlagClear(FLAG_SYS_USE_STRENGTH);
     FlagClear(FLAG_SYS_USE_FLASH);
-    if (VarGet(VAR_0x4039) == 1)
+    // If you were defeated by Kyogre/Groudon and the step counter has
+    // maxed out, end the unusual weather.
+    if (VarGet(VAR_SHOULD_END_UNUSUAL_WEATHER) == 1)
     {
-        VarSet(VAR_0x4039, 0);
-        VarSet(VAR_0x4037, 0);
+        VarSet(VAR_SHOULD_END_UNUSUAL_WEATHER, 0);
+        VarSet(VAR_UNUSUAL_WEATHER_LOCATION, UNUSUAL_WEATHER_NONE);
     }
 }
 
@@ -698,7 +700,7 @@ void UpdateEscapeWarp(s16 x, s16 y)
 {
     u8 currMapType = GetCurrentMapType();
     u8 destMapType = GetMapTypeByGroupAndId(sWarpDestination.mapGroup, sWarpDestination.mapNum);
-    if (is_map_type_1_2_3_5_or_6(currMapType) && is_map_type_1_2_3_5_or_6(destMapType) != TRUE)
+    if (IsMapTypeOutdoors(currMapType) && IsMapTypeOutdoors(destMapType) != TRUE)
         SetEscapeWarp(gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum, -1, x - 7, y - 6);
 }
 
@@ -843,8 +845,8 @@ void LoadMapFromCameraTransition(u8 mapGroup, u8 mapNum)
 
 static void mli0_load_map(u32 a1)
 {
-    bool8 v2;
-    bool8 indoors;
+    bool8 isOutdoors;
+    bool8 isIndoors;
 
     LoadCurrentMapData();
     if (!(sUnknown_020322D8 & 1))
@@ -857,8 +859,8 @@ static void mli0_load_map(u32 a1)
             LoadEventObjTemplatesFromHeader();
     }
 
-    v2 = is_map_type_1_2_3_5_or_6(gMapHeader.mapType);
-    indoors = Overworld_MapTypeIsIndoors(gMapHeader.mapType);
+    isOutdoors = IsMapTypeOutdoors(gMapHeader.mapType);
+    isIndoors = IsMapTypeIndoors(gMapHeader.mapType);
 
     sub_80EB218();
     TrySetMapSaveWarpStatus();
@@ -870,7 +872,7 @@ static void mli0_load_map(u32 a1)
         DoTimeBasedEvents();
     SetSav1WeatherFromCurrMapHeader();
     ChooseAmbientCrySpecies();
-    if (v2)
+    if (isOutdoors)
         FlagClear(FLAG_SYS_USE_FLASH);
     SetDefaultFlashLevel();
     Overworld_ClearSavedMusic();
@@ -884,7 +886,7 @@ static void mli0_load_map(u32 a1)
     else
         InitMap();
 
-    if (a1 != 1 && indoors)
+    if (a1 != 1 && isIndoors)
     {
         UpdateTVScreensOnMap(gBackupMapLayout.width, gBackupMapLayout.height);
         sub_80E9238(1);
@@ -945,7 +947,7 @@ static u8 GetAdjustedInitialTransitionFlags(struct InitialPlayerAvatarState *pla
 
 static u8 GetAdjustedInitialDirection(struct InitialPlayerAvatarState *playerStruct, u8 transitionFlags, u16 metatileBehavior, u8 mapType)
 {
-    if (FlagGet(FLAG_SYS_CRUISE_MODE) && mapType == MAP_TYPE_6)
+    if (FlagGet(FLAG_SYS_CRUISE_MODE) && mapType == MAP_TYPE_OCEAN_ROUTE)
         return DIR_EAST;
     else if (MetatileBehavior_IsDeepSouthWarp(metatileBehavior) == TRUE)
         return DIR_NORTH;
@@ -1038,7 +1040,7 @@ static bool16 ShouldLegendaryMusicPlayAtLocation(struct WarpData *warp)
         case MAP_NUM(ROUTE128):
             return TRUE;
         default:
-            if (VarGet(VAR_0x405E) < 4)
+            if (VarGet(VAR_RAYQUAZA_STATE) < 4)
                 return FALSE;
             switch (warp->mapNum)
             {
@@ -1054,7 +1056,7 @@ static bool16 ShouldLegendaryMusicPlayAtLocation(struct WarpData *warp)
 
 static bool16 NoMusicInSotopolisWithLegendaries(struct WarpData *warp)
 {
-    if (VarGet(VAR_0x40CA) != 1)
+    if (VarGet(VAR_SKY_PILLAR_STATE) != 1)
         return FALSE;
     else if (warp->mapGroup != MAP_GROUP(SOOTOPOLIS_CITY))
         return FALSE;
@@ -1079,9 +1081,9 @@ static bool16 IsInfiltratedWeatherInstitute(struct WarpData *warp)
 
 static bool16 IsInflitratedSpaceCenter(struct WarpData *warp)
 {
-    if (VarGet(VAR_0x405D) == 0)
+    if (VarGet(VAR_MOSSDEEP_STATE) == 0)
         return FALSE;
-    else if (VarGet(VAR_0x405D) > 2)
+    else if (VarGet(VAR_MOSSDEEP_STATE) > 2)
         return FALSE;
     else if (warp->mapGroup != MAP_GROUP(MOSSDEEP_CITY_SPACE_CENTER_1F))
         return FALSE;
@@ -1219,7 +1221,7 @@ void Overworld_ChangeMusicTo(u16 newMusic)
 u8 GetMapMusicFadeoutSpeed(void)
 {
     const struct MapHeader *mapHeader = GetDestinationWarpMapHeader();
-    if (Overworld_MapTypeIsIndoors(mapHeader->mapType) == TRUE)
+    if (IsMapTypeIndoors(mapHeader->mapType) == TRUE)
         return 2;
     else
         return 4;
@@ -1232,7 +1234,7 @@ void TryFadeOutOldMapMusic(void)
     if (FlagGet(FLAG_SPECIAL_FLAG_0x4001) != TRUE && warpMusic != GetCurrentMapMusic())
     {
         if (currentMusic == MUS_NAMINORI
-            && VarGet(VAR_0x40CA) == 2
+            && VarGet(VAR_SKY_PILLAR_STATE) == 2
             && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(SOOTOPOLIS_CITY)
             && gSaveBlock1Ptr->location.mapNum == MAP_NUM(SOOTOPOLIS_CITY)
             && sWarpDestination.mapGroup == MAP_GROUP(SOOTOPOLIS_CITY)
@@ -1350,13 +1352,13 @@ u8 GetLastUsedWarpMapType(void)
     return GetMapTypeByWarpData(&gLastUsedWarp);
 }
 
-bool8 is_map_type_1_2_3_5_or_6(u8 mapType)
+bool8 IsMapTypeOutdoors(u8 mapType)
 {
     if (mapType == MAP_TYPE_ROUTE
      || mapType == MAP_TYPE_TOWN
      || mapType == MAP_TYPE_UNDERWATER
      || mapType == MAP_TYPE_CITY
-     || mapType == MAP_TYPE_6)
+     || mapType == MAP_TYPE_OCEAN_ROUTE)
         return TRUE;
     else
         return FALSE;
@@ -1366,14 +1368,14 @@ bool8 Overworld_MapTypeAllowsTeleportAndFly(u8 mapType)
 {
     if (mapType == MAP_TYPE_ROUTE
      || mapType == MAP_TYPE_TOWN
-     || mapType == MAP_TYPE_6
+     || mapType == MAP_TYPE_OCEAN_ROUTE
      || mapType == MAP_TYPE_CITY)
         return TRUE;
     else
         return FALSE;
 }
 
-bool8 Overworld_MapTypeIsIndoors(u8 mapType)
+bool8 IsMapTypeIndoors(u8 mapType)
 {
     if (mapType == MAP_TYPE_INDOOR
      || mapType == MAP_TYPE_SECRET_BASE)

@@ -90,7 +90,7 @@ MauvilleCity_Gym_EventScript_20DF2B:: @ 820DF2B
 	waitmessage
 	call Common_EventScript_PlayGymBadgeFanfare
 	msgbox MauvilleCity_Gym_Text_20E7AA, MSGBOX_DEFAULT
-	setvar VAR_0x40D2, 3
+	setvar VAR_SLATEPORT_OUTSIDE_MUSEUM_STATE, 3
 	clearflag FLAG_HIDE_VERDANTURF_TOWN_SCOTT
 	setflag FLAG_DEFEATED_MAUVILLE_GYM
 	setflag FLAG_BADGE03_GET

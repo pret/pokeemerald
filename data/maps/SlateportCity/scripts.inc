@@ -8,7 +8,7 @@ SlateportCity_MapScript1_1DCC6C: @ 81DCC6C
 	call SlateportCity_EventScript_1DCC8D
 	compare VAR_SLATEPORT_STATE, 1
 	call_if_eq SlateportCity_EventScript_1DCC99
-	compare VAR_0x40D2, 1
+	compare VAR_SLATEPORT_OUTSIDE_MUSEUM_STATE, 1
 	call_if_eq SlateportCity_EventScript_1DCCE7
 	end
 
@@ -50,7 +50,7 @@ SlateportCity_EventScript_1DCD06:: @ 81DCD06
 	return
 
 SlateportCity_MapScript2_1DCD12: @ 81DCD12
-	map_script_2 VAR_0x40D2, 1, SlateportCity_EventScript_1DCD1C
+	map_script_2 VAR_SLATEPORT_OUTSIDE_MUSEUM_STATE, 1, SlateportCity_EventScript_1DCD1C
 	.2byte 0
 
 SlateportCity_EventScript_1DCD1C:: @ 81DCD1C
@@ -84,8 +84,8 @@ SlateportCity_EventScript_1DCD1C:: @ 81DCD1C
 	setobjectxyperm 35, 10, 12
 	setobjectmovementtype 35, MOVEMENT_TYPE_FACE_DOWN
 	clearflag FLAG_SPECIAL_FLAG_0x4000
-	setvar VAR_0x40D2, 2
-	addvar VAR_0x40D1, 1
+	setvar VAR_SLATEPORT_OUTSIDE_MUSEUM_STATE, 2
+	addvar VAR_SCOTT_STATE, 1
 	releaseall
 	end
 
@@ -901,8 +901,8 @@ SlateportCity_EventScript_1DD5DC:: @ 81DD5DC
 	applymovement 35, SlateportCity_Movement_1DD63A
 	waitmovement 0
 	removeobject 35
-	addvar VAR_0x40D1, 1
-	setvar VAR_0x40D2, 3
+	addvar VAR_SCOTT_STATE, 1
+	setvar VAR_SLATEPORT_OUTSIDE_MUSEUM_STATE, 3
 	releaseall
 	end
 

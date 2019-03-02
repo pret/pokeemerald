@@ -499,8 +499,8 @@ gSpecials:: @ 81DBA64
 	def_special sub_813B21C
 	def_special SetMatchCallRegisteredFlag
 	def_special sub_8175280
-	def_special sub_813B2E4
-	def_special sub_813B374
+	def_special CreateUnusualWeatherEvent
+	def_special GetUnusualWeatherMapNameAndType
 	def_special sub_813B490
 	def_special sub_80A08CC
 	def_special Unused_SetWeatherSunny

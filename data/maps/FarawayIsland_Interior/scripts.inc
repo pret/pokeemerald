@@ -38,7 +38,7 @@ FarawayIsland_Interior_EventScript_267D5E:: @ 8267D5E
 	return
 
 FarawayIsland_Interior_MapScript1_267D72: @ 8267D72
-	setvar VAR_0x403A, 0
+	setvar VAR_NEVER_READ_0x403A, 0
 	setvar VAR_TEMP_1, 1
 	call_if_unset FLAG_CAUGHT_MEW, FarawayIsland_Interior_EventScript_267D86
 	end

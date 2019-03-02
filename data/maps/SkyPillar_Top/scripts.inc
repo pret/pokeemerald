@@ -16,9 +16,9 @@ SkyPillar_Top_EventScript_2396D2:: @ 82396D2
 	return
 
 SkyPillar_Top_MapScript1_2396E6: @ 82396E6
-	compare VAR_0x40CA, 2
+	compare VAR_SKY_PILLAR_STATE, 2
 	call_if_lt SkyPillar_Top_EventScript_2396FD
-	compare VAR_0x40CA, 2
+	compare VAR_SKY_PILLAR_STATE, 2
 	call_if_ge SkyPillar_Top_EventScript_239705
 	end
 
@@ -36,7 +36,7 @@ SkyPillar_Top_EventScript_23970F:: @ 823970F
 	return
 
 SkyPillar_Top_MapScript2_239713: @ 8239713
-	map_script_2 VAR_0x40CA, 0, SkyPillar_Top_EventScript_23971D
+	map_script_2 VAR_SKY_PILLAR_STATE, 0, SkyPillar_Top_EventScript_23971D
 	.2byte 0
 
 SkyPillar_Top_EventScript_23971D:: @ 823971D
@@ -130,9 +130,9 @@ SkyPillar_Top_EventScript_23979A:: @ 823979A
 	applymovement EVENT_OBJ_ID_CAMERA, SkyPillar_Top_Movement_23985C
 	waitmovement 0
 	special RemoveCameraObject
-	setvar VAR_0x405E, 5
-	setvar VAR_0x40CA, 1
-	setvar VAR_0x40D7, 1
+	setvar VAR_RAYQUAZA_STATE, 5
+	setvar VAR_SKY_PILLAR_STATE, 1
+	setvar VAR_SKY_PILLAR_RAQUAZA_CRY_DONE, 1
 	releaseall
 	end
 

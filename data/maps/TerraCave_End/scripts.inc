@@ -47,13 +47,13 @@ TerraCave_End_EventScript_23B0EC:: @ 823B0EC
 	goto_if_eq TerraCave_End_EventScript_23B163
 	compare VAR_RESULT, 5
 	goto_if_eq TerraCave_End_EventScript_23B163
-	setvar VAR_0x4039, 1
+	setvar VAR_SHOULD_END_UNUSUAL_WEATHER, 1
 	setflag FLAG_DEFEATED_GROUDON
 	releaseall
 	end
 
 TerraCave_End_EventScript_23B155:: @ 823B155
-	setvar VAR_0x4039, 1
+	setvar VAR_SHOULD_END_UNUSUAL_WEATHER, 1
 	setflag FLAG_DEFEATED_GROUDON
 	goto TerraCave_End_EventScript_27376D
 	end

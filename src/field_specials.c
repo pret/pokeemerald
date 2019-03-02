@@ -360,17 +360,17 @@ u8 GetSSTidalLocation(s8 *mapGroup, s8 *mapNum, s16 *x, s16 *y)
     return 0;
 }
 
-bool32 is_tile_that_overrides_player_control(void)
+bool32 ShouldDoWallyCall(void)
 {
     if (FlagGet(FLAG_ENABLE_FIRST_WALLY_POKENAV_CALL))
     {
         switch (gMapHeader.mapType)
         {
-            case 1:
-            case 2:
-            case 3:
-            case 6:
-                if (++(*GetVarPointer(VAR_0x40F2)) < 0xFA)
+            case MAP_TYPE_TOWN:
+            case MAP_TYPE_CITY:
+            case MAP_TYPE_ROUTE:
+            case MAP_TYPE_OCEAN_ROUTE:
+                if (++(*GetVarPointer(VAR_WALLY_CALL_STEP_COUNTER)) < 250)
                 {
                     return FALSE;
                 }
@@ -387,7 +387,7 @@ bool32 is_tile_that_overrides_player_control(void)
     return TRUE;
 }
 
-bool32 sub_8138120(void)
+bool32 ShouldDoWinonaCall(void)
 {
     if (FlagGet(FLAG_REGISTER_WINONA_POKENAV))
     {
@@ -396,8 +396,8 @@ bool32 sub_8138120(void)
             case MAP_TYPE_TOWN:
             case MAP_TYPE_CITY:
             case MAP_TYPE_ROUTE:
-            case MAP_TYPE_6:
-                if (++(*GetVarPointer(VAR_0x40F3)) < 10)
+            case MAP_TYPE_OCEAN_ROUTE:
+                if (++(*GetVarPointer(VAR_WINONA_CALL_STEP_COUNTER)) < 10)
                 {
                     return FALSE;
                 }
@@ -414,7 +414,7 @@ bool32 sub_8138120(void)
     return TRUE;
 }
 
-bool32 sub_8138168(void)
+bool32 ShouldDoScottCall(void)
 {
     if (FlagGet(FLAG_SCOTT_CALL_NATIONAL_DEX))
     {
@@ -424,7 +424,7 @@ bool32 sub_8138168(void)
             case 2:
             case 3:
             case 6:
-                if (++(*GetVarPointer(VAR_0x40F5)) < 0xA)
+                if (++(*GetVarPointer(VAR_SCOTT_CALL_STEP_COUNTER)) < 10)
                 {
                     return FALSE;
                 }
@@ -441,7 +441,7 @@ bool32 sub_8138168(void)
     return TRUE;
 }
 
-bool32 sub_81381B0(void)
+bool32 ShouldDoRoxanneCall(void)
 {
     if (FlagGet(FLAG_ENABLE_ROXANNE_FIRST_CALL))
     {
@@ -451,7 +451,7 @@ bool32 sub_81381B0(void)
             case 2:
             case 3:
             case 6:
-                if (++(*GetVarPointer(VAR_0x40F4)) < 0xFA)
+                if (++(*GetVarPointer(VAR_ROXANNE_CALL_STEP_COUNTER)) < 250)
                 {
                     return FALSE;
                 }
@@ -468,7 +468,7 @@ bool32 sub_81381B0(void)
     return TRUE;
 }
 
-bool32 sub_81381F8(void)
+bool32 ShouldDoRivalRayquazaCall(void)
 {
     if (FlagGet(FLAG_DEFEATED_MAGMA_SPACE_CENTER))
     {
@@ -478,7 +478,7 @@ bool32 sub_81381F8(void)
             case 2:
             case 3:
             case 6:
-                if (++(*GetVarPointer(VAR_0x40F6)) < 0xFA)
+                if (++(*GetVarPointer(VAR_RIVAL_RAYQUAZA_CALL_STEP_COUNTER)) < 250)
                 {
                     return FALSE;
                 }
@@ -1516,7 +1516,7 @@ bool8 FoundBlackGlasses(void)
 
 void SetRoute119Weather(void)
 {
-    if (is_map_type_1_2_3_5_or_6(GetLastUsedWarpMapType()) != TRUE)
+    if (IsMapTypeOutdoors(GetLastUsedWarpMapType()) != TRUE)
     {
         SetSav1Weather(20);
     }
@@ -1524,7 +1524,7 @@ void SetRoute119Weather(void)
 
 void SetRoute123Weather(void)
 {
-    if (is_map_type_1_2_3_5_or_6(GetLastUsedWarpMapType()) != TRUE)
+    if (IsMapTypeOutdoors(GetLastUsedWarpMapType()) != TRUE)
     {
         SetSav1Weather(21);
     }
@@ -3421,40 +3421,59 @@ bool8 sub_813B260(void)
     return FALSE;
 }
 
-void sub_813B2E4(void)
+void CreateUnusualWeatherEvent(void)
 {
     u16 randomValue = Random();
-    VarSet(VAR_0x4038, 0);
+    VarSet(VAR_UNUSUAL_WEATHER_STEP_COUNTER, 0);
 
     if (FlagGet(FLAG_DEFEATED_KYOGRE) == TRUE)
     {
-        VarSet(VAR_0x4037, (randomValue & 7) + 1);
+        VarSet(VAR_UNUSUAL_WEATHER_LOCATION, (randomValue % UNUSUAL_WEATHER_COUNT_PER_LEGENDARY) + UNUSUAL_WEATHER_GROUDON_LOCATIONS_START);
     }
     else if (FlagGet(FLAG_DEFEATED_GROUDON) == TRUE)
     {
-        VarSet(VAR_0x4037, (randomValue & 7) + 9);
+        VarSet(VAR_UNUSUAL_WEATHER_LOCATION, (randomValue % UNUSUAL_WEATHER_COUNT_PER_LEGENDARY) + UNUSUAL_WEATHER_KYOGRE_LOCATIONS_START);
     }
     else if ((randomValue & 1) == 0)
     {
         randomValue = Random();
-        VarSet(VAR_0x4037, (randomValue & 7) + 1);
+        VarSet(VAR_UNUSUAL_WEATHER_LOCATION, (randomValue % UNUSUAL_WEATHER_COUNT_PER_LEGENDARY) + UNUSUAL_WEATHER_GROUDON_LOCATIONS_START);
     }
     else
     {
         randomValue = Random();
-        VarSet(VAR_0x4037, (randomValue & 7) + 9);
+        VarSet(VAR_UNUSUAL_WEATHER_LOCATION, (randomValue % UNUSUAL_WEATHER_COUNT_PER_LEGENDARY) + UNUSUAL_WEATHER_KYOGRE_LOCATIONS_START);
     }
 }
 
-bool32 sub_813B374(void)
+// Saves the map name for the current unusual weather location in gStringVar1, then
+// returns TRUE if the weather is for Kyogre, and FALSE if it's for Groudon.
+bool32 GetUnusualWeatherMapNameAndType(void)
 {
-    static const u8 gUnknown_085B3400[] = { 0x1d, 0x1d, 0x1e, 0x1e, 0x1f, 0x1f, 0x21, 0x21, 0x14, 0x14, 0x28, 0x28, 0x2a, 0x2a, 0x2c, 0x2c };
+    static const u8 sUnusualWeatherMapNumbers[] = {
+        MAP_NUM(ROUTE114),
+        MAP_NUM(ROUTE114),
+        MAP_NUM(ROUTE115),
+        MAP_NUM(ROUTE115),
+        MAP_NUM(ROUTE116),
+        MAP_NUM(ROUTE116),
+        MAP_NUM(ROUTE118),
+        MAP_NUM(ROUTE118),
+        MAP_NUM(ROUTE105),
+        MAP_NUM(ROUTE105),
+        MAP_NUM(ROUTE125),
+        MAP_NUM(ROUTE125),
+        MAP_NUM(ROUTE127),
+        MAP_NUM(ROUTE127),
+        MAP_NUM(ROUTE129),
+        MAP_NUM(ROUTE129)
+    };
 
-    u16 var = VarGet(VAR_0x4037);
+    u16 unusualWeather = VarGet(VAR_UNUSUAL_WEATHER_LOCATION);
 
-    GetMapName(gStringVar1, gUnknown_085B3400[var - 1], 0);
+    GetMapName(gStringVar1, sUnusualWeatherMapNumbers[unusualWeather - 1], 0);
 
-    if (var < 9)
+    if (unusualWeather < UNUSUAL_WEATHER_KYOGRE_LOCATIONS_START)
     {
         return FALSE;
     }
@@ -3464,21 +3483,39 @@ bool32 sub_813B374(void)
     }
 }
 
-bool8 sub_813B3B0(void)
+bool8 UnusualWeatherHasExpired(void)
 {
-    static const u8 gUnknown_085B3410[] = { 0x1d, 0x1d, 0x1e, 0x1e, 0x1f, 0x1f, 0x21, 0x21, 0x14, 0x14, 0x28, 0x28, 0x2a, 0x2a, 0x2c, 0x2c };
+    // Duplicate array.
+    static const u8 sUnusualWeatherMapNumbers_2[] = {
+        MAP_NUM(ROUTE114),
+        MAP_NUM(ROUTE114),
+        MAP_NUM(ROUTE115),
+        MAP_NUM(ROUTE115),
+        MAP_NUM(ROUTE116),
+        MAP_NUM(ROUTE116),
+        MAP_NUM(ROUTE118),
+        MAP_NUM(ROUTE118),
+        MAP_NUM(ROUTE105),
+        MAP_NUM(ROUTE105),
+        MAP_NUM(ROUTE125),
+        MAP_NUM(ROUTE125),
+        MAP_NUM(ROUTE127),
+        MAP_NUM(ROUTE127),
+        MAP_NUM(ROUTE129),
+        MAP_NUM(ROUTE129)
+    };
 
-    u16 var1 = VarGet(VAR_0x4038);
-    u16 var2 = VarGet(VAR_0x4037);
+    u16 steps = VarGet(VAR_UNUSUAL_WEATHER_STEP_COUNTER);
+    u16 unusualWeather = VarGet(VAR_UNUSUAL_WEATHER_LOCATION);
 
-    if (!var2)
+    if (unusualWeather == UNUSUAL_WEATHER_NONE)
     {
         return FALSE;
     }
 
-    if (++var1 > 999)
+    if (++steps > 999)
     {
-        VarSet(VAR_0x4038, 0);
+        VarSet(VAR_UNUSUAL_WEATHER_STEP_COUNTER, 0);
         if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(UNDERWATER_MARINE_CAVE))
         {
             switch (gSaveBlock1Ptr->location.mapNum)
@@ -3488,7 +3525,7 @@ bool8 sub_813B3B0(void)
                 case MAP_NUM(MARINE_CAVE_END):
                 case MAP_NUM(TERRA_CAVE_ENTRANCE):
                 case MAP_NUM(TERRA_CAVE_END):
-                    VarSet(VAR_0x4039, 1);
+                    VarSet(VAR_SHOULD_END_UNUSUAL_WEATHER, 1);
                     return FALSE;
                 default:
                     break;
@@ -3503,27 +3540,27 @@ bool8 sub_813B3B0(void)
                 case MAP_NUM(UNDERWATER5):
                 case MAP_NUM(UNDERWATER6):
                 case MAP_NUM(UNDERWATER7):
-                    VarSet(VAR_0x4039, 1);
+                    VarSet(VAR_SHOULD_END_UNUSUAL_WEATHER, 1);
                     return FALSE;
                 default:
                     break;
             }
         }
 
-        if (gSaveBlock1Ptr->location.mapNum == gUnknown_085B3410[var2 - 1] &&
+        if (gSaveBlock1Ptr->location.mapNum == sUnusualWeatherMapNumbers_2[unusualWeather - 1] &&
             gSaveBlock1Ptr->location.mapGroup == 0)
         {
             return TRUE;
         }
         else
         {
-            VarSet(VAR_0x4037, 0);
+            VarSet(VAR_UNUSUAL_WEATHER_LOCATION, UNUSUAL_WEATHER_NONE);
             return FALSE;
         }
     }
     else
     {
-        VarSet(VAR_0x4038, var1);
+        VarSet(VAR_UNUSUAL_WEATHER_STEP_COUNTER, steps);
         return FALSE;
     }
 }
@@ -3577,7 +3614,7 @@ bool32 sub_813B4E0(void)
 
 bool32 sub_813B514(void)
 {
-    if (!VarGet(VAR_0x403F))
+    if (!VarGet(VAR_ALWAYS_ZERO_0x403F))
     {
         return FALSE;
     }

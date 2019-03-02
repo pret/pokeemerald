@@ -40,7 +40,7 @@ EverGrandeCity_PokemonCenter_1F_EventScript_229A79:: @ 8229A79
 	call_if_eq EverGrandeCity_PokemonCenter_1F_EventScript_229AC1
 	compare VAR_FACING, 3
 	call_if_eq EverGrandeCity_PokemonCenter_1F_EventScript_229AC1
-	addvar VAR_0x40D1, 1
+	addvar VAR_SCOTT_STATE, 1
 	setflag FLAG_MET_SCOTT_IN_EVERGRANDE
 	playse SE_KAIDAN
 	waitse

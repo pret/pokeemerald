@@ -307,7 +307,7 @@ VerdanturfTown_BattleTentLobby_EventScript_201AD0:: @ 8201AD0
 	faceplayer
 	goto_if_set FLAG_MET_SCOTT_IN_VERDANTURF, VerdanturfTown_BattleTentLobby_EventScript_201AED
 	msgbox VerdanturfTown_BattleTentLobby_Text_201F3F, MSGBOX_DEFAULT
-	addvar VAR_0x40D1, 1
+	addvar VAR_SCOTT_STATE, 1
 	setflag FLAG_MET_SCOTT_IN_VERDANTURF
 	release
 	end

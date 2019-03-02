@@ -94,7 +94,7 @@ MossdeepCity_EventScript_1E4B41:: @ 81E4B41
 	removeobject 12
 	removeobject 13
 	delay 30
-	setvar VAR_0x405D, 2
+	setvar VAR_MOSSDEEP_STATE, 2
 	setflag FLAG_HIDE_MOSSDEEP_CITY_TEAM_MAGMA
 	releaseall
 	end
@@ -259,7 +259,7 @@ MossdeepCity_EventScript_1E4C85:: @ 81E4C85
 	call_if_eq MossdeepCity_EventScript_1E4CB0
 	compare VAR_FACING, 4
 	call_if_eq MossdeepCity_EventScript_1E4CC2
-	addvar VAR_0x40D1, 1
+	addvar VAR_SCOTT_STATE, 1
 	removeobject 16
 	release
 	end

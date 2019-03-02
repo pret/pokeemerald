@@ -33,31 +33,31 @@ SootopolisCity_EventScript_1E56E5:: @ 81E56E5
 
 SootopolisCity_MapScript1_1E56EF: @ 81E56EF
 	setflag FLAG_VISITED_SOOTOPOLIS_CITY
-	compare VAR_0x405E, 1
+	compare VAR_RAYQUAZA_STATE, 1
 	call_if_eq SootopolisCity_EventScript_1E5781
-	compare VAR_0x40CA, 1
+	compare VAR_SKY_PILLAR_STATE, 1
 	call_if_eq SootopolisCity_EventScript_1E5781
 	call SootopolisCity_EventScript_1E5805
 	call SootopolisCity_EventScript_1E57B2
-	compare VAR_0x405E, 1
+	compare VAR_RAYQUAZA_STATE, 1
 	call_if_eq SootopolisCity_EventScript_1E5785
-	compare VAR_0x405E, 2
+	compare VAR_RAYQUAZA_STATE, 2
 	call_if_eq SootopolisCity_EventScript_1E5785
-	compare VAR_0x405E, 3
+	compare VAR_RAYQUAZA_STATE, 3
 	call_if_eq SootopolisCity_EventScript_1E5785
-	compare VAR_0x405E, 4
+	compare VAR_RAYQUAZA_STATE, 4
 	call_if_eq SootopolisCity_EventScript_1E5785
-	compare VAR_0x405E, 5
+	compare VAR_RAYQUAZA_STATE, 5
 	call_if_eq SootopolisCity_EventScript_1E5785
-	compare VAR_0x405E, 2
+	compare VAR_RAYQUAZA_STATE, 2
 	call_if_eq SootopolisCity_EventScript_1E5842
-	compare VAR_0x405E, 3
+	compare VAR_RAYQUAZA_STATE, 3
 	call_if_eq SootopolisCity_EventScript_1E5842
-	compare VAR_0x405E, 4
+	compare VAR_RAYQUAZA_STATE, 4
 	call_if_eq SootopolisCity_EventScript_1E585B
-	compare VAR_0x405E, 5
+	compare VAR_RAYQUAZA_STATE, 5
 	call_if_eq SootopolisCity_EventScript_1E5871
-	compare VAR_0x405E, 6
+	compare VAR_RAYQUAZA_STATE, 6
 	call_if_eq SootopolisCity_EventScript_1E58D3
 	end
 
@@ -77,19 +77,19 @@ SootopolisCity_EventScript_1E5785:: @ 81E5785
 	return
 
 SootopolisCity_EventScript_1E57B2:: @ 81E57B2
-	compare VAR_0x405E, 0
+	compare VAR_RAYQUAZA_STATE, 0
 	goto_if_eq SootopolisCity_EventScript_1E5800
-	compare VAR_0x405E, 6
+	compare VAR_RAYQUAZA_STATE, 6
 	goto_if_ge SootopolisCity_EventScript_1E5800
-	compare VAR_0x405E, 1
+	compare VAR_RAYQUAZA_STATE, 1
 	goto_if_eq SootopolisCity_EventScript_1E5801
-	compare VAR_0x405E, 2
+	compare VAR_RAYQUAZA_STATE, 2
 	goto_if_eq SootopolisCity_EventScript_1E5801
-	compare VAR_0x405E, 3
+	compare VAR_RAYQUAZA_STATE, 3
 	goto_if_eq SootopolisCity_EventScript_1E5801
-	compare VAR_0x405E, 4
+	compare VAR_RAYQUAZA_STATE, 4
 	goto_if_eq SootopolisCity_EventScript_1E5801
-	compare VAR_0x40CA, 1
+	compare VAR_SKY_PILLAR_STATE, 1
 	goto_if_le SootopolisCity_EventScript_1E5801
 	return
 
@@ -101,15 +101,15 @@ SootopolisCity_EventScript_1E5801:: @ 81E5801
 	return
 
 SootopolisCity_EventScript_1E5805:: @ 81E5805
-	compare VAR_0x405E, 0
+	compare VAR_RAYQUAZA_STATE, 0
 	goto_if_eq SootopolisCity_EventScript_1E583D
-	compare VAR_0x405E, 6
+	compare VAR_RAYQUAZA_STATE, 6
 	goto_if_ge SootopolisCity_EventScript_1E583D
-	compare VAR_0x405E, 1
+	compare VAR_RAYQUAZA_STATE, 1
 	goto_if_eq SootopolisCity_EventScript_1E583E
-	compare VAR_0x40CA, 1
+	compare VAR_SKY_PILLAR_STATE, 1
 	goto_if_eq SootopolisCity_EventScript_1E583E
-	compare VAR_0x40CA, 1
+	compare VAR_SKY_PILLAR_STATE, 1
 	goto_if_le Common_EventScript_SetWeather15
 	return
 
@@ -140,11 +140,11 @@ SootopolisCity_EventScript_1E5871:: @ 81E5871
 	setobjectxyperm 7, 29, 33
 	setobjectxyperm 16, 33, 35
 	setobjectxyperm 17, 34, 35
-	compare VAR_0x40D8, 0
+	compare VAR_SOOTOPOLIS_STATE, 0
 	call_if_eq SootopolisCity_EventScript_1E58AF
-	compare VAR_0x40D8, 1
+	compare VAR_SOOTOPOLIS_STATE, 1
 	call_if_eq SootopolisCity_EventScript_1E58BB
-	compare VAR_0x40D8, 2
+	compare VAR_SOOTOPOLIS_STATE, 2
 	call_if_eq SootopolisCity_EventScript_1E58C7
 	return
 
@@ -168,13 +168,13 @@ SootopolisCity_EventScript_1E58D3:: @ 81E58D3
 	return
 
 SootopolisCity_MapScript2_1E58DB: @ 81E58DB
-	map_script_2 VAR_0x405E, 5, SootopolisCity_EventScript_1E58E5
+	map_script_2 VAR_RAYQUAZA_STATE, 5, SootopolisCity_EventScript_1E58E5
 	.2byte 0
 
 SootopolisCity_EventScript_1E58E5:: @ 81E58E5
-	compare VAR_0x40CA, 1
+	compare VAR_SKY_PILLAR_STATE, 1
 	call_if_eq SootopolisCity_EventScript_1E58FC
-	compare VAR_0x40CA, 2
+	compare VAR_SKY_PILLAR_STATE, 2
 	call_if_eq SootopolisCity_EventScript_1E5901
 	end
 
@@ -184,7 +184,7 @@ SootopolisCity_EventScript_1E58FC:: @ 81E58FC
 
 SootopolisCity_EventScript_1E5901:: @ 81E5901
 	turnobject EVENT_OBJ_ID_PLAYER, 2
-	setvar VAR_0x40CA, 3
+	setvar VAR_SKY_PILLAR_STATE, 3
 	return
 
 SootopolisCity_MapScript1_1E590B: @ 81E590B
@@ -192,8 +192,8 @@ SootopolisCity_MapScript1_1E590B: @ 81E590B
 	end
 
 SootopolisCity_MapScript2_1E5914: @ 81E5914
-	map_script_2 VAR_0x405E, 1, SootopolisCity_EventScript_1E5926
-	map_script_2 VAR_0x40CA, 1, SootopolisCity_EventScript_1E5BFE
+	map_script_2 VAR_RAYQUAZA_STATE, 1, SootopolisCity_EventScript_1E5926
+	map_script_2 VAR_SKY_PILLAR_STATE, 1, SootopolisCity_EventScript_1E5BFE
 	.2byte 0
 
 SootopolisCity_EventScript_1E5926:: @ 81E5926
@@ -271,7 +271,7 @@ SootopolisCity_EventScript_1E5946:: @ 81E5946
 	applymovement EVENT_OBJ_ID_CAMERA, SootopolisCity_Movement_1E5A75
 	waitmovement 0
 	special RemoveCameraObject
-	setvar VAR_0x405E, 2
+	setvar VAR_RAYQUAZA_STATE, 2
 	clearflag FLAG_SPECIAL_FLAG_0x4000
 	releaseall
 	end
@@ -371,7 +371,7 @@ SootopolisCity_EventScript_1E5A82:: @ 81E5A82
 	applymovement EVENT_OBJ_ID_CAMERA, SootopolisCity_Movement_1E5BAE
 	waitmovement 0
 	special RemoveCameraObject
-	setvar VAR_0x405E, 2
+	setvar VAR_RAYQUAZA_STATE, 2
 	clearflag FLAG_SPECIAL_FLAG_0x4000
 	releaseall
 	end
@@ -540,7 +540,7 @@ SootopolisCity_EventScript_1E5C1E:: @ 81E5C1E
 	special WaitWeather
 	waitstate
 	clearflag FLAG_SYS_WEATHER_CTRL
-	setvar VAR_0x40CA, 3
+	setvar VAR_SKY_PILLAR_STATE, 3
 	clearflag FLAG_LEGENDARIES_IN_SOOTOPOLIS
 	fadenewbgm MUS_RUNECITY
 	delay 120
@@ -593,7 +593,7 @@ SootopolisCity_EventScript_1E5CCE:: @ 81E5CCE
 	special WaitWeather
 	waitstate
 	clearflag FLAG_SYS_WEATHER_CTRL
-	setvar VAR_0x40CA, 2
+	setvar VAR_SKY_PILLAR_STATE, 2
 	clearflag FLAG_LEGENDARIES_IN_SOOTOPOLIS
 	fadenewbgm MUS_NAMINORI
 	delay 120
@@ -694,11 +694,11 @@ SootopolisCity_Movement_1E5E7F: @ 81E5E7F
 SootopolisCity_EventScript_1E5E8D:: @ 81E5E8D
 	lock
 	faceplayer
-	compare VAR_0x405E, 6
+	compare VAR_RAYQUAZA_STATE, 6
 	goto_if_ge SootopolisCity_EventScript_1E5EC4
-	compare VAR_0x405E, 5
+	compare VAR_RAYQUAZA_STATE, 5
 	goto_if_eq SootopolisCity_EventScript_1E5ECE
-	compare VAR_0x405E, 2
+	compare VAR_RAYQUAZA_STATE, 2
 	goto_if_ge SootopolisCity_EventScript_1E5EBA
 	msgbox SootopolisCity_Text_1E6D77, MSGBOX_DEFAULT
 	release
@@ -722,11 +722,11 @@ SootopolisCity_EventScript_1E5ECE:: @ 81E5ECE
 SootopolisCity_EventScript_1E5ED8:: @ 81E5ED8
 	lock
 	faceplayer
-	compare VAR_0x405E, 1
+	compare VAR_RAYQUAZA_STATE, 1
 	goto_if_le SootopolisCity_EventScript_1E5F1B
-	compare VAR_0x405E, 6
+	compare VAR_RAYQUAZA_STATE, 6
 	goto_if_ge SootopolisCity_EventScript_1E5F1B
-	compare VAR_0x405E, 5
+	compare VAR_RAYQUAZA_STATE, 5
 	goto_if_eq SootopolisCity_EventScript_1E5F10
 	msgbox SootopolisCity_Text_1E6BFF, MSGBOX_DEFAULT
 	closemessage
@@ -794,7 +794,7 @@ SootopolisCity_EventScript_1E5FE2:: @ 81E5FE2
 	lockall
 	applymovement 2, Common_Movement_FacePlayer
 	waitmovement 0
-	compare VAR_0x405E, 5
+	compare VAR_RAYQUAZA_STATE, 5
 	goto_if_eq SootopolisCity_EventScript_1E600D
 	msgbox SootopolisCity_Text_1E71A1, MSGBOX_DEFAULT
 	closemessage
@@ -811,7 +811,7 @@ SootopolisCity_EventScript_1E600D:: @ 81E600D
 SootopolisCity_EventScript_1E6017:: @ 81E6017
 	lock
 	faceplayer
-	compare VAR_0x405E, 6
+	compare VAR_RAYQUAZA_STATE, 6
 	goto_if_ge SootopolisCity_EventScript_1E602E
 	msgbox SootopolisCity_Text_1E6CCA, MSGBOX_DEFAULT
 	release
@@ -825,11 +825,11 @@ SootopolisCity_EventScript_1E602E:: @ 81E602E
 SootopolisCity_EventScript_1E6038:: @ 81E6038
 	lock
 	faceplayer
-	compare VAR_0x405E, 6
+	compare VAR_RAYQUAZA_STATE, 6
 	goto_if_ge SootopolisCity_EventScript_1E607A
-	compare VAR_0x405E, 5
+	compare VAR_RAYQUAZA_STATE, 5
 	goto_if_eq SootopolisCity_EventScript_1E6084
-	compare VAR_0x405E, 2
+	compare VAR_RAYQUAZA_STATE, 2
 	goto_if_ge SootopolisCity_EventScript_1E6065
 	msgbox SootopolisCity_Text_1E6F90, MSGBOX_DEFAULT
 	release
@@ -857,11 +857,11 @@ SootopolisCity_EventScript_1E608E:: @ 81E608E
 	lockall
 	applymovement 4, Common_Movement_FacePlayer
 	waitmovement 0
-	compare VAR_0x405E, 5
+	compare VAR_RAYQUAZA_STATE, 5
 	goto_if_eq SootopolisCity_EventScript_1E60D9
-	compare VAR_0x405E, 6
+	compare VAR_RAYQUAZA_STATE, 6
 	goto_if_ge SootopolisCity_EventScript_1E60CF
-	compare VAR_0x405E, 1
+	compare VAR_RAYQUAZA_STATE, 1
 	goto_if_le SootopolisCity_EventScript_1E60CF
 	msgbox SootopolisCity_Text_1E690B, MSGBOX_DEFAULT
 	closemessage
@@ -884,12 +884,12 @@ SootopolisCity_EventScript_1E60E3:: @ 81E60E3
 	lockall
 	applymovement 5, Common_Movement_FacePlayer
 	waitmovement 0
-	compare VAR_0x405E, 5
+	compare VAR_RAYQUAZA_STATE, 5
 	goto_if_eq SootopolisCity_EventScript_1E612D
 	goto_if_set FLAG_SYS_GAME_CLEAR, SootopolisCity_EventScript_1E6137
-	compare VAR_0x405E, 6
+	compare VAR_RAYQUAZA_STATE, 6
 	goto_if_ge SootopolisCity_EventScript_1E6141
-	compare VAR_0x405E, 1
+	compare VAR_RAYQUAZA_STATE, 1
 	goto_if_le SootopolisCity_EventScript_1E6141
 	msgbox SootopolisCity_Text_1E6692, MSGBOX_DEFAULT
 	closemessage
@@ -930,11 +930,11 @@ SootopolisCity_EventScript_1E6166:: @ 81E6166
 	applymovement 7, Common_Movement_FacePlayer
 	waitmovement 0
 	call_if_unset FLAG_STEVEN_GUIDES_TO_CAVE_OF_ORIGIN, SootopolisCity_EventScript_1E61CC
-	compare VAR_0x405E, 2
+	compare VAR_RAYQUAZA_STATE, 2
 	goto_if_eq SootopolisCity_EventScript_1E61AE
-	compare VAR_0x405E, 3
+	compare VAR_RAYQUAZA_STATE, 3
 	goto_if_eq SootopolisCity_EventScript_1E61C2
-	compare VAR_0x405E, 4
+	compare VAR_RAYQUAZA_STATE, 4
 	goto_if_eq SootopolisCity_EventScript_1E61C2
 	goto_if_set FLAG_SOOTOPOLIS_ARCHIE_MAXIE_LEAVE, SootopolisCity_EventScript_1E61B8
 	msgbox SootopolisCity_Text_1E78E5, MSGBOX_DEFAULT
@@ -1263,7 +1263,7 @@ SootopolisCity_EventScript_1E635D:: @ 81E635D
 	lockall
 	applymovement 15, Common_Movement_FacePlayer
 	waitmovement 0
-	compare VAR_0x405E, 5
+	compare VAR_RAYQUAZA_STATE, 5
 	goto_if_eq SootopolisCity_EventScript_1E6388
 	msgbox SootopolisCity_Text_1E67DC, MSGBOX_DEFAULT
 	closemessage
@@ -1280,7 +1280,7 @@ SootopolisCity_EventScript_1E6388:: @ 81E6388
 
 SootopolisCity_EventScript_1E6393:: @ 81E6393
 	lockall
-	compare VAR_0x405E, 5
+	compare VAR_RAYQUAZA_STATE, 5
 	goto_if_eq SootopolisCity_EventScript_1E63C7
 	msgbox SootopolisCity_Text_1E6936, MSGBOX_DEFAULT
 	closemessage
@@ -1304,7 +1304,7 @@ SootopolisCity_EventScript_1E63DB:: @ 81E63DB
 	lockall
 	applymovement 13, Common_Movement_FacePlayer
 	waitmovement 0
-	compare VAR_0x405E, 5
+	compare VAR_RAYQUAZA_STATE, 5
 	goto_if_eq SootopolisCity_EventScript_1E6406
 	msgbox SootopolisCity_Text_1E6C7C, MSGBOX_DEFAULT
 	closemessage
@@ -1323,7 +1323,7 @@ SootopolisCity_EventScript_1E6411:: @ 81E6411
 	lockall
 	applymovement 12, Common_Movement_FacePlayer
 	waitmovement 0
-	compare VAR_0x405E, 5
+	compare VAR_RAYQUAZA_STATE, 5
 	goto_if_eq SootopolisCity_EventScript_1E643C
 	msgbox SootopolisCity_Text_1E6A50, MSGBOX_DEFAULT
 	closemessage
@@ -1340,7 +1340,7 @@ SootopolisCity_EventScript_1E643C:: @ 81E643C
 SootopolisCity_EventScript_1E6446:: @ 81E6446
 	lock
 	faceplayer
-	compare VAR_0x405E, 4
+	compare VAR_RAYQUAZA_STATE, 4
 	goto_if_eq SootopolisCity_EventScript_1E64D8
 	goto_if_set FLAG_RECEIVED_HM07, SootopolisCity_EventScript_1E64E2
 	goto_if_set FLAG_SOOTOPOLIS_ARCHIE_MAXIE_LEAVE, SootopolisCity_EventScript_1E646F
@@ -1367,14 +1367,14 @@ SootopolisCity_EventScript_1E64B2:: @ 81E64B2
 	applymovement 18, SootopolisCity_Movement_1E64EC
 	waitmovement 0
 	moveobjectoffscreen 18
-	setvar VAR_0x40D8, 1
+	setvar VAR_SOOTOPOLIS_STATE, 1
 	return
 
 SootopolisCity_EventScript_1E64C5:: @ 81E64C5
 	applymovement 18, SootopolisCity_Movement_1E64EF
 	waitmovement 0
 	moveobjectoffscreen 18
-	setvar VAR_0x40D8, 2
+	setvar VAR_SOOTOPOLIS_STATE, 2
 	return
 
 SootopolisCity_EventScript_1E64D8:: @ 81E64D8
@@ -1399,7 +1399,7 @@ SootopolisCity_Movement_1E64EF: @ 81E64EF
 
 SootopolisCity_EventScript_1E64F2:: @ 81E64F2
 	lockall
-	compare VAR_0x405E, 5
+	compare VAR_RAYQUAZA_STATE, 5
 	goto_if_eq SootopolisCity_EventScript_1E6509
 	msgbox SootopolisCity_Text_1E72DB, MSGBOX_DEFAULT
 	closemessage
@@ -1415,7 +1415,7 @@ SootopolisCity_EventScript_1E6509:: @ 81E6509
 
 SootopolisCity_EventScript_1E651F:: @ 81E651F
 	lockall
-	compare VAR_0x405E, 5
+	compare VAR_RAYQUAZA_STATE, 5
 	goto_if_eq SootopolisCity_EventScript_1E6536
 	msgbox SootopolisCity_Text_1E7460, MSGBOX_DEFAULT
 	closemessage
