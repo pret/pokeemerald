@@ -23,7 +23,6 @@
 #include "constants/songs.h"
 #include "constants/species.h"
 #include "constants/weather.h"
-#include "flying.h"
 
 extern const struct SpriteTemplate gUnknown_08593114;
 extern const union AffineAnimCmd *const gUnknown_082FF6C0[];

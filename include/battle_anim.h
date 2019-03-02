@@ -223,6 +223,12 @@ void sub_8117854(u8 taskId, int unused, u16 arg2, u8 battler1, u8 arg4, u8 arg5,
 void sub_810310C(u8 battler, struct Sprite* sprite);
 void AnimMoveTwisterParticle(struct Sprite* sprite);
 
+// water.c
+void sub_8108C94(struct Sprite *sprite);
+
+// flying.c
+void sub_810E2C8(struct Sprite *sprite);
+
 // smokescreen.c
 u8 sub_807521C(s16 x, s16 y, u8 a3);
 

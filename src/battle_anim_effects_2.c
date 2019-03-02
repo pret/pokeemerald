@@ -15,7 +15,6 @@
 #include "util.h"
 #include "constants/rgb.h"
 #include "constants/songs.h"
-#include "water.h"
 
 void sub_8103448(struct Sprite *);
 void sub_8103498(struct Sprite *);

@@ -4,7 +4,6 @@
 #include "trig.h"
 #include "constants/songs.h"
 #include "sound.h"
-#include "flying.h"
 
 static void sub_810A1A8(struct Sprite *);
 static void sub_810A1F8(struct Sprite *);

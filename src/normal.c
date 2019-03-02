@@ -5,7 +5,6 @@
 #include "task.h"
 #include "trig.h"
 #include "constants/rgb.h"
-#include "flying.h"
 
 void AnimConfusionDuck(struct Sprite *);
 void AnimSimplePaletteBlend(struct Sprite *);
