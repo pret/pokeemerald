@@ -21,8 +21,7 @@
 #include "alloc.h"
 #include "gpu_regs.h"
 #include "constants/game_stat.h"
-
-extern void PrintOnTrainerHillRecordsWindow(void); // pokenav.s
+#include "trainer_hill.h"
 
 // this file's functions
 static void Task_CloseTrainerHillRecordsOnButton(u8 taskId);

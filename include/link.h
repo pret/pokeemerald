@@ -261,6 +261,7 @@ void sub_800B3A4(u32 who);
 bool32 sub_800A07C(void);
 void sub_800AB98(void);
 void sub_800AA04(u8 a0);
+void sub_800B4C0(void);
 
 extern u16 gLinkPartnersHeldKeys[6];
 extern u32 gLinkDebugSeed;

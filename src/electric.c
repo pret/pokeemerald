@@ -4,9 +4,7 @@
 #include "trig.h"
 #include "constants/songs.h"
 #include "sound.h"
-
-extern void sub_810E2C8(struct Sprite *);
-extern void TranslateAnimSpriteToTargetMonLocation(struct Sprite *);
+#include "flying.h"
 
 static void sub_810A1A8(struct Sprite *);
 static void sub_810A1F8(struct Sprite *);

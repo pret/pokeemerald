@@ -33,9 +33,6 @@ extern struct MusicPlayerInfo gMPlayInfo_BGM;
 
 extern const struct CompressedSpritePalette gTrainerFrontPicPaletteTable[];
 
-extern void sub_8172EF0(u8 battlerId, struct Pokemon *mon);
-extern u16 sub_8068B48(void);
-
 // this file's functions
 static void RecordedOpponentHandleGetMonData(void);
 static void RecordedOpponentHandleGetRawMonData(void);

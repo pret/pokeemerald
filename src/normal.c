@@ -5,6 +5,7 @@
 #include "task.h"
 #include "trig.h"
 #include "constants/rgb.h"
+#include "flying.h"
 
 void AnimConfusionDuck(struct Sprite *);
 void AnimSimplePaletteBlend(struct Sprite *);
@@ -35,8 +36,6 @@ static void sub_81161F4(void);
 static void sub_81162F8(u8);
 static void sub_81163D0(struct Sprite *);
 static void sub_81165E4(struct Sprite *);
-
-extern void sub_810E2C8(struct Sprite *);
 
 const union AnimCmd gUnknown_0859722C[] =
 {

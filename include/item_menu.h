@@ -71,6 +71,7 @@ void sub_81AAC14(void);
 void sub_81AAC50(void);
 void sub_81AAC70(void);
 void sub_81AAC28(void);
+void sub_81AABB0(void);
 void SetInitialScrollAndCursorPositions(u8 pocketId);
 void bag_menu_mail_related(void);
 void CB2_BagMenuFromStartMenu(void);
@@ -80,6 +81,8 @@ void CB2_GoToSellMenu(void);
 void GoToBagMenu(u8 bagMenuType, u8 pocketId, void ( *postExitMenuMainCallback2)());
 void DoWallyTutorialBagMenu(void);
 void ResetBagScrollPositions(void);
+void sub_81AABF0(void (*callback)(void));
+void CB2_ChooseBerry(void);
 
 
 #endif //GUARD_item_menu_H

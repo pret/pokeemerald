@@ -142,9 +142,6 @@ extern const u8 gText_Space[];
 extern const u8 gText_BlenderMaxSpeedRecord[];
 extern const u8 gText_234Players[];
 
-extern void sub_81AABF0(void (*callback)(void));
-extern void sub_800B4C0(void);
-
 // this file's functions
 static void BerryBlender_SetBackgroundsPos(void);
 static void sub_8080EA4(u8 taskId);

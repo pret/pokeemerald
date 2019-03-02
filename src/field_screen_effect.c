@@ -10,7 +10,6 @@
 #include "field_screen_effect.h"
 #include "field_special_scene.h"
 #include "field_weather.h"
-// #include "fldeff_flash.h"
 #include "gpu_regs.h"
 #include "link.h"
 #include "link_rfu.h"
@@ -31,15 +30,9 @@
 #include "constants/event_object_movement_constants.h"
 #include "constants/songs.h"
 #include "constants/rgb.h"
+#include "trainer_hill.h"
+#include "event_obj_lock.h"
 
-extern bool32 sub_81D6534(void);
-extern bool8 walkrun_is_standing_still(void);
-extern void ScriptUnfreezeEventObjects(void);
-extern void sub_80FB768(void);
-extern void sub_808D194(void);
-extern void sub_808D1C8(void);
-extern bool32 sub_808D1B4(void);
-extern bool32 sub_808D1E8(void);
 extern void sub_80B6B68(void);
 extern void sub_80B6E4C(u8, u8);
 extern void sub_80B75D8(u8);
@@ -47,6 +40,8 @@ extern void sub_80B7A74(u8);
 extern void sub_808C0A8(u8);
 extern u8 GetMapPairFadeToType(u8, u8);
 extern u8 GetMapPairFadeFromType(u8, u8);
+extern bool32 sub_808D1B4(void);
+extern bool32 sub_808D1E8(void);
 
 extern const u16 gUnknown_82EC7CC[];
 

@@ -4,9 +4,7 @@
 #include "string_util.h"
 #include "task.h"
 #include "text.h"
-
-extern bool32 IsMatchCallTaskActive(void);
-extern void StartMatchCallFromScript(u8*);
+#include "match_call.h"
 
 static EWRAM_DATA u8 sFieldMessageBoxMode = 0;
 

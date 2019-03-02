@@ -41,5 +41,6 @@ void sub_80B0534(void);
 void sub_80B058C(void);
 void sub_80B05B4(void);
 void WriteFlashScanlineEffectBuffer(u8 flashLevel);
+bool8 walkrun_is_standing_still(void);
 
 #endif // GUARD_FIELD_SCREEN_EFFECT_H

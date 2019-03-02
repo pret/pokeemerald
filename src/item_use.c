@@ -37,10 +37,10 @@
 #include "constants/items.h"
 #include "constants/songs.h"
 #include "constants/vars.h"
+#include "event_obj_lock.h"
 
 extern void unknown_ItemMenu_Confirm(u8 taskId);
 extern void sub_81C5B14(u8 taskId);
-extern void ScriptUnfreezeEventObjects(void);
 extern void ItemUseOutOfBattle_TMHM(u8 a);
 extern void ItemUseOutOfBattle_EvolutionStone(u8 b);
 extern bool8 IsPlayerFacingSurfableFishableWater(void);

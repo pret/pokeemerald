@@ -3379,7 +3379,7 @@ u16 get_unknown_box_id(void)
     return gUnknown_0203AB6F;
 }
 
-bool32 sub_813B21C(void)
+bool8 sub_813B21C(void)
 {
     if (FlagGet(FLAG_SYS_STORAGE_UNKNOWN_FLAG) == FALSE)
     {

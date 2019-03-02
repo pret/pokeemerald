@@ -11,11 +11,9 @@
 #include "text.h"
 #include "constants/event_object_movement_constants.h"
 #include "constants/items.h"
+#include "event_object_movement.h"
 
-extern u8 EventObjectGetBerryTreeId(u8 eventObjectId);
-extern void sub_8092EF0(u8 mapId, u8 mapNumber, u8 mapGroup);
-extern void CB2_ChooseBerry(void);
-extern bool8 IsBerryTreeSparkling(u8, u8, u8);
+
 
 extern const u8 BerryTreeScript[];
 

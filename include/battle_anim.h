@@ -204,6 +204,9 @@ void sub_80A718C(struct Sprite *sprite);
 #define STAT_ANIM_MULTIPLE_MINUS2 58
 void LaunchStatusAnimation(u8 battlerId, u8 statusAnimId);
 
+// battle_anim_8170478.c
+void sub_8172EF0(u8 battler, struct Pokemon *mon);
+
 // ground.c
 void sub_81152DC(u8 taskId);
 
@@ -215,6 +218,12 @@ u8 LaunchBallFadeMonTask(bool8 unFadeLater, u8 battlerId, u32 selectedPalettes, 
 // battle_anim_utility_funcs.s
 void sub_8116EB4(u8);
 void sub_8117854(u8 taskId, int unused, u16 arg2, u8 battler1, u8 arg4, u8 arg5, u8 arg6, u8 arg7, const u32 *arg8, const u32 *arg9, const u32 *palette);
+
+// battle_anim_effects_1.c
+void sub_810310C(u8 battler, struct Sprite* sprite);
+
+// smokescreen.c
+u8 sub_807521C(s16 x, s16 y, u8 a3);
 
 u32 UnpackSelectedBattleAnimPalettes(s16);
 

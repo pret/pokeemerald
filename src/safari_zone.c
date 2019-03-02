@@ -10,6 +10,7 @@
 #include "string_util.h"
 #include "tv.h"
 #include "constants/game_stat.h"
+#include "field_screen_effect.h"
 
 struct PokeblockFeeder
 {
@@ -26,8 +27,6 @@ extern const u8 EventScript_2A4B8A[];
 extern const u8 EventScript_2A4B6F[];
 extern const u8 EventScript_2A4B4C[];
 extern const u8 EventScript_2A4B9B[];
-
-extern void sub_80AF6F0(void);
 
 EWRAM_DATA u8 gNumSafariBalls = 0;
 EWRAM_DATA static u16 sSafariZoneStepCounter = 0;

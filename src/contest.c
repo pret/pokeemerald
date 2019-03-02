@@ -45,8 +45,6 @@
 #include "constants/rgb.h"
 #include "contest_ai.h"
 
-extern void sub_80FC9F8(u8); // contest_link_80FC4F4.c
-
 // This file's functions.
 static void sub_80D782C(void);
 static void sub_80D7C7C(u8 taskId);

@@ -43,5 +43,6 @@ s8 GetSetPokedexFlag(u16 nationalNum, u8 caseId);
 u16 CreateMonSpriteFromNationalDexNumber(u16, s16, s16, u16);
 bool16 HasAllHoennMons(void);
 void ResetPokedexScrollPositions(void);
+u16 sub_80C0944(void);
 
 #endif // GUARD_POKEDEX_H
