@@ -8,6 +8,7 @@
 #include "bg.h"
 #include "constants/items.h"
 #include "constants/songs.h"
+#include "data2.h"
 #include "decompress.h"
 #include "event_data.h"
 #include "event_object_movement.h"
@@ -446,7 +447,6 @@ EWRAM_DATA u16 gSpecialVar_ItemId = 0;
 static EWRAM_DATA struct TempWallyStruct *gUnknown_0203CE80 = 0;
 
 extern u8 *const gPocketNamesStringsTable[];
-extern const u8 gMoveNames[][0xD];
 extern u8* gReturnToXStringsTable[];
 extern const u8 EventScript_2736B3[];
 extern const u16 gUnknown_0860F074[];
