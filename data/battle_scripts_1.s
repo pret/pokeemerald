@@ -5573,6 +5573,19 @@ BattleScript_MoveUsedIsParalyzed::
 	statusanimation BS_ATTACKER
 	cancelmultiturnmoves BS_ATTACKER
 	goto BattleScript_MoveEnd
+	
+BattleScript_PowderMoveNoEffect::
+	attackstring
+	ppreduce
+	pause 0x20
+	jumpiftype BS_TARGET, TYPE_GRASS, BattleScript_PowderMoveNoEffectPrint
+	call BattleScript_AbilityPopUp
+BattleScript_PowderMoveNoEffectPrint:
+	printstring STRINGID_ITDOESNTAFFECT
+	waitmessage 0x40
+	cancelmultiturnmoves BS_ATTACKER
+	sethword gMoveResultFlags, MOVE_RESULT_FAILED
+	goto BattleScript_MoveEnd
 
 BattleScript_MoveUsedFlinched::
 	printstring STRINGID_PKMNFLINCHED
