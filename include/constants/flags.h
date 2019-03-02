@@ -273,7 +273,7 @@
 #define FLAG_RECEIVED_DURIN_BERRY            0xFB
 #define FLAG_RECEIVED_BELUE_BERRY            0xFC
 #define FLAG_ENABLE_RIVAL_MATCH_CALL         0xFD
-#define FLFLAG_RECEIVED_CHARCOAL             0xFE
+#define FLAG_RECEIVED_CHARCOAL               0xFE
 #define FLAG_LATIOS_OR_LATIAS_ROAMING        0xFF
 #define FLAG_RECEIVED_REPEAT_BALL            0x100
 #define FLAG_RECEIVED_OLD_ROD                0x101
@@ -1262,25 +1262,25 @@
 
 // System Flags
 
-#define FLAG_SYS_POKEMON_GET                           (SYSTEM_FLAGS + 0) // FLAG_0x860
-#define FLAG_SYS_POKEDEX_GET                           (SYSTEM_FLAGS + 1)
-#define FLAG_SYS_POKENAV_GET                           (SYSTEM_FLAGS + 2)
-#define FLAG_SYS_GAME_CLEAR                            (SYSTEM_FLAGS + 4)
-#define FLAG_SYS_CHAT_USED                             (SYSTEM_FLAGS + 5)
-#define FLAG_SYS_HIPSTER_MEET                          (SYSTEM_FLAGS + 6)
+#define FLAG_SYS_POKEMON_GET                        (SYSTEM_FLAGS + 0x00) // FLAG_0x860
+#define FLAG_SYS_POKEDEX_GET                        (SYSTEM_FLAGS + 0x01)
+#define FLAG_SYS_POKENAV_GET                        (SYSTEM_FLAGS + 0x02)
+#define FLAG_SYS_GAME_CLEAR                         (SYSTEM_FLAGS + 0x04)
+#define FLAG_SYS_CHAT_USED                          (SYSTEM_FLAGS + 0x05)
+#define FLAG_SYS_HIPSTER_MEET                       (SYSTEM_FLAGS + 0x06)
 
 // Badges
-#define FLAG_BADGE01_GET                               (SYSTEM_FLAGS + 7)
-#define FLAG_BADGE02_GET                               (SYSTEM_FLAGS + 8)
-#define FLAG_BADGE03_GET                               (SYSTEM_FLAGS + 9)
-#define FLAG_BADGE04_GET                             (SYSTEM_FLAGS + 0xA)
-#define FLAG_BADGE05_GET                             (SYSTEM_FLAGS + 0xB)
-#define FLAG_BADGE06_GET                             (SYSTEM_FLAGS + 0xC)
-#define FLAG_BADGE07_GET                             (SYSTEM_FLAGS + 0xD)
-#define FLAG_BADGE08_GET                             (SYSTEM_FLAGS + 0xE)
+#define FLAG_BADGE01_GET                            (SYSTEM_FLAGS + 0x07)
+#define FLAG_BADGE02_GET                            (SYSTEM_FLAGS + 0x08)
+#define FLAG_BADGE03_GET                            (SYSTEM_FLAGS + 0x09)
+#define FLAG_BADGE04_GET                            (SYSTEM_FLAGS + 0x0A)
+#define FLAG_BADGE05_GET                            (SYSTEM_FLAGS + 0x0B)
+#define FLAG_BADGE06_GET                            (SYSTEM_FLAGS + 0x0C)
+#define FLAG_BADGE07_GET                            (SYSTEM_FLAGS + 0x0D)
+#define FLAG_BADGE08_GET                            (SYSTEM_FLAGS + 0x0E)
 
 // Towns and Cities
-#define FLAG_VISITED_LITTLEROOT_TOWN                 (SYSTEM_FLAGS + 0xF)
+#define FLAG_VISITED_LITTLEROOT_TOWN                (SYSTEM_FLAGS + 0x0F)
 #define FLAG_VISITED_OLDALE_TOWN                    (SYSTEM_FLAGS + 0x10)
 #define FLAG_VISITED_DEWFORD_TOWN                   (SYSTEM_FLAGS + 0x11)
 #define FLAG_VISITED_LAVARIDGE_TOWN                 (SYSTEM_FLAGS + 0x12)
