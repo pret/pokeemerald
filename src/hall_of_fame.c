@@ -419,13 +419,13 @@ static void Task_Hof_InitMonData(u8 taskId)
     for (i = 0; i < PARTY_SIZE; i++)
     {
         u8 nick[POKEMON_NAME_LENGTH + 2];
-        if (GetMonData_2(&gPlayerParty[i], MON_DATA_SPECIES))
+        if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES))
         {
-            sHofMonPtr->mon[i].species = GetMonData_2(&gPlayerParty[i], MON_DATA_SPECIES2);
-            sHofMonPtr->mon[i].tid = GetMonData_2(&gPlayerParty[i], MON_DATA_OT_ID);
-            sHofMonPtr->mon[i].personality = GetMonData_2(&gPlayerParty[i], MON_DATA_PERSONALITY);
-            sHofMonPtr->mon[i].lvl = GetMonData_2(&gPlayerParty[i], MON_DATA_LEVEL);
-            GetMonData(&gPlayerParty[i], MON_DATA_NICKNAME, nick);
+            sHofMonPtr->mon[i].species = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2);
+            sHofMonPtr->mon[i].tid = GetMonData(&gPlayerParty[i], MON_DATA_OT_ID);
+            sHofMonPtr->mon[i].personality = GetMonData(&gPlayerParty[i], MON_DATA_PERSONALITY);
+            sHofMonPtr->mon[i].lvl = GetMonData(&gPlayerParty[i], MON_DATA_LEVEL);
+            GetMonDataExtended(&gPlayerParty[i], MON_DATA_NICKNAME, nick);
             for (j = 0; j < POKEMON_NAME_LENGTH; j++)
             {
                 sHofMonPtr->mon[i].nick[j] = nick[j];

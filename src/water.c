@@ -2018,16 +2018,16 @@ u8 sub_8108384(void)
     {
         partyIndex = gBattlerPartyIndexes[gBattleAnimAttacker];
         slot =  &gPlayerParty[partyIndex];
-        maxhp = GetMonData_2(slot, MON_DATA_MAX_HP);
-        hp = GetMonData_2(slot, MON_DATA_HP);
+        maxhp = GetMonData(slot, MON_DATA_MAX_HP);
+        hp = GetMonData(slot, MON_DATA_HP);
         maxhp /= 4;
     }
     else
     {
         partyIndex = gBattlerPartyIndexes[gBattleAnimAttacker];
         slot =  &gEnemyParty[partyIndex];
-        maxhp = GetMonData_2(slot, MON_DATA_MAX_HP);
-        hp = GetMonData_2(slot, MON_DATA_HP);
+        maxhp = GetMonData(slot, MON_DATA_MAX_HP);
+        hp = GetMonData(slot, MON_DATA_HP);
         maxhp /= 4;
     }
     for (i = 0; i < 3; i++)

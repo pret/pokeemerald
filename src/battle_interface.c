@@ -1438,8 +1438,8 @@ void SwapHpBarsWithHpText(void)
                     healthBarSpriteId = gSprites[gHealthboxSpriteIds[i]].hMain_HealthBarSpriteId;
 
                     CpuFill32(0, (void*)(OBJ_VRAM0 + gSprites[healthBarSpriteId].oam.tileNum * TILE_SIZE_4BPP), 0x100);
-                    UpdateHpTextInHealthboxInDoubles(gHealthboxSpriteIds[i], GetMonData_2(&gPlayerParty[gBattlerPartyIndexes[i]], MON_DATA_HP), HP_CURRENT);
-                    UpdateHpTextInHealthboxInDoubles(gHealthboxSpriteIds[i], GetMonData_2(&gPlayerParty[gBattlerPartyIndexes[i]], MON_DATA_MAX_HP), HP_MAX);
+                    UpdateHpTextInHealthboxInDoubles(gHealthboxSpriteIds[i], GetMonData(&gPlayerParty[gBattlerPartyIndexes[i]], MON_DATA_HP), HP_CURRENT);
+                    UpdateHpTextInHealthboxInDoubles(gHealthboxSpriteIds[i], GetMonData(&gPlayerParty[gBattlerPartyIndexes[i]], MON_DATA_MAX_HP), HP_MAX);
                 }
                 else // text to bars
                 {
@@ -1462,8 +1462,8 @@ void SwapHpBarsWithHpText(void)
                         healthBarSpriteId = gSprites[gHealthboxSpriteIds[i]].hMain_HealthBarSpriteId;
 
                         CpuFill32(0, (void *)(OBJ_VRAM0 + gSprites[healthBarSpriteId].oam.tileNum * 32), 0x100);
-                        UpdateHpTextInHealthboxInDoubles(gHealthboxSpriteIds[i], GetMonData_2(&gEnemyParty[gBattlerPartyIndexes[i]], MON_DATA_HP), HP_CURRENT);
-                        UpdateHpTextInHealthboxInDoubles(gHealthboxSpriteIds[i], GetMonData_2(&gEnemyParty[gBattlerPartyIndexes[i]], MON_DATA_MAX_HP), HP_MAX);
+                        UpdateHpTextInHealthboxInDoubles(gHealthboxSpriteIds[i], GetMonData(&gEnemyParty[gBattlerPartyIndexes[i]], MON_DATA_HP), HP_CURRENT);
+                        UpdateHpTextInHealthboxInDoubles(gHealthboxSpriteIds[i], GetMonData(&gEnemyParty[gBattlerPartyIndexes[i]], MON_DATA_MAX_HP), HP_MAX);
                     }
                 }
                 else // text to bars
@@ -1943,12 +1943,12 @@ static void UpdateNickInHealthbox(u8 healthboxSpriteId, struct Pokemon *mon)
     u8 gender;
 
     StringCopy(gDisplayedStringBattle, gText_HighlightDarkGrey);
-    GetMonData(mon, MON_DATA_NICKNAME, nickname);
+    GetMonDataExtended(mon, MON_DATA_NICKNAME, nickname);
     StringGetEnd10(nickname);
     ptr = StringAppend(gDisplayedStringBattle, nickname);
 
     gender = GetMonGender(mon);
-    species = GetMonData_2(mon, MON_DATA_SPECIES);
+    species = GetMonData(mon, MON_DATA_SPECIES);
 
     if ((species == SPECIES_NIDORAN_F || species == SPECIES_NIDORAN_M) && StringCompare(nickname, gSpeciesNames[species]) == 0)
         gender = 100;
@@ -2003,7 +2003,7 @@ static void TryAddPokeballIconToHealthbox(u8 healthboxSpriteId, bool8 noStatus)
     battlerId = gSprites[healthboxSpriteId].hMain_Battler;
     if (GetBattlerSide(battlerId) == B_SIDE_PLAYER)
         return;
-    if (!GetSetPokedexFlag(SpeciesToNationalPokedexNum(GetMonData_2(&gEnemyParty[gBattlerPartyIndexes[battlerId]], MON_DATA_SPECIES)), FLAG_GET_CAUGHT))
+    if (!GetSetPokedexFlag(SpeciesToNationalPokedexNum(GetMonData(&gEnemyParty[gBattlerPartyIndexes[battlerId]], MON_DATA_SPECIES)), FLAG_GET_CAUGHT))
         return;
 
     healthBarSpriteId = gSprites[healthboxSpriteId].hMain_HealthBarSpriteId;
@@ -2027,7 +2027,7 @@ static void UpdateStatusIconInHealthbox(u8 healthboxSpriteId)
     healthBarSpriteId = gSprites[healthboxSpriteId].hMain_HealthBarSpriteId;
     if (GetBattlerSide(battlerId) == B_SIDE_PLAYER)
     {
-        status = GetMonData_2(&gPlayerParty[gBattlerPartyIndexes[battlerId]], MON_DATA_STATUS);
+        status = GetMonData(&gPlayerParty[gBattlerPartyIndexes[battlerId]], MON_DATA_STATUS);
         if (!IsDoubleBattle())
             tileNumAdder = 0x1A;
         else
@@ -2035,7 +2035,7 @@ static void UpdateStatusIconInHealthbox(u8 healthboxSpriteId)
     }
     else
     {
-        status = GetMonData_2(&gEnemyParty[gBattlerPartyIndexes[battlerId]], MON_DATA_STATUS);
+        status = GetMonData(&gEnemyParty[gBattlerPartyIndexes[battlerId]], MON_DATA_STATUS);
         tileNumAdder = 0x11;
     }
 
@@ -2197,16 +2197,16 @@ void UpdateHealthboxAttribute(u8 healthboxSpriteId, struct Pokemon *mon, u8 elem
         u8 isDoubles;
 
         if (elementId == HEALTHBOX_LEVEL || elementId == HEALTHBOX_ALL)
-            UpdateLvlInHealthbox(healthboxSpriteId, GetMonData_2(mon, MON_DATA_LEVEL));
+            UpdateLvlInHealthbox(healthboxSpriteId, GetMonData(mon, MON_DATA_LEVEL));
         if (elementId == HEALTHBOX_CURRENT_HP || elementId == HEALTHBOX_ALL)
-            UpdateHpTextInHealthbox(healthboxSpriteId, GetMonData_2(mon, MON_DATA_HP), HP_CURRENT);
+            UpdateHpTextInHealthbox(healthboxSpriteId, GetMonData(mon, MON_DATA_HP), HP_CURRENT);
         if (elementId == HEALTHBOX_MAX_HP || elementId == HEALTHBOX_ALL)
-            UpdateHpTextInHealthbox(healthboxSpriteId, GetMonData_2(mon, MON_DATA_MAX_HP), HP_MAX);
+            UpdateHpTextInHealthbox(healthboxSpriteId, GetMonData(mon, MON_DATA_MAX_HP), HP_MAX);
         if (elementId == HEALTHBOX_HEALTH_BAR || elementId == HEALTHBOX_ALL)
         {
             LoadBattleBarGfx(0);
-            maxHp = GetMonData_2(mon, MON_DATA_MAX_HP);
-            currHp = GetMonData_2(mon, MON_DATA_HP);
+            maxHp = GetMonData(mon, MON_DATA_MAX_HP);
+            currHp = GetMonData(mon, MON_DATA_HP);
             SetBattleBarStruct(battlerId, healthboxSpriteId, maxHp, currHp, 0);
             MoveBattleBar(battlerId, healthboxSpriteId, HEALTH_BAR, 0);
         }
@@ -2219,9 +2219,9 @@ void UpdateHealthboxAttribute(u8 healthboxSpriteId, struct Pokemon *mon, u8 elem
             u8 level;
 
             LoadBattleBarGfx(3);
-            species = GetMonData_2(mon, MON_DATA_SPECIES);
-            level = GetMonData_2(mon, MON_DATA_LEVEL);
-            exp = GetMonData_2(mon, MON_DATA_EXP);
+            species = GetMonData(mon, MON_DATA_SPECIES);
+            level = GetMonData(mon, MON_DATA_LEVEL);
+            exp = GetMonData(mon, MON_DATA_EXP);
             currLevelExp = gExperienceTables[gBaseStats[species].growthRate][level];
             currExpBarValue = exp - currLevelExp;
             maxExpBarValue = gExperienceTables[gBaseStats[species].growthRate][level + 1] - currLevelExp;
@@ -2240,12 +2240,12 @@ void UpdateHealthboxAttribute(u8 healthboxSpriteId, struct Pokemon *mon, u8 elem
     else
     {
         if (elementId == HEALTHBOX_LEVEL || elementId == HEALTHBOX_ALL)
-            UpdateLvlInHealthbox(healthboxSpriteId, GetMonData_2(mon, MON_DATA_LEVEL));
+            UpdateLvlInHealthbox(healthboxSpriteId, GetMonData(mon, MON_DATA_LEVEL));
         if (elementId == HEALTHBOX_HEALTH_BAR || elementId == HEALTHBOX_ALL)
         {
             LoadBattleBarGfx(0);
-            maxHp = GetMonData_2(mon, MON_DATA_MAX_HP);
-            currHp = GetMonData_2(mon, MON_DATA_HP);
+            maxHp = GetMonData(mon, MON_DATA_MAX_HP);
+            currHp = GetMonData(mon, MON_DATA_HP);
             SetBattleBarStruct(battlerId, healthboxSpriteId, maxHp, currHp, 0);
             MoveBattleBar(battlerId, healthboxSpriteId, HEALTH_BAR, 0);
         }
@@ -2336,7 +2336,7 @@ static void MoveBattleBarGraphically(u8 battlerId, u8 whichBar)
                     gBattleSpritesDataPtr->battleBars[battlerId].receivedValue,
                     &gBattleSpritesDataPtr->battleBars[battlerId].currValue,
                     array, B_EXPBAR_PIXELS / 8);
-        level = GetMonData_2(&gPlayerParty[gBattlerPartyIndexes[battlerId]], MON_DATA_LEVEL);
+        level = GetMonData(&gPlayerParty[gBattlerPartyIndexes[battlerId]], MON_DATA_LEVEL);
         if (level == MAX_LEVEL)
         {
             for (i = 0; i < 8; i++)

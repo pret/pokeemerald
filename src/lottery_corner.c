@@ -60,12 +60,12 @@ void PickLotteryCornerTicket(void)
     {
         struct Pokemon *mon = &gPlayerParty[i];
 
-        if (GetMonData_2(mon, MON_DATA_SPECIES) != SPECIES_NONE)
+        if (GetMonData(mon, MON_DATA_SPECIES) != SPECIES_NONE)
         {
             // do not calculate ticket values for eggs.
-            if (!GetMonData_2(mon, MON_DATA_IS_EGG))
+            if (!GetMonData(mon, MON_DATA_IS_EGG))
             {
-                u32 otId = GetMonData_2(mon, MON_DATA_OT_ID);
+                u32 otId = GetMonData(mon, MON_DATA_OT_ID);
                 u8 numMatchingDigits = GetMatchingDigits(gSpecialVar_Result, otId);
 
                 if (numMatchingDigits > gSpecialVar_0x8004 && numMatchingDigits > 1)
@@ -84,10 +84,10 @@ void PickLotteryCornerTicket(void)
     {
         for (j = 0; j < IN_BOX_COUNT; j++)
         {
-            if (GetBoxMonData_2(&gPokemonStoragePtr->boxes[i][j], MON_DATA_SPECIES) != SPECIES_NONE &&
-            !GetBoxMonData_2(&gPokemonStoragePtr->boxes[i][j], MON_DATA_IS_EGG))
+            if (GetBoxMonData(&gPokemonStoragePtr->boxes[i][j], MON_DATA_SPECIES) != SPECIES_NONE &&
+            !GetBoxMonData(&gPokemonStoragePtr->boxes[i][j], MON_DATA_IS_EGG))
             {
-                u32 otId = GetBoxMonData_2(&gPokemonStoragePtr->boxes[i][j], MON_DATA_OT_ID);
+                u32 otId = GetBoxMonData(&gPokemonStoragePtr->boxes[i][j], MON_DATA_OT_ID);
                 u8 numMatchingDigits = GetMatchingDigits(gSpecialVar_Result, otId);
 
                 if (numMatchingDigits > gSpecialVar_0x8004 && numMatchingDigits > 1)
@@ -107,12 +107,12 @@ void PickLotteryCornerTicket(void)
         if (box == TOTAL_BOXES_COUNT)
         {
             gSpecialVar_0x8006 = 0;
-            GetMonData(&gPlayerParty[slot], MON_DATA_NICKNAME, gStringVar1);
+            GetMonDataExtended(&gPlayerParty[slot], MON_DATA_NICKNAME, gStringVar1);
         }
         else
         {
             gSpecialVar_0x8006 = 1;
-            GetBoxMonData(&gPokemonStoragePtr->boxes[box][slot], MON_DATA_NICKNAME, gStringVar1);
+            GetBoxMonDataExtended(&gPokemonStoragePtr->boxes[box][slot], MON_DATA_NICKNAME, gStringVar1);
         }
         StringGetEnd10(gStringVar1);
     }

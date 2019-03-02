@@ -3005,7 +3005,7 @@ static void atk19_tryfaintmon(void)
             {
                 if (gBattleResults.opponentFaintCounter < 0xFF)
                     gBattleResults.opponentFaintCounter++;
-                gBattleResults.lastOpponentSpecies = GetMonData(&gEnemyParty[gBattlerPartyIndexes[gActiveBattler]], MON_DATA_SPECIES, NULL);
+                gBattleResults.lastOpponentSpecies = GetMonDataExtended(&gEnemyParty[gBattlerPartyIndexes[gActiveBattler]], MON_DATA_SPECIES, NULL);
             }
             if ((gHitMarker & HITMARKER_DESTINYBOND) && gBattleMons[gBattlerAttacker].hp != 0)
             {
@@ -3276,12 +3276,12 @@ static void atk23_getexp(void)
 
             for (viaSentIn = 0, i = 0; i < PARTY_SIZE; i++)
             {
-                if (GetMonData_2(&gPlayerParty[i], MON_DATA_SPECIES) == SPECIES_NONE || GetMonData_2(&gPlayerParty[i], MON_DATA_HP) == 0)
+                if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES) == SPECIES_NONE || GetMonData(&gPlayerParty[i], MON_DATA_HP) == 0)
                     continue;
                 if (gBitTable[i] & sentIn)
                     viaSentIn++;
 
-                item = GetMonData_2(&gPlayerParty[i], MON_DATA_HELD_ITEM);
+                item = GetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM);
 
                 if (item == ITEM_ENIGMA_BERRY)
                     holdEffect = gSaveBlock1Ptr->enigmaBerry.holdEffect;
@@ -3320,7 +3320,7 @@ static void atk23_getexp(void)
     case 2: // set exp value to the poke in expgetter_id and print message
         if (gBattleControllerExecFlags == 0)
         {
-            item = GetMonData_2(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_HELD_ITEM);
+            item = GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_HELD_ITEM);
 
             if (item == ITEM_ENIGMA_BERRY)
                 holdEffect = gSaveBlock1Ptr->enigmaBerry.holdEffect;
@@ -3333,7 +3333,7 @@ static void atk23_getexp(void)
                 gBattleScripting.atk23_state = 5;
                 gBattleMoveDamage = 0; // used for exp
             }
-            else if (GetMonData_2(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_LEVEL) == MAX_LEVEL)
+            else if (GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_LEVEL) == MAX_LEVEL)
             {
                 *(&gBattleStruct->sentInPokes) >>= 1;
                 gBattleScripting.atk23_state = 5;
@@ -3349,7 +3349,7 @@ static void atk23_getexp(void)
                     gBattleStruct->wildVictorySong++;
                 }
 
-                if (GetMonData_2(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_HP))
+                if (GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_HP))
                 {
                     if (gBattleStruct->sentInPokes & 1)
                         gBattleMoveDamage = *exp;
@@ -3416,14 +3416,14 @@ static void atk23_getexp(void)
         if (gBattleControllerExecFlags == 0)
         {
             gBattleBufferB[gBattleStruct->expGetterBattlerId][0] = 0;
-            if (GetMonData_2(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_HP) && GetMonData_2(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_LEVEL) != MAX_LEVEL)
+            if (GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_HP) && GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_LEVEL) != MAX_LEVEL)
             {
-                gBattleResources->statsBeforeLvlUp->hp = GetMonData_2(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_MAX_HP);
-                gBattleResources->statsBeforeLvlUp->atk = GetMonData_2(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_ATK);
-                gBattleResources->statsBeforeLvlUp->def = GetMonData_2(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_DEF);
-                gBattleResources->statsBeforeLvlUp->spd = GetMonData_2(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_SPEED);
-                gBattleResources->statsBeforeLvlUp->spAtk = GetMonData_2(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_SPATK);
-                gBattleResources->statsBeforeLvlUp->spDef = GetMonData_2(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_SPDEF);
+                gBattleResources->statsBeforeLvlUp->hp = GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_MAX_HP);
+                gBattleResources->statsBeforeLvlUp->atk = GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_ATK);
+                gBattleResources->statsBeforeLvlUp->def = GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_DEF);
+                gBattleResources->statsBeforeLvlUp->spd = GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_SPEED);
+                gBattleResources->statsBeforeLvlUp->spAtk = GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_SPATK);
+                gBattleResources->statsBeforeLvlUp->spDef = GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_SPDEF);
 
                 gActiveBattler = gBattleStruct->expGetterBattlerId;
                 BtlController_EmitExpUpdate(0, gBattleStruct->expGetterMonId, gBattleMoveDamage);
@@ -3443,7 +3443,7 @@ static void atk23_getexp(void)
 
                 PREPARE_MON_NICK_WITH_PREFIX_BUFFER(gBattleTextBuff1, gActiveBattler, gBattleStruct->expGetterMonId)
 
-                PREPARE_BYTE_NUMBER_BUFFER(gBattleTextBuff2, 3, GetMonData_2(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_LEVEL))
+                PREPARE_BYTE_NUMBER_BUFFER(gBattleTextBuff2, 3, GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_LEVEL))
 
                 BattleScriptPushCursor();
                 gLeveledUpInBattle |= gBitTable[gBattleStruct->expGetterMonId];
@@ -3454,31 +3454,31 @@ static void atk23_getexp(void)
                 // update battle mon structure after level up
                 if (gBattlerPartyIndexes[0] == gBattleStruct->expGetterMonId && gBattleMons[0].hp)
                 {
-                    gBattleMons[0].level = GetMonData_2(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_LEVEL);
-                    gBattleMons[0].hp = GetMonData_2(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_HP);
-                    gBattleMons[0].maxHP = GetMonData_2(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_MAX_HP);
-                    gBattleMons[0].attack = GetMonData_2(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_ATK);
-                    gBattleMons[0].defense = GetMonData_2(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_DEF);
+                    gBattleMons[0].level = GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_LEVEL);
+                    gBattleMons[0].hp = GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_HP);
+                    gBattleMons[0].maxHP = GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_MAX_HP);
+                    gBattleMons[0].attack = GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_ATK);
+                    gBattleMons[0].defense = GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_DEF);
                     // Why is this duplicated?
-                    gBattleMons[0].speed = GetMonData_2(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_SPEED);
-                    gBattleMons[0].speed = GetMonData_2(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_SPEED);
+                    gBattleMons[0].speed = GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_SPEED);
+                    gBattleMons[0].speed = GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_SPEED);
 
-                    gBattleMons[0].spAttack = GetMonData_2(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_SPATK);
-                    gBattleMons[0].spDefense = GetMonData_2(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_SPDEF);
+                    gBattleMons[0].spAttack = GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_SPATK);
+                    gBattleMons[0].spDefense = GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_SPDEF);
                 }
                 // What is else if?
                 if (gBattlerPartyIndexes[2] == gBattleStruct->expGetterMonId && gBattleMons[2].hp && (gBattleTypeFlags & BATTLE_TYPE_DOUBLE))
                 {
-                    gBattleMons[2].level = GetMonData_2(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_LEVEL);
-                    gBattleMons[2].hp = GetMonData_2(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_HP);
-                    gBattleMons[2].maxHP = GetMonData_2(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_MAX_HP);
-                    gBattleMons[2].attack = GetMonData_2(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_ATK);
-                    gBattleMons[2].defense = GetMonData_2(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_DEF);
+                    gBattleMons[2].level = GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_LEVEL);
+                    gBattleMons[2].hp = GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_HP);
+                    gBattleMons[2].maxHP = GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_MAX_HP);
+                    gBattleMons[2].attack = GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_ATK);
+                    gBattleMons[2].defense = GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_DEF);
                     // Duplicated again, but this time there's no Sp Defense
-                    gBattleMons[2].speed = GetMonData_2(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_SPEED);
-                    gBattleMons[2].speed = GetMonData_2(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_SPEED);
+                    gBattleMons[2].speed = GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_SPEED);
+                    gBattleMons[2].speed = GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_SPEED);
 
-                    gBattleMons[2].spAttack = GetMonData_2(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_SPATK);
+                    gBattleMons[2].spAttack = GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_SPATK);
                 }
                 gBattleScripting.atk23_state = 5;
             }
@@ -3526,18 +3526,18 @@ static void atk24(void)
     {
         for (i = 0; i < 3; i++)
         {
-            if (GetMonData_2(&gPlayerParty[i], MON_DATA_SPECIES) && !GetMonData_2(&gPlayerParty[i], MON_DATA_IS_EGG))
-                HP_count += GetMonData_2(&gPlayerParty[i], MON_DATA_HP);
+            if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES) && !GetMonData(&gPlayerParty[i], MON_DATA_IS_EGG))
+                HP_count += GetMonData(&gPlayerParty[i], MON_DATA_HP);
         }
     }
     else
     {
         for (i = 0; i < PARTY_SIZE; i++)
         {
-            if (GetMonData_2(&gPlayerParty[i], MON_DATA_SPECIES) && !GetMonData_2(&gPlayerParty[i], MON_DATA_IS_EGG)
+            if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES) && !GetMonData(&gPlayerParty[i], MON_DATA_IS_EGG)
              && (!(gBattleTypeFlags & BATTLE_TYPE_ARENA) || !(gBattleStruct->arenaLostPlayerMons & gBitTable[i])))
             {
-                HP_count += GetMonData_2(&gPlayerParty[i], MON_DATA_HP);
+                HP_count += GetMonData(&gPlayerParty[i], MON_DATA_HP);
             }
         }
     }
@@ -3547,10 +3547,10 @@ static void atk24(void)
 
     for (HP_count = 0, i = 0; i < PARTY_SIZE; i++)
     {
-        if (GetMonData_2(&gEnemyParty[i], MON_DATA_SPECIES) && !GetMonData_2(&gEnemyParty[i], MON_DATA_IS_EGG)
+        if (GetMonData(&gEnemyParty[i], MON_DATA_SPECIES) && !GetMonData(&gEnemyParty[i], MON_DATA_IS_EGG)
             && (!(gBattleTypeFlags & BATTLE_TYPE_ARENA) || !(gBattleStruct->arenaLostOpponentMons & gBitTable[i])))
         {
-            HP_count += GetMonData_2(&gEnemyParty[i], MON_DATA_HP);
+            HP_count += GetMonData(&gEnemyParty[i], MON_DATA_HP);
         }
     }
 
@@ -3632,17 +3632,17 @@ static void atk24(void)
         adds r4, r1, r0\n\
         adds r0, r4, 0\n\
         movs r1, 0xB\n\
-        bl GetMonData\n\
+        bl GetMonDataExtended\n\
         cmp r0, 0\n\
         beq _0804AD2C\n\
         adds r0, r4, 0\n\
         movs r1, 0x2D\n\
-        bl GetMonData\n\
+        bl GetMonDataExtended\n\
         cmp r0, 0\n\
         bne _0804AD2C\n\
         adds r0, r4, 0\n\
         movs r1, 0x39\n\
-        bl GetMonData\n\
+        bl GetMonDataExtended\n\
         adds r0, r6, r0\n\
         lsls r0, 16\n\
         lsrs r6, r0, 16\n\
@@ -3662,12 +3662,12 @@ static void atk24(void)
         adds r4, r1, r0\n\
         adds r0, r4, 0\n\
         movs r1, 0xB\n\
-        bl GetMonData\n\
+        bl GetMonDataExtended\n\
         cmp r0, 0\n\
         beq _0804ADA2\n\
         adds r0, r4, 0\n\
         movs r1, 0x2D\n\
-        bl GetMonData\n\
+        bl GetMonDataExtended\n\
         cmp r0, 0\n\
         bne _0804ADA2\n\
         ldr r0, =gBattleTypeFlags\n\
@@ -3693,7 +3693,7 @@ static void atk24(void)
     _0804AD94:\n\
         adds r0, r4, 0\n\
         movs r1, 0x39\n\
-        bl GetMonData\n\
+        bl GetMonDataExtended\n\
         adds r0, r6, r0\n\
         lsls r0, 16\n\
         lsrs r6, r0, 16\n\
@@ -3720,12 +3720,12 @@ static void atk24(void)
         adds r4, r1, r0\n\
         adds r0, r4, 0\n\
         movs r1, 0xB\n\
-        bl GetMonData\n\
+        bl GetMonDataExtended\n\
         cmp r0, 0\n\
         beq _0804AE10\n\
         adds r0, r4, 0\n\
         movs r1, 0x2D\n\
-        bl GetMonData\n\
+        bl GetMonDataExtended\n\
         cmp r0, 0\n\
         bne _0804AE10\n\
         ldr r0, =gBattleTypeFlags\n\
@@ -3750,7 +3750,7 @@ static void atk24(void)
     _0804AE02:\n\
         adds r0, r4, 0\n\
         movs r1, 0x39\n\
-        bl GetMonData\n\
+        bl GetMonDataExtended\n\
         adds r0, r6, r0\n\
         lsls r0, 16\n\
         lsrs r6, r0, 16\n\
@@ -5019,9 +5019,9 @@ static void atk4F_jumpifcantswitch(void)
 
         for (lastMonId = i + 3; i < lastMonId; i++)
         {
-            if (GetMonData_2(&party[i], MON_DATA_SPECIES) != SPECIES_NONE
-             && !GetMonData_2(&party[i], MON_DATA_IS_EGG)
-             && GetMonData_2(&party[i], MON_DATA_HP) != 0
+            if (GetMonData(&party[i], MON_DATA_SPECIES) != SPECIES_NONE
+             && !GetMonData(&party[i], MON_DATA_IS_EGG)
+             && GetMonData(&party[i], MON_DATA_HP) != 0
              && gBattlerPartyIndexes[gActiveBattler] != i)
                 break;
         }
@@ -5067,9 +5067,9 @@ static void atk4F_jumpifcantswitch(void)
 
         for (lastMonId = i + 3; i < lastMonId; i++)
         {
-            if (GetMonData_2(&party[i], MON_DATA_SPECIES) != SPECIES_NONE
-             && !GetMonData_2(&party[i], MON_DATA_IS_EGG)
-             && GetMonData_2(&party[i], MON_DATA_HP) != 0
+            if (GetMonData(&party[i], MON_DATA_SPECIES) != SPECIES_NONE
+             && !GetMonData(&party[i], MON_DATA_IS_EGG)
+             && GetMonData(&party[i], MON_DATA_HP) != 0
              && gBattlerPartyIndexes[gActiveBattler] != i)
                 break;
         }
@@ -5089,9 +5089,9 @@ static void atk4F_jumpifcantswitch(void)
 
         for (lastMonId = i + 3; i < lastMonId; i++)
         {
-            if (GetMonData_2(&party[i], MON_DATA_SPECIES) != SPECIES_NONE
-             && !GetMonData_2(&party[i], MON_DATA_IS_EGG)
-             && GetMonData_2(&party[i], MON_DATA_HP) != 0
+            if (GetMonData(&party[i], MON_DATA_SPECIES) != SPECIES_NONE
+             && !GetMonData(&party[i], MON_DATA_IS_EGG)
+             && GetMonData(&party[i], MON_DATA_HP) != 0
              && gBattlerPartyIndexes[gActiveBattler] != i)
                 break;
         }
@@ -5130,9 +5130,9 @@ static void atk4F_jumpifcantswitch(void)
 
         for (i = 0; i < PARTY_SIZE; i++)
         {
-            if (GetMonData_2(&party[i], MON_DATA_HP) != 0
-             && GetMonData_2(&party[i], MON_DATA_SPECIES) != SPECIES_NONE
-             && !GetMonData_2(&party[i], MON_DATA_IS_EGG)
+            if (GetMonData(&party[i], MON_DATA_HP) != 0
+             && GetMonData(&party[i], MON_DATA_SPECIES) != SPECIES_NONE
+             && !GetMonData(&party[i], MON_DATA_IS_EGG)
              && i != gBattlerPartyIndexes[battlerIn1] && i != gBattlerPartyIndexes[battlerIn2])
                 break;
         }
@@ -5759,7 +5759,7 @@ static void atk5A_yesnoboxlearnmove(void)
             }
             else
             {
-                u16 moveId = GetMonData_2(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_MOVE1 + movePosition);
+                u16 moveId = GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_MOVE1 + movePosition);
                 if (IsHMMove2(moveId))
                 {
                     PrepareStringBattle(STRINGID_HMMOVESCANTBEFORGOTTEN, gActiveBattler);
@@ -6010,16 +6010,16 @@ static void atk61_drawpartystatussummary(void)
 
     for (i = 0; i < PARTY_SIZE; i++)
     {
-        if (GetMonData_2(&party[i], MON_DATA_SPECIES2) == SPECIES_NONE
-            || GetMonData_2(&party[i], MON_DATA_SPECIES2) == SPECIES_EGG)
+        if (GetMonData(&party[i], MON_DATA_SPECIES2) == SPECIES_NONE
+            || GetMonData(&party[i], MON_DATA_SPECIES2) == SPECIES_EGG)
         {
             hpStatuses[i].hp = 0xFFFF;
             hpStatuses[i].status = 0;
         }
         else
         {
-            hpStatuses[i].hp = GetMonData_2(&party[i], MON_DATA_HP);
-            hpStatuses[i].status = GetMonData_2(&party[i], MON_DATA_STATUS);
+            hpStatuses[i].hp = GetMonData(&party[i], MON_DATA_HP);
+            hpStatuses[i].status = GetMonData(&party[i], MON_DATA_STATUS);
         }
     }
 
@@ -6372,7 +6372,7 @@ static void PutLevelAndGenderOnLvlUpBox(void)
     u8 *txtPtr;
     u32 var;
 
-    monLevel = GetMonData_2(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_LEVEL);
+    monLevel = GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_LEVEL);
     monGender = GetMonGender(&gPlayerParty[gBattleStruct->expGetterMonId]);
     GetMonNickname(&gPlayerParty[gBattleStruct->expGetterMonId], gStringVar4);
 
@@ -6450,8 +6450,8 @@ static void PutMonIconOnLvlUpBox(void)
     struct SpriteSheet iconSheet;
     struct SpritePalette iconPalSheet;
 
-    u16 species = GetMonData_2(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_SPECIES);
-    u32 personality = GetMonData_2(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_PERSONALITY);
+    u16 species = GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_SPECIES);
+    u32 personality = GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_PERSONALITY);
 
     const u8* iconPtr = GetMonIconPtr(species, personality, 1);
     iconSheet.data = iconPtr;
@@ -7578,9 +7578,9 @@ static void atk8F_forcerandomswitch(void)
 
         for (i = firstMonId; i < lastMonId; i++)
         {
-            if (GetMonData_2(&party[i], MON_DATA_SPECIES) != SPECIES_NONE
-             && !GetMonData_2(&party[i], MON_DATA_IS_EGG)
-             && GetMonData_2(&party[i], MON_DATA_HP) != 0)
+            if (GetMonData(&party[i], MON_DATA_SPECIES) != SPECIES_NONE
+             && !GetMonData(&party[i], MON_DATA_IS_EGG)
+             && GetMonData(&party[i], MON_DATA_HP) != 0)
              {
                  validMons++;
              }
@@ -7601,9 +7601,9 @@ static void atk8F_forcerandomswitch(void)
                 }
                 while (i == battler2PartyId
                        || i == battler1PartyId
-                       || GetMonData_2(&party[i], MON_DATA_SPECIES) == SPECIES_NONE
-                       || GetMonData_2(&party[i], MON_DATA_IS_EGG) == TRUE
-                       || GetMonData_2(&party[i], MON_DATA_HP) == 0);
+                       || GetMonData(&party[i], MON_DATA_SPECIES) == SPECIES_NONE
+                       || GetMonData(&party[i], MON_DATA_IS_EGG) == TRUE
+                       || GetMonData(&party[i], MON_DATA_HP) == 0);
             }
             *(gBattleStruct->monToSwitchIntoId + gBattlerTarget) = i;
 
@@ -7910,11 +7910,11 @@ static void atk97_tryinfatuating(void)
     else
         monTarget = &gEnemyParty[gBattlerPartyIndexes[gBattlerTarget]];
 
-    speciesAttacker = GetMonData_2(monAttacker, MON_DATA_SPECIES);
-    personalityAttacker = GetMonData_2(monAttacker, MON_DATA_PERSONALITY);
+    speciesAttacker = GetMonData(monAttacker, MON_DATA_SPECIES);
+    personalityAttacker = GetMonData(monAttacker, MON_DATA_PERSONALITY);
 
-    speciesTarget = GetMonData_2(monTarget, MON_DATA_SPECIES);
-    personalityTarget = GetMonData_2(monTarget, MON_DATA_PERSONALITY);
+    speciesTarget = GetMonData(monTarget, MON_DATA_SPECIES);
+    personalityTarget = GetMonData(monTarget, MON_DATA_PERSONALITY);
 
     if (gBattleMons[gBattlerTarget].ability == ABILITY_OBLIVIOUS)
     {
@@ -8643,8 +8643,8 @@ static void atkAE_healpartystatus(void)
 
         for (i = 0; i < PARTY_SIZE; i++)
         {
-            u16 species = GetMonData_2(&party[i], MON_DATA_SPECIES2);
-            u8 abilityBit = GetMonData_2(&party[i], MON_DATA_ALT_ABILITY);
+            u16 species = GetMonData(&party[i], MON_DATA_SPECIES2);
+            u8 abilityBit = GetMonData(&party[i], MON_DATA_ALT_ABILITY);
 
             if (species != SPECIES_NONE && species != SPECIES_EGG)
             {
@@ -9188,10 +9188,10 @@ static void atkC4_trydobeatup(void)
         u8 beforeLoop = gBattleCommunication[0];
         for (;gBattleCommunication[0] < 6; gBattleCommunication[0]++)
         {
-            if (GetMonData_2(&party[gBattleCommunication[0]], MON_DATA_HP)
-                && GetMonData_2(&party[gBattleCommunication[0]], MON_DATA_SPECIES2)
-                && GetMonData_2(&party[gBattleCommunication[0]], MON_DATA_SPECIES2) != SPECIES_EGG
-                && !GetMonData_2(&party[gBattleCommunication[0]], MON_DATA_STATUS))
+            if (GetMonData(&party[gBattleCommunication[0]], MON_DATA_HP)
+                && GetMonData(&party[gBattleCommunication[0]], MON_DATA_SPECIES2)
+                && GetMonData(&party[gBattleCommunication[0]], MON_DATA_SPECIES2) != SPECIES_EGG
+                && !GetMonData(&party[gBattleCommunication[0]], MON_DATA_STATUS))
                     break;
         }
         if (gBattleCommunication[0] < 6)
@@ -9200,9 +9200,9 @@ static void atkC4_trydobeatup(void)
 
             gBattlescriptCurrInstr += 9;
 
-            gBattleMoveDamage = gBaseStats[GetMonData_2(&party[gBattleCommunication[0]], MON_DATA_SPECIES)].baseAttack;
+            gBattleMoveDamage = gBaseStats[GetMonData(&party[gBattleCommunication[0]], MON_DATA_SPECIES)].baseAttack;
             gBattleMoveDamage *= gBattleMoves[gCurrentMove].power;
-            gBattleMoveDamage *= (GetMonData_2(&party[gBattleCommunication[0]], MON_DATA_LEVEL) * 2 / 5 + 2);
+            gBattleMoveDamage *= (GetMonData(&party[gBattleCommunication[0]], MON_DATA_LEVEL) * 2 / 5 + 2);
             gBattleMoveDamage /= gBaseStats[gBattleMons[gBattlerTarget].species].baseDefense;
             gBattleMoveDamage = (gBattleMoveDamage / 50) + 2;
             if (gProtectStructs[gBattlerAttacker].helpingHand)
@@ -9699,15 +9699,15 @@ static void atkDE_asistattackselect(void)
     {
         if (monId == gBattlerPartyIndexes[gBattlerAttacker])
             continue;
-        if (GetMonData_2(&party[monId], MON_DATA_SPECIES2) == SPECIES_NONE)
+        if (GetMonData(&party[monId], MON_DATA_SPECIES2) == SPECIES_NONE)
             continue;
-        if (GetMonData_2(&party[monId], MON_DATA_SPECIES2) == SPECIES_EGG)
+        if (GetMonData(&party[monId], MON_DATA_SPECIES2) == SPECIES_EGG)
             continue;
 
         for (moveId = 0; moveId < MAX_MON_MOVES; moveId++)
         {
             s32 i = 0;
-            u16 move = GetMonData_2(&party[monId], MON_DATA_MOVE1 + moveId);
+            u16 move = GetMonData(&party[monId], MON_DATA_MOVE1 + moveId);
 
             if (IsInvalidForSleepTalkOrAssist(move))
                 continue;
@@ -9863,10 +9863,10 @@ static void atkE5_pickup(void)
     {
         for (i = 0; i < PARTY_SIZE; i++)
         {
-            species = GetMonData_2(&gPlayerParty[i], MON_DATA_SPECIES2);
-            heldItem = GetMonData_2(&gPlayerParty[i], MON_DATA_HELD_ITEM);
+            species = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2);
+            heldItem = GetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM);
 
-            if (GetMonData_2(&gPlayerParty[i], MON_DATA_ALT_ABILITY))
+            if (GetMonData(&gPlayerParty[i], MON_DATA_ALT_ABILITY))
                 ability = gBaseStats[species].ability2;
             else
                 ability = gBaseStats[species].ability1;
@@ -9886,10 +9886,10 @@ static void atkE5_pickup(void)
     {
         for (i = 0; i < PARTY_SIZE; i++)
         {
-            species = GetMonData_2(&gPlayerParty[i], MON_DATA_SPECIES2);
-            heldItem = GetMonData_2(&gPlayerParty[i], MON_DATA_HELD_ITEM);
+            species = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2);
+            heldItem = GetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM);
 
-            if (GetMonData_2(&gPlayerParty[i], MON_DATA_ALT_ABILITY))
+            if (GetMonData(&gPlayerParty[i], MON_DATA_ALT_ABILITY))
                 ability = gBaseStats[species].ability2;
             else
                 ability = gBaseStats[species].ability1;
@@ -9902,7 +9902,7 @@ static void atkE5_pickup(void)
             {
                 s32 j;
                 s32 rand = Random() % 100;
-                u8 lvlDivBy10 = (GetMonData_2(&gPlayerParty[i], MON_DATA_LEVEL) - 1) / 10;
+                u8 lvlDivBy10 = (GetMonData(&gPlayerParty[i], MON_DATA_LEVEL) - 1) / 10;
                 if (lvlDivBy10 > 9)
                     lvlDivBy10 = 9;
 
@@ -10253,12 +10253,12 @@ static void atkF0_givecaughtmon(void)
         {
             gBattleCommunication[MULTISTRING_CHOOSER] = 0;
             StringCopy(gStringVar1, GetBoxNamePtr(VarGet(VAR_STORAGE_UNKNOWN)));
-            GetMonData(&gEnemyParty[gBattlerPartyIndexes[gBattlerAttacker ^ BIT_SIDE]], MON_DATA_NICKNAME, gStringVar2);
+            GetMonDataExtended(&gEnemyParty[gBattlerPartyIndexes[gBattlerAttacker ^ BIT_SIDE]], MON_DATA_NICKNAME, gStringVar2);
         }
         else
         {
             StringCopy(gStringVar1, GetBoxNamePtr(VarGet(VAR_STORAGE_UNKNOWN)));
-            GetMonData(&gEnemyParty[gBattlerPartyIndexes[gBattlerAttacker ^ BIT_SIDE]], MON_DATA_NICKNAME, gStringVar2);
+            GetMonDataExtended(&gEnemyParty[gBattlerPartyIndexes[gBattlerAttacker ^ BIT_SIDE]], MON_DATA_NICKNAME, gStringVar2);
             StringCopy(gStringVar3, GetBoxNamePtr(get_unknown_box_id()));
             gBattleCommunication[MULTISTRING_CHOOSER] = 2;
         }
@@ -10267,17 +10267,17 @@ static void atkF0_givecaughtmon(void)
             gBattleCommunication[MULTISTRING_CHOOSER]++;
     }
 
-    gBattleResults.caughtMonSpecies = GetMonData(&gEnemyParty[gBattlerPartyIndexes[gBattlerAttacker ^ BIT_SIDE]], MON_DATA_SPECIES, NULL);
-    GetMonData(&gEnemyParty[gBattlerPartyIndexes[gBattlerAttacker ^ BIT_SIDE]], MON_DATA_NICKNAME, gBattleResults.caughtMonNick);
-    gBattleResults.caughtMonBall = GetMonData(&gEnemyParty[gBattlerPartyIndexes[gBattlerAttacker ^ BIT_SIDE]], MON_DATA_POKEBALL, NULL);
+    gBattleResults.caughtMonSpecies = GetMonDataExtended(&gEnemyParty[gBattlerPartyIndexes[gBattlerAttacker ^ BIT_SIDE]], MON_DATA_SPECIES, NULL);
+    GetMonDataExtended(&gEnemyParty[gBattlerPartyIndexes[gBattlerAttacker ^ BIT_SIDE]], MON_DATA_NICKNAME, gBattleResults.caughtMonNick);
+    gBattleResults.caughtMonBall = GetMonDataExtended(&gEnemyParty[gBattlerPartyIndexes[gBattlerAttacker ^ BIT_SIDE]], MON_DATA_POKEBALL, NULL);
 
     gBattlescriptCurrInstr++;
 }
 
 static void atkF1_trysetcaughtmondexflags(void)
 {
-    u16 species = GetMonData(&gEnemyParty[0], MON_DATA_SPECIES, NULL);
-    u32 personality = GetMonData(&gEnemyParty[0], MON_DATA_PERSONALITY, NULL);
+    u16 species = GetMonDataExtended(&gEnemyParty[0], MON_DATA_SPECIES, NULL);
+    u32 personality = GetMonDataExtended(&gEnemyParty[0], MON_DATA_PERSONALITY, NULL);
 
     if (GetSetPokedexFlag(SpeciesToNationalPokedexNum(species), FLAG_GET_CAUGHT))
     {
@@ -10292,7 +10292,7 @@ static void atkF1_trysetcaughtmondexflags(void)
 
 static void atkF2_displaydexinfo(void)
 {
-    u16 species = GetMonData(&gEnemyParty[0], MON_DATA_SPECIES, NULL);
+    u16 species = GetMonDataExtended(&gEnemyParty[0], MON_DATA_SPECIES, NULL);
 
     switch (gBattleCommunication[0])
     {
@@ -10457,13 +10457,13 @@ static void atkF3_trygivecaughtmonnick(void)
     case 2:
         if (!gPaletteFade.active)
         {
-            GetMonData(&gEnemyParty[gBattlerPartyIndexes[gBattlerAttacker ^ BIT_SIDE]], MON_DATA_NICKNAME, gBattleStruct->caughtMonNick);
+            GetMonDataExtended(&gEnemyParty[gBattlerPartyIndexes[gBattlerAttacker ^ BIT_SIDE]], MON_DATA_NICKNAME, gBattleStruct->caughtMonNick);
             FreeAllWindowBuffers();
 
             DoNamingScreen(NAMING_SCREEN_CAUGHT_MON, gBattleStruct->caughtMonNick,
-                           GetMonData_2(&gEnemyParty[gBattlerPartyIndexes[gBattlerAttacker ^ BIT_SIDE]], MON_DATA_SPECIES),
+                           GetMonData(&gEnemyParty[gBattlerPartyIndexes[gBattlerAttacker ^ BIT_SIDE]], MON_DATA_SPECIES),
                            GetMonGender(&gEnemyParty[gBattlerPartyIndexes[gBattlerAttacker ^ BIT_SIDE]]),
-                           GetMonData(&gEnemyParty[gBattlerPartyIndexes[gBattlerAttacker ^ BIT_SIDE]], MON_DATA_PERSONALITY, NULL),
+                           GetMonDataExtended(&gEnemyParty[gBattlerPartyIndexes[gBattlerAttacker ^ BIT_SIDE]], MON_DATA_PERSONALITY, NULL),
                            BattleMainCB2);
 
             gBattleCommunication[MULTIUSE_STATE]++;

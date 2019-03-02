@@ -801,12 +801,12 @@ void sub_818603C(u8 arg0)
                     {
                         for (j = 0; j < MAX_MON_MOVES; j++)
                         {
-                            ppBonuses[j] = ((GetMonData(&gPlayerParty[gBattlerPartyIndexes[battlerId]], MON_DATA_PP_BONUSES, NULL) & ((3 << (j << 1)))) >> (j << 1));
+                            ppBonuses[j] = ((GetMonDataExtended(&gPlayerParty[gBattlerPartyIndexes[battlerId]], MON_DATA_PP_BONUSES, NULL) & ((3 << (j << 1)))) >> (j << 1));
                         }
                         for (j = 0; j < MAX_MON_MOVES; j++)
                         {
-                            movePp.moves[j] = GetMonData(&gPlayerParty[gBattlerPartyIndexes[battlerId]], MON_DATA_MOVE1 + array1[j], NULL);
-                            movePp.pp[j] = GetMonData(&gPlayerParty[gBattlerPartyIndexes[battlerId]], MON_DATA_PP1 + array1[j], NULL);
+                            movePp.moves[j] = GetMonDataExtended(&gPlayerParty[gBattlerPartyIndexes[battlerId]], MON_DATA_MOVE1 + array1[j], NULL);
+                            movePp.pp[j] = GetMonDataExtended(&gPlayerParty[gBattlerPartyIndexes[battlerId]], MON_DATA_PP1 + array1[j], NULL);
                             array3[j] = ppBonuses[array1[j]];
                         }
                         for (j = 0; j < MAX_MON_MOVES; j++)

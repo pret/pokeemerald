@@ -2099,7 +2099,7 @@ _081D2C7E:
 	adds r0, r1
 	adds r1, r2, 0
 	adds r2, r3, 0
-	bl GetMonData
+	bl GetMonDataExtended
 	b _081D2CCA
 	.pool
 _081D2C94:
@@ -2108,7 +2108,7 @@ _081D2C94:
 	ldr r1, =gPlayerParty
 	adds r0, r1
 	adds r1, r2, 0
-	bl GetMonData
+	bl GetMonDataExtended
 	b _081D2CCA
 	.pool
 _081D2CA8:
@@ -2197,7 +2197,7 @@ _081D2D20:
 	adds r4, r0
 	adds r0, r4, 0
 	movs r1, 0x38
-	bl GetMonData
+	bl GetMonDataExtended
 	lsls r0, 16
 	lsrs r0, 16
 	mov r8, r0
@@ -3697,27 +3697,27 @@ sub_81D388C: @ 81D388C
 	adds r4, r0, 0
 	adds r5, r1, 0
 	movs r1, 0x3A
-	bl GetMonData
+	bl GetMonDataExtended
 	strh r0, [r5]
 	adds r0, r4, 0
 	movs r1, 0x3B
-	bl GetMonData
+	bl GetMonDataExtended
 	strh r0, [r5, 0x2]
 	adds r0, r4, 0
 	movs r1, 0x3C
-	bl GetMonData
+	bl GetMonDataExtended
 	strh r0, [r5, 0x4]
 	adds r0, r4, 0
 	movs r1, 0x3D
-	bl GetMonData
+	bl GetMonDataExtended
 	strh r0, [r5, 0x6]
 	adds r0, r4, 0
 	movs r1, 0x3E
-	bl GetMonData
+	bl GetMonDataExtended
 	strh r0, [r5, 0x8]
 	adds r0, r4, 0
 	movs r1, 0x3F
-	bl GetMonData
+	bl GetMonDataExtended
 	strh r0, [r5, 0xA]
 	pop {r4,r5}
 	pop {r0}

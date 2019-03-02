@@ -734,9 +734,9 @@ static void sub_8036A5C(void)
 
     for (i = 0; i < PARTY_SIZE; i++)
     {
-        species = GetMonData_2(&gPlayerParty[i], MON_DATA_SPECIES2);
-        hp = GetMonData_2(&gPlayerParty[i], MON_DATA_HP);
-        status = GetMonData_2(&gPlayerParty[i], MON_DATA_STATUS);
+        species = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2);
+        hp = GetMonData(&gPlayerParty[i], MON_DATA_HP);
+        status = GetMonData(&gPlayerParty[i], MON_DATA_STATUS);
 
         if (species == SPECIES_NONE)
             continue;
@@ -1400,17 +1400,17 @@ static void sub_80379F8(u8 arrayIdPlus)
 
     for (i = 0; i < 3; i++)
     {
-        gUnknown_02022FF8[i].species     = GetMonData_2(&gPlayerParty[arrayIdPlus + i], MON_DATA_SPECIES);
-        gUnknown_02022FF8[i].heldItem    = GetMonData_2(&gPlayerParty[arrayIdPlus + i], MON_DATA_HELD_ITEM);
-        GetMonData(&gPlayerParty[arrayIdPlus + i], MON_DATA_NICKNAME, gUnknown_02022FF8[i].nickname);
-        gUnknown_02022FF8[i].level       = GetMonData_2(&gPlayerParty[arrayIdPlus + i], MON_DATA_LEVEL);
-        gUnknown_02022FF8[i].hp          = GetMonData_2(&gPlayerParty[arrayIdPlus + i], MON_DATA_HP);
-        gUnknown_02022FF8[i].maxhp       = GetMonData_2(&gPlayerParty[arrayIdPlus + i], MON_DATA_MAX_HP);
-        gUnknown_02022FF8[i].status      = GetMonData_2(&gPlayerParty[arrayIdPlus + i], MON_DATA_STATUS);
-        gUnknown_02022FF8[i].personality = GetMonData_2(&gPlayerParty[arrayIdPlus + i], MON_DATA_PERSONALITY);
+        gUnknown_02022FF8[i].species     = GetMonData(&gPlayerParty[arrayIdPlus + i], MON_DATA_SPECIES);
+        gUnknown_02022FF8[i].heldItem    = GetMonData(&gPlayerParty[arrayIdPlus + i], MON_DATA_HELD_ITEM);
+        GetMonDataExtended(&gPlayerParty[arrayIdPlus + i], MON_DATA_NICKNAME, gUnknown_02022FF8[i].nickname);
+        gUnknown_02022FF8[i].level       = GetMonData(&gPlayerParty[arrayIdPlus + i], MON_DATA_LEVEL);
+        gUnknown_02022FF8[i].hp          = GetMonData(&gPlayerParty[arrayIdPlus + i], MON_DATA_HP);
+        gUnknown_02022FF8[i].maxhp       = GetMonData(&gPlayerParty[arrayIdPlus + i], MON_DATA_MAX_HP);
+        gUnknown_02022FF8[i].status      = GetMonData(&gPlayerParty[arrayIdPlus + i], MON_DATA_STATUS);
+        gUnknown_02022FF8[i].personality = GetMonData(&gPlayerParty[arrayIdPlus + i], MON_DATA_PERSONALITY);
         gUnknown_02022FF8[i].gender      = GetMonGender(&gPlayerParty[arrayIdPlus + i]);
         StripExtCtrlCodes(gUnknown_02022FF8[i].nickname);
-        if (GetMonData_2(&gPlayerParty[arrayIdPlus + i], MON_DATA_LANGUAGE) != LANGUAGE_JAPANESE)
+        if (GetMonData(&gPlayerParty[arrayIdPlus + i], MON_DATA_LANGUAGE) != LANGUAGE_JAPANESE)
             PadNameString(gUnknown_02022FF8[i].nickname, CHAR_SPACE);
     }
     memcpy(gUnknown_02023058, gUnknown_02022FF8, sizeof(gUnknown_02022FF8));
@@ -2151,9 +2151,9 @@ static void sub_8038B94(u8 taskId)
     r7 = 0;
     for (i = 0; i < PARTY_SIZE; i++)
     {
-        u16 species = GetMonData_2(&sp4[i], MON_DATA_SPECIES2);
-        u16 hp = GetMonData_2(&sp4[i], MON_DATA_HP);
-        u32 status = GetMonData_2(&sp4[i], MON_DATA_STATUS);
+        u16 species = GetMonData(&sp4[i], MON_DATA_SPECIES2);
+        u16 hp = GetMonData(&sp4[i], MON_DATA_HP);
+        u32 status = GetMonData(&sp4[i], MON_DATA_STATUS);
 
         if (species == SPECIES_NONE)
             continue;
@@ -2175,9 +2175,9 @@ static void sub_8038B94(u8 taskId)
     r7 = 0;
     for (i = 0; i < PARTY_SIZE; i++)
     {
-        u16 species = GetMonData_2(&sp8[i], MON_DATA_SPECIES2);
-        u16 hp = GetMonData_2(&sp8[i], MON_DATA_HP);
-        u32 status = GetMonData_2(&sp8[i], MON_DATA_STATUS);
+        u16 species = GetMonData(&sp8[i], MON_DATA_SPECIES2);
+        u16 hp = GetMonData(&sp8[i], MON_DATA_HP);
+        u32 status = GetMonData(&sp8[i], MON_DATA_STATUS);
 
         if (species == SPECIES_NONE)
             continue;
@@ -2642,10 +2642,10 @@ static void TryCorrectShedinjaLanguage(struct Pokemon *mon)
     u8 nickname[POKEMON_NAME_LENGTH + 1];
     u8 language = LANGUAGE_JAPANESE;
 
-    if (GetMonData_2(mon, MON_DATA_SPECIES) == SPECIES_SHEDINJA
-     && GetMonData_2(mon, MON_DATA_LANGUAGE) != language)
+    if (GetMonData(mon, MON_DATA_SPECIES) == SPECIES_SHEDINJA
+     && GetMonData(mon, MON_DATA_LANGUAGE) != language)
     {
-        GetMonData(mon, MON_DATA_NICKNAME, nickname);
+        GetMonDataExtended(mon, MON_DATA_NICKNAME, nickname);
         if (StringCompareWithoutExtCtrlCodes(nickname, sText_ShedinjaJpnName) == 0)
             SetMonData(mon, MON_DATA_LANGUAGE, &language);
     }
@@ -2741,11 +2741,11 @@ void SpriteCB_FaintOpponentMon(struct Sprite *sprite)
     else
         species = sprite->sSpeciesId;
 
-    GetMonData_2(&gEnemyParty[gBattlerPartyIndexes[battler]], MON_DATA_PERSONALITY);  // Unused return value.
+    GetMonData(&gEnemyParty[gBattlerPartyIndexes[battler]], MON_DATA_PERSONALITY);  // Unused return value.
 
     if (species == SPECIES_UNOWN)
     {
-        u32 personalityValue = GetMonData_2(&gEnemyParty[gBattlerPartyIndexes[battler]], MON_DATA_PERSONALITY);
+        u32 personalityValue = GetMonData(&gEnemyParty[gBattlerPartyIndexes[battler]], MON_DATA_PERSONALITY);
         u16 unownForm = ((((personalityValue & 0x3000000) >> 18) | ((personalityValue & 0x30000) >> 12) | ((personalityValue & 0x300) >> 6) | (personalityValue & 3)) % 0x1C);
         u16 unownSpecies;
 
@@ -3090,7 +3090,7 @@ static void BattleStartClearSetData(void)
     gBattleStruct->runTries = 0;
     gBattleStruct->safariGoNearCounter = 0;
     gBattleStruct->safariPkblThrowCounter = 0;
-    *(&gBattleStruct->safariCatchFactor) = gBaseStats[GetMonData_2(&gEnemyParty[0], MON_DATA_SPECIES)].catchRate * 100 / 1275;
+    *(&gBattleStruct->safariCatchFactor) = gBaseStats[GetMonData(&gEnemyParty[0], MON_DATA_SPECIES)].catchRate * 100 / 1275;
     gBattleStruct->safariEscapeFactor = 3;
     gBattleStruct->wildVictorySong = 0;
     gBattleStruct->moneyMultiplier = 1;
@@ -3440,7 +3440,7 @@ static void BattleIntroDrawTrainersOrMonsSprites(void)
                 }
                 BtlController_EmitLoadMonSprite(0);
                 MarkBattlerForControllerExec(gActiveBattler);
-                gBattleResults.lastOpponentSpecies = GetMonData(&gEnemyParty[gBattlerPartyIndexes[gActiveBattler]], MON_DATA_SPECIES, NULL);
+                gBattleResults.lastOpponentSpecies = GetMonDataExtended(&gEnemyParty[gBattlerPartyIndexes[gActiveBattler]], MON_DATA_SPECIES, NULL);
             }
         }
 
@@ -3478,16 +3478,16 @@ static void BattleIntroDrawPartySummaryScreens(void)
     {
         for (i = 0; i < PARTY_SIZE; i++)
         {
-            if (GetMonData_2(&gEnemyParty[i], MON_DATA_SPECIES2) == SPECIES_NONE
-             || GetMonData_2(&gEnemyParty[i], MON_DATA_SPECIES2) == SPECIES_EGG)
+            if (GetMonData(&gEnemyParty[i], MON_DATA_SPECIES2) == SPECIES_NONE
+             || GetMonData(&gEnemyParty[i], MON_DATA_SPECIES2) == SPECIES_EGG)
             {
                 hpStatus[i].hp = 0xFFFF;
                 hpStatus[i].status = 0;
             }
             else
             {
-                hpStatus[i].hp = GetMonData_2(&gEnemyParty[i], MON_DATA_HP);
-                hpStatus[i].status = GetMonData_2(&gEnemyParty[i], MON_DATA_STATUS);
+                hpStatus[i].hp = GetMonData(&gEnemyParty[i], MON_DATA_HP);
+                hpStatus[i].status = GetMonData(&gEnemyParty[i], MON_DATA_STATUS);
             }
         }
         gActiveBattler = GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT);
@@ -3496,16 +3496,16 @@ static void BattleIntroDrawPartySummaryScreens(void)
 
         for (i = 0; i < PARTY_SIZE; i++)
         {
-            if (GetMonData_2(&gPlayerParty[i], MON_DATA_SPECIES2) == SPECIES_NONE
-             || GetMonData_2(&gPlayerParty[i], MON_DATA_SPECIES2) == SPECIES_EGG)
+            if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2) == SPECIES_NONE
+             || GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2) == SPECIES_EGG)
             {
                 hpStatus[i].hp = 0xFFFF;
                 hpStatus[i].status = 0;
             }
             else
             {
-                hpStatus[i].hp = GetMonData_2(&gPlayerParty[i], MON_DATA_HP);
-                hpStatus[i].status = GetMonData_2(&gPlayerParty[i], MON_DATA_STATUS);
+                hpStatus[i].hp = GetMonData(&gPlayerParty[i], MON_DATA_HP);
+                hpStatus[i].status = GetMonData(&gPlayerParty[i], MON_DATA_STATUS);
             }
         }
         gActiveBattler = GetBattlerAtPosition(B_POSITION_PLAYER_LEFT);
@@ -3522,16 +3522,16 @@ static void BattleIntroDrawPartySummaryScreens(void)
 
         for (i = 0; i < PARTY_SIZE; i++)
         {
-            if (GetMonData_2(&gPlayerParty[i], MON_DATA_SPECIES2) == SPECIES_NONE
-             || GetMonData_2(&gPlayerParty[i], MON_DATA_SPECIES2) == SPECIES_EGG)
+            if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2) == SPECIES_NONE
+             || GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2) == SPECIES_EGG)
             {
                 hpStatus[i].hp = 0xFFFF;
                 hpStatus[i].status = 0;
             }
             else
             {
-                hpStatus[i].hp = GetMonData_2(&gPlayerParty[i], MON_DATA_HP);
-                hpStatus[i].status = GetMonData_2(&gPlayerParty[i], MON_DATA_STATUS);
+                hpStatus[i].hp = GetMonData(&gPlayerParty[i], MON_DATA_HP);
+                hpStatus[i].status = GetMonData(&gPlayerParty[i], MON_DATA_STATUS);
             }
         }
 
@@ -5157,13 +5157,13 @@ static void HandleEndTurn_FinishBattle(void)
                 {
                     if (gBattleResults.playerMon1Species == SPECIES_NONE)
                     {
-                        gBattleResults.playerMon1Species = GetMonData(&gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], MON_DATA_SPECIES, NULL);
-                        GetMonData(&gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], MON_DATA_NICKNAME, gBattleResults.playerMon1Name);
+                        gBattleResults.playerMon1Species = GetMonDataExtended(&gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], MON_DATA_SPECIES, NULL);
+                        GetMonDataExtended(&gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], MON_DATA_NICKNAME, gBattleResults.playerMon1Name);
                     }
                     else
                     {
-                        gBattleResults.playerMon2Species = GetMonData(&gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], MON_DATA_SPECIES, NULL);
-                        GetMonData(&gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], MON_DATA_NICKNAME, gBattleResults.playerMon2Name);
+                        gBattleResults.playerMon2Species = GetMonDataExtended(&gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], MON_DATA_SPECIES, NULL);
+                        GetMonDataExtended(&gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], MON_DATA_NICKNAME, gBattleResults.playerMon2Name);
                     }
                 }
             }

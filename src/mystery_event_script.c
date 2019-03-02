@@ -314,7 +314,7 @@ bool8 MEScrCmd_givepokemon(struct ScriptContext *ctx)
     void *mailPtr = (void *)(data + sizeof(struct Pokemon));
 
     pokemon = *(struct Pokemon *)pokemonPtr;
-    species = GetMonData_2(&pokemon, MON_DATA_SPECIES2);
+    species = GetMonData(&pokemon, MON_DATA_SPECIES2);
 
     if (species == SPECIES_EGG)
         StringCopyN(gStringVar1, gText_EggNickname, POKEMON_NAME_LENGTH + 1);
@@ -338,7 +338,7 @@ bool8 MEScrCmd_givepokemon(struct ScriptContext *ctx)
             GetSetPokedexFlag(pokedexNum, FLAG_SET_CAUGHT);
         }
 
-        heldItem = GetMonData_2(&gPlayerParty[5], MON_DATA_HELD_ITEM);
+        heldItem = GetMonData(&gPlayerParty[5], MON_DATA_HELD_ITEM);
         if (ItemIsMail(heldItem))
             GiveMailToMon2(&gPlayerParty[5], &mail);
         CompactPartySlots();

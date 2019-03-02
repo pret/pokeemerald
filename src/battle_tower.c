@@ -1934,7 +1934,7 @@ static void FillTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount)
         // Ensure this pokemon species isn't a duplicate.
         for (j = 0; j < i + firstMonId; j++)
         {
-            if (GetMonData(&gEnemyParty[j], MON_DATA_SPECIES, NULL) == gFacilityTrainerMons[monSetId].species)
+            if (GetMonDataExtended(&gEnemyParty[j], MON_DATA_SPECIES, NULL) == gFacilityTrainerMons[monSetId].species)
                 break;
         }
         if (j != i + firstMonId)
@@ -1943,8 +1943,8 @@ static void FillTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount)
         // Ensure this Pokemon's held item isn't a duplicate.
         for (j = 0; j < i + firstMonId; j++)
         {
-            if (GetMonData(&gEnemyParty[j], MON_DATA_HELD_ITEM, NULL) != 0
-             && GetMonData(&gEnemyParty[j], MON_DATA_HELD_ITEM, NULL) == gBattleFrontierHeldItems[gFacilityTrainerMons[monSetId].itemTableId])
+            if (GetMonDataExtended(&gEnemyParty[j], MON_DATA_HELD_ITEM, NULL) != 0
+             && GetMonDataExtended(&gEnemyParty[j], MON_DATA_HELD_ITEM, NULL) == gBattleFrontierHeldItems[gFacilityTrainerMons[monSetId].itemTableId])
                 break;
         }
         if (j != i + firstMonId)
@@ -2208,7 +2208,7 @@ static void HandleSpecialTrainerBattleEnd(void)
     case SPECIAL_BATTLE_SECRET_BASE:
         for (i = 0; i < PARTY_SIZE; i++)
         {
-            u16 itemBefore = GetMonData_2(&gSaveBlock1Ptr->playerParty[i], MON_DATA_HELD_ITEM);
+            u16 itemBefore = GetMonData(&gSaveBlock1Ptr->playerParty[i], MON_DATA_HELD_ITEM);
             SetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM, &itemBefore);
         }
         break;
@@ -2266,7 +2266,7 @@ void DoSpecialTrainerBattle(void)
     case SPECIAL_BATTLE_SECRET_BASE:
         for (i = 0; i < PARTY_SIZE; i++)
         {
-            u16 itemBefore = GetMonData_2(&gPlayerParty[i], MON_DATA_HELD_ITEM);
+            u16 itemBefore = GetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM);
             SetMonData(&gSaveBlock1Ptr->playerParty[i], MON_DATA_HELD_ITEM, &itemBefore);
         }
         CreateTask(Task_StartBattleAfterTransition, 1);
@@ -2446,8 +2446,8 @@ static void sub_81640E0(u16 trainerId)
 {
     s32 i, count;
     u32 validSpecies[3];
-    u16 species1 = GetMonData(&gPlayerParty[0], MON_DATA_SPECIES, NULL);
-    u16 species2 = GetMonData(&gPlayerParty[1], MON_DATA_SPECIES, NULL);
+    u16 species1 = GetMonDataExtended(&gPlayerParty[0], MON_DATA_SPECIES, NULL);
+    u16 species2 = GetMonDataExtended(&gPlayerParty[1], MON_DATA_SPECIES, NULL);
 
     count = 0;
     for (i = 0; i < 3; i++)
@@ -2472,8 +2472,8 @@ static void sub_8164188(u16 trainerId)
     s32 i, count;
     u32 validSpecies[3];
     u32 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
-    u16 species1 = GetMonData(&gPlayerParty[0], MON_DATA_SPECIES, NULL);
-    u16 species2 = GetMonData(&gPlayerParty[1], MON_DATA_SPECIES, NULL);
+    u16 species1 = GetMonDataExtended(&gPlayerParty[0], MON_DATA_SPECIES, NULL);
+    u16 species2 = GetMonDataExtended(&gPlayerParty[1], MON_DATA_SPECIES, NULL);
 
     count = 0;
     for (i = 0; i < 4; i++)
@@ -2512,8 +2512,8 @@ static void sub_81642A0(void)
     lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
     battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
     challengeNum = gSaveBlock2Ptr->frontier.towerWinStreaks[battleMode][lvlMode] / 7;
-    species1 = GetMonData(&gPlayerParty[0], MON_DATA_SPECIES, NULL);
-    species2 = GetMonData(&gPlayerParty[1], MON_DATA_SPECIES, NULL);
+    species1 = GetMonDataExtended(&gPlayerParty[0], MON_DATA_SPECIES, NULL);
+    species2 = GetMonDataExtended(&gPlayerParty[1], MON_DATA_SPECIES, NULL);
     level = SetFacilityPtrsGetLevel();
 
     j = 0;
@@ -2895,8 +2895,8 @@ static void sub_8164E04(void)
     StripExtCtrlCodes(text);
     StringCopy(gSaveBlock2Ptr->frontier.field_BD8, text);
     GetBattleTowerTrainerLanguage(&gSaveBlock2Ptr->frontier.field_BEB, gTrainerBattleOpponent_A);
-    gSaveBlock2Ptr->frontier.field_BD6 = GetMonData(&gEnemyParty[gBattlerPartyIndexes[1]], MON_DATA_SPECIES, NULL);
-    gSaveBlock2Ptr->frontier.field_BD4 = GetMonData(&gPlayerParty[gBattlerPartyIndexes[0]], MON_DATA_SPECIES, NULL);
+    gSaveBlock2Ptr->frontier.field_BD6 = GetMonDataExtended(&gEnemyParty[gBattlerPartyIndexes[1]], MON_DATA_SPECIES, NULL);
+    gSaveBlock2Ptr->frontier.field_BD4 = GetMonDataExtended(&gPlayerParty[gBattlerPartyIndexes[0]], MON_DATA_SPECIES, NULL);
     for (i = 0; i < POKEMON_NAME_LENGTH + 1; i++)
         gSaveBlock2Ptr->frontier.field_BE0[i] = gBattleMons[0].nickname[i];
     gSaveBlock2Ptr->frontier.field_D06 = gBattleOutcome;
@@ -3005,7 +3005,7 @@ static void AwardBattleTowerRibbons(void)
             partyIndex = gSaveBlock2Ptr->frontier.selectedPartyMons[i] - 1;
             ribbons[i].partyIndex = partyIndex;
             ribbons[i].count = 0;
-            if (!GetMonData_2(&gSaveBlock1Ptr->playerParty[partyIndex], ribbonType))
+            if (!GetMonData(&gSaveBlock1Ptr->playerParty[partyIndex], ribbonType))
             {
                 gSpecialVar_Result = TRUE;
                 SetMonData(&gSaveBlock1Ptr->playerParty[partyIndex], ribbonType, &gSpecialVar_Result);
@@ -3469,10 +3469,10 @@ s32 GetHighestLevelInPlayerParty(void)
 
     for (i = 0; i < PARTY_SIZE; i++)
     {
-        if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES, NULL)
-            && GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2, NULL) != SPECIES_EGG)
+        if (GetMonDataExtended(&gPlayerParty[i], MON_DATA_SPECIES, NULL)
+            && GetMonDataExtended(&gPlayerParty[i], MON_DATA_SPECIES2, NULL) != SPECIES_EGG)
         {
-            s32 level = GetMonData(&gPlayerParty[i], MON_DATA_LEVEL, NULL);
+            s32 level = GetMonDataExtended(&gPlayerParty[i], MON_DATA_LEVEL, NULL);
             if (level > highestLevel)
                 highestLevel = level;
         }
@@ -3608,7 +3608,7 @@ static void FillTentTrainerParty_(u16 trainerId, u8 firstMonId, u8 monCount)
         // Ensure this pokemon species isn't a duplicate.
         for (j = 0; j < i + firstMonId; j++)
         {
-            if (GetMonData(&gEnemyParty[j], MON_DATA_SPECIES, NULL) == gFacilityTrainerMons[monSetId].species)
+            if (GetMonDataExtended(&gEnemyParty[j], MON_DATA_SPECIES, NULL) == gFacilityTrainerMons[monSetId].species)
                 break;
         }
         if (j != i + firstMonId)
@@ -3617,8 +3617,8 @@ static void FillTentTrainerParty_(u16 trainerId, u8 firstMonId, u8 monCount)
         // Ensure this Pokemon's held item isn't a duplicate.
         for (j = 0; j < i + firstMonId; j++)
         {
-            if (GetMonData(&gEnemyParty[j], MON_DATA_HELD_ITEM, NULL) != 0
-             && GetMonData(&gEnemyParty[j], MON_DATA_HELD_ITEM, NULL) == gBattleFrontierHeldItems[gFacilityTrainerMons[monSetId].itemTableId])
+            if (GetMonDataExtended(&gEnemyParty[j], MON_DATA_HELD_ITEM, NULL) != 0
+             && GetMonDataExtended(&gEnemyParty[j], MON_DATA_HELD_ITEM, NULL) == gBattleFrontierHeldItems[gFacilityTrainerMons[monSetId].itemTableId])
                 break;
         }
         if (j != i + firstMonId)
@@ -3733,7 +3733,7 @@ void sub_8166188(void)
 
         for (i = 0; i < PARTY_SIZE; i++)
         {
-            u32 species = GetMonData(&gEnemyParty[i], MON_DATA_SPECIES, NULL);
+            u32 species = GetMonDataExtended(&gEnemyParty[i], MON_DATA_SPECIES, NULL);
             if (species)
             {
                 SetMonData(&gEnemyParty[i], MON_DATA_EXP, &gExperienceTables[gBaseStats[species].growthRate][enemyLevel]);

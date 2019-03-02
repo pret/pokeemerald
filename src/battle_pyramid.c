@@ -1233,13 +1233,13 @@ static void RestorePyramidPlayerParty(void)
         int partyIndex = gSaveBlock2Ptr->frontier.selectedPartyMons[i] - 1;
         for (j = 0; j < 3; j++)
         {
-            if (GetMonData(&gSaveBlock1Ptr->playerParty[partyIndex], MON_DATA_SPECIES, NULL) == GetMonData(&gPlayerParty[j], MON_DATA_SPECIES, NULL))
+            if (GetMonDataExtended(&gSaveBlock1Ptr->playerParty[partyIndex], MON_DATA_SPECIES, NULL) == GetMonDataExtended(&gPlayerParty[j], MON_DATA_SPECIES, NULL))
             {
                 for (k = 0; k < MAX_MON_MOVES; k++)
                 {
                     for (l = 0; l < MAX_MON_MOVES; l++)
                     {
-                        if (GetMonData(&gSaveBlock1Ptr->playerParty[partyIndex], MON_DATA_MOVE1 + l, NULL) == GetMonData(&gPlayerParty[j], MON_DATA_MOVE1 + k, NULL))
+                        if (GetMonDataExtended(&gSaveBlock1Ptr->playerParty[partyIndex], MON_DATA_MOVE1 + l, NULL) == GetMonDataExtended(&gPlayerParty[j], MON_DATA_MOVE1 + k, NULL))
                             break;
                     }
                     if (l == MAX_MON_MOVES)
@@ -1383,7 +1383,7 @@ void GenerateBattlePyramidWildMon(void)
     else
         wildMons = sLevel50WildMonPointers[round];
 
-    id = GetMonData(&gEnemyParty[0], MON_DATA_SPECIES, NULL) - 1;
+    id = GetMonDataExtended(&gEnemyParty[0], MON_DATA_SPECIES, NULL) - 1;
     SetMonData(&gEnemyParty[0], MON_DATA_SPECIES, &wildMons[id].species);
     GetSpeciesName(name, wildMons[id].species);
     SetMonData(&gEnemyParty[0], MON_DATA_NICKNAME, &name);
@@ -1411,7 +1411,7 @@ void GenerateBattlePyramidWildMon(void)
     default:
         if (gBaseStats[wildMons[id].species].ability2)
         {
-            i = GetMonData(&gEnemyParty[0], MON_DATA_PERSONALITY, NULL) % 2;
+            i = GetMonDataExtended(&gEnemyParty[0], MON_DATA_PERSONALITY, NULL) % 2;
             SetMonData(&gEnemyParty[0], MON_DATA_ALT_ABILITY, &i);
         }
         else

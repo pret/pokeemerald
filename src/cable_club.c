@@ -356,8 +356,8 @@ static void sub_80B2918(u8 taskId)
         sub_800AA04(gFieldLinkPlayerCount);
         card = (struct TrainerCard *)gBlockSendBuffer;
         TrainerCard_GenerateCardForPlayer(card);
-        card->monSpecies[0] = GetMonData(&gPlayerParty[gSelectedOrderFromParty[0] - 1], MON_DATA_SPECIES, NULL);
-        card->monSpecies[1] = GetMonData(&gPlayerParty[gSelectedOrderFromParty[1] - 1], MON_DATA_SPECIES, NULL);
+        card->monSpecies[0] = GetMonDataExtended(&gPlayerParty[gSelectedOrderFromParty[0] - 1], MON_DATA_SPECIES, NULL);
+        card->monSpecies[1] = GetMonDataExtended(&gPlayerParty[gSelectedOrderFromParty[1] - 1], MON_DATA_SPECIES, NULL);
         gTasks[taskId].func = sub_80B2C30;
     }
 }
@@ -403,8 +403,8 @@ static void sub_80B2A08(u8 taskId)
         sub_800AA04(gFieldLinkPlayerCount);
         card = (struct TrainerCard *)gBlockSendBuffer;
         TrainerCard_GenerateCardForPlayer(card);
-        card->monSpecies[0] = GetMonData(&gPlayerParty[gSelectedOrderFromParty[0] - 1], MON_DATA_SPECIES, NULL);
-        card->monSpecies[1] = GetMonData(&gPlayerParty[gSelectedOrderFromParty[1] - 1], MON_DATA_SPECIES, NULL);
+        card->monSpecies[0] = GetMonDataExtended(&gPlayerParty[gSelectedOrderFromParty[0] - 1], MON_DATA_SPECIES, NULL);
+        card->monSpecies[1] = GetMonDataExtended(&gPlayerParty[gSelectedOrderFromParty[1] - 1], MON_DATA_SPECIES, NULL);
         gTasks[taskId].func = sub_80B2C30;
         sub_800A4D8(2);
     }

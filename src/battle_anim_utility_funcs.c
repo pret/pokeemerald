@@ -321,9 +321,9 @@ void sub_8116B14(u8 taskId)
     else
     {
         if (GetBattlerSide(gBattleAnimAttacker) != B_SIDE_PLAYER)
-            species = GetMonData_2(&gEnemyParty[gBattlerPartyIndexes[gBattleAnimAttacker]], MON_DATA_SPECIES);
+            species = GetMonData(&gEnemyParty[gBattlerPartyIndexes[gBattleAnimAttacker]], MON_DATA_SPECIES);
         else
-            species = GetMonData_2(&gPlayerParty[gBattlerPartyIndexes[gBattleAnimAttacker]], MON_DATA_SPECIES);
+            species = GetMonData(&gPlayerParty[gBattlerPartyIndexes[gBattleAnimAttacker]], MON_DATA_SPECIES);
     }
 
     spriteId = GetAnimBattlerSpriteId(0);
@@ -443,9 +443,9 @@ static void sub_8116F04(u8 taskId)
     else
     {
         if (GetBattlerSide(sAnimStatsChangeData->battler1) != B_SIDE_PLAYER)
-            sAnimStatsChangeData->species = GetMonData_2(&gEnemyParty[gBattlerPartyIndexes[sAnimStatsChangeData->battler1]], MON_DATA_SPECIES);
+            sAnimStatsChangeData->species = GetMonData(&gEnemyParty[gBattlerPartyIndexes[sAnimStatsChangeData->battler1]], MON_DATA_SPECIES);
         else
-            sAnimStatsChangeData->species = GetMonData_2(&gPlayerParty[gBattlerPartyIndexes[sAnimStatsChangeData->battler1]], MON_DATA_SPECIES);
+            sAnimStatsChangeData->species = GetMonData(&gPlayerParty[gBattlerPartyIndexes[sAnimStatsChangeData->battler1]], MON_DATA_SPECIES);
     }
 
     gTasks[taskId].func = sub_81170EC;
@@ -809,9 +809,9 @@ void sub_8117854(u8 taskId, int unused, u16 arg2, u8 battler1, u8 arg4, u8 arg5,
     else
     {
         if (GetBattlerSide(battler1) != B_SIDE_PLAYER)
-            species = GetMonData_2(&gEnemyParty[gBattlerPartyIndexes[battler1]], MON_DATA_SPECIES);
+            species = GetMonData(&gEnemyParty[gBattlerPartyIndexes[battler1]], MON_DATA_SPECIES);
         else
-            species = GetMonData_2(&gPlayerParty[gBattlerPartyIndexes[battler1]], MON_DATA_SPECIES);
+            species = GetMonData(&gPlayerParty[gBattlerPartyIndexes[battler1]], MON_DATA_SPECIES);
     }
 
     spriteId = sub_80A89C8(battler1, gBattlerSpriteIds[battler1], species);

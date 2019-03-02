@@ -371,9 +371,9 @@ static void SetRentalsToOpponentParty(void)
     for (i = 0; i < 3; i++)
     {
         gSaveBlock2Ptr->frontier.rentalMons[i + 3].monId = gUnknown_03006298[i];
-        gSaveBlock2Ptr->frontier.rentalMons[i + 3].ivs = GetBoxMonData(&gEnemyParty[i].box, MON_DATA_ATK_IV, NULL);
-        gSaveBlock2Ptr->frontier.rentalMons[i + 3].personality = GetMonData(&gEnemyParty[i], MON_DATA_PERSONALITY, NULL);
-        gSaveBlock2Ptr->frontier.rentalMons[i + 3].abilityBit = GetBoxMonData(&gEnemyParty[i].box, MON_DATA_ALT_ABILITY, NULL);
+        gSaveBlock2Ptr->frontier.rentalMons[i + 3].ivs = GetBoxMonDataExtended(&gEnemyParty[i].box, MON_DATA_ATK_IV, NULL);
+        gSaveBlock2Ptr->frontier.rentalMons[i + 3].personality = GetMonDataExtended(&gEnemyParty[i], MON_DATA_PERSONALITY, NULL);
+        gSaveBlock2Ptr->frontier.rentalMons[i + 3].abilityBit = GetBoxMonDataExtended(&gEnemyParty[i].box, MON_DATA_ALT_ABILITY, NULL);
         SetMonData(&gEnemyParty[i], MON_DATA_HELD_ITEM, &gBattleFrontierHeldItems[gFacilityTrainerMons[gUnknown_03006298[i]].itemTableId]);
     }
 }

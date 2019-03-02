@@ -1263,7 +1263,7 @@ static void InterviewAfter_ContestLiveUpdates(void)
         show2->contestLiveUpdates.active = TRUE;
         StringCopy(show2->contestLiveUpdates.playerName, gSaveBlock2Ptr->playerName);
         show2->contestLiveUpdates.category = gSpecialVar_ContestCategory;
-        show2->contestLiveUpdates.species = GetMonData(&gPlayerParty[gContestMonPartyIndex], MON_DATA_SPECIES, NULL);
+        show2->contestLiveUpdates.species = GetMonDataExtended(&gPlayerParty[gContestMonPartyIndex], MON_DATA_SPECIES, NULL);
         show2->contestLiveUpdates.winningSpecies = show->contestLiveUpdates.winningSpecies;
         show2->contestLiveUpdates.appealFlags2 = show->contestLiveUpdates.appealFlags2;
         show2->contestLiveUpdates.round1Rank = show->contestLiveUpdates.round1Rank;
@@ -1528,10 +1528,10 @@ void BravoTrainerPokemonProfile_BeforeInterview2(u8 contestStandingPlace)
         show->bravoTrainer.contestResult = contestStandingPlace;
         show->bravoTrainer.contestCategory = gSpecialVar_ContestCategory;
         show->bravoTrainer.contestRank = gSpecialVar_ContestRank;
-        show->bravoTrainer.species = GetMonData(&gPlayerParty[gContestMonPartyIndex], MON_DATA_SPECIES, NULL);
-        GetMonData(&gPlayerParty[gContestMonPartyIndex], MON_DATA_NICKNAME, show->bravoTrainer.pokemonNickname);
+        show->bravoTrainer.species = GetMonDataExtended(&gPlayerParty[gContestMonPartyIndex], MON_DATA_SPECIES, NULL);
+        GetMonDataExtended(&gPlayerParty[gContestMonPartyIndex], MON_DATA_NICKNAME, show->bravoTrainer.pokemonNickname);
         StripExtCtrlCodes(show->bravoTrainer.pokemonNickname);
-        show->bravoTrainer.pokemonNameLanguage = GetMonData_2(&gPlayerParty[gContestMonPartyIndex], MON_DATA_LANGUAGE);
+        show->bravoTrainer.pokemonNameLanguage = GetMonData(&gPlayerParty[gContestMonPartyIndex], MON_DATA_LANGUAGE);
     }
 }
 
@@ -1609,22 +1609,22 @@ void PutNameRaterShowOnTheAir(void)
     InterviewBefore_NameRater();
     if (gSpecialVar_Result != 1)
     {
-        GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_NICKNAME, gStringVar1);
+        GetMonDataExtended(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_NICKNAME, gStringVar1);
         if (StringLength(gSaveBlock2Ptr->playerName) > 1 && StringLength(gStringVar1) > 1)
         {
             show = &gSaveBlock1Ptr->tvShows[sCurTVShowSlot];
             show->nameRaterShow.kind = TVSHOW_NAME_RATER_SHOW;
             show->nameRaterShow.active = TRUE;
-            show->nameRaterShow.species = GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_SPECIES, NULL);
+            show->nameRaterShow.species = GetMonDataExtended(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_SPECIES, NULL);
             show->nameRaterShow.random = Random() % 3;
             show->nameRaterShow.random2 = Random() % 2;
             show->nameRaterShow.randomSpecies = TV_GetSomeOtherSpeciesAlreadySeenByPlayer(show->nameRaterShow.species);
             StringCopy(show->nameRaterShow.trainerName, gSaveBlock2Ptr->playerName);
-            GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_NICKNAME, show->nameRaterShow.pokemonName);
+            GetMonDataExtended(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_NICKNAME, show->nameRaterShow.pokemonName);
             StripExtCtrlCodes(show->nameRaterShow.pokemonName);
             tv_store_id_2x(show);
             show->nameRaterShow.language = gGameLanguage;
-            show->nameRaterShow.pokemonNameLanguage = GetMonData_2(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_LANGUAGE);
+            show->nameRaterShow.pokemonNameLanguage = GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_LANGUAGE);
         }
     }
 }
@@ -1676,7 +1676,7 @@ static void InterviewAfter_FanClubLetter(void)
     show->fanclubLetter.kind = TVSHOW_FAN_CLUB_LETTER;
     show->fanclubLetter.active = TRUE;
     StringCopy(show->fanclubLetter.playerName, gSaveBlock2Ptr->playerName);
-    show->fanclubLetter.species = GetMonData(&gPlayerParty[GetLeadMonIndex()], MON_DATA_SPECIES, NULL);
+    show->fanclubLetter.species = GetMonDataExtended(&gPlayerParty[GetLeadMonIndex()], MON_DATA_SPECIES, NULL);
     tv_store_id_2x(show);
     show->fanclubLetter.language = gGameLanguage;
 }
@@ -1701,21 +1701,21 @@ static void InterviewAfter_PkmnFanClubOpinions(void)
     show = &gSaveBlock1Ptr->tvShows[sCurTVShowSlot];
     show->fanclubOpinions.kind = TVSHOW_PKMN_FAN_CLUB_OPINIONS;
     show->fanclubOpinions.active = TRUE;
-    show->fanclubOpinions.friendshipHighNybble = GetMonData(&gPlayerParty[GetLeadMonIndex()], MON_DATA_FRIENDSHIP, NULL) >> 4;
+    show->fanclubOpinions.friendshipHighNybble = GetMonDataExtended(&gPlayerParty[GetLeadMonIndex()], MON_DATA_FRIENDSHIP, NULL) >> 4;
     show->fanclubOpinions.questionAsked = gSpecialVar_0x8007;
     StringCopy(show->fanclubOpinions.playerName, gSaveBlock2Ptr->playerName);
-    GetMonData(&gPlayerParty[GetLeadMonIndex()], MON_DATA_NICKNAME, show->fanclubOpinions.nickname);
+    GetMonDataExtended(&gPlayerParty[GetLeadMonIndex()], MON_DATA_NICKNAME, show->fanclubOpinions.nickname);
     StripExtCtrlCodes(show->fanclubOpinions.nickname);
-    show->fanclubOpinions.species = GetMonData(&gPlayerParty[GetLeadMonIndex()], MON_DATA_SPECIES, NULL);
+    show->fanclubOpinions.species = GetMonDataExtended(&gPlayerParty[GetLeadMonIndex()], MON_DATA_SPECIES, NULL);
     tv_store_id_2x(show);
     show->fanclubOpinions.language = gGameLanguage;
-    if (gGameLanguage == LANGUAGE_JAPANESE || GetMonData_2(&gPlayerParty[GetLeadMonIndex()], MON_DATA_LANGUAGE) == LANGUAGE_JAPANESE)
+    if (gGameLanguage == LANGUAGE_JAPANESE || GetMonData(&gPlayerParty[GetLeadMonIndex()], MON_DATA_LANGUAGE) == LANGUAGE_JAPANESE)
     {
         show->fanclubOpinions.pokemonNameLanguage = LANGUAGE_JAPANESE;
     }
     else
     {
-        show->fanclubOpinions.pokemonNameLanguage = GetMonData_2(&gPlayerParty[GetLeadMonIndex()], MON_DATA_LANGUAGE);
+        show->fanclubOpinions.pokemonNameLanguage = GetMonData(&gPlayerParty[GetLeadMonIndex()], MON_DATA_LANGUAGE);
     }
 }
 
@@ -2160,30 +2160,30 @@ static void sub_80EDFB4(TVShow *show)
 
     for (i = 0, nPokemon = 0; i < PARTY_SIZE; i ++)
     {
-        if (GetMonData_2(&gPlayerParty[i], MON_DATA_SPECIES) != SPECIES_NONE && !GetMonData_2(&gPlayerParty[i], MON_DATA_IS_EGG))
+        if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES) != SPECIES_NONE && !GetMonData(&gPlayerParty[i], MON_DATA_IS_EGG))
         {
-            sTV_SecretBaseVisitMonsTemp[nPokemon].level = GetMonData_2(&gPlayerParty[i], MON_DATA_LEVEL);
-            sTV_SecretBaseVisitMonsTemp[nPokemon].species = GetMonData_2(&gPlayerParty[i], MON_DATA_SPECIES);
+            sTV_SecretBaseVisitMonsTemp[nPokemon].level = GetMonData(&gPlayerParty[i], MON_DATA_LEVEL);
+            sTV_SecretBaseVisitMonsTemp[nPokemon].species = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES);
             nMoves = 0;
-            move = GetMonData_2(&gPlayerParty[i], MON_DATA_MOVE1);
+            move = GetMonData(&gPlayerParty[i], MON_DATA_MOVE1);
             if (move != MOVE_NONE)
             {
                 sTV_SecretBaseVisitMovesTemp[nMoves] = move;
                 nMoves ++;
             }
-            move = GetMonData_2(&gPlayerParty[i], MON_DATA_MOVE2);
+            move = GetMonData(&gPlayerParty[i], MON_DATA_MOVE2);
             if (move != MOVE_NONE)
             {
                 sTV_SecretBaseVisitMovesTemp[nMoves] = move;
                 nMoves ++;
             }
-            move = GetMonData_2(&gPlayerParty[i], MON_DATA_MOVE3);
+            move = GetMonData(&gPlayerParty[i], MON_DATA_MOVE3);
             if (move != MOVE_NONE)
             {
                 sTV_SecretBaseVisitMovesTemp[nMoves] = move;
                 nMoves ++;
             }
-            move = GetMonData_2(&gPlayerParty[i], MON_DATA_MOVE4);
+            move = GetMonData(&gPlayerParty[i], MON_DATA_MOVE4);
             if (move != MOVE_NONE)
             {
                 sTV_SecretBaseVisitMovesTemp[nMoves] = move;
@@ -2373,19 +2373,19 @@ void sub_80EE4DC(struct Pokemon *pokemon, u8 ribbonMonDataIdx)
         show->cuties.kind = TVSHOW_CUTIES;
         show->cuties.active = FALSE;
         StringCopy(show->cuties.playerName, gSaveBlock2Ptr->playerName);
-        GetMonData(pokemon, MON_DATA_NICKNAME, show->cuties.nickname);
+        GetMonDataExtended(pokemon, MON_DATA_NICKNAME, show->cuties.nickname);
         StripExtCtrlCodes(show->cuties.nickname);
         show->cuties.nRibbons = GetRibbonCount(pokemon);
         show->cuties.selectedRibbon = TV_MonDataIdxToRibbon(ribbonMonDataIdx);
         tv_store_id_3x(show);
         show->cuties.language = gGameLanguage;
-        if (show->cuties.language == LANGUAGE_JAPANESE || GetMonData_2(pokemon, MON_DATA_LANGUAGE) == LANGUAGE_JAPANESE)
+        if (show->cuties.language == LANGUAGE_JAPANESE || GetMonData(pokemon, MON_DATA_LANGUAGE) == LANGUAGE_JAPANESE)
         {
             show->cuties.pokemonNameLanguage = LANGUAGE_JAPANESE;
         }
         else
         {
-            show->cuties.pokemonNameLanguage = GetMonData_2(pokemon, MON_DATA_LANGUAGE);
+            show->cuties.pokemonNameLanguage = GetMonData(pokemon, MON_DATA_LANGUAGE);
         }
     }
 }
@@ -2395,23 +2395,23 @@ u8 GetRibbonCount(struct Pokemon *pokemon)
     u8 nRibbons;
 
     nRibbons = 0;
-    nRibbons += GetMonData_2(pokemon, MON_DATA_COOL_RIBBON);
-    nRibbons += GetMonData_2(pokemon, MON_DATA_BEAUTY_RIBBON);
-    nRibbons += GetMonData_2(pokemon, MON_DATA_CUTE_RIBBON);
-    nRibbons += GetMonData_2(pokemon, MON_DATA_SMART_RIBBON);
-    nRibbons += GetMonData_2(pokemon, MON_DATA_TOUGH_RIBBON);
-    nRibbons += GetMonData_2(pokemon, MON_DATA_CHAMPION_RIBBON);
-    nRibbons += GetMonData_2(pokemon, MON_DATA_WINNING_RIBBON);
-    nRibbons += GetMonData_2(pokemon, MON_DATA_VICTORY_RIBBON);
-    nRibbons += GetMonData_2(pokemon, MON_DATA_ARTIST_RIBBON);
-    nRibbons += GetMonData_2(pokemon, MON_DATA_EFFORT_RIBBON);
-    nRibbons += GetMonData_2(pokemon, MON_DATA_GIFT_RIBBON_1);
-    nRibbons += GetMonData_2(pokemon, MON_DATA_GIFT_RIBBON_2);
-    nRibbons += GetMonData_2(pokemon, MON_DATA_GIFT_RIBBON_3);
-    nRibbons += GetMonData_2(pokemon, MON_DATA_GIFT_RIBBON_4);
-    nRibbons += GetMonData_2(pokemon, MON_DATA_GIFT_RIBBON_5);
-    nRibbons += GetMonData_2(pokemon, MON_DATA_GIFT_RIBBON_6);
-    nRibbons += GetMonData_2(pokemon, MON_DATA_GIFT_RIBBON_7);
+    nRibbons += GetMonData(pokemon, MON_DATA_COOL_RIBBON);
+    nRibbons += GetMonData(pokemon, MON_DATA_BEAUTY_RIBBON);
+    nRibbons += GetMonData(pokemon, MON_DATA_CUTE_RIBBON);
+    nRibbons += GetMonData(pokemon, MON_DATA_SMART_RIBBON);
+    nRibbons += GetMonData(pokemon, MON_DATA_TOUGH_RIBBON);
+    nRibbons += GetMonData(pokemon, MON_DATA_CHAMPION_RIBBON);
+    nRibbons += GetMonData(pokemon, MON_DATA_WINNING_RIBBON);
+    nRibbons += GetMonData(pokemon, MON_DATA_VICTORY_RIBBON);
+    nRibbons += GetMonData(pokemon, MON_DATA_ARTIST_RIBBON);
+    nRibbons += GetMonData(pokemon, MON_DATA_EFFORT_RIBBON);
+    nRibbons += GetMonData(pokemon, MON_DATA_GIFT_RIBBON_1);
+    nRibbons += GetMonData(pokemon, MON_DATA_GIFT_RIBBON_2);
+    nRibbons += GetMonData(pokemon, MON_DATA_GIFT_RIBBON_3);
+    nRibbons += GetMonData(pokemon, MON_DATA_GIFT_RIBBON_4);
+    nRibbons += GetMonData(pokemon, MON_DATA_GIFT_RIBBON_5);
+    nRibbons += GetMonData(pokemon, MON_DATA_GIFT_RIBBON_6);
+    nRibbons += GetMonData(pokemon, MON_DATA_GIFT_RIBBON_7);
     return nRibbons;
 }
 
@@ -2527,23 +2527,23 @@ void sub_80EE8C8(u16 winStreak, u8 facilityAndMode)
             case 11:
             case 12:
             case 13:
-                show->frontier.species1 = GetMonData(&gPlayerParty[0], MON_DATA_SPECIES, NULL);
-                show->frontier.species2 = GetMonData(&gPlayerParty[1], MON_DATA_SPECIES, NULL);
-                show->frontier.species3 = GetMonData(&gPlayerParty[2], MON_DATA_SPECIES, NULL);
+                show->frontier.species1 = GetMonDataExtended(&gPlayerParty[0], MON_DATA_SPECIES, NULL);
+                show->frontier.species2 = GetMonDataExtended(&gPlayerParty[1], MON_DATA_SPECIES, NULL);
+                show->frontier.species3 = GetMonDataExtended(&gPlayerParty[2], MON_DATA_SPECIES, NULL);
                 break;
             case 2:
-                show->frontier.species1 = GetMonData(&gPlayerParty[0], MON_DATA_SPECIES, NULL);
-                show->frontier.species2 = GetMonData(&gPlayerParty[1], MON_DATA_SPECIES, NULL);
-                show->frontier.species3 = GetMonData(&gPlayerParty[2], MON_DATA_SPECIES, NULL);
-                show->frontier.species4 = GetMonData(&gPlayerParty[3], MON_DATA_SPECIES, NULL);
+                show->frontier.species1 = GetMonDataExtended(&gPlayerParty[0], MON_DATA_SPECIES, NULL);
+                show->frontier.species2 = GetMonDataExtended(&gPlayerParty[1], MON_DATA_SPECIES, NULL);
+                show->frontier.species3 = GetMonDataExtended(&gPlayerParty[2], MON_DATA_SPECIES, NULL);
+                show->frontier.species4 = GetMonDataExtended(&gPlayerParty[3], MON_DATA_SPECIES, NULL);
                 break;
             case 3:
-                show->frontier.species1 = GetMonData(&gPlayerParty[0], MON_DATA_SPECIES, NULL);
-                show->frontier.species2 = GetMonData(&gPlayerParty[1], MON_DATA_SPECIES, NULL);
+                show->frontier.species1 = GetMonDataExtended(&gPlayerParty[0], MON_DATA_SPECIES, NULL);
+                show->frontier.species2 = GetMonDataExtended(&gPlayerParty[1], MON_DATA_SPECIES, NULL);
                 break;
             case 4:
-                show->frontier.species1 = GetMonData(&gSaveBlock1Ptr->playerParty[gSaveBlock2Ptr->frontier.selectedPartyMons[0] - 1], MON_DATA_SPECIES, NULL);
-                show->frontier.species2 = GetMonData(&gSaveBlock1Ptr->playerParty[gSaveBlock2Ptr->frontier.selectedPartyMons[1] - 1], MON_DATA_SPECIES, NULL);
+                show->frontier.species1 = GetMonDataExtended(&gSaveBlock1Ptr->playerParty[gSaveBlock2Ptr->frontier.selectedPartyMons[0] - 1], MON_DATA_SPECIES, NULL);
+                show->frontier.species2 = GetMonDataExtended(&gSaveBlock1Ptr->playerParty[gSaveBlock2Ptr->frontier.selectedPartyMons[1] - 1], MON_DATA_SPECIES, NULL);
                 break;
         }
         tv_store_id_3x(show);
@@ -3073,7 +3073,7 @@ static void InterviewBefore_FanClubLetter(void)
     FindActiveBroadcastByShowType_SetScriptResult(TVSHOW_FAN_CLUB_LETTER);
     if (!gSpecialVar_Result)
     {
-        StringCopy(gStringVar1, gSpeciesNames[GetMonData(&gPlayerParty[GetLeadMonIndex()], MON_DATA_SPECIES, NULL)]);
+        StringCopy(gStringVar1, gSpeciesNames[GetMonDataExtended(&gPlayerParty[GetLeadMonIndex()], MON_DATA_SPECIES, NULL)]);
         InitializeEasyChatWordArray(gSaveBlock1Ptr->tvShows[sCurTVShowSlot].fanclubLetter.words, 6);
     }
 }
@@ -3092,8 +3092,8 @@ static void InterviewBefore_PkmnFanClubOpinions(void)
     FindActiveBroadcastByShowType_SetScriptResult(TVSHOW_PKMN_FAN_CLUB_OPINIONS);
     if (!gSpecialVar_Result)
     {
-        StringCopy(gStringVar1, gSpeciesNames[GetMonData(&gPlayerParty[GetLeadMonIndex()], MON_DATA_SPECIES, NULL)]);
-        GetMonData(&gPlayerParty[GetLeadMonIndex()], MON_DATA_NICKNAME, gStringVar2);
+        StringCopy(gStringVar1, gSpeciesNames[GetMonDataExtended(&gPlayerParty[GetLeadMonIndex()], MON_DATA_SPECIES, NULL)]);
+        GetMonDataExtended(&gPlayerParty[GetLeadMonIndex()], MON_DATA_NICKNAME, gStringVar2);
         StringGetEnd10(gStringVar2);
         InitializeEasyChatWordArray(gSaveBlock1Ptr->tvShows[sCurTVShowSlot].fanclubOpinions.words, 2);
     }
@@ -3152,9 +3152,9 @@ bool8 sub_80EF88C(u8 monIdx)
     u8 language;
 
     pokemon = &gPlayerParty[monIdx];
-    GetMonData(pokemon, MON_DATA_NICKNAME, gStringVar1);
-    language = GetMonData(pokemon, MON_DATA_LANGUAGE, &language);
-    if (language == LANGUAGE_ENGLISH && !StringCompare(gSpeciesNames[GetMonData(pokemon, MON_DATA_SPECIES, NULL)], gStringVar1))
+    GetMonDataExtended(pokemon, MON_DATA_NICKNAME, gStringVar1);
+    language = GetMonDataExtended(pokemon, MON_DATA_LANGUAGE, &language);
+    if (language == LANGUAGE_ENGLISH && !StringCompare(gSpeciesNames[GetMonDataExtended(pokemon, MON_DATA_SPECIES, NULL)], gStringVar1))
     {
         return FALSE;
     }
@@ -3435,7 +3435,7 @@ bool8 TV_IsScriptShowKindAlreadyInQueue(void)
 
 bool8 TV_PutNameRaterShowOnTheAirIfNicnkameChanged(void)
 {
-    GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_NICKNAME, gStringVar1);
+    GetMonDataExtended(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_NICKNAME, gStringVar1);
     if (!StringCompare(gStringVar3, gStringVar1))
     {
         return FALSE;
@@ -3448,9 +3448,9 @@ void ChangePokemonNickname(void)
 {
     void ChangePokemonNickname_CB(void);
 
-    GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_NICKNAME, gStringVar3);
-    GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_NICKNAME, gStringVar2);
-    DoNamingScreen(3, gStringVar2, GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_SPECIES, NULL), GetMonGender(&gPlayerParty[gSpecialVar_0x8004]), GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_PERSONALITY, NULL), ChangePokemonNickname_CB);
+    GetMonDataExtended(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_NICKNAME, gStringVar3);
+    GetMonDataExtended(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_NICKNAME, gStringVar2);
+    DoNamingScreen(3, gStringVar2, GetMonDataExtended(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_SPECIES, NULL), GetMonGender(&gPlayerParty[gSpecialVar_0x8004]), GetMonDataExtended(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_PERSONALITY, NULL), ChangePokemonNickname_CB);
 }
 
 void ChangePokemonNickname_CB(void)
@@ -3464,9 +3464,9 @@ void ChangeBoxPokemonNickname(void)
     struct BoxPokemon *boxMon;
 
     boxMon = GetBoxedMonPtr(gSpecialVar_MonBoxId, gSpecialVar_MonBoxPos);
-    GetBoxMonData(boxMon, MON_DATA_NICKNAME, gStringVar3);
-    GetBoxMonData(boxMon, MON_DATA_NICKNAME, gStringVar2);
-    DoNamingScreen(3, gStringVar2, GetBoxMonData(boxMon, MON_DATA_SPECIES, NULL), GetBoxMonGender(boxMon), GetBoxMonData(boxMon, MON_DATA_PERSONALITY, NULL), ChangeBoxPokemonNickname_CB);
+    GetBoxMonDataExtended(boxMon, MON_DATA_NICKNAME, gStringVar3);
+    GetBoxMonDataExtended(boxMon, MON_DATA_NICKNAME, gStringVar2);
+    DoNamingScreen(3, gStringVar2, GetBoxMonDataExtended(boxMon, MON_DATA_SPECIES, NULL), GetBoxMonGender(boxMon), GetBoxMonDataExtended(boxMon, MON_DATA_PERSONALITY, NULL), ChangeBoxPokemonNickname_CB);
 }
 
 void ChangeBoxPokemonNickname_CB(void)
@@ -3477,13 +3477,13 @@ void ChangeBoxPokemonNickname_CB(void)
 
 void TV_CopyNicknameToStringVar1AndEnsureTerminated(void)
 {
-    GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_NICKNAME, gStringVar1);
+    GetMonDataExtended(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_NICKNAME, gStringVar1);
     StringGetEnd10(gStringVar1);
 }
 
 void TV_CheckMonOTIDEqualsPlayerID(void)
 {
-    if (GetPlayerIDAsU32() == GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_OT_ID, NULL))
+    if (GetPlayerIDAsU32() == GetMonDataExtended(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_OT_ID, NULL))
     {
         gSpecialVar_Result = FALSE;
     }

@@ -10873,7 +10873,7 @@ _081CD690:
 	adds r4, r0
 	adds r0, r4, 0
 	movs r1, 0x38
-	bl GetMonData
+	bl GetMonDataExtended
 	lsls r0, 16
 	lsrs r0, 16
 	mov r8, r0
@@ -11226,7 +11226,7 @@ _081CD998:
 	ldr r1, =gPlayerParty
 	adds r0, r1
 	movs r1, 0x2D
-	bl GetMonData
+	bl GetMonDataExtended
 	adds r2, r0, 0
 	cmp r2, 0
 	bne _081CD9BE
@@ -14066,12 +14066,12 @@ _081CF158:
 	adds r4, r1, r0
 	adds r0, r4, 0
 	movs r1, 0x5
-	bl GetMonData
+	bl GetMonDataExtended
 	cmp r0, 0
 	beq _081CF1AA
 	adds r0, r4, 0
 	movs r1, 0x6
-	bl GetMonData
+	bl GetMonDataExtended
 	cmp r0, 0
 	bne _081CF1A4
 	lsls r1, r5, 24
@@ -14083,7 +14083,7 @@ _081CF158:
 	str r0, [sp]
 	ldr r1, [r6, 0x14]
 	adds r0, r4, 0
-	bl GetMonData
+	bl GetMonDataExtended
 	lsls r0, 16
 	ldr r2, =0x0000ffff
 	ldr r1, [sp]
@@ -15062,7 +15062,7 @@ sub_81CF8E4: @ 81CF8E4
 	ldr r2, =gStringVar3
 	adds r0, r4, 0
 	movs r1, 0x2
-	bl GetMonData
+	bl GetMonDataExtended
 	b _081CF94A
 	.pool
 _081CF924:
@@ -15080,7 +15080,7 @@ _081CF924:
 	ldr r2, =gStringVar3
 	adds r0, r4, 0
 	movs r1, 0x2
-	bl GetBoxMonData
+	bl GetBoxMonDataExtended
 _081CF94A:
 	ldr r4, =gStringVar3
 	adds r0, r4, 0
@@ -15422,22 +15422,22 @@ _081CFBB0:
 	adds r4, r1, r0
 	adds r0, r4, 0
 	movs r1, 0x5
-	bl GetMonData
+	bl GetMonDataExtended
 	cmp r0, 0
 	beq _081CFC10
 	adds r0, r4, 0
 	movs r1, 0x6
-	bl GetMonData
+	bl GetMonDataExtended
 	cmp r0, 0
 	bne _081CFC0A
 	adds r0, r4, 0
 	movs r1, 0x4
-	bl GetMonData
+	bl GetMonDataExtended
 	cmp r0, 0
 	bne _081CFC0A
 	adds r0, r4, 0
 	movs r1, 0x52
-	bl GetMonData
+	bl GetMonDataExtended
 	adds r3, r0, 0
 	cmp r3, 0
 	beq _081CFC0A
@@ -15642,17 +15642,17 @@ _081CFD5C:
 	adds r4, r1, r0
 	adds r0, r4, 0
 	movs r1, 0x5
-	bl GetMonData
+	bl GetMonDataExtended
 	cmp r0, 0
 	beq _081CFD8A
 	adds r0, r4, 0
 	movs r1, 0x6
-	bl GetMonData
+	bl GetMonDataExtended
 	cmp r0, 0
 	bne _081CFD8A
 	adds r0, r4, 0
 	movs r1, 0x53
-	bl GetMonData
+	bl GetMonDataExtended
 	cmp r0, 0
 	bne _081CFDB2
 _081CFD8A:
@@ -16439,7 +16439,7 @@ sub_81D035C: @ 81D035C
 	ldr r2, =gStringVar3
 	adds r0, r4, 0
 	movs r1, 0x2
-	bl GetMonData
+	bl GetMonDataExtended
 	b _081D03CC
 	.pool
 _081D03A4:
@@ -16458,7 +16458,7 @@ _081D03A4:
 	ldr r2, =gStringVar3
 	adds r0, r4, 0
 	movs r1, 0x2
-	bl GetBoxMonData
+	bl GetBoxMonDataExtended
 _081D03CC:
 	ldr r4, =gStringVar3
 	adds r0, r4, 0
@@ -16920,7 +16920,7 @@ sub_81D06E4: @ 81D06E4
 	adds r0, r4, 0
 	movs r1, 0x2
 	adds r2, r5, 0
-	bl GetMonData
+	bl GetMonDataExtended
 	adds r0, r4, 0
 	bl GetLevelFromMonExp
 	strb r0, [r7]
@@ -16942,7 +16942,7 @@ _081D0730:
 	adds r0, r4, 0
 	movs r1, 0x2
 	adds r2, r5, 0
-	bl GetBoxMonData
+	bl GetBoxMonDataExtended
 _081D0752:
 	adds r0, r5, 0
 	bl StringGetEnd10
@@ -16975,15 +16975,15 @@ sub_81D0760: @ 81D0760
 	adds r4, r0
 	adds r0, r4, 0
 	movs r1, 0xB
-	bl GetMonData
+	bl GetMonDataExtended
 	strh r0, [r5]
 	adds r0, r4, 0
 	movs r1, 0
-	bl GetMonData
+	bl GetMonDataExtended
 	str r0, [r6]
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl GetMonData
+	bl GetMonDataExtended
 	b _081D07D0
 	.pool
 _081D07AC:
@@ -16992,15 +16992,15 @@ _081D07AC:
 	bl GetBoxedMonPtr
 	adds r4, r0, 0
 	movs r1, 0xB
-	bl GetBoxMonData
+	bl GetBoxMonDataExtended
 	strh r0, [r5]
 	adds r0, r4, 0
 	movs r1, 0
-	bl GetBoxMonData
+	bl GetBoxMonDataExtended
 	str r0, [r6]
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl GetBoxMonData
+	bl GetBoxMonDataExtended
 _081D07D0:
 	str r0, [r7]
 	pop {r4-r7}
@@ -17032,7 +17032,7 @@ _081D07FA:
 	ldr r1, =gPlayerParty
 	adds r0, r1
 	movs r1, 0x52
-	bl GetMonData
+	bl GetMonDataExtended
 _081D080A:
 	pop {r1}
 	bx r1
@@ -17061,7 +17061,7 @@ sub_81D0814: @ 81D0814
 	ldr r1, =gPlayerParty
 	adds r0, r1
 	movs r1, 0x53
-	bl GetMonData
+	bl GetMonDataExtended
 	b _081D0852
 	.pool
 _081D0848:

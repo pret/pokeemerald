@@ -1796,8 +1796,8 @@ void sub_8014790(u8 taskId)
             gLinkPlayers[0].linkType = 0x2211;
             gLinkPlayers[0].id = 0;
             gLinkPlayers[1].id = 2;
-            sendBuff[0] = GetMonData_2(&gPlayerParty[gSelectedOrderFromParty[0] - 1], MON_DATA_SPECIES);
-            sendBuff[1] = GetMonData(&gPlayerParty[gSelectedOrderFromParty[1] - 1], MON_DATA_SPECIES, NULL);
+            sendBuff[0] = GetMonData(&gPlayerParty[gSelectedOrderFromParty[0] - 1], MON_DATA_SPECIES);
+            sendBuff[1] = GetMonDataExtended(&gPlayerParty[gSelectedOrderFromParty[1] - 1], MON_DATA_SPECIES, NULL);
             gMain.savedCallback = NULL;
             data[0] = 4;
             RecordMixTrainerNames();

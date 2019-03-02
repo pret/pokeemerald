@@ -844,9 +844,9 @@ void sub_81144F8(u8 taskId)
     else
     {
         if (GetBattlerSide(gBattleAnimAttacker) != B_SIDE_PLAYER)
-            species = GetMonData_2(&gEnemyParty[gBattlerPartyIndexes[gBattleAnimAttacker]], MON_DATA_SPECIES);
+            species = GetMonData(&gEnemyParty[gBattlerPartyIndexes[gBattleAnimAttacker]], MON_DATA_SPECIES);
         else
-            species = GetMonData_2(&gPlayerParty[gBattlerPartyIndexes[gBattleAnimAttacker]], MON_DATA_SPECIES);
+            species = GetMonData(&gPlayerParty[gBattlerPartyIndexes[gBattleAnimAttacker]], MON_DATA_SPECIES);
     }
 
     spriteId = GetAnimBattlerSpriteId(ANIM_ATTACKER);

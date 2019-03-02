@@ -24,20 +24,20 @@ void sub_81D9DE4(u8 taskId)
     switch (gTasks[taskId].data[9])
     {
     case 0:
-        gHighestRibbonRank = GetMonData_2(&gPlayerParty[gContestMonPartyIndex], MON_DATA_COOL_RIBBON);
+        gHighestRibbonRank = GetMonData(&gPlayerParty[gContestMonPartyIndex], MON_DATA_COOL_RIBBON);
         break;
     case 1:
-        gHighestRibbonRank = GetMonData_2(&gPlayerParty[gContestMonPartyIndex], MON_DATA_BEAUTY_RIBBON);
+        gHighestRibbonRank = GetMonData(&gPlayerParty[gContestMonPartyIndex], MON_DATA_BEAUTY_RIBBON);
         break;
     case 2:
-        gHighestRibbonRank = GetMonData_2(&gPlayerParty[gContestMonPartyIndex], MON_DATA_CUTE_RIBBON);
+        gHighestRibbonRank = GetMonData(&gPlayerParty[gContestMonPartyIndex], MON_DATA_CUTE_RIBBON);
         break;
     case 3:
-        gHighestRibbonRank = GetMonData_2(&gPlayerParty[gContestMonPartyIndex], MON_DATA_SMART_RIBBON);
+        gHighestRibbonRank = GetMonData(&gPlayerParty[gContestMonPartyIndex], MON_DATA_SMART_RIBBON);
         break;
     case 4:
     default:
-        gHighestRibbonRank = GetMonData_2(&gPlayerParty[gContestMonPartyIndex], MON_DATA_TOUGH_RIBBON);
+        gHighestRibbonRank = GetMonData(&gPlayerParty[gContestMonPartyIndex], MON_DATA_TOUGH_RIBBON);
         break;
     }
 

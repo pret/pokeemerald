@@ -493,10 +493,10 @@ void SetMultiuseSpriteTemplateToTrainerFront(u16 arg0, u8 battlerPosition);
 
 // Some code erroneously omits the third arg, so these macros are used as
 // two-argument versions.
-#define GetMonData_2 ((u32 (*)(struct Pokemon*, s32))GetMonData)
-#define GetBoxMonData_2 ((u32 (*)(struct BoxPokemon*, s32))GetBoxMonData)
-u32 GetMonData(struct Pokemon *mon, s32 field, u8 *data);
-u32 GetBoxMonData(struct BoxPokemon *boxMon, s32 field, u8 *data);
+#define GetMonData ((u32 (*)(struct Pokemon*, s32))GetMonDataExtended)
+#define GetBoxMonData ((u32 (*)(struct BoxPokemon*, s32))GetBoxMonDataExtended)
+u32 GetMonDataExtended(struct Pokemon *mon, s32 field, u8 *data);
+u32 GetBoxMonDataExtended(struct BoxPokemon *boxMon, s32 field, u8 *data);
 
 void SetMonData(struct Pokemon *mon, s32 field, const void *dataArg);
 void SetBoxMonData(struct BoxPokemon *boxMon, s32 field, const void *dataArg);

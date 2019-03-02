@@ -1569,24 +1569,24 @@ static void sub_80773D0(void)
         for (i = 0; i < gUnknown_0203229C->partyCounts[0]; i++)
         {
             struct Pokemon *mon = &gPlayerParty[i];
-            gUnknown_0203229C->partyIcons[0][i] = CreateMonIcon(GetMonData_2(mon, MON_DATA_SPECIES2),
+            gUnknown_0203229C->partyIcons[0][i] = CreateMonIcon(GetMonData(mon, MON_DATA_SPECIES2),
                                                          sub_80D3014,
                                                          (gTradeMonSpriteCoords[i][0] * 8) + 14,
                                                          (gTradeMonSpriteCoords[i][1] * 8) - 12,
                                                          1,
-                                                         GetMonData_2(mon, MON_DATA_PERSONALITY),
+                                                         GetMonData(mon, MON_DATA_PERSONALITY),
                                                          TRUE);
         }
 
         for (i = 0; i < gUnknown_0203229C->partyCounts[1]; i++)
         {
             struct Pokemon *mon = &gEnemyParty[i];
-            gUnknown_0203229C->partyIcons[1][i] = CreateMonIcon(GetMonData(mon, MON_DATA_SPECIES2, NULL),
+            gUnknown_0203229C->partyIcons[1][i] = CreateMonIcon(GetMonDataExtended(mon, MON_DATA_SPECIES2, NULL),
                                                          sub_80D3014,
                                                          (gTradeMonSpriteCoords[i + PARTY_SIZE][0] * 8) + 14,
                                                          (gTradeMonSpriteCoords[i + PARTY_SIZE][1] * 8) - 12,
                                                          1,
-                                                         GetMonData_2(mon, MON_DATA_PERSONALITY),
+                                                         GetMonData(mon, MON_DATA_PERSONALITY),
                                                          FALSE);
         }
         gMain.state++;
@@ -1756,24 +1756,24 @@ static void sub_8077B74(void)
         for (i = 0; i < gUnknown_0203229C->partyCounts[0]; i++)
         {
             struct Pokemon *mon = &gPlayerParty[i];
-            gUnknown_0203229C->partyIcons[0][i] = CreateMonIcon(GetMonData(mon, MON_DATA_SPECIES2, NULL),
+            gUnknown_0203229C->partyIcons[0][i] = CreateMonIcon(GetMonDataExtended(mon, MON_DATA_SPECIES2, NULL),
                                                          sub_80D3014,
                                                          (gTradeMonSpriteCoords[i][0] * 8) + 14,
                                                          (gTradeMonSpriteCoords[i][1] * 8) - 12,
                                                          1,
-                                                         GetMonData_2(mon, MON_DATA_PERSONALITY),
+                                                         GetMonData(mon, MON_DATA_PERSONALITY),
                                                          TRUE);
         }
 
         for (i = 0; i < gUnknown_0203229C->partyCounts[1]; i++)
         {
             struct Pokemon *mon = &gEnemyParty[i];
-            gUnknown_0203229C->partyIcons[1][i] = CreateMonIcon(GetMonData(mon, MON_DATA_SPECIES2, NULL),
+            gUnknown_0203229C->partyIcons[1][i] = CreateMonIcon(GetMonDataExtended(mon, MON_DATA_SPECIES2, NULL),
                                                          sub_80D3014,
                                                          (gTradeMonSpriteCoords[i + PARTY_SIZE][0] * 8) + 14,
                                                          (gTradeMonSpriteCoords[i + PARTY_SIZE][1] * 8) - 12,
                                                          1,
-                                                         GetMonData_2(mon, MON_DATA_PERSONALITY),
+                                                         GetMonData(mon, MON_DATA_PERSONALITY),
                                                          FALSE);
         }
         gMain.state++;
@@ -2163,13 +2163,13 @@ static bool8 shedinja_maker_maybe(void)
         for (i = 0, mon = gEnemyParty; i < PARTY_SIZE; mon++, i++)
         {
             u8 name[POKEMON_NAME_LENGTH + 1];
-            u16 species = GetMonData_2(mon, MON_DATA_SPECIES);
+            u16 species = GetMonData(mon, MON_DATA_SPECIES);
 
             if (species != SPECIES_NONE)
             {
-                if (species == SPECIES_SHEDINJA && GetMonData_2(mon, MON_DATA_LANGUAGE) != LANGUAGE_JAPANESE)
+                if (species == SPECIES_SHEDINJA && GetMonData(mon, MON_DATA_LANGUAGE) != LANGUAGE_JAPANESE)
                 {
-                    GetMonData(mon, MON_DATA_NICKNAME, name);
+                    GetMonDataExtended(mon, MON_DATA_NICKNAME, name);
 
                     if (!StringCompareWithoutExtCtrlCodes(name, gJPText_Shedinja))
                     {
@@ -2570,11 +2570,11 @@ static u8 sub_80790D4(u8 *a0, u8 a1, u8 a2, u8 a3)
     }
 
     a3 %= PARTY_SIZE;
-    species = GetMonData_2(&gEnemyParty[a3], MON_DATA_SPECIES);
+    species = GetMonData(&gEnemyParty[a3], MON_DATA_SPECIES);
 
     if (species == SPECIES_DEOXYS || species == SPECIES_MEW)
     {
-        if (!GetMonData_2(&gEnemyParty[a3], MON_DATA_OBEDIENCE))
+        if (!GetMonData(&gEnemyParty[a3], MON_DATA_OBEDIENCE))
         {
             return 2;
         }
@@ -2940,9 +2940,9 @@ static u8 sub_8079A3C(u8 *str, u8 whichParty, u8 monIdx)
     u8 nickname[12];
 
     if (whichParty == 0)
-        GetMonData(&gPlayerParty[monIdx], MON_DATA_NICKNAME, nickname);
+        GetMonDataExtended(&gPlayerParty[monIdx], MON_DATA_NICKNAME, nickname);
     else
-        GetMonData(&gEnemyParty[monIdx], MON_DATA_NICKNAME, nickname);
+        GetMonDataExtended(&gEnemyParty[monIdx], MON_DATA_NICKNAME, nickname);
 
     StringCopy10(str, nickname);
     return GetStringWidth(0, str, GetFontAttribute(0, FONTATTR_LETTER_SPACING));
@@ -2959,11 +2959,11 @@ static void sub_8079AA4(u8 *a0, u8 a1, u8 a2)
         {
             if (!a1)
             {
-                arr[i] = GetMonData(&gPlayerParty[a2], i + MON_DATA_MOVE1, NULL);
+                arr[i] = GetMonDataExtended(&gPlayerParty[a2], i + MON_DATA_MOVE1, NULL);
             }
             else
             {
-                arr[i] = GetMonData(&gEnemyParty[a2], i + MON_DATA_MOVE1, NULL);
+                arr[i] = GetMonDataExtended(&gEnemyParty[a2], i + MON_DATA_MOVE1, NULL);
             }
         }
 
@@ -3005,7 +3005,7 @@ static void sub_8079BE0(u8 whichParty)
 
     for (i = 0; i < gUnknown_0203229C->partyCounts[whichParty]; i++)
     {
-        GetMonData(&mons[i], MON_DATA_NICKNAME, sp);
+        GetMonDataExtended(&mons[i], MON_DATA_NICKNAME, sp);
         StringCopy10(sp14, sp);
         sub_8079B84(whichParty, i, sp14);
     }
@@ -3022,9 +3022,9 @@ static void sub_8079C4C(u8 whichParty, u8 monIdx, u8 a2, u8 a3, u8 a4, u8 a5)
     CopyBgTilemapBufferToVram(1);
 
     if (whichParty == 0)
-        level = GetMonData(&gPlayerParty[monIdx], MON_DATA_LEVEL, NULL);
+        level = GetMonDataExtended(&gPlayerParty[monIdx], MON_DATA_LEVEL, NULL);
     else
-        level = GetMonData(&gEnemyParty[monIdx], MON_DATA_LEVEL, NULL);
+        level = GetMonDataExtended(&gEnemyParty[monIdx], MON_DATA_LEVEL, NULL);
 
     if (gUnknown_0203229C->unk_51[whichParty][monIdx] == 0)
     {
@@ -3048,12 +3048,12 @@ static void sub_8079C4C(u8 whichParty, u8 monIdx, u8 a2, u8 a3, u8 a4, u8 a5)
         if (whichParty == 0)
         {
             gender = GetMonGender(&gPlayerParty[monIdx]);
-            GetMonData(&gPlayerParty[monIdx], MON_DATA_NICKNAME, nickname);
+            GetMonDataExtended(&gPlayerParty[monIdx], MON_DATA_NICKNAME, nickname);
         }
         else
         {
             gender = GetMonGender(&gEnemyParty[monIdx]);
-            GetMonData(&gEnemyParty[monIdx], MON_DATA_NICKNAME, nickname);
+            GetMonDataExtended(&gEnemyParty[monIdx], MON_DATA_NICKNAME, nickname);
         }
 
         switch (gender)
@@ -3322,12 +3322,12 @@ static void sub_807A320(u8 who)
         case 0:
             for (i = 0; i < gUnknown_0203229C->partyCounts[who]; i++)
             {
-                if (GetMonData_2(&gPlayerParty[i], MON_DATA_IS_EGG) == TRUE)
+                if (GetMonData(&gPlayerParty[i], MON_DATA_IS_EGG) == TRUE)
                 {
                     gUnknown_0203229C->unk_45[who][i] = 0;
                     gUnknown_0203229C->unk_51[who][i] = 1;
                 }
-                else if (GetMonData_2(&gPlayerParty[i], MON_DATA_HP) == 0)
+                else if (GetMonData(&gPlayerParty[i], MON_DATA_HP) == 0)
                 {
                     gUnknown_0203229C->unk_45[who][i] = 0;
                     gUnknown_0203229C->unk_51[who][i] = 0;
@@ -3342,12 +3342,12 @@ static void sub_807A320(u8 who)
         case 1:
             for (i = 0; i < gUnknown_0203229C->partyCounts[who]; i++)
             {
-                if (GetMonData_2(&gEnemyParty[i], MON_DATA_IS_EGG) == TRUE)
+                if (GetMonData(&gEnemyParty[i], MON_DATA_IS_EGG) == TRUE)
                 {
                     gUnknown_0203229C->unk_45[who][i] = 0;
                     gUnknown_0203229C->unk_51[who][i] = 1;
                 }
-                else if (GetMonData_2(&gEnemyParty[i], MON_DATA_HP) == 0)
+                else if (GetMonData(&gEnemyParty[i], MON_DATA_HP) == 0)
                 {
                     gUnknown_0203229C->unk_45[who][i] = 0;
                     gUnknown_0203229C->unk_51[who][i] = 0;
@@ -3371,16 +3371,16 @@ static void sub_807A468(u8 who)
         case 0:
             for (i = 0; i < gUnknown_0203229C->partyCounts[0]; i++)
             {
-                curHp = GetMonData_2(&gPlayerParty[i], MON_DATA_HP);
-                maxHp = GetMonData_2(&gPlayerParty[i], MON_DATA_MAX_HP);
+                curHp = GetMonData(&gPlayerParty[i], MON_DATA_HP);
+                maxHp = GetMonData(&gPlayerParty[i], MON_DATA_MAX_HP);
                 gUnknown_0203229C->unk_5D[0][i] = GetHPBarLevel(curHp, maxHp);
             }
             break;
         case 1:
             for (i = 0; i < gUnknown_0203229C->partyCounts[1]; i++)
             {
-                curHp = GetMonData_2(&gEnemyParty[i], MON_DATA_HP);
-                maxHp = GetMonData_2(&gEnemyParty[i], MON_DATA_MAX_HP);
+                curHp = GetMonData(&gEnemyParty[i], MON_DATA_HP);
+                maxHp = GetMonData(&gEnemyParty[i], MON_DATA_MAX_HP);
                 gUnknown_0203229C->unk_5D[1][i] = GetHPBarLevel(curHp, maxHp);
             }
             break;
@@ -3423,8 +3423,8 @@ static u32 sub_807A5F4(struct Pokemon *monList, int a1, int monIdx)
 
     for (i = 0; i < a1; i++)
     {
-        species2[i] = GetMonData_2(&monList[i], MON_DATA_SPECIES2);
-        species[i] = GetMonData_2(&monList[i], MON_DATA_SPECIES);
+        species2[i] = GetMonData(&monList[i], MON_DATA_SPECIES2);
+        species[i] = GetMonData(&monList[i], MON_DATA_SPECIES);
     }
 
     if (!IsNationalPokedexEnabled())
@@ -3460,7 +3460,7 @@ static u32 sub_807A5F4(struct Pokemon *monList, int a1, int monIdx)
 
     if (species[monIdx] == SPECIES_DEOXYS || species[monIdx] == SPECIES_MEW)
     {
-        if (!GetMonData_2(&monList[monIdx], MON_DATA_OBEDIENCE))
+        if (!GetMonData(&monList[monIdx], MON_DATA_OBEDIENCE))
         {
             return 4;
         }
@@ -3654,7 +3654,7 @@ int sub_807A918(struct Pokemon *mon, u16 monIdx)
 
     for (i = 0; i < gPlayerPartyCount; i++)
     {
-        speciesArray[i] = GetMonData_2(&mon[i], MON_DATA_SPECIES2);
+        speciesArray[i] = GetMonData(&mon[i], MON_DATA_SPECIES2);
         if (speciesArray[i] == SPECIES_EGG)
         {
             speciesArray[i] = 0;
@@ -3745,7 +3745,7 @@ _0807A934:\n\
 	muls r0, r5\n\
 	adds r0, r6, r0\n\
 	movs r1, 0x41\n\
-	bl GetMonData\n\
+	bl GetMonDataExtended\n\
 	str r0, [r4]\n\
 	movs r1, 0xCE\n\
 	lsls r1, 1\n\
@@ -4024,8 +4024,8 @@ static void sub_807ACFC(u8 whichParty, u8 a1)
     switch (a1)
     {
         case 0:
-            species = GetMonData_2(mon, MON_DATA_SPECIES2);
-            personality = GetMonData_2(mon, MON_DATA_PERSONALITY);
+            species = GetMonData(mon, MON_DATA_SPECIES2);
+            personality = GetMonData(mon, MON_DATA_PERSONALITY);
 
             if (whichParty == 0)
                 HandleLoadSpecialPokePic_2(&gMonFrontPicTable[species], gMonSpritesGfxPtr->sprites[1], species, personality);
@@ -4223,10 +4223,10 @@ static void sub_807B270(void)
             gUnknown_02032298[0] = gSpecialVar_0x8005;
             gUnknown_02032298[1] = 6;
             StringCopy(gLinkPlayers[0].name, gSaveBlock2Ptr->playerName);
-            GetMonData(&gEnemyParty[0], MON_DATA_OT_NAME, otName);
+            GetMonDataExtended(&gEnemyParty[0], MON_DATA_OT_NAME, otName);
             StringCopy(gLinkPlayers[1].name, otName);
             gLinkPlayers[0].language = LANGUAGE_ENGLISH;
-            gLinkPlayers[1].language = GetMonData_2(&gEnemyParty[0], MON_DATA_LANGUAGE);
+            gLinkPlayers[1].language = GetMonData(&gEnemyParty[0], MON_DATA_LANGUAGE);
             gUnknown_020322A0 = AllocZeroed(sizeof(*gUnknown_020322A0));
             AllocateMonSpritesGfx();
             ResetTasks();
@@ -4300,10 +4300,10 @@ static void sub_807B464(u8 partyIdx)
 {
     struct Pokemon *mon = &gPlayerParty[partyIdx];
 
-    if (!GetMonData_2(mon, MON_DATA_IS_EGG))
+    if (!GetMonData(mon, MON_DATA_IS_EGG))
     {
-        u16 species = GetMonData(mon, MON_DATA_SPECIES, NULL);
-        u32 personality = GetMonData(mon, MON_DATA_PERSONALITY, NULL);
+        u16 species = GetMonDataExtended(mon, MON_DATA_SPECIES, NULL);
+        u32 personality = GetMonDataExtended(mon, MON_DATA_PERSONALITY, NULL);
         species = SpeciesToNationalPokedexNum(species);
         GetSetPokedexFlag(species, FLAG_SET_SEEN);
         HandleSetPokedexFlag(species, FLAG_SET_CAUGHT, personality);
@@ -4323,10 +4323,10 @@ static void sub_807B4D0(u8 a0, u8 a1)
     u8 friendship;
 
     struct Pokemon *playerMon = &gPlayerParty[a0];
-    u16 playerMail = GetMonData_2(playerMon, MON_DATA_MAIL);
+    u16 playerMail = GetMonData(playerMon, MON_DATA_MAIL);
 
     struct Pokemon *partnerMon = &gEnemyParty[a1];
-    u16 partnerMail = GetMonData_2(partnerMon, MON_DATA_MAIL);
+    u16 partnerMail = GetMonData(partnerMon, MON_DATA_MAIL);
 
     if (playerMail != 0xFF)
         ClearMailStruct(&gSaveBlock1Ptr->mail[playerMail]);
@@ -4337,7 +4337,7 @@ static void sub_807B4D0(u8 a0, u8 a1)
     *partnerMon = gUnknown_020322A0->mon;
 
     friendship = 70;
-    if (!GetMonData_2(playerMon, MON_DATA_IS_EGG))
+    if (!GetMonData(playerMon, MON_DATA_IS_EGG))
         SetMonData(playerMon, MON_DATA_FRIENDSHIP, &friendship);
 
     if (partnerMail != 0xFF)
@@ -4559,9 +4559,9 @@ static void SetTradeSceneStrings(void)
     {
         mpId = GetMultiplayerId();
         StringCopy(gStringVar1, gLinkPlayers[mpId ^ 1].name);
-        GetMonData(&gEnemyParty[gUnknown_02032298[1] % PARTY_SIZE], MON_DATA_NICKNAME, name);
+        GetMonDataExtended(&gEnemyParty[gUnknown_02032298[1] % PARTY_SIZE], MON_DATA_NICKNAME, name);
         StringCopy10(gStringVar3, name);
-        GetMonData(&gPlayerParty[gUnknown_02032298[0]], MON_DATA_NICKNAME, name);
+        GetMonDataExtended(&gPlayerParty[gUnknown_02032298[0]], MON_DATA_NICKNAME, name);
         StringCopy10(gStringVar2, name);
     }
     else
@@ -4569,7 +4569,7 @@ static void SetTradeSceneStrings(void)
         ingameTrade = &gIngameTrades[gSpecialVar_0x8004];
         StringCopy(gStringVar1, ingameTrade->otName);
         StringCopy10(gStringVar3, ingameTrade->name);
-        GetMonData(&gPlayerParty[gSpecialVar_0x8005], MON_DATA_NICKNAME, name);
+        GetMonDataExtended(&gPlayerParty[gSpecialVar_0x8005], MON_DATA_NICKNAME, name);
         StringCopy10(gStringVar2, name);
     }
 }
@@ -5735,7 +5735,7 @@ static void sub_807E784(void)
 {
     u8 nickname[32];
     const struct InGameTrade *inGameTrade = &gIngameTrades[gSpecialVar_0x8004];
-    GetMonData(&gPlayerParty[gSpecialVar_0x8005], MON_DATA_NICKNAME, nickname);
+    GetMonDataExtended(&gPlayerParty[gSpecialVar_0x8005], MON_DATA_NICKNAME, nickname);
     StringCopy10(gStringVar1, nickname);
     StringCopy(gStringVar2, gSpeciesNames[inGameTrade->species]);
 }
@@ -5743,7 +5743,7 @@ static void sub_807E784(void)
 static void _CreateInGameTradePokemon(u8 whichPlayerMon, u8 whichInGameTrade)
 {
     const struct InGameTrade *inGameTrade = &gIngameTrades[whichInGameTrade];
-    u8 level = GetMonData_2(&gPlayerParty[whichPlayerMon], MON_DATA_LEVEL);
+    u8 level = GetMonData(&gPlayerParty[whichPlayerMon], MON_DATA_LEVEL);
 
     struct MailStruct mail;
     u8 metLocation = 0xFE;
@@ -5809,9 +5809,9 @@ static void sub_807E974(struct MailStruct *mail, const struct InGameTrade *trade
 
 u16 GetTradeSpecies(void)
 {
-    if (GetMonData_2(&gPlayerParty[gSpecialVar_0x8005], MON_DATA_IS_EGG))
+    if (GetMonData(&gPlayerParty[gSpecialVar_0x8005], MON_DATA_IS_EGG))
         return SPECIES_NONE;
-    return GetMonData_2(&gPlayerParty[gSpecialVar_0x8005], MON_DATA_SPECIES);
+    return GetMonData(&gPlayerParty[gSpecialVar_0x8005], MON_DATA_SPECIES);
 }
 
 void CreateInGameTradePokemon(void)
@@ -6072,7 +6072,7 @@ static void sub_807F14C(void)
     u8 numRibbons = 0;
     for (i = 0; i < 12; i ++)
     {
-        numRibbons += GetMonData_2(&gEnemyParty[gUnknown_02032298[1] % 6], MON_DATA_CHAMPION_RIBBON + i);
+        numRibbons += GetMonData(&gEnemyParty[gUnknown_02032298[1] % 6], MON_DATA_CHAMPION_RIBBON + i);
     }
     if (numRibbons != 0)
         FlagSet(FLAG_SYS_RIBBON_GET);

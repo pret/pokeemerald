@@ -2051,29 +2051,29 @@ void sub_80DA8C8(u8 partyIndex)
         gContestMons[gContestPlayerMonIndex].trainerGfxId = EVENT_OBJ_GFX_LINK_MAY;
     gContestMons[gContestPlayerMonIndex].flags = 0;
     gContestMons[gContestPlayerMonIndex].unk2C[0] = 0;
-    gContestMons[gContestPlayerMonIndex].species = GetMonData_2(&gPlayerParty[partyIndex], MON_DATA_SPECIES);
-    GetMonData(&gPlayerParty[partyIndex], MON_DATA_NICKNAME, name);
+    gContestMons[gContestPlayerMonIndex].species = GetMonData(&gPlayerParty[partyIndex], MON_DATA_SPECIES);
+    GetMonDataExtended(&gPlayerParty[partyIndex], MON_DATA_NICKNAME, name);
     StringGetEnd10(name);
     if (gIsLinkContest & 1)
     {
-        sub_80DF9E0(name, GetMonData_2(&gPlayerParty[partyIndex], MON_DATA_LANGUAGE));
+        sub_80DF9E0(name, GetMonData(&gPlayerParty[partyIndex], MON_DATA_LANGUAGE));
     }
     memcpy(gContestMons[gContestPlayerMonIndex].nickname, name, POKEMON_NAME_LENGTH + 1);
     StringCopy(gContestMons[gContestPlayerMonIndex].nickname, name);
-    gContestMons[gContestPlayerMonIndex].cool = GetMonData_2(&gPlayerParty[partyIndex], MON_DATA_COOL);
-    gContestMons[gContestPlayerMonIndex].beauty = GetMonData_2(&gPlayerParty[partyIndex], MON_DATA_BEAUTY);
-    gContestMons[gContestPlayerMonIndex].cute = GetMonData_2(&gPlayerParty[partyIndex], MON_DATA_CUTE);
-    gContestMons[gContestPlayerMonIndex].smart = GetMonData_2(&gPlayerParty[partyIndex], MON_DATA_SMART);
-    gContestMons[gContestPlayerMonIndex].tough = GetMonData_2(&gPlayerParty[partyIndex], MON_DATA_TOUGH);
-    gContestMons[gContestPlayerMonIndex].sheen = GetMonData_2(&gPlayerParty[partyIndex], MON_DATA_SHEEN);
-    gContestMons[gContestPlayerMonIndex].moves[0] = GetMonData_2(&gPlayerParty[partyIndex], MON_DATA_MOVE1);
-    gContestMons[gContestPlayerMonIndex].moves[1] = GetMonData_2(&gPlayerParty[partyIndex], MON_DATA_MOVE2);
-    gContestMons[gContestPlayerMonIndex].moves[2] = GetMonData_2(&gPlayerParty[partyIndex], MON_DATA_MOVE3);
-    gContestMons[gContestPlayerMonIndex].moves[3] = GetMonData_2(&gPlayerParty[partyIndex], MON_DATA_MOVE4);
-    gContestMons[gContestPlayerMonIndex].personality = GetMonData_2(&gPlayerParty[partyIndex], MON_DATA_PERSONALITY);
-    gContestMons[gContestPlayerMonIndex].otId = GetMonData_2(&gPlayerParty[partyIndex], MON_DATA_OT_ID);
+    gContestMons[gContestPlayerMonIndex].cool = GetMonData(&gPlayerParty[partyIndex], MON_DATA_COOL);
+    gContestMons[gContestPlayerMonIndex].beauty = GetMonData(&gPlayerParty[partyIndex], MON_DATA_BEAUTY);
+    gContestMons[gContestPlayerMonIndex].cute = GetMonData(&gPlayerParty[partyIndex], MON_DATA_CUTE);
+    gContestMons[gContestPlayerMonIndex].smart = GetMonData(&gPlayerParty[partyIndex], MON_DATA_SMART);
+    gContestMons[gContestPlayerMonIndex].tough = GetMonData(&gPlayerParty[partyIndex], MON_DATA_TOUGH);
+    gContestMons[gContestPlayerMonIndex].sheen = GetMonData(&gPlayerParty[partyIndex], MON_DATA_SHEEN);
+    gContestMons[gContestPlayerMonIndex].moves[0] = GetMonData(&gPlayerParty[partyIndex], MON_DATA_MOVE1);
+    gContestMons[gContestPlayerMonIndex].moves[1] = GetMonData(&gPlayerParty[partyIndex], MON_DATA_MOVE2);
+    gContestMons[gContestPlayerMonIndex].moves[2] = GetMonData(&gPlayerParty[partyIndex], MON_DATA_MOVE3);
+    gContestMons[gContestPlayerMonIndex].moves[3] = GetMonData(&gPlayerParty[partyIndex], MON_DATA_MOVE4);
+    gContestMons[gContestPlayerMonIndex].personality = GetMonData(&gPlayerParty[partyIndex], MON_DATA_PERSONALITY);
+    gContestMons[gContestPlayerMonIndex].otId = GetMonData(&gPlayerParty[partyIndex], MON_DATA_OT_ID);
 
-    heldItem = GetMonData_2(&gPlayerParty[partyIndex], MON_DATA_HELD_ITEM);
+    heldItem = GetMonData(&gPlayerParty[partyIndex], MON_DATA_HELD_ITEM);
     cool   = gContestMons[gContestPlayerMonIndex].cool;
     beauty = gContestMons[gContestPlayerMonIndex].beauty;
     cute   = gContestMons[gContestPlayerMonIndex].cute;
@@ -2215,26 +2215,26 @@ u8 sub_80DAE0C(struct Pokemon *pkmn)
     u8 ribbon;
     u8 retVal;
 
-    if (GetMonData_2(pkmn, MON_DATA_IS_EGG))
+    if (GetMonData(pkmn, MON_DATA_IS_EGG))
         return 3;
-    if (GetMonData_2(pkmn, MON_DATA_HP) == 0)
+    if (GetMonData(pkmn, MON_DATA_HP) == 0)
         return 4;
     switch (gSpecialVar_ContestCategory)
     {
     case CONTEST_CATEGORY_COOL:
-        ribbon = GetMonData_2(pkmn, MON_DATA_COOL_RIBBON);
+        ribbon = GetMonData(pkmn, MON_DATA_COOL_RIBBON);
         break;
     case CONTEST_CATEGORY_BEAUTY:
-        ribbon = GetMonData_2(pkmn, MON_DATA_BEAUTY_RIBBON);
+        ribbon = GetMonData(pkmn, MON_DATA_BEAUTY_RIBBON);
         break;
     case CONTEST_CATEGORY_CUTE:
-        ribbon = GetMonData_2(pkmn, MON_DATA_CUTE_RIBBON);
+        ribbon = GetMonData(pkmn, MON_DATA_CUTE_RIBBON);
         break;
     case CONTEST_CATEGORY_SMART:
-        ribbon = GetMonData_2(pkmn, MON_DATA_SMART_RIBBON);
+        ribbon = GetMonData(pkmn, MON_DATA_SMART_RIBBON);
         break;
     case CONTEST_CATEGORY_TOUGH:
-        ribbon = GetMonData_2(pkmn, MON_DATA_TOUGH_RIBBON);
+        ribbon = GetMonData(pkmn, MON_DATA_TOUGH_RIBBON);
         break;
     default:
         return 0;

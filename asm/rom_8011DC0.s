@@ -2147,7 +2147,7 @@ _08017D14:
 	ldr r1, =gPlayerParty
 	adds r0, r1
 	movs r1, 0x41
-	bl GetMonData
+	bl GetMonDataExtended
 	adds r1, r0, 0
 	movs r0, 0xCE
 	lsls r0, 1
@@ -2175,7 +2175,7 @@ _08017D50:
 	ldr r1, =gPlayerParty
 	adds r0, r1
 	movs r1, 0x41
-	bl GetMonData
+	bl GetMonDataExtended
 	adds r1, r0, 0
 	lsls r0, r1, 3
 	subs r0, r1
@@ -2538,12 +2538,12 @@ _08018032:
 	adds r4, r1, r0
 	adds r0, r4, 0
 	movs r1, 0x38
-	bl GetMonData
+	bl GetMonDataExtended
 	cmp r0, 0x1E
 	bhi _0801805A
 	adds r0, r4, 0
 	movs r1, 0x41
-	bl GetMonData
+	bl GetMonDataExtended
 	movs r1, 0xCE
 	lsls r1, 1
 	cmp r0, r1
@@ -2604,15 +2604,15 @@ sub_80180A0: @ 80180A0
 	adds r4, r0
 	adds r0, r4, 0
 	movs r1, 0x41
-	bl GetMonData
+	bl GetMonDataExtended
 	strh r0, [r5, 0xA]
 	adds r0, r4, 0
 	movs r1, 0x38
-	bl GetMonData
+	bl GetMonDataExtended
 	strh r0, [r5, 0xC]
 	adds r0, r4, 0
 	movs r1, 0
-	bl GetMonData
+	bl GetMonDataExtended
 	str r0, [r5, 0x4]
 	ldrh r1, [r5, 0xA]
 	movs r0, 0xCE
@@ -2641,15 +2641,15 @@ sub_80180E8: @ 80180E8
 	adds r4, r0
 	adds r0, r4, 0
 	movs r1, 0x41
-	bl GetMonData
+	bl GetMonDataExtended
 	strh r0, [r5, 0xE]
 	adds r0, r4, 0
 	movs r1, 0x38
-	bl GetMonData
+	bl GetMonDataExtended
 	strh r0, [r5, 0x10]
 	adds r0, r4, 0
 	movs r1, 0
-	bl GetMonData
+	bl GetMonDataExtended
 	str r0, [r5, 0x14]
 	pop {r4,r5}
 	pop {r0}
@@ -2689,12 +2689,12 @@ _08018146:
 	adds r4, r1, r0
 	adds r0, r4, 0
 	movs r1, 0
-	bl GetMonData
+	bl GetMonDataExtended
 	cmp r0, r6
 	bne _0801816C
 	adds r0, r4, 0
 	movs r1, 0x41
-	bl GetMonData
+	bl GetMonDataExtended
 	lsls r0, 16
 	lsrs r0, 16
 	cmp r0, r7
@@ -33640,12 +33640,12 @@ _08027A62:
 	adds r4, r1, r0
 	adds r0, r4, 0
 	movs r1, 0x5
-	bl GetMonData
+	bl GetMonDataExtended
 	cmp r0, 0
 	beq _08027A94
 	adds r0, r4, 0
 	movs r1, 0x41
-	bl GetMonData
+	bl GetMonDataExtended
 	cmp r0, 0x55
 	bne _08027A94
 	movs r0, 0x1
@@ -39560,15 +39560,15 @@ sub_802AC2C: @ 802AC2C
 	adds r4, r1, 0
 	adds r0, r4, 0
 	movs r1, 0xB
-	bl GetMonData
+	bl GetMonDataExtended
 	strh r0, [r5]
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl GetMonData
+	bl GetMonDataExtended
 	str r0, [r5, 0x4]
 	adds r0, r4, 0
 	movs r1, 0
-	bl GetMonData
+	bl GetMonDataExtended
 	str r0, [r5, 0x8]
 	pop {r4,r5}
 	pop {r0}
@@ -43292,12 +43292,12 @@ _0802C924:
 	adds r4, r1, r0
 	adds r0, r4, 0
 	movs r1, 0x5
-	bl GetMonData
+	bl GetMonDataExtended
 	cmp r0, 0
 	beq _0802C95C
 	adds r0, r4, 0
 	movs r1, 0x41
-	bl GetMonData
+	bl GetMonDataExtended
 	lsls r0, 16
 	lsrs r0, 16
 	bl sub_802C908

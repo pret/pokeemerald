@@ -2032,10 +2032,10 @@ static void sub_81A3FD4(void)
         count = 0;
         do
         {
-            u16 species = GetMonData_2(&gPlayerParty[monId], MON_DATA_SPECIES2);
-            u16 heldItem = GetMonData_2(&gPlayerParty[monId], MON_DATA_HELD_ITEM);
-            u8 level = GetMonData_2(&gPlayerParty[monId], MON_DATA_LEVEL);
-            u16 hp = GetMonData_2(&gPlayerParty[monId], MON_DATA_HP);
+            u16 species = GetMonData(&gPlayerParty[monId], MON_DATA_SPECIES2);
+            u16 heldItem = GetMonData(&gPlayerParty[monId], MON_DATA_HELD_ITEM);
+            u8 level = GetMonData(&gPlayerParty[monId], MON_DATA_LEVEL);
+            u16 hp = GetMonData(&gPlayerParty[monId], MON_DATA_HP);
             if (VarGet(VAR_FRONTIER_FACILITY) == FRONTIER_FACILITY_PYRAMID)
             {
                 if (heldItem == 0)
@@ -2151,7 +2151,7 @@ static void sub_81A43A8(void)
     {
         if (gSaveBlock2Ptr->frontier.selectedPartyMons[i] != 0)
         {
-            u16 item = GetMonData(&gSaveBlock1Ptr->playerParty[gSaveBlock2Ptr->frontier.selectedPartyMons[i] - 1], MON_DATA_HELD_ITEM, NULL);
+            u16 item = GetMonDataExtended(&gSaveBlock1Ptr->playerParty[gSaveBlock2Ptr->frontier.selectedPartyMons[i] - 1], MON_DATA_HELD_ITEM, NULL);
             SetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM, &item);
         }
     }
@@ -2189,8 +2189,8 @@ static void sub_81A447C(void)
             {
                 for (k = 0; k < MAX_MON_MOVES; k++)
                 {
-                    if (GetMonData(&gSaveBlock1Ptr->playerParty[gSaveBlock2Ptr->frontier.selectedPartyMons[i] - 1], MON_DATA_MOVE1 + k, NULL)
-                        == GetMonData(&gPlayerParty[i], MON_DATA_MOVE1 + j, NULL))
+                    if (GetMonDataExtended(&gSaveBlock1Ptr->playerParty[gSaveBlock2Ptr->frontier.selectedPartyMons[i] - 1], MON_DATA_MOVE1 + k, NULL)
+                        == GetMonDataExtended(&gPlayerParty[i], MON_DATA_MOVE1 + j, NULL))
                         break;
                 }
                 if (k == MAX_MON_MOVES)

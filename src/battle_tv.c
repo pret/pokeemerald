@@ -258,7 +258,7 @@ void BattleTv_SetDataBasedOnString(u16 stringId)
         break;
     case STRINGID_NOTVERYEFFECTIVE:
         AddMovePoints(1, moveSlot, 1, 0);
-        if (!(gBattleTypeFlags & BATTLE_TYPE_LINK) && GetMonData(defMon, MON_DATA_HP, NULL) != 0)
+        if (!(gBattleTypeFlags & BATTLE_TYPE_LINK) && GetMonDataExtended(defMon, MON_DATA_HP, NULL) != 0)
             TrySetBattleSeminarShow();
         break;
     case STRINGID_SUPEREFFECTIVE:
@@ -374,7 +374,7 @@ void BattleTv_SetDataBasedOnString(u16 stringId)
         tvPtr->pos[defSide][defFlank].curseMoveSlot = moveSlot;
         break;
     case STRINGID_PKMNAFFLICTEDBYCURSE:
-        if (GetMonData(atkMon, MON_DATA_HP, NULL)
+        if (GetMonDataExtended(atkMon, MON_DATA_HP, NULL)
             && tvPtr->pos[atkSide][atkFlank].curseMonId != 0)
         {
             AddMovePoints(8, 0, tvPtr->pos[atkSide][atkFlank].curseMonId - 1, tvPtr->pos[atkSide][atkFlank].curseMoveSlot);
@@ -399,7 +399,7 @@ void BattleTv_SetDataBasedOnString(u16 stringId)
         tvPtr->pos[defSide][defFlank].nightmareMoveSlot = moveSlot;
         break;
     case STRINGID_PKMNLOCKEDINNIGHTMARE:
-        if (GetMonData(atkMon, MON_DATA_HP, NULL) != 0
+        if (GetMonDataExtended(atkMon, MON_DATA_HP, NULL) != 0
             && tvPtr->pos[atkSide][atkFlank].nightmareMonId != 0)
         {
             AddMovePoints(8, 5, tvPtr->pos[atkSide][atkFlank].nightmareMonId - 1, tvPtr->pos[atkSide][atkFlank].nightmareMoveSlot);
@@ -416,7 +416,7 @@ void BattleTv_SetDataBasedOnString(u16 stringId)
         tvPtr->pos[defSide][defFlank].wrapMoveSlot = moveSlot;
         break;
     case STRINGID_PKMNHURTBY:
-        if (GetMonData(atkMon, MON_DATA_HP, NULL) != 0
+        if (GetMonDataExtended(atkMon, MON_DATA_HP, NULL) != 0
             && tvPtr->pos[atkSide][atkFlank].wrapMonId != 0)
         {
             AddMovePoints(8, 6, tvPtr->pos[atkSide][atkFlank].wrapMonId - 1, tvPtr->pos[atkSide][atkFlank].wrapMoveSlot);
@@ -429,7 +429,7 @@ void BattleTv_SetDataBasedOnString(u16 stringId)
         tvPtr->mon[effSide][gBattlerPartyIndexes[gEffectBattler]].brnMoveSlot = moveSlot;
         break;
     case STRINGID_PKMNHURTBYBURN:
-        if (GetMonData(atkMon, MON_DATA_HP, NULL) != 0)
+        if (GetMonDataExtended(atkMon, MON_DATA_HP, NULL) != 0)
         {
             if (tvPtr->mon[atkSide][gBattlerPartyIndexes[gBattlerAttacker]].brnMonId != 0)
                 AddMovePoints(8, 4, tvPtr->mon[atkSide][gBattlerPartyIndexes[gBattlerAttacker]].brnMonId - 1, tvPtr->mon[atkSide][gBattlerPartyIndexes[gBattlerAttacker]].brnMoveSlot);
@@ -446,7 +446,7 @@ void BattleTv_SetDataBasedOnString(u16 stringId)
         tvPtr->mon[effSide][gBattlerPartyIndexes[gEffectBattler]].badPsnMoveSlot = moveSlot;
         break;
     case STRINGID_PKMNHURTBYPOISON:
-        if (GetMonData(atkMon, MON_DATA_HP, NULL) != 0)
+        if (GetMonDataExtended(atkMon, MON_DATA_HP, NULL) != 0)
         {
             if (tvPtr->mon[atkSide][gBattlerPartyIndexes[gBattlerAttacker]].psnMonId != 0)
                 AddMovePoints(8, 2, tvPtr->mon[atkSide][gBattlerPartyIndexes[gBattlerAttacker]].psnMonId - 1, tvPtr->mon[atkSide][gBattlerPartyIndexes[gBattlerAttacker]].psnMoveSlot);
@@ -732,9 +732,9 @@ void TryPutLinkBattleTvShowOnAir(void)
     movePoints = &gBattleStruct->tvMovePoints;
     for (i = 0; i < PARTY_SIZE; i++)
     {
-        if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES, NULL) != SPECIES_NONE)
+        if (GetMonDataExtended(&gPlayerParty[i], MON_DATA_SPECIES, NULL) != SPECIES_NONE)
             countPlayer++;
-        if (GetMonData(&gEnemyParty[i], MON_DATA_SPECIES, NULL) != SPECIES_NONE)
+        if (GetMonDataExtended(&gEnemyParty[i], MON_DATA_SPECIES, NULL) != SPECIES_NONE)
             countOpponent++;
     }
 
@@ -743,8 +743,8 @@ void TryPutLinkBattleTvShowOnAir(void)
 
     for (i = 0; i < PARTY_SIZE; i++)
     {
-        species = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES, NULL);
-        if (species != SPECIES_NONE && !GetMonData(&gPlayerParty[i], MON_DATA_IS_EGG, NULL))
+        species = GetMonDataExtended(&gPlayerParty[i], MON_DATA_SPECIES, NULL);
+        if (species != SPECIES_NONE && !GetMonDataExtended(&gPlayerParty[i], MON_DATA_IS_EGG, NULL))
         {
             for (sum = 0, j = 0; j < MAX_MON_MOVES; j++)
                 sum += movePoints->points[0][i * 4 + j];
@@ -757,15 +757,15 @@ void TryPutLinkBattleTvShowOnAir(void)
             }
         }
 
-        species = GetMonData(&gEnemyParty[i], MON_DATA_SPECIES, NULL);
-        if (species != SPECIES_NONE && !GetMonData(&gEnemyParty[i], MON_DATA_IS_EGG, NULL))
+        species = GetMonDataExtended(&gEnemyParty[i], MON_DATA_SPECIES, NULL);
+        if (species != SPECIES_NONE && !GetMonDataExtended(&gEnemyParty[i], MON_DATA_IS_EGG, NULL))
         {
             for (sum = 0, j = 0; j < MAX_MON_MOVES; j++)
                 sum += movePoints->points[1][i * 4 + j];
 
             if (opponentBestSum == sum)
             {
-                if (GetMonData(&gEnemyParty[i], MON_DATA_EXP, NULL) > GetMonData(&gEnemyParty[opponentBestMonId], MON_DATA_EXP, NULL))
+                if (GetMonDataExtended(&gEnemyParty[i], MON_DATA_EXP, NULL) > GetMonDataExtended(&gEnemyParty[opponentBestMonId], MON_DATA_EXP, NULL))
                 {
                     opponentBestMonId = i;
                     opponentBestSum = sum;
@@ -790,7 +790,7 @@ void TryPutLinkBattleTvShowOnAir(void)
         }
     }
 
-    moveId = GetMonData(&gPlayerParty[playerBestMonId], MON_DATA_MOVE1 + i, NULL);
+    moveId = GetMonDataExtended(&gPlayerParty[playerBestMonId], MON_DATA_MOVE1 + i, NULL);
     if (playerBestSum == 0 || moveId == 0)
         return;
 
@@ -855,7 +855,7 @@ _0817E434:\n\
     adds r0, r4, r0\n\
     movs r1, 0xB\n\
     movs r2, 0\n\
-    bl GetMonData\n\
+    bl GetMonDataExtended\n\
     cmp r0, 0\n\
     beq _0817E454\n\
     mov r0, r8\n\
@@ -868,7 +868,7 @@ _0817E454:\n\
     adds r0, r4, r5\n\
     movs r1, 0xB\n\
     movs r2, 0\n\
-    bl GetMonData\n\
+    bl GetMonDataExtended\n\
     cmp r0, 0\n\
     beq _0817E46A\n\
     adds r0, r7, 0x1\n\
@@ -903,7 +903,7 @@ _0817E48E:\n\
     adds r0, r4, 0\n\
     movs r1, 0xB\n\
     movs r2, 0\n\
-    bl GetMonData\n\
+    bl GetMonDataExtended\n\
     lsls r0, 16\n\
     lsrs r7, r0, 16\n\
     adds r0, r6, 0x1\n\
@@ -913,7 +913,7 @@ _0817E48E:\n\
     adds r0, r4, 0\n\
     movs r1, 0x2D\n\
     movs r2, 0\n\
-    bl GetMonData\n\
+    bl GetMonDataExtended\n\
     cmp r0, 0\n\
     bne _0817E4EE\n\
     movs r4, 0\n\
@@ -951,7 +951,7 @@ _0817E4EE:\n\
     adds r0, r4, 0\n\
     movs r1, 0xB\n\
     movs r2, 0\n\
-    bl GetMonData\n\
+    bl GetMonDataExtended\n\
     lsls r0, 16\n\
     lsrs r7, r0, 16\n\
     ldr r3, [sp, 0x8]\n\
@@ -962,7 +962,7 @@ _0817E4EE:\n\
     adds r0, r4, 0\n\
     movs r1, 0x2D\n\
     movs r2, 0\n\
-    bl GetMonData\n\
+    bl GetMonDataExtended\n\
     cmp r0, 0\n\
     bne _0817E5A0\n\
     movs r4, 0\n\
@@ -999,7 +999,7 @@ _0817E534:\n\
     adds r0, r1\n\
     movs r1, 0x19\n\
     movs r2, 0\n\
-    bl GetMonData\n\
+    bl GetMonDataExtended\n\
     adds r4, r0, 0\n\
     ldr r2, [sp, 0x14]\n\
     mov r0, r8\n\
@@ -1008,7 +1008,7 @@ _0817E534:\n\
     adds r0, r3\n\
     movs r1, 0x19\n\
     movs r2, 0\n\
-    bl GetMonData\n\
+    bl GetMonDataExtended\n\
     cmp r4, r0\n\
     bls _0817E5A0\n\
     b _0817E594\n\
@@ -1058,7 +1058,7 @@ _0817E5C8:\n\
     adds r1, r6, 0\n\
     adds r1, 0xD\n\
     movs r2, 0\n\
-    bl GetMonData\n\
+    bl GetMonDataExtended\n\
     lsls r0, 16\n\
     lsrs r4, r0, 16\n\
     ldr r2, [sp, 0x1C]\n\
@@ -1464,8 +1464,8 @@ static void TrySetBattleSeminarShow(void)
                     bestMoveId = i;
             }
 
-            opponentSpecies = GetMonData(&gEnemyParty [gBattlerPartyIndexes[gBattlerTarget]],   MON_DATA_SPECIES, NULL);
-            playerSpecies   = GetMonData(&gPlayerParty[gBattlerPartyIndexes[gBattlerAttacker]], MON_DATA_SPECIES, NULL);
+            opponentSpecies = GetMonDataExtended(&gEnemyParty [gBattlerPartyIndexes[gBattlerTarget]],   MON_DATA_SPECIES, NULL);
+            playerSpecies   = GetMonDataExtended(&gPlayerParty[gBattlerPartyIndexes[gBattlerAttacker]], MON_DATA_SPECIES, NULL);
             sub_80EE35C(opponentSpecies, playerSpecies, gMoveSelectionCursor[gBattlerAttacker], gBattleMons[gBattlerAttacker].moves, gBattleMons[gBattlerAttacker].moves[bestMoveId]);
             break;
         }
@@ -1553,7 +1553,7 @@ u8 GetBattlerMoveSlotId(u8 battlerId, u16 moveId)
     {
         if (i >= MAX_MON_MOVES)
             break;
-        if (GetMonData(&party[gBattlerPartyIndexes[battlerId]], MON_DATA_MOVE1 + i, NULL) == moveId)
+        if (GetMonDataExtended(&party[gBattlerPartyIndexes[battlerId]], MON_DATA_MOVE1 + i, NULL) == moveId)
             break;
         i++;
     }

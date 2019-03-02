@@ -905,7 +905,7 @@ static void sub_8140470(void)
     
     for (i = 0; i < PARTY_SIZE; i++)
     {
-        switch (GetMonData_2(&gPlayerParty[i], MON_DATA_SPECIES2))
+        switch (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2))
         {
         case SPECIES_SHROOMISH:
             gUnknown_0203AB88->var02 |= 0x1;

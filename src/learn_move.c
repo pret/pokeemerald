@@ -566,7 +566,7 @@ static void LearnMoveMain(void)
             }
             else
             {
-                u16 moveId = GetMonData_2(&gPlayerParty[sLearnMoveStruct->partyMon], MON_DATA_MOVE1 + sLearnMoveStruct->moveSlot);
+                u16 moveId = GetMonData(&gPlayerParty[sLearnMoveStruct->partyMon], MON_DATA_MOVE1 + sLearnMoveStruct->moveSlot);
 
                 StringCopy(gStringVar3, gMoveNames[moveId]);
                 RemoveMonPPBonus(&gPlayerParty[sLearnMoveStruct->partyMon], sLearnMoveStruct->moveSlot);
@@ -768,7 +768,7 @@ static void CreateMenuItemsList(void)
         sLearnMoveStruct->menuItems[i].id = sLearnMoveStruct->movesToLearn[i];
     }
 
-    GetMonData(&gPlayerParty[sLearnMoveStruct->partyMon], MON_DATA_NICKNAME, nickname);
+    GetMonDataExtended(&gPlayerParty[sLearnMoveStruct->partyMon], MON_DATA_NICKNAME, nickname);
     StringCopy10(gStringVar1, nickname);
     sLearnMoveStruct->menuItems[sLearnMoveStruct->numMenuChoices].name = gText_Cancel;
     sLearnMoveStruct->menuItems[sLearnMoveStruct->numMenuChoices].id = LIST_B_PRESSED;

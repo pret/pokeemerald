@@ -853,7 +853,7 @@ sub_8166D44: @ 8166D44
 	adds r0, r1
 	movs r1, 0x2
 	add r2, sp, 0xC
-	bl GetMonData
+	bl GetMonDataExtended
 	add r0, sp, 0xC
 	bl StringGetEnd10
 	ldr r1, =gText_GetsAPokeBlockQuestion
@@ -1191,7 +1191,7 @@ _0816702E:
 	adds r0, r7
 	ldr r1, [r0]
 	adds r0, r6, 0
-	bl GetMonData
+	bl GetMonDataExtended
 	adds r1, r5, r4
 	strb r0, [r1]
 	adds r0, r4, 0x1
@@ -1215,7 +1215,7 @@ sub_8167054: @ 8167054
 	adds r5, r1, 0
 	adds r0, r5, 0
 	movs r1, 0x30
-	bl GetMonData
+	bl GetMonDataExtended
 	cmp r0, 0xFF
 	beq _081670F0
 	mov r0, r8
@@ -1230,7 +1230,7 @@ _08167078:
 	ldr r6, [r0]
 	adds r0, r5, 0
 	adds r1, r6, 0
-	bl GetMonData
+	bl GetMonDataExtended
 	lsls r0, 24
 	lsrs r0, 24
 	strb r0, [r7]
@@ -1265,7 +1265,7 @@ _081670B0:
 	bls _08167078
 	adds r0, r5, 0
 	movs r1, 0x30
-	bl GetMonData
+	bl GetMonDataExtended
 	lsls r0, 24
 	lsrs r0, 24
 	mov r2, r8
@@ -1505,7 +1505,7 @@ _081672AC:
 	ldr r1, =gPlayerParty
 	adds r0, r1
 	movs r1, 0x2D
-	bl GetMonData
+	bl GetMonDataExtended
 	cmp r0, 0
 	bne _081672D2
 	cmp r5, 0
@@ -1545,7 +1545,7 @@ _081672F2:
 	ldr r1, =gPlayerParty
 	adds r0, r1
 	movs r1, 0x2D
-	bl GetMonData
+	bl GetMonDataExtended
 	cmp r0, 0
 	beq _0816730A
 	adds r0, r6, 0x1
@@ -1706,7 +1706,7 @@ _08167430:
 	ldr r1, =gPlayerParty
 	adds r0, r1
 	movs r1, 0x2D
-	bl GetMonData
+	bl GetMonDataExtended
 	adds r3, r0, 0
 	cmp r3, 0
 	bne _0816746C
@@ -3221,7 +3221,7 @@ sub_81681F4: @ 81681F4
 	ldr r1, =gPlayerParty
 	adds r0, r1
 	movs r1, 0x30
-	bl GetMonData
+	bl GetMonDataExtended
 	lsls r0, 24
 	lsrs r2, r0, 24
 	ldr r0, =gUnknown_0203BCAC

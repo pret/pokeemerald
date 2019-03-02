@@ -248,14 +248,14 @@ void EvolutionScene(struct Pokemon* mon, u16 speciesToEvolve, bool8 canStopEvo, 
     sEvoStructPtr = AllocZeroed(sizeof(struct EvoInfo));
     AllocateMonSpritesGfx();
 
-    GetMonData(mon, MON_DATA_NICKNAME, name);
+    GetMonDataExtended(mon, MON_DATA_NICKNAME, name);
     StringCopy10(gStringVar1, name);
     StringCopy(gStringVar2, gSpeciesNames[speciesToEvolve]);
 
     // preEvo sprite
-    currSpecies = GetMonData_2(mon, MON_DATA_SPECIES);
-    trainerId = GetMonData_2(mon, MON_DATA_OT_ID);
-    personality = GetMonData_2(mon, MON_DATA_PERSONALITY);
+    currSpecies = GetMonData(mon, MON_DATA_SPECIES);
+    trainerId = GetMonData(mon, MON_DATA_OT_ID);
+    personality = GetMonData(mon, MON_DATA_PERSONALITY);
     DecompressPicFromTable_2(&gMonFrontPicTable[currSpecies],
                              gMonSpritesGfxPtr->sprites[1],
                              currSpecies);
@@ -314,8 +314,8 @@ static void CB2_EvolutionSceneLoadGraphics(void)
     struct Pokemon* Mon = &gPlayerParty[gTasks[sEvoStructPtr->evoTaskID].tPartyID];
 
     postEvoSpecies = gTasks[sEvoStructPtr->evoTaskID].tPostEvoSpecies;
-    trainerId = GetMonData_2(Mon, MON_DATA_OT_ID);
-    personality = GetMonData_2(Mon, MON_DATA_PERSONALITY);
+    trainerId = GetMonData(Mon, MON_DATA_OT_ID);
+    personality = GetMonData(Mon, MON_DATA_PERSONALITY);
 
     SetHBlankCallback(NULL);
     SetVBlankCallback(NULL);
@@ -418,8 +418,8 @@ static void CB2_TradeEvolutionSceneLoadGraphics(void)
     case 4:
         {
             const struct CompressedSpritePalette* pokePal;
-            u32 trainerId = GetMonData_2(Mon, MON_DATA_OT_ID);
-            u32 personality = GetMonData_2(Mon, MON_DATA_PERSONALITY);
+            u32 trainerId = GetMonData(Mon, MON_DATA_OT_ID);
+            u32 personality = GetMonData(Mon, MON_DATA_PERSONALITY);
             DecompressPicFromTable_2(&gMonFrontPicTable[postEvoSpecies],
                                      gMonSpritesGfxPtr->sprites[3],
                                      postEvoSpecies);
@@ -470,16 +470,16 @@ void TradeEvolutionScene(struct Pokemon* mon, u16 speciesToEvolve, u8 preEvoSpri
     const struct CompressedSpritePalette* pokePal;
     u8 ID;
 
-    GetMonData(mon, MON_DATA_NICKNAME, name);
+    GetMonDataExtended(mon, MON_DATA_NICKNAME, name);
     StringCopy10(gStringVar1, name);
     StringCopy(gStringVar2, gSpeciesNames[speciesToEvolve]);
 
     gAffineAnimsDisabled = TRUE;
 
     // preEvo sprite
-    currSpecies = GetMonData_2(mon, MON_DATA_SPECIES);
-    personality = GetMonData_2(mon, MON_DATA_PERSONALITY);
-    trainerId = GetMonData_2(mon, MON_DATA_OT_ID);
+    currSpecies = GetMonData(mon, MON_DATA_SPECIES);
+    personality = GetMonData(mon, MON_DATA_PERSONALITY);
+    trainerId = GetMonData(mon, MON_DATA_OT_ID);
 
     sEvoStructPtr = AllocZeroed(sizeof(struct EvoInfo));
     sEvoStructPtr->preEvoSpriteID = preEvoSpriteID;
@@ -578,9 +578,9 @@ static void CreateShedinja(u16 preEvoSpecies, struct Pokemon* mon)
         GetSetPokedexFlag(SpeciesToNationalPokedexNum(evos[1].targetSpecies), FLAG_SET_SEEN);
         GetSetPokedexFlag(SpeciesToNationalPokedexNum(evos[1].targetSpecies), FLAG_SET_CAUGHT);
 
-        if (GetMonData_2(shedinja, MON_DATA_SPECIES) == SPECIES_SHEDINJA
-            && GetMonData_2(shedinja, MON_DATA_LANGUAGE) == LANGUAGE_JAPANESE
-            && GetMonData_2(mon, MON_DATA_SPECIES) == SPECIES_NINJASK)
+        if (GetMonData(shedinja, MON_DATA_SPECIES) == SPECIES_SHEDINJA
+            && GetMonData(shedinja, MON_DATA_LANGUAGE) == LANGUAGE_JAPANESE
+            && GetMonData(mon, MON_DATA_SPECIES) == SPECIES_NINJASK)
                 SetMonData(shedinja, MON_DATA_NICKNAME, Text_ShedinjaJapaneseName);
     }
 }
@@ -741,7 +741,7 @@ static void Task_EvolutionScene(u8 taskID)
                 gTasks[taskID].tBits |= TASK_BIT_LEARN_MOVE;
                 gTasks[taskID].tLearnsFirstMove = FALSE;
                 gTasks[taskID].tLearnMoveState = 0;
-                GetMonData(mon, MON_DATA_NICKNAME, text);
+                GetMonDataExtended(mon, MON_DATA_NICKNAME, text);
                 StringCopy10(gBattleTextBuff1, text);
 
                 if (var == 0xFFFF) // no place to learn it
@@ -917,7 +917,7 @@ static void Task_EvolutionScene(u8 taskID)
                 }
                 else
                 {
-                    u16 move = GetMonData_2(mon, var + MON_DATA_MOVE1);
+                    u16 move = GetMonData(mon, var + MON_DATA_MOVE1);
                     if (IsHMMove2(move))
                     {
                         BattleStringExpandPlaceholdersToDisplayedString(gBattleStringsTable[STRINGID_HMMOVESCANTBEFORGOTTEN - BATTLESTRINGS_ID_ADDER]);
@@ -1098,7 +1098,7 @@ static void Task_TradeEvolutionScene(u8 taskID)
                 gTasks[taskID].tBits |= TASK_BIT_LEARN_MOVE;
                 gTasks[taskID].tLearnsFirstMove = FALSE;
                 gTasks[taskID].tLearnMoveState = 0;
-                GetMonData(mon, MON_DATA_NICKNAME, text);
+                GetMonDataExtended(mon, MON_DATA_NICKNAME, text);
                 StringCopy10(gBattleTextBuff1, text);
 
                 if (var == 0xFFFF)
@@ -1251,7 +1251,7 @@ static void Task_TradeEvolutionScene(u8 taskID)
                 }
                 else
                 {
-                    u16 move = GetMonData_2(mon, var + MON_DATA_MOVE1);
+                    u16 move = GetMonData(mon, var + MON_DATA_MOVE1);
                     if (IsHMMove2(move))
                     {
                         BattleStringExpandPlaceholdersToDisplayedString(gBattleStringsTable[STRINGID_HMMOVESCANTBEFORGOTTEN - BATTLESTRINGS_ID_ADDER]);

@@ -243,7 +243,7 @@ static u8 ChooseWildMonLevel(const struct WildPokemon *wildPokemon)
     rand = Random() % range;
 
     // check ability for max level mon
-    if (!GetMonData_2(&gPlayerParty[0], MON_DATA_SANITY_IS_EGG))
+    if (!GetMonData(&gPlayerParty[0], MON_DATA_SANITY_IS_EGG))
     {
         u8 ability = GetMonAbility(&gPlayerParty[0]);
         if (ability == ABILITY_HUSTLE || ability == ABILITY_VITAL_SPIRIT || ability == ABILITY_PRESSURE)
@@ -324,11 +324,11 @@ static u8 PickWildMonNature(void)
         }
     }
     // check synchronize for a pokemon with the same ability
-    if (!GetMonData_2(&gPlayerParty[0], MON_DATA_SANITY_IS_EGG)
+    if (!GetMonData(&gPlayerParty[0], MON_DATA_SANITY_IS_EGG)
         && GetMonAbility(&gPlayerParty[0]) == ABILITY_SYNCHRONIZE
         && Random() % 2 == 0)
     {
-        return GetMonData_2(&gPlayerParty[0], MON_DATA_PERSONALITY) % 25;
+        return GetMonData(&gPlayerParty[0], MON_DATA_PERSONALITY) % 25;
     }
 
     // random nature
@@ -352,12 +352,12 @@ static void CreateWildMon(u16 species, u8 level)
     }
 
     if (checkCuteCharm
-        && !GetMonData_2(&gPlayerParty[0], MON_DATA_SANITY_IS_EGG)
+        && !GetMonData(&gPlayerParty[0], MON_DATA_SANITY_IS_EGG)
         && GetMonAbility(&gPlayerParty[0]) == ABILITY_CUTE_CHARM
         && Random() % 3 != 0)
     {
-        u16 leadingMonSpecies = GetMonData_2(&gPlayerParty[0], MON_DATA_SPECIES);
-        u32 leadingMonPersonality = GetMonData_2(&gPlayerParty[0], MON_DATA_PERSONALITY);
+        u16 leadingMonSpecies = GetMonData(&gPlayerParty[0], MON_DATA_SPECIES);
+        u32 leadingMonPersonality = GetMonData(&gPlayerParty[0], MON_DATA_PERSONALITY);
         u8 gender = GetGenderFromSpeciesAndPersonality(leadingMonSpecies, leadingMonPersonality);
 
         // misses mon is genderless check, although no genderless mon can have cute charm as ability
@@ -470,7 +470,7 @@ static bool8 DoWildEncounterRateTest(u32 encounterRate, bool8 ignoreAbility)
         encounterRate = encounterRate * 80 / 100;
     ApplyFluteEncounterRateMod(&encounterRate);
     ApplyCleanseTagEncounterRateMod(&encounterRate);
-    if (!ignoreAbility && !GetMonData_2(&gPlayerParty[0], MON_DATA_SANITY_IS_EGG))
+    if (!ignoreAbility && !GetMonData(&gPlayerParty[0], MON_DATA_SANITY_IS_EGG))
     {
         u32 ability = GetMonAbility(&gPlayerParty[0]);
 
@@ -842,9 +842,9 @@ static bool8 IsWildLevelAllowedByRepel(u8 wildLevel)
 
     for (i = 0; i < PARTY_SIZE; i++)
     {
-        if (GetMonData_2(&gPlayerParty[i], MON_DATA_HP) && !GetMonData_2(&gPlayerParty[i], MON_DATA_IS_EGG))
+        if (GetMonData(&gPlayerParty[i], MON_DATA_HP) && !GetMonData(&gPlayerParty[i], MON_DATA_IS_EGG))
         {
-            u8 ourLevel = GetMonData_2(&gPlayerParty[i], MON_DATA_LEVEL);
+            u8 ourLevel = GetMonData(&gPlayerParty[i], MON_DATA_LEVEL);
 
             if (wildLevel < ourLevel)
                 return FALSE;
@@ -860,13 +860,13 @@ static bool8 IsAbilityAllowingEncounter(u8 level)
 {
     u8 ability;
 
-    if (GetMonData_2(&gPlayerParty[0], MON_DATA_SANITY_IS_EGG))
+    if (GetMonData(&gPlayerParty[0], MON_DATA_SANITY_IS_EGG))
         return TRUE;
 
     ability = GetMonAbility(&gPlayerParty[0]);
     if (ability == ABILITY_KEEN_EYE || ability == ABILITY_INTIMIDATE)
     {
-        u8 playerMonLevel = GetMonData_2(&gPlayerParty[0], MON_DATA_LEVEL);
+        u8 playerMonLevel = GetMonData(&gPlayerParty[0], MON_DATA_LEVEL);
         if (playerMonLevel > 5 && level <= playerMonLevel - 5 && !(Random() % 2))
             return FALSE;
     }
@@ -897,7 +897,7 @@ static bool8 TryGetRandomWildMonIndexByType(const struct WildPokemon *wildMon, u
 
 static bool8 TryGetAbilityInfluencedWildMonIndex(const struct WildPokemon *wildMon, u8 type, u8 ability, u8 *monIndex)
 {
-    if (GetMonData_2(&gPlayerParty[0], MON_DATA_SANITY_IS_EGG))
+    if (GetMonData(&gPlayerParty[0], MON_DATA_SANITY_IS_EGG))
         return FALSE;
     else if (GetMonAbility(&gPlayerParty[0]) != ability)
         return FALSE;
@@ -917,6 +917,6 @@ static void ApplyFluteEncounterRateMod(u32 *encRate)
 
 static void ApplyCleanseTagEncounterRateMod(u32 *encRate)
 {
-    if (GetMonData_2(&gPlayerParty[0], MON_DATA_HELD_ITEM) == ITEM_CLEANSE_TAG)
+    if (GetMonData(&gPlayerParty[0], MON_DATA_HELD_ITEM) == ITEM_CLEANSE_TAG)
         *encRate = *encRate * 2 / 3;
 }
