@@ -27,5 +27,6 @@ void ResetCyclingRoadChallengeData(void);
 bool8 warp0_in_pokecenter(void);
 void ResetFanClub(void);
 bool8 sub_813B21C(void);
+void set_unknown_box_id(u8 id);
 
 #endif // GUARD_FIELD_SPECIALS_H

@@ -32,16 +32,7 @@
 #include "constants/rgb.h"
 #include "trainer_hill.h"
 #include "event_obj_lock.h"
-
-extern void sub_80B6B68(void);
-extern void sub_80B6E4C(u8, u8);
-extern void sub_80B75D8(u8);
-extern void sub_80B7A74(u8);
-extern void sub_808C0A8(u8);
-extern u8 GetMapPairFadeToType(u8, u8);
-extern u8 GetMapPairFadeFromType(u8, u8);
-extern bool32 sub_808D1B4(void);
-extern bool32 sub_808D1E8(void);
+#include "fldeff.h"
 
 extern const u16 gUnknown_82EC7CC[];
 

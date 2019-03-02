@@ -35,8 +35,7 @@
 #include "constants/moves.h"
 #include "constants/items.h"
 #include "constants/event_objects.h"
-
-extern u8 gSelectedOrderFromParty[];
+#include "party_menu.h"
 
 struct FrontierBrainMon
 {
@@ -47,8 +46,6 @@ struct FrontierBrainMon
     u8 evs[NUM_STATS];
     u16 moves[4];
 };
-
-extern void sub_81B8558(void);
 
 // This file's functions.
 static void sub_81A17A0(void);

@@ -24,9 +24,6 @@
 #include "main.h"
 #include "trainer_hill.h"
 
-extern void sub_800B9B8(void);
-extern u8 gUnknown_03002748;
-
 static void VBlankIntr(void);
 static void HBlankIntr(void);
 static void VCountIntr(void);
@@ -312,8 +309,6 @@ void SetSerialCallback(IntrCallback callback)
 {
     gMain.serialCallback = callback;
 }
-
-extern void CopyBufferedValuesToGpuRegs(void);
 
 static void VBlankIntr(void)
 {

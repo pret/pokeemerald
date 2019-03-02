@@ -111,8 +111,6 @@ static void PopulateSpeciesFromTrainerParty(int, u8 *);
 static void PopulateBattleFrontierFacilityName(int, u8 *);
 static void PopulateBattleFrontierStreak(int, u8 *);
 
-extern void sub_81973A4(void);
-
 #define TEXT_ID(topic, id) (((topic) << 8) | ((id) & 0xFF))
 
 static const struct MatchCallTrainerTextInfo sMatchCallTrainers[] =

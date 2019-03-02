@@ -66,8 +66,6 @@ extern struct MusicPlayerInfo gMPlayInfo_BGM;
 
 #define HALL_OF_FAME_MAX_TEAMS 50
 
-extern void ReturnFromHallOfFamePC(void);
-
 // this file's functions
 static void ClearVramOamPltt_LoadHofPal(void);
 static void sub_8174F70(void);

@@ -11,10 +11,10 @@
 #include "trainer_hill.h"
 #include "gba/flash_internal.h"
 #include "decoration_inventory.h"
+#include "agb_flash.h"
 
 static void ApplyNewEncryptionKeyToAllEncryptedData(u32 encryptionKey);
 
-extern bool16 IdentifyFlash(void);
 extern void ApplyNewEncryptionKeyToBerryPowder(u32 key);
 
 #define SAVEBLOCK_MOVE_RANGE    128

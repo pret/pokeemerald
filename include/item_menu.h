@@ -2,6 +2,7 @@
 #define GUARD_item_menu_H
 
 #include "item.h"
+#include "menu_helpers.h"
 
 #define RETURN_LOCATION_FIELD 0
 #define RETURN_LOCATION_BATTLE 1
@@ -83,6 +84,9 @@ void DoWallyTutorialBagMenu(void);
 void ResetBagScrollPositions(void);
 void sub_81AABF0(void (*callback)(void));
 void CB2_ChooseBerry(void);
+void unknown_ItemMenu_Confirm(u8 taskId);
+void bag_menu_yes_no(u8, u8, const struct YesNoFuncTable*);
+void sub_81AB9A8(u8 pocketId);
 
 
 #endif //GUARD_item_menu_H

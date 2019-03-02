@@ -41,7 +41,6 @@ extern void sub_8108BE0(struct Sprite *);
 extern void sub_8108C08(struct Sprite *);
 extern void sub_8108C54(struct Sprite *);
 extern void sub_8108CDC(struct Sprite *);
-extern void sub_80A8EE4(struct Sprite *);
 void sub_810756C(u8);
 void sub_81076F4(u8);
 void sub_8107B84(u8);

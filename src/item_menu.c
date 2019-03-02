@@ -140,7 +140,6 @@ void unknown_ItemMenu_Confirm2(u8 taskId);
 void unknown_item_menu_type(u8 taskId);
 void item_menu_type_2(u8 taskId);
 void display_sell_item_ask_str(u8 taskId);
-void unknown_ItemMenu_Confirm(u8 taskId);
 void display_deposit_item_ask_str(u8 taskId);
 void item_menu_type_b(u8 taskId);
 void BagMenuActuallyToss(u8 taskId);

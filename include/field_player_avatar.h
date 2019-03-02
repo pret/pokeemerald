@@ -70,5 +70,8 @@ void sub_808C1B4(u8 direction);
 void sub_808B9D4(u8 direction);
 void sub_808D194(void);
 void sub_808D1C8(void);
+bool32 sub_808D1B4(void);
+bool32 sub_808D1E8(void);
+void sub_808C0A8(u8 a);
 
 #endif // GUARD_FIELD_PLAYER_AVATAR_H

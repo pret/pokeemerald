@@ -55,8 +55,6 @@ extern struct MusicPlayerInfo gMPlayInfo_BGM;
 extern const struct CompressedSpriteSheet gMonFrontPicTable[];
 extern const u16 gUnknown_0860F074[];
 
-extern bool8 sub_81221EC(void);
-
 // this file's functions
 static void HandleInitBackgrounds(void);
 static void HandleInitWindows(void);

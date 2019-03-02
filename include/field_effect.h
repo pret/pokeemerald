@@ -36,6 +36,10 @@ bool8 FieldEffectCmd_end(u8 **script, u32 *val);
 bool8 FieldEffectCmd_loadgfx_callnative(u8 **script, u32 *val);
 bool8 FieldEffectCmd_loadtiles_callnative(u8 **script, u32 *val);
 bool8 FieldEffectCmd_loadfadedpal_callnative(u8 **script, u32 *val);
+void sub_80B6B68(void);
+void sub_80B6E4C(u8 a0, u8 priority);
+void sub_80B75D8(u8 priority);
+void sub_80B7A74(u8 priority);
 
 void sub_80B9C28(s16*, u8);
 void sub_80B9C54(s16*, u8);
@@ -47,5 +51,6 @@ void sub_80B7A58(struct Sprite*);
 void MultiplyPaletteRGBComponents(u16 i, u8 r, u8 g, u8 b);
 void FreeResourcesAndDestroySprite(struct Sprite *sprite, u8 spriteId);
 u8 CreateMonSprite_PicBox(u16 species, s16 x, s16 y, u8 subpriority);
+void StartEscapeRopeFieldEffect(void);
 
 #endif //GUARD_FIELD_EFFECTS_H

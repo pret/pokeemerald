@@ -18,8 +18,6 @@
 #include "constants/items.h"
 #include "constants/maps.h"
 
-extern bool32 sub_800B504(void);
-
 // this file's functions
 static void Task_ContinueTaskAfterMessagePrints(u8 taskId);
 static void Task_CallYesOrNoCallback(u8 taskId);

@@ -134,5 +134,6 @@ u16 EasyChat_GetNumWordsInGroup(u8);
 u16 sub_811EE90(u16);
 void DoEasyChatScreen(u8 type, u16 *words, MainCallback callback, u8 displayedPersonType);
 void sub_811F8BC(void);
+void sub_811EFC0(u8 additionalPhraseId);
 
 #endif // GUARD_EASYCHAT_H
