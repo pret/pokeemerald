@@ -55,6 +55,7 @@
 #include "constants/vars.h"
 #include "constants/battle_frontier.h"
 #include "constants/weather.h"
+#include "palette.h"
 
 EWRAM_DATA bool8 gBikeCyclingChallenge = FALSE;
 EWRAM_DATA u8 gBikeCollisions = 0;
@@ -80,7 +81,6 @@ extern const u16 gEventObjectPalette17[];
 extern const u16 gEventObjectPalette33[];
 extern const u16 gEventObjectPalette34[];
 
-extern void LoadPalette(const void *src, u32 offset, u16 size); // incorrect signature, needed to match
 extern void BlendPalettes(u32, u8, u16);
 extern void FieldInitRegionMap(MainCallback callback);
 
@@ -591,7 +591,9 @@ void SpawnLinkPartnerEventObject(void)
 
 static void LoadLinkPartnerEventObjectSpritePalette(u8 graphicsId, u8 localEventId, u8 paletteNum)
 {
-    paletteNum += 6;
+    u8 adjustedPaletteNum;
+    // Note: This temp var is necessary; paletteNum += 6 doesn't match.
+    adjustedPaletteNum = paletteNum + 6;
     if (graphicsId == EVENT_OBJ_GFX_LINK_RS_BRENDAN ||
         graphicsId == EVENT_OBJ_GFX_LINK_RS_MAY ||
         graphicsId == EVENT_OBJ_GFX_RIVAL_BRENDAN_NORMAL ||
@@ -602,21 +604,21 @@ static void LoadLinkPartnerEventObjectSpritePalette(u8 graphicsId, u8 localEvent
         {
             u8 spriteId = gEventObjects[obj].spriteId;
             struct Sprite *sprite = &gSprites[spriteId];
-            sprite->oam.paletteNum = paletteNum;
+            sprite->oam.paletteNum = adjustedPaletteNum;
 
             switch (graphicsId)
             {
                 case EVENT_OBJ_GFX_LINK_RS_BRENDAN:
-                    LoadPalette(gEventObjectPalette33, 0x100 + paletteNum * 16, 0x20);
+                    LoadPalette(gEventObjectPalette33, 0x100 + (adjustedPaletteNum << 4), 0x20);
                     break;
                 case EVENT_OBJ_GFX_LINK_RS_MAY:
-                    LoadPalette(gEventObjectPalette34, 0x100 + paletteNum * 16, 0x20);
+                    LoadPalette(gEventObjectPalette34, 0x100 + (adjustedPaletteNum << 4), 0x20);
                     break;
                 case EVENT_OBJ_GFX_RIVAL_BRENDAN_NORMAL:
-                    LoadPalette(gEventObjectPalette8, 0x100 + paletteNum * 16, 0x20);
+                    LoadPalette(gEventObjectPalette8, 0x100 + (adjustedPaletteNum << 4), 0x20);
                     break;
                 case EVENT_OBJ_GFX_RIVAL_MAY_NORMAL:
-                    LoadPalette(gEventObjectPalette17, 0x100 + paletteNum * 16, 0x20);
+                    LoadPalette(gEventObjectPalette17, 0x100 + (adjustedPaletteNum << 4), 0x20);
                     break;
             }
         }
