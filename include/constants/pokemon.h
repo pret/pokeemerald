@@ -103,6 +103,7 @@
 #define FLAG_SOUND                  0x10000
 #define FLAG_BALLISTIC              0x20000
 #define FLAG_PROTECTION_MOVE        0x40000
+#define FLAG_POWDER                 0x80000
 
 // Split defines.
 #define SPLIT_PHYSICAL  0x0

@@ -1,7 +1,7 @@
 IslandCave_MapScripts:: @ 8238E2A
-	map_script 5, IslandCave_MapScript1_238E3A
-	map_script 1, IslandCave_MapScript1_238E58
-	map_script 3, IslandCave_MapScript1_238E99
+	map_script MAP_SCRIPT_ON_RESUME, IslandCave_MapScript1_238E3A
+	map_script MAP_SCRIPT_ON_LOAD, IslandCave_MapScript1_238E58
+	map_script MAP_SCRIPT_ON_TRANSITION, IslandCave_MapScript1_238E99
 	.byte 0
 
 IslandCave_MapScript1_238E3A: @ 8238E3A
@@ -11,7 +11,7 @@ IslandCave_MapScript1_238E3A: @ 8238E3A
 IslandCave_EventScript_238E44:: @ 8238E44
 	specialvar VAR_RESULT, GetBattleOutcome
 	compare VAR_RESULT, 7
-	goto_if_ne IslandCave_EventScript_27374E
+	goto_if_ne Common_EventScript_NopReturn
 	removeobject VAR_LAST_TALKED
 	return
 

@@ -39,6 +39,7 @@
 #include "tv.h"
 #include "data2.h"
 #include "constants/layouts.h"
+#include "constants/metatile_behaviors.h"
 
 // Static type declarations
 
@@ -62,7 +63,7 @@ IWRAM_DATA s8 sTVShowMixingCurSlot;
 EWRAM_DATA u16 sPokemonAnglerSpecies = 0;
 EWRAM_DATA u16 sPokemonAnglerAttemptCounters = 0;
 EWRAM_DATA u16 sFindThatGamerCoinsSpent = 0;
-EWRAM_DATA bool8 sFindThatGamerWhichGame = FALSE;
+EWRAM_DATA u8 sFindThatGamerWhichGame = SLOT_MACHINE;
 EWRAM_DATA ALIGNED(4) u8 sRecordMixingPartnersWithoutShowsToShare = 0;
 EWRAM_DATA ALIGNED(4) u8 sTVShowState = 0;
 EWRAM_DATA u8 sTVSecretBaseSecretsRandomValues[3] = {};
@@ -853,9 +854,9 @@ void SetTVMetatilesOnMap(int width, int height, u16 tileId)
     {
         for (x = 0; x < width; x ++)
         {
-            if (MapGridGetMetatileBehaviorAt(x, y) == 0x86) // is this tile a TV?
+            if (MapGridGetMetatileBehaviorAt(x, y) == MB_TELEVISION)
             {
-                MapGridSetMetatileIdAt(x, y, tileId | 0xc00);
+                MapGridSetMetatileIdAt(x, y, tileId | METATILE_COLLISION_MASK);
             }
         }
     }
@@ -2019,7 +2020,7 @@ void sub_80EDCE8(void)
     }
 }
 
-void sub_80EDD78(u16 nCoinsPaidOut)
+void AlertTVOfNewCoinTotal(u16 nCoinsPaidOut)
 {
     TVShow *show;
     bool8 flag;
@@ -2031,7 +2032,7 @@ void sub_80EDD78(u16 nCoinsPaidOut)
         flag = FALSE;
         switch (sFindThatGamerWhichGame)
         {
-            case FALSE:
+            case SLOT_MACHINE:
                 if (nCoinsPaidOut >= sFindThatGamerCoinsSpent + 200)
                 {
                     flag = TRUE;
@@ -2044,7 +2045,7 @@ void sub_80EDD78(u16 nCoinsPaidOut)
                     break;
                 }
                 return;
-            case TRUE:
+            case ROULETTE:
                 if (nCoinsPaidOut >= sFindThatGamerCoinsSpent + 50)
                 {
                     flag = TRUE;
@@ -2072,15 +2073,15 @@ void sub_80EDD78(u16 nCoinsPaidOut)
     }
 }
 
-void sub_80EDE70(u16 nCoinsSpent)
+void AlertTVThatPlayerPlayedSlotMachine(u16 nCoinsSpent)
 {
-    sFindThatGamerWhichGame = FALSE;
+    sFindThatGamerWhichGame = SLOT_MACHINE;
     sFindThatGamerCoinsSpent = nCoinsSpent;
 }
 
-void sub_80EDE84(u16 nCoinsSpent)
+void AlertTVThatPlayerPlayedRoulette(u16 nCoinsSpent)
 {
-    sFindThatGamerWhichGame = TRUE;
+    sFindThatGamerWhichGame = ROULETTE;
     sFindThatGamerCoinsSpent = nCoinsSpent;
 }
 
@@ -2448,8 +2449,8 @@ void sub_80EE72C(void)
         show->trainerFanClub.kind = TVSHOW_TRAINER_FAN_CLUB;
         show->trainerFanClub.active = FALSE;
         StringCopy(show->trainerFanClub.playerName, gSaveBlock2Ptr->playerName);
-        show->trainerFanClub.words[0] = gSaveBlock1Ptr->unk2BB0[0];
-        show->trainerFanClub.words[1] = gSaveBlock1Ptr->unk2BB0[1];
+        show->trainerFanClub.words[0] = gSaveBlock1Ptr->easyChatProfile[0];
+        show->trainerFanClub.words[1] = gSaveBlock1Ptr->easyChatProfile[1];
         tv_store_id_3x(show);
         show->trainerFanClub.language = gGameLanguage;
     }
@@ -3603,7 +3604,7 @@ void GetMomOrDadStringForTVMessage(void)
 
 void sub_80F01B8(void)
 {
-    VarSet(VAR_0x40BC, 0);
+    VarSet(VAR_BRAVO_TRAINER_BATTLE_TOWER_ON, 0);
     RemoveEventObjectByLocalIdAndMap(5, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
     FlagSet(FLAG_HIDE_BATTLE_TOWER_REPORTER);
 }

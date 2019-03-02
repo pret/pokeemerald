@@ -1,9 +1,9 @@
 BattleFrontier_OutsideWest_MapScripts:: @ 823D3E1
-	map_script 3, BattleFrontier_OutsideWest_MapScript1_23D3E7
+	map_script MAP_SCRIPT_ON_TRANSITION, BattleFrontier_OutsideWest_MapScript1_23D3E7
 	.byte 0
 
 BattleFrontier_OutsideWest_MapScript1_23D3E7: @ 823D3E7
-	setvar VAR_0x40BC, 0
+	setvar VAR_BRAVO_TRAINER_BATTLE_TOWER_ON, 0
 	setflag FLAG_HIDE_BATTLE_TOWER_REPORTER
 	end
 
@@ -63,7 +63,7 @@ BattleFrontier_OutsideWest_EventScript_23D4AE:: @ 823D4AE
 
 BattleFrontier_OutsideWest_EventScript_23D4BA:: @ 823D4BA
 	closemessage
-	applymovement VAR_LAST_TALKED, BattleFrontier_OutsideWest_Movement_2725AA
+	applymovement VAR_LAST_TALKED, Common_Movement_WalkInPlaceDown
 	waitmovement 0
 	delay 30
 	hideobjectat 3, MAP_BATTLE_FRONTIER_OUTSIDE_WEST
@@ -105,7 +105,7 @@ BattleFrontier_OutsideWest_EventScript_23D518:: @ 823D518
 	faceplayer
 	message BattleFrontier_OutsideWest_Text_23DA60
 	waitmessage
-	applymovement 18, BattleFrontier_OutsideWest_Movement_2725A0
+	applymovement 18, Common_Movement_FaceAwayPlayer
 	waitmovement 0
 	waitbuttonpress
 	release
@@ -126,16 +126,16 @@ BattleFrontier_OutsideWest_EventScript_23D53D:: @ 823D53D
 	end
 
 BattleFrontier_OutsideWest_EventScript_23D544:: @ 823D544
-	applymovement 9, BattleFrontier_OutsideWest_Movement_2725A8
+	applymovement 9, Common_Movement_WalkInPlaceRight
 	waitmovement 0
 	msgbox BattleFrontier_OutsideWest_Text_23DB7D, MSGBOX_DEFAULT
-	applymovement 10, BattleFrontier_OutsideWest_Movement_2725A4
+	applymovement 10, Common_Movement_WalkInPlaceLeft
 	waitmovement 0
 	msgbox BattleFrontier_OutsideWest_Text_23DBCE, MSGBOX_DEFAULT
 	closemessage
 	delay 25
-	applymovement 9, BattleFrontier_OutsideWest_Movement_2725A6
-	applymovement 10, BattleFrontier_OutsideWest_Movement_2725A6
+	applymovement 9, Common_Movement_WalkInPlaceUp
+	applymovement 10, Common_Movement_WalkInPlaceUp
 	waitmovement 0
 	release
 	end
@@ -157,7 +157,7 @@ BattleFrontier_OutsideWest_EventScript_23D57F:: @ 823D57F
 	end
 
 BattleFrontier_OutsideWest_EventScript_23D5BA:: @ 823D5BA
-	applymovement 14, BattleFrontier_OutsideWest_Movement_2725A6
+	applymovement 14, Common_Movement_WalkInPlaceUp
 	waitmovement 0
 	return
 
@@ -298,7 +298,7 @@ BattleFrontier_OutsideWest_EventScript_23D6D7:: @ 823D6D7
 	faceplayer
 	msgbox BattleFrontier_OutsideWest_Text_23E410, MSGBOX_DEFAULT
 	closemessage
-	applymovement 23, BattleFrontier_OutsideWest_Movement_2725A2
+	applymovement 23, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end

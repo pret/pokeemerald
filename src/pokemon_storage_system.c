@@ -1218,7 +1218,7 @@ static const u16 gWallpaperPalettes_Plain[][16] =
 static const u32 gWallpaperTiles_Plain[] = INCBIN_U32("graphics/pokemon_storage/plain.4bpp.lz");
 static const u32 gWallpaperTilemap_Plain[] = INCBIN_U32("graphics/pokemon_storage/plain.bin.lz");
 
-// 12×18 tilemap
+// 12x18 tilemap
 static const u32 gUnknown_085773C4[] = INCBIN_U32("graphics/unused/tilemap_5773C4.bin");
 
 static const u16 gUnknown_08577574[][2] =
@@ -6654,7 +6654,7 @@ static void sub_80CE8E4(void)
     if (sIsMonBeingMoved)
         sub_80CE790();
     else
-        sBoxCursorPosition = gUnknown_0203CF20;
+        sBoxCursorPosition = gLastViewedMonIndex;
 }
 
 s16 CompactPartySlots(void)

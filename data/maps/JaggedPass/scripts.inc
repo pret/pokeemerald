@@ -1,7 +1,7 @@
 JaggedPass_MapScripts:: @ 8230656
-	map_script 5, JaggedPass_MapScript1_230666
-	map_script 3, JaggedPass_MapScript1_23068B
-	map_script 1, JaggedPass_MapScript1_23069C
+	map_script MAP_SCRIPT_ON_RESUME, JaggedPass_MapScript1_230666
+	map_script MAP_SCRIPT_ON_TRANSITION, JaggedPass_MapScript1_23068B
+	map_script MAP_SCRIPT_ON_LOAD, JaggedPass_MapScript1_23069C
 	.byte 0
 
 JaggedPass_MapScript1_230666: @ 8230666
@@ -21,7 +21,7 @@ JaggedPass_EventScript_230685:: @ 8230685
 	return
 
 JaggedPass_MapScript1_23068B: @ 823068B
-	compare VAR_0x40BD, 1
+	compare VAR_JAGGED_PASS_ASH_WEATHER, 1
 	call_if_eq JaggedPass_EventScript_230697
 	end
 
@@ -71,27 +71,27 @@ JaggedPass_EventScript_230718:: @ 8230718
 	goto_if_set FLAG_BEAT_MAGMA_GRUNT_JAGGED_PASS, JaggedPass_EventScript_230766
 	waitse
 	playse SE_PIN
-	applymovement 5, JaggedPass_Movement_272598
+	applymovement 5, Common_Movement_ExclamationMark
 	waitmovement 0
-	applymovement 5, JaggedPass_Movement_27259A
+	applymovement 5, Common_Movement_Delay48
 	waitmovement 0
-	applymovement 5, JaggedPass_Movement_27259E
+	applymovement 5, Common_Movement_FacePlayer
 	waitmovement 0
 	msgbox JaggedPass_Text_230CCB, MSGBOX_DEFAULT
 	closemessage
 	trainerbattle_no_intro TRAINER_GRUNT_30, JaggedPass_Text_230D2D
 	setflag FLAG_BEAT_MAGMA_GRUNT_JAGGED_PASS
-	applymovement 5, JaggedPass_Movement_2725A2
+	applymovement 5, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	releaseall
 	end
 
 JaggedPass_EventScript_230766:: @ 8230766
-	applymovement 5, JaggedPass_Movement_27259E
+	applymovement 5, Common_Movement_FacePlayer
 	waitmovement 0
 	msgbox JaggedPass_Text_230D65, MSGBOX_DEFAULT
 	closemessage
-	applymovement 5, JaggedPass_Movement_2725A2
+	applymovement 5, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	releaseall
 	end

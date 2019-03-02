@@ -1,14 +1,14 @@
 PetalburgCity_Gym_MapScripts:: @ 8204889
-	map_script 1, PetalburgCity_Gym_MapScript1_20489E
-	map_script 3, PetalburgCity_Gym_MapScript1_20492D
-	map_script 4, PetalburgCity_Gym_MapScript2_20498B
-	map_script 2, PetalburgCity_Gym_MapScript2_20499A
+	map_script MAP_SCRIPT_ON_LOAD, PetalburgCity_Gym_MapScript1_20489E
+	map_script MAP_SCRIPT_ON_TRANSITION, PetalburgCity_Gym_MapScript1_20492D
+	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, PetalburgCity_Gym_MapScript2_20498B
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, PetalburgCity_Gym_MapScript2_20499A
 	.byte 0
 
 PetalburgCity_Gym_MapScript1_20489E: @ 820489E
-	compare VAR_0x4085, 6
+	compare VAR_PETALBURG_GYM_STATE, 6
 	goto_if_eq PetalburgCity_Gym_EventScript_2048B5
-	compare VAR_0x4085, 7
+	compare VAR_PETALBURG_GYM_STATE, 7
 	call_if_ge PetalburgCity_Gym_EventScript_2048FF
 	end
 
@@ -44,9 +44,9 @@ PetalburgCity_Gym_EventScript_2048FF:: @ 82048FF
 	return
 
 PetalburgCity_Gym_MapScript1_20492D: @ 820492D
-	compare VAR_0x4085, 1
+	compare VAR_PETALBURG_GYM_STATE, 1
 	call_if_eq PetalburgCity_Gym_EventScript_20494D
-	compare VAR_0x4085, 6
+	compare VAR_PETALBURG_GYM_STATE, 6
 	call_if_lt PetalburgCity_Gym_EventScript_204955
 	call_if_set FLAG_SYS_GAME_CLEAR, PetalburgCity_Gym_EventScript_20495D
 	end
@@ -64,17 +64,17 @@ PetalburgCity_Gym_EventScript_20495D:: @ 820495D
 	specialvar VAR_RESULT, IsTrainerReadyForRematch
 	compare VAR_RESULT, 1
 	goto_if_eq PetalburgCity_Gym_EventScript_204985
-	compare VAR_0x4085, 8
+	compare VAR_PETALBURG_GYM_STATE, 8
 	goto_if_eq PetalburgCity_Gym_EventScript_204985
 	setobjectxyperm 1, 4, 107
 	return
 
 PetalburgCity_Gym_EventScript_204985:: @ 8204985
-	setvar VAR_0x4085, 8
+	setvar VAR_PETALBURG_GYM_STATE, 8
 	end
 
 PetalburgCity_Gym_MapScript2_20498B: @ 820498B
-	map_script_2 VAR_0x4085, 1, PetalburgCity_Gym_EventScript_204995
+	map_script_2 VAR_PETALBURG_GYM_STATE, 1, PetalburgCity_Gym_EventScript_204995
 	.2byte 0
 
 PetalburgCity_Gym_EventScript_204995:: @ 8204995
@@ -82,7 +82,7 @@ PetalburgCity_Gym_EventScript_204995:: @ 8204995
 	end
 
 PetalburgCity_Gym_MapScript2_20499A: @ 820499A
-	map_script_2 VAR_0x4085, 1, PetalburgCity_Gym_EventScript_2049A4
+	map_script_2 VAR_PETALBURG_GYM_STATE, 1, PetalburgCity_Gym_EventScript_2049A4
 	.2byte 0
 
 PetalburgCity_Gym_EventScript_2049A4:: @ 82049A4
@@ -90,17 +90,17 @@ PetalburgCity_Gym_EventScript_2049A4:: @ 82049A4
 	msgbox PetalburgCity_Gym_Text_205B32, MSGBOX_DEFAULT
 	msgbox PetalburgCity_Gym_Text_205B4C, MSGBOX_DEFAULT
 	closemessage
-	applymovement EVENT_OBJ_ID_PLAYER, PetalburgCity_Gym_Movement_2725AA
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceDown
 	applymovement 10, PetalburgCity_Gym_Movement_2049EC
 	waitmovement 0
 	playse SE_KAIDAN
 	removeobject 10
 	setflag FLAG_HIDE_PETALBURG_CITY_WALLY
 	delay 30
-	applymovement EVENT_OBJ_ID_PLAYER, PetalburgCity_Gym_Movement_2725A6
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceUp
 	waitmovement 0
 	msgbox PetalburgCity_Gym_Text_205C40, MSGBOX_DEFAULT
-	setvar VAR_0x4085, 2
+	setvar VAR_PETALBURG_GYM_STATE, 2
 	releaseall
 	end
 
@@ -114,7 +114,7 @@ PetalburgCity_Gym_Movement_2049EC: @ 82049EC
 PetalburgCity_Gym_EventScript_2049F1:: @ 82049F1
 	lock
 	faceplayer
-	switch VAR_0x4085
+	switch VAR_PETALBURG_GYM_STATE
 	case 2, PetalburgCity_Gym_EventScript_204D4A
 	case 3, PetalburgCity_Gym_EventScript_204D54
 	case 4, PetalburgCity_Gym_EventScript_204D5E
@@ -216,8 +216,8 @@ PetalburgCity_Gym_EventScript_204AAC:: @ 8204AAC
 	call_if_eq PetalburgCity_Gym_EventScript_204CB5
 	removeobject 10
 	setflag FLAG_HIDE_PETALBURG_CITY_WALLYS_AUNT
-	setvar VAR_0x4085, 1
-	setvar VAR_0x4057, 2
+	setvar VAR_PETALBURG_GYM_STATE, 1
+	setvar VAR_PETALBURG_STATE, 2
 	clearflag FLAG_HIDE_PETALBURG_CITY_WALLY
 	clearflag FLAG_HIDE_PETALBURG_GYM_WALLY
 	setflag FLAG_HIDE_LITTLEROOT_TOWN_BIRCHS_LAB_RIVAL
@@ -228,7 +228,7 @@ PetalburgCity_Gym_EventScript_204AAC:: @ 8204AAC
 	end
 
 PetalburgCity_Gym_EventScript_204C31:: @ 8204C31
-	applymovement 1, PetalburgCity_Gym_Movement_2725AA
+	applymovement 1, Common_Movement_WalkInPlaceDown
 	applymovement 10, PetalburgCity_Gym_Movement_2050EB
 	waitmovement 0
 	return
@@ -236,20 +236,20 @@ PetalburgCity_Gym_EventScript_204C31:: @ 8204C31
 PetalburgCity_Gym_EventScript_204C43:: @ 8204C43
 	applymovement 10, PetalburgCity_Gym_Movement_2050E1
 	waitmovement 0
-	applymovement 1, PetalburgCity_Gym_Movement_2725A8
-	applymovement EVENT_OBJ_ID_PLAYER, PetalburgCity_Gym_Movement_2725A8
+	applymovement 1, Common_Movement_WalkInPlaceRight
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceRight
 	waitmovement 0
 	return
 
 PetalburgCity_Gym_EventScript_204C5F:: @ 8204C5F
-	applymovement 1, PetalburgCity_Gym_Movement_2725AA
-	applymovement EVENT_OBJ_ID_PLAYER, PetalburgCity_Gym_Movement_2725AA
+	applymovement 1, Common_Movement_WalkInPlaceDown
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceDown
 	applymovement 10, PetalburgCity_Gym_Movement_2050EB
 	waitmovement 0
 	return
 
 PetalburgCity_Gym_EventScript_204C78:: @ 8204C78
-	applymovement 1, PetalburgCity_Gym_Movement_2725AA
+	applymovement 1, Common_Movement_WalkInPlaceDown
 	applymovement 10, PetalburgCity_Gym_Movement_205102
 	applymovement EVENT_OBJ_ID_PLAYER, PetalburgCity_Gym_Movement_205111
 	waitmovement 0
@@ -274,55 +274,55 @@ PetalburgCity_Gym_EventScript_204CB5:: @ 8204CB5
 	return
 
 PetalburgCity_Gym_EventScript_204CC7:: @ 8204CC7
-	applymovement 1, PetalburgCity_Gym_Movement_2725A6
+	applymovement 1, Common_Movement_WalkInPlaceUp
 	waitmovement 0
 	return
 
 PetalburgCity_Gym_EventScript_204CD2:: @ 8204CD2
-	applymovement 1, PetalburgCity_Gym_Movement_2725AA
-	applymovement EVENT_OBJ_ID_PLAYER, PetalburgCity_Gym_Movement_2725A6
+	applymovement 1, Common_Movement_WalkInPlaceDown
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceUp
 	waitmovement 0
 	return
 
 PetalburgCity_Gym_EventScript_204CE4:: @ 8204CE4
-	applymovement 1, PetalburgCity_Gym_Movement_2725A8
-	applymovement EVENT_OBJ_ID_PLAYER, PetalburgCity_Gym_Movement_2725A4
+	applymovement 1, Common_Movement_WalkInPlaceRight
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceLeft
 	waitmovement 0
 	return
 
 PetalburgCity_Gym_EventScript_204CF6:: @ 8204CF6
-	applymovement 1, PetalburgCity_Gym_Movement_2725A4
-	applymovement EVENT_OBJ_ID_PLAYER, PetalburgCity_Gym_Movement_2725A8
+	applymovement 1, Common_Movement_WalkInPlaceLeft
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceRight
 	waitmovement 0
 	return
 
 PetalburgCity_Gym_EventScript_204D08:: @ 8204D08
-	applymovement 1, PetalburgCity_Gym_Movement_2725AA
+	applymovement 1, Common_Movement_WalkInPlaceDown
 	waitmovement 0
 	return
 
 PetalburgCity_Gym_EventScript_204D13:: @ 8204D13
-	applymovement 1, PetalburgCity_Gym_Movement_2725A8
+	applymovement 1, Common_Movement_WalkInPlaceRight
 	waitmovement 0
 	return
 
 PetalburgCity_Gym_EventScript_204D1E:: @ 8204D1E
-	applymovement 1, PetalburgCity_Gym_Movement_2725AA
+	applymovement 1, Common_Movement_WalkInPlaceDown
 	waitmovement 0
 	return
 
 PetalburgCity_Gym_EventScript_204D29:: @ 8204D29
-	applymovement 1, PetalburgCity_Gym_Movement_2725AA
+	applymovement 1, Common_Movement_WalkInPlaceDown
 	waitmovement 0
 	return
 
 PetalburgCity_Gym_EventScript_204D34:: @ 8204D34
-	applymovement 10, PetalburgCity_Gym_Movement_27259E
+	applymovement 10, Common_Movement_FacePlayer
 	waitmovement 0
 	return
 
 PetalburgCity_Gym_EventScript_204D3F:: @ 8204D3F
-	applymovement 10, PetalburgCity_Gym_Movement_2725AA
+	applymovement 10, Common_Movement_WalkInPlaceDown
 	waitmovement 0
 	return
 
@@ -350,7 +350,7 @@ PetalburgCity_Gym_EventScript_204D72:: @ 8204D72
 	return
 
 PetalburgCity_Gym_EventScript_204D73:: @ 8204D73
-	applymovement 1, PetalburgCity_Gym_Movement_2725AA
+	applymovement 1, Common_Movement_WalkInPlaceDown
 	waitmovement 0
 	return
 
@@ -403,7 +403,7 @@ PetalburgCity_Gym_EventScript_204E17:: @ 8204E17
 PetalburgCity_Gym_EventScript_204E1D:: @ 8204E1D
 	giveitem_std ITEM_ENIGMA_BERRY
 	compare VAR_RESULT, 0
-	goto_if_eq PetalburgCity_Gym_EventScript_272054
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	setvar VAR_ENIGMA_BERRY_AVAILABLE, 0
 	release
 	end
@@ -413,10 +413,10 @@ PetalburgCity_Gym_EventScript_204E3B:: @ 8204E3B
 	trainerbattle_no_intro TRAINER_NORMAN_1, PetalburgCity_Gym_Text_206107
 	message PetalburgCity_Gym_Text_206162
 	waitmessage
-	call PetalburgCity_Gym_EventScript_27207E
+	call Common_EventScript_PlayGymBadgeFanfare
 	msgbox PetalburgCity_Gym_Text_20618A, MSGBOX_DEFAULT
 	setflag FLAG_DEFEATED_PETALBURG_GYM
-	setvar VAR_0x4085, 7
+	setvar VAR_PETALBURG_GYM_STATE, 7
 	setflag FLAG_BADGE05_GET
 	special sub_813B9A0
 	call PetalburgCity_Gym_EventScript_2721F8
@@ -444,7 +444,7 @@ PetalburgCity_Gym_EventScript_204E3B:: @ 8204E3B
 PetalburgCity_Gym_EventScript_204ED2:: @ 8204ED2
 	giveitem_std ITEM_TM42
 	compare VAR_RESULT, 0
-	goto_if_eq PetalburgCity_Gym_EventScript_27205E
+	goto_if_eq Common_EventScript_BagIsFull
 	setflag FLAG_RECEIVED_TM42
 	msgbox PetalburgCity_Gym_Text_206254, MSGBOX_DEFAULT
 	return
@@ -465,9 +465,9 @@ PetalburgCity_Gym_EventScript_204F13:: @ 8204F13
 	applymovement 11, PetalburgCity_Gym_Movement_2050BB
 	waitmovement 0
 	playse SE_PIN
-	applymovement 11, PetalburgCity_Gym_Movement_272598
+	applymovement 11, Common_Movement_ExclamationMark
 	waitmovement 0
-	applymovement 11, PetalburgCity_Gym_Movement_27259A
+	applymovement 11, Common_Movement_Delay48
 	waitmovement 0
 	delay 10
 	compare VAR_0x8008, 1
@@ -496,7 +496,7 @@ PetalburgCity_Gym_EventScript_204F13:: @ 8204F13
 	compare VAR_0x8008, 3
 	call_if_eq PetalburgCity_Gym_EventScript_20506C
 	removeobject 11
-	setvar VAR_0x4057, 4
+	setvar VAR_PETALBURG_STATE, 4
 	clearflag FLAG_HIDE_PETALBURG_CITY_WALLYS_UNCLE
 	warp MAP_PETALBURG_CITY, 255, 15, 8
 	waitstate
@@ -504,47 +504,47 @@ PetalburgCity_Gym_EventScript_204F13:: @ 8204F13
 	end
 
 PetalburgCity_Gym_EventScript_204FCC:: @ 8204FCC
-	applymovement 11, PetalburgCity_Gym_Movement_2725A6
+	applymovement 11, Common_Movement_WalkInPlaceUp
 	waitmovement 0
 	return
 
 PetalburgCity_Gym_EventScript_204FD7:: @ 8204FD7
-	applymovement 11, PetalburgCity_Gym_Movement_2725A8
+	applymovement 11, Common_Movement_WalkInPlaceRight
 	waitmovement 0
 	return
 
 PetalburgCity_Gym_EventScript_204FE2:: @ 8204FE2
-	applymovement 11, PetalburgCity_Gym_Movement_2725A4
+	applymovement 11, Common_Movement_WalkInPlaceLeft
 	waitmovement 0
 	return
 
 PetalburgCity_Gym_EventScript_204FED:: @ 8204FED
 	applymovement 11, PetalburgCity_Gym_Movement_2050C3
 	waitmovement 0
-	applymovement EVENT_OBJ_ID_PLAYER, PetalburgCity_Gym_Movement_2725A4
-	applymovement 1, PetalburgCity_Gym_Movement_2725A4
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceLeft
+	applymovement 1, Common_Movement_WalkInPlaceLeft
 	waitmovement 0
 	return
 
 PetalburgCity_Gym_EventScript_205009:: @ 8205009
 	applymovement 11, PetalburgCity_Gym_Movement_2050CA
 	waitmovement 0
-	applymovement EVENT_OBJ_ID_PLAYER, PetalburgCity_Gym_Movement_2725AA
-	applymovement 1, PetalburgCity_Gym_Movement_2725AA
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceDown
+	applymovement 1, Common_Movement_WalkInPlaceDown
 	waitmovement 0
 	return
 
 PetalburgCity_Gym_EventScript_205025:: @ 8205025
 	applymovement 11, PetalburgCity_Gym_Movement_2050D0
 	waitmovement 0
-	applymovement EVENT_OBJ_ID_PLAYER, PetalburgCity_Gym_Movement_2725AA
-	applymovement 1, PetalburgCity_Gym_Movement_2725AA
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceDown
+	applymovement 1, Common_Movement_WalkInPlaceDown
 	waitmovement 0
 	return
 
 PetalburgCity_Gym_EventScript_205041:: @ 8205041
 	applymovement 11, PetalburgCity_Gym_Movement_20507E
-	applymovement 1, PetalburgCity_Gym_Movement_2725AA
+	applymovement 1, Common_Movement_WalkInPlaceDown
 	applymovement EVENT_OBJ_ID_PLAYER, PetalburgCity_Gym_Movement_2050A1
 	waitmovement 0
 	return
@@ -783,7 +783,7 @@ PetalburgCity_Gym_EventScript_20512D:: @ 820512D
 
 PetalburgCity_Gym_EventScript_205137:: @ 8205137
 	lockall
-	compare VAR_0x4085, 6
+	compare VAR_PETALBURG_GYM_STATE, 6
 	goto_if_lt PetalburgCity_Gym_EventScript_20517D
 	setvar VAR_0x8008, 7
 	setvar VAR_0x8009, 85
@@ -813,7 +813,7 @@ PetalburgCity_Gym_EventScript_20517D:: @ 820517D
 
 PetalburgCity_Gym_EventScript_205187:: @ 8205187
 	lockall
-	compare VAR_0x4085, 6
+	compare VAR_PETALBURG_GYM_STATE, 6
 	goto_if_lt PetalburgCity_Gym_EventScript_20517D
 	setvar VAR_0x8008, 1
 	setvar VAR_0x8009, 98

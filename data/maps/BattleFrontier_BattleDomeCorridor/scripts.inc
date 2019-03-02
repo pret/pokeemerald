@@ -1,5 +1,5 @@
 BattleFrontier_BattleDomeCorridor_MapScripts:: @ 824B0FE
-	map_script 2, BattleFrontier_BattleDomeCorridor_MapScript2_24B104
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, BattleFrontier_BattleDomeCorridor_MapScript2_24B104
 	.byte 0
 
 BattleFrontier_BattleDomeCorridor_MapScript2_24B104: @ 824B104

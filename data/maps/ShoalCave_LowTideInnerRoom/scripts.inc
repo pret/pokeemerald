@@ -1,6 +1,6 @@
 ShoalCave_LowTideInnerRoom_MapScripts:: @ 8236EF5
-	map_script 1, ShoalCave_LowTideInnerRoom_MapScript1_236F16
-	map_script 3, ShoalCave_LowTideInnerRoom_MapScript1_236F00
+	map_script MAP_SCRIPT_ON_LOAD, ShoalCave_LowTideInnerRoom_MapScript1_236F16
+	map_script MAP_SCRIPT_ON_TRANSITION, ShoalCave_LowTideInnerRoom_MapScript1_236F00
 	.byte 0
 
 ShoalCave_LowTideInnerRoom_MapScript1_236F00: @ 8236F00
@@ -64,7 +64,7 @@ ShoalCave_LowTideInnerRoom_EventScript_236FBA:: @ 8236FBA
 	goto_if_set FLAG_RECEIVED_SHOAL_SHELL_1, ShoalCave_LowTideInnerRoom_EventScript_236FEC
 	giveitem_std ITEM_SHOAL_SHELL
 	compare VAR_RESULT, 0
-	goto_if_eq ShoalCave_LowTideInnerRoom_EventScript_272054
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	setmetatile 41, 20, 859, 0
 	special DrawWholeMapView
 	setflag FLAG_RECEIVED_SHOAL_SHELL_1
@@ -81,7 +81,7 @@ ShoalCave_LowTideInnerRoom_EventScript_236FF6:: @ 8236FF6
 	goto_if_set FLAG_RECEIVED_SHOAL_SHELL_2, ShoalCave_LowTideInnerRoom_EventScript_236FEC
 	giveitem_std ITEM_SHOAL_SHELL
 	compare VAR_RESULT, 0
-	goto_if_eq ShoalCave_LowTideInnerRoom_EventScript_272054
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	setmetatile 41, 10, 859, 0
 	special DrawWholeMapView
 	setflag FLAG_RECEIVED_SHOAL_SHELL_2
@@ -93,7 +93,7 @@ ShoalCave_LowTideInnerRoom_EventScript_237028:: @ 8237028
 	goto_if_set FLAG_RECEIVED_SHOAL_SHELL_3, ShoalCave_LowTideInnerRoom_EventScript_236FEC
 	giveitem_std ITEM_SHOAL_SHELL
 	compare VAR_RESULT, 0
-	goto_if_eq ShoalCave_LowTideInnerRoom_EventScript_272054
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	setmetatile 6, 9, 859, 0
 	special DrawWholeMapView
 	setflag FLAG_RECEIVED_SHOAL_SHELL_3
@@ -105,7 +105,7 @@ ShoalCave_LowTideInnerRoom_EventScript_23705A:: @ 823705A
 	goto_if_set FLAG_RECEIVED_SHOAL_SHELL_4, ShoalCave_LowTideInnerRoom_EventScript_236FEC
 	giveitem_std ITEM_SHOAL_SHELL
 	compare VAR_RESULT, 0
-	goto_if_eq ShoalCave_LowTideInnerRoom_EventScript_272054
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	setmetatile 16, 13, 859, 0
 	special DrawWholeMapView
 	setflag FLAG_RECEIVED_SHOAL_SHELL_4
@@ -117,7 +117,7 @@ ShoalCave_LowTideInnerRoom_EventScript_23708C:: @ 823708C
 	goto_if_set FLAG_RECEIVED_SHOAL_SALT_1, ShoalCave_LowTideInnerRoom_EventScript_2370BE
 	giveitem_std ITEM_SHOAL_SALT
 	compare VAR_RESULT, 0
-	goto_if_eq ShoalCave_LowTideInnerRoom_EventScript_272054
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	setmetatile 31, 8, 858, 0
 	special DrawWholeMapView
 	setflag FLAG_RECEIVED_SHOAL_SALT_1
@@ -134,7 +134,7 @@ ShoalCave_LowTideInnerRoom_EventScript_2370C8:: @ 82370C8
 	goto_if_set FLAG_RECEIVED_SHOAL_SALT_2, ShoalCave_LowTideInnerRoom_EventScript_2370BE
 	giveitem_std ITEM_SHOAL_SALT
 	compare VAR_RESULT, 0
-	goto_if_eq ShoalCave_LowTideInnerRoom_EventScript_272054
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	setmetatile 14, 26, 858, 0
 	special DrawWholeMapView
 	setflag FLAG_RECEIVED_SHOAL_SALT_2

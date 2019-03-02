@@ -1,8 +1,8 @@
 BattleFrontier_BattleDomeBattleRoom_MapScripts:: @ 824BC9C
-	map_script 3, BattleFrontier_BattleDomeBattleRoom_MapScript1_24BCB1
-	map_script 2, BattleFrontier_BattleDomeBattleRoom_MapScript2_24BD00
-	map_script 4, BattleFrontier_BattleDomeBattleRoom_MapScript2_24C481
-	map_script 5, BattleFrontier_BattleDomeBattleRoom_MapScript1_24C4F0
+	map_script MAP_SCRIPT_ON_TRANSITION, BattleFrontier_BattleDomeBattleRoom_MapScript1_24BCB1
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, BattleFrontier_BattleDomeBattleRoom_MapScript2_24BD00
+	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, BattleFrontier_BattleDomeBattleRoom_MapScript2_24C481
+	map_script MAP_SCRIPT_ON_RESUME, BattleFrontier_BattleDomeBattleRoom_MapScript1_24C4F0
 	.byte 0
 
 BattleFrontier_BattleDomeBattleRoom_MapScript1_24BCB1: @ 824BCB1
@@ -966,14 +966,14 @@ BattleFrontier_BattleDomeBattleRoom_EventScript_24C919:: @ 824C919
 	random 2
 	copyvar VAR_TEMP_D, VAR_RESULT
 	compare VAR_TEMP_D, 0
-	goto_if_eq BattleFrontier_BattleDomeBattleRoom_EventScript_27374E
+	goto_if_eq Common_EventScript_NopReturn
 	setobjectxyperm 6, 2, 0
 	setobjectmovementtype 6, MOVEMENT_TYPE_FACE_RIGHT
 	return
 
 BattleFrontier_BattleDomeBattleRoom_EventScript_24C938:: @ 824C938
 	compare VAR_TEMP_D, 0
-	goto_if_eq BattleFrontier_BattleDomeBattleRoom_EventScript_27374E
+	goto_if_eq Common_EventScript_NopReturn
 	applymovement 6, BattleFrontier_BattleDomeBattleRoom_Movement_24C95E
 	return
 

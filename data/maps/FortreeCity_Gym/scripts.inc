@@ -1,6 +1,6 @@
 FortreeCity_Gym_MapScripts:: @ 82165AB
-	map_script 3, FortreeCity_Gym_MapScript1_2165B6
-	map_script 4, FortreeCity_Gym_MapScript2_2165BA
+	map_script MAP_SCRIPT_ON_TRANSITION, FortreeCity_Gym_MapScript1_2165B6
+	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, FortreeCity_Gym_MapScript2_2165BA
 	.byte 0
 
 FortreeCity_Gym_MapScript1_2165B6: @ 82165B6
@@ -28,7 +28,7 @@ FortreeCity_Gym_EventScript_2165C8:: @ 82165C8
 FortreeCity_Gym_EventScript_2165FD:: @ 82165FD
 	message FortreeCity_Gym_Text_216EEC
 	waitmessage
-	call FortreeCity_Gym_EventScript_27207E
+	call Common_EventScript_PlayGymBadgeFanfare
 	msgbox FortreeCity_Gym_Text_216F17, MSGBOX_DEFAULT
 	setflag FLAG_DEFEATED_FORTREE_GYM
 	setflag FLAG_BADGE06_GET
@@ -51,7 +51,7 @@ FortreeCity_Gym_EventScript_2165FD:: @ 82165FD
 FortreeCity_Gym_EventScript_216646:: @ 8216646
 	giveitem_std ITEM_TM40
 	compare VAR_RESULT, 0
-	goto_if_eq FortreeCity_Gym_EventScript_272054
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	msgbox FortreeCity_Gym_Text_216FEC, MSGBOX_DEFAULT
 	setflag FLAG_RECEIVED_TM40
 	release
@@ -60,7 +60,7 @@ FortreeCity_Gym_EventScript_216646:: @ 8216646
 FortreeCity_Gym_EventScript_21666A:: @ 821666A
 	giveitem_std ITEM_TM40
 	compare VAR_RESULT, 0
-	goto_if_eq FortreeCity_Gym_EventScript_27205E
+	goto_if_eq Common_EventScript_BagIsFull
 	msgbox FortreeCity_Gym_Text_216FEC, MSGBOX_DEFAULT
 	setflag FLAG_RECEIVED_TM40
 	return

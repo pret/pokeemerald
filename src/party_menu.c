@@ -63,6 +63,7 @@
 #include "window.h"
 #include "constants/battle.h"
 #include "constants/battle_frontier.h"
+#include "constants/easy_chat.h"
 #include "constants/field_effects.h"
 #include "constants/flags.h"
 #include "constants/items.h"
@@ -3833,7 +3834,7 @@ static void sub_81B3828(void)
 static void sub_81B3894(void)
 {
     gPaletteFade.bufferTransferDisabled = TRUE;
-    gUnknown_0203CEC8.unk9 = gUnknown_0203CF20;
+    gUnknown_0203CEC8.unk9 = gLastViewedMonIndex;
     InitPartyMenu(gUnknown_0203CEC8.unk8_0, 0xFF, gUnknown_0203CEC8.unkB, 1, 21, sub_81B36FC, gUnknown_0203CEC8.exitCallback);
 }
 
@@ -4211,7 +4212,11 @@ static void sub_81B452C(void)
 {
     u8 mail = GetMonData(&gPlayerParty[gUnknown_0203CEC8.unk9], MON_DATA_MAIL);
 
-    sub_811A20C(4, gSaveBlock1Ptr->mail[mail].words, sub_81B4578, 3);
+    DoEasyChatScreen(
+    	EASY_CHAT_TYPE_MAIL,
+    	gSaveBlock1Ptr->mail[mail].words,
+    	sub_81B4578,
+    	EASY_CHAT_PERSON_DISPLAY_NONE);
 }
 
 static void sub_81B4578(void)
@@ -6385,7 +6390,11 @@ static void sub_81B814C(void)
 
     sub_81B1DB8(&gPlayerParty[gUnknown_0203CEC8.unk9], gUnknown_0203CEC8.unkC);
     mail = GetMonData(&gPlayerParty[gUnknown_0203CEC8.unk9], MON_DATA_MAIL);
-    sub_811A20C(4, gSaveBlock1Ptr->mail[mail].words, sub_81B81A8, 3);
+    DoEasyChatScreen(
+    	EASY_CHAT_TYPE_MAIL,
+    	gSaveBlock1Ptr->mail[mail].words,
+    	sub_81B81A8,
+    	EASY_CHAT_PERSON_DISPLAY_NONE);
 }
 
 static void sub_81B81A8(void)
@@ -7319,9 +7328,9 @@ static void sub_81B97DC(struct Pokemon *mon, u8 slotTo, u8 slotFrom)
     u8 pp1 = GetMonData(mon, MON_DATA_PP1 + slotTo);
     u8 pp0 = GetMonData(mon, MON_DATA_PP1 + slotFrom);
     u8 ppBonuses = GetMonData(mon, MON_DATA_PP_BONUSES);
-    u8 ppBonusMask1 = gUnknown_08329D22[slotTo];
+    u8 ppBonusMask1 = gPPUpGetMask[slotTo];
     u8 ppBonusMove1 = (ppBonuses & ppBonusMask1) >> (slotTo * 2);
-    u8 ppBonusMask2 = gUnknown_08329D22[slotFrom];
+    u8 ppBonusMask2 = gPPUpGetMask[slotFrom];
     u8 ppBonusMove2 = (ppBonuses & ppBonusMask2) >> (slotFrom * 2);
     ppBonuses &= ~ppBonusMask1;
     ppBonuses &= ~ppBonusMask2;

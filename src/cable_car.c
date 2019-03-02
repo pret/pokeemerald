@@ -358,7 +358,7 @@ static void CleanupCableCar(void)
     HideBg(3);
     sub_8150B6C(0);
     gSpriteCoordOffsetX = 0;
-    sub_80AB130(WEATHER_NONE);
+    SetCurrentAndNextWeatherNoDelay(WEATHER_NONE);
     for (i = 0; i < 20; i++)
         gWeatherPtr->sprites.s2.ashSprites[i] = NULL;
 
@@ -394,7 +394,7 @@ static void sub_81503E4(u8 taskId)
     case 0:
         if (sCableCar->timer == sCableCar->unk4)
         {
-            ChangeWeather(sCableCar->weather);
+            SetNextWeather(sCableCar->weather);
             sCableCar->state = 1;
         }
         break;
@@ -798,7 +798,7 @@ static void LoadCableCarSprites(void)
             gSprites[spriteId].data[1] = 99;
             sCableCar->weather = WEATHER_ASH;
             sCableCar->unk4 = 0x15e;
-            sub_80AB130(WEATHER_SUNNY);
+            SetCurrentAndNextWeatherNoDelay(WEATHER_SUNNY);
             break;
         case 1:
             CopyToBgTilemapBufferRect_ChangePalette(0, sCableCar->mtChimneyTilemap + 0x24, 24, 26, 12, 3, 17);
@@ -822,7 +822,7 @@ static void LoadCableCarSprites(void)
             gSprites[spriteId].data[1] = 0x41;
             sCableCar->weather = WEATHER_SUNNY;
             sCableCar->unk4 = 0x109;
-            sub_80AB130(WEATHER_ASH);
+            SetCurrentAndNextWeatherNoDelay(WEATHER_ASH);
             break;
     }
     for (i = 0; i < 9; i++)

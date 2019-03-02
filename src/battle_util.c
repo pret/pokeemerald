@@ -1258,13 +1258,9 @@ u8 DoFieldEndTurnEffects(void)
         case ENDTURN_GRASSY_TERRAIN:
             if (gFieldStatuses & STATUS_FIELD_GRASSY_TERRAIN)
             {
+                if (gFieldTimers.grassyTerrainTimer == 0 || --gFieldTimers.grassyTerrainTimer == 0)
+                    gFieldStatuses &= ~(STATUS_FIELD_GRASSY_TERRAIN);
                 BattleScriptExecute(BattleScript_GrassyTerrainLoop);
-                effect++;
-            }
-            if (gFieldStatuses & STATUS_FIELD_GRASSY_TERRAIN && --gFieldTimers.grassyTerrainTimer == 0)
-            {
-                gFieldStatuses &= ~(STATUS_FIELD_GRASSY_TERRAIN);
-                BattleScriptExecute(BattleScript_GrassyTerrainEnds);
                 effect++;
             }
             gBattleStruct->turnCountersTracker++;
@@ -2017,7 +2013,8 @@ enum
 	CANCELLER_IN_LOVE,
 	CANCELLER_BIDE,
 	CANCELLER_THAW,
-	CANCELLER_POWDER,
+	CANCELLER_POWDER_MOVE,
+	CANCELLER_POWDER_STATUS,
 	CANCELLER_END,
 	CANCELLER_PSYCHIC_TERRAIN,
 	CANCELLER_END2,
@@ -2308,7 +2305,27 @@ u8 AtkCanceller_UnableToUseMove(void)
             }
             gBattleStruct->atkCancellerTracker++;
             break;
-        case CANCELLER_POWDER:
+        case CANCELLER_POWDER_MOVE:
+            if (gBattleMoves[gCurrentMove].flags & FLAG_POWDER)
+            {
+                if (IS_BATTLER_OF_TYPE(gBattlerTarget, TYPE_GRASS)
+                    || GetBattlerAbility(gBattlerTarget) == ABILITY_OVERCOAT)
+                {
+                    gBattlerAbility = gBattlerTarget;
+                    effect = 1;
+                }
+                else if (GetBattlerHoldEffect(gBattlerTarget, TRUE) == HOLD_EFFECT_SAFETY_GOOGLES)
+                {
+                    RecordItemEffectBattle(gBattlerTarget, HOLD_EFFECT_SAFETY_GOOGLES);
+                    effect = 1;
+                }
+
+                if (effect)
+                    gBattlescriptCurrInstr = BattleScript_PowderMoveNoEffect;
+            }
+            gBattleStruct->atkCancellerTracker++;
+            break;
+        case CANCELLER_POWDER_STATUS:
             if (gBattleMons[gBattlerAttacker].status2 & STATUS2_POWDER)
             {
                 u32 moveType;
@@ -3242,6 +3259,9 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
              && !gProtectStructs[gBattlerAttacker].confusionSelfDmg
              && TARGET_TURN_DAMAGED
              && (gBattleMoves[move].flags & FLAG_MAKES_CONTACT)
+             && !IS_BATTLER_OF_TYPE(gBattlerAttacker, TYPE_GRASS)
+             && GetBattlerAbility(gBattlerAttacker) != ABILITY_OVERCOAT
+             && GetBattlerHoldEffect(gBattlerAttacker, TRUE) != HOLD_EFFECT_SAFETY_GOOGLES
              && (Random() % 10) == 0)
             {
                 do
@@ -3254,7 +3274,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
 
                 gBattleScripting.moveEffect += MOVE_EFFECT_AFFECTS_USER;
                 BattleScriptPushCursor();
-                gBattlescriptCurrInstr = BattleScript_ApplySecondaryEffect;
+                gBattlescriptCurrInstr = BattleScript_AbilityStatusEffect;
                 gHitMarker |= HITMARKER_IGNORE_SAFEGUARD;
                 effect++;
             }
@@ -3269,7 +3289,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
             {
                 gBattleScripting.moveEffect = MOVE_EFFECT_AFFECTS_USER | MOVE_EFFECT_POISON;
                 BattleScriptPushCursor();
-                gBattlescriptCurrInstr = BattleScript_ApplySecondaryEffect;
+                gBattlescriptCurrInstr = BattleScript_AbilityStatusEffect;
                 gHitMarker |= HITMARKER_IGNORE_SAFEGUARD;
                 effect++;
             }
@@ -3284,7 +3304,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
             {
                 gBattleScripting.moveEffect = MOVE_EFFECT_AFFECTS_USER | MOVE_EFFECT_PARALYSIS;
                 BattleScriptPushCursor();
-                gBattlescriptCurrInstr = BattleScript_ApplySecondaryEffect;
+                gBattlescriptCurrInstr = BattleScript_AbilityStatusEffect;
                 gHitMarker |= HITMARKER_IGNORE_SAFEGUARD;
                 effect++;
             }
@@ -3299,7 +3319,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
             {
                 gBattleScripting.moveEffect = MOVE_EFFECT_AFFECTS_USER | MOVE_EFFECT_BURN;
                 BattleScriptPushCursor();
-                gBattlescriptCurrInstr = BattleScript_ApplySecondaryEffect;
+                gBattlescriptCurrInstr = BattleScript_AbilityStatusEffect;
                 gHitMarker |= HITMARKER_IGNORE_SAFEGUARD;
                 effect++;
             }
@@ -5182,7 +5202,7 @@ static u32 CalcMoveBasePowerAfterModifiers(u16 move, u8 battlerAtk, u8 battlerDe
         MulModifier(&modifier, UQ_4_12(1.5));
     if (gFieldStatuses & STATUS_FIELD_GRASSY_TERRAIN && moveType == TYPE_GRASS && IsBattlerGrounded(battlerAtk) && !(gStatuses3[battlerAtk] & STATUS3_SEMI_INVULNERABLE))
         MulModifier(&modifier, UQ_4_12(1.5));
-    if (gFieldStatuses & STATUS_FIELD_MISTY_TERRAIN && moveType == TYPE_DRAGON && IsBattlerGrounded(battlerDef) && !(gStatuses3[battlerDef] & STATUS3_SEMI_INVULNERABLE)
+    if (gFieldStatuses & STATUS_FIELD_MISTY_TERRAIN && moveType == TYPE_DRAGON && IsBattlerGrounded(battlerDef) && !(gStatuses3[battlerDef] & STATUS3_SEMI_INVULNERABLE))
         MulModifier(&modifier, UQ_4_12(0.5));
     if (gFieldStatuses & STATUS_FIELD_ELECTRIC_TERRAIN && moveType == TYPE_ELECTRIC && IsBattlerGrounded(battlerAtk) && !(gStatuses3[battlerAtk] & STATUS3_SEMI_INVULNERABLE))
         MulModifier(&modifier, UQ_4_12(1.5));

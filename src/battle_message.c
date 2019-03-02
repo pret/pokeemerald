@@ -526,7 +526,7 @@ static const u8 sText_PkmnFlung[] = _("{B_ATK_NAME_WITH_PREFIX} flung its\n{B_LA
 static const u8 sText_PkmnPreventedFromHealing[] = _("{B_DEF_NAME_WITH_PREFIX} was prevented\nfrom healing!");
 static const u8 sText_PkmnSwitchedAtkAndDef[] = _("{B_ATK_NAME_WITH_PREFIX} switched its\nAttack and Defense!");
 static const u8 sText_PkmnsAbilitySuppressed[] = _("{B_DEF_NAME_WITH_PREFIX}'s ability\nwas suppressed!");
-static const u8 sText_ShieldedFromCriticalHits[] = _("The {B_CURRENT_MOVE} shielded your\nteam from critical hits!");
+static const u8 sText_ShieldedFromCriticalHits[] = _("The {B_CURRENT_MOVE} shielded {B_ATK_TEAM2}\nteam from critical hits!");
 static const u8 sText_SwitchedAtkAndSpAtk[] = _("{B_ATK_NAME_WITH_PREFIX} switched all its\nchanges to its Attack and\pSp. Atk with the target!");
 static const u8 sText_SwitchedDefAndSpDef[] = _("{B_ATK_NAME_WITH_PREFIX} switched all its\nchanges to its Defense and\pSp. Def with the target!");
 static const u8 sText_PkmnAcquiredAbility[] = _("{B_DEF_NAME_WITH_PREFIX} acquired\n{B_LAST_ABILITY}!");
@@ -539,7 +539,7 @@ static const u8 sText_PointedStonesFloat[] =_("Pointed stones float in the air\n
 static const u8 sText_CloakedInMysticalMoonlight[] =_("It became cloaked in mystical\nmoonlight!");
 static const u8 sText_TrappedBySwirlingMagma[] =_("{B_DEF_NAME_WITH_PREFIX} became\ntrapped by swirling magma!");
 static const u8 sText_VanishedInstantly[] =_("{B_ATK_NAME_WITH_PREFIX} vanished\ninstantly!");
-static const u8 sText_ProtectedTeam[] =_("{B_CURRENT_MOVE} protected\n{B_ATK_TEAM}!");
+static const u8 sText_ProtectedTeam[] =_("{B_CURRENT_MOVE} protected\n{B_ATK_TEAM2} team!");
 static const u8 sText_SharedItsGuard[] =_("{B_ATK_NAME_WITH_PREFIX} shared its\nguard with the target!");
 static const u8 sText_SharedItsPower[] =_("{B_ATK_NAME_WITH_PREFIX} shared its\npower with the target!");
 static const u8 sText_SwapsDefAndSpDefOfAllPkmn[] =_("It created a bizarre area in which\nthe Defense and Sp.Def stats are swapped!");
@@ -562,8 +562,8 @@ static const u8 sText_EmbargoEnds[] = _("{B_DEF_NAME_WITH_PREFIX}can\nuse items 
 static const u8 sText_MagnetRiseEnds[] = _("{B_ATK_NAME_WITH_PREFIX}'s electromagnetism\nwore off!");
 static const u8 sText_HealBlockEnds[] = _("{B_ATK_NAME_WITH_PREFIX}'s Heal Block\nwore off!");
 static const u8 sText_TelekinesisEnds[] = _("{B_ATK_NAME_WITH_PREFIX} was freed\nfrom the telekinesis!");
-static const u8 sText_TailwindEnds[] = _("{B_ATK_TEAM}'s tailwind\n petered out!");
-static const u8 sText_LuckyChantEnds[] = _("{B_ATK_TEAM}'s Lucky Chant\n wore off!");
+static const u8 sText_TailwindEnds[] = _("{B_ATK_TEAM1} team's tailwind\n petered out!");
+static const u8 sText_LuckyChantEnds[] = _("{B_ATK_TEAM1} team's Lucky Chant\n wore off!");
 static const u8 sText_TrickRoomEnds[] = _("The twisted dimensions returned to\nnormal!");
 static const u8 sText_WonderRoomEnds[] = _("Wonder Room wore off, and\nDefense and Sp. Def stats returned to normal!");
 static const u8 sText_MagicRoomEnds[] = _("Magic Room wore off, and\nheld items' effects returned to normal!");
@@ -575,10 +575,10 @@ static const u8 sText_TargetAbilityRaisedStat[] = _("{B_DEF_NAME_WITH_PREFIX}'s 
 static const u8 sText_TargetAbilityLoweredStat[] = _("{B_DEF_NAME_WITH_PREFIX}'s {B_DEF_ABILITY}\nlowered its {B_BUFF1}!");
 static const u8 sText_AttackerAbilityRaisedStat[] = _("{B_ATK_NAME_WITH_PREFIX}'s {B_ATK_ABILITY}\nraised its {B_BUFF1}!");
 static const u8 sText_AuroraVeilEnds[] = _("{B_DEF_NAME_WITH_PREFIX}'s {B_DEF_ABILITY}\nwore off!");
-static const u8 sText_ElectricTerrainEnds[] = _("{B_ATK_ABILITY} wore off.");
-static const u8 sText_MistyTerrainEnds[] = _("{B_ATK_ABILITY} wore off.");
-static const u8 sText_PsychicTerrainEnds[] = _("{B_ATK_ABILITY} wore off.");
-static const u8 sText_GrassyTerrainEnds[] = _("{B_ATK_ABILITY} wore off.");
+static const u8 sText_ElectricTerrainEnds[] = _("The electricity disappeared\nfrom the battlefield.");
+static const u8 sText_MistyTerrainEnds[] = _("The mist disappeared\nfrom the battlefield.");
+static const u8 sText_PsychicTerrainEnds[] = _("The weirdness disappeared\nfrom the battlefield.");
+static const u8 sText_GrassyTerrainEnds[] = _("The grass disappeared\nfrom the battlefield.");
 static const u8 sText_AngryPointActivates[] = _("{B_DEF_NAME_WITH_PREFIX}'s {B_DEF_ABILITY} maxed\nits attack!");
 static const u8 sText_PoisonHealHpUp[] = _("The poisoning healed {B_ATK_NAME_WITH_PREFIX}\na little bit!");
 static const u8 sText_BadDreamsDmg[] = _("The {B_DEF_NAME_WITH_PREFIX} is tormented\nby {B_DEF_ABILITY}!");
@@ -1636,8 +1636,10 @@ const u8 gText_RecordBattleToPass[] = _("Would you like to record your battle\no
 const u8 gText_BattleRecordedOnPass[] = _("{B_PLAYER_NAME}'s battle result was recorded\non the FRONTIER PASS.");
 static const u8 sText_LinkTrainerWantsToBattlePause[] = _("{B_LINK_OPPONENT1_NAME}\nwants to battle!{PAUSE 49}");
 static const u8 sText_TwoLinkTrainersWantToBattlePause[] = _("{B_LINK_OPPONENT1_NAME} and {B_LINK_OPPONENT2_NAME}\nwant to battle!{PAUSE 49}");
-static const u8 sText_YourTeam[] = _("Your team");
-static const u8 sText_OpposingTeam[] = _("The opposing team");
+static const u8 sText_Your1[] = _("Your");
+static const u8 sText_Opposing1[] = _("The opposing");
+static const u8 sText_Your2[] = _("your");
+static const u8 sText_Opposing2[] = _("the opposing");
 
 // This is four lists of moves which use a different attack string in Japanese
 // to the default. See the documentation for ChooseTypeOfMoveUsedString for more detail.
@@ -3126,11 +3128,17 @@ u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst)
                     break;
                 }
                 break;
-            case B_TXT_ATK_TEAM:
+            case B_TXT_ATK_TEAM1:
                 if (GetBattlerSide(gBattlerAttacker) == B_SIDE_PLAYER)
-                    toCpy = sText_YourTeam;
+                    toCpy = sText_Your1;
                 else
-                    toCpy = sText_OpposingTeam;
+                    toCpy = sText_Opposing1;
+                break;
+            case B_TXT_ATK_TEAM2:
+                if (GetBattlerSide(gBattlerAttacker) == B_SIDE_PLAYER)
+                    toCpy = sText_Your2;
+                else
+                    toCpy = sText_Opposing2;
                 break;
             }
 

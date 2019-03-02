@@ -5455,6 +5455,9 @@ BattleScript_EnduredMsg::
 	return
 	
 BattleScript_SturdiedMsg::
+	copybyte gBattlerAbility, gBattlerTarget
+	pause 0x10
+	call BattleScript_AbilityPopUp
 	printstring STRINGID_ENDUREDSTURDY
 	waitmessage 0x40
 	return
@@ -5569,6 +5572,19 @@ BattleScript_MoveUsedIsParalyzed::
 	waitmessage 0x40
 	statusanimation BS_ATTACKER
 	cancelmultiturnmoves BS_ATTACKER
+	goto BattleScript_MoveEnd
+	
+BattleScript_PowderMoveNoEffect::
+	attackstring
+	ppreduce
+	pause 0x20
+	jumpiftype BS_TARGET, TYPE_GRASS, BattleScript_PowderMoveNoEffectPrint
+	call BattleScript_AbilityPopUp
+BattleScript_PowderMoveNoEffectPrint:
+	printstring STRINGID_ITDOESNTAFFECT
+	waitmessage 0x40
+	cancelmultiturnmoves BS_ATTACKER
+	sethword gMoveResultFlags, MOVE_RESULT_FAILED
 	goto BattleScript_MoveEnd
 
 BattleScript_MoveUsedFlinched::
@@ -6161,17 +6177,17 @@ BattleScript_GrassyTerrainLoop::
 	printstring STRINGID_GRASSYTERRAINHEALS
 	waitmessage 0x40
 BattleScript_GrassyTerrainHpChange:
-	orword gHitMarker, HITMARKER_x20 | HITMARKER_IGNORE_SUBSTITUTE | HITMARKER_x100000 | HITMARKER_GRUDGE
+	orword gHitMarker, HITMARKER_x20 | HITMARKER_IGNORE_SUBSTITUTE | HITMARKER_x100000
 	healthbarupdate BS_ATTACKER
 	datahpupdate BS_ATTACKER
 BattleScript_GrassyTerrainLoopIncrement::
-	jumpifbyte CMP_NOT_EQUAL, gBattleOutcome, 0, BattleScript_GrassyTerrainLoopEnd
 	addbyte gBattleCommunication, 0x1
 	jumpifbytenotequal gBattleCommunication, gBattlersCount, BattleScript_GrassyTerrainLoop
 BattleScript_GrassyTerrainLoopEnd::
-	bicword gHitMarker, HITMARKER_x20 | HITMARKER_IGNORE_SUBSTITUTE | HITMARKER_x100000 | HITMARKER_GRUDGE
+	bicword gHitMarker, HITMARKER_x20 | HITMARKER_IGNORE_SUBSTITUTE | HITMARKER_x100000
+	jumpifbyte CMP_EQUAL, gFieldTimers + 5, 0x0, BattleScript_GrassyTerrainEnds
 	end2
-    
+	
 BattleScript_AbilityNoSpecificStatLoss::
 	pause 0x20
 	call BattleScript_AbilityPopUp
@@ -6315,8 +6331,9 @@ BattleScript_CuteCharmActivates::
 	waitmessage 0x40
 	return
 
-BattleScript_ApplySecondaryEffect::
+BattleScript_AbilityStatusEffect::
 	waitstate
+	call BattleScript_AbilityPopUp
 	seteffectsecondary
 	return
 

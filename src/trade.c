@@ -1834,9 +1834,9 @@ static void sub_8077B74(void)
         }
 
         if (gUnknown_0203229C->tradeMenuCursorPosition < PARTY_SIZE)
-            gUnknown_0203229C->tradeMenuCursorPosition = gUnknown_0203CF20;
+            gUnknown_0203229C->tradeMenuCursorPosition = gLastViewedMonIndex;
         else
-            gUnknown_0203229C->tradeMenuCursorPosition = gUnknown_0203CF20 + PARTY_SIZE;
+            gUnknown_0203229C->tradeMenuCursorPosition = gLastViewedMonIndex + PARTY_SIZE;
 
         gUnknown_0203229C->tradeMenuCursorSpriteIdx = CreateSprite(&gSpriteTemplate_832DC94, gTradeMonSpriteCoords[gUnknown_0203229C->tradeMenuCursorPosition][0] * 8 + 32, gTradeMonSpriteCoords[gUnknown_0203229C->tradeMenuCursorPosition][1] * 8, 2);
         gMain.state = 16;

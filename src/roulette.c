@@ -996,7 +996,7 @@ static void sub_81405CC(void)
         taskId = gUnknown_0203AB88->varA4 = CreateTask(sub_81408A8, 0);
         gTasks[taskId].data[6] = 6;
         gTasks[taskId].data[13] = GetCoins();
-        sub_80EDE84(GetCoins());
+        AlertTVThatPlayerPlayedRoulette(GetCoins());
         gUnknown_0203AB88->varA5 = CreateTask(sub_8140814, 1);
         SetMainCallback2(sub_8140238);
         return;
@@ -1964,7 +1964,7 @@ static void sub_8141DE4(u8 taskId)
         gSpecialVar_0x8004 = TRUE;
     else
         gSpecialVar_0x8004 = FALSE;
-    sub_80EDD78(GetCoins());
+    AlertTVOfNewCoinTotal(GetCoins());
     BeginHardwarePaletteFade(0xFF, 0, 0, 16, 0);
     gTasks[taskId].func = sub_8141E7C;
 }

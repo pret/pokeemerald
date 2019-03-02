@@ -166,7 +166,7 @@
       "y": 48,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
-      "script": "EverGrandeCity_EventScript_271E73"
+      "script": "Common_EventScript_ShowPokemonCenterSign"
     },
     {
       "type": "sign",
@@ -190,7 +190,7 @@
       "y": 48,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
-      "script": "EverGrandeCity_EventScript_271E73"
+      "script": "Common_EventScript_ShowPokemonCenterSign"
     }
   ]
 }

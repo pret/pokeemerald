@@ -1,14 +1,14 @@
 LittlerootTown_BrendansHouse_2F_MapScripts:: @ 81F83E3
-	map_script 3, LittlerootTown_BrendansHouse_2F_MapScript1_1F83EE
-	map_script 4, LittlerootTown_BrendansHouse_2F_MapScript2_1F846A
+	map_script MAP_SCRIPT_ON_TRANSITION, LittlerootTown_BrendansHouse_2F_MapScript1_1F83EE
+	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, LittlerootTown_BrendansHouse_2F_MapScript2_1F846A
 	.byte 0
 
 LittlerootTown_BrendansHouse_2F_MapScript1_1F83EE: @ 81F83EE
-	compare VAR_0x408D, 2
+	compare VAR_LITTLEROOT_RIVAL_STATE, 2
 	call_if_lt LittlerootTown_BrendansHouse_2F_EventScript_1F8457
-	compare VAR_0x408D, 3
+	compare VAR_LITTLEROOT_RIVAL_STATE, 3
 	call_if_ge LittlerootTown_BrendansHouse_2F_EventScript_1F841A
-	compare VAR_0x4092, 4
+	compare VAR_LITTLEROOT_INTRO_STATE, 4
 	call_if_eq LittlerootTown_BrendansHouse_2F_EventScript_2926FE
 	call LittlerootTown_BrendansHouse_2F_EventScript_275CE1
 	setvar VAR_0x4089, 0
@@ -16,7 +16,7 @@ LittlerootTown_BrendansHouse_2F_MapScript1_1F83EE: @ 81F83EE
 
 LittlerootTown_BrendansHouse_2F_EventScript_1F841A:: @ 81F841A
 	goto_if_set FLAG_MET_RIVAL_LILYCOVE, LittlerootTown_BrendansHouse_2F_EventScript_1F8433
-	compare VAR_0x4084, 2
+	compare VAR_BIRCH_LAB_STATE, 2
 	goto_if_ge LittlerootTown_BrendansHouse_2F_EventScript_1F8456
 	goto LittlerootTown_BrendansHouse_2F_EventScript_1F8433
 
@@ -40,7 +40,7 @@ LittlerootTown_BrendansHouse_2F_EventScript_1F8457:: @ 81F8457
 	return
 
 LittlerootTown_BrendansHouse_2F_EventScript_1F8464:: @ 81F8464
-	setvar VAR_0x408D, 2
+	setvar VAR_LITTLEROOT_RIVAL_STATE, 2
 	return
 
 LittlerootTown_BrendansHouse_2F_MapScript2_1F846A: @ 81F846A
@@ -55,7 +55,7 @@ LittlerootTown_BrendansHouse_2F_EventScript_1F8474:: @ 81F8474
 
 LittlerootTown_BrendansHouse_2F_EventScript_1F8481:: @ 81F8481
 	lockall
-	compare VAR_0x408D, 2
+	compare VAR_LITTLEROOT_RIVAL_STATE, 2
 	goto_if_eq LittlerootTown_BrendansHouse_2F_EventScript_1F8497
 	msgbox LittlerootTown_BrendansHouse_2F_Text_1F9991, MSGBOX_DEFAULT
 	releaseall
@@ -67,9 +67,9 @@ LittlerootTown_BrendansHouse_2F_EventScript_1F8497:: @ 81F8497
 	applymovement 1, LittlerootTown_BrendansHouse_2F_Movement_1F85BC
 	waitmovement 0
 	playse SE_PIN
-	applymovement 1, LittlerootTown_BrendansHouse_2F_Movement_272598
+	applymovement 1, Common_Movement_ExclamationMark
 	waitmovement 0
-	applymovement 1, LittlerootTown_BrendansHouse_2F_Movement_27259A
+	applymovement 1, Common_Movement_Delay48
 	waitmovement 0
 	delay 10
 	playbgm MUS_BOY_SUP, 1
@@ -81,7 +81,7 @@ LittlerootTown_BrendansHouse_2F_EventScript_1F8497:: @ 81F8497
 	call_if_eq LittlerootTown_BrendansHouse_2F_EventScript_1F8565
 	compare VAR_FACING, 4
 	call_if_eq LittlerootTown_BrendansHouse_2F_EventScript_1F8594
-	setvar VAR_0x408D, 3
+	setvar VAR_LITTLEROOT_RIVAL_STATE, 3
 	setflag FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F_POKE_BALL
 	clearflag FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_RIVAL_BEDROOM
 	setvar VAR_0x4050, 1
@@ -93,7 +93,7 @@ LittlerootTown_BrendansHouse_2F_EventScript_1F8497:: @ 81F8497
 LittlerootTown_BrendansHouse_2F_EventScript_1F8507:: @ 81F8507
 	applymovement 1, LittlerootTown_BrendansHouse_2F_Movement_1F85C0
 	waitmovement 0
-	applymovement EVENT_OBJ_ID_PLAYER, LittlerootTown_BrendansHouse_2F_Movement_2725A8
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceRight
 	waitmovement 0
 	msgbox LittlerootTown_BrendansHouse_2F_Text_1F97B4, MSGBOX_DEFAULT
 	closemessage
@@ -105,7 +105,7 @@ LittlerootTown_BrendansHouse_2F_EventScript_1F8507:: @ 81F8507
 LittlerootTown_BrendansHouse_2F_EventScript_1F8536:: @ 81F8536
 	applymovement 1, LittlerootTown_BrendansHouse_2F_Movement_1F85D7
 	waitmovement 0
-	applymovement EVENT_OBJ_ID_PLAYER, LittlerootTown_BrendansHouse_2F_Movement_2725A8
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceRight
 	waitmovement 0
 	msgbox LittlerootTown_BrendansHouse_2F_Text_1F97B4, MSGBOX_DEFAULT
 	closemessage
@@ -117,7 +117,7 @@ LittlerootTown_BrendansHouse_2F_EventScript_1F8536:: @ 81F8536
 LittlerootTown_BrendansHouse_2F_EventScript_1F8565:: @ 81F8565
 	applymovement 1, LittlerootTown_BrendansHouse_2F_Movement_1F85E8
 	waitmovement 0
-	applymovement EVENT_OBJ_ID_PLAYER, LittlerootTown_BrendansHouse_2F_Movement_2725A8
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceRight
 	waitmovement 0
 	msgbox LittlerootTown_BrendansHouse_2F_Text_1F97B4, MSGBOX_DEFAULT
 	closemessage
@@ -129,7 +129,7 @@ LittlerootTown_BrendansHouse_2F_EventScript_1F8565:: @ 81F8565
 LittlerootTown_BrendansHouse_2F_EventScript_1F8594:: @ 81F8594
 	applymovement 1, LittlerootTown_BrendansHouse_2F_Movement_1F85FD
 	waitmovement 0
-	applymovement EVENT_OBJ_ID_PLAYER, LittlerootTown_BrendansHouse_2F_Movement_2725A6
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceUp
 	waitmovement 0
 	msgbox LittlerootTown_BrendansHouse_2F_Text_1F97B4, MSGBOX_DEFAULT
 	closemessage
@@ -307,7 +307,7 @@ LittlerootTown_BrendansHouse_2F_Text_1F877F: @ 81F877F
 	.string "Record your progress with SAVE.\p"
 	.string "The remaining pages are blank…$"
 
-LittlerootTown_BrendansHouse_2F_Text_1F8820: @ 81F8820
+Common_Text_LookCloserAtMap: @ 81F8820
 	.string "{PLAYER} took a closer look at the\n"
 	.string "HOENN region map.$"
 

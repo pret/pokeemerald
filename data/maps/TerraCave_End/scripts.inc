@@ -1,6 +1,6 @@
 TerraCave_End_MapScripts:: @ 823B0B0
-	map_script 5, TerraCave_End_MapScript1_23B0BB
-	map_script 3, TerraCave_End_MapScript1_23B0D9
+	map_script MAP_SCRIPT_ON_RESUME, TerraCave_End_MapScript1_23B0BB
+	map_script MAP_SCRIPT_ON_TRANSITION, TerraCave_End_MapScript1_23B0D9
 	.byte 0
 
 TerraCave_End_MapScript1_23B0BB: @ 823B0BB
@@ -10,7 +10,7 @@ TerraCave_End_MapScript1_23B0BB: @ 823B0BB
 TerraCave_End_EventScript_23B0C5:: @ 823B0C5
 	specialvar VAR_RESULT, GetBattleOutcome
 	compare VAR_RESULT, 7
-	goto_if_ne TerraCave_End_EventScript_27374E
+	goto_if_ne Common_EventScript_NopReturn
 	removeobject 1
 	return
 
@@ -25,7 +25,7 @@ TerraCave_End_EventScript_23B0E3:: @ 823B0E3
 
 TerraCave_End_EventScript_23B0EC:: @ 823B0EC
 	lockall
-	applymovement EVENT_OBJ_ID_PLAYER, TerraCave_End_Movement_2725B2
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_FaceUp
 	waitmovement 0
 	applymovement 1, TerraCave_End_Movement_23B16E
 	waitmovement 0

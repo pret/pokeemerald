@@ -1,6 +1,6 @@
 BattleFrontier_BattlePikeLobby_MapScripts:: @ 825B6C6
-	map_script 2, BattleFrontier_BattlePikeLobby_MapScript2_25B6D1
-	map_script 4, BattleFrontier_BattlePikeLobby_MapScript2_25B6F3
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, BattleFrontier_BattlePikeLobby_MapScript2_25B6D1
+	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, BattleFrontier_BattlePikeLobby_MapScript2_25B6F3
 	.byte 0
 
 BattleFrontier_BattlePikeLobby_MapScript2_25B6D1: @ 825B6D1
@@ -195,7 +195,7 @@ BattleFrontier_BattlePikeLobby_EventScript_25B95C:: @ 825B95C
 	special LoadPlayerParty
 	closemessage
 	delay 2
-	call BattleFrontier_BattlePikeLobby_EventScript_27134F
+	call Common_EventScript_SaveGame
 	setvar VAR_TEMP_0, 255
 	setvar VAR_0x8004, 26
 	special CallBattlePikeFunction

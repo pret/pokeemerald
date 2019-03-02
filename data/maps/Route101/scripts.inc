@@ -1,6 +1,6 @@
 Route101_MapScripts:: @ 81EBCBA
-	map_script 3, Route101_MapScript1_1EBCC5
-	map_script 2, Route101_MapScript2_1EBCCB
+	map_script MAP_SCRIPT_ON_TRANSITION, Route101_MapScript1_1EBCC5
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, Route101_MapScript2_1EBCCB
 	.byte 0
 
 Route101_MapScript1_1EBCC5: @ 81EBCC5
@@ -8,12 +8,12 @@ Route101_MapScript1_1EBCC5: @ 81EBCC5
 	end
 
 Route101_MapScript2_1EBCCB: @ 81EBCCB
-	map_script_2 VAR_0x4060, 0, Route101_EventScript_1EBCD5
+	map_script_2 VAR_ROUTE101_STATE, 0, Route101_EventScript_1EBCD5
 	.2byte 0
 
 Route101_EventScript_1EBCD5:: @ 81EBCD5
 	setflag FLAG_SPECIAL_FLAG_0x4000
-	setvar VAR_0x4060, 1
+	setvar VAR_ROUTE101_STATE, 1
 	end
 
 Route101_EventScript_1EBCDE:: @ 81EBCDE
@@ -30,14 +30,14 @@ Route101_EventScript_1EBCDE:: @ 81EBCDE
 	applymovement 4, Route101_Movement_1EBD96
 	applymovement 2, Route101_Movement_1EBDC8
 	waitmovement 0
-	applymovement 2, Route101_Movement_2725A8
+	applymovement 2, Common_Movement_WalkInPlaceRight
 	waitmovement 0
 	applymovement 4, Route101_Movement_1EBDBD
 	applymovement 2, Route101_Movement_1EBDEF
 	waitmovement 0
 	msgbox Route101_Text_1EBE9A, MSGBOX_DEFAULT
 	closemessage
-	setvar VAR_0x4060, 2
+	setvar VAR_ROUTE101_STATE, 2
 	releaseall
 	end
 
@@ -223,7 +223,7 @@ Route101_EventScript_1EBE16:: @ 81EBE16
 	fadescreen 1
 	removeobject 4
 	setobjectxy EVENT_OBJ_ID_PLAYER, 6, 13
-	applymovement EVENT_OBJ_ID_PLAYER, Route101_Movement_2725A4
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceLeft
 	waitmovement 0
 	special ChooseStarter
 	waitstate
@@ -234,8 +234,8 @@ Route101_EventScript_1EBE16:: @ 81EBE16
 	setflag FLAG_HIDE_ROUTE_101_BIRCH_ZIGZAGOON_BATTLE
 	clearflag FLAG_HIDE_LITTLEROOT_TOWN_BIRCHS_LAB_BIRCH
 	setflag FLAG_HIDE_ROUTE_101_BIRCH_STARTERS_BAG
-	setvar VAR_0x4084, 2
-	setvar VAR_0x4060, 3
+	setvar VAR_BIRCH_LAB_STATE, 2
+	setvar VAR_ROUTE101_STATE, 3
 	clearflag FLAG_SPECIAL_FLAG_0x4000
 	checkplayergender
 	compare VAR_RESULT, MALE

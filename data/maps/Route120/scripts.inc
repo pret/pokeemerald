@@ -1,7 +1,7 @@
 Route120_MapScripts:: @ 81F53EC
-	map_script 5, Route120_MapScript1_1F53FC
-	map_script 3, Route120_MapScript1_1F54CD
-	map_script 1, Route120_MapScript1_1F5474
+	map_script MAP_SCRIPT_ON_RESUME, Route120_MapScript1_1F53FC
+	map_script MAP_SCRIPT_ON_TRANSITION, Route120_MapScript1_1F54CD
+	map_script MAP_SCRIPT_ON_LOAD, Route120_MapScript1_1F5474
 	.byte 0
 
 Route120_MapScript1_1F53FC: @ 81F53FC
@@ -26,7 +26,7 @@ Route120_EventScript_1F5406:: @ 81F5406
 Route120_EventScript_1F5449:: @ 81F5449
 	specialvar VAR_RESULT, GetBattleOutcome
 	compare VAR_RESULT, 7
-	goto_if_ne Route120_EventScript_27374E
+	goto_if_ne Common_EventScript_NopReturn
 	removeobject 30
 	removeobject 36
 	return
@@ -34,7 +34,7 @@ Route120_EventScript_1F5449:: @ 81F5449
 Route120_EventScript_1F5460:: @ 81F5460
 	specialvar VAR_RESULT, GetBattleOutcome
 	compare VAR_RESULT, 7
-	goto_if_ne Route120_EventScript_27374E
+	goto_if_ne Common_EventScript_NopReturn
 	removeobject VAR_LAST_TALKED
 	return
 
@@ -147,7 +147,7 @@ Route120_EventScript_1F55F6:: @ 81F55F6
 Route120_EventScript_1F5601:: @ 81F5601
 	giveitem_std VAR_0x8004
 	compare VAR_RESULT, 0
-	goto_if_eq Route120_EventScript_272054
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_DAILY_ROUTE_120_RECEIVED_BERRY
 	msgbox Route120_Text_2A71D5, MSGBOX_DEFAULT
 	release
@@ -196,12 +196,12 @@ Route120_EventScript_1F568B:: @ 81F568B
 	call_if_eq Route120_EventScript_1F57A3
 	compare VAR_FACING, 3
 	call_if_eq Route120_EventScript_1F57AE
-	applymovement 31, Route120_Movement_2725A4
+	applymovement 31, Common_Movement_WalkInPlaceLeft
 	waitmovement 0
 	delay 20
 	msgbox Route120_Text_1F5B43, MSGBOX_DEFAULT
 	closemessage
-	applymovement 30, Route120_Movement_2725A8
+	applymovement 30, Common_Movement_WalkInPlaceRight
 	waitmovement 0
 	applymovement 30, Route120_Movement_2723C7
 	waitmovement 0
@@ -233,15 +233,15 @@ Route120_EventScript_1F571C:: @ 81F571C
 	end
 
 Route120_EventScript_1F572C:: @ 81F572C
-	applymovement 31, Route120_Movement_2725AA
-	applymovement EVENT_OBJ_ID_PLAYER, Route120_Movement_2725A6
+	applymovement 31, Common_Movement_WalkInPlaceDown
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceUp
 	waitmovement 0
 	msgbox Route120_Text_1F5BAF, MSGBOX_DEFAULT
 	giveitem_std ITEM_DEVON_SCOPE
 	setflag FLAG_RECEIVED_DEVON_SCOPE
 	msgbox Route120_Text_1F5C7B, MSGBOX_DEFAULT
 	closemessage
-	applymovement 31, Route120_Movement_2725AA
+	applymovement 31, Common_Movement_WalkInPlaceDown
 	waitmovement 0
 	delay 50
 	setfieldeffectargument 0, 1
@@ -258,7 +258,7 @@ Route120_EventScript_1F572C:: @ 81F572C
 	end
 
 Route120_EventScript_1F57A3:: @ 81F57A3
-	applymovement EVENT_OBJ_ID_PLAYER, Route120_Movement_2725A4
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceLeft
 	waitmovement 0
 	return
 

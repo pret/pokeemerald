@@ -1,11 +1,11 @@
 RustboroCity_DevonCorp_3F_MapScripts:: @ 821242D
-	map_script 3, RustboroCity_DevonCorp_3F_MapScript1_21243D
-	map_script 4, RustboroCity_DevonCorp_3F_MapScript2_212455
-	map_script 2, RustboroCity_DevonCorp_3F_MapScript2_212464
+	map_script MAP_SCRIPT_ON_TRANSITION, RustboroCity_DevonCorp_3F_MapScript1_21243D
+	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, RustboroCity_DevonCorp_3F_MapScript2_212455
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, RustboroCity_DevonCorp_3F_MapScript2_212464
 	.byte 0
 
 RustboroCity_DevonCorp_3F_MapScript1_21243D: @ 821243D
-	compare VAR_0x408F, 0
+	compare VAR_DEVON_CORP_3F_STATE, 0
 	call_if_eq RustboroCity_DevonCorp_3F_EventScript_212449
 	end
 
@@ -15,7 +15,7 @@ RustboroCity_DevonCorp_3F_EventScript_212449:: @ 8212449
 	return
 
 RustboroCity_DevonCorp_3F_MapScript2_212455: @ 8212455
-	map_script_2 VAR_0x408F, 0, RustboroCity_DevonCorp_3F_EventScript_21245F
+	map_script_2 VAR_DEVON_CORP_3F_STATE, 0, RustboroCity_DevonCorp_3F_EventScript_21245F
 	.2byte 0
 
 RustboroCity_DevonCorp_3F_EventScript_21245F:: @ 821245F
@@ -23,7 +23,7 @@ RustboroCity_DevonCorp_3F_EventScript_21245F:: @ 821245F
 	end
 
 RustboroCity_DevonCorp_3F_MapScript2_212464: @ 8212464
-	map_script_2 VAR_0x408F, 0, RustboroCity_DevonCorp_3F_EventScript_21246E
+	map_script_2 VAR_DEVON_CORP_3F_STATE, 0, RustboroCity_DevonCorp_3F_EventScript_21246E
 	.2byte 0
 
 RustboroCity_DevonCorp_3F_EventScript_21246E:: @ 821246E
@@ -58,17 +58,17 @@ RustboroCity_DevonCorp_3F_EventScript_21246E:: @ 821246E
 	setflag FLAG_HIDE_RUSTBORO_CITY_POKEMON_SCHOOL_SCOTT
 	msgbox RustboroCity_DevonCorp_3F_Text_212837, MSGBOX_DEFAULT
 	closemessage
-	call RustboroCity_DevonCorp_3F_EventScript_272083
+	call Common_EventScript_OutOfCenterPartyHeal
 	msgbox RustboroCity_DevonCorp_3F_Text_2129D2, MSGBOX_DEFAULT
 	setflag FLAG_HIDE_ROUTE_116_TUNNELER
 	clearflag FLAG_HIDE_RUSTURF_TUNNEL_LOVER_MAN
 	clearflag FLAG_HIDE_RUSTURF_TUNNEL_LOVER_WOMAN
 	clearflag FLAG_HIDE_BRINEYS_HOUSE_MR_BRINEY
 	clearflag FLAG_HIDE_BRINEYS_HOUSE_PEEKO
-	setvar VAR_0x4096, 1
+	setvar VAR_BRINEY_LOCATION, 1
 	clearflag FLAG_HIDE_RUSBORO_CITY_RIVAL
-	setvar VAR_0x408F, 1
-	setvar VAR_0x405A, 6
+	setvar VAR_DEVON_CORP_3F_STATE, 1
+	setvar VAR_RUSTBORO_STATE, 6
 	releaseall
 	end
 
@@ -154,7 +154,7 @@ RustboroCity_DevonCorp_3F_EventScript_21256C:: @ 821256C
 	goto_if_set FLAG_DELIVERED_STEVEN_LETTER, RustboroCity_DevonCorp_3F_EventScript_212595
 	msgbox RustboroCity_DevonCorp_3F_Text_212A09, MSGBOX_DEFAULT
 	closemessage
-	applymovement VAR_LAST_TALKED, RustboroCity_DevonCorp_3F_Movement_2725A2
+	applymovement VAR_LAST_TALKED, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end
@@ -163,11 +163,11 @@ RustboroCity_DevonCorp_3F_EventScript_212595:: @ 8212595
 	msgbox RustboroCity_DevonCorp_3F_Text_212A29, MSGBOX_DEFAULT
 	giveitem_std ITEM_EXP_SHARE
 	compare VAR_RESULT, 0
-	goto_if_eq RustboroCity_DevonCorp_3F_EventScript_272054
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_EXP_SHARE
 	msgbox RustboroCity_DevonCorp_3F_Text_212A9E, MSGBOX_DEFAULT
 	closemessage
-	applymovement VAR_LAST_TALKED, RustboroCity_DevonCorp_3F_Movement_2725A2
+	applymovement VAR_LAST_TALKED, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end
@@ -175,7 +175,7 @@ RustboroCity_DevonCorp_3F_EventScript_212595:: @ 8212595
 RustboroCity_DevonCorp_3F_EventScript_2125CC:: @ 82125CC
 	msgbox RustboroCity_DevonCorp_3F_Text_212B78, MSGBOX_DEFAULT
 	closemessage
-	applymovement VAR_LAST_TALKED, RustboroCity_DevonCorp_3F_Movement_2725A2
+	applymovement VAR_LAST_TALKED, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end

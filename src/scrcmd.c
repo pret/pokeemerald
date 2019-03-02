@@ -2028,14 +2028,14 @@ bool8 ScrCmd_setmetatile(struct ScriptContext *ctx)
     u16 x = VarGet(ScriptReadHalfword(ctx));
     u16 y = VarGet(ScriptReadHalfword(ctx));
     u16 tileId = VarGet(ScriptReadHalfword(ctx));
-    u16 v8 = VarGet(ScriptReadHalfword(ctx));
+    u16 isImpassable = VarGet(ScriptReadHalfword(ctx));
 
     x += 7;
     y += 7;
-    if (!v8)
+    if (!isImpassable)
         MapGridSetMetatileIdAt(x, y, tileId);
     else
-        MapGridSetMetatileIdAt(x, y, tileId | 0xC00);
+        MapGridSetMetatileIdAt(x, y, tileId | METATILE_COLLISION_MASK);
     return FALSE;
 }
 

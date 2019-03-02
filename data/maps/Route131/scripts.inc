@@ -1,5 +1,5 @@
 Route131_MapScripts:: @ 81F7404
-	map_script 3, Route131_MapScript1_1F740A
+	map_script MAP_SCRIPT_ON_TRANSITION, Route131_MapScript1_1F740A
 	.byte 0
 
 Route131_MapScript1_1F740A: @ 81F740A
@@ -13,7 +13,7 @@ Route131_EventScript_1F741B:: @ 81F741B
 	return
 
 Route131_EventScript_1F741F:: @ 81F741F
-	call_if_set FLAG_SYS_WEATHER_CTRL, Route131_EventScript_27207A
+	call_if_set FLAG_SYS_WEATHER_CTRL, Common_EventScript_SetWeather15
 	return
 
 Route131_EventScript_1F7429:: @ 81F7429

@@ -503,7 +503,7 @@ void DoWarp(void)
     ScriptContext2_Enable();
     TryFadeOutOldMapMusic();
     WarpFadeScreen();
-    PlayRainSoundEffect();
+    PlayRainStoppingSoundEffect();
     PlaySE(SE_KAIDAN);
     gFieldCallback = mapldr_default;
     CreateTask(sub_80AFA0C, 10);
@@ -514,7 +514,7 @@ void DoDiveWarp(void)
     ScriptContext2_Enable();
     TryFadeOutOldMapMusic();
     WarpFadeScreen();
-    PlayRainSoundEffect();
+    PlayRainStoppingSoundEffect();
     gFieldCallback = mapldr_default;
     CreateTask(sub_80AFA0C, 10);
 }
@@ -524,7 +524,7 @@ void sub_80AF79C(void)
     ScriptContext2_Enable();
     TryFadeOutOldMapMusic();
     FadeScreen(FADE_TO_WHITE, 8);
-    PlayRainSoundEffect();
+    PlayRainStoppingSoundEffect();
     gFieldCallback = sub_80AF3B0;
     CreateTask(sub_80AFA0C, 10);
 }
@@ -734,7 +734,7 @@ static void sub_80AFA88(u8 taskId)
     case 4:
         TryFadeOutOldMapMusic();
         WarpFadeScreen();
-        PlayRainSoundEffect();
+        PlayRainStoppingSoundEffect();
         task->data[0] = 0;
         task->func = sub_80AFA0C;
         break;
@@ -771,7 +771,7 @@ void sub_80AFC60(void)
     ScriptContext2_Enable();
     TryFadeOutOldMapMusic();
     WarpFadeScreen();
-    PlayRainSoundEffect();
+    PlayRainStoppingSoundEffect();
     PlaySE(SE_KAIDAN);
     gFieldCallback = sub_80AF3C8;
     CreateTask(task0A_fade_n_map_maybe, 10);

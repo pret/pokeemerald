@@ -1,6 +1,6 @@
 Route119_MapScripts:: @ 81F4424
-	map_script 5, Route119_MapScript1_1F442F
-	map_script 3, Route119_MapScript1_1F444D
+	map_script MAP_SCRIPT_ON_RESUME, Route119_MapScript1_1F442F
+	map_script MAP_SCRIPT_ON_TRANSITION, Route119_MapScript1_1F444D
 	.byte 0
 
 Route119_MapScript1_1F442F: @ 81F442F
@@ -10,13 +10,13 @@ Route119_MapScript1_1F442F: @ 81F442F
 Route119_EventScript_1F4439:: @ 81F4439
 	specialvar VAR_RESULT, GetBattleOutcome
 	compare VAR_RESULT, 7
-	goto_if_ne Route119_EventScript_27374E
+	goto_if_ne Common_EventScript_NopReturn
 	removeobject VAR_LAST_TALKED
 	return
 
 Route119_MapScript1_1F444D: @ 81F444D
-	call Route119_EventScript_271ED7
-	call Route119_EventScript_271EFB
+	call Common_EventScript_SetupRivalGender
+	call Common_EventScript_SetupRivalOnBikeGender
 	compare VAR_WEATHER_INSTITUTE_STATE, 1
 	call_if_eq Route119_EventScript_1F4466
 	special SetRoute119Weather
@@ -51,7 +51,7 @@ Route119_EventScript_1F4488:: @ 81F4488
 	call_if_eq Route119_EventScript_1F46C6
 	compare VAR_TEMP_1, 2
 	call_if_eq Route119_EventScript_1F46D1
-	applymovement EVENT_OBJ_ID_PLAYER, Route119_Movement_2725AA
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceDown
 	waitmovement 0
 	delay 30
 	compare VAR_TEMP_1, 1
@@ -156,7 +156,7 @@ Route119_EventScript_1F460F:: @ 81F460F
 	compare VAR_TEMP_1, 2
 	call_if_eq Route119_EventScript_1F46EE
 	removeobject 25
-	setvar VAR_0x4072, 1
+	setvar VAR_ROUTE119_STATE, 1
 	savebgm MUS_DUMMY
 	fadedefaultbgm
 	delay 60
@@ -459,7 +459,7 @@ Route119_EventScript_1F49A3:: @ 81F49A3
 	faceplayer
 	msgbox Route119_Text_1F50EB, MSGBOX_DEFAULT
 	closemessage
-	applymovement VAR_LAST_TALKED, Route119_Movement_2725A2
+	applymovement VAR_LAST_TALKED, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end
@@ -469,7 +469,7 @@ Route119_EventScript_1F49BA:: @ 81F49BA
 	faceplayer
 	msgbox Route119_Text_1F5147, MSGBOX_DEFAULT
 	closemessage
-	applymovement VAR_LAST_TALKED, Route119_Movement_2725A2
+	applymovement VAR_LAST_TALKED, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end

@@ -6369,25 +6369,27 @@ static void atk76_various(void)
     switch (gBattlescriptCurrInstr[2])
     {
     case VARIOUS_CHECK_IF_GRASSY_TERRAIN_HEALS:
-        if ((gStatuses3[gActiveBattler] & (STATUS3_SEMI_INVULNERABLE)) || BATTLER_MAX_HP(gActiveBattler) || !(IsBattlerGrounded(gActiveBattler)))
+        if ((gStatuses3[gActiveBattler] & (STATUS3_SEMI_INVULNERABLE))
+            || BATTLER_MAX_HP(gActiveBattler)
+            || !gBattleMons[gActiveBattler].hp
+            || !(IsBattlerGrounded(gActiveBattler)))
         {
             gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 3);
-            return;
-        }  
-        gBattleMoveDamage = gBattleMons[gActiveBattler].maxHP / 16;
-        if (gBattleMoveDamage == 0)
-            gBattleMoveDamage = 1;
-        gBattleMoveDamage *= -1;
+        }
+        else
+        {
+            gBattleMoveDamage = gBattleMons[gActiveBattler].maxHP / 16;
+            if (gBattleMoveDamage == 0)
+                gBattleMoveDamage = 1;
+            gBattleMoveDamage *= -1;
 
-        if (gAbsentBattlerFlags & gBitTable[gBattlerAttacker])
-            gBattleMoveDamage = 0;
-
-        gBattlescriptCurrInstr += 7;
+            gBattlescriptCurrInstr += 7;
+        }
         return;
     case VARIOUS_GRAVITY_ON_AIRBORNE_MONS:
         if (gStatuses3[gActiveBattler] & STATUS3_ON_AIR)
             CancelMultiTurnMoves(gActiveBattler);
-        
+
         gStatuses3[gActiveBattler] &= ~(STATUS3_MAGNET_RISE | STATUS3_TELEKINESIS | STATUS3_ON_AIR);
         break;
     case VARIOUS_SPECTRAL_THIEF:

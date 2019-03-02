@@ -106,7 +106,7 @@ gSpecials:: @ 81DBA64
 	def_special sub_80B3000
 	def_special SaveGame
 	def_special DoWateringBerryTreeAnim
-	def_special easy_chat_input_maybe
+	def_special ShowEasyChatScreen
 	def_special sub_811EECC
 	def_special ScrSpecial_GetCurrentMauvilleMan
 	def_special ScrSpecial_HasBardSongBeenChanged
@@ -503,7 +503,7 @@ gSpecials:: @ 81DBA64
 	def_special sub_813B374
 	def_special sub_813B490
 	def_special sub_80A08CC
-	def_special sub_813B484
+	def_special Unused_SetWeatherSunny
 	def_special sub_81AFDA0
 	def_special sub_813B4E0
 	def_special ShouldDoBrailleRegicePuzzle

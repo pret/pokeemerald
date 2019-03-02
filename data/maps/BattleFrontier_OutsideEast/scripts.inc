@@ -1,6 +1,6 @@
 BattleFrontier_OutsideEast_MapScripts:: @ 8242C04
-	map_script 5, BattleFrontier_OutsideEast_MapScript1_242C0F
-	map_script 3, BattleFrontier_OutsideEast_MapScript1_242C2D
+	map_script MAP_SCRIPT_ON_RESUME, BattleFrontier_OutsideEast_MapScript1_242C0F
+	map_script MAP_SCRIPT_ON_TRANSITION, BattleFrontier_OutsideEast_MapScript1_242C2D
 	.byte 0
 
 BattleFrontier_OutsideEast_MapScript1_242C0F: @ 8242C0F
@@ -10,12 +10,12 @@ BattleFrontier_OutsideEast_MapScript1_242C0F: @ 8242C0F
 BattleFrontier_OutsideEast_EventScript_242C19:: @ 8242C19
 	specialvar VAR_RESULT, GetBattleOutcome
 	compare VAR_RESULT, 7
-	goto_if_ne BattleFrontier_OutsideEast_EventScript_27374E
+	goto_if_ne Common_EventScript_NopReturn
 	removeobject VAR_LAST_TALKED
 	return
 
 BattleFrontier_OutsideEast_MapScript1_242C2D: @ 8242C2D
-	setvar VAR_0x40BC, 0
+	setvar VAR_BRAVO_TRAINER_BATTLE_TOWER_ON, 0
 	setflag FLAG_HIDE_BATTLE_TOWER_REPORTER
 	call_if_unset FLAG_DEFEATED_SUDOWOODO, BattleFrontier_OutsideEast_EventScript_242C3F
 	end

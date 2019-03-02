@@ -1,15 +1,15 @@
 RustboroCity_MapScripts:: @ 81E06BD
-	map_script 3, RustboroCity_MapScript1_1E06C8
-	map_script 2, RustboroCity_MapScript2_1E070B
+	map_script MAP_SCRIPT_ON_TRANSITION, RustboroCity_MapScript1_1E06C8
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, RustboroCity_MapScript2_1E070B
 	.byte 0
 
 RustboroCity_MapScript1_1E06C8: @ 81E06C8
 	setflag FLAG_VISITED_RUSTBORO_CITY
-	call RustboroCity_EventScript_271ED7
-	compare VAR_0x405A, 6
+	call Common_EventScript_SetupRivalGender
+	compare VAR_RUSTBORO_STATE, 6
 	call_if_eq RustboroCity_EventScript_1E0707
 	getplayerxy VAR_TEMP_0, VAR_TEMP_1
-	compare VAR_0x405A, 6
+	compare VAR_RUSTBORO_STATE, 6
 	goto_if_eq RustboroCity_EventScript_1E06EC
 	end
 
@@ -28,7 +28,7 @@ RustboroCity_EventScript_1E0707:: @ 81E0707
 	return
 
 RustboroCity_MapScript2_1E070B: @ 81E070B
-	map_script_2 VAR_0x405A, 6, RustboroCity_EventScript_1E0715
+	map_script_2 VAR_RUSTBORO_STATE, 6, RustboroCity_EventScript_1E0715
 	.2byte 0
 
 RustboroCity_EventScript_1E0715:: @ 81E0715
@@ -42,18 +42,18 @@ RustboroCity_EventScript_1E0715:: @ 81E0715
 	applymovement 15, RustboroCity_Movement_1E0852
 	waitmovement 0
 	playse SE_PIN
-	applymovement 15, RustboroCity_Movement_272598
+	applymovement 15, Common_Movement_ExclamationMark
 	waitmovement 0
-	applymovement 15, RustboroCity_Movement_27259A
+	applymovement 15, Common_Movement_Delay48
 	waitmovement 0
-	applymovement EVENT_OBJ_ID_PLAYER, RustboroCity_Movement_2725A6
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceUp
 	waitmovement 0
 	applymovement 15, RustboroCity_Movement_1E084E
 	waitmovement 0
 	msgbox RustboroCity_Text_1E22A5, MSGBOX_DEFAULT
 	closemessage
 	setflag FLAG_HAS_MATCH_CALL
-	applymovement 15, RustboroCity_Movement_2725A4
+	applymovement 15, Common_Movement_WalkInPlaceLeft
 	waitmovement 0
 	playse SE_TK_KASYA
 	delay 10
@@ -63,7 +63,7 @@ RustboroCity_EventScript_1E0715:: @ 81E0715
 	delay 10
 	playse SE_TK_KASYA
 	delay 20
-	applymovement 15, RustboroCity_Movement_2725AA
+	applymovement 15, Common_Movement_WalkInPlaceDown
 	waitmovement 0
 	msgbox RustboroCity_Text_1E2331, MSGBOX_DEFAULT
 	closemessage
@@ -99,7 +99,7 @@ RustboroCity_EventScript_1E07BD:: @ 81E07BD
 	playse SE_KAIDAN
 	removeobject 15
 	setflag FLAG_HIDE_RUSTBORO_CITY_SCIENTIST
-	setvar VAR_0x405A, 7
+	setvar VAR_RUSTBORO_STATE, 7
 	clearflag FLAG_SPECIAL_FLAG_0x4000
 	releaseall
 	end
@@ -221,7 +221,7 @@ RustboroCity_EventScript_1E0922:: @ 81E0922
 	lock
 	faceplayer
 	msgbox RustboroCity_Text_1E16F4, MSGBOX_DEFAULT
-	applymovement 7, RustboroCity_Movement_2725A2
+	applymovement 7, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end
@@ -230,7 +230,7 @@ RustboroCity_EventScript_1E0938:: @ 81E0938
 	lock
 	faceplayer
 	msgbox RustboroCity_Text_1E174B, MSGBOX_DEFAULT
-	applymovement 8, RustboroCity_Movement_2725A2
+	applymovement 8, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end
@@ -302,9 +302,9 @@ RustboroCity_EventScript_1E09CD:: @ 81E09CD
 	setobjectxyperm 9, 30, 10
 	clearflag FLAG_HIDE_RUSTBORO_CITY_DEVON_EMPLOYEE_1
 	setflag FLAG_DEVON_GOODS_STOLEN
-	setvar VAR_0x405A, 2
+	setvar VAR_RUSTBORO_STATE, 2
 	setvar VAR_RUSTURF_TUNNEL_STATE, 2
-	setvar VAR_0x406F, 1
+	setvar VAR_ROUTE116_STATE, 1
 	clearflag FLAG_HIDE_ROUTE_116_MR_BRINEY
 	clearflag FLAG_HIDE_RUSTURF_TUNNEL_PEEKO
 	clearflag FLAG_HIDE_RUSTURF_TUNNEL_AQUA_GRUNT
@@ -344,7 +344,7 @@ RustboroCity_EventScript_1E0A6E:: @ 81E0A6E
 RustboroCity_EventScript_1E0A79:: @ 81E0A79
 	applymovement 9, RustboroCity_Movement_1E0AD5
 	waitmovement 0
-	applymovement EVENT_OBJ_ID_PLAYER, RustboroCity_Movement_2725A6
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceUp
 	waitmovement 0
 	return
 
@@ -493,59 +493,59 @@ RustboroCity_EventScript_1E0B2E:: @ 81E0B2E
 	compare VAR_TEMP_1, 3
 	call_if_eq RustboroCity_EventScript_1E0BF3
 	setflag FLAG_INTERACTED_WITH_DEVON_EMPLOYEE_GOODS_STOLEN
-	setvar VAR_0x405A, 3
+	setvar VAR_RUSTBORO_STATE, 3
 	moveobjectoffscreen 9
 	msgbox RustboroCity_Text_1E183E, MSGBOX_DEFAULT
 	releaseall
 	end
 
 RustboroCity_EventScript_1E0B6F:: @ 81E0B6F
-	applymovement 9, RustboroCity_Movement_2725A6
+	applymovement 9, Common_Movement_WalkInPlaceUp
 	waitmovement 0
 	playse SE_PIN
-	applymovement 9, RustboroCity_Movement_272598
+	applymovement 9, Common_Movement_ExclamationMark
 	waitmovement 0
-	applymovement 9, RustboroCity_Movement_27259A
+	applymovement 9, Common_Movement_Delay48
 	waitmovement 0
-	applymovement EVENT_OBJ_ID_PLAYER, RustboroCity_Movement_2725AA
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceDown
 	waitmovement 0
 	return
 
 RustboroCity_EventScript_1E0B9B:: @ 81E0B9B
-	applymovement 9, RustboroCity_Movement_2725A4
+	applymovement 9, Common_Movement_WalkInPlaceLeft
 	waitmovement 0
 	playse SE_PIN
-	applymovement 9, RustboroCity_Movement_272598
+	applymovement 9, Common_Movement_ExclamationMark
 	waitmovement 0
-	applymovement 9, RustboroCity_Movement_27259A
+	applymovement 9, Common_Movement_Delay48
 	waitmovement 0
 	applymovement EVENT_OBJ_ID_PLAYER, RustboroCity_Movement_2725AC
 	waitmovement 0
 	return
 
 RustboroCity_EventScript_1E0BC7:: @ 81E0BC7
-	applymovement 9, RustboroCity_Movement_2725AA
+	applymovement 9, Common_Movement_WalkInPlaceDown
 	waitmovement 0
 	playse SE_PIN
-	applymovement 9, RustboroCity_Movement_272598
+	applymovement 9, Common_Movement_ExclamationMark
 	waitmovement 0
-	applymovement 9, RustboroCity_Movement_27259A
+	applymovement 9, Common_Movement_Delay48
 	waitmovement 0
-	applymovement EVENT_OBJ_ID_PLAYER, RustboroCity_Movement_2725A6
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceUp
 	waitmovement 0
 	return
 
 RustboroCity_EventScript_1E0BF3:: @ 81E0BF3
-	applymovement 9, RustboroCity_Movement_2725AA
+	applymovement 9, Common_Movement_WalkInPlaceDown
 	waitmovement 0
 	playse SE_PIN
-	applymovement 9, RustboroCity_Movement_272598
+	applymovement 9, Common_Movement_ExclamationMark
 	waitmovement 0
-	applymovement 9, RustboroCity_Movement_27259A
+	applymovement 9, Common_Movement_Delay48
 	waitmovement 0
 	applymovement 9, RustboroCity_Movement_1E0C29
 	waitmovement 0
-	applymovement EVENT_OBJ_ID_PLAYER, RustboroCity_Movement_2725A6
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceUp
 	waitmovement 0
 	return
 
@@ -596,7 +596,7 @@ RustboroCity_EventScript_1E0C5B:: @ 81E0C5B
 	closemessage
 	setflag FLAG_RETURNED_DEVON_GOODS
 	setflag FLAG_HIDE_RUSTBORO_CITY_DEVON_EMPLOYEE_1
-	setvar VAR_0x405A, 5
+	setvar VAR_RUSTBORO_STATE, 5
 	delay 30
 	warp MAP_RUSTBORO_CITY_DEVON_CORP_3F, 255, 2, 2
 	waitstate
@@ -608,69 +608,69 @@ RustboroCity_EventScript_1E0CD3:: @ 81E0CD3
 	return
 
 RustboroCity_EventScript_1E0CDC:: @ 81E0CDC
-	applymovement 9, RustboroCity_Movement_2725A6
+	applymovement 9, Common_Movement_WalkInPlaceUp
 	waitmovement 0
 	playse SE_PIN
-	applymovement 9, RustboroCity_Movement_272598
+	applymovement 9, Common_Movement_ExclamationMark
 	waitmovement 0
-	applymovement 9, RustboroCity_Movement_27259A
+	applymovement 9, Common_Movement_Delay48
 	waitmovement 0
-	applymovement EVENT_OBJ_ID_PLAYER, RustboroCity_Movement_2725AA
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceDown
 	waitmovement 0
 	return
 
 RustboroCity_EventScript_1E0D08:: @ 81E0D08
-	applymovement 9, RustboroCity_Movement_2725A8
+	applymovement 9, Common_Movement_WalkInPlaceRight
 	waitmovement 0
 	playse SE_PIN
-	applymovement 9, RustboroCity_Movement_272598
+	applymovement 9, Common_Movement_ExclamationMark
 	waitmovement 0
-	applymovement 9, RustboroCity_Movement_27259A
+	applymovement 9, Common_Movement_Delay48
 	waitmovement 0
 	applymovement EVENT_OBJ_ID_PLAYER, RustboroCity_Movement_2725AE
 	waitmovement 0
 	return
 
 RustboroCity_EventScript_1E0D34:: @ 81E0D34
-	applymovement 9, RustboroCity_Movement_2725AA
+	applymovement 9, Common_Movement_WalkInPlaceDown
 	waitmovement 0
 	playse SE_PIN
-	applymovement 9, RustboroCity_Movement_272598
+	applymovement 9, Common_Movement_ExclamationMark
 	waitmovement 0
-	applymovement 9, RustboroCity_Movement_27259A
+	applymovement 9, Common_Movement_Delay48
 	waitmovement 0
-	applymovement EVENT_OBJ_ID_PLAYER, RustboroCity_Movement_2725A6
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceUp
 	waitmovement 0
 	return
 
 RustboroCity_EventScript_1E0D60:: @ 81E0D60
-	applymovement 9, RustboroCity_Movement_2725AA
+	applymovement 9, Common_Movement_WalkInPlaceDown
 	waitmovement 0
 	playse SE_PIN
-	applymovement 9, RustboroCity_Movement_272598
+	applymovement 9, Common_Movement_ExclamationMark
 	waitmovement 0
-	applymovement 9, RustboroCity_Movement_27259A
+	applymovement 9, Common_Movement_Delay48
 	waitmovement 0
 	applymovement 9, RustboroCity_Movement_1E0C29
 	waitmovement 0
-	applymovement EVENT_OBJ_ID_PLAYER, RustboroCity_Movement_2725A6
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceUp
 	waitmovement 0
 	return
 
 RustboroCity_EventScript_1E0D96:: @ 81E0D96
-	applymovement 9, RustboroCity_Movement_2725A4
+	applymovement 9, Common_Movement_WalkInPlaceLeft
 	waitmovement 0
 	playse SE_PIN
-	applymovement 9, RustboroCity_Movement_272598
+	applymovement 9, Common_Movement_ExclamationMark
 	waitmovement 0
-	applymovement 9, RustboroCity_Movement_27259A
+	applymovement 9, Common_Movement_Delay48
 	waitmovement 0
 	return
 
 RustboroCity_EventScript_1E0DB8:: @ 81E0DB8
 	lockall
 	call_if_unset FLAG_MET_RIVAL_RUSTBORO, RustboroCity_EventScript_1E0DD1
-	applymovement 14, RustboroCity_Movement_27259E
+	applymovement 14, Common_Movement_FacePlayer
 	waitmovement 0
 	goto RustboroCity_EventScript_1E0FF3
 
@@ -694,128 +694,128 @@ RustboroCity_EventScript_1E0DEE:: @ 81E0DEE
 RustboroCity_EventScript_1E0DF3:: @ 81E0DF3
 	lockall
 	call RustboroCity_EventScript_1E0DD1
-	applymovement 14, RustboroCity_Movement_2725AA
+	applymovement 14, Common_Movement_WalkInPlaceDown
 	waitmovement 0
 	playse SE_PIN
-	applymovement 14, RustboroCity_Movement_272598
+	applymovement 14, Common_Movement_ExclamationMark
 	waitmovement 0
-	applymovement 14, RustboroCity_Movement_27259A
+	applymovement 14, Common_Movement_Delay48
 	waitmovement 0
 	applymovement 14, RustboroCity_Movement_1E120E
 	waitmovement 0
-	applymovement EVENT_OBJ_ID_PLAYER, RustboroCity_Movement_2725A6
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceUp
 	waitmovement 0
 	goto RustboroCity_EventScript_1E0FF3
 
 RustboroCity_EventScript_1E0E33:: @ 81E0E33
 	lockall
 	call RustboroCity_EventScript_1E0DD1
-	applymovement 14, RustboroCity_Movement_2725AA
+	applymovement 14, Common_Movement_WalkInPlaceDown
 	waitmovement 0
 	playse SE_PIN
-	applymovement 14, RustboroCity_Movement_272598
+	applymovement 14, Common_Movement_ExclamationMark
 	waitmovement 0
-	applymovement 14, RustboroCity_Movement_27259A
+	applymovement 14, Common_Movement_Delay48
 	waitmovement 0
 	applymovement 14, RustboroCity_Movement_1E1215
 	waitmovement 0
-	applymovement EVENT_OBJ_ID_PLAYER, RustboroCity_Movement_2725A6
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceUp
 	waitmovement 0
 	goto RustboroCity_EventScript_1E0FF3
 
 RustboroCity_EventScript_1E0E73:: @ 81E0E73
 	lockall
 	call RustboroCity_EventScript_1E0DD1
-	applymovement 14, RustboroCity_Movement_2725AA
+	applymovement 14, Common_Movement_WalkInPlaceDown
 	waitmovement 0
 	playse SE_PIN
-	applymovement 14, RustboroCity_Movement_272598
+	applymovement 14, Common_Movement_ExclamationMark
 	waitmovement 0
-	applymovement 14, RustboroCity_Movement_27259A
+	applymovement 14, Common_Movement_Delay48
 	waitmovement 0
 	applymovement 14, RustboroCity_Movement_1E121B
 	waitmovement 0
-	applymovement EVENT_OBJ_ID_PLAYER, RustboroCity_Movement_2725A6
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceUp
 	waitmovement 0
 	goto RustboroCity_EventScript_1E0FF3
 
 RustboroCity_EventScript_1E0EB3:: @ 81E0EB3
 	lockall
 	call RustboroCity_EventScript_1E0DD1
-	applymovement 14, RustboroCity_Movement_2725AA
+	applymovement 14, Common_Movement_WalkInPlaceDown
 	waitmovement 0
 	playse SE_PIN
-	applymovement 14, RustboroCity_Movement_272598
+	applymovement 14, Common_Movement_ExclamationMark
 	waitmovement 0
-	applymovement 14, RustboroCity_Movement_27259A
+	applymovement 14, Common_Movement_Delay48
 	waitmovement 0
 	applymovement 14, RustboroCity_Movement_1E1220
 	waitmovement 0
-	applymovement EVENT_OBJ_ID_PLAYER, RustboroCity_Movement_2725A6
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceUp
 	waitmovement 0
 	goto RustboroCity_EventScript_1E0FF3
 
 RustboroCity_EventScript_1E0EF3:: @ 81E0EF3
 	lockall
 	call RustboroCity_EventScript_1E0DD1
-	applymovement 14, RustboroCity_Movement_2725AA
+	applymovement 14, Common_Movement_WalkInPlaceDown
 	waitmovement 0
 	playse SE_PIN
-	applymovement 14, RustboroCity_Movement_272598
+	applymovement 14, Common_Movement_ExclamationMark
 	waitmovement 0
-	applymovement 14, RustboroCity_Movement_27259A
+	applymovement 14, Common_Movement_Delay48
 	waitmovement 0
 	applymovement 14, RustboroCity_Movement_1E1224
 	waitmovement 0
-	applymovement EVENT_OBJ_ID_PLAYER, RustboroCity_Movement_2725A6
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceUp
 	waitmovement 0
 	goto RustboroCity_EventScript_1E0FF3
 
 RustboroCity_EventScript_1E0F33:: @ 81E0F33
 	lockall
 	call RustboroCity_EventScript_1E0DD1
-	applymovement 14, RustboroCity_Movement_2725AA
+	applymovement 14, Common_Movement_WalkInPlaceDown
 	waitmovement 0
 	playse SE_PIN
-	applymovement 14, RustboroCity_Movement_272598
+	applymovement 14, Common_Movement_ExclamationMark
 	waitmovement 0
-	applymovement 14, RustboroCity_Movement_27259A
+	applymovement 14, Common_Movement_Delay48
 	waitmovement 0
 	applymovement 14, RustboroCity_Movement_1E1227
 	waitmovement 0
-	applymovement EVENT_OBJ_ID_PLAYER, RustboroCity_Movement_2725A6
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceUp
 	waitmovement 0
 	goto RustboroCity_EventScript_1E0FF3
 
 RustboroCity_EventScript_1E0F73:: @ 81E0F73
 	lockall
 	call RustboroCity_EventScript_1E0DD1
-	applymovement 14, RustboroCity_Movement_2725AA
+	applymovement 14, Common_Movement_WalkInPlaceDown
 	waitmovement 0
 	playse SE_PIN
-	applymovement 14, RustboroCity_Movement_272598
+	applymovement 14, Common_Movement_ExclamationMark
 	waitmovement 0
-	applymovement 14, RustboroCity_Movement_27259A
+	applymovement 14, Common_Movement_Delay48
 	waitmovement 0
 	applymovement 14, RustboroCity_Movement_1E122B
 	waitmovement 0
-	applymovement EVENT_OBJ_ID_PLAYER, RustboroCity_Movement_2725A6
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceUp
 	waitmovement 0
 	goto RustboroCity_EventScript_1E0FF3
 
 RustboroCity_EventScript_1E0FB3:: @ 81E0FB3
 	lockall
 	call RustboroCity_EventScript_1E0DD1
-	applymovement 14, RustboroCity_Movement_2725AA
+	applymovement 14, Common_Movement_WalkInPlaceDown
 	waitmovement 0
 	playse SE_PIN
-	applymovement 14, RustboroCity_Movement_272598
+	applymovement 14, Common_Movement_ExclamationMark
 	waitmovement 0
-	applymovement 14, RustboroCity_Movement_27259A
+	applymovement 14, Common_Movement_Delay48
 	waitmovement 0
 	applymovement 14, RustboroCity_Movement_1E1230
 	waitmovement 0
-	applymovement EVENT_OBJ_ID_PLAYER, RustboroCity_Movement_2725A6
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceUp
 	waitmovement 0
 	goto RustboroCity_EventScript_1E0FF3
 
@@ -840,7 +840,7 @@ RustboroCity_EventScript_1E100B:: @ 81E100B
 	closemessage
 	delay 30
 	setflag FLAG_ENABLE_RIVAL_MATCH_CALL
-	setvar VAR_0x405A, 8
+	setvar VAR_RUSTBORO_STATE, 8
 	setvar VAR_0x4063, 2
 	setvar VAR_0x8008, 0
 	msgbox RustboroCity_Text_1E1AFA, MSGBOX_YESNO
@@ -911,7 +911,7 @@ RustboroCity_EventScript_1E1114:: @ 81E1114
 	closemessage
 	delay 30
 	setflag FLAG_ENABLE_RIVAL_MATCH_CALL
-	setvar VAR_0x405A, 8
+	setvar VAR_RUSTBORO_STATE, 8
 	setvar VAR_0x4063, 2
 	msgbox RustboroCity_Text_1E1E34, MSGBOX_YESNO
 	compare VAR_RESULT, 1
