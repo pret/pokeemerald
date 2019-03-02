@@ -59,8 +59,9 @@
 #define B_TXT_BUFF3 0x34
 #define B_TXT_ATK_TRAINER_NAME 0x35
 #define B_TXT_ATK_TRAINER_CLASS 0x36
-#define B_TXT_ATK_TEAM 0x37
-#define B_TXT_DEF_NAME 0x38
+#define B_TXT_ATK_TEAM1 0x37 // Your/The opposing
+#define B_TXT_ATK_TEAM2 0x38 // your/the opposing
+#define B_TXT_DEF_NAME 0x39
 
 // for B_TXT_BUFF1, B_TXT_BUFF2 and B_TXT_BUFF3
 
