@@ -358,9 +358,9 @@ static void Task_DoPokeballSendOutAnim(u8 taskId)
     battlerId = gTasks[taskId].tBattler;
 
     if (GetBattlerSide(battlerId) != B_SIDE_PLAYER)
-        itemId = GetMonData(&gEnemyParty[gBattlerPartyIndexes[battlerId]], MON_DATA_POKEBALL);
+        itemId = GetMonData_2(&gEnemyParty[gBattlerPartyIndexes[battlerId]], MON_DATA_POKEBALL);
     else
-        itemId = GetMonData(&gPlayerParty[gBattlerPartyIndexes[battlerId]], MON_DATA_POKEBALL);
+        itemId = GetMonData_2(&gPlayerParty[gBattlerPartyIndexes[battlerId]], MON_DATA_POKEBALL);
 
     ballId = ItemIdToBallId(itemId);
     LoadBallGfx(ballId);
@@ -760,7 +760,7 @@ static void SpriteCB_ReleaseMonFromBall(struct Sprite *sprite)
             pan = -25;
         }
 
-        species = GetMonData(mon, MON_DATA_SPECIES);
+        species = GetMonData_2(mon, MON_DATA_SPECIES);
         if ((battlerId == GetBattlerAtPosition(B_POSITION_PLAYER_LEFT) || battlerId == GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT))
          && IsDoubleBattle() && gBattleSpritesDataPtr->animationData->field_9_x1)
         {
@@ -1270,7 +1270,7 @@ void FreeBallGfx(u8 ballId)
 static u16 GetBattlerPokeballItemId(u8 battlerId)
 {
     if (GetBattlerSide(battlerId) == B_SIDE_PLAYER)
-        return GetMonData(&gPlayerParty[gBattlerPartyIndexes[battlerId]], MON_DATA_POKEBALL);
+        return GetMonData_2(&gPlayerParty[gBattlerPartyIndexes[battlerId]], MON_DATA_POKEBALL);
     else
-        return GetMonData(&gEnemyParty[gBattlerPartyIndexes[battlerId]], MON_DATA_POKEBALL);
+        return GetMonData_2(&gEnemyParty[gBattlerPartyIndexes[battlerId]], MON_DATA_POKEBALL);
 }

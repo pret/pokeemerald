@@ -157,9 +157,9 @@ void sub_8158D8C(u8 taskId)
         }
 
         if (GetBattlerSide(battlerId) != B_SIDE_PLAYER)
-            species = GetMonData(&gEnemyParty[gBattlerPartyIndexes[battlerId]], MON_DATA_SPECIES);
+            species = GetMonData_2(&gEnemyParty[gBattlerPartyIndexes[battlerId]], MON_DATA_SPECIES);
         else
-            species = GetMonData(&gPlayerParty[gBattlerPartyIndexes[battlerId]], MON_DATA_SPECIES);
+            species = GetMonData_2(&gPlayerParty[gBattlerPartyIndexes[battlerId]], MON_DATA_SPECIES);
     }
 
     if (species != SPECIES_NONE)
@@ -203,9 +203,9 @@ void sub_8158E9C(u8 taskId)
         }
 
         if (GetBattlerSide(battlerId) != B_SIDE_PLAYER)
-            species = GetMonData(&gEnemyParty[gBattlerPartyIndexes[battlerId]], MON_DATA_SPECIES);
+            species = GetMonData_2(&gEnemyParty[gBattlerPartyIndexes[battlerId]], MON_DATA_SPECIES);
         else
-            species = GetMonData(&gPlayerParty[gBattlerPartyIndexes[battlerId]], MON_DATA_SPECIES);
+            species = GetMonData_2(&gPlayerParty[gBattlerPartyIndexes[battlerId]], MON_DATA_SPECIES);
     }
 
     gTasks[taskId].data[0] = gBattleAnimArgs[1];

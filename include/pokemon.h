@@ -491,12 +491,12 @@ void SetMultiuseSpriteTemplateToPokemon(u16 species, u8 battlerPosition);
 void SetMultiuseSpriteTemplateToTrainerBack(u16 trainerSpriteId, u8 battlerPosition);
 void SetMultiuseSpriteTemplateToTrainerFront(u16 arg0, u8 battlerPosition);
 
-// These are full type signatures for GetMonData() and GetBoxMonData(),
-// but they are not used since some code erroneously omits the third arg.
-// u32 GetMonData(struct Pokemon *mon, s32 field, u8 *data);
-// u32 GetBoxMonData(struct BoxPokemon *boxMon, s32 field, u8 *data);
-u32 GetMonData();
-u32 GetBoxMonData();
+// Some code erroneously omits the third arg, so these macros are used as
+// two-argument versions.
+#define GetMonData_2 ((u32 (*)(struct Pokemon*, s32))GetMonData)
+#define GetBoxMonData_2 ((u32 (*)(struct BoxPokemon*, s32))GetBoxMonData)
+u32 GetMonData(struct Pokemon *mon, s32 field, u8 *data);
+u32 GetBoxMonData(struct BoxPokemon *boxMon, s32 field, u8 *data);
 
 void SetMonData(struct Pokemon *mon, s32 field, const void *dataArg);
 void SetBoxMonData(struct BoxPokemon *boxMon, s32 field, const void *dataArg);

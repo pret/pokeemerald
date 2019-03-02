@@ -71,14 +71,14 @@ static void CreateInitialRoamerMon(bool16 createLatios)
     (&gSaveBlock1Ptr->roamer)->level = 40;
     (&gSaveBlock1Ptr->roamer)->status = 0;
     (&gSaveBlock1Ptr->roamer)->active = TRUE;
-    (&gSaveBlock1Ptr->roamer)->ivs = GetMonData(&gEnemyParty[0], MON_DATA_IVS);
-    (&gSaveBlock1Ptr->roamer)->personality = GetMonData(&gEnemyParty[0], MON_DATA_PERSONALITY);
-    (&gSaveBlock1Ptr->roamer)->hp = GetMonData(&gEnemyParty[0], MON_DATA_MAX_HP);
-    (&gSaveBlock1Ptr->roamer)->cool = GetMonData(&gEnemyParty[0], MON_DATA_COOL);
-    (&gSaveBlock1Ptr->roamer)->beauty = GetMonData(&gEnemyParty[0], MON_DATA_BEAUTY);
-    (&gSaveBlock1Ptr->roamer)->cute = GetMonData(&gEnemyParty[0], MON_DATA_CUTE);
-    (&gSaveBlock1Ptr->roamer)->smart = GetMonData(&gEnemyParty[0], MON_DATA_SMART);
-    (&gSaveBlock1Ptr->roamer)->tough = GetMonData(&gEnemyParty[0], MON_DATA_TOUGH);
+    (&gSaveBlock1Ptr->roamer)->ivs = GetMonData_2(&gEnemyParty[0], MON_DATA_IVS);
+    (&gSaveBlock1Ptr->roamer)->personality = GetMonData_2(&gEnemyParty[0], MON_DATA_PERSONALITY);
+    (&gSaveBlock1Ptr->roamer)->hp = GetMonData_2(&gEnemyParty[0], MON_DATA_MAX_HP);
+    (&gSaveBlock1Ptr->roamer)->cool = GetMonData_2(&gEnemyParty[0], MON_DATA_COOL);
+    (&gSaveBlock1Ptr->roamer)->beauty = GetMonData_2(&gEnemyParty[0], MON_DATA_BEAUTY);
+    (&gSaveBlock1Ptr->roamer)->cute = GetMonData_2(&gEnemyParty[0], MON_DATA_CUTE);
+    (&gSaveBlock1Ptr->roamer)->smart = GetMonData_2(&gEnemyParty[0], MON_DATA_SMART);
+    (&gSaveBlock1Ptr->roamer)->tough = GetMonData_2(&gEnemyParty[0], MON_DATA_TOUGH);
     sRoamerLocation[MAP_GRP] = 0;
     sRoamerLocation[MAP_NUM] = sRoamerLocations[Random() % (ARRAY_COUNT(sRoamerLocations) - 1)][0];
 }
@@ -200,8 +200,8 @@ bool8 TryStartRoamerEncounter(void)
 
 void UpdateRoamerHPStatus(struct Pokemon *mon)
 {
-    (&gSaveBlock1Ptr->roamer)->hp = GetMonData(mon, MON_DATA_HP);
-    (&gSaveBlock1Ptr->roamer)->status = GetMonData(mon, MON_DATA_STATUS);
+    (&gSaveBlock1Ptr->roamer)->hp = GetMonData_2(mon, MON_DATA_HP);
+    (&gSaveBlock1Ptr->roamer)->status = GetMonData_2(mon, MON_DATA_STATUS);
 
     RoamerMoveToOtherLocationSet();
 }

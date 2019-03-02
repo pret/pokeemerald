@@ -1531,7 +1531,7 @@ void BravoTrainerPokemonProfile_BeforeInterview2(u8 contestStandingPlace)
         show->bravoTrainer.species = GetMonData(&gPlayerParty[gContestMonPartyIndex], MON_DATA_SPECIES, NULL);
         GetMonData(&gPlayerParty[gContestMonPartyIndex], MON_DATA_NICKNAME, show->bravoTrainer.pokemonNickname);
         StripExtCtrlCodes(show->bravoTrainer.pokemonNickname);
-        show->bravoTrainer.pokemonNameLanguage = GetMonData(&gPlayerParty[gContestMonPartyIndex], MON_DATA_LANGUAGE);
+        show->bravoTrainer.pokemonNameLanguage = GetMonData_2(&gPlayerParty[gContestMonPartyIndex], MON_DATA_LANGUAGE);
     }
 }
 
@@ -1624,7 +1624,7 @@ void PutNameRaterShowOnTheAir(void)
             StripExtCtrlCodes(show->nameRaterShow.pokemonName);
             tv_store_id_2x(show);
             show->nameRaterShow.language = gGameLanguage;
-            show->nameRaterShow.pokemonNameLanguage = GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_LANGUAGE);
+            show->nameRaterShow.pokemonNameLanguage = GetMonData_2(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_LANGUAGE);
         }
     }
 }
@@ -1709,13 +1709,13 @@ static void InterviewAfter_PkmnFanClubOpinions(void)
     show->fanclubOpinions.species = GetMonData(&gPlayerParty[GetLeadMonIndex()], MON_DATA_SPECIES, NULL);
     tv_store_id_2x(show);
     show->fanclubOpinions.language = gGameLanguage;
-    if (gGameLanguage == LANGUAGE_JAPANESE || GetMonData(&gPlayerParty[GetLeadMonIndex()], MON_DATA_LANGUAGE) == LANGUAGE_JAPANESE)
+    if (gGameLanguage == LANGUAGE_JAPANESE || GetMonData_2(&gPlayerParty[GetLeadMonIndex()], MON_DATA_LANGUAGE) == LANGUAGE_JAPANESE)
     {
         show->fanclubOpinions.pokemonNameLanguage = LANGUAGE_JAPANESE;
     }
     else
     {
-        show->fanclubOpinions.pokemonNameLanguage = GetMonData(&gPlayerParty[GetLeadMonIndex()], MON_DATA_LANGUAGE);
+        show->fanclubOpinions.pokemonNameLanguage = GetMonData_2(&gPlayerParty[GetLeadMonIndex()], MON_DATA_LANGUAGE);
     }
 }
 
@@ -2160,30 +2160,30 @@ static void sub_80EDFB4(TVShow *show)
 
     for (i = 0, nPokemon = 0; i < PARTY_SIZE; i ++)
     {
-        if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES) != SPECIES_NONE && !GetMonData(&gPlayerParty[i], MON_DATA_IS_EGG))
+        if (GetMonData_2(&gPlayerParty[i], MON_DATA_SPECIES) != SPECIES_NONE && !GetMonData_2(&gPlayerParty[i], MON_DATA_IS_EGG))
         {
-            sTV_SecretBaseVisitMonsTemp[nPokemon].level = GetMonData(&gPlayerParty[i], MON_DATA_LEVEL);
-            sTV_SecretBaseVisitMonsTemp[nPokemon].species = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES);
+            sTV_SecretBaseVisitMonsTemp[nPokemon].level = GetMonData_2(&gPlayerParty[i], MON_DATA_LEVEL);
+            sTV_SecretBaseVisitMonsTemp[nPokemon].species = GetMonData_2(&gPlayerParty[i], MON_DATA_SPECIES);
             nMoves = 0;
-            move = GetMonData(&gPlayerParty[i], MON_DATA_MOVE1);
+            move = GetMonData_2(&gPlayerParty[i], MON_DATA_MOVE1);
             if (move != MOVE_NONE)
             {
                 sTV_SecretBaseVisitMovesTemp[nMoves] = move;
                 nMoves ++;
             }
-            move = GetMonData(&gPlayerParty[i], MON_DATA_MOVE2);
+            move = GetMonData_2(&gPlayerParty[i], MON_DATA_MOVE2);
             if (move != MOVE_NONE)
             {
                 sTV_SecretBaseVisitMovesTemp[nMoves] = move;
                 nMoves ++;
             }
-            move = GetMonData(&gPlayerParty[i], MON_DATA_MOVE3);
+            move = GetMonData_2(&gPlayerParty[i], MON_DATA_MOVE3);
             if (move != MOVE_NONE)
             {
                 sTV_SecretBaseVisitMovesTemp[nMoves] = move;
                 nMoves ++;
             }
-            move = GetMonData(&gPlayerParty[i], MON_DATA_MOVE4);
+            move = GetMonData_2(&gPlayerParty[i], MON_DATA_MOVE4);
             if (move != MOVE_NONE)
             {
                 sTV_SecretBaseVisitMovesTemp[nMoves] = move;
@@ -2379,13 +2379,13 @@ void sub_80EE4DC(struct Pokemon *pokemon, u8 ribbonMonDataIdx)
         show->cuties.selectedRibbon = TV_MonDataIdxToRibbon(ribbonMonDataIdx);
         tv_store_id_3x(show);
         show->cuties.language = gGameLanguage;
-        if (show->cuties.language == LANGUAGE_JAPANESE || GetMonData(pokemon, MON_DATA_LANGUAGE) == LANGUAGE_JAPANESE)
+        if (show->cuties.language == LANGUAGE_JAPANESE || GetMonData_2(pokemon, MON_DATA_LANGUAGE) == LANGUAGE_JAPANESE)
         {
             show->cuties.pokemonNameLanguage = LANGUAGE_JAPANESE;
         }
         else
         {
-            show->cuties.pokemonNameLanguage = GetMonData(pokemon, MON_DATA_LANGUAGE);
+            show->cuties.pokemonNameLanguage = GetMonData_2(pokemon, MON_DATA_LANGUAGE);
         }
     }
 }
@@ -2395,23 +2395,23 @@ u8 GetRibbonCount(struct Pokemon *pokemon)
     u8 nRibbons;
 
     nRibbons = 0;
-    nRibbons += GetMonData(pokemon, MON_DATA_COOL_RIBBON);
-    nRibbons += GetMonData(pokemon, MON_DATA_BEAUTY_RIBBON);
-    nRibbons += GetMonData(pokemon, MON_DATA_CUTE_RIBBON);
-    nRibbons += GetMonData(pokemon, MON_DATA_SMART_RIBBON);
-    nRibbons += GetMonData(pokemon, MON_DATA_TOUGH_RIBBON);
-    nRibbons += GetMonData(pokemon, MON_DATA_CHAMPION_RIBBON);
-    nRibbons += GetMonData(pokemon, MON_DATA_WINNING_RIBBON);
-    nRibbons += GetMonData(pokemon, MON_DATA_VICTORY_RIBBON);
-    nRibbons += GetMonData(pokemon, MON_DATA_ARTIST_RIBBON);
-    nRibbons += GetMonData(pokemon, MON_DATA_EFFORT_RIBBON);
-    nRibbons += GetMonData(pokemon, MON_DATA_GIFT_RIBBON_1);
-    nRibbons += GetMonData(pokemon, MON_DATA_GIFT_RIBBON_2);
-    nRibbons += GetMonData(pokemon, MON_DATA_GIFT_RIBBON_3);
-    nRibbons += GetMonData(pokemon, MON_DATA_GIFT_RIBBON_4);
-    nRibbons += GetMonData(pokemon, MON_DATA_GIFT_RIBBON_5);
-    nRibbons += GetMonData(pokemon, MON_DATA_GIFT_RIBBON_6);
-    nRibbons += GetMonData(pokemon, MON_DATA_GIFT_RIBBON_7);
+    nRibbons += GetMonData_2(pokemon, MON_DATA_COOL_RIBBON);
+    nRibbons += GetMonData_2(pokemon, MON_DATA_BEAUTY_RIBBON);
+    nRibbons += GetMonData_2(pokemon, MON_DATA_CUTE_RIBBON);
+    nRibbons += GetMonData_2(pokemon, MON_DATA_SMART_RIBBON);
+    nRibbons += GetMonData_2(pokemon, MON_DATA_TOUGH_RIBBON);
+    nRibbons += GetMonData_2(pokemon, MON_DATA_CHAMPION_RIBBON);
+    nRibbons += GetMonData_2(pokemon, MON_DATA_WINNING_RIBBON);
+    nRibbons += GetMonData_2(pokemon, MON_DATA_VICTORY_RIBBON);
+    nRibbons += GetMonData_2(pokemon, MON_DATA_ARTIST_RIBBON);
+    nRibbons += GetMonData_2(pokemon, MON_DATA_EFFORT_RIBBON);
+    nRibbons += GetMonData_2(pokemon, MON_DATA_GIFT_RIBBON_1);
+    nRibbons += GetMonData_2(pokemon, MON_DATA_GIFT_RIBBON_2);
+    nRibbons += GetMonData_2(pokemon, MON_DATA_GIFT_RIBBON_3);
+    nRibbons += GetMonData_2(pokemon, MON_DATA_GIFT_RIBBON_4);
+    nRibbons += GetMonData_2(pokemon, MON_DATA_GIFT_RIBBON_5);
+    nRibbons += GetMonData_2(pokemon, MON_DATA_GIFT_RIBBON_6);
+    nRibbons += GetMonData_2(pokemon, MON_DATA_GIFT_RIBBON_7);
     return nRibbons;
 }
 

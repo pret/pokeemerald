@@ -1570,7 +1570,7 @@ static void InitPartyMenu(u8 a, u8 b, u8 c, u8 d, u8 e, TaskFunc task, MainCallb
 
         if (d == 0)
             gUnknown_0203CEC8.unk9 = 0;
-        else if (gUnknown_0203CEC8.unk9 > 5 || GetMonData(&gPlayerParty[gUnknown_0203CEC8.unk9], MON_DATA_SPECIES) == SPECIES_NONE)
+        else if (gUnknown_0203CEC8.unk9 > 5 || GetMonData_2(&gPlayerParty[gUnknown_0203CEC8.unk9], MON_DATA_SPECIES) == SPECIES_NONE)
             gUnknown_0203CEC8.unk9 = 0; // wut why is this else if?
 
         gTextFlags.autoScroll = 0;
@@ -1881,7 +1881,7 @@ static void RenderPartyMenuBox(u8 slot)
     }
     else
     {
-        if (GetMonData(&gPlayerParty[slot], MON_DATA_SPECIES) == SPECIES_NONE)
+        if (GetMonData_2(&gPlayerParty[slot], MON_DATA_SPECIES) == SPECIES_NONE)
         {
             sub_81B2720(gUnknown_0203CEDC[slot].windowId);
             UpdateSelectedPartyBox(&gUnknown_0203CEDC[slot], 0x40);
@@ -1916,7 +1916,7 @@ static void RenderPartyMenuBox(u8 slot)
 
 static void DisplayPartyPokemonData(u8 slot)
 {
-    if (GetMonData(&gPlayerParty[slot], MON_DATA_IS_EGG))
+    if (GetMonData_2(&gPlayerParty[slot], MON_DATA_IS_EGG))
     {
         gUnknown_0203CEDC[slot].unk0->unk0(gUnknown_0203CEDC[slot].windowId, 0, 0, 0, 0, 1);
         DisplayPartyPokemonNickname(&gPlayerParty[slot], &gUnknown_0203CEDC[slot], 0);
@@ -1939,7 +1939,7 @@ static void DisplayPartyPokemonSelectData(u8 slot, u8 stringID)
 
     gUnknown_0203CEDC[slot].unk0->unk0(gUnknown_0203CEDC[slot].windowId, 0, 0, 0, 0, 1);
     DisplayPartyPokemonNickname(mon, &gUnknown_0203CEDC[slot], 0);
-    if (!GetMonData(mon, MON_DATA_IS_EGG))
+    if (!GetMonData_2(mon, MON_DATA_IS_EGG))
     {
         DisplayPartyPokemonLevelCheck(mon, &gUnknown_0203CEDC[slot], 0);
         DisplayPartyPokemonGenderNidoranCheck(mon, &gUnknown_0203CEDC[slot], 0);
@@ -2006,7 +2006,7 @@ static void sub_81B0B98(u8 slot)
 
 static void DisplayPartyPokemonSelectHeldItemRelated(u8 slot)
 {
-    if (GetMonData(&gPlayerParty[slot], MON_DATA_HELD_ITEM))
+    if (GetMonData_2(&gPlayerParty[slot], MON_DATA_HELD_ITEM))
         DisplayPartyPokemonSelectData(slot, 11);
     else
         DisplayPartyPokemonSelectData(slot, 12);
@@ -2035,7 +2035,7 @@ static bool8 sub_81B0BFC(u8 slot)
             DisplayPartyPokemonSelectToTeachMove(slot, item, 0);
             break;
         case 2:
-            if (!GetMonData(currentPokemon, MON_DATA_IS_EGG) && GetEvolutionTargetSpecies(currentPokemon, 3, item) != SPECIES_NONE)
+            if (!GetMonData_2(currentPokemon, MON_DATA_IS_EGG) && GetEvolutionTargetSpecies(currentPokemon, 3, item) != SPECIES_NONE)
                 return FALSE;
             DisplayPartyPokemonSelectData(slot, 0);
             break;
@@ -2120,7 +2120,7 @@ static void party_menu_add_per_mon_objects_internal(u8 slot)
             party_menu_link_mon_status_condition_object(gUnknown_02022FF8[actualSlot].species, status, &gUnknown_0203CEDC[slot]);
         }
     }
-    else if (GetMonData(&gPlayerParty[slot], MON_DATA_SPECIES) != SPECIES_NONE)
+    else if (GetMonData_2(&gPlayerParty[slot], MON_DATA_SPECIES) != SPECIES_NONE)
     {
         party_menu_icon_anim(&gPlayerParty[slot], &gUnknown_0203CEDC[slot], slot);
         party_menu_held_item_object(&gPlayerParty[slot], &gUnknown_0203CEDC[slot]);
@@ -2167,7 +2167,7 @@ void sub_81B0FCC(u8 slot, u8 b)
     switch (slot)
     {
     default:
-        if (GetMonData(&gPlayerParty[slot], MON_DATA_SPECIES) != SPECIES_NONE)
+        if (GetMonData_2(&gPlayerParty[slot], MON_DATA_SPECIES) != SPECIES_NONE)
         {
             UpdateSelectedPartyBox(&gUnknown_0203CEDC[slot], GetPartyBoxPalBitfield(slot, b));
             AnimateSelectedPartyIcon(gUnknown_0203CEDC[slot].unk9, b);
@@ -2210,7 +2210,7 @@ static u8 GetPartyBoxPalBitfield(u8 slot, u8 b)
 
     if (b == 1)
         returnVar |= 1;
-    if (GetMonData(&gPlayerParty[slot], MON_DATA_HP) == 0)
+    if (GetMonData_2(&gPlayerParty[slot], MON_DATA_HP) == 0)
         returnVar |= 2;
     if (PartyBoxPal_ParnterOrDisqualifiedInArena(slot) == TRUE)
         returnVar |= 8;
@@ -2409,7 +2409,7 @@ static void sub_81B140C(u8 taskId, s8 *ptr)
 
 static bool8 sub_81B15A4(u8 *slotPtr)
 {
-    if (GetMonData(&gPlayerParty[*slotPtr], MON_DATA_IS_EGG) == TRUE)
+    if (GetMonData_2(&gPlayerParty[*slotPtr], MON_DATA_IS_EGG) == TRUE)
     {
         PlaySE(SE_HAZURE);
         return FALSE;
@@ -2684,10 +2684,10 @@ static void SetNewPartySelectTarget2(s8 *ptr, s8 b)
         {
             if (gUnknown_0203CEC4->unk8_1 == 3)
             {
-                if (GetMonData(&gPlayerParty[3], MON_DATA_SPECIES) != SPECIES_NONE)
+                if (GetMonData_2(&gPlayerParty[3], MON_DATA_SPECIES) != SPECIES_NONE)
                     *ptr = 3;
             }
-            else if (GetMonData(&gPlayerParty[2], MON_DATA_SPECIES) != SPECIES_NONE)
+            else if (GetMonData_2(&gPlayerParty[2], MON_DATA_SPECIES) != SPECIES_NONE)
             {
                 *ptr = 2;
             }
@@ -2696,10 +2696,10 @@ static void SetNewPartySelectTarget2(s8 *ptr, s8 b)
         {
             if (gUnknown_0203CEC4->unk8_1 == 5)
             {
-                if (GetMonData(&gPlayerParty[5], MON_DATA_SPECIES) != SPECIES_NONE)
+                if (GetMonData_2(&gPlayerParty[5], MON_DATA_SPECIES) != SPECIES_NONE)
                     *ptr = 5;
             }
-            else if (GetMonData(&gPlayerParty[4], MON_DATA_SPECIES) != SPECIES_NONE)
+            else if (GetMonData_2(&gPlayerParty[4], MON_DATA_SPECIES) != SPECIES_NONE)
             {
                 *ptr = 4;
             }
@@ -2727,7 +2727,7 @@ static s8 sub_81B1B00(s8 a, s8 b)
         a += b;
         if ((u8)a >= 6)
             return -1;
-        if (GetMonData(&gPlayerParty[a], MON_DATA_SPECIES) != SPECIES_NONE)
+        if (GetMonData_2(&gPlayerParty[a], MON_DATA_SPECIES) != SPECIES_NONE)
             return a;
     }
 }
@@ -2845,7 +2845,7 @@ static void sub_81B1DB8(struct Pokemon *mon, u16 item)
 
 static u8 TryTakeMonItem(struct Pokemon* mon)
 {
-    u16 item = GetMonData(mon, MON_DATA_HELD_ITEM);
+    u16 item = GetMonData_2(mon, MON_DATA_HELD_ITEM);
 
     if (item == ITEM_NONE)
         return 0;
@@ -2884,8 +2884,8 @@ void sub_81B1F18(u8 taskId, u8 slot, s8 c, s16 HPDifference, TaskFunc func)
     struct Pokemon *mon = &gPlayerParty[slot];
     s16 *data = gTasks[taskId].data;
 
-    data[0] = GetMonData(mon, MON_DATA_HP);
-    data[1] = GetMonData(mon, MON_DATA_MAX_HP);
+    data[0] = GetMonData_2(mon, MON_DATA_HP);
+    data[1] = GetMonData_2(mon, MON_DATA_MAX_HP);
     data[2] = c;
     data[3] = HPDifference;
     data[4] = slot;
@@ -2940,9 +2940,9 @@ u8 sub_81B205C(struct Pokemon *mon)
 {
     u8 ailment;
 
-    if (GetMonData(mon, MON_DATA_HP) == 0)
+    if (GetMonData_2(mon, MON_DATA_HP) == 0)
         return AILMENT_FNT;
-    ailment = pokemon_ailments_get_primary(GetMonData(mon, MON_DATA_STATUS));
+    ailment = pokemon_ailments_get_primary(GetMonData_2(mon, MON_DATA_STATUS));
     if (ailment != AILMENT_NONE)
         return ailment;
     if (CheckPartyPokerus(mon, 0))
@@ -2975,7 +2975,7 @@ static void sub_81B209C(void)
 
 static bool16 sub_81B2134(struct Pokemon *mon)
 {
-    if (GetMonData(mon, MON_DATA_IS_EGG) != TRUE && sub_802C908(GetMonData(mon, MON_DATA_SPECIES)))
+    if (GetMonData_2(mon, MON_DATA_IS_EGG) != TRUE && sub_802C908(GetMonData_2(mon, MON_DATA_SPECIES)))
         return TRUE;
     return FALSE;
 }
@@ -2984,7 +2984,7 @@ static bool16 sub_81B2134(struct Pokemon *mon)
 
 static bool16 sub_81B2164(struct Pokemon *mon)
 {
-    if (GetMonData(mon, MON_DATA_IS_EGG) != TRUE && GetMonData(mon, MON_DATA_SPECIES) == SPECIES_DODRIO)
+    if (GetMonData_2(mon, MON_DATA_IS_EGG) != TRUE && GetMonData_2(mon, MON_DATA_SPECIES) == SPECIES_DODRIO)
         return TRUE;
     return FALSE;
 }
@@ -3049,7 +3049,7 @@ static u8 CanMonLearnTMTutor(struct Pokemon *mon, u16 item, u8 tutor)
 {
     u16 move;
 
-    if (GetMonData(mon, MON_DATA_IS_EGG))
+    if (GetMonData_2(mon, MON_DATA_IS_EGG))
         return CANNOT_LEARN_MOVE_IS_EGG;
 
     if (item >= ITEM_TM01_FOCUS_PUNCH)
@@ -3060,7 +3060,7 @@ static u8 CanMonLearnTMTutor(struct Pokemon *mon, u16 item, u8 tutor)
             return CANNOT_LEARN_MOVE;
         do {} while (0); // :morphon:
     }
-    else if (CanLearnTutorMove(GetMonData(mon, MON_DATA_SPECIES), tutor) == FALSE)
+    else if (CanLearnTutorMove(GetMonData_2(mon, MON_DATA_SPECIES), tutor) == FALSE)
     {
         return CANNOT_LEARN_MOVE;
     }
@@ -3342,7 +3342,7 @@ static void DisplayPartyPokemonNickname(struct Pokemon *mon, struct Struct203CED
 {
     u8 nickname[POKEMON_NAME_LENGTH + 1];
 
-    if (GetMonData(mon, MON_DATA_SPECIES) != SPECIES_NONE)
+    if (GetMonData_2(mon, MON_DATA_SPECIES) != SPECIES_NONE)
     {
         if (c == 1)
             ptr->unk0->unk0(ptr->windowId, ptr->unk0->unk4[0] >> 3, ptr->unk0->unk4[1] >> 3, ptr->unk0->unk4[2] >> 3, ptr->unk0->unk4[3] >> 3, 0);
@@ -3353,7 +3353,7 @@ static void DisplayPartyPokemonNickname(struct Pokemon *mon, struct Struct203CED
 
 static void DisplayPartyPokemonLevelCheck(struct Pokemon *mon, struct Struct203CEDC *ptr, u8 c)
 {
-    if (GetMonData(mon, MON_DATA_SPECIES) != SPECIES_NONE)
+    if (GetMonData_2(mon, MON_DATA_SPECIES) != SPECIES_NONE)
     {
         u8 ailment = sub_81B205C(mon);
         if (ailment == AILMENT_NONE || ailment == AILMENT_PKRS)
@@ -3361,7 +3361,7 @@ static void DisplayPartyPokemonLevelCheck(struct Pokemon *mon, struct Struct203C
             if (c != 0)
                 ptr->unk0->unk0(ptr->windowId, ptr->unk0->unk4[4] >> 3, (ptr->unk0->unk4[5] >> 3) + 1, ptr->unk0->unk4[6] >> 3, ptr->unk0->unk4[7] >> 3, 0);
             if (c != 2)
-                DisplayPartyPokemonLevel(GetMonData(mon, MON_DATA_LEVEL), ptr);
+                DisplayPartyPokemonLevel(GetMonData_2(mon, MON_DATA_LEVEL), ptr);
         }
     }
 }
@@ -3381,7 +3381,7 @@ static void DisplayPartyPokemonGenderNidoranCheck(struct Pokemon *mon, struct St
     if (c == 1)
         ptr->unk0->unk0(ptr->windowId, ptr->unk0->unk4[8] >> 3, (ptr->unk0->unk4[9] >> 3) + 1, ptr->unk0->unk4[10] >> 3, ptr->unk0->unk4[11] >> 3, 0);
     GetMonNickname(mon, nickname);
-    DisplayPartyPokemonGender(GetMonGender(mon), GetMonData(mon, MON_DATA_SPECIES), nickname, ptr);
+    DisplayPartyPokemonGender(GetMonGender(mon), GetMonData_2(mon, MON_DATA_SPECIES), nickname, ptr);
 }
 
 static void DisplayPartyPokemonGender(u8 gender, u16 species, u8 *nickname, struct Struct203CEDC *ptr)
@@ -3409,12 +3409,12 @@ static void DisplayPartyPokemonGender(u8 gender, u16 species, u8 *nickname, stru
 
 static void DisplayPartyPokemonHPCheck(struct Pokemon *mon, struct Struct203CEDC *ptr, u8 c)
 {
-    if (GetMonData(mon, MON_DATA_SPECIES) != SPECIES_NONE)
+    if (GetMonData_2(mon, MON_DATA_SPECIES) != SPECIES_NONE)
     {
         if (c != 0)
             ptr->unk0->unk0(ptr->windowId, ptr->unk0->unk4[12] >> 3, (ptr->unk0->unk4[13] >> 3) + 1, ptr->unk0->unk4[14] >> 3, ptr->unk0->unk4[15] >> 3, 0);
         if (c != 2)
-            DisplayPartyPokemonHP(GetMonData(mon, MON_DATA_HP), ptr);
+            DisplayPartyPokemonHP(GetMonData_2(mon, MON_DATA_HP), ptr);
     }
 }
 
@@ -3430,12 +3430,12 @@ static void DisplayPartyPokemonHP(u16 hp, struct Struct203CEDC *ptr)
 
 static void DisplayPartyPokemonMaxHPCheck(struct Pokemon *mon, struct Struct203CEDC *ptr, u8 c)
 {
-    if (GetMonData(mon, MON_DATA_SPECIES) != SPECIES_NONE)
+    if (GetMonData_2(mon, MON_DATA_SPECIES) != SPECIES_NONE)
     {
         if (c != 0)
             ptr->unk0->unk0(ptr->windowId, (ptr->unk0->unk4[16] >> 3) + 1, (ptr->unk0->unk4[17] >> 3) + 1, ptr->unk0->unk4[18] >> 3, ptr->unk0->unk4[19] >> 3, 0);
         if (c != 2)
-            DisplayPartyPokemonMaxHP(GetMonData(mon, MON_DATA_MAX_HP), ptr);
+            DisplayPartyPokemonMaxHP(GetMonData_2(mon, MON_DATA_MAX_HP), ptr);
     }
 }
 
@@ -3449,8 +3449,8 @@ static void DisplayPartyPokemonMaxHP(u16 maxhp, struct Struct203CEDC *ptr)
 
 static void DisplayPartyPokemonHPBarCheck(struct Pokemon *mon, struct Struct203CEDC *ptr)
 {
-    if (GetMonData(mon, MON_DATA_SPECIES) != SPECIES_NONE)
-        DisplayPartyPokemonHPBar(GetMonData(mon, MON_DATA_HP), GetMonData(mon, MON_DATA_MAX_HP), ptr);
+    if (GetMonData_2(mon, MON_DATA_SPECIES) != SPECIES_NONE)
+        DisplayPartyPokemonHPBar(GetMonData_2(mon, MON_DATA_HP), GetMonData_2(mon, MON_DATA_MAX_HP), ptr);
 }
 
 static void DisplayPartyPokemonHPBar(u16 hp, u16 maxhp, struct Struct203CEDC *ptr)
@@ -3565,7 +3565,7 @@ static bool8 sub_81B314C(void)
 
     for (i = 0; i < 6; i++)
     {
-        if (GetMonData(&party[i], MON_DATA_SPECIES) != SPECIES_NONE && (GetMonData(&party[i], MON_DATA_HP) != 0 || GetMonData(&party[i], MON_DATA_IS_EGG)))
+        if (GetMonData_2(&party[i], MON_DATA_SPECIES) != SPECIES_NONE && (GetMonData_2(&party[i], MON_DATA_HP) != 0 || GetMonData_2(&party[i], MON_DATA_IS_EGG)))
             j++;
         if (j > 1)
             return TRUE;
@@ -3666,7 +3666,7 @@ static void sub_81B3414(struct Pokemon *mons, u8 a)
     {
         for (j = 0; sFieldMoves[j] != FIELD_MOVE_TERMINATOR; j++)
         {
-            if (GetMonData(&mons[a], i + MON_DATA_MOVE1) == sFieldMoves[j])
+            if (GetMonData_2(&mons[a], i + MON_DATA_MOVE1) == sFieldMoves[j])
             {
                 AppendToList(gUnknown_0203CEC4->unkF, &gUnknown_0203CEC4->unk17, j + 19);
                 break;
@@ -3676,9 +3676,9 @@ static void sub_81B3414(struct Pokemon *mons, u8 a)
 
     if (!InBattlePike())
     {
-        if (GetMonData(&mons[1], MON_DATA_SPECIES) != SPECIES_NONE)
+        if (GetMonData_2(&mons[1], MON_DATA_SPECIES) != SPECIES_NONE)
             AppendToList(gUnknown_0203CEC4->unkF, &gUnknown_0203CEC4->unk17, 1);
-        if (ItemIsMail(GetMonData(&mons[a], MON_DATA_HELD_ITEM)))
+        if (ItemIsMail(GetMonData_2(&mons[a], MON_DATA_HELD_ITEM)))
             AppendToList(gUnknown_0203CEC4->unkF, &gUnknown_0203CEC4->unk17, 6);
         else
             AppendToList(gUnknown_0203CEC4->unkF, &gUnknown_0203CEC4->unk17, 3);
@@ -3693,7 +3693,7 @@ static u8 sub_81B353C(struct Pokemon *mon)
     switch (gUnknown_0203CEC8.unk8_0)
     {
     case 0:
-        if (InMultiBattleRoom() == TRUE || GetMonData(mon, MON_DATA_IS_EGG))
+        if (InMultiBattleRoom() == TRUE || GetMonData_2(mon, MON_DATA_IS_EGG))
             returnVar = 1;
         else
             returnVar = 0;
@@ -3716,7 +3716,7 @@ static u8 sub_81B353C(struct Pokemon *mon)
         }
         break;
     case 6:
-        returnVar = (GetMonData(mon, MON_DATA_IS_EGG)) ? 7 : 6;
+        returnVar = (GetMonData_2(mon, MON_DATA_IS_EGG)) ? 7 : 6;
         break;
     case 8:
         returnVar = 10;
@@ -3752,7 +3752,7 @@ static bool8 sub_81B3608(u8 taskId)
     }
     else
     {
-        item = GetMonData(mon, MON_DATA_HELD_ITEM);
+        item = GetMonData_2(mon, MON_DATA_HELD_ITEM);
         if (item != ITEM_NONE)
         {
             sub_81B33B4(gPlayerParty, gUnknown_0203CEC8.unk9, sub_81B353C(mon));
@@ -4116,7 +4116,7 @@ static void c2_8123744(void)
     }
     else
     {
-        gUnknown_0203CEFC = GetMonData(&gPlayerParty[gUnknown_0203CEC8.unk9], MON_DATA_HELD_ITEM);
+        gUnknown_0203CEFC = GetMonData_2(&gPlayerParty[gUnknown_0203CEC8.unk9], MON_DATA_HELD_ITEM);
         if (gUnknown_0203CEFC != ITEM_NONE)
         {
             InitPartyMenu(gUnknown_0203CEC8.unk8_0, 0xFF, gUnknown_0203CEC8.unkB, 1, 0x7F, sub_81B4350, gUnknown_0203CEC8.exitCallback);
@@ -4210,7 +4210,7 @@ static void sub_81B44FC(u8 taskId)
 
 static void sub_81B452C(void)
 {
-    u8 mail = GetMonData(&gPlayerParty[gUnknown_0203CEC8.unk9], MON_DATA_MAIL);
+    u8 mail = GetMonData_2(&gPlayerParty[gUnknown_0203CEC8.unk9], MON_DATA_MAIL);
 
     DoEasyChatScreen(
     	EASY_CHAT_TYPE_MAIL,
@@ -4222,7 +4222,7 @@ static void sub_81B452C(void)
 static void sub_81B4578(void)
 {
     struct Pokemon *mon = &gPlayerParty[gUnknown_0203CEC8.unk9];
-    u16 item = GetMonData(mon, MON_DATA_HELD_ITEM);
+    u16 item = GetMonData_2(mon, MON_DATA_HELD_ITEM);
 
     if (gSpecialVar_Result == FALSE)
     {
@@ -4259,7 +4259,7 @@ static void sub_81B469C(u8 taskId)
         sub_81B5C94(mon, &gUnknown_0203CEDC[gUnknown_0203CEC8.unk9]);
         if (gUnknown_0203CEC8.unk8_0 == 12)
         {
-            if (GetMonData(mon, MON_DATA_HELD_ITEM) != ITEM_NONE)
+            if (GetMonData_2(mon, MON_DATA_HELD_ITEM) != ITEM_NONE)
                 DisplayPartyPokemonOtherText(11, &gUnknown_0203CEDC[gUnknown_0203CEC8.unk9], 1);
             else
                 DisplayPartyPokemonOtherText(12, &gUnknown_0203CEDC[gUnknown_0203CEC8.unk9], 1);
@@ -4271,7 +4271,7 @@ static void sub_81B469C(u8 taskId)
 static void CursorCb_TakeItem(u8 taskId)
 {
     struct Pokemon *mon = &gPlayerParty[gUnknown_0203CEC8.unk9];
-    u16 item = GetMonData(mon, MON_DATA_HELD_ITEM);
+    u16 item = GetMonData_2(mon, MON_DATA_HELD_ITEM);
 
     PlaySE(SE_SELECT);
     sub_81B302C(&gUnknown_0203CEC4->unkC[0]);
@@ -4298,7 +4298,7 @@ static void CursorCb_TakeItem(u8 taskId)
 static void CursorCb_Toss(u8 taskId)
 {
     struct Pokemon *mon = &gPlayerParty[gUnknown_0203CEC8.unk9];
-    u16 item = GetMonData(mon, MON_DATA_HELD_ITEM);
+    u16 item = GetMonData_2(mon, MON_DATA_HELD_ITEM);
 
     PlaySE(SE_SELECT);
     sub_81B302C(&gUnknown_0203CEC4->unkC[0]);
@@ -4335,7 +4335,7 @@ static void sub_81B48DC(u8 taskId)
     switch (Menu_ProcessInputNoWrapClearOnChoose())
     {
     case 0:
-        CopyItemName(GetMonData(mon, MON_DATA_HELD_ITEM), gStringVar1);
+        CopyItemName(GetMonData_2(mon, MON_DATA_HELD_ITEM), gStringVar1);
         StringExpandPlaceholders(gStringVar4, gText_ItemThrownAway);
         sub_81B1B5C(gStringVar4, 0);
         gTasks[taskId].func = sub_81B4988;
@@ -4384,7 +4384,7 @@ static void CursorCb_Read(u8 taskId)
 
 static void sub_81B4A98(void)
 {
-    ReadMail(&gSaveBlock1Ptr->mail[GetMonData(&gPlayerParty[gUnknown_0203CEC8.unk9], MON_DATA_MAIL)], sub_81B4AE0, 1);
+    ReadMail(&gSaveBlock1Ptr->mail[GetMonData_2(&gPlayerParty[gUnknown_0203CEC8.unk9], MON_DATA_MAIL)], sub_81B4AE0, 1);
 }
 
 static void sub_81B4AE0(void)
@@ -4452,7 +4452,7 @@ static void sub_81B4C94(u8 taskId)
     switch (Menu_ProcessInputNoWrapClearOnChoose())
     {
     case 0:
-        item = GetMonData(&gPlayerParty[gUnknown_0203CEC8.unk9], MON_DATA_HELD_ITEM);
+        item = GetMonData_2(&gPlayerParty[gUnknown_0203CEC8.unk9], MON_DATA_HELD_ITEM);
         if (AddBagItem(item, 1) == TRUE)
         {
             TakeMailFromMon(&gPlayerParty[gUnknown_0203CEC8.unk9]);
@@ -4490,7 +4490,7 @@ static void CursorCb_Cancel2(u8 taskId)
     else
     {
         sub_81B31B0(1);
-        CopyItemName(GetMonData(mon, MON_DATA_HELD_ITEM), gStringVar2);
+        CopyItemName(GetMonData_2(mon, MON_DATA_HELD_ITEM), gStringVar2);
         display_pokemon_menu_message(26);
     }
     gTasks[taskId].data[0] = 0xFF;
@@ -4586,9 +4586,9 @@ static void CursorCb_Store(u8 taskId)
 
 static void CursorCb_Register(u8 taskId)
 {
-    u16 species2 = GetMonData(&gPlayerParty[gUnknown_0203CEC8.unk9], MON_DATA_SPECIES2);
-    u16 species = GetMonData(&gPlayerParty[gUnknown_0203CEC8.unk9], MON_DATA_SPECIES);
-    u8 obedience = GetMonData(&gPlayerParty[gUnknown_0203CEC8.unk9], MON_DATA_OBEDIENCE);
+    u16 species2 = GetMonData_2(&gPlayerParty[gUnknown_0203CEC8.unk9], MON_DATA_SPECIES2);
+    u16 species = GetMonData_2(&gPlayerParty[gUnknown_0203CEC8.unk9], MON_DATA_SPECIES);
+    u8 obedience = GetMonData_2(&gPlayerParty[gUnknown_0203CEC8.unk9], MON_DATA_OBEDIENCE);
 
     switch (sub_807A8D0(*(struct UnkLinkRfuStruct_02022B14Substruct *)sub_800F7DC(), species2, species, obedience))
     {
@@ -4613,9 +4613,9 @@ static void CursorCb_Register(u8 taskId)
 
 static void CursorCb_Trade1(u8 taskId)
 {
-    u16 species2 = GetMonData(&gPlayerParty[gUnknown_0203CEC8.unk9], MON_DATA_SPECIES2);
-    u16 species = GetMonData(&gPlayerParty[gUnknown_0203CEC8.unk9], MON_DATA_SPECIES);
-    u8 obedience = GetMonData(&gPlayerParty[gUnknown_0203CEC8.unk9], MON_DATA_OBEDIENCE);
+    u16 species2 = GetMonData_2(&gPlayerParty[gUnknown_0203CEC8.unk9], MON_DATA_SPECIES2);
+    u16 species = GetMonData_2(&gPlayerParty[gUnknown_0203CEC8.unk9], MON_DATA_SPECIES);
+    u8 obedience = GetMonData_2(&gPlayerParty[gUnknown_0203CEC8.unk9], MON_DATA_OBEDIENCE);
     u32 stringId = sub_807A7E0(*(struct UnkLinkRfuStruct_02022B14Substruct *)sub_800F7DC(), gUnknown_02022C38, species2, gUnknown_02022C3C, gUnknown_02022C3E, species, obedience);
 
     if (stringId != 0)
@@ -4819,7 +4819,7 @@ static void task_launch_hm_phase_2(u8 taskId)
 
 static u16 brm_get_selected_species(void)
 {
-    return GetMonData(&gPlayerParty[gUnknown_0203CEC8.unk9], MON_DATA_SPECIES);
+    return GetMonData_2(&gPlayerParty[gUnknown_0203CEC8.unk9], MON_DATA_SPECIES);
 }
 
 static void task_brm_cancel_1_on_keypad_a_or_b(u8 taskId)
@@ -4919,8 +4919,8 @@ static void party_menu_icon_anim(struct Pokemon *mon, struct Struct203CEDC *ptr,
 
     if (IsMultiBattle() == TRUE && gMain.inBattle)
         bit = (gUnknown_08616020[a] ^ bit) ? 1 : 0;
-    species2 = GetMonData(mon, MON_DATA_SPECIES2);
-    party_menu_link_mon_icon_anim(species2, GetMonData(mon, MON_DATA_PERSONALITY), ptr, 1, bit);
+    species2 = GetMonData_2(mon, MON_DATA_SPECIES2);
+    party_menu_link_mon_icon_anim(species2, GetMonData_2(mon, MON_DATA_PERSONALITY), ptr, 1, bit);
     sub_81B5B38(ptr->unk9, mon);
 }
 
@@ -4957,7 +4957,7 @@ static void sub_81B5A8C(u8 spriteId, u16 hp, u16 maxhp)
 
 static void sub_81B5B38(u8 spriteId, struct Pokemon *mon)
 {
-    sub_81B5A8C(spriteId, GetMonData(mon, MON_DATA_HP), GetMonData(mon, MON_DATA_MAX_HP));
+    sub_81B5A8C(spriteId, GetMonData_2(mon, MON_DATA_HP), GetMonData_2(mon, MON_DATA_MAX_HP));
 }
 
 static void AnimateSelectedPartyIcon(u8 spriteId, u8 a)
@@ -5005,7 +5005,7 @@ static void UpdatePartyMonIconFrame(struct Sprite *sprite)
 
 static void party_menu_held_item_object(struct Pokemon *mon, struct Struct203CEDC *ptr)
 {
-    if (GetMonData(mon, MON_DATA_SPECIES) != SPECIES_NONE)
+    if (GetMonData_2(mon, MON_DATA_SPECIES) != SPECIES_NONE)
     {
         ptr->unkA = CreateSprite(&gSpriteTemplate_8615EC0, ptr->unk4[2], ptr->unk4[3], 0);
         sub_81B5C94(mon, ptr);
@@ -5024,7 +5024,7 @@ static void party_menu_link_mon_held_item_object(u16 species, u16 item, struct S
 
 static void sub_81B5C94(struct Pokemon *mon, struct Struct203CEDC *ptr)
 {
-    sub_81B5CB0(GetMonData(mon, MON_DATA_HELD_ITEM), ptr);
+    sub_81B5CB0(GetMonData_2(mon, MON_DATA_HELD_ITEM), ptr);
 }
 
 static void sub_81B5CB0(u16 item, struct Struct203CEDC *ptr)
@@ -5059,7 +5059,7 @@ void sub_81B5D4C(u8 *a, u8 *b, u8 c)
     case 0:
         for (i = 0; i < a[0]; i++)
         {
-            item = GetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM);
+            item = GetMonData_2(&gPlayerParty[i], MON_DATA_HELD_ITEM);
             if (item != ITEM_NONE)
                 sub_81B5DF0(b[i], ItemIsMail(item));
         }
@@ -5067,7 +5067,7 @@ void sub_81B5D4C(u8 *a, u8 *b, u8 c)
     case 1:
         for (i = 0; i < a[1]; i++)
         {
-            item = GetMonData(&gEnemyParty[i], MON_DATA_HELD_ITEM);
+            item = GetMonData_2(&gEnemyParty[i], MON_DATA_HELD_ITEM);
             if (item != ITEM_NONE)
                 sub_81B5DF0(b[i + 6], ItemIsMail(item));
         }
@@ -5106,7 +5106,7 @@ static void sub_81B5E74(struct Sprite *sprite)
 
 static void party_menu_pokeball_object(struct Pokemon *mon, struct Struct203CEDC *ptr)
 {
-    if (GetMonData(mon, MON_DATA_SPECIES) != SPECIES_NONE)
+    if (GetMonData_2(mon, MON_DATA_SPECIES) != SPECIES_NONE)
         ptr->unkB = CreateSprite(&gSpriteTemplate_8615F08, ptr->unk4[6], ptr->unk4[7], 8);
 }
 
@@ -5164,7 +5164,7 @@ static void LoadPartyMenuPokeballGfx(void)
 
 static void party_menu_status_condition_object(struct Pokemon *mon, struct Struct203CEDC *ptr)
 {
-    if (GetMonData(mon, MON_DATA_SPECIES) != SPECIES_NONE)
+    if (GetMonData_2(mon, MON_DATA_SPECIES) != SPECIES_NONE)
     {
         ptr->unkC = CreateSprite(&gSpriteTemplate_8616008, ptr->unk4[4], ptr->unk4[5], 0);
         party_menu_get_status_condition_and_update_object(mon, ptr);
@@ -5232,7 +5232,7 @@ void sub_81B617C(void)
         gUnknown_0203CEC8.unk9 = 0;
         for (i = 0; i < PARTY_SIZE; i++)
         {
-            if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES) != SPECIES_NONE && GetMonData(&gPlayerParty[i], MON_DATA_HP) == 0)
+            if (GetMonData_2(&gPlayerParty[i], MON_DATA_SPECIES) != SPECIES_NONE && GetMonData_2(&gPlayerParty[i], MON_DATA_HP) == 0)
             {
                 gUnknown_0203CEC8.unk9 = i;
                 break;
@@ -5354,7 +5354,7 @@ static void GetMedicineItemEffectMessage(u16 item)
 
 static bool8 UsingHPEVItemOnShedinja(struct Pokemon *mon, u16 item)
 {
-    if (GetItemEffectType(item) == 13 && GetMonData(mon, MON_DATA_SPECIES) == SPECIES_SHEDINJA)
+    if (GetItemEffectType(item) == 13 && GetMonData_2(mon, MON_DATA_SPECIES) == SPECIES_SHEDINJA)
         return FALSE;
     return TRUE;
 }
@@ -5386,8 +5386,8 @@ void ItemUseCB_Medicine(u8 taskId, TaskFunc task)
         canHeal = IsHPRecoveryItem(item);
         if (canHeal == TRUE)
         {
-            hp = GetMonData(mon, MON_DATA_HP);
-            if (hp == GetMonData(mon, MON_DATA_MAX_HP))
+            hp = GetMonData_2(mon, MON_DATA_HP);
+            if (hp == GetMonData_2(mon, MON_DATA_MAX_HP))
                 canHeal = FALSE;
         }
         if (ExecuteTableBasedItemEffect__(gUnknown_0203CEC8.unk9, item, 0))
@@ -5423,7 +5423,7 @@ void ItemUseCB_Medicine(u8 taskId, TaskFunc task)
     {
         if (hp == 0)
             sub_81B0FCC(gUnknown_0203CEC8.unk9, 1);
-        sub_81B1F18(taskId, gUnknown_0203CEC8.unk9, 1, GetMonData(mon, MON_DATA_HP) - hp, sub_81B672C);
+        sub_81B1F18(taskId, gUnknown_0203CEC8.unk9, 1, GetMonData_2(mon, MON_DATA_HP) - hp, sub_81B672C);
         sub_81B1FA8(taskId, 0, hp);
         return;
     }
@@ -5462,10 +5462,10 @@ void sub_81B67C8(u8 taskId, TaskFunc task)
     struct Pokemon *mon = &gPlayerParty[gUnknown_0203CEC8.unk9];
     u16 item = gSpecialVar_ItemId;
     u8 effectType = GetItemEffectType(item);
-    u16 friendship = GetMonData(mon, MON_DATA_FRIENDSHIP);
+    u16 friendship = GetMonData_2(mon, MON_DATA_FRIENDSHIP);
     u16 relevantEV = sub_81B691C(mon, effectType);
     bool8 cannotUseEffect = ExecuteTableBasedItemEffect__(gUnknown_0203CEC8.unk9, item, 0);
-    u16 newFriendship = GetMonData(mon, MON_DATA_FRIENDSHIP);
+    u16 newFriendship = GetMonData_2(mon, MON_DATA_FRIENDSHIP);
     u16 newRelevantEV = sub_81B691C(mon, effectType);
 
     if (cannotUseEffect || (friendship == newFriendship && relevantEV == newRelevantEV))
@@ -5505,19 +5505,19 @@ static u16 sub_81B691C(struct Pokemon *mon, u8 effectType)
     switch (effectType)
     {
     case 13:
-        if (GetMonData(mon, MON_DATA_SPECIES) != SPECIES_SHEDINJA)
-            return GetMonData(mon, MON_DATA_HP_EV);
+        if (GetMonData_2(mon, MON_DATA_SPECIES) != SPECIES_SHEDINJA)
+            return GetMonData_2(mon, MON_DATA_HP_EV);
         break;
     case 12:
-        return GetMonData(mon, MON_DATA_ATK_EV);
+        return GetMonData_2(mon, MON_DATA_ATK_EV);
     case 17:
-        return GetMonData(mon, MON_DATA_DEF_EV);
+        return GetMonData_2(mon, MON_DATA_DEF_EV);
     case 16:
-        return GetMonData(mon, MON_DATA_SPEED_EV);
+        return GetMonData_2(mon, MON_DATA_SPEED_EV);
     case 14:
-        return GetMonData(mon, MON_DATA_SPATK_EV);
+        return GetMonData_2(mon, MON_DATA_SPATK_EV);
     case 15:
-        return GetMonData(mon, MON_DATA_SPDEF_EV);
+        return GetMonData_2(mon, MON_DATA_SPDEF_EV);
     }
     return 0;
 }
@@ -5557,7 +5557,7 @@ static void sub_81B6A10(u8 slot)
 
     for (i = 0; i < MAX_MON_MOVES; i++)
     {
-        move = GetMonData(&gPlayerParty[slot], MON_DATA_MOVE1 + i);
+        move = GetMonData_2(&gPlayerParty[slot], MON_DATA_MOVE1 + i);
         AddTextPrinterParameterized(windowId, fontId, gMoveNames[move], 8, (i * 16) + 1, 0xFF, NULL);
         if (move != MOVE_NONE)
             moveCount++;
@@ -5646,7 +5646,7 @@ static void ether_effect_related(u8 taskId)
         mon = &gPlayerParty[ptr->unk9];
         PlaySE(SE_KAIFUKU);
         RemoveBagItem(item, 1);
-        move = GetMonData(mon, MON_DATA_MOVE1 + *moveslot);
+        move = GetMonData_2(mon, MON_DATA_MOVE1 + *moveslot);
         StringCopy(gStringVar1, gMoveNames[move]);
         GetMedicineItemEffectMessage(item);
         sub_81B1B5C(gStringVar4, 1);
@@ -5687,7 +5687,7 @@ bool8 MonKnowsMove(struct Pokemon *mon, u16 move)
 
     for (i = 0; i < MAX_MON_MOVES; i++)
     {
-        if (GetMonData(mon, MON_DATA_MOVE1 + i) == move)
+        if (GetMonData_2(mon, MON_DATA_MOVE1 + i) == move)
             return TRUE;
     }
     return FALSE;
@@ -5846,7 +5846,7 @@ static void sub_81B711C(u8 taskId)
 static void sub_81B7154(u8 taskId)
 {
     struct Pokemon *mon = &gPlayerParty[gUnknown_0203CEC8.unk9];
-    u16 move = GetMonData(mon, MON_DATA_MOVE1 + sub_81C1B94());
+    u16 move = GetMonData_2(mon, MON_DATA_MOVE1 + sub_81C1B94());
 
     GetMonNickname(mon, gStringVar1);
     StringCopy(gStringVar2, gMoveNames[move]);
@@ -5934,7 +5934,7 @@ void dp05_rare_candy(u8 taskId, TaskFunc task)
     u16 *itemPtr = &gSpecialVar_ItemId;
     bool8 cannotUseEffect;
 
-    if (GetMonData(mon, MON_DATA_LEVEL) != MAX_LEVEL)
+    if (GetMonData_2(mon, MON_DATA_LEVEL) != MAX_LEVEL)
     {
         sub_81B79A0(mon, arrayPtr);
         cannotUseEffect = ExecuteTableBasedItemEffect__(gUnknown_0203CEC8.unk9, *itemPtr, 0);
@@ -5959,7 +5959,7 @@ void dp05_rare_candy(u8 taskId, TaskFunc task)
         sub_81B754C(gUnknown_0203CEC8.unk9, mon);
         RemoveBagItem(gSpecialVar_ItemId, 1);
         GetMonNickname(mon, gStringVar1);
-        ConvertIntToDecimalStringN(gStringVar2, GetMonData(mon, MON_DATA_LEVEL), 0, 3);
+        ConvertIntToDecimalStringN(gStringVar2, GetMonData_2(mon, MON_DATA_LEVEL), 0, 3);
         StringExpandPlaceholders(gStringVar4, gText_PkmnElevatedToLvVar2);
         sub_81B1B5C(gStringVar4, 1);
         schedule_bg_copy_tilemap_to_vram(2);
@@ -6108,12 +6108,12 @@ static void sub_81B7910(u8 taskId, u16 move)
 
 static void sub_81B79A0(struct Pokemon *mon, s16 *data)
 {
-    data[0] = GetMonData(mon, MON_DATA_MAX_HP);
-    data[1] = GetMonData(mon, MON_DATA_ATK);
-    data[2] = GetMonData(mon, MON_DATA_DEF);
-    data[4] = GetMonData(mon, MON_DATA_SPATK);
-    data[5] = GetMonData(mon, MON_DATA_SPDEF);
-    data[3] = GetMonData(mon, MON_DATA_SPEED);
+    data[0] = GetMonData_2(mon, MON_DATA_MAX_HP);
+    data[1] = GetMonData_2(mon, MON_DATA_ATK);
+    data[2] = GetMonData_2(mon, MON_DATA_DEF);
+    data[4] = GetMonData_2(mon, MON_DATA_SPATK);
+    data[5] = GetMonData_2(mon, MON_DATA_SPDEF);
+    data[3] = GetMonData_2(mon, MON_DATA_SPEED);
 }
 
 void sub_81B79E8(u8 taskId, TaskFunc task)
@@ -6129,13 +6129,13 @@ static void sub_81B7A28(u8 taskId)
     struct Pokemon *mon = &gPlayerParty[gUnknown_0203CEC8.unk9];
     u16 hp;
 
-    if (GetMonData(mon, MON_DATA_SPECIES) == SPECIES_NONE)
+    if (GetMonData_2(mon, MON_DATA_SPECIES) == SPECIES_NONE)
     {
         gTasks[taskId].func = task_sacred_ash_party_loop;
         return;
     }
 
-    hp = GetMonData(mon, MON_DATA_HP);
+    hp = GetMonData_2(mon, MON_DATA_HP);
     if (ExecuteTableBasedItemEffect__(gUnknown_0203CEC8.unk9, gSpecialVar_ItemId, 0))
     {
         gTasks[taskId].func = task_sacred_ash_party_loop;
@@ -6148,7 +6148,7 @@ static void sub_81B7A28(u8 taskId)
         DisplayPartyPokemonLevelCheck(mon, &gUnknown_0203CEDC[gUnknown_0203CEC8.unk9], 1);
     sub_81B0FCC(gUnknown_0203CEC4->data[2], 0);
     sub_81B0FCC(gUnknown_0203CEC8.unk9, 1);
-    sub_81B1F18(taskId, gUnknown_0203CEC8.unk9, 1, GetMonData(mon, MON_DATA_HP) - hp, sub_81B7C10);
+    sub_81B1F18(taskId, gUnknown_0203CEC8.unk9, 1, GetMonData_2(mon, MON_DATA_HP) - hp, sub_81B7C10);
     sub_81B1FA8(taskId, 0, hp);
     gUnknown_0203CEC4->data[0] = 1;
     gUnknown_0203CEC4->data[1] = 1;
@@ -6329,7 +6329,7 @@ void sub_81B7F60(void)
 
 static void sub_81B7FAC(u8 taskId)
 {
-    gUnknown_0203CEFC = GetMonData(&gPlayerParty[gUnknown_0203CEC8.unk9], MON_DATA_HELD_ITEM);
+    gUnknown_0203CEFC = GetMonData_2(&gPlayerParty[gUnknown_0203CEC8.unk9], MON_DATA_HELD_ITEM);
     if (gUnknown_0203CEFC == ITEM_NONE)
     {
         sub_81B8044(taskId);
@@ -6389,7 +6389,7 @@ static void sub_81B814C(void)
     u8 mail;
 
     sub_81B1DB8(&gPlayerParty[gUnknown_0203CEC8.unk9], gUnknown_0203CEC8.unkC);
-    mail = GetMonData(&gPlayerParty[gUnknown_0203CEC8.unk9], MON_DATA_MAIL);
+    mail = GetMonData_2(&gPlayerParty[gUnknown_0203CEC8.unk9], MON_DATA_MAIL);
     DoEasyChatScreen(
     	EASY_CHAT_TYPE_MAIL,
     	gSaveBlock1Ptr->mail[mail].words,
@@ -6400,7 +6400,7 @@ static void sub_81B814C(void)
 static void sub_81B81A8(void)
 {
     struct Pokemon *mon = &gPlayerParty[gUnknown_0203CEC8.unk9];
-    u16 item = GetMonData(mon, MON_DATA_HELD_ITEM);
+    u16 item = GetMonData_2(mon, MON_DATA_HELD_ITEM);
 
     if (gSpecialVar_Result == FALSE)
     {
@@ -6508,7 +6508,7 @@ static void sub_81B8474(u8 taskId)
 
     gUnknown_0203CEE8 = 0;
     mail = &gSaveBlock1Ptr->mail[playerPCItemPageInfo.itemsAbove + 6 + playerPCItemPageInfo.cursorPos];
-    if (GetMonData(mon, MON_DATA_HELD_ITEM) != ITEM_NONE)
+    if (GetMonData_2(mon, MON_DATA_HELD_ITEM) != ITEM_NONE)
     {
         sub_81B1B5C(gText_PkmnHoldingItemCantHoldMail, 1);
     }
@@ -6548,11 +6548,11 @@ static bool8 GetBattleEntryEligibility(struct Pokemon *mon)
     u16 i = 0;
     u16 species;
 
-    if (GetMonData(mon, MON_DATA_IS_EGG)
-        || GetMonData(mon, MON_DATA_LEVEL) > sub_81B8888()
+    if (GetMonData_2(mon, MON_DATA_IS_EGG)
+        || GetMonData_2(mon, MON_DATA_LEVEL) > sub_81B8888()
         || (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(BATTLE_FRONTIER_BATTLE_PYRAMID_LOBBY)
             && gSaveBlock1Ptr->location.mapNum == MAP_NUM(BATTLE_FRONTIER_BATTLE_PYRAMID_LOBBY)
-            && GetMonData(mon, MON_DATA_HELD_ITEM) != ITEM_NONE))
+            && GetMonData_2(mon, MON_DATA_HELD_ITEM) != ITEM_NONE))
     {
         return FALSE;
     }
@@ -6560,13 +6560,13 @@ static bool8 GetBattleEntryEligibility(struct Pokemon *mon)
     switch (VarGet(VAR_FRONTIER_FACILITY)) // oddly the specific cases are beyond 6, turns out case 9 is apparently related to link battles
     {
     case 9:
-        if (GetMonData(mon, MON_DATA_HP) != 0)
+        if (GetMonData_2(mon, MON_DATA_HP) != 0)
             return TRUE;
         return FALSE;
     case 8:
         return TRUE;
     default:
-        species = GetMonData(mon, MON_DATA_SPECIES);
+        species = GetMonData_2(mon, MON_DATA_SPECIES);
         for (; gFrontierBannedSpecies[i] != 0xFFFF; i++)
         {
             if (gFrontierBannedSpecies[i] == species)
@@ -6600,13 +6600,13 @@ static u8 sub_81B865C(void)
     unk2 = sub_81B8830();
     for (i = 0; i < unk2 - 1; i++)
     {
-        u16 species = GetMonData(&party[order[i] - 1], MON_DATA_SPECIES);
-        u16 item = GetMonData(&party[order[i] - 1], MON_DATA_HELD_ITEM);
+        u16 species = GetMonData_2(&party[order[i] - 1], MON_DATA_SPECIES);
+        u16 item = GetMonData_2(&party[order[i] - 1], MON_DATA_HELD_ITEM);
         for (j = i + 1; j < unk2; j++)
         {
-            if (species == GetMonData(&party[order[j] - 1], MON_DATA_SPECIES))
+            if (species == GetMonData_2(&party[order[j] - 1], MON_DATA_SPECIES))
                 return 18;
-            if (item != ITEM_NONE && item == GetMonData(&party[order[j] - 1], MON_DATA_HELD_ITEM))
+            if (item != ITEM_NONE && item == GetMonData_2(&party[order[j] - 1], MON_DATA_HELD_ITEM))
                 return 19;
         }
     }
@@ -6746,7 +6746,7 @@ void sub_81B89F0(void)
 
 static u8 sub_81B8A2C(struct Pokemon *mon)
 {
-    if (GetMonData(&gPlayerParty[1], MON_DATA_SPECIES) != SPECIES_NONE && GetMonData(mon, MON_DATA_IS_EGG) == FALSE)
+    if (GetMonData_2(&gPlayerParty[1], MON_DATA_SPECIES) != SPECIES_NONE && GetMonData_2(mon, MON_DATA_IS_EGG) == FALSE)
     {
         if (gUnknown_0203CEC8.unkB == 1)
             return 3;
@@ -6768,7 +6768,7 @@ static bool8 sub_81B8A7C(void)
         StringExpandPlaceholders(gStringVar4, gText_CantSwitchWithAlly);
         return FALSE;
     }
-    if (GetMonData(&gPlayerParty[slot], MON_DATA_HP) == 0)
+    if (GetMonData_2(&gPlayerParty[slot], MON_DATA_HP) == 0)
     {
         GetMonNickname(&gPlayerParty[slot], gStringVar1);
         StringExpandPlaceholders(gStringVar4, gText_PkmnHasNoEnergy);
@@ -6783,7 +6783,7 @@ static bool8 sub_81B8A7C(void)
             return FALSE;
         }
     }
-    if (GetMonData(&gPlayerParty[slot], MON_DATA_IS_EGG))
+    if (GetMonData_2(&gPlayerParty[slot], MON_DATA_IS_EGG))
     {
         StringExpandPlaceholders(gStringVar4, gText_EggCantBattle);
         return FALSE;
@@ -7061,7 +7061,7 @@ static void sub_81B90D0(void)
     for (i = 1; i < PARTY_SIZE; i++)
     {
         mon = &gPlayerParty[sub_81B8F38(i)];
-        if (GetMonData(mon, MON_DATA_SPECIES) != SPECIES_NONE && GetMonData(mon, MON_DATA_HP) != 0)
+        if (GetMonData_2(mon, MON_DATA_SPECIES) != SPECIES_NONE && GetMonData_2(mon, MON_DATA_HP) != 0)
         {
             leadVal = sub_81B8F38(0);
             sub_81B8FB0(0, i);
@@ -7259,7 +7259,7 @@ void sub_81B95E0(void)
     gSpecialVar_Result = FALSE;
     for (i = 0; i < 3; i++)
     {
-        if (GetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM) != ITEM_NONE)
+        if (GetMonData_2(&gPlayerParty[i], MON_DATA_HELD_ITEM) != ITEM_NONE)
         {
             gSpecialVar_Result = TRUE;
             break;
@@ -7297,7 +7297,7 @@ void sub_81B96D0(void)
     gSpecialVar_Result = 0;
     for (i = 0; i < MAX_MON_MOVES; i++)
     {
-        if (GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_MOVE1 + i) != ITEM_NONE)
+        if (GetMonData_2(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_MOVE1 + i) != ITEM_NONE)
             gSpecialVar_Result++;
     }
 }
@@ -7305,7 +7305,7 @@ void sub_81B96D0(void)
 void sub_81B9718(void)
 {
     struct Pokemon *mon = &gPlayerParty[gSpecialVar_0x8004];
-    u16 move = GetMonData(mon, MON_DATA_MOVE1 + gSpecialVar_0x8005);
+    u16 move = GetMonData_2(mon, MON_DATA_MOVE1 + gSpecialVar_0x8005);
 
     GetMonNickname(mon, gStringVar1);
     StringCopy(gStringVar2, gMoveNames[move]);
@@ -7323,11 +7323,11 @@ void sub_81B9770(void)
 
 static void sub_81B97DC(struct Pokemon *mon, u8 slotTo, u8 slotFrom)
 {
-    u16 move1 = GetMonData(mon, MON_DATA_MOVE1 + slotTo);
-    u16 move0 = GetMonData(mon, MON_DATA_MOVE1 + slotFrom);
-    u8 pp1 = GetMonData(mon, MON_DATA_PP1 + slotTo);
-    u8 pp0 = GetMonData(mon, MON_DATA_PP1 + slotFrom);
-    u8 ppBonuses = GetMonData(mon, MON_DATA_PP_BONUSES);
+    u16 move1 = GetMonData_2(mon, MON_DATA_MOVE1 + slotTo);
+    u16 move0 = GetMonData_2(mon, MON_DATA_MOVE1 + slotFrom);
+    u8 pp1 = GetMonData_2(mon, MON_DATA_PP1 + slotTo);
+    u8 pp0 = GetMonData_2(mon, MON_DATA_PP1 + slotFrom);
+    u8 ppBonuses = GetMonData_2(mon, MON_DATA_PP_BONUSES);
     u8 ppBonusMask1 = gPPUpGetMask[slotTo];
     u8 ppBonusMove1 = (ppBonuses & ppBonusMask1) >> (slotTo * 2);
     u8 ppBonusMask2 = gPPUpGetMask[slotFrom];
@@ -7344,7 +7344,7 @@ static void sub_81B97DC(struct Pokemon *mon, u8 slotTo, u8 slotFrom)
 
 void sub_81B98DC(void)
 {
-    if (GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_IS_EGG))
+    if (GetMonData_2(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_IS_EGG))
         gSpecialVar_Result = TRUE;
     else
         gSpecialVar_Result = FALSE;
@@ -7356,7 +7356,7 @@ void sub_81B9918(void)
     u32 i, j;
 
     gSpecialVar_Result = FALSE;
-    move = GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_MOVE1 + gSpecialVar_0x8005);
+    move = GetMonData_2(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_MOVE1 + gSpecialVar_0x8005);
     if (move == MOVE_SURF)
     {
         for (i = 0; i < CalculatePlayerPartyCount(); i++)
@@ -7365,7 +7365,7 @@ void sub_81B9918(void)
             {
                 for (j = 0; j < MAX_MON_MOVES; j++)
                 {
-                    if (GetMonData(&gPlayerParty[i], MON_DATA_MOVE1 + j) == MOVE_SURF)
+                    if (GetMonData_2(&gPlayerParty[i], MON_DATA_MOVE1 + j) == MOVE_SURF)
                         return;
                 }
             }

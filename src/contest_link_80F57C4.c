@@ -2682,23 +2682,23 @@ u16 sub_80F7F7C(void)
     switch (gSpecialVar_ContestCategory)
     {
     case CONTEST_CATEGORY_COOL:
-        if (GetMonData(mon, MON_DATA_COOL_RIBBON) > gSpecialVar_ContestRank)
+        if (GetMonData_2(mon, MON_DATA_COOL_RIBBON) > gSpecialVar_ContestRank)
             result = 1;
         break;
     case CONTEST_CATEGORY_BEAUTY:
-        if (GetMonData(mon, MON_DATA_BEAUTY_RIBBON) > gSpecialVar_ContestRank)
+        if (GetMonData_2(mon, MON_DATA_BEAUTY_RIBBON) > gSpecialVar_ContestRank)
             result = 1;
         break;
     case CONTEST_CATEGORY_CUTE:
-        if (GetMonData(mon, MON_DATA_CUTE_RIBBON) > gSpecialVar_ContestRank)
+        if (GetMonData_2(mon, MON_DATA_CUTE_RIBBON) > gSpecialVar_ContestRank)
             result = 1;
         break;
     case CONTEST_CATEGORY_SMART:
-        if (GetMonData(mon, MON_DATA_SMART_RIBBON) > gSpecialVar_ContestRank)
+        if (GetMonData_2(mon, MON_DATA_SMART_RIBBON) > gSpecialVar_ContestRank)
             result = 1;
         break;
     case CONTEST_CATEGORY_TOUGH:
-        if (GetMonData(mon, MON_DATA_TOUGH_RIBBON) > gSpecialVar_ContestRank)
+        if (GetMonData_2(mon, MON_DATA_TOUGH_RIBBON) > gSpecialVar_ContestRank)
             result = 1;
         break;
     }
@@ -2716,7 +2716,7 @@ void sub_80F7FFC(void)
     switch (gSpecialVar_ContestCategory)
     {
     case CONTEST_CATEGORY_COOL:
-        ribbonData = GetMonData(&gPlayerParty[gContestMonPartyIndex], MON_DATA_COOL_RIBBON);
+        ribbonData = GetMonData_2(&gPlayerParty[gContestMonPartyIndex], MON_DATA_COOL_RIBBON);
         if (ribbonData <= gSpecialVar_ContestRank && ribbonData < 4)
         {
             ribbonData++;
@@ -2726,7 +2726,7 @@ void sub_80F7FFC(void)
         }
         break;
     case CONTEST_CATEGORY_BEAUTY:
-        ribbonData = GetMonData(&gPlayerParty[gContestMonPartyIndex], MON_DATA_BEAUTY_RIBBON);
+        ribbonData = GetMonData_2(&gPlayerParty[gContestMonPartyIndex], MON_DATA_BEAUTY_RIBBON);
         if (ribbonData <= gSpecialVar_ContestRank && ribbonData < 4)
         {
             ribbonData++;
@@ -2736,7 +2736,7 @@ void sub_80F7FFC(void)
         }
         break;
     case CONTEST_CATEGORY_CUTE:
-        ribbonData = GetMonData(&gPlayerParty[gContestMonPartyIndex], MON_DATA_CUTE_RIBBON);
+        ribbonData = GetMonData_2(&gPlayerParty[gContestMonPartyIndex], MON_DATA_CUTE_RIBBON);
         if (ribbonData <= gSpecialVar_ContestRank && ribbonData < 4)
         {
             ribbonData++;
@@ -2746,7 +2746,7 @@ void sub_80F7FFC(void)
         }
         break;
     case CONTEST_CATEGORY_SMART:
-        ribbonData = GetMonData(&gPlayerParty[gContestMonPartyIndex], MON_DATA_SMART_RIBBON);
+        ribbonData = GetMonData_2(&gPlayerParty[gContestMonPartyIndex], MON_DATA_SMART_RIBBON);
         if (ribbonData <= gSpecialVar_ContestRank && ribbonData < 4)
         {
             ribbonData++;
@@ -2756,7 +2756,7 @@ void sub_80F7FFC(void)
         }
         break;
     case CONTEST_CATEGORY_TOUGH:
-        ribbonData = GetMonData(&gPlayerParty[gContestMonPartyIndex], MON_DATA_TOUGH_RIBBON);
+        ribbonData = GetMonData_2(&gPlayerParty[gContestMonPartyIndex], MON_DATA_TOUGH_RIBBON);
         if (ribbonData <= gSpecialVar_ContestRank && ribbonData < 4)
         {
             ribbonData++;

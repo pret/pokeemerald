@@ -2032,10 +2032,10 @@ static void sub_81A3FD4(void)
         count = 0;
         do
         {
-            u16 species = GetMonData(&gPlayerParty[monId], MON_DATA_SPECIES2);
-            u16 heldItem = GetMonData(&gPlayerParty[monId], MON_DATA_HELD_ITEM);
-            u8 level = GetMonData(&gPlayerParty[monId], MON_DATA_LEVEL);
-            u16 hp = GetMonData(&gPlayerParty[monId], MON_DATA_HP);
+            u16 species = GetMonData_2(&gPlayerParty[monId], MON_DATA_SPECIES2);
+            u16 heldItem = GetMonData_2(&gPlayerParty[monId], MON_DATA_HELD_ITEM);
+            u8 level = GetMonData_2(&gPlayerParty[monId], MON_DATA_LEVEL);
+            u16 hp = GetMonData_2(&gPlayerParty[monId], MON_DATA_HP);
             if (VarGet(VAR_FRONTIER_FACILITY) == FRONTIER_FACILITY_PYRAMID)
             {
                 if (heldItem == 0)

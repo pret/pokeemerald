@@ -34,8 +34,8 @@ void ClearMailStruct(struct MailStruct *mail)
 
 bool8 MonHasMail(struct Pokemon *mon)
 {
-    u16 heldItem = GetMonData(mon, MON_DATA_HELD_ITEM);
-    if (ItemIsMail(heldItem) && GetMonData(mon, MON_DATA_MAIL) != 0xFF)
+    u16 heldItem = GetMonData_2(mon, MON_DATA_HELD_ITEM);
+    if (ItemIsMail(heldItem) && GetMonData_2(mon, MON_DATA_MAIL) != 0xFF)
         return TRUE;
     else
         return FALSE;
@@ -66,8 +66,8 @@ u8 GiveMailToMon(struct Pokemon *mon, u16 itemId)
             for (i = 0; i < 4; i++)
                 gSaveBlock1Ptr->mail[id].trainerId[i] = gSaveBlock2Ptr->playerTrainerId[i];
 
-            species = GetBoxMonData(&mon->box, MON_DATA_SPECIES);
-            personality = GetBoxMonData(&mon->box, MON_DATA_PERSONALITY);
+            species = GetBoxMonData_2(&mon->box, MON_DATA_SPECIES);
+            personality = GetBoxMonData_2(&mon->box, MON_DATA_PERSONALITY);
             gSaveBlock1Ptr->mail[id].species = SpeciesToMailSpecies(species, personality);
             gSaveBlock1Ptr->mail[id].itemId = itemId;
             SetMonData(mon, MON_DATA_MAIL, &id);
@@ -140,7 +140,7 @@ void TakeMailFromMon(struct Pokemon *mon)
 
     if (MonHasMail(mon))
     {
-        mailId = GetMonData(mon, MON_DATA_MAIL);
+        mailId = GetMonData_2(mon, MON_DATA_MAIL);
         gSaveBlock1Ptr->mail[mailId].itemId = ITEM_NONE;
         mailId = 0xFF;
         heldItem[0] = ITEM_NONE;
@@ -169,8 +169,8 @@ u8 TakeMailFromMon2(struct Pokemon *mon)
     {
         if (gSaveBlock1Ptr->mail[i].itemId == ITEM_NONE)
         {
-            memcpy(&gSaveBlock1Ptr->mail[i], &gSaveBlock1Ptr->mail[GetMonData(mon, MON_DATA_MAIL)], sizeof(struct MailStruct));
-            gSaveBlock1Ptr->mail[GetMonData(mon, MON_DATA_MAIL)].itemId = ITEM_NONE;
+            memcpy(&gSaveBlock1Ptr->mail[i], &gSaveBlock1Ptr->mail[GetMonData_2(mon, MON_DATA_MAIL)], sizeof(struct MailStruct));
+            gSaveBlock1Ptr->mail[GetMonData_2(mon, MON_DATA_MAIL)].itemId = ITEM_NONE;
             SetMonData(mon, MON_DATA_MAIL, &newMailId);
             SetMonData(mon, MON_DATA_HELD_ITEM, newHeldItem);
             return i;

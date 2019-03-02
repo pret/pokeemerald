@@ -645,15 +645,15 @@ static bool8 LoadMonAndSceneGfx(struct Pokemon *mon)
     switch (sPokeblockFeed->loadGfxState)
     {
     case 0:
-        species = GetMonData(mon, MON_DATA_SPECIES2);
-        personality = GetMonData(mon, MON_DATA_PERSONALITY);
+        species = GetMonData_2(mon, MON_DATA_SPECIES2);
+        personality = GetMonData_2(mon, MON_DATA_PERSONALITY);
         HandleLoadSpecialPokePic_2(&gMonFrontPicTable[species], gMonSpritesGfxPtr->sprites[1], species, personality);
         sPokeblockFeed->loadGfxState++;
         break;
     case 1:
-        species = GetMonData(mon, MON_DATA_SPECIES2);
-        personality = GetMonData(mon, MON_DATA_PERSONALITY);
-        trainerId = GetMonData(mon, MON_DATA_OT_ID);
+        species = GetMonData_2(mon, MON_DATA_SPECIES2);
+        personality = GetMonData_2(mon, MON_DATA_PERSONALITY);
+        trainerId = GetMonData_2(mon, MON_DATA_OT_ID);
         palette = GetMonSpritePalStructFromOtIdPersonality(species, trainerId, personality);
 
         LoadCompressedSpritePalette(palette);
@@ -822,7 +822,7 @@ static void Task_PaletteFadeToReturn(u8 taskId)
 
 static u8 CreateMonSprite(struct Pokemon* mon)
 {
-    u16 species = GetMonData(mon, MON_DATA_SPECIES2);
+    u16 species = GetMonData_2(mon, MON_DATA_SPECIES2);
     u8 spriteId = CreateSprite(&gMultiuseSpriteTemplate, 48, 80, 2);
 
     sPokeblockFeed->species = species;

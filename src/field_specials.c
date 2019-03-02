@@ -973,27 +973,27 @@ u16 GetWeekCount(void)
 u8 GetLeadMonFriendshipScore(void)
 {
     struct Pokemon *pokemon = &gPlayerParty[GetLeadMonIndex()];
-    if (GetMonData(pokemon, MON_DATA_FRIENDSHIP) == 255)
+    if (GetMonData_2(pokemon, MON_DATA_FRIENDSHIP) == 255)
     {
         return 6;
     }
-    if (GetMonData(pokemon, MON_DATA_FRIENDSHIP) >= 200)
+    if (GetMonData_2(pokemon, MON_DATA_FRIENDSHIP) >= 200)
     {
         return 5;
     }
-    if (GetMonData(pokemon, MON_DATA_FRIENDSHIP) >= 150)
+    if (GetMonData_2(pokemon, MON_DATA_FRIENDSHIP) >= 150)
     {
         return 4;
     }
-    if (GetMonData(pokemon, MON_DATA_FRIENDSHIP) >= 100)
+    if (GetMonData_2(pokemon, MON_DATA_FRIENDSHIP) >= 100)
     {
         return 3;
     }
-    if (GetMonData(pokemon, MON_DATA_FRIENDSHIP) >= 50)
+    if (GetMonData_2(pokemon, MON_DATA_FRIENDSHIP) >= 50)
     {
         return 2;
     }
-    if (GetMonData(pokemon, MON_DATA_FRIENDSHIP) >= 1)
+    if (GetMonData_2(pokemon, MON_DATA_FRIENDSHIP) >= 1)
     {
         return 1;
     }
@@ -1217,7 +1217,7 @@ void ResetTrickHouseEndRoomFlag(void)
 
 bool8 CheckLeadMonCool(void)
 {
-    if (GetMonData(&gPlayerParty[GetLeadMonIndex()], MON_DATA_COOL) < 200)
+    if (GetMonData_2(&gPlayerParty[GetLeadMonIndex()], MON_DATA_COOL) < 200)
     {
         return FALSE;
     }
@@ -1226,7 +1226,7 @@ bool8 CheckLeadMonCool(void)
 
 bool8 CheckLeadMonBeauty(void)
 {
-    if (GetMonData(&gPlayerParty[GetLeadMonIndex()], MON_DATA_BEAUTY) < 200)
+    if (GetMonData_2(&gPlayerParty[GetLeadMonIndex()], MON_DATA_BEAUTY) < 200)
     {
         return FALSE;
     }
@@ -1235,7 +1235,7 @@ bool8 CheckLeadMonBeauty(void)
 
 bool8 CheckLeadMonCute(void)
 {
-    if (GetMonData(&gPlayerParty[GetLeadMonIndex()], MON_DATA_CUTE) < 200)
+    if (GetMonData_2(&gPlayerParty[GetLeadMonIndex()], MON_DATA_CUTE) < 200)
     {
         return FALSE;
     }
@@ -1244,7 +1244,7 @@ bool8 CheckLeadMonCute(void)
 
 bool8 CheckLeadMonSmart(void)
 {
-    if (GetMonData(&gPlayerParty[GetLeadMonIndex()], MON_DATA_SMART) < 200)
+    if (GetMonData_2(&gPlayerParty[GetLeadMonIndex()], MON_DATA_SMART) < 200)
     {
         return FALSE;
     }
@@ -1253,7 +1253,7 @@ bool8 CheckLeadMonSmart(void)
 
 bool8 CheckLeadMonTough(void)
 {
-    if (GetMonData(&gPlayerParty[GetLeadMonIndex()], MON_DATA_TOUGH) < 200)
+    if (GetMonData_2(&gPlayerParty[GetLeadMonIndex()], MON_DATA_TOUGH) < 200)
     {
         return FALSE;
     }
@@ -1268,9 +1268,9 @@ void IsGrassTypeInParty(void)
     for (i = 0; i < PARTY_SIZE; i++)
     {
         pokemon = &gPlayerParty[i];
-        if (GetMonData(pokemon, MON_DATA_SANITY_HAS_SPECIES) && !GetMonData(pokemon, MON_DATA_IS_EGG))
+        if (GetMonData_2(pokemon, MON_DATA_SANITY_HAS_SPECIES) && !GetMonData_2(pokemon, MON_DATA_IS_EGG))
         {
-            species = GetMonData(pokemon, MON_DATA_SPECIES);
+            species = GetMonData_2(pokemon, MON_DATA_SPECIES);
             if (gBaseStats[species].type1 == TYPE_GRASS || gBaseStats[species].type2 == TYPE_GRASS)
             {
                 gSpecialVar_Result = TRUE;
@@ -1576,7 +1576,7 @@ u16 SetPacifidlogTMReceivedDay(void)
 
 bool8 MonOTNameMatchesPlayer(void)
 {
-    if (GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_LANGUAGE) != GAME_LANGUAGE)
+    if (GetMonData_2(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_LANGUAGE) != GAME_LANGUAGE)
     {
         return TRUE;    // huh?
     }
@@ -1660,7 +1660,7 @@ bool8 sub_813990C(void)
 
     for (i = 0; i < partyCount; i++)
     {
-        if (GetMonData(&gPlayerParty[i], MON_DATA_SANITY_IS_BAD_EGG) == 1)
+        if (GetMonData_2(&gPlayerParty[i], MON_DATA_SANITY_IS_BAD_EGG) == 1)
             return TRUE;
     }
 
@@ -1921,12 +1921,12 @@ void sub_8139D98(void)
     u8 i;
     u32 ivStorage[NUM_STATS];
 
-    ivStorage[STAT_HP] = GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_HP_IV);
-    ivStorage[STAT_ATK] = GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_ATK_IV);
-    ivStorage[STAT_DEF] = GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_DEF_IV);
-    ivStorage[STAT_SPEED] = GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_SPEED_IV);
-    ivStorage[STAT_SPATK] = GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_SPATK_IV);
-    ivStorage[STAT_SPDEF] = GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_SPDEF_IV);
+    ivStorage[STAT_HP] = GetMonData_2(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_HP_IV);
+    ivStorage[STAT_ATK] = GetMonData_2(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_ATK_IV);
+    ivStorage[STAT_DEF] = GetMonData_2(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_DEF_IV);
+    ivStorage[STAT_SPEED] = GetMonData_2(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_SPEED_IV);
+    ivStorage[STAT_SPATK] = GetMonData_2(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_SPATK_IV);
+    ivStorage[STAT_SPDEF] = GetMonData_2(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_SPDEF_IV);
 
     gSpecialVar_0x8005 = 0;
 

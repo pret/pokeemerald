@@ -20,8 +20,8 @@ bool8 SetUpFieldMove_SoftBoiled(void)
     u16 hp;
     u16 minHp;
 
-    maxHp = GetMonData(&gPlayerParty[GetCursorSelectionMonId()], MON_DATA_MAX_HP);
-    hp = GetMonData(&gPlayerParty[GetCursorSelectionMonId()], MON_DATA_HP);
+    maxHp = GetMonData_2(&gPlayerParty[GetCursorSelectionMonId()], MON_DATA_MAX_HP);
+    hp = GetMonData_2(&gPlayerParty[GetCursorSelectionMonId()], MON_DATA_HP);
 
     minHp = (maxHp / 5);
     if (hp > minHp)
@@ -52,21 +52,21 @@ void sub_81615A8(u8 taskId)
         return;
     }
 
-    hp = GetMonData(&gPlayerParty[pokemonIndex], MON_DATA_HP);
-    if(hp == 0 || unk9 == pokemonIndex || GetMonData(&gPlayerParty[pokemonIndex], MON_DATA_MAX_HP) == hp)
+    hp = GetMonData_2(&gPlayerParty[pokemonIndex], MON_DATA_HP);
+    if(hp == 0 || unk9 == pokemonIndex || GetMonData_2(&gPlayerParty[pokemonIndex], MON_DATA_MAX_HP) == hp)
     {
         sub_81617B8(taskId);
         return;
     }
 
     PlaySE(SE_KAIFUKU);
-    sub_81B1F18(taskId, unk9, -1, GetMonData(&gPlayerParty[unk9], MON_DATA_MAX_HP)/5, sub_816166C);
+    sub_81B1F18(taskId, unk9, -1, GetMonData_2(&gPlayerParty[unk9], MON_DATA_MAX_HP)/5, sub_816166C);
 }
 
 static void sub_816166C(u8 taskId)
 {
     PlaySE(SE_KAIFUKU);
-    sub_81B1F18(taskId, gUnknown_0203CEC8.unkA, 1, GetMonData(&gPlayerParty[gUnknown_0203CEC8.unk9], MON_DATA_MAX_HP)/5, sub_81616C0);
+    sub_81B1F18(taskId, gUnknown_0203CEC8.unkA, 1, GetMonData_2(&gPlayerParty[gUnknown_0203CEC8.unk9], MON_DATA_MAX_HP)/5, sub_81616C0);
 }
 
 static void sub_81616C0(u8 taskId)

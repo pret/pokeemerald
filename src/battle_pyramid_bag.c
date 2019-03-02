@@ -1362,7 +1362,7 @@ void sub_81C6A94(void)
     memcpy(newQuantities, gSaveBlock2Ptr->frontier.pyramidBag.quantity[gSaveBlock2Ptr->frontier.lvlMode], PYRAMID_BAG_ITEMS_COUNT * sizeof(u8));
     for (i = 0; i < 3; i++)
     {
-        heldItem = GetMonData(&party[i], MON_DATA_HELD_ITEM);
+        heldItem = GetMonData_2(&party[i], MON_DATA_HELD_ITEM);
         if (heldItem != 0 && !AddBagItem(heldItem, 1))
         {
             memcpy(gSaveBlock2Ptr->frontier.pyramidBag.itemId[gSaveBlock2Ptr->frontier.lvlMode], newItems, PYRAMID_BAG_ITEMS_COUNT * sizeof(u16));

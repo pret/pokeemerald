@@ -709,12 +709,12 @@ u8 sub_80E98AC(struct Pokemon *pokemon)
 {
     u16 evTotal;
 
-    evTotal  = GetMonData(pokemon, MON_DATA_HP_EV);
-    evTotal += GetMonData(pokemon, MON_DATA_ATK_EV);
-    evTotal += GetMonData(pokemon, MON_DATA_DEF_EV);
-    evTotal += GetMonData(pokemon, MON_DATA_SPEED_EV);
-    evTotal += GetMonData(pokemon, MON_DATA_SPATK_EV);
-    evTotal += GetMonData(pokemon, MON_DATA_SPDEF_EV);
+    evTotal  = GetMonData_2(pokemon, MON_DATA_HP_EV);
+    evTotal += GetMonData_2(pokemon, MON_DATA_ATK_EV);
+    evTotal += GetMonData_2(pokemon, MON_DATA_DEF_EV);
+    evTotal += GetMonData_2(pokemon, MON_DATA_SPEED_EV);
+    evTotal += GetMonData_2(pokemon, MON_DATA_SPATK_EV);
+    evTotal += GetMonData_2(pokemon, MON_DATA_SPDEF_EV);
     return evTotal / 6;
 }
 
@@ -740,17 +740,17 @@ void sub_80E9914(void)
             party->levels[partyIdx] = 0;
             party->personality[partyIdx] = 0;
             party->EVs[partyIdx] = 0;
-            if (GetMonData(&gPlayerParty[partyIdx], MON_DATA_SPECIES) != SPECIES_NONE
-                && !GetMonData(&gPlayerParty[partyIdx], MON_DATA_IS_EGG))
+            if (GetMonData_2(&gPlayerParty[partyIdx], MON_DATA_SPECIES) != SPECIES_NONE
+                && !GetMonData_2(&gPlayerParty[partyIdx], MON_DATA_IS_EGG))
             {
                 for (moveIdx = 0; moveIdx < 4; moveIdx++)
                 {
-                    party->moves[sbPartyIdx * 4 + moveIdx] = GetMonData(&gPlayerParty[partyIdx], MON_DATA_MOVE1 + moveIdx);
+                    party->moves[sbPartyIdx * 4 + moveIdx] = GetMonData_2(&gPlayerParty[partyIdx], MON_DATA_MOVE1 + moveIdx);
                 }
-                party->species[sbPartyIdx] = GetMonData(&gPlayerParty[partyIdx], MON_DATA_SPECIES);
-                party->heldItems[sbPartyIdx] = GetMonData(&gPlayerParty[partyIdx], MON_DATA_HELD_ITEM);
-                party->levels[sbPartyIdx] = GetMonData(&gPlayerParty[partyIdx], MON_DATA_LEVEL);
-                party->personality[sbPartyIdx] = GetMonData(&gPlayerParty[partyIdx], MON_DATA_PERSONALITY);
+                party->species[sbPartyIdx] = GetMonData_2(&gPlayerParty[partyIdx], MON_DATA_SPECIES);
+                party->heldItems[sbPartyIdx] = GetMonData_2(&gPlayerParty[partyIdx], MON_DATA_HELD_ITEM);
+                party->levels[sbPartyIdx] = GetMonData_2(&gPlayerParty[partyIdx], MON_DATA_LEVEL);
+                party->personality[sbPartyIdx] = GetMonData_2(&gPlayerParty[partyIdx], MON_DATA_PERSONALITY);
                 party->EVs[sbPartyIdx] = sub_80E98AC(&gPlayerParty[partyIdx]);
                 sbPartyIdx++;
             }

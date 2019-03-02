@@ -253,9 +253,9 @@ void EvolutionScene(struct Pokemon* mon, u16 speciesToEvolve, bool8 canStopEvo, 
     StringCopy(gStringVar2, gSpeciesNames[speciesToEvolve]);
 
     // preEvo sprite
-    currSpecies = GetMonData(mon, MON_DATA_SPECIES);
-    trainerId = GetMonData(mon, MON_DATA_OT_ID);
-    personality = GetMonData(mon, MON_DATA_PERSONALITY);
+    currSpecies = GetMonData_2(mon, MON_DATA_SPECIES);
+    trainerId = GetMonData_2(mon, MON_DATA_OT_ID);
+    personality = GetMonData_2(mon, MON_DATA_PERSONALITY);
     DecompressPicFromTable_2(&gMonFrontPicTable[currSpecies],
                              gMonSpritesGfxPtr->sprites[1],
                              currSpecies);
@@ -314,8 +314,8 @@ static void CB2_EvolutionSceneLoadGraphics(void)
     struct Pokemon* Mon = &gPlayerParty[gTasks[sEvoStructPtr->evoTaskID].tPartyID];
 
     postEvoSpecies = gTasks[sEvoStructPtr->evoTaskID].tPostEvoSpecies;
-    trainerId = GetMonData(Mon, MON_DATA_OT_ID);
-    personality = GetMonData(Mon, MON_DATA_PERSONALITY);
+    trainerId = GetMonData_2(Mon, MON_DATA_OT_ID);
+    personality = GetMonData_2(Mon, MON_DATA_PERSONALITY);
 
     SetHBlankCallback(NULL);
     SetVBlankCallback(NULL);
@@ -418,8 +418,8 @@ static void CB2_TradeEvolutionSceneLoadGraphics(void)
     case 4:
         {
             const struct CompressedSpritePalette* pokePal;
-            u32 trainerId = GetMonData(Mon, MON_DATA_OT_ID);
-            u32 personality = GetMonData(Mon, MON_DATA_PERSONALITY);
+            u32 trainerId = GetMonData_2(Mon, MON_DATA_OT_ID);
+            u32 personality = GetMonData_2(Mon, MON_DATA_PERSONALITY);
             DecompressPicFromTable_2(&gMonFrontPicTable[postEvoSpecies],
                                      gMonSpritesGfxPtr->sprites[3],
                                      postEvoSpecies);
@@ -477,9 +477,9 @@ void TradeEvolutionScene(struct Pokemon* mon, u16 speciesToEvolve, u8 preEvoSpri
     gAffineAnimsDisabled = TRUE;
 
     // preEvo sprite
-    currSpecies = GetMonData(mon, MON_DATA_SPECIES);
-    personality = GetMonData(mon, MON_DATA_PERSONALITY);
-    trainerId = GetMonData(mon, MON_DATA_OT_ID);
+    currSpecies = GetMonData_2(mon, MON_DATA_SPECIES);
+    personality = GetMonData_2(mon, MON_DATA_PERSONALITY);
+    trainerId = GetMonData_2(mon, MON_DATA_OT_ID);
 
     sEvoStructPtr = AllocZeroed(sizeof(struct EvoInfo));
     sEvoStructPtr->preEvoSpriteID = preEvoSpriteID;
@@ -578,9 +578,9 @@ static void CreateShedinja(u16 preEvoSpecies, struct Pokemon* mon)
         GetSetPokedexFlag(SpeciesToNationalPokedexNum(evos[1].targetSpecies), FLAG_SET_SEEN);
         GetSetPokedexFlag(SpeciesToNationalPokedexNum(evos[1].targetSpecies), FLAG_SET_CAUGHT);
 
-        if (GetMonData(shedinja, MON_DATA_SPECIES) == SPECIES_SHEDINJA
-            && GetMonData(shedinja, MON_DATA_LANGUAGE) == LANGUAGE_JAPANESE
-            && GetMonData(mon, MON_DATA_SPECIES) == SPECIES_NINJASK)
+        if (GetMonData_2(shedinja, MON_DATA_SPECIES) == SPECIES_SHEDINJA
+            && GetMonData_2(shedinja, MON_DATA_LANGUAGE) == LANGUAGE_JAPANESE
+            && GetMonData_2(mon, MON_DATA_SPECIES) == SPECIES_NINJASK)
                 SetMonData(shedinja, MON_DATA_NICKNAME, Text_ShedinjaJapaneseName);
     }
 }
@@ -917,7 +917,7 @@ static void Task_EvolutionScene(u8 taskID)
                 }
                 else
                 {
-                    u16 move = GetMonData(mon, var + MON_DATA_MOVE1);
+                    u16 move = GetMonData_2(mon, var + MON_DATA_MOVE1);
                     if (IsHMMove2(move))
                     {
                         BattleStringExpandPlaceholdersToDisplayedString(gBattleStringsTable[STRINGID_HMMOVESCANTBEFORGOTTEN - BATTLESTRINGS_ID_ADDER]);
@@ -1251,7 +1251,7 @@ static void Task_TradeEvolutionScene(u8 taskID)
                 }
                 else
                 {
-                    u16 move = GetMonData(mon, var + MON_DATA_MOVE1);
+                    u16 move = GetMonData_2(mon, var + MON_DATA_MOVE1);
                     if (IsHMMove2(move))
                     {
                         BattleStringExpandPlaceholdersToDisplayedString(gBattleStringsTable[STRINGID_HMMOVESCANTBEFORGOTTEN - BATTLESTRINGS_ID_ADDER]);

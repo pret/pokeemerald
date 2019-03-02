@@ -634,9 +634,9 @@ void sub_8170BB0(u8 taskId)
 
     spriteId = gBattlerSpriteIds[gBattleAnimAttacker];
     if (GetBattlerSide(gBattleAnimAttacker) == B_SIDE_PLAYER)
-        ball = GetMonData(&gPlayerParty[gBattlerPartyIndexes[gBattleAnimAttacker]], MON_DATA_POKEBALL);
+        ball = GetMonData_2(&gPlayerParty[gBattlerPartyIndexes[gBattleAnimAttacker]], MON_DATA_POKEBALL);
     else
-        ball = GetMonData(&gEnemyParty[gBattlerPartyIndexes[gBattleAnimAttacker]], MON_DATA_POKEBALL);
+        ball = GetMonData_2(&gEnemyParty[gBattlerPartyIndexes[gBattleAnimAttacker]], MON_DATA_POKEBALL);
 
     ballId = ItemIdToBallId(ball);
     switch (gTasks[taskId].data[0])
@@ -2019,8 +2019,8 @@ void sub_8172EF0(u8 battler, struct Pokemon *mon)
 
     isShiny = 0;
     gBattleSpritesDataPtr->healthBoxesData[battler].flag_x80 = 1;
-    otId = GetMonData(mon, MON_DATA_OT_ID);
-    personality = GetMonData(mon, MON_DATA_PERSONALITY);
+    otId = GetMonData_2(mon, MON_DATA_OT_ID);
+    personality = GetMonData_2(mon, MON_DATA_PERSONALITY);
 
     if (IsBattlerSpriteVisible(battler))
     {
