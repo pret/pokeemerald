@@ -8651,14 +8651,14 @@ const struct Item gItems[] =
         .secondaryId = 0,
     },
 	
-	[ITEM_KEY_STONE] =
+	[ITEM_MEGA_BRACELET] =
 	{
-        .name = _("Key Stone"),
-        .itemId = ITEM_KEY_STONE,
+        .name = _("Mega Bracelet"),
+        .itemId = ITEM_MEGA_BRACELET,
         .price = 200,
         .holdEffect = HOLD_EFFECT_NONE,
         .holdEffectParam = 0,
-        .description = gKeyStoneItemDescription,
+        .description = gMegaBraceletItemDescription,
         .importance = 0,
         .unk19 = 0,
         .pocket = POCKET_KEY_ITEMS,

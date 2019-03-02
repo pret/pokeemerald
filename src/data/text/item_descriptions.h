@@ -425,5 +425,5 @@ const u8 gCameruptiteItemDescription[] = _("This stone enables\nCamerupt to Mega
 const u8 gLoppuniteItemDescription[] = _("This stone enables\nLoppunny to Mega\nEvolve in battle.");
 const u8 gSalamenciteItemDescription[] = _("This stone enables\nSalamence to Mega\nEvolve in battle.");
 const u8 gBeedrilliteItemDescription[] = _("This stone enables\nBeedrill to Mega\nEvolve in battle.");
-const u8 gKeyStoneItemDescription[] = _("Allows Pokémon holding\na Mega Stone to Mega\nEvolve in battle.");
+const u8 gMegaBraceletItemDescription[] = _("Allows Pokémon holding\na Mega Stone to Mega\nEvolve in battle.");
 const u8 gProtectPadsItemDescription[] = _("Protects the holder\nfrom effects caused\nby contact moves.");
