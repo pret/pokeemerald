@@ -387,7 +387,7 @@ void nullsub_89(void)
 
 void sub_80124EC(u8 windowId, u8 arg1, u8 stringId)
 {
-    FillWindowPixelBuffer(windowId, PALETTE_NUM_TO_FILL_VALUE(1));
+    FillWindowPixelBuffer(windowId, PIXEL_FILL(1));
     switch (arg1 << 8)
     {
     case 0x200:
@@ -506,7 +506,7 @@ void sub_8012780(u8 taskId)
         }
         data->field_11 = AddWindow(&gUnknown_082F012C);
 
-        FillWindowPixelBuffer(data->field_10, PALETTE_NUM_TO_FILL_VALUE(2));
+        FillWindowPixelBuffer(data->field_10, PIXEL_FILL(2));
         sub_80173E0(data->field_10, 0, gUnknown_082EDBC4, 8, 1, 4);
         PutWindowTilemap(data->field_10);
         CopyWindowToVram(data->field_10, 2);
@@ -1075,7 +1075,7 @@ void sub_80134E8(u8 taskId)
         data->listWindowId = AddWindow(&gUnknown_082F0174);
         data->field_D = AddWindow(&gUnknown_082F017C);
 
-        FillWindowPixelBuffer(data->field_C, PALETTE_NUM_TO_FILL_VALUE(2));
+        FillWindowPixelBuffer(data->field_C, PIXEL_FILL(2));
         sub_80173E0(data->field_C, 0, gUnknown_082EF7DC, 8, 1, 4);
         PutWindowTilemap(data->field_C);
         CopyWindowToVram(data->field_C, 2);
@@ -2155,7 +2155,7 @@ void sub_8014F48(u8 taskId)
         data->listTaskId = ListMenuInit(&gMultiuseListMenuTemplate, 0, 0);
 
         sub_8018784(data->field_D);
-        FillWindowPixelBuffer(data->field_D, PALETTE_NUM_TO_FILL_VALUE(1));
+        FillWindowPixelBuffer(data->field_D, PIXEL_FILL(1));
         PutWindowTilemap(data->field_D);
         sub_80125BC(data->field_D);
         CopyWindowToVram(data->field_D, 2);

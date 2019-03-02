@@ -2646,7 +2646,7 @@ static void sub_813A570(u8 taskId)
     DestroyListMenuTask(task->data[14], NULL, NULL);
     Free(gUnknown_0203AB64);
     ClearStdWindowAndFrameToTransparent(task->data[13], 1);
-    FillWindowPixelBuffer(task->data[13], PALETTE_NUM_TO_FILL_VALUE(0));
+    FillWindowPixelBuffer(task->data[13], PIXEL_FILL(0));
     CopyWindowToVram(task->data[13], 2);
     RemoveWindow(task->data[13]);
     DestroyTask(taskId);
@@ -3001,7 +3001,7 @@ static void sub_813AA60(u16 a0, u16 a1)
 
     if (a0 > 2 && a0 < 7)
     {
-        FillWindowPixelRect(0, PALETTE_NUM_TO_FILL_VALUE(1), 0, 0, 216, 32);
+        FillWindowPixelRect(0, PIXEL_FILL(1), 0, 0, 216, 32);
         switch (a0)
         {
             case 3:
@@ -3140,7 +3140,7 @@ static void sub_813AD34(u8 a0, u16 a1)
 
     if (a0 == 9 || a0 == 10)
     {
-        FillWindowPixelRect(gUnknown_0203AB5E, PALETTE_NUM_TO_FILL_VALUE(1), 0, 0, 96, 48);
+        FillWindowPixelRect(gUnknown_0203AB5E, PIXEL_FILL(1), 0, 0, 96, 48);
         if (a0 == 10)
         {
             AddTextPrinterParameterized(gUnknown_0203AB5E, 1, gUnknown_085B3254[a1], 0, 1, 0, NULL);
@@ -3227,7 +3227,7 @@ void sub_813AF48(void)
         DestroyListMenuTask(task->data[14], NULL, NULL);
         Free(gUnknown_0203AB64);
         ClearStdWindowAndFrameToTransparent(task->data[13], TRUE);
-        FillWindowPixelBuffer(task->data[13], PALETTE_NUM_TO_FILL_VALUE(0));
+        FillWindowPixelBuffer(task->data[13], PIXEL_FILL(0));
         ClearWindowTilemap(task->data[13]);
         CopyWindowToVram(task->data[13], 2);
         RemoveWindow(task->data[13]);

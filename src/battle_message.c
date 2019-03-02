@@ -1357,7 +1357,7 @@ static const struct BattleWindowText sTextOnWindowsInfo_Normal[] =
 {
 // The corresponding WindowTemplate is gStandardBattleWindowTemplates[] within src/battle_bg.c
     { // 0 Standard battle message
-        .fillValue = PALETTE_NUM_TO_FILL_VALUE(0xF),
+        .fillValue = PIXEL_FILL(0xF),
         .fontId = 1,
         .x = 0,
         .y = 1,
@@ -1369,7 +1369,7 @@ static const struct BattleWindowText sTextOnWindowsInfo_Normal[] =
         .shadowColor = 6,
     },
     { // 1 "What will (pokemon) do?"
-        .fillValue = PALETTE_NUM_TO_FILL_VALUE(0xF),
+        .fillValue = PIXEL_FILL(0xF),
         .fontId = 1,
         .x = 1,
         .y = 1,
@@ -1381,7 +1381,7 @@ static const struct BattleWindowText sTextOnWindowsInfo_Normal[] =
         .shadowColor = 6,
     },
     { // 2 "Fight/Pokemon/Bag/Run"
-        .fillValue = PALETTE_NUM_TO_FILL_VALUE(0xE),
+        .fillValue = PIXEL_FILL(0xE),
         .fontId = 1,
         .x = 0,
         .y = 1,
@@ -1393,7 +1393,7 @@ static const struct BattleWindowText sTextOnWindowsInfo_Normal[] =
         .shadowColor = 15,
     },
     { // 3 Top left move
-        .fillValue = PALETTE_NUM_TO_FILL_VALUE(0xE),
+        .fillValue = PIXEL_FILL(0xE),
         .fontId = 7,
         .x = 0,
         .y = 1,
@@ -1405,7 +1405,7 @@ static const struct BattleWindowText sTextOnWindowsInfo_Normal[] =
         .shadowColor = 15,
     },
     { // 4 Top right move
-        .fillValue = PALETTE_NUM_TO_FILL_VALUE(0xE),
+        .fillValue = PIXEL_FILL(0xE),
         .fontId = 7,
         .x = 0,
         .y = 1,
@@ -1417,7 +1417,7 @@ static const struct BattleWindowText sTextOnWindowsInfo_Normal[] =
         .shadowColor = 15,
     },
     { // 5 Bottom left move
-        .fillValue = PALETTE_NUM_TO_FILL_VALUE(0xE),
+        .fillValue = PIXEL_FILL(0xE),
         .fontId = 7,
         .x = 0,
         .y = 1,
@@ -1429,7 +1429,7 @@ static const struct BattleWindowText sTextOnWindowsInfo_Normal[] =
         .shadowColor = 15,
     },
     { // 6 Bottom right move
-        .fillValue = PALETTE_NUM_TO_FILL_VALUE(0xE),
+        .fillValue = PIXEL_FILL(0xE),
         .fontId = 7,
         .x = 0,
         .y = 1,
@@ -1441,7 +1441,7 @@ static const struct BattleWindowText sTextOnWindowsInfo_Normal[] =
         .shadowColor = 15,
     },
     { // 7 "PP"
-        .fillValue = PALETTE_NUM_TO_FILL_VALUE(0xE),
+        .fillValue = PIXEL_FILL(0xE),
         .fontId = 7,
         .x = 0,
         .y = 1,
@@ -1453,7 +1453,7 @@ static const struct BattleWindowText sTextOnWindowsInfo_Normal[] =
         .shadowColor = 11,
     },
     { // 8
-        .fillValue = PALETTE_NUM_TO_FILL_VALUE(0xE),
+        .fillValue = PIXEL_FILL(0xE),
         .fontId = 1,
         .x = 0,
         .y = 1,
@@ -1465,7 +1465,7 @@ static const struct BattleWindowText sTextOnWindowsInfo_Normal[] =
         .shadowColor = 15,
     },
     { // 9 PP remaining
-        .fillValue = PALETTE_NUM_TO_FILL_VALUE(0xE),
+        .fillValue = PIXEL_FILL(0xE),
         .fontId = 1,
         .x = 2,
         .y = 1,
@@ -1477,7 +1477,7 @@ static const struct BattleWindowText sTextOnWindowsInfo_Normal[] =
         .shadowColor = 11,
     },
     { // 10 "type"
-        .fillValue = PALETTE_NUM_TO_FILL_VALUE(0xE),
+        .fillValue = PIXEL_FILL(0xE),
         .fontId = 7,
         .x = 0,
         .y = 1,
@@ -1489,7 +1489,7 @@ static const struct BattleWindowText sTextOnWindowsInfo_Normal[] =
         .shadowColor = 15,
     },
     { // 11 "switch which?"
-        .fillValue = PALETTE_NUM_TO_FILL_VALUE(0xE),
+        .fillValue = PIXEL_FILL(0xE),
         .fontId = 7,
         .x = 0,
         .y = 1,
@@ -1501,7 +1501,7 @@ static const struct BattleWindowText sTextOnWindowsInfo_Normal[] =
         .shadowColor = 15,
     },
     { // 12 "gText_BattleYesNoChoice"
-        .fillValue = PALETTE_NUM_TO_FILL_VALUE(0xE),
+        .fillValue = PIXEL_FILL(0xE),
         .fontId = 1,
         .x = 0,
         .y = 1,
@@ -1513,7 +1513,7 @@ static const struct BattleWindowText sTextOnWindowsInfo_Normal[] =
         .shadowColor = 15,
     },
     { // 13
-        .fillValue = PALETTE_NUM_TO_FILL_VALUE(0xE),
+        .fillValue = PIXEL_FILL(0xE),
         .fontId = 1,
         .x = 0,
         .y = 1,
@@ -1525,7 +1525,7 @@ static const struct BattleWindowText sTextOnWindowsInfo_Normal[] =
         .shadowColor = 15,
     },
     { // 14
-        .fillValue = PALETTE_NUM_TO_FILL_VALUE(0),
+        .fillValue = PIXEL_FILL(0),
         .fontId = 1,
         .x = 32,
         .y = 1,
@@ -1537,7 +1537,7 @@ static const struct BattleWindowText sTextOnWindowsInfo_Normal[] =
         .shadowColor = 2,
     },
     { // 15
-        .fillValue = PALETTE_NUM_TO_FILL_VALUE(0xE),
+        .fillValue = PIXEL_FILL(0xE),
         .fontId = 1,
         .x = -1,
         .y = 1,
@@ -1549,7 +1549,7 @@ static const struct BattleWindowText sTextOnWindowsInfo_Normal[] =
         .shadowColor = 15,
     },
     { // 16
-        .fillValue = PALETTE_NUM_TO_FILL_VALUE(0xE),
+        .fillValue = PIXEL_FILL(0xE),
         .fontId = 1,
         .x = -1,
         .y = 1,
@@ -1561,7 +1561,7 @@ static const struct BattleWindowText sTextOnWindowsInfo_Normal[] =
         .shadowColor = 15,
     },
     { // 17
-        .fillValue = PALETTE_NUM_TO_FILL_VALUE(0xE),
+        .fillValue = PIXEL_FILL(0xE),
         .fontId = 1,
         .x = -1,
         .y = 1,
@@ -1573,7 +1573,7 @@ static const struct BattleWindowText sTextOnWindowsInfo_Normal[] =
         .shadowColor = 15,
     },
     { // 18
-        .fillValue = PALETTE_NUM_TO_FILL_VALUE(0xE),
+        .fillValue = PIXEL_FILL(0xE),
         .fontId = 1,
         .x = -1,
         .y = 1,
@@ -1585,7 +1585,7 @@ static const struct BattleWindowText sTextOnWindowsInfo_Normal[] =
         .shadowColor = 15,
     },
     { // 19
-        .fillValue = PALETTE_NUM_TO_FILL_VALUE(0xE),
+        .fillValue = PIXEL_FILL(0xE),
         .fontId = 1,
         .x = -1,
         .y = 1,
@@ -1597,7 +1597,7 @@ static const struct BattleWindowText sTextOnWindowsInfo_Normal[] =
         .shadowColor = 15,
     },
     { // 20
-        .fillValue = PALETTE_NUM_TO_FILL_VALUE(0xE),
+        .fillValue = PIXEL_FILL(0xE),
         .fontId = 1,
         .x = -1,
         .y = 1,
@@ -1609,7 +1609,7 @@ static const struct BattleWindowText sTextOnWindowsInfo_Normal[] =
         .shadowColor = 15,
     },
     { // 21
-        .fillValue = PALETTE_NUM_TO_FILL_VALUE(0),
+        .fillValue = PIXEL_FILL(0),
         .fontId = 1,
         .x = -1,
         .y = 1,
@@ -1621,7 +1621,7 @@ static const struct BattleWindowText sTextOnWindowsInfo_Normal[] =
         .shadowColor = 6,
     },
     { // 22
-        .fillValue = PALETTE_NUM_TO_FILL_VALUE(0),
+        .fillValue = PIXEL_FILL(0),
         .fontId = 1,
         .x = -1,
         .y = 1,
@@ -1633,7 +1633,7 @@ static const struct BattleWindowText sTextOnWindowsInfo_Normal[] =
         .shadowColor = 6,
     },
     { // 23
-        .fillValue = PALETTE_NUM_TO_FILL_VALUE(0x0),
+        .fillValue = PIXEL_FILL(0x0),
         .fontId = 1,
         .x = -1,
         .y = 1,
@@ -1649,7 +1649,7 @@ static const struct BattleWindowText sTextOnWindowsInfo_Normal[] =
 static const struct BattleWindowText sTextOnWindowsInfo_Arena[] =
 {
     { // 0
-        .fillValue = PALETTE_NUM_TO_FILL_VALUE(0xF),
+        .fillValue = PIXEL_FILL(0xF),
         .fontId = 1,
         .x = 0,
         .y = 1,
@@ -1661,7 +1661,7 @@ static const struct BattleWindowText sTextOnWindowsInfo_Arena[] =
         .shadowColor = 6,
     },
     { // 1
-        .fillValue = PALETTE_NUM_TO_FILL_VALUE(0xF),
+        .fillValue = PIXEL_FILL(0xF),
         .fontId = 1,
         .x = 1,
         .y = 1,
@@ -1673,7 +1673,7 @@ static const struct BattleWindowText sTextOnWindowsInfo_Arena[] =
         .shadowColor = 6,
     },
     { // 2
-        .fillValue = PALETTE_NUM_TO_FILL_VALUE(0xE),
+        .fillValue = PIXEL_FILL(0xE),
         .fontId = 1,
         .x = 0,
         .y = 1,
@@ -1685,7 +1685,7 @@ static const struct BattleWindowText sTextOnWindowsInfo_Arena[] =
         .shadowColor = 15,
     },
     { // 3
-        .fillValue = PALETTE_NUM_TO_FILL_VALUE(0xE),
+        .fillValue = PIXEL_FILL(0xE),
         .fontId = 7,
         .x = 0,
         .y = 1,
@@ -1697,7 +1697,7 @@ static const struct BattleWindowText sTextOnWindowsInfo_Arena[] =
         .shadowColor = 15,
     },
     { // 4
-        .fillValue = PALETTE_NUM_TO_FILL_VALUE(0xE),
+        .fillValue = PIXEL_FILL(0xE),
         .fontId = 7,
         .x = 0,
         .y = 1,
@@ -1709,7 +1709,7 @@ static const struct BattleWindowText sTextOnWindowsInfo_Arena[] =
         .shadowColor = 15,
     },
     { // 5
-        .fillValue = PALETTE_NUM_TO_FILL_VALUE(0xE),
+        .fillValue = PIXEL_FILL(0xE),
         .fontId = 7,
         .x = 0,
         .y = 1,
@@ -1721,7 +1721,7 @@ static const struct BattleWindowText sTextOnWindowsInfo_Arena[] =
         .shadowColor = 15,
     },
     { // 6
-        .fillValue = PALETTE_NUM_TO_FILL_VALUE(0xE),
+        .fillValue = PIXEL_FILL(0xE),
         .fontId = 7,
         .x = 0,
         .y = 1,
@@ -1733,7 +1733,7 @@ static const struct BattleWindowText sTextOnWindowsInfo_Arena[] =
         .shadowColor = 15,
     },
     { // 7
-        .fillValue = PALETTE_NUM_TO_FILL_VALUE(0xE),
+        .fillValue = PIXEL_FILL(0xE),
         .fontId = 7,
         .x = 0,
         .y = 1,
@@ -1745,7 +1745,7 @@ static const struct BattleWindowText sTextOnWindowsInfo_Arena[] =
         .shadowColor = 11,
     },
     { // 8
-        .fillValue = PALETTE_NUM_TO_FILL_VALUE(0xE),
+        .fillValue = PIXEL_FILL(0xE),
         .fontId = 1,
         .x = 0,
         .y = 1,
@@ -1757,7 +1757,7 @@ static const struct BattleWindowText sTextOnWindowsInfo_Arena[] =
         .shadowColor = 15,
     },
     { // 9
-        .fillValue = PALETTE_NUM_TO_FILL_VALUE(0xE),
+        .fillValue = PIXEL_FILL(0xE),
         .fontId = 1,
         .x = 2,
         .y = 1,
@@ -1769,7 +1769,7 @@ static const struct BattleWindowText sTextOnWindowsInfo_Arena[] =
         .shadowColor = 11,
     },
     { // 10
-        .fillValue = PALETTE_NUM_TO_FILL_VALUE(0xE),
+        .fillValue = PIXEL_FILL(0xE),
         .fontId = 7,
         .x = 0,
         .y = 1,
@@ -1781,7 +1781,7 @@ static const struct BattleWindowText sTextOnWindowsInfo_Arena[] =
         .shadowColor = 15,
     },
     { // 11
-        .fillValue = PALETTE_NUM_TO_FILL_VALUE(0xE),
+        .fillValue = PIXEL_FILL(0xE),
         .fontId = 7,
         .x = 0,
         .y = 1,
@@ -1793,7 +1793,7 @@ static const struct BattleWindowText sTextOnWindowsInfo_Arena[] =
         .shadowColor = 15,
     },
     { // 12
-        .fillValue = PALETTE_NUM_TO_FILL_VALUE(0xE),
+        .fillValue = PIXEL_FILL(0xE),
         .fontId = 1,
         .x = 0,
         .y = 1,
@@ -1805,7 +1805,7 @@ static const struct BattleWindowText sTextOnWindowsInfo_Arena[] =
         .shadowColor = 15,
     },
     { // 13
-        .fillValue = PALETTE_NUM_TO_FILL_VALUE(0xE),
+        .fillValue = PIXEL_FILL(0xE),
         .fontId = 1,
         .x = 0,
         .y = 1,
@@ -1817,7 +1817,7 @@ static const struct BattleWindowText sTextOnWindowsInfo_Arena[] =
         .shadowColor = 15,
     },
     { // 14
-        .fillValue = PALETTE_NUM_TO_FILL_VALUE(0),
+        .fillValue = PIXEL_FILL(0),
         .fontId = 1,
         .x = 32,
         .y = 1,
@@ -1829,7 +1829,7 @@ static const struct BattleWindowText sTextOnWindowsInfo_Arena[] =
         .shadowColor = 2,
     },
     { // 15
-        .fillValue = PALETTE_NUM_TO_FILL_VALUE(0xE),
+        .fillValue = PIXEL_FILL(0xE),
         .fontId = 1,
         .x = -1,
         .y = 1,
@@ -1841,7 +1841,7 @@ static const struct BattleWindowText sTextOnWindowsInfo_Arena[] =
         .shadowColor = 15,
     },
     { // 16
-        .fillValue = PALETTE_NUM_TO_FILL_VALUE(0xE),
+        .fillValue = PIXEL_FILL(0xE),
         .fontId = 1,
         .x = -1,
         .y = 1,
@@ -1853,7 +1853,7 @@ static const struct BattleWindowText sTextOnWindowsInfo_Arena[] =
         .shadowColor = 15,
     },
     { // 17
-        .fillValue = PALETTE_NUM_TO_FILL_VALUE(0xE),
+        .fillValue = PIXEL_FILL(0xE),
         .fontId = 1,
         .x = -1,
         .y = 1,
@@ -1865,7 +1865,7 @@ static const struct BattleWindowText sTextOnWindowsInfo_Arena[] =
         .shadowColor = 15,
     },
     { // 18
-        .fillValue = PALETTE_NUM_TO_FILL_VALUE(0xE),
+        .fillValue = PIXEL_FILL(0xE),
         .fontId = 1,
         .x = -1,
         .y = 1,
@@ -1877,7 +1877,7 @@ static const struct BattleWindowText sTextOnWindowsInfo_Arena[] =
         .shadowColor = 15,
     },
     { // 19
-        .fillValue = PALETTE_NUM_TO_FILL_VALUE(0xE),
+        .fillValue = PIXEL_FILL(0xE),
         .fontId = 1,
         .x = -1,
         .y = 1,
@@ -1889,7 +1889,7 @@ static const struct BattleWindowText sTextOnWindowsInfo_Arena[] =
         .shadowColor = 15,
     },
     { // 20
-        .fillValue = PALETTE_NUM_TO_FILL_VALUE(0xE),
+        .fillValue = PIXEL_FILL(0xE),
         .fontId = 1,
         .x = -1,
         .y = 1,
@@ -1901,7 +1901,7 @@ static const struct BattleWindowText sTextOnWindowsInfo_Arena[] =
         .shadowColor = 15,
     },
     { // 21
-        .fillValue = PALETTE_NUM_TO_FILL_VALUE(0xE),
+        .fillValue = PIXEL_FILL(0xE),
         .fontId = 1,
         .x = -1,
         .y = 1,
@@ -1913,7 +1913,7 @@ static const struct BattleWindowText sTextOnWindowsInfo_Arena[] =
         .shadowColor = 15,
     },
     { // 22
-        .fillValue = PALETTE_NUM_TO_FILL_VALUE(0x1),
+        .fillValue = PIXEL_FILL(0x1),
         .fontId = 1,
         .x = 0,
         .y = 1,

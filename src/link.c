@@ -1683,8 +1683,8 @@ static void sub_800B080(void)
     CopyToBgTilemapBuffer(1, gWirelessLinkDisplayTilemap, 0, 0);
     CopyBgTilemapBufferToVram(1);
     LoadPalette(gWirelessLinkDisplayPal, 0, 0x20);
-    FillWindowPixelBuffer(0, PALETTE_NUM_TO_FILL_VALUE(0));
-    FillWindowPixelBuffer(2, PALETTE_NUM_TO_FILL_VALUE(0));
+    FillWindowPixelBuffer(0, PIXEL_FILL(0));
+    FillWindowPixelBuffer(2, PIXEL_FILL(0));
     AddTextPrinterParameterized3(0, 3, 2, 6, gUnknown_082ED224, 0, gText_CommErrorEllipsis);
     AddTextPrinterParameterized3(2, 3, 2, 1, gUnknown_082ED224, 0, gText_MoveCloserToLinkPartner);
     PutWindowTilemap(0);
@@ -1696,8 +1696,8 @@ static void sub_800B080(void)
 static void sub_800B138(void)
 {
     LoadBgTiles(0, g2BlankTilesGfx, 0x20, 0);
-    FillWindowPixelBuffer(1, PALETTE_NUM_TO_FILL_VALUE(0));
-    FillWindowPixelBuffer(2, PALETTE_NUM_TO_FILL_VALUE(0));
+    FillWindowPixelBuffer(1, PIXEL_FILL(0));
+    FillWindowPixelBuffer(2, PIXEL_FILL(0));
     AddTextPrinterParameterized3(1, 3, 2, 0, gUnknown_082ED224, 0, gText_CommErrorCheckConnections);
     PutWindowTilemap(1);
     PutWindowTilemap(2);

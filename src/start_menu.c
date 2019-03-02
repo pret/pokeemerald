@@ -1232,7 +1232,7 @@ static void sub_80A0550(u8 taskId)
         switch (*step)
         {
         case 0:
-            FillWindowPixelBuffer(0, PALETTE_NUM_TO_FILL_VALUE(1));
+            FillWindowPixelBuffer(0, PIXEL_FILL(1));
             AddTextPrinterParameterized2(0,
                                         1,
                                         gText_SavingDontTurnOffPower,

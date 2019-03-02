@@ -945,7 +945,7 @@ static void InitBerryBlenderWindows(void)
 
         DeactivateAllTextPrinters();
         for (i = 0; i < 5; i++)
-            FillWindowPixelBuffer(i, PALETTE_NUM_TO_FILL_VALUE(0));
+            FillWindowPixelBuffer(i, PIXEL_FILL(0));
 
         FillBgTilemapBufferRect_Palette0(0, 0, 0, 0, 0x1E, 0x14);
         sub_81978B0(0xE0);
@@ -3538,7 +3538,7 @@ void ShowBerryBlenderRecordWindow(void)
     winTemplate = sBlenderRecordWindowTemplate;
     gRecordsWindowId = AddWindow(&winTemplate);
     DrawStdWindowFrame(gRecordsWindowId, 0);
-    FillWindowPixelBuffer(gRecordsWindowId, PALETTE_NUM_TO_FILL_VALUE(1));
+    FillWindowPixelBuffer(gRecordsWindowId, PIXEL_FILL(1));
 
     xPos = GetStringCenterAlignXOffset(1, gText_BlenderMaxSpeedRecord, 0x90);
     AddTextPrinterParameterized(gRecordsWindowId, 1, gText_BlenderMaxSpeedRecord, xPos, 1, 0, NULL);
@@ -3647,7 +3647,7 @@ static void Blender_AddTextPrinter(u8 windowId, const u8 *string, u8 x, u8 y, s3
 
     if (caseId != 3)
     {
-        FillWindowPixelBuffer(windowId, PALETTE_NUM_TO_FILL_VALUE(txtColor[0]));
+        FillWindowPixelBuffer(windowId, PIXEL_FILL(txtColor[0]));
     }
 
     AddTextPrinterParameterized4(windowId, 1, x, y, letterSpacing, 1, txtColor, speed, string);

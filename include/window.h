@@ -1,7 +1,7 @@
 #ifndef GUARD_WINDOW_H
 #define GUARD_WINDOW_H
 
-#define PALETTE_NUM_TO_FILL_VALUE(num) ((num) | ((num) << 4))
+#define PIXEL_FILL(num) ((num) | ((num) << 4))
 
 enum
 {

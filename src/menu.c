@@ -213,7 +213,7 @@ void sub_81973A4(void)
 void DrawDialogueFrame(u8 windowId, bool8 copyToVram)
 {
     CallWindowFunction(windowId, WindowFunc_DrawDialogueFrame);
-    FillWindowPixelBuffer(windowId, PALETTE_NUM_TO_FILL_VALUE(1));
+    FillWindowPixelBuffer(windowId, PIXEL_FILL(1));
     PutWindowTilemap(windowId);
     if (copyToVram == TRUE)
         CopyWindowToVram(windowId, 3);
@@ -222,7 +222,7 @@ void DrawDialogueFrame(u8 windowId, bool8 copyToVram)
 void DrawStdWindowFrame(u8 windowId, bool8 copyToVram)
 {
     CallWindowFunction(windowId, WindowFunc_DrawStandardFrame);
-    FillWindowPixelBuffer(windowId, PALETTE_NUM_TO_FILL_VALUE(1));
+    FillWindowPixelBuffer(windowId, PIXEL_FILL(1));
     PutWindowTilemap(windowId);
     if (copyToVram == TRUE)
         CopyWindowToVram(windowId, 3);
@@ -231,7 +231,7 @@ void DrawStdWindowFrame(u8 windowId, bool8 copyToVram)
 void ClearDialogWindowAndFrame(u8 windowId, bool8 copyToVram)
 {
     CallWindowFunction(windowId, WindowFunc_ClearDialogWindowAndFrame);
-    FillWindowPixelBuffer(windowId, PALETTE_NUM_TO_FILL_VALUE(1));
+    FillWindowPixelBuffer(windowId, PIXEL_FILL(1));
     ClearWindowTilemap(windowId);
     if (copyToVram == TRUE)
         CopyWindowToVram(windowId, 3);
@@ -240,7 +240,7 @@ void ClearDialogWindowAndFrame(u8 windowId, bool8 copyToVram)
 void ClearStdWindowAndFrame(u8 windowId, bool8 copyToVram)
 {
     CallWindowFunction(windowId, WindowFunc_ClearStdWindowAndFrame);
-    FillWindowPixelBuffer(windowId, PALETTE_NUM_TO_FILL_VALUE(1));
+    FillWindowPixelBuffer(windowId, PIXEL_FILL(1));
     ClearWindowTilemap(windowId);
     if (copyToVram == TRUE)
         CopyWindowToVram(windowId, 3);
@@ -554,7 +554,7 @@ void DrawDialogFrameWithCustomTileAndPalette(u8 windowId, bool8 copyToVram, u16 
     sTileNum = tileNum;
     sPaletteNum = paletteNum;
     CallWindowFunction(windowId, WindowFunc_DrawDialogFrameWithCustomTileAndPalette);
-    FillWindowPixelBuffer(windowId, PALETTE_NUM_TO_FILL_VALUE(1));
+    FillWindowPixelBuffer(windowId, PIXEL_FILL(1));
     PutWindowTilemap(windowId);
     if (copyToVram == TRUE)
         CopyWindowToVram(windowId, 3);
@@ -566,7 +566,7 @@ void DrawDialogFrameWithCustomTile(u8 windowId, bool8 copyToVram, u16 tileNum)
     sTileNum = tileNum;
     sPaletteNum = GetWindowAttribute(windowId, WINDOW_PALETTE_NUM);
     CallWindowFunction(windowId, WindowFunc_DrawDialogFrameWithCustomTileAndPalette);
-    FillWindowPixelBuffer(windowId, PALETTE_NUM_TO_FILL_VALUE(1));
+    FillWindowPixelBuffer(windowId, PIXEL_FILL(1));
     PutWindowTilemap(windowId);
     if (copyToVram == TRUE)
         CopyWindowToVram(windowId, 3);
@@ -671,7 +671,7 @@ void ClearDialogWindowAndFrameToTransparent(u8 windowId, bool8 copyToVram)
 {
     // The palette slot doesn't matter, since the tiles are transparent.
     CallWindowFunction(windowId, WindowFunc_ClearDialogWindowAndFrameNullPalette);
-    FillWindowPixelBuffer(windowId, PALETTE_NUM_TO_FILL_VALUE(0));
+    FillWindowPixelBuffer(windowId, PIXEL_FILL(0));
     ClearWindowTilemap(windowId);
     if (copyToVram == TRUE)
         CopyWindowToVram(windowId, 3);
@@ -687,7 +687,7 @@ void DrawStdFrameWithCustomTileAndPalette(u8 windowId, bool8 copyToVram, u16 bas
     sTileNum = baseTileNum;
     sPaletteNum = paletteNum;
     CallWindowFunction(windowId, WindowFunc_DrawStdFrameWithCustomTileAndPalette);
-    FillWindowPixelBuffer(windowId, PALETTE_NUM_TO_FILL_VALUE(1));
+    FillWindowPixelBuffer(windowId, PIXEL_FILL(1));
     PutWindowTilemap(windowId);
     if (copyToVram == TRUE)
         CopyWindowToVram(windowId, 3);
@@ -699,7 +699,7 @@ void DrawStdFrameWithCustomTile(u8 windowId, bool8 copyToVram, u16 baseTileNum)
     sTileNum = baseTileNum;
     sPaletteNum = GetWindowAttribute(windowId, WINDOW_PALETTE_NUM);
     CallWindowFunction(windowId, WindowFunc_DrawStdFrameWithCustomTileAndPalette);
-    FillWindowPixelBuffer(windowId, PALETTE_NUM_TO_FILL_VALUE(1));
+    FillWindowPixelBuffer(windowId, PIXEL_FILL(1));
     PutWindowTilemap(windowId);
     if (copyToVram == TRUE)
         CopyWindowToVram(windowId, 3);
@@ -768,7 +768,7 @@ void WindowFunc_DrawStdFrameWithCustomTileAndPalette(u8 bg, u8 tilemapLeft, u8 t
 void ClearStdWindowAndFrameToTransparent(u8 windowId, bool8 copyToVram)
 {
     CallWindowFunction(windowId, WindowFunc_ClearStdWindowAndFrameToTransparent);
-    FillWindowPixelBuffer(windowId, PALETTE_NUM_TO_FILL_VALUE(0));
+    FillWindowPixelBuffer(windowId, PIXEL_FILL(0));
     ClearWindowTilemap(windowId);
     if (copyToVram == TRUE)
         CopyWindowToVram(windowId, 3);
@@ -814,7 +814,7 @@ void sub_8198180(const u8 *string, u8 a2, bool8 copyToVram)
     if (sWindowId != 0xFF)
     {
         PutWindowTilemap(sWindowId);
-        FillWindowPixelBuffer(sWindowId, PALETTE_NUM_TO_FILL_VALUE(15));
+        FillWindowPixelBuffer(sWindowId, PIXEL_FILL(15));
         width = GetStringWidth(0, string, 0);
         AddTextPrinterParameterized3(sWindowId,
                   0,
@@ -848,7 +848,7 @@ void sub_8198204(const u8 *string, const u8 *string2, u8 a3, u8 a4, bool8 copyTo
             color[2] = 2;
         }
         PutWindowTilemap(sWindowId);
-        FillWindowPixelBuffer(sWindowId, PALETTE_NUM_TO_FILL_VALUE(15));
+        FillWindowPixelBuffer(sWindowId, PIXEL_FILL(15));
         if (string2 != NULL)
         {
             width = GetStringWidth(0, string2, 0);
@@ -876,7 +876,7 @@ void sub_81982F0(void)
 {
     if (sWindowId != 0xFF)
     {
-        FillWindowPixelBuffer(sWindowId, PALETTE_NUM_TO_FILL_VALUE(15));
+        FillWindowPixelBuffer(sWindowId, PIXEL_FILL(15));
         CopyWindowToVram(sWindowId, 3);
     }
 }
@@ -885,7 +885,7 @@ void sub_8198314(void)
 {
     if (sWindowId != 0xFF)
     {
-        FillWindowPixelBuffer(sWindowId, PALETTE_NUM_TO_FILL_VALUE(0));
+        FillWindowPixelBuffer(sWindowId, PIXEL_FILL(0));
         ClearWindowTilemap(sWindowId);
         CopyWindowToVram(sWindowId, 3);
         RemoveWindow(sWindowId);
@@ -934,7 +934,7 @@ void RedrawMenuCursor(u8 oldPos, u8 newPos)
 
     width = GetMenuCursorDimensionByFont(sMenu.fontId, 0);
     height = GetMenuCursorDimensionByFont(sMenu.fontId, 1);
-    FillWindowPixelRect(sMenu.windowId, PALETTE_NUM_TO_FILL_VALUE(1), sMenu.left, sMenu.optionHeight * oldPos + sMenu.top, width, height);
+    FillWindowPixelRect(sMenu.windowId, PIXEL_FILL(1), sMenu.left, sMenu.optionHeight * oldPos + sMenu.top, width, height);
     AddTextPrinterParameterized(sMenu.windowId, sMenu.fontId, gText_SelectorArrow3, sMenu.left, sMenu.optionHeight * newPos + sMenu.top, 0, 0);
 }
 
@@ -1313,7 +1313,7 @@ void sub_8199060(u8 oldCursorPos, u8 newCursorPos)
     u8 xPos = (oldCursorPos % sMenu.horizontalCount) * sMenu.optionWidth + sMenu.left;
     u8 yPos = (oldCursorPos / sMenu.horizontalCount) * sMenu.optionHeight + sMenu.top;
     FillWindowPixelRect(sMenu.windowId,
-                        PALETTE_NUM_TO_FILL_VALUE(1),
+                        PIXEL_FILL(1),
                         xPos,
                         yPos,
                         cursorWidth,

@@ -3689,7 +3689,7 @@ static void sub_811CFCC(void)
         return;
 
     xOffset = GetStringCenterAlignXOffset(1, titleText, 144);
-    FillWindowPixelBuffer(0, PALETTE_NUM_TO_FILL_VALUE(0));
+    FillWindowPixelBuffer(0, PIXEL_FILL(0));
     sub_811D058(0, 1, titleText, xOffset, 1, 0xFF, 0, 2, 3);
     PutWindowTilemap(0);
     CopyWindowToVram(0, 3);
@@ -3759,7 +3759,7 @@ static void sub_811D104(u8 arg0)
         break;
     }
 
-    FillWindowPixelBuffer(1, PALETTE_NUM_TO_FILL_VALUE(1));
+    FillWindowPixelBuffer(1, PIXEL_FILL(1));
     if (text1)
         sub_811D028(1, 1, text1, 0, 1, 0xFF, 0);
 
@@ -3809,7 +3809,7 @@ static void sub_811D2C8(void)
     if (var0 == 7)
         var1 = 1;
 
-    FillWindowPixelBuffer(gUnknown_0203A11C->windowId, PALETTE_NUM_TO_FILL_VALUE(1));
+    FillWindowPixelBuffer(gUnknown_0203A11C->windowId, PIXEL_FILL(1));
     for (i = 0; i < numRows; i++)
     {
         memcpy(spC, sText_Clear17, sizeof(sText_Clear17));
@@ -3949,7 +3949,7 @@ static void sub_811D684(void)
 static void sub_811D698(u32 arg0)
 {
     sub_811DD84();
-    FillWindowPixelBuffer(2, PALETTE_NUM_TO_FILL_VALUE(1));
+    FillWindowPixelBuffer(2, PIXEL_FILL(1));
     switch (arg0)
     {
     case 0:
@@ -4106,14 +4106,14 @@ static void sub_811D950(u8 arg0, u8 arg1)
         var1 = 0;
     }
 
-    FillWindowPixelRect(2, PALETTE_NUM_TO_FILL_VALUE(1), 0, y, 224, var2);
+    FillWindowPixelRect(2, PIXEL_FILL(1), 0, y, 224, var2);
     if (var1)
-        FillWindowPixelRect(2, PALETTE_NUM_TO_FILL_VALUE(1), 0, 0, 224, var1);
+        FillWindowPixelRect(2, PIXEL_FILL(1), 0, 0, 224, var1);
 }
 
 static void sub_811D9B4(void)
 {
-    FillWindowPixelBuffer(2, PALETTE_NUM_TO_FILL_VALUE(1));
+    FillWindowPixelBuffer(2, PIXEL_FILL(1));
     CopyWindowToVram(2, 2);
 }
 
@@ -4783,7 +4783,7 @@ static void sub_811E948(void)
     template.paletteNum = 11;
     template.baseBlock = 0x34;
     windowId = AddWindow(&template);
-    FillWindowPixelBuffer(windowId, PALETTE_NUM_TO_FILL_VALUE(1));
+    FillWindowPixelBuffer(windowId, PIXEL_FILL(1));
     for (i = 0; i < 4; i++)
     {
         const u8 *str = sFooterTextOptions[var0][i];

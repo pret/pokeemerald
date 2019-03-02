@@ -1474,7 +1474,7 @@ static void HandleDpadMovement(struct Task *task)
 
 static void sub_80E4894(void)
 {
-    FillWindowPixelBuffer(gNamingScreenData->windows[3], PALETTE_NUM_TO_FILL_VALUE(1));
+    FillWindowPixelBuffer(gNamingScreenData->windows[3], PIXEL_FILL(1));
     AddTextPrinterParameterized(gNamingScreenData->windows[3], 1, gNamingScreenData->template->title, 8, 1, 0, 0);
     PutWindowTilemap(gNamingScreenData->windows[3]);
 }
@@ -1485,7 +1485,7 @@ static void sub_80E48E8(void)
 
     StringCopy(buffer, gSpeciesNames[gNamingScreenData->monSpecies]);
     StringAppendN(buffer, gNamingScreenData->template->title, 15);
-    FillWindowPixelBuffer(gNamingScreenData->windows[3], PALETTE_NUM_TO_FILL_VALUE(1));
+    FillWindowPixelBuffer(gNamingScreenData->windows[3], PIXEL_FILL(1));
     AddTextPrinterParameterized(gNamingScreenData->windows[3], 1, buffer, 8, 1, 0, 0);
     PutWindowTilemap(gNamingScreenData->windows[3]);
 }
@@ -1672,7 +1672,7 @@ static void sub_80E4D10(void)
     u8 maxChars = gNamingScreenData->template->maxChars;
     u16 unk = gNamingScreenData->inputCharBaseXPos - 0x40;
 
-    FillWindowPixelBuffer(gNamingScreenData->windows[2], PALETTE_NUM_TO_FILL_VALUE(1));
+    FillWindowPixelBuffer(gNamingScreenData->windows[2], PIXEL_FILL(1));
 
     for (i = 0; i < maxChars; i++)
     {
@@ -1704,9 +1704,9 @@ static const struct TextColorThing sUnkColorStruct =
 
 static const u8 sFillValues[3] =
 {
-    PALETTE_NUM_TO_FILL_VALUE(0xE),
-    PALETTE_NUM_TO_FILL_VALUE(0xD),
-    PALETTE_NUM_TO_FILL_VALUE(0xF)
+    PIXEL_FILL(0xE),
+    PIXEL_FILL(0xD),
+    PIXEL_FILL(0xF)
 };
 
 static const u8 *const sUnkColors[3] =
@@ -1768,7 +1768,7 @@ static void sub_80E4EF0(void)
 {
     const u8 color[3] = { 15, 1, 2 };
 
-    FillWindowPixelBuffer(gNamingScreenData->windows[4], PALETTE_NUM_TO_FILL_VALUE(15));
+    FillWindowPixelBuffer(gNamingScreenData->windows[4], PIXEL_FILL(15));
     AddTextPrinterParameterized3(gNamingScreenData->windows[4], 0, 2, 1, color, 0, gText_MoveOkBack);
     PutWindowTilemap(gNamingScreenData->windows[4]);
     CopyWindowToVram(gNamingScreenData->windows[4], 3);

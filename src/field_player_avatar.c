@@ -1918,7 +1918,7 @@ static bool8 Fishing9(struct Task *task)
 static bool8 Fishing10(struct Task *task)
 {
     AlignFishingAnimationFrames();
-    FillWindowPixelBuffer(0, PALETTE_NUM_TO_FILL_VALUE(1));
+    FillWindowPixelBuffer(0, PIXEL_FILL(1));
     AddTextPrinterParameterized2(0, 1, gText_PokemonOnHook, 1, 0, 2, 1, 3);
     task->tStep++;
     task->tFrameCounter = 0;
@@ -1966,7 +1966,7 @@ static bool8 Fishing12(struct Task *task)
 {
     AlignFishingAnimationFrames();
     StartSpriteAnim(&gSprites[gPlayerAvatar.spriteId], GetFishingNoCatchDirectionAnimNum(GetPlayerFacingDirection()));
-    FillWindowPixelBuffer(0, PALETTE_NUM_TO_FILL_VALUE(1));
+    FillWindowPixelBuffer(0, PIXEL_FILL(1));
     AddTextPrinterParameterized2(0, 1, gText_NotEvenANibble, 1, 0, 2, 1, 3);
     task->tStep = FISHING_SHOW_RESULT;
     return TRUE;
@@ -1977,7 +1977,7 @@ static bool8 Fishing13(struct Task *task)
 {
     AlignFishingAnimationFrames();
     StartSpriteAnim(&gSprites[gPlayerAvatar.spriteId], GetFishingNoCatchDirectionAnimNum(GetPlayerFacingDirection()));
-    FillWindowPixelBuffer(0, PALETTE_NUM_TO_FILL_VALUE(1));
+    FillWindowPixelBuffer(0, PIXEL_FILL(1));
     AddTextPrinterParameterized2(0, 1, gText_ItGotAway, 1, 0, 2, 1, 3);
     task->tStep++;
     return TRUE;

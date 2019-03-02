@@ -3794,7 +3794,7 @@ static void sub_8190CD4(u8 taskId)
             for (i = windowId; i < windowId + 9; i++)
             {
                 CopyWindowToVram(i, 2);
-                FillWindowPixelBuffer(i, PALETTE_NUM_TO_FILL_VALUE(0));
+                FillWindowPixelBuffer(i, PIXEL_FILL(0));
             }
             gTasks[taskId].data[0] = 3;
             break;

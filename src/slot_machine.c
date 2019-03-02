@@ -3036,7 +3036,7 @@ s16 sub_8102D5C(s16 a0)
     sub_81065DC();
     AddWindow(&gUnknown_085A7444);
     PutWindowTilemap(1);
-    FillWindowPixelBuffer(1, PALETTE_NUM_TO_FILL_VALUE(0));
+    FillWindowPixelBuffer(1, PIXEL_FILL(0));
     task->data[0]++;
 }
 
@@ -3052,7 +3052,7 @@ s16 sub_8102D5C(s16 a0)
 {
     if (gMain.newKeys & (B_BUTTON | SELECT_BUTTON))
     {
-        FillWindowPixelBuffer(1, PALETTE_NUM_TO_FILL_VALUE(0));
+        FillWindowPixelBuffer(1, PIXEL_FILL(0));
         ClearWindowTilemap(1);
         CopyWindowToVram(1, 1);
         RemoveWindow(1);
