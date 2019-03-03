@@ -709,7 +709,7 @@ static void HandlePokeblockListMenuItems(void)
 
     StringCopy(sPokeblockMenu->menuItemsStrings[i], gText_StowCase);
     sPokeblockMenu->items[i].name = sPokeblockMenu->menuItemsStrings[i];
-    sPokeblockMenu->items[i].id = LIST_B_PRESSED;
+    sPokeblockMenu->items[i].id = LIST_CANCEL;
 
     gMultiuseListMenuTemplate = sPokeblockListMenuTemplate;
     gMultiuseListMenuTemplate.fontId = 7;
@@ -751,7 +751,7 @@ static void sub_8135FCC(s32 pkblId)
 
     FillWindowPixelBuffer(7, 0);
 
-    if (pkblId != LIST_B_PRESSED)
+    if (pkblId != LIST_CANCEL)
     {
         pokeblock = &gSaveBlock1Ptr->pokeblocks[pkblId];
         rectTilemapSrc[0] = 0x17;
@@ -959,7 +959,7 @@ static void Task_FreeDataAndExitPokeblockCase(u8 taskId)
     if (!gPaletteFade.active)
     {
         if (sPokeblockMenu->caseId == PBLOCK_CASE_FEEDER || sPokeblockMenu->caseId == PBLOCK_CASE_GIVE)
-            gFieldCallback = sub_80AF168;
+            gFieldCallback = FieldCallback_ReturnToEventScript2;
 
         DestroyListMenuTask(data[0], &sSavedPokeblockData.lastItemPage, &sSavedPokeblockData.lastItemPos);
         sub_8136418();
@@ -1011,7 +1011,7 @@ static void Task_HandlePokeblockMenuInput(u8 taskId)
             {
             case LIST_NOTHING_CHOSEN:
                 break;
-            case LIST_B_PRESSED:
+            case LIST_CANCEL:
                 PlaySE(SE_SELECT);
                 gSpecialVar_Result = 0xFFFF;
                 gSpecialVar_ItemId = 0;
@@ -1066,7 +1066,7 @@ static void Task_HandlePokeblocksSwapInput(u8 taskId)
         {
         case LIST_NOTHING_CHOSEN:
             break;
-        case LIST_B_PRESSED: // same id as STOW CASE field
+        case LIST_CANCEL: // same id as STOW CASE field
             PlaySE(SE_SELECT);
             if (gMain.newKeys & A_BUTTON)
                 HandlePokeblocksSwap(taskId, FALSE);

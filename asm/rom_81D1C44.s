@@ -1579,12 +1579,12 @@ _081D2800:
 	.pool
 	thumb_func_end sub_81D2754
 
-	thumb_func_start sub_81D2824
-sub_81D2824: @ 81D2824
+	thumb_func_start InitMoveTutorWindows
+InitMoveTutorWindows: @ 81D2824
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
-	ldr r0, =gUnknown_08625510
+	ldr r0, =gMoveTutorWindowTemplates
 	bl InitWindows
 	bl DeactivateAllTextPrinters
 	movs r0, 0
@@ -1645,21 +1645,21 @@ _081D288E:
 	pop {r4,r5}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_81D2824
+	thumb_func_end InitMoveTutorWindows
 
 	thumb_func_start nullsub_79
 nullsub_79: @ 81D28C4
 	bx lr
 	thumb_func_end nullsub_79
 
-	thumb_func_start sub_81D28C8
-sub_81D28C8: @ 81D28C8
+	thumb_func_start LoadMoveTutorMovesList
+LoadMoveTutorMovesList: @ 81D28C8
 	push {r4-r7,lr}
 	lsls r1, 16
 	lsrs r4, r1, 16
 	ldr r3, =gMultiuseListMenuTemplate
 	adds r2, r3, 0
-	ldr r1, =gUnknown_08625548
+	ldr r1, =gMoveTutorMovesListTemplate
 	ldm r1!, {r5-r7}
 	stm r2!, {r5-r7}
 	ldm r1!, {r5-r7}
@@ -1679,10 +1679,10 @@ _081D28F4:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_81D28C8
+	thumb_func_end LoadMoveTutorMovesList
 
-	thumb_func_start sub_81D28FC
-sub_81D28FC: @ 81D28FC
+	thumb_func_start MoveTutorLoadBattleMoveDescription
+MoveTutorLoadBattleMoveDescription: @ 81D28FC
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -1884,16 +1884,16 @@ _081D2AB6:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_81D28FC
+	thumb_func_end MoveTutorLoadBattleMoveDescription
 
-	thumb_func_start sub_81D2ACC
-sub_81D2ACC: @ 81D2ACC
+	thumb_func_start MoveTutorMenuLoadContestMoveDescription
+MoveTutorMenuLoadContestMoveDescription: @ 81D2ACC
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
 	sub sp, 0xC
 	adds r4, r0, 0
-	bl ShowHideHearts
+	bl MoveTutorShowHideHearts
 	movs r0, 0x1
 	movs r1, 0x11
 	bl FillWindowPixelBuffer
@@ -1997,10 +1997,10 @@ _081D2BB8:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_81D2ACC
+	thumb_func_end MoveTutorMenuLoadContestMoveDescription
 
-	thumb_func_start sub_81D2BD0
-sub_81D2BD0: @ 81D2BD0
+	thumb_func_start MoveTutorCursorCallback
+MoveTutorCursorCallback: @ 81D2BD0
 	push {r4,lr}
 	adds r4, r0, 0
 	lsls r1, 24
@@ -2011,16 +2011,16 @@ sub_81D2BD0: @ 81D2BD0
 	bl PlaySE
 _081D2BE2:
 	adds r0, r4, 0
-	bl sub_81D28FC
+	bl MoveTutorLoadBattleMoveDescription
 	adds r0, r4, 0
-	bl sub_81D2ACC
+	bl MoveTutorMenuLoadContestMoveDescription
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_81D2BD0
+	thumb_func_end MoveTutorCursorCallback
 
-	thumb_func_start sub_81D2BF4
-sub_81D2BF4: @ 81D2BF4
+	thumb_func_start MoveTutorPrintText
+MoveTutorPrintText: @ 81D2BF4
 	push {r4,lr}
 	sub sp, 0x10
 	adds r4, r0, 0
@@ -2052,10 +2052,10 @@ sub_81D2BF4: @ 81D2BF4
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_81D2BF4
+	thumb_func_end MoveTutorPrintText
 
-	thumb_func_start sub_81D2C3C
-sub_81D2C3C: @ 81D2C3C
+	thumb_func_start MoveTutorRunTextPrinters
+MoveTutorRunTextPrinters: @ 81D2C3C
 	push {lr}
 	bl RunTextPrinters
 	movs r0, 0x3
@@ -2064,12 +2064,12 @@ sub_81D2C3C: @ 81D2C3C
 	lsrs r0, 16
 	pop {r1}
 	bx r1
-	thumb_func_end sub_81D2C3C
+	thumb_func_end MoveTutorRunTextPrinters
 
-	thumb_func_start sub_81D2C50
-sub_81D2C50: @ 81D2C50
+	thumb_func_start MoveTutorCreateYesNoMenu
+MoveTutorCreateYesNoMenu: @ 81D2C50
 	push {lr}
-	ldr r0, =gUnknown_08625540
+	ldr r0, =gMoveTutorYesNoMenuTemplate
 	movs r1, 0x1
 	movs r2, 0xE
 	movs r3, 0
@@ -2077,7 +2077,7 @@ sub_81D2C50: @ 81D2C50
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_81D2C50
+	thumb_func_end MoveTutorCreateYesNoMenu
 
 	thumb_func_start sub_81D2C68
 sub_81D2C68: @ 81D2C68

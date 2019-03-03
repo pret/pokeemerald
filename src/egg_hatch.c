@@ -469,7 +469,7 @@ static void Task_EggHatch(u8 taskID)
     {
         CleanupOverworldWindowsAndTilemaps();
         SetMainCallback2(CB2_EggHatch_0);
-        gFieldCallback = sub_80AF168;
+        gFieldCallback = FieldCallback_ReturnToEventScript2;
         DestroyTask(taskID);
     }
 }

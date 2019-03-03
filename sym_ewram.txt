@@ -192,7 +192,7 @@ gPlayerFacingPosition: @ 203AB40
 	.include "src/rom_81520A8.o"
 	.include "src/save.o"
 	.include "src/mystery_event_script.o"
-	.include "src/learn_move.o"
+	.include "src/move_tutor.o"
 	.include "src/decoration_inventory.o"
 	.include "src/roamer.o"
 	.include "src/battle_tower.o"

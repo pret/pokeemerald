@@ -1688,7 +1688,7 @@ void CB2_ReturnToFieldContinueScript(void)
 void CB2_ReturnToFieldContinueScriptPlayMapMusic(void)
 {
     FieldClearVBlankHBlankCallbacks();
-    gFieldCallback = sub_80AF168;
+    gFieldCallback = FieldCallback_ReturnToEventScript2;
     CB2_ReturnToField();
 }
 

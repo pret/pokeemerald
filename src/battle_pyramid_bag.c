@@ -576,7 +576,7 @@ static void SetBagItemsListTemplate(void)
     }
     StringCopy(gPyramidBagResources->itemStrings[i], gText_CloseBag);
     gPyramidBagResources->bagListItems[i].name = gPyramidBagResources->itemStrings[i];
-    gPyramidBagResources->bagListItems[i].id = LIST_B_PRESSED;
+    gPyramidBagResources->bagListItems[i].id = LIST_CANCEL;
     gMultiuseListMenuTemplate = gUnknown_0861F2C0;
     gMultiuseListMenuTemplate.totalItems = gPyramidBagResources->listMenuCount;
     gMultiuseListMenuTemplate.items = gPyramidBagResources->bagListItems;
@@ -607,7 +607,7 @@ static void PyramidBagMoveCursorFunc(s32 itemIndex, bool8 onInit, struct ListMen
     if (gPyramidBagResources->unk814 == 0xFF)
     {
         sub_81C6FF8(gPyramidBagResources->unk815 ^ 1);
-        if (itemIndex != LIST_B_PRESSED)
+        if (itemIndex != LIST_CANCEL)
             ShowItemImage(gSaveBlock2Ptr->frontier.pyramidBag.itemId[gSaveBlock2Ptr->frontier.lvlMode][itemIndex], gPyramidBagResources->unk815);
         else
             ShowItemImage(0xFFFF, gPyramidBagResources->unk815);
@@ -619,7 +619,7 @@ static void PyramidBagMoveCursorFunc(s32 itemIndex, bool8 onInit, struct ListMen
 static void PrintItemQuantity(u8 windowId, s32 itemIndex, u8 y)
 {
     s32 xAlign;
-    if (itemIndex == LIST_B_PRESSED)
+    if (itemIndex == LIST_CANCEL)
         return;
 
     if (gPyramidBagResources->unk814 != 0xFF)
@@ -641,7 +641,7 @@ static void PrintItemQuantity(u8 windowId, s32 itemIndex, u8 y)
 static void PrintItemDescription(s32 listMenuId)
 {
     const u8 *desc;
-    if (listMenuId != LIST_B_PRESSED)
+    if (listMenuId != LIST_CANCEL)
     {
         desc = ItemId_GetDescription(gSaveBlock2Ptr->frontier.pyramidBag.itemId[gSaveBlock2Ptr->frontier.lvlMode][listMenuId]);
     }
@@ -859,7 +859,7 @@ static void Task_HandlePyramidBagInput(u8 taskId)
             {
             case LIST_NOTHING_CHOSEN:
                 break;
-            case LIST_B_PRESSED:
+            case LIST_CANCEL:
                 PlaySE(SE_SELECT);
                 gSpecialVar_ItemId = 0;
                 sub_81C5B14(taskId);
@@ -1293,7 +1293,7 @@ static void Task_ItemSwapHandleInput(u8 taskId)
             {
             case LIST_NOTHING_CHOSEN:
                 break;
-            case LIST_B_PRESSED:
+            case LIST_CANCEL:
                 PlaySE(SE_SELECT);
                 if (gMain.newKeys & A_BUTTON)
                     PerformItemSwap(taskId);

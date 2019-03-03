@@ -1108,7 +1108,7 @@ void Task_BagMenu(u8 taskId)
             {
                 case LIST_NOTHING_CHOSEN:
                     break;
-                case LIST_B_PRESSED:
+                case LIST_CANCEL:
                     if (gUnknown_0203CE58.location == 5)
                     {
                         PlaySE(SE_HAZURE);
@@ -1324,7 +1324,7 @@ void sub_81AC3C0(u8 taskId)
             {
                 case LIST_NOTHING_CHOSEN:
                     break;
-                case LIST_B_PRESSED:
+                case LIST_CANCEL:
                     PlaySE(SE_SELECT);
                     if (gMain.newKeys & A_BUTTON)
                         sub_81AC498(taskId);

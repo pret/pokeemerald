@@ -6061,7 +6061,7 @@ static void sub_807F110(u8 taskId)
     if (!gPaletteFade.active)
     {
         SetMainCallback2(sub_807B270);
-        gFieldCallback = sub_80AF168;
+        gFieldCallback = FieldCallback_ReturnToEventScript2;
         DestroyTask(taskId);
     }
 }

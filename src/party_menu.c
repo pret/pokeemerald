@@ -7287,7 +7287,7 @@ static void sub_81B9640(u8 taskId)
 void sub_81B968C(void)
 {
     ShowPokemonSummaryScreen(PSS_MODE_SELECT_MOVE, gPlayerParty, gSpecialVar_0x8004, gPlayerPartyCount - 1, CB2_ReturnToField);
-    gFieldCallback = sub_80AF168;
+    gFieldCallback = FieldCallback_ReturnToEventScript2;
 }
 
 void sub_81B96D0(void)

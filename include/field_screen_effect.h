@@ -5,7 +5,7 @@ void pal_fill_for_maplights(void);
 void pal_fill_black(void);
 void WarpFadeScreen(void);
 void sub_80AF128(void);
-void sub_80AF168(void);
+void FieldCallback_ReturnToEventScript2(void);
 void sub_80AF188(void);
 void sub_80AF214(void);
 void sub_80AF2B4(u8 taskId);

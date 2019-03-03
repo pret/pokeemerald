@@ -4,7 +4,7 @@
 #include "window.h"
 
 #define LIST_NOTHING_CHOSEN -1
-#define LIST_B_PRESSED -2
+#define LIST_CANCEL -2
 #define LIST_HEADER -3
 
 #define LIST_NO_MULTIPLE_SCROLL     0

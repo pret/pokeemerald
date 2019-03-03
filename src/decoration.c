@@ -939,7 +939,7 @@ void sub_812764C(u8 taskId)
         {
             case LIST_NOTHING_CHOSEN:
                 break;
-            case LIST_B_PRESSED:
+            case LIST_CANCEL:
                 PlaySE(SE_SELECT);
                 SecretBasePC_SelectedDecorActions[data[11]][1](taskId);
                 break;

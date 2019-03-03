@@ -391,7 +391,7 @@ void sub_80E8FD0(u8 taskId)
             }
             sub_80E8F9C();
             WarpIntoMap();
-            gFieldCallback = sub_80AF168;
+            gFieldCallback = FieldCallback_ReturnToEventScript2;
             SetMainCallback2(CB2_LoadMap);
             DestroyTask(taskId);
             break;
@@ -959,7 +959,7 @@ void sub_80E9E90(u8 taskId)
     {
         case LIST_NOTHING_CHOSEN:
             break;
-        case LIST_B_PRESSED:
+        case LIST_CANCEL:
             PlaySE(SE_SELECT);
             DestroyListMenuTask(data[5], NULL, NULL);
             RemoveScrollIndicatorArrowPair(data[8]);

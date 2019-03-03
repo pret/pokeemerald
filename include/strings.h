@@ -859,15 +859,15 @@ extern const u8 gText_Winona[];
 extern const u8 gText_Phoebe[];
 extern const u8 gText_Glacia[];
 
-extern const u8 gText_PkmnLearnedMove4[];
-extern const u8 gText_PkmnTryingToLearnMove[];
-extern const u8 gText_WhichMoveToForget2[];
-extern const u8 gText_StopTryingToTeachMove[];
-extern const u8 gText_12AndPoof[];
-extern const u8 gText_PkmnForgotMoveAndLearnedNew[];
+extern const u8 gText_MoveTutorPkmnLearnedMove[];
+extern const u8 gText_MoveTutorPkmnTryingToLearnMove[];
+extern const u8 gText_MoveTutorWhichMoveToForget[];
+extern const u8 gText_MoveTutorStopTryingToTeachMove[];
+extern const u8 gText_MoveTutorAndPoof[];
+extern const u8 gText_MoveTutorPkmnForgotMoveAndLearnedNew[];
 extern const u8 gText_TeachWhichMoveToPkmn[];
-extern const u8 gText_GiveUpTeachingNewMove[];
-extern const u8 gText_TeachX[];
+extern const u8 gText_MoveTutorGiveUp[];
+extern const u8 gText_MoveTutorTeachMoveConfirm[];
 
 extern const u8 gText_Kira[];
 extern const u8 gText_Amy[];
