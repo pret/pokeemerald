@@ -226,9 +226,9 @@ static void berry_fix_gpu_set(void)
 
     DmaCopy32(3, sUnknown_08618138, BG_PLTT + 0x1E0, 0x20);
     SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_1D_MAP);
-    FillWindowPixelBuffer(2, 0);
-    FillWindowPixelBuffer(3, 0);
-    FillWindowPixelBuffer(0, 0xAA);
+    FillWindowPixelBuffer(2, PIXEL_FILL(0));
+    FillWindowPixelBuffer(3, PIXEL_FILL(0));
+    FillWindowPixelBuffer(0, PIXEL_FILL(0xA));
 
     width = GetStringWidth(0, sUnknown_08617E9B, 0);
     left = (0x78 - width) / 2;
@@ -273,7 +273,7 @@ static int berry_fix_text_update(int checkval)
 static void berry_fix_text_print(int scene)
 {
     FillBgTilemapBufferRect_Palette0(0, 0, 0, 0, 32, 32);
-    FillWindowPixelBuffer(1, 0xAA);
+    FillWindowPixelBuffer(1, PIXEL_FILL(0xA));
     AddTextPrinterParameterized3(1, 1, 0, 0, sUnknown_08618158, -1, gUnknown_08618160[scene]);
     PutWindowTilemap(1);
     CopyWindowToVram(1, 2);

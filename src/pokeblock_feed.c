@@ -581,7 +581,7 @@ static bool8 TransitionToPokeblockFeedScene(void)
         gMain.state++;
         break;
     case 10:
-        SetWindowBorderStyle(0, 1, 1, 14);
+        DrawStdFrameWithCustomTileAndPalette(0, 1, 1, 14);
         gMain.state++;
         break;
     case 11:
@@ -704,7 +704,7 @@ static void HandleInitWindows(void)
     DeactivateAllTextPrinters();
     LoadUserWindowBorderGfx(0, 1, 0xE0);
     LoadPalette(gUnknown_0860F074, 0xF0, 0x20);
-    FillWindowPixelBuffer(0, 0);
+    FillWindowPixelBuffer(0, PIXEL_FILL(0));
     PutWindowTilemap(0);
     schedule_bg_copy_tilemap_to_vram(0);
 }

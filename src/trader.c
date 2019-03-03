@@ -73,7 +73,7 @@ void CreateAvailableDecorationsMenu(u8 taskId)
     }
     windowTemplate.width = convert_pixel_width_to_tile_width(windowWidth);
     data[3] = AddWindow(&windowTemplate);
-    SetWindowBorderStyle(data[3], FALSE, 0x214, 14);
+    DrawStdFrameWithCustomTileAndPalette(data[3], FALSE, 0x214, 14);
     for (i = 0; i < 4; i++)
     {
         if (trader->decorIds[i] > NUM_DECORATIONS)
@@ -98,7 +98,7 @@ void sub_8133BE4(u8 taskId, u8 decorationId)
         gSpecialVar_0x8004 = decorationId;
     }
 
-    sub_8198070(data[3], FALSE);
+    ClearStdWindowAndFrameToTransparent(data[3], FALSE);
     ClearWindowTilemap(data[3]);
     RemoveWindow(data[3]);
     schedule_bg_copy_tilemap_to_vram(0);

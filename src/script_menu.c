@@ -1202,7 +1202,7 @@ bool8 ScriptMenu_YesNo(u8 left, u8 top)
     else
     {
         gSpecialVar_Result = 0xFF;
-        DisplayYesNoMenu();
+        DisplayYesNoMenuDefaultYes();
         taskId = CreateTask(Task_HandleYesNoInput, 0x50);
         return TRUE;
     }
@@ -1630,7 +1630,7 @@ u8 CreateWindowFromRect(u8 x, u8 y, u8 width, u8 height)
 
 void sub_80E2A78(u8 windowId)
 {
-    sub_8198070(windowId, TRUE);
+    ClearStdWindowAndFrameToTransparent(windowId, TRUE);
     RemoveWindow(windowId);
 }
 
@@ -1639,27 +1639,27 @@ static void sub_80E2A94(u8 multichoiceId)
     switch (multichoiceId)
     {
         case 77:
-            FillWindowPixelBuffer(0, 0x11);
+            FillWindowPixelBuffer(0, PIXEL_FILL(1));
             AddTextPrinterParameterized2(0, 1, gUnknown_0858BBAC[Menu_GetCursorPos()], 0, NULL, 2, 1, 3);
             break;
         case 76:
-            FillWindowPixelBuffer(0, 0x11);
+            FillWindowPixelBuffer(0, PIXEL_FILL(1));
             AddTextPrinterParameterized2(0, 1, gUnknown_0858BB9C[Menu_GetCursorPos()], 0, NULL, 2, 1, 3);
             break;
         case 78:
-            FillWindowPixelBuffer(0, 0x11);
+            FillWindowPixelBuffer(0, PIXEL_FILL(1));
             AddTextPrinterParameterized2(0, 1, gUnknown_0858BBBC[Menu_GetCursorPos()], 0, NULL, 2, 1, 3);
             break;
         case 79:
-            FillWindowPixelBuffer(0, 0x11);
+            FillWindowPixelBuffer(0, PIXEL_FILL(1));
             AddTextPrinterParameterized2(0, 1, gUnknown_0858BBCC[Menu_GetCursorPos()], 0, NULL, 2, 1, 3);
             break;
         case 75:
-            FillWindowPixelBuffer(0, 0x11);
+            FillWindowPixelBuffer(0, PIXEL_FILL(1));
             AddTextPrinterParameterized2(0, 1, gUnknown_0858BBEC[Menu_GetCursorPos()], 0, NULL, 2, 1, 3);
             break;
         case 74:
-            FillWindowPixelBuffer(0, 0x11);
+            FillWindowPixelBuffer(0, PIXEL_FILL(1));
             AddTextPrinterParameterized2(0, 1, gUnknown_0858BBE0[Menu_GetCursorPos()], 0, NULL, 2, 1, 3);
             break;
     }
