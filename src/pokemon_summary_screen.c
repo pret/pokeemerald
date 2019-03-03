@@ -1349,7 +1349,7 @@ static bool8 ExtractMonDataToSummaryStruct(struct Pokemon *a)
         }
         break;
     case 3:
-        GetMonData(a, MON_DATA_OT_NAME, &sum->OTName);
+        GetMonData(a, MON_DATA_OT_NAME, sum->OTName);
         ConvertInternationalString((u8*)&sum->OTName, GetMonData(a, MON_DATA_LANGUAGE));
         sum->unk7 = sub_81B205C(a);
         sum->OTGender = GetMonData(a, MON_DATA_OT_GENDER);

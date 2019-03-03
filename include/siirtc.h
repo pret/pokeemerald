@@ -39,10 +39,10 @@ struct SiiRtcInfo
     u8 alarmMinute;
 };
 
-void SiiRtcUnprotect();
-void SiiRtcProtect();
-u8 SiiRtcProbe();
-bool8 SiiRtcReset();
+void SiiRtcUnprotect(void);
+void SiiRtcProtect(void);
+u8 SiiRtcProbe(void);
+bool8 SiiRtcReset(void);
 bool8 SiiRtcGetStatus(struct SiiRtcInfo *rtc);
 bool8 SiiRtcSetStatus(struct SiiRtcInfo *rtc);
 bool8 SiiRtcGetDateTime(struct SiiRtcInfo *rtc);
