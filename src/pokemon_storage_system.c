@@ -6501,7 +6501,7 @@ static void InitCanRelaseMonVars(void)
     }
 
     sub_80CE350(sPSSData->field_2176);
-    sPSSData->field_2174 = GetMonData(&sPSSData->field_2108, MON_DATA_KNOWN_MOVES, sPSSData->field_2176);
+    sPSSData->field_2174 = GetMonData(&sPSSData->field_2108, MON_DATA_KNOWN_MOVES, (u8*)sPSSData->field_2176);
     if (sPSSData->field_2174 != 0)
     {
         sPSSData->field_216D = 0;
@@ -6559,7 +6559,7 @@ static s8 RunCanReleaseMon(void)
         {
             if (sPSSData->field_2170 != TOTAL_BOXES_COUNT || sPSSData->field_2171 != i)
             {
-                knownMoves = GetMonData(gPlayerParty + i, MON_DATA_KNOWN_MOVES, sPSSData->field_2176);
+                knownMoves = GetMonData(gPlayerParty + i, MON_DATA_KNOWN_MOVES, (u8*)sPSSData->field_2176);
                 sPSSData->field_2174 &= ~(knownMoves);
             }
         }
@@ -6578,7 +6578,7 @@ static s8 RunCanReleaseMon(void)
     case 1:
         for (i = 0; i < IN_BOX_COUNT; i++)
         {
-            knownMoves = GetAndCopyBoxMonDataAt(sPSSData->field_216E, sPSSData->field_216F, MON_DATA_KNOWN_MOVES, sPSSData->field_2176);
+            knownMoves = GetAndCopyBoxMonDataAt(sPSSData->field_216E, sPSSData->field_216F, MON_DATA_KNOWN_MOVES, (u8*)sPSSData->field_2176);
             if (knownMoves != 0
                 && !(sPSSData->field_2170 == sPSSData->field_216E && sPSSData->field_2171 == sPSSData->field_216F))
             {
@@ -10357,7 +10357,7 @@ bool32 AnyStorageMonWithMove(u16 moveId)
         {
             if (GetBoxMonData(&gPokemonStoragePtr->boxes[i][j], MON_DATA_SANITY_HAS_SPECIES)
                 && !GetBoxMonData(&gPokemonStoragePtr->boxes[i][j], MON_DATA_SANITY_IS_EGG)
-                && GetBoxMonData(&gPokemonStoragePtr->boxes[i][j], MON_DATA_KNOWN_MOVES, moves))
+                && GetBoxMonData(&gPokemonStoragePtr->boxes[i][j], MON_DATA_KNOWN_MOVES, (u8*)moves))
                 return TRUE;
         }
     }
