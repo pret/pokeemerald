@@ -1860,7 +1860,7 @@ void sub_8139B60(void)
 
 void sub_8139C10(void)
 {
-    sub_8198070(gUnknown_0203AB5E, TRUE);
+    ClearStdWindowAndFrameToTransparent(gUnknown_0203AB5E, TRUE);
     RemoveWindow(gUnknown_0203AB5E);
 }
 
@@ -2645,8 +2645,8 @@ static void sub_813A570(u8 taskId)
     sub_813A738(taskId);
     DestroyListMenuTask(task->data[14], NULL, NULL);
     Free(gUnknown_0203AB64);
-    sub_8198070(task->data[13], 1);
-    FillWindowPixelBuffer(task->data[13], 0);
+    ClearStdWindowAndFrameToTransparent(task->data[13], 1);
+    FillWindowPixelBuffer(task->data[13], PIXEL_FILL(0));
     CopyWindowToVram(task->data[13], 2);
     RemoveWindow(task->data[13]);
     DestroyTask(taskId);
@@ -2890,7 +2890,7 @@ void sub_813A958(void)
 
 void sub_813A988(void)
 {
-    sub_8198070(gUnknown_0203AB6D, TRUE);
+    ClearStdWindowAndFrameToTransparent(gUnknown_0203AB6D, TRUE);
     RemoveWindow(gUnknown_0203AB6D);
 }
 
@@ -2942,7 +2942,7 @@ void sub_813AA18(void)
 
 void sub_813AA44(void)
 {
-    sub_8198070(gUnknown_0203AB6E, TRUE);
+    ClearStdWindowAndFrameToTransparent(gUnknown_0203AB6E, TRUE);
     RemoveWindow(gUnknown_0203AB6E);
 }
 
@@ -3001,7 +3001,7 @@ static void sub_813AA60(u16 a0, u16 a1)
 
     if (a0 > 2 && a0 < 7)
     {
-        FillWindowPixelRect(0, 0x11, 0, 0, 216, 32);
+        FillWindowPixelRect(0, PIXEL_FILL(1), 0, 0, 216, 32);
         switch (a0)
         {
             case 3:
@@ -3140,7 +3140,7 @@ static void sub_813AD34(u8 a0, u16 a1)
 
     if (a0 == 9 || a0 == 10)
     {
-        FillWindowPixelRect(gUnknown_0203AB5E, 0x11, 0, 0, 96, 48);
+        FillWindowPixelRect(gUnknown_0203AB5E, PIXEL_FILL(1), 0, 0, 96, 48);
         if (a0 == 10)
         {
             AddTextPrinterParameterized(gUnknown_0203AB5E, 1, gUnknown_085B3254[a1], 0, 1, 0, NULL);
@@ -3154,7 +3154,7 @@ static void sub_813AD34(u8 a0, u16 a1)
 
 void sub_813ADB8(void)
 {
-    sub_8198070(gUnknown_0203AB5E, TRUE);
+    ClearStdWindowAndFrameToTransparent(gUnknown_0203AB5E, TRUE);
     RemoveWindow(gUnknown_0203AB5E);
 }
 
@@ -3226,8 +3226,8 @@ void sub_813AF48(void)
         struct Task *task = &gTasks[taskId];
         DestroyListMenuTask(task->data[14], NULL, NULL);
         Free(gUnknown_0203AB64);
-        sub_8198070(task->data[13], TRUE);
-        FillWindowPixelBuffer(task->data[13], 0);
+        ClearStdWindowAndFrameToTransparent(task->data[13], TRUE);
+        FillWindowPixelBuffer(task->data[13], PIXEL_FILL(0));
         ClearWindowTilemap(task->data[13]);
         CopyWindowToVram(task->data[13], 2);
         RemoveWindow(task->data[13]);

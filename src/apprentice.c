@@ -1619,7 +1619,7 @@ static u8 CreateAndShowWindow(u8 left, u8 top, u8 width, u8 height)
 
 static void RemoveAndHideWindow(u8 windowId)
 {
-    sub_8198070(windowId, TRUE);
+    ClearStdWindowAndFrameToTransparent(windowId, TRUE);
     RemoveWindow(windowId);
 }
 
@@ -1826,7 +1826,7 @@ static void Script_PrintMessage(void)
     FreezeEventObjects();
     sub_808B864();
     sub_808BCF4();
-    NewMenuHelpers_DrawDialogueFrame(0, 1);
+    DrawDialogueFrame(0, 1);
     PrintMessage();
 }
 

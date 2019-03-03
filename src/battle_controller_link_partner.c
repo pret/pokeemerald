@@ -90,7 +90,7 @@ static void LinkPartnerHandleBattleAnimation(void);
 static void LinkPartnerHandleLinkStandbyMsg(void);
 static void LinkPartnerHandleResetActionMoveSelection(void);
 static void LinkPartnerHandleCmd55(void);
-static void nullsub_113(void);
+static void SpriteCB_Null3(void);
 
 static void LinkPartnerBufferRunCommand(void);
 static void LinkPartnerBufferExecCompleted(void);
@@ -161,10 +161,10 @@ static void (*const sLinkPartnerBufferCommands[CONTROLLER_CMDS_COUNT])(void) =
     LinkPartnerHandleLinkStandbyMsg,
     LinkPartnerHandleResetActionMoveSelection,
     LinkPartnerHandleCmd55,
-    nullsub_113
+    SpriteCB_Null3
 };
 
-static void nullsub_112(void)
+static void SpriteCB_Null2(void)
 {
 }
 
@@ -1564,7 +1564,7 @@ static void LinkPartnerHandleIntroTrainerBallThrow(void)
         gTasks[gBattlerStatusSummaryTaskId[gActiveBattler]].func = Task_HidePartyStatusSummary;
 
     gBattleSpritesDataPtr->animationData->field_9_x1 = 1;
-    gBattlerControllerFuncs[gActiveBattler] = nullsub_112;
+    gBattlerControllerFuncs[gActiveBattler] = SpriteCB_Null2;
 }
 
 static void sub_814DCCC(u8 taskId)
@@ -1687,6 +1687,6 @@ static void LinkPartnerHandleCmd55(void)
     gBattlerControllerFuncs[gActiveBattler] = sub_80587B0;
 }
 
-static void nullsub_113(void)
+static void SpriteCB_Null3(void)
 {
 }

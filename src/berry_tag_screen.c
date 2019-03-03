@@ -381,7 +381,7 @@ static void PrintTextInBerryTagScreen(u8 windowId, const u8 *text, u8 x, u8 y, s
 static void AddBerryTagTextToBg0(void)
 {
     memcpy(GetBgTilemapBuffer(0), sBerryTag->tilemapBuffers[2], sizeof(sBerryTag->tilemapBuffers[2]));
-    FillWindowPixelBuffer(WIN_BERRY_TAG, 0xFF);
+    FillWindowPixelBuffer(WIN_BERRY_TAG, PIXEL_FILL(15));
     PrintTextInBerryTagScreen(WIN_BERRY_TAG, gText_BerryTag, GetStringCenterAlignXOffset(1, gText_BerryTag, 0x40), 1, 0, 1);
     PutWindowTilemap(WIN_BERRY_TAG);
     schedule_bg_copy_tilemap_to_vram(0);
@@ -598,7 +598,7 @@ static void Task_DisplayAnotherBerry(u8 taskId)
         switch (data[0])
         {
         case 0x30:
-            FillWindowPixelBuffer(0, 0);
+            FillWindowPixelBuffer(0, PIXEL_FILL(0));
             break;
         case 0x40:
             PrintBerryNumberAndName();
@@ -608,7 +608,7 @@ static void Task_DisplayAnotherBerry(u8 taskId)
             CreateBerrySprite();
             break;
         case 0x60:
-            FillWindowPixelBuffer(1, 0);
+            FillWindowPixelBuffer(1, PIXEL_FILL(0));
             break;
         case 0x70:
             PrintBerrySize();
@@ -620,7 +620,7 @@ static void Task_DisplayAnotherBerry(u8 taskId)
             SetFlavorCirclesVisiblity();
             break;
         case 0xA0:
-            FillWindowPixelBuffer(2, 0);
+            FillWindowPixelBuffer(2, PIXEL_FILL(0));
             break;
         case 0xB0:
             PrintBerryDescription1();
@@ -635,7 +635,7 @@ static void Task_DisplayAnotherBerry(u8 taskId)
         switch (data[0])
         {
         case 0x30:
-            FillWindowPixelBuffer(2, 0);
+            FillWindowPixelBuffer(2, PIXEL_FILL(0));
             break;
         case 0x40:
             PrintBerryDescription2();
@@ -647,7 +647,7 @@ static void Task_DisplayAnotherBerry(u8 taskId)
             SetFlavorCirclesVisiblity();
             break;
         case 0x70:
-            FillWindowPixelBuffer(1, 0);
+            FillWindowPixelBuffer(1, PIXEL_FILL(0));
             break;
         case 0x80:
             PrintBerryFirmness();
@@ -660,7 +660,7 @@ static void Task_DisplayAnotherBerry(u8 taskId)
             CreateBerrySprite();
             break;
         case 0xB0:
-            FillWindowPixelBuffer(0, 0);
+            FillWindowPixelBuffer(0, PIXEL_FILL(0));
             break;
         case 0xC0:
             PrintBerryNumberAndName();

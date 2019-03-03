@@ -90,7 +90,7 @@ void CB2_InitMysteryEventMenu(void)
 
         DeactivateAllTextPrinters();
         for (i = 0; i < 2; i++)
-            FillWindowPixelBuffer(i, 0);
+            FillWindowPixelBuffer(i, PIXEL_FILL(0));
 
         FillBgTilemapBufferRect_Palette0(0, 0, 0, 0, 0x1E, 0x14);
         LoadUserWindowBorderGfx(0, 1u, 0xD0u);
@@ -133,7 +133,7 @@ static void CB2_MysteryEventMenu(void)
     switch (gMain.state)
     {
     case 0:
-        SetWindowBorderStyle(0, 1, 1, 0xD);
+        DrawStdFrameWithCustomTileAndPalette(0, 1, 1, 0xD);
         PutWindowTilemap(0);
         CopyWindowToVram(0, 3);
         ShowBg(0);
@@ -180,7 +180,7 @@ static void CB2_MysteryEventMenu(void)
             {
                 PlaySE(SE_SELECT);
                 CheckShouldAdvanceLinkState();
-                SetWindowBorderStyle(1, 1, 1, 0xD);
+                DrawStdFrameWithCustomTileAndPalette(1, 1, 1, 0xD);
                 PrintMysteryMenuText(1, gText_LoadingEvent, 1, 2, 0);
                 PutWindowTilemap(1);
                 CopyWindowToVram(1, 3);
@@ -313,6 +313,6 @@ static void PrintMysteryMenuText(u8 windowId, const u8 *text, u8 x, u8 y, s32 sp
     textColor[1] = 2;
     textColor[2] = 3;
 
-    FillWindowPixelBuffer(windowId, (textColor[0]) | (textColor[0] << 4));
+    FillWindowPixelBuffer(windowId, PIXEL_FILL(textColor[0]));
     AddTextPrinterParameterized4(windowId, 1, x, y, letterSpacing, lineSpacing, textColor, speed, text);
 }

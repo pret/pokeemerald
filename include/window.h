@@ -1,6 +1,8 @@
 #ifndef GUARD_WINDOW_H
 #define GUARD_WINDOW_H
 
+#define PIXEL_FILL(num) ((num) | ((num) << 4))
+
 enum
 {
     WINDOW_BG,
@@ -72,7 +74,5 @@ extern void* gUnknown_03002F70[];
 extern u32 filler_03002F58;
 extern u32 filler_03002F5C;
 extern u32 filler_03002F64;
-
-extern u8 gUnknown_03002F60;
 
 #endif // GUARD_WINDOW_H

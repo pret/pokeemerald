@@ -27,15 +27,15 @@ void ShowCoinsWindow(u32 coinAmount, u8 x, u8 y)
     struct WindowTemplate template;
     SetWindowTemplateFields(&template, 0, x, y, 8, 2, 0xF, 0x141);
     sCoinsWindowId = AddWindow(&template);
-    FillWindowPixelBuffer(sCoinsWindowId, 0);
+    FillWindowPixelBuffer(sCoinsWindowId, PIXEL_FILL(0));
     PutWindowTilemap(sCoinsWindowId);
-    SetWindowBorderStyle(sCoinsWindowId, FALSE, 0x214, 0xE);
+    DrawStdFrameWithCustomTileAndPalette(sCoinsWindowId, FALSE, 0x214, 0xE);
     PrintCoinsString(coinAmount);
 }
 
 void HideCoinsWindow(void)
 {
-    sub_819746C(sCoinsWindowId, TRUE);
+    ClearStdWindowAndFrame(sCoinsWindowId, TRUE);
     RemoveWindow(sCoinsWindowId);
 }
 
