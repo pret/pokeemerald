@@ -14,6 +14,7 @@
 #include "menu.h"
 #include "new_game.h"
 #include "party_menu.h"
+#include "pokemon.h"
 #include "random.h"
 #include "script.h"
 #include "script_menu.h"
@@ -1291,9 +1292,9 @@ static u16 sub_819FF98(u8 arg0)
     else
         level = 60;
 
-    for (j = 0; learnset[j] != 0xFFFF; j++)
+    for (j = 0; learnset[j] != LEVEL_UP_END; j++)
     {
-        if ((learnset[j] & 0xFE00) > (level << 9))
+        if ((learnset[j] & LEVEL_UP_LEVEL_MASK) > LEVEL_UP_NUM_AS_LEVEL(level))
             break;
     }
 
@@ -1322,7 +1323,7 @@ static u16 sub_819FF98(u8 arg0)
 
                 for (; j < knownMovesCount; j++)
                 {
-                    if ((learnset[j] & 0x1FF) == moveId)
+                    if (LEVEL_UP_GET_MOVE(learnset[j]) == moveId)
                     {
                         valid = FALSE;
                         break;
@@ -1342,11 +1343,11 @@ static u16 sub_819FF98(u8 arg0)
                 do
                 {
                     u8 learnsetId = Random() % (knownMovesCount - MAX_MON_MOVES);
-                    moveId = learnset[learnsetId] & 0x1FF;
+                    moveId = LEVEL_UP_GET_MOVE(learnset[learnsetId]);
                     valid = TRUE;
                     for (j = knownMovesCount - MAX_MON_MOVES; j < knownMovesCount; j++)
                     {
-                        if ((learnset[j] & 0x1FF) == moveId)
+                        if (LEVEL_UP_GET_MOVE(learnset[j]) == moveId)
                         {
                             valid = FALSE;
                             break;
@@ -1394,9 +1395,9 @@ static void GetLatestLearnedMoves(u16 species, u16 *moves)
         level = 60;
 
     learnset = gLevelUpLearnsets[species];
-    for (i = 0; learnset[i] != 0xFFFF; i++)
+    for (i = 0; learnset[i] != LEVEL_UP_END; i++)
     {
-        if ((learnset[i] & 0xFE00) > (level << 9))
+        if ((learnset[i] & LEVEL_UP_LEVEL_MASK) > LEVEL_UP_NUM_AS_LEVEL(level))
             break;
     }
 
@@ -1405,7 +1406,7 @@ static void GetLatestLearnedMoves(u16 species, u16 *moves)
         knownMovesCount = MAX_MON_MOVES;
 
     for (j = 0; j < knownMovesCount; j++)
-        moves[j] = learnset[(i - 1) - j] & 0x1FF;
+        moves[j] = LEVEL_UP_GET_MOVE(learnset[(i - 1) - j]);
 }
 
 static u16 sub_81A0284(u8 arg0, u8 speciesTableId, u8 arg2)

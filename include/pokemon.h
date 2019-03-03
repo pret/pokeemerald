@@ -134,6 +134,13 @@
 #define MAX_TOTAL_EVS 510
 #define UNOWN_FORM_COUNT 28
 
+#define LEVEL_UP_MOVE(level, move) ((level << 9) | move)
+#define LEVEL_UP_END 0xFFFF
+#define LEVEL_UP_MOVE_MASK 0x1FF
+#define LEVEL_UP_LEVEL_MASK 0xFE00
+#define LEVEL_UP_NUM_AS_LEVEL(level) (level << 9)
+#define LEVEL_UP_GET_MOVE(entry) (entry & LEVEL_UP_MOVE_MASK)
+
 struct PokemonSubstruct0
 {
     u16 species;
