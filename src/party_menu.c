@@ -2936,7 +2936,7 @@ u8 pokemon_ailments_get_primary(u32 status)
     return AILMENT_NONE;
 }
 
-u8 sub_81B205C(struct Pokemon *mon)
+u8 GetMonAilment(struct Pokemon *mon)
 {
     u8 ailment;
 
@@ -3355,7 +3355,7 @@ static void DisplayPartyPokemonLevelCheck(struct Pokemon *mon, struct Struct203C
 {
     if (GetMonData(mon, MON_DATA_SPECIES) != SPECIES_NONE)
     {
-        u8 ailment = sub_81B205C(mon);
+        u8 ailment = GetMonAilment(mon);
         if (ailment == AILMENT_NONE || ailment == AILMENT_PKRS)
         {
             if (c != 0)
@@ -5183,7 +5183,7 @@ static void party_menu_link_mon_status_condition_object(u16 species, u8 status, 
 
 static void party_menu_get_status_condition_and_update_object(struct Pokemon *mon, struct Struct203CEDC *ptr)
 {
-    party_menu_update_status_condition_object(sub_81B205C(mon), ptr);
+    party_menu_update_status_condition_object(GetMonAilment(mon), ptr);
 }
 
 static void party_menu_update_status_condition_object(u8 status, struct Struct203CEDC *ptr)
