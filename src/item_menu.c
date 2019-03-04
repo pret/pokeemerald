@@ -1,3 +1,4 @@
+#include <string.h>
 #include "global.h"
 #include "item_menu.h"
 #include "battle.h"
@@ -40,7 +41,6 @@
 #include "shop.h"
 #include "sound.h"
 #include "sprite.h"
-#include "string.h"
 #include "strings.h"
 #include "string_util.h"
 #include "task.h"

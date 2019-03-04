@@ -1,6 +1,6 @@
+#include <string.h>
 #include "global.h"
 #include "menu.h"
-#include "string.h"
 #include "string_util.h"
 #include "task.h"
 #include "text.h"

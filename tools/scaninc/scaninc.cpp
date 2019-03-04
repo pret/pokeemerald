@@ -25,8 +25,7 @@
 #include <set>
 #include <string>
 #include "scaninc.h"
-#include "asm_file.h"
-#include "c_file.h"
+#include "source_file.h"
 
 bool CanOpenFile(std::string path)
 {
@@ -46,7 +45,7 @@ int main(int argc, char **argv)
     std::queue<std::string> filesToProcess;
     std::set<std::string> dependencies;
 
-    std::list<std::string> includeDirs;
+    std::vector<std::string> includeDirs;
 
     argc--;
     argv++;
@@ -83,79 +82,50 @@ int main(int argc, char **argv)
 
     std::string initialPath(argv[0]);
 
-    std::size_t pos = initialPath.find_last_of('.');
+    filesToProcess.push(initialPath);
 
-    if (pos == std::string::npos)
-        FATAL_ERROR("no file extension in path \"%s\"\n", initialPath.c_str());
-
-    std::string extension = initialPath.substr(pos + 1);
-
-    std::string srcDir("");
-    std::size_t slash = initialPath.rfind('/');
-    if (slash != std::string::npos)
+    while (!filesToProcess.empty())
     {
-        srcDir = initialPath.substr(0, slash + 1);
-    }
-    includeDirs.push_back(srcDir);
+        std::string filePath = filesToProcess.front();
+        SourceFile file(filePath);
+        filesToProcess.pop();
 
-    if (extension == "c" || extension == "h")
-    {
-        filesToProcess.push(initialPath);
-
-        while (!filesToProcess.empty())
+        includeDirs.push_back(file.GetSrcDir());
+        for (auto incbin : file.GetIncbins())
         {
-            CFile file(filesToProcess.front());
-            filesToProcess.pop();
-
-            file.FindIncbins();
-            for (auto incbin : file.GetIncbins())
+            dependencies.insert(incbin);
+        }
+        for (auto include : file.GetIncludes())
+        {
+            bool found = false;
+            for (auto includeDir : includeDirs)
             {
-                dependencies.insert(incbin);
-            }
-            for (auto include : file.GetIncludes())
-            {
-                for (auto includeDir : includeDirs)
+                std::string path(includeDir + include);
+                if (CanOpenFile(path))
                 {
-                    std::string path(includeDir + include);
-                    if (CanOpenFile(path))
+                    bool inserted = dependencies.insert(path).second;
+                    if (inserted)
                     {
-                        bool inserted = dependencies.insert(path).second;
-                        if (inserted)
-                        {
-                            filesToProcess.push(path);
-                        }
-                        break;
+                        filesToProcess.push(path);
                     }
+                    found = true;
+                    break;
                 }
             }
-        }
-    }
-    else if (extension == "s" || extension == "inc")
-    {
-        filesToProcess.push(initialPath);
-
-        while (!filesToProcess.empty())
-        {
-            AsmFile file(filesToProcess.front());
-
-            filesToProcess.pop();
-
-            IncDirectiveType incDirectiveType;
-            std::string path;
-
-            while ((incDirectiveType = file.ReadUntilIncDirective(path)) != IncDirectiveType::None)
+            if (!found)
             {
-                bool inserted = dependencies.insert(path).second;
-                if (inserted
-                    && incDirectiveType == IncDirectiveType::Include
-                    && CanOpenFile(path))
-                    filesToProcess.push(path);
+                if (GetFileType(include) == SourceFileType::Header)
+                    // We don't have any generated .h files... yet.
+                    // Better to give a warning; debugging the makefile when a
+                    // header is missing is very difficult.
+                    fprintf(stderr, "scaninc: warning: C header file \"%s\" not found. (included from \"%s\")\n",
+                            include.c_str(), filePath.c_str());
+
+                // It's probably a generated file.
+                dependencies.insert(include);
             }
         }
-    }
-    else
-    {
-        FATAL_ERROR("unknown extension \"%s\"\n", extension.c_str());
+        includeDirs.pop_back();
     }
 
     for (const std::string &path : dependencies)
