@@ -62,7 +62,7 @@ int main(int argc, char **argv)
                 argv++;
                 includeDir = std::string(argv[0]);
             }
-            if (includeDir.back() != '/')
+            if (!includeDir.empty() && includeDir.back() != '/')
             {
                 includeDir += '/';
             }
