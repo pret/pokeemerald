@@ -1407,7 +1407,7 @@ static bool8 ExtractMonDataToSummaryStruct(struct Pokemon *mon)
     case 3:
         GetMonData(mon, MON_DATA_OT_NAME, sum->OTName);
         ConvertInternationalString((u8*)&sum->OTName, GetMonData(mon, MON_DATA_LANGUAGE));
-        sum->ailment = sub_81B205C(mon);
+        sum->ailment = GetMonAilment(mon);
         sum->OTGender = GetMonData(mon, MON_DATA_OT_GENDER);
         sum->OTID = GetMonData(mon, MON_DATA_OT_ID);
         sum->metLocation = GetMonData(mon, MON_DATA_MET_LOCATION);
