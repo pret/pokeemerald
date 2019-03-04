@@ -98,10 +98,6 @@
 #define PSS_DATA_WINDOW_MOVE_PP 1
 #define PSS_DATA_WINDOW_MOVE_DESCRIPTION 2
 
-// Used for switching between pages, pokemon, and moves.
-#define PSS_CHANGE_NEXT 1
-#define PSS_CHANGE_PREV -1
-
 static EWRAM_DATA struct PokemonSummaryScreenData
 {
     /*0x00*/ union {
@@ -1490,19 +1486,19 @@ static void HandleInput(u8 taskId)
     {
         if (gMain.newKeys & DPAD_UP)
         {
-            ChangeSummaryPokemon(taskId, PSS_CHANGE_PREV);
+            ChangeSummaryPokemon(taskId, -1);
         }
         else if (gMain.newKeys & DPAD_DOWN)
         {
-            ChangeSummaryPokemon(taskId, PSS_CHANGE_NEXT);
+            ChangeSummaryPokemon(taskId, 1);
         }
         else if ((gMain.newKeys & DPAD_LEFT) || GetLRKeysState() == 1)
         {
-            ChangePage(taskId, PSS_CHANGE_PREV);
+            ChangePage(taskId, -1);
         }
         else if ((gMain.newKeys & DPAD_RIGHT) || GetLRKeysState() == 2)
         {
-            ChangePage(taskId, PSS_CHANGE_NEXT);
+            ChangePage(taskId, 1);
         }
         else if (gMain.newKeys & A_BUTTON)
         {
@@ -1542,14 +1538,14 @@ static void ChangeSummaryPokemon(u8 taskId, s8 delta)
 
             if (sMonSummaryScreenData->currPageIndex != PSS_PAGE_INFO)
             {
-                if (delta == PSS_CHANGE_NEXT)
+                if (delta == 1)
                     delta = 0;
                 else
                     delta = 2;
             }
             else
             {
-                if (delta == PSS_CHANGE_NEXT)
+                if (delta == 1)
                     delta = 1;
                 else
                     delta = 3;
@@ -1723,16 +1719,16 @@ static void ChangePage(u8 taskId, s8 delta)
 
     if (summary->isEgg)
         return;
-    else if (delta == PSS_CHANGE_PREV && sMonSummaryScreenData->currPageIndex == sMonSummaryScreenData->minPageIndex)
+    else if (delta == -1&& sMonSummaryScreenData->currPageIndex == sMonSummaryScreenData->minPageIndex)
         return;
-    else if (delta == PSS_CHANGE_NEXT && sMonSummaryScreenData->currPageIndex == sMonSummaryScreenData->maxPageIndex)
+    else if (delta == 1 && sMonSummaryScreenData->currPageIndex == sMonSummaryScreenData->maxPageIndex)
         return;
 
     PlaySE(SE_SELECT);
     ClearPageWindowTilemaps(sMonSummaryScreenData->currPageIndex);
     sMonSummaryScreenData->currPageIndex += delta;
     data[0] = 0;
-    if (delta == PSS_CHANGE_NEXT)
+    if (delta == 1)
         SetTaskFuncWithFollowupFunc(taskId, PssScrollRight, gTasks[taskId].func);
     else
         SetTaskFuncWithFollowupFunc(taskId, PssScrollLeft, gTasks[taskId].func);
@@ -2157,20 +2153,20 @@ static void HandleReplaceMoveInput(u8 taskId)
             if (gMain.newKeys & DPAD_UP)
             {
                 data[0] = 4;
-                sub_81C1070(data, PSS_CHANGE_PREV, &sMonSummaryScreenData->firstMoveIndex);
+                sub_81C1070(data, -1, &sMonSummaryScreenData->firstMoveIndex);
             }
             else if (gMain.newKeys & DPAD_DOWN)
             {
                 data[0] = 4;
-                sub_81C1070(data, PSS_CHANGE_NEXT, &sMonSummaryScreenData->firstMoveIndex);
+                sub_81C1070(data, 1, &sMonSummaryScreenData->firstMoveIndex);
             }
             else if (gMain.newKeys & DPAD_LEFT || GetLRKeysState() == 1)
             {
-                ChangePage(taskId, PSS_CHANGE_PREV);
+                ChangePage(taskId, -1);
             }
             else if (gMain.newKeys & DPAD_RIGHT || GetLRKeysState() == 2)
             {
-                ChangePage(taskId, PSS_CHANGE_NEXT);
+                ChangePage(taskId, 1);
             }
             else if (gMain.newKeys & A_BUTTON)
             {
@@ -2252,7 +2248,7 @@ static void HandleHMMovesCantBeForgottenInput(u8 taskId)
                     ClearWindowTilemap(PSS_LABEL_WINDOW_POKEMON_SKILLS_STATUS);
                 move = sMonSummaryScreenData->summary.moves[sMonSummaryScreenData->firstMoveIndex];
                 gTasks[taskId].func = HandleReplaceMoveInput;
-                ChangePage(taskId, PSS_CHANGE_PREV);
+                ChangePage(taskId, -1);
                 sub_81C1DA4(9, -2);
                 sub_81C1EFC(9, -2, move);
             }
@@ -2266,7 +2262,7 @@ static void HandleHMMovesCantBeForgottenInput(u8 taskId)
                     ClearWindowTilemap(PSS_LABEL_WINDOW_POKEMON_SKILLS_STATUS);
                 move = sMonSummaryScreenData->summary.moves[sMonSummaryScreenData->firstMoveIndex];
                 gTasks[taskId].func = HandleReplaceMoveInput;
-                ChangePage(taskId, PSS_CHANGE_NEXT);
+                ChangePage(taskId, 1);
                 sub_81C1DA4(9, -2);
                 sub_81C1EFC(9, -2, move);
             }
