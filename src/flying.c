@@ -108,7 +108,7 @@ const union AffineAnimCmd gUnknown_085962EC[] =
 
 const union AffineAnimCmd *const gUnknown_08596314[] =
 {
-        gUnknown_085962EC,
+    gUnknown_085962EC,
 };
 
 const union AffineAnimCmd gUnknown_08596318[] =
@@ -357,7 +357,8 @@ void sub_810DE70(struct Sprite *sprite)
     sprite->callback(sprite);
 }
 
-static void sub_810DE98(struct Sprite *sprite) {
+static void sub_810DE98(struct Sprite *sprite)
+{
     sprite->pos2.x = Sin(sprite->data[1], 32);
     sprite->pos2.y = Cos(sprite->data[1], 8);
     sprite->data[1] += 5;
@@ -392,8 +393,7 @@ static void sub_810DF18(u8 taskId)
         {
             gPlttBufferFaded[base + 0x101 + i] = gPlttBufferFaded[base + 0x100 + i];
             i--;
-        }
-        while (i > 0);
+        } while (i > 0);
 
         gPlttBufferFaded[base + 0x101] = temp;
     }
@@ -524,7 +524,9 @@ static void sub_810E24C(struct Sprite *sprite)
         sprite->data[3] &= 0xFF;
     }
 
-    if ((u32)(sprite->pos1.x + sprite->pos2.x + 32) > 304 || sprite->pos1.y + sprite->pos2.y > 160)
+    if (sprite->pos1.x + sprite->pos2.x < -32
+        || sprite->pos1.x + sprite->pos2.x > 272
+        || sprite->pos1.y + sprite->pos2.y > 160)
     {
         gSprites[GetAnimBattlerSpriteId(ANIM_ATTACKER)].invisible = 0;
         DestroyAnimSprite(sprite);
@@ -546,56 +548,62 @@ void sub_810E2C8(struct Sprite *sprite)
     }
 }
 
-// FAKEMATCHING
+struct FeatherDanceData
+{
+    u8 unk0_0a:1;
+    u8 unk0_0b:1;
+    u8 unk0_0c:1;
+    u8 unk0_0d:1;
+    u8 unk0_1:4;
+    u8 unk1;
+    u16 unk2;
+    s16 unk4;
+    u16 unk6;
+    u16 unk8;
+    u16 unkA;
+    u8 unkC[2];
+    u16 unkE_0:1;
+    u16 unkE_1:15;
+};
+
 void sub_810E314(struct Sprite *sprite)
 {
-    s16 *data;
-    u8 slot;
-    s16 spriteCoord;
-    int t1, t2;
-    u32 arg2;
-    u32 matrixNum;
-    u8 sinIndex;
-    register s16 sinVal asm ("r4");
-    register int sinVal2 asm ("r0");
+    u8 battler, matrixNum, sinIndex;
+    s16 spriteCoord, sinVal;
 
-    data = sprite->data;
+    struct FeatherDanceData *data = (struct FeatherDanceData *)sprite->data;
 
     if (gBattleAnimArgs[7] & 0x100)
-        slot = gBattleAnimAttacker;
+        battler = gBattleAnimAttacker;
     else
-        slot = gBattleAnimTarget;
+        battler = gBattleAnimTarget;
 
-    if (GetBattlerSide(slot) == B_SIDE_PLAYER)
+    if (GetBattlerSide(battler) == B_SIDE_PLAYER)
         gBattleAnimArgs[0] = -gBattleAnimArgs[0];
 
-    sprite->pos1.x = GetBattlerSpriteCoord(slot, 0) + gBattleAnimArgs[0];
-    spriteCoord = GetBattlerSpriteCoord(slot, 1);
+    sprite->pos1.x = GetBattlerSpriteCoord(battler, BATTLER_COORD_ATTR_HEIGHT) + gBattleAnimArgs[0];
+    spriteCoord = GetBattlerSpriteCoord(battler, BATTLER_COORD_ATTR_WIDTH);
     sprite->pos1.y = spriteCoord + gBattleAnimArgs[1];
-    data[4] = sprite->pos1.y << 8;
 
-    t1 = (spriteCoord + (u16) gBattleAnimArgs[6]) << 1;
-    data[7] = (data[7] & 1) | t1;
-    ((u8 *) data)[0] |= 4;
+    data->unk8 = sprite->pos1.y << 8;
+    data->unkE_1 = spriteCoord + gBattleAnimArgs[6];
+    data->unk0_0c = 1;
+    data->unk2 = gBattleAnimArgs[2] & 0xFF;
+    data->unkA = (gBattleAnimArgs[2] >> 8) & 0xFF;
+    data->unk4 = gBattleAnimArgs[3];
+    data->unk6 = gBattleAnimArgs[4];
+    *(u16*)(data->unkC) = gBattleAnimArgs[5];
 
-    arg2 = (u16) gBattleAnimArgs[2];
-    data[1] = (u8) gBattleAnimArgs[2];
-    arg2 <<= 16;
-    data[5] = arg2 >> 24;
-    data[2] = gBattleAnimArgs[3];
-    data[3] = gBattleAnimArgs[4];
-    data[6] = gBattleAnimArgs[5];
-
-    if ((u16) (data[1] - 64) <= 0x7f)
+    if (data->unk2 >= 64 && data->unk2 <= 191)
     {
         if (!IsContest())
-            sprite->oam.priority = GetBattlerSpriteBGPriority(slot) + 1;
+            sprite->oam.priority = GetBattlerSpriteBGPriority(battler) + 1;
         else
-            sprite->oam.priority = GetBattlerSpriteBGPriority(slot);
+            sprite->oam.priority = GetBattlerSpriteBGPriority(battler);
 
-        ((u8 *) data)[14] = data[7] & -2;
+        data->unkE_0 = 0;
 
-        if (!(data[2] & 0x8000))
+        if (!(data->unk4 & 0x8000))
         {
             sprite->hFlip ^= 1;
             sprite->animNum = sprite->hFlip;
@@ -606,10 +614,10 @@ void sub_810E314(struct Sprite *sprite)
     }
     else
     {
-        sprite->oam.priority = GetBattlerSpriteBGPriority(slot);
-        ((u8 *) data)[14] |= 1;
+        sprite->oam.priority = GetBattlerSpriteBGPriority(battler);
+        data->unkE_0 = 1;
 
-        if (data[2] & 0x8000)
+        if (data->unk4 & 0x8000)
         {
             sprite->hFlip ^= 1;
             sprite->animNum = sprite->hFlip;
@@ -619,24 +627,243 @@ void sub_810E314(struct Sprite *sprite)
         }
     }
 
-    t2 = (u16) data[1] >> 6 << 4;
-    ((u8 *) data)[0] = (15 & data[0]) | t2;
-
-    sprite->pos2.x = (gSineTable[(u16) data[1]] * (u8) data[6]) >> 8;
-
+    data->unk0_1 = data->unk2 >> 6;
+    sprite->pos2.x = (gSineTable[data->unk2] * data->unkC[0]) >> 8;
     matrixNum = sprite->oam.matrixNum;
 
-    sinIndex = (-sprite->pos2.x >> 1) + data[5];
+    sinIndex = (-sprite->pos2.x >> 1) + data->unkA;
     sinVal = gSineTable[sinIndex];
 
     gOamMatrices[matrixNum].a = gOamMatrices[matrixNum].d = gSineTable[sinIndex + 64];
-    gOamMatrices[matrixNum].b = sinVal;
-    sinVal2 = -sinVal;
-    gOamMatrices[matrixNum].c = sinVal2;
+    // The comparison below is completely pointless. 'sprite' is sure to be a valid pointer and
+    // both the 'if' and 'else' parts are exactly the same.
+    // The only reason for this is making sure the compiler generates the exact ASM.
+    if (sprite)
+    {
+        gOamMatrices[matrixNum].b = sinVal;
+        gOamMatrices[matrixNum].c = -sinVal;
+    }
+    else
+    {
+        gOamMatrices[matrixNum].b = sinVal;
+        gOamMatrices[matrixNum].c = -sinVal;
+    }
 
     sprite->callback = sub_810E520;
 }
 
+#ifdef NONMATCHING
+/*
+Things I can't get to match:
+1. data->unk0_1 bitfield behaviour. The way bits are read is different.
+2. sprite->oam.priority--; sprite->oam.priority++; Nonmatching version tail-merges these, original does not.
+3. sprite->pos2.x = (gSineTable[data->unk2] * var) >> 8; data->unk2 is very weirdly read at seemingly random moments inside the switch.
+4. sinVal r6/r7 mismatch.
+*/
+void sub_810E520(struct Sprite *sprite)
+{
+    u8 matrixNum, sinIndex, var;
+    s16 sinVal = 0;
+    struct FeatherDanceData *data = (struct FeatherDanceData *)sprite->data;
+
+    if (data->unk0_0a)
+    {
+        if (data->unk1-- % 256 == 0)
+        {
+            data->unk0_0a = 0;
+            data->unk1 = 0;
+        }
+    }
+    else
+    {
+        switch (data->unk2 >> 6)
+        {
+        case 0:
+            if (data->unk0_1 == 1)
+            {
+                data->unk0_0d = 1;
+                data->unk0_0a = 1;
+                data->unk1 = 0;
+            }
+            else if (data->unk0_1 == 3)
+            {
+                data->unk0_0b ^= 1;
+                data->unk1 = 0;
+            }
+            else if (data->unk0_0d)
+            {
+                sprite->hFlip ^= 1;
+                sprite->animNum = sprite->hFlip;
+                sprite->animBeginning = 1;
+                sprite->animEnded = 0;
+                if (data->unk0_0c)
+                {
+                    if (!IsContest())
+                    {
+                        if (!data->unkE_0)
+                            sprite->oam.priority--;
+                        else
+                            sprite->oam.priority++;
+                    }
+                    else
+                    {
+                        if (!data->unkE_0)
+                            sprite->subpriority -= 12;
+                        else
+                            sprite->subpriority += 12;
+                    }
+                    data->unkE_0 ^= 1;
+                }
+                data->unk0_0d = 0;
+            }
+            data->unk0_1 = 0;
+            break;
+        case 1:
+            if (data->unk0_1 == 0)
+            {
+                data->unk0_0d = 1;
+                data->unk0_0a = 1;
+                data->unk1 = 0;
+            }
+            else if (data->unk0_1 == 2)
+            {
+                data->unk0_0a = 1;
+                data->unk1 = 0;
+            }
+            else if (data->unk0_0d)
+            {
+                sprite->hFlip ^= 1;
+                sprite->animNum = sprite->hFlip;
+                sprite->animBeginning = 1;
+                sprite->animEnded = 0;
+                if (data->unk0_0c)
+                {
+                    if (!IsContest())
+                    {
+                        if (!data->unkE_0)
+                            sprite->oam.priority--;
+                        else
+                            sprite->oam.priority++;
+                    }
+                    else
+                    {
+                        if (!data->unkE_0)
+                            sprite->subpriority -= 12;
+                        else
+                            sprite->subpriority += 12;
+                    }
+                    data->unkE_0 ^= 1;
+                }
+                data->unk0_0d = 0;
+            }
+            data->unk0_1 = 1;
+            break;
+        case 2:
+            if (data->unk0_1 == 0)
+            {
+                data->unk0_0d = 1;
+                data->unk0_0a = 1;
+                data->unk1 = 0;
+            }
+            else if (data->unk0_1 == 2)
+            {
+                data->unk0_0a = 1;
+                data->unk1 = 0;
+            }
+            else if (data->unk0_0d)
+            {
+                sprite->hFlip ^= 1;
+                sprite->animNum = sprite->hFlip;
+                sprite->animBeginning = 1;
+                sprite->animEnded = 0;
+                if (data->unk0_0c)
+                {
+                    if (!IsContest())
+                    {
+                        if (!data->unkE_0)
+                            sprite->oam.priority--;
+                        else
+                            sprite->oam.priority++;
+                    }
+                    else
+                    {
+                        if (!data->unkE_0)
+                            sprite->subpriority -= 12;
+                        else
+                            sprite->subpriority += 12;
+                    }
+                    data->unkE_0 ^= 1;
+                }
+                data->unk0_0d = 0;
+            }
+            data->unk0_1 = 2;
+            break;
+        case 3:
+            if (data->unk0_1 == 2)
+            {
+                data->unk0_0d = 1;
+            }
+            else if (data->unk0_1 == 0)
+            {
+                data->unk0_0b ^= 1;
+                data->unk1 = 0;
+            }
+            else if (data->unk0_0d)
+            {
+                sprite->hFlip ^= 1;
+                sprite->animNum = sprite->hFlip;
+                sprite->animBeginning = 1;
+                sprite->animEnded = 0;
+                if (data->unk0_0c)
+                {
+                    if (!IsContest())
+                    {
+                        if (!data->unkE_0)
+                            sprite->oam.priority--;
+                        else
+                            sprite->oam.priority++;
+                    }
+                    else
+                    {
+                        if (!data->unkE_0)
+                            sprite->subpriority -= 12;
+                        else
+                            sprite->subpriority += 12;
+                    }
+                    data->unkE_0 ^= 1;
+                }
+                data->unk0_0d = 0;
+            }
+            data->unk0_1 = 3;
+            break;
+        }
+
+        var = data->unkC[data->unk0_0b];
+        sprite->pos2.x = (gSineTable[data->unk2] * var) >> 8;
+        matrixNum = sprite->oam.matrixNum;
+
+        sinIndex = (-sprite->pos2.x >> 1) + data->unkA;
+        sinVal = gSineTable[sinIndex];
+
+        gOamMatrices[matrixNum].a = gOamMatrices[matrixNum].d = gSineTable[sinIndex + 64];
+        gOamMatrices[matrixNum].b = sinVal;
+        gOamMatrices[matrixNum].c = -sinVal;
+
+        data->unk8 += data->unk6;
+        sprite->pos1.y = data->unk8 >> 8;
+        if (data->unk4 & 0x8000)
+            data->unk2 = (data->unk2 - (data->unk4 & 0x7FFF)) & 0xFF;
+        else
+            data->unk2 = (data->unk2 + (data->unk4 & 0x7FFF)) & 0xFF;
+
+        if (sprite->pos1.y + sprite->pos2.y > data->unkE_1)
+        {
+            sprite->data[0] = 0;
+            sprite->callback = sub_810E2C8;
+        }
+    }
+}
+#else
 NAKED
 void sub_810E520(struct Sprite *sprite)
 {
@@ -1345,6 +1572,7 @@ _0810EA36:\n\
     .pool\n\
     ");
 }
+#endif
 
 void sub_810EA4C(struct Sprite *sprite)
 {
@@ -1363,7 +1591,7 @@ void sub_810EAA0(struct Sprite * sprite)
         InitSpritePosToAnimAttacker(sprite, 0);
     else
         InitSpritePosToAnimTarget(sprite, FALSE);
-    
+
     if ((!gBattleAnimArgs[2] && !GetBattlerSide(gBattleAnimAttacker))
         || (gBattleAnimArgs[2] == 1 && !GetBattlerSide(gBattleAnimTarget)))
     {
@@ -1424,14 +1652,15 @@ void sub_810EC34(struct Sprite *sprite)
 {
     switch (sprite->data[0])
     {
-        case 0:
-            InitSpritePosToAnimAttacker(sprite, 1);
-            gSprites[GetAnimBattlerSpriteId(0)].invisible = 1;
-            ++sprite->data[0];
-            break;
-        case 1:
-            if (sprite->affineAnimEnded)
-                DestroyAnimSprite(sprite);
+    case 0:
+        InitSpritePosToAnimAttacker(sprite, 1);
+        gSprites[GetAnimBattlerSpriteId(0)].invisible = 1;
+        ++sprite->data[0];
+        break;
+    case 1:
+        if (sprite->affineAnimEnded)
+            DestroyAnimSprite(sprite);
+        break;
     }
 }
 
@@ -1439,23 +1668,24 @@ void sub_810EC94(struct Sprite *sprite)
 {
     switch (sprite->data[0])
     {
-        case 0:
-            sprite->pos1.y = GetBattlerSpriteCoord(gBattleAnimTarget, 1);
-            sprite->pos2.y = -sprite->pos1.y - 32;
-            sprite->data[0]++;
-            break;
-        case 1:
-            sprite->pos2.y += 10;
-            if (sprite->pos2.y >= 0)
-                ++sprite->data[0];
-            break;
-        case 2:
-            sprite->pos2.y -= 10;
-            if (sprite->pos1.y + sprite->pos2.y < -32)
-            {
-                gSprites[GetAnimBattlerSpriteId(0)].invisible = 0;
-                DestroyAnimSprite(sprite);
-            }
+    case 0:
+        sprite->pos1.y = GetBattlerSpriteCoord(gBattleAnimTarget, 1);
+        sprite->pos2.y = -sprite->pos1.y - 32;
+        sprite->data[0]++;
+        break;
+    case 1:
+        sprite->pos2.y += 10;
+        if (sprite->pos2.y >= 0)
+            ++sprite->data[0];
+        break;
+    case 2:
+        sprite->pos2.y -= 10;
+        if (sprite->pos1.y + sprite->pos2.y < -32)
+        {
+            gSprites[GetAnimBattlerSpriteId(0)].invisible = 0;
+            DestroyAnimSprite(sprite);
+        }
+        break;
     }
 }
 
@@ -1471,7 +1701,9 @@ void sub_810ED28(struct Sprite *sprite)
 void sub_810ED70(struct Sprite *sprite)
 {
     if (sprite->data[0] > 0)
+    {
         sprite->data[0]--;
+    }
     else if (sprite->pos1.y + sprite->pos2.y > -32)
     {
         sprite->data[2] += sprite->data[1];
@@ -1500,80 +1732,75 @@ void sub_810EE14(struct Sprite *sprite)
 {
     u32 matrixNum;
     int t1, t2;
-    
+
     switch (sprite->data[0])
     {
-        case 0:
-            if (!gBattleAnimArgs[0])
-            {
-                sprite->pos1.x = GetBattlerSpriteCoord(gBattleAnimAttacker, 0);
-                sprite->pos1.y = GetBattlerSpriteCoord(gBattleAnimAttacker, 1);
-            }
-            else
-            {
-                sprite->pos1.x = GetBattlerSpriteCoord(gBattleAnimTarget, 0);
-                sprite->pos1.y = GetBattlerSpriteCoord(gBattleAnimTarget, 1);
-            }
+    case 0:
+        if (!gBattleAnimArgs[0])
+        {
+            sprite->pos1.x = GetBattlerSpriteCoord(gBattleAnimAttacker, 0);
+            sprite->pos1.y = GetBattlerSpriteCoord(gBattleAnimAttacker, 1);
+        }
+        else
+        {
+            sprite->pos1.x = GetBattlerSpriteCoord(gBattleAnimTarget, 0);
+            sprite->pos1.y = GetBattlerSpriteCoord(gBattleAnimTarget, 1);
+        }
 
-            sprite->data[1] = 512;
+        sprite->data[1] = 512;
 
-            TrySetSpriteRotScale(sprite, 0, 256, sprite->data[1], 0);
-            sprite->data[0]++;
-            break;
-        case 1:
-            if (sprite->data[2] <= 11)
-                sprite->data[1] -= 40;
-            else
-                sprite->data[1] += 40;
-            
-            sprite->data[2]++;
+        TrySetSpriteRotScale(sprite, 0, 256, sprite->data[1], 0);
+        sprite->data[0]++;
+        break;
+    case 1:
+        if (sprite->data[2] <= 11)
+            sprite->data[1] -= 40;
+        else
+            sprite->data[1] += 40;
 
-            TrySetSpriteRotScale(sprite, 0, 256, sprite->data[1], 0);
+        sprite->data[2]++;
 
-            matrixNum = sprite->oam.matrixNum;
+        TrySetSpriteRotScale(sprite, 0, 256, sprite->data[1], 0);
 
-            t1 = 15616;
-            t2 = t1 / gOamMatrices[matrixNum].d + 1;
+        matrixNum = sprite->oam.matrixNum;
 
-            if (t2 > 128)
-                t2 = 128;
+        t1 = 15616;
+        t2 = t1 / gOamMatrices[matrixNum].d + 1;
 
-            t2 = (64 - t2) / 2;
-            sprite->pos2.y = t2;
+        if (t2 > 128)
+            t2 = 128;
 
-            if (sprite->data[2] == 24)
-            {
-                sub_80A749C(sprite);
-                DestroyAnimSprite(sprite);
-            }
+        t2 = (64 - t2) / 2;
+        sprite->pos2.y = t2;
+
+        if (sprite->data[2] == 24)
+        {
+            sub_80A749C(sprite);
+            DestroyAnimSprite(sprite);
+        }
+        break;
     }
 }
 
 void sub_810EEF8(struct Sprite *sprite)
 {
-    int v1, v2;
-
-    v1 = 0x1ff & Random2();
-    v2 = 0x7f & Random2();
+    int v1 = 0x1ff & Random2();
+    int v2 = 0x7f & Random2();
 
     if (v1 % 2)
         sprite->data[0] = 736 + v1;
-    
     else
         sprite->data[0] = 736 - v1;
-    
 
     if (v2 % 2)
         sprite->data[1] = 896 + v2;
-    
     else
         sprite->data[1] = 896 - v2;
-   
+
     sprite->data[2] = gBattleAnimArgs[0];
 
     if (sprite->data[2])
         sprite->oam.matrixNum = 8;
-    
 
     if (gBattleAnimArgs[1] == 0)
     {
@@ -1607,7 +1834,6 @@ void sub_810EFA8(struct Sprite *sprite)
 
     if (sprite->data[0] < 0)
         sprite->data[0] = 0;
-    
 
     if (++sprite->data[3] == 31)
         DestroyAnimSprite(sprite);
@@ -1624,27 +1850,26 @@ void sub_810F018(struct Sprite *sprite)
 {
     switch (sprite->data[0])
     {
-        case 0:
-            if (++sprite->data[1] > 8)
-            {
-                sprite->data[1] = 0;
-                sprite->invisible ^= 1;
-                if (++sprite->data[2] > 5 && sprite->invisible)
-                    sprite->data[0]++;
-            }
-            break;
-        case 1:
-            DestroyAnimSprite(sprite);
+    case 0:
+        if (++sprite->data[1] > 8)
+        {
+            sprite->data[1] = 0;
+            sprite->invisible ^= 1;
+            if (++sprite->data[2] > 5 && sprite->invisible)
+                sprite->data[0]++;
+        }
+        break;
+    case 1:
+        DestroyAnimSprite(sprite);
+        break;
     }
 }
 
 void sub_810F084(struct Sprite *sprite)
 {
-    s16 posx, posy;
     u16 rotation;
-
-    posx = sprite->pos1.x;
-    posy = sprite->pos1.y;
+    s16 posx = sprite->pos1.x;
+    s16 posy = sprite->pos1.y;
 
     sprite->pos1.x = GetBattlerSpriteCoord(gBattleAnimAttacker, 2);
     sprite->pos1.y = GetBattlerSpriteCoord(gBattleAnimAttacker, 3);
@@ -1671,7 +1896,8 @@ void sub_810F140(struct Sprite *sprite)
     sprite->pos1.x = sprite->data[4] >> 4;
     sprite->pos1.y = sprite->data[5] >> 4;
 
-    if ((u16) (sprite->pos1.x + 0x2d) > 0x14a || sprite->pos1.y > 0x9d || sprite->pos1.y < -0x2d)
+    if (sprite->pos1.x > 285 || sprite->pos1.x < -45
+        || sprite->pos1.y > 157 || sprite->pos1.y < -45)
         DestroySpriteAndMatrix(sprite);
 }
 
