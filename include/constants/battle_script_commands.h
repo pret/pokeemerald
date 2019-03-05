@@ -137,6 +137,7 @@
 #define VARIOUS_SET_POWDER                      74
 #define VARIOUS_SPECTRAL_THIEF                  75
 #define VARIOUS_GRAVITY_ON_AIRBORNE_MONS        76
+#define VARIOUS_CHECK_IF_GRASSY_TERRAIN_HEALS   77
 
 // atk80, dmg manipulation
 #define ATK80_DMG_CHANGE_SIGN                               0
