@@ -34,7 +34,6 @@ extern struct MusicPlayerInfo gMPlayInfo_BGM;
 extern const struct CompressedSpritePalette gTrainerFrontPicPaletteTable[];
 
 extern void sub_8172EF0(u8 battlerId, struct Pokemon *mon);
-extern u16 sub_8068B48(void);
 
 // this file's functions
 static void RecordedOpponentHandleGetMonData(void);
@@ -93,7 +92,7 @@ static void RecordedOpponentHandleBattleAnimation(void);
 static void RecordedOpponentHandleLinkStandbyMsg(void);
 static void RecordedOpponentHandleResetActionMoveSelection(void);
 static void RecordedOpponentHandleCmd55(void);
-static void SpriteCB_Null9(void);
+static void RecordedOpponentCmdEnd(void);
 
 static void RecordedOpponentBufferRunCommand(void);
 static void RecordedOpponentBufferExecCompleted(void);
@@ -165,7 +164,7 @@ static void (*const sRecordedOpponentBufferCommands[CONTROLLER_CMDS_COUNT])(void
     RecordedOpponentHandleLinkStandbyMsg,
     RecordedOpponentHandleResetActionMoveSelection,
     RecordedOpponentHandleCmd55,
-    SpriteCB_Null9
+    RecordedOpponentCmdEnd
 };
 
 static void nullsub_70(void)
@@ -1791,6 +1790,6 @@ static void RecordedOpponentHandleCmd55(void)
     gBattlerControllerFuncs[gActiveBattler] = sub_80587B0;
 }
 
-static void SpriteCB_Null9(void)
+static void RecordedOpponentCmdEnd(void)
 {
 }

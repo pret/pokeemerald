@@ -84,7 +84,7 @@ static void SafariHandleBattleAnimation(void);
 static void SafariHandleLinkStandbyMsg(void);
 static void SafariHandleResetActionMoveSelection(void);
 static void SafariHandleCmd55(void);
-static void SpriteCB_Null5(void);
+static void SafariCmdEnd(void);
 
 static void SafariBufferRunCommand(void);
 static void SafariBufferExecCompleted(void);
@@ -148,7 +148,7 @@ static void (*const sSafariBufferCommands[CONTROLLER_CMDS_COUNT])(void) =
     SafariHandleLinkStandbyMsg,
     SafariHandleResetActionMoveSelection,
     SafariHandleCmd55,
-    SpriteCB_Null5
+    SafariCmdEnd
 };
 
 static void SpriteCB_Null4(void)
@@ -688,6 +688,6 @@ static void SafariHandleCmd55(void)
         gBattlerControllerFuncs[gActiveBattler] = sub_81595E4;
 }
 
-static void SpriteCB_Null5(void)
+static void SafariCmdEnd(void)
 {
 }
