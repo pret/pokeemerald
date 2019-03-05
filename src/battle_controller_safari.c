@@ -85,7 +85,7 @@ static void SafariHandleLinkStandbyMsg(void);
 static void SafariHandleResetActionMoveSelection(void);
 static void SafariHandleCmd55(void);
 static void SafariHandleBattleDebug(void);
-static void nullsub_115(void);
+static void SafariCmdEnd(void);
 
 static void SafariBufferRunCommand(void);
 static void SafariBufferExecCompleted(void);
@@ -150,10 +150,10 @@ static void (*const sSafariBufferCommands[CONTROLLER_CMDS_COUNT])(void) =
     SafariHandleResetActionMoveSelection,
     SafariHandleCmd55,
     SafariHandleBattleDebug,
-    nullsub_115
+    SafariCmdEnd
 };
 
-static void nullsub_114(void)
+static void SpriteCB_Null4(void)
 {
 }
 
@@ -695,6 +695,6 @@ static void SafariHandleBattleDebug(void)
     SafariBufferExecCompleted();
 }
 
-static void nullsub_115(void)
+static void SafariCmdEnd(void)
 {
 }

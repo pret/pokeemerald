@@ -557,9 +557,9 @@ static bool8 TryStartStepCountScript(u16 metatileBehavior)
             ScriptContext1_SetupScript(EventScript_EggHatch);
             return TRUE;
         }
-        if (sub_813B3B0() == TRUE)
+        if (UnusualWeatherHasExpired() == TRUE)
         {
-            ScriptContext1_SetupScript(gUnknown_08273D1F);
+            ScriptContext1_SetupScript(UnusualWeather_EventScript_EndEventAndCleanup_1);
             return TRUE;
         }
         if (ShouldDoBrailleRegicePuzzle() == TRUE)
@@ -567,27 +567,27 @@ static bool8 TryStartStepCountScript(u16 metatileBehavior)
             ScriptContext1_SetupScript(IslandCave_EventScript_238EAF);
             return TRUE;
         }
-        if (is_tile_that_overrides_player_control() == TRUE)
+        if (ShouldDoWallyCall() == TRUE)
         {
             ScriptContext1_SetupScript(MauvilleCity_EventScript_1DF7BA);
             return TRUE;
         }
-        if (sub_8138120() == TRUE)
+        if (ShouldDoWinonaCall() == TRUE)
         {
             ScriptContext1_SetupScript(Route119_EventScript_1F49EC);
             return TRUE;
         }
-        if (sub_8138168() == TRUE)
+        if (ShouldDoScottCall() == TRUE)
         {
             ScriptContext1_SetupScript(LittlerootTown_ProfessorBirchsLab_EventScript_1FA4D6);
             return TRUE;
         }
-        if (sub_81381B0() == TRUE)
+        if (ShouldDoRoxanneCall() == TRUE)
         {
             ScriptContext1_SetupScript(RustboroCity_Gym_EventScript_21307B);
             return TRUE;
         }
-        if (sub_81381F8() == TRUE)
+        if (ShouldDoRivalRayquazaCall() == TRUE)
         {
             ScriptContext1_SetupScript(MossdeepCity_SpaceCenter_2F_EventScript_224175);
             return TRUE;

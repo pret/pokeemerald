@@ -4088,7 +4088,7 @@ BattleScript_EffectImprison::
 	attackcanceler
 	attackstring
 	ppreduce
-	tryimprision BattleScript_ButItFailed
+	tryimprison BattleScript_ButItFailed
 	attackanimation
 	waitanimation
 	printstring STRINGID_PKMNSEALEDOPPONENTMOVE
@@ -5415,11 +5415,11 @@ BattleScript_MoveUsedIsImprisoned::
 	waitmessage 0x40
 	goto BattleScript_MoveEnd
 
-BattleScript_SelectingImprisionedMove::
+BattleScript_SelectingImprisonedMove::
 	printselectionstring STRINGID_PKMNCANTUSEMOVESEALED
 	endselectionscript
 
-BattleScript_SelectingImprisionedMoveInPalace::
+BattleScript_SelectingImprisonedMoveInPalace::
 	printstring STRINGID_PKMNCANTUSEMOVESEALED
 	goto BattleScript_SelectingUnusableMoveInPalace
 
@@ -5685,7 +5685,7 @@ BattleScript_MoveUsedIsInLove::
 	status2animation BS_ATTACKER, STATUS2_INFATUATION
 	return
 
-BattleScript_MoveUsedIsParalyzedCantAttack::
+BattleScript_MoveUsedIsInLoveCantAttack::
 	printstring STRINGID_PKMNIMMOBILIZEDBYLOVE
 	waitmessage 0x40
 	goto BattleScript_MoveEnd

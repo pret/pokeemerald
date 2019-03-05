@@ -34,6 +34,8 @@
 #include "battle_records.h"
 #include "graphics.h"
 #include "new_game.h"
+#include "save.h"
+#include "link.h"
 
 #define BLENDER_SCORE_BEST      0
 #define BLENDER_SCORE_GOOD      1
@@ -140,15 +142,8 @@ extern const u8 gText_Space[];
 extern const u8 gText_BlenderMaxSpeedRecord[];
 extern const u8 gText_234Players[];
 
-extern void sub_800A418(void);
-extern u8 sub_800A9D8(void);
 extern void sub_81AABF0(void (*callback)(void));
 extern void sub_800B4C0(void);
-extern void ClearLinkCallback(void);
-extern void sub_8009F8C(void);
-extern void sub_8153430(void);
-extern bool8 sub_8153474(void);
-extern void sub_80EECEC(void);
 
 // this file's functions
 static void BerryBlender_SetBackgroundsPos(void);
@@ -945,7 +940,7 @@ static void InitBerryBlenderWindows(void)
 
         DeactivateAllTextPrinters();
         for (i = 0; i < 5; i++)
-            FillWindowPixelBuffer(i, 0);
+            FillWindowPixelBuffer(i, PIXEL_FILL(0));
 
         FillBgTilemapBufferRect_Palette0(0, 0, 0, 0, 0x1E, 0x14);
         sub_81978B0(0xE0);
@@ -1251,7 +1246,7 @@ static void sub_8080018(void)
     case 10:
         if (++sBerryBlenderData->framesToWait > 20)
         {
-            sub_8197DF8(4, TRUE);
+            ClearDialogWindowAndFrameToTransparent(4, TRUE);
             if (GetBlockReceivedStatus() == sub_800A9D8())
             {
                 for (i = 0; i < GetLinkPlayerCount(); i++)
@@ -2600,7 +2595,7 @@ static bool8 LinkPlayAgainHandleSaving(void)
         }
         break;
     case 2:
-        sub_8153430();
+        FullSaveGame();
         sBerryBlenderData->field_1A0++;
         sBerryBlenderData->framesToWait = 0;
         break;
@@ -2614,7 +2609,7 @@ static bool8 LinkPlayAgainHandleSaving(void)
     case 4:
         if (IsLinkTaskFinished())
         {
-            if (sub_8153474())
+            if (CheckSaveFile())
             {
                 sBerryBlenderData->field_1A0 = 5;
             }
@@ -3325,7 +3320,7 @@ static bool8 Blender_PrintBlendingResults(void)
             sBerryBlenderData->mainState++;
         break;
     case 5:
-        sub_8198070(5, 1);
+        ClearStdWindowAndFrameToTransparent(5, 1);
 
         for (i = 0; i < BLENDER_MAX_PLAYERS; i++)
         {
@@ -3466,7 +3461,7 @@ static bool8 Blender_PrintBlendingRanking(void)
         }
         break;
     case 3:
-        SetWindowBorderStyle(5, 0, 1, 0xD);
+        DrawStdFrameWithCustomTileAndPalette(5, 0, 1, 0xD);
         xPos = GetStringCenterAlignXOffset(1, sText_Ranking, 0xA8);
         Blender_AddTextPrinter(5, sText_Ranking, xPos, 1, TEXT_SPEED_FF, 0);
 
@@ -3537,8 +3532,8 @@ void ShowBerryBlenderRecordWindow(void)
 
     winTemplate = sBlenderRecordWindowTemplate;
     gRecordsWindowId = AddWindow(&winTemplate);
-    NewMenuHelpers_DrawStdWindowFrame(gRecordsWindowId, 0);
-    FillWindowPixelBuffer(gRecordsWindowId, 0x11);
+    DrawStdWindowFrame(gRecordsWindowId, 0);
+    FillWindowPixelBuffer(gRecordsWindowId, PIXEL_FILL(1));
 
     xPos = GetStringCenterAlignXOffset(1, gText_BlenderMaxSpeedRecord, 0x90);
     AddTextPrinterParameterized(gRecordsWindowId, 1, gText_BlenderMaxSpeedRecord, xPos, 1, 0, NULL);
@@ -3647,7 +3642,7 @@ static void Blender_AddTextPrinter(u8 windowId, const u8 *string, u8 x, u8 y, s3
 
     if (caseId != 3)
     {
-        FillWindowPixelBuffer(windowId, txtColor[0] | (txtColor[0] << 4));
+        FillWindowPixelBuffer(windowId, PIXEL_FILL(txtColor[0]));
     }
 
     AddTextPrinterParameterized4(windowId, 1, x, y, letterSpacing, 1, txtColor, speed, string);
@@ -3658,7 +3653,7 @@ static bool32 Blender_PrintText(s16 *textState, const u8 *string, s32 textSpeed)
     switch (*textState)
     {
     case 0:
-        sub_8197B1C(4, FALSE, 0x14, 0xF);
+        DrawDialogFrameWithCustomTileAndPalette(4, FALSE, 0x14, 0xF);
         Blender_AddTextPrinter(4, string, 0, 1, textSpeed, 0);
         PutWindowTilemap(4);
         CopyWindowToVram(4, 3);

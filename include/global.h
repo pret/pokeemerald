@@ -801,15 +801,15 @@ struct TrainerNameRecord
 
 struct SaveTrainerHill
 {
-    /*0x3D64*/ u32 field_3D64;
-    /*0x3D68*/ u32 field_3D68;
+    /*0x3D64*/ u32 timer;
+    /*0x3D68*/ u32 bestTime;
     /*0x3D6C*/ u8 field_3D6C;
     /*0x3D6D*/ u8 unused;
     /*0x3D6E*/ u16 field_3D6E_0a:1; // 1
     /*0x3D6E*/ u16 field_3D6E_0b:1; // 2
     /*0x3D6E*/ u16 field_3D6E_0c:1; // 4
-    /*0x3D6E*/ u16 field_3D6E_0d:1; // 8
-    /*0x3D6E*/ u16 field_3D6E_0e:1; // x10
+    /*0x3D6E*/ u16 hasLost:1; // 8
+    /*0x3D6E*/ u16 maybeECardScanDuringChallenge:1; // x10
     /*0x3D6E*/ u16 field_3D6E_0f:1; // x20
     /*0x3D6E*/ u16 tag:2; // x40, x80 = xC0
 };
@@ -912,13 +912,13 @@ struct MapPosition
     s8 height;
 };
 
-struct UnkStruct_8054FF8
+struct TradeRoomPlayer
 {
-    u8 a;
-    u8 b;
+    u8 playerId;
+    u8 isLocalPlayer;
     u8 c;
-    u8 d;
-    struct MapPosition sub;
+    u8 facing;
+    struct MapPosition pos;
     u16 field_C;
 };
 

@@ -29,6 +29,7 @@
 #include "constants/items.h"
 #include "constants/species.h"
 #include "constants/vars.h"
+#include "constants/battle_frontier.h"
 
 extern const u16 gEventObjectPalette8[];
 extern const u16 gEventObjectPalette17[];
@@ -40,7 +41,7 @@ static const u8 gUnknown_0858D8EC[] = { 3, 4, 5, 14 };
 
 static void sub_80F8EE8(u8 taskId);
 static void sub_80F9088(u8 taskId);
-static void sub_80F9460(void);
+static void CB2_ReturnFromChooseHalfParty(void);
 static void sub_80F94B8(void);
 
 void SetContestTrainerGfxIds(void)
@@ -640,22 +641,24 @@ void ScriptSetMonMoveSlot(u8 monIndex, u16 move, u8 slot)
     SetMonMoveSlot(&gPlayerParty[monIndex], move, slot);
 }
 
-void sub_80F9438(void)
+// Note: When control returns to the event script, gSpecialVar_Result will be
+// TRUE if the party selection was successful.
+void ChooseHalfPartyForBattle(void)
 {
-    gMain.savedCallback = sub_80F9460;
-    VarSet(VAR_FRONTIER_FACILITY, 9); // this isn't a valid frontier facility id (??)
-    sub_81B8518(0);
+    gMain.savedCallback = CB2_ReturnFromChooseHalfParty;
+    VarSet(VAR_FRONTIER_FACILITY, FRONTIER_FACILITY_DOUBLE_COLOSSEUM);
+    InitChooseHalfPartyForBattle(0);
 }
 
-static void sub_80F9460(void)
+static void CB2_ReturnFromChooseHalfParty(void)
 {
     switch (gSelectedOrderFromParty[0])
     {
     case 0:
-        gSpecialVar_Result = 0;
+        gSpecialVar_Result = FALSE;
         break;
     default:
-        gSpecialVar_Result = 1;
+        gSpecialVar_Result = TRUE;
         break;
     }
 
@@ -665,7 +668,7 @@ static void sub_80F9460(void)
 void sub_80F9490(void)
 {
     gMain.savedCallback = sub_80F94B8;
-    sub_81B8518(gSpecialVar_0x8004 + 1);
+    InitChooseHalfPartyForBattle(gSpecialVar_0x8004 + 1);
 }
 
 static void sub_80F94B8(void)

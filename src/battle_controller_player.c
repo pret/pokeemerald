@@ -100,7 +100,7 @@ static void PlayerHandleLinkStandbyMsg(void);
 static void PlayerHandleResetActionMoveSelection(void);
 static void PlayerHandleCmd55(void);
 static void PlayerHandleBattleDebug(void);
-static void nullsub_22(void);
+static void PlayerCmdEnd(void);
 
 static void PlayerBufferRunCommand(void);
 static void HandleInputChooseTarget(void);
@@ -188,7 +188,7 @@ static void (*const sPlayerBufferCommands[CONTROLLER_CMDS_COUNT])(void) =
     PlayerHandleResetActionMoveSelection,
     PlayerHandleCmd55,
     PlayerHandleBattleDebug,
-    nullsub_22
+    PlayerCmdEnd
 };
 
 static const u8 sTargetIdentities[] = {B_POSITION_PLAYER_LEFT, B_POSITION_PLAYER_RIGHT, B_POSITION_OPPONENT_RIGHT, B_POSITION_OPPONENT_LEFT};
@@ -3169,6 +3169,6 @@ static void PlayerHandleBattleDebug(void)
     gBattlerControllerFuncs[gActiveBattler] = WaitForDebug;
 }
 
-static void nullsub_22(void)
+static void PlayerCmdEnd(void)
 {
 }

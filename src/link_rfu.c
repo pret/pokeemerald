@@ -18,7 +18,7 @@
 #include "constants/species.h"
 #include "save.h"
 
-extern u16 gUnknown_03005DA8;
+extern u16 gHeldKeyCodeToSend;
 extern void nullsub_89(u8 taskId);
 
 struct UnkRfuStruct_1 gUnknown_03004140;
@@ -2991,7 +2991,7 @@ static void sub_800F048(void)
     }
 }
 
-bool32 sub_800F0B8(void)
+bool32 IsRfuRecvQueueEmpty(void)
 {
     s32 i;
     s32 j;
@@ -3212,7 +3212,7 @@ bool32 sub_800F4F0(void)
         for (i = 0; i < CMD_LENGTH - 1; i++)
             gSendCmd[i] = 0;
     }
-    return sub_800F0B8();
+    return IsRfuRecvQueueEmpty();
 }
 
 void sub_800F638(u8 unused, u32 flags)
@@ -3272,10 +3272,12 @@ u8 sub_800F74C(const u8 *a0)
 
 void rfu_func_080F97B8(void)
 {
-    if (gReceivedRemoteLinkPlayers && gUnknown_03005DA8 && gLinkTransferringData != 1)
+    if (gReceivedRemoteLinkPlayers
+        && gHeldKeyCodeToSend != LINK_KEY_CODE_NULL
+        && gLinkTransferringData != TRUE)
     {
         gUnknown_03000D78[0]++;
-        gUnknown_03005DA8 |= (gUnknown_03000D78[0] << 8);
+        gHeldKeyCodeToSend |= (gUnknown_03000D78[0] << 8);
         sub_800FD14(0xbe00);
     }
 }
@@ -3285,7 +3287,7 @@ struct UnkLinkRfuStruct_02022B14 *sub_800F7DC(void)
     return &gUnknown_02022B14;
 }
 
-bool32 sub_800F7E4(void)
+bool32 IsSendingKeysToRfu(void)
 {
     return gUnknown_03005000.unk_00 == rfu_func_080F97B8;
 }
@@ -3509,7 +3511,7 @@ void sub_800FD14(u16 command)
             gSendCmd[1 + i] = gUnknown_03005000.unk_f2[i];
         break;
     case 0xbe00:
-        gSendCmd[1] = gUnknown_03005DA8;
+        gSendCmd[1] = gHeldKeyCodeToSend;
         break;
     case 0xee00:
         break;
@@ -3799,10 +3801,10 @@ bool32 sub_8010454(u32 a0)
 
 u8 sub_801048C(bool32 a0)
 {
-    if (a0 == 0)
+    if (a0 == FALSE)
         return sub_800D550(0, 0);
     sub_800D550(1, 0x258);
-    return FALSE;
+    return 0;
 }
 
 void sub_80104B0(void)
@@ -5163,7 +5165,7 @@ u32 sub_80124C0(void)
     return gUnknown_03005000.unk_9e8.unk_232;
 }
 
-u32 sub_80124D4(void)
+u32 GetRfuRecvQueueLength(void)
 {
     return gUnknown_03005000.unk_124.unk_8c2;
 }

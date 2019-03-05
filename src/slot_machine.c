@@ -1025,7 +1025,7 @@ static bool8 SlotAction_AwaitPlayerInput(struct Task *task)
 
 static bool8 SlotAction_PrintYouDontHaveThreeCoins(struct Task *task)
 {
-    NewMenuHelpers_DrawDialogueFrame(0, 0);
+    DrawDialogueFrame(0, 0);
     AddTextPrinterParameterized(0, 1, gText_YouDontHaveThreeCoins, 0, 1, 0, 0);
     CopyWindowToVram(0, 3);
     sSlotMachine->state = 7;
@@ -1036,7 +1036,7 @@ static bool8 SlotAction_ExitYouDontHaveThreeCoinsMessage(struct Task *task)
 {
     if (gMain.newKeys & (A_BUTTON | B_BUTTON))
     {
-        sub_8197434(0, TRUE);
+        ClearDialogWindowAndFrame(0, TRUE);
         sSlotMachine->state = 5;
     }
     return FALSE;
@@ -1274,7 +1274,7 @@ static bool8 SlotAction_NoMatches(struct Task *task)
 
 static bool8 SlotAction_PrintQuitTheGame(struct Task *task)
 {
-    NewMenuHelpers_DrawDialogueFrame(0, 0);
+    DrawDialogueFrame(0, 0);
     AddTextPrinterParameterized(0, 1, gText_QuitTheGame, 0, 1, 0, 0);
     CopyWindowToVram(0, 3);
     CreateYesNoMenuParameterized(0x15, 7, 0x214, 0x180, 0xE, 0xF);
@@ -1287,7 +1287,7 @@ static bool8 SlotAction_SeeIfPlayerQuits(struct Task *task)
     s8 input = Menu_ProcessInputNoWrapClearOnChoose();
     if (input == 0) // player chooses to quit
     {
-        sub_8197434(0, TRUE);
+        ClearDialogWindowAndFrame(0, TRUE);
         sub_8103D8C(0);
         sub_8103D8C(1);
         sub_8103D8C(2);
@@ -1296,7 +1296,7 @@ static bool8 SlotAction_SeeIfPlayerQuits(struct Task *task)
     }
     else if (input == 1 || input == -1) // player chooses not to quit
     {
-        sub_8197434(0, TRUE);
+        ClearDialogWindowAndFrame(0, TRUE);
         sSlotMachine->state = 5;
     }
     return FALSE;
@@ -1304,7 +1304,7 @@ static bool8 SlotAction_SeeIfPlayerQuits(struct Task *task)
 
 static bool8 SlotAction_PrintMessage_9999Coins(struct Task *task)
 {
-    NewMenuHelpers_DrawDialogueFrame(0, 0);
+    DrawDialogueFrame(0, 0);
     AddTextPrinterParameterized(0, 1, gText_YouveGot9999Coins, 0, 1, 0, 0);
     CopyWindowToVram(0, 3);
     sSlotMachine->state = 24;
@@ -1315,7 +1315,7 @@ static bool8 SlotAction_ExitMessage_9999Coins(struct Task *task)
 {
     if (gMain.newKeys & (A_BUTTON | B_BUTTON))
     {
-        sub_8197434(0, TRUE);
+        ClearDialogWindowAndFrame(0, TRUE);
         sSlotMachine->state = 5;
     }
     return FALSE;
@@ -1323,7 +1323,7 @@ static bool8 SlotAction_ExitMessage_9999Coins(struct Task *task)
 
 static bool8 SlotAction_PrintMessage_NoMoreCoins(struct Task *task)
 {
-    NewMenuHelpers_DrawDialogueFrame(0, 0);
+    DrawDialogueFrame(0, 0);
     AddTextPrinterParameterized(0, 1, gText_YouveRunOutOfCoins, 0, 1, 0, 0);
     CopyWindowToVram(0, 3);
     sSlotMachine->state = 26;
@@ -1334,7 +1334,7 @@ static bool8 SlotAction_ExitMessage_NoMoreCoins(struct Task *task)
 {
     if (gMain.newKeys & (A_BUTTON | B_BUTTON))
     {
-        sub_8197434(0, TRUE);
+        ClearDialogWindowAndFrame(0, TRUE);
         sSlotMachine->state = 27;
     }
     return FALSE;
@@ -3120,7 +3120,7 @@ static void InfoBox_8104B80(struct Task *task)
     sub_81065DC();
     AddWindow(&gUnknown_085A7444);
     PutWindowTilemap(1);
-    FillWindowPixelBuffer(1, 0);
+    FillWindowPixelBuffer(1, PIXEL_FILL(0));
     task->data[0]++;
 }
 
@@ -3136,7 +3136,7 @@ static void InfoBox_AwaitPlayerInput(struct Task *task)
 {
     if (gMain.newKeys & (B_BUTTON | SELECT_BUTTON))
     {
-        FillWindowPixelBuffer(1, 0);
+        FillWindowPixelBuffer(1, PIXEL_FILL(0));
         ClearWindowTilemap(1);
         CopyWindowToVram(1, 1);
         RemoveWindow(1);

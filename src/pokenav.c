@@ -388,7 +388,7 @@ u32 sub_81C7078(u32 (*func)(s32), u32 priority)
 {
     u16 taskId;
 
-    if (!is_c1_link_related_active())
+    if (!IsUpdateLinkStateCBActive())
         taskId = CreateTask(sub_81C7170, priority);
     else
         taskId = CreateTask(sub_81C71E4, priority);
@@ -1138,8 +1138,8 @@ bool32 IsDma3ManagerBusyWithBgCopy_(void)
 
 void sub_81C7BF8(u32 windowId)
 {
-    FillWindowPixelBuffer(windowId, 0x44);
-    FillWindowPixelRect(windowId, 0x55, 0, 0, 0x80, 1);
+    FillWindowPixelBuffer(windowId, PIXEL_FILL(4));
+    FillWindowPixelRect(windowId, PIXEL_FILL(5), 0, 0, 0x80, 1);
 }
 
 void sub_81C7C28(void)

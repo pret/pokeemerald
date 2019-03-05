@@ -98,7 +98,7 @@ static void OpponentHandleLinkStandbyMsg(void);
 static void OpponentHandleResetActionMoveSelection(void);
 static void OpponentHandleCmd55(void);
 static void OpponentHandleDebugMenu(void);
-static void nullsub_91(void);
+static void OpponentCmdEnd(void);
 
 static void OpponentBufferRunCommand(void);
 static void OpponentBufferExecCompleted(void);
@@ -171,7 +171,7 @@ static void (*const sOpponentBufferCommands[CONTROLLER_CMDS_COUNT])(void) =
     OpponentHandleResetActionMoveSelection,
     OpponentHandleCmd55,
     OpponentHandleDebugMenu,
-    nullsub_91
+    OpponentCmdEnd
 };
 
 // unknown unused data
@@ -2002,6 +2002,6 @@ static void OpponentHandleDebugMenu(void)
     OpponentBufferExecCompleted();
 }
 
-static void nullsub_91(void)
+static void OpponentCmdEnd(void)
 {
 }

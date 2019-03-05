@@ -1126,7 +1126,7 @@ void GetShieldToyTVDecorationInfo(void)
         if (!VarGet(VAR_CURRENT_SECRET_BASE))
             return;
 
-        VarSet(VAR_0x40EE, VarGet(VAR_0x40EE) | 0x10);
+        VarSet(VAR_SECRET_BASE_LOW_TV_FLAGS, VarGet(VAR_SECRET_BASE_LOW_TV_FLAGS) | 0x10);
         break;
     case 734:
         ConvertIntToDecimalStringN(gStringVar1, 50, STR_CONV_MODE_LEFT_ALIGN, 2);
@@ -1137,7 +1137,7 @@ void GetShieldToyTVDecorationInfo(void)
         if (!VarGet(VAR_CURRENT_SECRET_BASE))
             return;
 
-        VarSet(VAR_0x40EE, VarGet(VAR_0x40EE) | 0x20);
+        VarSet(VAR_SECRET_BASE_LOW_TV_FLAGS, VarGet(VAR_SECRET_BASE_LOW_TV_FLAGS) | 0x20);
         break;
     case 756:
         gSpecialVar_Result = 1;
@@ -1145,7 +1145,7 @@ void GetShieldToyTVDecorationInfo(void)
         if (!VarGet(VAR_CURRENT_SECRET_BASE))
             return;
 
-        VarSet(VAR_0x40EE, VarGet(VAR_0x40EE) | 0x80);
+        VarSet(VAR_SECRET_BASE_LOW_TV_FLAGS, VarGet(VAR_SECRET_BASE_LOW_TV_FLAGS) | 0x80);
         break;
     case 757:
         gSpecialVar_Result = 2;
@@ -1153,7 +1153,7 @@ void GetShieldToyTVDecorationInfo(void)
         if (!VarGet(VAR_CURRENT_SECRET_BASE))
             return;
 
-        VarSet(VAR_0x40EE, VarGet(VAR_0x40EE) | 0x80);
+        VarSet(VAR_SECRET_BASE_LOW_TV_FLAGS, VarGet(VAR_SECRET_BASE_LOW_TV_FLAGS) | 0x80);
         break;
     case 758:
         gSpecialVar_Result = 3;
@@ -1161,7 +1161,7 @@ void GetShieldToyTVDecorationInfo(void)
         if (!VarGet(VAR_CURRENT_SECRET_BASE))
             return;
 
-        VarSet(VAR_0x40EE, VarGet(VAR_0x40EE) | 0x80);
+        VarSet(VAR_SECRET_BASE_LOW_TV_FLAGS, VarGet(VAR_SECRET_BASE_LOW_TV_FLAGS) | 0x80);
         break;
     }
 }

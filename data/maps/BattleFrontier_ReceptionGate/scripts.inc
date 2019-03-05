@@ -8,12 +8,12 @@ BattleFrontier_ReceptionGate_MapScript1_2661E5: @ 82661E5
 	end
 
 BattleFrontier_ReceptionGate_MapScript2_2661E9: @ 82661E9
-	map_script_2 VAR_0x40D0, 0, BattleFrontier_ReceptionGate_EventScript_2661F3
+	map_script_2 VAR_HAS_ENTERED_BATTLE_FRONTIER, 0, BattleFrontier_ReceptionGate_EventScript_2661F3
 	.2byte 0
 
 BattleFrontier_ReceptionGate_EventScript_2661F3:: @ 82661F3
 	lockall
-	setvar VAR_0x40D0, 1
+	setvar VAR_HAS_ENTERED_BATTLE_FRONTIER, 1
 	playse SE_PIN
 	applymovement 1, Common_Movement_ExclamationMark
 	waitmovement 0

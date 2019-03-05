@@ -93,7 +93,7 @@ static void WallyHandleLinkStandbyMsg(void);
 static void WallyHandleResetActionMoveSelection(void);
 static void WallyHandleCmd55(void);
 static void WallyHandleBattleDebug(void);
-static void nullsub_118(void);
+static void WallyCmdEnd(void);
 
 static void WallyBufferRunCommand(void);
 static void WallyBufferExecCompleted(void);
@@ -163,10 +163,10 @@ static void (*const sWallyBufferCommands[CONTROLLER_CMDS_COUNT])(void) =
     WallyHandleResetActionMoveSelection,
     WallyHandleCmd55,
     WallyHandleBattleDebug,
-    nullsub_118
+    WallyCmdEnd
 };
 
-static void nullsub_117(void)
+static void SpriteCB_Null7(void)
 {
 }
 
@@ -1566,6 +1566,6 @@ static void WallyHandleBattleDebug(void)
     WallyBufferExecCompleted();
 }
 
-static void nullsub_118(void)
+static void WallyCmdEnd(void)
 {
 }

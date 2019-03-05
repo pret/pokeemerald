@@ -184,7 +184,7 @@
       "x": 21,
       "y": 15,
       "elevation": 3,
-      "var": "VAR_0x40C8",
+      "var": "VAR_JAGGED_PASS_STATE",
       "var_value": "1",
       "script": "JaggedPass_EventScript_2306BB"
     },
@@ -193,7 +193,7 @@
       "x": 22,
       "y": 20,
       "elevation": 3,
-      "var": "VAR_0x40C8",
+      "var": "VAR_JAGGED_PASS_STATE",
       "var_value": "1",
       "script": "JaggedPass_EventScript_2306BB"
     },
@@ -202,7 +202,7 @@
       "x": 21,
       "y": 20,
       "elevation": 3,
-      "var": "VAR_0x40C8",
+      "var": "VAR_JAGGED_PASS_STATE",
       "var_value": "1",
       "script": "JaggedPass_EventScript_2306BB"
     },
@@ -211,7 +211,7 @@
       "x": 14,
       "y": 15,
       "elevation": 3,
-      "var": "VAR_0x40C8",
+      "var": "VAR_JAGGED_PASS_STATE",
       "var_value": "1",
       "script": "JaggedPass_EventScript_2306BB"
     },
@@ -220,7 +220,7 @@
       "x": 13,
       "y": 15,
       "elevation": 3,
-      "var": "VAR_0x40C8",
+      "var": "VAR_JAGGED_PASS_STATE",
       "var_value": "1",
       "script": "JaggedPass_EventScript_2306BB"
     }

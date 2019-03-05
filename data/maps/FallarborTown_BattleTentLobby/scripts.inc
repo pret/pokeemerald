@@ -296,7 +296,7 @@ FallarborTown_BattleTentLobby_EventScript_200228:: @ 8200228
 	faceplayer
 	goto_if_set FLAG_MET_SCOTT_IN_FALLARBOR, FallarborTown_BattleTentLobby_EventScript_200245
 	msgbox FallarborTown_BattleTentLobby_Text_200501, MSGBOX_DEFAULT
-	addvar VAR_0x40D1, 1
+	addvar VAR_SCOTT_STATE, 1
 	setflag FLAG_MET_SCOTT_IN_FALLARBOR
 	release
 	end

@@ -1452,7 +1452,7 @@ static bool8 ExtractMonDataToSummaryStruct(struct Pokemon *a)
         }
         break;
     case 3:
-        GetMonData(a, MON_DATA_OT_NAME, &sum->OTName);
+        GetMonData(a, MON_DATA_OT_NAME, sum->OTName);
         ConvertInternationalString((u8*)&sum->OTName, GetMonData(a, MON_DATA_LANGUAGE));
         sum->unk7 = sub_81B205C(a);
         sum->OTGender = GetMonData(a, MON_DATA_OT_GENDER);
@@ -2735,7 +2735,7 @@ static void ResetWindows(void)
 
     for (i = 0; i < 20; i++)
     {
-        FillWindowPixelBuffer(i, 0);
+        FillWindowPixelBuffer(i, PIXEL_FILL(0));
     }
     for (i = 0; i < ARRAY_COUNT(pssData->windowIds); i++)
     {
@@ -2750,9 +2750,9 @@ static void SummaryScreen_PrintTextOnWindow(u8 windowId, const u8 *string, u8 x,
 
 static void sub_81C25E8(void)
 {
-    FillWindowPixelBuffer(17, 0);
-    FillWindowPixelBuffer(18, 0);
-    FillWindowPixelBuffer(19, 0);
+    FillWindowPixelBuffer(17, PIXEL_FILL(0));
+    FillWindowPixelBuffer(18, PIXEL_FILL(0));
+    FillWindowPixelBuffer(19, PIXEL_FILL(0));
     if (!pssData->summary.isEgg)
         sub_81C2628();
     else
@@ -3007,7 +3007,7 @@ static u8 AddWindowFromTemplateList(const struct WindowTemplate *template, u8 te
     if (*windowIdPtr == 0xFF)
     {
         *windowIdPtr = AddWindow(&template[templateId]);
-        FillWindowPixelBuffer(*windowIdPtr, 0);
+        FillWindowPixelBuffer(*windowIdPtr, PIXEL_FILL(0));
     }
     return *windowIdPtr;
 }
@@ -3029,7 +3029,7 @@ static void PrintPageSpecificText(u8 pageIndex)
     for (i = 0; i < ARRAY_COUNT(pssData->windowIds); i++)
     {
         if (pssData->windowIds[i] != 0xFF)
-            FillWindowPixelBuffer(pssData->windowIds[i], 0);
+            FillWindowPixelBuffer(pssData->windowIds[i], PIXEL_FILL(0));
     }
     sTextPrinterFunctions[pageIndex]();
 }
@@ -3578,7 +3578,7 @@ static void PrintMovePowerAndAccuracy(u16 moveIndex)
     const u8 *text;
     if (moveIndex != 0)
     {
-        FillWindowPixelRect(14, 0, 53, 0, 19, 32);
+        FillWindowPixelRect(14, PIXEL_FILL(0), 53, 0, 19, 32);
 
         if (gBattleMoves[moveIndex].power < 2)
         {
@@ -3676,7 +3676,7 @@ static void PrintContestMoveDescription(u8 moveSlot)
 static void PrintMoveDetails(u16 move)
 {
     u8 windowId = AddWindowFromTemplateList(sPageMovesTemplate, 2);
-    FillWindowPixelBuffer(windowId, 0);
+    FillWindowPixelBuffer(windowId, PIXEL_FILL(0));
     if (move != MOVE_NONE)
     {
         if (pssData->currPageIndex == 2)
@@ -3730,7 +3730,7 @@ static void PrintNewMoveDetailsOrCancelText(void)
 static void sub_81C4064(void)
 {
     u8 windowId = AddWindowFromTemplateList(sPageMovesTemplate, 0);
-    FillWindowPixelRect(windowId, 0, 0, 66, 72, 16);
+    FillWindowPixelRect(windowId, PIXEL_FILL(0), 0, 66, 72, 16);
     CopyWindowToVram(windowId, 2);
 }
 
@@ -3739,11 +3739,11 @@ static void sub_81C40A0(u8 moveIndex1, u8 moveIndex2)
     u8 windowId1 = AddWindowFromTemplateList(sPageMovesTemplate, 0);
     u8 windowId2 = AddWindowFromTemplateList(sPageMovesTemplate, 1);
 
-    FillWindowPixelRect(windowId1, 0, 0, moveIndex1 * 16, 0x48, 0x10);
-    FillWindowPixelRect(windowId1, 0, 0, moveIndex2 * 16, 0x48, 0x10);
+    FillWindowPixelRect(windowId1, PIXEL_FILL(0), 0, moveIndex1 * 16, 0x48, 0x10);
+    FillWindowPixelRect(windowId1, PIXEL_FILL(0), 0, moveIndex2 * 16, 0x48, 0x10);
 
-    FillWindowPixelRect(windowId2, 0, 0, moveIndex1 * 16, 0x30, 0x10);
-    FillWindowPixelRect(windowId2, 0, 0, moveIndex2 * 16, 0x30, 0x10);
+    FillWindowPixelRect(windowId2, PIXEL_FILL(0), 0, moveIndex1 * 16, 0x30, 0x10);
+    FillWindowPixelRect(windowId2, PIXEL_FILL(0), 0, moveIndex2 * 16, 0x30, 0x10);
 
     PrintMoveNameAndPP(moveIndex1);
     PrintMoveNameAndPP(moveIndex2);
@@ -3752,7 +3752,7 @@ static void sub_81C40A0(u8 moveIndex1, u8 moveIndex2)
 static void PrintHMMovesCantBeForgotten(void)
 {
     u8 windowId = AddWindowFromTemplateList(sPageMovesTemplate, 2);
-    FillWindowPixelBuffer(windowId, 0);
+    FillWindowPixelBuffer(windowId, PIXEL_FILL(0));
     SummaryScreen_PrintTextOnWindow(windowId, gText_HMMovesCantBeForgotten2, 6, 1, 0, 0);
 }
 

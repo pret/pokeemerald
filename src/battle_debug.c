@@ -724,7 +724,7 @@ static void Task_DebugMenuProcessInput(u8 taskId)
         if (listItemId == LIST_B_PRESSED)
         {
             DestroyListMenuTask(data->secondaryListTaskId, NULL, NULL);
-            sub_8198070(data->secondaryListWindowId, TRUE);
+            ClearStdWindowAndFrameToTransparent(data->secondaryListWindowId, TRUE);
             RemoveWindow(data->secondaryListWindowId);
             data->activeWindow = ACTIVE_WIN_MAIN;
             data->secondaryListTaskId = 0xFF;
@@ -745,7 +745,7 @@ static void Task_DebugMenuProcessInput(u8 taskId)
     {
         if (gMain.newKeys & (B_BUTTON | A_BUTTON))
         {
-            sub_8198070(data->modifyWindowId, TRUE);
+            ClearStdWindowAndFrameToTransparent(data->modifyWindowId, TRUE);
             RemoveWindow(data->modifyWindowId);
             DestroyModifyArrows(data);
             data->activeWindow = ACTIVE_WIN_SECONDARY;
