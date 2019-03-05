@@ -92,7 +92,7 @@ static void WallyHandleBattleAnimation(void);
 static void WallyHandleLinkStandbyMsg(void);
 static void WallyHandleResetActionMoveSelection(void);
 static void WallyHandleCmd55(void);
-static void SpriteCB_Null8(void);
+static void WallyCmdEnd(void);
 
 static void WallyBufferRunCommand(void);
 static void WallyBufferExecCompleted(void);
@@ -161,7 +161,7 @@ static void (*const sWallyBufferCommands[CONTROLLER_CMDS_COUNT])(void) =
     WallyHandleLinkStandbyMsg,
     WallyHandleResetActionMoveSelection,
     WallyHandleCmd55,
-    SpriteCB_Null8
+    WallyCmdEnd
 };
 
 static void SpriteCB_Null7(void)
@@ -1559,6 +1559,6 @@ static void WallyHandleCmd55(void)
         gBattlerControllerFuncs[gActiveBattler] = sub_80587B0;
 }
 
-static void SpriteCB_Null8(void)
+static void WallyCmdEnd(void)
 {
 }
