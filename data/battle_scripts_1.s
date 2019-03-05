@@ -3876,7 +3876,7 @@ BattleScript_MoveUsedIsInLove::
 	status2animation BS_ATTACKER, STATUS2_INFATUATION
 	return
 
-BattleScript_MoveUsedIsParalyzedCantAttack::
+BattleScript_MoveUsedIsInLoveCantAttack::
 	printstring STRINGID_PKMNIMMOBILIZEDBYLOVE
 	waitmessage 0x40
 	goto BattleScript_MoveEnd

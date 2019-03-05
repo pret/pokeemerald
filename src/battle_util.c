@@ -1526,7 +1526,7 @@ u8 AtkCanceller_UnableToUseMove(void)
                 }
                 else
                 {
-                    BattleScriptPush(BattleScript_MoveUsedIsParalyzedCantAttack);
+                    BattleScriptPush(BattleScript_MoveUsedIsInLoveCantAttack);
                     gHitMarker |= HITMARKER_UNABLE_TO_USE_MOVE;
                     gProtectStructs[gBattlerAttacker].loveImmobility = 1;
                     CancelMultiTurnMoves(gBattlerAttacker);
