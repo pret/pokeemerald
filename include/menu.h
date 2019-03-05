@@ -31,7 +31,7 @@ u16 AddTextPrinterParameterized2(u8 windowId, u8 fontId, const u8 *str, u8 speed
 void PrintPlayerNameOnWindow(u8, const u8*, u16, u16);
 void DisplayItemMessageOnField(u8 taskId, const u8 *src, TaskFunc callback);
 void sub_8197434(u8 windowId, bool8 copyToVram);
-void SetStandardWindowBorderStyle(u8 a0, u8 a1);
+void SetStandardWindowBorderStyle(u8 windowId, bool8 copyToVram);
 void DisplayYesNoMenu(void);
 u32 GetPlayerTextSpeed(void);
 u8 GetPlayerTextSpeedDelay(void);

@@ -20,7 +20,6 @@
 #include "overworld.h"
 #include "palette.h"
 #include "party_menu.h"
-#include "pokenav.h"
 #include "player_pc.h"
 #include "script.h"
 #include "sound.h"
@@ -29,6 +28,7 @@
 #include "strings.h"
 #include "task.h"
 #include "window.h"
+#include "menu_unknown.h"
 
 // structures
 struct Struct203BCC4

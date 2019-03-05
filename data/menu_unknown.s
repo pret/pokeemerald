@@ -3,20 +3,6 @@
 
 	.section .rodata
 
-gUnknown_086253E8:: @ 86253E8
-	.4byte 0x8010100
-	.4byte 0x80F02
-	.4byte 0x8011500
-	.4byte 0x180F12
-	.4byte 0xB010100
-	.4byte 0x180F08
-
-gUnknown_08625400:: @ 8625400
-	.byte 1, 2, 3
-
-gUnknown_08625403:: @ 8625403
-	.byte 0xFF
-
 @ ScanlineEffectParams
 gUnknown_08625404:: @ 8625404
 	.4byte 0x04000040 @ REG_ADDR_WIN0H
