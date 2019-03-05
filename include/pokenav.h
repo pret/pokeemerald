@@ -28,7 +28,7 @@ void InitMoveRelearnerWindows(bool8 useContextWindow);
 bool8 EventObjectIsFarawayIslandMew(struct EventObject *);
 u32 sub_81D427C(void);
 void sub_81D4998(void);
-void sub_81D3640(u16 arg0, void* statStoreLocation1, void* statStoreLocation2, u8 arg3, u8 arg4, u8 arg5);
-void sub_81D3784(u16 arg0, void* statStoreLocation1, u8 arg2, u8 arg3, u8 arg4);
+void DrawLevelUpWindowPg1(u16 arg0, void* statStoreLocation1, void* statStoreLocation2, u8 arg3, u8 arg4, u8 arg5);
+void DrawLevelUpWindowPg2(u16 arg0, void* statStoreLocation1, u8 arg2, u8 arg3, u8 arg4);
 
 #endif //GUARD_POKENAV_H

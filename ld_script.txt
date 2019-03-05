@@ -291,6 +291,7 @@ SECTIONS {
         src/pokenav.o(.text);
         asm/pokenav.o(.text);
         src/pokenav_match_call.o(.text);
+        asm/player_pc_ui.o(.text);
         asm/rom_81D1C44.o(.text);
         src/trainer_hill.o(.text);
         src/rayquaza_scene.o(.text);
@@ -594,6 +595,7 @@ SECTIONS {
         src/pokenav.o(.rodata);
         data/pokenav.o(.rodata);
         src/pokenav_match_call.o(.rodata);
+        data/player_pc_ui.o(.rodata);
         data/rom_81D1C44.o(.rodata);
         src/trainer_hill.o(.rodata);
         src/rayquaza_scene.o(.rodata);

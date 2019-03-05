@@ -6005,7 +6005,7 @@ static void sub_81B767C(u8 taskId)
     s16 *arrayPtr = gUnknown_0203CEC4->data;
 
     arrayPtr[12] = sub_81B3364();
-    sub_81D3640(arrayPtr[12], arrayPtr, &arrayPtr[6], 1, 2, 3);
+    DrawLevelUpWindowPg1(arrayPtr[12], arrayPtr, &arrayPtr[6], 1, 2, 3);
     CopyWindowToVram(arrayPtr[12], 2);
     schedule_bg_copy_tilemap_to_vram(2);
 }
@@ -6014,7 +6014,7 @@ static void sub_81B76C8(u8 taskId)
 {
     s16 *arrayPtr = gUnknown_0203CEC4->data;
 
-    sub_81D3784(arrayPtr[12], &arrayPtr[6], 1, 2, 3);
+    DrawLevelUpWindowPg2(arrayPtr[12], &arrayPtr[6], 1, 2, 3);
     CopyWindowToVram(arrayPtr[12], 2);
     schedule_bg_copy_tilemap_to_vram(2);
 }
