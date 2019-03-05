@@ -652,7 +652,7 @@ void sub_810E314(struct Sprite *sprite)
     sprite->callback = sub_810E520;
 }
 
-#ifndef NONMATCHING
+#ifdef NONMATCHING
 /*
 Things I can't get to match:
 1. data->unk0_1 bitfield behaviour. The way bits are read is different.
