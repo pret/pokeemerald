@@ -115,7 +115,7 @@ extern const u8 BattleScript_PrintPayDayMoneyString[];
 extern const u8 BattleScript_WrapTurnDmg[];
 extern const u8 BattleScript_WrapEnds[];
 extern const u8 BattleScript_MoveUsedIsInLove[];
-extern const u8 BattleScript_MoveUsedIsParalyzedCantAttack[];
+extern const u8 BattleScript_MoveUsedIsInLoveCantAttack[];
 extern const u8 BattleScript_NightmareTurnDmg[];
 extern const u8 BattleScript_CurseTurnDmg[];
 extern const u8 BattleScript_TargetPRLZHeal[];
