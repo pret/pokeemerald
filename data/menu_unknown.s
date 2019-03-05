@@ -21,8 +21,8 @@ gUnknown_08625403:: @ 8625403
 gUnknown_08625404:: @ 8625404
 	.4byte 0x04000040 @ REG_ADDR_WIN0H
     .4byte 0xA6600001 @ SCANLINE_EFFECT_DMACNT_32BIT
-    .byte 1, @ initState
-    .byte 0, @ unused9
+    .byte 1 @ initState
+    .byte 0 @ unused9
     .byte 0, 0 @ Padding
 
 gUnknown_08625410:: @ 8625410
