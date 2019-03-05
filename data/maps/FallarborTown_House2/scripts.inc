@@ -37,7 +37,7 @@ FallarborTown_House2_EventScript_2013D6:: @ 82013D6
 
 FallarborTown_House2_EventScript_20140C:: @ 820140C
 	msgbox FallarborTown_House2_Text_2015C3, MSGBOX_DEFAULT
-	special TeachMoveTutorMove
+	special TeachMoveRelearnerMove
 	waitstate
 	compare VAR_0x8004, 0
 	goto_if_eq FallarborTown_House2_EventScript_2013D6
