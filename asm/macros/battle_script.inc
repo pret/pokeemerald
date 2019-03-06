@@ -1597,6 +1597,11 @@
 	various \battler, VARIOUS_CHECK_IF_GRASSY_TERRAIN_HEALS
 	.4byte \ptr
 	.endm
+	
+	.macro jumpifroarfails ptr:req
+	various BS_ATTACKER, VARIOUS_JUMP_IF_ROAR_FAILS
+	.4byte \ptr
+	.endm
 
 @ helpful macros
 	.macro setstatchanger stat:req, stages:req, down:req

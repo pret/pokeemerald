@@ -2123,6 +2123,7 @@ BattleScript_EffectRoar::
 	attackcanceler
 	attackstring
 	ppreduce
+	jumpifroarfails BattleScript_ButItFailed
 	jumpifability BS_TARGET, ABILITY_SUCTION_CUPS, BattleScript_AbilityPreventsPhasingOut
 	jumpifstatus3 BS_TARGET, STATUS3_ROOTED, BattleScript_PrintMonIsRooted
 	accuracycheck BattleScript_ButItFailed, NO_ACC_CALC_CHECK_LOCK_ON
@@ -4967,18 +4968,9 @@ BattleScript_BideNoEnergyToAttack::
 	printstring STRINGID_PKMNUNLEASHEDENERGY
 	waitmessage 0x40
 	goto BattleScript_ButItFailed
-
-BattleScript_SuccessForceOut::
-	attackanimation
-	waitanimation
-	switchoutabilities BS_TARGET
-	returntoball BS_TARGET
-	waitstate
-	jumpifbattletype BATTLE_TYPE_TRAINER, BattleScript_TrainerBattleForceOut
-	setoutcomeonteleport BS_ATTACKER
-	finishaction
-
-BattleScript_TrainerBattleForceOut::
+	
+BattleScript_RoarSuccessSwitch::
+	call BattleScript_RoarSuccessRet
 	getswitchedmondata BS_TARGET
 	switchindataupdate BS_TARGET
 	switchinanim BS_TARGET, FALSE
@@ -4986,6 +4978,19 @@ BattleScript_TrainerBattleForceOut::
 	printstring STRINGID_PKMNWASDRAGGEDOUT
 	switchineffects BS_TARGET
 	goto BattleScript_MoveEnd
+	
+BattleScript_RoarSuccessEndBattle::
+	call BattleScript_RoarSuccessRet
+	setoutcomeonteleport BS_ATTACKER
+	finishaction
+
+BattleScript_RoarSuccessRet:
+	attackanimation
+	waitanimation
+	switchoutabilities BS_TARGET
+	returntoball BS_TARGET
+	waitstate
+	return
 
 BattleScript_MistProtected::
 	pause 0x20
