@@ -2,7 +2,6 @@
 #define GUARD_POKENAV_H
 #include "list_menu.h"
 
-bool8 sub_81D20BC(void *arg0);
 bool8 sub_81D312C(void *arg0);
 bool8 sub_81D4A58(struct EventObject*);
 void MoveRelearnerPrintText(u8 *);

@@ -237,11 +237,7 @@ gUnknown_0203CF40: @ 203CF40
 gUnknown_0203CF44: @ 203CF44
 	.space 0x4
 
-gUnknown_0203CF48: @ 203CF48
-	.space 0x4
-
-gUnknown_0203CF4C: @ 203CF4C
-	.space 0x4
+    .include "src/menu_unknown.o"
 
 gUnknown_0203CF50: @ 203CF50
 	.space 0x4

@@ -18,7 +18,8 @@ struct UnknownStruct_81D1ED4
     u8 unk13C[0x216];
     u16 unk352;
     u8 unk354;
-    u8 unk355[0x23];
+    u8 unk355;
+    u8 unk356[0x22];
 };
 
 bool8 sub_81D1C44(u8 a0);
@@ -33,6 +34,7 @@ void sub_81D1ED4(struct UnknownStruct_81D1ED4 *a0);
 void sub_81D2108(struct UnknownStruct_81D1ED4 *arg0);
 void sub_81D20AC(struct UnknownStruct_81D1ED4 *arg0);
 void sub_81D2230(struct UnknownStruct_81D1ED4 *arg0);
+bool8 sub_81D20BC(struct UnknownStruct_81D1ED4 *arg0);
 void sub_81D3464(void *arg0);
 void sub_81D3480(void *arg0, u8 arg1);
 void sub_81D2754(struct UnknownStruct_81D1ED4 *arg0, void *arg1);
