@@ -4,14 +4,6 @@
 
 bool8 sub_81D20BC(void *arg0);
 bool8 sub_81D312C(void *arg0);
-void sub_81D1ED4(void *arg0);
-void sub_81D2108(void *arg0);
-void sub_81D20AC(void *arg0);
-void sub_81D2230(void *arg0);
-void sub_81D3464(void *arg0);
-void sub_81D3480(void *arg0, u8 arg1);
-void sub_81D2754(void *arg0, void *arg1);
-void sub_81D1F84(void *arg0, void *arg1, void *arg2);
 bool8 sub_81D4A58(struct EventObject*);
 void MoveRelearnerPrintText(u8 *);
 u16 MoveRelearnerRunTextPrinters(void);

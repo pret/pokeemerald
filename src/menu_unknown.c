@@ -184,3 +184,38 @@ void sub_81D1EC0(void)
 {
     Free(gUnknown_0203CF4C);
 }
+
+void sub_81D1ED4(struct UnknownStruct_81D1ED4 *a0)
+{
+    u8 j;
+    u8 i;
+    u8 v1;
+    for (j = 0; j < 5; j++)
+    {
+        for (i = 0; i < 10; i++)
+        {
+            // u16
+            a0->unk64[i][j].unk0 = 0;
+            a0->unk64[i][j].unk2 = 0;
+        }
+        for (i = 0; i < 4; i++)
+        {
+            // u8
+            a0->unk0[i][j] = 0;
+
+            // u16
+            a0->unk14[i][j].unk0 = 0x9B;
+            a0->unk14[i][j].unk2 = 0x5B;
+        }
+
+        // u16
+        a0->unk12C[j].unk0 = 0;
+        a0->unk12C[j].unk2 = 0;
+    }
+
+    // u8
+    a0->unk354 = 0;
+    
+    // u16
+    a0->unk352 = 0;
+}
