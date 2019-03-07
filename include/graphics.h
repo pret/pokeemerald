@@ -3996,6 +3996,8 @@ extern const u32 gItemIcon_AssaultVest[];
 extern const u32 gItemIconPalette_AssaultVest[];
 extern const u32 gItemIcon_PixiePlate[];
 extern const u32 gItemIconPalette_PixiePlate[];
+extern const u32 gItemIcon_SafetyGoggles[];
+extern const u32 gItemIconPalette_SafetyGoggles[];
 extern const u32 gItemIcon_Gengarite[];
 extern const u32 gItemIconPalette_Gengarite[];
 extern const u32 gItemIcon_Gardevoirite[];
