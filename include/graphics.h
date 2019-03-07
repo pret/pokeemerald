@@ -4092,6 +4092,21 @@ extern const u32 gItemIcon_Beedrillite[];
 extern const u32 gItemIconPalette_Beedrillite[];
 extern const u32 gItemIcon_MegaBracelet[];
 extern const u32 gItemIconPalette_MegaBracelet[];
+// Gen 7 Items
+extern const u32 gItemIcon_ProtectivePads[];
+extern const u32 gItemIconPalette_ProtectivePads[];
+extern const u32 gItemIcon_TerrainExtender[];
+extern const u32 gItemIconPalette_TerrainExtender[];
+extern const u32 gItemIcon_ElectricSeed[];
+extern const u32 gItemIconPalette_ElectricSeed[];
+extern const u32 gItemIcon_GrassySeed[];
+extern const u32 gItemIconPalette_GrassySeed[];
+extern const u32 gItemIcon_MistySeed[];
+extern const u32 gItemIconPalette_MistySeed[];
+extern const u32 gItemIcon_PsychicSeed[];
+extern const u32 gItemIconPalette_PsychicSeed[];
+extern const u32 gItemIcon_AdrenalineOrb[];
+extern const u32 gItemIconPalette_AdrenalineOrb[];
 
 extern const u32 gItemIcon_ReturnToFieldArrow[];
 extern const u32 gItemIconPalette_ReturnToFieldArrow[];

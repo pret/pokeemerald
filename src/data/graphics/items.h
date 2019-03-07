@@ -1105,3 +1105,26 @@ const u32 gItemIconPalette_Beedrillite[] = INCBIN_U32("graphics/items/icon_palet
 
 const u32 gItemIcon_MegaBracelet[] = INCBIN_U32("graphics/items/icons/mega_bracelet.4bpp.lz");
 const u32 gItemIconPalette_MegaBracelet[] = INCBIN_U32("graphics/items/icon_palettes/mega_bracelet.gbapal.lz");
+
+// Gen 7 Items
+
+const u32 gItemIcon_ProtectivePads[] = INCBIN_U32("graphics/items/icons/protective_pads.4bpp.lz");
+const u32 gItemIconPalette_ProtectivePads[] = INCBIN_U32("graphics/items/icon_palettes/protective_pads.gbapal.lz");
+
+const u32 gItemIcon_TerrainExtender[] = INCBIN_U32("graphics/items/icons/terrain_extender.4bpp.lz");
+const u32 gItemIconPalette_TerrainExtender[] = INCBIN_U32("graphics/items/icon_palettes/terrain_extender.gbapal.lz");
+
+const u32 gItemIcon_ElectricSeed[] = INCBIN_U32("graphics/items/icons/electric_seed.4bpp.lz");
+const u32 gItemIconPalette_ElectricSeed[] = INCBIN_U32("graphics/items/icon_palettes/electric_seed.gbapal.lz");
+
+const u32 gItemIcon_GrassySeed[] = INCBIN_U32("graphics/items/icons/grassy_seed.4bpp.lz");
+const u32 gItemIconPalette_GrassySeed[] = INCBIN_U32("graphics/items/icon_palettes/grassy_seed.gbapal.lz");
+
+const u32 gItemIcon_MistySeed[] = INCBIN_U32("graphics/items/icons/misty_seed.4bpp.lz");
+const u32 gItemIconPalette_MistySeed[] = INCBIN_U32("graphics/items/icon_palettes/misty_seed.gbapal.lz");
+
+const u32 gItemIcon_PsychicSeed[] = INCBIN_U32("graphics/items/icons/psychic_seed.4bpp.lz");
+const u32 gItemIconPalette_PsychicSeed[] = INCBIN_U32("graphics/items/icon_palettes/psychic_seed.gbapal.lz");
+
+const u32 gItemIcon_AdrenalineOrb[] = INCBIN_U32("graphics/items/icons/adrenaline_orb.4bpp.lz");
+const u32 gItemIconPalette_AdrenalineOrb[] = INCBIN_U32("graphics/items/icon_palettes/adrenaline_orb.gbapal.lz");

@@ -526,6 +526,14 @@ const u32 *const gItemIconTable[][2] =
     [ITEM_SALAMENCITE] = {gItemIcon_Salamencite, gItemIconPalette_Salamencite},
     [ITEM_BEEDRILLITE] = {gItemIcon_Beedrillite, gItemIconPalette_Beedrillite},
     [ITEM_MEGA_BRACELET] = {gItemIcon_MegaBracelet, gItemIconPalette_MegaBracelet},
+	// Gen 7 Items
+    [ITEM_PROTECTIVE_PADS] = {gItemIcon_ProtectivePads, gItemIconPalette_ProtectivePads},
+    [ITEM_TERRAIN_EXTENDER] = {gItemIcon_TerrainExtender, gItemIconPalette_TerrainExtender},
+    [ITEM_ELECTRIC_SEED] = {gItemIcon_ElectricSeed, gItemIconPalette_ElectricSeed},
+    [ITEM_GRASSY_SEED] = {gItemIcon_GrassySeed, gItemIconPalette_GrassySeed},
+    [ITEM_MISTY_SEED] = {gItemIcon_MistySeed, gItemIconPalette_MistySeed},
+    [ITEM_PSYCHIC_SEED] = {gItemIcon_PsychicSeed, gItemIconPalette_PsychicSeed},
+    [ITEM_ADRENALINE_ORB] = {gItemIcon_AdrenalineOrb, gItemIconPalette_AdrenalineOrb},
     // Return to field arrow
     [ITEM_FIELD_ARROW] = {gItemIcon_ReturnToFieldArrow, gItemIconPalette_ReturnToFieldArrow},
 };
