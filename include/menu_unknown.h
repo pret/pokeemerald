@@ -14,8 +14,10 @@ struct UnknownStruct_81D1ED4
     u8 unk0[4][5];
     struct UnknownSubStruct_81D1ED4 unk14[4][5];
     struct UnknownSubStruct_81D1ED4 unk64[10][5];
-    struct UnknownSubStruct_81D1ED4 unk12C[4];
-    u8 unk13C[0x216];
+    struct UnknownSubStruct_81D1ED4 unk12C[5];
+    struct UnknownSubStruct_81D1ED4 unk13C[0x42];
+    struct UnknownSubStruct_81D1ED4 unk248[0x42];
+    u16 unk350;
     u16 unk352;
     u8 unk354;
     u8 unk355;
@@ -37,7 +39,7 @@ void sub_81D2230(struct UnknownStruct_81D1ED4 *arg0);
 bool8 sub_81D20BC(struct UnknownStruct_81D1ED4 *arg0);
 void sub_81D3464(void *arg0);
 void sub_81D3480(void *arg0, u8 arg1);
-void sub_81D2754(struct UnknownStruct_81D1ED4 *arg0, void *arg1);
+void sub_81D2754(struct UnknownStruct_81D1ED4 *arg0, struct UnknownSubStruct_81D1ED4 *arg1);
 void sub_81D1F84(struct UnknownStruct_81D1ED4 *arg0, struct UnknownSubStruct_81D1ED4 arg1[4][5], struct UnknownSubStruct_81D1ED4 arg2[4][5]);
 
 #endif // GUARD_MENU_UNKNOWN_H

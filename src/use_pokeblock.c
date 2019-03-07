@@ -34,7 +34,6 @@ struct UsePokeblockSubStruct
 struct UsePokeblockStruct
 {
     u8 field_0[0x7C58];
-    //u8 field_7C58[0x378];
     struct UnknownStruct_81D1ED4 field_7C58;
     struct UsePokeblockSubStruct info;
 };
@@ -204,7 +203,7 @@ void sub_8166380(void)
             gUnknown_0203BC90->field_50++;
             break;
         case 11:
-            sub_81D2754(&gUnknown_0203BCAC->field_7C58, &gUnknown_0203BCAC->field_0[0x7C6C]);
+            sub_81D2754(&gUnknown_0203BCAC->field_7C58, gUnknown_0203BCAC->field_7C58.unk14[0]);
             sub_81D20AC(&gUnknown_0203BCAC->field_7C58);
             gUnknown_0203BC90->field_50++;
             break;
