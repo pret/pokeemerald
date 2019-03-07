@@ -8128,6 +8128,24 @@ const struct Item gItems[] =
         .battleUseFunc = NULL,
         .secondaryId = 0,
     },
+
+    [ITEM_SAFETY_GOGGLES] =
+    {
+        .name = _("SafetyGoggles"),
+        .itemId = ITEM_SAFETY_GOGGLES,
+        .price = 4000,
+        .holdEffect = HOLD_EFFECT_SAFETY_GOOGLES,
+        .holdEffectParam = 0,
+        .description = gSafetyGogglesItemDescription,
+        .importance = 0,
+        .unk19 = 0,
+        .pocket = POCKET_ITEMS,
+        .type = 4,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .battleUsage = 0,
+        .battleUseFunc = NULL,
+        .secondaryId = 0,
+    },
 	
 	[ITEM_GENGARITE] =
 	{

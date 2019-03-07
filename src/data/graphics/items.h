@@ -962,6 +962,9 @@ const u32 gItemIconPalette_AssaultVest[] = INCBIN_U32("graphics/items/icon_palet
 const u32 gItemIcon_PixiePlate[] = INCBIN_U32("graphics/items/icons/pixie_plate.4bpp.lz");
 const u32 gItemIconPalette_PixiePlate[] = INCBIN_U32("graphics/items/icon_palettes/pixie_plate.gbapal.lz");
 
+const u32 gItemIcon_SafetyGoggles[] = INCBIN_U32("graphics/items/icons/safety_goggles.4bpp.lz");
+const u32 gItemIconPalette_SafetyGoggles[] = INCBIN_U32("graphics/items/icon_palettes/safety_goggles.gbapal.lz");
+
 const u32 gItemIcon_Gengarite[] = INCBIN_U32("graphics/items/icons/gengarite.4bpp.lz");
 const u32 gItemIconPalette_Gengarite[] = INCBIN_U32("graphics/items/icon_palettes/gengarite.gbapal.lz");
 
