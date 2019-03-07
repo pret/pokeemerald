@@ -24,6 +24,7 @@ EWRAM_DATA static struct ListMenuItem *sUnknown_0203CF4C = NULL;
 void sub_81D1E7C(s32 itemIndex, bool8 onInit, struct ListMenu *list);
 void sub_81D24A4(struct UnknownStruct_81D1ED4 *a0);
 void sub_81D2634(struct UnknownStruct_81D1ED4 *a0);
+void MoveRelearnerCursorCallback(s32 itemIndex, bool8 onInit, struct ListMenu *list);
 
 static const struct WindowTemplate sUnknown_086253E8[] =
 {
@@ -72,7 +73,7 @@ static const struct ScanlineEffectParams sUnknown_08625404 =
 };
 
 
-const u8 gUnknown_08625410[] =
+static const u8 sUnknown_08625410[] =
 {
     4,
     5,
@@ -107,6 +108,91 @@ const u8 gUnknown_08625410[] =
     0x21, 0x21, 0x21, 0x21, 0x21, 0x21, 0x21, 0x21, 0x21, 0x21, 0x21, 0x21, 0x21, 0x21, 0x21, 0x21, 0x21, 0x21, 0x21,
     0x22, 0x22, 0x22, 0x22, 0x22, 0x22, 0x22, 0x22, 0x22, 0x22, 0x22, 0x22, 0x22, 0x22, 0x22, 0x22, 0x22, 0x22, 0x22, 0x22,
     0x23
+};
+
+
+const struct WindowTemplate gMoveRelearnerWindowTemplates[] =
+{
+    {
+        .bg = 1,
+        .tilemapLeft = 1,
+        .tilemapTop = 1,
+        .width = 16,
+        .height = 12,
+        .paletteNum = 0xF,
+        .baseBlock = 0xA
+    },
+    {
+        .bg = 1,
+        .tilemapLeft = 1,
+        .tilemapTop = 1,
+        .width = 16,
+        .height = 12,
+        .paletteNum = 0xF,
+        .baseBlock = 0xCA
+    },
+    {
+        .bg = 1,
+        .tilemapLeft = 19,
+        .tilemapTop = 1,
+        .width = 10,
+        .height = 12,
+        .paletteNum = 0xF,
+        .baseBlock = 0x18A
+    },
+    {
+        .bg = 1,
+        .tilemapLeft = 4,
+        .tilemapTop = 15,
+        .width = 22,
+        .height = 4,
+        .paletteNum = 0xF,
+        .baseBlock = 0x202
+    },
+    {
+        .bg = 0,
+        .tilemapLeft = 22,
+        .tilemapTop = 8,
+        .width = 5,
+        .height = 4,
+        .paletteNum = 0xF,
+        .baseBlock = 0x25A
+    },
+    DUMMY_WIN_TEMPLATE
+};
+
+const struct WindowTemplate gMoveRelearnerYesNoMenuTemplate =
+{
+    .bg = 0,
+    .tilemapLeft = 22,
+    .tilemapTop = 8,
+    .width = 5,
+    .height = 4,
+    .paletteNum = 0xF,
+    .baseBlock = 0x25A
+};
+
+
+const struct ListMenuTemplate gMoveRelearnerMovesListTemplate =
+{
+    .items = NULL,
+    .moveCursorFunc = MoveRelearnerCursorCallback,
+    .itemPrintFunc = NULL,
+    .totalItems = 0,
+    .maxShowed = 0,
+    .windowId = 2,
+    .header_X = 0,
+    .item_X = 8,
+    .cursor_X = 0,
+    .upText_Y = 1,
+    .cursorPal = 2,
+    .fillValue = 1,
+    .cursorShadowPal = 3,
+    .lettersSpacing = 0,
+    .itemVerticalPadding = 0,
+    .scrollMultiple = LIST_NO_MULTIPLE_SCROLL,
+    .fontId = 1,
+    .cursorKind = 0
 };
 
 bool8 sub_81D1C44(u8 count)
@@ -1353,7 +1439,7 @@ NAKED
 void sub_81D2754(struct UnknownStruct_81D1ED4 *arg0, struct UnknownSubStruct_81D1ED4 *arg1)
 {
     // There are some register-renaming issues here. The cause of the problem seems to be that
-    // GCC tries to save gUnknown_08625410 in a register, instead of loading the constant repeatedly.
+    // GCC tries to save sUnknown_08625410 in a register, instead of loading the constant repeatedly.
     // But this is one too many things to keep track of, so GCC is forced to use the stack.
 #ifdef NONMATCHING
     u8* v1;
@@ -1363,7 +1449,7 @@ void sub_81D2754(struct UnknownStruct_81D1ED4 *arg0, struct UnknownSubStruct_81D
     u16 v5;
 
     v1 = arg0->unk0[0];
-    v2 = gUnknown_08625410[*v1];
+    v2 = sUnknown_08625410[*v1];
     v1++;
     arg1[0].unk0 = 0x9B;
     arg1[0].unk2 = 0x5B - v2;
@@ -1380,7 +1466,7 @@ void sub_81D2754(struct UnknownStruct_81D1ED4 *arg0, struct UnknownSubStruct_81D
             v3++;
         }
 
-        v2 = gUnknown_08625410[*v1];
+        v2 = sUnknown_08625410[*v1];
         v1++;
         arg1[v4].unk0 = ((gSineTable[v3 + 0x40] * v2) >> 8) + 0x9B;
         arg1[v4].unk2 = ((gSineTable[v3] * v2) >> 8) - 0x5B;
@@ -1398,7 +1484,7 @@ void sub_81D2754(struct UnknownStruct_81D1ED4 *arg0, struct UnknownSubStruct_81D
 	push {r5-r7}\n\
 	adds r6, r0, 0\n\
 	mov r8, r1\n\
-	ldr r1, =gUnknown_08625410\n\
+	ldr r1, =sUnknown_08625410\n\
 	ldrb r0, [r6]\n\
 	adds r0, r1\n\
 	ldrb r2, [r0]\n\
@@ -1443,7 +1529,7 @@ _081D27A4:\n\
 	lsrs r7, r0, 24\n\
 _081D27B4:\n\
 	ldrb r0, [r6]\n\
-	ldr r2, =gUnknown_08625410\n\
+	ldr r2, =sUnknown_08625410\n\
 	adds r0, r2\n\
 	ldrb r2, [r0]\n\
 	adds r6, 0x1\n\
