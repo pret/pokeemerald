@@ -97,7 +97,6 @@ int main(int argc, char **argv)
         }
         for (auto include : file.GetIncludes())
         {
-            bool found = false;
             for (auto includeDir : includeDirs)
             {
                 std::string path(includeDir + include);
@@ -108,21 +107,8 @@ int main(int argc, char **argv)
                     {
                         filesToProcess.push(path);
                     }
-                    found = true;
                     break;
                 }
-            }
-            if (!found)
-            {
-                if (GetFileType(include) == SourceFileType::Header)
-                    // We don't have any generated .h files... yet.
-                    // Better to give a warning; debugging the makefile when a
-                    // header is missing is very difficult.
-                    fprintf(stderr, "scaninc: warning: C header file \"%s\" not found. (included from \"%s\")\n",
-                            include.c_str(), filePath.c_str());
-
-                // It's probably a generated file.
-                dependencies.insert(include);
             }
         }
         includeDirs.pop_back();
