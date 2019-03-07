@@ -398,6 +398,7 @@ const u8 gNormalGemItemDescription[] = _("Increases the\npower of Normal\nType m
 const u8 gFairyGemItemDescription[] = _("Increases the\npower of Fairy\nType moves.");
 const u8 gAssaultVestItemDescription[] = _("Raises Sp. Def but\nprevents the use of\nstatus moves.");
 const u8 gPixiePlateItemDescription[] = _("A stone tablet that\nboosts the power of\nFairy-type moves.");
+const u8 gSafetyGogglesItemDescription[] = _("Protect from\nweather damage and\npowder moves.");
 const u8 gGengariteItemDescription[] = _("This stone enables\nGengar to Mega\nEvolve in battle.");
 const u8 gGardevoiriteItemDescription[] = _("This stone enables\nGardevoir to Mega\nEvolve in battle.");
 const u8 gAmpharositeItemDescription[] = _("This stone enables\nAmpharos to Mega\nEvolve in battle.");
