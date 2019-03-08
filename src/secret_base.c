@@ -871,7 +871,7 @@ void sub_80E9C9C(u8 taskId)
     {
         data[1] = 0;
         data[2] = 0;
-        sub_8197434(0, 0);
+        ClearDialogWindowAndFrame(0, 0);
         gUnknown_0203A020 = calloc(1, sizeof(struct SecretBaseListMenuBuffer));
         data[6] = AddWindow(&gUnknown_0858D06C[0]);
         game_continue(taskId);
@@ -963,7 +963,7 @@ void sub_80E9E90(u8 taskId)
             PlaySE(SE_SELECT);
             DestroyListMenuTask(data[5], NULL, NULL);
             RemoveScrollIndicatorArrowPair(data[8]);
-            sub_819746C(data[6], 0);
+            ClearStdWindowAndFrame(data[6], 0);
             ClearWindowTilemap(data[6]);
             RemoveWindow(data[6]);
             schedule_bg_copy_tilemap_to_vram(0);
@@ -1020,8 +1020,8 @@ void sub_80E9FFC(u8 taskId)
     s16 *data;
 
     data = gTasks[taskId].data;
-    sub_819746C(data[6], FALSE);
-    sub_819746C(data[7], FALSE);
+    ClearStdWindowAndFrame(data[6], FALSE);
+    ClearStdWindowAndFrame(data[7], FALSE);
     ClearWindowTilemap(data[6]);
     ClearWindowTilemap(data[7]);
     RemoveWindow(data[7]);
@@ -1033,7 +1033,7 @@ void sub_80E9FFC(u8 taskId)
 
 void sub_80EA06C(u8 taskId)
 {
-    DisplayYesNoMenu();
+    DisplayYesNoMenuDefaultYes();
     DoYesNoFuncWithChoice(taskId, &gUnknown_0858D058);
 }
 
@@ -1042,7 +1042,7 @@ void sub_80EA08C(u8 taskId)
     s16 *data;
 
     data = gTasks[taskId].data;
-    sub_8197434(0, 0);
+    ClearDialogWindowAndFrame(0, 0);
     DestroyListMenuTask(data[5], &data[2], &data[1]);
     gSaveBlock1Ptr->secretBases[data[4]].sbr_field_1_6 = 0;
     game_continue(taskId);
@@ -1061,7 +1061,7 @@ void sub_80EA13C(u8 taskId)
     s16 *data;
 
     data = gTasks[taskId].data;
-    sub_8197434(0, 0);
+    ClearDialogWindowAndFrame(0, 0);
     DestroyListMenuTask(data[5], &data[2], &data[1]);
     sub_80E9E00(taskId);
     gTasks[taskId].func = sub_80E9E90;
@@ -1073,7 +1073,7 @@ void sub_80EA18C(u8 taskId)
 
     data = gTasks[taskId].data;
     sub_80E9E44(taskId);
-    sub_819746C(data[7], 0);
+    ClearStdWindowAndFrame(data[7], 0);
     ClearWindowTilemap(data[7]);
     RemoveWindow(data[7]);
     schedule_bg_copy_tilemap_to_vram(0);

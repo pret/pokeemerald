@@ -2755,7 +2755,7 @@ static void sub_81B1B8C(u8 taskId)
     {
         if (gTasks[taskId].data[0] == 0)
         {
-            sub_8198070(6, 0);
+            ClearStdWindowAndFrameToTransparent(6, 0);
             ClearWindowTilemap(6);
         }
         DestroyTask(taskId);
@@ -2780,7 +2780,7 @@ static void sub_81B1C1C(u8 taskId)
 {
     if (sub_81B1BD4() != TRUE)
     {
-        sub_8198070(6, 0);
+        ClearStdWindowAndFrameToTransparent(6, 0);
         ClearWindowTilemap(6);
         if (sub_81221AC() == TRUE)
         {
@@ -3110,7 +3110,7 @@ static void sub_81B239C(u8 a)
     }
     DeactivateAllTextPrinters();
     for (i = 0; i < PARTY_SIZE; i++)
-        FillWindowPixelBuffer(i, 0);
+        FillWindowPixelBuffer(i, PIXEL_FILL(0));
     LoadUserWindowBorderGfx(0, 0x4F, 0xD0);
     LoadPalette(GetOverworldTextboxPalettePtr(), 0xE0, 0x20);
     LoadPalette(gUnknown_0860F074, 0xF0, 0x20);
@@ -3128,7 +3128,7 @@ static void sub_81B2428(bool8 a)
         if (a == TRUE)
         {
             firstWindowId = AddWindow(&gUnknown_08615918);
-            FillWindowPixelBuffer(firstWindowId, 0);
+            FillWindowPixelBuffer(firstWindowId, PIXEL_FILL(0));
             mainOffset = GetStringCenterAlignXOffset(0, gMenuText_Confirm, 48);
             AddTextPrinterParameterized4(firstWindowId, 0, mainOffset, 1, 0, 0, gUnknown_086157FC[0], -1, gMenuText_Confirm);
             PutWindowTilemap(firstWindowId);
@@ -3141,7 +3141,7 @@ static void sub_81B2428(bool8 a)
             windowId = AddWindow(&gUnknown_08615908);
             offset = 3;
         }
-        FillWindowPixelBuffer(windowId, 0);
+        FillWindowPixelBuffer(windowId, PIXEL_FILL(0));
         if (gUnknown_0203CEC8.unk8_0 != 10)
         {
             mainOffset = GetStringCenterAlignXOffset(0, gText_Cancel, 48);
@@ -3481,8 +3481,9 @@ static void DisplayPartyPokemonHPBar(u16 hp, u16 maxhp, struct Struct203CEDC *pt
     FillWindowPixelRect(ptr->windowId, gUnknown_08615AB8[0], ptr->unk0->unk4[20], ptr->unk0->unk4[21] + 1, hpFraction, 2);
     if (hpFraction != ptr->unk0->unk4[22])
     {
-        FillWindowPixelRect(ptr->windowId, 13, ptr->unk0->unk4[20] + hpFraction, ptr->unk0->unk4[21], ptr->unk0->unk4[22] - hpFraction, 1);
-        FillWindowPixelRect(ptr->windowId, 2, ptr->unk0->unk4[20] + hpFraction, ptr->unk0->unk4[21] + 1, ptr->unk0->unk4[22] - hpFraction, 2);
+        // This appears to be an alternating fill
+        FillWindowPixelRect(ptr->windowId, 0x0D, ptr->unk0->unk4[20] + hpFraction, ptr->unk0->unk4[21], ptr->unk0->unk4[22] - hpFraction, 1);
+        FillWindowPixelRect(ptr->windowId, 0x02, ptr->unk0->unk4[20] + hpFraction, ptr->unk0->unk4[21] + 1, ptr->unk0->unk4[22] - hpFraction, 2);
     }
     CopyWindowToVram(ptr->windowId, 2);
 }
@@ -3503,7 +3504,7 @@ static void sub_81B302C(u8 *ptr)
 {
     if (*ptr != 0xFF)
     {
-        sub_8198070(*ptr, 0);
+        ClearStdWindowAndFrameToTransparent(*ptr, 0);
         RemoveWindow(*ptr);
         *ptr = 0xFF;
         schedule_bg_copy_tilemap_to_vram(2);
@@ -3548,7 +3549,7 @@ void display_pokemon_menu_message(u32 stringID)
             else if (sub_81B314C() == FALSE)
                 stringID = 1;
         }
-        SetWindowBorderStyle(*windowPtr, FALSE, 0x4F, 0xD);
+        DrawStdFrameWithCustomTileAndPalette(*windowPtr, FALSE, 0x4F, 0xD);
         StringExpandPlaceholders(gStringVar4, gUnknown_08615AF4[stringID]);
         AddTextPrinterParameterized(*windowPtr, 1, gStringVar4, 0, 1, 0, 0);
         schedule_bg_copy_tilemap_to_vram(2);
@@ -3598,7 +3599,7 @@ static u8 sub_81B31B0(u8 a)
     }
 
     gUnknown_0203CEC4->unkC[0] = AddWindow(&window);
-    SetWindowBorderStyle(gUnknown_0203CEC4->unkC[0], FALSE, 0x4F, 13);
+    DrawStdFrameWithCustomTileAndPalette(gUnknown_0203CEC4->unkC[0], FALSE, 0x4F, 13);
     if (a == 3)
         return gUnknown_0203CEC4->unkC[0];
     cursorDimension = GetMenuCursorDimensionByFont(1, 0);
@@ -3618,7 +3619,7 @@ static u8 sub_81B31B0(u8 a)
 
 static void sub_81B3300(const u8 *text)
 {
-    SetWindowBorderStyle(6, FALSE, 0x4F, 13);
+    DrawStdFrameWithCustomTileAndPalette(6, FALSE, 0x4F, 13);
     gTextFlags.canABSpeedUpPrint = TRUE;
     AddTextPrinterParameterized2(6, 1, text, GetPlayerTextSpeedDelay(), 0, 2, 1, 3);
 }
@@ -3631,7 +3632,7 @@ static void sub_81B334C(void)
 static u8 sub_81B3364(void)
 {
     gUnknown_0203CEC4->unkC[0] = AddWindow(&gUnknown_08615970);
-    SetWindowBorderStyle(gUnknown_0203CEC4->unkC[0], FALSE, 0x4F, 13);
+    DrawStdFrameWithCustomTileAndPalette(gUnknown_0203CEC4->unkC[0], FALSE, 0x4F, 13);
     return gUnknown_0203CEC4->unkC[0];
 }
 

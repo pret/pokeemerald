@@ -293,7 +293,7 @@ static void ReceiveExchangePacket(u32 which)
 
 static void PrintTextOnRecordMixing(const u8 *src)
 {
-    NewMenuHelpers_DrawDialogueFrame(0, 0);
+    DrawDialogueFrame(0, 0);
     AddTextPrinterParameterized(0, 1, src, 0, 1, 0, NULL);
     CopyWindowToVram(0, 3);
 }
@@ -372,7 +372,7 @@ static void Task_RecordMixing_Main(u8 taskId)
             {
                 CreateTask(sub_80AF2B4, 10);
             }
-            sub_8197434(0, 1);
+            ClearDialogWindowAndFrame(0, 1);
             DestroyTask(taskId);
             EnableBothScriptContexts();
         }

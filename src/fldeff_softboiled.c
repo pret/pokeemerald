@@ -86,7 +86,7 @@ static void sub_8161724(u8 taskId)
     sub_81B0FCC(gUnknown_0203CEC8.unk9, 0);
     gUnknown_0203CEC8.unk9 = gUnknown_0203CEC8.unkA;
     sub_81B0FCC(gUnknown_0203CEC8.unkA, 1);
-    sub_8198070(0x6, FALSE);
+    ClearStdWindowAndFrameToTransparent(0x6, FALSE);
     ClearWindowTilemap(0x6);
     display_pokemon_menu_message(0);
     gTasks[taskId].func = sub_81B1370;

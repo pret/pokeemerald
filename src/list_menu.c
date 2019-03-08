@@ -355,11 +355,11 @@ s32 DoMysteryGiftListMenu(struct WindowTemplate *windowTemplate, struct ListMenu
                 switch (arg2)
                 {
                 case 0: // can never be reached, because of the if statement above
-                    sub_819746C(sMysteryGiftLinkMenu.windowId, FALSE);
+                    ClearStdWindowAndFrame(sMysteryGiftLinkMenu.windowId, FALSE);
                     break;
                 case 2:
                 case 1:
-                    sub_819746C(sMysteryGiftLinkMenu.windowId, FALSE);
+                    ClearStdWindowAndFrame(sMysteryGiftLinkMenu.windowId, FALSE);
                     break;
                 }
             }
@@ -486,7 +486,7 @@ void RedrawListMenu(u8 listTaskId)
 {
     struct ListMenu *list = (void*) gTasks[listTaskId].data;
 
-    FillWindowPixelBuffer(list->template.windowId, (list->template.fillValue << 4) | (list->template.fillValue));
+    FillWindowPixelBuffer(list->template.windowId, PIXEL_FILL(list->template.fillValue));
     ListMenuPrintEntries(list, list->scrollOffset, 0, list->template.maxShowed);
     ListMenuDrawCursor(list);
     CopyWindowToVram(list->template.windowId, 2);
@@ -584,7 +584,7 @@ static u8 ListMenuInitInternal(struct ListMenuTemplate *listMenuTemplate, u16 sc
     if (list->template.totalItems < list->template.maxShowed)
         list->template.maxShowed = list->template.totalItems;
 
-    FillWindowPixelBuffer(list->template.windowId, (list->template.fillValue << 4) | (list->template.fillValue));
+    FillWindowPixelBuffer(list->template.windowId, PIXEL_FILL(list->template.fillValue));
     ListMenuPrintEntries(list, list->scrollOffset, 0, list->template.maxShowed);
     ListMenuDrawCursor(list);
     ListMenuCallSelectionChangedCallback(list, TRUE);
@@ -698,7 +698,7 @@ static void ListMenuErasePrintedCursor(struct ListMenu *list, u16 selectedRow)
         u8 width  = GetMenuCursorDimensionByFont(list->template.fontId, 0);
         u8 height = GetMenuCursorDimensionByFont(list->template.fontId, 1);
         FillWindowPixelRect(list->template.windowId,
-                            (list->template.fillValue << 4) | (list->template.fillValue),
+                            PIXEL_FILL(list->template.fillValue),
                             list->template.cursor_X,
                             selectedRow * yMultiplier + list->template.upText_Y,
                             width,
@@ -795,7 +795,7 @@ static void ListMenuScroll(struct ListMenu *list, u8 count, bool8 movingDown)
 {
     if (count >= list->template.maxShowed)
     {
-        FillWindowPixelBuffer(list->template.windowId, (list->template.fillValue << 4) | (list->template.fillValue));
+        FillWindowPixelBuffer(list->template.windowId, PIXEL_FILL(list->template.fillValue));
         ListMenuPrintEntries(list, list->scrollOffset, 0, list->template.maxShowed);
     }
     else
@@ -806,26 +806,26 @@ static void ListMenuScroll(struct ListMenu *list, u8 count, bool8 movingDown)
         {
             u16 y, width, height;
 
-            ScrollWindow(list->template.windowId, 1, count * yMultiplier, (list->template.fillValue << 4) | (list->template.fillValue));
+            ScrollWindow(list->template.windowId, 1, count * yMultiplier, PIXEL_FILL(list->template.fillValue));
             ListMenuPrintEntries(list, list->scrollOffset, 0, count);
 
             y = (list->template.maxShowed * yMultiplier) + list->template.upText_Y;
             width = GetWindowAttribute(list->template.windowId, WINDOW_WIDTH) * 8;
             height = (GetWindowAttribute(list->template.windowId, WINDOW_HEIGHT) * 8) - y;
             FillWindowPixelRect(list->template.windowId,
-                                (list->template.fillValue << 4) | (list->template.fillValue),
+                                PIXEL_FILL(list->template.fillValue),
                                 0, y, width, height);
         }
         else
         {
             u16 width;
 
-            ScrollWindow(list->template.windowId, 0, count * yMultiplier, (list->template.fillValue << 4) | (list->template.fillValue));
+            ScrollWindow(list->template.windowId, 0, count * yMultiplier, PIXEL_FILL(list->template.fillValue));
             ListMenuPrintEntries(list, list->scrollOffset + (list->template.maxShowed - count), list->template.maxShowed - count, count);
 
             width = GetWindowAttribute(list->template.windowId, WINDOW_WIDTH) * 8;
             FillWindowPixelRect(list->template.windowId,
-                                (list->template.fillValue << 4) | (list->template.fillValue),
+                                PIXEL_FILL(list->template.fillValue),
                                 0, 0, width, list->template.upText_Y);
         }
     }

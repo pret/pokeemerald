@@ -1552,7 +1552,7 @@ void sub_80C6D80(const u8 *string, void *dst, u8 arg2, u8 arg3, s32 arg4)
     winTemplate.width = 24;
     winTemplate.height = 2;
     windowId = AddWindow(&winTemplate);
-    FillWindowPixelBuffer(windowId, (arg3 << 4) | arg3);
+    FillWindowPixelBuffer(windowId, PIXEL_FILL(arg3));
     tileData1 = (u8*) GetWindowAttribute(windowId, WINDOW_TILE_DATA);
     tileData2 = (winTemplate.width * 32) + tileData1;
 
@@ -1599,7 +1599,7 @@ void sub_80C6EAC(const u8 *string, void *dst, u16 arg2, u8 arg3, u8 clr2, u8 clr
     winTemplate.height = 2;
     var = winTemplate.width * 32;
     windowId = AddWindow(&winTemplate);
-    FillWindowPixelBuffer(windowId, (arg3 << 4) | arg3);
+    FillWindowPixelBuffer(windowId, PIXEL_FILL(arg3));
     tileData1 = (u8*) GetWindowAttribute(windowId, WINDOW_TILE_DATA);
     tileData2 = (winTemplate.width * 32) + tileData1;
     txtColor[0] = arg3;
@@ -1736,8 +1736,8 @@ static void Task_PokemonStorageSystemPC(u8 taskId)
     case 0:
         CreatePCMenu(task->data[1], &task->data[15]);
         sub_81973A4();
-        NewMenuHelpers_DrawDialogueFrame(0, 0);
-        FillWindowPixelBuffer(0, 0x11);
+        DrawDialogueFrame(0, 0);
+        FillWindowPixelBuffer(0, PIXEL_FILL(1));
         AddTextPrinterParameterized2(0, 1, gUnknown_085716C0[task->data[1]].desc, TEXT_SPEED_FF, NULL, 2, 1, 3);
         CopyWindowToVram(0, 3);
         CopyWindowToVram(task->data[15], 3);
@@ -1763,13 +1763,13 @@ static void Task_PokemonStorageSystemPC(u8 taskId)
             if (task->data[1] != task->data[3])
             {
                 task->data[1] = task->data[3];
-                FillWindowPixelBuffer(0, 0x11);
+                FillWindowPixelBuffer(0, PIXEL_FILL(1));
                 AddTextPrinterParameterized2(0, 1, gUnknown_085716C0[task->data[1]].desc, 0, NULL, 2, 1, 3);
             }
             break;
         case MENU_B_PRESSED:
         case  4:
-            sub_819746C(task->data[15], TRUE);
+            ClearStdWindowAndFrame(task->data[15], TRUE);
             ScriptContext2_Disable();
             EnableBothScriptContexts();
             RemoveWindow(task->data[15]);
@@ -1778,13 +1778,13 @@ static void Task_PokemonStorageSystemPC(u8 taskId)
         default:
             if (task->data[2] == 0 && CountPartyMons() == PARTY_SIZE)
             {
-                FillWindowPixelBuffer(0, 0x11);
+                FillWindowPixelBuffer(0, PIXEL_FILL(1));
                 AddTextPrinterParameterized2(0, 1, gText_PartyFull, 0, NULL, 2, 1, 3);
                 task->data[0] = 3;
             }
             else if (task->data[2] == 1 && CountPartyMons() == 1)
             {
-                FillWindowPixelBuffer(0, 0x11);
+                FillWindowPixelBuffer(0, PIXEL_FILL(1));
                 AddTextPrinterParameterized2(0, 1, gText_JustOnePkmn, 0, NULL, 2, 1, 3);
                 task->data[0] = 3;
             }
@@ -1799,7 +1799,7 @@ static void Task_PokemonStorageSystemPC(u8 taskId)
     case 3:
         if (gMain.newKeys & (A_BUTTON | B_BUTTON))
         {
-            FillWindowPixelBuffer(0, 0x11);
+            FillWindowPixelBuffer(0, PIXEL_FILL(1));
             AddTextPrinterParameterized2(0, 1, gUnknown_085716C0[task->data[1]].desc, 0, NULL, 2, 1, 3);
             task->data[0] = 2;
         }
@@ -1809,7 +1809,7 @@ static void Task_PokemonStorageSystemPC(u8 taskId)
                 task->data[1] = 4;
             Menu_MoveCursor(-1);
             task->data[1] = Menu_GetCursorPos();
-            FillWindowPixelBuffer(0, 0x11);
+            FillWindowPixelBuffer(0, PIXEL_FILL(1));
             AddTextPrinterParameterized2(0, 1, gUnknown_085716C0[task->data[1]].desc, 0, NULL, 2, 1, 3);
             task->data[0] = 2;
         }
@@ -1819,7 +1819,7 @@ static void Task_PokemonStorageSystemPC(u8 taskId)
                 task->data[1] = 0;
             Menu_MoveCursor(1);
             task->data[1] = Menu_GetCursorPos();
-            FillWindowPixelBuffer(0, 0x11);
+            FillWindowPixelBuffer(0, PIXEL_FILL(1));
             AddTextPrinterParameterized2(0, 1, gUnknown_085716C0[task->data[1]].desc, 0, NULL, 2, 1, 3);
             task->data[0] = 2;
         }
@@ -1865,7 +1865,7 @@ static void CreatePCMenu(u8 whichMenu, s16 *windowIdPtr)
     winTemplate.width = GetMaxWidthInMenuTable((void *)gUnknown_085716C0, ARRAY_COUNT(gUnknown_085716C0));
     windowId = AddWindow(&winTemplate);
 
-    NewMenuHelpers_DrawStdWindowFrame(windowId, FALSE);
+    DrawStdWindowFrame(windowId, FALSE);
     PrintMenuTable(windowId, ARRAY_COUNT(gUnknown_085716C0), (void *)gUnknown_085716C0);
     InitMenuInUpperLeftCornerPlaySoundWhenAPressed(windowId, ARRAY_COUNT(gUnknown_085716C0), whichMenu);
     *windowIdPtr = windowId;
@@ -2103,7 +2103,7 @@ static void sub_80C7BE4(void)
     winTemplate.height = 4;
 
     windowId = AddWindow(&winTemplate);
-    FillWindowPixelBuffer(windowId, 0x44);
+    FillWindowPixelBuffer(windowId, PIXEL_FILL(4));
 
     center = GetStringCenterAlignXOffset(1, boxName, 64);
     AddTextPrinterParameterized3(windowId, 1, center, 1, gUnknown_08571734, TEXT_SPEED_FF, boxName);
@@ -4107,7 +4107,7 @@ static void LoadCursorMonGfx(u16 species, u32 pid)
 
 static void PrintCursorMonInfo(void)
 {
-    FillWindowPixelBuffer(0, 0x11);
+    FillWindowPixelBuffer(0, PIXEL_FILL(1));
     if (sPSSData->boxOption != BOX_OPTION_MOVE_ITEMS)
     {
         AddTextPrinterParameterized(0, 1, sPSSData->cursorMonNickText, 6, 0, TEXT_SPEED_FF, NULL);
@@ -4416,7 +4416,7 @@ static void PrintStorageActionText(u8 id)
     }
 
     DynamicPlaceholderTextUtil_ExpandPlaceholders(sPSSData->field_2190, gPCStorageActionTexts[id].text);
-    FillWindowPixelBuffer(1, 0x11);
+    FillWindowPixelBuffer(1, PIXEL_FILL(1));
     AddTextPrinterParameterized(1, 1, sPSSData->field_2190, 0, 1, TEXT_SPEED_FF, NULL);
     sub_8098858(1, 2, 14);
     PutWindowTilemap(1);
@@ -4432,7 +4432,7 @@ static void ShowYesNoWindow(s8 cursorPos)
 
 static void ClearBottomWindow(void)
 {
-    sub_8198070(1, FALSE);
+    ClearStdWindowAndFrameToTransparent(1, FALSE);
     schedule_bg_copy_tilemap_to_vram(0);
 }
 
@@ -6501,7 +6501,7 @@ static void InitCanRelaseMonVars(void)
     }
 
     sub_80CE350(sPSSData->field_2176);
-    sPSSData->field_2174 = GetMonData(&sPSSData->field_2108, MON_DATA_KNOWN_MOVES, sPSSData->field_2176);
+    sPSSData->field_2174 = GetMonData(&sPSSData->field_2108, MON_DATA_KNOWN_MOVES, (u8*)sPSSData->field_2176);
     if (sPSSData->field_2174 != 0)
     {
         sPSSData->field_216D = 0;
@@ -6559,7 +6559,7 @@ static s8 RunCanReleaseMon(void)
         {
             if (sPSSData->field_2170 != TOTAL_BOXES_COUNT || sPSSData->field_2171 != i)
             {
-                knownMoves = GetMonData(gPlayerParty + i, MON_DATA_KNOWN_MOVES, sPSSData->field_2176);
+                knownMoves = GetMonData(gPlayerParty + i, MON_DATA_KNOWN_MOVES, (u8*)sPSSData->field_2176);
                 sPSSData->field_2174 &= ~(knownMoves);
             }
         }
@@ -6578,7 +6578,7 @@ static s8 RunCanReleaseMon(void)
     case 1:
         for (i = 0; i < IN_BOX_COUNT; i++)
         {
-            knownMoves = GetAndCopyBoxMonDataAt(sPSSData->field_216E, sPSSData->field_216F, MON_DATA_KNOWN_MOVES, sPSSData->field_2176);
+            knownMoves = GetAndCopyBoxMonDataAt(sPSSData->field_216E, sPSSData->field_216F, MON_DATA_KNOWN_MOVES, (u8*)sPSSData->field_2176);
             if (knownMoves != 0
                 && !(sPSSData->field_2170 == sPSSData->field_216E && sPSSData->field_2171 == sPSSData->field_216F))
             {
@@ -8733,7 +8733,7 @@ static void AddMenu(void)
     sPSSData->menuWindow.tilemapTop = 15 - sPSSData->menuWindow.height;
     sPSSData->field_CB0 = AddWindow(&sPSSData->menuWindow);
     ClearWindowTilemap(sPSSData->field_CB0);
-    SetWindowBorderStyle(sPSSData->field_CB0, FALSE, 11, 14);
+    DrawStdFrameWithCustomTileAndPalette(sPSSData->field_CB0, FALSE, 11, 14);
     PrintMenuTable(sPSSData->field_CB0, sPSSData->menuItemsCount, (void*)sPSSData->menuItems);
     InitMenuInUpperLeftCornerPlaySoundWhenAPressed(sPSSData->field_CB0, sPSSData->menuItemsCount, 0);
     schedule_bg_copy_tilemap_to_vram(0);
@@ -8787,7 +8787,7 @@ static s16 sub_80D00AC(void)
 
 static void sub_80D013C(void)
 {
-    sub_8198070(sPSSData->field_CB0, TRUE);
+    ClearStdWindowAndFrameToTransparent(sPSSData->field_CB0, TRUE);
     RemoveWindow(sPSSData->field_CB0);
 }
 
@@ -8835,7 +8835,7 @@ static bool8 sub_80D0164(void)
         sPSSData->field_2200 = AddWindow8Bit(&gUnknown_0857BB1C);
         if (sPSSData->field_2200 != 0xFF)
         {
-            FillWindowPixelBuffer(sPSSData->field_2200, 0);
+            FillWindowPixelBuffer(sPSSData->field_2200, PIXEL_FILL(0));
             return TRUE;
         }
     }
@@ -8892,7 +8892,7 @@ static bool8 sub_80D024C(void)
         ChangeBgX(0, -1024, 0);
         ChangeBgY(0, -1024, 0);
         FillBgTilemapBufferRect_Palette0(0, 0, 0, 0, 0x20, 0x20);
-        FillWindowPixelBuffer8Bit(sPSSData->field_2200, 0);
+        FillWindowPixelBuffer8Bit(sPSSData->field_2200, PIXEL_FILL(0));
         sub_80D07B0(sMoveMonsPtr->fromRow, sMoveMonsPtr->fromColumn);
         SetBgAttribute(0, BG_ATTR_PALETTEMODE, 1);
         PutWindowTilemap(sPSSData->field_2200);
@@ -9194,7 +9194,7 @@ static void sub_80D0834(u8 arg0, u8 arg1)
     if (species != SPECIES_NONE)
     {
         FillWindowPixelRect8Bit(sPSSData->field_2200,
-                                0,
+                                PIXEL_FILL(0),
                                 24 * arg0,
                                 24 * arg1,
                                 32,
@@ -9911,7 +9911,7 @@ static void PrintItemDescription(void)
     else
         description = ItemId_GetDescription(sPSSData->cursorMonItem);
 
-    FillWindowPixelBuffer(2, 0x11);
+    FillWindowPixelBuffer(2, PIXEL_FILL(1));
     AddTextPrinterParameterized5(2, 1, description, 4, 0, 0, NULL, 0, 1);
 }
 
@@ -10357,7 +10357,7 @@ bool32 AnyStorageMonWithMove(u16 moveId)
         {
             if (GetBoxMonData(&gPokemonStoragePtr->boxes[i][j], MON_DATA_SANITY_HAS_SPECIES)
                 && !GetBoxMonData(&gPokemonStoragePtr->boxes[i][j], MON_DATA_SANITY_IS_EGG)
-                && GetBoxMonData(&gPokemonStoragePtr->boxes[i][j], MON_DATA_KNOWN_MOVES, moves))
+                && GetBoxMonData(&gPokemonStoragePtr->boxes[i][j], MON_DATA_KNOWN_MOVES, (u8*)moves))
                 return TRUE;
         }
     }

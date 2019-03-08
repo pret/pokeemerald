@@ -793,7 +793,7 @@ static void Task_SetClock2(u8 taskId)
 
 static void Task_SetClock3(u8 taskId)
 {
-    SetWindowBorderStyle(0, FALSE, 0x250, 0x0d);
+    DrawStdFrameWithCustomTileAndPalette(0, FALSE, 0x250, 0x0d);
     AddTextPrinterParameterized(0, 1, gText_IsThisTheCorrectTime, 0, 1, 0, NULL);
     PutWindowTilemap(0);
     schedule_bg_copy_tilemap_to_vram(0);
@@ -812,7 +812,7 @@ static void Task_SetClock4(u8 taskId)
         case 1:    //B button
         case -1:     //NO
             PlaySE(SE_SELECT);
-            sub_8198070(0, FALSE);
+            ClearStdWindowAndFrameToTransparent(0, FALSE);
             ClearWindowTilemap(0);
             gTasks[taskId].func = Task_SetClock2;
             break;

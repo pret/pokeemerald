@@ -884,7 +884,7 @@ void bag_menu_print_description_box_text(int a)
         StringExpandPlaceholders(gStringVar4, gText_ReturnToVar1);
         str = gStringVar4;
     }
-    FillWindowPixelBuffer(1, 0);
+    FillWindowPixelBuffer(1, PIXEL_FILL(0));
     bag_menu_print(1, 1, str, 3, 1, 0, 0, 0, 0);
 }
 
@@ -896,7 +896,7 @@ void bag_menu_print_cursor_(u8 a, u8 b)
 void bag_menu_print_cursor(u8 a, u8 b)
 {
     if (b == 0xFF)
-        FillWindowPixelRect(0, 0, 0, a, GetMenuCursorDimensionByFont(1, 0), GetMenuCursorDimensionByFont(1, 1));
+        FillWindowPixelRect(0, PIXEL_FILL(0), 0, a, GetMenuCursorDimensionByFont(1, 0), GetMenuCursorDimensionByFont(1, 1));
     else
         bag_menu_print(0, 1, gText_SelectorArrow2, 0, a, 0, 0, 0, b);
 
@@ -1028,7 +1028,7 @@ void DisplayItemMessage(u8 taskId, u8 fontId, const u8 *str, void ( *callback)(u
     s16* data = gTasks[taskId].data;
 
     data[10] = AddItemMessageWindow(4);
-    FillWindowPixelBuffer(data[10], 17);
+    FillWindowPixelBuffer(data[10], PIXEL_FILL(1));
     DisplayMessageAndContinueTask(taskId, data[10], 10, 13, fontId, GetPlayerTextSpeedDelay(), str, callback);
     schedule_bg_copy_tilemap_to_vram(1);
 }
@@ -1293,7 +1293,7 @@ void bag_menu_swap_items(u8 taskId)
     gUnknown_0203CE54->unk81A = data[1];
     CopyItemName(BagGetItemIdByPocketPosition(gUnknown_0203CE58.pocket + 1, data[1]), gStringVar1);
     StringExpandPlaceholders(gStringVar4, gText_MoveVar1Where);
-    FillWindowPixelBuffer(1, 0);
+    FillWindowPixelBuffer(1, PIXEL_FILL(0));
     bag_menu_print(1, 1, gStringVar4, 3, 1, 0, 0, 0, 0);
     sub_80D4FEC(data[1]);
     sub_81AB89C();
@@ -1505,7 +1505,7 @@ void sub_81AC644(u8 unused)
     {
         CopyItemName(gSpecialVar_ItemId, gStringVar1);
         StringExpandPlaceholders(gStringVar4, gText_Var1IsSelected);
-        FillWindowPixelBuffer(1, 0);
+        FillWindowPixelBuffer(1, PIXEL_FILL(0));
         bag_menu_print(1, 1, gStringVar4, 3, 1, 0, 0, 0, 0);
     }
     if (gUnknown_0203CE54->unk828 == 1)
@@ -1646,7 +1646,7 @@ void ItemMenu_UseOutOfBattle(u8 taskId)
             bag_menu_print_there_is_no_pokemon(taskId);
         else
         {
-            FillWindowPixelBuffer(1, 0);
+            FillWindowPixelBuffer(1, PIXEL_FILL(0));
             schedule_bg_copy_tilemap_to_vram(0);
             if (gUnknown_0203CE58.pocket != BERRIES_POCKET)
                 ItemId_GetFieldFunc(gSpecialVar_ItemId)(taskId);
@@ -1670,7 +1670,7 @@ void ItemMenu_Toss(u8 taskId)
     {
         CopyItemName(gSpecialVar_ItemId, gStringVar1);
         StringExpandPlaceholders(gStringVar4, gText_TossHowManyVar1s);
-        FillWindowPixelBuffer(1, 0);
+        FillWindowPixelBuffer(1, PIXEL_FILL(0));
         bag_menu_print(1, 1, gStringVar4, 3, 1, 0, 0, 0, 0);
         sub_81ABC3C(7);
         gTasks[taskId].func = Task_ChooseHowManyToToss;
@@ -1684,7 +1684,7 @@ void BagMenuConfirmToss(u8 taskId)
     CopyItemName(gSpecialVar_ItemId, gStringVar1);
     ConvertIntToDecimalStringN(gStringVar2, data[8], 0, 3);
     StringExpandPlaceholders(gStringVar4, gText_ConfirmTossItems);
-    FillWindowPixelBuffer(1, 0);
+    FillWindowPixelBuffer(1, PIXEL_FILL(0));
     bag_menu_print(1, 1, gStringVar4, 3, 1, 0, 0, 0, 0);
     bag_menu_yes_no(taskId, 5, &gUnknown_08614084);
 }
@@ -1727,7 +1727,7 @@ void BagMenuActuallyToss(u8 taskId)
     CopyItemName(gSpecialVar_ItemId, gStringVar1);
     ConvertIntToDecimalStringN(gStringVar2, data[8], 0, 3);
     StringExpandPlaceholders(gStringVar4, gText_ThrewAwayVar2Var1s);
-    FillWindowPixelBuffer(1, 0);
+    FillWindowPixelBuffer(1, PIXEL_FILL(0));
     bag_menu_print(1, 1, gStringVar4, 3, 1, 0, 0, 0, 0);
     gTasks[taskId].func = Task_ActuallyToss;
 }
@@ -2043,7 +2043,7 @@ void display_deposit_item_ask_str(u8 taskId)
     {
         CopyItemName(gSpecialVar_ItemId, gStringVar1);
         StringExpandPlaceholders(gStringVar4, gText_DepositHowManyVar1);
-        FillWindowPixelBuffer(1, 0);
+        FillWindowPixelBuffer(1, PIXEL_FILL(0));
         bag_menu_print(1, 1, gStringVar4, 3, 1, 0, 0, 0, 0);
         sub_81ABC3C(7);
         gTasks[taskId].func = sub_81ADA7C;
@@ -2078,7 +2078,7 @@ void sub_81ADB14(u8 taskId)
 {
     s16* data = gTasks[taskId].data;
 
-    FillWindowPixelBuffer(1, 0);
+    FillWindowPixelBuffer(1, PIXEL_FILL(0));
     if (ItemId_GetImportance(gSpecialVar_ItemId))
     {
         bag_menu_print(1, 1, gText_CantStoreImportantItems, 3, 1, 0, 0, 0, 0);
@@ -2244,7 +2244,7 @@ void bag_menu_print_pocket_names(const u8 *pocketName1, const u8 *pocketName2)
     window.width = 16;
     window.height = 2;
     windowId = AddWindow(&window);
-    FillWindowPixelBuffer(windowId, 0);
+    FillWindowPixelBuffer(windowId, PIXEL_FILL(0));
     offset = GetStringCenterAlignXOffset(1, pocketName1, 0x40);
     bag_menu_print(windowId, 1, pocketName1, offset, 1, 0, 0, -1, 1);
     if (pocketName2)
@@ -2283,7 +2283,7 @@ void setup_bag_menu_textboxes(void)
     LoadPalette(&gUnknown_0860F074, 0xF0, 0x20);
     for (i = 0; i < 3; i++)
     {
-        FillWindowPixelBuffer(i, 0);
+        FillWindowPixelBuffer(i, PIXEL_FILL(0));
         PutWindowTilemap(i);
     }
     schedule_bg_copy_tilemap_to_vram(0);
@@ -2306,7 +2306,7 @@ u8 bag_menu_add_window(u8 a)
     if (*ptr == 0xFF)
     {
         *ptr = AddWindow(&gUnknown_086141AC[a]);
-        SetWindowBorderStyle(*ptr, 0, 1, 14);
+        DrawStdFrameWithCustomTileAndPalette(*ptr, 0, 1, 14);
         schedule_bg_copy_tilemap_to_vram(1);
     }
     return *ptr;
@@ -2317,7 +2317,7 @@ void bag_menu_remove_window(u8 a)
     u8 *ptr = &gUnknown_0203CE54->windowPointers[a];
     if (*ptr != 0xFF)
     {
-        sub_8198070(*ptr, 0);
+        ClearStdWindowAndFrameToTransparent(*ptr, 0);
         ClearWindowTilemap(*ptr);
         RemoveWindow(*ptr);
         schedule_bg_copy_tilemap_to_vram(1);
@@ -2338,7 +2338,8 @@ void bag_menu_RemoveBagItem_message_window(u8 a)
     u8 *ptr = &gUnknown_0203CE54->windowPointers[a];
     if (*ptr != 0xFF)
     {
-        sub_8197DF8(*ptr, 0);
+        ClearDialogWindowAndFrameToTransparent(*ptr, FALSE);
+        // This ClearWindowTilemap call is redundant, since ClearDialogWindowAndFrameToTransparent already calls it.
         ClearWindowTilemap(*ptr);
         RemoveWindow(*ptr);
         schedule_bg_copy_tilemap_to_vram(1);
@@ -2366,7 +2367,7 @@ void bag_menu_remove_money_window(void)
 
 void bag_menu_prepare_tmhm_move_window(void)
 {
-    FillWindowPixelBuffer(3, 0);
+    FillWindowPixelBuffer(3, PIXEL_FILL(0));
     blit_move_info_icon(3, 19, 0, 0);
     blit_move_info_icon(3, 20, 0, 12);
     blit_move_info_icon(3, 21, 0, 24);
@@ -2380,7 +2381,7 @@ void PrintTMHMMoveData(u16 itemId)
     u16 moveId;
     const u8* text;
 
-    FillWindowPixelBuffer(4, 0);
+    FillWindowPixelBuffer(4, PIXEL_FILL(0));
     if (itemId == ITEM_NONE)
     {
         for (i = 0; i < 4; i++)
