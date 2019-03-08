@@ -37,7 +37,7 @@
  *   - Creates moveDisplayArrowTask to listen to right/left buttons.
  *   - Creates moveListScrollArrowTask to listen to up/down buttons.
  *   - Whenever the selected move changes (and once on init), the MoveRelearnerCursorCallback
- *     is called (see gMoveRelearnerMovesListTemplate). That callback will reload the contest
+ *     is called (see sMoveRelearnerMovesListTemplate). That callback will reload the contest
  *     display and battle display windows for the new move. Both are always loaded in
  *     memory, but only the currently active one is copied to VRAM. The exception to this
  *     is the appeal and jam hearts, which are sprites. MoveRelearnerShowHideHearts is called

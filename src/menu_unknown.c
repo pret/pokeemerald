@@ -21,22 +21,18 @@
 #include "constants/songs.h"
 #include "gba/io_reg.h"
 
-#define WINDOW_UNK_0 0
-#define WINDOW_UNK_1 1
-#define WINDOW_UNK_2 2
-
 EWRAM_DATA static u8 sUnknown_0203CF48[3] = {0};
 EWRAM_DATA static struct ListMenuItem *sUnknown_0203CF4C = NULL;
 
-void sub_81D1E7C(s32 itemIndex, bool8 onInit, struct ListMenu *list);
-void sub_81D24A4(struct UnknownStruct_81D1ED4 *a0);
-void sub_81D2634(struct UnknownStruct_81D1ED4 *a0);
-void MoveRelearnerCursorCallback(s32 itemIndex, bool8 onInit, struct ListMenu *list);
-extern void nullsub_79(void);
+static void sub_81D1E7C(s32 itemIndex, bool8 onInit, struct ListMenu *list);
+static void sub_81D24A4(struct UnknownStruct_81D1ED4 *a0);
+static void sub_81D2634(struct UnknownStruct_81D1ED4 *a0);
+static void MoveRelearnerCursorCallback(s32 itemIndex, bool8 onInit, struct ListMenu *list);
+static void nullsub_79(void);
 
 static const struct WindowTemplate sUnknown_086253E8[] =
 {
-    [WINDOW_UNK_0] = {
+    {
         .bg = 0,
         .tilemapLeft = 1,
         .tilemapTop = 1,
@@ -45,7 +41,7 @@ static const struct WindowTemplate sUnknown_086253E8[] =
         .paletteNum = 0xF,
         .baseBlock = 0x8
     },
-    [WINDOW_UNK_1] = {
+    {
         .bg = 0,
         .tilemapLeft = 21,
         .tilemapTop = 1,
@@ -54,7 +50,7 @@ static const struct WindowTemplate sUnknown_086253E8[] =
         .paletteNum = 0xF,
         .baseBlock = 0x18
     },
-    [WINDOW_UNK_2] = {
+    {
         .bg = 0,
         .tilemapLeft = 1,
         .tilemapTop = 1,
@@ -119,7 +115,7 @@ static const u8 sUnknown_08625410[] =
 };
 
 
-const struct WindowTemplate gMoveRelearnerWindowTemplates[] =
+static const struct WindowTemplate sMoveRelearnerWindowTemplates[] =
 {
     {
         .bg = 1,
@@ -169,7 +165,7 @@ const struct WindowTemplate gMoveRelearnerWindowTemplates[] =
     DUMMY_WIN_TEMPLATE
 };
 
-const struct WindowTemplate gMoveRelearnerYesNoMenuTemplate =
+static const struct WindowTemplate sMoveRelearnerYesNoMenuTemplate =
 {
     .bg = 0,
     .tilemapLeft = 22,
@@ -181,7 +177,7 @@ const struct WindowTemplate gMoveRelearnerYesNoMenuTemplate =
 };
 
 
-const struct ListMenuTemplate gMoveRelearnerMovesListTemplate =
+static const struct ListMenuTemplate sMoveRelearnerMovesListTemplate =
 {
     .items = NULL,
     .moveCursorFunc = MoveRelearnerCursorCallback,
@@ -228,16 +224,16 @@ u8 sub_81D1C84(u8 a0)
     u8 windowId = sUnknown_0203CF48[a0];
     if (windowId == 0xFF)
     {
-        if (a0 == WINDOW_UNK_2)
+        if (a0 == 2)
         {
             u32 v1;
             u32 v2;
             s32 v3;
 
-            template = sUnknown_086253E8[WINDOW_UNK_2];
+            template = sUnknown_086253E8[2];
             v3 = GetMaxWidthInMenuTable(&gMailboxMailOptions[0], 4);
             template.width = v3;
-            sUnknown_0203CF48[WINDOW_UNK_2] = AddWindow(&template);
+            sUnknown_0203CF48[2] = AddWindow(&template);
         }
         else
         {
@@ -256,12 +252,12 @@ void sub_81D1D04(u8 a0)
     sUnknown_0203CF48[a0] = 0xFF;
 }
 
-u8 sub_81D1D34(u8 a0)
+static u8 sub_81D1D34(u8 a0)
 {
     return sUnknown_0203CF48[a0];
 }
 
-void sub_81D1D44(u8 windowId, s32 itemId, u8 y)
+static void sub_81D1D44(u8 windowId, s32 itemId, u8 y)
 {
     u8 buffer[30];
     u16 length;
@@ -310,7 +306,7 @@ u8 sub_81D1DC0(struct PlayerPCItemPageStruct *page)
     return ListMenuInit(&gMultiuseListMenuTemplate, page->itemsAbove, page->cursorPos);
 }
 
-void sub_81D1E7C(s32 itemIndex, bool8 onInit, struct ListMenu *list)
+static void sub_81D1E7C(s32 itemIndex, bool8 onInit, struct ListMenu *list)
 {
     if (onInit != TRUE)
         PlaySE(SE_SELECT);
@@ -355,27 +351,6 @@ void sub_81D1ED4(struct UnknownStruct_81D1ED4 *a0)
 NAKED
 void sub_81D1F84(struct UnknownStruct_81D1ED4 *arg0, struct UnknownSubStruct_81D1ED4 arg1[4][5], struct UnknownSubStruct_81D1ED4 arg2[4][5])
 {
-    /*
-    u16 j;
-    u16 i;
-    s16 v1;
-    s16 v2;
-    for (j = 0; j < 5; j++)
-    {
-        v1 = arg1[0][j].unk0;
-        v2 = (arg2[0][j].unk0 - v1) / 10;
-
-        for (i = 0; i < 9; i++)
-        {
-            arg0->unk64[i][j].unk0 = v1 + ((v1 << 1) & 1);
-        }
-
-        for (i = 0; i < 9; i++)
-        {
-
-        }
-    }
-    */
     asm(".syntax unified\n\
     push {r4-r7,lr}\n\
 	mov r7, r10\n\
@@ -723,7 +698,7 @@ void sub_81D2230(struct UnknownStruct_81D1ED4 *arg0)
 }
 
 NAKED
-void sub_81D2278(void *a0, void *a1, u16 *a2, u16 *a3, u8 a38, u32 a3C)
+static void sub_81D2278(void *a0, void *a1, u16 *a2, u16 *a3, u8 a38, u32 a3C)
 {
 #ifdef NONMATCHING
     // a0 => sp0
@@ -1072,7 +1047,7 @@ _081D2494:\n\
 }
 
 NAKED
-void sub_81D24A4(struct UnknownStruct_81D1ED4 *a0)
+static void sub_81D24A4(struct UnknownStruct_81D1ED4 *a0)
 {
     asm(".syntax unified\n\
     push {r4-r7,lr}\n\
@@ -1286,7 +1261,7 @@ _081D2620:\n\
 }
 
 NAKED
-void sub_81D2634(struct UnknownStruct_81D1ED4 *a0)
+static void sub_81D2634(struct UnknownStruct_81D1ED4 *a0)
 {
     asm(".syntax unified\n\
 	push {r4-r6,lr}\n\
@@ -1599,7 +1574,7 @@ void InitMoveRelearnerWindows(bool8 useContextWindow)
 {
     u8 i;
 
-    InitWindows(gMoveRelearnerWindowTemplates);
+    InitWindows(sMoveRelearnerWindowTemplates);
     DeactivateAllTextPrinters();
     LoadUserWindowBorderGfx(0, 1, 0xE0);
     LoadPalette(gUnknown_0860F074, 0xF0, 0x20);
@@ -1627,14 +1602,14 @@ void InitMoveRelearnerWindows(bool8 useContextWindow)
     schedule_bg_copy_tilemap_to_vram(1);
 }
 
-void nullsub_79(void)
+static void nullsub_79(void)
 {
 
 }
 
 u8 LoadMoveRelearnerMovesList(const struct ListMenuItem *items, u16 numChoices)
 {
-    gMultiuseListMenuTemplate = gMoveRelearnerMovesListTemplate;
+    gMultiuseListMenuTemplate = sMoveRelearnerMovesListTemplate;
     gMultiuseListMenuTemplate.totalItems = numChoices;
     gMultiuseListMenuTemplate.items = items;
 
@@ -1650,7 +1625,7 @@ u8 LoadMoveRelearnerMovesList(const struct ListMenuItem *items, u16 numChoices)
 }
 
 NAKED
-void MoveRelearnerLoadBattleMoveDescription(u32 chosenMove)
+static void MoveRelearnerLoadBattleMoveDescription(u32 chosenMove)
 {
     // Two small issues, and a few renamed registers.
 #ifdef NONMATCHING
@@ -1928,7 +1903,7 @@ _081D2AB6:\n\
 }
 
 NAKED
-void MoveRelearnerMenuLoadContestMoveDescription(u32 chosenMove)
+static void MoveRelearnerMenuLoadContestMoveDescription(u32 chosenMove)
 {
 #ifdef NONMATCHING
     //u8 offset;
@@ -2089,7 +2064,7 @@ _081D2BB8:\n\
 #endif
 }
 
-void MoveRelearnerCursorCallback(s32 itemIndex, bool8 onInit, struct ListMenu *list)
+static void MoveRelearnerCursorCallback(s32 itemIndex, bool8 onInit, struct ListMenu *list)
 {
     if (onInit != TRUE)
         PlaySE(SE_SELECT);
@@ -2097,14 +2072,14 @@ void MoveRelearnerCursorCallback(s32 itemIndex, bool8 onInit, struct ListMenu *l
     MoveRelearnerMenuLoadContestMoveDescription(itemIndex);
 }
 
-void MoveRelearnerPrintText(u8 *text)
+void MoveRelearnerPrintText(u8 *str)
 {
     u8 speed;
 
     FillWindowPixelBuffer(3, 0x11);
     gTextFlags.canABSpeedUpPrint = TRUE;
     speed = GetPlayerTextSpeedDelay();
-    AddTextPrinterParameterized2(3, 1, text, speed, NULL, TEXT_COLOR_DARK_GREY, TEXT_COLOR_WHITE, 3);
+    AddTextPrinterParameterized2(3, 1, str, speed, NULL, TEXT_COLOR_DARK_GREY, TEXT_COLOR_WHITE, 3);
 }
 
 bool16 MoveRelearnerRunTextPrinters(void)
@@ -2115,5 +2090,5 @@ bool16 MoveRelearnerRunTextPrinters(void)
 
 void MoveRelearnerCreateYesNoMenu(void)
 {
-    CreateYesNoMenu(&gMoveRelearnerYesNoMenuTemplate, 1, 0xE, 0);
+    CreateYesNoMenu(&sMoveRelearnerYesNoMenuTemplate, 1, 0xE, 0);
 }
