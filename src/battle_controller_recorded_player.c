@@ -87,7 +87,7 @@ static void RecordedPlayerHandleBattleAnimation(void);
 static void RecordedPlayerHandleLinkStandbyMsg(void);
 static void RecordedPlayerHandleResetActionMoveSelection(void);
 static void RecordedPlayerHandleCmd55(void);
-static void nullsub_121(void);
+static void RecordedPlayerCmdEnd(void);
 
 static void RecordedPlayerBufferRunCommand(void);
 static void RecordedPlayerBufferExecCompleted(void);
@@ -158,7 +158,7 @@ static void (*const sRecordedPlayerBufferCommands[CONTROLLER_CMDS_COUNT])(void) 
     RecordedPlayerHandleLinkStandbyMsg,
     RecordedPlayerHandleResetActionMoveSelection,
     RecordedPlayerHandleCmd55,
-    nullsub_121
+    RecordedPlayerCmdEnd
 };
 
 static void nullsub_120(void)
@@ -1806,6 +1806,6 @@ static void RecordedPlayerHandleCmd55(void)
     gBattlerControllerFuncs[gActiveBattler] = sub_80587B0;
 }
 
-static void nullsub_121(void)
+static void RecordedPlayerCmdEnd(void)
 {
 }

@@ -11,7 +11,7 @@ LittlerootTown_MaysHouse_2F_MapScript1_1F92A1: @ 81F92A1
 	compare VAR_LITTLEROOT_INTRO_STATE, 4
 	call_if_eq LittlerootTown_MaysHouse_2F_EventScript_2926FE
 	call LittlerootTown_MaysHouse_2F_EventScript_275CE1
-	setvar VAR_0x4089, 0
+	setvar VAR_SECRET_BASE_INITIALIZED, 0
 	end
 
 LittlerootTown_MaysHouse_2F_EventScript_1F92CD:: @ 81F92CD
@@ -45,7 +45,7 @@ LittlerootTown_MaysHouse_2F_EventScript_1F9317:: @ 81F9317
 	return
 
 LittlerootTown_MaysHouse_2F_MapScript2_1F931D: @ 81F931D
-	map_script_2 VAR_0x4089, 0, LittlerootTown_MaysHouse_2F_EventScript_1F9327
+	map_script_2 VAR_SECRET_BASE_INITIALIZED, 0, LittlerootTown_MaysHouse_2F_EventScript_1F9327
 	.2byte 0
 
 LittlerootTown_MaysHouse_2F_EventScript_1F9327:: @ 81F9327

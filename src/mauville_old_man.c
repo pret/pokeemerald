@@ -437,7 +437,7 @@ static void BardSong_TextSubPrinter(struct TextPrinterTemplate * printer, u16 a1
 
 static void sub_8120708(const u8 * src)
 {
-    NewMenuHelpers_DrawDialogueFrame(0, 0);
+    DrawDialogueFrame(0, 0);
     AddTextPrinterParameterized(0, 1, src, 0, 1, 1, BardSong_TextSubPrinter);
     gUnknown_03002F84 = TRUE;
     CopyWindowToVram(0, 3);

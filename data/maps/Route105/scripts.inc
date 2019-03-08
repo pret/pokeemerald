@@ -6,10 +6,10 @@ Route105_MapScripts:: @ 81EE1DB
 
 Route105_MapScript1_1EE1EB: @ 81EE1EB
 	call_if_unset FLAG_REGI_DOORS_OPENED, Route105_EventScript_1EE20B
-	compare VAR_0x4037, 9
-	call_if_eq Route105_EventScript_2739AB
-	compare VAR_0x4037, 10
-	call_if_eq Route105_EventScript_273A18
+	compare VAR_UNUSUAL_WEATHER_LOCATION, UNUSUAL_WEATHER_ROUTE_105_NORTH
+	call_if_eq UnusualWeather_EventScript_PlaceTilesRoute105North
+	compare VAR_UNUSUAL_WEATHER_LOCATION, UNUSUAL_WEATHER_ROUTE_105_SOUTH
+	call_if_eq UnusualWeather_EventScript_PlaceTilesRoute105South
 	end
 
 Route105_EventScript_1EE20B:: @ 81EE20B
@@ -18,16 +18,16 @@ Route105_EventScript_1EE20B:: @ 81EE20B
 	return
 
 Route105_MapScript1_1EE21E: @ 81EE21E
-	compare VAR_0x4039, 1
+	compare VAR_SHOULD_END_UNUSUAL_WEATHER, 1
 	call_if_eq Route105_EventScript_273D13
-	compare VAR_0x4037, 9
-	call_if_eq Route105_EventScript_273D17
-	compare VAR_0x4037, 10
-	call_if_eq Route105_EventScript_273D17
+	compare VAR_UNUSUAL_WEATHER_LOCATION, UNUSUAL_WEATHER_ROUTE_105_NORTH
+	call_if_eq UnusualWeather_StartKyogreWeather
+	compare VAR_UNUSUAL_WEATHER_LOCATION, UNUSUAL_WEATHER_ROUTE_105_SOUTH
+	call_if_eq UnusualWeather_StartKyogreWeather
 	end
 
 Route105_MapScript2_1EE240: @ 81EE240
-	map_script_2 VAR_0x4039, 1, gUnknown_08273D1F
+	map_script_2 VAR_SHOULD_END_UNUSUAL_WEATHER, 1, UnusualWeather_EventScript_EndEventAndCleanup_1
 	.2byte 0
 
 Route105_EventScript_1EE24A:: @ 81EE24A

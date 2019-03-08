@@ -76,19 +76,19 @@ static void DisableGpioPortRead();
 
 static const char AgbLibRtcVersion[] = "SIIRTC_V001";
 
-void SiiRtcUnprotect()
+void SiiRtcUnprotect(void)
 {
     EnableGpioPortRead();
     sLocked = FALSE;
 }
 
-void SiiRtcProtect()
+void SiiRtcProtect(void)
 {
     DisableGpioPortRead();
     sLocked = TRUE;
 }
 
-u8 SiiRtcProbe()
+u8 SiiRtcProbe(void)
 {
     u8 errorCode;
     struct SiiRtcInfo rtc;
@@ -129,7 +129,7 @@ u8 SiiRtcProbe()
     return (errorCode << 4) | 1;
 }
 
-bool8 SiiRtcReset()
+bool8 SiiRtcReset(void)
 {
     u8 result;
     struct SiiRtcInfo rtc;

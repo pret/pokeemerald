@@ -108,7 +108,7 @@ sub_81D1D04: @ 81D1D04
 	adds r4, r0
 	ldrb r0, [r4]
 	movs r1, 0
-	bl sub_8198070
+	bl ClearStdWindowAndFrameToTransparent
 	ldrb r0, [r4]
 	bl ClearWindowTilemap
 	ldrb r0, [r4]
@@ -1613,7 +1613,7 @@ _081D284A:
 	movs r1, 0
 	movs r2, 0x1
 	movs r3, 0xE
-	bl SetWindowBorderStyle
+	bl DrawStdFrameWithCustomTileAndPalette
 	b _081D288E
 	.pool
 _081D287C:
@@ -1623,7 +1623,7 @@ _081D287C:
 	movs r1, 0
 	movs r2, 0x1
 	movs r3, 0xE
-	bl SetWindowBorderStyle
+	bl DrawStdFrameWithCustomTileAndPalette
 _081D288E:
 	movs r0, 0x2
 	bl PutWindowTilemap
@@ -1633,12 +1633,12 @@ _081D288E:
 	movs r1, 0
 	movs r2, 0x1
 	movs r3, 0xE
-	bl SetWindowBorderStyle
+	bl DrawStdFrameWithCustomTileAndPalette
 	movs r0, 0x3
 	movs r1, 0
 	movs r2, 0x1
 	movs r3, 0xE
-	bl SetWindowBorderStyle
+	bl DrawStdFrameWithCustomTileAndPalette
 	bl nullsub_79
 	movs r0, 0x1
 	bl schedule_bg_copy_tilemap_to_vram

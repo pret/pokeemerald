@@ -279,7 +279,7 @@ static void InitContestPaintingWindow(void)
     SetBgTilemapBuffer(1, AllocZeroed(BG_SCREEN_SIZE));
     gContestPaintingWindowId = AddWindow(&gUnknown_085B07EC);
     DeactivateAllTextPrinters();
-    FillWindowPixelBuffer(gContestPaintingWindowId, 0);
+    FillWindowPixelBuffer(gContestPaintingWindowId, PIXEL_FILL(0));
     PutWindowTilemap(gContestPaintingWindowId);
     CopyWindowToVram(gContestPaintingWindowId, 3);
     ShowBg(1);

@@ -115,7 +115,7 @@ static u8 SaveConfirmSaveCallback(void);
 static u8 SaveYesNoCallback(void);
 static u8 SaveConfirmInputCallback(void);
 static u8 SaveFileExistsCallback(void);
-static u8 SaveConfirmOverwriteNoCallback(void);
+static u8 SaveConfirmOverwriteDefaultNoCallback(void);
 static u8 SaveConfirmOverwriteCallback(void);
 static u8 SaveOverwriteInputCallback(void);
 static u8 SaveSavingMessageCallback(void);
@@ -368,7 +368,7 @@ static void ShowSafariBallsWindow(void)
 {
     sSafariBallsWindowId = AddWindow(&sSafariBallsWindowTemplate);
     PutWindowTilemap(sSafariBallsWindowId);
-    NewMenuHelpers_DrawStdWindowFrame(sSafariBallsWindowId, FALSE);
+    DrawStdWindowFrame(sSafariBallsWindowId, FALSE);
     ConvertIntToDecimalStringN(gStringVar1, gNumSafariBalls, STR_CONV_MODE_RIGHT_ALIGN, 2);
     StringExpandPlaceholders(gStringVar4, gText_SafariBallStock);
     AddTextPrinterParameterized(sSafariBallsWindowId, 1, gStringVar4, 0, 1, 0xFF, NULL);
@@ -383,7 +383,7 @@ static void ShowPyramidFloorWindow(void)
         sBattlePyramidFloorWindowId = AddWindow(&sPyramidFloorWindowTemplate_2);
 
     PutWindowTilemap(sBattlePyramidFloorWindowId);
-    NewMenuHelpers_DrawStdWindowFrame(sBattlePyramidFloorWindowId, FALSE);
+    DrawStdWindowFrame(sBattlePyramidFloorWindowId, FALSE);
     StringCopy(gStringVar1, sPyramindFloorNames[gSaveBlock2Ptr->frontier.curChallengeBattleNum]);
     StringExpandPlaceholders(gStringVar4, gText_BattlePyramidFloor);
     AddTextPrinterParameterized(sBattlePyramidFloorWindowId, 1, gStringVar4, 0, 1, 0xFF, NULL);
@@ -394,13 +394,13 @@ static void RemoveExtraStartMenuWindows(void)
 {
     if (GetSafariZoneFlag())
     {
-        sub_8198070(sSafariBallsWindowId, FALSE);
+        ClearStdWindowAndFrameToTransparent(sSafariBallsWindowId, FALSE);
         CopyWindowToVram(sSafariBallsWindowId, 2);
         RemoveWindow(sSafariBallsWindowId);
     }
     if (InBattlePyramid())
     {
-        sub_8198070(sBattlePyramidFloorWindowId, FALSE);
+        ClearStdWindowAndFrameToTransparent(sBattlePyramidFloorWindowId, FALSE);
         RemoveWindow(sBattlePyramidFloorWindowId);
     }
 }
@@ -451,7 +451,7 @@ static bool32 InitStartMenuStep(void)
         break;
     case 2:
         sub_81973A4();
-        NewMenuHelpers_DrawStdWindowFrame(sub_81979C4(sNumStartMenuActions), FALSE);
+        DrawStdWindowFrame(sub_81979C4(sNumStartMenuActions), FALSE);
         sUnknown_02037619[1] = 0;
         sUnknown_02037619[0]++;
         break;
@@ -743,7 +743,7 @@ static bool8 StartMenuBattlePyramidRetireCallback(void)
 
 void sub_809FDD4(void)
 {
-    sub_8197DF8(0, FALSE);
+    ClearDialogWindowAndFrameToTransparent(0, FALSE);
     ScriptUnfreezeEventObjects();
     CreateStartMenuTask(sub_809FA34);
     ScriptContext2_Enable();
@@ -779,13 +779,13 @@ static bool8 SaveCallback(void)
     case SAVE_IN_PROGRESS:
         return FALSE;
     case SAVE_CANCELED: // Back to start menu
-        sub_8197DF8(0, FALSE);
+        ClearDialogWindowAndFrameToTransparent(0, FALSE);
         InitStartMenu();
         gMenuCallback = HandleStartMenuInput;
         return FALSE;
     case SAVE_SUCCESS:
     case SAVE_ERROR:    // Close start menu
-        sub_8197DF8(0, TRUE);
+        ClearDialogWindowAndFrameToTransparent(0, TRUE);
         ScriptUnfreezeEventObjects();
         ScriptContext2_Disable();
         SoftResetInBattlePyramid();
@@ -822,7 +822,7 @@ static bool8 BattlePyramidRetireCallback(void)
     case SAVE_IN_PROGRESS:
         return FALSE;
     case SAVE_CANCELED: // Yes (Retire from battle pyramid)
-        sub_8197DF8(0, TRUE);
+        ClearDialogWindowAndFrameToTransparent(0, TRUE);
         ScriptUnfreezeEventObjects();
         ScriptContext2_Disable();
         ScriptContext1_SetupScript(BattleFrontier_BattlePyramidEmptySquare_EventScript_252C88);
@@ -889,7 +889,7 @@ static void SaveGameTask(u8 taskId)
 
 static void sub_80A0014(void)
 {
-    sub_8197434(0, TRUE);
+    ClearDialogWindowAndFrame(0, TRUE);
 }
 
 static void HideSaveInfoWindow(void)
@@ -935,7 +935,7 @@ static bool8 SaveErrorTimer(void)
 
 static u8 SaveConfirmSaveCallback(void)
 {
-    sub_819746C(GetStartMenuWindowId(), FALSE);
+    ClearStdWindowAndFrame(GetStartMenuWindowId(), FALSE);
     RemoveStartMenuWindow();
     ShowSaveInfoWindow();
 
@@ -953,7 +953,7 @@ static u8 SaveConfirmSaveCallback(void)
 
 static u8 SaveYesNoCallback(void)
 {
-    DisplayYesNoMenu(); // Show Yes/No menu
+    DisplayYesNoMenuDefaultYes(); // Show Yes/No menu
     sSaveDialogCallback = SaveConfirmInputCallback;
     return SAVE_IN_PROGRESS;
 }
@@ -994,7 +994,7 @@ static u8 SaveFileExistsCallback(void)
 {
     if (gDifferentSaveFile == TRUE)
     {
-        ShowSaveMessage(gText_DifferentSaveFile, SaveConfirmOverwriteNoCallback);
+        ShowSaveMessage(gText_DifferentSaveFile, SaveConfirmOverwriteDefaultNoCallback);
     }
     else
     {
@@ -1004,16 +1004,16 @@ static u8 SaveFileExistsCallback(void)
     return SAVE_IN_PROGRESS;
 }
 
-static u8 SaveConfirmOverwriteNoCallback(void)
+static u8 SaveConfirmOverwriteDefaultNoCallback(void)
 {
-    sub_8197948(1); // Show Yes/No menu (No selected as default)
+    DisplayYesNoMenuWithDefault(1); // Show Yes/No menu (No selected as default)
     sSaveDialogCallback = SaveOverwriteInputCallback;
     return SAVE_IN_PROGRESS;
 }
 
 static u8 SaveConfirmOverwriteCallback(void)
 {
-    DisplayYesNoMenu(); // Show Yes/No menu
+    DisplayYesNoMenuDefaultYes(); // Show Yes/No menu
     sSaveDialogCallback = SaveOverwriteInputCallback;
     return SAVE_IN_PROGRESS;
 }
@@ -1127,7 +1127,7 @@ static void InitBattlePyramidRetire(void)
 
 static u8 BattlePyramidConfirmRetireCallback(void)
 {
-    sub_819746C(GetStartMenuWindowId(), FALSE);
+    ClearStdWindowAndFrame(GetStartMenuWindowId(), FALSE);
     RemoveStartMenuWindow();
     ShowSaveMessage(gText_BattlePyramidConfirmRetire, BattlePyramidRetireYesNoCallback);
 
@@ -1136,7 +1136,7 @@ static u8 BattlePyramidConfirmRetireCallback(void)
 
 static u8 BattlePyramidRetireYesNoCallback(void)
 {
-    sub_8197948(1); // Show Yes/No menu (No selected as default)
+    DisplayYesNoMenuWithDefault(1); // Show Yes/No menu (No selected as default)
     sSaveDialogCallback = BattlePyramidRetireInputCallback;
 
     return SAVE_IN_PROGRESS;
@@ -1224,7 +1224,7 @@ static void sub_80A0550(u8 taskId)
         switch (*step)
         {
         case 0:
-            FillWindowPixelBuffer(0, 17);
+            FillWindowPixelBuffer(0, PIXEL_FILL(1));
             AddTextPrinterParameterized2(0,
                                         1,
                                         gText_SavingDontTurnOffPower,
@@ -1305,7 +1305,7 @@ static void ShowSaveInfoWindow(void)
     }
 
     sSaveInfoWindowId = AddWindow(&saveInfoWindow);
-    NewMenuHelpers_DrawStdWindowFrame(sSaveInfoWindowId, FALSE);
+    DrawStdWindowFrame(sSaveInfoWindowId, FALSE);
 
     gender = gSaveBlock2Ptr->playerGender;
     color = TEXT_COLOR_RED;  // Red when female, blue when male.
@@ -1356,7 +1356,7 @@ static void ShowSaveInfoWindow(void)
 
 static void RemoveSaveInfoWindow(void)
 {
-    sub_819746C(sSaveInfoWindowId, FALSE);
+    ClearStdWindowAndFrame(sSaveInfoWindowId, FALSE);
     RemoveWindow(sSaveInfoWindowId);
 }
 
@@ -1378,7 +1378,7 @@ void sub_80A08CC(void) // Referenced in data/specials.inc and data/scripts/maps/
 
 static void HideStartMenuWindow(void)
 {
-    sub_819746C(GetStartMenuWindowId(), TRUE);
+    ClearStdWindowAndFrame(GetStartMenuWindowId(), TRUE);
     RemoveStartMenuWindow();
     ScriptUnfreezeEventObjects();
     ScriptContext2_Disable();

@@ -9,7 +9,7 @@ SeafloorCavern_Entrance_MapScript1_234474: @ 8234474
 
 SeafloorCavern_Entrance_EventScript_234485:: @ 8234485
 	lockall
-	compare VAR_0x40D9, 1
+	compare VAR_HAS_TALKED_TO_SEAFLOOR_CAVERN_ENTRANCE_GRUNT, 1
 	goto_if_eq SeafloorCavern_Entrance_EventScript_2344ED
 	waitse
 	playse SE_PIN
@@ -25,7 +25,7 @@ SeafloorCavern_Entrance_EventScript_234485:: @ 8234485
 	compare VAR_FACING, 2
 	call_if_eq SeafloorCavern_Entrance_EventScript_234539
 	delay 30
-	setvar VAR_0x40D9, 1
+	setvar VAR_HAS_TALKED_TO_SEAFLOOR_CAVERN_ENTRANCE_GRUNT, 1
 	moveobjectoffscreen 1
 	msgbox SeafloorCavern_Entrance_Text_234544, MSGBOX_DEFAULT
 	closemessage

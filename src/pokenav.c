@@ -1138,8 +1138,8 @@ bool32 IsDma3ManagerBusyWithBgCopy_(void)
 
 void sub_81C7BF8(u32 windowId)
 {
-    FillWindowPixelBuffer(windowId, 0x44);
-    FillWindowPixelRect(windowId, 0x55, 0, 0, 0x80, 1);
+    FillWindowPixelBuffer(windowId, PIXEL_FILL(4));
+    FillWindowPixelRect(windowId, PIXEL_FILL(5), 0, 0, 0x80, 1);
 }
 
 void sub_81C7C28(void)
