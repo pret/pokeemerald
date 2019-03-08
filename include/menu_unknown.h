@@ -2,6 +2,7 @@
 #define GUARD_MENU_UNKNOWN_H
 
 #include "player_pc.h"
+#include "list_menu.h"
 
 struct UnknownSubStruct_81D1ED4
 {
@@ -41,5 +42,10 @@ void sub_81D3464(void *arg0);
 void sub_81D3480(void *arg0, u8 arg1);
 void sub_81D2754(struct UnknownStruct_81D1ED4 *arg0, struct UnknownSubStruct_81D1ED4 *arg1);
 void sub_81D1F84(struct UnknownStruct_81D1ED4 *arg0, struct UnknownSubStruct_81D1ED4 arg1[4][5], struct UnknownSubStruct_81D1ED4 arg2[4][5]);
+void MoveRelearnerPrintText(u8 *text);
+bool16 MoveRelearnerRunTextPrinters(void);
+void MoveRelearnerCreateYesNoMenu(void);
+u8 LoadMoveRelearnerMovesList(const struct ListMenuItem *items, u16 numChoices);
+void InitMoveRelearnerWindows(bool8 useContextWindow);
 
 #endif // GUARD_MENU_UNKNOWN_H

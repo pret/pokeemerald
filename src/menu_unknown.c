@@ -1,14 +1,21 @@
 #include "global.h"
 #include "alloc.h"
+#include "battle_main.h"
+#include "contest_effect.h"
 #include "gpu_regs.h"
+#include "menu.h"
 #include "international_string_util.h"
 #include "menu.h"
 #include "menu_unknown.h"
+#include "move_relearner.h"
+#include "palette.h"
 #include "player_pc.h"
+#include "pokemon_summary_screen.h"
 #include "scanline_effect.h"
 #include "sound.h"
 #include "strings.h"
 #include "string_util.h"
+#include "text_window.h"
 #include "trig.h"
 #include "window.h"
 #include "constants/songs.h"
@@ -25,6 +32,7 @@ void sub_81D1E7C(s32 itemIndex, bool8 onInit, struct ListMenu *list);
 void sub_81D24A4(struct UnknownStruct_81D1ED4 *a0);
 void sub_81D2634(struct UnknownStruct_81D1ED4 *a0);
 void MoveRelearnerCursorCallback(s32 itemIndex, bool8 onInit, struct ListMenu *list);
+extern void nullsub_79(void);
 
 static const struct WindowTemplate sUnknown_086253E8[] =
 {
@@ -1585,4 +1593,527 @@ _081D2800:\n\
 	.pool\n\
     .syntax divided");
 #endif
+}
+
+void InitMoveRelearnerWindows(bool8 useContextWindow)
+{
+    u8 i;
+
+    InitWindows(gMoveRelearnerWindowTemplates);
+    DeactivateAllTextPrinters();
+    LoadUserWindowBorderGfx(0, 1, 0xE0);
+    LoadPalette(gUnknown_0860F074, 0xF0, 0x20);
+    
+    for (i = 0; i < 5; i++)
+    {
+        FillWindowPixelBuffer(i, 0x11);
+    }
+
+    if (!useContextWindow)
+    {
+        PutWindowTilemap(0);
+        SetWindowBorderStyle(0, 0, 0x1, 0xE);
+    }
+    else
+    {
+        PutWindowTilemap(1);
+        SetWindowBorderStyle(1, 0, 1, 0xE);
+    }
+    PutWindowTilemap(2);
+    PutWindowTilemap(3);
+    SetWindowBorderStyle(2, 0, 1, 0xE);
+    SetWindowBorderStyle(3, 0, 1, 0xE);
+    nullsub_79();
+    schedule_bg_copy_tilemap_to_vram(1);
+}
+
+void nullsub_79(void)
+{
+
+}
+
+u8 LoadMoveRelearnerMovesList(const struct ListMenuItem *items, u16 numChoices)
+{
+    gMultiuseListMenuTemplate = gMoveRelearnerMovesListTemplate;
+    gMultiuseListMenuTemplate.totalItems = numChoices;
+    gMultiuseListMenuTemplate.items = items;
+
+    if (numChoices < 6)
+    {
+        gMultiuseListMenuTemplate.maxShowed = numChoices;
+    }
+    else
+    {
+        gMultiuseListMenuTemplate.maxShowed = 6;
+    }
+    return gMultiuseListMenuTemplate.maxShowed;
+}
+
+NAKED
+void MoveRelearnerLoadBattleMoveDescription(u32 chosenMove)
+{
+    // Two small issues, and a few renamed registers.
+#ifdef NONMATCHING
+    u8 offset;
+    s32 width;
+    const struct BattleMove *move;
+    u8 buffer[0x20];
+    const u8 *labelStr;
+
+    FillWindowPixelBuffer(0, 0x11);
+    labelStr = gText_MoveRelearnerBattleMoves;
+    offset = GetStringCenterAlignXOffset(1, labelStr, 0x80);
+    AddTextPrinterParameterized(0, 1, labelStr, offset, 1, TEXT_SPEED_FF, NULL);
+
+    labelStr = gText_MoveRelearnerPP;
+    AddTextPrinterParameterized(0, 1, labelStr, 4, 0x29, TEXT_SPEED_FF, NULL);
+
+    labelStr = gText_MoveRelearnerPower;
+    offset = GetStringRightAlignXOffset(1, labelStr, 0x6A);
+    AddTextPrinterParameterized(0, 1, labelStr, offset, 0x19, TEXT_SPEED_FF, NULL);
+
+    labelStr = gText_MoveRelearnerAccuracy;
+    offset = GetStringRightAlignXOffset(1, labelStr, 0x6A);
+    AddTextPrinterParameterized(0, 1, labelStr, offset, 0x29, TEXT_SPEED_FF, NULL);
+    if (chosenMove == LIST_CANCEL)
+    {
+        CopyWindowToVram(0, 2);
+        return;
+    }
+    move = &gBattleMoves[chosenMove];
+    labelStr = gTypeNames[move->type];
+    // GCC tries to be smart, and preserves the same 0x19 from above for this.
+    // The original asm just loads the constant 0x19 twice.
+    AddTextPrinterParameterized(0, 1, labelStr, 4, 0x19, TEXT_SPEED_FF, NULL);
+
+    // GCC tries to generate this as:
+    //   add r4, r0, 0
+    //   add r4, r4, 4
+    // But the original asm is:
+    //   add r4, r0, 4
+    width = 4 + GetStringWidth(1, gText_MoveRelearnerPP, 0);
+
+    ConvertIntToDecimalStringN(buffer, move->pp, 0, 2);
+    AddTextPrinterParameterized(0, 1, buffer, width, 0x29, TEXT_SPEED_FF, NULL);
+    
+
+    if (move->power < 2)
+    {
+        labelStr = gText_ThreeDashes;
+    }
+    else
+    {
+        ConvertIntToDecimalStringN(buffer, move->power, 0, 3);
+        labelStr = buffer;
+    }
+    AddTextPrinterParameterized(0, 1, labelStr, 0x6A, 0x19, TEXT_SPEED_FF, NULL);
+
+    if (move->accuracy == 0)
+    {
+        labelStr = gText_ThreeDashes;
+    }
+    else
+    {
+        ConvertIntToDecimalStringN(buffer, move->accuracy, 0, 3);
+        labelStr = buffer;
+    }
+    AddTextPrinterParameterized(0, 1, labelStr, 0x6A, 0x29, TEXT_SPEED_FF, NULL);
+    labelStr = gMoveDescriptionPointers[chosenMove - 1];
+    AddTextPrinterParameterized(0, 7, labelStr, 0, 0x41, 0, NULL);
+#else
+    asm(".syntax unified\n\
+    push {r4-r7,lr}\n\
+	mov r7, r10\n\
+	mov r6, r9\n\
+	mov r5, r8\n\
+	push {r5-r7}\n\
+	sub sp, 0x2C\n\
+	mov r9, r0\n\
+	movs r0, 0\n\
+	movs r1, 0x11\n\
+	bl FillWindowPixelBuffer\n\
+	ldr r5, =gText_MoveRelearnerBattleMoves\n\
+	movs r0, 0x1\n\
+	adds r1, r5, 0\n\
+	movs r2, 0x80\n\
+	bl GetStringCenterAlignXOffset\n\
+	adds r4, r0, 0\n\
+	lsls r3, r4, 24\n\
+	lsrs r3, 24\n\
+	movs r0, 0x1\n\
+	str r0, [sp]\n\
+	movs r0, 0xFF\n\
+	mov r8, r0\n\
+	str r0, [sp, 0x4]\n\
+	movs r7, 0\n\
+	str r7, [sp, 0x8]\n\
+	movs r0, 0\n\
+	movs r1, 0x1\n\
+	adds r2, r5, 0\n\
+	bl AddTextPrinterParameterized\n\
+	ldr r5, =gText_MoveRelearnerPP\n\
+	movs r1, 0x29\n\
+	mov r10, r1\n\
+	str r1, [sp]\n\
+	mov r0, r8\n\
+	str r0, [sp, 0x4]\n\
+	str r7, [sp, 0x8]\n\
+	movs r0, 0\n\
+	movs r1, 0x1\n\
+	adds r2, r5, 0\n\
+	movs r3, 0x4\n\
+	bl AddTextPrinterParameterized\n\
+	ldr r5, =gText_MoveRelearnerPower\n\
+	movs r0, 0x1\n\
+	adds r1, r5, 0\n\
+	movs r2, 0x6A\n\
+	bl GetStringRightAlignXOffset\n\
+	adds r4, r0, 0\n\
+	lsls r3, r4, 24\n\
+	lsrs r3, 24\n\
+	movs r1, 0x19\n\
+	str r1, [sp]\n\
+	mov r0, r8\n\
+	str r0, [sp, 0x4]\n\
+	str r7, [sp, 0x8]\n\
+	movs r0, 0\n\
+	movs r1, 0x1\n\
+	adds r2, r5, 0\n\
+	bl AddTextPrinterParameterized\n\
+	ldr r5, =gText_MoveRelearnerAccuracy\n\
+	movs r0, 0x1\n\
+	adds r1, r5, 0\n\
+	movs r2, 0x6A\n\
+	bl GetStringRightAlignXOffset\n\
+	adds r4, r0, 0\n\
+	lsls r3, r4, 24\n\
+	lsrs r3, 24\n\
+	mov r1, r10\n\
+	str r1, [sp]\n\
+	mov r0, r8\n\
+	str r0, [sp, 0x4]\n\
+	str r7, [sp, 0x8]\n\
+	movs r0, 0\n\
+	movs r1, 0x1\n\
+	adds r2, r5, 0\n\
+	bl AddTextPrinterParameterized\n\
+	movs r0, 0x2\n\
+	negs r0, r0\n\
+	cmp r9, r0\n\
+	bne _081D29C4\n\
+	movs r0, 0\n\
+	movs r1, 0x2\n\
+	bl CopyWindowToVram\n\
+	b _081D2AB6\n\
+	.pool\n\
+_081D29C4:\n\
+	mov r1, r9\n\
+	lsls r0, r1, 1\n\
+	add r0, r9\n\
+	lsls r0, 2\n\
+	ldr r1, =gBattleMoves\n\
+	adds r6, r0, r1\n\
+	ldrb r1, [r6, 0x2]\n\
+	lsls r0, r1, 3\n\
+	subs r0, r1\n\
+	ldr r1, =gTypeNames\n\
+	adds r5, r0, r1\n\
+	movs r0, 0x19\n\
+	str r0, [sp]\n\
+	mov r1, r8\n\
+	str r1, [sp, 0x4]\n\
+	str r7, [sp, 0x8]\n\
+	movs r0, 0\n\
+	movs r1, 0x1\n\
+	adds r2, r5, 0\n\
+	movs r3, 0x4\n\
+	bl AddTextPrinterParameterized\n\
+	ldr r1, =gText_MoveRelearnerPP\n\
+	movs r0, 0x1\n\
+	movs r2, 0\n\
+	bl GetStringWidth\n\
+	adds r4, r0, 0x4\n\
+	ldrb r1, [r6, 0x4]\n\
+	add r0, sp, 0xC\n\
+	movs r2, 0\n\
+	movs r3, 0x2\n\
+	bl ConvertIntToDecimalStringN\n\
+	lsls r3, r4, 24\n\
+	lsrs r3, 24\n\
+	mov r0, r10\n\
+	str r0, [sp]\n\
+	mov r1, r8\n\
+	str r1, [sp, 0x4]\n\
+	str r7, [sp, 0x8]\n\
+	movs r0, 0\n\
+	movs r1, 0x1\n\
+	add r2, sp, 0xC\n\
+	bl AddTextPrinterParameterized\n\
+	ldrb r0, [r6, 0x1]\n\
+	cmp r0, 0x1\n\
+	bhi _081D2A3C\n\
+	ldr r5, =gText_ThreeDashes\n\
+	b _081D2A4A\n\
+	.pool\n\
+_081D2A3C:\n\
+	ldrb r1, [r6, 0x1]\n\
+	add r0, sp, 0xC\n\
+	movs r2, 0\n\
+	movs r3, 0x3\n\
+	bl ConvertIntToDecimalStringN\n\
+	add r5, sp, 0xC\n\
+_081D2A4A:\n\
+	movs r0, 0x19\n\
+	str r0, [sp]\n\
+	movs r0, 0xFF\n\
+	str r0, [sp, 0x4]\n\
+	movs r0, 0\n\
+	str r0, [sp, 0x8]\n\
+	movs r1, 0x1\n\
+	adds r2, r5, 0\n\
+	movs r3, 0x6A\n\
+	bl AddTextPrinterParameterized\n\
+	ldrb r0, [r6, 0x3]\n\
+	cmp r0, 0\n\
+	bne _081D2A70\n\
+	ldr r5, =gText_ThreeDashes\n\
+	b _081D2A7E\n\
+	.pool\n\
+_081D2A70:\n\
+	ldrb r1, [r6, 0x3]\n\
+	add r0, sp, 0xC\n\
+	movs r2, 0\n\
+	movs r3, 0x3\n\
+	bl ConvertIntToDecimalStringN\n\
+	add r5, sp, 0xC\n\
+_081D2A7E:\n\
+	movs r0, 0x29\n\
+	str r0, [sp]\n\
+	movs r0, 0xFF\n\
+	str r0, [sp, 0x4]\n\
+	movs r4, 0\n\
+	str r4, [sp, 0x8]\n\
+	movs r0, 0\n\
+	movs r1, 0x1\n\
+	adds r2, r5, 0\n\
+	movs r3, 0x6A\n\
+	bl AddTextPrinterParameterized\n\
+	ldr r1, =gMoveDescriptionPointers\n\
+	mov r0, r9\n\
+	subs r0, 0x1\n\
+	lsls r0, 2\n\
+	adds r0, r1\n\
+	ldr r5, [r0]\n\
+	movs r0, 0x41\n\
+	str r0, [sp]\n\
+	str r4, [sp, 0x4]\n\
+	str r4, [sp, 0x8]\n\
+	movs r0, 0\n\
+	movs r1, 0x7\n\
+	adds r2, r5, 0\n\
+	movs r3, 0\n\
+	bl AddTextPrinterParameterized\n\
+_081D2AB6:\n\
+	add sp, 0x2C\n\
+	pop {r3-r5}\n\
+	mov r8, r3\n\
+	mov r9, r4\n\
+	mov r10, r5\n\
+	pop {r4-r7}\n\
+	pop {r0}\n\
+	bx r0\n\
+	.pool\n\
+    .syntax divided");
+#endif
+}
+
+NAKED
+void MoveRelearnerMenuLoadContestMoveDescription(u32 chosenMove)
+{
+#ifdef NONMATCHING
+    //u8 offset;
+    const u8 *labelStr;
+    const struct ContestMove *move;
+    u8 category;
+    const u8 **temp;
+
+    MoveRelearnerShowHideHearts(chosenMove);
+    FillWindowPixelBuffer(1, 0x11);
+    labelStr = gText_MoveRelearnerContestMovesTitle;
+    // GCC compiles these as:
+    //   add r3, r0, 0
+    //   lsls r3, r3, 24
+    //   lsrs r3, r3, 24
+    // But in the original asm:
+    //   lsls r3, r0, 24
+    //   lsrs r3, r3, 24
+    //offset = GetStringCenterAlignXOffset(1, labelStr, 0x80);
+    AddTextPrinterParameterized(1, 1, labelStr, GetStringCenterAlignXOffset(1, labelStr, 0x80), 1, TEXT_SPEED_FF, NULL);
+
+    labelStr = gText_MoveRelearnerAppeal;
+    //offset = GetStringRightAlignXOffset(1, labelStr, 0x5C);
+    AddTextPrinterParameterized(1, 1, labelStr, GetStringCenterAlignXOffset(1, labelStr, 0x5C), 0x19, TEXT_SPEED_FF, NULL);
+
+    labelStr = gText_MoveRelearnerJam;
+    //offset = GetStringRightAlignXOffset(1, labelStr, 0x5C);
+    AddTextPrinterParameterized(1, 1, labelStr, GetStringCenterAlignXOffset(1, labelStr, 0x5C), 0x29, TEXT_SPEED_FF, NULL);
+
+    if (chosenMove == MENU_NOTHING_CHOSEN)
+    {
+        CopyWindowToVram(1, 2);
+        return;
+    }
+
+    move = &gContestMoves[chosenMove];
+    temp = (const u8**)gContestMoveTypeTextPointers;
+    category = move->contestCategory;
+    labelStr = temp[category];
+    AddTextPrinterParameterized(1, 1, labelStr, 4, 0x19, TEXT_SPEED_FF, NULL);
+
+    labelStr = gContestEffectDescriptionPointers[move->effect];
+    AddTextPrinterParameterized(1, 1, labelStr, 0, 0x41, TEXT_SPEED_FF, NULL);
+
+    CopyWindowToVram(1, 2);
+#else
+    asm(".syntax unified\n\
+    push {r4-r7,lr}\n\
+	mov r7, r8\n\
+	push {r7}\n\
+	sub sp, 0xC\n\
+	adds r4, r0, 0\n\
+	bl MoveRelearnerShowHideHearts\n\
+	movs r0, 0x1\n\
+	movs r1, 0x11\n\
+	bl FillWindowPixelBuffer\n\
+	ldr r5, =gText_MoveRelearnerContestMovesTitle\n\
+	movs r0, 0x1\n\
+	adds r1, r5, 0\n\
+	movs r2, 0x80\n\
+	bl GetStringCenterAlignXOffset\n\
+	lsls r3, r0, 24\n\
+	lsrs r3, 24\n\
+	movs r0, 0x1\n\
+	str r0, [sp]\n\
+	movs r7, 0xFF\n\
+	str r7, [sp, 0x4]\n\
+	movs r6, 0\n\
+	str r6, [sp, 0x8]\n\
+	movs r1, 0x1\n\
+	adds r2, r5, 0\n\
+	bl AddTextPrinterParameterized\n\
+	ldr r5, =gText_MoveRelearnerAppeal\n\
+	movs r0, 0x1\n\
+	adds r1, r5, 0\n\
+	movs r2, 0x5C\n\
+	bl GetStringRightAlignXOffset\n\
+	lsls r3, r0, 24\n\
+	lsrs r3, 24\n\
+	movs r0, 0x19\n\
+	mov r8, r0\n\
+	str r0, [sp]\n\
+	str r7, [sp, 0x4]\n\
+	str r6, [sp, 0x8]\n\
+	movs r0, 0x1\n\
+	movs r1, 0x1\n\
+	adds r2, r5, 0\n\
+	bl AddTextPrinterParameterized\n\
+	ldr r5, =gText_MoveRelearnerJam\n\
+	movs r0, 0x1\n\
+	adds r1, r5, 0\n\
+	movs r2, 0x5C\n\
+	bl GetStringRightAlignXOffset\n\
+	lsls r3, r0, 24\n\
+	lsrs r3, 24\n\
+	movs r0, 0x29\n\
+	str r0, [sp]\n\
+	str r7, [sp, 0x4]\n\
+	str r6, [sp, 0x8]\n\
+	movs r0, 0x1\n\
+	movs r1, 0x1\n\
+	adds r2, r5, 0\n\
+	bl AddTextPrinterParameterized\n\
+	movs r0, 0x2\n\
+	negs r0, r0\n\
+	cmp r4, r0\n\
+	bne _081D2B6C\n\
+	movs r0, 0x1\n\
+	movs r1, 0x2\n\
+	bl CopyWindowToVram\n\
+	b _081D2BB8\n\
+	.pool\n\
+_081D2B6C:\n\
+	lsls r4, 3\n\
+	ldr r0, =gContestMoves\n\
+	adds r4, r0\n\
+	ldr r1, =gContestMoveTypeTextPointers\n\
+	ldrb r0, [r4, 0x1]\n\
+	lsls r0, 29\n\
+	lsrs r0, 27\n\
+	adds r0, r1\n\
+	ldr r5, [r0]\n\
+	mov r0, r8\n\
+	str r0, [sp]\n\
+	str r7, [sp, 0x4]\n\
+	str r6, [sp, 0x8]\n\
+	movs r0, 0x1\n\
+	movs r1, 0x1\n\
+	adds r2, r5, 0\n\
+	movs r3, 0x4\n\
+	bl AddTextPrinterParameterized\n\
+	ldr r1, =gContestEffectDescriptionPointers\n\
+	ldrb r0, [r4]\n\
+	lsls r0, 2\n\
+	adds r0, r1\n\
+	ldr r5, [r0]\n\
+	movs r0, 0x41\n\
+	str r0, [sp]\n\
+	str r7, [sp, 0x4]\n\
+	str r6, [sp, 0x8]\n\
+	movs r0, 0x1\n\
+	movs r1, 0x7\n\
+	adds r2, r5, 0\n\
+	movs r3, 0\n\
+	bl AddTextPrinterParameterized\n\
+	movs r0, 0x1\n\
+	movs r1, 0x2\n\
+	bl CopyWindowToVram\n\
+_081D2BB8:\n\
+	add sp, 0xC\n\
+	pop {r3}\n\
+	mov r8, r3\n\
+	pop {r4-r7}\n\
+	pop {r0}\n\
+	bx r0\n\
+	.pool\n\
+    .syntax divided");
+#endif
+}
+
+void MoveRelearnerCursorCallback(s32 itemIndex, bool8 onInit, struct ListMenu *list)
+{
+    if (onInit != TRUE)
+        PlaySE(SE_SELECT);
+    MoveRelearnerLoadBattleMoveDescription(itemIndex);
+    MoveRelearnerMenuLoadContestMoveDescription(itemIndex);
+}
+
+void MoveRelearnerPrintText(u8 *text)
+{
+    u8 speed;
+
+    FillWindowPixelBuffer(3, 0x11);
+    gTextFlags.canABSpeedUpPrint = TRUE;
+    speed = GetPlayerTextSpeedDelay();
+    AddTextPrinterParameterized2(3, 1, text, speed, NULL, TEXT_COLOR_DARK_GREY, TEXT_COLOR_WHITE, 3);
+}
+
+bool16 MoveRelearnerRunTextPrinters(void)
+{
+    RunTextPrinters();
+    return IsTextPrinterActive(3);
+}
+
+void MoveRelearnerCreateYesNoMenu(void)
+{
+    CreateYesNoMenu(&gMoveRelearnerYesNoMenuTemplate, 1, 0xE, 0);
 }
