@@ -5885,12 +5885,22 @@ void UndoMegaEvolution(u8 monId)
 
 bool32 DoBattlersShareType(u32 battler1, u32 battler2)
 {
-    if (gBattleMons[battler1].type1 == gBattleMons[battler2].type1 || gBattleMons[battler1].type1 == gBattleMons[battler2].type2)
-        return TRUE;
-    else if (gBattleMons[battler1].type2 == gBattleMons[battler2].type1 || gBattleMons[battler1].type2 == gBattleMons[battler2].type2)
-        return TRUE;
-    else
-        return FALSE;
+    s32 i;
+    u8 types1[3] = {gBattleMons[battler1].type1, gBattleMons[battler1].type2, gBattleMons[battler1].type3};
+    u8 types2[3] = {gBattleMons[battler2].type1, gBattleMons[battler2].type2, gBattleMons[battler2].type3};
+
+    if (types1[2] == TYPE_MYSTERY)
+        types1[2] = types1[0];
+    if (types2[2] == TYPE_MYSTERY)
+        types2[2] = types2[0];
+
+    for (i = 0; i < 3; i++)
+    {
+        if (types1[i] == types2[0] || types1[i] == types2[1] || types1[i] == types2[2])
+            return TRUE;
+    }
+
+    return FALSE;
 }
 
 bool32 CanBattlerGetOrLoseItem(u8 battlerId, u16 itemId)
