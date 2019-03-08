@@ -1,5 +1,5 @@
-#ifndef GUARD_MENU_UNKNOWN_H
-#define GUARD_MENU_UNKNOWN_H
+#ifndef GUARD_MENU_SPECIALIZED_H
+#define GUARD_MENU_SPECIALIZED_H
 
 #include "player_pc.h"
 #include "list_menu.h"
@@ -48,4 +48,4 @@ void MoveRelearnerCreateYesNoMenu(void);
 u8 LoadMoveRelearnerMovesList(const struct ListMenuItem *items, u16 numChoices);
 void InitMoveRelearnerWindows(bool8 useContextWindow);
 
-#endif // GUARD_MENU_UNKNOWN_H
+#endif // GUARD_MENU_SPECIALIZED_H

@@ -291,8 +291,8 @@ SECTIONS {
         src/pokenav.o(.text);
         asm/pokenav.o(.text);
         src/pokenav_match_call.o(.text);
-        src/menu_unknown.o(.text);
-        asm/menu_unknown.o(.text);
+        src/menu_specialized.o(.text);
+        asm/menu_specialized.o(.text);
         asm/rom_81D1C44.o(.text);
         src/trainer_hill.o(.text);
         src/rayquaza_scene.o(.text);
@@ -596,8 +596,8 @@ SECTIONS {
         src/pokenav.o(.rodata);
         data/pokenav.o(.rodata);
         src/pokenav_match_call.o(.rodata);
-        src/menu_unknown.o(.rodata);
-        data/menu_unknown.o(.rodata);
+        src/menu_specialized.o(.rodata);
+        data/menu_specialized.o(.rodata);
         data/rom_81D1C44.o(.rodata);
         src/trainer_hill.o(.rodata);
         src/rayquaza_scene.o(.rodata);

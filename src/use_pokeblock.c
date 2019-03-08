@@ -4,7 +4,7 @@
 #include "alloc.h"
 #include "palette.h"
 #include "pokenav.h"
-#include "menu_unknown.h"
+#include "menu_specialized.h"
 #include "scanline_effect.h"
 #include "text.h"
 #include "bg.h"

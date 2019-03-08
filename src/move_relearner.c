@@ -12,7 +12,7 @@
 #include "alloc.h"
 #include "menu.h"
 #include "menu_helpers.h"
-#include "menu_unknown.h"
+#include "menu_specialized.h"
 #include "overworld.h"
 #include "palette.h"
 #include "pokemon_summary_screen.h"

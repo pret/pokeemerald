@@ -28,7 +28,7 @@
 #include "strings.h"
 #include "task.h"
 #include "window.h"
-#include "menu_unknown.h"
+#include "menu_specialized.h"
 
 // structures
 struct Struct203BCC4

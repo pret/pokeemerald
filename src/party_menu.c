@@ -37,7 +37,7 @@
 #include "main.h"
 #include "menu.h"
 #include "menu_helpers.h"
-#include "menu_unknown.h"
+#include "menu_specialized.h"
 #include "metatile_behavior.h"
 #include "overworld.h"
 #include "palette.h"

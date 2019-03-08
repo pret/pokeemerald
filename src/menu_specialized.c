@@ -6,7 +6,7 @@
 #include "menu.h"
 #include "international_string_util.h"
 #include "menu.h"
-#include "menu_unknown.h"
+#include "menu_specialized.h"
 #include "move_relearner.h"
 #include "palette.h"
 #include "player_pc.h"
