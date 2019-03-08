@@ -1581,7 +1581,7 @@ void InitMoveRelearnerWindows(bool8 useContextWindow)
     
     for (i = 0; i < 5; i++)
     {
-        FillWindowPixelBuffer(i, 0x11);
+        FillWindowPixelBuffer(i, PIXEL_FILL(1));
     }
 
     if (!useContextWindow)
@@ -1635,7 +1635,7 @@ static void MoveRelearnerLoadBattleMoveDescription(u32 chosenMove)
     u8 buffer[0x20];
     const u8 *labelStr;
 
-    FillWindowPixelBuffer(0, 0x11);
+    FillWindowPixelBuffer(0, PIXEL_FILL(1));
     labelStr = gText_MoveRelearnerBattleMoves;
     offset = GetStringCenterAlignXOffset(1, labelStr, 0x80);
     AddTextPrinterParameterized(0, 1, labelStr, offset, 1, TEXT_SPEED_FF, NULL);
@@ -1913,7 +1913,7 @@ static void MoveRelearnerMenuLoadContestMoveDescription(u32 chosenMove)
     const u8 **temp;
 
     MoveRelearnerShowHideHearts(chosenMove);
-    FillWindowPixelBuffer(1, 0x11);
+    FillWindowPixelBuffer(1, PIXEL_FILL(1));
     labelStr = gText_MoveRelearnerContestMovesTitle;
     // GCC compiles these as:
     //   add r3, r0, 0
@@ -2076,7 +2076,7 @@ void MoveRelearnerPrintText(u8 *str)
 {
     u8 speed;
 
-    FillWindowPixelBuffer(3, 0x11);
+    FillWindowPixelBuffer(3, PIXEL_FILL(1));
     gTextFlags.canABSpeedUpPrint = TRUE;
     speed = GetPlayerTextSpeedDelay();
     AddTextPrinterParameterized2(3, 1, str, speed, NULL, TEXT_COLOR_DARK_GREY, TEXT_COLOR_WHITE, 3);
