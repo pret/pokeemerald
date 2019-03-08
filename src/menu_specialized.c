@@ -246,7 +246,7 @@ u8 sub_81D1C84(u8 a0)
 
 void sub_81D1D04(u8 a0)
 {
-    sub_8198070(sUnknown_0203CF48[a0], 0);
+    ClearStdWindowAndFrameToTransparent(sUnknown_0203CF48[a0], 0);
     ClearWindowTilemap(sUnknown_0203CF48[a0]);
     RemoveWindow(sUnknown_0203CF48[a0]);
     sUnknown_0203CF48[a0] = 0xFF;
@@ -1587,17 +1587,17 @@ void InitMoveRelearnerWindows(bool8 useContextWindow)
     if (!useContextWindow)
     {
         PutWindowTilemap(0);
-        SetWindowBorderStyle(0, 0, 0x1, 0xE);
+        DrawStdFrameWithCustomTileAndPalette(0, 0, 0x1, 0xE);
     }
     else
     {
         PutWindowTilemap(1);
-        SetWindowBorderStyle(1, 0, 1, 0xE);
+        DrawStdFrameWithCustomTileAndPalette(1, 0, 1, 0xE);
     }
     PutWindowTilemap(2);
     PutWindowTilemap(3);
-    SetWindowBorderStyle(2, 0, 1, 0xE);
-    SetWindowBorderStyle(3, 0, 1, 0xE);
+    DrawStdFrameWithCustomTileAndPalette(2, 0, 1, 0xE);
+    DrawStdFrameWithCustomTileAndPalette(3, 0, 1, 0xE);
     nullsub_79();
     schedule_bg_copy_tilemap_to_vram(1);
 }
