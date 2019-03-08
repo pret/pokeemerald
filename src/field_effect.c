@@ -240,12 +240,6 @@ static IWRAM_DATA u8 sActiveList[32];
 
 extern u8 *gFieldEffectScriptPointers[];
 extern const struct SpriteTemplate *const gFieldEffectObjectTemplatePointers[];
-extern void sub_81555D8(u8, u8);
-extern void pal_fill_for_maplights(void);
-extern void sub_80E1558(u8);
-extern void sub_80E1570(void);
-extern bool8 sub_80E1584(void);
-extern void WarpFadeScreen(void);
 
 // .rodata
 const u32 gNewGameBirchPic[] = INCBIN_U32("graphics/birch_speech/birch.4bpp");

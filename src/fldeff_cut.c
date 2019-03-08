@@ -20,7 +20,6 @@
 #include "constants/field_effects.h"
 #include "constants/songs.h"
 
-extern void ScriptUnfreezeEventObjects(void);
 extern bool8 IsMewPlayingHideAndSeek(void);
 
 extern struct MapPosition gPlayerFacingPosition;

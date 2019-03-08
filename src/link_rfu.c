@@ -17,9 +17,9 @@
 #include "text.h"
 #include "constants/species.h"
 #include "save.h"
+#include "rom_8011DC0.h"
 
 extern u16 gHeldKeyCodeToSend;
-extern void nullsub_89(u8 taskId);
 
 struct UnkRfuStruct_1 gUnknown_03004140;
 struct UnkRfuStruct_2 gUnknown_03005000;

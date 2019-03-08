@@ -13,8 +13,7 @@
 #include "text_window.h"
 #include "international_string_util.h"
 #include "strings.h"
-
-extern void SetPokemonCryStereo(u32 val);
+#include "gba/m4a_internal.h"
 
 // Task data
 enum

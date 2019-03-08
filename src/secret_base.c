@@ -43,8 +43,6 @@
 #include "constants/species.h"
 #include "constants/trainers.h"
 
-extern void mapldr_default(void);
-
 // Static type declarations
 
 struct SecretBaseListMenuBuffer {

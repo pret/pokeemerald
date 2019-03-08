@@ -2,6 +2,7 @@
 #include "reshow_battle_screen.h"
 #include "battle.h"
 #include "palette.h"
+#include "pokemon.h"
 #include "main.h"
 #include "scanline_effect.h"
 #include "text.h"
@@ -17,8 +18,6 @@
 #include "data2.h"
 
 extern const union AnimCmd * const * const gMonAnimationsSpriteAnimsPtrTable[];
-
-extern void SetMultiuseSpriteTemplateToTrainerBack(u16 backPicId, u8 battlerPosition);
 
 // this file's functions
 static void CB2_ReshowBattleScreenAfterMenu(void);

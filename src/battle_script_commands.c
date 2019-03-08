@@ -48,6 +48,7 @@
 #include "battle_pyramid.h"
 #include "field_specials.h"
 #include "pokemon_summary_screen.h"
+#include "pokenav.h"
 
 extern struct MusicPlayerInfo gMPlayInfo_BGM;
 
@@ -55,9 +56,6 @@ extern const u8* const gBattleScriptsForMoveEffects[];
 
 // functions
 extern void sub_81D388C(struct Pokemon* mon, void* statStoreLocation); // pokenav.s
-extern void sub_81D3640(u16 arg0, void* statStoreLocation1, void* statStoreLocation2, u8 arg3, u8 arg4, u8 arg5); // pokenav.s
-extern void sub_81D3784(u16 arg0, void* statStoreLocation1, u8 arg2, u8 arg3, u8 arg4); // pokenav.s
-extern u8 sub_813B21C(void);
 
 #define DEFENDER_IS_PROTECTED ((gProtectStructs[gBattlerTarget].protected) && (gBattleMoves[gCurrentMove].flags & FLAG_PROTECT_AFFECTED))
 
