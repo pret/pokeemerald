@@ -180,10 +180,10 @@ gPlayerFacingPosition: @ 203AB40
 	
 	.include "src/pokeblock.o"
 	.include "src/field_specials.o"
-    .include "src/battle_records.o"
-    .include "src/pokedex_area_screen.o"
-    .include "src/evolution_scene.o"
-    .include "src/roulette.o"
+	.include "src/battle_records.o"
+	.include "src/pokedex_area_screen.o"
+	.include "src/evolution_scene.o"
+	.include "src/roulette.o"
 	.include "src/pokedex_cry_screen.o"
 	.include "src/coins.o"
 	.include "src/battle_transition.o"
@@ -237,7 +237,7 @@ gUnknown_0203CF40: @ 203CF40
 gUnknown_0203CF44: @ 203CF44
 	.space 0x4
 
-    .include "src/menu_specialized.o"
+	.include "src/menu_specialized.o"
 
 gUnknown_0203CF50: @ 203CF50
 	.space 0x4
