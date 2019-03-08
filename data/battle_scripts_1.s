@@ -5616,9 +5616,14 @@ BattleScript_PowderMoveNoEffect::
 	ppreduce
 	pause 0x20
 	jumpiftype BS_TARGET, TYPE_GRASS, BattleScript_PowderMoveNoEffectPrint
+	jumpifability BS_TARGET, ABILITY_OVERCOAT, BattleScript_PowderMoveNoEffectOvercoat
+	printstring STRINGID_SAFETYGOOGLESPROTECTED
+	goto BattleScript_PowderMoveNoEffectWaitMsg
+BattleScript_PowderMoveNoEffectOvercoat:
 	call BattleScript_AbilityPopUp
 BattleScript_PowderMoveNoEffectPrint:
 	printstring STRINGID_ITDOESNTAFFECT
+BattleScript_PowderMoveNoEffectWaitMsg:
 	waitmessage 0x40
 	cancelmultiturnmoves BS_ATTACKER
 	sethword gMoveResultFlags, MOVE_RESULT_FAILED
