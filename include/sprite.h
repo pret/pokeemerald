@@ -151,6 +151,26 @@ enum
     SUBSPRITES_IGNORE_PRIORITY, // on but priority is ignored
 };
 
+#define OAM_SIZE_0 (0)
+#define OAM_SIZE_1 (1 << 0)
+#define OAM_SIZE_2 (1 << 1)
+#define OAM_SIZE_3 (1 << 2)
+
+#define SPRITE_SIZE_8x8 .shape = ST_OAM_SQUARE, .size = OAM_SIZE_0
+#define SPRITE_SIZE_16x16 .shape = ST_OAM_SQUARE, .size = OAM_SIZE_1
+#define SPRITE_SIZE_32x32 .shape = ST_OAM_SQUARE, .size = OAM_SIZE_2
+#define SPRITE_SIZE_64x64 .shape = ST_OAM_SQUARE, .size = OAM_SIZE_3
+
+#define SPRITE_SIZE_16x8 .shape = ST_OAM_H_RECTANGLE, .size = OAM_SIZE_0
+#define SPRITE_SIZE_32x8 .shape = ST_OAM_H_RECTANGLE, .size = OAM_SIZE_1
+#define SPRITE_SIZE_32x16 .shape = ST_OAM_H_RECTANGLE, .size = OAM_SIZE_2
+#define SPRITE_SIZE_64x32 .shape = ST_OAM_H_RECTANGLE, .size = OAM_SIZE_3
+
+#define SPRITE_SIZE_8x16 .shape = ST_OAM_V_RECTANGLE, .size = OAM_SIZE_0
+#define SPRITE_SIZE_8x32 .shape = ST_OAM_V_RECTANGLE, .size = OAM_SIZE_1
+#define SPRITE_SIZE_16x32 .shape = ST_OAM_V_RECTANGLE, .size = OAM_SIZE_2
+#define SPRITE_SIZE_32x64 .shape = ST_OAM_V_RECTANGLE, .size = OAM_SIZE_3
+
 struct Subsprite
 {
     s8 x; // was u16 in R/S

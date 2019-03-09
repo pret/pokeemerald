@@ -4765,6 +4765,14 @@ extern const u32 gUnknown_08C16FA8[];
 extern const u32 gUnknown_08C16E90[];
 extern const u32 gUnknown_08C17170[];
 extern const u32 gUnknown_08C17980[];
+extern const u32 gTiles_8C19450[];
+extern const u32 gContestNextTurnGfx[];
+extern const u16 gContestPal[];
+extern const u32 gUnknown_08C19168[];
+extern const u32 gContestApplauseGfx[];
+extern const u32 gContestJudgeGfx[];
+extern const u32 gContestJudgeSymbolsGfx[];
+extern const u32 gContest3Pal[];
 
 extern const u32 gUnknown_08D95E00[];
 extern const u32 gUnknown_08D960D0[];
