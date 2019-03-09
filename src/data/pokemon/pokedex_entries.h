@@ -3158,7 +3158,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_ZIGZAGOON] =
     {
-        .categoryName = _("TINYRACCOON"),
+        .categoryName = _("COMFRACCOON"),
         .height = 4,
         .weight = 175,
         .description = gZigzagoonPokedexText,
