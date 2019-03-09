@@ -220,9 +220,6 @@ u32 gContestRngValue;
 
 extern const struct BgTemplate gUnknown_08587F34[4];
 extern const struct WindowTemplate gUnknown_08587F44[];
-extern const u8 *const gUnknown_08587D90[];
-extern const u8 *const gUnknown_08587F08[];
-extern const u8 *const gUnknown_08587F1C[];
 extern const u8 *const gUnknown_0827E8DA[];
 extern const u8 gText_0827D55A[];
 extern const u8 gText_0827E793[];
@@ -251,7 +248,6 @@ extern const struct ContestPokemon gContestOpponents[96];
 extern const u8 gUnknown_085898A4[96];
 extern const union AffineAnimCmd *const gUnknown_082FF6C0[];
 extern const union AffineAnimCmd *const gUnknown_082FF694[];
-extern const u8 *const gContestEffectDescriptionPointers[];
 extern const struct SpriteTemplate gSpriteTemplate_8587AD0;
 extern const struct SpriteTemplate gSpriteTemplate_8587B18[];
 extern void (*const gContestEffectFuncs[])(void);
@@ -582,6 +578,8 @@ const struct SpriteTemplate gSpriteTemplate_8587C18 =
 };
 
 const u16 gUnknown_08587C30[] = INCBIN_U16("graphics/unknown/unknown_587C30.gbapal");
+
+#include "data/contest_text_tables.h"
 
 static void TaskDummy1(u8 taskId)
 {
