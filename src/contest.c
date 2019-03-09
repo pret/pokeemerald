@@ -218,8 +218,6 @@ EWRAM_DATA u8 gUnknown_02039F5D = 0;
 // IWRAM common vars.
 u32 gContestRngValue;
 
-extern const struct BgTemplate gUnknown_08587F34[4];
-extern const struct WindowTemplate gUnknown_08587F44[];
 extern const u8 *const gUnknown_0827E8DA[];
 extern const u8 gText_0827D55A[];
 extern const u8 gText_0827E793[];
@@ -252,7 +250,6 @@ extern const struct SpriteTemplate gSpriteTemplate_8587AD0;
 extern const struct SpriteTemplate gSpriteTemplate_8587B18[];
 extern void (*const gContestEffectFuncs[])(void);
 extern const s8 gContestExcitementTable[][5];
-extern const struct ContestWinner gUnknown_08587FA4[];
 extern const struct CompressedSpriteSheet gUnknown_08589904[];
 extern const struct SpritePalette gUnknown_08589924[];
 extern const struct SpriteTemplate gSpriteTemplate_858998C[];
@@ -580,6 +577,152 @@ const struct SpriteTemplate gSpriteTemplate_8587C18 =
 const u16 gUnknown_08587C30[] = INCBIN_U16("graphics/unknown/unknown_587C30.gbapal");
 
 #include "data/contest_text_tables.h"
+
+const struct BgTemplate gUnknown_08587F34[] =
+{
+    {
+        .bg = 0,
+        .charBaseIndex = 0,
+        .mapBaseIndex = 0x18,
+        .screenSize = 2,
+        .paletteMode = 0,
+        .priority = 0,
+        .baseTile = 0
+    },
+    {
+        .bg = 1,
+        .charBaseIndex = 2,
+        .mapBaseIndex = 0x1E,
+        .screenSize = 2,
+        .paletteMode = 0,
+        .priority = 1,
+        .baseTile = 0
+    },
+    {
+        .bg = 2,
+        .charBaseIndex = 0,
+        .mapBaseIndex = 0x1C,
+        .screenSize = 2,
+        .paletteMode = 0,
+        .priority = 0,
+        .baseTile = 0
+    },
+    {
+        .bg = 3,
+        .charBaseIndex = 0,
+        .mapBaseIndex = 0x1A,
+        .screenSize = 0,
+        .paletteMode = 0,
+        .priority = 3,
+        .baseTile = 0
+    }
+};
+
+const struct WindowTemplate gUnknown_08587F44[] =
+{
+    {
+        .bg = 0,
+        .tilemapLeft = 18,
+        .tilemapTop = 0,
+        .width = 12,
+        .height = 2,
+        .paletteNum = 0xF,
+        .baseBlock = 0x200
+    },
+    {
+        .bg = 0,
+        .tilemapLeft = 18,
+        .tilemapTop = 5,
+        .width = 12,
+        .height = 2,
+        .paletteNum = 0xF,
+        .baseBlock = 0x218
+    },
+    {
+        .bg = 0,
+        .tilemapLeft = 18,
+        .tilemapTop = 10,
+        .width = 12,
+        .height = 2,
+        .paletteNum = 0xF,
+        .baseBlock = 0x230
+    },
+    {
+        .bg = 0,
+        .tilemapLeft = 18,
+        .tilemapTop = 15,
+        .width = 12,
+        .height = 2,
+        .paletteNum = 0xF,
+        .baseBlock = 0x248
+    },
+    {
+        .bg = 0,
+        .tilemapLeft = 1,
+        .tilemapTop = 15,
+        .width = 17,
+        .height = 4,
+        .paletteNum = 0xF,
+        .baseBlock = 0x260
+    },
+    {
+        .bg = 0,
+        .tilemapLeft = 1,
+        .tilemapTop = 0x1F,
+        .width = 9,
+        .height = 2,
+        .paletteNum = 0xF,
+        .baseBlock = 0x2A4
+    },
+    {
+        .bg = 0,
+        .tilemapLeft = 1,
+        .tilemapTop = 0x21,
+        .width = 9,
+        .height = 2,
+        .paletteNum = 0xF,
+        .baseBlock = 0x2B6
+    },
+    {
+        .bg = 0,
+        .tilemapLeft = 1,
+        .tilemapTop = 0x23,
+        .width = 9,
+        .height = 2,
+        .paletteNum = 0xF,
+        .baseBlock = 0x2C8
+    },
+    {
+        .bg = 0,
+        .tilemapLeft = 1,
+        .tilemapTop = 0x25,
+        .width = 9,
+        .height = 2,
+        .paletteNum = 0xF,
+        .baseBlock = 0x2DA
+    },
+    {
+        .bg = 0,
+        .tilemapLeft = 16,
+        .tilemapTop = 0x1F,
+        .width = 1,
+        .height = 2,
+        .paletteNum = 0xF,
+        .baseBlock = 0x2EC
+    },
+    {
+        .bg = 0,
+        .tilemapLeft = 11,
+        .tilemapTop = 0x23,
+        .width = 18,
+        .height = 4,
+        .paletteNum = 0xF,
+        .baseBlock = 0x2EE
+    },
+    DUMMY_WIN_TEMPLATE
+};
+
+#include "data/contest_opponents.h"
 
 static void TaskDummy1(u8 taskId)
 {

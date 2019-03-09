@@ -196,6 +196,14 @@ enum
     CONTEST_STRING_NONE = 255
 };
 
+enum {
+    CONTEST_RANK_NORMAL,
+    CONTEST_RANK_SUPER,
+    CONTEST_RANK_HYPER,
+    CONTEST_RANK_MASTER,
+    CONTEST_RANK_LINK
+};
+
 struct ContestPokemon
 {
     /*0x00*/ u16 species;
