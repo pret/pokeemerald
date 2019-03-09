@@ -19,10 +19,10 @@
 	gfxId 7
 	.4byte 0xc000fff
 	aiPool 0, 1, 0, 0, 0, 1
-	.2byte 46
-	.2byte 44
-	.2byte 36
-	.2byte 336
+	.2byte MOVE_ROAR
+	.2byte MOVE_BITE
+	.2byte MOVE_TAKE_DOWN
+	.2byte MOVE_HOWL
 	.byte 10
 	.byte 4
 	.byte 10
@@ -39,10 +39,10 @@
 	gfxId 8
 	.4byte 0x82000fff
 	aiPool 0, 0, 0, 1, 0, 0
-	.2byte 156
-	.2byte 263
-	.2byte 33
-	.2byte 343
+	.2byte MOVE_REST
+	.2byte MOVE_FACADE
+	.2byte MOVE_TACKLE
+	.2byte MOVE_COVET
 	.byte 10
 	.byte 10
 	.byte 6
@@ -59,10 +59,10 @@
 	gfxId 11
 	.4byte 0x21000fff
 	aiPool 0, 0, 1, 0, 0, 0
-	.2byte 318
-	.2byte 236
-	.2byte 113
-	.2byte 16
+	.2byte MOVE_SILVER_WIND
+	.2byte MOVE_MOONLIGHT
+	.2byte MOVE_LIGHT_SCREEN
+	.2byte MOVE_GUST
 	.byte 2
 	.byte 10
 	.byte 10
@@ -79,10 +79,10 @@
 	gfxId 16
 	.4byte 0x20800fff
 	aiPool 0, 0, 0, 0, 1, 1
-	.2byte 117
-	.2byte 235
-	.2byte 331
-	.2byte 74
+	.2byte MOVE_BIDE
+	.2byte MOVE_SYNTHESIS
+	.2byte MOVE_BULLET_SEED
+	.2byte MOVE_GROWTH
 	.byte 3
 	.byte 3
 	.byte 5
@@ -99,10 +99,10 @@
 	gfxId 18
 	.4byte 0x80400fff
 	aiPool 0, 1, 0, 0, 0, 0
-	.2byte 17
-	.2byte 97
-	.2byte 332
-	.2byte 45
+	.2byte MOVE_WING_ATTACK
+	.2byte MOVE_AGILITY
+	.2byte MOVE_AERIAL_ACE
+	.2byte MOVE_GROWL
 	.byte 1
 	.byte 3
 	.byte 3
@@ -119,10 +119,10 @@
 	gfxId 44
 	.4byte 0x10200fff
 	aiPool 0, 0, 0, 0, 1, 0
-	.2byte 141
-	.2byte 206
-	.2byte 154
-	.2byte 170
+	.2byte MOVE_LEECH_LIFE
+	.2byte MOVE_FALSE_SWIPE
+	.2byte MOVE_FURY_SWIPES
+	.2byte MOVE_MIND_READER
 	.byte 5
 	.byte 2
 	.byte 10
@@ -139,10 +139,10 @@
 	gfxId 35
 	.4byte 0x20100fff
 	aiPool 0, 0, 0, 0, 1, 0
-	.2byte 78
-	.2byte 73
-	.2byte 72
-	.2byte 213
+	.2byte MOVE_STUN_SPORE
+	.2byte MOVE_LEECH_SEED
+	.2byte MOVE_MEGA_DRAIN
+	.2byte MOVE_ATTRACT
 	.byte 3
 	.byte 3
 	.byte 10
@@ -159,10 +159,10 @@
 	gfxId 26
 	.4byte 0x8080fff
 	aiPool 0, 0, 1, 1, 0, 0
-	.2byte 62
-	.2byte 55
-	.2byte 45
-	.2byte 317
+	.2byte MOVE_AURORA_BEAM
+	.2byte MOVE_WATER_GUN
+	.2byte MOVE_GROWL
+	.2byte MOVE_ROCK_TOMB
 	.byte 3
 	.byte 5
 	.byte 1
@@ -179,10 +179,10 @@
 	gfxId 31
 	.4byte 0x40040fff
 	aiPool 0, 0, 1, 1, 0, 1
-	.2byte 70
-	.2byte 68
-	.2byte 281
-	.2byte 227
+	.2byte MOVE_STRENGTH
+	.2byte MOVE_COUNTER
+	.2byte MOVE_YAWN
+	.2byte MOVE_ENCORE
 	.byte 10
 	.byte 4
 	.byte 4
@@ -199,10 +199,10 @@
 	gfxId 47
 	.4byte 0x80020fff
 	aiPool 0, 1, 0, 0, 1, 0
-	.2byte 310
-	.2byte 103
-	.2byte 253
-	.2byte 304
+	.2byte MOVE_ASTONISH
+	.2byte MOVE_SCREECH
+	.2byte MOVE_UPROAR
+	.2byte MOVE_HYPER_VOICE
 	.byte 2
 	.byte 2
 	.byte 7
@@ -219,10 +219,10 @@
 	gfxId 38
 	.4byte 0x8010fff
 	aiPool 0, 1, 0, 0, 0, 1
-	.2byte 69
-	.2byte 233
-	.2byte 33
-	.2byte 179
+	.2byte MOVE_SEISMIC_TOSS
+	.2byte MOVE_VITAL_THROW
+	.2byte MOVE_TACKLE
+	.2byte MOVE_REVERSAL
 	.byte 9
 	.byte 1
 	.byte 1
@@ -239,10 +239,10 @@
 	gfxId 10
 	.4byte 0x8008fff
 	aiPool 0, 1, 0, 0, 0, 1
-	.2byte 232
-	.2byte 334
-	.2byte 29
-	.2byte 36
+	.2byte MOVE_METAL_CLAW
+	.2byte MOVE_IRON_DEFENSE
+	.2byte MOVE_HEADBUTT
+	.2byte MOVE_TAKE_DOWN
 	.byte 5
 	.byte 10
 	.byte 2
@@ -259,10 +259,10 @@
 	gfxId 33
 	.4byte 0x90004fff
 	aiPool 0, 0, 1, 1, 1, 0
-	.2byte 114
-	.2byte 212
-	.2byte 109
-	.2byte 141
+	.2byte MOVE_HAZE
+	.2byte MOVE_MEAN_LOOK
+	.2byte MOVE_CONFUSE_RAY
+	.2byte MOVE_LEECH_LIFE
 	.byte 4
 	.byte 2
 	.byte 2
@@ -279,10 +279,10 @@
 	gfxId 6
 	.4byte 0x40002fff
 	aiPool 0, 0, 0, 1, 0, 0
-	.2byte 124
-	.2byte 133
-	.2byte 92
-	.2byte 281
+	.2byte MOVE_SLUDGE
+	.2byte MOVE_AMNESIA
+	.2byte MOVE_TOXIC
+	.2byte MOVE_YAWN
 	.byte 1
 	.byte 10
 	.byte 1
@@ -299,10 +299,10 @@
 	gfxId 15
 	.4byte 0x80001fff
 	aiPool 0, 1, 1, 0, 0, 0
-	.2byte 209
-	.2byte 86
-	.2byte 87
-	.2byte 46
+	.2byte MOVE_SPARK
+	.2byte MOVE_THUNDER_WAVE
+	.2byte MOVE_THUNDER
+	.2byte MOVE_ROAR
 	.byte 20
 	.byte 10
 	.byte 1
@@ -319,10 +319,10 @@
 	gfxId 20
 	.4byte 0xc000fff
 	aiPool 0, 0, 0, 1, 1, 0
-	.2byte 45
-	.2byte 73
-	.2byte 33
-	.2byte 230
+	.2byte MOVE_GROWL
+	.2byte MOVE_LEECH_SEED
+	.2byte MOVE_TACKLE
+	.2byte MOVE_SWEET_SCENT
 	.byte 5
 	.byte 3
 	.byte 10
@@ -339,10 +339,10 @@
 	gfxId 40
 	.4byte 0x82000fff
 	aiPool 0, 0, 1, 0, 1, 0
-	.2byte 48
-	.2byte 18
-	.2byte 318
-	.2byte 219
+	.2byte MOVE_SUPERSONIC
+	.2byte MOVE_WHIRLWIND
+	.2byte MOVE_SILVER_WIND
+	.2byte MOVE_SAFEGUARD
 	.byte 3
 	.byte 10
 	.byte 2
@@ -359,10 +359,10 @@
 	gfxId 34
 	.4byte 0x21000fff
 	aiPool 0, 1, 1, 0, 0, 0
-	.2byte 119
-	.2byte 98
-	.2byte 332
-	.2byte 297
+	.2byte MOVE_MIRROR_MOVE
+	.2byte MOVE_QUICK_ATTACK
+	.2byte MOVE_AERIAL_ACE
+	.2byte MOVE_FEATHER_DANCE
 	.byte 10
 	.byte 8
 	.byte 4
@@ -379,10 +379,10 @@
 	gfxId 55
 	.4byte 0x20800fff
 	aiPool 0, 0, 0, 0, 1, 1
-	.2byte 91
-	.2byte 89
-	.2byte 90
-	.2byte 222
+	.2byte MOVE_DIG
+	.2byte MOVE_EARTHQUAKE
+	.2byte MOVE_FISSURE
+	.2byte MOVE_MAGNITUDE
 	.byte 4
 	.byte 2
 	.byte 3
@@ -399,10 +399,10 @@
 	gfxId 53
 	.4byte 0x80400fff
 	aiPool 0, 0, 1, 0, 0, 1
-	.2byte 56
-	.2byte 240
-	.2byte 34
-	.2byte 58
+	.2byte MOVE_HYDRO_PUMP
+	.2byte MOVE_RAIN_DANCE
+	.2byte MOVE_BODY_SLAM
+	.2byte MOVE_ICE_BEAM
 	.byte 2
 	.byte 10
 	.byte 5
@@ -419,10 +419,10 @@
 	gfxId 5
 	.4byte 0x10200fff
 	aiPool 0, 1, 1, 0, 0, 0
-	.2byte 99
-	.2byte 103
-	.2byte 57
-	.2byte 59
+	.2byte MOVE_RAGE
+	.2byte MOVE_SCREECH
+	.2byte MOVE_SURF
+	.2byte MOVE_BLIZZARD
 	.byte 6
 	.byte 10
 	.byte 2
@@ -439,10 +439,10 @@
 	gfxId 45
 	.4byte 0x20100fff
 	aiPool 0, 1, 0, 1, 0, 0
-	.2byte 226
-	.2byte 97
-	.2byte 129
-	.2byte 213
+	.2byte MOVE_BATON_PASS
+	.2byte MOVE_AGILITY
+	.2byte MOVE_SWIFT
+	.2byte MOVE_ATTRACT
 	.byte 8
 	.byte 6
 	.byte 8
@@ -459,10 +459,10 @@
 	gfxId 66
 	.4byte 0x8080fff
 	aiPool 0, 0, 0, 1, 1, 1
-	.2byte 217
-	.2byte 263
-	.2byte 264
-	.2byte 216
+	.2byte MOVE_PRESENT
+	.2byte MOVE_FACADE
+	.2byte MOVE_FOCUS_PUNCH
+	.2byte MOVE_RETURN
 	.byte 4
 	.byte 3
 	.byte 10
@@ -479,10 +479,10 @@
 	gfxId 39
 	.4byte 0x40040fff
 	aiPool 0, 0, 0, 0, 0, 1
-	.2byte 37
-	.2byte 259
-	.2byte 242
-	.2byte 91
+	.2byte MOVE_THRASH
+	.2byte MOVE_TORMENT
+	.2byte MOVE_CRUNCH
+	.2byte MOVE_DIG
 	.byte 8
 	.byte 5
 	.byte 5
@@ -499,10 +499,10 @@
 	gfxId 32
 	.4byte 0x24000fff
 	aiPool 1, 0, 1, 0, 1, 0
-	.2byte 80
-	.2byte 345
-	.2byte 320
-	.2byte 275
+	.2byte MOVE_PETAL_DANCE
+	.2byte MOVE_MAGICAL_LEAF
+	.2byte MOVE_GRASS_WHISTLE
+	.2byte MOVE_INGRAIN
 	.byte 50
 	.byte 15
 	.byte 75
@@ -519,10 +519,10 @@
 	gfxId 51
 	.4byte 0x82000fff
 	aiPool 1, 1, 1, 1, 1, 1
-	.2byte 64
-	.2byte 31
-	.2byte 216
-	.2byte 45
+	.2byte MOVE_PECK
+	.2byte MOVE_FURY_ATTACK
+	.2byte MOVE_RETURN
+	.2byte MOVE_GROWL
 	.byte 15
 	.byte 21
 	.byte 15
@@ -539,10 +539,10 @@
 	gfxId 8
 	.4byte 0x81000fff
 	aiPool 1, 0, 0, 1, 1, 1
-	.2byte 44
-	.2byte 28
-	.2byte 91
-	.2byte 185
+	.2byte MOVE_BITE
+	.2byte MOVE_SAND_ATTACK
+	.2byte MOVE_DIG
+	.2byte MOVE_FAINT_ATTACK
 	.byte 75
 	.byte 25
 	.byte 25
@@ -559,10 +559,10 @@
 	gfxId 11
 	.4byte 0x80800fff
 	aiPool 1, 1, 0, 0, 1, 0
-	.2byte 191
-	.2byte 43
-	.2byte 40
-	.2byte 28
+	.2byte MOVE_SPIKES
+	.2byte MOVE_LEER
+	.2byte MOVE_POISON_STING
+	.2byte MOVE_SAND_ATTACK
 	.byte 10
 	.byte 30
 	.byte 25
@@ -579,10 +579,10 @@
 	gfxId 18
 	.4byte 0x10400fff
 	aiPool 1, 1, 0, 0, 0, 1
-	.2byte 163
-	.2byte 111
-	.2byte 129
-	.2byte 154
+	.2byte MOVE_SLASH
+	.2byte MOVE_DEFENSE_CURL
+	.2byte MOVE_SWIFT
+	.2byte MOVE_FURY_SWIPES
 	.byte 30
 	.byte 90
 	.byte 30
@@ -599,10 +599,10 @@
 	gfxId 44
 	.4byte 0x8200fff
 	aiPool 1, 0, 1, 0, 1, 0
-	.2byte 120
-	.2byte 317
-	.2byte 60
-	.2byte 93
+	.2byte MOVE_SELF_DESTRUCT
+	.2byte MOVE_ROCK_TOMB
+	.2byte MOVE_PSYBEAM
+	.2byte MOVE_CONFUSION
 	.byte 50
 	.byte 40
 	.byte 10
@@ -619,10 +619,10 @@
 	gfxId 26
 	.4byte 0x10100fff
 	aiPool 1, 1, 1, 0, 0, 1
-	.2byte 179
-	.2byte 9
-	.2byte 7
-	.2byte 8
+	.2byte MOVE_REVERSAL
+	.2byte MOVE_THUNDER_PUNCH
+	.2byte MOVE_FIRE_PUNCH
+	.2byte MOVE_ICE_PUNCH
 	.byte 40
 	.byte 20
 	.byte 40
@@ -639,10 +639,10 @@
 	gfxId 31
 	.4byte 0x80080fff
 	aiPool 1, 0, 0, 1, 1, 0
-	.2byte 298
-	.2byte 244
-	.2byte 95
-	.2byte 253
+	.2byte MOVE_TEETER_DANCE
+	.2byte MOVE_PSYCH_UP
+	.2byte MOVE_HYPNOSIS
+	.2byte MOVE_UPROAR
 	.byte 25
 	.byte 75
 	.byte 25
@@ -659,10 +659,10 @@
 	gfxId 47
 	.4byte 0xa0040fff
     aiPool 1, 0, 1, 0, 1, 0
-	.2byte 119
-	.2byte 195
-	.2byte 219
-	.2byte 54
+	.2byte MOVE_MIRROR_MOVE
+	.2byte MOVE_PERISH_SONG
+	.2byte MOVE_SAFEGUARD
+	.2byte MOVE_MIST
 	.byte 30
 	.byte 30
 	.byte 40
@@ -699,10 +699,10 @@
 	gfxId 10
 	.4byte 0x80010fff
 	aiPool 1, 0, 0, 0, 1, 1
-	.2byte 168
-	.2byte 103
-	.2byte 246
-	.2byte 20
+	.2byte MOVE_THIEF
+	.2byte MOVE_SCREECH
+	.2byte MOVE_ANCIENT_POWER
+	.2byte MOVE_BIND
 	.byte 10
 	.byte 10
 	.byte 40
@@ -719,10 +719,10 @@
 	gfxId 33
 	.4byte 0x80008fff
 	aiPool 1, 1, 1, 0, 0, 0
-	.2byte 30
-	.2byte 31
-	.2byte 32
-	.2byte 39
+	.2byte MOVE_HORN_ATTACK
+	.2byte MOVE_FURY_ATTACK
+	.2byte MOVE_HORN_DRILL
+	.2byte MOVE_TAIL_WHIP
 	.byte 70
 	.byte 30
 	.byte 5
@@ -739,10 +739,10 @@
 	gfxId 6
 	.4byte 0x80004fff
 	aiPool 1, 0, 0, 1, 1, 1
-	.2byte 300
-	.2byte 346
-	.2byte 89
-	.2byte 248
+	.2byte MOVE_MUD_SPORT
+	.2byte MOVE_WATER_SPORT
+	.2byte MOVE_EARTHQUAKE
+	.2byte MOVE_FUTURE_SIGHT
 	.byte 45
 	.byte 45
 	.byte 60
@@ -759,10 +759,10 @@
 	gfxId 35
 	.4byte 0x8002fff
 	aiPool 1, 1, 1, 0, 0, 1
-	.2byte 129
-	.2byte 104
-	.2byte 97
-	.2byte 15
+	.2byte MOVE_SWIFT
+	.2byte MOVE_DOUBLE_TEAM
+	.2byte MOVE_AGILITY
+	.2byte MOVE_CUT
 	.byte 40
 	.byte 30
 	.byte 25
@@ -779,10 +779,10 @@
 	gfxId 16
 	.4byte 0x8001fff
 	aiPool 1, 0, 1, 1, 1, 0
-	.2byte 310
-	.2byte 45
-	.2byte 240
-	.2byte 352
+	.2byte MOVE_ASTONISH
+	.2byte MOVE_GROWL
+	.2byte MOVE_RAIN_DANCE
+	.2byte MOVE_WATER_PULSE
 	.byte 15
 	.byte 15
 	.byte 30
@@ -799,10 +799,10 @@
 	gfxId 17
 	.4byte 0xc000fff
 	aiPool 1, 0, 0, 1, 1, 0
-	.2byte 281
-	.2byte 50
-	.2byte 45
-	.2byte 93
+	.2byte MOVE_YAWN
+	.2byte MOVE_DISABLE
+	.2byte MOVE_GROWL
+	.2byte MOVE_CONFUSION
 	.byte 20
 	.byte 40
 	.byte 40
@@ -819,10 +819,10 @@
 	gfxId 66
 	.4byte 0x82000fff
 	aiPool 1, 1, 0, 1, 0, 0
-	.2byte 263
-	.2byte 210
-	.2byte 19
-	.2byte 216
+	.2byte MOVE_FACADE
+	.2byte MOVE_FURY_CUTTER
+	.2byte MOVE_FLY
+	.2byte MOVE_RETURN
 	.byte 40
 	.byte 10
 	.byte 40
@@ -839,10 +839,10 @@
 	gfxId 20
 	.4byte 0x21000fff
 	aiPool 1, 0, 1, 1, 0, 0
-	.2byte 213
-	.2byte 58
-	.2byte 219
-	.2byte 45
+	.2byte MOVE_ATTRACT
+	.2byte MOVE_ICE_BEAM
+	.2byte MOVE_SAFEGUARD
+	.2byte MOVE_GROWL
 	.byte 10
 	.byte 30
 	.byte 40
@@ -859,10 +859,10 @@
 	gfxId 37
 	.4byte 0x20800fff
 	aiPool 1, 0, 1, 1, 1, 1
-	.2byte 50
-	.2byte 248
-	.2byte 237
-	.2byte 216
+	.2byte MOVE_DISABLE
+	.2byte MOVE_FUTURE_SIGHT
+	.2byte MOVE_HIDDEN_POWER
+	.2byte MOVE_RETURN
 	.byte 10
 	.byte 40
 	.byte 50
@@ -879,10 +879,10 @@
 	gfxId 21
 	.4byte 0x80400fff
 	aiPool 1, 1, 0, 0, 0, 1
-	.2byte 327
-	.2byte 197
-	.2byte 279
-	.2byte 5
+	.2byte MOVE_SKY_UPPERCUT
+	.2byte MOVE_DETECT
+	.2byte MOVE_REVENGE
+	.2byte MOVE_MEGA_PUNCH
 	.byte 45
 	.byte 20
 	.byte 10
@@ -899,10 +899,10 @@
 	gfxId 85
 	.4byte 0x10200fff
 	aiPool 1, 0, 1, 1, 0, 1
-	.2byte 47
-	.2byte 135
-	.2byte 121
-	.2byte 38
+	.2byte MOVE_SING
+	.2byte MOVE_SOFT_BOILED
+	.2byte MOVE_EGG_BOMB
+	.2byte MOVE_DOUBLE_EDGE
 	.byte 20
 	.byte 35
 	.byte 40
@@ -919,10 +919,10 @@
 	gfxId 18
 	.4byte 0x20100fff
 	aiPool 1, 1, 0, 1, 0, 0
-	.2byte 351
-	.2byte 98
-	.2byte 103
-	.2byte 213
+	.2byte MOVE_SHOCK_WAVE
+	.2byte MOVE_QUICK_ATTACK
+	.2byte MOVE_SCREECH
+	.2byte MOVE_ATTRACT
 	.byte 40
 	.byte 10
 	.byte 40
@@ -939,10 +939,10 @@
 	gfxId 48
 	.4byte 0x8080fff
 	aiPool 1, 0, 0, 1, 0, 1
-	.2byte 184
-	.2byte 269
-	.2byte 39
-	.2byte 44
+	.2byte MOVE_SCARY_FACE
+	.2byte MOVE_TAUNT
+	.2byte MOVE_TAIL_WHIP
+	.2byte MOVE_BITE
 	.byte 20
 	.byte 20
 	.byte 20
@@ -959,10 +959,10 @@
 	gfxId 40
 	.4byte 0x40040fff
 	aiPool 1, 0, 1, 0, 1, 0
-	.2byte 195
-	.2byte 212
-	.2byte 109
-	.2byte 220
+	.2byte MOVE_PERISH_SONG
+	.2byte MOVE_MEAN_LOOK
+	.2byte MOVE_CONFUSE_RAY
+	.2byte MOVE_PAIN_SPLIT
 	.byte 10
 	.byte 35
 	.byte 10
@@ -979,10 +979,10 @@
 	gfxId 55
 	.4byte 0x84000fff
 	aiPool 2, 0, 0, 0, 1, 1
-	.2byte 319
-	.2byte 232
-	.2byte 106
-	.2byte 36
+	.2byte MOVE_METAL_SOUND
+	.2byte MOVE_METAL_CLAW
+	.2byte MOVE_HARDEN
+	.2byte MOVE_TAKE_DOWN
 	.byte 30
 	.byte 50
 	.byte 35
@@ -999,10 +999,10 @@
 	gfxId 8
 	.4byte 0x82000fff
 	aiPool 2, 1, 1, 0, 0, 0
-	.2byte 74
-	.2byte 13
-	.2byte 153
-	.2byte 326
+	.2byte MOVE_GROWTH
+	.2byte MOVE_RAZOR_WIND
+	.2byte MOVE_EXPLOSION
+	.2byte MOVE_EXTRASENSORY
 	.byte 75
 	.byte 75
 	.byte 65
@@ -1019,10 +1019,10 @@
 	gfxId 11
 	.4byte 0x81000fff
 	aiPool 2, 0, 0, 1, 1, 1
-	.2byte 103
-	.2byte 154
-	.2byte 28
-	.2byte 226
+	.2byte MOVE_SCREECH
+	.2byte MOVE_FURY_SWIPES
+	.2byte MOVE_SAND_ATTACK
+	.2byte MOVE_BATON_PASS
 	.byte 30
 	.byte 50
 	.byte 95
@@ -1039,10 +1039,10 @@
 	gfxId 18
 	.4byte 0x80800fff
 	aiPool 2, 1, 1, 0, 0, 0
-	.2byte 97
-	.2byte 332
-	.2byte 17
-	.2byte 19
+	.2byte MOVE_AGILITY
+	.2byte MOVE_AERIAL_ACE
+	.2byte MOVE_WING_ATTACK
+	.2byte MOVE_FLY
 	.byte 65
 	.byte 85
 	.byte 35
@@ -1059,10 +1059,10 @@
 	gfxId 44
 	.4byte 0x80400fff
 	aiPool 2, 0, 0, 0, 1, 1
-	.2byte 269
-	.2byte 168
-	.2byte 316
-	.2byte 36
+	.2byte MOVE_TAUNT
+	.2byte MOVE_THIEF
+	.2byte MOVE_ODOR_SLEUTH
+	.2byte MOVE_TAKE_DOWN
 	.byte 40
 	.byte 80
 	.byte 35
@@ -1079,10 +1079,10 @@
 	gfxId 26
 	.4byte 0x80200fff
 	aiPool 2, 0, 1, 0, 1, 0
-	.2byte 234
-	.2byte 318
-	.2byte 78
-	.2byte 290
+	.2byte MOVE_MORNING_SUN
+	.2byte MOVE_SILVER_WIND
+	.2byte MOVE_STUN_SPORE
+	.2byte MOVE_SECRET_POWER
 	.byte 40
 	.byte 70
 	.byte 25
@@ -1099,10 +1099,10 @@
 	gfxId 31
 	.4byte 0x80100fff
 	aiPool 2, 1, 0, 1, 1, 1
-	.2byte 175
-	.2byte 48
-	.2byte 30
-	.2byte 31
+	.2byte MOVE_FLAIL
+	.2byte MOVE_SUPERSONIC
+	.2byte MOVE_HORN_ATTACK
+	.2byte MOVE_FURY_ATTACK
 	.byte 80
 	.byte 60
 	.byte 30
@@ -1119,10 +1119,10 @@
 	gfxId 47
 	.4byte 0x80080fff
 	aiPool 2, 1, 1, 1, 1, 1
-	.2byte 241
-	.2byte 311
-	.2byte 201
-	.2byte 216
+	.2byte MOVE_SUNNY_DAY
+	.2byte MOVE_WEATHER_BALL
+	.2byte MOVE_SANDSTORM
+	.2byte MOVE_RETURN
 	.byte 70
 	.byte 80
 	.byte 80
@@ -1139,10 +1139,10 @@
 	gfxId 38
 	.4byte 0x80040fff
 	aiPool 2, 1, 0, 0, 0, 1
-	.2byte 69
-	.2byte 116
-	.2byte 2
-	.2byte 184
+	.2byte MOVE_SEISMIC_TOSS
+	.2byte MOVE_FOCUS_ENERGY
+	.2byte MOVE_KARATE_CHOP
+	.2byte MOVE_SCARY_FACE
 	.byte 70
 	.byte 85
 	.byte 25
@@ -1159,10 +1159,10 @@
 	gfxId 10
 	.4byte 0x80020fff
 	aiPool 2, 0, 1, 1, 1, 0
-	.2byte 213
-	.2byte 148
-	.2byte 253
-	.2byte 45
+	.2byte MOVE_ATTRACT
+	.2byte MOVE_FLASH
+	.2byte MOVE_UPROAR
+	.2byte MOVE_GROWL
 	.byte 40
 	.byte 60
 	.byte 90
@@ -1179,10 +1179,10 @@
 	gfxId 33
 	.4byte 0x80010fff
 	aiPool 2, 0, 0, 0, 1, 1
-	.2byte 305
-	.2byte 137
-	.2byte 35
-	.2byte 103
+	.2byte MOVE_POISON_FANG
+	.2byte MOVE_GLARE
+	.2byte MOVE_WRAP
+	.2byte MOVE_SCREECH
 	.byte 35
 	.byte 50
 	.byte 90
@@ -1199,10 +1199,10 @@
 	gfxId 22
 	.4byte 0x80008fff
 	aiPool 2, 0, 1, 1, 0, 0
-	.2byte 352
-	.2byte 156
-	.2byte 323
-	.2byte 150
+	.2byte MOVE_WATER_PULSE
+	.2byte MOVE_REST
+	.2byte MOVE_WATER_SPOUT
+	.2byte MOVE_SPLASH
 	.byte 30
 	.byte 100
 	.byte 100
@@ -1219,10 +1219,10 @@
 	gfxId 35
 	.4byte 0x80004fff
 	aiPool 2, 0, 0, 1, 0, 1
-	.2byte 33
-	.2byte 150
-	.2byte 175
-	.2byte 33
+	.2byte MOVE_TACKLE
+	.2byte MOVE_SPLASH
+	.2byte MOVE_FLAIL
+	.2byte MOVE_TACKLE
 	.byte 30
 	.byte 30
 	.byte 160
@@ -1239,10 +1239,10 @@
 	gfxId 16
 	.4byte 0x80002fff
 	aiPool 2, 0, 1, 0, 1, 0
-	.2byte 153
-	.2byte 248
-	.2byte 94
-	.2byte 93
+	.2byte MOVE_EXPLOSION
+	.2byte MOVE_FUTURE_SIGHT
+	.2byte MOVE_PSYCHIC
+	.2byte MOVE_CONFUSION
 	.byte 50
 	.byte 70
 	.byte 60
@@ -1259,10 +1259,10 @@
 	gfxId 39
 	.4byte 0x80001fff
 	aiPool 2, 1, 1, 0, 0, 0
-	.2byte 195
-	.2byte 258
-	.2byte 63
-	.2byte 163
+	.2byte MOVE_PERISH_SONG
+	.2byte MOVE_HAIL
+	.2byte MOVE_HYPER_BEAM
+	.2byte MOVE_SLASH
 	.byte 95
 	.byte 80
 	.byte 85
@@ -1279,10 +1279,10 @@
 	gfxId 32
 	.4byte 0xc000fff
 	aiPool 2, 0, 0, 0, 1, 1
-	.2byte 23
-	.2byte 95
-	.2byte 121
-	.2byte 285
+	.2byte MOVE_STOMP
+	.2byte MOVE_HYPNOSIS
+	.2byte MOVE_EGG_BOMB
+	.2byte MOVE_SKILL_SWAP
 	.byte 40
 	.byte 50
 	.byte 60
@@ -1299,10 +1299,10 @@
 	gfxId 65
 	.4byte 0x82000fff
 	aiPool 2, 0, 0, 1, 0, 1
-	.2byte 125
-	.2byte 155
-	.2byte 198
-	.2byte 45
+	.2byte MOVE_BONE_CLUB
+	.2byte MOVE_BONEMERANG
+	.2byte MOVE_BONE_RUSH
+	.2byte MOVE_GROWL
 	.byte 40
 	.byte 35
 	.byte 85
@@ -1319,10 +1319,10 @@
 	gfxId 22
 	.4byte 0x21000fff
 	aiPool 2, 1, 0, 0, 0, 1
-	.2byte 179
-	.2byte 279
-	.2byte 116
-	.2byte 25
+	.2byte MOVE_REVERSAL
+	.2byte MOVE_REVENGE
+	.2byte MOVE_FOCUS_ENERGY
+	.2byte MOVE_MEGA_KICK
 	.byte 85
 	.byte 30
 	.byte 25
@@ -1339,10 +1339,10 @@
 	gfxId 49
 	.4byte 0x20800fff
 	aiPool 2, 0, 0, 1, 0, 1
-	.2byte 39
-	.2byte 145
-	.2byte 264
-	.2byte 110
+	.2byte MOVE_TAIL_WHIP
+	.2byte MOVE_BUBBLE
+	.2byte MOVE_FOCUS_PUNCH
+	.2byte MOVE_WITHDRAW
 	.byte 30
 	.byte 35
 	.byte 100
@@ -1359,10 +1359,10 @@
 	gfxId 14
 	.4byte 0x80400fff
 	aiPool 2, 1, 0, 0, 0, 1
-	.2byte 5
-	.2byte 99
-	.2byte 264
-	.2byte 39
+	.2byte MOVE_MEGA_PUNCH
+	.2byte MOVE_RAGE
+	.2byte MOVE_FOCUS_PUNCH
+	.2byte MOVE_TAIL_WHIP
 	.byte 100
 	.byte 50
 	.byte 30
@@ -1379,10 +1379,10 @@
 	gfxId 36
 	.4byte 0x10200fff
 	aiPool 2, 0, 1, 0, 1, 0
-	.2byte 153
-	.2byte 191
-	.2byte 113
-	.2byte 202
+	.2byte MOVE_EXPLOSION
+	.2byte MOVE_SPIKES
+	.2byte MOVE_LIGHT_SCREEN
+	.2byte MOVE_GIGA_DRAIN
 	.byte 80
 	.byte 80
 	.byte 80
@@ -1399,10 +1399,10 @@
 	gfxId 34
 	.4byte 0x20100fff
 	aiPool 2, 0, 0, 1, 0, 1
-	.2byte 180
-	.2byte 281
-	.2byte 111
-	.2byte 36
+	.2byte MOVE_SPITE
+	.2byte MOVE_YAWN
+	.2byte MOVE_DEFENSE_CURL
+	.2byte MOVE_TAKE_DOWN
 	.byte 40
 	.byte 35
 	.byte 100
@@ -1419,10 +1419,10 @@
 	gfxId 48
 	.4byte 0x8080fff
 	aiPool 2, 1, 1, 0, 0, 0
-	.2byte 46
-	.2byte 53
-	.2byte 185
-	.2byte 241
+	.2byte MOVE_ROAR
+	.2byte MOVE_FLAMETHROWER
+	.2byte MOVE_FAINT_ATTACK
+	.2byte MOVE_SUNNY_DAY
 	.byte 100
 	.byte 100
 	.byte 30
@@ -1439,10 +1439,10 @@
 	gfxId 25
 	.4byte 0x40040fff
 	aiPool 2, 0, 1, 1, 0, 0
-	.2byte 208
-	.2byte 215
-	.2byte 111
-	.2byte 59
+	.2byte MOVE_MILK_DRINK
+	.2byte MOVE_HEAL_BELL
+	.2byte MOVE_DEFENSE_CURL
+	.2byte MOVE_BLIZZARD
 	.byte 50
 	.byte 110
 	.byte 100
@@ -1459,10 +1459,10 @@
 	gfxId 32
 	.4byte 0x84000fff
 	aiPool 3, 1, 1, 0, 0, 1
-	.2byte 63
-	.2byte 56
-	.2byte 240
-	.2byte 44
+	.2byte MOVE_HYPER_BEAM
+	.2byte MOVE_HYDRO_PUMP
+	.2byte MOVE_RAIN_DANCE
+	.2byte MOVE_BITE
 	.byte 160
 	.byte 200
 	.byte 20
@@ -1479,10 +1479,10 @@
 	gfxId 21
 	.4byte 0x82000fff
 	aiPool 3, 1, 0, 0, 0, 1
-	.2byte 304
-	.2byte 23
-	.2byte 46
-	.2byte 336
+	.2byte MOVE_HYPER_VOICE
+	.2byte MOVE_STOMP
+	.2byte MOVE_ROAR
+	.2byte MOVE_HOWL
 	.byte 170
 	.byte 50
 	.byte 55
@@ -1499,10 +1499,10 @@
 	gfxId 8
 	.4byte 0x81000fff
 	aiPool 3, 0, 1, 1, 1, 0
-	.2byte 213
-	.2byte 274
-	.2byte 185
-	.2byte 39
+	.2byte MOVE_ATTRACT
+	.2byte MOVE_ASSIST
+	.2byte MOVE_FAINT_ATTACK
+	.2byte MOVE_TAIL_WHIP
 	.byte 40
 	.byte 200
 	.byte 150
@@ -1519,10 +1519,10 @@
 	gfxId 11
 	.4byte 0x80800fff
 	aiPool 3, 0, 0, 1, 1, 1
-	.2byte 343
-	.2byte 68
-	.2byte 227
-	.2byte 303
+	.2byte MOVE_COVET
+	.2byte MOVE_COUNTER
+	.2byte MOVE_ENCORE
+	.2byte MOVE_SLACK_OFF
 	.byte 85
 	.byte 85
 	.byte 170
@@ -1539,10 +1539,10 @@
 	gfxId 18
 	.4byte 0x80400fff
 	aiPool 3, 1, 1, 0, 0, 0
-	.2byte 349
-	.2byte 63
-	.2byte 195
-	.2byte 219
+	.2byte MOVE_DRAGON_DANCE
+	.2byte MOVE_HYPER_BEAM
+	.2byte MOVE_PERISH_SONG
+	.2byte MOVE_SAFEGUARD
 	.byte 170
 	.byte 150
 	.byte 30
@@ -1559,10 +1559,10 @@
 	gfxId 15
 	.4byte 0x80200fff
 	aiPool 3, 1, 0, 0, 1, 0
-	.2byte 351
-	.2byte 247
-	.2byte 285
-	.2byte 216
+	.2byte MOVE_SHOCK_WAVE
+	.2byte MOVE_SHADOW_BALL
+	.2byte MOVE_SKILL_SWAP
+	.2byte MOVE_RETURN
 	.byte 230
 	.byte 60
 	.byte 60
@@ -1579,10 +1579,10 @@
 	gfxId 26
 	.4byte 0x80100fff
 	aiPool 3, 0, 1, 1, 1, 0
-	.2byte 80
-	.2byte 230
-	.2byte 78
-	.2byte 148
+	.2byte MOVE_PETAL_DANCE
+	.2byte MOVE_SWEET_SCENT
+	.2byte MOVE_STUN_SPORE
+	.2byte MOVE_FLASH
 	.byte 35
 	.byte 200
 	.byte 150
@@ -1599,10 +1599,10 @@
 	gfxId 31
 	.4byte 0x80080fff
 	aiPool 3, 0, 0, 1, 1, 1
-	.2byte 212
-	.2byte 185
-	.2byte 282
-	.2byte 109
+	.2byte MOVE_MEAN_LOOK
+	.2byte MOVE_FAINT_ATTACK
+	.2byte MOVE_KNOCK_OFF
+	.2byte MOVE_CONFUSE_RAY
 	.byte 25
 	.byte 35
 	.byte 230
@@ -1619,10 +1619,10 @@
 	gfxId 47
 	.4byte 0x80040fff
 	aiPool 3, 0, 0, 1, 1, 1
-	.2byte 101
-	.2byte 248
-	.2byte 109
-	.2byte 94
+	.2byte MOVE_NIGHT_SHADE
+	.2byte MOVE_FUTURE_SIGHT
+	.2byte MOVE_CONFUSE_RAY
+	.2byte MOVE_PSYCHIC
 	.byte 35
 	.byte 35
 	.byte 150
@@ -1639,10 +1639,10 @@
 	gfxId 38
 	.4byte 0x80020fff
 	aiPool 3, 1, 0, 1, 0, 1
-	.2byte 97
-	.2byte 207
-	.2byte 269
-	.2byte 36
+	.2byte MOVE_AGILITY
+	.2byte MOVE_SWAGGER
+	.2byte MOVE_TAUNT
+	.2byte MOVE_TAKE_DOWN
 	.byte 140
 	.byte 70
 	.byte 140
@@ -1659,10 +1659,10 @@
 	gfxId 10
 	.4byte 0x80010fff
 	aiPool 3, 0, 0, 1, 0, 1
-	.2byte 186
-	.2byte 213
-	.2byte 36
-	.2byte 204
+	.2byte MOVE_SWEET_KISS
+	.2byte MOVE_ATTRACT
+	.2byte MOVE_TAKE_DOWN
+	.2byte MOVE_CHARM
 	.byte 50
 	.byte 100
 	.byte 220
@@ -1679,10 +1679,10 @@
 	gfxId 33
 	.4byte 0x80008fff
 	aiPool 3, 1, 0, 0, 0, 1
-	.2byte 70
-	.2byte 203
-	.2byte 179
-	.2byte 317
+	.2byte MOVE_STRENGTH
+	.2byte MOVE_ENDURE
+	.2byte MOVE_REVERSAL
+	.2byte MOVE_ROCK_TOMB
 	.byte 170
 	.byte 70
 	.byte 110
@@ -1699,10 +1699,10 @@
 	gfxId 6
 	.4byte 0x80004fff
 	aiPool 3, 1, 1, 0, 0, 0
-	.2byte 153
-	.2byte 113
-	.2byte 129
-	.2byte 148
+	.2byte MOVE_EXPLOSION
+	.2byte MOVE_LIGHT_SCREEN
+	.2byte MOVE_SWIFT
+	.2byte MOVE_FLASH
 	.byte 200
 	.byte 200
 	.byte 30
@@ -1719,10 +1719,10 @@
 	gfxId 35
 	.4byte 0x80002fff
 	aiPool 3, 0, 1, 1, 1, 0
-	.2byte 186
-	.2byte 213
-	.2byte 156
-	.2byte 39
+	.2byte MOVE_SWEET_KISS
+	.2byte MOVE_ATTRACT
+	.2byte MOVE_REST
+	.2byte MOVE_TAIL_WHIP
 	.byte 25
 	.byte 150
 	.byte 180
@@ -1739,10 +1739,10 @@
 	gfxId 16
 	.4byte 0x80001fff
 	aiPool 3, 1, 1, 0, 1, 1
-	.2byte 68
-	.2byte 243
-	.2byte 219
-	.2byte 194
+	.2byte MOVE_COUNTER
+	.2byte MOVE_MIRROR_COAT
+	.2byte MOVE_SAFEGUARD
+	.2byte MOVE_DESTINY_BOND
 	.byte 60
 	.byte 230
 	.byte 50
@@ -1759,10 +1759,10 @@
 	gfxId 40
 	.4byte 0xc000fff
 	aiPool 3, 1, 0, 0, 0, 1
-	.2byte 194
-	.2byte 109
-	.2byte 122
-	.2byte 188
+	.2byte MOVE_DESTINY_BOND
+	.2byte MOVE_CONFUSE_RAY
+	.2byte MOVE_LICK
+	.2byte MOVE_SLUDGE_BOMB
 	.byte 200
 	.byte 100
 	.byte 50
@@ -1779,10 +1779,10 @@
 	gfxId 46
 	.4byte 0x82000fff
 	aiPool 3, 1, 1, 1, 1, 1
-	.2byte 176
-	.2byte 160
-	.2byte 216
-	.2byte 278
+	.2byte MOVE_CONVERSION_2
+	.2byte MOVE_CONVERSION
+	.2byte MOVE_RETURN
+	.2byte MOVE_RECYCLE
 	.byte 130
 	.byte 130
 	.byte 130
@@ -1799,10 +1799,10 @@
 	gfxId 7
 	.4byte 0x21000fff
 	aiPool 3, 1, 0, 0, 0, 1
-	.2byte 200
-	.2byte 21
-	.2byte 239
-	.2byte 89
+	.2byte MOVE_OUTRAGE
+	.2byte MOVE_SLAM
+	.2byte MOVE_TWISTER
+	.2byte MOVE_EARTHQUAKE
 	.byte 150
 	.byte 140
 	.byte 50
@@ -1819,10 +1819,10 @@
 	gfxId 6
 	.4byte 0x20800fff
 	aiPool 3, 0, 0, 1, 1, 0
-	.2byte 45
-	.2byte 269
-	.2byte 6
-	.2byte 44
+	.2byte MOVE_GROWL
+	.2byte MOVE_TAUNT
+	.2byte MOVE_PAY_DAY
+	.2byte MOVE_BITE
 	.byte 125
 	.byte 110
 	.byte 180
@@ -1839,10 +1839,10 @@
 	gfxId 45
 	.4byte 0x80400fff
 	aiPool 3, 0, 1, 0, 1, 0
-	.2byte 195
-	.2byte 212
-	.2byte 142
-	.2byte 313
+	.2byte MOVE_PERISH_SONG
+	.2byte MOVE_MEAN_LOOK
+	.2byte MOVE_LOVELY_KISS
+	.2byte MOVE_FAKE_TEARS
 	.byte 100
 	.byte 150
 	.byte 100
@@ -1859,10 +1859,10 @@
 	gfxId 20
 	.4byte 0x10200fff
 	aiPool 3, 0, 0, 1, 0, 0
-	.2byte 45
-	.2byte 281
-	.2byte 227
-	.2byte 266
+	.2byte MOVE_GROWL
+	.2byte MOVE_YAWN
+	.2byte MOVE_ENCORE
+	.2byte MOVE_FOLLOW_ME
 	.byte 80
 	.byte 120
 	.byte 200
@@ -1879,10 +1879,10 @@
 	gfxId 37
 	.4byte 0x20100fff
 	aiPool 3, 1, 1, 0, 0, 0
-	.2byte 129
-	.2byte 98
-	.2byte 234
-	.2byte 39
+	.2byte MOVE_SWIFT
+	.2byte MOVE_QUICK_ATTACK
+	.2byte MOVE_MORNING_SUN
+	.2byte MOVE_TAIL_WHIP
 	.byte 180
 	.byte 150
 	.byte 100
@@ -1899,10 +1899,10 @@
 	gfxId 49
 	.4byte 0x8080fff
 	aiPool 3, 0, 0, 1, 0, 1
-	.2byte 263
-	.2byte 174
-	.2byte 281
-	.2byte 264
+	.2byte MOVE_FACADE
+	.2byte MOVE_CURSE
+	.2byte MOVE_YAWN
+	.2byte MOVE_FOCUS_PUNCH
 	.byte 100
 	.byte 80
 	.byte 200
@@ -1919,10 +1919,10 @@
 	gfxId 44
 	.4byte 0x40040fff
 	aiPool 3, 1, 0, 0, 0, 1
-	.2byte 37
-	.2byte 332
-	.2byte 313
-	.2byte 43
+	.2byte MOVE_THRASH
+	.2byte MOVE_AERIAL_ACE
+	.2byte MOVE_FAKE_TEARS
+	.2byte MOVE_LEER
 	.byte 180
 	.byte 140
 	.byte 30
