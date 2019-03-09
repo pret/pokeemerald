@@ -78,3 +78,9 @@ const struct ContestWinner gUnknown_08587FA4[] =
         .contestRank = CONTEST_RANK_MASTER
     }
 };
+/*
+const struct ContestPokemon gContestOpponents[] =
+{
+
+};*/
+extern const struct ContestPokemon gContestOpponents[96];
