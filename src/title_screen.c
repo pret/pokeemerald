@@ -26,10 +26,10 @@
 #define VERSION_BANNER_SHAPE 1
 #define VERSION_BANNER_RIGHT_TILEOFFSET 64
 #define VERSION_BANNER_BYTES 0x1000
-#define VERSION_BANNER_LEFT_X 98
-#define VERSION_BANNER_RIGHT_X 162
-#define VERSION_BANNER_Y 2
-#define VERSION_BANNER_Y_GOAL 66
+#define VERSION_BANNER_LEFT_X 154
+#define VERSION_BANNER_RIGHT_X 218
+#define VERSION_BANNER_Y -20
+#define VERSION_BANNER_Y_GOAL 48
 #define START_BANNER_X 128
 
 #define CLEAR_SAVE_BUTTON_COMBO (B_BUTTON | SELECT_BUTTON | DPAD_UP)
@@ -521,7 +521,7 @@ void CB2_InitTitleScreen(void)
         LoadCompressedSpriteSheet(&sSpriteSheet_EmeraldVersion[0]);
         LoadCompressedSpriteSheet(&sSpriteSheet_PressStart[0]);
         LoadCompressedSpriteSheet(&sPokemonLogoShineSpriteSheet[0]);
-        LoadPalette(gTitleScreenEmeraldVersionPal, 0x100, 0x20);
+        LoadPalette(gTitleScreenEmeraldVersionPal, 0x100, 0x120);
         LoadSpritePalette(&sSpritePalette_PressStart[0]);
         gMain.state = 2;
         break;
@@ -531,8 +531,8 @@ void CB2_InitTitleScreen(void)
 
         gTasks[taskId].tCounter = 256;
         gTasks[taskId].tSkipToNext = FALSE;
-        gTasks[taskId].data[2] = -16;
-        gTasks[taskId].data[3] = -32;
+        gTasks[taskId].data[2] = -24;
+        gTasks[taskId].data[3] = -40;
         gMain.state = 3;
         break;
     }
@@ -543,9 +543,9 @@ void CB2_InitTitleScreen(void)
         break;
     case 4:
         PanFadeAndZoomScreen(0x78, 0x50, 0x100, 0);
-        SetGpuReg(REG_OFFSET_BG2X_L, -29 * 256);
+        SetGpuReg(REG_OFFSET_BG2X_L, -24 * 256);
         SetGpuReg(REG_OFFSET_BG2X_H, -1);
-        SetGpuReg(REG_OFFSET_BG2Y_L, -32 * 256);
+        SetGpuReg(REG_OFFSET_BG2Y_L, -40 * 256);
         SetGpuReg(REG_OFFSET_BG2Y_H, -1);
         SetGpuReg(REG_OFFSET_WIN0H, 0);
         SetGpuReg(REG_OFFSET_WIN0V, 0);
@@ -636,7 +636,7 @@ static void Task_TitleScreenPhase1(u8 taskId)
 // Create "Press Start" and copyright banners, and slide Pokemon logo up
 static void Task_TitleScreenPhase2(u8 taskId)
 {
-    u32 yPos;
+    u32 xPos, yPos;
 
     // Skip to next phase when A, B, Start, or Select is pressed
     if ((gMain.newKeys & A_B_START_SELECT) || gTasks[taskId].tSkipToNext)
@@ -667,12 +667,15 @@ static void Task_TitleScreenPhase2(u8 taskId)
         gTasks[taskId].func = Task_TitleScreenPhase3;
     }
 
-    if (!(gTasks[taskId].tCounter & 3) && gTasks[taskId].data[2] != 0)
+    if (!(gTasks[taskId].tCounter & 3) && gTasks[taskId].data[2] != -8)
         gTasks[taskId].data[2]++;
-    if (!(gTasks[taskId].tCounter & 1) && gTasks[taskId].data[3] != 0)
+    if (!(gTasks[taskId].tCounter & 1) && gTasks[taskId].data[3] != -8)
         gTasks[taskId].data[3]++;
 
-    // Slide Pokemon logo up
+    // Slide Pokemon logo
+    xPos = gTasks[taskId].data[2] * 256;
+	SetGpuReg(REG_OFFSET_BG2X_L, xPos);
+	SetGpuReg(REG_OFFSET_BG2X_H, xPos / 0x10000);
     yPos = gTasks[taskId].data[3] * 256;
     SetGpuReg(REG_OFFSET_BG2Y_L, yPos);
     SetGpuReg(REG_OFFSET_BG2Y_H, yPos / 0x10000);
@@ -709,8 +712,10 @@ static void Task_TitleScreenPhase3(u8 taskId)
     }
     else
     {
-        SetGpuReg(REG_OFFSET_BG2Y_L, 0);
-        SetGpuReg(REG_OFFSET_BG2Y_H, 0);
+        SetGpuReg(REG_OFFSET_BG2X_L, -8 * 256);
+        SetGpuReg(REG_OFFSET_BG2X_H, -1);
+        SetGpuReg(REG_OFFSET_BG2Y_L, -8 * 256);
+        SetGpuReg(REG_OFFSET_BG2Y_H, -1);
         gTasks[taskId].tCounter++;
         if (gTasks[taskId].tCounter & 1)
         {
