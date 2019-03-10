@@ -276,6 +276,18 @@ $(FONTGFXDIR)/font2.fwjpnfont: $(FONTGFXDIR)/font2_japanese.png
 $(FONTGFXDIR)/font6.fwjpnfont: $(FONTGFXDIR)/font6_braille.png
 	$(GFX) $< $@
 
+$(FONTGFXDIR)/font0kr.latfont: $(FONTGFXDIR)/font0_korean.png
+	$(GFX) $< $@
+
+$(FONTGFXDIR)/font1kr.latfont: $(FONTGFXDIR)/font1_korean.png
+	$(GFX) $< $@
+
+$(FONTGFXDIR)/font2kr.latfont: $(FONTGFXDIR)/font2_korean.png
+	$(GFX) $< $@
+
+$(FONTGFXDIR)/font7kr.latfont: $(FONTGFXDIR)/font7_korean.png
+	$(GFX) $< $@
+
 $(FONTGFXDIR)/unused_frlg_male.fwjpnfont: $(FONTGFXDIR)/unused_japanese_frlg_male_font.png
 	$(GFX) $< $@
 
