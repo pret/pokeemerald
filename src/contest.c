@@ -247,10 +247,6 @@ extern const union AffineAnimCmd *const gUnknown_082FF694[];
 extern const struct SpriteTemplate gSpriteTemplate_8587AD0;
 extern const struct SpriteTemplate gSpriteTemplate_8587B18[];
 extern void (*const gContestEffectFuncs[])(void);
-extern const s8 gContestExcitementTable[][5];
-extern const struct CompressedSpriteSheet gUnknown_08589904[];
-extern const struct SpritePalette gUnknown_08589924[];
-extern const struct SpriteTemplate gSpriteTemplate_858998C[];
 
 static const u8 gUnknown_08587A6C[] =
 {
@@ -721,6 +717,138 @@ const struct WindowTemplate gUnknown_08587F44[] =
 };
 
 #include "data/contest_opponents.h"
+
+static const struct CompressedSpriteSheet sUnknown_08589904[] =
+{
+    {
+        .data = gBlankGfxCompressed,
+        .size = 0x1000,
+        .tag = 0x80E8
+    },
+    {
+        .data = gBlankGfxCompressed,
+        .size = 0x1000,
+        .tag = 0x80E9
+    },
+    {
+        .data = gBlankGfxCompressed,
+        .size = 0x1000,
+        .tag = 0x80EA
+    },
+    {
+        .data = gBlankGfxCompressed,
+        .size = 0x1000,
+        .tag = 0x80EB
+    }
+};
+
+// Yup this is super dangerous but that's how it is here
+static const struct SpritePalette sUnknown_08589924[] =
+{
+    {
+        .data = (u16*)(gHeap + 0x1A0A4),
+        .tag = 0x80E8
+    },
+    {
+        .data = (u16*)(gHeap + 0x1A0C4),
+        .tag = 0x80E9
+    },
+    {
+        .data = (u16*)(gHeap + 0x1A0E4),
+        .tag = 0x80EA
+    },
+    {
+        .data = (u16*)(gHeap + 0x1A104),
+        .tag = 0x80EB
+    }
+};
+
+const struct OamData gOamData_8589944 =
+{
+    .y = 0,
+    .affineMode = 3,
+    .objMode = 1,
+    .mosaic = 0,
+    .bpp = 0,
+    .shape = 0,
+    .x = 0,
+    .matrixNum = 0,
+    .size = 3,
+    .tileNum = 0,
+    .priority = 0,
+    .paletteNum = 0,
+    .affineParam = 0
+};
+
+const union AffineAnimCmd gSpriteAffineAnim_858994C[] =
+{
+    AFFINEANIMCMD_FRAME(0x100, 0x100, 0, 0),
+    AFFINEANIMCMD_END
+};
+
+const union AffineAnimCmd gSpriteAffineAnim_858995C[] =
+{
+    AFFINEANIMCMD_FRAME(3, 3, 0, 15),
+    AFFINEANIMCMD_FRAME(-3, -3, 0, 15),
+    AFFINEANIMCMD_FRAME(3, 3, 0, 15),
+    AFFINEANIMCMD_FRAME(-3, -3, 0, 15),
+    AFFINEANIMCMD_END
+};
+
+const union AffineAnimCmd *const gSpriteAffineAnimTable_8589984[] =
+{
+    gSpriteAffineAnim_858994C,
+    gSpriteAffineAnim_858995C
+};
+
+const struct SpriteTemplate gSpriteTemplate_858998C[] =
+{
+    {
+        .tileTag = 0x80E8,
+        .paletteTag = 0x80E8,
+        .oam = &gOamData_8589944,
+        .anims = gDummySpriteAnimTable,
+        .images = NULL,
+        .affineAnims = gSpriteAffineAnimTable_8589984,
+        .callback = SpriteCallbackDummy
+    },
+    {
+        .tileTag = 0x80E9,
+        .paletteTag = 0x80E9,
+        .oam = &gOamData_8589944,
+        .anims = gDummySpriteAnimTable,
+        .images = NULL,
+        .affineAnims = gSpriteAffineAnimTable_8589984,
+        .callback = SpriteCallbackDummy
+    },
+    {
+        .tileTag = 0x80EA,
+        .paletteTag = 0x80EA,
+        .oam = &gOamData_8589944,
+        .anims = gDummySpriteAnimTable,
+        .images = NULL,
+        .affineAnims = gSpriteAffineAnimTable_8589984,
+        .callback = SpriteCallbackDummy
+    },
+    {
+        .tileTag = 0x80EB,
+        .paletteTag = 0x80EB,
+        .oam = &gOamData_8589944,
+        .anims = gDummySpriteAnimTable,
+        .images = NULL,
+        .affineAnims = gSpriteAffineAnimTable_8589984,
+        .callback = SpriteCallbackDummy
+    }
+};
+
+const s8 gContestExcitementTable[][5] =
+{
+    { 1,  0, -1, -1,  0},
+    { 0,  1,  0, -1, -1},
+    {-1,  0,  1,  0, -1},
+    {-1, -1,  0,  1,  0},
+    { 0, -1, -1,  0,  1}
+};
 
 static void TaskDummy1(u8 taskId)
 {
@@ -3763,8 +3891,8 @@ static u8 sub_80DC9EC(u8 a)
     u8 spriteId1, spriteId2;
     u8 x = gUnknown_02039F26[a] * 40 + 32;
 
-    LoadCompressedSpriteSheet(&gUnknown_08589904[a]);
-    LoadSpritePalette(&gUnknown_08589924[a]);
+    LoadCompressedSpriteSheet(&sUnknown_08589904[a]);
+    LoadSpritePalette(&sUnknown_08589924[a]);
     spriteId1 = CreateSprite(&gSpriteTemplate_858998C[a], 184, x, 29);
     spriteId2 = CreateSprite(&gSpriteTemplate_858998C[a], 248, x, 29);
     gSprites[spriteId2].oam.tileNum += 64;
