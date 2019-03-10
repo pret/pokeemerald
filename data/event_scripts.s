@@ -1116,8 +1116,8 @@ EverGrandeCity_HallOfFame_EventScript_2717C1:: @ 82717C1
 	call_if_unset FLAG_RECEIVED_BELDUM, EverGrandeCity_HallOfFame_EventScript_27183F
 	setflag FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_RIVAL_BEDROOM
 	setflag FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_RIVAL_BEDROOM
-	compare VAR_0x40D3, 0
-	call_if_eq EverGrandeCity_HallOfFame_EventScript_271851
+	compare VAR_NATIONAL_DEX_STATE, NATIONAL_DEX_STATE_0
+	call_if_eq EverGrandeCity_HallOfFame_EventScript_SetNationalDexAvailable
 	return
 
 EverGrandeCity_HallOfFame_EventScript_271829:: @ 8271829
@@ -1142,8 +1142,8 @@ EverGrandeCity_HallOfFame_EventScript_271843:: @ 8271843
 	clearflag FLAG_HIDE_PLAYERS_HOUSE_DAD
 	return
 
-EverGrandeCity_HallOfFame_EventScript_271851:: @ 8271851
-	setvar VAR_0x40D3, 1
+EverGrandeCity_HallOfFame_EventScript_SetNationalDexAvailable:: @ 8271851
+	setvar VAR_NATIONAL_DEX_STATE, NATIONAL_DEX_STATE_1
 	return
 
 EventScript_WhiteOut:: @ 8271857

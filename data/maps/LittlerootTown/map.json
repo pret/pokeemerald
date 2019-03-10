@@ -154,35 +154,35 @@
       "x": 10,
       "y": 1,
       "elevation": 3,
-      "var": "VAR_0x4050",
-      "var_value": "0",
-      "script": "LittlerootTown_EventScript_1E8091"
+      "var": "VAR_PROF_BIRCH_STATE",
+      "var_value": "PROF_BIRCH_STATE_CANT_LEAVE",
+      "script": "LittlerootTown_EventScript_StoppedByTwin_East"
     },
     {
       "type": "trigger",
       "x": 11,
       "y": 1,
       "elevation": 3,
-      "var": "VAR_0x4050",
-      "var_value": "0",
-      "script": "LittlerootTown_EventScript_1E80EF"
+      "var": "VAR_PROF_BIRCH_STATE",
+      "var_value": "PROF_BIRCH_STATE_CANT_LEAVE",
+      "script": "LittlerootTown_EventScript_StoppedByTwin_West"
     },
     {
       "type": "trigger",
       "x": 11,
       "y": 1,
       "elevation": 3,
-      "var": "VAR_0x4050",
-      "var_value": "1",
-      "script": "LittlerootTown_EventScript_1E811F"
+      "var": "VAR_PROF_BIRCH_STATE",
+      "var_value": "PROF_BIRCH_STATE_FIND_BIRCH",
+      "script": "LittlerootTown_EventScript_StoppedByConcernedTwin"
     },
     {
       "type": "trigger",
       "x": 8,
       "y": 9,
       "elevation": 3,
-      "var": "VAR_0x4050",
-      "var_value": "3",
+      "var": "VAR_PROF_BIRCH_STATE",
+      "var_value": "PROF_BIRCH_STATE_BIRCH_SAVED",
       "script": "LittlerootTown_EventScript_1E81F9"
     },
     {
@@ -190,8 +190,8 @@
       "x": 9,
       "y": 9,
       "elevation": 3,
-      "var": "VAR_0x4050",
-      "var_value": "3",
+      "var": "VAR_PROF_BIRCH_STATE",
+      "var_value": "PROF_BIRCH_STATE_BIRCH_SAVED",
       "script": "LittlerootTown_EventScript_1E8205"
     },
     {
@@ -199,8 +199,8 @@
       "x": 10,
       "y": 9,
       "elevation": 3,
-      "var": "VAR_0x4050",
-      "var_value": "3",
+      "var": "VAR_PROF_BIRCH_STATE",
+      "var_value": "PROF_BIRCH_STATE_BIRCH_SAVED",
       "script": "LittlerootTown_EventScript_1E81E1"
     },
     {
@@ -208,8 +208,8 @@
       "x": 11,
       "y": 9,
       "elevation": 3,
-      "var": "VAR_0x4050",
-      "var_value": "3",
+      "var": "VAR_PROF_BIRCH_STATE",
+      "var_value": "PROF_BIRCH_STATE_BIRCH_SAVED",
       "script": "LittlerootTown_EventScript_1E81ED"
     },
     {
@@ -217,8 +217,8 @@
       "x": 10,
       "y": 2,
       "elevation": 3,
-      "var": "VAR_0x4050",
-      "var_value": "3",
+      "var": "VAR_PROF_BIRCH_STATE",
+      "var_value": "PROF_BIRCH_STATE_BIRCH_SAVED",
       "script": "LittlerootTown_EventScript_1E81BB"
     },
     {
@@ -226,8 +226,8 @@
       "x": 11,
       "y": 2,
       "elevation": 3,
-      "var": "VAR_0x4050",
-      "var_value": "3",
+      "var": "VAR_PROF_BIRCH_STATE",
+      "var_value": "PROF_BIRCH_STATE_BIRCH_SAVED",
       "script": "LittlerootTown_EventScript_1E81CE"
     }
   ],

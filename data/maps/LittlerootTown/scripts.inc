@@ -10,8 +10,8 @@ LittlerootTown_MapScript_OnTransition: @ 81E7DDB
 	compare VAR_LITTLEROOT_INTRO_STATE, LITTLEROOT_INTRO_STATE_FEMALE
 	call_if_eq LittlerootTown_EventScript_MoveMomToMaysHouse
 	call_if_unset FLAG_RESCUED_BIRCH, LittlerootTown_EventScript_PlaceTwin
-	compare VAR_0x4050, 3
-	call_if_eq LittlerootTown_EventScript_1E7E92
+	compare VAR_PROF_BIRCH_STATE, PROF_BIRCH_STATE_BIRCH_SAVED
+	call_if_eq LittlerootTown_EventScript_SetupMomRunningShoes
 	compare VAR_LITTLEROOT_HOUSES_STATE, HOUSES_STATE_4
 	call_if_eq LittlerootTown_EventScript_1E7E5C
 	compare VAR_LITTLEROOT_HOUSES_STATE_2, HOUSES_STATE_4
@@ -20,14 +20,14 @@ LittlerootTown_MapScript_OnTransition: @ 81E7DDB
 	call_if_eq LittlerootTown_EventScript_1E7E53
 	compare VAR_LITTLEROOT_RIVAL_STATE, 3
 	call_if_eq LittlerootTown_EventScript_1E7E4F
-	compare VAR_0x40D3, 1
+	compare VAR_NATIONAL_DEX_STATE, NATIONAL_DEX_STATE_1
 	call_if_eq LittlerootTown_EventScript_1E7E4B
-	compare VAR_0x40D3, 2
+	compare VAR_NATIONAL_DEX_STATE, NATIONAL_DEX_STATE_2
 	call_if_eq LittlerootTown_EventScript_1E7E45
 	end
 
 LittlerootTown_EventScript_1E7E45:: @ 81E7E45
-	setvar VAR_0x40D3, 3
+	setvar VAR_NATIONAL_DEX_STATE, NATIONAL_DEX_STATE_3
 	return
 
 LittlerootTown_EventScript_1E7E4B:: @ 81E7E4B
@@ -53,7 +53,7 @@ LittlerootTown_EventScript_MoveMomToMaysHouse:: @ 81E7E67
 	return
 
 LittlerootTown_EventScript_PlaceTwin:: @ 81E7E6F
-	compare VAR_0x4050, 0
+	compare VAR_PROF_BIRCH_STATE, PROF_BIRCH_STATE_CANT_LEAVE
 	goto_if_eq LittlerootTown_EventScript_PlaceTwinGuarding
 	setobjectxyperm 1, 10, 1
 	setobjectmovementtype 1, MOVEMENT_TYPE_FACE_UP
@@ -64,28 +64,28 @@ LittlerootTown_EventScript_PlaceTwinGuarding:: @ 81E7E86
 	setobjectmovementtype 1, MOVEMENT_TYPE_FACE_DOWN
 	return
 
-LittlerootTown_EventScript_1E7E92:: @ 81E7E92
+LittlerootTown_EventScript_SetupMomRunningShoes:: @ 81E7E92
 	clearflag FLAG_HIDE_LITTLEROOT_TOWN_MOM_OUTSIDE
 	setobjectmovementtype 4, MOVEMENT_TYPE_FACE_DOWN
 	checkplayergender
 	compare VAR_RESULT, MALE
-	call_if_eq LittlerootTown_EventScript_1E7EB1
+	call_if_eq LittlerootTown_EventScript_SetupMomRunningShoes_Brendan
 	compare VAR_RESULT, FEMALE
-	call_if_eq LittlerootTown_EventScript_1E7EB9
+	call_if_eq LittlerootTown_EventScript_SetupMomRunningShoes_May
 	return
 
-LittlerootTown_EventScript_1E7EB1:: @ 81E7EB1
+LittlerootTown_EventScript_SetupMomRunningShoes_Brendan:: @ 81E7EB1
 	setobjectxyperm 4, 5, 9
 	return
 
-LittlerootTown_EventScript_1E7EB9:: @ 81E7EB9
+LittlerootTown_EventScript_SetupMomRunningShoes_May:: @ 81E7EB9
 	setobjectxyperm 4, 14, 9
 	return
 
 LittlerootTown_MapScript_OnFrameTable: @ 81E7EC1
 	map_script_2 VAR_LITTLEROOT_INTRO_STATE, LITTLEROOT_INTRO_STATE_MALE, LittlerootTown_EventScript_StartMoveInMomSequence_Brendan
 	map_script_2 VAR_LITTLEROOT_INTRO_STATE, LITTLEROOT_INTRO_STATE_FEMALE, LittlerootTown_EventScript_StartMoveInMomSequence_May
-	map_script_2 VAR_0x40D3, 1, LittlerootTown_EventScript_1E7FB1
+	map_script_2 VAR_NATIONAL_DEX_STATE, NATIONAL_DEX_STATE_1, LittlerootTown_EventScript_1E7FB1
 	.2byte 0
 
 LittlerootTown_EventScript_StartMoveInMomSequence_Brendan:: @ 81E7EDB
@@ -201,7 +201,7 @@ LittlerootTown_EventScript_1E7FB1:: @ 81E7FB1
 	end
 
 LittlerootTown_MapScript_OnWarpTable: @ 81E7FE2
-	map_script_2 VAR_0x40D3, 1, LittlerootTown_EventScript_PlaceBirchAndRival
+	map_script_2 VAR_NATIONAL_DEX_STATE, NATIONAL_DEX_STATE_1, LittlerootTown_EventScript_PlaceBirchAndRival
 	.2byte 0
 
 LittlerootTown_EventScript_PlaceBirchAndRival:: @ 81E7FEC
@@ -236,7 +236,7 @@ LittlerootTown_EventScript_TalkToTwin:: @ 81E8034
 	faceplayer
 	goto_if_set FLAG_ADVENTURE_STARTED, LittlerootTown_EventScript_TalkToNormalTwin
 	goto_if_set FLAG_RESCUED_BIRCH, LittlerootTown_Text_TalkToHappyTwin
-	compare VAR_0x4050, 0
+	compare VAR_PROF_BIRCH_STATE, PROF_BIRCH_STATE_CANT_LEAVE
 	goto_if_ne LittlerootTown_EventScript_TalkToConcernedTwin
 	msgbox LittlerootTown_Text_GuardingTwin, MSGBOX_DEFAULT
 	release
@@ -248,7 +248,7 @@ LittlerootTown_EventScript_TalkToConcernedTwin:: @ 81E805D
 	closemessage
 	applymovement 1, Common_Movement_FaceOriginalDirection
 	waitmovement 0
-	setvar VAR_0x4050, 2
+	setvar VAR_PROF_BIRCH_STATE, PROF_BIRCH_STATE_SAVE_BIRCH
 	release
 	end
 
@@ -263,27 +263,27 @@ LittlerootTown_EventScript_TalkToNormalTwin:: @ 81E8087
 	release
 	end
 
-LittlerootTown_EventScript_1E8091:: @ 81E8091
+LittlerootTown_EventScript_StoppedByTwin_East:: @ 81E8091
 	lockall
-	applymovement 1, LittlerootTown_Movement_1E80D1
+	applymovement 1, LittlerootTown_EventScript_StoppedByTwin_BlockEast
 	waitmovement 0
-	call LittlerootTown_EventScript_1E80AD
-	applymovement 1, LittlerootTown_Movement_1E80E1
+	call LittlerootTown_EventScript_StoppedByTwin
+	applymovement 1, LittlerootTown_EventScript_StoppedByTwin_ReturnFromEast
 	waitmovement 0
 	releaseall
 	end
 
-LittlerootTown_EventScript_1E80AD:: @ 81E80AD
+LittlerootTown_EventScript_StoppedByTwin:: @ 81E80AD
 	msgbox LittlerootTown_Text_GuardingTwin, MSGBOX_DEFAULT
 	closemessage
-	applymovement 1, LittlerootTown_Movement_1E80DF
-	applymovement EVENT_OBJ_ID_PLAYER, LittlerootTown_Movement_1E80EB
+	applymovement 1, LittlerootTown_EventScript_TwinPushPlayer
+	applymovement EVENT_OBJ_ID_PLAYER, LittlerootTown_EventScript_PlayerPushedBack
 	waitmovement 0
-	msgbox LittlerootTown_Text_1E8C07, MSGBOX_DEFAULT
+	msgbox LittlerootTown_Text_StoppedByTwin, MSGBOX_DEFAULT
 	closemessage
 	return
 
-LittlerootTown_Movement_1E80D1: @ 81E80D1
+LittlerootTown_EventScript_StoppedByTwin_BlockEast: @ 81E80D1
 	face_right
 	delay_8
 	disable_jump_landing_ground_effect
@@ -299,11 +299,11 @@ LittlerootTown_Movement_1E80D1: @ 81E80D1
 	face_down
 	step_end
 
-LittlerootTown_Movement_1E80DF: @ 81E80DF
+LittlerootTown_EventScript_TwinPushPlayer: @ 81E80DF
 	walk_down
 	step_end
 
-LittlerootTown_Movement_1E80E1: @ 81E80E1
+LittlerootTown_EventScript_StoppedByTwin_ReturnFromEast: @ 81E80E1
 	walk_right
 	walk_down
 	walk_down
@@ -315,23 +315,23 @@ LittlerootTown_Movement_1E80E1: @ 81E80E1
 	walk_in_place_fastest_down
 	step_end
 
-LittlerootTown_Movement_1E80EB: @ 81E80EB
+LittlerootTown_EventScript_PlayerPushedBack: @ 81E80EB
 	lock_facing_direction
 	walk_down
 	unlock_facing_direction
 	step_end
 
-LittlerootTown_EventScript_1E80EF:: @ 81E80EF
+LittlerootTown_EventScript_StoppedByTwin_West:: @ 81E80EF
 	lockall
-	applymovement 1, LittlerootTown_Movement_1E810B
+	applymovement 1, LittlerootTown_EventScript_StoppedByTwin_BlockWest
 	waitmovement 0
-	call LittlerootTown_EventScript_1E80AD
-	applymovement 1, LittlerootTown_Movement_1E8118
+	call LittlerootTown_EventScript_StoppedByTwin
+	applymovement 1, LittlerootTown_EventScript_StoppedByTwin_ReturnFromWest
 	waitmovement 0
 	releaseall
 	end
 
-LittlerootTown_Movement_1E810B: @ 81E810B
+LittlerootTown_EventScript_StoppedByTwin_BlockWest: @ 81E810B
 	face_right
 	delay_8
 	disable_jump_landing_ground_effect
@@ -346,7 +346,7 @@ LittlerootTown_Movement_1E810B: @ 81E810B
 	face_down
 	step_end
 
-LittlerootTown_Movement_1E8118: @ 81E8118
+LittlerootTown_EventScript_StoppedByTwin_ReturnFromWest: @ 81E8118
 	walk_left
 	walk_down
 	walk_left
@@ -355,7 +355,7 @@ LittlerootTown_Movement_1E8118: @ 81E8118
 	walk_in_place_fastest_down
 	step_end
 
-LittlerootTown_EventScript_1E811F:: @ 81E811F
+LittlerootTown_EventScript_StoppedByConcernedTwin:: @ 81E811F
 	lockall
 	applymovement 1, Common_Movement_WalkInPlaceRight
 	waitmovement 0
@@ -366,7 +366,7 @@ LittlerootTown_EventScript_1E811F:: @ 81E811F
 	closemessage
 	applymovement 1, Common_Movement_FaceOriginalDirection
 	waitmovement 0
-	setvar VAR_0x4050, 2
+	setvar VAR_PROF_BIRCH_STATE, PROF_BIRCH_STATE_SAVE_BIRCH
 	releaseall
 	end
 
@@ -476,7 +476,7 @@ LittlerootTown_EventScript_1E8211:: @ 81E8211
 	call_if_eq LittlerootTown_EventScript_1E8405
 	compare VAR_RESULT, FEMALE
 	call_if_eq LittlerootTown_EventScript_1E8448
-	goto LittlerootTown_EventScript_1E8686
+	goto LittlerootTown_EventScript_GetRunningShoes
 	end
 
 LittlerootTown_EventScript_1E8281:: @ 81E8281
@@ -903,13 +903,13 @@ LittlerootTown_EventScript_TalkToMom:: @ 81E863D
 	hideobjectat 4, MAP_LITTLEROOT_TOWN
 	closedoor VAR_0x8009, VAR_0x800A
 	waitdooranim
-	goto LittlerootTown_EventScript_1E8686
+	goto LittlerootTown_EventScript_GetRunningShoes
 	end
 
-LittlerootTown_EventScript_1E8686:: @ 81E8686
+LittlerootTown_EventScript_GetRunningShoes:: @ 81E8686
 	removeobject 4
 	setflag FLAG_SYS_B_DASH
-	setvar VAR_0x4050, 4
+	setvar VAR_PROF_BIRCH_STATE, PROF_BIRCH_STATE_HAS_SHOES
 	release
 	end
 
@@ -990,7 +990,7 @@ LittlerootTown_Text_GuardingTwin: @ 81E8BB8
 	.string "If you go outside and go in the grass,\n"
 	.string "wild POKéMON will jump out!$"
 
-LittlerootTown_Text_1E8C07: @ 81E8C07
+LittlerootTown_Text_StoppedByTwin: @ 81E8C07
 	.string "It's dangerous if you don't have\n"
 	.string "your own POKéMON.$"
 

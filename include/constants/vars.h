@@ -96,7 +96,7 @@
 #define VAR_POKELOT_PRIZE_PLACE              0x404D
 #define VAR_UNUSED_0x404E                    0x404E // Unused Var
 #define VAR_LOTAD_SIZE_RECORD                0x404F
-#define VAR_0x4050                           0x4050
+#define VAR_PROF_BIRCH_STATE                           0x4050
 #define VAR_ROUTE102_ACCESSIBLE              0x4051
 #define VAR_UNUSED_0x4052                    0x4052 // Unused Var
 #define VAR_LAVARIDGE_RIVAL_STATE            0x4053
@@ -167,7 +167,7 @@
 #define VAR_LILYCOVE_MUSEUM_2F_STATE         0x4094
 #define VAR_LILYCOVE_FAN_CLUB_STATE          0x4095
 #define VAR_BRINEY_LOCATION                  0x4096
-#define VAR_INIT_SECRET_BASE       0x4097
+#define VAR_INIT_SECRET_BASE                 0x4097
 #define VAR_PETALBURG_WOODS_STATE            0x4098
 #define VAR_LILYCOVE_CONTEST_LOBBY_STATE     0x4099
 #define VAR_RUSTURF_TUNNEL_STATE             0x409A
@@ -227,7 +227,7 @@
 #define VAR_HAS_ENTERED_BATTLE_FRONTIER      0x40D0 // Var is used like a flag.
 #define VAR_SCOTT_STATE                      0x40D1
 #define VAR_SLATEPORT_OUTSIDE_MUSEUM_STATE   0x40D2
-#define VAR_0x40D3                           0x40D3
+#define VAR_NATIONAL_DEX_STATE                           0x40D3
 #define VAR_SS_TIDAL_SCOTT_STATE             0x40D4 // Always equal to FLAG_MET_SCOTT_ON_SS_TIDAL
 #define VAR_ROAMER_POKEMON                   0x40D5 // 0 = Latias, 1 = Latios
 #define VAR_TRAINER_HILL_IS_ACTIVE           0x40D6
@@ -316,5 +316,19 @@
 #define HOUSES_STATE_3 3
 #define HOUSES_STATE_4 4
 #define HOUSES_STATE_5 5
+
+#define PROF_BIRCH_STATE_CANT_LEAVE 0
+#define PROF_BIRCH_STATE_FIND_BIRCH 1
+#define PROF_BIRCH_STATE_SAVE_BIRCH 2
+#define PROF_BIRCH_STATE_BIRCH_SAVED 3
+#define PROF_BIRCH_STATE_HAS_SHOES 4
+
+#define NATIONAL_DEX_STATE_0 0
+#define NATIONAL_DEX_STATE_1 1
+#define NATIONAL_DEX_STATE_2 2
+#define NATIONAL_DEX_STATE_3 3
+#define NATIONAL_DEX_STATE_4 4
+#define NATIONAL_DEX_STATE_5 5
+#define NATIONAL_DEX_STATE_6 6
 
 #endif // GUARD_CONSTANTS_VARS_H
