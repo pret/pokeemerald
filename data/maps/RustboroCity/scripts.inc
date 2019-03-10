@@ -24,7 +24,7 @@ RustboroCity_EventScript_1E06FF:: @ 81E06FF
 	end
 
 RustboroCity_EventScript_1E0707:: @ 81E0707
-	setflag FLAG_SPECIAL_FLAG_0x4000
+	setflag FLAG_HIDE_MAP_NAME_POPUP
 	return
 
 RustboroCity_MapScript2_1E070B: @ 81E070B
@@ -100,7 +100,7 @@ RustboroCity_EventScript_1E07BD:: @ 81E07BD
 	removeobject 15
 	setflag FLAG_HIDE_RUSTBORO_CITY_SCIENTIST
 	setvar VAR_RUSTBORO_STATE, 7
-	clearflag FLAG_SPECIAL_FLAG_0x4000
+	clearflag FLAG_HIDE_MAP_NAME_POPUP
 	releaseall
 	end
 

@@ -15,7 +15,7 @@ InsideOfTruck_MapScript1_23BF01: @ 823BF01
 
 InsideOfTruck_EventScript_23BF04:: @ 823BF04
 	lockall
-	setflag FLAG_SPECIAL_FLAG_0x4000
+	setflag FLAG_HIDE_MAP_NAME_POPUP
 	checkplayergender
 	compare VAR_RESULT, MALE
 	goto_if_eq InsideOfTruck_EventScript_23BF20
