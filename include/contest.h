@@ -204,6 +204,12 @@ enum {
     CONTEST_RANK_LINK
 };
 
+enum {
+    CONTEST_FILTER_NONE,
+    CONTEST_FILTER_NO_POSTGAME,
+    CONTEST_FILTER_ONLY_POSTGAME
+};
+
 struct ContestPokemon
 {
     /*0x00*/ u16 species;

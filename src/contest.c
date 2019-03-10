@@ -242,7 +242,6 @@ extern const u8 gText_Contest_Fear[];
 extern const u8 gText_BDot[];
 extern const u8 gText_CDot[];
 extern const u8 *const gUnknown_08587E10[];
-extern const u8 gUnknown_085898A4[96];
 extern const union AffineAnimCmd *const gUnknown_082FF6C0[];
 extern const union AffineAnimCmd *const gUnknown_082FF694[];
 extern const struct SpriteTemplate gSpriteTemplate_8587AD0;
@@ -2565,7 +2564,7 @@ void sub_80DAB8C(u8 contestType, u8 rank)
         r7 = TRUE;
 
     // Find all suitable opponents
-    r3 = gUnknown_085898A4;
+    r3 = gPostgameContestOpponentFilter;
     for (i = 0; i < ARRAY_COUNT(gContestOpponents); i++)
     {
         if (rank == gContestOpponents[i].whichRank)
@@ -2625,12 +2624,12 @@ void sub_80DACBC(u8 contestType, u8 rank, bool32 isPostgame)
 
         if (isPostgame == TRUE)
         {
-            if (gUnknown_085898A4[i] == 1)
+            if (gPostgameContestOpponentFilter[i] == CONTEST_FILTER_NO_POSTGAME)
                 continue;
         }
         else
         {
-            if (gUnknown_085898A4[i] == 2)
+            if (gPostgameContestOpponentFilter[i] == CONTEST_FILTER_ONLY_POSTGAME)
                 continue;
         }
         if ((contestType == CONTEST_CATEGORY_COOL && gContestOpponents[i].aiPool_Cool)

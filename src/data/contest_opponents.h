@@ -3,6 +3,103 @@
 #include "contest.h"
 #include "constants/species.h"
 
+#define CONTEST_OPPONENT_JIMMY 0
+#define CONTEST_OPPONENT_EDITH 1
+#define CONTEST_OPPONENT_EVAN 2
+#define CONTEST_OPPONENT_KELSEY 3
+#define CONTEST_OPPONENT_MADISON 4
+#define CONTEST_OPPONENT_RAYMOND 5
+#define CONTEST_OPPONENT_GRANT 6
+#define CONTEST_OPPONENT_PAIGE 7
+#define CONTEST_OPPONENT_ALEC 8
+#define CONTEST_OPPONENT_SYDNEY 9
+#define CONTEST_OPPONENT_MORRIS 10
+#define CONTEST_OPPONENT_MARIAH 11
+#define CONTEST_OPPONENT_RUSSELL 12
+#define CONTEST_OPPONENT_MELANIE 13
+#define CONTEST_OPPONENT_CHANCE 14
+#define CONTEST_OPPONENT_AGATHA 15
+#define CONTEST_OPPONENT_BEAU 16
+#define CONTEST_OPPONENT_KAY 17
+#define CONTEST_OPPONENT_CALE 18
+#define CONTEST_OPPONENT_CAITLIN 19
+#define CONTEST_OPPONENT_COLBY 20
+#define CONTEST_OPPONENT_KYLIE 21
+#define CONTEST_OPPONENT_LIAM 22
+#define CONTEST_OPPONENT_MILO 23
+#define CONTEST_OPPONENT_KARINA 24
+#define CONTEST_OPPONENT_BOBBY 25
+#define CONTEST_OPPONENT_CLAIRE 26
+#define CONTEST_OPPONENT_WILLIE 27
+#define CONTEST_OPPONENT_CASSIDY 28
+#define CONTEST_OPPONENT_MORGAN 29
+#define CONTEST_OPPONENT_SUMMER 30
+#define CONTEST_OPPONENT_MILES 31
+#define CONTEST_OPPONENT_AUDREY 32
+#define CONTEST_OPPONENT_AVERY 33
+#define CONTEST_OPPONENT_ARIANA 34
+#define CONTEST_OPPONENT_ASHTON 35
+#define CONTEST_OPPONENT_SANDRA 36
+#define CONTEST_OPPONENT_CARSON 37
+#define CONTEST_OPPONENT_KATRINA 38
+#define CONTEST_OPPONENT_LUKE 39
+#define CONTEST_OPPONENT_RAUL 40
+#define CONTEST_OPPONENT_JADA 41
+#define CONTEST_OPPONENT_ZEEK 42
+#define CONTEST_OPPONENT_DIEGO 43
+#define CONTEST_OPPONENT_ALIYAH 44
+#define CONTEST_OPPONENT_NATALIA 45
+#define CONTEST_OPPONENT_DEVIN 46
+#define CONTEST_OPPONENT_TYLOR 47
+#define CONTEST_OPPONENT_RONNIE 48
+#define CONTEST_OPPONENT_CLAUDIA 49
+#define CONTEST_OPPONENT_ELIAS 50
+#define CONTEST_OPPONENT_JADE 51
+#define CONTEST_OPPONENT_FRANCIS 52
+#define CONTEST_OPPONENT_ALISHA 53
+#define CONTEST_OPPONENT_SAUL 54
+#define CONTEST_OPPONENT_FELICIA 55
+#define CONTEST_OPPONENT_EMILIO 56
+#define CONTEST_OPPONENT_KARLA 57
+#define CONTEST_OPPONENT_DARRYL 58
+#define CONTEST_OPPONENT_SELENA 59
+#define CONTEST_OPPONENT_NOEL 60
+#define CONTEST_OPPONENT_LACEY 61
+#define CONTEST_OPPONENT_CORBIN 62
+#define CONTEST_OPPONENT_GRACIE 63
+#define CONTEST_OPPONENT_COLTIN 64
+#define CONTEST_OPPONENT_ELLIE 65
+#define CONTEST_OPPONENT_MARCUS 66
+#define CONTEST_OPPONENT_KIARA 67
+#define CONTEST_OPPONENT_BRYCE 68
+#define CONTEST_OPPONENT_JAMIE 69
+#define CONTEST_OPPONENT_JORGE 70
+#define CONTEST_OPPONENT_DEVON 71
+#define CONTEST_OPPONENT_JUSTINA 72
+#define CONTEST_OPPONENT_RALPH 73
+#define CONTEST_OPPONENT_ROSA 74
+#define CONTEST_OPPONENT_KEATON 75
+#define CONTEST_OPPONENT_MAYRA 76
+#define CONTEST_OPPONENT_LAMAR 77
+#define CONTEST_OPPONENT_AUBREY 78
+#define CONTEST_OPPONENT_NIGEL 79
+#define CONTEST_OPPONENT_CAMILLE 80
+#define CONTEST_OPPONENT_DEON 81
+#define CONTEST_OPPONENT_JANELLE 82
+#define CONTEST_OPPONENT_HEATH 83
+#define CONTEST_OPPONENT_SASHA 84
+#define CONTEST_OPPONENT_FRANKIE 85
+#define CONTEST_OPPONENT_HELEN 86
+#define CONTEST_OPPONENT_CAMILE 87
+#define CONTEST_OPPONENT_MARTIN 88
+#define CONTEST_OPPONENT_SERGIO 89
+#define CONTEST_OPPONENT_KAILEY 90
+#define CONTEST_OPPONENT_PERLA 91
+#define CONTEST_OPPONENT_CLARA 92
+#define CONTEST_OPPONENT_JAKOB 93
+#define CONTEST_OPPONENT_TREY 94
+#define CONTEST_OPPONENT_LANE 95
+
 const struct ContestWinner gUnknown_08587FA4[] =
 {
     {
@@ -81,7 +178,7 @@ const struct ContestWinner gUnknown_08587FA4[] =
 
 const struct ContestPokemon gContestOpponents[] =
 {
-    {
+    [CONTEST_OPPONENT_JIMMY] = {
         .species = SPECIES_POOCHYENA,
         .nickname = _("POOCHY"),
         .trainerName = _("JIMMY"),
@@ -110,7 +207,7 @@ const struct ContestPokemon gContestOpponents[] =
         .personality = 0,
         .otId = 0xFFFF
     },
-    {
+    [CONTEST_OPPONENT_EDITH] = {
         .species = SPECIES_ILLUMISE,
         .nickname = _("MUSILLE"),
         .trainerName = _("EDITH"),
@@ -139,7 +236,7 @@ const struct ContestPokemon gContestOpponents[] =
         .personality = 0,
         .otId = 0xFFFF
     },
-    {
+    [CONTEST_OPPONENT_EVAN] = {
         .species = SPECIES_DUSTOX,
         .nickname = _("DUSTER"),
         .trainerName = _("EVAN"),
@@ -168,7 +265,7 @@ const struct ContestPokemon gContestOpponents[] =
         .personality = 0,
         .otId = 0xFFFF
     },
-    {
+    [CONTEST_OPPONENT_KELSEY] = {
         .species = SPECIES_SEEDOT,
         .nickname = _("DOTS"),
         .trainerName = _("KELSEY"),
@@ -197,7 +294,7 @@ const struct ContestPokemon gContestOpponents[] =
         .personality = 0,
         .otId = 0xFFFF
     },
-    {
+    [CONTEST_OPPONENT_MADISON] = {
         .species = SPECIES_TAILLOW,
         .nickname = _("TATAY"),
         .trainerName = _("MADISON"),
@@ -226,7 +323,7 @@ const struct ContestPokemon gContestOpponents[] =
         .personality = 0,
         .otId = 0xFFFF
     },
-    {
+    [CONTEST_OPPONENT_RAYMOND] = {
         .species = SPECIES_NINCADA,
         .nickname = _("NINDA"),
         .trainerName = _("RAYMOND"),
@@ -255,7 +352,7 @@ const struct ContestPokemon gContestOpponents[] =
         .personality = 0,
         .otId = 0xFFFF
     },
-    {
+    [CONTEST_OPPONENT_GRANT] = {
         .species = SPECIES_SHROOMISH,
         .nickname = _("SMISH"),
         .trainerName = _("GRANT"),
@@ -284,7 +381,7 @@ const struct ContestPokemon gContestOpponents[] =
         .personality = 0,
         .otId = 0xFFFF
     },
-    {
+    [CONTEST_OPPONENT_PAIGE] = {
         .species = SPECIES_SPHEAL,
         .nickname = _("SLEAL"),
         .trainerName = _("PAIGE"),
@@ -313,7 +410,7 @@ const struct ContestPokemon gContestOpponents[] =
         .personality = 0,
         .otId = 0xFFFF
     },
-    {
+    [CONTEST_OPPONENT_ALEC] = {
         .species = SPECIES_SLAKOTH,
         .nickname = _("SLOKTH"),
         .trainerName = _("ALEC"),
@@ -342,7 +439,7 @@ const struct ContestPokemon gContestOpponents[] =
         .personality = 0,
         .otId = 0xFFFF
     },
-    {
+    [CONTEST_OPPONENT_SYDNEY] = {
         .species = SPECIES_WHISMUR,
         .nickname = _("WHIRIS"),
         .trainerName = _("SYDNEY"),
@@ -371,7 +468,7 @@ const struct ContestPokemon gContestOpponents[] =
         .personality = 0,
         .otId = 0xFFFF
     },
-    {
+    [CONTEST_OPPONENT_MORRIS] = {
         .species = SPECIES_MAKUHITA,
         .nickname = _("MAHITA"),
         .trainerName = _("MORRIS"),
@@ -400,7 +497,7 @@ const struct ContestPokemon gContestOpponents[] =
         .personality = 0,
         .otId = 0xFFFF
     },
-    {
+    [CONTEST_OPPONENT_MARIAH] = {
         .species = SPECIES_ARON,
         .nickname = _("RONAR"),
         .trainerName = _("MARIAH"),
@@ -429,7 +526,7 @@ const struct ContestPokemon gContestOpponents[] =
         .personality = 0,
         .otId = 0xFFFF
     },
-    {
+    [CONTEST_OPPONENT_RUSSELL] = {
         .species = SPECIES_CROBAT,
         .nickname = _("BATRO"),
         .trainerName = _("RUSSELL"),
@@ -458,7 +555,7 @@ const struct ContestPokemon gContestOpponents[] =
         .personality = 0,
         .otId = 0xFFFF
     },
-    {
+    [CONTEST_OPPONENT_MELANIE] = {
         .species = SPECIES_GULPIN,
         .nickname = _("GULIN"),
         .trainerName = _("MELANIE"),
@@ -487,7 +584,7 @@ const struct ContestPokemon gContestOpponents[] =
         .personality = 0,
         .otId = 0xFFFF
     },
-    {
+    [CONTEST_OPPONENT_CHANCE] = {
         .species = SPECIES_MANECTRIC,
         .nickname = _("RIKELEC"),
         .trainerName = _("CHANCE"),
@@ -516,7 +613,7 @@ const struct ContestPokemon gContestOpponents[] =
         .personality = 0,
         .otId = 0xFFFF
     },
-    {
+    [CONTEST_OPPONENT_AGATHA] = {
         .species = SPECIES_BULBASAUR,
         .nickname = _("BULBY"),
         .trainerName = _("AGATHA"),
@@ -545,7 +642,7 @@ const struct ContestPokemon gContestOpponents[] =
         .personality = 0,
         .otId = 0xFFFF
     },
-    {
+    [CONTEST_OPPONENT_BEAU] = {
         .species = SPECIES_BUTTERFREE,
         .nickname = _("FUTTERBE"),
         .trainerName = _("BEAU"),
@@ -574,7 +671,7 @@ const struct ContestPokemon gContestOpponents[] =
         .personality = 0,
         .otId = 0xFFFF
     },
-    {
+    [CONTEST_OPPONENT_KAY] = {
         .species = SPECIES_PIDGEOTTO,
         .nickname = _("PIDEOT"),
         .trainerName = _("KAY"),
@@ -603,7 +700,7 @@ const struct ContestPokemon gContestOpponents[] =
         .personality = 0,
         .otId = 0xFFFF
     },
-    {
+    [CONTEST_OPPONENT_CALE] = {
         .species = SPECIES_DIGLETT,
         .nickname = _("DIGLE"),
         .trainerName = _("CALE"),
@@ -632,7 +729,7 @@ const struct ContestPokemon gContestOpponents[] =
         .personality = 0,
         .otId = 0xFFFF
     },
-    {
+    [CONTEST_OPPONENT_CAITLIN] = {
         .species = SPECIES_POLIWAG,
         .nickname = _("WAGIL"),
         .trainerName = _("CAITLIN"),
@@ -661,7 +758,7 @@ const struct ContestPokemon gContestOpponents[] =
         .personality = 0,
         .otId = 0xFFFF
     },
-    {
+    [CONTEST_OPPONENT_COLBY] = {
         .species = SPECIES_TOTODILE,
         .nickname = _("TOTDIL"),
         .trainerName = _("COLBY"),
@@ -690,7 +787,7 @@ const struct ContestPokemon gContestOpponents[] =
         .personality = 0,
         .otId = 0xFFFF
     },
-    {
+    [CONTEST_OPPONENT_KYLIE] = {
         .species = SPECIES_LEDYBA,
         .nickname = _("BALEDY"),
         .trainerName = _("KYLIE"),
@@ -719,7 +816,7 @@ const struct ContestPokemon gContestOpponents[] =
         .personality = 0,
         .otId = 0xFFFF
     },
-    {
+    [CONTEST_OPPONENT_LIAM] = {
         .species = SPECIES_DELIBIRD,
         .nickname = _("BIRDLY"),
         .trainerName = _("LIAM"),
@@ -748,7 +845,7 @@ const struct ContestPokemon gContestOpponents[] =
         .personality = 0,
         .otId = 0xFFFF
     },
-    {
+    [CONTEST_OPPONENT_MILO] = {
         .species = SPECIES_LARVITAR,
         .nickname = _("TARVITAR"),
         .trainerName = _("MILO"),
@@ -777,7 +874,7 @@ const struct ContestPokemon gContestOpponents[] =
         .personality = 0,
         .otId = 0xFFFF
     },
-    {
+    [CONTEST_OPPONENT_KARINA] = {
         .species = SPECIES_ROSELIA,
         .nickname = _("RELIA"),
         .trainerName = _("KARINA"),
@@ -806,7 +903,7 @@ const struct ContestPokemon gContestOpponents[] =
         .personality = 0,
         .otId = 0xFFFF
     },
-    {
+    [CONTEST_OPPONENT_BOBBY] = {
         .species = SPECIES_DODRIO,
         .nickname = _("DUODO"),
         .trainerName = _("BOBBY"),
@@ -835,7 +932,7 @@ const struct ContestPokemon gContestOpponents[] =
         .personality = 0,
         .otId = 0xFFFF
     },
-    {
+    [CONTEST_OPPONENT_CLAIRE] = {
         .species = SPECIES_TRAPINCH,
         .nickname = _("PINCHIN"),
         .trainerName = _("CLAIRE"),
@@ -864,7 +961,7 @@ const struct ContestPokemon gContestOpponents[] =
         .personality = 0,
         .otId = 0xFFFF
     },
-    {
+    [CONTEST_OPPONENT_WILLIE] = {
         .species = SPECIES_CACNEA,
         .nickname = _("NACAC"),
         .trainerName = _("WILLIE"),
@@ -893,7 +990,7 @@ const struct ContestPokemon gContestOpponents[] =
         .personality = 0,
         .otId = 0xFFFF
     },
-    {
+    [CONTEST_OPPONENT_CASSIDY] = {
         .species = SPECIES_SANDSLASH,
         .nickname = _("SHRAND"),
         .trainerName = _("CASSIDY"),
@@ -922,7 +1019,7 @@ const struct ContestPokemon gContestOpponents[] =
         .personality = 0,
         .otId = 0xFFFF
     },
-    {
+    [CONTEST_OPPONENT_MORGAN] = {
         .species = SPECIES_BALTOY,
         .nickname = _("TOYBAL"),
         .trainerName = _("MORGAN"),
@@ -951,7 +1048,7 @@ const struct ContestPokemon gContestOpponents[] =
         .personality = 0,
         .otId = 0xFFFF
     },
-    {
+    [CONTEST_OPPONENT_SUMMER] = {
         .species = SPECIES_MEDICHAM,
         .nickname = _("CHAMCHAM"),
         .trainerName = _("SUMMER"),
@@ -980,7 +1077,7 @@ const struct ContestPokemon gContestOpponents[] =
         .personality = 0,
         .otId = 0xFFFF
     },
-    {
+    [CONTEST_OPPONENT_MILES] = {
         .species = SPECIES_SPINDA,
         .nickname = _("SPININ"),
         .trainerName = _("MILES"),
@@ -1009,7 +1106,7 @@ const struct ContestPokemon gContestOpponents[] =
         .personality = 0,
         .otId = 0xFFFF
     },
-    {
+    [CONTEST_OPPONENT_AUDREY] = {
         .species = SPECIES_SWABLU,
         .nickname = _("SWABY"),
         .trainerName = _("AUDREY"),
@@ -1038,7 +1135,7 @@ const struct ContestPokemon gContestOpponents[] =
         .personality = 0,
         .otId = 0xFFFF
     },
-    {
+    [CONTEST_OPPONENT_AVERY] = {
         .species = SPECIES_SPOINK,
         .nickname = _("POINKER"),
         .trainerName = _("AVERY"),
@@ -1067,7 +1164,7 @@ const struct ContestPokemon gContestOpponents[] =
         .personality = 0,
         .otId = 0xFFFF
     },
-    {
+    [CONTEST_OPPONENT_ARIANA] = {    
         .species = SPECIES_KECLEON,
         .nickname = _("KECON"),
         .trainerName = _("ARIANA"),
@@ -1096,7 +1193,7 @@ const struct ContestPokemon gContestOpponents[] =
         .personality = 0,
         .otId = 0xFFFF
     },
-    {
+    [CONTEST_OPPONENT_ASHTON] = {
         .species = SPECIES_GOLDEEN,
         .nickname = _("GOLDEN"),
         .trainerName = _("ASHTON"),
@@ -1125,7 +1222,7 @@ const struct ContestPokemon gContestOpponents[] =
         .personality = 0,
         .otId = 0xFFFF
     },
-    {
+    [CONTEST_OPPONENT_SANDRA] = {
         .species = SPECIES_BARBOACH,
         .nickname = _("BOBOACH"),
         .trainerName = _("SANDRA"),
@@ -1154,7 +1251,7 @@ const struct ContestPokemon gContestOpponents[] =
         .personality = 0,
         .otId = 0xFFFF
     },
-    {
+    [CONTEST_OPPONENT_CARSON] = {
         .species = SPECIES_SKARMORY,
         .nickname = _("CORPY"),
         .trainerName = _("CARSON"),
@@ -1183,7 +1280,7 @@ const struct ContestPokemon gContestOpponents[] =
         .personality = 0,
         .otId = 0xFFFF
     },
-    {
+    [CONTEST_OPPONENT_KATRINA] = {
         .species = SPECIES_LOTAD,
         .nickname = _("TADO"),
         .trainerName = _("KATRINA"),
@@ -1212,7 +1309,7 @@ const struct ContestPokemon gContestOpponents[] =
         .personality = 0,
         .otId = 0xFFFF
     },
-    {
+    [CONTEST_OPPONENT_LUKE] = {
         .species = SPECIES_SLOWBRO,
         .nickname = _("BROWLO"),
         .trainerName = _("LUKE"),
@@ -1241,7 +1338,7 @@ const struct ContestPokemon gContestOpponents[] =
         .personality = 0,
         .otId = 0xFFFF
     },
-    {
+    [CONTEST_OPPONENT_RAUL] = {
         .species = SPECIES_FARFETCHD,
         .nickname = _("FETCHIN"),
         .trainerName = _("RAUL"),
@@ -1270,7 +1367,7 @@ const struct ContestPokemon gContestOpponents[] =
         .personality = 0,
         .otId = 0xFFFF
     },
-    {
+    [CONTEST_OPPONENT_JADA] = {
         .species = SPECIES_SEEL,
         .nickname = _("SEELEY"),
         .trainerName = _("JADA"),
@@ -1299,7 +1396,7 @@ const struct ContestPokemon gContestOpponents[] =
         .personality = 0,
         .otId = 0xFFFF
     },
-    {
+    [CONTEST_OPPONENT_ZEEK] = {
         .species = SPECIES_DROWZEE,
         .nickname = _("DROWZIN"),
         .trainerName = _("ZEEK"),
@@ -1328,7 +1425,7 @@ const struct ContestPokemon gContestOpponents[] =
         .personality = 0,
         .otId = 0xFFFF
     },
-    {
+    [CONTEST_OPPONENT_DIEGO] = {
         .species = SPECIES_HITMONCHAN,
         .nickname = _("HITEMON"),
         .trainerName = _("DIEGO"),
@@ -1357,7 +1454,7 @@ const struct ContestPokemon gContestOpponents[] =
         .personality = 0,
         .otId = 0xFFFF
     },
-    {
+    [CONTEST_OPPONENT_ALIYAH] = {
         .species = SPECIES_BLISSEY,
         .nickname = _("BLISS"),
         .trainerName = _("ALIYAH"),
@@ -1386,7 +1483,7 @@ const struct ContestPokemon gContestOpponents[] =
         .personality = 0,
         .otId = 0xFFFF
     },
-    {
+    [CONTEST_OPPONENT_NATALIA] = {
         .species = SPECIES_ELEKID,
         .nickname = _("KIDLEK"),
         .trainerName = _("NATALIA"),
@@ -1415,7 +1512,7 @@ const struct ContestPokemon gContestOpponents[] =
         .personality = 0,
         .otId = 0xFFFF
     },
-    {
+    [CONTEST_OPPONENT_DEVIN] = {
         .species = SPECIES_SNUBBULL,
         .nickname = _("SNUBBINS"),
         .trainerName = _("DEVIN"),
@@ -1444,7 +1541,7 @@ const struct ContestPokemon gContestOpponents[] =
         .personality = 0,
         .otId = 0xFFFF
     },
-    {
+    [CONTEST_OPPONENT_TYLOR] = {
         .species = SPECIES_MISDREAVUS,
         .nickname = _("DREAVIS"),
         .trainerName = _("TYLOR"),
@@ -1473,7 +1570,7 @@ const struct ContestPokemon gContestOpponents[] =
         .personality = 0,
         .otId = 0xFFFF
     },
-    {
+    [CONTEST_OPPONENT_RONNIE] = {
         .species = SPECIES_LAIRON,
         .nickname = _("LAIRN"),
         .trainerName = _("RONNIE"),
@@ -1502,7 +1599,7 @@ const struct ContestPokemon gContestOpponents[] =
         .personality = 0,
         .otId = 0xFFFF
     },
-    {
+    [CONTEST_OPPONENT_CLAUDIA] = {
         .species = SPECIES_SHIFTRY,
         .nickname = _("SHIFTY"),
         .trainerName = _("CLAUDIA"),
@@ -1531,7 +1628,7 @@ const struct ContestPokemon gContestOpponents[] =
         .personality = 0,
         .otId = 0xFFFF
     },
-    {
+    [CONTEST_OPPONENT_ELIAS] = {
         .species = SPECIES_NINJASK,
         .nickname = _("NINAS"),
         .trainerName = _("ELIAS"),
@@ -1560,7 +1657,7 @@ const struct ContestPokemon gContestOpponents[] =
         .personality = 0,
         .otId = 0xFFFF
     },
-    {
+    [CONTEST_OPPONENT_JADE] = {
         .species = SPECIES_SWELLOW,
         .nickname = _("WELOW"),
         .trainerName = _("JADE"),
@@ -1589,7 +1686,7 @@ const struct ContestPokemon gContestOpponents[] =
         .personality = 0,
         .otId = 0xFFFF
     },
-    {
+    [CONTEST_OPPONENT_FRANCIS] = {
         .species = SPECIES_MIGHTYENA,
         .nickname = _("YENA"),
         .trainerName = _("FRANCIS"),
@@ -1618,7 +1715,7 @@ const struct ContestPokemon gContestOpponents[] =
         .personality = 0,
         .otId = 0xFFFF
     },
-    {
+    [CONTEST_OPPONENT_ALISHA] = {
         .species = SPECIES_BEAUTIFLY,
         .nickname = _("TIFLY"),
         .trainerName = _("ALISHA"),
@@ -1647,7 +1744,7 @@ const struct ContestPokemon gContestOpponents[] =
         .personality = 0,
         .otId = 0xFFFF
     },
-    {
+    [CONTEST_OPPONENT_SAUL] = {
         .species = SPECIES_SEAKING,
         .nickname = _("KINGSEA"),
         .trainerName = _("SAUL"),
@@ -1676,7 +1773,7 @@ const struct ContestPokemon gContestOpponents[] =
         .personality = 0,
         .otId = 0xFFFF
     },
-    {
+    [CONTEST_OPPONENT_FELICIA] = {
         .species = SPECIES_CASTFORM,
         .nickname = _("CASTER"),
         .trainerName = _("FELICIA"),
@@ -1705,7 +1802,7 @@ const struct ContestPokemon gContestOpponents[] =
         .personality = 0,
         .otId = 0xFFFF
     },
-    {
+    [CONTEST_OPPONENT_EMILIO] = {
         .species = SPECIES_MACHOKE,
         .nickname = _("CHOKEM"),
         .trainerName = _("EMILIO"),
@@ -1734,7 +1831,7 @@ const struct ContestPokemon gContestOpponents[] =
         .personality = 0,
         .otId = 0xFFFF
     },
-    {
+    [CONTEST_OPPONENT_KARLA] = {
         .species = SPECIES_LOMBRE,
         .nickname = _("LOMBE"),
         .trainerName = _("KARLA"),
@@ -1763,7 +1860,7 @@ const struct ContestPokemon gContestOpponents[] =
         .personality = 0,
         .otId = 0xFFFF
     },
-    {
+    [CONTEST_OPPONENT_DARRYL] = {
         .species = SPECIES_SEVIPER,
         .nickname = _("VIPES"),
         .trainerName = _("DARRYL"),
@@ -1792,7 +1889,7 @@ const struct ContestPokemon gContestOpponents[] =
         .personality = 0,
         .otId = 0xFFFF
     },
-    {
+    [CONTEST_OPPONENT_SELENA] = {
         .species = SPECIES_WAILMER,
         .nickname = _("MERAIL"),
         .trainerName = _("SELENA"),
@@ -1821,7 +1918,7 @@ const struct ContestPokemon gContestOpponents[] =
         .personality = 0,
         .otId = 0xFFFF
     },
-    {
+    [CONTEST_OPPONENT_NOEL] = {
         .species = SPECIES_MAGIKARP,
         .nickname = _("KARPAG"),
         .trainerName = _("NOEL"),
@@ -1850,7 +1947,7 @@ const struct ContestPokemon gContestOpponents[] =
         .personality = 0,
         .otId = 0xFFFF
     },
-    {
+    [CONTEST_OPPONENT_LACEY] = {
         .species = SPECIES_LUNATONE,
         .nickname = _("LUNONE"),
         .trainerName = _("LACEY"),
@@ -1879,7 +1976,7 @@ const struct ContestPokemon gContestOpponents[] =
         .personality = 0,
         .otId = 0xFFFF
     },
-    {
+    [CONTEST_OPPONENT_CORBIN] = {
         .species = SPECIES_ABSOL,
         .nickname = _("ABSO"),
         .trainerName = _("CORBIN"),
@@ -1908,7 +2005,7 @@ const struct ContestPokemon gContestOpponents[] =
         .personality = 0,
         .otId = 0xFFFF
     },
-    {
+    [CONTEST_OPPONENT_GRACIE] = {
         .species = SPECIES_EXEGGUTOR,
         .nickname = _("EGGSOR"),
         .trainerName = _("GRACIE"),
@@ -1937,7 +2034,7 @@ const struct ContestPokemon gContestOpponents[] =
         .personality = 0,
         .otId = 0xFFFF
     },
-    {
+    [CONTEST_OPPONENT_COLTIN] = {
         .species = SPECIES_CUBONE,
         .nickname = _("CUBIN"),
         .trainerName = _("COLTIN"),
@@ -1966,7 +2063,7 @@ const struct ContestPokemon gContestOpponents[] =
         .personality = 0,
         .otId = 0xFFFF
     },
-    {
+    [CONTEST_OPPONENT_ELLIE] = {
         .species = SPECIES_HITMONLEE,
         .nickname = _("HITMON"),
         .trainerName = _("ELLIE"),
@@ -1995,7 +2092,7 @@ const struct ContestPokemon gContestOpponents[] =
         .personality = 0,
         .otId = 0xFFFF
     },
-    {
+    [CONTEST_OPPONENT_MARCUS] = {
         .species = SPECIES_SQUIRTLE,
         .nickname = _("SURTLE"),
         .trainerName = _("MARCUS"),
@@ -2024,7 +2121,7 @@ const struct ContestPokemon gContestOpponents[] =
         .personality = 0,
         .otId = 0xFFFF
     },
-    {
+    [CONTEST_OPPONENT_KIARA] = {
         .species = SPECIES_KANGASKHAN,
         .nickname = _("KHANKAN"),
         .trainerName = _("KIARA"),
@@ -2053,7 +2150,7 @@ const struct ContestPokemon gContestOpponents[] =
         .personality = 0,
         .otId = 0xFFFF
     },
-    {
+    [CONTEST_OPPONENT_BRYCE] = {
         .species = SPECIES_PINECO,
         .nickname = _("PINOC"),
         .trainerName = _("BRYCE"),
@@ -2082,7 +2179,7 @@ const struct ContestPokemon gContestOpponents[] =
         .personality = 0,
         .otId = 0xFFFF
     },
-    {
+    [CONTEST_OPPONENT_JAMIE] = {
         .species = SPECIES_DUNSPARCE,
         .nickname = _("DILTOT"),
         .trainerName = _("JAMIE"),
@@ -2111,7 +2208,7 @@ const struct ContestPokemon gContestOpponents[] =
         .personality = 0,
         .otId = 0xFFFF
     },
-    {
+    [CONTEST_OPPONENT_JORGE] = {
         .species = SPECIES_HOUNDOOM,
         .nickname = _("DOOMOND"),
         .trainerName = _("JORGE"),
@@ -2140,7 +2237,7 @@ const struct ContestPokemon gContestOpponents[] =
         .personality = 0,
         .otId = 0xFFFF
     },
-    {
+    [CONTEST_OPPONENT_DEVON] = {
         .species = SPECIES_MILTANK,
         .nickname = _("MILKAN"),
         .trainerName = _("DEVON"),
@@ -2169,7 +2266,7 @@ const struct ContestPokemon gContestOpponents[] =
         .personality = 0,
         .otId = 0xFFFF
     },
-    {
+    [CONTEST_OPPONENT_JUSTINA] = {
         .species = SPECIES_GYARADOS,
         .nickname = _("RADOS"),
         .trainerName = _("JUSTINA"),
@@ -2198,7 +2295,7 @@ const struct ContestPokemon gContestOpponents[] =
         .personality = 0,
         .otId = 0xFFFF
     },
-    {
+    [CONTEST_OPPONENT_RALPH] = {
         .species = SPECIES_LOUDRED,
         .nickname = _("LOUDERD"),
         .trainerName = _("RALPH"),
@@ -2227,7 +2324,7 @@ const struct ContestPokemon gContestOpponents[] =
         .personality = 0,
         .otId = 0xFFFF
     },
-    {
+    [CONTEST_OPPONENT_ROSA] = {
         .species = SPECIES_SKITTY,
         .nickname = _("SITTY"),
         .trainerName = _("ROSA"),
@@ -2256,7 +2353,7 @@ const struct ContestPokemon gContestOpponents[] =
         .personality = 0,
         .otId = 0xFFFF
     },
-    {
+    [CONTEST_OPPONENT_KEATON] = {
         .species = SPECIES_SLAKING,
         .nickname = _("SLING"),
         .trainerName = _("KEATON"),
@@ -2285,7 +2382,7 @@ const struct ContestPokemon gContestOpponents[] =
         .personality = 0,
         .otId = 0xFFFF
     },
-    {
+    [CONTEST_OPPONENT_MAYRA] = {
         .species = SPECIES_ALTARIA,
         .nickname = _("TARIA"),
         .trainerName = _("MAYRA"),
@@ -2314,7 +2411,7 @@ const struct ContestPokemon gContestOpponents[] =
         .personality = 0,
         .otId = 0xFFFF
     },
-    {
+    [CONTEST_OPPONENT_LAMAR] = {
         .species = SPECIES_KIRLIA,
         .nickname = _("LIRKI"),
         .trainerName = _("LAMAR"),
@@ -2343,7 +2440,7 @@ const struct ContestPokemon gContestOpponents[] =
         .personality = 0,
         .otId = 0xFFFF
     },
-    {
+    [CONTEST_OPPONENT_AUBREY] = {
         .species = SPECIES_BELLOSSOM,
         .nickname = _("BLOSSOM"),
         .trainerName = _("AUBREY"),
@@ -2372,7 +2469,7 @@ const struct ContestPokemon gContestOpponents[] =
         .personality = 0,
         .otId = 0xFFFF
     },
-    {
+    [CONTEST_OPPONENT_NIGEL] = {
         .species = SPECIES_SABLEYE,
         .nickname = _("EYESAB"),
         .trainerName = _("NIGEL"),
@@ -2401,7 +2498,7 @@ const struct ContestPokemon gContestOpponents[] =
         .personality = 0,
         .otId = 0xFFFF
     },
-    {
+    [CONTEST_OPPONENT_CAMILLE] = {
         .species = SPECIES_NATU,
         .nickname = _("UTAN"),
         .trainerName = _("CAMILLE"),
@@ -2430,7 +2527,7 @@ const struct ContestPokemon gContestOpponents[] =
         .personality = 0,
         .otId = 0xFFFF
     },
-    {
+    [CONTEST_OPPONENT_DEON] = {
         .species = SPECIES_SHARPEDO,
         .nickname = _("PEDOS"),
         .trainerName = _("DEON"),
@@ -2459,7 +2556,7 @@ const struct ContestPokemon gContestOpponents[] =
         .personality = 0,
         .otId = 0xFFFF
     },
-    {
+    [CONTEST_OPPONENT_JANELLE] = {
         .species = SPECIES_LUVDISC,
         .nickname = _("LUVIS"),
         .trainerName = _("JANELLE"),
@@ -2488,7 +2585,7 @@ const struct ContestPokemon gContestOpponents[] =
         .personality = 0,
         .otId = 0xFFFF
     },
-    {
+    [CONTEST_OPPONENT_HEATH] = {
         .species = SPECIES_HERACROSS,
         .nickname = _("HEROSS"),
         .trainerName = _("HEATH"),
@@ -2517,7 +2614,7 @@ const struct ContestPokemon gContestOpponents[] =
         .personality = 0,
         .otId = 0xFFFF
     },
-    {
+    [CONTEST_OPPONENT_SASHA] = {
         .species = SPECIES_ELECTRODE,
         .nickname = _("RODLECT"),
         .trainerName = _("SASHA"),
@@ -2546,7 +2643,7 @@ const struct ContestPokemon gContestOpponents[] =
         .personality = 0,
         .otId = 0xFFFF
     },
-    {
+    [CONTEST_OPPONENT_FRANKIE] = {
         .species = SPECIES_PICHU,
         .nickname = _("CHUPY"),
         .trainerName = _("FRANKIE"),
@@ -2575,7 +2672,7 @@ const struct ContestPokemon gContestOpponents[] =
         .personality = 0,
         .otId = 0xFFFF
     },
-    {
+    [CONTEST_OPPONENT_HELEN] = {
         .species = SPECIES_WOBBUFFET,
         .nickname = _("WOBET"),
         .trainerName = _("HELEN"),
@@ -2604,7 +2701,7 @@ const struct ContestPokemon gContestOpponents[] =
         .personality = 0,
         .otId = 0xFFFF
     },
-    {
+    [CONTEST_OPPONENT_CAMILE] = {
         .species = SPECIES_GENGAR,
         .nickname = _("GAREN"),
         .trainerName = _("CAMILE"),
@@ -2633,7 +2730,7 @@ const struct ContestPokemon gContestOpponents[] =
         .personality = 0,
         .otId = 0xFFFF
     },
-    {
+    [CONTEST_OPPONENT_MARTIN] = {
         .species = SPECIES_PORYGON,
         .nickname = _("GONPOR"),
         .trainerName = _("MARTIN"),
@@ -2662,7 +2759,7 @@ const struct ContestPokemon gContestOpponents[] =
         .personality = 0,
         .otId = 0xFFFF
     },
-    {
+    [CONTEST_OPPONENT_SERGIO] = {
         .species = SPECIES_DRAGONITE,
         .nickname = _("DRITE"),
         .trainerName = _("SERGIO"),
@@ -2691,7 +2788,7 @@ const struct ContestPokemon gContestOpponents[] =
         .personality = 0,
         .otId = 0xFFFF
     },
-    {
+    [CONTEST_OPPONENT_KAILEY] = {
         .species = SPECIES_MEOWTH,
         .nickname = _("MEOWY"),
         .trainerName = _("KAILEY"),
@@ -2720,7 +2817,7 @@ const struct ContestPokemon gContestOpponents[] =
         .personality = 0,
         .otId = 0xFFFF
     },
-    {
+    [CONTEST_OPPONENT_PERLA] = {
         .species = SPECIES_JYNX,
         .nickname = _("NYX"),
         .trainerName = _("PERLA"),
@@ -2749,7 +2846,7 @@ const struct ContestPokemon gContestOpponents[] =
         .personality = 0,
         .otId = 0xFFFF
     },
-    {
+    [CONTEST_OPPONENT_CLARA] = {
         .species = SPECIES_TOGEPI,
         .nickname = _("GEPITO"),
         .trainerName = _("CLARA"),
@@ -2778,7 +2875,7 @@ const struct ContestPokemon gContestOpponents[] =
         .personality = 0,
         .otId = 0xFFFF
     },
-    {
+    [CONTEST_OPPONENT_JAKOB] = {
         .species = SPECIES_ESPEON,
         .nickname = _("SPEON"),
         .trainerName = _("JAKOB"),
@@ -2807,7 +2904,7 @@ const struct ContestPokemon gContestOpponents[] =
         .personality = 0,
         .otId = 0xFFFF
     },
-    {
+    [CONTEST_OPPONENT_TREY] = {
         .species = SPECIES_SLOWKING,
         .nickname = _("SLOWGO"),
         .trainerName = _("TREY"),
@@ -2836,7 +2933,7 @@ const struct ContestPokemon gContestOpponents[] =
         .personality = 0,
         .otId = 0xFFFF
     },
-    {
+    [CONTEST_OPPONENT_LANE] = {
         .species = SPECIES_URSARING,
         .nickname = _("URSING"),
         .trainerName = _("LANE"),
@@ -2865,4 +2962,105 @@ const struct ContestPokemon gContestOpponents[] =
         .personality = 0,
         .otId = 0xFFFF
     }
+};
+
+
+const u8 gPostgameContestOpponentFilter[] =
+{
+	[CONTEST_OPPONENT_JIMMY] = CONTEST_FILTER_NONE,
+    [CONTEST_OPPONENT_EDITH] = CONTEST_FILTER_NONE,
+    [CONTEST_OPPONENT_EVAN] = CONTEST_FILTER_NONE,
+    [CONTEST_OPPONENT_KELSEY] = CONTEST_FILTER_NONE,
+    [CONTEST_OPPONENT_MADISON] = CONTEST_FILTER_NONE,
+    [CONTEST_OPPONENT_RAYMOND] = CONTEST_FILTER_NONE,
+    [CONTEST_OPPONENT_GRANT] = CONTEST_FILTER_NONE,
+    [CONTEST_OPPONENT_PAIGE] = CONTEST_FILTER_NONE,
+    [CONTEST_OPPONENT_ALEC] = CONTEST_FILTER_NONE,
+    [CONTEST_OPPONENT_SYDNEY] = CONTEST_FILTER_NONE,
+    [CONTEST_OPPONENT_MORRIS] = CONTEST_FILTER_NONE,
+    [CONTEST_OPPONENT_MARIAH] = CONTEST_FILTER_NONE,
+    [CONTEST_OPPONENT_RUSSELL] = CONTEST_FILTER_NONE,
+    [CONTEST_OPPONENT_MELANIE] = CONTEST_FILTER_NONE,
+    [CONTEST_OPPONENT_CHANCE] = CONTEST_FILTER_NONE,
+    [CONTEST_OPPONENT_AGATHA] = CONTEST_FILTER_ONLY_POSTGAME,
+    [CONTEST_OPPONENT_BEAU] = CONTEST_FILTER_ONLY_POSTGAME,
+    [CONTEST_OPPONENT_KAY] = CONTEST_FILTER_ONLY_POSTGAME,
+    [CONTEST_OPPONENT_CALE] = CONTEST_FILTER_ONLY_POSTGAME,
+    [CONTEST_OPPONENT_CAITLIN] = CONTEST_FILTER_ONLY_POSTGAME,
+    [CONTEST_OPPONENT_COLBY] = CONTEST_FILTER_ONLY_POSTGAME,
+    [CONTEST_OPPONENT_KYLIE] = CONTEST_FILTER_ONLY_POSTGAME,
+    [CONTEST_OPPONENT_LIAM] = CONTEST_FILTER_ONLY_POSTGAME,
+    [CONTEST_OPPONENT_MILO] = CONTEST_FILTER_ONLY_POSTGAME,
+    [CONTEST_OPPONENT_KARINA] = CONTEST_FILTER_NONE,
+    [CONTEST_OPPONENT_BOBBY] = CONTEST_FILTER_NONE,
+    [CONTEST_OPPONENT_CLAIRE] = CONTEST_FILTER_NONE,
+    [CONTEST_OPPONENT_WILLIE] = CONTEST_FILTER_NONE,
+    [CONTEST_OPPONENT_CASSIDY] = CONTEST_FILTER_NONE,
+    [CONTEST_OPPONENT_MORGAN] = CONTEST_FILTER_NONE,
+    [CONTEST_OPPONENT_SUMMER] = CONTEST_FILTER_NONE,
+    [CONTEST_OPPONENT_MILES] = CONTEST_FILTER_NONE,
+	[CONTEST_OPPONENT_AUDREY] = CONTEST_FILTER_NONE,
+    [CONTEST_OPPONENT_AVERY] = CONTEST_FILTER_NONE,
+    [CONTEST_OPPONENT_ARIANA] = CONTEST_FILTER_NONE,
+    [CONTEST_OPPONENT_ASHTON] = CONTEST_FILTER_NONE,
+    [CONTEST_OPPONENT_SANDRA] = CONTEST_FILTER_NONE,
+    [CONTEST_OPPONENT_CARSON] = CONTEST_FILTER_NONE,
+    [CONTEST_OPPONENT_KATRINA] = CONTEST_FILTER_NONE,
+    [CONTEST_OPPONENT_LUKE] = CONTEST_FILTER_ONLY_POSTGAME,
+    [CONTEST_OPPONENT_RAUL] = CONTEST_FILTER_ONLY_POSTGAME,
+    [CONTEST_OPPONENT_JADA] = CONTEST_FILTER_ONLY_POSTGAME,
+    [CONTEST_OPPONENT_ZEEK] = CONTEST_FILTER_ONLY_POSTGAME,
+    [CONTEST_OPPONENT_DIEGO] = CONTEST_FILTER_ONLY_POSTGAME,
+    [CONTEST_OPPONENT_ALIYAH] = CONTEST_FILTER_ONLY_POSTGAME,
+    [CONTEST_OPPONENT_NATALIA] = CONTEST_FILTER_ONLY_POSTGAME,
+    [CONTEST_OPPONENT_DEVIN] = CONTEST_FILTER_ONLY_POSTGAME,
+    [CONTEST_OPPONENT_TYLOR] = CONTEST_FILTER_ONLY_POSTGAME,
+    [CONTEST_OPPONENT_RONNIE] = CONTEST_FILTER_NONE,
+    [CONTEST_OPPONENT_CLAUDIA] = CONTEST_FILTER_NONE,
+    [CONTEST_OPPONENT_ELIAS] = CONTEST_FILTER_NONE,
+    [CONTEST_OPPONENT_JADE] = CONTEST_FILTER_NONE,
+    [CONTEST_OPPONENT_FRANCIS] = CONTEST_FILTER_NONE,
+    [CONTEST_OPPONENT_ALISHA] = CONTEST_FILTER_NONE,
+    [CONTEST_OPPONENT_SAUL] = CONTEST_FILTER_NONE,
+    [CONTEST_OPPONENT_FELICIA] = CONTEST_FILTER_NONE,
+    [CONTEST_OPPONENT_EMILIO] = CONTEST_FILTER_NONE,
+    [CONTEST_OPPONENT_KARLA] = CONTEST_FILTER_NONE,
+    [CONTEST_OPPONENT_DARRYL] = CONTEST_FILTER_NONE,
+    [CONTEST_OPPONENT_SELENA] = CONTEST_FILTER_NONE,
+    [CONTEST_OPPONENT_NOEL] = CONTEST_FILTER_NONE,
+    [CONTEST_OPPONENT_LACEY] = CONTEST_FILTER_NONE,
+    [CONTEST_OPPONENT_CORBIN] = CONTEST_FILTER_NONE,
+    [CONTEST_OPPONENT_GRACIE] = CONTEST_FILTER_ONLY_POSTGAME,
+	[CONTEST_OPPONENT_COLTIN] = CONTEST_FILTER_ONLY_POSTGAME,
+    [CONTEST_OPPONENT_ELLIE] = CONTEST_FILTER_ONLY_POSTGAME,
+    [CONTEST_OPPONENT_MARCUS] = CONTEST_FILTER_ONLY_POSTGAME,
+    [CONTEST_OPPONENT_KIARA] = CONTEST_FILTER_ONLY_POSTGAME,
+    [CONTEST_OPPONENT_BRYCE] = CONTEST_FILTER_ONLY_POSTGAME,
+    [CONTEST_OPPONENT_JAMIE] = CONTEST_FILTER_ONLY_POSTGAME,
+    [CONTEST_OPPONENT_JORGE] = CONTEST_FILTER_ONLY_POSTGAME,
+    [CONTEST_OPPONENT_DEVON] = CONTEST_FILTER_ONLY_POSTGAME,
+    [CONTEST_OPPONENT_JUSTINA] = CONTEST_FILTER_NONE,
+    [CONTEST_OPPONENT_RALPH] = CONTEST_FILTER_NONE,
+    [CONTEST_OPPONENT_ROSA] = CONTEST_FILTER_NONE,
+    [CONTEST_OPPONENT_KEATON] = CONTEST_FILTER_NONE,
+    [CONTEST_OPPONENT_MAYRA] = CONTEST_FILTER_NONE,
+    [CONTEST_OPPONENT_LAMAR] = CONTEST_FILTER_NONE,
+    [CONTEST_OPPONENT_AUBREY] = CONTEST_FILTER_NONE,
+    [CONTEST_OPPONENT_NIGEL] = CONTEST_FILTER_NONE,
+    [CONTEST_OPPONENT_CAMILLE] = CONTEST_FILTER_NONE,
+    [CONTEST_OPPONENT_DEON] = CONTEST_FILTER_NONE,
+    [CONTEST_OPPONENT_JANELLE] = CONTEST_FILTER_NONE,
+    [CONTEST_OPPONENT_HEATH] = CONTEST_FILTER_NONE,
+    [CONTEST_OPPONENT_SASHA] = CONTEST_FILTER_NONE,
+    [CONTEST_OPPONENT_FRANKIE] = CONTEST_FILTER_NONE,
+    [CONTEST_OPPONENT_HELEN] = CONTEST_FILTER_NONE,
+    [CONTEST_OPPONENT_CAMILE] = CONTEST_FILTER_ONLY_POSTGAME,
+    [CONTEST_OPPONENT_MARTIN] = CONTEST_FILTER_ONLY_POSTGAME,
+    [CONTEST_OPPONENT_SERGIO] = CONTEST_FILTER_ONLY_POSTGAME,
+    [CONTEST_OPPONENT_KAILEY] = CONTEST_FILTER_ONLY_POSTGAME,
+    [CONTEST_OPPONENT_PERLA] = CONTEST_FILTER_ONLY_POSTGAME,
+    [CONTEST_OPPONENT_CLARA] = CONTEST_FILTER_ONLY_POSTGAME,
+    [CONTEST_OPPONENT_JAKOB] = CONTEST_FILTER_ONLY_POSTGAME,
+    [CONTEST_OPPONENT_TREY] = CONTEST_FILTER_ONLY_POSTGAME,
+    [CONTEST_OPPONENT_LANE] = CONTEST_FILTER_ONLY_POSTGAME
 };
