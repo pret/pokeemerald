@@ -31,7 +31,7 @@ LittlerootTown_EventScript_1E7E45:: @ 81E7E45
 	return
 
 LittlerootTown_EventScript_1E7E4B:: @ 81E7E4B
-	setflag FLAG_SPECIAL_FLAG_0x4000
+	setflag FLAG_HIDE_MAP_NAME_POPUP
 	return
 
 LittlerootTown_EventScript_1E7E4F:: @ 81E7E4F
@@ -141,7 +141,7 @@ LittlerootTown_EventScript_1E7F17:: @ 81E7F17
 	closedoor VAR_0x8004, VAR_0x8005
 	waitdooranim
 	clearflag FLAG_HIDE_LITTLEROOT_TOWN_FAT_MAN
-	clearflag FLAG_SPECIAL_FLAG_0x4000
+	clearflag FLAG_HIDE_MAP_NAME_POPUP
 	return
 
 LittlerootTown_Movement_1E7F98: @ 81E7F98
@@ -194,7 +194,7 @@ LittlerootTown_EventScript_1E7FB1:: @ 81E7FB1
 	clearflag FLAG_HIDE_LITTLEROOT_TOWN_RIVAL
 	clearflag FLAG_HIDE_LITTLEROOT_TOWN_BIRCH
 	delay 20
-	clearflag FLAG_SPECIAL_FLAG_0x4000
+	clearflag FLAG_HIDE_MAP_NAME_POPUP
 	warp MAP_LITTLEROOT_TOWN_PROFESSOR_BIRCHS_LAB, 255, 6, 5
 	waitstate
 	releaseall
