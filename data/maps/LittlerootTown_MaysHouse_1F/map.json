@@ -136,7 +136,7 @@
       "y": 8,
       "elevation": 0,
       "var": "VAR_LITTLEROOT_INTRO_STATE",
-      "var_value": "4",
+      "var_value": "LITTLEROOT_INTRO_STATE_4",
       "script": "LittlerootTown_MaysHouse_1F_EventScript_1F8A4C"
     },
     {
