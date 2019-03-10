@@ -26,7 +26,7 @@ LittlerootTown_MaysHouse_1F_EventScript_1F88EA:: @ 81F88EA
 	return
 
 LittlerootTown_MaysHouse_1F_MapScript1_1F88F4: @ 81F88F4
-	compare VAR_LITTLEROOT_INTRO_STATE, LITTLEROOT_INTRO_STATE_3
+	compare VAR_LITTLEROOT_INTRO_STATE, LITTLEROOT_INTRO_STATE_ENTERED_HOUSE
 	call_if_eq LittlerootTown_MaysHouse_1F_EventScript_1F892E
 	compare VAR_LITTLEROOT_INTRO_STATE, LITTLEROOT_INTRO_STATE_5
 	call_if_eq LittlerootTown_MaysHouse_1F_EventScript_1F8916
@@ -50,7 +50,7 @@ LittlerootTown_MaysHouse_1F_EventScript_1F892E:: @ 81F892E
 	return
 
 LittlerootTown_MaysHouse_1F_MapScript2_1F893A: @ 81F893A
-	map_script_2 VAR_LITTLEROOT_INTRO_STATE, LITTLEROOT_INTRO_STATE_3, LittlerootTown_MaysHouse_1F_EventScript_1F898C
+	map_script_2 VAR_LITTLEROOT_INTRO_STATE, LITTLEROOT_INTRO_STATE_ENTERED_HOUSE, LittlerootTown_MaysHouse_1F_EventScript_1F898C
 	map_script_2 VAR_LITTLEROOT_INTRO_STATE, LITTLEROOT_INTRO_STATE_5, LittlerootTown_MaysHouse_1F_EventScript_1F8964
 	map_script_2 VAR_LITTLEROOT_INTRO_STATE, LITTLEROOT_INTRO_STATE_6, LittlerootTown_MaysHouse_1F_EventScript_1F899D
 	map_script_2 VAR_LITTLEROOT_HOUSES_STATE_2, HOUSES_STATE_1, LittlerootTown_MaysHouse_1F_EventScript_1F89AE
