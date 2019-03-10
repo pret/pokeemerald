@@ -3161,7 +3161,7 @@ Route118_EventScript_273D13:: @ 8273D13
 Route125_EventScript_273D13:: @ 8273D13
 Route127_EventScript_273D13:: @ 8273D13
 Route129_EventScript_273D13:: @ 8273D13
-	setflag FLAG_SPECIAL_FLAG_0x4000
+	setflag FLAG_HIDE_MAP_NAME_POPUP
 	return
 
 UnusualWeather_StartKyogreWeather:: @ 8273D17
@@ -3188,7 +3188,7 @@ UnusualWeather_EventScript_EndEventAndCleanup_2:: @ 8273D31
 	special DrawWholeMapView
 	setvar VAR_UNUSUAL_WEATHER_LOCATION, UNUSUAL_WEATHER_NONE
 	setvar VAR_SHOULD_END_UNUSUAL_WEATHER, 0
-	clearflag FLAG_SPECIAL_FLAG_0x4000
+	clearflag FLAG_HIDE_MAP_NAME_POPUP
 	fadescreenswapbuffers 0
 	releaseall
 	end
