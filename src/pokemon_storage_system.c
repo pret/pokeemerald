@@ -969,10 +969,10 @@ static const struct OamData sOamData_857286C =
     .objMode = 0,
     .mosaic = 0,
     .bpp = 0,
-    .shape = 0,
+    .shape = SPRITE_SHAPE(64x64),
     .x = 0,
     .matrixNum = 0,
-    .size = 3,
+    .size = SPRITE_SIZE(64x64),
     .tileNum = 0,
     .priority = 0,
     .paletteNum = 0,
@@ -986,10 +986,10 @@ static const struct OamData sOamData_8572874 =
     .objMode = 0,
     .mosaic = 0,
     .bpp = 0,
-    .shape = 1,
+    .shape = SPRITE_SHAPE(16x8),
     .x = 0,
     .matrixNum = 0,
-    .size = 0,
+    .size = SPRITE_SIZE(16x8),
     .tileNum = 0,
     .priority = 0,
     .paletteNum = 0,
@@ -1062,10 +1062,10 @@ static const struct OamData sOamData_85728EC =
     .objMode = 0,
     .mosaic = 0,
     .bpp = 0,
-    .shape = 0,
+    .shape = SPRITE_SHAPE(32x32),
     .x = 0,
     .matrixNum = 0,
-    .size = 2,
+    .size = SPRITE_SIZE(32x32),
     .tileNum = 0,
     .priority = 0,
     .paletteNum = 0,
@@ -1467,8 +1467,8 @@ static const struct SpriteSheet gUnknown_0857B080 = {gPCGfx_Arrow, 0x80, 6};
 
 static const struct OamData gOamData_83BB298 =
 {
-    .shape = ST_OAM_H_RECTANGLE,
-    .size = 2,
+    .shape = SPRITE_SHAPE(32x16),
+    .size = SPRITE_SIZE(32x16),
     .priority = 2
 };
 
@@ -1503,7 +1503,8 @@ static const struct SpriteTemplate gSpriteTemplate_857B0A8 =
 
 static const struct OamData gOamData_83BB2D0 =
 {
-    .shape = ST_OAM_V_RECTANGLE,
+    .shape = SPRITE_SHAPE(8x16),
+    .size = SPRITE_SIZE(8x16),
     .priority = 2
 };
 
@@ -2004,7 +2005,7 @@ static void sub_80C7958(u8 curBox)
     u8 spriteId;
     struct SpriteTemplate template;
     struct OamData oamData = {};
-    oamData.size = 3;
+    oamData.size = SPRITE_SIZE(64x64);
     oamData.paletteNum = 1;
     template = (struct SpriteTemplate){
         0, 0, &oamData, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
@@ -2017,8 +2018,8 @@ static void sub_80C7958(u8 curBox)
     spriteId = CreateSprite(&template, 160, 96, 0);
     gUnknown_02039D04->unk_0000 = gSprites + spriteId;
 
-    oamData.shape = ST_OAM_V_RECTANGLE;
-    oamData.size = 1;
+    oamData.shape = SPRITE_SHAPE(8x32);
+    oamData.size = SPRITE_SIZE(8x32);
     template.tileTag = gUnknown_02039D04->unk_0240 + 1;
     template.anims = sSpriteAnimTable_8571710;
     for (i = 0; i < 4; i++)
@@ -8490,12 +8491,14 @@ static void sub_80CFC14(void)
 
     static const struct OamData sOamData_857BA0C =
     {
-        .size = 2,
+        .shape = SPRITE_SHAPE(32x32),
+        .size = SPRITE_SIZE(32x32),
         .priority = 1,
     };
     static const struct OamData sOamData_857BA14 =
     {
-        .size = 1,
+        .shape = SPRITE_SHAPE(16x16),
+        .size = SPRITE_SIZE(16x16),
         .priority = 1,
     };
 
@@ -9358,10 +9361,10 @@ static const struct OamData sOamData_857BBA4 =
     .objMode = 0,
     .mosaic = 0,
     .bpp = 0,
-    .shape = 0,
+    .shape = SPRITE_SHAPE(32x32),
     .x = 0,
     .matrixNum = 0,
-    .size = 2,
+    .size = SPRITE_SIZE(32x32),
     .tileNum = 0,
     .priority = 1,
     .paletteNum = 0,

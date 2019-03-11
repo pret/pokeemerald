@@ -43,13 +43,18 @@ static EWRAM_DATA struct PicData sSpritePics[PICS_COUNT] = {};
 // .rodata
 
 static const struct PicData sDummyPicData = {};
+
 static const struct OamData gUnknown_0860B064 =
 {
-    .size = 3
+    .shape = SPRITE_SHAPE(64x64),
+    .size = SPRITE_SIZE(64x64)
 };
+
 static const struct OamData gUnknown_0860B06C =
 {
-    .affineMode = 1, .size = 3
+    .affineMode = 1,
+    .shape = SPRITE_SHAPE(64x64),
+    .size = SPRITE_SIZE(64x64)
 };
 
 // .text

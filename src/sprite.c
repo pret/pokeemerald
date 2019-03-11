@@ -91,21 +91,21 @@ typedef void (*AnimFunc)(struct Sprite *);
 typedef void (*AnimCmdFunc)(struct Sprite *);
 typedef void (*AffineAnimCmdFunc)(u8 matrixNum, struct Sprite *);
 
-#define DUMMY_OAM_DATA        \
-{                             \
-    160, /* Y (off-screen) */ \
-    0,                        \
-    0,                        \
-    0,                        \
-    0,                        \
-    0,                        \
-    304, /* X */              \
-    0,                        \
-    0,                        \
-    0,                        \
-    3, /* lowest priority */  \
-    0,                        \
-    0                         \
+#define DUMMY_OAM_DATA                      \
+{                                           \
+    .y = 160,                               \
+    .affineMode = 0,                        \
+    .objMode = 0,                           \
+    .mosaic = 0,                            \
+    .bpp = 0,                               \
+    .shape = SPRITE_SHAPE(8x8),             \
+    .x = 304,                               \
+    .matrixNum = 0,                         \
+    .size = SPRITE_SIZE(8x8),               \
+    .tileNum = 0,                           \
+    .priority = 3, /* lowest priority */    \
+    .paletteNum = 0,                        \
+    .affineParam = 0                        \
 }
 
 #define ANIM_END        0xFFFF
