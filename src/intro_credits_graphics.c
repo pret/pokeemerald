@@ -59,13 +59,23 @@ static void nullsub_66(struct Sprite *sprite);
 
 static const struct SpriteTemplate gUnknown_085F504C =
 {
-    2000, 0xFFFF, &gDummyOamData, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, sub_817B62C
+    .tileTag = 2000,
+    .paletteTag = 0xFFFF,
+    .oam = &gDummyOamData,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_817B62C
 };
 
 static const struct CompressedSpriteSheet gUnknown_085F5064[] =
 {
-    { gUnknown_085F16A8, 0x400, 2000 },
-    { NULL }
+    {
+        .data = gUnknown_085F16A8,
+        .size = 0x400,
+        .tag = 2000
+    },
+    {}
 };
 
 static const union AnimCmd gUnknown_085F5074[] =
@@ -187,8 +197,12 @@ static const struct IntroCreditsSpriteMetadata gUnknown_085F50A4[] =
 
 static const struct CompressedSpriteSheet gUnknown_085F50EC[] =
 {
-    { gIntro2TreeTiles, 0x400, 2000 },
-    { NULL }
+    {
+        .data = gIntro2TreeTiles,
+        .size = 0x400,
+        .tag = 2000
+    },
+    {}
 };
 
 static const union AnimCmd gUnknown_085F50FC[] =
@@ -330,8 +344,12 @@ static const struct IntroCreditsSpriteMetadata gUnknown_085F5120[] =
 
 static const struct CompressedSpriteSheet gUnknown_085F5180[] =
 {
-    { gIntro2NightTiles, 0x400, 2000 },
-    { NULL }
+    {
+        .data = gIntro2NightTiles,
+        .size = 0x400,
+        .tag = 2000
+    },
+    {}
 };
 
 static const union AnimCmd gUnknown_085F5190[] =
@@ -427,12 +445,24 @@ static const union AnimCmd *const gUnknown_085F51E8[] =
 
 static const struct SpriteTemplate gUnknown_085F51EC =
 {
-    1002, 1002, &gOamData_85F51CC, gUnknown_085F51E8, NULL, gDummySpriteAffineAnimTable, nullsub_65
+    .tileTag = 1002,
+    .paletteTag = 1002,
+    .oam = &gOamData_85F51CC,
+    .anims = gUnknown_085F51E8,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = nullsub_65
 };
 
 static const struct SpriteTemplate gUnknown_085F5204 =
 {
-    1003, 1003, &gOamData_85F51CC, gUnknown_085F51E8, NULL, gDummySpriteAffineAnimTable, nullsub_65
+    .tileTag = 1003,
+    .paletteTag = 1003,
+    .oam = &gOamData_85F51CC,
+    .anims = gUnknown_085F51E8,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = nullsub_65
 };
 
 static const struct OamData gUnknown_085F521C =
@@ -459,12 +489,24 @@ static const union AnimCmd *const gUnknown_085F5238[] =
 
 static const struct SpriteTemplate gUnknown_085F523C =
 {
-    1001, 1002, &gUnknown_085F521C, gUnknown_085F5238, NULL, gDummySpriteAffineAnimTable, sub_817B7C4
+    .tileTag = 1001,
+    .paletteTag = 1002,
+    .oam = &gUnknown_085F521C,
+    .anims = gUnknown_085F5238,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_817B7C4
 };
 
 static const struct SpriteTemplate gUnknown_085F5254 =
 {
-    1001, 1003, &gUnknown_085F521C, gUnknown_085F5238, NULL, gDummySpriteAffineAnimTable, sub_817B7C4
+    .tileTag = 1001,
+    .paletteTag = 1003,
+    .oam = &gUnknown_085F521C,
+    .anims = gUnknown_085F5238,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_817B7C4
 };
 
 static const struct OamData gUnknown_085F526C =
@@ -495,102 +537,162 @@ static const union AnimCmd *const gUnknown_085F5284[] =
 
 static const struct SpriteTemplate gUnknown_085F528C =
 {
-    1004, 1004, &gUnknown_085F526C, gUnknown_085F5284, NULL, gDummySpriteAffineAnimTable, nullsub_66
+    .tileTag = 1004,
+    .paletteTag = 1004,
+    .oam = &gUnknown_085F526C,
+    .anims = gUnknown_085F5284,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = nullsub_66
 };
 
 static const struct SpriteTemplate gUnknown_085F52A4 =
 {
-    1005, 1005, &gUnknown_085F526C, gUnknown_085F5284, NULL, gDummySpriteAffineAnimTable, nullsub_66
+    .tileTag = 1005,
+    .paletteTag = 1005,
+    .oam = &gUnknown_085F526C,
+    .anims = gUnknown_085F5284,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = nullsub_66
 };
 
 const struct CompressedSpriteSheet gIntro2BrendanSpriteSheet[] =
 {
-    { gIntro2BrendanNoTurnGfx, 0x2000, 1002 },
-    { NULL }
+    {
+        .data = gIntro2BrendanNoTurnGfx,
+        .size = 0x2000,
+        .tag = 1002
+    },
+    {}
 };
 
 const struct CompressedSpriteSheet gIntro2MaySpriteSheet[] =
 {
-    { gIntro2MayNoTurnGfx, 0x2000, 1003 },
-    { NULL }
+    {
+        .data = gIntro2MayNoTurnGfx,
+        .size = 0x2000,
+        .tag = 1003
+    },
+    {}
 };
 
 const struct CompressedSpriteSheet gIntro2BicycleSpriteSheet[] =
 {
-    { gIntro2BicycleTiles, 0x1000, 1001 },
-    { NULL }
+    {
+        .data = gIntro2BicycleTiles,
+        .size = 0x1000,
+        .tag = 1001
+    },
+    {}
 };
 
 static const struct CompressedSpriteSheet gUnknown_085F52EC[] =
 {
-    { gIntro2FlygonGfx, 0x1000, 1004 },
-    { NULL }
+    {
+        .data = gIntro2FlygonGfx,
+        .size = 0x1000,
+        .tag = 1004
+    },
+    {}
 };
 
 const struct CompressedSpriteSheet gIntro2FlygonSpriteSheet[] =
 {
-    { gIntro2FlygonGfx, 0x1000, 1005 },
-    { NULL }
+    {
+        .data = gIntro2FlygonGfx,
+        .size = 0x1000,
+        .tag = 1005
+    },
+    {}
 };
 
 const struct SpritePalette gIntroBikeAndFlygonPalette[] =
 {
-    { gIntro2BrendanNoTurnPal, 1002 },
-    { gIntro2BrendanNoTurnPal, 1003 },
-    { gIntro2FlygonPal,        1004 },
-    { gIntro2FlygonPal,        1005 },
-    { NULL }
+    { .data = gIntro2BrendanNoTurnPal, .tag = 1002 },
+    { .data = gIntro2BrendanNoTurnPal, .tag = 1003 },
+    { .data = gIntro2FlygonPal,        .tag = 1004 },
+    { .data = gIntro2FlygonPal,        .tag = 1005 },
+    {}
 };
 
 const struct CompressedSpriteSheet gUnknown_085F5334[] =
 {
-    { gIntro2BrendanTiles, 0x3800, 1002 },
-    { NULL }
+    {
+        .data = gIntro2BrendanTiles,
+        .size = 0x3800,
+        .tag = 1002
+    },
+    {}
 };
 
 const struct CompressedSpriteSheet gUnknown_085F5344[] =
 {
-    { gIntro2MayTiles, 0x3800, 1003 },
-    { NULL }
+    {
+        .data = gIntro2MayTiles,
+        .size = 0x3800,
+        .tag = 1003
+    },
+    {}
 };
 
 const struct CompressedSpriteSheet gUnknown_085F5354[] =
 {
-    { gIntro2BicycleTiles, 0x1000, 1001 },
-    { NULL }
+    {
+        .data = gIntro2BicycleTiles,
+        .size = 0x1000,
+        .tag = 1001
+    },
+    {}
 };
 
 static const struct CompressedSpriteSheet gUnknown_085F5364[] =
 {
-    { gIntro2LatiosTiles, 0x1000, 1004 },
-    { NULL }
+    {
+        .data = gIntro2LatiosTiles,
+        .size = 0x1000,
+        .tag = 1004
+    },
+    {}
 };
 
 static const struct CompressedSpriteSheet gUnknown_085F5374[] =
 {
-    { gIntro2LatiasTiles, 0x1000, 1005 },
-    { NULL }
+    {
+        .data = gIntro2LatiasTiles,
+        .size = 0x1000,
+        .tag = 1005
+    },
+    {}
 };
 
 const struct SpritePalette gUnknown_085F5384[] =
 {
-    { gIntro2BrendanPalette, 1002 },
-    { gIntro2MayPalette,     1003 },
-    { gIntro2LatiosPalette,  1004 },
-    { gIntro2LatiasPalette,  1005 },
-    { NULL }
+    { .data = gIntro2BrendanPalette, .tag = 1002 },
+    { .data = gIntro2MayPalette,     .tag = 1003 },
+    { .data = gIntro2LatiosPalette,  .tag = 1004 },
+    { .data = gIntro2LatiasPalette,  .tag = 1005 },
+    {}
 };
 
 const struct CompressedSpriteSheet gUnknown_085F53AC[] =
 {
-    { gIntro2BrendanTiles, 0x2000, 1002},
-    { NULL }
+    {
+        .data = gIntro2BrendanTiles,
+        .size = 0x2000,
+        .tag = 1002
+    },
+    {}
 };
 
 const struct CompressedSpriteSheet gUnknown_085F53BC[] =
 {
-    { gIntro2MayTiles, 0x2000, 1003},
-    { NULL }
+    {
+        .data = gIntro2MayTiles,
+        .size = 0x2000,
+        .tag = 1003
+    },
+    {}
 };
 
 EWRAM_DATA u16 gUnknown_0203BD24 = 0;
