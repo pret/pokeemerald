@@ -36,6 +36,13 @@
 
 // Static type declarations
 
+struct FlagControlledFlyDest
+{
+    const u8 *const *name;
+    u16 mapSecId;
+    u16 flag;
+};
+
 // Static RAM declarations
 
 static EWRAM_DATA struct RegionMap *gRegionMap = NULL;
@@ -319,17 +326,13 @@ static const u8 *const gUnknown_085A1ED4[] =
     gText_PokemonCenter
 };
 
-static const struct
+static const struct FlagControlledFlyDest gUnknown_085A1EDC[] =
 {
-    const u8 *const *name;
-    u16 mapSecId;
-    u16 flag;
-}
-gUnknown_085A1EDC[] =
-{
-    gUnknown_085A1ED4,
-    MAPSEC_EVER_GRANDE_CITY,
-    FLAG_LANDMARK_POKEMON_LEAGUE
+    {
+        .name = gUnknown_085A1ED4,
+        .mapSecId = MAPSEC_EVER_GRANDE_CITY,
+        .flag = FLAG_LANDMARK_POKEMON_LEAGUE
+    }
 };
 
 static const struct BgTemplate gUnknown_085A1EE4[] =
@@ -1774,7 +1777,7 @@ static void sub_8124904(void)
     if (sFlyMap->regionMap.iconDrawType > MAPSECTYPE_NONE && sFlyMap->regionMap.iconDrawType <= MAPSECTYPE_BATTLE_FRONTIER)
     {
         flag = FALSE;
-        for (i = 0; i < 1; i++)
+        for (i = 0; i < ARRAY_COUNT(gUnknown_085A1EDC); i++)
         {
             if (sFlyMap->regionMap.mapSecId == gUnknown_085A1EDC[i].mapSecId)
             {
