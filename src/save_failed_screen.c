@@ -47,19 +47,19 @@ EWRAM_DATA u8 gSaveFailedUnused2[4] = {0};
 
 static const struct OamData sClockOamData =
 {
-    160, // Y
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    1,
-    0,
-    0,
-    0,
-    0
+    .y = 160,
+    .affineMode = 0,
+    .objMode = 0,
+    .mosaic = 0,
+    .bpp = 0,
+    .shape = SPRITE_SHAPE(16x16),
+    .x = 0,
+    .matrixNum = 0,
+    .size = SPRITE_SIZE(16x16),
+    .tileNum = 0,
+    .priority = 0,
+    .paletteNum = 0,
+    .affineParam = 0
 };
 
 static const struct BgTemplate gUnknown_085EFD88[3] =

@@ -153,19 +153,22 @@ const struct SpritePalette gUnknown_085CDB74[] = {
 
 const struct OamData gOamData_85CDB84 = {
     .affineMode = ST_OAM_AFFINE_DOUBLE,
-    .size = 3,
+    .shape = SPRITE_SHAPE(64x64),
+    .size = SPRITE_SIZE(64x64),
     .priority = 2
 };
 
 const struct OamData gOamData_85CDB8C = {
     .affineMode = ST_OAM_AFFINE_DOUBLE,
-    .shape = ST_OAM_H_RECTANGLE,
+    .shape = SPRITE_SHAPE(16x8),
+    .size = SPRITE_SIZE(16x8),
     .priority = 2
 };
 
 const struct OamData gOamData_85CDB94 = {
     .affineMode = ST_OAM_AFFINE_DOUBLE,
-    .size = 1,
+    .shape = SPRITE_SHAPE(16x16),
+    .size = SPRITE_SIZE(16x16),
     .priority = 2
 };
 
