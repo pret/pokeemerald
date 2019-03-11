@@ -102,15 +102,87 @@ static const union AnimCmd *const gUnknown_085F5094[] =
 
 static const struct IntroCreditsSpriteMetadata gUnknown_085F50A4[] =
 {
-    {  0, ST_OAM_SQUARE,      2,   72, 32, 100, 0xc00 },
-    {  0, ST_OAM_SQUARE,      2,  158, 32, 100, 0xc00 },
-    {  1, ST_OAM_SQUARE,      1,  192, 40, 101, 0x800 },
-    {  1, ST_OAM_SQUARE,      1,   56, 40, 101, 0x800 },
-    {  2, ST_OAM_H_RECTANGLE, 0,  100, 44, 102, 0x400 },
-    {  2, ST_OAM_H_RECTANGLE, 0,  152, 44, 102, 0x400 },
-    {  3, ST_OAM_H_RECTANGLE, 0,    8, 46, 103, 0x100 },
-    {  3, ST_OAM_H_RECTANGLE, 0,   56, 46, 103, 0x100 },
-    {  3, ST_OAM_H_RECTANGLE, 0,  240, 46, 103, 0x100 },
+    {
+        .animNum = 0,
+        .shape = SPRITE_SHAPE(32x32),
+        .size = SPRITE_SIZE(32x32),
+        .x = 72,
+        .y = 32,
+        .subpriority = 100,
+        .xOff = 0xc00
+    },
+    {
+        .animNum = 0,
+        .shape = SPRITE_SHAPE(32x32),
+        .size = SPRITE_SIZE(32x32),
+        .x = 158,
+        .y = 32,
+        .subpriority = 100,
+        .xOff = 0xc00
+    },
+    {
+        .animNum = 1,
+        .shape = SPRITE_SHAPE(16x16),
+        .size = SPRITE_SIZE(16x16),
+        .x = 192,
+        .y = 40,
+        .subpriority = 101,
+        .xOff = 0x800
+    },
+    {
+        .animNum = 1,
+        .shape = SPRITE_SHAPE(16x16),
+        .size = SPRITE_SIZE(16x16),
+        .x = 56,
+        .y = 40,
+        .subpriority = 101,
+        .xOff = 0x800
+    },
+    {
+        .animNum = 2,
+        .shape = SPRITE_SHAPE(16x8),
+        .size = SPRITE_SIZE(16x8),
+        .x = 100,
+        .y = 44,
+        .subpriority = 102,
+        .xOff = 0x400
+    },
+    {
+        .animNum = 2,
+        .shape = SPRITE_SHAPE(16x8),
+        .size = SPRITE_SIZE(16x8),
+        .x = 152,
+        .y = 44,
+        .subpriority = 102,
+        .xOff = 0x400
+    },
+    {
+        .animNum = 3,
+        .shape = SPRITE_SHAPE(16x8),
+        .size = SPRITE_SIZE(16x8),
+        .x = 8,
+        .y = 46,
+        .subpriority = 103,
+        .xOff = 0x100
+    },
+    {
+        .animNum = 3,
+        .shape = SPRITE_SHAPE(16x8),
+        .size = SPRITE_SIZE(16x8),
+        .x = 56,
+        .y = 46,
+        .subpriority = 103,
+        .xOff = 0x100
+    },
+    {
+        .animNum = 3,
+        .shape = SPRITE_SHAPE(16x8),
+        .size = SPRITE_SIZE(16x8),
+        .x = 240,
+        .y = 46,
+        .subpriority = 103,
+        .xOff = 0x100
+    },
 };
 
 static const struct CompressedSpriteSheet gUnknown_085F50EC[] =
@@ -146,18 +218,114 @@ static const union AnimCmd *const gUnknown_085F5114[] =
 
 static const struct IntroCreditsSpriteMetadata gUnknown_085F5120[] =
 {
-    {  0, ST_OAM_SQUARE,      2,   16, 88, 100, 0x2000 },
-    {  0, ST_OAM_SQUARE,      2,   80, 88, 100, 0x2000 },
-    {  0, ST_OAM_SQUARE,      2,  144, 88, 100, 0x2000 },
-    {  0, ST_OAM_SQUARE,      2,  208, 88, 100, 0x2000 },
-    {  1, ST_OAM_V_RECTANGLE, 2,   40, 88, 101, 0x1000 },
-    {  1, ST_OAM_V_RECTANGLE, 2,  104, 88, 101, 0x1000 },
-    {  1, ST_OAM_V_RECTANGLE, 2,  168, 88, 101, 0x1000 },
-    {  1, ST_OAM_V_RECTANGLE, 2,  232, 88, 101, 0x1000 },
-    {  2, ST_OAM_V_RECTANGLE, 2,   56, 88, 102, 0x800  },
-    {  2, ST_OAM_V_RECTANGLE, 2,  120, 88, 102, 0x800  },
-    {  2, ST_OAM_V_RECTANGLE, 2,  184, 88, 102, 0x800  },
-    {  2, ST_OAM_V_RECTANGLE, 2,  248, 88, 102, 0x800  },
+    {
+        .animNum = 0,
+        .shape = SPRITE_SHAPE(32x32),
+        .size = SPRITE_SIZE(32x32),
+        .x = 16,
+        .y = 88,
+        .subpriority = 100,
+        .xOff = 0x2000,
+    },
+    {
+        .animNum = 0,
+        .shape = SPRITE_SHAPE(32x32),
+        .size = SPRITE_SIZE(32x32),
+        .x = 80,
+        .y = 88,
+        .subpriority = 100,
+        .xOff = 0x2000,
+    },
+    {
+        .animNum = 0,
+        .shape = SPRITE_SHAPE(32x32),
+        .size = SPRITE_SIZE(32x32),
+        .x = 144,
+        .y = 88,
+        .subpriority = 100,
+        .xOff = 0x2000,
+    },
+    {
+        .animNum = 0,
+        .shape = SPRITE_SHAPE(32x32),
+        .size = SPRITE_SIZE(32x32),
+        .x = 208,
+        .y = 88,
+        .subpriority = 100,
+        .xOff = 0x2000,
+    },
+    {
+        .animNum = 1,
+        .shape = SPRITE_SHAPE(16x32),
+        .size = SPRITE_SIZE(16x32),
+        .x = 40,
+        .y = 88,
+        .subpriority = 101,
+        .xOff = 0x1000,
+    },
+    {
+        .animNum = 1,
+        .shape = SPRITE_SHAPE(16x32),
+        .size = SPRITE_SIZE(16x32),
+        .x = 104,
+        .y = 88,
+        .subpriority = 101,
+        .xOff = 0x1000,
+    },
+    {
+        .animNum = 1,
+        .shape = SPRITE_SHAPE(16x32),
+        .size = SPRITE_SIZE(16x32),
+        .x = 168,
+        .y = 88,
+        .subpriority = 101,
+        .xOff = 0x1000,
+    },
+    {
+        .animNum = 1,
+        .shape = SPRITE_SHAPE(16x32),
+        .size = SPRITE_SIZE(16x32),
+        .x = 232,
+        .y = 88,
+        .subpriority = 101,
+        .xOff = 0x1000,
+    },
+    {
+        .animNum = 2,
+        .shape = SPRITE_SHAPE(16x32),
+        .size = SPRITE_SIZE(16x32),
+        .x = 56,
+        .y = 88,
+        .subpriority = 102,
+        .xOff = 0x800,
+    },
+    {
+        .animNum = 2,
+        .shape = SPRITE_SHAPE(16x32),
+        .size = SPRITE_SIZE(16x32),
+        .x = 120,
+        .y = 88,
+        .subpriority = 102,
+        .xOff = 0x800,
+    },
+    {
+        .animNum = 2,
+        .shape = SPRITE_SHAPE(16x32),
+        .size = SPRITE_SIZE(16x32),
+        .x = 184,
+        .y = 88,
+        .subpriority = 102,
+        .xOff = 0x800,
+    },
+    {
+        .animNum = 2,
+        .shape = SPRITE_SHAPE(16x32),
+        .size = SPRITE_SIZE(16x32),
+        .x = 248,
+        .y = 88,
+        .subpriority = 102,
+        .xOff = 0x800,
+    }
 };
 
 static const struct CompressedSpriteSheet gUnknown_085F5180[] =
@@ -179,12 +347,60 @@ static const union AnimCmd *const gUnknown_085F5198[] =
 
 static const struct IntroCreditsSpriteMetadata gUnknown_085F519C[] =
 {
-    { 0, ST_OAM_SQUARE, 2,   24, 88, 100, 0x1000 },
-    { 0, ST_OAM_SQUARE, 2,   64, 88, 100, 0x1000 },
-    { 0, ST_OAM_SQUARE, 2,  104, 88, 100, 0x1000 },
-    { 0, ST_OAM_SQUARE, 2,  144, 88, 100, 0x1000 },
-    { 0, ST_OAM_SQUARE, 2,  184, 88, 100, 0x1000 },
-    { 0, ST_OAM_SQUARE, 2,  224, 88, 100, 0x1000 },
+    {
+        .animNum = 0,
+        .shape = SPRITE_SHAPE(32x32),
+        .size = SPRITE_SIZE(32x32),
+        .x = 24,
+        .y = 88,
+        .subpriority = 100,
+        .xOff = 0x1000,
+    },
+    {
+        .animNum = 0,
+        .shape = SPRITE_SHAPE(32x32),
+        .size = SPRITE_SIZE(32x32),
+        .x = 64,
+        .y = 88,
+        .subpriority = 100,
+        .xOff = 0x1000,
+    },
+    {
+        .animNum = 0,
+        .shape = SPRITE_SHAPE(32x32),
+        .size = SPRITE_SIZE(32x32),
+        .x = 104,
+        .y = 88,
+        .subpriority = 100,
+        .xOff = 0x1000,
+    },
+    {
+        .animNum = 0,
+        .shape = SPRITE_SHAPE(32x32),
+        .size = SPRITE_SIZE(32x32),
+        .x = 144,
+        .y = 88,
+        .subpriority = 100,
+        .xOff = 0x1000,
+    },
+    {
+        .animNum = 0,
+        .shape = SPRITE_SHAPE(32x32),
+        .size = SPRITE_SIZE(32x32),
+        .x = 184,
+        .y = 88,
+        .subpriority = 100,
+        .xOff = 0x1000,
+    },
+    {
+        .animNum = 0,
+        .shape = SPRITE_SHAPE(32x32),
+        .size = SPRITE_SIZE(32x32),
+        .x = 224,
+        .y = 88,
+        .subpriority = 100,
+        .xOff = 0x1000,
+    }
 };
 
 static const struct OamData gOamData_85F51CC =
