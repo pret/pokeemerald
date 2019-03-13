@@ -2427,7 +2427,7 @@ static void Task_IntroWaterDrops_1(u8 taskId)
                                    | BLDCNT_TGT2_BG3
                                    | BLDCNT_TGT2_OBJ
                                    | BLDCNT_TGT2_BD);
-        SetGpuReg(REG_OFFSET_BLDALPHA, gIntroWaterDropData[31]);
+        SetGpuReg(REG_OFFSET_BLDALPHA, gIntroWaterDropAlphaBlend[31]);
         SetGpuReg(REG_OFFSET_BLDY, 0);
         gTasks[taskId].data[1] = 0x40;
         gTasks[taskId].data[0]++;
@@ -2439,11 +2439,11 @@ static void Task_IntroWaterDrops_1(u8 taskId)
 
             gTasks[taskId].data[1]--;
             tmp = gTasks[taskId].data[1] / 2;
-            SetGpuReg(REG_OFFSET_BLDALPHA, gIntroWaterDropData[tmp]);
+            SetGpuReg(REG_OFFSET_BLDALPHA, gIntroWaterDropAlphaBlend[tmp]);
         }
         else
         {
-            SetGpuReg(REG_OFFSET_BLDALPHA, gIntroWaterDropData[0]);
+            SetGpuReg(REG_OFFSET_BLDALPHA, gIntroWaterDropAlphaBlend[0]);
             gTasks[taskId].data[1] = 0x10;
             gTasks[taskId].data[0]++;
         }
@@ -2470,7 +2470,7 @@ static void Task_IntroWaterDrops_2(u8 taskId)
                                    | BLDCNT_TGT2_BG3
                                    | BLDCNT_TGT2_OBJ
                                    | BLDCNT_TGT2_BD);
-        SetGpuReg(REG_OFFSET_BLDALPHA, gIntroWaterDropData[0]);
+        SetGpuReg(REG_OFFSET_BLDALPHA, gIntroWaterDropAlphaBlend[0]);
         SetGpuReg(REG_OFFSET_BLDY, 0);
         gTasks[taskId].data[1] = 0;
         gTasks[taskId].data[0]++;
@@ -2482,11 +2482,11 @@ static void Task_IntroWaterDrops_2(u8 taskId)
 
             gTasks[taskId].data[1]++;
             tmp = gTasks[taskId].data[1] / 2;
-            SetGpuReg(REG_OFFSET_BLDALPHA, gIntroWaterDropData[tmp]);
+            SetGpuReg(REG_OFFSET_BLDALPHA, gIntroWaterDropAlphaBlend[tmp]);
         }
         else
         {
-            SetGpuReg(REG_OFFSET_BLDALPHA, gIntroWaterDropData[31]);
+            SetGpuReg(REG_OFFSET_BLDALPHA, gIntroWaterDropAlphaBlend[31]);
             gTasks[taskId].data[1] = 0x10;
             gTasks[taskId].data[0]++;
         }
