@@ -64,7 +64,22 @@ static const u32 sTitleScreenRayquazaTilemap[] = INCBIN_U32("graphics/title_scre
 static const u32 sTitleScreenLogoShineGfx[] = INCBIN_U32("graphics/title_screen/logo_shine.4bpp.lz");
 static const u32 sTitleScreenCloudsGfx[] = INCBIN_U32("graphics/title_screen/clouds.4bpp.lz");
 
-const u16 gIntroWaterDropData[] =
+// This is BLDALPHA data. It's equivalent to:
+//
+// BLDALPHA_BLEND(0, 16)
+// BLDALPHA_BLEND(1, 16)
+// ...
+// BLDALPHA_BLEND(14, 16)
+// BLDALPHA_BLEND(15, 16)
+// BLDALPHA_BLEND(16, 15)
+// BLDALPHA_BLEND(16, 14)
+// ...
+// BLDALPHA_BLEND(16, 1)
+// BLDALPHA_BLEND(16, 0)
+// BLDALPHA_BLEND(16, 0)
+// BLDALPHA_BLEND(16, 0)
+// ... (repeated until array has 32 entries)
+const u16 gIntroWaterDropAlphaBlend[] =
 {
     0x0010, 0x0110, 0x0210, 0x0310, 0x0410, 0x0510, 0x0610, 0x0710,
     0x0810, 0x0910, 0x0a10, 0x0b10, 0x0c10, 0x0d10, 0x0e10, 0x0f10,
@@ -324,7 +339,7 @@ static void SpriteCB_VersionBannerLeft(struct Sprite *sprite)
             sprite->pos1.y++;
         if (sprite->data[0] != 0)
             sprite->data[0]--;
-        SetGpuReg(REG_OFFSET_BLDALPHA, gIntroWaterDropData[sprite->data[0]]);
+        SetGpuReg(REG_OFFSET_BLDALPHA, gIntroWaterDropAlphaBlend[sprite->data[0]]);
     }
 }
 
