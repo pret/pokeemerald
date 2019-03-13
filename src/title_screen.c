@@ -64,31 +64,41 @@ static const u32 sTitleScreenRayquazaTilemap[] = INCBIN_U32("graphics/title_scre
 static const u32 sTitleScreenLogoShineGfx[] = INCBIN_U32("graphics/title_screen/logo_shine.4bpp.lz");
 static const u32 sTitleScreenCloudsGfx[] = INCBIN_U32("graphics/title_screen/clouds.4bpp.lz");
 
-// This is BLDALPHA data. It's equivalent to:
-//
-// BLDALPHA_BLEND(0, 16)
-// BLDALPHA_BLEND(1, 16)
-// ...
-// BLDALPHA_BLEND(14, 16)
-// BLDALPHA_BLEND(15, 16)
-// BLDALPHA_BLEND(16, 15)
-// BLDALPHA_BLEND(16, 14)
-// ...
-// BLDALPHA_BLEND(16, 1)
-// BLDALPHA_BLEND(16, 0)
-// BLDALPHA_BLEND(16, 0)
-// BLDALPHA_BLEND(16, 0)
-// ... (repeated until array has 32 entries)
 const u16 gIntroWaterDropAlphaBlend[] =
 {
-    0x0010, 0x0110, 0x0210, 0x0310, 0x0410, 0x0510, 0x0610, 0x0710,
-    0x0810, 0x0910, 0x0a10, 0x0b10, 0x0c10, 0x0d10, 0x0e10, 0x0f10,
-    0x100f, 0x100e, 0x100d, 0x100c, 0x100b, 0x100a, 0x1009, 0x1008,
-    0x1007, 0x1006, 0x1005, 0x1004, 0x1003, 0x1002, 0x1001, 0x1000,
-    0x1000, 0x1000, 0x1000, 0x1000, 0x1000, 0x1000, 0x1000, 0x1000,
-    0x1000, 0x1000, 0x1000, 0x1000, 0x1000, 0x1000, 0x1000, 0x1000,
-    0x1000, 0x1000, 0x1000, 0x1000, 0x1000, 0x1000, 0x1000, 0x1000,
-    0x1000, 0x1000, 0x1000, 0x1000, 0x1000, 0x1000, 0x1000, 0x1000,
+    BLDALPHA_BLEND(16, 0),
+    BLDALPHA_BLEND(16, 1),
+    BLDALPHA_BLEND(16, 2),
+    BLDALPHA_BLEND(16, 3),
+    BLDALPHA_BLEND(16, 4),
+    BLDALPHA_BLEND(16, 5),
+    BLDALPHA_BLEND(16, 6),
+    BLDALPHA_BLEND(16, 7),
+    BLDALPHA_BLEND(16, 8),
+    BLDALPHA_BLEND(16, 9),
+    BLDALPHA_BLEND(16, 10),
+    BLDALPHA_BLEND(16, 11),
+    BLDALPHA_BLEND(16, 12),
+    BLDALPHA_BLEND(16, 13),
+    BLDALPHA_BLEND(16, 14),
+    BLDALPHA_BLEND(16, 15),
+    BLDALPHA_BLEND(15, 16),
+    BLDALPHA_BLEND(14, 16),
+    BLDALPHA_BLEND(13, 16),
+    BLDALPHA_BLEND(12, 16),
+    BLDALPHA_BLEND(11, 16),
+    BLDALPHA_BLEND(10, 16),
+    BLDALPHA_BLEND(9, 16),
+    BLDALPHA_BLEND(8, 16),
+    BLDALPHA_BLEND(7, 16),
+    BLDALPHA_BLEND(6, 16),
+    BLDALPHA_BLEND(5, 16),
+    BLDALPHA_BLEND(4, 16),
+    BLDALPHA_BLEND(3, 16),
+    BLDALPHA_BLEND(2, 16),
+    BLDALPHA_BLEND(1, 16),
+    BLDALPHA_BLEND(0, 16),
+    [32 ... 63] = BLDALPHA_BLEND(0, 16)
 };
 
 static const struct OamData sVersionBannerLeftOamData =
