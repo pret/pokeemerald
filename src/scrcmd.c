@@ -2002,6 +2002,8 @@ bool8 ScrCmd_setrespawn(struct ScriptContext *ctx)
     return FALSE;
 }
 
+// Stores the player's gender in the Result var, either MALE or
+// FEMALE.
 bool8 ScrCmd_checkplayergender(struct ScriptContext *ctx)
 {
     gSpecialVar_Result = gSaveBlock2Ptr->playerGender;

@@ -54,7 +54,7 @@ LittlerootTown_MaysHouse_1F_MapScript2_1F893A: @ 81F893A
 	map_script_2 VAR_LITTLEROOT_INTRO_STATE, LITTLEROOT_INTRO_STATE_5, LittlerootTown_MaysHouse_1F_EventScript_1F8964
 	map_script_2 VAR_LITTLEROOT_INTRO_STATE, LITTLEROOT_INTRO_STATE_6, LittlerootTown_MaysHouse_1F_EventScript_1F899D
 	map_script_2 VAR_LITTLEROOT_HOUSES_STATE_2, HOUSES_STATE_1, LittlerootTown_MaysHouse_1F_EventScript_1F89AE
-	map_script_2 VAR_LITTLEROOT_HOUSES_STATE, HOUSES_STATE_3, LittlerootTown_MaysHouse_1F_EventScript_292AF2
+	map_script_2 VAR_LITTLEROOT_HOUSES_STATE, HOUSES_STATE_3, LittlerootTown_CommonHouse_EventScript_292AF2
 	.2byte 0
 
 LittlerootTown_MaysHouse_1F_EventScript_1F8964:: @ 81F8964
@@ -77,14 +77,14 @@ LittlerootTown_MaysHouse_1F_EventScript_1F898C:: @ 81F898C
 	lockall
 	setvar VAR_0x8004, 1
 	setvar VAR_0x8005, 1
-	goto LittlerootTown_MaysHouse_1F_EventScript_292704
+	goto LittlerootTown_CommonHouse_EventScript_FirstEnterHouse
 	end
 
 LittlerootTown_MaysHouse_1F_EventScript_1F899D:: @ 81F899D
 	lockall
 	setvar VAR_0x8004, 1
 	setvar VAR_0x8005, 1
-	goto LittlerootTown_MaysHouse_1F_EventScript_2928DC
+	goto LittlerootTown_CommonHouse_EventScript_2928DC
 	end
 
 LittlerootTown_MaysHouse_1F_EventScript_1F89AE:: @ 81F89AE
@@ -156,7 +156,7 @@ LittlerootTown_MaysHouse_1F_EventScript_1F8A4C:: @ 81F8A4C
 	setvar VAR_0x8005, 1
 	applymovement VAR_0x8004, Common_Movement_WalkInPlaceRight
 	waitmovement 0
-	goto LittlerootTown_MaysHouse_1F_EventScript_292765
+	goto LittlerootTown_CommonHouse_EventScript_292765
 	end
 
 LittlerootTown_MaysHouse_1F_EventScript_1F8A67:: @ 81F8A67

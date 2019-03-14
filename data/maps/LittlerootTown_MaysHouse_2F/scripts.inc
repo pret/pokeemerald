@@ -8,8 +8,8 @@ LittlerootTown_MaysHouse_2F_MapScript1_1F92A1: @ 81F92A1
 	call_if_lt LittlerootTown_MaysHouse_2F_EventScript_1F930A
 	compare VAR_LITTLEROOT_RIVAL_STATE, 3
 	call_if_ge LittlerootTown_MaysHouse_2F_EventScript_1F92CD
-	compare VAR_LITTLEROOT_INTRO_STATE, LITTLEROOT_INTRO_STATE_4
-	call_if_eq LittlerootTown_MaysHouse_2F_EventScript_2926FE
+	compare VAR_LITTLEROOT_INTRO_STATE, LITTLEROOT_INTRO_STATE_GO_SEE_ROOM
+	call_if_eq LittlerootTown_CommonHouse_EventScript_2926FE
 	call LittlerootTown_MaysHouse_2F_EventScript_275CE1
 	setvar VAR_SECRET_BASE_INITIALIZED, 0
 	end

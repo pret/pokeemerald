@@ -1,60 +1,60 @@
 LittlerootTown_BrendansHouse_1F_MapScripts:: @ 81F7755
-	map_script MAP_SCRIPT_ON_LOAD, LittlerootTown_BrendansHouse_1F_MapScript1_1F7765
-	map_script MAP_SCRIPT_ON_TRANSITION, LittlerootTown_BrendansHouse_1F_MapScript1_1F77A4
-	map_script MAP_SCRIPT_ON_FRAME_TABLE, LittlerootTown_BrendansHouse_1F_MapScript2_1F77EA
+	map_script MAP_SCRIPT_ON_LOAD, LittlerootTown_BrendansHouse_1F_MapScript_OnLoad
+	map_script MAP_SCRIPT_ON_TRANSITION, LittlerootTown_BrendansHouse_1F_MapScript_OnTransition
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, LittlerootTown_BrendansHouse_1F_MapScript_OnFrameTable
 	.byte 0
 
-LittlerootTown_BrendansHouse_1F_MapScript1_1F7765: @ 81F7765
+LittlerootTown_BrendansHouse_1F_MapScript_OnLoad: @ 81F7765
 	compare VAR_LITTLEROOT_INTRO_STATE, LITTLEROOT_INTRO_STATE_6
-	call_if_lt LittlerootTown_BrendansHouse_1F_EventScript_1F777A
-	call_if_set FLAG_RECEIVED_RUNNING_SHOES, LittlerootTown_BrendansHouse_1F_EventScript_1F778D
+	call_if_lt LittlerootTown_BrendansHouse_1F_EventScript_PlaceMovingBoxes
+	call_if_set FLAG_RECEIVED_RUNNING_SHOES, LittlerootTown_BrendansHouse_1F_EventScript_CheckRunningInstructions
 	end
 
-LittlerootTown_BrendansHouse_1F_EventScript_1F777A:: @ 81F777A
-	setmetatile 5, 4, 624, 1
-	setmetatile 5, 2, 616, 1
+LittlerootTown_BrendansHouse_1F_EventScript_PlaceMovingBoxes:: @ 81F777A
+	setmetatile 5, 4, 0x270, 1 @ Open moving box
+	setmetatile 5, 2, 0x268, 1 @ Closed moving box
 	return
 
-LittlerootTown_BrendansHouse_1F_EventScript_1F778D:: @ 81F778D
+LittlerootTown_BrendansHouse_1F_EventScript_CheckRunningInstructions:: @ 81F778D
 	checkplayergender
-	compare VAR_RESULT, 0
-	goto_if_eq LittlerootTown_BrendansHouse_1F_EventScript_1F779A
+	compare VAR_RESULT, MALE
+	goto_if_eq LittlerootTown_BrendansHouse_1F_EventScript_PlaceRunningInstructions
 	return
 
-LittlerootTown_BrendansHouse_1F_EventScript_1F779A:: @ 81F779A
-	setmetatile 3, 7, 659, 1
+LittlerootTown_BrendansHouse_1F_EventScript_PlaceRunningInstructions:: @ 81F779A
+	setmetatile 3, 7, 0x293, 1 @ Open book
 	return
 
-LittlerootTown_BrendansHouse_1F_MapScript1_1F77A4: @ 81F77A4
+LittlerootTown_BrendansHouse_1F_MapScript_OnTransition: @ 81F77A4
 	compare VAR_LITTLEROOT_INTRO_STATE, LITTLEROOT_INTRO_STATE_ENTERED_HOUSE
-	call_if_eq LittlerootTown_BrendansHouse_1F_EventScript_1F77DE
+	call_if_eq LittlerootTown_BrendansHouse_1F_EventScript_PlaceMomInDoorway
 	compare VAR_LITTLEROOT_INTRO_STATE, LITTLEROOT_INTRO_STATE_5
-	call_if_eq LittlerootTown_BrendansHouse_1F_EventScript_1F77C6
+	call_if_eq LittlerootTown_BrendansHouse_1F_EventScript_PlaceMomFacingStairs
 	compare VAR_LITTLEROOT_INTRO_STATE, LITTLEROOT_INTRO_STATE_6
-	call_if_eq LittlerootTown_BrendansHouse_1F_EventScript_1F77D2
+	call_if_eq LittlerootTown_BrendansHouse_1F_EventScript_PlaceMomAtTV
 	end
 
-LittlerootTown_BrendansHouse_1F_EventScript_1F77C6:: @ 81F77C6
+LittlerootTown_BrendansHouse_1F_EventScript_PlaceMomFacingStairs:: @ 81F77C6
 	setobjectxyperm 1, 8, 4
 	setobjectmovementtype 1, MOVEMENT_TYPE_FACE_UP
 	return
 
-LittlerootTown_BrendansHouse_1F_EventScript_1F77D2:: @ 81F77D2
+LittlerootTown_BrendansHouse_1F_EventScript_PlaceMomAtTV:: @ 81F77D2
 	setobjectxyperm 1, 4, 5
 	setobjectmovementtype 1, MOVEMENT_TYPE_FACE_UP
 	return
 
-LittlerootTown_BrendansHouse_1F_EventScript_1F77DE:: @ 81F77DE
+LittlerootTown_BrendansHouse_1F_EventScript_PlaceMomInDoorway:: @ 81F77DE
 	setobjectxyperm 1, 9, 8
 	setobjectmovementtype 1, MOVEMENT_TYPE_FACE_UP
 	return
 
-LittlerootTown_BrendansHouse_1F_MapScript2_1F77EA: @ 81F77EA
-	map_script_2 VAR_LITTLEROOT_INTRO_STATE, LITTLEROOT_INTRO_STATE_ENTERED_HOUSE, LittlerootTown_BrendansHouse_1F_EventScript_1F783C
+LittlerootTown_BrendansHouse_1F_MapScript_OnFrameTable: @ 81F77EA
+	map_script_2 VAR_LITTLEROOT_INTRO_STATE, LITTLEROOT_INTRO_STATE_ENTERED_HOUSE, LittlerootTown_BrendansHouse_1F_EventScript_SetupFirstEnterHouse
 	map_script_2 VAR_LITTLEROOT_INTRO_STATE, LITTLEROOT_INTRO_STATE_5, LittlerootTown_BrendansHouse_1F_EventScript_1F7814
 	map_script_2 VAR_LITTLEROOT_INTRO_STATE, LITTLEROOT_INTRO_STATE_6, LittlerootTown_BrendansHouse_1F_EventScript_1F784D
 	map_script_2 VAR_LITTLEROOT_HOUSES_STATE, HOUSES_STATE_1, LittlerootTown_BrendansHouse_1F_EventScript_1F785E
-	map_script_2 VAR_LITTLEROOT_HOUSES_STATE, HOUSES_STATE_3, LittlerootTown_BrendansHouse_1F_EventScript_292AF2
+	map_script_2 VAR_LITTLEROOT_HOUSES_STATE, HOUSES_STATE_3, LittlerootTown_CommonHouse_EventScript_292AF2
 	.2byte 0
 
 LittlerootTown_BrendansHouse_1F_EventScript_1F7814:: @ 81F7814
@@ -73,18 +73,18 @@ LittlerootTown_BrendansHouse_1F_Movement_1F783A: @ 81F783A
 	walk_up
 	step_end
 
-LittlerootTown_BrendansHouse_1F_EventScript_1F783C:: @ 81F783C
+LittlerootTown_BrendansHouse_1F_EventScript_SetupFirstEnterHouse:: @ 81F783C
 	lockall
 	setvar VAR_0x8004, 1
 	setvar VAR_0x8005, 0
-	goto LittlerootTown_BrendansHouse_1F_EventScript_292704
+	goto LittlerootTown_CommonHouse_EventScript_FirstEnterHouse
 	end
 
 LittlerootTown_BrendansHouse_1F_EventScript_1F784D:: @ 81F784D
 	lockall
 	setvar VAR_0x8004, 0
 	setvar VAR_0x8005, 1
-	goto LittlerootTown_BrendansHouse_1F_EventScript_29286D
+	goto LittlerootTown_CommonHouse_EventScript_29286D
 	end
 
 LittlerootTown_BrendansHouse_1F_EventScript_1F785E:: @ 81F785E
@@ -119,7 +119,7 @@ LittlerootTown_BrendansHouse_1F_EventScript_1F78A3:: @ 81F78A3
 	setvar VAR_0x8005, 0
 	applymovement VAR_0x8004, Common_Movement_WalkInPlaceLeft
 	waitmovement 0
-	goto LittlerootTown_BrendansHouse_1F_EventScript_292765
+	goto LittlerootTown_CommonHouse_EventScript_292765
 	end
 
 LittlerootTown_BrendansHouse_1F_EventScript_1F78BE:: @ 81F78BE
@@ -293,11 +293,11 @@ LittlerootTown_BrendansHouse_1F_Movement_1F7A16: @ 81F7A16
 	walk_up
 	step_end
 
-LittlerootTown_BrendansHouse_1F_Text_1F7A1C: @ 81F7A1C
+LittlerootTown_BrendansHouse_1F_Text_MomEnterHouse: @ 81F7A1C
 	.string "MOM: See, {PLAYER}?\n"
 	.string "Isn't it nice in here, too?$"
 
-LittlerootTown_BrendansHouse_1F_Text_1F7A46: @ 81F7A46
+LittlerootTown_BrendansHouse_1F_Text_MomMoverPokemon: @ 81F7A46
 	.string "The mover's POKéMON do all the work\n"
 	.string "of moving us in and cleaning up after.\l"
 	.string "This is so convenient!\p"

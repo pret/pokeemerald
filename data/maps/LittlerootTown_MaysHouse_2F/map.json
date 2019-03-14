@@ -256,7 +256,7 @@
       "y": 1,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "LittlerootTown_MaysHouse_2F_EventScript_29278D"
+      "script": "LittlerootTown_CommonHouse_EventScript_29278D"
     },
     {
       "type": "sign",

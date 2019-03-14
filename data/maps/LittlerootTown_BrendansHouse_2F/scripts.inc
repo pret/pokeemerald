@@ -8,8 +8,8 @@ LittlerootTown_BrendansHouse_2F_MapScript1_1F83EE: @ 81F83EE
 	call_if_lt LittlerootTown_BrendansHouse_2F_EventScript_1F8457
 	compare VAR_LITTLEROOT_RIVAL_STATE, 3
 	call_if_ge LittlerootTown_BrendansHouse_2F_EventScript_1F841A
-	compare VAR_LITTLEROOT_INTRO_STATE, LITTLEROOT_INTRO_STATE_4
-	call_if_eq LittlerootTown_BrendansHouse_2F_EventScript_2926FE
+	compare VAR_LITTLEROOT_INTRO_STATE, LITTLEROOT_INTRO_STATE_GO_SEE_ROOM
+	call_if_eq LittlerootTown_CommonHouse_EventScript_2926FE
 	call LittlerootTown_BrendansHouse_2F_EventScript_275CE1
 	setvar VAR_SECRET_BASE_INITIALIZED, 0
 	end
