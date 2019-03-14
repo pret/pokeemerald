@@ -1621,12 +1621,12 @@ const u32 gMonShinyPalette_Donphan[] = INCBIN_U32("graphics/pokemon/donphan/shin
 const u8 gMonIcon_Donphan[] = INCBIN_U8("graphics/pokemon/donphan/icon.4bpp");
 const u8 gMonFootprint_Donphan[] = INCBIN_U8("graphics/pokemon/donphan/footprint.1bpp");
 
-const u32 gMonStillFrontPic_Porygon2[] = INCBIN_U32("graphics/pokemon/front_pics/porygon2_still_front_pic.4bpp.lz");
-const u32 gMonPalette_Porygon2[] = INCBIN_U32("graphics/pokemon/palettes/porygon2_palette.gbapal.lz");
-const u32 gMonBackPic_Porygon2[] = INCBIN_U32("graphics/pokemon/back_pics/porygon2_back_pic.4bpp.lz");
-const u32 gMonShinyPalette_Porygon2[] = INCBIN_U32("graphics/pokemon/palettes/porygon2_shiny_palette.gbapal.lz");
-const u8 gMonIcon_Porygon2[] = INCBIN_U8("graphics/pokemon/icons/porygon2_icon.4bpp");
-const u8 gMonFootprint_Porygon2[] = INCBIN_U8("graphics/pokemon/footprints/porygon2_footprint.1bpp");
+const u32 gMonStillFrontPic_Porygon2[] = INCBIN_U32("graphics/pokemon/porygon2/front.4bpp.lz");
+const u32 gMonPalette_Porygon2[] = INCBIN_U32("graphics/pokemon/porygon2/normal.gbapal.lz");
+const u32 gMonBackPic_Porygon2[] = INCBIN_U32("graphics/pokemon/porygon2/back.4bpp.lz");
+const u32 gMonShinyPalette_Porygon2[] = INCBIN_U32("graphics/pokemon/porygon2/shiny.gbapal.lz");
+const u8 gMonIcon_Porygon2[] = INCBIN_U8("graphics/pokemon/porygon2/icon.4bpp");
+const u8 gMonFootprint_Porygon2[] = INCBIN_U8("graphics/pokemon/porygon2/footprint.1bpp");
 
 const u32 gMonStillFrontPic_Stantler[] = INCBIN_U32("graphics/pokemon/stantler/front.4bpp.lz");
 const u32 gMonPalette_Stantler[] = INCBIN_U32("graphics/pokemon/stantler/normal.gbapal.lz");
@@ -2695,7 +2695,7 @@ const u32 gMonPalette_Deoxys[] = INCBIN_U32("graphics/pokemon/deoxys/normal.gbap
 const u32 gMonBackPic_Deoxys[] = INCBIN_U32("graphics/pokemon/deoxys/back.4bpp.lz");
 const u32 gMonShinyPalette_Deoxys[] = INCBIN_U32("graphics/pokemon/deoxys/shiny.gbapal.lz");
 const u8 gMonIcon_Deoxys[] = INCBIN_U8("graphics/pokemon/deoxys/icon.4bpp");
-const u8 gMonIcon_DeoxysSpeed[] = INCBIN_U8("graphics/pokemon/deoxys_speed/icon.4bpp");
+const u8 gMonIcon_DeoxysSpeed[] = INCBIN_U8("graphics/pokemon/deoxys/icon_speed.4bpp");
 const u8 gMonIcon_DeoxysSpeedWide[] = INCBIN_U8("graphics/unused/deoxys_speed_icon_wide.4bpp");
 
 asm(".space 0x6800");
