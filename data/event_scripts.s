@@ -2601,10 +2601,10 @@ gUnknown_08272C5F:: @ 8272C5F
 gUnknown_08272C98:: @ 8272C98
 	.string "An item in the BAG can be\nregistered to SELECT for easy use.$"
 
-gUnknown_08272CD5:: @ 8272CD5
+gRivalHousePCText:: @ 8272CD5
 	.string "There's an e-mail from POKéMON TRAINER\nSCHOOL.\p… … … … … …\pA POKéMON may learn up to four moves.\pA TRAINER's expertise is tested on the\nmove sets chosen for POKéMON.\p… … … … … …$"
 
-gUnknown_08272D87:: @ 8272D87
+gPlayerHousePCBootText:: @ 8272D87
 	.string "{PLAYER} booted up the PC.$"
 
 gUnknown_08272D9C:: @ 8272D9C

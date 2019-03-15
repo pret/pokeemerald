@@ -26,7 +26,7 @@ gSpecials:: @ 81DBA64
 	def_special sub_80E9C88
 	def_special sub_80EA2E4
 	def_special sub_80EA354
-	def_special sub_80E933C
+	def_special InitSecretBase
 	def_special sub_8127E18
 	def_special sub_81297AC
 	def_special sub_80E8C98

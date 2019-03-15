@@ -28,9 +28,9 @@ LittlerootTown_MaysHouse_1F_EventScript_1F88EA:: @ 81F88EA
 LittlerootTown_MaysHouse_1F_MapScript1_1F88F4: @ 81F88F4
 	compare VAR_LITTLEROOT_INTRO_STATE, LITTLEROOT_INTRO_STATE_ENTERED_HOUSE
 	call_if_eq LittlerootTown_MaysHouse_1F_EventScript_1F892E
-	compare VAR_LITTLEROOT_INTRO_STATE, LITTLEROOT_INTRO_STATE_5
+	compare VAR_LITTLEROOT_INTRO_STATE, LITTLEROOT_INTRO_STATE_MUST_SET_TIME
 	call_if_eq LittlerootTown_MaysHouse_1F_EventScript_1F8916
-	compare VAR_LITTLEROOT_INTRO_STATE, LITTLEROOT_INTRO_STATE_6
+	compare VAR_LITTLEROOT_INTRO_STATE, LITTLEROOT_INTRO_STATE_CLOCK_IS_SET
 	call_if_eq LittlerootTown_MaysHouse_1F_EventScript_1F8922
 	end
 
@@ -51,8 +51,8 @@ LittlerootTown_MaysHouse_1F_EventScript_1F892E:: @ 81F892E
 
 LittlerootTown_MaysHouse_1F_MapScript2_1F893A: @ 81F893A
 	map_script_2 VAR_LITTLEROOT_INTRO_STATE, LITTLEROOT_INTRO_STATE_ENTERED_HOUSE, LittlerootTown_MaysHouse_1F_EventScript_1F898C
-	map_script_2 VAR_LITTLEROOT_INTRO_STATE, LITTLEROOT_INTRO_STATE_5, LittlerootTown_MaysHouse_1F_EventScript_1F8964
-	map_script_2 VAR_LITTLEROOT_INTRO_STATE, LITTLEROOT_INTRO_STATE_6, LittlerootTown_MaysHouse_1F_EventScript_1F899D
+	map_script_2 VAR_LITTLEROOT_INTRO_STATE, LITTLEROOT_INTRO_STATE_MUST_SET_TIME, LittlerootTown_MaysHouse_1F_EventScript_1F8964
+	map_script_2 VAR_LITTLEROOT_INTRO_STATE, LITTLEROOT_INTRO_STATE_CLOCK_IS_SET, LittlerootTown_MaysHouse_1F_EventScript_1F899D
 	map_script_2 VAR_LITTLEROOT_HOUSES_STATE_2, HOUSES_STATE_1, LittlerootTown_MaysHouse_1F_EventScript_1F89AE
 	map_script_2 VAR_LITTLEROOT_HOUSES_STATE, HOUSES_STATE_3, LittlerootTown_CommonHouse_EventScript_292AF2
 	.2byte 0
@@ -113,7 +113,7 @@ LittlerootTown_MaysHouse_1F_Movement_1F89EC: @ 81F89EC
 	walk_left
 	step_end
 
-LittlerootTown_BrendansHouse_1F_EventScript_1F89F3:: @ 81F89F3
+LittlerootTown_BrendansHouse_1F_EventScript_TalkToRivalMom:: @ 81F89F3
 LittlerootTown_MaysHouse_1F_EventScript_1F89F3:: @ 81F89F3
 	lock
 	faceplayer
@@ -141,7 +141,7 @@ LittlerootTown_BrendansHouse_1F_EventScript_1F8A33:: @ 81F8A33
 	release
 	end
 
-LittlerootTown_BrendansHouse_1F_EventScript_1F8A3D:: @ 81F8A3D
+LittlerootTown_BrendansHouse_1F_EventScript_TalkToRivalSibling:: @ 81F8A3D
 LittlerootTown_MaysHouse_1F_EventScript_1F8A3D:: @ 81F8A3D
 	lock
 	faceplayer
@@ -156,7 +156,7 @@ LittlerootTown_MaysHouse_1F_EventScript_1F8A4C:: @ 81F8A4C
 	setvar VAR_0x8005, 1
 	applymovement VAR_0x8004, Common_Movement_WalkInPlaceRight
 	waitmovement 0
-	goto LittlerootTown_CommonHouse_EventScript_292765
+	goto LittlerootTown_CommonHouse_EventScript_GoSeeRoom_BlockPlayerAtEntrance
 	end
 
 LittlerootTown_MaysHouse_1F_EventScript_1F8A67:: @ 81F8A67

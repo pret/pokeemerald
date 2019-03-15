@@ -436,7 +436,7 @@ EventScript_275B5B:: @ 8275B5B
 	special sub_80E9068
 	setvar VAR_0x8004, 0
 	setvar VAR_0x8005, 0
-	special sub_80E933C
+	special InitSecretBase
 	setvar VAR_SECRET_BASE_INITIALIZED, 1
 	waitstate
 	end
@@ -547,7 +547,7 @@ EventScript_275CDE:: @ 8275CDE
 	releaseall
 	end
 
-LittlerootTown_BrendansHouse_2F_EventScript_275CE1:: @ 8275CE1
+SecretBase_SetDecorationFlags:: @ 8275CE1
 LittlerootTown_MaysHouse_2F_EventScript_275CE1:: @ 8275CE1
 SecretBase_RedCave1_EventScript_275CE1:: @ 8275CE1
 	setflag FLAG_DECORATION_1
@@ -566,10 +566,10 @@ SecretBase_RedCave1_EventScript_275CE1:: @ 8275CE1
 	setflag FLAG_DECORATION_14
 	return
 
-EventScript_275D0C:: @ 8275D0C
+EventScript_InitSecretBase:: @ 8275D0C
 	setvar VAR_0x8004, 0
 	setvar VAR_0x8005, 0
-	special sub_80E933C
+	special InitSecretBase
 	setvar VAR_SECRET_BASE_INITIALIZED, 1
 	end
 

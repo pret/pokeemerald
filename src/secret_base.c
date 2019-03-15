@@ -500,7 +500,7 @@ void sub_80E9238(u8 flagIn)
     }
 }
 
-void sub_80E933C(void)
+void InitSecretBase(void)
 {
     u8 *roomDecor;
     u8 *roomDecorPos;

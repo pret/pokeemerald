@@ -1744,7 +1744,7 @@ void sub_8128C64(u8 taskId)
             data[2] ++;
             break;
         case 1:
-            ScriptContext1_SetupScript(EventScript_275D0C);
+            ScriptContext1_SetupScript(EventScript_InitSecretBase);
             data[2] ++;
             break;
         case 2:
@@ -2650,7 +2650,7 @@ void sub_812A2C4(u8 taskId)
             data[2] ++;
             break;
         case 1:
-            ScriptContext1_SetupScript(EventScript_275D0C);
+            ScriptContext1_SetupScript(EventScript_InitSecretBase);
             data[2] ++;
             break;
         case 2:

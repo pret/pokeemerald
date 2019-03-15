@@ -5,7 +5,7 @@ LittlerootTown_BrendansHouse_1F_MapScripts:: @ 81F7755
 	.byte 0
 
 LittlerootTown_BrendansHouse_1F_MapScript_OnLoad: @ 81F7765
-	compare VAR_LITTLEROOT_INTRO_STATE, LITTLEROOT_INTRO_STATE_6
+	compare VAR_LITTLEROOT_INTRO_STATE, LITTLEROOT_INTRO_STATE_CLOCK_IS_SET
 	call_if_lt LittlerootTown_BrendansHouse_1F_EventScript_PlaceMovingBoxes
 	call_if_set FLAG_RECEIVED_RUNNING_SHOES, LittlerootTown_BrendansHouse_1F_EventScript_CheckRunningInstructions
 	end
@@ -28,9 +28,9 @@ LittlerootTown_BrendansHouse_1F_EventScript_PlaceRunningInstructions:: @ 81F779A
 LittlerootTown_BrendansHouse_1F_MapScript_OnTransition: @ 81F77A4
 	compare VAR_LITTLEROOT_INTRO_STATE, LITTLEROOT_INTRO_STATE_ENTERED_HOUSE
 	call_if_eq LittlerootTown_BrendansHouse_1F_EventScript_PlaceMomInDoorway
-	compare VAR_LITTLEROOT_INTRO_STATE, LITTLEROOT_INTRO_STATE_5
+	compare VAR_LITTLEROOT_INTRO_STATE, LITTLEROOT_INTRO_STATE_MUST_SET_TIME
 	call_if_eq LittlerootTown_BrendansHouse_1F_EventScript_PlaceMomFacingStairs
-	compare VAR_LITTLEROOT_INTRO_STATE, LITTLEROOT_INTRO_STATE_6
+	compare VAR_LITTLEROOT_INTRO_STATE, LITTLEROOT_INTRO_STATE_CLOCK_IS_SET
 	call_if_eq LittlerootTown_BrendansHouse_1F_EventScript_PlaceMomAtTV
 	end
 
@@ -51,25 +51,25 @@ LittlerootTown_BrendansHouse_1F_EventScript_PlaceMomInDoorway:: @ 81F77DE
 
 LittlerootTown_BrendansHouse_1F_MapScript_OnFrameTable: @ 81F77EA
 	map_script_2 VAR_LITTLEROOT_INTRO_STATE, LITTLEROOT_INTRO_STATE_ENTERED_HOUSE, LittlerootTown_BrendansHouse_1F_EventScript_SetupFirstEnterHouse
-	map_script_2 VAR_LITTLEROOT_INTRO_STATE, LITTLEROOT_INTRO_STATE_5, LittlerootTown_BrendansHouse_1F_EventScript_1F7814
-	map_script_2 VAR_LITTLEROOT_INTRO_STATE, LITTLEROOT_INTRO_STATE_6, LittlerootTown_BrendansHouse_1F_EventScript_1F784D
+	map_script_2 VAR_LITTLEROOT_INTRO_STATE, LITTLEROOT_INTRO_STATE_MUST_SET_TIME, LittlerootTown_BrendansHouse_1F_EventScript_1F7814
+	map_script_2 VAR_LITTLEROOT_INTRO_STATE, LITTLEROOT_INTRO_STATE_CLOCK_IS_SET, LittlerootTown_BrendansHouse_1F_EventScript_1F784D
 	map_script_2 VAR_LITTLEROOT_HOUSES_STATE, HOUSES_STATE_1, LittlerootTown_BrendansHouse_1F_EventScript_1F785E
 	map_script_2 VAR_LITTLEROOT_HOUSES_STATE, HOUSES_STATE_3, LittlerootTown_CommonHouse_EventScript_292AF2
 	.2byte 0
 
 LittlerootTown_BrendansHouse_1F_EventScript_1F7814:: @ 81F7814
 	lockall
-	msgbox LittlerootTown_BrendansHouse_1F_Text_1F7B67, MSGBOX_DEFAULT
+	msgbox LittlerootTown_BrendansHouse_1F_Text_MustSetTime_BlockPlayerAtStairs, MSGBOX_DEFAULT
 	closemessage
-	applymovement EVENT_OBJ_ID_PLAYER, LittlerootTown_BrendansHouse_1F_Movement_1F783A
-	applymovement 1, LittlerootTown_BrendansHouse_1F_Movement_1F783A
+	applymovement EVENT_OBJ_ID_PLAYER, LittlerootTown_BrendansHouse_1F_Movement_PushPlayerUpStairs
+	applymovement 1, LittlerootTown_BrendansHouse_1F_Movement_PushPlayerUpStairs
 	waitmovement 0
 	warp MAP_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F, 255, 7, 1
 	waitstate
 	releaseall
 	end
 
-LittlerootTown_BrendansHouse_1F_Movement_1F783A: @ 81F783A
+LittlerootTown_BrendansHouse_1F_Movement_PushPlayerUpStairs: @ 81F783A
 	walk_up
 	step_end
 
@@ -119,7 +119,7 @@ LittlerootTown_BrendansHouse_1F_EventScript_1F78A3:: @ 81F78A3
 	setvar VAR_0x8005, 0
 	applymovement VAR_0x8004, Common_Movement_WalkInPlaceLeft
 	waitmovement 0
-	goto LittlerootTown_CommonHouse_EventScript_292765
+	goto LittlerootTown_CommonHouse_EventScript_GoSeeRoom_BlockPlayerAtEntrance
 	end
 
 LittlerootTown_BrendansHouse_1F_EventScript_1F78BE:: @ 81F78BE
@@ -307,12 +307,12 @@ LittlerootTown_BrendansHouse_1F_Text_MomMoverPokemon: @ 81F7A46
 	.string "our move here.\l"
 	.string "Don't forget to set it!$"
 
-LittlerootTown_BrendansHouse_1F_Text_1F7B24: @ 81F7B24
+LittlerootTown_BrendansHouse_1F_Text_GoSeeRoom_BlockPlayerAtEntrance: @ 81F7B24
 	.string "MOM: Well, {PLAYER}?\p"
 	.string "Aren't you interested in seeing your\n"
 	.string "very own room?$"
 
-LittlerootTown_BrendansHouse_1F_Text_1F7B67: @ 81F7B67
+LittlerootTown_BrendansHouse_1F_Text_MustSetTime_BlockPlayerAtStairs: @ 81F7B67
 LittlerootTown_MaysHouse_1F_Text_1F7B67: @ 81F7B67
 	.string "MOM: {PLAYER}.\p"
 	.string "Go set the clock in your room, honey.$"
@@ -375,10 +375,10 @@ LittlerootTown_BrendansHouse_1F_Text_1F7E89: @ 81F7E89
 	.string "Registered MOM\n"
 	.string "in the POKéNAV.$"
 
-LittlerootTown_BrendansHouse_1F_Text_1F7EA8: @ 81F7EA8
+LittlerootTown_BrendansHouse_1F_Text_MoverPokemon2: @ 81F7EA8
 	.string "Fugiiiiih!$"
 
-LittlerootTown_BrendansHouse_1F_Text_1F7EB3: @ 81F7EB3
+LittlerootTown_BrendansHouse_1F_Text_MoverPokemon1: @ 81F7EB3
 	.string "Huggoh, uggo uggo…$"
 
 LittlerootTown_BrendansHouse_1F_Text_1F7EC6: @ 81F7EC6

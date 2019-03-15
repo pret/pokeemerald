@@ -6,7 +6,7 @@ extern const u8 gUnknown_0823B5E9[];
 extern const u8 EventScript_TestSignpostMsg[];
 extern const u8 EventScript_TryGetTrainerScript[];
 extern const u8 EventScript_275BB7[];
-extern const u8 EventScript_275D0C[];
+extern const u8 EventScript_InitSecretBase[];
 extern const u8 EventScript_275D1F[];
 extern const u8 EventScript_275D2E[];
 extern const u8 EventScript_271354[];
@@ -387,7 +387,7 @@ extern const u8 EventScript_2926F8[];
 extern const u8 Route111_EventScript_2907F0[];
 
 //player pc
-extern const u8 LittlerootTown_BrendansHouse_2F_EventScript_1F863F[];
+extern const u8 LittlerootTown_BrendansHouse_2F_EventScript_TurnOffPC[];
 extern const u8 LittlerootTown_MaysHouse_2F_EventScript_1F958F[];
 
 //contest_strings
@@ -524,8 +524,8 @@ extern const u8 MauvilleCity_PokemonCenter_1F_Text_290097[];
 extern const u8 MauvilleCity_PokemonCenter_1F_Text_2900B5[];
 extern const u8 MauvilleCity_PokemonCenter_1F_Text_2900CB[];
 
-extern const u8 EventScript_PlayerPCMale[];
-extern const u8 EventScript_PlayerPCFemale[];
+extern const u8 EventScript_BrendansHouse_2F_UsePC[];
+extern const u8 EventScript_MaysHouse_2F_UsePCMay[];
 extern const u8 EventScript_SecretBasePC[];
 extern const u8 EventScript_RecordMixingSecretBasePC[];
 extern const u8 EventScript_SecretPower1[];

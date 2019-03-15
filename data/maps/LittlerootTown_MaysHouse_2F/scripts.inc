@@ -9,7 +9,7 @@ LittlerootTown_MaysHouse_2F_MapScript1_1F92A1: @ 81F92A1
 	compare VAR_LITTLEROOT_RIVAL_STATE, 3
 	call_if_ge LittlerootTown_MaysHouse_2F_EventScript_1F92CD
 	compare VAR_LITTLEROOT_INTRO_STATE, LITTLEROOT_INTRO_STATE_GO_SEE_ROOM
-	call_if_eq LittlerootTown_CommonHouse_EventScript_2926FE
+	call_if_eq LittlerootTown_CommonHouse_EventScript_FirstEnterPlayerRoom
 	call LittlerootTown_MaysHouse_2F_EventScript_275CE1
 	setvar VAR_SECRET_BASE_INITIALIZED, 0
 	end
@@ -51,7 +51,7 @@ LittlerootTown_MaysHouse_2F_MapScript2_1F931D: @ 81F931D
 LittlerootTown_MaysHouse_2F_EventScript_1F9327:: @ 81F9327
 	checkplayergender
 	compare VAR_RESULT, 1
-	goto_if_eq EventScript_275D0C
+	goto_if_eq EventScript_InitSecretBase
 	end
 
 LittlerootTown_MaysHouse_2F_EventScript_1F9334:: @ 81F9334
@@ -246,8 +246,7 @@ LittlerootTown_MaysHouse_2F_Movement_1F94BB: @ 81F94BB
 	walk_in_place_fastest_right
 	step_end
 
-LittlerootTown_BrendansHouse_2F_EventScript_1F94C1:: @ 81F94C1
-LittlerootTown_MaysHouse_2F_EventScript_1F94C1:: @ 81F94C1
+LittlerootTown_CommonHouse_EventScript_TalkToRival:: @ 81F94C1
 	lockall
 	goto_if_set FLAG_MET_RIVAL_LILYCOVE, LittlerootTown_BrendansHouse_2F_EventScript_1F94F7
 	checkplayergender
@@ -297,7 +296,7 @@ LittlerootTown_BrendansHouse_2F_EventScript_1F954A:: @ 81F954A
 	msgbox LittlerootTown_BrendansHouse_2F_Text_1F9BE7, MSGBOX_DEFAULT
 	return
 
-EventScript_PlayerPCFemale:: @ 81F9553
+EventScript_MaysHouse_2F_UsePCMay:: @ 81F9553
 	lockall
 	checkplayergender
 	compare VAR_RESULT, MALE
@@ -307,7 +306,7 @@ EventScript_PlayerPCFemale:: @ 81F9553
 	end
 
 LittlerootTown_MaysHouse_2F_EventScript_1F956C:: @ 81F956C
-	msgbox gUnknown_08272CD5, MSGBOX_DEFAULT
+	msgbox gRivalHousePCText, MSGBOX_DEFAULT
 	releaseall
 	end
 
@@ -315,7 +314,7 @@ LittlerootTown_MaysHouse_2F_EventScript_1F9576:: @ 81F9576
 	setvar VAR_0x8004, 2
 	special DoPCTurnOnEffect
 	playse SE_PC_ON
-	msgbox gUnknown_08272D87, MSGBOX_DEFAULT
+	msgbox gPlayerHousePCBootText, MSGBOX_DEFAULT
 	special BedroomPC
 	waitstate
 	releaseall

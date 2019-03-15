@@ -1,5 +1,5 @@
-LittlerootTown_CommonHouse_EventScript_2926FE:: @ 82926FE
-	setvar VAR_LITTLEROOT_INTRO_STATE, LITTLEROOT_INTRO_STATE_5
+LittlerootTown_CommonHouse_EventScript_FirstEnterPlayerRoom:: @ 82926FE
+	setvar VAR_LITTLEROOT_INTRO_STATE, LITTLEROOT_INTRO_STATE_MUST_SET_TIME
 	return
 
 @ VAR_0x8004 is the object id for Mom.
@@ -36,69 +36,69 @@ LittlerootTown_CommonHouse_Movement_PushPlayerIntoHouse: @ 8292763
 	walk_up
 	step_end
 
-LittlerootTown_CommonHouse_EventScript_292765:: @ 8292765
-	msgbox LittlerootTown_BrendansHouse_1F_Text_1F7B24, MSGBOX_DEFAULT
+LittlerootTown_CommonHouse_EventScript_GoSeeRoom_BlockPlayerAtEntrance:: @ 8292765
+	msgbox LittlerootTown_BrendansHouse_1F_Text_GoSeeRoom_BlockPlayerAtEntrance, MSGBOX_DEFAULT
 	closemessage
 	applymovement VAR_0x8004, Common_Movement_WalkInPlaceUp
-	applymovement EVENT_OBJ_ID_PLAYER, LittlerootTown_BrendansHouse_1F_Movement_292AF0
+	applymovement EVENT_OBJ_ID_PLAYER, LittlerootTown_CommonHouse_Movement_PushPlayerIntoHouse_2
 	waitmovement 0
 	releaseall
 	end
 
-LittlerootTown_CommonHouse_EventScript_292781:: @ 8292781
+LittlerootTown_BrendansHouse_2F_EventScript_LookAtClock:: @ 8292781
 	lockall
 	setvar VAR_0x8004, 0
-	goto LittlerootTown_CommonHouse_EventScript_292799
+	goto LittlerootTown_CommonHouse_EventScript_LookAtClock
 	end
 
-LittlerootTown_CommonHouse_EventScript_29278D:: @ 829278D
+LittlerootTown_MaysHouse_2F_EventScript_LookAtClock:: @ 829278D
 	lockall
 	setvar VAR_0x8004, 1
-	goto LittlerootTown_CommonHouse_EventScript_292799
+	goto LittlerootTown_CommonHouse_EventScript_LookAtClock
 	end
 
-LittlerootTown_CommonHouse_EventScript_292799:: @ 8292799
+LittlerootTown_CommonHouse_EventScript_LookAtClock:: @ 8292799
 	goto_if_set FLAG_SET_WALL_CLOCK, LittlerootTown_CommonHouse_29283F
-	msgbox LittlerootTown_BrendansHouse_2F_Text_1F8668, MSGBOX_DEFAULT
-	call LittlerootTown_CommonHouse_EventScript_292849
+	msgbox LittlerootTown_BrendansHouse_2F_Text_ClockStopped, MSGBOX_DEFAULT
+	call LittlerootTown_CommonHouse_EventScript_StartWallClock
 	delay 30
-	setvar VAR_LITTLEROOT_INTRO_STATE, LITTLEROOT_INTRO_STATE_6
+	setvar VAR_LITTLEROOT_INTRO_STATE, LITTLEROOT_INTRO_STATE_CLOCK_IS_SET
 	setflag FLAG_SET_WALL_CLOCK
 	setflag FLAG_HIDE_LITTLEROOT_TOWN_PLAYERS_HOUSE_VIGOROTH_1
 	setflag FLAG_HIDE_LITTLEROOT_TOWN_PLAYERS_HOUSE_VIGOROTH_2
 	checkplayergender
 	compare VAR_RESULT, MALE
-	call_if_eq LittlerootTown_CommonHouse_EventScript_2927DF
+	call_if_eq LittlerootTown_CommonHouse_EventScript_MomUpstairs_Brendan
 	compare VAR_RESULT, FEMALE
-	call_if_eq LittlerootTown_CommonHouse_EventScript_29280F
+	call_if_eq LittlerootTown_CommonHouse_EventScript_MomUpstairs_May
 	playse SE_KAIDAN
 	removeobject VAR_0x8008
 	releaseall
 	end
 
-LittlerootTown_CommonHouse_EventScript_2927DF:: @ 82927DF
+LittlerootTown_CommonHouse_EventScript_MomUpstairs_Brendan:: @ 82927DF
 	setvar VAR_0x8008, 14
 	addobject VAR_0x8008
-	applymovement VAR_0x8008, LittlerootTown_CommonHouse_Movement_292850
+	applymovement VAR_0x8008, LittlerootTown_CommonHouse_Movement_MomUpstairsGoToPlayer_Brendan
 	waitmovement 0
 	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceRight
 	waitmovement 0
-	msgbox LittlerootTown_BrendansHouse_2F_Text_1F869A, MSGBOX_DEFAULT
+	msgbox LittlerootTown_BrendansHouse_2F_Text_MomUpstairsDialog, MSGBOX_DEFAULT
 	closemessage
-	applymovement VAR_0x8008, LittlerootTown_CommonHouse_Movement_292857
+	applymovement VAR_0x8008, LittlerootTown_CommonHouse_Movement_MomUpstairsLeave_Brendan
 	waitmovement 0
 	return
 
-LittlerootTown_CommonHouse_EventScript_29280F:: @ 829280F
+LittlerootTown_CommonHouse_EventScript_MomUpstairs_May:: @ 829280F
 	setvar VAR_0x8008, 14
 	addobject VAR_0x8008
-	applymovement VAR_0x8008, LittlerootTown_CommonHouse_Movement_29285B
+	applymovement VAR_0x8008, LittlerootTown_CommonHouse_Movement_MomUpstairsGoToPlayer_May
 	waitmovement 0
 	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceLeft
 	waitmovement 0
-	msgbox LittlerootTown_BrendansHouse_2F_Text_1F869A, MSGBOX_DEFAULT
+	msgbox LittlerootTown_BrendansHouse_2F_Text_MomUpstairsDialog, MSGBOX_DEFAULT
 	closemessage
-	applymovement VAR_0x8008, LittlerootTown_CommonHouse_Movement_292862
+	applymovement VAR_0x8008, LittlerootTown_CommonHouse_Movement_MomUpstairsLeave_May
 	waitmovement 0
 	return
 
@@ -110,13 +110,13 @@ LittlerootTown_CommonHouse_29283F:: @ 829283F
 	releaseall
 	end
 
-LittlerootTown_CommonHouse_EventScript_292849:: @ 8292849
+LittlerootTown_CommonHouse_EventScript_StartWallClock:: @ 8292849
 	fadescreen 1
 	special StartWallClock
 	waitstate
 	return
 
-LittlerootTown_CommonHouse_Movement_292850: @ 8292850
+LittlerootTown_CommonHouse_Movement_MomUpstairsGoToPlayer_Brendan: @ 8292850
 	delay_8
 	walk_down
 	walk_in_place_fastest_left
@@ -125,13 +125,13 @@ LittlerootTown_CommonHouse_Movement_292850: @ 8292850
 	walk_left
 	step_end
 
-LittlerootTown_CommonHouse_Movement_292857: @ 8292857
+LittlerootTown_CommonHouse_Movement_MomUpstairsLeave_Brendan: @ 8292857
 	walk_right
 	walk_up
 	delay_8
 	step_end
 
-LittlerootTown_CommonHouse_Movement_29285B: @ 829285B
+LittlerootTown_CommonHouse_Movement_MomUpstairsGoToPlayer_May: @ 829285B
 	delay_8
 	walk_down
 	walk_in_place_fastest_right
@@ -140,7 +140,7 @@ LittlerootTown_CommonHouse_Movement_29285B: @ 829285B
 	walk_right
 	step_end
 
-LittlerootTown_CommonHouse_Movement_292862: @ 8292862
+LittlerootTown_CommonHouse_Movement_MomUpstairsLeave_May: @ 8292862
 	walk_left
 	walk_up
 	delay_8
@@ -305,7 +305,7 @@ LittlerootTown_CommonHouse_Movement_2929C1: @ 82929C1
 	walk_in_place_fastest_left
 	step_end
 
-LittlerootTown_CommonHouse_EventScript_2929C5:: @ 82929C5
+LittlerootTown_CommonHouse_EventScript_TalkToMom:: @ 82929C5
 	lock
 	faceplayer
 	compare VAR_LITTLEROOT_HOUSES_STATE, HOUSES_STATE_4
@@ -379,22 +379,22 @@ LittlerootTown_CommonHouse_EventScript_292AB0:: @ 8292AB0
 	release
 	end
 
-LittlerootTown_CommonHouse_EventScript_292ABA:: @ 8292ABA
+LittlerootTown_CommonHouse_EventScript_TalkToMoverPokemon2:: @ 8292ABA
 	lock
 	faceplayer
 	waitse
 	playmoncry SPECIES_VIGOROTH, 0
-	msgbox LittlerootTown_BrendansHouse_1F_Text_1F7EA8, MSGBOX_DEFAULT
+	msgbox LittlerootTown_BrendansHouse_1F_Text_MoverPokemon2, MSGBOX_DEFAULT
 	waitmoncry
 	release
 	end
 
-LittlerootTown_CommonHouse_EventScript_292ACD:: @ 8292ACD
+LittlerootTown_CommonHouse_EventScript_TalkToMoverPokemon1:: @ 8292ACD
 	lock
 	faceplayer
 	waitse
 	playmoncry SPECIES_VIGOROTH, 0
-	msgbox LittlerootTown_BrendansHouse_1F_Text_1F7EB3, MSGBOX_DEFAULT
+	msgbox LittlerootTown_BrendansHouse_1F_Text_MoverPokemon1, MSGBOX_DEFAULT
 	waitmoncry
 	release
 	end
@@ -423,7 +423,7 @@ LittlerootTown_CommonHouse_Movement_292AEE: @ 8292AEE
 	walk_right
 	step_end
 
-LittlerootTown_BrendansHouse_1F_Movement_292AF0: @ 8292AF0
+LittlerootTown_CommonHouse_Movement_PushPlayerIntoHouse_2: @ 8292AF0
 	walk_up
 	step_end
 

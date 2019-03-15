@@ -1,36 +1,36 @@
 LittlerootTown_BrendansHouse_2F_MapScripts:: @ 81F83E3
-	map_script MAP_SCRIPT_ON_TRANSITION, LittlerootTown_BrendansHouse_2F_MapScript1_1F83EE
-	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, LittlerootTown_BrendansHouse_2F_MapScript2_1F846A
+	map_script MAP_SCRIPT_ON_TRANSITION, LittlerootTown_BrendansHouse_2F_MapScript_OnTransition
+	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, LittlerootTown_BrendansHouse_2F_MapScript_OnWarpTable
 	.byte 0
 
-LittlerootTown_BrendansHouse_2F_MapScript1_1F83EE: @ 81F83EE
+LittlerootTown_BrendansHouse_2F_MapScript_OnTransition: @ 81F83EE
 	compare VAR_LITTLEROOT_RIVAL_STATE, 2
 	call_if_lt LittlerootTown_BrendansHouse_2F_EventScript_1F8457
 	compare VAR_LITTLEROOT_RIVAL_STATE, 3
 	call_if_ge LittlerootTown_BrendansHouse_2F_EventScript_1F841A
 	compare VAR_LITTLEROOT_INTRO_STATE, LITTLEROOT_INTRO_STATE_GO_SEE_ROOM
-	call_if_eq LittlerootTown_CommonHouse_EventScript_2926FE
-	call LittlerootTown_BrendansHouse_2F_EventScript_275CE1
+	call_if_eq LittlerootTown_CommonHouse_EventScript_FirstEnterPlayerRoom
+	call SecretBase_SetDecorationFlags
 	setvar VAR_SECRET_BASE_INITIALIZED, 0
 	end
 
 LittlerootTown_BrendansHouse_2F_EventScript_1F841A:: @ 81F841A
 	goto_if_set FLAG_MET_RIVAL_LILYCOVE, LittlerootTown_BrendansHouse_2F_EventScript_1F8433
 	compare VAR_BIRCH_LAB_STATE, 2
-	goto_if_ge LittlerootTown_BrendansHouse_2F_EventScript_1F8456
+	goto_if_ge LittlerootTown_BrendansHouse_2F_EventScript_EndScript
 	goto LittlerootTown_BrendansHouse_2F_EventScript_1F8433
 
 LittlerootTown_BrendansHouse_2F_EventScript_1F8433:: @ 81F8433
 	checkplayergender
 	compare VAR_RESULT, 0
-	goto_if_eq LittlerootTown_BrendansHouse_2F_EventScript_1F8456
+	goto_if_eq LittlerootTown_BrendansHouse_2F_EventScript_EndScript
 	compare VAR_NATIONAL_DEX_STATE, NATIONAL_DEX_STATE_2
 	goto_if_ge LittlerootTown_BrendansHouse_2F_EventScript_1F9309
 	setobjectxyperm 1, 0, 2
 	setobjectmovementtype 1, MOVEMENT_TYPE_FACE_UP
 	return
 
-LittlerootTown_BrendansHouse_2F_EventScript_1F8456:: @ 81F8456
+LittlerootTown_BrendansHouse_2F_EventScript_EndScript:: @ 81F8456
 	return
 
 LittlerootTown_BrendansHouse_2F_EventScript_1F8457:: @ 81F8457
@@ -43,17 +43,17 @@ LittlerootTown_BrendansHouse_2F_EventScript_1F8464:: @ 81F8464
 	setvar VAR_LITTLEROOT_RIVAL_STATE, 2
 	return
 
-LittlerootTown_BrendansHouse_2F_MapScript2_1F846A: @ 81F846A
-	map_script_2 VAR_SECRET_BASE_INITIALIZED, 0, LittlerootTown_BrendansHouse_2F_EventScript_1F8474
+LittlerootTown_BrendansHouse_2F_MapScript_OnWarpTable: @ 81F846A
+	map_script_2 VAR_SECRET_BASE_INITIALIZED, 0, LittlerootTown_BrendansHouse_2F_EventScript_CheckIfSecretBase
 	.2byte 0
 
-LittlerootTown_BrendansHouse_2F_EventScript_1F8474:: @ 81F8474
+LittlerootTown_BrendansHouse_2F_EventScript_CheckIfSecretBase:: @ 81F8474
 	checkplayergender
 	compare VAR_RESULT, 0
-	goto_if_eq EventScript_275D0C
+	goto_if_eq EventScript_InitSecretBase
 	end
 
-LittlerootTown_BrendansHouse_2F_EventScript_1F8481:: @ 81F8481
+LittlerootTown_BrendansHouse_2F_EventScript_InteractPokeBall:: @ 81F8481
 	lockall
 	compare VAR_LITTLEROOT_RIVAL_STATE, 2
 	goto_if_eq LittlerootTown_BrendansHouse_2F_EventScript_1F8497
@@ -244,52 +244,50 @@ LittlerootTown_BrendansHouse_2F_Movement_1F8609: @ 81F8609
 	walk_in_place_fastest_left
 	step_end
 
-EventScript_PlayerPCMale:: @ 81F860D
+EventScript_BrendansHouse_2F_UsePC:: @ 81F860D
 	lockall
 	checkplayergender
 	compare VAR_RESULT, MALE
-	goto_if_eq LittlerootTown_BrendansHouse_2F_EventScript_1F8626
+	goto_if_eq LittlerootTown_BrendansHouse_2F_EventScript_UsePlayerPC
 	compare VAR_RESULT, FEMALE
-	goto_if_eq LittlerootTown_BrendansHouse_2F_EventScript_1F864C
+	goto_if_eq LittlerootTown_BrendansHouse_2F_EventScript_UseRivalPC
 	end
 
-LittlerootTown_BrendansHouse_2F_EventScript_1F8626:: @ 81F8626
+LittlerootTown_BrendansHouse_2F_EventScript_UsePlayerPC:: @ 81F8626
 	setvar VAR_0x8004, 1
 	special DoPCTurnOnEffect
 	playse SE_PC_ON
-	msgbox gUnknown_08272D87, MSGBOX_DEFAULT
+	msgbox gPlayerHousePCBootText, MSGBOX_DEFAULT
 	special BedroomPC
 	waitstate
 	releaseall
 	end
 
-LittlerootTown_BrendansHouse_2F_EventScript_1F863F:: @ 81F863F
+LittlerootTown_BrendansHouse_2F_EventScript_TurnOffPC:: @ 81F863F
 	setvar VAR_0x8004, 1
 	playse SE_PC_OFF
 	special DoPCTurnOffEffect
 	releaseall
 	end
 
-LittlerootTown_BrendansHouse_2F_EventScript_1F864C:: @ 81F864C
-	msgbox gUnknown_08272CD5, MSGBOX_DEFAULT
+LittlerootTown_BrendansHouse_2F_EventScript_UseRivalPC:: @ 81F864C
+	msgbox gRivalHousePCText, MSGBOX_DEFAULT
 	releaseall
 	end
 
-LittlerootTown_BrendansHouse_2F_EventScript_1F8656:: @ 81F8656
-LittlerootTown_MaysHouse_2F_EventScript_1F8656:: @ 81F8656
-	msgbox LittlerootTown_BrendansHouse_2F_Text_1F877F, MSGBOX_SIGN
+LittlerootTown_CommonHouse_EventScript_ReadAdventureBook:: @ 81F8656
+	msgbox LittlerootTown_BrendansHouse_2F_Text_AdventureBook, MSGBOX_SIGN
 	end
 
-LittlerootTown_BrendansHouse_2F_EventScript_1F865F:: @ 81F865F
-LittlerootTown_MaysHouse_2F_EventScript_1F865F:: @ 81F865F
-	msgbox LittlerootTown_BrendansHouse_2F_Text_1F884F, MSGBOX_SIGN
+LittlerootTown_CommonHouse_EventScript_LookAtGamecube:: @ 81F865F
+	msgbox LittlerootTown_CommonHouse_Text_LookAtGamecube, MSGBOX_SIGN
 	end
 
-LittlerootTown_BrendansHouse_2F_Text_1F8668: @ 81F8668
+LittlerootTown_BrendansHouse_2F_Text_ClockStopped: @ 81F8668
 	.string "The clock is stopped…\p"
 	.string "Better set it and start it!$"
 
-LittlerootTown_BrendansHouse_2F_Text_1F869A: @ 81F869A
+LittlerootTown_BrendansHouse_2F_Text_MomUpstairsDialog: @ 81F869A
 	.string "MOM: {PLAYER}, how do you like your\n"
 	.string "new room?\p"
 	.string "Good! Everything's put away neatly!\p"
@@ -299,7 +297,7 @@ LittlerootTown_BrendansHouse_2F_Text_1F869A: @ 81F869A
 	.string "Oh, you should make sure that\n"
 	.string "everything's all there on your desk.$"
 
-LittlerootTown_BrendansHouse_2F_Text_1F877F: @ 81F877F
+LittlerootTown_BrendansHouse_2F_Text_AdventureBook: @ 81F877F
 	.string "{PLAYER} flipped open the notebook.\p"
 	.string "ADVENTURE RULE NO. 1\n"
 	.string "Open the MENU with START.\p"
@@ -311,7 +309,7 @@ Common_Text_LookCloserAtMap: @ 81F8820
 	.string "{PLAYER} took a closer look at the\n"
 	.string "HOENN region map.$"
 
-LittlerootTown_BrendansHouse_2F_Text_1F884F: @ 81F884F
+LittlerootTown_CommonHouse_Text_LookAtGamecube: @ 81F884F
 	.string "It's a Nintendo GameCube.\p"
 	.string "A Game Boy Advance is connected to\n"
 	.string "serve as the Controller.$"
