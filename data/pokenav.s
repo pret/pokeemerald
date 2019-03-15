@@ -3,64 +3,6 @@
 
 	.section .rodata
 
-gUnknown_0861FA6C:: @ 861FA6C
-	obj_tiles gPokenavLeftHeaderMainMenu_Gfx, 0x20, 3
-	obj_tiles gPokenavLeftHeaderCondition_Gfx, 0x20, 1
-	obj_tiles gPokenavLeftHeaderRibbons_Gfx, 0x20, 2
-	obj_tiles gPokenavLeftHeaderMatchCall_Gfx, 0x20, 4
-	obj_tiles gPokenavLeftHeaderHoennMap_Gfx, 0x20, 0
-	obj_tiles gPokenavLeftHeaderHoennMap_Gfx, 0x40, 0
-
-gUnknown_0861FA9C:: @ 861FA9C
-	.4byte gPokenavLeftHeaderParty_Gfx, 1
-	.4byte gPokenavLeftHeaderSearch_Gfx, 1
-	.4byte gPokenavLeftHeaderCool_Gfx, 4
-	.4byte gPokenavLeftHeaderBeauty_Gfx, 1
-	.4byte gPokenavLeftHeaderCute_Gfx, 2
-	.4byte gPokenavLeftHeaderSmart_Gfx, 0
-	.4byte gPokenavLeftHeaderTough_Gfx, 0
-
-gUnknown_0861FAD4:: @ 861FAD4
-	.2byte 0x0
-	.2byte 0x8000
-	.2byte 0x0
-	.2byte 0x0
-
-gUnknown_0861FADC::
-	obj_image_anim_frame 0, 8
-	obj_image_anim_frame 16, 8
-	obj_image_anim_frame 32, 8
-	obj_image_anim_frame 48, 8
-	obj_image_anim_frame 64, 8
-	obj_image_anim_frame 80, 8
-	obj_image_anim_frame 96, 8
-	obj_image_anim_frame 112, 8
-	obj_image_anim_jump 0
-
-gUnknown_0861FB00::
-	.4byte gUnknown_0861FADC
-
-gUnknown_0861FB04:: @ 861FB04
-	spr_template 0, 0, gUnknown_0861FAD4, gUnknown_0861FB00, NULL, gDummySpriteAffineAnimTable, sub_81C7CB4 
-
-gUnknown_0861FB1C::
-	.2byte 0x4000
-	.2byte 0xC000
-	.2byte 0x400
-	.2byte 0x0
-
-gUnknown_0861FB24::
-	.2byte 0x4000
-	.2byte 0x8000
-	.2byte 0x400
-	.2byte 0x0
-
-gUnknown_0861FB2C:: @ 861FB2C
-	spr_template 2, 1, gUnknown_0861FB1C, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
-
-gUnknown_0861FB44:: @ 861FB44
-	spr_template 2, 2, gUnknown_0861FB24, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
-	
 gUnknown_0861FB5C:: @ 861FB5C
 	.incbin "graphics/pokenav/arrows_matchcall.gbapal"
 	

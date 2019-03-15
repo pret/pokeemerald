@@ -227,15 +227,7 @@ gPlayerFacingPosition: @ 203AB40
 	.include "src/pokemon_summary_screen.o"
 	.include "src/unk_pokedex_area_screen_helper.o"
 	.include "src/battle_pyramid_bag.o"
-
-gUnknown_0203CF3C: @ 203CF3C
-	.space 0x4
-
-gUnknown_0203CF40: @ 203CF40
-	.space 0x4
-
-gUnknown_0203CF44: @ 203CF44
-	.space 0x4
+    .include "src/pokenav.o"
 
 gUnknown_0203CF48: @ 203CF48
 	.space 0x4

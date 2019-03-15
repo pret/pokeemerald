@@ -105,6 +105,13 @@ struct UnknownStruct_0203CF40
     void *field10[SUBSTRUCT_COUNT];
 };
 
+// Needed to match u32/u16 tag field difference.
+struct CompressedSpritePalette_
+{
+    const u32 *data;  // LZ77 compressed palette data
+    u32 tag;
+};
+
 extern u32 sub_81C9430(void);
 extern void sub_81CAADC(void);
 extern u32 sub_81C99D4(void);
@@ -176,6 +183,7 @@ extern u32 sub_81C8958(s32 a0);
 extern u32 sub_81C8A28(s32 a0);
 extern void sub_81C8B70(struct UnknownSubSubStruct_0203CF40 *a0, u32 a1, u32 a2);
 extern void sub_81C9008(struct UnknownSubStruct_81C81D4 *a0, u32 a1);
+extern void sub_81C7CB4(struct Sprite* sprite);
 
 u32 sub_81C8870(s32 a0);
 u32 sub_81C85A0(s32 a0);
@@ -425,7 +433,7 @@ const u8 gMenuButtonReminderColor[4] =
     4, 1, 2, 0
 };
 
-const struct CompressedSpriteSheet gUnknown_0861FA4C[] =
+static const struct CompressedSpriteSheet sUnknown_0861FA4C[] =
 {
     {
         .data = gUnknown_0861F5B0,
@@ -434,25 +442,194 @@ const struct CompressedSpriteSheet gUnknown_0861FA4C[] =
     }
 };
 
-const struct SpritePalette gUnknown_0861FA54[2] =
+static const struct SpritePalette sUnknown_0861FA54[] =
 {
     {
         .data = gUnknown_0861F590,
         .tag = 0,
     },
+    {}
 };
 
-const struct CompressedSpriteSheet gUnknown_0861FA64 =
+static const struct CompressedSpriteSheet sUnknown_0861FA64 =
 {
     .data = gPokenavLeftHeaderHoennMap_Gfx,
     .size = 0xC00,
     .tag = 2
 };
 
-extern struct UnknownStruct_0203CF40 *gUnknown_0203CF40;
-extern u8 gUnknown_0203CF3C;
-extern const struct SpriteTemplate gUnknown_0861FB04;
-extern u32 gUnknown_0203CF44;
+static const struct CompressedSpriteSheet sUnknown_0861FA6C[] =
+{
+    {
+        .data = gPokenavLeftHeaderMainMenu_Gfx,
+        .size = 0x20,
+        .tag = 3
+    },
+    {
+        .data = gPokenavLeftHeaderCondition_Gfx,
+        .size = 0x20,
+        .tag = 1
+    },
+    {
+        .data = gPokenavLeftHeaderRibbons_Gfx,
+        .size = 0x20,
+        .tag = 2
+    },
+    {
+        .data = gPokenavLeftHeaderMatchCall_Gfx,
+        .size = 0x20,
+        .tag = 4
+    },
+    {
+        .data = gPokenavLeftHeaderHoennMap_Gfx,
+        .size = 0x20,
+        .tag = 0
+    },
+    {
+        .data = gPokenavLeftHeaderHoennMap_Gfx,
+        .size = 0x40,
+        .tag = 0
+    }
+};
+
+static const struct CompressedSpritePalette_ sUnknown_0861FA9C[] =
+{
+    {
+        .data = gPokenavLeftHeaderParty_Gfx,
+        .tag = 1
+    },
+    {
+        .data = gPokenavLeftHeaderSearch_Gfx,
+        .tag = 1
+    },
+    {
+        .data = gPokenavLeftHeaderCool_Gfx,
+        .tag = 4
+    },
+    {
+        .data = gPokenavLeftHeaderBeauty_Gfx,
+        .tag = 1
+    },
+    {
+        .data = gPokenavLeftHeaderCute_Gfx,
+        .tag = 2
+    },
+    {
+        .data = gPokenavLeftHeaderSmart_Gfx,
+        .tag = 0
+    },
+    {
+        .data = gPokenavLeftHeaderTough_Gfx,
+        .tag = 0
+    }
+};
+
+static const struct OamData sUnknown_0861FAD4 =
+{
+    .y = 0,
+    .affineMode = 0,
+    .objMode = 0,
+    .mosaic = 0,
+    .bpp = 0,
+    .shape = 0, // FIXME: Use SPRITE_SHAPE
+    .x = 0,
+    .matrixNum = 0,
+    .size = 2, // FIXME: Use SPRITE_SIZE
+    .tileNum = 0,
+    .priority = 0,
+    .paletteNum = 0,
+    .affineParam = 0
+};
+
+static const union AnimCmd sUnknown_0861FADC[] =
+{
+    ANIMCMD_FRAME(0, 8),
+    ANIMCMD_FRAME(16, 8),
+    ANIMCMD_FRAME(32, 8),
+    ANIMCMD_FRAME(48, 8),
+    ANIMCMD_FRAME(64, 8),
+    ANIMCMD_FRAME(80, 8),
+    ANIMCMD_FRAME(96, 8),
+    ANIMCMD_FRAME(112, 8),
+    ANIMCMD_JUMP(0)
+};
+
+static const union AnimCmd *const sUnknown_0861FB00[] =
+{
+    sUnknown_0861FADC
+};
+
+static const struct SpriteTemplate sUnknown_0861FB04 =
+{
+    .tileTag = 0,
+    .paletteTag = 0,
+    .oam = &sUnknown_0861FAD4,
+    .anims = sUnknown_0861FB00,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_81C7CB4
+};
+
+static const struct OamData sUnknown_0861FB1C =
+{
+    .y = 0,
+    .affineMode = 0,
+    .objMode = 0,
+    .mosaic = 0,
+    .bpp = 0,
+    .shape = 1,
+    .x = 0,
+    .matrixNum = 0,
+    .size = 3,
+    .tileNum = 0,
+    .priority = 1,
+    .paletteNum = 0,
+    .affineParam = 0
+};
+
+static const struct OamData sUnknown_0861FB24 =
+{
+    .y = 0,
+    .affineMode = 0,
+    .objMode = 0,
+    .mosaic = 0,
+    .bpp = 0,
+    .shape = 1,
+    .x = 0,
+    .matrixNum = 0,
+    .size = 2,
+    .tileNum = 0,
+    .priority = 1,
+    .paletteNum = 0,
+    .affineParam = 0
+};
+
+static const struct SpriteTemplate sUnknown_0861FB2C =
+{
+    .tileTag = 2,
+    .paletteTag = 1,
+    .oam = &sUnknown_0861FB1C,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCallbackDummy
+};
+
+static const struct SpriteTemplate sUnknown_0861FB44 =
+{
+    .tileTag = 2,
+    .paletteTag = 2,
+    .oam = &sUnknown_0861FB24,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCallbackDummy
+};
+
+EWRAM_DATA u8 gUnknown_0203CF3C = 0;
+EWRAM_DATA struct UnknownStruct_0203CF40 *gUnknown_0203CF40 = NULL;
+EWRAM_DATA u32 gUnknown_0203CF44 = 0;
+
 // code
 u32 sub_81C7078(u32 (*func)(s32), u32 priority)
 {
@@ -1220,12 +1397,12 @@ void sub_81C7C28(void)
     u8 spriteId;
     struct UnknownSubStruct_0203CF40 *structPtr = GetSubstructPtr(0);
 
-    for (i = 0; i < ARRAY_COUNT(gUnknown_0861FA4C); i++)
-        LoadCompressedSpriteSheet(&gUnknown_0861FA4C[i]);
+    for (i = 0; i < ARRAY_COUNT(sUnknown_0861FA4C); i++)
+        LoadCompressedSpriteSheet(&sUnknown_0861FA4C[i]);
 
-    sub_81C795C(gUnknown_0861FA54);
+    sub_81C795C(sUnknown_0861FA54);
     structPtr->unk14 = ~1 & ~(0x10000 << IndexOfSpritePaletteTag(0));
-    spriteId = CreateSprite(&gUnknown_0861FB04, 220, 12, 0);
+    spriteId = CreateSprite(&sUnknown_0861FB04, 220, 12, 0);
     structPtr->unk18 = &gSprites[spriteId];
 }
 
@@ -1263,26 +1440,22 @@ void sub_81C7CE4(void)
     structPtr->unk18->subpriority = 0;
 }
 
-extern const struct SpriteTemplate gUnknown_0861FB2C;
-extern const struct SpriteTemplate gUnknown_0861FB44;
-extern const struct CompressedSpriteSheet gUnknown_0861FA6C[];
-
 void sub_81C7D28(void)
 {
     s32 i, spriteId;
     struct UnknownSubStruct_0203CF40 *structPtr = GetSubstructPtr(0);
 
-    LoadCompressedSpriteSheet(&gUnknown_0861FA64);
+    LoadCompressedSpriteSheet(&sUnknown_0861FA64);
     AllocSpritePalette(1);
     AllocSpritePalette(2);
     for (i = 0; i < 2; i++)
     {
-        spriteId = CreateSprite(&gUnknown_0861FB2C, 0, 0, 1);
+        spriteId = CreateSprite(&sUnknown_0861FB2C, 0, 0, 1);
         structPtr->unk1C[i] = &gSprites[spriteId];
         structPtr->unk1C[i]->invisible = TRUE;
         structPtr->unk1C[i]->pos2.x = i * 64;
 
-        spriteId = CreateSprite(&gUnknown_0861FB44, 0, 0, 2);
+        spriteId = CreateSprite(&sUnknown_0861FB44, 0, 0, 2);
         structPtr->unk24[i] = &gSprites[spriteId];
         structPtr->unk24[i]->invisible = TRUE;
         structPtr->unk24[i]->pos2.x = i * 32;
@@ -1318,27 +1491,18 @@ void sub_81C7E58(u32 arg0)
         return;
 
     structPtr = GetSubstructPtr(0);
-    tag = gUnknown_0861FA6C[arg0].tag;
-    size = GetDecompressedDataSize(gUnknown_0861FA6C[arg0].data);
+    tag = sUnknown_0861FA6C[arg0].tag;
+    size = GetDecompressedDataSize(sUnknown_0861FA6C[arg0].data);
     LoadPalette(&gPokenavLeftHeader_Pal[tag * 16], (IndexOfSpritePaletteTag(1) * 16) + 0x100, 0x20);
-    LZ77UnCompWram(gUnknown_0861FA6C[arg0].data, gDecompressionBuffer);
+    LZ77UnCompWram(sUnknown_0861FA6C[arg0].data, gDecompressionBuffer);
     RequestDma3Copy(gDecompressionBuffer, (void *)VRAM + 0x10000 + (GetSpriteTileStartByTag(2) * 32), size, 1);
-    structPtr->unk1C[1]->oam.tileNum = GetSpriteTileStartByTag(2) + gUnknown_0861FA6C[arg0].size;
+    structPtr->unk1C[1]->oam.tileNum = GetSpriteTileStartByTag(2) + sUnknown_0861FA6C[arg0].size;
 
     if (arg0 == 4 || arg0 == 5)
         structPtr->unk1C[1]->pos2.x = 56;
     else
         structPtr->unk1C[1]->pos2.x = 64;
 }
-
-// Needed to match u32/u16 tag field difference.
-struct CompressedSpritePalette_
-{
-    const u32 *data;  // LZ77 compressed palette data
-    u32 tag;
-};
-
-extern const struct CompressedSpritePalette_ gUnknown_0861FA9C[];
 
 void sub_81C7F24(u32 arg0)
 {
@@ -1347,10 +1511,10 @@ void sub_81C7F24(u32 arg0)
     if (arg0 >= 7)
         return;
 
-    tag = gUnknown_0861FA9C[arg0].tag;
-    size = GetDecompressedDataSize(gUnknown_0861FA9C[arg0].data);
+    tag = sUnknown_0861FA9C[arg0].tag;
+    size = GetDecompressedDataSize(sUnknown_0861FA9C[arg0].data);
     LoadPalette(&gPokenavLeftHeader_Pal[tag * 16], (IndexOfSpritePaletteTag(2) * 16) + 0x100, 0x20);
-    LZ77UnCompWram(gUnknown_0861FA9C[arg0].data, &gDecompressionBuffer[0x1000]);
+    LZ77UnCompWram(sUnknown_0861FA9C[arg0].data, &gDecompressionBuffer[0x1000]);
     RequestDma3Copy(&gDecompressionBuffer[0x1000], (void *)VRAM + 0x10800 + (GetSpriteTileStartByTag(2) * 32), size, 1);
 }
 
