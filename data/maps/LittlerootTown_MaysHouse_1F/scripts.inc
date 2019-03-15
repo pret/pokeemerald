@@ -84,7 +84,7 @@ LittlerootTown_MaysHouse_1F_EventScript_1F899D:: @ 81F899D
 	lockall
 	setvar VAR_0x8004, 1
 	setvar VAR_0x8005, 1
-	goto LittlerootTown_CommonHouse_EventScript_2928DC
+	goto LittlerootTown_CommonHouse_EventScript_MomTVScene_May
 	end
 
 LittlerootTown_MaysHouse_1F_EventScript_1F89AE:: @ 81F89AE

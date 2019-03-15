@@ -146,75 +146,75 @@ LittlerootTown_CommonHouse_Movement_MomUpstairsLeave_May: @ 8292862
 	delay_8
 	step_end
 
-LittlerootTown_CommonHouse_EventScript_292866:: @ 8292866
-	setvar VAR_LITTLEROOT_INTRO_STATE, LITTLEROOT_INTRO_STATE_7
+LittlerootTown_CommonHouse_EventScript_EndMoveInIntro:: @ 8292866
+	setvar VAR_LITTLEROOT_INTRO_STATE, LITTLEROOT_INTRO_STATE_DONE
 	releaseall
 	end
 
-LittlerootTown_CommonHouse_EventScript_29286D:: @ 829286D
+LittlerootTown_CommonHouse_EventScript_MomTVScene_Brendan:: @ 829286D
 	applymovement VAR_0x8005, Common_Movement_WalkInPlaceRight
 	waitmovement 0
-	call LittlerootTown_CommonHouse_EventScript_29294B
-	applymovement EVENT_OBJ_ID_PLAYER, LittlerootTown_CommonHouse_Movement_292AE0
+	call LittlerootTown_CommonHouse_EventScript_MomCallPlayerToTV
+	applymovement EVENT_OBJ_ID_PLAYER, LittlerootTown_CommonHouse_Movement_MovePlayerToTV_Brendan
 	waitmovement 0
 	playbgm MUS_INTER_V, 0
-	msgbox LittlerootTown_BrendansHouse_1F_Text_1F7BBC, MSGBOX_DEFAULT
+	msgbox LittlerootTown_CommonHouse_Text_MomLookAtTV, MSGBOX_DEFAULT
 	closemessage
-	applymovement VAR_0x8005, LittlerootTown_CommonHouse_Movement_2929B7
+	applymovement VAR_0x8005, LittlerootTown_CommonHouse_Movement_MoveMomFromTV_Brendan
 	waitmovement 0
-	applymovement EVENT_OBJ_ID_PLAYER, LittlerootTown_CommonHouse_Movement_292AE6
+	applymovement EVENT_OBJ_ID_PLAYER, LittlerootTown_CommonHouse_Movement_PlayerFaceTV_Brendan
 	waitmovement 0
-	call LittlerootTown_CommonHouse_EventScript_29296C
+	call LittlerootTown_CommonHouse_EventScript_WatchTVWithMom
 	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceLeft
 	waitmovement 0
-	msgbox LittlerootTown_BrendansHouse_1F_Text_1F7BF1, MSGBOX_DEFAULT
-	msgbox LittlerootTown_BrendansHouse_1F_Text_1F7C35, MSGBOX_DEFAULT
+	msgbox LittlerootTown_CommonHouse_Text_MomStopWatchingTV, MSGBOX_DEFAULT
+	msgbox LittlerootTown_CommonHouse_Text_IntroduceBirch, MSGBOX_DEFAULT
 	closemessage
 	setvar VAR_TEMP_1, 1
-	applymovement VAR_0x8005, LittlerootTown_CommonHouse_Movement_2929BD
+	applymovement VAR_0x8005, LittlerootTown_CommonHouse_Movement_MomWalkTVToSeat_Brendan
 	waitmovement 0
-	goto LittlerootTown_CommonHouse_EventScript_292866
+	goto LittlerootTown_CommonHouse_EventScript_EndMoveInIntro
 	end
 
-LittlerootTown_CommonHouse_EventScript_2928DC:: @ 82928DC
+LittlerootTown_CommonHouse_EventScript_MomTVScene_May:: @ 82928DC
 	applymovement VAR_0x8005, Common_Movement_WalkInPlaceLeft
 	waitmovement 0
-	call LittlerootTown_CommonHouse_EventScript_29294B
-	applymovement EVENT_OBJ_ID_PLAYER, LittlerootTown_CommonHouse_Movement_292AE8
+	call LittlerootTown_CommonHouse_EventScript_MomCallPlayerToTV
+	applymovement EVENT_OBJ_ID_PLAYER, LittlerootTown_CommonHouse_Movement_MovePlayerToTV_May
 	waitmovement 0
 	playbgm MUS_INTER_V, 0
-	msgbox LittlerootTown_MaysHouse_1F_Text_1F7BBC, MSGBOX_DEFAULT
+	msgbox LittlerootTown_CommonHouse_Text_MomLookAtTV, MSGBOX_DEFAULT
 	closemessage
-	applymovement VAR_0x8005, LittlerootTown_CommonHouse_Movement_2929BA
+	applymovement VAR_0x8005, LittlerootTown_CommonHouse_Movement_MoveMomFromTV_May
 	waitmovement 0
-	applymovement EVENT_OBJ_ID_PLAYER, LittlerootTown_CommonHouse_Movement_292AEE
+	applymovement EVENT_OBJ_ID_PLAYER, LittlerootTown_CommonHouse_Movement_PlayerFaceTV_May
 	waitmovement 0
-	call LittlerootTown_CommonHouse_EventScript_29296C
+	call LittlerootTown_CommonHouse_EventScript_WatchTVWithMom
 	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceRight
 	waitmovement 0
-	msgbox LittlerootTown_MaysHouse_1F_Text_1F7BF1, MSGBOX_DEFAULT
-	msgbox LittlerootTown_MaysHouse_1F_Text_1F7C35, MSGBOX_DEFAULT
+	msgbox LittlerootTown_CommonHouse_Text_MomStopWatchingTV, MSGBOX_DEFAULT
+	msgbox LittlerootTown_CommonHouse_Text_IntroduceBirch, MSGBOX_DEFAULT
 	closemessage
 	setvar VAR_TEMP_1, 1
-	applymovement VAR_0x8005, LittlerootTown_CommonHouse_Movement_2929C1
+	applymovement VAR_0x8005, LittlerootTown_CommonHouse_Movement_MomWalkTVToSeat_May
 	waitmovement 0
-	goto LittlerootTown_CommonHouse_EventScript_292866
+	goto LittlerootTown_CommonHouse_EventScript_EndMoveInIntro
 	end
 
-LittlerootTown_CommonHouse_EventScript_29294B:: @ 829294B
+LittlerootTown_CommonHouse_EventScript_MomCallPlayerToTV:: @ 829294B
 	playse SE_PIN
 	applymovement VAR_0x8005, Common_Movement_ExclamationMark
 	waitmovement 0
 	applymovement VAR_0x8005, Common_Movement_Delay48
 	waitmovement 0
-	msgbox LittlerootTown_BrendansHouse_1F_Text_1F7B96, MSGBOX_DEFAULT
+	msgbox LittlerootTown_BrendansHouse_1F_Text_MomCallPlayerToTV, MSGBOX_DEFAULT
 	closemessage
 	return
 
-LittlerootTown_CommonHouse_EventScript_29296C:: @ 829296C
+LittlerootTown_CommonHouse_EventScript_WatchTVWithMom:: @ 829296C
 	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceUp
 	waitmovement 0
-	msgbox LittlerootTown_BrendansHouse_1F_Text_1F7EC6, MSGBOX_DEFAULT
+	msgbox LittlerootTown_BrendansHouse_1F_Text_WatchTVWithMom, MSGBOX_DEFAULT
 	fadedefaultbgm
 	special TurnOffTVScreen
 	setflag FLAG_SYS_TV_HOME
@@ -283,23 +283,23 @@ LittlerootTown_CommonHouse_Movement_2929B3: @ 82929B3
 	walk_right
 	step_end
 
-LittlerootTown_CommonHouse_Movement_2929B7: @ 82929B7
+LittlerootTown_CommonHouse_Movement_MoveMomFromTV_Brendan: @ 82929B7
 	walk_left
 	walk_in_place_fastest_right
 	step_end
 
-LittlerootTown_CommonHouse_Movement_2929BA: @ 82929BA
+LittlerootTown_CommonHouse_Movement_MoveMomFromTV_May: @ 82929BA
 	walk_right
 	walk_in_place_fastest_left
 	step_end
 
-LittlerootTown_CommonHouse_Movement_2929BD: @ 82929BD
+LittlerootTown_CommonHouse_Movement_MomWalkTVToSeat_Brendan: @ 82929BD
 	walk_left
 	walk_down
 	walk_in_place_fastest_right
 	step_end
 
-LittlerootTown_CommonHouse_Movement_2929C1: @ 82929C1
+LittlerootTown_CommonHouse_Movement_MomWalkTVToSeat_May: @ 82929C1
 	walk_right
 	walk_down
 	walk_in_place_fastest_left
@@ -316,7 +316,7 @@ LittlerootTown_CommonHouse_EventScript_TalkToMom:: @ 82929C5
 	goto_if_set FLAG_RESCUED_BIRCH, LittlerootTown_CommonHouse_EventScript_292A86
 	compare VAR_TEMP_1, 1
 	goto_if_eq LittlerootTown_CommonHouse_EventScript_292A94
-	compare VAR_LITTLEROOT_INTRO_STATE, LITTLEROOT_INTRO_STATE_7
+	compare VAR_LITTLEROOT_INTRO_STATE, LITTLEROOT_INTRO_STATE_DONE
 	goto_if_eq LittlerootTown_CommonHouse_EventScript_292AB0
 	msgbox LittlerootTown_BrendansHouse_1F_Text_MomEnterHouse, MSGBOX_DEFAULT
 	release
@@ -399,7 +399,7 @@ LittlerootTown_CommonHouse_EventScript_TalkToMoverPokemon1:: @ 8292ACD
 	release
 	end
 
-LittlerootTown_CommonHouse_Movement_292AE0: @ 8292AE0
+LittlerootTown_CommonHouse_Movement_MovePlayerToTV_Brendan: @ 8292AE0
 	walk_down
 	walk_down
 	walk_left
@@ -407,11 +407,11 @@ LittlerootTown_CommonHouse_Movement_292AE0: @ 8292AE0
 	walk_left
 	step_end
 
-LittlerootTown_CommonHouse_Movement_292AE6: @ 8292AE6
+LittlerootTown_CommonHouse_Movement_PlayerFaceTV_Brendan: @ 8292AE6
 	walk_left
 	step_end
 
-LittlerootTown_CommonHouse_Movement_292AE8: @ 8292AE8
+LittlerootTown_CommonHouse_Movement_MovePlayerToTV_May: @ 8292AE8
 	walk_down
 	walk_down
 	walk_right
@@ -419,7 +419,7 @@ LittlerootTown_CommonHouse_Movement_292AE8: @ 8292AE8
 	walk_right
 	step_end
 
-LittlerootTown_CommonHouse_Movement_292AEE: @ 8292AEE
+LittlerootTown_CommonHouse_Movement_PlayerFaceTV_May: @ 8292AEE
 	walk_right
 	step_end
 

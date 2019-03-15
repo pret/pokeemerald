@@ -51,15 +51,15 @@ LittlerootTown_BrendansHouse_1F_EventScript_PlaceMomInDoorway:: @ 81F77DE
 
 LittlerootTown_BrendansHouse_1F_MapScript_OnFrameTable: @ 81F77EA
 	map_script_2 VAR_LITTLEROOT_INTRO_STATE, LITTLEROOT_INTRO_STATE_ENTERED_HOUSE, LittlerootTown_BrendansHouse_1F_EventScript_SetupFirstEnterHouse
-	map_script_2 VAR_LITTLEROOT_INTRO_STATE, LITTLEROOT_INTRO_STATE_MUST_SET_TIME, LittlerootTown_BrendansHouse_1F_EventScript_1F7814
+	map_script_2 VAR_LITTLEROOT_INTRO_STATE, LITTLEROOT_INTRO_STATE_MUST_SET_TIME, LittlerootTown_BrendansHouse_1F_EventScript_BlockPlayerAtStairs
 	map_script_2 VAR_LITTLEROOT_INTRO_STATE, LITTLEROOT_INTRO_STATE_CLOCK_IS_SET, LittlerootTown_BrendansHouse_1F_EventScript_1F784D
 	map_script_2 VAR_LITTLEROOT_HOUSES_STATE, HOUSES_STATE_1, LittlerootTown_BrendansHouse_1F_EventScript_1F785E
 	map_script_2 VAR_LITTLEROOT_HOUSES_STATE, HOUSES_STATE_3, LittlerootTown_CommonHouse_EventScript_292AF2
 	.2byte 0
 
-LittlerootTown_BrendansHouse_1F_EventScript_1F7814:: @ 81F7814
+LittlerootTown_BrendansHouse_1F_EventScript_BlockPlayerAtStairs:: @ 81F7814
 	lockall
-	msgbox LittlerootTown_BrendansHouse_1F_Text_MustSetTime_BlockPlayerAtStairs, MSGBOX_DEFAULT
+	msgbox LittlerootTown_BrendansHouse_1F_Text_BlockPlayerAtStairs, MSGBOX_DEFAULT
 	closemessage
 	applymovement EVENT_OBJ_ID_PLAYER, LittlerootTown_BrendansHouse_1F_Movement_PushPlayerUpStairs
 	applymovement 1, LittlerootTown_BrendansHouse_1F_Movement_PushPlayerUpStairs
@@ -84,7 +84,7 @@ LittlerootTown_BrendansHouse_1F_EventScript_1F784D:: @ 81F784D
 	lockall
 	setvar VAR_0x8004, 0
 	setvar VAR_0x8005, 1
-	goto LittlerootTown_CommonHouse_EventScript_29286D
+	goto LittlerootTown_CommonHouse_EventScript_MomTVScene_Brendan
 	end
 
 LittlerootTown_BrendansHouse_1F_EventScript_1F785E:: @ 81F785E
@@ -312,28 +312,25 @@ LittlerootTown_BrendansHouse_1F_Text_GoSeeRoom_BlockPlayerAtEntrance: @ 81F7B24
 	.string "Aren't you interested in seeing your\n"
 	.string "very own room?$"
 
-LittlerootTown_BrendansHouse_1F_Text_MustSetTime_BlockPlayerAtStairs: @ 81F7B67
+LittlerootTown_BrendansHouse_1F_Text_BlockPlayerAtStairs: @ 81F7B67
 LittlerootTown_MaysHouse_1F_Text_1F7B67: @ 81F7B67
 	.string "MOM: {PLAYER}.\p"
 	.string "Go set the clock in your room, honey.$"
 
-LittlerootTown_BrendansHouse_1F_Text_1F7B96: @ 81F7B96
+LittlerootTown_BrendansHouse_1F_Text_MomCallPlayerToTV: @ 81F7B96
 	.string "MOM: Oh! {PLAYER}, {PLAYER}!\n"
 	.string "Quick! Come quickly!$"
 
-LittlerootTown_BrendansHouse_1F_Text_1F7BBC: @ 81F7BBC
-LittlerootTown_MaysHouse_1F_Text_1F7BBC: @ 81F7BBC
+LittlerootTown_CommonHouse_Text_MomLookAtTV: @ 81F7BBC
 	.string "MOM: Look! It's PETALBURG GYM!\n"
 	.string "Maybe DAD will be on!$"
 
-LittlerootTown_BrendansHouse_1F_Text_1F7BF1: @ 81F7BF1
-LittlerootTown_MaysHouse_1F_Text_1F7BF1: @ 81F7BF1
+LittlerootTown_CommonHouse_Text_MomStopWatchingTV: @ 81F7BF1
 	.string "MOM: Oh… It's over.\p"
 	.string "I think DAD was on, but we missed him.\n"
 	.string "Too bad.$"
 
-LittlerootTown_BrendansHouse_1F_Text_1F7C35: @ 81F7C35
-LittlerootTown_MaysHouse_1F_Text_1F7C35: @ 81F7C35
+LittlerootTown_CommonHouse_Text_IntroduceBirch: @ 81F7C35
 	.string "Oh, yes.\n"
 	.string "One of DAD's friends lives in town.\p"
 	.string "PROF. BIRCH is his name.\p"
@@ -381,7 +378,7 @@ LittlerootTown_BrendansHouse_1F_Text_MoverPokemon2: @ 81F7EA8
 LittlerootTown_BrendansHouse_1F_Text_MoverPokemon1: @ 81F7EB3
 	.string "Huggoh, uggo uggo…$"
 
-LittlerootTown_BrendansHouse_1F_Text_1F7EC6: @ 81F7EC6
+LittlerootTown_BrendansHouse_1F_Text_WatchTVWithMom: @ 81F7EC6
 	.string "INTERVIEWER: …We brought you this\n"
 	.string "report from in front of PETALBURG GYM.$"
 
