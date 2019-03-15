@@ -300,5 +300,6 @@ extern const u8 BattleScript_DefiantActivates[];
 extern const u8 BattleScript_PowderMoveNoEffect[];
 extern const u8 BattleScript_GrassyTerrainLoop[];
 extern const u8 BattleScript_VCreateStatLoss[];
+extern const u8 BattleScript_SpikyShieldEffect[];
 
 #endif // GUARD_BATTLE_SCRIPTS_H

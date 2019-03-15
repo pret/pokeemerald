@@ -4151,6 +4151,7 @@ static void atk48_playstatchangeanimation(void)
 
 enum
 {
+    ATK49_SPIKY_SHIELD,
     ATK49_RAGE,
     ATK49_DEFROST,
     ATK49_SYNCHRONIZE_TARGET,
@@ -4202,6 +4203,23 @@ static void atk49_moveend(void)
     {
         switch (gBattleScripting.atk49_state)
         {
+        case ATK49_SPIKY_SHIELD:
+            if (gProtectStructs[gBattlerTarget].spikyShielded && gBattleMoves[gCurrentMove].flags & FLAG_MAKES_CONTACT)
+            {
+                if (!(GetBattlerAbility(gBattlerAttacker) == ABILITY_MAGIC_GUARD))
+                {
+                    gMoveResultFlags &= ~(MOVE_RESULT_NO_EFFECT);
+                    gBattleMoveDamage = gBattleMons[gBattlerAttacker].maxHP / 8;
+                    if (gBattleMoveDamage == 0)
+                        gBattleMoveDamage = 1;
+                    PREPARE_MOVE_BUFFER(gBattleTextBuff1, MOVE_SPIKY_SHIELD);
+                    BattleScriptPushCursor();
+                    gBattlescriptCurrInstr = BattleScript_SpikyShieldEffect;
+                    effect = 1;
+                }
+            }
+            gBattleScripting.atk49_state++;
+            break;
         case ATK49_RAGE: // rage check
             if (gBattleMons[gBattlerTarget].status2 & STATUS2_RAGE
                 && gBattleMons[gBattlerTarget].hp != 0 && gBattlerAttacker != gBattlerTarget
