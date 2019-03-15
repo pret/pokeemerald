@@ -1,16 +1,16 @@
 Route121_SafariZoneEntrance_MapScripts:: @ 822BBBB
-	map_script 2, Route121_SafariZoneEntrance_MapScript2_22BBC1
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, Route121_SafariZoneEntrance_MapScript2_22BBC1
 	.byte 0
 
 Route121_SafariZoneEntrance_MapScript2_22BBC1: @ 822BBC1
-	map_script_2 VAR_0x40A4, 1, Route121_SafariZoneEntrance_EventScript_22BBCB
+	map_script_2 VAR_SAFARI_ZONE_STATE, 1, Route121_SafariZoneEntrance_EventScript_22BBCB
 	.2byte 0
 
 Route121_SafariZoneEntrance_EventScript_22BBCB:: @ 822BBCB
 	lockall
 	applymovement EVENT_OBJ_ID_PLAYER, Route121_SafariZoneEntrance_Movement_22BBDD
 	waitmovement 0
-	setvar VAR_0x40A4, 0
+	setvar VAR_SAFARI_ZONE_STATE, 0
 	releaseall
 	end
 
@@ -46,7 +46,7 @@ Route121_SafariZoneEntrance_EventScript_22BC0E:: @ 822BC0E
 
 Route121_SafariZoneEntrance_EventScript_22BC18:: @ 822BC18
 	lockall
-	applymovement EVENT_OBJ_ID_PLAYER, Route121_SafariZoneEntrance_Movement_2725A6
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceUp
 	waitmovement 0
 	showmoneybox 0, 0, 0
 	msgbox Route121_SafariZoneEntrance_Text_2A4F74, MSGBOX_YESNO
@@ -81,7 +81,7 @@ Route121_SafariZoneEntrance_EventScript_22BC48:: @ 822BC48
 	applymovement EVENT_OBJ_ID_PLAYER, Route121_SafariZoneEntrance_Movement_22BD18
 	waitmovement 0
 	special EnterSafariMode
-	setvar VAR_0x40A4, 2
+	setvar VAR_SAFARI_ZONE_STATE, 2
 	clearflag FLAG_GOOD_LUCK_SAFARI_ZONE
 	warp MAP_SAFARI_ZONE_SOUTH, 255, 32, 33
 	waitstate

@@ -1,6 +1,6 @@
 BattleFrontier_BattlePikeRandomRoom2_MapScripts:: @ 825E392
-	map_script 2, BattleFrontier_BattlePikeRandomRoom2_MapScript2_25E39D
-	map_script 4, BattleFrontier_BattlePikeRandomRoom2_MapScript2_25E3DE
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, BattleFrontier_BattlePikeRandomRoom2_MapScript2_25E39D
+	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, BattleFrontier_BattlePikeRandomRoom2_MapScript2_25E3DE
 	.byte 0
 
 BattleFrontier_BattlePikeRandomRoom2_MapScript2_25E39D: @ 825E39D

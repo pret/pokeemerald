@@ -165,7 +165,6 @@ SECTIONS {
         src/fight.o(.text);
         src/poison.o(.text);
         src/flying.o(.text);
-        asm/flying.o(.text);
         src/psychic.o(.text);
         src/bug.o(.text);
         src/rock.o(.text);
@@ -178,7 +177,6 @@ SECTIONS {
         src/battle_intro.o(.text);
         src/bike.o(.text);
         src/easy_chat.o(.text);
-        asm/easy_chat.o(.text);
         src/mon_markings.o(.text);
         src/mauville_old_man.o(.text);
         src/mail.o(.text);
@@ -501,7 +499,7 @@ SECTIONS {
         src/battle_anim_utility_funcs.o(.rodata);
         src/battle_intro.o(.rodata);
         src/bike.o(.rodata);
-        data/easy_chat.o(.rodata);
+        src/easy_chat.o(.rodata);
         src/mon_markings.o(.rodata);
         src/mauville_old_man.o(.rodata);
         src/mail.o(.rodata);

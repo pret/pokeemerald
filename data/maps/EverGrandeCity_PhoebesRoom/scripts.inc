@@ -1,7 +1,7 @@
 EverGrandeCity_PhoebesRoom_MapScripts:: @ 8228174
-	map_script 1, EverGrandeCity_PhoebesRoom_MapScript1_2281AA
-	map_script 4, EverGrandeCity_PhoebesRoom_MapScript2_228184
-	map_script 2, EverGrandeCity_PhoebesRoom_MapScript2_228193
+	map_script MAP_SCRIPT_ON_LOAD, EverGrandeCity_PhoebesRoom_MapScript1_2281AA
+	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, EverGrandeCity_PhoebesRoom_MapScript2_228184
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, EverGrandeCity_PhoebesRoom_MapScript2_228193
 	.byte 0
 
 EverGrandeCity_PhoebesRoom_MapScript2_228184: @ 8228184
@@ -13,19 +13,19 @@ EverGrandeCity_PhoebesRoom_EventScript_22818E:: @ 822818E
 	end
 
 EverGrandeCity_PhoebesRoom_MapScript2_228193: @ 8228193
-	map_script_2 VAR_0x409C, 1, EverGrandeCity_PhoebesRoom_EventScript_22819D
+	map_script_2 VAR_ELITE_4_STATE, 1, EverGrandeCity_PhoebesRoom_EventScript_22819D
 	.2byte 0
 
 EverGrandeCity_PhoebesRoom_EventScript_22819D:: @ 822819D
 	lockall
 	call EverGrandeCity_PhoebesRoom_EventScript_272475
-	setvar VAR_0x409C, 2
+	setvar VAR_ELITE_4_STATE, 2
 	releaseall
 	end
 
 EverGrandeCity_PhoebesRoom_MapScript1_2281AA: @ 82281AA
 	call_if_set FLAG_DEFEATED_ELITE_4_PHOEBE, EverGrandeCity_PhoebesRoom_EventScript_2281BF
-	compare VAR_0x409C, 2
+	compare VAR_ELITE_4_STATE, 2
 	call_if_eq EverGrandeCity_PhoebesRoom_EventScript_2281C5
 	end
 

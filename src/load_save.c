@@ -11,10 +11,10 @@
 #include "trainer_hill.h"
 #include "gba/flash_internal.h"
 #include "decoration_inventory.h"
+#include "agb_flash.h"
 
 static void ApplyNewEncryptionKeyToAllEncryptedData(u32 encryptionKey);
 
-extern bool16 IdentifyFlash(void);
 extern void ApplyNewEncryptionKeyToBerryPowder(u32 key);
 
 #define SAVEBLOCK_MOVE_RANGE    128
@@ -99,7 +99,7 @@ void MoveSaveBlocks_ResetHeap(void)
     hblankCB = gMain.hblankCallback;
     gMain.vblankCallback = NULL;
     gMain.hblankCallback = NULL;
-    gUnknown_0203CF5C = NULL;
+    gTrainerHillVBlankCounter = NULL;
 
     saveBlock2Copy = (struct SaveBlock2 *)(gHeap);
     saveBlock1Copy = (struct SaveBlock1 *)(gHeap + sizeof(struct SaveBlock2));

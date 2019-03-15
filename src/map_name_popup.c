@@ -207,7 +207,7 @@ bool8 sub_80D47D4(void)
 
 void ShowMapNamePopup(void)
 {
-    if (FlagGet(FLAG_SPECIAL_FLAG_0x4000) != TRUE)
+    if (FlagGet(FLAG_HIDE_MAP_NAME_POPUP) != TRUE)
     {
         if (!FuncIsActiveTask(Task_MapNamePopUpWindow))
         {
@@ -276,7 +276,7 @@ static void Task_MapNamePopUpWindow(u8 taskId)
         }
         break;
     case 4:
-        sub_819746C(GetMapNamePopUpWindowId(), TRUE);
+        ClearStdWindowAndFrame(GetMapNamePopUpWindowId(), TRUE);
         task->data[0] = 5;
         break;
     case 5:
@@ -290,7 +290,7 @@ void HideMapNamePopUpWindow(void)
 {
     if (FuncIsActiveTask(Task_MapNamePopUpWindow))
     {
-        sub_819746C(GetMapNamePopUpWindowId(), TRUE);
+        ClearStdWindowAndFrame(GetMapNamePopUpWindowId(), TRUE);
         RemoveMapNamePopUpWindow();
         SetGpuReg_ForcedBlank(REG_OFFSET_BG0VOFS, 0);
         DestroyTask(sPopupTaskId);

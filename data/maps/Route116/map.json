@@ -433,7 +433,7 @@
       "x": 47,
       "y": 9,
       "elevation": 3,
-      "var": "VAR_0x406F",
+      "var": "VAR_ROUTE116_STATE",
       "var_value": "1",
       "script": "Route116_EventScript_1F2D95"
     }

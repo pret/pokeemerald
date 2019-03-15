@@ -28,7 +28,7 @@ SootopolisCity_House6_EventScript_226FA3:: @ 8226FA3
 
 SootopolisCity_House6_EventScript_226FAD:: @ 8226FAD
 	bufferdecorationname 1, 117
-	msgbox gUnknown_08272B1A, MSGBOX_DEFAULT
+	msgbox gText_NoRoomLeftForAnother, MSGBOX_DEFAULT
 	msgbox SootopolisCity_House6_Text_22704A, MSGBOX_DEFAULT
 	release
 	end

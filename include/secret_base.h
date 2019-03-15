@@ -33,6 +33,8 @@ void sub_80E8B6C(void);
 void sub_80E8BC8(void);
 void sub_80E8D4C(void);
 void EnableBothScriptContexts(void);
+void ReceiveSecretBasesData(void *records, size_t recordSize, u8 linkIdx);
+
 
 
 #endif //GUARD_SECRET_BASE_H

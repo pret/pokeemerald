@@ -16,8 +16,8 @@
 void sub_80AC6B4(struct Sprite *);
 
 // EWRAM
-EWRAM_DATA static u8 gUnknown_02038BC4 = 0;
-EWRAM_DATA static u16 gUnknown_02038BC6 = 0;
+EWRAM_DATA static u8 gCurrentAlternatingWeather = 0;
+EWRAM_DATA static u16 gUnusedWeatherRelated = 0;
 
 // CONST
 const u16 gUnknown_0854C290[] = INCBIN_U16("graphics/weather/1.gbapal");
@@ -2286,13 +2286,14 @@ void unc_0807DAB4(struct Sprite *sprite)
 
 //------------------------------------------------------------------------------
 
-static void sub_80AEC94(u32 a0, u32 a1)
+// Unused function.
+static void UnusedSetCurrentAlternatingWeather(u32 a0, u32 a1)
 {
-    gUnknown_02038BC4 = a0;
-    gUnknown_02038BC6 = a1;
+    gCurrentAlternatingWeather = a0;
+    gUnusedWeatherRelated = a1;
 }
 
-static void sub_80AECA8(u8 taskId)
+static void Task_DoAlternatingWeather(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
 
@@ -2301,8 +2302,8 @@ static void sub_80AECA8(u8 taskId)
     case 0:
         if (data[15]-- <= 0)
         {
-            ChangeWeather(data[1]);
-            gUnknown_02038BC4 = data[1];
+            SetNextWeather(data[1]);
+            gCurrentAlternatingWeather = data[1];
             data[15] = 600;
             data[0]++;
         }
@@ -2310,8 +2311,8 @@ static void sub_80AECA8(u8 taskId)
     case 1:
         if (data[15]-- <= 0)
         {
-            ChangeWeather(data[2]);
-            gUnknown_02038BC4 = data[2];
+            SetNextWeather(data[2]);
+            gCurrentAlternatingWeather = data[2];
             data[15] = 600;
             data[0] = 0;
         }
@@ -2319,25 +2320,25 @@ static void sub_80AECA8(u8 taskId)
     }
 }
 
-static void sub_80AED28(void)
+static void CreateAlternatingWeatherTask(void)
 {
-    u8 taskId = CreateTask(sub_80AECA8, 0);
+    u8 taskId = CreateTask(Task_DoAlternatingWeather, 0);
     s16 *data = gTasks[taskId].data;
 
     data[15] = 600;
-    if (gUnknown_02038BC4 == WEATHER_RAIN_HEAVY)
+    if (gCurrentAlternatingWeather == WEATHER_RAIN_HEAVY)
     {
         data[1] = WEATHER_DROUGHT;
         data[2] = WEATHER_RAIN_HEAVY;
     }
-    else if (gUnknown_02038BC4 == WEATHER_DROUGHT)
+    else if (gCurrentAlternatingWeather == WEATHER_DROUGHT)
     {
         data[1] = WEATHER_RAIN_HEAVY;
         data[2] = WEATHER_DROUGHT;
     }
     else
     {
-        gUnknown_02038BC4 = WEATHER_RAIN_HEAVY;
+        gCurrentAlternatingWeather = WEATHER_RAIN_HEAVY;
         data[1] = WEATHER_DROUGHT;
         data[2] = WEATHER_RAIN_HEAVY;
     }
@@ -2368,51 +2369,51 @@ void SetSav1WeatherFromCurrMapHeader(void)
 void SetWeather(u32 weather)
 {
     SetSav1Weather(weather);
-    ChangeWeather(GetSav1Weather());
+    SetNextWeather(GetSav1Weather());
 }
 
 void SetWeather_Unused(u32 weather)
 {
     SetSav1Weather(weather);
-    sub_80AB104(GetSav1Weather());
+    SetCurrentAndNextWeather(GetSav1Weather());
 }
 
 void DoCurrentWeather(void)
 {
     u8 weather = GetSav1Weather();
 
-    if (weather == WEATHER_15)
+    if (weather == WEATHER_ALTERNATING)
     {
-        if (!FuncIsActiveTask(sub_80AECA8))
-            sub_80AED28();
-        weather = gUnknown_02038BC4;
+        if (!FuncIsActiveTask(Task_DoAlternatingWeather))
+            CreateAlternatingWeatherTask();
+        weather = gCurrentAlternatingWeather;
     }
     else
     {
-        if (FuncIsActiveTask(sub_80AECA8))
-            DestroyTask(FindTaskIdByFunc(sub_80AECA8));
-        gUnknown_02038BC4 = WEATHER_RAIN_HEAVY;
+        if (FuncIsActiveTask(Task_DoAlternatingWeather))
+            DestroyTask(FindTaskIdByFunc(Task_DoAlternatingWeather));
+        gCurrentAlternatingWeather = WEATHER_RAIN_HEAVY;
     }
-    ChangeWeather(weather);
+    SetNextWeather(weather);
 }
 
-void sub_80AEE84(void)
+void ResumePausedWeather(void)
 {
     u8 weather = GetSav1Weather();
 
-    if (weather == WEATHER_15)
+    if (weather == WEATHER_ALTERNATING)
     {
-        if (!FuncIsActiveTask(sub_80AECA8))
-            sub_80AED28();
-        weather = gUnknown_02038BC4;
+        if (!FuncIsActiveTask(Task_DoAlternatingWeather))
+            CreateAlternatingWeatherTask();
+        weather = gCurrentAlternatingWeather;
     }
     else
     {
-        if (FuncIsActiveTask(sub_80AECA8))
-            DestroyTask(FindTaskIdByFunc(sub_80AECA8));
-        gUnknown_02038BC4 = WEATHER_RAIN_HEAVY;
+        if (FuncIsActiveTask(Task_DoAlternatingWeather))
+            DestroyTask(FindTaskIdByFunc(Task_DoAlternatingWeather));
+        gCurrentAlternatingWeather = WEATHER_RAIN_HEAVY;
     }
-    sub_80AB104(weather);
+    SetCurrentAndNextWeather(weather);
 }
 
 static const u8 sWeatherCycleRoute119[] =
@@ -2434,25 +2435,25 @@ static u8 TranslateWeatherNum(u8 weather)
 {
     switch (weather)
     {
-    case WEATHER_NONE:       return WEATHER_NONE;
-    case WEATHER_CLOUDS:     return WEATHER_CLOUDS;
-    case WEATHER_SUNNY:      return WEATHER_SUNNY;
-    case WEATHER_RAIN_LIGHT: return WEATHER_RAIN_LIGHT;
-    case WEATHER_SNOW:       return WEATHER_SNOW;
-    case WEATHER_RAIN_MED:   return WEATHER_RAIN_MED;
-    case WEATHER_FOG_1:      return WEATHER_FOG_1;
-    case WEATHER_ASH:        return WEATHER_ASH;
-    case WEATHER_SANDSTORM:  return WEATHER_SANDSTORM;
-    case WEATHER_FOG_2:      return WEATHER_FOG_2;
-    case WEATHER_FOG_3:      return WEATHER_FOG_3;
-    case WEATHER_SHADE:      return WEATHER_SHADE;
-    case WEATHER_DROUGHT:    return WEATHER_DROUGHT;
-    case WEATHER_RAIN_HEAVY: return WEATHER_RAIN_HEAVY;
-    case WEATHER_BUBBLES:    return WEATHER_BUBBLES;
-    case WEATHER_15:         return WEATHER_15;
+    case WEATHER_NONE:           return WEATHER_NONE;
+    case WEATHER_CLOUDS:         return WEATHER_CLOUDS;
+    case WEATHER_SUNNY:          return WEATHER_SUNNY;
+    case WEATHER_RAIN_LIGHT:     return WEATHER_RAIN_LIGHT;
+    case WEATHER_SNOW:           return WEATHER_SNOW;
+    case WEATHER_RAIN_MED:       return WEATHER_RAIN_MED;
+    case WEATHER_FOG_1:          return WEATHER_FOG_1;
+    case WEATHER_ASH:            return WEATHER_ASH;
+    case WEATHER_SANDSTORM:      return WEATHER_SANDSTORM;
+    case WEATHER_FOG_2:          return WEATHER_FOG_2;
+    case WEATHER_FOG_3:          return WEATHER_FOG_3;
+    case WEATHER_SHADE:          return WEATHER_SHADE;
+    case WEATHER_DROUGHT:        return WEATHER_DROUGHT;
+    case WEATHER_RAIN_HEAVY:     return WEATHER_RAIN_HEAVY;
+    case WEATHER_BUBBLES:        return WEATHER_BUBBLES;
+    case WEATHER_ALTERNATING:    return WEATHER_ALTERNATING;
     case WEATHER_ROUTE119_CYCLE: return sWeatherCycleRoute119[gSaveBlock1Ptr->weatherCycleStage];
     case WEATHER_ROUTE123_CYCLE: return sWeatherCycleRoute123[gSaveBlock1Ptr->weatherCycleStage];
-    default:                 return WEATHER_NONE;
+    default:                     return WEATHER_NONE;
     }
 }
 

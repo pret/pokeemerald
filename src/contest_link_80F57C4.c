@@ -39,6 +39,7 @@
 #include "constants/rgb.h"
 #include "constants/songs.h"
 #include "constants/vars.h"
+#include "contest.h"
 
 struct ContestLinkUnk0
 {
@@ -98,8 +99,6 @@ extern const struct SpriteTemplate gSpriteTemplate_858D7F8;
 extern const struct SpriteSheet gUnknown_0858D810[];
 extern const struct SpritePalette gUnknown_0858D850;
 extern const struct SpriteTemplate gSpriteTemplate_858D860;
-
-extern void sub_81D9DE4(u8);
 
 static void sub_80F6A9C(void);
 static void sub_80F71C8(void);
@@ -372,12 +371,12 @@ static void sub_80F5CE4(u8 taskId)
             sub_80DEDA8(0xFE);
             gUnknown_02039F5C = 1;
             gUnknown_02039F5D = sub_80DEFA8(0xFE, 0);
-            var = VarGet(VAR_0x4086);
-            VarSet(VAR_0x4086, 0);
+            var = VarGet(VAR_LINK_CONTEST_ROOM_STATE);
+            VarSet(VAR_LINK_CONTEST_ROOM_STATE, 0);
             SetContinueGameWarpStatusToDynamicWarp();
             TrySavingData(SAVE_LINK);
             ClearContinueGameWarpStatus2();
-            VarSet(VAR_0x4086, var);
+            VarSet(VAR_LINK_CONTEST_ROOM_STATE, var);
             gTasks[taskId].data[0]++;
             break;
         case 1:
@@ -935,7 +934,7 @@ static void sub_80F6AE8(void)
 //     windowTemplate.width = 30;
 //     windowTemplate.height = 2;
 //     windowId = AddWindow(&windowTemplate);
-//     FillWindowPixelBuffer(windowId, 0x11);
+//     FillWindowPixelBuffer(windowId, PIXEL_FILL(1));
 //     origWidth = GetStringWidth(1, text, 0) + 9;
 //     strWidth = origWidth;
 //     if (strWidth < 0)

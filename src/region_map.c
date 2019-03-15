@@ -883,7 +883,7 @@ static void RegionMap_InitializeStateBasedOnPlayerLocation(void)
         case MAP_TYPE_CITY:
         case MAP_TYPE_ROUTE:
         case MAP_TYPE_UNDERWATER:
-        case MAP_TYPE_6:
+        case MAP_TYPE_OCEAN_ROUTE:
             gRegionMap->mapSecId = gMapHeader.regionMapSectionId;
             gRegionMap->playerIsInCave = FALSE;
             mapWidth = gMapHeader.mapLayout->width;
@@ -896,7 +896,7 @@ static void RegionMap_InitializeStateBasedOnPlayerLocation(void)
             }
             break;
         case MAP_TYPE_UNDERGROUND:
-        case MAP_TYPE_7:
+        case MAP_TYPE_UNUSED_2:
             if (gMapHeader.flags & 0x02)
             {
                 mapHeader = Overworld_GetMapHeaderByGroupAndId(gSaveBlock1Ptr->escapeWarp.mapGroup, gSaveBlock1Ptr->escapeWarp.mapNum);
@@ -1159,7 +1159,7 @@ static u16 RegionMap_GetTerraCaveMapSecId(void)
 {
     s16 idx;
 
-    idx = VarGet(VAR_0x4037) - 1;
+    idx = VarGet(VAR_UNUSUAL_WEATHER_LOCATION) - 1;
     if (idx < 0 || idx > 15)
     {
         idx = 0;
@@ -1171,7 +1171,7 @@ static void RegionMap_GetMarineCaveCoords(u16 *x, u16 *y)
 {
     u16 idx;
 
-    idx = VarGet(VAR_0x4037);
+    idx = VarGet(VAR_UNUSUAL_WEATHER_LOCATION);
     if (idx < 9 || idx > 16)
     {
         idx = 9;
@@ -1622,7 +1622,7 @@ void MCB2_FlyMap(void)
         case 7:
             LoadPalette(sRegionMapFramePal, 0x10, 0x20);
             PutWindowTilemap(2);
-            FillWindowPixelBuffer(2, 0x00);
+            FillWindowPixelBuffer(2, PIXEL_FILL(0));
             AddTextPrinterParameterized(2, 1, gText_FlyToWhere, 0, 1, 0, NULL);
             schedule_bg_copy_tilemap_to_vram(0);
             gMain.state++;
@@ -1687,8 +1687,8 @@ static void sub_8124904(void)
                 {
                     StringLength(gUnknown_085A1EDC[i].name[sFlyMap->regionMap.posWithinMapSec]);
                     flag = TRUE;
-                    sub_8198070(0, FALSE);
-                    SetWindowBorderStyle(1, FALSE, 0x65, 0x0d);
+                    ClearStdWindowAndFrameToTransparent(0, FALSE);
+                    DrawStdFrameWithCustomTileAndPalette(1, FALSE, 0x65, 0x0d);
                     AddTextPrinterParameterized(1, 1, sFlyMap->regionMap.mapSecName, 0, 1, 0, NULL);
                     name = gUnknown_085A1EDC[i].name[sFlyMap->regionMap.posWithinMapSec];
                     AddTextPrinterParameterized(1, 1, name, GetStringRightAlignXOffset(1, name, 0x60), 0x11, 0, NULL);
@@ -1702,12 +1702,12 @@ static void sub_8124904(void)
         {
             if (gUnknown_03001180 == TRUE)
             {
-                sub_8198070(1, FALSE);
-                SetWindowBorderStyle(0, FALSE, 0x65, 0x0d);
+                ClearStdWindowAndFrameToTransparent(1, FALSE);
+                DrawStdFrameWithCustomTileAndPalette(0, FALSE, 0x65, 0x0d);
             }
             else
             {
-                FillWindowPixelBuffer(0, 0x11);
+                FillWindowPixelBuffer(0, PIXEL_FILL(1));
             }
             AddTextPrinterParameterized(0, 1, sFlyMap->regionMap.mapSecName, 0, 1, 0, NULL);
             schedule_bg_copy_tilemap_to_vram(0);
@@ -1718,10 +1718,10 @@ static void sub_8124904(void)
     {
         if (gUnknown_03001180 == TRUE)
         {
-            sub_8198070(1, FALSE);
-            SetWindowBorderStyle(0, FALSE, 0x65, 0x0d);
+            ClearStdWindowAndFrameToTransparent(1, FALSE);
+            DrawStdFrameWithCustomTileAndPalette(0, FALSE, 0x65, 0x0d);
         }
-        FillWindowPixelBuffer(0, 0x11);
+        FillWindowPixelBuffer(0, PIXEL_FILL(1));
         CopyWindowToVram(0, 2);
         schedule_bg_copy_tilemap_to_vram(0);
         gUnknown_03001180 = FALSE;

@@ -1,7 +1,7 @@
 MtPyre_2F_MapScripts:: @ 82310FB
-	map_script 2, MtPyre_2F_MapScript2_2A8327
-	map_script 3, MtPyre_2F_MapScript1_2A8331
-	map_script 5, MtPyre_2F_MapScript1_23110B
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, MtPyre_2F_MapScript2_2A8327
+	map_script MAP_SCRIPT_ON_TRANSITION, MtPyre_2F_MapScript1_2A8331
+	map_script MAP_SCRIPT_ON_RESUME, MtPyre_2F_MapScript1_23110B
 	.byte 0
 
 MtPyre_2F_MapScript1_23110B: @ 823110B

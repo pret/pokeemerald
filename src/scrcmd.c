@@ -1203,7 +1203,7 @@ bool8 ScrCmd_turnvobject(struct ScriptContext *ctx)
 
 bool8 ScrCmd_lockall(struct ScriptContext *ctx)
 {
-    if (is_c1_link_related_active())
+    if (IsUpdateLinkStateCBActive())
     {
         return FALSE;
     }
@@ -1217,7 +1217,7 @@ bool8 ScrCmd_lockall(struct ScriptContext *ctx)
 
 bool8 ScrCmd_lock(struct ScriptContext *ctx)
 {
-    if (is_c1_link_related_active())
+    if (IsUpdateLinkStateCBActive())
     {
         return FALSE;
     }
@@ -1302,7 +1302,7 @@ bool8 ScrCmd_cmdDB(struct ScriptContext *ctx)
     if (msg == NULL)
         msg = (const u8 *)ctx->data[0];
     sub_81973A4();
-    NewMenuHelpers_DrawDialogueFrame(0, 1);
+    DrawDialogueFrame(0, 1);
     AddTextPrinterParameterized(0, 1, msg, 0, 1, 0, 0);
     return FALSE;
 }
@@ -1517,9 +1517,9 @@ bool8 ScrCmd_braillemessage(struct ScriptContext *ctx)
     winTemplate = CreateWindowTemplate(0, xWindow, yWindow + 1, width, height, 0xF, 0x1);
     gUnknown_03000F30 = AddWindow(&winTemplate);
     LoadUserWindowBorderGfx(gUnknown_03000F30, 0x214, 0xE0);
-    NewMenuHelpers_DrawStdWindowFrame(gUnknown_03000F30, 0);
+    DrawStdWindowFrame(gUnknown_03000F30, 0);
     PutWindowTilemap(gUnknown_03000F30);
-    FillWindowPixelBuffer(gUnknown_03000F30, 0x11);
+    FillWindowPixelBuffer(gUnknown_03000F30, PIXEL_FILL(1));
     AddTextPrinterParameterized(gUnknown_03000F30, 6, gStringVar4, xText, yText, 0xFF, 0x0);
     CopyWindowToVram(gUnknown_03000F30, 3);
     return FALSE;
@@ -2028,14 +2028,14 @@ bool8 ScrCmd_setmetatile(struct ScriptContext *ctx)
     u16 x = VarGet(ScriptReadHalfword(ctx));
     u16 y = VarGet(ScriptReadHalfword(ctx));
     u16 tileId = VarGet(ScriptReadHalfword(ctx));
-    u16 v8 = VarGet(ScriptReadHalfword(ctx));
+    u16 isImpassable = VarGet(ScriptReadHalfword(ctx));
 
     x += 7;
     y += 7;
-    if (!v8)
+    if (!isImpassable)
         MapGridSetMetatileIdAt(x, y, tileId);
     else
-        MapGridSetMetatileIdAt(x, y, tileId | 0xC00);
+        MapGridSetMetatileIdAt(x, y, tileId | METATILE_COLLISION_MASK);
     return FALSE;
 }
 
@@ -2182,7 +2182,7 @@ bool8 ScrCmd_cmdD8(struct ScriptContext *ctx)
 
 bool8 ScrCmd_cmdD9(struct ScriptContext *ctx)
 {
-    if (is_c1_link_related_active())
+    if (IsUpdateLinkStateCBActive())
     {
         return FALSE;
     }
@@ -2254,7 +2254,7 @@ bool8 ScrCmd_setmonmetlocation(struct ScriptContext *ctx)
 
 void sub_809BDB4(void)
 {
-    sub_819746C(gUnknown_03000F30, 1);
+    ClearStdWindowAndFrame(gUnknown_03000F30, 1);
     RemoveWindow(gUnknown_03000F30);
 }
 

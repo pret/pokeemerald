@@ -45,8 +45,6 @@
 #include "constants/rgb.h"
 #include "contest_ai.h"
 
-extern void sub_80FC9F8(u8); // contest_link_80FC4F4.c
-
 // This file's functions.
 static void sub_80D782C(void);
 static void sub_80D7C7C(u8 taskId);
@@ -819,7 +817,7 @@ static void sub_80D8490(u8 taskId)
         }
         r5 = StringCopy(r5, gMoveNames[move]);
 
-        FillWindowPixelBuffer(i + 5, 0);
+        FillWindowPixelBuffer(i + 5, PIXEL_FILL(0));
         Contest_PrintTextToBg0WindowAt(i + 5, sp8, 5, 1, 7);
     }
 
@@ -941,7 +939,7 @@ static void sub_80D895C(u8 taskId)
 
     for (i = 0; i < 4; i++)
     {
-        FillWindowPixelBuffer(5 + i, 0);
+        FillWindowPixelBuffer(5 + i, PIXEL_FILL(0));
         PutWindowTilemap(5 + i);
         CopyWindowToVram(5 + i, 2);
     }
@@ -2258,7 +2256,7 @@ static void sub_80DAEA4(void)
 
     for (i = 0; i < 4; i++)
     {
-        FillWindowPixelBuffer(gUnknown_02039F26[i], 0);
+        FillWindowPixelBuffer(gUnknown_02039F26[i], PIXEL_FILL(0));
         sub_80DAF04(i);
         sub_80DAF88(i);
     }
@@ -2478,7 +2476,7 @@ static void prints_contest_move_description(u16 a)
     ContestBG_FillBoxWithTile(0, 0x5036, 0x15, 0x20, 0x08,      0x01, 0x11);
     ContestBG_FillBoxWithTile(0, 0x5014, 0x15, 0x20, numHearts, 0x01, 0x11);
 
-    FillWindowPixelBuffer(10, 0);
+    FillWindowPixelBuffer(10, PIXEL_FILL(0));
     Contest_PrintTextToBg0WindowStd(10, gContestEffectDescriptionPointers[gContestMoves[a].effect]);
     Contest_PrintTextToBg0WindowStd(9, gText_Slash);
 }
@@ -2621,7 +2619,7 @@ static void sub_80DB884(void)
 
 static void sub_80DB89C(void)
 {
-    FillWindowPixelBuffer(4, 0);
+    FillWindowPixelBuffer(4, PIXEL_FILL(0));
     CopyWindowToVram(4, 2);
     Contest_SetBgCopyFlags(0);
 }
@@ -3456,7 +3454,7 @@ static void sub_80DCD48(void)
         break;
     default:
         for (i = 0; i < 4; i++)
-            FillWindowPixelBuffer(i, 0);
+            FillWindowPixelBuffer(i, PIXEL_FILL(0));
         for (i = 0; i < 4; i++)
         {
             value = sContestantStatus[i].unk4;
@@ -5038,7 +5036,7 @@ static void sub_80DF750(void)
         return;
 
     for (i = 0; i < 4; i++)
-        FillWindowPixelBuffer(i, 0);
+        FillWindowPixelBuffer(i, PIXEL_FILL(0));
 
     if (gHeap[0x1A000] == 2)
     {

@@ -1,8 +1,8 @@
 BattleFrontier_BattleTowerLobby_MapScripts:: @ 823E67B
-	map_script 5, BattleFrontier_BattleTowerLobby_MapScript1_23E690
-	map_script 3, BattleFrontier_BattleTowerLobby_MapScript1_23E694
-	map_script 2, BattleFrontier_BattleTowerLobby_MapScript2_23E6DD
-	map_script 4, BattleFrontier_BattleTowerLobby_MapScript2_23E6C9
+	map_script MAP_SCRIPT_ON_RESUME, BattleFrontier_BattleTowerLobby_MapScript1_23E690
+	map_script MAP_SCRIPT_ON_TRANSITION, BattleFrontier_BattleTowerLobby_MapScript1_23E694
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, BattleFrontier_BattleTowerLobby_MapScript2_23E6DD
+	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, BattleFrontier_BattleTowerLobby_MapScript2_23E6C9
 	.byte 0
 
 BattleFrontier_BattleTowerLobby_MapScript1_23E690: @ 823E690
@@ -231,7 +231,7 @@ BattleFrontier_BattleTowerLobby_EventScript_23E8EE:: @ 823E8EE
 	end
 
 BattleFrontier_BattleTowerLobby_EventScript_23E930:: @ 823E930
-	setvar VAR_0x40BC, 1
+	setvar VAR_BRAVO_TRAINER_BATTLE_TOWER_ON, 1
 	return
 
 BattleFrontier_BattleTowerLobby_EventScript_23E936:: @ 823E936
@@ -300,12 +300,12 @@ BattleFrontier_BattleTowerLobby_EventScript_23EA2A:: @ 823EA2A
 	special LoadPlayerParty
 	closemessage
 	delay 2
-	call BattleFrontier_BattleTowerLobby_EventScript_27134F
+	call Common_EventScript_SaveGame
 	setvar VAR_TEMP_0, 255
 	compare VAR_RESULT, 0
 	goto_if_eq BattleFrontier_BattleTowerLobby_EventScript_23F0D0
 	incrementgamestat 30
-	setvar VAR_0x40BC, 1
+	setvar VAR_BRAVO_TRAINER_BATTLE_TOWER_ON, 1
 	goto BattleFrontier_BattleTowerLobby_EventScript_23F0F3
 	end
 
@@ -380,12 +380,12 @@ BattleFrontier_BattleTowerLobby_EventScript_23EB93:: @ 823EB93
 	special LoadPlayerParty
 	closemessage
 	delay 2
-	call BattleFrontier_BattleTowerLobby_EventScript_27134F
+	call Common_EventScript_SaveGame
 	setvar VAR_TEMP_0, 255
 	compare VAR_RESULT, 0
 	goto_if_eq BattleFrontier_BattleTowerLobby_EventScript_23F0D0
 	incrementgamestat 30
-	setvar VAR_0x40BC, 0
+	setvar VAR_BRAVO_TRAINER_BATTLE_TOWER_ON, 0
 	goto BattleFrontier_BattleTowerLobby_EventScript_23F0F3
 	end
 
@@ -461,12 +461,12 @@ BattleFrontier_BattleTowerLobby_EventScript_23ECFF:: @ 823ECFF
 	special LoadPlayerParty
 	closemessage
 	delay 2
-	call BattleFrontier_BattleTowerLobby_EventScript_27134F
+	call Common_EventScript_SaveGame
 	setvar VAR_TEMP_0, 255
 	compare VAR_RESULT, 0
 	goto_if_eq BattleFrontier_BattleTowerLobby_EventScript_23F0D0
 	incrementgamestat 30
-	setvar VAR_0x40BC, 0
+	setvar VAR_BRAVO_TRAINER_BATTLE_TOWER_ON, 0
 	goto BattleFrontier_BattleTowerLobby_EventScript_23F0F3
 	end
 
@@ -544,7 +544,7 @@ BattleFrontier_BattleTowerLobby_EventScript_23EE68:: @ 823EE68
 	setvar VAR_0x8004, 6
 	setvar VAR_0x8005, 0
 	special sub_8161F74
-	call BattleFrontier_BattleTowerLobby_EventScript_27134F
+	call Common_EventScript_SaveGame
 	setvar VAR_TEMP_0, 255
 	compare VAR_RESULT, 0
 	goto_if_eq BattleFrontier_BattleTowerLobby_EventScript_23F0D0
@@ -572,8 +572,8 @@ BattleFrontier_BattleTowerLobby_EventScript_23EEE7:: @ 823EEE7
 
 BattleFrontier_BattleTowerLobby_EventScript_23EF32:: @ 823EF32
 	msgbox BattleFrontier_BattleTowerLobby_Text_23F969, MSGBOX_DEFAULT
-	setvar VAR_0x8004, 1
-	call BattleFrontier_BattleTowerLobby_EventScript_271E7C
+	setvar VAR_0x8004, EASY_CHAT_TYPE_BATTLE_START
+	call Common_ShowEasyChatScreen
 	lock
 	faceplayer
 	goto BattleFrontier_BattleTowerLobby_EventScript_23EF8A
@@ -581,8 +581,8 @@ BattleFrontier_BattleTowerLobby_EventScript_23EF32:: @ 823EF32
 
 BattleFrontier_BattleTowerLobby_EventScript_23EF4C:: @ 823EF4C
 	msgbox BattleFrontier_BattleTowerLobby_Text_23F9AA, MSGBOX_DEFAULT
-	setvar VAR_0x8004, 2
-	call BattleFrontier_BattleTowerLobby_EventScript_271E7C
+	setvar VAR_0x8004, EASY_CHAT_TYPE_BATTLE_WON
+	call Common_ShowEasyChatScreen
 	lock
 	faceplayer
 	goto BattleFrontier_BattleTowerLobby_EventScript_23EF8A
@@ -590,8 +590,8 @@ BattleFrontier_BattleTowerLobby_EventScript_23EF4C:: @ 823EF4C
 
 BattleFrontier_BattleTowerLobby_EventScript_23EF66:: @ 823EF66
 	msgbox BattleFrontier_BattleTowerLobby_Text_23F9D4, MSGBOX_DEFAULT
-	setvar VAR_0x8004, 3
-	call BattleFrontier_BattleTowerLobby_EventScript_271E7C
+	setvar VAR_0x8004, EASY_CHAT_TYPE_BATTLE_LOST
+	call Common_ShowEasyChatScreen
 	lock
 	faceplayer
 	goto BattleFrontier_BattleTowerLobby_EventScript_23EF8A
@@ -995,7 +995,7 @@ BattleFrontier_BattleTowerLobby_EventScript_23F3A6:: @ 823F3A6
 
 BattleFrontier_BattleTowerLobby_EventScript_23F3AF:: @ 823F3AF
 	incrementgamestat 30
-	setvar VAR_0x40BC, 0
+	setvar VAR_BRAVO_TRAINER_BATTLE_TOWER_ON, 0
 	message BattleFrontier_BattleTowerLobby_Text_24144D
 	waitmessage
 	setvar VAR_0x8004, 6
@@ -1058,7 +1058,7 @@ BattleFrontier_BattleTowerLobby_EventScript_23F463:: @ 823F463
 
 BattleFrontier_BattleTowerLobby_EventScript_23F496:: @ 823F496
 	incrementgamestat 30
-	setvar VAR_0x40BC, 0
+	setvar VAR_BRAVO_TRAINER_BATTLE_TOWER_ON, 0
 	message BattleFrontier_BattleTowerLobby_Text_24144D
 	waitmessage
 	setvar VAR_0x8004, 6

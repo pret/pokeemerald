@@ -16,9 +16,6 @@
 #include "constants/rgb.h"
 #include "constants/songs.h"
 
-extern void sub_8108C94(struct Sprite *);
-extern void sub_810310C(u8, struct Sprite *);
-
 void sub_8103448(struct Sprite *);
 void sub_8103498(struct Sprite *);
 void sub_810358C(struct Sprite *);
@@ -1417,7 +1414,7 @@ static void AnimTask_WithdrawStep(u8 taskId)
     }
 }
 
-// Animates a "zap of energy" used in KINESIS. 
+// Animates a "zap of energy" used in KINESIS.
 // arg 0: x pixel offset
 // arg 1: y pixel offset
 // arg 2: vertical flip
@@ -1592,7 +1589,7 @@ void sub_8103AA4(struct Sprite *sprite)
         sprite->data[3] = sub_8151534(sub_8151534(b, a), sub_8151624(0x1C0));
         sprite->data[4] = sub_8151534(sub_8151534(c, a), sub_8151624(0x1C0));
         sprite->callback = sub_8103A00;
-    } 
+    }
 }
 
 static void sub_8103BE4(u8 taskId)
@@ -3470,7 +3467,7 @@ void AnimOrbitFast(struct Sprite *sprite)
 
 static void AnimOrbitFastStep(struct Sprite *sprite)
 {
-    if ((u16)(sprite->data[1] - 64) < 128)
+    if (sprite->data[1] >= 64 && sprite->data[1] <= 191)
         sprite->subpriority = sprite->data[7] + 1;
     else
         sprite->subpriority = sprite->data[7] - 1;

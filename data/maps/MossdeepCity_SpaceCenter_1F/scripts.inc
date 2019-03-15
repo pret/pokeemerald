@@ -1,10 +1,10 @@
 MossdeepCity_SpaceCenter_1F_MapScripts:: @ 8222F41
-	map_script 1, MossdeepCity_SpaceCenter_1F_MapScript1_222FC2
-	map_script 3, MossdeepCity_SpaceCenter_1F_MapScript1_222F4C
+	map_script MAP_SCRIPT_ON_LOAD, MossdeepCity_SpaceCenter_1F_MapScript1_222FC2
+	map_script MAP_SCRIPT_ON_TRANSITION, MossdeepCity_SpaceCenter_1F_MapScript1_222F4C
 	.byte 0
 
 MossdeepCity_SpaceCenter_1F_MapScript1_222F4C: @ 8222F4C
-	compare VAR_0x405D, 2
+	compare VAR_MOSSDEEP_STATE, 2
 	goto_if_eq MossdeepCity_SpaceCenter_1F_EventScript_222F58
 	end
 
@@ -18,11 +18,11 @@ MossdeepCity_SpaceCenter_1F_EventScript_222F58:: @ 8222F58
 	setobjectxyperm 1, 3, 4
 	setobjectmovementtype 1, MOVEMENT_TYPE_FACE_RIGHT
 	setobjectmovementtype 2, MOVEMENT_TYPE_FACE_RIGHT
-	compare VAR_0x409E, 1
+	compare VAR_MOSSDEEP_SPACE_CENTER_STATE_1, 1
 	goto_if_eq MossdeepCity_SpaceCenter_1F_EventScript_222FAA
-	compare VAR_0x409E, 2
+	compare VAR_MOSSDEEP_SPACE_CENTER_STATE_1, 2
 	goto_if_eq MossdeepCity_SpaceCenter_1F_EventScript_222FB2
-	compare VAR_0x409E, 3
+	compare VAR_MOSSDEEP_SPACE_CENTER_STATE_1, 3
 	goto_if_eq MossdeepCity_SpaceCenter_1F_EventScript_222FBA
 	end
 
@@ -39,7 +39,7 @@ MossdeepCity_SpaceCenter_1F_EventScript_222FBA:: @ 8222FBA
 	end
 
 MossdeepCity_SpaceCenter_1F_MapScript1_222FC2: @ 8222FC2
-	compare VAR_0x405D, 2
+	compare VAR_MOSSDEEP_STATE, 2
 	goto_if_le MossdeepCity_SpaceCenter_1F_EventScript_222FCE
 	end
 
@@ -50,7 +50,7 @@ MossdeepCity_SpaceCenter_1F_EventScript_222FCE:: @ 8222FCE
 MossdeepCity_SpaceCenter_1F_EventScript_222FD8:: @ 8222FD8
 	lock
 	faceplayer
-	compare VAR_0x405D, 2
+	compare VAR_MOSSDEEP_STATE, 2
 	goto_if_eq MossdeepCity_SpaceCenter_1F_EventScript_223024
 	dotimebasedevents
 	specialvar VAR_RESULT, GetWeekCount
@@ -60,7 +60,7 @@ MossdeepCity_SpaceCenter_1F_EventScript_222FD8:: @ 8222FD8
 	compare VAR_RESULT, 1
 	call_if_ge MossdeepCity_SpaceCenter_1F_EventScript_22301B
 	closemessage
-	applymovement VAR_LAST_TALKED, MossdeepCity_SpaceCenter_1F_Movement_2725A2
+	applymovement VAR_LAST_TALKED, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end
@@ -82,7 +82,7 @@ MossdeepCity_SpaceCenter_1F_EventScript_223024:: @ 8223024
 	compare VAR_RESULT, 1
 	call_if_ge MossdeepCity_SpaceCenter_1F_EventScript_22305A
 	closemessage
-	applymovement VAR_LAST_TALKED, MossdeepCity_SpaceCenter_1F_Movement_2725A8
+	applymovement VAR_LAST_TALKED, Common_Movement_WalkInPlaceRight
 	waitmovement 0
 	release
 	end
@@ -98,7 +98,7 @@ MossdeepCity_SpaceCenter_1F_EventScript_22305A:: @ 822305A
 MossdeepCity_SpaceCenter_1F_EventScript_223063:: @ 8223063
 	lock
 	faceplayer
-	compare VAR_0x405D, 2
+	compare VAR_MOSSDEEP_STATE, 2
 	goto_if_eq MossdeepCity_SpaceCenter_1F_EventScript_22307A
 	msgbox MossdeepCity_SpaceCenter_1F_Text_2233D3, MSGBOX_DEFAULT
 	release
@@ -106,7 +106,7 @@ MossdeepCity_SpaceCenter_1F_EventScript_223063:: @ 8223063
 
 MossdeepCity_SpaceCenter_1F_EventScript_22307A:: @ 822307A
 	msgbox MossdeepCity_SpaceCenter_1F_Text_2234B7, MSGBOX_DEFAULT
-	applymovement VAR_LAST_TALKED, MossdeepCity_SpaceCenter_1F_Movement_2725A8
+	applymovement VAR_LAST_TALKED, Common_Movement_WalkInPlaceRight
 	waitmovement 0
 	release
 	end
@@ -114,13 +114,13 @@ MossdeepCity_SpaceCenter_1F_EventScript_22307A:: @ 822307A
 MossdeepCity_SpaceCenter_1F_EventScript_22308E:: @ 822308E
 	lock
 	faceplayer
-	compare VAR_0x405D, 2
+	compare VAR_MOSSDEEP_STATE, 2
 	goto_if_eq MossdeepCity_SpaceCenter_1F_EventScript_2230DA
 	goto_if_set FLAG_RECEIVED_SUN_STONE_MOSSDEEP, MossdeepCity_SpaceCenter_1F_EventScript_2230D0
 	msgbox MossdeepCity_SpaceCenter_1F_Text_223540, MSGBOX_DEFAULT
 	giveitem_std ITEM_SUN_STONE
 	compare VAR_RESULT, 0
-	goto_if_eq MossdeepCity_SpaceCenter_1F_EventScript_272054
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_SUN_STONE_MOSSDEEP
 	msgbox MossdeepCity_SpaceCenter_1F_Text_2235A6, MSGBOX_DEFAULT
 	release
@@ -136,17 +136,17 @@ MossdeepCity_SpaceCenter_1F_EventScript_2230DA:: @ 82230DA
 	msgbox MossdeepCity_SpaceCenter_1F_Text_2235F0, MSGBOX_DEFAULT
 	giveitem_std ITEM_SUN_STONE
 	compare VAR_RESULT, 0
-	goto_if_eq MossdeepCity_SpaceCenter_1F_EventScript_272054
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_SUN_STONE_MOSSDEEP
 	msgbox MossdeepCity_SpaceCenter_1F_Text_223664, MSGBOX_DEFAULT
-	applymovement VAR_LAST_TALKED, MossdeepCity_SpaceCenter_1F_Movement_2725A8
+	applymovement VAR_LAST_TALKED, Common_Movement_WalkInPlaceRight
 	waitmovement 0
 	release
 	end
 
 MossdeepCity_SpaceCenter_1F_EventScript_223119:: @ 8223119
 	msgbox MossdeepCity_SpaceCenter_1F_Text_223664, MSGBOX_DEFAULT
-	applymovement VAR_LAST_TALKED, MossdeepCity_SpaceCenter_1F_Movement_2725A8
+	applymovement VAR_LAST_TALKED, Common_Movement_WalkInPlaceRight
 	waitmovement 0
 	release
 	end
@@ -155,9 +155,9 @@ MossdeepCity_SpaceCenter_1F_EventScript_22312D:: @ 822312D
 	lock
 	faceplayer
 	goto_if_set FLAG_SYS_GAME_CLEAR, MossdeepCity_SpaceCenter_1F_EventScript_223154
-	compare VAR_0x405D, 2
+	compare VAR_MOSSDEEP_STATE, 2
 	goto_if_eq MossdeepCity_SpaceCenter_1F_EventScript_22315E
-	compare VAR_0x405D, 2
+	compare VAR_MOSSDEEP_STATE, 2
 	goto_if_lt MossdeepCity_SpaceCenter_1F_EventScript_223154
 	goto MossdeepCity_SpaceCenter_1F_EventScript_22315E
 	end
@@ -176,9 +176,9 @@ MossdeepCity_SpaceCenter_1F_EventScript_223168:: @ 8223168
 	lock
 	faceplayer
 	goto_if_set FLAG_SYS_GAME_CLEAR, MossdeepCity_SpaceCenter_1F_EventScript_22318F
-	compare VAR_0x405D, 2
+	compare VAR_MOSSDEEP_STATE, 2
 	goto_if_eq MossdeepCity_SpaceCenter_1F_EventScript_2231A4
-	compare VAR_0x405D, 2
+	compare VAR_MOSSDEEP_STATE, 2
 	goto_if_lt MossdeepCity_SpaceCenter_1F_EventScript_22318F
 	goto MossdeepCity_SpaceCenter_1F_EventScript_2231A4
 	end
@@ -186,7 +186,7 @@ MossdeepCity_SpaceCenter_1F_EventScript_223168:: @ 8223168
 MossdeepCity_SpaceCenter_1F_EventScript_22318F:: @ 822318F
 	msgbox MossdeepCity_SpaceCenter_1F_Text_22375B, MSGBOX_DEFAULT
 	closemessage
-	applymovement VAR_LAST_TALKED, MossdeepCity_SpaceCenter_1F_Movement_2725A2
+	applymovement VAR_LAST_TALKED, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end
@@ -194,7 +194,7 @@ MossdeepCity_SpaceCenter_1F_EventScript_22318F:: @ 822318F
 MossdeepCity_SpaceCenter_1F_EventScript_2231A4:: @ 82231A4
 	msgbox MossdeepCity_SpaceCenter_1F_Text_2237B5, MSGBOX_DEFAULT
 	closemessage
-	applymovement VAR_LAST_TALKED, MossdeepCity_SpaceCenter_1F_Movement_2725A2
+	applymovement VAR_LAST_TALKED, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end
@@ -203,7 +203,7 @@ MossdeepCity_SpaceCenter_1F_EventScript_2231B9:: @ 82231B9
 	lock
 	faceplayer
 	msgbox MossdeepCity_SpaceCenter_1F_Text_223849, MSGBOX_DEFAULT
-	applymovement VAR_LAST_TALKED, MossdeepCity_SpaceCenter_1F_Movement_2725A2
+	applymovement VAR_LAST_TALKED, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end
@@ -242,7 +242,7 @@ MossdeepCity_SpaceCenter_1F_EventScript_22321F:: @ 822321F
 	case 3, MossdeepCity_SpaceCenter_1F_EventScript_223289
 	applymovement 9, MossdeepCity_SpaceCenter_1F_Movement_2232A2
 	waitmovement 0
-	setvar VAR_0x409E, 2
+	setvar VAR_MOSSDEEP_SPACE_CENTER_STATE_1, 2
 	release
 	end
 
@@ -254,14 +254,14 @@ MossdeepCity_SpaceCenter_1F_EventScript_22326E:: @ 822326E
 MossdeepCity_SpaceCenter_1F_EventScript_223278:: @ 8223278
 	applymovement 9, MossdeepCity_SpaceCenter_1F_Movement_22329A
 	waitmovement 0
-	setvar VAR_0x409E, 1
+	setvar VAR_MOSSDEEP_SPACE_CENTER_STATE_1, 1
 	release
 	end
 
 MossdeepCity_SpaceCenter_1F_EventScript_223289:: @ 8223289
 	applymovement 9, MossdeepCity_SpaceCenter_1F_Movement_22329E
 	waitmovement 0
-	setvar VAR_0x409E, 3
+	setvar VAR_MOSSDEEP_SPACE_CENTER_STATE_1, 3
 	release
 	end
 

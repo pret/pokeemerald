@@ -1,13 +1,13 @@
 Route111_MapScripts:: @ 81F0CA7
-	map_script 1, Route111_MapScript1_1F0CBC
-	map_script 3, Route111_MapScript1_1F0D87
-	map_script 4, Route111_MapScript2_1F0E46
-	map_script 2, Route111_MapScript2_1F0E56
+	map_script MAP_SCRIPT_ON_LOAD, Route111_MapScript1_1F0CBC
+	map_script MAP_SCRIPT_ON_TRANSITION, Route111_MapScript1_1F0D87
+	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, Route111_MapScript2_1F0E46
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, Route111_MapScript2_1F0E56
 	.byte 0
 
 Route111_MapScript1_1F0CBC: @ 81F0CBC
 	call_if_unset FLAG_REGI_DOORS_OPENED, Route111_EventScript_1F0CD1
-	compare VAR_0x40CB, 1
+	compare VAR_ROUTE_111_STATE, 1
 	call_if_eq Route111_EventScript_1F0CE4
 	end
 
@@ -38,12 +38,12 @@ Route111_EventScript_1F0CE4:: @ 81F0CE4
 	return
 
 Route111_MapScript1_1F0D87: @ 81F0D87
-	setvar VAR_0x40D6, 0
+	setvar VAR_TRAINER_HILL_IS_ACTIVE, 0
 	special SetMirageTowerVisibility
 	call_if_unset FLAG_MIRAGE_TOWER_VISIBLE, Route111_EventScript_1F0E3C
-	compare VAR_0x40CB, 1
+	compare VAR_ROUTE_111_STATE, 1
 	call_if_eq Route111_EventScript_1F0DC2
-	compare VAR_0x40CB, 2
+	compare VAR_ROUTE_111_STATE, 2
 	call_if_eq Route111_EventScript_1F0E40
 	call Route111_EventScript_1F0DE6
 	call Route111_EventScript_28CCC7
@@ -101,11 +101,11 @@ Route111_EventScript_1F0E3C:: @ 81F0E3C
 	return
 
 Route111_EventScript_1F0E40:: @ 81F0E40
-	setvar VAR_0x40CB, 3
+	setvar VAR_ROUTE_111_STATE, 3
 	return
 
 Route111_MapScript2_1F0E46: @ 81F0E46
-	map_script_2 VAR_0x40CB, 1, Route111_EventScript_1F0E50
+	map_script_2 VAR_ROUTE_111_STATE, 1, Route111_EventScript_1F0E50
 	.2byte 0
 
 Route111_EventScript_1F0E50:: @ 81F0E50
@@ -113,7 +113,7 @@ Route111_EventScript_1F0E50:: @ 81F0E50
 	end
 
 Route111_MapScript2_1F0E56: @ 81F0E56
-	map_script_2 VAR_0x40CB, 1, Route111_EventScript_1F0E60
+	map_script_2 VAR_ROUTE_111_STATE, 1, Route111_EventScript_1F0E60
 	.2byte 0
 
 Route111_EventScript_1F0E60:: @ 81F0E60
@@ -134,7 +134,7 @@ Route111_EventScript_1F0E60:: @ 81F0E60
 	waitstate
 	special StartMirageTowerFossilFallAndSink
 	waitstate
-	setvar VAR_0x40CB, 2
+	setvar VAR_ROUTE_111_STATE, 2
 	clearflag FLAG_HIDE_DESERT_UNDERPASS_FOSSIL
 	goto_if_set FLAG_CHOSE_ROOT_FOSSIL, Route111_EventScript_1F0EA7
 	msgbox Route111_Text_1F1C74, MSGBOX_DEFAULT
@@ -164,7 +164,7 @@ Route111_EventScript_1F0EB9:: @ 81F0EB9
 	msgbox Route111_Text_2A6EBD, MSGBOX_DEFAULT
 	giveitem_std ITEM_RAZZ_BERRY
 	compare VAR_RESULT, 0
-	goto_if_eq Route111_EventScript_272054
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_DAILY_ROUTE_111_RECEIVED_BERRY
 	special GetPlayerBigGuyGirlString
 	msgbox Route111_Text_2A6F3D, MSGBOX_DEFAULT
@@ -285,7 +285,7 @@ Route111_EventScript_1F0FC5:: @ 81F0FC5
 Route111_EventScript_1F0FE7:: @ 81F0FE7
 	msgbox Route111_Text_1F1523, MSGBOX_DEFAULT
 	trainerbattle_no_intro TRAINER_VICTOR, Route111_Text_1F1542
-	applymovement 1, Route111_Movement_2725A6
+	applymovement 1, Common_Movement_WalkInPlaceUp
 	waitmovement 0
 	call Route111_EventScript_1F113C
 	msgbox Route111_Text_1F156F, MSGBOX_DEFAULT
@@ -303,7 +303,7 @@ Route111_EventScript_1F0FE7:: @ 81F0FE7
 	call Route111_EventScript_1F1143
 	msgbox Route111_Text_1F159D, MSGBOX_DEFAULT
 	trainerbattle_no_intro TRAINER_VICTORIA, Route111_Text_1F1616
-	applymovement 2, Route111_Movement_2725A6
+	applymovement 2, Common_Movement_WalkInPlaceUp
 	waitmovement 0
 	call Route111_EventScript_1F113C
 	msgbox Route111_Text_1F1645, MSGBOX_DEFAULT
@@ -321,7 +321,7 @@ Route111_EventScript_1F0FE7:: @ 81F0FE7
 	call Route111_EventScript_1F1143
 	msgbox Route111_Text_1F167E, MSGBOX_DEFAULT
 	trainerbattle_no_intro TRAINER_VIVI, Route111_Text_1F16C6
-	applymovement 3, Route111_Movement_2725A6
+	applymovement 3, Common_Movement_WalkInPlaceUp
 	waitmovement 0
 	call Route111_EventScript_1F113C
 	msgbox Route111_Text_1F16DC, MSGBOX_DEFAULT
@@ -341,7 +341,7 @@ Route111_EventScript_1F0FE7:: @ 81F0FE7
 	trainerbattle_no_intro TRAINER_VICKY, Route111_Text_1F1756
 	msgbox Route111_Text_1F1788, MSGBOX_DEFAULT
 	closemessage
-	applymovement 4, Route111_Movement_2725A6
+	applymovement 4, Common_Movement_WalkInPlaceUp
 	waitmovement 0
 	call Route111_EventScript_1F113C
 	applymovement 4, Route111_Movement_1F114A
@@ -411,9 +411,9 @@ Route111_EventScript_1F1192:: @ 81F1192
 Route111_EventScript_1F119B:: @ 81F119B
 	lock
 	faceplayer
-	compare VAR_0x40CB, 3
+	compare VAR_ROUTE_111_STATE, 3
 	goto_if_eq Route111_EventScript_1F11C6
-	compare VAR_0x40CB, 2
+	compare VAR_ROUTE_111_STATE, 2
 	goto_if_eq Route111_EventScript_1F11D0
 	goto_if_set FLAG_MIRAGE_TOWER_VISIBLE, Route111_EventScript_1F11DA
 	msgbox Route111_Text_1F1A22, MSGBOX_DEFAULT
@@ -437,11 +437,11 @@ Route111_EventScript_1F11DA:: @ 81F11DA
 
 Route111_EventScript_1F11E4:: @ 81F11E4
 	lockall
-	applymovement 46, Route111_Movement_27259E
+	applymovement 46, Common_Movement_FacePlayer
 	waitmovement 0
 	msgbox Route111_Text_1F1CCA, MSGBOX_DEFAULT
 	closemessage
-	applymovement 46, Route111_Movement_2725A2
+	applymovement 46, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	releaseall
 	end

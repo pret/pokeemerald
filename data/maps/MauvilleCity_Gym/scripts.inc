@@ -1,10 +1,10 @@
 MauvilleCity_Gym_MapScripts:: @ 820DD6E
-	map_script 1, MauvilleCity_Gym_MapScript1_20DD74
+	map_script MAP_SCRIPT_ON_LOAD, MauvilleCity_Gym_MapScript1_20DD74
 	.byte 0
 
 MauvilleCity_Gym_MapScript1_20DD74: @ 820DD74
 	goto_if_set FLAG_DEFEATED_MAUVILLE_GYM, MauvilleCity_Gym_EventScript_20DEE7
-	switch VAR_0x4093
+	switch VAR_MAUVILLE_GYM_STATE
 	case 0, MauvilleCity_Gym_EventScript_20DDBA
 	case 1, MauvilleCity_Gym_EventScript_20DEAF
 	case 2, MauvilleCity_Gym_EventScript_20DEBD
@@ -79,7 +79,7 @@ MauvilleCity_Gym_EventScript_20DEEB:: @ 820DEEB
 	compare VAR_RESULT, 1
 	goto_if_eq MauvilleCity_Gym_EventScript_20DFDE
 	goto_if_unset FLAG_RECEIVED_TM34, MauvilleCity_Gym_EventScript_20DF8D
-	compare VAR_0x40BA, 2
+	compare VAR_NEW_MAUVILLE_STATE, 2
 	goto_if_eq MauvilleCity_Gym_EventScript_20DFD4
 	msgbox MauvilleCity_Gym_Text_20E8E3, MSGBOX_DEFAULT
 	release
@@ -88,14 +88,14 @@ MauvilleCity_Gym_EventScript_20DEEB:: @ 820DEEB
 MauvilleCity_Gym_EventScript_20DF2B:: @ 820DF2B
 	message MauvilleCity_Gym_Text_20E77F
 	waitmessage
-	call MauvilleCity_Gym_EventScript_27207E
+	call Common_EventScript_PlayGymBadgeFanfare
 	msgbox MauvilleCity_Gym_Text_20E7AA, MSGBOX_DEFAULT
-	setvar VAR_0x40D2, 3
+	setvar VAR_SLATEPORT_OUTSIDE_MUSEUM_STATE, 3
 	clearflag FLAG_HIDE_VERDANTURF_TOWN_SCOTT
 	setflag FLAG_DEFEATED_MAUVILLE_GYM
 	setflag FLAG_BADGE03_GET
-	addvar VAR_0x4085, 1
-	compare VAR_0x4085, 6
+	addvar VAR_PETALBURG_GYM_STATE, 1
+	compare VAR_PETALBURG_GYM_STATE, 6
 	call_if_eq MauvilleCity_Gym_EventScript_271E84
 	setvar VAR_0x8008, 3
 	call MauvilleCity_Gym_EventScript_271F43
@@ -117,7 +117,7 @@ MauvilleCity_Gym_EventScript_20DF2B:: @ 820DF2B
 MauvilleCity_Gym_EventScript_20DF8D:: @ 820DF8D
 	giveitem_std ITEM_TM34
 	compare VAR_RESULT, 0
-	goto_if_eq MauvilleCity_Gym_EventScript_272054
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	msgbox MauvilleCity_Gym_Text_20E844, MSGBOX_DEFAULT
 	setflag FLAG_RECEIVED_TM34
 	release
@@ -126,7 +126,7 @@ MauvilleCity_Gym_EventScript_20DF8D:: @ 820DF8D
 MauvilleCity_Gym_EventScript_20DFB1:: @ 820DFB1
 	giveitem_std ITEM_TM34
 	compare VAR_RESULT, 0
-	goto_if_eq MauvilleCity_Gym_EventScript_27205E
+	goto_if_eq Common_EventScript_BagIsFull
 	msgbox MauvilleCity_Gym_Text_20E844, MSGBOX_DEFAULT
 	setflag FLAG_RECEIVED_TM34
 	return
@@ -144,9 +144,9 @@ MauvilleCity_Gym_EventScript_20DFDE:: @ 820DFDE
 MauvilleCity_Gym_EventScript_20DFF9:: @ 820DFF9
 	lockall
 	goto_if_set FLAG_DEFEATED_MAUVILLE_GYM, MauvilleCity_Gym_EventScript_20E0AD
-	compare VAR_0x4093, 1
+	compare VAR_MAUVILLE_GYM_STATE, 1
 	goto_if_eq MauvilleCity_Gym_EventScript_20E0AD
-	setvar VAR_0x4093, 1
+	setvar VAR_MAUVILLE_GYM_STATE, 1
 	setvar VAR_0x8004, 0
 	goto MauvilleCity_Gym_EventScript_20E08D
 	end
@@ -154,9 +154,9 @@ MauvilleCity_Gym_EventScript_20DFF9:: @ 820DFF9
 MauvilleCity_Gym_EventScript_20E01E:: @ 820E01E
 	lockall
 	goto_if_set FLAG_DEFEATED_MAUVILLE_GYM, MauvilleCity_Gym_EventScript_20E0AD
-	compare VAR_0x4093, 2
+	compare VAR_MAUVILLE_GYM_STATE, 2
 	goto_if_eq MauvilleCity_Gym_EventScript_20E0AD
-	setvar VAR_0x4093, 2
+	setvar VAR_MAUVILLE_GYM_STATE, 2
 	setvar VAR_0x8004, 1
 	goto MauvilleCity_Gym_EventScript_20E08D
 	end
@@ -164,9 +164,9 @@ MauvilleCity_Gym_EventScript_20E01E:: @ 820E01E
 MauvilleCity_Gym_EventScript_20E043:: @ 820E043
 	lockall
 	goto_if_set FLAG_DEFEATED_MAUVILLE_GYM, MauvilleCity_Gym_EventScript_20E0AD
-	compare VAR_0x4093, 3
+	compare VAR_MAUVILLE_GYM_STATE, 3
 	goto_if_eq MauvilleCity_Gym_EventScript_20E0AD
-	setvar VAR_0x4093, 3
+	setvar VAR_MAUVILLE_GYM_STATE, 3
 	setvar VAR_0x8004, 2
 	goto MauvilleCity_Gym_EventScript_20E08D
 	end
@@ -174,9 +174,9 @@ MauvilleCity_Gym_EventScript_20E043:: @ 820E043
 MauvilleCity_Gym_EventScript_20E068:: @ 820E068
 	lockall
 	goto_if_set FLAG_DEFEATED_MAUVILLE_GYM, MauvilleCity_Gym_EventScript_20E0AD
-	compare VAR_0x4093, 4
+	compare VAR_MAUVILLE_GYM_STATE, 4
 	goto_if_eq MauvilleCity_Gym_EventScript_20E0AD
-	setvar VAR_0x4093, 4
+	setvar VAR_MAUVILLE_GYM_STATE, 4
 	setvar VAR_0x8004, 3
 	goto MauvilleCity_Gym_EventScript_20E08D
 	end

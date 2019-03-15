@@ -1418,7 +1418,7 @@ static void sub_80772A4(void)
         for (i = 0; i < 18; i++)
         {
             ClearWindowTilemap(i);
-            FillWindowPixelBuffer(i, 0);
+            FillWindowPixelBuffer(i, PIXEL_FILL(0));
         }
 
         FillBgTilemapBufferRect(0, 0, 0, 0, 30, 20, 15);
@@ -1507,13 +1507,13 @@ static void sub_80773D0(void)
         }
         break;
     case 3:
-        if (GetLinkPlayerCount_2() >= sub_800AA48())
+        if (GetLinkPlayerCount_2() >= GetSavedPlayerCount())
         {
             if (IsLinkMaster())
             {
                 if (++gUnknown_0203229C->unk_A8 > 30)
                 {
-                    sub_800A620();
+                    CheckShouldAdvanceLinkState();
                     gMain.state++;
                 }
             }
@@ -1834,9 +1834,9 @@ static void sub_8077B74(void)
         }
 
         if (gUnknown_0203229C->tradeMenuCursorPosition < PARTY_SIZE)
-            gUnknown_0203229C->tradeMenuCursorPosition = gUnknown_0203CF20;
+            gUnknown_0203229C->tradeMenuCursorPosition = gLastViewedMonIndex;
         else
-            gUnknown_0203229C->tradeMenuCursorPosition = gUnknown_0203CF20 + PARTY_SIZE;
+            gUnknown_0203229C->tradeMenuCursorPosition = gLastViewedMonIndex + PARTY_SIZE;
 
         gUnknown_0203229C->tradeMenuCursorSpriteIdx = CreateSprite(&gSpriteTemplate_832DC94, gTradeMonSpriteCoords[gUnknown_0203229C->tradeMenuCursorPosition][0] * 8 + 32, gTradeMonSpriteCoords[gUnknown_0203229C->tradeMenuCursorPosition][1] * 8, 2);
         gMain.state = 16;
@@ -2461,7 +2461,7 @@ static void sub_8078DBC(void)
         if (gUnknown_0203229C->tradeMenuCursorPosition < 6)
         {
             sub_8098858(1, 1, 14);
-            FillWindowPixelBuffer(1, 0x11);
+            FillWindowPixelBuffer(1, PIXEL_FILL(1));
             PrintMenuTable(1, 2, gUnknown_0832DEAC);
             InitMenuInUpperLeftCornerPlaySoundWhenAPressed(1, 2, 0);
             PutWindowTilemap(1);
@@ -2724,7 +2724,7 @@ static void sub_8079408(void)
 
         for (i = 0; i < 4; i++)
         {
-            FillWindowPixelBuffer(i + 14, 0);
+            FillWindowPixelBuffer(i + 14, PIXEL_FILL(0));
             rbox_fill_rectangle(i + 14);
         }
 
@@ -2762,7 +2762,7 @@ static void sub_80794CC(void)
             Free(gUnknown_0203229C);
             FreeAllWindowBuffers();
             sub_800E084();
-            SetMainCallback2(c2_8056854);
+            SetMainCallback2(CB2_ReturnToFieldFromMultiplayer);
         }
     }
     else
@@ -2772,7 +2772,7 @@ static void sub_80794CC(void)
             Free(gUnknown_02032184);
             Free(gUnknown_0203229C);
             FreeAllWindowBuffers();
-            SetMainCallback2(c2_8056854);
+            SetMainCallback2(CB2_ReturnToFieldFromMultiplayer);
         }
     }
 }
@@ -3256,7 +3256,7 @@ static void sub_807A0C4(void)
 
 static void sub_807A19C(u8 a0)
 {
-    FillWindowPixelBuffer(0, 0x11);
+    FillWindowPixelBuffer(0, PIXEL_FILL(1));
     AddTextPrinterParameterized(0, 1, gUnknown_0832DEBC[a0], 0, 1, TEXT_SPEED_FF, NULL);
     sub_8098858(0, 20, 12);
     PutWindowTilemap(0);
@@ -4099,11 +4099,11 @@ void sub_807AE50(void)
         case 3:
             if (IsLinkMaster())
             {
-                if (GetLinkPlayerCount_2() >= sub_800AA48())
+                if (GetLinkPlayerCount_2() >= GetSavedPlayerCount())
                 {
                     if (++gUnknown_020322A0->timer > 30)
                     {
-                        sub_800A620();
+                        CheckShouldAdvanceLinkState();
                         gMain.state++;
                     }
                 }
@@ -4185,7 +4185,7 @@ void sub_807B140(void)
 
 void sub_807B154(void)
 {
-    FillWindowPixelBuffer(0, 0xFF);
+    FillWindowPixelBuffer(0, PIXEL_FILL(15));
     PutWindowTilemap(0);
     CopyWindowToVram(0, 3);
 }
@@ -4263,7 +4263,7 @@ static void sub_807B270(void)
             break;
         case 8:
             sub_807ACFC(1, 1);
-            FillWindowPixelBuffer(0, 0xFF);
+            FillWindowPixelBuffer(0, PIXEL_FILL(15));
             PutWindowTilemap(0);
             CopyWindowToVram(0, 3);
             gMain.state++;
@@ -4654,7 +4654,7 @@ static bool8 sub_807BBEC(void)
             if (!gPaletteFade.active)
             {
                 sub_807B62C(4);
-                FillWindowPixelBuffer(0, 0xFF);
+                FillWindowPixelBuffer(0, PIXEL_FILL(15));
                 CopyWindowToVram(0, 3);
                 gUnknown_020322A0->state++;
             }
@@ -5146,7 +5146,7 @@ static bool8 sub_807CFC8(void)
             if (!gPaletteFade.active)
             {
                 sub_807B62C(4);
-                FillWindowPixelBuffer(0, 0xFF);
+                FillWindowPixelBuffer(0, PIXEL_FILL(15));
                 CopyWindowToVram(0, 3);
                 gUnknown_020322A0->state++;
             }
@@ -6085,7 +6085,7 @@ void sub_807F19C(void)
 
 void sub_807F1A8(u8 windowId, const u8 *str, u8 speed)
 {
-    FillWindowPixelBuffer(windowId, 0xFF);
+    FillWindowPixelBuffer(windowId, PIXEL_FILL(15));
     gUnknown_020322A0->unk_F6[0] = 15;
     gUnknown_020322A0->unk_F6[1] = 1;
     gUnknown_020322A0->unk_F6[2] = 6;

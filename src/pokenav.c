@@ -209,7 +209,7 @@ void sub_81C7710(void);
 static void InitKeys_(void);
 static void FreeVars(void);
 static void VblankCb_Pokenav(void);
-static void Cb2_Pokenav(void);
+static void CB2_Pokenav(void);
 void sub_81C7C28(void);
 void sub_81C72BC(void);
 void sub_81C7B74(void);
@@ -456,7 +456,7 @@ u32 sub_81C7078(u32 (*func)(s32), u32 priority)
 {
     u16 taskId;
 
-    if (!is_c1_link_related_active())
+    if (!IsUpdateLinkStateCBActive())
         taskId = CreateTask(sub_81C7170, priority);
     else
         taskId = CreateTask(sub_81C71E4, priority);
@@ -553,7 +553,7 @@ void sub_81C71E4(u8 taskId)
     }
 }
 
-void CB2_PokeNav(void)
+void CB2_InitPokeNav(void)
 {
     gUnknown_0203CF40 = Alloc(sizeof(*gUnknown_0203CF40));
     if (gUnknown_0203CF40 == NULL)
@@ -566,7 +566,7 @@ void CB2_PokeNav(void)
         ResetTasks();
         SetVBlankCallback(NULL);
         CreateTask(sub_81C742C, 0);
-        SetMainCallback2(Cb2_Pokenav);
+        SetMainCallback2(CB2_Pokenav);
         SetVBlankCallback(VblankCb_Pokenav);
     }
 }
@@ -597,7 +597,7 @@ void sub_81C72BC(void)
         FreeAllSpritePalettes();
         SetVBlankCallback(NULL);
         CreateTask(sub_81C742C, 0);
-        SetMainCallback2(Cb2_Pokenav);
+        SetMainCallback2(CB2_Pokenav);
         SetVBlankCallback(VblankCb_Pokenav);
     }
 }
@@ -656,7 +656,7 @@ static bool32 AnyMonHasRibbon(void)
     return FALSE;
 }
 
-static void Cb2_Pokenav(void)
+static void CB2_Pokenav(void)
 {
     RunTasks();
     AnimateSprites();
@@ -1208,8 +1208,8 @@ bool32 IsDma3ManagerBusyWithBgCopy_(void)
 
 void sub_81C7BF8(u32 windowId)
 {
-    FillWindowPixelBuffer(windowId, 0x44);
-    FillWindowPixelRect(windowId, 0x55, 0, 0, 0x80, 1);
+    FillWindowPixelBuffer(windowId, PIXEL_FILL(4));
+    FillWindowPixelRect(windowId, PIXEL_FILL(5), 0, 0, 0x80, 1);
 }
 
 void sub_81C7C28(void)

@@ -8,7 +8,7 @@ SootopolisCity_House1_EventScript_22694D:: @ 822694D
 	msgbox SootopolisCity_House1_Text_2269A1, MSGBOX_DEFAULT
 	giveitem_std ITEM_TM31
 	compare VAR_RESULT, 0
-	goto_if_eq SootopolisCity_House1_EventScript_272054
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_TM31
 	msgbox SootopolisCity_House1_Text_226A13, MSGBOX_DEFAULT
 	release

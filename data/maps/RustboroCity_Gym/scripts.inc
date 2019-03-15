@@ -14,15 +14,15 @@ RustboroCity_Gym_EventScript_212F31:: @ 8212F31
 RustboroCity_Gym_EventScript_212F66:: @ 8212F66
 	message RustboroCity_Gym_Text_2137EC
 	waitmessage
-	call RustboroCity_Gym_EventScript_27207E
+	call Common_EventScript_PlayGymBadgeFanfare
 	msgbox RustboroCity_Gym_Text_213816, MSGBOX_DEFAULT
 	setflag FLAG_DEFEATED_RUSTBORO_GYM
 	setflag FLAG_BADGE01_GET
-	setvar VAR_0x405A, 1
-	addvar VAR_0x4085, 1
+	setvar VAR_RUSTBORO_STATE, 1
+	addvar VAR_PETALBURG_GYM_STATE, 1
 	setvar VAR_0x8008, 1
 	call RustboroCity_Gym_EventScript_271F43
-	compare VAR_0x4085, 6
+	compare VAR_PETALBURG_GYM_STATE, 6
 	call_if_eq RustboroCity_Gym_EventScript_271E84
 	goto RustboroCity_Gym_EventScript_212FA4
 	end
@@ -30,7 +30,7 @@ RustboroCity_Gym_EventScript_212F66:: @ 8212F66
 RustboroCity_Gym_EventScript_212FA4:: @ 8212FA4
 	giveitem_std ITEM_TM39
 	compare VAR_RESULT, 0
-	goto_if_eq RustboroCity_Gym_EventScript_272054
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_TM39
 	msgbox RustboroCity_Gym_Text_2138B1, MSGBOX_DEFAULT
 	release

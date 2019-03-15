@@ -1,8 +1,8 @@
 Route110_TrickHouseEnd_MapScripts:: @ 826ACAF
-	map_script 5, Route110_TrickHouseEnd_MapScript1_26ACC4
-	map_script 3, Route110_TrickHouseEnd_MapScript1_26ACD0
-	map_script 2, Route110_TrickHouseEnd_MapScript2_26ACF5
-	map_script 4, Route110_TrickHouseEnd_MapScript2_26ACDE
+	map_script MAP_SCRIPT_ON_RESUME, Route110_TrickHouseEnd_MapScript1_26ACC4
+	map_script MAP_SCRIPT_ON_TRANSITION, Route110_TrickHouseEnd_MapScript1_26ACD0
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, Route110_TrickHouseEnd_MapScript2_26ACF5
+	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, Route110_TrickHouseEnd_MapScript2_26ACDE
 	.byte 0
 
 Route110_TrickHouseEnd_MapScript1_26ACC4: @ 826ACC4
@@ -59,7 +59,7 @@ Route110_TrickHouseEnd_EventScript_26AD17:: @ 826AD17
 Route110_TrickHouseEnd_EventScript_26AD84:: @ 826AD84
 	msgbox Route110_TrickHouseEnd_Text_26B0BC, MSGBOX_DEFAULT
 	msgbox Route110_TrickHouseEnd_Text_26B73D, MSGBOX_DEFAULT
-	setvar VAR_0x40C1, 0
+	setvar VAR_TRICK_HOUSE_PRIZE_PICKUP, 0
 	giveitem_std ITEM_RARE_CANDY
 	compare VAR_RESULT, 0
 	call_if_eq Route110_TrickHouseEnd_EventScript_26AFEF
@@ -72,7 +72,7 @@ Route110_TrickHouseEnd_EventScript_26AD84:: @ 826AD84
 Route110_TrickHouseEnd_EventScript_26ADC0:: @ 826ADC0
 	msgbox Route110_TrickHouseEnd_Text_26B13B, MSGBOX_DEFAULT
 	msgbox Route110_TrickHouseEnd_Text_26B73D, MSGBOX_DEFAULT
-	setvar VAR_0x40C1, 0
+	setvar VAR_TRICK_HOUSE_PRIZE_PICKUP, 0
 	giveitem_std ITEM_TIMER_BALL
 	compare VAR_RESULT, 0
 	call_if_eq Route110_TrickHouseEnd_EventScript_26AFEF
@@ -85,7 +85,7 @@ Route110_TrickHouseEnd_EventScript_26ADC0:: @ 826ADC0
 Route110_TrickHouseEnd_EventScript_26ADFC:: @ 826ADFC
 	msgbox Route110_TrickHouseEnd_Text_26B1AD, MSGBOX_DEFAULT
 	msgbox Route110_TrickHouseEnd_Text_26B73D, MSGBOX_DEFAULT
-	setvar VAR_0x40C1, 0
+	setvar VAR_TRICK_HOUSE_PRIZE_PICKUP, 0
 	giveitem_std ITEM_HARD_STONE
 	compare VAR_RESULT, 0
 	call_if_eq Route110_TrickHouseEnd_EventScript_26AFEF
@@ -98,7 +98,7 @@ Route110_TrickHouseEnd_EventScript_26ADFC:: @ 826ADFC
 Route110_TrickHouseEnd_EventScript_26AE38:: @ 826AE38
 	msgbox Route110_TrickHouseEnd_Text_26B223, MSGBOX_DEFAULT
 	msgbox Route110_TrickHouseEnd_Text_26B73D, MSGBOX_DEFAULT
-	setvar VAR_0x40C1, 0
+	setvar VAR_TRICK_HOUSE_PRIZE_PICKUP, 0
 	giveitem_std ITEM_SMOKE_BALL
 	compare VAR_RESULT, 0
 	call_if_eq Route110_TrickHouseEnd_EventScript_26AFEF
@@ -111,7 +111,7 @@ Route110_TrickHouseEnd_EventScript_26AE38:: @ 826AE38
 Route110_TrickHouseEnd_EventScript_26AE74:: @ 826AE74
 	msgbox Route110_TrickHouseEnd_Text_26B293, MSGBOX_DEFAULT
 	msgbox Route110_TrickHouseEnd_Text_26B73D, MSGBOX_DEFAULT
-	setvar VAR_0x40C1, 0
+	setvar VAR_TRICK_HOUSE_PRIZE_PICKUP, 0
 	giveitem_std ITEM_TM12
 	compare VAR_RESULT, 0
 	call_if_eq Route110_TrickHouseEnd_EventScript_26AFEF
@@ -124,7 +124,7 @@ Route110_TrickHouseEnd_EventScript_26AE74:: @ 826AE74
 Route110_TrickHouseEnd_EventScript_26AEB0:: @ 826AEB0
 	msgbox Route110_TrickHouseEnd_Text_26B315, MSGBOX_DEFAULT
 	msgbox Route110_TrickHouseEnd_Text_26B73D, MSGBOX_DEFAULT
-	setvar VAR_0x40C1, 0
+	setvar VAR_TRICK_HOUSE_PRIZE_PICKUP, 0
 	giveitem_std ITEM_MAGNET
 	compare VAR_RESULT, 0
 	call_if_eq Route110_TrickHouseEnd_EventScript_26AFEF
@@ -137,7 +137,7 @@ Route110_TrickHouseEnd_EventScript_26AEB0:: @ 826AEB0
 Route110_TrickHouseEnd_EventScript_26AEEC:: @ 826AEEC
 	msgbox Route110_TrickHouseEnd_Text_26B365, MSGBOX_DEFAULT
 	msgbox Route110_TrickHouseEnd_Text_26B73D, MSGBOX_DEFAULT
-	setvar VAR_0x40C1, 0
+	setvar VAR_TRICK_HOUSE_PRIZE_PICKUP, 0
 	giveitem_std ITEM_PP_MAX
 	compare VAR_RESULT, 0
 	call_if_eq Route110_TrickHouseEnd_EventScript_26AFEF
@@ -161,11 +161,11 @@ Route110_TrickHouseEnd_EventScript_26AF28:: @ 826AF28
 	delay 30
 	msgbox Route110_TrickHouseEnd_Text_26B3FA, MSGBOX_DEFAULT
 	closemessage
-	applymovement 1, Route110_TrickHouseEnd_Movement_27259E
+	applymovement 1, Common_Movement_FacePlayer
 	waitmovement 0
 	delay 30
 	msgbox Route110_TrickHouseEnd_Text_26B485, MSGBOX_DEFAULT
-	setvar VAR_0x40C1, 0
+	setvar VAR_TRICK_HOUSE_PRIZE_PICKUP, 0
 	call Route110_TrickHouseEnd_EventScript_26AFA5
 	compare VAR_RESULT, 0
 	call_if_eq Route110_TrickHouseEnd_EventScript_26B002
@@ -200,34 +200,34 @@ Route110_TrickHouseEnd_EventScript_26AFCF:: @ 826AFCF
 	return
 
 Route110_TrickHouseEnd_EventScript_26AFEF:: @ 826AFEF
-	call Route110_TrickHouseEnd_EventScript_27205E
+	call Common_EventScript_BagIsFull
 	msgbox Route110_TrickHouseEnd_Text_26B760, MSGBOX_DEFAULT
-	setvar VAR_0x40C1, 1
+	setvar VAR_TRICK_HOUSE_PRIZE_PICKUP, 1
 	return
 
 Route110_TrickHouseEnd_EventScript_26B002:: @ 826B002
-	call Route110_TrickHouseEnd_EventScript_272071
+	call Common_EventScript_NoRoomLeftForAnother
 	msgbox Route110_TrickHouseEnd_Text_26B615, MSGBOX_DEFAULT
-	setvar VAR_0x40C1, 1
+	setvar VAR_TRICK_HOUSE_PRIZE_PICKUP, 1
 	return
 
 Route110_TrickHouseEnd_EventScript_26B015:: @ 826B015
-	applymovement 1, Route110_TrickHouseEnd_Movement_2725AA
+	applymovement 1, Common_Movement_WalkInPlaceDown
 	waitmovement 0
 	return
 
 Route110_TrickHouseEnd_EventScript_26B020:: @ 826B020
-	applymovement 1, Route110_TrickHouseEnd_Movement_2725A6
+	applymovement 1, Common_Movement_WalkInPlaceUp
 	waitmovement 0
 	return
 
 Route110_TrickHouseEnd_EventScript_26B02B:: @ 826B02B
-	applymovement 1, Route110_TrickHouseEnd_Movement_2725A4
+	applymovement 1, Common_Movement_WalkInPlaceLeft
 	waitmovement 0
 	return
 
 Route110_TrickHouseEnd_EventScript_26B036:: @ 826B036
-	applymovement 1, Route110_TrickHouseEnd_Movement_2725A8
+	applymovement 1, Common_Movement_WalkInPlaceRight
 	waitmovement 0
 	return
 
@@ -235,13 +235,13 @@ Route110_TrickHouseEnd_EventScript_26B041:: @ 826B041
 	lockall
 	turnobject 1, 3
 	playse SE_PIN
-	applymovement 1, Route110_TrickHouseEnd_Movement_272598
+	applymovement 1, Common_Movement_ExclamationMark
 	waitmovement 0
 	delay 20
 	applymovement 1, Route110_TrickHouseEnd_Movement_26B08B
 	waitmovement 0
 	playse SE_W153
-	applymovement EVENT_OBJ_ID_PLAYER, Route110_TrickHouseEnd_Movement_2725AA
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceDown
 	waitmovement 0
 	msgbox Route110_TrickHouseEnd_Text_26B8BD, MSGBOX_DEFAULT
 	closemessage

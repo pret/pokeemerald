@@ -1,6 +1,6 @@
 FallarborTown_BattleTentLobby_MapScripts:: @ 81FFE66
-	map_script 2, FallarborTown_BattleTentLobby_MapScript2_1FFE85
-	map_script 4, FallarborTown_BattleTentLobby_MapScript2_1FFE71
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, FallarborTown_BattleTentLobby_MapScript2_1FFE85
+	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, FallarborTown_BattleTentLobby_MapScript2_1FFE71
 	.byte 0
 
 FallarborTown_BattleTentLobby_MapScript2_1FFE71: @ 81FFE71
@@ -191,7 +191,7 @@ FallarborTown_BattleTentLobby_EventScript_2000E2:: @ 82000E2
 	special LoadPlayerParty
 	closemessage
 	delay 2
-	call FallarborTown_BattleTentLobby_EventScript_27134F
+	call Common_EventScript_SaveGame
 	setvar VAR_TEMP_0, 255
 	compare VAR_RESULT, 0
 	goto_if_eq FallarborTown_BattleTentLobby_EventScript_2001AB
@@ -296,7 +296,7 @@ FallarborTown_BattleTentLobby_EventScript_200228:: @ 8200228
 	faceplayer
 	goto_if_set FLAG_MET_SCOTT_IN_FALLARBOR, FallarborTown_BattleTentLobby_EventScript_200245
 	msgbox FallarborTown_BattleTentLobby_Text_200501, MSGBOX_DEFAULT
-	addvar VAR_0x40D1, 1
+	addvar VAR_SCOTT_STATE, 1
 	setflag FLAG_MET_SCOTT_IN_FALLARBOR
 	release
 	end

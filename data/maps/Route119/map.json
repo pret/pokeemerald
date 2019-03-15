@@ -607,7 +607,7 @@
       "x": 25,
       "y": 31,
       "elevation": 0,
-      "var": "VAR_0x4072",
+      "var": "VAR_ROUTE119_STATE",
       "var_value": "0",
       "script": "Route119_EventScript_1F4472"
     },
@@ -616,7 +616,7 @@
       "x": 26,
       "y": 31,
       "elevation": 0,
-      "var": "VAR_0x4072",
+      "var": "VAR_ROUTE119_STATE",
       "var_value": "0",
       "script": "Route119_EventScript_1F447D"
     },

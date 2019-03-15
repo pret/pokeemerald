@@ -234,7 +234,7 @@
       "x": 26,
       "y": 23,
       "elevation": 3,
-      "var": "VAR_0x4098",
+      "var": "VAR_PETALBURG_WOODS_STATE",
       "var_value": "0",
       "script": "PetalburgWoods_EventScript_22DFD7"
     },
@@ -243,7 +243,7 @@
       "x": 27,
       "y": 23,
       "elevation": 3,
-      "var": "VAR_0x4098",
+      "var": "VAR_PETALBURG_WOODS_STATE",
       "var_value": "0",
       "script": "PetalburgWoods_EventScript_22E079"
     }

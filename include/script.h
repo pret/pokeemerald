@@ -43,16 +43,16 @@ void ScriptContext1_SetupScript(const u8 *ptr);
 void ScriptContext1_Stop(void);
 void EnableBothScriptContexts(void);
 void ScriptContext2_RunNewScript(const u8 *ptr);
-u8 *mapheader_get_tagged_pointer(u8 tag);
-void mapheader_run_script_by_tag(u8 tag);
-u8 *mapheader_get_first_match_from_tagged_ptr_list(u8 tag);
-void mapheader_run_script_with_tag_x1(void);
-void mapheader_run_script_with_tag_x3(void);
-void mapheader_run_script_with_tag_x5(void);
-void mapheader_run_script_with_tag_x7(void);
-void mapheader_run_script_with_tag_x6(void);
-bool8 mapheader_run_first_tag2_script_list_match(void);
-void mapheader_run_first_tag4_script_list_match(void);
+u8 *MapHeaderGetScriptTable(u8 tag);
+void MapHeaderRunScriptType(u8 tag);
+u8 *MapHeaderCheckScriptTable(u8 tag);
+void RunOnLoadMapScript(void);
+void RunOnTransitionMapScript(void);
+void RunOnResumeMapScript(void);
+void RunOnReturnToFieldMapScript(void);
+void RunOnDiveWarpMapScript(void);
+bool8 TryRunOnFrameMapScript(void);
+void TryRunOnWarpIntoMapScript(void);
 u32 CalculateRamScriptChecksum(void);
 void ClearRamScript(void);
 bool8 InitRamScript(const u8 *script, u16 scriptSize, u8 mapGroup, u8 mapNum, u8 objectId);
@@ -60,5 +60,8 @@ const u8 *GetRamScript(u8 objectId, const u8 *script);
 bool32 sub_80991F8(void);
 u8 *sub_8099244(void);
 void sub_80992A0(u8 *script, u16 scriptSize);
+
+// srccmd.h
+void sub_809BE48(u16 npcId);
 
 #endif // GUARD_SCRIPT_H

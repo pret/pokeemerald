@@ -135,7 +135,7 @@
       "x": 2,
       "y": 8,
       "elevation": 0,
-      "var": "VAR_0x4092",
+      "var": "VAR_LITTLEROOT_INTRO_STATE",
       "var_value": "4",
       "script": "LittlerootTown_MaysHouse_1F_EventScript_1F8A4C"
     },
@@ -144,7 +144,7 @@
       "x": 1,
       "y": 3,
       "elevation": 0,
-      "var": "VAR_0x408D",
+      "var": "VAR_LITTLEROOT_RIVAL_STATE",
       "var_value": "2",
       "script": "LittlerootTown_MaysHouse_1F_EventScript_1F8A67"
     },
@@ -153,7 +153,7 @@
       "x": 2,
       "y": 4,
       "elevation": 0,
-      "var": "VAR_0x408D",
+      "var": "VAR_LITTLEROOT_RIVAL_STATE",
       "var_value": "2",
       "script": "LittlerootTown_MaysHouse_1F_EventScript_1F8A73"
     },
@@ -162,7 +162,7 @@
       "x": 3,
       "y": 3,
       "elevation": 0,
-      "var": "VAR_0x408D",
+      "var": "VAR_LITTLEROOT_RIVAL_STATE",
       "var_value": "2",
       "script": "LittlerootTown_MaysHouse_1F_EventScript_1F8A7F"
     }

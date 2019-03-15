@@ -1,7 +1,7 @@
 BattleFrontier_BattleFactoryBattleRoom_MapScripts:: @ 825ADAB
-	map_script 3, BattleFrontier_BattleFactoryBattleRoom_MapScript1_25ADBB
-	map_script 4, BattleFrontier_BattleFactoryBattleRoom_MapScript2_25AE00
-	map_script 2, BattleFrontier_BattleFactoryBattleRoom_MapScript2_25AE31
+	map_script MAP_SCRIPT_ON_TRANSITION, BattleFrontier_BattleFactoryBattleRoom_MapScript1_25ADBB
+	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, BattleFrontier_BattleFactoryBattleRoom_MapScript2_25AE00
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, BattleFrontier_BattleFactoryBattleRoom_MapScript2_25AE31
 	.byte 0
 
 BattleFrontier_BattleFactoryBattleRoom_MapScript1_25ADBB: @ 825ADBB
@@ -304,12 +304,12 @@ BattleFrontier_BattleFactoryPreBattleRoom_EventScript_25B1AA:: @ 825B1AA
 	end
 
 BattleFrontier_BattleFactoryBattleRoom_EventScript_25B1B4:: @ 825B1B4
-	applymovement 1, BattleFrontier_BattleFactoryBattleRoom_Movement_2725A8
-	applymovement 3, BattleFrontier_BattleFactoryBattleRoom_Movement_2725A8
-	applymovement 4, BattleFrontier_BattleFactoryBattleRoom_Movement_2725A8
-	applymovement 5, BattleFrontier_BattleFactoryBattleRoom_Movement_2725A4
-	applymovement 6, BattleFrontier_BattleFactoryBattleRoom_Movement_2725A4
-	applymovement 7, BattleFrontier_BattleFactoryBattleRoom_Movement_2725A4
+	applymovement 1, Common_Movement_WalkInPlaceRight
+	applymovement 3, Common_Movement_WalkInPlaceRight
+	applymovement 4, Common_Movement_WalkInPlaceRight
+	applymovement 5, Common_Movement_WalkInPlaceLeft
+	applymovement 6, Common_Movement_WalkInPlaceLeft
+	applymovement 7, Common_Movement_WalkInPlaceLeft
 	waitmovement 0
 	return
 

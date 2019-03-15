@@ -6,33 +6,33 @@ LilycoveCity_CoveLilyMotel_1F_EventScript_218189:: @ 8218189
 	goto_if_set FLAG_SYS_GAME_CLEAR, LilycoveCity_CoveLilyMotel_1F_EventScript_2181EA
 	goto_if_set FLAG_BADGE07_GET, LilycoveCity_CoveLilyMotel_1F_EventScript_2181C3
 	msgbox LilycoveCity_CoveLilyMotel_1F_Text_218264, MSGBOX_DEFAULT
-	applymovement 1, LilycoveCity_CoveLilyMotel_1F_Movement_27259E
+	applymovement 1, Common_Movement_FacePlayer
 	waitmovement 0
 	msgbox LilycoveCity_CoveLilyMotel_1F_Text_21831E, MSGBOX_DEFAULT
 	closemessage
-	applymovement 1, LilycoveCity_CoveLilyMotel_1F_Movement_2725A2
+	applymovement 1, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	releaseall
 	end
 
 LilycoveCity_CoveLilyMotel_1F_EventScript_2181C3:: @ 82181C3
 	msgbox LilycoveCity_CoveLilyMotel_1F_Text_2183C3, MSGBOX_DEFAULT
-	applymovement 1, LilycoveCity_CoveLilyMotel_1F_Movement_27259E
+	applymovement 1, Common_Movement_FacePlayer
 	waitmovement 0
 	msgbox LilycoveCity_CoveLilyMotel_1F_Text_218470, MSGBOX_DEFAULT
 	closemessage
-	applymovement 1, LilycoveCity_CoveLilyMotel_1F_Movement_2725A2
+	applymovement 1, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	releaseall
 	end
 
 LilycoveCity_CoveLilyMotel_1F_EventScript_2181EA:: @ 82181EA
 	msgbox LilycoveCity_CoveLilyMotel_1F_Text_218544, MSGBOX_DEFAULT
-	applymovement 1, LilycoveCity_CoveLilyMotel_1F_Movement_27259E
+	applymovement 1, Common_Movement_FacePlayer
 	waitmovement 0
 	msgbox LilycoveCity_CoveLilyMotel_1F_Text_2185F4, MSGBOX_DEFAULT
 	closemessage
-	applymovement 1, LilycoveCity_CoveLilyMotel_1F_Movement_2725A2
+	applymovement 1, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	releaseall
 	end
@@ -40,11 +40,11 @@ LilycoveCity_CoveLilyMotel_1F_EventScript_2181EA:: @ 82181EA
 LilycoveCity_CoveLilyMotel_1F_EventScript_218211:: @ 8218211
 	lockall
 	playse SE_PIN
-	applymovement 1, LilycoveCity_CoveLilyMotel_1F_Movement_272598
+	applymovement 1, Common_Movement_ExclamationMark
 	waitmovement 0
-	applymovement 1, LilycoveCity_CoveLilyMotel_1F_Movement_27259A
+	applymovement 1, Common_Movement_Delay48
 	waitmovement 0
-	applymovement EVENT_OBJ_ID_PLAYER, LilycoveCity_CoveLilyMotel_1F_Movement_2725AA
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceDown
 	waitmovement 0
 	msgbox LilycoveCity_CoveLilyMotel_1F_Text_21839B, MSGBOX_DEFAULT
 	closemessage

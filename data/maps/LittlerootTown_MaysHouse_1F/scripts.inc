@@ -1,11 +1,11 @@
 LittlerootTown_MaysHouse_1F_MapScripts:: @ 81F88A5
-	map_script 1, LittlerootTown_MaysHouse_1F_MapScript1_1F88B5
-	map_script 3, LittlerootTown_MaysHouse_1F_MapScript1_1F88F4
-	map_script 2, LittlerootTown_MaysHouse_1F_MapScript2_1F893A
+	map_script MAP_SCRIPT_ON_LOAD, LittlerootTown_MaysHouse_1F_MapScript1_1F88B5
+	map_script MAP_SCRIPT_ON_TRANSITION, LittlerootTown_MaysHouse_1F_MapScript1_1F88F4
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, LittlerootTown_MaysHouse_1F_MapScript2_1F893A
 	.byte 0
 
 LittlerootTown_MaysHouse_1F_MapScript1_1F88B5: @ 81F88B5
-	compare VAR_0x4092, 6
+	compare VAR_LITTLEROOT_INTRO_STATE, 6
 	call_if_lt LittlerootTown_MaysHouse_1F_EventScript_1F88CA
 	call_if_set FLAG_RECEIVED_RUNNING_SHOES, LittlerootTown_MaysHouse_1F_EventScript_1F88DD
 	end
@@ -26,11 +26,11 @@ LittlerootTown_MaysHouse_1F_EventScript_1F88EA:: @ 81F88EA
 	return
 
 LittlerootTown_MaysHouse_1F_MapScript1_1F88F4: @ 81F88F4
-	compare VAR_0x4092, 3
+	compare VAR_LITTLEROOT_INTRO_STATE, 3
 	call_if_eq LittlerootTown_MaysHouse_1F_EventScript_1F892E
-	compare VAR_0x4092, 5
+	compare VAR_LITTLEROOT_INTRO_STATE, 5
 	call_if_eq LittlerootTown_MaysHouse_1F_EventScript_1F8916
-	compare VAR_0x4092, 6
+	compare VAR_LITTLEROOT_INTRO_STATE, 6
 	call_if_eq LittlerootTown_MaysHouse_1F_EventScript_1F8922
 	end
 
@@ -50,11 +50,11 @@ LittlerootTown_MaysHouse_1F_EventScript_1F892E:: @ 81F892E
 	return
 
 LittlerootTown_MaysHouse_1F_MapScript2_1F893A: @ 81F893A
-	map_script_2 VAR_0x4092, 3, LittlerootTown_MaysHouse_1F_EventScript_1F898C
-	map_script_2 VAR_0x4092, 5, LittlerootTown_MaysHouse_1F_EventScript_1F8964
-	map_script_2 VAR_0x4092, 6, LittlerootTown_MaysHouse_1F_EventScript_1F899D
-	map_script_2 VAR_0x408C, 1, LittlerootTown_MaysHouse_1F_EventScript_1F89AE
-	map_script_2 VAR_0x4082, 3, LittlerootTown_MaysHouse_1F_EventScript_292AF2
+	map_script_2 VAR_LITTLEROOT_INTRO_STATE, 3, LittlerootTown_MaysHouse_1F_EventScript_1F898C
+	map_script_2 VAR_LITTLEROOT_INTRO_STATE, 5, LittlerootTown_MaysHouse_1F_EventScript_1F8964
+	map_script_2 VAR_LITTLEROOT_INTRO_STATE, 6, LittlerootTown_MaysHouse_1F_EventScript_1F899D
+	map_script_2 VAR_LITTLEROOT_HOUSES_STATE_2, 1, LittlerootTown_MaysHouse_1F_EventScript_1F89AE
+	map_script_2 VAR_LITTLEROOT_HOUSES_STATE, 3, LittlerootTown_MaysHouse_1F_EventScript_292AF2
 	.2byte 0
 
 LittlerootTown_MaysHouse_1F_EventScript_1F8964:: @ 81F8964
@@ -90,17 +90,17 @@ LittlerootTown_MaysHouse_1F_EventScript_1F899D:: @ 81F899D
 LittlerootTown_MaysHouse_1F_EventScript_1F89AE:: @ 81F89AE
 	lockall
 	playse SE_PIN
-	applymovement 4, LittlerootTown_MaysHouse_1F_Movement_272598
+	applymovement 4, Common_Movement_ExclamationMark
 	waitmovement 0
-	applymovement 4, LittlerootTown_MaysHouse_1F_Movement_27259A
+	applymovement 4, Common_Movement_Delay48
 	waitmovement 0
-	applymovement EVENT_OBJ_ID_PLAYER, LittlerootTown_MaysHouse_1F_Movement_2725A8
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceRight
 	applymovement 4, LittlerootTown_MaysHouse_1F_Movement_1F89EC
 	waitmovement 0
 	special GetRivalSonDaughterString
 	msgbox LittlerootTown_MaysHouse_1F_Text_1F8BC5, MSGBOX_DEFAULT
 	setflag FLAG_MET_RIVAL_MOM
-	setvar VAR_0x408C, 2
+	setvar VAR_LITTLEROOT_HOUSES_STATE_2, 2
 	releaseall
 	end
 
@@ -119,7 +119,7 @@ LittlerootTown_MaysHouse_1F_EventScript_1F89F3:: @ 81F89F3
 	faceplayer
 	goto_if_set FLAG_DEFEATED_RIVAL_ROUTE103, LittlerootTown_BrendansHouse_1F_EventScript_1F8A33
 	goto_if_set FLAG_SYS_POKEMON_GET, LittlerootTown_BrendansHouse_1F_EventScript_1F8A29
-	compare VAR_0x408D, 3
+	compare VAR_LITTLEROOT_RIVAL_STATE, 3
 	goto_if_eq LittlerootTown_BrendansHouse_1F_EventScript_1F8A1F
 	special GetRivalSonDaughterString
 	msgbox LittlerootTown_BrendansHouse_1F_Text_1F8CA5, MSGBOX_DEFAULT
@@ -154,7 +154,7 @@ LittlerootTown_MaysHouse_1F_EventScript_1F8A4C:: @ 81F8A4C
 	lockall
 	setvar VAR_0x8004, 1
 	setvar VAR_0x8005, 1
-	applymovement VAR_0x8004, LittlerootTown_MaysHouse_1F_Movement_2725A8
+	applymovement VAR_0x8004, Common_Movement_WalkInPlaceRight
 	waitmovement 0
 	goto LittlerootTown_MaysHouse_1F_EventScript_292765
 	end
@@ -183,9 +183,9 @@ LittlerootTown_MaysHouse_1F_EventScript_1F8A8B:: @ 81F8A8B
 	addobject 7
 	delay 30
 	playse SE_PIN
-	applymovement 7, LittlerootTown_MaysHouse_1F_Movement_272598
+	applymovement 7, Common_Movement_ExclamationMark
 	waitmovement 0
-	applymovement 7, LittlerootTown_MaysHouse_1F_Movement_27259A
+	applymovement 7, Common_Movement_Delay48
 	waitmovement 0
 	compare VAR_0x8008, 1
 	call_if_ne LittlerootTown_MaysHouse_1F_EventScript_1F8B2A
@@ -210,7 +210,7 @@ LittlerootTown_MaysHouse_1F_EventScript_1F8A8B:: @ 81F8A8B
 	setflag FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_2F_POKE_BALL
 	clearflag FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_RIVAL_BEDROOM
 	delay 30
-	setvar VAR_0x408D, 3
+	setvar VAR_LITTLEROOT_RIVAL_STATE, 3
 	setvar VAR_0x4050, 1
 	savebgm MUS_DUMMY
 	fadedefaultbgm
@@ -218,7 +218,7 @@ LittlerootTown_MaysHouse_1F_EventScript_1F8A8B:: @ 81F8A8B
 	end
 
 LittlerootTown_MaysHouse_1F_EventScript_1F8B2A:: @ 81F8B2A
-	applymovement EVENT_OBJ_ID_PLAYER, LittlerootTown_MaysHouse_1F_Movement_2725AA
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceDown
 	waitmovement 0
 	return
 

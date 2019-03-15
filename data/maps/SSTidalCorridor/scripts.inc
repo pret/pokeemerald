@@ -1,9 +1,9 @@
 SSTidalCorridor_MapScripts:: @ 823BFCF
-	map_script 2, SSTidalCorridor_MapScript2_23BFD5
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, SSTidalCorridor_MapScript2_23BFD5
 	.byte 0
 
 SSTidalCorridor_MapScript2_23BFD5: @ 823BFD5
-	map_script_2 VAR_0x40D4, 0, SSTidalCorridor_EventScript_23C219
+	map_script_2 VAR_SS_TIDAL_SCOTT_STATE, 0, SSTidalCorridor_EventScript_23C219
 	map_script_2 VAR_PORTHOLE_STATE, 1, SSTidalCorridor_EventScript_23BFFF
 	map_script_2 VAR_PORTHOLE_STATE, 5, SSTidalCorridor_EventScript_23C015
 	map_script_2 VAR_PORTHOLE_STATE, 9, SSTidalCorridor_EventScript_23C067
@@ -201,7 +201,7 @@ SSTidalCorridor_EventScript_23C219:: @ 823C219
 	lockall
 	applymovement 5, SSTidalCorridor_Movement_23C26D
 	waitmovement 0
-	applymovement EVENT_OBJ_ID_PLAYER, SSTidalCorridor_Movement_2725A8
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceRight
 	waitmovement 0
 	msgbox SSTidalCorridor_Text_23C28F, MSGBOX_DEFAULT
 	closemessage
@@ -216,7 +216,7 @@ SSTidalCorridor_EventScript_23C219:: @ 823C219
 	waitmovement 0
 	delay 30
 	setflag FLAG_MET_SCOTT_ON_SS_TIDAL
-	setvar VAR_0x40D4, 1
+	setvar VAR_SS_TIDAL_SCOTT_STATE, 1
 	releaseall
 	end
 

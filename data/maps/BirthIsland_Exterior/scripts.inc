@@ -1,7 +1,7 @@
 BirthIsland_Exterior_MapScripts:: @ 8267F15
-	map_script 3, BirthIsland_Exterior_MapScript1_267F29
-	map_script 5, BirthIsland_Exterior_MapScript1_267F65
-	map_script 7, BirthIsland_Exterior_MapScript1_267F25
+	map_script MAP_SCRIPT_ON_TRANSITION, BirthIsland_Exterior_MapScript1_267F29
+	map_script MAP_SCRIPT_ON_RESUME, BirthIsland_Exterior_MapScript1_267F65
+	map_script MAP_SCRIPT_ON_RETURN_TO_FIELD, BirthIsland_Exterior_MapScript1_267F25
 	.byte 0
 
 BirthIsland_Exterior_MapScript1_267F25: @ 8267F25
@@ -23,7 +23,7 @@ BirthIsland_Exterior_EventScript_267F4E:: @ 8267F4E
 	return
 
 BirthIsland_Exterior_EventScript_267F55:: @ 8267F55
-	goto_if_set FLAG_DEFEATED_DEOXYS, BirthIsland_Exterior_EventScript_27374E
+	goto_if_set FLAG_DEFEATED_DEOXYS, Common_EventScript_NopReturn
 	clearflag FLAG_HIDE_BIRTH_ISLAND_DEOXYS_TRIANGLE
 	clearflag FLAG_DEOXYS_ROCK_COMPLETE
 	return
@@ -35,7 +35,7 @@ BirthIsland_Exterior_MapScript1_267F65: @ 8267F65
 BirthIsland_Exterior_EventScript_267F6F:: @ 8267F6F
 	specialvar VAR_RESULT, GetBattleOutcome
 	compare VAR_RESULT, 7
-	goto_if_ne BirthIsland_Exterior_EventScript_27374E
+	goto_if_ne Common_EventScript_NopReturn
 	removeobject 2
 	return
 

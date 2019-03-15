@@ -1,10 +1,10 @@
 MtChimney_MapScripts:: @ 822EDC1
-	map_script 5, MtChimney_MapScript1_22EDD2
-	map_script 3, MtChimney_MapScript1_22EDCC
+	map_script MAP_SCRIPT_ON_RESUME, MtChimney_MapScript1_22EDD2
+	map_script MAP_SCRIPT_ON_TRANSITION, MtChimney_MapScript1_22EDCC
 	.byte 0
 
 MtChimney_MapScript1_22EDCC: @ 822EDCC
-	setvar VAR_0x40BD, 1
+	setvar VAR_JAGGED_PASS_ASH_WEATHER, 1
 	end
 
 MtChimney_MapScript1_22EDD2: @ 822EDD2
@@ -17,7 +17,7 @@ MtChimney_EventScript_22EDD5:: @ 822EDD5
 	call_if_unset FLAG_EVIL_LEADER_PLEASE_STOP, MtChimney_EventScript_22EDF9
 	call_if_set FLAG_EVIL_LEADER_PLEASE_STOP, MtChimney_EventScript_22EE02
 	closemessage
-	applymovement 1, MtChimney_Movement_2725A2
+	applymovement 1, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	setflag FLAG_EVIL_LEADER_PLEASE_STOP
 	release
@@ -35,12 +35,12 @@ MtChimney_EventScript_22EE0B:: @ 822EE0B
 	lockall
 	playbgm MUS_MGM0, 0
 	msgbox MtChimney_Text_22F26A, MSGBOX_DEFAULT
-	applymovement 2, MtChimney_Movement_27259E
+	applymovement 2, Common_Movement_FacePlayer
 	waitmovement 0
 	playse SE_PIN
-	applymovement 2, MtChimney_Movement_272598
+	applymovement 2, Common_Movement_ExclamationMark
 	waitmovement 0
-	applymovement 2, MtChimney_Movement_27259A
+	applymovement 2, Common_Movement_Delay48
 	waitmovement 0
 	msgbox MtChimney_Text_22F32E, MSGBOX_DEFAULT
 	trainerbattle_no_intro TRAINER_MAXIE_2, MtChimney_Text_22F5CF
@@ -60,7 +60,7 @@ MtChimney_EventScript_22EE0B:: @ 822EE0B
 	call_if_eq MtChimney_EventScript_22EEC7
 	compare VAR_FACING, 2
 	call_if_eq MtChimney_EventScript_22EED2
-	applymovement EVENT_OBJ_ID_PLAYER, MtChimney_Movement_2725A4
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceLeft
 	waitmovement 0
 	msgbox MtChimney_Text_22FC3D, MSGBOX_DEFAULT
 	closemessage
@@ -121,7 +121,7 @@ MtChimney_EventScript_22EEF3:: @ 822EEF3
 	end
 
 MtChimney_EventScript_22EF51:: @ 822EF51
-	msgbox gUnknown_08272AD0, MSGBOX_DEFAULT
+	msgbox gText_TooBadBagIsFull, MSGBOX_DEFAULT
 	hidemoneybox
 	nop
 	nop

@@ -198,7 +198,7 @@ BattleFrontier_Lounge3_EventScript_261FE1:: @ 8261FE1
 
 BattleFrontier_Lounge3_EventScript_261FF1:: @ 8261FF1
 	closemessage
-	applymovement VAR_LAST_TALKED, BattleFrontier_Lounge3_Movement_2725A2
+	applymovement VAR_LAST_TALKED, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end

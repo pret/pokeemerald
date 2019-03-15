@@ -1,6 +1,6 @@
 BattleFrontier_BattleTowerCorridor_MapScripts:: @ 8241AAA
-	map_script 1, BattleFrontier_BattleTowerCorridor_MapScript1_241AB5
-	map_script 2, BattleFrontier_BattleTowerCorridor_MapScript2_241AE6
+	map_script MAP_SCRIPT_ON_LOAD, BattleFrontier_BattleTowerCorridor_MapScript1_241AB5
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, BattleFrontier_BattleTowerCorridor_MapScript2_241AE6
 	.byte 0
 
 BattleFrontier_BattleTowerCorridor_MapScript1_241AB5: @ 8241AB5

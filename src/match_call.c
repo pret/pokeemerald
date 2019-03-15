@@ -111,8 +111,6 @@ static void PopulateSpeciesFromTrainerParty(int, u8 *);
 static void PopulateBattleFrontierFacilityName(int, u8 *);
 static void PopulateBattleFrontierStreak(int, u8 *);
 
-extern void sub_81973A4(void);
-
 #define TEXT_ID(topic, id) (((topic) << 8) | ((id) & 0xFF))
 
 static const struct MatchCallTrainerTextInfo sMatchCallTrainers[] =
@@ -1016,7 +1014,7 @@ static bool32 MapAllowsMatchCall(void)
     
     if (gMapHeader.regionMapSectionId == MAPSEC_SOOTOPOLIS_CITY
      && FlagGet(FLAG_HIDE_SOOTOPOLIS_CITY_RAYQUAZA) == TRUE
-     && FlagGet(FLAG_UNUSED_0x0DC) == FALSE)
+     && FlagGet(FLAG_NEVER_SET_0x0DC) == FALSE)
         return FALSE;
 
     if (gMapHeader.regionMapSectionId == MAPSEC_MT_CHIMNEY
@@ -1191,7 +1189,7 @@ static bool32 LoadMatchCallWindowGfx(u8 taskId)
         return FALSE;
     }
 
-    FillWindowPixelBuffer(taskData[2], 0x88);
+    FillWindowPixelBuffer(taskData[2], PIXEL_FILL(8));
     LoadPalette(sUnknown_0860EA4C, 0xE0, 0x20);
     LoadPalette(sPokeNavIconPalette, 0xF0, 0x20);
     ChangeBgY(0, -0x2000, 0);
@@ -1241,7 +1239,7 @@ static bool32 sub_81962D8(u8 taskId)
     s16 *taskData = gTasks[taskId].data;
     if (!ExecuteMatchCallTextPrinter(taskData[2]))
     {
-        FillWindowPixelBuffer(taskData[2], 0x88);
+        FillWindowPixelBuffer(taskData[2], PIXEL_FILL(8));
         if (!gMatchCallState.triggeredFromScript)
             SelectMatchCallMessage(gMatchCallState.trainerId, gStringVar4);
 
@@ -1257,7 +1255,7 @@ static bool32 sub_8196330(u8 taskId)
     s16 *taskData = gTasks[taskId].data;
     if (!ExecuteMatchCallTextPrinter(taskData[2]) && !IsSEPlaying() && gMain.newKeys & (A_BUTTON | B_BUTTON))
     {
-        FillWindowPixelBuffer(taskData[2], 0x88);
+        FillWindowPixelBuffer(taskData[2], PIXEL_FILL(8));
         CopyWindowToVram(taskData[2], 2);
         PlaySE(SE_TOREOFF);
         return TRUE;

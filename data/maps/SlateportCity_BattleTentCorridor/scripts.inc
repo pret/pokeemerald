@@ -1,6 +1,6 @@
 SlateportCity_BattleTentCorridor_MapScripts:: @ 8208E26
-	map_script 2, SlateportCity_BattleTentCorridor_MapScript2_208E5B
-	map_script 4, SlateportCity_BattleTentCorridor_MapScript2_208E31
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, SlateportCity_BattleTentCorridor_MapScript2_208E5B
+	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, SlateportCity_BattleTentCorridor_MapScript2_208E31
 	.byte 0
 
 SlateportCity_BattleTentCorridor_MapScript2_208E31: @ 8208E31
@@ -44,7 +44,7 @@ SlateportCity_BattleTentCorridor_EventScript_208E65:: @ 8208E65
 SlateportCity_BattleTentCorridor_EventScript_208EB4:: @ 8208EB4
 	msgbox SlateportCity_BattleTentCorridor_Text_25AB96, MSGBOX_DEFAULT
 	closemessage
-	applymovement 1, SlateportCity_BattleTentCorridor_Movement_2725A6
+	applymovement 1, Common_Movement_WalkInPlaceUp
 	waitmovement 0
 	opendoor 2, 1
 	waitdooranim

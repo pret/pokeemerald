@@ -1,6 +1,29 @@
 #ifndef GUARD_OVERWORLD_H
 #define GUARD_OVERWORLD_H
 
+#define LINK_KEY_CODE_NULL 0x00
+#define LINK_KEY_CODE_EMPTY 0x11
+#define LINK_KEY_CODE_DPAD_DOWN 0x12
+#define LINK_KEY_CODE_DPAD_UP 0x13
+#define LINK_KEY_CODE_DPAD_LEFT 0x14
+#define LINK_KEY_CODE_DPAD_RIGHT 0x15
+#define LINK_KEY_CODE_UNK_2 0x16
+#define LINK_KEY_CODE_EXIT_ROOM 0x17
+#define LINK_KEY_CODE_START_BUTTON 0x18
+#define LINK_KEY_CODE_A_BUTTON 0x19
+#define LINK_KEY_CODE_UNK_4 0x1A // I'd guess this is the B button?
+
+// These two are a hack to stop user input until link stuff can be
+// resolved.
+#define LINK_KEY_CODE_HANDLE_RECV_QUEUE 0x1B 
+#define LINK_KEY_CODE_HANDLE_SEND_QUEUE 0x1C
+#define LINK_KEY_CODE_UNK_7 0x1D
+#define LINK_KEY_CODE_UNK_8 0x1E
+
+#define MOVEMENT_MODE_FREE 0
+#define MOVEMENT_MODE_FROZEN 1
+#define MOVEMENT_MODE_SCRIPTED 2
+
 struct InitialPlayerAvatarState
 {
     u8 transitionFlags;
@@ -12,7 +35,7 @@ struct LinkPlayerEventObject
     u8 active;
     u8 linkPlayerId;
     u8 eventObjId;
-    u8 mode;
+    u8 movementMode;
 };
 
 // Exported RAM declarations
@@ -22,10 +45,10 @@ extern struct LinkPlayerEventObject gLinkPlayerEventObjects[4];
 extern u16 *gBGTilemapBuffers1;
 extern u16 *gBGTilemapBuffers2;
 extern u16 *gBGTilemapBuffers3;
-extern u16 gUnknown_03005DA8;
+extern u16 gHeldKeyCodeToSend;
 extern void (*gFieldCallback)(void);
 extern bool8 (*gFieldCallback2)(void);
-extern u8 gUnknown_03005DB4;
+extern u8 gLocalLinkPlayerId;
 extern u8 gFieldLinkPlayerCount;
 
 // Exported ROM declarations
@@ -68,7 +91,7 @@ void SetContinueGameWarpToDynamicWarp(int unused);
 const struct MapConnection *GetMapConnection(u8 dir);
 bool8 SetDiveWarpEmerge(u16 x, u16 y);
 bool8 SetDiveWarpDive(u16 x, u16 y);
-void mliX_load_map(u8 mapGroup, u8 mapNum);
+void LoadMapFromCameraTransition(u8 mapGroup, u8 mapNum);
 void ResetInitialPlayerAvatarState(void);
 void StoreInitialPlayerAvatarState(void);
 bool32 Overworld_IsBikingAllowed(void);
@@ -96,19 +119,19 @@ u8 GetMapTypeByGroupAndId(s8 mapGroup, s8 mapNum);
 u8 GetMapTypeByWarpData(struct WarpData *warp);
 u8 GetCurrentMapType(void);
 u8 GetLastUsedWarpMapType(void);
-bool8 is_map_type_1_2_3_5_or_6(u8 mapType);
+bool8 IsMapTypeOutdoors(u8 mapType);
 bool8 Overworld_MapTypeAllowsTeleportAndFly(u8 mapType);
-bool8 Overworld_MapTypeIsIndoors(u8 mapType);
+bool8 IsMapTypeIndoors(u8 mapType);
 u8 GetSavedWarpRegionMapSectionId(void);
 u8 GetCurrentRegionMapSectionId(void);
 u8 GetCurrentMapBattleScene(void);
 void CleanupOverworldWindowsAndTilemaps(void);
-bool32 is_c1_link_related_active(void);
+bool32 IsUpdateLinkStateCBActive(void);
 void CB1_Overworld(void);
 void CB2_OverworldBasic(void);
 void CB2_Overworld(void);
 void SetMainCallback1(void (*cb)(void));
-void sub_8085E94(void *a0);
+void SetUnusedCallback(void *a0);
 void CB2_NewGame(void);
 void CB2_WhiteOut(void);
 void CB2_LoadMap(void);
@@ -117,18 +140,18 @@ void sub_8086074(void);
 void CB2_ReturnToField(void);
 void CB2_ReturnToFieldLocal(void);
 void CB2_ReturnToFieldLink(void);
-void c2_8056854(void);
+void CB2_ReturnToFieldFromMultiplayer(void);
 void CB2_ReturnToFieldWithOpenMenu(void);
 void CB2_ReturnToFieldContinueScript(void);
 void CB2_ReturnToFieldContinueScriptPlayMapMusic(void);
 void sub_80861E8(void);
 void CB2_ContinueSavedGame(void);
-void sub_8086C2C(void);
+void ResetAllMultiplayerState(void);
 u32 sub_8087214(void);
 bool32 sub_808727C(void);
 u16 sub_8087288(void);
 u16 sub_808729C(void);
-u16 sub_80872B0(void);
+u16 QueueExitLinkRoomKey(void);
 u16 sub_80872C4(void);
 bool32 sub_8087598(void);
 bool32 sub_80875C8(void);

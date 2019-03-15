@@ -12,7 +12,7 @@ RustboroCity_Flat2_2F_EventScript_215FE1:: @ 8215FE1
 	msgbox RustboroCity_Flat2_2F_Text_21605A, MSGBOX_DEFAULT
 	giveitem_std ITEM_PREMIER_BALL
 	compare VAR_RESULT, 0
-	goto_if_eq RustboroCity_Flat2_2F_EventScript_272054
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_PREMIER_BALL_RUSTBORO
 	release
 	end

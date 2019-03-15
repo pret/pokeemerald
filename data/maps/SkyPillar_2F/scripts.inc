@@ -1,11 +1,11 @@
 SkyPillar_2F_MapScripts:: @ 823962B
-	map_script 2, SkyPillar_2F_MapScript2_2A8327
-	map_script 3, SkyPillar_2F_MapScript1_23963B
-	map_script 5, SkyPillar_2F_MapScript1_239650
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, SkyPillar_2F_MapScript2_2A8327
+	map_script MAP_SCRIPT_ON_TRANSITION, SkyPillar_2F_MapScript1_23963B
+	map_script MAP_SCRIPT_ON_RESUME, SkyPillar_2F_MapScript1_239650
 	.byte 0
 
 SkyPillar_2F_MapScript1_23963B: @ 823963B
-	compare VAR_0x40CA, 2
+	compare VAR_SKY_PILLAR_STATE, 2
 	call_if_lt SkyPillar_2F_EventScript_23964C
 	copyvar VAR_ICE_STEP_COUNT, 0x1
 	end

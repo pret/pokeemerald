@@ -269,8 +269,8 @@ BattleFrontier_BattleTowerLobby_EventScript_2B6DD4:
 	apprentice_msg TRUE, 11
 	setvar VAR_0x8004, 25
 	special CallApprenticeFunction
-	setvar VAR_0x8004, 19
-	call BattleFrontier_BattleTowerLobby_EventScript_271E7C
+	setvar VAR_0x8004, EASY_CHAT_TYPE_APPRENTICE
+	call Common_ShowEasyChatScreen
 	lock
 	faceplayer
 	setvar VAR_0x8004, 21

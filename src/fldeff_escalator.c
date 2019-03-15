@@ -7,7 +7,7 @@
 
 static EWRAM_DATA u8 sEscalatorAnim_TaskId = 0;
 
-static void sub_80E12E8(u8 taskId, const s16 *list, u16 c)
+static void sub_80E12E8(u8 taskId, const s16 *list, u16 isImpassableFlag)
 {
     s16 r5 = gTasks[taskId].data[4] - 1;
     s16 r3 = gTasks[taskId].data[5] - 1;
@@ -26,9 +26,9 @@ static void sub_80E12E8(u8 taskId, const s16 *list, u16 c)
                 if (list[r4] == metatileId)
                 {
                     if (r4 != 2)
-                        MapGridSetMetatileIdAt(r5 + x, r3 + y, c | list[r4 + 1]);
+                        MapGridSetMetatileIdAt(r5 + x, r3 + y, isImpassableFlag | list[r4 + 1]);
                     else
-                        MapGridSetMetatileIdAt(r5 + x, r3 + y, c | list[0]);
+                        MapGridSetMetatileIdAt(r5 + x, r3 + y, isImpassableFlag | list[0]);
                 }
             }
         }
@@ -44,9 +44,9 @@ static void sub_80E12E8(u8 taskId, const s16 *list, u16 c)
                 if (list[2 - r4] == metatileId)
                 {
                     if (r4 != 2)
-                        MapGridSetMetatileIdAt(r5 + x, r3 + y, c | list[1 - r4]);
+                        MapGridSetMetatileIdAt(r5 + x, r3 + y, isImpassableFlag | list[1 - r4]);
                     else
-                        MapGridSetMetatileIdAt(r5 + x, r3 + y, c | list[2]);
+                        MapGridSetMetatileIdAt(r5 + x, r3 + y, isImpassableFlag | list[2]);
                 }
             }
         }
@@ -76,13 +76,13 @@ static void sub_80E1444(u8 taskId)
             sub_80E12E8(taskId, gUnknown_08589AC0, 0);
             break;
         case 2:
-            sub_80E12E8(taskId, gUnknown_08589AC6, 0xC00);
+            sub_80E12E8(taskId, gUnknown_08589AC6, METATILE_COLLISION_MASK);
             break;
         case 3:
             sub_80E12E8(taskId, gUnknown_08589ACC, 0);
             break;
         case 4:
-            sub_80E12E8(taskId, gUnknown_08589AD2, 0xC00);
+            sub_80E12E8(taskId, gUnknown_08589AD2, METATILE_COLLISION_MASK);
             break;
         case 5:
             sub_80E12E8(taskId, gUnknown_08589AD8, 0);

@@ -232,13 +232,13 @@ Route111_EventScript_28CF94:: @ 828CF94
 
 Route111_EventScript_28CF9F:: @ 828CF9F
 	applymovement VAR_0x8004, Route111_Movement_28D04F
-	applymovement VAR_0x8005, Route111_Movement_2725A6
+	applymovement VAR_0x8005, Common_Movement_WalkInPlaceUp
 	waitmovement 0
 	return
 
 Route111_EventScript_28CFB1:: @ 828CFB1
 	applymovement VAR_0x8004, Route111_Movement_28D051
-	applymovement VAR_0x8005, Route111_Movement_2725A4
+	applymovement VAR_0x8005, Common_Movement_WalkInPlaceLeft
 	waitmovement 0
 	return
 
@@ -313,8 +313,8 @@ Route111_EventScript_28D0A7:: @ 828D0A7
 	compare VAR_RESULT, 0
 	goto_if_eq Route111_EventScript_28D0E1
 	msgbox Route111_Text_28B433, MSGBOX_DEFAULT
-	setvar VAR_0x8004, 10
-	call Route111_EventScript_271E7C
+	setvar VAR_0x8004, EASY_CHAT_TYPE_GABBY_AND_TY
+	call Common_ShowEasyChatScreen
 	lock
 	faceplayer
 	compare VAR_RESULT, 0

@@ -140,9 +140,9 @@ extern const u16 gUnknown_083970E8[];
 extern const u8 gWeatherFog1Tiles[];
 
 void StartWeather(void);
-void ChangeWeather(u8 weather);
-void sub_80AB104(u8 weather);
-void sub_80AB130(u8 weather);
+void SetNextWeather(u8 weather);
+void SetCurrentAndNextWeather(u8 weather);
+void SetCurrentAndNextWeatherNoDelay(u8 weather);
 void sub_80ABC48(s8 gammaIndex);
 void sub_80ABC7C(u8 gammaIndex, u8 gammaTargetIndex, u8 gammaStepDelay);
 void FadeScreen(u8 mode, s8 delay);
@@ -162,7 +162,7 @@ bool8 Weather_UpdateBlend(void);
 void sub_80AC274(u8 a);
 u8 GetCurrentWeather(void);
 void SetRainStrengthFromSoundEffect(u16 soundEffect);
-void PlayRainSoundEffect(void);
+void PlayRainStoppingSoundEffect(void);
 u8 IsWeatherChangeComplete(void);
 void SetWeatherScreenFadeOut(void);
 void sub_80AC3E4(void);
@@ -233,6 +233,6 @@ void SetSav1WeatherFromCurrMapHeader(void);
 void SetWeather(u32 weather);
 void DoCurrentWeather(void);
 void UpdateWeatherPerDay(u16 increment);
-void sub_80AEE84(void);
+void ResumePausedWeather(void);
 
 #endif // GUARD_WEATHER_H

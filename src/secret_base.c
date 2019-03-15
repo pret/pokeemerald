@@ -43,8 +43,6 @@
 #include "constants/species.h"
 #include "constants/trainers.h"
 
-extern void mapldr_default(void);
-
 // Static type declarations
 
 struct SecretBaseListMenuBuffer {
@@ -60,7 +58,7 @@ struct SecretBaseRecordMixer {
 
 // Static RAM declarations
 EWRAM_DATA u8 sCurSecretBaseId = 0;
-EWRAM_DATA u8 gUnknown_0203A01D = 0;
+EWRAM_DATA bool8 gInFriendSecretBase = FALSE;
 EWRAM_DATA struct SecretBaseListMenuBuffer *gUnknown_0203A020 = NULL;
 
 // Static ROM declarations
@@ -259,7 +257,7 @@ void sub_80E8CB0(s16 *xPtr, s16 *yPtr, u16 tile)
     {
         for (x = 0; x < mapLayout->width; x ++)
         {
-            if ((mapLayout->map[y * mapLayout->width + x] & 0x3ff) == tile)
+            if ((mapLayout->map[y * mapLayout->width + x] & METATILE_ID_MASK) == tile)
             {
                 *xPtr = x;
                 *yPtr = y;
@@ -282,7 +280,7 @@ void sub_80E8D4C(void)
     {
         if (gUnknown_0858CFCC[i].tile1 == tile)
         {
-            MapGridSetMetatileIdAt(x, y, gUnknown_0858CFCC[i].tile2 | 0xC00);
+            MapGridSetMetatileIdAt(x, y, gUnknown_0858CFCC[i].tile2 | METATILE_COLLISION_MASK);
             CurrentMapDrawMetatileAt(x, y);
             return;
         }
@@ -291,7 +289,7 @@ void sub_80E8D4C(void)
     {
         if (gUnknown_0858CFCC[i].tile2 == tile)
         {
-            MapGridSetMetatileIdAt(x, y, gUnknown_0858CFCC[i].tile1 | 0xC00);
+            MapGridSetMetatileIdAt(x, y, gUnknown_0858CFCC[i].tile1 | METATILE_COLLISION_MASK);
             CurrentMapDrawMetatileAt(x, y);
             return;
         }
@@ -352,7 +350,7 @@ void sub_80E8EE0(struct MapEvents const *events)
                     {
                         if (gUnknown_0858CFCC[i].tile1 == tile_id)
                         {
-                            MapGridSetMetatileIdAt(x, y, gUnknown_0858CFCC[i].tile2 | 0xc00);
+                            MapGridSetMetatileIdAt(x, y, gUnknown_0858CFCC[i].tile2 | METATILE_COLLISION_MASK);
                             break;
                         }
                     }
@@ -407,7 +405,7 @@ void sub_80E9068(void)
 
 bool8 sub_80E909C(void)
 {
-    if (gMapHeader.mapType == MAP_TYPE_SECRET_BASE && VarGet(VAR_0x4097) == 0)
+    if (gMapHeader.mapType == MAP_TYPE_SECRET_BASE && VarGet(VAR_INIT_SECRET_BASE) == 0)
     {
         return FALSE;
     }
@@ -434,7 +432,7 @@ void sub_80E9108(void)
     sub_80E8CB0(&x, &y, 0x220);
     x += 7;
     y += 7;
-    MapGridSetMetatileIdAt(x, y, 0x220 | 0xC00);
+    MapGridSetMetatileIdAt(x, y, 0x220 | METATILE_COLLISION_MASK);
     CurrentMapDrawMetatileAt(x, y);
     pal_fill_black();
     CreateTask(sub_80E90C8, 0);
@@ -492,12 +490,12 @@ void sub_80E9238(u8 flagIn)
         if (curBaseId != 0)
         {
             sub_80E8CB0(&x, &y, 0x220);
-            MapGridSetMetatileIdAt(x + 7, y + 7, 0x221 | 0xc00);
+            MapGridSetMetatileIdAt(x + 7, y + 7, 0x221 | METATILE_COLLISION_MASK);
         }
-        else if (flagIn == 1 && VarGet(VAR_0x4089) == 1)
+        else if (flagIn == 1 && VarGet(VAR_SECRET_BASE_INITIALIZED) == 1)
         {
             sub_80E8CB0(&x, &y, 0x220);
-            MapGridSetMetatileIdAt(x + 7, y + 7, 0x20a | 0xc00);
+            MapGridSetMetatileIdAt(x + 7, y + 7, 0x20a | METATILE_COLLISION_MASK);
         }
     }
 }
@@ -552,7 +550,7 @@ void sub_80E933C(void)
                 metatile = MapGridGetMetatileBehaviorAt(gSpecialVar_0x8006 + 7, gSpecialVar_0x8007 + 7);
                 if (MetatileBehavior_IsSecretBaseLargeMatEdge(metatile) == TRUE || MetatileBehavior_IsLargeMatCenter(metatile) == TRUE)
                 {
-                    gSpecialVar_Result = gMapHeader.events->eventObjects[objIdx].graphicsId + VAR_0x3F20;
+                    gSpecialVar_Result = gMapHeader.events->eventObjects[objIdx].graphicsId + UNKNOWN_VAR_OFFSET_3F20;
                     VarSet(gSpecialVar_Result, gDecorations[roomDecor[decorIdx]].tiles[0]);
                     gSpecialVar_Result = gMapHeader.events->eventObjects[objIdx].localId;
                     FlagClear(gSpecialVar_0x8004 + 0xAE);
@@ -791,7 +789,7 @@ void sub_80E9AD0(void)
             {
                 if (gUnknown_0858CFCC[j].tile2 == tile)
                 {
-                    MapGridSetMetatileIdAt(events->bgEvents[i].x + 7, events->bgEvents[i].y + 7, gUnknown_0858CFCC[j].tile1 | 0xc00);
+                    MapGridSetMetatileIdAt(events->bgEvents[i].x + 7, events->bgEvents[i].y + 7, gUnknown_0858CFCC[j].tile1 | METATILE_COLLISION_MASK);
                     break;
                 }
             }
@@ -871,7 +869,7 @@ void sub_80E9C9C(u8 taskId)
     {
         data[1] = 0;
         data[2] = 0;
-        sub_8197434(0, 0);
+        ClearDialogWindowAndFrame(0, 0);
         gUnknown_0203A020 = calloc(1, sizeof(struct SecretBaseListMenuBuffer));
         data[6] = AddWindow(&gUnknown_0858D06C[0]);
         game_continue(taskId);
@@ -963,7 +961,7 @@ void sub_80E9E90(u8 taskId)
             PlaySE(SE_SELECT);
             DestroyListMenuTask(data[5], NULL, NULL);
             RemoveScrollIndicatorArrowPair(data[8]);
-            sub_819746C(data[6], 0);
+            ClearStdWindowAndFrame(data[6], 0);
             ClearWindowTilemap(data[6]);
             RemoveWindow(data[6]);
             schedule_bg_copy_tilemap_to_vram(0);
@@ -1020,8 +1018,8 @@ void sub_80E9FFC(u8 taskId)
     s16 *data;
 
     data = gTasks[taskId].data;
-    sub_819746C(data[6], FALSE);
-    sub_819746C(data[7], FALSE);
+    ClearStdWindowAndFrame(data[6], FALSE);
+    ClearStdWindowAndFrame(data[7], FALSE);
     ClearWindowTilemap(data[6]);
     ClearWindowTilemap(data[7]);
     RemoveWindow(data[7]);
@@ -1033,7 +1031,7 @@ void sub_80E9FFC(u8 taskId)
 
 void sub_80EA06C(u8 taskId)
 {
-    DisplayYesNoMenu();
+    DisplayYesNoMenuDefaultYes();
     DoYesNoFuncWithChoice(taskId, &gUnknown_0858D058);
 }
 
@@ -1042,7 +1040,7 @@ void sub_80EA08C(u8 taskId)
     s16 *data;
 
     data = gTasks[taskId].data;
-    sub_8197434(0, 0);
+    ClearDialogWindowAndFrame(0, 0);
     DestroyListMenuTask(data[5], &data[2], &data[1]);
     gSaveBlock1Ptr->secretBases[data[4]].sbr_field_1_6 = 0;
     game_continue(taskId);
@@ -1061,7 +1059,7 @@ void sub_80EA13C(u8 taskId)
     s16 *data;
 
     data = gTasks[taskId].data;
-    sub_8197434(0, 0);
+    ClearDialogWindowAndFrame(0, 0);
     DestroyListMenuTask(data[5], &data[2], &data[1]);
     sub_80E9E00(taskId);
     gTasks[taskId].func = sub_80E9E90;
@@ -1073,7 +1071,7 @@ void sub_80EA18C(u8 taskId)
 
     data = gTasks[taskId].data;
     sub_80E9E44(taskId);
-    sub_819746C(data[7], 0);
+    ClearStdWindowAndFrame(data[7], 0);
     ClearWindowTilemap(data[7]);
     RemoveWindow(data[7]);
     schedule_bg_copy_tilemap_to_vram(0);
@@ -1186,11 +1184,11 @@ void SecretBasePerStepCallback(u8 taskId)
         case 0:
             if (VarGet(VAR_CURRENT_SECRET_BASE) != 0)
             {
-                gUnknown_0203A01D = TRUE;
+                gInFriendSecretBase = TRUE;
             }
             else
             {
-                gUnknown_0203A01D = FALSE;
+                gInFriendSecretBase = FALSE;
             }
             PlayerGetDestCoords(&data[2], &data[3]);
             data[1] = 1;
@@ -1201,103 +1199,103 @@ void SecretBasePerStepCallback(u8 taskId)
             {
                 data[2] = x;
                 data[3] = y;
-                VarSet(VAR_0x40EC, VarGet(VAR_0x40EC) + 1);
+                VarSet(VAR_SECRET_BASE_STEP_COUNTER, VarGet(VAR_SECRET_BASE_STEP_COUNTER) + 1);
                 behavior = MapGridGetMetatileBehaviorAt(x, y);
                 tileId = MapGridGetMetatileIdAt(x, y);
                 if (tileId == 0x234 || tileId == 0x23C)
                 {
-                    if (gUnknown_0203A01D == TRUE)
+                    if (gInFriendSecretBase == TRUE)
                     {
-                        VarSet(VAR_0x40EF, VarGet(VAR_0x40EF) | 0x20);
+                        VarSet(VAR_SECRET_BASE_HIGH_TV_FLAGS, VarGet(VAR_SECRET_BASE_HIGH_TV_FLAGS) | 0x20);
                     }
                 }
                 else if (tileId == 0x2b8 || tileId == 0x2b9 || tileId == 0x2ba || tileId == 0x2c0 || tileId == 0x2c1 || tileId == 0x2c2 || tileId == 0x2c8 || tileId == 0x2c9 || tileId == 0x2ca)
                 {
-                    if (gUnknown_0203A01D == TRUE)
+                    if (gInFriendSecretBase == TRUE)
                     {
-                        VarSet(VAR_0x40EE, VarGet(VAR_0x40EE) | 0x01);
+                        VarSet(VAR_SECRET_BASE_LOW_TV_FLAGS, VarGet(VAR_SECRET_BASE_LOW_TV_FLAGS) | 0x01);
                     }
                 }
                 else if (tileId == 0x239 || tileId == 0x241 || tileId == 0x251 || tileId == 0x259)
                 {
-                    if (gUnknown_0203A01D == TRUE)
+                    if (gInFriendSecretBase == TRUE)
                     {
-                        VarSet(VAR_0x40EE, VarGet(VAR_0x40EE) | 0x04);
+                        VarSet(VAR_SECRET_BASE_LOW_TV_FLAGS, VarGet(VAR_SECRET_BASE_LOW_TV_FLAGS) | 0x04);
                     }
                 }
                 else if ((behavior == 0x34 && tileId == 0x26d) || (behavior == 0x35 && MapGridGetMetatileIdAt(x, y) == 0x26a))
                 {
-                    if (gUnknown_0203A01D == TRUE)
+                    if (gInFriendSecretBase == TRUE)
                     {
-                        VarSet(VAR_0x40EF, VarGet(VAR_0x40EF) | 0x200);
+                        VarSet(VAR_SECRET_BASE_HIGH_TV_FLAGS, VarGet(VAR_SECRET_BASE_HIGH_TV_FLAGS) | 0x200);
                     }
                 }
                 else if (behavior == 0xc1 && tileId == 0x23d)
                 {
-                    if (gUnknown_0203A01D == TRUE)
+                    if (gInFriendSecretBase == TRUE)
                     {
-                        VarSet(VAR_0x40EF, VarGet(VAR_0x40EF) ^ 0x1000);
-                        VarSet(VAR_0x40EF, VarGet(VAR_0x40EF) | 0x2000);
+                        VarSet(VAR_SECRET_BASE_HIGH_TV_FLAGS, VarGet(VAR_SECRET_BASE_HIGH_TV_FLAGS) ^ 0x1000);
+                        VarSet(VAR_SECRET_BASE_HIGH_TV_FLAGS, VarGet(VAR_SECRET_BASE_HIGH_TV_FLAGS) | 0x2000);
                     }
                 }
                 else if (behavior == 0x47 && tileId == 0x23e)
                 {
-                    if (gUnknown_0203A01D == TRUE)
+                    if (gInFriendSecretBase == TRUE)
                     {
-                        VarSet(VAR_0x40EF, VarGet(VAR_0x40EF) | 0x1000);
-                        VarSet(VAR_0x40EF, VarGet(VAR_0x40EF) ^ 0x2000);
+                        VarSet(VAR_SECRET_BASE_HIGH_TV_FLAGS, VarGet(VAR_SECRET_BASE_HIGH_TV_FLAGS) | 0x1000);
+                        VarSet(VAR_SECRET_BASE_HIGH_TV_FLAGS, VarGet(VAR_SECRET_BASE_HIGH_TV_FLAGS) ^ 0x2000);
                     }
                 }
                 else if (MetatileBehavior_IsSecretBaseGlitterMat(behavior) == TRUE)
                 {
-                    if (gUnknown_0203A01D == TRUE)
+                    if (gInFriendSecretBase == TRUE)
                     {
-                        VarSet(VAR_0x40EF, VarGet(VAR_0x40EF) | 0x80);
+                        VarSet(VAR_SECRET_BASE_HIGH_TV_FLAGS, VarGet(VAR_SECRET_BASE_HIGH_TV_FLAGS) | 0x80);
                     }
                 }
                 else if (MetatileBehavior_IsSecretBaseBalloon(behavior) == TRUE)
                 {
                     PopSecretBaseBalloon(MapGridGetMetatileIdAt(x, y), x, y);
-                    if (gUnknown_0203A01D == TRUE)
+                    if (gInFriendSecretBase == TRUE)
                     {
                         switch ((int)MapGridGetMetatileIdAt(x, y))
                         {
                             case 0x338:
                             case 0x33c:
                             case 0x340:
-                                VarSet(VAR_0x40EE, VarGet(VAR_0x40EE) | 0x02);
+                                VarSet(VAR_SECRET_BASE_LOW_TV_FLAGS, VarGet(VAR_SECRET_BASE_LOW_TV_FLAGS) | 0x02);
                                 break;
                             case 0x228:
-                                VarSet(VAR_0x40EE, VarGet(VAR_0x40EE) | 0x100);
+                                VarSet(VAR_SECRET_BASE_LOW_TV_FLAGS, VarGet(VAR_SECRET_BASE_LOW_TV_FLAGS) | 0x100);
                                 break;
                         }
                     }
                 }
                 else if (MetatileBehavior_IsSecretBaseBreakableDoor(behavior) == TRUE)
                 {
-                    if (gUnknown_0203A01D == TRUE)
+                    if (gInFriendSecretBase == TRUE)
                     {
-                        VarSet(VAR_0x40EF, VarGet(VAR_0x40EF) | 0x400);
+                        VarSet(VAR_SECRET_BASE_HIGH_TV_FLAGS, VarGet(VAR_SECRET_BASE_HIGH_TV_FLAGS) | 0x400);
                     }
                     ShatterSecretBaseBreakableDoor(x, y);
                 }
                 else if (MetatileBehavior_IsSecretBaseSoundMat(behavior) == TRUE){
-                    if (gUnknown_0203A01D == TRUE) {
-                        VarSet(VAR_0x40EE, VarGet(VAR_0x40EE) | 0x8000);
+                    if (gInFriendSecretBase == TRUE) {
+                        VarSet(VAR_SECRET_BASE_LOW_TV_FLAGS, VarGet(VAR_SECRET_BASE_LOW_TV_FLAGS) | 0x8000);
                     }
                 }
                 else if (MetatileBehavior_IsSecretBaseJumpMat(behavior) == TRUE)
                 {
-                    if (gUnknown_0203A01D == TRUE)
+                    if (gInFriendSecretBase == TRUE)
                     {
-                        VarSet(VAR_0x40EF, VarGet(VAR_0x40EF) | 0x4000);
+                        VarSet(VAR_SECRET_BASE_HIGH_TV_FLAGS, VarGet(VAR_SECRET_BASE_HIGH_TV_FLAGS) | 0x4000);
                     }
                 }
                 else if (MetatileBehavior_IsSecretBaseSpinMat(behavior) == TRUE)
                 {
-                    if (gUnknown_0203A01D == TRUE)
+                    if (gInFriendSecretBase == TRUE)
                     {
-                        VarSet(VAR_0x40EF, VarGet(VAR_0x40EF) | 0x02);
+                        VarSet(VAR_SECRET_BASE_HIGH_TV_FLAGS, VarGet(VAR_SECRET_BASE_HIGH_TV_FLAGS) | 0x02);
                     }
                 }
             }
@@ -1780,33 +1778,33 @@ void sub_80EB18C(struct SecretBaseRecord *bases)
 
 void sub_80EB1AC(void)
 {
-    VarSet(VAR_0x40EC, 0);
-    VarSet(VAR_0x40ED, 0);
-    VarSet(VAR_0x40EE, 0);
-    VarSet(VAR_0x40EF, 0);
+    VarSet(VAR_SECRET_BASE_STEP_COUNTER, 0);
+    VarSet(VAR_SECRET_BASE_LAST_ITEM_USED, 0);
+    VarSet(VAR_SECRET_BASE_LOW_TV_FLAGS, 0);
+    VarSet(VAR_SECRET_BASE_HIGH_TV_FLAGS, 0);
     if (VarGet(VAR_CURRENT_SECRET_BASE) != 0)
     {
-        VarSet(VAR_0x40F0, TRUE);
+        VarSet(VAR_SECRET_BASE_IS_NOT_LOCAL, TRUE);
     }
     else
     {
-        VarSet(VAR_0x40F0, FALSE);
+        VarSet(VAR_SECRET_BASE_IS_NOT_LOCAL, FALSE);
     }
-    gUnknown_0203A01D = FALSE;
+    gInFriendSecretBase = FALSE;
 }
 
 void sub_80EB218(void)
 {
-    if (VarGet(VAR_0x40F0) && gUnknown_0203A01D == TRUE && !CurrentMapIsSecretBase())
+    if (VarGet(VAR_SECRET_BASE_IS_NOT_LOCAL) && gInFriendSecretBase == TRUE && !CurrentMapIsSecretBase())
     {
-        VarSet(VAR_0x40F0, FALSE);
-        gUnknown_0203A01D = FALSE;
+        VarSet(VAR_SECRET_BASE_IS_NOT_LOCAL, FALSE);
+        gInFriendSecretBase = FALSE;
         sub_80EEA70();
-        VarSet(VAR_0x40EC, 0);
-        VarSet(VAR_0x40ED, 0);
-        VarSet(VAR_0x40EE, 0);
-        VarSet(VAR_0x40EF, 0);
-        VarSet(VAR_0x40F0, FALSE);
+        VarSet(VAR_SECRET_BASE_STEP_COUNTER, 0);
+        VarSet(VAR_SECRET_BASE_LAST_ITEM_USED, 0);
+        VarSet(VAR_SECRET_BASE_LOW_TV_FLAGS, 0);
+        VarSet(VAR_SECRET_BASE_HIGH_TV_FLAGS, 0);
+        VarSet(VAR_SECRET_BASE_IS_NOT_LOCAL, FALSE);
     }
 }
 
@@ -1814,7 +1812,7 @@ void sub_80EB290(void)
 {
     if (VarGet(VAR_CURRENT_SECRET_BASE) != 0)
     {
-        VarSet(VAR_0x40EF, VarGet(VAR_0x40EF) | 0x800);
+        VarSet(VAR_SECRET_BASE_HIGH_TV_FLAGS, VarGet(VAR_SECRET_BASE_HIGH_TV_FLAGS) | 0x800);
     }
 }
 
@@ -1822,7 +1820,7 @@ void sub_80EB2C8(void)
 {
     if (VarGet(VAR_CURRENT_SECRET_BASE) != 0)
     {
-        VarSet(VAR_0x40EE, VarGet(VAR_0x40EE) | 0x400);
+        VarSet(VAR_SECRET_BASE_LOW_TV_FLAGS, VarGet(VAR_SECRET_BASE_LOW_TV_FLAGS) | 0x400);
     }
 }
 
@@ -1830,9 +1828,9 @@ void sub_80EB300(void)
 {
     if (VarGet(VAR_CURRENT_SECRET_BASE) != 0)
     {
-        VarSet(VAR_0x40EE, VarGet(VAR_0x40EE) & ~0x3800);
-        VarSet(VAR_0x40EF, VarGet(VAR_0x40EF) & ~0x001);
-        VarSet(VAR_0x40EE, VarGet(VAR_0x40EE) | 0x2000);
+        VarSet(VAR_SECRET_BASE_LOW_TV_FLAGS, VarGet(VAR_SECRET_BASE_LOW_TV_FLAGS) & ~0x3800);
+        VarSet(VAR_SECRET_BASE_HIGH_TV_FLAGS, VarGet(VAR_SECRET_BASE_HIGH_TV_FLAGS) & ~0x001);
+        VarSet(VAR_SECRET_BASE_LOW_TV_FLAGS, VarGet(VAR_SECRET_BASE_LOW_TV_FLAGS) | 0x2000);
     }
 }
 
@@ -1840,9 +1838,9 @@ void sub_80EB368(void)
 {
     if (VarGet(VAR_CURRENT_SECRET_BASE) != 0)
     {
-        VarSet(VAR_0x40EE, VarGet(VAR_0x40EE) & ~0x3800);
-        VarSet(VAR_0x40EF, VarGet(VAR_0x40EF) & ~0x001);
-        VarSet(VAR_0x40EE, VarGet(VAR_0x40EE) | 0x800);
+        VarSet(VAR_SECRET_BASE_LOW_TV_FLAGS, VarGet(VAR_SECRET_BASE_LOW_TV_FLAGS) & ~0x3800);
+        VarSet(VAR_SECRET_BASE_HIGH_TV_FLAGS, VarGet(VAR_SECRET_BASE_HIGH_TV_FLAGS) & ~0x001);
+        VarSet(VAR_SECRET_BASE_LOW_TV_FLAGS, VarGet(VAR_SECRET_BASE_LOW_TV_FLAGS) | 0x800);
     }
 }
 
@@ -1850,9 +1848,9 @@ void sub_80EB3D0(void)
 {
     if (VarGet(VAR_CURRENT_SECRET_BASE) != 0)
     {
-        VarSet(VAR_0x40EE, VarGet(VAR_0x40EE) & ~0x3800);
-        VarSet(VAR_0x40EF, VarGet(VAR_0x40EF) & ~0x001);
-        VarSet(VAR_0x40EE, VarGet(VAR_0x40EE) | 0x1000);
+        VarSet(VAR_SECRET_BASE_LOW_TV_FLAGS, VarGet(VAR_SECRET_BASE_LOW_TV_FLAGS) & ~0x3800);
+        VarSet(VAR_SECRET_BASE_HIGH_TV_FLAGS, VarGet(VAR_SECRET_BASE_HIGH_TV_FLAGS) & ~0x001);
+        VarSet(VAR_SECRET_BASE_LOW_TV_FLAGS, VarGet(VAR_SECRET_BASE_LOW_TV_FLAGS) | 0x1000);
     }
 }
 
@@ -1860,9 +1858,9 @@ void sub_80EB438(void)
 {
     if (VarGet(VAR_CURRENT_SECRET_BASE) != 0)
     {
-        VarSet(VAR_0x40EE, VarGet(VAR_0x40EE) & ~0x3800);
-        VarSet(VAR_0x40EF, VarGet(VAR_0x40EF) & ~0x001);
-        VarSet(VAR_0x40EF, VarGet(VAR_0x40EF) | 0x001);
+        VarSet(VAR_SECRET_BASE_LOW_TV_FLAGS, VarGet(VAR_SECRET_BASE_LOW_TV_FLAGS) & ~0x3800);
+        VarSet(VAR_SECRET_BASE_HIGH_TV_FLAGS, VarGet(VAR_SECRET_BASE_HIGH_TV_FLAGS) & ~0x001);
+        VarSet(VAR_SECRET_BASE_HIGH_TV_FLAGS, VarGet(VAR_SECRET_BASE_HIGH_TV_FLAGS) | 0x001);
     }
 }
 
@@ -1891,7 +1889,7 @@ void sub_80EB498(void)
         case 0x334:
             if (VarGet(VAR_CURRENT_SECRET_BASE) != 0)
             {
-                VarSet(VAR_0x40EE, VarGet(VAR_0x40EE) | 0x4000);
+                VarSet(VAR_SECRET_BASE_LOW_TV_FLAGS, VarGet(VAR_SECRET_BASE_LOW_TV_FLAGS) | 0x4000);
             }
             break;
     }
@@ -1909,7 +1907,7 @@ void sub_80EB56C(void)
         case 0x28b:
             if (VarGet(VAR_CURRENT_SECRET_BASE) != 0)
             {
-                VarSet(VAR_0x40EE, VarGet(VAR_0x40EE) | 0x40);
+                VarSet(VAR_SECRET_BASE_LOW_TV_FLAGS, VarGet(VAR_SECRET_BASE_LOW_TV_FLAGS) | 0x40);
             }
             break;
         case 0x2d8:
@@ -1932,21 +1930,21 @@ void sub_80EB56C(void)
         case 0x2fb:
             if (VarGet(VAR_CURRENT_SECRET_BASE) != 0)
             {
-                VarSet(VAR_0x40EE, VarGet(VAR_0x40EE) | 0x8);
+                VarSet(VAR_SECRET_BASE_LOW_TV_FLAGS, VarGet(VAR_SECRET_BASE_LOW_TV_FLAGS) | 0x8);
             }
             break;
         case 0x22c:
         case 0x233:
             if (VarGet(VAR_CURRENT_SECRET_BASE) != 0)
             {
-                VarSet(VAR_0x40EF, VarGet(VAR_0x40EF) | 0x40);
+                VarSet(VAR_SECRET_BASE_HIGH_TV_FLAGS, VarGet(VAR_SECRET_BASE_HIGH_TV_FLAGS) | 0x40);
             }
             break;
         case 0x288:
         case 0x289:
             if (VarGet(VAR_CURRENT_SECRET_BASE) != 0)
             {
-                VarSet(VAR_0x40EF, VarGet(VAR_0x40EF) | 0x100);
+                VarSet(VAR_SECRET_BASE_HIGH_TV_FLAGS, VarGet(VAR_SECRET_BASE_HIGH_TV_FLAGS) | 0x100);
             }
             break;
         case 0x22d:
@@ -1954,7 +1952,7 @@ void sub_80EB56C(void)
         case 0x22f:
             if (VarGet(VAR_CURRENT_SECRET_BASE) != 0)
             {
-                VarSet(VAR_0x40EF, VarGet(VAR_0x40EF) | 0x10);
+                VarSet(VAR_SECRET_BASE_HIGH_TV_FLAGS, VarGet(VAR_SECRET_BASE_HIGH_TV_FLAGS) | 0x10);
             }
             break;
         case 0x287:
@@ -1982,7 +1980,7 @@ void sub_80EB56C(void)
         case 0x2cf:
             if (VarGet(VAR_CURRENT_SECRET_BASE) != 0)
             {
-                VarSet(VAR_0x40EF, VarGet(VAR_0x40EF) | 0x8);
+                VarSet(VAR_SECRET_BASE_HIGH_TV_FLAGS, VarGet(VAR_SECRET_BASE_HIGH_TV_FLAGS) | 0x8);
             }
             break;
     }
@@ -2009,7 +2007,7 @@ void sub_80EB9E0(void)
         case 0x2c6:
             if (VarGet(VAR_CURRENT_SECRET_BASE) != 0)
             {
-                VarSet(VAR_0x40EF, VarGet(VAR_0x40EF) | 0x8);
+                VarSet(VAR_SECRET_BASE_HIGH_TV_FLAGS, VarGet(VAR_SECRET_BASE_HIGH_TV_FLAGS) | 0x8);
             }
             break;
     }
@@ -2047,14 +2045,14 @@ void sub_80EBB28(void)
         case 0x2c7:
             if (VarGet(VAR_CURRENT_SECRET_BASE) != 0)
             {
-                VarSet(VAR_0x40EF, VarGet(VAR_0x40EF) | 0x8);
+                VarSet(VAR_SECRET_BASE_HIGH_TV_FLAGS, VarGet(VAR_SECRET_BASE_HIGH_TV_FLAGS) | 0x8);
             }
             break;
         case 0x280:
         case 0x281:
             if (VarGet(VAR_CURRENT_SECRET_BASE) != 0)
             {
-                VarSet(VAR_0x40EF, VarGet(VAR_0x40EF) | 0x100);
+                VarSet(VAR_SECRET_BASE_HIGH_TV_FLAGS, VarGet(VAR_SECRET_BASE_HIGH_TV_FLAGS) | 0x100);
             }
             break;
         case 0x225:
@@ -2062,7 +2060,7 @@ void sub_80EBB28(void)
         case 0x227:
             if (VarGet(VAR_CURRENT_SECRET_BASE) != 0)
             {
-                VarSet(VAR_0x40EF, VarGet(VAR_0x40EF) | 0x10);
+                VarSet(VAR_SECRET_BASE_HIGH_TV_FLAGS, VarGet(VAR_SECRET_BASE_HIGH_TV_FLAGS) | 0x10);
             }
             break;
     }
@@ -2080,7 +2078,7 @@ void sub_80EBE7C(void)
         case 0x28e:
             if (VarGet(VAR_CURRENT_SECRET_BASE) != 0)
             {
-                VarSet(VAR_0x40EF, VarGet(VAR_0x40EF) | 0x4);
+                VarSet(VAR_SECRET_BASE_HIGH_TV_FLAGS, VarGet(VAR_SECRET_BASE_HIGH_TV_FLAGS) | 0x4);
             }
             break;
     }

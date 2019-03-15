@@ -195,7 +195,7 @@
       "x": 14,
       "y": 18,
       "elevation": 4,
-      "var": "VAR_0x40BF",
+      "var": "VAR_METEOR_FALLS_STATE",
       "var_value": "0",
       "script": "MeteorFalls_1F_1R_EventScript_22BD5F"
     }
