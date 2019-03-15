@@ -36,8 +36,7 @@ struct UnknownSubSubStruct_0203CF40 {
     u8 unk4;
     u8 unk5;
     u16 unk6;
-    u8 windowId;
-    u8 unk9;
+    u16 windowId;
     u16 unkA;
     u16 unkC;
     u16 unkE;
@@ -173,18 +172,21 @@ extern u32 sub_81C91AC(struct UnknownSubStruct_81C81D4 *a0, const void *a1, void
 extern u32 sub_81C9160(struct UnknownSubSubStruct_81C81D4 *a0, void *a1);
 extern void sub_81C8ED0(void);
 extern void sub_81C8EF8(struct UnknownSubSubStruct_81C81D4 *a0, struct UnknownSubSubStruct_0203CF40 *a1);
-extern u32 sub_81C8870(s32 a0);
 extern u32 sub_81C8958(s32 a0);
+extern u32 sub_81C8A28(s32 a0);
+extern void sub_81C8B70(struct UnknownSubSubStruct_0203CF40 *a0, u32 a1, u32 a2);
+extern void sub_81C9008(struct UnknownSubStruct_81C81D4 *a0, u32 a1);
 
-u32 sub_81C85A0(s32);
+u32 sub_81C8870(s32 a0);
+u32 sub_81C85A0(s32 a0);
 void sub_81C8568(s32 a0, struct UnknownSubStruct_81C81D4 *a1);
-u32 sub_81C83F0(s32);
+u32 sub_81C83F0(s32 a0);
 bool32 sub_81C83E0(void);
 void sub_81C83AC(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, struct UnknownSubStruct_81C81D4 *a5);
 void sub_81C837C(struct UnknownSubSubStruct_81C81D4 *a0, struct UnknownSubStruct_81C81D4 *a1);
 void sub_81C835C(struct UnknownSubSubStruct_0203CF40 *a0);
 void sub_81C82E4(struct UnknownSubStruct_81C81D4 *a0);
-u32 sub_81C8254(s32);
+u32 sub_81C8254(s32 a0);
 u32 sub_81C791C(s32 a0);
 bool32 sub_81C756C(u32 a0);
 bool32 sub_81C76C4(void);
@@ -2027,4 +2029,83 @@ void sub_81C87AC(u16 a0)
     structPtr->unk888.unk0 = temp;
     structPtr->unk89C = 0;
     structPtr->unk8A0 = sub_81C7078(sub_81C8958, 6);
+}
+
+void sub_81C87F0(void)
+{
+    struct UnknownSubStruct_81C81D4 *structPtr;
+    structPtr = GetSubstructPtr(0x11);
+    structPtr->unk89C = 0;
+    structPtr->unk8A0 = sub_81C7078(sub_81C8A28, 6);
+}
+
+bool32 sub_81C8820(void)
+{
+    struct UnknownSubStruct_81C81D4 *structPtr;
+    structPtr = GetSubstructPtr(0x11);
+    return sub_81C70D8(structPtr->unk8A0);
+}
+
+void sub_81C8838(void)
+{
+    struct UnknownSubStruct_81C81D4 *structPtr;
+    struct UnknownSubSubStruct_81C81D4 *subStr;
+    structPtr = GetSubstructPtr(0x11);
+    subStr = &structPtr->unk888;
+    structPtr->unk38(structPtr->unk0.windowId, subStr->unk0 + subStr->unk6, (structPtr->unk0.unkA + subStr->unk6) & 0xF);
+    CopyWindowToVram(structPtr->unk0.windowId, 1);
+}
+
+u32 sub_81C8870(s32 a0)
+{
+    struct UnknownSubStruct_81C81D4 *structPtr;
+    u16 v1;
+    u32 v2;
+
+    // Needed to fix a register renaming issue.
+    register u16* temp asm("r1");
+    structPtr = GetSubstructPtr(0x11);
+
+    switch (a0)
+    {
+    case 0:
+        sub_81C9008(structPtr, 1);
+        // fall-through
+    case 1:
+        if (structPtr->unk89C != structPtr->unk888.unk6)
+            sub_81C8B70(&structPtr->unk0, structPtr->unk89C, 1);
+        
+        structPtr->unk89C++;
+        return 0;
+    case 2:
+        if (IsDma3ManagerBusyWithBgCopy())
+            return 2;
+        
+        if (structPtr->unk89C != structPtr->unk888.unk8)
+            return 6;
+        
+        if (structPtr->unk888.unk6 != 0)
+            sub_81C8B70(&structPtr->unk0, structPtr->unk89C, structPtr->unk888.unk6);
+        
+        return 0;
+    case 3:
+        if (IsDma3ManagerBusyWithBgCopy())
+            return 2;
+        temp = &structPtr->unk888.unk6;
+        v1 = *temp;
+        if (v1 == 0)
+            return 4;
+        
+        sub_81C84E8(v1, 0);
+        return 0;
+    case 4:
+         v2 = sub_81C8630();
+         if (v2)
+            return 2;
+
+        structPtr->unk888.unk6 = v2;
+        return 4;
+    default:
+        return 4;
+    }
 }
