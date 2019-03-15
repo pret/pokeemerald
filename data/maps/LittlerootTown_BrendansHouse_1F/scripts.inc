@@ -52,7 +52,7 @@ LittlerootTown_BrendansHouse_1F_EventScript_PlaceMomInDoorway:: @ 81F77DE
 LittlerootTown_BrendansHouse_1F_MapScript_OnFrameTable: @ 81F77EA
 	map_script_2 VAR_LITTLEROOT_INTRO_STATE, LITTLEROOT_INTRO_STATE_ENTERED_HOUSE, LittlerootTown_BrendansHouse_1F_EventScript_SetupFirstEnterHouse
 	map_script_2 VAR_LITTLEROOT_INTRO_STATE, LITTLEROOT_INTRO_STATE_MUST_SET_TIME, LittlerootTown_BrendansHouse_1F_EventScript_BlockPlayerAtStairs
-	map_script_2 VAR_LITTLEROOT_INTRO_STATE, LITTLEROOT_INTRO_STATE_CLOCK_IS_SET, LittlerootTown_BrendansHouse_1F_EventScript_1F784D
+	map_script_2 VAR_LITTLEROOT_INTRO_STATE, LITTLEROOT_INTRO_STATE_CLOCK_IS_SET, LittlerootTown_BrendansHouse_1F_EventScript_SetupMomTVScene
 	map_script_2 VAR_LITTLEROOT_HOUSES_STATE, HOUSES_STATE_1, LittlerootTown_BrendansHouse_1F_EventScript_1F785E
 	map_script_2 VAR_LITTLEROOT_HOUSES_STATE, HOUSES_STATE_3, LittlerootTown_CommonHouse_EventScript_292AF2
 	.2byte 0
@@ -80,7 +80,7 @@ LittlerootTown_BrendansHouse_1F_EventScript_SetupFirstEnterHouse:: @ 81F783C
 	goto LittlerootTown_CommonHouse_EventScript_FirstEnterHouse
 	end
 
-LittlerootTown_BrendansHouse_1F_EventScript_1F784D:: @ 81F784D
+LittlerootTown_BrendansHouse_1F_EventScript_SetupMomTVScene:: @ 81F784D
 	lockall
 	setvar VAR_0x8004, 0
 	setvar VAR_0x8005, 1
