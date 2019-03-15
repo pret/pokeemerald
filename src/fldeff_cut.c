@@ -22,8 +22,6 @@
 
 extern bool8 IsMewPlayingHideAndSeek(void);
 
-extern struct MapPosition gPlayerFacingPosition;
-
 extern const u8 Route103_EventScript_290705[];
 extern const u8 FarawayIsland_Interior_EventScript_267EDB[];
 
