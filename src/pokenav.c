@@ -179,12 +179,16 @@ extern u32 sub_81C91AC(struct UnknownSubStruct_81C81D4 *a0, const void *a1, void
 extern u32 sub_81C9160(struct UnknownSubSubStruct_81C81D4 *a0, void *a1);
 extern void sub_81C8ED0(void);
 extern void sub_81C8EF8(struct UnknownSubSubStruct_81C81D4 *a0, struct UnknownSubSubStruct_0203CF40 *a1);
-extern u32 sub_81C8958(s32 a0);
-extern u32 sub_81C8A28(s32 a0);
 extern void sub_81C8B70(struct UnknownSubSubStruct_0203CF40 *a0, u32 a1, u32 a2);
-extern void sub_81C9008(struct UnknownSubStruct_81C81D4 *a0, u32 a1);
+extern void sub_81C9008(struct UnknownSubSubStruct_0203CF40 *a0, u32 a1);
 extern void sub_81C7CB4(struct Sprite* sprite);
+extern void sub_81C8CB4(struct UnknownSubSubStruct_81C81D4 *a0, struct UnknownSubSubStruct_0203CF40 *a1);
+extern void sub_81C8DBC(struct UnknownSubSubStruct_0203CF40 *a0, u32 a1);
+extern void sub_81C8E54(struct UnknownSubSubStruct_81C81D4 *a0, struct UnknownSubSubStruct_0203CF40 *a1, u32 a2);
+extern void sub_81C8D4C(struct UnknownSubSubStruct_81C81D4 *a0, struct UnknownSubSubStruct_0203CF40 *a1);
 
+u32 sub_81C8A28(s32 a0);
+u32 sub_81C8958(s32 a0);
 u32 sub_81C8870(s32 a0);
 u32 sub_81C85A0(s32 a0);
 void sub_81C8568(s32 a0, struct UnknownSubStruct_81C81D4 *a1);
@@ -2233,7 +2237,7 @@ u32 sub_81C8870(s32 a0)
     switch (a0)
     {
     case 0:
-        sub_81C9008(structPtr, 1);
+        sub_81C9008(&structPtr->unk0, 1);
         // fall-through
     case 1:
         if (structPtr->unk89C != structPtr->unk888.unk6)
@@ -2270,6 +2274,134 @@ u32 sub_81C8870(s32 a0)
         structPtr->unk888.unk6 = v2;
         return 4;
     default:
+        return 4;
+    }
+}
+
+u32 sub_81C8958(s32 a0)
+{
+    struct UnknownSubStruct_81C81D4 *structPtr;
+    structPtr = GetSubstructPtr(0x11);
+    if (IsDma3ManagerBusyWithBgCopy())
+        return 2;
+    
+    switch (a0)
+    {
+    case 0:
+        sub_81C8CB4(&structPtr->unk888, &structPtr->unk0);
+        break;
+    case 1:
+        sub_81C8DBC(&structPtr->unk0, 0);
+        break;
+    case 2:
+        sub_81C8E54(&structPtr->unk888, &structPtr->unk0, 0);
+        break;
+    case 3:
+        sub_81C8DBC(&structPtr->unk0, 1);
+        break;
+    case 4:
+        sub_81C8E54(&structPtr->unk888, &structPtr->unk0, 1);
+        break;
+    case 5:
+        sub_81C8DBC(&structPtr->unk0, 2);
+        break;
+    case 6:
+        sub_81C8E54(&structPtr->unk888, &structPtr->unk0, 2);
+        break;
+    case 7:
+        sub_81C8E54(&structPtr->unk888, &structPtr->unk0, 3);
+        break;
+    default:
+        return 4;
+    }
+    return 0;
+}
+
+u32 sub_81C8A28(s32 a0)
+{
+    struct UnknownSubStruct_81C81D4 *structPtr;
+    struct UnknownSubSubStruct_81C81D4 *subPtr888;
+    register struct UnknownSubSubStruct_0203CF40 *subPtr0 asm("r2");
+    s32 v4;
+
+    if (IsDma3ManagerBusyWithBgCopy())
+    {
+        return 2;
+    }
+    
+    structPtr = GetSubstructPtr(0x11);
+    subPtr888 = &structPtr->unk888;
+    subPtr0 = &structPtr->unk0;
+
+    switch (a0)
+    {
+    default:
+        return 4;
+    case 0:
+        sub_81C8D4C(subPtr888, subPtr0);
+        return 0;
+    case 1:
+    {
+        s32 v1;
+        s32 v2;
+        u32 *v3;
+        register s32 v4 asm("r5");
+
+        v3 = &structPtr->unk89C;
+        v1 = *v3 + 1;
+        *v3 = v1;
+        if (v1 < structPtr->unk888.unk8)
+        {
+            sub_81C8B70(subPtr0, v1, 1);
+            return 2;
+        }
+
+        *v3 = 0;
+        if (subPtr888->unk2 <= subPtr888->unk8)
+        {
+            register u32 temp asm("r0");
+            temp = subPtr888->unk0;
+            if (temp == 0)
+                return 9;
+            v2 = temp;
+        }
+        else
+        {
+            register s32 temp asm("r1");
+            v2 = subPtr888->unk0 + subPtr888->unk8;
+            temp = (s32)subPtr888->unk2;
+            if (v2 <= temp)
+                return 9;
+            v2 -= temp;
+        }
+        v4 = v2 * -1;
+        sub_81C8B70(subPtr0, v4, v2);
+        subPtr888->unk6 = v2;
+        *v3 = v4;
+        return 0;
+    }
+    case 2:
+        sub_81C84E8(structPtr->unk89C, 0);
+        return 0;
+    case 3:
+        if (sub_81C8630())
+            return 2;
+        
+        structPtr->unk89C = 0;
+        return 1;
+    case 4:
+        sub_81C83AC(subPtr888->unk10, subPtr888->unk0 + structPtr->unk89C, 1, subPtr888->unkC, structPtr->unk89C, structPtr);
+        return 0;
+    case 5:
+        if (sub_81C83E0())
+            return 2;
+        
+        v4 = ++structPtr->unk89C;
+        if (v4 >= subPtr888->unk2 || v4 >= subPtr888->unk8)
+            return 1;
+        return 9;
+    case 6:
+        sub_81C9008(subPtr0, 0);
         return 4;
     }
 }
