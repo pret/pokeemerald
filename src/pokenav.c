@@ -68,8 +68,7 @@ struct UnknownSubStruct_0203CF40
     u8 tilemapBuffer[0x800];
 };
 
-// Generally at index 0x11 (17)
-struct UnknownSubStruct_81C81D4
+struct UnknownInnerStruct_81C81D4
 {
     struct UnknownSubSubStruct_0203CF40 unk0;
     u32 unk10;
@@ -87,6 +86,12 @@ struct UnknownSubStruct_81C81D4
     u32 unk40;
     u32 unk44;
     char unk48[0x40];
+};
+
+// Generally at index 0x11 (17)
+struct UnknownSubStruct_81C81D4
+{
+    struct UnknownInnerStruct_81C81D4 unk0;
     u8 tilemapBuffer[0x800];
     struct UnknownSubSubStruct_81C81D4 unk888;
     u32 unk89C;
@@ -178,24 +183,25 @@ extern u32 sub_81CFE08(void);
 extern u32 sub_81C91AC(struct UnknownSubStruct_81C81D4 *a0, const void *a1, void *a2, s32 a3);
 extern u32 sub_81C9160(struct UnknownSubSubStruct_81C81D4 *a0, void *a1);
 extern void sub_81C8ED0(void);
-extern void sub_81C8EF8(struct UnknownSubSubStruct_81C81D4 *a0, struct UnknownSubSubStruct_0203CF40 *a1);
-extern void sub_81C8B70(struct UnknownSubSubStruct_0203CF40 *a0, u32 a1, u32 a2);
-extern void sub_81C9008(struct UnknownSubSubStruct_0203CF40 *a0, u32 a1);
 extern void sub_81C7CB4(struct Sprite* sprite);
-extern void sub_81C8CB4(struct UnknownSubSubStruct_81C81D4 *a0, struct UnknownSubSubStruct_0203CF40 *a1);
-extern void sub_81C8DBC(struct UnknownSubSubStruct_0203CF40 *a0, u32 a1);
-extern void sub_81C8E54(struct UnknownSubSubStruct_81C81D4 *a0, struct UnknownSubSubStruct_0203CF40 *a1, u32 a2);
-extern void sub_81C8D4C(struct UnknownSubSubStruct_81C81D4 *a0, struct UnknownSubSubStruct_0203CF40 *a1);
+extern void sub_81CBD48(u16 windowId, u32 a1);
+extern void sub_81C8EF8(struct UnknownSubSubStruct_81C81D4 *a0, struct UnknownInnerStruct_81C81D4 *a1);
+extern void sub_81C9008(struct UnknownInnerStruct_81C81D4 *a0, u32 a1);
+extern void sub_81C8DBC(struct UnknownInnerStruct_81C81D4 *a0, u32 a1);
+extern void sub_81C8E54(struct UnknownSubSubStruct_81C81D4 *a0, struct UnknownInnerStruct_81C81D4 *a1, u32 a2);
 
+void sub_81C8D4C(struct UnknownSubSubStruct_81C81D4 *a0, struct UnknownInnerStruct_81C81D4 *a1);
+void sub_81C8CB4(struct UnknownSubSubStruct_81C81D4 *a0, struct UnknownInnerStruct_81C81D4 *a1);
+void sub_81C8B70(struct UnknownSubSubStruct_0203CF40 *a0, u32 a1, u32 a2);
 u32 sub_81C8A28(s32 a0);
 u32 sub_81C8958(s32 a0);
 u32 sub_81C8870(s32 a0);
 u32 sub_81C85A0(s32 a0);
-void sub_81C8568(s32 a0, struct UnknownSubStruct_81C81D4 *a1);
+void sub_81C8568(s32 a0, struct UnknownInnerStruct_81C81D4 *a1);
 u32 sub_81C83F0(s32 a0);
 bool32 sub_81C83E0(void);
-void sub_81C83AC(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, struct UnknownSubStruct_81C81D4 *a5);
-void sub_81C837C(struct UnknownSubSubStruct_81C81D4 *a0, struct UnknownSubStruct_81C81D4 *a1);
+void sub_81C83AC(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, struct UnknownInnerStruct_81C81D4 *a5);
+void sub_81C837C(struct UnknownSubSubStruct_81C81D4 *a0, struct UnknownInnerStruct_81C81D4 *a1);
 void sub_81C835C(struct UnknownSubSubStruct_0203CF40 *a0);
 void sub_81C82E4(struct UnknownSubStruct_81C81D4 *a0);
 u32 sub_81C8254(s32 a0);
@@ -633,6 +639,8 @@ static const struct SpriteTemplate sUnknown_0861FB44 =
 EWRAM_DATA u8 gUnknown_0203CF3C = 0;
 EWRAM_DATA struct UnknownStruct_0203CF40 *gUnknown_0203CF40 = NULL;
 EWRAM_DATA u32 gUnknown_0203CF44 = 0;
+
+extern const u8 gUnknown_0861FBE4[3];
 
 // code
 u32 sub_81C7078(u32 (*func)(s32), u32 priority)
@@ -1693,7 +1701,7 @@ void sub_81C8234(void)
 
     structPtr = GetSubstructPtr(0x11);
     sub_81C8FE0();
-    RemoveWindow(structPtr->unk0.windowId);
+    RemoveWindow(structPtr->unk0.unk0.windowId);
     FreeSubstruct(0x11);
 }
 
@@ -1712,10 +1720,10 @@ u32 sub_81C8254(s32 a0)
             sub_81C82E4(structPtr);
             return 0;
         case 1:
-            sub_81C835C(&structPtr->unk0);
+            sub_81C835C(&structPtr->unk0.unk0);
             return 0;
         case 2:
-            sub_81C837C(&structPtr->unk888, structPtr);
+            sub_81C837C(&structPtr->unk888, &structPtr->unk0);
             return 0;
         case 3:
             if (sub_81C83E0())
@@ -1737,28 +1745,27 @@ u32 sub_81C8254(s32 a0)
 
 void sub_81C82E4(struct UnknownSubStruct_81C81D4 *a0)
 {
-    u16 v1 = (a0->unk0.unk1 << 12) | a0->unk0.unk6;
+    u16 v1 = (a0->unk0.unk0.unk1 << 12) | a0->unk0.unk0.unk6;
     // TODO: When #553 is merged, use a PALETTE_NUM_TO_FILL_VALUE(1) macro here...
-    sub_8199DF0(a0->unk0.bg, 0x11, a0->unk0.unk6, 1);
+    sub_8199DF0(a0->unk0.unk0.bg, 0x11, a0->unk0.unk0.unk6, 1);
     // ...and PALETTE_NUM_TO_FILL_VALUE(4) here.
-    sub_8199DF0(a0->unk0.bg, 0x44, a0->unk0.unk6 + 1, 1);
-    SetBgTilemapBuffer(a0->unk0.bg, a0->tilemapBuffer);
-    FillBgTilemapBufferRect_Palette0(a0->unk0.bg, v1, 0, 0, 32, 32);
-    ChangeBgY(a0->unk0.bg, 0, 0);
-    ChangeBgX(a0->unk0.bg, 0, 0);
-    ChangeBgY(a0->unk0.bg, a0->unk0.unk3 << 11, 2);
-    CopyBgTilemapBufferToVram(a0->unk0.bg);
+    sub_8199DF0(a0->unk0.unk0.bg, 0x44, a0->unk0.unk0.unk6 + 1, 1);
+    SetBgTilemapBuffer(a0->unk0.unk0.bg, a0->tilemapBuffer);
+    FillBgTilemapBufferRect_Palette0(a0->unk0.unk0.bg, v1, 0, 0, 32, 32);
+    ChangeBgY(a0->unk0.unk0.bg, 0, 0);
+    ChangeBgX(a0->unk0.unk0.bg, 0, 0);
+    ChangeBgY(a0->unk0.unk0.bg, a0->unk0.unk0.unk3 << 11, 2);
+    CopyBgTilemapBufferToVram(a0->unk0.unk0.bg);
 }
 
 void sub_81C835C(struct UnknownSubSubStruct_0203CF40 *a0)
 {
-    // TODO: When #553 is merged, use a PALETTE_NUM_TO_FILL_VALUE(1) macro here.
-    FillWindowPixelBuffer(a0->windowId, 0x11);
+    FillWindowPixelBuffer(a0->windowId, PIXEL_FILL(1));
     PutWindowTilemap(a0->windowId);
     CopyWindowToVram(a0->windowId, 1);
 }
 
-void sub_81C837C(struct UnknownSubSubStruct_81C81D4 *a0, struct UnknownSubStruct_81C81D4 *a1)
+void sub_81C837C(struct UnknownSubSubStruct_81C81D4 *a0, struct UnknownInnerStruct_81C81D4 *a1)
 {
     s32 v1;
     s32 v2;
@@ -1771,7 +1778,7 @@ void sub_81C837C(struct UnknownSubSubStruct_81C81D4 *a0, struct UnknownSubStruct
     sub_81C83AC(a0->unk10, a0->unk0, v1, a0->unkC, 0, a1);
 }
 
-void sub_81C83AC(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, struct UnknownSubStruct_81C81D4 *a5)
+void sub_81C83AC(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, struct UnknownInnerStruct_81C81D4 *a5)
 {
     if (a2 == 0)
         return;
@@ -1792,10 +1799,10 @@ bool32 sub_81C83E0(void)
 
 u32 sub_81C83F0(s32 a0)
 {
-    struct UnknownSubStruct_81C81D4 *structPtr;
+    struct UnknownInnerStruct_81C81D4 *structPtr;
     u32 v1;
 
-    structPtr = GetSubstructPtr(0x11);
+    structPtr = &((struct UnknownSubStruct_81C81D4*)GetSubstructPtr(0x11))->unk0;
     switch (a0)
     {
     case 0:
@@ -1856,6 +1863,7 @@ bool32 sub_81C84C0(void)
 #ifdef NONMATCHING
 // This has some register renaming issues (r4, r5, and r6 are all switched around), and
 // for some reason it's creating two copies of subPtr->unk0.
+// TODO: Now I know why it's making two copies - one of them is UnknownInnerStruct_81C81D4.
 void sub_81C84E8(s32 a0, s32 a1)
 {
     s32 v1;
@@ -1969,7 +1977,7 @@ _081C854E:\n\
 }
 #endif
 
-void sub_81C8568(s32 a0, struct UnknownSubStruct_81C81D4 *a1)
+void sub_81C8568(s32 a0, struct UnknownInnerStruct_81C81D4 *a1)
 {
     a1->unk20 = GetBgY(a1->unk0.bg);
     a1->unk24 = a1->unk20 + (a0 << 12);
@@ -1986,8 +1994,8 @@ u32 sub_81C85A0(s32 a0)
     s32 y;
     s32 v1;
     bool32 flag;
-    struct UnknownSubStruct_81C81D4 *structPtr;
-    structPtr = GetSubstructPtr(0x11);
+    struct UnknownInnerStruct_81C81D4 *structPtr;
+    structPtr = &((struct UnknownSubStruct_81C81D4 *)GetSubstructPtr(0x11))->unk0;
     
     switch (a0)
     {
@@ -2033,7 +2041,7 @@ bool32 sub_81C8630(void)
 {
     struct UnknownSubStruct_81C81D4 *structPtr;
     structPtr = GetSubstructPtr(0x11);
-    return sub_81C70D8(structPtr->unk28);
+    return sub_81C70D8(structPtr->unk0.unk28);
 }
 
 struct UnknownSubSubStruct_81C81D4 *sub_81C8644(void)
@@ -2220,8 +2228,8 @@ void sub_81C8838(void)
     struct UnknownSubSubStruct_81C81D4 *subStr;
     structPtr = GetSubstructPtr(0x11);
     subStr = &structPtr->unk888;
-    structPtr->unk38(structPtr->unk0.windowId, subStr->unk0 + subStr->unk6, (structPtr->unk0.unkA + subStr->unk6) & 0xF);
-    CopyWindowToVram(structPtr->unk0.windowId, 1);
+    structPtr->unk0.unk38(structPtr->unk0.unk0.windowId, subStr->unk0 + subStr->unk6, (structPtr->unk0.unk0.unkA + subStr->unk6) & 0xF);
+    CopyWindowToVram(structPtr->unk0.unk0.windowId, 1);
 }
 
 u32 sub_81C8870(s32 a0)
@@ -2241,7 +2249,7 @@ u32 sub_81C8870(s32 a0)
         // fall-through
     case 1:
         if (structPtr->unk89C != structPtr->unk888.unk6)
-            sub_81C8B70(&structPtr->unk0, structPtr->unk89C, 1);
+            sub_81C8B70(&structPtr->unk0.unk0, structPtr->unk89C, 1);
         
         structPtr->unk89C++;
         return 0;
@@ -2253,7 +2261,7 @@ u32 sub_81C8870(s32 a0)
             return 6;
         
         if (structPtr->unk888.unk6 != 0)
-            sub_81C8B70(&structPtr->unk0, structPtr->unk89C, structPtr->unk888.unk6);
+            sub_81C8B70(&structPtr->unk0.unk0, structPtr->unk89C, structPtr->unk888.unk6);
         
         return 0;
     case 3:
@@ -2321,7 +2329,7 @@ u32 sub_81C8A28(s32 a0)
 {
     struct UnknownSubStruct_81C81D4 *structPtr;
     struct UnknownSubSubStruct_81C81D4 *subPtr888;
-    register struct UnknownSubSubStruct_0203CF40 *subPtr0 asm("r2");
+    register struct UnknownInnerStruct_81C81D4 *subPtr0 asm("r2");
     s32 v4;
 
     if (IsDma3ManagerBusyWithBgCopy())
@@ -2352,7 +2360,7 @@ u32 sub_81C8A28(s32 a0)
         *v3 = v1;
         if (v1 < structPtr->unk888.unk8)
         {
-            sub_81C8B70(subPtr0, v1, 1);
+            sub_81C8B70(&subPtr0->unk0, v1, 1);
             return 2;
         }
 
@@ -2375,7 +2383,7 @@ u32 sub_81C8A28(s32 a0)
             v2 -= temp;
         }
         v4 = v2 * -1;
-        sub_81C8B70(subPtr0, v4, v2);
+        sub_81C8B70(&subPtr0->unk0, v4, v2);
         subPtr888->unk6 = v2;
         *v3 = v4;
         return 0;
@@ -2390,7 +2398,7 @@ u32 sub_81C8A28(s32 a0)
         structPtr->unk89C = 0;
         return 1;
     case 4:
-        sub_81C83AC(subPtr888->unk10, subPtr888->unk0 + structPtr->unk89C, 1, subPtr888->unkC, structPtr->unk89C, structPtr);
+        sub_81C83AC(subPtr888->unk10, subPtr888->unk0 + structPtr->unk89C, 1, subPtr888->unkC, structPtr->unk89C, &structPtr->unk0);
         return 0;
     case 5:
         if (sub_81C83E0())
@@ -2404,4 +2412,95 @@ u32 sub_81C8A28(s32 a0)
         sub_81C9008(subPtr0, 0);
         return 4;
     }
+}
+
+void sub_81C8B70(struct UnknownSubSubStruct_0203CF40 *a0, u32 a1, u32 a2)
+{
+    u8 *v1;
+    u32 v2;
+
+    v1 = (u8*)GetWindowAttribute(a0->windowId, WINDOW_TILE_DATA);
+    v2 = a0->unk4 * 64;
+
+    a1 = (a0->unkA + a1) & 0xF;
+    if ((s32)(a1 + a2) <= 16)
+    {
+        CpuFastFill8(PIXEL_FILL(1), v1 + a1 * v2, a2 * v2);
+        CopyWindowToVram(a0->windowId, 2);
+    }
+    else
+    {
+        u32 v3;
+        u32 v4;
+
+        v3 = 16 - a1;
+        v4 = a2 - v3;
+
+        CpuFastFill8(PIXEL_FILL(1), v1 + a1 * v2, v3 * v2);
+        CpuFastFill8(PIXEL_FILL(1), v1, v4 * v2);
+        CopyWindowToVram(a0->windowId, 2);
+    }
+
+    a2 -= 1;
+    for (a2; a2 != -1; a1 = (a1 + 1) & 0xF, a2--)
+    {
+        sub_81CBD48(a0->windowId, a1);
+    }
+
+    CopyWindowToVram(a0->windowId, 1);
+}
+
+void sub_81C8C64(struct UnknownSubSubStruct_0203CF40 *a0, u32 a1)
+{
+    u16 *v1;
+    register u32 v2 asm("r0");
+    u32 v3;
+
+    v1 = (u16*)GetBgTilemapBuffer(GetWindowAttribute(a0->windowId, WINDOW_BG));
+
+    v1 = &v1[(a0->unkA << 6) + a0->unk2 - 1];
+
+    if (a1 != 0)
+    {
+        v2 = a0->unk1 << 12;
+        v3 = a0->unk6 + 1;
+    }
+    else
+    {
+        v2 = a0->unk1 << 12;
+        v3 = a0->unk6;
+    }
+    {
+        register u16 v5 asm("r1");
+        register u32 v6 asm("r0");
+        v6 = (v3 | v2);
+        v6 = v6 << 16;
+        v5 = v6 >> 16;
+        v1[0] = v5;
+        v1[0x20] = v5;
+    }
+}
+
+void sub_81C8CB4(struct UnknownSubSubStruct_81C81D4 *a0, struct UnknownInnerStruct_81C81D4 *a1)
+{
+    u8 buffer[ARRAY_COUNT(gUnknown_0861FBE4)];
+
+
+    memcpy(buffer, gUnknown_0861FBE4, ARRAY_COUNT(gUnknown_0861FBE4));
+
+    a1->unk34(a0->unk10 + a0->unkC * a0->unk0, a1->unk48);
+    a1->unk38(a1->unk0.windowId, a0->unk0, a1->unk0.unkA);
+    FillWindowPixelRect(a1->unk0.windowId, PIXEL_FILL(4), 0, a1->unk0.unkA * 16, a1->unk0.unk4 * 8, 16);
+    AddTextPrinterParameterized3(a1->unk0.windowId, a1->unk0.unk5, 8, (a1->unk0.unkA * 16) + 1, buffer, TEXT_SPEED_FF, a1->unk48);
+    sub_81C8C64(&a1->unk0, 1);
+    CopyWindowRectToVram(a1->unk0.windowId, 3, 0, a1->unk0.unkA * 2, a1->unk0.unk4, 2);
+}
+
+void sub_81C8D4C(struct UnknownSubSubStruct_81C81D4 *a0, struct UnknownInnerStruct_81C81D4 *a1)
+{
+    a1->unk34(a0->unk10 + a0->unkC * a0->unk0, a1->unk48);
+    FillWindowPixelRect(a1->unk0.windowId, PIXEL_FILL(1), 0, a1->unk0.unkA * 16, a1->unk0.unk4 * 8, 16);
+    AddTextPrinterParameterized(a1->unk0.windowId, a1->unk0.unk5, a1->unk48, 8, a1->unk0.unkA * 16 + 1, TEXT_SPEED_FF, NULL);
+    sub_81C8C64(&a1->unk0, 0);
+    CopyWindowToVram(a1->unk0.windowId, 3);
 }
