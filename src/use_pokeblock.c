@@ -4,6 +4,7 @@
 #include "alloc.h"
 #include "palette.h"
 #include "pokenav.h"
+#include "menu_specialized.h"
 #include "scanline_effect.h"
 #include "text.h"
 #include "bg.h"
@@ -33,7 +34,7 @@ struct UsePokeblockSubStruct
 struct UsePokeblockStruct
 {
     u8 field_0[0x7C58];
-    u8 field_7C58[0x378];
+    struct UnknownStruct_81D1ED4 field_7C58;
     struct UsePokeblockSubStruct info;
 };
 
@@ -130,7 +131,7 @@ void sub_8166340(void)
     LoadOam();
     ProcessSpriteCopyRequests();
     TransferPlttBuffer();
-    sub_81D2108(gUnknown_0203BCAC->field_7C58);
+    sub_81D2108(&gUnknown_0203BCAC->field_7C58);
     ScanlineEffect_InitHBlankDmaTransfer();
 }
 
@@ -146,7 +147,7 @@ void sub_8166380(void)
     {
         case 0:
             gUnknown_0203BCAC->field_0[0x7B10] = 0xFF;
-            sub_81D1ED4(gUnknown_0203BCAC->field_7C58);
+            sub_81D1ED4(&gUnknown_0203BCAC->field_7C58);
             gUnknown_0203BC90->field_50++;
             break;
         case 1:
@@ -202,19 +203,19 @@ void sub_8166380(void)
             gUnknown_0203BC90->field_50++;
             break;
         case 11:
-            sub_81D2754(gUnknown_0203BCAC->field_7C58, &gUnknown_0203BCAC->field_0[0x7C6C]);
-            sub_81D20AC(gUnknown_0203BCAC->field_7C58);
+            sub_81D2754(&gUnknown_0203BCAC->field_7C58, gUnknown_0203BCAC->field_7C58.unk14[0]);
+            sub_81D20AC(&gUnknown_0203BCAC->field_7C58);
             gUnknown_0203BC90->field_50++;
             break;
         case 12:
-            if (!sub_81D20BC(gUnknown_0203BCAC->field_7C58))
+            if (!sub_81D20BC(&gUnknown_0203BCAC->field_7C58))
             {
-                sub_81D1F84(gUnknown_0203BCAC->field_7C58, &gUnknown_0203BCAC->field_7C58[0x14], &gUnknown_0203BCAC->field_7C58[0x14]);
+                sub_81D1F84(&gUnknown_0203BCAC->field_7C58, gUnknown_0203BCAC->field_7C58.unk14, gUnknown_0203BCAC->field_7C58.unk14);
                 gUnknown_0203BC90->field_50++;
             }
             break;
         case 13:
-            sub_81D2230(gUnknown_0203BCAC->field_7C58);
+            sub_81D2230(&gUnknown_0203BCAC->field_7C58);
             gUnknown_0203BC90->field_50++;
             break;
         case 14:

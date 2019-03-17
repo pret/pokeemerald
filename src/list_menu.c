@@ -341,7 +341,7 @@ s32 DoMysteryGiftListMenu(struct WindowTemplate *windowTemplate, struct ListMenu
         }
         if (gMain.newKeys & B_BUTTON)
         {
-            sMysteryGiftLinkMenu.currItemId = LIST_B_PRESSED;
+            sMysteryGiftLinkMenu.currItemId = LIST_CANCEL;
             sMysteryGiftLinkMenu.state = 2;
         }
         if (sMysteryGiftLinkMenu.state == 2)
@@ -416,7 +416,7 @@ s32 ListMenu_ProcessInput(u8 listTaskId)
     }
     else if (gMain.newKeys & B_BUTTON)
     {
-        return LIST_B_PRESSED;
+        return LIST_CANCEL;
     }
     else if (gMain.newAndRepeatedKeys & DPAD_UP)
     {

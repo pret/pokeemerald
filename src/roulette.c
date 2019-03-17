@@ -1984,7 +1984,7 @@ static void sub_8141E7C(u8 taskId) // end roulette ?
         ResetPaletteFade();
         ResetSpriteData();
         sub_8140418();
-        gFieldCallback = sub_80AF168;
+        gFieldCallback = FieldCallback_ReturnToEventScript2;
         SetMainCallback2(CB2_ReturnToField);
         DestroyTask(taskId);
     }

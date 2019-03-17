@@ -70,7 +70,7 @@ static void CB2_HandleGivenWaldaPhrase(void)
     }
 
     StringCopy(gStringVar1, GetWaldaPhrasePtr());
-    gFieldCallback = sub_80AF168;
+    gFieldCallback = FieldCallback_ReturnToEventScript2;
     SetMainCallback2(CB2_ReturnToField);
 }
 
