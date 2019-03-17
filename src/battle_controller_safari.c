@@ -25,8 +25,6 @@
 
 extern const struct CompressedSpritePalette gTrainerBackPicPaletteTable[];
 
-extern void sub_81358F4(void);
-
 // this file's functions
 static void SafariHandleGetMonData(void);
 static void SafariHandleGetRawMonData(void);

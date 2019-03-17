@@ -10,6 +10,7 @@
 #include "battle_tower.h"
 #include "event_data.h"
 #include "evolution_scene.h"
+#include "field_specials.h"
 #include "item.h"
 #include "link.h"
 #include "main.h"
@@ -71,10 +72,6 @@ extern const u8 gSpeciesNames[][POKEMON_NAME_LENGTH + 1];
 extern const struct CompressedSpritePalette gMonPaletteTable[];
 extern const struct CompressedSpritePalette gMonShinyPaletteTable[];
 extern const u8 gTrainerClassNames[][13];
-
-extern u16 get_unknown_box_id(void);
-extern void set_unknown_box_id(u8);
-extern bool8 sub_806F104(void);
 
 // this file's functions
 static u16 CalculateBoxMonChecksum(struct BoxPokemon *boxMon);
@@ -2465,10 +2462,10 @@ static const struct OamData sOamData_8329F20 =
     .objMode = 0,
     .mosaic = 0,
     .bpp = 0,
-    .shape = 0,
+    .shape = SPRITE_SHAPE(64x64),
     .x = 0,
     .matrixNum = 0,
-    .size = 3,
+    .size = SPRITE_SIZE(64x64),
     .tileNum = 0,
     .priority = 0,
     .paletteNum = 0,

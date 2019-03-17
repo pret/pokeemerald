@@ -214,7 +214,7 @@ static void DecompressGlyphFont6(u16 glyph)
     gUnknown_03002F90.unk81 = 0x10;
 }
 
-u8 GetGlyphWidthFont6(void)
+u32 GetGlyphWidthFont6(u16 glyphId, bool32 isJapanese)
 {
     return 0x10;
 }

@@ -538,4 +538,6 @@
 
 #define MUS_ROUTE_118 0x7FFF  // map is split into 2 music sections. controlled by GetCurrLocationDefaultMusic().
 
+#define MUS_NONE 0xFFFF
+
 #endif  // GUARD_CONSTANTS_SONGS_H

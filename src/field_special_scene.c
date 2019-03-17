@@ -301,7 +301,7 @@ void Task_HandlePorthole(u8 taskId)
         break;
     case EXIT_PORTHOLE: // exit porthole.
         FlagClear(FLAG_SPECIAL_FLAG_0x4001);
-        FlagClear(FLAG_SPECIAL_FLAG_0x4000);
+        FlagClear(FLAG_HIDE_MAP_NAME_POPUP);
         SetWarpDestinationToDynamicWarp(0);
         DoDiveWarp();
         DestroyTask(taskId);
@@ -338,7 +338,7 @@ void sub_80FB7A4(void)
 {
     FlagSet(FLAG_SYS_CRUISE_MODE);
     FlagSet(FLAG_SPECIAL_FLAG_0x4001);
-    FlagSet(FLAG_SPECIAL_FLAG_0x4000);
+    FlagSet(FLAG_HIDE_MAP_NAME_POPUP);
     SetDynamicWarp(0, gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum, -1);
     sub_80FB59C();
     sub_80AF8B8();

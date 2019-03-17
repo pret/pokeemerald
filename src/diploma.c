@@ -13,8 +13,7 @@
 #include "text.h"
 #include "overworld.h"
 #include "menu.h"
-
-extern bool16 sub_80C0944(void);
+#include "pokedex.h"
 
 extern const u8 gText_DexNational[];
 extern const u8 gText_DexHoenn[];

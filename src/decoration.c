@@ -392,7 +392,9 @@ const struct SpritePalette gUnknown_085A73E0 = {
 };
 
 const struct OamData Unknown_085A73E8 = {
-    .size = 1, .priority = 1
+    .shape = SPRITE_SHAPE(16x16),
+    .size = SPRITE_SIZE(16x16),
+    .priority = 1
 };
 
 const union AnimCmd Unknown_085A73F0[] = {

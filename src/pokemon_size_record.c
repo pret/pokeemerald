@@ -1,5 +1,6 @@
 #include "global.h"
 #include "event_data.h"
+#include "pokedex.h"
 #include "pokemon.h"
 #include "pokemon_size_record.h"
 #include "string_util.h"
@@ -14,9 +15,6 @@ struct UnknownStruct
     u8 unk2;
     u16 unk4;
 };
-
-extern u16 GetPokedexHeightWeight(u16 dexNo, bool8 height);
-extern u16 SpeciesToNationalPokedexNum(u16 species);
 
 static const struct UnknownStruct sBigMonSizeTable[] =
 {

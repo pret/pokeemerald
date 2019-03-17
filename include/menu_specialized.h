@@ -3,6 +3,7 @@
 
 #include "player_pc.h"
 #include "list_menu.h"
+#include "pokemon.h"
 
 struct UnknownSubStruct_81D1ED4
 {
@@ -47,5 +48,6 @@ bool16 MoveRelearnerRunTextPrinters(void);
 void MoveRelearnerCreateYesNoMenu(void);
 u8 LoadMoveRelearnerMovesList(const struct ListMenuItem *items, u16 numChoices);
 void InitMoveRelearnerWindows(bool8 useContextWindow);
+void GetMonLevelUpWindowStats(struct Pokemon* mon, void* statStoreLocation);
 
 #endif // GUARD_MENU_SPECIALIZED_H

@@ -17,9 +17,9 @@
 #include "text.h"
 #include "constants/species.h"
 #include "save.h"
+#include "rom_8011DC0.h"
 
 extern u16 gHeldKeyCodeToSend;
-extern void nullsub_89(u8 taskId);
 
 struct UnkRfuStruct_1 gUnknown_03004140;
 struct UnkRfuStruct_2 gUnknown_03005000;
@@ -155,7 +155,8 @@ const u8 sWireless_RSEtoASCIITable[] = {
     0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x00
 };
 const struct OamData sWirelessStatusIndicatorOamData = {
-    .size = 1
+    .shape = SPRITE_SHAPE(16x16),
+    .size = SPRITE_SIZE(16x16)
 };
 static const union AnimCmd sWirelessStatusIndicatorAnim0[] = {
     // 3 bars

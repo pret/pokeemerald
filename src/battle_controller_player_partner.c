@@ -30,9 +30,6 @@
 extern const struct CompressedSpritePalette gTrainerFrontPicPaletteTable[];
 extern const struct CompressedSpritePalette gTrainerBackPicPaletteTable[];
 
-extern void sub_81358F4(void);
-extern void sub_8172EF0(u8 battlerId, struct Pokemon *mon);
-
 // this file's functions
 static void PlayerPartnerHandleGetMonData(void);
 static void PlayerPartnerHandleGetRawMonData(void);

@@ -66,8 +66,6 @@ extern struct MusicPlayerInfo gMPlayInfo_BGM;
 
 #define HALL_OF_FAME_MAX_TEAMS 50
 
-extern void ReturnFromHallOfFamePC(void);
-
 // this file's functions
 static void ClearVramOamPltt_LoadHofPal(void);
 static void sub_8174F70(void);
@@ -180,10 +178,10 @@ static const struct OamData sOamData_85E53FC =
     .objMode = 0,
     .mosaic = 0,
     .bpp = 0,
-    .shape = 0,
+    .shape = SPRITE_SHAPE(8x8),
     .x = 0,
     .matrixNum = 0,
-    .size = 0,
+    .size = SPRITE_SIZE(8x8),
     .tileNum = 0,
     .priority = 0,
     .paletteNum = 0,

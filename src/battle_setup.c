@@ -44,6 +44,7 @@
 #include "mirage_tower.h"
 #include "constants/map_types.h"
 #include "constants/battle_frontier.h"
+#include "field_screen_effect.h"
 
 enum
 {
@@ -61,10 +62,6 @@ struct TrainerBattleParameter
     void *varPtr;
     u8 ptrType;
 };
-
-extern void ClearPoisonStepCounter(void);
-extern void sub_808BCF4(void);
-extern void sub_80AF6F0(void);
 
 // this file's functions
 static void DoBattlePikeWildBattle(void);

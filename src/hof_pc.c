@@ -7,10 +7,6 @@
 #include "script_menu.h"
 #include "task.h"
 
-extern void Overworld_PlaySpecialMapMusic(void);
-extern bool16 ScrSpecial_CreatePCMenu(void);
-extern void ScriptMenu_DisplayPCStartupPrompt(void);
-
 static void ReshowPCMenuAfterHallOfFamePC(void);
 static void Task_WaitForPaletteFade(u8);
 

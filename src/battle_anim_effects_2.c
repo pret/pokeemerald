@@ -16,9 +16,6 @@
 #include "constants/rgb.h"
 #include "constants/songs.h"
 
-extern void sub_8108C94(struct Sprite *);
-extern void sub_810310C(u8, struct Sprite *);
-
 void sub_8103448(struct Sprite *);
 void sub_8103498(struct Sprite *);
 void sub_810358C(struct Sprite *);
