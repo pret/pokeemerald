@@ -2016,6 +2016,11 @@ s32 GetStringWidth(u8 fontId, const u8 *str, s16 letterSpacing)
             break;
         default:
             glyphWidth = func(*str, isJapanese);
+
+            /* 한글 문자일 경우 1바이트 건너뛰기 */
+            if (*str >= 0x37 && *str <= 0x41)
+                str++;
+
             if (minGlyphWidth > 0)
             {
                 if (glyphWidth < minGlyphWidth)
@@ -2270,6 +2275,9 @@ void DecompressGlyphFont0(u16 glyphId, bool32 isJapanese)
 
 u32 GetGlyphWidthFont0(u16 glyphId, bool32 isJapanese)
 {
+    if (glyphId >= 0x37 && glyphId <= 0x41)
+        return 8;
+
     if (isJapanese == TRUE)
         return 8;
     else
@@ -2325,6 +2333,9 @@ void DecompressGlyphFont7(u16 glyphId, bool32 isJapanese)
 
 u32 GetGlyphWidthFont7(u16 glyphId, bool32 isJapanese)
 {
+    if (glyphId >= 0x37 && glyphId <= 0x41)
+        return 8;
+
     if (isJapanese == TRUE)
         return 8;
     else
@@ -2379,6 +2390,9 @@ void DecompressGlyphFont8(u16 glyphId, bool32 isJapanese)
 
 u32 GetGlyphWidthFont8(u16 glyphId, bool32 isJapanese)
 {
+    if (glyphId >= 0x37 && glyphId <= 0x41)
+        return 8;
+
     if (isJapanese == TRUE)
         return 8;
     else
@@ -2436,7 +2450,10 @@ void DecompressGlyphFont2(u16 glyphId, bool32 isJapanese)
 }
 
 u32 GetGlyphWidthFont2(u16 glyphId, bool32 isJapanese)
-{ 
+{
+    if (glyphId >= 0x37 && glyphId <= 0x41)
+        return 11;
+
     if (isJapanese == TRUE)
         return gFont2JapaneseGlyphWidths[glyphId];
     else
@@ -2494,6 +2511,9 @@ void DecompressGlyphFont1(u16 glyphId, bool32 isJapanese)
 
 u32 GetGlyphWidthFont1(u16 glyphId, bool32 isJapanese)
 {
+    if (glyphId >= 0x37 && glyphId <= 0x41)
+        return 12;
+
     if (isJapanese == TRUE)
         return 8;
     else
