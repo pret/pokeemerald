@@ -2610,7 +2610,7 @@ static void sub_813A4EC(u8 taskId)
     {
     case LIST_NOTHING_CHOSEN:
         break;
-    case LIST_B_PRESSED:
+    case LIST_CANCEL:
         gSpecialVar_Result = 0x7F;
         PlaySE(SE_SELECT);
         sub_813A570(taskId);
@@ -2690,10 +2690,10 @@ static void sub_813A664(u8 taskId)
 static void sub_813A694(u8 taskId)
 {
     static const struct ScrollArrowsTemplate gUnknown_085B3030 = {
-        .firstArrowType = 2,
+        .firstArrowType = SCROLL_ARROW_UP,
         .firstX = 0,
         .firstY = 0,
-        .secondArrowType = 3,
+        .secondArrowType = SCROLL_ARROW_DOWN,
         .secondX = 0,
         .secondY = 0,
         .fullyUpThreshold = 0,

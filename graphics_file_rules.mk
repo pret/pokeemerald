@@ -1,7 +1,4 @@
-MONSTILLFRONTGFXDIR := graphics/pokemon/front_pics
-MONBACKGFXDIR := graphics/pokemon/back_pics
-MONFRONTGFXDIR := graphics/pokemon/anim_front_pics
-MONPALDIR := graphics/pokemon/palettes
+CASTFORMGFXDIR := graphics/pokemon/castform
 TILESETGFXDIR := data/tilesets
 FONTGFXDIR := data/graphics/fonts
 INTERFACEGFXDIR := graphics/interface
@@ -24,35 +21,43 @@ MISCGFXDIR := graphics/misc
 types := normal fight flying poison ground rock bug ghost steel mystery fire water grass electric psychic ice dragon dark
 contest_types := cool beauty cute smart tough
 
-$(MONSTILLFRONTGFXDIR)/castform_still_front_pic.4bpp: $(MONSTILLFRONTGFXDIR)/castform_normal_form_still_front_pic.4bpp \
-												   $(MONSTILLFRONTGFXDIR)/castform_sunny_form_still_front_pic.4bpp \
-												   $(MONSTILLFRONTGFXDIR)/castform_rainy_form_still_front_pic.4bpp \
-												   $(MONSTILLFRONTGFXDIR)/castform_snowy_form_still_front_pic.4bpp
+
+
+### Castform ###
+
+$(CASTFORMGFXDIR)/front.4bpp: $(CASTFORMGFXDIR)/front_normal_form.4bpp \
+							  $(CASTFORMGFXDIR)/front_sunny_form.4bpp \
+							  $(CASTFORMGFXDIR)/front_rainy_form.4bpp \
+							  $(CASTFORMGFXDIR)/front_snowy_form.4bpp
 	@cat $^ >$@
 
-$(MONBACKGFXDIR)/castform_back_pic.4bpp: $(MONBACKGFXDIR)/castform_normal_form_back_pic.4bpp \
-									  $(MONBACKGFXDIR)/castform_sunny_form_back_pic.4bpp \
-									  $(MONBACKGFXDIR)/castform_rainy_form_back_pic.4bpp \
-									  $(MONBACKGFXDIR)/castform_snowy_form_back_pic.4bpp
+$(CASTFORMGFXDIR)/back.4bpp: $(CASTFORMGFXDIR)/back_normal_form.4bpp \
+							 $(CASTFORMGFXDIR)/back_sunny_form.4bpp \
+							 $(CASTFORMGFXDIR)/back_rainy_form.4bpp \
+							 $(CASTFORMGFXDIR)/back_snowy_form.4bpp
 	@cat $^ >$@
 
-$(MONFRONTGFXDIR)/castform_front_pic.4bpp: $(MONFRONTGFXDIR)/castform_normal_form_front_pic.4bpp \
-										$(MONFRONTGFXDIR)/castform_sunny_form_front_pic.4bpp \
-										$(MONFRONTGFXDIR)/castform_rainy_form_front_pic.4bpp \
-										$(MONFRONTGFXDIR)/castform_snowy_form_front_pic.4bpp
+$(CASTFORMGFXDIR)/anim_front.4bpp: $(CASTFORMGFXDIR)/anim_front_normal_form.4bpp \
+								   $(CASTFORMGFXDIR)/anim_front_sunny_form.4bpp \
+								   $(CASTFORMGFXDIR)/anim_front_rainy_form.4bpp \
+								   $(CASTFORMGFXDIR)/anim_front_snowy_form.4bpp
 	@cat $^ >$@
 
-$(MONPALDIR)/castform_palette.gbapal: $(MONPALDIR)/castform_normal_form_palette.gbapal \
-									  $(MONPALDIR)/castform_sunny_form_palette.gbapal \
-									  $(MONPALDIR)/castform_rainy_form_palette.gbapal \
-									  $(MONPALDIR)/castform_snowy_form_palette.gbapal
+$(CASTFORMGFXDIR)/normal.gbapal: $(CASTFORMGFXDIR)/normal_normal_form.gbapal \
+								 $(CASTFORMGFXDIR)/normal_sunny_form.gbapal \
+								 $(CASTFORMGFXDIR)/normal_rainy_form.gbapal \
+								 $(CASTFORMGFXDIR)/normal_snowy_form.gbapal
 	@cat $^ >$@
 
-$(MONPALDIR)/castform_shiny_palette.gbapal: $(MONPALDIR)/castform_normal_form_shiny_palette.gbapal \
-											$(MONPALDIR)/castform_sunny_form_shiny_palette.gbapal \
-											$(MONPALDIR)/castform_rainy_form_shiny_palette.gbapal \
-											$(MONPALDIR)/castform_snowy_form_shiny_palette.gbapal
+$(CASTFORMGFXDIR)/shiny.gbapal: $(CASTFORMGFXDIR)/shiny_normal_form.gbapal \
+								$(CASTFORMGFXDIR)/shiny_sunny_form.gbapal \
+								$(CASTFORMGFXDIR)/shiny_rainy_form.gbapal \
+								$(CASTFORMGFXDIR)/shiny_snowy_form.gbapal
 	@cat $^ >$@
+
+
+
+### Tilesets ###
 
 $(TILESETGFXDIR)/secondary/petalburg/tiles.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 159
@@ -246,6 +251,10 @@ $(TILESETGFXDIR)/secondary/battle_frontier_ranking_hall/tiles.4bpp: %.4bpp: %.pn
 $(TILESETGFXDIR)/secondary/mystery_events_house/tiles.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 509
 
+
+
+### Fonts ###
+
 $(FONTGFXDIR)/font0.latfont: $(FONTGFXDIR)/font0_latin.png
 	$(GFX) $< $@
 
@@ -309,6 +318,9 @@ $(FONTGFXDIR)/unused_frlg_down_arrow.4bpp: %.4bpp: %.png
 $(FONTGFXDIR)/keypad_icons.4bpp: %.4bpp: %.png
 	$(GFX) $< $@
 
+
+
+### Miscellaneous ###
 graphics/title_screen/pokemon_logo.gbapal: %.gbapal: %.pal
 	$(GFX) $< $@ -num_colors 224
 
@@ -322,13 +334,13 @@ $(MISCGFXDIR)/japanese_hof.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 29
 
 $(BATINTGFXDIR)/textbox.gbapal: $(BATINTGFXDIR)/textbox_0.gbapal \
-						$(BATINTGFXDIR)/textbox_1.gbapal
+								$(BATINTGFXDIR)/textbox_1.gbapal
 	@cat $^ >$@
 
 $(BTLANMSPRGFXDIR)/010.4bpp: $(BTLANMSPRGFXDIR)/010_0.4bpp \
-						  $(BTLANMSPRGFXDIR)/010_1.4bpp \
-						  $(BTLANMSPRGFXDIR)/010_2.4bpp \
-						  $(BTLANMSPRGFXDIR)/010_3.4bpp
+						 	 $(BTLANMSPRGFXDIR)/010_1.4bpp \
+						 	 $(BTLANMSPRGFXDIR)/010_2.4bpp \
+						 	 $(BTLANMSPRGFXDIR)/010_3.4bpp
 	@cat $^ >$@
 
 $(UNUSEDGFXDIR)/obi_palpak1.gbapal: $(UNUSEDGFXDIR)/old_pal1.gbapal \
@@ -352,8 +364,8 @@ $(UNUSEDGFXDIR)/obi2.4bpp: $(UNUSEDGFXDIR)/old_bulbasaur2.4bpp \
 	@cat $^ >$@
 
 $(INTERFACEGFXDIR)/hp_numbers.4bpp: $(INTERFACEGFXDIR)/hpbar_anim.4bpp \
-							$(INTERFACEGFXDIR)/numbers1.4bpp \
-							$(INTERFACEGFXDIR)/numbers2.4bpp
+									$(INTERFACEGFXDIR)/numbers1.4bpp \
+									$(INTERFACEGFXDIR)/numbers2.4bpp
 	@cat $^ >$@
 
 $(UNUSEDGFXDIR)/redyellowgreen_frame.bin: $(UNUSEDGFXDIR)/red_frame.bin \
@@ -483,6 +495,10 @@ $(SLOTMACHINEGFXDIR)/reel_time_gfx.4bpp: $(SLOTMACHINEGFXDIR)/reel_time_pikachu.
 
 $(UNUSEDGFXDIR)/intro_birch_beauty.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 822
+
+
+
+### PSS ###
 
 $(PSSGFXDIR)/forest_frame.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 55
@@ -648,7 +664,11 @@ $(INTERFACEGFXDIR)/selector_outline.4bpp: %.4bpp: %.png
 	
 $(BATTRANSGFXDIR)/frontier_transition.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 43
-	
+
+
+
+### Pokenav ###
+
 $(PKNAVOPTIONSGFXDIR)/options.4bpp: $(PKNAVOPTIONSGFXDIR)/hoenn_map.4bpp \
 								$(PKNAVOPTIONSGFXDIR)/condition.4bpp \
 								$(PKNAVOPTIONSGFXDIR)/match_call.4bpp \

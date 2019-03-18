@@ -129,10 +129,10 @@ static const struct OamData sOamData_ScrollArrowIndicator =
     .objMode = 0,
     .mosaic = 0,
     .bpp = 0,
-    .shape = 0,
+    .shape = SPRITE_SHAPE(16x16),
     .x = 0,
     .matrixNum = 0,
-    .size = 1,
+    .size = SPRITE_SIZE(16x16),
     .tileNum = 0,
     .priority = 0,
     .paletteNum = 0,
@@ -186,8 +186,8 @@ static const struct Subsprite sSubsprite_RedOutline1 =
 {
     .x = 0,
     .y = 0,
-    .shape = 0,
-    .size = 0,
+    .shape = SPRITE_SHAPE(8x8),
+    .size = SPRITE_SIZE(8x8),
     .tileOffset = 0,
     .priority = 0,
 };
@@ -196,8 +196,8 @@ static const struct Subsprite sSubsprite_RedOutline2 =
 {
     .x = 0,
     .y = 0,
-    .shape = 0,
-    .size = 0,
+    .shape = SPRITE_SHAPE(8x8),
+    .size = SPRITE_SIZE(8x8),
     .tileOffset = 1,
     .priority = 0,
 };
@@ -206,8 +206,8 @@ static const struct Subsprite sSubsprite_RedOutline3 =
 {
     .x = 0,
     .y = 0,
-    .shape = 0,
-    .size = 0,
+    .shape = SPRITE_SHAPE(8x8),
+    .size = SPRITE_SIZE(8x8),
     .tileOffset = 2,
     .priority = 0,
 };
@@ -216,8 +216,8 @@ static const struct Subsprite sSubsprite_RedOutline4 =
 {
     .x = 0,
     .y = 0,
-    .shape = 0,
-    .size = 0,
+    .shape = SPRITE_SHAPE(8x8),
+    .size = SPRITE_SIZE(8x8),
     .tileOffset = 3,
     .priority = 0,
 };
@@ -226,8 +226,8 @@ static const struct Subsprite sSubsprite_RedOutline5 =
 {
     .x = 0,
     .y = 0,
-    .shape = 0,
-    .size = 0,
+    .shape = SPRITE_SHAPE(8x8),
+    .size = SPRITE_SIZE(8x8),
     .tileOffset = 4,
     .priority = 0,
 };
@@ -236,8 +236,8 @@ static const struct Subsprite sSubsprite_RedOutline6 =
 {
     .x = 0,
     .y = 0,
-    .shape = 0,
-    .size = 0,
+    .shape = SPRITE_SHAPE(8x8),
+    .size = SPRITE_SIZE(8x8),
     .tileOffset = 5,
     .priority = 0,
 };
@@ -246,8 +246,8 @@ static const struct Subsprite sSubsprite_RedOutline7 =
 {
     .x = 0,
     .y = 0,
-    .shape = 0,
-    .size = 0,
+    .shape = SPRITE_SHAPE(8x8),
+    .size = SPRITE_SIZE(8x8),
     .tileOffset = 6,
     .priority = 0,
 };
@@ -256,8 +256,8 @@ static const struct Subsprite sSubsprite_RedOutline8 =
 {
     .x = 0,
     .y = 0,
-    .shape = 0,
-    .size = 0,
+    .shape = SPRITE_SHAPE(8x8),
+    .size = SPRITE_SIZE(8x8),
     .tileOffset = 7,
     .priority = 0,
 };
@@ -269,10 +269,10 @@ static const struct OamData sOamData_RedArrowCursor =
     .objMode = 0,
     .mosaic = 0,
     .bpp = 0,
-    .shape = 0,
+    .shape = SPRITE_SHAPE(16x16),
     .x = 0,
     .matrixNum = 0,
-    .size = 1,
+    .size = SPRITE_SIZE(16x16),
     .tileNum = 0,
     .priority = 0,
     .paletteNum = 0,
@@ -341,7 +341,7 @@ s32 DoMysteryGiftListMenu(struct WindowTemplate *windowTemplate, struct ListMenu
         }
         if (gMain.newKeys & B_BUTTON)
         {
-            sMysteryGiftLinkMenu.currItemId = LIST_B_PRESSED;
+            sMysteryGiftLinkMenu.currItemId = LIST_CANCEL;
             sMysteryGiftLinkMenu.state = 2;
         }
         if (sMysteryGiftLinkMenu.state == 2)
@@ -416,7 +416,7 @@ s32 ListMenu_ProcessInput(u8 listTaskId)
     }
     else if (gMain.newKeys & B_BUTTON)
     {
-        return LIST_B_PRESSED;
+        return LIST_CANCEL;
     }
     else if (gMain.newAndRepeatedKeys & DPAD_UP)
     {

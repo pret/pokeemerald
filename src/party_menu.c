@@ -37,15 +37,16 @@
 #include "main.h"
 #include "menu.h"
 #include "menu_helpers.h"
+#include "menu_specialized.h"
 #include "metatile_behavior.h"
 #include "overworld.h"
 #include "palette.h"
 #include "party_menu.h"
+#include "player_pc.h"
 #include "pokemon.h"
 #include "pokemon_icon.h"
 #include "pokemon_storage_system.h"
 #include "pokemon_summary_screen.h"
-#include "pokenav.h"
 #include "region_map.h"
 #include "reshow_battle_screen.h"
 #include "rom_8011DC0.h"
@@ -1175,10 +1176,10 @@ static const struct OamData gOamData_83765EC =
     .objMode = 0,
     .mosaic = 0,
     .bpp = 0,
-    .shape = 0,
+    .shape = SPRITE_SHAPE(8x8),
     .x = 0,
     .matrixNum = 0,
-    .size = 0,
+    .size = SPRITE_SIZE(8x8),
     .tileNum = 0,
     .priority = 1,
     .paletteNum = 0,
@@ -1231,10 +1232,10 @@ static const struct OamData sOamData_8615ED8 =
     .objMode = 0,
     .mosaic = 0,
     .bpp = 0,
-    .shape = 0,
+    .shape = SPRITE_SHAPE(32x32),
     .x = 0,
     .matrixNum = 0,
-    .size = 2,
+    .size = SPRITE_SIZE(32x32),
     .tileNum = 0,
     .priority = 1,
     .paletteNum = 0,
@@ -1287,10 +1288,10 @@ static const struct OamData sOamData_8615F20 =
     .objMode = 0,
     .mosaic = 0,
     .bpp = 0,
-    .shape = 0,
+    .shape = SPRITE_SHAPE(16x16),
     .x = 0,
     .matrixNum = 0,
-    .size = 1,
+    .size = SPRITE_SIZE(16x16),
     .tileNum = 0,
     .priority = 2,
     .paletteNum = 0,
@@ -1366,10 +1367,10 @@ static const struct OamData sOamData_8615F90 =
     .objMode = 0,
     .mosaic = 0,
     .bpp = 0,
-    .shape = 1,
+    .shape = SPRITE_SHAPE(32x8),
     .x = 0,
     .matrixNum = 0,
-    .size = 1,
+    .size = SPRITE_SIZE(32x8),
     .tileNum = 0,
     .priority = 1,
     .paletteNum = 0,
@@ -6006,7 +6007,7 @@ static void sub_81B767C(u8 taskId)
     s16 *arrayPtr = gUnknown_0203CEC4->data;
 
     arrayPtr[12] = sub_81B3364();
-    sub_81D3640(arrayPtr[12], arrayPtr, &arrayPtr[6], 1, 2, 3);
+    DrawLevelUpWindowPg1(arrayPtr[12], arrayPtr, &arrayPtr[6], 1, 2, 3);
     CopyWindowToVram(arrayPtr[12], 2);
     schedule_bg_copy_tilemap_to_vram(2);
 }
@@ -6015,7 +6016,7 @@ static void sub_81B76C8(u8 taskId)
 {
     s16 *arrayPtr = gUnknown_0203CEC4->data;
 
-    sub_81D3784(arrayPtr[12], &arrayPtr[6], 1, 2, 3);
+    DrawLevelUpWindowPg2(arrayPtr[12], &arrayPtr[6], 1, 2, 3);
     CopyWindowToVram(arrayPtr[12], 2);
     schedule_bg_copy_tilemap_to_vram(2);
 }
@@ -7288,7 +7289,7 @@ static void sub_81B9640(u8 taskId)
 void sub_81B968C(void)
 {
     ShowPokemonSummaryScreen(PSS_MODE_SELECT_MOVE, gPlayerParty, gSpecialVar_0x8004, gPlayerPartyCount - 1, CB2_ReturnToField);
-    gFieldCallback = sub_80AF168;
+    gFieldCallback = FieldCallback_ReturnToEventScript2;
 }
 
 void sub_81B96D0(void)

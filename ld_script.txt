@@ -185,7 +185,6 @@ SECTIONS {
         src/heal_location.o(.text);
         src/region_map.o(.text);
         src/contest_painting_effects.o(.text);
-        asm/contest_painting_effects.o(.text);
         src/decoration.o(.text);
         src/slot_machine.o(.text);
         src/contest_painting.o(.text);
@@ -225,7 +224,7 @@ SECTIONS {
         src/battle_controller_safari.o(.text);
         src/fldeff_sweetscent.o(.text);
         src/battle_anim_effects_3.o(.text);
-        src/learn_move.o(.text);
+        src/move_relearner.o(.text);
         src/fldeff_softboiled.o(.text);
         src/decoration_inventory.o(.text);
         src/roamer.o(.text);
@@ -290,6 +289,8 @@ SECTIONS {
         src/pokenav.o(.text);
         asm/pokenav.o(.text);
         src/pokenav_match_call.o(.text);
+        src/menu_specialized.o(.text);
+        asm/menu_specialized.o(.text);
         asm/rom_81D1C44.o(.text);
         src/trainer_hill.o(.text);
         src/rayquaza_scene.o(.text);
@@ -534,7 +535,7 @@ SECTIONS {
         src/contest_ai.o(.rodata);
         src/battle_controller_safari.o(.rodata);
         src/battle_anim_effects_3.o(.rodata);
-        src/learn_move.o(.rodata);
+        src/move_relearner.o(.rodata);
         src/roamer.o(.rodata);
         src/battle_tower.o(.rodata);
         src/use_pokeblock.o(.rodata);
@@ -593,6 +594,8 @@ SECTIONS {
         src/pokenav.o(.rodata);
         data/pokenav.o(.rodata);
         src/pokenav_match_call.o(.rodata);
+        src/menu_specialized.o(.rodata);
+        data/menu_specialized.o(.rodata);
         data/rom_81D1C44.o(.rodata);
         src/trainer_hill.o(.rodata);
         src/rayquaza_scene.o(.rodata);

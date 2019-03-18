@@ -155,7 +155,8 @@ const u8 sWireless_RSEtoASCIITable[] = {
     0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x00
 };
 const struct OamData sWirelessStatusIndicatorOamData = {
-    .size = 1
+    .shape = SPRITE_SHAPE(16x16),
+    .size = SPRITE_SIZE(16x16)
 };
 static const union AnimCmd sWirelessStatusIndicatorAnim0[] = {
     // 3 bars
