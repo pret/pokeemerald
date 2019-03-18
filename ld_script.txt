@@ -50,6 +50,8 @@ SECTIONS {
         src/blit.o(.text);
         src/window.o(.text);
         src/text.o(.text);
+        src/korean.o(.text);
+        src/korean_table.o(.rodata);
         src/sprite.o(.text);
         src/string_util.o(.text);
         src/link.o(.text);
@@ -390,6 +392,8 @@ SECTIONS {
         src/bg.o(.rodata);
         src/window.o(.rodata);
         src/text.o(.rodata);
+        src/korean.o(.rodata);
+        src/korean_table.o(.rodata);
         src/sprite.o(.rodata);
         data/io_reg.o(.rodata);
         src/string_util.o(.rodata);

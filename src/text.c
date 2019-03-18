@@ -11,6 +11,7 @@
 #include "blit.h"
 #include "menu.h"
 #include "dynamic_placeholder_text_util.h"
+#include "korean.h"
 
 EWRAM_DATA struct TextPrinter gTempTextPrinter = {0};
 EWRAM_DATA struct TextPrinter gTextPrinters[NUM_TEXT_PRINTERS] = {0};
@@ -1652,7 +1653,7 @@ u16 RenderText(struct TextPrinter *textPrinter)
         }
 
         /* 한글 문자 체크 & 문자 가져오기 */
-        if (currChar >= 0x37 && currChar <= 0x41)
+        if (CheckKoreanGlyph(currChar))
         {
             currChar = (currChar << 8) | *textPrinter->printerTemplate.currentChar;
             textPrinter->printerTemplate.currentChar++;
@@ -2018,7 +2019,7 @@ s32 GetStringWidth(u8 fontId, const u8 *str, s16 letterSpacing)
             glyphWidth = func(*str, isJapanese);
 
             /* 한글 문자일 경우 1바이트 건너뛰기 */
-            if (*str >= 0x37 && *str <= 0x41)
+            if (CheckKoreanGlyph(*str))
                 str++;
 
             if (minGlyphWidth > 0)
@@ -2241,7 +2242,7 @@ void DecompressGlyphFont0(u16 glyphId, bool32 isJapanese)
     }
     else
     {
-        if (glyphId >= 0x100)
+        if (glyphId >= 0x3700)
         {
             u16 index = glyphId - 0x3700;
             glyphs = gFont0KoreanGlyphs + (0x20 * index);
@@ -2275,7 +2276,7 @@ void DecompressGlyphFont0(u16 glyphId, bool32 isJapanese)
 
 u32 GetGlyphWidthFont0(u16 glyphId, bool32 isJapanese)
 {
-    if (glyphId >= 0x37 && glyphId <= 0x41)
+    if (CheckKoreanGlyph(glyphId))
         return 8;
 
     if (isJapanese == TRUE)
@@ -2299,7 +2300,7 @@ void DecompressGlyphFont7(u16 glyphId, bool32 isJapanese)
     }
     else
     {
-        if (glyphId >= 0x100)
+        if (glyphId >= 0x3700)
         {
             u16 index = glyphId - 0x3700;
             glyphs = gFont7KoreanGlyphs + (0x20 * index);
@@ -2333,7 +2334,7 @@ void DecompressGlyphFont7(u16 glyphId, bool32 isJapanese)
 
 u32 GetGlyphWidthFont7(u16 glyphId, bool32 isJapanese)
 {
-    if (glyphId >= 0x37 && glyphId <= 0x41)
+    if (CheckKoreanGlyph(glyphId))
         return 8;
 
     if (isJapanese == TRUE)
@@ -2356,7 +2357,7 @@ void DecompressGlyphFont8(u16 glyphId, bool32 isJapanese)
     }
     else
     {
-        if (glyphId >= 0x100)
+        if (glyphId >= 0x3700)
         {
             u16 index = glyphId - 0x3700;
             glyphs = gFont0KoreanGlyphs + (0x20 * index);
@@ -2390,7 +2391,7 @@ void DecompressGlyphFont8(u16 glyphId, bool32 isJapanese)
 
 u32 GetGlyphWidthFont8(u16 glyphId, bool32 isJapanese)
 {
-    if (glyphId >= 0x37 && glyphId <= 0x41)
+    if (CheckKoreanGlyph(glyphId))
         return 8;
 
     if (isJapanese == TRUE)
@@ -2415,7 +2416,7 @@ void DecompressGlyphFont2(u16 glyphId, bool32 isJapanese)
     }
     else
     {
-        if (glyphId >= 0x100)
+        if (glyphId >= 0x3700)
         {
             u16 index = glyphId - 0x3700;
             glyphs = gFont2KoreanGlyphs + (0x20 * index);
@@ -2451,7 +2452,7 @@ void DecompressGlyphFont2(u16 glyphId, bool32 isJapanese)
 
 u32 GetGlyphWidthFont2(u16 glyphId, bool32 isJapanese)
 {
-    if (glyphId >= 0x37 && glyphId <= 0x41)
+    if (CheckKoreanGlyph(glyphId))
         return 11;
 
     if (isJapanese == TRUE)
@@ -2475,7 +2476,7 @@ void DecompressGlyphFont1(u16 glyphId, bool32 isJapanese)
     }
     else
     {
-        if (glyphId >= 0x100)
+        if (glyphId >= 0x3700)
         {
             u16 index = glyphId - 0x3700;
             glyphs = gFont1KoreanGlyphs + (0x20 * index);
@@ -2511,7 +2512,7 @@ void DecompressGlyphFont1(u16 glyphId, bool32 isJapanese)
 
 u32 GetGlyphWidthFont1(u16 glyphId, bool32 isJapanese)
 {
-    if (glyphId >= 0x37 && glyphId <= 0x41)
+    if (CheckKoreanGlyph(glyphId))
         return 12;
 
     if (isJapanese == TRUE)
