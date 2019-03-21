@@ -30,31 +30,33 @@ struct NamingScreenTemplate
 };
 
 struct NamingScreenData {
- /*0x0*/    u8 tilemapBuffer1[0x800];
- /*0x800*/  u8 tilemapBuffer2[0x800];
- /*0x800*/  u8 tilemapBuffer3[0x800];
- /*0x1800*/ u8 textBuffer[0x10];
- /*0x1810*/ u8 tileBuffer[0x600];
- /*0x1E10*/ u8 state;
- /*0x1E11*/ u8 windows[5];
- /*0x1E16*/ u16 inputCharBaseXPos;
- /*0x1E18*/ u16 bg1vOffset;
- /*0x1E1A*/ u16 bg2vOffset;
- /*0x1E1C*/ u16 bg1Priority;
- /*0x1E1E*/ u16 bg2Priority;
- /*0x1E20*/ u8 bgToReveal;
- /*0x1E21*/ u8 bgToHide;
- /*0x1E22*/ u8 currentPage;
- /*0x1E23*/ u8 cursorSpriteId;
- /*0x1E24*/ u8 selectBtnFrameSpriteId;
- /*0x1E25*/ u8 keyRepeatStartDelayCopy;
- /*0x1E28*/ const struct NamingScreenTemplate *template;
- /*0x1E2C*/ u8 templateNum;
- /*0x1E30*/ u8 *destBuffer;
- /*0x1E34*/ u16 monSpecies;
- /*0x1E36*/ u16 monGender;
- /*0x1E38*/ u32 monPersonality;
- /*0x1E3C*/ MainCallback returnCallback;
+    u8 tilemapBuffer1[0x800];
+    u8 tilemapBuffer2[0x800];
+    u8 tilemapBuffer3[0x800];
+    u8 textBuffer[0x20];
+    u8 backupBuffer[0x20];
+    u8 tileBuffer[0x600];
+    u8 state;
+    u8 koreanState;
+    u8 windows[5];
+    u16 inputCharBaseXPos;
+    u16 bg1vOffset;
+    u16 bg2vOffset;
+    u16 bg1Priority;
+    u16 bg2Priority;
+    u8 bgToReveal;
+    u8 bgToHide;
+    u8 currentPage;
+    u8 cursorSpriteId;
+    u8 selectBtnFrameSpriteId;
+    u8 keyRepeatStartDelayCopy;
+    const struct NamingScreenTemplate *template;
+    u8 templateNum;
+    u8 *destBuffer;
+    u16 monSpecies;
+    u16 monGender;
+    u32 monPersonality;
+    MainCallback returnCallback;
 };
 
 enum
@@ -82,6 +84,17 @@ enum
     INPUT_STATE_DISABLED,
     INPUT_STATE_ENABLED,
     INPUT_STATE_2,
+};
+
+enum
+{
+    STATE_NONE,
+    STATE_JAUM,
+    STATE_MOUM_MERGEABLE,
+    STATE_MOUM,
+    STATE_JAUM_2_MERGEABLE,
+    STATE_JAUM_2,
+    STATE_MERGED_JAUM,
 };
 
 void DoNamingScreen(u8 templateNum, u8 *destBuffer, u16 monSpecies, u16 monGender, u32 monPersonality, MainCallback returnCallback);

@@ -26,6 +26,22 @@ u8 CheckJaum(u8 glyph);
 u8 CheckMoum(u8 glyph);
 
 /**
+ * 한글 고유번호를 유니코드로 변환(0xac00를 빼준 결과 반환)
+ *
+ * @param korean : 입력값
+ * @return 유니코드값
+ */
+u16 ConvertKoreanToUnicode(u16 korean);
+
+/**
+ * 유니코드를 한글 고유번호로 변환
+ *
+ * @param code : 입력값
+ * @return 한글 고유번호 반환
+ */
+u16 ConvertUnicodeToKorean(u16 code);
+
+/**
  * 입력값을 초성값으로 변환
  *
  * @param index : 입력값
@@ -45,7 +61,7 @@ u8 GetJung(u8 index);
  * 입력값을 종성값으로 변환
  *
  * @param index : 입력값
- * @return 종성값 반환
+ * @return 종성값 반환, -1 반환시 실패
  */
 u8 GetJong(u8 index);
 
@@ -56,6 +72,14 @@ u8 GetJong(u8 index);
  * @return 초성값 반환
  */
 u8 ConvertToCho(u16 korean);
+
+/**
+ * 종성값에서 초성값으로 변환시키기
+ *
+ * @param jong : 입력값
+ * @return 초성값 반환
+ */
+u8 ConvertJongToCho(u8 jong);
 
 /**
  * 중성값으로 변환시키기
@@ -74,6 +98,15 @@ u8 ConvertToJung(u16 korean);
 u8 ConvertToJong(u16 korean);
 
 /**
+ * 종성값 인덱스으로 변환시키기
+ * (자음값이 아닌 종성값에 대한 순서값)
+ *
+ * @param korean : 입력값
+ * @return 종성값 인덱스 반환
+ */
+u8 ConvertToJongIndex(u16 korean);
+
+/**
  * 한글 조합하기
  *
  * @param cho : 초성값
@@ -81,7 +114,7 @@ u8 ConvertToJong(u16 korean);
  * @param jong : 종성값
  * @return 유니코드 한글문자 반환
  */
-u8 GetKorean(u8 cho, u8 jung, u8 jong);
+u16 GetKorean(u8 cho, u8 jung, u8 jong);
 
 /**
  * 자음 합치기

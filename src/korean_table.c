@@ -1,6 +1,6 @@
 #include "global.h"
 
-const s8 gConvertJongToChoTable[] =
+const u8 gConvertJongToChoTable[] =
 {
 /* 0     */ 0x00,
 /* 1   ㄱ*/ 0x01,
@@ -33,7 +33,7 @@ const s8 gConvertJongToChoTable[] =
             -1,
 };
 
-const s16 gConvertKoreanToUnicodeTable[] =
+const u16 gConvertKoreanToUnicodeTable[] =
 {
     -1,
     0x0000,
@@ -2853,7 +2853,7 @@ const s16 gConvertKoreanToUnicodeTable[] =
     -1,
 };
 
-const s16 gConvertUnicodeToKoreanTable[] =
+const u16 gConvertUnicodeToKoreanTable[] =
 {
     0x3701,
     0x3702,

@@ -43,10 +43,25 @@ u8 GetJong(u8 index)
     return -1;
 }
 
+u16 ConvertKoreanToUnicode(u16 korean)
+{
+    return gConvertKoreanToUnicodeTable[korean - 0x3700];
+}
+
+u16 ConvertUnicodeToKorean(u16 code)
+{
+    return gConvertUnicodeToKoreanTable[code];
+}
+
 u8 ConvertToCho(u16 korean)
 {
     u16 code = gConvertKoreanToUnicodeTable[korean - 0x3700];
     return ((code / 28) / 21) + 0x01;
+}
+
+u8 ConvertJongToCho(u8 jong)
+{
+    return gConvertJongToChoTable[jong];
 }
 
 u8 ConvertToJung(u16 korean)
@@ -60,7 +75,12 @@ u8 ConvertToJong(u16 korean)
     return gConvertJongToChoTable[gConvertKoreanToUnicodeTable[korean - 0x3700] % 28];
 }
 
-u8 GetKorean(u8 cho, u8 jung, u8 jong)
+u8 ConvertToJongIndex(u16 korean)
+{
+    return gConvertKoreanToUnicodeTable[korean - 0x3700] % 28;
+}
+
+u16 GetKorean(u8 cho, u8 jung, u8 jong)
 {    
     return (((cho * 21) + jung) * 28) + jong;
 }

@@ -27,6 +27,7 @@
 #include "text_window.h"
 #include "overworld.h"
 #include "constants/event_objects.h"
+#include "korean.h"
 
 EWRAM_DATA static struct NamingScreenData *gNamingScreenData = NULL;
 extern u16 gKeyRepeatStartDelay;
@@ -150,10 +151,35 @@ static const struct WindowTemplate gUnknown_0858BE10[] =
     DUMMY_WIN_TEMPLATE
 };
 
-static const u8 gUnknown_0858BE40[] = __("abcdef .ghijkl ,mnopqrs tuvwxyz ABCDEF .GHIJKL ,MNOPQRS TUVWXYZ 01234   56789   !?♂♀/-  …“”‘'   ");
+static const u8 gUnknown_0858BE40[][4][20] =
+{
+    /* 소문자 알파뱃 자판 */
+    {
+        _("1234567890"),
+        _("abcdefghij"),
+        _("klmnopqrst"),
+        _("uvwxyz♂♀-·"),
+    },
+    /* 한글 자판 */
+    {
+        {0x09, 0x0E, 0x05, 0x02, 0x0B, 0xAB, 0xAC, 0xAE, 0x17, 0x1B },
+        {0x08, 0x0D, 0x04, 0x01, 0x0A, 0x20, 0x1A, 0x16, 0x15, 0x19 },
+        {0x07, 0x03, 0x0C, 0x06, 0x13, 0x1C, 0x18, 0x14, 0x28, 0xBA },
+        {0x10, 0x11, 0x0F, 0x12, 0x00, 0x25, 0x21, 0x26, 0xB8, 0xAD },
+    },
+    /* 대문자 알파뱃 자판 */
+    {
+        _("1234567890"),
+        _("ABCDEFGHIJ"),
+        _("KLMNOPQRST"),
+        _("UVWXYZ‘'“”"),
+    }
+};
 
-static const u8 gUnknown_0858BEA0[] = { 8, 8, 6 };
-static const u8 gUnknown_0858BEA3[] = { 0, 12, 24, 56, 68, 80, 92, 123, 0, 12, 24, 56, 68, 80, 92, 123, 0, 22, 44, 66, 88, 110, 0, 0 };
+static const u8 gUnknown_0858BEA0[] = { 10, 10, 10 };
+static const u8 gUnknown_0858BEA3[] = { 0, 16, 32, 48, 64, 80, 96, 112, 128, 144,
+                                        0, 16, 32, 48, 64, 80, 96, 112, 128, 144,
+                                        0, 16, 32, 48, 64, 80, 96, 112, 128, 144 };
 
 // forward declarations
 static const struct NamingScreenTemplate *const sNamingScreenTemplates[];
@@ -312,6 +338,7 @@ static void C2_NamingScreen(void)
 static void NamingScreen_Init(void)
 {
     gNamingScreenData->state = 0;
+    gNamingScreenData->koreanState = 0;
     gNamingScreenData->bg1vOffset = 0;
     gNamingScreenData->bg2vOffset = 0;
     gNamingScreenData->bg1Priority = BGCNT_PRIORITY(1);
@@ -327,6 +354,7 @@ static void NamingScreen_Init(void)
     memset(gNamingScreenData->textBuffer, 0xFF, sizeof(gNamingScreenData->textBuffer));
     if (gNamingScreenData->template->copyExistingString != 0)
         StringCopy(gNamingScreenData->textBuffer, gNamingScreenData->destBuffer);
+    StringCopy(gNamingScreenData->backupBuffer, gNamingScreenData->destBuffer);
     gKeyRepeatStartDelay = 16;
 }
 
@@ -909,7 +937,7 @@ static void sub_80E3CC8(void)
 
 static void CursorInit(void)
 {
-    gNamingScreenData->cursorSpriteId = CreateSprite(&gUnknown_0858C138, 38, 88, 1);
+    gNamingScreenData->cursorSpriteId = CreateSprite(&gUnknown_0858C138, 27, 88, 1);
     sub_80E3E3C(1);
     gSprites[gNamingScreenData->cursorSpriteId].oam.priority = 1;
     gSprites[gNamingScreenData->cursorSpriteId].oam.objMode = 1;
@@ -923,7 +951,7 @@ static void SetCursorPos(s16 x, s16 y)
     struct Sprite *cursorSprite = &gSprites[gNamingScreenData->cursorSpriteId];
 
     if (x < gUnknown_0858BEA0[sub_80E3274()])
-        cursorSprite->pos1.x = gUnknown_0858BEA3[x + sub_80E3274() * 8] + 38;
+        cursorSprite->pos1.x = gUnknown_0858BEA3[x + sub_80E3274() * 10] + 27;
     else
         cursorSprite->pos1.x = 0;
 
@@ -1126,7 +1154,7 @@ static void CreateUnderscoreSprites(void)
     gSprites[spriteId].oam.priority = 3;
     gSprites[spriteId].invisible = TRUE;
     xPos = gNamingScreenData->inputCharBaseXPos;
-    for (i = 0; i < gNamingScreenData->template->maxChars; i++, xPos += 8)
+    for (i = 0; i < gNamingScreenData->template->maxChars * 2; i += 2, xPos += 8)
     {
         spriteId = CreateSprite(&sSpriteTemplate_Underscore, xPos + 3, 0x3C, 0);
         gSprites[spriteId].oam.priority = 3;
@@ -1486,7 +1514,7 @@ static void sub_80E48E8(void)
     StringCopy(buffer, gSpeciesNames[gNamingScreenData->monSpecies]);
     StringAppendN(buffer, gNamingScreenData->template->title, 15);
     FillWindowPixelBuffer(gNamingScreenData->windows[3], PIXEL_FILL(1));
-    AddTextPrinterParameterized(gNamingScreenData->windows[3], 1, buffer, 8, 1, 0, 0);
+    AddTextPrinterParameterized(gNamingScreenData->windows[3], 2, buffer, 8, 1, 0, 0);
     PutWindowTilemap(gNamingScreenData->windows[3]);
 }
 
@@ -1549,9 +1577,8 @@ static void sub_80E49BC(void)
 
 static u8 GetCharAtKeyboardPos(s16 a, s16 b)
 {
-    return gUnknown_0858BE40[a + b * 8 + sub_80E3274() * 32];
+    return gUnknown_0858BE40[gNamingScreenData->currentPage][b][a];
 }
-
 
 static u8 GetTextCaretPosition(void)
 {
@@ -1559,10 +1586,10 @@ static u8 GetTextCaretPosition(void)
 
     for (i = 0; i < gNamingScreenData->template->maxChars; i++)
     {
-        if (gNamingScreenData->textBuffer[i] == EOS)
-            return i;
+        if (gNamingScreenData->textBuffer[i * 2] == EOS)
+            return i * 2;
     }
-    return gNamingScreenData->template->maxChars - 1;
+    return gNamingScreenData->template->maxChars * 2;
 }
 
 static u8 GetPreviousTextCaretPosition(void)
@@ -1571,8 +1598,8 @@ static u8 GetPreviousTextCaretPosition(void)
 
     for (i = gNamingScreenData->template->maxChars - 1; i > 0; i--)
     {
-        if (gNamingScreenData->textBuffer[i] != EOS)
-            return i;
+        if (gNamingScreenData->textBuffer[i * 2] != EOS)
+            return i * 2;
     }
     return 0;
 }
@@ -1580,15 +1607,76 @@ static u8 GetPreviousTextCaretPosition(void)
 static void DeleteTextCharacter(void)
 {
     u8 index;
-    u8 var2;
-
+    u8 position, ch;
+    u8 state;
+    u16 korean;
+    
+    state = gNamingScreenData->koreanState;
+    
+    // 마지막으로 입력된 인덱스
     index = GetPreviousTextCaretPosition();
-    gNamingScreenData->textBuffer[index] = 0;
+
+    // 문자 가져오기
+    korean = (gNamingScreenData->textBuffer[index] << 8) |
+              gNamingScreenData->textBuffer[index + 1];
+
+    switch (state)
+    {
+    // 0 - STATE_NONE : 초기상태 (그냥 한 글자 제거)
+    // 1 - STATE_JAUM : 자음입력상태
+    case STATE_NONE:
+    case STATE_JAUM:
+        gNamingScreenData->textBuffer[index] = EOS;
+        gNamingScreenData->textBuffer[index + 1] = EOS;
+        break;
+
+    // 2, 3 - STATE_MOUM_MERGEABLE, STATE_MOUM : 자음+모음 입력상태 (모음만 제거하기)
+    case STATE_MOUM_MERGEABLE:
+    case STATE_MOUM:
+        state = STATE_JAUM;
+        gNamingScreenData->textBuffer[index] = 0x41;
+        gNamingScreenData->textBuffer[index + 1] = ConvertToCho(korean);
+        break;
+
+    // 4, 5 - STATE_JAUM_2_MERGEABLE, STATE_JAUM_2 : 자음+모음+자음 입력상태 (자음만 제거)
+    case STATE_JAUM_2_MERGEABLE:
+    case STATE_JAUM_2:
+        ch = ConvertToJung(korean);
+        if (ch == 0x1c || ch == 0x21 || ch == 0x26)
+            state = STATE_MOUM_MERGEABLE;
+        else
+            state = STATE_MOUM;
+
+        korean = GetKorean(
+                     GetCho(ConvertToCho(korean)),
+                     GetJung(ConvertToJung(korean)),
+                     0);
+        korean = ConvertUnicodeToKorean(korean);
+
+        gNamingScreenData->textBuffer[index] = (korean & 0xFF00) >> 8;
+        gNamingScreenData->textBuffer[index + 1] = korean & 0x00FF;
+        break;
+
+    // 6 - STATE_MERGED_JAUM : 이중자음 입력상태 (분리시키기)
+    case STATE_MERGED_JAUM:
+        state = STATE_JAUM_2_MERGEABLE;
+
+        korean = GetKorean(
+                     GetCho(ConvertToCho(korean)),
+                     GetJung(ConvertToJung(korean)),
+                     SplitJong(ConvertToJongIndex(korean), 0));
+        korean = ConvertUnicodeToKorean(korean);
+
+        gNamingScreenData->textBuffer[index] = (korean & 0xFF00) >> 8;
+        gNamingScreenData->textBuffer[index + 1] = korean & 0x00FF;
+        break;
+    }
+
+    gNamingScreenData->koreanState = state;
+
     sub_80E4D10();
-    CopyBgTilemapBufferToVram(3);
-    gNamingScreenData->textBuffer[index] = EOS;
-    var2 = GetKeyRoleAtCursorPos();
-    if (var2 == 0 || var2 == 2)
+    position = GetKeyRoleAtCursorPos();
+    if (position == 0 || position == 2)
         sub_80E3948(1, 0, 1);
     PlaySE(SE_BOWA);
 }
@@ -1604,31 +1692,461 @@ static bool8 sub_80E4B54(void)
     CopyBgTilemapBufferToVram(3);
     PlaySE(SE_SELECT);
 
-    if (GetPreviousTextCaretPosition() != gNamingScreenData->template->maxChars - 1)
-        return FALSE;
-    else
-        return TRUE;
+    return FALSE;
 }
 
 static void AddTextCharacter(u8 ch)
 {
     u8 index = GetTextCaretPosition();
+    u8 state = gNamingScreenData->koreanState;
+    u16 koreanChar;
+    u16 prevChar;
 
-    gNamingScreenData->textBuffer[index] = ch;
+    /* 이전에 입력한 글자 불러오기 */
+    if (index >= 2)
+    {
+        prevChar = gNamingScreenData->textBuffer[index - 2] << 8 |
+                   gNamingScreenData->textBuffer[index - 1];
+    }
+
+    if (ch >= 0xa1 || ch == 0x00)
+    {
+        // 입력수 초과 예외처리
+        if (index == gNamingScreenData->template->maxChars * 2)
+            return;
+
+        // 한글입력 중이면 강제로 초기상태로 변경
+        gNamingScreenData->textBuffer[index++] = 0;
+        gNamingScreenData->textBuffer[index] = ch;
+        state = STATE_NONE;
+    }
+    else
+    {
+        switch (state)
+        {
+        /* 0 - STATE_NONE : 초기 상태(모든 문자 입력가능) */
+        case STATE_NONE:
+        {
+            // 입력수 초과 예외처리
+            if (index == gNamingScreenData->template->maxChars * 2)
+                return;
+
+            // 문자 입력
+            gNamingScreenData->textBuffer[index++] = 0x41;
+            gNamingScreenData->textBuffer[index] = ch;
+
+            // 문자가 자음이면 입력 상태 변경
+            if (CheckJaum(ch))
+                state = STATE_JAUM;
+            break;
+        }
+        /* 1 - STATE_JAUM : 자음 입력 상태 */
+        case STATE_JAUM:
+        {
+            if (CheckMoum(ch))
+            {
+                /* 모음을 입력 했을 경우 */
+                // 한글 조합
+                koreanChar = GetKorean(GetCho(prevChar & 0xff), GetJung(ch), 0);
+                koreanChar = ConvertUnicodeToKorean(koreanChar);
+
+                if (koreanChar == 0xffff)
+                {
+                    /* 없는 글자일 경우 상태복구 및 일반 문자 입력 */
+                    state = STATE_NONE;
+
+                    // 입력수 초과 예외처리
+                    if (index == gNamingScreenData->template->maxChars * 2)
+                        return;
+
+                    // 문자 입력
+                    gNamingScreenData->textBuffer[index++] = 0x41;
+                    gNamingScreenData->textBuffer[index] = ch;
+                }
+                else
+                {
+                    /* 조합 성공하면 버퍼에 이전 위치에 그대로 입력시키기 */
+                    index -= 2;
+                    gNamingScreenData->textBuffer[index++] = (koreanChar & 0xff00) >> 8;
+                    gNamingScreenData->textBuffer[index] = koreanChar & 0xff;
+                    
+                    // 모음 조합가능 여부에 따른 상태 분기
+                    if (ch == 0x1c || ch == 0x21 || ch == 0x26)
+                        state = STATE_MOUM_MERGEABLE;
+                    else
+                        state = STATE_MOUM;
+                }
+            }
+            else
+            {
+                /* 입력값이 모음이 아닐 경우 */
+                // 입력수 초과 예외처리
+                if (index == gNamingScreenData->template->maxChars * 2)
+                    return;
+
+                // 문자 입력
+                gNamingScreenData->textBuffer[index++] = 0x41;
+                gNamingScreenData->textBuffer[index] = ch;
+            }
+            break;
+        }
+        /* 2 - STATE_MOUM_MERGEABLE : 모음 입력 상태(모음 조합가능) */
+        case STATE_MOUM_MERGEABLE:
+        {
+            if (CheckMoum(ch))
+            {
+                if (MergeMoum(ConvertToJung(prevChar), ch) == 0)
+                {
+                    /* 모음 조합이 불가능하면 상태 복구 */
+                    state = STATE_NONE;
+
+                    // 입력수 초과 예외처리
+                    if (index == gNamingScreenData->template->maxChars * 2)
+                        return;
+
+                    // 문자 입력
+                    gNamingScreenData->textBuffer[index++] = 0x41;
+                    gNamingScreenData->textBuffer[index] = ch;
+                }
+                else
+                {
+                    /* 모음 조합이 가능할 경우 */
+                    koreanChar = GetKorean(
+                                    GetCho(ConvertToCho(prevChar)), 
+                                    MergeMoum(ConvertToJung(prevChar), ch), 
+                                    0);
+                    koreanChar = ConvertUnicodeToKorean(koreanChar);
+
+                    if (koreanChar == 0xffff)
+                    {
+                        /* 없는 글자일 경우 상태복구 및 일반 문자 입력 */
+                        state = STATE_NONE;
+
+                        // 입력수 초과 예외처리
+                        if (index == gNamingScreenData->template->maxChars * 2)
+                            return;
+
+                        // 문자 입력
+                        gNamingScreenData->textBuffer[index++] = 0x41;
+                        gNamingScreenData->textBuffer[index] = ch;
+                    }
+                    else
+                    {
+                        /* 조합 성공하면 버퍼에 이전 위치에 그대로 입력시키기 */
+                        index -= 2;
+                        gNamingScreenData->textBuffer[index++] = (koreanChar & 0xff00) >> 8;
+                        gNamingScreenData->textBuffer[index] = koreanChar & 0xff;
+                        state = STATE_MOUM;
+                    }
+                }
+            }
+            else
+            {
+                koreanChar = GetKorean(
+                                GetCho(ConvertToCho(prevChar)), 
+                                GetJung(ConvertToJung(prevChar)), 
+                                GetJong(ch));
+                koreanChar = ConvertUnicodeToKorean(koreanChar);
+
+                if (koreanChar == 0xffff || GetJong(ch) == 0xff)
+                {
+                    /* 없는 글자일 경우 자음 상태복구 및 일반 문자 입력 */
+                    state = STATE_JAUM;
+
+                    // 입력수 초과 예외처리
+                    if (index == gNamingScreenData->template->maxChars * 2)
+                        return;
+
+                    // 문자 입력
+                    gNamingScreenData->textBuffer[index++] = 0x41;
+                    gNamingScreenData->textBuffer[index] = ch;
+                }
+                else
+                {
+                    /* 조합 성공하면 버퍼에 이전 위치에 그대로 입력시키기 */
+                    index -= 2;
+                    gNamingScreenData->textBuffer[index++] = (koreanChar & 0xff00) >> 8;
+                    gNamingScreenData->textBuffer[index] = koreanChar & 0xff;
+                    state = STATE_JAUM_2;
+                }
+            }
+            break;
+        }
+        /* 3 - STATE_MOUM : 모음 입력 상태 */
+        case STATE_MOUM:
+        {
+            if (CheckMoum(ch))
+            {
+                // 입력수 초과 예외처리
+                if (index == gNamingScreenData->template->maxChars * 2)
+                    return;
+
+                // 문자 입력
+                gNamingScreenData->textBuffer[index++] = 0x41;
+                gNamingScreenData->textBuffer[index] = ch;
+            }
+            else
+            {
+                koreanChar = GetKorean(
+                                GetCho(ConvertToCho(prevChar)), 
+                                GetJung(ConvertToJung(prevChar)), 
+                                GetJong(ch));
+                koreanChar = ConvertUnicodeToKorean(koreanChar);
+
+                if (koreanChar == 0xffff || GetJong(ch) == 0xff)
+                {
+                    state = STATE_JAUM;
+
+                    if (index == gNamingScreenData->template->maxChars * 2)
+                        return;
+
+                    gNamingScreenData->textBuffer[index++] = 0x41;
+                    gNamingScreenData->textBuffer[index] = ch;
+                }
+                else
+                {
+                    index -= 2;
+                    gNamingScreenData->textBuffer[index++] = (koreanChar & 0xff00) >> 8;
+                    gNamingScreenData->textBuffer[index] = koreanChar & 0xff;
+                    
+                    // 자음 조합 가능 여부에 따른 분기
+                    if (ch == 0x01 || ch == 0x03 || ch == 0x06 || ch == 0x08)
+                        state = STATE_JAUM_2_MERGEABLE;
+                    else
+                        state = STATE_JAUM_2;
+                }
+            }
+            break;
+        }
+        /* 4 - STATE_JAUM_2_MERGEABLE : 자음 입력 상태(자음 조합가능) */
+        case STATE_JAUM_2_MERGEABLE:
+        {
+            if (CheckJaum(ch))
+            {
+                /* 자음을 입력했을 경우 */
+                if (MergeJaum(ConvertToJong(prevChar), ch) == FALSE)
+                {
+                    /* 조합이 불가능할 경우  */
+                    state = STATE_JAUM;
+
+                    if (index == gNamingScreenData->template->maxChars * 2)
+                        return;
+
+                    gNamingScreenData->textBuffer[index++] = 0x41;
+                    gNamingScreenData->textBuffer[index] = ch;
+                }
+                else
+                {
+                    koreanChar = GetKorean(
+                                    GetCho(ConvertToCho(prevChar)), 
+                                    GetJung(ConvertToJung(prevChar)), 
+                                    MergeJaum(ConvertToJong(prevChar), ch));
+                    koreanChar = ConvertUnicodeToKorean(koreanChar);
+
+                    if (koreanChar == 0xffff)
+                    {
+                        state = STATE_NONE;
+
+                        if (index == gNamingScreenData->template->maxChars * 2)
+                            return;
+
+                        gNamingScreenData->textBuffer[index++] = 0x41;
+                        gNamingScreenData->textBuffer[index] = ch;
+                    }
+                    else
+                    {
+                        index -= 2;
+                        gNamingScreenData->textBuffer[index++] = (koreanChar & 0xff00) >> 8;
+                        gNamingScreenData->textBuffer[index] = koreanChar & 0xff;
+                        state = STATE_MERGED_JAUM;
+                    }
+                }
+            }
+            else
+            {
+                /* 자음 미입력일 경우 */
+                if (index == gNamingScreenData->template->maxChars * 2)
+                    return;
+
+                // 이전 글자에서 종성만 제거
+                koreanChar = GetKorean(
+                                GetCho(ConvertToCho(prevChar)), 
+                                GetJung(ConvertToJung(prevChar)), 
+                                0);
+
+                index -= 2;
+                gNamingScreenData->textBuffer[index++] = (koreanChar & 0xff00) >> 8;
+                gNamingScreenData->textBuffer[index++] = koreanChar & 0xff;
+
+                // 새 글자
+                koreanChar = GetKorean(
+                                GetCho(ConvertToCho(prevChar)), 
+                                GetJung(ch), 
+                                0);
+                koreanChar = ConvertUnicodeToKorean(koreanChar);
+
+                if (koreanChar == 0xffff)
+                {
+                    state = STATE_NONE;
+                    gNamingScreenData->textBuffer[index++] = 0x41;
+                    gNamingScreenData->textBuffer[index] = ch;
+                }
+                else
+                {
+                    gNamingScreenData->textBuffer[index++] = (koreanChar & 0xff00) >> 8;
+                    gNamingScreenData->textBuffer[index] = koreanChar & 0xff;
+
+                    // 모음 조합가능 여부에 따른 분기
+                    if (ch == 0x1c || ch == 0x21 || ch == 0x26)
+                        state = STATE_MOUM_MERGEABLE;
+                    else
+                        state = STATE_MOUM;
+                }
+            }
+            break;
+        }        
+        /* 5 - STATE_JAUM_2 : 자음 입력 상태(모음 조합 가능) */
+        case STATE_JAUM_2:
+        {
+            if (CheckJaum(ch))
+            {
+                state = STATE_JAUM;
+
+                if (index == gNamingScreenData->template->maxChars * 2)
+                    return;
+
+                gNamingScreenData->textBuffer[index++] = 0x41;
+                gNamingScreenData->textBuffer[index] = ch;
+            }
+            else
+            {
+                if (index == gNamingScreenData->template->maxChars * 2)
+                    return;
+
+                // 이전 글자에서 종성만 제거
+                koreanChar = GetKorean(
+                                GetCho(ConvertToCho(prevChar)), 
+                                GetJung(ConvertToJung(prevChar)), 
+                                0);
+
+                index -= 2;
+                gNamingScreenData->textBuffer[index++] = (koreanChar & 0xff00) >> 8;
+                gNamingScreenData->textBuffer[index] = koreanChar & 0xff;
+                
+                // 새 글자
+                koreanChar = GetKorean(
+                                GetCho(ConvertToCho(prevChar)), 
+                                GetJung(ch), 
+                                0);
+                koreanChar = ConvertUnicodeToKorean(koreanChar);
+
+                if (koreanChar == 0xffff)
+                {
+                    state = STATE_NONE;
+                    gNamingScreenData->textBuffer[index++] = 0x41;
+                    gNamingScreenData->textBuffer[index] = ch;
+                }
+                else
+                {
+                    gNamingScreenData->textBuffer[index++] = (koreanChar & 0xff00) >> 8;
+                    gNamingScreenData->textBuffer[index] = koreanChar & 0xff;
+
+                    // 모음 조합가능 여부에 따른 분기
+                    if (ch == 0x1c || ch == 0x21 || ch == 0x26)
+                        state = STATE_MOUM_MERGEABLE;
+                    else
+                        state = STATE_MOUM;
+                }
+            }
+            break;
+        }
+        /* 6 - STATE_MERGED_JAUM : 이중 자음 입력상태 */
+        case STATE_MERGED_JAUM:
+        {
+            if (CheckJaum(ch))
+            {
+                state = STATE_JAUM;
+
+                if (index == gNamingScreenData->template->maxChars * 2)
+
+                gNamingScreenData->textBuffer[index++] = 0x41;
+                gNamingScreenData->textBuffer[index] = ch;
+            }
+            else
+            {
+                if (index == gNamingScreenData->template->maxChars * 2)
+                    return;
+                
+                // 이전 글자에서 종성만 제거
+                koreanChar = GetKorean(
+                                GetCho(ConvertToCho(prevChar)), 
+                                GetJung(ConvertToJung(prevChar)), 
+                                SplitJong(ConvertToJongIndex(prevChar), 0));
+
+                index -= 2;
+                gNamingScreenData->textBuffer[index++] = (koreanChar & 0xff00) >> 8;
+                gNamingScreenData->textBuffer[index++] = koreanChar & 0xff;
+                
+                // 새 글자
+                koreanChar = GetKorean(
+                                GetCho(ConvertJongToCho(SplitJong(ConvertToJongIndex(prevChar), 1))), 
+                                GetJung(ch), 
+                                0);
+                koreanChar = ConvertUnicodeToKorean(koreanChar);
+
+                if (koreanChar == 0xffff)
+                {
+                    state = STATE_NONE;
+                    gNamingScreenData->textBuffer[index++] = 0x41;
+                    gNamingScreenData->textBuffer[index] = ch;
+                }
+                else
+                {
+                    gNamingScreenData->textBuffer[index++] = (koreanChar & 0xff00) >> 8;
+                    gNamingScreenData->textBuffer[index] = koreanChar & 0xff;
+
+                    // 모음 조합가능 여부에 따른 분기
+                    if (ch == 0x1c || ch == 0x21 || ch == 0x26)
+                        state = STATE_MOUM_MERGEABLE;
+                    else
+                        state = STATE_MOUM;
+                }
+            }
+            break;
+        }
+        }
+    }
+
+    gNamingScreenData->koreanState = state;
 }
 
 static void sub_80E4BE4(void)
 {
-    u8 i;
+    u8 i, j;
 
-    for (i = 0; i < gNamingScreenData->template->maxChars; i++)
+    for (i = 0, j = 0; gNamingScreenData->textBuffer[i] != EOS; i += 2)
     {
-        if (gNamingScreenData->textBuffer[i] != CHAR_SPACE && gNamingScreenData->textBuffer[i] != EOS)
+        if (gNamingScreenData->textBuffer[i] == 0)
         {
-            StringCopyN(gNamingScreenData->destBuffer, gNamingScreenData->textBuffer, gNamingScreenData->template->maxChars + 1);
-            break;
+            gNamingScreenData->destBuffer[j] = gNamingScreenData->textBuffer[i + 1];
+            j++;
+        } else
+        {
+            gNamingScreenData->destBuffer[j++] = gNamingScreenData->textBuffer[i];
+            gNamingScreenData->destBuffer[j++] = gNamingScreenData->textBuffer[i + 1];
         }
     }
+
+    gNamingScreenData->destBuffer[j] = EOS;
+
+    for (i = 0; gNamingScreenData->destBuffer[i] != EOS; i++)
+    {
+        if (gNamingScreenData->destBuffer[i] != EOS)
+            j++;
+    }
+
+    if (j == 0)
+        StringCopy(gNamingScreenData->destBuffer, gNamingScreenData->backupBuffer);
 }
 
 static void choose_name_or_words_screen_load_bg_tile_patterns(void)
@@ -1667,26 +2185,34 @@ static void nullsub_10(u8 a1, u8 a2)
 static void sub_80E4D10(void)
 {
     u8 i;
-    u8 temp[2];
-    u16 unk2;
+    u8 temp[3];
     u8 maxChars = gNamingScreenData->template->maxChars;
     u16 unk = gNamingScreenData->inputCharBaseXPos - 0x40;
 
-    FillWindowPixelBuffer(gNamingScreenData->windows[2], PIXEL_FILL(1));
+    FillWindowPixelBuffer(gNamingScreenData->windows[2], 0x11);
 
-    for (i = 0; i < maxChars; i++)
+    for (i = 0; i < sizeof(gNamingScreenData->textBuffer); i += 2)
     {
-        temp[0] = gNamingScreenData->textBuffer[i];
-        temp[1] = gExpandedPlaceholder_Empty[0];
-        unk2 = (sub_80E503C(temp[0]) == 1) ? 2 : 0;
-
-        AddTextPrinterParameterized(gNamingScreenData->windows[2], 1, temp, i * 8 + unk + unk2, 1, 0xFF, NULL);
+		if (gNamingScreenData->textBuffer[i] == 0)
+		{
+			temp[0] = gNamingScreenData->textBuffer[i + 1];
+			temp[1] = gExpandedPlaceholder_Empty[0];
+			temp[2] = gExpandedPlaceholder_Empty[0];
+		} else
+		{
+			temp[0] = gNamingScreenData->textBuffer[i];
+			temp[1] = gNamingScreenData->textBuffer[i + 1];
+			temp[2] = gExpandedPlaceholder_Empty[0];
+		}
+	
+        AddTextPrinterParameterized(gNamingScreenData->windows[2], 7, temp, i * 4 + unk, 1, 0xFF, NULL);
     }
 
     sub_80E498C();
     CopyWindowToVram(gNamingScreenData->windows[2], 2);
     PutWindowTilemap(gNamingScreenData->windows[2]);
 }
+
 
 struct TextColorThing   // needed because of alignment... it's so stupid
 {
@@ -1853,7 +2379,7 @@ static void sub_80E50EC(void)
 static const struct NamingScreenTemplate playerNamingScreenTemplate =
 {
     .copyExistingString = 0,
-    .maxChars = 7,
+    .maxChars = 3,
     .iconFunction = 1,
     .addGenderIcon = 0,
     .initialPage = 1,
@@ -1875,7 +2401,7 @@ static const struct NamingScreenTemplate pcBoxNamingTemplate =
 static const struct NamingScreenTemplate monNamingScreenTemplate =
 {
     .copyExistingString = 0,
-    .maxChars = 10,
+    .maxChars = 5,
     .iconFunction = 3,
     .addGenderIcon = 1,
     .initialPage = 1,
@@ -1886,7 +2412,7 @@ static const struct NamingScreenTemplate monNamingScreenTemplate =
 static const struct NamingScreenTemplate wandaWordsScreenTemplate =
 {
     .copyExistingString = 1,
-    .maxChars = 15,
+    .maxChars = 8,
     .iconFunction = 4,
     .addGenderIcon = 0,
     .initialPage = 1,
