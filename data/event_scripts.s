@@ -1717,20 +1717,20 @@ Route109_EventScript_271E95:: @ 8271E95
 EventScript_UseSurf:: @ 8271EA0
 	checkpartymove MOVE_SURF
 	compare VAR_RESULT, 6
-	goto_if_eq EventScript_271ED6
+	goto_if_eq EventScript_CantSurf
 	bufferpartymonnick 0, VAR_RESULT
 	setfieldeffectargument 0, VAR_RESULT
 	lockall
-	msgbox gUnknown_08272FD6, MSGBOX_YESNO
+	msgbox gText_WantToUseSurf, MSGBOX_YESNO
 	compare VAR_RESULT, 0
-	goto_if_eq EventScript_271ED5
-	msgbox gUnknown_0827300D, MSGBOX_DEFAULT
+	goto_if_eq EventScript_CancelSurf
+	msgbox gText_PlayerUsedSurf, MSGBOX_DEFAULT
 	dofieldeffect FLDEFF_USE_SURF
 
-EventScript_271ED5:: @ 8271ED5
+EventScript_CancelSurf:: @ 8271ED5
 	releaseall
 
-EventScript_271ED6:: @ 8271ED6
+EventScript_CantSurf:: @ 8271ED6
 	end
 
 Common_EventScript_SetupRivalGender:: @ 8271ED7
