@@ -1,7 +1,7 @@
 #include "global.h"
-#include "ereader.h"
 #include "event_obj_lock.h"
 #include "event_object_movement.h"
+#include "faraway_island.h"
 #include "field_camera.h"
 #include "field_effect.h"
 #include "field_player_avatar.h"
