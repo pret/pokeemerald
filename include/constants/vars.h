@@ -74,7 +74,7 @@
 #define VAR_UNUSUAL_WEATHER_LOCATION         0x4037
 #define VAR_UNUSUAL_WEATHER_STEP_COUNTER     0x4038
 #define VAR_SHOULD_END_UNUSUAL_WEATHER       0x4039
-#define VAR_NEVER_READ_0x403A                0x403A // Var is written to, but never checked
+#define VAR_FARAWAY_ISLAND_STEP_COUNTER      0x403A
 #define VAR_REGICE_STEPS_1                   0x403B
 #define VAR_REGICE_STEPS_2                   0x403C
 #define VAR_REGICE_STEPS_3                   0x403D

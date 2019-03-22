@@ -291,8 +291,9 @@ SECTIONS {
         src/pokenav_match_call.o(.text);
         src/menu_specialized.o(.text);
         asm/menu_specialized.o(.text);
-        src/ereader.o(.text);
-        asm/ereader.o(.text);
+        src/ereader_helpers.o(.text);
+        src/faraway_island.o(.text);
+        src/ereader_screen.o(.text);
         src/trainer_hill.o(.text);
         src/rayquaza_scene.o(.text);
         src/walda_phrase.o(.text);
@@ -597,7 +598,9 @@ SECTIONS {
         src/pokenav_match_call.o(.rodata);
         src/menu_specialized.o(.rodata);
         data/menu_specialized.o(.rodata);
-        data/ereader.o(.rodata);
+        data/ereader_helpers.o(.rodata);
+        src/faraway_island.o(.rodata);
+        data/ereader_screen.o(.rodata);
         src/trainer_hill.o(.rodata);
         src/rayquaza_scene.o(.rodata);
         src/walda_phrase.o(.rodata);
