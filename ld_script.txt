@@ -292,7 +292,6 @@ SECTIONS {
         src/menu_specialized.o(.text);
         asm/menu_specialized.o(.text);
         src/ereader.o(.text);
-        asm/ereader.o(.text);
         src/trainer_hill.o(.text);
         src/rayquaza_scene.o(.text);
         src/walda_phrase.o(.text);
