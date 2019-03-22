@@ -159,7 +159,7 @@ static void sub_8122804(struct EasyChatPair *s, u16 b, u8 c)
     }
 }
 
-void ReceiveEasyChatPairsData(void *a, u32 b, u8 unused)
+void ReceiveEasyChatPairsData(struct EasyChatPair *a, size_t size, u8 unused)
 {
     u16 i, j, r3, players;
     struct EasyChatPair *buffer1, *buffer2, *src, *dst, *foo_of_buffer2;
@@ -176,7 +176,7 @@ void ReceiveEasyChatPairsData(void *a, u32 b, u8 unused)
         {
             players = GetLinkPlayerCount();
             for (i = 0; i < players; i++)
-                memcpy(&(buffer1[i * 5]), (u8 *)a + i * b, 40);
+                memcpy(&(buffer1[i * 5]), (u8 *)a + i * size, 40);
             src = buffer1;
             dst = buffer2;
             r3 = 0;

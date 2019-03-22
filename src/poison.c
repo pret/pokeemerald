@@ -3,8 +3,6 @@
 #include "trig.h"
 #include "constants/rgb.h"
 
-extern void sub_80A77C8(struct Sprite *);
-
 void sub_810DBAC(struct Sprite *);
 void sub_810DC2C(struct Sprite *);
 void sub_810DCD0(struct Sprite *);

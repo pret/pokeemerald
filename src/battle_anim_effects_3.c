@@ -24,9 +24,6 @@
 #include "constants/species.h"
 #include "constants/weather.h"
 
-extern u8 sub_807521C(s16 x, s16 y, u8 a3);
-extern void sub_810E2C8(struct Sprite *);
-
 extern const struct SpriteTemplate gUnknown_08593114;
 extern const union AffineAnimCmd *const gUnknown_082FF6C0[];
 extern const union AffineAnimCmd *const gUnknown_082FF694[];

@@ -32,8 +32,7 @@
 #include "constants/map_types.h"
 #include "constants/maps.h"
 #include "constants/songs.h"
-
-extern bool32 TryStartMatchCall(void);
+#include "match_call.h"
 
 static EWRAM_DATA u8 sWildEncounterImmunitySteps = 0;
 static EWRAM_DATA u16 sPreviousPlayerMetatileBehavior = 0;

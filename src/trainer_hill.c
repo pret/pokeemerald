@@ -3,6 +3,7 @@
 #include "battle.h"
 #include "battle_tower.h"
 #include "battle_setup.h"
+#include "ereader.h"
 #include "event_data.h"
 #include "event_scripts.h"
 #include "fieldmap.h"
@@ -31,8 +32,6 @@
 #include "constants/trainers.h"
 #include "constants/easy_chat.h"
 #include "constants/trainer_hill.h"
-
-extern bool32 sub_81D3B34(void);
 
 #define HILL_TAG_NORMAL 0
 #define HILL_TAG_VARIETY 1

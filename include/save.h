@@ -92,4 +92,7 @@ u32 TryCopySpecialSaveSection(u8 sector, u8* dst);
 u32 sub_8153634(u8 sector, u8* src);
 void sub_8153688(u8 taskId);
 
+// save_failed_screen.c
+void DoSaveFailedScreen(u8 saveType);
+
 #endif // GUARD_SAVE_H

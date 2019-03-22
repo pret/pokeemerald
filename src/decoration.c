@@ -392,7 +392,9 @@ const struct SpritePalette gUnknown_085A73E0 = {
 };
 
 const struct OamData Unknown_085A73E8 = {
-    .size = 1, .priority = 1
+    .shape = SPRITE_SHAPE(16x16),
+    .size = SPRITE_SIZE(16x16),
+    .priority = 1
 };
 
 const union AnimCmd Unknown_085A73F0[] = {
@@ -939,7 +941,7 @@ void sub_812764C(u8 taskId)
         {
             case LIST_NOTHING_CHOSEN:
                 break;
-            case LIST_B_PRESSED:
+            case LIST_CANCEL:
                 PlaySE(SE_SELECT);
                 SecretBasePC_SelectedDecorActions[data[11]][1](taskId);
                 break;

@@ -18,8 +18,6 @@
 #include "constants/items.h"
 #include "constants/maps.h"
 
-extern bool32 sub_800B504(void);
-
 // this file's functions
 static void Task_ContinueTaskAfterMessagePrints(u8 taskId);
 static void Task_CallYesOrNoCallback(u8 taskId);
@@ -39,10 +37,10 @@ static const struct OamData sOamData_859F4E8 =
     .objMode = 0,
     .mosaic = 0,
     .bpp = 0,
-    .shape = 0,
+    .shape = SPRITE_SHAPE(16x16),
     .x = 0,
     .matrixNum = 0,
-    .size = 1,
+    .size = SPRITE_SIZE(16x16),
     .tileNum = 0,
     .priority = 0,
     .paletteNum = 0,

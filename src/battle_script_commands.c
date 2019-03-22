@@ -49,16 +49,12 @@
 #include "battle_pyramid.h"
 #include "field_specials.h"
 #include "pokemon_summary_screen.h"
+#include "pokenav.h"
+#include "menu_specialized.h"
 
 extern struct MusicPlayerInfo gMPlayInfo_BGM;
 
 extern const u8* const gBattleScriptsForMoveEffects[];
-
-// functions
-extern void sub_81D388C(struct Pokemon* mon, void* statStoreLocation); // pokenav.s
-extern void sub_81D3640(u16 arg0, void* statStoreLocation1, void* statStoreLocation2, u8 arg3, u8 arg4, u8 arg5); // pokenav.s
-extern void sub_81D3784(u16 arg0, void* statStoreLocation1, u8 arg2, u8 arg3, u8 arg4); // pokenav.s
-extern u8 sub_813B21C(void);
 
 // this file's functions
 static bool8 IsTwoTurnsMove(u16 move);
@@ -710,10 +706,10 @@ static const struct OamData sOamData_MonIconOnLvlUpBox =
     .objMode = 0,
     .mosaic = 0,
     .bpp = 0,
-    .shape = 0,
+    .shape = SPRITE_SHAPE(32x32),
     .x = 0,
     .matrixNum = 0,
-    .size = 2,
+    .size = SPRITE_SIZE(32x32),
     .tileNum = 0,
     .priority = 0,
     .paletteNum = 0,
@@ -5960,16 +5956,16 @@ static void sub_804F100(void)
 {
     struct StatsArray currentStats;
 
-    sub_81D388C(&gPlayerParty[gBattleStruct->expGetterMonId], &currentStats);
-    sub_81D3640(0xD, gBattleResources->statsBeforeLvlUp, &currentStats, 0xE, 0xD, 0xF);
+    GetMonLevelUpWindowStats(&gPlayerParty[gBattleStruct->expGetterMonId], &currentStats);
+    DrawLevelUpWindowPg1(0xD, gBattleResources->statsBeforeLvlUp, &currentStats, 0xE, 0xD, 0xF);
 }
 
 static void sub_804F144(void)
 {
     struct StatsArray currentStats;
 
-    sub_81D388C(&gPlayerParty[gBattleStruct->expGetterMonId], &currentStats);
-    sub_81D3784(0xD, &currentStats, 0xE, 0xD, 0xF);
+    GetMonLevelUpWindowStats(&gPlayerParty[gBattleStruct->expGetterMonId], &currentStats);
+    DrawLevelUpWindowPg2(0xD, &currentStats, 0xE, 0xD, 0xF);
 }
 
 static void sub_804F17C(void)

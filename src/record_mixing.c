@@ -34,9 +34,8 @@
 #include "daycare.h"
 #include "international_string_util.h"
 #include "constants/battle_frontier.h"
+#include "dewford_trend.h"
 
-extern void ReceiveSecretBasesData(struct SecretBaseRecord *, size_t, u8);
-extern void ReceiveEasyChatPairsData(struct EasyChatPair *, size_t, u8);
 
 // Static type declarations
 

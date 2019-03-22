@@ -55,8 +55,6 @@ extern struct MusicPlayerInfo gMPlayInfo_BGM;
 extern const struct CompressedSpriteSheet gMonFrontPicTable[];
 extern const u16 gUnknown_0860F074[];
 
-extern bool8 sub_81221EC(void);
-
 // this file's functions
 static void HandleInitBackgrounds(void);
 static void HandleInitWindows(void);
@@ -465,10 +463,10 @@ static const struct OamData sThrownPokeblockOamData =
     .objMode = 0,
     .mosaic = 0,
     .bpp = 0,
-    .shape = 0,
+    .shape = SPRITE_SHAPE(8x8),
     .x = 0,
     .matrixNum = 0,
-    .size = 0,
+    .size = SPRITE_SIZE(8x8),
     .tileNum = 0,
     .priority = 1,
     .paletteNum = 0,

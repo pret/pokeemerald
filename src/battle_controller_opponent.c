@@ -32,13 +32,11 @@
 #include "constants/moves.h"
 #include "constants/songs.h"
 #include "constants/trainers.h"
+#include "trainer_hill.h"
 
 extern struct MusicPlayerInfo gMPlayInfo_BGM;
 
 extern const struct CompressedSpritePalette gTrainerFrontPicPaletteTable[];
-
-extern void sub_8172EF0(u8 battlerId, struct Pokemon *mon);
-extern u8 GetTrainerHillTrainerFrontSpriteId(u16 trainerId);
 
 // this file's functions
 static void OpponentHandleGetMonData(void);
