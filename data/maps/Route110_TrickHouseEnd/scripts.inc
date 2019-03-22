@@ -45,7 +45,7 @@ Route110_TrickHouseEnd_EventScript_26AD17:: @ 826AD17
 	faceplayer
 	msgbox Route110_TrickHouseEnd_Text_26B08D, MSGBOX_DEFAULT
 	setvar VAR_TEMP_2, 1
-	switch VAR_0x4044
+	switch VAR_TRICK_HOUSE_LEVEL
 	case 0, Route110_TrickHouseEnd_EventScript_26AD84
 	case 1, Route110_TrickHouseEnd_EventScript_26ADC0
 	case 2, Route110_TrickHouseEnd_EventScript_26ADFC
@@ -196,7 +196,7 @@ Route110_TrickHouseEnd_EventScript_26AFCF:: @ 826AFCF
 	applymovement 1, Route110_TrickHouseEnd_Movement_269E3F
 	waitmovement 0
 	removeobject 1
-	addvar VAR_0x4044, 1
+	addvar VAR_TRICK_HOUSE_LEVEL, 1
 	return
 
 Route110_TrickHouseEnd_EventScript_26AFEF:: @ 826AFEF
