@@ -6279,8 +6279,9 @@ BattleScript_AngryPointActivates::
 	return
 	
 BattleScript_TargetAbilityStatRaise::
-	setgraphicalstatchangevalues
 	call BattleScript_AbilityPopUp
+	statbuffchange STAT_CHANGE_NOT_PROTECT_AFFECTED | MOVE_EFFECT_CERTAIN, NULL
+	setgraphicalstatchangevalues
 	playanimation BS_TARGET, B_ANIM_STATS_CHANGE, sB_ANIM_ARG1
 	waitanimation
 	printstring STRINGID_TARGETABILITYSTATRAISE

@@ -3132,9 +3132,8 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
              && TARGET_TURN_DAMAGED
              && IsBattlerAlive(battler)
              && moveType == TYPE_DARK
-             && gBattleMons[battler].statStages[STAT_ATK] != 0xC)
+             && gBattleMons[battler].statStages[STAT_ATK] != 12)
             {
-                gBattleMons[battler].statStages[STAT_ATK]++;
                 SET_STATCHANGER(STAT_ATK, 1, FALSE);
                 BattleScriptPushCursor();
                 gBattlescriptCurrInstr = BattleScript_TargetAbilityStatRaise;
@@ -3146,9 +3145,8 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
              && TARGET_TURN_DAMAGED
              && IsBattlerAlive(battler)
              && (moveType == TYPE_DARK || moveType == TYPE_BUG || moveType == TYPE_GHOST)
-             && gBattleMons[battler].statStages[STAT_SPEED] != 0xC)
+             && gBattleMons[battler].statStages[STAT_SPEED] != 12)
             {
-                gBattleMons[battler].statStages[STAT_SPEED]++;
                 SET_STATCHANGER(STAT_SPEED, 1, FALSE);
                 BattleScriptPushCursor();
                 gBattlescriptCurrInstr = BattleScript_TargetAbilityStatRaise;
@@ -3159,7 +3157,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
             if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
              && TARGET_TURN_DAMAGED
              && IsBattlerAlive(battler)
-             && (gBattleMons[battler].statStages[STAT_SPEED] != 0xC || gBattleMons[battler].statStages[STAT_DEF] != 0))
+             && (gBattleMons[battler].statStages[STAT_SPEED] != 12 || gBattleMons[battler].statStages[STAT_DEF] != 0))
             {
                 BattleScriptPushCursor();
                 gBattlescriptCurrInstr = BattleScript_WeakArmorActivates;
