@@ -4011,8 +4011,9 @@ static void atk46_playanimation2(void) // animation Id is stored in the first po
 
 static void atk47_setgraphicalstatchangevalues(void)
 {
-    u8 value = 0;
-    switch (GET_STAT_BUFF_VALUE_WITH_SIGN(gBattleScripting.statChanger))
+    u8 value = GET_STAT_BUFF_VALUE_WITH_SIGN(gBattleScripting.statChanger);
+
+    switch (value)
     {
     case SET_STAT_BUFF_VALUE(1): // +1
         value = STAT_ANIM_PLUS1;
@@ -4031,6 +4032,12 @@ static void atk47_setgraphicalstatchangevalues(void)
         break;
     case SET_STAT_BUFF_VALUE(3) | STAT_BUFF_NEGATIVE: // -3
         value = STAT_ANIM_MINUS2;
+        break;
+    default: // <-12,-4> and <4, 12>
+        if (value & STAT_BUFF_NEGATIVE)
+            value = STAT_ANIM_MINUS2;
+        else
+            value = STAT_ANIM_PLUS2;
         break;
     }
     gBattleScripting.animArg1 = GET_STAT_BUFF_ID(gBattleScripting.statChanger) + value - 1;

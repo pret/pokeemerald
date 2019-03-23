@@ -3214,9 +3214,9 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
              && gIsCriticalHit
              && TARGET_TURN_DAMAGED
              && IsBattlerAlive(battler)
-             && gBattleMons[battler].statStages[STAT_ATK] != 0xC)
+             && gBattleMons[battler].statStages[STAT_ATK] != 12)
             {
-                gBattleMons[battler].statStages[STAT_ATK] = 0xC;
+                SET_STATCHANGER(STAT_ATK, 12 - gBattleMons[battler].statStages[STAT_ATK], FALSE);
                 BattleScriptPushCursor();
                 gBattlescriptCurrInstr = BattleScript_AngryPointActivates;
                 effect++;

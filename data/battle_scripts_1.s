@@ -6270,9 +6270,9 @@ BattleScript_MummyActivates::
 	return
 	
 BattleScript_AngryPointActivates::
-	setbyte sB_ANIM_ARG1 0x38
-	setbyte sB_ANIM_ARG2 0x0
 	call BattleScript_AbilityPopUp
+	statbuffchange STAT_CHANGE_NOT_PROTECT_AFFECTED | MOVE_EFFECT_CERTAIN, NULL
+	setgraphicalstatchangevalues
 	playanimation BS_TARGET, B_ANIM_STATS_CHANGE, sB_ANIM_ARG1
 	printstring STRINGID_ANGRYPOINTACTIVATES
 	waitmessage 0x40

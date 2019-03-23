@@ -707,7 +707,7 @@ static void Task_DebugMenuProcessInput(u8 taskId)
     if (data->activeWindow == ACTIVE_WIN_MAIN)
     {
         listItemId = ListMenu_ProcessInput(data->mainListTaskId);
-        if (listItemId != LIST_B_PRESSED && listItemId != LIST_NOTHING_CHOSEN && listItemId < LIST_ITEM_COUNT)
+        if (listItemId != LIST_CANCEL && listItemId != LIST_NOTHING_CHOSEN && listItemId < LIST_ITEM_COUNT)
         {
             data->currentMainListItemId = listItemId;
 
@@ -721,7 +721,7 @@ static void Task_DebugMenuProcessInput(u8 taskId)
     else if (data->activeWindow == ACTIVE_WIN_SECONDARY)
     {
         listItemId = ListMenu_ProcessInput(data->secondaryListTaskId);
-        if (listItemId == LIST_B_PRESSED)
+        if (listItemId == LIST_CANCEL)
         {
             DestroyListMenuTask(data->secondaryListTaskId, NULL, NULL);
             ClearStdWindowAndFrameToTransparent(data->secondaryListWindowId, TRUE);
