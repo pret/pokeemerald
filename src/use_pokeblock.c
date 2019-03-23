@@ -62,8 +62,10 @@ struct UsePokeblockStruct
     /*0x7B44*/ struct Sprite *field_7B44[0x45];
     /*0x7C58*/ struct UnknownStruct_81D1ED4 field_7C58;
     /*0x7FB0*/ u8 unk7FB0[3];
-    /*0x7FB3*/ s8 unk7FB3;
-    /*0x7FB4*/ u8 filler7FB4[0x4];
+    /*0x7FB3*/ s8 field_7FB3;
+    /*0x7FB4*/ s8 field_7FB4;
+    /*0x7FB5*/ s8 field_7FB5;
+    /*0x7FB6*/ u8 filler7FB6[0x2];
     /*0x7FB8*/ struct Unk7FB8 field_7FB8[6];
     /*0x7FD0*/ struct UsePokeblockSubStruct info;
     /*0x804C*/ u8 filler804C[0x20];
@@ -322,7 +324,7 @@ void sub_8166564(void)
             sub_81D3464(gUnknown_0203BCAC->field_7B1C);
             if (gUnknown_0203BCAC->info.field_71 != gUnknown_0203BCAC->info.field_70 - 1)
             {
-                u8 var0 = gUnknown_0203BCAC->unk7FB0[gUnknown_0203BCAC->unk7FB3];
+                u8 var0 = gUnknown_0203BCAC->unk7FB0[gUnknown_0203BCAC->field_7FB3];
                 sub_81D3480(gUnknown_0203BCAC->field_7B1C, gUnknown_0203BCAC->field_7B10, var0);
             }
 
@@ -1123,7 +1125,6 @@ void sub_8167420(void)
     sub_81674BC();
 }
 
-#ifdef NONMATCHING
 void sub_81674BC(void)
 {
     s16 var;
@@ -1133,87 +1134,17 @@ void sub_81674BC(void)
     gUnknown_0203BCAC->field_7FB3 = 0;
     gUnknown_0203BCAC->field_7FB4 = 1;
     gUnknown_0203BCAC->field_7FB5 = 2;
-    
     var = gUnknown_0203BCAC->info.field_71 + 1;
-    
-    if(var >= gUnknown_0203BCAC->info.field_70)
-    {
+    if (var >= gUnknown_0203BCAC->info.field_70)
         var = 0;
-        
-    }
     
-    var2 = var - 1;
-    
-    if(var2 < 0)
-        {
-            var2 = gUnknown_0203BCAC->info.field_70 - 1;
-        }
+    var2 = gUnknown_0203BCAC->info.field_71 - 1;
+    if (var2 < 0)
+        var2 = gUnknown_0203BCAC->info.field_70 - 1;
     
     sub_816753C(var, 1);
     sub_816753C(var2, 2);
 }
-#else
-NAKED
-void sub_81674BC(void)
-{
-    asm(".syntax unified\n\
-    push {r4,r5,lr}\n\
-    ldr r4, =gUnknown_0203BCAC\n\
-    ldr r0, [r4]\n\
-    ldr r5, =0x00008041\n\
-    adds r0, r5\n\
-    ldrb r0, [r0]\n\
-    movs r1, 0\n\
-    bl sub_816753C\n\
-    ldr r0, [r4]\n\
-    ldr r1, =0x00007fb3\n\
-    adds r0, r1\n\
-    movs r1, 0\n\
-    strb r1, [r0]\n\
-    ldr r0, [r4]\n\
-    ldr r2, =0x00007fb4\n\
-    adds r0, r2\n\
-    movs r1, 0x1\n\
-    strb r1, [r0]\n\
-    ldr r0, [r4]\n\
-    ldr r1, =0x00007fb5\n\
-    adds r0, r1\n\
-    movs r1, 0x2\n\
-    strb r1, [r0]\n\
-    ldr r0, [r4]\n\
-    adds r5, r0, r5\n\
-    ldrb r3, [r5]\n\
-    adds r1, r3, 0x1\n\
-    adds r2, 0x8C\n\
-    adds r0, r2\n\
-    ldrb r2, [r0]\n\
-    cmp r1, r2\n\
-    blt _08167500\n\
-    movs r1, 0\n\
-_08167500:\n\
-    subs r0, r3, 0x1\n\
-    lsls r0, 16\n\
-    lsrs r4, r0, 16\n\
-    cmp r0, 0\n\
-    bge _08167510\n\
-    subs r0, r2, 0x1\n\
-    lsls r0, 16\n\
-    lsrs r4, r0, 16\n\
-_08167510:\n\
-    adds r0, r1, 0\n\
-    movs r1, 0x1\n\
-    bl sub_816753C\n\
-    lsls r0, r4, 16\n\
-    asrs r0, 16\n\
-    movs r1, 0x2\n\
-    bl sub_816753C\n\
-    pop {r4,r5}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .pool\n\
-    .syntax divided\n");
-}
-#endif
 
 #ifdef NONMATCHING
 void sub_816753C(s16 a1, u8 a2)
