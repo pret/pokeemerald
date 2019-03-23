@@ -230,7 +230,6 @@ bool8 IsLinkMaster(void);
 void CB2_LinkError(void);
 u8 GetSioMultiSI(void);
 bool8 IsLinkConnectionEstablished(void);
-void SetSuppressLinkErrorMessage(bool8);
 bool8 HasLinkErrorOccurred(void);
 void ResetSerial(void);
 u32 LinkMain1(u8 *shouldAdvanceLinkState, u16 *sendCmd, u16 (*recvCmds)[CMD_LENGTH]);

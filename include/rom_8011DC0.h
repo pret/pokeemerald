@@ -20,4 +20,8 @@ bool32 sub_802C908(u16);
 void nullsub_89(u8 taskId);
 void var_800D_set_xB(void);
 
+bool32 mevent_0814257C(u8 *textState, const u8 *str);
+void sub_8018884(const u8 *src);
+void sub_80186A4(void);
+
 #endif //GUARD_rom_8011DC0_H

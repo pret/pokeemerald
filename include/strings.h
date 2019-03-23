@@ -2563,4 +2563,24 @@ extern const u8 gUnknown_0862BAC4[];
 extern const u8 gUnknown_0862BACF[];
 extern const u8 gUnknown_0862BADA[];
 
+// E-Reader
+extern const u8 gUnknown_085EDFD6[];
+extern const u8 gUnknown_085EDFF5[];
+extern const u8 gUnknown_085EE014[];
+extern const u8 gUnknown_085EE035[];
+extern const u8 gUnknown_085EE05C[];
+extern const u8 gUnknown_085EE06B[];
+extern const u8 gUnknown_085EE080[];
+extern const u8 gUnknown_085EE097[];
+extern const u8 gUnknown_085EE0A3[];
+extern const u8 gUnknown_085EE0BF[];
+extern const u8 gUnknown_085EE0DC[];
+extern const u8 gUnknown_085EE0FA[];
+extern const u8 gUnknown_085EE107[];
+extern const u8 gUnknown_085EE120[];
+extern const u8 gUnknown_085EE12D[];
+extern const u8 gUnknown_085EE14B[];
+extern const u8 gUnknown_085EE14F[];
+extern const u8 gUnknown_085EE154[];
+
 #endif // GUARD_STRINGS_H

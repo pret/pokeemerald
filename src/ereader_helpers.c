@@ -1,15 +1,14 @@
 #include "global.h"
 #include "alloc.h"
-#include "event_object_movement.h"
+#include "decompress.h"
+#include "ereader_helpers.h"
 #include "link.h"
+#include "main.h"
+#include "rom_8011DC0.h"
 #include "save.h"
+#include "sprite.h"
+#include "task.h"
 #include "util.h"
-
-struct Unk81D38FC
-{
-    u8 unk0[0x270];
-    int checksum;
-};
 
 struct Unknown030012C8
 {
@@ -20,10 +19,7 @@ struct Unknown030012C8
     int unk14;
 };
 
-void sub_81D41A0(void);
 static void sub_81D4170(void);
-int sub_81D3D70(u8, u32, u32*, u32*);
-void sub_81D41F4(void);
 static u16 sub_81D3EE8(u8);
 static void sub_81D413C(void);
 static void sub_81D414C(void);
@@ -554,11 +550,4 @@ void sub_81D41F4(void)
 void sub_81D4238(void)
 {
     CpuFill32(0, &gUnknown_030012C8, sizeof(struct Unknown030012C8));
-}
-
-u8 sub_81D4258(void)
-{
-    u8 eventObjectId;
-    TryGetEventObjectIdByLocalIdAndMap(1, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, &eventObjectId);
-    return eventObjectId;
 }

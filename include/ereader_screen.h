@@ -1,0 +1,6 @@
+#ifndef GUARD_EREADER_SCREEN_H
+#define GUARD_EREADER_SCREEN_H
+
+void sub_81D5014(void);
+
+#endif // GUARD_EREADER_SCREEN_H
