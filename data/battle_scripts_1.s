@@ -6289,8 +6289,8 @@ BattleScript_TargetAbilityStatRaise::
 	return
 	
 BattleScript_WeakArmorActivates::
-	setstatchanger STAT_DEF, 1, TRUE
 	call BattleScript_AbilityPopUp
+	setstatchanger STAT_DEF, 1, TRUE
 	statbuffchange 0x1, BattleScript_WeakArmorActivatesSpeed
 	jumpifbyte CMP_LESS_THAN, cMULTISTRING_CHOOSER, 0x2, BattleScript_WeakArmorDefAnim
 	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, 0x3, BattleScript_WeakArmorActivatesSpeed
@@ -6304,7 +6304,7 @@ BattleScript_WeakArmorDefAnim:
 	printstring STRINGID_TARGETABILITYSTATLOWER
 	waitmessage 0x40
 BattleScript_WeakArmorActivatesSpeed:
-	setstatchanger STAT_SPEED, 1, FALSE
+	setstatchanger STAT_SPEED, 2, FALSE
 	statbuffchange 0x1, BattleScript_WeakArmorActivatesEnd
 	jumpifbyte CMP_LESS_THAN, cMULTISTRING_CHOOSER, 0x2, BattleScript_WeakArmorSpeedAnim
 	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, 0x3, BattleScript_WeakArmorActivatesEnd
