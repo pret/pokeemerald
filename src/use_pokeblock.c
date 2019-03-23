@@ -203,14 +203,14 @@ void sub_8166380(void)
             gUnknown_0203BC90->field_50++;
             break;
         case 11:
-            sub_81D2754(&gUnknown_0203BCAC->field_7C58, gUnknown_0203BCAC->field_7C58.unk14[0]);
+            sub_81D2754(gUnknown_0203BCAC->field_7C58.unk0[0], gUnknown_0203BCAC->field_7C58.unk14[0]);
             sub_81D20AC(&gUnknown_0203BCAC->field_7C58);
             gUnknown_0203BC90->field_50++;
             break;
         case 12:
             if (!sub_81D20BC(&gUnknown_0203BCAC->field_7C58))
             {
-                sub_81D1F84(&gUnknown_0203BCAC->field_7C58, gUnknown_0203BCAC->field_7C58.unk14, gUnknown_0203BCAC->field_7C58.unk14);
+                sub_81D1F84(&gUnknown_0203BCAC->field_7C58, gUnknown_0203BCAC->field_7C58.unk14[0], gUnknown_0203BCAC->field_7C58.unk14[0]);
                 gUnknown_0203BC90->field_50++;
             }
             break;
