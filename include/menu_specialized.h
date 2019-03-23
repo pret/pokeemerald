@@ -39,7 +39,7 @@ void sub_81D20AC(struct UnknownStruct_81D1ED4 *arg0);
 void sub_81D2230(struct UnknownStruct_81D1ED4 *arg0);
 bool8 sub_81D20BC(struct UnknownStruct_81D1ED4 *arg0);
 void sub_81D3464(void *arg0);
-void sub_81D3480(void *arg0, u8 arg1);
+void sub_81D3480(void *arg0, u8 arg1, u8 arg2);
 void sub_81D2754(struct UnknownStruct_81D1ED4 *arg0, struct UnknownSubStruct_81D1ED4 *arg1);
 void sub_81D1F84(struct UnknownStruct_81D1ED4 *arg0, struct UnknownSubStruct_81D1ED4 arg1[4][5], struct UnknownSubStruct_81D1ED4 arg2[4][5]);
 void MoveRelearnerPrintText(u8 *str);

@@ -48,9 +48,12 @@ struct UsePokeblockStruct
 {
     /*0x0000*/ u8 field_0[0x7B0E];
 	/*0x7B0E*/ u16 field_7B0E;
-	/*0x7B10*/ u8 field_7B10[0x148];
+	/*0x7B10*/ u8 field_7B10[0xC];
+    /*0x7B1C*/ u8 field_7B1C[0x13C];
     /*0x7C58*/ struct UnknownStruct_81D1ED4 field_7C58;
-    /*0x7FB0*/ u8 unk7FB0[0x20];
+    /*0x7FB0*/ u8 unk7FB0[3];
+    /*0x7FB3*/ s8 unk7FB3;
+    /*0x7FB4*/ u8 filler7FB4[0x1C];
     /*0x7FD0*/ struct UsePokeblockSubStruct info;
 };
 
@@ -296,7 +299,6 @@ void sub_8166380(void)
     }
 }
 
-#ifdef NONMATCHING
 void sub_8166564(void)
 {
     switch (gUnknown_0203BC90->field_50)
@@ -311,109 +313,20 @@ void sub_8166564(void)
             gUnknown_0203BC90->field_50++;
             break;
         case 1:
-            if (!gPaletteFade.active) {
-                sub_81D3464((&gUnknown_0203BCAC + 0x7b1c));
-                if (*(&gUnknown_0203BCAC + 0x8041) != *(&gUnknown_0203BCAC + 0x8040) - 1){
-                        sub_81D3480(*(&gUnknown_0203BCAC - 0x7b1c), *(&gUnknown_0203BCAC + 0x7b1c - 0xC), *(&gUnknown_0203BCAC + 0x8041 - 0x91) + *(&gUnknown_0203BCAC + 0x7fb3));
+            if (!gPaletteFade.active)
+            {
+                sub_81D3464(&gUnknown_0203BCAC->field_7B1C);
+                if (gUnknown_0203BCAC->info.field_71 != gUnknown_0203BCAC->info.field_70 - 1)
+                {
+                    u8 var0 = gUnknown_0203BCAC->unk7FB0[gUnknown_0203BCAC->unk7FB3];
+                    sub_81D3480(&gUnknown_0203BCAC->field_7B1C, gUnknown_0203BCAC->field_7B10[0], var0);
                 }
-                else {
-                    sub_816636C(sub_8166634);
-                }
+
+                sub_816636C(sub_8166634);
             }
             break;
     }
 }
-
-#else
-NAKED
-void sub_8166564(void)
-{
-	asm(".syntax unified\n\
-	push {r4,lr}\n\
-	sub sp, 0x4\n\
-	ldr r4, =gUnknown_0203BC90\n\
-	ldr r0, [r4]\n\
-	adds r0, 0x50\n\
-	ldrb r1, [r0]\n\
-	cmp r1, 0\n\
-	beq _08166580\n\
-	cmp r1, 0x1\n\
-	beq _081665C0\n\
-	b _08166610\n\
-	.pool\n\
-_08166580:\n\
-	movs r0, 0x1\n\
-	negs r0, r0\n\
-	str r1, [sp]\n\
-	movs r1, 0\n\
-	movs r2, 0x10\n\
-	movs r3, 0\n\
-	bl BeginNormalPaletteFade\n\
-	ldr r0, =sub_8166340\n\
-	bl SetVBlankCallback\n\
-	movs r0, 0\n\
-	bl ShowBg\n\
-	movs r0, 0x1\n\
-	bl ShowBg\n\
-	movs r0, 0x3\n\
-	bl ShowBg\n\
-	movs r0, 0x2\n\
-	bl ShowBg\n\
-	ldr r1, [r4]\n\
-	adds r1, 0x50\n\
-	ldrb r0, [r1]\n\
-	adds r0, 0x1\n\
-	strb r0, [r1]\n\
-	b _08166610\n\
-	.pool\n\
-_081665C0:\n\
-	ldr r0, =gPaletteFade\n\
-	ldrb r1, [r0, 0x7]\n\
-	movs r0, 0x80\n\
-	ands r0, r1\n\
-	cmp r0, 0\n\
-	bne _08166610\n\
-	ldr r4, =gUnknown_0203BCAC\n\
-	ldr r0, [r4]\n\
-	ldr r1, =0x00007b1c\n\
-	adds r0, r1\n\
-	bl sub_81D3464\n\
-	ldr r4, [r4]\n\
-	ldr r2, =0x00008041\n\
-	adds r0, r4, r2\n\
-	ldrb r1, [r0]\n\
-	ldr r3, =0x00008040\n\
-	adds r0, r4, r3\n\
-	ldrb r0, [r0]\n\
-	subs r0, 0x1\n\
-	cmp r1, r0\n\
-	beq _0816660A\n\
-	ldr r1, =0x00007fb3\n\
-	adds r0, r4, r1\n\
-	movs r1, 0\n\
-	ldrsb r1, [r0, r1]\n\
-	subs r2, 0x91\n\
-	adds r0, r4, r2\n\
-	adds r0, r1\n\
-	ldrb r2, [r0]\n\
-	ldr r3, =0x00007b1c\n\
-	adds r0, r4, r3\n\
-	subs r3, 0xC\n\
-	adds r1, r4, r3\n\
-	ldrb r1, [r1]\n\
-	bl sub_81D3480\n\
-_0816660A:\n\
-	ldr r0, =sub_8166634\n\
-	bl sub_816636C\n\
-_08166610:\n\
-	add sp, 0x4\n\
-	pop {r4}\n\
-	pop {r0}\n\
-	bx r0\n\
-	.pool\n\
-	.syntax divided\n");
-}
-#endif
 
 void sub_8166634(void)
 {	
