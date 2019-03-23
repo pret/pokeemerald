@@ -18,7 +18,7 @@ MagmaHideout_4F_EventScript_23A560:: @ 823A560
 	playfanfare MUS_ME_TAMA
 	playse SE_TAMA
 	special sub_80B0534
-	applymovement EVENT_OBJ_ID_PLAYER, MagmaHideout_4F_Movement_2725A6
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceUp
 	waitmovement 0
 	delay 150
 	removeobject 7
@@ -50,10 +50,10 @@ MagmaHideout_4F_EventScript_23A560:: @ 823A560
 	waitmovement 0
 	msgbox MagmaHideout_4F_Text_23AADA, MSGBOX_DEFAULT
 	closemessage
-	applymovement EVENT_OBJ_ID_PLAYER, MagmaHideout_4F_Movement_2725A8
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceRight
 	waitmovement 0
 	delay 30
-	applymovement 6, MagmaHideout_4F_Movement_27259E
+	applymovement 6, Common_Movement_FacePlayer
 	waitmovement 0
 	msgbox MagmaHideout_4F_Text_23AB33, MSGBOX_DEFAULT
 	closemessage
@@ -62,9 +62,9 @@ MagmaHideout_4F_EventScript_23A560:: @ 823A560
 	closemessage
 	clearflag FLAG_HIDE_SLATEPORT_CITY_CAPTAIN_STERN
 	clearflag FLAG_HIDE_SLATEPORT_CITY_GABBY_AND_TY
-	setvar VAR_0x4058, 1
+	setvar VAR_SLATEPORT_STATE, 1
 	setflag FLAG_GROUDON_AWAKENED_MAGMA_HIDEOUT
-	setvar VAR_0x40A0, 1
+	setvar VAR_SLATEPORT_HARBOR_STATE, 1
 	fadescreen 1
 	removeobject 6
 	removeobject 2

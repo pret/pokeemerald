@@ -1244,22 +1244,22 @@ static void DaycarePrintMonInfo(u8 windowId, s32 daycareSlotId, u8 y)
 
 static void Task_HandleDaycareLevelMenuInput(u8 taskId)
 {
-    u32 var = ListMenuHandleInputGetItemId(gTasks[taskId].tMenuListTaskId);
+    u32 input = ListMenu_ProcessInput(gTasks[taskId].tMenuListTaskId);
 
     if (gMain.newKeys & A_BUTTON)
     {
-        switch (var)
+        switch (input)
         {
         case 0:
         case 1:
-            gSpecialVar_Result = var;
+            gSpecialVar_Result = input;
             break;
         case 5:
             gSpecialVar_Result = 2;
             break;
         }
         DestroyListMenuTask(gTasks[taskId].tMenuListTaskId, NULL, NULL);
-        sub_819746C(gTasks[taskId].tWindowId, TRUE);
+        ClearStdWindowAndFrame(gTasks[taskId].tWindowId, TRUE);
         RemoveWindow(gTasks[taskId].tWindowId);
         DestroyTask(taskId);
         EnableBothScriptContexts();
@@ -1268,7 +1268,7 @@ static void Task_HandleDaycareLevelMenuInput(u8 taskId)
     {
         gSpecialVar_Result = 2;
         DestroyListMenuTask(gTasks[taskId].tMenuListTaskId, NULL, NULL);
-        sub_819746C(gTasks[taskId].tWindowId, TRUE);
+        ClearStdWindowAndFrame(gTasks[taskId].tWindowId, TRUE);
         RemoveWindow(gTasks[taskId].tWindowId);
         DestroyTask(taskId);
         EnableBothScriptContexts();
@@ -1283,7 +1283,7 @@ void ShowDaycareLevelMenu(void)
     u8 daycareMenuTaskId;
 
     windowId = AddWindow(&sDaycareLevelMenuWindowTemplate);
-    NewMenuHelpers_DrawStdWindowFrame(windowId, FALSE);
+    DrawStdWindowFrame(windowId, FALSE);
 
     menuTemplate = sDaycareListMenuLevelTemplate;
     menuTemplate.windowId = windowId;

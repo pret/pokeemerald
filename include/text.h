@@ -284,4 +284,8 @@ void DecompressGlyphFont1(u16 glyphId, bool32 isJapanese);
 u32 GetGlyphWidthFont1(u16 glyphId, bool32 isJapanese);
 void DecompressGlyphFont9(u16 glyphId);
 
+// unk_text_util_2.c
+u16 Font6Func(struct TextPrinter *textPrinter);
+u32 GetGlyphWidthFont6(u16 glyphId, bool32 isJapanese);
+
 #endif // GUARD_TEXT_H

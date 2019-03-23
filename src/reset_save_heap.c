@@ -19,7 +19,7 @@ void sub_81700F8(void)
     REG_IME = imeBackup;
     gMain.inBattle = FALSE;
     SetSaveBlocksPointers(sub_815355C());
-    sub_808447C();
+    ResetMenuAndMonGlobals();
     Save_ResetSaveCounters();
     Save_LoadGameData(0);
     if (gSaveFileStatus == 0 || gSaveFileStatus == 2)

@@ -1,7 +1,7 @@
 MossdeepCity_StevensHouse_MapScripts:: @ 8222784
-	map_script 1, MossdeepCity_StevensHouse_MapScript1_222794
-	map_script 3, MossdeepCity_StevensHouse_MapScript1_2227A8
-	map_script 2, MossdeepCity_StevensHouse_MapScript2_2227C0
+	map_script MAP_SCRIPT_ON_LOAD, MossdeepCity_StevensHouse_MapScript1_222794
+	map_script MAP_SCRIPT_ON_TRANSITION, MossdeepCity_StevensHouse_MapScript1_2227A8
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, MossdeepCity_StevensHouse_MapScript2_2227C0
 	.byte 0
 
 MossdeepCity_StevensHouse_MapScript1_222794: @ 8222794
@@ -13,7 +13,7 @@ MossdeepCity_StevensHouse_EventScript_22279E:: @ 822279E
 	return
 
 MossdeepCity_StevensHouse_MapScript1_2227A8: @ 82227A8
-	compare VAR_0x40C6, 2
+	compare VAR_STEVENS_HOUSE_STATE, 2
 	call_if_eq MossdeepCity_StevensHouse_EventScript_2227B4
 	end
 
@@ -23,17 +23,17 @@ MossdeepCity_StevensHouse_EventScript_2227B4:: @ 82227B4
 	return
 
 MossdeepCity_StevensHouse_MapScript2_2227C0: @ 82227C0
-	map_script_2 VAR_0x40C6, 1, MossdeepCity_StevensHouse_EventScript_2227CA
+	map_script_2 VAR_STEVENS_HOUSE_STATE, 1, MossdeepCity_StevensHouse_EventScript_2227CA
 	.2byte 0
 
 MossdeepCity_StevensHouse_EventScript_2227CA:: @ 82227CA
 	lockall
-	applymovement 1, MossdeepCity_StevensHouse_Movement_2725A4
+	applymovement 1, Common_Movement_WalkInPlaceLeft
 	waitmovement 0
 	playse SE_PIN
-	applymovement 1, MossdeepCity_StevensHouse_Movement_272598
+	applymovement 1, Common_Movement_ExclamationMark
 	waitmovement 0
-	applymovement 1, MossdeepCity_StevensHouse_Movement_27259A
+	applymovement 1, Common_Movement_Delay48
 	waitmovement 0
 	applymovement 1, MossdeepCity_StevensHouse_Movement_222833
 	waitmovement 0
@@ -48,7 +48,7 @@ MossdeepCity_StevensHouse_EventScript_2227CA:: @ 82227CA
 	waitmovement 0
 	setflag FLAG_HIDE_MOSSDEEP_CITY_SCOTT
 	setflag FLAG_HIDE_SEAFLOOR_CAVERN_ENTRANCE_AQUA_GRUNT
-	setvar VAR_0x40C6, 2
+	setvar VAR_STEVENS_HOUSE_STATE, 2
 	releaseall
 	end
 
@@ -99,7 +99,7 @@ MossdeepCity_StevensHouse_EventScript_222895:: @ 8222895
 	compare VAR_RESULT, 0
 	goto_if_eq MossdeepCity_StevensHouse_EventScript_222901
 	call MossdeepCity_StevensHouse_EventScript_27378B
-	call MossdeepCity_StevensHouse_EventScript_2723DD
+	call Common_EventScript_NameReceivedPokemon
 	goto MossdeepCity_StevensHouse_EventScript_222901
 	end
 

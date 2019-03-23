@@ -1,0 +1,65 @@
+{
+  "id": "MAP_SKY_PILLAR_TOP",
+  "name": "SkyPillar_Top",
+  "layout": "LAYOUT_SKY_PILLAR_TOP",
+  "music": "MUS_TOZAN",
+  "region_map_section": "MAPSEC_SKY_PILLAR",
+  "requires_flash": false,
+  "weather": "WEATHER_NONE",
+  "map_type": "MAP_TYPE_ROUTE",
+  "allow_bike": false,
+  "allow_escape_rope": false,
+  "allow_running": true,
+  "show_map_name": true,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+  "connections": null,
+  "object_events": [
+    {
+      "graphics_id": "EVENT_OBJ_GFX_RAYQUAZA_2",
+      "x": 14,
+      "y": 7,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "0x0",
+      "flag": "FLAG_HIDE_SKY_PILLAR_TOP_RAYQUAZA_2"
+    },
+    {
+      "graphics_id": "EVENT_OBJ_GFX_RAYQUAZA_1",
+      "x": 14,
+      "y": 6,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "SkyPillar_Top_EventScript_239722",
+      "flag": "FLAG_RAYQUAZA_ON_SKY_TOWER_SUMMIT"
+    }
+  ],
+  "warp_events": [
+    {
+      "x": 16,
+      "y": 14,
+      "elevation": 3,
+      "dest_map": "MAP_SKY_PILLAR_5F",
+      "dest_warp_id": 1
+    }
+  ],
+  "coord_events": [
+    {
+      "type": "trigger",
+      "x": 14,
+      "y": 9,
+      "elevation": 3,
+      "var": "VAR_SKY_PILLAR_RAQUAZA_CRY_DONE",
+      "var_value": "0",
+      "script": "SkyPillar_Top_EventScript_23979A"
+    }
+  ],
+  "bg_events": []
+}

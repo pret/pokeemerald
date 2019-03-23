@@ -1,0 +1,45 @@
+{
+  "id": "MAP_NEW_MAUVILLE_ENTRANCE",
+  "name": "NewMauville_Entrance",
+  "layout": "LAYOUT_NEW_MAUVILLE_ENTRANCE",
+  "music": "MUS_M_DUNGON",
+  "region_map_section": "MAPSEC_NEW_MAUVILLE",
+  "requires_flash": false,
+  "weather": "WEATHER_NONE",
+  "map_type": "MAP_TYPE_UNDERGROUND",
+  "allow_bike": true,
+  "allow_escape_rope": true,
+  "allow_running": true,
+  "show_map_name": true,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+  "connections": null,
+  "object_events": [],
+  "warp_events": [
+    {
+      "x": 4,
+      "y": 6,
+      "elevation": 3,
+      "dest_map": "MAP_ROUTE110",
+      "dest_warp_id": 0
+    },
+    {
+      "x": 4,
+      "y": 1,
+      "elevation": 3,
+      "dest_map": "MAP_NEW_MAUVILLE_INSIDE",
+      "dest_warp_id": 0
+    }
+  ],
+  "coord_events": [
+    {
+      "type": "trigger",
+      "x": 4,
+      "y": 2,
+      "elevation": 3,
+      "var": "VAR_NEW_MAUVILLE_STATE",
+      "var_value": "0",
+      "script": "NewMauville_Entrance_EventScript_2372FF"
+    }
+  ],
+  "bg_events": []
+}

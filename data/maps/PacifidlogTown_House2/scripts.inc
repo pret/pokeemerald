@@ -4,7 +4,7 @@ PacifidlogTown_House2_MapScripts:: @ 8203791
 PacifidlogTown_House2_EventScript_203792:: @ 8203792
 	lock
 	faceplayer
-	dodailyevents
+	dotimebasedevents
 	call PacifidlogTown_House2_EventScript_2037DE
 	goto_if_set FLAG_RECEIVED_FANCLUB_TM_THIS_WEEK, PacifidlogTown_House2_EventScript_20387E
 	call_if_set FLAG_MET_FANCLUB_YOUNGER_BROTHER, PacifidlogTown_House2_EventScript_2037F8
@@ -20,7 +20,7 @@ PacifidlogTown_House2_EventScript_203792:: @ 8203792
 	end
 
 PacifidlogTown_House2_EventScript_2037DE:: @ 82037DE
-	goto_if_unset FLAG_RECEIVED_FANCLUB_TM_THIS_WEEK, PacifidlogTown_House2_EventScript_27374E
+	goto_if_unset FLAG_RECEIVED_FANCLUB_TM_THIS_WEEK, Common_EventScript_NopReturn
 	specialvar VAR_RESULT, GetDaysUntilPacifidlogTMAvailable
 	compare VAR_RESULT, 0
 	call_if_eq PacifidlogTown_House2_EventScript_203812
@@ -43,7 +43,7 @@ PacifidlogTown_House2_EventScript_203816:: @ 8203816
 	msgbox PacifidlogTown_House2_Text_20396D, MSGBOX_DEFAULT
 	giveitem_std ITEM_TM27
 	compare VAR_RESULT, 0
-	goto_if_eq PacifidlogTown_House2_EventScript_272054
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_FANCLUB_TM_THIS_WEEK
 	special SetPacifidlogTMReceivedDay
 	msgbox PacifidlogTown_House2_Text_203A85, MSGBOX_DEFAULT
@@ -59,7 +59,7 @@ PacifidlogTown_House2_EventScript_20384F:: @ 820384F
 	msgbox PacifidlogTown_House2_Text_203A2F, MSGBOX_DEFAULT
 	giveitem_std ITEM_TM21
 	compare VAR_RESULT, 0
-	goto_if_eq PacifidlogTown_House2_EventScript_272054
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_FANCLUB_TM_THIS_WEEK
 	special SetPacifidlogTMReceivedDay
 	msgbox PacifidlogTown_House2_Text_203A85, MSGBOX_DEFAULT

@@ -1,0 +1,35 @@
+{
+  "id": "MAP_NAVEL_ROCK_UP2",
+  "name": "NavelRock_Up2",
+  "layout": "LAYOUT_NAVEL_ROCK_LADDER_ROOM2",
+  "music": "MUS_RG_NANADUNGEON",
+  "region_map_section": "MAPSEC_NAVEL_ROCK2",
+  "requires_flash": false,
+  "weather": "WEATHER_NONE",
+  "map_type": "MAP_TYPE_UNDERGROUND",
+  "allow_bike": false,
+  "allow_escape_rope": false,
+  "allow_running": true,
+  "show_map_name": true,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+  "connections": null,
+  "object_events": [],
+  "warp_events": [
+    {
+      "x": 3,
+      "y": 3,
+      "elevation": 3,
+      "dest_map": "MAP_NAVEL_ROCK_UP1",
+      "dest_warp_id": 1
+    },
+    {
+      "x": 5,
+      "y": 5,
+      "elevation": 3,
+      "dest_map": "MAP_NAVEL_ROCK_UP3",
+      "dest_warp_id": 0
+    }
+  ],
+  "coord_events": [],
+  "bg_events": []
+}

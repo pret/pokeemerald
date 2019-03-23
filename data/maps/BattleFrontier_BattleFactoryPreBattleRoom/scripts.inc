@@ -1,6 +1,6 @@
 BattleFrontier_BattleFactoryPreBattleRoom_MapScripts:: @ 8259ABA
-	map_script 2, BattleFrontier_BattleFactoryPreBattleRoom_MapScript2_259AEF
-	map_script 4, BattleFrontier_BattleFactoryPreBattleRoom_MapScript2_259AC5
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, BattleFrontier_BattleFactoryPreBattleRoom_MapScript2_259AEF
+	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, BattleFrontier_BattleFactoryPreBattleRoom_MapScript2_259AC5
 	.byte 0
 
 BattleFrontier_BattleFactoryPreBattleRoom_MapScript2_259AC5: @ 8259AC5

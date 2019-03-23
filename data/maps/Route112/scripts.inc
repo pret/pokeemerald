@@ -1,45 +1,45 @@
 Route112_MapScripts:: @ 81F1DA8
-	map_script 3, Route112_MapScript1_1F1DAE
+	map_script MAP_SCRIPT_ON_TRANSITION, Route112_MapScript1_1F1DAE
 	.byte 0
 
 Route112_MapScript1_1F1DAE: @ 81F1DAE
 	clearflag FLAG_FORCE_MIRAGE_TOWER_VISIBLE
-	setvar VAR_0x40BD, 0
+	setvar VAR_JAGGED_PASS_ASH_WEATHER, 0
 	end
 
 Route112_EventScript_1F1DB7:: @ 81F1DB7
 	lockall
 	delay 40
-	applymovement 1, Route112_Movement_2725A8
+	applymovement 1, Common_Movement_WalkInPlaceRight
 	waitmovement 0
 	delay 20
 	msgbox Route112_Text_1F1F3F, MSGBOX_DEFAULT
 	closemessage
-	applymovement 1, Route112_Movement_2725A2
+	applymovement 1, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	delay 40
-	applymovement 6, Route112_Movement_2725A4
+	applymovement 6, Common_Movement_WalkInPlaceLeft
 	waitmovement 0
 	delay 20
 	msgbox Route112_Text_1F1F7A, MSGBOX_DEFAULT
 	closemessage
-	applymovement 6, Route112_Movement_2725A2
+	applymovement 6, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	delay 40
-	applymovement 1, Route112_Movement_2725A8
+	applymovement 1, Common_Movement_WalkInPlaceRight
 	waitmovement 0
 	delay 20
 	msgbox Route112_Text_1F1FBA, MSGBOX_DEFAULT
 	closemessage
-	applymovement 1, Route112_Movement_2725A2
+	applymovement 1, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	delay 40
-	applymovement 6, Route112_Movement_2725A4
+	applymovement 6, Common_Movement_WalkInPlaceLeft
 	waitmovement 0
 	delay 20
 	msgbox Route112_Text_1F2003, MSGBOX_DEFAULT
 	closemessage
-	applymovement 6, Route112_Movement_2725A2
+	applymovement 6, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	releaseall
 	end

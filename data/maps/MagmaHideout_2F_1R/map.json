@@ -1,0 +1,95 @@
+{
+  "id": "MAP_MAGMA_HIDEOUT_2F_1R",
+  "name": "MagmaHideout_2F_1R",
+  "layout": "LAYOUT_MAGMA_HIDEOUT_2F_1R",
+  "music": "MUS_AJITO",
+  "region_map_section": "MAPSEC_MAGMA_HIDEOUT",
+  "requires_flash": false,
+  "weather": "WEATHER_NONE",
+  "map_type": "MAP_TYPE_UNDERGROUND",
+  "allow_bike": true,
+  "allow_escape_rope": true,
+  "allow_running": true,
+  "show_map_name": true,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+  "connections": null,
+  "object_events": [
+    {
+      "graphics_id": "EVENT_OBJ_GFX_MAGMA_MEMBER_M",
+      "x": 18,
+      "y": 19,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_WALK_SEQUENCE_LEFT_UP_RIGHT_DOWN",
+      "movement_range_x": 5,
+      "movement_range_y": 4,
+      "trainer_type": "1",
+      "trainer_sight_or_berry_tree_id": "1",
+      "script": "MagmaHideout_2F_1R_EventScript_239B7F",
+      "flag": "FLAG_HIDE_MAGMA_HIDEOUT_GRUNTS"
+    },
+    {
+      "graphics_id": "EVENT_OBJ_GFX_MAGMA_MEMBER_M",
+      "x": 12,
+      "y": 14,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_WALK_SEQUENCE_DOWN_RIGHT_UP_LEFT",
+      "movement_range_x": 7,
+      "movement_range_y": 6,
+      "trainer_type": "1",
+      "trainer_sight_or_berry_tree_id": "3",
+      "script": "MagmaHideout_2F_1R_EventScript_239B96",
+      "flag": "FLAG_HIDE_MAGMA_HIDEOUT_GRUNTS"
+    },
+    {
+      "graphics_id": "EVENT_OBJ_GFX_MAGMA_MEMBER_F",
+      "x": 8,
+      "y": 8,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": "1",
+      "trainer_sight_or_berry_tree_id": "7",
+      "script": "MagmaHideout_2F_1R_EventScript_239B51",
+      "flag": "FLAG_HIDE_MAGMA_HIDEOUT_GRUNTS"
+    },
+    {
+      "graphics_id": "EVENT_OBJ_GFX_MAGMA_MEMBER_M",
+      "x": 21,
+      "y": 11,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_UP",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": "1",
+      "trainer_sight_or_berry_tree_id": "3",
+      "script": "MagmaHideout_2F_1R_EventScript_239B68",
+      "flag": "FLAG_HIDE_MAGMA_HIDEOUT_GRUNTS"
+    }
+  ],
+  "warp_events": [
+    {
+      "x": 11,
+      "y": 23,
+      "elevation": 0,
+      "dest_map": "MAP_MAGMA_HIDEOUT_2F_2R",
+      "dest_warp_id": 0
+    },
+    {
+      "x": 8,
+      "y": 2,
+      "elevation": 0,
+      "dest_map": "MAP_MAGMA_HIDEOUT_1F",
+      "dest_warp_id": 1
+    },
+    {
+      "x": 17,
+      "y": 33,
+      "elevation": 3,
+      "dest_map": "MAP_MAGMA_HIDEOUT_3F_1R",
+      "dest_warp_id": 2
+    }
+  ],
+  "coord_events": [],
+  "bg_events": []
+}

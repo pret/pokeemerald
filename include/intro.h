@@ -9,6 +9,6 @@
 void CB2_InitCopyrightScreenAfterBootup(void);
 void CB2_InitCopyrightScreenAfterBootup(void);
 void CB2_InitCopyrightScreenAfterTitleScreen(void);
-void sub_816F2A8(u16, u16, u16, u16);
+void PanFadeAndZoomScreen(u16, u16, u16, u16);
 
 #endif // GUARD_INTRO_H

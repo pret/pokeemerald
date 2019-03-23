@@ -1,8 +1,8 @@
 EverGrandeCity_PokemonLeague_2F_MapScripts:: @ 8229D07
-	map_script 2, EverGrandeCity_PokemonLeague_2F_MapScript2_276C3B
-	map_script 4, EverGrandeCity_PokemonLeague_2F_MapScript2_276B6C
-	map_script 1, EverGrandeCity_PokemonLeague_2F_MapScript1_276BBE
-	map_script 3, EverGrandeCity_PokemonLeague_2F_MapScript1_276ACF
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, EverGrandeCity_PokemonLeague_2F_MapScript2_276C3B
+	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, EverGrandeCity_PokemonLeague_2F_MapScript2_276B6C
+	map_script MAP_SCRIPT_ON_LOAD, EverGrandeCity_PokemonLeague_2F_MapScript1_276BBE
+	map_script MAP_SCRIPT_ON_TRANSITION, EverGrandeCity_PokemonLeague_2F_MapScript1_276ACF
 	.byte 0
 
 EverGrandeCity_PokemonLeague_2F_EventScript_229D1C:: @ 8229D1C

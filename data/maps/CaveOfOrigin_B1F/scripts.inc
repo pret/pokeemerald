@@ -6,16 +6,16 @@ CaveOfOrigin_B1F_EventScript_2357A9:: @ 82357A9
 	faceplayer
 	msgbox CaveOfOrigin_B1F_Text_23586E, MSGBOX_DEFAULT
 	closemessage
-	applymovement 1, CaveOfOrigin_B1F_Movement_2725A6
+	applymovement 1, Common_Movement_WalkInPlaceUp
 	waitmovement 0
 	delay 60
 	playse SE_PIN
-	applymovement 1, CaveOfOrigin_B1F_Movement_272598
+	applymovement 1, Common_Movement_ExclamationMark
 	waitmovement 0
-	applymovement 1, CaveOfOrigin_B1F_Movement_27259A
+	applymovement 1, Common_Movement_Delay48
 	waitmovement 0
 	delay 30
-	applymovement 1, CaveOfOrigin_B1F_Movement_27259E
+	applymovement 1, Common_Movement_FacePlayer
 	waitmovement 0
 	message CaveOfOrigin_B1F_Text_235ACE
 	waitmessage
@@ -52,7 +52,7 @@ CaveOfOrigin_B1F_EventScript_23584D:: @ 823584D
 	playse SE_KAIDAN
 	fadescreenspeed 1, 4
 	setflag FLAG_WALLACE_GOES_TO_SKY_PILLAR
-	setvar VAR_0x405E, 3
+	setvar VAR_RAYQUAZA_STATE, 3
 	removeobject 1
 	clearflag FLAG_HIDE_SKY_PILLAR_WALLACE
 	fadescreen 0

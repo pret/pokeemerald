@@ -1,5 +1,6 @@
 #include "constants/flags.h"
 #include "constants/items.h"
+#include "constants/map_scripts.h"
 #include "constants/moves.h"
 #include "constants/songs.h"
 #include "constants/species.h"

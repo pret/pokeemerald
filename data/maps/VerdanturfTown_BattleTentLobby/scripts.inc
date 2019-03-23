@@ -1,6 +1,6 @@
 VerdanturfTown_BattleTentLobby_MapScripts:: @ 82016D0
-	map_script 2, VerdanturfTown_BattleTentLobby_MapScript2_2016EF
-	map_script 4, VerdanturfTown_BattleTentLobby_MapScript2_2016DB
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, VerdanturfTown_BattleTentLobby_MapScript2_2016EF
+	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, VerdanturfTown_BattleTentLobby_MapScript2_2016DB
 	.byte 0
 
 VerdanturfTown_BattleTentLobby_MapScript2_2016DB: @ 82016DB
@@ -192,7 +192,7 @@ VerdanturfTown_BattleTentLobby_EventScript_201954:: @ 8201954
 	special LoadPlayerParty
 	closemessage
 	delay 2
-	call VerdanturfTown_BattleTentLobby_EventScript_27134F
+	call Common_EventScript_SaveGame
 	setvar VAR_TEMP_0, 255
 	compare VAR_RESULT, 0
 	goto_if_eq VerdanturfTown_BattleTentLobby_EventScript_201A1D
@@ -281,7 +281,7 @@ VerdanturfTown_BattleTentLobby_EventScript_201A7B:: @ 8201A7B
 	msgbox VerdanturfTown_BattleTentLobby_Text_201D9E, MSGBOX_DEFAULT
 	giveitem_std ITEM_TM45
 	compare VAR_RESULT, 0
-	goto_if_eq VerdanturfTown_BattleTentLobby_EventScript_272054
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_TM45
 	msgbox VerdanturfTown_BattleTentLobby_Text_201E43, MSGBOX_DEFAULT
 	release
@@ -307,7 +307,7 @@ VerdanturfTown_BattleTentLobby_EventScript_201AD0:: @ 8201AD0
 	faceplayer
 	goto_if_set FLAG_MET_SCOTT_IN_VERDANTURF, VerdanturfTown_BattleTentLobby_EventScript_201AED
 	msgbox VerdanturfTown_BattleTentLobby_Text_201F3F, MSGBOX_DEFAULT
-	addvar VAR_0x40D1, 1
+	addvar VAR_SCOTT_STATE, 1
 	setflag FLAG_MET_SCOTT_IN_VERDANTURF
 	release
 	end

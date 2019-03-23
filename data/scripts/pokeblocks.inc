@@ -264,7 +264,7 @@ EventScript_Pblock1_No: @ 8293C70
 
 EventScript_Pblock1_NoBerries: @ 8293C7A
 	msgbox Text_Pblock1_NoBerries, MSGBOX_DEFAULT
-	dodailyevents
+	dotimebasedevents
 	goto_if_set FLAG_DAILY_CONTEST_LOBBY_RECEIVED_BERRY, LilycoveCity_ContestLobby_EventScript_293C92
 	goto LilycoveCity_ContestLobby_EventScript_293C9C
 	end
@@ -333,7 +333,7 @@ EventScript_Pblock1_NoPokeblock: @ 8293D43
 LilycoveCity_ContestLobby_EventScript_293D4D:: @ 8293D4D
 	lockall
 	setvar VAR_0x8009, 2
-	applymovement 10, LilycoveCity_ContestLobby_Movement_2725A2
+	applymovement 10, Common_Movement_FaceOriginalDirection
 	applymovement 3, LilycoveCity_ContestLobby_Movement_294053
 	waitmovement 0
 	msgbox LilycoveCity_ContestLobby_Text_293201, MSGBOX_YESNO
@@ -398,8 +398,8 @@ LilycoveCity_ContestLobby_EventScript_293E1E:: @ 8293E1E
 	lockall
 	setvar VAR_0x8008, 15
 	setvar VAR_0x8009, 3
-	applymovement 9, LilycoveCity_ContestLobby_Movement_2725A2
-	applymovement 17, LilycoveCity_ContestLobby_Movement_2725A2
+	applymovement 9, Common_Movement_FaceOriginalDirection
+	applymovement 17, Common_Movement_FaceOriginalDirection
 	applymovement VAR_0x8008, LilycoveCity_ContestLobby_Movement_294053
 	waitmovement 0
 	msgbox LilycoveCity_ContestLobby_Text_293842, MSGBOX_YESNO
@@ -551,7 +551,7 @@ LilycoveCity_ContestLobby_EventScript_293FF8: @ 8293FF8
 	specialvar VAR_RESULT, GetFirstFreePokeblockSlot
 	compare VAR_RESULT, 65535
 	goto_if_eq LilycoveCity_ContestLobby_EventScript_294028
-	dodailyevents
+	dotimebasedevents
 	goto_if_set FLAG_DAILY_CONTEST_LOBBY_RECEIVED_BERRY, LilycoveCity_ContestLobby_EventScript_294028
 	goto LilycoveCity_ContestLobby_EventScript_294032
 	end
@@ -602,7 +602,7 @@ EventScript_PblocLink_NoBerries: @ 82940B1
 	end
 
 EventScript_PblocLink_TryConnect: @ 82940BB
-	call LilycoveCity_ContestLobby_EventScript_27134F
+	call Common_EventScript_SaveGame
 	compare VAR_RESULT, 0
 	goto_if_eq EventScript_PblocLink_End
 	specialvar VAR_RESULT, IsWirelessAdapterConnected

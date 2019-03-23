@@ -21,30 +21,29 @@ struct HailStruct {
 };
 
 static void sub_810B6C4(struct Sprite *);
-extern void sub_810B848(struct Sprite *);
-extern void AnimIcePunchSwirlingParticle(struct Sprite *);
-extern void AnimIceBeamParticle(struct Sprite *);
-extern void AnimIceEffectParticle(struct Sprite *);
-extern void AnimFlickerIceEffectParticle(struct Sprite *);
-extern void AnimSwirlingSnowball_Step1(struct Sprite *);
-extern void AnimSwirlingSnowball_Step2(struct Sprite *);
-extern void AnimSwirlingSnowball_Step3(struct Sprite *);
-extern void AnimSwirlingSnowball_End(struct Sprite *);
-extern void AnimMoveParticleBeyondTarget(struct Sprite *);
-extern void AnimWiggleParticleTowardsTarget(struct Sprite *);
-extern void AnimWaveFromCenterOfTarget(struct Sprite *);
-extern void InitSwirlingFogAnim(struct Sprite *);
-extern void AnimSwirlingFogAnim(struct Sprite *);
-extern void AnimThrowMistBall(struct Sprite *);
-extern void InitPoisonGasCloudAnim(struct Sprite *);
-extern void MovePoisonGasCloud(struct Sprite *);
-extern void AnimHailBegin(struct Sprite *);
-extern void AnimHailContinue(struct Sprite *);
-extern void sub_80A8EE4(struct Sprite *);
-extern void InitIceBallAnim(struct Sprite *);
-extern void AnimThrowIceBall(struct Sprite *);
-extern void InitIceBallParticle(struct Sprite *);
-extern void AnimIceBallParticle(struct Sprite *);
+void sub_810B848(struct Sprite *);
+void AnimIcePunchSwirlingParticle(struct Sprite *);
+void AnimIceBeamParticle(struct Sprite *);
+void AnimIceEffectParticle(struct Sprite *);
+void AnimFlickerIceEffectParticle(struct Sprite *);
+void AnimSwirlingSnowball_Step1(struct Sprite *);
+void AnimSwirlingSnowball_Step2(struct Sprite *);
+void AnimSwirlingSnowball_Step3(struct Sprite *);
+void AnimSwirlingSnowball_End(struct Sprite *);
+void AnimMoveParticleBeyondTarget(struct Sprite *);
+void AnimWiggleParticleTowardsTarget(struct Sprite *);
+void AnimWaveFromCenterOfTarget(struct Sprite *);
+void InitSwirlingFogAnim(struct Sprite *);
+void AnimSwirlingFogAnim(struct Sprite *);
+void AnimThrowMistBall(struct Sprite *);
+void InitPoisonGasCloudAnim(struct Sprite *);
+void MovePoisonGasCloud(struct Sprite *);
+void AnimHailBegin(struct Sprite *);
+void AnimHailContinue(struct Sprite *);
+void InitIceBallAnim(struct Sprite *);
+void AnimThrowIceBall(struct Sprite *);
+void InitIceBallParticle(struct Sprite *);
+void AnimIceBallParticle(struct Sprite *);
 void AnimTask_Haze2(u8);
 void AnimTask_OverlayFogTiles(u8);
 void AnimTask_Hail2(u8);
@@ -1176,7 +1175,7 @@ void AnimSwirlingFogAnim(struct Sprite *sprite)
 // Fades mons to black and places foggy overlay in Haze.
 void AnimTask_Haze1(u8 taskId)
 {
-    struct UnknownAnimStruct2 subStruct;
+    struct BattleAnimBgData animBg;
 
     SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT1_BG1 | BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_ALL);
     SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(0, 16));
@@ -1191,17 +1190,17 @@ void AnimTask_Haze1(u8 taskId)
     SetGpuReg(REG_OFFSET_BG1HOFS, gBattle_BG1_X);
     SetGpuReg(REG_OFFSET_BG1VOFS, gBattle_BG1_Y);
 
-    sub_80A6B30(&subStruct);
-    LoadBgTiles(subStruct.bgId, gWeatherFog1Tiles, 0x800, subStruct.tilesOffset);
-    sub_80A6D60(&subStruct, gBattleAnimFogTilemap, 0);
-    LoadPalette(&gUnknown_083970E8, subStruct.unk8 * 16, 32);
+    sub_80A6B30(&animBg);
+    LoadBgTiles(animBg.bgId, gWeatherFog1Tiles, 0x800, animBg.tilesOffset);
+    sub_80A6D60(&animBg, gBattleAnimFogTilemap, 0);
+    LoadPalette(&gUnknown_083970E8, animBg.paletteId * 16, 32);
 
     gTasks[taskId].func = AnimTask_Haze2;
 }
 
 void AnimTask_Haze2(u8 taskId)
 {
-    struct UnknownAnimStruct2 subStruct;
+    struct BattleAnimBgData animBg;
 
     gBattle_BG1_X += -1;
     gBattle_BG1_Y += 0;
@@ -1245,7 +1244,7 @@ void AnimTask_Haze2(u8 taskId)
         }
         break;
     case 3:
-        sub_80A6B30(&subStruct);
+        sub_80A6B30(&animBg);
         sub_80A6C68(1);
         sub_80A6C68(2);
 
@@ -1283,7 +1282,7 @@ void AnimThrowMistBall(struct Sprite *sprite)
 // Displays misty background in Mist Ball.
 void AnimTask_LoadMistTiles(u8 taskId)
 {
-    struct UnknownAnimStruct2 subStruct;
+    struct BattleAnimBgData animBg;
 
     SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT1_BG1 | BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_ALL);
     SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(0, 16));
@@ -1298,10 +1297,10 @@ void AnimTask_LoadMistTiles(u8 taskId)
     SetGpuReg(REG_OFFSET_BG1HOFS, gBattle_BG1_X);
     SetGpuReg(REG_OFFSET_BG1VOFS, gBattle_BG1_Y);
 
-    sub_80A6B30(&subStruct);
-    LoadBgTiles(subStruct.bgId, gWeatherFog1Tiles, 0x800, subStruct.tilesOffset);
-    sub_80A6D60(&subStruct, gBattleAnimFogTilemap, 0);
-    LoadPalette(&gUnknown_083970E8, subStruct.unk8 * 16, 32);
+    sub_80A6B30(&animBg);
+    LoadBgTiles(animBg.bgId, gWeatherFog1Tiles, 0x800, animBg.tilesOffset);
+    sub_80A6D60(&animBg, gBattleAnimFogTilemap, 0);
+    LoadPalette(&gUnknown_083970E8, animBg.paletteId * 16, 32);
 
     gTasks[taskId].data[15] = -1;
     gTasks[taskId].func = AnimTask_OverlayFogTiles;
@@ -1309,7 +1308,7 @@ void AnimTask_LoadMistTiles(u8 taskId)
 
 void AnimTask_OverlayFogTiles(u8 taskId)
 {
-    struct UnknownAnimStruct2 subStruct;
+    struct BattleAnimBgData animBg;
 
     gBattle_BG1_X += gTasks[taskId].data[15];
     gBattle_BG1_Y += 0;
@@ -1347,7 +1346,7 @@ void AnimTask_OverlayFogTiles(u8 taskId)
         }
         break;
     case 3:
-        sub_80A6B30(&subStruct);
+        sub_80A6B30(&animBg);
         sub_80A6C68(1);
         sub_80A6C68(2);
 
@@ -1887,7 +1886,7 @@ void InitIceBallAnim(struct Sprite *sprite)
 // Throws the ball of ice in Ice Ball.
 void AnimThrowIceBall(struct Sprite *sprite)
 {
-    if (!TranslateAnimArc(sprite))
+    if (!TranslateAnimHorizontalArc(sprite))
         return;
 
     StartSpriteAnim(sprite, 1);

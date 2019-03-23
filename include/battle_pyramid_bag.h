@@ -34,7 +34,7 @@ struct PyramidBagCursorData
 extern struct PyramidBagResources *gPyramidBagResources;
 extern struct PyramidBagCursorData gPyramidBagCursorData;
 
-void sub_81C4EEC(void);
+void InitBattlePyramidBagCursorPosition(void);
 void CB2_PyramidBagMenuFromStartMenu(void);
 void sub_81C4F84(void);
 void sub_81C5924(void);

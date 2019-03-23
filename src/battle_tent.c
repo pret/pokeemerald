@@ -12,6 +12,7 @@
 #include "frontier_util.h"
 #include "string_util.h"
 #include "constants/items.h"
+#include "constants/layouts.h"
 #include "constants/region_map_sections.h"
 #include "constants/species.h"
 
@@ -268,10 +269,10 @@ static void sub_81B9E88(void)
     DoBattleFactorySwapScreen();
 }
 
-bool8 sub_81B9E94(void)
+bool8 InSlateportBattleTent(void)
 {
-    return (gMapHeader.regionMapSectionId == MAPSEC_SLATEPORT_CITY
-            && ((gMapHeader.mapLayoutId == 385) | (gMapHeader.mapLayoutId == 386)));
+    return gMapHeader.regionMapSectionId == MAPSEC_SLATEPORT_CITY
+           && (gMapHeader.mapLayoutId == LAYOUT_BATTLE_TENT_CORRIDOR || gMapHeader.mapLayoutId == LAYOUT_BATTLE_TENT_BATTLE_ROOM);
 }
 
 static void sub_81B9EC0(void)
@@ -328,7 +329,7 @@ static void sub_81B9EC0(void)
         if (j != i + firstMonId)
             continue;
 
-        gSaveBlock2Ptr->frontier.field_E70[i].monId = monSetId;
+        gSaveBlock2Ptr->frontier.rentalMons[i].monId = monSetId;
         species[i] = gFacilityTrainerMons[monSetId].species;
         heldItems[i] = gBattleFrontierHeldItems[gFacilityTrainerMons[monSetId].itemTableId];
         monIds[i] = monSetId;
@@ -355,7 +356,7 @@ static void sub_81BA040(void)
             trainerId = Random() % 30;
             for (i = 0; i < gSaveBlock2Ptr->frontier.curChallengeBattleNum; i++)
             {
-                if (gSaveBlock2Ptr->frontier.field_CB4[i] == trainerId)
+                if (gSaveBlock2Ptr->frontier.trainerIds[i] == trainerId)
                     break;
             }
         } while (i != gSaveBlock2Ptr->frontier.curChallengeBattleNum);
@@ -369,7 +370,7 @@ static void sub_81BA040(void)
     }
 
     if (gSaveBlock2Ptr->frontier.curChallengeBattleNum < 2)
-        gSaveBlock2Ptr->frontier.field_CB4[gSaveBlock2Ptr->frontier.curChallengeBattleNum] = gTrainerBattleOpponent_A;
+        gSaveBlock2Ptr->frontier.trainerIds[gSaveBlock2Ptr->frontier.curChallengeBattleNum] = gTrainerBattleOpponent_A;
 
     monSets = gFacilityTrainers[gTrainerBattleOpponent_A].monSets;
     i = 0;
@@ -378,7 +379,7 @@ static void sub_81BA040(void)
         sRandMonSetId = monSets[Random() % setsCount];
         for (j = 0; j < 6; j++)
         {
-            if (gFacilityTrainerMons[sRandMonSetId].species == gFacilityTrainerMons[gSaveBlock2Ptr->frontier.field_E70[j].monId].species)
+            if (gFacilityTrainerMons[sRandMonSetId].species == gFacilityTrainerMons[gSaveBlock2Ptr->frontier.rentalMons[j].monId].species)
                 break;
         }
         if (j != 6)

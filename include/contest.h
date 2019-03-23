@@ -437,6 +437,8 @@ extern u8 gHighestRibbonRank;
 extern struct ContestResources *gContestResources;
 extern u8 sContestBgCopyFlags;
 extern struct ContestWinner gUnknown_02039F3C;
+extern u8 gUnknown_02039F5C;
+extern u8 gUnknown_02039F5D;
 
 extern u32 gContestRngValue;
 
@@ -476,5 +478,6 @@ bool32 sub_80FC4F4(void *, u16);
 bool8 sub_80FC55C(void);
 bool8 sub_80FC530(u8);
 u8 sub_80F86E0(u8 *);
+void sub_80FC9F8(u8 taskId);
 
 #endif //GUARD_CONTEST_H

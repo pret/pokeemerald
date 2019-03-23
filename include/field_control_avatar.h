@@ -37,5 +37,8 @@ u8 sub_8068F18(void);
 bool8 dive_warp(struct MapPosition *position, u16 b);
 int SetCableClubWarp(void);
 u8 TrySetDiveWarp(void);
+const u8 *GetInteractedLinkPlayerScript(struct MapPosition *position, u8 metatileBehavior, u8 direction);
+u8 *GetCoordEventScriptAtMapPosition(struct MapPosition *position);
+void ClearPoisonStepCounter(void);
 
 #endif // GUARD_FIELDCONTROLAVATAR_H

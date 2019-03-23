@@ -1,0 +1,28 @@
+{
+  "id": "MAP_UNDERWATER_MARINE_CAVE",
+  "name": "Underwater_MarineCave",
+  "layout": "LAYOUT_UNDERWATER_MARINE_CAVE",
+  "music": "MUS_DAN01",
+  "region_map_section": "MAPSEC_UNDERWATER_MARINE_CAVE",
+  "requires_flash": false,
+  "weather": "WEATHER_BUBBLES",
+  "map_type": "MAP_TYPE_UNDERWATER",
+  "allow_bike": true,
+  "allow_escape_rope": false,
+  "allow_running": true,
+  "show_map_name": true,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+  "connections": null,
+  "object_events": [],
+  "warp_events": [
+    {
+      "x": 9,
+      "y": 8,
+      "elevation": 0,
+      "dest_map": "MAP_NONE",
+      "dest_warp_id": 127
+    }
+  ],
+  "coord_events": [],
+  "bg_events": []
+}

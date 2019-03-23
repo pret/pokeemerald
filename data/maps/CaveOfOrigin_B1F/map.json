@@ -1,0 +1,42 @@
+{
+  "id": "MAP_CAVE_OF_ORIGIN_B1F",
+  "name": "CaveOfOrigin_B1F",
+  "layout": "LAYOUT_CAVE_OF_ORIGIN_B1F",
+  "music": "MUS_NONE",
+  "region_map_section": "MAPSEC_CAVE_OF_ORIGIN",
+  "requires_flash": false,
+  "weather": "WEATHER_FOG_1",
+  "map_type": "MAP_TYPE_UNDERGROUND",
+  "allow_bike": false,
+  "allow_escape_rope": true,
+  "allow_running": true,
+  "show_map_name": true,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+  "connections": null,
+  "object_events": [
+    {
+      "graphics_id": "EVENT_OBJ_GFX_WALLACE",
+      "x": 9,
+      "y": 13,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_UP",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "CaveOfOrigin_B1F_EventScript_2357A9",
+      "flag": "FLAG_HIDE_CAVE_OF_ORIGIN_B1F_WALLACE"
+    }
+  ],
+  "warp_events": [
+    {
+      "x": 9,
+      "y": 3,
+      "elevation": 3,
+      "dest_map": "MAP_CAVE_OF_ORIGIN_1F",
+      "dest_warp_id": 1
+    }
+  ],
+  "coord_events": [],
+  "bg_events": []
+}

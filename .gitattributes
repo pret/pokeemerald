@@ -9,6 +9,7 @@ Makefile text eol=lf
 *.pl text eol=lf
 *.inc text eol=lf
 *.sha1 text eol=lf
+*.json text eol=lf
 
 *.png binary
 *.bin binary

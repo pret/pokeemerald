@@ -1,0 +1,81 @@
+{
+  "id": "MAP_ANCIENT_TOMB",
+  "name": "AncientTomb",
+  "layout": "LAYOUT_ANCIENT_TOMB",
+  "music": "MUS_MABOROSI",
+  "region_map_section": "MAPSEC_ANCIENT_TOMB",
+  "requires_flash": false,
+  "weather": "WEATHER_NONE",
+  "map_type": "MAP_TYPE_UNDERGROUND",
+  "allow_bike": true,
+  "allow_escape_rope": true,
+  "allow_running": true,
+  "show_map_name": true,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+  "connections": null,
+  "object_events": [
+    {
+      "graphics_id": "EVENT_OBJ_GFX_REGISTEEL",
+      "x": 8,
+      "y": 7,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "AncientTomb_EventScript_23905A",
+      "flag": "FLAG_HIDE_REGISTEEL"
+    }
+  ],
+  "warp_events": [
+    {
+      "x": 8,
+      "y": 29,
+      "elevation": 3,
+      "dest_map": "MAP_ROUTE120",
+      "dest_warp_id": 0
+    },
+    {
+      "x": 8,
+      "y": 20,
+      "elevation": 0,
+      "dest_map": "MAP_ANCIENT_TOMB",
+      "dest_warp_id": 2
+    },
+    {
+      "x": 8,
+      "y": 11,
+      "elevation": 3,
+      "dest_map": "MAP_ANCIENT_TOMB",
+      "dest_warp_id": 1
+    }
+  ],
+  "coord_events": [],
+  "bg_events": [
+    {
+      "type": "sign",
+      "x": 8,
+      "y": 20,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "AncientTomb_EventScript_239033"
+    },
+    {
+      "type": "sign",
+      "x": 7,
+      "y": 20,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "AncientTomb_EventScript_239050"
+    },
+    {
+      "type": "sign",
+      "x": 9,
+      "y": 20,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "AncientTomb_EventScript_239050"
+    }
+  ]
+}

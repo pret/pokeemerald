@@ -1,5 +1,5 @@
 ShoalCave_LowTideEntranceRoom_MapScripts:: @ 8236DBA
-	map_script 3, ShoalCave_LowTideEntranceRoom_MapScript1_236DC0
+	map_script MAP_SCRIPT_ON_TRANSITION, ShoalCave_LowTideEntranceRoom_MapScript1_236DC0
 	.byte 0
 
 ShoalCave_LowTideEntranceRoom_MapScript1_236DC0: @ 8236DC0
@@ -8,17 +8,17 @@ ShoalCave_LowTideEntranceRoom_MapScript1_236DC0: @ 8236DC0
 	goto ShoalCave_LowTideEntranceRoom_EventScript_236DD5
 
 ShoalCave_LowTideEntranceRoom_EventScript_236DD1:: @ 8236DD1
-	setmaplayoutindex 168
+	setmaplayoutindex LAYOUT_SHOAL_CAVE_HIGH_TIDE_ENTRANCE_ROOM
 	end
 
 ShoalCave_LowTideEntranceRoom_EventScript_236DD5:: @ 8236DD5
-	setmaplayoutindex 164
+	setmaplayoutindex LAYOUT_SHOAL_CAVE_LOW_TIDE_ENTRANCE_ROOM
 	end
 
 ShoalCave_LowTideEntranceRoom_EventScript_236DD9:: @ 8236DD9
 	lock
 	faceplayer
-	dodailyevents
+	dotimebasedevents
 	call_if_set FLAG_SYS_SHOAL_ITEM, ShoalCave_LowTideEntranceRoom_EventScript_236ED9
 	checkitem ITEM_SHOAL_SALT, 4
 	compare VAR_RESULT, 0
@@ -39,7 +39,7 @@ ShoalCave_LowTideEntranceRoom_EventScript_236DD9:: @ 8236DD9
 	takeitem ITEM_SHOAL_SHELL, 4
 	giveitem_std ITEM_SHELL_BELL
 	compare VAR_RESULT, 0
-	goto_if_eq ShoalCave_LowTideEntranceRoom_EventScript_272054
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	msgbox ShoalCave_LowTideEntranceRoom_Text_2A8012, MSGBOX_DEFAULT
 	setflag FLAG_TEMP_2
 	release

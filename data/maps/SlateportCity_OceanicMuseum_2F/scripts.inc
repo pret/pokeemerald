@@ -43,8 +43,8 @@ SlateportCity_OceanicMuseum_2F_EventScript_20BB00:: @ 820BB00
 	trainerbattle_no_intro TRAINER_GRUNT_15, SlateportCity_OceanicMuseum_2F_Text_20BF66
 	applymovement 3, SlateportCity_OceanicMuseum_2F_Movement_20BCEF
 	waitmovement 0
-	applymovement 3, SlateportCity_OceanicMuseum_2F_Movement_2725AA
-	applymovement 4, SlateportCity_OceanicMuseum_2F_Movement_2725A6
+	applymovement 3, Common_Movement_WalkInPlaceDown
+	applymovement 4, Common_Movement_WalkInPlaceUp
 	waitmovement 0
 	msgbox SlateportCity_OceanicMuseum_2F_Text_20BF7A, MSGBOX_DEFAULT
 	closemessage
@@ -68,7 +68,7 @@ SlateportCity_OceanicMuseum_2F_EventScript_20BB00:: @ 820BB00
 	fadescreen 0
 	delay 30
 	setflag FLAG_HIDE_SLATEPORT_CITY_OCEANIC_MUSEUM_AQUA_GRUNTS
-	applymovement EVENT_OBJ_ID_PLAYER, SlateportCity_OceanicMuseum_2F_Movement_2725A8
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceRight
 	waitmovement 0
 	msgbox SlateportCity_OceanicMuseum_2F_Text_20C2BE, MSGBOX_DEFAULT
 	setvar VAR_0x8004, 269
@@ -86,7 +86,7 @@ SlateportCity_OceanicMuseum_2F_EventScript_20BB00:: @ 820BB00
 	setflag FLAG_DELIVERED_DEVON_GOODS
 	clearflag FLAG_HIDE_ROUTE_116_DEVON_EMPLOYEE
 	setflag FLAG_HIDE_RUSTBORO_CITY_DEVON_CORP_3F_EMPLOYEE
-	setvar VAR_0x40D2, 1
+	setvar VAR_SLATEPORT_OUTSIDE_MUSEUM_STATE, 1
 	fadescreen 0
 	release
 	end
@@ -96,12 +96,12 @@ SlateportCity_OceanicMuseum_2F_EventScript_20BC8C:: @ 820BC8C
 	return
 
 SlateportCity_OceanicMuseum_2F_EventScript_20BC92:: @ 820BC92
-	applymovement EVENT_OBJ_ID_PLAYER, SlateportCity_OceanicMuseum_2F_Movement_2725A4
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceLeft
 	waitmovement 0
 	return
 
 SlateportCity_OceanicMuseum_2F_EventScript_20BC9D:: @ 820BC9D
-	applymovement 1, SlateportCity_OceanicMuseum_2F_Movement_2725A4
+	applymovement 1, Common_Movement_WalkInPlaceLeft
 	waitmovement 0
 	return
 
@@ -268,7 +268,7 @@ SlateportCity_OceanicMuseum_2F_EventScript_20BD76:: @ 820BD76
 	faceplayer
 	msgbox SlateportCity_OceanicMuseum_2F_Text_20C4C2, MSGBOX_DEFAULT
 	closemessage
-	applymovement VAR_LAST_TALKED, SlateportCity_OceanicMuseum_2F_Movement_2725A2
+	applymovement VAR_LAST_TALKED, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end

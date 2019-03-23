@@ -1,0 +1,191 @@
+{
+  "id": "MAP_SLATEPORT_CITY_HARBOR",
+  "name": "SlateportCity_Harbor",
+  "layout": "LAYOUT_HARBOR",
+  "music": "MUS_FINECITY",
+  "region_map_section": "MAPSEC_SLATEPORT_CITY",
+  "requires_flash": false,
+  "weather": "WEATHER_NONE",
+  "map_type": "MAP_TYPE_INDOOR",
+  "allow_bike": false,
+  "allow_escape_rope": false,
+  "allow_running": false,
+  "show_map_name": false,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+  "connections": null,
+  "object_events": [
+    {
+      "graphics_id": "EVENT_OBJ_GFX_BEAUTY",
+      "x": 8,
+      "y": 10,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "SlateportCity_Harbor_EventScript_20CAF1",
+      "flag": "FLAG_HIDE_SLATEPORT_CITY_HARBOR_PATRONS"
+    },
+    {
+      "graphics_id": "EVENT_OBJ_GFX_SAILOR",
+      "x": 4,
+      "y": 12,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "SlateportCity_Harbor_EventScript_20CC52",
+      "flag": "FLAG_HIDE_SLATEPORT_CITY_HARBOR_PATRONS"
+    },
+    {
+      "graphics_id": "EVENT_OBJ_GFX_FAT_MAN",
+      "x": 1,
+      "y": 12,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "SlateportCity_Harbor_EventScript_20CC99",
+      "flag": "FLAG_HIDE_SLATEPORT_CITY_HARBOR_PATRONS"
+    },
+    {
+      "graphics_id": "EVENT_OBJ_GFX_SCIENTIST_1",
+      "x": 6,
+      "y": 13,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "SlateportCity_Harbor_EventScript_20CCA2",
+      "flag": "FLAG_HIDE_SLATEPORT_CITY_HARBOR_CAPTAIN_STERN"
+    },
+    {
+      "graphics_id": "EVENT_OBJ_GFX_SS_TIDAL",
+      "x": 8,
+      "y": 9,
+      "elevation": 1,
+      "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "0x0",
+      "flag": "FLAG_HIDE_SLATEPORT_CITY_HARBOR_SS_TIDAL"
+    },
+    {
+      "graphics_id": "EVENT_OBJ_GFX_AQUA_MEMBER_M",
+      "x": 7,
+      "y": 10,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "0x0",
+      "flag": "FLAG_HIDE_SLATEPORT_CITY_HARBOR_AQUA_GRUNT"
+    },
+    {
+      "graphics_id": "EVENT_OBJ_GFX_ARCHIE",
+      "x": 8,
+      "y": 10,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "0x0",
+      "flag": "FLAG_HIDE_SLATEPORT_CITY_HARBOR_ARCHIE"
+    },
+    {
+      "graphics_id": "EVENT_OBJ_GFX_SUBMARINE_SHADOW",
+      "x": 7,
+      "y": 9,
+      "elevation": 1,
+      "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "0x0",
+      "flag": "FLAG_HIDE_SLATEPORT_CITY_HARBOR_SUBMARINE_SHADOW"
+    }
+  ],
+  "warp_events": [
+    {
+      "x": 11,
+      "y": 14,
+      "elevation": 0,
+      "dest_map": "MAP_SLATEPORT_CITY",
+      "dest_warp_id": 8
+    },
+    {
+      "x": 12,
+      "y": 14,
+      "elevation": 0,
+      "dest_map": "MAP_SLATEPORT_CITY",
+      "dest_warp_id": 8
+    },
+    {
+      "x": 19,
+      "y": 15,
+      "elevation": 0,
+      "dest_map": "MAP_SLATEPORT_CITY",
+      "dest_warp_id": 9
+    },
+    {
+      "x": 20,
+      "y": 15,
+      "elevation": 0,
+      "dest_map": "MAP_SLATEPORT_CITY",
+      "dest_warp_id": 9
+    }
+  ],
+  "coord_events": [
+    {
+      "type": "trigger",
+      "x": 8,
+      "y": 11,
+      "elevation": 3,
+      "var": "VAR_SLATEPORT_HARBOR_STATE",
+      "var_value": "1",
+      "script": "SlateportCity_Harbor_EventScript_20C9BB"
+    },
+    {
+      "type": "trigger",
+      "x": 8,
+      "y": 12,
+      "elevation": 3,
+      "var": "VAR_SLATEPORT_HARBOR_STATE",
+      "var_value": "1",
+      "script": "SlateportCity_Harbor_EventScript_20C9C7"
+    },
+    {
+      "type": "trigger",
+      "x": 8,
+      "y": 13,
+      "elevation": 3,
+      "var": "VAR_SLATEPORT_HARBOR_STATE",
+      "var_value": "1",
+      "script": "SlateportCity_Harbor_EventScript_20C9D3"
+    },
+    {
+      "type": "trigger",
+      "x": 8,
+      "y": 14,
+      "elevation": 3,
+      "var": "VAR_SLATEPORT_HARBOR_STATE",
+      "var_value": "1",
+      "script": "SlateportCity_Harbor_EventScript_20C9DF"
+    }
+  ],
+  "bg_events": []
+}

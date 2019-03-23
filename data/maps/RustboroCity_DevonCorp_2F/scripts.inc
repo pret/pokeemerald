@@ -1,20 +1,20 @@
 RustboroCity_DevonCorp_2F_MapScripts:: @ 8211857
-	map_script 3, RustboroCity_DevonCorp_2F_MapScript1_21185D
+	map_script MAP_SCRIPT_ON_TRANSITION, RustboroCity_DevonCorp_2F_MapScript1_21185D
 	.byte 0
 
 RustboroCity_DevonCorp_2F_MapScript1_21185D: @ 821185D
-	compare VAR_0x40C4, 1
+	compare VAR_FOSSIL_RESURRECTION_STATE, 1
 	call_if_eq RustboroCity_DevonCorp_2F_EventScript_211869
 	end
 
 RustboroCity_DevonCorp_2F_EventScript_211869:: @ 8211869
-	setvar VAR_0x40C4, 2
+	setvar VAR_FOSSIL_RESURRECTION_STATE, 2
 	return
 
 RustboroCity_DevonCorp_2F_EventScript_21186F:: @ 821186F
 	lock
 	faceplayer
-	compare VAR_0x40C4, 1
+	compare VAR_FOSSIL_RESURRECTION_STATE, 1
 	call_if_eq RustboroCity_DevonCorp_2F_EventScript_211869
 	msgbox RustboroCity_DevonCorp_2F_Text_211BFB, MSGBOX_DEFAULT
 	release
@@ -23,7 +23,7 @@ RustboroCity_DevonCorp_2F_EventScript_21186F:: @ 821186F
 RustboroCity_DevonCorp_2F_EventScript_211886:: @ 8211886
 	lock
 	faceplayer
-	compare VAR_0x40C4, 1
+	compare VAR_FOSSIL_RESURRECTION_STATE, 1
 	call_if_eq RustboroCity_DevonCorp_2F_EventScript_211869
 	goto_if_set FLAG_MET_DEVON_EMPLOYEE, RustboroCity_DevonCorp_2F_EventScript_2118A6
 	msgbox RustboroCity_DevonCorp_2F_Text_211C50, MSGBOX_DEFAULT
@@ -38,7 +38,7 @@ RustboroCity_DevonCorp_2F_EventScript_2118A6:: @ 82118A6
 RustboroCity_DevonCorp_2F_EventScript_2118B0:: @ 82118B0
 	lock
 	faceplayer
-	compare VAR_0x40C4, 1
+	compare VAR_FOSSIL_RESURRECTION_STATE, 1
 	call_if_eq RustboroCity_DevonCorp_2F_EventScript_211869
 	goto_if_set FLAG_RECEIVED_POKENAV, RustboroCity_DevonCorp_2F_EventScript_2118D0
 	msgbox RustboroCity_DevonCorp_2F_Text_211D9F, MSGBOX_DEFAULT
@@ -53,7 +53,7 @@ RustboroCity_DevonCorp_2F_EventScript_2118D0:: @ 82118D0
 RustboroCity_DevonCorp_2F_EventScript_2118DA:: @ 82118DA
 	lock
 	faceplayer
-	compare VAR_0x40C4, 1
+	compare VAR_FOSSIL_RESURRECTION_STATE, 1
 	call_if_eq RustboroCity_DevonCorp_2F_EventScript_211869
 	msgbox RustboroCity_DevonCorp_2F_Text_211EE0, MSGBOX_DEFAULT
 	release
@@ -62,9 +62,9 @@ RustboroCity_DevonCorp_2F_EventScript_2118DA:: @ 82118DA
 RustboroCity_DevonCorp_2F_EventScript_2118F1:: @ 82118F1
 	lock
 	faceplayer
-	compare VAR_0x40C4, 2
+	compare VAR_FOSSIL_RESURRECTION_STATE, 2
 	goto_if_eq RustboroCity_DevonCorp_2F_EventScript_211A03
-	compare VAR_0x40C4, 1
+	compare VAR_FOSSIL_RESURRECTION_STATE, 1
 	goto_if_eq RustboroCity_DevonCorp_2F_EventScript_2119F9
 	msgbox RustboroCity_DevonCorp_2F_Text_211F48, MSGBOX_DEFAULT
 	checkitem ITEM_ROOT_FOSSIL, 1
@@ -79,9 +79,9 @@ RustboroCity_DevonCorp_2F_EventScript_2118F1:: @ 82118F1
 RustboroCity_DevonCorp_2F_EventScript_211933:: @ 8211933
 	closemessage
 	playse SE_PIN
-	applymovement 5, RustboroCity_DevonCorp_2F_Movement_272598
+	applymovement 5, Common_Movement_ExclamationMark
 	waitmovement 0
-	applymovement 5, RustboroCity_DevonCorp_2F_Movement_27259A
+	applymovement 5, Common_Movement_Delay48
 	waitmovement 0
 	msgbox RustboroCity_DevonCorp_2F_Text_211FA6, MSGBOX_YESNO
 	compare VAR_RESULT, 0
@@ -96,17 +96,17 @@ RustboroCity_DevonCorp_2F_EventScript_211974:: @ 8211974
 	bufferitemname 0, ITEM_ROOT_FOSSIL
 	msgbox RustboroCity_DevonCorp_2F_Text_212153, MSGBOX_DEFAULT
 	takeitem ITEM_ROOT_FOSSIL, 1
-	setvar VAR_0x40C4, 1
-	setvar VAR_0x40C5, 1
+	setvar VAR_FOSSIL_RESURRECTION_STATE, 1
+	setvar VAR_WHICH_FOSSIL_REVIVED, 1
 	release
 	end
 
 RustboroCity_DevonCorp_2F_EventScript_211991:: @ 8211991
 	closemessage
 	playse SE_PIN
-	applymovement 5, RustboroCity_DevonCorp_2F_Movement_272598
+	applymovement 5, Common_Movement_ExclamationMark
 	waitmovement 0
-	applymovement 5, RustboroCity_DevonCorp_2F_Movement_27259A
+	applymovement 5, Common_Movement_Delay48
 	waitmovement 0
 	msgbox RustboroCity_DevonCorp_2F_Text_211FA6, MSGBOX_YESNO
 	compare VAR_RESULT, 0
@@ -121,8 +121,8 @@ RustboroCity_DevonCorp_2F_EventScript_2119D2:: @ 82119D2
 	bufferitemname 0, ITEM_CLAW_FOSSIL
 	msgbox RustboroCity_DevonCorp_2F_Text_212153, MSGBOX_DEFAULT
 	takeitem ITEM_CLAW_FOSSIL, 1
-	setvar VAR_0x40C4, 1
-	setvar VAR_0x40C5, 2
+	setvar VAR_FOSSIL_RESURRECTION_STATE, 1
+	setvar VAR_WHICH_FOSSIL_REVIVED, 2
 	release
 	end
 
@@ -137,9 +137,9 @@ RustboroCity_DevonCorp_2F_EventScript_2119F9:: @ 82119F9
 	end
 
 RustboroCity_DevonCorp_2F_EventScript_211A03:: @ 8211A03
-	compare VAR_0x40C5, 1
+	compare VAR_WHICH_FOSSIL_REVIVED, 1
 	goto_if_eq RustboroCity_DevonCorp_2F_EventScript_211A1A
-	compare VAR_0x40C5, 2
+	compare VAR_WHICH_FOSSIL_REVIVED, 2
 	goto_if_eq RustboroCity_DevonCorp_2F_EventScript_211A2C
 	end
 
@@ -171,7 +171,7 @@ RustboroCity_DevonCorp_2F_EventScript_211A6E:: @ 8211A6E
 	compare VAR_RESULT, 0
 	goto_if_eq RustboroCity_DevonCorp_2F_EventScript_211AD7
 	call RustboroCity_DevonCorp_2F_EventScript_27378B
-	call RustboroCity_DevonCorp_2F_EventScript_2723DD
+	call Common_EventScript_NameReceivedPokemon
 	goto RustboroCity_DevonCorp_2F_EventScript_211AD7
 	end
 
@@ -199,7 +199,7 @@ RustboroCity_DevonCorp_2F_EventScript_211AC4:: @ 8211AC4
 	return
 
 RustboroCity_DevonCorp_2F_EventScript_211AD7:: @ 8211AD7
-	setvar VAR_0x40C4, 0
+	setvar VAR_FOSSIL_RESURRECTION_STATE, 0
 	setflag FLAG_RECEIVED_REVIVED_FOSSIL_MON
 	release
 	end
@@ -220,7 +220,7 @@ RustboroCity_DevonCorp_2F_EventScript_211B11:: @ 8211B11
 	compare VAR_RESULT, 0
 	goto_if_eq RustboroCity_DevonCorp_2F_EventScript_211B7A
 	call RustboroCity_DevonCorp_2F_EventScript_27378B
-	call RustboroCity_DevonCorp_2F_EventScript_2723DD
+	call Common_EventScript_NameReceivedPokemon
 	goto RustboroCity_DevonCorp_2F_EventScript_211B7A
 	end
 
@@ -248,7 +248,7 @@ RustboroCity_DevonCorp_2F_EventScript_211B67:: @ 8211B67
 	return
 
 RustboroCity_DevonCorp_2F_EventScript_211B7A:: @ 8211B7A
-	setvar VAR_0x40C4, 0
+	setvar VAR_FOSSIL_RESURRECTION_STATE, 0
 	setflag FLAG_RECEIVED_REVIVED_FOSSIL_MON
 	release
 	end
@@ -279,9 +279,9 @@ RustboroCity_DevonCorp_2F_EventScript_211BCD:: @ 8211BCD
 RustboroCity_DevonCorp_2F_EventScript_211BCF:: @ 8211BCF
 	lock
 	faceplayer
-	compare VAR_0x40C4, 1
+	compare VAR_FOSSIL_RESURRECTION_STATE, 1
 	call_if_eq RustboroCity_DevonCorp_2F_EventScript_211869
-	compare VAR_0x405A, 6
+	compare VAR_RUSTBORO_STATE, 6
 	goto_if_ge RustboroCity_DevonCorp_2F_EventScript_211BF1
 	msgbox RustboroCity_DevonCorp_2F_Text_212338, MSGBOX_DEFAULT
 	release

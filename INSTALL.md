@@ -66,6 +66,14 @@ cd ../pokeemerald
 
 And build the ROM with `make`.
 
+If the step `./build.sh` in the above list of commands fails with the error `Makefile:1: /opt/devkitpro/devkitARM/base_tools: No such file or directory`, then try installing the pacman package `devkitarm-rules` by executing the command
+
+```
+sudo dkp-pacman -S devkitarm-rules
+```
+
+Executing `./build.sh` again should now succeed.
+
 # Faster builds
 
 After the first build, subsequent builds are faster. You can further speed up the build:

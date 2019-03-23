@@ -1,0 +1,71 @@
+{
+  "id": "MAP_SOUTHERN_ISLAND_INTERIOR",
+  "name": "SouthernIsland_Interior",
+  "layout": "LAYOUT_SOUTHERN_ISLAND_INTERIOR",
+  "music": "MUS_DAN02",
+  "region_map_section": "MAPSEC_SOUTHERN_ISLAND",
+  "requires_flash": false,
+  "weather": "WEATHER_SHADE",
+  "map_type": "MAP_TYPE_ROUTE",
+  "allow_bike": true,
+  "allow_escape_rope": false,
+  "allow_running": true,
+  "show_map_name": true,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+  "connections": null,
+  "object_events": [
+    {
+      "graphics_id": "EVENT_OBJ_GFX_VAR_0",
+      "x": 13,
+      "y": 12,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_UP",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "0x0",
+      "flag": "FLAG_HIDE_SOUTHERN_ISLAND_EON_STONE"
+    },
+    {
+      "graphics_id": "EVENT_OBJ_GFX_VAR_1",
+      "x": 13,
+      "y": 2,
+      "elevation": 0,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "0x0",
+      "flag": "FLAG_HIDE_SOUTHERN_ISLAND_UNCHOSEN_EON_DUO_MON"
+    }
+  ],
+  "warp_events": [
+    {
+      "x": 13,
+      "y": 18,
+      "elevation": 3,
+      "dest_map": "MAP_SOUTHERN_ISLAND_EXTERIOR",
+      "dest_warp_id": 0
+    },
+    {
+      "x": 14,
+      "y": 18,
+      "elevation": 3,
+      "dest_map": "MAP_SOUTHERN_ISLAND_EXTERIOR",
+      "dest_warp_id": 1
+    }
+  ],
+  "coord_events": [],
+  "bg_events": [
+    {
+      "type": "sign",
+      "x": 13,
+      "y": 11,
+      "elevation": 3,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
+      "script": "SouthernIsland_Interior_EventScript_242AC4"
+    }
+  ]
+}

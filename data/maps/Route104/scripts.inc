@@ -1,10 +1,10 @@
 Route104_MapScripts:: @ 81ECC32
-	map_script 2, Route104_MapScript2_1ECC3D
-	map_script 3, Route104_MapScript1_1ECC4E
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, Route104_MapScript2_1ECC3D
+	map_script MAP_SCRIPT_ON_TRANSITION, Route104_MapScript1_1ECC4E
 	.byte 0
 
 Route104_MapScript2_1ECC3D: @ 81ECC3D
-	map_script_2 VAR_0x408E, 1, Route104_EventScript_1ECC47
+	map_script_2 VAR_BOARD_BRINEY_BOAT_ROUTE104_STATE, 1, Route104_EventScript_1ECC47
 	.2byte 0
 
 Route104_EventScript_1ECC47:: @ 81ECC47
@@ -13,7 +13,7 @@ Route104_EventScript_1ECC47:: @ 81ECC47
 	end
 
 Route104_MapScript1_1ECC4E: @ 81ECC4E
-	call Route104_EventScript_271ED7
+	call Common_EventScript_SetupRivalGender
 	call Route104_EventScript_1ECC78
 	call Route104_EventScript_1ECC5E
 	end
@@ -29,7 +29,7 @@ Route104_EventScript_1ECC74:: @ 81ECC74
 	return
 
 Route104_EventScript_1ECC78:: @ 81ECC78
-	compare VAR_0x408E, 1
+	compare VAR_BOARD_BRINEY_BOAT_ROUTE104_STATE, 1
 	goto_if_ge Route104_EventScript_1ECC9D
 	goto_if_set FLAG_MET_RIVAL_RUSTBORO, Route104_EventScript_1ECC9D
 	goto_if_unset FLAG_REGISTER_RIVAL_POKENAV, Route104_EventScript_1ECC9D
@@ -42,16 +42,16 @@ Route104_EventScript_1ECC9D:: @ 81ECC9D
 Route104_EventScript_1ECC9E:: @ 81ECC9E
 	lockall
 	setvar VAR_0x8008, 1
-	applymovement 34, Route104_Movement_27259E
+	applymovement 34, Common_Movement_FacePlayer
 	waitmovement 0
 	goto Route104_EventScript_1ECD33
 
 Route104_EventScript_1ECCB3:: @ 81ECCB3
 	lockall
 	setflag FLAG_HIDE_RUSBORO_CITY_RIVAL
-	setvar VAR_0x405A, 8
+	setvar VAR_RUSTBORO_STATE, 8
 	setvar VAR_0x4063, 2
-	applymovement EVENT_OBJ_ID_PLAYER, Route104_Movement_2725A6
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceUp
 	waitmovement 0
 	delay 10
 	addobject 34
@@ -64,9 +64,9 @@ Route104_EventScript_1ECCB3:: @ 81ECCB3
 	setvar VAR_0x8008, 0
 	call Route104_EventScript_1E0DD1
 	playse SE_PIN
-	applymovement 34, Route104_Movement_272598
+	applymovement 34, Common_Movement_ExclamationMark
 	waitmovement 0
-	applymovement 34, Route104_Movement_27259A
+	applymovement 34, Common_Movement_Delay48
 	waitmovement 0
 	goto Route104_EventScript_1ECD33
 
@@ -270,7 +270,7 @@ Route104_EventScript_1ECF8C:: @ 81ECF8C
 	msgbox Route104_Text_2A6D86, MSGBOX_DEFAULT
 	giveitem_std ITEM_CHESTO_BERRY
 	compare VAR_RESULT, 0
-	goto_if_eq Route104_EventScript_272054
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_CHESTO_BERRY_ROUTE_104
 	msgbox Route104_Text_2A6E32, MSGBOX_DEFAULT
 	release
@@ -288,7 +288,7 @@ Route104_EventScript_1ECFCD:: @ 81ECFCD
 	msgbox Route104_Text_1ED96A, MSGBOX_DEFAULT
 	giveitem_std ITEM_WHITE_HERB
 	compare VAR_RESULT, 0
-	goto_if_eq Route104_EventScript_272054
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_WHITE_HERB
 	release
 	end
@@ -341,7 +341,7 @@ Route104_EventScript_1ED057:: @ 81ED057
 	msgbox Route104_Text_1ED838, MSGBOX_DEFAULT
 	giveitem_std ITEM_TM09
 	compare VAR_RESULT, 0
-	goto_if_eq Route104_EventScript_272054
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_TM09
 	release
 	end
@@ -413,11 +413,11 @@ Route104_EventScript_1ED139:: @ 81ED139
 	call Route104_EventScript_2720A8
 	setflag FLAG_HIDE_ROUTE_104_MR_BRINEY_BOAT
 	hideobjectat 7, MAP_ROUTE104
-	copyvar VAR_0x4096, VAR_0x8008
+	copyvar VAR_BRINEY_LOCATION, VAR_0x8008
 	resetobjectpriority EVENT_OBJ_ID_PLAYER, MAP_ROUTE104
 	resetobjectpriority 2, MAP_DEWFORD_TOWN
 	moveobjectoffscreen 2
-	setvar VAR_0x408E, 0
+	setvar VAR_BOARD_BRINEY_BOAT_ROUTE104_STATE, 0
 	goto_if_unset FLAG_DELIVERED_STEVEN_LETTER, Route104_EventScript_1ED1B4
 	goto_if_set FLAG_DELIVERED_STEVEN_LETTER, Route104_EventScript_1ED1BE
 	end

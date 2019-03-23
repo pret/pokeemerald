@@ -1,0 +1,153 @@
+{
+  "id": "MAP_UNION_ROOM",
+  "name": "UnionRoom",
+  "layout": "LAYOUT_UNION_ROOM",
+  "music": "MUS_RAINBOW",
+  "region_map_section": "MAPSEC_DYNAMIC",
+  "requires_flash": false,
+  "weather": "WEATHER_NONE",
+  "map_type": "MAP_TYPE_INDOOR",
+  "allow_bike": false,
+  "allow_escape_rope": false,
+  "allow_running": false,
+  "show_map_name": false,
+  "battle_scene": "MAP_BATTLE_SCENE_FRONTIER",
+  "connections": null,
+  "object_events": [
+    {
+      "graphics_id": "EVENT_OBJ_GFX_UNION_ROOM_NURSE",
+      "x": 3,
+      "y": 2,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "UnionRoom_EventScript_23D236",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "EVENT_OBJ_GFX_VAR_3",
+      "x": 1,
+      "y": 8,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_WANDER_AROUND",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "UnionRoom_EventScript_23D204",
+      "flag": "FLAG_HIDE_UNION_ROOM_PLAYER_4"
+    },
+    {
+      "graphics_id": "EVENT_OBJ_GFX_VAR_7",
+      "x": 7,
+      "y": 8,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_WANDER_AROUND",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "UnionRoom_EventScript_23D22C",
+      "flag": "FLAG_HIDE_UNION_ROOM_PLAYER_8"
+    },
+    {
+      "graphics_id": "EVENT_OBJ_GFX_VAR_6",
+      "x": 1,
+      "y": 4,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_WANDER_AROUND",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "UnionRoom_EventScript_23D222",
+      "flag": "FLAG_HIDE_UNION_ROOM_PLAYER_7"
+    },
+    {
+      "graphics_id": "EVENT_OBJ_GFX_VAR_5",
+      "x": 7,
+      "y": 4,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_WANDER_AROUND",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "UnionRoom_EventScript_23D218",
+      "flag": "FLAG_HIDE_UNION_ROOM_PLAYER_6"
+    },
+    {
+      "graphics_id": "EVENT_OBJ_GFX_VAR_4",
+      "x": 13,
+      "y": 4,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_WANDER_AROUND",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "UnionRoom_EventScript_23D20E",
+      "flag": "FLAG_HIDE_UNION_ROOM_PLAYER_5"
+    },
+    {
+      "graphics_id": "EVENT_OBJ_GFX_VAR_2",
+      "x": 10,
+      "y": 6,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_WANDER_AROUND",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "UnionRoom_EventScript_23D1FA",
+      "flag": "FLAG_HIDE_UNION_ROOM_PLAYER_3"
+    },
+    {
+      "graphics_id": "EVENT_OBJ_GFX_VAR_1",
+      "x": 13,
+      "y": 8,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_WANDER_AROUND",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "UnionRoom_EventScript_23D1F0",
+      "flag": "FLAG_HIDE_UNION_ROOM_PLAYER_2"
+    },
+    {
+      "graphics_id": "EVENT_OBJ_GFX_VAR_0",
+      "x": 4,
+      "y": 6,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_WANDER_AROUND",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "UnionRoom_EventScript_23D1E6",
+      "flag": "FLAG_HIDE_UNION_ROOM_PLAYER_1"
+    }
+  ],
+  "warp_events": [
+    {
+      "x": 7,
+      "y": 11,
+      "elevation": 3,
+      "dest_map": "MAP_NONE",
+      "dest_warp_id": 127
+    },
+    {
+      "x": 8,
+      "y": 11,
+      "elevation": 3,
+      "dest_map": "MAP_NONE",
+      "dest_warp_id": 127
+    }
+  ],
+  "coord_events": [],
+  "bg_events": []
+}

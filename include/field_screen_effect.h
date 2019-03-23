@@ -5,7 +5,7 @@ void pal_fill_for_maplights(void);
 void pal_fill_black(void);
 void WarpFadeScreen(void);
 void sub_80AF128(void);
-void sub_80AF168(void);
+void FieldCallback_ReturnToEventScript2(void);
 void sub_80AF188(void);
 void sub_80AF214(void);
 void sub_80AF2B4(u8 taskId);
@@ -34,11 +34,13 @@ void sub_80AF948(void);
 void sub_80AF9F8(void);
 void sub_80AFC60(void);
 void sub_80B009C(u8 flashLevel);
-void door_upload_tiles(void);
+void WriteBattlePyramidViewScanlineEffectBuffer(void);
 void sub_80B0244(void);
 void sub_80B0268(void);
 void sub_80B0534(void);
 void sub_80B058C(void);
 void sub_80B05B4(void);
+void WriteFlashScanlineEffectBuffer(u8 flashLevel);
+bool8 walkrun_is_standing_still(void);
 
 #endif // GUARD_FIELD_SCREEN_EFFECT_H

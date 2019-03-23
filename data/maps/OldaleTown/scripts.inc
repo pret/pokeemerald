@@ -1,9 +1,9 @@
 OldaleTown_MapScripts:: @ 81E8EA2
-	map_script 3, OldaleTown_MapScript1_1E8EA8
+	map_script MAP_SCRIPT_ON_TRANSITION, OldaleTown_MapScript1_1E8EA8
 	.byte 0
 
 OldaleTown_MapScript1_1E8EA8: @ 81E8EA8
-	call OldaleTown_EventScript_271ED7
+	call Common_EventScript_SetupRivalGender
 	setflag FLAG_VISITED_OLDALE_TOWN
 	call_if_unset FLAG_ADVENTURE_STARTED, OldaleTown_EventScript_1E8ED2
 	call_if_unset FLAG_RECEIVED_POTION_OLDALE, OldaleTown_EventScript_1E8EDE
@@ -11,7 +11,7 @@ OldaleTown_MapScript1_1E8EA8: @ 81E8EA8
 	end
 
 OldaleTown_EventScript_1E8ECC:: @ 81E8ECC
-	setvar VAR_0x4051, 1
+	setvar VAR_ROUTE102_ACCESSIBLE, 1
 	return
 
 OldaleTown_EventScript_1E8ED2:: @ 81E8ED2
@@ -85,7 +85,7 @@ OldaleTown_EventScript_1E8FB9:: @ 81E8FB9
 	end
 
 OldaleTown_EventScript_1E8FC3:: @ 81E8FC3
-	msgbox gUnknown_08272AD0, MSGBOX_DEFAULT
+	msgbox gText_TooBadBagIsFull, MSGBOX_DEFAULT
 	fadedefaultbgm
 	release
 	end
@@ -193,7 +193,7 @@ OldaleTown_EventScript_1E901F:: @ 81E901F
 	goto_if_set FLAG_ADVENTURE_STARTED, OldaleTown_EventScript_1E9066
 	msgbox OldaleTown_Text_1E939A, MSGBOX_DEFAULT
 	closemessage
-	applymovement 3, OldaleTown_Movement_2725A2
+	applymovement 3, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end
@@ -217,7 +217,7 @@ OldaleTown_EventScript_1E9066:: @ 81E9066
 
 OldaleTown_EventScript_1E9070:: @ 81E9070
 	lockall
-	applymovement 4, OldaleTown_Movement_27259E
+	applymovement 4, Common_Movement_FacePlayer
 	waitmovement 0
 	setvar VAR_0x8009, 0
 	goto OldaleTown_EventScript_1E90E6
@@ -227,7 +227,7 @@ OldaleTown_EventScript_1E9086:: @ 81E9086
 	lockall
 	applymovement 4, OldaleTown_Movement_1E9170
 	waitmovement 0
-	applymovement EVENT_OBJ_ID_PLAYER, OldaleTown_Movement_2725A8
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceRight
 	waitmovement 0
 	setvar VAR_0x8009, 1
 	goto OldaleTown_EventScript_1E90E6
@@ -237,7 +237,7 @@ OldaleTown_EventScript_1E90A6:: @ 81E90A6
 	lockall
 	applymovement 4, OldaleTown_Movement_1E9173
 	waitmovement 0
-	applymovement EVENT_OBJ_ID_PLAYER, OldaleTown_Movement_2725A8
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceRight
 	waitmovement 0
 	setvar VAR_0x8009, 1
 	goto OldaleTown_EventScript_1E90E6
@@ -247,7 +247,7 @@ OldaleTown_EventScript_1E90C6:: @ 81E90C6
 	lockall
 	applymovement 4, OldaleTown_Movement_1E9175
 	waitmovement 0
-	applymovement EVENT_OBJ_ID_PLAYER, OldaleTown_Movement_2725A8
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceRight
 	waitmovement 0
 	setvar VAR_0x8009, 1
 	goto OldaleTown_EventScript_1E90E6
@@ -280,7 +280,7 @@ OldaleTown_EventScript_1E911A:: @ 81E911A
 	applymovement 4, OldaleTown_Movement_1E9177
 	waitmovement 0
 	removeobject 4
-	setvar VAR_0x40C7, 2
+	setvar VAR_OLDALE_STATE, 2
 	setflag FLAG_HIDE_OLDALE_TOWN_RIVAL
 	releaseall
 	end

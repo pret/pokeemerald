@@ -1,17 +1,17 @@
 Route116_MapScripts:: @ 81F2C0C
-	map_script 3, Route116_MapScript1_1F2C1C
-	map_script 1, Route116_MapScript1_1F2C4F
-	map_script 2, Route116_MapScript2_1F2C66
+	map_script MAP_SCRIPT_ON_TRANSITION, Route116_MapScript1_1F2C1C
+	map_script MAP_SCRIPT_ON_LOAD, Route116_MapScript1_1F2C4F
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, Route116_MapScript2_1F2C66
 	.byte 0
 
 Route116_MapScript1_1F2C1C: @ 81F2C1C
 	call_if_set FLAG_RECOVERED_DEVON_GOODS, Route116_EventScript_1F2C47
-	compare VAR_0x4039, 1
+	compare VAR_SHOULD_END_UNUSUAL_WEATHER, 1
 	call_if_eq Route116_EventScript_273D13
-	compare VAR_0x4037, 5
-	call_if_eq Route116_EventScript_273D1B
-	compare VAR_0x4037, 6
-	call_if_eq Route116_EventScript_273D1B
+	compare VAR_UNUSUAL_WEATHER_LOCATION, UNUSUAL_WEATHER_ROUTE_116_NORTH
+	call_if_eq UnusualWeather_StartGroudonWeather
+	compare VAR_UNUSUAL_WEATHER_LOCATION, UNUSUAL_WEATHER_ROUTE_116_SOUTH
+	call_if_eq UnusualWeather_StartGroudonWeather
 	end
 
 Route116_EventScript_1F2C47:: @ 81F2C47
@@ -19,14 +19,14 @@ Route116_EventScript_1F2C47:: @ 81F2C47
 	return
 
 Route116_MapScript1_1F2C4F: @ 81F2C4F
-	compare VAR_0x4037, 5
-	call_if_eq Route116_EventScript_27395F
-	compare VAR_0x4037, 6
-	call_if_eq Route116_EventScript_273972
+	compare VAR_UNUSUAL_WEATHER_LOCATION, UNUSUAL_WEATHER_ROUTE_116_NORTH
+	call_if_eq UnusualWeather_EventScript_PlaceTilesRoute116North
+	compare VAR_UNUSUAL_WEATHER_LOCATION, UNUSUAL_WEATHER_ROUTE_116_SOUTH
+	call_if_eq UnusualWeather_EventScript_PlaceTilesRoute116South
 	end
 
 Route116_MapScript2_1F2C66: @ 81F2C66
-	map_script_2 VAR_0x4039, 1, gUnknown_08273D1F
+	map_script_2 VAR_SHOULD_END_UNUSUAL_WEATHER, 1, UnusualWeather_EventScript_EndEventAndCleanup_1
 	.2byte 0
 
 Route116_EventScript_1F2C70:: @ 81F2C70
@@ -145,17 +145,17 @@ Route116_EventScript_1F2D84:: @ 81F2D84
 	lock
 	faceplayer
 	msgbox Route116_Text_1F309D, MSGBOX_DEFAULT
-	setvar VAR_0x406F, 2
+	setvar VAR_ROUTE116_STATE, 2
 	release
 	end
 
 Route116_EventScript_1F2D95:: @ 81F2D95
 	lockall
-	applymovement 11, Route116_Movement_2725A8
-	applymovement EVENT_OBJ_ID_PLAYER, Route116_Movement_2725A4
+	applymovement 11, Common_Movement_WalkInPlaceRight
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceLeft
 	waitmovement 0
 	msgbox Route116_Text_1F309D, MSGBOX_DEFAULT
-	setvar VAR_0x406F, 2
+	setvar VAR_ROUTE116_STATE, 2
 	releaseall
 	end
 

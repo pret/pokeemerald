@@ -1,0 +1,68 @@
+{
+  "id": "MAP_ROUTE110_TRICK_HOUSE_END",
+  "name": "Route110_TrickHouseEnd",
+  "layout": "LAYOUT_ROUTE110_TRICK_HOUSE_END",
+  "music": "MUS_KARAKURI",
+  "region_map_section": "MAPSEC_ROUTE_110",
+  "requires_flash": false,
+  "weather": "WEATHER_NONE",
+  "map_type": "MAP_TYPE_INDOOR",
+  "allow_bike": false,
+  "allow_escape_rope": false,
+  "allow_running": false,
+  "show_map_name": false,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+  "connections": null,
+  "object_events": [
+    {
+      "graphics_id": "EVENT_OBJ_GFX_MAN_1",
+      "x": 4,
+      "y": 5,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Route110_TrickHouseEnd_EventScript_26AD17",
+      "flag": "FLAG_HIDE_TRICK_HOUSE_END_MAN"
+    }
+  ],
+  "warp_events": [
+    {
+      "x": 10,
+      "y": 1,
+      "elevation": 3,
+      "dest_map": "MAP_ROUTE110_TRICK_HOUSE_PUZZLE1",
+      "dest_warp_id": 2
+    },
+    {
+      "x": 2,
+      "y": 1,
+      "elevation": 3,
+      "dest_map": "MAP_ROUTE110_TRICK_HOUSE_CORRIDOR",
+      "dest_warp_id": 0
+    }
+  ],
+  "coord_events": [
+    {
+      "type": "trigger",
+      "x": 2,
+      "y": 2,
+      "elevation": 3,
+      "var": "VAR_TEMP_2",
+      "var_value": "0",
+      "script": "Route110_TrickHouseEnd_EventScript_26B041"
+    }
+  ],
+  "bg_events": [
+    {
+      "type": "hidden_item",
+      "x": 4,
+      "y": 5,
+      "elevation": 3,
+      "item": "ITEM_NUGGET",
+      "flag": "FLAG_HIDDEN_ITEM_TRICK_HOUSE_NUGGET"
+    }
+  ]
+}

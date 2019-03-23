@@ -114,7 +114,7 @@ u16 Font6Func(struct TextPrinter *textPrinter)
                             textPrinter->printerTemplate.currentY = textPrinter->printerTemplate.y + *textPrinter->printerTemplate.currentChar++;
                             return 2;
                         case 15:
-                            FillWindowPixelBuffer(textPrinter->printerTemplate.windowId, textPrinter->printerTemplate.bgColor | (textPrinter->printerTemplate.bgColor << 4));
+                            FillWindowPixelBuffer(textPrinter->printerTemplate.windowId, PIXEL_FILL(textPrinter->printerTemplate.bgColor));
                             return 2;
                     }
                     break;
@@ -146,7 +146,7 @@ u16 Font6Func(struct TextPrinter *textPrinter)
         case 2:
             if (TextPrinterWaitWithDownArrow(textPrinter))
             {
-                FillWindowPixelBuffer(textPrinter->printerTemplate.windowId, textPrinter->printerTemplate.bgColor | (textPrinter->printerTemplate.bgColor << 4));
+                FillWindowPixelBuffer(textPrinter->printerTemplate.windowId, PIXEL_FILL(textPrinter->printerTemplate.bgColor));
                 textPrinter->printerTemplate.currentX = textPrinter->printerTemplate.x;
                 textPrinter->printerTemplate.currentY = textPrinter->printerTemplate.y;
                 textPrinter->state = 0;
@@ -166,12 +166,12 @@ u16 Font6Func(struct TextPrinter *textPrinter)
             {
                 if (textPrinter->scrollDistance < sUnknown_08616124[gSaveBlock2Ptr->optionsTextSpeed])
                 {
-                    ScrollWindow(textPrinter->printerTemplate.windowId, 0, textPrinter->scrollDistance, textPrinter->printerTemplate.bgColor | (textPrinter->printerTemplate.bgColor << 4));
+                    ScrollWindow(textPrinter->printerTemplate.windowId, 0, textPrinter->scrollDistance, PIXEL_FILL(textPrinter->printerTemplate.bgColor));
                     textPrinter->scrollDistance = 0;
                 }
                 else
                 {
-                    ScrollWindow(textPrinter->printerTemplate.windowId, 0, sUnknown_08616124[gSaveBlock2Ptr->optionsTextSpeed], textPrinter->printerTemplate.bgColor | (textPrinter->printerTemplate.bgColor << 4));
+                    ScrollWindow(textPrinter->printerTemplate.windowId, 0, sUnknown_08616124[gSaveBlock2Ptr->optionsTextSpeed], PIXEL_FILL(textPrinter->printerTemplate.bgColor));
                     textPrinter->scrollDistance -= sUnknown_08616124[gSaveBlock2Ptr->optionsTextSpeed];
                 }
                 CopyWindowToVram(textPrinter->printerTemplate.windowId, 2);
@@ -214,7 +214,7 @@ static void DecompressGlyphFont6(u16 glyph)
     gUnknown_03002F90.unk81 = 0x10;
 }
 
-u8 GetGlyphWidthFont6(void)
+u32 GetGlyphWidthFont6(u16 glyphId, bool32 isJapanese)
 {
     return 0x10;
 }

@@ -1,3 +1,0 @@
-Route104_Prototype_MapEvents:: @ 853DDC0
-	map_events 0x0, 0x0, 0x0, 0x0
-

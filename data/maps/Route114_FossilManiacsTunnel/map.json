@@ -1,0 +1,75 @@
+{
+  "id": "MAP_ROUTE114_FOSSIL_MANIACS_TUNNEL",
+  "name": "Route114_FossilManiacsTunnel",
+  "layout": "LAYOUT_ROUTE114_FOSSIL_MANIACS_TUNNEL",
+  "music": "MUS_TONEKUSA",
+  "region_map_section": "MAPSEC_ROUTE_114",
+  "requires_flash": false,
+  "weather": "WEATHER_NONE",
+  "map_type": "MAP_TYPE_INDOOR",
+  "allow_bike": false,
+  "allow_escape_rope": false,
+  "allow_running": false,
+  "show_map_name": false,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+  "connections": null,
+  "object_events": [
+    {
+      "graphics_id": "EVENT_OBJ_GFX_MANIAC",
+      "x": 5,
+      "y": 3,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_UP",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Route114_FossilManiacsTunnel_EventScript_22AF87",
+      "flag": "0"
+    }
+  ],
+  "warp_events": [
+    {
+      "x": 6,
+      "y": 25,
+      "elevation": 3,
+      "dest_map": "MAP_ROUTE114_FOSSIL_MANIACS_HOUSE",
+      "dest_warp_id": 2
+    },
+    {
+      "x": 7,
+      "y": 25,
+      "elevation": 3,
+      "dest_map": "MAP_ROUTE114_FOSSIL_MANIACS_HOUSE",
+      "dest_warp_id": 2
+    },
+    {
+      "x": 6,
+      "y": 2,
+      "elevation": 0,
+      "dest_map": "MAP_DESERT_UNDERPASS",
+      "dest_warp_id": 0
+    }
+  ],
+  "coord_events": [
+    {
+      "type": "trigger",
+      "x": 5,
+      "y": 4,
+      "elevation": 3,
+      "var": "VAR_FOSSIL_MANIAC_STATE",
+      "var_value": "1",
+      "script": "Route114_FossilManiacsTunnel_EventScript_22AF66"
+    },
+    {
+      "type": "trigger",
+      "x": 6,
+      "y": 4,
+      "elevation": 3,
+      "var": "VAR_FOSSIL_MANIAC_STATE",
+      "var_value": "1",
+      "script": "Route114_FossilManiacsTunnel_EventScript_22AF66"
+    }
+  ],
+  "bg_events": []
+}

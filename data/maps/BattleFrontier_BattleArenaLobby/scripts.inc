@@ -1,6 +1,6 @@
 BattleFrontier_BattleArenaLobby_MapScripts:: @ 8255C36
-	map_script 2, BattleFrontier_BattleArenaLobby_MapScript2_255C55
-	map_script 4, BattleFrontier_BattleArenaLobby_MapScript2_255C41
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, BattleFrontier_BattleArenaLobby_MapScript2_255C55
+	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, BattleFrontier_BattleArenaLobby_MapScript2_255C41
 	.byte 0
 
 BattleFrontier_BattleArenaLobby_MapScript2_255C41: @ 8255C41
@@ -199,7 +199,7 @@ BattleFrontier_BattleArenaLobby_EventScript_255EE8:: @ 8255EE8
 	special LoadPlayerParty
 	closemessage
 	delay 2
-	call BattleFrontier_BattleArenaLobby_EventScript_27134F
+	call Common_EventScript_SaveGame
 	setvar VAR_TEMP_0, 255
 	compare VAR_RESULT, 0
 	goto_if_eq BattleFrontier_BattleArenaLobby_EventScript_255FE1

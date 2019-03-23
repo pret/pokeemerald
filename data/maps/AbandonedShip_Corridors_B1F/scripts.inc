@@ -1,6 +1,6 @@
 AbandonedShip_Corridors_B1F_MapScripts:: @ 8237D84
-	map_script 5, AbandonedShip_Corridors_B1F_MapScript1_237D8F
-	map_script 1, AbandonedShip_Corridors_B1F_MapScript1_237D98
+	map_script MAP_SCRIPT_ON_RESUME, AbandonedShip_Corridors_B1F_MapScript1_237D8F
+	map_script MAP_SCRIPT_ON_LOAD, AbandonedShip_Corridors_B1F_MapScript1_237D98
 	.byte 0
 
 AbandonedShip_Corridors_B1F_MapScript1_237D8F: @ 8237D8F

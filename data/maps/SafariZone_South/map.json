@@ -1,0 +1,123 @@
+{
+  "id": "MAP_SAFARI_ZONE_SOUTH",
+  "name": "SafariZone_South",
+  "layout": "LAYOUT_SAFARI_ZONE_SOUTH",
+  "music": "MUS_SAFARI",
+  "region_map_section": "MAPSEC_SAFARI_ZONE",
+  "requires_flash": false,
+  "weather": "WEATHER_NONE",
+  "map_type": "MAP_TYPE_ROUTE",
+  "allow_bike": true,
+  "allow_escape_rope": false,
+  "allow_running": true,
+  "show_map_name": true,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+  "connections": [
+    {
+      "direction": "up",
+      "offset": 0,
+      "map": "MAP_SAFARI_ZONE_NORTH"
+    },
+    {
+      "direction": "left",
+      "offset": 0,
+      "map": "MAP_SAFARI_ZONE_SOUTHWEST"
+    },
+    {
+      "direction": "right",
+      "offset": 0,
+      "map": "MAP_SAFARI_ZONE_SOUTHEAST"
+    }
+  ],
+  "object_events": [
+    {
+      "graphics_id": "EVENT_OBJ_GFX_CAMPER",
+      "x": 32,
+      "y": 34,
+      "elevation": 4,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "SafariZone_South_EventScript_23D2E5",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "EVENT_OBJ_GFX_BOY_1",
+      "x": 26,
+      "y": 28,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_WANDER_AROUND",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "SafariZone_South_EventScript_23D2CA",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "EVENT_OBJ_GFX_MAN_4",
+      "x": 16,
+      "y": 6,
+      "elevation": 5,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "SafariZone_South_EventScript_23D2D3",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "EVENT_OBJ_GFX_YOUNGSTER",
+      "x": 15,
+      "y": 31,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_WANDER_AROUND",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "SafariZone_South_EventScript_23D2DC",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "EVENT_OBJ_GFX_CAMPER",
+      "x": 36,
+      "y": 16,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "SafariZone_South_EventScript_23D390",
+      "flag": "FLAG_HIDE_SAFARI_ZONE_SOUTH_CONSTRUCTION_WORKERS"
+    },
+    {
+      "graphics_id": "EVENT_OBJ_GFX_CAMPER",
+      "x": 36,
+      "y": 17,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "SafariZone_South_EventScript_23D3A2",
+      "flag": "FLAG_HIDE_SAFARI_ZONE_SOUTH_CONSTRUCTION_WORKERS"
+    }
+  ],
+  "warp_events": [
+    {
+      "x": 32,
+      "y": 33,
+      "elevation": 0,
+      "dest_map": "MAP_ROUTE121_SAFARI_ZONE_ENTRANCE",
+      "dest_warp_id": 0
+    }
+  ],
+  "coord_events": [],
+  "bg_events": []
+}

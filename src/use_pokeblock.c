@@ -4,6 +4,7 @@
 #include "alloc.h"
 #include "palette.h"
 #include "pokenav.h"
+#include "menu_specialized.h"
 #include "scanline_effect.h"
 #include "text.h"
 #include "bg.h"
@@ -21,46 +22,36 @@
 
 struct UsePokeblockSubStruct
 {
-    void (*field_0)(void);
-    void (*callback)(void);
-    struct Pokeblock *pokeblock;
-    struct Pokemon *pokemon;
-    u8 stringBuffer[0x40];
-    u8 field_50;
-    u8 field_51;
-    u8 field_52;
-    u8 field_53;
-    u8 field_54;
-    u8 field_55;
-    u8 field_56;
-    u8 field_57[5];
-    u8 field_5c[5];
-    u8 field_61[5];
-    s16 field_66[5];
-	u8 field_76;
-    u8 field_77;
-	u8 field_78;
-	u8 field_79;
-	u8 (*funcPtr8044) (void);
-	u8 field_8048;
+    /*0x00*/ void (*field_0)(void);
+    /*0x04*/ void (*callback)(void);
+    /*0x08*/ struct Pokeblock *pokeblock;
+    /*0x0C*/ struct Pokemon *pokemon;
+    /*0x10*/ u8 stringBuffer[0x40];
+    /*0x50*/ u8 field_50;
+    /*0x51*/ u8 field_51;
+    /*0x52*/ u8 field_52;
+    /*0x53*/ u8 field_53;
+    /*0x54*/ u8 field_54;
+    /*0x55*/ u8 field_55;
+    /*0x56*/ u8 field_56;
+    /*0x57*/ u8 field_57[5];
+    /*0x5C*/ u8 field_5c[5];
+    /*0x61*/ u8 field_61[5];
+    /*0x66*/ s16 field_66[5];
+	/*0x70*/ u8 field_70;
+    /*0x71*/ u8 field_71;
+	/*0x74*/ u8 (*unk74)(void);
+	/*0x78*/ u8 unk78;
 };
 
 struct UsePokeblockStruct
 {
-    u8 field_0[0x7B0E];
-	u16 field_7B0E;
-	u8 field_7B10[0x148];
-    u8 field_7C58[0x35B];
-	u8 field_7FB3;
-	u8 field_7FB4;
-	u8 field_7FB5;
-	u8 field_7FB6;
-	u8 field_7FB7;
-	u8 field_7FB8;
-	u8 field_7FB9;
-	u16 field_7FBA;
-	u8 field_7FBC[0x14];
-    struct UsePokeblockSubStruct info;
+    /*0x0000*/ u8 field_0[0x7B0E];
+	/*0x7B0E*/ u16 field_7B0E;
+	/*0x7B10*/ u8 field_7B10[0x148];
+    /*0x7C58*/ struct UnknownStruct_81D1ED4 field_7C58;
+    /*0x7FB0*/ u8 unk7FB0[0x20];
+    /*0x7FD0*/ struct UsePokeblockSubStruct info;
 };
 
 extern u16 gKeyRepeatStartDelay;
@@ -206,7 +197,7 @@ void sub_8166340(void)
     LoadOam();
     ProcessSpriteCopyRequests();
     TransferPlttBuffer();
-    sub_81D2108(gUnknown_0203BCAC->field_7C58);
+    sub_81D2108(&gUnknown_0203BCAC->field_7C58);
     ScanlineEffect_InitHBlankDmaTransfer();
 }
 
@@ -222,7 +213,7 @@ void sub_8166380(void)
     {
         case 0:
             gUnknown_0203BCAC->field_0[0x7B10] = 0xFF;
-            sub_81D1ED4(gUnknown_0203BCAC->field_7C58);
+            sub_81D1ED4(&gUnknown_0203BCAC->field_7C58);
             gUnknown_0203BC90->field_50++;
             break;
         case 1:
@@ -278,19 +269,19 @@ void sub_8166380(void)
             gUnknown_0203BC90->field_50++;
             break;
         case 11:
-            sub_81D2754(gUnknown_0203BCAC->field_7C58, &gUnknown_0203BCAC->field_0[0x7C6C]);
-            sub_81D20AC(gUnknown_0203BCAC->field_7C58);
+            sub_81D2754(&gUnknown_0203BCAC->field_7C58, gUnknown_0203BCAC->field_7C58.unk14[0]);
+            sub_81D20AC(&gUnknown_0203BCAC->field_7C58);
             gUnknown_0203BC90->field_50++;
             break;
         case 12:
-            if (!sub_81D20BC(gUnknown_0203BCAC->field_7C58))
+            if (!sub_81D20BC(&gUnknown_0203BCAC->field_7C58))
             {
-                sub_81D1F84(gUnknown_0203BCAC->field_7C58, &gUnknown_0203BCAC->field_7C58[0x14], &gUnknown_0203BCAC->field_7C58[0x14]);
+                sub_81D1F84(&gUnknown_0203BCAC->field_7C58, gUnknown_0203BCAC->field_7C58.unk14, gUnknown_0203BCAC->field_7C58.unk14);
                 gUnknown_0203BC90->field_50++;
             }
             break;
         case 13:
-            sub_81D2230(gUnknown_0203BCAC->field_7C58);
+            sub_81D2230(&gUnknown_0203BCAC->field_7C58);
             gUnknown_0203BC90->field_50++;
             break;
         case 14:
@@ -452,7 +443,7 @@ void sub_8166634(void)
             else if (gMain.newKeys & A_BUTTON)
             {
                 PlaySE(SE_SELECT);
-                if (gUnknown_0203BCAC->info.field_77 == gUnknown_0203BCAC->info.field_76 - 1)
+                if (gUnknown_0203BCAC->info.field_71 == gUnknown_0203BCAC->info.field_70 - 1)
                 {
                     gUnknown_0203BC90->field_50 = 3;
                 }
@@ -464,7 +455,7 @@ void sub_8166634(void)
 			
             break;
         case 1:
-			var = gUnknown_0203BCAC->info.funcPtr8044();
+			var = gUnknown_0203BCAC->info.unk74();
 			if(!var)
 				gUnknown_0203BC90->field_50 = var;
            break;
@@ -514,7 +505,7 @@ void sub_816681C(void)
     switch (gUnknown_0203BC90->field_50)
     {
         case 0:
-            gPokeblockMonId = sub_81672A4(gUnknown_0203BCAC->info.field_77);
+            gPokeblockMonId = sub_81672A4(gUnknown_0203BCAC->info.field_71);
             gUnknown_0203BC94 = gUnknown_0203BC90->callback;
             gUnknown_0203BC98 = gUnknown_0203BC90->pokeblock;
             BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
@@ -546,7 +537,7 @@ void sub_81668F8(void)
     {
 		u16 var;
         case 0:
-            if (gUnknown_0203BCAC->info.field_77 != gPokeblockMonId)
+            if (gUnknown_0203BCAC->info.field_71 != gPokeblockMonId)
             {
                 sub_8167CA0(gUnknown_0203BC90->field_56);
                 gUnknown_0203BC90->field_50++;
@@ -557,7 +548,7 @@ void sub_81668F8(void)
             }
             break;
         case 1:
-			var = gUnknown_0203BCAC->info.funcPtr8044();
+			var = gUnknown_0203BCAC->info.unk74();
             if (!var)
             {
                 gUnknown_0203BC90->field_50 = var;
@@ -600,7 +591,7 @@ void sub_8166A34(void)
         u8 var;
 		case 0:
 			gUnknown_0203BC90->field_5c[0] = (u8) &gPlayerParty;
-            gUnknown_0203BCAC->info.field_77 = (u32) &gUnknown_0203BCAC->field_0[gUnknown_0203BCAC->info.field_77];
+            gUnknown_0203BCAC->info.field_71 = (u32) &gUnknown_0203BCAC->field_0[gUnknown_0203BCAC->info.field_71];
 			gUnknown_0203BC90->field_5c[0] = &gPlayerParty
 			sub_81D3520(&gUnknown_0203BCAC->field_0[0x7B1C]);
             /*gUnknown_0203BCAC->pokemon = &gPlayerParty[gUnknown_083DFEC4->unk893c[gUnknown_0203BCAC->field_0[0x7B1C]].partyIdx];
@@ -623,10 +614,10 @@ void sub_8166A34(void)
 			sub_81D2074();
             if (!var)
             {
-                sub_81681F4(sub_81672A4(gUnknown_0203BCAC->info.field_77));
+                sub_81681F4(sub_81672A4(gUnknown_0203BCAC->info.field_71));
                 /*sub_80F3D00();
                 gUnknown_0203BCAC->unk52 = 0;*/
-				if(gUnknown_0203BCAC->info.field_77 == gUnknown_0203BCAC->info.field_76 - 1)
+				if(gUnknown_0203BCAC->info.field_71 == gUnknown_0203BCAC->info.field_70 - 1)
 				{
 					gUnknown_0203BC90->field_52 = var;
 				}
@@ -1051,7 +1042,7 @@ _08166D18:\n\
 void sub_8166D44(void)
 {
 	u8 stringBuffer[0x40];
-    GetMonData(&gPlayerParty[sub_81672A4(gUnknown_0203BCAC->info.field_77)], MON_DATA_NICKNAME, stringBuffer);
+    GetMonData(&gPlayerParty[sub_81672A4(gUnknown_0203BCAC->info.field_71)], MON_DATA_NICKNAME, stringBuffer);
     StringGetEnd10(stringBuffer);
     StringAppend(stringBuffer, gText_GetsAPokeBlockQuestion);
 	StringCopy(gStringVar4, stringBuffer);
@@ -1252,7 +1243,7 @@ void sub_8167104(void)
 {
     u16 i;
     struct Pokemon *pokemon = gPlayerParty;
-    pokemon += gUnknown_0203BCAC->field_7C58[gUnknown_0203BCAC->info.field_77 * 4 + 865];
+    pokemon += gUnknown_0203BCAC->unk7FB0[gUnknown_0203BCAC->info.field_71 * 4 + 9];
     Pokeblock_GetMonContestStats(pokemon, gUnknown_0203BC90->field_57);
     sub_8167054(gUnknown_0203BC90->pokeblock, pokemon);
     Pokeblock_GetMonContestStats(pokemon, gUnknown_0203BC90->field_5c);
@@ -1297,7 +1288,7 @@ void sub_8167184(struct Pokeblock *pokeblock, struct Pokemon *pokemon)
 bool8 sub_8167268(void)
 {
 	u8 *mon;
-	mon	= (u8 *) &gUnknown_0203BCAC->field_0[gUnknown_0203BCAC->info.field_77 * 4];
+	mon	= (u8 *) &gUnknown_0203BCAC->field_0[gUnknown_0203BCAC->info.field_71 * 4];
     if (sub_81D2C68(*(mon + 864 + 0x7C58), *(mon + 865 + 0x7C58), MON_DATA_SHEEN, 0) == 255)
         return TRUE;
     return FALSE;
@@ -1390,8 +1381,8 @@ void sub_8167420(void)
 			ct++;
         }
     }
-	gUnknown_0203BCAC->info.field_77 = 0;
-	gUnknown_0203BCAC->info.field_76 = ct + 1;
+	gUnknown_0203BCAC->info.field_71 = 0;
+	gUnknown_0203BCAC->info.field_70 = ct + 1;
 	sub_81674BC();
 }
 #else
@@ -1471,14 +1462,14 @@ void sub_81674BC(void)
 	s16 var;
 	s16 var2;
 	
-	sub_816753C(gUnknown_0203BCAC->info.field_77, 0);
+	sub_816753C(gUnknown_0203BCAC->info.field_71, 0);
 	gUnknown_0203BCAC->field_7FB3 = 0;
 	gUnknown_0203BCAC->field_7FB4 = 1;
 	gUnknown_0203BCAC->field_7FB5 = 2;
 	
-	var = gUnknown_0203BCAC->info.field_77 + 1;
+	var = gUnknown_0203BCAC->info.field_71 + 1;
 	
-	if(var >= gUnknown_0203BCAC->info.field_76)
+	if(var >= gUnknown_0203BCAC->info.field_70)
 	{
 		var = 0;
 		
@@ -1488,7 +1479,7 @@ void sub_81674BC(void)
 	
 	if(var2 < 0)
 		{
-			var2 = gUnknown_0203BCAC->info.field_76 - 1;
+			var2 = gUnknown_0203BCAC->info.field_70 - 1;
 		}
 	
 	sub_816753C(var, 1);
@@ -1568,10 +1559,10 @@ void sub_816753C(s16 a1, u8 a2)
 	v5 =  *(0x7FB8 + v3);
 	v6 =  *(0x7FB9 + v3);
 	
-	sub_81D2ED4(gUnknown_0203BCAC->field_0[0x7B4D + 24 * a2], gUnknown_0203BCAC->field_0[0x7B95 + 64 * a2], v5, v6, a1, gUnknown_0203BCAC->info.field_76, 0);
-	sub_81D2F78(gUnknown_0203BCAC->field_7C58[0], gUnknown_0203BCAC->field_0[0x7FB0], v5, v6, a1, a2, gUnknown_0203BCAC->info.field_76, 0);
-	sub_81D3094(gUnknown_0203BCAC->field_0[(a2 << 13) + 0x304], gUnknown_0203BCAC->field_0[(a2 << 7) + 4], v5, v6, a1, gUnknown_0203BCAC->info.field_76, 0);
-	//gUnknown_0203BCAC->field_0[0x7B4D + a1 * 40], gUnknown_0203BCAC->field_7FB8, gUnknown_0203BCAC->field_7FB9, gUnknown_203BCAC->field_0[0], gUnknown_203BCAC->info.field_76, 0)
+	sub_81D2ED4(gUnknown_0203BCAC->field_0[0x7B4D + 24 * a2], gUnknown_0203BCAC->field_0[0x7B95 + 64 * a2], v5, v6, a1, gUnknown_0203BCAC->info.field_70, 0);
+	sub_81D2F78(gUnknown_0203BCAC->field_7C58[0], gUnknown_0203BCAC->field_0[0x7FB0], v5, v6, a1, a2, gUnknown_0203BCAC->info.field_70, 0);
+	sub_81D3094(gUnknown_0203BCAC->field_0[(a2 << 13) + 0x304], gUnknown_0203BCAC->field_0[(a2 << 7) + 4], v5, v6, a1, gUnknown_0203BCAC->info.field_70, 0);
+	//gUnknown_0203BCAC->field_0[0x7B4D + a1 * 40], gUnknown_0203BCAC->field_7FB8, gUnknown_0203BCAC->field_7FB9, gUnknown_203BCAC->field_0[0], gUnknown_203BCAC->info.field_70, 0)
 }
 #else
 NAKED
@@ -1882,7 +1873,7 @@ void sub_8167760(void)
 	sub_81D321C(v6, v7, v9);
 	LoadSpriteSheets(v6);
 	LoadSpritePalettes(v9);
-	for(i = 0; i < gUnknown_0203BCAC->info.field_76 - 1; i++)
+	for(i = 0; i < gUnknown_0203BCAC->info.field_70 - 1; i++)
 	{
 		v1 = CreateSprite(v7, 226, (0x140000 * i + 0x80000) >> 16, 0);
 		if(v1 == 64)
@@ -2144,7 +2135,7 @@ _08167902:\n\
 bool8 sub_8167930(void)
 {
 	bool8 retvalue;
-	switch(gUnknown_0203BCAC->info.field_8048)
+	switch(gUnknown_0203BCAC->info.unk78)
 		{
 			case 0:
 				ChangeBgX(0, 0, 0);
@@ -2202,11 +2193,11 @@ bool8 sub_8167930(void)
 				sub_81D21DC(2);
 				break;
 			default:
-				gUnknown_0203BCAC->info.field_8048 = 0;
+				gUnknown_0203BCAC->info.unk78 = 0;
 				retvalue = 0;
 				return retvalue;
 		}
-		gUnknown_0203BCAC->info.field_8048++;
+		gUnknown_0203BCAC->info.unk78++;
 		retvalue = 1;
 		return retvalue;
 }

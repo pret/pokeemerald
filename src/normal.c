@@ -36,8 +36,6 @@ static void sub_81162F8(u8);
 static void sub_81163D0(struct Sprite *);
 static void sub_81165E4(struct Sprite *);
 
-extern void sub_810E2C8(struct Sprite *);
-
 const union AnimCmd gUnknown_0859722C[] =
 {
     ANIMCMD_FRAME(0, 8),
@@ -323,14 +321,14 @@ void AnimSimplePaletteBlend(struct Sprite *sprite)
 //   6: BG palette 5
 u32 UnpackSelectedBattleAnimPalettes(s16 selector)
 {
-    u8 arg0 = selector & 1;
-    u8 arg1 = (selector >> 1) & 1;
-    u8 arg2 = (selector >> 2) & 1;
-    u8 arg3 = (selector >> 3) & 1;
-    u8 arg4 = (selector >> 4) & 1;
+    u8 battleBackground = selector & 1;
+    u8 attacker = (selector >> 1) & 1;
+    u8 target = (selector >> 2) & 1;
+    u8 attackerPartner = (selector >> 3) & 1;
+    u8 targetPartner = (selector >> 4) & 1;
     u8 arg5 = (selector >> 5) & 1;
     u8 arg6 = (selector >> 6) & 1;
-    return sub_80A75AC(arg0, arg1, arg2, arg3, arg4, arg5, arg6);
+    return sub_80A75AC(battleBackground, attacker, target, attackerPartner, targetPartner, arg5, arg6);
 }
 
 static void AnimSimplePaletteBlendStep(struct Sprite *sprite)

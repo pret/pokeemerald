@@ -973,7 +973,7 @@ static void sub_81405CC(void)
         sub_814372C(6);
         sub_81436D0(0);
         sub_81424FC(0);
-        NewMenuHelpers_DrawStdWindowFrame(gUnknown_0203AB8C, FALSE);
+        DrawStdWindowFrame(gUnknown_0203AB8C, FALSE);
         AddTextPrinterParameterized(gUnknown_0203AB8C, 1, gUnknown_082A5B89, 0, 1, TEXT_SPEED_FF, NULL);
         CopyWindowToVram(gUnknown_0203AB8C, 3);
         gSpriteCoordOffsetX = -60;
@@ -996,7 +996,7 @@ static void sub_81405CC(void)
         taskId = gUnknown_0203AB88->varA4 = CreateTask(sub_81408A8, 0);
         gTasks[taskId].data[6] = 6;
         gTasks[taskId].data[13] = GetCoins();
-        sub_80EDE84(GetCoins());
+        AlertTVThatPlayerPlayedRoulette(GetCoins());
         gUnknown_0203AB88->varA5 = CreateTask(sub_8140814, 1);
         SetMainCallback2(sub_8140238);
         return;
@@ -1043,8 +1043,8 @@ static void sub_81408A8(u8 taskId)
 
 static void sub_8140914(u8 taskId)
 {
-    DisplayYesNoMenu();
-    NewMenuHelpers_DrawStdWindowFrame(gUnknown_0203AB8C, 0);
+    DisplayYesNoMenuDefaultYes();
+    DrawStdWindowFrame(gUnknown_0203AB8C, 0);
     AddTextPrinterParameterized(gUnknown_0203AB8C, 1, gUnknown_082A5C13, 0, 1, TEXT_SPEED_FF, 0);
     CopyWindowToVram(gUnknown_0203AB8C, 3);
     DoYesNoFuncWithChoice(taskId, &gUnknown_085B6410);
@@ -1052,7 +1052,7 @@ static void sub_8140914(u8 taskId)
 
 static void sub_8140968(u8 taskId)
 {
-    sub_819746C(0, TRUE);
+    ClearStdWindowAndFrame(0, TRUE);
     gTasks[taskId].func = sub_8140BD0;
 }
 
@@ -1808,14 +1808,14 @@ static void sub_814189C(u8 taskId)
         if (gTasks[taskId].data[2] == 12)
         {
             PlayFanfare(MUS_ME_B_BIG);
-            NewMenuHelpers_DrawStdWindowFrame(gUnknown_0203AB8C, FALSE);
+            DrawStdWindowFrame(gUnknown_0203AB8C, FALSE);
             AddTextPrinterParameterized(gUnknown_0203AB8C, 1, gUnknown_082A5BD7, 0, 1, TEXT_SPEED_FF, NULL);
             CopyWindowToVram(gUnknown_0203AB8C, 3);
         }
         else
         {
             PlayFanfare(MUS_ME_B_SMALL);
-            NewMenuHelpers_DrawStdWindowFrame(gUnknown_0203AB8C, FALSE);
+            DrawStdWindowFrame(gUnknown_0203AB8C, FALSE);
             AddTextPrinterParameterized(gUnknown_0203AB8C, 1, gUnknown_082A5BCB, 0, 1, TEXT_SPEED_FF, NULL);
             CopyWindowToVram(gUnknown_0203AB8C, 3);
         }
@@ -1823,7 +1823,7 @@ static void sub_814189C(u8 taskId)
     case 0:
     default:
         m4aSongNumStart(SE_HAZURE);
-        NewMenuHelpers_DrawStdWindowFrame(gUnknown_0203AB8C, FALSE);
+        DrawStdWindowFrame(gUnknown_0203AB8C, FALSE);
         AddTextPrinterParameterized(gUnknown_0203AB8C, 1, gUnknown_082A5BE0, 0, 1, TEXT_SPEED_FF, NULL);
         CopyWindowToVram(gUnknown_0203AB8C, 3);
         break;
@@ -1867,7 +1867,7 @@ static void sub_8141A18(u8 taskId)
 {
     ConvertIntToDecimalStringN(gStringVar1, (gUnknown_0203AB88->var19 * gTasks[taskId].data[2]), STR_CONV_MODE_LEFT_ALIGN, 2);
     StringExpandPlaceholders(gStringVar4, gUnknown_082A5BEF);
-    NewMenuHelpers_DrawStdWindowFrame(gUnknown_0203AB8C, FALSE);
+    DrawStdWindowFrame(gUnknown_0203AB8C, FALSE);
     AddTextPrinterParameterized(gUnknown_0203AB8C, 1, gStringVar4, 0, 1, TEXT_SPEED_FF, NULL);
     CopyWindowToVram(gUnknown_0203AB8C, 3);
     gTasks[taskId].data[1] = (gUnknown_0203AB88->var19 * gTasks[taskId].data[2]);
@@ -1900,14 +1900,14 @@ static void sub_8141B58(u8 taskId)
     {
         if (gTasks[taskId].data[6] == 6)
         {
-            NewMenuHelpers_DrawStdWindowFrame(gUnknown_0203AB8C, FALSE);
+            DrawStdWindowFrame(gUnknown_0203AB8C, FALSE);
             AddTextPrinterParameterized(gUnknown_0203AB8C, 1, gUnknown_082A5C21, 0, 1, TEXT_SPEED_FF, NULL);
             CopyWindowToVram(gUnknown_0203AB8C, 3);
             sub_8141F7C(taskId, dp01t_12_3_battle_menu, 0xFFFF, 3);
         }
         else if (gTasks[taskId].data[13] == 9999)
         {
-            NewMenuHelpers_DrawStdWindowFrame(gUnknown_0203AB8C, FALSE);
+            DrawStdWindowFrame(gUnknown_0203AB8C, FALSE);
             AddTextPrinterParameterized(gUnknown_0203AB8C, 1, gUnknown_082A5C61, 0, 1, TEXT_SPEED_FF, NULL);
             CopyWindowToVram(gUnknown_0203AB8C, 3);
             sub_8141F7C(taskId, sub_8140914, 0xFFFF, 0x3);
@@ -1919,7 +1919,7 @@ static void sub_8141B58(u8 taskId)
     }
     else
     {
-        NewMenuHelpers_DrawStdWindowFrame(gUnknown_0203AB8C, FALSE);
+        DrawStdWindowFrame(gUnknown_0203AB8C, FALSE);
         AddTextPrinterParameterized(gUnknown_0203AB8C, 1, gUnknown_082A5C04, 0, 1, TEXT_SPEED_FF, NULL);
         CopyWindowToVram(gUnknown_0203AB8C, 3);
         sub_8141F7C(taskId, sub_8140994, 0x3C, 0x3);
@@ -1944,7 +1944,7 @@ static void dp01t_12_3_battle_menu(u8 taskId)
 
     if (gTasks[taskId].data[13] == 9999)
     {
-        NewMenuHelpers_DrawStdWindowFrame(gUnknown_0203AB8C, FALSE);
+        DrawStdWindowFrame(gUnknown_0203AB8C, FALSE);
         AddTextPrinterParameterized(gUnknown_0203AB8C, 1, gUnknown_082A5C61, 0, 1, TEXT_SPEED_FF, NULL);
         CopyWindowToVram(gUnknown_0203AB8C, 3);
         sub_8141F7C(taskId, sub_8140914, 0xFFFF, 3);
@@ -1964,7 +1964,7 @@ static void sub_8141DE4(u8 taskId)
         gSpecialVar_0x8004 = TRUE;
     else
         gSpecialVar_0x8004 = FALSE;
-    sub_80EDD78(GetCoins());
+    AlertTVOfNewCoinTotal(GetCoins());
     BeginHardwarePaletteFade(0xFF, 0, 0, 16, 0);
     gTasks[taskId].func = sub_8141E7C;
 }
@@ -1984,7 +1984,7 @@ static void sub_8141E7C(u8 taskId) // end roulette ?
         ResetPaletteFade();
         ResetSpriteData();
         sub_8140418();
-        gFieldCallback = sub_80AF168;
+        gFieldCallback = FieldCallback_ReturnToEventScript2;
         SetMainCallback2(CB2_ReturnToField);
         DestroyTask(taskId);
     }
@@ -2311,18 +2311,18 @@ static const u32 RouletteCursorTiles[] = INCBIN_U32("graphics/roulette/cursor.4b
 
 static const struct SpritePalette gUnknown_085B7384[] =
 {
-    { RouletteSpritePalette_01, 1 },
-    { RouletteSpritePalette_02, 2 },
-    { RouletteSpritePalette_03, 3 },
-    { RouletteSpritePalette_04, 4 },
-    { RouletteSpritePalette_05, 5 },
-    { RouletteSpritePalette_06, 6 },
-    { RouletteSpritePalette_07, 7 },
-    { RouletteSpritePalette_08, 8 },
-    { RouletteSpritePalette_09, 9 },
-    { RouletteSpritePalette_10, 10 },
-    { RouletteSpritePalette_11, 11 },
-    { RouletteSpritePalette_12, 12 },
+    { .data = RouletteSpritePalette_01, .tag = 1 },
+    { .data = RouletteSpritePalette_02, .tag = 2 },
+    { .data = RouletteSpritePalette_03, .tag = 3 },
+    { .data = RouletteSpritePalette_04, .tag = 4 },
+    { .data = RouletteSpritePalette_05, .tag = 5 },
+    { .data = RouletteSpritePalette_06, .tag = 6 },
+    { .data = RouletteSpritePalette_07, .tag = 7 },
+    { .data = RouletteSpritePalette_08, .tag = 8 },
+    { .data = RouletteSpritePalette_09, .tag = 9 },
+    { .data = RouletteSpritePalette_10, .tag = 10 },
+    { .data = RouletteSpritePalette_11, .tag = 11 },
+    { .data = RouletteSpritePalette_12, .tag = 12 },
     {}
 };
 
@@ -2330,8 +2330,8 @@ static const struct OamData gOamData_85B73EC =
 {
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .shape = ST_OAM_SQUARE,
-    .size = 2,
+    .shape = SPRITE_SHAPE(32x32),
+    .size = SPRITE_SIZE(32x32),
     .priority = 1,
 };
 
@@ -2339,8 +2339,8 @@ static const struct OamData gOamData_85B73F4 =
 {
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .shape = ST_OAM_SQUARE,
-    .size = 1,
+    .shape = SPRITE_SHAPE(16x16),
+    .size = SPRITE_SIZE(16x16),
     .priority = 1,
 };
 
@@ -2349,35 +2349,41 @@ static const struct OamData gOamData_85B73FC =
     .y = 60,
     .affineMode = ST_OAM_AFFINE_DOUBLE,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .shape = ST_OAM_V_RECTANGLE,
-    .size = 2,
+    .shape = SPRITE_SHAPE(16x32),
+    .size = SPRITE_SIZE(16x32),
     .priority = 2,
 };
 
-static const union AnimCmd gSpriteAnim_85B7404[] = {
+static const union AnimCmd gSpriteAnim_85B7404[] =
+{
     ANIMCMD_FRAME(0, 0),
     ANIMCMD_END
 };
 
-static const union AnimCmd *const gSpriteAnimTable_85B740C[] = {
+static const union AnimCmd *const gSpriteAnimTable_85B740C[] =
+{
     gSpriteAnim_85B7404
 };
 
-static const union AffineAnimCmd gSpriteAffineAnim_85B7410[] = {
+static const union AffineAnimCmd gSpriteAffineAnim_85B7410[] =
+{
     AFFINEANIMCMD_END
 };
 
-static const union AffineAnimCmd *const gSpriteAffineAnimTable_85B7418[] = {
+static const union AffineAnimCmd *const gSpriteAffineAnimTable_85B7418[] =
+{
     gSpriteAffineAnim_85B7410
 };
 
-static const struct CompressedSpriteSheet gUnknown_085B741C = {
+static const struct CompressedSpriteSheet gUnknown_085B741C =
+{
     .data = RoulettePokeIcons2Tiles,
     .size = 0xC00,
     .tag = 0
 };
 
-static const union AnimCmd gSpriteAnim_85B7420[] = {
+static const union AnimCmd gSpriteAnim_85B7420[] =
+{
     ANIMCMD_FRAME(0, 0),
     ANIMCMD_FRAME(32, 0),
     ANIMCMD_FRAME(64, 0),
@@ -2393,67 +2399,82 @@ static const union AnimCmd gSpriteAnim_85B7420[] = {
     ANIMCMD_END
 };
 
-static const union AnimCmd *const gSpriteAnimTable_85B7458[] = {
+static const union AnimCmd *const gSpriteAnimTable_85B7458[] =
+{
     &gSpriteAnim_85B7420[0]
 };
 
-static const union AnimCmd *const gSpriteAnimTable_85B745C[] = {
+static const union AnimCmd *const gSpriteAnimTable_85B745C[] =
+{
     &gSpriteAnim_85B7420[1]
 };
 
-static const union AnimCmd *const gSpriteAnimTable_85B7460[] = {
+static const union AnimCmd *const gSpriteAnimTable_85B7460[] =
+{
     &gSpriteAnim_85B7420[2]
 };
 
-static const union AnimCmd *const gSpriteAnimTable_85B7464[] = {
+static const union AnimCmd *const gSpriteAnimTable_85B7464[] =
+{
     &gSpriteAnim_85B7420[3]
 };
 
-static const union AnimCmd *const gSpriteAnimTable_85B7468[] = {
+static const union AnimCmd *const gSpriteAnimTable_85B7468[] =
+{
     &gSpriteAnim_85B7420[4]
 };
 
-static const union AnimCmd *const gSpriteAnimTable_85B746C[] = {
+static const union AnimCmd *const gSpriteAnimTable_85B746C[] =
+{
     &gSpriteAnim_85B7420[5]
 };
 
-static const union AnimCmd *const gSpriteAnimTable_85B7470[] = {
+static const union AnimCmd *const gSpriteAnimTable_85B7470[] =
+{
     &gSpriteAnim_85B7420[6]
 };
 
-static const union AnimCmd *const gSpriteAnimTable_85B7474[] = {
+static const union AnimCmd *const gSpriteAnimTable_85B7474[] =
+{
     &gSpriteAnim_85B7420[7]
 };
 
-static const union AnimCmd *const gSpriteAnimTable_85B7478[] = {
+static const union AnimCmd *const gSpriteAnimTable_85B7478[] =
+{
     &gSpriteAnim_85B7420[8]
 };
 
-static const union AnimCmd *const gSpriteAnimTable_85B747C[] = {
+static const union AnimCmd *const gSpriteAnimTable_85B747C[] =
+{
     &gSpriteAnim_85B7420[9]
 };
 
-static const union AnimCmd *const gSpriteAnimTable_85B7480[] = {
+static const union AnimCmd *const gSpriteAnimTable_85B7480[] =
+{
     &gSpriteAnim_85B7420[10]
 };
 
-static const union AnimCmd *const gSpriteAnimTable_85B7484[] = {
+static const union AnimCmd *const gSpriteAnimTable_85B7484[] =
+{
     &gSpriteAnim_85B7420[11]
 };
 
-static const struct CompressedSpriteSheet gUnknown_085B7488 = {
+static const struct CompressedSpriteSheet gUnknown_085B7488 =
+{
     .data = gRouletteHeadersTiles,
     .size = 0x1600,
     .tag = 4
 };
 
-static const struct CompressedSpriteSheet gUnknown_085B7490 = {
+static const struct CompressedSpriteSheet gUnknown_085B7490 =
+{
     .data = RoulettePokeIconsTiles,
     .size = 0x400,
     .tag = 5
 };
 
-static const union AnimCmd gSpriteAnim_85B7498[] = {
+static const union AnimCmd gSpriteAnim_85B7498[] =
+{
     ANIMCMD_FRAME(0, 0),
     ANIMCMD_FRAME(16, 0),
     ANIMCMD_FRAME(32, 0),
@@ -2468,7 +2489,8 @@ static const union AnimCmd gSpriteAnim_85B7498[] = {
     ANIMCMD_END
 };
 
-static const union AnimCmd gSpriteAnim_85B74C8[] = {
+static const union AnimCmd gSpriteAnim_85B74C8[] =
+{
     ANIMCMD_FRAME(0, 0),
     ANIMCMD_FRAME(4, 0),
     ANIMCMD_FRAME(8, 0),
@@ -2476,47 +2498,58 @@ static const union AnimCmd gSpriteAnim_85B74C8[] = {
     ANIMCMD_END
 };
 
-static const union AnimCmd *const gSpriteAnimTable_85B74DC[] = {
+static const union AnimCmd *const gSpriteAnimTable_85B74DC[] =
+{
     &gSpriteAnim_85B7498[0]
 };
 
-static const union AnimCmd *const gSpriteAnimTable_85B74E0[] = {
+static const union AnimCmd *const gSpriteAnimTable_85B74E0[] =
+{
     &gSpriteAnim_85B7498[2]
 };
 
-static const union AnimCmd *const gSpriteAnimTable_85B74E4[] = {
+static const union AnimCmd *const gSpriteAnimTable_85B74E4[] =
+{
     &gSpriteAnim_85B7498[4]
 };
 
-static const union AnimCmd *const gSpriteAnimTable_85B74E8[] = {
+static const union AnimCmd *const gSpriteAnimTable_85B74E8[] =
+{
     &gSpriteAnim_85B7498[6]
 };
 
-static const union AnimCmd *const gSpriteAnimTable_85B74EC[] = {
+static const union AnimCmd *const gSpriteAnimTable_85B74EC[] =
+{
     &gSpriteAnim_85B7498[8]
 };
 
-static const union AnimCmd *const gSpriteAnimTable_85B74F0[] = {
+static const union AnimCmd *const gSpriteAnimTable_85B74F0[] =
+{
     &gSpriteAnim_85B7498[9]
 };
 
-static const union AnimCmd *const gSpriteAnimTable_85B74F4[] = {
+static const union AnimCmd *const gSpriteAnimTable_85B74F4[] =
+{
     &gSpriteAnim_85B7498[10]
 };
 
-static const union AnimCmd *const gSpriteAnimTable_85B74F8[] = {
+static const union AnimCmd *const gSpriteAnimTable_85B74F8[] =
+{
     &gSpriteAnim_85B74C8[0]
 };
 
-static const union AnimCmd *const gSpriteAnimTable_85B74FC[] = {
+static const union AnimCmd *const gSpriteAnimTable_85B74FC[] =
+{
     &gSpriteAnim_85B74C8[1]
 };
 
-static const union AnimCmd *const gSpriteAnimTable_85B7500[] = {
+static const union AnimCmd *const gSpriteAnimTable_85B7500[] =
+{
     &gSpriteAnim_85B74C8[2]
 };
 
-static const union AnimCmd *const gSpriteAnimTable_85B7504[] = {
+static const union AnimCmd *const gSpriteAnimTable_85B7504[] =
+{
     &gSpriteAnim_85B74C8[3]
 };
 
@@ -2747,8 +2780,8 @@ static const struct OamData gOamData_85B7730 =
 {
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .shape = ST_OAM_H_RECTANGLE,
-    .size = 3,
+    .shape = SPRITE_SHAPE(64x32),
+    .size = SPRITE_SIZE(64x32),
     .priority = 1,
 };
 
@@ -2756,8 +2789,8 @@ static const struct OamData gOamData_85B7738 =
 {
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .shape = ST_OAM_V_RECTANGLE,
-    .size = 0,
+    .shape = SPRITE_SHAPE(8x16),
+    .size = SPRITE_SIZE(8x16),
     .priority = 1,
 };
 
@@ -2765,8 +2798,8 @@ static const struct OamData gOamData_85B7740 =
 {
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .shape = ST_OAM_H_RECTANGLE,
-    .size = 2,
+    .shape = SPRITE_SHAPE(32x16),
+    .size = SPRITE_SIZE(32x16),
     .priority = 1,
 };
 
@@ -2774,8 +2807,8 @@ static const struct OamData gOamData_85B7748 =
 {
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .shape = ST_OAM_H_RECTANGLE,
-    .size = 0,
+    .shape = SPRITE_SHAPE(16x8),
+    .size = SPRITE_SIZE(16x8),
     .priority = 1,
 };
 
@@ -2809,7 +2842,8 @@ static const struct CompressedSpriteSheet gUnknown_085B7750[] =
     {}
 };
 
-static const union AnimCmd gSpriteAnim_85B7780[] = {
+static const union AnimCmd gSpriteAnim_85B7780[] =
+{
     ANIMCMD_FRAME(0, 0),
     ANIMCMD_FRAME(2, 0),
     ANIMCMD_FRAME(4, 0),
@@ -2824,11 +2858,13 @@ static const union AnimCmd gSpriteAnim_85B7780[] = {
     //ANIMCMD_END
 };
 
-static const union AnimCmd *const gSpriteAnimTable_85B77A8[] = {
+static const union AnimCmd *const gSpriteAnimTable_85B77A8[] =
+{
     gSpriteAnim_85B7780
 };
 
-static const union AnimCmd gSpriteAnim_85B77AC[] = {
+static const union AnimCmd gSpriteAnim_85B77AC[] =
+{
     ANIMCMD_FRAME(0, 0),
     ANIMCMD_FRAME(8, 0),
     ANIMCMD_FRAME(16, 0),
@@ -2837,11 +2873,13 @@ static const union AnimCmd gSpriteAnim_85B77AC[] = {
     ANIMCMD_END
 };
 
-static const union AnimCmd *const gSpriteAnimTable_85B77C4[] = {
+static const union AnimCmd *const gSpriteAnimTable_85B77C4[] =
+{
     gSpriteAnim_85B77AC
 };
 
-static const union AnimCmd gSpriteAnim_85B77C8[] = {
+static const union AnimCmd gSpriteAnim_85B77C8[] =
+{
     ANIMCMD_FRAME(0, 0),
     ANIMCMD_FRAME(2, 0),
     ANIMCMD_FRAME(4, 0),
@@ -2850,7 +2888,8 @@ static const union AnimCmd gSpriteAnim_85B77C8[] = {
     ANIMCMD_END
 };
 
-static const union AnimCmd *const gSpriteAnimTable_85B77E0[] = {
+static const union AnimCmd *const gSpriteAnimTable_85B77E0[] =
+{
     gSpriteAnim_85B77C8
 };
 
@@ -2913,8 +2952,8 @@ static const struct OamData gOamData_85B785C =
 {
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .shape = ST_OAM_SQUARE,
-    .size = 1,
+    .shape = SPRITE_SHAPE(16x16),
+    .size = SPRITE_SIZE(16x16),
     .priority = 2,
 };
 
@@ -2924,7 +2963,8 @@ static const struct CompressedSpriteSheet gUnknown_085B7864 = {
     .tag = 12
 };
 
-static const union AnimCmd gSpriteAnim_85B786C[] = {
+static const union AnimCmd gSpriteAnim_85B786C[] =
+{
     ANIMCMD_FRAME(0, 5),
     ANIMCMD_FRAME(4, 5),
     ANIMCMD_FRAME(8, 5),
@@ -2932,7 +2972,8 @@ static const union AnimCmd gSpriteAnim_85B786C[] = {
     ANIMCMD_JUMP(0)
 };
 
-static const union AnimCmd gSpriteAnim_85B7880[] = {
+static const union AnimCmd gSpriteAnim_85B7880[] =
+{
     ANIMCMD_FRAME(0, 10),
     ANIMCMD_FRAME(4, 10),
     ANIMCMD_FRAME(8, 10),
@@ -2940,7 +2981,8 @@ static const union AnimCmd gSpriteAnim_85B7880[] = {
     ANIMCMD_JUMP(0)
 };
 
-static const union AnimCmd gSpriteAnim_85B7894[] = {
+static const union AnimCmd gSpriteAnim_85B7894[] =
+{
     ANIMCMD_FRAME(0, 15),
     ANIMCMD_FRAME(4, 15),
     ANIMCMD_FRAME(8, 15),
@@ -2948,7 +2990,8 @@ static const union AnimCmd gSpriteAnim_85B7894[] = {
     ANIMCMD_JUMP(0)
 };
 
-static const union AnimCmd gSpriteAnim_85B78A8[] = {
+static const union AnimCmd gSpriteAnim_85B78A8[] =
+{
     ANIMCMD_FRAME(4, 2),
     ANIMCMD_FRAME(8, 5),
     ANIMCMD_FRAME(4, 5),
@@ -2956,7 +2999,8 @@ static const union AnimCmd gSpriteAnim_85B78A8[] = {
     ANIMCMD_END
 };
 
-static const union AnimCmd gSpriteAnim_85B78BC[] = {
+static const union AnimCmd gSpriteAnim_85B78BC[] =
+{
     ANIMCMD_FRAME(4, 2),
     ANIMCMD_FRAME(0, 4),
     ANIMCMD_FRAME(4, 4),
@@ -2965,7 +3009,8 @@ static const union AnimCmd gSpriteAnim_85B78BC[] = {
     ANIMCMD_END
 };
 
-static const union AnimCmd gSpriteAnim_85B78D4[] = {
+static const union AnimCmd gSpriteAnim_85B78D4[] =
+{
     ANIMCMD_FRAME(0, 2),
     ANIMCMD_FRAME(4, 5),
     ANIMCMD_FRAME(8, 5),
@@ -2973,12 +3018,14 @@ static const union AnimCmd gSpriteAnim_85B78D4[] = {
     ANIMCMD_END
 };
 
-static const union AnimCmd gSpriteAnim_85B78E8[] = {
+static const union AnimCmd gSpriteAnim_85B78E8[] =
+{
     ANIMCMD_FRAME(12, 0),
     ANIMCMD_END
 };
 
-static const union AnimCmd gSpriteAnim_85B78F0[] = {
+static const union AnimCmd gSpriteAnim_85B78F0[] =
+{
     ANIMCMD_FRAME(8, 2),
     ANIMCMD_FRAME(4, 5),
     ANIMCMD_FRAME(0, 5),
@@ -2986,7 +3033,8 @@ static const union AnimCmd gSpriteAnim_85B78F0[] = {
     ANIMCMD_END
 };
 
-static const union AnimCmd *const gSpriteAnimTable_85B7904[] = {
+static const union AnimCmd *const gSpriteAnimTable_85B7904[] =
+{
     gSpriteAnim_85B786C,
     gSpriteAnim_85B7880,
     gSpriteAnim_85B7894,
@@ -3014,12 +3062,13 @@ static const struct OamData gOamData_85B7940 =
     .y = 81,
     .affineMode = ST_OAM_AFFINE_DOUBLE,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .shape = ST_OAM_SQUARE,
-    .size = 3,
+    .shape = SPRITE_SHAPE(64x64),
+    .size = SPRITE_SIZE(64x64),
     .priority = 2,
 };
 
-static const struct CompressedSpriteSheet gUnknown_085B7948 = {
+static const struct CompressedSpriteSheet gUnknown_085B7948 =
+{
     .data = gRouletteCenter_Gfx,
     .size = 0x800,
     .tag = 6
@@ -3040,8 +3089,8 @@ static const struct OamData gOamData_85B7968 =
 {
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .shape = ST_OAM_SQUARE,
-    .size = 2,
+    .shape = SPRITE_SHAPE(32x32),
+    .size = SPRITE_SIZE(32x32),
     .priority = 2,
 };
 
@@ -3049,18 +3098,20 @@ static const struct OamData gOamData_85B7970 =
 {
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .shape = ST_OAM_SQUARE,
-    .size = 2,
+    .shape = SPRITE_SHAPE(32x32),
+    .size = SPRITE_SIZE(32x32),
     .priority = 2,
 };
 
-static const struct CompressedSpriteSheet gUnknown_085B7978 = {
+static const struct CompressedSpriteSheet gUnknown_085B7978 =
+{
     .data = gUnknown_085B67FC,
     .size = 0xE00,
     .tag = 13
 };
 
-static const union AnimCmd gSpriteAnim_85B7980[] = {
+static const union AnimCmd gSpriteAnim_85B7980[] =
+{
     ANIMCMD_FRAME(0, 6),
     ANIMCMD_FRAME(16, 6),
     ANIMCMD_FRAME(32, 6),
@@ -3070,45 +3121,53 @@ static const union AnimCmd gSpriteAnim_85B7980[] = {
     ANIMCMD_JUMP(2)
 };
 
-static const union AnimCmd gSpriteAnim_85B799C[] = {
+static const union AnimCmd gSpriteAnim_85B799C[] =
+{
     ANIMCMD_FRAME(80, 10),
     ANIMCMD_END
 };
 
-static const union AnimCmd gSpriteAnim_85B79A4[] = {
+static const union AnimCmd gSpriteAnim_85B79A4[] =
+{
     ANIMCMD_FRAME(80, 10, .hFlip = TRUE),
     ANIMCMD_END
 };
 
-static const union AnimCmd gSpriteAnim_85B79AC[] = {
+static const union AnimCmd gSpriteAnim_85B79AC[] =
+{
     ANIMCMD_FRAME(80, 20),
     ANIMCMD_FRAME(96, 20),
     ANIMCMD_JUMP(0)
 };
 
-static const union AnimCmd gSpriteAnim_85B79B8[] = {
+static const union AnimCmd gSpriteAnim_85B79B8[] =
+{
     ANIMCMD_FRAME(80, 20, .hFlip = TRUE),
     ANIMCMD_FRAME(96, 20, .hFlip = TRUE),
     ANIMCMD_JUMP(0)
 };
 
-static const union AnimCmd gSpriteAnim_85B79C4[] = {
+static const union AnimCmd gSpriteAnim_85B79C4[] =
+{
     ANIMCMD_FRAME(80, 10),
     ANIMCMD_FRAME(96, 10),
     ANIMCMD_JUMP(0)
 };
 
-static const union AnimCmd gSpriteAnim_85B79D0[] = {
+static const union AnimCmd gSpriteAnim_85B79D0[] =
+{
     ANIMCMD_FRAME(80, 10, .hFlip = TRUE),
     ANIMCMD_FRAME(96, 10, .hFlip = TRUE),
     ANIMCMD_JUMP(0)
 };
 
-static const union AnimCmd *const gSpriteAnimTable_85B79DC[] = {
+static const union AnimCmd *const gSpriteAnimTable_85B79DC[] =
+{
     gSpriteAnim_85B7980
 };
 
-static const union AnimCmd *const gSpriteAnimTable_85B79E0[] = {
+static const union AnimCmd *const gSpriteAnimTable_85B79E0[] =
+{
     gSpriteAnim_85B799C,
     gSpriteAnim_85B79A4,
     gSpriteAnim_85B79AC,
@@ -3143,8 +3202,8 @@ static const struct OamData gOamData_85B7A28 =
 {
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .shape = ST_OAM_SQUARE,
-    .size = 1,
+    .shape = SPRITE_SHAPE(16x16),
+    .size = SPRITE_SIZE(16x16),
     .priority = 2,
 };
 
@@ -3152,8 +3211,8 @@ static const struct OamData gOamData_85B7A30 =
 {
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .shape = ST_OAM_H_RECTANGLE,
-    .size = 2,
+    .shape = SPRITE_SHAPE(32x16),
+    .size = SPRITE_SIZE(32x16),
     .priority = 2,
 };
 
@@ -3161,24 +3220,27 @@ static const struct OamData gOamData_85B7A38 =
 {
     .affineMode = ST_OAM_AFFINE_NORMAL,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .shape = ST_OAM_H_RECTANGLE,
-    .size = 2,
+    .shape = SPRITE_SHAPE(32x16),
+    .size = SPRITE_SIZE(32x16),
     .priority = 2,
 };
 
-static const struct CompressedSpriteSheet gUnknown_085B7A40 = {
+static const struct CompressedSpriteSheet gUnknown_085B7A40 =
+{
     .data = gUnknown_085B7290,
     .size = 0x180,
     .tag = 14
 };
 
-static const union AffineAnimCmd gSpriteAffineAnim_85B7A48[] = {
+static const union AffineAnimCmd gSpriteAffineAnim_85B7A48[] =
+{
     AFFINEANIMCMD_FRAME(0x80, 0x80, 0, 0),
     AFFINEANIMCMD_FRAME(2,    2,    0, 60),
     AFFINEANIMCMD_END
 };
 
-static const union AffineAnimCmd gSpriteAffineAnim_85B7A60[] = {
+static const union AffineAnimCmd gSpriteAffineAnim_85B7A60[] =
+{
     AFFINEANIMCMD_FRAME(0x100, 0x100, 0, 0),
     AFFINEANIMCMD_FRAME(-2,    0x0,   0, 15),
     AFFINEANIMCMD_FRAME(-1,    -2,    0, 15),
@@ -3186,38 +3248,46 @@ static const union AffineAnimCmd gSpriteAffineAnim_85B7A60[] = {
     AFFINEANIMCMD_END
 };
 
-static const union AffineAnimCmd *const gSpriteAffineAnimTable_85B7A88[] = {
+static const union AffineAnimCmd *const gSpriteAffineAnimTable_85B7A88[] =
+{
     gSpriteAffineAnim_85B7A48
 };
 
-static const union AffineAnimCmd *const gSpriteAffineAnimTable_85B7A8C[] = {
+static const union AffineAnimCmd *const gSpriteAffineAnimTable_85B7A8C[] =
+{
     gSpriteAffineAnim_85B7A60
 };
 
-static const union AffineAnimCmd gSpriteAffineAnim_85B7A90[] = {
+static const union AffineAnimCmd gSpriteAffineAnim_85B7A90[] =
+{
     AFFINEANIMCMD_FRAME(0x100, 0x100, 0, 0),
     AFFINEANIMCMD_END
 };
 
-static const union AffineAnimCmd *const gSpriteAffineAnimTable_85B7AA0[] = {
+static const union AffineAnimCmd *const gSpriteAffineAnimTable_85B7AA0[] =
+{
     gSpriteAffineAnim_85B7A90
 };
 
-static const union AnimCmd gSpriteAnim_85B7AA4[] = {
+static const union AnimCmd gSpriteAnim_85B7AA4[] =
+{
     ANIMCMD_FRAME(0, 0),
     ANIMCMD_END
 };
 
-static const union AnimCmd gSpriteAnim_85B7AAC[] = {
+static const union AnimCmd gSpriteAnim_85B7AAC[] =
+{
     ANIMCMD_FRAME(4, 0),
     ANIMCMD_END
 };
 
-static const union AnimCmd *const gSpriteAnimTable_85B7AB4[] = {
+static const union AnimCmd *const gSpriteAnimTable_85B7AB4[] =
+{
     gSpriteAnim_85B7AA4
 };
 
-static const union AnimCmd *const gSpriteAnimTable_85B7AB8[] = {
+static const union AnimCmd *const gSpriteAnimTable_85B7AB8[] =
+{
     gSpriteAnim_85B7AAC
 };
 
@@ -3256,7 +3326,7 @@ static const struct SpriteTemplate gUnknown_085B7AEC =
 
 static void sub_81428C4(u8 r0)
 {
-    DisplayYesNoMenu();
+    DisplayYesNoMenuDefaultYes();
     DoYesNoFuncWithChoice(r0, &gUnknown_085B6408);
 }
 
@@ -3272,7 +3342,7 @@ static void sub_81428E4(u8 taskId)
 
 static void sub_8142918(u8 taskId)
 {
-    sub_819746C(0, TRUE);
+    ClearStdWindowAndFrame(0, TRUE);
     HideCoinsWindow();
     FreeAllWindowBuffers();
     BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
@@ -3283,7 +3353,7 @@ static void sub_8142918(u8 taskId)
 
 static void sub_814297C(u8 taskId)
 {
-    sub_819746C(0, FALSE);
+    ClearStdWindowAndFrame(0, FALSE);
     HideCoinsWindow();
     ScriptContext2_Disable();
     DestroyTask(taskId);
@@ -3296,7 +3366,7 @@ static void sub_81429A0(u8 taskId)
     {
         gSpecialVar_0x8004 = 1;
         HideCoinsWindow();
-        sub_819746C(0, TRUE);
+        ClearStdWindowAndFrame(0, TRUE);
         ScriptContext2_Disable();
         DestroyTask(taskId);
     }
@@ -3309,7 +3379,7 @@ static void sub_81429F0(u8 taskId)
         u32 temp = gUnknown_085B6344[(gSpecialVar_0x8004 & 1) + (gSpecialVar_0x8004 >> 7 << 1)];
         ConvertIntToDecimalStringN(gStringVar1, temp, STR_CONV_MODE_LEADING_ZEROS, 1);
         StringExpandPlaceholders(gStringVar4, gUnknown_082A5B12);
-        NewMenuHelpers_DrawStdWindowFrame(0, FALSE);
+        DrawStdWindowFrame(0, FALSE);
         AddTextPrinterParameterized(0, 1, gStringVar4, 0, 1, TEXT_SPEED_FF, NULL);
         CopyWindowToVram(0, 3);
         gTasks[taskId].func = sub_81428C4;
@@ -3326,7 +3396,7 @@ static void Task_Roulette_0(u8 taskId)
     {
         if ((gSpecialVar_0x8004 & 0x80) && (gSpecialVar_0x8004 & 1))
         {
-            NewMenuHelpers_DrawStdWindowFrame(0, FALSE);
+            DrawStdWindowFrame(0, FALSE);
             AddTextPrinterParameterized(0, 1, gUnknown_082A5B6B, 0, 1, TEXT_SPEED_FF, NULL);
             CopyWindowToVram(0, 3);
             gTasks[taskId].func = sub_81429F0;
@@ -3334,7 +3404,7 @@ static void Task_Roulette_0(u8 taskId)
         else
         {
             StringExpandPlaceholders(gStringVar4, gUnknown_082A5B12);
-            NewMenuHelpers_DrawStdWindowFrame(0, FALSE);
+            DrawStdWindowFrame(0, FALSE);
             AddTextPrinterParameterized(0, 1, gStringVar4, 0, 1, TEXT_SPEED_FF, NULL);
             CopyWindowToVram(0, 3);
             gTasks[taskId].func = sub_81428C4;
@@ -3343,7 +3413,7 @@ static void Task_Roulette_0(u8 taskId)
     else
     {
         StringExpandPlaceholders(gStringVar4, gUnknown_082A5B4E);
-        NewMenuHelpers_DrawStdWindowFrame(0, FALSE);
+        DrawStdWindowFrame(0, FALSE);
         AddTextPrinterParameterized(0, 1, gStringVar4, 0, 1, TEXT_SPEED_FF, NULL);
         CopyWindowToVram(0, 3);
         gTasks[taskId].func = sub_81429A0;

@@ -4,2244 +4,10 @@
 	.syntax unified
 
 	.text
-	
 
 
-	thumb_func_start sub_81C7078
-sub_81C7078: @ 81C7078
-	push {r4,r5,lr}
-	adds r5, r0, 0
-	adds r4, r1, 0
-	bl is_c1_link_related_active
-	cmp r0, 0
-	bne _081C7090
-	ldr r0, =sub_81C7170
-	b _081C7092
-	.pool
-_081C7090:
-	ldr r0, =sub_81C71E4
-_081C7092:
-	lsls r1, r4, 24
-	lsrs r1, 24
-	bl CreateTask
-	lsls r0, 24
-	lsrs r4, r0, 24
-	adds r0, r4, 0
-	movs r1, 0x1
-	adds r2, r5, 0
-	bl SetWordTaskArg
-	ldr r1, =gTasks
-	lsls r0, r4, 2
-	adds r0, r4
-	lsls r0, 3
-	adds r0, r1
-	ldr r2, =gUnknown_0203CF3C
-	ldrb r1, [r2]
-	strh r1, [r0, 0xE]
-	ldrb r0, [r2]
-	adds r1, r0, 0x1
-	strb r1, [r2]
-	lsls r0, 24
-	lsrs r0, 8
-	orrs r0, r4
-	pop {r4,r5}
-	pop {r1}
-	bx r1
-	.pool
-	thumb_func_end sub_81C7078
 
-	thumb_func_start sub_81C70D8
-sub_81C70D8: @ 81C70D8
-	push {lr}
-	ldr r1, =0x0000ffff
-	ands r1, r0
-	lsrs r3, r0, 16
-	ldr r2, =gTasks
-	lsls r0, r1, 2
-	adds r0, r1
-	lsls r0, 3
-	adds r1, r0, r2
-	ldrb r0, [r1, 0x4]
-	cmp r0, 0
-	beq _081C711C
-	ldr r2, [r1]
-	ldr r0, =sub_81C7170
-	cmp r2, r0
-	beq _081C70FE
-	ldr r0, =sub_81C71E4
-	cmp r2, r0
-	bne _081C711C
-_081C70FE:
-	movs r2, 0xE
-	ldrsh r0, [r1, r2]
-	cmp r0, r3
-	bne _081C711C
-	movs r0, 0x1
-	b _081C711E
-	.pool
-_081C711C:
-	movs r0, 0
-_081C711E:
-	pop {r1}
-	bx r1
-	thumb_func_end sub_81C70D8
 
-	thumb_func_start sub_81C7124
-sub_81C7124: @ 81C7124
-	push {r4-r6,lr}
-	adds r6, r0, 0
-	movs r5, 0
-	ldr r4, =gTasks
-_081C712C:
-	ldrb r0, [r4, 0x4]
-	cmp r0, 0
-	beq _081C7160
-	ldr r1, [r4]
-	ldr r0, =sub_81C7170
-	cmp r1, r0
-	beq _081C7140
-	ldr r0, =sub_81C71E4
-	cmp r1, r0
-	bne _081C7160
-_081C7140:
-	lsls r0, r5, 24
-	lsrs r0, 24
-	movs r1, 0x1
-	bl GetWordTaskArg
-	cmp r0, r6
-	bne _081C7160
-	movs r0, 0x1
-	b _081C716A
-	.pool
-_081C7160:
-	adds r4, 0x28
-	adds r5, 0x1
-	cmp r5, 0xF
-	ble _081C712C
-	movs r0, 0
-_081C716A:
-	pop {r4-r6}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_81C7124
-
-	thumb_func_start sub_81C7170
-sub_81C7170: @ 81C7170
-	push {r4-r7,lr}
-	lsls r0, 24
-	lsrs r5, r0, 24
-	adds r0, r5, 0
-	movs r1, 0x1
-	bl GetWordTaskArg
-	adds r6, r0, 0
-	lsls r0, r5, 2
-	adds r0, r5
-	lsls r0, 3
-	ldr r1, =gTasks + 0x8
-	adds r4, r0, r1
-	movs r7, 0
-_081C718C:
-	movs r1, 0
-	ldrsh r0, [r4, r1]
-	bl _call_via_r6
-	cmp r0, 0x4
-	bhi _081C71D6
-	lsls r0, 2
-	ldr r1, =_081C71AC
-	adds r0, r1
-	ldr r0, [r0]
-	mov pc, r0
-	.pool
-	.align 2, 0
-_081C71AC:
-	.4byte _081C71C6
-	.4byte _081C71C0
-	.4byte _081C71DE
-	.4byte _081C71DA
-	.4byte _081C71CE
-_081C71C0:
-	ldrh r0, [r4]
-	adds r0, 0x1
-	b _081C71D8
-_081C71C6:
-	ldrh r0, [r4]
-	adds r0, 0x1
-	strh r0, [r4]
-	b _081C71DE
-_081C71CE:
-	adds r0, r5, 0
-	bl DestroyTask
-	b _081C71DE
-_081C71D6:
-	subs r0, 0x5
-_081C71D8:
-	strh r0, [r4]
-_081C71DA:
-	cmp r7, 0
-	beq _081C718C
-_081C71DE:
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_81C7170
-
-	thumb_func_start sub_81C71E4
-sub_81C71E4: @ 81C71E4
-	push {r4,r5,lr}
-	lsls r0, 24
-	lsrs r5, r0, 24
-	bl sub_8087598
-	cmp r0, 0
-	bne _081C724A
-	adds r0, r5, 0
-	movs r1, 0x1
-	bl GetWordTaskArg
-	adds r2, r0, 0
-	lsls r0, r5, 2
-	adds r0, r5
-	lsls r0, 3
-	ldr r1, =gTasks + 0x8
-	adds r4, r0, r1
-	movs r1, 0
-	ldrsh r0, [r4, r1]
-	bl _call_via_r2
-	cmp r0, 0x4
-	bhi _081C7246
-	lsls r0, 2
-	ldr r1, =_081C7224
-	adds r0, r1
-	ldr r0, [r0]
-	mov pc, r0
-	.pool
-	.align 2, 0
-_081C7224:
-	.4byte _081C7238
-	.4byte _081C7238
-	.4byte _081C724A
-	.4byte _081C724A
-	.4byte _081C723E
-_081C7238:
-	ldrh r0, [r4]
-	adds r0, 0x1
-	b _081C7248
-_081C723E:
-	adds r0, r5, 0
-	bl DestroyTask
-	b _081C724A
-_081C7246:
-	subs r0, 0x5
-_081C7248:
-	strh r0, [r4]
-_081C724A:
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_81C71E4
-
-	thumb_func_start CB2_PokeNav
-CB2_PokeNav: @ 81C7250
-	push {r4,lr}
-	ldr r4, =gUnknown_0203CF40
-	movs r0, 0x5C
-	bl Alloc
-	str r0, [r4]
-	cmp r0, 0
-	bne _081C7270
-	ldr r0, =CB2_ReturnToFieldWithOpenMenu
-	bl SetMainCallback2
-	b _081C7292
-	.pool
-_081C7270:
-	bl sub_81C7360
-	bl ResetTasks
-	movs r0, 0
-	bl SetVBlankCallback
-	ldr r0, =sub_81C742C
-	movs r1, 0
-	bl CreateTask
-	ldr r0, =sub_81C7400
-	bl SetMainCallback2
-	ldr r0, =sub_81C7418
-	bl SetVBlankCallback
-_081C7292:
-	pop {r4}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end CB2_PokeNav
-
-	thumb_func_start sub_81C72A4
-sub_81C72A4: @ 81C72A4
-	push {lr}
-	ldr r0, =sub_81C72BC
-	bl SetMainCallback2
-	movs r0, 0x1
-	movs r1, 0
-	bl FadeScreen
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_81C72A4
-
-	thumb_func_start sub_81C72BC
-sub_81C72BC: @ 81C72BC
-	push {r4,lr}
-	bl UpdatePaletteFade
-	ldr r0, =gPaletteFade
-	ldrb r1, [r0, 0x7]
-	movs r0, 0x80
-	ands r0, r1
-	cmp r0, 0
-	bne _081C7320
-	ldr r4, =gUnknown_0203CF40
-	movs r0, 0x5C
-	bl Alloc
-	str r0, [r4]
-	cmp r0, 0
-	bne _081C72F0
-	ldr r0, =CB2_ReturnToFieldContinueScriptPlayMapMusic
-	bl SetMainCallback2
-	b _081C7320
-	.pool
-_081C72F0:
-	bl sub_81C7360
-	ldr r1, [r4]
-	movs r0, 0x1
-	strh r0, [r1, 0x8]
-	bl ResetTasks
-	bl ResetSpriteData
-	bl FreeAllSpritePalettes
-	movs r0, 0
-	bl SetVBlankCallback
-	ldr r0, =sub_81C742C
-	movs r1, 0
-	bl CreateTask
-	ldr r0, =sub_81C7400
-	bl SetMainCallback2
-	ldr r0, =sub_81C7418
-	bl SetVBlankCallback
-_081C7320:
-	pop {r4}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_81C72BC
-
-	thumb_func_start sub_81C7334
-sub_81C7334: @ 81C7334
-	push {r4,lr}
-	movs r4, 0
-_081C7338:
-	adds r0, r4, 0
-	bl sub_81C7650
-	adds r4, 0x1
-	cmp r4, 0x12
-	ble _081C7338
-	ldr r4, =gUnknown_0203CF40
-	ldr r0, [r4]
-	bl Free
-	movs r0, 0
-	str r0, [r4]
-	bl InitKeys
-	pop {r4}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_81C7334
-
-	thumb_func_start sub_81C7360
-sub_81C7360: @ 81C7360
-	push {r4,r5,lr}
-	adds r5, r0, 0
-	movs r2, 0
-	movs r1, 0x12
-	adds r0, 0x58
-_081C736A:
-	str r2, [r0]
-	subs r0, 0x4
-	subs r1, 0x1
-	cmp r1, 0
-	bge _081C736A
-	movs r4, 0
-	strh r4, [r5, 0x8]
-	str r4, [r5, 0x4]
-	bl sub_81C7388
-	str r0, [r5, 0xC]
-	str r4, [r5]
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_81C7360
-
-	thumb_func_start sub_81C7388
-sub_81C7388: @ 81C7388
-	push {r4-r6,lr}
-	movs r5, 0
-_081C738C:
-	movs r0, 0x64
-	adds r1, r5, 0
-	muls r1, r0
-	ldr r0, =gPlayerParty
-	adds r4, r1, r0
-	adds r0, r4, 0
-	movs r1, 0x5
-	bl GetMonData
-	cmp r0, 0
-	beq _081C73BA
-	adds r0, r4, 0
-	movs r1, 0x6
-	bl GetMonData
-	cmp r0, 0
-	bne _081C73BA
-	adds r0, r4, 0
-	movs r1, 0x52
-	bl GetMonData
-	cmp r0, 0
-	bne _081C73E2
-_081C73BA:
-	adds r5, 0x1
-	cmp r5, 0x5
-	ble _081C738C
-	movs r4, 0
-_081C73C2:
-	movs r5, 0
-	lsls r6, r4, 24
-_081C73C6:
-	adds r0, r4, 0
-	adds r1, r5, 0
-	bl CheckBoxMonSanityAt
-	cmp r0, 0
-	beq _081C73EC
-	lsls r1, r5, 24
-	lsrs r1, 24
-	lsrs r0, r6, 24
-	movs r2, 0x52
-	bl GetBoxMonDataAt
-	cmp r0, 0
-	beq _081C73EC
-_081C73E2:
-	movs r0, 0x1
-	b _081C73FA
-	.pool
-_081C73EC:
-	adds r5, 0x1
-	cmp r5, 0x1D
-	ble _081C73C6
-	adds r4, 0x1
-	cmp r4, 0xD
-	ble _081C73C2
-	movs r0, 0
-_081C73FA:
-	pop {r4-r6}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_81C7388
-
-	thumb_func_start sub_81C7400
-sub_81C7400: @ 81C7400
-	push {lr}
-	bl RunTasks
-	bl AnimateSprites
-	bl BuildOamBuffer
-	bl UpdatePaletteFade
-	pop {r0}
-	bx r0
-	thumb_func_end sub_81C7400
-
-	thumb_func_start sub_81C7418
-sub_81C7418: @ 81C7418
-	push {lr}
-	bl TransferPlttBuffer
-	bl LoadOam
-	bl ProcessSpriteCopyRequests
-	pop {r0}
-	bx r0
-	thumb_func_end sub_81C7418
-
-	thumb_func_start sub_81C742C
-sub_81C742C: @ 81C742C
-	push {r4-r7,lr}
-	lsls r0, 24
-	lsrs r0, 24
-	lsls r1, r0, 2
-	adds r1, r0
-	lsls r1, 3
-	ldr r0, =gTasks + 0x8
-	adds r7, r1, r0
-	movs r1, 0
-	ldrsh r0, [r7, r1]
-	cmp r0, 0x5
-	bls _081C7446
-	b _081C7562
-_081C7446:
-	lsls r0, 2
-	ldr r1, =_081C7458
-	adds r0, r1
-	ldr r0, [r0]
-	mov pc, r0
-	.pool
-	.align 2, 0
-_081C7458:
-	.4byte _081C7470
-	.4byte _081C747A
-	.4byte _081C7490
-	.4byte _081C749C
-	.4byte _081C751E
-	.4byte _081C752C
-_081C7470:
-	bl sub_81C76C4
-	movs r0, 0x1
-	strh r0, [r7]
-	b _081C7562
-_081C747A:
-	bl sub_81C76FC
-	cmp r0, 0
-	bne _081C7562
-	ldr r0, =0x000186a0
-	bl sub_81C756C
-	b _081C74E8
-	.pool
-_081C7490:
-	bl sub_81C786C
-	cmp r0, 0
-	bne _081C7562
-	movs r0, 0x3
-	strh r0, [r7]
-_081C749C:
-	bl sub_81C75E0
-	adds r6, r0, 0
-	movs r0, 0x1
-	negs r0, r0
-	cmp r6, r0
-	beq _081C74FC
-	ldr r0, =0x0001869f
-	cmp r6, r0
-	bls _081C7506
-	ldr r4, =gUnknown_0861F3EC
-	ldr r5, =gUnknown_0203CF40
-	ldr r0, [r5]
-	ldr r1, [r0, 0x4]
-	lsls r0, r1, 3
-	subs r0, r1
-	lsls r0, 2
-	adds r1, r4, 0
-	adds r1, 0x18
-	adds r0, r1
-	ldr r0, [r0]
-	bl _call_via_r0
-	ldr r0, [r5]
-	ldr r1, [r0, 0x4]
-	lsls r0, r1, 3
-	subs r0, r1
-	lsls r0, 2
-	adds r4, 0x14
-	adds r0, r4
-	ldr r0, [r0]
-	bl _call_via_r0
-	adds r0, r6, 0
-	bl sub_81C756C
-	cmp r0, 0
-	beq _081C74FC
-_081C74E8:
-	movs r0, 0x4
-	strh r0, [r7]
-	b _081C7562
-	.pool
-_081C74FC:
-	bl sub_81C7710
-	movs r0, 0x5
-	strh r0, [r7]
-	b _081C7562
-_081C7506:
-	cmp r6, 0
-	beq _081C7562
-	adds r0, r6, 0
-	bl sub_81C7850
-	bl sub_81C786C
-	cmp r0, 0
-	beq _081C7562
-	movs r0, 0x2
-	strh r0, [r7]
-	b _081C7562
-_081C751E:
-	bl sub_81C75D4
-	cmp r0, 0
-	bne _081C7562
-	movs r0, 0x3
-	strh r0, [r7]
-	b _081C7562
-_081C752C:
-	bl sub_81C7738
-	cmp r0, 0
-	bne _081C7562
-	ldr r0, =gUnknown_0203CF40
-	ldr r0, [r0]
-	ldrh r0, [r0, 0x8]
-	negs r4, r0
-	orrs r4, r0
-	lsrs r4, 31
-	bl sub_81C9430
-	bl sub_81C7334
-	cmp r4, 0
-	beq _081C755C
-	ldr r0, =CB2_ReturnToFieldContinueScriptPlayMapMusic
-	bl SetMainCallback2
-	b _081C7562
-	.pool
-_081C755C:
-	ldr r0, =CB2_ReturnToFieldWithOpenMenu
-	bl SetMainCallback2
-_081C7562:
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_81C742C
-
-	thumb_func_start sub_81C756C
-sub_81C756C: @ 81C756C
-	push {r4-r6,lr}
-	ldr r1, =0xfffe7960
-	adds r6, r0, r1
-	bl sub_81C75F4
-	ldr r5, =gUnknown_0861F3EC
-	lsls r0, r6, 3
-	subs r0, r6
-	lsls r4, r0, 2
-	adds r0, r4, r5
-	ldr r0, [r0]
-	bl _call_via_r0
-	cmp r0, 0
-	beq _081C75CC
-	adds r0, r5, 0
-	adds r0, 0x8
-	adds r0, r4, r0
-	ldr r0, [r0]
-	bl _call_via_r0
-	cmp r0, 0
-	beq _081C75CC
-	adds r0, r5, 0
-	adds r0, 0xC
-	adds r0, r4, r0
-	ldr r0, [r0]
-	adds r1, r5, 0
-	adds r1, 0x10
-	adds r1, r4, r1
-	ldr r1, [r1]
-	bl sub_81C7834
-	ldr r0, =gUnknown_0203CF40
-	ldr r1, [r0]
-	adds r0, r5, 0x4
-	adds r0, r4, r0
-	ldr r0, [r0]
-	str r0, [r1]
-	str r6, [r1, 0x4]
-	movs r0, 0x1
-	b _081C75CE
-	.pool
-_081C75CC:
-	movs r0, 0
-_081C75CE:
-	pop {r4-r6}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_81C756C
-
-	thumb_func_start sub_81C75D4
-sub_81C75D4: @ 81C75D4
-	push {lr}
-	bl sub_81C786C
-	pop {r1}
-	bx r1
-	thumb_func_end sub_81C75D4
-
-	thumb_func_start sub_81C75E0
-sub_81C75E0: @ 81C75E0
-	push {lr}
-	ldr r0, =gUnknown_0203CF40
-	ldr r0, [r0]
-	ldr r0, [r0]
-	bl _call_via_r0
-	pop {r1}
-	bx r1
-	.pool
-	thumb_func_end sub_81C75E0
-
-	thumb_func_start sub_81C75F4
-sub_81C75F4: @ 81C75F4
-	push {lr}
-	bl InitKeys
-	pop {r0}
-	bx r0
-	thumb_func_end sub_81C75F4
-
-	thumb_func_start c3args_set_0toR1_1to0
-c3args_set_0toR1_1to0: @ 81C7600
-	push {lr}
-	bl SetVBlankCallback
-	pop {r0}
-	bx r0
-	thumb_func_end c3args_set_0toR1_1to0
-
-	thumb_func_start sub_81C760C
-sub_81C760C: @ 81C760C
-	push {lr}
-	ldr r0, =sub_81C7418
-	bl SetVBlankCallback
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_81C760C
-
-	thumb_func_start sub_81C761C
-sub_81C761C: @ 81C761C
-	push {r4,lr}
-	adds r4, r0, 0
-	adds r0, r1, 0
-	bl Alloc
-	ldr r1, =gUnknown_0203CF40
-	ldr r1, [r1]
-	lsls r4, 2
-	adds r1, 0x10
-	adds r1, r4
-	str r0, [r1]
-	pop {r4}
-	pop {r1}
-	bx r1
-	.pool
-	thumb_func_end sub_81C761C
-
-	thumb_func_start sub_81C763C
-sub_81C763C: @ 81C763C
-	ldr r1, =gUnknown_0203CF40
-	ldr r1, [r1]
-	lsls r0, 2
-	adds r1, 0x10
-	adds r1, r0
-	ldr r0, [r1]
-	bx lr
-	.pool
-	thumb_func_end sub_81C763C
-
-	thumb_func_start sub_81C7650
-sub_81C7650: @ 81C7650
-	push {r4,r5,lr}
-	ldr r5, =gUnknown_0203CF40
-	ldr r1, [r5]
-	lsls r4, r0, 2
-	adds r1, 0x10
-	adds r1, r4
-	ldr r0, [r1]
-	cmp r0, 0
-	beq _081C7670
-	bl Free
-	ldr r0, [r5]
-	adds r0, 0x10
-	adds r0, r4
-	movs r1, 0
-	str r1, [r0]
-_081C7670:
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_81C7650
-
-	thumb_func_start sub_81C767C
-sub_81C767C: @ 81C767C
-	ldr r0, =gUnknown_0203CF40
-	ldr r0, [r0]
-	ldrh r0, [r0, 0x8]
-	bx lr
-	.pool
-	thumb_func_end sub_81C767C
-
-	thumb_func_start sub_81C7688
-sub_81C7688: @ 81C7688
-	ldr r1, =gUnknown_0203CF40
-	ldr r1, [r1]
-	strh r0, [r1, 0x8]
-	bx lr
-	.pool
-	thumb_func_end sub_81C7688
-
-	thumb_func_start sub_81C7694
-sub_81C7694: @ 81C7694
-	push {lr}
-	adds r1, r0, 0
-	cmp r1, 0x4
-	bls _081C769E
-	movs r1, 0
-_081C769E:
-	ldr r0, =gUnknown_0203CF40
-	ldr r0, [r0]
-	strh r1, [r0, 0xA]
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_81C7694
-
-	thumb_func_start sub_81C76AC
-sub_81C76AC: @ 81C76AC
-	ldr r0, =gUnknown_0203CF40
-	ldr r0, [r0]
-	ldrh r0, [r0, 0xA]
-	bx lr
-	.pool
-	thumb_func_end sub_81C76AC
-
-	thumb_func_start sub_81C76B8
-sub_81C76B8: @ 81C76B8
-	ldr r0, =gUnknown_0203CF40
-	ldr r0, [r0]
-	ldr r0, [r0, 0xC]
-	bx lr
-	.pool
-	thumb_func_end sub_81C76B8
-
-	thumb_func_start sub_81C76C4
-sub_81C76C4: @ 81C76C4
-	push {r4,lr}
-	ldr r1, =0x0000082c
-	movs r0, 0
-	bl sub_81C761C
-	adds r4, r0, 0
-	cmp r4, 0
-	beq _081C76F4
-	bl ResetSpriteData
-	bl FreeAllSpritePalettes
-	ldr r0, =sub_81C7764
-	movs r1, 0x1
-	bl sub_81C7078
-	str r0, [r4, 0xC]
-	movs r0, 0x1
-	b _081C76F6
-	.pool
-_081C76F4:
-	movs r0, 0
-_081C76F6:
-	pop {r4}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_81C76C4
-
-	thumb_func_start sub_81C76FC
-sub_81C76FC: @ 81C76FC
-	push {lr}
-	movs r0, 0
-	bl sub_81C763C
-	ldr r0, [r0, 0xC]
-	bl sub_81C70D8
-	pop {r1}
-	bx r1
-	thumb_func_end sub_81C76FC
-
-	thumb_func_start sub_81C7710
-sub_81C7710: @ 81C7710
-	push {lr}
-	sub sp, 0x4
-	movs r0, 0x6F
-	bl PlaySE
-	bl sub_81CAADC
-	movs r1, 0x1
-	negs r1, r1
-	movs r0, 0
-	str r0, [sp]
-	adds r0, r1, 0
-	movs r2, 0
-	movs r3, 0x10
-	bl BeginNormalPaletteFade
-	add sp, 0x4
-	pop {r0}
-	bx r0
-	thumb_func_end sub_81C7710
-
-	thumb_func_start sub_81C7738
-sub_81C7738: @ 81C7738
-	push {lr}
-	ldr r0, =gPaletteFade
-	ldrb r1, [r0, 0x7]
-	movs r0, 0x80
-	ands r0, r1
-	cmp r0, 0
-	beq _081C7750
-	movs r0, 0x1
-	b _081C775E
-	.pool
-_081C7750:
-	bl sub_81C99D4
-	bl sub_81C7C94
-	bl FreeAllWindowBuffers
-	movs r0, 0
-_081C775E:
-	pop {r1}
-	bx r1
-	thumb_func_end sub_81C7738
-
-	thumb_func_start sub_81C7764
-sub_81C7764: @ 81C7764
-	push {r4,lr}
-	sub sp, 0x4
-	cmp r0, 0x1
-	beq _081C77B0
-	cmp r0, 0x1
-	bgt _081C7776
-	cmp r0, 0
-	beq _081C7780
-	b _081C782A
-_081C7776:
-	cmp r0, 0x2
-	beq _081C77FC
-	cmp r0, 0x3
-	beq _081C780E
-	b _081C782A
-_081C7780:
-	movs r1, 0x82
-	lsls r1, 5
-	movs r0, 0
-	bl SetGpuReg
-	bl FreeAllWindowBuffers
-	movs r0, 0
-	bl ResetBgsAndClearDma3BusyFlags
-	ldr r1, =gUnknown_0861FA04
-	movs r0, 0
-	movs r2, 0x1
-	bl InitBgsFromTemplates
-	bl sub_8199D98
-	bl reset_temp_tile_data_buffers
-	movs r0, 0x1
-	b _081C782C
-	.pool
-_081C77B0:
-	movs r0, 0
-	bl sub_81C763C
-	adds r4, r0, 0
-	ldr r1, =gPokenavHeader_Gfx
-	movs r0, 0
-	str r0, [sp]
-	movs r2, 0
-	movs r3, 0
-	bl decompress_and_copy_tile_data_to_vram
-	adds r4, 0x2C
-	movs r0, 0
-	adds r1, r4, 0
-	bl SetBgTilemapBuffer
-	ldr r1, =gPokenavHeader_Tilemap
-	movs r0, 0
-	movs r2, 0
-	movs r3, 0
-	bl CopyToBgTilemapBuffer
-	ldr r0, =gPokenavHeader_Pal
-	movs r1, 0
-	movs r2, 0x20
-	bl sub_81C7944
-	movs r0, 0
-	bl CopyBgTilemapBufferToVram
-	movs r0, 0
-	b _081C782C
-	.pool
-_081C77FC:
-	bl free_temp_tile_data_buffers_if_possible
-	lsls r0, 24
-	cmp r0, 0
-	bne _081C7818
-	bl sub_81C7B74
-	movs r0, 0
-	b _081C782C
-_081C780E:
-	bl IsDma3ManagerBusyWithBgCopy
-	lsls r0, 24
-	cmp r0, 0
-	beq _081C781C
-_081C7818:
-	movs r0, 0x2
-	b _081C782C
-_081C781C:
-	bl sub_81C7C28
-	bl sub_81C7D28
-	movs r0, 0
-	bl ShowBg
-_081C782A:
-	movs r0, 0x4
-_081C782C:
-	add sp, 0x4
-	pop {r4}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_81C7764
-
-	thumb_func_start sub_81C7834
-sub_81C7834: @ 81C7834
-	push {r4,r5,lr}
-	adds r4, r0, 0
-	adds r5, r1, 0
-	movs r0, 0
-	bl sub_81C763C
-	str r4, [r0]
-	str r5, [r0, 0x4]
-	movs r1, 0
-	str r1, [r0, 0x8]
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_81C7834
-
-	thumb_func_start sub_81C7850
-sub_81C7850: @ 81C7850
-	push {r4,lr}
-	adds r4, r0, 0
-	movs r0, 0
-	bl sub_81C763C
-	movs r1, 0
-	str r1, [r0, 0x8]
-	ldr r1, [r0]
-	adds r0, r4, 0
-	bl _call_via_r1
-	pop {r4}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_81C7850
-
-	thumb_func_start sub_81C786C
-sub_81C786C: @ 81C786C
-	push {lr}
-	movs r0, 0
-	bl sub_81C763C
-	ldr r0, [r0, 0x4]
-	bl _call_via_r0
-	pop {r1}
-	bx r1
-	thumb_func_end sub_81C786C
-
-	thumb_func_start sub_81C7880
-sub_81C7880: @ 81C7880
-	push {r4,lr}
-	movs r0, 0
-	bl sub_81C763C
-	adds r4, r0, 0
-	ldr r0, =atk47_cmd47
-	movs r1, 0x4
-	bl sub_81C7078
-	str r0, [r4, 0xC]
-	pop {r4}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_81C7880
-
-	thumb_func_start sub_81C78A0
-sub_81C78A0: @ 81C78A0
-	push {r4,lr}
-	movs r0, 0
-	bl sub_81C763C
-	adds r4, r0, 0
-	ldr r0, =sub_81C791C
-	movs r1, 0x4
-	bl sub_81C7078
-	str r0, [r4, 0xC]
-	pop {r4}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_81C78A0
-
-	thumb_func_start sub_81C78C0
-sub_81C78C0: @ 81C78C0
-	push {lr}
-	movs r0, 0
-	bl sub_81C763C
-	ldr r0, [r0, 0xC]
-	bl sub_81C70D8
-	pop {r1}
-	bx r1
-	thumb_func_end sub_81C78C0
-
-	thumb_func_start atk47_cmd47
-atk47_cmd47: @ 81C78D4
-	push {lr}
-	cmp r0, 0x1
-	beq _081C78EA
-	cmp r0, 0x1
-	bgt _081C78E4
-	cmp r0, 0
-	beq _081C78EA
-	b _081C7914
-_081C78E4:
-	cmp r0, 0x2
-	beq _081C78EE
-	b _081C7914
-_081C78EA:
-	movs r0, 0
-	b _081C7916
-_081C78EE:
-	movs r1, 0xC0
-	lsls r1, 1
-	movs r0, 0
-	movs r2, 0x1
-	bl ChangeBgY
-	ldr r1, =0x00001fff
-	cmp r0, r1
-	bhi _081C7908
-	movs r0, 0x2
-	b _081C7916
-	.pool
-_081C7908:
-	movs r1, 0x80
-	lsls r1, 6
-	movs r0, 0
-	movs r2, 0
-	bl ChangeBgY
-_081C7914:
-	movs r0, 0x4
-_081C7916:
-	pop {r1}
-	bx r1
-	thumb_func_end atk47_cmd47
-
-	thumb_func_start sub_81C791C
-sub_81C791C: @ 81C791C
-	push {lr}
-	movs r1, 0xC0
-	lsls r1, 1
-	movs r0, 0
-	movs r2, 0x2
-	bl ChangeBgY
-	cmp r0, 0
-	ble _081C7932
-	movs r0, 0x2
-	b _081C793E
-_081C7932:
-	movs r0, 0
-	movs r1, 0
-	movs r2, 0
-	bl ChangeBgY
-	movs r0, 0x4
-_081C793E:
-	pop {r1}
-	bx r1
-	thumb_func_end sub_81C791C
-
-	thumb_func_start sub_81C7944
-sub_81C7944: @ 81C7944
-	push {lr}
-	lsls r1, 1
-	ldr r3, =gPlttBufferUnfaded
-	adds r1, r3
-	lsls r2, 10
-	lsrs r2, 11
-	bl CpuSet
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_81C7944
-
-	thumb_func_start sub_81C795C
-sub_81C795C: @ 81C795C
-	push {r4,lr}
-	adds r4, r0, 0
-	b _081C7974
-_081C7962:
-	lsls r0, r1, 4
-	movs r2, 0x80
-	lsls r2, 1
-	adds r1, r0, r2
-	ldr r0, [r4]
-	movs r2, 0x20
-	bl sub_81C7944
-	adds r4, 0x8
-_081C7974:
-	ldr r0, [r4]
-	cmp r0, 0
-	beq _081C7988
-	ldrh r0, [r4, 0x4]
-	bl AllocSpritePalette
-	lsls r0, 24
-	lsrs r1, r0, 24
-	cmp r1, 0xFF
-	bne _081C7962
-_081C7988:
-	pop {r4}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_81C795C
-
-	thumb_func_start sub_81C7990
-sub_81C7990: @ 81C7990
-	push {lr}
-	sub sp, 0x4
-	adds r3, r0, 0
-	lsls r1, 16
-	lsrs r1, 16
-	mov r0, sp
-	strh r1, [r0]
-	lsls r3, 5
-	ldr r0, =gPlttBufferFaded + 0x200
-	adds r3, r0
-	ldr r2, =0x01000010
-	mov r0, sp
-	adds r1, r3, 0
-	bl CpuSet
-	add sp, 0x4
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_81C7990
-
-	thumb_func_start sub_81C79BC
-sub_81C79BC: @ 81C79BC
-	push {r4-r7,lr}
-	mov r7, r10
-	mov r6, r9
-	mov r5, r8
-	push {r5-r7}
-	sub sp, 0xC
-	str r0, [sp]
-	str r1, [sp, 0x4]
-	mov r10, r2
-	str r3, [sp, 0x8]
-	ldr r0, [sp, 0x2C]
-	cmp r0, 0
-	bne _081C79E4
-	ldr r2, =0x001fffff
-	mov r1, r10
-	ands r2, r1
-	ldr r0, [sp]
-	b _081C79F4
-	.pool
-_081C79E4:
-	ldr r2, [sp, 0x2C]
-	ldr r0, [sp, 0x8]
-	cmp r2, r0
-	blt _081C7A00
-	ldr r2, =0x001fffff
-	mov r1, r10
-	ands r2, r1
-	ldr r0, [sp, 0x4]
-_081C79F4:
-	ldr r1, [sp, 0x30]
-	bl CpuSet
-	b _081C7AAE
-	.pool
-_081C7A00:
-	movs r2, 0x1
-	negs r2, r2
-	add r10, r2
-	b _081C7AA6
-_081C7A08:
-	ldr r1, [sp]
-	ldrh r0, [r1]
-	movs r2, 0x1F
-	mov r9, r2
-	mov r1, r9
-	ands r1, r0
-	mov r9, r1
-	lsls r0, 16
-	lsrs r2, r0, 21
-	movs r1, 0x1F
-	ands r1, r2
-	mov r8, r1
-	lsrs r7, r0, 26
-	movs r2, 0x1F
-	ands r7, r2
-	ldr r0, [sp, 0x4]
-	ldrh r4, [r0]
-	movs r0, 0x1F
-	ands r0, r4
-	mov r1, r9
-	subs r0, r1
-	lsls r0, 8
-	ldr r1, [sp, 0x8]
-	bl __divsi3
-	ldr r2, [sp, 0x2C]
-	adds r6, r0, 0
-	muls r6, r2
-	asrs r6, 8
-	lsls r4, 16
-	lsrs r0, r4, 21
-	movs r1, 0x1F
-	ands r0, r1
-	mov r2, r8
-	subs r0, r2
-	lsls r0, 8
-	ldr r1, [sp, 0x8]
-	bl __divsi3
-	ldr r1, [sp, 0x2C]
-	adds r5, r0, 0
-	muls r5, r1
-	asrs r5, 8
-	lsrs r4, 26
-	movs r2, 0x1F
-	ands r4, r2
-	subs r4, r7
-	lsls r4, 8
-	adds r0, r4, 0
-	ldr r1, [sp, 0x8]
-	bl __divsi3
-	ldr r1, [sp, 0x2C]
-	muls r0, r1
-	asrs r0, 8
-	add r6, r9
-	movs r2, 0x1F
-	ands r6, r2
-	add r5, r8
-	ands r5, r2
-	adds r0, r7, r0
-	ands r0, r2
-	lsls r0, 10
-	lsls r5, 5
-	orrs r0, r5
-	orrs r0, r6
-	ldr r1, [sp, 0x30]
-	strh r0, [r1]
-	ldr r2, [sp]
-	adds r2, 0x2
-	str r2, [sp]
-	ldr r0, [sp, 0x4]
-	adds r0, 0x2
-	str r0, [sp, 0x4]
-	adds r1, 0x2
-	str r1, [sp, 0x30]
-	movs r1, 0x1
-	negs r1, r1
-	add r10, r1
-_081C7AA6:
-	movs r0, 0x1
-	negs r0, r0
-	cmp r10, r0
-	bne _081C7A08
-_081C7AAE:
-	add sp, 0xC
-	pop {r3-r5}
-	mov r8, r3
-	mov r9, r4
-	mov r10, r5
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_81C79BC
-
-	thumb_func_start sub_81C7AC0
-sub_81C7AC0: @ 81C7AC0
-	push {r4,lr}
-	sub sp, 0x4
-	adds r4, r0, 0
-	movs r0, 0
-	bl sub_81C763C
-	cmp r4, 0x1
-	beq _081C7AF0
-	cmp r4, 0x1
-	bgt _081C7ADA
-	cmp r4, 0
-	beq _081C7AE4
-	b _081C7B2C
-_081C7ADA:
-	cmp r4, 0x2
-	beq _081C7B04
-	cmp r4, 0x3
-	beq _081C7B18
-	b _081C7B2C
-_081C7AE4:
-	ldr r0, [r0, 0x14]
-	movs r1, 0x2
-	negs r1, r1
-	str r4, [sp]
-	movs r2, 0
-	b _081C7B10
-_081C7AF0:
-	ldr r0, [r0, 0x14]
-	movs r1, 0x2
-	negs r1, r1
-	movs r2, 0
-	str r2, [sp]
-	movs r2, 0x10
-	movs r3, 0
-	bl BeginNormalPaletteFade
-	b _081C7B2C
-_081C7B04:
-	movs r0, 0x1
-	negs r0, r0
-	movs r1, 0x2
-	negs r1, r1
-	movs r2, 0
-	str r2, [sp]
-_081C7B10:
-	movs r3, 0x10
-	bl BeginNormalPaletteFade
-	b _081C7B2C
-_081C7B18:
-	movs r0, 0x1
-	negs r0, r0
-	movs r1, 0x2
-	negs r1, r1
-	movs r2, 0
-	str r2, [sp]
-	movs r2, 0x10
-	movs r3, 0
-	bl BeginNormalPaletteFade
-_081C7B2C:
-	add sp, 0x4
-	pop {r4}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_81C7AC0
-
-	thumb_func_start sub_81C7B34
-sub_81C7B34: @ 81C7B34
-	ldr r0, =gPaletteFade
-	ldrb r0, [r0, 0x7]
-	lsrs r0, 7
-	bx lr
-	.pool
-	thumb_func_end sub_81C7B34
-
-	thumb_func_start sub_81C7B40
-sub_81C7B40: @ 81C7B40
-	push {lr}
-	ldr r0, =0xfffefffe
-	movs r1, 0x10
-	movs r2, 0
-	bl BlendPalettes
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_81C7B40
-
-	thumb_func_start sub_81C7B54
-sub_81C7B54: @ 81C7B54
-	push {r4,r5,lr}
-	adds r5, r0, 0
-	cmp r1, 0
-	ble _081C7B6C
-	adds r4, r1, 0
-_081C7B5E:
-	adds r0, r5, 0
-	adds r5, 0x4
-	bl InitBgFromTemplate
-	subs r4, 0x1
-	cmp r4, 0
-	bne _081C7B5E
-_081C7B6C:
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_81C7B54
-
-	thumb_func_start sub_81C7B74
-sub_81C7B74: @ 81C7B74
-	push {r4,lr}
-	movs r0, 0
-	bl sub_81C763C
-	adds r4, r0, 0
-	ldr r0, =gUnknown_0861FA08
-	bl InitWindows
-	movs r0, 0
-	str r0, [r4, 0x10]
-	bl sub_81C7BF8
-	ldrb r0, [r4, 0x10]
-	bl PutWindowTilemap
-	ldrb r0, [r4, 0x10]
-	movs r1, 0x3
-	bl CopyWindowToVram
-	pop {r4}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_81C7B74
-
-	thumb_func_start sub_81C7BA4
-sub_81C7BA4: @ 81C7BA4
-	push {r4,r5,lr}
-	sub sp, 0xC
-	adds r4, r0, 0
-	movs r0, 0
-	bl sub_81C763C
-	adds r5, r0, 0
-	ldr r0, [r5, 0x10]
-	bl sub_81C7BF8
-	ldrb r0, [r5, 0x10]
-	ldr r1, =gUnknown_0861FA48
-	str r1, [sp]
-	movs r1, 0
-	str r1, [sp, 0x4]
-	ldr r1, =gUnknown_0861FA18
-	lsls r4, 2
-	adds r4, r1
-	ldr r1, [r4]
-	str r1, [sp, 0x8]
-	movs r1, 0x1
-	movs r2, 0
-	movs r3, 0x1
-	bl AddTextPrinterParameterized3
-	add sp, 0xC
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_81C7BA4
-
-	thumb_func_start sub_81C7BE8
-sub_81C7BE8: @ 81C7BE8
-	push {lr}
-	bl IsDma3ManagerBusyWithBgCopy
-	lsls r0, 24
-	lsrs r0, 24
-	pop {r1}
-	bx r1
-	thumb_func_end sub_81C7BE8
-
-	thumb_func_start sub_81C7BF8
-sub_81C7BF8: @ 81C7BF8
-	push {r4,lr}
-	sub sp, 0x8
-	adds r4, r0, 0
-	lsls r4, 24
-	lsrs r4, 24
-	adds r0, r4, 0
-	movs r1, 0x44
-	bl FillWindowPixelBuffer
-	movs r0, 0x80
-	str r0, [sp]
-	movs r0, 0x1
-	str r0, [sp, 0x4]
-	adds r0, r4, 0
-	movs r1, 0x55
-	movs r2, 0
-	movs r3, 0
-	bl FillWindowPixelRect
-	add sp, 0x8
-	pop {r4}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_81C7BF8
-
-	thumb_func_start sub_81C7C28
-sub_81C7C28: @ 81C7C28
-	push {r4-r6,lr}
-	movs r0, 0
-	bl sub_81C763C
-	adds r6, r0, 0
-	movs r5, 0
-	ldr r4, =gUnknown_0861FA4C
-_081C7C36:
-	adds r0, r4, 0
-	bl LoadCompressedSpriteSheet
-	adds r4, 0x8
-	adds r5, 0x1
-	cmp r5, 0
-	beq _081C7C36
-	ldr r0, =gUnknown_0861FA54
-	bl sub_81C795C
-	movs r0, 0
-	bl IndexOfSpritePaletteTag
-	lsls r0, 24
-	lsrs r0, 24
-	movs r1, 0x80
-	lsls r1, 9
-	lsls r1, r0
-	movs r0, 0x2
-	negs r0, r0
-	bics r0, r1
-	str r0, [r6, 0x14]
-	ldr r0, =gUnknown_0861FB04
-	movs r1, 0xDC
-	movs r2, 0xC
-	movs r3, 0
-	bl CreateSprite
-	lsls r0, 24
-	lsrs r0, 24
-	lsls r1, r0, 4
-	adds r1, r0
-	lsls r1, 2
-	ldr r0, =gSprites
-	adds r1, r0
-	str r1, [r6, 0x18]
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_81C7C28
-
-	thumb_func_start sub_81C7C94
-sub_81C7C94: @ 81C7C94
-	push {lr}
-	movs r0, 0
-	bl sub_81C763C
-	ldr r0, [r0, 0x18]
-	bl DestroySprite
-	movs r0, 0
-	bl FreeSpriteTilesByTag
-	movs r0, 0
-	bl FreeSpritePaletteByTag
-	pop {r0}
-	bx r0
-	thumb_func_end sub_81C7C94
-
-	thumb_func_start sub_81C7CB4
-sub_81C7CB4: @ 81C7CB4
-	push {r4,lr}
-	adds r4, r0, 0
-	movs r0, 0
-	bl GetBgY
-	lsrs r0, 8
-	negs r0, r0
-	strh r0, [r4, 0x26]
-	pop {r4}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_81C7CB4
-
-	thumb_func_start sub_81C7CCC
-sub_81C7CCC: @ 81C7CCC
-	push {lr}
-	movs r0, 0
-	bl sub_81C763C
-	ldr r0, [r0, 0x18]
-	ldr r1, =SpriteCallbackDummy
-	str r1, [r0, 0x1C]
-	pop {r1}
-	bx r1
-	.pool
-	thumb_func_end sub_81C7CCC
-
-	thumb_func_start sub_81C7CE4
-sub_81C7CE4: @ 81C7CE4
-	push {r4,lr}
-	movs r0, 0
-	bl sub_81C763C
-	ldr r2, [r0, 0x18]
-	movs r4, 0
-	movs r1, 0xDC
-	strh r1, [r2, 0x20]
-	ldr r2, [r0, 0x18]
-	movs r1, 0xC
-	strh r1, [r2, 0x22]
-	ldr r2, [r0, 0x18]
-	ldr r1, =sub_81C7CB4
-	str r1, [r2, 0x1C]
-	adds r2, 0x3E
-	ldrb r3, [r2]
-	movs r1, 0x5
-	negs r1, r1
-	ands r1, r3
-	strb r1, [r2]
-	ldr r3, [r0, 0x18]
-	ldrb r2, [r3, 0x5]
-	movs r1, 0xD
-	negs r1, r1
-	ands r1, r2
-	strb r1, [r3, 0x5]
-	ldr r0, [r0, 0x18]
-	adds r0, 0x43
-	strb r4, [r0]
-	pop {r4}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_81C7CE4
-
-	thumb_func_start sub_81C7D28
-sub_81C7D28: @ 81C7D28
-	push {r4-r7,lr}
-	mov r7, r8
-	push {r7}
-	movs r0, 0
-	bl sub_81C763C
-	adds r6, r0, 0
-	ldr r0, =gUnknown_0861FA64
-	bl LoadCompressedSpriteSheet
-	movs r0, 0x1
-	bl AllocSpritePalette
-	movs r0, 0x2
-	bl AllocSpritePalette
-	movs r5, 0
-	ldr r0, =gSprites
-	mov r8, r0
-	movs r7, 0x4
-_081C7D50:
-	ldr r0, =gUnknown_0861FB2C
-	movs r1, 0
-	movs r2, 0
-	movs r3, 0x1
-	bl CreateSprite
-	lsls r0, 24
-	lsrs r1, r0, 24
-	lsls r4, r5, 2
-	adds r2, r6, 0
-	adds r2, 0x1C
-	adds r2, r4
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	add r0, r8
-	str r0, [r2]
-	adds r0, 0x3E
-	ldrb r1, [r0]
-	orrs r1, r7
-	strb r1, [r0]
-	ldr r1, [r2]
-	lsls r0, r5, 6
-	strh r0, [r1, 0x24]
-	ldr r0, =gUnknown_0861FB44
-	movs r1, 0
-	movs r2, 0
-	movs r3, 0x2
-	bl CreateSprite
-	lsls r0, 24
-	lsrs r1, r0, 24
-	adds r2, r6, 0
-	adds r2, 0x24
-	adds r2, r4
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	add r0, r8
-	str r0, [r2]
-	adds r0, 0x3E
-	ldrb r1, [r0]
-	orrs r1, r7
-	strb r1, [r0]
-	ldr r1, [r2]
-	lsls r0, r5, 5
-	strh r0, [r1, 0x24]
-	ldr r1, [r2]
-	movs r0, 0x12
-	strh r0, [r1, 0x26]
-	ldr r3, [r2]
-	ldrh r2, [r3, 0x4]
-	lsls r1, r2, 22
-	lsrs r1, 22
-	lsls r0, r5, 3
-	adds r0, 0x40
-	adds r1, r0
-	ldr r4, =0x000003ff
-	adds r0, r4, 0
-	ands r1, r0
-	ldr r4, =0xfffffc00
-	adds r0, r4, 0
-	ands r2, r0
-	orrs r2, r1
-	strh r2, [r3, 0x4]
-	adds r5, 0x1
-	cmp r5, 0x1
-	ble _081C7D50
-	pop {r3}
-	mov r8, r3
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_81C7D28
-
-	thumb_func_start sub_81C7DFC
-sub_81C7DFC: @ 81C7DFC
-	push {lr}
-	cmp r0, 0x5
-	bhi _081C7E08
-	bl sub_81C7E58
-	b _081C7E0E
-_081C7E08:
-	subs r0, 0x6
-	bl sub_81C7F24
-_081C7E0E:
-	pop {r0}
-	bx r0
-	thumb_func_end sub_81C7DFC
-
-	thumb_func_start sub_81C7E14
-sub_81C7E14: @ 81C7E14
-	push {r4,r5,lr}
-	adds r4, r0, 0
-	movs r0, 0
-	bl sub_81C763C
-	adds r5, r0, 0
-	cmp r4, 0x4
-	bne _081C7E30
-	movs r0, 0x2
-	bl GetSpriteTileStartByTag
-	ldr r3, [r5, 0x20]
-	adds r0, 0x20
-	b _081C7E3A
-_081C7E30:
-	movs r0, 0x2
-	bl GetSpriteTileStartByTag
-	ldr r3, [r5, 0x20]
-	adds r0, 0x40
-_081C7E3A:
-	ldr r2, =0x000003ff
-	adds r1, r2, 0
-	ands r0, r1
-	ldrh r2, [r3, 0x4]
-	ldr r1, =0xfffffc00
-	ands r1, r2
-	orrs r1, r0
-	strh r1, [r3, 0x4]
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_81C7E14
-
-	thumb_func_start sub_81C7E58
-sub_81C7E58: @ 81C7E58
-	push {r4-r7,lr}
-	mov r7, r9
-	mov r6, r8
-	push {r6,r7}
-	mov r9, r0
-	cmp r0, 0x5
-	bhi _081C7F16
-	movs r0, 0
-	bl sub_81C763C
-	adds r7, r0, 0
-	ldr r0, =gUnknown_0861FA6C
-	mov r1, r9
-	lsls r6, r1, 3
-	adds r6, r0
-	ldrh r4, [r6, 0x6]
-	ldr r2, [r6]
-	mov r8, r2
-	mov r0, r8
-	bl GetDecompressedDataSize
-	adds r5, r0, 0
-	lsls r4, 5
-	ldr r0, =gPokenavLeftHeader_Pal
-	adds r4, r0
-	movs r0, 0x1
-	bl IndexOfSpritePaletteTag
-	adds r1, r0, 0
-	lsls r1, 24
-	lsrs r1, 4
-	movs r0, 0x80
-	lsls r0, 17
-	adds r1, r0
-	lsrs r1, 16
-	adds r0, r4, 0
-	movs r2, 0x20
-	bl LoadPalette
-	ldr r4, =gDecompressionBuffer
-	mov r0, r8
-	adds r1, r4, 0
-	bl LZ77UnCompWram
-	movs r0, 0x2
-	bl GetSpriteTileStartByTag
-	adds r1, r0, 0
-	lsls r1, 16
-	lsrs r1, 11
-	ldr r2, =0x06010000
-	adds r1, r2
-	lsls r5, 16
-	lsrs r5, 16
-	adds r0, r4, 0
-	adds r2, r5, 0
-	movs r3, 0x1
-	bl RequestDma3Copy
-	movs r0, 0x2
-	bl GetSpriteTileStartByTag
-	ldr r3, [r7, 0x20]
-	ldrh r1, [r6, 0x4]
-	adds r0, r1
-	ldr r2, =0x000003ff
-	adds r1, r2, 0
-	ands r0, r1
-	ldrh r2, [r3, 0x4]
-	ldr r1, =0xfffffc00
-	ands r1, r2
-	orrs r1, r0
-	strh r1, [r3, 0x4]
-	mov r0, r9
-	subs r0, 0x4
-	cmp r0, 0x1
-	bhi _081C7F10
-	ldr r1, [r7, 0x20]
-	movs r0, 0x38
-	b _081C7F14
-	.pool
-_081C7F10:
-	ldr r1, [r7, 0x20]
-	movs r0, 0x40
-_081C7F14:
-	strh r0, [r1, 0x24]
-_081C7F16:
-	pop {r3,r4}
-	mov r8, r3
-	mov r9, r4
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_81C7E58
-
-	thumb_func_start sub_81C7F24
-sub_81C7F24: @ 81C7F24
-	push {r4-r6,lr}
-	cmp r0, 0x6
-	bhi _081C7F8A
-	ldr r2, =gUnknown_0861FA9C
-	lsls r1, r0, 3
-	adds r0, r2, 0x4
-	adds r0, r1, r0
-	ldr r4, [r0]
-	adds r1, r2
-	ldr r6, [r1]
-	adds r0, r6, 0
-	bl GetDecompressedDataSize
-	adds r5, r0, 0
-	lsls r4, 5
-	ldr r0, =gPokenavLeftHeader_Pal
-	adds r4, r0
-	movs r0, 0x2
-	bl IndexOfSpritePaletteTag
-	adds r1, r0, 0
-	lsls r1, 24
-	lsrs r1, 4
-	movs r0, 0x80
-	lsls r0, 17
-	adds r1, r0
-	lsrs r1, 16
-	adds r0, r4, 0
-	movs r2, 0x20
-	bl LoadPalette
-	ldr r4, =gDecompressionBuffer+0x1000
-	adds r0, r6, 0
-	adds r1, r4, 0
-	bl LZ77UnCompWram
-	movs r0, 0x2
-	bl GetSpriteTileStartByTag
-	adds r1, r0, 0
-	lsls r1, 16
-	lsrs r1, 11
-	ldr r0, =0x06010800
-	adds r1, r0
-	lsls r5, 16
-	lsrs r5, 16
-	adds r0, r4, 0
-	adds r2, r5, 0
-	movs r3, 0x1
-	bl RequestDma3Copy
-_081C7F8A:
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_81C7F24
-
-	thumb_func_start sub_81C7FA0
-sub_81C7FA0: @ 81C7FA0
-	push {lr}
-	adds r3, r0, 0
-	movs r0, 0x10
-	cmp r1, 0
-	bne _081C7FAC
-	movs r0, 0x30
-_081C7FAC:
-	cmp r3, 0x5
-	bhi _081C7FB8
-	adds r1, r2, 0
-	bl sub_81C803C
-	b _081C7FBE
-_081C7FB8:
-	adds r1, r2, 0
-	bl sub_81C8088
-_081C7FBE:
-	pop {r0}
-	bx r0
-	thumb_func_end sub_81C7FA0
-
-	thumb_func_start sub_81C7FC4
-sub_81C7FC4: @ 81C7FC4
-	push {lr}
-	cmp r0, 0x5
-	bhi _081C7FD2
-	adds r0, r1, 0
-	bl sub_81C80D4
-	b _081C7FD8
-_081C7FD2:
-	adds r0, r1, 0
-	bl sub_81C8110
-_081C7FD8:
-	pop {r0}
-	bx r0
-	thumb_func_end sub_81C7FC4
-
-	thumb_func_start sub_81C7FDC
-sub_81C7FDC: @ 81C7FDC
-	push {r4,lr}
-	movs r0, 0
-	bl sub_81C763C
-	movs r4, 0x4
-	adds r2, r0, 0
-	adds r2, 0x1C
-	movs r3, 0x1
-_081C7FEC:
-	ldr r1, [r2]
-	adds r1, 0x3E
-	ldrb r0, [r1]
-	orrs r0, r4
-	strb r0, [r1]
-	ldr r1, [r2, 0x8]
-	adds r1, 0x3E
-	ldrb r0, [r1]
-	orrs r0, r4
-	strb r0, [r1]
-	adds r2, 0x4
-	subs r3, 0x1
-	cmp r3, 0
-	bge _081C7FEC
-	pop {r4}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_81C7FDC
-
-	thumb_func_start sub_81C8010
-sub_81C8010: @ 81C8010
-	push {lr}
-	movs r0, 0
-	bl sub_81C763C
-	adds r1, r0, 0
-	ldr r0, [r1, 0x1C]
-	ldr r2, [r0, 0x1C]
-	ldr r0, =SpriteCallbackDummy
-	cmp r2, r0
-	bne _081C8034
-	ldr r0, [r1, 0x24]
-	ldr r0, [r0, 0x1C]
-	cmp r0, r2
-	bne _081C8034
-	movs r0, 0
-	b _081C8036
-	.pool
-_081C8034:
-	movs r0, 0x1
-_081C8036:
-	pop {r1}
-	bx r1
-	thumb_func_end sub_81C8010
-
-	thumb_func_start sub_81C803C
-sub_81C803C: @ 81C803C
-	push {r4-r7,lr}
-	mov r7, r8
-	push {r7}
-	mov r8, r0
-	adds r4, r1, 0
-	movs r0, 0
-	bl sub_81C763C
-	cmp r4, 0
-	bne _081C8058
-	movs r7, 0x60
-	negs r7, r7
-	movs r6, 0x20
-	b _081C805E
-_081C8058:
-	movs r7, 0x80
-	lsls r7, 1
-	movs r6, 0xA0
-_081C805E:
-	adds r4, r0, 0
-	adds r4, 0x1C
-	movs r5, 0x1
-_081C8064:
-	ldr r0, [r4]
-	mov r1, r8
-	strh r1, [r0, 0x22]
-	ldm r4!, {r0}
-	adds r1, r7, 0
-	adds r2, r6, 0
-	movs r3, 0xC
-	bl sub_81C814C
-	subs r5, 0x1
-	cmp r5, 0
-	bge _081C8064
-	pop {r3}
-	mov r8, r3
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_81C803C
-
-	thumb_func_start sub_81C8088
-sub_81C8088: @ 81C8088
-	push {r4-r7,lr}
-	mov r7, r8
-	push {r7}
-	mov r8, r0
-	adds r4, r1, 0
-	movs r0, 0
-	bl sub_81C763C
-	cmp r4, 0
-	bne _081C80A4
-	movs r7, 0x60
-	negs r7, r7
-	movs r6, 0x10
-	b _081C80AA
-_081C80A4:
-	movs r7, 0x80
-	lsls r7, 1
-	movs r6, 0xC0
-_081C80AA:
-	adds r4, r0, 0
-	adds r4, 0x24
-	movs r5, 0x1
-_081C80B0:
-	ldr r0, [r4]
-	mov r1, r8
-	strh r1, [r0, 0x22]
-	ldm r4!, {r0}
-	adds r1, r7, 0
-	adds r2, r6, 0
-	movs r3, 0xC
-	bl sub_81C814C
-	subs r5, 0x1
-	cmp r5, 0
-	bge _081C80B0
-	pop {r3}
-	mov r8, r3
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_81C8088
-
-	thumb_func_start sub_81C80D4
-sub_81C80D4: @ 81C80D4
-	push {r4-r7,lr}
-	adds r4, r0, 0
-	movs r0, 0
-	bl sub_81C763C
-	cmp r4, 0
-	bne _081C80EA
-	movs r6, 0x20
-	movs r5, 0x60
-	negs r5, r5
-	b _081C80F0
-_081C80EA:
-	movs r6, 0xC0
-	movs r5, 0x80
-	lsls r5, 1
-_081C80F0:
-	adds r7, r0, 0
-	adds r7, 0x1C
-	movs r4, 0x1
-_081C80F6:
-	ldm r7!, {r0}
-	adds r1, r6, 0
-	adds r2, r5, 0
-	movs r3, 0xC
-	bl sub_81C814C
-	subs r4, 0x1
-	cmp r4, 0
-	bge _081C80F6
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_81C80D4
-
-	thumb_func_start sub_81C8110
-sub_81C8110: @ 81C8110
-	push {r4-r7,lr}
-	adds r4, r0, 0
-	movs r0, 0
-	bl sub_81C763C
-	cmp r4, 0
-	bne _081C8126
-	movs r6, 0x10
-	movs r5, 0x60
-	negs r5, r5
-	b _081C812C
-_081C8126:
-	movs r6, 0xC0
-	movs r5, 0x80
-	lsls r5, 1
-_081C812C:
-	adds r7, r0, 0
-	adds r7, 0x24
-	movs r4, 0x1
-_081C8132:
-	ldm r7!, {r0}
-	adds r1, r6, 0
-	adds r2, r5, 0
-	movs r3, 0xC
-	bl sub_81C814C
-	subs r4, 0x1
-	cmp r4, 0
-	bge _081C8132
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_81C8110
-
-	thumb_func_start sub_81C814C
-sub_81C814C: @ 81C814C
-	push {r4-r6,lr}
-	adds r4, r0, 0
-	adds r0, r1, 0
-	adds r6, r2, 0
-	adds r5, r3, 0
-	strh r0, [r4, 0x20]
-	lsls r1, r0, 4
-	strh r1, [r4, 0x2E]
-	subs r0, r6, r0
-	lsls r0, 4
-	adds r1, r5, 0
-	bl __divsi3
-	strh r0, [r4, 0x30]
-	strh r5, [r4, 0x32]
-	strh r6, [r4, 0x3C]
-	ldr r0, =sub_81C817C
-	str r0, [r4, 0x1C]
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_81C814C
-
-	thumb_func_start sub_81C817C
-sub_81C817C: @ 81C817C
-	push {lr}
-	adds r2, r0, 0
-	ldrh r1, [r2, 0x32]
-	movs r3, 0x32
-	ldrsh r0, [r2, r3]
-	cmp r0, 0
-	beq _081C81C4
-	subs r0, r1, 0x1
-	strh r0, [r2, 0x32]
-	ldrh r0, [r2, 0x30]
-	ldrh r1, [r2, 0x2E]
-	adds r0, r1
-	strh r0, [r2, 0x2E]
-	lsls r0, 16
-	asrs r0, 20
-	strh r0, [r2, 0x20]
-	adds r0, 0x10
-	lsls r0, 16
-	movs r1, 0x88
-	lsls r1, 17
-	cmp r0, r1
-	bls _081C81B6
-	adds r0, r2, 0
-	adds r0, 0x3E
-	ldrb r1, [r0]
-	movs r2, 0x4
-	orrs r1, r2
-	strb r1, [r0]
-	b _081C81CC
-_081C81B6:
-	adds r2, 0x3E
-	ldrb r1, [r2]
-	movs r0, 0x5
-	negs r0, r0
-	ands r0, r1
-	strb r0, [r2]
-	b _081C81CC
-_081C81C4:
-	ldrh r0, [r2, 0x3C]
-	strh r0, [r2, 0x20]
-	ldr r0, =SpriteCallbackDummy
-	str r0, [r2, 0x1C]
-_081C81CC:
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_81C817C
 
 	thumb_func_start sub_81C81D4
 sub_81C81D4: @ 81C81D4
@@ -2251,7 +17,7 @@ sub_81C81D4: @ 81C81D4
 	adds r7, r2, 0
 	ldr r1, =0x000008a4
 	movs r0, 0x11
-	bl sub_81C761C
+	bl AllocSubstruct
 	adds r4, r0, 0
 	cmp r4, 0
 	beq _081C821C
@@ -2294,13 +60,13 @@ sub_81C8224: @ 81C8224
 sub_81C8234: @ 81C8234
 	push {r4,lr}
 	movs r0, 0x11
-	bl sub_81C763C
+	bl GetSubstructPtr
 	adds r4, r0, 0
 	bl sub_81C8FE0
 	ldrb r0, [r4, 0x8]
 	bl RemoveWindow
 	movs r0, 0x11
-	bl sub_81C7650
+	bl FreeSubstruct
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -2315,7 +81,7 @@ sub_81C8254: @ 81C8254
 	cmp r0, 0
 	bne _081C82C0
 	movs r0, 0x11
-	bl sub_81C763C
+	bl GetSubstructPtr
 	adds r2, r0, 0
 	cmp r4, 0x4
 	bhi _081C82D6
@@ -2519,7 +285,7 @@ sub_81C83F0: @ 81C83F0
 	sub sp, 0xC
 	adds r6, r0, 0
 	movs r0, 0x11
-	bl sub_81C763C
+	bl GetSubstructPtr
 	adds r4, r0, 0
 	cmp r6, 0
 	beq _081C8408
@@ -2612,7 +378,7 @@ _081C849C:
 sub_81C84A4: @ 81C84A4
 	push {lr}
 	movs r0, 0x11
-	bl sub_81C763C
+	bl GetSubstructPtr
 	ldr r1, =0x00000888
 	adds r0, r1
 	ldrh r1, [r0]
@@ -2628,7 +394,7 @@ sub_81C84A4: @ 81C84A4
 sub_81C84C0: @ 81C84C0
 	push {lr}
 	movs r0, 0x11
-	bl sub_81C763C
+	bl GetSubstructPtr
 	ldr r1, =0x00000888
 	adds r0, r1
 	movs r3, 0
@@ -2653,7 +419,7 @@ sub_81C84E8: @ 81C84E8
 	adds r6, r0, 0
 	adds r4, r1, 0
 	movs r0, 0x11
-	bl sub_81C763C
+	bl GetSubstructPtr
 	adds r7, r0, 0
 	ldr r0, =0x00000888
 	adds r5, r7, r0
@@ -2747,7 +513,7 @@ sub_81C85A0: @ 81C85A0
 	push {r4-r6,lr}
 	adds r5, r0, 0
 	movs r0, 0x11
-	bl sub_81C763C
+	bl GetSubstructPtr
 	adds r4, r0, 0
 	cmp r5, 0
 	beq _081C85B8
@@ -2826,7 +592,7 @@ _081C862A:
 sub_81C8630: @ 81C8630
 	push {lr}
 	movs r0, 0x11
-	bl sub_81C763C
+	bl GetSubstructPtr
 	ldr r0, [r0, 0x28]
 	bl sub_81C70D8
 	pop {r1}
@@ -2837,7 +603,7 @@ sub_81C8630: @ 81C8630
 sub_81C8644: @ 81C8644
 	push {lr}
 	movs r0, 0x11
-	bl sub_81C763C
+	bl GetSubstructPtr
 	ldr r1, =0x00000888
 	adds r0, r1
 	pop {r1}
@@ -3021,7 +787,7 @@ sub_81C8770: @ 81C8770
 sub_81C877C: @ 81C877C
 	push {r4,lr}
 	movs r0, 0x11
-	bl sub_81C763C
+	bl GetSubstructPtr
 	adds r4, r0, 0
 	ldr r0, =0x0000089c
 	adds r1, r4, r0
@@ -3047,7 +813,7 @@ sub_81C87AC: @ 81C87AC
 	lsls r4, 16
 	lsrs r4, 16
 	movs r0, 0x11
-	bl sub_81C763C
+	bl GetSubstructPtr
 	adds r5, r0, 0
 	ldr r0, =0x00000888
 	adds r1, r5, r0
@@ -3075,7 +841,7 @@ sub_81C87AC: @ 81C87AC
 sub_81C87F0: @ 81C87F0
 	push {r4,lr}
 	movs r0, 0x11
-	bl sub_81C763C
+	bl GetSubstructPtr
 	adds r4, r0, 0
 	ldr r0, =0x0000089c
 	adds r1, r4, r0
@@ -3098,7 +864,7 @@ sub_81C87F0: @ 81C87F0
 sub_81C8820: @ 81C8820
 	push {lr}
 	movs r0, 0x11
-	bl sub_81C763C
+	bl GetSubstructPtr
 	movs r1, 0x8A
 	lsls r1, 4
 	adds r0, r1
@@ -3112,7 +878,7 @@ sub_81C8820: @ 81C8820
 sub_81C8838: @ 81C8838
 	push {r4,lr}
 	movs r0, 0x11
-	bl sub_81C763C
+	bl GetSubstructPtr
 	adds r4, r0, 0
 	ldr r0, =0x00000888
 	adds r2, r4, r0
@@ -3140,7 +906,7 @@ sub_81C8870: @ 81C8870
 	push {r4,r5,lr}
 	adds r5, r0, 0
 	movs r0, 0x11
-	bl sub_81C763C
+	bl GetSubstructPtr
 	adds r4, r0, 0
 	cmp r5, 0x4
 	bhi _081C894C
@@ -3249,7 +1015,7 @@ sub_81C8958: @ 81C8958
 	push {r4,r5,lr}
 	adds r5, r0, 0
 	movs r0, 0x11
-	bl sub_81C763C
+	bl GetSubstructPtr
 	adds r4, r0, 0
 	bl IsDma3ManagerBusyWithBgCopy
 	lsls r0, 24
@@ -3351,7 +1117,7 @@ sub_81C8A28: @ 81C8A28
 	cmp r0, 0
 	bne _081C8AA6
 	movs r0, 0x11
-	bl sub_81C763C
+	bl GetSubstructPtr
 	adds r4, r0, 0
 	ldr r0, =0x00000888
 	adds r6, r4, r0
@@ -4123,7 +1889,7 @@ sub_81C9080: @ 81C9080
 	push {r4,lr}
 	adds r4, r0, 0
 	movs r0, 0x11
-	bl sub_81C763C
+	bl GetSubstructPtr
 	ldr r1, =0x0000088e
 	adds r0, r1
 	ldrh r0, [r0]
@@ -4235,7 +2001,7 @@ sub_81C9148: @ 81C9148
 	push {r4,lr}
 	adds r4, r0, 0
 	movs r0, 0x11
-	bl sub_81C763C
+	bl GetSubstructPtr
 	ldr r1, [r0, 0x40]
 	strh r4, [r1, 0x3C]
 	ldr r0, [r0, 0x44]
@@ -4410,7 +2176,7 @@ sub_81C9298: @ 81C9298
 	push {r4,lr}
 	movs r0, 0x1
 	movs r1, 0x10
-	bl sub_81C761C
+	bl AllocSubstruct
 	adds r4, r0, 0
 	cmp r4, 0
 	beq _081C92C4
@@ -4439,7 +2205,7 @@ sub_81C92CC: @ 81C92CC
 	push {r4,lr}
 	movs r0, 0x1
 	movs r1, 0x10
-	bl sub_81C761C
+	bl AllocSubstruct
 	adds r4, r0, 0
 	cmp r4, 0
 	beq _081C92FA
@@ -4469,7 +2235,7 @@ sub_81C9304: @ 81C9304
 	push {r4,lr}
 	movs r0, 0x1
 	movs r1, 0x10
-	bl sub_81C761C
+	bl AllocSubstruct
 	adds r4, r0, 0
 	cmp r4, 0
 	beq _081C932E
@@ -4497,7 +2263,7 @@ sub_81C9338: @ 81C9338
 	push {lr}
 	movs r0, 0x1
 	movs r1, 0x10
-	bl sub_81C761C
+	bl AllocSubstruct
 	adds r2, r0, 0
 	cmp r2, 0
 	beq _081C9360
@@ -4524,7 +2290,7 @@ sub_81C9368: @ 81C9368
 	push {r4,r5,lr}
 	movs r0, 0x1
 	movs r1, 0x10
-	bl sub_81C761C
+	bl AllocSubstruct
 	adds r5, r0, 0
 	cmp r5, 0
 	beq _081C9394
@@ -4570,7 +2336,7 @@ _081C93B4:
 	.4byte _081C93DC
 _081C93C8:
 	movs r0, 0
-	bl sub_81C7688
+	bl SetPokenavMode
 _081C93CE:
 	bl sub_81C93EC
 	b _081C93DE
@@ -4592,7 +2358,7 @@ _081C93E0:
 	thumb_func_start sub_81C93EC
 sub_81C93EC: @ 81C93EC
 	push {lr}
-	bl sub_81C767C
+	bl GetPokenavMode
 	cmp r0, 0x1
 	beq _081C9408
 	cmp r0, 0x1
@@ -4619,7 +2385,7 @@ _081C9412:
 sub_81C941C: @ 81C941C
 	push {lr}
 	movs r0, 0x1
-	bl sub_81C763C
+	bl GetSubstructPtr
 	ldr r1, [r0, 0xC]
 	bl _call_via_r1
 	pop {r1}
@@ -4630,7 +2396,7 @@ sub_81C941C: @ 81C941C
 sub_81C9430: @ 81C9430
 	push {lr}
 	movs r0, 0x1
-	bl sub_81C7650
+	bl FreeSubstruct
 	pop {r0}
 	bx r0
 	thumb_func_end sub_81C9430
@@ -4711,7 +2477,7 @@ _081C94D4:
 	b _081C94EE
 	.pool
 _081C94E0:
-	bl sub_81C76B8
+	bl CanViewRibbonsMenu
 	cmp r0, 0
 	beq _081C94FC
 	movs r0, 0x9
@@ -5199,7 +2965,7 @@ _081C988E:
 sub_81C9894: @ 81C9894
 	push {lr}
 	movs r0, 0x1
-	bl sub_81C763C
+	bl GetSubstructPtr
 	ldrh r0, [r0]
 	pop {r1}
 	bx r1
@@ -5209,7 +2975,7 @@ sub_81C9894: @ 81C9894
 sub_81C98A4: @ 81C98A4
 	push {lr}
 	movs r0, 0x1
-	bl sub_81C763C
+	bl GetSubstructPtr
 	movs r1, 0x2
 	ldrsh r0, [r0, r1]
 	pop {r1}
@@ -5220,7 +2986,7 @@ sub_81C98A4: @ 81C98A4
 sub_81C98B4: @ 81C98B4
 	push {lr}
 	movs r0, 0x1
-	bl sub_81C763C
+	bl GetSubstructPtr
 	ldrh r0, [r0, 0x4]
 	pop {r1}
 	bx r1
@@ -5230,7 +2996,7 @@ sub_81C98B4: @ 81C98B4
 sub_81C98C4: @ 81C98C4
 	push {lr}
 	movs r0, 0x1
-	bl sub_81C763C
+	bl GetSubstructPtr
 	ldrh r0, [r0, 0x6]
 	pop {r1}
 	bx r1
@@ -5315,7 +3081,7 @@ sub_81C9958: @ 81C9958
 	push {r4,lr}
 	ldr r1, =0x0000088c
 	movs r0, 0x2
-	bl sub_81C761C
+	bl AllocSubstruct
 	adds r4, r0, 0
 	cmp r4, 0
 	beq _081C997A
@@ -5340,7 +3106,7 @@ sub_81C9990: @ 81C9990
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	movs r0, 0x2
-	bl sub_81C763C
+	bl GetSubstructPtr
 	adds r5, r0, 0
 	ldr r0, =gUnknown_086201A0
 	lsls r4, 2
@@ -5361,7 +3127,7 @@ sub_81C9990: @ 81C9990
 sub_81C99C0: @ 81C99C0
 	push {lr}
 	movs r0, 0x2
-	bl sub_81C763C
+	bl GetSubstructPtr
 	ldr r0, [r0]
 	bl _call_via_r0
 	pop {r1}
@@ -5372,7 +3138,7 @@ sub_81C99C0: @ 81C99C0
 sub_81C99D4: @ 81C99D4
 	push {r4,lr}
 	movs r0, 0x2
-	bl sub_81C763C
+	bl GetSubstructPtr
 	adds r4, r0, 0
 	bl sub_81CA7F4
 	ldrb r0, [r4, 0x8]
@@ -5380,7 +3146,7 @@ sub_81C99D4: @ 81C99D4
 	bl sub_81C9FEC
 	bl sub_81CA994
 	movs r0, 0x2
-	bl sub_81C7650
+	bl FreeSubstruct
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -5390,7 +3156,7 @@ sub_81C99D4: @ 81C99D4
 sub_81C99FC: @ 81C99FC
 	push {lr}
 	movs r0, 0x2
-	bl sub_81C763C
+	bl GetSubstructPtr
 	ldr r0, [r0, 0x4]
 	bl sub_81C70D8
 	pop {r1}
@@ -5403,7 +3169,7 @@ sub_81C9A10: @ 81C9A10
 	sub sp, 0x4
 	adds r4, r0, 0
 	movs r0, 0x2
-	bl sub_81C763C
+	bl GetSubstructPtr
 	adds r5, r0, 0
 	cmp r4, 0x9
 	bls _081C9A24
@@ -5430,7 +3196,7 @@ _081C9A34:
 _081C9A5C:
 	ldr r0, =gUnknown_08620194
 	movs r1, 0x3
-	bl sub_81C7B54
+	bl InitBgTemplates
 	ldr r1, =gPokenavMessageBox_Gfx
 	movs r0, 0
 	str r0, [sp]
@@ -5452,7 +3218,7 @@ _081C9A5C:
 	ldr r0, =gPokenavMessageBox_Pal
 	movs r1, 0x10
 	movs r2, 0x20
-	bl sub_81C7944
+	bl CopyPaletteIntoBufferUnfaded
 	movs r0, 0x1
 	movs r1, 0
 	movs r2, 0
@@ -5505,7 +3271,7 @@ _081C9AFA:
 	ldr r0, =gUnknown_0861FD4C
 	movs r1, 0x20
 	movs r2, 0x20
-	bl sub_81C7944
+	bl CopyPaletteIntoBufferUnfaded
 	b _081C9AD6
 	.pool
 _081C9B30:
@@ -5532,7 +3298,7 @@ _081C9B3E:
 	ldr r0, =gUnknown_0861FC78
 	movs r1, 0x30
 	movs r2, 0x20
-	bl sub_81C7944
+	bl CopyPaletteIntoBufferUnfaded
 	bl sub_81C9894
 	cmp r0, 0x3
 	beq _081C9B76
@@ -5602,7 +3368,7 @@ _081C9C06:
 	bl sub_81C7DFC
 	b _081C9AD6
 _081C9C0E:
-	bl sub_81C7B34
+	bl IsPaletteFadeActive
 	cmp r0, 0
 	bne _081C9C5C
 	bl sub_81C9894
@@ -6026,7 +3792,7 @@ _081C9F42:
 	movs r0, 0
 	b _081C9FBE
 _081C9F52:
-	bl sub_81C7BE8
+	bl IsDma3ManagerBusyWithBgCopy_
 	cmp r0, 0
 	bne _081C9FB8
 	bl sub_81C7880
@@ -6066,7 +3832,7 @@ _081C9F96:
 	movs r0, 0
 	b _081C9FBE
 _081C9FB0:
-	bl sub_81C7B34
+	bl IsPaletteFadeActive
 	cmp r0, 0
 	beq _081C9FBC
 _081C9FB8:
@@ -6130,7 +3896,7 @@ sub_81CA02C: @ 81CA02C
 	mov r7, r8
 	push {r7}
 	movs r0, 0x2
-	bl sub_81C763C
+	bl GetSubstructPtr
 	movs r2, 0
 	adds r0, 0x2C
 	mov r8, r0
@@ -6180,7 +3946,7 @@ _081CA054:
 sub_81CA094: @ 81CA094
 	push {r4-r7,lr}
 	movs r0, 0x2
-	bl sub_81C763C
+	bl GetSubstructPtr
 	movs r1, 0
 	adds r7, r0, 0
 	adds r7, 0x2C
@@ -6236,7 +4002,7 @@ sub_81CA0EC: @ 81CA0EC
 	str r1, [sp, 0x14]
 	str r2, [sp]
 	movs r0, 0x2
-	bl sub_81C763C
+	bl GetSubstructPtr
 	mov r10, r0
 	movs r0, 0x3
 	bl GetSpriteTileStartByTag
@@ -6376,7 +4142,7 @@ sub_81CA20C: @ 81CA20C
 	mov r7, r8
 	push {r7}
 	movs r0, 0x2
-	bl sub_81C763C
+	bl GetSubstructPtr
 	adds r6, r0, 0
 	bl sub_81C98A4
 	mov r8, r0
@@ -6431,7 +4197,7 @@ _081CA264:
 sub_81CA278: @ 81CA278
 	push {r4,r5,lr}
 	movs r0, 0x2
-	bl sub_81C763C
+	bl GetSubstructPtr
 	adds r4, r0, 0
 	bl sub_81C98A4
 	adds r3, r0, 0
@@ -6484,7 +4250,7 @@ _081CA2B2:
 sub_81CA2DC: @ 81CA2DC
 	push {r4-r6,lr}
 	movs r0, 0x2
-	bl sub_81C763C
+	bl GetSubstructPtr
 	adds r6, r0, 0
 	movs r5, 0
 	adds r4, r6, 0
@@ -6524,7 +4290,7 @@ _081CA316:
 sub_81CA324: @ 81CA324
 	push {r4,lr}
 	movs r0, 0x2
-	bl sub_81C763C
+	bl GetSubstructPtr
 	adds r3, r0, 0
 	movs r2, 0
 	ldr r4, =SpriteCallbackDummy
@@ -6606,7 +4372,7 @@ sub_81CA3B4: @ 81CA3B4
 	push {r7}
 	adds r4, r0, 0
 	movs r0, 0x2
-	bl sub_81C763C
+	bl GetSubstructPtr
 	adds r7, r0, 0
 	movs r5, 0
 	mov r8, r5
@@ -6919,7 +4685,7 @@ _081CA5F6:
 	cmp r0, 0xC
 	bne _081CA638
 	movs r0, 0x2
-	bl sub_81C763C
+	bl GetSubstructPtr
 	ldrb r1, [r0, 0xC]
 	subs r1, 0x1
 	strb r1, [r0, 0xC]
@@ -6943,7 +4709,7 @@ _081CA638:
 sub_81CA640: @ 81CA640
 	push {r4,lr}
 	movs r0, 0x2
-	bl sub_81C763C
+	bl GetSubstructPtr
 	adds r4, r0, 0
 	ldr r0, =gUnknown_0862036C
 	movs r1, 0x10
@@ -6983,7 +4749,7 @@ _081CA690:
 sub_81CA698: @ 81CA698
 	push {lr}
 	movs r0, 0x2
-	bl sub_81C763C
+	bl GetSubstructPtr
 	ldr r0, [r0, 0x28]
 	bl DestroySprite
 	pop {r0}
@@ -7024,7 +4790,7 @@ _081CA6DA:
 sub_81CA6E0: @ 81CA6E0
 	push {r4,lr}
 	movs r0, 0x2
-	bl sub_81C763C
+	bl GetSubstructPtr
 	adds r4, r0, 0
 	ldr r0, =gUnknown_086202CC
 	bl AddWindow
@@ -7049,7 +4815,7 @@ sub_81CA714: @ 81CA714
 	push {r4-r6,lr}
 	sub sp, 0xC
 	movs r0, 0x2
-	bl sub_81C763C
+	bl GetSubstructPtr
 	adds r5, r0, 0
 	bl sub_81C98B4
 	ldr r1, =gUnknown_086202D4
@@ -7091,7 +4857,7 @@ sub_81CA770: @ 81CA770
 	push {r4-r6,lr}
 	sub sp, 0xC
 	movs r0, 0x2
-	bl sub_81C763C
+	bl GetSubstructPtr
 	adds r5, r0, 0
 	ldr r6, =gText_NoRibbonWinners
 	movs r2, 0x1
@@ -7138,7 +4904,7 @@ sub_81CA7C4: @ 81CA7C4
 sub_81CA7D4: @ 81CA7D4
 	push {r4,lr}
 	movs r0, 0x2
-	bl sub_81C763C
+	bl GetSubstructPtr
 	adds r4, r0, 0
 	ldr r0, =sub_81CA808
 	movs r1, 0x2
@@ -7154,7 +4920,7 @@ sub_81CA7D4: @ 81CA7D4
 sub_81CA7F4: @ 81CA7F4
 	push {lr}
 	movs r0, 0x2
-	bl sub_81C763C
+	bl GetSubstructPtr
 	ldrb r0, [r0, 0xA]
 	bl DestroyTask
 	pop {r0}
@@ -7203,7 +4969,7 @@ sub_81CA850: @ 81CA850
 	ldr r0, =gUnknown_0861FC78 + 0xE
 	movs r1, 0x31
 	movs r2, 0x4
-	bl sub_81C7944
+	bl CopyPaletteIntoBufferUnfaded
 	pop {r0}
 	bx r0
 	.pool
@@ -7336,7 +5102,7 @@ titlescreen_0: @ 81CA92C
 	ldr r2, [r2, 0x8]
 	bl ScanlineEffect_SetParams
 	ldr r0, =sub_81CA914
-	bl c3args_set_0toR1_1to0
+	bl SetVBlankCallback_
 	ldr r0, =sub_81CA9EC
 	movs r1, 0x3
 	bl CreateTask
@@ -7361,7 +5127,7 @@ sub_81CA994: @ 81CA994
 	lsls r0, 24
 	lsrs r0, 24
 	bl DestroyTask
-	bl sub_81C760C
+	bl SetPokenavVBlankCallback
 	pop {r0}
 	bx r0
 	.pool
@@ -7511,7 +5277,7 @@ sub_81CAAE8: @ 81CAAE8
 	movs r1, 0xD4
 	lsls r1, 1
 	movs r0, 0x5
-	bl sub_81C761C
+	bl AllocSubstruct
 	adds r4, r0, 0
 	cmp r4, 0
 	beq _081CAB1C
@@ -7539,7 +5305,7 @@ _081CAB1E:
 sub_81CAB24: @ 81CAB24
 	push {lr}
 	movs r0, 0x5
-	bl sub_81C763C
+	bl GetSubstructPtr
 	ldr r1, [r0, 0x18]
 	bl _call_via_r1
 	pop {r1}
@@ -7550,7 +5316,7 @@ sub_81CAB24: @ 81CAB24
 sub_81CAB38: @ 81CAB38
 	push {lr}
 	movs r0, 0x5
-	bl sub_81C7650
+	bl FreeSubstruct
 	pop {r0}
 	bx r0
 	thumb_func_end sub_81CAB38
@@ -7631,7 +5397,7 @@ _081CABD0:
 	ands r0, r1
 	cmp r0, 0
 	beq _081CABF2
-	bl sub_81C767C
+	bl GetPokenavMode
 	cmp r0, 0x1
 	beq _081CABEC
 	ldr r0, =sub_81CABFC
@@ -7710,11 +5476,11 @@ _081CAC5E:
 	bne _081CAC98
 	b _081CACA6
 _081CAC64:
-	bl sub_81C767C
+	bl GetPokenavMode
 	cmp r0, 0x1
 	bne _081CAC72
 	movs r0, 0x2
-	bl sub_81C7688
+	bl SetPokenavMode
 _081CAC72:
 	ldr r0, =sub_81CACF8
 	str r0, [r4, 0x18]
@@ -7818,7 +5584,7 @@ sub_81CAD20: @ 81CAD20
 	push {r4-r7,lr}
 	adds r5, r0, 0
 	movs r0, 0x5
-	bl sub_81C763C
+	bl GetSubstructPtr
 	adds r4, r0, 0
 	cmp r5, 0x1
 	beq _081CAD4C
@@ -7965,7 +5731,7 @@ _081CAE24:
 sub_81CAE28: @ 81CAE28
 	push {lr}
 	movs r0, 0x5
-	bl sub_81C763C
+	bl GetSubstructPtr
 	ldr r0, [r0, 0x10]
 	pop {r1}
 	bx r1
@@ -7975,7 +5741,7 @@ sub_81CAE28: @ 81CAE28
 sub_81CAE38: @ 81CAE38
 	push {lr}
 	movs r0, 0x5
-	bl sub_81C763C
+	bl GetSubstructPtr
 	ldrh r0, [r0, 0xA]
 	pop {r1}
 	bx r1
@@ -7985,7 +5751,7 @@ sub_81CAE38: @ 81CAE38
 sub_81CAE48: @ 81CAE48
 	push {lr}
 	movs r0, 0x5
-	bl sub_81C763C
+	bl GetSubstructPtr
 	ldrh r0, [r0, 0xC]
 	pop {r1}
 	bx r1
@@ -7995,7 +5761,7 @@ sub_81CAE48: @ 81CAE48
 sub_81CAE58: @ 81CAE58
 	push {lr}
 	movs r0, 0x5
-	bl sub_81C763C
+	bl GetSubstructPtr
 	adds r1, r0, 0
 	ldrh r0, [r1, 0xA]
 	ldrh r1, [r1, 0xC]
@@ -8009,7 +5775,7 @@ sub_81CAE6C: @ 81CAE6C
 	push {r4,lr}
 	adds r4, r0, 0
 	movs r0, 0x5
-	bl sub_81C763C
+	bl GetSubstructPtr
 	adds r1, r0, 0
 	ldrh r0, [r1, 0xC]
 	adds r4, r0
@@ -8032,7 +5798,7 @@ _081CAE8C:
 sub_81CAE94: @ 81CAE94
 	push {lr}
 	movs r0, 0x5
-	bl sub_81C763C
+	bl GetSubstructPtr
 	adds r0, 0x1C
 	pop {r1}
 	bx r1
@@ -8043,7 +5809,7 @@ sub_81CAEA4: @ 81CAEA4
 	push {r4,lr}
 	adds r4, r0, 0
 	movs r0, 0x5
-	bl sub_81C763C
+	bl GetSubstructPtr
 	lsls r4, 2
 	adds r0, r4
 	ldrb r0, [r0, 0x1D]
@@ -8057,7 +5823,7 @@ sub_81CAEBC: @ 81CAEBC
 	push {r4,lr}
 	adds r4, r0, 0
 	movs r0, 0x5
-	bl sub_81C763C
+	bl GetSubstructPtr
 	lsls r1, r4, 2
 	adds r1, r0, r1
 	ldrb r0, [r1, 0x1C]
@@ -8096,7 +5862,7 @@ sub_81CAF04: @ 81CAF04
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	movs r0, 0x5
-	bl sub_81C763C
+	bl GetSubstructPtr
 	lsls r1, r4, 2
 	adds r1, r0, r1
 	ldrb r0, [r1, 0x1C]
@@ -8151,7 +5917,7 @@ sub_81CAF78: @ 81CAF78
 	adds r5, r0, 0
 	adds r6, r1, 0
 	movs r0, 0x5
-	bl sub_81C763C
+	bl GetSubstructPtr
 	adds r4, r0, 0
 	movs r0, 0
 	strb r0, [r6]
@@ -8196,7 +5962,7 @@ sub_81CAFD8: @ 81CAFD8
 	adds r4, r0, 0
 	adds r5, r1, 0
 	movs r0, 0x5
-	bl sub_81C763C
+	bl GetSubstructPtr
 	lsls r4, 2
 	adds r4, r0, r4
 	ldrb r0, [r4, 0x1C]
@@ -8231,7 +5997,7 @@ _081CB012:
 sub_81CB01C: @ 81CB01C
 	push {lr}
 	movs r0, 0x5
-	bl sub_81C763C
+	bl GetSubstructPtr
 	ldrh r0, [r0]
 	pop {r1}
 	bx r1
@@ -8242,7 +6008,7 @@ sub_81CB02C: @ 81CB02C
 	push {r4,lr}
 	adds r4, r0, 0
 	movs r0, 0x5
-	bl sub_81C763C
+	bl GetSubstructPtr
 	adds r1, r0, 0
 	ldrh r0, [r1, 0x2]
 	cmp r0, r4
@@ -8340,7 +6106,7 @@ sub_81CB0E4: @ 81CB0E4
 	push {r4-r7,lr}
 	adds r5, r0, 0
 	movs r0, 0x5
-	bl sub_81C763C
+	bl GetSubstructPtr
 	adds r7, r0, 0
 	movs r6, 0x1
 	adds r5, 0x1
@@ -8381,7 +6147,7 @@ sub_81CB128: @ 81CB128
 	push {r4-r6,lr}
 	adds r5, r0, 0
 	movs r0, 0x5
-	bl sub_81C763C
+	bl GetSubstructPtr
 	adds r1, r0, 0
 	movs r6, 0x1
 	negs r6, r6
@@ -8472,7 +6238,7 @@ _081CB1C8:
 sub_81CB1D0: @ 81CB1D0
 	push {r4,lr}
 	movs r0, 0x5
-	bl sub_81C763C
+	bl GetSubstructPtr
 	adds r4, r0, 0
 	bl sub_81C875C
 	adds r1, r0, 0
@@ -8538,7 +6304,7 @@ sub_81CB260: @ 81CB260
 	push {r4,lr}
 	ldr r1, =0x00002048
 	movs r0, 0x6
-	bl sub_81C761C
+	bl AllocSubstruct
 	adds r4, r0, 0
 	cmp r4, 0
 	beq _081CB294
@@ -8566,7 +6332,7 @@ sub_81CB29C: @ 81CB29C
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	movs r0, 0x6
-	bl sub_81C763C
+	bl GetSubstructPtr
 	adds r5, r0, 0
 	ldr r0, =gUnknown_08622798
 	lsls r4, 2
@@ -8587,7 +6353,7 @@ sub_81CB29C: @ 81CB29C
 sub_81CB2CC: @ 81CB2CC
 	push {lr}
 	movs r0, 0x6
-	bl sub_81C763C
+	bl GetSubstructPtr
 	ldr r0, [r0]
 	bl _call_via_r0
 	pop {r1}
@@ -8598,7 +6364,7 @@ sub_81CB2CC: @ 81CB2CC
 sub_81CB2E0: @ 81CB2E0
 	push {r4,lr}
 	movs r0, 0x6
-	bl sub_81C763C
+	bl GetSubstructPtr
 	adds r4, r0, 0
 	bl sub_81CC2B4
 	bl sub_81CBC1C
@@ -8609,7 +6375,7 @@ sub_81CB2E0: @ 81CB2E0
 	ldrb r0, [r4, 0x14]
 	bl RemoveWindow
 	movs r0, 0x6
-	bl sub_81C7650
+	bl FreeSubstruct
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -8619,7 +6385,7 @@ sub_81CB2E0: @ 81CB2E0
 sub_81CB310: @ 81CB310
 	push {lr}
 	movs r0, 0x6
-	bl sub_81C763C
+	bl GetSubstructPtr
 	ldr r0, [r0, 0x4]
 	bl sub_81C70D8
 	pop {r1}
@@ -8632,7 +6398,7 @@ sub_81CB324: @ 81CB324
 	sub sp, 0x8
 	adds r4, r0, 0
 	movs r0, 0x6
-	bl sub_81C763C
+	bl GetSubstructPtr
 	adds r5, r0, 0
 	cmp r4, 0x7
 	bls _081CB338
@@ -8657,7 +6423,7 @@ _081CB348:
 _081CB368:
 	ldr r0, =gUnknown_0862278C
 	movs r1, 0x3
-	bl sub_81C7B54
+	bl InitBgTemplates
 	movs r0, 0x2
 	movs r1, 0
 	movs r2, 0
@@ -8687,7 +6453,7 @@ _081CB368:
 	ldr r0, =gUnknown_08622510
 	movs r1, 0x20
 	movs r2, 0x20
-	bl sub_81C7944
+	bl CopyPaletteIntoBufferUnfaded
 	movs r0, 0x2
 	b _081CB418
 	.pool
@@ -8720,7 +6486,7 @@ _081CB3E0:
 	ldr r0, =gUnknown_086226E0
 	movs r1, 0x10
 	movs r2, 0x20
-	bl sub_81C7944
+	bl CopyPaletteIntoBufferUnfaded
 	movs r0, 0x1
 _081CB418:
 	bl CopyBgTilemapBufferToVram
@@ -8744,11 +6510,11 @@ _081CB424:
 	ldr r0, =gUnknown_08622700
 	movs r1, 0x30
 	movs r2, 0x20
-	bl sub_81C7944
+	bl CopyPaletteIntoBufferUnfaded
 	ldr r0, =gUnknown_08622720
 	movs r1, 0x50
 	movs r2, 0x20
-	bl sub_81C7944
+	bl CopyPaletteIntoBufferUnfaded
 	movs r0, 0
 	b _081CB506
 	.pool
@@ -8806,7 +6572,7 @@ _081CB4A6:
 	movs r0, 0
 	b _081CB506
 _081CB4EA:
-	bl sub_81C7B34
+	bl IsPaletteFadeActive
 	cmp r0, 0
 	bne _081CB4FA
 	bl sub_81C8010
@@ -8832,7 +6598,7 @@ sub_81CB510: @ 81CB510
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	movs r0, 0x6
-	bl sub_81C763C
+	bl GetSubstructPtr
 	adds r5, r0, 0
 	cmp r4, 0x1
 	beq _081CB55E
@@ -8901,7 +6667,7 @@ sub_81CB588: @ 81CB588
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	movs r0, 0x6
-	bl sub_81C763C
+	bl GetSubstructPtr
 	adds r5, r0, 0
 	cmp r4, 0x1
 	beq _081CB5D6
@@ -8970,7 +6736,7 @@ sub_81CB600: @ 81CB600
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	movs r0, 0x6
-	bl sub_81C763C
+	bl GetSubstructPtr
 	adds r5, r0, 0
 	cmp r4, 0x1
 	beq _081CB64E
@@ -9039,7 +6805,7 @@ sub_81CB678: @ 81CB678
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	movs r0, 0x6
-	bl sub_81C763C
+	bl GetSubstructPtr
 	adds r5, r0, 0
 	cmp r4, 0x1
 	beq _081CB6C6
@@ -9108,7 +6874,7 @@ sub_81CB6F0: @ 81CB6F0
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	movs r0, 0x6
-	bl sub_81C763C
+	bl GetSubstructPtr
 	adds r5, r0, 0
 	cmp r4, 0
 	beq _081CB706
@@ -9145,7 +6911,7 @@ sub_81CB734: @ 81CB734
 	movs r0, 0x5
 	bl PlaySE
 	movs r0, 0x6
-	bl sub_81C763C
+	bl GetSubstructPtr
 	adds r4, r0, 0
 	bl sub_81CB01C
 	adds r1, r0, 0
@@ -9164,7 +6930,7 @@ sub_81CB75C: @ 81CB75C
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	movs r0, 0x6
-	bl sub_81C763C
+	bl GetSubstructPtr
 	adds r5, r0, 0
 	cmp r4, 0
 	beq _081CB772
@@ -9200,7 +6966,7 @@ sub_81CB7A0: @ 81CB7A0
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	movs r0, 0x6
-	bl sub_81C763C
+	bl GetSubstructPtr
 	adds r5, r0, 0
 	cmp r4, 0x1
 	beq _081CB7D4
@@ -9266,7 +7032,7 @@ sub_81CB824: @ 81CB824
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	movs r0, 0x6
-	bl sub_81C763C
+	bl GetSubstructPtr
 	adds r5, r0, 0
 	cmp r4, 0x1
 	beq _081CB85E
@@ -9320,7 +7086,7 @@ sub_81CB888: @ 81CB888
 	push {r4-r6,lr}
 	adds r5, r0, 0
 	movs r0, 0x6
-	bl sub_81C763C
+	bl GetSubstructPtr
 	adds r4, r0, 0
 	movs r6, 0
 	cmp r5, 0x6
@@ -9378,7 +7144,7 @@ _081CB904:
 	bl sub_81C7BA4
 	b _081CB934
 _081CB90C:
-	bl sub_81C7BE8
+	bl IsDma3ManagerBusyWithBgCopy_
 	cmp r0, 0
 	bne _081CB8EC
 	ldrb r0, [r4, 0xF]
@@ -9408,7 +7174,7 @@ sub_81CB93C: @ 81CB93C
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	movs r0, 0x6
-	bl sub_81C763C
+	bl GetSubstructPtr
 	adds r5, r0, 0
 	cmp r4, 0x1
 	beq _081CB974
@@ -9458,7 +7224,7 @@ _081CB9A0:
 	bl sub_81CC42C
 	cmp r0, 0
 	bne _081CB9BA
-	bl sub_81C7BE8
+	bl IsDma3ManagerBusyWithBgCopy_
 	cmp r0, 0
 	beq _081CB9BE
 _081CB9BA:
@@ -9477,7 +7243,7 @@ sub_81CB9C8: @ 81CB9C8
 	push {r4,r5,lr}
 	adds r5, r0, 0
 	movs r0, 0x6
-	bl sub_81C763C
+	bl GetSubstructPtr
 	adds r4, r0, 0
 	cmp r5, 0x4
 	bhi _081CBA60
@@ -9553,7 +7319,7 @@ sub_81CBA68: @ 81CBA68
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	movs r0, 0x6
-	bl sub_81C763C
+	bl GetSubstructPtr
 	adds r5, r0, 0
 	cmp r4, 0x1
 	beq _081CBA9C
@@ -9609,7 +7375,7 @@ sub_81CBAD4: @ 81CBAD4
 	push {r4,r5,lr}
 	adds r5, r0, 0
 	movs r0, 0x6
-	bl sub_81C763C
+	bl GetSubstructPtr
 	adds r4, r0, 0
 	cmp r5, 0x4
 	bhi _081CBB6C
@@ -9699,7 +7465,7 @@ _081CBB80:
 	movs r0, 0
 	b _081CBBB4
 _081CBB9A:
-	bl sub_81C7B34
+	bl IsPaletteFadeActive
 	cmp r0, 0
 	bne _081CBBAA
 	bl sub_81C78C0
@@ -10034,7 +7800,7 @@ sub_81CBE50: @ 81CBE50
 	movs r0, 0x9
 	bl GetGameStat
 	adds r1, r0, 0
-	ldr r0, =0x0001869f
+	ldr r0, =0x0001869f @ Note to decompiler: See UNKNOWN_OFFSET
 	cmp r1, r0
 	ble _081CBE68
 	adds r1, r0, 0
@@ -10531,7 +8297,7 @@ sub_81CC214: @ 81CC214
 	push {r4-r6,lr}
 	sub sp, 0x8
 	movs r0, 0x6
-	bl sub_81C763C
+	bl GetSubstructPtr
 	adds r6, r0, 0
 	movs r5, 0
 	ldr r4, =gUnknown_08622810
@@ -10596,7 +8362,7 @@ _081CC224:
 sub_81CC2B4: @ 81CC2B4
 	push {r4,lr}
 	movs r0, 0x6
-	bl sub_81C763C
+	bl GetSubstructPtr
 	adds r4, r0, 0
 	ldr r0, [r4, 0x1C]
 	cmp r0, 0
@@ -10877,13 +8643,13 @@ sub_81CC4D4: @ 81CC4D4
 	push {r4,lr}
 	movs r0, 0x3
 	movs r1, 0x14
-	bl sub_81C761C
+	bl AllocSubstruct
 	adds r4, r0, 0
 	cmp r4, 0
 	beq _081CC4F0
 	ldr r1, =0x00000884
 	movs r0, 0x10
-	bl sub_81C761C
+	bl AllocSubstruct
 	cmp r0, 0
 	bne _081CC4F8
 _081CC4F0:
@@ -10928,9 +8694,9 @@ sub_81CC524: @ 81CC524
 	orrs r0, r1
 	strb r0, [r3, 0x15]
 	movs r0, 0x10
-	bl sub_81C7650
+	bl FreeSubstruct
 	movs r0, 0x3
-	bl sub_81C7650
+	bl FreeSubstruct
 	pop {r0}
 	bx r0
 	.pool
@@ -10940,7 +8706,7 @@ sub_81CC524: @ 81CC524
 sub_81CC554: @ 81CC554
 	push {lr}
 	movs r0, 0x3
-	bl sub_81C763C
+	bl GetSubstructPtr
 	ldr r1, [r0, 0x10]
 	bl _call_via_r1
 	pop {r1}
@@ -11026,7 +8792,7 @@ sub_81CC5DC: @ 81CC5DC
 sub_81CC5E4: @ 81CC5E4
 	push {lr}
 	movs r0, 0x3
-	bl sub_81C763C
+	bl GetSubstructPtr
 	ldr r0, [r0, 0xC]
 	pop {r1}
 	bx r1
@@ -11037,7 +8803,7 @@ sub_81CC5F4: @ 81CC5F4
 	push {r4,lr}
 	ldr r1, =0x00001948
 	movs r0, 0x4
-	bl sub_81C761C
+	bl AllocSubstruct
 	adds r4, r0, 0
 	cmp r4, 0
 	beq _081CC624
@@ -11063,7 +8829,7 @@ sub_81CC62C: @ 81CC62C
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	movs r0, 0x4
-	bl sub_81C763C
+	bl GetSubstructPtr
 	adds r5, r0, 0
 	ldr r0, =gUnknown_086230E4
 	lsls r4, 2
@@ -11084,7 +8850,7 @@ sub_81CC62C: @ 81CC62C
 sub_81CC65C: @ 81CC65C
 	push {lr}
 	movs r0, 0x4
-	bl sub_81C763C
+	bl GetSubstructPtr
 	ldr r0, [r0]
 	bl _call_via_r0
 	pop {r1}
@@ -11095,17 +8861,17 @@ sub_81CC65C: @ 81CC65C
 sub_81CC670: @ 81CC670
 	push {r4,lr}
 	movs r0, 0x4
-	bl sub_81C763C
+	bl GetSubstructPtr
 	adds r4, r0, 0
 	bl FreeRegionMapIconResources
 	bl sub_81CC9EC
 	ldrb r0, [r4, 0x8]
 	bl RemoveWindow
 	movs r0, 0x10
-	bl sub_81C7650
+	bl FreeSubstruct
 	movs r0, 0x4
-	bl sub_81C7650
-	bl sub_81C760C
+	bl FreeSubstruct
+	bl SetPokenavVBlankCallback
 	movs r0, 0
 	bl SetBgMode
 	pop {r4}
@@ -11128,7 +8894,7 @@ sub_81CC6A4: @ 81CC6A4
 sub_81CC6BC: @ 81CC6BC
 	push {lr}
 	movs r0, 0x4
-	bl sub_81C763C
+	bl GetSubstructPtr
 	ldr r0, [r0, 0x4]
 	bl sub_81C70D8
 	pop {r1}
@@ -11161,7 +8927,7 @@ sub_81CC6F4: @ 81CC6F4
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	movs r0, 0x4
-	bl sub_81C763C
+	bl GetSubstructPtr
 	adds r5, r0, 0
 	cmp r4, 0x7
 	bls _081CC706
@@ -11185,7 +8951,7 @@ _081CC714:
 	.4byte _081CC82A
 _081CC734:
 	movs r0, 0
-	bl c3args_set_0toR1_1to0
+	bl SetVBlankCallback_
 	movs r0, 0x1
 	bl HideBg
 	movs r0, 0x2
@@ -11197,9 +8963,9 @@ _081CC734:
 	ldr r4, =gUnknown_086230D8
 	adds r0, r4, 0
 	movs r1, 0x2
-	bl sub_81C7B54
+	bl InitBgTemplates
 	movs r0, 0x10
-	bl sub_81C763C
+	bl GetSubstructPtr
 	adds r5, r0, 0
 	adds r4, 0x4
 	bl sub_81CC6D0
@@ -11265,7 +9031,7 @@ _081CC7E2:
 	movs r0, 0x2
 	bl ShowBg
 	ldr r0, =sub_81CC6A4
-	bl c3args_set_0toR1_1to0
+	bl SetVBlankCallback_
 	b _081CC77C
 	.pool
 _081CC804:
@@ -11286,7 +9052,7 @@ _081CC812:
 	bl sub_81C7AC0
 	b _081CC77C
 _081CC82A:
-	bl sub_81C7B34
+	bl IsPaletteFadeActive
 	cmp r0, 0
 	bne _081CC83A
 	bl sub_81C8010
@@ -11308,7 +9074,7 @@ sub_81CC848: @ 81CC848
 	push {r4,lr}
 	adds r4, r0, 0
 	movs r0, 0x4
-	bl sub_81C763C
+	bl GetSubstructPtr
 	cmp r4, 0
 	beq _081CC85C
 	cmp r4, 0x1
@@ -11367,7 +9133,7 @@ _081CC8A2:
 	movs r0, 0
 	b _081CC8D2
 _081CC8BE:
-	bl sub_81C7BE8
+	bl IsDma3ManagerBusyWithBgCopy_
 	cmp r0, 0
 	beq _081CC8CA
 _081CC8C6:
@@ -11388,7 +9154,7 @@ sub_81CC8D8: @ 81CC8D8
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	movs r0, 0x4
-	bl sub_81C763C
+	bl GetSubstructPtr
 	adds r5, r0, 0
 	cmp r4, 0x1
 	beq _081CC90C
@@ -11433,7 +9199,7 @@ _081CC924:
 	movs r0, 0
 	b _081CC954
 _081CC940:
-	bl sub_81C7BE8
+	bl IsDma3ManagerBusyWithBgCopy_
 	cmp r0, 0
 	beq _081CC94C
 _081CC948:
@@ -11472,7 +9238,7 @@ _081CC972:
 	movs r0, 0
 	b _081CC9BA
 _081CC982:
-	bl sub_81C7B34
+	bl IsPaletteFadeActive
 	cmp r0, 0
 	bne _081CC99E
 	bl sub_81C7FDC
@@ -11527,7 +9293,7 @@ _081CC9C6:
 sub_81CC9EC: @ 81CC9EC
 	push {r4,r5,lr}
 	movs r0, 0x4
-	bl sub_81C763C
+	bl GetSubstructPtr
 	adds r4, r0, 0
 	movs r0, 0x6
 	bl FreeSpriteTilesByTag
@@ -11606,11 +9372,11 @@ sub_81CCA1C: @ 81CCA1C
 	ldr r0, =gUnknown_08622868
 	movs r1, 0x10
 	movs r2, 0x20
-	bl sub_81C7944
+	bl CopyPaletteIntoBufferUnfaded
 	ldr r0, =gHoennMapZoomIcons_Pal
 	movs r1, 0x30
 	movs r2, 0x20
-	bl sub_81C7944
+	bl CopyPaletteIntoBufferUnfaded
 	bl sub_8124658
 	lsls r0, 24
 	cmp r0, 0
@@ -11653,7 +9419,7 @@ sub_81CCB0C: @ 81CCB0C
 	sub sp, 0xC
 	adds r4, r0, 0
 	movs r0, 0x10
-	bl sub_81C763C
+	bl GetSubstructPtr
 	adds r5, r0, 0
 	ldrb r0, [r5, 0x2]
 	cmp r0, 0x4
@@ -11916,7 +9682,7 @@ sub_81CCD34: @ 81CCD34
 	push {r4,lr}
 	adds r4, r0, 0
 	movs r0, 0x4
-	bl sub_81C763C
+	bl GetSubstructPtr
 	adds r2, r0, 0
 	cmp r4, 0x15
 	ble _081CCD48
@@ -12065,7 +9831,7 @@ sub_81CCE58: @ 81CCE58
 	mov r7, r8
 	push {r7}
 	movs r0, 0x4
-	bl sub_81C763C
+	bl GetSubstructPtr
 	adds r4, r0, 0
 	bl sub_8124658
 	lsls r0, 24
@@ -12210,7 +9976,7 @@ _081CCF70:
 sub_81CCF78: @ 81CCF78
 	push {r4,lr}
 	movs r0, 0x4
-	bl sub_81C763C
+	bl GetSubstructPtr
 	adds r4, r0, 0
 	movs r0, 0x1
 	bl GetBgY
@@ -12235,7 +10001,7 @@ sub_81CCFA4: @ 81CCFA4
 	push {r4-r6,lr}
 	adds r4, r0, 0
 	movs r0, 0x4
-	bl sub_81C763C
+	bl GetSubstructPtr
 	movs r1, 0x1
 	ands r4, r1
 	lsls r5, r4, 2
@@ -12265,7 +10031,7 @@ sub_81CCFD8: @ 81CCFD8
 	push {r4,lr}
 	ldr r1, =0x0000678c
 	movs r0, 0xB
-	bl sub_81C761C
+	bl AllocSubstruct
 	adds r4, r0, 0
 	cmp r4, 0
 	beq _081CD01C
@@ -12296,7 +10062,7 @@ sub_81CD024: @ 81CD024
 	push {r4,lr}
 	ldr r1, =0x0000678c
 	movs r0, 0xB
-	bl sub_81C761C
+	bl AllocSubstruct
 	adds r4, r0, 0
 	cmp r4, 0
 	beq _081CD068
@@ -12326,7 +10092,7 @@ _081CD06A:
 sub_81CD070: @ 81CD070
 	push {lr}
 	movs r0, 0xB
-	bl sub_81C763C
+	bl GetSubstructPtr
 	ldr r2, =0x00006304
 	adds r1, r0, r2
 	ldr r1, [r1]
@@ -12341,7 +10107,7 @@ sub_81CD08C: @ 81CD08C
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	movs r0, 0x12
-	bl sub_81C763C
+	bl GetSubstructPtr
 	adds r5, r0, 0
 	adds r0, r4, 0
 	bl sub_81CD1E4
@@ -12416,7 +10182,7 @@ sub_81CD110: @ 81CD110
 	adds r1, r4, r1
 	strb r0, [r1]
 	movs r0, 0x12
-	bl sub_81C763C
+	bl GetSubstructPtr
 	ldrh r1, [r0, 0x2]
 	lsls r1, 2
 	adds r0, r1
@@ -12484,7 +10250,7 @@ _081CD1B6:
 sub_81CD1C0: @ 81CD1C0
 	push {lr}
 	movs r0, 0xB
-	bl sub_81C763C
+	bl GetSubstructPtr
 	movs r1, 0xC6
 	lsls r1, 7
 	adds r0, r1
@@ -12492,10 +10258,10 @@ sub_81CD1C0: @ 81CD1C0
 	cmp r0, 0
 	bne _081CD1DA
 	movs r0, 0x12
-	bl sub_81C7650
+	bl FreeSubstruct
 _081CD1DA:
 	movs r0, 0xB
-	bl sub_81C7650
+	bl FreeSubstruct
 	pop {r0}
 	bx r0
 	thumb_func_end sub_81CD1C0
@@ -12505,7 +10271,7 @@ sub_81CD1E4: @ 81CD1E4
 	push {r4,lr}
 	adds r4, r0, 0
 	movs r0, 0x12
-	bl sub_81C763C
+	bl GetSubstructPtr
 	adds r2, r0, 0
 	movs r3, 0
 	ldr r0, =gMain
@@ -12569,10 +10335,10 @@ sub_81CD258: @ 81CD258
 	lsrs r0, 24
 	mov r8, r0
 	movs r0, 0xB
-	bl sub_81C763C
+	bl GetSubstructPtr
 	adds r4, r0, 0
 	movs r0, 0x12
-	bl sub_81C763C
+	bl GetSubstructPtr
 	adds r5, r0, 0
 	mov r0, r8
 	cmp r0, 0
@@ -12739,10 +10505,10 @@ _081CD3BA:
 sub_81CD3C4: @ 81CD3C4
 	push {r4,lr}
 	movs r0, 0xB
-	bl sub_81C763C
+	bl GetSubstructPtr
 	adds r4, r0, 0
 	movs r0, 0x12
-	bl sub_81C763C
+	bl GetSubstructPtr
 	adds r2, r0, 0
 	ldr r1, =0x0000678a
 	adds r0, r4, r1
@@ -12927,7 +10693,7 @@ sub_81CD548: @ 81CD548
 	lsrs r4, r0, 24
 	adds r5, r4, 0
 	movs r0, 0xB
-	bl sub_81C763C
+	bl GetSubstructPtr
 	adds r1, r0, 0
 	cmp r4, 0x1
 	beq _081CD588
@@ -13047,7 +10813,7 @@ sub_81CD624: @ 81CD624
 	lsrs r2, 24
 	mov r10, r2
 	movs r0, 0x12
-	bl sub_81C763C
+	bl GetSubstructPtr
 	lsls r4, 2
 	adds r0, r4
 	ldrb r4, [r0, 0x4]
@@ -13295,10 +11061,10 @@ sub_81CD824: @ 81CD824
 	lsls r1, 24
 	lsrs r6, r1, 24
 	movs r0, 0xB
-	bl sub_81C763C
+	bl GetSubstructPtr
 	adds r5, r0, 0
 	movs r0, 0x12
-	bl sub_81C763C
+	bl GetSubstructPtr
 	adds r7, r0, 0
 	mov r1, r8
 	lsls r0, r1, 16
@@ -13439,11 +11205,11 @@ _081CD95C:
 sub_81CD970: @ 81CD970
 	push {r4-r7,lr}
 	movs r0, 0xB
-	bl sub_81C763C
+	bl GetSubstructPtr
 	adds r7, r0, 0
 	ldr r1, =0x000006ac
 	movs r0, 0x12
-	bl sub_81C761C
+	bl AllocSubstruct
 	adds r6, r0, 0
 	movs r0, 0xC6
 	lsls r0, 7
@@ -13506,7 +11272,7 @@ _081CD9C4:
 sub_81CD9F8: @ 81CD9F8
 	push {lr}
 	movs r0, 0xB
-	bl sub_81C763C
+	bl GetSubstructPtr
 	movs r1, 0xC6
 	lsls r1, 7
 	adds r2, r0, r1
@@ -13533,10 +11299,10 @@ sub_81CDA1C: @ 81CDA1C
 	lsrs r1, 24
 	mov r9, r1
 	movs r0, 0xB
-	bl sub_81C763C
+	bl GetSubstructPtr
 	mov r8, r0
 	movs r0, 0x12
-	bl sub_81C763C
+	bl GetSubstructPtr
 	adds r4, r0, 0
 	lsls r0, r6, 16
 	asrs r5, r0, 16
@@ -13705,10 +11471,10 @@ sub_81CDB98: @ 81CDB98
 	lsrs r1, 24
 	mov r9, r1
 	movs r0, 0xB
-	bl sub_81C763C
+	bl GetSubstructPtr
 	adds r7, r0, 0
 	movs r0, 0x12
-	bl sub_81C763C
+	bl GetSubstructPtr
 	adds r4, r0, 0
 	lsls r0, r6, 16
 	asrs r5, r0, 16
@@ -13785,7 +11551,7 @@ _081CDC3E:
 sub_81CDC50: @ 81CDC50
 	push {lr}
 	movs r0, 0x12
-	bl sub_81C763C
+	bl GetSubstructPtr
 	ldrh r0, [r0]
 	pop {r1}
 	bx r1
@@ -13795,7 +11561,7 @@ sub_81CDC50: @ 81CDC50
 sub_81CDC60: @ 81CDC60
 	push {lr}
 	movs r0, 0x12
-	bl sub_81C763C
+	bl GetSubstructPtr
 	ldrh r0, [r0, 0x2]
 	pop {r1}
 	bx r1
@@ -13805,7 +11571,7 @@ sub_81CDC60: @ 81CDC60
 sub_81CDC70: @ 81CDC70
 	push {lr}
 	movs r0, 0xB
-	bl sub_81C763C
+	bl GetSubstructPtr
 	ldr r1, =0x00006428
 	adds r0, r1
 	pop {r1}
@@ -13817,7 +11583,7 @@ sub_81CDC70: @ 81CDC70
 sub_81CDC84: @ 81CDC84
 	push {lr}
 	movs r0, 0xB
-	bl sub_81C763C
+	bl GetSubstructPtr
 	ldr r1, =0x00006786
 	adds r0, r1
 	ldrb r0, [r0]
@@ -13830,7 +11596,7 @@ sub_81CDC84: @ 81CDC84
 sub_81CDC9C: @ 81CDC9C
 	push {lr}
 	movs r0, 0xB
-	bl sub_81C763C
+	bl GetSubstructPtr
 	ldr r1, =0x00006302
 	adds r0, r1
 	ldrb r0, [r0]
@@ -13846,7 +11612,7 @@ sub_81CDCB4: @ 81CDCB4
 	lsls r4, 24
 	lsrs r4, 24
 	movs r0, 0xB
-	bl sub_81C763C
+	bl GetSubstructPtr
 	lsls r4, 13
 	movs r1, 0xC0
 	lsls r1, 2
@@ -13864,7 +11630,7 @@ sub_81CDCD4: @ 81CDCD4
 	lsls r4, 24
 	lsrs r4, 24
 	movs r0, 0xB
-	bl sub_81C763C
+	bl GetSubstructPtr
 	lsls r4, 7
 	adds r0, r4
 	pop {r4}
@@ -13876,7 +11642,7 @@ sub_81CDCD4: @ 81CDCD4
 sub_81CDCEC: @ 81CDCEC
 	push {lr}
 	movs r0, 0xB
-	bl sub_81C763C
+	bl GetSubstructPtr
 	ldr r1, =0x00006789
 	adds r0, r1
 	ldrb r0, [r0]
@@ -13892,7 +11658,7 @@ sub_81CDD04: @ 81CDD04
 	lsls r4, 24
 	lsrs r4, 24
 	movs r0, 0xB
-	bl sub_81C763C
+	bl GetSubstructPtr
 	lsls r4, 6
 	ldr r1, =0x00006368
 	adds r4, r1
@@ -13910,7 +11676,7 @@ sub_81CDD24: @ 81CDD24
 	lsls r4, 24
 	lsrs r4, 24
 	movs r0, 0xB
-	bl sub_81C763C
+	bl GetSubstructPtr
 	lsls r1, r4, 1
 	adds r1, r4
 	lsls r1, 3
@@ -13927,7 +11693,7 @@ sub_81CDD24: @ 81CDD24
 sub_81CDD48: @ 81CDD48
 	push {lr}
 	movs r0, 0x12
-	bl sub_81C763C
+	bl GetSubstructPtr
 	ldrh r1, [r0, 0x2]
 	lsls r1, 2
 	adds r0, r1
@@ -13940,7 +11706,7 @@ sub_81CDD48: @ 81CDD48
 sub_81CDD5C: @ 81CDD5C
 	push {lr}
 	movs r0, 0xB
-	bl sub_81C763C
+	bl GetSubstructPtr
 	movs r1, 0xC6
 	lsls r1, 7
 	adds r0, r1
@@ -13960,7 +11726,7 @@ _081CDD76:
 sub_81CDD7C: @ 81CDD7C
 	push {lr}
 	movs r0, 0xB
-	bl sub_81C763C
+	bl GetSubstructPtr
 	adds r2, r0, 0
 	movs r1, 0xC6
 	lsls r1, 7
@@ -13989,7 +11755,7 @@ _081CDDA6:
 sub_81CDDB0: @ 81CDDB0
 	push {lr}
 	movs r0, 0xB
-	bl sub_81C763C
+	bl GetSubstructPtr
 	ldr r2, =0x00006786
 	adds r1, r0, r2
 	ldrb r1, [r1]
@@ -14009,7 +11775,7 @@ sub_81CDDD4: @ 81CDDD4
 	push {r4,lr}
 	ldr r1, =0x000038ac
 	movs r0, 0xC
-	bl sub_81C761C
+	bl AllocSubstruct
 	adds r4, r0, 0
 	cmp r4, 0
 	beq _081CDE24
@@ -14045,7 +11811,7 @@ sub_81CDE2C: @ 81CDE2C
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	movs r0, 0xC
-	bl sub_81C763C
+	bl GetSubstructPtr
 	adds r5, r0, 0
 	ldr r0, =gUnknown_08623384
 	lsls r4, 2
@@ -14068,7 +11834,7 @@ sub_81CDE2C: @ 81CDE2C
 sub_81CDE64: @ 81CDE64
 	push {lr}
 	movs r0, 0xC
-	bl sub_81C763C
+	bl GetSubstructPtr
 	ldr r1, =0x00001810
 	adds r0, r1
 	ldr r0, [r0]
@@ -14082,7 +11848,7 @@ sub_81CDE64: @ 81CDE64
 sub_81CDE80: @ 81CDE80
 	push {lr}
 	movs r0, 0xC
-	bl sub_81C763C
+	bl GetSubstructPtr
 	ldr r0, [r0]
 	bl sub_81C70D8
 	pop {r1}
@@ -14095,7 +11861,7 @@ sub_81CDE94: @ 81CDE94
 	sub sp, 0xC
 	adds r4, r0, 0
 	movs r0, 0xC
-	bl sub_81C763C
+	bl GetSubstructPtr
 	adds r5, r0, 0
 	cmp r4, 0x14
 	bls _081CDEA8
@@ -14140,7 +11906,7 @@ _081CDF16:
 _081CDF18:
 	ldr r0, =gUnknown_08623358
 	movs r1, 0x3
-	bl sub_81C7B54
+	bl InitBgTemplates
 	movs r0, 0x1
 	movs r1, 0
 	movs r2, 0
@@ -14231,11 +11997,11 @@ _081CDFF2:
 	ldr r0, =gPokenavCondition_Pal
 	movs r1, 0x10
 	movs r2, 0x20
-	bl sub_81C7944
+	bl CopyPaletteIntoBufferUnfaded
 	ldr r0, =gUnknown_08623208
 	movs r1, 0xF0
 	movs r2, 0x20
-	bl sub_81C7944
+	bl CopyPaletteIntoBufferUnfaded
 	ldr r0, =0x00001814
 	adds r1, r5, r0
 	ldr r0, =0x0000ffb0
@@ -14262,7 +12028,7 @@ _081CE03C:
 	ldr r0, =gUnknown_086231E8
 	movs r1, 0x30
 	movs r2, 0x20
-	bl sub_81C7944
+	bl CopyPaletteIntoBufferUnfaded
 	movs r0, 0x2
 	bl sub_81D21DC
 	b _081CDFB0
@@ -14440,7 +12206,7 @@ _081CE1FC:
 	bl sub_81C7FA0
 	b _081CDFB0
 _081CE218:
-	bl sub_81C7B34
+	bl IsPaletteFadeActive
 	cmp r0, 0
 	bne _081CE2C0
 	bl sub_81CDD5C
@@ -14451,7 +12217,7 @@ _081CE218:
 	bne _081CE2C0
 _081CE230:
 	ldr r0, =sub_81CEE44
-	bl c3args_set_0toR1_1to0
+	bl SetVBlankCallback_
 	b _081CDFB0
 	.pool
 _081CE23C:
@@ -14522,7 +12288,7 @@ sub_81CE2D0: @ 81CE2D0
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	movs r0, 0xC
-	bl sub_81C763C
+	bl GetSubstructPtr
 	adds r5, r0, 0
 	cmp r4, 0x1
 	beq _081CE308
@@ -14569,7 +12335,7 @@ _081CE33A:
 	movs r0, 0
 	b _081CE376
 _081CE33E:
-	bl sub_81C7B34
+	bl IsPaletteFadeActive
 	cmp r0, 0
 	bne _081CE34E
 	bl sub_81C78C0
@@ -14604,7 +12370,7 @@ sub_81CE37C: @ 81CE37C
 	push {r4-r6,lr}
 	adds r4, r0, 0
 	movs r0, 0xC
-	bl sub_81C763C
+	bl GetSubstructPtr
 	adds r6, r0, 0
 	bl sub_81CDC70
 	adds r2, r0, 0
@@ -14758,7 +12524,7 @@ sub_81CE4D8: @ 81CE4D8
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	movs r0, 0xC
-	bl sub_81C763C
+	bl GetSubstructPtr
 	adds r5, r0, 0
 	cmp r4, 0x8
 	bhi _081CE5DC
@@ -14880,7 +12646,7 @@ sub_81CE5E4: @ 81CE5E4
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	movs r0, 0xC
-	bl sub_81C763C
+	bl GetSubstructPtr
 	adds r5, r0, 0
 	cmp r4, 0x7
 	bhi _081CE6B2
@@ -15006,7 +12772,7 @@ _081CE6E6:
 	bl sub_81C7BA4
 	b _081CE6E2
 _081CE6EE:
-	bl sub_81C7BE8
+	bl IsDma3ManagerBusyWithBgCopy_
 	cmp r0, 0x1
 	bne _081CE6E2
 	movs r0, 0x2
@@ -15042,7 +12808,7 @@ _081CE71E:
 	bl sub_81C7BA4
 	b _081CE71A
 _081CE726:
-	bl sub_81C7BE8
+	bl IsDma3ManagerBusyWithBgCopy_
 	cmp r0, 0x1
 	bne _081CE71A
 	movs r0, 0x2
@@ -15084,7 +12850,7 @@ sub_81CE754: @ 81CE754
 	lsls r2, 24
 	lsrs r5, r2, 24
 	movs r0, 0xC
-	bl sub_81C763C
+	bl GetSubstructPtr
 	adds r6, r0, 0
 	cmp r4, 0x1
 	beq _081CE7B8
@@ -15298,7 +13064,7 @@ _081CE926:
 sub_81CE934: @ 81CE934
 	push {r4,lr}
 	movs r0, 0xC
-	bl sub_81C763C
+	bl GetSubstructPtr
 	adds r4, r0, 0
 	ldr r1, =0x00001822
 	adds r0, r4, r1
@@ -15396,7 +13162,7 @@ sub_81CE9E4: @ 81CE9E4
 	push {r5-r7}
 	sub sp, 0x58
 	movs r0, 0xC
-	bl sub_81C763C
+	bl GetSubstructPtr
 	adds r6, r0, 0
 	add r4, sp, 0x20
 	add r5, sp, 0x38
@@ -15699,7 +13465,7 @@ _081CEC8E:
 sub_81CECA0: @ 81CECA0
 	push {r4,lr}
 	movs r0, 0xC
-	bl sub_81C763C
+	bl GetSubstructPtr
 	adds r4, r0, 0
 	movs r1, 0xC1
 	lsls r1, 5
@@ -15734,7 +13500,7 @@ _081CECF0:
 	bl sub_81CEBF4
 	bl sub_81CEE68
 	movs r0, 0xC
-	bl sub_81C7650
+	bl FreeSubstruct
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -15745,7 +13511,7 @@ sub_81CED10: @ 81CED10
 	push {r4,lr}
 	adds r4, r0, 0
 	movs r0, 0xC
-	bl sub_81C763C
+	bl GetSubstructPtr
 	ldr r1, =0x00001814
 	adds r0, r1
 	ldrh r0, [r0]
@@ -15766,7 +13532,7 @@ sub_81CED30: @ 81CED30
 	lsls r0, 24
 	lsrs r6, r0, 24
 	movs r0, 0xC
-	bl sub_81C763C
+	bl GetSubstructPtr
 	mov r8, r0
 	ldr r7, =0x00001816
 	add r7, r8
@@ -15889,7 +13655,7 @@ sub_81CEE44: @ 81CEE44
 	thumb_func_start sub_81CEE68
 sub_81CEE68: @ 81CEE68
 	push {lr}
-	bl sub_81C760C
+	bl SetPokenavVBlankCallback
 	pop {r0}
 	bx r0
 	thumb_func_end sub_81CEE68
@@ -15979,7 +13745,7 @@ _081CEF0C:
 sub_81CEF14: @ 81CEF14
 	push {r4,lr}
 	movs r0, 0xC
-	bl sub_81C763C
+	bl GetSubstructPtr
 	adds r4, r0, 0
 	bl sub_81CDD5C
 	cmp r0, 0x1
@@ -16002,13 +13768,13 @@ sub_81CEF3C: @ 81CEF3C
 	push {r4,lr}
 	movs r0, 0x7
 	movs r1, 0x24
-	bl sub_81C761C
+	bl AllocSubstruct
 	adds r4, r0, 0
 	cmp r4, 0
 	beq _081CEF90
 	ldr r1, =0x000006ac
 	movs r0, 0x12
-	bl sub_81C761C
+	bl AllocSubstruct
 	str r0, [r4, 0x20]
 	cmp r0, 0
 	beq _081CEF90
@@ -16042,12 +13808,12 @@ sub_81CEF98: @ 81CEF98
 	push {r4,lr}
 	movs r0, 0x7
 	movs r1, 0x24
-	bl sub_81C761C
+	bl AllocSubstruct
 	adds r4, r0, 0
 	cmp r4, 0
 	beq _081CEFD4
 	movs r0, 0x12
-	bl sub_81C763C
+	bl GetSubstructPtr
 	str r0, [r4, 0x20]
 	ldr r0, =sub_81CF030
 	str r0, [r4]
@@ -16074,7 +13840,7 @@ _081CEFD6:
 sub_81CEFDC: @ 81CEFDC
 	push {lr}
 	movs r0, 0x7
-	bl sub_81C763C
+	bl GetSubstructPtr
 	ldr r1, [r0]
 	bl _call_via_r1
 	pop {r1}
@@ -16085,15 +13851,15 @@ sub_81CEFDC: @ 81CEFDC
 sub_81CEFF0: @ 81CEFF0
 	push {lr}
 	movs r0, 0x7
-	bl sub_81C763C
+	bl GetSubstructPtr
 	ldr r0, [r0, 0x1C]
 	cmp r0, 0
 	bne _081CF004
 	movs r0, 0x12
-	bl sub_81C7650
+	bl FreeSubstruct
 _081CF004:
 	movs r0, 0x7
-	bl sub_81C7650
+	bl FreeSubstruct
 	pop {r0}
 	bx r0
 	thumb_func_end sub_81CEFF0
@@ -16205,7 +13971,7 @@ sub_81CF0B8: @ 81CF0B8
 sub_81CF0C0: @ 81CF0C0
 	push {lr}
 	movs r0, 0x7
-	bl sub_81C763C
+	bl GetSubstructPtr
 	ldr r0, [r0, 0x18]
 	pop {r1}
 	bx r1
@@ -16215,7 +13981,7 @@ sub_81CF0C0: @ 81CF0C0
 sub_81CF0D0: @ 81CF0D0
 	push {lr}
 	movs r0, 0x7
-	bl sub_81C763C
+	bl GetSubstructPtr
 	ldr r0, [r0, 0x20]
 	adds r0, 0x4
 	pop {r1}
@@ -16226,7 +13992,7 @@ sub_81CF0D0: @ 81CF0D0
 sub_81CF0E0: @ 81CF0E0
 	push {lr}
 	movs r0, 0x7
-	bl sub_81C763C
+	bl GetSubstructPtr
 	ldr r0, [r0, 0x20]
 	ldrh r0, [r0]
 	pop {r1}
@@ -16237,7 +14003,7 @@ sub_81CF0E0: @ 81CF0E0
 sub_81CF0F0: @ 81CF0F0
 	push {r4,lr}
 	movs r0, 0x7
-	bl sub_81C763C
+	bl GetSubstructPtr
 	adds r4, r0, 0
 	bl sub_81C875C
 	ldr r1, [r4, 0x20]
@@ -16253,7 +14019,7 @@ sub_81CF0F0: @ 81CF0F0
 sub_81CF10C: @ 81CF10C
 	push {lr}
 	movs r0, 0x7
-	bl sub_81C763C
+	bl GetSubstructPtr
 	ldr r0, [r0, 0x20]
 	ldrh r0, [r0, 0x2]
 	pop {r1}
@@ -16278,7 +14044,7 @@ sub_81CF134: @ 81CF134
 	push {r4-r6,lr}
 	sub sp, 0x4
 	movs r0, 0x7
-	bl sub_81C763C
+	bl GetSubstructPtr
 	adds r6, r0, 0
 	ldr r0, [r6, 0x20]
 	movs r1, 0
@@ -16344,7 +14110,7 @@ _081CF1AA:
 sub_81CF1C4: @ 81CF1C4
 	push {lr}
 	movs r0, 0x7
-	bl sub_81C763C
+	bl GetSubstructPtr
 	movs r1, 0
 	str r1, [r0, 0x10]
 	str r1, [r0, 0xC]
@@ -16360,7 +14126,7 @@ sub_81CF1D8: @ 81CF1D8
 	push {r7}
 	sub sp, 0x4
 	movs r0, 0x7
-	bl sub_81C763C
+	bl GetSubstructPtr
 	adds r6, r0, 0
 	ldr r5, [r6, 0xC]
 	ldr r4, [r6, 0x10]
@@ -16437,7 +14203,7 @@ _081CF26A:
 sub_81CF278: @ 81CF278
 	push {r4-r6,lr}
 	movs r0, 0x7
-	bl sub_81C763C
+	bl GetSubstructPtr
 	adds r5, r0, 0
 	ldr r0, [r5, 0x20]
 	ldrh r6, [r0]
@@ -16548,7 +14314,7 @@ sub_81CF330: @ 81CF330
 	movs r1, 0x81
 	lsls r1, 4
 	movs r0, 0x8
-	bl sub_81C761C
+	bl AllocSubstruct
 	adds r4, r0, 0
 	cmp r4, 0
 	beq _081CF360
@@ -16577,7 +14343,7 @@ sub_81CF368: @ 81CF368
 	movs r1, 0x81
 	lsls r1, 4
 	movs r0, 0x8
-	bl sub_81C761C
+	bl AllocSubstruct
 	adds r4, r0, 0
 	cmp r4, 0
 	beq _081CF398
@@ -16604,7 +14370,7 @@ sub_81CF3A0: @ 81CF3A0
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	movs r0, 0x8
-	bl sub_81C763C
+	bl GetSubstructPtr
 	adds r5, r0, 0
 	ldr r0, =gUnknown_08623598
 	lsls r4, 2
@@ -16625,7 +14391,7 @@ sub_81CF3A0: @ 81CF3A0
 sub_81CF3D0: @ 81CF3D0
 	push {lr}
 	movs r0, 0x8
-	bl sub_81C763C
+	bl GetSubstructPtr
 	ldr r0, [r0]
 	bl _call_via_r0
 	pop {r1}
@@ -16636,7 +14402,7 @@ sub_81CF3D0: @ 81CF3D0
 sub_81CF3E4: @ 81CF3E4
 	push {lr}
 	movs r0, 0x8
-	bl sub_81C763C
+	bl GetSubstructPtr
 	ldr r0, [r0, 0x4]
 	bl sub_81C70D8
 	pop {r1}
@@ -16647,13 +14413,13 @@ sub_81CF3E4: @ 81CF3E4
 sub_81CF3F8: @ 81CF3F8
 	push {r4,lr}
 	movs r0, 0x8
-	bl sub_81C763C
+	bl GetSubstructPtr
 	adds r4, r0, 0
 	bl sub_81C8234
 	ldrb r0, [r4, 0x8]
 	bl RemoveWindow
 	movs r0, 0x8
-	bl sub_81C7650
+	bl FreeSubstruct
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -16665,7 +14431,7 @@ sub_81CF418: @ 81CF418
 	sub sp, 0x4
 	adds r4, r0, 0
 	movs r0, 0x8
-	bl sub_81C763C
+	bl GetSubstructPtr
 	adds r5, r0, 0
 	cmp r4, 0x5
 	bls _081CF42C
@@ -16688,7 +14454,7 @@ _081CF43C:
 _081CF454:
 	ldr r0, =gUnknown_08623590
 	movs r1, 0x2
-	bl sub_81C7B54
+	bl InitBgTemplates
 	ldr r1, =gUnknown_086233E4
 	movs r0, 0
 	str r0, [sp]
@@ -16710,7 +14476,7 @@ _081CF454:
 	ldr r0, =gUnknown_086233C4
 	movs r1, 0x10
 	movs r2, 0x20
-	bl sub_81C7944
+	bl CopyPaletteIntoBufferUnfaded
 	movs r0, 0x1
 	bl CopyBgTilemapBufferToVram
 _081CF498:
@@ -16734,7 +14500,7 @@ _081CF4C0:
 	ldr r0, =gUnknown_08623570
 	movs r1, 0x20
 	movs r2, 0x20
-	bl sub_81C7944
+	bl CopyPaletteIntoBufferUnfaded
 	bl sub_81CF88C
 	b _081CF498
 	.pool
@@ -16789,7 +14555,7 @@ _081CF552:
 	bl sub_81C7AC0
 	b _081CF498
 _081CF55A:
-	bl sub_81C7B34
+	bl IsPaletteFadeActive
 	cmp r0, 0
 	bne _081CF56A
 	bl sub_81C8010
@@ -16812,7 +14578,7 @@ sub_81CF578: @ 81CF578
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	movs r0, 0x8
-	bl sub_81C763C
+	bl GetSubstructPtr
 	adds r5, r0, 0
 	cmp r4, 0x1
 	beq _081CF5C6
@@ -16880,7 +14646,7 @@ sub_81CF5F0: @ 81CF5F0
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	movs r0, 0x8
-	bl sub_81C763C
+	bl GetSubstructPtr
 	adds r5, r0, 0
 	cmp r4, 0x1
 	beq _081CF63E
@@ -16948,7 +14714,7 @@ sub_81CF668: @ 81CF668
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	movs r0, 0x8
-	bl sub_81C763C
+	bl GetSubstructPtr
 	adds r5, r0, 0
 	cmp r4, 0x1
 	beq _081CF6B6
@@ -17016,7 +14782,7 @@ sub_81CF6E0: @ 81CF6E0
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	movs r0, 0x8
-	bl sub_81C763C
+	bl GetSubstructPtr
 	adds r5, r0, 0
 	cmp r4, 0x1
 	beq _081CF72E
@@ -17096,7 +14862,7 @@ _081CF764:
 	movs r0, 0
 	b _081CF792
 _081CF778:
-	bl sub_81C7B34
+	bl IsPaletteFadeActive
 	cmp r0, 0
 	bne _081CF788
 	bl sub_81C78C0
@@ -17130,7 +14896,7 @@ _081CF7A4:
 	movs r0, 0
 	b _081CF7C2
 _081CF7B4:
-	bl sub_81C7B34
+	bl IsPaletteFadeActive
 	cmp r0, 0
 	beq _081CF7C0
 	movs r0, 0x2
@@ -17371,13 +15137,13 @@ sub_81CF9BC: @ 81CF9BC
 	push {r4,lr}
 	movs r0, 0x9
 	movs r1, 0x20
-	bl sub_81C761C
+	bl AllocSubstruct
 	adds r4, r0, 0
 	cmp r4, 0
 	beq _081CF9FC
 	ldr r1, =0x000006ac
 	movs r0, 0x12
-	bl sub_81C761C
+	bl AllocSubstruct
 	str r0, [r4, 0x1C]
 	cmp r0, 0
 	beq _081CF9FC
@@ -17405,12 +15171,12 @@ sub_81CFA04: @ 81CFA04
 	push {r4,lr}
 	movs r0, 0x9
 	movs r1, 0x20
-	bl sub_81C761C
+	bl AllocSubstruct
 	adds r4, r0, 0
 	cmp r4, 0
 	beq _081CFA2C
 	movs r0, 0x12
-	bl sub_81C763C
+	bl GetSubstructPtr
 	str r0, [r4, 0x1C]
 	ldr r0, =sub_81CFA88
 	str r0, [r4]
@@ -17430,7 +15196,7 @@ _081CFA2E:
 sub_81CFA34: @ 81CFA34
 	push {lr}
 	movs r0, 0x9
-	bl sub_81C763C
+	bl GetSubstructPtr
 	ldr r1, [r0]
 	bl _call_via_r1
 	pop {r1}
@@ -17441,15 +15207,15 @@ sub_81CFA34: @ 81CFA34
 sub_81CFA48: @ 81CFA48
 	push {lr}
 	movs r0, 0x9
-	bl sub_81C763C
+	bl GetSubstructPtr
 	ldr r0, [r0, 0x18]
 	cmp r0, 0
 	bne _081CFA5C
 	movs r0, 0x12
-	bl sub_81C7650
+	bl FreeSubstruct
 _081CFA5C:
 	movs r0, 0x9
-	bl sub_81C7650
+	bl FreeSubstruct
 	pop {r0}
 	bx r0
 	thumb_func_end sub_81CFA48
@@ -17561,7 +15327,7 @@ sub_81CFB10: @ 81CFB10
 sub_81CFB18: @ 81CFB18
 	push {lr}
 	movs r0, 0x9
-	bl sub_81C763C
+	bl GetSubstructPtr
 	ldr r0, [r0, 0x14]
 	pop {r1}
 	bx r1
@@ -17571,7 +15337,7 @@ sub_81CFB18: @ 81CFB18
 sub_81CFB28: @ 81CFB28
 	push {lr}
 	movs r0, 0x9
-	bl sub_81C763C
+	bl GetSubstructPtr
 	ldr r0, [r0, 0x1C]
 	adds r0, 0x4
 	pop {r1}
@@ -17582,7 +15348,7 @@ sub_81CFB28: @ 81CFB28
 sub_81CFB38: @ 81CFB38
 	push {lr}
 	movs r0, 0x9
-	bl sub_81C763C
+	bl GetSubstructPtr
 	ldr r0, [r0, 0x1C]
 	ldrh r0, [r0]
 	pop {r1}
@@ -17593,7 +15359,7 @@ sub_81CFB38: @ 81CFB38
 sub_81CFB48: @ 81CFB48
 	push {r4,lr}
 	movs r0, 0x9
-	bl sub_81C763C
+	bl GetSubstructPtr
 	adds r4, r0, 0
 	bl sub_81C875C
 	ldr r1, [r4, 0x1C]
@@ -17609,7 +15375,7 @@ sub_81CFB48: @ 81CFB48
 sub_81CFB64: @ 81CFB64
 	push {lr}
 	movs r0, 0x9
-	bl sub_81C763C
+	bl GetSubstructPtr
 	ldr r0, [r0, 0x1C]
 	ldrh r0, [r0, 0x2]
 	pop {r1}
@@ -17634,7 +15400,7 @@ sub_81CFB8C: @ 81CFB8C
 	push {r4-r6,lr}
 	sub sp, 0x4
 	movs r0, 0x9
-	bl sub_81C763C
+	bl GetSubstructPtr
 	adds r6, r0, 0
 	ldr r0, [r6, 0x1C]
 	movs r1, 0
@@ -17706,7 +15472,7 @@ _081CFC10:
 sub_81CFC2C: @ 81CFC2C
 	push {lr}
 	movs r0, 0x9
-	bl sub_81C763C
+	bl GetSubstructPtr
 	movs r1, 0
 	str r1, [r0, 0x10]
 	str r1, [r0, 0xC]
@@ -17723,7 +15489,7 @@ sub_81CFC40: @ 81CFC40
 	push {r6,r7}
 	sub sp, 0x4
 	movs r0, 0x9
-	bl sub_81C763C
+	bl GetSubstructPtr
 	mov r8, r0
 	ldr r7, [r0, 0xC]
 	ldr r6, [r0, 0x10]
@@ -17934,7 +15700,7 @@ sub_81CFDD0: @ 81CFDD0
 	movs r1, 0x81
 	lsls r1, 4
 	movs r0, 0xA
-	bl sub_81C761C
+	bl AllocSubstruct
 	adds r4, r0, 0
 	cmp r4, 0
 	beq _081CFE00
@@ -17963,7 +15729,7 @@ sub_81CFE08: @ 81CFE08
 	movs r1, 0x81
 	lsls r1, 4
 	movs r0, 0xA
-	bl sub_81C761C
+	bl AllocSubstruct
 	adds r4, r0, 0
 	cmp r4, 0
 	beq _081CFE38
@@ -17990,7 +15756,7 @@ sub_81CFE40: @ 81CFE40
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	movs r0, 0xA
-	bl sub_81C763C
+	bl GetSubstructPtr
 	adds r5, r0, 0
 	ldr r0, =gUnknown_086237B8
 	lsls r4, 2
@@ -18011,7 +15777,7 @@ sub_81CFE40: @ 81CFE40
 sub_81CFE70: @ 81CFE70
 	push {lr}
 	movs r0, 0xA
-	bl sub_81C763C
+	bl GetSubstructPtr
 	ldr r0, [r0]
 	bl _call_via_r0
 	pop {r1}
@@ -18022,7 +15788,7 @@ sub_81CFE70: @ 81CFE70
 sub_81CFE84: @ 81CFE84
 	push {lr}
 	movs r0, 0xA
-	bl sub_81C763C
+	bl GetSubstructPtr
 	ldr r0, [r0, 0x4]
 	bl sub_81C70D8
 	pop {r1}
@@ -18033,13 +15799,13 @@ sub_81CFE84: @ 81CFE84
 sub_81CFE98: @ 81CFE98
 	push {r4,lr}
 	movs r0, 0xA
-	bl sub_81C763C
+	bl GetSubstructPtr
 	adds r4, r0, 0
 	bl sub_81C8234
 	ldrb r0, [r4, 0x8]
 	bl RemoveWindow
 	movs r0, 0xA
-	bl sub_81C7650
+	bl FreeSubstruct
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -18051,7 +15817,7 @@ sub_81CFEB8: @ 81CFEB8
 	sub sp, 0x4
 	adds r4, r0, 0
 	movs r0, 0xA
-	bl sub_81C763C
+	bl GetSubstructPtr
 	adds r5, r0, 0
 	cmp r4, 0x5
 	bls _081CFECC
@@ -18074,7 +15840,7 @@ _081CFEDC:
 _081CFEF4:
 	ldr r0, =gUnknown_086237B0
 	movs r1, 0x2
-	bl sub_81C7B54
+	bl InitBgTemplates
 	ldr r1, =gUnknown_08623604
 	movs r0, 0
 	str r0, [sp]
@@ -18094,7 +15860,7 @@ _081CFEF4:
 	ldr r0, =gUnknown_086235E4
 	movs r1, 0x10
 	movs r2, 0x20
-	bl sub_81C7944
+	bl CopyPaletteIntoBufferUnfaded
 	movs r0, 0x1
 	bl CopyBgTilemapBufferToVram
 _081CFF32:
@@ -18128,7 +15894,7 @@ _081CFF76:
 	ldr r0, =gUnknown_08623790
 	movs r1, 0x20
 	movs r2, 0x20
-	bl sub_81C7944
+	bl CopyPaletteIntoBufferUnfaded
 	bl sub_81D0304
 	b _081CFF32
 	.pool
@@ -18163,7 +15929,7 @@ _081CFFA4:
 	bl sub_81C7FA0
 	b _081CFF32
 _081CFFDE:
-	bl sub_81C7B34
+	bl IsPaletteFadeActive
 	cmp r0, 0
 	bne _081CFFEE
 	bl sub_81C8010
@@ -18186,7 +15952,7 @@ sub_81CFFFC: @ 81CFFFC
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	movs r0, 0xA
-	bl sub_81C763C
+	bl GetSubstructPtr
 	adds r5, r0, 0
 	cmp r4, 0x1
 	beq _081D004A
@@ -18254,7 +16020,7 @@ sub_81D0074: @ 81D0074
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	movs r0, 0xA
-	bl sub_81C763C
+	bl GetSubstructPtr
 	adds r5, r0, 0
 	cmp r4, 0x1
 	beq _081D00C2
@@ -18322,7 +16088,7 @@ sub_81D00EC: @ 81D00EC
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	movs r0, 0xA
-	bl sub_81C763C
+	bl GetSubstructPtr
 	adds r5, r0, 0
 	cmp r4, 0x1
 	beq _081D013A
@@ -18390,7 +16156,7 @@ sub_81D0164: @ 81D0164
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	movs r0, 0xA
-	bl sub_81C763C
+	bl GetSubstructPtr
 	adds r5, r0, 0
 	cmp r4, 0x1
 	beq _081D01B2
@@ -18470,7 +16236,7 @@ _081D01E8:
 	movs r0, 0
 	b _081D0216
 _081D01FC:
-	bl sub_81C7B34
+	bl IsPaletteFadeActive
 	cmp r0, 0
 	bne _081D020C
 	bl sub_81C78C0
@@ -18504,7 +16270,7 @@ _081D0228:
 	movs r0, 0
 	b _081D0246
 _081D0238:
-	bl sub_81C7B34
+	bl IsPaletteFadeActive
 	cmp r0, 0
 	beq _081D0244
 	movs r0, 0x2
@@ -18756,12 +16522,12 @@ sub_81D0450: @ 81D0450
 	push {r4,lr}
 	movs r0, 0xD
 	movs r1, 0x9C
-	bl sub_81C761C
+	bl AllocSubstruct
 	adds r4, r0, 0
 	cmp r4, 0
 	beq _081D0498
 	movs r0, 0x12
-	bl sub_81C763C
+	bl GetSubstructPtr
 	str r0, [r4, 0x8]
 	cmp r0, 0
 	beq _081D0498
@@ -18792,7 +16558,7 @@ _081D049A:
 sub_81D04A0: @ 81D04A0
 	push {lr}
 	movs r0, 0xD
-	bl sub_81C763C
+	bl GetSubstructPtr
 	adds r1, r0, 0
 	adds r1, 0x98
 	ldr r1, [r1]
@@ -18805,7 +16571,7 @@ sub_81D04A0: @ 81D04A0
 sub_81D04B8: @ 81D04B8
 	push {lr}
 	movs r0, 0xD
-	bl sub_81C7650
+	bl FreeSubstruct
 	pop {r0}
 	bx r0
 	thumb_func_end sub_81D04B8
@@ -19111,7 +16877,7 @@ _081D06BE:
 sub_81D06C4: @ 81D06C4
 	push {lr}
 	movs r0, 0xD
-	bl sub_81C763C
+	bl GetSubstructPtr
 	ldr r0, [r0, 0x8]
 	ldrh r0, [r0, 0x2]
 	pop {r1}
@@ -19122,7 +16888,7 @@ sub_81D06C4: @ 81D06C4
 sub_81D06D4: @ 81D06D4
 	push {lr}
 	movs r0, 0xD
-	bl sub_81C763C
+	bl GetSubstructPtr
 	ldr r0, [r0, 0x8]
 	ldrh r0, [r0]
 	pop {r1}
@@ -19136,7 +16902,7 @@ sub_81D06E4: @ 81D06E4
 	adds r7, r1, 0
 	adds r6, r2, 0
 	movs r0, 0xD
-	bl sub_81C763C
+	bl GetSubstructPtr
 	ldr r1, [r0, 0x8]
 	ldrh r0, [r1, 0x2]
 	lsls r0, 2
@@ -19192,7 +16958,7 @@ sub_81D0760: @ 81D0760
 	adds r6, r1, 0
 	adds r7, r2, 0
 	movs r0, 0xD
-	bl sub_81C763C
+	bl GetSubstructPtr
 	ldr r1, [r0, 0x8]
 	ldrh r0, [r1, 0x2]
 	lsls r0, 2
@@ -19246,7 +17012,7 @@ _081D07D0:
 sub_81D07D8: @ 81D07D8
 	push {lr}
 	movs r0, 0xD
-	bl sub_81C763C
+	bl GetSubstructPtr
 	ldr r1, [r0, 0x8]
 	ldrh r0, [r1, 0x2]
 	lsls r0, 2
@@ -19413,7 +17179,7 @@ sub_81D0914: @ 81D0914
 	push {r4,lr}
 	adds r4, r0, 0
 	movs r0, 0xD
-	bl sub_81C763C
+	bl GetSubstructPtr
 	ldrh r1, [r0, 0x10]
 	str r1, [r4]
 	adds r0, 0x14
@@ -19427,7 +17193,7 @@ sub_81D092C: @ 81D092C
 	push {r4,lr}
 	adds r4, r0, 0
 	movs r0, 0xD
-	bl sub_81C763C
+	bl GetSubstructPtr
 	ldrh r1, [r0, 0x12]
 	str r1, [r4]
 	adds r0, 0x78
@@ -19440,7 +17206,7 @@ sub_81D092C: @ 81D092C
 sub_81D0944: @ 81D0944
 	push {lr}
 	movs r0, 0xD
-	bl sub_81C763C
+	bl GetSubstructPtr
 	ldrh r0, [r0, 0xC]
 	pop {r1}
 	bx r1
@@ -19450,7 +17216,7 @@ sub_81D0944: @ 81D0944
 sub_81D0954: @ 81D0954
 	push {lr}
 	movs r0, 0xD
-	bl sub_81C763C
+	bl GetSubstructPtr
 	adds r1, r0, 0
 	ldrh r0, [r1, 0xC]
 	cmp r0, 0x18
@@ -19474,7 +17240,7 @@ sub_81D0978: @ 81D0978
 	push {r4,lr}
 	ldr r1, =0x0000101c
 	movs r0, 0xE
-	bl sub_81C761C
+	bl AllocSubstruct
 	adds r4, r0, 0
 	cmp r4, 0
 	beq _081D09A8
@@ -19500,7 +17266,7 @@ sub_81D09B0: @ 81D09B0
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	movs r0, 0xE
-	bl sub_81C763C
+	bl GetSubstructPtr
 	adds r5, r0, 0
 	ldr r0, =gUnknown_08624BA0
 	lsls r4, 2
@@ -19521,7 +17287,7 @@ sub_81D09B0: @ 81D09B0
 sub_81D09E0: @ 81D09E0
 	push {lr}
 	movs r0, 0xE
-	bl sub_81C763C
+	bl GetSubstructPtr
 	ldr r0, [r0]
 	bl _call_via_r0
 	pop {r1}
@@ -19532,7 +17298,7 @@ sub_81D09E0: @ 81D09E0
 sub_81D09F4: @ 81D09F4
 	push {r4,lr}
 	movs r0, 0xE
-	bl sub_81C763C
+	bl GetSubstructPtr
 	adds r4, r0, 0
 	ldrb r0, [r4, 0xA]
 	bl RemoveWindow
@@ -19561,7 +17327,7 @@ sub_81D09F4: @ 81D09F4
 	ldr r0, [r4, 0x14]
 	bl DestroySprite
 	movs r0, 0xE
-	bl sub_81C7650
+	bl FreeSubstruct
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -19571,7 +17337,7 @@ sub_81D09F4: @ 81D09F4
 sub_81D0A58: @ 81D0A58
 	push {lr}
 	movs r0, 0xE
-	bl sub_81C763C
+	bl GetSubstructPtr
 	ldr r0, [r0, 0x4]
 	bl sub_81C70D8
 	pop {r1}
@@ -19584,7 +17350,7 @@ sub_81D0A6C: @ 81D0A6C
 	sub sp, 0x8
 	adds r4, r0, 0
 	movs r0, 0xE
-	bl sub_81C763C
+	bl GetSubstructPtr
 	adds r5, r0, 0
 	cmp r4, 0x9
 	bls _081D0A80
@@ -19611,7 +17377,7 @@ _081D0A90:
 _081D0AB8:
 	ldr r0, =gUnknown_08624B98
 	movs r1, 0x2
-	bl sub_81C7B54
+	bl InitBgTemplates
 	ldr r1, =gUnknown_08DDE030
 	movs r0, 0
 	str r0, [sp]
@@ -19631,7 +17397,7 @@ _081D0AB8:
 	ldr r0, =gUnknown_08DDE010
 	movs r1, 0x10
 	movs r2, 0x20
-	bl sub_81C7944
+	bl CopyPaletteIntoBufferUnfaded
 	b _081D0BBA
 	.pool
 _081D0B04:
@@ -19669,11 +17435,11 @@ _081D0B12:
 	ldr r0, =gUnknown_08623FF8
 	movs r1, 0x20
 	movs r2, 0xA0
-	bl sub_81C7944
+	bl CopyPaletteIntoBufferUnfaded
 	ldr r0, =gUnknown_08624098
 	movs r1, 0xA0
 	movs r2, 0x20
-	bl sub_81C7944
+	bl CopyPaletteIntoBufferUnfaded
 	movs r0, 0x1
 	b _081D0BBC
 	.pool
@@ -19765,7 +17531,7 @@ _081D0BE8:
 	movs r0, 0
 	b _081D0C4A
 _081D0C3C:
-	bl sub_81C7B34
+	bl IsPaletteFadeActive
 	cmp r0, 0
 	beq _081D0C48
 _081D0C44:
@@ -19796,7 +17562,7 @@ _081D0C60:
 	movs r0, 0
 	b _081D0C7E
 _081D0C70:
-	bl sub_81C7B34
+	bl IsPaletteFadeActive
 	cmp r0, 0
 	beq _081D0C7C
 	movs r0, 0x2
@@ -19813,7 +17579,7 @@ sub_81D0C84: @ 81D0C84
 	push {r4,r5,lr}
 	adds r5, r0, 0
 	movs r0, 0xE
-	bl sub_81C763C
+	bl GetSubstructPtr
 	adds r4, r0, 0
 	cmp r5, 0x6
 	bhi _081D0D24
@@ -19893,7 +17659,7 @@ sub_81D0D2C: @ 81D0D2C
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	movs r0, 0xE
-	bl sub_81C763C
+	bl GetSubstructPtr
 	adds r5, r0, 0
 	cmp r4, 0x1
 	beq _081D0D5C
@@ -19945,7 +17711,7 @@ sub_81D0D8C: @ 81D0D8C
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	movs r0, 0xE
-	bl sub_81C763C
+	bl GetSubstructPtr
 	adds r5, r0, 0
 	cmp r4, 0x1
 	beq _081D0DC0
@@ -20006,7 +17772,7 @@ sub_81D0E00: @ 81D0E00
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	movs r0, 0xE
-	bl sub_81C763C
+	bl GetSubstructPtr
 	adds r5, r0, 0
 	cmp r4, 0x1
 	beq _081D0E30

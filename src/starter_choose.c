@@ -170,10 +170,10 @@ static const struct OamData gOamData_85B1E10 =
     .objMode = 0,
     .mosaic = 0,
     .bpp = 0,
-    .shape = 0,
+    .shape = SPRITE_SHAPE(32x32),
     .x = 0,
     .matrixNum = 0,
-    .size = 2,
+    .size = SPRITE_SIZE(32x32),
     .tileNum = 0,
     .priority = 1,
     .paletteNum = 0,
@@ -187,10 +187,10 @@ static const struct OamData gOamData_85B1E18 =
     .objMode = 0,
     .mosaic = 0,
     .bpp = 0,
-    .shape = 0,
+    .shape = SPRITE_SHAPE(32x32),
     .x = 0,
     .matrixNum = 0,
-    .size = 2,
+    .size = SPRITE_SIZE(32x32),
     .tileNum = 0,
     .priority = 1,
     .paletteNum = 0,
@@ -204,10 +204,10 @@ static const struct OamData gOamData_85B1E20 =
     .objMode = 0,
     .mosaic = 0,
     .bpp = 0,
-    .shape = 0,
+    .shape = SPRITE_SHAPE(64x64),
     .x = 0,
     .matrixNum = 0,
-    .size = 3,
+    .size = SPRITE_SIZE(64x64),
     .tileNum = 0,
     .priority = 1,
     .paletteNum = 0,
@@ -296,21 +296,35 @@ static const union AffineAnimCmd * const gSpriteAffineAnimTable_85B1ED4[] = {gSp
 
 static const struct CompressedSpriteSheet gUnknown_085B1ED8[] =
 {
-    gUnknown_085B18AC, 0x0800, 0x1000,
-    NULL,
+    {
+        .data = gUnknown_085B18AC,
+        .size = 0x0800,
+        .tag = 0x1000
+    },
+    {}
 };
 
 static const struct CompressedSpriteSheet gUnknown_085B1EE8[] =
 {
-    gUnknown_085B1BCC, 0x0800, 0x1001,
-    NULL,
+    {
+        .data = gUnknown_085B1BCC,
+        .size = 0x0800,
+        .tag = 0x1001
+    },
+    {}
 };
 
 static const struct SpritePalette gUnknown_085B1EF8[] =
 {
-    gBirchBallarrow_Pal, 0x1000,
-    gBirchCircle_Pal, 0x1001,
-    NULL,
+    {
+        .data = gBirchBallarrow_Pal,
+        .tag = 0x1000
+    },
+    {
+        .data = gBirchCircle_Pal,
+        .tag = 0x1001
+    },
+    {},
 };
 
 static const struct SpriteTemplate sSpriteTemplate_Hand =
@@ -393,8 +407,8 @@ void CB2_ChooseStarter(void)
     DmaFill16(3, 0, PLTT, PLTT_SIZE);
 
     LZ77UnCompVram(gBirchHelpGfx, (void *)VRAM);
-    LZ77UnCompVram(gBirchBagTilemap, (void *)(VRAM + 0x3000));
-    LZ77UnCompVram(gBirchGrassTilemap, (void *)(VRAM + 0x3800));
+    LZ77UnCompVram(gBirchBagTilemap, (void *)(BG_SCREEN_ADDR(6)));
+    LZ77UnCompVram(gBirchGrassTilemap, (void *)(BG_SCREEN_ADDR(7)));
 
     ResetBgsAndClearDma3BusyFlags(0);
     InitBgsFromTemplates(0, gUnknown_085B1E00, ARRAY_COUNT(gUnknown_085B1E00));
@@ -469,7 +483,7 @@ static void MainCallback2_StarterChoose(void)
 static void Task_StarterChoose1(u8 taskId)
 {
     CreateStarterPokemonLabel(gTasks[taskId].tStarterSelection);
-    SetWindowBorderStyle(0, FALSE, 0x2A8, 0xD);
+    DrawStdFrameWithCustomTileAndPalette(0, FALSE, 0x2A8, 0xD);
     AddTextPrinterParameterized(0, 1, gText_BirchInTrouble, 0, 1, 0, NULL);
     PutWindowTilemap(0);
     schedule_bg_copy_tilemap_to_vram(0);
@@ -523,7 +537,7 @@ static void Task_StarterChoose3(u8 taskId)
 static void Task_StarterChoose4(u8 taskId)
 {
     PlayCry1(GetStarterPokemon(gTasks[taskId].tStarterSelection), 0);
-    FillWindowPixelBuffer(0, 0x11);
+    FillWindowPixelBuffer(0, PIXEL_FILL(1));
     AddTextPrinterParameterized(0, 1, gText_ConfirmStarterChoice, 0, 1, 0, NULL);
     schedule_bg_copy_tilemap_to_vram(0);
     CreateYesNoMenu(&gUnknown_085B1DDC, 0x2A8, 0xD, 0);
@@ -579,7 +593,7 @@ static void CreateStarterPokemonLabel(u8 selection)
     winTemplate.tilemapTop = gStarterChoose_LabelCoords[selection][1];
 
     sStarterChooseWindowId = AddWindow(&winTemplate);
-    FillWindowPixelBuffer(sStarterChooseWindowId, 0);
+    FillWindowPixelBuffer(sStarterChooseWindowId, PIXEL_FILL(0));
 
     width = GetStringCenterAlignXOffset(7, text, 0x68);
     AddTextPrinterParameterized3(sStarterChooseWindowId, 7, width, 1, gUnknown_085B1E0C, 0, text);
@@ -600,7 +614,7 @@ static void CreateStarterPokemonLabel(u8 selection)
 
 static void sub_8134604(void)
 {
-    FillWindowPixelBuffer(sStarterChooseWindowId, 0);
+    FillWindowPixelBuffer(sStarterChooseWindowId, PIXEL_FILL(0));
     ClearWindowTilemap(sStarterChooseWindowId);
     RemoveWindow(sStarterChooseWindowId);
     sStarterChooseWindowId = 0xFF;

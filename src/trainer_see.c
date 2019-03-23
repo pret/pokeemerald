@@ -17,8 +17,6 @@
 #include "constants/event_object_movement_constants.h"
 #include "constants/field_effects.h"
 
-extern void sub_809BE48(u16 npcId);
-
 // this file's functions
 static u8 CheckTrainer(u8 eventObjectId);
 static u8 GetTrainerApproachDistance(struct EventObject *trainerObj);
@@ -102,10 +100,10 @@ static const struct OamData sOamData_Icons =
     .objMode = 0,
     .mosaic = 0,
     .bpp = 0,
-    .shape = 0,
+    .shape = SPRITE_SHAPE(16x16),
     .x = 0,
     .matrixNum = 0,
-    .size = 1,
+    .size = SPRITE_SIZE(16x16),
     .tileNum = 0,
     .priority = 1,
     .paletteNum = 0,
@@ -114,13 +112,22 @@ static const struct OamData sOamData_Icons =
 
 static const struct SpriteFrameImage sSpriteImageTable_ExclamationQuestionMark[] =
 {
-    {sEmotion_ExclamationMarkGfx, 0x80},
-    {sEmotion_QuestionMarkGfx, 0x80}
+    {
+        .data = sEmotion_ExclamationMarkGfx,
+        .size = 0x80
+    },
+    {
+        .data = sEmotion_QuestionMarkGfx,
+        .size = 0x80
+    }
 };
 
 static const struct SpriteFrameImage sSpriteImageTable_HeartIcon[] =
 {
-    {sEmotion_HeartGfx, 0x80}
+    {
+        .data = sEmotion_HeartGfx,
+        .size = 0x80
+    }
 };
 
 static const union AnimCmd sSpriteAnim_Icons1[] =

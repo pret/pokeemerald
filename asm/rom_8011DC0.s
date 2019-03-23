@@ -472,7 +472,7 @@ sub_8017020: @ 8017020
 	bl sub_81973A4
 	movs r0, 0
 	movs r1, 0x1
-	bl NewMenuHelpers_DrawDialogueFrame
+	bl DrawDialogueFrame
 	ldr r0, =gStringVar4
 	adds r1, r4, 0
 	bl StringExpandPlaceholders
@@ -517,7 +517,7 @@ _08017076:
 	bl sub_81973A4
 	movs r0, 0
 	movs r1, 0x1
-	bl NewMenuHelpers_DrawDialogueFrame
+	bl DrawDialogueFrame
 	ldr r0, =gStringVar4
 	adds r1, r5, 0
 	bl StringExpandPlaceholders
@@ -563,7 +563,7 @@ _080170CA:
 	negs r0, r0
 	b _08017110
 _080170D4:
-	bl DisplayYesNoMenu
+	bl DisplayYesNoMenuDefaultYes
 	ldrb r0, [r4]
 	adds r0, 0x1
 	strb r0, [r4]
@@ -609,7 +609,7 @@ sub_8017118: @ 8017118
 	lsrs r4, 24
 	adds r0, r4, 0
 	movs r1, 0
-	bl NewMenuHelpers_DrawStdWindowFrame
+	bl DrawStdWindowFrame
 	adds r0, r4, 0
 	movs r1, 0xFF
 	bl FillWindowPixelBuffer
@@ -705,7 +705,7 @@ _080171DC:
 	strb r0, [r5]
 	ldrb r0, [r5]
 	movs r1, 0
-	bl NewMenuHelpers_DrawStdWindowFrame
+	bl DrawStdWindowFrame
 	ldr r0, =gMultiuseListMenuTemplate
 	adds r2, r0, 0
 	ldr r1, [sp, 0x24]
@@ -731,7 +731,7 @@ _080171DC:
 _08017228:
 	mov r3, r9
 	ldrb r0, [r3]
-	bl ListMenuHandleInputGetItemId
+	bl ListMenu_ProcessInput
 	mov r8, r0
 	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
@@ -745,7 +745,7 @@ _08017228:
 	bl DestroyListMenuTask
 	ldrb r0, [r5]
 	movs r1, 0x1
-	bl sub_819746C
+	bl ClearStdWindowAndFrame
 	ldrb r0, [r5]
 	bl RemoveWindow
 	movs r0, 0
@@ -765,7 +765,7 @@ _08017264:
 	bl DestroyListMenuTask
 	ldrb r0, [r5]
 	movs r1, 0x1
-	bl sub_819746C
+	bl ClearStdWindowAndFrame
 	ldrb r0, [r5]
 	bl RemoveWindow
 	strb r4, [r7]
@@ -818,7 +818,7 @@ _080172C8:
 	strb r0, [r6]
 	ldrb r0, [r6]
 	movs r1, 0
-	bl NewMenuHelpers_DrawStdWindowFrame
+	bl DrawStdWindowFrame
 	ldr r0, =gMultiuseListMenuTemplate
 	adds r2, r0, 0
 	ldr r1, [sp, 0x24]
@@ -847,7 +847,7 @@ _08017314:
 _0801731C:
 	mov r3, r10
 	ldrb r0, [r3]
-	bl ListMenuHandleInputGetItemId
+	bl ListMenu_ProcessInput
 	adds r1, r0, 0
 	ldr r0, =gMain
 	ldrh r2, [r0, 0x2E]
@@ -8315,6 +8315,11 @@ _0801AFC2:
 	.pool
 	thumb_func_end sub_801AC54
 
+@void sub_801AFD8() {
+@	CpuFill32(0, &gSaveBlock1Ptr->field_322C, 219);
+@	sub_801B180();
+@	sub_811F8BC();
+@}
 	thumb_func_start sub_801AFD8
 sub_801AFD8: @ 801AFD8
 	push {lr}
@@ -8367,25 +8372,25 @@ sav1_get_mevent_buffer_2: @ 801B034
 	.pool
 	thumb_func_end sav1_get_mevent_buffer_2
 
-	thumb_func_start sub_801B044
-sub_801B044: @ 801B044
+	thumb_func_start GetSaveBlock1Field356C
+GetSaveBlock1Field356C: @ 801B044
 	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldr r1, =0x0000356c
 	adds r0, r1
 	bx lr
 	.pool
-	thumb_func_end sub_801B044
+	thumb_func_end GetSaveBlock1Field356C
 
-	thumb_func_start sub_801B058
-sub_801B058: @ 801B058
+	thumb_func_start GetSaveBlock1Field3564
+GetSaveBlock1Field3564: @ 801B058
 	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldr r1, =0x00003564
 	adds r0, r1
 	bx lr
 	.pool
-	thumb_func_end sub_801B058
+	thumb_func_end GetSaveBlock1Field3564
 
 	thumb_func_start sub_801B06C
 sub_801B06C: @ 801B06C
@@ -8531,7 +8536,7 @@ sub_801B180: @ 801B180
 	sub sp, 0x4
 	movs r0, 0
 	str r0, [sp]
-	bl sub_801B044
+	bl GetSaveBlock1Field356C
 	adds r1, r0, 0
 	ldr r2, =0x05000001
 	mov r0, sp
@@ -13795,7 +13800,7 @@ _0801DB60:
 sub_801DB68: @ 801DB68
 	push {r4,r5,lr}
 	adds r4, r0, 0
-	bl sub_801B044
+	bl GetSaveBlock1Field356C
 	adds r5, r0, 0
 	movs r0, 0x3
 	adds r1, r4, 0
@@ -13841,7 +13846,7 @@ _0801DBB8:
 	thumb_func_start sub_801DBC0
 sub_801DBC0: @ 801DBC0
 	push {lr}
-	bl sub_801B044
+	bl GetSaveBlock1Field356C
 	movs r1, 0
 	strb r1, [r0]
 	strb r1, [r0, 0x1]
@@ -13858,7 +13863,7 @@ sub_801DBDC: @ 801DBDC
 	ldr r0, =0x0000402e
 	bl GetVarPointer
 	adds r4, r0, 0
-	bl sub_801B044
+	bl GetSaveBlock1Field356C
 	adds r2, r0, 0
 	ldr r0, [r2]
 	lsls r0, 24
@@ -13889,7 +13894,7 @@ _0801DC10:
 sub_801DC20: @ 801DC20
 	push {r4-r6,lr}
 	ldr r6, =gSpecialVar_Result
-	bl sub_801B044
+	bl GetSaveBlock1Field356C
 	adds r4, r0, 0
 	bl IsMysteryEventEnabled
 	cmp r0, 0
@@ -18237,7 +18242,7 @@ sub_801FEBC: @ 801FEBC
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0
-	bl sub_8198070
+	bl ClearStdWindowAndFrameToTransparent
 	ldr r0, [r4]
 	ldrb r0, [r0, 0x18]
 	bl ClearWindowTilemap
@@ -18465,7 +18470,7 @@ sub_8020094: @ 8020094
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0
-	bl sub_8198070
+	bl ClearStdWindowAndFrameToTransparent
 	ldr r0, [r4]
 	ldrb r0, [r0, 0x1E]
 	bl ClearWindowTilemap
@@ -18908,7 +18913,7 @@ sub_802040C: @ 802040C
 	push {lr}
 	movs r0, 0x3
 	movs r1, 0
-	bl sub_8198070
+	bl ClearStdWindowAndFrameToTransparent
 	movs r0, 0x3
 	bl ClearWindowTilemap
 	pop {r0}
@@ -22373,7 +22378,7 @@ _0802210C:
 	movs r1, 0
 	adds r2, r4, 0
 	movs r3, 0xD
-	bl SetWindowBorderStyle
+	bl DrawStdFrameWithCustomTileAndPalette
 	b _08022218
 	.pool
 _08022130:
@@ -22504,7 +22509,7 @@ sub_802222C: @ 802222C
 	adds r5, r4, r0
 	ldrb r0, [r5]
 	movs r1, 0x1
-	bl sub_8198070
+	bl ClearStdWindowAndFrameToTransparent
 	ldrb r0, [r5]
 	bl RemoveWindow
 	adds r0, r4, 0
@@ -22572,7 +22577,7 @@ _08022296:
 	movs r1, 0
 	adds r2, r4, 0
 	movs r3, 0xD
-	bl SetWindowBorderStyle
+	bl DrawStdFrameWithCustomTileAndPalette
 	b _080224BA
 	.pool
 _080222D0:
@@ -22768,7 +22773,7 @@ _08022480:
 _08022494:
 	ldrb r0, [r6, 0x2]
 	movs r1, 0x1
-	bl sub_8198070
+	bl ClearStdWindowAndFrameToTransparent
 	ldrb r0, [r6, 0x2]
 	bl ClearWindowTilemap
 	ldrb r0, [r6, 0x2]
@@ -23859,7 +23864,7 @@ _08022D38:
 _08022D42:
 	movs r0, 0
 	movs r1, 0
-	bl NewMenuHelpers_DrawDialogueFrame
+	bl DrawDialogueFrame
 	ldrb r1, [r5, 0x1]
 	movs r0, 0x2
 	mov r8, r0
@@ -23941,7 +23946,7 @@ _08022DE8:
 	beq _08022DFA
 	movs r0, 0
 	movs r1, 0x1
-	bl sub_8197434
+	bl ClearDialogWindowAndFrame
 _08022DFA:
 	ldrb r0, [r7, 0xE]
 	movs r1, 0x1
@@ -24245,7 +24250,7 @@ _0802301E:
 _08023044:
 	movs r0, 0
 	movs r1, 0x1
-	bl sub_8197434
+	bl ClearDialogWindowAndFrame
 	movs r0, 0xA
 	movs r1, 0x1
 	movs r2, 0
@@ -26457,7 +26462,7 @@ _080241A6:
 	beq _0802421E
 	movs r0, 0
 	movs r1, 0
-	bl NewMenuHelpers_DrawDialogueFrame
+	bl DrawDialogueFrame
 	ldr r2, =gText_SavingDontTurnOffPower
 	movs r0, 0
 	str r0, [sp]
@@ -26545,7 +26550,7 @@ _08024246:
 	strb r0, [r5, 0xC]
 	b _080242D8
 _0802426A:
-	bl DisplayYesNoMenu
+	bl DisplayYesNoMenuDefaultYes
 	b _080242D0
 _08024270:
 	bl Menu_ProcessInputNoWrapClearOnChoose
@@ -26578,7 +26583,7 @@ _080242A4:
 _080242A6:
 	movs r0, 0
 	movs r1, 0x1
-	bl sub_8197434
+	bl ClearDialogWindowAndFrame
 	movs r4, 0
 	str r4, [sp]
 	adds r0, r6, 0
@@ -26756,7 +26761,7 @@ _080243EA:
 _080243F6:
 	movs r0, 0
 	movs r1, 0x1
-	bl sub_8197434
+	bl ClearDialogWindowAndFrame
 	adds r0, r5, 0
 	bl sub_8021488
 	movs r0, 0x1
@@ -26814,7 +26819,7 @@ _0802445A:
 _08024460:
 	movs r0, 0
 	movs r1, 0
-	bl NewMenuHelpers_DrawDialogueFrame
+	bl DrawDialogueFrame
 	ldrh r1, [r5, 0x14]
 	cmp r1, 0x3
 	bne _08024490
@@ -27181,7 +27186,7 @@ sub_8024700: @ 8024700
 	adds r0, r5, 0
 	bl sub_8024668
 	adds r1, r0, r4
-	ldr r2, =0x0001869f
+	ldr r2, =0x0001869f @ Note to decompiler: See UNKNOWN_OFFSET
 	cmp r1, r2
 	bhi _08024730
 	adds r0, r5, 0
@@ -27342,7 +27347,7 @@ sub_802482C: @ 802482C
 	movs r1, 0
 	adds r2, r4, 0
 	adds r3, r5, 0
-	bl SetWindowBorderStyle
+	bl DrawStdFrameWithCustomTileAndPalette
 	ldr r2, =gText_Powder
 	movs r0, 0x1
 	str r0, [sp]
@@ -27441,7 +27446,7 @@ sub_8024918: @ 8024918
 	bl ClearWindowTilemap
 	ldrb r0, [r4]
 	movs r1, 0x1
-	bl sub_8198070
+	bl ClearStdWindowAndFrameToTransparent
 	ldrb r0, [r4]
 	bl RemoveWindow
 	pop {r4}
@@ -38547,7 +38552,7 @@ _0802A3A4:
 _0802A3AE:
 	movs r0, 0
 	movs r1, 0
-	bl NewMenuHelpers_DrawDialogueFrame
+	bl DrawDialogueFrame
 	ldr r2, =gText_SavingDontTurnOffPower
 	str r4, [sp]
 	movs r0, 0x2

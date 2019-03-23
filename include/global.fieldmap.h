@@ -1,6 +1,13 @@
 #ifndef GUARD_GLOBAL_FIELDMAP_H
 #define GUARD_GLOBAL_FIELDMAP_H
 
+#define METATILE_COLLISION_MASK 0x0C00
+#define METATILE_ID_MASK 0x03FF
+#define METATILE_ID_UNDEFINED 0x03FF
+#define METATILE_ELEVATION_SHIFT 12
+#define METATILE_COLLISION_SHIFT 10
+#define METATILE_ELEVATION_MASK 0xF000
+
 enum
 {
     CONNECTION_SOUTH = 1,
@@ -19,8 +26,8 @@ struct Tileset
     /*0x01*/ bool8 isSecondary;
     /*0x04*/ void *tiles;
     /*0x08*/ void *palettes;
-    /*0x0c*/ void *metatiles;
-    /*0x10*/ void *metatileAttributes;
+    /*0x0c*/ u16 *metatiles;
+    /*0x10*/ u16 *metatileAttributes;
     /*0x14*/ TilesetCB callback;
 };
 

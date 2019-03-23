@@ -24,8 +24,8 @@ PetalburgCity_PokemonCenter_1F_EventScript_291591:: @ 8291591
 PetalburgCity_PokemonCenter_1F_EventScript_29159F:: @ 829159F
 	msgbox PetalburgCity_PokemonCenter_1F_Text_291969, MSGBOX_DEFAULT
 	closemessage
-	setvar VAR_0x8004, 0
-	call PetalburgCity_PokemonCenter_1F_EventScript_271E7C
+	setvar VAR_0x8004, EASY_CHAT_TYPE_PROFILE
+	call Common_ShowEasyChatScreen
 	lock
 	faceplayer
 	compare VAR_RESULT, 0
@@ -76,8 +76,8 @@ PetalburgCity_PokemonCenter_1F_EventScript_291642:: @ 8291642
 PetalburgCity_PokemonCenter_1F_EventScript_291650:: @ 8291650
 	msgbox PetalburgCity_PokemonCenter_1F_Text_291A6B, MSGBOX_DEFAULT
 	closemessage
-	setvar VAR_0x8004, 0
-	call PetalburgCity_PokemonCenter_1F_EventScript_271E7C
+	setvar VAR_0x8004, EASY_CHAT_TYPE_PROFILE
+	call Common_ShowEasyChatScreen
 	lock
 	faceplayer
 	compare VAR_RESULT, 0

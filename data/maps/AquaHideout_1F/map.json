@@ -1,0 +1,82 @@
+{
+  "id": "MAP_AQUA_HIDEOUT_1F",
+  "name": "AquaHideout_1F",
+  "layout": "LAYOUT_AQUA_HIDEOUT_1F",
+  "music": "MUS_AJITO",
+  "region_map_section": "MAPSEC_AQUA_HIDEOUT",
+  "requires_flash": false,
+  "weather": "WEATHER_NONE",
+  "map_type": "MAP_TYPE_INDOOR",
+  "allow_bike": false,
+  "allow_escape_rope": false,
+  "allow_running": false,
+  "show_map_name": true,
+  "battle_scene": "MAP_BATTLE_SCENE_AQUA",
+  "connections": null,
+  "object_events": [
+    {
+      "graphics_id": "EVENT_OBJ_GFX_AQUA_MEMBER_M",
+      "x": 13,
+      "y": 11,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "AquaHideout_1F_EventScript_233494",
+      "flag": "FLAG_HIDE_AQUA_HIDEOUT_1F_GRUNT_1_BLOCKING_ENTRANCE"
+    },
+    {
+      "graphics_id": "EVENT_OBJ_GFX_AQUA_MEMBER_M",
+      "x": 14,
+      "y": 11,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "AquaHideout_1F_EventScript_2334C6",
+      "flag": "FLAG_HIDE_AQUA_HIDEOUT_1F_GRUNT_2_BLOCKING_ENTRANCE"
+    },
+    {
+      "graphics_id": "EVENT_OBJ_GFX_AQUA_MEMBER_M",
+      "x": 20,
+      "y": 4,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_WALK_SEQUENCE_DOWN_LEFT_UP_RIGHT",
+      "movement_range_x": 13,
+      "movement_range_y": 5,
+      "trainer_type": "1",
+      "trainer_sight_or_berry_tree_id": "3",
+      "script": "AquaHideout_1F_EventScript_2334F8",
+      "flag": "FLAG_HIDE_AQUA_HIDEOUT_GRUNTS"
+    }
+  ],
+  "warp_events": [
+    {
+      "x": 13,
+      "y": 27,
+      "elevation": 1,
+      "dest_map": "MAP_LILYCOVE_CITY",
+      "dest_warp_id": 6
+    },
+    {
+      "x": 14,
+      "y": 27,
+      "elevation": 1,
+      "dest_map": "MAP_LILYCOVE_CITY",
+      "dest_warp_id": 6
+    },
+    {
+      "x": 22,
+      "y": 1,
+      "elevation": 3,
+      "dest_map": "MAP_AQUA_HIDEOUT_B1F",
+      "dest_warp_id": 0
+    }
+  ],
+  "coord_events": [],
+  "bg_events": []
+}

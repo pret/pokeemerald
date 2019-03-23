@@ -70,13 +70,13 @@ const union AnimCmd gAnimCmd_RubySapphireMay_1[] =
 
 const union AnimCmd *const gTrainerBackAnims_Brendan[] =
 {
-    AnimCmd_82FF540,
+    gAnimCmd_General_Frame3,
     gAnimCmd_Brendan_1,
 };
 
 const union AnimCmd *const gTrainerBackAnims_May[] =
 {
-    AnimCmd_82FF540,
+    gAnimCmd_General_Frame3,
     gAnimCmd_May_Steven_1,
 };
 
@@ -94,25 +94,25 @@ const union AnimCmd *const gTrainerBackAnims_Leaf[] =
 
 const union AnimCmd *const gTrainerBackAnims_RubySapphireBrendan[] =
 {
-    AnimCmd_82FF540,
+    gAnimCmd_General_Frame3,
     gAnimCmd_RubySapphireBrendan_1,
 };
 
 const union AnimCmd *const gTrainerBackAnims_RubySapphireMay[] =
 {
-    AnimCmd_82FF540,
+    gAnimCmd_General_Frame3,
     gAnimCmd_RubySapphireMay_1,
 };
 
 const union AnimCmd *const gTrainerBackAnims_Wally[] =
 {
-    AnimCmd_82FF540,
+    gAnimCmd_General_Frame3,
     gAnimCmd_Wally_1,
 };
 
 const union AnimCmd *const gTrainerBackAnims_Steven[] =
 {
-    AnimCmd_82FF540,
+    gAnimCmd_General_Frame3,
     gAnimCmd_May_Steven_1,
 };
 

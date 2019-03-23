@@ -1,6 +1,6 @@
 RusturfTunnel_MapScripts:: @ 822CE27
-	map_script 3, RusturfTunnel_MapScript1_22CE44
-	map_script 2, RusturfTunnel_MapScript2_22CE32
+	map_script MAP_SCRIPT_ON_TRANSITION, RusturfTunnel_MapScript1_22CE44
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, RusturfTunnel_MapScript2_22CE32
 	.byte 0
 
 RusturfTunnel_MapScript2_22CE32: @ 822CE32
@@ -23,7 +23,7 @@ RusturfTunnel_EventScript_22CE5F:: @ 822CE5F
 	faceplayer
 	msgbox RusturfTunnel_Text_22D7A3, MSGBOX_DEFAULT
 	closemessage
-	applymovement VAR_LAST_TALKED, RusturfTunnel_Movement_2725A2
+	applymovement VAR_LAST_TALKED, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end
@@ -35,7 +35,7 @@ RusturfTunnel_EventScript_22CE76:: @ 822CE76
 	setflag FLAG_TEMP_1
 	msgbox RusturfTunnel_Text_22D510, MSGBOX_DEFAULT
 	closemessage
-	applymovement VAR_LAST_TALKED, RusturfTunnel_Movement_2725A2
+	applymovement VAR_LAST_TALKED, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end
@@ -43,7 +43,7 @@ RusturfTunnel_EventScript_22CE76:: @ 822CE76
 RusturfTunnel_EventScript_22CE99:: @ 822CE99
 	msgbox RusturfTunnel_Text_22D5F3, MSGBOX_DEFAULT
 	closemessage
-	applymovement VAR_LAST_TALKED, RusturfTunnel_Movement_2725A2
+	applymovement VAR_LAST_TALKED, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end
@@ -94,7 +94,7 @@ RusturfTunnel_EventScript_22CF6F:: @ 822CF6F
 	applymovement EVENT_OBJ_ID_PLAYER, RusturfTunnel_Movement_22D045
 	applymovement 1, RusturfTunnel_Movement_22D06C
 	waitmovement 0
-	applymovement 10, RusturfTunnel_Movement_2725AA
+	applymovement 10, Common_Movement_WalkInPlaceDown
 	waitmovement 0
 	return
 
@@ -102,14 +102,14 @@ RusturfTunnel_EventScript_22CF8B:: @ 822CF8B
 	applymovement EVENT_OBJ_ID_PLAYER, RusturfTunnel_Movement_22D045
 	applymovement 1, RusturfTunnel_Movement_22D06C
 	waitmovement 0
-	applymovement 10, RusturfTunnel_Movement_2725AA
+	applymovement 10, Common_Movement_WalkInPlaceDown
 	waitmovement 0
 	return
 
 RusturfTunnel_EventScript_22CFA7:: @ 822CFA7
-	applymovement 1, RusturfTunnel_Movement_2725A6
+	applymovement 1, Common_Movement_WalkInPlaceUp
 	waitmovement 0
-	applymovement EVENT_OBJ_ID_PLAYER, RusturfTunnel_Movement_2725AA
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceDown
 	waitmovement 0
 	return
 
@@ -142,9 +142,9 @@ RusturfTunnel_EventScript_22CFE6:: @ 822CFE6
 
 RusturfTunnel_EventScript_22CFFF:: @ 822CFFF
 	playse SE_PIN
-	applymovement 1, RusturfTunnel_Movement_272598
+	applymovement 1, Common_Movement_ExclamationMark
 	waitmovement 0
-	applymovement 1, RusturfTunnel_Movement_27259A
+	applymovement 1, Common_Movement_Delay48
 	waitmovement 0
 	return
 
@@ -328,7 +328,7 @@ RusturfTunnel_EventScript_22D0C2:: @ 822D0C2
 	applymovement 5, RusturfTunnel_Movement_22D1A4
 	waitmovement 0
 	msgbox RusturfTunnel_Text_22D395, MSGBOX_DEFAULT
-	applymovement 5, RusturfTunnel_Movement_27259E
+	applymovement 5, Common_Movement_FacePlayer
 	waitmovement 0
 	message RusturfTunnel_Text_22D3BA
 	waitmessage
@@ -345,8 +345,8 @@ RusturfTunnel_EventScript_22D0C2:: @ 822D0C2
 	removeobject 7
 	clearflag FLAG_DEVON_GOODS_STOLEN
 	setflag FLAG_RECOVERED_DEVON_GOODS
-	setvar VAR_0x405A, 4
-	setvar VAR_0x4090, 1
+	setvar VAR_RUSTBORO_STATE, 4
+	setvar VAR_BRINEY_HOUSE_STATE, 1
 	setflag FLAG_HIDE_ROUTE_116_MR_BRINEY
 	release
 	end

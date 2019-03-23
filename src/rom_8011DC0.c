@@ -33,8 +33,7 @@
 #include "start_menu.h"
 #include "data2.h"
 #include "field_screen_effect.h"
-
-extern void HealPlayerParty(void);
+#include "script_pokemon_util_80F87D8.h"
 
 struct UnkStruct_Shared
 {
@@ -188,9 +187,7 @@ extern u8 gUnknown_02022C3E;
 extern u16 gUnknown_02022C3C;
 extern u8 gUnknown_02022C20[];
 extern u8 gFieldLinkPlayerCount;
-extern u8 gUnknown_03005DB4;
-extern struct MailStruct gUnknown_020321C0[PARTY_SIZE];
-extern u8 gUnknown_02032298[2];
+extern u8 gLocalLinkPlayerId;
 
 // IWRAM vars
 IWRAM_DATA struct UnkStruct_Leader *gUnknown_03000DA0;
@@ -389,7 +386,7 @@ void nullsub_89(void)
 
 void sub_80124EC(u8 windowId, u8 arg1, u8 stringId)
 {
-    FillWindowPixelBuffer(windowId, 0x11);
+    FillWindowPixelBuffer(windowId, PIXEL_FILL(1));
     switch (arg1 << 8)
     {
     case 0x200:
@@ -508,17 +505,17 @@ void sub_8012780(u8 taskId)
         }
         data->field_11 = AddWindow(&gUnknown_082F012C);
 
-        FillWindowPixelBuffer(data->field_10, 0x22);
+        FillWindowPixelBuffer(data->field_10, PIXEL_FILL(2));
         sub_80173E0(data->field_10, 0, gUnknown_082EDBC4, 8, 1, 4);
         PutWindowTilemap(data->field_10);
         CopyWindowToVram(data->field_10, 2);
 
-        NewMenuHelpers_DrawStdWindowFrame(data->listWindowId, FALSE);
+        DrawStdWindowFrame(data->listWindowId, FALSE);
         gMultiuseListMenuTemplate = gUnknown_082F015C;
         gMultiuseListMenuTemplate.windowId = data->listWindowId;
         data->listTaskId = ListMenuInit(&gMultiuseListMenuTemplate, 0, 0);
 
-        NewMenuHelpers_DrawStdWindowFrame(data->field_11, FALSE);
+        DrawStdWindowFrame(data->field_11, FALSE);
         PutWindowTilemap(data->field_11);
         CopyWindowToVram(data->field_11, 2);
 
@@ -788,10 +785,10 @@ void sub_8012780(u8 taskId)
 void sub_8012F64(struct UnkStruct_Leader *data)
 {
     ClearWindowTilemap(data->field_11);
-    sub_819746C(data->field_11, FALSE);
+    ClearStdWindowAndFrame(data->field_11, FALSE);
     DestroyListMenuTask(data->listTaskId, 0, 0);
     ClearWindowTilemap(data->field_10);
-    sub_819746C(data->listWindowId, FALSE);
+    ClearStdWindowAndFrame(data->listWindowId, FALSE);
     CopyBgTilemapBufferToVram(0);
     RemoveWindow(data->field_11);
     RemoveWindow(data->listWindowId);
@@ -1077,17 +1074,17 @@ void sub_80134E8(u8 taskId)
         data->listWindowId = AddWindow(&gUnknown_082F0174);
         data->field_D = AddWindow(&gUnknown_082F017C);
 
-        FillWindowPixelBuffer(data->field_C, 0x22);
+        FillWindowPixelBuffer(data->field_C, PIXEL_FILL(2));
         sub_80173E0(data->field_C, 0, gUnknown_082EF7DC, 8, 1, 4);
         PutWindowTilemap(data->field_C);
         CopyWindowToVram(data->field_C, 2);
 
-        NewMenuHelpers_DrawStdWindowFrame(data->listWindowId, FALSE);
+        DrawStdWindowFrame(data->listWindowId, FALSE);
         gMultiuseListMenuTemplate = gUnknown_082F0204;
         gMultiuseListMenuTemplate.windowId = data->listWindowId;
         data->listTaskId = ListMenuInit(&gMultiuseListMenuTemplate, 0, 0);
 
-        NewMenuHelpers_DrawStdWindowFrame(data->field_D, FALSE);
+        DrawStdWindowFrame(data->field_D, FALSE);
         PutWindowTilemap(data->field_D);
         sub_80125BC(data->field_D);
         CopyWindowToVram(data->field_D, 2);
@@ -1105,7 +1102,7 @@ void sub_80134E8(u8 taskId)
             RedrawListMenu(data->listTaskId);
             break;
         case 0:
-            id = ListMenuHandleInputGetItemId(data->listTaskId);
+            id = ListMenu_ProcessInput(data->listTaskId);
             if (gMain.newKeys & A_BUTTON && id != -1)
             {
                 // this unused variable along with the assignment is needed to match
@@ -1256,10 +1253,10 @@ void sub_80134E8(u8 taskId)
     case 18:
     case 20:
         ClearWindowTilemap(data->field_D);
-        sub_819746C(data->field_D, FALSE);
+        ClearStdWindowAndFrame(data->field_D, FALSE);
         DestroyListMenuTask(data->listTaskId, 0, 0);
         ClearWindowTilemap(data->field_C);
-        sub_819746C(data->listWindowId, FALSE);
+        ClearStdWindowAndFrame(data->listWindowId, FALSE);
         CopyBgTilemapBufferToVram(0);
         RemoveWindow(data->field_D);
         RemoveWindow(data->listWindowId);
@@ -1632,7 +1629,7 @@ void sub_8014210(u16 battleFlags)
 
 void sub_8014290(u16 arg0, u16 x, u16 y)
 {
-    VarSet(VAR_0x4087, arg0);
+    VarSet(VAR_CABLE_CLUB_STATE, arg0);
     SetWarpDestination(gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum, -1, x, y);
     SetDynamicWarpWithCoords(0, gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum, -1, x, y);
     WarpIntoMap();
@@ -1641,9 +1638,9 @@ void sub_8014290(u16 arg0, u16 x, u16 y)
 void sub_8014304(s8 mapGroup, s8 mapNum, s32 x, s32 y, u16 arg4)
 {
     gSpecialVar_0x8004 = arg4;
-    VarSet(VAR_0x4087, arg4);
+    VarSet(VAR_CABLE_CLUB_STATE, arg4);
     gFieldLinkPlayerCount = GetLinkPlayerCount();
-    gUnknown_03005DB4 = GetMultiplayerId();
+    gLocalLinkPlayerId = GetMultiplayerId();
     SetCableClubWarp();
     SetWarpDestination(mapGroup, mapNum, -1, x, y);
     WarpIntoMap();
@@ -1689,7 +1686,7 @@ void sub_801440C(u8 taskId)
     case 9 ... 11:
     case 13:
     case 15:
-        sub_800E3A8();
+        RecordMixTrainerNames();
         break;
     }
 
@@ -1699,7 +1696,7 @@ void sub_801440C(u8 taskId)
     case 81:
         CleanupOverworldWindowsAndTilemaps();
         gMain.savedCallback = sub_801AC54;
-        sub_81B8518(3);
+        InitChooseHalfPartyForBattle(3);
         break;
     case 1:
         CleanupOverworldWindowsAndTilemaps();
@@ -1802,12 +1799,12 @@ void sub_8014790(u8 taskId)
             sendBuff[1] = GetMonData(&gPlayerParty[gSelectedOrderFromParty[1] - 1], MON_DATA_SPECIES, NULL);
             gMain.savedCallback = NULL;
             data[0] = 4;
-            sub_800E3A8();
+            RecordMixTrainerNames();
             ResetBlockReceivedFlags();
             break;
         case 16:
         case 23 ... 27:
-            sub_800E3A8();
+            RecordMixTrainerNames();
             DestroyTask(taskId);
         default:
             EnableBothScriptContexts();
@@ -2157,7 +2154,7 @@ void sub_8014F48(u8 taskId)
         data->listTaskId = ListMenuInit(&gMultiuseListMenuTemplate, 0, 0);
 
         sub_8018784(data->field_D);
-        FillWindowPixelBuffer(data->field_D, 0x11);
+        FillWindowPixelBuffer(data->field_D, PIXEL_FILL(1));
         PutWindowTilemap(data->field_D);
         sub_80125BC(data->field_D);
         CopyWindowToVram(data->field_D, 2);
@@ -2176,7 +2173,7 @@ void sub_8014F48(u8 taskId)
             RedrawListMenu(data->listTaskId);
             break;
         case 0:
-            id = ListMenuHandleInputGetItemId(data->listTaskId);
+            id = ListMenu_ProcessInput(data->listTaskId);
             if (gMain.newKeys & A_BUTTON && id != -1)
             {
                 // this unused variable along with the assignment is needed to match
@@ -2340,7 +2337,7 @@ void sub_80152F4(u8 taskId)
             break;
         case 0:
             if (data->field_13 != 0)
-                id = ListMenuHandleInputGetItemId(data->listTaskId);
+                id = ListMenu_ProcessInput(data->listTaskId);
             if (data->field_14 > 120)
             {
                 if (data->field_0->arr[0].field_1A_0 == 1 && !data->field_0->arr[0].unk.field_0.unk_0a_7)

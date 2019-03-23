@@ -1,0 +1,109 @@
+{
+  "id": "MAP_EVER_GRANDE_CITY_POKEMON_LEAGUE_1F",
+  "name": "EverGrandeCity_PokemonLeague_1F",
+  "layout": "LAYOUT_EVER_GRANDE_CITY_POKEMON_LEAGUE_1F",
+  "music": "MUS_POKECEN",
+  "region_map_section": "MAPSEC_EVER_GRANDE_CITY",
+  "requires_flash": false,
+  "weather": "WEATHER_NONE",
+  "map_type": "MAP_TYPE_INDOOR",
+  "allow_bike": false,
+  "allow_escape_rope": false,
+  "allow_running": false,
+  "show_map_name": false,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+  "connections": null,
+  "object_events": [
+    {
+      "graphics_id": "EVENT_OBJ_GFX_NURSE",
+      "x": 3,
+      "y": 2,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "EverGrandeCity_PokemonLeague_1F_EventScript_2295FC",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "EVENT_OBJ_GFX_MART_EMPLOYEE",
+      "x": 16,
+      "y": 2,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "EverGrandeCity_PokemonLeague_1F_EventScript_22960A",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "EVENT_OBJ_GFX_MAN_3",
+      "x": 8,
+      "y": 2,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "EverGrandeCity_PokemonLeague_1F_EventScript_229636",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "EVENT_OBJ_GFX_MAN_3",
+      "x": 11,
+      "y": 2,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "EverGrandeCity_PokemonLeague_1F_EventScript_229636",
+      "flag": "0"
+    }
+  ],
+  "warp_events": [
+    {
+      "x": 9,
+      "y": 11,
+      "elevation": 3,
+      "dest_map": "MAP_EVER_GRANDE_CITY",
+      "dest_warp_id": 0
+    },
+    {
+      "x": 10,
+      "y": 11,
+      "elevation": 3,
+      "dest_map": "MAP_EVER_GRANDE_CITY",
+      "dest_warp_id": 0
+    },
+    {
+      "x": 9,
+      "y": 1,
+      "elevation": 3,
+      "dest_map": "MAP_EVER_GRANDE_CITY_HALL5",
+      "dest_warp_id": 0
+    },
+    {
+      "x": 10,
+      "y": 1,
+      "elevation": 3,
+      "dest_map": "MAP_EVER_GRANDE_CITY_HALL5",
+      "dest_warp_id": 0
+    },
+    {
+      "x": 1,
+      "y": 7,
+      "elevation": 4,
+      "dest_map": "MAP_EVER_GRANDE_CITY_POKEMON_LEAGUE_2F",
+      "dest_warp_id": 0
+    }
+  ],
+  "coord_events": [],
+  "bg_events": []
+}

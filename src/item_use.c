@@ -1,19 +1,22 @@
 #include "global.h"
 #include "item_use.h"
 #include "battle.h"
+#include "battle_pyramid.h"
 #include "battle_pyramid_bag.h"
 #include "berry.h"
 #include "bike.h"
 #include "coins.h"
 #include "data2.h"
 #include "event_data.h"
-#include "fieldmap.h"
 #include "event_object_movement.h"
+#include "fieldmap.h"
+#include "field_effect.h"
 #include "field_player_avatar.h"
 #include "field_screen_effect.h"
 #include "field_weather.h"
 #include "item.h"
 #include "item_menu.h"
+#include "item_use.h"
 #include "mail.h"
 #include "main.h"
 #include "menu.h"
@@ -24,7 +27,6 @@
 #include "party_menu.h"
 #include "pokeblock.h"
 #include "pokemon.h"
-#include "rom_818CFC8.h"
 #include "script.h"
 #include "sound.h"
 #include "strings.h"
@@ -37,33 +39,15 @@
 #include "constants/items.h"
 #include "constants/songs.h"
 #include "constants/vars.h"
+#include "event_obj_lock.h"
 
-extern void(*gUnknown_0203A0F4)(u8 taskId);
-extern void (*gUnknown_03006328)(u8, TaskFunc);
-extern void unknown_ItemMenu_Confirm(u8 taskId);
-extern void sub_81C5B14(u8 taskId);
-extern void ScriptUnfreezeEventObjects(void);
-extern void ItemUseOutOfBattle_TMHM(u8 a);
-extern void ItemUseOutOfBattle_EvolutionStone(u8 b);
-extern bool8 IsPlayerFacingSurfableFishableWater(void);
-extern bool8 sub_81221AC(void);
 extern u8 Route102_EventScript_274482[];
 extern u8 Route102_EventScript_2744C0[];
 extern u8 BattleFrontier_OutsideEast_EventScript_242CFC[];
-extern int sub_80247BC(void);
-extern struct MapHeader* mapconnection_get_mapheader(struct MapConnection *connection);
-extern void SetUpItemUseCallback(u8 taskId);
-extern void ItemUseCB_Medicine(u8, TaskFunc);
-extern void bag_menu_yes_no(u8, u8, const struct YesNoFuncTable*);
-extern void sub_81C5924(void);
-extern void sub_81C59BC(void);
-extern void sub_81AB9A8(u8);
-extern void StartEscapeRopeFieldEffect(void);
-extern u8* sub_806CF78(u16);
-extern void sub_81B89F0(void);
-extern u8 GetItemEffectType(u16);
-extern struct MapConnection *sub_8088A8C(s16, s16);
 
+extern s32 sub_80247BC(void);
+
+void SetUpItemUseCallback(u8 taskId);
 void MapPostLoadHook_UseItem(void);
 void sub_80AF6D4(void);
 void Task_CallItemUseOnFieldCallback(u8 taskId);
@@ -99,6 +83,9 @@ void sub_80FD8E0(u8 taskId, s16 x, s16 y);
 void sub_80FDBEC(void);
 bool8 sub_80FDE2C(void);
 void ItemUseOutOfBattle_CannotUse(u8 taskId);
+
+// EWRAM variables
+EWRAM_DATA static void(*gUnknown_0203A0F4)(u8 taskId) = NULL;
 
 // .rodata
 
@@ -187,7 +174,7 @@ void DisplayCannotDismountBikeMessage(u8 taskId, bool8 isUsingRegisteredKeyItemO
 
 void CleanUpAfterFailingToUseRegisteredKeyItemOnField(u8 taskId)
 {
-    sub_8197434(0, 1);
+    ClearDialogWindowAndFrame(0, 1);
     DestroyTask(taskId);
     ScriptUnfreezeEventObjects();
     ScriptContext2_Disable();
@@ -349,7 +336,7 @@ void sub_80FD504(u8 taskId)
 
 void sub_80FD5CC(u8 taskId)
 {
-    sub_8197434(0, 1);
+    ClearDialogWindowAndFrame(0, 1);
     ScriptUnfreezeEventObjects();
     ScriptContext2_Disable();
     DestroyTask(taskId);
@@ -403,12 +390,12 @@ bool8 sub_80FD6D4(const struct MapEvents *events, s16 x, s16 y)
 
 bool8 sub_80FD730(struct MapConnection *connection, int x, int y)
 {
-    struct MapHeader *mapHeader;
+    
     u16 localX, localY;
     u32 localOffset;
     s32 localLength;
 
-    mapHeader = mapconnection_get_mapheader(connection);
+    struct MapHeader const *const mapHeader = mapconnection_get_mapheader(connection);
 
     switch (connection->direction)
     {

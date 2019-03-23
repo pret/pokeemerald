@@ -1,7 +1,7 @@
 #ifndef GUARD_TITLE_SCREEN_H
 #define GUARD_TITLE_SCREEN_H
 
-extern const u16 gUnknown_0853FF70[];
+extern const u16 gIntroWaterDropAlphaBlend[];
 
 void CB2_InitTitleScreen(void);
 

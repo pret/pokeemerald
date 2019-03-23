@@ -32,5 +32,6 @@ void SetCameraPanningCallback(void (*a)(void));
 void SetCameraPanning(s16 a, s16 b);
 void InstallCameraPanAheadCallback(void);
 void UpdateCameraPanning(void);
+void FieldUpdateBgTilemapScroll(void);
 
 #endif //GUARD_FIELD_CAMERA_H

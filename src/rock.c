@@ -12,8 +12,6 @@
 extern const union AnimCmd *const gUnknown_085950E0[];
 extern const union AnimCmd *const gUnknown_085954D0[];
 
-extern void AnimMoveTwisterParticle(struct Sprite *);
-
 void sub_81109F0(struct Sprite *);
 void sub_8110AB4(struct Sprite *);
 void AnimDirtParticleAcrossScreen(struct Sprite *);
@@ -326,7 +324,7 @@ void sub_81109F0(struct Sprite *sprite)
     sprite->data[5] = gBattleAnimArgs[2];
 
     StoreSpriteCallbackInData6(sprite, sub_8110A70);
-    sprite->callback = sub_80A6450;
+    sprite->callback = TranslateSpriteInEllipseOverDuration;
     sprite->callback(sprite);
 }
 
@@ -341,7 +339,7 @@ static void sub_8110A70(struct Sprite *sprite)
     sprite->data[4] = -24;
 
     StoreSpriteCallbackInData6(sprite, DestroySpriteAndMatrix);
-    sprite->callback = sub_80A6450;
+    sprite->callback = TranslateSpriteInEllipseOverDuration;
     sprite->callback(sprite);
 }
 
@@ -367,7 +365,7 @@ void sub_8110AB4(struct Sprite *sprite)
     sprite->data[3] = 0;
     sprite->data[4] = 0;
 
-    sprite->callback = AnimTranslateLinearSimple;
+    sprite->callback = TranslateSpriteLinearFixedPoint;
     StoreSpriteCallbackInData6(sprite, DestroySpriteAndMatrix);
 }
 
@@ -402,7 +400,7 @@ static void sub_8110B80(struct Sprite *sprite)
 void AnimTask_LoadSandstormBackground(u8 taskId)
 {
     int var0;
-    struct UnknownAnimStruct2 unknownStruct;
+    struct BattleAnimBgData animBg;
 
     var0 = 0;
     SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT1_BG1 | BLDCNT_TGT2_ALL | BLDCNT_EFFECT_BLEND);
@@ -418,10 +416,10 @@ void AnimTask_LoadSandstormBackground(u8 taskId)
     SetGpuReg(REG_OFFSET_BG1HOFS, gBattle_BG1_X);
     SetGpuReg(REG_OFFSET_BG1VOFS, gBattle_BG1_Y);
 
-    sub_80A6B30(&unknownStruct);
-    sub_80A6CC0(unknownStruct.bgId, gUnknown_08D8D58C, unknownStruct.tilesOffset);
-    sub_80A6D60(&unknownStruct, gUnknown_08D8D410, 0);
-    LoadCompressedPalette(gBattleAnimSpritePalette_261, unknownStruct.unk8 * 16, 32);
+    sub_80A6B30(&animBg);
+    AnimLoadCompressedBgGfx(animBg.bgId, gUnknown_08D8D58C, animBg.tilesOffset);
+    sub_80A6D60(&animBg, gUnknown_08D8D410, 0);
+    LoadCompressedPalette(gBattleAnimSpritePalette_261, animBg.paletteId * 16, 32);
 
     if (gBattleAnimArgs[0] && GetBattlerSide(gBattleAnimAttacker) != B_SIDE_PLAYER)
         var0 = 1;
@@ -432,7 +430,7 @@ void AnimTask_LoadSandstormBackground(u8 taskId)
 
 static void sub_8110CB0(u8 taskId)
 {
-    struct UnknownAnimStruct2 unknownStruct;
+    struct BattleAnimBgData animBg;
 
     if (gTasks[taskId].data[0] == 0)
         gBattle_BG1_X += -6;
@@ -477,8 +475,8 @@ static void sub_8110CB0(u8 taskId)
         }
         break;
     case 3:
-        sub_80A6B30(&unknownStruct);
-        sub_80A6C68(unknownStruct.bgId);
+        sub_80A6B30(&animBg);
+        sub_80A6C68(animBg.bgId);
         gTasks[taskId].data[12]++;
         break;
     case 4:
@@ -735,7 +733,7 @@ static void sub_8111214(struct Task *task)
 
 void sub_811131C(struct Sprite *sprite)
 {
-    if (TranslateAnimArc(sprite))
+    if (TranslateAnimHorizontalArc(sprite))
     {
         u8 taskId = FindTaskIdByFunc(sub_81110A4);
         if (taskId != 0xFF)

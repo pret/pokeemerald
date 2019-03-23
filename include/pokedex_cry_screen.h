@@ -10,6 +10,8 @@ struct CryRelatedStruct
     u8 yPos;
 };
 
+extern u8 gDexCryScreenState;
+
 bool8 sub_8145354(struct CryRelatedStruct*, u8);
 void sub_814545C(u8);
 void sub_8145534(u16);

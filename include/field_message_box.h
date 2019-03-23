@@ -17,5 +17,6 @@ void HideFieldMessageBox(void);
 bool8 IsFieldMessageBoxHidden(void);
 u8 GetFieldMessageBoxMode(void);
 void sub_8098374(void);
+void InitFieldMessageBox(void);
 
 #endif // GUARD_FIELD_MESSAGE_BOX_H

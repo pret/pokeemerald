@@ -5,8 +5,6 @@
 #include "trig.h"
 #include "constants/rgb.h"
 
-extern u16 gUnknown_0203A100[];
-
 void sub_8113064(struct Sprite *);
 void sub_81131B4(struct Sprite *);
 void sub_8113224(struct Sprite *);
@@ -16,6 +14,8 @@ static void sub_81132E0(struct Sprite *);
 static void sub_81134B8(u8);
 static void sub_8113574(struct Task *);
 static void sub_811369C(struct Sprite *);
+
+EWRAM_DATA static u16 gUnknown_0203A100[7] = {0};
 
 const union AnimCmd gUnknown_08596E60[] =
 {
@@ -209,7 +209,7 @@ void sub_8113064(struct Sprite *sprite)
     sprite->data[5] = gBattleAnimArgs[5];
     sprite->invisible = 1;
     StoreSpriteCallbackInData6(sprite, DestroySpriteAndMatrix);
-    sprite->callback = sub_80A66DC;
+    sprite->callback = TranslateSpriteLinearAndFlicker;
 }
 
 static void sub_8113100(struct Sprite *sprite)

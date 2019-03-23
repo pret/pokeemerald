@@ -392,7 +392,7 @@ extern const struct SpriteTemplate gMiniTwinklingStarSpriteTemplate;
 
 void unref_sub_8170478(u8 taskId)
 {
-    struct UnknownAnimStruct2 unknownStruct;
+    struct BattleAnimBgData unknownStruct;
     u8 healthBoxSpriteId;
     u8 battler;
     u8 spriteId1, spriteId2, spriteId3, spriteId4;
@@ -426,9 +426,9 @@ void unref_sub_8170478(u8 taskId)
     gSprites[spriteId4].callback = SpriteCallbackDummy;
 
     sub_80A6B30(&unknownStruct);
-    sub_80A6D48(unknownStruct.bgId, gUnknown_08C2EA9C);
-    sub_80A6CC0(unknownStruct.bgId, gUnknown_08C2EA50, unknownStruct.tilesOffset);
-    LoadCompressedPalette(gCureBubblesPal, unknownStruct.unk8 << 4, 32);
+    AnimLoadCompressedBgTilemap(unknownStruct.bgId, gUnknown_08C2EA9C);
+    AnimLoadCompressedBgGfx(unknownStruct.bgId, gUnknown_08C2EA50, unknownStruct.tilesOffset);
+    LoadCompressedPalette(gCureBubblesPal, unknownStruct.paletteId << 4, 32);
 
     gBattle_BG1_X = -gSprites[spriteId3].pos1.x + 32;
     gBattle_BG1_Y = -gSprites[spriteId3].pos1.y - 32;
@@ -806,7 +806,7 @@ static void sub_8171134(struct Sprite *sprite)
     u8 ballId;
     int ballId2; // extra var needed to match
 
-    if (TranslateAnimArc(sprite))
+    if (TranslateAnimHorizontalArc(sprite))
     {
         if (gBattleSpritesDataPtr->animationData->ballThrowCaseId == BALL_TRAINER_BLOCK)
         {
@@ -1276,7 +1276,7 @@ static void sub_81719EC(struct Sprite *sprite)
 static void sub_8171AAC(struct Sprite *sprite)
 {
     sprite->invisible = !sprite->invisible;
-    if (TranslateAnimArc(sprite))
+    if (TranslateAnimHorizontalArc(sprite))
         DestroySprite(sprite);
 }
 
@@ -2206,7 +2206,7 @@ static void sub_817339C(struct Sprite *sprite)
 
 static void sub_81733D4(struct Sprite *sprite)
 {
-    if (TranslateAnimArc(sprite))
+    if (TranslateAnimHorizontalArc(sprite))
     {
         sprite->data[0] = 0;
         sprite->invisible = 1;

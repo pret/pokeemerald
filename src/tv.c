@@ -38,6 +38,8 @@
 #include "secret_base.h"
 #include "tv.h"
 #include "data2.h"
+#include "constants/layouts.h"
+#include "constants/metatile_behaviors.h"
 
 // Static type declarations
 
@@ -61,7 +63,7 @@ IWRAM_DATA s8 sTVShowMixingCurSlot;
 EWRAM_DATA u16 sPokemonAnglerSpecies = 0;
 EWRAM_DATA u16 sPokemonAnglerAttemptCounters = 0;
 EWRAM_DATA u16 sFindThatGamerCoinsSpent = 0;
-EWRAM_DATA bool8 sFindThatGamerWhichGame = FALSE;
+EWRAM_DATA u8 sFindThatGamerWhichGame = SLOT_MACHINE;
 EWRAM_DATA ALIGNED(4) u8 sRecordMixingPartnersWithoutShowsToShare = 0;
 EWRAM_DATA ALIGNED(4) u8 sTVShowState = 0;
 EWRAM_DATA u8 sTVSecretBaseSecretsRandomValues[3] = {};
@@ -852,9 +854,9 @@ void SetTVMetatilesOnMap(int width, int height, u16 tileId)
     {
         for (x = 0; x < width; x ++)
         {
-            if (MapGridGetMetatileBehaviorAt(x, y) == 0x86) // is this tile a TV?
+            if (MapGridGetMetatileBehaviorAt(x, y) == MB_TELEVISION)
             {
-                MapGridSetMetatileIdAt(x, y, tileId | 0xc00);
+                MapGridSetMetatileIdAt(x, y, tileId | METATILE_COLLISION_MASK);
             }
         }
     }
@@ -972,7 +974,7 @@ void GabbyAndTyBeforeInterview(void)
     TakeTVShowInSearchOfTrainersOffTheAir();
     if (gSaveBlock1Ptr->gabbyAndTyData.lastMove == MOVE_NONE)
     {
-        FlagSet(0x0001);
+        FlagSet(FLAG_TEMP_1);
     }
 }
 
@@ -2018,7 +2020,7 @@ void sub_80EDCE8(void)
     }
 }
 
-void sub_80EDD78(u16 nCoinsPaidOut)
+void AlertTVOfNewCoinTotal(u16 nCoinsPaidOut)
 {
     TVShow *show;
     bool8 flag;
@@ -2030,7 +2032,7 @@ void sub_80EDD78(u16 nCoinsPaidOut)
         flag = FALSE;
         switch (sFindThatGamerWhichGame)
         {
-            case FALSE:
+            case SLOT_MACHINE:
                 if (nCoinsPaidOut >= sFindThatGamerCoinsSpent + 200)
                 {
                     flag = TRUE;
@@ -2043,7 +2045,7 @@ void sub_80EDD78(u16 nCoinsPaidOut)
                     break;
                 }
                 return;
-            case TRUE:
+            case ROULETTE:
                 if (nCoinsPaidOut >= sFindThatGamerCoinsSpent + 50)
                 {
                     flag = TRUE;
@@ -2071,15 +2073,15 @@ void sub_80EDD78(u16 nCoinsPaidOut)
     }
 }
 
-void sub_80EDE70(u16 nCoinsSpent)
+void AlertTVThatPlayerPlayedSlotMachine(u16 nCoinsSpent)
 {
-    sFindThatGamerWhichGame = FALSE;
+    sFindThatGamerWhichGame = SLOT_MACHINE;
     sFindThatGamerCoinsSpent = nCoinsSpent;
 }
 
-void sub_80EDE84(u16 nCoinsSpent)
+void AlertTVThatPlayerPlayedRoulette(u16 nCoinsSpent)
 {
-    sFindThatGamerWhichGame = TRUE;
+    sFindThatGamerWhichGame = ROULETTE;
     sFindThatGamerCoinsSpent = nCoinsSpent;
 }
 
@@ -2447,8 +2449,8 @@ void sub_80EE72C(void)
         show->trainerFanClub.kind = TVSHOW_TRAINER_FAN_CLUB;
         show->trainerFanClub.active = FALSE;
         StringCopy(show->trainerFanClub.playerName, gSaveBlock2Ptr->playerName);
-        show->trainerFanClub.words[0] = gSaveBlock1Ptr->unk2BB0[0];
-        show->trainerFanClub.words[1] = gSaveBlock1Ptr->unk2BB0[1];
+        show->trainerFanClub.words[0] = gSaveBlock1Ptr->easyChatProfile[0];
+        show->trainerFanClub.words[1] = gSaveBlock1Ptr->easyChatProfile[1];
         tv_store_id_3x(show);
         show->trainerFanClub.language = gGameLanguage;
     }
@@ -2564,13 +2566,13 @@ void sub_80EEA70(void)
             show->secretBaseSecrets.kind = TVSHOW_SECRET_BASE_SECRETS;
             show->secretBaseSecrets.active = FALSE;
             StringCopy(show->secretBaseSecrets.playerName, gSaveBlock2Ptr->playerName);
-            show->secretBaseSecrets.stepsInBase = VarGet(0x40ec);
+            show->secretBaseSecrets.stepsInBase = VarGet(VAR_SECRET_BASE_STEP_COUNTER);
             sub_80E980C();
             StringCopy(strbuf, gStringVar1);
             StripExtCtrlCodes(strbuf);
             StringCopy(show->secretBaseSecrets.baseOwnersName, strbuf);
-            show->secretBaseSecrets.item = VarGet(0x40ed);
-            show->secretBaseSecrets.flags = VarGet(0x40ee) + (VarGet(0x40ef) << 16);
+            show->secretBaseSecrets.item = VarGet(VAR_SECRET_BASE_LAST_ITEM_USED);
+            show->secretBaseSecrets.flags = VarGet(VAR_SECRET_BASE_LOW_TV_FLAGS) + (VarGet(VAR_SECRET_BASE_HIGH_TV_FLAGS) << 16);
             tv_store_id_3x(show);
             show->secretBaseSecrets.language = gGameLanguage;
             if (show->secretBaseSecrets.language == LANGUAGE_JAPANESE || gSaveBlock1Ptr->secretBases[VarGet(VAR_CURRENT_SECRET_BASE)].language == LANGUAGE_JAPANESE)
@@ -3602,9 +3604,9 @@ void GetMomOrDadStringForTVMessage(void)
 
 void sub_80F01B8(void)
 {
-    VarSet(VAR_0x40BC, 0);
+    VarSet(VAR_BRAVO_TRAINER_BATTLE_TOWER_ON, 0);
     RemoveEventObjectByLocalIdAndMap(5, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
-    FlagSet(0x396);
+    FlagSet(FLAG_HIDE_BATTLE_TOWER_REPORTER);
 }
 
 void ReceiveTvShowsData(void *src, u32 size, u8 masterIdx)
@@ -6264,7 +6266,9 @@ static void DoTVShowTodaysRivalTrainer(void)
                 case MAPSEC_DYNAMIC:
                     switch (show->rivalTrainer.mapLayoutId)
                     {
-                        case 0x115 ... 0x117:
+                        case LAYOUT_SS_TIDAL_CORRIDOR:
+                        case LAYOUT_SS_TIDAL_LOWER_DECK:
+                        case LAYOUT_SS_TIDAL_ROOMS:
                             sTVShowState = 10;
                             break;
                         default:
@@ -6463,7 +6467,9 @@ static void DoTVShowHoennTreasureInvestigators(void)
             {
                 switch (show->treasureInvestigators.mapLayoutId)
                 {
-                    case 0x115 ... 0x117:
+                    case LAYOUT_SS_TIDAL_CORRIDOR:
+                    case LAYOUT_SS_TIDAL_LOWER_DECK:
+                    case LAYOUT_SS_TIDAL_ROOMS:
                         sTVShowState = 2;
                         break;
                     default:
@@ -7345,7 +7351,7 @@ static void DoTVShowWhatsNo1InHoennToday(void)
     ShowFieldMessage(sTVWhatsNo1InHoennTodayTextGroup[state]);
 }
 
-u8 sub_80F5180(TVShow *show)
+u8 TVShowGetFlagCount(TVShow *show)
 {
     u8 i;
     u8 tot;
@@ -7360,7 +7366,7 @@ u8 sub_80F5180(TVShow *show)
     return tot;
 }
 
-u8 sub_80F51AC(TVShow *show, u8 a1)
+u8 TVShowGetStateForFlagNumber(TVShow *show, u8 a1)
 {
     u8 i;
     u8 tot;
@@ -7394,7 +7400,7 @@ static void DoTVShowSecretBaseSecrets(void)
         case 0:
             TVShowConvertInternationalString(gStringVar1, show->secretBaseSecrets.baseOwnersName, show->secretBaseSecrets.baseOwnersNameLanguage);
             TVShowConvertInternationalString(gStringVar2, show->secretBaseSecrets.playerName, show->secretBaseSecrets.language);
-            bitCount = sub_80F5180(show);
+            bitCount = TVShowGetFlagCount(show);
             if (bitCount == 0)
             {
                 sTVShowState = 8;
@@ -7403,12 +7409,12 @@ static void DoTVShowSecretBaseSecrets(void)
             {
                 show->secretBaseSecrets.savedState = 1;
                 sTVSecretBaseSecretsRandomValues[0] = Random() % bitCount;
-                sTVShowState = sub_80F51AC(show, sTVSecretBaseSecretsRandomValues[0]);
+                sTVShowState = TVShowGetStateForFlagNumber(show, sTVSecretBaseSecretsRandomValues[0]);
             }
             break;
         case 1:
             TVShowConvertInternationalString(gStringVar2, show->secretBaseSecrets.playerName, show->secretBaseSecrets.language);
-            bitCount = sub_80F5180(show);
+            bitCount = TVShowGetFlagCount(show);
             switch (bitCount)
             {
                 case 1:
@@ -7418,11 +7424,11 @@ static void DoTVShowSecretBaseSecrets(void)
                     show->secretBaseSecrets.savedState = 2;
                     if (sTVSecretBaseSecretsRandomValues[0] == 0)
                     {
-                        sTVShowState = sub_80F51AC(show, 1);
+                        sTVShowState = TVShowGetStateForFlagNumber(show, 1);
                     }
                     else
                     {
-                        sTVShowState = sub_80F51AC(show, 0);
+                        sTVShowState = TVShowGetStateForFlagNumber(show, 0);
                     }
                     break;
                 default:
@@ -7435,13 +7441,13 @@ static void DoTVShowSecretBaseSecrets(void)
                         }
                     }
                     show->secretBaseSecrets.savedState = 2;
-                    sTVShowState = sub_80F51AC(show, sTVSecretBaseSecretsRandomValues[1]);
+                    sTVShowState = TVShowGetStateForFlagNumber(show, sTVSecretBaseSecretsRandomValues[1]);
                     break;
             }
             break;
         case 2:
             TVShowConvertInternationalString(gStringVar2, show->secretBaseSecrets.playerName, show->secretBaseSecrets.language);
-            bitCount = sub_80F5180(show);
+            bitCount = TVShowGetFlagCount(show);
             if (bitCount == 2)
             {
                 sTVShowState = 9;
@@ -7457,7 +7463,7 @@ static void DoTVShowSecretBaseSecrets(void)
                     }
                 }
                 show->secretBaseSecrets.savedState = 3;
-                sTVShowState = sub_80F51AC(show, sTVSecretBaseSecretsRandomValues[2]);
+                sTVShowState = TVShowGetStateForFlagNumber(show, sTVSecretBaseSecretsRandomValues[2]);
             }
             break;
         case 3:

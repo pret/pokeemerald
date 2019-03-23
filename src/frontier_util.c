@@ -35,8 +35,7 @@
 #include "constants/moves.h"
 #include "constants/items.h"
 #include "constants/event_objects.h"
-
-extern u8 gSelectedOrderFromParty[];
+#include "party_menu.h"
 
 struct FrontierBrainMon
 {
@@ -47,8 +46,6 @@ struct FrontierBrainMon
     u8 evs[NUM_STATS];
     u16 moves[4];
 };
-
-extern void sub_81B8558(void);
 
 // This file's functions.
 static void sub_81A17A0(void);
@@ -1044,8 +1041,8 @@ static void TowerPrintPrevOrCurrentStreak(u8 battleMode, u8 lvlMode, u8 x1, u8 x
 static void ShowTowerResultsWindow(u8 battleMode)
 {
     gRecordsWindowId = AddWindow(&gUnknown_08611C74);
-    NewMenuHelpers_DrawStdWindowFrame(gRecordsWindowId, FALSE);
-    FillWindowPixelBuffer(gRecordsWindowId, 0x11);
+    DrawStdWindowFrame(gRecordsWindowId, FALSE);
+    FillWindowPixelBuffer(gRecordsWindowId, PIXEL_FILL(1));
     if (battleMode == FRONTIER_MODE_SINGLES)
         StringExpandPlaceholders(gStringVar4, gText_SingleBattleRoomResults);
     else if (battleMode == FRONTIER_MODE_DOUBLES)
@@ -1115,8 +1112,8 @@ static void DomePrintPrevOrCurrentStreak(u8 battleMode, u8 lvlMode, u8 x1, u8 x2
 static void ShowDomeResultsWindow(u8 battleMode)
 {
     gRecordsWindowId = AddWindow(&gUnknown_08611C74);
-    NewMenuHelpers_DrawStdWindowFrame(gRecordsWindowId, FALSE);
-    FillWindowPixelBuffer(gRecordsWindowId, 0x11);
+    DrawStdWindowFrame(gRecordsWindowId, FALSE);
+    FillWindowPixelBuffer(gRecordsWindowId, PIXEL_FILL(1));
     if (battleMode == FRONTIER_MODE_SINGLES)
         StringExpandPlaceholders(gStringVar4, gText_SingleBattleTourneyResults);
     else
@@ -1191,8 +1188,8 @@ static void PalacePrintPrevOrCurrentStreak(u8 battleMode, u8 lvlMode, u8 x1, u8 
 static void ShowPalaceResultsWindow(u8 battleMode)
 {
     gRecordsWindowId = AddWindow(&gUnknown_08611C74);
-    NewMenuHelpers_DrawStdWindowFrame(gRecordsWindowId, FALSE);
-    FillWindowPixelBuffer(gRecordsWindowId, 0x11);
+    DrawStdWindowFrame(gRecordsWindowId, FALSE);
+    FillWindowPixelBuffer(gRecordsWindowId, PIXEL_FILL(1));
     if (battleMode == FRONTIER_MODE_SINGLES)
         StringExpandPlaceholders(gStringVar4, gText_SingleBattleHallResults);
     else
@@ -1247,8 +1244,8 @@ static void PikePrintPrevOrCurrentStreak(u8 lvlMode, u8 x1, u8 x2, u8 y)
 static void ShowPikeResultsWindow(void)
 {
     gRecordsWindowId = AddWindow(&gUnknown_08611C74);
-    NewMenuHelpers_DrawStdWindowFrame(gRecordsWindowId, FALSE);
-    FillWindowPixelBuffer(gRecordsWindowId, 0x11);
+    DrawStdWindowFrame(gRecordsWindowId, FALSE);
+    FillWindowPixelBuffer(gRecordsWindowId, PIXEL_FILL(1));
     StringExpandPlaceholders(gStringVar4, gText_BattleChoiceResults);
     PrintAligned(gStringVar4, 0);
     AddTextPrinterParameterized(gRecordsWindowId, 1, gText_Lv502, 8, 33, TEXT_SPEED_FF, NULL);
@@ -1309,8 +1306,8 @@ static void ArenaPrintPrevOrCurrentStreak(u8 lvlMode, u8 x1, u8 x2, u8 y)
 static void ShowArenaResultsWindow(void)
 {
     gRecordsWindowId = AddWindow(&gUnknown_08611C74);
-    NewMenuHelpers_DrawStdWindowFrame(gRecordsWindowId, FALSE);
-    FillWindowPixelBuffer(gRecordsWindowId, 0x11);
+    DrawStdWindowFrame(gRecordsWindowId, FALSE);
+    FillWindowPixelBuffer(gRecordsWindowId, PIXEL_FILL(1));
     PrintHyphens(10);
     StringExpandPlaceholders(gStringVar4, gText_SetKOTourneyResults);
     PrintAligned(gStringVar4, 2);
@@ -1395,8 +1392,8 @@ static void FactoryPrintPrevOrCurrentStreak(u8 battleMode, u8 lvlMode, u8 x1, u8
 static void ShowFactoryResultsWindow(u8 battleMode)
 {
     gRecordsWindowId = AddWindow(&gUnknown_08611C74);
-    NewMenuHelpers_DrawStdWindowFrame(gRecordsWindowId, FALSE);
-    FillWindowPixelBuffer(gRecordsWindowId, 0x11);
+    DrawStdWindowFrame(gRecordsWindowId, FALSE);
+    FillWindowPixelBuffer(gRecordsWindowId, PIXEL_FILL(1));
     if (battleMode == FRONTIER_MODE_SINGLES)
         StringExpandPlaceholders(gStringVar4, gText_BattleSwapSingleResults);
     else
@@ -1460,8 +1457,8 @@ static void PyramidPrintPrevOrCurrentStreak(u8 lvlMode, u8 x1, u8 x2, u8 y)
 static void ShowPyramidResultsWindow(void)
 {
     gRecordsWindowId = AddWindow(&gUnknown_08611C74);
-    NewMenuHelpers_DrawStdWindowFrame(gRecordsWindowId, FALSE);
-    FillWindowPixelBuffer(gRecordsWindowId, 0x11);
+    DrawStdWindowFrame(gRecordsWindowId, FALSE);
+    FillWindowPixelBuffer(gRecordsWindowId, PIXEL_FILL(1));
     StringExpandPlaceholders(gStringVar4, gText_BattleQuestResults);
     PrintAligned(gStringVar4, 2);
     AddTextPrinterParameterized(gRecordsWindowId, 1, gText_Lv502, 8, 49, TEXT_SPEED_FF, NULL);
@@ -1483,8 +1480,8 @@ static void ShowLinkContestResultsWindow(void)
     s32 x;
 
     gRecordsWindowId = AddWindow(&gUnknown_08611C7C);
-    NewMenuHelpers_DrawStdWindowFrame(gRecordsWindowId, FALSE);
-    FillWindowPixelBuffer(gRecordsWindowId, 0x11);
+    DrawStdWindowFrame(gRecordsWindowId, FALSE);
+    FillWindowPixelBuffer(gRecordsWindowId, PIXEL_FILL(1));
 
     StringExpandPlaceholders(gStringVar4, gText_LinkContestResults);
     x = GetStringCenterAlignXOffset(1, gStringVar4, 208);
@@ -1528,7 +1525,7 @@ static void ShowLinkContestResultsWindow(void)
 
 static void sub_81A31FC(void)
 {
-    u8 text[32];
+    u8 name[32];
     s32 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
     s32 facility = VarGet(VAR_FRONTIER_FACILITY);
     s32 battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
@@ -1541,9 +1538,9 @@ static void sub_81A31FC(void)
             gSaveBlock2Ptr->frontier.towerRecordWinStreaks[battleMode][lvlMode] = gSaveBlock2Ptr->frontier.towerWinStreaks[battleMode][lvlMode];
             if (battleMode == FRONTIER_MODE_LINK_MULTIS)
             {
-                StringCopy(text, gLinkPlayers[gBattleScripting.multiplayerId ^ 1].name);
-                StripExtCtrlCodes(text);
-                StringCopy(gSaveBlock2Ptr->frontier.field_EE1[lvlMode], text);
+                StringCopy(name, gLinkPlayers[gBattleScripting.multiplayerId ^ 1].name);
+                StripExtCtrlCodes(name);
+                StringCopy(gSaveBlock2Ptr->frontier.opponentName[lvlMode], name);
                 SetTrainerId(gLinkPlayers[gBattleScripting.multiplayerId ^ 1].trainerId, gSaveBlock2Ptr->frontier.field_EF1[lvlMode]);
             }
             if (gSaveBlock2Ptr->frontier.towerWinStreaks[battleMode][lvlMode] > 1
@@ -1827,7 +1824,7 @@ void sub_81A3ACC(void)
     s32 i;
 
     for (i = 0; i < 20; i++)
-        gSaveBlock2Ptr->frontier.field_CB4[i] = 0xFFFF;
+        gSaveBlock2Ptr->frontier.trainerIds[i] = 0xFFFF;
 }
 
 static void sub_81A3B00(void)
@@ -2336,8 +2333,8 @@ static void PrintHallRecords(s32 hallFacilityId, s32 lvlMode)
     AddTextPrinterParameterized(gRecordsWindowId, 1, gLevelModeText[lvlMode], x, 1, TEXT_SPEED_FF, NULL);
     if (hallFacilityId == HALL_FACILITIES_COUNT)
     {
-        gSaveBlock2Ptr->frontier.field_EE1[0][PLAYER_NAME_LENGTH] = EOS;
-        gSaveBlock2Ptr->frontier.field_EE1[1][PLAYER_NAME_LENGTH] = EOS;
+        gSaveBlock2Ptr->frontier.opponentName[0][PLAYER_NAME_LENGTH] = EOS;
+        gSaveBlock2Ptr->frontier.opponentName[1][PLAYER_NAME_LENGTH] = EOS;
         Fill2PRecords(records2P, lvlMode);
         for (i = 0; i < 3; i++)
             Print2PRecord(i, 1, 4, &records2P[i]);
@@ -2353,8 +2350,8 @@ static void PrintHallRecords(s32 hallFacilityId, s32 lvlMode)
 void ShowRankingHallRecordsWindow(void)
 {
     gRecordsWindowId = AddWindow(&gUnknown_08611C84);
-    NewMenuHelpers_DrawStdWindowFrame(gRecordsWindowId, FALSE);
-    FillWindowPixelBuffer(gRecordsWindowId, 0x11);
+    DrawStdWindowFrame(gRecordsWindowId, FALSE);
+    FillWindowPixelBuffer(gRecordsWindowId, PIXEL_FILL(1));
     PrintHallRecords(gSpecialVar_0x8005, FRONTIER_LVL_50);
     PutWindowTilemap(gRecordsWindowId);
     CopyWindowToVram(gRecordsWindowId, 3);
@@ -2362,7 +2359,7 @@ void ShowRankingHallRecordsWindow(void)
 
 void ScrollRankingHallRecordsWindow(void)
 {
-    FillWindowPixelBuffer(gRecordsWindowId, 0x11);
+    FillWindowPixelBuffer(gRecordsWindowId, PIXEL_FILL(1));
     PrintHallRecords(gSpecialVar_0x8005, FRONTIER_LVL_OPEN);
     CopyWindowToVram(gRecordsWindowId, 2);
 }

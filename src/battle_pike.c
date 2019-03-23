@@ -16,6 +16,8 @@
 #include "constants/event_objects.h"
 #include "constants/battle_frontier.h"
 #include "constants/abilities.h"
+#include "constants/easy_chat.h"
+#include "constants/layouts.h"
 #include "constants/rgb.h"
 #include "constants/trainers.h"
 #include "constants/species.h"
@@ -35,12 +37,12 @@
 #define PIKE_STATUS_KIRLIA 0
 #define PIKE_STATUS_DUSCLOPS 1
 
-struct Unk0861231C
+struct PikeRoomNPC
 {
-    u16 unk0;
-    u8 unk2;
-    u8 unk3;
-    u8 unk4;
+    u16 graphicsId;
+    u8 speechId1;
+    u8 speechId2;
+    u8 speechId3;
 };
 
 struct PikeWildMon
@@ -55,50 +57,50 @@ static IWRAM_DATA u8 sRoomType;
 static IWRAM_DATA u8 sStatusMon;
 static IWRAM_DATA bool8 sUnknown_0300128E;
 static IWRAM_DATA u32 sStatusFlags;
-static IWRAM_DATA u8 sUnknown_03001294;
+static IWRAM_DATA u8 sNpcId;
 
 // This file's functions.
-static void sub_81A705C(void);
-static void sub_81A7140(void);
-static void sub_81A7248(void);
-static void sub_81A73B8(void);
-static void sub_81A7070(void);
-static void sub_81A73EC(void);
+static void SetRoomType(void);
+static void GetBattlePikeData(void);
+static void SetBattlePikeData(void);
+static void GetInFinalRoom(void);
+static void SetupRoomEventObjects(void);
+static void GetRoomType(void);
 static void sub_81A7400(void);
 static void sub_81A740C(void);
 static void sub_81A7418(void);
 static void nullsub_76(void);
 static void nullsub_124(void);
-static void sub_81A7468(void);
-static void sub_81A74CC(void);
-static void sub_81A74E0(void);
-static void sub_81A7508(void);
-static void sub_81A7580(void);
-static void sub_81A8090(void);
-static void sub_81A80DC(void);
-static void sub_81A825C(void);
-static void sub_81A827C(void);
-static void sub_81A84B4(void);
-static void sub_81A84EC(void);
-static void sub_81A863C(void);
-static void sub_81A8658(void);
-static void sub_81A869C(void);
-static void sub_81A86C0(void);
-static void sub_81A8794(void);
-static void sub_81A87E8(void);
-static void sub_81A8830(void);
+static void GetRoomInflictedStatus(void);
+static void GetRoomInflictedStatusMon(void);
+static void HealOneOrTwoMons(void);
+static void BufferNPCMessage(void);
+static void StatusInflictionScreenFade(void);
+static void GetInBattlePike(void);
+static void SetHintedRoom(void);
+static void GetHintedRoomIndex(void);
+static void GetRoomTypeHint(void);
+static void ClearPikeTrainerIds(void);
+static void BufferRecordMixingTrainerMessage(void);
+static void GetCurrentRoomPikeQueenFightType(void);
+static void HealSomeMonsBeforePikeQueen(void);
+static void SetHealingRoomsDisabled(void);
+static void CanAnyPartyMonsBeHealed(void);
+static void BackupMonHeldItems(void);
+static void RestoreMonHeldItems(void);
+static void InitPikeChallenge(void);
 static u8 GetNextRoomType(void);
 static void PrepareOneTrainer(bool8 difficult);
-static u16 sub_81A7B58(void);
+static u16 GetNPCRoomGraphicsId(void);
 static void PrepareTwoTrainers(void);
 static void TryHealMons(u8 healCount);
-static void sub_81A7EE4(u8 taskId);
+static void Task_DoStatusInflictionScreenFade(u8 taskId);
 static bool8 AtLeastTwoAliveMons(void);
 static u8 SpeciesToPikeMonId(u16 species);
 static bool8 CanEncounterWildMon(u8 monLevel);
-static u8 sub_81A8590(u8);
-static bool8 sub_81A7D8C(struct Task *task);
-static bool8 sub_81A7DE8(struct Task *task);
+static u8 GetPikeQueenFightType(u8);
+static bool8 StatusInflictionFadeOut(struct Task *task);
+static bool8 StatusInflictionFadeIn(struct Task *task);
 
 // Const rom data.
 static const struct PikeWildMon sLvl50_Mons1[] =
@@ -275,253 +277,264 @@ static const struct PikeWildMon *const *const sWildMons[2] =
     [FRONTIER_LVL_OPEN] = sLvlOpenMons
 };
 
-static const struct Unk0861231C gUnknown_0861231C[] =
+static const struct PikeRoomNPC sNPCTable[] =
 {
     {
-        .unk0 = 0x0012,
-        .unk2 = 0x03,
-        .unk3 = 0x05,
-        .unk4 = 0x06
+        .graphicsId = EVENT_OBJ_GFX_POKEFAN_F,
+        .speechId1 = 3,
+        .speechId2 = 5,
+        .speechId3 = 6
     },
     {
-        .unk0 = 0x0005,
-        .unk2 = 0x0d,
-        .unk3 = 0x20,
-        .unk4 = 0x25
+        .graphicsId = EVENT_OBJ_GFX_NINJA_BOY,
+        .speechId1 = 13,
+        .speechId2 = 32,
+        .speechId3 = 37
     },
     {
-        .unk0 = 0x0011,
-        .unk2 = 0x08,
-        .unk3 = 0x0b,
-        .unk4 = 0x0c
+        .graphicsId = EVENT_OBJ_GFX_FAT_MAN,
+        .speechId1 = 8,
+        .speechId2 = 11,
+        .speechId3 = 12
     },
     {
-        .unk0 = 0x0024,
-        .unk2 = 0x22,
-        .unk3 = 0x1e,
-        .unk4 = 0x21
+        .graphicsId = EVENT_OBJ_GFX_BUG_CATCHER,
+        .speechId1 = 34,
+        .speechId2 = 30,
+        .speechId3 = 33
     },
     {
-        .unk0 = 0x0015,
-        .unk2 = 0x00,
-        .unk3 = 0x00,
-        .unk4 = 0x00
+        .graphicsId = EVENT_OBJ_GFX_EXPERT_M,
+        .speechId1 = 0,
+        .speechId2 = 0,
+        .speechId3 = 0
     },
     {
-        .unk0 = 0x001e,
-        .unk2 = 0x01,
-        .unk3 = 0x01,
-        .unk4 = 0x01
+        .graphicsId = EVENT_OBJ_GFX_OLD_WOMAN,
+        .speechId1 = 1,
+        .speechId2 = 1,
+        .speechId3 = 1
     },
     {
-        .unk0 = 0x002c,
-        .unk2 = 0x16,
-        .unk3 = 0x17,
-        .unk4 = 0x1b
+        .graphicsId = EVENT_OBJ_GFX_BLACK_BELT,
+        .speechId1 = 22,
+        .speechId2 = 23,
+        .speechId3 = 27
     },
     {
-        .unk0 = 0x0037,
-        .unk2 = 0x08,
-        .unk3 = 0x16,
-        .unk4 = 0x1f
+        .graphicsId = EVENT_OBJ_GFX_HIKER,
+        .speechId1 = 8,
+        .speechId2 = 22,
+        .speechId3 = 31
     },
     {
-        .unk0 = 0x000e,
-        .unk2 = 0x0d,
-        .unk3 = 0x27,
-        .unk4 = 0x15
+        .graphicsId = EVENT_OBJ_GFX_GIRL_3,
+        .speechId1 = 13,
+        .speechId2 = 39,
+        .speechId3 = 21
     },
     {
-        .unk0 = 0x0014,
-        .unk2 = 0x02,
-        .unk3 = 0x04,
-        .unk4 = 0x11
+        .graphicsId = EVENT_OBJ_GFX_WOMAN_2,
+        .speechId1 = 2,
+        .speechId2 = 4,
+        .speechId3 = 17
     },
     {
-        .unk0 = 0x0038,
-        .unk2 = 0x1e,
-        .unk3 = 0x14,
-        .unk4 = 0x24
+        .graphicsId = EVENT_OBJ_GFX_CYCLING_TRIATHLETE_M,
+        .speechId1 = 30,
+        .speechId2 = 20,
+        .speechId3 = 36
     },
     {
-        .unk0 = 0x0042,
-        .unk2 = 0x1c,
-        .unk3 = 0x22,
-        .unk4 = 0x19
+        .graphicsId = EVENT_OBJ_GFX_MAN_5,
+        .speechId1 = 28,
+        .speechId2 = 34,
+        .speechId3 = 25
     },
     {
-        .unk0 = 0x0026,
-        .unk2 = 0x17,
-        .unk3 = 0x26,
-        .unk4 = 0x1a
+        .graphicsId = EVENT_OBJ_GFX_SCHOOL_KID_M,
+        .speechId1 = 23,
+        .speechId2 = 38,
+        .speechId3 = 26
     },
     {
-        .unk0 = 0x0032,
-        .unk2 = 0x17,
-        .unk3 = 0x1e,
-        .unk4 = 0x0b
+        .graphicsId = EVENT_OBJ_GFX_FISHERMAN,
+        .speechId1 = 23,
+        .speechId2 = 30,
+        .speechId3 = 11
     },
     {
-        .unk0 = 0x002f,
-        .unk2 = 0x0f,
-        .unk3 = 0x13,
-        .unk4 = 0x0e
+        .graphicsId = EVENT_OBJ_GFX_LASS,
+        .speechId1 = 15,
+        .speechId2 = 19,
+        .speechId3 = 14
     },
     {
-        .unk0 = 0x0027,
-        .unk2 = 0x02,
-        .unk3 = 0x1d,
-        .unk4 = 0x1a
+        .graphicsId = EVENT_OBJ_GFX_MANIAC,
+        .speechId1 = 2,
+        .speechId2 = 29,
+        .speechId3 = 26
     },
     {
-        .unk0 = 0x0033,
-        .unk2 = 0x25,
-        .unk3 = 0x0c,
-        .unk4 = 0x20
+        .graphicsId = EVENT_OBJ_GFX_RUNNING_TRIATHLETE_M,
+        .speechId1 = 37,
+        .speechId2 = 12,
+        .speechId3 = 32
     },
     {
-        .unk0 = 0x0021,
-        .unk2 = 0x18,
-        .unk3 = 0x17,
-        .unk4 = 0x26
+        .graphicsId = EVENT_OBJ_GFX_MAN_3,
+        .speechId1 = 24,
+        .speechId2 = 23,
+        .speechId3 = 38
     },
     {
-        .unk0 = 0x0018,
-        .unk2 = 0x05,
-        .unk3 = 0x16,
-        .unk4 = 0x04
+        .graphicsId = EVENT_OBJ_GFX_WOMAN_3,
+        .speechId1 = 5,
+        .speechId2 = 22,
+        .speechId3 = 4
     },
     {
-        .unk0 = 0x000b,
-        .unk2 = 0x29,
-        .unk3 = 0x25,
-        .unk4 = 0x23
+        .graphicsId = EVENT_OBJ_GFX_LITTLE_BOY,
+        .speechId1 = 41,
+        .speechId2 = 37,
+        .speechId3 = 35
     },
     {
-        .unk0 = 0x0035,
-        .unk2 = 0x27,
-        .unk3 = 0x0e,
-        .unk4 = 0x0d
+        .graphicsId = EVENT_OBJ_GFX_TUBER_F,
+        .speechId1 = 39,
+        .speechId2 = 14,
+        .speechId3 = 13
     },
     {
-        .unk0 = 0x0030,
-        .unk2 = 0x0a,
-        .unk3 = 0x07,
-        .unk4 = 0x09
+        .graphicsId = EVENT_OBJ_GFX_GENTLEMAN,
+        .speechId1 = 10,
+        .speechId2 = 7,
+        .speechId3 = 9
     },
     {
-        .unk0 = 0x000c,
-        .unk2 = 0x28,
-        .unk3 = 0x14,
-        .unk4 = 0x10
+        .graphicsId = EVENT_OBJ_GFX_LITTLE_GIRL,
+        .speechId1 = 40,
+        .speechId2 = 20,
+        .speechId3 = 16
     },
     {
-        .unk0 = 0x0034,
-        .unk2 = 0x12,
-        .unk3 = 0x0d,
-        .unk4 = 0x15
+        .graphicsId = EVENT_OBJ_GFX_RUNNING_TRIATHLETE_F,
+        .speechId1 = 18,
+        .speechId2 = 13,
+        .speechId3 = 21
     },
     {
-        .unk0 = 0x0013,
-        .unk2 = 0x16,
-        .unk3 = 0x1f,
-        .unk4 = 0x1b
+        .graphicsId = EVENT_OBJ_GFX_MAN_1,
+        .speechId1 = 22,
+        .speechId2 = 31,
+        .speechId3 = 27
     }
 };
 
-static const u16 gUnknown_086123E4[][6] =
+static const u16 sNPCSpeeches[][6] =
 {
-    {0x0a29, 0x0630, 0x0a01, 0x140f, 0x1020, 0x270e},
-    {0x0a2a, 0x081d, 0x061b, 0x1034, 0x1e20, 0x0a29},
-    {0x1e22, 0x1231, 0x0a01, 0x1018, 0x1c1a, 0x0c03},
-    {0x1e0f, 0x100b, 0x1039, 0x200f, 0x102b, 0x0a14},
-    {0x103b, 0x0a02, 0x161e, 0x1020, 0x143e, 0x0c03},
-    {0x0a31, 0x0e02, 0x0e15, 0x1436, 0x1037, 0x1e0a},
-    {0x0a29, 0x1025, 0x142a, 0x1034, 0x1e0f, 0x0a1b},
-    {0x0a01, 0x0e07, 0x122a, 0x1e0f, 0x061f, 0xffff},
-    {0x1a35, 0x1036, 0x0e0f, 0x0a01, 0x2621, 0x1e0f},
-    {0x0e25, 0x102f, 0x062d, 0x201e, 0x0c03, 0xffff},
-    {0x0c1d, 0x081d, 0x0a2b, 0x100f, 0x0a02, 0x0c03},
-    {0x0a2a, 0x0a3e, 0x2000, 0x1027, 0x1c08, 0x0c04},
-    {0x0a01, 0x1212, 0x0a01, 0x1000, 0x062d, 0xffff},
-    {0x1e22, 0x1231, 0x0a01, 0x1018, 0x1c1c, 0x0c03},
-    {0x0a01, 0x060b, 0x1030, 0x0a28, 0x2549, 0x0624},
-    {0x1014, 0x0a2c, 0x0415, 0x1642, 0x1e1b, 0x0c03},
-    {0x0628, 0x1a0f, 0x100b, 0x2017, 0x0c00, 0xffff},
-    {0x0a01, 0x1015, 0x1647, 0x1e0f, 0x0e39, 0x0e36},
-    {0x0a01, 0x1017, 0x1620, 0x0e19, 0x0a31, 0x0c38},
-    {0x0c1d, 0x081d, 0x0c00, 0x1022, 0x1c12, 0x020b},
-    {0x1029, 0x1404, 0x102f, 0x1006, 0x1e28, 0x1c1c},
-    {0x1029, 0x0e20, 0x1028, 0x1c16, 0x1e29, 0x0c03},
-    {0x1e0f, 0x100b, 0x0e2f, 0x0638, 0x100c, 0xffff},
-    {0x0a29, 0x1408, 0x102f, 0x061e, 0x102c, 0xffff},
-    {0x1023, 0x100b, 0x081d, 0x062d, 0x1037, 0x0a14},
-    {0x0a29, 0x1022, 0x1408, 0x102f, 0x161e, 0x1029},
-    {0x0601, 0x102c, 0x0a01, 0x1015, 0x0e39, 0x0e36},
-    {0x1020, 0x020b, 0x103f, 0x1c12, 0x0c04, 0xffff},
-    {0x1018, 0x0a02, 0x103a, 0x0446, 0x020e, 0x0c03},
-    {0x1e10, 0x020b, 0x1e0a, 0x100b, 0x063a, 0xffff},
-    {0x0a02, 0x1212, 0x1e0f, 0x100b, 0x0638, 0x0c03},
-    {0x1e22, 0x1000, 0x161b, 0x103f, 0x1e0f, 0x0c03},
-    {0x0a29, 0x0e1e, 0x1025, 0x1e26, 0x0c00, 0xffff},
-    {0x0a01, 0x0e1e, 0x1236, 0x102f, 0x120b, 0x0c04},
-    {0x2805, 0x1e0f, 0x0a1b, 0x100b, 0x1020, 0x063b},
-    {0x0a01, 0x101f, 0x0a3e, 0x1037, 0x1020, 0x0628},
-    {0x1026, 0x0a31, 0x1e29, 0x1c1c, 0x0a01, 0x1212},
-    {0x0c0a, 0x0c00, 0x1029, 0x101c, 0x1e0f, 0x0c23},
-    {0x0a28, 0x020e, 0x100f, 0x1039, 0x142a, 0x0c04},
-    {0x0a28, 0x020e, 0x100f, 0x0620, 0x102f, 0x043c},
-    {0x0c39, 0x0c39, 0x0c00, 0x0a29, 0x2017, 0x0c39},
-    {0x265c, 0x100b, 0x1020, 0x1230, 0x1e05, 0x100c},
+    {EC_WORD_I_AM, EC_WORD_LOST, EC_WORD_I, EC_WORD_NEED, EC_WORD_A, EC_MOVE2(HELPING_HAND)},
+    {EC_WORD_I_VE, EC_WORD_NO, EC_WORD_SENSE, EC_WORD_OF, EC_WORD_WHERE, EC_WORD_I_AM},
+    {EC_WORD_WHAT, EC_WORD_SHOULD, EC_WORD_I, EC_WORD_DO, EC_WORD_NOW, EC_WORD_QUES},
+    {EC_WORD_THIS, EC_WORD_IS, EC_WORD_TOO, EC_WORD_EXCITING, EC_WORD_FOR, EC_WORD_ME},
+    {EC_WORD_DID, EC_WORD_YOU, EC_WORD_MAKE, EC_WORD_A, EC_WORD_MISTAKE, EC_WORD_QUES},
+    {EC_WORD_IT_S, EC_WORD_MEAN, EC_WORD_AND, EC_WORD_AWFUL, EC_WORD_IN, EC_WORD_HERE},
+    {EC_WORD_I_AM, EC_WORD_SO, EC_WORD_TIRED, EC_WORD_OF, EC_WORD_THIS, EC_WORD_PLACE},
+    {EC_WORD_I, EC_WORD_QUITE, EC_WORD_ENJOY, EC_WORD_THIS, EC_WORD_CHALLENGE, 0xFFFF},
+    {EC_WORD_LOOK, EC_WORD_AT, EC_WORD_HOW, EC_WORD_I, EC_MOVE2(TACKLE), EC_WORD_THIS},
+    {EC_WORD_READY, EC_WORD_TO, EC_WORD_GIVE_UP, EC_WORD_YET, EC_WORD_QUES, 0xFFFF},
+    {EC_WORD_OH, EC_WORD_NO, EC_WORD_WHO, EC_WORD_ARE, EC_WORD_YOU, EC_WORD_QUES},
+    {EC_WORD_I_VE, EC_WORD_BEEN, EC_WORD_WANDERING, EC_WORD_ABOUT, EC_WORD_FOREVER, EC_WORD_ELLIPSIS},
+    {EC_WORD_I, EC_WORD_THINK, EC_WORD_I, EC_WORD_WILL, EC_WORD_GIVE_UP, 0xFFFF},
+    {EC_WORD_WHAT, EC_WORD_SHOULD, EC_WORD_I, EC_WORD_DO, EC_WORD_NEXT, EC_WORD_QUES},
+    {EC_WORD_I, EC_WORD_CAN_WIN, EC_WORD_WITH, EC_WORD_MY, EC_MOVE(SHEER_COLD), EC_WORD_GENIUS},
+    {EC_WORD_WON_T, EC_WORD_SOMEONE, EC_WORD_COOL, EC_WORD_SHOW, EC_WORD_UP, EC_WORD_QUES},
+    {EC_WORD_BATTLE, EC_WORD_GAME, EC_WORD_IS, EC_WORD_AWESOME, EC_WORD_EXCL, 0xFFFF},
+    {EC_WORD_I, EC_WORD_CAN_T, EC_WORD_TAKE, EC_WORD_THIS, EC_WORD_ANY, EC_WORD_MORE},
+    {EC_WORD_I, EC_WORD_DON_T, EC_WORD_KNOW, EC_WORD_IF, EC_WORD_IT_S, EC_WORD_OKAY},
+    {EC_WORD_OH, EC_WORD_NO, EC_WORD_EXCL, EC_WORD_NOT, EC_WORD_ANOTHER, EC_WORD_TRAINER},
+    {EC_WORD_IT, EC_WORD_HAS, EC_WORD_TO, EC_WORD_BE, EC_WORD_LEFT, EC_WORD_NEXT},
+    {EC_WORD_IT, EC_WORD_MUST_BE, EC_WORD_OVER, EC_WORD_SOON, EC_WORD_RIGHT, EC_WORD_QUES},
+    {EC_WORD_THIS, EC_WORD_IS, EC_WORD_TOTALLY, EC_WORD_EASY, EC_WORD_ISN_T_IT_QUES, 0xFFFF},
+    {EC_WORD_I_AM, EC_WORD_GOING, EC_WORD_TO, EC_WORD_POWER, EC_WORD_ON, 0xFFFF},
+    {EC_WORD_THERE, EC_WORD_IS, EC_WORD_NO, EC_WORD_GIVE_UP, EC_WORD_IN, EC_WORD_ME},
+    {EC_WORD_I_AM, EC_WORD_NOT, EC_WORD_GOING, EC_WORD_TO, EC_WORD_MAKE, EC_WORD_IT},
+    {EC_WORD_GO, EC_WORD_ON, EC_WORD_I, EC_WORD_CAN_T, EC_WORD_ANY, EC_WORD_MORE},
+    {EC_WORD_A, EC_WORD_TRAINER, EC_WORD_AFTER, EC_WORD_ANOTHER, EC_WORD_ELLIPSIS, 0xFFFF},
+    {EC_WORD_DO, EC_WORD_YOU, EC_WORD_LIKE, EC_WORD_STEEL, EC_WORD_POKEMON, EC_WORD_QUES},
+    {EC_WORD_EVERY, EC_WORD_TRAINER, EC_WORD_HERE, EC_WORD_IS, EC_WORD_TOO_WEAK, 0xFFFF},
+    {EC_WORD_YOU, EC_WORD_THINK, EC_WORD_THIS, EC_WORD_IS, EC_WORD_EASY, EC_WORD_QUES},
+    {EC_WORD_WHAT, EC_WORD_WILL, EC_WORD_COME, EC_WORD_AFTER, EC_WORD_THIS, EC_WORD_QUES},
+    {EC_WORD_I_AM, EC_WORD_JUST, EC_WORD_SO, EC_WORD_CONFUSED, EC_WORD_EXCL, 0xFFFF},
+    {EC_WORD_I, EC_WORD_JUST, EC_WORD_WANT, EC_WORD_TO, EC_WORD_GO_HOME, EC_WORD_ELLIPSIS},
+    {EC_WORD_YEEHAW_EXCL, EC_WORD_THIS, EC_WORD_PLACE, EC_WORD_IS, EC_WORD_A, EC_WORD_PUSHOVER},
+    {EC_WORD_I, EC_WORD_HAVEN_T, EC_WORD_BEEN, EC_WORD_IN, EC_WORD_A, EC_WORD_BATTLE},
+    {EC_WORD_MAYBE, EC_WORD_IT_S, EC_WORD_RIGHT, EC_WORD_NEXT, EC_WORD_I, EC_WORD_THINK},
+    {EC_WORD_WAAAH, EC_WORD_EXCL, EC_WORD_IT, EC_WORD_WASN_T, EC_WORD_THIS, EC_WORD_WAY},
+    {EC_WORD_MY, EC_WORD_POKEMON, EC_WORD_ARE, EC_WORD_TOO, EC_WORD_TIRED, EC_WORD_ELLIPSIS},
+    {EC_WORD_MY, EC_WORD_POKEMON, EC_WORD_ARE, EC_WORD_STRONG, EC_WORD_TO, EC_WORD_POISON},
+    {EC_WORD_LALALA, EC_WORD_LALALA, EC_WORD_EXCL, EC_WORD_I_AM, EC_WORD_AWESOME, EC_WORD_LALALA},
+    {EC_MOVE2(TOXIC), EC_WORD_IS, EC_WORD_A, EC_WORD_TERRIBLE, EC_WORD_THING, EC_WORD_ISN_T_IT_QUES},
 };
 
-static const u8 gUnknown_086125DC[][4] =
+// Only the 5th array in this data is used by the code.
+static const u8 sPikeQueenWinStreakAppearances[][4] =
 {
-    {0x23, 0x46, 0x23, 0x01},
-    {0x04, 0x09, 0x05, 0x00},
-    {0x15, 0x2a, 0x15, 0x01},
-    {0x1c, 0x38, 0x1c, 0x01},
-    {0x15, 0x2a, 0x15, 0x01},
-    {0x1c, 0x8c, 0x38, 0x01},
-    {0x15, 0x46, 0x23, 0x00},
+    {35,  70, 35, 1},
+    { 4,   9,  5, 0},
+    {21,  42, 21, 1},
+    {28,  56, 28, 1},
+    {21,  42, 21, 1},
+    {28, 140, 56, 1},
+    {21,  70, 35, 0},
 };
 
 static void (* const sBattlePikeFunctions[])(void) =
 {
-    sub_81A705C,
-    sub_81A7140,
-    sub_81A7248,
-    sub_81A73B8,
-    sub_81A7070,
-    sub_81A73EC,
+    SetRoomType,
+    GetBattlePikeData,
+    SetBattlePikeData,
+    GetInFinalRoom,
+    SetupRoomEventObjects,
+    GetRoomType,
     sub_81A7400,
     sub_81A740C,
     sub_81A7418,
     nullsub_76,
     nullsub_124,
-    sub_81A7468,
-    sub_81A74CC,
-    sub_81A74E0,
-    sub_81A7508,
-    sub_81A7580,
-    sub_81A8090,
-    sub_81A80DC,
-    sub_81A825C,
-    sub_81A827C,
-    sub_81A84B4,
-    sub_81A84EC,
-    sub_81A863C,
-    sub_81A8658,
-    sub_81A869C,
-    sub_81A86C0,
-    sub_81A8794,
-    sub_81A87E8,
-    sub_81A8830
+    GetRoomInflictedStatus,
+    GetRoomInflictedStatusMon,
+    HealOneOrTwoMons,
+    BufferNPCMessage,
+    StatusInflictionScreenFade,
+    GetInBattlePike,
+    SetHintedRoom,
+    GetHintedRoomIndex,
+    GetRoomTypeHint,
+    ClearPikeTrainerIds,
+    BufferRecordMixingTrainerMessage,
+    GetCurrentRoomPikeQueenFightType,
+    HealSomeMonsBeforePikeQueen,
+    SetHealingRoomsDisabled,
+    CanAnyPartyMonsBeHealed,
+    BackupMonHeldItems,
+    RestoreMonHeldItems,
+    InitPikeChallenge
 };
 
-static const u8 gUnknown_0861266C[] = {3, 3, 1, 0, 0, 2, 2, 1, 4};
+static const u8 sRoomTypeHints[] = {
+    3, // PIKE_ROOM_SINGLE_BATTLE
+    3, // PIKE_ROOM_HEAL_FULL
+    1, // PIKE_ROOM_NPC
+    0, // PIKE_ROOM_STATUS
+    0, // PIKE_ROOM_HEAL_PART
+    2, // PIKE_ROOM_WILD_MONS
+    2, // PIKE_ROOM_HARD_BATTLE
+    1, // PIKE_ROOM_DOUBLE_BATTLE
+    4, // PIKE_ROOM_BRAIN
+};
 
-static const u8 gUnknown_08612675[][3] =
+static const u8 sNumMonsToHealBeforePikeQueen[][3] =
 {
     {2, 1, 0},
     {2, 0, 1},
@@ -531,9 +544,9 @@ static const u8 gUnknown_08612675[][3] =
     {0, 1, 2},
 };
 
-static bool8 (* const gUnknown_08612688[])(struct Task *) =
+static bool8 (* const sStatusInflictionScreenFadeFuncs[])(struct Task *) =
 {
-    sub_81A7D8C, sub_81A7DE8
+    StatusInflictionFadeOut, StatusInflictionFadeIn
 };
 
 static const u32 gUnknown_08612690[] = {0x400, 0x800};
@@ -544,78 +557,78 @@ void CallBattlePikeFunction(void)
     sBattlePikeFunctions[gSpecialVar_0x8004]();
 }
 
-static void sub_81A705C(void)
+static void SetRoomType(void)
 {
     u8 roomType = GetNextRoomType();
     sRoomType = roomType;
 }
 
-static void sub_81A7070(void)
+static void SetupRoomEventObjects(void)
 {
-    bool32 setPerson1, setPerson2;
-    u32 person1;
-    u16 person2;
+    bool32 setObjGfx1, setObjGfx2;
+    u32 objGfx1;
+    u16 objGfx2;
 
     VarSet(VAR_OBJ_GFX_ID_0, EVENT_OBJ_GFX_LINK_RECEPTIONIST);
     VarSet(VAR_OBJ_GFX_ID_1, EVENT_OBJ_GFX_DUSCLOPS);
-    setPerson1 = TRUE;
-    setPerson2 = FALSE;
-    person1 = 0;
-    person2 = 0;
+    setObjGfx1 = TRUE;
+    setObjGfx2 = FALSE;
+    objGfx1 = 0;
+    objGfx2 = 0;
 
     switch (sRoomType)
     {
     case PIKE_ROOM_SINGLE_BATTLE:
         PrepareOneTrainer(FALSE);
-        setPerson1 = FALSE;
+        setObjGfx1 = FALSE;
         break;
     case PIKE_ROOM_HEAL_FULL:
-        person1 = EVENT_OBJ_GFX_LINK_RECEPTIONIST;
+        objGfx1 = EVENT_OBJ_GFX_LINK_RECEPTIONIST;
         break;
     case PIKE_ROOM_NPC:
-        person1 = (u8)(sub_81A7B58());
+        objGfx1 = (u8)(GetNPCRoomGraphicsId());
         break;
     case PIKE_ROOM_STATUS:
-        person1 = EVENT_OBJ_GFX_GENTLEMAN;
+        objGfx1 = EVENT_OBJ_GFX_GENTLEMAN;
         if (sStatusMon == PIKE_STATUS_DUSCLOPS)
-            person2 = EVENT_OBJ_GFX_DUSCLOPS;
+            objGfx2 = EVENT_OBJ_GFX_DUSCLOPS;
         else
-            person2 = EVENT_OBJ_GFX_KIRLIA;
-        setPerson2 = TRUE;
+            objGfx2 = EVENT_OBJ_GFX_KIRLIA;
+        setObjGfx2 = TRUE;
         break;
     case PIKE_ROOM_HEAL_PART:
-        person1 = EVENT_OBJ_GFX_GENTLEMAN;
+        objGfx1 = EVENT_OBJ_GFX_GENTLEMAN;
         break;
     case PIKE_ROOM_WILD_MONS:
-        setPerson1 = FALSE;
+        setObjGfx1 = FALSE;
         break;
     case PIKE_ROOM_HARD_BATTLE:
         PrepareOneTrainer(TRUE);
-        person2 = EVENT_OBJ_GFX_LINK_RECEPTIONIST;
-        setPerson1 = FALSE;
-        setPerson2 = TRUE;
+        objGfx2 = EVENT_OBJ_GFX_LINK_RECEPTIONIST;
+        setObjGfx1 = FALSE;
+        setObjGfx2 = TRUE;
         break;
     case PIKE_ROOM_DOUBLE_BATTLE:
         PrepareTwoTrainers();
-        setPerson1 = FALSE;
+        setObjGfx1 = FALSE;
         break;
     case PIKE_ROOM_BRAIN:
         SetFrontierBrainEventObjGfx(FRONTIER_FACILITY_PIKE);
-        person2 = EVENT_OBJ_GFX_LINK_RECEPTIONIST;
-        setPerson1 = FALSE;
-        setPerson2 = TRUE;
+        objGfx2 = EVENT_OBJ_GFX_LINK_RECEPTIONIST;
+        setObjGfx1 = FALSE;
+        setObjGfx2 = TRUE;
         break;
     default:
         return;
     }
 
-    if (setPerson1 == TRUE)
-        VarSet(VAR_OBJ_GFX_ID_0, person1);
-    if (setPerson2 == TRUE)
-        VarSet(VAR_OBJ_GFX_ID_1, person2);
+    if (setObjGfx1 == TRUE)
+        VarSet(VAR_OBJ_GFX_ID_0, objGfx1);
+    if (setObjGfx2 == TRUE)
+        VarSet(VAR_OBJ_GFX_ID_1, objGfx2);
 }
 
-static void sub_81A7140(void)
+static void GetBattlePikeData(void)
 {
     u32 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
 
@@ -642,7 +655,7 @@ static void sub_81A7140(void)
     }
 }
 
-static void sub_81A7248(void)
+static void SetBattlePikeData(void)
 {
     u32 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
 
@@ -682,15 +695,15 @@ static void sub_81A7248(void)
     }
 }
 
-static void sub_81A73B8(void)
+static void GetInFinalRoom(void)
 {
-    if (gSaveBlock2Ptr->frontier.curChallengeBattleNum >= 15)
+    if (gSaveBlock2Ptr->frontier.curChallengeBattleNum > 14)
         gSpecialVar_Result = TRUE;
     else
         gSpecialVar_Result = FALSE;
 }
 
-static void sub_81A73EC(void)
+static void GetRoomType(void)
 {
     gSpecialVar_Result = sRoomType;
 }
@@ -724,7 +737,7 @@ static void nullsub_124(void)
 
 }
 
-static void sub_81A7468(void)
+static void GetRoomInflictedStatus(void)
 {
     switch (sStatusFlags)
     {
@@ -746,35 +759,35 @@ static void sub_81A7468(void)
     }
 }
 
-static void sub_81A74CC(void)
+static void GetRoomInflictedStatusMon(void)
 {
     gSpecialVar_Result = sStatusMon;
 }
 
-static void sub_81A74E0(void)
+static void HealOneOrTwoMons(void)
 {
     u16 toHeal = (Random() % 2) + 1;
     TryHealMons(toHeal);
     gSpecialVar_Result = toHeal;
 }
 
-static void sub_81A7508(void)
+static void BufferNPCMessage(void)
 {
-    s32 id;
+    int speechId;
 
     if (gSaveBlock2Ptr->frontier.curChallengeBattleNum <= 4)
-        id = gUnknown_0861231C[sUnknown_03001294].unk2;
+        speechId = sNPCTable[sNpcId].speechId1;
     else if (gSaveBlock2Ptr->frontier.curChallengeBattleNum <= 10)
-        id = gUnknown_0861231C[sUnknown_03001294].unk3;
+        speechId = sNPCTable[sNpcId].speechId2;
     else
-        id = gUnknown_0861231C[sUnknown_03001294].unk4;
+        speechId = sNPCTable[sNpcId].speechId3;
 
-    FrontierSpeechToString(gUnknown_086123E4[id]);
+    FrontierSpeechToString(sNPCSpeeches[speechId]);
 }
 
-static void sub_81A7580(void)
+static void StatusInflictionScreenFade(void)
 {
-    CreateTask(sub_81A7EE4, 2);
+    CreateTask(Task_DoStatusInflictionScreenFade, 2);
 }
 
 static void HealMon(struct Pokemon *mon)
@@ -1013,81 +1026,88 @@ static bool8 AtLeastOneHealthyMon(void)
 
 static u8 GetNextRoomType(void)
 {
-    u8 sp[8];
+    u8 roomTypesAvailability[8];
     u8 i;
-    u8 ret;
-    u8 var;
-    u8 count;
-    u8 *allocated;
+    u8 nextRoomType;
+    u8 roomTypeGroup;
+    u8 numRoomCandidates;
+    u8 *roomCandidates;
     u8 id;
 
-    if (gSaveBlock2Ptr->frontier.field_E10_2 == PIKE_ROOM_BRAIN)
-        return gSaveBlock2Ptr->frontier.field_E10_2;
-    if (gSpecialVar_0x8007 == gSaveBlock2Ptr->frontier.field_E10_1)
+    if (gSaveBlock2Ptr->frontier.pikeHintedRoomType == PIKE_ROOM_BRAIN)
+        return gSaveBlock2Ptr->frontier.pikeHintedRoomType;
+
+    // Check if the player walked into the same room that the lady gave a hint about.
+    if (gSpecialVar_0x8007 == gSaveBlock2Ptr->frontier.pikeHintedRoomIndex)
     {
-        if (gSaveBlock2Ptr->frontier.field_E10_2 == PIKE_ROOM_STATUS)
+        if (gSaveBlock2Ptr->frontier.pikeHintedRoomType == PIKE_ROOM_STATUS)
             TryInflictRandomStatus();
-        return gSaveBlock2Ptr->frontier.field_E10_2;
+        return gSaveBlock2Ptr->frontier.pikeHintedRoomType;
     }
 
     for (i = 0; i < 8; i++)
-        sp[i] = 0;
+        roomTypesAvailability[i] = 0;
 
-    count = 8;
-    var = gUnknown_0861266C[gSaveBlock2Ptr->frontier.field_E10_2];
+    numRoomCandidates = 8;
+
+    // The room types associated with the lady's hint cannot be in the other two rooms.
+    roomTypeGroup = sRoomTypeHints[gSaveBlock2Ptr->frontier.pikeHintedRoomType];
     for (i = 0; i < 8; i++)
     {
-        if (gUnknown_0861266C[i] == var)
+        if (sRoomTypeHints[i] == roomTypeGroup)
         {
-            sp[i] = 1;
-            count--;
+            roomTypesAvailability[i] = 1;
+            numRoomCandidates--;
         }
     }
 
-    if (sp[7] != 1 && !AtLeastTwoAliveMons())
+    // Remove room type candidates that would have no effect on the player's party.
+    if (roomTypesAvailability[PIKE_ROOM_DOUBLE_BATTLE] != 1 && !AtLeastTwoAliveMons())
     {
-        sp[7] = 1;
-        count--;
+        roomTypesAvailability[PIKE_ROOM_DOUBLE_BATTLE] = 1;
+        numRoomCandidates--;
     }
-    if (sp[3] != 1 && !AtLeastOneHealthyMon())
+    if (roomTypesAvailability[PIKE_ROOM_STATUS] != 1 && !AtLeastOneHealthyMon())
     {
-        sp[3] = 1;
-        count--;
+        roomTypesAvailability[PIKE_ROOM_STATUS] = 1;
+        numRoomCandidates--;
     }
-    if (gSaveBlock2Ptr->frontier.field_E10_3)
+
+    // Remove healing room type candidates if healing rooms are disabled.
+    if (gSaveBlock2Ptr->frontier.pikeHealingRoomsDisabled)
     {
-        if (sp[1] != 1)
+        if (roomTypesAvailability[PIKE_ROOM_HEAL_FULL] != 1)
         {
-            sp[1] = 1;
-            count--;
+            roomTypesAvailability[PIKE_ROOM_HEAL_FULL] = 1;
+            numRoomCandidates--;
         }
-        if (sp[4] != 1)
+        if (roomTypesAvailability[PIKE_ROOM_HEAL_PART] != 1)
         {
-            sp[4] = 1;
-            count--;
+            roomTypesAvailability[PIKE_ROOM_HEAL_PART] = 1;
+            numRoomCandidates--;
         }
     }
 
-    allocated = AllocZeroed(count);
+    roomCandidates = AllocZeroed(numRoomCandidates);
     id = 0;
     for (i = 0; i < 8; i++)
     {
-        if (sp[i] == 0)
-            allocated[id++] = i;
+        if (roomTypesAvailability[i] == 0)
+            roomCandidates[id++] = i;
     }
 
-    ret = allocated[Random() % count];
-    free(allocated);
-    if (ret == PIKE_ROOM_STATUS)
+    nextRoomType = roomCandidates[Random() % numRoomCandidates];
+    free(roomCandidates);
+    if (nextRoomType == PIKE_ROOM_STATUS)
         TryInflictRandomStatus();
 
-    return ret;
+    return nextRoomType;
 }
 
-static u16 sub_81A7B58(void)
+static u16 GetNPCRoomGraphicsId(void)
 {
-    sUnknown_03001294 = Random() % 25;
-    return gUnknown_0861231C[sUnknown_03001294].unk0;
+    sNpcId = Random() % ARRAY_COUNT(sNPCTable);
+    return sNPCTable[sNpcId].graphicsId;
 }
 
 static u8 sub_81A7B84(void)
@@ -1162,12 +1182,12 @@ u8 GetBattlePikeWildMonHeaderId(void)
     return headerId;
 }
 
-static void sub_81A7D54(u8 taskId)
+static void DoStatusInflictionScreenFade(u8 taskId)
 {
-    while (gUnknown_08612688[gTasks[taskId].data[0]](&gTasks[taskId]));
+    while (sStatusInflictionScreenFadeFuncs[gTasks[taskId].data[0]](&gTasks[taskId]));
 }
 
-static bool8 sub_81A7D8C(struct Task *task)
+static bool8 StatusInflictionFadeOut(struct Task *task)
 {
     if (task->data[6] == 0 || --task->data[6] == 0)
     {
@@ -1186,7 +1206,7 @@ static bool8 sub_81A7D8C(struct Task *task)
     return FALSE;
 }
 
-static bool8 sub_81A7DE8(struct Task *task)
+static bool8 StatusInflictionFadeIn(struct Task *task)
 {
     if (task->data[6] == 0 || --task->data[6] == 0)
     {
@@ -1201,7 +1221,7 @@ static bool8 sub_81A7DE8(struct Task *task)
     {
         if (--task->data[3] == 0)
         {
-            DestroyTask(FindTaskIdByFunc(sub_81A7D54));
+            DestroyTask(FindTaskIdByFunc(DoStatusInflictionScreenFade));
         }
         else
         {
@@ -1212,36 +1232,36 @@ static bool8 sub_81A7DE8(struct Task *task)
     return FALSE;
 }
 
-static void sub_81A7E60(s16 a0, s16 a1, s16 a2, s16 a3, s16 a4)
+static void StartStatusInflictionScreenFade(s16 fadeOutDelay, s16 fadeInDelay, s16 numFades, s16 fadeOutSpeed, s16 fadeInSpped)
 {
-    u8 taskId = CreateTask(sub_81A7D54, 3);
+    u8 taskId = CreateTask(DoStatusInflictionScreenFade, 3);
 
-    gTasks[taskId].data[1] = a0;
-    gTasks[taskId].data[2] = a1;
-    gTasks[taskId].data[3] = a2;
-    gTasks[taskId].data[4] = a3;
-    gTasks[taskId].data[5] = a4;
-    gTasks[taskId].data[6] = a0;
+    gTasks[taskId].data[1] = fadeOutDelay;
+    gTasks[taskId].data[2] = fadeInDelay;
+    gTasks[taskId].data[3] = numFades;
+    gTasks[taskId].data[4] = fadeOutSpeed;
+    gTasks[taskId].data[5] = fadeInSpped;
+    gTasks[taskId].data[6] = fadeOutDelay;
 }
 
-static bool8 sub_81A7EC4(void)
+static bool8 IsStatusInflictionScreenFadeTaskFinished(void)
 {
-    if (FindTaskIdByFunc(sub_81A7D54) == 0xFF)
+    if (FindTaskIdByFunc(DoStatusInflictionScreenFade) == 0xFF)
         return TRUE;
     else
         return FALSE;
 }
 
-static void sub_81A7EE4(u8 taskId)
+static void Task_DoStatusInflictionScreenFade(u8 taskId)
 {
     if (gTasks[taskId].data[0] == 0)
     {
         gTasks[taskId].data[0]++;
-        sub_81A7E60(0, 0, 3, 2, 2);
+        StartStatusInflictionScreenFade(0, 0, 3, 2, 2);
     }
     else
     {
-        if (sub_81A7EC4())
+        if (IsStatusInflictionScreenFadeTaskFinished())
         {
             EnableBothScriptContexts();
             DestroyTask(taskId);
@@ -1307,72 +1327,78 @@ static void TryHealMons(u8 healCount)
     }
 }
 
-static void sub_81A8090(void)
+static void GetInBattlePike(void)
 {
     gSpecialVar_Result = InBattlePike();
 }
 
 bool8 InBattlePike(void)
 {
-    return (gMapHeader.mapLayoutId == 351 || gMapHeader.mapLayoutId == 352
-            || gMapHeader.mapLayoutId == 358 || gMapHeader.mapLayoutId == 359);
+    return gMapHeader.mapLayoutId == LAYOUT_BATTLE_FRONTIER_BATTLE_PIKE_THREE_PATH_ROOM
+        || gMapHeader.mapLayoutId == LAYOUT_BATTLE_FRONTIER_BATTLE_PIKE_RANDOM_ROOM1
+        || gMapHeader.mapLayoutId == LAYOUT_BATTLE_FRONTIER_BATTLE_PIKE_RANDOM_ROOM3
+        || gMapHeader.mapLayoutId == LAYOUT_UNKNOWN_084693AC;
 }
 
-static void sub_81A80DC(void)
+static void SetHintedRoom(void)
 {
     u8 i, count, id;
-    u8 *allocated;
+    u8 *roomCandidates;
 
     gSpecialVar_Result = 0;
-    if (sub_81A8590(1))
+    if (GetPikeQueenFightType(1))
     {
         gSpecialVar_Result = 1;
-        gSaveBlock2Ptr->frontier.field_E10_1 = Random() % 6;
-        gSaveBlock2Ptr->frontier.field_E10_2 = PIKE_ROOM_BRAIN;
+        gSaveBlock2Ptr->frontier.pikeHintedRoomIndex = Random() % 6;
+        gSaveBlock2Ptr->frontier.pikeHintedRoomType = PIKE_ROOM_BRAIN;
     }
     else
     {
-        gSaveBlock2Ptr->frontier.field_E10_1 = Random() % 3;
-        if (gSaveBlock2Ptr->frontier.field_E10_3)
+        gSaveBlock2Ptr->frontier.pikeHintedRoomIndex = Random() % 3;
+        if (gSaveBlock2Ptr->frontier.pikeHealingRoomsDisabled)
             count = 6;
         else
             count = 8;
 
-        allocated = AllocZeroed(count);
+        roomCandidates = AllocZeroed(count);
         for (i = 0, id = 0; i < count; i++)
         {
-            if (gSaveBlock2Ptr->frontier.field_E10_3)
+            if (gSaveBlock2Ptr->frontier.pikeHealingRoomsDisabled)
             {
                 if (i != PIKE_ROOM_HEAL_FULL && i != PIKE_ROOM_HEAL_PART)
-                    allocated[id++] = i;
+                    roomCandidates[id++] = i;
             }
             else
             {
-                allocated[i] = i;
+                roomCandidates[i] = i;
             }
         }
-        gSaveBlock2Ptr->frontier.field_E10_2 = allocated[Random() % count];
-        free(allocated);
-        if (gSaveBlock2Ptr->frontier.field_E10_2 == PIKE_ROOM_STATUS && !AtLeastOneHealthyMon())
-            gSaveBlock2Ptr->frontier.field_E10_2 = PIKE_ROOM_NPC;
-        if (gSaveBlock2Ptr->frontier.field_E10_2 == PIKE_ROOM_DOUBLE_BATTLE && !AtLeastTwoAliveMons())
-            gSaveBlock2Ptr->frontier.field_E10_2 = PIKE_ROOM_NPC;
+
+        gSaveBlock2Ptr->frontier.pikeHintedRoomType = roomCandidates[Random() % count];
+        free(roomCandidates);
+        if (gSaveBlock2Ptr->frontier.pikeHintedRoomType == PIKE_ROOM_STATUS && !AtLeastOneHealthyMon())
+            gSaveBlock2Ptr->frontier.pikeHintedRoomType = PIKE_ROOM_NPC;
+        if (gSaveBlock2Ptr->frontier.pikeHintedRoomType == PIKE_ROOM_DOUBLE_BATTLE && !AtLeastTwoAliveMons())
+            gSaveBlock2Ptr->frontier.pikeHintedRoomType = PIKE_ROOM_NPC;
     }
 }
 
-static void sub_81A825C(void)
+static void GetHintedRoomIndex(void)
 {
-    gSpecialVar_Result = gSaveBlock2Ptr->frontier.field_E10_1;
+    // 0 = left room
+    // 1 = center room
+    // 2 = right room
+    gSpecialVar_Result = gSaveBlock2Ptr->frontier.pikeHintedRoomIndex;
 }
 
-static void sub_81A827C(void)
+static void GetRoomTypeHint(void)
 {
-    gSpecialVar_Result = gUnknown_0861266C[gSaveBlock2Ptr->frontier.field_E10_2];
+    gSpecialVar_Result = sRoomTypeHints[gSaveBlock2Ptr->frontier.pikeHintedRoomType];
 }
 
 static void PrepareOneTrainer(bool8 difficult)
 {
-    s32 i;
+    int i;
     u8 lvlMode;
     u8 battleNum;
     u16 challengeNum;
@@ -1390,7 +1416,7 @@ static void PrepareOneTrainer(bool8 difficult)
         trainerId = sub_8162548(challengeNum, battleNum);
         for (i = 0; i < gSaveBlock2Ptr->frontier.curChallengeBattleNum - 1; i++)
         {
-            if (gSaveBlock2Ptr->frontier.field_CB4[i] == trainerId)
+            if (gSaveBlock2Ptr->frontier.trainerIds[i] == trainerId)
                 break;
         }
     } while (i != gSaveBlock2Ptr->frontier.curChallengeBattleNum - 1);
@@ -1399,12 +1425,12 @@ static void PrepareOneTrainer(bool8 difficult)
     gFacilityTrainers = gBattleFrontierTrainers;
     SetBattleFacilityTrainerGfxId(gTrainerBattleOpponent_A, 0);
     if (gSaveBlock2Ptr->frontier.curChallengeBattleNum < 14)
-        gSaveBlock2Ptr->frontier.field_CB4[gSaveBlock2Ptr->frontier.curChallengeBattleNum - 1] = gTrainerBattleOpponent_A;
+        gSaveBlock2Ptr->frontier.trainerIds[gSaveBlock2Ptr->frontier.curChallengeBattleNum - 1] = gTrainerBattleOpponent_A;
 }
 
 static void PrepareTwoTrainers(void)
 {
-    s32 i;
+    int i;
     u16 trainerId;
     u8 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
     u16 challengeNum = gSaveBlock2Ptr->frontier.pikeWinStreaks[lvlMode] / 14;
@@ -1415,7 +1441,7 @@ static void PrepareTwoTrainers(void)
         trainerId = sub_8162548(challengeNum, 1);
         for (i = 0; i < gSaveBlock2Ptr->frontier.curChallengeBattleNum - 1; i++)
         {
-            if (gSaveBlock2Ptr->frontier.field_CB4[i] == trainerId)
+            if (gSaveBlock2Ptr->frontier.trainerIds[i] == trainerId)
                 break;
         }
     } while (i != gSaveBlock2Ptr->frontier.curChallengeBattleNum - 1);
@@ -1423,14 +1449,14 @@ static void PrepareTwoTrainers(void)
     gTrainerBattleOpponent_A = trainerId;
     SetBattleFacilityTrainerGfxId(gTrainerBattleOpponent_A, 0);
     if (gSaveBlock2Ptr->frontier.curChallengeBattleNum <= 14)
-        gSaveBlock2Ptr->frontier.field_CB4[gSaveBlock2Ptr->frontier.curChallengeBattleNum - 1] = gTrainerBattleOpponent_A;
+        gSaveBlock2Ptr->frontier.trainerIds[gSaveBlock2Ptr->frontier.curChallengeBattleNum - 1] = gTrainerBattleOpponent_A;
 
     do
     {
         trainerId = sub_8162548(challengeNum, 1);
         for (i = 0; i < gSaveBlock2Ptr->frontier.curChallengeBattleNum; i++)
         {
-            if (gSaveBlock2Ptr->frontier.field_CB4[i] == trainerId)
+            if (gSaveBlock2Ptr->frontier.trainerIds[i] == trainerId)
                 break;
         }
     } while (i != gSaveBlock2Ptr->frontier.curChallengeBattleNum);
@@ -1438,18 +1464,18 @@ static void PrepareTwoTrainers(void)
     gTrainerBattleOpponent_B = trainerId;
     SetBattleFacilityTrainerGfxId(gTrainerBattleOpponent_B, 1);
     if (gSaveBlock2Ptr->frontier.curChallengeBattleNum < 14)
-        gSaveBlock2Ptr->frontier.field_CB4[gSaveBlock2Ptr->frontier.curChallengeBattleNum - 2] = gTrainerBattleOpponent_B;
+        gSaveBlock2Ptr->frontier.trainerIds[gSaveBlock2Ptr->frontier.curChallengeBattleNum - 2] = gTrainerBattleOpponent_B;
 }
 
-static void sub_81A84B4(void)
+static void ClearPikeTrainerIds(void)
 {
     u8 i;
 
     for (i = 0; i < 14; i++)
-        gSaveBlock2Ptr->frontier.field_CB4[i] = 0xFFFF;
+        gSaveBlock2Ptr->frontier.trainerIds[i] = 0xFFFF;
 }
 
-static void sub_81A84EC(void)
+static void BufferRecordMixingTrainerMessage(void)
 {
     if (gSpecialVar_0x8005 == 0)
     {
@@ -1482,31 +1508,31 @@ static bool8 AtLeastTwoAliveMons(void)
         return TRUE;
 }
 
-static u8 sub_81A8590(u8 arg0)
+static u8 GetPikeQueenFightType(u8 nextRoom)
 {
-    u8 symbolsCount;
+    u8 numPikeSymbols;
 
     u8 var = 5;
     u8 ret = 0;
     u8 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
-    u16 wins = gSaveBlock2Ptr->frontier.pikeWinStreaks[lvlMode];
-    wins += arg0;
-    symbolsCount = GetPlayerSymbolCountForFacility(FRONTIER_FACILITY_PIKE);
+    u16 winStreak = gSaveBlock2Ptr->frontier.pikeWinStreaks[lvlMode];
+    winStreak += nextRoom;
+    numPikeSymbols = GetPlayerSymbolCountForFacility(FRONTIER_FACILITY_PIKE);
 
-    switch (symbolsCount)
+    switch (numPikeSymbols)
     {
     case 0:
     case 1:
-        if (wins == gUnknown_086125DC[var][symbolsCount] - gUnknown_086125DC[var][3])
-            ret = symbolsCount + 1;
+        if (winStreak == sPikeQueenWinStreakAppearances[var][numPikeSymbols] - sPikeQueenWinStreakAppearances[var][3])
+            ret = numPikeSymbols + 1;
         break;
     case 2:
     default:
-        if (wins == gUnknown_086125DC[var][0] - gUnknown_086125DC[var][3])
+        if (winStreak == sPikeQueenWinStreakAppearances[var][0] - sPikeQueenWinStreakAppearances[var][3])
             ret = 3;
-        else if (wins == gUnknown_086125DC[var][1] - gUnknown_086125DC[var][3]
-                 || (wins > gUnknown_086125DC[var][1]
-                     && (wins - gUnknown_086125DC[var][1] + gUnknown_086125DC[var][3]) % gUnknown_086125DC[var][2] == 0))
+        else if (winStreak == sPikeQueenWinStreakAppearances[var][1] - sPikeQueenWinStreakAppearances[var][3]
+                 || (winStreak > sPikeQueenWinStreakAppearances[var][1]
+                     && (winStreak - sPikeQueenWinStreakAppearances[var][1] + sPikeQueenWinStreakAppearances[var][3]) % sPikeQueenWinStreakAppearances[var][2] == 0))
             ret = 4;
         break;
     }
@@ -1514,25 +1540,25 @@ static u8 sub_81A8590(u8 arg0)
     return ret;
 }
 
-static void sub_81A863C(void)
+static void GetCurrentRoomPikeQueenFightType(void)
 {
-    gSpecialVar_Result = sub_81A8590(0);
+    gSpecialVar_Result = GetPikeQueenFightType(0);
 }
 
-static void sub_81A8658(void)
+static void HealSomeMonsBeforePikeQueen(void)
 {
-    u8 toHealCount = gUnknown_08612675[gSaveBlock2Ptr->frontier.field_E10_1][gSpecialVar_0x8007];
+    u8 toHealCount = sNumMonsToHealBeforePikeQueen[gSaveBlock2Ptr->frontier.pikeHintedRoomIndex][gSpecialVar_0x8007];
 
     TryHealMons(toHealCount);
     gSpecialVar_Result = toHealCount;
 }
 
-static void sub_81A869C(void)
+static void SetHealingRoomsDisabled(void)
 {
-    gSaveBlock2Ptr->frontier.field_E10_3 = gSpecialVar_0x8005;
+    gSaveBlock2Ptr->frontier.pikeHealingRoomsDisabled = gSpecialVar_0x8005;
 }
 
-static void sub_81A86C0(void)
+static void CanAnyPartyMonsBeHealed(void)
 {
     u8 i, j;
 
@@ -1571,19 +1597,19 @@ static void sub_81A86C0(void)
     }
 }
 
-static void sub_81A8794(void)
+static void BackupMonHeldItems(void)
 {
     u8 i;
 
     for (i = 0; i < 3; i++)
     {
-        s32 heldItem = GetMonData(&gSaveBlock1Ptr->playerParty[gSaveBlock2Ptr->frontier.selectedPartyMons[i] - 1],
+        int heldItem = GetMonData(&gSaveBlock1Ptr->playerParty[gSaveBlock2Ptr->frontier.selectedPartyMons[i] - 1],
                                   MON_DATA_HELD_ITEM);
-        gSaveBlock2Ptr->frontier.field_E12[i] = heldItem;
+        gSaveBlock2Ptr->frontier.pikeHeldItemsBackup[i] = heldItem;
     }
 }
 
-static void sub_81A87E8(void)
+static void RestoreMonHeldItems(void)
 {
     u8 i;
 
@@ -1591,11 +1617,11 @@ static void sub_81A87E8(void)
     {
         SetMonData(&gPlayerParty[gSaveBlock2Ptr->frontier.selectedPartyMons[i] - 1],
                    MON_DATA_HELD_ITEM,
-                   &gSaveBlock2Ptr->frontier.field_E12[i]);
+                   &gSaveBlock2Ptr->frontier.pikeHeldItemsBackup[i]);
     }
 }
 
-static void sub_81A8830(void)
+static void InitPikeChallenge(void)
 {
     u8 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
 

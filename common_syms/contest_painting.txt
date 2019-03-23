@@ -1,0 +1,4 @@
+gUnknown_03006190
+gUnknown_030061A0
+gUnknown_030061C0
+gContestPaintingMonPalette

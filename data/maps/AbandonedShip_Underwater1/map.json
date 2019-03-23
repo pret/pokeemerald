@@ -1,0 +1,35 @@
+{
+  "id": "MAP_ABANDONED_SHIP_UNDERWATER1",
+  "name": "AbandonedShip_Underwater1",
+  "layout": "LAYOUT_ABANDONED_SHIP_UNDERWATER1",
+  "music": "MUS_DEEPDEEP",
+  "region_map_section": "MAPSEC_ABANDONED_SHIP",
+  "requires_flash": false,
+  "weather": "WEATHER_BUBBLES",
+  "map_type": "MAP_TYPE_UNDERWATER",
+  "allow_bike": true,
+  "allow_escape_rope": false,
+  "allow_running": true,
+  "show_map_name": true,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+  "connections": null,
+  "object_events": [],
+  "warp_events": [
+    {
+      "x": 3,
+      "y": 7,
+      "elevation": 3,
+      "dest_map": "MAP_ABANDONED_SHIP_UNDERWATER2",
+      "dest_warp_id": 0
+    },
+    {
+      "x": 4,
+      "y": 7,
+      "elevation": 3,
+      "dest_map": "MAP_ABANDONED_SHIP_UNDERWATER2",
+      "dest_warp_id": 0
+    }
+  ],
+  "coord_events": [],
+  "bg_events": []
+}

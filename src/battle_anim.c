@@ -119,8 +119,8 @@ const struct OamData gUnknown_08524904 =
 {
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .shape = ST_OAM_SQUARE,
-    .size = 0,
+    .shape = SPRITE_SHAPE(8x8),
+    .size = SPRITE_SIZE(8x8),
     .priority = 2,
 };
 
@@ -129,8 +129,8 @@ const struct OamData gUnknown_0852490C =
 {
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .shape = ST_OAM_SQUARE,
-    .size = 1,
+    .shape = SPRITE_SHAPE(16x16),
+    .size = SPRITE_SIZE(16x16),
     .priority = 2,
 };
 
@@ -138,8 +138,8 @@ const struct OamData gUnknown_08524914 =
 {
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .shape = ST_OAM_SQUARE,
-    .size = 2,
+    .shape = SPRITE_SHAPE(32x32),
+    .size = SPRITE_SIZE(32x32),
     .priority = 2,
 };
 
@@ -147,8 +147,8 @@ const struct OamData gUnknown_0852491C =
 {
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .shape = ST_OAM_SQUARE,
-    .size = 3,
+    .shape = SPRITE_SHAPE(64x64),
+    .size = SPRITE_SIZE(64x64),
     .priority = 2,
 };
 
@@ -156,8 +156,8 @@ const struct OamData gUnknown_08524924 =
 {
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .shape = ST_OAM_H_RECTANGLE,
-    .size = 0,
+    .shape = SPRITE_SHAPE(16x8),
+    .size = SPRITE_SIZE(16x8),
     .priority = 2,
 };
 
@@ -165,8 +165,8 @@ const struct OamData gUnknown_0852492C =
 {
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .shape = ST_OAM_H_RECTANGLE,
-    .size = 1,
+    .shape = SPRITE_SHAPE(32x8),
+    .size = SPRITE_SIZE(32x8),
     .priority = 2,
 };
 
@@ -174,8 +174,8 @@ const struct OamData gUnknown_08524934 =
 {
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .shape = ST_OAM_H_RECTANGLE,
-    .size = 2,
+    .shape = SPRITE_SHAPE(32x16),
+    .size = SPRITE_SIZE(32x16),
     .priority = 2,
 };
 
@@ -183,8 +183,8 @@ const struct OamData gUnknown_0852493C =
 {
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .shape = ST_OAM_H_RECTANGLE,
-    .size = 3,
+    .shape = SPRITE_SHAPE(64x32),
+    .size = SPRITE_SIZE(64x32),
     .priority = 2,
 };
 
@@ -192,8 +192,8 @@ const struct OamData gUnknown_08524944 =
 {
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .shape = ST_OAM_V_RECTANGLE,
-    .size = 0,
+    .shape = SPRITE_SHAPE(8x16),
+    .size = SPRITE_SIZE(8x16),
     .priority = 2,
 };
 
@@ -201,8 +201,8 @@ const struct OamData gUnknown_0852494C =
 {
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .shape = ST_OAM_V_RECTANGLE,
-    .size = 1,
+    .shape = SPRITE_SHAPE(8x32),
+    .size = SPRITE_SIZE(8x32),
     .priority = 2,
 };
 
@@ -210,8 +210,8 @@ const struct OamData gUnknown_08524954 =
 {
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .shape = ST_OAM_V_RECTANGLE,
-    .size = 2,
+    .shape = SPRITE_SHAPE(16x32),
+    .size = SPRITE_SIZE(16x32),
     .priority = 2,
 };
 
@@ -219,8 +219,8 @@ const struct OamData gUnknown_0852495C =
 {
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .shape = ST_OAM_V_RECTANGLE,
-    .size = 3,
+    .shape = SPRITE_SHAPE(32x64),
+    .size = SPRITE_SIZE(32x64),
     .priority = 2,
 };
 
@@ -228,8 +228,8 @@ const struct OamData gUnknown_08524964 =
 {
     .affineMode = ST_OAM_AFFINE_NORMAL,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .shape = ST_OAM_SQUARE,
-    .size = 0,
+    .shape = SPRITE_SHAPE(8x8),
+    .size = SPRITE_SIZE(8x8),
     .priority = 2,
 };
 
@@ -237,8 +237,8 @@ const struct OamData gUnknown_0852496C =
 {
     .affineMode = ST_OAM_AFFINE_NORMAL,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .shape = ST_OAM_SQUARE,
-    .size = 1,
+    .shape = SPRITE_SHAPE(16x16),
+    .size = SPRITE_SIZE(16x16),
     .priority = 2,
 };
 
@@ -246,8 +246,8 @@ const struct OamData gUnknown_08524974 =
 {
     .affineMode = ST_OAM_AFFINE_NORMAL,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .shape = ST_OAM_SQUARE,
-    .size = 2,
+    .shape = SPRITE_SHAPE(32x32),
+    .size = SPRITE_SIZE(32x32),
     .priority = 2,
 };
 
@@ -255,8 +255,8 @@ const struct OamData gUnknown_0852497C =
 {
     .affineMode = ST_OAM_AFFINE_NORMAL,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .shape = ST_OAM_SQUARE,
-    .size = 3,
+    .shape = SPRITE_SHAPE(64x64),
+    .size = SPRITE_SIZE(64x64),
     .priority = 2,
 };
 
@@ -264,8 +264,8 @@ const struct OamData gUnknown_08524984 =
 {
     .affineMode = ST_OAM_AFFINE_NORMAL,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .shape = ST_OAM_H_RECTANGLE,
-    .size = 0,
+    .shape = SPRITE_SHAPE(16x8),
+    .size = SPRITE_SIZE(16x8),
     .priority = 2,
 };
 
@@ -273,8 +273,8 @@ const struct OamData gUnknown_0852498C =
 {
     .affineMode = ST_OAM_AFFINE_NORMAL,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .shape = ST_OAM_H_RECTANGLE,
-    .size = 1,
+    .shape = SPRITE_SHAPE(32x8),
+    .size = SPRITE_SIZE(32x8),
     .priority = 2,
 };
 
@@ -282,8 +282,8 @@ const struct OamData gUnknown_08524994 =
 {
     .affineMode = ST_OAM_AFFINE_NORMAL,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .shape = ST_OAM_H_RECTANGLE,
-    .size = 2,
+    .shape = SPRITE_SHAPE(32x16),
+    .size = SPRITE_SIZE(32x16),
     .priority = 2,
 };
 
@@ -291,8 +291,8 @@ const struct OamData gUnknown_0852499C =
 {
     .affineMode = ST_OAM_AFFINE_NORMAL,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .shape = ST_OAM_H_RECTANGLE,
-    .size = 3,
+    .shape = SPRITE_SHAPE(64x32),
+    .size = SPRITE_SIZE(64x32),
     .priority = 2,
 };
 
@@ -300,8 +300,8 @@ const struct OamData gUnknown_085249A4 =
 {
     .affineMode = ST_OAM_AFFINE_NORMAL,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .shape = ST_OAM_V_RECTANGLE,
-    .size = 0,
+    .shape = SPRITE_SHAPE(8x16),
+    .size = SPRITE_SIZE(8x16),
     .priority = 2,
 };
 
@@ -309,8 +309,8 @@ const struct OamData gUnknown_085249AC =
 {
     .affineMode = ST_OAM_AFFINE_NORMAL,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .shape = ST_OAM_V_RECTANGLE,
-    .size = 1,
+    .shape = SPRITE_SHAPE(8x32),
+    .size = SPRITE_SIZE(8x32),
     .priority = 2,
 };
 
@@ -318,8 +318,8 @@ const struct OamData gUnknown_085249B4 =
 {
     .affineMode = ST_OAM_AFFINE_NORMAL,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .shape = ST_OAM_V_RECTANGLE,
-    .size = 2,
+    .shape = SPRITE_SHAPE(16x32),
+    .size = SPRITE_SIZE(16x32),
     .priority = 2,
 };
 
@@ -327,8 +327,8 @@ const struct OamData gUnknown_085249BC =
 {
     .affineMode = ST_OAM_AFFINE_NORMAL,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .shape = ST_OAM_V_RECTANGLE,
-    .size = 3,
+    .shape = SPRITE_SHAPE(32x64),
+    .size = SPRITE_SIZE(32x64),
     .priority = 2,
 };
 
@@ -336,8 +336,8 @@ const struct OamData gUnknown_085249C4 =
 {
     .affineMode = ST_OAM_AFFINE_DOUBLE,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .shape = ST_OAM_SQUARE,
-    .size = 0,
+    .shape = SPRITE_SHAPE(8x8),
+    .size = SPRITE_SIZE(8x8),
     .priority = 2,
 };
 
@@ -345,8 +345,8 @@ const struct OamData gUnknown_085249CC =
 {
     .affineMode = ST_OAM_AFFINE_DOUBLE,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .shape = ST_OAM_SQUARE,
-    .size = 1,
+    .shape = SPRITE_SHAPE(16x16),
+    .size = SPRITE_SIZE(16x16),
     .priority = 2,
 };
 
@@ -354,8 +354,8 @@ const struct OamData gUnknown_085249D4 =
 {
     .affineMode = ST_OAM_AFFINE_DOUBLE,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .shape = ST_OAM_SQUARE,
-    .size = 2,
+    .shape = SPRITE_SHAPE(32x32),
+    .size = SPRITE_SIZE(32x32),
     .priority = 2,
 };
 
@@ -363,8 +363,8 @@ const struct OamData gUnknown_085249DC =
 {
     .affineMode = ST_OAM_AFFINE_DOUBLE,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .shape = ST_OAM_SQUARE,
-    .size = 3,
+    .shape = SPRITE_SHAPE(64x64),
+    .size = SPRITE_SIZE(64x64),
     .priority = 2,
 };
 
@@ -372,8 +372,8 @@ const struct OamData gUnknown_085249E4 =
 {
     .affineMode = ST_OAM_AFFINE_DOUBLE,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .shape = ST_OAM_H_RECTANGLE,
-    .size = 0,
+    .shape = SPRITE_SHAPE(16x8),
+    .size = SPRITE_SIZE(16x8),
     .priority = 2,
 };
 
@@ -381,8 +381,8 @@ const struct OamData gUnknown_085249EC =
 {
     .affineMode = ST_OAM_AFFINE_DOUBLE,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .shape = ST_OAM_H_RECTANGLE,
-    .size = 1,
+    .shape = SPRITE_SHAPE(32x8),
+    .size = SPRITE_SIZE(32x8),
     .priority = 2,
 };
 
@@ -390,8 +390,8 @@ const struct OamData gUnknown_085249F4 =
 {
     .affineMode = ST_OAM_AFFINE_DOUBLE,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .shape = ST_OAM_H_RECTANGLE,
-    .size = 2,
+    .shape = SPRITE_SHAPE(32x16),
+    .size = SPRITE_SIZE(32x16),
     .priority = 2,
 };
 
@@ -399,8 +399,8 @@ const struct OamData gUnknown_085249FC =
 {
     .affineMode = ST_OAM_AFFINE_DOUBLE,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .shape = ST_OAM_H_RECTANGLE,
-    .size = 3,
+    .shape = SPRITE_SHAPE(64x32),
+    .size = SPRITE_SIZE(64x32),
     .priority = 2,
 };
 
@@ -408,8 +408,8 @@ const struct OamData gUnknown_08524A04 =
 {
     .affineMode = ST_OAM_AFFINE_DOUBLE,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .shape = ST_OAM_V_RECTANGLE,
-    .size = 0,
+    .shape = SPRITE_SHAPE(8x16),
+    .size = SPRITE_SIZE(8x16),
     .priority = 2,
 };
 
@@ -417,8 +417,8 @@ const struct OamData gUnknown_08524A0C =
 {
     .affineMode = ST_OAM_AFFINE_DOUBLE,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .shape = ST_OAM_V_RECTANGLE,
-    .size = 1,
+    .shape = SPRITE_SHAPE(8x32),
+    .size = SPRITE_SIZE(8x32),
     .priority = 2,
 };
 
@@ -426,8 +426,8 @@ const struct OamData gUnknown_08524A14 =
 {
     .affineMode = ST_OAM_AFFINE_DOUBLE,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .shape = ST_OAM_V_RECTANGLE,
-    .size = 2,
+    .shape = SPRITE_SHAPE(16x32),
+    .size = SPRITE_SIZE(16x32),
     .priority = 2,
 };
 
@@ -435,8 +435,8 @@ const struct OamData gUnknown_08524A1C =
 {
     .affineMode = ST_OAM_AFFINE_DOUBLE,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .shape = ST_OAM_V_RECTANGLE,
-    .size = 3,
+    .shape = SPRITE_SHAPE(32x64),
+    .size = SPRITE_SIZE(32x64),
     .priority = 2,
 };
 
@@ -444,8 +444,8 @@ const struct OamData gUnknown_08524A24 =
 {
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_BLEND,
-    .shape = ST_OAM_SQUARE,
-    .size = 0,
+    .shape = SPRITE_SHAPE(8x8),
+    .size = SPRITE_SIZE(8x8),
     .priority = 2,
 };
 
@@ -453,8 +453,8 @@ const struct OamData gUnknown_08524A2C =
 {
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_BLEND,
-    .shape = ST_OAM_SQUARE,
-    .size = 1,
+    .shape = SPRITE_SHAPE(16x16),
+    .size = SPRITE_SIZE(16x16),
     .priority = 2,
 };
 
@@ -462,8 +462,8 @@ const struct OamData gUnknown_08524A34 =
 {
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_BLEND,
-    .shape = ST_OAM_SQUARE,
-    .size = 2,
+    .shape = SPRITE_SHAPE(32x32),
+    .size = SPRITE_SIZE(32x32),
     .priority = 2,
 };
 
@@ -471,8 +471,8 @@ const struct OamData gUnknown_08524A3C =
 {
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_BLEND,
-    .shape = ST_OAM_SQUARE,
-    .size = 3,
+    .shape = SPRITE_SHAPE(64x64),
+    .size = SPRITE_SIZE(64x64),
     .priority = 2,
 };
 
@@ -480,8 +480,8 @@ const struct OamData gUnknown_08524A44 =
 {
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_BLEND,
-    .shape = ST_OAM_H_RECTANGLE,
-    .size = 0,
+    .shape = SPRITE_SHAPE(16x8),
+    .size = SPRITE_SIZE(16x8),
     .priority = 2,
 };
 
@@ -489,8 +489,8 @@ const struct OamData gUnknown_08524A4C =
 {
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_BLEND,
-    .shape = ST_OAM_H_RECTANGLE,
-    .size = 1,
+    .shape = SPRITE_SHAPE(32x8),
+    .size = SPRITE_SIZE(32x8),
     .priority = 2,
 };
 
@@ -498,8 +498,8 @@ const struct OamData gUnknown_08524A54 =
 {
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_BLEND,
-    .shape = ST_OAM_H_RECTANGLE,
-    .size = 2,
+    .shape = SPRITE_SHAPE(32x16),
+    .size = SPRITE_SIZE(32x16),
     .priority = 2,
 };
 
@@ -507,8 +507,8 @@ const struct OamData gUnknown_08524A5C =
 {
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_BLEND,
-    .shape = ST_OAM_H_RECTANGLE,
-    .size = 3,
+    .shape = SPRITE_SHAPE(64x32),
+    .size = SPRITE_SIZE(64x32),
     .priority = 2,
 };
 
@@ -516,8 +516,8 @@ const struct OamData gUnknown_08524A64 =
 {
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_BLEND,
-    .shape = ST_OAM_V_RECTANGLE,
-    .size = 0,
+    .shape = SPRITE_SHAPE(8x16),
+    .size = SPRITE_SIZE(8x16),
     .priority = 2,
 };
 
@@ -525,8 +525,8 @@ const struct OamData gUnknown_08524A6C =
 {
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_BLEND,
-    .shape = ST_OAM_V_RECTANGLE,
-    .size = 1,
+    .shape = SPRITE_SHAPE(8x32),
+    .size = SPRITE_SIZE(8x32),
     .priority = 2,
 };
 
@@ -534,8 +534,8 @@ const struct OamData gUnknown_08524A74 =
 {
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_BLEND,
-    .shape = ST_OAM_V_RECTANGLE,
-    .size = 2,
+    .shape = SPRITE_SHAPE(16x32),
+    .size = SPRITE_SIZE(16x32),
     .priority = 2,
 };
 
@@ -543,8 +543,8 @@ const struct OamData gUnknown_08524A7C =
 {
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_BLEND,
-    .shape = ST_OAM_V_RECTANGLE,
-    .size = 3,
+    .shape = SPRITE_SHAPE(32x64),
+    .size = SPRITE_SIZE(32x64),
     .priority = 2,
 };
 
@@ -552,8 +552,8 @@ const struct OamData gUnknown_08524A84 =
 {
     .affineMode = ST_OAM_AFFINE_NORMAL,
     .objMode = ST_OAM_OBJ_BLEND,
-    .shape = ST_OAM_SQUARE,
-    .size = 0,
+    .shape = SPRITE_SHAPE(8x8),
+    .size = SPRITE_SIZE(8x8),
     .priority = 2,
 };
 
@@ -561,8 +561,8 @@ const struct OamData gUnknown_08524A8C =
 {
     .affineMode = ST_OAM_AFFINE_NORMAL,
     .objMode = ST_OAM_OBJ_BLEND,
-    .shape = ST_OAM_SQUARE,
-    .size = 1,
+    .shape = SPRITE_SHAPE(16x16),
+    .size = SPRITE_SIZE(16x16),
     .priority = 2,
 };
 
@@ -570,8 +570,8 @@ const struct OamData gUnknown_08524A94 =
 {
     .affineMode = ST_OAM_AFFINE_NORMAL,
     .objMode = ST_OAM_OBJ_BLEND,
-    .shape = ST_OAM_SQUARE,
-    .size = 2,
+    .shape = SPRITE_SHAPE(32x32),
+    .size = SPRITE_SIZE(32x32),
     .priority = 2,
 };
 
@@ -579,8 +579,8 @@ const struct OamData gUnknown_08524A9C =
 {
     .affineMode = ST_OAM_AFFINE_NORMAL,
     .objMode = ST_OAM_OBJ_BLEND,
-    .shape = ST_OAM_SQUARE,
-    .size = 3,
+    .shape = SPRITE_SHAPE(64x64),
+    .size = SPRITE_SIZE(64x64),
     .priority = 2,
 };
 
@@ -588,8 +588,8 @@ const struct OamData gUnknown_08524AA4 =
 {
     .affineMode = ST_OAM_AFFINE_NORMAL,
     .objMode = ST_OAM_OBJ_BLEND,
-    .shape = ST_OAM_H_RECTANGLE,
-    .size = 0,
+    .shape = SPRITE_SHAPE(16x8),
+    .size = SPRITE_SIZE(16x8),
     .priority = 2,
 };
 
@@ -597,8 +597,8 @@ const struct OamData gUnknown_08524AAC =
 {
     .affineMode = ST_OAM_AFFINE_NORMAL,
     .objMode = ST_OAM_OBJ_BLEND,
-    .shape = ST_OAM_H_RECTANGLE,
-    .size = 1,
+    .shape = SPRITE_SHAPE(32x8),
+    .size = SPRITE_SIZE(32x8),
     .priority = 2,
 };
 
@@ -606,8 +606,8 @@ const struct OamData gUnknown_08524AB4 =
 {
     .affineMode = ST_OAM_AFFINE_NORMAL,
     .objMode = ST_OAM_OBJ_BLEND,
-    .shape = ST_OAM_H_RECTANGLE,
-    .size = 2,
+    .shape = SPRITE_SHAPE(32x16),
+    .size = SPRITE_SIZE(32x16),
     .priority = 2,
 };
 
@@ -615,8 +615,8 @@ const struct OamData gUnknown_08524ABC =
 {
     .affineMode = ST_OAM_AFFINE_NORMAL,
     .objMode = ST_OAM_OBJ_BLEND,
-    .shape = ST_OAM_H_RECTANGLE,
-    .size = 3,
+    .shape = SPRITE_SHAPE(64x32),
+    .size = SPRITE_SIZE(64x32),
     .priority = 2,
 };
 
@@ -624,8 +624,8 @@ const struct OamData gUnknown_08524AC4 =
 {
     .affineMode = ST_OAM_AFFINE_NORMAL,
     .objMode = ST_OAM_OBJ_BLEND,
-    .shape = ST_OAM_V_RECTANGLE,
-    .size = 0,
+    .shape = SPRITE_SHAPE(8x16),
+    .size = SPRITE_SIZE(8x16),
     .priority = 2,
 };
 
@@ -633,8 +633,8 @@ const struct OamData gUnknown_08524ACC =
 {
     .affineMode = ST_OAM_AFFINE_NORMAL,
     .objMode = ST_OAM_OBJ_BLEND,
-    .shape = ST_OAM_V_RECTANGLE,
-    .size = 1,
+    .shape = SPRITE_SHAPE(8x32),
+    .size = SPRITE_SIZE(8x32),
     .priority = 2,
 };
 
@@ -642,8 +642,8 @@ const struct OamData gUnknown_08524AD4 =
 {
     .affineMode = ST_OAM_AFFINE_NORMAL,
     .objMode = ST_OAM_OBJ_BLEND,
-    .shape = ST_OAM_V_RECTANGLE,
-    .size = 2,
+    .shape = SPRITE_SHAPE(16x32),
+    .size = SPRITE_SIZE(16x32),
     .priority = 2,
 };
 
@@ -651,8 +651,8 @@ const struct OamData gUnknown_08524ADC =
 {
     .affineMode = ST_OAM_AFFINE_NORMAL,
     .objMode = ST_OAM_OBJ_BLEND,
-    .shape = ST_OAM_V_RECTANGLE,
-    .size = 3,
+    .shape = SPRITE_SHAPE(32x64),
+    .size = SPRITE_SIZE(32x64),
     .priority = 2,
 };
 
@@ -660,8 +660,8 @@ const struct OamData gUnknown_08524AE4 =
 {
     .affineMode = ST_OAM_AFFINE_DOUBLE,
     .objMode = ST_OAM_OBJ_BLEND,
-    .shape = ST_OAM_SQUARE,
-    .size = 0,
+    .shape = SPRITE_SHAPE(8x8),
+    .size = SPRITE_SIZE(8x8),
     .priority = 2,
 };
 
@@ -669,8 +669,8 @@ const struct OamData gUnknown_08524AEC =
 {
     .affineMode = ST_OAM_AFFINE_DOUBLE,
     .objMode = ST_OAM_OBJ_BLEND,
-    .shape = ST_OAM_SQUARE,
-    .size = 1,
+    .shape = SPRITE_SHAPE(16x16),
+    .size = SPRITE_SIZE(16x16),
     .priority = 2,
 };
 
@@ -678,8 +678,8 @@ const struct OamData gUnknown_08524AF4 =
 {
     .affineMode = ST_OAM_AFFINE_DOUBLE,
     .objMode = ST_OAM_OBJ_BLEND,
-    .shape = ST_OAM_SQUARE,
-    .size = 2,
+    .shape = SPRITE_SHAPE(32x32),
+    .size = SPRITE_SIZE(32x32),
     .priority = 2,
 };
 
@@ -687,8 +687,8 @@ const struct OamData gUnknown_08524AFC =
 {
     .affineMode = ST_OAM_AFFINE_DOUBLE,
     .objMode = ST_OAM_OBJ_BLEND,
-    .shape = ST_OAM_SQUARE,
-    .size = 3,
+    .shape = SPRITE_SHAPE(64x64),
+    .size = SPRITE_SIZE(64x64),
     .priority = 2,
 };
 
@@ -696,8 +696,8 @@ const struct OamData gUnknown_08524B04 =
 {
     .affineMode = ST_OAM_AFFINE_DOUBLE,
     .objMode = ST_OAM_OBJ_BLEND,
-    .shape = ST_OAM_H_RECTANGLE,
-    .size = 0,
+    .shape = SPRITE_SHAPE(16x8),
+    .size = SPRITE_SIZE(16x8),
     .priority = 2,
 };
 
@@ -705,8 +705,8 @@ const struct OamData gUnknown_08524B0C =
 {
     .affineMode = ST_OAM_AFFINE_DOUBLE,
     .objMode = ST_OAM_OBJ_BLEND,
-    .shape = ST_OAM_H_RECTANGLE,
-    .size = 1,
+    .shape = SPRITE_SHAPE(32x8),
+    .size = SPRITE_SIZE(32x8),
     .priority = 2,
 };
 
@@ -714,8 +714,8 @@ const struct OamData gUnknown_08524B14 =
 {
     .affineMode = ST_OAM_AFFINE_DOUBLE,
     .objMode = ST_OAM_OBJ_BLEND,
-    .shape = ST_OAM_H_RECTANGLE,
-    .size = 2,
+    .shape = SPRITE_SHAPE(32x16),
+    .size = SPRITE_SIZE(32x16),
     .priority = 2,
 };
 
@@ -723,8 +723,8 @@ const struct OamData gUnknown_08524B1C =
 {
     .affineMode = ST_OAM_AFFINE_DOUBLE,
     .objMode = ST_OAM_OBJ_BLEND,
-    .shape = ST_OAM_H_RECTANGLE,
-    .size = 3,
+    .shape = SPRITE_SHAPE(64x32),
+    .size = SPRITE_SIZE(64x32),
     .priority = 2,
 };
 
@@ -732,8 +732,8 @@ const struct OamData gUnknown_08524B24 =
 {
     .affineMode = ST_OAM_AFFINE_DOUBLE,
     .objMode = ST_OAM_OBJ_BLEND,
-    .shape = ST_OAM_V_RECTANGLE,
-    .size = 0,
+    .shape = SPRITE_SHAPE(8x16),
+    .size = SPRITE_SIZE(8x16),
     .priority = 2,
 };
 
@@ -741,8 +741,8 @@ const struct OamData gUnknown_08524B2C =
 {
     .affineMode = ST_OAM_AFFINE_DOUBLE,
     .objMode = ST_OAM_OBJ_BLEND,
-    .shape = ST_OAM_V_RECTANGLE,
-    .size = 1,
+    .shape = SPRITE_SHAPE(8x32),
+    .size = SPRITE_SIZE(8x32),
     .priority = 2,
 };
 
@@ -750,8 +750,8 @@ const struct OamData gUnknown_08524B34 =
 {
     .affineMode = ST_OAM_AFFINE_DOUBLE,
     .objMode = ST_OAM_OBJ_BLEND,
-    .shape = ST_OAM_V_RECTANGLE,
-    .size = 2,
+    .shape = SPRITE_SHAPE(16x32),
+    .size = SPRITE_SIZE(16x32),
     .priority = 2,
 };
 
@@ -759,8 +759,8 @@ const struct OamData gUnknown_08524B3C =
 {
     .affineMode = ST_OAM_AFFINE_DOUBLE,
     .objMode = ST_OAM_OBJ_BLEND,
-    .shape = ST_OAM_V_RECTANGLE,
-    .size = 3,
+    .shape = SPRITE_SHAPE(32x64),
+    .size = SPRITE_SIZE(32x64),
     .priority = 2,
 };
 
@@ -1924,7 +1924,7 @@ bool8 IsBattlerSpriteVisible(u8 battlerId)
 
 void MoveBattlerSpriteToBG(u8 battlerId, bool8 toBG_2, bool8 setSpriteInvisible)
 {
-    struct UnknownAnimStruct2 unknownStruct;
+    struct BattleAnimBgData animBg;
     u8 battlerSpriteId;
 
     if (!toBG_2)
@@ -1933,18 +1933,18 @@ void MoveBattlerSpriteToBG(u8 battlerId, bool8 toBG_2, bool8 setSpriteInvisible)
 
         if (IsContest() == TRUE)
         {
-            RequestDma3Fill(0, (void*)(VRAM + 0x8000), 0x2000, 1);
-            RequestDma3Fill(0xFF, (void*)(VRAM + 0xF000), 0x1000, 0);
+            RequestDma3Fill(0, (void*)(BG_SCREEN_ADDR(16)), 0x2000, 1);
+            RequestDma3Fill(0xFF, (void*)(BG_SCREEN_ADDR(30)), 0x1000, 0);
         }
         else
         {
-            RequestDma3Fill(0, (void*)(VRAM + 0x4000), 0x2000, 1);
-            RequestDma3Fill(0xFF, (void*)(VRAM + 0xe000), 0x1000, 0);
+            RequestDma3Fill(0, (void*)(BG_SCREEN_ADDR(8)), 0x2000, 1);
+            RequestDma3Fill(0xFF, (void*)(BG_SCREEN_ADDR(28)), 0x1000, 0);
         }
 
-        sub_80A6B30(&unknownStruct);
-        CpuFill16(0, unknownStruct.bgTiles, 0x1000);
-        CpuFill16(0xFF, unknownStruct.unk4, 0x800);
+        sub_80A6B30(&animBg);
+        CpuFill16(0, animBg.bgTiles, 0x1000);
+        CpuFill16(0xFF, animBg.bgTilemap, 0x800);
 
         SetAnimBgAttribute(1, BG_ANIM_PRIORITY, 2);
         SetAnimBgAttribute(1, BG_ANIM_SCREEN_SIZE, 1);
@@ -1963,26 +1963,26 @@ void MoveBattlerSpriteToBG(u8 battlerId, bool8 toBG_2, bool8 setSpriteInvisible)
         SetGpuReg(REG_OFFSET_BG1HOFS, gBattle_BG1_X);
         SetGpuReg(REG_OFFSET_BG1VOFS, gBattle_BG1_Y);
 
-        LoadPalette(&gPlttBufferUnfaded[0x100 + battlerId * 16], unknownStruct.unk8 * 16, 0x20);
-        CpuCopy32(&gPlttBufferUnfaded[0x100 + battlerId * 16], (void*)(BG_PLTT + unknownStruct.unk8 * 32), 0x20);
+        LoadPalette(&gPlttBufferUnfaded[0x100 + battlerId * 16], animBg.paletteId * 16, 0x20);
+        CpuCopy32(&gPlttBufferUnfaded[0x100 + battlerId * 16], (void*)(BG_PLTT + animBg.paletteId * 32), 0x20);
 
         if (IsContest())
             battlerPosition = 0;
         else
             battlerPosition = GetBattlerPosition(battlerId);
 
-        sub_8118FBC(1, 0, 0, battlerPosition, unknownStruct.unk8, unknownStruct.bgTiles, unknownStruct.unk4, unknownStruct.tilesOffset);
+        sub_8118FBC(1, 0, 0, battlerPosition, animBg.paletteId, animBg.bgTiles, animBg.bgTilemap, animBg.tilesOffset);
 
         if (IsContest())
             sub_80A46A0();
     }
     else
     {
-        RequestDma3Fill(0, (void*)(VRAM + 0x6000), 0x2000, 1);
-        RequestDma3Fill(0, (void*)(VRAM + 0xF000), 0x1000, 1);
-        sub_80A6B90(&unknownStruct, 2);
-        CpuFill16(0, unknownStruct.bgTiles + 0x1000, 0x1000);
-        CpuFill16(0, unknownStruct.unk4 + 0x400, 0x800);
+        RequestDma3Fill(0, (void*)(BG_SCREEN_ADDR(12)), 0x2000, 1);
+        RequestDma3Fill(0, (void*)(BG_SCREEN_ADDR(30)), 0x1000, 1);
+        sub_80A6B90(&animBg, 2);
+        CpuFill16(0, animBg.bgTiles + 0x1000, 0x1000);
+        CpuFill16(0, animBg.bgTilemap + 0x400, 0x800);
         SetAnimBgAttribute(2, BG_ANIM_PRIORITY, 2);
         SetAnimBgAttribute(2, BG_ANIM_SCREEN_SIZE, 1);
         SetAnimBgAttribute(2, BG_ANIM_AREA_OVERFLOW_MODE, 0);
@@ -2001,20 +2001,20 @@ void MoveBattlerSpriteToBG(u8 battlerId, bool8 toBG_2, bool8 setSpriteInvisible)
         LoadPalette(&gPlttBufferUnfaded[0x100 + battlerId * 16], 0x90, 0x20);
         CpuCopy32(&gPlttBufferUnfaded[0x100 + battlerId * 16], (void*)(BG_PLTT + 0x120), 0x20);
 
-        sub_8118FBC(2, 0, 0, GetBattlerPosition(battlerId), unknownStruct.unk8, unknownStruct.bgTiles + 0x1000, unknownStruct.unk4 + 0x400, unknownStruct.tilesOffset);
+        sub_8118FBC(2, 0, 0, GetBattlerPosition(battlerId), animBg.paletteId, animBg.bgTiles + 0x1000, animBg.bgTilemap + 0x400, animBg.tilesOffset);
     }
 }
 
 static void sub_80A46A0(void)
 {
     s32 i, j;
-    struct UnknownAnimStruct2 unknownStruct;
+    struct BattleAnimBgData animBg;
     u16 *ptr;
 
     if (IsSpeciesNotUnown(gContestResources->field_18->species))
     {
-        sub_80A6B30(&unknownStruct);
-        ptr = unknownStruct.unk4;
+        sub_80A6B30(&animBg);
+        ptr = animBg.bgTilemap;
         for (i = 0; i < 8; i++)
         {
             for (j = 0; j < 4; j++)
@@ -2052,8 +2052,8 @@ void sub_80A4720(u16 a, u16 *b, u32 c, u8 d)
 
 void sub_80A477C(bool8 to_BG2)
 {
-    struct UnknownAnimStruct2 unknownStruct;
-    sub_80A6B30(&unknownStruct);
+    struct BattleAnimBgData animBg;
+    sub_80A6B30(&animBg);
 
     if (!to_BG2 || IsContest())
     {
@@ -2073,11 +2073,11 @@ static void task_pA_ma0A_obj_to_bg_pal(u8 taskId)
 {
     u8 spriteId, palIndex;
     s16 x, y;
-    struct UnknownAnimStruct2 unknownStruct;
+    struct BattleAnimBgData animBg;
 
     spriteId = gTasks[taskId].data[0];
     palIndex = gTasks[taskId].data[6];
-    sub_80A6B30(&unknownStruct);
+    sub_80A6B30(&animBg);
     x = gTasks[taskId].data[1] - (gSprites[spriteId].pos1.x + gSprites[spriteId].pos2.x);
     y = gTasks[taskId].data[2] - (gSprites[spriteId].pos1.y + gSprites[spriteId].pos2.y);
 
@@ -2089,7 +2089,7 @@ static void task_pA_ma0A_obj_to_bg_pal(u8 taskId)
         gBattle_BG1_X = x + gTasks[taskId].data[3];
         gBattle_BG1_Y = y + gTasks[taskId].data[4];
         src = gPlttBufferFaded + 0x100 + palIndex * 16;
-        dst = gPlttBufferFaded + 0x100 + unknownStruct.unk8 * 16 - 256;
+        dst = gPlttBufferFaded + 0x100 + animBg.paletteId * 16 - 256;
         CpuCopy32(src, dst, 0x20);
     }
     else
@@ -2452,15 +2452,15 @@ static void LoadMoveBg(u16 bgId)
         LZDecompressWram(tilemap, gDecompressionBuffer);
         sub_80A4720(sub_80A6D94(), (void*)(gDecompressionBuffer), 0x100, 0);
         dmaSrc = gDecompressionBuffer;
-        dmaDest = (void *)(VRAM + 0xD000);
+        dmaDest = (void *)(BG_SCREEN_ADDR(26));
         DmaCopy32(3, dmaSrc, dmaDest, 0x800);
-        LZDecompressVram(gBattleAnimBackgroundTable[bgId].image, (void *)(VRAM + 0x2000));
+        LZDecompressVram(gBattleAnimBackgroundTable[bgId].image, (void *)(BG_SCREEN_ADDR(4)));
         LoadCompressedPalette(gBattleAnimBackgroundTable[bgId].palette, sub_80A6D94() * 16, 32);
     }
     else
     {
-        LZDecompressVram(gBattleAnimBackgroundTable[bgId].tilemap, (void *)(VRAM + 0xD000));
-        LZDecompressVram(gBattleAnimBackgroundTable[bgId].image, (void *)(VRAM + 0x8000));
+        LZDecompressVram(gBattleAnimBackgroundTable[bgId].tilemap, (void *)(BG_SCREEN_ADDR(26)));
+        LZDecompressVram(gBattleAnimBackgroundTable[bgId].image, (void *)(BG_CHAR_ADDR(2)));
         LoadCompressedPalette(gBattleAnimBackgroundTable[bgId].palette, 32, 32);
     }
 }

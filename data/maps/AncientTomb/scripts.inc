@@ -1,7 +1,7 @@
 AncientTomb_MapScripts:: @ 8238FB3
-	map_script 5, AncientTomb_MapScript1_238FC3
-	map_script 1, AncientTomb_MapScript1_238FF2
-	map_script 3, AncientTomb_MapScript1_238FE1
+	map_script MAP_SCRIPT_ON_RESUME, AncientTomb_MapScript1_238FC3
+	map_script MAP_SCRIPT_ON_LOAD, AncientTomb_MapScript1_238FF2
+	map_script MAP_SCRIPT_ON_TRANSITION, AncientTomb_MapScript1_238FE1
 	.byte 0
 
 AncientTomb_MapScript1_238FC3: @ 8238FC3
@@ -11,7 +11,7 @@ AncientTomb_MapScript1_238FC3: @ 8238FC3
 AncientTomb_EventScript_238FCD:: @ 8238FCD
 	specialvar VAR_RESULT, GetBattleOutcome
 	compare VAR_RESULT, 7
-	goto_if_ne AncientTomb_EventScript_27374E
+	goto_if_ne Common_EventScript_NopReturn
 	removeobject VAR_LAST_TALKED
 	return
 
@@ -25,7 +25,7 @@ AncientTomb_EventScript_238FEE:: @ 8238FEE
 	return
 
 AncientTomb_MapScript1_238FF2: @ 8238FF2
-	call_if_unset FLAG_SYS_BRAILLE_FLY, AncientTomb_EventScript_238FFC
+	call_if_unset FLAG_SYS_REGISTEEL_PUZZLE_COMPLETED, AncientTomb_EventScript_238FFC
 	end
 
 AncientTomb_EventScript_238FFC:: @ 8238FFC
@@ -39,7 +39,7 @@ AncientTomb_EventScript_238FFC:: @ 8238FFC
 
 AncientTomb_EventScript_239033:: @ 8239033
 	lockall
-	goto_if_set FLAG_SYS_BRAILLE_FLY, AncientTomb_EventScript_239046
+	goto_if_set FLAG_SYS_REGISTEEL_PUZZLE_COMPLETED, AncientTomb_EventScript_239046
 	braillemessage AncientTomb_Braille_2A6D06
 	waitbuttonpress
 	hidebox2

@@ -61,12 +61,14 @@ void SetHBlankCallback(IntrCallback callback);
 void SetVCountCallback(IntrCallback callback);
 void SetSerialCallback(IntrCallback callback);
 void InitFlashTimer(void);
-void sub_80008DC(u32 *var);
-void sub_80008E8(void);
+void SetTrainerHillVBlankCounter(u32 *var);
+void ClearTrainerHillVBlankCounter(void);
 void DoSoftReset(void);
 void ClearPokemonCrySongs(void);
 void RestoreSerialTimer3IntrHandlers(void);
 void StartTimer1(void);
 void SeedRngAndSetTrainerId(void);
+u16 GetGeneratedTrainerIdLower(void);
+
 
 #endif // GUARD_MAIN_H

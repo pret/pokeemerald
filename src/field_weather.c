@@ -186,11 +186,11 @@ void StartWeather(void)
     }
 }
 
-void ChangeWeather(u8 weather)
+void SetNextWeather(u8 weather)
 {
     if (weather != WEATHER_RAIN_LIGHT && weather != WEATHER_RAIN_MED && weather != WEATHER_RAIN_HEAVY)
     {
-        PlayRainSoundEffect();
+        PlayRainStoppingSoundEffect();
     }
 
     if (gWeatherPtr->nextWeather != weather && gWeatherPtr->currWeather == weather)
@@ -203,18 +203,19 @@ void ChangeWeather(u8 weather)
     gWeatherPtr->finishStep = 0;
 }
 
-void sub_80AB104(u8 weather)
+void SetCurrentAndNextWeather(u8 weather)
 {
-    PlayRainSoundEffect();
+    PlayRainStoppingSoundEffect();
     gWeatherPtr->currWeather = weather;
     gWeatherPtr->nextWeather = weather;
 }
 
-void sub_80AB130(u8 weather)
+void SetCurrentAndNextWeatherNoDelay(u8 weather)
 {
-    PlayRainSoundEffect();
+    PlayRainStoppingSoundEffect();
     gWeatherPtr->currWeather = weather;
     gWeatherPtr->nextWeather = weather;
+    // Overrides the normal delay during screen fading.
     gWeatherPtr->readyForInit = TRUE;
 }
 
@@ -1053,7 +1054,7 @@ void SetRainStrengthFromSoundEffect(u16 soundEffect)
     }
 }
 
-void PlayRainSoundEffect(void)
+void PlayRainStoppingSoundEffect(void)
 {
     if (IsSpecialSEPlaying())
     {

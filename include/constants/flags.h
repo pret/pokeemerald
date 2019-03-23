@@ -236,7 +236,7 @@
 #define FLAG_MET_WAILMER_TRAINER             0xDA
 #define FLAG_EVIL_LEADER_PLEASE_STOP         0xDB
 
-#define FLAG_UNUSED_0x0DC                    0xDC // Unused Flag
+#define FLAG_NEVER_SET_0x0DC                 0xDC // This flag is read, but never written to
 
 #define FLAG_RECEIVED_GO_GOGGLES             0xDD
 #define FLAG_WINGULL_SENT_ON_ERRAND          0xDE
@@ -1352,9 +1352,9 @@
 #define FLAG_SYS_ENC_UP_ITEM                        (SYSTEM_FLAGS + 0x4D)
 #define FLAG_SYS_ENC_DOWN_ITEM                      (SYSTEM_FLAGS + 0x4E)
 #define FLAG_SYS_BRAILLE_DIG                        (SYSTEM_FLAGS + 0x4F)
-#define FLAG_SYS_BRAILLE_STRENGTH                   (SYSTEM_FLAGS + 0x50)
-#define FLAG_SYS_BRAILLE_WAIT                       (SYSTEM_FLAGS + 0x51)
-#define FLAG_SYS_BRAILLE_FLY                        (SYSTEM_FLAGS + 0x52)
+#define FLAG_SYS_REGIROCK_PUZZLE_COMPLETED          (SYSTEM_FLAGS + 0x50)
+#define FLAG_SYS_BRAILLE_REGICE_COMPLETED           (SYSTEM_FLAGS + 0x51)
+#define FLAG_SYS_REGISTEEL_PUZZLE_COMPLETED         (SYSTEM_FLAGS + 0x52)
 #define FLAG_SYS_HAS_EON_TICKET                     (SYSTEM_FLAGS + 0x53)
 
 #define FLAG_LANDMARK_POKEMON_LEAGUE                (SYSTEM_FLAGS + 0x54)
@@ -1548,7 +1548,7 @@
 
 // Special Flags (Unknown)
 #define SPECIAL_FLAGS_START                                        0x4000
-#define FLAG_SPECIAL_FLAG_0x4000                                   0x4000
+#define FLAG_HIDE_MAP_NAME_POPUP                                   0x4000
 #define FLAG_SPECIAL_FLAG_0x4001                                   0x4001
 #define FLAG_SPECIAL_FLAG_0x4002                                   0x4002
 #define FLAG_SPECIAL_FLAG_0x4003                                   0x4003

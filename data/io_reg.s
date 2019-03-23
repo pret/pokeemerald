@@ -24,11 +24,11 @@ gUnref_82EC784:: @ 82EC784
     .4byte 0x02000100
     .4byte 0x08000400
 
-gUnknown_82EC7C4:: @ 82EC7C4
-	.2byte 0x0100
-	.2byte 0x0200
-	.2byte 0x0400
-	.2byte 0x0800
+gOverworldBackgroundLayerFlags:: @ 82EC7C4
+	.2byte 0x0100 /* BLDCNT_TGT2_BG0 */
+	.2byte 0x0200 /* BLDCNT_TGT2_BG1 */
+	.2byte 0x0400 /* BLDCNT_TGT2_BG2 */
+	.2byte 0x0800 /* BLDCNT_TGT2_BG3 */
 
 gUnknown_82EC7CC:: @ 82EC7CC
 	.2byte 0x0001

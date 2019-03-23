@@ -1,0 +1,61 @@
+{
+  "id": "MAP_NAVEL_ROCK_TOP",
+  "name": "NavelRock_Top",
+  "layout": "LAYOUT_NAVEL_ROCK_TOP",
+  "music": "MUS_RG_NANADUNGEON",
+  "region_map_section": "MAPSEC_NAVEL_ROCK2",
+  "requires_flash": false,
+  "weather": "WEATHER_SHADE",
+  "map_type": "MAP_TYPE_UNDERGROUND",
+  "allow_bike": false,
+  "allow_escape_rope": false,
+  "allow_running": true,
+  "show_map_name": true,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+  "connections": null,
+  "object_events": [
+    {
+      "graphics_id": "EVENT_OBJ_GFX_HOOH",
+      "x": 12,
+      "y": 4,
+      "elevation": 0,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "0x0",
+      "flag": "FLAG_HIDE_HO_OH"
+    }
+  ],
+  "warp_events": [
+    {
+      "x": 13,
+      "y": 20,
+      "elevation": 3,
+      "dest_map": "MAP_NAVEL_ROCK_UP4",
+      "dest_warp_id": 1
+    }
+  ],
+  "coord_events": [
+    {
+      "type": "trigger",
+      "x": 12,
+      "y": 10,
+      "elevation": 3,
+      "var": "VAR_TEMP_1",
+      "var_value": "0",
+      "script": "NavelRock_Top_EventScript_26916F"
+    }
+  ],
+  "bg_events": [
+    {
+      "type": "hidden_item",
+      "x": 12,
+      "y": 9,
+      "elevation": 3,
+      "item": "ITEM_SACRED_ASH",
+      "flag": "FLAG_HIDDEN_ITEM_NAVEL_ROCK_TOP_SACRED_ASH"
+    }
+  ]
+}

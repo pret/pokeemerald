@@ -4,7 +4,7 @@
 #include "window.h"
 
 #define LIST_NOTHING_CHOSEN -1
-#define LIST_B_PRESSED -2
+#define LIST_CANCEL -2
 #define LIST_HEADER -3
 
 #define LIST_NO_MULTIPLE_SCROLL     0
@@ -101,7 +101,7 @@ extern struct ListMenuTemplate gMultiuseListMenuTemplate;
 s32 DoMysteryGiftListMenu(struct WindowTemplate *windowTemplate, struct ListMenuTemplate *listMenuTemplate, u8 arg2, u16 tileNum, u16 palNum);
 u8 ListMenuInit(struct ListMenuTemplate *listMenuTemplate, u16 scrollOffset, u16 selectedRow);
 u8 ListMenuInitInRect(struct ListMenuTemplate *listMenuTemplate, struct ListMenuWindowRect *arg1, u16 scrollOffset, u16 selectedRow);
-s32 ListMenuHandleInputGetItemId(u8 listTaskId);
+s32 ListMenu_ProcessInput(u8 listTaskId);
 void DestroyListMenuTask(u8 listTaskId, u16 *scrollOffset, u16 *selectedRow);
 void RedrawListMenu(u8 listTaskId);
 void ChangeListMenuPals(u8 listTaskId, u8 cursorPal, u8 fillValue, u8 cursorShadowPal);

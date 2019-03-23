@@ -1,5 +1,5 @@
 Route119_WeatherInstitute_2F_MapScripts:: @ 826FF1E
-	map_script 3, Route119_WeatherInstitute_2F_MapScript1_26FF24
+	map_script MAP_SCRIPT_ON_TRANSITION, Route119_WeatherInstitute_2F_MapScript1_26FF24
 	.byte 0
 
 Route119_WeatherInstitute_2F_MapScript1_26FF24: @ 826FF24
@@ -55,9 +55,9 @@ Route119_WeatherInstitute_2F_EventScript_26FFC8:: @ 826FFC8
 	msgbox Route119_WeatherInstitute_2F_Text_270568, MSGBOX_DEFAULT
 	closemessage
 	playse SE_PIN
-	applymovement 3, Route119_WeatherInstitute_2F_Movement_272598
+	applymovement 3, Common_Movement_ExclamationMark
 	waitmovement 0
-	applymovement 3, Route119_WeatherInstitute_2F_Movement_27259A
+	applymovement 3, Common_Movement_Delay48
 	waitmovement 0
 	msgbox Route119_WeatherInstitute_2F_Text_2705DD, MSGBOX_DEFAULT
 	closemessage
@@ -98,7 +98,7 @@ Route119_WeatherInstitute_2F_EventScript_270085:: @ 8270085
 	compare VAR_RESULT, 0
 	goto_if_eq Route119_WeatherInstitute_2F_EventScript_2700EA
 	call Route119_WeatherInstitute_2F_EventScript_27378B
-	call Route119_WeatherInstitute_2F_EventScript_2723DD
+	call Common_EventScript_NameReceivedPokemon
 	goto Route119_WeatherInstitute_2F_EventScript_2700EA
 	end
 
@@ -131,41 +131,43 @@ Route119_WeatherInstitute_2F_EventScript_2700EA:: @ 82700EA
 	end
 
 Route119_WeatherInstitute_2F_EventScript_2700F7:: @ 82700F7
-	goto_if_set FLAG_SYS_GAME_CLEAR, Route119_WeatherInstitute_2F_EventScript_27010A
+	goto_if_set FLAG_SYS_GAME_CLEAR, Route119_WeatherInstitute_2F_EventScript_TryStartUnusualWeather
 	msgbox Route119_WeatherInstitute_2F_Text_27077E, MSGBOX_DEFAULT
 	release
 	end
 
-Route119_WeatherInstitute_2F_EventScript_27010A:: @ 827010A
+Route119_WeatherInstitute_2F_EventScript_TryStartUnusualWeather:: @ 827010A
+    @ This code uses VAR_0x8004 to count the number of legendaries the player has defeated
+    @ already.
 	setvar VAR_0x8004, 0
-	call_if_set FLAG_DEFEATED_KYOGRE, Route119_WeatherInstitute_2F_EventScript_270160
-	call_if_set FLAG_DEFEATED_GROUDON, Route119_WeatherInstitute_2F_EventScript_270160
+	call_if_set FLAG_DEFEATED_KYOGRE, WeatherInstitute_UnusualWeather_EventScript_IncrementLegendCount
+	call_if_set FLAG_DEFEATED_GROUDON, WeatherInstitute_UnusualWeather_EventScript_IncrementLegendCount
 	compare VAR_0x8004, 2
-	goto_if_eq Route119_WeatherInstitute_2F_EventScript_270166
-	call_if_unset FLAG_TEMP_2, Route119_WeatherInstitute_2F_EventScript_270159
-	specialvar VAR_RESULT, sub_813B374
+	goto_if_eq WeatherInstitute_UnusualWeather_EventScript_ShowLegendariesAlreadyDefeated
+	call_if_unset FLAG_TEMP_2, WeatherInstitute_UnusualWeather_EventScript_DoCreateUnusualWeather
+	specialvar VAR_RESULT, GetUnusualWeatherMapNameAndType
 	compare VAR_RESULT, 1
-	goto_if_eq Route119_WeatherInstitute_2F_EventScript_27014F
-	msgbox Route119_WeatherInstitute_2F_Text_2707F1, MSGBOX_DEFAULT
+	goto_if_eq WeatherInstitute_UnusualWeather_EventScript_ShowKyogreWeatherMessage
+	msgbox WeatherInstitute_UnusualWeather_GroudonWeatherText, MSGBOX_DEFAULT
 	release
 	end
 
-Route119_WeatherInstitute_2F_EventScript_27014F:: @ 827014F
-	msgbox Route119_WeatherInstitute_2F_Text_270873, MSGBOX_DEFAULT
+WeatherInstitute_UnusualWeather_EventScript_ShowKyogreWeatherMessage:: @ 827014F
+	msgbox WeatherInstitute_UnusualWeather_KyogreWeatherText, MSGBOX_DEFAULT
 	release
 	end
 
-Route119_WeatherInstitute_2F_EventScript_270159:: @ 8270159
-	special sub_813B2E4
+WeatherInstitute_UnusualWeather_EventScript_DoCreateUnusualWeather:: @ 8270159
+	special CreateUnusualWeatherEvent
 	setflag FLAG_TEMP_2
 	return
 
-Route119_WeatherInstitute_2F_EventScript_270160:: @ 8270160
+WeatherInstitute_UnusualWeather_EventScript_IncrementLegendCount:: @ 8270160
 	addvar VAR_0x8004, 1
 	return
 
-Route119_WeatherInstitute_2F_EventScript_270166:: @ 8270166
-	msgbox Route119_WeatherInstitute_2F_Text_2708FC, MSGBOX_DEFAULT
+WeatherInstitute_UnusualWeather_EventScript_ShowLegendariesAlreadyDefeated:: @ 8270166
+	msgbox WeatherInstitute_UnusualWeather_EventScript_ShowLegendariesAlreadyDefeatedText, MSGBOX_DEFAULT
 	release
 	end
 
@@ -309,7 +311,7 @@ Route119_WeatherInstitute_2F_Text_27077E: @ 827077E
 	.string "years, but it's ridiculous to think that\l"
 	.string "humans can freely change the weather.$"
 
-Route119_WeatherInstitute_2F_Text_2707F1: @ 82707F1
+WeatherInstitute_UnusualWeather_GroudonWeatherText: @ 82707F1
 	.string "I track weather patterns over\n"
 	.string "the HOENN region.\p"
 	.string "Presently, a drought has been recorded\n"
@@ -317,7 +319,7 @@ Route119_WeatherInstitute_2F_Text_2707F1: @ 82707F1
 	.string "Could that mean, somewhere near\n"
 	.string "{STR_VAR_1}…$"
 
-Route119_WeatherInstitute_2F_Text_270873: @ 8270873
+WeatherInstitute_UnusualWeather_KyogreWeatherText: @ 8270873
 	.string "I track weather patterns over\n"
 	.string "the HOENN region.\p"
 	.string "Presently, heavy rainfall has been\n"
@@ -325,7 +327,7 @@ Route119_WeatherInstitute_2F_Text_270873: @ 8270873
 	.string "Could that mean, somewhere near\n"
 	.string "{STR_VAR_1}…$"
 
-Route119_WeatherInstitute_2F_Text_2708FC: @ 82708FC
+WeatherInstitute_UnusualWeather_EventScript_ShowLegendariesAlreadyDefeatedText: @ 82708FC
 	.string "Abnormal weather conditions are\n"
 	.string "no longer being reported.\p"
 	.string "The occasional rainfall is a blessing,\n"

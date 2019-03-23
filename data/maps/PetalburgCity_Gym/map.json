@@ -1,0 +1,544 @@
+{
+  "id": "MAP_PETALBURG_CITY_GYM",
+  "name": "PetalburgCity_Gym",
+  "layout": "LAYOUT_PETALBURG_CITY_GYM",
+  "music": "MUS_GIM",
+  "region_map_section": "MAPSEC_PETALBURG_CITY",
+  "requires_flash": false,
+  "weather": "WEATHER_NONE",
+  "map_type": "MAP_TYPE_INDOOR",
+  "allow_bike": false,
+  "allow_escape_rope": false,
+  "allow_running": false,
+  "show_map_name": false,
+  "battle_scene": "MAP_BATTLE_SCENE_GYM",
+  "connections": null,
+  "object_events": [
+    {
+      "graphics_id": "EVENT_OBJ_GFX_NORMAN",
+      "x": 4,
+      "y": 2,
+      "elevation": 0,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "PetalburgCity_Gym_EventScript_2049F1",
+      "flag": "FLAG_HIDE_PETALYBURG_GYM_NORMAN"
+    },
+    {
+      "graphics_id": "EVENT_OBJ_GFX_WOMAN_5",
+      "x": 4,
+      "y": 94,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "1",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "PetalburgCity_Gym_EventScript_2054AA",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "EVENT_OBJ_GFX_MAN_3",
+      "x": 4,
+      "y": 81,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "1",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "PetalburgCity_Gym_EventScript_2053BA",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "EVENT_OBJ_GFX_MAN_3",
+      "x": 4,
+      "y": 42,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "1",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "PetalburgCity_Gym_EventScript_2053F6",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "EVENT_OBJ_GFX_WOMAN_5",
+      "x": 4,
+      "y": 55,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "1",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "PetalburgCity_Gym_EventScript_2054E6",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "EVENT_OBJ_GFX_MAN_3",
+      "x": 4,
+      "y": 68,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "1",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "PetalburgCity_Gym_EventScript_205432",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "EVENT_OBJ_GFX_WOMAN_5",
+      "x": 4,
+      "y": 16,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "1",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "PetalburgCity_Gym_EventScript_205522",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "EVENT_OBJ_GFX_MAN_3",
+      "x": 4,
+      "y": 29,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "1",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "PetalburgCity_Gym_EventScript_20546E",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "EVENT_OBJ_GFX_MAN_2",
+      "x": 3,
+      "y": 109,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "PetalburgCity_Gym_EventScript_20574F",
+      "flag": "FLAG_HIDE_PETALBURG_GYM_GREETER"
+    },
+    {
+      "graphics_id": "EVENT_OBJ_GFX_WALLY",
+      "x": 4,
+      "y": 111,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_UP",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "0x0",
+      "flag": "FLAG_HIDE_PETALBURG_GYM_WALLY"
+    },
+    {
+      "graphics_id": "EVENT_OBJ_GFX_POKEFAN_M",
+      "x": 1,
+      "y": 7,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_UP",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "0x0",
+      "flag": "FLAG_HIDE_PETALBURG_GYM_WALLYS_UNCLE"
+    }
+  ],
+  "warp_events": [
+    {
+      "x": 4,
+      "y": 111,
+      "elevation": 3,
+      "dest_map": "MAP_PETALBURG_CITY",
+      "dest_warp_id": 2
+    },
+    {
+      "x": 5,
+      "y": 111,
+      "elevation": 3,
+      "dest_map": "MAP_PETALBURG_CITY",
+      "dest_warp_id": 2
+    },
+    {
+      "x": 1,
+      "y": 105,
+      "elevation": 3,
+      "dest_map": "MAP_PETALBURG_CITY_GYM",
+      "dest_warp_id": 3
+    },
+    {
+      "x": 7,
+      "y": 85,
+      "elevation": 3,
+      "dest_map": "MAP_PETALBURG_CITY_GYM",
+      "dest_warp_id": 2
+    },
+    {
+      "x": 6,
+      "y": 85,
+      "elevation": 3,
+      "dest_map": "MAP_PETALBURG_CITY_GYM",
+      "dest_warp_id": 2
+    },
+    {
+      "x": 7,
+      "y": 105,
+      "elevation": 3,
+      "dest_map": "MAP_PETALBURG_CITY_GYM",
+      "dest_warp_id": 6
+    },
+    {
+      "x": 1,
+      "y": 98,
+      "elevation": 3,
+      "dest_map": "MAP_PETALBURG_CITY_GYM",
+      "dest_warp_id": 5
+    },
+    {
+      "x": 2,
+      "y": 98,
+      "elevation": 3,
+      "dest_map": "MAP_PETALBURG_CITY_GYM",
+      "dest_warp_id": 5
+    },
+    {
+      "x": 1,
+      "y": 79,
+      "elevation": 3,
+      "dest_map": "MAP_PETALBURG_CITY_GYM",
+      "dest_warp_id": 10
+    },
+    {
+      "x": 7,
+      "y": 79,
+      "elevation": 3,
+      "dest_map": "MAP_PETALBURG_CITY_GYM",
+      "dest_warp_id": 12
+    },
+    {
+      "x": 7,
+      "y": 46,
+      "elevation": 3,
+      "dest_map": "MAP_PETALBURG_CITY_GYM",
+      "dest_warp_id": 8
+    },
+    {
+      "x": 6,
+      "y": 46,
+      "elevation": 3,
+      "dest_map": "MAP_PETALBURG_CITY_GYM",
+      "dest_warp_id": 8
+    },
+    {
+      "x": 1,
+      "y": 59,
+      "elevation": 3,
+      "dest_map": "MAP_PETALBURG_CITY_GYM",
+      "dest_warp_id": 9
+    },
+    {
+      "x": 2,
+      "y": 59,
+      "elevation": 3,
+      "dest_map": "MAP_PETALBURG_CITY_GYM",
+      "dest_warp_id": 9
+    },
+    {
+      "x": 1,
+      "y": 92,
+      "elevation": 3,
+      "dest_map": "MAP_PETALBURG_CITY_GYM",
+      "dest_warp_id": 16
+    },
+    {
+      "x": 7,
+      "y": 92,
+      "elevation": 3,
+      "dest_map": "MAP_PETALBURG_CITY_GYM",
+      "dest_warp_id": 18
+    },
+    {
+      "x": 7,
+      "y": 59,
+      "elevation": 3,
+      "dest_map": "MAP_PETALBURG_CITY_GYM",
+      "dest_warp_id": 14
+    },
+    {
+      "x": 6,
+      "y": 59,
+      "elevation": 3,
+      "dest_map": "MAP_PETALBURG_CITY_GYM",
+      "dest_warp_id": 14
+    },
+    {
+      "x": 1,
+      "y": 72,
+      "elevation": 3,
+      "dest_map": "MAP_PETALBURG_CITY_GYM",
+      "dest_warp_id": 15
+    },
+    {
+      "x": 2,
+      "y": 72,
+      "elevation": 3,
+      "dest_map": "MAP_PETALBURG_CITY_GYM",
+      "dest_warp_id": 15
+    },
+    {
+      "x": 7,
+      "y": 40,
+      "elevation": 3,
+      "dest_map": "MAP_PETALBURG_CITY_GYM",
+      "dest_warp_id": 24
+    },
+    {
+      "x": 1,
+      "y": 53,
+      "elevation": 3,
+      "dest_map": "MAP_PETALBURG_CITY_GYM",
+      "dest_warp_id": 26
+    },
+    {
+      "x": 7,
+      "y": 53,
+      "elevation": 3,
+      "dest_map": "MAP_PETALBURG_CITY_GYM",
+      "dest_warp_id": 28
+    },
+    {
+      "x": 1,
+      "y": 66,
+      "elevation": 3,
+      "dest_map": "MAP_PETALBURG_CITY_GYM",
+      "dest_warp_id": 30
+    },
+    {
+      "x": 1,
+      "y": 20,
+      "elevation": 3,
+      "dest_map": "MAP_PETALBURG_CITY_GYM",
+      "dest_warp_id": 20
+    },
+    {
+      "x": 2,
+      "y": 20,
+      "elevation": 3,
+      "dest_map": "MAP_PETALBURG_CITY_GYM",
+      "dest_warp_id": 20
+    },
+    {
+      "x": 7,
+      "y": 20,
+      "elevation": 3,
+      "dest_map": "MAP_PETALBURG_CITY_GYM",
+      "dest_warp_id": 21
+    },
+    {
+      "x": 6,
+      "y": 20,
+      "elevation": 3,
+      "dest_map": "MAP_PETALBURG_CITY_GYM",
+      "dest_warp_id": 21
+    },
+    {
+      "x": 1,
+      "y": 33,
+      "elevation": 3,
+      "dest_map": "MAP_PETALBURG_CITY_GYM",
+      "dest_warp_id": 22
+    },
+    {
+      "x": 2,
+      "y": 33,
+      "elevation": 3,
+      "dest_map": "MAP_PETALBURG_CITY_GYM",
+      "dest_warp_id": 22
+    },
+    {
+      "x": 7,
+      "y": 33,
+      "elevation": 3,
+      "dest_map": "MAP_PETALBURG_CITY_GYM",
+      "dest_warp_id": 23
+    },
+    {
+      "x": 6,
+      "y": 33,
+      "elevation": 3,
+      "dest_map": "MAP_PETALBURG_CITY_GYM",
+      "dest_warp_id": 23
+    },
+    {
+      "x": 7,
+      "y": 14,
+      "elevation": 3,
+      "dest_map": "MAP_PETALBURG_CITY_GYM",
+      "dest_warp_id": 34
+    },
+    {
+      "x": 1,
+      "y": 27,
+      "elevation": 3,
+      "dest_map": "MAP_PETALBURG_CITY_GYM",
+      "dest_warp_id": 36
+    },
+    {
+      "x": 1,
+      "y": 7,
+      "elevation": 3,
+      "dest_map": "MAP_PETALBURG_CITY_GYM",
+      "dest_warp_id": 32
+    },
+    {
+      "x": 2,
+      "y": 7,
+      "elevation": 3,
+      "dest_map": "MAP_PETALBURG_CITY_GYM",
+      "dest_warp_id": 32
+    },
+    {
+      "x": 7,
+      "y": 7,
+      "elevation": 3,
+      "dest_map": "MAP_PETALBURG_CITY_GYM",
+      "dest_warp_id": 33
+    },
+    {
+      "x": 6,
+      "y": 7,
+      "elevation": 3,
+      "dest_map": "MAP_PETALBURG_CITY_GYM",
+      "dest_warp_id": 33
+    }
+  ],
+  "coord_events": [],
+  "bg_events": [
+    {
+      "type": "sign",
+      "x": 1,
+      "y": 105,
+      "elevation": 3,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "PetalburgCity_Gym_EventScript_205137"
+    },
+    {
+      "type": "sign",
+      "x": 7,
+      "y": 105,
+      "elevation": 3,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "PetalburgCity_Gym_EventScript_205187"
+    },
+    {
+      "type": "sign",
+      "x": 1,
+      "y": 79,
+      "elevation": 3,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "PetalburgCity_Gym_EventScript_2051BC"
+    },
+    {
+      "type": "sign",
+      "x": 7,
+      "y": 79,
+      "elevation": 3,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "PetalburgCity_Gym_EventScript_2051EF"
+    },
+    {
+      "type": "sign",
+      "x": 1,
+      "y": 92,
+      "elevation": 3,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "PetalburgCity_Gym_EventScript_205222"
+    },
+    {
+      "type": "sign",
+      "x": 7,
+      "y": 92,
+      "elevation": 3,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "PetalburgCity_Gym_EventScript_205255"
+    },
+    {
+      "type": "sign",
+      "x": 7,
+      "y": 40,
+      "elevation": 3,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "PetalburgCity_Gym_EventScript_205288"
+    },
+    {
+      "type": "sign",
+      "x": 1,
+      "y": 53,
+      "elevation": 3,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "PetalburgCity_Gym_EventScript_2052BB"
+    },
+    {
+      "type": "sign",
+      "x": 7,
+      "y": 53,
+      "elevation": 3,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "PetalburgCity_Gym_EventScript_2052EE"
+    },
+    {
+      "type": "sign",
+      "x": 1,
+      "y": 66,
+      "elevation": 3,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "PetalburgCity_Gym_EventScript_205321"
+    },
+    {
+      "type": "sign",
+      "x": 7,
+      "y": 14,
+      "elevation": 3,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "PetalburgCity_Gym_EventScript_205354"
+    },
+    {
+      "type": "sign",
+      "x": 1,
+      "y": 27,
+      "elevation": 3,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "PetalburgCity_Gym_EventScript_205387"
+    },
+    {
+      "type": "sign",
+      "x": 1,
+      "y": 110,
+      "elevation": 3,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
+      "script": "PetalburgCity_Gym_EventScript_20576E"
+    },
+    {
+      "type": "sign",
+      "x": 7,
+      "y": 110,
+      "elevation": 3,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
+      "script": "PetalburgCity_Gym_EventScript_20577E"
+    }
+  ]
+}

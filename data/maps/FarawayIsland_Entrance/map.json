@@ -1,0 +1,99 @@
+{
+  "id": "MAP_FARAWAY_ISLAND_ENTRANCE",
+  "name": "FarawayIsland_Entrance",
+  "layout": "LAYOUT_FARAWAY_ISLAND_ENTRANCE",
+  "music": "MUS_DAN02",
+  "region_map_section": "MAPSEC_FARAWAY_ISLAND",
+  "requires_flash": false,
+  "weather": "WEATHER_NONE",
+  "map_type": "MAP_TYPE_INDOOR",
+  "allow_bike": true,
+  "allow_escape_rope": false,
+  "allow_running": true,
+  "show_map_name": true,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+  "connections": null,
+  "object_events": [
+    {
+      "graphics_id": "EVENT_OBJ_GFX_SAILOR",
+      "x": 13,
+      "y": 39,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_UP",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "FarawayIsland_Entrance_EventScript_267CA2",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "EVENT_OBJ_GFX_SS_TIDAL",
+      "x": 13,
+      "y": 41,
+      "elevation": 1,
+      "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "0x0",
+      "flag": "0"
+    }
+  ],
+  "warp_events": [
+    {
+      "x": 22,
+      "y": 7,
+      "elevation": 3,
+      "dest_map": "MAP_FARAWAY_ISLAND_INTERIOR",
+      "dest_warp_id": 0
+    },
+    {
+      "x": 23,
+      "y": 7,
+      "elevation": 3,
+      "dest_map": "MAP_FARAWAY_ISLAND_INTERIOR",
+      "dest_warp_id": 1
+    }
+  ],
+  "coord_events": [
+    {
+      "type": "trigger",
+      "x": 9,
+      "y": 18,
+      "elevation": 3,
+      "var": "0",
+      "var_value": "0",
+      "script": "FarawayIsland_Entrance_EventScript_267C98"
+    },
+    {
+      "type": "trigger",
+      "x": 10,
+      "y": 20,
+      "elevation": 3,
+      "var": "0",
+      "var_value": "0",
+      "script": "FarawayIsland_Entrance_EventScript_267C9D"
+    },
+    {
+      "type": "trigger",
+      "x": 22,
+      "y": 9,
+      "elevation": 3,
+      "var": "0",
+      "var_value": "0",
+      "script": "FarawayIsland_Entrance_EventScript_267C98"
+    }
+  ],
+  "bg_events": [
+    {
+      "type": "sign",
+      "x": 3,
+      "y": 32,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
+      "script": "FarawayIsland_Entrance_EventScript_267CF1"
+    }
+  ]
+}

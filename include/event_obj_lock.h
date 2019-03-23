@@ -7,5 +7,6 @@ bool8 sub_809847C(void);
 void LockSelectedEventObject(void);
 void sub_8098630(void);
 bool8 sub_8098734(void);
+void ScriptUnfreezeEventObjects(void);
 
 #endif // GUARD_EVENT_OBJ_LOCK_H

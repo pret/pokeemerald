@@ -21,6 +21,7 @@
 #include "gpu_regs.h"
 #include "international_string_util.h"
 #include "pokedex.h"
+#include "pokemon_icon.h"
 #include "graphics.h"
 #include "pokemon_icon.h"
 #include "trainer_pokemon_sprites.h"
@@ -89,10 +90,8 @@ struct TrainerCardData
     u8 language;
 };
 
-//external functions
-extern u8 sub_80D30A0(u16);
-
 // EWRAM
+EWRAM_DATA struct TrainerCard gTrainerCards[4] = {0};
 EWRAM_DATA static struct TrainerCardData *sData = NULL;
 
 //this file's functions
@@ -349,7 +348,7 @@ static void sub_80C2760(u8 taskId)
     case 0:
         if (!IsDma3ManagerBusyWithBgCopy())
         {
-            FillWindowPixelBuffer(1, 0);
+            FillWindowPixelBuffer(1, PIXEL_FILL(0));
             sData->var_0++;
         }
         break;
@@ -362,7 +361,7 @@ static void sub_80C2760(u8 taskId)
         sData->var_0++;
         break;
     case 3:
-        FillWindowPixelBuffer(2, 0);
+        FillWindowPixelBuffer(2, PIXEL_FILL(0));
         sub_80C4FF0();
         sub_80C438C(2);
         sData->var_0++;
@@ -468,7 +467,7 @@ static void sub_80C2760(u8 taskId)
         break;
     case 15:
         sub_800AC34();
-        NewMenuHelpers_DrawDialogueFrame(0, 1);
+        DrawDialogueFrame(0, 1);
         AddTextPrinterParameterized(0, 1, gText_WaitingTrainerFinishReading, 0, 1, 255, 0);
         CopyWindowToVram(0, 3);
         sData->var_0 = 16;
@@ -694,7 +693,7 @@ static void SetPlayerCardData(struct TrainerCard *trainerCard, u8 cardType)
     trainerCard->money = GetMoney(&gSaveBlock1Ptr->money);
 
     for (i = 0; i < 4; i++)
-        trainerCard->var_28[i] = gSaveBlock1Ptr->unk2BB0[i];
+        trainerCard->var_28[i] = gSaveBlock1Ptr->easyChatProfile[i];
 
     StringCopy(trainerCard->playerName, gSaveBlock2Ptr->playerName);
 
@@ -1102,7 +1101,7 @@ static void PrintTimeOnCard(void)
     r10 = width + 30;
     r7 -= r10;
 
-    FillWindowPixelRect(1, 0, r7, r4, r10, 15);
+    FillWindowPixelRect(1, PIXEL_FILL(0), r7, r4, r10, 15);
     ConvertIntToDecimalStringN(gStringVar4, hours, 1, 3);
     AddTextPrinterParameterized3(1, 1, r7, r4, gUnknown_0856FB0C, TEXT_SPEED_FF, gStringVar4);
     r7 += 18;
@@ -1535,7 +1534,7 @@ static void sub_80C48C8(void)
     }
 }
 
-u8 sub_80C4904(u8 cardId)
+u8 GetTrainerCardStars(u8 cardId)
 {
     struct TrainerCard* trainerCards = gTrainerCards;
     return trainerCards[cardId].stars;
@@ -1633,7 +1632,7 @@ static bool8 sub_80C4B08(struct Task* task)
         switch (sData->var_4)
         {
         case 0:
-            FillWindowPixelBuffer(1, 0);
+            FillWindowPixelBuffer(1, PIXEL_FILL(0));
             FillBgTilemapBufferRect_Palette0(3, 0, 0, 0, 0x20, 0x20);
             break;
         case 1:
@@ -1658,7 +1657,7 @@ static bool8 sub_80C4B08(struct Task* task)
             if (!sData->var_8)
                 sub_80C474C();
             else
-                FillWindowPixelBuffer(2, 0);
+                FillWindowPixelBuffer(2, PIXEL_FILL(0));
             break;
         case 4:
             if (sData->var_8)

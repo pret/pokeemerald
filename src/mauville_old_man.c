@@ -437,7 +437,7 @@ static void BardSong_TextSubPrinter(struct TextPrinterTemplate * printer, u16 a1
 
 static void sub_8120708(const u8 * src)
 {
-    NewMenuHelpers_DrawDialogueFrame(0, 0);
+    DrawDialogueFrame(0, 0);
     AddTextPrinterParameterized(0, 1, src, 0, 1, 1, BardSong_TextSubPrinter);
     gUnknown_03002F84 = TRUE;
     CopyWindowToVram(0, 3);
@@ -1182,9 +1182,9 @@ static void Task_StoryListMenu(u8 taskId) // Task_StoryListMenu
             break;
         case 1:
             selection = Menu_ProcessInput();
-            if (selection == -2)
+            if (selection == MENU_NOTHING_CHOSEN)
                 break;
-            if (selection == -1 || selection == GetFreeStorySlot())
+            if (selection == MENU_B_PRESSED || selection == GetFreeStorySlot())
             {
                 gSpecialVar_Result = 0;
             }

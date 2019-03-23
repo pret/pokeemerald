@@ -28,7 +28,7 @@ Route121_EventScript_1F5E18:: @ 81F5E18
 	removeobject 12
 	removeobject 13
 	removeobject 14
-	setvar VAR_0x4074, 1
+	setvar VAR_ROUTE121_STATE, 1
 	releaseall
 	end
 

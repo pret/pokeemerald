@@ -1,5 +1,5 @@
 LavaridgeTown_Gym_1F_MapScripts:: @ 81FE6F4
-	map_script 3, LavaridgeTown_Gym_1F_MapScript1_1FE6FA
+	map_script MAP_SCRIPT_ON_TRANSITION, LavaridgeTown_Gym_1F_MapScript1_1FE6FA
 	.byte 0
 
 LavaridgeTown_Gym_1F_MapScript1_1FE6FA: @ 81FE6FA
@@ -71,18 +71,18 @@ LavaridgeTown_Gym_1F_EventScript_1FE78C:: @ 81FE78C
 LavaridgeTown_Gym_1F_EventScript_1FE7C1:: @ 81FE7C1
 	message LavaridgeTown_Gym_1F_Text_1FF32F
 	waitmessage
-	call LavaridgeTown_Gym_1F_EventScript_27207E
+	call Common_EventScript_PlayGymBadgeFanfare
 	msgbox LavaridgeTown_Gym_1F_Text_1FF359, MSGBOX_DEFAULT
 	setflag FLAG_FLANNERY_GIVES_BADGE_INFO
 	setflag FLAG_DEFEATED_LAVARIDGE_GYM
 	setflag FLAG_BADGE04_GET
-	addvar VAR_0x4085, 1
-	compare VAR_0x4085, 6
+	addvar VAR_PETALBURG_GYM_STATE, 1
+	compare VAR_PETALBURG_GYM_STATE, 6
 	call_if_eq LavaridgeTown_Gym_1F_EventScript_271E84
 	setvar VAR_0x8008, 4
 	call LavaridgeTown_Gym_1F_EventScript_271F43
 	setflag FLAG_HIDE_VERDANTURF_TOWN_WANDAS_HOUSE_WALLY
-	setvar VAR_0x4053, 1
+	setvar VAR_LAVARIDGE_RIVAL_STATE, 1
 	call LavaridgeTown_Gym_1F_EventScript_1FE841
 	closemessage
 	delay 30
@@ -98,7 +98,7 @@ LavaridgeTown_Gym_1F_EventScript_1FE7C1:: @ 81FE7C1
 LavaridgeTown_Gym_1F_EventScript_1FE81D:: @ 81FE81D
 	giveitem_std ITEM_TM50
 	compare VAR_RESULT, 0
-	goto_if_eq LavaridgeTown_Gym_1F_EventScript_272054
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	msgbox LavaridgeTown_Gym_1F_Text_1FF45C, MSGBOX_DEFAULT
 	setflag FLAG_RECEIVED_TM50
 	release
@@ -107,7 +107,7 @@ LavaridgeTown_Gym_1F_EventScript_1FE81D:: @ 81FE81D
 LavaridgeTown_Gym_1F_EventScript_1FE841:: @ 81FE841
 	giveitem_std ITEM_TM50
 	compare VAR_RESULT, 0
-	goto_if_eq LavaridgeTown_Gym_1F_EventScript_27205E
+	goto_if_eq Common_EventScript_BagIsFull
 	msgbox LavaridgeTown_Gym_1F_Text_1FF45C, MSGBOX_DEFAULT
 	setflag FLAG_RECEIVED_TM50
 	return

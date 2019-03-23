@@ -45,7 +45,7 @@ gScriptCmdTable:: @ 81DB67C
 	.4byte ScrCmd_clearflag
 	.4byte ScrCmd_checkflag
 	.4byte ScrCmd_initclock
-	.4byte ScrCmd_dodailyevents
+	.4byte ScrCmd_dotimebasedevents
 	.4byte ScrCmd_gettime
 	.4byte ScrCmd_playse
 	.4byte ScrCmd_waitse

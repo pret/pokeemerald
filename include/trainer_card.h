@@ -43,7 +43,7 @@ struct TrainerCard
 extern struct TrainerCard gTrainerCards[4];
 
 u32 CountPlayerTrainerStars(void);
-u8 sub_80C4904(u8 cardId);
+u8 GetTrainerCardStars(u8 cardId);
 void CopyTrainerCardData(struct TrainerCard *dst, u16 *src, u8 gameVersion);
 void ShowPlayerTrainerCard(void (*callback)(void));
 void ShowTrainerCardInLink(u8 arg0, void (*callback)(void));

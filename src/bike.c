@@ -14,12 +14,6 @@
 extern bool8 gBikeCyclingChallenge;
 extern u8 gBikeCollisions;
 
-extern u8 sub_808B980(u8 direction);
-extern u8 sub_808B9BC(u8 direction);
-extern u8 sub_808B9A4(u8 direction);
-extern u8 sub_808C1B4(u8 direction);
-extern u8 sub_808B9D4(u8 direction);
-
 // this file's functions
 static void MovePlayerOnMachBike(u8, u16, u16);
 static u8 GetMachBikeTransition(u8 *);

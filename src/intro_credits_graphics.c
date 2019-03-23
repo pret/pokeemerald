@@ -57,123 +57,380 @@ static void nullsub_65(struct Sprite *sprite);
 static void sub_817B7C4(struct Sprite *sprite);
 static void nullsub_66(struct Sprite *sprite);
 
-static const struct SpriteTemplate gUnknown_085F504C = {
-    2000, 0xFFFF, &gDummyOamData, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, sub_817B62C
+static const struct SpriteTemplate gUnknown_085F504C =
+{
+    .tileTag = 2000,
+    .paletteTag = 0xFFFF,
+    .oam = &gDummyOamData,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_817B62C
 };
 
-static const struct CompressedSpriteSheet gUnknown_085F5064[] = {
-    { gUnknown_085F16A8, 0x400, 2000 },
-    { NULL }
+static const struct CompressedSpriteSheet gUnknown_085F5064[] =
+{
+    {
+        .data = gUnknown_085F16A8,
+        .size = 0x400,
+        .tag = 2000
+    },
+    {}
 };
 
-static const union AnimCmd gUnknown_085F5074[] = {
+static const union AnimCmd gUnknown_085F5074[] =
+{
     ANIMCMD_FRAME( 0, 30),
     ANIMCMD_END
 };
 
-static const union AnimCmd gUnknown_085F507C[] = {
+static const union AnimCmd gUnknown_085F507C[] =
+{
     ANIMCMD_FRAME(16, 30),
     ANIMCMD_END
 };
 
-static const union AnimCmd gUnknown_085F5084[] = {
+static const union AnimCmd gUnknown_085F5084[] =
+{
     ANIMCMD_FRAME(20, 30),
     ANIMCMD_END
 };
 
-static const union AnimCmd gUnknown_085F508C[] = {
+static const union AnimCmd gUnknown_085F508C[] =
+{
     ANIMCMD_FRAME(22, 30),
     ANIMCMD_END
 };
 
-static const union AnimCmd *const gUnknown_085F5094[] = {
+static const union AnimCmd *const gUnknown_085F5094[] =
+{
     gUnknown_085F5074,
     gUnknown_085F507C,
     gUnknown_085F5084,
     gUnknown_085F508C
 };
 
-static const struct IntroCreditsSpriteMetadata gUnknown_085F50A4[] = {
-    {  0, ST_OAM_SQUARE,      2,   72, 32, 100, 0xc00 },
-    {  0, ST_OAM_SQUARE,      2,  158, 32, 100, 0xc00 },
-    {  1, ST_OAM_SQUARE,      1,  192, 40, 101, 0x800 },
-    {  1, ST_OAM_SQUARE,      1,   56, 40, 101, 0x800 },
-    {  2, ST_OAM_H_RECTANGLE, 0,  100, 44, 102, 0x400 },
-    {  2, ST_OAM_H_RECTANGLE, 0,  152, 44, 102, 0x400 },
-    {  3, ST_OAM_H_RECTANGLE, 0,    8, 46, 103, 0x100 },
-    {  3, ST_OAM_H_RECTANGLE, 0,   56, 46, 103, 0x100 },
-    {  3, ST_OAM_H_RECTANGLE, 0,  240, 46, 103, 0x100 },
+static const struct IntroCreditsSpriteMetadata gUnknown_085F50A4[] =
+{
+    {
+        .animNum = 0,
+        .shape = SPRITE_SHAPE(32x32),
+        .size = SPRITE_SIZE(32x32),
+        .x = 72,
+        .y = 32,
+        .subpriority = 100,
+        .xOff = 0xc00
+    },
+    {
+        .animNum = 0,
+        .shape = SPRITE_SHAPE(32x32),
+        .size = SPRITE_SIZE(32x32),
+        .x = 158,
+        .y = 32,
+        .subpriority = 100,
+        .xOff = 0xc00
+    },
+    {
+        .animNum = 1,
+        .shape = SPRITE_SHAPE(16x16),
+        .size = SPRITE_SIZE(16x16),
+        .x = 192,
+        .y = 40,
+        .subpriority = 101,
+        .xOff = 0x800
+    },
+    {
+        .animNum = 1,
+        .shape = SPRITE_SHAPE(16x16),
+        .size = SPRITE_SIZE(16x16),
+        .x = 56,
+        .y = 40,
+        .subpriority = 101,
+        .xOff = 0x800
+    },
+    {
+        .animNum = 2,
+        .shape = SPRITE_SHAPE(16x8),
+        .size = SPRITE_SIZE(16x8),
+        .x = 100,
+        .y = 44,
+        .subpriority = 102,
+        .xOff = 0x400
+    },
+    {
+        .animNum = 2,
+        .shape = SPRITE_SHAPE(16x8),
+        .size = SPRITE_SIZE(16x8),
+        .x = 152,
+        .y = 44,
+        .subpriority = 102,
+        .xOff = 0x400
+    },
+    {
+        .animNum = 3,
+        .shape = SPRITE_SHAPE(16x8),
+        .size = SPRITE_SIZE(16x8),
+        .x = 8,
+        .y = 46,
+        .subpriority = 103,
+        .xOff = 0x100
+    },
+    {
+        .animNum = 3,
+        .shape = SPRITE_SHAPE(16x8),
+        .size = SPRITE_SIZE(16x8),
+        .x = 56,
+        .y = 46,
+        .subpriority = 103,
+        .xOff = 0x100
+    },
+    {
+        .animNum = 3,
+        .shape = SPRITE_SHAPE(16x8),
+        .size = SPRITE_SIZE(16x8),
+        .x = 240,
+        .y = 46,
+        .subpriority = 103,
+        .xOff = 0x100
+    },
 };
 
-static const struct CompressedSpriteSheet gUnknown_085F50EC[] = {
-    { gIntro2TreeTiles, 0x400, 2000 },
-    { NULL }
+static const struct CompressedSpriteSheet gUnknown_085F50EC[] =
+{
+    {
+        .data = gIntro2TreeTiles,
+        .size = 0x400,
+        .tag = 2000
+    },
+    {}
 };
 
-static const union AnimCmd gUnknown_085F50FC[] = {
+static const union AnimCmd gUnknown_085F50FC[] =
+{
     ANIMCMD_FRAME( 0, 30),
     ANIMCMD_END
 };
 
-static const union AnimCmd gUnknown_085F5104[] = {
+static const union AnimCmd gUnknown_085F5104[] =
+{
     ANIMCMD_FRAME(16, 30),
     ANIMCMD_END
 };
 
-static const union AnimCmd gUnknown_085F510C[] = {
+static const union AnimCmd gUnknown_085F510C[] =
+{
     ANIMCMD_FRAME(24, 30),
     ANIMCMD_END
 };
 
-static const union AnimCmd *const gUnknown_085F5114[] = {
+static const union AnimCmd *const gUnknown_085F5114[] =
+{
     gUnknown_085F50FC,
     gUnknown_085F5104,
     gUnknown_085F510C
 };
 
-static const struct IntroCreditsSpriteMetadata gUnknown_085F5120[] = {
-    {  0, ST_OAM_SQUARE,      2,   16, 88, 100, 0x2000 },
-    {  0, ST_OAM_SQUARE,      2,   80, 88, 100, 0x2000 },
-    {  0, ST_OAM_SQUARE,      2,  144, 88, 100, 0x2000 },
-    {  0, ST_OAM_SQUARE,      2,  208, 88, 100, 0x2000 },
-    {  1, ST_OAM_V_RECTANGLE, 2,   40, 88, 101, 0x1000 },
-    {  1, ST_OAM_V_RECTANGLE, 2,  104, 88, 101, 0x1000 },
-    {  1, ST_OAM_V_RECTANGLE, 2,  168, 88, 101, 0x1000 },
-    {  1, ST_OAM_V_RECTANGLE, 2,  232, 88, 101, 0x1000 },
-    {  2, ST_OAM_V_RECTANGLE, 2,   56, 88, 102, 0x800  },
-    {  2, ST_OAM_V_RECTANGLE, 2,  120, 88, 102, 0x800  },
-    {  2, ST_OAM_V_RECTANGLE, 2,  184, 88, 102, 0x800  },
-    {  2, ST_OAM_V_RECTANGLE, 2,  248, 88, 102, 0x800  },
+static const struct IntroCreditsSpriteMetadata gUnknown_085F5120[] =
+{
+    {
+        .animNum = 0,
+        .shape = SPRITE_SHAPE(32x32),
+        .size = SPRITE_SIZE(32x32),
+        .x = 16,
+        .y = 88,
+        .subpriority = 100,
+        .xOff = 0x2000,
+    },
+    {
+        .animNum = 0,
+        .shape = SPRITE_SHAPE(32x32),
+        .size = SPRITE_SIZE(32x32),
+        .x = 80,
+        .y = 88,
+        .subpriority = 100,
+        .xOff = 0x2000,
+    },
+    {
+        .animNum = 0,
+        .shape = SPRITE_SHAPE(32x32),
+        .size = SPRITE_SIZE(32x32),
+        .x = 144,
+        .y = 88,
+        .subpriority = 100,
+        .xOff = 0x2000,
+    },
+    {
+        .animNum = 0,
+        .shape = SPRITE_SHAPE(32x32),
+        .size = SPRITE_SIZE(32x32),
+        .x = 208,
+        .y = 88,
+        .subpriority = 100,
+        .xOff = 0x2000,
+    },
+    {
+        .animNum = 1,
+        .shape = SPRITE_SHAPE(16x32),
+        .size = SPRITE_SIZE(16x32),
+        .x = 40,
+        .y = 88,
+        .subpriority = 101,
+        .xOff = 0x1000,
+    },
+    {
+        .animNum = 1,
+        .shape = SPRITE_SHAPE(16x32),
+        .size = SPRITE_SIZE(16x32),
+        .x = 104,
+        .y = 88,
+        .subpriority = 101,
+        .xOff = 0x1000,
+    },
+    {
+        .animNum = 1,
+        .shape = SPRITE_SHAPE(16x32),
+        .size = SPRITE_SIZE(16x32),
+        .x = 168,
+        .y = 88,
+        .subpriority = 101,
+        .xOff = 0x1000,
+    },
+    {
+        .animNum = 1,
+        .shape = SPRITE_SHAPE(16x32),
+        .size = SPRITE_SIZE(16x32),
+        .x = 232,
+        .y = 88,
+        .subpriority = 101,
+        .xOff = 0x1000,
+    },
+    {
+        .animNum = 2,
+        .shape = SPRITE_SHAPE(16x32),
+        .size = SPRITE_SIZE(16x32),
+        .x = 56,
+        .y = 88,
+        .subpriority = 102,
+        .xOff = 0x800,
+    },
+    {
+        .animNum = 2,
+        .shape = SPRITE_SHAPE(16x32),
+        .size = SPRITE_SIZE(16x32),
+        .x = 120,
+        .y = 88,
+        .subpriority = 102,
+        .xOff = 0x800,
+    },
+    {
+        .animNum = 2,
+        .shape = SPRITE_SHAPE(16x32),
+        .size = SPRITE_SIZE(16x32),
+        .x = 184,
+        .y = 88,
+        .subpriority = 102,
+        .xOff = 0x800,
+    },
+    {
+        .animNum = 2,
+        .shape = SPRITE_SHAPE(16x32),
+        .size = SPRITE_SIZE(16x32),
+        .x = 248,
+        .y = 88,
+        .subpriority = 102,
+        .xOff = 0x800,
+    }
 };
 
-static const struct CompressedSpriteSheet gUnknown_085F5180[] = {
-    { gIntro2NightTiles, 0x400, 2000 },
-    { NULL }
+static const struct CompressedSpriteSheet gUnknown_085F5180[] =
+{
+    {
+        .data = gIntro2NightTiles,
+        .size = 0x400,
+        .tag = 2000
+    },
+    {}
 };
 
-static const union AnimCmd gUnknown_085F5190[] = {
+static const union AnimCmd gUnknown_085F5190[] =
+{
     ANIMCMD_FRAME(0, 30),
     ANIMCMD_END
 };
 
-static const union AnimCmd *const gUnknown_085F5198[] = {
+static const union AnimCmd *const gUnknown_085F5198[] =
+{
     gUnknown_085F5190
 };
 
-static const struct IntroCreditsSpriteMetadata gUnknown_085F519C[] = {
-    { 0, ST_OAM_SQUARE, 2,   24, 88, 100, 0x1000 },
-    { 0, ST_OAM_SQUARE, 2,   64, 88, 100, 0x1000 },
-    { 0, ST_OAM_SQUARE, 2,  104, 88, 100, 0x1000 },
-    { 0, ST_OAM_SQUARE, 2,  144, 88, 100, 0x1000 },
-    { 0, ST_OAM_SQUARE, 2,  184, 88, 100, 0x1000 },
-    { 0, ST_OAM_SQUARE, 2,  224, 88, 100, 0x1000 },
+static const struct IntroCreditsSpriteMetadata gUnknown_085F519C[] =
+{
+    {
+        .animNum = 0,
+        .shape = SPRITE_SHAPE(32x32),
+        .size = SPRITE_SIZE(32x32),
+        .x = 24,
+        .y = 88,
+        .subpriority = 100,
+        .xOff = 0x1000,
+    },
+    {
+        .animNum = 0,
+        .shape = SPRITE_SHAPE(32x32),
+        .size = SPRITE_SIZE(32x32),
+        .x = 64,
+        .y = 88,
+        .subpriority = 100,
+        .xOff = 0x1000,
+    },
+    {
+        .animNum = 0,
+        .shape = SPRITE_SHAPE(32x32),
+        .size = SPRITE_SIZE(32x32),
+        .x = 104,
+        .y = 88,
+        .subpriority = 100,
+        .xOff = 0x1000,
+    },
+    {
+        .animNum = 0,
+        .shape = SPRITE_SHAPE(32x32),
+        .size = SPRITE_SIZE(32x32),
+        .x = 144,
+        .y = 88,
+        .subpriority = 100,
+        .xOff = 0x1000,
+    },
+    {
+        .animNum = 0,
+        .shape = SPRITE_SHAPE(32x32),
+        .size = SPRITE_SIZE(32x32),
+        .x = 184,
+        .y = 88,
+        .subpriority = 100,
+        .xOff = 0x1000,
+    },
+    {
+        .animNum = 0,
+        .shape = SPRITE_SHAPE(32x32),
+        .size = SPRITE_SIZE(32x32),
+        .x = 224,
+        .y = 88,
+        .subpriority = 100,
+        .xOff = 0x1000,
+    }
 };
 
-static const struct OamData gOamData_85F51CC = {
-    .y = 160, .shape = ST_OAM_SQUARE, .size = 3, .priority = 1
+static const struct OamData gOamData_85F51CC =
+{
+    .y = 160,
+    .shape = SPRITE_SHAPE(64x64),
+    .size = SPRITE_SIZE(64x64),
+    .priority = 1
 };
 
-static const union AnimCmd gUnknown_085F51D4[] = {
+static const union AnimCmd gUnknown_085F51D4[] =
+{
     ANIMCMD_FRAME(  0, 8),
     ANIMCMD_FRAME( 64, 8),
     ANIMCMD_FRAME(128, 8),
@@ -181,23 +438,43 @@ static const union AnimCmd gUnknown_085F51D4[] = {
     ANIMCMD_JUMP(0)
 };
 
-static const union AnimCmd *const gUnknown_085F51E8[] = {
+static const union AnimCmd *const gUnknown_085F51E8[] =
+{
     gUnknown_085F51D4
 };
 
-static const struct SpriteTemplate gUnknown_085F51EC = {
-    1002, 1002, &gOamData_85F51CC, gUnknown_085F51E8, NULL, gDummySpriteAffineAnimTable, nullsub_65
+static const struct SpriteTemplate gUnknown_085F51EC =
+{
+    .tileTag = 1002,
+    .paletteTag = 1002,
+    .oam = &gOamData_85F51CC,
+    .anims = gUnknown_085F51E8,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = nullsub_65
 };
 
-static const struct SpriteTemplate gUnknown_085F5204 = {
-    1003, 1003, &gOamData_85F51CC, gUnknown_085F51E8, NULL, gDummySpriteAffineAnimTable, nullsub_65
+static const struct SpriteTemplate gUnknown_085F5204 =
+{
+    .tileTag = 1003,
+    .paletteTag = 1003,
+    .oam = &gOamData_85F51CC,
+    .anims = gUnknown_085F51E8,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = nullsub_65
 };
 
-static const struct OamData gUnknown_085F521C = {
-    .y = 160, .shape = ST_OAM_H_RECTANGLE, .size = 3, .priority = 1
+static const struct OamData gUnknown_085F521C =
+{
+    .y = 160,
+    .shape = SPRITE_SHAPE(64x32),
+    .size = SPRITE_SIZE(64x32),
+    .priority = 1
 };
 
-static const union AnimCmd gUnknown_085F5224[] = {
+static const union AnimCmd gUnknown_085F5224[] =
+{
     ANIMCMD_FRAME(  0, 8),
     ANIMCMD_FRAME( 32, 8),
     ANIMCMD_FRAME( 64, 8),
@@ -205,119 +482,217 @@ static const union AnimCmd gUnknown_085F5224[] = {
     ANIMCMD_JUMP(0)
 };
 
-static const union AnimCmd *const gUnknown_085F5238[] = {
+static const union AnimCmd *const gUnknown_085F5238[] =
+{
     gUnknown_085F5224
 };
 
-static const struct SpriteTemplate gUnknown_085F523C = {
-    1001, 1002, &gUnknown_085F521C, gUnknown_085F5238, NULL, gDummySpriteAffineAnimTable, sub_817B7C4
+static const struct SpriteTemplate gUnknown_085F523C =
+{
+    .tileTag = 1001,
+    .paletteTag = 1002,
+    .oam = &gUnknown_085F521C,
+    .anims = gUnknown_085F5238,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_817B7C4
 };
 
-static const struct SpriteTemplate gUnknown_085F5254 = {
-    1001, 1003, &gUnknown_085F521C, gUnknown_085F5238, NULL, gDummySpriteAffineAnimTable, sub_817B7C4
+static const struct SpriteTemplate gUnknown_085F5254 =
+{
+    .tileTag = 1001,
+    .paletteTag = 1003,
+    .oam = &gUnknown_085F521C,
+    .anims = gUnknown_085F5238,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_817B7C4
 };
 
-static const struct OamData gUnknown_085F526C = {
-    .y = 160, .shape = ST_OAM_SQUARE, .size = 3, .priority = 1
+static const struct OamData gUnknown_085F526C =
+{
+    .y = 160,
+    .shape = SPRITE_SHAPE(64x64),
+    .size = SPRITE_SIZE(64x64),
+    .priority = 1
 };
 
-static const union AnimCmd gUnknown_085F5274[] = {
+static const union AnimCmd gUnknown_085F5274[] =
+{
     ANIMCMD_FRAME(  0, 16),
     ANIMCMD_END
 };
 
-static const union AnimCmd gUnknown_085F527C[] = {
+static const union AnimCmd gUnknown_085F527C[] =
+{
     ANIMCMD_FRAME( 64, 16),
     ANIMCMD_END
 };
 
-static const union AnimCmd *const gUnknown_085F5284[] = {
+static const union AnimCmd *const gUnknown_085F5284[] =
+{
     gUnknown_085F5274,
     gUnknown_085F527C
 };
 
-static const struct SpriteTemplate gUnknown_085F528C = {
-    1004, 1004, &gUnknown_085F526C, gUnknown_085F5284, NULL, gDummySpriteAffineAnimTable, nullsub_66
+static const struct SpriteTemplate gUnknown_085F528C =
+{
+    .tileTag = 1004,
+    .paletteTag = 1004,
+    .oam = &gUnknown_085F526C,
+    .anims = gUnknown_085F5284,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = nullsub_66
 };
 
-static const struct SpriteTemplate gUnknown_085F52A4 = {
-    1005, 1005, &gUnknown_085F526C, gUnknown_085F5284, NULL, gDummySpriteAffineAnimTable, nullsub_66
+static const struct SpriteTemplate gUnknown_085F52A4 =
+{
+    .tileTag = 1005,
+    .paletteTag = 1005,
+    .oam = &gUnknown_085F526C,
+    .anims = gUnknown_085F5284,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = nullsub_66
 };
 
-const struct CompressedSpriteSheet gIntro2BrendanSpriteSheet[] = {
-    { gIntro2BrendanNoTurnGfx, 0x2000, 1002 },
-    { NULL }
+const struct CompressedSpriteSheet gIntro2BrendanSpriteSheet[] =
+{
+    {
+        .data = gIntro2BrendanNoTurnGfx,
+        .size = 0x2000,
+        .tag = 1002
+    },
+    {}
 };
 
-const struct CompressedSpriteSheet gIntro2MaySpriteSheet[] = {
-    { gIntro2MayNoTurnGfx, 0x2000, 1003 },
-    { NULL }
+const struct CompressedSpriteSheet gIntro2MaySpriteSheet[] =
+{
+    {
+        .data = gIntro2MayNoTurnGfx,
+        .size = 0x2000,
+        .tag = 1003
+    },
+    {}
 };
 
-const struct CompressedSpriteSheet gIntro2BicycleSpriteSheet[] = {
-    { gIntro2BicycleTiles, 0x1000, 1001 },
-    { NULL }
+const struct CompressedSpriteSheet gIntro2BicycleSpriteSheet[] =
+{
+    {
+        .data = gIntro2BicycleTiles,
+        .size = 0x1000,
+        .tag = 1001
+    },
+    {}
 };
 
-static const struct CompressedSpriteSheet gUnknown_085F52EC[] = {
-    { gIntro2FlygonGfx, 0x1000, 1004 },
-    { NULL }
+static const struct CompressedSpriteSheet gUnknown_085F52EC[] =
+{
+    {
+        .data = gIntro2FlygonGfx,
+        .size = 0x1000,
+        .tag = 1004
+    },
+    {}
 };
 
-const struct CompressedSpriteSheet gIntro2FlygonSpriteSheet[] = {
-    { gIntro2FlygonGfx, 0x1000, 1005 },
-    { NULL }
+const struct CompressedSpriteSheet gIntro2FlygonSpriteSheet[] =
+{
+    {
+        .data = gIntro2FlygonGfx,
+        .size = 0x1000,
+        .tag = 1005
+    },
+    {}
 };
 
-const struct SpritePalette gUnknown_085F530C[] = {
-    { gIntro2BrendanNoTurnPal, 1002 },
-    { gIntro2BrendanNoTurnPal, 1003 },
-    { gIntro2FlygonPal,        1004 },
-    { gIntro2FlygonPal,        1005 },
-    { NULL }
+const struct SpritePalette gIntroBikeAndFlygonPalette[] =
+{
+    { .data = gIntro2BrendanNoTurnPal, .tag = 1002 },
+    { .data = gIntro2BrendanNoTurnPal, .tag = 1003 },
+    { .data = gIntro2FlygonPal,        .tag = 1004 },
+    { .data = gIntro2FlygonPal,        .tag = 1005 },
+    {}
 };
 
-const struct CompressedSpriteSheet gUnknown_085F5334[] = {
-    { gIntro2BrendanTiles, 0x3800, 1002 },
-    { NULL }
+const struct CompressedSpriteSheet gUnknown_085F5334[] =
+{
+    {
+        .data = gIntro2BrendanTiles,
+        .size = 0x3800,
+        .tag = 1002
+    },
+    {}
 };
 
-const struct CompressedSpriteSheet gUnknown_085F5344[] = {
-    { gIntro2MayTiles, 0x3800, 1003 },
-    { NULL }
+const struct CompressedSpriteSheet gUnknown_085F5344[] =
+{
+    {
+        .data = gIntro2MayTiles,
+        .size = 0x3800,
+        .tag = 1003
+    },
+    {}
 };
 
-const struct CompressedSpriteSheet gUnknown_085F5354[] = {
-    { gIntro2BicycleTiles, 0x1000, 1001 },
-    { NULL }
+const struct CompressedSpriteSheet gUnknown_085F5354[] =
+{
+    {
+        .data = gIntro2BicycleTiles,
+        .size = 0x1000,
+        .tag = 1001
+    },
+    {}
 };
 
-static const struct CompressedSpriteSheet gUnknown_085F5364[] = {
-    { gIntro2LatiosTiles, 0x1000, 1004 },
-    { NULL }
+static const struct CompressedSpriteSheet gUnknown_085F5364[] =
+{
+    {
+        .data = gIntro2LatiosTiles,
+        .size = 0x1000,
+        .tag = 1004
+    },
+    {}
 };
 
-static const struct CompressedSpriteSheet gUnknown_085F5374[] = {
-    { gIntro2LatiasTiles, 0x1000, 1005 },
-    { NULL }
+static const struct CompressedSpriteSheet gUnknown_085F5374[] =
+{
+    {
+        .data = gIntro2LatiasTiles,
+        .size = 0x1000,
+        .tag = 1005
+    },
+    {}
 };
 
-const struct SpritePalette gUnknown_085F5384[] = {
-    { gIntro2BrendanPalette, 1002 },
-    { gIntro2MayPalette,     1003 },
-    { gIntro2LatiosPalette,  1004 },
-    { gIntro2LatiasPalette,  1005 },
-    { NULL }
+const struct SpritePalette gUnknown_085F5384[] =
+{
+    { .data = gIntro2BrendanPalette, .tag = 1002 },
+    { .data = gIntro2MayPalette,     .tag = 1003 },
+    { .data = gIntro2LatiosPalette,  .tag = 1004 },
+    { .data = gIntro2LatiasPalette,  .tag = 1005 },
+    {}
 };
 
-const struct CompressedSpriteSheet gUnknown_085F53AC[] = {
-    { gIntro2BrendanTiles, 0x2000, 1002},
-    { NULL }
+const struct CompressedSpriteSheet gUnknown_085F53AC[] =
+{
+    {
+        .data = gIntro2BrendanTiles,
+        .size = 0x2000,
+        .tag = 1002
+    },
+    {}
 };
 
-const struct CompressedSpriteSheet gUnknown_085F53BC[] = {
-    { gIntro2MayTiles, 0x2000, 1003},
-    { NULL }
+const struct CompressedSpriteSheet gUnknown_085F53BC[] =
+{
+    {
+        .data = gIntro2MayTiles,
+        .size = 0x2000,
+        .tag = 1003
+    },
+    {}
 };
 
 EWRAM_DATA u16 gUnknown_0203BD24 = 0;
@@ -331,15 +706,15 @@ static void sub_817B458(u8);
 
 void load_intro_part2_graphics(u8 a)
 {
-    LZ77UnCompVram(gUnknown_085F0740, (void *)(VRAM + 0x4000));
-    LZ77UnCompVram(gUnknown_085F0BC0, (void *)(VRAM + 0x7800));
+    LZ77UnCompVram(gUnknown_085F0740, (void *)(BG_CHAR_ADDR(1)));
+    LZ77UnCompVram(gUnknown_085F0BC0, (void *)(BG_SCREEN_ADDR(15)));
     LoadPalette(&gUnknown_085F06E0, 240, 32);
     switch (a)
     {
     case 0:
     default:
         LZ77UnCompVram(gUnknown_085F0DBC, (void *)(VRAM));
-        LZ77UnCompVram(gUnknown_085F1398, (void *)(VRAM + 0x3000));
+        LZ77UnCompVram(gUnknown_085F1398, (void *)(BG_SCREEN_ADDR(6)));
         LoadPalette(&gUnknown_085F0CFC, 0, 96);
         LoadCompressedSpriteSheet(gUnknown_085F5064);
         LoadPalette(&gUnknown_085F1668, 256, 32);
@@ -347,7 +722,7 @@ void load_intro_part2_graphics(u8 a)
         break;
     case 1:
         LZ77UnCompVram(gUnknown_085F1824, (void *)(VRAM));
-        LZ77UnCompVram(gUnknown_085F1EAC, (void *)(VRAM + 0x3000));
+        LZ77UnCompVram(gUnknown_085F1EAC, (void *)(BG_SCREEN_ADDR(6)));
         LoadPalette(&gUnknown_085F17E4, 0, 32);
         LoadCompressedSpriteSheet(gUnknown_085F50EC);
         LoadPalette(&gUnknown_085F21B0, 256, 32);
@@ -358,6 +733,7 @@ void load_intro_part2_graphics(u8 a)
     gReservedSpritePaletteCount = 8;
 }
 
+// Note: This is only called with a=1.
 void sub_817B150(u8 a)
 {
     switch (a)
@@ -437,15 +813,15 @@ void sub_817B150(u8 a)
 
 void sub_817B1C8(u8 a)
 {
-    LZ77UnCompVram(gUnknown_085F0740, (void *)(VRAM + 0x4000));
-    LZ77UnCompVram(gUnknown_085F0BC0, (void *)(VRAM + 0x7800));
+    LZ77UnCompVram(gUnknown_085F0740, (void *)(BG_CHAR_ADDR(1)));
+    LZ77UnCompVram(gUnknown_085F0BC0, (void *)(BG_SCREEN_ADDR(15)));
     switch (a)
     {
     case 0:
     default:
         LoadPalette(&gUnknown_085F06E0, 240, 32);
         LZ77UnCompVram(gUnknown_085F0DBC, (void *)(VRAM));
-        LZ77UnCompVram(gUnknown_085F1398, (void *)(VRAM + 0x3000));
+        LZ77UnCompVram(gUnknown_085F1398, (void *)(BG_SCREEN_ADDR(6)));
         LoadPalette(&gUnknown_085F0CFC, 0, 96);
         LoadCompressedSpriteSheet(gUnknown_085F5064);
         LZ77UnCompVram(gUnknown_085F16A8, (void *)(VRAM + 0x10000));
@@ -455,7 +831,7 @@ void sub_817B1C8(u8 a)
     case 1:
         LoadPalette(&gUnknown_085F0700, 240, 32);
         LZ77UnCompVram(gUnknown_085F0DBC, (void *)(VRAM));
-        LZ77UnCompVram(gUnknown_085F1398, (void *)(VRAM + 0x3000));
+        LZ77UnCompVram(gUnknown_085F1398, (void *)(BG_SCREEN_ADDR(6)));
         LoadPalette(&gUnknown_085F0D5C, 0, 96);
         LoadCompressedSpriteSheet(gUnknown_085F5064);
         LZ77UnCompVram(gUnknown_085F16A8, (void *)(VRAM + 0x10000));
@@ -466,7 +842,7 @@ void sub_817B1C8(u8 a)
     case 3:
         LoadPalette(&gUnknown_085F0700, 240, 32);
         LZ77UnCompVram(gUnknown_085F1824, (void *)(VRAM));
-        LZ77UnCompVram(gUnknown_085F1EAC, (void *)(VRAM + 0x3000));
+        LZ77UnCompVram(gUnknown_085F1EAC, (void *)(BG_SCREEN_ADDR(6)));
         LoadPalette(&gUnknown_085F1804, 0, 32);
         LoadCompressedSpriteSheet(gUnknown_085F50EC);
         LoadPalette(&gUnknown_085F1804, 256, 32);
@@ -475,7 +851,7 @@ void sub_817B1C8(u8 a)
     case 4:
         LoadPalette(&gUnknown_085F0720, 240, 32);
         LZ77UnCompVram(gUnknown_085F235C, (void *)(VRAM));
-        LZ77UnCompVram(gUnknown_085F2568, (void *)(VRAM + 0x3000));
+        LZ77UnCompVram(gUnknown_085F2568, (void *)(BG_SCREEN_ADDR(6)));
         LoadPalette(&gUnknown_085F231C, 0, 64);
         LoadCompressedSpriteSheet(gUnknown_085F5180);
         LoadPalette(&gUnknown_085F2548, 256, 32);
@@ -509,7 +885,7 @@ void sub_817B3A8(u8 a)
                                 | DISPCNT_OBJ_ON);
 }
 
-u8 sub_817B3DC(u8 a, u16 b, u16 c, u16 d)
+u8 CreateBicycleAnimationTask(u8 a, u16 b, u16 c, u16 d)
 {
     u8 taskId = CreateTask(&sub_817B458, 0);
 

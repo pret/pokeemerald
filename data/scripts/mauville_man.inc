@@ -43,8 +43,8 @@ MauvilleCity_PokemonCenter_1F_EventScript_28E0F4:: @ 828E0F4
 	end
 
 MauvilleCity_PokemonCenter_1F_EventScript_28E113:: @ 828E113
-	setvar VAR_0x8004, 6
-	call MauvilleCity_PokemonCenter_1F_EventScript_271E7C
+	setvar VAR_0x8004, EASY_CHAT_TYPE_BARD_SONG
+	call Common_ShowEasyChatScreen
 	lock
 	faceplayer
 	compare VAR_RESULT, 0

@@ -1,6 +1,6 @@
 BattleFrontier_BattlePyramidLobby_MapScripts:: @ 8250716
-	map_script 2, BattleFrontier_BattlePyramidLobby_MapScript2_250735
-	map_script 4, BattleFrontier_BattlePyramidLobby_MapScript2_2497FB
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, BattleFrontier_BattlePyramidLobby_MapScript2_250735
+	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, BattleFrontier_BattlePyramidLobby_MapScript2_2497FB
 	.byte 0
 
 BattleFrontier_BattlePyramidLobby_MapScript2_250721: @ 8250721
@@ -200,7 +200,7 @@ BattleFrontier_BattlePyramidLobby_EventScript_2509A5:: @ 82509A5
 	special LoadPlayerParty
 	closemessage
 	delay 2
-	call BattleFrontier_BattlePyramidLobby_EventScript_27134F
+	call Common_EventScript_SaveGame
 	setvar VAR_TEMP_0, 255
 	compare VAR_RESULT, 0
 	goto_if_eq BattleFrontier_BattlePyramidLobby_EventScript_250AAA
@@ -260,7 +260,7 @@ BattleFrontier_BattlePyramidLobby_EventScript_250ACC:: @ 8250ACC
 
 BattleFrontier_BattlePyramidLobby_EventScript_250ACE:: @ 8250ACE
 	lockall
-	applymovement 2, BattleFrontier_BattlePyramidLobby_Movement_27259E
+	applymovement 2, Common_Movement_FacePlayer
 	waitmovement 0
 	msgbox BattleFrontier_BattlePyramidLobby_Text_251C3B, MSGBOX_DEFAULT
 	call BattleFrontier_BattlePyramidLobby_EventScript_250AF0

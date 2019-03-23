@@ -1,0 +1,247 @@
+{
+  "id": "MAP_SS_TIDAL_CORRIDOR",
+  "name": "SSTidalCorridor",
+  "layout": "LAYOUT_SS_TIDAL_CORRIDOR",
+  "music": "MUS_M_BOAT",
+  "region_map_section": "MAPSEC_DYNAMIC",
+  "requires_flash": false,
+  "weather": "WEATHER_NONE",
+  "map_type": "MAP_TYPE_INDOOR",
+  "allow_bike": false,
+  "allow_escape_rope": false,
+  "allow_running": false,
+  "show_map_name": false,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+  "connections": null,
+  "object_events": [
+    {
+      "graphics_id": "EVENT_OBJ_GFX_SAILOR",
+      "x": 1,
+      "y": 11,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_UP",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "SSTidalCorridor_EventScript_23C119",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "EVENT_OBJ_GFX_SAILOR",
+      "x": 16,
+      "y": 7,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_WANDER_UP_AND_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 2,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "SSTidalCorridor_EventScript_23C1A3",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "EVENT_OBJ_GFX_EXPERT_M",
+      "x": 9,
+      "y": 2,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "SSTidalCorridor_EventScript_23C0D9",
+      "flag": "FLAG_HIDE_SS_TIDAL_CORRIDOR_MR_BRINEY"
+    },
+    {
+      "graphics_id": "EVENT_OBJ_GFX_WINGULL",
+      "x": 7,
+      "y": 2,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "SSTidalCorridor_EventScript_23C0E2",
+      "flag": "FLAG_HIDE_SS_TIDAL_CORRIDOR_MR_BRINEY"
+    },
+    {
+      "graphics_id": "EVENT_OBJ_GFX_SCOTT",
+      "x": 9,
+      "y": 10,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "0x0",
+      "flag": "FLAG_HIDE_SS_TIDAL_CORRIDOR_SCOTT"
+    }
+  ],
+  "warp_events": [
+    {
+      "x": 4,
+      "y": 9,
+      "elevation": 3,
+      "dest_map": "MAP_SS_TIDAL_ROOMS",
+      "dest_warp_id": 0
+    },
+    {
+      "x": 7,
+      "y": 9,
+      "elevation": 3,
+      "dest_map": "MAP_SS_TIDAL_ROOMS",
+      "dest_warp_id": 2
+    },
+    {
+      "x": 10,
+      "y": 9,
+      "elevation": 3,
+      "dest_map": "MAP_SS_TIDAL_ROOMS",
+      "dest_warp_id": 4
+    },
+    {
+      "x": 13,
+      "y": 9,
+      "elevation": 3,
+      "dest_map": "MAP_SS_TIDAL_ROOMS",
+      "dest_warp_id": 6
+    },
+    {
+      "x": 4,
+      "y": 3,
+      "elevation": 3,
+      "dest_map": "MAP_SS_TIDAL_ROOMS",
+      "dest_warp_id": 8
+    },
+    {
+      "x": 7,
+      "y": 3,
+      "elevation": 3,
+      "dest_map": "MAP_SS_TIDAL_ROOMS",
+      "dest_warp_id": 9
+    },
+    {
+      "x": 10,
+      "y": 3,
+      "elevation": 3,
+      "dest_map": "MAP_SS_TIDAL_ROOMS",
+      "dest_warp_id": 10
+    },
+    {
+      "x": 13,
+      "y": 3,
+      "elevation": 3,
+      "dest_map": "MAP_SS_TIDAL_ROOMS",
+      "dest_warp_id": 11
+    },
+    {
+      "x": 16,
+      "y": 2,
+      "elevation": 3,
+      "dest_map": "MAP_SS_TIDAL_LOWER_DECK",
+      "dest_warp_id": 0
+    }
+  ],
+  "coord_events": [],
+  "bg_events": [
+    {
+      "type": "sign",
+      "x": 2,
+      "y": 1,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "SSTidalCorridor_EventScript_23C17D"
+    },
+    {
+      "type": "sign",
+      "x": 4,
+      "y": 1,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "SSTidalCorridor_EventScript_23C17D"
+    },
+    {
+      "type": "sign",
+      "x": 6,
+      "y": 1,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "SSTidalCorridor_EventScript_23C17D"
+    },
+    {
+      "type": "sign",
+      "x": 8,
+      "y": 1,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "SSTidalCorridor_EventScript_23C17D"
+    },
+    {
+      "type": "sign",
+      "x": 10,
+      "y": 1,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "SSTidalCorridor_EventScript_23C17D"
+    },
+    {
+      "type": "sign",
+      "x": 12,
+      "y": 1,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "SSTidalCorridor_EventScript_23C17D"
+    },
+    {
+      "type": "sign",
+      "x": 14,
+      "y": 1,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "SSTidalCorridor_EventScript_23C17D"
+    },
+    {
+      "type": "sign",
+      "x": 16,
+      "y": 1,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "SSTidalCorridor_EventScript_23C17D"
+    },
+    {
+      "type": "sign",
+      "x": 5,
+      "y": 9,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
+      "script": "SSTidalCorridor_EventScript_23C0F5"
+    },
+    {
+      "type": "sign",
+      "x": 8,
+      "y": 9,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
+      "script": "SSTidalCorridor_EventScript_23C0FE"
+    },
+    {
+      "type": "sign",
+      "x": 11,
+      "y": 9,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
+      "script": "SSTidalCorridor_EventScript_23C107"
+    },
+    {
+      "type": "sign",
+      "x": 14,
+      "y": 9,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
+      "script": "SSTidalCorridor_EventScript_23C110"
+    }
+  ]
+}

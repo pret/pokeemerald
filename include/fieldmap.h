@@ -9,6 +9,8 @@
 #define NUM_PALS_TOTAL 13
 #define MAX_MAP_DATA_SIZE 0x2800
 
+#include "main.h"
+
 extern struct BackupMapLayout gBackupMapLayout;
 
 u32 MapGridGetMetatileIdAt(int, int);
@@ -32,10 +34,21 @@ void sub_8088B3C(u16 x, u16 y);
 void InitMap(void);
 void InitMapFromSavedGame(void);
 void InitTrainerHillMap(void);
-void InitBattlePyramidMap(u8 a0);
+void InitBattlePyramidMap(bool8 setPlayerPosition);
+void copy_map_tileset1_tileset2_to_vram(struct MapLayout const *mapLayout);
+void apply_map_tileset1_tileset2_palette(struct MapLayout const *mapLayout);
+void apply_map_tileset2_palette(struct MapLayout const *mapLayout);
+void copy_map_tileset2_to_vram_2(struct MapLayout const *mapLayout);
+void copy_map_tileset1_to_vram(const struct MapLayout *);
+void copy_map_tileset2_to_vram(const struct MapLayout *);
+struct MapHeader const *const mapconnection_get_mapheader(struct MapConnection *connection);
+struct MapConnection *sub_8088A8C(s16 x, s16 y);
 
 void SpriteCB_PokeballGlow(struct Sprite *);
 void SpriteCB_PokecenterMonitor(struct Sprite *);
 void SpriteCB_HallOfFameMonitor(struct Sprite *);
+
+// field_region_map.c
+void FieldInitRegionMap(MainCallback callback);
 
 #endif //GUARD_FIELDMAP_H

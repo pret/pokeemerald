@@ -4007,26 +4007,35 @@ extern const u32 gBerryPalette_Enigma[];
 //credits
 extern const u32 gCreditsCopyrightEnd_Gfx[];
 
-//pokenav condition marker
+//pokenav
 extern const u8 gPokenavConditionMarker_Gfx[];
 extern const u16 gPokenavConditionMarker_Pal[];
+extern const u16 gPokenavLeftHeader_Pal[];
+extern const u16 gPokenavHeader_Pal[];
+extern const u32 gPokenavHeader_Gfx[];
+extern const u32 gPokenavHeader_Tilemap[];
+extern const u32 gPokenavLeftHeaderHoennMap_Gfx[];
+extern const u32 gPokenavLeftHeaderMainMenu_Gfx[];
+extern const u32 gPokenavLeftHeaderCondition_Gfx[];
+extern const u32 gPokenavLeftHeaderRibbons_Gfx[];
+extern const u32 gPokenavLeftHeaderMatchCall_Gfx[];
 
-extern const u32 gUnknown_08D9862C[];
+extern const u32 gPageInfoTilemap[];
 extern const u32 gUnknown_08D98CC8[];
-extern const u32 gUnknown_08D987FC[];
-extern const u32 gUnknown_08D9898C[];
-extern const u32 gUnknown_08D98B28[];
-extern const u32 gUnknown_08D9853C[];
+extern const u32 gPageSkillsTilemap[];
+extern const u32 gPageBattleMovesTilemap[];
+extern const u32 gPageContestMovesTilemap[];
+extern const u32 gStatusScreenPalette[];
 extern const u16 gUnknown_08D85620[];
 extern const u16 gSummaryScreenWindow_Tilemap[];
 extern const u32 gMoveTypes_Pal[];
-extern const u32 gUnknown_08D97D0C[];
+extern const u32 gStatusScreenBitmap[];
 
 extern const u16 gSummaryScreenPowAcc_Tilemap[];
 extern const u16 gUnknown_08DC3C34[];
 
 extern const u32 gMoveTypes_Gfx[];
-extern const u32 gUnknown_08D97BEC[];
+extern const u32 gMoveSelectorBitmap[];
 extern const u32 gUnknown_08D97CF4[];
 extern const u32 gStatusGfx_Icons[];
 extern const u32 gStatusPal_Icons[];
@@ -4104,9 +4113,13 @@ extern const u32 gUnknown_08D83B2C[];
 extern const u32 gUnknown_08D83C3C[];
 extern const u32 gUnknown_08D83900[];
 extern const u32 gBattleFrontierGfx_DomeOptions[];
+extern const u16 gTilesetAnims_BattleDomePals0_0[];
+extern const u16 gTilesetAnims_BattleDomePals0_1[];
+extern const u16 gTilesetAnims_BattleDomePals0_2[];
+extern const u16 gTilesetAnims_BattleDomePals0_3[];
 
-extern const u32 gUnknown_08D854E8[];
-extern const u32 gUnknown_08D855E8[];
+extern const u32 gBattleArenaJudgementSymbolsGfx[];
+extern const u32 gBattleArenaJudgementSymbolsPalette[];
 extern const u32 gContest2Pal[];
 
 extern const u32 gBattleAnimSpriteSheet_000[];
@@ -4724,9 +4737,9 @@ extern const u32 gBattleAnimBackgroundTilemap_17[];
 extern const u32 gBattleAnimBackgroundTilemap_20[];
 extern const u32 gBattleAnimBackgroundTilemap_21[];
 
-extern const u32 gUnknown_08C1D0AC[];
-extern const u32 gUnknown_08C1D1E8[];
-extern const u32 gUnknown_08C1D210[];
+extern const u32 gMetalShineGfx[];
+extern const u32 gMetalShinePalette[];
+extern const u32 gMetalShineTilemap[];
 
 extern const u32 gUnknown_08C20668[];
 extern const u32 gUnknown_08C20684[];
@@ -4882,5 +4895,14 @@ extern const u16 gFrontierPassMedalsGold_Pal[];
 extern const u16 gFrontierPassMedalsSilver_Pal[];
 extern const u16 gFrontierPassMapCursor_Pal[];
 
+// Easy Chat Screen
+extern const u32 gEasyChatWindow_Gfx[];
+extern const u32 gEasyChatWindow_Tilemap[];
+extern const u32 gEasyChatMode_Gfx[];
+extern const u16 gEasyChatMode_Pal[];
+extern const u32 gEasyChatCursor_Gfx[];
+extern const u16 gEasyChatCursor_Pal[];
+extern const u32 gEasyChatRightWindow_Gfx[];
+extern const u16 gEasyChatRightWindow_Pal[];
 
 #endif //GUARD_GRAPHICS_H

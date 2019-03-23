@@ -213,12 +213,13 @@ extern struct UnkRfuStruct_2 gUnknown_03005000;
 extern u8 gWirelessStatusIndicatorSpriteId;
 
 // Exported ROM declarations
+void WipeTrainerNameRecords(void);
 u32 sub_800BEC0(void);
 void sub_800E700(void);
 void sub_800EDD4(void);
 void sub_800F6FC(u8 who);
 void sub_800F728(u8 who);
-bool32 sub_800F7E4(void);
+bool32 IsSendingKeysToRfu(void);
 void sub_800F804(void);
 void sub_800F850(void);
 u8 sub_800FCD8(void);
@@ -237,8 +238,8 @@ void sub_800E6D0(void);
 bool32 sub_8010EC0(void);
 bool32 sub_8010F1C(void);
 bool32 sub_8011A80(void);
-bool32 sub_800F0B8(void);
-u32 sub_80124D4(void);
+bool32 IsRfuRecvQueueEmpty(void);
+u32 GetRfuRecvQueueLength(void);
 void RfuVSync(void);
 void sub_80111B0(bool32 a0);
 u8 sub_8011A74(void);
@@ -263,7 +264,7 @@ void sub_800E084(void);
 void sub_801103C(void);
 void sub_8011C5C(void);
 void sub_80106D4(void);
-void sub_800E3A8(void);
+void RecordMixTrainerNames(void);
 void sub_800ED10(void);
 void sub_800ED28(void);
 void sub_8011090(u8 a0, u32 a1, u32 a2);
@@ -282,5 +283,6 @@ void sub_800EF7C(void);
 bool8 sub_800DE7C(struct UnkLinkRfuStruct_02022B14 *buff1, u8 *buff2, u8 idx);
 s32 sub_800E87C(u8 idx);
 void sub_8011BA4(void);
+void sub_8010198(void);
 
 #endif //GUARD_LINK_RFU_H

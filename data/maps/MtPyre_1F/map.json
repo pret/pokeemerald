@@ -1,0 +1,103 @@
+{
+  "id": "MAP_MT_PYRE_1F",
+  "name": "MtPyre_1F",
+  "layout": "LAYOUT_MT_PYRE_1F",
+  "music": "MUS_M_DUNGON",
+  "region_map_section": "MAPSEC_MT_PYRE",
+  "requires_flash": false,
+  "weather": "WEATHER_NONE",
+  "map_type": "MAP_TYPE_INDOOR",
+  "allow_bike": false,
+  "allow_escape_rope": false,
+  "allow_running": false,
+  "show_map_name": true,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+  "connections": null,
+  "object_events": [
+    {
+      "graphics_id": "EVENT_OBJ_GFX_OLD_WOMAN",
+      "x": 21,
+      "y": 2,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "MtPyre_1F_EventScript_230F3F",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "EVENT_OBJ_GFX_POKEFAN_F",
+      "x": 17,
+      "y": 8,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_UP",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "MtPyre_1F_EventScript_230F78",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "EVENT_OBJ_GFX_MAN_4",
+      "x": 13,
+      "y": 10,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "MtPyre_1F_EventScript_230F81",
+      "flag": "0"
+    }
+  ],
+  "warp_events": [
+    {
+      "x": 17,
+      "y": 18,
+      "elevation": 3,
+      "dest_map": "MAP_ROUTE122",
+      "dest_warp_id": 0
+    },
+    {
+      "x": 3,
+      "y": 6,
+      "elevation": 3,
+      "dest_map": "MAP_MT_PYRE_EXTERIOR",
+      "dest_warp_id": 0
+    },
+    {
+      "x": 18,
+      "y": 18,
+      "elevation": 3,
+      "dest_map": "MAP_ROUTE122",
+      "dest_warp_id": 0
+    },
+    {
+      "x": 4,
+      "y": 6,
+      "elevation": 3,
+      "dest_map": "MAP_MT_PYRE_EXTERIOR",
+      "dest_warp_id": 0
+    },
+    {
+      "x": 11,
+      "y": 1,
+      "elevation": 3,
+      "dest_map": "MAP_MT_PYRE_2F",
+      "dest_warp_id": 0
+    },
+    {
+      "x": 20,
+      "y": 9,
+      "elevation": 3,
+      "dest_map": "MAP_MT_PYRE_2F",
+      "dest_warp_id": 4
+    }
+  ],
+  "coord_events": [],
+  "bg_events": []
+}

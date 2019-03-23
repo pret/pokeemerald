@@ -1078,7 +1078,7 @@
 	.4byte \param0
 	.endm
 
-	.macro tryimprision param0:req
+	.macro tryimprison param0:req
 	.byte 0xdb
 	.4byte \param0
 	.endm
@@ -1341,15 +1341,15 @@
 	.endm
 	
 	.macro sethword dst:req, value:req
-	setbyte \dst, \value & 0xFF
-	setbyte \dst + 1, (\value >> 8) & 0xFF
+	setbyte \dst, (\value) & 0xFF
+	setbyte \dst + 1, ((\value) >> 8) & 0xFF
 	.endm
 	
 	.macro setword dst:req, value:req
-	setbyte \dst, \value & 0xFF
-	setbyte \dst + 1, (\value >> 8) & 0xFF
-	setbyte \dst + 2, (\value >> 16) & 0xFF
-	setbyte \dst + 3, (\value >> 24) & 0xFF
+	setbyte \dst, (\value) & 0xFF
+	setbyte \dst + 1, ((\value) >> 8) & 0xFF
+	setbyte \dst + 2, ((\value) >> 16) & 0xFF
+	setbyte \dst + 3, ((\value) >> 24) & 0xFF
 	.endm
 	
 	.macro copybyte dst:req, src:req
