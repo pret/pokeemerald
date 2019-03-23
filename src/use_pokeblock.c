@@ -2,6 +2,8 @@
 #include "main.h"
 #include "pokeblock.h"
 #include "alloc.h"
+#include "decompress.h"
+#include "graphics.h"
 #include "palette.h"
 #include "pokenav.h"
 #include "menu_specialized.h"
@@ -42,6 +44,8 @@ struct UsePokeblockSubStruct
     /*0x71*/ u8 field_71;
     /*0x74*/ u8 (*unk74)(void);
     /*0x78*/ u8 unk78;
+    /*0x79*/ u8 filler79[0x1];
+    /*0x7A*/ u8 field_7A[0x22];
 };
 
 struct Unk7FB8
@@ -59,16 +63,19 @@ struct UsePokeblockStruct
     /*0x7B10*/ u8 field_7B10;
     /*0x7B11*/ u8 field_7B11[0xB];
     /*0x7B1C*/ struct Sprite *field_7B1C[10];
-    /*0x7B44*/ struct Sprite *field_7B44[0x45];
+    /*0x7B44*/ struct Sprite *field_7B44[2];
+    /*0x7B4C*/ u8 field_7B4C;
+    /*0x7B4D*/ u8 filler7B4D[0x47];
+    /*0x7B94*/ u8 filler7B94;
+    /*0x7B95*/ u8 field_7B95[3][64];
     /*0x7C58*/ struct UnknownStruct_81D1ED4 field_7C58;
     /*0x7FB0*/ u8 unk7FB0[3];
     /*0x7FB3*/ s8 field_7FB3;
     /*0x7FB4*/ s8 field_7FB4;
     /*0x7FB5*/ s8 field_7FB5;
-    /*0x7FB6*/ u8 filler7FB6[0x2];
+    /*0x7FB6*/ s8 field_7FB6;
     /*0x7FB8*/ struct Unk7FB8 field_7FB8[6];
     /*0x7FD0*/ struct UsePokeblockSubStruct info;
-    /*0x804C*/ u8 filler804C[0x20];
 };
 
 extern u16 gKeyRepeatStartDelay;
@@ -84,12 +91,12 @@ void sub_81668F8(void);
 void sub_8167420(void);
 void sub_8167760(void);
 u8 sub_81672E4(u8 arg0);
-bool8 sub_8168328(void);
+static bool8 sub_8168328(void);
 bool8 sub_8167930(void);
 void sub_8167608(u8 arg0);
 void sub_8167BA0(u16 arg0, u8 copyToVramMode);
 void sub_8166634(void);
-void sub_8167CA0(bool8);
+static void sub_8167CA0(bool8);
 void sub_8166BEC(void);
 void sub_8166D44(void);
 s8 sub_8166DE4(void);
@@ -101,7 +108,6 @@ u8 sub_81672A4(u8 a0);
 void sub_8166A34(void);
 void sub_8167104(void);
 void sub_8167338(void);
-extern void sub_81D2074(void);
 void sub_81681F4(u8);
 void sub_8166E24(void);
 bool8 sub_8166EDC(void);
@@ -112,13 +118,16 @@ extern u32 sub_81D2C68(s32, s32, s32, u8 *);
 void sub_81673DC(struct Sprite *sprite);
 void sub_81674BC(void);
 void sub_816753C(s16, u8);
+static u8 sub_8167EA4(void);
+static u8 sub_8167FA4(void);
+static u8 sub_8168048(void);
 extern void sub_81D2ED4(u8, u8, u16, u8, u8, u8, u8);
 extern void sub_81D2F78(u8, u8, s16, u16, u8, u8, u8, u8);
 extern void sub_81D3094(u8, u8, s16, u16, u8, u8, u8);
 extern void sub_81D31D0(struct SpritePalette *, struct SpritePalette *, struct SpritePalette *);
 extern void sub_81D321C(struct SpriteSheet *, struct SpriteTemplate *, struct SpritePalette*);
-void sub_8168180(void);
-void sub_81681B4(void);
+void sub_8168180(struct Sprite *sprite);
+void sub_81681B4(struct Sprite *sprite);
 extern void sub_81D32B0(struct SpriteSheet *, struct SpritePalette*);
 extern void sub_81D21DC(u8);
 
@@ -139,6 +148,11 @@ extern const u32 gUnknown_085DFA60[];
 extern const u32 gUnknown_085DFC0C[];
 extern const u16 gUnknown_086231E8[];
 extern const u16 gUnknown_08623208[];
+extern const u8 gUnknown_085DFCC9[];
+extern const struct SpritePalette gUnknown_085DFDB8;
+extern const struct SpriteTemplate gUnknown_085DFDA0;
+
+extern const u8 *const gNatureNamePointers[];
 
 // ram variables
 EWRAM_DATA struct UsePokeblockSubStruct *gUnknown_0203BC90 = NULL;
@@ -1800,63 +1814,282 @@ bool8 sub_8167930(void)
         return retvalue;
 }
 
+void sub_8167BA0(u16 arg0, u8 copyToVramMode)
+{
+    u8 partyIndex;
+    u8 nature;
+    u8 *str;
 
+    FillWindowPixelBuffer(0, PIXEL_FILL(0));
+    FillWindowPixelBuffer(1, PIXEL_FILL(0));
+    if (gUnknown_0203BCAC->info.field_71 != gUnknown_0203BCAC->info.field_70 - 1)
+    {
+        AddTextPrinterParameterized(0, 1, gUnknown_0203BCAC->field_7B95[arg0], 0, 1, 0, NULL);
+        partyIndex = sub_81672A4(gUnknown_0203BCAC->info.field_71);
+        nature = GetNature(&gPlayerParty[partyIndex]);
+        str = StringCopy(gUnknown_0203BCAC->info.field_7A, gText_NatureSlash);
+        str = StringCopy(str, gNatureNamePointers[nature]);
+        AddTextPrinterParameterized3(1, 1, 2, 1, gUnknown_085DFCC9, 0, gUnknown_0203BCAC->info.field_7A);
+    }
 
+    if (copyToVramMode)
+    {
+        CopyWindowToVram(0, 3);
+        CopyWindowToVram(1, 3);
+    }
+    else
+    {
+        CopyWindowToVram(0, 2);
+        CopyWindowToVram(1, 2);
+    }
+}
 
+static void sub_8167CA0(bool8 arg0)
+{
+    u16 var0;
+    int var1;
+    int r8;
+    int r4;
 
+    if (arg0)
+        var0 = gUnknown_0203BCAC->field_7FB5;
+    else
+        var0 = gUnknown_0203BCAC->field_7FB4;
 
+    sub_81D1F84(
+        &gUnknown_0203BCAC->field_7C58,
+        gUnknown_0203BCAC->field_7C58.unk14[gUnknown_0203BCAC->field_7FB3],
+        gUnknown_0203BCAC->field_7C58.unk14[var0]);
 
+    r8 = (gUnknown_0203BCAC->info.field_71 ^ (gUnknown_0203BCAC->info.field_70 - 1)) ? 1 : 0;
+    if (arg0)
+    {
+        gUnknown_0203BCAC->field_7FB5 = gUnknown_0203BCAC->field_7FB4;
+        gUnknown_0203BCAC->field_7FB4 = gUnknown_0203BCAC->field_7FB3;
+        gUnknown_0203BCAC->field_7FB3 = var0;
+        gUnknown_0203BCAC->field_7FB6 = gUnknown_0203BCAC->field_7FB5;
 
+        gUnknown_0203BCAC->info.field_71 = gUnknown_0203BCAC->info.field_71 == 0
+            ? gUnknown_0203BCAC->info.field_70 - 1
+            : gUnknown_0203BCAC->info.field_71 - 1;
 
+        gUnknown_0203BCAC->field_7B4C = gUnknown_0203BCAC->info.field_71 == 0
+            ? gUnknown_0203BCAC->info.field_70 - 1
+            : gUnknown_0203BCAC->info.field_71 - 1;
+    }
+    else
+    {
+        gUnknown_0203BCAC->field_7FB4 = gUnknown_0203BCAC->field_7FB5;
+        gUnknown_0203BCAC->field_7FB5 = gUnknown_0203BCAC->field_7FB3;
+        gUnknown_0203BCAC->field_7FB3 = var0;
+        gUnknown_0203BCAC->field_7FB6 = gUnknown_0203BCAC->field_7FB4;
 
+        gUnknown_0203BCAC->info.field_71 = gUnknown_0203BCAC->info.field_71 < gUnknown_0203BCAC->info.field_70 - 1
+            ? gUnknown_0203BCAC->info.field_71 + 1
+            : 0;
 
+        gUnknown_0203BCAC->field_7B4C = gUnknown_0203BCAC->info.field_71 < gUnknown_0203BCAC->info.field_70 - 1
+            ? gUnknown_0203BCAC->info.field_71 + 1
+            : 0;
+    }
 
+    r4 = (gUnknown_0203BCAC->info.field_71 ^ (gUnknown_0203BCAC->info.field_70 - 1)) ? 1 : 0;
+    sub_81D3520(gUnknown_0203BCAC->field_7B1C);
 
+    if (!r8)
+        gUnknown_0203BCAC->info.unk74 = sub_8167EA4;
+    else if (!r4)
+        gUnknown_0203BCAC->info.unk74 = sub_8167FA4;
+    else
+        gUnknown_0203BCAC->info.unk74 = sub_8168048;
+}
 
+static u8 sub_8167EA4(void)
+{
+    switch (gUnknown_0203BCAC->info.unk78)
+    {
+    case 0:
+        sub_8167608(gUnknown_0203BCAC->field_7FB3);
+        gUnknown_0203BCAC->info.unk78++;
+        break;
+    case 1:
+        sub_8167BA0(gUnknown_0203BCAC->field_7FB3, 0);
+        gUnknown_0203BCAC->info.unk78++;
+        break;
+    case 2:
+        if (!sub_81D3178(&gUnknown_0203BCAC->field_7C58, &gUnknown_0203BCAC->field_7B0E))
+        {
+            sub_816753C(gUnknown_0203BCAC->field_7B4C, gUnknown_0203BCAC->field_7FB6);
+            gUnknown_0203BCAC->info.unk78++;
+        }
+        break;
+    case 3:
+        sub_81D3464(gUnknown_0203BCAC->field_7B1C);
+        if (gUnknown_0203BCAC->info.field_71 != gUnknown_0203BCAC->info.field_70 - 1)
+        {
+            u8 var0 = gUnknown_0203BCAC->unk7FB0[gUnknown_0203BCAC->field_7FB3];
+            sub_81D3480(gUnknown_0203BCAC->field_7B1C, gUnknown_0203BCAC->field_7B10, var0);
+        }
 
+        gUnknown_0203BCAC->info.unk78 = 0;
+        return FALSE;
+    }
 
+    return TRUE;
+}
 
+static u8 sub_8167FA4(void)
+{
+    switch (gUnknown_0203BCAC->info.unk78)
+    {
+    case 0:
+        if (!sub_81D31A4(&gUnknown_0203BCAC->field_7C58, &gUnknown_0203BCAC->field_7B0E))
+            gUnknown_0203BCAC->info.unk78++;
+        break;
+    case 1:
+        sub_8167BA0(gUnknown_0203BCAC->field_7FB3, 0);
+        gUnknown_0203BCAC->info.unk78++;
+        break;
+    case 2:
+        sub_816753C(gUnknown_0203BCAC->field_7B4C, gUnknown_0203BCAC->field_7FB6);
+        gUnknown_0203BCAC->info.unk78++;
+        break;
+    case 3:
+        gUnknown_0203BCAC->info.unk78 = 0;
+        return FALSE;
+    }
 
+    return TRUE;
+}
 
+static u8 sub_8168048(void)
+{
+    switch (gUnknown_0203BCAC->info.unk78)
+    {
+    case 0:
+        sub_81D2074(&gUnknown_0203BCAC->field_7C58);
+        if (!sub_81D3150(&gUnknown_0203BCAC->field_7B0E))
+        {
+            sub_8167608(gUnknown_0203BCAC->field_7FB3);
+            gUnknown_0203BCAC->info.unk78++;
+        }
+        break;
+    case 1:
+        sub_8167BA0(gUnknown_0203BCAC->field_7FB3, 0);
+        gUnknown_0203BCAC->info.unk78++;
+        break;
+    case 2:
+        if (!sub_81D3178(&gUnknown_0203BCAC->field_7C58, &gUnknown_0203BCAC->field_7B0E))
+        {
+            sub_816753C(gUnknown_0203BCAC->field_7B4C, gUnknown_0203BCAC->field_7FB6);
+            gUnknown_0203BCAC->info.unk78++;
+        }
+        break;
+    case 3:
+        sub_81D3464(gUnknown_0203BCAC->field_7B1C);
+        if (gUnknown_0203BCAC->info.field_71 != gUnknown_0203BCAC->info.field_70 - 1)
+        {
+            u8 var0 = gUnknown_0203BCAC->unk7FB0[gUnknown_0203BCAC->field_7FB3];
+            sub_81D3480(gUnknown_0203BCAC->field_7B1C, gUnknown_0203BCAC->field_7B10, var0);
+        }
 
+        gUnknown_0203BCAC->info.unk78 = 0;
+        return FALSE;
+    }
 
+    return TRUE;
+}
 
+void sub_8168168(struct Sprite *sprite)
+{
+    sprite->pos1.x = gUnknown_0203BCAC->field_7B0E + 38;
+}
 
+void sub_8168180(struct Sprite *sprite)
+{
+    if (sprite->data[0] == gUnknown_0203BCAC->info.field_71)
+        StartSpriteAnim(sprite, 0);
+    else
+        StartSpriteAnim(sprite, 1);
+}
 
+void sub_81681B4(struct Sprite *sprite)
+{
+    if (gUnknown_0203BCAC->info.field_71 == gUnknown_0203BCAC->info.field_70 - 1)
+        sprite->oam.paletteNum = IndexOfSpritePaletteTag(101);
+    else
+        sprite->oam.paletteNum = IndexOfSpritePaletteTag(102);
+}
 
+void sub_81681F4(u8 monIndex)
+{
+    u8 sheen = GetMonData(&gPlayerParty[monIndex], MON_DATA_SHEEN);
+    gUnknown_0203BCAC->unk7FB0[gUnknown_0203BCAC->field_7FB3] = sheen != 255
+        ? sheen / 29
+        : 9;
+}
 
+static void sub_8168248(void)
+{
+    struct CompressedSpriteSheet spriteSheet;
+    struct SpritePalette spritePalette;
 
+    spritePalette = gUnknown_085DFDB8;
+    spriteSheet.data = gUsePokeblockCondition_Gfx;
+    spriteSheet.size = 0x800;
+    spriteSheet.tag = 1;
+    LoadCompressedSpriteSheet(&spriteSheet);
+    LoadSpritePalette(&spritePalette);
+}
 
+static void sub_8168294(void)
+{
+    u16 i;
+    s16 xDiff, xStart;
+    int yStart = 17;
+    int var = 8;
+    struct Sprite **sprites = gUnknown_0203BCAC->field_7B44;
+    const struct SpriteTemplate *template = &gUnknown_085DFDA0;
 
+    for (i = 0, xDiff = 64, xStart = -96; i < 2; i++)
+    {
+        u8 spriteId = CreateSprite(template, i * xDiff + xStart, yStart, 0);
+        if (spriteId != MAX_SPRITES)
+        {
+            gSprites[spriteId].data[0] = var;
+            gSprites[spriteId].data[1] = (i * xDiff) | 32;
+            gSprites[spriteId].data[2] = i;
+            StartSpriteAnim(&gSprites[spriteId], i);
+            sprites[i] = &gSprites[spriteId];
+        }
+    }
+}
 
+static bool8 sub_8168328(void)
+{
+    switch (gUnknown_0203BCAC->info.unk78)
+    {
+    case 0:
+        sub_8168248();
+        gUnknown_0203BCAC->info.unk78++;
+        return TRUE;
+    case 1:
+        sub_8168294();
+        gUnknown_0203BCAC->info.unk78 = 0;
+        return FALSE;
+    }
 
+    return FALSE;
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+void sub_8168374(struct Sprite *sprite)
+{
+    s16 prevX = sprite->pos1.x;
+    sprite->pos1.x += sprite->data[0];
+    if ((prevX <= sprite->data[1] && sprite->pos1.x >= sprite->data[1])
+     || (prevX >= sprite->data[1] && sprite->pos1.x <= sprite->data[1]))
+    {
+        sprite->pos1.x = sprite->data[1];
+        sprite->callback = SpriteCallbackDummy;
+    }
+}

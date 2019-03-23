@@ -4905,4 +4905,7 @@ extern const u16 gEasyChatCursor_Pal[];
 extern const u32 gEasyChatRightWindow_Gfx[];
 extern const u16 gEasyChatRightWindow_Pal[];
 
+// Use Pokeblock
+extern const u32 gUsePokeblockCondition_Gfx[];
+
 #endif //GUARD_GRAPHICS_H
