@@ -489,9 +489,10 @@ void PrepareStringBattle(u16 stringId, u8 battler)
         stringId = STRINGID_STATSWONTDECREASE2;
 
     // Check Defiant and Competitive stat raise whenever a stat is lowered.
-    else if (((GetBattlerAbility(gBattlerTarget) == ABILITY_DEFIANT && gBattleMons[gBattlerTarget].statStages[STAT_ATK] != 12)
-                || (GetBattlerAbility(gBattlerTarget) == ABILITY_COMPETITIVE && gBattleMons[gBattlerTarget].statStages[STAT_SPATK] != 12))
-             && stringId == STRINGID_PKMNSSTATCHANGED4)
+    else if (stringId == STRINGID_PKMNSSTATCHANGED4
+              && ((GetBattlerAbility(gBattlerTarget) == ABILITY_DEFIANT && gBattleMons[gBattlerTarget].statStages[STAT_ATK] != 12)
+                 || (GetBattlerAbility(gBattlerTarget) == ABILITY_COMPETITIVE && gBattleMons[gBattlerTarget].statStages[STAT_SPATK] != 12))
+              && gSpecialStatuses[gBattlerTarget].changedStatsBattlerId != BATTLE_PARTNER(gBattlerTarget))
     {
         gBattlerAbility = gBattlerTarget;
         BattleScriptPushCursor();

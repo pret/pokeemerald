@@ -7808,6 +7808,8 @@ static u32 ChangeStatBuffs(s8 statValue, u32 statId, u32 flags, const u8 *BS_ptr
     else
         gActiveBattler = gBattlerTarget;
 
+    gSpecialStatuses[gActiveBattler].changedStatsBattlerId = gBattlerAttacker;
+
     flags &= ~(MOVE_EFFECT_AFFECTS_USER);
 
     if (flags & MOVE_EFFECT_CERTAIN)
