@@ -1,6 +1,7 @@
 #ifndef GUARD_MENU_SPECIALIZED_H
 #define GUARD_MENU_SPECIALIZED_H
 
+#include "sprite.h"
 #include "player_pc.h"
 #include "list_menu.h"
 #include "pokemon.h"
@@ -13,17 +14,16 @@ struct UnknownSubStruct_81D1ED4
 
 struct UnknownStruct_81D1ED4
 {
-    u8 unk0[4][5];
-    struct UnknownSubStruct_81D1ED4 unk14[4][5];
-    struct UnknownSubStruct_81D1ED4 unk64[10][5];
-    struct UnknownSubStruct_81D1ED4 unk12C[5];
-    u16 unk140[66][2];
-    u16 unk248[66][2];
-    u16 unk350;
-    u16 unk352;
-    u8 unk354;
-    u8 unk355;
-    u8 unk356[0x22];
+    /*0x000*/ u8 unk0[4][5];
+    /*0x014*/ struct UnknownSubStruct_81D1ED4 unk14[4][5];
+    /*0x064*/ struct UnknownSubStruct_81D1ED4 unk64[10][5];
+    /*0x12C*/ struct UnknownSubStruct_81D1ED4 unk12C[5];
+    /*0x140*/ u16 unk140[66][2];
+    /*0x248*/ u16 unk248[66][2];
+    /*0x350*/ u16 unk350;
+    /*0x352*/ u16 unk352;
+    /*0x354*/ u8 unk354;
+    /*0x355*/ u8 unk355;
 };
 
 bool8 sub_81D1C44(u8 count);
@@ -38,9 +38,11 @@ void sub_81D1ED4(struct UnknownStruct_81D1ED4 *a0);
 void sub_81D2108(struct UnknownStruct_81D1ED4 *arg0);
 void sub_81D20AC(struct UnknownStruct_81D1ED4 *arg0);
 void sub_81D2230(struct UnknownStruct_81D1ED4 *arg0);
+void sub_81D3520(struct Sprite **);
 bool8 sub_81D20BC(struct UnknownStruct_81D1ED4 *arg0);
-void sub_81D3464(void *arg0);
-void sub_81D3480(void *arg0, u8 arg1);
+void sub_81D354C(struct Sprite **);
+void sub_81D3464(struct Sprite **arg0);
+void sub_81D3480(struct Sprite **arg0, u8 arg1, u8 arg2);
 void sub_81D2754(u8 *arg0, struct UnknownSubStruct_81D1ED4 *arg1);
 void sub_81D1F84(struct UnknownStruct_81D1ED4 *arg0, struct UnknownSubStruct_81D1ED4 *arg1, struct UnknownSubStruct_81D1ED4 *arg2);
 void MoveRelearnerPrintText(u8 *str);
