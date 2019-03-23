@@ -1,6 +1,7 @@
 #ifndef GUARD_MENU_SPECIALIZED_H
 #define GUARD_MENU_SPECIALIZED_H
 
+#include "sprite.h"
 #include "player_pc.h"
 #include "list_menu.h"
 #include "pokemon.h"
@@ -37,9 +38,11 @@ void sub_81D1ED4(struct UnknownStruct_81D1ED4 *a0);
 void sub_81D2108(struct UnknownStruct_81D1ED4 *arg0);
 void sub_81D20AC(struct UnknownStruct_81D1ED4 *arg0);
 void sub_81D2230(struct UnknownStruct_81D1ED4 *arg0);
+void sub_81D3520(struct Sprite **);
 bool8 sub_81D20BC(struct UnknownStruct_81D1ED4 *arg0);
-void sub_81D3464(void *arg0);
-void sub_81D3480(void *arg0, u8 arg1, u8 arg2);
+void sub_81D354C(struct Sprite **);
+void sub_81D3464(struct Sprite **arg0);
+void sub_81D3480(struct Sprite **arg0, u8 arg1, u8 arg2);
 void sub_81D2754(u8 *arg0, struct UnknownSubStruct_81D1ED4 *arg1);
 void sub_81D1F84(struct UnknownStruct_81D1ED4 *arg0, struct UnknownSubStruct_81D1ED4 *arg1, struct UnknownSubStruct_81D1ED4 *arg2);
 void MoveRelearnerPrintText(u8 *str);
