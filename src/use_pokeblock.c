@@ -44,6 +44,13 @@ struct UsePokeblockSubStruct
     /*0x78*/ u8 unk78;
 };
 
+struct Unk7FB8
+{
+    u8 unk0;
+    u8 unk1;
+    u16 unk2;
+};
+
 struct UsePokeblockStruct
 {
     /*0x0000*/ u8 field_0[0x7B06];
@@ -56,7 +63,8 @@ struct UsePokeblockStruct
     /*0x7C58*/ struct UnknownStruct_81D1ED4 field_7C58;
     /*0x7FB0*/ u8 unk7FB0[3];
     /*0x7FB3*/ s8 unk7FB3;
-    /*0x7FB4*/ u8 filler7FB4[0x1C];
+    /*0x7FB4*/ u8 filler7FB4[0x4];
+    /*0x7FB8*/ struct Unk7FB8 field_7FB8[6];
     /*0x7FD0*/ struct UsePokeblockSubStruct info;
     /*0x804C*/ u8 filler804C[0x20];
 };
@@ -815,13 +823,9 @@ void sub_8166E24(void)
     for (gUnknown_0203BC90->field_53 = 0; gUnknown_0203BC90->field_53 < 5 && gUnknown_0203BC90->field_61[gUnknown_0203BC90->field_53] == 0; gUnknown_0203BC90->field_53++);
     
     if (gUnknown_0203BC90->field_53 < 5)
-    {
         Pokeblock_BufferEnhancedStatText(gStringVar4, gUnknown_0203BC90->field_53, gUnknown_0203BC90->field_61[gUnknown_0203BC90->field_53]);
-    }
     else
-        {
-            Pokeblock_BufferEnhancedStatText(gStringVar4, gUnknown_0203BC90->field_53, 0);
-        }
+        Pokeblock_BufferEnhancedStatText(gStringVar4, gUnknown_0203BC90->field_53, 0);
         
     Pokeblock_MenuWindowTextPrint(gStringVar4);
     PutWindowTilemap(2);
@@ -880,10 +884,8 @@ void Pokeblock_BufferEnhancedStatText(u8 *dest, u8 statID, s16 a2)
 {
     if (a2 != 0)
     {
-        if(a2 > 0)
-        {
-            statID = 0;
-        }
+        if (a2 > 0)
+            a2 = 0;
 
         StringCopy(dest, sContestStatNames[statID]);
         StringAppend(dest, gText_WasEnhanced);
@@ -938,12 +940,10 @@ _08167018:\n\
 
 void Pokeblock_GetMonContestStats(struct Pokemon *pokemon, u8 *data)
 {
-    u16 i = 0;
+    u16 i;
 
-    for (; i < 5; i++)
-    {
+    for (i = 0; i < 5; i++)
         data[i] = GetMonData(pokemon, gUnknown_085DFCB0[i]);
-    }
 }
 
 void sub_8167054(struct Pokeblock *pokeblock, struct Pokemon *pokemon)
@@ -954,7 +954,7 @@ void sub_8167054(struct Pokeblock *pokeblock, struct Pokemon *pokemon)
     if (GetMonData(pokemon, MON_DATA_SHEEN) != 255)
     {
         sub_8167184(pokeblock, pokemon);
-        for (i=0; i<5; i++)
+        for (i = 0; i < 5; i++)
         {
             data = GetMonData(pokemon, gUnknown_085DFCB0[i]);
             cstat = data +  gUnknown_0203BC90->field_66[i];
@@ -965,10 +965,12 @@ void sub_8167054(struct Pokeblock *pokeblock, struct Pokemon *pokemon)
             data = cstat;
             SetMonData(pokemon, gUnknown_085DFCB0[i], &data);
         }
+
         cstat = (u8)GetMonData(pokemon, MON_DATA_SHEEN);
         cstat = cstat + pokeblock->feel;
         if (cstat > 255)
             cstat = 255;
+
         data = cstat;
         SetMonData(pokemon, MON_DATA_SHEEN, &data);
     }
@@ -1006,17 +1008,17 @@ void sub_8167184(struct Pokeblock *pokeblock, struct Pokemon *pokemon)
         direction = -1;
     else
         return;
-    for (i=0; i<5; i++)
+
+    for (i = 0; i < 5; i++)
     {
         amount = gUnknown_0203BC90->field_66[i];
         boost = amount / 10;
         if (amount % 10 >= 5) // round to the nearest
             boost++;
+
         taste = GetMonFlavorRelation(pokemon, gUnknown_085DFCC4[i]);
         if (taste == direction)
-        {
             gUnknown_0203BC90->field_66[i] += boost * taste;
-        }
     }
 }
 
@@ -1032,30 +1034,30 @@ bool8 sub_8167268(void)
 u8 sub_81672A4(u8 a0)
 {
     u8 i;
-    for (i=0; i<PARTY_SIZE; i++)
+    for (i = 0; i < PARTY_SIZE; i++)
     {
         if (!GetMonData(&gPlayerParty[i], MON_DATA_IS_EGG))
         {
             if (a0 == 0)
                 return i;
+
             a0--;
         }
     }
     return 0;
 }
 
-u8 sub_81672E4(u8 a0)
+u8 sub_81672E4(u8 partyCount)
 {
-    u8 ct;
-    u8 i;
-    for (i=0, ct=0; i<a0; i++)
+    u8 i, numEggs;
+
+    for (i = 0, numEggs = 0; i < partyCount; i++)
     {
         if (GetMonData(&gPlayerParty[i], MON_DATA_IS_EGG))
-        {
-            ct++;
-        }
+            numEggs++;
     }
-    return a0 - ct;
+
+    return partyCount - numEggs;
 }
 
 u8 sub_8167324(u8 a0)
@@ -1070,7 +1072,7 @@ void sub_8167338(void)
     LoadSpriteSheet(&gSpriteSheet_ConditionUpDown);
     LoadSpritePalette(&gSpritePalette_ConditionUpDown);
     gUnknown_0203BC90->field_54 = 0;
-    for (flavor=0; flavor<5; flavor++)
+    for (flavor = 0; flavor < 5; flavor++)
     {
         if (gUnknown_0203BC90->field_61[flavor] != 0)
         {
@@ -1078,9 +1080,8 @@ void sub_8167338(void)
             if (spriteidx != MAX_SPRITES)
             {
                 if (gUnknown_0203BC90->field_61[flavor] != 0)
-                {
                     gSprites[spriteidx].callback = sub_81673DC;
-                }
+
                 gUnknown_0203BC90->field_54++;
             }
         }
@@ -1089,107 +1090,38 @@ void sub_8167338(void)
 
 void sub_81673DC(struct Sprite *sprite)
 {
-    if (sprite->data[0] <= 5)
+    if (sprite->data[0] < 6)
         sprite->pos2.y -= 2;
-    else if (sprite->data[0] <= 11)
+    else if (sprite->data[0] < 12)
         sprite->pos2.y += 2;
-    if ((++sprite->data[0]) > 60)
+
+    if (++sprite->data[0] > 60)
     {
         DestroySprite(sprite);
-       gUnknown_0203BC90->field_54--;
+        gUnknown_0203BC90->field_54--;
     }
 }
 
-#ifdef NONMATCHING
 void sub_8167420(void)
 {
     u16 i;
-    u16 ct;
+    u16 numMons;
     
-    for (i=0, ct=0;  i < CalculatePlayerPartyCount(); i++)
+    for (i = 0, numMons = 0;  i < CalculatePlayerPartyCount(); i++)
     {
         if (!GetMonData(&gPlayerParty[i], MON_DATA_IS_EGG))
         {
-            *(&gUnknown_0203BCAC->field_7FB8 + ct * 4) = 14;
-            *(&gUnknown_0203BCAC->field_7FB9 + ct * 4)= i;
-            *(&gUnknown_0203BCAC->field_7FBA + ct * 2) = 0;
-            ct++;
+            gUnknown_0203BCAC->field_7FB8[numMons].unk0 = 14;
+            gUnknown_0203BCAC->field_7FB8[numMons].unk1 = i;
+            gUnknown_0203BCAC->field_7FB8[numMons].unk2 = 0;
+            numMons++;
         }
     }
+
     gUnknown_0203BCAC->info.field_71 = 0;
-    gUnknown_0203BCAC->info.field_70 = ct + 1;
+    gUnknown_0203BCAC->info.field_70 = numMons + 1;
     sub_81674BC();
 }
-#else
-NAKED
-void sub_8167420(void)
-{
-    asm(".syntax unified\n\
-push {r4-r6,lr}\n\
-    movs r4, 0\n\
-    movs r5, 0\n\
-    ldr r6, =gUnknown_0203BCAC\n\
-    b _08167472\n\
-    .pool\n\
-_08167430:\n\
-    movs r0, 0x64\n\
-    muls r0, r4\n\
-    ldr r1, =gPlayerParty\n\
-    adds r0, r1\n\
-    movs r1, 0x2D\n\
-    bl GetMonData\n\
-    adds r3, r0, 0\n\
-    cmp r3, 0\n\
-    bne _0816746C\n\
-    ldr r1, [r6]\n\
-    lsls r2, r5, 2\n\
-    adds r1, r2\n\
-    ldr r0, =0x00007fb8\n\
-    adds r1, r0\n\
-    movs r0, 0xE\n\
-    strb r0, [r1]\n\
-    ldr r0, [r6]\n\
-    adds r0, r2\n\
-    ldr r1, =0x00007fb9\n\
-    adds r0, r1\n\
-    strb r4, [r0]\n\
-    ldr r0, [r6]\n\
-    adds r0, r2\n\
-    ldr r2, =0x00007fba\n\
-    adds r0, r2\n\
-    strh r3, [r0]\n\
-    adds r0, r5, 0x1\n\
-    lsls r0, 16\n\
-    lsrs r5, r0, 16\n\
-_0816746C:\n\
-    adds r0, r4, 0x1\n\
-    lsls r0, 16\n\
-    lsrs r4, r0, 16\n\
-_08167472:\n\
-    bl CalculatePlayerPartyCount\n\
-    lsls r0, 24\n\
-    lsrs r0, 24\n\
-    cmp r4, r0\n\
-    bcc _08167430\n\
-    ldr r2, =gUnknown_0203BCAC\n\
-    ldr r0, [r2]\n\
-    ldr r1, =0x00008041\n\
-    adds r0, r1\n\
-    movs r1, 0\n\
-    strb r1, [r0]\n\
-    ldr r0, [r2]\n\
-    adds r1, r5, 0x1\n\
-    ldr r2, =0x00008040\n\
-    adds r0, r2\n\
-    strb r1, [r0]\n\
-    bl sub_81674BC\n\
-    pop {r4-r6}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .pool\n\
-    .syntax divided\n");
-}
-#endif
 
 #ifdef NONMATCHING
 void sub_81674BC(void)
