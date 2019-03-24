@@ -898,7 +898,7 @@ SECTIONS {
         sound/songs/midi/se_rg_excellent.o(.rodata);
         sound/songs/midi/se_rg_nawamiss.o(.rodata);
         sound/songs/midi/se_toreeye.o(.rodata);
-        sound/songs/se_toreoff.o(.rodata);
+        sound/songs/midi/se_toreoff.o(.rodata);
         sound/songs/midi/se_hantei1.o(.rodata);
         sound/songs/midi/se_hantei2.o(.rodata);
         sound/songs/midi/se_curtain.o(.rodata);
