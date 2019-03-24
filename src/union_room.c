@@ -2474,12 +2474,12 @@ u16 ReadAsU16(const u8 *ptr)
     return (ptr[1] << 8) | (ptr[0]);
 }
 
-void sub_8015664(u32 arg0, const u8 *src)
+void sub_8015664(u32 nextState, const u8 *src)
 {
     struct UnkStruct_URoom *data = gUnknown_02022C30.uRoom;
 
     data->state = 8;
-    data->stateAfterPrint = arg0;
+    data->stateAfterPrint = nextState;
     if (src != gStringVar4)
         StringExpandPlaceholders(gStringVar4, src);
 }
@@ -3023,7 +3023,7 @@ void sub_80156E0(u8 taskId)
         break;
     case 13:
         sub_8017E00(gStringVar4, gUnknown_02022C2C | 0x40);
-        sub_8015664(0xE, gStringVar4);
+        sub_8015664(14, gStringVar4);
         break;
     case 14:
         sub_800ADF8();
