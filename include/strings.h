@@ -2589,4 +2589,7 @@ extern const u8 gUnknown_085EE14B[];
 extern const u8 gUnknown_085EE14F[];
 extern const u8 gUnknown_085EE154[];
 
+// Berry Powder Menu
+extern const u8 gText_Powder[];
+
 #endif // GUARD_STRINGS_H

@@ -404,7 +404,7 @@ _08020F48:
 	ldr r1, [r4]
 	ldr r0, [r1, 0x68]
 	str r0, [r1, 0x1C]
-	bl sub_8024700
+	bl GiveBerryPowder
 	lsls r0, 24
 	cmp r0, 0
 	bne _08020F66
@@ -6510,7 +6510,7 @@ _080240DC:
 	movs r3, 0x6
 	bl ConvertIntToDecimalStringN
 	ldr r4, =gStringVar2
-	bl sub_80247BC
+	bl GetBerryPowder
 	adds r1, r0, 0
 	adds r0, r4, 0
 	movs r2, 0
