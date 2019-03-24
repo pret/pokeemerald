@@ -13,14 +13,14 @@
 
 static EWRAM_DATA bool32 gUnknown_02022C70 = FALSE;
 
-void sub_801B180(void);
-void sub_801B14C(void);
-bool32 sub_801B114(const struct MEventBuffer_3120_Sub * data);
-bool32 sub_801B2CC(const struct MEventBuffer_32E0_Sub * data);
-void sub_801B330(void);
-void sub_801B368(void);
-void sub_801B9F8(void);
-void sub_801BA8C(u32 a0, u32 a1, u32 * a2, int a3);
+static void sub_801B180(void);
+static void sub_801B14C(void);
+static bool32 sub_801B114(const struct MEventBuffer_3120_Sub *data);
+static bool32 sub_801B2CC(const struct MEventBuffer_32E0_Sub *data);
+static void sub_801B330(void);
+static void sub_801B368(void);
+static void sub_801B9F8(void);
+static void sub_801BA8C(u32 a0, u32 a1, u32 *a2, int a3);
 
 void sub_801AFD8(void)
 {
@@ -29,27 +29,27 @@ void sub_801AFD8(void)
     sub_811F8BC();
 }
 
-struct MEventBuffer_3120_Sub * sub_801B00C(void)
+struct MEventBuffer_3120_Sub *sub_801B00C(void)
 {
     return &gSaveBlock1Ptr->unk_322C.buffer_000.data;
 }
 
-struct MEventBuffer_32E0_Sub * sav1_get_mevent_buffer_1(void)
+struct MEventBuffer_32E0_Sub *sav1_get_mevent_buffer_1(void)
 {
     return &gSaveBlock1Ptr->unk_322C.buffer_1c0.data;
 }
 
-struct MEventBuffer_3430_Sub * sav1_get_mevent_buffer_2(void)
+struct MEventBuffer_3430_Sub *sav1_get_mevent_buffer_2(void)
 {
     return &gSaveBlock1Ptr->unk_322C.buffer_310.data;
 }
 
-struct MysteryEventStruct * sub_801B044(void)
+struct MysteryEventStruct *sub_801B044(void)
 {
     return &gSaveBlock1Ptr->unk_322C.unk_340;
 }
 
-u16 * sub_801B058(void)
+u16 *sub_801B058(void)
 {
     return gSaveBlock1Ptr->unk_322C.unk_338;
 }
@@ -59,7 +59,7 @@ void sub_801B06C(void)
     sub_801B14C();
 }
 
-bool32 sub_801B078(const struct MEventBuffer_3120_Sub * src)
+bool32 sub_801B078(const struct MEventBuffer_3120_Sub *src)
 {
     if (!sub_801B114(src))
         return FALSE;
@@ -80,7 +80,7 @@ bool32 sub_801B0CC(void)
     return TRUE;
 }
 
-bool32 sub_801B114(const struct MEventBuffer_3120_Sub * data)
+static bool32 sub_801B114(const struct MEventBuffer_3120_Sub *data)
 {
     if (data->unk_00 == 0)
         return FALSE;
@@ -90,28 +90,28 @@ bool32 sub_801B114(const struct MEventBuffer_3120_Sub * data)
 
 bool32 sub_801B128(void)
 {
-    const struct MEventBuffer_3120_Sub * data = &gSaveBlock1Ptr->unk_322C.buffer_000.data;
+    const struct MEventBuffer_3120_Sub *data = &gSaveBlock1Ptr->unk_322C.buffer_000.data;
     if (data->unk_02 == 0)
         return FALSE;
 
     return TRUE;
 }
 
-void sub_801B14C(void)
+static void sub_801B14C(void)
 {
     CpuFill32(0, sub_801B00C(), sizeof(gSaveBlock1Ptr->unk_322C.buffer_000.data));
     gSaveBlock1Ptr->unk_322C.buffer_000.crc = 0;
 }
 
-void sub_801B180(void)
+static void sub_801B180(void)
 {
     CpuFill32(0, sub_801B044(), sizeof(struct MysteryEventStruct));
     sub_801DBC0();
 }
 
-bool32 sub_801B1A4(const u8 * src)
+bool32 sub_801B1A4(const u8 *src)
 {
-    const u8 * r5 = (const u8 *)&gSaveBlock1Ptr->unk_322C.buffer_000.data;
+    const u8 *r5 = (const u8 *)&gSaveBlock1Ptr->unk_322C.buffer_000.data;
     u32 i;
     if (!sub_801B0CC())
         return FALSE;
@@ -136,10 +136,10 @@ void sub_801B1E8(void)
     ClearEReaderTrainer(&gSaveBlock2Ptr->frontier.ereaderTrainer);
 }
 
-bool32 sub_801B21C(const struct MEventBuffer_32E0_Sub * data)
+bool32 sub_801B21C(const struct MEventBuffer_32E0_Sub *data)
 {
-    struct MEventBuffer_3430_Sub * r2;
-    struct MEventBuffer_32E0_Sub * r1;
+    struct MEventBuffer_3430_Sub *r2;
+    struct MEventBuffer_32E0_Sub *r1;
     if (!sub_801B2CC(data))
         return FALSE;
 
@@ -164,7 +164,7 @@ bool32 sub_801B27C(void)
     return TRUE;
 }
 
-bool32 sub_801B2CC(const struct MEventBuffer_32E0_Sub * data)
+static bool32 sub_801B2CC(const struct MEventBuffer_32E0_Sub *data)
 {
     if (data->unk_00 == 0)
         return FALSE;
@@ -182,22 +182,22 @@ bool32 sub_801B2CC(const struct MEventBuffer_32E0_Sub * data)
 
 bool32 sub_801B308(void)
 {
-    const struct MEventBuffer_32E0_Sub * data = &gSaveBlock1Ptr->unk_322C.buffer_1c0.data;
+    const struct MEventBuffer_32E0_Sub *data = &gSaveBlock1Ptr->unk_322C.buffer_1c0.data;
     if (data->unk_08_6 == 0)
         return FALSE;
 
     return TRUE;
 }
 
-void sub_801B330(void)
+static void sub_801B330(void)
 {
     CpuFill32(0, &gSaveBlock1Ptr->unk_322C.buffer_1c0.data, sizeof(struct MEventBuffer_32E0_Sub));
     gSaveBlock1Ptr->unk_322C.buffer_1c0.crc = 0;
 }
 
-void sub_801B368(void)
+static void sub_801B368(void)
 {
-    CpuFill32(0, sav1_get_mevent_buffer_2(), 18 * sizeof(u16));
+    CpuFill32(0, sav1_get_mevent_buffer_2(), 18 *sizeof(u16));
     gSaveBlock1Ptr->unk_322C.buffer_310.crc = 0;
 }
 
@@ -209,13 +209,13 @@ u16 sub_801B39C(void)
     return 0;
 }
 
-void sub_801B3C0(struct MEventBuffer_32E0_Sub * buffer)
+void sub_801B3C0(struct MEventBuffer_32E0_Sub *buffer)
 {
     if (buffer->unk_08_6 == 1)
         buffer->unk_08_6 = 0;
 }
 
-bool32 sub_801B3D8(u16 a0)
+static bool32 sub_801B3D8(u16 a0)
 {
     if (a0 >= 1000 && a0 < 1020)
         return TRUE;
@@ -259,7 +259,7 @@ bool32 sub_801B3F8(void)
     return TRUE;
 }
 
-int sub_801B438(const struct MEventBuffer_3430_Sub * data, int size)
+static int sub_801B438(const struct MEventBuffer_3430_Sub *data, int size)
 {
     int r3 = 0;
     int i;
@@ -272,7 +272,7 @@ int sub_801B438(const struct MEventBuffer_3430_Sub * data, int size)
     return r3;
 }
 
-bool32 sub_801B460(const struct MEventBuffer_3430_Sub * data1, const u16 * data2, int size)
+static bool32 sub_801B460(const struct MEventBuffer_3430_Sub *data1, const u16 *data2, int size)
 {
     int i;
     for (i = 0; i < size; i++)
@@ -286,7 +286,7 @@ bool32 sub_801B460(const struct MEventBuffer_3430_Sub * data1, const u16 * data2
     return FALSE;
 }
 
-bool32 sub_801B4A4(const u16 * data)
+static bool32 sub_801B4A4(const u16 *data)
 {
     if (data[1] == 0)
         return FALSE;
@@ -297,9 +297,9 @@ bool32 sub_801B4A4(const u16 * data)
     return TRUE;
 }
 
-int sub_801B4CC(void)
+static int sub_801B4CC(void)
 {
-    struct MEventBuffer_32E0_Sub * data;
+    struct MEventBuffer_32E0_Sub *data;
     if (!sub_801B27C())
         return 0;
 
@@ -310,9 +310,9 @@ int sub_801B4CC(void)
     return sub_801B438(&gSaveBlock1Ptr->unk_322C.buffer_310.data, data->unk_09);
 }
 
-bool32 sub_801B508(const u16 * data)
+bool32 sub_801B508(const u16 *data)
 {
-    struct MEventBuffer_32E0_Sub * buffer = &gSaveBlock1Ptr->unk_322C.buffer_1c0.data;
+    struct MEventBuffer_32E0_Sub *buffer = &gSaveBlock1Ptr->unk_322C.buffer_1c0.data;
     int size = buffer->unk_09;
     int i;
     if (!sub_801B4A4(data))
@@ -334,7 +334,7 @@ bool32 sub_801B508(const u16 * data)
     return FALSE;
 }
 
-void sub_801B580(struct MEventStruct_Unk1442CC * data, bool32 a1)
+void sub_801B580(struct MEventStruct_Unk1442CC *data, bool32 a1)
 {
     int i;
     CpuFill32(0, data, sizeof(struct MEventStruct_Unk1442CC));
@@ -376,7 +376,7 @@ void sub_801B580(struct MEventStruct_Unk1442CC * data, bool32 a1)
     data->unk_60 = RomHeaderSoftwareVersion;
 }
 
-bool32 sub_801B6A0(const struct MEventStruct_Unk1442CC * data, bool32 a1)
+bool32 sub_801B6A0(const struct MEventStruct_Unk1442CC *data, bool32 a1)
 {
     if (data->unk_00 != 0x101)
         return FALSE;
@@ -399,7 +399,7 @@ bool32 sub_801B6A0(const struct MEventStruct_Unk1442CC * data, bool32 a1)
     return TRUE;
 }
 
-u32 sub_801B6EC(const u16 * a0, const struct MEventStruct_Unk1442CC * a1, void * unused)
+u32 sub_801B6EC(const u16 *a0, const struct MEventStruct_Unk1442CC *a1, void *unused)
 {
     if (a1->unk_14 == 0)
         return 0;
@@ -410,7 +410,7 @@ u32 sub_801B6EC(const u16 * a0, const struct MEventStruct_Unk1442CC * a1, void *
     return 2;
 }
 
-u32 sub_801B708(const u16 * a0, const struct MEventStruct_Unk1442CC * a1, void * unused)
+u32 sub_801B708(const u16 *a0, const struct MEventStruct_Unk1442CC *a1, void *unused)
 {
     int r4 = a1->unk_44 - sub_801B438(&a1->unk_20, a1->unk_44);
     if (r4 == 0)
@@ -422,7 +422,7 @@ u32 sub_801B708(const u16 * a0, const struct MEventStruct_Unk1442CC * a1, void *
     return 2;
 }
 
-bool32 sub_801B748(const struct MEventStruct_Unk1442CC * a0, const u16 * a1)
+bool32 sub_801B748(const struct MEventStruct_Unk1442CC *a0, const u16 *a1)
 {
     int i;
     for (i = 0; i < 4; i++)
@@ -434,12 +434,12 @@ bool32 sub_801B748(const struct MEventStruct_Unk1442CC * a0, const u16 * a1)
     return TRUE;
 }
 
-int sub_801B770(const struct MEventStruct_Unk1442CC * a0)
+static int sub_801B770(const struct MEventStruct_Unk1442CC *a0)
 {
     return sub_801B438(&a0->unk_20, a0->unk_44);
 }
 
-u16 sub_801B784(const struct MEventStruct_Unk1442CC * a0, u32 command)
+u16 sub_801B784(const struct MEventStruct_Unk1442CC *a0, u32 command)
 {
     switch (command)
     {
@@ -459,12 +459,12 @@ u16 sub_801B784(const struct MEventStruct_Unk1442CC * a0, u32 command)
     }
 }
 
-void sub_801B7D8(u32 command)
+static void sub_801B7D8(u32 command)
 {
-    struct MEventBuffer_32E0_Sub * data = &gSaveBlock1Ptr->unk_322C.buffer_1c0.data;
+    struct MEventBuffer_32E0_Sub *data = &gSaveBlock1Ptr->unk_322C.buffer_1c0.data;
     if (data->unk_08_0 == 2)
     {
-        u16 * dest = NULL;
+        u16 *dest = NULL;
         switch (command)
         {
         case 0:
@@ -498,7 +498,7 @@ u16 mevent_081445C0(u32 command)
             struct MEventBuffer_32E0_Sub *data = &gSaveBlock1Ptr->unk_322C.buffer_1c0.data;
             if (data->unk_08_0 == 2)
             {
-                struct MEventBuffer_3430_Sub * buffer = &gSaveBlock1Ptr->unk_322C.buffer_310.data;
+                struct MEventBuffer_3430_Sub *buffer = &gSaveBlock1Ptr->unk_322C.buffer_310.data;
                 return buffer->unk_00;
             }
             break;
@@ -508,7 +508,7 @@ u16 mevent_081445C0(u32 command)
             struct MEventBuffer_32E0_Sub *data = &gSaveBlock1Ptr->unk_322C.buffer_1c0.data;
             if (data->unk_08_0 == 2)
             {
-                struct MEventBuffer_3430_Sub * buffer = &gSaveBlock1Ptr->unk_322C.buffer_310.data;
+                struct MEventBuffer_3430_Sub *buffer = &gSaveBlock1Ptr->unk_322C.buffer_310.data;
                 return buffer->unk_02;
             }
             break;
@@ -518,7 +518,7 @@ u16 mevent_081445C0(u32 command)
             struct MEventBuffer_32E0_Sub *data = &gSaveBlock1Ptr->unk_322C.buffer_1c0.data;
             if (data->unk_08_0 == 2)
             {
-                struct MEventBuffer_3430_Sub * buffer = &gSaveBlock1Ptr->unk_322C.buffer_310.data;
+                struct MEventBuffer_3430_Sub *buffer = &gSaveBlock1Ptr->unk_322C.buffer_310.data;
                 return buffer->unk_04;
             }
             break;
@@ -585,12 +585,12 @@ void sub_801B990(u32 a0, u32 a1)
     }
 }
 
-void sub_801B9F8(void)
+static void sub_801B9F8(void)
 {
     CpuFill32(0, gSaveBlock1Ptr->unk_322C.unk_344, sizeof(gSaveBlock1Ptr->unk_322C.unk_344));
 }
 
-bool32 sub_801BA24(u32 a0, u32 * a1, int size)
+static bool32 sub_801BA24(u32 a0, u32 *a1, int size)
 {
     int i;
     int j;
@@ -619,7 +619,7 @@ bool32 sub_801BA24(u32 a0, u32 * a1, int size)
     }
 }
 
-void sub_801BA8C(u32 a0, u32 a1, u32 * a2, int a3)
+static void sub_801BA8C(u32 a0, u32 a1, u32 *a2, int a3)
 {
     if (sub_801BA24(a1, a2, a3))
         sub_801B7D8(a0);
