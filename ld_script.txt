@@ -230,7 +230,6 @@ SECTIONS {
         src/roamer.o(.text);
         src/battle_tower.o(.text);
         src/use_pokeblock.o(.text);
-        asm/use_pokeblock.o(.text);
         src/battle_controller_wally.o(.text);
         src/player_pc.o(.text);
         src/intro.o(.text);
