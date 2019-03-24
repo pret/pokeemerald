@@ -9,7 +9,7 @@
 sub_801DB68: @ 801DB68
 	push {r4,r5,lr}
 	adds r4, r0, 0
-	bl GetSaveBlock1Field356C
+	bl sub_801B044
 	adds r5, r0, 0
 	movs r0, 0x3
 	adds r1, r4, 0
@@ -55,7 +55,7 @@ _0801DBB8:
 	thumb_func_start sub_801DBC0
 sub_801DBC0: @ 801DBC0
 	push {lr}
-	bl GetSaveBlock1Field356C
+	bl sub_801B044
 	movs r1, 0
 	strb r1, [r0]
 	strb r1, [r0, 0x1]
@@ -72,7 +72,7 @@ sub_801DBDC: @ 801DBDC
 	ldr r0, =0x0000402e
 	bl GetVarPointer
 	adds r4, r0, 0
-	bl GetSaveBlock1Field356C
+	bl sub_801B044
 	adds r2, r0, 0
 	ldr r0, [r2]
 	lsls r0, 24
@@ -103,7 +103,7 @@ _0801DC10:
 sub_801DC20: @ 801DC20
 	push {r4-r6,lr}
 	ldr r6, =gSpecialVar_Result
-	bl GetSaveBlock1Field356C
+	bl sub_801B044
 	adds r4, r0, 0
 	bl IsMysteryEventEnabled
 	cmp r0, 0
