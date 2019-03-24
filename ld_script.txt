@@ -800,7 +800,7 @@ SECTIONS {
         sound/songs/se_w057.o(.rodata);
         sound/songs/se_w056.o(.rodata);
         sound/songs/se_w250.o(.rodata);
-        sound/songs/se_w030.o(.rodata);
+        sound/songs/midi/se_w030.o(.rodata);
         sound/songs/se_w039.o(.rodata);
         sound/songs/se_w054.o(.rodata);
         sound/songs/se_w077.o(.rodata);
