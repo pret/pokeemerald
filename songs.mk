@@ -1125,5 +1125,8 @@ $(MID_SUBDIR)/se_tb_start.s: %.s: %.mid
 $(MID_SUBDIR)/se_tk_kasya.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G127 -V110 -P4
 
+$(MID_SUBDIR)/se_tk_warpin.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G127 -V090 -P4
+
 $(MID_SUBDIR)/se_z_search.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G127 -P5
