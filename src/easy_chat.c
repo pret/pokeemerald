@@ -1318,7 +1318,7 @@ void ShowEasyChatScreen(void)
         words = gSaveBlock2Ptr->apprentices[0].easyChatWords;
         break;
     case EASY_CHAT_TYPE_QUESTIONNAIRE:
-        words = GetSaveBlock1Field3564();
+        words = sub_801B058();
         break;
     default:
         return;
@@ -5531,7 +5531,7 @@ void InitializeEasyChatWordArray(u16 *words, u16 length)
 void sub_811F8BC(void)
 {
     int i;
-    u16 *words = GetSaveBlock1Field3564();
+    u16 *words = sub_801B058();
     for (i = 0; i < 4; i++)
         words[i] = 0xFFFF;
 }

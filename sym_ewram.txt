@@ -46,8 +46,7 @@ gUnknown_02022C68: @ 2022C68
 gUnknown_02022C6C: @ 2022C6C
 	.space 0x4
 
-gUnknown_02022C70: @ 2022C70
-	.space 0x4
+	.include "src/mevent2.o"
 
 gUnknown_02022C74: @ 2022C74
 	.space 0x4
