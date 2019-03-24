@@ -698,7 +698,7 @@ SECTIONS {
         sound/songs/midi/se_nageru.o(.rodata);
         sound/songs/midi/se_toy_c.o(.rodata);
         sound/songs/midi/se_toy_d.o(.rodata);
-        sound/songs/se_toy_e.o(.rodata);
+        sound/songs/midi/se_toy_e.o(.rodata);
         sound/songs/se_toy_f.o(.rodata);
         sound/songs/se_toy_g.o(.rodata);
         sound/songs/midi/se_toy_a.o(.rodata);
