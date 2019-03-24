@@ -509,19 +509,15 @@ void sub_81668F8(void)
     }
 }
 
-#ifdef NONMATCHING
 void sub_8166A34(void)
 {
     switch (gUnknown_0203BC90->field_50)
     {
         u8 var;
         case 0:
-            gUnknown_0203BC90->field_5c[0] = (u8) &gPlayerParty;
-            gUnknown_0203BCAC->info.field_71 = (u32) &gUnknown_0203BCAC->field_0[gUnknown_0203BCAC->info.field_71];
-            gUnknown_0203BC90->field_5c[0] = &gPlayerParty
+            gUnknown_0203BC90->pokemon = gPlayerParty;
+            gUnknown_0203BC90->pokemon += gUnknown_0203BCAC->field_7FB8[gUnknown_0203BCAC->info.field_71].unk1;
             sub_81D3520(gUnknown_0203BCAC->field_7B1C);
-            /*gUnknown_0203BCAC->pokemon = &gPlayerParty[gUnknown_083DFEC4->unk893c[gUnknown_0203BCAC->field_0[0x7B1C]].partyIdx];
-            move_anim_execute();*/
             gUnknown_0203BC90->field_50++;
             break;
         case 1:
@@ -530,27 +526,26 @@ void sub_8166A34(void)
             break;
         case 2:
             sub_8167104();
-            sub_81D2754(gUnknown_0203BC90->field_5c, &gUnknown_0203BCAC->field_7C58[0x50]);
-            sub_81D1F84(&gUnknown_0203BCAC->field_7C58[0], &gUnknown_0203BCAC->field_7C58[gUnknown_0203BCAC->field_7C58[0x35B] + 0x14], 0);
+            sub_81D2754(gUnknown_0203BC90->field_5c, gUnknown_0203BCAC->field_7C58.unk14[3]);
+            sub_81D1F84(&gUnknown_0203BCAC->field_7C58, gUnknown_0203BCAC->field_7C58.unk14[gUnknown_0203BCAC->field_7FB3], gUnknown_0203BCAC->field_7C58.unk14[3]);
             sub_8167338();
             gUnknown_0203BC90->field_50++;
             break;
         case 3:
-            var = gUnknown_0203BCAC->field_7C58[0];
-            sub_81D2074();
-            if (!var)
+			var = sub_81D2074(&gUnknown_0203BCAC->field_7C58);
+			if(var)
+				return;
+			
+            sub_81681F4(sub_81672A4(gUnknown_0203BCAC->info.field_71));
+			
+            if (gUnknown_0203BCAC->info.field_71 != gUnknown_0203BCAC->info.field_70 - 1)
             {
-                sub_81681F4(sub_81672A4(gUnknown_0203BCAC->info.field_71));
-                /*sub_80F3D00();
-                gUnknown_0203BCAC->unk52 = 0;*/
-                if(gUnknown_0203BCAC->info.field_71 == gUnknown_0203BCAC->info.field_70 - 1)
-                {
-                    gUnknown_0203BC90->field_52 = var;
-                }
-        
-                sub_81D3480(&gUnknown_0203BCAC->field_7C58[0x35B], gUnknown_0203BCAC->field_7C58[0x35B + gUnknown_0203BCAC->field_7C58[0x358]]);
-                
+                u8 var0 = gUnknown_0203BCAC->unk7FB0[gUnknown_0203BCAC->field_7FB3];
+                sub_81D3480(gUnknown_0203BCAC->field_7B1C, gUnknown_0203BCAC->field_7B10, var0);
             }
+			
+            gUnknown_0203BC90->field_52 = 0;
+			gUnknown_0203BC90->field_50++;
             break;
         case 4:
             if ((++gUnknown_0203BC90->field_52) > 16)
@@ -568,190 +563,6 @@ void sub_8166A34(void)
             break;
     }
 }
-#else
-NAKED
-void sub_8166A34(void)
-{
-    asm(".syntax unified\n\
-        push {r4-r6,lr}\n\
-    ldr r1, =gUnknown_0203BC90\n\
-    ldr r0, [r1]\n\
-    adds r0, 0x50\n\
-    ldrb r0, [r0]\n\
-    adds r5, r1, 0\n\
-    cmp r0, 0x5\n\
-    bls _08166A46\n\
-    b _08166BDA\n\
-_08166A46:\n\
-    lsls r0, 2\n\
-    ldr r1, =_08166A58\n\
-    adds r0, r1\n\
-    ldr r0, [r0]\n\
-    mov pc, r0\n\
-    .pool\n\
-    .align 2, 0\n\
-_08166A58:\n\
-    .4byte _08166A70\n\
-    .4byte _08166AAC\n\
-    .4byte _08166AC0\n\
-    .4byte _08166B14\n\
-    .4byte _08166B94\n\
-    .4byte _08166BB6\n\
-_08166A70:\n\
-    ldr r4, [r5]\n\
-    ldr r3, =gPlayerParty\n\
-    str r3, [r4, 0xC]\n\
-    ldr r0, =gUnknown_0203BCAC\n\
-    ldr r0, [r0]\n\
-    ldr r2, =0x00008041\n\
-    adds r1, r0, r2\n\
-    ldrb r1, [r1]\n\
-    lsls r1, 2\n\
-    adds r1, r0, r1\n\
-    subs r2, 0x88\n\
-    adds r1, r2\n\
-    ldrb r2, [r1]\n\
-    movs r1, 0x64\n\
-    muls r1, r2\n\
-    adds r1, r3\n\
-    str r1, [r4, 0xC]\n\
-    ldr r3, =0x00007b1c\n\
-    adds r0, r3\n\
-    bl sub_81D3520\n\
-    b _08166BAA\n\
-    .pool\n\
-_08166AAC:\n\
-    ldr r0, =gMain\n\
-    ldrh r1, [r0, 0x2E]\n\
-    movs r0, 0x3\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    bne _08166ABA\n\
-    b _08166BDA\n\
-_08166ABA:\n\
-    b _08166BAA\n\
-    .pool\n\
-_08166AC0:\n\
-    bl sub_8167104\n\
-    ldr r6, =gUnknown_0203BC90\n\
-    ldr r0, [r6]\n\
-    adds r0, 0x5C\n\
-    ldr r4, =gUnknown_0203BCAC\n\
-    ldr r1, [r4]\n\
-    ldr r5, =0x00007ca8\n\
-    adds r1, r5\n\
-    bl sub_81D2754\n\
-    ldr r2, [r4]\n\
-    ldr r4, =0x00007c58\n\
-    adds r0, r2, r4\n\
-    ldr r3, =0x00007fb3\n\
-    adds r1, r2, r3\n\
-    movs r3, 0\n\
-    ldrsb r3, [r1, r3]\n\
-    lsls r1, r3, 2\n\
-    adds r1, r3\n\
-    lsls r1, 2\n\
-    adds r4, 0x14\n\
-    adds r1, r4\n\
-    adds r1, r2, r1\n\
-    adds r2, r5\n\
-    bl sub_81D1F84\n\
-    bl sub_8167338\n\
-    ldr r1, [r6]\n\
-    b _08166BAC\n\
-    .pool\n\
-_08166B14:\n\
-    ldr r5, =gUnknown_0203BCAC\n\
-    ldr r0, [r5]\n\
-    ldr r1, =0x00007c58\n\
-    adds r0, r1\n\
-    bl sub_81D2074\n\
-    lsls r0, 24\n\
-    lsrs r6, r0, 24\n\
-    cmp r6, 0\n\
-    bne _08166BDA\n\
-    ldr r0, [r5]\n\
-    ldr r4, =0x00008041\n\
-    adds r0, r4\n\
-    ldrb r0, [r0]\n\
-    bl sub_81672A4\n\
-    lsls r0, 24\n\
-    lsrs r0, 24\n\
-    bl sub_81681F4\n\
-    ldr r3, [r5]\n\
-    adds r4, r3, r4\n\
-    ldrb r1, [r4]\n\
-    ldr r2, =0x00008040\n\
-    adds r0, r3, r2\n\
-    ldrb r0, [r0]\n\
-    subs r0, 0x1\n\
-    cmp r1, r0\n\
-    beq _08166B6C\n\
-    ldr r4, =0x00007fb3\n\
-    adds r0, r3, r4\n\
-    movs r1, 0\n\
-    ldrsb r1, [r0, r1]\n\
-    subs r2, 0x90\n\
-    adds r0, r3, r2\n\
-    adds r0, r1\n\
-    ldrb r2, [r0]\n\
-    ldr r4, =0x00007b1c\n\
-    adds r0, r3, r4\n\
-    subs r4, 0xC\n\
-    adds r1, r3, r4\n\
-    ldrb r1, [r1]\n\
-    bl sub_81D3480\n\
-_08166B6C:\n\
-    ldr r1, =gUnknown_0203BC90\n\
-    ldr r0, [r1]\n\
-    adds r0, 0x52\n\
-    strb r6, [r0]\n\
-    ldr r1, [r1]\n\
-    b _08166BAC\n\
-    .pool\n\
-_08166B94:\n\
-    ldr r1, [r5]\n\
-    adds r1, 0x52\n\
-    ldrb r0, [r1]\n\
-    adds r0, 0x1\n\
-    strb r0, [r1]\n\
-    lsls r0, 24\n\
-    lsrs r0, 24\n\
-    cmp r0, 0x10\n\
-    bls _08166BDA\n\
-    bl sub_8166E24\n\
-_08166BAA:\n\
-    ldr r1, [r5]\n\
-_08166BAC:\n\
-    adds r1, 0x50\n\
-    ldrb r0, [r1]\n\
-    adds r0, 0x1\n\
-    strb r0, [r1]\n\
-    b _08166BDA\n\
-_08166BB6:\n\
-    ldr r0, =gMain\n\
-    ldrh r1, [r0, 0x2E]\n\
-    movs r0, 0x3\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    beq _08166BDA\n\
-    bl sub_8166EDC\n\
-    lsls r0, 24\n\
-    cmp r0, 0\n\
-    bne _08166BDA\n\
-    ldr r0, =gSpecialVar_ItemId\n\
-    ldrb r0, [r0]\n\
-    bl TryClearPokeblock\n\
-    ldr r0, =sub_8166BEC\n\
-    bl sub_816636C\n\
-_08166BDA:\n\
-    pop {r4-r6}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .pool\n\
-    .syntax divided\n");
-}
-#endif
 
 void sub_8166BEC(void)
 {
