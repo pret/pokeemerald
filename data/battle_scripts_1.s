@@ -5350,16 +5350,16 @@ BattleScript_SelectingNotAllowedMoveGravityInPalace::
 	goto BattleScript_SelectingUnusableMoveInPalace
 	
 BattleScript_SelectingNotAllowedMoveHealBlock::
-	printselectionstring STRINGID_GRAVITYPREVENTSUSAGE
+	printselectionstring STRINGID_HEALBLOCKPREVENTSUSAGE
 	endselectionscript
 
 BattleScript_MoveUsedHealBlockPrevents::
-	printstring STRINGID_GRAVITYPREVENTSUSAGE
+	printstring STRINGID_HEALBLOCKPREVENTSUSAGE
 	waitmessage 0x40
 	goto BattleScript_MoveEnd
 
 BattleScript_SelectingNotAllowedMoveHealBlockInPalace::
-	printstring STRINGID_GRAVITYPREVENTSUSAGE
+	printstring STRINGID_HEALBLOCKPREVENTSUSAGE
 	goto BattleScript_SelectingUnusableMoveInPalace
 
 BattleScript_WishComesTrue::
@@ -5773,18 +5773,13 @@ BattleScript_EmbargoEndTurn::
 	waitmessage 0x40
 	end2
 	
-BattleScript_MagnetRiseEndTurn::
-	printstring STRINGID_MAGNETRISEENDS
-	waitmessage 0x40
-	end2
-	
 BattleScript_TelekinesisEndTurn::
 	printstring STRINGID_TELEKINESISENDS
 	waitmessage 0x40
 	end2
 	
-BattleScript_HealBlockEndTurn::
-	printstring STRINGID_HEALBLOCKENDS
+BattleScript_BufferEndTurn::
+	printstring STRINGID_BUFFERENDS
 	waitmessage 0x40
 	end2
 
