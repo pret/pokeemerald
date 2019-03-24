@@ -1107,5 +1107,8 @@ $(MID_SUBDIR)/se_tama.s: %.s: %.mid
 $(MID_SUBDIR)/se_tamago.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G128 -V120 -P5
 
+$(MID_SUBDIR)/se_tamakoro.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G128 -V110 -P2
+
 $(MID_SUBDIR)/se_z_search.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G127 -P5
