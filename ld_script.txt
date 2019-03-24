@@ -680,7 +680,7 @@ SECTIONS {
         sound/songs/midi/se_ru_hyuu.o(.rodata);
         sound/songs/midi/se_ki_gasyan.o(.rodata);
         sound/songs/midi/se_tk_warpin.o(.rodata);
-        sound/songs/se_tk_warpout.o(.rodata);
+        sound/songs/midi/se_tk_warpout.o(.rodata);
         sound/songs/se_tu_saa.o(.rodata);
         sound/songs/midi/se_hi_turun.o(.rodata);
         sound/songs/se_track_move.o(.rodata);
