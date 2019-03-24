@@ -748,7 +748,7 @@ SECTIONS {
         sound/songs/midi/se_pn_off.o(.rodata);
         sound/songs/midi/se_z_search.o(.rodata);
         sound/songs/midi/se_tamago.o(.rodata);
-        sound/songs/se_tb_start.o(.rodata);
+        sound/songs/midi/se_tb_start.o(.rodata);
         sound/songs/midi/se_tb_kon.o(.rodata);
         sound/songs/midi/se_tb_kara.o(.rodata);
         sound/songs/midi/se_bidoro.o(.rodata);
