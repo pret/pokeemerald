@@ -804,7 +804,7 @@ SECTIONS {
         sound/songs/se_w039.o(.rodata);
         sound/songs/se_w054.o(.rodata);
         sound/songs/se_w077.o(.rodata);
-        sound/songs/se_w020.o(.rodata);
+        sound/songs/midi/se_w020.o(.rodata);
         sound/songs/se_w082.o(.rodata);
         sound/songs/se_w047.o(.rodata);
         sound/songs/se_w195.o(.rodata);
