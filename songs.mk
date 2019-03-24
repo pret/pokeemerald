@@ -1116,5 +1116,8 @@ $(MID_SUBDIR)/se_tamakoro_e.s: %.s: %.mid
 $(MID_SUBDIR)/se_tb_kara.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G127 -V100 -P5
 
+$(MID_SUBDIR)/se_tb_kon.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G128 -V110 -P5
+
 $(MID_SUBDIR)/se_z_search.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G127 -P5
