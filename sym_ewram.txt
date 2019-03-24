@@ -78,24 +78,6 @@ gUnknown_02022C94: @ 2022C94
 
 	.include "src/dodrio_berry_picking.o"
 
-gUnknown_02022C9C: @ 2022C9C
-	.space 0x14
-
-gUnknown_02022CB0: @ 2022CB0
-	.space 0x8
-
-gUnknown_02022CB8: @ 2022CB8
-	.space 0x2C
-
-gUnknown_02022CE4: @ 2022CE4
-	.space 0x10
-
-gUnknown_02022CF4: @ 2022CF4
-	.space 0x4
-
-gUnknown_02022CF8: @ 2022CF8
-	.space 0x4
-
 gUnknown_02022CFC: @ 2022CFC
 	.space 0x4
 

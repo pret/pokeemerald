@@ -1,16 +1,28 @@
 #include "global.h"
 #include "alloc.h"
+#include "palette.h"
 #include "link.h"
+#include "link_rfu.h"
 #include "task.h"
 #include "main.h"
 #include "constants/songs.h"
 #include "sound.h"
 
-struct DodrioBerryPickingSubstruct_004A
+struct DodrioBerryPickingSubstruct_0160
 {
-    /*0x00*/ u16 unk00;
-    /*0x02*/ u8 filler02[10];
-}; // size = 0x0C
+    /*0x0000 : 0x0160*/ u8 filler_000[12];
+    /*0x000C : 0x016C*/ u8 unk_00C;
+    /*0x000D : 0x016D*/ u8 filler_00D[0x3000 - 0xd];
+    /*0x3000 : 0x3160*/ u32 unk_3000;
+    /*0x3004 : 0x3164*/ u8 filler_3004[16];
+    /*0x3014 : 0x3174*/ u8 unk_3014;
+    /*0x3015 : 0x3175*/ u8 filler_3015[0x318C - 0x3175];
+}; // size = 0x302C
+
+struct DodrioBerryPickingStruct_2022CF4
+{
+    u8 filler_00[0x40];
+}; // size = 0x40
 
 struct DodrioBerryPickingSubstruct_31A0
 {
@@ -77,7 +89,8 @@ struct DodrioBerryPickingStruct
     /*0x0124*/ u8 filler_0124[8];
     /*0x012C*/ u32 unk_012C;
     /*0x0130*/ u32 unk_0130[5];
-    /*0x0144*/ u8 filler_0144[0x318C - 0x0144];
+    /*0x0144*/ u8 filler_0144[0x1C];
+    /*0x0160*/ struct DodrioBerryPickingSubstruct_0160 unk_0160;
     /*0x318C*/ struct DodrioBerryPickingSubstruct_318C unk_318C[5];
     /*0x31A0*/ struct DodrioBerryPickingSubstruct_31A0 unk_31A0[5];
     /*0x32CC*/ struct DodrioBerryPickingSubstruct_31A0 unk_32CC;
@@ -85,6 +98,13 @@ struct DodrioBerryPickingStruct
 }; // size = 0x3330
 
 EWRAM_DATA struct DodrioBerryPickingStruct * gUnknown_02022C98 = NULL;
+EWRAM_DATA u16 * gUnknown_02022C9C[5] = {NULL};
+EWRAM_DATA u16 * gUnknown_02022CB0[2] = {NULL};
+EWRAM_DATA u16 * gUnknown_02022CB8[11] = {NULL};
+EWRAM_DATA u16 * gUnknown_02022CE4[4] = {NULL};
+EWRAM_DATA struct DodrioBerryPickingStruct_2022CF4 * gUnknown_02022CF4 = NULL;
+EWRAM_DATA struct DodrioBerryPickingSubstruct_0160 * gUnknown_02022CF8 = NULL;
+
 IWRAM_DATA bool32 gUnknown_03000DB0;
 
 void sub_8024A1C(void);
@@ -94,6 +114,20 @@ void sub_80261F8(struct DodrioBerryPickingSubstruct_318C *, struct Pokemon *);
 void sub_80261CC(void);
 void sub_8026B5C(u8, u8*, u8*);
 void sub_80273F0(void);
+void sub_8029274(struct DodrioBerryPickingSubstruct_0160 *);
+void sub_8025910(u8 taskId);
+void sub_802620C(TaskFunc, u8);
+bool32 sub_802A770(void);
+void sub_80283A8(void);
+void sub_8028408(struct DodrioBerryPickingSubstruct_318C *, u8, u8, u8);
+void sub_802868C(u8, u8);
+void sub_8028A34(void);
+void sub_8028A88(void);
+void sub_8028D44(void);
+void sub_8028734(void);
+void sub_80261E4(void);
+void sub_802621C(TaskFunc);
+void sub_802589C(u8 taskId);
 
 void sub_802493C(u16 a0, void (*a1)(void))
 {
@@ -179,5 +213,78 @@ void sub_8024A30(struct DodrioBerryPickingStruct * data)
         data->unk_0034[i] = data->unk_0034[i - 1] + 1;
         if (data->unk_0034[i] > data->unk_0024 - 1)
             data->unk_0034[i] %= data->unk_0024;
+    }
+}
+
+void sub_8024BC8(u8 taskId)
+{
+    u8 r4, r5;
+
+    switch (gUnknown_02022C98->unk_000C)
+    {
+        case 0:
+            SetVBlankCallback(NULL);
+            sub_802620C(sub_8025910, 4);
+            gUnknown_02022C98->unk_000C++;
+            break;
+        case 1:
+            if (!FuncIsActiveTask(sub_8025910))
+            {
+                sub_8029274(&gUnknown_02022C98->unk_0160);
+                gUnknown_02022C98->unk_000C++;
+            }
+            break;
+        case 2:
+            if (!sub_802A770())
+            {
+                sub_8010434();
+                gUnknown_02022C98->unk_000C++;
+            }
+            break;
+        case 3:
+            if (IsLinkTaskFinished())
+            {
+                if (gReceivedRemoteLinkPlayers != 0)
+                {
+                    sub_800E0E8();
+                    CreateWirelessStatusIndicatorSprite(0, 0);
+                }
+                gUnknown_02022C98->unk_000C++;
+            }
+            break;
+        case 4:
+            r5 = gUnknown_02022C98->unk_0024;
+            sub_80283A8();
+            for (r4 = 0; r4 < r5; r4++)
+            {
+                sub_8028408(&gUnknown_02022C98->unk_318C[gUnknown_02022C98->unk_0034[r4]], r4, gUnknown_02022C98->unk_0034[r4], gUnknown_02022C98->unk_0024);
+            }
+            sub_802868C(0, gUnknown_02022C98->unk_0024);
+            gUnknown_02022C98->unk_000C++;
+            break;
+        case 5:
+            sub_8028A34();
+            sub_8028A88();
+            sub_8028D44();
+            sub_8028734();
+            gUnknown_02022C98->unk_000C++;
+            break;
+        case 6:
+            BlendPalettes(0xFFFFFFFF, 0x10, 0x00);
+            BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, 0);
+            SetVBlankCallback(sub_80261E4);
+            gUnknown_02022C98->unk_000C++;
+            break;
+        case 7:
+            UpdatePaletteFade();
+            if (!gPaletteFade.active)
+            {
+                gUnknown_02022C98->unk_000C++;
+            }
+            break;
+        default:
+            DestroyTask(taskId);
+            sub_802621C(sub_802589C);
+            break;
     }
 }
