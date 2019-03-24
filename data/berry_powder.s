@@ -3,8 +3,9 @@
 
 	.section .rodata
 
+
 	.align 2
-gUnknown_082F7BA4_UnrefDupe:: @ 82F444C struct BgTemplate
+gUnknown_082F7BA4_UnrefDupe:: @ 82F444C struct BgTemplate(???)
 	.4byte 0x000001e0
 	.4byte 0x000012c9
 	.4byte 0x000012ea

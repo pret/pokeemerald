@@ -41,12 +41,12 @@
 #include "secret_base.h"
 #include "player_pc.h"
 #include "field_specials.h"
+#include "berry_powder.h"
 
 
 extern void copy_strings_to_sav1(void);
 extern void sub_801AFD8(void);
 extern void ResetPokeJumpResults(void);
-extern void SetBerryPowder(u32* powder, u32 newValue);
 
 extern const u8 EventScript_ResetAllMapFlags[];
 

@@ -73,9 +73,9 @@ gUnknown_02022C8C: @ 2022C8C
 gUnknown_02022C90: @ 2022C90
 	.space 0x4
 
-gUnknown_02022C94: @ 2022C94
-	.space 0x4
+	.include "src/berry_powder.o"
 
+	.align 2
 gUnknown_02022C98: @ 2022C98
 	.space 0x4
 

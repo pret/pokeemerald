@@ -64,7 +64,7 @@ SECTIONS {
         asm/mevent_news.o(.text);
         asm/union_room_chat.o(.text);
         asm/berry_crush.o(.text);
-        asm/berry_powder_vendor.o(.text);
+        src/berry_powder.o(.text);
         asm/dodrio_berry_picking.o(.text);
         asm/pokemon_jump.o(.text);
         src/rtc.o(.text);
@@ -413,7 +413,7 @@ SECTIONS {
         data/mevent_server.o(.rodata);
         data/union_room_chat.o(.rodata);
         data/berry_crush.o(.rodata);
-        data/berry_powder_vendor.o(.rodata);
+        data/berry_powder.o(.rodata);
         data/dodrio_berry_picking.o(.rodata);
         data/pokemon_jump.o(.rodata);
         src/rtc.o(.rodata);
