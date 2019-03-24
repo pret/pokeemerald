@@ -1218,5 +1218,8 @@ $(MID_SUBDIR)/se_w014.s: %.s: %.mid
 $(MID_SUBDIR)/se_w015.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G128 -V120 -P4
 
+$(MID_SUBDIR)/se_w016.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G128 -V110 -P4
+
 $(MID_SUBDIR)/se_z_search.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G127 -P5
