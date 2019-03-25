@@ -28,7 +28,7 @@ const struct CompressedSpriteSheet gTrainerBackPicTable[] =
 const struct CompressedSpritePalette gTrainerBackPicPaletteTable[] = 
 {
     gTrainerPalette_Brendan, TRAINER_BACK_PIC_BRENDAN,
-    gTrainerPalette_May, TRAINER_BACK_PIC_MAY,
+    gTrainerBackPicPalette_May, TRAINER_BACK_PIC_MAY,
     gTrainerBackPicPalette_Red, TRAINER_BACK_PIC_RED,
     gTrainerBackPicPalette_Leaf, TRAINER_BACK_PIC_LEAF,
     gTrainerPalette_RubySapphireBrendan, TRAINER_BACK_PIC_RUBY_SAPPHIRE_BRENDAN,

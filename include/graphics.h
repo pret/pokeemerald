@@ -3066,6 +3066,8 @@ extern const u8 gTrainerBackPic_RubySapphireMay[];
 extern const u8 gTrainerBackPic_Wally[];
 extern const u8 gTrainerBackPic_Steven[];
 
+// TODO brendan when the Kai backsprite is made
+extern const u32 gTrainerBackPicPalette_May[];
 extern const u32 gTrainerBackPicPalette_Red[];
 extern const u32 gTrainerBackPicPalette_Leaf[];
 
