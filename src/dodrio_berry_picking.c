@@ -138,6 +138,7 @@ void sub_8025D50(void);
 void sub_8025E0C(void);
 void sub_8025ED8(void);
 void sub_8025F48(void);
+void sub_8026044(void);
 void sub_80261CC(void);
 void sub_80261E4(void);
 void sub_80261F8(struct DodrioBerryPickingSubstruct_318C *, struct Pokemon *);
@@ -475,4 +476,41 @@ void sub_8024F38(void)
         sub_802671C();
         sub_8025F48();
     }
+}
+
+void sub_8024FFC(void)
+{
+    if (gUnknown_02022C98->unk_0040 < 10)
+    {
+        if (JOY_NEW(DPAD_UP))
+        {
+            if (gUnknown_02022C98->unk_31A0[gUnknown_02022C98->multiplayerId].unk_2C == 0)
+            {
+                gUnknown_02022C98->unk_32CC.unk_2C = 2;
+            }
+        }
+        else if (JOY_NEW(DPAD_RIGHT))
+        {
+            if (gUnknown_02022C98->unk_31A0[gUnknown_02022C98->multiplayerId].unk_2C == 0)
+            {
+                gUnknown_02022C98->unk_32CC.unk_2C = 1;
+            }
+        }
+        else if (JOY_NEW(DPAD_LEFT))
+        {
+            if (gUnknown_02022C98->unk_31A0[gUnknown_02022C98->multiplayerId].unk_2C == 0)
+            {
+                gUnknown_02022C98->unk_32CC.unk_2C = 3;
+            }
+        }
+        else
+        {
+            gUnknown_02022C98->unk_32CC.unk_2C = 0;
+        }
+    }
+    else
+    {
+        sub_8026240(11);
+    }
+    sub_8026044();
 }
