@@ -9,6 +9,7 @@
 #include "main.h"
 #include "constants/songs.h"
 #include "sound.h"
+#include "m4a.h"
 #include "pokemon_jump.h"
 
 struct DodrioBerryPickingSubstruct_0160
@@ -31,7 +32,9 @@ struct DodrioBerryPickingSubstruct_31A0
 {
     u8 unk_00[0x10];
     u32 unk_10;
-    u8 filler_14[0x18];
+    u8 unk_14[11];
+    u8 unk_1F[11];
+    u8 filler_2A[2];
     u8 unk_2C;
     u8 filler_2D[3];
     u8 unk_30;
@@ -109,7 +112,12 @@ struct DodrioBerryPickingStruct
     // align 2
     /*0x012C*/ u32 unk_012C;
     /*0x0130*/ u32 unk_0130[5];
-    /*0x0144*/ u8 filler_0144[0x1C];
+    /*0x0144*/ u8 unk_0144;
+    /*0x0145*/ u8 filler_0145[3];
+    /*0x0148*/ u8 unk_0148[11];
+    /*0x0153*/ u8 filler_0153[1];
+    /*0x0154*/ u8 unk_0154;
+    /*0x0155*/ u8 filler_0155[11];
     /*0x0160*/ struct DodrioBerryPickingSubstruct_0160 unk_0160;
     /*0x318C*/ struct DodrioBerryPickingSubstruct_318C unk_318C[5];
     /*0x31A0*/ struct DodrioBerryPickingSubstruct_31A0 unk_31A0[5];
@@ -165,6 +173,8 @@ void sub_802671C(void);
 void sub_8026AF4(void);
 void sub_8026B28(void);
 void sub_8026B5C(u8, u8*, u8*);
+u32 sub_8026BB8(void);
+void sub_8026C28(void);
 bool32 sub_8026C50(void);
 bool32 sub_8026C90(void);
 void sub_80272E8(void);
@@ -175,10 +185,16 @@ u8 sub_8027518(u8);
 void sub_8027554(void);
 void sub_8027608(void);
 u32 sub_8027748(void);
+void sub_8027DD0(u8);
+u32 sub_8027E30(struct DodrioBerryPickingSubstruct_31A0 *, u8 *, u8 *, u8 *, u8 *, u8 *, u8, u32, u32);
 u32 sub_8028164(u32 unused, struct DodrioBerryPickingSubstruct_31A0 *, u8 *, u8 *, u8 *, u8 *, u8 *, u8 *, u32 *, u32 *);
+void sub_80282EC(u8);
 u32 sub_8028318(u8, u8 *);
+void sub_8028350(u8);
+bool32 sub_8028374(u8);
 void sub_80283A8(void);
 void sub_8028408(struct DodrioBerryPickingSubstruct_318C *, u8, u8, u8);
+void sub_80284CC(u8);
 void sub_8028504(u8);
 void sub_8028614(u8);
 void sub_802868C(u8, u8);
@@ -1097,5 +1113,204 @@ void sub_80259FC(void)
                 }
                 break;
         }
+    }
+}
+
+void sub_8025C0C(void)
+{
+    u8 i;
+    u8 r6 = gUnknown_02022C98->unk_0024;
+
+    gUnknown_02022C98->unk_31A0[0].unk_10 = sub_8028164(0, &gUnknown_02022C98->unk_31A0[0], &gUnknown_02022C98->unk_31A0[0].unk_2C, &gUnknown_02022C98->unk_31A0[1].unk_2C, &gUnknown_02022C98->unk_31A0[2].unk_2C, &gUnknown_02022C98->unk_31A0[3].unk_2C, &gUnknown_02022C98->unk_31A0[4].unk_2C, &gUnknown_02022C98->unk_0040, &gUnknown_02022C98->unk_0120, &gUnknown_02022C98->unk_012C);
+    gUnknown_02022C98->unk_0128 = 1;
+
+    for (i = 1; i < r6; i++)
+    {
+        if (sub_8028374(i) != 0)
+        {
+            gUnknown_02022C98->unk_0130[i] = 1;
+            gUnknown_02022C98->unk_0128 = 0;
+        }
+    }
+    if (++gUnknown_02022C98->unk_0124 >= 60)
+    {
+        if (gUnknown_02022C98->unk_0128 != 0)
+        {
+            sub_8011AC8();
+            gUnknown_02022C98->unk_0124 = 0;
+        }
+        else if (gUnknown_02022C98->unk_0124 > 70)
+        {
+            sub_8011AC8();
+            gUnknown_02022C98->unk_0124 = 0;
+        }
+    }
+}
+
+void sub_8025D04(void)
+{
+    switch (gUnknown_02022C98->unk_0018)
+    {
+        case 3:
+            if (sub_8026BB8() == 1)
+            {
+                sub_8026C28();
+                gUnknown_02022C98->unk_011C = 1;
+            }
+            break;
+        case 4:
+            sub_80259FC();
+            break;
+        case 11:
+            sub_8025C0C();
+            break;
+    }
+}
+
+void sub_8025D50(void)
+{
+    switch (gUnknown_02022C98->unk_0018)
+    {
+        case 4:
+            sub_8027E30(&gUnknown_02022C98->unk_32CC, &gUnknown_02022C98->unk_31A0[0].unk_2C, &gUnknown_02022C98->unk_31A0[1].unk_2C, &gUnknown_02022C98->unk_31A0[2].unk_2C, &gUnknown_02022C98->unk_31A0[3].unk_2C, &gUnknown_02022C98->unk_31A0[4].unk_2C, gUnknown_02022C98->unk_0040, gUnknown_02022C98->unk_0120, gUnknown_02022C98->unk_012C);
+            break;
+        case 11:
+            sub_8027E30(&gUnknown_02022C98->unk_32CC, &gUnknown_02022C98->unk_31A0[0].unk_2C, &gUnknown_02022C98->unk_31A0[1].unk_2C, &gUnknown_02022C98->unk_31A0[2].unk_2C, &gUnknown_02022C98->unk_31A0[3].unk_2C, &gUnknown_02022C98->unk_31A0[4].unk_2C, gUnknown_02022C98->unk_0040, gUnknown_02022C98->unk_0120, gUnknown_02022C98->unk_012C);
+            break;
+    }
+}
+
+void sub_8025E0C(void)
+{
+    switch (gUnknown_02022C98->unk_0018)
+    {
+        case 4:
+            sub_8028164(gUnknown_02022C98->multiplayerId, &gUnknown_02022C98->unk_31A0[gUnknown_02022C98->multiplayerId], &gUnknown_02022C98->unk_31A0[0].unk_2C, &gUnknown_02022C98->unk_31A0[1].unk_2C, &gUnknown_02022C98->unk_31A0[2].unk_2C, &gUnknown_02022C98->unk_31A0[3].unk_2C, &gUnknown_02022C98->unk_31A0[4].unk_2C, &gUnknown_02022C98->unk_0040, &gUnknown_02022C98->unk_0120, &gUnknown_02022C98->unk_012C);
+            break;
+        case 11:
+            sub_8028164(gUnknown_02022C98->multiplayerId, &gUnknown_02022C98->unk_31A0[gUnknown_02022C98->multiplayerId], &gUnknown_02022C98->unk_31A0[0].unk_2C, &gUnknown_02022C98->unk_31A0[1].unk_2C, &gUnknown_02022C98->unk_31A0[2].unk_2C, &gUnknown_02022C98->unk_31A0[3].unk_2C, &gUnknown_02022C98->unk_31A0[4].unk_2C, &gUnknown_02022C98->unk_0040, &gUnknown_02022C98->unk_0120, &gUnknown_02022C98->unk_012C);
+            break;
+    }
+}
+
+void sub_8025ED8(void)
+{
+    switch (gUnknown_02022C98->unk_0018)
+    {
+        case 3:
+            sub_8027DD0(1);
+            gUnknown_02022C98->unk_011C = 1;
+            break;
+        case 4:
+            if (gUnknown_02022C98->unk_32CC.unk_2C != 0)
+            {
+                sub_80282EC(gUnknown_02022C98->unk_32CC.unk_2C);
+            }
+            break;
+        case 11:
+            if (gUnknown_02022C98->unk_0120 == 0 && gUnknown_02022C98->unk_012C == 0)
+            {
+                sub_8028350(1);
+            }
+            break;
+    }
+}
+
+void sub_8025F48(void)
+{
+    if (gUnknown_02022C98->unk_31A0[gUnknown_02022C98->multiplayerId].unk_2C == 0)
+    {
+        if (!IsSEPlaying())
+        {
+            gUnknown_02022C98->unk_0144 = 0;
+        }
+    }
+    else if (gUnknown_02022C98->unk_31A0[gUnknown_02022C98->multiplayerId].unk_30 == 1)
+    {
+        if (gUnknown_02022C98->unk_0144 == 0)
+        {
+            m4aSongNumStop(SE_SEIKAI);
+            PlaySE(SE_SEIKAI);
+            gUnknown_02022C98->unk_0144 = 1;
+        }
+    }
+    else if (gUnknown_02022C98->unk_31A0[gUnknown_02022C98->multiplayerId].unk_34 == 1)
+    {
+        if (gUnknown_02022C98->unk_0144 == 0 && !IsSEPlaying())
+        {
+            PlaySE(SE_BOO);
+            sub_80284CC(1);
+            gUnknown_02022C98->unk_0144 = 1;
+        }
+    }
+
+    if (gUnknown_02022C98->unk_0154 == 0 && gUnknown_02022C98->unk_0040 >= 10)
+    {
+        StopMapMusic();
+        gUnknown_02022C98->unk_0154 = 1;
+    }
+    else if (gUnknown_02022C98->unk_0154 == 1)
+    {
+        PlayFanfareByFanfareNum(11); // MUS_ME_ZANNEN
+        gUnknown_02022C98->unk_0154 = 2;
+    }
+}
+
+void sub_8026044(void)
+{
+    u8 r8 = gUnknown_02022C98->unk_0044;
+    u8 r7 = gUnknown_02022C98->unk_0048;
+    u8 r4;
+    if (gUnknown_02022C98->unk_31A0[gUnknown_02022C98->multiplayerId].unk_2C == 0)
+    {
+        if (gUnknown_02022C98->unk_31A0[gUnknown_02022C98->multiplayerId].unk_30 != 1 && gUnknown_02022C98->unk_31A0[gUnknown_02022C98->multiplayerId].unk_34 != 1)
+        {
+            gUnknown_02022C98->unk_0144 = 0;
+        }
+    }
+    else if (gUnknown_02022C98->unk_31A0[gUnknown_02022C98->multiplayerId].unk_30 == 1)
+    {
+        if (gUnknown_02022C98->unk_0144 == 0)
+        {
+            m4aSongNumStop(SE_SEIKAI);
+            PlaySE(SE_SEIKAI);
+            gUnknown_02022C98->unk_0144 = 1;
+        }
+    }
+    else if (gUnknown_02022C98->unk_31A0[gUnknown_02022C98->multiplayerId].unk_34 == 1)
+    {
+        if (gUnknown_02022C98->unk_0144 == 0 && !IsSEPlaying())
+        {
+            PlaySE(SE_BOO);
+            sub_80284CC(1);
+            gUnknown_02022C98->unk_0144 = 1;
+        }
+    }
+    for (r4 = r8; r4 < r7; r4++)
+    {
+        struct DodrioBerryPickingSubstruct_31A0 * ptr = &gUnknown_02022C98->unk_31A0[gUnknown_02022C98->multiplayerId];
+        u8 * r1 = ptr->unk_14;
+        if (ptr->unk_1F[r4] >= 10)
+        {
+            if (gUnknown_02022C98->unk_0148[r4] == 0)
+            {
+                PlaySE(SE_FUUSEN1 + r1[r4]);
+                gUnknown_02022C98->unk_0148[r4] = 1;
+            }
+        }
+        else
+        {
+            gUnknown_02022C98->unk_0148[r4] = 0;
+        }
+    }
+    if (gUnknown_02022C98->unk_0154 == 0 && gUnknown_02022C98->unk_0040 >= 10)
+    {
+        StopMapMusic();
+        gUnknown_02022C98->unk_0154 = 1;
+    }
+    else if (gUnknown_02022C98->unk_0154 == 1)
+    {
+        PlayFanfareByFanfareNum(11); // MUS_ME_ZANNEN
+        gUnknown_02022C98->unk_0154 = 2;
     }
 }
