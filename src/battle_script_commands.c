@@ -10503,6 +10503,7 @@ static void atkE5_pickup(void)
     s32 i;
     u16 species, heldItem;
     u8 ability;
+    u8 level;
 
     if (InBattlePike())
     {
@@ -10537,6 +10538,10 @@ static void atkE5_pickup(void)
         {
             species = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2);
             heldItem = GetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM);
+            level = GetMonData(&gPlayerParty[i], MON_DATA_LEVEL);
+            u8 lvlDivBy10 = (level - 1) / 10;
+            if (lvlDivBy10 > 9)
+                lvlDivBy10 = 9;
 
             if (GetMonData(&gPlayerParty[i], MON_DATA_ALT_ABILITY))
                 ability = gBaseStats[species].ability2;
@@ -10551,9 +10556,6 @@ static void atkE5_pickup(void)
             {
                 s32 j;
                 s32 rand = Random() % 100;
-                u8 lvlDivBy10 = (GetMonData(&gPlayerParty[i], MON_DATA_LEVEL) - 1) / 10;
-                if (lvlDivBy10 > 9)
-                    lvlDivBy10 = 9;
 
                 for (j = 0; j < 9; j++)
                 {
@@ -10569,6 +10571,12 @@ static void atkE5_pickup(void)
                     }
                 }
             }
+            else if (ability == ABILITY_HONEY_GATHER
+                && species != 0
+                && species != SPECIES_EGG
+                && heldItem == ITEM_NONE
+                && (Random()%100 <= lvlDivBy10*5+5))
+                SetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM, ITEM_HONEY);
         }
     }
 
