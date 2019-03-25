@@ -42,7 +42,9 @@ struct DodrioBerryPickingSubstruct_318C
 struct DodrioBerryPickingStruct
 {
     /*0x0000*/ void (*savedCallback)(void);
-    /*0x0004*/ u8 filler_0004[8];
+    /*0x0004*/ u8 filler_0004[4];
+    /*0x0008*/ u8 unk_0008;
+    /*0x0009*/ u8 filler_0009[3];
     /*0x000C*/ u8 unk_000C;
     /*0x000D*/ u8 filler_000D[3];
     /*0x0010*/ u8 unk_0010;
@@ -88,7 +90,9 @@ struct DodrioBerryPickingStruct
     /*0x00F4*/ u8 unk_00F4[11][2];
     /*0x010A*/ u8 filler_010A[2];
     /*0x010C*/ u8 unk_010C[5];
-    /*0x0111*/ u8 filler_0111[7];
+    /*0x0111*/ u8 filler_0111[3];
+    /*0x0114*/ u16 unk_0114;
+    // align 2
     /*0x0118*/ u32 unk_0118;
     /*0x011C*/ u32 unk_011C;
     /*0x0120*/ u32 unk_0120;
@@ -150,19 +154,27 @@ void sub_802671C(void);
 void sub_8026AF4(void);
 void sub_8026B28(void);
 void sub_8026B5C(u8, u8*, u8*);
+bool32 sub_8026C50(void);
+bool32 sub_8026C90(void);
+void sub_80272A4(void);
 void sub_80273F0(void);
+void sub_802749C(void);
 u8 sub_8027518(u8);
 void sub_80283A8(void);
 void sub_8028408(struct DodrioBerryPickingSubstruct_318C *, u8, u8, u8);
 void sub_8028504(u8);
 void sub_802868C(u8, u8);
 void sub_8028734(void);
+void sub_80289E8(u8);
 void sub_8028A34(void);
 void sub_8028A88(void);
 void sub_8028D44(void);
+void sub_8028DFC(void);
+void sub_8028EC8(u8);
 void sub_8029274(struct DodrioBerryPickingSubstruct_0160 *);
 void sub_80292E0(u8);
 bool32 sub_802A770(void);
+u8 sub_802A794(void);
 
 extern void (*const gUnknown_082F7AC4[])(void);
 extern void (*const gUnknown_082F7AF4[])(void);
@@ -513,4 +525,190 @@ void sub_8024FFC(void)
         sub_8026240(11);
     }
     sub_8026044();
+}
+
+void sub_80250D4(void)
+{
+    u8 i;
+
+    sub_802671C();
+    sub_8025F48();
+    if (sub_8026C50() == 1)
+    {
+        sub_80272A4();
+        sub_8026240(5);
+    }
+    else
+    {
+        gUnknown_02022C98->unk_012C = 1;
+        for (i = 1; i < gUnknown_02022C98->unk_0024; i++)
+        {
+            if (gUnknown_02022C98->unk_0130[i] != 1)
+            {
+                gUnknown_02022C98->unk_012C = 0;
+                break;
+            }
+        }
+    }
+}
+
+void sub_8025158(void)
+{
+    sub_8026044();
+    if (sub_8026C90() == 1)
+        sub_8026240(5);
+}
+
+bool32 sub_8025170(void)
+{
+    u8 r4 = GetBlockReceivedStatus();
+    u8 r0 = sub_800A9D8();
+    if (r4 == r0)
+    {
+        ResetBlockReceivedFlags();
+        return TRUE;
+    }
+    else
+    {
+        return FALSE;
+    }
+}
+
+void sub_8025198(void)
+{
+    switch (gUnknown_02022C98->unk_0010)
+    {
+        case 0:
+            if (SendBlock(0, gUnknown_02022C98->unk_004A, sizeof(gUnknown_02022C98->unk_004A)))
+            {
+                gUnknown_02022C98->unk_0008 = 0;
+                gUnknown_02022C98->unk_0010++;
+            }
+            break;
+        case 1:
+            if (IsLinkTaskFinished())
+            {
+                gUnknown_02022C98->unk_0010++;
+            }
+            break;
+        case 2:
+            if (sub_8025170())
+            {
+                gUnknown_02022C98->unk_0008 = gUnknown_02022C98->unk_0024;
+            }
+            if (gUnknown_02022C98->unk_0008 >= gUnknown_02022C98->unk_0024)
+            {
+                gUnknown_02022C98->unk_0014++;
+                gUnknown_02022C98->unk_0010++;
+            }
+            break;
+        default:
+            if (WaitFanfare(TRUE))
+            {
+                sub_8026240(6);
+                FadeOutAndPlayNewMapMusic(MUS_RG_WIN_YASEI, 4);
+            }
+            break;
+    }
+}
+
+void sub_8025230(void)
+{
+    u8 i;
+
+    switch (gUnknown_02022C98->unk_0010) {
+        case 0:
+            if (SendBlock(0, gUnknown_02022C98->unk_004A[gUnknown_02022C98->unk_0014],
+                          sizeof(gUnknown_02022C98->unk_004A))) {
+                gUnknown_02022C98->unk_0008 = 0;
+                gUnknown_02022C98->unk_0010++;
+            }
+            break;
+        case 1:
+            if (IsLinkTaskFinished()) {
+                gUnknown_02022C98->unk_0010++;
+            }
+            break;
+        case 2:
+            if (sub_8025170()) {
+                for (i = 0; i < gUnknown_02022C98->unk_0024; i++) {
+                    memcpy(gUnknown_02022C98->unk_004A, gBlockRecvBuffer, sizeof(gUnknown_02022C98->unk_004A));
+                    gUnknown_02022C98->unk_0008 = gUnknown_02022C98->unk_0024;
+                }
+            }
+            if (gUnknown_02022C98->unk_0008 >= gUnknown_02022C98->unk_0024) {
+                gUnknown_02022C98->unk_0014++;
+                gUnknown_02022C98->unk_0010++;
+            }
+            break;
+        default:
+            if (WaitFanfare(TRUE)) {
+                gUnknown_02022C98->unk_0114 = gUnknown_02022C98->unk_004A[gUnknown_02022C98->multiplayerId][5];
+                sub_8026240(6);
+                FadeOutAndPlayNewMapMusic(MUS_RG_WIN_YASEI, 4);
+            }
+            break;
+    }
+}
+
+void sub_8025324(void)
+{
+    u8 sp00 = 1;
+    u8 i;
+
+    switch (gUnknown_02022C98->unk_0010)
+    {
+        case 0:
+            sub_802749C();
+            sub_80289E8(1);
+            sub_8028DFC();
+            sub_8028EC8(1);
+            sub_80292E0(2);
+            gUnknown_02022C98->unk_0010++;
+            break;
+        case 1:
+            if (!sub_802A770())
+            {
+                sub_80292E0(5);
+                gUnknown_02022C98->unk_0010++;
+            }
+            break;
+        case 2:
+            sp00 = sub_802A794();
+            if (SendBlock(0, &sp00, sizeof(sp00)))
+            {
+                gUnknown_02022C98->unk_0010++;
+            }
+            break;
+        case 3:
+            if (IsLinkTaskFinished())
+            {
+                gUnknown_02022C98->unk_0010++;
+                gUnknown_02022C98->unk_0008 = 0;
+            }
+            break;
+        case 4:
+            if (sub_8025170())
+            {
+                for (i = 0; i < gUnknown_02022C98->unk_0024; i++)
+                {
+                    *(gUnknown_02022C98->unk_010C + i) = *(u8 *)gBlockRecvBuffer[i];
+                    gUnknown_02022C98->unk_0008 = gUnknown_02022C98->unk_0024;
+                }
+            }
+            if (gUnknown_02022C98->unk_0008 >= gUnknown_02022C98->unk_0024) {
+                if (++gUnknown_02022C98->unk_0014 >= 120)
+                {
+                    sub_80292E0(6);
+                    gUnknown_02022C98->unk_0010++;
+                }
+            }
+            break;
+        default:
+            if (!sub_802A770())
+            {
+                sub_8026240(7);
+            }
+            break;
+    }
 }
