@@ -3,6 +3,7 @@
 #include "palette.h"
 #include "window.h"
 #include "bg.h"
+#include "gpu_regs.h"
 #include "link.h"
 #include "link_rfu.h"
 #include "task.h"
@@ -221,6 +222,8 @@ u8 sub_802A794(void);
 extern void (*const gUnknown_082F7AC4[])(void);
 extern void (*const gUnknown_082F7AF4[])(void);
 
+extern const u8 gUnknown_082F7A94[];
+
 void sub_802493C(u16 a0, void (*a1)(void))
 {
     gUnknown_03000DB0 = FALSE;
@@ -314,70 +317,70 @@ void sub_8024BC8(u8 taskId)
 
     switch (gUnknown_02022C98->unk_000C)
     {
-        case 0:
-            SetVBlankCallback(NULL);
-            sub_802620C(sub_8025910, 4);
+    case 0:
+        SetVBlankCallback(NULL);
+        sub_802620C(sub_8025910, 4);
+        gUnknown_02022C98->unk_000C++;
+        break;
+    case 1:
+        if (!FuncIsActiveTask(sub_8025910))
+        {
+            sub_8029274(&gUnknown_02022C98->unk_0160);
             gUnknown_02022C98->unk_000C++;
-            break;
-        case 1:
-            if (!FuncIsActiveTask(sub_8025910))
-            {
-                sub_8029274(&gUnknown_02022C98->unk_0160);
-                gUnknown_02022C98->unk_000C++;
-            }
-            break;
-        case 2:
-            if (!sub_802A770())
-            {
-                sub_8010434();
-                gUnknown_02022C98->unk_000C++;
-            }
-            break;
-        case 3:
-            if (IsLinkTaskFinished())
-            {
-                if (gReceivedRemoteLinkPlayers != 0)
-                {
-                    sub_800E0E8();
-                    CreateWirelessStatusIndicatorSprite(0, 0);
-                }
-                gUnknown_02022C98->unk_000C++;
-            }
-            break;
-        case 4:
-            r5 = gUnknown_02022C98->unk_0024;
-            sub_80283A8();
-            for (r4 = 0; r4 < r5; r4++)
-            {
-                sub_8028408(&gUnknown_02022C98->unk_318C[gUnknown_02022C98->unk_0034[r4]], r4, gUnknown_02022C98->unk_0034[r4], gUnknown_02022C98->unk_0024);
-            }
-            sub_802868C(0, gUnknown_02022C98->unk_0024);
+        }
+        break;
+    case 2:
+        if (!sub_802A770())
+        {
+            sub_8010434();
             gUnknown_02022C98->unk_000C++;
-            break;
-        case 5:
-            sub_8028A34();
-            sub_8028A88();
-            sub_8028D44();
-            sub_8028734();
-            gUnknown_02022C98->unk_000C++;
-            break;
-        case 6:
-            BlendPalettes(0xFFFFFFFF, 0x10, 0x00);
-            BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, 0);
-            SetVBlankCallback(sub_80261E4);
-            gUnknown_02022C98->unk_000C++;
-            break;
-        case 7:
-            UpdatePaletteFade();
-            if (!gPaletteFade.active)
+        }
+        break;
+    case 3:
+        if (IsLinkTaskFinished())
+        {
+            if (gReceivedRemoteLinkPlayers != 0)
             {
-                gUnknown_02022C98->unk_000C++;
+                sub_800E0E8();
+                CreateWirelessStatusIndicatorSprite(0, 0);
             }
-            break;
-        default:
-            DestroyTask(taskId);
-            sub_802621C(sub_802589C);
-            break;
+            gUnknown_02022C98->unk_000C++;
+        }
+        break;
+    case 4:
+        r5 = gUnknown_02022C98->unk_0024;
+        sub_80283A8();
+        for (r4 = 0; r4 < r5; r4++)
+        {
+            sub_8028408(&gUnknown_02022C98->unk_318C[gUnknown_02022C98->unk_0034[r4]], r4, gUnknown_02022C98->unk_0034[r4], gUnknown_02022C98->unk_0024);
+        }
+        sub_802868C(0, gUnknown_02022C98->unk_0024);
+        gUnknown_02022C98->unk_000C++;
+        break;
+    case 5:
+        sub_8028A34();
+        sub_8028A88();
+        sub_8028D44();
+        sub_8028734();
+        gUnknown_02022C98->unk_000C++;
+        break;
+    case 6:
+        BlendPalettes(0xFFFFFFFF, 0x10, 0x00);
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, 0);
+        SetVBlankCallback(sub_80261E4);
+        gUnknown_02022C98->unk_000C++;
+        break;
+    case 7:
+        UpdatePaletteFade();
+        if (!gPaletteFade.active)
+        {
+            gUnknown_02022C98->unk_000C++;
+        }
+        break;
+    default:
+        DestroyTask(taskId);
+        sub_802621C(sub_802589C);
+        break;
     }
 }
 
@@ -407,15 +410,15 @@ void sub_8024DBC(void)
 {
     switch (gUnknown_02022C98->unk_0010)
     {
-        case 0:
-            sub_8028504(1);
-            sub_80292E0(1);
-            gUnknown_02022C98->unk_0010++;
-            break;
-        case 1:
-            if (!sub_802A770())
-                sub_8026240(1);
-            break;
+    case 0:
+        sub_8028504(1);
+        sub_80292E0(1);
+        gUnknown_02022C98->unk_0010++;
+        break;
+    case 1:
+        if (!sub_802A770())
+            sub_8026240(1);
+        break;
     }
 }
 
@@ -437,40 +440,40 @@ void sub_8024E38(void)
 {
     switch (gUnknown_02022C98->unk_0010)
     {
-        case 0:
-            sub_802EB24(7, 8, 120, 80, 0);
+    case 0:
+        sub_802EB24(7, 8, 120, 80, 0);
+        gUnknown_02022C98->unk_0010++;
+        break;
+    case 1:
+        sub_8010434();
+        gUnknown_02022C98->unk_0010++;
+        break;
+    case 2:
+        if (IsLinkTaskFinished())
+        {
             gUnknown_02022C98->unk_0010++;
-            break;
-        case 1:
+            gUnknown_02022C98->unk_0030 = 0;
+        }
+        break;
+    case 3:
+        if (!sub_802EB84())
+        {
+            gUnknown_02022C98->unk_0010++;
+        }
+        break;
+    case 4:
+        if (++gUnknown_02022C98->unk_0030 > 5)
+        {
             sub_8010434();
             gUnknown_02022C98->unk_0010++;
-            break;
-        case 2:
-            if (IsLinkTaskFinished())
-            {
-                gUnknown_02022C98->unk_0010++;
-                gUnknown_02022C98->unk_0030 = 0;
-            }
-            break;
-        case 3:
-            if (!sub_802EB84())
-            {
-                gUnknown_02022C98->unk_0010++;
-            }
-            break;
-        case 4:
-            if (++gUnknown_02022C98->unk_0030 > 5)
-            {
-                sub_8010434();
-                gUnknown_02022C98->unk_0010++;
-            }
-            break;
-        case 5:
-            if (IsLinkTaskFinished())
-            {
-                sub_8026240(3);
-            }
-            break;
+        }
+        break;
+    case 5:
+        if (IsLinkTaskFinished())
+        {
+            sub_8026240(3);
+        }
+        break;
     }
 }
 
@@ -620,37 +623,37 @@ void sub_8025198(void)
 {
     switch (gUnknown_02022C98->unk_0010)
     {
-        case 0:
-            if (SendBlock(0, gUnknown_02022C98->unk_004A, sizeof(gUnknown_02022C98->unk_004A)))
-            {
-                gUnknown_02022C98->unk_0008 = 0;
-                gUnknown_02022C98->unk_0010++;
-            }
-            break;
-        case 1:
-            if (IsLinkTaskFinished())
-            {
-                gUnknown_02022C98->unk_0010++;
-            }
-            break;
-        case 2:
-            if (sub_8025170())
-            {
-                gUnknown_02022C98->unk_0008 = gUnknown_02022C98->unk_0024;
-            }
-            if (gUnknown_02022C98->unk_0008 >= gUnknown_02022C98->unk_0024)
-            {
-                gUnknown_02022C98->unk_0014++;
-                gUnknown_02022C98->unk_0010++;
-            }
-            break;
-        default:
-            if (WaitFanfare(TRUE))
-            {
-                sub_8026240(6);
-                FadeOutAndPlayNewMapMusic(MUS_RG_WIN_YASEI, 4);
-            }
-            break;
+    case 0:
+        if (SendBlock(0, gUnknown_02022C98->unk_004A, sizeof(gUnknown_02022C98->unk_004A)))
+        {
+            gUnknown_02022C98->unk_0008 = 0;
+            gUnknown_02022C98->unk_0010++;
+        }
+        break;
+    case 1:
+        if (IsLinkTaskFinished())
+        {
+            gUnknown_02022C98->unk_0010++;
+        }
+        break;
+    case 2:
+        if (sub_8025170())
+        {
+            gUnknown_02022C98->unk_0008 = gUnknown_02022C98->unk_0024;
+        }
+        if (gUnknown_02022C98->unk_0008 >= gUnknown_02022C98->unk_0024)
+        {
+            gUnknown_02022C98->unk_0014++;
+            gUnknown_02022C98->unk_0010++;
+        }
+        break;
+    default:
+        if (WaitFanfare(TRUE))
+        {
+            sub_8026240(6);
+            FadeOutAndPlayNewMapMusic(MUS_RG_WIN_YASEI, 4);
+        }
+        break;
     }
 }
 
@@ -659,37 +662,37 @@ void sub_8025230(void)
     u8 i;
 
     switch (gUnknown_02022C98->unk_0010) {
-        case 0:
-            if (SendBlock(0, gUnknown_02022C98->unk_004A[gUnknown_02022C98->unk_0014],
-                          sizeof(gUnknown_02022C98->unk_004A))) {
-                gUnknown_02022C98->unk_0008 = 0;
-                gUnknown_02022C98->unk_0010++;
+    case 0:
+        if (SendBlock(0, gUnknown_02022C98->unk_004A[gUnknown_02022C98->unk_0014],
+                      sizeof(gUnknown_02022C98->unk_004A))) {
+            gUnknown_02022C98->unk_0008 = 0;
+            gUnknown_02022C98->unk_0010++;
+        }
+        break;
+    case 1:
+        if (IsLinkTaskFinished()) {
+            gUnknown_02022C98->unk_0010++;
+        }
+        break;
+    case 2:
+        if (sub_8025170()) {
+            for (i = 0; i < gUnknown_02022C98->unk_0024; i++) {
+                memcpy(gUnknown_02022C98->unk_004A, gBlockRecvBuffer, sizeof(gUnknown_02022C98->unk_004A));
+                gUnknown_02022C98->unk_0008 = gUnknown_02022C98->unk_0024;
             }
-            break;
-        case 1:
-            if (IsLinkTaskFinished()) {
-                gUnknown_02022C98->unk_0010++;
-            }
-            break;
-        case 2:
-            if (sub_8025170()) {
-                for (i = 0; i < gUnknown_02022C98->unk_0024; i++) {
-                    memcpy(gUnknown_02022C98->unk_004A, gBlockRecvBuffer, sizeof(gUnknown_02022C98->unk_004A));
-                    gUnknown_02022C98->unk_0008 = gUnknown_02022C98->unk_0024;
-                }
-            }
-            if (gUnknown_02022C98->unk_0008 >= gUnknown_02022C98->unk_0024) {
-                gUnknown_02022C98->unk_0014++;
-                gUnknown_02022C98->unk_0010++;
-            }
-            break;
-        default:
-            if (WaitFanfare(TRUE)) {
-                gUnknown_02022C98->unk_0114 = gUnknown_02022C98->unk_004A[gUnknown_02022C98->multiplayerId][5];
-                sub_8026240(6);
-                FadeOutAndPlayNewMapMusic(MUS_RG_WIN_YASEI, 4);
-            }
-            break;
+        }
+        if (gUnknown_02022C98->unk_0008 >= gUnknown_02022C98->unk_0024) {
+            gUnknown_02022C98->unk_0014++;
+            gUnknown_02022C98->unk_0010++;
+        }
+        break;
+    default:
+        if (WaitFanfare(TRUE)) {
+            gUnknown_02022C98->unk_0114 = gUnknown_02022C98->unk_004A[gUnknown_02022C98->multiplayerId][5];
+            sub_8026240(6);
+            FadeOutAndPlayNewMapMusic(MUS_RG_WIN_YASEI, 4);
+        }
+        break;
     }
 }
 
@@ -700,58 +703,58 @@ void sub_8025324(void)
 
     switch (gUnknown_02022C98->unk_0010)
     {
-        case 0:
-            sub_802749C();
-            sub_80289E8(1);
-            sub_8028DFC();
-            sub_8028EC8(1);
-            sub_80292E0(2);
+    case 0:
+        sub_802749C();
+        sub_80289E8(1);
+        sub_8028DFC();
+        sub_8028EC8(1);
+        sub_80292E0(2);
+        gUnknown_02022C98->unk_0010++;
+        break;
+    case 1:
+        if (!sub_802A770())
+        {
+            sub_80292E0(5);
             gUnknown_02022C98->unk_0010++;
-            break;
-        case 1:
-            if (!sub_802A770())
+        }
+        break;
+    case 2:
+        sp00 = sub_802A794();
+        if (SendBlock(0, &sp00, sizeof(sp00)))
+        {
+            gUnknown_02022C98->unk_0010++;
+        }
+        break;
+    case 3:
+        if (IsLinkTaskFinished())
+        {
+            gUnknown_02022C98->unk_0010++;
+            gUnknown_02022C98->unk_0008 = 0;
+        }
+        break;
+    case 4:
+        if (sub_8025170())
+        {
+            for (i = 0; i < gUnknown_02022C98->unk_0024; i++)
             {
-                sub_80292E0(5);
+                *(gUnknown_02022C98->unk_010C + i) = *(u8 *)gBlockRecvBuffer[i];
+                gUnknown_02022C98->unk_0008 = gUnknown_02022C98->unk_0024;
+            }
+        }
+        if (gUnknown_02022C98->unk_0008 >= gUnknown_02022C98->unk_0024) {
+            if (++gUnknown_02022C98->unk_0014 >= 120)
+            {
+                sub_80292E0(6);
                 gUnknown_02022C98->unk_0010++;
             }
-            break;
-        case 2:
-            sp00 = sub_802A794();
-            if (SendBlock(0, &sp00, sizeof(sp00)))
-            {
-                gUnknown_02022C98->unk_0010++;
-            }
-            break;
-        case 3:
-            if (IsLinkTaskFinished())
-            {
-                gUnknown_02022C98->unk_0010++;
-                gUnknown_02022C98->unk_0008 = 0;
-            }
-            break;
-        case 4:
-            if (sub_8025170())
-            {
-                for (i = 0; i < gUnknown_02022C98->unk_0024; i++)
-                {
-                    *(gUnknown_02022C98->unk_010C + i) = *(u8 *)gBlockRecvBuffer[i];
-                    gUnknown_02022C98->unk_0008 = gUnknown_02022C98->unk_0024;
-                }
-            }
-            if (gUnknown_02022C98->unk_0008 >= gUnknown_02022C98->unk_0024) {
-                if (++gUnknown_02022C98->unk_0014 >= 120)
-                {
-                    sub_80292E0(6);
-                    gUnknown_02022C98->unk_0010++;
-                }
-            }
-            break;
-        default:
-            if (!sub_802A770())
-            {
-                sub_8026240(7);
-            }
-            break;
+        }
+        break;
+    default:
+        if (!sub_802A770())
+        {
+            sub_8026240(7);
+        }
+        break;
     }
 }
 
@@ -762,88 +765,88 @@ void sub_8025470(void)
 
     switch (gUnknown_02022C98->unk_0010)
     {
-        case 0:
-            if (sub_8027748() >= 3000)
-            {
-                sub_80292E0(4);
-            }
+    case 0:
+        if (sub_8027748() >= 3000)
+        {
+            sub_80292E0(4);
+        }
+        gUnknown_02022C98->unk_0010++;
+        break;
+    case 1:
+        if (!sub_802A770())
+        {
+            sub_80292E0(3);
             gUnknown_02022C98->unk_0010++;
-            break;
-        case 1:
-            if (!sub_802A770())
-            {
-                sub_80292E0(3);
-                gUnknown_02022C98->unk_0010++;
-            }
-            break;
-        case 2:
-            sub_8028FCC();
-            sub_80272E8();
+        }
+        break;
+    case 2:
+        sub_8028FCC();
+        sub_80272E8();
+        gUnknown_02022C98->unk_0010++;
+        break;
+    case 3:
+        if ((sp0 = sub_802A794()) != 0)
+        {
             gUnknown_02022C98->unk_0010++;
-            break;
-        case 3:
-            if ((sp0 = sub_802A794()) != 0)
+        }
+        break;
+    case 4:
+        if (!sub_802A770())
+        {
+            sub_80292E0(5);
+            gUnknown_02022C98->unk_0010++;
+        }
+        break;
+    case 5:
+        sp0 = sub_802A794();
+        if (SendBlock(0, &sp0, sizeof(sp0)))
+        {
+            gUnknown_02022C98->unk_0008 = 0;
+            gUnknown_02022C98->unk_0010++;
+        }
+        break;
+    case 6:
+        if (IsLinkTaskFinished())
+        {
+            gUnknown_02022C98->unk_0010++;
+        }
+        break;
+    case 7:
+        if (sub_8025170())
+        {
+            for (i = 0; i < gUnknown_02022C98->unk_0024; i++)
             {
+                *(gUnknown_02022C98->unk_010C + i) = *(u8 *)gBlockRecvBuffer[i];
+                gUnknown_02022C98->unk_0008 = gUnknown_02022C98->unk_0024;
+            }
+        }
+        if (gUnknown_02022C98->unk_0008 >= gUnknown_02022C98->unk_0024) {
+            if (++gUnknown_02022C98->unk_0014 >= 120)
+            {
+                sub_8027608();
+                sub_80292E0(6);
                 gUnknown_02022C98->unk_0010++;
             }
-            break;
-        case 4:
-            if (!sub_802A770())
+        }
+        else
+        {
+            sub_8027554();
+        }
+        break;
+    default:
+        if (!sub_802A770())
+        {
+            for (i = 0; i < gUnknown_02022C98->unk_0024; i++)
             {
-                sub_80292E0(5);
-                gUnknown_02022C98->unk_0010++;
-            }
-            break;
-        case 5:
-            sp0 = sub_802A794();
-            if (SendBlock(0, &sp0, sizeof(sp0)))
-            {
-                gUnknown_02022C98->unk_0008 = 0;
-                gUnknown_02022C98->unk_0010++;
-            }
-            break;
-        case 6:
-            if (IsLinkTaskFinished())
-            {
-                gUnknown_02022C98->unk_0010++;
-            }
-            break;
-        case 7:
-            if (sub_8025170())
-            {
-                for (i = 0; i < gUnknown_02022C98->unk_0024; i++)
+                if (gUnknown_02022C98->unk_010C[i] == 2)
                 {
-                    *(gUnknown_02022C98->unk_010C + i) = *(u8 *)gBlockRecvBuffer[i];
-                    gUnknown_02022C98->unk_0008 = gUnknown_02022C98->unk_0024;
+                    sub_8026240(8);
+                    return;
                 }
             }
-            if (gUnknown_02022C98->unk_0008 >= gUnknown_02022C98->unk_0024) {
-                if (++gUnknown_02022C98->unk_0014 >= 120)
-                {
-                    sub_8027608();
-                    sub_80292E0(6);
-                    gUnknown_02022C98->unk_0010++;
-                }
-            }
-            else
-            {
-                sub_8027554();
-            }
-            break;
-        default:
-            if (!sub_802A770())
-            {
-                for (i = 0; i < gUnknown_02022C98->unk_0024; i++)
-                {
-                    if (gUnknown_02022C98->unk_010C[i] == 2)
-                    {
-                        sub_8026240(8);
-                        return;
-                    }
-                }
-                sub_8026240(10);
-            }
-            break;
+            sub_8026240(10);
+        }
+        break;
     }
 }
 
@@ -851,29 +854,29 @@ void sub_8025644(void)
 {
     switch (gUnknown_02022C98->unk_0010)
     {
-        case 0:
-            sub_800AC34();
-            sub_80292E0(7);
+    case 0:
+        sub_800AC34();
+        sub_80292E0(7);
+        gUnknown_02022C98->unk_0010++;
+        break;
+    case 1:
+        if (!sub_802A770())
+        {
             gUnknown_02022C98->unk_0010++;
-            break;
-        case 1:
-            if (!sub_802A770())
-            {
-                gUnknown_02022C98->unk_0010++;
-            }
-            break;
-        case 2:
-            if (sub_802A794() == 5)
-            {
-                gUnknown_02022C98->unk_0010++;
-            }
-            break;
-        default:
-            if (gReceivedRemoteLinkPlayers == 0)
-            {
-                sub_8026240(9);
-            }
-            break;
+        }
+        break;
+    case 2:
+        if (sub_802A794() == 5)
+        {
+            gUnknown_02022C98->unk_0010++;
+        }
+        break;
+    default:
+        if (gReceivedRemoteLinkPlayers == 0)
+        {
+            sub_8026240(9);
+        }
+        break;
     }
 }
 
@@ -881,35 +884,35 @@ void sub_80256AC(void)
 {
     switch (gUnknown_02022C98->unk_0010)
     {
-        case 0:
-            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
+    case 0:
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
+        gUnknown_02022C98->unk_0010++;
+        break;
+    case 1:
+        UpdatePaletteFade();
+        if (!gPaletteFade.active)
+        {
             gUnknown_02022C98->unk_0010++;
-            break;
-        case 1:
-            UpdatePaletteFade();
-            if (!gPaletteFade.active)
-            {
-                gUnknown_02022C98->unk_0010++;
-            }
-            break;
-        case 2:
-            sub_8028B80();
-            sub_80287E4();
-            sub_8028614(gUnknown_02022C98->unk_0024);
-            sub_8028E84();
-            gUnknown_03000DB0 = TRUE;
-            sub_80292E0(8);
-            gUnknown_02022C98->unk_0010++;
-            break;
-        default:
-            if (!sub_802A770())
-            {
-                SetMainCallback2(gUnknown_02022C98->savedCallback);
-                DestroyTask(gUnknown_02022C98->unk_0004);
-                Free(gUnknown_02022C98);
-                FreeAllWindowBuffers();
-            }
-            break;
+        }
+        break;
+    case 2:
+        sub_8028B80();
+        sub_80287E4();
+        sub_8028614(gUnknown_02022C98->unk_0024);
+        sub_8028E84();
+        gUnknown_03000DB0 = TRUE;
+        sub_80292E0(8);
+        gUnknown_02022C98->unk_0010++;
+        break;
+    default:
+        if (!sub_802A770())
+        {
+            SetMainCallback2(gUnknown_02022C98->savedCallback);
+            DestroyTask(gUnknown_02022C98->unk_0004);
+            Free(gUnknown_02022C98);
+            FreeAllWindowBuffers();
+        }
+        break;
     }
 }
 
@@ -917,62 +920,62 @@ void sub_8025758(void)
 {
     switch (gUnknown_02022C98->unk_0010)
     {
-        case 0:
-            sub_80292E0(9);
-            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
+    case 0:
+        sub_80292E0(9);
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
+        gUnknown_02022C98->unk_0010++;
+        break;
+    case 1:
+        UpdatePaletteFade();
+        if (!gPaletteFade.active)
+        {
             gUnknown_02022C98->unk_0010++;
-            break;
-        case 1:
-            UpdatePaletteFade();
-            if (!gPaletteFade.active)
-            {
-                gUnknown_02022C98->unk_0010++;
-            }
-            break;
-        case 2:
-            ChangeBgX(0, 0, 0);
-            ChangeBgY(0, 0, 0);
-            ChangeBgX(1, 0, 0);
-            ChangeBgY(1, 0, 0);
-            ChangeBgX(2, 0, 0);
-            ChangeBgY(2, 0, 0);
-            ChangeBgX(3, 0, 0);
-            ChangeBgY(3, 0, 0);
+        }
+        break;
+    case 2:
+        ChangeBgX(0, 0, 0);
+        ChangeBgY(0, 0, 0);
+        ChangeBgX(1, 0, 0);
+        ChangeBgY(1, 0, 0);
+        ChangeBgX(2, 0, 0);
+        ChangeBgY(2, 0, 0);
+        ChangeBgX(3, 0, 0);
+        ChangeBgY(3, 0, 0);
+        gUnknown_02022C98->unk_0010++;
+        break;
+    case 3:
+        StopMapMusic();
+        gUnknown_02022C98->unk_0010++;
+        break;
+    case 4:
+        PlayNewMapMusic(MUS_RG_KINOMIKUI);
+        sub_8028E4C();
+        gUnknown_02022C98->unk_0010++;
+        break;
+    case 5:
+        BlendPalettes(0xFFFFFFFF, 16, 0);
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, 0);
+        gUnknown_02022C98->unk_0010++;
+        break;
+    case 6:
+        UpdatePaletteFade();
+        if (!gPaletteFade.active)
+        {
             gUnknown_02022C98->unk_0010++;
-            break;
-        case 3:
-            StopMapMusic();
-            gUnknown_02022C98->unk_0010++;
-            break;
-        case 4:
-            PlayNewMapMusic(MUS_RG_KINOMIKUI);
-            sub_8028E4C();
-            gUnknown_02022C98->unk_0010++;
-            break;
-        case 5:
-            BlendPalettes(0xFFFFFFFF, 16, 0);
-            BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, 0);
-            gUnknown_02022C98->unk_0010++;
-            break;
-        case 6:
-            UpdatePaletteFade();
-            if (!gPaletteFade.active)
-            {
-                gUnknown_02022C98->unk_0010++;
-            }
-            break;
-        default:
-            DestroyTask(gUnknown_02022C98->unk_0004);
-            sub_802621C(sub_802589C);
-            sub_802903C();
-            sub_8024A30(gUnknown_02022C98);
-            if (gReceivedRemoteLinkPlayers == 0)
-            {
-                gUnknown_02022C98->unk_0024 = 1;
-            }
-            sub_80273F0();
-            sub_8028EC8(0);
-            break;
+        }
+        break;
+    default:
+        DestroyTask(gUnknown_02022C98->unk_0004);
+        sub_802621C(sub_802589C);
+        sub_802903C();
+        sub_8024A30(gUnknown_02022C98);
+        if (gReceivedRemoteLinkPlayers == 0)
+        {
+            gUnknown_02022C98->unk_0024 = 1;
+        }
+        sub_80273F0();
+        sub_8028EC8(0);
+        break;
     }
 }
 
@@ -980,33 +983,33 @@ void sub_802589C(u8 taskId)
 {
     switch (gUnknown_02022C98->unk_0010)
     {
-        case 0:
-            if (sub_8026264() == 1)
-            {
-                gUnknown_02022C98->unk_0010++;
-            }
-            break;
-        case 1:
-            sub_80286E4();
+    case 0:
+        if (sub_8026264() == 1)
+        {
             gUnknown_02022C98->unk_0010++;
-            break;
-        case 2:
-            if (sub_8028828() == 1)
-            {
-                gUnknown_02022C98->unk_0010++;
-            }
-            break;
-        default:
-            if (gUnknown_02022C98->unk_0020 != 0)
-            {
-                sub_802621C(sub_8024D4C);
-            }
-            else
-            {
-                sub_802621C(sub_8024D84);
-            }
-            DestroyTask(taskId);
-            break;
+        }
+        break;
+    case 1:
+        sub_80286E4();
+        gUnknown_02022C98->unk_0010++;
+        break;
+    case 2:
+        if (sub_8028828() == 1)
+        {
+            gUnknown_02022C98->unk_0010++;
+        }
+        break;
+    default:
+        if (gUnknown_02022C98->unk_0020 != 0)
+        {
+            sub_802621C(sub_8024D4C);
+        }
+        else
+        {
+            sub_802621C(sub_8024D84);
+        }
+        DestroyTask(taskId);
+        break;
     }
 }
 
@@ -1017,35 +1020,35 @@ void sub_8025910(u8 taskId)
 
     switch (data[0])
     {
-        case 0:
-            if (SendBlock(0, &gUnknown_02022C98->unk_318C[gUnknown_02022C98->multiplayerId].isShiny, sizeof(gUnknown_02022C98->unk_318C[gUnknown_02022C98->multiplayerId].isShiny)))
+    case 0:
+        if (SendBlock(0, &gUnknown_02022C98->unk_318C[gUnknown_02022C98->multiplayerId].isShiny, sizeof(gUnknown_02022C98->unk_318C[gUnknown_02022C98->multiplayerId].isShiny)))
+        {
+            gUnknown_02022C98->unk_0008 = 0;
+            data[0]++;
+        }
+        break;
+    case 1:
+        if (IsLinkTaskFinished())
+        {
+            data[0]++;
+        }
+        break;
+    case 2:
+        if (sub_8025170())
+        {
+            for (i = 0; i < gUnknown_02022C98->unk_0024; i++)
             {
-                gUnknown_02022C98->unk_0008 = 0;
-                data[0]++;
+                *(u8 *)&gUnknown_02022C98->unk_318C[i] = *(u8 *)gBlockRecvBuffer[i];
+                gUnknown_02022C98->unk_0008 = gUnknown_02022C98->unk_0024;
             }
-            break;
-        case 1:
-            if (IsLinkTaskFinished())
-            {
-                data[0]++;
-            }
-            break;
-        case 2:
-            if (sub_8025170())
-            {
-                for (i = 0; i < gUnknown_02022C98->unk_0024; i++)
-                {
-                    *(u8 *)&gUnknown_02022C98->unk_318C[i] = *(u8 *)gBlockRecvBuffer[i];
-                    gUnknown_02022C98->unk_0008 = gUnknown_02022C98->unk_0024;
-                }
-            }
-            if (gUnknown_02022C98->unk_0008 >= gUnknown_02022C98->unk_0024)
-            {
-                DestroyTask(taskId);
-                sub_80292E0(6);
-                gUnknown_02022C98->unk_0010++;
-            }
-            break;
+        }
+        if (gUnknown_02022C98->unk_0008 >= gUnknown_02022C98->unk_0024)
+        {
+            DestroyTask(taskId);
+            sub_80292E0(6);
+            gUnknown_02022C98->unk_0010++;
+        }
+        break;
     }
 }
 
@@ -1089,29 +1092,29 @@ void sub_80259FC(void)
         }
         switch (gUnknown_02022C98->unk_00A8[i])
         {
-            case 0:
-            default:
-                break;
-            case 1 ... 3:
-                if (++gUnknown_02022C98->unk_00B0[i] >= 6)
-                {
-                    gUnknown_02022C98->unk_00B0[i] = 0;
-                    gUnknown_02022C98->unk_00A8[i] = 0;
-                    gUnknown_02022C98->unk_31A0[i].unk_2C = 0;
-                    gUnknown_02022C98->unk_31A0[i].unk_30 = 0;
-                    gUnknown_02022C98->unk_31A0[i].unk_34 = 0;
-                }
-                break;
-            case 4:
-                if (++gUnknown_02022C98->unk_00B0[i] >= 40)
-                {
-                    gUnknown_02022C98->unk_00B0[i] = 0;
-                    gUnknown_02022C98->unk_00A8[i] = 0;
-                    gUnknown_02022C98->unk_31A0[i].unk_2C = 0;
-                    gUnknown_02022C98->unk_31A0[i].unk_30 = 0;
-                    gUnknown_02022C98->unk_31A0[i].unk_34 = 0;
-                }
-                break;
+        case 0:
+        default:
+            break;
+        case 1 ... 3:
+            if (++gUnknown_02022C98->unk_00B0[i] >= 6)
+            {
+                gUnknown_02022C98->unk_00B0[i] = 0;
+                gUnknown_02022C98->unk_00A8[i] = 0;
+                gUnknown_02022C98->unk_31A0[i].unk_2C = 0;
+                gUnknown_02022C98->unk_31A0[i].unk_30 = 0;
+                gUnknown_02022C98->unk_31A0[i].unk_34 = 0;
+            }
+            break;
+        case 4:
+            if (++gUnknown_02022C98->unk_00B0[i] >= 40)
+            {
+                gUnknown_02022C98->unk_00B0[i] = 0;
+                gUnknown_02022C98->unk_00A8[i] = 0;
+                gUnknown_02022C98->unk_31A0[i].unk_2C = 0;
+                gUnknown_02022C98->unk_31A0[i].unk_30 = 0;
+                gUnknown_02022C98->unk_31A0[i].unk_34 = 0;
+            }
+            break;
         }
     }
 }
@@ -1151,19 +1154,19 @@ void sub_8025D04(void)
 {
     switch (gUnknown_02022C98->unk_0018)
     {
-        case 3:
-            if (sub_8026BB8() == 1)
-            {
-                sub_8026C28();
-                gUnknown_02022C98->unk_011C = 1;
-            }
-            break;
-        case 4:
-            sub_80259FC();
-            break;
-        case 11:
-            sub_8025C0C();
-            break;
+    case 3:
+        if (sub_8026BB8() == 1)
+        {
+            sub_8026C28();
+            gUnknown_02022C98->unk_011C = 1;
+        }
+        break;
+    case 4:
+        sub_80259FC();
+        break;
+    case 11:
+        sub_8025C0C();
+        break;
     }
 }
 
@@ -1171,12 +1174,12 @@ void sub_8025D50(void)
 {
     switch (gUnknown_02022C98->unk_0018)
     {
-        case 4:
-            sub_8027E30(&gUnknown_02022C98->unk_32CC, &gUnknown_02022C98->unk_31A0[0].unk_2C, &gUnknown_02022C98->unk_31A0[1].unk_2C, &gUnknown_02022C98->unk_31A0[2].unk_2C, &gUnknown_02022C98->unk_31A0[3].unk_2C, &gUnknown_02022C98->unk_31A0[4].unk_2C, gUnknown_02022C98->unk_0040, gUnknown_02022C98->unk_0120, gUnknown_02022C98->unk_012C);
-            break;
-        case 11:
-            sub_8027E30(&gUnknown_02022C98->unk_32CC, &gUnknown_02022C98->unk_31A0[0].unk_2C, &gUnknown_02022C98->unk_31A0[1].unk_2C, &gUnknown_02022C98->unk_31A0[2].unk_2C, &gUnknown_02022C98->unk_31A0[3].unk_2C, &gUnknown_02022C98->unk_31A0[4].unk_2C, gUnknown_02022C98->unk_0040, gUnknown_02022C98->unk_0120, gUnknown_02022C98->unk_012C);
-            break;
+    case 4:
+        sub_8027E30(&gUnknown_02022C98->unk_32CC, &gUnknown_02022C98->unk_31A0[0].unk_2C, &gUnknown_02022C98->unk_31A0[1].unk_2C, &gUnknown_02022C98->unk_31A0[2].unk_2C, &gUnknown_02022C98->unk_31A0[3].unk_2C, &gUnknown_02022C98->unk_31A0[4].unk_2C, gUnknown_02022C98->unk_0040, gUnknown_02022C98->unk_0120, gUnknown_02022C98->unk_012C);
+        break;
+    case 11:
+        sub_8027E30(&gUnknown_02022C98->unk_32CC, &gUnknown_02022C98->unk_31A0[0].unk_2C, &gUnknown_02022C98->unk_31A0[1].unk_2C, &gUnknown_02022C98->unk_31A0[2].unk_2C, &gUnknown_02022C98->unk_31A0[3].unk_2C, &gUnknown_02022C98->unk_31A0[4].unk_2C, gUnknown_02022C98->unk_0040, gUnknown_02022C98->unk_0120, gUnknown_02022C98->unk_012C);
+        break;
     }
 }
 
@@ -1184,12 +1187,12 @@ void sub_8025E0C(void)
 {
     switch (gUnknown_02022C98->unk_0018)
     {
-        case 4:
-            sub_8028164(gUnknown_02022C98->multiplayerId, &gUnknown_02022C98->unk_31A0[gUnknown_02022C98->multiplayerId], &gUnknown_02022C98->unk_31A0[0].unk_2C, &gUnknown_02022C98->unk_31A0[1].unk_2C, &gUnknown_02022C98->unk_31A0[2].unk_2C, &gUnknown_02022C98->unk_31A0[3].unk_2C, &gUnknown_02022C98->unk_31A0[4].unk_2C, &gUnknown_02022C98->unk_0040, &gUnknown_02022C98->unk_0120, &gUnknown_02022C98->unk_012C);
-            break;
-        case 11:
-            sub_8028164(gUnknown_02022C98->multiplayerId, &gUnknown_02022C98->unk_31A0[gUnknown_02022C98->multiplayerId], &gUnknown_02022C98->unk_31A0[0].unk_2C, &gUnknown_02022C98->unk_31A0[1].unk_2C, &gUnknown_02022C98->unk_31A0[2].unk_2C, &gUnknown_02022C98->unk_31A0[3].unk_2C, &gUnknown_02022C98->unk_31A0[4].unk_2C, &gUnknown_02022C98->unk_0040, &gUnknown_02022C98->unk_0120, &gUnknown_02022C98->unk_012C);
-            break;
+    case 4:
+        sub_8028164(gUnknown_02022C98->multiplayerId, &gUnknown_02022C98->unk_31A0[gUnknown_02022C98->multiplayerId], &gUnknown_02022C98->unk_31A0[0].unk_2C, &gUnknown_02022C98->unk_31A0[1].unk_2C, &gUnknown_02022C98->unk_31A0[2].unk_2C, &gUnknown_02022C98->unk_31A0[3].unk_2C, &gUnknown_02022C98->unk_31A0[4].unk_2C, &gUnknown_02022C98->unk_0040, &gUnknown_02022C98->unk_0120, &gUnknown_02022C98->unk_012C);
+        break;
+    case 11:
+        sub_8028164(gUnknown_02022C98->multiplayerId, &gUnknown_02022C98->unk_31A0[gUnknown_02022C98->multiplayerId], &gUnknown_02022C98->unk_31A0[0].unk_2C, &gUnknown_02022C98->unk_31A0[1].unk_2C, &gUnknown_02022C98->unk_31A0[2].unk_2C, &gUnknown_02022C98->unk_31A0[3].unk_2C, &gUnknown_02022C98->unk_31A0[4].unk_2C, &gUnknown_02022C98->unk_0040, &gUnknown_02022C98->unk_0120, &gUnknown_02022C98->unk_012C);
+        break;
     }
 }
 
@@ -1197,22 +1200,22 @@ void sub_8025ED8(void)
 {
     switch (gUnknown_02022C98->unk_0018)
     {
-        case 3:
-            sub_8027DD0(1);
-            gUnknown_02022C98->unk_011C = 1;
-            break;
-        case 4:
-            if (gUnknown_02022C98->unk_32CC.unk_2C != 0)
-            {
-                sub_80282EC(gUnknown_02022C98->unk_32CC.unk_2C);
-            }
-            break;
-        case 11:
-            if (gUnknown_02022C98->unk_0120 == 0 && gUnknown_02022C98->unk_012C == 0)
-            {
-                sub_8028350(1);
-            }
-            break;
+    case 3:
+        sub_8027DD0(1);
+        gUnknown_02022C98->unk_011C = 1;
+        break;
+    case 4:
+        if (gUnknown_02022C98->unk_32CC.unk_2C != 0)
+        {
+            sub_80282EC(gUnknown_02022C98->unk_32CC.unk_2C);
+        }
+        break;
+    case 11:
+        if (gUnknown_02022C98->unk_0120 == 0 && gUnknown_02022C98->unk_012C == 0)
+        {
+            sub_8028350(1);
+        }
+        break;
     }
 }
 
@@ -1312,5 +1315,84 @@ void sub_8026044(void)
     {
         PlayFanfareByFanfareNum(11); // MUS_ME_ZANNEN
         gUnknown_02022C98->unk_0154 = 2;
+    }
+}
+
+void sub_80261CC(void)
+{
+    RunTasks();
+    AnimateSprites();
+    BuildOamBuffer();
+    UpdatePaletteFade();
+}
+
+void sub_80261E4(void)
+{
+    TransferPlttBuffer();
+    LoadOam();
+    ProcessSpriteCopyRequests();
+}
+
+void sub_80261F8(struct DodrioBerryPickingSubstruct_318C * a0, struct Pokemon * a1)
+{
+    a0->isShiny = IsMonShiny(a1);
+}
+
+void sub_802620C(TaskFunc func, u8 priority)
+{
+    CreateTask(func, priority);
+}
+
+void sub_802621C(TaskFunc func)
+{
+    gUnknown_02022C98->unk_0004 = CreateTask(func, 1);
+    gUnknown_02022C98->unk_0010 = 0;
+    gUnknown_02022C98->unk_000C = 0;
+    gUnknown_02022C98->unk_0014 = 0;
+}
+
+void sub_8026240(u8 a0)
+{
+    gUnknown_02022C98->unk_001C = gUnknown_02022C98->unk_0018;
+    gUnknown_02022C98->unk_0018 = a0;
+    gUnknown_02022C98->unk_0010 = 0;
+    gUnknown_02022C98->unk_0014 = 0;
+}
+
+bool32 sub_8026264(void)
+{
+    u8 r2 = gUnknown_02022C98->unk_0014 / 4;
+    gUnknown_02022C98->unk_0014++;
+    if (r2 != 0 && gUnknown_02022C98->unk_0014 % 4 == 0)
+    {
+        if (r2 < gUnknown_082F7A94[gUnknown_02022C98->unk_0024 - 1])
+        {
+            SetGpuReg(REG_OFFSET_BG1HOFS,  (r2 * 8));
+            SetGpuReg(REG_OFFSET_BG2HOFS, -(r2 * 8));
+            return FALSE;
+        }
+        else
+        {
+            return TRUE;
+        }
+    }
+    else
+    {
+        return FALSE;
+    }
+}
+
+void sub_80262C0(void)
+{
+    u8 i;
+    u8 start = gUnknown_02022C98->unk_0044;
+    u8 finish = gUnknown_02022C98->unk_0048;
+
+    for (i = start; i < finish; i++)
+    {
+        struct DodrioBerryPickingSubstruct_31A0 * ptr = &gUnknown_02022C98->unk_32CC;
+        u8 * r4 = gUnknown_02022C98->unk_32CC.unk_14;
+        ptr->unk_1F[i] = (i % 2 == 0) ? 1 : 0;
+        r4[i] = 0;
     }
 }
