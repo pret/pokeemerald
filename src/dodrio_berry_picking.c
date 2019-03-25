@@ -29,11 +29,15 @@ struct DodrioBerryPickingStruct_2022CF4
 
 struct DodrioBerryPickingSubstruct_31A0
 {
-    u8 unk_00[0x2C - 0x00];
+    u8 unk_00[0x10];
+    u32 unk_10;
+    u8 filler_14[0x18];
     u8 unk_2C;
     u8 filler_2D[3];
     u8 unk_30;
-    u8 filler_31[11];
+    u8 filler_31[3];
+    u8 unk_34;
+    u8 filler_35[7];
 }; // size = 0x3C
 
 struct DodrioBerryPickingSubstruct_318C
@@ -99,7 +103,10 @@ struct DodrioBerryPickingStruct
     /*0x0118*/ u32 unk_0118;
     /*0x011C*/ u32 unk_011C;
     /*0x0120*/ u32 unk_0120;
-    /*0x0124*/ u8 filler_0124[8];
+    /*0x0124*/ u8 unk_0124;
+    /*0x0125*/ u8 filler_0125[3];
+    /*0x0128*/ u8 unk_0128;
+    // align 2
     /*0x012C*/ u32 unk_012C;
     /*0x0130*/ u32 unk_0130[5];
     /*0x0144*/ u8 filler_0144[0x1C];
@@ -152,6 +159,7 @@ void sub_80261F8(struct DodrioBerryPickingSubstruct_318C *, struct Pokemon *);
 void sub_802620C(TaskFunc, u8);
 void sub_802621C(TaskFunc);
 void sub_8026240(u8);
+bool32 sub_8026264(void);
 void sub_80262C0(void);
 void sub_802671C(void);
 void sub_8026AF4(void);
@@ -167,6 +175,8 @@ u8 sub_8027518(u8);
 void sub_8027554(void);
 void sub_8027608(void);
 u32 sub_8027748(void);
+u32 sub_8028164(u32 unused, struct DodrioBerryPickingSubstruct_31A0 *, u8 *, u8 *, u8 *, u8 *, u8 *, u8 *, u32 *, u32 *);
+u32 sub_8028318(u8, u8 *);
 void sub_80283A8(void);
 void sub_8028408(struct DodrioBerryPickingSubstruct_318C *, u8, u8, u8);
 void sub_8028504(u8);
@@ -175,6 +185,8 @@ void sub_802868C(u8, u8);
 void sub_8028734(void);
 void sub_80287E4(void);
 void sub_80289E8(u8);
+void sub_80286E4(void);
+bool32 sub_8028828(void);
 void sub_8028A34(void);
 void sub_8028A88(void);
 void sub_8028B80(void);
@@ -353,7 +365,7 @@ void sub_8024BC8(u8 taskId)
     }
 }
 
-void sub_8024D4C(void)
+void sub_8024D4C(u8 taskId)
 {
     sub_8025D04();
     gUnknown_082F7AC4[gUnknown_02022C98->unk_0018]();
@@ -364,7 +376,7 @@ void sub_8024D4C(void)
     sub_8025D50();
 }
 
-void sub_8024D84(void)
+void sub_8024D84(u8 taskId)
 {
     sub_8025E0C();
     gUnknown_082F7AF4[gUnknown_02022C98->unk_0018]();
@@ -945,5 +957,145 @@ void sub_8025758(void)
             sub_80273F0();
             sub_8028EC8(0);
             break;
+    }
+}
+
+void sub_802589C(u8 taskId)
+{
+    switch (gUnknown_02022C98->unk_0010)
+    {
+        case 0:
+            if (sub_8026264() == 1)
+            {
+                gUnknown_02022C98->unk_0010++;
+            }
+            break;
+        case 1:
+            sub_80286E4();
+            gUnknown_02022C98->unk_0010++;
+            break;
+        case 2:
+            if (sub_8028828() == 1)
+            {
+                gUnknown_02022C98->unk_0010++;
+            }
+            break;
+        default:
+            if (gUnknown_02022C98->unk_0020 != 0)
+            {
+                sub_802621C(sub_8024D4C);
+            }
+            else
+            {
+                sub_802621C(sub_8024D84);
+            }
+            DestroyTask(taskId);
+            break;
+    }
+}
+
+void sub_8025910(u8 taskId)
+{
+    s16 * data = gTasks[taskId].data;
+    u8 i;
+
+    switch (data[0])
+    {
+        case 0:
+            if (SendBlock(0, &gUnknown_02022C98->unk_318C[gUnknown_02022C98->multiplayerId].isShiny, sizeof(gUnknown_02022C98->unk_318C[gUnknown_02022C98->multiplayerId].isShiny)))
+            {
+                gUnknown_02022C98->unk_0008 = 0;
+                data[0]++;
+            }
+            break;
+        case 1:
+            if (IsLinkTaskFinished())
+            {
+                data[0]++;
+            }
+            break;
+        case 2:
+            if (sub_8025170())
+            {
+                for (i = 0; i < gUnknown_02022C98->unk_0024; i++)
+                {
+                    *(u8 *)&gUnknown_02022C98->unk_318C[i] = *(u8 *)gBlockRecvBuffer[i];
+                    gUnknown_02022C98->unk_0008 = gUnknown_02022C98->unk_0024;
+                }
+            }
+            if (gUnknown_02022C98->unk_0008 >= gUnknown_02022C98->unk_0024)
+            {
+                DestroyTask(taskId);
+                sub_80292E0(6);
+                gUnknown_02022C98->unk_0010++;
+            }
+            break;
+    }
+}
+
+void sub_80259FC(void)
+{
+    u8 i;
+    u8 r7 = gUnknown_02022C98->unk_0024;
+
+    gUnknown_02022C98->unk_31A0[0].unk_10 = sub_8028164(0, &gUnknown_02022C98->unk_31A0[0], &gUnknown_02022C98->unk_31A0[0].unk_2C, &gUnknown_02022C98->unk_31A0[1].unk_2C, &gUnknown_02022C98->unk_31A0[2].unk_2C, &gUnknown_02022C98->unk_31A0[3].unk_2C, &gUnknown_02022C98->unk_31A0[4].unk_2C, &gUnknown_02022C98->unk_0040, &gUnknown_02022C98->unk_0120, &gUnknown_02022C98->unk_012C);
+    gUnknown_02022C98->unk_0128 = 1;
+
+    for (i = 1; i < r7; i++)
+    {
+        if (   gUnknown_02022C98->unk_00A8[i] == 0
+            && sub_8028318(i, &gUnknown_02022C98->unk_31A0[i].unk_2C) == 0)
+        {
+            gUnknown_02022C98->unk_31A0[i].unk_2C = 0;
+            gUnknown_02022C98->unk_0128 = 0;
+        }
+    }
+    if (++gUnknown_02022C98->unk_0124 >= 60)
+    {
+        if (gUnknown_02022C98->unk_0128 != 0)
+        {
+            sub_8011AC8();
+            gUnknown_02022C98->unk_0124 = 0;
+        }
+        else if (gUnknown_02022C98->unk_0124 > 70)
+        {
+            sub_8011AC8();
+            gUnknown_02022C98->unk_0124 = 0;
+        }
+    }
+
+    for (i = 0; i < r7; i++)
+    {
+        if (   gUnknown_02022C98->unk_31A0[i].unk_2C != 0
+            && gUnknown_02022C98->unk_00A8[i] == 0)
+        {
+            gUnknown_02022C98->unk_00A8[i] = 1;
+        }
+        switch (gUnknown_02022C98->unk_00A8[i])
+        {
+            case 0:
+            default:
+                break;
+            case 1 ... 3:
+                if (++gUnknown_02022C98->unk_00B0[i] >= 6)
+                {
+                    gUnknown_02022C98->unk_00B0[i] = 0;
+                    gUnknown_02022C98->unk_00A8[i] = 0;
+                    gUnknown_02022C98->unk_31A0[i].unk_2C = 0;
+                    gUnknown_02022C98->unk_31A0[i].unk_30 = 0;
+                    gUnknown_02022C98->unk_31A0[i].unk_34 = 0;
+                }
+                break;
+            case 4:
+                if (++gUnknown_02022C98->unk_00B0[i] >= 40)
+                {
+                    gUnknown_02022C98->unk_00B0[i] = 0;
+                    gUnknown_02022C98->unk_00A8[i] = 0;
+                    gUnknown_02022C98->unk_31A0[i].unk_2C = 0;
+                    gUnknown_02022C98->unk_31A0[i].unk_30 = 0;
+                    gUnknown_02022C98->unk_31A0[i].unk_34 = 0;
+                }
+                break;
+        }
     }
 }
