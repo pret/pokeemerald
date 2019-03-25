@@ -1,6 +1,8 @@
 #include "global.h"
 #include "alloc.h"
 #include "palette.h"
+#include "window.h"
+#include "bg.h"
 #include "link.h"
 #include "link_rfu.h"
 #include "task.h"
@@ -42,7 +44,8 @@ struct DodrioBerryPickingSubstruct_318C
 struct DodrioBerryPickingStruct
 {
     /*0x0000*/ void (*savedCallback)(void);
-    /*0x0004*/ u8 filler_0004[4];
+    /*0x0004*/ u8 unk_0004;
+    /*0x0005*/ u8 filler_0005[3];
     /*0x0008*/ u8 unk_0008;
     /*0x0009*/ u8 filler_0009[3];
     /*0x000C*/ u8 unk_000C;
@@ -156,21 +159,32 @@ void sub_8026B28(void);
 void sub_8026B5C(u8, u8*, u8*);
 bool32 sub_8026C50(void);
 bool32 sub_8026C90(void);
+void sub_80272E8(void);
 void sub_80272A4(void);
 void sub_80273F0(void);
 void sub_802749C(void);
 u8 sub_8027518(u8);
+void sub_8027554(void);
+void sub_8027608(void);
+u32 sub_8027748(void);
 void sub_80283A8(void);
 void sub_8028408(struct DodrioBerryPickingSubstruct_318C *, u8, u8, u8);
 void sub_8028504(u8);
+void sub_8028614(u8);
 void sub_802868C(u8, u8);
 void sub_8028734(void);
+void sub_80287E4(void);
 void sub_80289E8(u8);
 void sub_8028A34(void);
 void sub_8028A88(void);
+void sub_8028B80(void);
 void sub_8028D44(void);
 void sub_8028DFC(void);
+void sub_8028E4C(void);
+void sub_8028E84(void);
 void sub_8028EC8(u8);
+void sub_8028FCC(void);
+void sub_802903C(void);
 void sub_8029274(struct DodrioBerryPickingSubstruct_0160 *);
 void sub_80292E0(u8);
 bool32 sub_802A770(void);
@@ -709,6 +723,227 @@ void sub_8025324(void)
             {
                 sub_8026240(7);
             }
+            break;
+    }
+}
+
+void sub_8025470(void)
+{
+    u8 sp0;
+    u8 i;
+
+    switch (gUnknown_02022C98->unk_0010)
+    {
+        case 0:
+            if (sub_8027748() >= 3000)
+            {
+                sub_80292E0(4);
+            }
+            gUnknown_02022C98->unk_0010++;
+            break;
+        case 1:
+            if (!sub_802A770())
+            {
+                sub_80292E0(3);
+                gUnknown_02022C98->unk_0010++;
+            }
+            break;
+        case 2:
+            sub_8028FCC();
+            sub_80272E8();
+            gUnknown_02022C98->unk_0010++;
+            break;
+        case 3:
+            if ((sp0 = sub_802A794()) != 0)
+            {
+                gUnknown_02022C98->unk_0010++;
+            }
+            break;
+        case 4:
+            if (!sub_802A770())
+            {
+                sub_80292E0(5);
+                gUnknown_02022C98->unk_0010++;
+            }
+            break;
+        case 5:
+            sp0 = sub_802A794();
+            if (SendBlock(0, &sp0, sizeof(sp0)))
+            {
+                gUnknown_02022C98->unk_0008 = 0;
+                gUnknown_02022C98->unk_0010++;
+            }
+            break;
+        case 6:
+            if (IsLinkTaskFinished())
+            {
+                gUnknown_02022C98->unk_0010++;
+            }
+            break;
+        case 7:
+            if (sub_8025170())
+            {
+                for (i = 0; i < gUnknown_02022C98->unk_0024; i++)
+                {
+                    *(gUnknown_02022C98->unk_010C + i) = *(u8 *)gBlockRecvBuffer[i];
+                    gUnknown_02022C98->unk_0008 = gUnknown_02022C98->unk_0024;
+                }
+            }
+            if (gUnknown_02022C98->unk_0008 >= gUnknown_02022C98->unk_0024) {
+                if (++gUnknown_02022C98->unk_0014 >= 120)
+                {
+                    sub_8027608();
+                    sub_80292E0(6);
+                    gUnknown_02022C98->unk_0010++;
+                }
+            }
+            else
+            {
+                sub_8027554();
+            }
+            break;
+        default:
+            if (!sub_802A770())
+            {
+                for (i = 0; i < gUnknown_02022C98->unk_0024; i++)
+                {
+                    if (gUnknown_02022C98->unk_010C[i] == 2)
+                    {
+                        sub_8026240(8);
+                        return;
+                    }
+                }
+                sub_8026240(10);
+            }
+            break;
+    }
+}
+
+void sub_8025644(void)
+{
+    switch (gUnknown_02022C98->unk_0010)
+    {
+        case 0:
+            sub_800AC34();
+            sub_80292E0(7);
+            gUnknown_02022C98->unk_0010++;
+            break;
+        case 1:
+            if (!sub_802A770())
+            {
+                gUnknown_02022C98->unk_0010++;
+            }
+            break;
+        case 2:
+            if (sub_802A794() == 5)
+            {
+                gUnknown_02022C98->unk_0010++;
+            }
+            break;
+        default:
+            if (gReceivedRemoteLinkPlayers == 0)
+            {
+                sub_8026240(9);
+            }
+            break;
+    }
+}
+
+void sub_80256AC(void)
+{
+    switch (gUnknown_02022C98->unk_0010)
+    {
+        case 0:
+            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
+            gUnknown_02022C98->unk_0010++;
+            break;
+        case 1:
+            UpdatePaletteFade();
+            if (!gPaletteFade.active)
+            {
+                gUnknown_02022C98->unk_0010++;
+            }
+            break;
+        case 2:
+            sub_8028B80();
+            sub_80287E4();
+            sub_8028614(gUnknown_02022C98->unk_0024);
+            sub_8028E84();
+            gUnknown_03000DB0 = TRUE;
+            sub_80292E0(8);
+            gUnknown_02022C98->unk_0010++;
+            break;
+        default:
+            if (!sub_802A770())
+            {
+                SetMainCallback2(gUnknown_02022C98->savedCallback);
+                DestroyTask(gUnknown_02022C98->unk_0004);
+                Free(gUnknown_02022C98);
+                FreeAllWindowBuffers();
+            }
+            break;
+    }
+}
+
+void sub_8025758(void)
+{
+    switch (gUnknown_02022C98->unk_0010)
+    {
+        case 0:
+            sub_80292E0(9);
+            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
+            gUnknown_02022C98->unk_0010++;
+            break;
+        case 1:
+            UpdatePaletteFade();
+            if (!gPaletteFade.active)
+            {
+                gUnknown_02022C98->unk_0010++;
+            }
+            break;
+        case 2:
+            ChangeBgX(0, 0, 0);
+            ChangeBgY(0, 0, 0);
+            ChangeBgX(1, 0, 0);
+            ChangeBgY(1, 0, 0);
+            ChangeBgX(2, 0, 0);
+            ChangeBgY(2, 0, 0);
+            ChangeBgX(3, 0, 0);
+            ChangeBgY(3, 0, 0);
+            gUnknown_02022C98->unk_0010++;
+            break;
+        case 3:
+            StopMapMusic();
+            gUnknown_02022C98->unk_0010++;
+            break;
+        case 4:
+            PlayNewMapMusic(MUS_RG_KINOMIKUI);
+            sub_8028E4C();
+            gUnknown_02022C98->unk_0010++;
+            break;
+        case 5:
+            BlendPalettes(0xFFFFFFFF, 16, 0);
+            BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, 0);
+            gUnknown_02022C98->unk_0010++;
+            break;
+        case 6:
+            UpdatePaletteFade();
+            if (!gPaletteFade.active)
+            {
+                gUnknown_02022C98->unk_0010++;
+            }
+            break;
+        default:
+            DestroyTask(gUnknown_02022C98->unk_0004);
+            sub_802621C(sub_802589C);
+            sub_802903C();
+            sub_8024A30(gUnknown_02022C98);
+            if (gReceivedRemoteLinkPlayers == 0)
+            {
+                gUnknown_02022C98->unk_0024 = 1;
+            }
+            sub_80273F0();
+            sub_8028EC8(0);
             break;
     }
 }
