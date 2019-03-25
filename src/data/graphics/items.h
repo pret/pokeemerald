@@ -877,8 +877,8 @@ const u32 gItemIconPalette_DreadPlate[] = INCBIN_U32("graphics/items/icon_palett
 const u32 gItemIcon_IronPlate[] = INCBIN_U32("graphics/items/icons/iron_plate.4bpp.lz");
 const u32 gItemIconPalette_IronPlate[] = INCBIN_U32("graphics/items/icon_palettes/iron_plate.gbapal.lz");
 
-const u32 gItemIcon_IronPlate[] = INCBIN_U32("graphics/items/icons/honey.4bpp.lz");
-const u32 gItemIconPalette_IronPlate[] = INCBIN_U32("graphics/items/icon_palettes/honey.gbapal.lz");
+const u32 gItemIcon_Honey[] = INCBIN_U32("graphics/items/icons/honey.4bpp.lz");
+const u32 gItemIconPalette_Honey[] = INCBIN_U32("graphics/items/icon_palettes/honey.gbapal.lz");
 
 // Gen 5 Items
 

@@ -10504,6 +10504,7 @@ static void atkE5_pickup(void)
     u16 species, heldItem;
     u8 ability;
     u8 level;
+    u8 lvlDivBy10;
 
     if (InBattlePike())
     {
@@ -10539,7 +10540,7 @@ static void atkE5_pickup(void)
             species = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2);
             heldItem = GetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM);
             level = GetMonData(&gPlayerParty[i], MON_DATA_LEVEL);
-            u8 lvlDivBy10 = (level - 1) / 10;
+            lvlDivBy10 = (level - 1) / 10;
             if (lvlDivBy10 > 9)
                 lvlDivBy10 = 9;
 
@@ -10576,7 +10577,11 @@ static void atkE5_pickup(void)
                 && species != SPECIES_EGG
                 && heldItem == ITEM_NONE
                 && (Random()%100 <= lvlDivBy10*5+5))
-                SetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM, ITEM_HONEY);
+            {
+                u16 honey = ITEM_HONEY;
+                SetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM, &honey);
+                break;
+            }
         }
     }
 
