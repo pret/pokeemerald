@@ -27,7 +27,11 @@ struct DodrioBerryPickingStruct_2022CF4
 
 struct DodrioBerryPickingSubstruct_31A0
 {
-    u8 unk_00[0x3C - 0x00];
+    u8 unk_00[0x2C - 0x00];
+    u8 unk_2C;
+    u8 filler_2D[3];
+    u8 unk_30;
+    u8 filler_31[11];
 }; // size = 0x3C
 
 struct DodrioBerryPickingSubstruct_318C
@@ -119,6 +123,7 @@ void sub_8024F10(void);
 void sub_8024F38(void);
 void sub_8024FFC(void);
 void sub_80250D4(void);
+void sub_8025158(void);
 void sub_8025198(void);
 void sub_8025230(void);
 void sub_8025324(void);
@@ -126,13 +131,13 @@ void sub_8025470(void);
 void sub_8025644(void);
 void sub_80256AC(void);
 void sub_8025758(void);
-void sub_8025158(void);
 void sub_802589C(u8 taskId);
 void sub_8025910(u8 taskId);
 void sub_8025D04(void);
 void sub_8025D50(void);
 void sub_8025E0C(void);
 void sub_8025ED8(void);
+void sub_8025F48(void);
 void sub_80261CC(void);
 void sub_80261E4(void);
 void sub_80261F8(struct DodrioBerryPickingSubstruct_318C *, struct Pokemon *);
@@ -140,10 +145,12 @@ void sub_802620C(TaskFunc, u8);
 void sub_802621C(TaskFunc);
 void sub_8026240(u8);
 void sub_80262C0(void);
+void sub_802671C(void);
 void sub_8026AF4(void);
 void sub_8026B28(void);
 void sub_8026B5C(u8, u8*, u8*);
 void sub_80273F0(void);
+u8 sub_8027518(u8);
 void sub_80283A8(void);
 void sub_8028408(struct DodrioBerryPickingSubstruct_318C *, u8, u8, u8);
 void sub_8028504(u8);
@@ -409,5 +416,63 @@ void sub_8024E38(void)
                 sub_8026240(3);
             }
             break;
+    }
+}
+
+void sub_8024F10(void)
+{
+    if (gUnknown_02022C98->unk_0010 == 0)
+    {
+        if (gUnknown_02022C98->unk_011C != 0)
+        {
+            sub_8026240(4);
+        }
+    }
+}
+
+void sub_8024F38(void)
+{
+    if (gUnknown_02022C98->unk_0010 == 0)
+    {
+        if (gUnknown_02022C98->unk_0040 < 10)
+        {
+            if (gUnknown_02022C98->unk_00A8[0] == 0)
+            {
+                if (JOY_NEW(DPAD_UP))
+                {
+                    if (gUnknown_02022C98->unk_31A0[0].unk_2C == 0)
+                    {
+                        gUnknown_02022C98->unk_31A0[0].unk_30 = 0;
+                        gUnknown_02022C98->unk_31A0[0].unk_2C = sub_8027518(2);
+                    }
+                }
+                else if (JOY_NEW(DPAD_RIGHT))
+                {
+                    if (gUnknown_02022C98->unk_31A0[0].unk_2C == 0)
+                    {
+                        gUnknown_02022C98->unk_31A0[0].unk_30 = 0;
+                        gUnknown_02022C98->unk_31A0[0].unk_2C = sub_8027518(1);
+                    }
+                }
+                else if (JOY_NEW(DPAD_LEFT))
+                {
+                    if (gUnknown_02022C98->unk_31A0[0].unk_2C == 0)
+                    {
+                        gUnknown_02022C98->unk_31A0[0].unk_30 = 0;
+                        gUnknown_02022C98->unk_31A0[0].unk_2C = sub_8027518(3);
+                    }
+                }
+                else
+                {
+                    gUnknown_02022C98->unk_31A0[0].unk_2C = sub_8027518(0);
+                }
+            }
+        }
+        else
+        {
+            sub_8026240(11);
+        }
+        sub_802671C();
+        sub_8025F48();
     }
 }
