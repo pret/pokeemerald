@@ -7,6 +7,7 @@
 #include "main.h"
 #include "constants/songs.h"
 #include "sound.h"
+#include "pokemon_jump.h"
 
 struct DodrioBerryPickingSubstruct_0160
 {
@@ -83,7 +84,8 @@ struct DodrioBerryPickingStruct
     /*0x00F4*/ u8 unk_00F4[11][2];
     /*0x010A*/ u8 filler_010A[2];
     /*0x010C*/ u8 unk_010C[5];
-    /*0x0111*/ u8 filler_0111[11];
+    /*0x0111*/ u8 filler_0111[7];
+    /*0x0118*/ u32 unk_0118;
     /*0x011C*/ u32 unk_011C;
     /*0x0120*/ u32 unk_0120;
     /*0x0124*/ u8 filler_0124[8];
@@ -110,24 +112,52 @@ IWRAM_DATA bool32 gUnknown_03000DB0;
 void sub_8024A1C(void);
 void sub_8024A30(struct DodrioBerryPickingStruct *);
 void sub_8024BC8(u8 taskId);
-void sub_80261F8(struct DodrioBerryPickingSubstruct_318C *, struct Pokemon *);
+void sub_8024DBC(void);
+void sub_8024E00(void);
+void sub_8024E38(void);
+void sub_8024F10(void);
+void sub_8024F38(void);
+void sub_8024FFC(void);
+void sub_80250D4(void);
+void sub_8025198(void);
+void sub_8025230(void);
+void sub_8025324(void);
+void sub_8025470(void);
+void sub_8025644(void);
+void sub_80256AC(void);
+void sub_8025758(void);
+void sub_8025158(void);
+void sub_802589C(u8 taskId);
+void sub_8025910(u8 taskId);
+void sub_8025D04(void);
+void sub_8025D50(void);
+void sub_8025E0C(void);
+void sub_8025ED8(void);
 void sub_80261CC(void);
+void sub_80261E4(void);
+void sub_80261F8(struct DodrioBerryPickingSubstruct_318C *, struct Pokemon *);
+void sub_802620C(TaskFunc, u8);
+void sub_802621C(TaskFunc);
+void sub_8026240(u8);
+void sub_80262C0(void);
+void sub_8026AF4(void);
+void sub_8026B28(void);
 void sub_8026B5C(u8, u8*, u8*);
 void sub_80273F0(void);
-void sub_8029274(struct DodrioBerryPickingSubstruct_0160 *);
-void sub_8025910(u8 taskId);
-void sub_802620C(TaskFunc, u8);
-bool32 sub_802A770(void);
 void sub_80283A8(void);
 void sub_8028408(struct DodrioBerryPickingSubstruct_318C *, u8, u8, u8);
+void sub_8028504(u8);
 void sub_802868C(u8, u8);
+void sub_8028734(void);
 void sub_8028A34(void);
 void sub_8028A88(void);
 void sub_8028D44(void);
-void sub_8028734(void);
-void sub_80261E4(void);
-void sub_802621C(TaskFunc);
-void sub_802589C(u8 taskId);
+void sub_8029274(struct DodrioBerryPickingSubstruct_0160 *);
+void sub_80292E0(u8);
+bool32 sub_802A770(void);
+
+extern void (*const gUnknown_082F7AC4[])(void);
+extern void (*const gUnknown_082F7AF4[])(void);
 
 void sub_802493C(u16 a0, void (*a1)(void))
 {
@@ -285,6 +315,99 @@ void sub_8024BC8(u8 taskId)
         default:
             DestroyTask(taskId);
             sub_802621C(sub_802589C);
+            break;
+    }
+}
+
+void sub_8024D4C(void)
+{
+    sub_8025D04();
+    gUnknown_082F7AC4[gUnknown_02022C98->unk_0018]();
+    if (gUnknown_03000DB0 == FALSE)
+    {
+        sub_8026AF4();
+    }
+    sub_8025D50();
+}
+
+void sub_8024D84(void)
+{
+    sub_8025E0C();
+    gUnknown_082F7AF4[gUnknown_02022C98->unk_0018]();
+    if (gUnknown_03000DB0 == FALSE)
+    {
+        sub_8026B28();
+    }
+    sub_8025ED8();
+}
+
+void sub_8024DBC(void)
+{
+    switch (gUnknown_02022C98->unk_0010)
+    {
+        case 0:
+            sub_8028504(1);
+            sub_80292E0(1);
+            gUnknown_02022C98->unk_0010++;
+            break;
+        case 1:
+            if (!sub_802A770())
+                sub_8026240(1);
+            break;
+    }
+}
+
+void sub_8024E00(void)
+{
+    if (gUnknown_02022C98->unk_0010 == 0)
+    {
+        sub_80262C0();
+        gUnknown_02022C98->unk_0010++;
+    }
+    else
+    {
+        gUnknown_02022C98->unk_0118 = 1;
+        sub_8026240(2);
+    }
+}
+
+void sub_8024E38(void)
+{
+    switch (gUnknown_02022C98->unk_0010)
+    {
+        case 0:
+            sub_802EB24(7, 8, 120, 80, 0);
+            gUnknown_02022C98->unk_0010++;
+            break;
+        case 1:
+            sub_8010434();
+            gUnknown_02022C98->unk_0010++;
+            break;
+        case 2:
+            if (IsLinkTaskFinished())
+            {
+                gUnknown_02022C98->unk_0010++;
+                gUnknown_02022C98->unk_0030 = 0;
+            }
+            break;
+        case 3:
+            if (!sub_802EB84())
+            {
+                gUnknown_02022C98->unk_0010++;
+            }
+            break;
+        case 4:
+            if (++gUnknown_02022C98->unk_0030 > 5)
+            {
+                sub_8010434();
+                gUnknown_02022C98->unk_0010++;
+            }
+            break;
+        case 5:
+            if (IsLinkTaskFinished())
+            {
+                sub_8026240(3);
+            }
             break;
     }
 }
