@@ -163,12 +163,12 @@
         {
             "blockdata_filepath": "data/layouts/Route101/map.bin",
             "border_filepath": "data/layouts/Route101/border.bin",
-            "height": 20,
+            "height": 68,
             "id": "LAYOUT_ROUTE101",
             "name": "Route101_Layout",
             "primary_tileset": "gTileset_General",
             "secondary_tileset": "gTileset_Petalburg",
-            "width": 20
+            "width": 44
         },
         {
             "blockdata_filepath": "data/layouts/Route102/map.bin",

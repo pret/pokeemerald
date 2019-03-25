@@ -2,7 +2,7 @@ LittlerootTown:
 	.4byte LittlerootTown_Layout
 	.4byte LittlerootTown_MapEvents
 	.4byte LittlerootTown_MapScripts
-	.4byte 0x0
+	.4byte LittlerootTown_MapConnections
 	.2byte MUS_MISHIRO
 	.2byte LAYOUT_LITTLEROOT_TOWN
 	.byte MAPSEC_LITTLEROOT_TOWN

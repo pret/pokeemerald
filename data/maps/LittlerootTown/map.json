@@ -37,7 +37,13 @@
             "y": 8
         }
     ],
-    "connections": null,
+    "connections": [
+        {
+            "direction": "up",
+            "map": "MAP_ROUTE101",
+            "offset": 0
+        }
+    ],
     "coord_events": [
         {
             "elevation": 3,

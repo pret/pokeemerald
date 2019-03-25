@@ -60,13 +60,57 @@ static void SpriteCB_PokemonLogoShine(struct Sprite *sprite);
 // const rom data
 static const u16 sUnusedUnknownPal[] = INCBIN_U16("graphics/title_screen/unk_853EF78.gbapal");
 
-static const u32 sTitleScreenRayquazaGfx[] = INCBIN_U32("graphics/title_screen/rayquaza.4bpp.lz");
-static const u32 sTitleScreenRayquazaTilemap[] = INCBIN_U32("graphics/title_screen/rayquaza.bin.lz");
+static const u32 sTitleScreenRayquazaGfx[] = INCBIN_U32("graphics/title_screen/background_gnosis.4bpp.lz");
+static const u32 sTitleScreenRayquazaTilemap[] = INCBIN_U32("graphics/title_screen/background_gnosis.bin.lz");
 static const u32 sTitleScreenLogoShineGfx[] = INCBIN_U32("graphics/title_screen/logo_shine.4bpp.lz");
 // static const u32 sTitleScreenCloudsGfx[] = INCBIN_U32("graphics/title_screen/clouds.4bpp.lz");
 
+static const u32 sTitleScreenTensoRayquaza_Gfx[] = INCBIN_U32("graphics/title_screen/tenso_rayq.4bpp.lz");
+static const u32 sTitleScreenTensoRayquaza_Tilemap[] = INCBIN_U32("graphics/title_screen/tenso_rayq.4bpp.lz");
+static const u32 sTitleScreenTensoRayquaza_Pal[] = INCBIN_U32("graphics/title_screen/tenso_rayq.gbapal.lz");
+
 const u32 gTest_Mon[] = INCBIN_U32("graphics/pokemon/anim_front_pics/rayquaza_front_pic.4bpp.lz");
 const u32 gTestPal_Mon[] = INCBIN_U32("graphics/pokemon/palettes/rayquaza_palette.gbapal.lz");
+
+static const struct CompressedSpriteSheet sSpriteSheet_TensoRayquaza[] =
+{
+    {sTitleScreenTensoRayquaza_Gfx, 4096, 778},
+    {NULL},
+};
+
+static const struct CompressedSpritePalette sSpritePal_TensoRayquaza[] =
+{
+    {sTitleScreenTensoRayquaza_Pal, 778},
+    {NULL},
+};
+
+static const struct OamData sTensoRayquazaOamData =
+{
+    .y = 0,
+    .affineMode = 0,
+    .objMode = 0,
+    .mosaic = 0,
+    .bpp = 0,
+    .shape = 0,
+    .x = 0,
+    .matrixNum = 0,
+    .size = 3,
+    .tileNum = 0,
+    .priority = 0,
+    .paletteNum = 0,
+    .affineParam = 0,
+};
+
+static const struct SpriteTemplate sTensoRayquazaSpriteTemplate =
+{
+    .tileTag = 778,
+    .paletteTag = 778,
+    .oam = &sTensoRayquazaOamData,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCallbackDummy,
+};
 
 static const struct CompressedSpriteSheet sSpriteSheet_Mon[] =
 {
@@ -722,7 +766,8 @@ static void Task_TitleScreenPhase2(u8 taskId)
                                     | DISPCNT_OBJ_ON);
         CreatePressStartBanner(START_BANNER_X, 108);
         CreateCopyrightBanner(START_BANNER_X, 148);
-        CreateSprite(&sMonSpriteTemplate, 190, 110, 0);
+        // CreateSprite(&sMonSpriteTemplate, 190, 110, 0);
+        CreateSprite(&sTensoRayquazaSpriteTemplate, 190, 110, 0);
 
         gTasks[taskId].data[4] = 0;
         gTasks[taskId].func = Task_TitleScreenPhase3;
