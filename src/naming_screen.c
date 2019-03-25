@@ -1977,6 +1977,7 @@ static void AddTextCharacter(u8 ch)
                                 GetCho(ConvertToCho(prevChar)), 
                                 GetJung(ConvertToJung(prevChar)), 
                                 0);
+                koreanChar = ConvertUnicodeToKorean(koreanChar);
 
                 index -= 2;
                 gNamingScreenData->textBuffer[index++] = (koreanChar & 0xff00) >> 8;
@@ -2032,14 +2033,15 @@ static void AddTextCharacter(u8 ch)
                                 GetCho(ConvertToCho(prevChar)), 
                                 GetJung(ConvertToJung(prevChar)), 
                                 0);
+                koreanChar = ConvertUnicodeToKorean(koreanChar);
 
                 index -= 2;
                 gNamingScreenData->textBuffer[index++] = (koreanChar & 0xff00) >> 8;
-                gNamingScreenData->textBuffer[index] = koreanChar & 0xff;
+                gNamingScreenData->textBuffer[index++] = koreanChar & 0xff;
                 
                 // 새 글자
                 koreanChar = GetKorean(
-                                GetCho(ConvertToCho(prevChar)), 
+                                GetCho(ConvertToJong(prevChar)), 
                                 GetJung(ch), 
                                 0);
                 koreanChar = ConvertUnicodeToKorean(koreanChar);
@@ -2086,6 +2088,7 @@ static void AddTextCharacter(u8 ch)
                                 GetCho(ConvertToCho(prevChar)), 
                                 GetJung(ConvertToJung(prevChar)), 
                                 SplitJong(ConvertToJongIndex(prevChar), 0));
+                koreanChar = ConvertUnicodeToKorean(koreanChar);
 
                 index -= 2;
                 gNamingScreenData->textBuffer[index++] = (koreanChar & 0xff00) >> 8;
