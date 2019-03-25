@@ -1,14 +1,13 @@
 #include "global.h"
 #include "script.h"
 #include "event_data.h"
+#include "mevent.h"
 #include "util.h"
 #include "constants/map_scripts.h"
 
 #define RAM_SCRIPT_MAGIC 51
 
 extern const u8* gUnknown_020375C0;
-
-extern bool32 sub_801B27C(void);
 
 // ewram bss
 IWRAM_DATA static u8 sScriptContext1Status;

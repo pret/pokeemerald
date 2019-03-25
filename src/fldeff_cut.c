@@ -1,6 +1,7 @@
 #include "global.h"
 #include "event_obj_lock.h"
 #include "event_object_movement.h"
+#include "faraway_island.h"
 #include "field_camera.h"
 #include "field_effect.h"
 #include "field_player_avatar.h"
@@ -19,8 +20,6 @@
 #include "constants/event_objects.h"
 #include "constants/field_effects.h"
 #include "constants/songs.h"
-
-extern bool8 IsMewPlayingHideAndSeek(void);
 
 extern struct MapPosition gPlayerFacingPosition;
 
