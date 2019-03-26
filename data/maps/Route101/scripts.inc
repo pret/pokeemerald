@@ -299,3 +299,46 @@ Route101_Text_1EC0C8: @ 81EC0C8
 	.string "ROUTE 101\n"
 	.string "{UP_ARROW} OLDALE TOWN$"
 
+Route101_Luna::
+	lock
+	faceplayer
+	msgbox Route101_Luna_Text, MSGBOX_DEFAULT
+	release
+	end
+
+Route101_Luna_Text:
+	.string "Hi!\n"
+	.string "I love my {COLOR POKEMON_COLOR}Zigzagoon{COLOR NO_COLOR}!\p"
+	.string "She and I come to this lagoon all\n"
+	.string "the time when it's nice out!$"
+
+Route101_Zig::
+	lock
+	faceplayer
+	msgbox Route101_Zig_Text, MSGBOX_DEFAULT
+	msgbox Route101_Zig_Question, MSGBOX_YESNO
+	compare VAR_RESULT, 1
+	goto_if_eq Route101_Zig_Hug
+	release
+	end
+
+Route101_Zig_Text:
+	.string "{COLOR POKEMON_COLOR}Zigzagoon:{COLOR NO_COLOR} Zig! zagoooon.\n"
+	.string "Zig zag zig.$"
+
+Route101_Zig_Question:
+	.string "Hug the {COLOR POKEMON_COLOR}Zigzagoon{COLOR NO_COLOR}?$"
+
+Route101_Zig_Hug::
+	applymovement 8, Route101_Zig_Hug_Movement
+	msgbox Route101_Zig_Hug_Text, MSGBOX_DEFAULT
+	release
+	end
+
+Route101_Zig_Hug_Text:
+	.string "You hug the {COLOR POKEMON_COLOR}Zigzagoon{COLOR NO_COLOR}!\l"
+	.string "{COLOR POKEMON_COLOR}Zigzagoon:{COLOR NO_COLOR} Zig! Zig Zig!$"
+
+Route101_Zig_Hug_Movement:
+	emote_heart
+	step_end

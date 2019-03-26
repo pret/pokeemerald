@@ -199,6 +199,32 @@
             "trainer_type": "0",
             "x": 2,
             "y": 13
+        },
+        {
+            "elevation": 0,
+            "flag": "0",
+            "graphics_id": "EVENT_OBJ_GFX_GIRL_2",
+            "movement_range_x": 0,
+            "movement_range_y": 0,
+            "movement_type": "MOVEMENT_TYPE_NONE",
+            "script": "Route101_Luna",
+            "trainer_sight_or_berry_tree_id": "0",
+            "trainer_type": "0",
+            "x": 38,
+            "y": 45
+        },
+        {
+            "elevation": 0,
+            "flag": "0",
+            "graphics_id": "EVENT_OBJ_GFX_ZIGZAGOON_2",
+            "movement_range_x": 0,
+            "movement_range_y": 0,
+            "movement_type": "MOVEMENT_TYPE_NONE",
+            "script": "Route101_Zig",
+            "trainer_sight_or_berry_tree_id": "0",
+            "trainer_type": "0",
+            "x": 39,
+            "y": 45
         }
     ],
     "region_map_section": "MAPSEC_ROUTE_101",
