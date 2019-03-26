@@ -30,13 +30,17 @@ struct DodrioBerryPickingStruct_2022CF4
     u8 filler_00[0x40];
 }; // size = 0x40
 
+struct DodrioBerryPickingSubstruct_31A0_14
+{
+    u8 unk_0[11];
+    u8 unk_B[11];
+};
+
 struct DodrioBerryPickingSubstruct_31A0
 {
     u8 unk_00[0x10];
     u32 unk_10;
-    u8 unk_14[11];
-    u8 unk_1F[11];
-    u8 filler_2A[2];
+    struct DodrioBerryPickingSubstruct_31A0_14 unk_14;
     u8 unk_2C;
     u8 filler_2D[3];
     u8 unk_30;
@@ -233,6 +237,7 @@ u8 sub_802A794(void);
 
 extern const u8 gUnknown_082F7A88[][3];
 extern const u8 gUnknown_082F449C[];
+extern const u8 gUknnown_082F45AF[];
 extern const u8 gUnknown_082F7A94[];
 extern void (*const gUnknown_082F7AC4[])(void);
 extern void (*const gUnknown_082F7AF4[])(void);
@@ -1304,13 +1309,12 @@ void sub_8026044(void)
     }
     for (r4 = r8; r4 < r7; r4++)
     {
-        struct DodrioBerryPickingSubstruct_31A0 * ptr = &gUnknown_02022C98->unk_31A0[gUnknown_02022C98->multiplayerId];
-        u8 * r1 = ptr->unk_14;
-        if (ptr->unk_1F[r4] >= 10)
+        struct DodrioBerryPickingSubstruct_31A0_14 * ptr = &gUnknown_02022C98->unk_31A0[gUnknown_02022C98->multiplayerId].unk_14;
+        if (ptr->unk_B[r4] >= 10)
         {
             if (gUnknown_02022C98->unk_0148[r4] == 0)
             {
-                PlaySE(SE_FUUSEN1 + r1[r4]);
+                PlaySE(SE_FUUSEN1 + ptr->unk_0[r4]);
                 gUnknown_02022C98->unk_0148[r4] = 1;
             }
         }
@@ -1403,10 +1407,9 @@ void sub_80262C0(void)
 
     for (i = start; i < finish; i++)
     {
-        struct DodrioBerryPickingSubstruct_31A0 * ptr = &gUnknown_02022C98->unk_32CC;
-        u8 * r4 = gUnknown_02022C98->unk_32CC.unk_14;
-        ptr->unk_1F[i] = (i % 2 == 0) ? 1 : 0;
-        r4[i] = 0;
+        struct DodrioBerryPickingSubstruct_31A0_14 * ptr = &gUnknown_02022C98->unk_32CC.unk_14;
+        ptr->unk_B[i] = (i % 2 == 0) ? 1 : 0;
+        ptr->unk_0[i] = 0;
     }
 }
 
@@ -1475,7 +1478,7 @@ void sub_8026324(void)
                 {
                     r3 = 2;
                 }
-                r2 = gUnknown_082F7A88[r3][gUnknown_02022C98->unk_31A0[0].unk_14[r5]] - gUnknown_02022C98->unk_00D0[r5];
+                r2 = gUnknown_082F7A88[r3][gUnknown_02022C98->unk_31A0[0].unk_14.unk_0[r5]] - gUnknown_02022C98->unk_00D0[r5];
                 if (r2 < 6)
                 {
                     gUnknown_02022C98->unk_009C[r5] += r2;
@@ -1516,8 +1519,8 @@ void sub_8026324(void)
                     sub_8026F1C(0, r5, r4);
                     sub_8027234(1);
                     sub_8026D1C(r4);
-                    gUnknown_02022C98->unk_00E8[r5] = gUnknown_02022C98->unk_32CC.unk_14[r5];
-                    gUnknown_02022C98->unk_32CC.unk_14[r5] = 3;
+                    gUnknown_02022C98->unk_00E8[r5] = gUnknown_02022C98->unk_32CC.unk_14.unk_0[r5];
+                    gUnknown_02022C98->unk_32CC.unk_14.unk_0[r5] = 3;
                     gUnknown_02022C98->unk_00F4[r5][0] = 0xFF;
                     gUnknown_02022C98->unk_00F4[r5][1] = 0xFF;
                 }
@@ -1914,3 +1917,48 @@ void sub_8026324(void)
                 "\t.pool");
 }
 #endif // NONMATCHING
+
+u32 sub_8026634(u8 a0, u8 a1, u8 a2)
+{
+    s32 r7 = 0;
+    u8 r5 = gUnknown_02022C98->unk_0024 - 1;
+    struct DodrioBerryPickingSubstruct_31A0_14 * ptr = &gUnknown_02022C98->unk_32CC.unk_14;
+
+    switch (a1)
+    {
+    case 3:
+    default:
+        r7 = 0;
+        break;
+    case 2:
+        r7 = 1;
+        break;
+    case 1:
+        r7 = 2;
+        break;
+    }
+    if (ptr->unk_B[a2] == 6 || ptr->unk_B[a2] == 7)
+    {
+        if (a2 == gUknnown_082F45AF[r7 + a0 * 3 + 15 * r5])
+        {
+            if (gUnknown_02022C98->unk_00C4[a2] == 1 || gUnknown_02022C98->unk_00C4[a2] == 2)
+            {
+                gUnknown_02022C98->unk_31A0[a0].unk_34 = 1;
+                return FALSE;
+            }
+            else
+            {
+                return TRUE;
+            }
+        }
+    }
+    else
+    {
+        if (a2 == gUknnown_082F45AF[r7 + a0 * 3 + 15 * r5])
+        {
+            gUnknown_02022C98->unk_00A8[a0] = 4;
+            gUnknown_02022C98->unk_31A0[a0].unk_34 = 1;
+        }
+    }
+    return FALSE;
+}
