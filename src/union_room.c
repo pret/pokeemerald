@@ -34,6 +34,7 @@
 #include "data2.h"
 #include "field_screen_effect.h"
 #include "script_pokemon_util_80F87D8.h"
+#include "international_string_util.h"
 #include "mevent.h"
 
 struct UnkStruct_Shared
@@ -264,6 +265,7 @@ void sub_801818C(bool32 arg0);
 void sub_801A3D0(u32 arg0, u32 arg1, struct UnkStruct_Main0 *arg2);
 s32 sub_8017178(u8 *arg0, u8 *arg1, u8 *arg2, const struct WindowTemplate *winTemplate, const struct ListMenuTemplate *menuTemplate);
 s32 sub_80172A0(u8 *arg0, u8 *arg1, u8 *arg2, u8 *arg3, const struct WindowTemplate *winTemplate, const struct ListMenuTemplate *menuTemplate, struct UnkStruct_Main0 *arg6);
+s32 sub_8017CB0(struct UnkStruct_Main0 * arg);
 bool32 sub_8018024(void);
 u32 sub_8017984(u32 arg0);
 void sub_8018220(u8 *unused, struct UnkStruct_URoom *arg1, bool8 arg2);
@@ -346,6 +348,7 @@ extern const struct WindowTemplate gUnknown_082F017C;
 extern const struct WindowTemplate gUnknown_082F021C;
 extern const struct WindowTemplate gUnknown_082F025C;
 extern const struct WindowTemplate gUnknown_082F0294;
+extern const struct WindowTemplate gUnknown_082F0344;
 extern const struct WindowTemplate gUnknown_082F034C;
 
 extern const struct ListMenuTemplate gUnknown_082F015C;
@@ -3678,7 +3681,7 @@ s8 sub_80170B8(u8 *arg0, bool32 arg1)
     return -2;
 }
 
-u8 sub_8017118(struct WindowTemplate * template)
+u8 sub_8017118(const struct WindowTemplate * template)
 {
     u8 windowId = AddWindow(template);
     DrawStdWindowFrame(windowId, FALSE);
@@ -3693,3 +3696,241 @@ void sub_8017168(u8 windowId)
 {
     RemoveWindow(windowId);
 }
+
+s32 sub_8017178(u8 *arg0, u8 *arg1, u8 *arg2, const struct WindowTemplate *winTemplate, const struct ListMenuTemplate *menuTemplate)
+{
+    s32 r1, r8;
+    struct WindowTemplate winTemplateCopy;
+
+    switch (*arg0)
+    {
+    case 0:
+        winTemplateCopy = *winTemplate;
+        r1 = sub_81DB41C(menuTemplate);
+        if (winTemplateCopy.width > r1)
+        {
+            winTemplateCopy.width = r1;
+        }
+        if (winTemplateCopy.tilemapLeft + winTemplateCopy.width > 29)
+        {
+            winTemplateCopy.tilemapLeft = max(29 - winTemplateCopy.width, 0);
+        }
+        *arg1 = AddWindow(&winTemplateCopy);
+        DrawStdWindowFrame(*arg1, FALSE);
+        gMultiuseListMenuTemplate = *menuTemplate;
+        gMultiuseListMenuTemplate.windowId = *arg1;
+        *arg2 = ListMenuInit(&gMultiuseListMenuTemplate, 0, 0);
+        CopyWindowToVram(*arg1, TRUE);
+        (*arg0)++;
+        break;
+    case 1:
+        r8 = ListMenu_ProcessInput(*arg2);
+        if (({gMain.newKeys & A_BUTTON;}))
+        {
+            DestroyListMenuTask(*arg2, NULL, NULL);
+            ClearStdWindowAndFrame(*arg1, TRUE);
+            RemoveWindow(*arg1);
+            *arg0 = 0;
+            return r8;
+        }
+        else if (({gMain.newKeys & B_BUTTON;}))
+        {
+            DestroyListMenuTask(*arg2, NULL, NULL);
+            ClearStdWindowAndFrame(*arg1, TRUE);
+            RemoveWindow(*arg1);
+            *arg0 = 0;
+            return -2;
+        }
+        break;
+    }
+
+    return -1;
+}
+
+#ifdef NONMATCHING
+s32 sub_80172A0(u8 *arg0, u8 *arg1, u8 *arg2, u8 *arg3, const struct WindowTemplate *winTemplate, const struct ListMenuTemplate *menuTemplate, struct UnkStruct_Main0 *arg6)
+{
+    s32 input;
+    s32 r4;
+
+    switch (*arg0)
+    {
+    case 0:
+        *arg3 = sub_8017118(&gUnknown_082F0344);
+        *arg1 = AddWindow(winTemplate);
+        DrawStdWindowFrame(*arg1, FALSE);
+        gMultiuseListMenuTemplate = *menuTemplate;
+        gMultiuseListMenuTemplate.windowId = *arg1;
+        *arg2 = ListMenuInit(&gMultiuseListMenuTemplate, 0, 1);
+        (*arg0)++;
+        break;
+    case 1:
+        CopyWindowToVram(*arg1, TRUE);
+        (*arg0)++;
+        break;
+    case 2:
+        // Register swap r1 <---> r2
+        input = ListMenu_ProcessInput(*arg2);
+        if (({gMain.newKeys & (A_BUTTON | B_BUTTON);}))
+        {
+            if (input == 8 || ({gMain.newKeys & B_BUTTON;}))
+            {
+                DestroyListMenuTask(*arg2, NULL, NULL);
+                RemoveWindow(*arg1);
+                sub_8017168(*arg3);
+                *arg0 = 0;
+                return -2;
+            }
+            else
+            {
+                r4 = sub_8017CB0(arg6);
+                if (r4 >= 0)
+                {
+                    DestroyListMenuTask(*arg2, NULL, NULL);
+                    RemoveWindow(*arg1);
+                    sub_8017168(*arg3);
+                    *arg0 = 0;
+                    return r4;
+                }
+                else
+                {
+                    PlaySE(SE_WALL_HIT);
+                }
+            }
+        }
+        break;
+    }
+
+    return -1;
+}
+#else
+NAKED
+s32 sub_80172A0(u8 *arg0, u8 *arg1, u8 *arg2, u8 *arg3, const struct WindowTemplate *winTemplate, const struct ListMenuTemplate *menuTemplate, struct UnkStruct_Main0 *arg6)
+{
+    asm_unified("\tpush {r4-r7,lr}\n"
+                "\tmov r7, r10\n"
+                "\tmov r6, r9\n"
+                "\tmov r5, r8\n"
+                "\tpush {r5-r7}\n"
+                "\tadds r5, r0, 0\n"
+                "\tadds r6, r1, 0\n"
+                "\tmov r10, r2\n"
+                "\tmov r9, r3\n"
+                "\tldrb r4, [r5]\n"
+                "\tcmp r4, 0x1\n"
+                "\tbeq _0801730C\n"
+                "\tcmp r4, 0x1\n"
+                "\tbgt _080172C2\n"
+                "\tcmp r4, 0\n"
+                "\tbeq _080172C8\n"
+                "\tb _0801739C\n"
+                "_080172C2:\n"
+                "\tcmp r4, 0x2\n"
+                "\tbeq _0801731C\n"
+                "\tb _0801739C\n"
+                "_080172C8:\n"
+                "\tldr r0, =gUnknown_082F0344\n"
+                "\tbl sub_8017118\n"
+                "\tmov r1, r9\n"
+                "\tstrb r0, [r1]\n"
+                "\tldr r0, [sp, 0x20]\n"
+                "\tbl AddWindow\n"
+                "\tstrb r0, [r6]\n"
+                "\tldrb r0, [r6]\n"
+                "\tmovs r1, 0\n"
+                "\tbl DrawStdWindowFrame\n"
+                "\tldr r0, =gMultiuseListMenuTemplate\n"
+                "\tadds r2, r0, 0\n"
+                "\tldr r1, [sp, 0x24]\n"
+                "\tldm r1!, {r3,r4,r7}\n"
+                "\tstm r2!, {r3,r4,r7}\n"
+                "\tldm r1!, {r3,r4,r7}\n"
+                "\tstm r2!, {r3,r4,r7}\n"
+                "\tldrb r1, [r6]\n"
+                "\tstrb r1, [r0, 0x10]\n"
+                "\tmovs r1, 0\n"
+                "\tmovs r2, 0x1\n"
+                "\tbl ListMenuInit\n"
+                "\tmov r1, r10\n"
+                "\tstrb r0, [r1]\n"
+                "\tb _08017314\n"
+                "\t.pool\n"
+                "_0801730C:\n"
+                "\tldrb r0, [r6]\n"
+                "\tmovs r1, 0x1\n"
+                "\tbl CopyWindowToVram\n"
+                "_08017314:\n"
+                "\tldrb r0, [r5]\n"
+                "\tadds r0, 0x1\n"
+                "\tstrb r0, [r5]\n"
+                "\tb _0801739C\n"
+                "_0801731C:\n"
+                "\tmov r3, r10\n"
+                "\tldrb r0, [r3]\n"
+                "\tbl ListMenu_ProcessInput\n"
+                "\tadds r1, r0, 0\n"
+                "\tldr r0, =gMain\n"
+                "\tldrh r2, [r0, 0x2E]\n"
+                "\tmovs r0, 0x3\n"
+                "\tands r0, r2\n"
+                "\tcmp r0, 0\n"
+                "\tbeq _0801739C\n"
+                "\tcmp r1, 0x8\n"
+                "\tbeq _0801733E\n"
+                "\tands r4, r2\n"
+                "\tmov r8, r4\n"
+                "\tcmp r4, 0\n"
+                "\tbeq _08017368\n"
+                "_0801733E:\n"
+                "\tmov r4, r10\n"
+                "\tldrb r0, [r4]\n"
+                "\tmovs r1, 0\n"
+                "\tmovs r2, 0\n"
+                "\tbl DestroyListMenuTask\n"
+                "\tldrb r0, [r6]\n"
+                "\tbl RemoveWindow\n"
+                "\tmov r7, r9\n"
+                "\tldrb r0, [r7]\n"
+                "\tbl sub_8017168\n"
+                "\tmovs r0, 0\n"
+                "\tstrb r0, [r5]\n"
+                "\tmovs r0, 0x2\n"
+                "\tnegs r0, r0\n"
+                "\tb _080173A0\n"
+                "\t.pool\n"
+                "_08017368:\n"
+                "\tldr r0, [sp, 0x28]\n"
+                "\tbl sub_8017CB0\n"
+                "\tadds r4, r0, 0\n"
+                "\tcmp r4, 0\n"
+                "\tblt _08017396\n"
+                "\tmov r1, r10\n"
+                "\tldrb r0, [r1]\n"
+                "\tmovs r1, 0\n"
+                "\tmovs r2, 0\n"
+                "\tbl DestroyListMenuTask\n"
+                "\tldrb r0, [r6]\n"
+                "\tbl RemoveWindow\n"
+                "\tmov r3, r9\n"
+                "\tldrb r0, [r3]\n"
+                "\tbl sub_8017168\n"
+                "\tmov r7, r8\n"
+                "\tstrb r7, [r5]\n"
+                "\tadds r0, r4, 0\n"
+                "\tb _080173A0\n"
+                "_08017396:\n"
+                "\tmovs r0, 0x7\n"
+                "\tbl PlaySE\n"
+                "_0801739C:\n"
+                "\tmovs r0, 0x1\n"
+                "\tnegs r0, r0\n"
+                "_080173A0:\n"
+                "\tpop {r3-r5}\n"
+                "\tmov r8, r3\n"
+                "\tmov r9, r4\n"
+                "\tmov r10, r5\n"
+                "\tpop {r4-r7}\n"
+                "\tpop {r1}\n"
+                "\tbx r1");
+}
+#endif
