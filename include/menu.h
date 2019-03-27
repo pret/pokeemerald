@@ -100,5 +100,6 @@ u8 sub_81980F0(u8 bg, u8 xPos, u8 yPos, u8 palette, u16 baseTile);
 void sub_8198314(void);
 void sub_8198180(const u8 *string, u8 a2, bool8 copyToVram);
 void AddTextPrinterWithCustomSpeedForMessage(bool8 allowSkippingDelayWithButtonPress, u8 speed);
+void sub_8198C78(void);
 
 #endif // GUARD_MENU_H

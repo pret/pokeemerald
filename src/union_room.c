@@ -331,6 +331,7 @@ extern const u8 gUnknown_082EF298[];
 extern const u8 gUnknown_082EF65C[];
 extern const u8 gUnknown_082EF6E4[];
 extern const u8 gUnknown_082EF718[];
+extern const u8 gUnknown_082EFD94[];
 
 extern const u32 gUnknown_082F00C4[];
 
@@ -3621,4 +3622,74 @@ bool32 sub_801704C(void)
     {
         return FALSE;
     }
+}
+
+bool8 PrintOnTextbox(u8 *textState, const u8 *str)
+{
+    switch (*textState)
+    {
+    case 0:
+        sub_81973A4();
+        DrawDialogueFrame(0, 1);
+        StringExpandPlaceholders(gStringVar4, str);
+        AddTextPrinterForMessage_2(TRUE);
+        (*textState)++;
+        break;
+    case 1:
+        if (!RunTextPrintersAndIsPrinter0Active())
+        {
+            *textState = 0;
+            return TRUE;
+        }
+        break;
+    }
+    return FALSE;
+}
+
+s8 sub_80170B8(u8 *arg0, bool32 arg1)
+{
+    s8 r1;
+
+    switch (*arg0)
+    {
+    case 0:
+        if (arg1)
+        {
+            return -3;
+        }
+        DisplayYesNoMenuDefaultYes();
+        (*arg0)++;
+        break;
+    case 1:
+        if (arg1)
+        {
+            sub_8198C78();
+            *arg0 = 0;
+            return -3;
+        }
+        r1 = Menu_ProcessInputNoWrapClearOnChoose();
+        if (r1 == -1 || r1 == 0 || r1 == 1)
+        {
+            *arg0 = 0;
+            return r1;
+        }
+        break;
+    }
+    return -2;
+}
+
+u8 sub_8017118(struct WindowTemplate * template)
+{
+    u8 windowId = AddWindow(template);
+    DrawStdWindowFrame(windowId, FALSE);
+    FillWindowPixelBuffer(windowId, 0xFF);
+    sub_80173E0(windowId, 1, gUnknown_082EFD94, 8, 1, 6);
+    CopyWindowToVram(windowId, 2);
+    PutWindowTilemap(windowId);
+    return windowId;
+}
+
+void sub_8017168(u8 windowId)
+{
+    RemoveWindow(windowId);
 }
