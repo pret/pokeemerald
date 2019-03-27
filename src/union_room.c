@@ -241,7 +241,7 @@ void sub_8018784(u8 windowId);
 void sub_8018884(const u8 *src);
 bool32 mevent_0814257C(u8 *textState, const u8 *str);
 s8 sub_8018B08(u8 *textState, u8 *arg1, u8 arg2, const u8 *str);
-bool32 sub_8016F1C(struct UnkStruct_x20 *arg0, s16 arg1);
+bool32 sub_8016F1C(struct UnkLinkRfuStruct_02022B14 *arg0, s16 arg1);
 u8 sub_8016DF0(struct UnkStruct_Main4 *arg0, struct UnkStruct_Main4 *arg1, u32 arg2);
 void sub_8019F2C(void);
 void sub_8019E70(u8 *arg0, s32 arg1);
@@ -274,7 +274,7 @@ void sub_8019F04(u8 *spriteIds);
 void sub_8019E3C(void);
 void sub_80173B0(void);
 s32 sub_8017D04(u32 type, u32 species);
-void sub_8017020(const u8 *src);
+bool32 sub_8017020(const u8 *src);
 void sub_8019BA8(void *);
 s32 sub_8017EA0(u8 *dst, u32 gender, u16 *arg2, struct UnkStruct_URoom *arg3);
 void sub_801697C(u8 taskId);
@@ -2340,7 +2340,7 @@ void sub_80152F4(u8 taskId)
             {
                 if (data->field_0->arr[0].field_1A_0 == 1 && !data->field_0->arr[0].unk.field_0.unk_0a_7)
                 {
-                    if (sub_8016F1C(&data->field_0->arr[0], data->field_12 + 7))
+                    if (sub_8016F1C(&data->field_0->arr[0].unk.field_0, data->field_12 + 7))
                     {
                         data->field_F = 0;
                         data->field_14 = 0;
@@ -3503,5 +3503,122 @@ void sub_8016CA0(u8 taskId)
             ptr[0]->arr[i].unk0 = sp0;
             ptr[0]->arr[i].unk18 = sub_8017630(&ptr[0]->arr[i].unk0, &gUnknown_082F045C);
         }
+    }
+}
+
+u8 sub_8016DF0(struct UnkStruct_Main4 * a0, struct UnkStruct_Main4 * a1, u32 a2)
+{
+    u8 taskId = CreateTask(sub_8016CA0, 0);
+    struct UnkStruct_Main4 ** data = (void *)gTasks[taskId].data;
+    data[0] = a0;
+    data[1] = a1;
+    gTasks[taskId].data[4] = a2;
+    return taskId;
+}
+
+void sub_8016E24(u8 taskId)
+{
+    s32 i, j;
+    struct UnkStruct_Main4 **ptr = (void*) gTasks[taskId].data;
+
+    for (i = 0; i < 4; i++)
+    {
+        sub_800DE7C(&ptr[0]->arr[i].unk0.field_0, ptr[0]->arr[i].unk0.playerName, i);
+        if (!sub_8013D88(ptr[0]->arr[i].unk0.field_0.unk_0a_0, gTasks[taskId].data[2]))
+        {
+            ptr[0]->arr[i].unk0 = gUnknown_082F045C;
+        }
+        for (j = 0; j < i; j++)
+        {
+            if (!sub_8017630(&ptr[0]->arr[j].unk0, &ptr[0]->arr[i].unk0))
+            {
+                ptr[0]->arr[i].unk0 = gUnknown_082F045C;
+            }
+        }
+        ptr[0]->arr[i].unk18 = sub_8017630(&ptr[0]->arr[i].unk0, &gUnknown_082F045C);
+    }
+}
+
+bool32 sub_8016F1C(struct UnkLinkRfuStruct_02022B14 *arg0, s16 arg1)
+{
+    if (arg1 == 7)
+    {
+        if (!arg0->unk_00.unk_00_5)
+        {
+            return FALSE;
+        }
+        else
+        {
+            return TRUE;
+        }
+    }
+    else if (arg1 == 8)
+    {
+        if (!arg0->unk_00.unk_00_4)
+        {
+            return FALSE;
+        }
+        else
+        {
+            return TRUE;
+        }
+    }
+    else
+    {
+        return FALSE;
+    }
+}
+
+void sub_8016F44(u8 taskId)
+{
+    s32 i;
+    struct UnkStruct_Main4 **ptr = (void*) gTasks[taskId].data;
+
+    for (i = 0; i < 4; i++)
+    {
+        if (sub_800DF34(&ptr[0]->arr[i].unk0.field_0, ptr[0]->arr[i].unk0.playerName, i))
+        {
+            sub_8016F1C(&ptr[0]->arr[i].unk0.field_0, gTasks[taskId].data[2]);
+        }
+        ptr[0]->arr[i].unk18 = sub_8017630(&ptr[0]->arr[i].unk0, &gUnknown_082F045C);
+    }
+}
+
+u8 sub_8016FC0(struct UnkStruct_Main4 * a0, u32 a1)
+{
+    u8 taskId = CreateTask(sub_8016E24, 0);
+    struct UnkStruct_Main4 **ptr = (void*) gTasks[taskId].data;
+    ptr[0] = a0;
+    gTasks[taskId].data[2] = a1;
+    return taskId;
+}
+
+u8 sub_8016FF0(struct UnkStruct_Main4 * a0, u32 a1)
+{
+    u8 taskId = CreateTask(sub_8016F44, 0);
+    struct UnkStruct_Main4 **ptr = (void*) gTasks[taskId].data;
+    ptr[0] = a0;
+    gTasks[taskId].data[2] = a1;
+    return taskId;
+}
+
+bool32 sub_8017020(const u8 *src)
+{
+    sub_81973A4();
+    DrawDialogueFrame(0, 1);
+    StringExpandPlaceholders(gStringVar4, src);
+    AddTextPrinterWithCustomSpeedForMessage(FALSE, 1);
+    return FALSE;
+}
+
+bool32 sub_801704C(void)
+{
+    if (!RunTextPrintersAndIsPrinter0Active())
+    {
+        return TRUE;
+    }
+    else
+    {
+        return FALSE;
     }
 }
