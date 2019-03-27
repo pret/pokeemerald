@@ -67,9 +67,31 @@ const u8 gUnknown_082F0E10[][3] = {
 };
 const u8 ALIGNED(4) gUnknown_082F0E18[3] = {7, 4, 7};
 const struct WindowTemplate gUnknown_082F0E1C[] = {
-    {0x01, 0x01, 0x01, 0x19, 0x04, 0x02, 0x029c},
-    {0x01, 0x01, 0x06, 0x1c, 0x08, 0x02, 0x01bc},
-    {0x01, 0x01, 0x0e, 0x1c, 0x05, 0x02, 0x0130}
+    {
+        .bg = 1,
+        .tilemapLeft = 1,
+        .tilemapTop = 1,
+        .width = 25,
+        .height = 4,
+        .paletteNum = 2,
+        .baseBlock = 0x029c
+    }, {
+        .bg = 1,
+        .tilemapLeft = 1,
+        .tilemapTop = 6,
+        .width = 28,
+        .height = 8,
+        .paletteNum = 2,
+        .baseBlock = 0x01bc
+    }, {
+        .bg = 1,
+        .tilemapLeft = 1,
+        .tilemapTop = 14,
+        .width = 28,
+        .height = 5,
+        .paletteNum = 2,
+        .baseBlock = 0x0130
+    }
 };
 
 const u16 gWonderCardBgPal1[] = INCBIN_U16("graphics/wonder_transfers/wonder_card_1.gbapal");
@@ -472,8 +494,23 @@ const u8 gUnknown_082F1DE0[][3] = {
     {0, 1, 2}
 };
 const struct WindowTemplate gUnknown_082F1DE8[] = {
-    {0, 1, 0, 28,  3, 2, 0x2AC},
-    {2, 1, 3, 28, 20, 2, 0x07C}
+    {
+        .bg = 0,
+        .tilemapLeft = 1,
+        .tilemapTop = 0,
+        .width = 28,
+        .height = 3,
+        .paletteNum = 2,
+        .baseBlock = 0x2AC
+    }, {
+        .bg = 2,
+        .tilemapLeft = 1,
+        .tilemapTop = 3,
+        .width = 28,
+        .height = 20,
+        .paletteNum = 2,
+        .baseBlock = 0x07C
+    }
 };
 const struct ScrollArrowsTemplate gUnknown_082F1DF8 = {
     0x02, 0xe8, 0x18, 0x03, 0xe8, 0x98,
@@ -492,22 +529,6 @@ const u32 gWonderNewsGfx7[] = INCBIN_U32("graphics/wonder_transfers/wonder_news_
 const u32 gWonderNewsTilemap7[] = INCBIN_U32("graphics/wonder_transfers/wonder_news_7.bin.lz");
 const u32 gWonderNewsGfx8[] = INCBIN_U32("graphics/wonder_transfers/wonder_news_8.4bpp.lz");
 const u32 gWonderNewsTilemap8[] = INCBIN_U32("graphics/wonder_transfers/wonder_news_8.bin.lz");
-
-/*
-const u16 gWonderNewsPal1[] = INCBIN_U16("data/graphics/mevent/pal_468060.gbapal");
-const u16 gWonderNewsPal7[] = INCBIN_U16("data/graphics/mevent/pal_468080.gbapal");
-const u16 gWonderNewsPal8[] = INCBIN_U16("data/graphics/mevent/pal_4680A0.gbapal");
-const u32 gWonderNewsGfx1[] = INCBIN_U32("data/graphics/mevent/gfx_4680C0.4bpp.lz");
-const u32 gWonderNewsTilemap1[] = INCBIN_U32("data/graphics/mevent/tilemap_468140.bin.lz");
-const u32 gWonderNewsGfx2[] = INCBIN_U32("data/graphics/mevent/gfx_46821C.4bpp.lz");
-const u32 gWonderNewsTilemap2[] = INCBIN_U32("data/graphics/mevent/tilemap_46824C.bin.lz");
-const u32 gWonderNewsGfx3[] = INCBIN_U32("data/graphics/mevent/gfx_46830C.4bpp.lz");
-const u32 gWonderNewsTilemap3[] = INCBIN_U32("data/graphics/mevent/tilemap_46837C.bin.lz");
-const u32 gWonderNewsGfx7[] = INCBIN_U32("data/graphics/mevent/gfx_468448.4bpp.lz");
-const u32 gWonderNewsTilemap7[] = INCBIN_U32("data/graphics/mevent/tilemap_4684D8.bin.lz");
-const u32 gWonderNewsGfx8[] = INCBIN_U32("data/graphics/mevent/gfx_4685B4.4bpp.lz");
-const u32 gWonderNewsTilemap8[] = INCBIN_U32("data/graphics/mevent/tilemap_468644.bin.lz");
-*/
 
 const struct UnkStruct_8467FB8 gUnknown_082F24C8[] = {
     {1, 0, 0, 0, gWonderNewsGfx1, gWonderNewsTilemap1, gWonderNewsPal1},
