@@ -35,6 +35,7 @@
 #include "field_screen_effect.h"
 #include "script_pokemon_util_80F87D8.h"
 #include "mevent.h"
+#include "union_room_chat.h"
 
 struct UnkStruct_Shared
 {
@@ -231,7 +232,6 @@ bool32 sub_8017678(struct UnkStruct_x20 *arg0, struct UnkStruct_x1C *arg1);
 u32 sub_8018120(struct TradeUnkStruct *arg0, u8 multiplayerId);
 void sub_801807C(struct TradeUnkStruct *arg0);
 void sub_801AC54(void);
-void sub_801DD98(void);
 void sub_802A9A8(u8 monId, MainCallback callback);
 void sub_802493C(u8 monId, MainCallback callback);
 void sub_8020C70(MainCallback callback);

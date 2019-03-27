@@ -4729,7 +4729,7 @@ bool32 sub_8011A80(void)
         return FALSE;
 }
 
-u8 sub_8011A9C(void)
+bool32 sub_8011A9C(void)
 {
     return gUnknown_03005000.unk_ce8;
 }
