@@ -46,7 +46,7 @@ struct UnkStruct_Shared
 struct UnkStruct_x1C
 {
     struct UnkStruct_Shared unk0;
-    u8 unk18;
+    u8 unk18:1;
 };
 
 struct UnkStruct_x20
@@ -3468,33 +3468,40 @@ u8 sub_8016B00(void)
     return r7;
 }
 
-/*
 void sub_8016CA0(u8 taskId)
 {
     s32 i, j;
-    struct UnkLinkRfuStruct_02022B14 sp0;
-    u8 text[10];
-    struct UnkStruct_Main4 *ptr = (void*) gTasks[taskId].data;
+    struct UnkStruct_Shared sp0;
+    struct UnkStruct_Main4 **ptr = (void*) gTasks[taskId].data;
+    bool8 r4;
 
     for (i = 0; i < 4; i++)
     {
-        j = sub_800DE7C(&sp0, text, i);
-        if (!sub_8013D88(sp0.unk_0a_0, gTasks[taskId].data[4]))
-            sp0 = gUnknown_082F045C.field_0;
-        if (sp0.unk_00.unk_00_0 == 1)
-            sp0 = gUnknown_082F045C.field_0;
-
-        if (!j)
+        r4 = sub_800DE7C(&sp0.field_0, sp0.playerName, i);
+        if (!sub_8013D88(sp0.field_0.unk_0a_0, gTasks[taskId].data[4]))
+        {
+            sp0 = gUnknown_082F045C;
+        }
+        if (sp0.field_0.unk_00.unk_00_0 == 1)
+        {
+            sp0 = gUnknown_082F045C;
+        }
+        if (!r4)
         {
             for (j = 0; j < i; j++)
             {
-                if (sub_8017630())
+                if (!sub_8017630(&ptr[1]->arr[j].unk0, &sp0))
+                {
+                    sp0 = gUnknown_082F045C;
+                }
             }
+            ptr[1]->arr[i].unk0 = sp0;
+            ptr[1]->arr[i].unk18 = sub_8017630(&ptr[1]->arr[i].unk0, &gUnknown_082F045C);
         }
         else
         {
-
+            ptr[0]->arr[i].unk0 = sp0;
+            ptr[0]->arr[i].unk18 = sub_8017630(&ptr[0]->arr[i].unk0, &gUnknown_082F045C);
         }
     }
 }
-*/
