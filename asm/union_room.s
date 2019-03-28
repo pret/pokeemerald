@@ -5,34 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_80173B0
-sub_80173B0: @ 80173B0
-	push {lr}
-	sub sp, 0xC
-	movs r0, 0x20
-	str r0, [sp]
-	str r0, [sp, 0x4]
-	movs r0, 0
-	str r0, [sp, 0x8]
-	movs r1, 0
-	movs r2, 0
-	movs r3, 0
-	bl FillBgTilemapBufferRect
-	movs r0, 0
-	bl CopyBgTilemapBufferToVram
-	add sp, 0xC
-	pop {r0}
-	bx r0
-	thumb_func_end sub_80173B0
-
-	thumb_func_start sub_80173D4
-sub_80173D4: @ 80173D4
-	push {lr}
-	bl EnableBothScriptContexts
-	pop {r0}
-	bx r0
-	thumb_func_end sub_80173D4
-
 	thumb_func_start sub_80173E0
 sub_80173E0: @ 80173E0
 	push {r4,r5,lr}

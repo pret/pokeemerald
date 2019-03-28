@@ -3934,3 +3934,31 @@ s32 sub_80172A0(u8 *arg0, u8 *arg1, u8 *arg2, u8 *arg3, const struct WindowTempl
                 "\tbx r1");
 }
 #endif
+
+void sub_80173B0(void)
+{
+    FillBgTilemapBufferRect(0, 0, 0, 0, 32, 32, 0);
+    CopyBgTilemapBufferToVram(0);
+}
+
+void sub_80173D4(void)
+{
+    EnableBothScriptContexts();
+}
+
+/*
+void sub_80173E0(u8 windowId, u8 arg1, const u8 *str, u8 arg3, u8 arg4, u8 arg5)
+{
+    struct TextPrinterTemplate sp0 = {
+        .currentChar = str,
+        .windowId = windowId,
+        .fontId = arg1,
+        .x = arg3,
+        .y = arg4,
+        .currentX = arg3,
+        .currentY = arg4
+    };
+
+    // to be continued
+}
+*/
