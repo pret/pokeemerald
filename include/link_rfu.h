@@ -287,5 +287,6 @@ void sub_8010198(void);
 bool32 sub_8011A9C(void);
 void sub_80104B0(void);
 void sub_8011A50(void);
+void sub_80110B8(u32 a0);
 
 #endif //GUARD_LINK_RFU_H

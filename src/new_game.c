@@ -43,9 +43,8 @@
 #include "field_specials.h"
 #include "berry_powder.h"
 #include "mevent.h"
+#include "union_room_chat.h"
 
-
-extern void copy_strings_to_sav1(void);
 extern void ResetPokeJumpResults(void);
 
 extern const u8 EventScript_ResetAllMapFlags[];

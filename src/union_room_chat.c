@@ -1,5 +1,7 @@
 #include "global.h"
 #include "alloc.h"
+#include "bg.h"
+#include "dynamic_placeholder_text_util.h"
 #include "link.h"
 #include "link_rfu.h"
 #include "load_save.h"
@@ -12,7 +14,9 @@
 #include "sound.h"
 #include "sprite.h"
 #include "string_util.h"
+#include "strings.h"
 #include "task.h"
+#include "window.h"
 #include "constants/rgb.h"
 #include "constants/songs.h"
 
@@ -37,11 +41,30 @@ struct UnionRoomChat
     u8 unk17;
     u8 unk18;
     u8 unk19;
-    u8 unk1A[0x9F];
+    u8 unk1A[0x1F];
+    u8 unk39[0x40];
+    u8 unk79[0x40];
     u8 unkB9[10][21];
     u8 filler18B[0x5];
     u8 unk190[0x28];
     u16 unk1B8;
+};
+
+struct UnionRoomChat2_Unk0
+{
+    int (* unk0)(u8 *);
+    u8 unk4;
+    u8 unk5;
+};
+
+struct UnionRoomChat2
+{
+    struct UnionRoomChat2_Unk0 unk0[3];
+    u16 unk18;
+    u16 unk1A;
+    u8 filler1C[0x2];
+    u16 unk1E;
+    u8 filler20[0x2148];
 };
 
 static void sub_801DDD0(struct UnionRoomChat *);
@@ -77,19 +100,28 @@ static void sub_801EF7C(u8 *);
 static void sub_801EFA8(u8 *);
 static void sub_801EFD0(u8 *);
 u8 *sub_801F114(void);
-void sub_801F2B4(u8 taskId);
-bool8 sub_801F4D0(void);
-int sub_801F534(void);
-void sub_801F544(void);
-void sub_801F5B8(void);
+static void sub_801F2B4(u8 taskId);
+static bool8 sub_801F4D0(void);
+static bool32 sub_801F534(void);
+static void sub_801F544(void);
+static void sub_801F5B8(void);
 void sub_801F5EC(u16, u8);
 bool8 sub_801F644(u8);
 s8 sub_801FF08(void);
+bool32 sub_8020890(void);
+void sub_8020770(void);
+static void sub_801F574(struct UnionRoomChat2 *);
+static void sub_801F580(void);
+void sub_80208D0(void);
+int sub_801FDD8(u8 *);
 
 extern struct UnionRoomChat *gUnknown_02022C84;
+extern struct UnionRoomChat2 *gUnknown_02022C88;
 
 extern const u8 *const gUnknown_082F2BA8[][10];
 extern const u8 gUnknown_082F2AA8[];
+extern const struct BgTemplate gUnknown_082F2C60[4];
+extern const struct WindowTemplate gUnknown_082F2C70[];
 
 
 void sub_801DD98(void)
@@ -1069,4 +1101,345 @@ static void sub_801EFD0(u8 *arg0)
     arg0[0] = 5;
     StringCopy(&arg0[1], gSaveBlock2Ptr->playerName);
     arg0[1 + (PLAYER_NAME_LENGTH + 1)] = gUnknown_02022C84->unk13;
+}
+
+bool32 sub_801EFF8(u8 *arg0, u8 *arg1)
+{
+    u8 *tempStr;
+    u8 var0 = *arg1;
+    u8 *str = arg1 + 1;
+    arg1 = str;
+    arg1 += 8;
+
+    switch (var0)
+    {
+    case 2:
+        if (gUnknown_02022C84->unk13 != str[8])
+        {
+            DynamicPlaceholderTextUtil_Reset();
+            DynamicPlaceholderTextUtil_SetPlaceholderPtr(0, str);
+            DynamicPlaceholderTextUtil_ExpandPlaceholders(arg0, gText_F700JoinedChat);
+            return TRUE;
+        }
+        break;
+    case 1:
+        tempStr = StringCopy(arg0, str);
+        *(tempStr++) = EXT_CTRL_CODE_BEGIN;
+        *(tempStr++) = EXT_CTRL_CODE_CLEAR_TO;
+        *(tempStr++) = 42;
+        *(tempStr++) = CHAR_COLON;
+        StringCopy(tempStr, arg1);
+        return TRUE;
+    case 5:
+        StringCopy(gUnknown_02022C84->unk79, str);
+        // fall through
+    case 3:
+        if (gUnknown_02022C84->unk13 != *arg1)
+        {
+            DynamicPlaceholderTextUtil_Reset();
+            DynamicPlaceholderTextUtil_SetPlaceholderPtr(0, str);
+            DynamicPlaceholderTextUtil_ExpandPlaceholders(arg0, gText_F700LeftChat);
+            return TRUE;
+        }
+        break;
+    }
+
+    return FALSE;
+}
+
+u8 sub_801F0B0(void)
+{
+    return gUnknown_02022C84->unk10;
+}
+
+void sub_801F0BC(u8 *arg0, u8 *arg1)
+{
+    *arg0 = gUnknown_02022C84->unk11;
+    *arg1 = gUnknown_02022C84->unk12;
+}
+
+u8 *sub_801F0D0(void)
+{
+    return gUnknown_02022C84->unk1A;
+}
+
+int sub_801F0DC(void)
+{
+    u8 *str = sub_801F0D0();
+    return StringLength_Multibyte(str);
+}
+
+void sub_801F0EC(int *arg0, int *arg1)
+{
+    int diff = gUnknown_02022C84->unk15 - gUnknown_02022C84->unk14;
+    if (diff < 0)
+    {
+        diff *= -1;
+        *arg0 = gUnknown_02022C84->unk15;
+    }
+    else
+    {
+        *arg0 = gUnknown_02022C84->unk14;
+    }
+
+    *arg1 = diff;
+}
+
+u8 *sub_801F114(void)
+{
+    int i;
+    u16 numChars = sub_801EED8();
+    u8 *str = gUnknown_02022C84->unk1A;
+    for (i = 0; i < numChars; i++)
+    {
+        if (*str == CHAR_SPECIAL_F9)
+            *str++;
+
+        str++;
+    }
+
+    return str;
+}
+
+u16 sub_801F144(void)
+{
+    u16 count;
+    u32 i;
+    u16 numChars = sub_801EED8();
+    u8 *str = gUnknown_02022C84->unk1A;
+    for (count = 0, i = 0; i < numChars; count++, i++)
+    {
+        if (*str == CHAR_SPECIAL_F9)
+            str++;
+
+        str++;
+    }
+
+    return count;
+}
+
+u8 *sub_801F180(void)
+{
+    return gUnknown_02022C84->unk39;
+}
+
+u8 sub_801F18C(void)
+{
+    return gUnknown_02022C84->unk16;
+}
+
+int sub_801F198(void)
+{
+    return gUnknown_02022C84->unk15;
+}
+
+int sub_801F1A4(void)
+{
+    u8 *str = sub_801EEA8();
+    u32 character = *str;
+    if (character > 0xFF || gUnknown_082F2AA8[character] == character || gUnknown_082F2AA8[character] == 0)
+        return 3;
+    else
+        return 0;
+}
+
+u8 *sub_801F1D0(void)
+{
+    return gUnknown_02022C84->unk79;
+}
+
+void copy_strings_to_sav1(void)
+{
+    StringCopy(gSaveBlock1Ptr->unk3C88[0], gText_Hello);
+    StringCopy(gSaveBlock1Ptr->unk3C88[1], gText_Pokemon2);
+    StringCopy(gSaveBlock1Ptr->unk3C88[2], gText_Trade);
+    StringCopy(gSaveBlock1Ptr->unk3C88[3], gText_Battle);
+    StringCopy(gSaveBlock1Ptr->unk3C88[4], gText_Lets);
+    StringCopy(gSaveBlock1Ptr->unk3C88[5], gText_Ok);
+    StringCopy(gSaveBlock1Ptr->unk3C88[6], gText_Sorry);
+    StringCopy(gSaveBlock1Ptr->unk3C88[7], gText_YayUnkF9F9);
+    StringCopy(gSaveBlock1Ptr->unk3C88[8], gText_ThankYou);
+    StringCopy(gSaveBlock1Ptr->unk3C88[9], gText_ByeBye);
+}
+
+static void sub_801F2B4(u8 taskId)
+{
+    u8 *buffer;
+    s16 *data = gTasks[taskId].data;
+
+    switch (data[0])
+    {
+    case 0:
+        if (!gReceivedRemoteLinkPlayers)
+        {
+            DestroyTask(taskId);
+            return;
+        }
+
+        data[0] = 1;
+        // fall through
+    case 1:
+        data[4] = GetLinkPlayerCount();
+        if (gUnknown_02022C84->unkD != data[4])
+        {
+            data[0] = 2;
+            gUnknown_02022C84->unkD = data[4];
+            return;
+        }
+
+        data[3] = GetBlockReceivedStatus();
+        if (!data[3] && sub_8011A9C())
+            return;
+
+        data[1] = 0;
+        data[0] = 3;
+        // fall through
+    case 3:
+        for (; data[1] < 5 && ((data[3] >> data[1]) & 1) == 0; data[1]++)
+            ;
+
+        if (data[1] == 5)
+        {
+            data[0] = 1;
+            return;
+        }
+
+        data[2] = data[1];
+        ResetBlockReceivedFlag(data[2]);
+        buffer = (u8 *)gBlockRecvBuffer[data[1]];
+        switch (buffer[0])
+        {
+            default:
+            case 1: data[5] = 3; break;
+            case 2: data[5] = 3; break;
+            case 3: data[5] = 4; break;
+            case 4: data[5] = 5; break;
+            case 5: data[5] = 6; break;
+        }
+
+        if (sub_801EFF8(gUnknown_02022C84->unk39, (u8 *)gBlockRecvBuffer[data[1]]))
+        {
+            gUnknown_02022C84->unk16 = data[1];
+            sub_801F5EC(12, 2);
+            data[0] = 7;
+        }
+        else
+        {
+            data[0] = data[5];
+        }
+
+        data[1]++;
+        break;
+    case 7:
+        if (!sub_801F644(2))
+            data[0] = data[5];
+        break;
+    case 4:
+        if (!gUnknown_02022C84->unk13 && data[2])
+        {
+            if (GetLinkPlayerCount() == 2)
+            {
+                sub_80104B0();
+                gUnknown_02022C84->unk17 = 1;
+                DestroyTask(taskId);
+                return;
+            }
+
+            sub_8011DE0(data[2]);
+        }
+
+        data[0] = 3;
+        break;
+    case 5:
+        if (gUnknown_02022C84->unk13)
+            gUnknown_02022C84->unk17 = 2;
+
+        DestroyTask(taskId);
+        break;
+    case 6:
+        gUnknown_02022C84->unk17 = 3;
+        DestroyTask(taskId);
+        break;
+    case 2:
+        if (!sub_8011A9C())
+        {
+            if (!gUnknown_02022C84->unk13)
+                sub_80110B8(gUnknown_02022C84->unkD);
+
+            data[0] = 1;
+        }
+        break;
+    }
+}
+
+static bool8 sub_801F4D0(void)
+{
+    gUnknown_02022C88 = Alloc(sizeof(*gUnknown_02022C88));
+    if (gUnknown_02022C88 && sub_8020890())
+    {
+        ResetBgsAndClearDma3BusyFlags(0);
+        InitBgsFromTemplates(0, gUnknown_082F2C60, ARRAY_COUNT(gUnknown_082F2C60));
+        InitWindows(gUnknown_082F2C70);
+        reset_temp_tile_data_buffers();
+        sub_8020770();
+        sub_801F574(gUnknown_02022C88);
+        sub_801F580();
+        sub_801F5EC(0, 0);
+        return TRUE;
+    }
+    else
+    {
+        return FALSE;
+    }
+}
+
+static bool32 sub_801F534(void)
+{
+    return sub_801F644(0);
+}
+
+static void sub_801F544(void)
+{
+    sub_80208D0();
+    if (gUnknown_02022C88)
+        FREE_AND_SET_NULL(gUnknown_02022C88);
+
+    FreeAllWindowBuffers();
+    gScanlineEffect.state = 3;
+}
+
+static void sub_801F574(struct UnionRoomChat2 *arg0)
+{
+    arg0->unk18 = 0xFF;
+    arg0->unk1E = 0xFF;
+    arg0->unk1A = 0;
+}
+
+static void sub_801F580(void)
+{
+    int i;
+
+    if (!gUnknown_02022C88)
+        return;
+
+    for (i = 0; i < 3; i++)
+    {
+        gUnknown_02022C88->unk0[i].unk0 = sub_801FDD8;
+        gUnknown_02022C88->unk0[i].unk4 = 0;
+        gUnknown_02022C88->unk0[i].unk5 = 0;
+    }
+}
+
+static void sub_801F5B8(void)
+{
+    int i;
+
+    if (!gUnknown_02022C88)
+        return;
+
+    for (i = 0; i < 3; i++)
+    {
+        gUnknown_02022C88->unk0[i].unk4 =
+            gUnknown_02022C88->unk0[i].unk0(&gUnknown_02022C88->unk0[i].unk5);
+    }
 }
