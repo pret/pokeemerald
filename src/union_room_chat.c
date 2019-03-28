@@ -16,6 +16,8 @@
 #include "string_util.h"
 #include "strings.h"
 #include "task.h"
+#include "text.h"
+#include "text_window.h"
 #include "window.h"
 #include "constants/rgb.h"
 #include "constants/songs.h"
@@ -52,7 +54,7 @@ struct UnionRoomChat
 
 struct UnionRoomChat2_Unk0
 {
-    int (* unk0)(u8 *);
+    bool32 (* unk0)(u8 *);
     u8 unk4;
     u8 unk5;
 };
@@ -62,9 +64,15 @@ struct UnionRoomChat2
     struct UnionRoomChat2_Unk0 unk0[3];
     u16 unk18;
     u16 unk1A;
-    u8 filler1C[0x2];
+    u16 unk1C;
     u16 unk1E;
     u8 filler20[0x2148];
+};
+
+struct Unk82F2C98
+{
+    u16 unk0;
+    bool32 (* unk4)(u8 *);
 };
 
 static void sub_801DDD0(struct UnionRoomChat *);
@@ -105,15 +113,48 @@ static bool8 sub_801F4D0(void);
 static bool32 sub_801F534(void);
 static void sub_801F544(void);
 static void sub_801F5B8(void);
-void sub_801F5EC(u16, u8);
-bool8 sub_801F644(u8);
-s8 sub_801FF08(void);
+static void sub_801F5EC(u16, u8);
+static bool8 sub_801F644(u8);
+static s8 sub_801FF08(void);
 bool32 sub_8020890(void);
 void sub_8020770(void);
 static void sub_801F574(struct UnionRoomChat2 *);
 static void sub_801F580(void);
 void sub_80208D0(void);
-int sub_801FDD8(u8 *);
+static bool32 sub_801FDD8(u8 *);
+void sub_8020480(void);
+void sub_8020538(void);
+void sub_8020584(void);
+void sub_80205B4(void);
+void task_tutorial_story_unknown(void);
+void sub_8020680(void);
+void sub_80206A4(void);
+void sub_80206D0(void);
+void sub_8020740(void);
+void sub_80206E8(void);
+void sub_80208E8(void);
+void sub_8020A68(void);
+void sub_8020B20(void);
+void sub_80203B0(void);
+void sub_802040C(void);
+void sub_802091C(int);
+bool32 sub_8020320(void);
+void sub_80201A4(void);
+bool32 sub_8020368(void);
+void sub_802093C(void);
+void sub_8020B80(void);
+void sub_801FF18(int, u16);
+static void sub_801FDDC(u8, u8, u8);
+void sub_8020094(void);
+static void sub_801FEBC(void);
+void sub_80200C8(void);
+static void sub_801FEE4(void);
+void sub_80200EC(u16, u16, u8);
+void sub_8020118(u16, u8 *, u8, u8, u16);
+void sub_80209AC(int);
+void sub_8020420(u16, u8 *, u8);
+void sub_80209E0(void);
+bool32 sub_8020A1C(void);
 
 extern struct UnionRoomChat *gUnknown_02022C84;
 extern struct UnionRoomChat2 *gUnknown_02022C88;
@@ -122,6 +163,7 @@ extern const u8 *const gUnknown_082F2BA8[][10];
 extern const u8 gUnknown_082F2AA8[];
 extern const struct BgTemplate gUnknown_082F2C60[4];
 extern const struct WindowTemplate gUnknown_082F2C70[];
+extern const struct Unk82F2C98 gUnknown_082F2C98[];
 
 
 void sub_801DD98(void)
@@ -1158,7 +1200,7 @@ void sub_801F0BC(u8 *arg0, u8 *arg1)
     *arg1 = gUnknown_02022C84->unk12;
 }
 
-u8 *sub_801F0D0(void)
+static u8 *sub_801F0D0(void)
 {
     return gUnknown_02022C84->unk1A;
 }
@@ -1169,7 +1211,7 @@ int sub_801F0DC(void)
     return StringLength_Multibyte(str);
 }
 
-void sub_801F0EC(int *arg0, int *arg1)
+void sub_801F0EC(u32 *arg0, u32 *arg1)
 {
     int diff = gUnknown_02022C84->unk15 - gUnknown_02022C84->unk14;
     if (diff < 0)
@@ -1442,4 +1484,571 @@ static void sub_801F5B8(void)
         gUnknown_02022C88->unk0[i].unk4 =
             gUnknown_02022C88->unk0[i].unk0(&gUnknown_02022C88->unk0[i].unk5);
     }
+}
+
+static void sub_801F5EC(u16 arg0, u8 arg1)
+{
+    u32 i;
+
+    gUnknown_02022C88->unk0[arg1].unk0 = sub_801FDD8;
+    for (i = 0; i < 21; i++)
+    {
+        if (gUnknown_082F2C98[i].unk0 == arg0)
+        {
+            gUnknown_02022C88->unk0[arg1].unk0 = gUnknown_082F2C98[i].unk4;
+            gUnknown_02022C88->unk0[arg1].unk4 = 1;
+            gUnknown_02022C88->unk0[arg1].unk5 = 0;
+            break;
+        }
+    }
+}
+
+static bool8 sub_801F644(u8 arg0)
+{
+    return gUnknown_02022C88->unk0[arg0].unk4;
+}
+
+bool32 sub_801F658(u8 *state)
+{
+    if (free_temp_tile_data_buffers_if_possible() == TRUE)
+        return TRUE;
+
+    switch (*state)
+    {
+    case 0:
+        sub_8020480();
+        sub_8020538();
+        break;
+    case 1:
+        sub_8020584();
+        break;
+    case 2:
+        sub_80205B4();
+        break;
+    case 3:
+        task_tutorial_story_unknown();
+        break;
+    case 4:
+        sub_8020680();
+        break;
+    case 5:
+        sub_80206A4();
+        sub_80206D0();
+        sub_8020740();
+        sub_80206E8();
+        break;
+    case 6:
+        if (!IsDma3ManagerBusyWithBgCopy())
+        {
+            sub_80208E8();
+            sub_8020A68();
+            sub_8020B20();
+        }
+        break;
+    default:
+        return FALSE;
+    }
+
+    (*state)++;
+    return TRUE;
+}
+
+bool32 sub_801F6F8(u8 *state)
+{
+    switch (*state)
+    {
+    case 0:
+        sub_80203B0();
+        CopyWindowToVram(3, 3);
+        break;
+    case 1:
+        return IsDma3ManagerBusyWithBgCopy();
+    }
+
+    (*state)++;
+    return TRUE;
+}
+
+bool32 sub_801F730(u8 *state)
+{
+    switch (*state)
+    {
+    case 0:
+        sub_802040C();
+        CopyWindowToVram(3, 3);
+        break;
+    case 1:
+        return IsDma3ManagerBusyWithBgCopy();
+    }
+
+    (*state)++;
+    return TRUE;
+}
+
+bool32 sub_801F768(u8 *state)
+{
+    switch (*state)
+    {
+    case 0:
+        sub_802091C(1);
+        if (sub_8020320())
+            return TRUE;
+
+        sub_80201A4();
+        CopyWindowToVram(2, 2);
+        break;
+    case 1:
+        if (IsDma3ManagerBusyWithBgCopy())
+            return TRUE;
+        break;
+    case 2:
+        if (sub_8020368())
+            return TRUE;
+
+        sub_802093C();
+        sub_802091C(0);
+        sub_8020B80();
+        return FALSE;
+    }
+
+    (*state)++;
+    return TRUE;
+}
+
+bool32 sub_801F7D4(u8 *state)
+{
+    sub_802093C();
+    return FALSE;
+}
+
+bool32 sub_801F7E0(u8 *state)
+{
+    switch (*state)
+    {
+    case 0:
+        sub_801FF18(0, 0);
+        sub_801FDDC(23, 11, 1);
+        CopyWindowToVram(gUnknown_02022C88->unk1E, 3);
+        break;
+    case 1:
+        return IsDma3ManagerBusyWithBgCopy();
+    }
+
+    (*state)++;
+    return TRUE;
+}
+
+bool32 sub_801F82C(u8 *state)
+{
+    switch (*state)
+    {
+    case 0:
+        sub_8020094();
+        sub_801FEBC();
+        CopyBgTilemapBufferToVram(0);
+        break;
+    case 1:
+        if (IsDma3ManagerBusyWithBgCopy())
+            return TRUE;
+
+        sub_80200C8();
+        sub_801FEE4();
+        return FALSE;
+    }
+
+    (*state)++;
+    return TRUE;
+}
+
+bool32 sub_801F870(u8 *state)
+{
+    u32 var0, var1;
+    u8 *str;
+
+    switch (*state)
+    {
+    case 0:
+        sub_801F0EC(&var0, &var1);
+        sub_80200EC(var0, var1, 0);
+        str = sub_801F0D0();
+        sub_8020118(0, str, 3, 1, 2);
+        CopyWindowToVram(1, 2);
+        break;
+    case 1:
+        if (!IsDma3ManagerBusyWithBgCopy())
+        {
+            sub_8020B80();
+            return FALSE;
+        }
+        return TRUE;
+    }
+
+    (*state)++;
+    return TRUE;
+}
+
+bool32 sub_801F8DC(u8 *state)
+{
+    u16 var0;
+    u8 *str;
+    u16 length;
+
+    switch (*state)
+    {
+    case 0:
+        var0 = sub_801F144();
+        str = sub_801F114();
+        length = StringLength_Multibyte(str);
+        sub_80200EC(var0, length, PIXEL_FILL(6));
+        sub_8020118(var0, str, 0, 4, 5);
+        CopyWindowToVram(1, 2);
+        break;
+    case 1:
+        if (!IsDma3ManagerBusyWithBgCopy())
+        {
+            sub_801FF18(1, 16);
+            CopyWindowToVram(gUnknown_02022C88->unk1E, 3);
+        }
+        else
+        {
+            return TRUE;
+        }
+        break;
+    case 2:
+        if (!IsDma3ManagerBusyWithBgCopy())
+            sub_80209AC(1);
+        else
+            return TRUE;
+        break;
+    case 3:
+        return FALSE;
+    }
+
+    (*state)++;
+    return TRUE;
+}
+
+bool32 sub_801F984(u8 *state)
+{
+    u16 var0;
+    u8 *str;
+    u16 length;
+
+    switch (*state)
+    {
+    case 0:
+        var0 = sub_801F144();
+        str = sub_801F114();
+        length = StringLength_Multibyte(str);
+        sub_80200EC(var0, length, PIXEL_FILL(0));
+        sub_8020118(var0, str, 3, 1, 2);
+        CopyWindowToVram(1, 2);
+        break;
+    case 1:
+        if (!IsDma3ManagerBusyWithBgCopy())
+        {
+            sub_8020094();
+            CopyWindowToVram(gUnknown_02022C88->unk1E, 3);
+        }
+        else
+        {
+            return TRUE;
+        }
+        break;
+    case 2:
+        if (!IsDma3ManagerBusyWithBgCopy())
+        {
+            sub_80209AC(0);
+            sub_80200C8();
+        }
+        else
+        {
+            return TRUE;
+        }
+        break;
+    case 3:
+        return FALSE;
+    }
+
+    (*state)++;
+    return TRUE;
+}
+
+bool32 sub_801FA2C(u8 *state)
+{
+    switch (*state)
+    {
+    case 0:
+        sub_80201A4();
+        CopyWindowToVram(2, 2);
+        (*state)++;
+        break;
+    case 1:
+        if (IsDma3ManagerBusyWithBgCopy())
+            return TRUE;
+        else
+            return FALSE;
+    }
+
+    return TRUE;
+}
+
+bool32 sub_801FA68(u8 *state)
+{
+    u16 var0;
+    u8 *str;
+    u8 var1;
+
+    switch (*state)
+    {
+    case 0:
+        var0 = gUnknown_02022C88->unk1A;
+        str = sub_801F180();
+        var1 = sub_801F18C();
+        sub_8020420(var0, str, var1);
+        CopyWindowToVram(0, 2);
+        break;
+    case 1:
+        if (IsDma3ManagerBusyWithBgCopy())
+            return TRUE;
+
+        if (gUnknown_02022C88->unk1A < 9)
+        {
+            gUnknown_02022C88->unk1A++;
+            *state = 4;
+            return FALSE;
+        }
+        else
+        {
+            gUnknown_02022C88->unk1C = 0;
+            (*state)++;
+        }
+        // fall through
+    case 2:
+        ScrollWindow(0, 0, 5, PIXEL_FILL(1));
+        CopyWindowToVram(0, 2);
+        gUnknown_02022C88->unk1C++;
+        (*state)++;
+        // fall through
+    case 3:
+        if (IsDma3ManagerBusyWithBgCopy())
+            return TRUE;
+
+        if (gUnknown_02022C88->unk1C < 3)
+        {
+            (*state)--;
+            return TRUE;
+        }
+        break;
+    case 4:
+        return FALSE;
+    default:
+        return TRUE;
+    }
+
+    (*state)++;
+    return TRUE;
+}
+
+bool32 sub_801FB44(u8 *state)
+{
+    switch (*state)
+    {
+    case 0:
+        sub_80209E0();
+        (*state)++;
+        break;
+    case 1:
+        return sub_8020A1C();
+    }
+
+    return TRUE;
+}
+
+bool32 sub_801FB70(u8 *state)
+{
+    switch (*state)
+    {
+    case 0:
+        sub_801FF18(3, 16);
+        CopyWindowToVram(gUnknown_02022C88->unk1E, 3);
+        (*state)++;
+        break;
+    case 1:
+        return IsDma3ManagerBusyWithBgCopy();
+    }
+
+    return TRUE;
+}
+
+bool32 sub_801FBB4(u8 *state)
+{
+    switch (*state)
+    {
+    case 0:
+        sub_801FF18(4, 0);
+        CopyWindowToVram(gUnknown_02022C88->unk1E, 3);
+        (*state)++;
+        break;
+    case 1:
+        return IsDma3ManagerBusyWithBgCopy();
+    }
+
+    return TRUE;
+}
+
+bool32 sub_801FBF8(u8 *state)
+{
+    u8 *str;
+
+    switch (*state)
+    {
+    case 0:
+        DynamicPlaceholderTextUtil_Reset();
+        str = sub_801F1D0();
+        DynamicPlaceholderTextUtil_SetPlaceholderPtr(0, str);
+        sub_801FF18(5, 0);
+        CopyWindowToVram(gUnknown_02022C88->unk1E, 3);
+        (*state)++;
+        break;
+    case 1:
+        return IsDma3ManagerBusyWithBgCopy();
+    }
+
+    return TRUE;
+}
+
+bool32 sub_801FC4C(u8 *state)
+{
+    switch (*state)
+    {
+    case 0:
+        sub_801FF18(6, 0);
+        sub_801FDDC(23, 10, 1);
+        CopyWindowToVram(gUnknown_02022C88->unk1E, 3);
+        (*state)++;
+        break;
+    case 1:
+        return IsDma3ManagerBusyWithBgCopy();
+    }
+
+    return TRUE;
+}
+
+bool32 sub_801FC9C(u8 *state)
+{
+    switch (*state)
+    {
+    case 0:
+        sub_801FF18(7, 0);
+        sub_801FDDC(23, 10, 1);
+        CopyWindowToVram(gUnknown_02022C88->unk1E, 3);
+        (*state)++;
+        break;
+    case 1:
+        return IsDma3ManagerBusyWithBgCopy();
+    }
+
+    return TRUE;
+}
+
+bool32 sub_801FCEC(u8 *state)
+{
+    switch (*state)
+    {
+    case 0:
+        sub_801FF18(8, 0);
+        CopyWindowToVram(gUnknown_02022C88->unk1E, 3);
+        (*state)++;
+        break;
+    case 1:
+        return IsDma3ManagerBusyWithBgCopy();
+    }
+
+    return TRUE;
+}
+
+bool32 sub_801FD30(u8 *state)
+{
+    switch (*state)
+    {
+    case 0:
+        DynamicPlaceholderTextUtil_Reset();
+        DynamicPlaceholderTextUtil_SetPlaceholderPtr(0, gSaveBlock2Ptr->playerName);
+        sub_801FF18(9, 0);
+        CopyWindowToVram(gUnknown_02022C88->unk1E, 3);
+        (*state)++;
+        break;
+    case 1:
+        return IsDma3ManagerBusyWithBgCopy();
+    }
+
+    return TRUE;
+}
+
+bool32 sub_801FD88(u8 *state)
+{
+    switch (*state)
+    {
+    case 0:
+        sub_801FF18(10, 0);
+        sub_801FDDC(23, 10, 1);
+        CopyWindowToVram(gUnknown_02022C88->unk1E, 3);
+        (*state)++;
+        break;
+    case 1:
+        return IsDma3ManagerBusyWithBgCopy();
+    }
+
+    return TRUE;
+}
+
+static bool32 sub_801FDD8(u8 *arg0)
+{
+    return FALSE;
+}
+
+static void sub_801FDDC(u8 left, u8 top, u8 initialCursorPos)
+{
+    struct WindowTemplate template;
+    template.bg = 0;
+    template.tilemapLeft = left;
+    template.tilemapTop = top;
+    template.width = 6;
+    template.height = 4;
+    template.paletteNum = 14;
+    template.baseBlock = 0x52;
+    gUnknown_02022C88->unk18 = AddWindow(&template);
+    if (gUnknown_02022C88->unk18 != 0xFF)
+    {
+        FillWindowPixelBuffer(gUnknown_02022C88->unk18, PIXEL_FILL(1));
+        PutWindowTilemap(gUnknown_02022C88->unk18);
+        AddTextPrinterParameterized(gUnknown_02022C88->unk18, 1, gText_Yes, 8, 1, TEXT_SPEED_FF, NULL);
+        AddTextPrinterParameterized(gUnknown_02022C88->unk18, 1, gText_No, 8, 17, TEXT_SPEED_FF, NULL);
+        sub_8098858(gUnknown_02022C88->unk18, 1, 13);
+        InitMenuInUpperLeftCornerPlaySoundWhenAPressed(gUnknown_02022C88->unk18, 2, initialCursorPos);
+    }
+}
+
+static void sub_801FEBC(void)
+{
+    if (gUnknown_02022C88->unk18 != 0xFF)
+    {
+        ClearStdWindowAndFrameToTransparent(gUnknown_02022C88->unk18, FALSE);
+        ClearWindowTilemap(gUnknown_02022C88->unk18);
+    }
+}
+
+static void sub_801FEE4(void)
+{
+    if (gUnknown_02022C88->unk18 != 0xFF)
+    {
+        RemoveWindow(gUnknown_02022C88->unk18);
+        gUnknown_02022C88->unk18 = 0xFF;
+    }
+}
+
+static s8 sub_801FF08(void)
+{
+    return Menu_ProcessInput();
 }
