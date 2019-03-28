@@ -3946,19 +3946,72 @@ void sub_80173D4(void)
     EnableBothScriptContexts();
 }
 
-/*
 void sub_80173E0(u8 windowId, u8 arg1, const u8 *str, u8 arg3, u8 arg4, u8 arg5)
 {
-    struct TextPrinterTemplate sp0 = {
-        .currentChar = str,
-        .windowId = windowId,
-        .fontId = arg1,
-        .x = arg3,
-        .y = arg4,
-        .currentX = arg3,
-        .currentY = arg4
-    };
+    struct TextPrinterTemplate sp0;
 
-    // to be continued
+    sp0.currentChar = str;
+    sp0.windowId = windowId;
+    sp0.fontId = arg1;
+    sp0.x = arg3;
+    sp0.y = arg4;
+    sp0.currentX = arg3;
+    sp0.currentY = arg4;
+    sp0.unk = 0;
+
+    gTextFlags.useAlternateDownArrow = FALSE;
+    switch (arg5)
+    {
+    case 0:
+        sp0.letterSpacing = 0;
+        sp0.lineSpacing = 0;
+        sp0.fgColor = 2;
+        sp0.bgColor = 1;
+        sp0.shadowColor = 3;
+        break;
+    case 1:
+        sp0.letterSpacing = 0;
+        sp0.lineSpacing = 0;
+        sp0.fgColor = 4;
+        sp0.bgColor = 1;
+        sp0.shadowColor = 5;
+        break;
+    case 2:
+        sp0.letterSpacing = 0;
+        sp0.lineSpacing = 0;
+        sp0.fgColor = 6;
+        sp0.bgColor = 1;
+        sp0.shadowColor = 7;
+        break;
+    case 3:
+        sp0.letterSpacing = 0;
+        sp0.lineSpacing = 0;
+        sp0.fgColor = 1;
+        sp0.bgColor = 1;
+        sp0.shadowColor = 3;
+        break;
+    case 4:
+        sp0.letterSpacing = 0;
+        sp0.lineSpacing = 0;
+        sp0.fgColor = 1;
+        sp0.bgColor = 2;
+        sp0.shadowColor = 3;
+        break;
+    case 5:
+        sp0.letterSpacing = 0;
+        sp0.lineSpacing = 0;
+        sp0.fgColor = 7;
+        sp0.bgColor = 15;
+        sp0.shadowColor = 9;
+        break;
+    case 6:
+        sp0.letterSpacing = 0;
+        sp0.lineSpacing = 0;
+        sp0.fgColor = 14;
+        sp0.bgColor = 15;
+        sp0.shadowColor = 9;
+        break;
+    }
+
+    AddTextPrinter(&sp0, 0xFF, NULL);
 }
-*/
