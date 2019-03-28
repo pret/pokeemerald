@@ -35,6 +35,7 @@
 #include "field_screen_effect.h"
 #include "script_pokemon_util_80F87D8.h"
 #include "international_string_util.h"
+#include "field_player_avatar.h"
 #include "mevent.h"
 
 struct UnkStruct_Shared
@@ -222,7 +223,7 @@ void sub_80149C4(void);
 u8 sub_80132D4(struct UnkStruct_Main0 *arg0);
 void sub_80178A0(u8 arg0, u8 arg1, u8 arg2, struct UnkStruct_x20 *arg3, u8 arg4, u8 id);
 u32 sub_80176E4(struct UnkStruct_x20 *arg0, struct UnkStruct_x1C *arg1);
-u8 sub_8017734(struct UnkStruct_x20 *arg0, struct UnkStruct_Shared *arg1, u8 arg2);
+u8 sub_8017734(struct UnkStruct_x20 *arg0, struct UnkStruct_x1C *arg1, u8 arg2);
 u8 sub_8013E44(void);
 u32 sub_8013B8C(struct UnkStruct_Group *arg0, s32 id);
 void sub_8013BD8(struct UnkStruct_Group *arg0, s32 id);
@@ -267,7 +268,7 @@ s32 sub_8017178(u8 *arg0, u8 *arg1, u8 *arg2, const struct WindowTemplate *winTe
 s32 sub_80172A0(u8 *arg0, u8 *arg1, u8 *arg2, u8 *arg3, const struct WindowTemplate *winTemplate, const struct ListMenuTemplate *menuTemplate, struct UnkStruct_Main0 *arg6);
 s32 sub_8017CB0(struct UnkStruct_Main0 * arg);
 bool32 sub_8018024(void);
-u32 sub_8017984(u32 arg0);
+u32 sub_8017984(s32 arg0);
 void sub_8018220(u8 *unused, struct UnkStruct_URoom *arg1, bool8 arg2);
 void sub_8017D9C(u8 *dst, u32 arg1, u32 playerGender);
 u32 sub_80179AC(struct UnkStruct_x20 *arg0);
@@ -379,6 +380,8 @@ extern const u8 *const gUnknown_082EE24C[][2];
 extern const struct UnkStruct_Shared gUnknown_082F045C;
 
 extern const u8 *const gUnknown_082F04D8[22];
+
+extern const u8 gText_Colon[];
 
 // code
 void nullsub_89(void)
@@ -973,7 +976,7 @@ u8 sub_80132D4(struct UnkStruct_Main0 *arg0)
     }
 
     for (id = 0; id < 4; id++)
-        sub_8017734(data->field_0->arr, &data->field_4->arr[id].unk0, 5);
+        sub_8017734(data->field_0->arr, &data->field_4->arr[id], 5);
 
     if (ret != 2)
     {
@@ -1498,7 +1501,7 @@ u8 sub_8013E44(void)
 
     for (id = 0; id < 4; id++)
     {
-        if (sub_8017734(data->field_0->arr, &data->field_4->arr[id].unk0, 16) != 0xFF)
+        if (sub_8017734(data->field_0->arr, &data->field_4->arr[id], 16) != 0xFF)
             ret = 1;
     }
 
@@ -3465,7 +3468,7 @@ u8 sub_8016B00(void)
     }
     for (i = 0; i < 4; i++)
     {
-        if (sub_8017734(&structPtr->field_0->arr[0], &structPtr->field_4->arr[i].unk0, 8) != 0xFF)
+        if (sub_8017734(&structPtr->field_0->arr[0], &structPtr->field_4->arr[i], 8) != 0xFF)
             r7 = 1;
     }
 
@@ -4114,4 +4117,106 @@ u32 sub_80176E4(struct UnkStruct_x20 *arg0, struct UnkStruct_x1C *arg1)
     }
 
     return result;
+}
+
+u8 sub_8017734(struct UnkStruct_x20 *arg0, struct UnkStruct_x1C *arg1, u8 arg2)
+{
+    s32 i;
+
+    if (arg1->unk18)
+    {
+        for (i = 0; i < arg2; i++)
+        {
+            if (arg0[i].field_1A_0 == 0)
+            {
+                arg0[i].unk = arg1->unk0;
+                arg0[i].field_18 = 0;
+                arg0[i].field_1A_0 = 1;
+                arg0[i].field_1B = 64;
+                arg1->unk18 = FALSE;
+                return i;
+            }
+        }
+    }
+
+    return 0xFF;
+}
+
+void sub_80177B8(u8 arg0, u8 arg1, u8 arg2, struct UnkStruct_x20 *arg3, u8 arg4, u8 id)
+{
+    u8 r2;
+    u8 sp0[6];
+
+    ConvertIntToDecimalStringN(gStringVar4, id + 1, STR_CONV_MODE_LEADING_ZEROS, 2);
+    StringAppend(gStringVar4, gText_Colon);
+    sub_80173E0(arg0, 1, gStringVar4, arg1, arg2, 0);
+    arg1 += 18;
+    r2 = arg3->unk.field_0.unk_0a_0;
+    if (arg3->field_1A_0 == 1 && !(r2 & 0x40))
+    {
+        sub_8018404(gStringVar4, arg3);
+        sub_80173E0(arg0, 1, gStringVar4, arg1, arg2, arg4);
+        ConvertIntToDecimalStringN(sp0, arg3->unk.field_0.unk_00.playerTrainerId[0] | (arg3->unk.field_0.unk_00.playerTrainerId[1] << 8), STR_CONV_MODE_LEADING_ZEROS, 5);
+        StringCopy(gStringVar4, gText_UnkCtrlCodeF907);
+        StringAppend(gStringVar4, sp0);
+        sub_80173E0(arg0, 1, gStringVar4, GetStringRightAlignXOffset(1, gStringVar4, 0x88), arg2, arg4);
+    }
+}
+
+void sub_80178A0(u8 arg0, u8 arg1, u8 arg2, struct UnkStruct_x20 *arg3, u8 arg4, u8 id)
+{
+    u8 sp0[6];
+
+    if (arg3->field_1A_0 == 1)
+    {
+        sub_8018404(gStringVar4, arg3);
+        sub_80173E0(arg0, 1, gStringVar4, arg1, arg2, arg4);
+        ConvertIntToDecimalStringN(sp0, arg3->unk.field_0.unk_00.playerTrainerId[0] | (arg3->unk.field_0.unk_00.playerTrainerId[1] << 8), STR_CONV_MODE_LEADING_ZEROS, 5);
+        StringCopy(gStringVar4, gText_UnkCtrlCodeF907);
+        StringAppend(gStringVar4, sp0);
+        sub_80173E0(arg0, 1, gStringVar4, GetStringRightAlignXOffset(1, gStringVar4, 0x68), arg2, arg4);
+    }
+}
+
+bool32 sub_8017940(void)
+{
+    s16 x, y;
+    GetXYCoordsOneStepInFrontOfPlayer(&x, &y);
+    if (x != 9)
+    {
+        return FALSE;
+    }
+    if (y != 8)
+    {
+        return FALSE;
+    }
+    if (gPlayerAvatar.tileTransitionState == 2 || gPlayerAvatar.tileTransitionState == 0)
+    {
+        return TRUE;
+    }
+
+    return FALSE;
+}
+
+u32 sub_8017984(s32 arg0)
+{
+    switch (arg0)
+    {
+    case 5:
+        return 1;
+    case 4:
+        return 2;
+    case 8:
+        return 3;
+    case 3:
+    default:
+        return 0;
+    }
+}
+
+u32 sub_80179AC(struct UnkStruct_x20 *arg0)
+{
+    u8 sp0[30];
+    sub_8018404(sp0, arg0);
+    return sub_800E540(ReadAsU16(arg0->unk.field_0.unk_00.playerTrainerId), sp0);
 }
