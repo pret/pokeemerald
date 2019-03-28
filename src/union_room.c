@@ -228,7 +228,7 @@ u32 sub_8013B8C(struct UnkStruct_Group *arg0, s32 id);
 void sub_8013BD8(struct UnkStruct_Group *arg0, s32 id);
 void sub_80173D4(void);
 void sub_80177B8(u8 arg0, u8 arg1, u8 arg2, struct UnkStruct_x20 *arg3, u8 arg4, u8 id);
-bool32 sub_8017678(struct UnkStruct_x20 *arg0, struct UnkStruct_x1C *arg1);
+bool32 sub_8017678(struct UnkStruct_Shared *arg0, struct UnkStruct_Shared *arg1);
 u32 sub_8018120(struct TradeUnkStruct *arg0, u8 multiplayerId);
 void sub_801807C(struct TradeUnkStruct *arg0);
 void sub_801AC54(void);
@@ -1456,7 +1456,7 @@ u8 sub_8013E44(void)
             {
                 if (data->field_0->arr[i].field_1A_0 == 1)
                 {
-                    if (sub_8017678(&data->field_0->arr[i], &data->field_4->arr[id]))
+                    if (sub_8017678(&data->field_0->arr[i].unk, &data->field_4->arr[id].unk0))
                     {
                         data->field_0->arr[i].unk = data->field_4->arr[id].unk0;
                         data->field_0->arr[i].field_1B = 0x40;
@@ -3423,7 +3423,7 @@ u8 sub_8016B00(void)
             {
                 if (structPtr->field_0->arr[j].field_1A_0 == 1)
                 {
-                    if (sub_8017678(&structPtr->field_0->arr[j], &structPtr->field_4->arr[i]))
+                    if (sub_8017678(&structPtr->field_0->arr[j].unk, &structPtr->field_4->arr[i].unk0))
                     {
                         structPtr->field_0->arr[j].unk = structPtr->field_4->arr[i].unk0;
                         structPtr->field_0->arr[j].field_1B = 0x40;
@@ -4014,4 +4014,104 @@ void sub_80173E0(u8 windowId, u8 arg1, const u8 *str, u8 arg3, u8 arg4, u8 arg5)
     }
 
     AddTextPrinter(&sp0, 0xFF, NULL);
+}
+
+void sub_8017580(struct UnkStruct_x20 *arg0, u8 count)
+{
+    s32 i;
+
+    for (i = 0; i < count; i++)
+    {
+        arg0[i].unk = gUnknown_082F045C;
+        arg0[i].field_18 = 0xFF;
+        arg0[i].field_1A_0 = 0;
+        arg0[i].field_1A_1 = 0;
+        arg0[i].field_1B = 0;
+    }
+}
+
+void sub_80175EC(struct UnkStruct_Main4 *arg0, u8 count)
+{
+    s32 i;
+
+    for (i = 0; i < 4; i++)
+    {
+        arg0->arr[i].unk0 = gUnknown_082F045C;
+        arg0->arr[i].unk18 = 0;
+    }
+}
+
+bool8 sub_8017630(struct UnkStruct_Shared* arg0, const struct UnkStruct_Shared* arg1)
+{
+    s32 i;
+
+    for (i = 0; i < 2; i++)
+    {
+        if (arg0->field_0.unk_00.playerTrainerId[i] != arg1->field_0.unk_00.playerTrainerId[i])
+        {
+            return TRUE;
+        }
+    }
+
+    for (i = 0; i < 8; i++)
+    {
+        if (arg0->playerName[i] != arg1->playerName[i])
+        {
+            return TRUE;
+        }
+    }
+
+    return FALSE;
+}
+
+bool32 sub_8017678(struct UnkStruct_Shared *arg0, struct UnkStruct_Shared *arg1)
+{
+    s32 i;
+
+    if (arg0->field_0.unk_0a_0 != arg1->field_0.unk_0a_0)
+    {
+        return TRUE;
+    }
+
+    if (arg0->field_0.unk_0a_7 != arg1->field_0.unk_0a_7)
+    {
+        return TRUE;
+    }
+
+    for (i = 0; i < 4; i++)
+    {
+        if (arg0->field_0.unk_04[i] != arg1->field_0.unk_04[i])
+        {
+            return TRUE;
+        }
+    }
+
+    if (arg0->field_0.species != arg1->field_0.species)
+    {
+        return TRUE;
+    }
+
+    if (arg0->field_0.type != arg1->field_0.type)
+    {
+        return TRUE;
+    }
+
+    return FALSE;
+}
+
+u32 sub_80176E4(struct UnkStruct_x20 *arg0, struct UnkStruct_x1C *arg1)
+{
+    u8 result = 0xFF;
+    s32 i;
+
+    for (i = 0; i < 4; i++)
+    {
+        if (arg1[i].unk18 && !sub_8017630(&arg0->unk, &arg1[i].unk0))
+        {
+            result = i;
+            arg1[i].unk18 = FALSE;
+        }
+    }
+
+    return result;
 }
