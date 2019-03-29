@@ -1615,7 +1615,7 @@ u16 RenderText(struct TextPrinter *textPrinter)
                     }
                 }
                 return 2;
-            case 20:
+            case EXT_CTRL_CODE_MIN_LETTER_SPACING:
                 textPrinter->minLetterSpacing = *textPrinter->printerTemplate.currentChar++;
                 return 2;
             case EXT_CTRL_CODE_JPN:

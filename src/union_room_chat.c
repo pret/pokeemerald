@@ -66,13 +66,26 @@ struct UnionRoomChat2
     u16 unk1A;
     u16 unk1C;
     u16 unk1E;
-    u8 filler20[0x2148];
+    u8 filler20[0x2];
+    u8 unk22[0x2146];
 };
 
 struct Unk82F2C98
 {
     u16 unk0;
     bool32 (* unk4)(u8 *);
+};
+
+struct Unk82F2D40
+{
+    const u8 *unk0;
+    u8 unk4;
+    u8 unk5;
+    u8 unk6;
+    u8 unk7;
+    u8 unk8;
+    u8 unk9;
+    u8 unkA;
 };
 
 static void sub_801DDD0(struct UnionRoomChat *);
@@ -143,14 +156,14 @@ void sub_80201A4(void);
 bool32 sub_8020368(void);
 void sub_802093C(void);
 void sub_8020B80(void);
-void sub_801FF18(int, u16);
+static void sub_801FF18(int, u16);
 static void sub_801FDDC(u8, u8, u8);
-void sub_8020094(void);
+static void sub_8020094(void);
 static void sub_801FEBC(void);
-void sub_80200C8(void);
+static void sub_80200C8(void);
 static void sub_801FEE4(void);
-void sub_80200EC(u16, u16, u8);
-void sub_8020118(u16, u8 *, u8, u8, u16);
+static void sub_80200EC(u16, u16, u8);
+static void sub_8020118(u16, u8 *, u8, u8, u8);
 void sub_80209AC(int);
 void sub_8020420(u16, u8 *, u8);
 void sub_80209E0(void);
@@ -164,6 +177,7 @@ extern const u8 gUnknown_082F2AA8[];
 extern const struct BgTemplate gUnknown_082F2C60[4];
 extern const struct WindowTemplate gUnknown_082F2C70[];
 extern const struct Unk82F2C98 gUnknown_082F2C98[];
+extern const struct Unk82F2D40 gUnknown_082F2D40[];
 
 
 void sub_801DD98(void)
@@ -2051,4 +2065,115 @@ static void sub_801FEE4(void)
 static s8 sub_801FF08(void)
 {
     return Menu_ProcessInput();
+}
+
+static void sub_801FF18(int arg0, u16 arg1)
+{
+    const u8 *str;
+    int windowId;
+    struct WindowTemplate template;
+    template.bg = 0;
+    template.tilemapLeft = 8;
+    template.tilemapTop = 16;
+    template.width = 21;
+    template.height = 4;
+    template.paletteNum = 14;
+    template.baseBlock = 0x6A;
+    if (gUnknown_082F2D40[arg0].unkA)
+    {
+        template.tilemapLeft -= 7;
+        template.width += 7;
+    }
+
+    gUnknown_02022C88->unk1E = AddWindow(&template);
+    windowId = gUnknown_02022C88->unk1E;
+    if (gUnknown_02022C88->unk1E == 0xFF)
+        return;
+
+    if (gUnknown_082F2D40[arg0].unk9)
+    {
+        DynamicPlaceholderTextUtil_ExpandPlaceholders(gUnknown_02022C88->unk22, gUnknown_082F2D40[arg0].unk0);
+        str = gUnknown_02022C88->unk22;
+    }
+    else
+    {
+        str = gUnknown_082F2D40[arg0].unk0;
+    }
+
+    ChangeBgY(0, arg1 * 256, 0);
+    FillWindowPixelBuffer(windowId, PIXEL_FILL(1));
+    PutWindowTilemap(windowId);
+    if (gUnknown_082F2D40[arg0].unk4 == 1)
+    {
+        sub_80989E0(windowId, 0xA, 2);
+        AddTextPrinterParameterized5(
+            windowId,
+            1,
+            str,
+            gUnknown_082F2D40[arg0].unk5 + 8,
+            gUnknown_082F2D40[arg0].unk6 + 8,
+            TEXT_SPEED_FF,
+            NULL,
+            gUnknown_082F2D40[arg0].unk7,
+            gUnknown_082F2D40[arg0].unk8);
+    }
+    else
+    {
+        sub_8098858(windowId, 0xA, 2);
+        AddTextPrinterParameterized5(
+            windowId,
+            1,
+            str,
+            gUnknown_082F2D40[arg0].unk5,
+            gUnknown_082F2D40[arg0].unk6,
+            TEXT_SPEED_FF,
+            NULL,
+            gUnknown_082F2D40[arg0].unk7,
+            gUnknown_082F2D40[arg0].unk8);
+    }
+
+    gUnknown_02022C88->unk1E = windowId;
+}
+
+static void sub_8020094(void)
+{
+    if (gUnknown_02022C88->unk1E != 0xFF)
+    {
+        ClearStdWindowAndFrameToTransparent(gUnknown_02022C88->unk1E, FALSE);
+        ClearWindowTilemap(gUnknown_02022C88->unk1E);
+    }
+
+    ChangeBgY(0, 0, 0);
+}
+
+static void sub_80200C8(void)
+{
+    if (gUnknown_02022C88->unk1E != 0xFF)
+    {
+        RemoveWindow(gUnknown_02022C88->unk1E);
+        gUnknown_02022C88->unk1E = 0xFF;
+    }
+}
+
+static void sub_80200EC(u16 x, u16 width, u8 fillValue)
+{
+    FillWindowPixelRect(1, fillValue, x * 8, 1, width * 8, 14);
+}
+
+static void sub_8020118(u16 x, u8 *str, u8 fillValue, u8 arg3, u8 arg4)
+{
+    u8 *str2;
+    u8 sp[38];
+    if (fillValue)
+        sub_80200EC(x, sub_801F198() - x, fillValue);
+
+    sp[0] = fillValue;
+    sp[1] = arg3;
+    sp[2] = arg4;
+    str2 = &sp[4];
+    str2[0] = EXT_CTRL_CODE_BEGIN;
+    str2[1] = EXT_CTRL_CODE_MIN_LETTER_SPACING;
+    str2[2] = 8;
+    StringCopy(&str2[3], str);
+    AddTextPrinterParameterized3(1, 2, x * 8, 1, sp, TEXT_SPEED_FF, str2);
 }
