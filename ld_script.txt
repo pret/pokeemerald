@@ -59,11 +59,11 @@ SECTIONS {
         src/union_room.o(.text);
         asm/union_room.o(.text);
         src/mevent2.o(.text);
-        asm/mevent_801BAAC.o(.text);
+        src/mevent_801BAAC.o(.text);
         asm/mevent_server.o(.text);
         asm/mevent_server_ish.o(.text);
         asm/mevent_server_helpers.o(.text);
-        asm/mevent_news.o(.text);
+        src/mevent_news.o(.text);
         asm/union_room_chat.o(.text);
         asm/berry_crush.o(.text);
         src/berry_powder.o(.text);
@@ -414,7 +414,7 @@ SECTIONS {
         src/union_room.o(.rodata);
         data/union_room.o(.rodata);
         src/mevent2.o(.rodata);
-        data/mevent_801BAAC.o(.rodata);
+        src/mevent_801BAAC.o(.rodata);
         data/mevent_server.o(.rodata);
         data/union_room_chat.o(.rodata);
         data/berry_crush.o(.rodata);
