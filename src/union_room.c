@@ -129,7 +129,7 @@ s32 sub_8017CB0(struct UnkStruct_x20 * arg, s32 arg1);
 bool32 sub_8018024(void);
 u32 sub_8017984(s32 arg0);
 void sub_8018220(u8 *unused, struct UnkStruct_URoom *arg1, bool8 arg2);
-void sub_8017D9C(u8 *dst, u32 arg1, u32 playerGender);
+void sub_8017D9C(u8 *dst, s32 arg1, u32 playerGender);
 u32 sub_80179AC(struct UnkStruct_x20 *arg0);
 void sub_8017E00(u8 *dst, u8 arg1);
 void sub_8019F04(u8 *spriteIds);
@@ -423,23 +423,27 @@ ALIGNED(4) const u8 gUnknown_082EE92C[] = _("The trade will be started.{PAUSE 60
 ALIGNED(4) const u8 gUnknown_082EE94C[] = _("The battle will be started.{PAUSE 60}");
 ALIGNED(4) const u8 gUnknown_082EE96C[] = _("Entering the chat…{PAUSE 60}");
 
-const u8 *const gUnknown_082EE984[][3] = {
+const u8 *const gUnknown_082EE984[][2][3] = {
     {
-        gUnknown_082EE94C,
-        gUnknown_082EE96C,
-        gUnknown_082EE92C
+        {
+            gUnknown_082EE94C,
+            gUnknown_082EE96C,
+            gUnknown_082EE92C
+        }, {
+            gUnknown_082EE94C,
+            gUnknown_082EE96C,
+            gUnknown_082EE92C
+        }
     }, {
-        gUnknown_082EE94C,
-        gUnknown_082EE96C,
-        gUnknown_082EE92C
-    }, {
-        gUnknown_082EE880,
-        gUnknown_082EE8B8,
-        gUnknown_082EE92C
-    }, {
-        gUnknown_082EE8D4,
-        gUnknown_082EE904,
-        gUnknown_082EE92C
+        {
+            gUnknown_082EE880,
+            gUnknown_082EE8B8,
+            gUnknown_082EE92C
+        }, {
+            gUnknown_082EE8D4,
+            gUnknown_082EE904,
+            gUnknown_082EE92C
+        }
     }
 };
 
@@ -5015,4 +5019,77 @@ s32 sub_8017CB0(struct UnkStruct_x20 * arg, s32 arg1)
     }
 
     return -1;
+}
+
+s32 sub_8017CF8(s32 arg1, struct UnkStruct_Main0 *arg0)
+{
+    return arg0->arr[arg1].unk.field_0.playerGender;
+}
+
+s32 sub_8017D04(u32 type, u32 species)
+{
+    s32 i;
+
+    if (species == SPECIES_EGG)
+    {
+        for (i = 0; i < gPlayerPartyCount; i++)
+        {
+            species = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2);
+            if (species == SPECIES_EGG)
+            {
+                return 0;
+            }
+        }
+        return 2;
+    }
+    else
+    {
+        for (i = 0; i < gPlayerPartyCount; i++)
+        {
+            species = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2);
+            if (gBaseStats[species].type1 == type || gBaseStats[species].type2 == type)
+            {
+                return 0;
+            }
+        }
+        return 1;
+    }
+}
+
+void sub_8017D9C(u8 *dst, s32 arg1, u32 playerGender)
+{
+    switch (arg1)
+    {
+    case 0x41:
+        StringExpandPlaceholders(dst, gUnknown_082EEA68[playerGender]);
+        break;
+    case 0x45:
+        StringExpandPlaceholders(dst, gUnknown_082EED3C[playerGender]);
+        break;
+    case 0x44:
+        StringExpandPlaceholders(dst, gUnknown_082EF7B0);
+        break;
+    case 0x48:
+        StringExpandPlaceholders(dst, gUnknown_082EEB08[playerGender]);
+        break;
+    }
+}
+
+void sub_8017E00(u8 *dst, u8 arg1)
+{
+    u8 mpId = GetMultiplayerId();
+    u8 gender = gLinkPlayers[mpId ^ 1].gender;
+
+    switch (arg1)
+    {
+    case 0x41:
+        StringCopy(dst, gUnknown_082EE984[mpId][gender][0]);
+        break;
+    case 0x44:
+        StringCopy(dst, gUnknown_082EE984[mpId][gender][2]);
+        break;
+    case 0x45:
+        StringCopy(dst, gUnknown_082EE984[mpId][gender][1]);
+        break;
+    }
 }
