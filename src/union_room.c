@@ -107,8 +107,8 @@ bool32 sub_8016F1C(struct UnkLinkRfuStruct_02022B14 *arg0, s16 arg1);
 u8 sub_8016DF0(struct UnkStruct_Main4 *arg0, struct UnkStruct_Main4 *arg1, u32 arg2);
 void sub_8019F2C(void);
 void sub_8019E70(u8 *arg0, s32 arg1);
-bool32 sub_80180A0(u8 monId, struct TradeUnkStruct *arg1);
-void sub_80180E8(u8 monId, struct TradeUnkStruct *arg1);
+bool32 sub_80180A0(u32 monId, struct TradeUnkStruct *arg1);
+void sub_80180E8(u32 monId, struct TradeUnkStruct *arg1);
 bool32 sub_801A2A8(struct UnkStruct_Main0 *arg0, s16 *arg1, s16 *arg2, u8 *arg3);
 void sub_80181CC(void);
 bool32 sub_8017940(void);
@@ -5149,4 +5149,92 @@ s32 sub_8017EA0(u8 *dst, u32 gender, u16 *arg2, struct UnkStruct_URoom *arg3)
     }
 
     return result;
+}
+
+bool32 sub_8017FD8(struct UnkStruct_URoom *arg0)
+{
+    if (gRecvCmds[0][1] != 0)
+    {
+        if (gRecvCmds[0][1] == 0x51)
+        {
+            arg0->field_98 = 0x51;
+            return TRUE;
+        }
+        else if (gRecvCmds[0][1] == 0x52)
+        {
+            arg0->field_98 = 0x52;
+            return TRUE;
+        }
+    }
+    return FALSE;
+}
+
+bool32 InUnionRoom(void)
+{
+    return    gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(UNION_ROOM)
+           && gSaveBlock1Ptr->location.mapNum == MAP_NUM(UNION_ROOM)
+           ? TRUE : FALSE;
+}
+
+bool32 sub_8018024(void)
+{
+    s32 i;
+    s32 count = 0;
+
+    for (i = 0; i < gPlayerPartyCount; i++)
+    {
+        if (   GetMonData(&gPlayerParty[i], MON_DATA_LEVEL) <= 30
+            && GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2) != SPECIES_EGG)
+        {
+            count++;
+        }
+    }
+
+    if (count > 1)
+    {
+        return TRUE;
+    }
+    else
+    {
+        return FALSE;
+    }
+}
+
+void sub_801807C(struct TradeUnkStruct *arg0)
+{
+    arg0->field_0 = 0;
+    arg0->field_2 = 0;
+    arg0->field_4 = 0;
+    arg0->field_A = 0;
+    arg0->field_C = 0;
+    arg0->species = 0;
+    arg0->level = 0;
+    arg0->personality = 0;
+}
+
+void sub_8018090(void)
+{
+    sub_801807C(&gUnknown_02022C40);
+}
+
+bool32 sub_80180A0(u32 monId, struct TradeUnkStruct *arg1)
+{
+    arg1->field_A = GetMonData(&gPlayerParty[monId], MON_DATA_SPECIES2);
+    arg1->field_C = GetMonData(&gPlayerParty[monId], MON_DATA_LEVEL);
+    arg1->field_4 = GetMonData(&gPlayerParty[monId], MON_DATA_PERSONALITY);
+    if (arg1->field_A == SPECIES_EGG)
+    {
+        return TRUE;
+    }
+    else
+    {
+        return FALSE;
+    }
+}
+
+void sub_80180E8(u32 monId, struct TradeUnkStruct *arg1)
+{
+    arg1->species = GetMonData(&gPlayerParty[monId], MON_DATA_SPECIES2);
+    arg1->level = GetMonData(&gPlayerParty[monId], MON_DATA_LEVEL);
+    arg1->personality = GetMonData(&gPlayerParty[monId], MON_DATA_PERSONALITY);
 }
