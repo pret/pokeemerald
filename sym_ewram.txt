@@ -6,30 +6,7 @@
 	.include "src/string_util.o"
 	.include "src/link.o"
 	.include "src/link_rfu.o"
-
-gUnknown_02022C20: @ 2022C20
-	.space 0xC
-
-gUnknown_02022C2C: @ 2022C2C
-	.space 0x1
-
-gUnknown_02022C2D: @ 2022C2D
-	.space 0x3
-
-gUnknown_02022C30: @ 2022C30
-	.space 0x8
-
-gUnknown_02022C38: @ 2022C38
-	.space 0x4
-
-gUnknown_02022C3C: @ 2022C3C
-	.space 0x2
-
-gUnknown_02022C3E: @ 2022C3E
-	.space 0x2
-
-gUnknown_02022C40: @ 2022C40
-	.space 0x18
+	.include "src/union_room.o"
 
 gUnknown_02022C58: @ 2022C58
 	.space 0x8

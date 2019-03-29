@@ -39,160 +39,17 @@
 #include "field_player_avatar.h"
 #include "strings.h"
 #include "mevent.h"
+#include "rom_8011DC0.h"
 
-struct UnkStruct_Shared
-{
-    struct UnkLinkRfuStruct_02022B14 field_0;
-    u8 needingPadding[2];
-    u8 playerName[PLAYER_NAME_LENGTH + 1];
-};
-
-struct UnkStruct_x1C
-{
-    struct UnkStruct_Shared unk0;
-    u8 unk18:1;
-};
-
-struct UnkStruct_x20
-{
-    struct UnkStruct_Shared unk;
-    u16 field_18;
-    u8 field_1A_0:2;
-    u8 field_1A_1:1;
-    u8 field_1B;
-    u8 field_1D;
-    u8 field_1E;
-    u8 field_1F;
-};
-
-struct UnkStruct_Main0
-{
-    struct UnkStruct_x20 arr[8];
-};
-
-struct UnkStruct_Main4
-{
-    struct UnkStruct_x1C arr[5];
-};
-
-struct UnkStruct_Main8
-{
-    struct UnkStruct_x20 arr[5];
-};
-
-struct UnkStruct_Leader
-{
-    struct UnkStruct_Main0 *field_0;
-    struct UnkStruct_Main4 *field_4;
-    struct UnkStruct_Main8 *field_8;
-    u8 state;
-    u8 textState;
-    u8 field_E;
-    u8 listWindowId;
-    u8 field_10;
-    u8 field_11;
-    u8 listTaskId;
-    u8 field_13;
-    u8 field_14;
-    u8 field_15;
-    u8 field_16;
-    u8 field_17;
-    u8 field_18;
-    u8 field_19;
-    u16 field_1A;
-};
-
-struct UnkStruct_Group
-{
-    struct UnkStruct_Main0 *field_0;
-    struct UnkStruct_Main4 *field_4;
-    u8 state;
-    u8 textState;
-    u8 field_A;
-    u8 listWindowId;
-    u8 field_C;
-    u8 field_D;
-    u8 listTaskId;
-    u8 field_F;
-    u8 field_10;
-    u8 field_11;
-    u8 field_12;
-    u8 field_13;
-    u8 field_14;
-    u8 field_15;
-};
-
-struct UnkStruct_8019BA8
-{
-    u8 field_0;
-    u8 field_1;
-    u8 field_2;
-    u8 field_3;
-};
-
-struct UnkStruct_URoom
-{
-    struct UnkStruct_Main0 *field_0;
-    struct UnkStruct_Main4 *field_4;
-    struct UnkStruct_Main0 *field_8;
-    struct UnkStruct_Main4 *field_C;
-    u16 field_10;
-    u16 field_12;
-    u8 state;
-    u8 stateAfterPrint;
-    u8 textState;
-    u8 field_17;
-    u8 field_18;
-    u8 field_19;
-    u8 field_1A;
-    u8 field_1B;
-    u8 field_1C;
-    u8 field_1D;
-    u8 field_1E;
-    u8 field_1F;
-    u8 field_20;
-    u8 spriteIds[40];
-    u8 field_49;
-    u8 field_4A;
-    u16 field_4C[6];
-    u8 field_58[0x98 - 0x58];
-    u16 field_98;
-    u16 field_9A[3];
-    struct UnkStruct_8019BA8 field_A0[8];
-};
-
-union UnkUnion_Main
-{
-    struct UnkStruct_Leader *leader;
-    struct UnkStruct_Group *group;
-    struct UnkStruct_URoom *uRoom;
-};
-
-struct TradeUnkStruct
-{
-    u16 field_0;
-    u16 field_2;
-    u32 field_4;
-    u8 field_8;
-    u8 field_9;
-    u16 field_A;
-    u16 field_C;
-    u16 species;
-    u16 level;
-    u16 field_12;
-    u32 personality;
-};
-
-extern struct TradeUnkStruct gUnknown_02022C40;
-extern struct UnkLinkRfuStruct_02022B14Substruct gUnknown_02022C38;
-extern union UnkUnion_Main gUnknown_02022C30;
-extern u8 gUnknown_02022C2C;
-extern u8 gUnknown_02022C2D;
-extern u8 gUnknown_02022C3E;
-extern u16 gUnknown_02022C3C;
-extern u8 gUnknown_02022C20[];
-extern u8 gFieldLinkPlayerCount;
-extern u8 gLocalLinkPlayerId;
+EWRAM_DATA u8 gUnknown_02022C20[12] = {};
+EWRAM_DATA u8 gUnknown_02022C2C = 0;
+EWRAM_DATA u8 gUnknown_02022C2D = 0;
+EWRAM_DATA union UnkUnion_Main gUnknown_02022C30 = {};
+EWRAM_DATA u32 gFiller_02022C34 = 0;
+EWRAM_DATA struct UnkLinkRfuStruct_02022B14Substruct gUnknown_02022C38 = {};
+EWRAM_DATA u16 gUnknown_02022C3C = 0;
+EWRAM_DATA u8 gUnknown_02022C3E = 0;
+EWRAM_DATA struct TradeUnkStruct gUnknown_02022C40 = {};
 
 // IWRAM vars
 IWRAM_DATA struct UnkStruct_Leader *gUnknown_03000DA0;
@@ -268,7 +125,7 @@ void sub_801818C(bool32 arg0);
 void sub_801A3D0(u32 arg0, u32 arg1, struct UnkStruct_Main0 *arg2);
 s32 sub_8017178(u8 *arg0, u8 *arg1, u8 *arg2, const struct WindowTemplate *winTemplate, const struct ListMenuTemplate *menuTemplate);
 s32 sub_80172A0(u8 *arg0, u8 *arg1, u8 *arg2, u8 *arg3, const struct WindowTemplate *winTemplate, const struct ListMenuTemplate *menuTemplate, struct UnkStruct_Main0 *arg6);
-s32 sub_8017CB0(struct UnkStruct_Main0 * arg);
+s32 sub_8017CB0(struct UnkStruct_x20 * arg, s32 arg1);
 bool32 sub_8018024(void);
 u32 sub_8017984(s32 arg0);
 void sub_8018220(u8 *unused, struct UnkStruct_URoom *arg1, bool8 arg2);
@@ -1326,7 +1183,7 @@ const u8 gUnknown_082F0530[] = {
 };
 
 // code
-void nullsub_89(void)
+void nullsub_89(u8 taskId)
 {
 
 }
@@ -4692,7 +4549,6 @@ s32 sub_8017178(u8 *arg0, u8 *arg1, u8 *arg2, const struct WindowTemplate *winTe
     return -1;
 }
 
-#ifdef NONMATCHING
 s32 sub_80172A0(u8 *arg0, u8 *arg1, u8 *arg2, u8 *arg3, const struct WindowTemplate *winTemplate, const struct ListMenuTemplate *menuTemplate, struct UnkStruct_Main0 *arg6)
 {
     s32 input;
@@ -4728,7 +4584,7 @@ s32 sub_80172A0(u8 *arg0, u8 *arg1, u8 *arg2, u8 *arg3, const struct WindowTempl
             }
             else
             {
-                r4 = sub_8017CB0(arg6);
+                r4 = sub_8017CB0(arg6->arr, input);
                 if (r4 >= 0)
                 {
                     DestroyListMenuTask(*arg2, NULL, NULL);
@@ -4748,138 +4604,6 @@ s32 sub_80172A0(u8 *arg0, u8 *arg1, u8 *arg2, u8 *arg3, const struct WindowTempl
 
     return -1;
 }
-#else
-NAKED
-s32 sub_80172A0(u8 *arg0, u8 *arg1, u8 *arg2, u8 *arg3, const struct WindowTemplate *winTemplate, const struct ListMenuTemplate *menuTemplate, struct UnkStruct_Main0 *arg6)
-{
-    asm_unified("\tpush {r4-r7,lr}\n"
-                "\tmov r7, r10\n"
-                "\tmov r6, r9\n"
-                "\tmov r5, r8\n"
-                "\tpush {r5-r7}\n"
-                "\tadds r5, r0, 0\n"
-                "\tadds r6, r1, 0\n"
-                "\tmov r10, r2\n"
-                "\tmov r9, r3\n"
-                "\tldrb r4, [r5]\n"
-                "\tcmp r4, 0x1\n"
-                "\tbeq _0801730C\n"
-                "\tcmp r4, 0x1\n"
-                "\tbgt _080172C2\n"
-                "\tcmp r4, 0\n"
-                "\tbeq _080172C8\n"
-                "\tb _0801739C\n"
-                "_080172C2:\n"
-                "\tcmp r4, 0x2\n"
-                "\tbeq _0801731C\n"
-                "\tb _0801739C\n"
-                "_080172C8:\n"
-                "\tldr r0, =gUnknown_082F0344\n"
-                "\tbl sub_8017118\n"
-                "\tmov r1, r9\n"
-                "\tstrb r0, [r1]\n"
-                "\tldr r0, [sp, 0x20]\n"
-                "\tbl AddWindow\n"
-                "\tstrb r0, [r6]\n"
-                "\tldrb r0, [r6]\n"
-                "\tmovs r1, 0\n"
-                "\tbl DrawStdWindowFrame\n"
-                "\tldr r0, =gMultiuseListMenuTemplate\n"
-                "\tadds r2, r0, 0\n"
-                "\tldr r1, [sp, 0x24]\n"
-                "\tldm r1!, {r3,r4,r7}\n"
-                "\tstm r2!, {r3,r4,r7}\n"
-                "\tldm r1!, {r3,r4,r7}\n"
-                "\tstm r2!, {r3,r4,r7}\n"
-                "\tldrb r1, [r6]\n"
-                "\tstrb r1, [r0, 0x10]\n"
-                "\tmovs r1, 0\n"
-                "\tmovs r2, 0x1\n"
-                "\tbl ListMenuInit\n"
-                "\tmov r1, r10\n"
-                "\tstrb r0, [r1]\n"
-                "\tb _08017314\n"
-                "\t.pool\n"
-                "_0801730C:\n"
-                "\tldrb r0, [r6]\n"
-                "\tmovs r1, 0x1\n"
-                "\tbl CopyWindowToVram\n"
-                "_08017314:\n"
-                "\tldrb r0, [r5]\n"
-                "\tadds r0, 0x1\n"
-                "\tstrb r0, [r5]\n"
-                "\tb _0801739C\n"
-                "_0801731C:\n"
-                "\tmov r3, r10\n"
-                "\tldrb r0, [r3]\n"
-                "\tbl ListMenu_ProcessInput\n"
-                "\tadds r1, r0, 0\n"
-                "\tldr r0, =gMain\n"
-                "\tldrh r2, [r0, 0x2E]\n"
-                "\tmovs r0, 0x3\n"
-                "\tands r0, r2\n"
-                "\tcmp r0, 0\n"
-                "\tbeq _0801739C\n"
-                "\tcmp r1, 0x8\n"
-                "\tbeq _0801733E\n"
-                "\tands r4, r2\n"
-                "\tmov r8, r4\n"
-                "\tcmp r4, 0\n"
-                "\tbeq _08017368\n"
-                "_0801733E:\n"
-                "\tmov r4, r10\n"
-                "\tldrb r0, [r4]\n"
-                "\tmovs r1, 0\n"
-                "\tmovs r2, 0\n"
-                "\tbl DestroyListMenuTask\n"
-                "\tldrb r0, [r6]\n"
-                "\tbl RemoveWindow\n"
-                "\tmov r7, r9\n"
-                "\tldrb r0, [r7]\n"
-                "\tbl sub_8017168\n"
-                "\tmovs r0, 0\n"
-                "\tstrb r0, [r5]\n"
-                "\tmovs r0, 0x2\n"
-                "\tnegs r0, r0\n"
-                "\tb _080173A0\n"
-                "\t.pool\n"
-                "_08017368:\n"
-                "\tldr r0, [sp, 0x28]\n"
-                "\tbl sub_8017CB0\n"
-                "\tadds r4, r0, 0\n"
-                "\tcmp r4, 0\n"
-                "\tblt _08017396\n"
-                "\tmov r1, r10\n"
-                "\tldrb r0, [r1]\n"
-                "\tmovs r1, 0\n"
-                "\tmovs r2, 0\n"
-                "\tbl DestroyListMenuTask\n"
-                "\tldrb r0, [r6]\n"
-                "\tbl RemoveWindow\n"
-                "\tmov r3, r9\n"
-                "\tldrb r0, [r3]\n"
-                "\tbl sub_8017168\n"
-                "\tmov r7, r8\n"
-                "\tstrb r7, [r5]\n"
-                "\tadds r0, r4, 0\n"
-                "\tb _080173A0\n"
-                "_08017396:\n"
-                "\tmovs r0, 0x7\n"
-                "\tbl PlaySE\n"
-                "_0801739C:\n"
-                "\tmovs r0, 0x1\n"
-                "\tnegs r0, r0\n"
-                "_080173A0:\n"
-                "\tpop {r3-r5}\n"
-                "\tmov r8, r3\n"
-                "\tmov r9, r4\n"
-                "\tmov r10, r5\n"
-                "\tpop {r4-r7}\n"
-                "\tpop {r1}\n"
-                "\tbx r1");
-}
-#endif
-
 void sub_80173B0(void)
 {
     FillBgTilemapBufferRect(0, 0, 0, 0, 32, 32, 0);
@@ -5211,4 +4935,84 @@ s32 sub_80179D4(struct UnkStruct_Main0 *arg0, u8 arg1, u8 arg2, u32 playerGender
         }
         return 0;
     }
+}
+
+void nullsub_14(u8 windowId, s32 itemId, u8 y)
+{
+
+}
+
+void sub_8017B3C(u8 arg0, u8 arg1, struct UnkLinkRfuStruct_02022B14 * arg2, const u8 * str, u8 arg4)
+{
+    u8 sp8[4];
+    u16 r8 = arg2->species;
+    u8 r7 = arg2->type;
+    u8 r9 = arg2->unk_0b_1;
+
+    sub_80173E0(arg0, 1, str, 8, arg1, arg4);
+    if (r8 == SPECIES_EGG)
+    {
+        sub_80173E0(arg0, 1, gUnknown_082EF7D0, 0x44, arg1, arg4);
+    }
+    else
+    {
+        blit_move_info_icon(arg0, r7 + 1, 0x44, arg1);
+        sub_80173E0(arg0, 1, gSpeciesNames[r8], 0x76, arg1, arg4);
+        ConvertIntToDecimalStringN(sp8, r9, STR_CONV_MODE_RIGHT_ALIGN, 3);
+        sub_80173E0(arg0, 1, sp8, 0xC6, arg1, arg4);
+    }
+}
+
+void sub_8017BE8(u8 windowId, s32 itemId, u8 y)
+{
+    struct UnkStruct_Leader *leader = gUnknown_02022C30.leader;
+    struct UnkLinkRfuStruct_02022B14 *rfu;
+    s32 i, j;
+    u8 sp4[11];
+
+    if (itemId == -3 && y == gUnknown_082F03A4.upText_Y)
+    {
+        rfu = sub_800F7DC();
+        if (rfu->species != SPECIES_NONE)
+        {
+            sub_8017B3C(windowId, y, rfu, gSaveBlock2Ptr->playerName, 5);
+        }
+    }
+    else
+    {
+        j = 0;
+        for (i = 0; i < 8; i++)
+        {
+            if (leader->field_0->arr[i].field_1A_0 == 1 && leader->field_0->arr[i].unk.field_0.species != SPECIES_NONE)
+            {
+                j++;
+            }
+            if (j == itemId + 1)
+            {
+                sub_8018404(sp4, &leader->field_0->arr[i]);
+                sub_8017B3C(windowId, y, &leader->field_0->arr[i].unk.field_0, sp4, 6);
+                break;
+            }
+        }
+    }
+}
+
+s32 sub_8017CB0(struct UnkStruct_x20 * arg, s32 arg1)
+{
+    s32 i;
+    s32 j = 0;
+
+    for (i = 0; i < 8; i++)
+    {
+        if (arg[i].field_1A_0 == 1 && arg[i].unk.field_0.species != SPECIES_NONE)
+        {
+            j++;
+        }
+        if (j == arg1 + 1)
+        {
+            return i;
+        }
+    }
+
+    return -1;
 }
