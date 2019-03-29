@@ -39,6 +39,7 @@
 #include "field_player_avatar.h"
 #include "strings.h"
 #include "mevent.h"
+#include "dynamic_placeholder_text_util.h"
 #include "rom_8011DC0.h"
 
 EWRAM_DATA u8 gUnknown_02022C20[12] = {};
@@ -5092,4 +5093,60 @@ void sub_8017E00(u8 *dst, u8 arg1)
         StringCopy(dst, gUnknown_082EE984[mpId][gender][1]);
         break;
     }
+}
+
+s32 sub_8017EA0(u8 *dst, u32 gender, u16 *arg2, struct UnkStruct_URoom *arg3)
+{
+    s32 result = 0;
+    u16 species = SPECIES_NONE;
+    s32 i;
+
+    switch (arg2[0])
+    {
+    case 0x41:
+        StringExpandPlaceholders(dst, gUnknown_082EE3DC);
+        result = 1;
+        break;
+    case 0x45:
+        StringExpandPlaceholders(dst, gUnknown_082EE430);
+        result = 1;
+        break;
+    case 0x44:
+        ConvertIntToDecimalStringN(arg3->field_58 + 0x00, gUnknown_02022C40.field_C, STR_CONV_MODE_LEFT_ALIGN, 3);
+        StringCopy(arg3->field_58 + 0x10, gSpeciesNames[gUnknown_02022C40.field_A]);
+        for (i = 0; i < 4; i++)
+        {
+            if (gUnknown_03007890->unk_14[i].unk_04 == 2)
+            {
+                ConvertIntToDecimalStringN(arg3->field_58 + 0x20, arg2[2], STR_CONV_MODE_LEFT_ALIGN, 3);
+                StringCopy(arg3->field_58 + 0x30, gSpeciesNames[arg2[1]]);
+                species = arg2[1];
+                break;
+            }
+        }
+        if (species == SPECIES_EGG)
+        {
+            StringCopy(dst, gUnknown_082EE4F0);
+        }
+        else
+        {
+            for (i = 0; i < 4; i++)
+            {
+                DynamicPlaceholderTextUtil_SetPlaceholderPtr(i, arg3->field_58 + 0x10 * i);
+            }
+            DynamicPlaceholderTextUtil_ExpandPlaceholders(dst, gUnknown_082EE47C);
+        }
+        result = 1;
+        break;
+    case 0x48:
+        StringExpandPlaceholders(dst, gUnknown_082EE380);
+        result = 1;
+        break;
+    case 0x40:
+        StringExpandPlaceholders(dst, gUnknown_082EE544);
+        result = 2;
+        break;
+    }
+
+    return result;
 }
