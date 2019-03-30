@@ -4180,11 +4180,11 @@ static void atk49_moveend(void)
 {
     s32 i;
     bool32 effect = FALSE;
-    u8 moveType = 0;
-    u8 holdEffectAtk = 0;
+    u32 moveType = 0;
+    u32 holdEffectAtk = 0;
     u16 *choicedMoveAtk = NULL;
-    u8 arg1, arg2;
-    u16 originallyUsedMove;
+    u32 arg1, arg2;
+    u32 originallyUsedMove;
 
     if (gChosenMove == 0xFFFF)
         originallyUsedMove = 0;
@@ -4194,11 +4194,7 @@ static void atk49_moveend(void)
     arg1 = gBattlescriptCurrInstr[1];
     arg2 = gBattlescriptCurrInstr[2];
 
-    if (gBattleMons[gBattlerAttacker].item == ITEM_ENIGMA_BERRY)
-        holdEffectAtk = gEnigmaBerries[gBattlerAttacker].holdEffect;
-    else
-        holdEffectAtk = ItemId_GetHoldEffect(gBattleMons[gBattlerAttacker].item);
-
+    holdEffectAtk = GetBattlerHoldEffect(gBattlerAttacker, TRUE);
     choicedMoveAtk = &gBattleStruct->choicedMove[gBattlerAttacker];
     GET_MOVE_TYPE(gCurrentMove, moveType);
 
@@ -4207,19 +4203,18 @@ static void atk49_moveend(void)
         switch (gBattleScripting.atk49_state)
         {
         case ATK49_SPIKY_SHIELD:
-            if (gProtectStructs[gBattlerTarget].spikyShielded && gBattleMoves[gCurrentMove].flags & FLAG_MAKES_CONTACT)
+            if (gProtectStructs[gBattlerTarget].spikyShielded
+                && gBattleMoves[gCurrentMove].flags & FLAG_MAKES_CONTACT
+                && GetBattlerAbility(gBattlerAttacker) != ABILITY_MAGIC_GUARD)
             {
-                if (!(GetBattlerAbility(gBattlerAttacker) == ABILITY_MAGIC_GUARD))
-                {
-                    gMoveResultFlags &= ~(MOVE_RESULT_NO_EFFECT);
-                    gBattleMoveDamage = gBattleMons[gBattlerAttacker].maxHP / 8;
-                    if (gBattleMoveDamage == 0)
-                        gBattleMoveDamage = 1;
-                    PREPARE_MOVE_BUFFER(gBattleTextBuff1, MOVE_SPIKY_SHIELD);
-                    BattleScriptPushCursor();
-                    gBattlescriptCurrInstr = BattleScript_SpikyShieldEffect;
-                    effect = 1;
-                }
+                gMoveResultFlags &= ~(MOVE_RESULT_NO_EFFECT);
+                gBattleMoveDamage = gBattleMons[gBattlerAttacker].maxHP / 8;
+                if (gBattleMoveDamage == 0)
+                    gBattleMoveDamage = 1;
+                PREPARE_MOVE_BUFFER(gBattleTextBuff1, MOVE_SPIKY_SHIELD);
+                BattleScriptPushCursor();
+                gBattlescriptCurrInstr = BattleScript_SpikyShieldEffect;
+                effect = 1;
             }
             gBattleScripting.atk49_state++;
             break;
@@ -9994,7 +9989,7 @@ static void atkD0_settaunt(void)
         u8 turns = 4;
         if (GetBattlerTurnOrderNum(gBattlerTarget) > GetBattlerTurnOrderNum(gBattlerAttacker))
             turns--; // If the target hasn't yet moved this turn, Taunt lasts for only three turns (source: Bulbapedia)
-        
+
         gDisableStructs[gBattlerTarget].tauntTimer = gDisableStructs[gBattlerTarget].tauntTimer2 = turns;
         gBattlescriptCurrInstr += 5;
     }
