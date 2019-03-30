@@ -4,7 +4,7 @@
 #include "ereader_helpers.h"
 #include "link.h"
 #include "main.h"
-#include "rom_8011DC0.h"
+#include "union_room.h"
 #include "save.h"
 #include "sprite.h"
 #include "task.h"

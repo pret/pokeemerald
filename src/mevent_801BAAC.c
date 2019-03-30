@@ -13,6 +13,7 @@
 #include "string_util.h"
 #include "link_rfu.h"
 #include "mevent.h"
+#include "mystery_gift.h"
 
 struct UnkStruct_8467FB8
 {

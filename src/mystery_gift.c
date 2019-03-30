@@ -8,16 +8,24 @@
 #include "text_window.h"
 #include "bg.h"
 #include "window.h"
+#include "strings.h"
 #include "text_window.h"
 #include "menu.h"
 #include "palette.h"
 #include "constants/songs.h"
 #include "sound.h"
 #include "mystery_gift.h"
+#include "union_room.h"
+#include "title_screen.h"
+#include "ereader_screen.h"
+#include "international_string_util.h"
+#include "list_menu.h"
 
 void bgid_upload_textbox_1(u8 bgId);
-void sub_8018798(u8);
-void sub_80186EC(u8, u8);
+void task_add_00_mystery_gift(void);
+
+EWRAM_DATA u8 gUnknown_02022C58 = 0;
+EWRAM_DATA u8 gUnknown_02022C59 = 0;
 
 const u16 gUnkTextboxBorderPal[] = INCBIN_U16("graphics/interface/unk_textbox_border.gbapal");
 const u32 gUnkTextboxBorderGfx[] = INCBIN_U32("graphics/interface/unk_textbox_border.4bpp.lz");
@@ -168,6 +176,158 @@ const struct WindowTemplate gUnknown_082F0600 = {
     .baseBlock = 0x0155
 };
 
+const struct ListMenuItem gUnknown_082F0608[] = {
+    { gText_WonderCards,  0 },
+    { gText_WonderNews,   1 },
+    { gText_Exit3,       -2 }
+};
+
+const struct ListMenuItem gUnknown_082F0620[] = {
+    { gText_WirelessCommunication,  0 },
+    { gText_Friend2,                1 },
+    { gText_Cancel2,               -2 }
+};
+
+const struct ListMenuTemplate gUnknown_082F0638 = {
+    .items = NULL,
+    .moveCursorFunc = ListMenuDefaultCursorMoveFunc,
+    .itemPrintFunc = NULL,
+    .totalItems = 3,
+    .maxShowed = 3,
+    .windowId = 0,
+    .header_X = 0,
+    .item_X = 8,
+    .cursor_X = 0,
+    .upText_Y = 1,
+    .cursorPal = 2,
+    .fillValue = 1,
+    .cursorShadowPal = 3,
+    .lettersSpacing = 0,
+    .itemVerticalPadding = 0,
+    .scrollMultiple = 0,
+    .fontId = 1,
+    .cursorKind = 0
+};
+
+const struct ListMenuItem gUnknown_082F0650[] = {
+    { gText_Receive,  0 },
+    { gText_Send,     1 },
+    { gText_Toss,     2 },
+    { gText_Cancel2, -2 }
+};
+
+const struct ListMenuItem gUnknown_082F0670[] = {
+    { gText_Receive,  0 },
+    { gText_Toss,     2 },
+    { gText_Cancel2, -2 }
+};
+
+const struct ListMenuItem gUnknown_082F0688[] = {
+    { gText_Receive,  0 },
+    { gText_Send,     1 },
+    { gText_Cancel2, -2 }
+};
+
+const struct ListMenuItem gUnknown_082F06A0[] = {
+    { gText_Receive,  0 },
+    { gText_Cancel2, -2 }
+};
+
+const struct ListMenuTemplate gUnknown_082F06B0 = {
+    .items = gUnknown_082F0650,
+    .moveCursorFunc = ListMenuDefaultCursorMoveFunc,
+    .itemPrintFunc = NULL,
+    .totalItems = 4,
+    .maxShowed = 4,
+    .windowId = 0,
+    .header_X = 0,
+    .item_X = 8,
+    .cursor_X = 0,
+    .upText_Y = 1,
+    .cursorPal = 2,
+    .fillValue = 1,
+    .cursorShadowPal = 3,
+    .lettersSpacing = 0,
+    .itemVerticalPadding = 0,
+    .scrollMultiple = 0,
+    .fontId = 1,
+    .cursorKind = 0
+};
+
+const struct ListMenuTemplate gUnknown_082F06C8 = {
+    .items = gUnknown_082F0670,
+    .moveCursorFunc = ListMenuDefaultCursorMoveFunc,
+    .itemPrintFunc = NULL,
+    .totalItems = 3,
+    .maxShowed = 3,
+    .windowId = 0,
+    .header_X = 0,
+    .item_X = 8,
+    .cursor_X = 0,
+    .upText_Y = 1,
+    .cursorPal = 2,
+    .fillValue = 1,
+    .cursorShadowPal = 3,
+    .lettersSpacing = 0,
+    .itemVerticalPadding = 0,
+    .scrollMultiple = 0,
+    .fontId = 1,
+    .cursorKind = 0
+};
+
+const struct ListMenuTemplate gUnknown_082F06E0 = {
+    .items = gUnknown_082F0688,
+    .moveCursorFunc = ListMenuDefaultCursorMoveFunc,
+    .itemPrintFunc = NULL,
+    .totalItems = 3,
+    .maxShowed = 3,
+    .windowId = 0,
+    .header_X = 0,
+    .item_X = 8,
+    .cursor_X = 0,
+    .upText_Y = 1,
+    .cursorPal = 2,
+    .fillValue = 1,
+    .cursorShadowPal = 3,
+    .lettersSpacing = 0,
+    .itemVerticalPadding = 0,
+    .scrollMultiple = 0,
+    .fontId = 1,
+    .cursorKind = 0
+};
+
+const struct ListMenuTemplate gUnknown_082F06F8 = {
+    .items = gUnknown_082F06A0,
+    .moveCursorFunc = ListMenuDefaultCursorMoveFunc,
+    .itemPrintFunc = NULL,
+    .totalItems = 2,
+    .maxShowed = 2,
+    .windowId = 0,
+    .header_X = 0,
+    .item_X = 8,
+    .cursor_X = 0,
+    .upText_Y = 1,
+    .cursorPal = 2,
+    .fillValue = 1,
+    .cursorShadowPal = 3,
+    .lettersSpacing = 0,
+    .itemVerticalPadding = 0,
+    .scrollMultiple = 0,
+    .fontId = 1,
+    .cursorKind = 0
+};
+
+const u8 *const Unref_082F0710[] = {
+    gText_VarietyOfEventsImportedWireless,
+    gText_WonderCardsInPossession,
+    gText_ReadNewsThatArrived,
+    gText_ReturnToTitle
+};
+
+ALIGNED(2) const u8 gUnknown_082F0720[] = { 0, 1, 2 };
+ALIGNED(2) const u8 gUnknown_082F0724[] = { 0, 1, 2 };
+ALIGNED(2) const u8 gUnknown_082F0728[] = { 1, 2, 3 };
+
 void sub_8018424(void)
 {
     ProcessSpriteCopyRequests();
@@ -250,4 +410,85 @@ bool32 sub_8018450(s32 arg)
     }
 
     return FALSE;
+}
+
+void c2_mystery_gift(void)
+{
+    if (sub_8018450(0))
+    {
+        SetMainCallback2(sub_8018438);
+        gUnknown_02022C60 = FALSE;
+        task_add_00_mystery_gift();
+    }
+    RunTasks();
+}
+
+void sub_801867C(void)
+{
+    if (sub_8018450(1))
+    {
+        SetMainCallback2(sub_8018438);
+        gUnknown_02022C60 = TRUE;
+        sub_81D5014();
+    }
+}
+
+void sub_80186A4(void)
+{
+    gUnknown_02022C60 = FALSE;
+    FreeAllWindowBuffers();
+    Free(GetBgTilemapBuffer(0));
+    Free(GetBgTilemapBuffer(1));
+    Free(GetBgTilemapBuffer(2));
+    Free(GetBgTilemapBuffer(3));
+    SetMainCallback2(CB2_InitTitleScreen);
+}
+
+void sub_80186EC(bool8 isJapanese, bool32 usePickOkCancel)
+{
+    const u8 * header;
+    const u8 * options;
+    FillWindowPixelBuffer(0, 0);
+    if (!isJapanese)
+    {
+        header = gText_MysteryGift;
+        options = !usePickOkCancel ? gText_PickOKExit : gText_PickOKCancel;
+    }
+    else
+    {
+        header = gJPText_MysteryGift;
+        options = gJPText_DecideStop;
+    }
+
+    AddTextPrinterParameterized4(0, 1, 4, 1, 0, 0, gUnknown_082F0720, -1, header);
+    AddTextPrinterParameterized4(0, 0, GetStringRightAlignXOffset(0, options, 0xDE), 1, 0, 0, gUnknown_082F0720, -1, options);
+    CopyWindowToVram(0, 2);
+    PutWindowTilemap(0);
+}
+
+void sub_8018784(u8 windowId)
+{
+    sub_8098858(windowId, 0x01, 0xF);
+}
+
+void sub_8018798(u32 bg)
+{
+    s32 i = 0, j;
+
+    FillBgTilemapBufferRect(bg, 0x003, 0, 0, 32, 2, 0x11);
+
+    for (i = 0; i < 18; i++)
+    {
+        for (j = 0; j < 32; j++)
+        {
+            if ((i & 1) != (j & 1))
+            {
+                FillBgTilemapBufferRect(bg, 1, j, i + 2, 1, 1, 0x11);
+            }
+            else
+            {
+                FillBgTilemapBufferRect(bg, 2, j, i + 2, 1, 1, 0x11);
+            }
+        }
+    }
 }

@@ -11,13 +11,13 @@
 #include "overworld.h"
 #include "random.h"
 #include "palette.h"
-#include "rom_8011DC0.h"
+#include "union_room.h"
 #include "string_util.h"
 #include "task.h"
 #include "text.h"
 #include "constants/species.h"
 #include "save.h"
-#include "rom_8011DC0.h"
+#include "mystery_gift.h"
 
 extern u16 gHeldKeyCodeToSend;
 
