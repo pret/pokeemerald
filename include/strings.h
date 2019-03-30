@@ -2592,4 +2592,18 @@ extern const u8 gUnknown_085EE154[];
 // Berry Powder Menu
 extern const u8 gText_Powder[];
 
+// Union Room Chat
+extern const u8 gText_F700JoinedChat[];
+extern const u8 gText_F700LeftChat[];
+extern const u8 gText_Hello[];
+extern const u8 gText_Pokemon2[];
+extern const u8 gText_Trade[];
+extern const u8 gText_Battle[];
+extern const u8 gText_Lets[];
+extern const u8 gText_Ok[];
+extern const u8 gText_Sorry[];
+extern const u8 gText_YayUnkF9F9[];
+extern const u8 gText_ThankYou[];
+extern const u8 gText_ByeBye[];
+
 #endif // GUARD_STRINGS_H
