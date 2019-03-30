@@ -6362,6 +6362,15 @@ BattleScript_RoughSkinActivates::
 	tryfaintmon BS_ATTACKER, FALSE, NULL
 	return
 
+BattleScript_SpikyShieldEffect::
+	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE | HITMARKER_x100000
+	healthbarupdate BS_ATTACKER
+	datahpupdate BS_ATTACKER
+	printstring STRINGID_PKMNHURTSWITH
+	waitmessage 0x40
+	tryfaintmon BS_ATTACKER, FALSE, NULL
+	return
+
 BattleScript_CuteCharmActivates::
 	call BattleScript_AbilityPopUp
 	status2animation BS_ATTACKER, STATUS2_INFATUATION
