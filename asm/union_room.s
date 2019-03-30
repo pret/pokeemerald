@@ -5,8 +5,6 @@
 
 	.text
 
-    @ file boundary?
-
 	thumb_func_start sub_8018424
 sub_8018424: @ 8018424
 	push {lr}

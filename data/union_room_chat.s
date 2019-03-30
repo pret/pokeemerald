@@ -4,23 +4,6 @@
 	.section .rodata
 
 	.align 2
-gUnknown_082F2A7C:: @ 82F2A7C
-	.4byte sub_801DFAC
-	.4byte sub_801E030
-	.4byte sub_801E120
-	.4byte sub_801E240
-	.4byte sub_801E764
-	.4byte sub_801E838
-	.4byte sub_801E460
-	.4byte sub_801E5C4
-	.4byte sub_801E668
-	.4byte sub_801E978
-
-	.align 2
-gUnknown_082F2AA4:: @ 82F2AA4
-	.byte 0x09, 0x09, 0x09, 0x09
-
-	.align 2
 gUnknown_082F2AA8:: @ 82F2AA8
 	.byte 0x00, 0x16, 0x17, 0x68, 0x19, 0x1a, 0x1b, 0x1c
 	.byte 0x1d, 0x1e, 0x00, 0x20, 0x21, 0x22, 0x23, 0x24
@@ -57,36 +40,9 @@ gUnknown_082F2AA8:: @ 82F2AA8
 
 	.align 2
 gUnknown_082F2BA8:: @ 82F2BA8
-	.4byte gUnknown_0862B9F9
-	.4byte gUnknown_0862B9FF
-	.4byte gUnknown_0862BA05
-	.4byte gUnknown_0862BA0B
-	.4byte gUnknown_0862BA11
-	.4byte gUnknown_0862BA17
-	.4byte gUnknown_0862BA1D
-	.4byte gUnknown_0862BA23
-	.4byte gUnknown_0862BA29
-	.4byte gUnknown_0862BA2F
-	.4byte gUnknown_0862BA35
-	.4byte gUnknown_0862BA3B
-	.4byte gUnknown_0862BA41
-	.4byte gUnknown_0862BA47
-	.4byte gUnknown_0862BA4D
-	.4byte gUnknown_0862BA53
-	.4byte gUnknown_0862BA59
-	.4byte gUnknown_0862BA5F
-	.4byte gUnknown_0862BA65
-	.4byte gUnknown_0862BA6B
-	.4byte gUnknown_0862BA79
-	.4byte gUnknown_0862BA84
-	.4byte gUnknown_0862BA8F
-	.4byte gUnknown_0862BA9A
-	.4byte gUnknown_0862BAA3
-	.4byte gUnknown_0862BAAE
-	.4byte gUnknown_0862BAB9
-	.4byte gUnknown_0862BAC4
-	.4byte gUnknown_0862BACF
-	.4byte gUnknown_0862BADA
+	.4byte gUnknown_0862B9F9, gUnknown_0862B9FF, gUnknown_0862BA05, gUnknown_0862BA0B, gUnknown_0862BA11, gUnknown_0862BA17, gUnknown_0862BA1D, gUnknown_0862BA23, gUnknown_0862BA29, gUnknown_0862BA2F
+	.4byte gUnknown_0862BA35, gUnknown_0862BA3B, gUnknown_0862BA41, gUnknown_0862BA47, gUnknown_0862BA4D, gUnknown_0862BA53, gUnknown_0862BA59, gUnknown_0862BA5F, gUnknown_0862BA65, gUnknown_0862BA6B
+	.4byte gUnknown_0862BA79, gUnknown_0862BA84, gUnknown_0862BA8F, gUnknown_0862BA9A, gUnknown_0862BAA3, gUnknown_0862BAAE, gUnknown_0862BAB9, gUnknown_0862BAC4, gUnknown_0862BACF, gUnknown_0862BADA
 
 	.align 2
 gUnknown_082F2C20:: @ 82F2C20

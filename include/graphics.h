@@ -4908,4 +4908,13 @@ extern const u16 gEasyChatRightWindow_Pal[];
 // Use Pokeblock
 extern const u32 gUsePokeblockCondition_Gfx[];
 
+// Union Room Chat
+extern const u16 gUnknown_08DD4BB0[];
+extern const u16 gUnknown_08DD4BD0[];
+extern const u32 gUnknown_08DD4BF0[];
+extern const u32 gUnknown_08DD4C4C[];
+extern const u16 gLinkMiscMenu_Pal[];
+extern const u32 gLinkMiscMenu_Gfx[];
+extern const u32 gLinkMiscMenu_Tilemap[];
+
 #endif //GUARD_GRAPHICS_H
