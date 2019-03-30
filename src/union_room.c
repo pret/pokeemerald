@@ -5383,3 +5383,9 @@ void sub_8018220(u8 *unused, struct UnkStruct_URoom *arg1, bool8 arg2)
         StringAppend(gStringVar4, arg1->field_1A4);
     }
 }
+
+void sub_8018404(u8 *dest, struct UnkStruct_x20 *arg1)
+{
+    StringCopy7(dest, arg1->unk.playerName);
+    ConvertInternationalString(dest, arg1->unk.field_0.unk_00.unk_00_0);
+}

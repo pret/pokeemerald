@@ -5,23 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_8018404
-sub_8018404: @ 8018404
-	push {r4,r5,lr}
-	adds r5, r0, 0
-	adds r4, r1, 0
-	adds r1, 0x10
-	bl StringCopy7
-	ldrb r1, [r4]
-	lsls r1, 28
-	lsrs r1, 28
-	adds r0, r5, 0
-	bl ConvertInternationalString
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_8018404
-
     @ file boundary?
 
 	thumb_func_start sub_8018424
