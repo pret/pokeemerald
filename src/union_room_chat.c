@@ -1,7 +1,11 @@
 #include "global.h"
 #include "alloc.h"
 #include "bg.h"
+#include "decompress.h"
+#include "dma3.h"
 #include "dynamic_placeholder_text_util.h"
+#include "gpu_regs.h"
+#include "graphics.h"
 #include "link.h"
 #include "link_rfu.h"
 #include "load_save.h"
@@ -66,8 +70,24 @@ struct UnionRoomChat2
     u16 unk1A;
     u16 unk1C;
     u16 unk1E;
-    u8 filler20[0x2];
-    u8 unk22[0x2146];
+    s16 unk20;
+    u8 unk22[0x106];
+    u8 unk128[BG_SCREEN_SIZE];
+    u8 unk928[BG_SCREEN_SIZE];
+    u8 unk1128[BG_SCREEN_SIZE];
+    u8 unk1928[BG_SCREEN_SIZE];
+    u8 unk2128[0x20];
+    u8 unk2148[0x20];
+};
+
+struct UnionRoomChat3
+{
+    struct Sprite *unk0;
+    struct Sprite *unk4;
+    struct Sprite *unk8;
+    struct Sprite *unkC;
+    struct Sprite *unk10;
+    u16 unk14;
 };
 
 struct Unk82F2C98
@@ -113,14 +133,14 @@ static void sub_801EDE0(void);
 static void sub_801EE10(void);
 static void sub_801EE2C(void);
 static u8 *sub_801EE84(void);
-u8 *sub_801EEA8(void);
+static u8 *sub_801EEA8(void);
 static void sub_801EF1C(u8 *);
 static void sub_801EF24(u8 *);
 static void sub_801EF4C(u8 *);
 static void sub_801EF7C(u8 *);
 static void sub_801EFA8(u8 *);
 static void sub_801EFD0(u8 *);
-u8 *sub_801F114(void);
+static u8 *sub_801F114(void);
 static void sub_801F2B4(u8 taskId);
 static bool8 sub_801F4D0(void);
 static bool32 sub_801F534(void);
@@ -129,33 +149,33 @@ static void sub_801F5B8(void);
 static void sub_801F5EC(u16, u8);
 static bool8 sub_801F644(u8);
 static s8 sub_801FF08(void);
-bool32 sub_8020890(void);
-void sub_8020770(void);
+static bool32 sub_8020890(void);
+static void sub_8020770(void);
 static void sub_801F574(struct UnionRoomChat2 *);
 static void sub_801F580(void);
-void sub_80208D0(void);
+static void sub_80208D0(void);
 static bool32 sub_801FDD8(u8 *);
-void sub_8020480(void);
-void sub_8020538(void);
-void sub_8020584(void);
-void sub_80205B4(void);
-void task_tutorial_story_unknown(void);
-void sub_8020680(void);
-void sub_80206A4(void);
-void sub_80206D0(void);
-void sub_8020740(void);
-void sub_80206E8(void);
-void sub_80208E8(void);
-void sub_8020A68(void);
-void sub_8020B20(void);
-void sub_80203B0(void);
-void sub_802040C(void);
-void sub_802091C(int);
-bool32 sub_8020320(void);
-void sub_80201A4(void);
-bool32 sub_8020368(void);
-void sub_802093C(void);
-void sub_8020B80(void);
+static void sub_8020480(void);
+static void sub_8020538(void);
+static void sub_8020584(void);
+static void sub_80205B4(void);
+static void sub_8020604(void);
+static void sub_8020680(void);
+static void sub_80206A4(void);
+static void sub_80206D0(void);
+static void sub_8020740(void);
+static void sub_80206E8(void);
+static void sub_80208E8(void);
+static void sub_8020A68(void);
+static void sub_8020B20(void);
+static void sub_80203B0(void);
+static void sub_802040C(void);
+static void sub_802091C(bool32);
+static bool32 sub_8020320(void);
+static void sub_80201A4(void);
+static bool32 sub_8020368(void);
+static void sub_802093C(void);
+static void sub_8020B80(void);
 static void sub_801FF18(int, u16);
 static void sub_801FDDC(u8, u8, u8);
 static void sub_8020094(void);
@@ -164,13 +184,16 @@ static void sub_80200C8(void);
 static void sub_801FEE4(void);
 static void sub_80200EC(u16, u16, u8);
 static void sub_8020118(u16, u8 *, u8, u8, u8);
-void sub_80209AC(int);
-void sub_8020420(u16, u8 *, u8);
-void sub_80209E0(void);
-bool32 sub_8020A1C(void);
+static void sub_80209AC(int);
+static void sub_8020420(u16, u8 *, u8);
+static void sub_80209E0(void);
+static bool32 sub_8020A1C(void);
+static void sub_80207C0(s16);
+static void sub_8020818(s16);
 
 extern struct UnionRoomChat *gUnknown_02022C84;
 extern struct UnionRoomChat2 *gUnknown_02022C88;
+extern struct UnionRoomChat3 *gUnknown_02022C8C;
 
 extern const u8 *const gUnknown_082F2BA8[][10];
 extern const u8 gUnknown_082F2AA8[];
@@ -178,6 +201,18 @@ extern const struct BgTemplate gUnknown_082F2C60[4];
 extern const struct WindowTemplate gUnknown_082F2C70[];
 extern const struct Unk82F2C98 gUnknown_082F2C98[];
 extern const struct Unk82F2D40 gUnknown_082F2D40[];
+extern const u8 gText_Ellipsis[];
+extern const struct MenuAction gUnknown_082F2DC8[];
+extern const u16 gUnknown_082F2C20[];
+extern const u16 gUnknown_082F2C40[];
+extern const struct CompressedSpriteSheet gUnknown_082F3134[];
+extern const struct SpritePalette gUnknown_082F315C;
+extern const struct SpriteTemplate gUnknown_082F319C;
+extern const u16 gUnknown_082F2DF0[];
+extern const struct SpriteTemplate gUnknown_082F31BC;
+extern const struct SpriteTemplate gUnknown_082F31D4;
+extern const struct SpriteTemplate gUnknown_082F322C;
+extern const struct SpriteTemplate gUnknown_082F3244;
 
 
 void sub_801DD98(void)
@@ -1065,7 +1100,7 @@ static void sub_801EE2C(void)
         StringCopy(gSaveBlock1Ptr->unk3C88[i], gUnknown_02022C84->unkB9[i]);
 }
 
-u8 *sub_801EE6C(int arg0)
+static u8 *sub_801EE6C(int arg0)
 {
     return gUnknown_02022C84->unkB9[arg0];
 }
@@ -1079,7 +1114,7 @@ static u8 *sub_801EE84(void)
     return str;
 }
 
-u8 *sub_801EEA8(void)
+static u8 *sub_801EEA8(void)
 {
     u8 *str = gUnknown_02022C84->unk1A;
     u8 *str2 = str;
@@ -1094,7 +1129,7 @@ u8 *sub_801EEA8(void)
     return str2;
 }
 
-u16 sub_801EED8(void)
+static u16 sub_801EED8(void)
 {
     u8 *str;
     u32 i, numChars, strLength;
@@ -1159,7 +1194,7 @@ static void sub_801EFD0(u8 *arg0)
     arg0[1 + (PLAYER_NAME_LENGTH + 1)] = gUnknown_02022C84->unk13;
 }
 
-bool32 sub_801EFF8(u8 *arg0, u8 *arg1)
+static bool32 sub_801EFF8(u8 *arg0, u8 *arg1)
 {
     u8 *tempStr;
     u8 var0 = *arg1;
@@ -1203,12 +1238,12 @@ bool32 sub_801EFF8(u8 *arg0, u8 *arg1)
     return FALSE;
 }
 
-u8 sub_801F0B0(void)
+static u8 sub_801F0B0(void)
 {
     return gUnknown_02022C84->unk10;
 }
 
-void sub_801F0BC(u8 *arg0, u8 *arg1)
+static void sub_801F0BC(u8 *arg0, u8 *arg1)
 {
     *arg0 = gUnknown_02022C84->unk11;
     *arg1 = gUnknown_02022C84->unk12;
@@ -1219,13 +1254,13 @@ static u8 *sub_801F0D0(void)
     return gUnknown_02022C84->unk1A;
 }
 
-int sub_801F0DC(void)
+static int sub_801F0DC(void)
 {
     u8 *str = sub_801F0D0();
     return StringLength_Multibyte(str);
 }
 
-void sub_801F0EC(u32 *arg0, u32 *arg1)
+static void sub_801F0EC(u32 *arg0, u32 *arg1)
 {
     int diff = gUnknown_02022C84->unk15 - gUnknown_02022C84->unk14;
     if (diff < 0)
@@ -1241,7 +1276,7 @@ void sub_801F0EC(u32 *arg0, u32 *arg1)
     *arg1 = diff;
 }
 
-u8 *sub_801F114(void)
+static u8 *sub_801F114(void)
 {
     int i;
     u16 numChars = sub_801EED8();
@@ -1257,7 +1292,7 @@ u8 *sub_801F114(void)
     return str;
 }
 
-u16 sub_801F144(void)
+static u16 sub_801F144(void)
 {
     u16 count;
     u32 i;
@@ -1274,22 +1309,22 @@ u16 sub_801F144(void)
     return count;
 }
 
-u8 *sub_801F180(void)
+static u8 *sub_801F180(void)
 {
     return gUnknown_02022C84->unk39;
 }
 
-u8 sub_801F18C(void)
+static u8 sub_801F18C(void)
 {
     return gUnknown_02022C84->unk16;
 }
 
-int sub_801F198(void)
+static int sub_801F198(void)
 {
     return gUnknown_02022C84->unk15;
 }
 
-int sub_801F1A4(void)
+static int sub_801F1A4(void)
 {
     u8 *str = sub_801EEA8();
     u32 character = *str;
@@ -1299,7 +1334,7 @@ int sub_801F1A4(void)
         return 0;
 }
 
-u8 *sub_801F1D0(void)
+static u8 *sub_801F1D0(void)
 {
     return gUnknown_02022C84->unk79;
 }
@@ -1540,7 +1575,7 @@ bool32 sub_801F658(u8 *state)
         sub_80205B4();
         break;
     case 3:
-        task_tutorial_story_unknown();
+        sub_8020604();
         break;
     case 4:
         sub_8020680();
@@ -1604,7 +1639,7 @@ bool32 sub_801F768(u8 *state)
     switch (*state)
     {
     case 0:
-        sub_802091C(1);
+        sub_802091C(TRUE);
         if (sub_8020320())
             return TRUE;
 
@@ -1620,7 +1655,7 @@ bool32 sub_801F768(u8 *state)
             return TRUE;
 
         sub_802093C();
-        sub_802091C(0);
+        sub_802091C(FALSE);
         sub_8020B80();
         return FALSE;
     }
@@ -2176,4 +2211,420 @@ static void sub_8020118(u16 x, u8 *str, u8 fillValue, u8 arg3, u8 arg4)
     str2[2] = 8;
     StringCopy(&str2[3], str);
     AddTextPrinterParameterized3(1, 2, x * 8, 1, sp, TEXT_SPEED_FF, str2);
+}
+
+static void sub_80201A4(void)
+{
+    u8 var0;
+    int i;
+    int var1;
+    u16 left;
+    u16 top;
+    u8 sp[52];
+    u8 *str;
+    u8 *str2;
+
+    FillWindowPixelBuffer(2, PIXEL_FILL(15));
+    var0 = sub_801F0B0();
+    sp[0] = 0;
+    sp[1] = 14;
+    sp[2] = 13;
+    if (var0 != 3)
+    {
+        str = &sp[4];
+        str[0] = EXT_CTRL_CODE_BEGIN;
+        str[1] = EXT_CTRL_CODE_MIN_LETTER_SPACING;
+        var1 = 8;
+        str[2] = var1;
+        left = var1;
+        if (var0 == 2)
+            left = 6;
+
+        for (i = 0, top = 0; i < 10; i++, top += 12)
+        {
+            if (!gUnknown_082F2BA8[var0][i])
+                return;
+
+            StringCopy(&sp[7], gUnknown_082F2BA8[var0][i]);
+            AddTextPrinterParameterized3(2, 0, left, top, sp, TEXT_SPEED_FF, &sp[4]);
+        }
+    }
+    else
+    {
+        left = 4;
+        for (i = 0, top = 0; i < 10; i++, top += 12)
+        {
+            str2 = sub_801EE6C(i);
+            if (GetStringWidth(0, str2, 0) <= 40)
+            {
+                AddTextPrinterParameterized3(2, 0, left, top, sp, TEXT_SPEED_FF, str2);
+            }
+            else
+            {
+                int length = StringLength_Multibyte(str2);
+                do
+                {
+                    length--;
+                    StringCopyN_Multibyte(&sp[4], str2, length);
+                } while (GetStringWidth(0, &sp[4], 0) > 35);
+
+                AddTextPrinterParameterized3(2, 0, left, top, sp, TEXT_SPEED_FF, &sp[4]);
+                AddTextPrinterParameterized3(2, 0, left + 35, top, sp, TEXT_SPEED_FF, gText_Ellipsis);
+            }
+        }
+    }
+}
+
+static bool32 sub_8020320(void)
+{
+    if (gUnknown_02022C88->unk20 < 56)
+    {
+        gUnknown_02022C88->unk20 += 12;
+        if (gUnknown_02022C88->unk20 >= 56)
+            gUnknown_02022C88->unk20 = 56;
+
+        if (gUnknown_02022C88->unk20 < 56)
+        {
+            sub_80207C0(gUnknown_02022C88->unk20);
+            return TRUE;
+        }
+    }
+
+    sub_8020818(gUnknown_02022C88->unk20);
+    return FALSE;
+}
+
+static bool32 sub_8020368(void)
+{
+    if (gUnknown_02022C88->unk20 > 0)
+    {
+        gUnknown_02022C88->unk20 -= 12;
+        if (gUnknown_02022C88->unk20 <= 0)
+            gUnknown_02022C88->unk20 = 0;
+
+        if (gUnknown_02022C88->unk20 > 0)
+        {
+            sub_80207C0(gUnknown_02022C88->unk20);
+            return TRUE;
+        }
+    }
+
+    sub_8020818(gUnknown_02022C88->unk20);
+    return FALSE;
+}
+
+static void sub_80203B0(void)
+{
+    FillWindowPixelBuffer(3, PIXEL_FILL(1));
+    sub_8098858(3, 1, 13);
+    PrintTextArray(3, 2, 8, 1, 14, 5, gUnknown_082F2DC8);
+    sub_81983AC(3, 2, 0, 1, 14, 5, sub_801F0B0());
+    PutWindowTilemap(3);
+}
+
+static void sub_802040C(void)
+{
+    ClearStdWindowAndFrameToTransparent(3, FALSE);
+    ClearWindowTilemap(3);
+}
+
+static void sub_8020420(u16 row, u8 *str, u8 arg2)
+{
+    u8 color[3];
+    color[0] = 1;
+    color[1] = arg2 * 2 + 2;
+    color[2] = arg2 * 2 + 3;
+    FillWindowPixelRect(0, PIXEL_FILL(1), 0, row * 15, 168, 15);
+    AddTextPrinterParameterized3(0, 2, 0, row * 15 + 1, color, TEXT_SPEED_FF, str);
+}
+
+static void sub_8020480(void)
+{
+    ChangeBgX(0, 0, 0);
+    ChangeBgY(0, 0, 0);
+    ChangeBgX(1, 0, 0);
+    ChangeBgY(1, 0, 0);
+    ChangeBgX(2, 0, 0);
+    ChangeBgY(2, 0, 0);
+    ChangeBgX(3, 0, 0);
+    ChangeBgY(3, 0, 0);
+    ShowBg(0);
+    ShowBg(1);
+    ShowBg(2);
+    ShowBg(3);
+    SetGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_OBJ_ON | DISPCNT_OBJ_1D_MAP);
+    SetGpuReg(REG_OFFSET_BLDCNT, 0);
+    ClearGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_WIN0_ON | DISPCNT_WIN1_ON | DISPCNT_OBJWIN_ON);
+    SetGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_WIN0_ON);
+    SetGpuReg(REG_OFFSET_WIN0H, WIN_RANGE(64, 240));
+    SetGpuReg(REG_OFFSET_WIN0V, WIN_RANGE(0, 144));
+    SetGpuReg(REG_OFFSET_WININ, WININ_WIN0_BG0 | WININ_WIN0_BG2 | WININ_WIN0_BG3
+                              | WININ_WIN0_OBJ | WININ_WIN0_CLR);
+    SetGpuReg(REG_OFFSET_WINOUT, WINOUT_WIN01_BG_ALL | WINOUT_WIN01_OBJ | WINOUT_WIN01_CLR);
+}
+
+static void sub_8020538(void)
+{
+    SetBgTilemapBuffer(0, gUnknown_02022C88->unk128);
+    SetBgTilemapBuffer(1, gUnknown_02022C88->unk928);
+    SetBgTilemapBuffer(3, gUnknown_02022C88->unk1128);
+    SetBgTilemapBuffer(2, gUnknown_02022C88->unk1928);
+}
+
+static void sub_8020584(void)
+{
+    RequestDma3Fill(0, (void *)BG_CHAR_ADDR(0), 0x20, 1);
+    FillBgTilemapBufferRect_Palette0(0, 0, 0, 0, 32, 32);
+    CopyBgTilemapBufferToVram(0);
+}
+
+static void sub_80205B4(void)
+{
+    LoadPalette(gUnknown_08DD4BD0, 0x70, 0x20);
+    LoadPalette(gUnknown_08DD4BB0, 0xC0, 0x20);
+    decompress_and_copy_tile_data_to_vram(1, gUnknown_08DD4BF0, 0, 0, 0);
+    CopyToBgTilemapBuffer(1, gUnknown_08DD4C4C, 0, 0);
+    CopyBgTilemapBufferToVram(1);
+}
+
+static void sub_8020604(void)
+{
+    u8 *ptr;
+
+    LoadPalette(gLinkMiscMenu_Pal, 0, 0x20);
+    ptr = decompress_and_copy_tile_data_to_vram(2, gLinkMiscMenu_Gfx, 0, 0, 0);
+    if (ptr)
+    {
+        CpuFastCopy(&ptr[0x220], gUnknown_02022C88->unk2128, 0x20);
+        CpuFastCopy(&ptr[0x420], gUnknown_02022C88->unk2148, 0x20);
+    }
+
+    CopyToBgTilemapBuffer(2, gLinkMiscMenu_Tilemap, 0, 0);
+    CopyBgTilemapBufferToVram(2);
+}
+
+static void sub_8020680(void)
+{
+    LoadPalette(gUnknown_082F2C20, 0x80, 0x20);
+    RequestDma3Fill(0, (void *)BG_CHAR_ADDR(1) + 0x20, 0x20, 1);
+}
+
+static void sub_80206A4(void)
+{
+    LoadPalette(gUnknown_082F2C40, 0xF0, 0x20);
+    PutWindowTilemap(0);
+    FillWindowPixelBuffer(0, PIXEL_FILL(1));
+    CopyWindowToVram(0, 3);
+}
+
+static void sub_80206D0(void)
+{
+    PutWindowTilemap(2);
+    sub_80201A4();
+    CopyWindowToVram(2, 3);
+}
+
+static void sub_80206E8(void)
+{
+    int i;
+    u8 var0[2];
+    var0[0] = 0;
+    var0[1] = 0xFF;
+
+    for (i = 0; i < 15; i++)
+        BlitBitmapToWindow(1, gUnknown_02022C88->unk2128, i * 8, 0, 8, 16);
+
+    FillWindowPixelBuffer(1, PIXEL_FILL(0));
+    PutWindowTilemap(1);
+    CopyWindowToVram(1, 3);
+}
+
+static void sub_8020740(void)
+{
+    FillWindowPixelBuffer(3, PIXEL_FILL(1));
+    LoadUserWindowBorderGfx(3, 1, 0xD0);
+    LoadUserWindowBorderGfx_(3, 0xA, 0x20);
+    LoadPalette(gUnknown_0860F074, 0xE0,  0x20);
+}
+
+static void sub_8020770(void)
+{
+    struct ScanlineEffectParams params;
+    params.dmaControl = SCANLINE_EFFECT_DMACNT_16BIT;
+    params.dmaDest = &REG_BG1HOFS;
+    params.initState = 1;
+    params.unused9 = 0;
+    gUnknown_02022C88->unk20 = 0;
+    CpuFastFill(0, gScanlineEffectRegBuffers, sizeof(gScanlineEffectRegBuffers));
+    ScanlineEffect_SetParams(params);
+}
+
+static void sub_80207C0(s16 arg0)
+{
+    CpuFill16(arg0, gScanlineEffectRegBuffers[gScanlineEffect.srcBuffer], 0x120);
+    CpuFill16(0, gScanlineEffectRegBuffers[gScanlineEffect.srcBuffer] + 0x90, 0x20);
+}
+
+static void sub_8020818(s16 arg0)
+{
+    CpuFill16(arg0, gScanlineEffectRegBuffers[0],         0x120);
+    CpuFill16(0,    gScanlineEffectRegBuffers[0] +  0x90, 0x20);
+    CpuFill16(arg0, gScanlineEffectRegBuffers[0] + 0x3C0, 0x120);
+    CpuFill16(0,    gScanlineEffectRegBuffers[0] + 0x450, 0x20);
+}
+
+static bool32 sub_8020890(void)
+{
+    u32 i;
+    for (i = 0; i < 5; i++)
+        LoadCompressedSpriteSheet(&gUnknown_082F3134[i]);
+
+    LoadSpritePalette(&gUnknown_082F315C);
+    gUnknown_02022C8C = Alloc(0x18);
+    if (!gUnknown_02022C8C)
+        return FALSE;
+
+    return TRUE;
+}
+
+static void sub_80208D0(void)
+{
+    if (gUnknown_02022C8C)
+        Free(gUnknown_02022C8C);
+}
+
+static void sub_80208E8(void)
+{
+    u8 spriteId = CreateSprite(&gUnknown_082F319C, 10, 24, 0);
+    gUnknown_02022C8C->unk0 = &gSprites[spriteId];
+}
+
+static void sub_802091C(bool32 invisible)
+{
+    gUnknown_02022C8C->unk0->invisible = invisible;
+}
+
+static void sub_802093C(void)
+{
+    u8 x, y;
+    u8 var2 = sub_801F0B0();
+    sub_801F0BC(&x, &y);
+    if (var2 != 3)
+    {
+        StartSpriteAnim(gUnknown_02022C8C->unk0, 0);
+        gUnknown_02022C8C->unk0->pos1.x = x * 8 + 10;
+        gUnknown_02022C8C->unk0->pos1.y = y * 12 + 24;
+    }
+    else
+    {
+        StartSpriteAnim(gUnknown_02022C8C->unk0, 2);
+        gUnknown_02022C8C->unk0->pos1.x = 24;
+        gUnknown_02022C8C->unk0->pos1.y = y * 12 + 24;
+    }
+}
+
+static void sub_80209AC(int arg0)
+{
+    const u16 *palette = &gUnknown_082F2DF0[arg0 * 2 + 1];
+    u8 index = IndexOfSpritePaletteTag(0);
+    LoadPalette(palette, index * 16 + 0x101, 4);
+}
+
+static void sub_80209E0(void)
+{
+    if (sub_801F0B0() != 3)
+        StartSpriteAnim(gUnknown_02022C8C->unk0, 1);
+    else
+        StartSpriteAnim(gUnknown_02022C8C->unk0, 3);
+
+    gUnknown_02022C8C->unk14 = 0;
+}
+
+static bool32 sub_8020A1C(void)
+{
+    if (gUnknown_02022C8C->unk14 > 3)
+        return FALSE;
+
+    if (++gUnknown_02022C8C->unk14 > 3)
+    {
+        if (sub_801F0B0() != 3)
+            StartSpriteAnim(gUnknown_02022C8C->unk0, 0);
+        else
+            StartSpriteAnim(gUnknown_02022C8C->unk0, 2);
+
+        return FALSE;
+    }
+
+    return TRUE;
+}
+
+static void sub_8020A68(void)
+{
+    u8 spriteId = CreateSprite(&gUnknown_082F31BC, 76, 152, 2);
+    gUnknown_02022C8C->unk8 = &gSprites[spriteId];
+    spriteId = CreateSprite(&gUnknown_082F31D4, 64, 152, 1);
+    gUnknown_02022C8C->unk4 = &gSprites[spriteId];
+}
+
+void sub_8020ABC(struct Sprite *sprite)
+{
+    int var0 = sub_801F198();
+    if (var0 == 15)
+    {
+        sprite->invisible = 1;
+    }
+    else
+    {
+        sprite->invisible = 0;
+        sprite->pos1.x = var0 * 8 + 76;
+    }
+}
+
+void sub_8020AF4(struct Sprite *sprite)
+{
+    if (++sprite->data[0] > 4)
+    {
+        sprite->data[0] = 0;
+        if (++sprite->pos2.x > 4)
+            sprite->pos2.x = 0;
+    }
+}
+
+static void sub_8020B20(void)
+{
+    u8 spriteId = CreateSprite(&gUnknown_082F322C, 8, 152, 3);
+    gUnknown_02022C8C->unkC = &gSprites[spriteId];
+    spriteId = CreateSprite(&gUnknown_082F3244, 32, 152, 4);
+    gUnknown_02022C8C->unk10 = &gSprites[spriteId];
+    gUnknown_02022C8C->unk10->invisible = 1;
+}
+
+static void sub_8020B80(void)
+{
+    if (sub_801F0B0() == 3)
+    {
+        if (sub_801F0DC() != 0)
+        {
+            gUnknown_02022C8C->unk10->invisible = 0;
+            StartSpriteAnim(gUnknown_02022C8C->unk10, 3);
+        }
+        else
+        {
+            gUnknown_02022C8C->unk10->invisible = 1;
+        }
+    }
+    else
+    {
+        int anim = sub_801F1A4();
+        if (anim == 3)
+        {
+            gUnknown_02022C8C->unk10->invisible = 1;
+        }
+        else
+        {
+            gUnknown_02022C8C->unk10->invisible = 0;
+            StartSpriteAnim(gUnknown_02022C8C->unk10, anim);
+        }
+    }
+
 }

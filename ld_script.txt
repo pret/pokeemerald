@@ -63,7 +63,6 @@ SECTIONS {
         asm/mevent_server_helpers.o(.text);
         asm/mevent_news.o(.text);
         src/union_room_chat.o(.text);
-        asm/union_room_chat.o(.text);
         asm/berry_crush.o(.text);
         src/berry_powder.o(.text);
         asm/dodrio_berry_picking.o(.text);
