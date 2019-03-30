@@ -64,7 +64,7 @@ SECTIONS {
         asm/mevent_server_ish.o(.text);
         asm/mevent_server_helpers.o(.text);
         src/mevent_news.o(.text);
-        asm/union_room_chat.o(.text);
+        src/union_room_chat.o(.text);
         asm/berry_crush.o(.text);
         src/berry_powder.o(.text);
         asm/dodrio_berry_picking.o(.text);
@@ -416,6 +416,7 @@ SECTIONS {
         src/mevent2.o(.rodata);
         src/mevent_801BAAC.o(.rodata);
         data/mevent_server.o(.rodata);
+        src/union_room_chat.o(.rodata);
         data/union_room_chat.o(.rodata);
         data/berry_crush.o(.rodata);
         data/berry_powder.o(.rodata);

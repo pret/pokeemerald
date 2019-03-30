@@ -99,6 +99,8 @@
 //
 #define EXT_CTRL_CODE_CLEAR     0x11
 //
+#define EXT_CTRL_CODE_CLEAR_TO  0x13
+#define EXT_CTRL_CODE_MIN_LETTER_SPACING 0x14
 #define EXT_CTRL_CODE_JPN       0x15
 #define EXT_CTRL_CODE_ENG       0x16
 

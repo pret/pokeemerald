@@ -1606,7 +1606,7 @@ u16 RenderText(struct TextPrinter *textPrinter)
                 textPrinter->printerTemplate.currentX = *textPrinter->printerTemplate.currentChar + textPrinter->printerTemplate.x;
                 textPrinter->printerTemplate.currentChar++;
                 return 2;
-            case 19:
+            case EXT_CTRL_CODE_CLEAR_TO:
                 {
                     widthHelper = *textPrinter->printerTemplate.currentChar;
                     widthHelper += textPrinter->printerTemplate.x;
@@ -1620,7 +1620,7 @@ u16 RenderText(struct TextPrinter *textPrinter)
                     }
                 }
                 return 2;
-            case 20:
+            case EXT_CTRL_CODE_MIN_LETTER_SPACING:
                 textPrinter->minLetterSpacing = *textPrinter->printerTemplate.currentChar++;
                 return 2;
             case EXT_CTRL_CODE_JPN:
