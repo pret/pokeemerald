@@ -4480,28 +4480,6 @@ static void atk48_playstatchangeanimation(void)
     }
 }
 
-enum
-{
-    ATK49_RAGE,
-    ATK49_DEFROST,
-    ATK49_SYNCHRONIZE_TARGET,
-    ATK49_MOVE_END_ABILITIES,
-    ATK49_STATUS_IMMUNITY_ABILITIES,
-    ATK49_SYNCHRONIZE_ATTACKER,
-    ATK49_CHOICE_MOVE,
-    ATK49_CHANGED_ITEMS,
-    ATK49_ATTACKER_INVISIBLE,
-    ATK49_ATTACKER_VISIBLE,
-    ATK49_TARGET_VISIBLE,
-    ATK49_ITEM_EFFECTS_ALL,
-    ATK49_KINGSROCK_SHELLBELL,
-    ATK49_SUBSTITUTE,
-    ATK49_UPDATE_LAST_MOVES,
-    ATK49_MIRROR_MOVE,
-    ATK49_NEXT_TARGET,
-    ATK49_COUNT,
-};
-
 static void atk49_moveend(void)
 {
     s32 i;
@@ -7209,6 +7187,9 @@ static void atk88_negativedamage(void)
 
     gBattlescriptCurrInstr++;
 }
+
+#define STAT_CHANGE_WORKED      0
+#define STAT_CHANGE_DIDNT_WORK  1
 
 static u8 ChangeStatBuffs(s8 statValue, u8 statId, u8 flags, const u8 *BS_ptr)
 {
