@@ -55,7 +55,8 @@ SECTIONS {
         src/link.o(.text);
         src/link_rfu.o(.text);
         src/union_room.o(.text);
-        asm/union_room.o(.text);
+        src/mystery_gift.o(.text);
+        asm/mystery_gift.o(.text);
         src/mevent2.o(.text);
         src/mevent_801BAAC.o(.text);
         asm/mevent_server.o(.text);
@@ -408,7 +409,8 @@ SECTIONS {
         src/link.o(.rodata);
         src/link_rfu.o(.rodata);
         src/union_room.o(.rodata);
-        data/union_room.o(.rodata);
+        src/mystery_gift.o(.rodata);
+        data/mystery_gift.o(.rodata);
         src/mevent2.o(.rodata);
         src/mevent_801BAAC.o(.rodata);
         data/mevent_server.o(.rodata);
