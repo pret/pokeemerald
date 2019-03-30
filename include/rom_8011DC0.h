@@ -123,6 +123,9 @@ struct UnkStruct_URoom
     u16 field_98;
     u16 field_9A[3];
     struct UnkStruct_8019BA8 field_A0[8];
+    u8 field_C0[12][15];
+    u8 field_174[48];
+    u8 field_1A4[200];
 };
 
 union UnkUnion_Main

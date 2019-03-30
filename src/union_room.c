@@ -41,6 +41,7 @@
 #include "mevent.h"
 #include "dynamic_placeholder_text_util.h"
 #include "rom_8011DC0.h"
+#include "easy_chat.h"
 #include "event_obj_lock.h"
 
 EWRAM_DATA u8 gUnknown_02022C20[12] = {};
@@ -3266,7 +3267,7 @@ void UnionRoomSpecial(void)
     // dumb line needed to match
     gUnknown_02022C30.uRoom = gUnknown_02022C30.uRoom;
 
-    dataPtr = AllocZeroed(0x26C);
+    dataPtr = AllocZeroed(sizeof(*gUnknown_02022C30.uRoom));
     gUnknown_02022C30.uRoom = dataPtr;
     gUnknown_03000DA8 = dataPtr;
 
@@ -5314,4 +5315,71 @@ u8 sub_80181DC(struct UnkStruct_URoom *arg0)
     }
 
     return retVal;
+}
+
+void sub_8018220(u8 *unused, struct UnkStruct_URoom *arg1, bool8 arg2)
+{
+    struct TrainerCard *trainerCard = &gTrainerCards[GetMultiplayerId() ^ 1];
+    s32 i;
+    s32 n;
+
+    DynamicPlaceholderTextUtil_Reset();
+
+    StringCopy(arg1->field_C0[0], gTrainerClassNames[sub_8068BB0()]);
+    DynamicPlaceholderTextUtil_SetPlaceholderPtr(0, arg1->field_C0[0]);
+
+    DynamicPlaceholderTextUtil_SetPlaceholderPtr(1, trainerCard->playerName);
+
+    StringCopy(arg1->field_174, gUnknown_082EFF50[trainerCard->stars]);
+    DynamicPlaceholderTextUtil_SetPlaceholderPtr(2, arg1->field_174);
+
+    ConvertIntToDecimalStringN(arg1->field_C0[2], trainerCard->caughtMonsCount, STR_CONV_MODE_LEFT_ALIGN, 3);
+    DynamicPlaceholderTextUtil_SetPlaceholderPtr(3, arg1->field_C0[2]);
+
+    ConvertIntToDecimalStringN(arg1->field_C0[3], trainerCard->playTimeHours, STR_CONV_MODE_LEFT_ALIGN, 3);
+    ConvertIntToDecimalStringN(arg1->field_C0[4], trainerCard->playTimeMinutes, STR_CONV_MODE_LEADING_ZEROS, 2);
+    DynamicPlaceholderTextUtil_SetPlaceholderPtr(4, arg1->field_C0[3]);
+    DynamicPlaceholderTextUtil_SetPlaceholderPtr(5, arg1->field_C0[4]);
+
+    DynamicPlaceholderTextUtil_ExpandPlaceholders(arg1->field_1A4, gUnknown_082EFF64);
+    StringCopy(gStringVar4, arg1->field_1A4);
+
+    n = trainerCard->linkBattleWins;
+    if (n > 9999)
+    {
+        n = 9999;
+    }
+    ConvertIntToDecimalStringN(arg1->field_C0[0], n, STR_CONV_MODE_LEFT_ALIGN, 4);
+    DynamicPlaceholderTextUtil_SetPlaceholderPtr(0, arg1->field_C0[0]);
+
+    n = trainerCard->linkBattleLosses;
+    if (n > 9999)
+    {
+        n = 9999;
+    }
+    ConvertIntToDecimalStringN(arg1->field_C0[1], n, STR_CONV_MODE_LEFT_ALIGN, 4);
+    DynamicPlaceholderTextUtil_SetPlaceholderPtr(2, arg1->field_C0[1]);
+
+    ConvertIntToDecimalStringN(arg1->field_C0[2], trainerCard->pokemonTrades, STR_CONV_MODE_LEFT_ALIGN, 5);
+    DynamicPlaceholderTextUtil_SetPlaceholderPtr(3, arg1->field_C0[2]);
+
+    for (i = 0; i < 4; i++)
+    {
+        CopyEasyChatWord(arg1->field_C0[i + 3], trainerCard->var_28[i]);
+        DynamicPlaceholderTextUtil_SetPlaceholderPtr(i + 4, arg1->field_C0[i + 3]);
+    }
+
+    DynamicPlaceholderTextUtil_ExpandPlaceholders(arg1->field_1A4, gUnknown_082EFFA4);
+    StringAppend(gStringVar4, arg1->field_1A4);
+
+    if (arg2 == TRUE)
+    {
+        DynamicPlaceholderTextUtil_ExpandPlaceholders(arg1->field_1A4, gUnknown_082F0020);
+        StringAppend(gStringVar4, arg1->field_1A4);
+    }
+    else if (arg2 == FALSE)
+    {
+        DynamicPlaceholderTextUtil_ExpandPlaceholders(arg1->field_1A4, gUnknown_082F0018[trainerCard->gender]);
+        StringAppend(gStringVar4, arg1->field_1A4);
+    }
 }
