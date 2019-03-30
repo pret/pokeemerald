@@ -40,7 +40,7 @@
 #include "strings.h"
 #include "mevent.h"
 #include "dynamic_placeholder_text_util.h"
-#include "rom_8011DC0.h"
+#include "union_room.h"
 #include "easy_chat.h"
 #include "event_obj_lock.h"
 #include "union_room_chat.h"
@@ -102,8 +102,6 @@ void sub_8020C70(MainCallback callback);
 void sub_80149D8(void);
 u16 sub_8019930(void);
 void sub_8018784(u8 windowId);
-void sub_8018884(const u8 *src);
-bool32 mevent_0814257C(u8 *textState, const u8 *str);
 s8 sub_8018B08(u8 *textState, u8 *arg1, u8 arg2, const u8 *str);
 bool32 sub_8016F1C(struct UnkLinkRfuStruct_02022B14 *arg0, s16 arg1);
 u8 sub_8016DF0(struct UnkStruct_Main4 *arg0, struct UnkStruct_Main4 *arg1, u32 arg2);

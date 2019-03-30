@@ -2606,4 +2606,24 @@ extern const u8 gText_YayUnkF9F9[];
 extern const u8 gText_ThankYou[];
 extern const u8 gText_ByeBye[];
 
+// Mystery Gift
+extern const u8 gText_MysteryGift[];
+extern const u8 gText_PickOKCancel[];
+extern const u8 gText_PickOKExit[];
+extern const u8 gJPText_MysteryGift[];
+extern const u8 gJPText_DecideStop[];
+extern const u8 gText_WonderCards[];
+extern const u8 gText_WonderNews[];
+extern const u8 gText_Exit3[];
+extern const u8 gText_WirelessCommunication[];
+extern const u8 gText_Friend2[];
+extern const u8 gText_Cancel2[];
+extern const u8 gText_Receive[];
+extern const u8 gText_Send[];
+extern const u8 gText_Toss[];
+extern const u8 gText_VarietyOfEventsImportedWireless[];
+extern const u8 gText_WonderCardsInPossession[];
+extern const u8 gText_ReadNewsThatArrived[];
+extern const u8 gText_ReturnToTitle[];
+
 #endif // GUARD_STRINGS_H
