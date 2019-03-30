@@ -41,6 +41,7 @@
 #include "mevent.h"
 #include "dynamic_placeholder_text_util.h"
 #include "rom_8011DC0.h"
+#include "event_obj_lock.h"
 
 EWRAM_DATA u8 gUnknown_02022C20[12] = {};
 EWRAM_DATA u8 gUnknown_02022C2C = 0;
@@ -3341,7 +3342,7 @@ void sub_80156E0(u8 taskId)
         break;
     case 2:
         sub_8010F84(0x40, 0, 0);
-        sub_8010FCC(gUnknown_02022C40.field_2, gUnknown_02022C40.field_A, gUnknown_02022C40.field_C);
+        sub_8010FCC(gUnknown_02022C40.type, gUnknown_02022C40.playerSpecies, gUnknown_02022C40.playerLevel);
         sub_800B488();
         OpenLink();
         sub_8011C84();
@@ -3936,14 +3937,14 @@ void sub_80156E0(u8 taskId)
                 sub_801568C(gUnknown_082EF4FC);
                 break;
             default:
-                gUnknown_02022C40.field_2 = var5;
+                gUnknown_02022C40.type = var5;
                 data->state = 55;
                 break;
             }
         }
         break;
     case 55:
-        sub_8010FCC(gUnknown_02022C40.field_2, gUnknown_02022C40.field_A, gUnknown_02022C40.field_C);
+        sub_8010FCC(gUnknown_02022C40.type, gUnknown_02022C40.playerSpecies, gUnknown_02022C40.playerLevel);
         sub_801568C(gUnknown_082EF520);
         break;
     case 44:
@@ -5112,8 +5113,8 @@ s32 sub_8017EA0(u8 *dst, u32 gender, u16 *arg2, struct UnkStruct_URoom *arg3)
         result = 1;
         break;
     case 0x44:
-        ConvertIntToDecimalStringN(arg3->field_58 + 0x00, gUnknown_02022C40.field_C, STR_CONV_MODE_LEFT_ALIGN, 3);
-        StringCopy(arg3->field_58 + 0x10, gSpeciesNames[gUnknown_02022C40.field_A]);
+        ConvertIntToDecimalStringN(arg3->field_58 + 0x00, gUnknown_02022C40.playerLevel, STR_CONV_MODE_LEFT_ALIGN, 3);
+        StringCopy(arg3->field_58 + 0x10, gSpeciesNames[gUnknown_02022C40.playerSpecies]);
         for (i = 0; i < 4; i++)
         {
             if (gUnknown_03007890->unk_14[i].unk_04 == 2)
@@ -5203,10 +5204,10 @@ bool32 sub_8018024(void)
 void sub_801807C(struct TradeUnkStruct *arg0)
 {
     arg0->field_0 = 0;
-    arg0->field_2 = 0;
-    arg0->field_4 = 0;
-    arg0->field_A = 0;
-    arg0->field_C = 0;
+    arg0->type = 0;
+    arg0->playerPersonality = 0;
+    arg0->playerSpecies = 0;
+    arg0->playerLevel = 0;
     arg0->species = 0;
     arg0->level = 0;
     arg0->personality = 0;
@@ -5219,10 +5220,10 @@ void sub_8018090(void)
 
 bool32 sub_80180A0(u32 monId, struct TradeUnkStruct *arg1)
 {
-    arg1->field_A = GetMonData(&gPlayerParty[monId], MON_DATA_SPECIES2);
-    arg1->field_C = GetMonData(&gPlayerParty[monId], MON_DATA_LEVEL);
-    arg1->field_4 = GetMonData(&gPlayerParty[monId], MON_DATA_PERSONALITY);
-    if (arg1->field_A == SPECIES_EGG)
+    arg1->playerSpecies = GetMonData(&gPlayerParty[monId], MON_DATA_SPECIES2);
+    arg1->playerLevel = GetMonData(&gPlayerParty[monId], MON_DATA_LEVEL);
+    arg1->playerPersonality = GetMonData(&gPlayerParty[monId], MON_DATA_PERSONALITY);
+    if (arg1->playerSpecies == SPECIES_EGG)
     {
         return TRUE;
     }
@@ -5237,4 +5238,80 @@ void sub_80180E8(u32 monId, struct TradeUnkStruct *arg1)
     arg1->species = GetMonData(&gPlayerParty[monId], MON_DATA_SPECIES2);
     arg1->level = GetMonData(&gPlayerParty[monId], MON_DATA_LEVEL);
     arg1->personality = GetMonData(&gPlayerParty[monId], MON_DATA_PERSONALITY);
+}
+
+u32 sub_8018120(struct TradeUnkStruct *arg0, u8 multiplayerId)
+{
+    u16 response = 0;
+    u16 species;
+    u32 personality;
+    u32 cur_personality;
+    u16 cur_species;
+    s32 i;
+
+    if (multiplayerId == 0)
+    {
+        species = arg0->playerSpecies;
+        personality = arg0->playerPersonality;
+    }
+    else
+    {
+        species = arg0->species;
+        personality = arg0->personality;
+    }
+
+    for (i = 0; i < gPlayerPartyCount; i++)
+    {
+        cur_personality = GetMonData(&gPlayerParty[i], MON_DATA_PERSONALITY);
+        if (cur_personality != personality)
+        {
+            continue;
+        }
+        cur_species = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2);
+        if (cur_species != species)
+        {
+            continue;
+        }
+        response = i;
+        break;
+    }
+
+    return response;
+}
+
+void sub_801818C(bool32 arg0)
+{
+    sub_80173B0();
+    ScriptContext2_Disable();
+    sub_8098524();
+    gUnknown_02022C2C = 0;
+    if (arg0)
+    {
+        sub_8010FCC(gUnknown_02022C40.type, gUnknown_02022C40.playerSpecies, gUnknown_02022C40.playerLevel);
+        sub_8011090(0x40, 0, 0);
+    }
+}
+
+void sub_80181CC(void)
+{
+    ScriptContext2_Enable();
+    ScriptFreezeEventObjects();
+}
+
+u8 sub_80181DC(struct UnkStruct_URoom *arg0)
+{
+    u8 retVal = 0x80;
+    u8 i;
+
+    for (i = 0; i < 4; i++)
+    {
+        if (arg0->field_C->arr[i].unk18)
+        {
+            retVal |= arg0->field_C->arr[i].unk0.field_0.playerGender << 3;
+            retVal |= arg0->field_C->arr[i].unk0.field_0.unk_00.playerTrainerId[0] & 7;
+            break;
+        }
+    }
+
+    return retVal;
 }

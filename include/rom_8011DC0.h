@@ -135,12 +135,12 @@ union UnkUnion_Main
 struct TradeUnkStruct
 {
     u16 field_0;
-    u16 field_2;
-    u32 field_4;
+    u16 type;
+    u32 playerPersonality;
     u8 field_8;
     u8 field_9;
-    u16 field_A;
-    u16 field_C;
+    u16 playerSpecies;
+    u16 playerLevel;
     u16 species;
     u16 level;
     u16 field_12;
