@@ -620,7 +620,7 @@ struct BattleScripting
     u8 animArg2;
     u16 tripleKickPower;
     u8 atk49_state;
-    u8 battlerWithAbility;
+    u8 unused_15;
     u8 unused_16;
     u8 battler;
     u8 animTurn;

@@ -3560,88 +3560,72 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
             }
         }
         break;
-    case ABILITYEFFECT_CHECK_OTHER_SIDE: // 12
-        side = GetBattlerSide(battler);
-        for (i = 0; i < gBattlersCount; i++)
-        {
-            if (GetBattlerSide(i) != side && gBattleMons[i].ability == ability)
-            {
-                gLastUsedAbility = ability;
-                effect = i + 1;
-            }
-        }
-        break;
-    case ABILITYEFFECT_CHECK_BATTLER_SIDE: // 13
-        side = GetBattlerSide(battler);
-        for (i = 0; i < gBattlersCount; i++)
-        {
-            if (GetBattlerSide(i) == side && gBattleMons[i].ability == ability)
-            {
-                gLastUsedAbility = ability;
-                effect = i + 1;
-            }
-        }
-        break;
-    case ABILITYEFFECT_CHECK_ON_FIELD: // 19
-        for (i = 0; i < gBattlersCount; i++)
-        {
-            if (gBattleMons[i].ability == ability && gBattleMons[i].hp != 0)
-            {
-                gLastUsedAbility = ability;
-                effect = i + 1;
-            }
-        }
-        break;
-    case ABILITYEFFECT_CHECK_FIELD_EXCEPT_BATTLER: // 15
-        for (i = 0; i < gBattlersCount; i++)
-        {
-            if (gBattleMons[i].ability == ability && i != battler)
-            {
-                gLastUsedAbility = ability;
-                effect = i + 1;
-            }
-        }
-        break;
-    case ABILITYEFFECT_COUNT_OTHER_SIDE: // 16
-        side = GetBattlerSide(battler);
-        for (i = 0; i < gBattlersCount; i++)
-        {
-            if (GetBattlerSide(i) != side && gBattleMons[i].ability == ability)
-            {
-                gLastUsedAbility = ability;
-                effect++;
-            }
-        }
-        break;
-    case ABILITYEFFECT_COUNT_BATTLER_SIDE: // 17
-        side = GetBattlerSide(battler);
-        for (i = 0; i < gBattlersCount; i++)
-        {
-            if (GetBattlerSide(i) == side && gBattleMons[i].ability == ability)
-            {
-                gLastUsedAbility = ability;
-                effect++;
-            }
-        }
-        break;
-    case ABILITYEFFECT_COUNT_ON_FIELD: // 18
-        for (i = 0; i < gBattlersCount; i++)
-        {
-            if (gBattleMons[i].ability == ability && i != battler)
-            {
-                gLastUsedAbility = ability;
-                effect++;
-            }
-        }
-        break;
     }
 
-    if (effect && caseID < ABILITYEFFECT_CHECK_OTHER_SIDE && gLastUsedAbility != 0xFF)
+    if (effect && gLastUsedAbility != 0xFF)
         RecordAbilityBattle(battler, gLastUsedAbility);
     if (effect && caseID <= ABILITYEFFECT_MOVE_END)
         gBattlerAbility = battler;
 
     return effect;
+}
+
+u32 GetBattlerAbility(u8 battlerId)
+{
+    if (gStatuses3[battlerId] & STATUS3_GASTRO_ACID)
+        return ABILITY_NONE;
+    else if ((gBattleMons[gBattlerAttacker].ability == ABILITY_MOLD_BREAKER
+            || gBattleMons[gBattlerAttacker].ability == ABILITY_TERAVOLT
+            || gBattleMons[gBattlerAttacker].ability == ABILITY_TURBOBLAZE)
+        && sAbilitiesAffectedByMoldBreaker[gBattleMons[battlerId].ability]
+        && gBattlerByTurnOrder[gCurrentTurnActionNumber] == gBattlerAttacker
+        && gActionsByTurnOrder[gBattlerByTurnOrder[gBattlerAttacker]] == B_ACTION_USE_MOVE
+        && gCurrentTurnActionNumber < gBattlersCount
+        && !(gStatuses3[gBattlerAttacker] & STATUS3_GASTRO_ACID))
+        return ABILITY_NONE;
+	else
+		return gBattleMons[battlerId].ability;
+}
+
+u32 IsAbilityOnSide(u32 battlerId, u32 ability)
+{
+    if (IsBattlerAlive(battlerId) && GetBattlerAbility(battlerId) == ability)
+        return battlerId + 1;
+    else if (IsBattlerAlive(BATTLE_PARTNER(battlerId)) && GetBattlerAbility(BATTLE_PARTNER(battlerId)) == ability)
+        return BATTLE_PARTNER(battlerId) + 1;
+    else
+        return 0;
+}
+
+u32 IsAbilityOnOpposingSide(u32 battlerId, u32 ability)
+{
+    return IsAbilityOnSide(BATTLE_OPPOSITE(battlerId), ability);
+}
+
+u32 IsAbilityOnField(u32 ability)
+{
+    u32 i;
+
+    for (i = 0; i < gBattlersCount; i++)
+    {
+        if (IsBattlerAlive(i) && GetBattlerAbility(i) == ability)
+            return i + 1;
+    }
+
+    return 0;
+}
+
+u32 IsAbilityOnFieldExcept(u32 battlerId, u32 ability)
+{
+    u32 i;
+
+    for (i = 0; i < gBattlersCount; i++)
+    {
+        if (i != battlerId && IsBattlerAlive(i) && GetBattlerAbility(i) == ability)
+            return i + 1;
+    }
+
+    return 0;
 }
 
 void BattleScriptExecute(const u8 *BS_ptr)
@@ -4372,7 +4356,7 @@ u8 GetMoveTarget(u16 move, u8 setTarget)
                 targetBattler = Random() % gBattlersCount;
             } while (targetBattler == gBattlerAttacker || side == GetBattlerSide(targetBattler) || gAbsentBattlerFlags & gBitTable[targetBattler]);
             if (gBattleMoves[move].type == TYPE_ELECTRIC
-                && AbilityBattleEffects(ABILITYEFFECT_COUNT_OTHER_SIDE, gBattlerAttacker, ABILITY_LIGHTNING_ROD, 0, 0)
+                && IsAbilityOnOpposingSide(gBattlerAttacker, ABILITY_LIGHTNING_ROD)
                 && gBattleMons[targetBattler].ability != ABILITY_LIGHTNING_ROD)
             {
                 targetBattler ^= BIT_FLANK;
@@ -4380,7 +4364,7 @@ u8 GetMoveTarget(u16 move, u8 setTarget)
                 gSpecialStatuses[targetBattler].lightningRodRedirected = 1;
             }
             else if (gBattleMoves[move].type == TYPE_WATER
-                && AbilityBattleEffects(ABILITYEFFECT_COUNT_OTHER_SIDE, gBattlerAttacker, ABILITY_STORM_DRAIN, 0, 0)
+                && IsAbilityOnOpposingSide(gBattlerAttacker, ABILITY_STORM_DRAIN)
                 && gBattleMons[targetBattler].ability != ABILITY_STORM_DRAIN)
             {
                 targetBattler ^= BIT_FLANK;
@@ -4562,23 +4546,6 @@ u8 IsMonDisobedient(void)
             return 1;
         }
     }
-}
-
-u32 GetBattlerAbility(u8 battlerId)
-{
-    if (gStatuses3[battlerId] & STATUS3_GASTRO_ACID)
-        return ABILITY_NONE;
-    else if ((gBattleMons[gBattlerAttacker].ability == ABILITY_MOLD_BREAKER
-            || gBattleMons[gBattlerAttacker].ability == ABILITY_TERAVOLT
-            || gBattleMons[gBattlerAttacker].ability == ABILITY_TURBOBLAZE)
-        && sAbilitiesAffectedByMoldBreaker[gBattleMons[battlerId].ability]
-        && gBattlerByTurnOrder[gCurrentTurnActionNumber] == gBattlerAttacker
-        && gActionsByTurnOrder[gBattlerByTurnOrder[gBattlerAttacker]] == B_ACTION_USE_MOVE
-        && gCurrentTurnActionNumber < gBattlersCount
-        && !(gStatuses3[gBattlerAttacker] & STATUS3_GASTRO_ACID))
-        return ABILITY_NONE;
-	else
-		return gBattleMons[battlerId].ability;
 }
 
 u32 GetBattlerHoldEffect(u8 battlerId, bool32 checkNegating)
@@ -5052,10 +5019,10 @@ static u32 CalcMoveBasePowerAfterModifiers(u16 move, u8 battlerAtk, u8 battlerDe
     }
 
     // field abilities
-    if ((ABILITY_ON_FIELD(ABILITY_DARK_AURA) && moveType == TYPE_DARK)
-        || (ABILITY_ON_FIELD(ABILITY_FAIRY_AURA) && moveType == TYPE_FAIRY))
+    if ((IsAbilityOnField(ABILITY_DARK_AURA) && moveType == TYPE_DARK)
+        || (IsAbilityOnField(ABILITY_FAIRY_AURA) && moveType == TYPE_FAIRY))
     {
-        if (ABILITY_ON_FIELD(ABILITY_AURA_BREAK))
+        if (IsAbilityOnField(ABILITY_AURA_BREAK))
             MulModifier(&modifier, UQ_4_12(0.75));
         else
             MulModifier(&modifier, UQ_4_12(1.25));

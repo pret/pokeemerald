@@ -11,7 +11,7 @@
 #define sB_ANIM_ARG2 gBattleScripting + 0x11
 #define sTRIPLE_KICK_POWER gBattleScripting + 0x12
 #define sMOVEEND_STATE gBattleScripting + 0x14
-#define sBATTLER_WITH_ABILITY gBattleScripting + 0x15
+#define sUNUSED_15 gBattleScripting + 0x15
 #define sUNUSED_16 gBattleScripting + 0x16
 #define sBATTLER gBattleScripting + 0x17
 #define sB_ANIM_TURN gBattleScripting + 0x18
@@ -45,7 +45,7 @@
 #define BS_BATTLER_0                7
 #define BS_ATTACKER_WITH_PARTNER    4 // for atk98_status_icon_update
 #define BS_ATTACKER_SIDE            8 // for atk1E_jumpifability
-#define BS_NOT_ATTACKER_SIDE        9 // for atk1E_jumpifability
+#define BS_TARGET_SIDE              9 // for atk1E_jumpifability
 #define BS_SCRIPTING                10
 #define BS_PLAYER1                  11
 #define BS_OPPONENT1                12
@@ -139,6 +139,7 @@
 #define VARIOUS_GRAVITY_ON_AIRBORNE_MONS        76
 #define VARIOUS_CHECK_IF_GRASSY_TERRAIN_HEALS   77
 #define VARIOUS_JUMP_IF_ROAR_FAILS              78
+#define VARIOUS_JUMP_IF_FLOWER_VEIL             79
 
 // atk80, dmg manipulation
 #define ATK80_DMG_CHANGE_SIGN                               0

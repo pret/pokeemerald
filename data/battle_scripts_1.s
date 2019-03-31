@@ -1818,6 +1818,7 @@ BattleScript_EffectSleep::
 	jumpifsubstituteblocks BattleScript_ButItFailed
 	jumpifstatus BS_TARGET, STATUS1_SLEEP, BattleScript_AlreadyAsleep
 	jumpifcantmakeasleep BattleScript_CantMakeAsleep
+	jumpifflowerveil BattleScript_FlowerVeilProtects
 	jumpifstatus BS_TARGET, STATUS1_ANY, BattleScript_ButItFailed
 	accuracycheck BattleScript_ButItFailed, ACC_CURR_MOVE
 	jumpifsideaffecting BS_TARGET, SIDE_STATUS_SAFEGUARD, BattleScript_SafeguardProtected
@@ -1825,6 +1826,18 @@ BattleScript_EffectSleep::
 	waitanimation
 	setmoveeffect MOVE_EFFECT_SLEEP
 	seteffectprimary
+	goto BattleScript_MoveEnd
+	
+BattleScript_FlowerVeilProtectsRet::
+	pause 0x20
+	call BattleScript_AbilityPopUp
+	printstring STRINGID_FLOWERVEILPROTECTED
+	waitmessage 0x40
+	return
+	
+BattleScript_FlowerVeilProtects:
+	call BattleScript_FlowerVeilProtectsRet
+	orhalfword gMoveResultFlags, MOVE_RESULT_FAILED
 	goto BattleScript_MoveEnd
 
 BattleScript_AlreadyAsleep::
@@ -2265,6 +2278,7 @@ BattleScript_EffectToxic::
 	attackstring
 	ppreduce
 	jumpifability BS_TARGET, ABILITY_IMMUNITY, BattleScript_ImmunityProtected
+	jumpifflowerveil BattleScript_FlowerVeilProtects
 	jumpifsubstituteblocks BattleScript_ButItFailed
 	jumpifstatus BS_TARGET, STATUS1_POISON, BattleScript_AlreadyPoisoned
 	jumpifstatus BS_TARGET, STATUS1_TOXIC_POISON, BattleScript_AlreadyPoisoned
@@ -2587,6 +2601,7 @@ BattleScript_EffectPoison::
 	attackstring
 	ppreduce
 	jumpifability BS_TARGET, ABILITY_IMMUNITY, BattleScript_ImmunityProtected
+	jumpifflowerveil BattleScript_FlowerVeilProtects
 	jumpifsubstituteblocks BattleScript_ButItFailed
 	jumpifstatus BS_TARGET, STATUS1_POISON, BattleScript_AlreadyPoisoned
 	jumpifstatus BS_TARGET, STATUS1_TOXIC_POISON, BattleScript_AlreadyPoisoned
@@ -2608,6 +2623,7 @@ BattleScript_EffectParalyze:
 	attackstring
 	ppreduce
 	jumpifability BS_TARGET, ABILITY_LIMBER, BattleScript_LimberProtected
+	jumpifflowerveil BattleScript_FlowerVeilProtects
 	jumpifsubstituteblocks BattleScript_ButItFailed
 	typecalc
 	jumpifmovehadnoeffect BattleScript_ButItFailed
@@ -3789,6 +3805,7 @@ BattleScript_EffectWillOWisp::
 	jumpifstatus BS_TARGET, STATUS1_BURN, BattleScript_AlreadyBurned
 	jumpiftype BS_TARGET, TYPE_FIRE, BattleScript_NotAffected
 	jumpifability BS_TARGET, ABILITY_WATER_VEIL, BattleScript_WaterVeilPrevents
+	jumpifflowerveil BattleScript_FlowerVeilProtects
 	jumpifstatus BS_TARGET, STATUS1_ANY, BattleScript_ButItFailed
 	accuracycheck BattleScript_ButItFailed, ACC_CURR_MOVE
 	jumpifsideaffecting BS_TARGET, SIDE_STATUS_SAFEGUARD, BattleScript_SafeguardProtected
@@ -4050,6 +4067,7 @@ BattleScript_EffectYawn::
 	ppreduce
 	jumpifability BS_TARGET, ABILITY_VITAL_SPIRIT, BattleScript_PrintBankAbilityMadeIneffective
 	jumpifability BS_TARGET, ABILITY_INSOMNIA, BattleScript_PrintBankAbilityMadeIneffective
+	jumpifflowerveil BattleScript_FlowerVeilProtects
 	jumpifsubstituteblocks BattleScript_ButItFailed
 	jumpifsideaffecting BS_TARGET, SIDE_STATUS_SAFEGUARD, BattleScript_SafeguardProtected
 	accuracycheck BattleScript_ButItFailed, NO_ACC_CALC_CHECK_LOCK_ON
@@ -4061,7 +4079,7 @@ BattleScript_EffectYawn::
 	waitmessage 0x40
 	goto BattleScript_MoveEnd
 BattleScript_PrintBankAbilityMadeIneffective::
-	copybyte sBATTLER, sBATTLER_WITH_ABILITY
+	copybyte sBATTLER, gBattlerAbility
 BattleScript_PrintAbilityMadeIneffective::
 	pause 0x20
 	printstring STRINGID_PKMNSXMADEITINEFFECTIVE
