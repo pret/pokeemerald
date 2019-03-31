@@ -4917,4 +4917,8 @@ extern const u16 gLinkMiscMenu_Pal[];
 extern const u32 gLinkMiscMenu_Gfx[];
 extern const u32 gLinkMiscMenu_Tilemap[];
 
+// Pokeblock
+extern const u8 gPokenavConditionCancel_Gfx[];
+extern const u16 gPokenavConditionCancel_Pal[];
+
 #endif //GUARD_GRAPHICS_H
