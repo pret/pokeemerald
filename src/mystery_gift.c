@@ -918,3 +918,73 @@ bool32 mevent_save_game(u8 * state)
 
     return FALSE;
 }
+
+const u8 * mevent_message(u32 * a0, u8 a1, u8 a2, u32 a3)
+{
+    const u8 * msg = NULL;
+    *a0 = 0;
+
+    switch (a3)
+    {
+    case 0:
+        *a0 = 0;
+        msg = gText_NothingSentOver;
+        break;
+    case 1:
+        *a0 = 0;
+        msg = gText_RecordUploadedViaWireless;
+        break;
+    case 2:
+        *a0 = 1;
+        msg = a2 == 0 ? gText_WonderCardReceived : gText_WonderCardReceivedFrom;
+        break;
+    case 3:
+        *a0 = 1;
+        msg = a2 == 0 ? gText_WonderNewsReceived : gText_WonderNewsReceivedFrom;
+        break;
+    case 4:
+        *a0 = 1;
+        msg = gText_NewStampReceived;
+        break;
+    case 5:
+        *a0 = 0;
+        msg = gText_AlreadyHadCard;
+        break;
+    case 6:
+        *a0 = 0;
+        msg = gText_AlreadyHadStamp;
+        break;
+    case 7:
+        *a0 = 0;
+        msg = gText_AlreadyHadNews;
+        break;
+    case 8:
+        *a0 = 0;
+        msg = gText_NoMoreRoomForStamps;
+        break;
+    case 9:
+        *a0 = 0;
+        msg = gText_CommunicationCanceled;
+        break;
+    case 10:
+        *a0 = 0;
+        msg = a1 == 0 ? gText_CantAcceptCardFromTrainer : gText_CantAcceptNewsFromTrainer;
+        break;
+    case 11:
+        *a0 = 0;
+        msg = gText_CommunicationError;
+        break;
+    case 12:
+        *a0 = 1;
+        msg = gText_NewTrainerReceived;
+        break;
+    case 13:
+        *a0 = 1;
+        break;
+    case 14:
+        *a0 = 0;
+        break;
+    }
+
+    return msg;
+}
