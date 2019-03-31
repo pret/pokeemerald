@@ -564,9 +564,7 @@ struct BattleScripting
 };
 
 // rom_80A5C6C
-u8 GetBattlerSide(u8 battler);
-u8 GetBattlerPosition(u8 battler);
-u8 GetBattlerAtPosition(u8 position);
+
 
 struct BattleSpriteInfo
 {
