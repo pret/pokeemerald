@@ -2634,5 +2634,21 @@ extern const u8 gText_WonderNewsThrownAway[];
 extern const u8 gText_WonderCardThrownAway[];
 extern const u8 gText_DataWillBeSaved[];
 extern const u8 gText_SaveCompletedPressA[];
+extern const u8 gText_NothingSentOver[];
+extern const u8 gText_RecordUploadedViaWireless[];
+extern const u8 gText_WonderCardReceivedFrom[];
+extern const u8 gText_WonderCardReceived[];
+extern const u8 gText_WonderNewsReceivedFrom[];
+extern const u8 gText_WonderNewsReceived[];
+extern const u8 gText_NewStampReceived[];
+extern const u8 gText_AlreadyHadCard[];
+extern const u8 gText_AlreadyHadStamp[];
+extern const u8 gText_AlreadyHadNews[];
+extern const u8 gText_NoMoreRoomForStamps[];
+extern const u8 gText_CommunicationCanceled[];
+extern const u8 gText_CantAcceptNewsFromTrainer[];
+extern const u8 gText_CantAcceptCardFromTrainer[];
+extern const u8 gText_CommunicationError[];
+extern const u8 gText_NewTrainerReceived[];
 
 #endif // GUARD_STRINGS_H
