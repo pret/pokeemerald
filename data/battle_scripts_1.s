@@ -32,7 +32,7 @@ gBattleScriptsForMoveEffects:: @ 82D86A8
 	.4byte BattleScript_EffectSpecialDefenseUp
 	.4byte BattleScript_EffectAccuracyUp
 	.4byte BattleScript_EffectEvasionUp
-	.4byte BattleScript_EffectUnused17
+	.4byte BattleScript_EffectSpecialAttackUp3
 	.4byte BattleScript_EffectAttackDown
 	.4byte BattleScript_EffectDefenseDown
 	.4byte BattleScript_EffectSpeedDown
@@ -111,7 +111,7 @@ gBattleScriptsForMoveEffects:: @ 82D86A8
 	.4byte BattleScript_EffectConversion2
 	.4byte BattleScript_EffectLockOn
 	.4byte BattleScript_EffectSketch
-	.4byte BattleScript_EffectUnused60
+	.4byte BattleScript_EffectHammerArm
 	.4byte BattleScript_EffectSleepTalk
 	.4byte BattleScript_EffectDestinyBond
 	.4byte BattleScript_EffectFlail
@@ -1720,10 +1720,8 @@ BattleScript_EffectPlaceholder:
 	printstring STRINGID_NOTDONEYET
 	goto BattleScript_MoveEnd
 
-BattleScript_EffectUnused17:
 BattleScript_EffectEvasionDownHit:
 BattleScript_EffectVitalThrow:
-BattleScript_EffectUnused60:
 BattleScript_EffectFalseSwipe:
 BattleScript_EffectAlwaysCrit:
 BattleScript_EffectPursuit:
@@ -1759,7 +1757,6 @@ BattleScript_EffectFoulPlay:
 BattleScript_EffectPsyshock:
 BattleScript_EffectWeatherBall:
 BattleScript_EffectHiddenPower:
-BattleScript_EffectFreezeDry:
 BattleScript_EffectTwoTypedMove:
 BattleScript_EffectTechnoBlast:
 BattleScript_EffectJudgment:
@@ -1894,6 +1891,7 @@ BattleScript_EffectScald:
 	setmoveeffect MOVE_EFFECT_BURN
 	goto BattleScript_EffectHit
 
+BattleScript_EffectFreezeDry:
 BattleScript_EffectFreezeHit::
 	setmoveeffect MOVE_EFFECT_FREEZE
 	goto BattleScript_EffectHit
@@ -2517,6 +2515,10 @@ BattleScript_EffectSpeedUp2::
 
 BattleScript_EffectSpecialAttackUp2::
 	setstatchanger STAT_SPATK, 2, FALSE
+	goto BattleScript_EffectStatUp
+
+BattleScript_EffectSpecialAttackUp3::
+	setstatchanger STAT_SPATK, 3, FALSE
 	goto BattleScript_EffectStatUp
 
 BattleScript_EffectSpecialDefenseUp2::
@@ -4235,6 +4237,10 @@ BattleScript_EffectPoisonFang::
 
 BattleScript_EffectOverheat::
 	setmoveeffect MOVE_EFFECT_SP_ATK_TWO_DOWN | MOVE_EFFECT_AFFECTS_USER | MOVE_EFFECT_CERTAIN
+	goto BattleScript_EffectHit
+
+BattleScript_EffectHammerArm::
+	setmoveeffect MOVE_EFFECT_SPD_MINUS_1 | MOVE_EFFECT_AFFECTS_USER | MOVE_EFFECT_CERTAIN
 	goto BattleScript_EffectHit
 
 BattleScript_EffectTickle::
