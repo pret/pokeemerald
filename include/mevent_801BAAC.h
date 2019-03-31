@@ -9,5 +9,8 @@ s32 sub_801BDA4(bool32 flag);
 void sub_801BB48(void);
 s32 sub_801CA50(bool32 flag);
 void sub_801C72C(void);
+u32 sub_801CCD0(u16 input);
+void sub_801CC80(void);
+void sub_801CC38(void);
 
 #endif //GUARD_MEVENT_801BAAC_H

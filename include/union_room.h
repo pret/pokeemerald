@@ -169,6 +169,9 @@ void var_800D_set_xB(void);
 bool32 mevent_0814257C(u8 *textState, const u8 *str);
 void sub_8018884(const u8 *src);
 void sub_80186A4(void);
+void sub_8014EFC(u32 arg0);
+void sub_80152A8(u32 arg0);
+void sub_8014A00(u32 arg0);
 
 extern bool8 gUnknown_02022C60;
 

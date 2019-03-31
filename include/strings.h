@@ -2661,5 +2661,16 @@ extern const u8 gText_NoMoreRoomForStamps[];
 extern const u8 gText_OtherTrainerCanceled[];
 extern const u8 gText_GiftSentTo[];
 extern const u8 gText_CantSendGiftToTrainer[];
+extern const u8 gText_DontHaveCardNewOneInput[];
+extern const u8 gText_DontHaveNewsNewOneInput[];
+extern const u8 gText_WhereShouldCardBeAccessed[];
+extern const u8 gText_WhereShouldNewsBeAccessed[];
+extern const u8 gText_Communicating[];
+extern const u8 gText_ThrowAwayWonderCard[];
+extern const u8 gText_HaventReceivedCardsGift[];
+extern const u8 gText_CommunicationCompleted[];
+extern const u8 gText_HaventReceivedGiftOkayToDiscard[];
+extern const u8 gText_SendingWonderCard[];
+extern const u8 gText_SendingWonderNews[];
 
 #endif // GUARD_STRINGS_H

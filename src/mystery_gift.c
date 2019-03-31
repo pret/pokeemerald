@@ -24,6 +24,12 @@
 #include "mevent.h"
 #include "mevent_801BAAC.h"
 #include "save.h"
+#include "link.h"
+#include "mevent_server_ish.h"
+#include "event_data.h"
+#include "link_rfu.h"
+#include "mevent_news.h"
+#include "mevent_server.h"
 
 void bgid_upload_textbox_1(u8 bgId);
 void task_add_00_mystery_gift(void);
@@ -33,11 +39,6 @@ EWRAM_DATA u8 gUnknown_02022C58[2] = {};
 
 const u16 gUnkTextboxBorderPal[] = INCBIN_U16("graphics/interface/unk_textbox_border.gbapal");
 const u32 gUnkTextboxBorderGfx[] = INCBIN_U32("graphics/interface/unk_textbox_border.4bpp.lz");
-
-struct MysteryGiftExtraData
-{
-    u8 filler_00[0x40];
-};
 
 struct MysteryGiftTaskData
 {
@@ -52,7 +53,7 @@ struct MysteryGiftTaskData
     u8 unkC;
     u8 unkD;
     u8 unkE;
-    struct MysteryGiftExtraData * unk10;
+    u8 * unk10;
 };
 
 const struct BgTemplate gUnknown_082F0598[] = {
@@ -623,7 +624,7 @@ bool32 sub_8018A1C(u8 * counter, const u8 * str)
     }
 }
 
-s32 sub_8018A50(u8 * unused0, u8 * unused1, bool8 r2)
+u32 sub_8018A50(u8 * unused0, u16 * unused1, bool8 r2)
 {
     struct ListMenuTemplate listMenuTemplate = gUnknown_082F0638;
     struct WindowTemplate windowTemplate = gUnknown_082F05E0;
@@ -661,7 +662,7 @@ s32 sub_8018A50(u8 * unused0, u8 * unused1, bool8 r2)
     return r4;
 }
 
-s32 sub_8018B08(u8 * textState, u16 * windowId, bool8 r6, const u8 * str)
+s8 sub_8018B08(u8 * textState, u16 * windowId, bool8 r6, const u8 * str)
 {
     struct WindowTemplate windowTemplate;
     s8 input;
@@ -886,7 +887,7 @@ bool32 sub_8018E20(bool32 arg0, bool32 arg1)
     }
 }
 
-s8 sub_8018E50(u8 * textState, u16 * windowId, bool32 r2)
+s32 sub_8018E50(u8 * textState, u16 * windowId, bool32 r2)
 {
     if (r2 == 0)
     {
@@ -1128,5 +1129,564 @@ void task_add_00_mystery_gift(void)
     data->unk4 = 0;
     data->unk6 = 0;
     data->unkE = 0;
-    data->unk10 = AllocZeroed(sizeof(*data->unk10));
+    data->unk10 = AllocZeroed(0x40);
+}
+
+void task00_mystery_gift(u8 taskId)
+{
+    struct MysteryGiftTaskData * data = (void *)gTasks[taskId].data;
+    u32 sp0;
+    const u8 * r1;
+
+    switch (data->unk8)
+    {
+    case  0:
+        data->unk8 = 1;
+        break;
+    case  1:
+        switch (sub_8018A50(&data->unk9, &data->unk0, FALSE))
+        {
+        case 0:
+            data->unkC = 0;
+            if (sub_801B27C() == TRUE)
+            {
+                data->unk8 = 18;
+            }
+            else
+            {
+                data->unk8 = 2;
+            }
+            break;
+        case 1:
+            data->unkC = 1;
+            if (sub_801B0CC() == TRUE)
+            {
+                data->unk8 = 18;
+            }
+            else
+            {
+                data->unk8 = 2;
+            }
+            break;
+        case -2u:
+            data->unk8 = 37;
+            break;
+        }
+        break;
+    case  2:
+    {
+        if (data->unkC == 0)
+        {
+            if (mevent_0814257C(&data->unk9, gText_DontHaveCardNewOneInput))
+            {
+                data->unk8 = 3;
+                sub_80186EC(0, 1);
+            }
+        }
+        else
+        {
+            if (mevent_0814257C(&data->unk9, gText_DontHaveNewsNewOneInput))
+            {
+                data->unk8 = 3;
+                sub_80186EC(0, 1);
+            }
+        }
+        break;
+    }
+    case  3:
+        if (data->unkC == 0)
+        {
+            sub_8018884(gText_WhereShouldCardBeAccessed);
+        }
+        else
+        {
+            sub_8018884(gText_WhereShouldNewsBeAccessed);
+        }
+        data->unk8 = 4;
+        break;
+    case  4:
+        switch (sub_8018A50(&data->unk9, &data->unk0, TRUE))
+        {
+        case 0:
+            sub_80188DC();
+            data->unk8 = 5;
+            data->unkD = 0;
+            break;
+        case 1:
+            sub_80188DC();
+            data->unk8 = 5;
+            data->unkD = 1;
+            break;
+        case -2u:
+            sub_80188DC();
+            if (sub_8018D98(data->unkC))
+            {
+                data->unk8 = 18;
+            }
+            else
+            {
+                data->unk8 = 0;
+                sub_80186EC(0, 0);
+            }
+            break;
+        }
+        break;
+    case  5:
+    {
+        register u8 eos asm("r1");
+        gStringVar1[0] = (eos = EOS);
+        gStringVar2[0] = eos;
+        gStringVar3[0] = eos;
+    }
+        switch (data->unkC)
+        {
+        case 0:
+            if (data->unkD == 1)
+            {
+                sub_8014EFC(0x15);
+            }
+            else if (data->unkD == 0)
+            {
+                sub_80152A8(0x15);
+            }
+            break;
+        case 1:
+            if (data->unkD == 1)
+            {
+                sub_8014EFC(0x16);
+            }
+            else if (data->unkD == 0)
+            {
+                sub_80152A8(0x16);
+            }
+            break;
+        }
+        data->unk8 = 6;
+        break;
+    case  6:
+        if (gReceivedRemoteLinkPlayers != 0)
+        {
+            sub_8018838(TRUE);
+            data->unk8 = 7;
+            sub_801D484(data->unkC);
+        }
+        else if (gSpecialVar_Result == 5)
+        {
+            sub_8018838(TRUE);
+            data->unk8 = 3;
+        }
+        break;
+    case  7:
+        sub_8018884(gText_Communicating);
+        data->unk8 = 8;
+        break;
+    case  8:
+        switch (sub_801D4A8(&data->unk0))
+        {
+        case 6:
+            task_add_05_task_del_08FA224_when_no_RfuFunc();
+            data->unkE = data->unk0;
+            data->unk8 = 13;
+            break;
+        case 5:
+            memcpy(data->unk10, sub_801D4F4(), 0x40);
+            sub_801D4E4();
+            break;
+        case 3:
+            data->unk8 = 10;
+            break;
+        case 2:
+            data->unk8 = 9;
+            break;
+        case 4:
+            data->unk8 = 11;
+            StringCopy(gStringVar1, gLinkPlayers[0].name);
+            break;
+        }
+        break;
+    case  9:
+        switch ((u32)sub_8018B08(&data->unk9, &data->unk0, FALSE, sub_801D4F4()))
+        {
+        case 0:
+            sub_801D500(0);
+            sub_801D4E4();
+            data->unk8 = 7;
+            break;
+        case 1:
+            sub_801D500(1);
+            sub_801D4E4();
+            data->unk8 = 7;
+            break;
+        case -1u:
+            sub_801D500(1);
+            sub_801D4E4();
+            data->unk8 = 7;
+            break;
+        }
+        break;
+    case 10:
+        if (mevent_0814257C(&data->unk9, sub_801D4F4()))
+        {
+            sub_801D4E4();
+            data->unk8 = 7;
+        }
+        break;
+    case 11:
+        switch ((u32)sub_8018B08(&data->unk9, &data->unk0, FALSE, gText_ThrowAwayWonderCard))
+        {
+        case 0:
+            if (sub_801B3F8() == TRUE)
+            {
+                data->unk8 = 12;
+            }
+            else
+            {
+                sub_801D500(0);
+                sub_801D4E4();
+                data->unk8 = 7;
+            }
+            break;
+        case 1:
+            sub_801D500(1);
+            sub_801D4E4();
+            data->unk8 = 7;
+            break;
+        case -1u:
+            sub_801D500(1);
+            sub_801D4E4();
+            data->unk8 = 7;
+            break;
+        }
+        break;
+    case 12:
+        switch ((u32)sub_8018B08(&data->unk9, &data->unk0, FALSE, gText_HaventReceivedCardsGift))
+        {
+        case 0:
+            sub_801D500(0);
+            sub_801D4E4();
+            data->unk8 = 7;
+            break;
+        case 1:
+            sub_801D500(1);
+            sub_801D4E4();
+            data->unk8 = 7;
+            break;
+        case -1u:
+            sub_801D500(1);
+            sub_801D4E4();
+            data->unk8 = 7;
+            break;
+        }
+        break;
+    case 13:
+        if (gReceivedRemoteLinkPlayers == 0)
+        {
+            sub_800E084();
+            data->unk8 = 14;
+        }
+        break;
+    case 14:
+        if (sub_8018A1C(&data->unk9, gText_CommunicationCompleted))
+        {
+            if (data->unkD == 1)
+            {
+                StringCopy(gStringVar1, gLinkPlayers[0].name);
+            }
+            data->unk8 = 15;
+        }
+        break;
+    case 15:
+    {
+        register bool32 flag asm("r1");
+        r1 = mevent_message(&sp0, data->unkC, data->unkD, data->unkE);
+        if (r1 == NULL)
+        {
+            r1 = data->unk10;
+        }
+        if (sp0)
+        {
+            flag = mevent_08142CE8(&data->unk9, r1, &data->unk0);
+        }
+        else
+        {
+            flag = mevent_0814257C(&data->unk9, r1);
+        }
+        if (flag)
+        {
+            if (data->unkE == 3)
+            {
+                if (data->unkD == 1)
+                {
+                    sub_801DB68(1);
+                }
+                else
+                {
+                    sub_801DB68(2);
+                }
+            }
+            if (sp0 == 0)
+            {
+                data->unk8 = 0;
+                sub_80186EC(0, 0);
+            }
+            else
+            {
+                data->unk8 = 17;
+            }
+        }
+        break;
+    }
+    case 16:
+        if (mevent_0814257C(&data->unk9, gText_CommunicationError))
+        {
+            data->unk8 = 0;
+            sub_80186EC(0, 0);
+        }
+        break;
+    case 17:
+        if (mevent_save_game(&data->unk9))
+        {
+            data->unk8 = 18;
+        }
+        break;
+    case 18:
+        if (sub_8018DAC(&data->unk9, data->unkC))
+        {
+            data->unk8 = 20;
+        }
+        break;
+    case 20:
+        if (data->unkC == 0)
+        {
+            if (({gMain.newKeys & A_BUTTON;}))
+            {
+                data->unk8 = 21;
+            }
+            if (({gMain.newKeys & B_BUTTON;}))
+            {
+                data->unk8 = 27;
+            }
+        }
+        else
+        {
+            switch (sub_801CCD0(gMain.newKeys))
+            {
+            case 0:
+                sub_801CC38();
+                data->unk8 = 21;
+                break;
+            case 1:
+                data->unk8 = 27;
+                break;
+            }
+        }
+        break;
+    case 21:
+    {
+        u32 result;
+        if (data->unkC == 0)
+        {
+            if (sub_801B308())
+            {
+                result = sub_8018C4C(&data->unk9, &data->unk0, data->unkC, FALSE);
+            }
+            else
+            {
+                result = sub_8018C4C(&data->unk9, &data->unk0, data->unkC, TRUE);
+            }
+        }
+        else
+        {
+            if (sub_801B128())
+            {
+                result = sub_8018C4C(&data->unk9, &data->unk0, data->unkC, FALSE);
+            }
+            else
+            {
+                result = sub_8018C4C(&data->unk9, &data->unk0, data->unkC, TRUE);
+            }
+        }
+        switch (result)
+        {
+        case 0:
+            data->unk8 = 28;
+            break;
+        case 1:
+            data->unk8 = 29;
+            break;
+        case 2:
+            data->unk8 = 22;
+            break;
+        case -2u:
+            if (data->unkC == 1)
+            {
+                sub_801CC80();
+            }
+            data->unk8 = 20;
+            break;
+        }
+        break;
+    }
+    case 22:
+        switch (sub_8018E50(&data->unk9, &data->unk0, data->unkC))
+        {
+        case 0:
+            if (data->unkC == 0 && sub_801B3F8() == TRUE)
+            {
+                data->unk8 = 23;
+            }
+            else
+            {
+                data->unk8 = 24;
+            }
+            break;
+        case 1:
+            data->unk8 = 21;
+            break;
+        case -1:
+            data->unk8 = 21;
+            break;
+        }
+        break;
+    case 23:
+        switch ((u32)sub_8018B08(&data->unk9, &data->unk0, TRUE, gText_HaventReceivedGiftOkayToDiscard))
+        {
+        case 0:
+            data->unk8 = 24;
+            break;
+        case 1:
+            data->unk8 = 21;
+            break;
+        case -1u:
+            data->unk8 = 21;
+            break;
+        }
+        break;
+    case 24:
+        if (sub_8018E20(data->unkC, 1))
+        {
+            sub_8018E08(data->unkC);
+            data->unk8 = 25;
+        }
+        break;
+    case 25:
+        if (mevent_save_game(&data->unk9))
+        {
+            data->unk8 = 26;
+        }
+        break;
+    case 26:
+        if (mevent_message_was_thrown_away(&data->unk9, data->unkC))
+        {
+            data->unk8 = 0;
+            sub_80186EC(0, 0);
+        }
+        break;
+    case 27:
+        if (sub_8018E20(data->unkC, 0))
+        {
+            data->unk8 = 0;
+        }
+        break;
+    case 28:
+        if (sub_8018E20(data->unkC, 1))
+        {
+            data->unk8 = 3;
+        }
+        break;
+    case 29:
+        if (sub_8018E20(data->unkC, 1))
+        {
+            switch (data->unkC)
+            {
+            case 0:
+                sub_8014A00(21);
+                break;
+            case 1:
+                sub_8014A00(22);
+                break;
+            }
+            data->unkD = 1;
+            data->unk8 = 30;
+        }
+        break;
+    case 30:
+        if (gReceivedRemoteLinkPlayers != 0)
+        {
+            sub_8018838(1);
+            data->unk8 = 31;
+        }
+        else if (gSpecialVar_Result == 5)
+        {
+            sub_8018838(1);
+            data->unk8 = 18;
+        }
+        break;
+    case 31:
+    {
+        register u8 eos asm("r1");
+        gStringVar1[0] = (eos = EOS);
+        gStringVar2[0] = eos;
+        gStringVar3[0] = eos;
+    }
+        if (data->unkC == 0)
+        {
+            sub_8018884(gText_SendingWonderCard);
+            mevent_srv_new_wcard();
+        }
+        else
+        {
+            sub_8018884(gText_SendingWonderNews);
+            mevent_srv_init_wnews();
+        }
+        data->unk8 = 32;
+        break;
+    case 32:
+        if (sub_801D0C4(&data->unk0) == 3)
+        {
+            data->unkE = data->unk0;
+            data->unk8 = 33;
+        }
+        break;
+    case 33:
+        task_add_05_task_del_08FA224_when_no_RfuFunc();
+        StringCopy(gStringVar1, gLinkPlayers[1].name);
+        data->unk8 = 34;
+        break;
+    case 34:
+        if (gReceivedRemoteLinkPlayers == 0)
+        {
+            sub_800E084();
+            data->unk8 = 35;
+        }
+        break;
+    case 35:
+        if (sub_8019174(&data->unk9, &data->unk0, data->unkD, data->unkE))
+        {
+            if (data->unkD == 1 && data->unkE == 3)
+            {
+                sub_801DB68(3);
+                data->unk8 = 17;
+            }
+            else
+            {
+                data->unk8 = 0;
+                sub_80186EC(0, 0);
+            }
+        }
+        break;
+    case 36:
+        if (mevent_0814257C(&data->unk9, gText_CommunicationError))
+        {
+            data->unk8 = 0;
+            sub_80186EC(0, 0);
+        }
+        break;
+    case 37:
+        CloseLink();
+        Free(data->unk10);
+        DestroyTask(taskId);
+        SetMainCallback2(sub_80186A4);
+        break;
+    }
 }
