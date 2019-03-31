@@ -598,7 +598,7 @@ bool32 sub_8018A1C(u8 * counter, const u8 * str)
     }
 }
 
-s32 sub_8018A50(u32 unused0, u32 unused1, bool8 r2)
+s32 sub_8018A50(u8 * unused0, u8 * unused1, bool8 r2)
 {
     struct ListMenuTemplate listMenuTemplate = gUnknown_082F0638;
     struct WindowTemplate windowTemplate = gUnknown_082F05E0;
@@ -634,4 +634,65 @@ s32 sub_8018A50(u32 unused0, u32 unused1, bool8 r2)
         CopyWindowToVram(2, 1);
     }
     return r4;
+}
+
+s32 sub_8018B08(u8 * textState, u16 * windowId, bool8 r6, const u8 * str)
+{
+    struct WindowTemplate windowTemplate;
+    s8 input;
+
+    switch (*textState)
+    {
+    case 0:
+        StringExpandPlaceholders(gStringVar4, str);
+        if (r6 == 0)
+        {
+            *windowId = AddWindow(&gUnknown_082F05C8);
+        }
+        else
+        {
+            *windowId = AddWindow(&gUnknown_082F05D0);
+        }
+        FillWindowPixelBuffer(*windowId, 0x11);
+        AddTextPrinterParameterized4(*windowId, 1, 0, 1, 0, 0, gUnknown_082F0728, 0, gStringVar4);
+        sub_8098858(*windowId, 0x001, 0x0F);
+        CopyWindowToVram(*windowId, 2);
+        PutWindowTilemap(*windowId);
+        (*textState)++;
+        break;
+    case 1:
+        windowTemplate = gUnknown_082F05E8;
+        if (r6 == 0)
+        {
+            windowTemplate.tilemapTop = 9;
+        }
+        else
+        {
+            windowTemplate.tilemapTop = 15;
+        }
+        CreateYesNoMenu(&windowTemplate, 10, 14, 0);
+        (*textState)++;
+        break;
+    case 2:
+        input = Menu_ProcessInputNoWrapClearOnChoose();
+        if (input == -1 || input == 0 || input == 1)
+        {
+            *textState = 0;
+            rbox_fill_rectangle(*windowId);
+            ClearWindowTilemap(*windowId);
+            CopyWindowToVram(*windowId, 1);
+            RemoveWindow(*windowId);
+            return input;
+        }
+        break;
+    case 0xFF:
+        *textState = 0;
+        rbox_fill_rectangle(*windowId);
+        ClearWindowTilemap(*windowId);
+        CopyWindowToVram(*windowId, 1);
+        RemoveWindow(*windowId);
+        return -1;
+    }
+
+    return -2;
 }
