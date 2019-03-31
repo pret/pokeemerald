@@ -23,6 +23,7 @@
 #include "string_util.h"
 #include "mevent.h"
 #include "mevent_801BAAC.h"
+#include "save.h"
 
 void bgid_upload_textbox_1(u8 bgId);
 void task_add_00_mystery_gift(void);
@@ -781,8 +782,10 @@ s32 sub_8018D98(bool32 a0)
     }
 }
 
-/*bool32 sub_8018DAC(u8 * state, bool32 arg1)
+bool32 sub_8018DAC(u8 * state, bool32 arg1)
 {
+    s32 v0;
+
     switch (*state)
     {
     case 0:
@@ -795,24 +798,123 @@ s32 sub_8018D98(bool32 a0)
             sub_801C6C8(sub_801B00C());
         }
         (*state)++;
+        break;
     case 1:
         if (arg1 == 0)
         {
-            if (sub_801BB74() == 0)
+            v0 = sub_801BB74();
+        check:
+            if (v0 != 0)
             {
-                break;
+                goto done;
             }
+            break;
         }
         else
         {
-            if (sub_801C758() == 0)
-            {
-                break;
-            }
+            v0 = sub_801C758();
+            goto check;
         }
+    done:
         *state = 0;
         return TRUE;
     }
 
     return FALSE;
-}*/
+}
+
+bool32 sub_8018E08(bool32 arg0)
+{
+    if (arg0 == 0)
+    {
+        sub_801B1E8();
+    }
+    else
+    {
+        sub_801B06C();
+    }
+    return TRUE;
+}
+
+bool32 sub_8018E20(bool32 arg0, bool32 arg1)
+{
+    if (arg0 == 0)
+    {
+        if (sub_801BDA4(arg1) != 0)
+        {
+            sub_801BB48();
+            return TRUE;
+        }
+        else
+        {
+            return FALSE;
+        }
+    }
+    else
+    {
+        if (sub_801CA50(arg1) != 0)
+        {
+            sub_801C72C();
+            return TRUE;
+        }
+        else
+        {
+            return FALSE;
+        }
+    }
+}
+
+s8 sub_8018E50(u8 * textState, u16 * windowId, bool32 r2)
+{
+    if (r2 == 0)
+    {
+        return sub_8018B08(textState, windowId, TRUE, gText_IfThrowAwayCardEventWontHappen);
+    }
+    else
+    {
+        return sub_8018B08(textState, windowId, TRUE, gText_OkayToDiscardNews);
+    }
+}
+
+bool32 mevent_message_was_thrown_away(u8 * textState, bool32 r1)
+{
+    if (r1 == 0)
+    {
+        return mevent_0814257C(textState, gText_WonderCardThrownAway);
+    }
+    else
+    {
+        return mevent_0814257C(textState, gText_WonderNewsThrownAway);
+    }
+}
+
+bool32 mevent_save_game(u8 * state)
+{
+    switch (*state)
+    {
+    case 0:
+        sub_8018884(gText_DataWillBeSaved);
+        (*state)++;
+        break;
+    case 1:
+        TrySavingData(0);
+        (*state)++;
+        break;
+    case 2:
+        sub_8018884(gText_SaveCompletedPressA);
+        (*state)++;
+        break;
+    case 3:
+        if (({gMain.newKeys & (A_BUTTON | B_BUTTON);}))
+        {
+            (*state)++;
+        }
+        break;
+    case 4:
+        *state = 0;
+        sub_80188DC();
+        return TRUE;
+    }
+
+    return FALSE;
+}
