@@ -488,7 +488,7 @@ void sub_80F910C(void)
     if (gIsLinkContest & 2)
     {
         if (gReceivedRemoteLinkPlayers)
-            sub_800E084();
+            DestroyWirelessStatusIndicatorSprite();
     }
 }
 

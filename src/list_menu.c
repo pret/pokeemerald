@@ -324,7 +324,7 @@ s32 DoMysteryGiftListMenu(const struct WindowTemplate *windowTemplate, const str
         case 2:
             LoadUserWindowBorderGfx(sMysteryGiftLinkMenu.windowId, tileNum, palNum);
         case 1:
-            sub_8098858(sMysteryGiftLinkMenu.windowId, tileNum, palNum / 16);
+            DrawTextBorderOuter(sMysteryGiftLinkMenu.windowId, tileNum, palNum / 16);
             break;
         }
         gMultiuseListMenuTemplate = *listMenuTemplate;

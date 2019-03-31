@@ -4,7 +4,7 @@
 #include "ereader_helpers.h"
 #include "link.h"
 #include "main.h"
-#include "union_room.h"
+#include "mystery_gift.h"
 #include "save.h"
 #include "sound.h"
 #include "sprite.h"
@@ -209,7 +209,7 @@ static u32 sub_81D4EE4(u8 *arg0, u16 *arg1)
     return 0;
 }
 
-void sub_81D5014(void)
+void task_add_00_ereader(void)
 {
     int value;
     struct Unk81D5014 *data;
@@ -251,7 +251,7 @@ static void sub_81D5084(u8 taskId)
     switch (data->unk8)
     {
     case 0:
-        if (mevent_0814257C(&data->unk9, gUnknown_085EDFD6))
+        if (MG_PrintTextOnWindow1AndWaitButton(&data->unk9, gUnknown_085EDFD6))
             data->unk8 = 1;
         break;
     case 1:
@@ -275,9 +275,9 @@ static void sub_81D5084(u8 taskId)
         }
         break;
     case 4:
-        if (mevent_0814257C(&data->unk9, gUnknown_085EDFF5))
+        if (MG_PrintTextOnWindow1AndWaitButton(&data->unk9, gUnknown_085EDFF5))
         {
-            sub_8018884(gUnknown_085EE014);
+            AddTextPrinterToWindow1(gUnknown_085EE014);
             sub_81D505C(&data->unk0);
             data->unk8 = 5;
         }
@@ -324,11 +324,11 @@ static void sub_81D5084(u8 taskId)
         }
         break;
     case 7:
-        if (mevent_0814257C(&data->unk9, gUnknown_085EE05C))
+        if (MG_PrintTextOnWindow1AndWaitButton(&data->unk9, gUnknown_085EE05C))
             data->unk8 = 4;
         break;
     case 8:
-        sub_8018884(gUnknown_085EE097);
+        AddTextPrinterToWindow1(gUnknown_085EE097);
         // XXX: This (u32*) cast is discarding the const qualifier from gUnknown_089A3470
         sub_81D4D50(&gUnknown_03006370, gMultiBootProgram_BerryGlitchFix_Start - gUnknown_089A3470, (u32*)gUnknown_089A3470);
         data->unk8 = 9;
@@ -347,7 +347,7 @@ static void sub_81D5084(u8 taskId)
         else if (data->unkE == 1)
         {
             sub_81D505C(&data->unk0);
-            sub_8018884(gUnknown_085EE120);
+            AddTextPrinterToWindow1(gUnknown_085EE120);
             data->unk8 = 11;
         }
         else
@@ -361,7 +361,7 @@ static void sub_81D5084(u8 taskId)
         break;
     case 12:
         sub_81D4E30();
-        sub_8018884(gUnknown_085EE0DC);
+        AddTextPrinterToWindow1(gUnknown_085EE0DC);
         data->unk8 = 13;
         break;
     case 13:
@@ -370,7 +370,7 @@ static void sub_81D5084(u8 taskId)
             case 0:
                 break;
             case 2:
-                sub_8018884(gUnknown_085EE097);
+                AddTextPrinterToWindow1(gUnknown_085EE097);
                 data->unk8 = 14;
                 break;
             case 1:
@@ -418,7 +418,7 @@ static void sub_81D5084(u8 taskId)
     case 17:
         if (sub_81D3AB0((struct Unk81D38FC *)&gDecompressionBuffer))
         {
-            sub_8018884(gUnknown_085EE0FA);
+            AddTextPrinterToWindow1(gUnknown_085EE0FA);
             sub_81D505C(&data->unk0);
             data->unk8 = 18;
         }
@@ -430,7 +430,7 @@ static void sub_81D5084(u8 taskId)
     case 18:
         if (sub_81D5064(&data->unk0, 120))
         {
-            sub_8018884(gUnknown_085EE107);
+            AddTextPrinterToWindow1(gUnknown_085EE107);
             PlayFanfare(MUS_FANFA4);
             data->unk8 = 19;
         }
@@ -440,25 +440,25 @@ static void sub_81D5084(u8 taskId)
             data->unk8 = 26;
         break;
     case 23:
-        if (mevent_0814257C(&data->unk9,gUnknown_085EE06B))
+        if (MG_PrintTextOnWindow1AndWaitButton(&data->unk9,gUnknown_085EE06B))
             data->unk8 = 26;
         break;
     case 20:
-        if (mevent_0814257C(&data->unk9, gUnknown_085EE0A3))
+        if (MG_PrintTextOnWindow1AndWaitButton(&data->unk9, gUnknown_085EE0A3))
             data->unk8 = 0;
         break;
     case 21:
-        if (mevent_0814257C(&data->unk9, gUnknown_085EE0BF))
+        if (MG_PrintTextOnWindow1AndWaitButton(&data->unk9, gUnknown_085EE0BF))
             data->unk8 = 0;
         break;
     case 22:
-        if (mevent_0814257C(&data->unk9, gUnknown_085EE12D))
+        if (MG_PrintTextOnWindow1AndWaitButton(&data->unk9, gUnknown_085EE12D))
             data->unk8 = 0;
         break;
     case 26:
         Free(data->unk10);
         DestroyTask(taskId);
-        SetMainCallback2(sub_80186A4);
+        SetMainCallback2(MainCB_FreeAllBuffersAndReturnToInitTitleScreen);
         break;
     }
 }

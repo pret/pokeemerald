@@ -5,31 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_8019930
-sub_8019930: @ 8019930
-	ldr r0, =0x000001a9
-	bx lr
-	.pool
-	thumb_func_end sub_8019930
-
-	thumb_func_start bgid_upload_textbox_1
-bgid_upload_textbox_1: @ 8019938
-	push {lr}
-	sub sp, 0x4
-	lsls r0, 24
-	lsrs r0, 24
-	ldr r1, =gUnkTextboxBorderGfx
-	movs r2, 0x80
-	lsls r2, 1
-	movs r3, 0
-	str r3, [sp]
-	bl DecompressAndLoadBgGfxUsingHeap
-	add sp, 0x4
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end bgid_upload_textbox_1
-
 	thumb_func_start is_walking_or_running
 is_walking_or_running: @ 8019958
 	push {lr}
@@ -1550,7 +1525,7 @@ sub_801A43C: @ 801A43C
 	movs r2, 0x20
 	bl LoadPalette
 	movs r0, 0xF0
-	bl sub_81978B0
+	bl Menu_LoadStdPalAt
 	bl DynamicPlaceholderTextUtil_Reset
 	movs r0, 0x20
 	str r0, [sp]
@@ -2393,7 +2368,7 @@ _0801ABF4:
 	movs r0, 0
 	movs r1, 0x1
 	movs r2, 0xD
-	bl sub_8098858
+	bl DrawTextBorderOuter
 	str r5, [sp]
 	movs r0, 0
 	adds r1, r6, 0

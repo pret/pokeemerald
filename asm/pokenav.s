@@ -8104,7 +8104,7 @@ sub_81CC09C: @ 81CC09C
 	ldrb r0, [r4, 0x14]
 	movs r1, 0x1
 	movs r2, 0x4
-	bl sub_8098858
+	bl DrawTextBorderOuter
 	ldrb r0, [r4, 0x14]
 	movs r1, 0x11
 	bl FillWindowPixelBuffer
@@ -9354,7 +9354,7 @@ sub_81CCA1C: @ 81CCA1C
 	ldrb r0, [r5, 0x8]
 	movs r1, 0x42
 	movs r2, 0x4
-	bl sub_8098858
+	bl DrawTextBorderOuter
 	ldr r1, =gUnknown_08622888
 	str r4, [sp]
 	movs r0, 0x1
