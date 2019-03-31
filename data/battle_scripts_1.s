@@ -345,6 +345,7 @@ gBattleScriptsForMoveEffects:: @ 82D86A8
 	.4byte BattleScript_EffectPartingShot
 	.4byte BattleScript_EffectSpectralThief
 	.4byte BattleScript_EffectVCreate
+	.4byte BattleScript_EffectMatBlock
 	
 BattleScript_EffectVCreate:
 	setmoveeffect MOVE_EFFECT_V_CREATE | MOVE_EFFECT_AFFECTS_USER
@@ -3148,9 +3149,15 @@ BattleScript_DoGhostCurse::
 	tryfaintmon BS_ATTACKER, FALSE, NULL
 	goto BattleScript_MoveEnd
 
+BattleScript_EffectMatBlock::
+	attackcanceler
+	jumpifnotfirstturn BattleScript_ButItFailedAtkStringPpReduce
+	goto BattleScript_ProtectLikeAtkString
+
 BattleScript_EffectProtect::
 BattleScript_EffectEndure::
 	attackcanceler
+BattleScript_ProtectLikeAtkString:
 	attackstring
 	ppreduce
 	setprotectlike

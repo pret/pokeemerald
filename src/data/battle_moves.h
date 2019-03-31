@@ -7870,16 +7870,17 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_MAT_BLOCK] =
     {
-        .effect = EFFECT_PLACEHOLDER, // Needs a custom move effect
+        .effect = EFFECT_MAT_BLOCK,
         .power = 0,
         .type = TYPE_FIGHTING,
         .accuracy = 0,
         .pp = 15,
         .secondaryEffectChance = 0,
-        .target = MOVE_TARGET_SELECTED,
+        .target = MOVE_TARGET_USER,
         .priority = 0,
         .flags = 0,
         .split = SPLIT_STATUS,
+        .argument = TRUE, // Protects the whole side.
     },
 
     [MOVE_BELCH] =
