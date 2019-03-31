@@ -27,11 +27,33 @@
 
 void bgid_upload_textbox_1(u8 bgId);
 void task_add_00_mystery_gift(void);
+void task00_mystery_gift(u8 taskId);
 
 EWRAM_DATA u8 gUnknown_02022C58[2] = {};
 
 const u16 gUnkTextboxBorderPal[] = INCBIN_U16("graphics/interface/unk_textbox_border.gbapal");
 const u32 gUnkTextboxBorderGfx[] = INCBIN_U32("graphics/interface/unk_textbox_border.4bpp.lz");
+
+struct MysteryGiftExtraData
+{
+    u8 filler_00[0x40];
+};
+
+struct MysteryGiftTaskData
+{
+    u16 unk0;
+    u16 unk2;
+    u16 unk4;
+    u16 unk6;
+    u8 unk8;
+    u8 unk9;
+    u8 unkA;
+    u8 unkB;
+    u8 unkC;
+    u8 unkD;
+    u8 unkE;
+    struct MysteryGiftExtraData * unk10;
+};
 
 const struct BgTemplate gUnknown_082F0598[] = {
     {
@@ -987,4 +1009,124 @@ const u8 * mevent_message(u32 * a0, u8 a1, u8 a2, u32 a3)
     }
 
     return msg;
+}
+
+bool32 mevent_08142CE8(u8 * state, const u8 * arg1, u16 * arg2)
+{
+    switch (*state)
+    {
+    case 0:
+        if (arg1 != NULL)
+        {
+            sub_8018884(arg1);
+        }
+        PlayFanfare(MUS_FANFA4);
+        *arg2 = 0;
+        (*state)++;
+        break;
+    case 1:
+        if (++(*arg2) > 0xF0)
+        {
+            (*state)++;
+        }
+        break;
+    case 2:
+        if (IsFanfareTaskInactive())
+        {
+            *state = 0;
+            sub_80188DC();
+            return TRUE;
+        }
+        break;
+    }
+    return FALSE;
+}
+
+const u8 * mevent_message_stamp_card_etc_send_status(u32 * a0, u8 unused, u32 state)
+{
+    const u8 * result = gText_CommunicationError;
+    *a0 = 0;
+    switch (state)
+    {
+    case 0:
+        result = gText_NothingSentOver;
+        break;
+    case 1:
+        result = gText_RecordUploadedViaWireless;
+        break;
+    case 2:
+        result = gText_WonderCardSentTo;
+        *a0 = 1;
+        break;
+    case 3:
+        result = gText_WonderNewsSentTo;
+        *a0 = 1;
+        break;
+    case 4:
+        result = gText_StampSentTo;
+        break;
+    case 5:
+        result = gText_OtherTrainerHasCard;
+        break;
+    case 6:
+        result = gText_OtherTrainerHasStamp;
+        break;
+    case 7:
+        result = gText_OtherTrainerHasNews;
+        break;
+    case 8:
+        result = gText_NoMoreRoomForStamps;
+        break;
+    case 9:
+        result = gText_OtherTrainerCanceled;
+        break;
+    case 10:
+        result = gText_CantSendGiftToTrainer;
+        break;
+    case 11:
+        result = gText_CommunicationError;
+        break;
+    case 12:
+        result = gText_GiftSentTo;
+        break;
+    case 13:
+        result = gText_GiftSentTo;
+        break;
+    case 14:
+        result = gText_CantSendGiftToTrainer;
+        break;
+    }
+    return result;
+}
+
+bool32 sub_8019174(u8 * state_p, u16 * arg1, u8 arg2, u32 state)
+{
+    u32 flag;
+    const u8 * str = mevent_message_stamp_card_etc_send_status(&flag, arg2, state);
+    if (flag)
+    {
+        return mevent_08142CE8(state_p, str, arg1);
+    }
+    else
+    {
+        return mevent_0814257C(state_p, str);
+    }
+}
+
+void task_add_00_mystery_gift(void)
+{
+    u8 taskId = CreateTask(task00_mystery_gift, 0);
+    struct MysteryGiftTaskData * data = (void *)gTasks[taskId].data;
+    data->unk8 = 0;
+    data->unk9 = 0;
+    data->unkA = 0;
+    data->unkB = 0;
+    data->unkC = 0;
+    data->unkD = 0;
+    data->unk0 = 0;
+    data->unk2 = 0;
+    data->unk4 = 0;
+    data->unk6 = 0;
+    data->unkE = 0;
+    data->unk10 = AllocZeroed(sizeof(*data->unk10));
 }

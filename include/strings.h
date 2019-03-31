@@ -2650,5 +2650,16 @@ extern const u8 gText_CantAcceptNewsFromTrainer[];
 extern const u8 gText_CantAcceptCardFromTrainer[];
 extern const u8 gText_CommunicationError[];
 extern const u8 gText_NewTrainerReceived[];
+extern const u8 gText_RecordUploadedViaWireless[];
+extern const u8 gText_WonderCardSentTo[];
+extern const u8 gText_WonderNewsSentTo[];
+extern const u8 gText_StampSentTo[];
+extern const u8 gText_OtherTrainerHasCard[];
+extern const u8 gText_OtherTrainerHasStamp[];
+extern const u8 gText_OtherTrainerHasNews[];
+extern const u8 gText_NoMoreRoomForStamps[];
+extern const u8 gText_OtherTrainerCanceled[];
+extern const u8 gText_GiftSentTo[];
+extern const u8 gText_CantSendGiftToTrainer[];
 
 #endif // GUARD_STRINGS_H
