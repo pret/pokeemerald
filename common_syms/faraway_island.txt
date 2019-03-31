@@ -1,0 +1,3 @@
+sPlayerToMewDeltaX
+sPlayerToMewDeltaY
+sMewDirectionCandidates

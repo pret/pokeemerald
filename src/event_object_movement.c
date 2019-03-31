@@ -4414,8 +4414,8 @@ bool8 CopyablePlayerMovement_GoSpeed0(struct EventObject *eventObject, struct Sp
     direction = playerDirection;
     if (EventObjectIsFarawayIslandMew(eventObject))
     {
-        direction = sub_81D427C();
-        if (direction == 0)
+        direction = GetMewMoveDirection();
+        if (direction == DIR_NONE)
         {
             direction = playerDirection;
             direction = state_to_direction(gInitialMovementTypeFacingDirections[eventObject->movementType], eventObject->directionSequenceIndex, direction);
