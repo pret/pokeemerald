@@ -2050,6 +2050,7 @@ void SetMoveEffect(bool32 primary, u32 certain)
                 break;
             if (GetBattlerAbility(gEffectBattler) == ABILITY_VITAL_SPIRIT
                 || GetBattlerAbility(gEffectBattler) == ABILITY_INSOMNIA
+                || IsAbilityOnSide(gEffectBattler, ABILITY_SWEET_VEIL)
                 || IsFlowerVeilProtected(gEffectBattler))
                 break;
 

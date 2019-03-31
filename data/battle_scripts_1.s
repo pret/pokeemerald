@@ -1819,6 +1819,7 @@ BattleScript_EffectSleep::
 	jumpifstatus BS_TARGET, STATUS1_SLEEP, BattleScript_AlreadyAsleep
 	jumpifcantmakeasleep BattleScript_CantMakeAsleep
 	jumpifflowerveil BattleScript_FlowerVeilProtects
+	jumpifability BS_TARGET_SIDE, ABILITY_SWEET_VEIL, BattleScript_SweetVeilProtects
 	jumpifstatus BS_TARGET, STATUS1_ANY, BattleScript_ButItFailed
 	accuracycheck BattleScript_ButItFailed, ACC_CURR_MOVE
 	jumpifsideaffecting BS_TARGET, SIDE_STATUS_SAFEGUARD, BattleScript_SafeguardProtected
@@ -1837,6 +1838,18 @@ BattleScript_FlowerVeilProtectsRet::
 	
 BattleScript_FlowerVeilProtects:
 	call BattleScript_FlowerVeilProtectsRet
+	orhalfword gMoveResultFlags, MOVE_RESULT_FAILED
+	goto BattleScript_MoveEnd
+	
+BattleScript_SweetVeilProtectsRet::
+	pause 0x20
+	call BattleScript_AbilityPopUp
+	printstring STRINGID_FLOWERVEILPROTECTED
+	waitmessage 0x40
+	return
+	
+BattleScript_SweetVeilProtects:
+	call BattleScript_SweetVeilProtectsRet
 	orhalfword gMoveResultFlags, MOVE_RESULT_FAILED
 	goto BattleScript_MoveEnd
 
