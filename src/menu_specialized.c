@@ -37,6 +37,9 @@ static void sub_81D24A4(struct UnknownStruct_81D1ED4 *a0);
 static void sub_81D2634(struct UnknownStruct_81D1ED4 *a0);
 static void MoveRelearnerCursorCallback(s32 itemIndex, bool8 onInit, struct ListMenu *list);
 static void nullsub_79(void);
+static void sub_81D3408(struct Sprite *sprite);
+/*static*/ void sub_81D3564(struct Sprite *sprite);
+static void sub_81D35E8(struct Sprite *sprite);
 
 static const struct WindowTemplate sUnknown_086253E8[] =
 {
@@ -1243,7 +1246,7 @@ void sub_81D2ED4(u8 *dst, u8 *nameDst, u16 boxId, u16 monId, u16 arg5, u16 arg6,
     }
 }
 
-void sub_81D2F78(struct Unk81D2F78_Struct *arg0, u8 *sheen, u16 boxId, u16 monId, u16 arg5, u16 id, u16 arg7, bool8 arg8)
+void sub_81D2F78(struct UnknownStruct_81D1ED4 *arg0, u8 *sheen, u16 boxId, u16 monId, u16 arg5, u16 id, u16 arg7, bool8 arg8)
 {
     u16 i;
 
@@ -1252,30 +1255,30 @@ void sub_81D2F78(struct Unk81D2F78_Struct *arg0, u8 *sheen, u16 boxId, u16 monId
 
     if (arg5 != arg7)
     {
-        arg0->contestStats[id][0] = GetBoxOrPartyMonData(boxId, monId, MON_DATA_COOL, NULL);
-        arg0->contestStats[id][1] = GetBoxOrPartyMonData(boxId, monId, MON_DATA_TOUGH, NULL);
-        arg0->contestStats[id][2] = GetBoxOrPartyMonData(boxId, monId, MON_DATA_SMART, NULL);
-        arg0->contestStats[id][3] = GetBoxOrPartyMonData(boxId, monId, MON_DATA_CUTE, NULL);
-        arg0->contestStats[id][4] = GetBoxOrPartyMonData(boxId, monId, MON_DATA_BEAUTY, NULL);
+        arg0->unk0[id][0] = GetBoxOrPartyMonData(boxId, monId, MON_DATA_COOL, NULL);
+        arg0->unk0[id][1] = GetBoxOrPartyMonData(boxId, monId, MON_DATA_TOUGH, NULL);
+        arg0->unk0[id][2] = GetBoxOrPartyMonData(boxId, monId, MON_DATA_SMART, NULL);
+        arg0->unk0[id][3] = GetBoxOrPartyMonData(boxId, monId, MON_DATA_CUTE, NULL);
+        arg0->unk0[id][4] = GetBoxOrPartyMonData(boxId, monId, MON_DATA_BEAUTY, NULL);
 
         sheen[id] = (GetBoxOrPartyMonData(boxId, monId, MON_DATA_SHEEN, NULL) != 0xFF)
                  ? GetBoxOrPartyMonData(boxId, monId, MON_DATA_SHEEN, NULL) / 29u
                  : 9;
 
-        sub_81D2754(arg0->contestStats[id], arg0->field_20[id]);
+        sub_81D2754(arg0->unk0[id], arg0->unk14[id]);
     }
     else
     {
         for (i = 0; i < 5; i++)
         {
-            arg0->contestStats[id][i] = 0;
-            arg0->field_20[id][i].unk0 = 155;
-            arg0->field_20[id][i].unk2 = 91;
+            arg0->unk0[id][i] = 0;
+            arg0->unk14[id][i].unk0 = 155;
+            arg0->unk14[id][i].unk2 = 91;
         }
     }
 }
 
-void sub_81D3094(u8 *tilesDst, u8 *palDst, u16 boxId, u16 monId, u16 arg5, u16 arg6, bool8 arg7)
+void sub_81D3094(void *tilesDst, void *palDst, u16 boxId, u16 monId, u16 arg5, u16 arg6, bool8 arg7)
 {
     if (!arg7)
         arg6--;
@@ -1325,10 +1328,10 @@ bool8 sub_81D31A4(struct UnknownStruct_81D1ED4 *arg0, s16 *arg1)
     return ((var1 != 0) || (var2 != 0));
 }
 
-const u32 gUnknown_08625560[] = INCBIN_U32("graphics/pokenav/pokeball.4bpp");
-const u32 gUnknown_08625660[] = INCBIN_U32("graphics/pokenav/pokeball_placeholder.4bpp");
-const u16 gUnknown_08625680[] = INCBIN_U16("graphics/pokenav/sparkle.gbapal");
-const u32 gUnknown_086256A0[] = INCBIN_U32("graphics/pokenav/sparkle.4bpp");
+static const u32 gUnknown_08625560[] = INCBIN_U32("graphics/pokenav/pokeball.4bpp");
+static const u32 gUnknown_08625660[] = INCBIN_U32("graphics/pokenav/pokeball_placeholder.4bpp");
+static const u16 gUnknown_08625680[] = INCBIN_U16("graphics/pokenav/sparkle.gbapal");
+static const u32 gUnknown_086256A0[] = INCBIN_U32("graphics/pokenav/sparkle.4bpp");
 
 static const struct OamData sOamData_8625A20 =
 {
@@ -1347,7 +1350,7 @@ static const struct OamData sOamData_8625A20 =
     .affineParam = 0
 };
 
-const struct OamData sOamData_8625A28 =
+static const struct OamData sOamData_8625A28 =
 {
     .y = 0,
     .affineMode = 0,
@@ -1376,7 +1379,7 @@ static const union AnimCmd sSpriteAnim_8625A38[] =
     ANIMCMD_END
 };
 
-const union AnimCmd *const sSpriteAnimTable_8625A40[] =
+static const union AnimCmd *const sSpriteAnimTable_8625A40[] =
 {
     sSpriteAnim_8625A30,
     sSpriteAnim_8625A38
@@ -1450,4 +1453,189 @@ void sub_81D32B0(struct SpriteSheet *sheet, struct SpritePalette *pal)
 
     *sheet = dataSheet;
     *pal = dataPal;
+}
+
+static void sub_81D32D4(struct Sprite *sprite)
+{
+    if (++sprite->data[1] > 60)
+    {
+        sprite->data[1] = 0;
+        sub_81D3408(sprite);
+    }
+}
+
+static void sub_81D32F4(struct Sprite *sprite)
+{
+    if (sprite->animEnded)
+    {
+        sprite->data[1] = 0;
+        sprite->callback = sub_81D32D4;
+    }
+}
+
+// Todo: Move these variables to C.
+extern const s16 gUnknown_08625B2C[][2];
+extern const struct SpriteTemplate gUnknown_08625B14;
+
+void sub_81D3314(struct Sprite *sprite)
+{
+    struct Sprite *sprite2 = &gSprites[sprite->data[4]];
+
+    if (sprite2 != NULL)
+    {
+        sprite->pos1.x = sprite2->pos1.x + sprite2->pos2.x + gUnknown_08625B2C[sprite->data[0]][0];
+        sprite->pos1.y = sprite2->pos1.y + sprite2->pos2.y + gUnknown_08625B2C[sprite->data[0]][1];
+    }
+    else
+    {
+        sprite->pos1.x = gUnknown_08625B2C[sprite->data[0]][0] + 40;
+        sprite->pos1.y = gUnknown_08625B2C[sprite->data[0]][1] + 104;
+    }
+}
+
+void sub_81D338C(u8 arg0, u8 arg1, struct Sprite **sprites)
+{
+    u16 i;
+
+    for (i = 0; i < 10; i++)
+    {
+        if (sprites[i] != NULL)
+        {
+            sprites[i]->data[0] = i;
+            sprites[i]->data[1] = (i * 16) + 1;
+            sprites[i]->data[2] = arg0;
+            sprites[i]->data[3] = i;
+            if (arg1 == 0 || arg0 != 9)
+            {
+                sprites[i]->callback = sub_81D3564;
+            }
+            else
+            {
+                sub_81D3314(sprites[i]);
+                sub_81D35E8(sprites[i]);
+                sprites[i]->callback = sub_81D32F4;
+                sprites[i]->invisible = FALSE;
+            }
+        }
+    }
+}
+
+static void sub_81D3408(struct Sprite *sprite)
+{
+    u16 i;
+    u8 id = sprite->data[5];
+
+    for (i = 0; i < sprite->data[2] + 1; i++)
+    {
+        gSprites[id].data[1] = (gSprites[id].data[0] * 16) + 1;
+        gSprites[id].callback = sub_81D3564;
+        id = gSprites[id].data[5];
+    }
+}
+
+void sub_81D3464(struct Sprite **sprites)
+{
+    u8 i;
+
+    for (i = 0; i < 10; i++)
+        sprites[i] = NULL;
+}
+
+void sub_81D3480(struct Sprite **sprites, u8 arg1, u8 arg2)
+{
+    u16 i, spriteId, firstSpriteId = 0;
+    u8 count = arg2;
+
+    for (i = 0; i < count + 1; i++)
+    {
+        spriteId = CreateSprite(&gUnknown_08625B14, 0, 0, 0);
+        if (spriteId != MAX_SPRITES)
+        {
+            sprites[i] = &gSprites[spriteId];
+            sprites[i]->invisible = TRUE;
+            sprites[i]->data[4] = arg1;
+            if (i != 0)
+                sprites[i - 1]->data[5] = spriteId;
+            else
+                firstSpriteId = spriteId;
+        }
+        else
+        {
+            break;
+        }
+    }
+
+    sprites[count]->data[5] = firstSpriteId;
+    sub_81D338C(count, 1, sprites);
+}
+
+void sub_81D3520(struct Sprite **sprites)
+{
+    u16 i;
+
+    for (i = 0; i < 10; i++)
+    {
+        if (sprites[i] != NULL)
+        {
+            DestroySprite(sprites[i]);
+            sprites[i] = NULL;
+        }
+        else
+        {
+            break;
+        }
+    }
+}
+
+void sub_81D354C(struct Sprite **sprites)
+{
+    sub_81D3520(sprites);
+    FreeSpriteTilesByTag(104);
+    FreeSpritePaletteByTag(104);
+}
+
+/*static*/ void sub_81D3564(struct Sprite *sprite)
+{
+    if (sprite->data[1] != 0)
+    {
+        if (--sprite->data[1] != 0)
+            return;
+
+        SeekSpriteAnim(sprite, 0);
+        sprite->invisible = FALSE;
+    }
+
+    sub_81D3314(sprite);
+    if (sprite->animEnded)
+    {
+        sprite->invisible = TRUE;
+        if (sprite->data[3] == sprite->data[2])
+        {
+            if (sprite->data[3] == 9)
+            {
+                sub_81D35E8(sprite);
+                sprite->callback = sub_81D32F4;
+            }
+            else
+            {
+                sprite->callback = sub_81D32D4;
+            }
+        }
+        else
+        {
+            sprite->callback = SpriteCallbackDummy;
+        }
+    }
+}
+
+static void sub_81D35E8(struct Sprite *sprite)
+{
+    u8 i, id = sprite->data[5];
+
+    for (i = 0; i < sprite->data[2] + 1; i++)
+    {
+        SeekSpriteAnim(&gSprites[id], 0);
+        gSprites[id].invisible = FALSE;
+        id = gSprites[id].data[5];
+    }
 }

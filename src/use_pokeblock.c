@@ -57,11 +57,11 @@ struct Unk7FB8
 
 struct UsePokeblockStruct
 {
-    /*0x0000*/ u8 field_0[4];
-    /*0x0000*/ u16 field_4[3][0x40];
-    /*0x0184*/ u8 field_184[0x304 - 0x184];
+    /*0x0000*/ u8 filler0[4];
+    /*0x0000*/ u16 field_4[6][0x40];
     /*0x0304*/ u8 field_304[3][0x2000];
-    /*0x6304*/ u8 field_6304[0x7b06 - 0x6304];
+    /*0x6304*/ u8 filler_6304[0x1000];
+    /*0x7304*/ u8 tilemapBuffer[BG_SCREEN_SIZE + 2];
     /*0x7B06*/ u8 field_7B06[7];
     /*0x7B0E*/ s16 field_7B0E;
     /*0x7B10*/ u8 field_7B10;
@@ -71,8 +71,7 @@ struct UsePokeblockStruct
     /*0x7B1C*/ struct Sprite *field_7B1C[10];
     /*0x7B44*/ struct Sprite *field_7B44[2];
     /*0x7B4C*/ u8 field_7B4C;
-    /*0x7B4D*/ u8 filler7B4D[0x47];
-    /*0x7B94*/ u8 filler7B94;
+    /*0x7B4D*/ u8 field_7B4D[3][24];
     /*0x7B95*/ u8 field_7B95[3][64];
     /*0x7C58*/ struct UnknownStruct_81D1ED4 field_7C58;
     /*0x7FB0*/ u8 unk7FB0[3];
@@ -119,7 +118,7 @@ void sub_8167338(void);
 void sub_81681F4(u8);
 void sub_8166E24(void);
 bool8 sub_8166EDC(void);
-void Pokeblock_BufferEnhancedStatText(u8 *dest, u8 statID, s16 a2);
+void Pokeblock_BufferEnhancedStatText(u8 *dest, u8 statId, s16 a2);
 void Pokeblock_MenuWindowTextPrint(const u8 *message);
 void sub_8167184(struct Pokeblock *, struct Pokemon *);
 void sub_81673DC(struct Sprite *sprite);
@@ -712,15 +711,13 @@ void Pokeblock_MenuWindowTextPrint(const u8 *message)
     AddTextPrinterParameterized(2, 1, gStringVar4, 0, 1, 0, NULL);
 }
 
+// This function is a joke.
 #ifdef NONMATCHING
-void Pokeblock_BufferEnhancedStatText(u8 *dest, u8 statID, s16 a2)
+void Pokeblock_BufferEnhancedStatText(u8 *dest, u8 statId, s16 a2)
 {
     if (a2 != 0)
     {
-        if (a2 > 0)
-            a2 = 0;
-
-        StringCopy(dest, sContestStatNames[statID]);
+        StringCopy(dest, sContestStatNames[statId]);
         StringAppend(dest, gText_WasEnhanced);
     }
     else
@@ -730,7 +727,7 @@ void Pokeblock_BufferEnhancedStatText(u8 *dest, u8 statID, s16 a2)
 }
 #else
 NAKED
-void Pokeblock_BufferEnhancedStatText(u8 *dest, u8 statID, s16 a2)
+void Pokeblock_BufferEnhancedStatText(u8 *dest, u8 statId, s16 a2)
 {
     asm(".syntax unified\n\
 push {r4,lr}\n\
@@ -979,116 +976,17 @@ void sub_81674BC(void)
     sub_816753C(var2, 2);
 }
 
-#ifdef NONMATCHING
-void sub_816753C(s16 a1, u8 a2)
+void sub_816753C(s16 id1, u8 id2)
 {
-    u8 *v3;
-    int v5;
-    int v6;
+    u8 boxId = gUnknown_0203BCAC->field_7FB8[id1].unk0;
+    u8 monId = gUnknown_0203BCAC->field_7FB8[id1].unk1;
+    u8 r6 = gUnknown_0203BCAC->info.field_70;
+    bool8 r8 = FALSE;
 
-    v3 = &gUnknown_0203BCAC->field_0[a1 << 16 >> 14];
-    v5 =  *(0x7FB8 + v3);
-    v6 =  *(0x7FB9 + v3);
-
-    sub_81D2ED4(gUnknown_0203BCAC->field_0[0x7B4D + 24 * a2], gUnknown_0203BCAC->field_0[0x7B95 + 64 * a2], v5, v6, a1, gUnknown_0203BCAC->info.field_70, 0);
-    sub_81D2F78(gUnknown_0203BCAC->field_7C58[0], gUnknown_0203BCAC->field_0[0x7FB0], v5, v6, a1, a2, gUnknown_0203BCAC->info.field_70, 0);
-    sub_81D3094(gUnknown_0203BCAC->field_0[(a2 << 13) + 0x304], gUnknown_0203BCAC->field_0[(a2 << 7) + 4], v5, v6, a1, gUnknown_0203BCAC->info.field_70, 0);
-    //gUnknown_0203BCAC->field_0[0x7B4D + a1 * 40], gUnknown_0203BCAC->field_7FB8, gUnknown_0203BCAC->field_7FB9, gUnknown_203BCAC->field_0[0], gUnknown_203BCAC->info.field_70, 0)
+    sub_81D2ED4(gUnknown_0203BCAC->field_7B4D[id2], gUnknown_0203BCAC->field_7B95[id2], boxId, monId, id1, r6, r8);
+    sub_81D2F78(&gUnknown_0203BCAC->field_7C58, gUnknown_0203BCAC->unk7FB0, boxId, monId, id1, id2, r6, r8);
+    sub_81D3094(gUnknown_0203BCAC->field_304[id2], gUnknown_0203BCAC->field_4[id2], boxId, monId, id1, r6, r8);
 }
-#else
-NAKED
-void sub_816753C(s16 a1, u8 a2)
-{
-    asm(".syntax unified\n\
-    push {r4-r7,lr}\n\
-    mov r7, r10\n\
-    mov r6, r9\n\
-    mov r5, r8\n\
-    push {r5-r7}\n\
-    sub sp, 0x10\n\
-    adds r5, r0, 0\n\
-    adds r4, r1, 0\n\
-    lsls r4, 24\n\
-    lsrs r4, 24\n\
-    ldr r0, =gUnknown_0203BCAC\n\
-    mov r9, r0\n\
-    ldr r1, [r0]\n\
-    lsls r5, 16\n\
-    asrs r0, r5, 14\n\
-    adds r0, r1, r0\n\
-    ldr r3, =0x00007fb8\n\
-    adds r2, r0, r3\n\
-    ldrb r7, [r2]\n\
-    ldr r2, =0x00007fb9\n\
-    adds r0, r2\n\
-    ldrb r0, [r0]\n\
-    mov r10, r0\n\
-    adds r3, 0x88\n\
-    adds r0, r1, r3\n\
-    ldrb r6, [r0]\n\
-    movs r0, 0\n\
-    mov r8, r0\n\
-    lsls r0, r4, 1\n\
-    adds r0, r4\n\
-    lsls r0, 3\n\
-    ldr r2, =0x00007b4d\n\
-    adds r0, r2\n\
-    adds r0, r1, r0\n\
-    lsls r2, r4, 6\n\
-    ldr r3, =0x00007b95\n\
-    adds r2, r3\n\
-    adds r1, r2\n\
-    lsrs r5, 16\n\
-    str r5, [sp]\n\
-    str r6, [sp, 0x4]\n\
-    mov r2, r8\n\
-    str r2, [sp, 0x8]\n\
-    adds r2, r7, 0\n\
-    mov r3, r10\n\
-    bl sub_81D2ED4\n\
-    mov r3, r9\n\
-    ldr r1, [r3]\n\
-    ldr r2, =0x00007c58\n\
-    adds r0, r1, r2\n\
-    ldr r3, =0x00007fb0\n\
-    adds r1, r3\n\
-    str r5, [sp]\n\
-    str r4, [sp, 0x4]\n\
-    str r6, [sp, 0x8]\n\
-    mov r2, r8\n\
-    str r2, [sp, 0xC]\n\
-    adds r2, r7, 0\n\
-    mov r3, r10\n\
-    bl sub_81D2F78\n\
-    lsls r0, r4, 13\n\
-    movs r1, 0xC1\n\
-    lsls r1, 2\n\
-    adds r0, r1\n\
-    mov r3, r9\n\
-    ldr r1, [r3]\n\
-    adds r0, r1, r0\n\
-    lsls r4, 7\n\
-    adds r4, 0x4\n\
-    adds r1, r4\n\
-    str r5, [sp]\n\
-    str r6, [sp, 0x4]\n\
-    mov r2, r8\n\
-    str r2, [sp, 0x8]\n\
-    adds r2, r7, 0\n\
-    mov r3, r10\n\
-    bl sub_81D3094\n\
-    add sp, 0x10\n\
-    pop {r3-r5}\n\
-    mov r8, r3\n\
-    mov r9, r4\n\
-    mov r10, r5\n\
-    pop {r4-r7}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .pool\n\
-    .syntax divided\n");
-}
-#endif
 
 void sub_8167608(u8 arg0)
 {
@@ -1242,10 +1140,10 @@ bool8 sub_8167930(void)
         CopyBgTilemapBufferToVram(1);
         break;
     case 10:
-        LZ77UnCompVram(gUnknown_085DFC0C, &gUnknown_0203BCAC->field_0[0x7304]);
+        LZ77UnCompVram(gUnknown_085DFC0C, gUnknown_0203BCAC->tilemapBuffer);
         break;
     case 11:
-        LoadBgTilemap(2, &gUnknown_0203BCAC->field_0[0x7304], 1280, 0);
+        LoadBgTilemap(2, gUnknown_0203BCAC->tilemapBuffer, 1280, 0);
         LoadPalette(gUnknown_086231E8, 48, 32);
         LoadPalette(gUnknown_08623208, 240, 32);
         sub_81D21DC(2);
