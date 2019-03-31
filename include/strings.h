@@ -2628,5 +2628,11 @@ extern const u8 gText_ReadNewsThatArrived[];
 extern const u8 gText_ReturnToTitle[];
 extern const u8 gText_WhatToDoWithCards[];
 extern const u8 gText_WhatToDoWithNews[];
+extern const u8 gText_IfThrowAwayCardEventWontHappen[];
+extern const u8 gText_OkayToDiscardNews[];
+extern const u8 gText_WonderNewsThrownAway[];
+extern const u8 gText_WonderCardThrownAway[];
+extern const u8 gText_DataWillBeSaved[];
+extern const u8 gText_SaveCompletedPressA[];
 
 #endif // GUARD_STRINGS_H
