@@ -284,8 +284,7 @@ BattleScript_HitFromAtkAnimation::
 	seteffectwithchance
 	tryfaintmon BS_TARGET, FALSE, NULL
 BattleScript_MoveEnd::
-	setbyte sMOVEEND_STATE, 0x0
-	moveend 0x0, 0x0
+	moveendall
 	end
 
 BattleScript_MakeMoveMissed::
@@ -423,8 +422,7 @@ BattleScript_ExplosionLoop:
 	resultmessage
 	waitmessage 0x40
 	tryfaintmon BS_TARGET, FALSE, NULL
-	setbyte sMOVEEND_STATE, 0x0
-	moveend 0x2, 0x10
+	moveendto ATK49_NEXT_TARGET
 	jumpifnexttargetvalid BattleScript_ExplosionLoop
 	tryfaintmon BS_ATTACKER, FALSE, NULL
 	end
@@ -432,8 +430,7 @@ BattleScript_ExplosionMissed:
 	effectivenesssound
 	resultmessage
 	waitmessage 0x40
-	setbyte sMOVEEND_STATE, 0x0
-	moveend 0x2, 0x10
+	moveendto ATK49_NEXT_TARGET
 	jumpifnexttargetvalid BattleScript_ExplosionLoop
 	tryfaintmon BS_ATTACKER, FALSE, NULL
 	end
@@ -657,8 +654,7 @@ BattleScript_DoMultiHit::
 	printstring STRINGID_EMPTYSTRING3
 	waitmessage 0x1
 	addbyte sMULTIHIT_STRING + 4, 0x1
-	setbyte sMOVEEND_STATE, 0x0
-	moveend 0x2, 0x10
+	moveendto ATK49_NEXT_TARGET
 	jumpifbyte CMP_COMMON_BITS, gMoveResultFlags, MOVE_RESULT_FOE_ENDURED, BattleScript_MultiHitPrintStrings
 	decrementmultihit BattleScript_MultiHitLoop
 	goto BattleScript_MultiHitPrintStrings
@@ -674,10 +670,8 @@ BattleScript_MultiHitPrintStrings::
 BattleScript_MultiHitEnd::
 	seteffectwithchance
 	tryfaintmon BS_TARGET, FALSE, NULL
-	setbyte sMOVEEND_STATE, 0x2
-	moveend 0x1, 0x0
-	setbyte sMOVEEND_STATE, 0x4
-	moveend 0x0, 0x0
+	moveendcase ATK49_SYNCHRONIZE_TARGET
+	moveendfrom ATK49_STATUS_IMMUNITY_ABILITIES
 	end
 
 BattleScript_EffectConversion::
@@ -1441,8 +1435,7 @@ BattleScript_DoTripleKickAttack::
 	waitmessage 0x40
 	printstring STRINGID_EMPTYSTRING3
 	waitmessage 0x1
-	setbyte sMOVEEND_STATE, 0x0
-	moveend 0x2, 0x10
+	moveendto ATK49_NEXT_TARGET
 	jumpifbyte CMP_COMMON_BITS, gMoveResultFlags, MOVE_RESULT_FOE_ENDURED, BattleScript_TripleKickPrintStrings
 	decrementmultihit BattleScript_TripleKickLoop
 	goto BattleScript_TripleKickPrintStrings
@@ -1461,8 +1454,7 @@ BattleScript_TripleKickPrintStrings::
 BattleScript_TripleKickEnd::
 	seteffectwithchance
 	tryfaintmon BS_TARGET, FALSE, NULL
-	setbyte sMOVEEND_STATE, 0xE
-	moveend 0x0, 0x0
+	moveendfrom ATK49_UPDATE_LAST_MOVES
 	end
 
 BattleScript_EffectThief::
@@ -1893,8 +1885,7 @@ BattleScript_DoHitAllWithUndergroundBonus::
 	printstring STRINGID_EMPTYSTRING3
 	waitmessage 0x1
 	tryfaintmon BS_TARGET, FALSE, NULL
-	setbyte sMOVEEND_STATE, 0x0
-	moveend 0x2, 0x10
+	moveendto ATK49_NEXT_TARGET
 	jumpifnexttargetvalid BattleScript_HitsAllWithUndergroundBonusLoop
 	end
 BattleScript_HitAllWithUndergroundBonusMissed::
@@ -1903,8 +1894,7 @@ BattleScript_HitAllWithUndergroundBonusMissed::
 	effectivenesssound
 	resultmessage
 	waitmessage 0x40
-	setbyte sMOVEEND_STATE, 0x0
-	moveend 0x2, 0x10
+	moveendto ATK49_NEXT_TARGET
 	jumpifnexttargetvalid BattleScript_HitsAllWithUndergroundBonusLoop
 	end
 
@@ -1995,8 +1985,7 @@ BattleScript_BeatUpAttack::
 	resultmessage
 	waitmessage 0x40
 	tryfaintmon BS_TARGET, FALSE, NULL
-	setbyte sMOVEEND_STATE, 0x0
-	moveend 0x2, 0x10
+	moveendto ATK49_NEXT_TARGET
 	goto BattleScript_BeatUpLoop
 BattleScript_BeatUpEnd::
 	end
@@ -2617,8 +2606,7 @@ BattleScript_TeeterDanceLoop::
 	resultmessage
 	waitmessage 0x40
 BattleScript_TeeterDanceDoMoveEndIncrement::
-	setbyte sMOVEEND_STATE, 0x0
-	moveend 0x2, 0x10
+	moveendto ATK49_NEXT_TARGET
 BattleScript_TeeterDanceLoopIncrement::
 	addbyte gBattlerTarget, 0x1
 	jumpifbytenotequal gBattlerTarget, gBattlersCount, BattleScript_TeeterDanceLoop
@@ -3140,10 +3128,8 @@ BattleScript_DoSwitchOut::
 	switchinanim BS_ATTACKER, FALSE
 	waitstate
 	switchineffects BS_ATTACKER
-	setbyte sMOVEEND_STATE, 0x4
-	moveend 0x1, 0x0
-	setbyte sMOVEEND_STATE, 0xF
-	moveend 0x1, 0x0
+	moveendcase ATK49_STATUS_IMMUNITY_ABILITIES
+	moveendcase ATK49_MIRROR_MOVE
 	end2
 
 BattleScript_PursuitDmgOnSwitchOut::
@@ -3166,8 +3152,7 @@ BattleScript_PursuitDmgOnSwitchOut::
 	resultmessage
 	waitmessage 0x40
 	tryfaintmon BS_TARGET, FALSE, NULL
-	setbyte sMOVEEND_STATE, 0x3
-	moveend 0x2, 0x6
+	moveendfromto ATK49_MOVE_END_ABILITIES, ATK49_CHOICE_MOVE
 	various4 BS_TARGET
 	jumpifbyte CMP_EQUAL, gBattleCommunication, 0x0, BattleScript_PursuitDmgOnSwitchOutRet
 	setbyte sGIVEEXP_STATE, 0x0
@@ -3395,8 +3380,7 @@ BattleScript_DisabledNoMore::
 BattleScript_SelectingDisabledMoveInPalace::
 	printstring STRINGID_PKMNMOVEISDISABLED
 BattleScript_SelectingUnusableMoveInPalace::
-	setbyte sMOVEEND_STATE, 0x0
-	moveend 0x2, 0x10
+	moveendto ATK49_NEXT_TARGET
 	end
 
 BattleScript_EncoredNoMore::
@@ -3425,8 +3409,7 @@ BattleScript_SpikesOnAttacker::
 BattleScript_SpikesOnAttackerFainted::
 	setbyte sGIVEEXP_STATE, 0x0
 	getexp BS_ATTACKER
-	setbyte sMOVEEND_STATE, 0x0
-	moveend 0x0, 0x0
+	moveendall
 	goto BattleScript_HandleFaintedMon
 
 BattleScript_SpikesOnTarget::
@@ -3441,8 +3424,7 @@ BattleScript_SpikesOnTarget::
 BattleScript_SpikesOnTargetFainted::
 	setbyte sGIVEEXP_STATE, 0x0
 	getexp BS_TARGET
-	setbyte sMOVEEND_STATE, 0x0
-	moveend 0x0, 0x0
+	moveendall
 	goto BattleScript_HandleFaintedMon
 
 BattleScript_SpikesOnFaintedBattler::
@@ -3457,8 +3439,7 @@ BattleScript_SpikesOnFaintedBattler::
 BattleScript_SpikesOnFaintedBattlerFainted::
 	setbyte sGIVEEXP_STATE, 0x0
 	getexp BS_FAINTED
-	setbyte sMOVEEND_STATE, 0x0
-	moveend 0x0, 0x0
+	moveendall
 	goto BattleScript_HandleFaintedMon
 
 BattleScript_PrintHurtBySpikes::
@@ -3562,10 +3543,8 @@ BattleScript_DoFutureAttackHit::
 	tryfaintmon BS_TARGET, FALSE, NULL
 	atk24 BattleScript_FutureAttackEnd
 BattleScript_FutureAttackEnd::
-	setbyte sMOVEEND_STATE, 0x0
-	moveend 0x1, 0x0
-	setbyte sMOVEEND_STATE, 0xB
-	moveend 0x2, 0xE
+	moveendcase ATK49_RAGE
+	moveendfromto ATK49_ITEM_EFFECTS_ALL, ATK49_UPDATE_LAST_MOVES
 	setbyte gMoveResultFlags, 0
 	end2
 
@@ -4254,8 +4233,7 @@ BattleScript_AbilityCuredStatus::
 BattleScript_IgnoresWhileAsleep::
 	printstring STRINGID_PKMNIGNORESASLEEP
 	waitmessage 0x40
-	setbyte sMOVEEND_STATE, 0x0
-	moveend 0x2, 0x10
+	moveendto ATK49_NEXT_TARGET
 	end
 
 BattleScript_IgnoresAndUsesRandomMove::
@@ -4271,8 +4249,7 @@ BattleScript_MoveUsedLoafingAround::
 BattleScript_82DB6C7::
 	printfromtable gInobedientStringIds
 	waitmessage 0x40
-	setbyte sMOVEEND_STATE, 0x0
-	moveend 0x2, 0x10
+	moveendto ATK49_NEXT_TARGET
 	end
 
 BattleScript_IgnoresAndFallsAsleep::
@@ -4280,8 +4257,7 @@ BattleScript_IgnoresAndFallsAsleep::
 	waitmessage 0x40
 	setmoveeffect MOVE_EFFECT_SLEEP | MOVE_EFFECT_AFFECTS_USER
 	seteffectprimary
-	setbyte sMOVEEND_STATE, 0x0
-	moveend 0x2, 0x10
+	moveendto ATK49_NEXT_TARGET
 	end
 
 BattleScript_IgnoresAndHitsItself::

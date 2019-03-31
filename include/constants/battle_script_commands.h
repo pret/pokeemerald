@@ -95,14 +95,32 @@
 // statchange defines
 #define STAT_CHANGE_BS_PTR                  0x1
 #define STAT_CHANGE_NOT_PROTECT_AFFECTED    0x20
-#define STAT_CHANGE_WORKED      0
-#define STAT_CHANGE_DIDNT_WORK  1
 
 // atk48
 #define ATK48_STAT_NEGATIVE         0x1
 #define ATK48_STAT_BY_TWO           0x2
 #define ATK48_ONLY_MULTIPLE         0x4
 #define ATK48_DONT_CHECK_LOWER      0x8
+
+// atk49, moveend cases
+#define ATK49_RAGE                              0
+#define ATK49_DEFROST                           1
+#define ATK49_SYNCHRONIZE_TARGET                2
+#define ATK49_MOVE_END_ABILITIES                3
+#define ATK49_STATUS_IMMUNITY_ABILITIES         4
+#define ATK49_SYNCHRONIZE_ATTACKER              5
+#define ATK49_CHOICE_MOVE                       6
+#define ATK49_CHANGED_ITEMS                     7
+#define ATK49_ATTACKER_INVISIBLE                8
+#define ATK49_ATTACKER_VISIBLE                  9
+#define ATK49_TARGET_VISIBLE                    10
+#define ATK49_ITEM_EFFECTS_ALL                  11
+#define ATK49_KINGSROCK_SHELLBELL               12
+#define ATK49_SUBSTITUTE                        13
+#define ATK49_UPDATE_LAST_MOVES                 14
+#define ATK49_MIRROR_MOVE                       15
+#define ATK49_NEXT_TARGET                       16
+#define ATK49_COUNT                             17
 
 #define BIT_HP                      0x1
 #define BIT_ATK                     0x2
