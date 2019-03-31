@@ -103,7 +103,7 @@ gUnknown_02022D00: @ 2022D00
 	.include "src/palette.o"
 	.include "src/sound.o"
 	.include "src/battle_anim.o"
-	.include "src/battle_anim_80A5C6C.o"
+	.include "src/battle_anim_mons.o"
 
 	.space 0xC
 	.include "src/field_weather.o"

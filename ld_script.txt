@@ -121,10 +121,10 @@ SECTIONS {
         src/palette.o(.text);
         src/sound.o(.text);
         src/battle_anim.o(.text);
-        src/battle_anim_80A5C6C.o(.text);
+        src/battle_anim_mons.o(.text);
         src/task.o(.text);
         src/reshow_battle_screen.o(.text);
-        src/battle_anim_80A9C70.o(.text);
+        src/battle_anim_status_effects.o(.text);
         src/title_screen.o(.text);
         src/field_weather.o(.text);
         src/field_weather_effect.o(.text);
@@ -146,7 +146,7 @@ SECTIONS {
         src/mail_data.o(.text);
         src/map_name_popup.o(.text);
         src/item_menu_icons.o(.text);
-        src/battle_anim_80D51AC.o(.text);
+        src/battle_anim_mon_movement.o(.text);
         src/item.o(.text);
         src/contest.o(.text);
         src/shop.o(.text);
@@ -248,7 +248,7 @@ SECTIONS {
         src/intro.o(.text);
         src/reset_save_heap.o(.text);
         src/field_region_map.o(.text);
-        src/battle_anim_8170478.o(.text);
+        src/battle_anim_special.o(.text);
         src/hall_of_fame.o(.text);
         src/credits.o(.text);
         src/lottery_corner.o(.text);
@@ -463,9 +463,9 @@ SECTIONS {
         src/palette.o(.rodata);
         src/sound.o(.rodata);
         src/battle_anim.o(.rodata);
-        src/battle_anim_80A5C6C.o(.rodata);
+        src/battle_anim_mons.o(.rodata);
         data/map_events.o(.rodata);
-        src/battle_anim_80A9C70.o(.rodata);
+        src/battle_anim_status_effects.o(.rodata);
         src/title_screen.o(.rodata);
         src/field_weather.o(.rodata);
         src/field_weather_effect.o(.rodata);
@@ -484,7 +484,7 @@ SECTIONS {
         src/fldeff_cut.o(.rodata);
         src/map_name_popup.o(.rodata);
         src/item_menu_icons.o(.rodata);
-        src/battle_anim_80D51AC.o(.rodata);
+        src/battle_anim_mon_movement.o(.rodata);
         src/item.o(.rodata);
         data/contest.o(.rodata);
         src/shop.o(.rodata);
@@ -568,7 +568,7 @@ SECTIONS {
         src/player_pc.o(.rodata);
         src/intro.o(.rodata);
         src/field_region_map.o(.rodata);
-        src/battle_anim_8170478.o(.rodata);
+        src/battle_anim_special.o(.rodata);
         src/hall_of_fame.o(.rodata);
         src/credits.o(.rodata);
         src/lottery_corner.o(.rodata);
