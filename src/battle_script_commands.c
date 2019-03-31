@@ -57,6 +57,9 @@ extern struct MusicPlayerInfo gMPlayInfo_BGM;
 extern const u8* const gBattleScriptsForMoveEffects[];
 
 // this file's functions
+#define STAT_CHANGE_WORKED      0
+#define STAT_CHANGE_DIDNT_WORK  1
+
 static bool8 IsTwoTurnsMove(u16 move);
 static void TrySetDestinyBondToHappen(void);
 static u8 AttacksThisTurn(u8 battlerId, u16 move); // Note: returns 1 if it's a charging turn, otherwise 2.
@@ -4151,30 +4154,6 @@ static void atk48_playstatchangeanimation(void)
         gBattlescriptCurrInstr += 4;
     }
 }
-
-enum
-{
-    ATK49_SPIKY_SHIELD,
-    ATK49_RAGE,
-    ATK49_DEFROST,
-    ATK49_SYNCHRONIZE_TARGET,
-    ATK49_MOVE_END_ABILITIES,
-    ATK49_STATUS_IMMUNITY_ABILITIES,
-    ATK49_SYNCHRONIZE_ATTACKER,
-    ATK49_CHOICE_MOVE,
-    ATK49_CHANGED_ITEMS,
-    ATK49_ATTACKER_INVISIBLE,
-    ATK49_ATTACKER_VISIBLE,
-    ATK49_TARGET_VISIBLE,
-    ATK49_ITEM_EFFECTS_ALL,
-    ATK49_KINGSROCK_SHELLBELL,
-    ATK49_SUBSTITUTE,
-    ATK49_UPDATE_LAST_MOVES,
-    ATK49_MIRROR_MOVE,
-    ATK49_NEXT_TARGET,
-    ATK49_CLEAR_BITS,
-    ATK49_COUNT,
-};
 
 static void atk49_moveend(void)
 {

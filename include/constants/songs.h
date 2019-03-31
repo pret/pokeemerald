@@ -467,7 +467,7 @@
 #define MUS_RG_UNION 539        // Union Room
 #define MUS_RG_NETWORK 540      // Network Center
 #define MUS_RG_OKURIMONO 541    // Mystery Gift
-#define MUS_RG_KINOMIKUI 542
+#define MUS_RG_KINOMIKUI 542    // Dodrio Berry Picking
 #define MUS_RG_NANADUNGEON 543  // Sevii Caves/Altering Cave (Mt. Moon)
 #define MUS_RG_OSHIE_TV 544     // Follow Me!
 #define MUS_RG_NANASHIMA 545    // Sevii Islands Routes (Lake of Rage)

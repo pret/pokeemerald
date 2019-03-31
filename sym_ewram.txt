@@ -46,8 +46,7 @@ gUnknown_02022C68: @ 2022C68
 gUnknown_02022C6C: @ 2022C6C
 	.space 0x4
 
-gUnknown_02022C70: @ 2022C70
-	.space 0x4
+	.include "src/mevent2.o"
 
 gUnknown_02022C74: @ 2022C74
 	.space 0x4
@@ -73,9 +72,9 @@ gUnknown_02022C8C: @ 2022C8C
 gUnknown_02022C90: @ 2022C90
 	.space 0x4
 
-gUnknown_02022C94: @ 2022C94
-	.space 0x4
+	.include "src/berry_powder.o"
 
+	.align 2
 gUnknown_02022C98: @ 2022C98
 	.space 0x4
 

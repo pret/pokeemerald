@@ -236,7 +236,6 @@ u32 LinkMain1(u8 *shouldAdvanceLinkState, u16 *sendCmd, u16 (*recvCmds)[CMD_LENG
 void LinkVSync(void);
 void Timer3Intr(void);
 void SerialCB(void);
-u8 GetLinkPlayerCount(void);
 bool32 InUnionRoom(void);
 void sub_800E0E8(void);
 bool8 IsLinkTaskFinished(void);
@@ -306,7 +305,6 @@ void sub_8009FAC(void);
 bool8 sub_800A4D8(u8 a0);
 u8 sub_800A9D8(void);
 u8 sub_800A0C8(s32, s32);
-u16 *GetSaveBlock1Field3564(void);
 u8 sub_800A9A8(void);
 void sub_800AD10(void);
 void sub_800AB18(void);

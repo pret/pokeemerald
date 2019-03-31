@@ -5042,6 +5042,11 @@ extern const u32 gBattleAnimBackgroundImageMuddyWater_Pal[];
 
 extern const u32 gBattleAnimFogTilemap[];
 
+extern const u32 gUsePokeblockGraph_Gfx[];
+extern const u32 gUsePokeblockGraph_Tilemap[];
+extern const u16 gUsePokeblockGraph_Pal[];
+extern const u16 gUsePokeblockNatureWin_Pal[];
+
 // Berry blender
 extern const u32 gBerryBlenderArrowTiles[];
 extern const u32 gBerryBlenderStartTiles[];
@@ -5166,5 +5171,17 @@ extern const u32 gEasyChatCursor_Gfx[];
 extern const u16 gEasyChatCursor_Pal[];
 extern const u32 gEasyChatRightWindow_Gfx[];
 extern const u16 gEasyChatRightWindow_Pal[];
+
+// Use Pokeblock
+extern const u32 gUsePokeblockCondition_Gfx[];
+
+// Union Room Chat
+extern const u16 gUnknown_08DD4BB0[];
+extern const u16 gUnknown_08DD4BD0[];
+extern const u32 gUnknown_08DD4BF0[];
+extern const u32 gUnknown_08DD4C4C[];
+extern const u16 gLinkMiscMenu_Pal[];
+extern const u32 gLinkMiscMenu_Gfx[];
+extern const u32 gLinkMiscMenu_Tilemap[];
 
 #endif //GUARD_GRAPHICS_H

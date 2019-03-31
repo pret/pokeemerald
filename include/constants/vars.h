@@ -60,7 +60,7 @@
 #define VAR_POISON_STEP_COUNTER              0x402B
 #define VAR_RESET_RTC_ENABLE                 0x402C
 #define VAR_ENIGMA_BERRY_AVAILABLE           0x402D
-#define VAR_UNUSED_0x402E                    0x402E // Unused Var
+#define VAR_0x402E                           0x402E
 
 #define VAR_FRONTIER_MANIAC_FACILITY         0x402F
 #define VAR_FRONTIER_GAMBLER_FACILITY        0x4030
@@ -84,7 +84,7 @@
 #define VAR_FANCLUB_UNKNOWN_1                0x4041
 #define VAR_FANCLUB_UNKNOWN_2                0x4042
 #define VAR_DEPT_STORE_FLOOR                 0x4043
-#define VAR_0x4044                           0x4044
+#define VAR_TRICK_HOUSE_LEVEL                0x4044
 #define VAR_POKELOT_PRIZE_ITEM               0x4045
 #define VAR_NATIONAL_DEX                     0x4046
 #define VAR_SEEDOT_SIZE_RECORD               0x4047

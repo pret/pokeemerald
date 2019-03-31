@@ -4,6 +4,7 @@
 #include "battle_pyramid.h"
 #include "battle_pyramid_bag.h"
 #include "berry.h"
+#include "berry_powder.h"
 #include "bike.h"
 #include "coins.h"
 #include "data2.h"
@@ -44,8 +45,6 @@
 extern u8 Route102_EventScript_274482[];
 extern u8 Route102_EventScript_2744C0[];
 extern u8 BattleFrontier_OutsideEast_EventScript_242CFC[];
-
-extern s32 sub_80247BC(void);
 
 void SetUpItemUseCallback(u8 taskId);
 void MapPostLoadHook_UseItem(void);
@@ -638,7 +637,7 @@ void ItemUseOutOfBattle_CoinCase(u8 taskId)
 
 void ItemUseOutOfBattle_PowderJar(u8 taskId)
 {
-    ConvertIntToDecimalStringN(gStringVar1, sub_80247BC(), 0, 5);
+    ConvertIntToDecimalStringN(gStringVar1, GetBerryPowder(), 0, 5);
     StringExpandPlaceholders(gStringVar4, gText_PowderQty);
 
     if (!gTasks[taskId].data[3])

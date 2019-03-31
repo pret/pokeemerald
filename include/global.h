@@ -814,6 +814,76 @@ struct SaveTrainerHill
     /*0x3D6E*/ u16 tag:2; // x40, x80 = xC0
 };
 
+struct MysteryEventStruct
+{
+    u8 unk_0_0:2;
+    u8 unk_0_2:3;
+    u8 unk_0_5:3;
+    u8 unk_1;
+};
+
+ struct MEventBuffer_3120_Sub
+{
+    u16 unk_00;
+    u8 unk_02;
+    u8 unk_03;
+    u8 unk_04[40];
+    u8 unk_2C[10][40];
+};
+
+ struct MEventBuffer_3120
+{
+    u32 crc;
+    struct MEventBuffer_3120_Sub data;
+};
+
+ struct MEventBuffer_32E0_Sub
+{
+    u16 unk_00;
+    u16 unk_02;
+    u32 unk_04;
+    u8 unk_08_0:2;
+    u8 unk_08_2:4;
+    u8 unk_08_6:2;
+    u8 unk_09;
+    u8 unk_0A[40];
+    u8 unk_32[40];
+    u8 unk_5A[4][40];
+    u8 unk_FA[40];
+    u8 unk_122[40];
+};
+
+ struct MEventBuffer_32E0
+{
+    u32 crc;
+    struct MEventBuffer_32E0_Sub data;
+};
+
+ struct MEventBuffer_3430_Sub
+{
+    u16 unk_00;
+    u16 unk_02;
+    u16 unk_04;
+    u16 unk_06;
+    u16 unk_08[2][7];
+};
+
+ struct MEventBuffer_3430
+{
+    u32 crc;
+    struct MEventBuffer_3430_Sub data;
+};
+
+ struct MEventBuffers
+{
+    /*0x000 0x322C*/ struct MEventBuffer_3120 buffer_000;
+    /*0x1c0 0x33EC*/ struct MEventBuffer_32E0 buffer_1c0;
+    /*0x310 0x353C*/ struct MEventBuffer_3430 buffer_310;
+    /*0x338 0x3564*/ u16 unk_338[4];
+    /*0x340 0x356C*/ struct MysteryEventStruct unk_340;
+    /*0x344 0x3570*/ u32 unk_344[2][5];
+}; // 0x36C 0x3598
+
 struct SaveBlock1
 {
     /*0x00*/ struct Coords16 pos;
@@ -890,14 +960,16 @@ struct SaveBlock1
     /*0x31A8*/ u8 giftRibbons[52];
     /*0x31DC*/ struct Roamer roamer;
     /*0x31F8*/ struct EnigmaBerry enigmaBerry;
-    /*0x322C*/ u8 field_322C[1260];
+    /*0x322C*/ struct MEventBuffers unk_322C;
+    /*0x3598*/ u8 field_3598[0x180];
     /*0x3718*/ u32 trainerHillTimes[4];
     /*0x3728*/ struct RamScript ramScript;
     /*0x3B14*/ struct RecordMixingGift recordMixingGift;
     /*0x3B24*/ u8 seen2[DEX_FLAGS_NO];
     /*0x3B58*/ LilycoveLady lilycoveLady;
     /*0x3B98*/ struct TrainerNameRecord trainerNameRecords[20];
-    /*0x3C88*/ u8 filler_3C88[0xDC];
+    /*0x3C88*/ u8 unk3C88[10][21];
+    /*0x3D5A*/ u8 filler3D5A[0xA];
     /*0x3D64*/ struct SaveTrainerHill trainerHill;
     /*0x3D70*/ struct WaldaPhrase waldaPhrase;
     // sizeof: 0x3D88
