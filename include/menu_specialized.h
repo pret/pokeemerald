@@ -26,6 +26,12 @@ struct UnknownStruct_81D1ED4
     /*0x355*/ u8 unk355;
 };
 
+struct Unk81D2F78_Struct
+{
+    u8 contestStats[4][5];
+    struct UnknownSubStruct_81D1ED4 field_20[4][5];
+};
+
 bool8 sub_81D1C44(u8 count);
 u8 sub_81D1C84(u8 a0);
 u8 sub_81D1DC0(struct PlayerPCItemPageStruct *page);
@@ -43,10 +49,7 @@ bool8 sub_81D20BC(struct UnknownStruct_81D1ED4 *arg0);
 void sub_81D354C(struct Sprite **);
 void sub_81D3464(struct Sprite **arg0);
 void sub_81D3480(struct Sprite **arg0, u8 arg1, u8 arg2);
-u8 sub_81D3178(struct UnknownStruct_81D1ED4*, u16*);
-u8 sub_81D31A4(struct UnknownStruct_81D1ED4*, u16*);
 bool32 sub_81D2074(struct UnknownStruct_81D1ED4 *a0);
-u8 sub_81D3150(u16 *arg0);
 void sub_81D2754(u8 *arg0, struct UnknownSubStruct_81D1ED4 *arg1);
 void sub_81D1F84(struct UnknownStruct_81D1ED4 *arg0, struct UnknownSubStruct_81D1ED4 *arg1, struct UnknownSubStruct_81D1ED4 *arg2);
 void MoveRelearnerPrintText(u8 *str);
@@ -55,5 +58,16 @@ void MoveRelearnerCreateYesNoMenu(void);
 u8 LoadMoveRelearnerMovesList(const struct ListMenuItem *items, u16 numChoices);
 void InitMoveRelearnerWindows(bool8 useContextWindow);
 void GetMonLevelUpWindowStats(struct Pokemon* mon, void* statStoreLocation);
+s32 GetBoxOrPartyMonData(u16 boxId, u16 monId, s32 request, u8 *dst);
+void sub_81D2ED4(u8 *dst, u8 *nameDst, u16 boxId, u16 monId, u16 arg5, u16 arg6, bool8 arg7);
+void sub_81D2F78(struct Unk81D2F78_Struct *arg0, u8 *sheen, u16 boxId, u16 monId, u16 arg5, u16 id, u16 arg7, bool8 arg8);
+void sub_81D3094(u8 *tilesDst, u8 *palDst, u16 boxId, u16 monId, u16 arg5, u16 arg6, bool8 arg7);
+bool8 sub_81D312C(s16 *var);
+bool8 sub_81D3150(s16 *var);
+bool8 sub_81D3178(struct UnknownStruct_81D1ED4 *arg0, s16 *arg1);
+bool8 sub_81D31A4(struct UnknownStruct_81D1ED4 *arg0, s16 *arg1);
+void sub_81D31D0(struct SpriteSheet *sheet, struct SpriteTemplate *template, struct SpritePalette *pal);
+void sub_81D321C(struct SpriteSheet *sheets, struct SpriteTemplate * template, struct SpritePalette *pals);
+void sub_81D32B0(struct SpriteSheet *sheet, struct SpritePalette *pal);
 
 #endif // GUARD_MENU_SPECIALIZED_H

@@ -2,7 +2,10 @@
 #include "alloc.h"
 #include "battle_main.h"
 #include "contest_effect.h"
+#include "data2.h"
+#include "decompress.h"
 #include "gpu_regs.h"
+#include "graphics.h"
 #include "menu.h"
 #include "international_string_util.h"
 #include "menu.h"
@@ -11,15 +14,20 @@
 #include "palette.h"
 #include "player_pc.h"
 #include "pokemon_summary_screen.h"
+#include "pokemon_storage_system.h"
 #include "scanline_effect.h"
 #include "sound.h"
 #include "strings.h"
 #include "string_util.h"
+#include "text.h"
 #include "text_window.h"
 #include "trig.h"
 #include "window.h"
 #include "constants/songs.h"
+#include "constants/species.h"
 #include "gba/io_reg.h"
+
+extern const struct CompressedSpriteSheet gMonFrontPicTable[];
 
 EWRAM_DATA static u8 sUnknown_0203CF48[3] = {0};
 EWRAM_DATA static struct ListMenuItem *sUnknown_0203CF4C = NULL;
@@ -1074,4 +1082,372 @@ bool16 MoveRelearnerRunTextPrinters(void)
 void MoveRelearnerCreateYesNoMenu(void)
 {
     CreateYesNoMenu(&sMoveRelearnerYesNoMenuTemplate, 1, 0xE, 0);
+}
+
+s32 GetBoxOrPartyMonData(u16 boxId, u16 monId, s32 request, u8 *dst)
+{
+    s32 ret;
+
+    if (boxId == TOTAL_BOXES_COUNT) // Party mon.
+    {
+        if (request == MON_DATA_NICKNAME || request == MON_DATA_OT_NAME)
+            ret = GetMonData(&gPlayerParty[monId], request, dst);
+        else
+            ret = GetMonData(&gPlayerParty[monId], request);
+    }
+    else
+    {
+        if (request == MON_DATA_NICKNAME || request == MON_DATA_OT_NAME)
+            ret = GetAndCopyBoxMonDataAt(boxId, monId, request, dst);
+        else
+            ret = GetBoxMonDataAt(boxId, monId, request);
+    }
+
+    return ret;
+}
+
+static u8 *sub_81D2CD0(u8 *dst, u16 boxId, u16 monId)
+{
+    u16 species, level, gender;
+    struct BoxPokemon *boxMon;
+    u8 *str;
+
+    *(dst++) = EXT_CTRL_CODE_BEGIN;
+    *(dst++) = 4;
+    *(dst++) = 8;
+    *(dst++) = 0;
+    *(dst++) = 9;
+    if (GetBoxOrPartyMonData(boxId, monId, MON_DATA_IS_EGG, NULL))
+    {
+        return StringCopyPadded(dst, gText_EggNickname, 0, 12);
+    }
+    else
+    {
+        GetBoxOrPartyMonData(boxId, monId, MON_DATA_NICKNAME, dst);
+        StringGetEnd10(dst);
+        species = GetBoxOrPartyMonData(boxId, monId, MON_DATA_SPECIES, NULL);
+        if (boxId == TOTAL_BOXES_COUNT) // Party mon.
+        {
+            level = GetMonData(&gPlayerParty[monId], MON_DATA_LEVEL);
+            gender = GetMonGender(&gPlayerParty[monId]);
+        }
+        else
+        {
+            // Needed to match, feel free to remove.
+            boxId++;boxId--;
+            monId++;monId--;
+
+            boxMon = GetBoxedMonPtr(boxId, monId);
+            gender = GetBoxMonGender(boxMon);
+            level = GetLevelFromBoxMonExp(boxMon);
+        }
+
+        if ((species == SPECIES_NIDORAN_F || species == SPECIES_NIDORAN_M) && !StringCompare(dst, gSpeciesNames[species]))
+            gender = MON_GENDERLESS;
+
+        for (str = dst; *str != EOS; str++)
+            ;
+
+        *(str++) = EXT_CTRL_CODE_BEGIN;
+        *(str++) = 0x12;
+        *(str++) = 0x3C;
+
+        switch (gender)
+        {
+        default:
+            *(str++) = CHAR_SPACE;
+            break;
+        case MON_MALE:
+            *(str++) = EXT_CTRL_CODE_BEGIN;
+            *(str++) = EXT_CTRL_CODE_COLOR;
+            *(str++) = 4;
+            *(str++) = EXT_CTRL_CODE_BEGIN;
+            *(str++) = 3;
+            *(str++) = 5;
+            *(str++) = CHAR_MALE;
+            break;
+        case MON_FEMALE:
+            *(str++) = EXT_CTRL_CODE_BEGIN;
+            *(str++) = EXT_CTRL_CODE_COLOR;
+            *(str++) = 6;
+            *(str++) = EXT_CTRL_CODE_BEGIN;
+            *(str++) = 3;
+            *(str++) = 7;
+            *(str++) = CHAR_FEMALE;
+            break;
+        }
+
+        *(str++) = EXT_CTRL_CODE_BEGIN;
+        *(str++) = 4;
+        *(str++) = 8;
+        *(str++) = 0;
+        *(str++) = 9;
+        *(str++) = CHAR_SLASH;
+        *(str++) = CHAR_SPECIAL_F9;
+        *(str++) = 5;
+        str = ConvertIntToDecimalStringN(str, level, STR_CONV_MODE_LEFT_ALIGN, 3);
+        *(str++) = CHAR_SPACE;
+        *str = EOS;
+
+        return str;
+    }
+}
+
+static u8 *sub_81D2E7C(u8 *dst, const u8 *src, s16 n)
+{
+    while (*src != EOS)
+    {
+        *(dst++) = *(src++);
+        n--;
+    }
+    while (n-- > 0)
+        *(dst++) = CHAR_SPACE;
+
+    *dst = EOS;
+    return dst;
+}
+
+void sub_81D2ED4(u8 *dst, u8 *nameDst, u16 boxId, u16 monId, u16 arg5, u16 arg6, bool8 arg7)
+{
+    u16 i;
+
+    if (!arg7)
+        arg6--;
+
+    if (arg5 != arg6)
+    {
+        sub_81D2CD0(nameDst, boxId, monId);
+        dst[0] = EXT_CTRL_CODE_BEGIN;
+        dst[1] = 4;
+        dst[2] = 8;
+        dst[3] = 0;
+        dst[4] = 9;
+        if (boxId == TOTAL_BOXES_COUNT) // Party mon.
+        {
+            sub_81D2E7C(dst + 5, gText_InParty, 8);
+        }
+        else
+        {
+            boxId++;boxId--; // Again...Someone fix this maybe?
+            sub_81D2E7C(dst + 5, GetBoxNamePtr(boxId), 8);
+        }
+    }
+    else
+    {
+        for (i = 0; i < 12; i++)
+            nameDst[i] = CHAR_SPACE;
+        nameDst[i] = EOS;
+        for (i = 0; i < 8; i++)
+            dst[i] = CHAR_SPACE;
+        dst[i] = EOS;
+    }
+}
+
+void sub_81D2F78(struct Unk81D2F78_Struct *arg0, u8 *sheen, u16 boxId, u16 monId, u16 arg5, u16 id, u16 arg7, bool8 arg8)
+{
+    u16 i;
+
+    if (!arg8)
+        arg7--;
+
+    if (arg5 != arg7)
+    {
+        arg0->contestStats[id][0] = GetBoxOrPartyMonData(boxId, monId, MON_DATA_COOL, NULL);
+        arg0->contestStats[id][1] = GetBoxOrPartyMonData(boxId, monId, MON_DATA_TOUGH, NULL);
+        arg0->contestStats[id][2] = GetBoxOrPartyMonData(boxId, monId, MON_DATA_SMART, NULL);
+        arg0->contestStats[id][3] = GetBoxOrPartyMonData(boxId, monId, MON_DATA_CUTE, NULL);
+        arg0->contestStats[id][4] = GetBoxOrPartyMonData(boxId, monId, MON_DATA_BEAUTY, NULL);
+
+        sheen[id] = (GetBoxOrPartyMonData(boxId, monId, MON_DATA_SHEEN, NULL) != 0xFF)
+                 ? GetBoxOrPartyMonData(boxId, monId, MON_DATA_SHEEN, NULL) / 29u
+                 : 9;
+
+        sub_81D2754(arg0->contestStats[id], arg0->field_20[id]);
+    }
+    else
+    {
+        for (i = 0; i < 5; i++)
+        {
+            arg0->contestStats[id][i] = 0;
+            arg0->field_20[id][i].unk0 = 155;
+            arg0->field_20[id][i].unk2 = 91;
+        }
+    }
+}
+
+void sub_81D3094(u8 *tilesDst, u8 *palDst, u16 boxId, u16 monId, u16 arg5, u16 arg6, bool8 arg7)
+{
+    if (!arg7)
+        arg6--;
+
+    if (arg5 != arg6)
+    {
+        u16 species = GetBoxOrPartyMonData(boxId, monId, MON_DATA_SPECIES2, NULL);
+        u32 trainerId = GetBoxOrPartyMonData(boxId, monId, MON_DATA_OT_ID, NULL);
+        u32 personality = GetBoxOrPartyMonData(boxId, monId, MON_DATA_PERSONALITY, NULL);
+
+        LoadSpecialPokePic(&gMonFrontPicTable[species], tilesDst, species, personality, TRUE);
+        LZ77UnCompWram(GetFrontSpritePalFromSpeciesAndPersonality(species, trainerId, personality), palDst);
+    }
+}
+
+bool8 sub_81D312C(s16 *var)
+{
+    *var += 24;
+    if (*var > 0)
+        *var = 0;
+
+    return (*var != 0);
+}
+
+bool8 sub_81D3150(s16 *var)
+{
+    *var -= 24;
+    if (*var < -80)
+        *var = -80;
+
+    return (*var != -80);
+}
+
+bool8 sub_81D3178(struct UnknownStruct_81D1ED4 *arg0, s16 *arg1)
+{
+    bool8 var1 = sub_81D2074(arg0);
+    bool8 var2 = sub_81D312C(arg1);
+
+    return ((var1 != 0) || (var2 != 0));
+}
+
+bool8 sub_81D31A4(struct UnknownStruct_81D1ED4 *arg0, s16 *arg1)
+{
+    bool8 var1 = sub_81D2074(arg0);
+    bool8 var2 = sub_81D3150(arg1);
+
+    return ((var1 != 0) || (var2 != 0));
+}
+
+const u32 gUnknown_08625560[] = INCBIN_U32("graphics/pokenav/pokeball.4bpp");
+const u32 gUnknown_08625660[] = INCBIN_U32("graphics/pokenav/pokeball_placeholder.4bpp");
+const u16 gUnknown_08625680[] = INCBIN_U16("graphics/pokenav/sparkle.gbapal");
+const u32 gUnknown_086256A0[] = INCBIN_U32("graphics/pokenav/sparkle.4bpp");
+
+static const struct OamData sOamData_8625A20 =
+{
+    .y = 0,
+    .affineMode = 0,
+    .objMode = 0,
+    .mosaic = 0,
+    .bpp = 0,
+    .shape = 0,
+    .x = 0,
+    .matrixNum = 0,
+    .size = 3,
+    .tileNum = 0,
+    .priority = 1,
+    .paletteNum = 0,
+    .affineParam = 0
+};
+
+const struct OamData sOamData_8625A28 =
+{
+    .y = 0,
+    .affineMode = 0,
+    .objMode = 0,
+    .mosaic = 0,
+    .bpp = 0,
+    .shape = 0,
+    .x = 0,
+    .matrixNum = 0,
+    .size = 1,
+    .tileNum = 0,
+    .priority = 2,
+    .paletteNum = 0,
+    .affineParam = 0
+};
+
+static const union AnimCmd sSpriteAnim_8625A30[] =
+{
+    ANIMCMD_FRAME(0, 5),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sSpriteAnim_8625A38[] =
+{
+    ANIMCMD_FRAME(4, 5),
+    ANIMCMD_END
+};
+
+const union AnimCmd *const sSpriteAnimTable_8625A40[] =
+{
+    sSpriteAnim_8625A30,
+    sSpriteAnim_8625A38
+};
+
+void sub_81D31D0(struct SpriteSheet *sheet, struct SpriteTemplate *template, struct SpritePalette *pal)
+{
+    struct SpriteSheet dataSheet = {NULL, 0x800, 100};
+
+    struct SpriteTemplate dataTemplate =
+    {
+        .tileTag = 100,
+        .paletteTag = 100,
+        .oam = &sOamData_8625A20,
+        .anims = gDummySpriteAnimTable,
+        .images = NULL,
+        .affineAnims = gDummySpriteAffineAnimTable,
+        .callback = SpriteCallbackDummy,
+    };
+
+    struct SpritePalette dataPal = {NULL, 100};
+
+    *sheet = dataSheet;
+    *template = dataTemplate;
+    *pal = dataPal;
+}
+
+void sub_81D321C(struct SpriteSheet *sheets, struct SpriteTemplate * template, struct SpritePalette *pals)
+{
+    u8 i;
+
+    struct SpriteSheet dataSheets[] =
+    {
+        {gUnknown_08625560, 0x100, 101},
+        {gUnknown_08625660, 0x20, 103},
+        {gPokenavConditionCancel_Gfx, 0x100, 102},
+        {},
+    };
+
+    struct SpritePalette dataPals[] =
+    {
+        {gPokenavConditionCancel_Pal, 101},
+        {gPokenavConditionCancel_Pal + 16, 102},
+        {},
+    };
+
+    struct SpriteTemplate dataTemplate =
+    {
+        .tileTag = 101,
+        .paletteTag = 101,
+        .oam = &sOamData_8625A28,
+        .anims = sSpriteAnimTable_8625A40,
+        .images = NULL,
+        .affineAnims = gDummySpriteAffineAnimTable,
+        .callback = SpriteCallbackDummy,
+    };
+
+    for (i = 0; i < ARRAY_COUNT(dataSheets); i++)
+        *(sheets++) = dataSheets[i];
+
+    *template = dataTemplate;
+
+    for (i = 0; i < ARRAY_COUNT(dataPals); i++)
+        *(pals++) = dataPals[i];
+}
+
+void sub_81D32B0(struct SpriteSheet *sheet, struct SpritePalette *pal)
+{
+    struct SpriteSheet dataSheet = {gUnknown_086256A0, 0x380, 104};
+    struct SpritePalette dataPal = {gUnknown_08625680, 104};
+
+    *sheet = dataSheet;
+    *pal = dataPal;
 }
