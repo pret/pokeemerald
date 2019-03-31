@@ -2626,5 +2626,7 @@ extern const u8 gText_VarietyOfEventsImportedWireless[];
 extern const u8 gText_WonderCardsInPossession[];
 extern const u8 gText_ReadNewsThatArrived[];
 extern const u8 gText_ReturnToTitle[];
+extern const u8 gText_WhatToDoWithCards[];
+extern const u8 gText_WhatToDoWithNews[];
 
 #endif // GUARD_STRINGS_H

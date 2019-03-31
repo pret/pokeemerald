@@ -21,6 +21,8 @@
 #include "international_string_util.h"
 #include "list_menu.h"
 #include "string_util.h"
+#include "mevent.h"
+#include "mevent_801BAAC.h"
 
 void bgid_upload_textbox_1(u8 bgId);
 void task_add_00_mystery_gift(void);
@@ -696,3 +698,121 @@ s32 sub_8018B08(u8 * textState, u16 * windowId, bool8 r6, const u8 * str)
 
     return -2;
 }
+
+s32 sub_8018C4C(u8 * textState, u16 * windowId, bool32 r2, bool32 r3)
+{
+    struct WindowTemplate windowTemplate;
+    s32 input;
+
+    switch (*textState)
+    {
+    case 0:
+        if (r2 == 0)
+        {
+            StringExpandPlaceholders(gStringVar4, gText_WhatToDoWithCards);
+        }
+        else
+        {
+            StringExpandPlaceholders(gStringVar4, gText_WhatToDoWithNews);
+        }
+        *windowId = AddWindow(&gUnknown_082F05D8);
+        FillWindowPixelBuffer(*windowId, 0x11);
+        AddTextPrinterParameterized4(*windowId, 1, 0, 1, 0, 0, gUnknown_082F0728, 0, gStringVar4);
+        sub_8098858(*windowId, 0x001, 0x0F);
+        CopyWindowToVram(*windowId, 2);
+        PutWindowTilemap(*windowId);
+        (*textState)++;
+        break;
+    case 1:
+        windowTemplate = gUnknown_082F05E8;
+        if (r3)
+        {
+            if (r2 == 0)
+            {
+                input = DoMysteryGiftListMenu(&gUnknown_082F05F8, &gUnknown_082F06C8, 1, 0x00A, 0xE0);
+            }
+            else
+            {
+                input = DoMysteryGiftListMenu(&gUnknown_082F0600, &gUnknown_082F06F8, 1, 0x00A, 0xE0);
+            }
+        }
+        else
+        {
+            if (r2 == 0)
+            {
+                input = DoMysteryGiftListMenu(&gUnknown_082F05F0, &gUnknown_082F06B0, 1, 0x00A, 0xE0);
+            }
+            else
+            {
+                input = DoMysteryGiftListMenu(&gUnknown_082F05F8, &gUnknown_082F06E0, 1, 0x00A, 0xE0);
+            }
+        }
+        if (input != -1)
+        {
+            *textState = 0;
+            rbox_fill_rectangle(*windowId);
+            ClearWindowTilemap(*windowId);
+            CopyWindowToVram(*windowId, 1);
+            RemoveWindow(*windowId);
+            return input;
+        }
+        break;
+    case 0xFF:
+        *textState = 0;
+        rbox_fill_rectangle(*windowId);
+        ClearWindowTilemap(*windowId);
+        CopyWindowToVram(*windowId, 1);
+        RemoveWindow(*windowId);
+        return -2;
+    }
+
+    return -1;
+}
+
+s32 sub_8018D98(bool32 a0)
+{
+    if (a0 == 0)
+    {
+        return sub_801B27C();
+    }
+    else
+    {
+        return sub_801B0CC();
+    }
+}
+
+/*bool32 sub_8018DAC(u8 * state, bool32 arg1)
+{
+    switch (*state)
+    {
+    case 0:
+        if (arg1 == 0)
+        {
+            sub_801BAAC(sav1_get_mevent_buffer_1(), sav1_get_mevent_buffer_2());
+        }
+        else
+        {
+            sub_801C6C8(sub_801B00C());
+        }
+        (*state)++;
+    case 1:
+        if (arg1 == 0)
+        {
+            if (sub_801BB74() == 0)
+            {
+                break;
+            }
+        }
+        else
+        {
+            if (sub_801C758() == 0)
+            {
+                break;
+            }
+        }
+        *state = 0;
+        return TRUE;
+    }
+
+    return FALSE;
+}*/
