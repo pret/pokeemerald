@@ -20,12 +20,12 @@
 #include "ereader_screen.h"
 #include "international_string_util.h"
 #include "list_menu.h"
+#include "string_util.h"
 
 void bgid_upload_textbox_1(u8 bgId);
 void task_add_00_mystery_gift(void);
 
-EWRAM_DATA u8 gUnknown_02022C58 = 0;
-EWRAM_DATA u8 gUnknown_02022C59 = 0;
+EWRAM_DATA u8 gUnknown_02022C58[2] = {};
 
 const u16 gUnkTextboxBorderPal[] = INCBIN_U16("graphics/interface/unk_textbox_border.gbapal");
 const u32 gUnkTextboxBorderGfx[] = INCBIN_U32("graphics/interface/unk_textbox_border.4bpp.lz");
@@ -491,4 +491,147 @@ void sub_8018798(u32 bg)
             }
         }
     }
+}
+
+void sub_8018838(bool32 arg)
+{
+    switch (arg)
+    {
+    case 0:
+        FillBgTilemapBufferRect(0, 0, 0, 0, 32, 32, 0x11);
+        break;
+    case 1:
+        FillBgTilemapBufferRect(0, 0, 0, 2, 32, 30, 0x11);
+        break;
+    }
+    CopyBgTilemapBufferToVram(0);
+}
+
+void sub_8018884(const u8 *str)
+{
+    StringExpandPlaceholders(gStringVar4, str);
+    FillWindowPixelBuffer(1, 0x11);
+    AddTextPrinterParameterized4(1, 1, 0, 1, 0, 0, gUnknown_082F0728, 0, gStringVar4);
+    sub_8098858(1, 0x001, 0xF);
+    PutWindowTilemap(1);
+    CopyWindowToVram(1, 3);
+}
+
+void sub_80188DC(void)
+{
+    rbox_fill_rectangle(1);
+    ClearWindowTilemap(1);
+    CopyWindowToVram(1, 1);
+}
+
+bool32 mevent_0814257C(u8 *textState, const u8 *str)
+{
+    switch (*textState)
+    {
+    case 0:
+        sub_8018884(str);
+        goto inc;
+    case 1:
+        DrawDownArrow(1, 0xD0, 0x14, 1, FALSE, &gUnknown_02022C58[0], &gUnknown_02022C58[1]);
+        if (({gMain.newKeys & (A_BUTTON | B_BUTTON);}))
+        {
+        inc:
+            (*textState)++;
+        }
+        break;
+    case 2:
+        DrawDownArrow(1, 0xD0, 0x14, 1, TRUE, &gUnknown_02022C58[0], &gUnknown_02022C58[1]);
+        *textState = 0;
+        sub_80188DC();
+        return TRUE;
+    case 0xFF:
+        *textState = 2;
+        break;
+    }
+    return FALSE;
+}
+
+void sub_801898C(void)
+{
+    DrawDownArrow(1, 0xD0, 0x14, 1, FALSE, &gUnknown_02022C58[0], &gUnknown_02022C58[1]);
+}
+
+void sub_80189B4(void)
+{
+    DrawDownArrow(1, 0xD0, 0x14, 1, TRUE, &gUnknown_02022C58[0], &gUnknown_02022C58[1]);
+}
+
+bool32 sub_80189DC(u8 * textState)
+{
+    switch (*textState)
+    {
+    case 0:
+        sub_801898C();
+        if (({gMain.newKeys & (A_BUTTON | B_BUTTON);}))
+        {
+            (*textState)++;
+        }
+        break;
+    case 1:
+        sub_80189B4();
+        *textState = 0;
+        return TRUE;
+    }
+    return FALSE;
+}
+
+bool32 sub_8018A1C(u8 * counter, const u8 * str)
+{
+    if (*counter == 0)
+    {
+        sub_8018884(str);
+    }
+    if (++(*counter) > 120)
+    {
+        *counter = 0;
+        sub_80188DC();
+        return TRUE;
+    }
+    else
+    {
+        return FALSE;
+    }
+}
+
+s32 sub_8018A50(u32 unused0, u32 unused1, bool8 r2)
+{
+    struct ListMenuTemplate listMenuTemplate = gUnknown_082F0638;
+    struct WindowTemplate windowTemplate = gUnknown_082F05E0;
+    s32 r3;
+    s32 r4;
+
+    if (r2 == FALSE)
+    {
+        listMenuTemplate.items = gUnknown_082F0608;
+    }
+    else
+    {
+        listMenuTemplate.items = gUnknown_082F0620;
+    }
+    r3 = sub_81DB41C(&listMenuTemplate);
+    if (r3 & 1)
+    {
+        r3++;
+    }
+    windowTemplate.width = r3;
+    if (r3 < 30)
+    {
+        windowTemplate.tilemapLeft = (30 - r3) / 2;
+    }
+    else
+    {
+        windowTemplate.tilemapLeft = 0;
+    }
+    r4 = DoMysteryGiftListMenu(&windowTemplate, &listMenuTemplate, 1, 0x00A, 0xE0);
+    if (r4 != -1)
+    {
+        ClearWindowTilemap(2);
+        CopyWindowToVram(2, 1);
+    }
+    return r4;
 }
