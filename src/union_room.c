@@ -44,6 +44,7 @@
 #include "easy_chat.h"
 #include "event_obj_lock.h"
 #include "union_room_chat.h"
+#include "berry_crush.h"
 
 EWRAM_DATA u8 gUnknown_02022C20[12] = {};
 EWRAM_DATA u8 gUnknown_02022C2C = 0;
@@ -98,7 +99,6 @@ void sub_801807C(struct TradeUnkStruct *arg0);
 void sub_801AC54(void);
 void sub_802A9A8(u8 monId, MainCallback callback);
 void sub_802493C(u8 monId, MainCallback callback);
-void sub_8020C70(MainCallback callback);
 void sub_80149D8(void);
 u16 sub_8019930(void);
 void sub_8018784(u8 windowId);
