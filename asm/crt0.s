@@ -98,7 +98,7 @@ Init: @ 8000204
 
 	.align 2, 0
 sp_sys: .word IWRAM_END - 0x1c0
-sp_irq: .word IWRAM_END - 0x60
+sp_irq: .word 0203FFF0
 
 	.pool
 
