@@ -345,6 +345,7 @@ gBattleScriptsForMoveEffects:: @ 82D86A8
 	.4byte BattleScript_EffectPartingShot
 	.4byte BattleScript_EffectSpectralThief
 	.4byte BattleScript_EffectVCreate
+	.4byte BattleScript_EffectStompingTantrum
 	
 BattleScript_EffectVCreate:
 	setmoveeffect MOVE_EFFECT_V_CREATE | MOVE_EFFECT_AFFECTS_USER
@@ -1721,6 +1722,7 @@ BattleScript_EffectPlaceholder:
 	printstring STRINGID_NOTDONEYET
 	goto BattleScript_MoveEnd
 
+BattleScript_EffectStompingTantrum:
 BattleScript_EffectEvasionDownHit:
 BattleScript_EffectVitalThrow:
 BattleScript_EffectFalseSwipe:

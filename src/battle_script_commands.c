@@ -4198,6 +4198,13 @@ static void atk49_moveend(void)
     {
         switch (gBattleScripting.atk49_state)
         {
+        case ATK49_FAILED_MOVE_COUNTER:
+            if (gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
+                gBattleStruct->lastMoveFailed |= gBitTable[gBattlerAttacker];
+            else
+                gBattleStruct->lastMoveFailed &= ~(gBitTable[gBattlerAttacker]);
+            gBattleScripting.atk49_state++;
+            break;
         case ATK49_SPIKY_SHIELD:
             if (gProtectStructs[gBattlerTarget].spikyShielded
                 && gBattleMoves[gCurrentMove].flags & FLAG_MAKES_CONTACT
