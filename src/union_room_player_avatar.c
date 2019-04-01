@@ -12,16 +12,16 @@
 EWRAM_DATA struct UnkStruct_8019BA8 * gUnknown_02022C64 = NULL;
 EWRAM_DATA u32 gUnknown_02022C68 = 0;
 
-u8 sub_8019DF4(void);
-bool32 sub_8019F8C(u32 playerIdx, u32 arg1);
-void sub_801A3B0(s32 arg0, s32 arg1, u8 arg2);
+static u8 sub_8019DF4(void);
+static u32 sub_8019F8C(u32 playerIdx, u32 arg1);
+static void sub_801A3B0(s32 arg0, s32 arg1, u8 arg2);
 
 ALIGNED(4) const u8 gUnknown_082F072C[][10] = {
     {0x21, 0x2c, 0x1f, 0x23, 0x25, 0x24, 0x41, 0x42},
     {0x22, 0x28, 0x20, 0x2f, 0x2f, 0x0e, 0x14, 0x2d}
 };
 
-const s16 gUnknown_082F0740[][2] = {
+static const s16 gUnknown_082F0740[][2] = {
     {0x4, 0x6},
     {0xd, 0x8},
     {0xa, 0x6},
@@ -32,7 +32,7 @@ const s16 gUnknown_082F0740[][2] = {
     {0x7, 0x8}
 };
 
-const s8 gUnknown_082F0760[][2] = {
+static const s8 gUnknown_082F0760[][2] = {
     { 0,  0},
     { 1,  0},
     { 0, -1},
@@ -40,31 +40,31 @@ const s8 gUnknown_082F0760[][2] = {
     { 0,  1}
 };
 
-const u8 gUnknown_082F076A[] = {
+static const u8 gUnknown_082F076A[] = {
     0x00, 0x02, 0x01, 0x04, 0x03
 };
 
-const u8 gUnknown_082F076F[] = {
+static const u8 gUnknown_082F076F[] = {
     0x01, 0x03, 0x01, 0x04, 0x02
 };
 
-const u8 gUnknown_082F0774[] = {
+static const u8 gUnknown_082F0774[] = {
     0x09, 0x08, 0x07, 0x02, 0x06, 0x05, 0x04, 0x03,
     0xbf, 0x02, 0xc0, 0x02, 0xc1, 0x02, 0xc2, 0x02,
     0xc3, 0x02, 0xc4, 0x02, 0xc5, 0x02, 0xc6, 0x02
 };
 
-const u8 gUnknown_082F078C[2] = {
+static const u8 gUnknown_082F078C[2] = {
     MOVEMENT_ACTION_FLY_UP,
     MOVEMENT_ACTION_STEP_END
 };
 
-const u8 gUnknown_082F078E[2] = {
+static const u8 gUnknown_082F078E[2] = {
     MOVEMENT_ACTION_FLY_DOWN,
     MOVEMENT_ACTION_STEP_END
 };
 
-bool32 is_walking_or_running(void)
+static bool32 is_walking_or_running(void)
 {
     if (gPlayerAvatar.tileTransitionState == 2 || gPlayerAvatar.tileTransitionState == 0)
     {
@@ -76,18 +76,18 @@ bool32 is_walking_or_running(void)
     }
 }
 
-u8 sub_8019978(u32 a0, u32 a1)
+static u8 sub_8019978(u32 a0, u32 a1)
 {
     return gUnknown_082F072C[a0][a1 % 8];
 }
 
-void sub_8019990(u32 a0, u32 a1, s32 * a2, s32 * a3)
+static void sub_8019990(u32 a0, u32 a1, s32 * a2, s32 * a3)
 {
     *a2 = gUnknown_082F0740[a0][0] + gUnknown_082F0760[a1][0] + 7;
     *a3 = gUnknown_082F0740[a0][1] + gUnknown_082F0760[a1][1] + 7;
 }
 
-bool32 sub_80199E0(u32 a0, u32 a1, s32 a2, s32 a3)
+static bool32 sub_80199E0(u32 a0, u32 a1, s32 a2, s32 a3)
 {
     if (gUnknown_082F0740[a0][0] + gUnknown_082F0760[a1][0] + 7 != a2)
     {
@@ -103,37 +103,37 @@ bool32 sub_80199E0(u32 a0, u32 a1, s32 a2, s32 a3)
     }
 }
 
-bool32 IsUnionRoomPlayerHidden(u32 player_idx)
+static bool32 IsUnionRoomPlayerHidden(u32 player_idx)
 {
     return FlagGet(FLAG_HIDE_UNION_ROOM_PLAYER_1 + player_idx);
 }
 
-void HideUnionRoomPlayer(u32 player_idx)
+static void HideUnionRoomPlayer(u32 player_idx)
 {
     FlagSet(FLAG_HIDE_UNION_ROOM_PLAYER_1 + player_idx);
 }
 
-void ShowUnionRoomPlayer(u32 player_idx)
+static void ShowUnionRoomPlayer(u32 player_idx)
 {
     FlagClear(FLAG_HIDE_UNION_ROOM_PLAYER_1 + player_idx);
 }
 
-void SetUnionRoomPlayerGfx(u32 playerIdx, u32 gfxId)
+static void SetUnionRoomPlayerGfx(u32 playerIdx, u32 gfxId)
 {
     VarSet(VAR_OBJ_GFX_ID_0 + playerIdx, gfxId);
 }
 
-void CreateUnionRoomPlayerEventObject(u32 playerIdx)
+static void CreateUnionRoomPlayerEventObject(u32 playerIdx)
 {
     show_sprite(gUnknown_082F0774[playerIdx], gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
 }
 
-void RemoveUnionRoomPlayerEventObject(u32 playerIdx)
+static void RemoveUnionRoomPlayerEventObject(u32 playerIdx)
 {
     RemoveEventObjectByLocalIdAndMap(gUnknown_082F0774[playerIdx], gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
 }
 
-bool32 SetUnionRoomPlayerEnterExitMovement(u32 playerIdx, const u8 * movement)
+static bool32 SetUnionRoomPlayerEnterExitMovement(u32 playerIdx, const u8 * movement)
 {
     u8 objectId;
     struct EventObject * object;
@@ -153,7 +153,7 @@ bool32 SetUnionRoomPlayerEnterExitMovement(u32 playerIdx, const u8 * movement)
     return TRUE;
 }
 
-bool32 sub_8019B3C(u32 playerIdx)
+static bool32 sub_8019B3C(u32 playerIdx)
 {
     u8 objectId;
     struct EventObject * object;
@@ -193,7 +193,7 @@ u8 sub_8019BA8(struct UnkStruct_8019BA8 * ptr)
     return sub_8019DF4();
 }
 
-bool32 sub_8019BDC(s8 * a0, u32 playerIdx, struct UnkStruct_8019BA8 * ptr)
+static bool32 sub_8019BDC(s8 * a0, u32 playerIdx, struct UnkStruct_8019BA8 * ptr)
 {
     switch (*a0)
     {
@@ -217,7 +217,7 @@ bool32 sub_8019BDC(s8 * a0, u32 playerIdx, struct UnkStruct_8019BA8 * ptr)
     return FALSE;
 }
 
-bool32 sub_8019C38(s8 * a0, u32 playerIdx, struct UnkStruct_8019BA8 * ptr)
+static bool32 sub_8019C38(s8 * a0, u32 playerIdx, struct UnkStruct_8019BA8 * ptr)
 {
     s16 x, y;
 
@@ -260,7 +260,7 @@ bool32 sub_8019C38(s8 * a0, u32 playerIdx, struct UnkStruct_8019BA8 * ptr)
     return FALSE;
 }
 
-bool32 sub_8019CF0(u32 playerIdx, u32 a1, u32 a2)
+static bool32 sub_8019CF0(u32 playerIdx, u32 a1, u32 a2)
 {
     struct UnkStruct_8019BA8 * ptr = &gUnknown_02022C64[playerIdx];
     ptr->field_3 = 1;
@@ -275,7 +275,7 @@ bool32 sub_8019CF0(u32 playerIdx, u32 a1, u32 a2)
     }
 }
 
-bool32 sub_8019D20(u32 playerIdx)
+static bool32 sub_8019D20(u32 playerIdx)
 {
     struct UnkStruct_8019BA8 * ptr = &gUnknown_02022C64[playerIdx];
     ptr->field_3 = 2;
@@ -289,7 +289,7 @@ bool32 sub_8019D20(u32 playerIdx)
     }
 }
 
-void sub_8019D44(u32 playerIdx, struct UnkStruct_8019BA8 * ptr)
+static void sub_8019D44(u32 playerIdx, struct UnkStruct_8019BA8 * ptr)
 {
     switch (ptr->field_0)
     {
@@ -338,7 +338,7 @@ void sub_8019D44(u32 playerIdx, struct UnkStruct_8019BA8 * ptr)
     ptr->field_3 = 0;
 }
 
-void sub_8019DD0(u8 taskId)
+static void sub_8019DD0(u8 taskId)
 {
     s32 i;
     for (i = 0; i < 8; i++)
@@ -347,7 +347,7 @@ void sub_8019DD0(u8 taskId)
     }
 }
 
-u8 sub_8019DF4(void)
+static u8 sub_8019DF4(void)
 {
     if (FuncIsActiveTask(sub_8019DD0) == 1)
     {
@@ -359,7 +359,7 @@ u8 sub_8019DF4(void)
     }
 }
 
-void sub_8019E20(void)
+static void sub_8019E20(void)
 {
     u8 taskId = FindTaskIdByFunc(sub_8019DD0);
     if (taskId < NUM_TASKS)
@@ -417,7 +417,7 @@ void sub_8019F2C(void)
     }
 }
 
-u8 sub_8019F64(u32 r1, u32 unused, struct UnkLinkRfuStruct_02022B14 * r2)
+static u8 sub_8019F64(u32 r1, u32 unused, struct UnkLinkRfuStruct_02022B14 * r2)
 {
     if (r1 != 0)
     {
@@ -433,12 +433,12 @@ u8 sub_8019F64(u32 r1, u32 unused, struct UnkLinkRfuStruct_02022B14 * r2)
     }
 }
 
-u32 sub_8019F8C(u32 a0, u32 a1)
+static u32 sub_8019F8C(u32 a0, u32 a1)
 {
     return sub_8097C8C(5 * a0 + a1 - 0x38);
 }
 
-void sub_8019FA4(u32 r5, u32 r6, u8 r8, struct UnkLinkRfuStruct_02022B14 * r9)
+static void sub_8019FA4(u32 r5, u32 r6, u8 r8, struct UnkLinkRfuStruct_02022B14 * r9)
 {
     s32 x, y;
     s32 r7 = 5 * r5 + r6;
@@ -453,7 +453,7 @@ void sub_8019FA4(u32 r5, u32 r6, u8 r8, struct UnkLinkRfuStruct_02022B14 * r9)
     sub_8088B94(x, y, 1);
 }
 
-void sub_801A02C(u32 a0, u32 a1)
+static void sub_801A02C(u32 a0, u32 a1)
 {
     s32 x, y;
     sub_8097CC4(5 * a0 + a1 - 0x38, 2);
@@ -461,7 +461,7 @@ void sub_801A02C(u32 a0, u32 a1)
     sub_8088B94(x, y, 0);
 }
 
-void sub_801A064(u32 r7, struct UnkLinkRfuStruct_02022B14 * r8)
+static void sub_801A064(u32 r7, struct UnkLinkRfuStruct_02022B14 * r8)
 {
     s16 x, y, x2, y2;
     s32 i;
@@ -489,7 +489,7 @@ void sub_801A064(u32 r7, struct UnkLinkRfuStruct_02022B14 * r8)
     }
 }
 
-void sub_801A16C(u32 r5, struct UnkLinkRfuStruct_02022B14 * r4)
+static void sub_801A16C(u32 r5, struct UnkLinkRfuStruct_02022B14 * r4)
 {
     u32 i;
     switch (r4->unk_0a_0)
@@ -515,7 +515,7 @@ void sub_801A16C(u32 r5, struct UnkLinkRfuStruct_02022B14 * r4)
     }
 }
 
-void sub_801A214(u32 r5, struct UnkLinkRfuStruct_02022B14 * unused)
+static void sub_801A214(u32 r5, struct UnkLinkRfuStruct_02022B14 * unused)
 {
     s32 i;
     sub_8019D20(r5);
@@ -525,7 +525,7 @@ void sub_801A214(u32 r5, struct UnkLinkRfuStruct_02022B14 * unused)
     }
 }
 
-void sub_801A234(struct UnkStruct_URoom *r0)
+static void sub_801A234(struct UnkStruct_URoom *r0)
 {
     s32 i;
     struct UnkStruct_x20 * r4;
@@ -543,7 +543,7 @@ void sub_801A234(struct UnkStruct_URoom *r0)
     }
 }
 
-void sub_801A274(void)
+void sub_801A274(struct UnkStruct_URoom *unused)
 {
     gUnknown_02022C68 = 300;
 }
@@ -600,7 +600,7 @@ bool32 sub_801A2A8(struct UnkStruct_Main0 *arg0, s16 *arg1, s16 *arg2, u8 *arg3)
     return FALSE;
 }
 
-void sub_801A3B0(s32 arg0, s32 arg1, u8 arg2)
+static void sub_801A3B0(s32 arg0, s32 arg1, u8 arg2)
 {
     sub_8097B78(5 * arg1 - 0x38 + arg0, arg2);
 }
