@@ -317,6 +317,7 @@ void sub_811067C(struct Sprite *sprite)
 {
     SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT2_ALL | BLDCNT_EFFECT_BLEND);
     SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(16, 0));
+    SetAverageBattlerPositions(gBattleAnimTarget, FALSE, &sprite->pos1.x, &sprite->pos1.y);
     if (GetBattlerSide(gBattleAnimAttacker))
         sprite->pos1.x -= gBattleAnimArgs[0];
     else

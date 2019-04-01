@@ -2264,6 +2264,29 @@ Move_WORK_UP:
 	end
 	
 Move_ELECTROWEB:
+	loadspritegfx ANIM_TAG_SPIDER_WEB
+	loadspritegfx ANIM_TAG_WEB_THREAD
+	loadspritegfx ANIM_TAG_SPARK_2
+	monbg ANIM_DEF_PARTNER
+	delay 0
+	createvisualtask AnimTask_BlendParticle, 5, ANIM_TAG_SPIDER_WEB, 0, 6, 6, RGB(31, 30, 1)
+	createsprite gSimplePaletteBlendSpriteTemplate, ANIM_ATTACKER, 5, 1, 2, 0, 9, RGB_BLACK
+	waitforvisualfinish
+	monbgprio_28 ANIM_TARGET
+	waitforvisualfinish
+	playsewithpan SE_W081B, SOUND_PAN_TARGET
+	createsprite gUnknown_08596A2C, ANIM_ATTACKER, 2, 0, 0
+	waitforvisualfinish
+	clearmonbg ANIM_DEF_PARTNER
+	delay 1
+	createsprite gSimplePaletteBlendSpriteTemplate, ANIM_ATTACKER, 5, 1, 2, 9, 0, RGB_BLACK
+	
+	@ ElectricityEffect looks ugly against both opponents, to do later
+	jumpifdoublebattle Move_ELECTROWEB_Wait
+	
+	call ElectricityEffect
+Move_ELECTROWEB_Wait:
+	waitforvisualfinish
 	end
 	
 Move_WILD_CHARGE:
