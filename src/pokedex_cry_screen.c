@@ -169,9 +169,14 @@ const struct OamData gOamData_85B8C60 =
 {
     .y = 160,
     .affineMode = ST_OAM_AFFINE_NORMAL,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(64x64),
+    .x = 0,
     .size = SPRITE_SIZE(64x64),
-    .priority = 1
+    .tileNum = 0,
+    .priority = 1,
+    .paletteNum = 0,
 };
 
 const struct SpriteTemplate gUnknown_085B8C68 =
@@ -521,3 +526,4 @@ static void sub_8145B24(s8 a0)
     sCryVolumeMeter->unk1 = r2;
     sCryVolumeMeter->unk2 = 5;
 }
+

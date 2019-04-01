@@ -1513,18 +1513,15 @@ void LoadAshSpriteSheet(void)
 const struct OamData gOamData_839ABB8 =
 {
     .y = 0,
-    .affineMode = 0,
-    .objMode = 1,
-    .mosaic = 0,
-    .bpp = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_BLEND,
+    .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(64x64),
     .x = 0,
-    .matrixNum = 0,
     .size = SPRITE_SIZE(64x64),
     .tileNum = 0,
     .priority = 1,
     .paletteNum = 15,
-    .affineParam = 0,
 };
 
 const union AnimCmd gSpriteAnim_839ABC0[] =
@@ -1750,18 +1747,15 @@ void CreateFog2Sprites(void)
 const struct OamData gOamData_839ABF0 =
 {
     .y = 0,
-    .affineMode = 0,
-    .objMode = 1,
-    .mosaic = 0,
-    .bpp = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_BLEND,
+    .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(64x64),
     .x = 0,
-    .matrixNum = 0,
     .size = SPRITE_SIZE(64x64),
     .tileNum = 0,
     .priority = 2,
     .paletteNum = 0,
-    .affineParam = 0,
 };
 
 const union AnimCmd gSpriteAnim_839ABF8[] =
@@ -1949,18 +1943,15 @@ void sub_80800E4(void)
 const struct OamData gOamData_839AC1C =
 {
     .y = 0,
-    .affineMode = 0,
-    .objMode = 1,
-    .mosaic = 0,
-    .bpp = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_BLEND,
+    .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(64x64),
     .x = 0,
-    .matrixNum = 0,
     .size = SPRITE_SIZE(64x64),
     .tileNum = 0,
     .priority = 1,
     .paletteNum = 0,
-    .affineParam = 0,
 };
 
 const union AnimCmd gSpriteAnim_839AC24[] =
@@ -2470,3 +2461,5 @@ static void UpdateRainCounter(u8 newWeather, u8 oldWeather)
      && (newWeather == WEATHER_RAIN_LIGHT || newWeather == WEATHER_RAIN_MED))
         IncrementGameStat(GAME_STAT_GOT_RAINED_ON);
 }
+
+
