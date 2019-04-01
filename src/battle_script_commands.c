@@ -49,13 +49,11 @@
 #include "field_specials.h"
 #include "pokemon_summary_screen.h"
 #include "pokenav.h"
+#include "menu_specialized.h"
 
 extern struct MusicPlayerInfo gMPlayInfo_BGM;
 
 extern const u8* const gBattleScriptsForMoveEffects[];
-
-// functions
-extern void sub_81D388C(struct Pokemon* mon, void* statStoreLocation); // pokenav.s
 
 #define DEFENDER_IS_PROTECTED ((gProtectStructs[gBattlerTarget].protected) && (gBattleMoves[gCurrentMove].flags & FLAG_PROTECT_AFFECTED))
 
@@ -733,10 +731,10 @@ static const struct OamData sOamData_MonIconOnLvlUpBox =
     .objMode = 0,
     .mosaic = 0,
     .bpp = 0,
-    .shape = 0,
+    .shape = SPRITE_SHAPE(32x32),
     .x = 0,
     .matrixNum = 0,
-    .size = 2,
+    .size = SPRITE_SIZE(32x32),
     .tileNum = 0,
     .priority = 0,
     .paletteNum = 0,
@@ -4482,28 +4480,6 @@ static void atk48_playstatchangeanimation(void)
     }
 }
 
-enum
-{
-    ATK49_RAGE,
-    ATK49_DEFROST,
-    ATK49_SYNCHRONIZE_TARGET,
-    ATK49_MOVE_END_ABILITIES,
-    ATK49_STATUS_IMMUNITY_ABILITIES,
-    ATK49_SYNCHRONIZE_ATTACKER,
-    ATK49_CHOICE_MOVE,
-    ATK49_CHANGED_ITEMS,
-    ATK49_ATTACKER_INVISIBLE,
-    ATK49_ATTACKER_VISIBLE,
-    ATK49_TARGET_VISIBLE,
-    ATK49_ITEM_EFFECTS_ALL,
-    ATK49_KINGSROCK_SHELLBELL,
-    ATK49_SUBSTITUTE,
-    ATK49_UPDATE_LAST_MOVES,
-    ATK49_MIRROR_MOVE,
-    ATK49_NEXT_TARGET,
-    ATK49_COUNT,
-};
-
 static void atk49_moveend(void)
 {
     s32 i;
@@ -6319,16 +6295,16 @@ static void sub_804F100(void)
 {
     struct StatsArray currentStats;
 
-    sub_81D388C(&gPlayerParty[gBattleStruct->expGetterMonId], &currentStats);
-    sub_81D3640(0xD, gBattleResources->statsBeforeLvlUp, &currentStats, 0xE, 0xD, 0xF);
+    GetMonLevelUpWindowStats(&gPlayerParty[gBattleStruct->expGetterMonId], &currentStats);
+    DrawLevelUpWindowPg1(0xD, gBattleResources->statsBeforeLvlUp, &currentStats, 0xE, 0xD, 0xF);
 }
 
 static void sub_804F144(void)
 {
     struct StatsArray currentStats;
 
-    sub_81D388C(&gPlayerParty[gBattleStruct->expGetterMonId], &currentStats);
-    sub_81D3784(0xD, &currentStats, 0xE, 0xD, 0xF);
+    GetMonLevelUpWindowStats(&gPlayerParty[gBattleStruct->expGetterMonId], &currentStats);
+    DrawLevelUpWindowPg2(0xD, &currentStats, 0xE, 0xD, 0xF);
 }
 
 static void sub_804F17C(void)
@@ -7211,6 +7187,9 @@ static void atk88_negativedamage(void)
 
     gBattlescriptCurrInstr++;
 }
+
+#define STAT_CHANGE_WORKED      0
+#define STAT_CHANGE_DIDNT_WORK  1
 
 static u8 ChangeStatBuffs(s8 statValue, u8 statId, u8 flags, const u8 *BS_ptr)
 {

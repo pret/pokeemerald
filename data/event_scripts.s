@@ -442,28 +442,28 @@ gStdScripts_End:: @ 81DC2CC
 EventScript_SecretBasePC:: @ 823B4BB
 	lockall
 	playse SE_PC_LOGIN
-	message Text_276805
+	message Text_SecretBaseBootUpPC
 	dofieldeffect FLDEFF_PCTURN_ON
 	waitstate
 	waitmessage
 	waitbuttonpress
 	playse SE_SELECT
-	goto EventScript_23B4D3
+	goto EventScript_SecretBasePCShowMainMenu
 	end
 
-EventScript_23B4D3:: @ 823B4D3
-	message Text_27681A
+EventScript_SecretBasePCShowMainMenu:: @ 823B4D3
+	message Text_SecretBasePCStartMenu
 	waitmessage
-	goto_if_set FLAG_DECORATION_16, EventScript_23B4EF
+	goto_if_set FLAG_DECORATION_16, EventScript_SecretBasePCMainMenuChoice
 	goto EventScript_23B531
 	end
 
-gUnknown_0823B4E8:: @ 823B4E8
+gUnknown_0823B4E8:: @ 823B4E8 ;EventScript_SecretBasePCCancel?
 	lockall
-	goto EventScript_23B4D3
+	goto EventScript_SecretBasePCShowMainMenu
 	end
 
-EventScript_23B4EF:: @ 823B4EF
+EventScript_SecretBasePCMainMenuChoice:: @ 823B4EF
 	multichoice 0, 0, 6, 0
 	switch VAR_RESULT
 	case 0, EventScript_23B581
@@ -485,7 +485,7 @@ EventScript_23B531:: @ 823B531
 EventScript_23B568:: @ 823B568
 	msgbox Text_2766AA, MSGBOX_YESNO
 	compare VAR_RESULT, 0
-	goto_if_eq EventScript_23B4D3
+	goto_if_eq EventScript_SecretBasePCShowMainMenu
 	closemessage
 	special sub_80E9AC0
 	releaseall
@@ -501,7 +501,7 @@ EventScript_23B585:: @ 823B585
 
 EventScript_RecordMixingSecretBasePC:: @ 823B589
 	lockall
-	message Text_276805
+	message Text_SecretBaseBootUpPC
 	playse SE_PC_LOGIN
 	dofieldeffect FLDEFF_PCTURN_ON
 	waitstate
@@ -512,7 +512,7 @@ EventScript_RecordMixingSecretBasePC:: @ 823B589
 	end
 
 EventScript_23B5A1:: @ 823B5A1
-	message Text_27681A
+	message Text_SecretBasePCStartMenu
 	waitmessage
 	multichoice 0, 0, 7, 0
 	switch VAR_RESULT
@@ -533,7 +533,7 @@ EventScript_23B5F0:: @ 823B5F0
 	compare VAR_RESULT, 1
 	goto_if_eq EventScript_23B62F
 	compare VAR_RESULT, 2
-	goto_if_eq EventScript_23B652
+	goto_if_eq EventScript_CantRegisterTooManyBases
 	special sub_80E980C
 	msgbox Text_276707, MSGBOX_YESNO
 	compare VAR_RESULT, 0
@@ -554,8 +554,8 @@ EventScript_23B62F:: @ 823B62F
 	releaseall
 	end
 
-EventScript_23B652:: @ 823B652
-	msgbox Text_27676F, MSGBOX_SIGN
+EventScript_CantRegisterTooManyBases:: @ 823B652
+	msgbox Text_TooManyBasesDeleteSome, MSGBOX_SIGN
 	special DoSecretBasePCTurnOffEffect
 	closemessage
 	releaseall
@@ -1099,7 +1099,7 @@ EverGrandeCity_HallOfFame_EventScript_2717C1:: @ 82717C1
 	compare VAR_FOSSIL_MANIAC_STATE, 0
 	call_if_eq EverGrandeCity_HallOfFame_EventScript_271839
 	clearflag FLAG_HIDE_LILCOVE_MOTEL_GAME_DESIGNERS
-	call EverGrandeCity_HallOfFame_EventScript_2718CC
+	call EverGrandeCity_HallOfFame_EventScript_ResetEliteFour
 	setflag FLAG_HIDE_SLATEPORT_CITY_STERNS_SHIPYARD_MR_BRINEY
 	clearflag FLAG_HIDE_SS_TIDAL_CORRIDOR_MR_BRINEY
 	clearflag FLAG_HIDE_MOSSDEEP_CITY_STEVENS_HOUSE_INVISIBLE_NINJA_BOY
@@ -1147,7 +1147,7 @@ EverGrandeCity_HallOfFame_EventScript_271851:: @ 8271851
 	return
 
 EventScript_WhiteOut:: @ 8271857
-	call EverGrandeCity_HallOfFame_EventScript_2718CC
+	call EverGrandeCity_HallOfFame_EventScript_ResetEliteFour
 	goto EventScript_ResetMrBriney
 	end
 
@@ -1192,7 +1192,7 @@ EventScript_MoveMrBrineyToRoute108:: @ 82718B3
 	clearflag FLAG_HIDE_ROUTE_109_MR_BRINEY_BOAT
 	end
 
-EverGrandeCity_HallOfFame_EventScript_2718CC:: @ 82718CC
+EverGrandeCity_HallOfFame_EventScript_ResetEliteFour:: @ 82718CC
 	clearflag FLAG_DEFEATED_ELITE_4_SYDNEY
 	clearflag FLAG_DEFEATED_ELITE_4_PHOEBE
 	clearflag FLAG_DEFEATED_ELITE_4_GLACIA
@@ -1337,13 +1337,13 @@ OldaleTown_PokemonCenter_1F_EventScript_271A19:: @ 8271A19
 OldaleTown_PokemonCenter_1F_EventScript_271A43:: @ 8271A43
 	specialvar VAR_RESULT, IsPokerusInParty
 	compare VAR_RESULT, 1
-	goto_if_eq OldaleTown_PokemonCenter_1F_EventScript_271A5F
+	goto_if_eq OldaleTown_PokemonCenter_1F_EventScript_Explain_Pokerus
 	compare VAR_RESULT, 0
 	goto_if_eq OldaleTown_PokemonCenter_1F_EventScript_2719B1
 	end
 
-OldaleTown_PokemonCenter_1F_EventScript_271A5F:: @ 8271A5F
-	message gUnknown_08272F07
+OldaleTown_PokemonCenter_1F_EventScript_Explain_Pokerus:: @ 8271A5F
+	message gText_PokerusExplanation
 	setflag FLAG_POKERUS_EXPLAINED
 	return
 
@@ -1437,7 +1437,7 @@ EventScript_271B85:: @ 8271B85
 EventScript_271B95:: @ 8271B95
 	message gUnknown_08272A78
 	waitfanfare
-	msgbox gUnknown_08272A9A, MSGBOX_DEFAULT
+	msgbox gText_PutItemInPocket, MSGBOX_DEFAULT
 	setvar VAR_RESULT, 1
 	return
 
@@ -1491,13 +1491,13 @@ Std_FindItem:: @ 8271BFD
 	checkitemtype VAR_0x8000
 	call EventScript_271B08
 	compare VAR_0x8007, 1
-	call_if_eq EventScript_271C3A
+	call_if_eq EventScript_PickItemUp
 	compare VAR_0x8007, 0
 	call_if_eq EventScript_271CA1
 	release
 	return
 
-EventScript_271C3A:: @ 8271C3A
+EventScript_PickItemUp:: @ 8271C3A
 	removeobject VAR_LAST_TALKED
 	giveitem VAR_0x8004, VAR_0x8005
 	specialvar VAR_RESULT, sub_81398C0
@@ -1513,20 +1513,20 @@ EventScript_271C3A:: @ 8271C3A
 	special CallBattlePyramidFunction
 	compare VAR_RESULT, 1
 	goto_if_eq EventScript_271C86
-	msgbox gUnknown_08272A9A, MSGBOX_DEFAULT
+	msgbox gText_PutItemInPocket, MSGBOX_DEFAULT
 	return
 
 EventScript_271C86:: @ 8271C86
-	msgbox gUnknown_08272AEA, MSGBOX_DEFAULT
+	msgbox gText_PlayerPutItemInBag, MSGBOX_DEFAULT
 	return
 
 EventScript_271C8F:: @ 8271C8F
 	bufferitemnameplural 0, VAR_0x8004, VAR_0x8005
-	message gUnknown_082731A9
+	message gText_PlayerFoundOneItemTwoLines
 	return
 
 EventScript_271C9B:: @ 8271C9B
-	message gUnknown_08272ABF
+	message gText_PlayerFoundOneItem
 	return
 
 EventScript_271CA1:: @ 8271CA1
@@ -1561,12 +1561,12 @@ EventScript_271CE8:: @ 8271CE8
 
 EventScript_271D0E:: @ 8271D0E
 	bufferitemnameplural 0, VAR_0x8004, 1
-	message gUnknown_082731A9
+	message gText_PlayerFoundOneItemTwoLines
 	goto EventScript_271D2A
 	end
 
 EventScript_271D1F:: @ 8271D1F
-	message gUnknown_08272ABF
+	message gText_PlayerFoundOneItem
 	goto EventScript_271D2A
 	end
 
@@ -1575,14 +1575,14 @@ EventScript_271D2A:: @ 8271D2A
 	waitfanfare
 	bufferitemnameplural 1, VAR_0x8004, 1
 	copyvar VAR_0x8004, VAR_0x8008
-	msgbox gUnknown_08272A9A, MSGBOX_DEFAULT
+	msgbox gText_PutItemInPocket, MSGBOX_DEFAULT
 	special sub_80EDCE8
 	special SetFlagInVar
 	releaseall
 	end
 
 EventScript_271D47:: @ 8271D47
-	msgbox gUnknown_08272ABF, MSGBOX_DEFAULT
+	msgbox gText_PlayerFoundOneItem, MSGBOX_DEFAULT
 	msgbox gText_TooBadBagIsFull, MSGBOX_DEFAULT
 	setvar VAR_RESULT, 0
 	releaseall
@@ -1591,7 +1591,7 @@ EventScript_271D47:: @ 8271D47
 EventScript_271D5E:: @ 8271D5E
 	lock
 	faceplayer
-	msgbox Text_27260D, MSGBOX_YESNO
+	msgbox Text_WouldYouLikeToMixRecords, MSGBOX_YESNO
 	compare VAR_RESULT, 1
 	goto_if_eq EventScript_271D83
 	compare VAR_RESULT, 0
@@ -1605,7 +1605,7 @@ EventScript_271D83:: @ 8271D83
 	faceplayer
 
 EventScript_271D89:: @ 8271D89
-	message Text_272640
+	message Text_WouldNotLikeToMixRecords
 	waitmessage
 	waitbuttonpress
 	release
@@ -1616,7 +1616,7 @@ EventScript_PC:: @ 8271D92
 	setvar VAR_0x8004, 0
 	special DoPCTurnOnEffect
 	playse SE_PC_ON
-	msgbox Text_27265A, MSGBOX_DEFAULT
+	msgbox Text_BootUpPC, MSGBOX_DEFAULT
 	goto EventScript_271DAC
 	end
 
@@ -1639,7 +1639,7 @@ EventScript_271DBC:: @ 8271DBC
 
 EventScript_271DF9:: @ 8271DF9
 	playse SE_PC_LOGIN
-	msgbox gUnknown_082726C2, MSGBOX_DEFAULT
+	msgbox gText_AccessedPlayersPC, MSGBOX_DEFAULT
 	special PlayerPC
 	waitstate
 	goto EventScript_271DAC
@@ -1649,18 +1649,18 @@ EventScript_271E0E:: @ 8271E0E
 	playse SE_PC_LOGIN
 	call_if_unset FLAG_SYS_PC_LANETTE, EventScript_271E35
 	call_if_set FLAG_SYS_PC_LANETTE, EventScript_271E3E
-	msgbox gUnknown_082726A3, MSGBOX_DEFAULT
+	msgbox gText_StorageSystemOpened, MSGBOX_DEFAULT
 	special ShowPokemonStorageSystemPC
 	waitstate
 	goto EventScript_271DAC
 	end
 
 EventScript_271E35:: @ 8271E35
-	msgbox gUnknown_0827268C, MSGBOX_DEFAULT
+	msgbox gText_AccessedSomeonesPC, MSGBOX_DEFAULT
 	return
 
 EventScript_271E3E:: @ 8271E3E
-	msgbox gUnknown_082726D4, MSGBOX_DEFAULT
+	msgbox gText_AccessedLanettesPC, MSGBOX_DEFAULT
 	return
 
 EventScript_271E47:: @ 8271E47
@@ -1717,20 +1717,20 @@ Route109_EventScript_271E95:: @ 8271E95
 EventScript_UseSurf:: @ 8271EA0
 	checkpartymove MOVE_SURF
 	compare VAR_RESULT, 6
-	goto_if_eq EventScript_271ED6
+	goto_if_eq EventScript_CantSurf
 	bufferpartymonnick 0, VAR_RESULT
 	setfieldeffectargument 0, VAR_RESULT
 	lockall
-	msgbox gUnknown_08272FD6, MSGBOX_YESNO
+	msgbox gText_WantToUseSurf, MSGBOX_YESNO
 	compare VAR_RESULT, 0
-	goto_if_eq EventScript_271ED5
-	msgbox gUnknown_0827300D, MSGBOX_DEFAULT
+	goto_if_eq EventScript_CancelSurf
+	msgbox gText_PlayerUsedSurf, MSGBOX_DEFAULT
 	dofieldeffect FLDEFF_USE_SURF
 
-EventScript_271ED5:: @ 8271ED5
+EventScript_CancelSurf:: @ 8271ED5
 	releaseall
 
-EventScript_271ED6:: @ 8271ED6
+EventScript_CantSurf:: @ 8271ED6
 	end
 
 Common_EventScript_SetupRivalGender:: @ 8271ED7
@@ -2464,56 +2464,56 @@ Movement_2725CB:: @ 82725CB
 	step_end
 
 EventScript_PictureBookShelf:: @ 82725CE
-	msgbox Text_2A81E5, MSGBOX_SIGN
+	msgbox Text_PictureBookShelf, MSGBOX_SIGN
 	end
 
 EventScript_BookShelf:: @ 82725D7
-	msgbox Text_2A820D, MSGBOX_SIGN
+	msgbox Text_BookShelf, MSGBOX_SIGN
 	end
 
-EventScript_PokemonCenterBookshelf:: @ 82725E0
-	msgbox Text_2A8232, MSGBOX_SIGN
+EventScript_PokemonCenterBookShelf:: @ 82725E0
+	msgbox Text_PokemonCenterBookShelf, MSGBOX_SIGN
 	end
 
 EventScript_Vase:: @ 82725E9
-	msgbox Text_2A8276, MSGBOX_SIGN
+	msgbox Text_Vase, MSGBOX_SIGN
 	end
 
-EventScript_TrashCan:: @ 82725F2
-	msgbox Text_2A82B3, MSGBOX_SIGN
+EventScript_EmptyTrashCan:: @ 82725F2
+	msgbox Text_EmptyTrashCan, MSGBOX_SIGN
 	end
 
 EventScript_ShopShelf:: @ 82725FB
-	msgbox Text_2A82BF, MSGBOX_SIGN
+	msgbox Text_ShopShelf, MSGBOX_SIGN
 	end
 
 EventScript_Blueprint:: @ 8272604
-	msgbox Text_2A82F7, MSGBOX_SIGN
+	msgbox Text_Blueprint, MSGBOX_SIGN
 	end
 
-Text_27260D: @ 827260D
+Text_WouldYouLikeToMixRecords: @ 827260D
 	.string "Would you like to mix records with\n"
 	.string "other TRAINERS?$"
 
-Text_272640: @ 8272640
+Text_WouldNotLikeToMixRecords: @ 8272640
 	.string "We hope to see you again!$"
 
-Text_27265A: @ 827265A
+Text_BootUpPC: @ 827265A
 	.string "{PLAYER} booted up the PC.$"
 
 gText_WhichPCShouldBeAccessed:: @ 827266F
 	.string "Which PC should be accessed?$"
 
-gUnknown_0827268C:: @ 827268C
+gText_AccessedSomeonesPC:: @ 827268C
 	.string "Accessed SOMEONE'S PC.$"
 
-gUnknown_082726A3:: @ 82726A3
+gText_StorageSystemOpened:: @ 82726A3
 	.string "POKéMON Storage System opened.$"
 
-gUnknown_082726C2:: @ 82726C2
+gText_AccessedPlayersPC:: @ 82726C2
 	.string "Accessed {PLAYER}'s PC.$"
 
-gUnknown_082726D4:: @ 82726D4
+gText_AccessedLanettesPC:: @ 82726D4
 	.string "Accessed LANETTE's PC.$"
 
 gUnknown_082726EB:: @ 82726EB
@@ -2561,16 +2561,16 @@ gUnknown_08272A78:: @ 8272A78
 gUnknown_08272A89:: @ 8272A89
 	.string "The BAG is full…$"
 
-gUnknown_08272A9A:: @ 8272A9A
+gText_PutItemInPocket:: @ 8272A9A
 	.string "{PLAYER} put away the {STR_VAR_2}\nin the {STR_VAR_3} POCKET.$"
 
-gUnknown_08272ABF:: @ 8272ABF
+gText_PlayerFoundOneItem:: @ 8272ABF
 	.string "{PLAYER} found one {STR_VAR_2}!$"
 
 gText_TooBadBagIsFull:: @ 8272AD0
 	.string "Too bad!\nThe BAG is full…$"
 
-gUnknown_08272AEA:: @ 8272AEA
+gText_PlayerPutItemInBag:: @ 8272AEA
 	.string "{PLAYER} put away the {STR_VAR_2}\nin the BAG.$"
 
 gUnknown_08272B09:: @ 8272B09
@@ -2597,13 +2597,13 @@ gUnknown_08272C1D:: @ 8272C1D
 gUnknown_08272C5F:: @ 8272C5F
 	.string "The sandstorm is vicious.\nIt's impossible to keep going.$"
 
-gUnknown_08272C98:: @ 8272C98
+gText_SelectWithoutRegisteredItem:: @ 8272C98
 	.string "An item in the BAG can be\nregistered to SELECT for easy use.$"
 
 gUnknown_08272CD5:: @ 8272CD5
 	.string "There's an e-mail from POKéMON TRAINER\nSCHOOL.\p… … … … … …\pA POKéMON may learn up to four moves.\pA TRAINER's expertise is tested on the\nmove sets chosen for POKéMON.\p… … … … … …$"
 
-gUnknown_08272D87:: @ 8272D87
+gText_PlayerHouseBootPC:: @ 8272D87
 	.string "{PLAYER} booted up the PC.$"
 
 gUnknown_08272D9C:: @ 8272D9C
@@ -2615,13 +2615,13 @@ gUnknown_08272DB3:: @ 8272DB3
 gUnknown_08272DE3:: @ 8272DE3
 	.string "{PLAYER} is out of usable\nPOKéMON!\p{PLAYER} whited out!$"
 
-gUnknown_08272E0F:: @ 8272E0F
+gText_RegisteredTrainerinPokeNav:: @ 8272E0F
 	.string "Registered {STR_VAR_1} {STR_VAR_2}\nin the POKéNAV.$"
 
 gUnknown_08272E30:: @ 8272E30
 	.string "Do you know the TM SECRET POWER?\pOur group, we love the TM SECRET\nPOWER.\pOne of our members will give it to you.\nCome back and show me if you get it.\pWe'll accept you as a member and sell\nyou good stuff in secrecy.$"
 
-gUnknown_08272F07:: @ 8272F07
+gText_PokerusExplanation:: @ 8272F07
 	.string "Your POKéMON may be infected with\nPOKéRUS.\pLittle is known about the POKéRUS\nexcept that they are microscopic life-\lforms that attach to POKéMON.\pWhile infected, POKéMON are said to\ngrow exceptionally well.$"
 
 	.include "data/text/surf.inc"
@@ -2650,13 +2650,13 @@ gUnknown_08273161:: @ 8273161
 gUnknown_08273178:: @ 8273178
 	.string "Thank you for accessing the\nMYSTERY GIFT System.$"
 
-gUnknown_082731A9:: @ 82731A9
+gText_PlayerFoundOneItemTwoLines:: @ 82731A9
 	.string "{PLAYER} found one {STR_VAR_1}\n{STR_VAR_2}!$"
 
-gUnknown_082731BD:: @ 82731BD
+gText_Sudowoodo_Attacked:: @ 82731BD
 	.string "The weird tree doesn't like the\nWAILMER PAIL!\pThe weird tree attacked!$"
 
-gUnknown_08273204:: @ 8273204
+gText_LegendaryFlewAway:: @ 8273204
 	.string "The {STR_VAR_1} flew away!$"
 
 gText_PkmnTransferredSomeonesPC:: @ 8273216
@@ -2674,7 +2674,7 @@ gText_PkmnBoxLanettesPCFull:: @ 82732D9
 gUnknown_0827331C:: @ 827331C
 	.string "There's no more room for POKéMON!\pThe POKéMON BOXES are full and\ncan't accept any more!$"
 
-gUnknown_08273374:: @ 8273374
+gText_NicknameThisPokemon:: @ 8273374
 	.string "Do you want to give a nickname to\nthis {STR_VAR_1}?$"
 
 gUnknown_0827339F:: @ 827339F
@@ -2707,8 +2707,8 @@ gText_UnusualWeatherEnded_Rain:: @ 8273656
 gText_UnusualWeatherEnded_Sun:: @ 8273684
 	.string "The intense sunshine appears to\nhave subsided…$"
 
-EventScript_2736B3:: @ 82736B3
-	msgbox gUnknown_08272C98, MSGBOX_SIGN
+EventScript_SelectWithoutRegisteredItem:: @ 82736B3
+	msgbox gText_SelectWithoutRegisteredItem, MSGBOX_SIGN
 	end
 
 EventScript_Poison:: @ 82736BC
@@ -2862,7 +2862,7 @@ TerraCave_End_EventScript_273776:: @ 8273776
 	removeobject VAR_LAST_TALKED
 	fadescreenswapbuffers 0
 	bufferspeciesname 0, VAR_0x8004
-	msgbox gUnknown_08273204, MSGBOX_DEFAULT
+	msgbox gText_LegendaryFlewAway, MSGBOX_DEFAULT
 	release
 	end
 
@@ -3161,7 +3161,7 @@ Route118_EventScript_273D13:: @ 8273D13
 Route125_EventScript_273D13:: @ 8273D13
 Route127_EventScript_273D13:: @ 8273D13
 Route129_EventScript_273D13:: @ 8273D13
-	setflag FLAG_SPECIAL_FLAG_0x4000
+	setflag FLAG_HIDE_MAP_NAME_POPUP
 	return
 
 UnusualWeather_StartKyogreWeather:: @ 8273D17
@@ -3188,7 +3188,7 @@ UnusualWeather_EventScript_EndEventAndCleanup_2:: @ 8273D31
 	special DrawWholeMapView
 	setvar VAR_UNUSUAL_WEATHER_LOCATION, UNUSUAL_WEATHER_NONE
 	setvar VAR_SHOULD_END_UNUSUAL_WEATHER, 0
-	clearflag FLAG_SPECIAL_FLAG_0x4000
+	clearflag FLAG_HIDE_MAP_NAME_POPUP
 	fadescreenswapbuffers 0
 	releaseall
 	end
@@ -3433,7 +3433,7 @@ Std_RegisteredInMatchCall:: @ 82742C9
 	closemessage
 	delay 30
 	playfanfare MUS_ME_TORE_EYE
-	msgbox gUnknown_08272E0F, MSGBOX_DEFAULT
+	msgbox gText_RegisteredTrainerinPokeNav, MSGBOX_DEFAULT
 	waitfanfare
 	closemessage
 	delay 30
@@ -4207,31 +4207,31 @@ MauvilleCity_GameCorner_EventScript_2A5B0D:: @ 82A5B0D
 	.include "data/text/berries.inc"
 	.include "data/text/shoal_cave.inc"
 
-Text_2A81E5: @ 82A81E5
+Text_PictureBookShelf: @ 82A81E5
 	.string "There's a set of POKéMON picture books.$"
 
-Text_2A820D: @ 82A820D
+Text_BookShelf: @ 82A820D
 	.string "It's filled with all sorts of books.$"
 
-Text_2A8232: @ 82A8232
+Text_PokemonCenterBookShelf: @ 82A8232
 	.string "POKéMON magazines!\n"
 	.string "POKéMON PAL…\p"
 	.string "POKéMON HANDBOOK…\n"
 	.string "ADORABLE POKéMON…$"
 
-Text_2A8276: @ 82A8276
+Text_Vase: @ 82A8276
 	.string "This vase looks expensive…\n"
 	.string "Peered inside…\p"
 	.string "But, it was empty.$"
 
-Text_2A82B3: @ 82A82B3
+Text_EmptyTrashCan: @ 82A82B3
 	.string "It's empty.$"
 
-Text_2A82BF: @ 82A82BF
+Text_ShopShelf: @ 82A82BF
 	.string "The shelves brim with all sorts of\n"
 	.string "POKéMON merchandise.$"
 
-Text_2A82F7: @ 82A82F7
+Text_Blueprint: @ 82A82F7
 	.string "A blueprint of some sort?\n"
 	.string "It's too complicated!$"
 

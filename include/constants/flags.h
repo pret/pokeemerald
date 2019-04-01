@@ -336,24 +336,23 @@
 #define FLAG_RECEIVED_AURORA_TICKET          0x13A // RECEIVED Aurora Ticket in Mystery Gift
 #define FLAG_RECEIVED_MYSTIC_TICKET          0x13B // RECEIVED Mystic Ticket in Mystery Gift
 #define FLAG_RECEIVED_OLD_SEA_MAP            0x13C // RECEIVED Old Sea Map in Mystery Gift
-
-#define FLAG_UNUSED_0x13D                    0x13D // Unused Flag
-#define FLAG_UNUSED_0x13E                    0x13E // Unused Flag
-#define FLAG_UNUSED_0x13F                    0x13F // Unused Flag
-#define FLAG_UNUSED_0x140                    0x140 // Unused Flag
-#define FLAG_UNUSED_0x141                    0x141 // Unused Flag
-#define FLAG_UNUSED_0x142                    0x142 // Unused Flag
-#define FLAG_UNUSED_0x143                    0x143 // Unused Flag
-#define FLAG_UNUSED_0x144                    0x144 // Unused Flag
-#define FLAG_UNUSED_0x145                    0x145 // Unused Flag
-#define FLAG_UNUSED_0x146                    0x146 // Unused Flag
-#define FLAG_UNUSED_0x147                    0x147 // Unused Flag
-#define FLAG_UNUSED_0x148                    0x148 // Unused Flag
-#define FLAG_UNUSED_0x149                    0x149 // Unused Flag
-#define FLAG_UNUSED_0x14A                    0x14A // Unused Flag
-#define FLAG_UNUSED_0x14B                    0x14B // Unused Flag
-#define FLAG_UNUSED_0x14C                    0x14C // Unused Flag
-#define FLAG_UNUSED_0x14D                    0x14D // Unused Flag
+#define FLAG_UNUSED_MYSTERY_GIFT_0x13D       0x13D
+#define FLAG_UNUSED_MYSTERY_GIFT_0x13E       0x13E
+#define FLAG_UNUSED_MYSTERY_GIFT_0x13F       0x13F
+#define FLAG_UNUSED_MYSTERY_GIFT_0x140       0x140
+#define FLAG_UNUSED_MYSTERY_GIFT_0x141       0x141
+#define FLAG_UNUSED_MYSTERY_GIFT_0x142       0x142
+#define FLAG_UNUSED_MYSTERY_GIFT_0x143       0x143
+#define FLAG_UNUSED_MYSTERY_GIFT_0x144       0x144
+#define FLAG_UNUSED_MYSTERY_GIFT_0x145       0x145
+#define FLAG_UNUSED_MYSTERY_GIFT_0x146       0x146
+#define FLAG_UNUSED_MYSTERY_GIFT_0x147       0x147
+#define FLAG_UNUSED_MYSTERY_GIFT_0x148       0x148
+#define FLAG_UNUSED_MYSTERY_GIFT_0x149       0x149
+#define FLAG_UNUSED_MYSTERY_GIFT_0x14A       0x14A
+#define FLAG_UNUSED_MYSTERY_GIFT_0x14B       0x14B
+#define FLAG_UNUSED_MYSTERY_GIFT_0x14C       0x14C
+#define FLAG_UNUSED_MYSTERY_GIFT_0x14D       0x14D
 
 #define FLAG_MIRAGE_TOWER_VISIBLE            0x14E
 #define FLAG_CHOSE_CLAW_FOSSIL               0x14F // Player chose Claw Fossil
@@ -1548,7 +1547,7 @@
 
 // Special Flags (Unknown)
 #define SPECIAL_FLAGS_START                                        0x4000
-#define FLAG_SPECIAL_FLAG_0x4000                                   0x4000
+#define FLAG_HIDE_MAP_NAME_POPUP                                   0x4000
 #define FLAG_SPECIAL_FLAG_0x4001                                   0x4001
 #define FLAG_SPECIAL_FLAG_0x4002                                   0x4002
 #define FLAG_SPECIAL_FLAG_0x4003                                   0x4003

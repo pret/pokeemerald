@@ -93,6 +93,7 @@ static const struct WindowTemplate gUnknown_085B21DC[] =
     },
     DUMMY_WIN_TEMPLATE
 };
+
 static const struct WindowTemplate gUnknown_085B21F4 =
 {
     .bg = 0,
@@ -103,7 +104,9 @@ static const struct WindowTemplate gUnknown_085B21F4 =
     .paletteNum = 14,
     .baseBlock = 572
 };
-static const struct BgTemplate gUnknown_085B21FC[] = {
+
+static const struct BgTemplate gUnknown_085B21FC[] =
+{
     {
         .bg = 0,
         .charBaseIndex = 2,
@@ -123,34 +126,57 @@ static const struct BgTemplate gUnknown_085B21FC[] = {
         .priority = 2
     }
 };
-static const struct CompressedSpriteSheet gUnknown_085B2208 = {
+
+static const struct CompressedSpriteSheet gUnknown_085B2208 =
+{
     sUnknown_085B1F58, 0x2000, TAG_GFX_WALL_CLOCK_HAND
 };
-static const u32 filler_85B2210[2] = {};
-static const struct SpritePalette gUnknown_085B2218[] = {
-    { gWallclockMale_Pal, TAG_PAL_WALL_CLOCK_HAND },
-    { gWallclockFemale_Pal, 0x1001 },
+
+static const u8 filler_85B2210[8] = {0};
+
+static const struct SpritePalette gUnknown_085B2218[] =
+{
+    {
+        .data = gWallclockMale_Pal,
+        .tag = TAG_PAL_WALL_CLOCK_HAND
+    },
+    {
+        .data = gWallclockFemale_Pal,
+        .tag = 0x1001
+    },
     {}
 };
-static const struct OamData Unknown_085B2230 = {
+
+static const struct OamData Unknown_085B2230 =
+{
     .y = 160,
-    .size = 3,
+    .shape = SPRITE_SHAPE(64x64),
+    .size = SPRITE_SIZE(64x64),
     .priority = 1,
 };
-static const union AnimCmd Unknown_085B2238[] = {
+
+static const union AnimCmd Unknown_085B2238[] =
+{
     ANIMCMD_FRAME(0, 30),
     ANIMCMD_END,
 };
-static const union AnimCmd Unknown_085B2240[] = {
+
+static const union AnimCmd Unknown_085B2240[] =
+{
     ANIMCMD_FRAME(64, 30),
     ANIMCMD_END,
 };
-static const union AnimCmd *const gUnknown_085B2248[] = {
+
+static const union AnimCmd *const gUnknown_085B2248[] =
+{
     Unknown_085B2238
 };
-static const union AnimCmd *const gUnknown_085B224C[] = {
+
+static const union AnimCmd *const gUnknown_085B224C[] =
+{
     Unknown_085B2240
 };
+
 static const struct SpriteTemplate gUnknown_085B2250 =
 {
     .tileTag = TAG_GFX_WALL_CLOCK_HAND,
@@ -161,6 +187,7 @@ static const struct SpriteTemplate gUnknown_085B2250 =
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = SpriteCB_MinuteHand,
 };
+
 static const struct SpriteTemplate gUnknown_085B2268 =
 {
     .tileTag = TAG_GFX_WALL_CLOCK_HAND,
@@ -171,25 +198,37 @@ static const struct SpriteTemplate gUnknown_085B2268 =
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = SpriteCB_HourHand,
 };
-static const struct OamData Unknown_085B2280 = {
+
+static const struct OamData Unknown_085B2280 =
+{
     .y = 160,
-    .size = 1,
+    .shape = SPRITE_SHAPE(16x16),
+    .size = SPRITE_SIZE(16x16),
     .priority = 3,
 };
-static const union AnimCmd Unknown_085B2288[] = {
+
+static const union AnimCmd Unknown_085B2288[] =
+{
     ANIMCMD_FRAME(132, 30),
     ANIMCMD_END,
 };
-static const union AnimCmd Unknown_085B2290[] = {
+
+static const union AnimCmd Unknown_085B2290[] =
+{
     ANIMCMD_FRAME(128, 30),
     ANIMCMD_END,
 };
-static const union AnimCmd *const gUnknown_085B2298[] = {
+
+static const union AnimCmd *const gUnknown_085B2298[] =
+{
     Unknown_085B2288
 };
-static const union AnimCmd *const gUnknown_085B229C[] = {
+
+static const union AnimCmd *const gUnknown_085B229C[] =
+{
     Unknown_085B2290
 };
+
 static const struct SpriteTemplate gUnknown_085B22A0 =
 {
     .tileTag = TAG_GFX_WALL_CLOCK_HAND,
@@ -200,6 +239,7 @@ static const struct SpriteTemplate gUnknown_085B22A0 =
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = SpriteCB_AMIndicator
 };
+
 static const struct SpriteTemplate gUnknown_085B22B8 =
 {
     .tileTag = TAG_GFX_WALL_CLOCK_HAND,
@@ -210,7 +250,9 @@ static const struct SpriteTemplate gUnknown_085B22B8 =
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = SpriteCB_PMIndicator
 };
-static const s8 sClockHandCoords[][2] = {
+
+static const s8 sClockHandCoords[][2] =
+{
     { 0x00, -0x18},
     { 0x01, -0x19},
     { 0x01, -0x19},

@@ -447,7 +447,7 @@ static EWRAM_DATA struct TempWallyStruct *gUnknown_0203CE80 = 0;
 
 extern u8 *const gPocketNamesStringsTable[];
 extern u8* gReturnToXStringsTable[];
-extern const u8 EventScript_2736B3[];
+extern const u8 EventScript_SelectWithoutRegisteredItem[];
 extern const u16 gUnknown_0860F074[];
 
 void ResetBagScrollPositions(void)
@@ -1107,7 +1107,7 @@ void Task_BagMenu(u8 taskId)
             {
                 case LIST_NOTHING_CHOSEN:
                     break;
-                case LIST_B_PRESSED:
+                case LIST_CANCEL:
                     if (gUnknown_0203CE58.location == 5)
                     {
                         PlaySE(SE_HAZURE);
@@ -1323,7 +1323,7 @@ void sub_81AC3C0(u8 taskId)
             {
                 case LIST_NOTHING_CHOSEN:
                     break;
-                case LIST_B_PRESSED:
+                case LIST_CANCEL:
                     PlaySE(SE_SELECT);
                     if (gMain.newKeys & A_BUTTON)
                         sub_81AC498(taskId);
@@ -1900,7 +1900,7 @@ bool8 UseRegisteredKeyItemOnField(void)
         else
             gSaveBlock1Ptr->registeredItem = ITEM_NONE;
     }
-    ScriptContext1_SetupScript(EventScript_2736B3);
+    ScriptContext1_SetupScript(EventScript_SelectWithoutRegisteredItem);
     return TRUE;
 }
 
