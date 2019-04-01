@@ -46,6 +46,7 @@
 #include "union_room_chat.h"
 #include "berry_crush.h"
 #include "mystery_gift.h"
+#include "union_room_player_avatar.h"
 
 EWRAM_DATA u8 gUnknown_02022C20[12] = {};
 EWRAM_DATA u8 gUnknown_02022C2C = 0;
@@ -106,15 +107,12 @@ s8 mevent_message_print_and_prompt_yes_no(u8 *textState, u8 *arg1, u8 arg2, cons
 bool32 sub_8016F1C(struct UnkLinkRfuStruct_02022B14 *arg0, s16 arg1);
 u8 sub_8016DF0(struct UnkStruct_Main4 *arg0, struct UnkStruct_Main4 *arg1, u32 arg2);
 void sub_8019F2C(void);
-void sub_8019E70(u8 *arg0, s32 arg1);
 bool32 sub_80180A0(u32 monId, struct TradeUnkStruct *arg1);
 void sub_80180E8(u32 monId, struct TradeUnkStruct *arg1);
-bool32 sub_801A2A8(struct UnkStruct_Main0 *arg0, s16 *arg1, s16 *arg2, u8 *arg3);
 void sub_80181CC(void);
 bool32 sub_8017940(void);
 u8 sub_8016B00(void);
 void sub_801A274(struct UnkStruct_URoom *arg0);
-void sub_801A284(struct UnkStruct_URoom *arg0);
 bool32 sub_8017FD8(struct UnkStruct_URoom *arg0);
 void sub_801689C(struct UnkStruct_URoom *arg0);
 u8 sub_80181DC(struct UnkStruct_URoom *arg0);
@@ -123,7 +121,6 @@ bool32 sub_801704C(void);
 s32 sub_8017CF8(s32 arg1, struct UnkStruct_Main0 *arg0);
 s32 sub_80179D4(struct UnkStruct_Main0 *arg0, u8 arg1, u8 arg2, u32 playerGender);
 void sub_801818C(bool32 arg0);
-void sub_801A3D0(u32 arg0, u32 arg1, struct UnkStruct_Main0 *arg2);
 s32 sub_8017178(u8 *arg0, u8 *arg1, u8 *arg2, const struct WindowTemplate *winTemplate, const struct ListMenuTemplate *menuTemplate);
 s32 sub_80172A0(u8 *arg0, u8 *arg1, u8 *arg2, u8 *arg3, const struct WindowTemplate *winTemplate, const struct ListMenuTemplate *menuTemplate, struct UnkStruct_Main0 *arg6);
 s32 sub_8017CB0(struct UnkStruct_x20 * arg, s32 arg1);
@@ -133,12 +130,10 @@ void sub_8018220(u8 *unused, struct UnkStruct_URoom *arg1, bool8 arg2);
 void sub_8017D9C(u8 *dst, s32 arg1, u32 playerGender);
 u32 sub_80179AC(struct UnkStruct_x20 *arg0);
 void sub_8017E00(u8 *dst, u8 arg1);
-void sub_8019F04(u8 *spriteIds);
-void sub_8019E3C(void);
 void sub_80173B0(void);
 s32 sub_8017D04(u32 type, u32 species);
 bool32 sub_8017020(const u8 *src);
-void sub_8019BA8(void *);
+u8 sub_8019BA8(struct UnkStruct_8019BA8 * );
 s32 sub_8017EA0(u8 *dst, u32 gender, u16 *arg2, struct UnkStruct_URoom *arg3);
 void sub_801697C(u8 taskId);
 bool8 sub_8017630(struct UnkStruct_Shared* arg0, const struct UnkStruct_Shared* arg1);

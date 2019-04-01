@@ -8,14 +8,7 @@
 	.include "src/link_rfu.o"
 	.include "src/union_room.o"
     .include "src/mystery_gift.o"
-
-    @ union room player avatar
-    .align 2
-gUnknown_02022C64: @ 2022C64
-	.space 0x4
-
-gUnknown_02022C68: @ 2022C68
-	.space 0x4
+    .include "src/union_room_player_avatar.o"
 
 gUnknown_02022C6C: @ 2022C6C
 	.space 0x4
