@@ -1,6 +1,7 @@
 #include "global.h"
 #include "alloc.h"
 #include "battle.h"
+#include "battle_anim.h"
 #include "battle_ai_script_commands.h"
 #include "battle_factory.h"
 #include "battle_setup.h"

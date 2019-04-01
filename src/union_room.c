@@ -1,6 +1,7 @@
 #include "global.h"
 #include "window.h"
 #include "bg.h"
+#include "random.h"
 #include "string_util.h"
 #include "task.h"
 #include "event_data.h"
@@ -34,162 +35,26 @@
 #include "data2.h"
 #include "field_screen_effect.h"
 #include "script_pokemon_util_80F87D8.h"
+#include "international_string_util.h"
+#include "field_player_avatar.h"
+#include "strings.h"
 #include "mevent.h"
+#include "dynamic_placeholder_text_util.h"
+#include "union_room.h"
+#include "easy_chat.h"
+#include "event_obj_lock.h"
 #include "union_room_chat.h"
+#include "berry_crush.h"
 
-struct UnkStruct_Shared
-{
-    struct UnkLinkRfuStruct_02022B14 field_0;
-    u8 needingPadding[2];
-    u8 playerName[PLAYER_NAME_LENGTH + 1];
-};
-
-struct UnkStruct_x1C
-{
-    struct UnkStruct_Shared unk0;
-    u8 unk18;
-};
-
-struct UnkStruct_x20
-{
-    struct UnkStruct_Shared unk;
-    u16 field_18;
-    u8 field_1A_0:2;
-    u8 field_1A_1:1;
-    u8 field_1B;
-    u8 field_1D;
-    u8 field_1E;
-    u8 field_1F;
-};
-
-struct UnkStruct_Main0
-{
-    struct UnkStruct_x20 arr[8];
-};
-
-struct UnkStruct_Main4
-{
-    struct UnkStruct_x1C arr[5];
-};
-
-struct UnkStruct_Main8
-{
-    struct UnkStruct_x20 arr[5];
-};
-
-struct UnkStruct_Leader
-{
-    struct UnkStruct_Main0 *field_0;
-    struct UnkStruct_Main4 *field_4;
-    struct UnkStruct_Main8 *field_8;
-    u8 state;
-    u8 textState;
-    u8 field_E;
-    u8 listWindowId;
-    u8 field_10;
-    u8 field_11;
-    u8 listTaskId;
-    u8 field_13;
-    u8 field_14;
-    u8 field_15;
-    u8 field_16;
-    u8 field_17;
-    u8 field_18;
-    u8 field_19;
-    u16 field_1A;
-};
-
-struct UnkStruct_Group
-{
-    struct UnkStruct_Main0 *field_0;
-    struct UnkStruct_Main4 *field_4;
-    u8 state;
-    u8 textState;
-    u8 field_A;
-    u8 listWindowId;
-    u8 field_C;
-    u8 field_D;
-    u8 listTaskId;
-    u8 field_F;
-    u8 field_10;
-    u8 field_11;
-    u8 field_12;
-    u8 field_13;
-    u8 field_14;
-    u8 field_15;
-};
-
-struct UnkStruct_8019BA8
-{
-    u8 field_0;
-    u8 field_1;
-    u8 field_2;
-    u8 field_3;
-};
-
-struct UnkStruct_URoom
-{
-    struct UnkStruct_Main0 *field_0;
-    struct UnkStruct_Main4 *field_4;
-    struct UnkStruct_Main0 *field_8;
-    struct UnkStruct_Main4 *field_C;
-    u16 field_10;
-    u16 field_12;
-    u8 state;
-    u8 stateAfterPrint;
-    u8 textState;
-    u8 field_17;
-    u8 field_18;
-    u8 field_19;
-    u8 field_1A;
-    u8 field_1B;
-    u8 field_1C;
-    u8 field_1D;
-    u8 field_1E;
-    u8 field_1F;
-    u8 field_20;
-    u8 spriteIds[40];
-    u8 field_49;
-    u8 field_4A;
-    u16 field_4C[6];
-    u8 field_58[0x98 - 0x58];
-    u16 field_98;
-    u16 field_9A[3];
-    struct UnkStruct_8019BA8 field_A0[8];
-};
-
-union UnkUnion_Main
-{
-    struct UnkStruct_Leader *leader;
-    struct UnkStruct_Group *group;
-    struct UnkStruct_URoom *uRoom;
-};
-
-struct TradeUnkStruct
-{
-    u16 field_0;
-    u16 field_2;
-    u32 field_4;
-    u8 field_8;
-    u8 field_9;
-    u16 field_A;
-    u16 field_C;
-    u16 species;
-    u16 level;
-    u16 field_12;
-    u32 personality;
-};
-
-extern struct TradeUnkStruct gUnknown_02022C40;
-extern struct UnkLinkRfuStruct_02022B14Substruct gUnknown_02022C38;
-extern union UnkUnion_Main gUnknown_02022C30;
-extern u8 gUnknown_02022C2C;
-extern u8 gUnknown_02022C2D;
-extern u8 gUnknown_02022C3E;
-extern u16 gUnknown_02022C3C;
-extern u8 gUnknown_02022C20[];
-extern u8 gFieldLinkPlayerCount;
-extern u8 gLocalLinkPlayerId;
+EWRAM_DATA u8 gUnknown_02022C20[12] = {};
+EWRAM_DATA u8 gUnknown_02022C2C = 0;
+EWRAM_DATA u8 gUnknown_02022C2D = 0;
+EWRAM_DATA union UnkUnion_Main gUnknown_02022C30 = {};
+EWRAM_DATA u32 gFiller_02022C34 = 0;
+EWRAM_DATA struct UnkLinkRfuStruct_02022B14Substruct gUnknown_02022C38 = {};
+EWRAM_DATA u16 gUnknown_02022C3C = 0;
+EWRAM_DATA u8 gUnknown_02022C3E = 0;
+EWRAM_DATA struct TradeUnkStruct gUnknown_02022C40 = {};
 
 // IWRAM vars
 IWRAM_DATA struct UnkStruct_Leader *gUnknown_03000DA0;
@@ -222,31 +87,28 @@ void sub_80149C4(void);
 u8 sub_80132D4(struct UnkStruct_Main0 *arg0);
 void sub_80178A0(u8 arg0, u8 arg1, u8 arg2, struct UnkStruct_x20 *arg3, u8 arg4, u8 id);
 u32 sub_80176E4(struct UnkStruct_x20 *arg0, struct UnkStruct_x1C *arg1);
-u8 sub_8017734(struct UnkStruct_x20 *arg0, struct UnkStruct_Shared *arg1, u8 arg2);
+u8 sub_8017734(struct UnkStruct_x20 *arg0, struct UnkStruct_x1C *arg1, u8 arg2);
 u8 sub_8013E44(void);
 u32 sub_8013B8C(struct UnkStruct_Group *arg0, s32 id);
 void sub_8013BD8(struct UnkStruct_Group *arg0, s32 id);
 void sub_80173D4(void);
 void sub_80177B8(u8 arg0, u8 arg1, u8 arg2, struct UnkStruct_x20 *arg3, u8 arg4, u8 id);
-bool32 sub_8017678(struct UnkStruct_x20 *arg0, struct UnkStruct_x1C *arg1);
+bool32 sub_8017678(struct UnkStruct_Shared *arg0, struct UnkStruct_Shared *arg1);
 u32 sub_8018120(struct TradeUnkStruct *arg0, u8 multiplayerId);
 void sub_801807C(struct TradeUnkStruct *arg0);
 void sub_801AC54(void);
 void sub_802A9A8(u8 monId, MainCallback callback);
 void sub_802493C(u8 monId, MainCallback callback);
-void sub_8020C70(MainCallback callback);
 void sub_80149D8(void);
 u16 sub_8019930(void);
 void sub_8018784(u8 windowId);
-void sub_8018884(const u8 *src);
-bool32 mevent_0814257C(u8 *textState, const u8 *str);
 s8 sub_8018B08(u8 *textState, u8 *arg1, u8 arg2, const u8 *str);
-bool32 sub_8016F1C(struct UnkStruct_x20 *arg0, s16 arg1);
+bool32 sub_8016F1C(struct UnkLinkRfuStruct_02022B14 *arg0, s16 arg1);
 u8 sub_8016DF0(struct UnkStruct_Main4 *arg0, struct UnkStruct_Main4 *arg1, u32 arg2);
 void sub_8019F2C(void);
 void sub_8019E70(u8 *arg0, s32 arg1);
-bool32 sub_80180A0(u8 monId, struct TradeUnkStruct *arg1);
-void sub_80180E8(u8 monId, struct TradeUnkStruct *arg1);
+bool32 sub_80180A0(u32 monId, struct TradeUnkStruct *arg1);
+void sub_80180E8(u32 monId, struct TradeUnkStruct *arg1);
 bool32 sub_801A2A8(struct UnkStruct_Main0 *arg0, s16 *arg1, s16 *arg2, u8 *arg3);
 void sub_80181CC(void);
 bool32 sub_8017940(void);
@@ -264,120 +126,1069 @@ void sub_801818C(bool32 arg0);
 void sub_801A3D0(u32 arg0, u32 arg1, struct UnkStruct_Main0 *arg2);
 s32 sub_8017178(u8 *arg0, u8 *arg1, u8 *arg2, const struct WindowTemplate *winTemplate, const struct ListMenuTemplate *menuTemplate);
 s32 sub_80172A0(u8 *arg0, u8 *arg1, u8 *arg2, u8 *arg3, const struct WindowTemplate *winTemplate, const struct ListMenuTemplate *menuTemplate, struct UnkStruct_Main0 *arg6);
+s32 sub_8017CB0(struct UnkStruct_x20 * arg, s32 arg1);
 bool32 sub_8018024(void);
-u32 sub_8017984(u32 arg0);
+u32 sub_8017984(s32 arg0);
 void sub_8018220(u8 *unused, struct UnkStruct_URoom *arg1, bool8 arg2);
-void sub_8017D9C(u8 *dst, u32 arg1, u32 playerGender);
+void sub_8017D9C(u8 *dst, s32 arg1, u32 playerGender);
 u32 sub_80179AC(struct UnkStruct_x20 *arg0);
 void sub_8017E00(u8 *dst, u8 arg1);
 void sub_8019F04(u8 *spriteIds);
 void sub_8019E3C(void);
 void sub_80173B0(void);
 s32 sub_8017D04(u32 type, u32 species);
-void sub_8017020(const u8 *src);
+bool32 sub_8017020(const u8 *src);
 void sub_8019BA8(void *);
 s32 sub_8017EA0(u8 *dst, u32 gender, u16 *arg2, struct UnkStruct_URoom *arg3);
 void sub_801697C(u8 taskId);
 bool8 sub_8017630(struct UnkStruct_Shared* arg0, const struct UnkStruct_Shared* arg1);
+void sub_8013278(u8 windowId, s32 itemId, u8 y);
+void sub_8013DF4(u8 windowId, s32 itemId, u8 y);
+void sub_8017BE8(u8 windowId, s32 itemId, u8 y);
+void nullsub_14(u8 windowId, s32 itemId, u8 y);
 
 // const rom data
-extern const u8 *const gUnknown_082EDB60[][5];
 
-extern const u8 gText_UnkCtrlCodeF907[];
-extern const u8 gUnknown_082EDBC4[];
-extern const u8 gText_AwaitingCommunication[];
-extern const u8 gText_AwaitingLink[];
-extern const u8 gUnknown_082EDC5C[];
-extern const u8 gUnknown_082EDC9C[];
-extern const u8 gUnknown_082EDC78[];
-extern const u8 gUnknown_082EDD58[];
-extern const u8 gUnknown_082EDBE8[];
-extern const u8 gUnknown_082EDC0C[];
-extern const u8 gUnknown_082EDC34[];
-extern const u8 gUnknown_082EE560[];
-extern const u8 gUnknown_082EE57C[];
-extern const u8 gUnknown_082EFC54[];
-extern const u8 gUnknown_082EFC3C[];
-extern const u8 gUnknown_082EDE0C[];
-extern const u8 gUnknown_082EDDF4[];
-extern const u8 gUnknown_082EF7DC[];
-extern const u8 gUnknown_082EDE48[];
-extern const u8 gUnknown_082EDE64[];
-extern const u8 gUnknown_082EDF40[];
-extern const u8 gText_PleaseStartOver[];
-extern const u8 gUnknown_082EF7F8[];
-extern const u8 gUnknown_082EFBC8[];
-extern const u8 gUnknown_082EFC90[];
-extern const u8 gUnknown_082EDEC4[];
-extern const u8 gUnknown_082EDF04[];
-extern const u8 gText_WirelessSearchCanceled[];
-extern const u8 gUnknown_082EF4FC[];
-extern const u8 gUnknown_082EF520[];
-extern const u8 gUnknown_082EF5B8[];
-extern const u8 gUnknown_082EF1EC[];
-extern const u8 gUnknown_082EF544[];
-extern const u8 gUnknown_082EF47C[];
-extern const u8 gUnknown_082EE6C8[];
-extern const u8 gUnknown_082EE004[];
-extern const u8 gUnknown_082EEBD0[];
-extern const u8 gUnknown_082EEB88[];
-extern const u8 gUnknown_082EE598[];
-extern const u8 gUnknown_082EEC14[];
-extern const u8 gUnknown_082EF590[];
-extern const u8 gUnknown_082EF20C[];
-extern const u8 gUnknown_082EF564[];
-extern const u8 gUnknown_082EF4C4[];
-extern const u8 gUnknown_082EF298[];
-extern const u8 gUnknown_082EF65C[];
-extern const u8 gUnknown_082EF6E4[];
-extern const u8 gUnknown_082EF718[];
+ALIGNED(4) const u8 gText_EmptyString[] = _("");
+ALIGNED(4) const u8 gText_Colon[] = _(":");
+ALIGNED(4) const u8 gText_UnkCtrlCodeF907[] = _("{ID}");
+ALIGNED(4) const u8 gText_PleaseStartOver[] = _("Please start over from the beginning.");
+ALIGNED(4) const u8 gText_WirelessSearchCanceled[] = _("The WIRELESS COMMUNICATION\nSYSTEM search has been canceled.");
+ALIGNED(4) const u8 unref_text_union_room_0[] = _("Awaiting communication\nfrom another player.");
+ALIGNED(4) const u8 gText_AwaitingCommunication[] = _("{STR_VAR_1}! Awaiting\ncommunication from another player.");
+ALIGNED(4) const u8 gText_AwaitingLink[] = _("{STR_VAR_1}! Awaiting link!\nPress START when everyone's ready.");
+ALIGNED(4) const u8 gJPText_SingleBattle[] = _("シングルバトルを かいさいする");
+ALIGNED(4) const u8 gJPText_DoubleBattle[] = _("ダブルバトルを かいさいする");
+ALIGNED(4) const u8 gJPText_MultiBattle[] = _("マルチバトルを かいさいする");
+ALIGNED(4) const u8 gJPText_TradePokemon[] = _("ポケモンこうかんを かいさいする");
+ALIGNED(4) const u8 gJPText_Chat[] = _("チャットを かいさいする");
+ALIGNED(4) const u8 gJPText_DistWonderCard[] = _("ふしぎなカードをくばる");
+ALIGNED(4) const u8 gJPText_DistWonderNews[] = _("ふしぎなニュースをくばる");
+ALIGNED(4) const u8 unref_text_union_room_1[] = _("ふしぎなできごとを かいさいする");
+ALIGNED(4) const u8 gJPText_HoldPokemonJump[] = _("なわとびを かいさいする");
+ALIGNED(4) const u8 gJPText_HoldBerryCrush[] = _("きのみマッシャーを かいさいする");
+ALIGNED(4) const u8 gJPText_HoldBerryPicking[] = _("きのみどりを かいさいする");
+ALIGNED(4) const u8 gJPText_HoldSpinTrade[] = _("ぐるぐるこうかんを かいさいする");
+ALIGNED(4) const u8 gJPText_HoldSpinShop[] = _("ぐるぐるショップを かいさいする");
 
-extern const u32 gUnknown_082F00C4[];
+const u8 *const unref_text_ptrs_union_room_0[] = {
+    gJPText_SingleBattle,
+    gJPText_DoubleBattle,
+    gJPText_MultiBattle,
+    gJPText_TradePokemon,
+    gJPText_Chat,
+    gJPText_DistWonderCard,
+    gJPText_DistWonderNews,
+    gJPText_DistWonderCard,
+    gJPText_HoldPokemonJump,
+    gJPText_HoldBerryCrush,
+    gJPText_HoldBerryPicking,
+    gJPText_HoldBerryPicking,
+    gJPText_HoldSpinTrade,
+    gJPText_HoldSpinShop
+};
 
-extern const u8 gUnknown_082F0530[];
+const u8 gText_1PlayerNeeded[] = _("1 player\nneeded.");
+const u8 gText_2PlayersNeeded[] = _("2 players\nneeded.");
+const u8 gText_3PlayersNeeded[] = _("3 players\nneeded.");
+const u8 gText_4PlayersNeeded[] = _("4 players\nneeded.");
+const u8 gText_2PlayerMode[] = _("2-PLAYER\nMODE");
+const u8 gText_3PlayerMode[] = _("3-PLAYER\nMODE");
+const u8 gText_4PlayerMode[] = _("4-PLAYER\nMODE");
+const u8 gText_5PlayerMode[] = _("5-PLAYER\nMODE");
 
-extern const struct WindowTemplate gUnknown_082F00BC;
-extern const struct WindowTemplate gUnknown_082F0124;
-extern const struct WindowTemplate gUnknown_082F012C;
-extern const struct WindowTemplate gUnknown_082F011C;
-extern const struct WindowTemplate gUnknown_082F0174;
-extern const struct WindowTemplate gUnknown_082F017C;
-extern const struct WindowTemplate gUnknown_082F021C;
-extern const struct WindowTemplate gUnknown_082F025C;
-extern const struct WindowTemplate gUnknown_082F0294;
-extern const struct WindowTemplate gUnknown_082F034C;
+const u8 *const gUnknown_082EDB60[][5] = {
+    {
+        gText_1PlayerNeeded,
+        gText_2PlayerMode,
+        NULL,
+        NULL,
+        NULL
+    }, {
+        gText_3PlayersNeeded,
+        gText_2PlayersNeeded,
+        gText_1PlayerNeeded,
+        gText_4PlayerMode,
+        NULL
+    }, {
+        gText_1PlayerNeeded,
+        gText_2PlayerMode,
+        gText_3PlayerMode,
+        gText_4PlayerMode,
+        gText_5PlayerMode
+    }, {
+        gText_2PlayersNeeded,
+        gText_1PlayerNeeded,
+        gText_3PlayerMode,
+        gText_4PlayerMode,
+        gText_5PlayerMode
+    }, {
+        gText_1PlayerNeeded,
+        gText_2PlayerMode,
+        gText_3PlayerMode,
+        gText_4PlayerMode,
+        NULL
+    }
+};
 
-extern const struct ListMenuTemplate gUnknown_082F015C;
-extern const struct ListMenuTemplate gUnknown_082F0204;
-extern const struct ListMenuTemplate gUnknown_082F0244;
-extern const struct ListMenuTemplate gUnknown_082F027C;
-extern const struct ListMenuTemplate gUnknown_082F032C;
-extern const struct ListMenuTemplate gUnknown_082F03A4;
+ALIGNED(4) const u8 gUnknown_082EDBC4[] = _("{B_BUTTON}CANCEL");
+ALIGNED(4) const u8 unref_text_union_room_2[] = _("ため\nさんかしゃ ぼしゅうちゅう です！");
+ALIGNED(4) const u8 gUnknown_082EDBE8[] = _("{STR_VAR_2} contacted you for\n{STR_VAR_1}. Accept?");
+ALIGNED(4) const u8 gUnknown_082EDC0C[] = _("{STR_VAR_2} contacted you.\nWill you share {STR_VAR_1}?");
+ALIGNED(4) const u8 gUnknown_082EDC34[] = _("{STR_VAR_2} contacted you.\nAdd to the members?");
+ALIGNED(4) const u8 gUnknown_082EDC5C[] = _("{STR_VAR_1}!\nAre these members OK?");
+ALIGNED(4) const u8 gUnknown_082EDC78[] = _("Cancel {STR_VAR_1} MODE\nwith these members?");
+ALIGNED(4) const u8 gUnknown_082EDC9C[] = _("An “OK” was sent\nto {STR_VAR_1}.");
+ALIGNED(4) const u8 gUnknown_082EDCB4[] = _("The other TRAINER doesn't appear\nto be available now…\p");
+ALIGNED(4) const u8 gUnknown_082EDCEC[] = _("You can't transmit with a TRAINER\nwho is too far away.\p");
+ALIGNED(4) const u8 gUnknown_082EDD24[] = _("The other TRAINER(S) is/are not\nready yet.\p");
 
-extern const u8 *const gUnknown_082F0048[];
-extern const u8 *const gUnknown_082EDDC4[];
-extern const u8 *const gUnknown_082EFB70[];
-extern const u8 *const gUnknown_082EDD50[];
-extern const u8 *const gUnknown_082EDE9C[];
-extern const u8 *const gUnknown_082EDF80[];
-extern const u8 *const gUnknown_082EFD58[];
-extern const u8 *const gUnknown_082EEB80[];
-extern const u8 *const gUnknown_082EE378[];
-extern const u8 *const gUnknown_082EEC9C[];
-extern const u8 *const gUnknown_082EED3C[];
-extern const u8 *const gUnknown_082EE324[];
-extern const u8 *const gUnknown_082EE17C[];
+const u8 *const gUnknown_082EDD50[] = {
+    gUnknown_082EDCEC,
+    gUnknown_082EDD24
+};
 
-extern const u8 *const gUnknown_082EE82C[][4];
+ALIGNED(4) const u8 gUnknown_082EDD58[] = _("The {STR_VAR_1} MODE with\nthese members will be canceled.{PAUSE 60}");
+ALIGNED(4) const u8 gUnknown_082EDD8C[] = _("There is a member who can no\nlonger remain available.\p");
 
-extern const u8 *const gUnknown_082EE24C[][2];
+const u8 *const gUnknown_082EDDC4[] = {
+    gUnknown_082EDCB4,
+    gUnknown_082EDD8C
+};
 
-extern const struct UnkStruct_Shared gUnknown_082F045C;
+ALIGNED(4) const u8 gUnknown_082EDDCC[] = _("The other TRAINER appears\nunavailable…\p");
+ALIGNED(4) const u8 gUnknown_082EDDF4[] = _("{STR_VAR_1} sent back an “OK”!");
+ALIGNED(4) const u8 gUnknown_082EDE0C[] = _("{STR_VAR_1} OK'd your registration as\na member.");
+ALIGNED(4) const u8 gUnknown_082EDE34[] = _("{STR_VAR_1} replied, “No…”\p");
+ALIGNED(4) const u8 gUnknown_082EDE48[] = _("{STR_VAR_1}!\nAwaiting other members!");
+ALIGNED(4) const u8 gUnknown_082EDE64[] = _("Quit being a member?");
+ALIGNED(4) const u8 gUnknown_082EDE7C[] = _("You stopped being a member.\p");
 
-extern const u8 *const gUnknown_082F04D8[22];
+const u8 *const gUnknown_082EDE9C[] = {
+    NULL,
+    gUnknown_082EDD8C,
+    gUnknown_082EDDCC,
+    NULL,
+    NULL,
+    NULL,
+    gUnknown_082EDE34,
+    NULL,
+    NULL,
+    gUnknown_082EDE7C
+};
+
+ALIGNED(4) const u8 gUnknown_082EDEC4[] = _("The WIRELESS COMMUNICATION\nSYSTEM link has been established.");
+ALIGNED(4) const u8 gUnknown_082EDF04[] = _("The WIRELESS COMMUNICATION\nSYSTEM link has been dropped…");
+ALIGNED(4) const u8 gUnknown_082EDF40[] = _("The link with your friend has been\ndropped…");
+ALIGNED(4) const u8 gUnknown_082EDF6C[] = _("{STR_VAR_1} replied, “No…”");
+
+const u8 *const gUnknown_082EDF80[] = {
+    NULL,
+    gUnknown_082EDF40,
+    gUnknown_082EDF40,
+    NULL,
+    NULL,
+    NULL,
+    gUnknown_082EDF6C,
+    NULL,
+    NULL,
+    NULL
+};
+
+ALIGNED(4) const u8 gUnknown_082EDFA8[] = _("Do you want the {STR_VAR_2}\nMODE?");
+ALIGNED(4) const u8 gUnknown_082EDFC4[] = _("Do you want the {STR_VAR_2}\nMODE?");
+
+const u8 *const unref_text_ptrs_union_room_1[] = {
+    gUnknown_082EDFA8,
+    gUnknown_082EDFC4
+};
+
+ALIGNED(4) const u8 unref_text_union_room_3[] = _("Communicating…\nPlease wait.");
+ALIGNED(4) const u8 gUnknown_082EE004[] = _("Awaiting {STR_VAR_1}'s response about\nthe trade…");
+ALIGNED(4) const u8 gUnknown_082EE02C[] = _("Communicating{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.\n{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.");
+ALIGNED(4) const u8 gUnknown_082EE098[] = _("Communicating with {STR_VAR_1}{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.\n{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.");
+ALIGNED(4) const u8 gUnknown_082EE104[] = _("Please wait a while{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.\n{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.");
+
+const u8 *const gUnknown_082EE17C[] = {
+    gUnknown_082EE02C,
+    gUnknown_082EE098,
+    gUnknown_082EE104
+};
+
+ALIGNED(4) const u8 gUnknown_082EE188[] = _("Hiya! Is there something that you\nwanted to do?");
+ALIGNED(4) const u8 gUnknown_082EE1B8[] = _("Hello!\nWould you like to do something?");
+ALIGNED(4) const u8 gUnknown_082EE1E0[] = _("{STR_VAR_1}: Hiya, we meet again!\nWhat are you up for this time?");
+ALIGNED(4) const u8 gUnknown_082EE218[] = _("{STR_VAR_1}: Oh! {PLAYER}, hello!\nWould you like to do something?");
+
+const u8 *const gUnknown_082EE24C[][2] = {
+    {
+        gUnknown_082EE188,
+        gUnknown_082EE1B8
+    }, {
+        gUnknown_082EE1E0,
+        gUnknown_082EE218
+    }
+};
+
+ALIGNED(4) const u8 gUnknown_082EE25C[] = _("Want to do something?");
+ALIGNED(4) const u8 gUnknown_082EE274[] = _("Would you like to do something?");
+ALIGNED(4) const u8 gUnknown_082EE294[] = _("{STR_VAR_1}: What would you like to\ndo now?");
+ALIGNED(4) const u8 unref_text_union_room_4[] = _("{STR_VAR_1}: Want to do anything else?");
+
+const u8 *const unref_text_ptrs_union_room_2[][2] = {
+    {
+        gUnknown_082EE25C,
+        gUnknown_082EE274
+    }, {
+        gUnknown_082EE294,
+        gUnknown_082EE294
+    }
+};
+
+ALIGNED(4) const u8 gUnknown_082EE2E8[] = _("Somebody has contacted you.{PAUSE 60}");
+ALIGNED(4) const u8 gUnknown_082EE308[] = _("{STR_VAR_1} has contacted you.{PAUSE 60}");
+
+const u8 *const gUnknown_082EE324[] = {
+    gUnknown_082EE2E8,
+    gUnknown_082EE308
+};
+
+ALIGNED(4) const u8 gUnknown_082EE32C[] = _("Awaiting a response from\nthe other TRAINER…");
+ALIGNED(4) const u8 gUnknown_082EE358[] = _("Awaiting a response from\n{STR_VAR_1}…");
+
+const u8 *const gUnknown_082EE378[] = {
+    gUnknown_082EE32C,
+    gUnknown_082EE358
+};
+
+ALIGNED(4) const u8 gUnknown_082EE380[] = _("The other TRAINER showed\nyou their TRAINER CARD.\pWould you like to show your\nTRAINER CARD?");
+ALIGNED(4) const u8 gUnknown_082EE3DC[] = _("The other TRAINER challenges you\nto battle.\pWill you accept the battle\nchallenge?");
+ALIGNED(4) const u8 gUnknown_082EE430[] = _("The other TRAINER invites you\nto chat.\pWill you accept the chat\ninvitation?");
+ALIGNED(4) const u8 gUnknown_082EE47C[] = _("There is an offer to trade your\nregistered Lv. {SPECIAL_F7 0x00} {SPECIAL_F7 0x01}\pin exchange for a\nLv. {SPECIAL_F7 0x02} {SPECIAL_F7 0x03}.\pWill you accept this trade\noffer?");
+ALIGNED(4) const u8 gUnknown_082EE4F0[] = _("There is an offer to trade your\nregistered EGG.\lWill you accept this trade offer?");
+ALIGNED(4) const u8 gUnknown_082EE544[] = _("The chat has been dropped.\p");
+ALIGNED(4) const u8 gUnknown_082EE560[] = _("You declined the offer.\p");
+ALIGNED(4) const u8 gUnknown_082EE57C[] = _("You declined the offer.\p");
+ALIGNED(4) const u8 gUnknown_082EE598[] = _("The chat was ended.\p");
+
+const u8 *const unref_text_ptrs_union_room_3[] = {
+    gUnknown_082EE380,
+    gUnknown_082EE3DC,
+    gUnknown_082EE430,
+    gUnknown_082EE47C
+};
+
+ALIGNED(4) const u8 gUnknown_082EE5C0[] = _("Oh, hey! We're in a chat right now.\nWant to join us?");
+ALIGNED(4) const u8 gUnknown_082EE5F8[] = _("{STR_VAR_1}: Hey, {PLAYER}!\nWe're having a chat right now.\lWant to join us?");
+ALIGNED(4) const u8 gUnknown_082EE638[] = _("Oh, hi! We're having a chat now.\nWould you like to join us?");
+ALIGNED(4) const u8 gUnknown_082EE674[] = _("{STR_VAR_1}: Oh, hi, {PLAYER}!\nWe're having a chat now.\lWould you like to join us?");
+
+const u8 *const gUnknown_082EE6B8[][2] = {
+    {
+        gUnknown_082EE5C0,
+        gUnknown_082EE638
+    }, {
+        gUnknown_082EE5F8,
+        gUnknown_082EE674
+    }
+};
+
+ALIGNED(4) const u8 gUnknown_082EE6C8[] = _("……\nThe TRAINER appears to be busy…\p");
+ALIGNED(4) const u8 gUnknown_082EE6EC[] = _("A battle, huh?\nAll right, just give me some time.");
+ALIGNED(4) const u8 gUnknown_082EE720[] = _("You want to chat, huh?\nSure, just wait a little.");
+ALIGNED(4) const u8 gUnknown_082EE754[] = _("Sure thing! As my “Greetings,”\nhere's my TRAINER CARD.");
+ALIGNED(4) const u8 gUnknown_082EE78C[] = _("A battle? Of course, but I need\ntime to get ready.");
+ALIGNED(4) const u8 gUnknown_082EE7C0[] = _("Did you want to chat?\nOkay, but please wait a moment.");
+ALIGNED(4) const u8 gUnknown_082EE7F8[] = _("As my introduction, I'll show you\nmy TRAINER CARD.");
+
+const u8 *const gUnknown_082EE82C[][4] = {
+    {
+        gUnknown_082EE6EC,
+        gUnknown_082EE720,
+        NULL,
+        gUnknown_082EE754
+    }, {
+        gUnknown_082EE78C,
+        gUnknown_082EE7C0,
+        NULL,
+        gUnknown_082EE7F8
+    }
+};
+
+ALIGNED(4) const u8 unref_text_union_room_5[] = _("You want to chat, huh?\nSure, just wait a little.");
+ALIGNED(4) const u8 gUnknown_082EE880[] = _("Thanks for waiting!\nLet's get our battle started!{PAUSE 60}");
+ALIGNED(4) const u8 gUnknown_082EE8B8[] = _("All right!\nLet's chat!{PAUSE 60}");
+ALIGNED(4) const u8 gUnknown_082EE8D4[] = _("Sorry I made you wait!\nLet's get started!{PAUSE 60}");
+ALIGNED(4) const u8 gUnknown_082EE904[] = _("Sorry I made you wait!\nLet's chat.{PAUSE 60}");
+ALIGNED(4) const u8 gUnknown_082EE92C[] = _("The trade will be started.{PAUSE 60}");
+ALIGNED(4) const u8 gUnknown_082EE94C[] = _("The battle will be started.{PAUSE 60}");
+ALIGNED(4) const u8 gUnknown_082EE96C[] = _("Entering the chat…{PAUSE 60}");
+
+const u8 *const gUnknown_082EE984[][2][3] = {
+    {
+        {
+            gUnknown_082EE94C,
+            gUnknown_082EE96C,
+            gUnknown_082EE92C
+        }, {
+            gUnknown_082EE94C,
+            gUnknown_082EE96C,
+            gUnknown_082EE92C
+        }
+    }, {
+        {
+            gUnknown_082EE880,
+            gUnknown_082EE8B8,
+            gUnknown_082EE92C
+        }, {
+            gUnknown_082EE8D4,
+            gUnknown_082EE904,
+            gUnknown_082EE92C
+        }
+    }
+};
+
+ALIGNED(4) const u8 gUnknown_082EE9B4[] = _("Sorry! My POKéMON don't seem to\nbe feeling too well right now.\lLet me battle you another time.\p");
+ALIGNED(4) const u8 gUnknown_082EEA14[] = _("I'm terribly sorry, but my POKéMON\naren't feeling well…\pLet's battle another time.\p");
+
+const u8 *const gUnknown_082EEA68[] = {
+    gUnknown_082EE9B4,
+    gUnknown_082EEA14
+};
+
+ALIGNED(4) const u8 gUnknown_082EEA70[] = _("Huh? My TRAINER CARD…\nWhere'd it go now?\lSorry! I'll show you another time!\p");
+ALIGNED(4) const u8 gUnknown_082EEAC0[] = _("Oh? Now where did I put my\nTRAINER CARD?…\lSorry! I'll show you later!\p");
+
+const u8 *const gUnknown_082EEB08[] = {
+    gUnknown_082EEA70,
+    gUnknown_082EEAC0
+};
+
+ALIGNED(4) const u8 gUnknown_082EEB10[] = _("If you want to do something with\nme, just give me a shout!\p");
+ALIGNED(4) const u8 gUnknown_082EEB4C[] = _("If you want to do something with\nme, don't be shy.\p");
+
+const u8 *const gUnknown_082EEB80[] = {
+    gUnknown_082EEB10,
+    gUnknown_082EEB4C
+};
+
+ALIGNED(4) const u8 gUnknown_082EEB88[] = _("Whoops! Sorry, but I have to do\nsomething else.\lAnother time, okay?\p");
+ALIGNED(4) const u8 gUnknown_082EEBD0[] = _("If you want to battle, you need\ntwo POKéMON that are below\lLv. 30.\p");
+ALIGNED(4) const u8 gUnknown_082EEC14[] = _("For a battle, you need two\nPOKéMON that are below Lv. 30.\p");
+ALIGNED(4) const u8 gUnknown_082EEC50[] = _("Oh, all right.\nCome see me anytime, okay?\p");
+ALIGNED(4) const u8 gUnknown_082EEC7C[] = _("Oh…\nPlease come by anytime.\p");
+
+const u8 *const gUnknown_082EEC9C[] = {
+    gUnknown_082EEC50,
+    gUnknown_082EEC7C
+};
+
+ALIGNED(4) const u8 gUnknown_082EECA4[] = _("Oh, sorry!\nI just can't right this instant.\lLet's chat another time.\p");
+ALIGNED(4) const u8 gUnknown_082EECEC[] = _("Oh, I'm sorry.\nI have too much to do right now.\lLet's chat some other time.\p");
+
+const u8 *const gUnknown_082EED3C[] = {
+    gUnknown_082EECA4,
+    gUnknown_082EECEC
+};
+
+ALIGNED(4) const u8 gUnknown_082EED44[] = _("Whoa!\nI can tell you're pretty tough!\p");
+ALIGNED(4) const u8 gUnknown_082EED6C[] = _("You used that move?\nThat's good strategy!\p");
+ALIGNED(4) const u8 gUnknown_082EED98[] = _("Way to go!\nThat was an eye-opener!\p");
+ALIGNED(4) const u8 gUnknown_082EEDBC[] = _("Oh! How could you use that\nPOKéMON in that situation?\p");
+ALIGNED(4) const u8 gUnknown_082EEDF4[] = _("That POKéMON…\nIt's been raised really well!\p");
+ALIGNED(4) const u8 gUnknown_082EEE24[] = _("That's it!\nThis is the right move now!\p");
+ALIGNED(4) const u8 gUnknown_082EEE4C[] = _("That's awesome!\nYou can battle that way?\p");
+ALIGNED(4) const u8 gUnknown_082EEE78[] = _("You have exquisite timing for\nswitching POKéMON!\p");
+
+const u8 *const gUnknown_082EEEAC[][4] = {
+    {
+        gUnknown_082EED44,
+        gUnknown_082EED6C,
+        gUnknown_082EED98,
+        gUnknown_082EEDBC
+    }, {
+        gUnknown_082EEDF4,
+        gUnknown_082EEE24,
+        gUnknown_082EEE4C,
+        gUnknown_082EEE78
+    }
+};
+
+ALIGNED(4) const u8 gUnknown_082EEECC[] = _("Oh, I see!\nThis is educational!\p");
+ALIGNED(4) const u8 gUnknown_082EEEF0[] = _("Don't say anything funny anymore!\nI'm sore from laughing!\p");
+ALIGNED(4) const u8 gUnknown_082EEF2C[] = _("Oh?\nSomething like that happened.\p");
+ALIGNED(4) const u8 gUnknown_082EEF50[] = _("Hmhm… What?\nSo is this what you're saying?\p");
+ALIGNED(4) const u8 gUnknown_082EEF7C[] = _("Is that right?\nI didn't know that.\p");
+ALIGNED(4) const u8 gUnknown_082EEFA0[] = _("Ahaha!\nWhat is that about?\p");
+ALIGNED(4) const u8 gUnknown_082EEFBC[] = _("Yes, that's exactly it!\nThat's what I meant.\p");
+ALIGNED(4) const u8 gUnknown_082EEFEC[] = _("In other words…\nYes! That's right!\p");
+
+const u8 *const gUnknown_082EF010[][4] = {
+    {
+        gUnknown_082EEECC,
+        gUnknown_082EEEF0,
+        gUnknown_082EEF2C,
+        gUnknown_082EEF50
+    }, {
+        gUnknown_082EEF7C,
+        gUnknown_082EEFA0,
+        gUnknown_082EEFBC,
+        gUnknown_082EEFEC
+    }
+};
+
+ALIGNED(4) const u8 gUnknown_082EF030[] = _("I'm just showing my TRAINER CARD\nas my way of greeting.\p");
+ALIGNED(4) const u8 gUnknown_082EF06C[] = _("I hope I get to know you better!\p");
+ALIGNED(4) const u8 gUnknown_082EF090[] = _("We're showing each other our\nTRAINER CARDS to get acquainted.\p");
+ALIGNED(4) const u8 gUnknown_082EF0D0[] = _("Glad to meet you.\nPlease don't be a stranger!\p");
+
+const u8 *const gUnknown_082EF100[][2] = {
+    {
+        gUnknown_082EF030,
+        gUnknown_082EF06C
+    }, {
+        gUnknown_082EF090,
+        gUnknown_082EF0D0
+    }
+};
+
+ALIGNED(4) const u8 gUnknown_082EF110[] = _("Yeahah!\nI really wanted this POKéMON!\p");
+ALIGNED(4) const u8 gUnknown_082EF138[] = _("Finally, a trade got me that\nPOKéMON I'd wanted a long time.\p");
+ALIGNED(4) const u8 gUnknown_082EF178[] = _("I'm trading POKéMON right now.\p");
+ALIGNED(4) const u8 gUnknown_082EF198[] = _("I finally got that POKéMON I\nwanted in a trade!\p");
+
+const u8 *const gUnknown_082EF1CC[][4] = {
+    {
+        gUnknown_082EF110,
+        gUnknown_082EF138,
+        NULL,
+        NULL
+    }, {
+        gUnknown_082EF178,
+        gUnknown_082EF198,
+        NULL,
+        NULL
+    }
+};
+
+ALIGNED(4) const u8 gUnknown_082EF1EC[] = _("{STR_VAR_1} checked the\nTRADING BOARD.\p");
+ALIGNED(4) const u8 gUnknown_082EF20C[] = _("Welcome to the TRADING BOARD.\pYou may register your POKéMON\nand offer it up for a trade.\pWould you like to register one of\nyour POKéMON?");
+ALIGNED(4) const u8 gUnknown_082EF298[] = _("This TRADING BOARD is used for\noffering a POKéMON for a trade.\pAll you need to do is register a\nPOKéMON for a trade.\pAnother TRAINER may offer a party\nPOKéMON in return for the trade.\pWe hope you will register POKéMON\nand trade them with many, many\lother TRAINERS.\pWould you like to register one of\nyour POKéMON?");
+ALIGNED(4) const u8 unref_text_union_room_6[] = _("We have registered your POKéMON for\ntrade on the TRADING BOARD.\pThank you for using this service!\p");
+ALIGNED(4) const u8 unref_text_union_room_7[] = _("Nobody has registered any POKéMON\nfor trade on the TRADING BOARD.\p\n");
+ALIGNED(4) const u8 gUnknown_082EF47C[] = _("Please choose the type of POKéMON\nthat you would like in the trade.\n");
+ALIGNED(4) const u8 gUnknown_082EF4C4[] = _("Which of your party POKéMON will\nyou offer in trade?\p");
+ALIGNED(4) const u8 gUnknown_082EF4FC[] = _("Registration has been canceled.\p");
+ALIGNED(4) const u8 gUnknown_082EF520[] = _("Registration has been completed.\p");
+ALIGNED(4) const u8 gUnknown_082EF544[] = _("The trade has been canceled.\p");
+ALIGNED(4) const u8 gUnknown_082EF564[] = _("Cancel the registration of your\nLv. {STR_VAR_2} {STR_VAR_1}?");
+ALIGNED(4) const u8 gUnknown_082EF590[] = _("Cancel the registration of your\nEGG?");
+ALIGNED(4) const u8 gUnknown_082EF5B8[] = _("The registration has been canceled.\p");
+ALIGNED(4) const u8 unref_text_union_room_8[] = _("TRAINERS wishing to make a trade\nwill be listed.");
+ALIGNED(4) const u8 unref_text_union_room_9[] = _("Please choose the TRAINER with whom\nyou would like to trade POKéMON.");
+ALIGNED(4) const u8 gUnknown_082EF65C[] = _("Would you like to ask {STR_VAR_1} to\nmake a trade?");
+ALIGNED(4) const u8 unref_text_union_room_10[] = _("Awaiting a response from\nthe other TRAINER…");
+ALIGNED(4) const u8 unref_text_union_room_11[] = _("You have not registered a POKéMON\nfor trading.\p");
+ALIGNED(4) const u8 gUnknown_082EF6E4[] = _("You don't have a {STR_VAR_2}-type\nPOKéMON that {STR_VAR_1} wants.\p");
+ALIGNED(4) const u8 gUnknown_082EF718[] = _("You don't have an EGG that\n{STR_VAR_1} wants.\p");
+ALIGNED(4) const u8 gUnknown_082EF740[] = _("{STR_VAR_1} can't make a trade for\nyour POKéMON right now.\p");
+ALIGNED(4) const u8 gUnknown_082EF774[] = _("You can't make a trade for\n{STR_VAR_1}'s POKéMON right now.\p");
+
+const u8 *const unref_text_ptrs_union_room_4[] = {
+    gUnknown_082EF740,
+    gUnknown_082EF774
+};
+
+ALIGNED(4) const u8 gUnknown_082EF7B0[] = _("Your trade offer was rejected.\p");
+ALIGNED(4) const u8 gUnknown_082EF7D0[] = _("EGG TRADE");
+ALIGNED(4) const u8 gUnknown_082EF7DC[] = _("{DPAD_UPDOWN}CHOOSE  {A_BUTTON}JOIN  {B_BUTTON}CANCEL");
+ALIGNED(4) const u8 gUnknown_082EF7F8[] = _("Please choose a TRAINER.");
+ALIGNED(4) const u8 gUnknown_082EF814[] = _("Please choose a TRAINER for\na SINGLE BATTLE.");
+ALIGNED(4) const u8 gUnknown_082EF844[] = _("Please choose a TRAINER for\na DOUBLE BATTLE.");
+ALIGNED(4) const u8 gUnknown_082EF874[] = _("Please choose the LEADER\nfor a MULTI BATTLE.");
+ALIGNED(4) const u8 gUnknown_082EF8A4[] = _("Please choose the TRAINER to\ntrade with.");
+ALIGNED(4) const u8 gUnknown_082EF8D0[] = _("Please choose the TRAINER who is\nsharing WONDER CARDS.");
+ALIGNED(4) const u8 gUnknown_082EF908[] = _("Please choose the TRAINER who is\nsharing WONDER NEWS.");
+ALIGNED(4) const u8 gUnknown_082EF940[] = _("Jump with mini POKéMON!\nPlease choose the LEADER.");
+ALIGNED(4) const u8 gUnknown_082EF974[] = _("BERRY CRUSH!\nPlease choose the LEADER.");
+ALIGNED(4) const u8 gUnknown_082EF99C[] = _("DODRIO BERRY-PICKING!\nPlease choose the LEADER.");
+ALIGNED(4) const u8 gUnknown_082EF9CC[] = _("BERRY BLENDER!\nPlease choose the LEADER.");
+ALIGNED(4) const u8 gUnknown_082EF9F8[] = _("RECORD CORNER!\nPlease choose the LEADER.");
+ALIGNED(4) const u8 gUnknown_082EFA24[] = _("COOLNESS CONTEST!\nPlease choose the LEADER.");
+ALIGNED(4) const u8 gUnknown_082EFA50[] = _("BEAUTY CONTEST!\nPlease choose the LEADER.");
+ALIGNED(4) const u8 gUnknown_082EFA7C[] = _("CUTENESS CONTEST!\nPlease choose the LEADER.");
+ALIGNED(4) const u8 gUnknown_082EFAA8[] = _("SMARTNESS CONTEST!\nPlease choose the LEADER.");
+ALIGNED(4) const u8 gUnknown_082EFAD8[] = _("TOUGHNESS CONTEST!\nPlease choose the LEADER.");
+ALIGNED(4) const u8 gUnknown_082EFB08[] = _("BATTLE TOWER LEVEL 50!\nPlease choose the LEADER.");
+ALIGNED(4) const u8 gUnknown_082EFB3C[] = _("BATTLE TOWER OPEN LEVEL!\nPlease choose the LEADER.");
+
+const u8 *const gUnknown_082EFB70[] = {
+    gUnknown_082EF814,
+    gUnknown_082EF844,
+    gUnknown_082EF874,
+    gUnknown_082EF8A4,
+    gUnknown_082EF940,
+    gUnknown_082EF974,
+    gUnknown_082EF99C,
+    gUnknown_082EF8D0,
+    gUnknown_082EF908,
+    NULL,
+    NULL,
+    NULL,
+    gUnknown_082EF9F8,
+    gUnknown_082EF9CC,
+    NULL,
+    gUnknown_082EFA24,
+    gUnknown_082EFA50,
+    gUnknown_082EFA7C,
+    gUnknown_082EFAA8,
+    gUnknown_082EFAD8,
+    gUnknown_082EFB08,
+    gUnknown_082EFB3C
+};
+
+ALIGNED(4) const u8 gUnknown_082EFBC8[] = _("Searching for a WIRELESS\nCOMMUNICATION SYSTEM. Wait...");
+ALIGNED(4) const u8 unref_text_union_room_12[] = _("For a DOUBLE BATTLE, you must have\nat least two POKéMON.\p");
+ALIGNED(4) const u8 gUnknown_082EFC3C[] = _("Awaiting {STR_VAR_1}'s response…");
+ALIGNED(4) const u8 gUnknown_082EFC54[] = _("{STR_VAR_1} has been asked to register\nyou as a member. Please wait.");
+ALIGNED(4) const u8 gUnknown_082EFC90[] = _("Awaiting a response from the\nWIRELESS COMMUNICATION SYSTEM.");
+ALIGNED(4) const u8 unref_text_union_room_13[] = _("Please wait for other TRAINERS to\ngather and get ready.");
+ALIGNED(4) const u8 gUnknown_082EFD04[] = _("No CARDS appear to be shared \nright now.");
+ALIGNED(4) const u8 gUnknown_082EFD30[] = _("No NEWS appears to be shared\nright now.");
+
+const u8 *const gUnknown_082EFD58[] = {
+    gUnknown_082EFD04,
+    gUnknown_082EFD30
+};
+
+ALIGNED(4) const u8 gUnknown_082EFD60[] = _("BATTLE");
+ALIGNED(4) const u8 gUnknown_082EFD68[] = _("CHAT");
+ALIGNED(4) const u8 gUnknown_082EFD70[] = _("GREETINGS");
+ALIGNED(4) const u8 gUnknown_082EFD7C[] = _("EXIT");
+ALIGNED(4) const u8 gUnknown_082EFD84[] = _("EXIT");
+ALIGNED(4) const u8 gUnknown_082EFD8C[] = _("INFO");
+ALIGNED(4) const u8 gUnknown_082EFD94[] = _("NAME{CLEAR_TO 0x3C}WANTED{CLEAR_TO 0x6E}OFFER{CLEAR_TO 0xC6}LV.");
+ALIGNED(4) const u8 gUnknown_082EFDB0[] = _("SINGLE BATTLE");
+ALIGNED(4) const u8 gUnknown_082EFDC0[] = _("DOUBLE BATTLE");
+ALIGNED(4) const u8 gUnknown_082EFDD0[] = _("MULTI BATTLE");
+ALIGNED(4) const u8 gUnknown_082EFDE0[] = _("POKéMON TRADES");
+ALIGNED(4) const u8 gUnknown_082EFDF0[] = _("CHAT");
+ALIGNED(4) const u8 gUnknown_082EFDF8[] = _("CARDS");
+ALIGNED(4) const u8 gUnknown_082EFE00[] = _("WONDER CARDS");
+ALIGNED(4) const u8 gUnknown_082EFE10[] = _("WONDER NEWS");
+ALIGNED(4) const u8 gUnknown_082EFE1C[] = _("POKéMON JUMP");
+ALIGNED(4) const u8 gUnknown_082EFE2C[] = _("BERRY CRUSH");
+ALIGNED(4) const u8 gUnknown_082EFE38[] = _("BERRY-PICKING");
+ALIGNED(4) const u8 gUnknown_082EFE48[] = _("SEARCH");
+ALIGNED(4) const u8 gUnknown_082EFE50[] = _("BERRY BLENDER");
+ALIGNED(4) const u8 gUnknown_082EFE60[] = _("RECORD CORNER");
+ALIGNED(4) const u8 gUnknown_082EFE70[] = _("COOL CONTEST");
+ALIGNED(4) const u8 gUnknown_082EFE80[] = _("BEAUTY CONTEST");
+ALIGNED(4) const u8 gUnknown_082EFE90[] = _("CUTE CONTEST");
+ALIGNED(4) const u8 gUnknown_082EFEA0[] = _("SMART CONTEST");
+ALIGNED(4) const u8 gUnknown_082EFEB0[] = _("TOUGH CONTEST");
+ALIGNED(4) const u8 gUnknown_082EFEC0[] = _("BATTLE TOWER LV. 50");
+ALIGNED(4) const u8 gUnknown_082EFED4[] = _("BATTLE TOWER OPEN LEVEL");
+ALIGNED(4) const u8 gUnknown_082EFEEC[] = _("It's a NORMAL CARD.");
+ALIGNED(4) const u8 gUnknown_082EFF00[] = _("It's a BRONZE CARD!");
+ALIGNED(4) const u8 gUnknown_082EFF14[] = _("It's a COPPER CARD!");
+ALIGNED(4) const u8 gUnknown_082EFF28[] = _("It's a SILVER CARD!");
+ALIGNED(4) const u8 gUnknown_082EFF3C[] = _("It's a GOLD CARD!");
+
+const u8 *const gUnknown_082EFF50[] = {
+    gUnknown_082EFEEC,
+    gUnknown_082EFF00,
+    gUnknown_082EFF14,
+    gUnknown_082EFF28,
+    gUnknown_082EFF3C
+};
+
+ALIGNED(4) const u8 gUnknown_082EFF64[] = _("This is {SPECIAL_F7 0x00} {SPECIAL_F7 0x01}'s\nTRAINER CARD…\l{SPECIAL_F7 0x02}\pPOKéDEX: {SPECIAL_F7 0x03}\nTIME:    {SPECIAL_F7 0x04}:{SPECIAL_F7 0x05}\p");
+ALIGNED(4) const u8 gUnknown_082EFFA4[] = _("BATTLES: WINS: {SPECIAL_F7 0x00}  LOSSES: {SPECIAL_F7 0x02}\nTRADES: {SPECIAL_F7 0x03}\p“{SPECIAL_F7 0x04} {SPECIAL_F7 0x05}\n{SPECIAL_F7 0x06} {SPECIAL_F7 0x07}”\p");
+ALIGNED(4) const u8 gUnknown_082EFFDC[] = _("{SPECIAL_F7 0x01}: Glad to have met you!{PAUSE 60}");
+ALIGNED(4) const u8 gUnknown_082EFFFC[] = _("{SPECIAL_F7 0x01}: Glad to meet you!{PAUSE 60}");
+
+const u8 *const gUnknown_082F0018[] = {
+    gUnknown_082EFFDC,
+    gUnknown_082EFFFC
+};
+
+ALIGNED(4) const u8 gUnknown_082F0020[] = _("Finished checking {SPECIAL_F7 0x01}'s\nTRAINER CARD.{PAUSE 60}");
+
+const u8 *const gUnknown_082F0048[] = {
+    gText_EmptyString,
+    gUnknown_082EFDB0,
+    gUnknown_082EFDC0,
+    gUnknown_082EFDD0,
+    gUnknown_082EFDE0,
+    gUnknown_082EFDF0,
+    gUnknown_082EFE00,
+    gUnknown_082EFE10,
+    gUnknown_082EFDF8,
+    gUnknown_082EFE1C,
+    gUnknown_082EFE2C,
+    gUnknown_082EFE38,
+    gUnknown_082EFE48,
+    gText_EmptyString,
+    gUnknown_082EFED4,
+    gUnknown_082EFE60,
+    gUnknown_082EFE50,
+    gText_EmptyString,
+    gText_EmptyString,
+    gText_EmptyString,
+    gText_EmptyString,
+    gUnknown_082EFE00,
+    gUnknown_082EFE10,
+    gUnknown_082EFE70,
+    gUnknown_082EFE80,
+    gUnknown_082EFE90,
+    gUnknown_082EFEA0,
+    gUnknown_082EFEB0,
+    gUnknown_082EFEC0
+};
+
+const struct WindowTemplate gUnknown_082F00BC = {
+    .bg = 0x00,
+    .tilemapLeft = 0x00,
+    .tilemapTop = 0x00,
+    .width = 0x1E,
+    .height = 0x02,
+    .paletteNum = 0x0F,
+    .baseBlock = 0x0008
+};
+
+const u32 gUnknown_082F00C4[] = {
+    0x0201,
+    0x0202,
+    0x0403,
+    0x0204,
+    0x2509,
+    0x250a,
+    0x350b,
+    0x0000,
+    0x0000,
+    0x0000,
+    0x0000,
+    0x0000,
+    0x240f,
+    0x2410,
+    0x0000,
+    0x2417,
+    0x2418,
+    0x2419,
+    0x241a,
+    0x241b,
+    0x021c,
+    0x020e
+};
+
+const struct WindowTemplate gUnknown_082F011C = {
+    .bg = 0x00,
+    .tilemapLeft = 0x01,
+    .tilemapTop = 0x03,
+    .width = 0x0d,
+    .height = 0x08,
+    .paletteNum = 0x0f,
+    .baseBlock = 0x0044
+};
+
+const struct WindowTemplate gUnknown_082F0124 = {
+    .bg = 0x00,
+    .tilemapLeft = 0x01,
+    .tilemapTop = 0x03,
+    .width = 0x0d,
+    .height = 0x0a,
+    .paletteNum = 0x0f,
+    .baseBlock = 0x0044
+};
+
+const struct WindowTemplate gUnknown_082F012C = {
+    .bg = 0x00,
+    .tilemapLeft = 0x10,
+    .tilemapTop = 0x03,
+    .width = 0x07,
+    .height = 0x04,
+    .paletteNum = 0x0f,
+    .baseBlock = 0x00c6
+};
+
+const struct ListMenuItem gUnknown_082F0134[] = {
+    { gText_EmptyString, 0 },
+    { gText_EmptyString, 1 },
+    { gText_EmptyString, 2 },
+    { gText_EmptyString, 3 },
+    { gText_EmptyString, 4 }
+};
+
+const struct ListMenuTemplate gUnknown_082F015C = {
+    .items = gUnknown_082F0134,
+    .moveCursorFunc = NULL,
+    .itemPrintFunc = sub_8013278,
+    .totalItems = 5,
+    .maxShowed = 5,
+    .windowId = 0,
+    .header_X = 0,
+    .item_X = 0,
+    .cursor_X = 0,
+    .upText_Y = 1,
+    .cursorPal = 2,
+    .fillValue = 1,
+    .cursorShadowPal = 3,
+    .lettersSpacing = 0,
+    .itemVerticalPadding = 0,
+    .scrollMultiple = 0,
+    .fontId = 1,
+    .cursorKind = 1
+};
+
+const struct WindowTemplate gUnknown_082F0174 = {
+    .bg = 0x00,
+    .tilemapLeft = 0x01,
+    .tilemapTop = 0x03,
+    .width = 0x11,
+    .height = 0x0a,
+    .paletteNum = 0x0f,
+    .baseBlock = 0x0044
+};
+
+const struct WindowTemplate gUnknown_082F017C = {
+    .bg = 0x00,
+    .tilemapLeft = 0x14,
+    .tilemapTop = 0x03,
+    .width = 0x07,
+    .height = 0x04,
+    .paletteNum = 0x0f,
+    .baseBlock = 0x00ee
+};
+
+const struct ListMenuItem gUnknown_082F0184[] = {
+    { gText_EmptyString,  0 },
+    { gText_EmptyString,  1 },
+    { gText_EmptyString,  2 },
+    { gText_EmptyString,  3 },
+    { gText_EmptyString,  4 },
+    { gText_EmptyString,  5 },
+    { gText_EmptyString,  6 },
+    { gText_EmptyString,  7 },
+    { gText_EmptyString,  8 },
+    { gText_EmptyString,  9 },
+    { gText_EmptyString, 10 },
+    { gText_EmptyString, 11 },
+    { gText_EmptyString, 12 },
+    { gText_EmptyString, 13 },
+    { gText_EmptyString, 14 },
+    { gText_EmptyString, 15 }
+};
+
+const struct ListMenuTemplate gUnknown_082F0204 = {
+    .items = gUnknown_082F0184,
+    .moveCursorFunc = ListMenuDefaultCursorMoveFunc,
+    .itemPrintFunc = sub_8013DF4,
+    .totalItems = 16,
+    .maxShowed = 5,
+    .windowId = 0,
+    .header_X = 0,
+    .item_X = 8,
+    .cursor_X = 0,
+    .upText_Y = 1,
+    .cursorPal = 2,
+    .fillValue = 1,
+    .cursorShadowPal = 3,
+    .lettersSpacing = 0,
+    .itemVerticalPadding = 0,
+    .scrollMultiple = 1,
+    .fontId = 1,
+    .cursorKind = 0
+};
+
+const struct WindowTemplate gUnknown_082F021C = {
+    .bg = 0x00,
+    .tilemapLeft = 0x14,
+    .tilemapTop = 0x05,
+    .width = 0x10,
+    .height = 0x08,
+    .paletteNum = 0x0f,
+    .baseBlock = 0x0001
+};
+
+const struct ListMenuItem gUnknown_082F0224[] = {
+    { gUnknown_082EFD70, 0x208 },
+    { gUnknown_082EFD60, 0x241 },
+    { gUnknown_082EFD68, 0x245 },
+    { gUnknown_082EFD7C, 0x040 }
+};
+
+const struct ListMenuTemplate gUnknown_082F0244 = {
+    .items = gUnknown_082F0224,
+    .moveCursorFunc = ListMenuDefaultCursorMoveFunc,
+    .itemPrintFunc = NULL,
+    .totalItems = 4,
+    .maxShowed = 4,
+    .windowId = 0,
+    .header_X = 0,
+    .item_X = 8,
+    .cursor_X = 0,
+    .upText_Y = 1,
+    .cursorPal = 2,
+    .fillValue = 1,
+    .cursorShadowPal = 3,
+    .lettersSpacing = 0,
+    .itemVerticalPadding = 0,
+    .scrollMultiple = 0,
+    .fontId = 1,
+    .cursorKind = 0
+};
+
+const struct WindowTemplate gUnknown_082F025C = {
+    .bg = 0x00,
+    .tilemapLeft = 0x12,
+    .tilemapTop = 0x07,
+    .width = 0x10,
+    .height = 0x06,
+    .paletteNum = 0x0f,
+    .baseBlock = 0x0001
+};
+
+const struct ListMenuItem gUnknown_082F0264[] = {
+    { gText_Register, 1 },
+    { gUnknown_082EFD8C, 2 },
+    { gUnknown_082EFD7C, 3 }
+};
+
+const struct ListMenuTemplate gUnknown_082F027C = {
+    .items = gUnknown_082F0264,
+    .moveCursorFunc = ListMenuDefaultCursorMoveFunc,
+    .itemPrintFunc = NULL,
+    .totalItems = 3,
+    .maxShowed = 3,
+    .windowId = 0,
+    .header_X = 0,
+    .item_X = 8,
+    .cursor_X = 0,
+    .upText_Y = 1,
+    .cursorPal = 2,
+    .fillValue = 1,
+    .cursorShadowPal = 3,
+    .lettersSpacing = 0,
+    .itemVerticalPadding = 0,
+    .scrollMultiple = 0,
+    .fontId = 1,
+    .cursorKind = 0
+};
+
+const struct WindowTemplate gUnknown_082F0294 = {
+    .bg = 0x00,
+    .tilemapLeft = 0x14,
+    .tilemapTop = 0x01,
+    .width = 0x10,
+    .height = 0x0c,
+    .paletteNum = 0x0f,
+    .baseBlock = 0x0001
+};
+
+const struct ListMenuItem gUnknown_082F029C[] = {
+    { gTypeNames[TYPE_NORMAL],   TYPE_NORMAL         },
+    { gTypeNames[TYPE_FIRE],     TYPE_FIRE           },
+    { gTypeNames[TYPE_WATER],    TYPE_WATER          },
+    { gTypeNames[TYPE_ELECTRIC], TYPE_ELECTRIC       },
+    { gTypeNames[TYPE_GRASS],    TYPE_GRASS          },
+    { gTypeNames[TYPE_ICE],      TYPE_ICE            },
+    { gTypeNames[TYPE_GROUND],   TYPE_GROUND         },
+    { gTypeNames[TYPE_ROCK],     TYPE_ROCK           },
+    { gTypeNames[TYPE_FLYING],   TYPE_FLYING         },
+    { gTypeNames[TYPE_PSYCHIC],  TYPE_PSYCHIC        },
+    { gTypeNames[TYPE_FIGHTING], TYPE_FIGHTING       },
+    { gTypeNames[TYPE_POISON],   TYPE_POISON         },
+    { gTypeNames[TYPE_BUG],      TYPE_BUG            },
+    { gTypeNames[TYPE_GHOST],    TYPE_GHOST          },
+    { gTypeNames[TYPE_DRAGON],   TYPE_DRAGON         },
+    { gTypeNames[TYPE_STEEL],    TYPE_STEEL          },
+    { gTypeNames[TYPE_DARK],     TYPE_DARK           },
+    { gUnknown_082EFD7C,         NUMBER_OF_MON_TYPES }
+};
+
+const struct ListMenuTemplate gUnknown_082F032C = {
+    .items = gUnknown_082F029C,
+    .moveCursorFunc = ListMenuDefaultCursorMoveFunc,
+    .itemPrintFunc = NULL,
+    .totalItems = NUMBER_OF_MON_TYPES,
+    .maxShowed = 6,
+    .windowId = 0,
+    .header_X = 0,
+    .item_X = 8,
+    .cursor_X = 0,
+    .upText_Y = 1,
+    .cursorPal = 2,
+    .fillValue = 1,
+    .cursorShadowPal = 3,
+    .lettersSpacing = 0,
+    .itemVerticalPadding = 0,
+    .scrollMultiple = 0,
+    .fontId = 1,
+    .cursorKind = 0
+};
+
+const struct WindowTemplate gUnknown_082F0344 = {
+    .bg = 0x00,
+    .tilemapLeft = 0x01,
+    .tilemapTop = 0x01,
+    .width = 0x1c,
+    .height = 0x02,
+    .paletteNum = 0x0d,
+    .baseBlock = 0x0001
+};
+
+const struct WindowTemplate gUnknown_082F034C = {
+    .bg = 0x00,
+    .tilemapLeft = 0x01,
+    .tilemapTop = 0x05,
+    .width = 0x1c,
+    .height = 0x0c,
+    .paletteNum = 0x0d,
+    .baseBlock = 0x0039
+};
+
+const struct ListMenuItem gUnknown_082F0354[] = {
+    { gText_EmptyString, -3 },
+    { gText_EmptyString,  0 },
+    { gText_EmptyString,  1 },
+    { gText_EmptyString,  2 },
+    { gText_EmptyString,  3 },
+    { gText_EmptyString,  4 },
+    { gText_EmptyString,  5 },
+    { gText_EmptyString,  6 },
+    { gText_EmptyString,  7 },
+    { gUnknown_082EFD84,  8 }
+};
+
+const struct ListMenuTemplate gUnknown_082F03A4 = {
+    .items = gUnknown_082F0354,
+    .moveCursorFunc = ListMenuDefaultCursorMoveFunc,
+    .itemPrintFunc = sub_8017BE8,
+    .totalItems = 10,
+    .maxShowed = 6,
+    .windowId = 0,
+    .header_X = 0,
+    .item_X = 8,
+    .cursor_X = 0,
+    .upText_Y = 1,
+    .cursorPal = 14,
+    .fillValue = 15,
+    .cursorShadowPal = 13,
+    .lettersSpacing = 0,
+    .itemVerticalPadding = 0,
+    .scrollMultiple = 0,
+    .fontId = 1,
+    .cursorKind = 0
+};
+
+const struct WindowTemplate UnrefWindowTemplate_082F03B4 = {
+    .bg = 0x00,
+    .tilemapLeft = 0x01,
+    .tilemapTop = 0x05,
+    .width = 0x1c,
+    .height = 0x0c,
+    .paletteNum = 0x0d,
+    .baseBlock = 0x0039
+};
+
+const struct ListMenuItem gUnknown_082F03C4[] = {
+    { gText_EmptyString,  0 },
+    { gText_EmptyString,  1 },
+    { gText_EmptyString,  2 },
+    { gText_EmptyString,  3 },
+    { gText_EmptyString,  4 },
+    { gText_EmptyString,  5 },
+    { gText_EmptyString,  6 },
+    { gText_EmptyString,  7 },
+    { gText_EmptyString,  8 },
+    { gText_EmptyString,  9 },
+    { gText_EmptyString, 10 },
+    { gText_EmptyString, 11 },
+    { gText_EmptyString, 12 },
+    { gText_EmptyString, 13 },
+    { gText_EmptyString, 14 },
+    { gText_EmptyString, 15 }
+};
+
+const struct ListMenuTemplate UnrefListMenuTemplate_082F0444 = {
+    .items = gUnknown_082F03C4,
+    .moveCursorFunc = ListMenuDefaultCursorMoveFunc,
+    .itemPrintFunc = nullsub_14,
+    .totalItems = 16,
+    .maxShowed = 4,
+    .windowId = 0,
+    .header_X = 0,
+    .item_X = 8,
+    .cursor_X = 0,
+    .upText_Y = 1,
+    .cursorPal = 2,
+    .fillValue = 1,
+    .cursorShadowPal = 3,
+    .lettersSpacing = 0,
+    .itemVerticalPadding = 0,
+    .scrollMultiple = 1,
+    .fontId = 1,
+    .cursorKind = 0
+};
+
+const struct UnkStruct_Shared gUnknown_082F045C = {0};
+
+ALIGNED(4) const u8 gUnknown_082F0474[] = {0x01, 0xff};
+ALIGNED(4) const u8 gUnknown_082F0478[] = {0x02, 0xff};
+ALIGNED(4) const u8 gUnknown_082F047C[] = {0x03, 0xff};
+ALIGNED(4) const u8 gUnknown_082F0480[] = {0x04, 0xff};
+ALIGNED(4) const u8 gUnknown_082F0484[] = {0x09, 0xff};
+ALIGNED(4) const u8 gUnknown_082F0488[] = {0x0a, 0xff};
+ALIGNED(4) const u8 gUnknown_082F048C[] = {0x0b, 0xff};
+ALIGNED(4) const u8 gUnknown_082F0490[] = {0x15, 0xff};
+ALIGNED(4) const u8 gUnknown_082F0494[] = {0x16, 0xff};
+ALIGNED(4) const u8 gUnknown_082F0498[] = {0x40, 0x41, 0x44, 0x45, 0x48, 0x51, 0x52, 0x53, 0x54, 0xff};
+ALIGNED(4) const u8 gUnknown_082F04A4[] = {0x0c, 0xff};
+ALIGNED(4) const u8 gUnknown_082F04A8[] = {0x01, 0x02, 0x03, 0x04, 0x09, 0x0a, 0x0b, 0x15, 0x16, 0x0d, 0xff};
+ALIGNED(4) const u8 gUnknown_082F04B4[] = {0x0f, 0xff};
+ALIGNED(4) const u8 gUnknown_082F04B8[] = {0x10, 0xff};
+ALIGNED(4) const u8 gUnknown_082F04BC[] = {0x17, 0xff};
+ALIGNED(4) const u8 gUnknown_082F04C0[] = {0x18, 0xff};
+ALIGNED(4) const u8 gUnknown_082F04C4[] = {0x19, 0xff};
+ALIGNED(4) const u8 gUnknown_082F04C8[] = {0x1a, 0xff};
+ALIGNED(4) const u8 gUnknown_082F04CC[] = {0x1b, 0xff};
+ALIGNED(4) const u8 gUnknown_082F04D0[] = {0x1c, 0xff};
+ALIGNED(4) const u8 gUnknown_082F04D4[] = {0x0e, 0xff};
+
+const u8 *const gUnknown_082F04D8[] = {
+    gUnknown_082F0474,
+    gUnknown_082F0478,
+    gUnknown_082F047C,
+    gUnknown_082F0480,
+    gUnknown_082F0484,
+    gUnknown_082F0488,
+    gUnknown_082F048C,
+    gUnknown_082F0490,
+    gUnknown_082F0494,
+    gUnknown_082F0498,
+    gUnknown_082F04A4,
+    gUnknown_082F04A8,
+    gUnknown_082F04B4,
+    gUnknown_082F04B8,
+    NULL,
+    gUnknown_082F04BC,
+    gUnknown_082F04C0,
+    gUnknown_082F04C4,
+    gUnknown_082F04C8,
+    gUnknown_082F04CC,
+    gUnknown_082F04D0,
+    gUnknown_082F04D4
+};
+
+const u8 gUnknown_082F0530[] = {
+    0x01, 0x02, 0x03, 0x04, 0x09, 0x0a, 0x0b, 0x15,
+    0x16, 0x00, 0x00, 0x00, 0x0f, 0x10, 0x00, 0x17,
+    0x18, 0x19, 0x1a, 0x1b, 0x1c, 0x0e, 0x00, 0x00
+};
 
 // code
-void nullsub_89(void)
+void nullsub_89(u8 taskId)
 {
 
 }
@@ -923,7 +1734,7 @@ bool8 sub_801320C(struct UnkStruct_Leader *data, u32 arg1, u32 arg2)
     return FALSE;
 }
 
-void sub_8013278(u8 arg0, u32 id, u8 arg2)
+void sub_8013278(u8 arg0, s32 id, u8 arg2)
 {
     struct UnkStruct_Leader *data = gUnknown_02022C30.leader;
     u8 var = 0;
@@ -969,7 +1780,7 @@ u8 sub_80132D4(struct UnkStruct_Main0 *arg0)
     }
 
     for (id = 0; id < 4; id++)
-        sub_8017734(data->field_0->arr, &data->field_4->arr[id].unk0, 5);
+        sub_8017734(data->field_0->arr, &data->field_4->arr[id], 5);
 
     if (ret != 2)
     {
@@ -1428,7 +2239,7 @@ u8 sub_8013DBC(struct UnkStruct_Group *data, u32 id)
     return 0;
 }
 
-void sub_8013DF4(u8 arg0, u32 id, u8 arg2)
+void sub_8013DF4(u8 arg0, s32 id, u8 arg2)
 {
     struct UnkStruct_Group *data = gUnknown_02022C30.group;
     u8 var = sub_8013DBC(data, id);
@@ -1452,7 +2263,7 @@ u8 sub_8013E44(void)
             {
                 if (data->field_0->arr[i].field_1A_0 == 1)
                 {
-                    if (sub_8017678(&data->field_0->arr[i], &data->field_4->arr[id]))
+                    if (sub_8017678(&data->field_0->arr[i].unk, &data->field_4->arr[id].unk0))
                     {
                         data->field_0->arr[i].unk = data->field_4->arr[id].unk0;
                         data->field_0->arr[i].field_1B = 0x40;
@@ -1494,7 +2305,7 @@ u8 sub_8013E44(void)
 
     for (id = 0; id < 4; id++)
     {
-        if (sub_8017734(data->field_0->arr, &data->field_4->arr[id].unk0, 16) != 0xFF)
+        if (sub_8017734(data->field_0->arr, &data->field_4->arr[id], 16) != 0xFF)
             ret = 1;
     }
 
@@ -2340,7 +3151,7 @@ void sub_80152F4(u8 taskId)
             {
                 if (data->field_0->arr[0].field_1A_0 == 1 && !data->field_0->arr[0].unk.field_0.unk_0a_7)
                 {
-                    if (sub_8016F1C(&data->field_0->arr[0], data->field_12 + 7))
+                    if (sub_8016F1C(&data->field_0->arr[0].unk.field_0, data->field_12 + 7))
                     {
                         data->field_F = 0;
                         data->field_14 = 0;
@@ -2454,7 +3265,7 @@ void UnionRoomSpecial(void)
     // dumb line needed to match
     gUnknown_02022C30.uRoom = gUnknown_02022C30.uRoom;
 
-    dataPtr = AllocZeroed(0x26C);
+    dataPtr = AllocZeroed(sizeof(*gUnknown_02022C30.uRoom));
     gUnknown_02022C30.uRoom = dataPtr;
     gUnknown_03000DA8 = dataPtr;
 
@@ -2530,7 +3341,7 @@ void sub_80156E0(u8 taskId)
         break;
     case 2:
         sub_8010F84(0x40, 0, 0);
-        sub_8010FCC(gUnknown_02022C40.field_2, gUnknown_02022C40.field_A, gUnknown_02022C40.field_C);
+        sub_8010FCC(gUnknown_02022C40.type, gUnknown_02022C40.playerSpecies, gUnknown_02022C40.playerLevel);
         sub_800B488();
         OpenLink();
         sub_8011C84();
@@ -3125,14 +3936,14 @@ void sub_80156E0(u8 taskId)
                 sub_801568C(gUnknown_082EF4FC);
                 break;
             default:
-                gUnknown_02022C40.field_2 = var5;
+                gUnknown_02022C40.type = var5;
                 data->state = 55;
                 break;
             }
         }
         break;
     case 55:
-        sub_8010FCC(gUnknown_02022C40.field_2, gUnknown_02022C40.field_A, gUnknown_02022C40.field_C);
+        sub_8010FCC(gUnknown_02022C40.type, gUnknown_02022C40.playerSpecies, gUnknown_02022C40.playerLevel);
         sub_801568C(gUnknown_082EF520);
         break;
     case 44:
@@ -3419,7 +4230,7 @@ u8 sub_8016B00(void)
             {
                 if (structPtr->field_0->arr[j].field_1A_0 == 1)
                 {
-                    if (sub_8017678(&structPtr->field_0->arr[j], &structPtr->field_4->arr[i]))
+                    if (sub_8017678(&structPtr->field_0->arr[j].unk, &structPtr->field_4->arr[i].unk0))
                     {
                         structPtr->field_0->arr[j].unk = structPtr->field_4->arr[i].unk0;
                         structPtr->field_0->arr[j].field_1B = 0x40;
@@ -3461,40 +4272,1118 @@ u8 sub_8016B00(void)
     }
     for (i = 0; i < 4; i++)
     {
-        if (sub_8017734(&structPtr->field_0->arr[0], &structPtr->field_4->arr[i].unk0, 8) != 0xFF)
+        if (sub_8017734(&structPtr->field_0->arr[0], &structPtr->field_4->arr[i], 8) != 0xFF)
             r7 = 1;
     }
 
     return r7;
 }
 
-/*
 void sub_8016CA0(u8 taskId)
 {
     s32 i, j;
-    struct UnkLinkRfuStruct_02022B14 sp0;
-    u8 text[10];
-    struct UnkStruct_Main4 *ptr = (void*) gTasks[taskId].data;
+    struct UnkStruct_Shared sp0;
+    struct UnkStruct_Main4 **ptr = (void*) gTasks[taskId].data;
+    bool8 r4;
 
     for (i = 0; i < 4; i++)
     {
-        j = sub_800DE7C(&sp0, text, i);
-        if (!sub_8013D88(sp0.unk_0a_0, gTasks[taskId].data[4]))
-            sp0 = gUnknown_082F045C.field_0;
-        if (sp0.unk_00.unk_00_0 == 1)
-            sp0 = gUnknown_082F045C.field_0;
-
-        if (!j)
+        r4 = sub_800DE7C(&sp0.field_0, sp0.playerName, i);
+        if (!sub_8013D88(sp0.field_0.unk_0a_0, gTasks[taskId].data[4]))
+        {
+            sp0 = gUnknown_082F045C;
+        }
+        if (sp0.field_0.unk_00.unk_00_0 == 1)
+        {
+            sp0 = gUnknown_082F045C;
+        }
+        if (!r4)
         {
             for (j = 0; j < i; j++)
             {
-                if (sub_8017630())
+                if (!sub_8017630(&ptr[1]->arr[j].unk0, &sp0))
+                {
+                    sp0 = gUnknown_082F045C;
+                }
             }
+            ptr[1]->arr[i].unk0 = sp0;
+            ptr[1]->arr[i].unk18 = sub_8017630(&ptr[1]->arr[i].unk0, &gUnknown_082F045C);
         }
         else
         {
-
+            ptr[0]->arr[i].unk0 = sp0;
+            ptr[0]->arr[i].unk18 = sub_8017630(&ptr[0]->arr[i].unk0, &gUnknown_082F045C);
         }
     }
 }
-*/
+
+u8 sub_8016DF0(struct UnkStruct_Main4 * a0, struct UnkStruct_Main4 * a1, u32 a2)
+{
+    u8 taskId = CreateTask(sub_8016CA0, 0);
+    struct UnkStruct_Main4 ** data = (void *)gTasks[taskId].data;
+    data[0] = a0;
+    data[1] = a1;
+    gTasks[taskId].data[4] = a2;
+    return taskId;
+}
+
+void sub_8016E24(u8 taskId)
+{
+    s32 i, j;
+    struct UnkStruct_Main4 **ptr = (void*) gTasks[taskId].data;
+
+    for (i = 0; i < 4; i++)
+    {
+        sub_800DE7C(&ptr[0]->arr[i].unk0.field_0, ptr[0]->arr[i].unk0.playerName, i);
+        if (!sub_8013D88(ptr[0]->arr[i].unk0.field_0.unk_0a_0, gTasks[taskId].data[2]))
+        {
+            ptr[0]->arr[i].unk0 = gUnknown_082F045C;
+        }
+        for (j = 0; j < i; j++)
+        {
+            if (!sub_8017630(&ptr[0]->arr[j].unk0, &ptr[0]->arr[i].unk0))
+            {
+                ptr[0]->arr[i].unk0 = gUnknown_082F045C;
+            }
+        }
+        ptr[0]->arr[i].unk18 = sub_8017630(&ptr[0]->arr[i].unk0, &gUnknown_082F045C);
+    }
+}
+
+bool32 sub_8016F1C(struct UnkLinkRfuStruct_02022B14 *arg0, s16 arg1)
+{
+    if (arg1 == 7)
+    {
+        if (!arg0->unk_00.unk_00_5)
+        {
+            return FALSE;
+        }
+        else
+        {
+            return TRUE;
+        }
+    }
+    else if (arg1 == 8)
+    {
+        if (!arg0->unk_00.unk_00_4)
+        {
+            return FALSE;
+        }
+        else
+        {
+            return TRUE;
+        }
+    }
+    else
+    {
+        return FALSE;
+    }
+}
+
+void sub_8016F44(u8 taskId)
+{
+    s32 i;
+    struct UnkStruct_Main4 **ptr = (void*) gTasks[taskId].data;
+
+    for (i = 0; i < 4; i++)
+    {
+        if (sub_800DF34(&ptr[0]->arr[i].unk0.field_0, ptr[0]->arr[i].unk0.playerName, i))
+        {
+            sub_8016F1C(&ptr[0]->arr[i].unk0.field_0, gTasks[taskId].data[2]);
+        }
+        ptr[0]->arr[i].unk18 = sub_8017630(&ptr[0]->arr[i].unk0, &gUnknown_082F045C);
+    }
+}
+
+u8 sub_8016FC0(struct UnkStruct_Main4 * a0, u32 a1)
+{
+    u8 taskId = CreateTask(sub_8016E24, 0);
+    struct UnkStruct_Main4 **ptr = (void*) gTasks[taskId].data;
+    ptr[0] = a0;
+    gTasks[taskId].data[2] = a1;
+    return taskId;
+}
+
+u8 sub_8016FF0(struct UnkStruct_Main4 * a0, u32 a1)
+{
+    u8 taskId = CreateTask(sub_8016F44, 0);
+    struct UnkStruct_Main4 **ptr = (void*) gTasks[taskId].data;
+    ptr[0] = a0;
+    gTasks[taskId].data[2] = a1;
+    return taskId;
+}
+
+bool32 sub_8017020(const u8 *src)
+{
+    sub_81973A4();
+    DrawDialogueFrame(0, 1);
+    StringExpandPlaceholders(gStringVar4, src);
+    AddTextPrinterWithCustomSpeedForMessage(FALSE, 1);
+    return FALSE;
+}
+
+bool32 sub_801704C(void)
+{
+    if (!RunTextPrintersAndIsPrinter0Active())
+    {
+        return TRUE;
+    }
+    else
+    {
+        return FALSE;
+    }
+}
+
+bool8 PrintOnTextbox(u8 *textState, const u8 *str)
+{
+    switch (*textState)
+    {
+    case 0:
+        sub_81973A4();
+        DrawDialogueFrame(0, 1);
+        StringExpandPlaceholders(gStringVar4, str);
+        AddTextPrinterForMessage_2(TRUE);
+        (*textState)++;
+        break;
+    case 1:
+        if (!RunTextPrintersAndIsPrinter0Active())
+        {
+            *textState = 0;
+            return TRUE;
+        }
+        break;
+    }
+    return FALSE;
+}
+
+s8 sub_80170B8(u8 *arg0, bool32 arg1)
+{
+    s8 r1;
+
+    switch (*arg0)
+    {
+    case 0:
+        if (arg1)
+        {
+            return -3;
+        }
+        DisplayYesNoMenuDefaultYes();
+        (*arg0)++;
+        break;
+    case 1:
+        if (arg1)
+        {
+            sub_8198C78();
+            *arg0 = 0;
+            return -3;
+        }
+        r1 = Menu_ProcessInputNoWrapClearOnChoose();
+        if (r1 == -1 || r1 == 0 || r1 == 1)
+        {
+            *arg0 = 0;
+            return r1;
+        }
+        break;
+    }
+    return -2;
+}
+
+u8 sub_8017118(const struct WindowTemplate * template)
+{
+    u8 windowId = AddWindow(template);
+    DrawStdWindowFrame(windowId, FALSE);
+    FillWindowPixelBuffer(windowId, 0xFF);
+    sub_80173E0(windowId, 1, gUnknown_082EFD94, 8, 1, 6);
+    CopyWindowToVram(windowId, 2);
+    PutWindowTilemap(windowId);
+    return windowId;
+}
+
+void sub_8017168(u8 windowId)
+{
+    RemoveWindow(windowId);
+}
+
+s32 sub_8017178(u8 *arg0, u8 *arg1, u8 *arg2, const struct WindowTemplate *winTemplate, const struct ListMenuTemplate *menuTemplate)
+{
+    s32 r1, r8;
+    struct WindowTemplate winTemplateCopy;
+
+    switch (*arg0)
+    {
+    case 0:
+        winTemplateCopy = *winTemplate;
+        r1 = sub_81DB41C(menuTemplate);
+        if (winTemplateCopy.width > r1)
+        {
+            winTemplateCopy.width = r1;
+        }
+        if (winTemplateCopy.tilemapLeft + winTemplateCopy.width > 29)
+        {
+            winTemplateCopy.tilemapLeft = max(29 - winTemplateCopy.width, 0);
+        }
+        *arg1 = AddWindow(&winTemplateCopy);
+        DrawStdWindowFrame(*arg1, FALSE);
+        gMultiuseListMenuTemplate = *menuTemplate;
+        gMultiuseListMenuTemplate.windowId = *arg1;
+        *arg2 = ListMenuInit(&gMultiuseListMenuTemplate, 0, 0);
+        CopyWindowToVram(*arg1, TRUE);
+        (*arg0)++;
+        break;
+    case 1:
+        r8 = ListMenu_ProcessInput(*arg2);
+        if (({gMain.newKeys & A_BUTTON;}))
+        {
+            DestroyListMenuTask(*arg2, NULL, NULL);
+            ClearStdWindowAndFrame(*arg1, TRUE);
+            RemoveWindow(*arg1);
+            *arg0 = 0;
+            return r8;
+        }
+        else if (({gMain.newKeys & B_BUTTON;}))
+        {
+            DestroyListMenuTask(*arg2, NULL, NULL);
+            ClearStdWindowAndFrame(*arg1, TRUE);
+            RemoveWindow(*arg1);
+            *arg0 = 0;
+            return -2;
+        }
+        break;
+    }
+
+    return -1;
+}
+
+s32 sub_80172A0(u8 *arg0, u8 *arg1, u8 *arg2, u8 *arg3, const struct WindowTemplate *winTemplate, const struct ListMenuTemplate *menuTemplate, struct UnkStruct_Main0 *arg6)
+{
+    s32 input;
+    s32 r4;
+
+    switch (*arg0)
+    {
+    case 0:
+        *arg3 = sub_8017118(&gUnknown_082F0344);
+        *arg1 = AddWindow(winTemplate);
+        DrawStdWindowFrame(*arg1, FALSE);
+        gMultiuseListMenuTemplate = *menuTemplate;
+        gMultiuseListMenuTemplate.windowId = *arg1;
+        *arg2 = ListMenuInit(&gMultiuseListMenuTemplate, 0, 1);
+        (*arg0)++;
+        break;
+    case 1:
+        CopyWindowToVram(*arg1, TRUE);
+        (*arg0)++;
+        break;
+    case 2:
+        // Register swap r1 <---> r2
+        input = ListMenu_ProcessInput(*arg2);
+        if (({gMain.newKeys & (A_BUTTON | B_BUTTON);}))
+        {
+            if (input == 8 || ({gMain.newKeys & B_BUTTON;}))
+            {
+                DestroyListMenuTask(*arg2, NULL, NULL);
+                RemoveWindow(*arg1);
+                sub_8017168(*arg3);
+                *arg0 = 0;
+                return -2;
+            }
+            else
+            {
+                r4 = sub_8017CB0(arg6->arr, input);
+                if (r4 >= 0)
+                {
+                    DestroyListMenuTask(*arg2, NULL, NULL);
+                    RemoveWindow(*arg1);
+                    sub_8017168(*arg3);
+                    *arg0 = 0;
+                    return r4;
+                }
+                else
+                {
+                    PlaySE(SE_WALL_HIT);
+                }
+            }
+        }
+        break;
+    }
+
+    return -1;
+}
+void sub_80173B0(void)
+{
+    FillBgTilemapBufferRect(0, 0, 0, 0, 32, 32, 0);
+    CopyBgTilemapBufferToVram(0);
+}
+
+void sub_80173D4(void)
+{
+    EnableBothScriptContexts();
+}
+
+void sub_80173E0(u8 windowId, u8 arg1, const u8 *str, u8 arg3, u8 arg4, u8 arg5)
+{
+    struct TextPrinterTemplate sp0;
+
+    sp0.currentChar = str;
+    sp0.windowId = windowId;
+    sp0.fontId = arg1;
+    sp0.x = arg3;
+    sp0.y = arg4;
+    sp0.currentX = arg3;
+    sp0.currentY = arg4;
+    sp0.unk = 0;
+
+    gTextFlags.useAlternateDownArrow = FALSE;
+    switch (arg5)
+    {
+    case 0:
+        sp0.letterSpacing = 0;
+        sp0.lineSpacing = 0;
+        sp0.fgColor = 2;
+        sp0.bgColor = 1;
+        sp0.shadowColor = 3;
+        break;
+    case 1:
+        sp0.letterSpacing = 0;
+        sp0.lineSpacing = 0;
+        sp0.fgColor = 4;
+        sp0.bgColor = 1;
+        sp0.shadowColor = 5;
+        break;
+    case 2:
+        sp0.letterSpacing = 0;
+        sp0.lineSpacing = 0;
+        sp0.fgColor = 6;
+        sp0.bgColor = 1;
+        sp0.shadowColor = 7;
+        break;
+    case 3:
+        sp0.letterSpacing = 0;
+        sp0.lineSpacing = 0;
+        sp0.fgColor = 1;
+        sp0.bgColor = 1;
+        sp0.shadowColor = 3;
+        break;
+    case 4:
+        sp0.letterSpacing = 0;
+        sp0.lineSpacing = 0;
+        sp0.fgColor = 1;
+        sp0.bgColor = 2;
+        sp0.shadowColor = 3;
+        break;
+    case 5:
+        sp0.letterSpacing = 0;
+        sp0.lineSpacing = 0;
+        sp0.fgColor = 7;
+        sp0.bgColor = 15;
+        sp0.shadowColor = 9;
+        break;
+    case 6:
+        sp0.letterSpacing = 0;
+        sp0.lineSpacing = 0;
+        sp0.fgColor = 14;
+        sp0.bgColor = 15;
+        sp0.shadowColor = 9;
+        break;
+    }
+
+    AddTextPrinter(&sp0, 0xFF, NULL);
+}
+
+void sub_8017580(struct UnkStruct_x20 *arg0, u8 count)
+{
+    s32 i;
+
+    for (i = 0; i < count; i++)
+    {
+        arg0[i].unk = gUnknown_082F045C;
+        arg0[i].field_18 = 0xFF;
+        arg0[i].field_1A_0 = 0;
+        arg0[i].field_1A_1 = 0;
+        arg0[i].field_1B = 0;
+    }
+}
+
+void sub_80175EC(struct UnkStruct_Main4 *arg0, u8 count)
+{
+    s32 i;
+
+    for (i = 0; i < 4; i++)
+    {
+        arg0->arr[i].unk0 = gUnknown_082F045C;
+        arg0->arr[i].unk18 = 0;
+    }
+}
+
+bool8 sub_8017630(struct UnkStruct_Shared* arg0, const struct UnkStruct_Shared* arg1)
+{
+    s32 i;
+
+    for (i = 0; i < 2; i++)
+    {
+        if (arg0->field_0.unk_00.playerTrainerId[i] != arg1->field_0.unk_00.playerTrainerId[i])
+        {
+            return TRUE;
+        }
+    }
+
+    for (i = 0; i < 8; i++)
+    {
+        if (arg0->playerName[i] != arg1->playerName[i])
+        {
+            return TRUE;
+        }
+    }
+
+    return FALSE;
+}
+
+bool32 sub_8017678(struct UnkStruct_Shared *arg0, struct UnkStruct_Shared *arg1)
+{
+    s32 i;
+
+    if (arg0->field_0.unk_0a_0 != arg1->field_0.unk_0a_0)
+    {
+        return TRUE;
+    }
+
+    if (arg0->field_0.unk_0a_7 != arg1->field_0.unk_0a_7)
+    {
+        return TRUE;
+    }
+
+    for (i = 0; i < 4; i++)
+    {
+        if (arg0->field_0.unk_04[i] != arg1->field_0.unk_04[i])
+        {
+            return TRUE;
+        }
+    }
+
+    if (arg0->field_0.species != arg1->field_0.species)
+    {
+        return TRUE;
+    }
+
+    if (arg0->field_0.type != arg1->field_0.type)
+    {
+        return TRUE;
+    }
+
+    return FALSE;
+}
+
+u32 sub_80176E4(struct UnkStruct_x20 *arg0, struct UnkStruct_x1C *arg1)
+{
+    u8 result = 0xFF;
+    s32 i;
+
+    for (i = 0; i < 4; i++)
+    {
+        if (arg1[i].unk18 && !sub_8017630(&arg0->unk, &arg1[i].unk0))
+        {
+            result = i;
+            arg1[i].unk18 = FALSE;
+        }
+    }
+
+    return result;
+}
+
+u8 sub_8017734(struct UnkStruct_x20 *arg0, struct UnkStruct_x1C *arg1, u8 arg2)
+{
+    s32 i;
+
+    if (arg1->unk18)
+    {
+        for (i = 0; i < arg2; i++)
+        {
+            if (arg0[i].field_1A_0 == 0)
+            {
+                arg0[i].unk = arg1->unk0;
+                arg0[i].field_18 = 0;
+                arg0[i].field_1A_0 = 1;
+                arg0[i].field_1B = 64;
+                arg1->unk18 = FALSE;
+                return i;
+            }
+        }
+    }
+
+    return 0xFF;
+}
+
+void sub_80177B8(u8 arg0, u8 arg1, u8 arg2, struct UnkStruct_x20 *arg3, u8 arg4, u8 id)
+{
+    u8 r2;
+    u8 sp0[6];
+
+    ConvertIntToDecimalStringN(gStringVar4, id + 1, STR_CONV_MODE_LEADING_ZEROS, 2);
+    StringAppend(gStringVar4, gText_Colon);
+    sub_80173E0(arg0, 1, gStringVar4, arg1, arg2, 0);
+    arg1 += 18;
+    r2 = arg3->unk.field_0.unk_0a_0;
+    if (arg3->field_1A_0 == 1 && !(r2 & 0x40))
+    {
+        sub_8018404(gStringVar4, arg3);
+        sub_80173E0(arg0, 1, gStringVar4, arg1, arg2, arg4);
+        ConvertIntToDecimalStringN(sp0, arg3->unk.field_0.unk_00.playerTrainerId[0] | (arg3->unk.field_0.unk_00.playerTrainerId[1] << 8), STR_CONV_MODE_LEADING_ZEROS, 5);
+        StringCopy(gStringVar4, gText_UnkCtrlCodeF907);
+        StringAppend(gStringVar4, sp0);
+        sub_80173E0(arg0, 1, gStringVar4, GetStringRightAlignXOffset(1, gStringVar4, 0x88), arg2, arg4);
+    }
+}
+
+void sub_80178A0(u8 arg0, u8 arg1, u8 arg2, struct UnkStruct_x20 *arg3, u8 arg4, u8 id)
+{
+    u8 sp0[6];
+
+    if (arg3->field_1A_0 == 1)
+    {
+        sub_8018404(gStringVar4, arg3);
+        sub_80173E0(arg0, 1, gStringVar4, arg1, arg2, arg4);
+        ConvertIntToDecimalStringN(sp0, arg3->unk.field_0.unk_00.playerTrainerId[0] | (arg3->unk.field_0.unk_00.playerTrainerId[1] << 8), STR_CONV_MODE_LEADING_ZEROS, 5);
+        StringCopy(gStringVar4, gText_UnkCtrlCodeF907);
+        StringAppend(gStringVar4, sp0);
+        sub_80173E0(arg0, 1, gStringVar4, GetStringRightAlignXOffset(1, gStringVar4, 0x68), arg2, arg4);
+    }
+}
+
+bool32 sub_8017940(void)
+{
+    s16 x, y;
+    GetXYCoordsOneStepInFrontOfPlayer(&x, &y);
+    if (x != 9)
+    {
+        return FALSE;
+    }
+    if (y != 8)
+    {
+        return FALSE;
+    }
+    if (gPlayerAvatar.tileTransitionState == 2 || gPlayerAvatar.tileTransitionState == 0)
+    {
+        return TRUE;
+    }
+
+    return FALSE;
+}
+
+u32 sub_8017984(s32 arg0)
+{
+    switch (arg0)
+    {
+    case 5:
+        return 1;
+    case 4:
+        return 2;
+    case 8:
+        return 3;
+    case 3:
+    default:
+        return 0;
+    }
+}
+
+u32 sub_80179AC(struct UnkStruct_x20 *arg0)
+{
+    u8 sp0[30];
+    sub_8018404(sp0, arg0);
+    return sub_800E540(ReadAsU16(arg0->unk.field_0.unk_00.playerTrainerId), sp0);
+}
+
+s32 sub_80179D4(struct UnkStruct_Main0 *arg0, u8 arg1, u8 arg2, u32 playerGender)
+{
+    bool32 r2;
+
+    struct UnkStruct_x20 * r5 = &arg0->arr[arg2];
+
+    if (!r5->unk.field_0.unk_0a_7 && arg1 == 0)
+    {
+        sub_8018404(gStringVar1, r5);
+        r2 = sub_800E540(ReadAsU16(r5->unk.field_0.unk_00.playerTrainerId), gStringVar1);
+        if (r5->unk.field_0.unk_0a_0 == 0x45)
+        {
+            StringExpandPlaceholders(gStringVar4, gUnknown_082EE6B8[r2][playerGender]);
+            return 2;
+        }
+        else
+        {
+            sub_8017020(gUnknown_082EE17C[r2]);
+            return 1;
+        }
+    }
+    else
+    {
+        sub_8018404(gStringVar1, r5);
+        if (arg1 != 0)
+        {
+            playerGender = (r5->unk.field_0.unk_00.playerTrainerId[arg1 + 1] >> 3) & 1;
+        }
+        switch (r5->unk.field_0.unk_0a_0 & 0x3F)
+        {
+        case 1:
+            StringExpandPlaceholders(gStringVar4, gUnknown_082EEEAC[playerGender][Random() % 4]);
+            break;
+        case 4:
+            StringExpandPlaceholders(gStringVar4, gUnknown_082EF1CC[playerGender][Random() % 2]);
+            break;
+        case 5:
+            StringExpandPlaceholders(gStringVar4, gUnknown_082EF010[playerGender][Random() % 4]);
+            break;
+        case 8:
+            StringExpandPlaceholders(gStringVar4, gUnknown_082EF100[playerGender][Random() % 2]);
+            break;
+        default:
+            StringExpandPlaceholders(gStringVar4, gUnknown_082EE6C8);
+            break;
+        }
+        return 0;
+    }
+}
+
+void nullsub_14(u8 windowId, s32 itemId, u8 y)
+{
+
+}
+
+void sub_8017B3C(u8 arg0, u8 arg1, struct UnkLinkRfuStruct_02022B14 * arg2, const u8 * str, u8 arg4)
+{
+    u8 sp8[4];
+    u16 r8 = arg2->species;
+    u8 r7 = arg2->type;
+    u8 r9 = arg2->unk_0b_1;
+
+    sub_80173E0(arg0, 1, str, 8, arg1, arg4);
+    if (r8 == SPECIES_EGG)
+    {
+        sub_80173E0(arg0, 1, gUnknown_082EF7D0, 0x44, arg1, arg4);
+    }
+    else
+    {
+        blit_move_info_icon(arg0, r7 + 1, 0x44, arg1);
+        sub_80173E0(arg0, 1, gSpeciesNames[r8], 0x76, arg1, arg4);
+        ConvertIntToDecimalStringN(sp8, r9, STR_CONV_MODE_RIGHT_ALIGN, 3);
+        sub_80173E0(arg0, 1, sp8, 0xC6, arg1, arg4);
+    }
+}
+
+void sub_8017BE8(u8 windowId, s32 itemId, u8 y)
+{
+    struct UnkStruct_Leader *leader = gUnknown_02022C30.leader;
+    struct UnkLinkRfuStruct_02022B14 *rfu;
+    s32 i, j;
+    u8 sp4[11];
+
+    if (itemId == -3 && y == gUnknown_082F03A4.upText_Y)
+    {
+        rfu = sub_800F7DC();
+        if (rfu->species != SPECIES_NONE)
+        {
+            sub_8017B3C(windowId, y, rfu, gSaveBlock2Ptr->playerName, 5);
+        }
+    }
+    else
+    {
+        j = 0;
+        for (i = 0; i < 8; i++)
+        {
+            if (leader->field_0->arr[i].field_1A_0 == 1 && leader->field_0->arr[i].unk.field_0.species != SPECIES_NONE)
+            {
+                j++;
+            }
+            if (j == itemId + 1)
+            {
+                sub_8018404(sp4, &leader->field_0->arr[i]);
+                sub_8017B3C(windowId, y, &leader->field_0->arr[i].unk.field_0, sp4, 6);
+                break;
+            }
+        }
+    }
+}
+
+s32 sub_8017CB0(struct UnkStruct_x20 * arg, s32 arg1)
+{
+    s32 i;
+    s32 j = 0;
+
+    for (i = 0; i < 8; i++)
+    {
+        if (arg[i].field_1A_0 == 1 && arg[i].unk.field_0.species != SPECIES_NONE)
+        {
+            j++;
+        }
+        if (j == arg1 + 1)
+        {
+            return i;
+        }
+    }
+
+    return -1;
+}
+
+s32 sub_8017CF8(s32 arg1, struct UnkStruct_Main0 *arg0)
+{
+    return arg0->arr[arg1].unk.field_0.playerGender;
+}
+
+s32 sub_8017D04(u32 type, u32 species)
+{
+    s32 i;
+
+    if (species == SPECIES_EGG)
+    {
+        for (i = 0; i < gPlayerPartyCount; i++)
+        {
+            species = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2);
+            if (species == SPECIES_EGG)
+            {
+                return 0;
+            }
+        }
+        return 2;
+    }
+    else
+    {
+        for (i = 0; i < gPlayerPartyCount; i++)
+        {
+            species = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2);
+            if (gBaseStats[species].type1 == type || gBaseStats[species].type2 == type)
+            {
+                return 0;
+            }
+        }
+        return 1;
+    }
+}
+
+void sub_8017D9C(u8 *dst, s32 arg1, u32 playerGender)
+{
+    switch (arg1)
+    {
+    case 0x41:
+        StringExpandPlaceholders(dst, gUnknown_082EEA68[playerGender]);
+        break;
+    case 0x45:
+        StringExpandPlaceholders(dst, gUnknown_082EED3C[playerGender]);
+        break;
+    case 0x44:
+        StringExpandPlaceholders(dst, gUnknown_082EF7B0);
+        break;
+    case 0x48:
+        StringExpandPlaceholders(dst, gUnknown_082EEB08[playerGender]);
+        break;
+    }
+}
+
+void sub_8017E00(u8 *dst, u8 arg1)
+{
+    u8 mpId = GetMultiplayerId();
+    u8 gender = gLinkPlayers[mpId ^ 1].gender;
+
+    switch (arg1)
+    {
+    case 0x41:
+        StringCopy(dst, gUnknown_082EE984[mpId][gender][0]);
+        break;
+    case 0x44:
+        StringCopy(dst, gUnknown_082EE984[mpId][gender][2]);
+        break;
+    case 0x45:
+        StringCopy(dst, gUnknown_082EE984[mpId][gender][1]);
+        break;
+    }
+}
+
+s32 sub_8017EA0(u8 *dst, u32 gender, u16 *arg2, struct UnkStruct_URoom *arg3)
+{
+    s32 result = 0;
+    u16 species = SPECIES_NONE;
+    s32 i;
+
+    switch (arg2[0])
+    {
+    case 0x41:
+        StringExpandPlaceholders(dst, gUnknown_082EE3DC);
+        result = 1;
+        break;
+    case 0x45:
+        StringExpandPlaceholders(dst, gUnknown_082EE430);
+        result = 1;
+        break;
+    case 0x44:
+        ConvertIntToDecimalStringN(arg3->field_58 + 0x00, gUnknown_02022C40.playerLevel, STR_CONV_MODE_LEFT_ALIGN, 3);
+        StringCopy(arg3->field_58 + 0x10, gSpeciesNames[gUnknown_02022C40.playerSpecies]);
+        for (i = 0; i < 4; i++)
+        {
+            if (gUnknown_03007890->unk_14[i].unk_04 == 2)
+            {
+                ConvertIntToDecimalStringN(arg3->field_58 + 0x20, arg2[2], STR_CONV_MODE_LEFT_ALIGN, 3);
+                StringCopy(arg3->field_58 + 0x30, gSpeciesNames[arg2[1]]);
+                species = arg2[1];
+                break;
+            }
+        }
+        if (species == SPECIES_EGG)
+        {
+            StringCopy(dst, gUnknown_082EE4F0);
+        }
+        else
+        {
+            for (i = 0; i < 4; i++)
+            {
+                DynamicPlaceholderTextUtil_SetPlaceholderPtr(i, arg3->field_58 + 0x10 * i);
+            }
+            DynamicPlaceholderTextUtil_ExpandPlaceholders(dst, gUnknown_082EE47C);
+        }
+        result = 1;
+        break;
+    case 0x48:
+        StringExpandPlaceholders(dst, gUnknown_082EE380);
+        result = 1;
+        break;
+    case 0x40:
+        StringExpandPlaceholders(dst, gUnknown_082EE544);
+        result = 2;
+        break;
+    }
+
+    return result;
+}
+
+bool32 sub_8017FD8(struct UnkStruct_URoom *arg0)
+{
+    if (gRecvCmds[0][1] != 0)
+    {
+        if (gRecvCmds[0][1] == 0x51)
+        {
+            arg0->field_98 = 0x51;
+            return TRUE;
+        }
+        else if (gRecvCmds[0][1] == 0x52)
+        {
+            arg0->field_98 = 0x52;
+            return TRUE;
+        }
+    }
+    return FALSE;
+}
+
+bool32 InUnionRoom(void)
+{
+    return    gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(UNION_ROOM)
+           && gSaveBlock1Ptr->location.mapNum == MAP_NUM(UNION_ROOM)
+           ? TRUE : FALSE;
+}
+
+bool32 sub_8018024(void)
+{
+    s32 i;
+    s32 count = 0;
+
+    for (i = 0; i < gPlayerPartyCount; i++)
+    {
+        if (   GetMonData(&gPlayerParty[i], MON_DATA_LEVEL) <= 30
+            && GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2) != SPECIES_EGG)
+        {
+            count++;
+        }
+    }
+
+    if (count > 1)
+    {
+        return TRUE;
+    }
+    else
+    {
+        return FALSE;
+    }
+}
+
+void sub_801807C(struct TradeUnkStruct *arg0)
+{
+    arg0->field_0 = 0;
+    arg0->type = 0;
+    arg0->playerPersonality = 0;
+    arg0->playerSpecies = 0;
+    arg0->playerLevel = 0;
+    arg0->species = 0;
+    arg0->level = 0;
+    arg0->personality = 0;
+}
+
+void sub_8018090(void)
+{
+    sub_801807C(&gUnknown_02022C40);
+}
+
+bool32 sub_80180A0(u32 monId, struct TradeUnkStruct *arg1)
+{
+    arg1->playerSpecies = GetMonData(&gPlayerParty[monId], MON_DATA_SPECIES2);
+    arg1->playerLevel = GetMonData(&gPlayerParty[monId], MON_DATA_LEVEL);
+    arg1->playerPersonality = GetMonData(&gPlayerParty[monId], MON_DATA_PERSONALITY);
+    if (arg1->playerSpecies == SPECIES_EGG)
+    {
+        return TRUE;
+    }
+    else
+    {
+        return FALSE;
+    }
+}
+
+void sub_80180E8(u32 monId, struct TradeUnkStruct *arg1)
+{
+    arg1->species = GetMonData(&gPlayerParty[monId], MON_DATA_SPECIES2);
+    arg1->level = GetMonData(&gPlayerParty[monId], MON_DATA_LEVEL);
+    arg1->personality = GetMonData(&gPlayerParty[monId], MON_DATA_PERSONALITY);
+}
+
+u32 sub_8018120(struct TradeUnkStruct *arg0, u8 multiplayerId)
+{
+    u16 response = 0;
+    u16 species;
+    u32 personality;
+    u32 cur_personality;
+    u16 cur_species;
+    s32 i;
+
+    if (multiplayerId == 0)
+    {
+        species = arg0->playerSpecies;
+        personality = arg0->playerPersonality;
+    }
+    else
+    {
+        species = arg0->species;
+        personality = arg0->personality;
+    }
+
+    for (i = 0; i < gPlayerPartyCount; i++)
+    {
+        cur_personality = GetMonData(&gPlayerParty[i], MON_DATA_PERSONALITY);
+        if (cur_personality != personality)
+        {
+            continue;
+        }
+        cur_species = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2);
+        if (cur_species != species)
+        {
+            continue;
+        }
+        response = i;
+        break;
+    }
+
+    return response;
+}
+
+void sub_801818C(bool32 arg0)
+{
+    sub_80173B0();
+    ScriptContext2_Disable();
+    sub_8098524();
+    gUnknown_02022C2C = 0;
+    if (arg0)
+    {
+        sub_8010FCC(gUnknown_02022C40.type, gUnknown_02022C40.playerSpecies, gUnknown_02022C40.playerLevel);
+        sub_8011090(0x40, 0, 0);
+    }
+}
+
+void sub_80181CC(void)
+{
+    ScriptContext2_Enable();
+    ScriptFreezeEventObjects();
+}
+
+u8 sub_80181DC(struct UnkStruct_URoom *arg0)
+{
+    u8 retVal = 0x80;
+    u8 i;
+
+    for (i = 0; i < 4; i++)
+    {
+        if (arg0->field_C->arr[i].unk18)
+        {
+            retVal |= arg0->field_C->arr[i].unk0.field_0.playerGender << 3;
+            retVal |= arg0->field_C->arr[i].unk0.field_0.unk_00.playerTrainerId[0] & 7;
+            break;
+        }
+    }
+
+    return retVal;
+}
+
+void sub_8018220(u8 *unused, struct UnkStruct_URoom *arg1, bool8 arg2)
+{
+    struct TrainerCard *trainerCard = &gTrainerCards[GetMultiplayerId() ^ 1];
+    s32 i;
+    s32 n;
+
+    DynamicPlaceholderTextUtil_Reset();
+
+    StringCopy(arg1->field_C0[0], gTrainerClassNames[sub_8068BB0()]);
+    DynamicPlaceholderTextUtil_SetPlaceholderPtr(0, arg1->field_C0[0]);
+
+    DynamicPlaceholderTextUtil_SetPlaceholderPtr(1, trainerCard->playerName);
+
+    StringCopy(arg1->field_174, gUnknown_082EFF50[trainerCard->stars]);
+    DynamicPlaceholderTextUtil_SetPlaceholderPtr(2, arg1->field_174);
+
+    ConvertIntToDecimalStringN(arg1->field_C0[2], trainerCard->caughtMonsCount, STR_CONV_MODE_LEFT_ALIGN, 3);
+    DynamicPlaceholderTextUtil_SetPlaceholderPtr(3, arg1->field_C0[2]);
+
+    ConvertIntToDecimalStringN(arg1->field_C0[3], trainerCard->playTimeHours, STR_CONV_MODE_LEFT_ALIGN, 3);
+    ConvertIntToDecimalStringN(arg1->field_C0[4], trainerCard->playTimeMinutes, STR_CONV_MODE_LEADING_ZEROS, 2);
+    DynamicPlaceholderTextUtil_SetPlaceholderPtr(4, arg1->field_C0[3]);
+    DynamicPlaceholderTextUtil_SetPlaceholderPtr(5, arg1->field_C0[4]);
+
+    DynamicPlaceholderTextUtil_ExpandPlaceholders(arg1->field_1A4, gUnknown_082EFF64);
+    StringCopy(gStringVar4, arg1->field_1A4);
+
+    n = trainerCard->linkBattleWins;
+    if (n > 9999)
+    {
+        n = 9999;
+    }
+    ConvertIntToDecimalStringN(arg1->field_C0[0], n, STR_CONV_MODE_LEFT_ALIGN, 4);
+    DynamicPlaceholderTextUtil_SetPlaceholderPtr(0, arg1->field_C0[0]);
+
+    n = trainerCard->linkBattleLosses;
+    if (n > 9999)
+    {
+        n = 9999;
+    }
+    ConvertIntToDecimalStringN(arg1->field_C0[1], n, STR_CONV_MODE_LEFT_ALIGN, 4);
+    DynamicPlaceholderTextUtil_SetPlaceholderPtr(2, arg1->field_C0[1]);
+
+    ConvertIntToDecimalStringN(arg1->field_C0[2], trainerCard->pokemonTrades, STR_CONV_MODE_LEFT_ALIGN, 5);
+    DynamicPlaceholderTextUtil_SetPlaceholderPtr(3, arg1->field_C0[2]);
+
+    for (i = 0; i < 4; i++)
+    {
+        CopyEasyChatWord(arg1->field_C0[i + 3], trainerCard->var_28[i]);
+        DynamicPlaceholderTextUtil_SetPlaceholderPtr(i + 4, arg1->field_C0[i + 3]);
+    }
+
+    DynamicPlaceholderTextUtil_ExpandPlaceholders(arg1->field_1A4, gUnknown_082EFFA4);
+    StringAppend(gStringVar4, arg1->field_1A4);
+
+    if (arg2 == TRUE)
+    {
+        DynamicPlaceholderTextUtil_ExpandPlaceholders(arg1->field_1A4, gUnknown_082F0020);
+        StringAppend(gStringVar4, arg1->field_1A4);
+    }
+    else if (arg2 == FALSE)
+    {
+        DynamicPlaceholderTextUtil_ExpandPlaceholders(arg1->field_1A4, gUnknown_082F0018[trainerCard->gender]);
+        StringAppend(gStringVar4, arg1->field_1A4);
+    }
+}
+
+void sub_8018404(u8 *dest, struct UnkStruct_x20 *arg1)
+{
+    StringCopy7(dest, arg1->unk.playerName);
+    ConvertInternationalString(dest, arg1->unk.field_0.unk_00.unk_00_0);
+}

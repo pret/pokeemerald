@@ -73,7 +73,7 @@ void sub_8118FBC(int bgId, u8 arg1, u8 arg2, u8 battlerPosition, u8 arg4, u8 *ar
 void HandleIntroSlide(u8 terrainId);
 int GetAnimBgAttribute(u8 bgId, u8 attributeId);
 
-// battle_anim_80A5C6C.s
+// battle_anim_mons.s
 void TranslateSpriteInEllipseOverDuration(struct Sprite *sprite);
 void sub_80A8AEC(struct Sprite *sprite);
 void sub_80A8A6C(struct Sprite *sprite);
@@ -155,6 +155,9 @@ void sub_80A6DEC(struct Sprite *sprite);
 void DestroyAnimVisualTaskAndDisableBlend(u8 taskId);
 void DestroySpriteAndFreeResources_(struct Sprite *sprite);
 void SetBattlerSpriteYOffsetFromOtherYScale(u8 spriteId, u8 otherSpriteId);
+u8 GetBattlerSide(u8 battler);
+u8 GetBattlerPosition(u8 battler);
+u8 GetBattlerAtPosition(u8 position);
 
 enum
 {
@@ -193,7 +196,7 @@ u8 GetSubstituteSpriteDefault_Y(u8 battlerId);
 void sub_80A64EC(struct Sprite *sprite);
 void sub_80A718C(struct Sprite *sprite);
 
-// battle_anim_80A9C70.s
+// battle_anim_status_effects.s
 #define STAT_ANIM_PLUS1  15
 #define STAT_ANIM_PLUS2  39
 #define STAT_ANIM_MINUS1 22
@@ -204,13 +207,11 @@ void sub_80A718C(struct Sprite *sprite);
 #define STAT_ANIM_MULTIPLE_MINUS2 58
 void LaunchStatusAnimation(u8 battlerId, u8 statusAnimId);
 
-// battle_anim_8170478.c
-void sub_8172EF0(u8 battler, struct Pokemon *mon);
-
 // ground.c
 void sub_81152DC(u8 taskId);
 
-// battle_anim_8170478.s
+// battle_anim_special.c
+void sub_8172EF0(u8 battler, struct Pokemon *mon);
 u8 ItemIdToBallId(u16 itemId);
 u8 AnimateBallOpenParticles(u8 x, u8 y, u8 priority, u8 subpriority, u8 ballId);
 u8 LaunchBallFadeMonTask(bool8 unFadeLater, u8 battlerId, u32 selectedPalettes, u8 ballId);

@@ -13,6 +13,7 @@
 #include "string_util.h"
 #include "link_rfu.h"
 #include "mevent.h"
+#include "mystery_gift.h"
 
 struct UnkStruct_8467FB8
 {
@@ -723,7 +724,7 @@ void sub_801CC80(void)
     }
 }
 
-u8 sub_801CCD0(u16 input)
+u32 sub_801CCD0(u16 input)
 {
     if (gUnknown_02022C78->unk_01C2_0)
     {

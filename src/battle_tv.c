@@ -1,6 +1,7 @@
 #include "global.h"
 #include "pokemon.h"
 #include "battle.h"
+#include "battle_anim.h"
 #include "battle_tv.h"
 #include "constants/battle_string_ids.h"
 #include "constants/battle_anim.h"

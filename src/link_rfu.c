@@ -11,13 +11,13 @@
 #include "overworld.h"
 #include "random.h"
 #include "palette.h"
-#include "rom_8011DC0.h"
+#include "union_room.h"
 #include "string_util.h"
 #include "task.h"
 #include "text.h"
 #include "constants/species.h"
 #include "save.h"
-#include "rom_8011DC0.h"
+#include "mystery_gift.h"
 
 extern u16 gHeldKeyCodeToSend;
 
@@ -310,10 +310,22 @@ const char gUnknown_082ED7EC[] = "PokemonSioInfo";
 const char gUnknown_082ED7FC[] = "LINK LOSS DISCONNECT!";
 const char gUnknown_082ED814[] = "LINK LOSS RECOVERY NOW";
 
-extern const char gUnknown_082ED82C[];
-extern const char gUnknown_082ED84B[];
-extern const char gUnknown_082ED85B[];
-extern const char gUnknown_082ED868[];
+ALIGNED(4) const char gUnknown_082ED82C[31] = {' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',0x00};
+const char gUnknown_082ED84B[16] = {' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',0x00};
+const char gUnknown_082ED85B[9] = {' ',' ',' ',' ',' ',' ',' ',' ',0x00};
+ALIGNED(4) const char gUnknown_082ED864[2] = {' ',0x00};
+const char gUnknown_082ED866[2] = {'*',0x00};
+const char gUnknown_082ED868[8] = "NOWSLOT";
+const char gUnknown_082ED870[12] = "           ";
+const char gUnknown_082ED87C[12] = "CLOCK DRIFT";
+const char gUnknown_082ED888[12] = "BUSY SEND  ";
+const char gUnknown_082ED894[12] = "CMD REJECT ";
+const char gUnknown_082ED8A0[12] = "CLOCK SLAVE";
+const char gUnknown_082ED8A8[3][8] = {
+    "CHILD ",
+    "PARENT",
+    "SEARCH"
+};
 
 // .text
 
