@@ -417,5 +417,6 @@ void sub_8097C44(u8 var, bool32 var2);
 bool32 sub_8097C8C(u8 var);
 void sub_8097BB4(u8 var1, u8 graphicsId);
 void sub_8097CC4(u8 var1, u8 var2);
+bool32 sub_8097D9C(u8 var);
 
 #endif //GUARD_FIELD_EVENT_OBJ_H

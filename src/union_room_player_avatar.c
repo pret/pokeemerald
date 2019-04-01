@@ -14,7 +14,7 @@ EWRAM_DATA u32 gUnknown_02022C68 = 0;
 
 u8 sub_8019DF4(void);
 bool32 sub_8019F8C(u32 playerIdx, u32 arg1);
-void sub_801A3B0(u32 arg0, u32 arg1, u8 arg2);
+void sub_801A3B0(s32 arg0, s32 arg1, u8 arg2);
 
 ALIGNED(4) const u8 gUnknown_082F072C[][10] = {
     {0x21, 0x2c, 0x1f, 0x23, 0x25, 0x24, 0x41, 0x42},
@@ -459,4 +459,153 @@ void sub_801A02C(u32 a0, u32 a1)
     sub_8097CC4(5 * a0 + a1 - 0x38, 2);
     sub_8019990(a0, a1, &x, &y);
     sub_8088B94(x, y, 0);
+}
+
+void sub_801A064(u32 r7, struct UnkLinkRfuStruct_02022B14 * r8)
+{
+    s16 x, y, x2, y2;
+    s32 i;
+
+    PlayerGetDestCoords(&x, &y);
+    player_get_pos_including_state_based_drift(&x2, &y2);
+    if (sub_8097C8C(5 * r7 - 0x38) == 1)
+    {
+        if (sub_80199E0(r7, 0, x, y) == 1 || sub_80199E0(r7, 0, x2, y2) == 1)
+        {
+            return;
+        }
+        sub_8019FA4(r7, 0, sub_8019978(r8->playerGender, r8->unk_00.playerTrainerId[0]), r8);
+    }
+    for (i = 1; i < 5; i++)
+    {
+        if (r8->unk_04[i - 1] == 0)
+        {
+            sub_801A02C(r7, i);
+        }
+        else if (sub_80199E0(r7, i, x, y) == 0 && sub_80199E0(r7, i, x2, y2) == 0)
+        {
+            sub_8019FA4(r7, i, sub_8019978((r8->unk_04[i - 1] >> 3) & 1, r8->unk_04[i - 1] & 7), r8);
+        }
+    }
+}
+
+void sub_801A16C(u32 r5, struct UnkLinkRfuStruct_02022B14 * r4)
+{
+    u32 i;
+    switch (r4->unk_0a_0)
+    {
+    case 0x40:
+    case 0x54:
+        sub_8019CF0(r5, r4->playerGender, r4->unk_00.playerTrainerId[0]);
+        for (i = 0; i < 5; i++)
+        {
+            sub_801A02C(r5, i);
+        }
+        break;
+    case 0x41:
+    case 0x44:
+    case 0x45:
+    case 0x48:
+    case 0x51:
+    case 0x52:
+    case 0x53:
+        sub_8019D20(r5);
+        sub_801A064(r5, r4);
+        break;
+    }
+}
+
+void sub_801A214(u32 r5, struct UnkLinkRfuStruct_02022B14 * unused)
+{
+    s32 i;
+    sub_8019D20(r5);
+    for (i = 0; i < 5; i++)
+    {
+        sub_801A02C(r5, i);
+    }
+}
+
+void sub_801A234(struct UnkStruct_URoom *r0)
+{
+    s32 i;
+    struct UnkStruct_x20 * r4;
+    gUnknown_02022C68 = 0;
+    for (i = 0, r4 = r0->field_0->arr; i < 8; i++)
+    {
+        if (r4[i].field_1A_0 == 1)
+        {
+            sub_801A16C(i, &r4[i].unk.field_0);
+        }
+        else if (r4[i].field_1A_0 == 2)
+        {
+            sub_801A214(i, &r4[i].unk.field_0);
+        }
+    }
+}
+
+void sub_801A274(void)
+{
+    gUnknown_02022C68 = 300;
+}
+
+void sub_801A284(struct UnkStruct_URoom *r2)
+{
+    if (++gUnknown_02022C68 > 300)
+    {
+        sub_801A234(r2);
+    }
+}
+
+bool32 sub_801A2A8(struct UnkStruct_Main0 *arg0, s16 *arg1, s16 *arg2, u8 *arg3)
+{
+    s16 x, y;
+    s32 i, j;
+    struct UnkStruct_x20 * r4;
+    if (!is_walking_or_running())
+    {
+        return FALSE;
+    }
+    GetXYCoordsOneStepInFrontOfPlayer(&x, &y);
+    for (i = 0, r4 = arg0->arr; i < 8; i++)
+    {
+        for (j = 0; j < 5; j++)
+        {
+            s32 r3 = 5 * i + j;
+            if (x != gUnknown_082F0740[i][0] + gUnknown_082F0760[j][0] + 7)
+            {
+                continue;
+            }
+            if (y != gUnknown_082F0740[i][1] + gUnknown_082F0760[j][1] + 7)
+            {
+                continue;
+            }
+            if (sub_8097C8C(r3 - 0x38) != 0)
+            {
+                continue;
+            }
+            if (sub_8097D9C(r3 - 0x38) != 0)
+            {
+                continue;
+            }
+            if (r4[i].field_1A_0 != 1)
+            {
+                continue;
+            }
+            sub_801A3B0(j, i, gUnknown_082F076A[GetPlayerFacingDirection()]);
+            *arg1 = j;
+            *arg2 = i;
+            return TRUE;
+        }
+    }
+    return FALSE;
+}
+
+void sub_801A3B0(s32 arg0, s32 arg1, u8 arg2)
+{
+    sub_8097B78(5 * arg1 - 0x38 + arg0, arg2);
+}
+
+void sub_801A3D0(u32 arg0, u32 arg1, struct UnkStruct_Main0 *arg2)
+{
+    return sub_801A3B0(arg0, arg1, sub_8019F64(arg0, arg1, &arg2->arr[arg1].unk.field_0));
 }
