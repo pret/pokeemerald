@@ -3,6 +3,8 @@
 
 #include "sprite.h"
 
+#define MAX_RAIN_SPRITES 24
+
 // Controls how the weather should be changing the screen palettes.
 enum
 {
@@ -27,7 +29,7 @@ struct Weather
     {
         struct
         {
-            struct Sprite *rainSprites[24];
+            struct Sprite *rainSprites[MAX_RAIN_SPRITES];
             struct Sprite *snowflakeSprites[101];
             struct Sprite *cloudSprites[3];
         } s1;
@@ -62,12 +64,12 @@ struct Weather
     bool8 weatherChangeComplete;
     u8 weatherPicSpritePalIndex;
     u8 altGammaSpritePalIndex;
-    u16 unknown_6D6;
-    u8 unknown_6D8;
-    u8 unknown_6D9;
+    u16 rainSpriteVisibleCounter;
+    u8 curRainSpriteIndex;
+    u8 maxRainSprites;
     u8 rainSpriteCount;
-    u8 unknown_6DB;
-    u8 unknown_6DC;
+    u8 rainSpriteVisibleDelay;
+    u8 isHeavyRain;
     u8 rainStrength;
     /*0x6DE*/ u8 cloudSpritesCreated;
     u8 filler_6DF[1];

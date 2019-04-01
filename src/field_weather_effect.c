@@ -12,9 +12,6 @@
 #include "trig.h"
 #include "gpu_regs.h"
 
-// This file's functions.
-void sub_80AC6B4(struct Sprite *);
-
 // EWRAM
 EWRAM_DATA static u8 gCurrentAlternatingWeather = 0;
 EWRAM_DATA static u16 gUnusedWeatherRelated = 0;
@@ -32,6 +29,12 @@ const u8 gWeatherAshTiles[] = INCBIN_U8("graphics/weather/ash.4bpp");
 const u8 gWeatherRainTiles[] = INCBIN_U8("graphics/weather/rain.4bpp");
 const u8 gWeatherSandstormTiles[] = INCBIN_U8("graphics/weather/sandstorm.4bpp");
 
+//------------------------------------------------------------------------------
+// Clouds
+//------------------------------------------------------------------------------
+
+static void sub_80AC6B4(struct Sprite *);
+
 static const struct Coords16 gUnknown_0854FB50[] =
 {
     { 0, 66},
@@ -39,7 +42,12 @@ static const struct Coords16 gUnknown_0854FB50[] =
     {10, 78},
 };
 
-static const struct SpriteSheet sCloudSpriteSheet = {gWeatherCloudTiles, sizeof(gWeatherCloudTiles), 0x1200};
+static const struct SpriteSheet sCloudSpriteSheet =
+{
+    .data = gWeatherCloudTiles,
+    .size = sizeof(gWeatherCloudTiles),
+    .tag = 0x1200
+};
 
 static const struct OamData gOamData_839A9DC =
 {
@@ -79,10 +87,6 @@ static const struct SpriteTemplate sCloudSpriteTemplate =
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = sub_80AC6B4,
 };
-
-//------------------------------------------------------------------------------
-// Clouds
-//------------------------------------------------------------------------------
 
 void Clouds_InitVars(void)
 {
@@ -214,7 +218,7 @@ void sub_807E0A0(void)
     gWeatherPtr->cloudSpritesCreated = FALSE;
 }
 
-void sub_80AC6B4(struct Sprite *sprite)
+static void sub_80AC6B4(struct Sprite *sprite)
 {
     sprite->data[0] = (sprite->data[0] + 1) & 1;
     if (sprite->data[0] != 0)
@@ -350,197 +354,11 @@ void task50_0807B6D4(u8 taskId)
 // Light Rain
 //------------------------------------------------------------------------------
 
-void LightRain_InitVars(void)
-{
-    gWeatherPtr->initStep = 0;
-    gWeatherPtr->weatherGfxLoaded = FALSE;
-    gWeatherPtr->unknown_6D6 = 0;
-    gWeatherPtr->unknown_6DB = 8;
-    gWeatherPtr->unknown_6DC = 0;
-    gWeatherPtr->unknown_6D9 = 10;
-    gWeatherPtr->gammaTargetIndex = 3;
-    gWeatherPtr->gammaStepDelay = 20;
-    SetRainStrengthFromSoundEffect(SE_T_KOAME);
-}
-
-void LightRain_InitAll(void)
-{
-    LightRain_InitVars();
-    while (gWeatherPtr->weatherGfxLoaded == FALSE)
-        LightRain_Main();
-}
-
-void LoadRainSpriteSheet(void);
-u8 CreateRainSprite(void);
-u8 sub_807E8E8(void);
-
-void LightRain_Main(void)
-{
-    switch (gWeatherPtr->initStep)
-    {
-    case 0:
-        LoadRainSpriteSheet();
-        gWeatherPtr->initStep++;
-        break;
-    case 1:
-        if (CreateRainSprite() == 0)
-            gWeatherPtr->initStep++;
-        break;
-    case 2:
-        if (sub_807E8E8() == FALSE)
-        {
-            gWeatherPtr->weatherGfxLoaded = TRUE;
-            gWeatherPtr->initStep++;
-        }
-        break;
-    }
-}
-
-void DestroyRainSprites(void);
-
-bool8 LightRain_Finish(void)
-{
-    switch (gWeatherPtr->finishStep)
-    {
-    case 0:
-        if (gWeatherPtr->nextWeather == WEATHER_RAIN_LIGHT
-         || gWeatherPtr->nextWeather == WEATHER_RAIN_MED
-         || gWeatherPtr->nextWeather == WEATHER_RAIN_HEAVY)
-        {
-            gWeatherPtr->finishStep = 0xFF;
-            return FALSE;
-        }
-        else
-        {
-            gWeatherPtr->unknown_6D9 = 0;
-            gWeatherPtr->finishStep++;
-        }
-        // fall through
-    case 1:
-        if (sub_807E8E8() == FALSE)
-        {
-            DestroyRainSprites();
-            gWeatherPtr->finishStep++;
-            return FALSE;
-        }
-        return TRUE;
-    }
-    return FALSE;
-}
-
-// defined below
-extern const s16 gUnknown_0839AABC[][2];
-extern const u16 gUnknown_0839AAC4[][2];
-
-void sub_807E4EC(struct Sprite *sprite)
-{
-    u32 randVal;
-    u16 r6;
-    s32 r4;
-    s32 r0;
-
-    if (sprite->data[1] == 0)
-        sprite->data[1] = 361;
-    randVal = sprite->data[1] * 1103515245 + 12345;
-    sprite->data[1] = ((randVal & 0x7FFF0000) >> 16) % 600;
-
-    r6 = gUnknown_0839AAC4[gWeatherPtr->unknown_6DC][0];
-
-    r4 = sprite->data[1] % 30;
-    sprite->data[2] = r4 * 8;  // useless assignment
-
-    r0 = sprite->data[1] / 30;
-    sprite->data[3] = r0 * 8;  // useless assignment
-
-    sprite->data[2] = r4;
-    sprite->data[2] <<= 7;
-
-    sprite->data[3] = r0;
-    sprite->data[3] <<= 7;
-
-    sprite->data[2] -= gUnknown_0839AABC[gWeatherPtr->unknown_6DC][0] * r6;
-    sprite->data[3] -= gUnknown_0839AABC[gWeatherPtr->unknown_6DC][1] * r6;
-
-    StartSpriteAnim(sprite, 0);
-    sprite->data[4] = 0;
-    sprite->coordOffsetEnabled = FALSE;
-    sprite->data[0] = r6;
-}
-
-void sub_807E5C0(struct Sprite *sprite)
-{
-    if (sprite->data[4] == 0)
-    {
-        sprite->data[2] += gUnknown_0839AABC[gWeatherPtr->unknown_6DC][0];
-        sprite->data[3] += gUnknown_0839AABC[gWeatherPtr->unknown_6DC][1];
-        sprite->pos1.x = sprite->data[2] >> 4;
-        sprite->pos1.y = sprite->data[3] >> 4;
-
-        if (sprite->data[5] != 0
-         && (sprite->pos1.x >= -8 && sprite->pos1.x <= 248)
-         && sprite->pos1.y >= -16 && sprite->pos1.y <= 176)
-            sprite->invisible = FALSE;
-        else
-            sprite->invisible = TRUE;
-
-        sprite->data[0]--;
-        if (sprite->data[0] == 0)
-        {
-            StartSpriteAnim(sprite, gWeatherPtr->unknown_6DC + 1);
-            sprite->data[4] = 1;
-            sprite->pos1.x -= gSpriteCoordOffsetX;
-            sprite->pos1.y -= gSpriteCoordOffsetY;
-            sprite->coordOffsetEnabled = TRUE;
-        }
-    }
-    else if (sprite->animEnded)
-    {
-        sprite->invisible = TRUE;
-        sub_807E4EC(sprite);
-    }
-}
-
-void sub_807E6C4(struct Sprite *sprite)
-{
-    if (sprite->data[0] == 0)
-    {
-        sub_807E4EC(sprite);
-        sprite->callback = sub_807E5C0;
-    }
-    else
-    {
-        sprite->data[0]--;
-    }
-}
-
-void sub_807E6F0(struct Sprite *sprite, u16 b)
-{
-    u16 r8 = gUnknown_0839AAC4[gWeatherPtr->unknown_6DC][0];
-    u16 r6 = b / (gUnknown_0839AAC4[gWeatherPtr->unknown_6DC][1] + r8);
-    u16 r4 = b % (gUnknown_0839AAC4[gWeatherPtr->unknown_6DC][1] + r8);
-
-    while (--r6 != 0xFFFF)
-        sub_807E4EC(sprite);
-    if (r4 < r8)
-    {
-        while (--r4 != 0xFFFF)
-            sub_807E5C0(sprite);
-        sprite->data[6] = 0;
-    }
-    else
-    {
-        sprite->data[0] = r4 - r8;
-        sprite->invisible = TRUE;
-        sprite->data[6] = 1;
-    }
-}
-
-extern const struct SpriteSheet sRainSpriteSheet;  // defined below
-
-void LoadRainSpriteSheet(void)
-{
-    LoadSpriteSheet(&sRainSpriteSheet);
-}
+static void LoadRainSpriteSheet(void);
+static bool8 CreateRainSprite(void);
+static void UpdateRainSprite(struct Sprite *sprite);
+static bool8 UpdateVisibleRainSprites(void);
+static void DestroyRainSprites(void);
 
 static const struct Coords16 sRainSpriteCoords[] =
 {
@@ -570,7 +388,7 @@ static const struct Coords16 sRainSpriteCoords[] =
     { 48,  96},
 };
 
-static const struct OamData gOamData_839AA68 =
+static const struct OamData sRainSpriteOamData =
 {
     .y = 0,
     .affineMode = 0,
@@ -587,13 +405,13 @@ static const struct OamData gOamData_839AA68 =
     .affineParam = 0,
 };
 
-static const union AnimCmd gSpriteAnim_839AA70[] =
+static const union AnimCmd sRainSpriteFallAnimCmd[] =
 {
     ANIMCMD_FRAME(0, 16),
     ANIMCMD_JUMP(0),
 };
 
-static const union AnimCmd gSpriteAnim_839AA78[] =
+static const union AnimCmd sRainSpriteSplashAnimCmd[] =
 {
     ANIMCMD_FRAME(8, 3),
     ANIMCMD_FRAME(32, 2),
@@ -601,7 +419,7 @@ static const union AnimCmd gSpriteAnim_839AA78[] =
     ANIMCMD_END,
 };
 
-static const union AnimCmd gSpriteAnim_839AA88[] =
+static const union AnimCmd sRainSpriteHeavySplashAnimCmd[] =
 {
     ANIMCMD_FRAME(8, 3),
     ANIMCMD_FRAME(16, 3),
@@ -609,37 +427,418 @@ static const union AnimCmd gSpriteAnim_839AA88[] =
     ANIMCMD_END,
 };
 
-static const union AnimCmd *const gSpriteAnimTable_839AA98[] =
+static const union AnimCmd *const sRainSpriteAnimCmds[] =
 {
-    gSpriteAnim_839AA70,
-    gSpriteAnim_839AA78,
-    gSpriteAnim_839AA88,
+    sRainSpriteFallAnimCmd,
+    sRainSpriteSplashAnimCmd,
+    sRainSpriteHeavySplashAnimCmd,
 };
 
 static const struct SpriteTemplate sRainSpriteTemplate =
 {
     .tileTag = 4614,
     .paletteTag = 4608,
-    .oam = &gOamData_839AA68,
-    .anims = gSpriteAnimTable_839AA98,
+    .oam = &sRainSpriteOamData,
+    .anims = sRainSpriteAnimCmds,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_807E5C0,
+    .callback = UpdateRainSprite,
 };
 
-const s16 gUnknown_0839AABC[][2] =
+// Q28.4 fixed-point format values
+static const s16 sRainSpriteMovement[][2] =
 {
-	{-104, 208},
-	{-160, 320},
+    {-0x68,  0xD0},
+    {-0xA0, 0x140},
 };
 
-const u16 gUnknown_0839AAC4[][2] =
+// First byte is the number of frames a raindrop falls before it splashes.
+// Second byte is the maximum number of frames a raindrop can "wait" before
+// it appears and starts falling. (This is only for the initial raindrop spawn.)
+static const u16 sRainSpriteFallingDurations[][2] =
 {
     {18, 7},
     {12, 10},
 };
 
-static const struct SpriteSheet sRainSpriteSheet = {gWeatherRainTiles, sizeof(gWeatherRainTiles), 0x1206};
+static const struct SpriteSheet sRainSpriteSheet =
+{
+    .data = gWeatherRainTiles,
+    .size = sizeof(gWeatherRainTiles),
+    .tag = 0x1206,
+};
+
+void LightRain_InitVars(void)
+{
+    gWeatherPtr->initStep = 0;
+    gWeatherPtr->weatherGfxLoaded = FALSE;
+    gWeatherPtr->rainSpriteVisibleCounter = 0;
+    gWeatherPtr->rainSpriteVisibleDelay = 8;
+    gWeatherPtr->isHeavyRain = 0;
+    gWeatherPtr->maxRainSprites = 10;
+    gWeatherPtr->gammaTargetIndex = 3;
+    gWeatherPtr->gammaStepDelay = 20;
+    SetRainStrengthFromSoundEffect(SE_T_KOAME);
+}
+
+void LightRain_InitAll(void)
+{
+    LightRain_InitVars();
+    while (!gWeatherPtr->weatherGfxLoaded)
+        LightRain_Main();
+}
+
+void LightRain_Main(void)
+{
+    switch (gWeatherPtr->initStep)
+    {
+    case 0:
+        LoadRainSpriteSheet();
+        gWeatherPtr->initStep++;
+        break;
+    case 1:
+        if (!CreateRainSprite())
+            gWeatherPtr->initStep++;
+        break;
+    case 2:
+        if (!UpdateVisibleRainSprites())
+        {
+            gWeatherPtr->weatherGfxLoaded = TRUE;
+            gWeatherPtr->initStep++;
+        }
+        break;
+    }
+}
+
+bool8 LightRain_Finish(void)
+{
+    switch (gWeatherPtr->finishStep)
+    {
+    case 0:
+        if (gWeatherPtr->nextWeather == WEATHER_RAIN_LIGHT
+         || gWeatherPtr->nextWeather == WEATHER_RAIN_MED
+         || gWeatherPtr->nextWeather == WEATHER_RAIN_HEAVY)
+        {
+            gWeatherPtr->finishStep = 0xFF;
+            return FALSE;
+        }
+        else
+        {
+            gWeatherPtr->maxRainSprites = 0;
+            gWeatherPtr->finishStep++;
+        }
+        // fall through
+    case 1:
+        if (!UpdateVisibleRainSprites())
+        {
+            DestroyRainSprites();
+            gWeatherPtr->finishStep++;
+            return FALSE;
+        }
+        return TRUE;
+    }
+    return FALSE;
+}
+
+#define tCounter data[0]
+#define tRandom  data[1]
+#define tPosX    data[2]
+#define tPosY    data[3]
+#define tState   data[4]
+#define tActive  data[5]
+#define tWaiting data[6]
+
+static void StartRainSpriteFall(struct Sprite *sprite)
+{
+    u32 rand;
+    u16 numFallingFrames;
+    int tileX;
+    int tileY;
+
+    if (sprite->tRandom == 0)
+        sprite->tRandom = 361;
+
+    // Standard RNG sequence.
+    rand = sprite->tRandom * 1103515245 + 12345;
+    sprite->tRandom = ((rand & 0x7FFF0000) >> 16) % 600;
+
+    numFallingFrames = sRainSpriteFallingDurations[gWeatherPtr->isHeavyRain][0];
+
+    tileX = sprite->tRandom % 30;
+    sprite->tPosX = tileX * 8; // Useless assignment, leftover from before fixed-point values were used
+
+    tileY = sprite->tRandom / 30;
+    sprite->tPosY = tileY * 8; // Useless assignment, leftover from before fixed-point values were used
+
+    sprite->tPosX = tileX;
+    sprite->tPosX <<= 7; // This is tileX * 8, using a fixed-point value with 4 decimal places
+
+    sprite->tPosY = tileY;
+    sprite->tPosY <<= 7; // This is tileX * 8, using a fixed-point value with 4 decimal places
+
+    // "Rewind" the rain sprites, from their ending position.
+    sprite->tPosX -= sRainSpriteMovement[gWeatherPtr->isHeavyRain][0] * numFallingFrames;
+    sprite->tPosY -= sRainSpriteMovement[gWeatherPtr->isHeavyRain][1] * numFallingFrames;
+
+    StartSpriteAnim(sprite, 0);
+    sprite->tState = 0;
+    sprite->coordOffsetEnabled = FALSE;
+    sprite->tCounter = numFallingFrames;
+}
+
+static void UpdateRainSprite(struct Sprite *sprite)
+{
+    if (sprite->tState == 0)
+    {
+        // Raindrop is in its "falling" motion.
+        sprite->tPosX += sRainSpriteMovement[gWeatherPtr->isHeavyRain][0];
+        sprite->tPosY += sRainSpriteMovement[gWeatherPtr->isHeavyRain][1];
+        sprite->pos1.x = sprite->tPosX >> 4;
+        sprite->pos1.y = sprite->tPosY >> 4;
+
+        if (sprite->tActive
+         && (sprite->pos1.x >= -8 && sprite->pos1.x <= 248)
+         && sprite->pos1.y >= -16 && sprite->pos1.y <= 176)
+            sprite->invisible = FALSE;
+        else
+            sprite->invisible = TRUE;
+
+        if (--sprite->tCounter == 0)
+        {
+            // Make raindrop splash on the ground
+            StartSpriteAnim(sprite, gWeatherPtr->isHeavyRain + 1);
+            sprite->tState = 1;
+            sprite->pos1.x -= gSpriteCoordOffsetX;
+            sprite->pos1.y -= gSpriteCoordOffsetY;
+            sprite->coordOffsetEnabled = TRUE;
+        }
+    }
+    else if (sprite->animEnded)
+    {
+        // The splashing animation ended.
+        sprite->invisible = TRUE;
+        StartRainSpriteFall(sprite);
+    }
+}
+
+static void WaitRainSprite(struct Sprite *sprite)
+{
+    if (sprite->tCounter == 0)
+    {
+        StartRainSpriteFall(sprite);
+        sprite->callback = UpdateRainSprite;
+    }
+    else
+    {
+        sprite->tCounter--;
+    }
+}
+
+static void InitRainSpriteMovement(struct Sprite *sprite, u16 val)
+{
+    u16 numFallingFrames = sRainSpriteFallingDurations[gWeatherPtr->isHeavyRain][0];
+    u16 numAdvanceRng = val / (sRainSpriteFallingDurations[gWeatherPtr->isHeavyRain][1] + numFallingFrames);
+    u16 frameVal = val % (sRainSpriteFallingDurations[gWeatherPtr->isHeavyRain][1] + numFallingFrames);
+
+    while (--numAdvanceRng != 0xFFFF)
+        StartRainSpriteFall(sprite);
+
+    if (frameVal < numFallingFrames)
+    {
+        while (--frameVal != 0xFFFF)
+            UpdateRainSprite(sprite);
+
+        sprite->tWaiting = 0;
+    }
+    else
+    {
+        sprite->tCounter = frameVal - numFallingFrames;
+        sprite->invisible = TRUE;
+        sprite->tWaiting = 1;
+    }
+}
+
+static void LoadRainSpriteSheet(void)
+{
+    LoadSpriteSheet(&sRainSpriteSheet);
+}
+
+static bool8 CreateRainSprite(void)
+{
+    u8 spriteIndex;
+    u8 spriteId;
+
+    if (gWeatherPtr->rainSpriteCount == MAX_RAIN_SPRITES)
+        return FALSE;
+
+    spriteIndex = gWeatherPtr->rainSpriteCount;
+    spriteId = CreateSpriteAtEnd(&sRainSpriteTemplate,
+      sRainSpriteCoords[spriteIndex].x, sRainSpriteCoords[spriteIndex].y, 78);
+
+    if (spriteId != MAX_SPRITES)
+    {
+        gSprites[spriteId].tActive = 0;
+        gSprites[spriteId].tRandom = spriteIndex * 145;
+        while (gSprites[spriteId].tRandom >= 600)
+            gSprites[spriteId].tRandom -= 600;
+
+        StartRainSpriteFall(&gSprites[spriteId]);
+        InitRainSpriteMovement(&gSprites[spriteId], spriteIndex * 9);
+        gSprites[spriteId].invisible = TRUE;
+        gWeatherPtr->sprites.s1.rainSprites[spriteIndex] = &gSprites[spriteId];
+    }
+    else
+    {
+        gWeatherPtr->sprites.s1.rainSprites[spriteIndex] = NULL;
+    }
+
+    if (++gWeatherPtr->rainSpriteCount == MAX_RAIN_SPRITES)
+    {
+        u16 i;
+        for (i = 0; i < MAX_RAIN_SPRITES; i++)
+        {
+            if (gWeatherPtr->sprites.s1.rainSprites[i])
+            {
+                if (!gWeatherPtr->sprites.s1.rainSprites[i]->tWaiting)
+                    gWeatherPtr->sprites.s1.rainSprites[i]->callback = UpdateRainSprite;
+                else
+                    gWeatherPtr->sprites.s1.rainSprites[i]->callback = WaitRainSprite;
+            }
+        }
+
+        return FALSE;
+    }
+
+    return TRUE;
+}
+
+static bool8 UpdateVisibleRainSprites(void)
+{
+    if (gWeatherPtr->curRainSpriteIndex == gWeatherPtr->maxRainSprites)
+        return FALSE;
+
+    if (++gWeatherPtr->rainSpriteVisibleCounter > gWeatherPtr->rainSpriteVisibleDelay)
+    {
+        gWeatherPtr->rainSpriteVisibleCounter = 0;
+        if (gWeatherPtr->curRainSpriteIndex < gWeatherPtr->maxRainSprites)
+        {
+            gWeatherPtr->sprites.s1.rainSprites[gWeatherPtr->curRainSpriteIndex++]->tActive = 1;
+        }
+        else
+        {
+            gWeatherPtr->curRainSpriteIndex--;
+            gWeatherPtr->sprites.s1.rainSprites[gWeatherPtr->curRainSpriteIndex]->tActive = 0;
+            gWeatherPtr->sprites.s1.rainSprites[gWeatherPtr->curRainSpriteIndex]->invisible = TRUE;
+        }
+    }
+    return TRUE;
+}
+
+static void DestroyRainSprites(void)
+{
+    u16 i;
+
+    for (i = 0; i < gWeatherPtr->rainSpriteCount; i++)
+    {
+        if (gWeatherPtr->sprites.s1.rainSprites[i] != NULL)
+            DestroySprite(gWeatherPtr->sprites.s1.rainSprites[i]);
+    }
+    gWeatherPtr->rainSpriteCount = 0;
+    FreeSpriteTilesByTag(0x1206);
+}
+
+#undef tCounter
+#undef tRandom
+#undef tPosX
+#undef tPosY
+#undef tState
+#undef tActive
+#undef tWaiting
+
+//------------------------------------------------------------------------------
+// Snow
+//------------------------------------------------------------------------------
+
+void Snow_InitVars(void)
+{
+    gWeatherPtr->initStep = 0;
+    gWeatherPtr->weatherGfxLoaded = FALSE;
+    gWeatherPtr->gammaTargetIndex = 3;
+    gWeatherPtr->gammaStepDelay = 20;
+    gWeatherPtr->unknown_6E5 = 16;
+    gWeatherPtr->unknown_6E0 = 0;
+}
+
+void Snow_Main(void);
+void sub_807ED48(struct Sprite *);
+
+void Snow_InitAll(void)
+{
+    Snow_InitVars();
+    while (gWeatherPtr->weatherGfxLoaded == FALSE)
+    {
+        u16 i;
+
+        Snow_Main();
+        for (i = 0; i < gWeatherPtr->snowflakeSpriteCount; i++)
+        {
+            sub_807ED48(gWeatherPtr->sprites.s1.snowflakeSprites[i]);
+        }
+    }
+}
+
+u8 snowflakes_progress(void);
+
+void Snow_Main(void)
+{
+    if (gWeatherPtr->initStep == 0 && snowflakes_progress() == FALSE)
+    {
+        gWeatherPtr->weatherGfxLoaded = TRUE;
+        gWeatherPtr->initStep++;
+    }
+}
+
+bool8 Snow_Finish(void)
+{
+    switch (gWeatherPtr->finishStep)
+    {
+    case 0:
+        gWeatherPtr->unknown_6E5 = 0;
+        gWeatherPtr->unknown_6E0 = 0;
+        gWeatherPtr->finishStep++;
+        // fall through
+    case 1:
+        if (snowflakes_progress() == FALSE)
+        {
+            gWeatherPtr->finishStep++;
+            return FALSE;
+        }
+        return TRUE;
+    }
+    return FALSE;
+}
+
+bool8 CreateSnowflakeSprite(void);
+bool8 RemoveSnowflakeSprite(void);
+
+bool8 snowflakes_progress(void)
+{
+    if (gWeatherPtr->snowflakeSpriteCount == gWeatherPtr->unknown_6E5)
+        return FALSE;
+
+    gWeatherPtr->unknown_6E0++;
+    if (gWeatherPtr->unknown_6E0 > 36)
+    {
+        gWeatherPtr->unknown_6E0 = 0;
+        if (gWeatherPtr->snowflakeSpriteCount < gWeatherPtr->unknown_6E5)
+            CreateSnowflakeSprite();
+        else
+            RemoveSnowflakeSprite();
+    }
+    return (gWeatherPtr->snowflakeSpriteCount != gWeatherPtr->unknown_6E5);
+}
+
+void sub_807EC40(struct Sprite *);
 
 static const struct OamData gOamData_839AAD4 =
 {
@@ -783,172 +982,6 @@ static const struct SpriteTemplate sFog1SpriteTemplate =
     .callback = Fog1SpriteCallback,
 };
 
-bool8 CreateRainSprite(void)
-{
-    u8 spriteNum;
-    u8 spriteId;
-
-    if (gWeatherPtr->rainSpriteCount == 24)
-        return FALSE;
-
-    spriteNum = gWeatherPtr->rainSpriteCount;
-    spriteId = CreateSpriteAtEnd(&sRainSpriteTemplate,
-      sRainSpriteCoords[spriteNum].x, sRainSpriteCoords[spriteNum].y, 78);
-    if (spriteId != MAX_SPRITES)
-    {
-        gSprites[spriteId].data[5] = 0;
-        gSprites[spriteId].data[1] = spriteNum * 145;
-        while (gSprites[spriteId].data[1] >= 600)
-            gSprites[spriteId].data[1] -= 600;
-        sub_807E4EC(&gSprites[spriteId]);
-        sub_807E6F0(&gSprites[spriteId], spriteNum * 9);
-        gSprites[spriteId].invisible = TRUE;
-        gWeatherPtr->sprites.s1.rainSprites[spriteNum] = &gSprites[spriteId];
-    }
-    else
-    {
-        gWeatherPtr->sprites.s1.rainSprites[spriteNum] = NULL;
-    }
-
-    if (++gWeatherPtr->rainSpriteCount == 24)
-    {
-        u16 i;
-
-        for (i = 0; i < 24; i++)
-        {
-            if (gWeatherPtr->sprites.s1.rainSprites[i] != NULL)
-            {
-                if (gWeatherPtr->sprites.s1.rainSprites[i]->data[6] == 0)
-                    gWeatherPtr->sprites.s1.rainSprites[i]->callback = sub_807E5C0;
-                else
-                    gWeatherPtr->sprites.s1.rainSprites[i]->callback = sub_807E6C4;
-            }
-        }
-        return FALSE;
-    }
-    return TRUE;
-}
-
-bool8 sub_807E8E8(void)
-{
-    if (gWeatherPtr->unknown_6D8 == gWeatherPtr->unknown_6D9)
-        return FALSE;
-
-    if (++gWeatherPtr->unknown_6D6 > gWeatherPtr->unknown_6DB)
-    {
-        gWeatherPtr->unknown_6D6 = 0;
-        if (gWeatherPtr->unknown_6D8 < gWeatherPtr->unknown_6D9)
-        {
-            gWeatherPtr->sprites.s1.rainSprites[gWeatherPtr->unknown_6D8++]->data[5] = 1;
-        }
-        else
-        {
-            gWeatherPtr->unknown_6D8--;
-            gWeatherPtr->sprites.s1.rainSprites[gWeatherPtr->unknown_6D8]->data[5] = 0;
-            gWeatherPtr->sprites.s1.rainSprites[gWeatherPtr->unknown_6D8]->invisible = TRUE;
-        }
-    }
-    return TRUE;
-}
-
-void DestroyRainSprites(void)
-{
-    u16 i;
-
-    for (i = 0; i < gWeatherPtr->rainSpriteCount; i++)
-    {
-        if (gWeatherPtr->sprites.s1.rainSprites[i] != NULL)
-            DestroySprite(gWeatherPtr->sprites.s1.rainSprites[i]);
-    }
-    gWeatherPtr->rainSpriteCount = 0;
-    FreeSpriteTilesByTag(0x1206);
-}
-
-//------------------------------------------------------------------------------
-// Snow
-//------------------------------------------------------------------------------
-
-void Snow_InitVars(void)
-{
-    gWeatherPtr->initStep = 0;
-    gWeatherPtr->weatherGfxLoaded = FALSE;
-    gWeatherPtr->gammaTargetIndex = 3;
-    gWeatherPtr->gammaStepDelay = 20;
-    gWeatherPtr->unknown_6E5 = 16;
-    gWeatherPtr->unknown_6E0 = 0;
-}
-
-void Snow_Main(void);
-void sub_807ED48(struct Sprite *);
-
-void Snow_InitAll(void)
-{
-    Snow_InitVars();
-    while (gWeatherPtr->weatherGfxLoaded == FALSE)
-    {
-        u16 i;
-
-        Snow_Main();
-        for (i = 0; i < gWeatherPtr->snowflakeSpriteCount; i++)
-        {
-            sub_807ED48(gWeatherPtr->sprites.s1.snowflakeSprites[i]);
-        }
-    }
-}
-
-u8 snowflakes_progress(void);
-
-void Snow_Main(void)
-{
-    if (gWeatherPtr->initStep == 0 && snowflakes_progress() == FALSE)
-    {
-        gWeatherPtr->weatherGfxLoaded = TRUE;
-        gWeatherPtr->initStep++;
-    }
-}
-
-bool8 Snow_Finish(void)
-{
-    switch (gWeatherPtr->finishStep)
-    {
-    case 0:
-        gWeatherPtr->unknown_6E5 = 0;
-        gWeatherPtr->unknown_6E0 = 0;
-        gWeatherPtr->finishStep++;
-        // fall through
-    case 1:
-        if (snowflakes_progress() == FALSE)
-        {
-            gWeatherPtr->finishStep++;
-            return FALSE;
-        }
-        return TRUE;
-    }
-    return FALSE;
-}
-
-bool8 CreateSnowflakeSprite(void);
-bool8 RemoveSnowflakeSprite(void);
-
-bool8 snowflakes_progress(void)
-{
-    if (gWeatherPtr->snowflakeSpriteCount == gWeatherPtr->unknown_6E5)
-        return FALSE;
-
-    gWeatherPtr->unknown_6E0++;
-    if (gWeatherPtr->unknown_6E0 > 36)
-    {
-        gWeatherPtr->unknown_6E0 = 0;
-        if (gWeatherPtr->snowflakeSpriteCount < gWeatherPtr->unknown_6E5)
-            CreateSnowflakeSprite();
-        else
-            RemoveSnowflakeSprite();
-    }
-    return (gWeatherPtr->snowflakeSpriteCount != gWeatherPtr->unknown_6E5);
-}
-
-void sub_807EC40(struct Sprite *);
-
 bool8 CreateSnowflakeSprite(void)
 {
     u8 spriteId = CreateSpriteAtEnd(&sSnowflakeSpriteTemplate, 0, 0, 78);
@@ -1057,10 +1090,10 @@ void MedRain_InitVars(void)
 {
     gWeatherPtr->initStep = 0;
     gWeatherPtr->weatherGfxLoaded = FALSE;
-    gWeatherPtr->unknown_6D6 = 0;
-    gWeatherPtr->unknown_6DB = 4;
-    gWeatherPtr->unknown_6DC = 0;
-    gWeatherPtr->unknown_6D9 = 16;
+    gWeatherPtr->rainSpriteVisibleCounter = 0;
+    gWeatherPtr->rainSpriteVisibleDelay = 4;
+    gWeatherPtr->isHeavyRain = 0;
+    gWeatherPtr->maxRainSprites = 16;
     gWeatherPtr->gammaTargetIndex = 3;
     gWeatherPtr->gammaStepDelay = 20;
     gWeatherPtr->weatherGfxLoaded = FALSE;  // duplicate assignment
@@ -1085,10 +1118,10 @@ void HeavyRain_InitVars(void)
 {
     gWeatherPtr->initStep = 0;
     gWeatherPtr->weatherGfxLoaded = FALSE;
-    gWeatherPtr->unknown_6D6 = 0;
-    gWeatherPtr->unknown_6DB = 4;
-    gWeatherPtr->unknown_6DC = 1;
-    gWeatherPtr->unknown_6D9 = 24;
+    gWeatherPtr->rainSpriteVisibleCounter = 0;
+    gWeatherPtr->rainSpriteVisibleDelay = 4;
+    gWeatherPtr->isHeavyRain = 1;
+    gWeatherPtr->maxRainSprites = 24;
     gWeatherPtr->gammaTargetIndex = 3;
     gWeatherPtr->gammaStepDelay = 20;
     gWeatherPtr->weatherGfxLoaded = FALSE;  // duplicate assignment
@@ -1102,8 +1135,8 @@ void HeavyRain_InitAll(void)
         Rain_Main();
 }
 
-void UpdateThunderSound(void);
-void SetThunderCounter(u16);
+static void UpdateThunderSound(void);
+static void SetThunderCounter(u16);
 
 void Rain_Main(void)
 {
@@ -1120,7 +1153,7 @@ void Rain_Main(void)
         gWeatherPtr->initStep++;
         break;
     case 2:
-        if (sub_807E8E8())
+        if (UpdateVisibleRainSprites())
             break;
         gWeatherPtr->weatherGfxLoaded = TRUE;
         gWeatherPtr->initStep++;
@@ -1224,12 +1257,12 @@ bool8 Rain_Finish(void)
              || gWeatherPtr->nextWeather == WEATHER_RAIN_MED
              || gWeatherPtr->nextWeather == WEATHER_RAIN_HEAVY)
                 return FALSE;
-            gWeatherPtr->unknown_6D9 = 0;
+            gWeatherPtr->maxRainSprites = 0;
             gWeatherPtr->finishStep++;
         }
         break;
     case 2:
-        if (sub_807E8E8())
+        if (UpdateVisibleRainSprites())
             break;
         DestroyRainSprites();
         gWeatherPtr->unknown_6ED = 0;
@@ -1241,7 +1274,7 @@ bool8 Rain_Finish(void)
     return TRUE;
 }
 
-void SetThunderCounter(u16 max)
+static void SetThunderCounter(u16 max)
 {
     if (gWeatherPtr->unknown_6ED == 0)
     {
@@ -1250,7 +1283,7 @@ void SetThunderCounter(u16 max)
     }
 }
 
-void UpdateThunderSound(void)
+static void UpdateThunderSound(void)
 {
     if (gWeatherPtr->unknown_6ED == 1)
     {
@@ -2125,7 +2158,7 @@ bool8 Shade_Finish(void)
 }
 
 //------------------------------------------------------------------------------
-// Weather 14
+// Bubbles
 //------------------------------------------------------------------------------
 
 const u8 gUnknown_0839AC68[] = {40, 90, 60, 90, 2, 60, 40, 30};
