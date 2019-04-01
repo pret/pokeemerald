@@ -90,7 +90,7 @@ struct UnkStruct_8019BA8
 {
     u8 field_0;
     u8 field_1;
-    u8 field_2;
+    s8 field_2;
     u8 field_3;
 };
 

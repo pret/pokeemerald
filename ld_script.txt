@@ -56,6 +56,7 @@ SECTIONS {
         src/link_rfu.o(.text);
         src/union_room.o(.text);
         src/mystery_gift.o(.text);
+        src/union_room_player_avatar.o(.text);
         asm/union_room_player_avatar.o(.text);
         src/mevent2.o(.text);
         src/mevent_801BAAC.o(.text);
@@ -411,6 +412,7 @@ SECTIONS {
         src/link_rfu.o(.rodata);
         src/union_room.o(.rodata);
         src/mystery_gift.o(.rodata);
+        src/union_room_player_avatar.o(.rodata);
         data/union_room_player_avatar.o(.rodata);
         src/mevent2.o(.rodata);
         src/mevent_801BAAC.o(.rodata);
