@@ -617,7 +617,7 @@ void sub_8166D44(void)
     StringAppend(stringBuffer, gText_GetsAPokeBlockQuestion);
     StringCopy(gStringVar4, stringBuffer);
     FillWindowPixelBuffer(2, 17);
-    sub_8098858(2, 151, 14);
+    DrawTextBorderOuter(2, 151, 14);
     AddTextPrinterParameterized(2, 1, gStringVar4, 0, 1, 0, NULL);
     PutWindowTilemap(2);
     CopyWindowToVram(2, 3);
@@ -645,7 +645,7 @@ s8 sub_8166DE4(void)
 
 void sub_8166E24(void)
 {
-    sub_8098858(2, 151, 14);
+    DrawTextBorderOuter(2, 151, 14);
     FillWindowPixelBuffer(2, 17);
 
     for (gUnknown_0203BC90->field_53 = 0; gUnknown_0203BC90->field_53 < 5; gUnknown_0203BC90->field_53++)
@@ -693,7 +693,7 @@ bool8 sub_8166EDC(void)
 void sub_8166F50(void)
 {
     FillWindowPixelBuffer(2, 17);
-    sub_8098858(2, 151, 14);
+    DrawTextBorderOuter(2, 151, 14);
     AddTextPrinterParameterized(2, 1, gText_WontEatAnymore, 0, 1, 0, NULL);
     PutWindowTilemap(2);
     CopyWindowToVram(2, 3);

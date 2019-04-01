@@ -45,6 +45,7 @@
 #include "event_obj_lock.h"
 #include "union_room_chat.h"
 #include "berry_crush.h"
+#include "mystery_gift.h"
 
 EWRAM_DATA u8 gUnknown_02022C20[12] = {};
 EWRAM_DATA u8 gUnknown_02022C2C = 0;
@@ -100,9 +101,8 @@ void sub_801AC54(void);
 void sub_802A9A8(u8 monId, MainCallback callback);
 void sub_802493C(u8 monId, MainCallback callback);
 void sub_80149D8(void);
-u16 sub_8019930(void);
-void sub_8018784(u8 windowId);
-s8 sub_8018B08(u8 *textState, u8 *arg1, u8 arg2, const u8 *str);
+void MG_DrawTextBorder(u8 windowId);
+s8 mevent_message_print_and_prompt_yes_no(u8 *textState, u8 *arg1, u8 arg2, const u8 *str);
 bool32 sub_8016F1C(struct UnkLinkRfuStruct_02022B14 *arg0, s16 arg1);
 u8 sub_8016DF0(struct UnkStruct_Main4 *arg0, struct UnkStruct_Main4 *arg1, u32 arg2);
 void sub_8019F2C(void);
@@ -1555,7 +1555,7 @@ void sub_8012780(u8 taskId)
         break;
     case 21:
     case 23:
-        sub_800E084();
+        DestroyWirelessStatusIndicatorSprite();
         sub_800EDD4();
         sub_8012F64(data);
         data->state++;
@@ -2076,7 +2076,7 @@ void sub_80134E8(u8 taskId)
         data->state++;
         break;
     case 13:
-        sub_800E084();
+        DestroyWirelessStatusIndicatorSprite();
         if (PrintOnTextbox(&data->textState, gUnknown_082EDE9C[sub_8011A74()]))
         {
             gSpecialVar_Result = 6;
@@ -2084,12 +2084,12 @@ void sub_80134E8(u8 taskId)
         }
         break;
     case 11:
-        sub_800E084();
+        DestroyWirelessStatusIndicatorSprite();
         gSpecialVar_Result = 5;
         data->state = 23;
         break;
     case 15:
-        sub_800E084();
+        DestroyWirelessStatusIndicatorSprite();
         if (PrintOnTextbox(&data->textState, gUnknown_082EDE9C[sub_8011A74()]))
         {
             gSpecialVar_Result = 8;
@@ -2481,7 +2481,7 @@ void sub_80143E4(void *arg0, bool32 arg1)
 
     TrainerCard_GenerateCardForPlayer((struct TrainerCard *)argAsU16Ptr);
     if (arg1)
-        argAsU16Ptr[48] = sub_801B39C();
+        argAsU16Ptr[48] = GetWonderCardFlagID();
     else
         argAsU16Ptr[48] = 0;
 }
@@ -2680,7 +2680,7 @@ void sub_8014790(u8 taskId)
     case 8:
         if (gReceivedRemoteLinkPlayers == 0)
         {
-            sub_800E084();
+            DestroyWirelessStatusIndicatorSprite();
             EnableBothScriptContexts();
             DestroyTask(taskId);
         }
@@ -2699,7 +2699,7 @@ void sub_80149D8(void)
     gTasks[taskId].data[0] = 0;
 }
 
-void sub_8014A00(u32 arg0)
+void MEvent_CreateTask_Leader(u32 arg0)
 {
     u8 taskId;
     struct UnkStruct_Leader *dataPtr;
@@ -2745,10 +2745,10 @@ void sub_8014A40(u8 taskId)
         data->field_17 = sub_8016FC0(data->field_4, 0xFF);
 
         winTemplate = gUnknown_082F011C;
-        winTemplate.baseBlock = sub_8019930();
+        winTemplate.baseBlock = GetMysteryGiftBaseBlock();
         winTemplate.paletteNum = 0xC;
         data->listWindowId = AddWindow(&winTemplate);
-        sub_8018784(data->listWindowId);
+        MG_DrawTextBorder(data->listWindowId);
         gMultiuseListMenuTemplate = gUnknown_082F015C;
         gMultiuseListMenuTemplate.windowId = data->listWindowId;
         data->listTaskId = ListMenuInit(&gMultiuseListMenuTemplate, 0, 0);
@@ -2763,7 +2763,7 @@ void sub_8014A40(u8 taskId)
         data->state = 3;
         break;
     case 3:
-        sub_8018884(gStringVar4);
+        AddTextPrinterToWindow1(gStringVar4);
         data->state = 4;
         break;
     case 4:
@@ -2771,11 +2771,11 @@ void sub_8014A40(u8 taskId)
         if (gMain.newKeys & B_BUTTON)
         {
             data->state = 13;
-            sub_800E084();
+            DestroyWirelessStatusIndicatorSprite();
         }
         break;
     case 6:
-        if (mevent_0814257C(&data->textState, gUnknown_082EDF40))
+        if (MG_PrintTextOnWindow1AndWaitButton(&data->textState, gUnknown_082EDF40))
         {
             data->field_13 = sub_8013398(data->field_0);
             RedrawListMenu(data->listTaskId);
@@ -2786,7 +2786,7 @@ void sub_8014A40(u8 taskId)
         data->state = 7;
         break;
     case 7:
-        switch (sub_8018B08(&data->textState, &data->field_14, 0, gStringVar4))
+        switch (mevent_message_print_and_prompt_yes_no(&data->textState, &data->field_14, 0, gStringVar4))
         {
         case 0:
             sub_800E0E8();
@@ -2837,7 +2837,7 @@ void sub_8014A40(u8 taskId)
         }
         break;
     case 9:
-        sub_8018884(gStringVar4);
+        AddTextPrinterToWindow1(gStringVar4);
         data->state = 10;
         break;
     case 10:
@@ -2860,7 +2860,7 @@ void sub_8014A40(u8 taskId)
         }
         break;
     case 13:
-        sub_800E084();
+        DestroyWirelessStatusIndicatorSprite();
         sub_800EDD4();
         DestroyListMenuTask(data->listTaskId, 0, 0);
         CopyBgTilemapBufferToVram(0);
@@ -2872,7 +2872,7 @@ void sub_8014A40(u8 taskId)
         data->state++;
         break;
     case 14:
-        if (mevent_0814257C(&data->textState, gText_PleaseStartOver))
+        if (MG_PrintTextOnWindow1AndWaitButton(&data->textState, gText_PleaseStartOver))
         {
             DestroyTask(taskId);
             gSpecialVar_Result = 5;
@@ -2907,7 +2907,7 @@ void sub_8014A40(u8 taskId)
     }
 }
 
-void sub_8014EFC(u32 arg0)
+void MEvent_CreateTask_CardOrNewsWithFriend(u32 arg0)
 {
     u8 taskId;
     struct UnkStruct_Group *dataPtr;
@@ -2940,7 +2940,7 @@ void sub_8014F48(u8 taskId)
         data->state = 1;
         break;
     case 1:
-        sub_8018884(gUnknown_082EF7F8);
+        AddTextPrinterToWindow1(gUnknown_082EF7F8);
         data->state = 2;
         break;
     case 2:
@@ -2949,7 +2949,7 @@ void sub_8014F48(u8 taskId)
         data->field_11 = sub_8016FC0(data->field_4, data->field_12 + 7);
 
         winTemplate1 = gUnknown_082F0174;
-        winTemplate1.baseBlock = sub_8019930();
+        winTemplate1.baseBlock = GetMysteryGiftBaseBlock();
         winTemplate1.paletteNum = 0xC;
         data->listWindowId = AddWindow(&winTemplate1);
 
@@ -2957,12 +2957,12 @@ void sub_8014F48(u8 taskId)
         winTemplate2.paletteNum = 0xC;
         data->field_D = AddWindow(&winTemplate2);
 
-        sub_8018784(data->listWindowId);
+        MG_DrawTextBorder(data->listWindowId);
         gMultiuseListMenuTemplate = gUnknown_082F0204;
         gMultiuseListMenuTemplate.windowId = data->listWindowId;
         data->listTaskId = ListMenuInit(&gMultiuseListMenuTemplate, 0, 0);
 
-        sub_8018784(data->field_D);
+        MG_DrawTextBorder(data->field_D);
         FillWindowPixelBuffer(data->field_D, PIXEL_FILL(1));
         PutWindowTilemap(data->field_D);
         sub_80125BC(data->field_D);
@@ -3013,7 +3013,7 @@ void sub_8014F48(u8 taskId)
         }
         break;
     case 4:
-        sub_8018884(gUnknown_082EFC3C);
+        AddTextPrinterToWindow1(gUnknown_082EFC3C);
         sub_8018404(gStringVar1, &data->field_0->arr[data->field_F]);
         data->state = 5;
         break;
@@ -3032,7 +3032,7 @@ void sub_8014F48(u8 taskId)
             data->state = 8;
             break;
         case 5:
-            sub_8018884(gUnknown_082EDDF4);
+            AddTextPrinterToWindow1(gUnknown_082EDDF4);
             sub_8011A64(0, 0);
             break;
         }
@@ -3050,17 +3050,17 @@ void sub_8014F48(u8 taskId)
         data->state++;
         break;
     case 9:
-        if (mevent_0814257C(&data->textState, gUnknown_082EDF80[sub_8011A74()]))
+        if (MG_PrintTextOnWindow1AndWaitButton(&data->textState, gUnknown_082EDF80[sub_8011A74()]))
         {
-            sub_800E084();
+            DestroyWirelessStatusIndicatorSprite();
             DestroyTask(taskId);
             sub_800EDD4();
             gSpecialVar_Result = 5;
         }
         break;
     case 7:
-        sub_800E084();
-        sub_8018884(gText_PleaseStartOver);
+        DestroyWirelessStatusIndicatorSprite();
+        AddTextPrinterToWindow1(gText_PleaseStartOver);
         DestroyTask(taskId);
         sub_800EDD4();
         gSpecialVar_Result = 5;
@@ -3076,7 +3076,7 @@ void sub_8014F48(u8 taskId)
     }
 }
 
-void sub_80152A8(u32 arg0)
+void MEvent_CreateTask_CardOrNewsOverWireless(u32 arg0)
 {
     u8 taskId;
     struct UnkStruct_Group *dataPtr;
@@ -3109,7 +3109,7 @@ void sub_80152F4(u8 taskId)
         data->state = 1;
         break;
     case 1:
-        sub_8018884(gUnknown_082EFBC8);
+        AddTextPrinterToWindow1(gUnknown_082EFBC8);
         data->state = 2;
         break;
     case 2:
@@ -3120,10 +3120,10 @@ void sub_80152F4(u8 taskId)
         if (data->field_13 != 0)
         {
             winTemplate = gUnknown_082F0174;
-            winTemplate.baseBlock = sub_8019930();
+            winTemplate.baseBlock = GetMysteryGiftBaseBlock();
             data->listWindowId = AddWindow(&winTemplate);
 
-            sub_8018784(data->listWindowId);
+            MG_DrawTextBorder(data->listWindowId);
             gMultiuseListMenuTemplate = gUnknown_082F0204;
             gMultiuseListMenuTemplate.windowId = data->listWindowId;
             data->listTaskId = ListMenuInit(&gMultiuseListMenuTemplate, 0, 0);
@@ -3178,7 +3178,7 @@ void sub_80152F4(u8 taskId)
         }
         break;
     case 4:
-        sub_8018884(gUnknown_082EFC90);
+        AddTextPrinterToWindow1(gUnknown_082EFC90);
         sub_8018404(gStringVar1, &data->field_0->arr[data->field_F]);
         data->state = 5;
         break;
@@ -3197,7 +3197,7 @@ void sub_80152F4(u8 taskId)
             data->state = 8;
             break;
         case 5:
-            sub_8018884(gUnknown_082EDEC4);
+            AddTextPrinterToWindow1(gUnknown_082EDEC4);
             sub_8011A64(0, 0);
             break;
         }
@@ -3218,27 +3218,27 @@ void sub_80152F4(u8 taskId)
         data->state++;
         break;
     case 9:
-        if (mevent_0814257C(&data->textState, gUnknown_082EDF04))
+        if (MG_PrintTextOnWindow1AndWaitButton(&data->textState, gUnknown_082EDF04))
         {
-            sub_800E084();
+            DestroyWirelessStatusIndicatorSprite();
             DestroyTask(taskId);
             sub_800EDD4();
             gSpecialVar_Result = 5;
         }
         break;
     case 7:
-        if (mevent_0814257C(&data->textState, gText_WirelessSearchCanceled))
+        if (MG_PrintTextOnWindow1AndWaitButton(&data->textState, gText_WirelessSearchCanceled))
         {
-            sub_800E084();
+            DestroyWirelessStatusIndicatorSprite();
             DestroyTask(taskId);
             sub_800EDD4();
             gSpecialVar_Result = 5;
         }
         break;
     case 11:
-        if (mevent_0814257C(&data->textState, gUnknown_082EFD58[data->field_12]))
+        if (MG_PrintTextOnWindow1AndWaitButton(&data->textState, gUnknown_082EFD58[data->field_12]))
         {
-            sub_800E084();
+            DestroyWirelessStatusIndicatorSprite();
             DestroyTask(taskId);
             sub_800EDD4();
             gSpecialVar_Result = 5;
@@ -4513,7 +4513,7 @@ s32 sub_8017178(u8 *arg0, u8 *arg1, u8 *arg2, const struct WindowTemplate *winTe
     {
     case 0:
         winTemplateCopy = *winTemplate;
-        r1 = sub_81DB41C(menuTemplate);
+        r1 = Intl_GetListMenuWidth(menuTemplate);
         if (winTemplateCopy.width > r1)
         {
             winTemplateCopy.width = r1;

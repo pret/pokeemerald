@@ -709,7 +709,7 @@ void LoadBattleMenuWindowGfx(void)
 
     if (gBattleTypeFlags & BATTLE_TYPE_ARENA)
     {
-        sub_81978B0(0x70);
+        Menu_LoadStdPalAt(0x70);
         LoadMessageBoxGfx(0, 0x30, 0x70);
         gPlttBufferUnfaded[0x76] = 0;
         CpuCopy16(&gPlttBufferUnfaded[0x76], &gPlttBufferFaded[0x76], 2);

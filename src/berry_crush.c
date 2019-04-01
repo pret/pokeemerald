@@ -582,7 +582,7 @@ int sub_802130C(void)
         ClearGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_OBJ_ON | DISPCNT_OBJ_1D_MAP);
         break;
     case 6:
-        sub_800E084();
+        DestroyWirelessStatusIndicatorSprite();
         sub_8022960(var0);
         sub_8034CC8();
         break;

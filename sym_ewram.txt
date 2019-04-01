@@ -9,10 +9,8 @@
 	.include "src/union_room.o"
     .include "src/mystery_gift.o"
 
-    .align 3
-gUnknown_02022C60: @ 2022C60
-	.space 0x4
-
+    @ union room player avatar
+    .align 2
 gUnknown_02022C64: @ 2022C64
 	.space 0x4
 
@@ -23,17 +21,13 @@ gUnknown_02022C6C: @ 2022C6C
 	.space 0x4
 
 	.include "src/mevent2.o"
+	.include "src/mevent_801BAAC.o"
 
-gUnknown_02022C74: @ 2022C74
-	.space 0x4
-
-gUnknown_02022C78: @ 2022C78
-	.space 0x4
-
+    @ mevent_server
 gUnknown_02022C7C: @ 2022C7C
 	.space 0x4
 
-gUnknown_02022C80: @ 2022C80
+s_mevent_srv_ish_ptr: @ 2022C80
 	.space 0x4
 
 gUnknown_02022C84: @ 2022C84

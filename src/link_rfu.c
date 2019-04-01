@@ -2243,7 +2243,7 @@ void CreateWirelessStatusIndicatorSprite(u8 x, u8 y)
     }
 }
 
-void sub_800E084(void)
+void DestroyWirelessStatusIndicatorSprite(void)
 {
     if (gSprites[gWirelessStatusIndicatorSpriteId].data[7] == 0x1234)
     {
@@ -2356,7 +2356,7 @@ void sub_800E174(void)
         CpuCopy16(gMain.oamBuffer + 125, (struct OamData *)OAM + 125, sizeof(struct OamData));
         if (sub_8011A74() == 1)
         {
-            sub_800E084();
+            DestroyWirelessStatusIndicatorSprite();
         }
     }
 }
@@ -4209,7 +4209,7 @@ void sub_8010DB4(void)
 {
     if (gUnknown_03005000.unk_ee == 1 && gUnknown_03004140.unk_02 == 0)
     {
-        if (gMain.callback2 == sub_8018438 || gUnknown_03004140.unk_3c->unk_04)
+        if (gMain.callback2 == c2_mystery_gift_e_reader_run || gUnknown_03004140.unk_3c->unk_04)
             gWirelessCommType = 2;
         SetMainCallback2(CB2_LinkError);
         gMain.savedCallback = CB2_LinkError;

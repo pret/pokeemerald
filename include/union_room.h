@@ -165,14 +165,8 @@ u8 sub_8013F78(void);
 bool32 sub_802C908(u16);
 void nullsub_89(u8 taskId);
 void var_800D_set_xB(void);
-
-bool32 mevent_0814257C(u8 *textState, const u8 *str);
-void sub_8018884(const u8 *src);
-void sub_80186A4(void);
-void sub_8014EFC(u32 arg0);
-void sub_80152A8(u32 arg0);
-void sub_8014A00(u32 arg0);
-
-extern bool8 gUnknown_02022C60;
+void MEvent_CreateTask_CardOrNewsWithFriend(u32 arg0);
+void MEvent_CreateTask_CardOrNewsOverWireless(u32 arg0);
+void MEvent_CreateTask_Leader(u32 arg0);
 
 #endif //GUARD_UNION_ROOM_H
