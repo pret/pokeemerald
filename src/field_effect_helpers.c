@@ -1508,7 +1508,7 @@ void sub_8155F80(struct Sprite *sprite)
                 }
             }
             SetGpuReg(REG_OFFSET_BG0VOFS, 0);
-            FieldEffectStop(sprite, FLDEFF_64);
+            FieldEffectStop(sprite, FLDEFF_RAYQUAZA);
             break;
     }
 

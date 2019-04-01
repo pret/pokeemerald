@@ -83,14 +83,21 @@ static const u32 sAreaGlow_Gfx[] = INCBIN_U32("graphics/pokedex/area_glow.4bpp.l
 
 static const u16 sSpeciesHiddenFromAreaScreen[] = { SPECIES_WYNAUT };
 
-static const u16 sMovingRegionMapSections[3] = { MAPSEC_MARINE_CAVE, MAPSEC_UNDERWATER_MARINE_CAVE, MAPSEC_TERRA_CAVE };
+static const u16 sMovingRegionMapSections[3] =
+{
+    MAPSEC_MARINE_CAVE,
+    MAPSEC_UNDERWATER_MARINE_CAVE,
+    MAPSEC_TERRA_CAVE
+};
 
-static const u16 sFeebasData[][3] = {
+static const u16 sFeebasData[][3] =
+{
     {SPECIES_FEEBAS, MAP_GROUP(ROUTE119), MAP_NUM(ROUTE119)},
     {NUM_SPECIES}
 };
 
-static const u16 sLandmarkData[][2] = {
+static const u16 sLandmarkData[][2] =
+{
     {MAPSEC_SKY_PILLAR,       FLAG_LANDMARK_SKY_PILLAR},
     {MAPSEC_SEAFLOOR_CAVERN,  FLAG_LANDMARK_SEAFLOOR_CAVERN},
     {MAPSEC_ALTERING_CAVE_2,  FLAG_LANDMARK_ALTERING_CAVE},
@@ -100,7 +107,8 @@ static const u16 sLandmarkData[][2] = {
     {MAPSEC_NONE}
 };
 
-static const u8 sAreaGlowTilemapMapping[] = {
+static const u8 sAreaGlowTilemapMapping[] =
+{
     0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0a, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f,
     0x11, 0x20, 0x02, 0x03, 0x27, 0x2d, 0x06, 0x07, 0x08, 0x09, 0x0a, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f,
     0x12, 0x21, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x2a, 0x2e, 0x0a, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f,
@@ -119,7 +127,8 @@ static const u8 sAreaGlowTilemapMapping[] = {
     0x1f, 0x22, 0x25, 0x03, 0x28, 0x2d, 0x2c, 0x07, 0x2b, 0x2e, 0x2f, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f,
 };
 
-static const struct UnkStruct_1C4D70 sUnknown_085B4018 = {
+static const struct UnkStruct_1C4D70 sUnknown_085B4018 =
+{
     .bg = 3,
     .unk2 = 0,
     .unk10 = 0,
@@ -127,21 +136,26 @@ static const struct UnkStruct_1C4D70 sUnknown_085B4018 = {
 };
 
 static const u8 sAreaMarkerTiles[];
-static const struct SpriteSheet sAreaMarkerSpriteSheet = {
+static const struct SpriteSheet sAreaMarkerSpriteSheet =
+{
     sAreaMarkerTiles, 0x80, 2
 };
 
 static const u16 sAreaMarkerPalette[];
-static const struct SpritePalette sAreaMarkerSpritePalette = {
+static const struct SpritePalette sAreaMarkerSpritePalette =
+{
     sAreaMarkerPalette, 2
 };
 
-static const struct OamData sAreaMarkerOamData = {
-    .size = 1,
+static const struct OamData sAreaMarkerOamData =
+{
+    .shape = SPRITE_SHAPE(16x16),
+    .size = SPRITE_SIZE(16x16),
     .priority = 1
 };
 
-static const struct SpriteTemplate sAreaMarkerSpriteTemplate = {
+static const struct SpriteTemplate sAreaMarkerSpriteTemplate =
+{
     2,
     2,
     &sAreaMarkerOamData,
@@ -154,16 +168,20 @@ static const struct SpriteTemplate sAreaMarkerSpriteTemplate = {
 static const u16 sAreaMarkerPalette[] = INCBIN_U16("graphics/pokedex/area_marker.gbapal");
 static const u8 sAreaMarkerTiles[] = INCBIN_U8("graphics/pokedex/area_marker.4bpp");
 
-static const struct SpritePalette sAreaUnknownSpritePalette = {
+static const struct SpritePalette sAreaUnknownSpritePalette =
+{
     gPokedexAreaScreenAreaUnknown_Pal, 3
 };
 
-static const struct OamData sAreaUnknownOamData = {
-    .size = 2,
+static const struct OamData sAreaUnknownOamData =
+{
+    .shape = SPRITE_SHAPE(32x32),
+    .size = SPRITE_SIZE(32x32),
     .priority = 1
 };
 
-static const struct SpriteTemplate sAreaUnknownSpriteTemplate = {
+static const struct SpriteTemplate sAreaUnknownSpriteTemplate =
+{
     3,
     3,
     &sAreaUnknownOamData,

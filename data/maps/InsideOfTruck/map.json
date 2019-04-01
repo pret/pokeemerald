@@ -2,7 +2,7 @@
   "id": "MAP_INSIDE_OF_TRUCK",
   "name": "InsideOfTruck",
   "layout": "LAYOUT_INSIDE_OF_TRUCK",
-  "music": "65535",
+  "music": "MUS_NONE",
   "region_map_section": "MAPSEC_INSIDE_OF_TRUCK",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

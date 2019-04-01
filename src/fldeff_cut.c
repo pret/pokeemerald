@@ -1,6 +1,7 @@
 #include "global.h"
 #include "event_obj_lock.h"
 #include "event_object_movement.h"
+#include "faraway_island.h"
 #include "field_camera.h"
 #include "field_effect.h"
 #include "field_player_avatar.h"
@@ -21,6 +22,8 @@
 #include "constants/songs.h"
 
 extern bool8 IsMewPlayingHideAndSeek(void);
+
+extern struct MapPosition gPlayerFacingPosition;
 
 extern const u8 Route103_EventScript_290705[];
 extern const u8 FarawayIsland_Interior_EventScript_267EDB[];
@@ -130,10 +133,10 @@ static const struct OamData sOamData_CutGrass =
     .objMode = 0,
     .mosaic = 0,
     .bpp = 0,
-    .shape = 0,
+    .shape = SPRITE_SHAPE(8x8),
     .x = 0,
     .matrixNum = 0,
-    .size = 0,
+    .size = SPRITE_SIZE(8x8),
     .tileNum = 1,
     .priority = 1,
     .paletteNum = 1,

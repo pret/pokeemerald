@@ -315,7 +315,7 @@ LittlerootTown_MaysHouse_2F_EventScript_1F9576:: @ 81F9576
 	setvar VAR_0x8004, 2
 	special DoPCTurnOnEffect
 	playse SE_PC_ON
-	msgbox gUnknown_08272D87, MSGBOX_DEFAULT
+	msgbox gText_PlayerHouseBootPC, MSGBOX_DEFAULT
 	special BedroomPC
 	waitstate
 	releaseall

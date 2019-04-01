@@ -918,7 +918,7 @@ static void Task_BuyMenu(u8 taskId)
         {
         case LIST_NOTHING_CHOSEN:
             break;
-        case LIST_B_PRESSED:
+        case LIST_CANCEL:
             PlaySE(SE_SELECT);
             ExitBuyMenu(taskId);
             break;
