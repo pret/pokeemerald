@@ -486,7 +486,7 @@ SECTIONS {
         src/item_menu_icons.o(.rodata);
         src/battle_anim_mon_movement.o(.rodata);
         src/item.o(.rodata);
-        data/contest.o(.rodata);
+        src/contest.o(.rodata);
         src/shop.o(.rodata);
         src/fldeff_escalator.o(.rodata);
         src/berry.o(.rodata);
