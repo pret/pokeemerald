@@ -2672,5 +2672,10 @@ extern const u8 gText_CommunicationCompleted[];
 extern const u8 gText_HaventReceivedGiftOkayToDiscard[];
 extern const u8 gText_SendingWonderCard[];
 extern const u8 gText_SendingWonderNews[];
+extern const u8 gText_WirelessCommStatus[];
+extern const u8 gText_PeopleTrading[];
+extern const u8 gText_PeopleBattling[];
+extern const u8 gText_PeopleInUnionRoom[];
+extern const u8 gText_PeopleCommunicating[];
 
 #endif // GUARD_STRINGS_H
