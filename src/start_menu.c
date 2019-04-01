@@ -44,6 +44,7 @@
 #include "window.h"
 #include "constants/songs.h"
 #include "rom_8011DC0.h"
+#include "union_room.h"
 
 // Menu actions
 enum

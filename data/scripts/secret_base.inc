@@ -1052,7 +1052,7 @@ Text_276731: @ 8276731
 	.string "This data is already registered.\n"
 	.string "Would you like to delete it?$"
 
-Text_27676F: @ 827676F
+Text_TooManyBasesDeleteSome: @ 827676F
 	.string "Up to 10 locations can be registered.\p"
 	.string "Delete a location if you want to\n"
 	.string "register another location.$"
@@ -1063,10 +1063,10 @@ Text_2767D1: @ 82767D1
 Text_2767E9: @ 82767E9
 	.string "Data has been unregistered.$"
 
-Text_276805: @ 8276805
+Text_SecretBaseBootUpPC: @ 8276805
 	.string "{PLAYER} booted up the PC.$"
 
-Text_27681A: @ 827681A
+Text_SecretBasePCStartMenu: @ 827681A
 	.string "What would you like to do?$"
 
 Text_276835: @ 8276835

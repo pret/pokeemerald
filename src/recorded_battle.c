@@ -1,5 +1,6 @@
 #include "global.h"
 #include "battle.h"
+#include "battle_anim.h"
 #include "recorded_battle.h"
 #include "main.h"
 #include "pokemon.h"

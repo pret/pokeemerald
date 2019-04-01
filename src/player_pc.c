@@ -20,7 +20,6 @@
 #include "overworld.h"
 #include "palette.h"
 #include "party_menu.h"
-#include "pokenav.h"
 #include "player_pc.h"
 #include "script.h"
 #include "sound.h"
@@ -29,6 +28,7 @@
 #include "strings.h"
 #include "task.h"
 #include "window.h"
+#include "menu_specialized.h"
 
 // structures
 struct Struct203BCC4
@@ -645,7 +645,7 @@ static void Mailbox_ProcessInput(u8 taskId)
         {
             case LIST_NOTHING_CHOSEN:
                 break;
-            case LIST_B_PRESSED:
+            case LIST_CANCEL:
                 PlaySE(SE_SELECT);
                 RemoveScrollIndicatorArrowPair(playerPCItemPageInfo.scrollIndicatorId);
                 Mailbox_ReturnToPlayerPC(taskId);
@@ -1151,7 +1151,7 @@ static void ItemStorage_ProcessInput(u8 taskId)
         {
         case LIST_NOTHING_CHOSEN:
             break;
-        case LIST_B_PRESSED:
+        case LIST_CANCEL:
             PlaySE(SE_SELECT);
             ItemStorage_GoBackToPlayerPCMenu(taskId);
             break;
@@ -1226,7 +1226,7 @@ static void sub_816C4FC(u8 taskId)
     {
     case LIST_NOTHING_CHOSEN:
         break;
-    case LIST_B_PRESSED:
+    case LIST_CANCEL:
         if (gMain.newKeys & A_BUTTON)
         {
             ItemStorage_DoItemSwap(taskId, FALSE);

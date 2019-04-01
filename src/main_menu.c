@@ -525,7 +525,7 @@ enum
     ACTION_OPTION,
     ACTION_MYSTERY_GIFT,
     ACTION_MYSTERY_EVENTS,
-    ACTION_UNKNOWN, // TODO: change when rom_8011DC0 decompiled
+    ACTION_EREADER,
     ACTION_INVALID
 };
 
@@ -1033,7 +1033,7 @@ static void Task_HandleMainMenuAPressed(u8 taskId)
                         }
                         else
                         {
-                            action = ACTION_UNKNOWN;
+                            action = ACTION_EREADER;
                         }
                         break;
                     case 3:
@@ -1082,7 +1082,7 @@ static void Task_HandleMainMenuAPressed(u8 taskId)
                 SetMainCallback2(CB2_InitMysteryEventMenu);
                 DestroyTask(taskId);
                 break;
-            case ACTION_UNKNOWN:
+            case ACTION_EREADER:
                 SetMainCallback2(sub_801867C);
                 DestroyTask(taskId);
                 break;

@@ -1,4 +1,5 @@
 #include "global.h"
+#include "alloc.h"
 #include "battle.h"
 #include "battle_tower.h"
 #include "cable_club.h"
@@ -20,7 +21,7 @@
 #include "link.h"
 #include "list_menu.h"
 #include "main.h"
-#include "alloc.h"
+#include "mevent.h"
 #include "match_call.h"
 #include "menu.h"
 #include "overworld.h"
@@ -31,7 +32,6 @@
 #include "random.h"
 #include "rayquaza_scene.h"
 #include "region_map.h"
-#include "rom_8011DC0.h"
 #include "rtc.h"
 #include "script.h"
 #include "script_menu.h"
@@ -2610,7 +2610,7 @@ static void sub_813A4EC(u8 taskId)
     {
     case LIST_NOTHING_CHOSEN:
         break;
-    case LIST_B_PRESSED:
+    case LIST_CANCEL:
         gSpecialVar_Result = 0x7F;
         PlaySE(SE_SELECT);
         sub_813A570(taskId);
@@ -2690,10 +2690,10 @@ static void sub_813A664(u8 taskId)
 static void sub_813A694(u8 taskId)
 {
     static const struct ScrollArrowsTemplate gUnknown_085B3030 = {
-        .firstArrowType = 2,
+        .firstArrowType = SCROLL_ARROW_UP,
         .firstX = 0,
         .firstY = 0,
-        .secondArrowType = 3,
+        .secondArrowType = SCROLL_ARROW_DOWN,
         .secondX = 0,
         .secondY = 0,
         .fullyUpThreshold = 0,

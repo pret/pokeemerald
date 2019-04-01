@@ -1,5 +1,6 @@
 #include "global.h"
 #include "alloc.h"
+#include "berry_powder.h"
 #include "item.h"
 #include "load_save.h"
 #include "main.h"
@@ -14,8 +15,6 @@
 #include "agb_flash.h"
 
 static void ApplyNewEncryptionKeyToAllEncryptedData(u32 encryptionKey);
-
-extern void ApplyNewEncryptionKeyToBerryPowder(u32 key);
 
 #define SAVEBLOCK_MOVE_RANGE    128
 
