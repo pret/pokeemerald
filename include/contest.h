@@ -216,7 +216,6 @@ struct ContestPokemon
     /*0x02*/ u8 nickname[POKEMON_NAME_LENGTH + 1];
     /*0x0D*/ u8 trainerName[PLAYER_NAME_LENGTH + 1];
     /*0x15*/ u8 trainerGfxId;
-    // Temp note: 2 bytes of padding
     /*0x18*/ u32 flags;
     /*0x1C*/ u8 whichRank:2; // 0x1 0x2
     u8 aiPool_Cool:1; // 0x4
@@ -224,7 +223,6 @@ struct ContestPokemon
     u8 aiPool_Cute:1; // 0x10
     u8 aiPool_Smart:1; // 0x20
     u8 aiPool_Tough:1; // 0x40
-    // Temp note: 1 byte of padding
     /*0x1E*/ u16 moves[4]; // moves
     /*0x26*/ u8 cool; // cool
     /*0x27*/ u8 beauty; // beauty
