@@ -412,14 +412,16 @@ const struct Subsprite gSubspriteTable_8587B78[] =
     {
         .x = -28,
         .y = -4,
-        SPRITE_SIZE_32x8,
+        .shape = ST_OAM_H_RECTANGLE,
+        .size = 1,
         .tileOffset = 0,
         .priority = 0
     },
     {
         .x = 4,
         .y = -4,
-        SPRITE_SIZE_32x8,
+        .shape = ST_OAM_H_RECTANGLE,
+        .size = 1,
         .tileOffset = 4,
         .priority = 0
     }
