@@ -2,6 +2,7 @@
 #include "alloc.h"
 #include "apprentice.h"
 #include "battle.h"
+#include "battle_anim.h"
 #include "battle_controllers.h"
 #include "battle_message.h"
 #include "battle_pike.h"

@@ -49,7 +49,7 @@
 #include "pokemon_summary_screen.h"
 #include "region_map.h"
 #include "reshow_battle_screen.h"
-#include "rom_8011DC0.h"
+#include "union_room.h"
 #include "scanline_effect.h"
 #include "script.h"
 #include "sound.h"
