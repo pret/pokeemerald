@@ -1412,7 +1412,7 @@ static void atk05_damagecalc(void)
     u8 moveType;
 
     GET_MOVE_TYPE(gCurrentMove, moveType);
-    gBattleMoveDamage = CalculateMoveDamage(gCurrentMove, gBattlerAttacker, gBattlerTarget, moveType, 0, gIsCriticalHit, TRUE);
+    gBattleMoveDamage = CalculateMoveDamage(gCurrentMove, gBattlerAttacker, gBattlerTarget, moveType, 0, gIsCriticalHit, TRUE, TRUE);
     gBattlescriptCurrInstr++;
 }
 
@@ -4449,7 +4449,7 @@ static void atk49_moveend(void)
                     gHitMarker |= HITMARKER_NO_ATTACKSTRING;
                 }
 
-                if (battlerId < gBattlersCount && gBattleMons[battlerId].hp != 0)
+                if (IsBattlerAlive(battlerId))
                 {
                     gBattlerTarget = battlerId;
                     gBattleScripting.atk49_state = 0;
