@@ -445,18 +445,15 @@ const struct CompressedSpriteSheet gUnknown_08587B88 =
 const struct OamData gOamData_8587B90 =
 {
     .y = 0,
-    .affineMode = 0,
-    .objMode = 0,
-    .mosaic = 0,
-    .bpp = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(16x16),
     .x = 0,
-    .matrixNum = 0,
     .size = SPRITE_SIZE(16x16),
     .tileNum = 0,
     .priority = 0,
     .paletteNum = 0,
-    .affineParam = 0
 };
 
 const struct SpriteTemplate gSpriteTemplate_8587B98 =
@@ -486,18 +483,15 @@ const struct SpritePalette gUnknown_08587BB8 =
 const struct OamData gOamData_8587BC0 =
 {
     .y = 0,
-    .affineMode = 0,
-    .objMode = 0,
-    .mosaic = 0,
-    .bpp = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(64x32),
     .x = 0,
-    .matrixNum = 0,
     .size = SPRITE_SIZE(64x32),
     .tileNum = 0,
     .priority = 0,
     .paletteNum = 0,
-    .affineParam = 0
 };
 
 const struct SpriteTemplate gSpriteTemplate_8587BC8 =
@@ -514,18 +508,15 @@ const struct SpriteTemplate gSpriteTemplate_8587BC8 =
 const struct OamData gOamData_8587BE0 =
 {
     .y = 0,
-    .affineMode = 0,
-    .objMode = 0,
-    .mosaic = 0,
-    .bpp = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(64x64),
     .x = 0,
-    .matrixNum = 0,
     .size = SPRITE_SIZE(64x64),
     .tileNum = 0,
     .priority = 3,
     .paletteNum = 2,
-    .affineParam = 0
 };
 
 const struct SpriteTemplate gSpriteTemplate_8587BE8 =
@@ -768,18 +759,16 @@ static const struct SpritePalette sUnknown_08589924[] =
 const struct OamData gOamData_8589944 =
 {
     .y = 0,
-    .affineMode = 3,
-    .objMode = 1,
-    .mosaic = 0,
-    .bpp = 0,
+    .affineMode = ST_OAM_AFFINE_DOUBLE,
+    .objMode = ST_OAM_OBJ_BLEND,
+    .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(64x64),
     .x = 0,
-    .matrixNum = 0,
     .size = SPRITE_SIZE(64x64),
     .tileNum = 0,
     .priority = 0,
     .paletteNum = 0,
-    .affineParam = 0
+    .affineParam = 0,
 };
 
 const union AffineAnimCmd gSpriteAffineAnim_858994C[] =
@@ -5762,3 +5751,5 @@ void sub_80DFA08(struct ContestPokemon *mon, s32 language)
         name[PLAYER_NAME_LENGTH] = EOS;
     }
 }
+
+

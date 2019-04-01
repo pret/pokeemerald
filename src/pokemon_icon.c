@@ -927,18 +927,15 @@ const struct SpritePalette gMonIconPaletteTable[] =
 const struct OamData sMonIconOamData =
 {
     .y = 0,
-    .affineMode = 0,
-    .objMode = 0,
-    .mosaic = 0,
-    .bpp = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(32x32),
     .x = 0,
-    .matrixNum = 0,
     .size = SPRITE_SIZE(32x32),
     .tileNum = 0,
     .priority = 1,
     .paletteNum = 0,
-    .affineParam = 0
 };
 
 // fastest to slowest
@@ -1311,3 +1308,5 @@ void sub_80D32C8(struct Sprite *sprite, u8 animNum)
     sprite->animDelayCounter = 0;
     sprite->animCmdIndex = 0;
 }
+
+
