@@ -1887,11 +1887,11 @@ void sub_80BC890(void)
 
 void sub_80BC8D4(u8 dexMode, u8 sortMode)
 {
-    u16 vars[3]; //I have no idea why three regular variables are stored in an array, but whatever.
+    u32 vars[3]; //I have no idea why three regular variables are stored in an array, but whatever.
 #define temp_dexCount   vars[0]
 #define temp_isHoennDex vars[1]
 #define temp_dexNum     vars[2]
-    s16 i;
+    s32 i;
 
     sPokedexView->pokemonListCount = 0;
 
@@ -1956,11 +1956,11 @@ void sub_80BC8D4(u8 dexMode, u8 sortMode)
             }
             break;
         case 1:
-            for (i = 0; i < POKEMON_SLOTS_NUMBER - 1; i++)
+            for (i = 0; i < ARRAY_COUNT(gPokedexOrder_Alphabetical); i++)
             {
                 temp_dexNum = gPokedexOrder_Alphabetical[i];
 
-                if (NationalToHoennOrder(temp_dexNum) <= temp_dexCount && GetSetPokedexFlag(temp_dexNum, FLAG_GET_SEEN))
+                if (NationalToHoennOrder(temp_dexNum) != 0 && GetSetPokedexFlag(temp_dexNum, FLAG_GET_SEEN))
                 {
                     sPokedexView->pokedexList[sPokedexView->pokemonListCount].dexNum = temp_dexNum;
                     sPokedexView->pokedexList[sPokedexView->pokemonListCount].seen = TRUE;
@@ -1970,11 +1970,11 @@ void sub_80BC8D4(u8 dexMode, u8 sortMode)
             }
             break;
         case 2:
-            for (i = NATIONAL_DEX_COUNT - 1; i >= 0; i--)
+            for (i = ARRAY_COUNT(gPokedexOrder_Weight) - 1; i >= 0; i--)
             {
                 temp_dexNum = gPokedexOrder_Weight[i];
 
-                if (NationalToHoennOrder(temp_dexNum) <= temp_dexCount && GetSetPokedexFlag(temp_dexNum, FLAG_GET_CAUGHT))
+                if (NationalToHoennOrder(temp_dexNum) != 0 && GetSetPokedexFlag(temp_dexNum, FLAG_GET_CAUGHT))
                 {
                     sPokedexView->pokedexList[sPokedexView->pokemonListCount].dexNum = temp_dexNum;
                     sPokedexView->pokedexList[sPokedexView->pokemonListCount].seen = TRUE;
@@ -1984,11 +1984,11 @@ void sub_80BC8D4(u8 dexMode, u8 sortMode)
             }
             break;
         case 3:
-            for (i = 0; i < NATIONAL_DEX_COUNT; i++)
+            for (i = 0; i < ARRAY_COUNT(gPokedexOrder_Weight); i++)
             {
                 temp_dexNum = gPokedexOrder_Weight[i];
 
-                if (NationalToHoennOrder(temp_dexNum) <= temp_dexCount && GetSetPokedexFlag(temp_dexNum, FLAG_GET_CAUGHT))
+                if (NationalToHoennOrder(temp_dexNum) != 0 && GetSetPokedexFlag(temp_dexNum, FLAG_GET_CAUGHT))
                 {
                     sPokedexView->pokedexList[sPokedexView->pokemonListCount].dexNum = temp_dexNum;
                     sPokedexView->pokedexList[sPokedexView->pokemonListCount].seen = TRUE;
@@ -1998,11 +1998,11 @@ void sub_80BC8D4(u8 dexMode, u8 sortMode)
             }
             break;
         case 4:
-            for (i = NATIONAL_DEX_COUNT - 1; i >= 0; i--)
+            for (i = ARRAY_COUNT(gPokedexOrder_Height) - 1; i >= 0; i--)
             {
                 temp_dexNum = gPokedexOrder_Height[i];
 
-                if (NationalToHoennOrder(temp_dexNum) <= temp_dexCount && GetSetPokedexFlag(temp_dexNum, FLAG_GET_CAUGHT))
+                if (NationalToHoennOrder(temp_dexNum) != 0 && GetSetPokedexFlag(temp_dexNum, FLAG_GET_CAUGHT))
                 {
                     sPokedexView->pokedexList[sPokedexView->pokemonListCount].dexNum = temp_dexNum;
                     sPokedexView->pokedexList[sPokedexView->pokemonListCount].seen = TRUE;
@@ -2012,11 +2012,11 @@ void sub_80BC8D4(u8 dexMode, u8 sortMode)
             }
             break;
         case 5:
-            for (i = 0; i < NATIONAL_DEX_COUNT; i++)
+            for (i = 0; i < ARRAY_COUNT(gPokedexOrder_Height); i++)
             {
                 temp_dexNum = gPokedexOrder_Height[i];
 
-                if (NationalToHoennOrder(temp_dexNum) <= temp_dexCount && GetSetPokedexFlag(temp_dexNum, FLAG_GET_CAUGHT))
+                if (NationalToHoennOrder(temp_dexNum) != 0 && GetSetPokedexFlag(temp_dexNum, FLAG_GET_CAUGHT))
                 {
                     sPokedexView->pokedexList[sPokedexView->pokemonListCount].dexNum = temp_dexNum;
                     sPokedexView->pokedexList[sPokedexView->pokemonListCount].seen = TRUE;
@@ -3877,7 +3877,7 @@ void sub_80C01CC(struct Sprite *sprite)
 void sub_80C020C(u32 num, u32 value, u32 c, u32 d)
 {
     u8 str[0x10];
-    u8 str2[0x20];
+    u8 str2[0x30];
     u16 natNum;
     const u8 *text;
     const u8 *text2;
@@ -4282,12 +4282,7 @@ s8 GetSetPokedexFlag(u16 nationalDexNo, u8 caseID)
              && (gSaveBlock2Ptr->pokedex.seen[index] & mask) == (gSaveBlock1Ptr->seen2[index] & mask))
                 retVal = 1;
             else
-            {
-                gSaveBlock2Ptr->pokedex.seen[index] &= ~mask;
-                gSaveBlock1Ptr->seen1[index] &= ~mask;
-                gSaveBlock1Ptr->seen2[index] &= ~mask;
                 retVal = 0;
-            }
         }
         break;
     case FLAG_GET_CAUGHT:
@@ -4298,13 +4293,7 @@ s8 GetSetPokedexFlag(u16 nationalDexNo, u8 caseID)
              && (gSaveBlock2Ptr->pokedex.owned[index] & mask) == (gSaveBlock1Ptr->seen2[index] & mask))
                 retVal = 1;
             else
-            {
-                gSaveBlock2Ptr->pokedex.owned[index] &= ~mask;
-                gSaveBlock2Ptr->pokedex.seen[index] &= ~mask;
-                gSaveBlock1Ptr->seen1[index] &= ~mask;
-                gSaveBlock1Ptr->seen2[index] &= ~mask;
                 retVal = 0;
-            }
         }
         break;
     case FLAG_SET_SEEN:

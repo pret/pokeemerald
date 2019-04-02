@@ -314,7 +314,7 @@ struct BaseStats
  /* 0x06 */ u8 type1;
  /* 0x07 */ u8 type2;
  /* 0x08 */ u8 catchRate;
- /* 0x09 */ u8 expYield;
+ /* 0x09 */ u16 expYield;
  /* 0x0A */ u16 evYield_HP:2;
  /* 0x0A */ u16 evYield_Attack:2;
  /* 0x0A */ u16 evYield_Defense:2;
@@ -533,7 +533,6 @@ u16 NationalToHoennOrder(u16 nationalNum);
 u16 SpeciesToNationalPokedexNum(u16 species);
 u16 SpeciesToHoennPokedexNum(u16 species);
 u16 HoennToNationalOrder(u16 hoennNum);
-u16 SpeciesToCryId(u16 species);
 void sub_806D544(u16 species, u32 personality, u8 *dest);
 void DrawSpindaSpots(u16 species, u32 personality, u8 *dest, u8 a4);
 void EvolutionRenameMon(struct Pokemon *mon, u16 oldSpecies, u16 newSpecies);
