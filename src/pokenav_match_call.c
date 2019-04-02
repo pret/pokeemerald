@@ -680,7 +680,7 @@ bool32 MatchCallFlagGetByIndex(u32 idx)
     match_call_t matchCall;
     u32 i;
 
-    if (idx > 20)
+    if (idx > ARRAY_COUNT(sMatchCallHeaders) - 1)
         return FALSE;
     matchCall = sMatchCallHeaders[idx];
     i = MatchCallGetFunctionIndex(matchCall);
@@ -727,7 +727,7 @@ u8 sub_81D16DC(u32 idx)
     match_call_t matchCall;
     u32 i;
 
-    if (idx > 20)
+    if (idx > ARRAY_COUNT(sMatchCallHeaders) - 1)
         return 0;
     matchCall = sMatchCallHeaders[idx];
     i = MatchCallGetFunctionIndex(matchCall);
@@ -771,7 +771,7 @@ bool32 MatchCall_IsRematchable(u32 idx)
     match_call_t matchCall;
     u32 i;
 
-    if (idx > 20)
+    if (idx > ARRAY_COUNT(sMatchCallHeaders) - 1)
         return 0;
     matchCall = sMatchCallHeaders[idx];
     i = MatchCallGetFunctionIndex(matchCall);
@@ -810,13 +810,13 @@ bool32 sub_81D17E8(u32 idx)
     match_call_t matchCall;
     u32 i;
 
-    if (idx > 20)
+    if (idx > ARRAY_COUNT(sMatchCallHeaders) - 1)
         return FALSE;
     matchCall = sMatchCallHeaders[idx];
     i = MatchCallGetFunctionIndex(matchCall);
     if (gUnknown_08625338[i](matchCall))
         return TRUE;
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < ARRAY_COUNT(sMatchCallCheckPageOverrides); i++)
     {
         if (sMatchCallCheckPageOverrides[i].idx == idx)
             return TRUE;
@@ -854,7 +854,7 @@ u32 MatchCall_GetRematchTableIdx(u32 idx)
     match_call_t matchCall;
     u32 i;
 
-    if (idx > 20)
+    if (idx > ARRAY_COUNT(sMatchCallHeaders) - 1)
         return REMATCH_TABLE_ENTRIES;
     matchCall = sMatchCallHeaders[idx];
     i = MatchCallGetFunctionIndex(matchCall);
@@ -891,7 +891,7 @@ void MatchCall_GetMessage(u32 idx, u8 *dest)
     match_call_t matchCall;
     u32 i;
 
-    if (idx > 20)
+    if (idx > ARRAY_COUNT(sMatchCallHeaders) - 1)
         return;
     matchCall = sMatchCallHeaders[idx];
     i = MatchCallGetFunctionIndex(matchCall);
@@ -1093,7 +1093,7 @@ void sub_81D1A78(u32 idx, const u8 **desc, const u8 **name)
     match_call_t matchCall;
     u32 i;
 
-    if (idx > 20)
+    if (idx > ARRAY_COUNT(sMatchCallHeaders) - 1)
         return;
     matchCall = sMatchCallHeaders[idx];
     i = MatchCallGetFunctionIndex(matchCall);
@@ -1146,11 +1146,11 @@ const u8 *sub_81D1B40(u32 idx, u32 offset)
 {
     u32 i;
 
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < ARRAY_COUNT(sMatchCallCheckPageOverrides); i++)
     {
         if (sMatchCallCheckPageOverrides[i].idx == idx)
         {
-            for (; i + 1 < 4 && sMatchCallCheckPageOverrides[i + 1].idx == idx; i++)
+            for (; i + 1 < ARRAY_COUNT(sMatchCallCheckPageOverrides) && sMatchCallCheckPageOverrides[i + 1].idx == idx; i++)
             {
                 if (!FlagGet(sMatchCallCheckPageOverrides[i + 1].v4))
                     break;
@@ -1244,7 +1244,7 @@ s32 sub_81D1BD0(u32 idx)
 {
     u32 i;
 
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < ARRAY_COUNT(sMatchCallCheckPageOverrides); i++)
     {
         if (sMatchCallCheckPageOverrides[i].idx == idx)
             return sMatchCallCheckPageOverrides[i].v2;
@@ -1256,7 +1256,7 @@ bool32 sub_81D1BF8(u32 idx)
 {
     s32 i;
 
-    for (i = 0; i < 21; i++)
+    for (i = 0; i < (s32)ARRAY_COUNT(sMatchCallHeaders); i++)
     {
         u32 r0 = MatchCall_GetRematchTableIdx(i);
         if (r0 != REMATCH_TABLE_ENTRIES && r0 == idx)
