@@ -12,14 +12,10 @@
     .include "src/union_room_battle.o"
 	.include "src/mevent2.o"
 	.include "src/mevent_801BAAC.o"
+    .include "src/mevent_server.o"
 
-    @ mevent_server
-gUnknown_02022C7C: @ 2022C7C
-	.space 0x4
-
-s_mevent_srv_ish_ptr: @ 2022C80
-	.space 0x4
-
+    @ union_room_chat
+    .align 2
 gUnknown_02022C84: @ 2022C84
 	.space 0x4
 
