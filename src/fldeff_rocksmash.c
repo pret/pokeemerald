@@ -27,9 +27,6 @@ static void sub_813561C(u8 taskId);
 static void sub_81356C4(void);
 static void sub_8135714(void);
 
-// extern RAM loc
-extern struct MapPosition gPlayerFacingPosition;
-
 // text
 bool8 CheckObjectGraphicsInFrontOfPlayer(u8 graphicsId)
 {
