@@ -175,7 +175,7 @@ sub_801D59C: @ 801D59C
 	adds r0, r4, 0
 	adds r1, r6, 0
 	movs r3, 0x4
-	bl sub_801D904
+	bl mevent_srv_sub_init_send
 	add sp, 0x4
 	pop {r4-r6}
 	pop {r0}
@@ -215,7 +215,7 @@ sub_801D5FC: @ 801D5FC
 	push {r4,lr}
 	adds r4, r0, 0
 	adds r0, 0x24
-	bl sub_801D8C0
+	bl mevent_srv_sub_recv
 	cmp r0, 0
 	beq _0801D612
 	movs r0, 0x4
@@ -234,7 +234,7 @@ sub_801D61C: @ 801D61C
 	push {r4,lr}
 	adds r4, r0, 0
 	adds r0, 0x24
-	bl sub_801D8CC
+	bl mevent_srv_sub_send
 	cmp r0, 0
 	beq _0801D632
 	movs r0, 0x4
@@ -303,7 +303,7 @@ _0801D6C4:
 	adds r0, 0x24
 	ldr r1, [r2, 0x4]
 	ldr r2, [r4, 0x18]
-	bl sub_801D928
+	bl mevent_srv_sub_init_recv
 	movs r0, 0x2
 	b _0801D7FE
 _0801D6D4:
@@ -315,7 +315,7 @@ _0801D6D8:
 	ldr r2, [r4, 0x14]
 	movs r1, 0x14
 	movs r3, 0
-	bl sub_801D904
+	bl mevent_srv_sub_init_send
 	movs r0, 0x3
 	b _0801D7FE
 _0801D6EA:
@@ -391,7 +391,7 @@ _0801D764:
 	ldr r2, [r4, 0x14]
 	movs r1, 0x11
 	movs r3, 0x64
-	bl sub_801D904
+	bl mevent_srv_sub_init_send
 	b _0801D804
 _0801D77C:
 	ldr r2, [r4, 0x4]
