@@ -1579,18 +1579,15 @@ static void LoadAshSpriteSheet(void)
 static const struct OamData sAshSpriteOamData =
 {
     .y = 0,
-    .affineMode = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_BLEND,
-    .mosaic = 0,
-    .bpp = 0,
+    .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(64x64),
     .x = 0,
-    .matrixNum = 0,
     .size = SPRITE_SIZE(64x64),
     .tileNum = 0,
     .priority = 1,
     .paletteNum = 15,
-    .affineParam = 0,
 };
 
 static const union AnimCmd sAshSpriteAnimCmd0[] =
@@ -1800,18 +1797,15 @@ static const struct SpriteSheet gFog2SpriteSheet =
 static const struct OamData sFog2SpriteOamData =
 {
     .y = 0,
-    .affineMode = 0,
-    .objMode = 1,
-    .mosaic = 0,
-    .bpp = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_BLEND,
+    .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(64x64),
     .x = 0,
-    .matrixNum = 0,
     .size = SPRITE_SIZE(64x64),
     .tileNum = 0,
     .priority = 2,
     .paletteNum = 0,
-    .affineParam = 0,
 };
 
 static const union AnimCmd sFog2SpriteAnimCmd0[] =
@@ -2043,18 +2037,15 @@ static void DestroySandstormSprites(void)
 static const struct OamData sSandstormSpriteOamData =
 {
     .y = 0,
-    .affineMode = 0,
-    .objMode = 1,
-    .mosaic = 0,
-    .bpp = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_BLEND,
+    .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(64x64),
     .x = 0,
-    .matrixNum = 0,
     .size = SPRITE_SIZE(64x64),
     .tileNum = 0,
     .priority = 1,
     .paletteNum = 0,
-    .affineParam = 0,
 };
 
 static const union AnimCmd sSandstormSpriteAnimCmd0[] =
@@ -2591,3 +2582,5 @@ static void UpdateRainCounter(u8 newWeather, u8 oldWeather)
      && (newWeather == WEATHER_RAIN_LIGHT || newWeather == WEATHER_RAIN_MED))
         IncrementGameStat(GAME_STAT_GOT_RAINED_ON);
 }
+
+

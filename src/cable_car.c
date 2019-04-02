@@ -151,25 +151,46 @@ const struct SpritePalette gUnknown_085CDB74[] = {
     { }
 };
 
-const struct OamData gOamData_85CDB84 = {
+const struct OamData gOamData_85CDB84 =
+{
+    .y = 0,
     .affineMode = ST_OAM_AFFINE_DOUBLE,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(64x64),
+    .x = 0,
     .size = SPRITE_SIZE(64x64),
-    .priority = 2
+    .tileNum = 0,
+    .priority = 2,
+    .paletteNum = 0,
 };
 
-const struct OamData gOamData_85CDB8C = {
+const struct OamData gOamData_85CDB8C =
+{
+    .y = 0,
     .affineMode = ST_OAM_AFFINE_DOUBLE,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(16x8),
+    .x = 0,
     .size = SPRITE_SIZE(16x8),
-    .priority = 2
+    .tileNum = 0,
+    .priority = 2,
+    .paletteNum = 0,
 };
 
-const struct OamData gOamData_85CDB94 = {
+const struct OamData gOamData_85CDB94 =
+{
+    .y = 0,
     .affineMode = ST_OAM_AFFINE_DOUBLE,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(16x16),
+    .x = 0,
     .size = SPRITE_SIZE(16x16),
-    .priority = 2
+    .tileNum = 0,
+    .priority = 2,
+    .paletteNum = 0,
 };
 
 const struct SpriteTemplate gSpriteTemplate_85CDB9C[] =
@@ -1002,3 +1023,4 @@ static void sub_81514C8(u8 arg0)
 
     sCableCar->unk1C = 0;
 }
+

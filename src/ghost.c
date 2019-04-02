@@ -87,7 +87,7 @@ const union AffineAnimCmd *const gUnknown_08596D54[] =
     gUnknown_08596D44,
 };
 
-const struct SpriteTemplate gUnknown_08596D58 =
+const struct SpriteTemplate gShadowBallSpriteTemplate =
 {
     .tileTag = ANIM_TAG_SHADOW_BALL,
     .paletteTag = ANIM_TAG_SHADOW_BALL,
@@ -261,20 +261,20 @@ static void sub_81116E8(struct Sprite *sprite)
     AnimTranslateLinear(sprite);
     sprite->pos2.x += Sin(sprite->data[5], 10);
     sprite->pos2.y += Cos(sprite->data[5], 15);
-    
+
     r2 = sprite->data[5];
     sprite->data[5] = (sprite->data[5] + 5) & 0xFF;
     r0 = sprite->data[5];
-    
+
     if (r2 == 0 || r2 > 196)
     {
         if (r0 > 0)
             PlaySE(SE_W109);
     }
-    
+
     if (sprite->data[6] == 0)
     {
-        sprite->invisible = TRUE; 
+        sprite->invisible = TRUE;
         sprite->callback = DestroyAnimSpriteAndDisableBlend;
     }
     else
@@ -283,18 +283,18 @@ static void sub_81116E8(struct Sprite *sprite)
 
 static void sub_8111764(struct Sprite *sprite)
 {
-    
-    s16 r0; 
+
+    s16 r0;
     if (sprite->data[6] > 0xFF)
     {
         if (++sprite->data[6] == 0x10d)
             sprite->data[6] = 0;
         return;
     }
-    
+
     r0 = sprite->data[7];
     sprite->data[7]++;
-    
+
     if ((r0 & 0xFF) == 0)
     {
         sprite->data[7] &= 0xff00;
@@ -392,16 +392,16 @@ static void sub_811196C(u8 taskId)
     }
 }
 
-// Spins a sprite towards the target, pausing in the middle. 
-// Used in Shadow Ball. 
+// Spins a sprite towards the target, pausing in the middle.
+// Used in Shadow Ball.
 // arg 0: duration step 1 (attacker -> center)
 // arg 1: duration step 2 (spin center)
 // arg 2: duration step 3 (center -> target)
 static void InitAnimShadowBall(struct Sprite *sprite)
 {
-    u16 r5, r6;
-    r5 = sprite->pos1.x;
-    r6 = sprite->pos1.y;
+    s16 oldPosX = sprite->pos1.x;
+    s16 oldPosY = sprite->pos1.y;
+
     sprite->pos1.x = GetBattlerSpriteCoord(gBattleAnimAttacker, 2);
     sprite->pos1.y = GetBattlerSpriteCoord(gBattleAnimAttacker, 3);
     sprite->data[0] = 0;
@@ -410,8 +410,8 @@ static void InitAnimShadowBall(struct Sprite *sprite)
     sprite->data[3] = gBattleAnimArgs[2];
     sprite->data[4] = sprite->pos1.x << 4;
     sprite->data[5] = sprite->pos1.y << 4;
-    sprite->data[6] = (((s16)r5 - sprite->pos1.x) << 4) / (gBattleAnimArgs[0] << 1);
-    sprite->data[7] = (((s16)r6 - sprite->pos1.y) << 4) / (gBattleAnimArgs[0] << 1);
+    sprite->data[6] = ((oldPosX - sprite->pos1.x) << 4) / (gBattleAnimArgs[0] << 1);
+    sprite->data[7] = ((oldPosY - sprite->pos1.y) << 4) / (gBattleAnimArgs[0] << 1);
     sprite->callback = AnimShadowBallStep;
 }
 
@@ -465,50 +465,57 @@ static void sub_8111B9C(struct Sprite *sprite)
     sprite->callback = sub_8111BB4;
 }
 
-static void sub_8111BB4(struct Sprite *sprite) {
-    
-    s8 r5 = FALSE;
+static void sub_8111BB4(struct Sprite *sprite)
+{
+    bool8 r5 = FALSE;
     bool8 r6 = FALSE;
-    if(sprite->animEnded)
+
+    if (sprite->animEnded)
     {
-        if(!(sprite->invisible))
-            sprite->invisible=TRUE;
-        switch(sprite->data[0])
+        if (!sprite->invisible)
+            sprite->invisible = TRUE;
+
+        switch (sprite->data[0])
         {
-            case 0:
-                if((sprite->data[1]) != 2)
-                    break;
-                goto loc_08111C06;
-            case 1:
-                if((sprite->data[1]) == 4)
-                    r5 = TRUE;
-                break;
-            default:
-                r6 = TRUE;
+        default:
+            r6 = TRUE;
+            break;
+        case 0:
+            if (sprite->data[1] == 2)
+                r5 = TRUE;
+            break;
+        case 1:
+            if (sprite->data[1] == 4)
+                r5 = TRUE;
+            break;
         }
-        if(r5)
+
+        if (r5)
         {
-        loc_08111C06:
             sprite->invisible ^= 1;
             sprite->data[2]++;
             sprite->data[1] = 0;
-            if(sprite->data[2] == 5)
+            if (sprite->data[2] == 5)
             {
                 sprite->data[2] = 0;
                 sprite->data[0]++;
             }
         }
-        else if(r6)
+        else if (r6)
+        {
             DestroyAnimSprite(sprite);
+        }
         else
+        {
             sprite->data[1]++;
+        }
     }
 }
 
 void sub_8111C50(u8 taskId)
 {
     struct Task *task;
-    
+
     task = &gTasks[taskId];
     task->data[0] = CloneBattlerSpriteWithBlend(1);
     if (task->data[0] < 0)
@@ -523,7 +530,7 @@ void sub_8111C50(u8 taskId)
     SetGpuReg(REG_OFFSET_BLDCNT, (BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_ALL));
     SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(task->data[2], task->data[3]));
     gSprites[task->data[0]].data[0] = 80;
-    if (GetBattlerSide(gBattleAnimTarget) == 0)
+    if (GetBattlerSide(gBattleAnimTarget) == B_SIDE_PLAYER)
     {
         gSprites[task->data[0]].data[1] = -144;
         gSprites[task->data[0]].data[2] = 112;
@@ -573,6 +580,7 @@ static void sub_8111D78(u8 taskId)
         break;
     case 2:
         DestroyAnimVisualTask(taskId);
+        break;
     }
 }
 
@@ -595,7 +603,7 @@ static void sub_8111E78(u8 taskId)
     switch (task->data[15])
     {
     case 0:
-        task->data[14] = AllocSpritePalette(0x2771);
+        task->data[14] = AllocSpritePalette(ANIM_TAG_BENT_SPOON);
         if (task->data[14] == 0xFF || task->data[14] == 0xF)
         {
             DestroyAnimVisualTask(taskId);
@@ -605,7 +613,7 @@ static void sub_8111E78(u8 taskId)
             task->data[0] = CloneBattlerSpriteWithBlend(1);
             if (task->data[0] < 0)
             {
-                FreeSpritePaletteByTag(0x2771);
+                FreeSpritePaletteByTag(ANIM_TAG_BENT_SPOON);
                 DestroyAnimVisualTask(taskId);
             }
             else
@@ -698,14 +706,14 @@ static void sub_81120DC(u8 taskId)
 static void sub_8112170(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
-    u8 position = GetBattlerSpriteBGPriorityRank(gBattleAnimTarget);
+    u8 rank = GetBattlerSpriteBGPriorityRank(gBattleAnimTarget);
 
     switch (task->data[15])
     {
     case 0:
         gScanlineEffect.state = 3;
         task->data[14] = GetAnimBattlerSpriteId(1);
-        if (position == 1)
+        if (rank == 1)
             ClearGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_BG1_ON);
         else
             ClearGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_BG2_ON);
@@ -714,12 +722,12 @@ static void sub_8112170(u8 taskId)
         BlendPalette(task->data[4], 16, 0, RGB(13, 0, 15));
         break;
     case 2:
-        gSprites[task->data[14]].invisible = 1;
+        gSprites[task->data[14]].invisible = TRUE;
         obj_delete_but_dont_free_vram(&gSprites[task->data[0]]);
-        FreeSpritePaletteByTag(0x2771);
+        FreeSpritePaletteByTag(ANIM_TAG_BENT_SPOON);
         SetGpuReg(REG_OFFSET_BLDCNT, 0);
         SetGpuReg(REG_OFFSET_BLDALPHA, 0);
-        if (position == 1)
+        if (rank == 1)
             SetGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_BG1_ON);
         else
             SetGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_BG2_ON);
@@ -886,7 +894,7 @@ static void sub_81125E0(u8 taskId)
                 }
             }
         }
-        
+
         if (task->data[10])
             task->data[10]--;
         else if (task->data[6])
@@ -1081,7 +1089,7 @@ static void sub_8112ACC(struct Sprite *sprite)
     if (sprite->data[0] == 0)
     {
         SetGpuReg(REG_OFFSET_BLDCNT, (BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_ALL));
-        SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(0x10, 0));
+        SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(16, 0));
         sprite->data[0]++;
         sprite->data[1] = 0;
         sprite->data[2] = 0;
@@ -1120,7 +1128,7 @@ static void sub_8112B78(struct Sprite *sprite)
     sprite->pos2.x = Sin(sprite->data[0], 12);
     if (GetBattlerSide(gBattleAnimAttacker) != B_SIDE_PLAYER)
         sprite->pos2.x = -sprite->pos2.x;
-    
+
     sprite->data[0] = (sprite->data[0] + 6) & 0xFF;
     sprite->data[1] += 0x100;
     sprite->pos2.y = -(sprite->data[1] >> 8);

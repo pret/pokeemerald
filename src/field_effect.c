@@ -284,20 +284,44 @@ bool8 (*const gFieldEffectScriptFuncs[])(u8 **, u32 *) =
 
 const struct OamData gNewGameBirchOamAttributes =
 {
+    .y = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(64x64),
-    .size = SPRITE_SIZE(64x64)
+    .x = 0,
+    .size = SPRITE_SIZE(64x64),
+    .tileNum = 0,
+    .priority = 0,
+    .paletteNum = 0,
 };
 
 const struct OamData gOamData_855C218 =
 {
+    .y = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(8x8),
-    .size = SPRITE_SIZE(8x8)
+    .x = 0,
+    .size = SPRITE_SIZE(8x8),
+    .tileNum = 0,
+    .priority = 0,
+    .paletteNum = 0,
 };
 
 const struct OamData gOamData_855C220 =
 {
+    .y = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(16x16),
-    .size = SPRITE_SIZE(16x16)
+    .x = 0,
+    .size = SPRITE_SIZE(16x16),
+    .tileNum = 0,
+    .priority = 0,
+    .paletteNum = 0,
 };
 
 const struct SpriteFrameImage gNewGameBirchPicTable[] =
@@ -347,8 +371,16 @@ const struct SpritePalette gFieldEffectObjectPaletteInfo5 =
 
 const struct OamData gOamData_855C26C =
 {
+    .y = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(32x16),
-    .size = SPRITE_SIZE(32x16)
+    .x = 0,
+    .size = SPRITE_SIZE(32x16),
+    .tileNum = 0,
+    .priority = 0,
+    .paletteNum = 0,
 };
 
 const struct SpriteFrameImage gSpriteImageTable_855C274[] =
@@ -3759,3 +3791,4 @@ static void Fldeff_MoveDeoxysRock_Step(u8 taskId)
             break;
     }
 }
+

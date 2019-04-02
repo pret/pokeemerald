@@ -6,7 +6,7 @@
 
 void sub_8110368(struct Sprite *);
 void sub_8110438(struct Sprite *);
-void sub_81104E4(struct Sprite *);
+void AnimTranslateWebThread(struct Sprite *);
 void sub_81105B4(struct Sprite *);
 void sub_811067C(struct Sprite *);
 void AnimTranslateStinger(struct Sprite *);
@@ -90,7 +90,7 @@ const struct SpriteTemplate gUnknown_085969C8 =
     .callback = sub_8110438,
 };
 
-const struct SpriteTemplate gUnknown_085969E0 =
+const struct SpriteTemplate gWebThreadSpriteTemplate =
 {
     .tileTag = ANIM_TAG_WEB_THREAD,
     .paletteTag = ANIM_TAG_WEB_THREAD,
@@ -98,7 +98,7 @@ const struct SpriteTemplate gUnknown_085969E0 =
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_81104E4,
+    .callback = AnimTranslateWebThread,
 };
 
 const struct SpriteTemplate gUnknown_085969F8 =
@@ -124,7 +124,7 @@ const union AffineAnimCmd *const gUnknown_08596A28[] =
     gUnknown_08596A10,
 };
 
-const struct SpriteTemplate gUnknown_08596A2C =
+const struct SpriteTemplate gSpiderWebSpriteTemplate =
 {
     .tileTag = ANIM_TAG_SPIDER_WEB,
     .paletteTag = ANIM_TAG_SPIDER_WEB,
@@ -247,12 +247,19 @@ void sub_8110438(struct Sprite *sprite)
     StoreSpriteCallbackInData6(sprite, DestroyAnimSprite);
 }
 
-void sub_81104E4(struct Sprite *sprite)
+// Creates a single web thread that travels from attacker to target.
+// Used by MOVE_STRING_SHOT and MOVE_SPIDER_WEB in their first move phase.
+// arg 0: x
+// arg 1: y
+// arg 2: controls the left-to-right movement
+// arg 3: amplitude
+// arg 4: if targets both opponents
+void AnimTranslateWebThread(struct Sprite *sprite)
 {
     if (IsContest())
         gBattleAnimArgs[2] /= 2;
 
-    InitSpritePosToAnimAttacker(sprite, 1);
+    InitSpritePosToAnimAttacker(sprite, TRUE);
     sprite->data[0] = gBattleAnimArgs[2];
     sprite->data[1] = sprite->pos1.x;
     sprite->data[3] = sprite->pos1.y;

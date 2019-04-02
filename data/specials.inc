@@ -434,7 +434,7 @@ gSpecials:: @ 81DBA64
 	def_special sub_81B8958
 	def_special sub_8018090
 	def_special sub_813990C
-	def_special sub_801B27C
+	def_special ValidateReceivedWonderCard
 	def_special HasAtLeastOneBerry
 	def_special sub_802C920
 	def_special sub_802E3C4
