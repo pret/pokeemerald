@@ -69,7 +69,7 @@ void mevent_srv_common_init_send(struct mevent_srv_common * svr, u32 ident, cons
     mevent_srv_sub_init_send(&svr->manager, ident, src, size);
 }
 
-static void * mevent_first_if_not_null_else_second(void * a0, void * a1)
+static const void * mevent_first_if_not_null_else_second(const void * a0, const void * a1)
 {
     if (a0 != NULL)
         return a0;
@@ -77,7 +77,7 @@ static void * mevent_first_if_not_null_else_second(void * a0, void * a1)
         return a1;
 }
 
-static u32 mevent_compare_pointers(void * a0, void * a1)
+static u32 mevent_compare_pointers(const void * a0, const void * a1)
 {
     if (a1 < a0)
         return 0;
@@ -120,45 +120,53 @@ static u32 common_mainseq_4(struct mevent_srv_common * svr)
 {
     // process command
     const struct mevent_cmd * cmd = &svr->cmdBuffer[svr->cmdidx];
-    void * ptr;
+    const void * ptr;
     svr->cmdidx++;
 
     switch (cmd->instr)
     {
     case 0:
+        // end
         AGB_ASSERT(cmd->parameter == NULL);
         svr->mainseqno = 1;
         svr->param = cmd->flag;
         break;
     case 1:
+        // wait_send
         svr->mainseqno = 3;
         break;
     case 2:
+        // receive
         AGB_ASSERT(cmd->parameter == NULL);
         mevent_srv_sub_init_recv(&svr->manager, cmd->flag, svr->recvBuffer);
         svr->mainseqno = 2;
         break;
     case 3:
+        // jump
         AGB_ASSERT(cmd->flag == FALSE);
         svr->cmdidx = 0;
         svr->cmdBuffer = cmd->parameter;
         break;
     case 5:
+        // get_1442CC
         AGB_ASSERT(cmd->flag == FALSE);
         AGB_ASSERT(cmd->parameter == NULL);
         memcpy(svr->mevent_unk1442cc, svr->recvBuffer, sizeof(struct MEventStruct_Unk1442CC));
         break;
     case 6:
+        // check_header__pass_false
         AGB_ASSERT(cmd->flag == FALSE);
         AGB_ASSERT(cmd->parameter == NULL);
         svr->param = sub_801B6A0(svr->mevent_unk1442cc, FALSE);
         break;
     case 30:
+        // check_header__pass_true
         AGB_ASSERT(cmd->flag == FALSE);
         AGB_ASSERT(cmd->parameter == NULL);
         svr->param = sub_801B6A0(svr->mevent_unk1442cc, TRUE);
         break;
     case 4:
+        // jump_if_eq
         if (svr->param == cmd->flag)
         {
             svr->cmdidx = 0;
@@ -166,11 +174,13 @@ static u32 common_mainseq_4(struct mevent_srv_common * svr)
         }
         break;
     case 7:
+        // check_crc
         AGB_ASSERT(cmd->flag == FALSE);
         ptr = mevent_first_if_not_null_else_second(cmd->parameter, svr->mevent_32e0);
         svr->param = sub_801B6EC(ptr, svr->mevent_unk1442cc, ptr);
         break;
     case 8:
+        // read_word
         AGB_ASSERT(cmd->flag == FALSE);
         AGB_ASSERT(cmd->parameter == NULL);
         svr->param = *(u32 *)svr->recvBuffer;
