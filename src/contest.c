@@ -2623,7 +2623,7 @@ void sub_80DA8C8(u8 partyIndex)
         gContestMons[gContestPlayerMonIndex].trainerGfxId = EVENT_OBJ_GFX_LINK_BRENDAN;
     else
         gContestMons[gContestPlayerMonIndex].trainerGfxId = EVENT_OBJ_GFX_LINK_MAY;
-    gContestMons[gContestPlayerMonIndex].flags = 0;
+    gContestMons[gContestPlayerMonIndex].aiChecks = 0;
     gContestMons[gContestPlayerMonIndex].unk2C[0] = 0;
     gContestMons[gContestPlayerMonIndex].species = GetMonData(&gPlayerParty[partyIndex], MON_DATA_SPECIES);
     GetMonData(&gPlayerParty[partyIndex], MON_DATA_NICKNAME, name);

@@ -216,7 +216,7 @@ struct ContestPokemon
     /*0x02*/ u8 nickname[POKEMON_NAME_LENGTH + 1];
     /*0x0D*/ u8 trainerName[PLAYER_NAME_LENGTH + 1];
     /*0x15*/ u8 trainerGfxId;
-    /*0x18*/ u32 flags;
+    /*0x18*/ u32 aiChecks;
     /*0x1C*/ u8 whichRank:2; // 0x1 0x2
     u8 aiPool_Cool:1; // 0x4
     u8 aiPool_Beauty:1; // 0x8
@@ -352,13 +352,13 @@ struct UnknownContestStruct7
 struct ContestAIInfo
 {
     /*0x00*/ u8 aiState;
-    /*0x02*/ u16 unk2;
-    /*0x04*/ u8 unk4;
+    /*0x02*/ u16 nextMove;
+    /*0x04*/ u8 nextMoveIndex;
     /*0x05*/ u8 unk5[4];
     /*0x09*/ u8 aiAction;
     /*0x0A*/ u8 fillerA[0x6]; // TODO: don't know what's here
-    /*0x10*/ u8 unk10;
-    /*0x14*/ u32 flags;
+    /*0x10*/ u8 currentAICheck;
+    /*0x14*/ u32 aiChecks;
     /*0x18*/ s16 scriptResult;
     /*0x1A*/ s16 scriptArr[3];
     /*0x20*/ const u8 *stack[8];
