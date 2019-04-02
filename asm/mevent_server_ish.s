@@ -115,7 +115,7 @@ mevent_srv_ish_init: @ 801D50C
 	adds r0, r4, 0
 	adds r1, r6, 0
 	mov r2, r8
-	bl sub_801D8D8
+	bl mevent_srv_sub_init
 	pop {r3}
 	mov r8, r3
 	pop {r4-r6}

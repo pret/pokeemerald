@@ -5,115 +5,6 @@
 
 	.text
 
-	thumb_func_start mevent_srv_init_wnews
-mevent_srv_init_wnews: @ 801D07C
-	push {r4,lr}
-	ldr r4, =gUnknown_02022C7C
-	movs r0, 0x60
-	bl AllocZeroed
-	str r0, [r4]
-	ldr r1, =gUnknown_082F298C
-	movs r2, 0
-	movs r3, 0x1
-	bl mevent_srv_init_common
-	pop {r4}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end mevent_srv_init_wnews
-
-	thumb_func_start mevent_srv_new_wcard
-mevent_srv_new_wcard: @ 801D0A0
-	push {r4,lr}
-	ldr r4, =gUnknown_02022C7C
-	movs r0, 0x60
-	bl AllocZeroed
-	str r0, [r4]
-	ldr r1, =gUnknown_082F29EC
-	movs r2, 0
-	movs r3, 0x1
-	bl mevent_srv_init_common
-	pop {r4}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end mevent_srv_new_wcard
-
-	thumb_func_start mevent_srv_common_do_exec
-mevent_srv_common_do_exec: @ 801D0C4
-	push {r4-r6,lr}
-	adds r6, r0, 0
-	ldr r4, =gUnknown_02022C7C
-	ldr r0, [r4]
-	cmp r0, 0
-	bne _0801D0D8
-	movs r0, 0x3
-	b _0801D0F8
-	.pool
-_0801D0D8:
-	bl mevent_dispatch_08145600
-	adds r5, r0, 0
-	cmp r5, 0x3
-	bne _0801D0F6
-	ldr r0, [r4]
-	ldr r1, [r0, 0x4]
-	strh r1, [r6]
-	bl mevent_srv_free_resources
-	ldr r0, [r4]
-	bl Free
-	movs r0, 0
-	str r0, [r4]
-_0801D0F6:
-	adds r0, r5, 0
-_0801D0F8:
-	pop {r4-r6}
-	pop {r1}
-	bx r1
-	thumb_func_end mevent_srv_common_do_exec
-
-	thumb_func_start mevent_srv_init_common
-mevent_srv_init_common: @ 801D100
-	push {r4-r6,lr}
-	mov r6, r9
-	mov r5, r8
-	push {r5,r6}
-	adds r4, r0, 0
-	adds r6, r1, 0
-	mov r8, r2
-	mov r9, r3
-	movs r5, 0
-	str r5, [r4]
-	str r5, [r4, 0x8]
-	movs r0, 0xA6
-	lsls r0, 1
-	bl AllocZeroed
-	str r0, [r4, 0x18]
-	movs r0, 0xDE
-	lsls r0, 1
-	bl AllocZeroed
-	str r0, [r4, 0x1C]
-	movs r0, 0x80
-	lsls r0, 3
-	bl AllocZeroed
-	str r0, [r4, 0x14]
-	movs r0, 0x64
-	bl AllocZeroed
-	str r0, [r4, 0x20]
-	str r6, [r4, 0x10]
-	str r5, [r4, 0xC]
-	adds r4, 0x38
-	adds r0, r4, 0
-	mov r1, r8
-	mov r2, r9
-	bl sub_801D8D8
-	pop {r3,r4}
-	mov r8, r3
-	mov r9, r4
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	thumb_func_end mevent_srv_init_common
-
 	thumb_func_start mevent_srv_free_resources
 mevent_srv_free_resources: @ 801D158
 	push {r4,lr}
@@ -517,8 +408,8 @@ _0801D464:
 	bx r1
 	thumb_func_end sub_801D1F0
 
-	thumb_func_start mevent_dispatch_08145600
-mevent_dispatch_08145600: @ 801D46C
+	thumb_func_start mevent_srv_exec_common
+mevent_srv_exec_common: @ 801D46C
 	push {lr}
 	ldr r2, =gUnknown_082F2548
 	ldr r1, [r0, 0x8]
@@ -529,6 +420,6 @@ mevent_dispatch_08145600: @ 801D46C
 	pop {r1}
 	bx r1
 	.pool
-	thumb_func_end mevent_dispatch_08145600
+	thumb_func_end mevent_srv_exec_common
 
 	.align 2, 0 @ don't pad with nop

@@ -23,8 +23,8 @@ sub_801D8CC: @ 801D8CC
 	bx r1
 	thumb_func_end sub_801D8CC
 
-	thumb_func_start sub_801D8D8
-sub_801D8D8: @ 801D8D8
+	thumb_func_start mevent_srv_sub_init
+mevent_srv_sub_init: @ 801D8D8
 	movs r3, 0
 	strb r1, [r0, 0x4]
 	strb r2, [r0, 0x5]
@@ -43,7 +43,7 @@ sub_801D8D8: @ 801D8D8
 	str r1, [r0, 0x20]
 	bx lr
 	.pool
-	thumb_func_end sub_801D8D8
+	thumb_func_end mevent_srv_sub_init
 
 	thumb_func_start sub_801D904
 sub_801D904: @ 801D904
