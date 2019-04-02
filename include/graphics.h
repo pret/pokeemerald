@@ -4663,8 +4663,6 @@ extern const u32 gBattleAnimBackgroundTilemap_ScaryFaceOpponent[];
 extern const u32 gBattleAnimBackgroundTilemap_ScaryFaceContest[];
 extern const u32 gBattleAnimSpriteSheet_284[];
 extern const u32 gBattleAnimSpriteSheet_285[];
-extern const u32 gBattleAnimSpriteSheet_289[];
-extern const u32 gBattleAnimSpriteSheet_290[];
 
 extern const u32 gBattleAnimSpritePalette_000[];
 extern const u32 gBattleAnimSpritePalette_001[];
@@ -4948,9 +4946,6 @@ extern const u32 gBattleAnimSpritePalette_285[];
 extern const u32 gBattleAnimSpritePalette_286[];
 extern const u32 gBattleAnimSpritePalette_287[];
 extern const u32 gBattleAnimSpritePalette_288[];
-extern const u32 gBattleAnimSpritePalette_289[];
-extern const u32 gBattleAnimSpritePalette_290[];
-extern const u32 gBattleAnimSpritePalette_291[];
 
 extern const u32 gBattleAnimBackgroundImage_00[];
 extern const u32 gBattleAnimBackgroundImage_02[];
@@ -5199,5 +5194,14 @@ extern const u16 gPokenavConditionCancel_Pal[];
 // Berry Crush
 extern const u32 gUnknown_08DE34B8[];
 extern const u16 gUnknown_08DE3398[];
+
+// New Battle Anim Particles
+extern const u32 gBattleAnimSpriteGfx_WhiteStreak[];
+extern const u32 gBattleAnimSpritePal_WhiteStreak[];
+extern const u32 gBattleAnimSpriteGfx_PurpleJab[];
+extern const u32 gBattleAnimSpritePal_PurpleJab[];
+extern const u32 gBattleAnimSpritePal_ToxicSpikes[];
+extern const u32 gBattleAnimSpriteGfx_EnergyBall[];
+extern const u32 gBattleAnimSpritePal_EnergyBall[];
 
 #endif //GUARD_GRAPHICS_H

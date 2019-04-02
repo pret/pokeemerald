@@ -1055,9 +1055,11 @@ const struct CompressedSpriteSheet gBattleAnimPicTable[] =
     {gBattleAnimSpriteSheet_183, 0x0800, ANIM_TAG_SLASH_2},
     {gBattleAnimSpriteSheet_056, 0x1000, ANIM_TAG_WHIP_HIT},
     {gBattleAnimSpriteSheet_163, 0x0100, ANIM_TAG_BLUE_RING_2},
-    {gBattleAnimSpriteSheet_289, 0x1000, ANIM_TAG_WHITE_STREAK},
-    {gBattleAnimSpriteSheet_290, 0x800,  ANIM_TAG_PURPLE_JAB},
-    {gBattleAnimSpriteSheet_152, 0x0080, ANIM_TAG_TOXIC_SPIKES},
+    // New
+    {gBattleAnimSpriteGfx_WhiteStreak,  0x0200, ANIM_TAG_WHITE_STREAK},
+    {gBattleAnimSpriteGfx_PurpleJab,    0x0100, ANIM_TAG_PURPLE_JAB},
+    {gBattleAnimSpriteSheet_152,        0x0080, ANIM_TAG_TOXIC_SPIKES},
+    {gBattleAnimSpriteGfx_EnergyBall,   0x0200, ANIM_TAG_ENERGY_BALL},
 };
 
 
@@ -1352,9 +1354,11 @@ const struct CompressedSpritePalette gBattleAnimPaletteTable[] =
     {gBattleAnimSpritePalette_286, ANIM_TAG_SLASH_2},
     {gBattleAnimSpritePalette_287, ANIM_TAG_WHIP_HIT},
     {gBattleAnimSpritePalette_288, ANIM_TAG_BLUE_RING_2},
-    {gBattleAnimSpritePalette_289, ANIM_TAG_WHITE_STREAK},
-    {gBattleAnimSpritePalette_290, ANIM_TAG_PURPLE_JAB},
-    {gBattleAnimSpritePalette_291, ANIM_TAG_TOXIC_SPIKES},
+    // New
+    {gBattleAnimSpritePal_WhiteStreak,  ANIM_TAG_WHITE_STREAK},
+    {gBattleAnimSpritePal_PurpleJab,    ANIM_TAG_PURPLE_JAB},
+    {gBattleAnimSpritePal_ToxicSpikes,  ANIM_TAG_TOXIC_SPIKES},
+    {gBattleAnimSpritePal_EnergyBall,   ANIM_TAG_ENERGY_BALL},
 };
 
 const struct BattleAnimBackground gBattleAnimBackgroundTable[] =

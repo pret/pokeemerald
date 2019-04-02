@@ -20,6 +20,18 @@ const u32 gSmokescreenImpactPalette[] = INCBIN_U32("graphics/battle_anims/sprite
 
 const u32 gBlankGfxCompressed[] = INCBIN_U32("graphics/interface/blank.4bpp.lz");
 
+// New Battle anims Particles
+const u32 gBattleAnimSpriteGfx_WhiteStreak[] = INCBIN_U32("graphics/battle_anims/sprites/white_streak.4bpp.lz");
+const u32 gBattleAnimSpritePal_WhiteStreak[] = INCBIN_U32("graphics/battle_anims/sprites/white_streak.gbapal.lz");
+
+const u32 gBattleAnimSpriteGfx_PurpleJab[] = INCBIN_U32("graphics/battle_anims/sprites/purple_jab.4bpp.lz");
+const u32 gBattleAnimSpritePal_PurpleJab[] = INCBIN_U32("graphics/battle_anims/sprites/purple_jab.gbapal.lz");
+
+const u32 gBattleAnimSpritePal_ToxicSpikes[] = INCBIN_U32("graphics/battle_anims/sprites/toxic_spikes.gbapal.lz");
+
+const u32 gBattleAnimSpriteGfx_EnergyBall[] = INCBIN_U32("graphics/battle_anims/sprites/energy_ball.4bpp.lz");
+const u32 gBattleAnimSpritePal_EnergyBall[] = INCBIN_U32("graphics/battle_anims/sprites/energy_ball.gbapal.lz");
+
 // Battle anims
 const u32 gBattleAnimSpriteSheet_146[] = INCBIN_U32("graphics/battle_anims/sprites/146.4bpp.lz");
 const u32 gBattleAnimSpriteSheet_000[] = INCBIN_U32("graphics/battle_anims/sprites/000.4bpp.lz");
@@ -564,14 +576,6 @@ const u32 gBattleAnimSpriteSheet_163[] = INCBIN_U32("graphics/battle_anims/sprit
 const u32 gBattleAnimSpritePalette_163[] = INCBIN_U32("graphics/battle_anims/sprites/163.gbapal.lz");
 
 const u32 gBattleAnimSpritePalette_288[] = INCBIN_U32("graphics/battle_anims/sprites/288.gbapal.lz");
-
-const u32 gBattleAnimSpriteSheet_289[] = INCBIN_U32("graphics/battle_anims/sprites/289.4bpp.lz");
-const u32 gBattleAnimSpritePalette_289[] = INCBIN_U32("graphics/battle_anims/sprites/289.gbapal.lz");
-
-const u32 gBattleAnimSpriteSheet_290[] = INCBIN_U32("graphics/battle_anims/sprites/290.4bpp.lz");
-const u32 gBattleAnimSpritePalette_290[] = INCBIN_U32("graphics/battle_anims/sprites/290.gbapal.lz");
-
-const u32 gBattleAnimSpritePalette_291[] = INCBIN_U32("graphics/battle_anims/sprites/toxicspike_color.gbapal.lz"); //reuse the spike image
 
 const u32 gBattleAnimSpritePalette_164[] = INCBIN_U32("graphics/battle_anims/sprites/164.gbapal.lz");
 const u32 gBattleAnimSpritePalette_165[] = INCBIN_U32("graphics/battle_anims/sprites/165.gbapal.lz");
