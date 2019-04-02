@@ -87,7 +87,7 @@ static void mevent_client_send_word(struct mevent_client * svr, u32 ident, u32 w
     mevent_srv_sub_init_send(&svr->manager, ident, svr->sendBuffer, sizeof(u32));
 }
 
-static u32 ish_mainseq_0(struct mevent_client * svr)
+static u32 mainseq_0(struct mevent_client * svr)
 {
     // init
     memcpy(svr->cmdBuffer, gUnknown_082F2598, ME_SEND_BUF_SIZE);
@@ -97,14 +97,14 @@ static u32 ish_mainseq_0(struct mevent_client * svr)
     return 0;
 }
 
-static u32 ish_mainseq_1(struct mevent_client * svr)
+static u32 mainseq_1(struct mevent_client * svr)
 {
     // done
     return 6;
 }
 
 
-static u32 ish_mainseq_2(struct mevent_client * svr)
+static u32 mainseq_2(struct mevent_client * svr)
 {
     // do recv
     if (mevent_srv_sub_recv(&svr->manager))
@@ -115,7 +115,7 @@ static u32 ish_mainseq_2(struct mevent_client * svr)
     return 1;
 }
 
-static u32 ish_mainseq_3(struct mevent_client * svr)
+static u32 mainseq_3(struct mevent_client * svr)
 {
     // do send
     if (mevent_srv_sub_send(&svr->manager))
@@ -126,7 +126,7 @@ static u32 ish_mainseq_3(struct mevent_client * svr)
     return 1;
 }
 
-static u32 ish_mainseq_4(struct mevent_client * svr)
+static u32 mainseq_4(struct mevent_client * svr)
 {
     // process command
     struct mevent_client_cmd * cmd = &svr->cmdBuffer[svr->cmdidx];
@@ -232,7 +232,7 @@ static u32 ish_mainseq_4(struct mevent_client * svr)
     return 1;
 }
 
-static u32 ish_mainseq_5(struct mevent_client * svr)
+static u32 mainseq_5(struct mevent_client * svr)
 {
     // wait flag
     if (svr->flag)
@@ -243,7 +243,7 @@ static u32 ish_mainseq_5(struct mevent_client * svr)
     return 1;
 }
 
-static u32 ish_mainseq_6(struct mevent_client * svr)
+static u32 mainseq_6(struct mevent_client * svr)
 {
     // ???
     switch (svr->flag)
@@ -263,7 +263,7 @@ static u32 ish_mainseq_6(struct mevent_client * svr)
     return 1;
 }
 
-static u32 ish_mainseq_7(struct mevent_client * svr)
+static u32 mainseq_7(struct mevent_client * svr)
 {
     // exec arbitrary code
     u32 (*func)(u32 *, struct SaveBlock2 *, struct SaveBlock1 *) = (void *)gDecompressionBuffer;
@@ -278,14 +278,14 @@ static u32 ish_mainseq_7(struct mevent_client * svr)
 static u32 mevent_client_exec(struct mevent_client * svr)
 {
     u32 (*funcs[])(struct mevent_client *) = {
-        ish_mainseq_0,
-        ish_mainseq_1,
-        ish_mainseq_2,
-        ish_mainseq_3,
-        ish_mainseq_4,
-        ish_mainseq_5,
-        ish_mainseq_6,
-        ish_mainseq_7
+        mainseq_0,
+        mainseq_1,
+        mainseq_2,
+        mainseq_3,
+        mainseq_4,
+        mainseq_5,
+        mainseq_6,
+        mainseq_7
     };
     return funcs[svr->mainseqno](svr);
 }
