@@ -62,7 +62,7 @@ SECTIONS {
         src/mevent_801BAAC.o(.text);
         src/mevent_server.o(.text);
         src/mevent_server_ish.o(.text);
-        asm/mevent_server_helpers.o(.text);
+        src/mevent_server_helpers.o(.text);
         src/mevent_news.o(.text);
         src/union_room_chat.o(.text);
         src/berry_crush.o(.text);

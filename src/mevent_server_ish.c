@@ -14,9 +14,7 @@ static void mevent_srv_ish_init(struct mevent_srv_ish *, u32, u32);
 static u32 mevent_srv_ish_exec(struct mevent_srv_ish *);
 static void mevent_srv_ish_free_resources(struct mevent_srv_ish *);
 
-extern const u8 gUnknown_082F2598[];
-extern const struct mevent_cmd gUnknown_8468B6C[];
-extern const struct mevent_cmd gUnknown_8468BCC[];
+extern const struct mevent_cmd_ish gUnknown_082F2598[];
 
 void mevent_srv_ish_do_init(u32 arg)
 {
