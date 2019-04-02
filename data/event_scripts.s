@@ -4442,6 +4442,9 @@ LilycoveCity_ContestLobby_EventScript_28CAD0:: @ 828CAD0
 	msgbox LilycoveCity_ContestLobby_Text_27F1EF, MSGBOX_DEFAULT
 	release
 	end
+	
+EventScript_RunningShoesManual::
+end
 
 LilycoveCity_ContestLobby_EventScript_28CADA:: @ 828CADA
 	setvar VAR_0x8004, 24
@@ -4587,10 +4590,6 @@ EventScript_2926F8:: @ 82926F8
 	end
 
 	.include "data/scripts/players_house.inc"
-
-EventScript_RunningShoesManual:: @ 8292DE5
-	msgbox LittlerootTown_BrendansHouse_1F_Text_1F7F66, MSGBOX_SIGN
-	end
 
 	.include "data/scripts/pokeblocks.inc"
 
