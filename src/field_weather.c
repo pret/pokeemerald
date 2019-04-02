@@ -91,7 +91,7 @@ static const struct WeatherCallbacks sWeatherFuncs[] =
 {
     {None_Init,          None_Main,      None_Init,         None_Finish},
     {Clouds_InitVars,    Clouds_Main,    Clouds_InitAll,    Clouds_Finish},
-    {Weather2_InitVars,  Weather2_Main,  Weather2_InitAll,  Weather2_Finish},
+    {Sunny_InitVars,     Sunny_Main,     Sunny_InitAll,     Sunny_Finish},
     {LightRain_InitVars, LightRain_Main, LightRain_InitAll, LightRain_Finish},
     {Snow_InitVars,      Snow_Main,      Snow_InitAll,      Snow_Finish},
     {MedRain_InitVars,   Rain_Main,      MedRain_InitAll,   Rain_Finish},

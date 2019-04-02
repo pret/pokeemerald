@@ -89,7 +89,7 @@ u8 AddPseudoEventObject(u16, void (*)(struct Sprite *), s16 x, s16 y, u8 subprio
 u8 show_sprite(u8, u8, u8);
 u8 SpawnSpecialEventObjectParameterized(u8 graphicsId, u8 movementBehavior, u8 localId, s16 x, s16 y, u8 z);
 u8 SpawnSpecialEventObject(struct EventObjectTemplate *);
-void sub_8093038(s16, s16, s16 *, s16 *);
+void SetSpritePosToMapCoords(s16, s16, s16 *, s16 *);
 void CameraObjectReset1(void);
 void EventObjectSetGraphicsId(struct EventObject *, u8 graphicsId);
 void EventObjectTurn(struct EventObject *, u8);
