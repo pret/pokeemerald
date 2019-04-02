@@ -9,10 +9,7 @@
 	.include "src/union_room.o"
     .include "src/mystery_gift.o"
     .include "src/union_room_player_avatar.o"
-
-gUnknown_02022C6C: @ 2022C6C
-	.space 0x4
-
+    .include "src/union_room_battle.o"
 	.include "src/mevent2.o"
 	.include "src/mevent_801BAAC.o"
 
