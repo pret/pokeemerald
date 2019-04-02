@@ -4,17 +4,6 @@
 	.section .rodata
 
 	.align 2
-gUnknown_082F255C:: @ 82F255C
-	.4byte sub_801D5D0
-	.4byte sub_801D5F8
-	.4byte sub_801D5FC
-	.4byte sub_801D61C
-	.4byte sub_801D63C
-	.4byte sub_801D810
-	.4byte sub_801D828
-	.4byte sub_801D860
-
-	.align 2
 gText_CanceledReadingCard:: @ 82F257C
 	.string "Canceled reading\nthe Card.$"
 
