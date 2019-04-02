@@ -1661,16 +1661,14 @@ void CreateYesNoMenu(const struct WindowTemplate *window, u16 baseTileNum, u8 pa
     InitMenuInUpperLeftCornerPlaySoundWhenAPressed(sYesNoWindowId, 2, initialCursorPos);
 }
 
-void sub_81997AC(u8 windowId, u8 a4, u8 a6, u8 a7, const struct MenuAction *strs)
+void PrintMenuGridTable(u8 windowId, u8 optionWidth, u8 horizontalCount, u8 verticalCount, const struct MenuAction *strs)
 {
-    u32 i;
-    u32 j;
-    for (i = 0; i < a7; i++)
+    u32 i, j;
+
+    for (i = 0; i < verticalCount; i++)
     {
-        for (j = 0; j < a6; j++)
-        {
-            AddTextPrinterParameterized(windowId, 1, strs[(i * a6) + j].text, (a4 * j) + 8, (i * 16) + 1, 0xFF, NULL);
-        }
+        for (j = 0; j < horizontalCount; j++)
+            AddTextPrinterParameterized(windowId, 1, strs[(i * horizontalCount) + j].text, (optionWidth * j) + 8, (i * 16) + 1, 0xFF, NULL);
     }
     CopyWindowToVram(windowId, 2);
 }
