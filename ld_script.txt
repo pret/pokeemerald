@@ -418,8 +418,7 @@ SECTIONS {
         src/mevent_801BAAC.o(.rodata);
         src/mevent_server.o(.rodata);
         src/mevent_server_ish.o(.rodata);
-        src/mevent_server_helpers.o(.rodata);
-        data/mevent_server.o(.rodata);
+        src/mevent_scripts.o(.rodata);
         src/union_room_chat.o(.rodata);
         data/union_room_chat.o(.rodata);
         data/berry_crush.o(.rodata);

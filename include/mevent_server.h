@@ -7,7 +7,7 @@ struct mevent_cmd
 {
     u32 instr;
     bool32 flag;
-    void * parameter;
+    const void * parameter;
 };
 
 struct mevent_srv_common
@@ -21,9 +21,9 @@ struct mevent_srv_common
     struct MEventBuffer_32E0_Sub * mevent_32e0;
     struct MEventBuffer_3120_Sub * mevent_3120;
     struct MEventStruct_Unk1442CC * mevent_unk1442cc;
-    void * sendBuffer1;
+    const void * sendBuffer1;
     u32 sendBuffer1Size;
-    void * sendBuffer2;
+    const void * sendBuffer2;
     u32 sendBuffer2Size;
     u32 sendWord;
     struct mevent_srv_sub manager;
