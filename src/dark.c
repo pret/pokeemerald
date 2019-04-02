@@ -803,17 +803,23 @@ void sub_81144BC(struct Sprite *sprite)
     StoreSpriteCallbackInData6(sprite, DestroyAnimSprite);
 }
 
-void sub_81144F8(u8 taskId)
+// Makes the attacker metallic and shining.
+// Used by MOVE_HARDEN and MOVE_IRON_DEFENSE.
+// arg0: if true won't change battler's palette back
+// arg1: if true, use custom color
+// arg2: custom color
+// Custom color argument is used in MOVE_POISON_TAIL to make the mon turn purplish/pinkish as if became cloaked in poison.
+void AnimTask_MetallicShine(u8 taskId)
 {
     u16 species;
     u8 spriteId;
     u8 newSpriteId;
     u16 paletteNum;
     struct BattleAnimBgData animBg;
-    int var0 = 0;
+    bool32 priorityChanged = FALSE;
 
-    gBattle_WIN0H = var0;
-    gBattle_WIN0V = var0;
+    gBattle_WIN0H = 0;
+    gBattle_WIN0V = 0;
     SetGpuReg(REG_OFFSET_WININ, WININ_WIN0_BG_ALL | WININ_WIN0_OBJ | WININ_WIN0_CLR | WININ_WIN1_BG_ALL | WININ_WIN1_OBJ | WININ_WIN1_CLR);
     SetGpuReg(REG_OFFSET_WINOUT, WINOUT_WINOBJ_BG_ALL | WINOUT_WINOBJ_OBJ | WINOUT_WINOBJ_CLR | WINOUT_WIN01_BG0 | WINOUT_WIN01_BG2 | WINOUT_WIN01_BG3 | WINOUT_WIN01_OBJ | WINOUT_WIN01_CLR);
     SetGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_OBJWIN_ON);
@@ -832,7 +838,7 @@ void sub_81144F8(u8 taskId)
             {
                 gSprites[gBattlerSpriteIds[BATTLE_PARTNER(gBattleAnimAttacker)]].oam.priority--;
                 SetAnimBgAttribute(1, BG_ANIM_PRIORITY, 1);
-                var0 = 1;
+                priorityChanged = TRUE;
             }
         }
     }
@@ -861,7 +867,7 @@ void sub_81144F8(u8 taskId)
     gBattle_BG1_Y = -gSprites[spriteId].pos1.y + 32;
     paletteNum = 16 + gSprites[spriteId].oam.paletteNum;
 
-    if (gBattleAnimArgs[1]  == 0)
+    if (gBattleAnimArgs[1] == 0)
         SetGreyscaleOrOriginalPalette(paletteNum, FALSE);
     else
         BlendPalette(paletteNum * 16, 16, 11, gBattleAnimArgs[2]);
@@ -870,7 +876,7 @@ void sub_81144F8(u8 taskId)
     gTasks[taskId].data[1] = gBattleAnimArgs[0];
     gTasks[taskId].data[2] = gBattleAnimArgs[1];
     gTasks[taskId].data[3] = gBattleAnimArgs[2];
-    gTasks[taskId].data[6] = var0;
+    gTasks[taskId].data[6] = priorityChanged;
     gTasks[taskId].func = sub_8114748;
 }
 
@@ -879,29 +885,28 @@ static void sub_8114748(u8 taskId)
     struct BattleAnimBgData animBg;
     u16 paletteNum;
     u8 spriteId;
-    u8 taskIdCopy = taskId;
 
-    gTasks[taskIdCopy].data[10] += 4;
+    gTasks[taskId].data[10] += 4;
     gBattle_BG1_X -= 4;
-    if (gTasks[taskIdCopy].data[10] == 128)
+    if (gTasks[taskId].data[10] == 128)
     {
-        gTasks[taskIdCopy].data[10] = 0;
+        gTasks[taskId].data[10] = 0;
         gBattle_BG1_X += 128;
-        gTasks[taskIdCopy].data[11]++;
-        if (gTasks[taskIdCopy].data[11] == 2)
+        gTasks[taskId].data[11]++;
+        if (gTasks[taskId].data[11] == 2)
         {
             spriteId = GetAnimBattlerSpriteId(ANIM_ATTACKER);
             paletteNum = 16 + gSprites[spriteId].oam.paletteNum;
-            if (gTasks[taskIdCopy].data[1] == 0)
+            if (gTasks[taskId].data[1] == 0)
                 SetGreyscaleOrOriginalPalette(paletteNum, 1);
 
-            DestroySprite(&gSprites[gTasks[taskIdCopy].data[0]]);
+            DestroySprite(&gSprites[gTasks[taskId].data[0]]);
             sub_80A6B30(&animBg);
             sub_80A6C68(animBg.bgId);
-            if (gTasks[taskIdCopy].data[6] == 1)
+            if (gTasks[taskId].data[6] == 1)
                 gSprites[gBattlerSpriteIds[BATTLE_PARTNER(gBattleAnimAttacker)]].oam.priority++;
         }
-        else if (gTasks[taskIdCopy].data[11] == 3)
+        else if (gTasks[taskId].data[11] == 3)
         {
             gBattle_WIN0H = 0;
             gBattle_WIN0V = 0;
@@ -918,7 +923,10 @@ static void sub_8114748(u8 taskId)
     }
 }
 
-void sub_811489C(u8 taskId)
+// Changes battler's palette to either greyscale or original.
+// arg0: which battler
+// arg1: 0 grayscale, 1 original
+void AnimTask_SetGreyscaleOrOriginalPal(u8 taskId)
 {
     u8 spriteId;
     u8 battler;
