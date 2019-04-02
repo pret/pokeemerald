@@ -26,6 +26,10 @@ YamakiTown_EventScript_CameraIntro::
 	removeobject 3
 	setflag FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_TRUCK //used for Sister appearance in Yamaki Town jsyk guys
 	removeobject 4
+	setflag FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_2F_POKE_BALL
+	setflag FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_2F_PICHU_DOLL
+	setflag FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F_SWABLU_DOLL
+	setflag FLAG_HIDE_LITTLE_ROOT_TOWN_PLAYERS_BEDROOM_MOM
 	applymovement EVENT_OBJ_ID_PLAYER, YamakiTown_MapScript2_CameraMovements
 	waitmovement 0
 	setvar VAR_0x408C, 1

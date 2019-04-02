@@ -49,7 +49,7 @@
         {
             "elevation": 0,
             "flag": "FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_RIVAL_BEDROOM",
-            "graphics_id": "EVENT_OBJ_GFX_RIVAL_MAY_NORMAL",
+            "graphics_id": "EVENT_OBJ_GFX_AQUA_MEMBER_F",
             "movement_range_x": 1,
             "movement_range_y": 0,
             "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
@@ -218,28 +218,28 @@
         {
             "elevation": 3,
             "flag": "FLAG_HIDE_LITTLE_ROOT_TOWN_PLAYERS_BEDROOM_MOM",
-            "graphics_id": "EVENT_OBJ_GFX_MOM",
+            "graphics_id": "EVENT_OBJ_GFX_SKITTY",
             "movement_range_x": 1,
             "movement_range_y": 0,
-            "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
-            "script": "0x0",
-            "trainer_sight_or_berry_tree_id": "",
-            "trainer_type": "",
-            "x": 1,
-            "y": 1
-        },
-        {
-            "elevation": 4,
-            "flag": "FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_2F_PICHU_DOLL",
-            "graphics_id": "EVENT_OBJ_GFX_PICHU_DOLL",
-            "movement_range_x": 1,
-            "movement_range_y": 1,
-            "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+            "movement_type": "MOVEMENT_TYPE_NONE",
             "script": "0x0",
             "trainer_sight_or_berry_tree_id": "",
             "trainer_type": "",
             "x": 3,
-            "y": 4
+            "y": 5
+        },
+        {
+            "elevation": 4,
+            "flag": "FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_2F_PICHU_DOLL",
+            "graphics_id": "EVENT_OBJ_GFX_KIRLIA",
+            "movement_range_x": 1,
+            "movement_range_y": 1,
+            "movement_type": "MOVEMENT_TYPE_NONE",
+            "script": "0x0",
+            "trainer_sight_or_berry_tree_id": "",
+            "trainer_type": "",
+            "x": 4,
+            "y": 5
         },
         {
             "elevation": 0,
@@ -253,6 +253,19 @@
             "trainer_type": "",
             "x": 5,
             "y": 4
+        },
+        {
+            "elevation": 3,
+            "flag": "FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F_SWABLU_DOLL",
+            "graphics_id": "EVENT_OBJ_GFX_PIKACHU",
+            "movement_range_x": 0,
+            "movement_range_y": 0,
+            "movement_type": "MOVEMENT_TYPE_NONE",
+            "script": "NULL",
+            "trainer_sight_or_berry_tree_id": "0",
+            "trainer_type": "0",
+            "x": 5,
+            "y": 5
         }
     ],
     "region_map_section": "MAPSEC_LITTLEROOT_TOWN",

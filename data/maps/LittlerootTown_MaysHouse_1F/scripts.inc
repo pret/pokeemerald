@@ -132,12 +132,13 @@ YamakiTown_PlayerHouse_EndOfDay::
 	closemessage
 	msgbox YamakiTown_PlayerHouse_EndOfDay_Text5, MSGBOX_DEFAULT
 	closemessage
+	applymovement 2, YamakiTown_PlayerHouse_Movement_SisterGoesUpstairs
+	waitmovement 0
 	removeobject 2
 	setflag FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F_POKE_BALL
 	applymovement 1, YamakiTown_PlayerHouse_Movement_FaceRight
 	waitmovement 0
-	applymovement 2, YamakiTown_PlayerHouse_Movement_SisterGoesUpstairs
-	waitmovement 0
+	clearflag FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_2F_POKE_BALL
 	applymovement EVENT_OBJ_ID_PLAYER, YamakiTown_PlayerHouse_Movement_PlayerGoingUpstairs
 	waitmovement 0
 	warpsilent MAP_LITTLEROOT_TOWN_MAYS_HOUSE_2F, 255, 7, 4
