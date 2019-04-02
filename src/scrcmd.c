@@ -2217,7 +2217,7 @@ bool8 ScrCmd_checkmonobedience(struct ScriptContext *ctx)
 
 bool8 ScrCmd_cmdCF(struct ScriptContext *ctx)
 {
-    const u8* v1 = sub_8099244();
+    const u8* v1 = GetSavedRamScriptIfValid();
 
     if (v1)
     {

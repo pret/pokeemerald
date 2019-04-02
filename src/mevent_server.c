@@ -46,8 +46,8 @@ static void mevent_srv_init_common(struct mevent_srv_common * svr, const void * 
 {
     svr->unk_00 = 0;
     svr->mainseqno = 0;
-    svr->mevent_32e0 = AllocZeroed(sizeof(struct MEventBuffer_32E0_Sub));
-    svr->mevent_3120 = AllocZeroed(sizeof(struct MEventBuffer_3120_Sub));
+    svr->wonder_card = AllocZeroed(sizeof(struct WonderCard));
+    svr->wonder_news = AllocZeroed(sizeof(struct WonderNews));
     svr->recvBuffer = AllocZeroed(ME_SEND_BUF_SIZE);
     svr->mevent_unk1442cc = AllocZeroed(sizeof(struct MEventStruct_Unk1442CC));
     svr->cmdBuffer = cmdBuffer;
@@ -57,8 +57,8 @@ static void mevent_srv_init_common(struct mevent_srv_common * svr, const void * 
 
 static void mevent_srv_free_resources(struct mevent_srv_common * svr)
 {
-    Free(svr->mevent_32e0);
-    Free(svr->mevent_3120);
+    Free(svr->wonder_card);
+    Free(svr->wonder_news);
     Free(svr->recvBuffer);
     Free(svr->mevent_unk1442cc);
 }
@@ -176,7 +176,7 @@ static u32 common_mainseq_4(struct mevent_srv_common * svr)
     case 7:
         // check_crc
         AGB_ASSERT(cmd->flag == FALSE);
-        ptr = mevent_first_if_not_null_else_second(cmd->parameter, svr->mevent_32e0);
+        ptr = mevent_first_if_not_null_else_second(cmd->parameter, svr->wonder_card);
         svr->param = sub_801B6EC(ptr, svr->mevent_unk1442cc, ptr);
         break;
     case 8:
@@ -192,11 +192,11 @@ static u32 common_mainseq_4(struct mevent_srv_common * svr)
         break;
     case 10:
         AGB_ASSERT(cmd->parameter == NULL);
-        svr->param = sub_801B784(svr->mevent_unk1442cc, cmd->flag);
+        svr->param = MEventStruct_Unk1442CC_GetValueNFrom_unk_20(svr->mevent_unk1442cc, cmd->flag);
         break;
     case 11:
         AGB_ASSERT(cmd->flag == FALSE);
-        svr->param = sub_801B748(svr->mevent_unk1442cc, cmd->parameter);
+        svr->param = MEventStruct_Unk1442CC_CompareField_unk_16(svr->mevent_unk1442cc, cmd->parameter);
         break;
     case 12:
         AGB_ASSERT(cmd->flag == FALSE);
@@ -204,11 +204,11 @@ static u32 common_mainseq_4(struct mevent_srv_common * svr)
         break;
     case 14:
         AGB_ASSERT(cmd->flag == FALSE);
-        mevent_srv_common_init_send(svr, 0x17, mevent_first_if_not_null_else_second(cmd->parameter, svr->mevent_3120), sizeof(struct MEventBuffer_3120_Sub));
+        mevent_srv_common_init_send(svr, 0x17, mevent_first_if_not_null_else_second(cmd->parameter, svr->wonder_news), sizeof(struct WonderNews));
         break;
     case 13:
         AGB_ASSERT(cmd->flag == FALSE);
-        mevent_srv_common_init_send(svr, 0x16, mevent_first_if_not_null_else_second(cmd->parameter, svr->mevent_32e0), sizeof(struct MEventBuffer_32E0_Sub));
+        mevent_srv_common_init_send(svr, 0x16, mevent_first_if_not_null_else_second(cmd->parameter, svr->wonder_card), sizeof(struct WonderCard));
         break;
     case 16:
         AGB_ASSERT(cmd->flag == FALSE);
@@ -238,11 +238,11 @@ static u32 common_mainseq_4(struct mevent_srv_common * svr)
         break;
     case 22:
         AGB_ASSERT(cmd->flag == FALSE);
-        memcpy(svr->mevent_32e0, cmd->parameter, 332);
+        memcpy(svr->wonder_card, cmd->parameter, 332);
         break;
     case 23:
         AGB_ASSERT(cmd->flag == FALSE);
-        memcpy(svr->mevent_3120, cmd->parameter, 444);
+        memcpy(svr->wonder_news, cmd->parameter, 444);
         break;
     case 21:
         AGB_ASSERT(cmd->flag == FALSE);
@@ -258,16 +258,16 @@ static u32 common_mainseq_4(struct mevent_srv_common * svr)
         break;
     case 26:
         AGB_ASSERT(cmd->flag == FALSE && cmd->parameter == NULL);
-        memcpy(svr->mevent_32e0, sav1_get_mevent_buffer_1(), 332);
-        sub_801B3C0(svr->mevent_32e0);
+        memcpy(svr->wonder_card, GetSavedWonderCard(), 332);
+        WonderCard_ResetInternalReceivedFlag(svr->wonder_card);
         break;
     case 27:
         AGB_ASSERT(cmd->flag == FALSE && cmd->parameter == NULL);
-        memcpy(svr->mevent_3120, sav1_get_mevent_buffer_0(), 444);
+        memcpy(svr->wonder_news, GetSavedWonderNews(), 444);
         break;
     case 28:
         AGB_ASSERT(cmd->flag == FALSE && cmd->parameter == NULL);
-        svr->sendBuffer1 = sub_8099244();
+        svr->sendBuffer1 = GetSavedRamScriptIfValid();
         break;
     case 29:
         mevent_srv_common_init_send(svr, 0x1b, cmd->parameter, cmd->flag);
