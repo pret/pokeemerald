@@ -5,23 +5,23 @@
 
 	.text
 
-	thumb_func_start sub_801D8C0
-sub_801D8C0: @ 801D8C0
+	thumb_func_start mevent_srv_sub_recv
+mevent_srv_sub_recv: @ 801D8C0
 	push {lr}
 	ldr r1, [r0, 0x20]
 	bl _call_via_r1
 	pop {r1}
 	bx r1
-	thumb_func_end sub_801D8C0
+	thumb_func_end mevent_srv_sub_recv
 
-	thumb_func_start sub_801D8CC
-sub_801D8CC: @ 801D8CC
+	thumb_func_start mevent_srv_sub_send
+mevent_srv_sub_send: @ 801D8CC
 	push {lr}
 	ldr r1, [r0, 0x24]
 	bl _call_via_r1
 	pop {r1}
 	bx r1
-	thumb_func_end sub_801D8CC
+	thumb_func_end mevent_srv_sub_send
 
 	thumb_func_start mevent_srv_sub_init
 mevent_srv_sub_init: @ 801D8D8
@@ -45,8 +45,8 @@ mevent_srv_sub_init: @ 801D8D8
 	.pool
 	thumb_func_end mevent_srv_sub_init
 
-	thumb_func_start sub_801D904
-sub_801D904: @ 801D904
+	thumb_func_start mevent_srv_sub_init_send
+mevent_srv_sub_init_send: @ 801D904
 	push {r4,lr}
 	adds r4, r0, 0
 	movs r0, 0
@@ -67,10 +67,10 @@ _0801D920:
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_801D904
+	thumb_func_end mevent_srv_sub_init_send
 
-	thumb_func_start sub_801D928
-sub_801D928: @ 801D928
+	thumb_func_start mevent_srv_sub_init_recv
+mevent_srv_sub_init_recv: @ 801D928
 	movs r3, 0
 	str r3, [r0]
 	strh r1, [r0, 0x6]
@@ -79,7 +79,7 @@ sub_801D928: @ 801D928
 	strh r3, [r0, 0xC]
 	str r2, [r0, 0x18]
 	bx lr
-	thumb_func_end sub_801D928
+	thumb_func_end mevent_srv_sub_init_recv
 
 	thumb_func_start sub_801D938
 sub_801D938: @ 801D938

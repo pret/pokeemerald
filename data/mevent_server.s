@@ -4,14 +4,6 @@
 	.section .rodata
 
 	.align 2
-gUnknown_082F2548:: @ 82F2548
-	.4byte sub_801D1AC
-	.4byte sub_801D1B4
-	.4byte sub_801D1B8
-	.4byte sub_801D1D4
-	.4byte sub_801D1F0
-
-	.align 2
 gUnknown_082F255C:: @ 82F255C
 	.4byte sub_801D5D0
 	.4byte sub_801D5F8
