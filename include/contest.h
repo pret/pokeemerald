@@ -235,10 +235,8 @@ struct ContestPokemon
     /*0x3C*/ u32 otId;  // otId
 };
 
-struct Shared18000
+struct Shared1A004
 {
-    /*0x18000*/ u8 unk18000;
-    /*0x18001*/ u8 filler18001[3];
     /*0x18004*/ u16 unk18004[16][16];
     /*0x18204*/ u16 unk18204[0x200];
     /*0x18604*/ u16 unk18604[0x200];
@@ -294,11 +292,11 @@ struct ContestantStatus
 {
     /*0x00*/ s16 appeal1;  // move appeal?
     /*0x02*/ s16 appeal2;  // final appeal after end of turn, maybe?
-    /*0x04*/ s16 unk4;
+    /*0x04*/ s16 pointTotal;
     /*0x06*/ u16 currMove;
     /*0x08*/ u16 prevMove;
     /*0x0A*/ u8 moveCategory;
-    /*0x0B*/ u8 unkB_0:2;
+    /*0x0B*/ u8 ranking:2;
     u8 unkB_2:2;
     u8 moveRepeatCount:3;
     u8 noMoreTurns:1;  // used a one-time move?
@@ -408,7 +406,7 @@ struct ContestResourcesField20
 
 struct ContestResources
 {
-    struct Contest *field_0;
+    struct Contest *contest;
     struct ContestantStatus *field_4;
     struct UnknownContestStruct7 *field_8;
     struct ContestAIInfo *field_C;
@@ -423,15 +421,16 @@ struct ContestResources
     void * field_3c;
 };
 
-#define sContest (*gContestResources->field_0)
-#define sContestantStatus (gContestResources->field_4)
-#define shared192D0 (*gContestResources->field_8)
-#define eContestAI (gContestResources->field_C)
-#define shared19328 (*gContestResources->field_10)
-#define shared19338 (*gContestResources->field_14)
-#define shared15800 (gHeap + 0x18000)
-#define shared16800 (gHeap + 0x19000)
-#define shared18000 (*(struct Shared18000 *)(gHeap + 0x1a000))
+#define eContest (*gContestResources->contest)
+#define eContestantStatus (gContestResources->field_4)
+#define eContestResources8 (*gContestResources->field_8)
+#define eContestAI (*gContestResources->field_C)
+#define eContestResources10 (*gContestResources->field_10)
+#define eContestResources14 (*gContestResources->field_14)
+#define eUnknownHeap18000 (gHeap + 0x18000)
+#define eUnknownHeap19000 (gHeap + 0x19000)
+#define eUnknownHeap1A000 (gHeap[0x1a000])
+#define eUnknownHeap1A004 (*(struct Shared1A004 *)(gHeap + 0x1a004))
 
 extern struct ContestPokemon gContestMons[4];
 extern s16 gContestMonConditions[4];
