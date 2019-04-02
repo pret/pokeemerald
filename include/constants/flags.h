@@ -445,13 +445,14 @@
 #define FLAG_REMATCH_NORMAN                  0x1A2
 #define FLAG_REMATCH_WINONA                  0x1A3
 #define FLAG_REMATCH_TATE_AND_LIZA           0x1A4
-#define FLAG_REMATCH_JUAN                    0x1A5
-#define FLAG_REMATCH_SIDNEY                  0x1A6
-#define FLAG_REMATCH_PHOEBE                  0x1A7
-#define FLAG_REMATCH_GLACIA                  0x1A8
-#define FLAG_REMATCH_DRAKE                   0x1A9
-#define FLAG_REMATCH_WALLACE                 0x1AA
+// Note: FLAG_REMATCH_JUAN is handled by FLAG_ENABLE_JUAN_MATCH_CALL instead.
+#define FLAG_REMATCH_SIDNEY                  0x1A5
+#define FLAG_REMATCH_PHOEBE                  0x1A6
+#define FLAG_REMATCH_GLACIA                  0x1A7
+#define FLAG_REMATCH_DRAKE                   0x1A8
+#define FLAG_REMATCH_WALLACE                 0x1A9
 
+#define FLAG_UNUSED_0x1AA                    0x1AA // Unused Flag
 #define FLAG_UNUSED_0x1AB                    0x1AB // Unused Flag
 
 #define FLAG_DEFEATED_DEOXYS                 0x1AC
