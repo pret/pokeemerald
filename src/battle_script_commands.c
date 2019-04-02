@@ -10540,7 +10540,7 @@ static void atkE5_pickup(void)
             species = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2);
             heldItem = GetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM);
             level = GetMonData(&gPlayerParty[i], MON_DATA_LEVEL);
-            lvlDivBy10 = (level - 1) / 10;
+            lvlDivBy10 = (level - 1) / 10; //Moving this here makes it easier to add in abilities like Honey Gather
             if (lvlDivBy10 > 9)
                 lvlDivBy10 = 9;
 
@@ -10571,16 +10571,6 @@ static void atkE5_pickup(void)
                         break;
                     }
                 }
-            }
-            else if (ability == ABILITY_HONEY_GATHER
-                && species != 0
-                && species != SPECIES_EGG
-                && heldItem == ITEM_NONE
-                && (Random()%100 <= lvlDivBy10*5+5))
-            {
-                u16 honey = ITEM_HONEY;
-                SetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM, &honey);
-                break;
             }
         }
     }
