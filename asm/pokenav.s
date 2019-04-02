@@ -3032,7 +3032,7 @@ _081C98D8:
 	.pool
 _081C9914:
 	adds r4, 0x1
-	cmp r4, 0x4D
+	cmp r4, 0x4D @ REMATCH_TABLE_ENTRIES - 1
 	ble _081C98D8
 	movs r0, 0
 _081C991C:
@@ -5638,7 +5638,7 @@ _081CAD80:
 	strh r1, [r4, 0x8]
 	lsls r0, r1, 16
 	lsrs r0, 16
-	cmp r0, 0x14
+	cmp r0, 0x14 @ ARRAY_COUNT(sMatchCallHeaders)
 	bhi _081CADF6
 	adds r6, 0x1
 	adds r5, 0x1
@@ -5683,7 +5683,7 @@ _081CADDC:
 	strh r0, [r4, 0x8]
 	lsls r0, 16
 	lsrs r0, 16
-	cmp r0, 0x4D
+	cmp r0, 0x4D @ REMATCH_TABLE_ENTRIES - 1
 	bhi _081CAD48
 	adds r6, 0x1
 	adds r5, 0x1
@@ -5709,7 +5709,7 @@ _081CAE02:
 	thumb_func_start sub_81CAE08
 sub_81CAE08: @ 81CAE08
 	push {lr}
-	cmp r0, 0x4D
+	cmp r0, 0x4D @ REMATCH_TABLE_ENTRIES - 1
 	ble _081CAE12
 	movs r0, 0
 	b _081CAE24
@@ -5787,7 +5787,7 @@ sub_81CAE6C: @ 81CAE6C
 	ldrh r0, [r0, 0x1E]
 	b _081CAE8C
 _081CAE8A:
-	movs r0, 0x4E
+	movs r0, 0x4E @ REMATCH_TABLE_ENTRIES
 _081CAE8C:
 	pop {r4}
 	pop {r1}
@@ -5836,7 +5836,7 @@ _081CAED4:
 	bl MatchCall_GetRematchTableIdx
 	adds r4, r0, 0
 _081CAEDC:
-	cmp r4, 0x4E
+	cmp r4, 0x4E @ REMATCH_TABLE_ENTRIES
 	beq _081CAEFC
 	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
@@ -5884,7 +5884,7 @@ _081CAF34:
 	adds r0, r5, 0
 	bl MatchCall_GetRematchTableIdx
 	adds r4, r0, 0
-	cmp r4, 0x4E
+	cmp r4, 0x4E @ REMATCH_TABLE_ENTRIES
 	bne _081CAF58
 	adds r0, r5, 0
 	bl sub_81D1BD0
@@ -5971,7 +5971,7 @@ sub_81CAFD8: @ 81CAFD8
 	ldrh r0, [r4, 0x1E]
 	bl MatchCall_GetRematchTableIdx
 	adds r1, r0, 0
-	cmp r1, 0x4E
+	cmp r1, 0x4E @ REMATCH_TABLE_ENTRIES
 	bne _081CB006
 	ldrh r0, [r4, 0x1E]
 	adds r1, r5, 0
@@ -6201,7 +6201,7 @@ _081CB170:
 	bne _081CB1B2
 _081CB18A:
 	adds r4, 0x1
-	cmp r4, 0x4D
+	cmp r4, 0x4D @ REMATCH_TABLE_ENTRIES - 1
 	ble _081CB170
 	movs r4, 0
 _081CB192:
@@ -6225,7 +6225,7 @@ _081CB1B2:
 	.pool
 _081CB1C0:
 	adds r4, 0x1
-	cmp r4, 0x14
+	cmp r4, 0x14 @ ARRAY_COUNT(sMatchCallHeaders)
 	ble _081CB192
 	movs r0, 0
 _081CB1C8:
