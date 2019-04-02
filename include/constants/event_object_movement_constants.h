@@ -242,4 +242,6 @@
 #define MOVEMENT_ACTION_FLY_UP                          0x9C
 #define MOVEMENT_ACTION_FLY_DOWN                        0x9D
 
+#define MOVEMENT_ACTION_STEP_END 0xFE
+
 #endif // GUARD_CONSTANTS_EVENTOBJMV_H

@@ -23,6 +23,19 @@
 #include "constants/species.h"
 #include "constants/vars.h"
 
+#define AREA_SCREEN_WIDTH 32
+#define AREA_SCREEN_HEIGHT 20
+
+#define GLOW_TILE_FULL          0xFFFF
+#define GLOW_TILE_LEFT          (1 << 0)
+#define GLOW_TILE_RIGHT         (1 << 1)
+#define GLOW_TILE_TOP           (1 << 2)
+#define GLOW_TILE_BOTTOM        (1 << 3)
+#define GLOW_TILE_BOTTOM_RIGHT  (1 << 4)
+#define GLOW_TILE_TOP_RIGHT     (1 << 5)
+#define GLOW_TILE_BOTTOM_LEFT   (1 << 6)
+#define GLOW_TILE_TOP_LEFT      (1 << 7)
+
 struct PokeDexAreaScreenMapIdentity
 {
     u8 mapGroup;
@@ -107,24 +120,114 @@ static const u16 sLandmarkData[][2] =
     {MAPSEC_NONE}
 };
 
-static const u8 sAreaGlowTilemapMapping[] =
-{
-    0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0a, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f,
-    0x11, 0x20, 0x02, 0x03, 0x27, 0x2d, 0x06, 0x07, 0x08, 0x09, 0x0a, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f,
-    0x12, 0x21, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x2a, 0x2e, 0x0a, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f,
-    0x13, 0x22, 0x02, 0x03, 0x27, 0x2d, 0x06, 0x07, 0x2a, 0x2e, 0x0a, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f,
-    0x14, 0x01, 0x23, 0x03, 0x26, 0x05, 0x2c, 0x07, 0x08, 0x09, 0x0a, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f,
-    0x15, 0x20, 0x23, 0x03, 0x28, 0x2d, 0x2c, 0x07, 0x08, 0x09, 0x0a, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f,
-    0x16, 0x21, 0x23, 0x03, 0x26, 0x05, 0x2c, 0x07, 0x2a, 0x2e, 0x0a, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f,
-    0x17, 0x22, 0x23, 0x03, 0x28, 0x2d, 0x2c, 0x07, 0x2a, 0x2e, 0x0a, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f,
-    0x18, 0x01, 0x24, 0x03, 0x04, 0x05, 0x06, 0x07, 0x29, 0x09, 0x2f, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f,
-    0x19, 0x20, 0x24, 0x03, 0x27, 0x2d, 0x06, 0x07, 0x29, 0x09, 0x2f, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f,
-    0x1a, 0x21, 0x24, 0x03, 0x04, 0x05, 0x06, 0x07, 0x2b, 0x2e, 0x2f, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f,
-    0x1b, 0x22, 0x24, 0x03, 0x27, 0x2d, 0x06, 0x07, 0x2b, 0x2e, 0x2f, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f,
-    0x1c, 0x01, 0x25, 0x03, 0x26, 0x05, 0x2c, 0x07, 0x29, 0x09, 0x2f, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f,
-    0x1d, 0x20, 0x25, 0x03, 0x28, 0x2d, 0x2c, 0x07, 0x29, 0x09, 0x2f, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f,
-    0x1e, 0x21, 0x25, 0x03, 0x26, 0x05, 0x2c, 0x07, 0x2b, 0x2e, 0x2f, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f,
-    0x1f, 0x22, 0x25, 0x03, 0x28, 0x2d, 0x2c, 0x07, 0x2b, 0x2e, 0x2f, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f,
+// Only some parts of this array are acutally used, because corner flags that overlap
+// with edge flags are cancelled out before lookup. For example, GLOW_TILE_BOTTOM_RIGHT | GLOW_TILE_RIGHT
+// will never be read.
+//
+// The rest of the bytes seem to be old data from before the cancellation was implemented.
+// Most of them line up as you would expect ([BOTTOM_RIGHT | RIGHT] has the same value as [RIGHT]).
+//
+// Any unreachable entries are simply listed in order, without the fancy "[FLAGS] = 0xXX" notation.
+static const u8 sAreaGlowTilemapMapping[] = {
+    [0] = 0x00,
+    [GLOW_TILE_LEFT] = 0x01,
+    [GLOW_TILE_RIGHT] = 0x02,
+    [GLOW_TILE_RIGHT | GLOW_TILE_LEFT] = 0x03,
+    [GLOW_TILE_TOP] = 0x04,
+    [GLOW_TILE_TOP | GLOW_TILE_LEFT] = 0x05,
+    [GLOW_TILE_TOP | GLOW_TILE_RIGHT] = 0x06,
+    [GLOW_TILE_TOP | GLOW_TILE_RIGHT | GLOW_TILE_LEFT] = 0x07,
+    [GLOW_TILE_BOTTOM] = 0x08,
+    [GLOW_TILE_BOTTOM | GLOW_TILE_LEFT] = 0x09,
+    [GLOW_TILE_BOTTOM | GLOW_TILE_RIGHT] = 0x0a,
+    [GLOW_TILE_BOTTOM | GLOW_TILE_RIGHT | GLOW_TILE_LEFT] = 0x0b,
+    [GLOW_TILE_BOTTOM | GLOW_TILE_TOP] = 0x0c,
+    [GLOW_TILE_BOTTOM | GLOW_TILE_TOP | GLOW_TILE_LEFT] = 0x0d,
+    [GLOW_TILE_BOTTOM | GLOW_TILE_TOP | GLOW_TILE_RIGHT] = 0x0e,
+    [GLOW_TILE_BOTTOM | GLOW_TILE_TOP | GLOW_TILE_RIGHT | GLOW_TILE_LEFT] = 0x0f,
+    [GLOW_TILE_BOTTOM_RIGHT] = 0x11,
+    [GLOW_TILE_BOTTOM_RIGHT | GLOW_TILE_LEFT] = 0x20,
+    0x02, 0x03,
+    [GLOW_TILE_BOTTOM_RIGHT | GLOW_TILE_TOP] = 0x27,
+    [GLOW_TILE_BOTTOM_RIGHT | GLOW_TILE_TOP | GLOW_TILE_LEFT] = 0x2d,
+    0x06, 0x07, 0x08, 0x09, 0x0a,
+    0x0b, 0x0c, 0x0d, 0x0e, 0x0f,
+    [GLOW_TILE_TOP_RIGHT] = 0x12,
+    [GLOW_TILE_TOP_RIGHT | GLOW_TILE_LEFT] = 0x21,
+    0x02, 0x03, 0x04, 0x05, 0x06,
+    0x07,
+    [GLOW_TILE_TOP_RIGHT | GLOW_TILE_BOTTOM] = 0x2a,
+    [GLOW_TILE_TOP_RIGHT | GLOW_TILE_BOTTOM | GLOW_TILE_LEFT] = 0x2e,
+    0x0a, 0x0b, 0x0c, 0x0d, 0x0e,
+    0x0f,
+    [GLOW_TILE_TOP_RIGHT | GLOW_TILE_BOTTOM_RIGHT] = 0x13,
+    [GLOW_TILE_TOP_RIGHT | GLOW_TILE_BOTTOM_RIGHT | GLOW_TILE_LEFT] = 0x22,
+    0x02, 0x03, 0x27, 0x2d, 0x06,
+    0x07, 0x2a, 0x2e, 0x0a, 0x0b,
+    0x0c, 0x0d, 0x0e, 0x0f,
+    [GLOW_TILE_BOTTOM_LEFT] = 0x14,
+    0x01,
+    [GLOW_TILE_BOTTOM_LEFT | GLOW_TILE_RIGHT] = 0x23,
+    0x03,
+    [GLOW_TILE_BOTTOM_LEFT | GLOW_TILE_TOP] = 0x26,
+    0x05,
+    [GLOW_TILE_BOTTOM_LEFT | GLOW_TILE_TOP | GLOW_TILE_RIGHT] = 0x2c,
+    0x07, 0x08, 0x09, 0x0a, 0x0b,
+    0x0c, 0x0d, 0x0e, 0x0f,
+    [GLOW_TILE_BOTTOM_LEFT | GLOW_TILE_BOTTOM_RIGHT] = 0x15,
+    0x20, 0x23, 0x03,
+    [GLOW_TILE_BOTTOM_LEFT | GLOW_TILE_BOTTOM_RIGHT | GLOW_TILE_TOP] = 0x28,
+    0x2d, 0x2c, 0x07, 0x08, 0x09,
+    0x0a, 0x0b, 0x0c, 0x0d, 0x0e,
+    0x0f,
+    [GLOW_TILE_BOTTOM_LEFT | GLOW_TILE_TOP_RIGHT] = 0x16,
+    0x21, 0x23, 0x03, 0x26, 0x05,
+    0x2c, 0x07, 0x2a, 0x2e, 0x0a,
+    0x0b, 0x0c, 0x0d, 0x0e, 0x0f,
+    [GLOW_TILE_BOTTOM_LEFT | GLOW_TILE_TOP_RIGHT | GLOW_TILE_BOTTOM_RIGHT] = 0x17,
+    0x22, 0x23, 0x03, 0x28, 0x2d,
+    0x2c, 0x07, 0x2a, 0x2e, 0x0a,
+    0x0b, 0x0c, 0x0d, 0x0e, 0x0f,
+    [GLOW_TILE_TOP_LEFT] = 0x18,
+    0x01,
+    [GLOW_TILE_TOP_LEFT | GLOW_TILE_RIGHT] = 0x24,
+    0x03, 0x04, 0x05, 0x06, 0x07,
+    [GLOW_TILE_TOP_LEFT | GLOW_TILE_BOTTOM] = 0x29,
+    0x09,
+    [GLOW_TILE_TOP_LEFT | GLOW_TILE_BOTTOM | GLOW_TILE_RIGHT] = 0x2f,
+    0x0b, 0x0c, 0x0d, 0x0e, 0x0f,
+    [GLOW_TILE_TOP_LEFT | GLOW_TILE_BOTTOM_RIGHT] = 0x19,
+    0x20, 0x24, 0x03, 0x27, 0x2d,
+    0x06, 0x07, 0x29, 0x09, 0x2f,
+    0x0b, 0x0c, 0x0d, 0x0e, 0x0f,
+    [GLOW_TILE_TOP_LEFT | GLOW_TILE_TOP_RIGHT] = 0x1a,
+    0x21, 0x24, 0x03, 0x04, 0x05,
+    0x06, 0x07,
+    [GLOW_TILE_TOP_LEFT | GLOW_TILE_TOP_RIGHT | GLOW_TILE_BOTTOM] = 0x2b,
+    0x2e, 0x2f, 0x0b, 0x0c, 0x0d,
+    0x0e, 0x0f,
+    [GLOW_TILE_TOP_LEFT | GLOW_TILE_TOP_RIGHT | GLOW_TILE_BOTTOM_RIGHT] = 0x1b,
+    0x22, 0x24, 0x03, 0x27, 0x2d,
+    0x06, 0x07, 0x2b, 0x2e, 0x2f,
+    0x0b, 0x0c, 0x0d, 0x0e, 0x0f,
+    [GLOW_TILE_TOP_LEFT | GLOW_TILE_BOTTOM_LEFT] = 0x1c,
+    0x01,
+    [GLOW_TILE_TOP_LEFT | GLOW_TILE_BOTTOM_LEFT | GLOW_TILE_RIGHT] = 0x25,
+    0x03, 0x26, 0x05, 0x2c, 0x07,
+    0x29, 0x09, 0x2f, 0x0b, 0x0c,
+    0x0d, 0x0e, 0x0f,
+    [GLOW_TILE_TOP_LEFT | GLOW_TILE_BOTTOM_LEFT | GLOW_TILE_BOTTOM_RIGHT] = 0x1d,
+    0x20, 0x25, 0x03, 0x28, 0x2d,
+    0x2c, 0x07, 0x29, 0x09, 0x2f,
+    0x0b, 0x0c, 0x0d, 0x0e, 0x0f,
+    [GLOW_TILE_TOP_LEFT | GLOW_TILE_BOTTOM_LEFT | GLOW_TILE_TOP_RIGHT] = 0x1e,
+    0x21, 0x25, 0x03, 0x26, 0x05,
+    0x2c, 0x07, 0x2b, 0x2e, 0x2f,
+    0x0b, 0x0c, 0x0d, 0x0e, 0x0f,
+    [GLOW_TILE_TOP_LEFT | GLOW_TILE_BOTTOM_LEFT | GLOW_TILE_TOP_RIGHT | GLOW_TILE_BOTTOM_RIGHT] = 0x1f,
+    0x22, 0x25, 0x03, 0x28, 0x2d,
+    0x2c, 0x07, 0x2b, 0x2e, 0x2f,
+    0x0b, 0x0c, 0x0d, 0x0e, 0x0f,
 };
 
 static const struct UnkStruct_1C4D70 sUnknown_085B4018 =
@@ -255,11 +358,11 @@ static void FindMapsWithMon(u16 species)
             {
                 switch (sFeebasData[i][1])
                 {
-                    case MAP_GROUP(PETALBURG_CITY):
+                    case MAP_GROUP_OVERWORLD_MONS:
                         SetAreaHasMon(sFeebasData[i][1], sFeebasData[i][2]);
                         break;
-                    case MAP_GROUP(METEOR_FALLS_1F_1R):
-                    case MAP_GROUP(SAFARI_ZONE_NORTHWEST):
+                    case MAP_GROUP_SPECIAL_MONS_1:
+                    case MAP_GROUP_SPECIAL_MONS_2:
                         SetSpecialMapHasMon(sFeebasData[i][1], sFeebasData[i][2]);
                         break;
                 }
@@ -268,15 +371,15 @@ static void FindMapsWithMon(u16 species)
 
         for (i = 0; gWildMonHeaders[i].mapGroup != 0xFF; i++)
         {
-            if (MapHasMon(gWildMonHeaders + i, species))
+            if (MapHasMon(&gWildMonHeaders[i], species))
             {
                 switch (gWildMonHeaders[i].mapGroup)
                 {
-                    case MAP_GROUP(PETALBURG_CITY):
+                    case MAP_GROUP_OVERWORLD_MONS:
                         SetAreaHasMon(gWildMonHeaders[i].mapGroup, gWildMonHeaders[i].mapNum);
                         break;
-                    case MAP_GROUP(METEOR_FALLS_1F_1R):
-                    case MAP_GROUP(SAFARI_ZONE_NORTHWEST):
+                    case MAP_GROUP_SPECIAL_MONS_1:
+                    case MAP_GROUP_SPECIAL_MONS_2:
                         SetSpecialMapHasMon(gWildMonHeaders[i].mapGroup, gWildMonHeaders[i].mapNum);
                         break;
                 }
@@ -390,18 +493,18 @@ static void BuildAreaGlowTilemap(void)
     u16 i, y, x, j;
     u16 val;
 
-    for (i = 0; i < 0x280; i++)
+    for (i = 0; i < ARRAY_COUNT(sPokedexAreaScreen->areaGlowTilemap); i++)
         sPokedexAreaScreen->areaGlowTilemap[i] = 0;
 
     for (i = 0; i < sPokedexAreaScreen->numOverworldAreas; i++)
     {
         j = 0;
-        for (y = 0; y < 20; y++)
+        for (y = 0; y < AREA_SCREEN_HEIGHT; y++)
         {
-            for (x = 0; x < 32; x++)
+            for (x = 0; x < AREA_SCREEN_WIDTH; x++)
             {
                 if (GetRegionMapSectionIdAt(x, y) == sPokedexAreaScreen->overworldAreasWithMons[i].regionMapSectionId)
-                    sPokedexAreaScreen->areaGlowTilemap[j] = 0xFFFF;
+                    sPokedexAreaScreen->areaGlowTilemap[j] = GLOW_TILE_FULL;
 
                 j++;
             }
@@ -409,51 +512,58 @@ static void BuildAreaGlowTilemap(void)
     }
 
     j = 0;
-    for (y = 0; y < 20; y++)
+    for (y = 0; y < AREA_SCREEN_HEIGHT; y++)
     {
-        for (x = 0; x < 32; x++)
+        for (x = 0; x < AREA_SCREEN_WIDTH; x++)
         {
-            if (sPokedexAreaScreen->areaGlowTilemap[j] == 0xFFFF)
+            if (sPokedexAreaScreen->areaGlowTilemap[j] == GLOW_TILE_FULL)
             {
-                if (x != 0 && sPokedexAreaScreen->areaGlowTilemap[j - 1] != 0xFFFF)
-                    sPokedexAreaScreen->areaGlowTilemap[j - 1] |= 0x02;
-                if (x != 31 && sPokedexAreaScreen->areaGlowTilemap[j + 1] != 0xFFFF)
-                    sPokedexAreaScreen->areaGlowTilemap[j + 1] |= 0x01;
-                if (y != 0 && sPokedexAreaScreen->areaGlowTilemap[j - 32] != 0xFFFF)
-                    sPokedexAreaScreen->areaGlowTilemap[j - 32] |= 0x08;
-                if (y != 19 && sPokedexAreaScreen->areaGlowTilemap[j + 32] != 0xFFFF)
-                    sPokedexAreaScreen->areaGlowTilemap[j + 32] |= 0x04;
-                if (x != 0 && y != 0 && sPokedexAreaScreen->areaGlowTilemap[j - 33] != 0xFFFF)
-                    sPokedexAreaScreen->areaGlowTilemap[j - 33] |= 0x10;
-                if (x != 31 && y != 0 && sPokedexAreaScreen->areaGlowTilemap[j - 31] != 0xFFFF)
-                    sPokedexAreaScreen->areaGlowTilemap[j - 31] |= 0x40;
-                if (x != 0 && y != 19 && sPokedexAreaScreen->areaGlowTilemap[j + 31] != 0xFFFF)
-                    sPokedexAreaScreen->areaGlowTilemap[j + 31] |= 0x20;
-                if (x != 31 && y != 19 && sPokedexAreaScreen->areaGlowTilemap[j + 33] != 0xFFFF)
-                    sPokedexAreaScreen->areaGlowTilemap[j + 33] |= 0x80;
+                // The "tile != GLOW_TILE_FULL" check is pointless in all of these conditionals,
+                // since there's no harm in OR'ing 0xFFFF with anything else.
+
+                // Edges
+                if (x != 0 && sPokedexAreaScreen->areaGlowTilemap[j - 1] != GLOW_TILE_FULL)
+                    sPokedexAreaScreen->areaGlowTilemap[j - 1] |= GLOW_TILE_RIGHT;
+                if (x != AREA_SCREEN_WIDTH - 1 && sPokedexAreaScreen->areaGlowTilemap[j + 1] != GLOW_TILE_FULL)
+                    sPokedexAreaScreen->areaGlowTilemap[j + 1] |= GLOW_TILE_LEFT;
+                if (y != 0 && sPokedexAreaScreen->areaGlowTilemap[j - AREA_SCREEN_WIDTH] != GLOW_TILE_FULL)
+                    sPokedexAreaScreen->areaGlowTilemap[j - AREA_SCREEN_WIDTH] |= GLOW_TILE_BOTTOM;
+                if (y != AREA_SCREEN_HEIGHT - 1 && sPokedexAreaScreen->areaGlowTilemap[j + AREA_SCREEN_WIDTH] != GLOW_TILE_FULL)
+                    sPokedexAreaScreen->areaGlowTilemap[j + AREA_SCREEN_WIDTH] |= GLOW_TILE_TOP;
+                
+                // Diagonals
+                if (x != 0 && y != 0 && sPokedexAreaScreen->areaGlowTilemap[j - AREA_SCREEN_WIDTH - 1] != GLOW_TILE_FULL)
+                    sPokedexAreaScreen->areaGlowTilemap[j - AREA_SCREEN_WIDTH - 1] |= GLOW_TILE_BOTTOM_RIGHT;
+                if (x != AREA_SCREEN_WIDTH - 1 && y != 0 && sPokedexAreaScreen->areaGlowTilemap[j - AREA_SCREEN_WIDTH + 1] != GLOW_TILE_FULL)
+                    sPokedexAreaScreen->areaGlowTilemap[j - AREA_SCREEN_WIDTH + 1] |= GLOW_TILE_BOTTOM_LEFT;
+                if (x != 0 && y != AREA_SCREEN_HEIGHT - 1 && sPokedexAreaScreen->areaGlowTilemap[j + AREA_SCREEN_WIDTH - 1] != GLOW_TILE_FULL)
+                    sPokedexAreaScreen->areaGlowTilemap[j + AREA_SCREEN_WIDTH - 1] |= GLOW_TILE_TOP_RIGHT;
+                if (x != AREA_SCREEN_WIDTH - 1 && y != AREA_SCREEN_HEIGHT - 1 && sPokedexAreaScreen->areaGlowTilemap[j + AREA_SCREEN_WIDTH + 1] != GLOW_TILE_FULL)
+                    sPokedexAreaScreen->areaGlowTilemap[j + AREA_SCREEN_WIDTH + 1] |= GLOW_TILE_TOP_LEFT;
             }
 
             j++;
         }
     }
 
-    for (i = 0; i < 0x280; i++)
+    for (i = 0; i < ARRAY_COUNT(sPokedexAreaScreen->areaGlowTilemap); i++)
     {
-        if (sPokedexAreaScreen->areaGlowTilemap[i] == 0xFFFF)
+        if (sPokedexAreaScreen->areaGlowTilemap[i] == GLOW_TILE_FULL)
         {
             sPokedexAreaScreen->areaGlowTilemap[i] = 0x10;
             sPokedexAreaScreen->areaGlowTilemap[i] |= 0xA000;
         }
         else if (sPokedexAreaScreen->areaGlowTilemap[i])
         {
-            if (sPokedexAreaScreen->areaGlowTilemap[i] & 0x02)
-                sPokedexAreaScreen->areaGlowTilemap[i] &= 0xFFCF;
-            if (sPokedexAreaScreen->areaGlowTilemap[i] & 0x01)
-                sPokedexAreaScreen->areaGlowTilemap[i] &= 0xFF3F;
-            if (sPokedexAreaScreen->areaGlowTilemap[i] & 0x08)
-                sPokedexAreaScreen->areaGlowTilemap[i] &= 0xFFAF;
-            if (sPokedexAreaScreen->areaGlowTilemap[i] & 0x04)
-                sPokedexAreaScreen->areaGlowTilemap[i] &= 0xFF5F;
+            // Get rid of overlapping flags
+            if (sPokedexAreaScreen->areaGlowTilemap[i] & GLOW_TILE_RIGHT)
+                sPokedexAreaScreen->areaGlowTilemap[i] &= ~(GLOW_TILE_BOTTOM_RIGHT | GLOW_TILE_TOP_RIGHT);
+            if (sPokedexAreaScreen->areaGlowTilemap[i] & GLOW_TILE_LEFT)
+                sPokedexAreaScreen->areaGlowTilemap[i] &= ~(GLOW_TILE_BOTTOM_LEFT | GLOW_TILE_TOP_LEFT);
+            if (sPokedexAreaScreen->areaGlowTilemap[i] & GLOW_TILE_BOTTOM)
+                sPokedexAreaScreen->areaGlowTilemap[i] &= ~(GLOW_TILE_BOTTOM_LEFT | GLOW_TILE_BOTTOM_RIGHT);
+            if (sPokedexAreaScreen->areaGlowTilemap[i] & GLOW_TILE_TOP)
+                sPokedexAreaScreen->areaGlowTilemap[i] &= ~(GLOW_TILE_TOP_LEFT | GLOW_TILE_TOP_RIGHT);
 
             sPokedexAreaScreen->areaGlowTilemap[i] = sAreaGlowTilemapMapping[sPokedexAreaScreen->areaGlowTilemap[i]];
             sPokedexAreaScreen->areaGlowTilemap[i] |= 0xA000;

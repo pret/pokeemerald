@@ -94,7 +94,7 @@ void CB2_InitMysteryEventMenu(void)
 
         FillBgTilemapBufferRect_Palette0(0, 0, 0, 0, 0x1E, 0x14);
         LoadUserWindowBorderGfx(0, 1u, 0xD0u);
-        sub_81978B0(0xE0);
+        Menu_LoadStdPalAt(0xE0);
         SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_MODE_0 | DISPCNT_OBJ_1D_MAP | DISPCNT_BG0_ON);
         SetGpuReg(REG_OFFSET_BLDCNT, 0);
         CreateTask(Task_DestroySelf, 0);

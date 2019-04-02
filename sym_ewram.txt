@@ -8,32 +8,16 @@
 	.include "src/link_rfu.o"
 	.include "src/union_room.o"
     .include "src/mystery_gift.o"
-
-    .align 3
-gUnknown_02022C60: @ 2022C60
-	.space 0x4
-
-gUnknown_02022C64: @ 2022C64
-	.space 0x4
-
-gUnknown_02022C68: @ 2022C68
-	.space 0x4
-
-gUnknown_02022C6C: @ 2022C6C
-	.space 0x4
-
+    .include "src/union_room_player_avatar.o"
+    .include "src/union_room_battle.o"
 	.include "src/mevent2.o"
+	.include "src/mevent_801BAAC.o"
 
-gUnknown_02022C74: @ 2022C74
-	.space 0x4
-
-gUnknown_02022C78: @ 2022C78
-	.space 0x4
-
+    @ mevent_server
 gUnknown_02022C7C: @ 2022C7C
 	.space 0x4
 
-gUnknown_02022C80: @ 2022C80
+s_mevent_srv_ish_ptr: @ 2022C80
 	.space 0x4
 
 gUnknown_02022C84: @ 2022C84
@@ -148,11 +132,7 @@ gUnknown_02022D00: @ 2022D00
 	.include "src/decoration.o"
 	.include "src/slot_machine.o"
 	.include "src/battle_ai_script_commands.o"
-	
-.align 2
-gPlayerFacingPosition: @ 203AB40
-	.space 0x8
-	
+	.include "src/fldeff_misc.o"
 	.include "src/pokeblock.o"
 	.include "src/field_specials.o"
 	.include "src/battle_records.o"

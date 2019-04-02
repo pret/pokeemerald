@@ -5,11 +5,11 @@
 
 	.text
 
-	thumb_func_start sub_801D484
-sub_801D484: @ 801D484
+	thumb_func_start mevent_srv_ish_do_init
+mevent_srv_ish_do_init: @ 801D484
 	push {r4,r5,lr}
 	adds r5, r0, 0
-	ldr r4, =gUnknown_02022C80
+	ldr r4, =s_mevent_srv_ish_ptr
 	movs r0, 0x50
 	bl AllocZeroed
 	str r0, [r4]
@@ -22,13 +22,13 @@ sub_801D484: @ 801D484
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_801D484
+	thumb_func_end mevent_srv_ish_do_init
 
-	thumb_func_start sub_801D4A8
-sub_801D4A8: @ 801D4A8
+	thumb_func_start mevent_srv_ish_do_exec
+mevent_srv_ish_do_exec: @ 801D4A8
 	push {r4-r6,lr}
 	adds r6, r0, 0
-	ldr r4, =gUnknown_02022C80
+	ldr r4, =s_mevent_srv_ish_ptr
 	ldr r0, [r4]
 	cmp r0, 0
 	bne _0801D4BC
@@ -43,7 +43,7 @@ _0801D4BC:
 	ldr r0, [r4]
 	ldr r1, [r0, 0x4]
 	strh r1, [r6]
-	bl sub_801D55C
+	bl mevent_srv_ish_free_resources
 	ldr r0, [r4]
 	bl Free
 	movs r0, 0
@@ -54,36 +54,36 @@ _0801D4DC:
 	pop {r4-r6}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_801D4A8
+	thumb_func_end mevent_srv_ish_do_exec
 
-	thumb_func_start sub_801D4E4
-sub_801D4E4: @ 801D4E4
-	ldr r0, =gUnknown_02022C80
+	thumb_func_start mevent_srv_ish_inc_flag
+mevent_srv_ish_inc_flag: @ 801D4E4
+	ldr r0, =s_mevent_srv_ish_ptr
 	ldr r1, [r0]
 	ldr r0, [r1, 0xC]
 	adds r0, 0x1
 	str r0, [r1, 0xC]
 	bx lr
 	.pool
-	thumb_func_end sub_801D4E4
+	thumb_func_end mevent_srv_ish_inc_flag
 
-	thumb_func_start sub_801D4F4
-sub_801D4F4: @ 801D4F4
-	ldr r0, =gUnknown_02022C80
+	thumb_func_start mevent_srv_ish_get_buffer
+mevent_srv_ish_get_buffer: @ 801D4F4
+	ldr r0, =s_mevent_srv_ish_ptr
 	ldr r0, [r0]
 	ldr r0, [r0, 0x20]
 	bx lr
 	.pool
-	thumb_func_end sub_801D4F4
+	thumb_func_end mevent_srv_ish_get_buffer
 
-	thumb_func_start sub_801D500
-sub_801D500: @ 801D500
-	ldr r1, =gUnknown_02022C80
+	thumb_func_start mevent_srv_ish_set_param
+mevent_srv_ish_set_param: @ 801D500
+	ldr r1, =s_mevent_srv_ish_ptr
 	ldr r1, [r1]
 	str r0, [r1, 0x4]
 	bx lr
 	.pool
-	thumb_func_end sub_801D500
+	thumb_func_end mevent_srv_ish_set_param
 
 	thumb_func_start mevent_srv_ish_init
 mevent_srv_ish_init: @ 801D50C
@@ -123,8 +123,8 @@ mevent_srv_ish_init: @ 801D50C
 	bx r0
 	thumb_func_end mevent_srv_ish_init
 
-	thumb_func_start sub_801D55C
-sub_801D55C: @ 801D55C
+	thumb_func_start mevent_srv_ish_free_resources
+mevent_srv_ish_free_resources: @ 801D55C
 	push {r4,lr}
 	adds r4, r0, 0
 	ldr r0, [r4, 0x14]
@@ -138,10 +138,10 @@ sub_801D55C: @ 801D55C
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_801D55C
+	thumb_func_end mevent_srv_ish_free_resources
 
-	thumb_func_start sub_801D580
-sub_801D580: @ 801D580
+	thumb_func_start mevent_srv_ish_jmp_buffer
+mevent_srv_ish_jmp_buffer: @ 801D580
 	push {r4,lr}
 	adds r4, r0, 0
 	ldr r0, [r4, 0x1C]
@@ -154,7 +154,7 @@ sub_801D580: @ 801D580
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_801D580
+	thumb_func_end mevent_srv_ish_jmp_buffer
 
 	thumb_func_start sub_801D59C
 sub_801D59C: @ 801D59C
@@ -340,7 +340,7 @@ _0801D708:
 	bne _0801D804
 _0801D70E:
 	adds r0, r4, 0
-	bl sub_801D580
+	bl mevent_srv_ish_jmp_buffer
 	b _0801D804
 _0801D716:
 	ldr r0, [r4, 0x20]

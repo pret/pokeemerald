@@ -432,7 +432,7 @@ void sub_819789C(void)
     LoadPalette(gUnknown_0860F074, STD_WINDOW_PALETTE_NUM * 0x10, 0x14);
 }
 
-void sub_81978B0(u16 offset)
+void Menu_LoadStdPalAt(u16 offset)
 {
     LoadPalette(gUnknown_0860F074, offset, 0x14);
 }
