@@ -815,11 +815,11 @@ static bool32 HandleLoadWonderCardOrNews(u8 * state, bool32 cardOrNews)
     case 0:
         if (cardOrNews == 0)
         {
-            InitWonderCardResources(sav1_get_mevent_buffer_1(), sav1_get_mevent_buffer_2());
+            InitWonderCardResources(GetSavedWonderCard(), sav1_get_mevent_buffer_2());
         }
         else
         {
-            InitWonderNewsResources(sav1_get_mevent_buffer_0());
+            InitWonderNewsResources(GetSavedWonderNews());
         }
         (*state)++;
         break;

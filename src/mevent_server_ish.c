@@ -216,7 +216,7 @@ static u32 ish_mainseq_4(struct mevent_srv_ish * svr)
         sub_801B508(svr->recvBuffer);
         break;
     case 17:
-        sub_80992A0(svr->recvBuffer, 1000);
+        InitRamScript_NoEventObject(svr->recvBuffer, 1000);
         break;
     case 18:
         memcpy(&gSaveBlock2Ptr->frontier.ereaderTrainer, svr->recvBuffer, 0xbc);
