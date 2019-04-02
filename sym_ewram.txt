@@ -193,9 +193,6 @@ gUnknown_0203CF44: @ 203CF44
 	.space 0x4
 
 	.include "src/menu_specialized.o"
-
-gUnknown_0203CF50: @ 203CF50
-	.space 0x4
-
+	.include "src/faraway_island.o"
 	.include "src/trainer_hill.o"
 	.include "src/rayquaza_scene.o"

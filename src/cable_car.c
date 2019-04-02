@@ -428,13 +428,12 @@ static void sub_81503E4(u8 taskId)
         case WEATHER_ASH:
             if (gWeatherPtr->sprites.s2.ashSprites[0] != NULL && gWeatherPtr->sprites.s2.ashSprites[0]->oam.priority != 0)
             {
-                for (; i < 20; i++)
+                for (; i < NUM_ASH_SPRITES; i++)
                 {
-                    if (gWeatherPtr->sprites.s2.ashSprites[i] != NULL)
-                    {
+                    if (gWeatherPtr->sprites.s2.ashSprites[i])
                         gWeatherPtr->sprites.s2.ashSprites[i]->oam.priority = 0;
-                    }
                 }
+
                 sCableCar->state = 2;
             }
             break;
@@ -445,12 +444,10 @@ static void sub_81503E4(u8 taskId)
             }
             else if (sCableCar->timer >= sCableCar->unk4 + 8)
             {
-                for (; i < 20; i++)
+                for (; i < NUM_ASH_SPRITES; i++)
                 {
-                    if (gWeatherPtr->sprites.s2.ashSprites[i] != NULL)
-                    {
-                        gWeatherPtr->sprites.s2.ashSprites[i]->invisible ^= TRUE;
-                    }
+                    if (gWeatherPtr->sprites.s2.ashSprites[i])
+                        gWeatherPtr->sprites.s2.ashSprites[i]->invisible ^= 1;
                 }
             }
             break;
@@ -466,9 +463,7 @@ static void sub_81503E4(u8 taskId)
         break;
     case 3:
         if (!gPaletteFade.active)
-        {
             sCableCar->state = 0xFF;
-        }
         break;
     case 0xFF:
         SetVBlankCallback(NULL);
@@ -557,7 +552,7 @@ static void sub_8150664(u8 taskId)
     if (sCableCar->timer < sCableCar->unk4)
         gSpriteCoordOffsetX = (gSpriteCoordOffsetX + 247) % 248;
     else
-        gWeatherPtr->unknown_6FC = (gWeatherPtr->unknown_6FC + 247) % 248;
+        gWeatherPtr->ashBaseSpritesX = (gWeatherPtr->ashBaseSpritesX + 247) % 248;
 }
 
 static void CableCarVblankCallback(void)
