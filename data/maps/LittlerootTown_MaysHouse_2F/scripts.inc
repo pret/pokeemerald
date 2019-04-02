@@ -10,36 +10,97 @@ YamakiTown_PlayerHouseUpstairs_MapScript1:
 	
 YamakiTown_PlayerHouseUpstairs_EggHatch::
 	lock
+	applymovement EVENT_OBJ_ID_PLAYER, YamakiTown_PlayerHouseUpstairs_Movement_DelayedFaceLeft
+	waitmovement 0
+	applymovement 16, YamakiTown_PlayerHouseUpstairs_Movement_EggJump
+	waitmovement 0
 	setflag FLAG_SYS_POKEMON_GET
+	applymovement EVENT_OBJ_ID_PLAYER, YamakiTown_PlayerHouseUpstairs_Movement_StepLeft
+	waitmovement 0
 	fadescreen 3
 	removeobject 16
 	bufferleadmonspeciesname 0
 	setflag FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_2F_POKE_BALL
+	addobject 17
+	clearflag FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F_SWABLU_DOLL
 	fadescreen 2
-	
+	playmoncry SPECIES_CHARMANDER, 0
+	msgbox YamakiTown_PlayerHouseUpstairs_PlaceholderCry, MSGBOX_DEFAULT
+	closemessage
+	waitmoncry
 	msgbox YamakiTown_PlayerHouseUpstairs_NicknameStarter, MSGBOX_YESNO
 	compare VAR_RESULT, 1
 	call_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_2723DD
+	closemessage
 	addobject 1
 	clearflag FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_RIVAL_BEDROOM
 	applymovement 1, YamakiTown_PlayerHouseUpstairs_Movement_SisterWallRun
 	waitmovement 0
 	msgbox YamakiTown_PlayerHouseUpstairs_EggHatch_Text1, MSGBOX_DEFAULT
 	closemessage
+	playmoncry SPECIES_CHARMANDER, 0
+	msgbox YamakiTown_PlayerHouseUpstairs_PlaceholderCry, MSGBOX_DEFAULT
+	closemessage
+	waitmoncry
 	applymovement 1, YamakiTown_PlayerHouseUpstairs_Movement_HeartMark
 	waitmovement 0
 	msgbox YamakiTown_PlayerHouseUpstairs_EggHatch_Text2, MSGBOX_DEFAULT
 	closemessage
+	special SpawnCameraObject
+	applymovement EVENT_OBJ_ID_CAMERA, YamakiTown_PlayerHouseUpstairs_Movement_CameraMoveUp
+	waitmovement 0
+	msgbox YamakiTown_PlayerHouseUpstairs_EggHatch_Text3, MSGBOX_DEFAULT
+	closemessage
+	applymovement EVENT_OBJ_ID_CAMERA, YamakiTown_PlayerHouseUpstairs_Movement_CameraMoveDown
+	waitmovement 0
+	special RemoveCameraObject
+	applymovement 1, YamakiTown_PlayerHouseUpstairs_Movement_SisterRunDownstairs
+	waitmovement 0
+	removeobject 1
+	setflag FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_RIVAL_BEDROOM
+	applymovement 1, YamakiTown_PlayerHouseUpstairs_Movement_PokemonInventory
+	waitmovement 0
+	removeobject 17
+	setflag FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F_SWABLU_DOLL
 	setvar VAR_0x408C, 6
 	release
 	end
 	
+YamakiTown_PlayerHouseUpstairs_Movement_DelayedFaceLeft:
+	delay_8
+	face_left
+	step_end
+	
+YamakiTown_PlayerHouseUpstairs_Movement_EggJump:
+	jump_down
+	step_end
+	
+YamakiTown_PlayerHouseUpstairs_Movement_PokemonInventory:
+	jump_up
+	jump_right
+	step_end
+	
+YamakiTown_PlayerHouseUpstairs_Movement_CameraMoveUp:
+	walk_up
+	step_end
+	
+YamakiTown_PlayerHouseUpstairs_Movement_CameraMoveDown:
+	walk_down
+	step_end
+	
+YamakiTown_PlayerHouseUpstairs_Movement_StepLeft:
+	walk_left
+	step_end
+	
 YamakiTown_PlayerHouseUpstairs_Movement_HeartMark:
+	walk_up
+	walk_right
+	walk_right
+	walk_right
 	emote_heart
 	step_end
 	
 YamakiTown_PlayerHouseUpstairs_Movement_SisterWallRun:
-	set_visible
 	walk_fastest_down
 	walk_fastest_down
 	walk_fastest_down
@@ -51,6 +112,16 @@ YamakiTown_PlayerHouseUpstairs_Movement_SisterWallRun:
 	delay_4
 	face_right
 	step_end
+	
+YamakiTown_PlayerHouseUpstairs_Movement_SisterRunDownstairs:
+	walk_fastest_left
+	walk_fastest_left
+	walk_fastest_left
+	walk_fastest_up
+	walk_fastest_up
+	walk_fastest_up
+	walk_fastest_up
+	step_end
 
 YamakiTown_PlayerHouseUpstairs_EggHatch_Text1:
 	.string "Sister: I heard a Pokémon!$"	
@@ -60,7 +131,13 @@ YamakiTown_PlayerHouseUpstairs_PlaceholderCry:
 	
 YamakiTown_PlayerHouseUpstairs_EggHatch_Text2:
 	.string "Oh my gosh, a {COLOR POKEMON_COLOR}{STR_VAR_1}{COLOR NO_COLOR}!\n"
-	.string "It's so CUTE!$"
+	.string "It's so CUTE!\p"
+	.string "I better go check on my egg! I\n"
+	.string "took it downstairs this morning!$"
+	
+YamakiTown_PlayerHouseUpstairs_EggHatch_Text3:
+	.string "Mom: Sister!\n"
+	.string "There's a Pokémon in your food!$"
 	
 YamakiTown_PlayerHouseUpstairs_NicknameStarter:
 	.string "Give a nickname to {COLOR POKEMON_COLOR}{STR_VAR_1}{COLOR NO_COLOR}?$"

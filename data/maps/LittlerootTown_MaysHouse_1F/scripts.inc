@@ -10,10 +10,10 @@ YamakiTown_PlayerHouse_MapScript1:
 	
 YamakiTown_PlayerHouse_MapScript2:
 	compare VAR_0x408C, 4
-	call_if_eq YamakiTown_PlayerHouse_SisterPosition
+	call_if_eq YamakiTown_PlayerHouse_SisterPositionAtTable
 	end
 	
-YamakiTown_PlayerHouse_SisterPosition::
+YamakiTown_PlayerHouse_SisterPositionAtTable::
 	setobjectxyperm 2, 8, 6
 	setobjectmovementtype 1, MOVEMENT_TYPE_FACE_LEFT
 	return
