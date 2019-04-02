@@ -2332,7 +2332,7 @@ void sub_8013F90(u8 taskId)
         if (GetBlockReceivedStatus() == 3)
         {
             gEnemyParty[0] = *(struct Pokemon*)(gBlockRecvBuffer[GetMultiplayerId() ^ 1]);
-            IncrementGameStat(GAME_STAT_50);
+            IncrementGameStat(GAME_STAT_NUM_UNION_ROOM_BATTLES);
             ResetBlockReceivedFlags();
             gTasks[taskId].data[0]++;
         }
