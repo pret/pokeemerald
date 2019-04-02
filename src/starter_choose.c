@@ -125,9 +125,9 @@ static const u8 gStarterChoose_LabelCoords[][2] =
 
 static const u16 sStarterMon[STARTER_MON_COUNT] =
 {
-    SPECIES_ZIGZAGOON,
-    SPECIES_BULBASAUR,
-    SPECIES_PSYDUCK,
+    SPECIES_DRATINI,
+    SPECIES_CHARMANDER,
+    SPECIES_BAGON,
 };
 
 static const struct BgTemplate gUnknown_085B1E00[3] =

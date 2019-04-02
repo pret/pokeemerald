@@ -1584,6 +1584,7 @@ void CB2_NewGame(void)
     SetFieldVBlankCallback();
     SetMainCallback1(CB1_Overworld);
     SetMainCallback2(CB2_Overworld);
+	gEventObjects[gPlayerAvatar.eventObjectId].invisible = TRUE;
 }
 
 void CB2_WhiteOut(void)
