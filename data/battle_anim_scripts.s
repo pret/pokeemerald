@@ -2019,6 +2019,23 @@ Move_GUNK_SHOT:
 	end
 	
 Move_IRON_HEAD:
+	loadspritegfx ANIM_TAG_GUST
+	loadspritegfx ANIM_TAG_IMPACT
+	loopsewithpan SE_W231, SOUND_PAN_ATTACKER, 28, 2
+	createvisualtask sub_81144F8, 5, 0, 0, 0
+	waitforvisualfinish
+	createsprite gUnknown_08592CD8, ANIM_ATTACKER, 2, 0
+	playsewithpan SE_W029, SOUND_PAN_ATTACKER
+	waitforvisualfinish
+	delay 2
+	createsprite gUnknown_08592CD8, ANIM_ATTACKER, 2, 1
+	waitforvisualfinish
+	createvisualtask AnimTask_ShakeMonInPlace, 2, ANIM_ATTACKER, 2, 0, 4, 1
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 5, 0, 7, 1
+	createsprite gUnknown_08592CD8, ANIM_ATTACKER, 2, 2
+	createsprite gUnknown_085973E8, ANIM_TARGET, 3, 0, 0, 1, 1
+	playsewithpan SE_W233B, SOUND_PAN_TARGET
+	waitforvisualfinish
 	end
 	
 Move_MAGNET_BOMB:
