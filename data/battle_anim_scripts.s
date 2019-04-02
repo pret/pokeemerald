@@ -2022,7 +2022,7 @@ Move_IRON_HEAD:
 	loadspritegfx ANIM_TAG_GUST
 	loadspritegfx ANIM_TAG_IMPACT
 	loopsewithpan SE_W231, SOUND_PAN_ATTACKER, 28, 2
-	createvisualtask sub_81144F8, 5, 0, 0, 0
+	createvisualtask sub_81144F8, 5, 1, 0, 0
 	waitforvisualfinish
 	createsprite gUnknown_08592CD8, ANIM_ATTACKER, 2, 0
 	playsewithpan SE_W029, SOUND_PAN_ATTACKER
@@ -2035,6 +2035,8 @@ Move_IRON_HEAD:
 	createsprite gUnknown_08592CD8, ANIM_ATTACKER, 2, 2
 	createsprite gUnknown_085973E8, ANIM_TARGET, 3, 0, 0, 1, 1
 	playsewithpan SE_W233B, SOUND_PAN_TARGET
+	waitforvisualfinish
+	createvisualtask sub_811489C, 5, 0, 1
 	waitforvisualfinish
 	end
 	
@@ -2627,6 +2629,20 @@ Move_INFESTATION:
 	end
 	
 Move_POWER_UP_PUNCH:
+	loadspritegfx ANIM_TAG_IMPACT
+	loadspritegfx ANIM_TAG_HANDS_AND_FEET
+	loadspritegfx ANIM_TAG_BREATH
+	monbg ANIM_TARGET
+	setalpha 12, 8
+	createvisualtask AnimTask_GrowAndShrink, 2,
+	playsewithpan SE_W118, SOUND_PAN_ATTACKER
+	waitforvisualfinish
+	playsewithpan SE_W003, SOUND_PAN_TARGET
+	createsprite gBasicHitSplatSpriteTemplate, ANIM_TARGET, 2, 0, 0, 1, 1
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 3, 0, 6, 1
+	waitforvisualfinish
+	clearmonbg ANIM_TARGET
+	blendoff
 	end
 	
 Move_OBLIVION_WING:
