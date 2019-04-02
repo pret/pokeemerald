@@ -173,9 +173,9 @@ void StartWeather(void)
         gWeatherPtr->ashSpritesCreated = 0;
         gWeatherPtr->fog1SpritesCreated = 0;
         gWeatherPtr->fog2SpritesCreated = 0;
-        gWeatherPtr->sandstormSprites1Created = 0;
-        gWeatherPtr->sandstormSprites2Created = 0;
-        gWeatherPtr->unknown_72E = 0;
+        gWeatherPtr->sandstormSpritesCreated = 0;
+        gWeatherPtr->sandstormSwirlSpritesCreated = 0;
+        gWeatherPtr->bubblesSpritesCreated = 0;
         gWeatherPtr->lightenedFogSpritePalsCount = 0;
         Weather_SetBlendCoeffs(16, 0);
         gWeatherPtr->currWeather = 0;
