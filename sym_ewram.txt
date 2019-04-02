@@ -13,7 +13,7 @@
 	.include "src/mevent2.o"
 	.include "src/mevent_801BAAC.o"
     .include "src/mevent_server.o"
-    .include "src/mevent_server_ish.o"
+    .include "src/mevent_client.o"
 
     @ union_room_chat
     .align 2

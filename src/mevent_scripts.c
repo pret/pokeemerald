@@ -1,38 +1,38 @@
 #include "global.h"
-#include "mevent_server_ish.h"
+#include "mevent_client.h"
 #include "mevent_server.h"
 
 const u8 gText_CanceledReadingCard[] = _("Canceled reading\nthe Card.");
 
 
-const struct mevent_cmd_ish gUnknown_082F2598[] = {
+const struct mevent_client_cmd gUnknown_082F2598[] = {
     {.instr =  2, .parameter = 16},
     {.instr =  4, .parameter = 0}
 };
 
-const struct mevent_cmd_ish gUnknown_082F25A8[] = {
+const struct mevent_client_cmd gUnknown_082F25A8[] = {
     {.instr =  8, .parameter = 0},
     {.instr =  3, .parameter = 0},
     {.instr =  2, .parameter = 16},
     {.instr =  4, .parameter = 0}
 };
 
-const struct mevent_cmd_ish gUnknown_082F25C8[] = {
+const struct mevent_client_cmd gUnknown_082F25C8[] = {
     {.instr = 20, .parameter = 0},
     {.instr =  1, .parameter = 10}
 };
 
-const struct mevent_cmd_ish gUnknown_082F25D8[] = {
+const struct mevent_client_cmd gUnknown_082F25D8[] = {
     {.instr = 20, .parameter = 0},
     {.instr =  1, .parameter = 11}
 };
 
-const struct mevent_cmd_ish gUnknown_082F25E8[] = {
+const struct mevent_client_cmd gUnknown_082F25E8[] = {
     {.instr = 20, .parameter = 0},
     {.instr =  1, .parameter = 0}
 };
 
-const struct mevent_cmd_ish gUnknown_082F25F8[] = {
+const struct mevent_client_cmd gUnknown_082F25F8[] = {
     {.instr =  2, .parameter = 22},
     {.instr = 10, .parameter = 0},
     {.instr =  2, .parameter = 25},
@@ -41,7 +41,7 @@ const struct mevent_cmd_ish gUnknown_082F25F8[] = {
     {.instr =  1, .parameter = 2}
 };
 
-const struct mevent_cmd_ish gUnknown_082F2628[] = {
+const struct mevent_client_cmd gUnknown_082F2628[] = {
     {.instr =  2, .parameter = 23},
     {.instr =  9, .parameter = 0},
     {.instr =  3, .parameter = 0},
@@ -49,17 +49,17 @@ const struct mevent_cmd_ish gUnknown_082F2628[] = {
     {.instr =  4, .parameter = 0}
 };
 
-const struct mevent_cmd_ish gUnknown_082F2650[] = {
+const struct mevent_client_cmd gUnknown_082F2650[] = {
     {.instr = 20, .parameter = 0},
     {.instr =  1, .parameter = 7}
 };
 
-const struct mevent_cmd_ish gUnknown_082F2660[] = {
+const struct mevent_client_cmd gUnknown_082F2660[] = {
     {.instr = 20, .parameter = 0},
     {.instr =  1, .parameter = 3}
 };
 
-const struct mevent_cmd_ish gUnknown_082F2670[] = {
+const struct mevent_client_cmd gUnknown_082F2670[] = {
     {.instr = 13, .parameter = 0},
     {.instr = 14, .parameter = 0},
     {.instr =  3, .parameter = 0},
@@ -67,17 +67,17 @@ const struct mevent_cmd_ish gUnknown_082F2670[] = {
     {.instr =  4, .parameter = 0}
 };
 
-const struct mevent_cmd_ish gUnknown_082F2698[] = {
+const struct mevent_client_cmd gUnknown_082F2698[] = {
     {.instr = 20, .parameter = 0},
     {.instr =  1, .parameter = 9}
 };
 
-const struct mevent_cmd_ish gUnknown_082F26A8[] = {
+const struct mevent_client_cmd gUnknown_082F26A8[] = {
     {.instr = 20, .parameter = 0},
     {.instr =  1, .parameter = 5}
 };
 
-const struct mevent_cmd_ish gUnknown_082F26B8[] = {
+const struct mevent_client_cmd gUnknown_082F26B8[] = {
     {.instr =  2, .parameter = 21},
     {.instr = 12, .parameter = 0},
     {.instr = 20, .parameter = 0},

@@ -61,7 +61,7 @@ SECTIONS {
         src/mevent2.o(.text);
         src/mevent_801BAAC.o(.text);
         src/mevent_server.o(.text);
-        src/mevent_server_ish.o(.text);
+        src/mevent_client.o(.text);
         src/mevent_server_helpers.o(.text);
         src/mevent_news.o(.text);
         src/union_room_chat.o(.text);
@@ -417,7 +417,7 @@ SECTIONS {
         src/mevent2.o(.rodata);
         src/mevent_801BAAC.o(.rodata);
         src/mevent_server.o(.rodata);
-        src/mevent_server_ish.o(.rodata);
+        src/mevent_client.o(.rodata);
         src/mevent_scripts.o(.rodata);
         src/union_room_chat.o(.rodata);
         data/union_room_chat.o(.rodata);
