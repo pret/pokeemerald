@@ -6,186 +6,186 @@ const u8 gText_CanceledReadingCard[] = _("Canceled reading\nthe Card.");
 
 
 const struct mevent_cmd_ish gUnknown_082F2598[] = {
-    { 2, 16},
-    { 4, 0}
+    {.instr =  2, .parameter = 16},
+    {.instr =  4, .parameter = 0}
 };
 
 const struct mevent_cmd_ish gUnknown_082F25A8[] = {
-    { 8, 0},
-    { 3, 0},
-    { 2, 16},
-    { 4, 0}
+    {.instr =  8, .parameter = 0},
+    {.instr =  3, .parameter = 0},
+    {.instr =  2, .parameter = 16},
+    {.instr =  4, .parameter = 0}
 };
 
 const struct mevent_cmd_ish gUnknown_082F25C8[] = {
-    {20, 0},
-    { 1, 10}
+    {.instr = 20, .parameter = 0},
+    {.instr =  1, .parameter = 10}
 };
 
 const struct mevent_cmd_ish gUnknown_082F25D8[] = {
-    {20, 0},
-    { 1, 11}
+    {.instr = 20, .parameter = 0},
+    {.instr =  1, .parameter = 11}
 };
 
 const struct mevent_cmd_ish gUnknown_082F25E8[] = {
-    {20, 0},
-    { 1, 0}
+    {.instr = 20, .parameter = 0},
+    {.instr =  1, .parameter = 0}
 };
 
 const struct mevent_cmd_ish gUnknown_082F25F8[] = {
-    { 2, 22},
-    {10, 0},
-    { 2, 25},
-    {17, 0},
-    {20, 0},
-    { 1, 2}
+    {.instr =  2, .parameter = 22},
+    {.instr = 10, .parameter = 0},
+    {.instr =  2, .parameter = 25},
+    {.instr = 17, .parameter = 0},
+    {.instr = 20, .parameter = 0},
+    {.instr =  1, .parameter = 2}
 };
 
 const struct mevent_cmd_ish gUnknown_082F2628[] = {
-    { 2, 23},
-    { 9, 0},
-    { 3, 0},
-    { 2, 16},
-    { 4, 0}
+    {.instr =  2, .parameter = 23},
+    {.instr =  9, .parameter = 0},
+    {.instr =  3, .parameter = 0},
+    {.instr =  2, .parameter = 16},
+    {.instr =  4, .parameter = 0}
 };
 
 const struct mevent_cmd_ish gUnknown_082F2650[] = {
-    {20, 0},
-    { 1, 7}
+    {.instr = 20, .parameter = 0},
+    {.instr =  1, .parameter = 7}
 };
 
 const struct mevent_cmd_ish gUnknown_082F2660[] = {
-    {20, 0},
-    { 1, 3}
+    {.instr = 20, .parameter = 0},
+    {.instr =  1, .parameter = 3}
 };
 
 const struct mevent_cmd_ish gUnknown_082F2670[] = {
-    {13, 0},
-    {14, 0},
-    { 3, 0},
-    { 2, 16},
-    { 4, 0}
+    {.instr = 13, .parameter = 0},
+    {.instr = 14, .parameter = 0},
+    {.instr =  3, .parameter = 0},
+    {.instr =  2, .parameter = 16},
+    {.instr =  4, .parameter = 0}
 };
 
 const struct mevent_cmd_ish gUnknown_082F2698[] = {
-    {20, 0},
-    { 1, 9}
+    {.instr = 20, .parameter = 0},
+    {.instr =  1, .parameter = 9}
 };
 
 const struct mevent_cmd_ish gUnknown_082F26A8[] = {
-    {20, 0},
-    { 1, 5}
+    {.instr = 20, .parameter = 0},
+    {.instr =  1, .parameter = 5}
 };
 
 const struct mevent_cmd_ish gUnknown_082F26B8[] = {
-    { 2, 21},
-    {12, 0},
-    {20, 0},
-    { 1, 14},
-    { 2, 21},
-    {12, 0},
-    {20, 0},
-    { 1, 13}
+    {.instr =  2, .parameter = 21},
+    {.instr = 12, .parameter = 0},
+    {.instr = 20, .parameter = 0},
+    {.instr =  1, .parameter = 14},
+    {.instr =  2, .parameter = 21},
+    {.instr = 12, .parameter = 0},
+    {.instr = 20, .parameter = 0},
+    {.instr =  1, .parameter = 13}
 };
 
 const struct mevent_cmd gUnknown_082F26F8[] = {
-    {18, 0x10, gUnknown_082F25C8},
-    { 1, 0x00, NULL},
-    { 2, 0x14, NULL},
-    { 0, 0x0a, NULL},
-    {18, 0x10, gUnknown_082F25D8},
-    { 1, 0x00, NULL},
-    { 2, 0x14, NULL},
-    { 0, 0x0b, NULL},
-    {18, 0x10, gUnknown_082F2698},
-    { 1, 0x00, NULL},
-    { 2, 0x14, NULL},
-    { 0, 0x09, NULL}
+    {.instr = 18, .flag = 0x10, .parameter = gUnknown_082F25C8},
+    {.instr =  1, .flag = 0x00, .parameter = NULL},
+    {.instr =  2, .flag = 0x14, .parameter = NULL},
+    {.instr =  0, .flag = 0x0a, .parameter = NULL},
+    {.instr = 18, .flag = 0x10, .parameter = gUnknown_082F25D8},
+    {.instr =  1, .flag = 0x00, .parameter = NULL},
+    {.instr =  2, .flag = 0x14, .parameter = NULL},
+    {.instr =  0, .flag = 0x0b, .parameter = NULL},
+    {.instr = 18, .flag = 0x10, .parameter = gUnknown_082F2698},
+    {.instr =  1, .flag = 0x00, .parameter = NULL},
+    {.instr =  2, .flag = 0x14, .parameter = NULL},
+    {.instr =  0, .flag = 0x09, .parameter = NULL}
 };
 
 const struct mevent_cmd gUnknown_082F2788[] = {
-    {18, 0x20, gUnknown_082F26B8},
-    { 1, 0x00, NULL},
-    {20, 0x1b, gText_CanceledReadingCard},
-    { 1, 0x00, NULL},
-    { 2, 0x14, NULL},
-    { 0, 0x09, NULL}
+    {.instr = 18, .flag = 0x20, .parameter = gUnknown_082F26B8},
+    {.instr =  1, .flag = 0x00, .parameter = NULL},
+    {.instr = 20, .flag = 0x1b, .parameter = gText_CanceledReadingCard},
+    {.instr =  1, .flag = 0x00, .parameter = NULL},
+    {.instr =  2, .flag = 0x14, .parameter = NULL},
+    {.instr =  0, .flag = 0x09, .parameter = NULL}
 };
 
 const struct mevent_cmd gUnknown_082F27D0[] = {
-    {18, 0x10, gUnknown_082F2650},
-    { 1, 0x00, NULL},
-    { 2, 0x14, NULL},
-    { 0, 0x07, NULL}
+    {.instr = 18, .flag = 0x10, .parameter = gUnknown_082F2650},
+    {.instr =  1, .flag = 0x00, .parameter = NULL},
+    {.instr =  2, .flag = 0x14, .parameter = NULL},
+    {.instr =  0, .flag = 0x07, .parameter = NULL}
 };
 
 const struct mevent_cmd gUnknown_082F2800[] = {
-    {18, 0x28, gUnknown_082F2628},
-    { 1, 0x00, NULL},
-    {14, 0x00, NULL},
-    { 1, 0x00, NULL},
-    { 2, 0x13, NULL},
-    { 8, 0x00, NULL},
-    { 4, 0x01, gUnknown_082F27D0},
-    {18, 0x10, gUnknown_082F2660},
-    { 1, 0x00, NULL},
-    { 2, 0x14, NULL},
-    { 0, 0x03, NULL}
+    {.instr = 18, .flag = 0x28, .parameter = gUnknown_082F2628},
+    {.instr =  1, .flag = 0x00, .parameter = NULL},
+    {.instr = 14, .flag = 0x00, .parameter = NULL},
+    {.instr =  1, .flag = 0x00, .parameter = NULL},
+    {.instr =  2, .flag = 0x13, .parameter = NULL},
+    {.instr =  8, .flag = 0x00, .parameter = NULL},
+    {.instr =  4, .flag = 0x01, .parameter = gUnknown_082F27D0},
+    {.instr = 18, .flag = 0x10, .parameter = gUnknown_082F2660},
+    {.instr =  1, .flag = 0x00, .parameter = NULL},
+    {.instr =  2, .flag = 0x14, .parameter = NULL},
+    {.instr =  0, .flag = 0x03, .parameter = NULL}
 };
 
 const struct mevent_cmd gUnknown_082F2884[] = {
-    {18, 0x30, gUnknown_082F25F8},
-    { 1, 0x00, NULL},
-    {13, 0x00, NULL},
-    { 1, 0x00, NULL},
-    {15, 0x00, NULL},
-    { 1, 0x00, NULL},
-    { 2, 0x14, NULL},
-    { 0, 0x02, NULL}
+    {.instr = 18, .flag = 0x30, .parameter = gUnknown_082F25F8},
+    {.instr =  1, .flag = 0x00, .parameter = NULL},
+    {.instr = 13, .flag = 0x00, .parameter = NULL},
+    {.instr =  1, .flag = 0x00, .parameter = NULL},
+    {.instr = 15, .flag = 0x00, .parameter = NULL},
+    {.instr =  1, .flag = 0x00, .parameter = NULL},
+    {.instr =  2, .flag = 0x14, .parameter = NULL},
+    {.instr =  0, .flag = 0x02, .parameter = NULL}
 };
 
 const struct mevent_cmd gUnknown_082F28E4[] = {
-    {18, 0x28, gUnknown_082F2670},
-    { 1, 0x00, NULL},
-    { 2, 0x13, NULL},
-    { 8, 0x00, NULL},
-    { 4, 0x00, gUnknown_082F2884},
-    { 3, 0x00, gUnknown_082F2788}
+    {.instr = 18, .flag = 0x28, .parameter = gUnknown_082F2670},
+    {.instr =  1, .flag = 0x00, .parameter = NULL},
+    {.instr =  2, .flag = 0x13, .parameter = NULL},
+    {.instr =  8, .flag = 0x00, .parameter = NULL},
+    {.instr =  4, .flag = 0x00, .parameter = gUnknown_082F2884},
+    {.instr =  3, .flag = 0x00, .parameter = gUnknown_082F2788}
 };
 
 const struct mevent_cmd gUnknown_082F292C[] = {
-    {18, 0x10, gUnknown_082F26A8},
-    { 1, 0x00, NULL},
-    { 2, 0x14, NULL},
-    { 0, 0x05, NULL},
-    {18, 0x10, gUnknown_082F25E8},
-    { 1, 0x00, NULL},
-    { 2, 0x14, NULL},
-    { 0, 0x00, NULL}
+    {.instr = 18, .flag = 0x10, .parameter = gUnknown_082F26A8},
+    {.instr =  1, .flag = 0x00, .parameter = NULL},
+    {.instr =  2, .flag = 0x14, .parameter = NULL},
+    {.instr =  0, .flag = 0x05, .parameter = NULL},
+    {.instr = 18, .flag = 0x10, .parameter = gUnknown_082F25E8},
+    {.instr =  1, .flag = 0x00, .parameter = NULL},
+    {.instr =  2, .flag = 0x14, .parameter = NULL},
+    {.instr =  0, .flag = 0x00, .parameter = NULL}
 };
 
 const struct mevent_cmd s_mevent_wonder_news[] = {
-    {27, 0x00, NULL},
-    {18, 0x20, gUnknown_082F25A8},
-    { 1, 0x00, NULL},
-    { 2, 0x11, NULL},
-    { 5, 0x00, NULL},
-    {30, 0x00, NULL},
-    { 4, 0x00, gUnknown_082F26F8},
-    { 3, 0x00, gUnknown_082F2800}
+    {.instr = 27, .flag = 0x00, .parameter = NULL},
+    {.instr = 18, .flag = 0x20, .parameter = gUnknown_082F25A8},
+    {.instr =  1, .flag = 0x00, .parameter = NULL},
+    {.instr =  2, .flag = 0x11, .parameter = NULL},
+    {.instr =  5, .flag = 0x00, .parameter = NULL},
+    {.instr = 30, .flag = 0x00, .parameter = NULL},
+    {.instr =  4, .flag = 0x00, .parameter = gUnknown_082F26F8},
+    {.instr =  3, .flag = 0x00, .parameter = gUnknown_082F2800}
 };
 
 const struct mevent_cmd s_mevent_wonder_card[] = {
-    {26, 0x00, NULL},
-    {28, 0x00, NULL},
-    {18, 0x20, gUnknown_082F25A8},
-    {1,  0x00, NULL},
-    {2,  0x11, NULL},
-    {5,  0x00, NULL},
-    {6,  0x00, NULL},
-    {4,  0x00, gUnknown_082F26F8},
-    {7,  0x00, NULL},
-    {4,  0x02, gUnknown_082F28E4},
-    {4,  0x00, gUnknown_082F2884},
-    {3,  0x00, gUnknown_082F292C},
+    {.instr = 26, .flag = 0x00, .parameter = NULL},
+    {.instr = 28, .flag = 0x00, .parameter = NULL},
+    {.instr = 18, .flag = 0x20, .parameter = gUnknown_082F25A8},
+    {.instr =  1, .flag = 0x00, .parameter = NULL},
+    {.instr =  2, .flag = 0x11, .parameter = NULL},
+    {.instr =  5, .flag = 0x00, .parameter = NULL},
+    {.instr =  6, .flag = 0x00, .parameter = NULL},
+    {.instr =  4, .flag = 0x00, .parameter = gUnknown_082F26F8},
+    {.instr =  7, .flag = 0x00, .parameter = NULL},
+    {.instr =  4, .flag = 0x02, .parameter = gUnknown_082F28E4},
+    {.instr =  4, .flag = 0x00, .parameter = gUnknown_082F2884},
+    {.instr =  3, .flag = 0x00, .parameter = gUnknown_082F292C}
 };
