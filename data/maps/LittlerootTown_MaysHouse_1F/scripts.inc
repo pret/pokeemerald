@@ -4,19 +4,51 @@ LittlerootTown_MaysHouse_1F_MapScripts::
 	.byte 0
 
 YamakiTown_PlayerHouse_MapScript1:
+	map_script_2 VAR_0x408C, 6, YamakiTown_PlayerHouse_EggsHatched
 	map_script_2 VAR_0x408C, 4, YamakiTown_PlayerHouse_EndOfDay
 	map_script_2 VAR_0x408C, 1, YamakiTown_PlayerHouse_MomIntro
 	.2byte 0
 	
 YamakiTown_PlayerHouse_MapScript2:
+	compare VAR_0x408C, 6
+	call_if_eq YamakiTown_PlayerHouse_SisterStarterChase
 	compare VAR_0x408C, 4
 	call_if_eq YamakiTown_PlayerHouse_SisterPositionAtTable
 	end
 	
 YamakiTown_PlayerHouse_SisterPositionAtTable::
 	setobjectxyperm 2, 8, 6
+	setobjectmovementtype 2, MOVEMENT_TYPE_FACE_LEFT
+	return
+	
+YamakiTown_PlayerHouse_SisterStarterChase::
+	setobjectxyperm 2, 2, 5
+	setobjectmovementtype 2, MOVEMENT_TYPE_WALK_SEQUENCE_LEFT_UP_RIGHT_DOWN
 	setobjectmovementtype 1, MOVEMENT_TYPE_FACE_LEFT
 	return
+	
+YamakiTown_PlayerHouse_EggsHatched::
+	lock
+	applymovement EVENT_OBJ_ID_PLAYER, YamakiTown_PlayerHouse_Movement_WalkAroundSisAndStarter
+	waitmovement 0
+	applymovement 1, YamakiTown_PlayerHouse_Movement_ExcMark
+	waitmovement 0
+	msgbox YamakiTown_PlayerHouse_EggsHatched_Text1, MSGBOX_DEFAULT
+	closemessage
+	bufferleadmonspeciesname 0
+	playmoncry SPECIES_CHARMANDER, 0
+	msgbox YamakiTown_PlayerHouseUpstairs_PlaceholderCry, MSGBOX_DEFAULT
+	closemessage
+	waitmoncry
+	applymovement 1, YamakiTown_PlayerHouse_Movement_Heart
+	waitmovement 0
+	msgbox YamakiTown_PlayerHouse_EggsHatched_Text2, MSGBOX_YESNO
+	compare VAR_RESULT, 1
+	call_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_2723DD
+	closemessage
+	setvar VAR_0x408C, 7
+	release
+	end
 	
 YamakiTown_PlayerHouse_MomIntro::
 	lock
@@ -38,13 +70,60 @@ YamakiTown_PlayerHouse_SisterScript::
 	lock
 	compare VAR_0x408C, 2
 	goto_if_eq YamakiTown_PlayerHouse_SisterIntro
+	compare VAR_0x408C, 7
+	goto_if_eq YamakiTown_PlayerHouse_SisterAfterStarter
 	faceplayer
+	release
+	end
+	
+YamakiTown_PlayerHouse_SisterAfterStarter::
+	faceplayer
+	msgbox YamakiTown_PlayerHouse_SisterStarter_Text, MSGBOX_DEFAULT
+	closemessage
 	release
 	end
 	
 YamakiTown_PlayerHouse_MomScript::
 	lock
 	faceplayer
+	compare VAR_0x408C, 7
+	goto_if_eq YamakiTown_PlayerHouse_MomScript_EggsHatched
+	release
+	end
+	
+YamakiTown_PlayerHouse_MomScript_EggsHatched::
+	msgbox YamakiTown_PlayerHouse_MomScript_EggsHatched_Text, MSGBOX_DEFAULT
+	closemessage
+	release
+	end
+	
+YamakiTown_PlayerHouse_SisterStarterScript_Deino::
+	lock
+	faceplayer
+	playmoncry SPECIES_BAGON, 0
+	msgbox YamakiTown_PlayerHouse_DeinoCry, MSGBOX_DEFAULT
+	closemessage
+	waitmoncry
+	release
+	end
+	
+YamakiTown_PlayerHouse_SisterStarterScript_Dratini::
+	lock
+	faceplayer
+	playmoncry SPECIES_DRATINI, 0
+	msgbox YamakiTown_PlayerHouse_DratiniCry, MSGBOX_DEFAULT
+	closemessage
+	waitmoncry
+	release
+	end
+	
+YamakiTown_PlayerHouse_SisterStarterScript_Goomy::
+	lock
+	faceplayer
+	playmoncry SPECIES_CHARMANDER, 0
+	msgbox YamakiTown_PlayerHouse_GoomyCry, MSGBOX_DEFAULT
+	closemessage
+	waitmoncry
 	release
 	end
 	
@@ -146,8 +225,22 @@ YamakiTown_PlayerHouse_EndOfDay::
 	release
 	end
 	
+YamakiTown_PlayerHouse_Movement_WalkAroundSisAndStarter:
+	delay_4
+	walk_right
+	walk_right
+	walk_down
+	walk_down
+	walk_down
+	face_right
+	step_end
+	
 YamakiTown_PlayerHouse_Movement_ExcMark:
 	emote_exclamation_mark
+	step_end
+
+YamakiTown_PlayerHouse_Movement_Heart:
+	emote_heart
 	step_end
 
 YamakiTown_PlayerHouse_Movement_PlayerGoingUpstairs:
@@ -320,4 +413,27 @@ YamakiTown_PlayerHouse_EndOfDay_Text5:
 	.string "was for me? Thanks! You're the\l"
 	.string "best, I'm gunna go put this in\l"
 	.string "my room straight away!$"
-
+	
+YamakiTown_PlayerHouse_GoomyCry:
+	.string "{COLOR POKEMON_COLOR}Goomy:{COLOR NO_COLOR} Placeholder cry!$"
+	
+YamakiTown_PlayerHouse_DeinoCry:
+	.string "{COLOR POKEMON_COLOR}Deino:{COLOR NO_COLOR} Placeholder cry!$"
+	
+YamakiTown_PlayerHouse_DratiniCry:
+	.string "{COLOR POKEMON_COLOR}Dratini:{COLOR NO_COLOR} Placeholder cry!$"
+	
+YamakiTown_PlayerHouse_SisterStarter_Text:
+	.string "I LOVE POKéMON! I LOVE POKéMON!\n"
+	.string "I LOVE POKéMON! I LOVE POKéMON!$"
+	
+YamakiTown_PlayerHouse_MomScript_EggsHatched_Text:
+	.string "Why don't you go show\n"
+	.string "{COLOR POKEMON_COLOR}{STR_VAR_1}{COLOR NO_COLOR} to Fan Zheng?$"
+	
+YamakiTown_PlayerHouse_EggsHatched_Text1:
+	.string "Mom: Oh? Your Egg hatched too?$"
+	
+YamakiTown_PlayerHouse_EggsHatched_Text2:
+	.string "What a cute Pokémon!\n"
+	.string "Have you given it a name?$"

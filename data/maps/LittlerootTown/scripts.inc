@@ -30,6 +30,7 @@ YamakiTown_EventScript_CameraIntro::
 	setflag FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_2F_PICHU_DOLL
 	setflag FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F_SWABLU_DOLL
 	setflag FLAG_HIDE_LITTLE_ROOT_TOWN_PLAYERS_BEDROOM_MOM
+	setflag FLAG_HIDE_OLDALE_TOWN_RIVAL
 	applymovement EVENT_OBJ_ID_PLAYER, YamakiTown_MapScript2_CameraMovements
 	waitmovement 0
 	setvar VAR_0x408C, 1

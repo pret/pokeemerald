@@ -28,10 +28,6 @@ YamakiTown_PlayerHouseUpstairs_EggHatch::
 	msgbox YamakiTown_PlayerHouseUpstairs_PlaceholderCry, MSGBOX_DEFAULT
 	closemessage
 	waitmoncry
-	msgbox YamakiTown_PlayerHouseUpstairs_NicknameStarter, MSGBOX_YESNO
-	compare VAR_RESULT, 1
-	call_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_2723DD
-	closemessage
 	addobject 1
 	clearflag FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_RIVAL_BEDROOM
 	applymovement 1, YamakiTown_PlayerHouseUpstairs_Movement_SisterWallRun
@@ -58,10 +54,12 @@ YamakiTown_PlayerHouseUpstairs_EggHatch::
 	waitmovement 0
 	removeobject 1
 	setflag FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_RIVAL_BEDROOM
-	applymovement 1, YamakiTown_PlayerHouseUpstairs_Movement_PokemonInventory
+	applymovement 17, YamakiTown_PlayerHouseUpstairs_Movement_PokemonInventory
 	waitmovement 0
 	removeobject 17
 	setflag FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F_SWABLU_DOLL
+	clearflag FLAG_HIDE_OLDALE_TOWN_RIVAL
+	clearflag FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F_POKE_BALL
 	setvar VAR_0x408C, 6
 	release
 	end
@@ -138,9 +136,6 @@ YamakiTown_PlayerHouseUpstairs_EggHatch_Text2:
 YamakiTown_PlayerHouseUpstairs_EggHatch_Text3:
 	.string "Mom: Sister!\n"
 	.string "There's a Pokémon in your food!$"
-	
-YamakiTown_PlayerHouseUpstairs_NicknameStarter:
-	.string "Give a nickname to {COLOR POKEMON_COLOR}{STR_VAR_1}{COLOR NO_COLOR}?$"
 
 LittlerootTown_MaysHouse_2F_MapScript1_1F92A1: @ 81F92A1
 	compare VAR_0x408D, 2
