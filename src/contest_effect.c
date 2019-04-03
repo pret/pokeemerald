@@ -517,7 +517,7 @@ static void ContestEffect_BadlyStartlesMonsInGoodCondition(void)
 // The appeal works great if performed first.
 static void ContestEffect_BetterIfFirst(void)
 {
-    if (gUnknown_02039F26[eContestResources8.contestant] == 0)
+    if (gContestantTurnOrder[eContestResources8.contestant] == 0)
     {
         u16 move = eContestantStatus[eContestResources8.contestant].currMove;
         eContestantStatus[eContestResources8.contestant].appeal2 += 2 * gContestEffects[gContestMoves[move].effect].appeal;
@@ -528,7 +528,7 @@ static void ContestEffect_BetterIfFirst(void)
 // The appeal works great if performed last.
 static void ContestEffect_BetterIfLast(void)
 {
-    if (gUnknown_02039F26[eContestResources8.contestant] == 3)
+    if (gContestantTurnOrder[eContestResources8.contestant] == 3)
     {
         u16 move = eContestantStatus[eContestResources8.contestant].currMove;
         eContestantStatus[eContestResources8.contestant].appeal2 += 2 * gContestEffects[gContestMoves[move].effect].appeal;

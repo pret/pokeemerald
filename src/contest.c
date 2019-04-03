@@ -200,7 +200,7 @@ EWRAM_DATA s16 gUnknown_02039F18[4] = {0};
 EWRAM_DATA u8 gContestFinalStandings[4] = {0};
 EWRAM_DATA u8 gContestMonPartyIndex = 0;
 EWRAM_DATA u8 gContestPlayerMonIndex = 0;
-EWRAM_DATA u8 gUnknown_02039F26[4] = {0};
+EWRAM_DATA u8 gContestantTurnOrder[4] = {0};
 EWRAM_DATA u8 gIsLinkContest = 0;
 // Bit 0: Is a link contest
 // Bit 1: Link contest uses wireless adapter
@@ -901,7 +901,7 @@ void LoadContestBgAfterMoveAnim(void)
     {
         u32 var = 5 + i;
 
-        LoadPalette(eUnknownHeap1A004.unk18004[var], 16 * (5 + gUnknown_02039F26[i]), 16 * sizeof(u16));
+        LoadPalette(eUnknownHeap1A004.unk18004[var], 16 * (5 + gContestantTurnOrder[i]), 16 * sizeof(u16));
     }
 }
 
@@ -943,51 +943,53 @@ static void sub_80D782C(void)
     FillPalette(RGB(31, 17, 31), 0xF3, 2);
 }
 
-static void sub_80D787C(void)
+static void InitContestResources(void)
 {
     s32 i;
 
     eContest = (struct Contest){};
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < CONTESTANT_COUNT; i++)
     {
-        eContest.unk19206[i] = 0xFF;
+        eContest.unused2[i] = 0xFF;
     }
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < CONTESTANT_COUNT; i++)
     {
-        gContestResources->field_4[i] = (struct ContestantStatus){};
+        eContestantStatus[i] = (struct ContestantStatus){};
     }
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < CONTESTANT_COUNT; i++)
     {
-        gContestResources->field_4[i].ranking = 0;
-        gContestResources->field_4[i].effectStringId = CONTEST_STRING_NONE;
-        gContestResources->field_4[i].effectStringId2 = CONTEST_STRING_NONE;
+        eContestantStatus[i].ranking = 0;
+        eContestantStatus[i].effectStringId = CONTEST_STRING_NONE;
+        eContestantStatus[i].effectStringId2 = CONTEST_STRING_NONE;
     }
-    *gContestResources->field_8 = (struct UnknownContestStruct7){};
-    *gContestResources->field_C = (struct ContestAIInfo){};
+    eContestResources8 = (struct UnknownContestStruct7){};
+    eContestAI = (struct ContestAIInfo){};
     *gContestResources->field_10 = (struct UnknownContestStruct5){};
-    memset(gContestResources->field_14, 0, 4 * sizeof(struct UnknownContestStruct4));
+    memset(gContestResources->field_14, 0, CONTESTANT_COUNT * sizeof(struct UnknownContestStruct4));
+    
     if (!(gIsLinkContest & 1))
-        sub_80DCE58(0);
-    for (i = 0; i < 4; i++)
+        SortContestants(FALSE);
+    
+    for (i = 0; i < CONTESTANT_COUNT; i++)
     {
-        gContestResources->field_4[i].nextTurnOrder = 0xFF;
-        eContest.unk19218[i] = gUnknown_02039F26[i];
+        eContestantStatus[i].nextTurnOrder = 0xFF;
+        eContest.unk19218[i] = gContestantTurnOrder[i];
     }
     sub_80DD590();
-    memset(gContestResources->field_1c, 0, sizeof(*gContestResources->field_1c) * 4);
+    memset(gContestResources->field_1c, 0, sizeof(*gContestResources->field_1c) * CONTESTANT_COUNT);
 }
 
-static void sub_80D7988(void)
+static void AllocContestResources(void)
 {
     gContestResources = AllocZeroed(sizeof(struct ContestResources));
     gContestResources->contest = AllocZeroed(sizeof(struct Contest));
-    gContestResources->field_4 = AllocZeroed(sizeof(struct ContestantStatus) * 4);
+    gContestResources->status = AllocZeroed(sizeof(struct ContestantStatus) * CONTESTANT_COUNT);
     gContestResources->field_8 = AllocZeroed(sizeof(struct UnknownContestStruct7));
-    gContestResources->field_C = AllocZeroed(sizeof(struct ContestAIInfo));
-    gContestResources->field_10 = AllocZeroed(sizeof(struct UnknownContestStruct5) * 4);
-    gContestResources->field_14 = AllocZeroed(sizeof(struct UnknownContestStruct4) * 4);
+    gContestResources->aiData = AllocZeroed(sizeof(struct ContestAIInfo));
+    gContestResources->field_10 = AllocZeroed(sizeof(struct UnknownContestStruct5) * CONTESTANT_COUNT);
+    gContestResources->field_14 = AllocZeroed(sizeof(struct UnknownContestStruct4) * CONTESTANT_COUNT);
     gContestResources->field_18 = AllocZeroed(sizeof(struct ContestStruct_field_18));
-    gContestResources->field_1c = AllocZeroed(sizeof(struct ContestResourcesField1C) * 4);
+    gContestResources->field_1c = AllocZeroed(sizeof(struct ContestResourcesField1C) * CONTESTANT_COUNT);
     gContestResources->field_20 = AllocZeroed(sizeof(struct ContestResourcesField20));
     gContestResources->field_24[0] = AllocZeroed(0x1000);
     gContestResources->field_24[1] = AllocZeroed(0x1000);
@@ -1000,12 +1002,12 @@ static void sub_80D7988(void)
     gUnknown_02023060 = gContestResources->field_24[1];
 }
 
-static void sub_80D7A5C(void)
+static void FreeContestResources(void)
 {
     FREE_AND_SET_NULL(gContestResources->contest);
-    FREE_AND_SET_NULL(gContestResources->field_4);
+    FREE_AND_SET_NULL(gContestResources->status);
     FREE_AND_SET_NULL(gContestResources->field_8);
-    FREE_AND_SET_NULL(gContestResources->field_C);
+    FREE_AND_SET_NULL(gContestResources->aiData);
     FREE_AND_SET_NULL(gContestResources->field_10);
     FREE_AND_SET_NULL(gContestResources->field_14);
     FREE_AND_SET_NULL(gContestResources->field_18);
@@ -1029,7 +1031,7 @@ void sub_80D7B24(void)
     {
     case 0:
         sContestBgCopyFlags = 0;
-        sub_80D7988();
+        AllocContestResources();
         AllocateMonSpritesGfx();
         FREE_AND_SET_NULL(gMonSpritesGfxPtr->firstDecompressed);
         gMonSpritesGfxPtr->firstDecompressed = AllocZeroed(0x4000);
@@ -1046,7 +1048,7 @@ void sub_80D7B24(void)
         gReservedSpritePaletteCount = 4;
         eUnknownHeap1A000 = 0;
         ClearBattleMonForms();
-        sub_80D787C();
+        InitContestResources();
         gMain.state++;
         break;
     case 1:
@@ -1376,15 +1378,15 @@ static void sub_80D8490(u8 taskId)
         u16 move = gContestMons[gContestPlayerMonIndex].moves[i];
         u8 *r5 = sp8;
 
-        if (gContestResources->field_4[gContestPlayerMonIndex].prevMove != MOVE_NONE
+        if (eContestantStatus[gContestPlayerMonIndex].prevMove != MOVE_NONE
             && sub_80DE1E8(gContestPlayerMonIndex)
-            && AreMovesContestCombo(gContestResources->field_4[gContestPlayerMonIndex].prevMove, move) != 0
-            && gContestResources->field_4[gContestPlayerMonIndex].hasJudgesAttention)
+            && AreMovesContestCombo(eContestantStatus[gContestPlayerMonIndex].prevMove, move) != 0
+            && eContestantStatus[gContestPlayerMonIndex].hasJudgesAttention)
         {
             r5 = StringCopy(sp8, gText_ColorLightShadowDarkGrey);
         }
         else if (move != 0
-                 && gContestResources->field_4[gContestPlayerMonIndex].prevMove == move
+                 && eContestantStatus[gContestPlayerMonIndex].prevMove == move
                  && gContestMoves[move].effect != CONTEST_EFFECT_REPETITION_NOT_BORING)
         {
             // Gray the text because it is a repeated move
@@ -1483,7 +1485,7 @@ static void sub_80D8894(u8 taskId)
         u16 var = GetChosenMove(gContestPlayerMonIndex);
         u8 taskId2;
 
-        gContestResources->field_4[gContestPlayerMonIndex].currMove = var;
+        eContestantStatus[gContestPlayerMonIndex].currMove = var;
         taskId2 = CreateTask(sub_80FC9F8, 0);
         SetTaskFuncWithFollowupFunc(taskId2, sub_80FC9F8, sub_80D892C);
         gTasks[taskId].func = TaskDummy1;
@@ -1559,7 +1561,7 @@ static void sub_80D8A88(u8 taskId)
 
             for (i = 0; i + gNumLinkContestPlayers < 4; i++)
             {
-                gContestResources->field_4[gNumLinkContestPlayers + i].currMove = GetChosenMove(gNumLinkContestPlayers + i);
+                eContestantStatus[gNumLinkContestPlayers + i].currMove = GetChosenMove(gNumLinkContestPlayers + i);
             }
         }
         gTasks[taskId].data[0] = 0;
@@ -1607,8 +1609,8 @@ static void sub_80D8B38(u8 taskId)
     case 2:
         sub_80DF080(r6);
         sub_80DF750();
-        if (gContestResources->field_4[r6].numTurnsSkipped != 0
-            || gContestResources->field_4[r6].noMoreTurns)
+        if (eContestantStatus[r6].numTurnsSkipped != 0
+            || eContestantStatus[r6].noMoreTurns)
         {
             gTasks[taskId].data[0] = 31;
         }
@@ -1645,7 +1647,7 @@ static void sub_80D8B38(u8 taskId)
         }
         return;
     case 5:
-        if (gContestResources->field_4[r6].nervous)
+        if (eContestantStatus[r6].nervous)
         {
             gTasks[taskId].data[0] = 33;
         }
@@ -1653,10 +1655,10 @@ static void sub_80D8B38(u8 taskId)
         {
             sub_80DB89C();
             StringCopy(gStringVar1, gContestMons[r6].nickname);
-            if (gContestResources->field_4[r6].currMove < MOVES_COUNT)
-                StringCopy(gStringVar2, gMoveNames[gContestResources->field_4[r6].currMove]);
+            if (eContestantStatus[r6].currMove < MOVES_COUNT)
+                StringCopy(gStringVar2, gMoveNames[eContestantStatus[r6].currMove]);
             else
-                StringCopy(gStringVar2, gUnknown_08587F1C[gContestResources->field_4[r6].moveCategory]);
+                StringCopy(gStringVar2, gUnknown_08587F1C[eContestantStatus[r6].moveCategory]);
             StringExpandPlaceholders(gStringVar4, gText_0827D55A);
             Contest_StartTextPrinter(gStringVar4, 1);
             gTasks[taskId].data[0] = 6;
@@ -1671,7 +1673,7 @@ static void sub_80D8B38(u8 taskId)
         return;
     case 7:
         {
-            u16 move = SanitizeMove(gContestResources->field_4[eContest.unk19215].currMove);
+            u16 move = SanitizeMove(eContestantStatus[eContest.unk19215].currMove);
 
             sub_80DE864(eContest.unk19215);
             sub_80DE9DC(eContest.unk19215);
@@ -1692,7 +1694,7 @@ static void sub_80D8B38(u8 taskId)
             }
             else
             {
-                if (!gContestResources->field_4[r6].hasJudgesAttention)
+                if (!eContestantStatus[r6].hasJudgesAttention)
                     sub_80DC674(r6);
                 sub_80DE12C();
                 gTasks[taskId].data[0] = 23;
@@ -1708,25 +1710,25 @@ static void sub_80D8B38(u8 taskId)
         return;
     case 23:
         gTasks[taskId].data[1] = 0;
-        if (gContestResources->field_4[r6].effectStringId != CONTEST_STRING_NONE)
+        if (eContestantStatus[r6].effectStringId != CONTEST_STRING_NONE)
         {
-            sub_80DD45C(r6, gContestResources->field_4[r6].effectStringId);
-            gContestResources->field_4[r6].effectStringId = CONTEST_STRING_NONE;
+            sub_80DD45C(r6, eContestantStatus[r6].effectStringId);
+            eContestantStatus[r6].effectStringId = CONTEST_STRING_NONE;
             gTasks[taskId].data[0] = 24;
         }
         else
         {
-            if (gContestResources->field_4[r6].effectStringId2 != CONTEST_STRING_NONE)
+            if (eContestantStatus[r6].effectStringId2 != CONTEST_STRING_NONE)
             {
                 for (i = 0; i < 4; i++)
                 {
-                    if (i != r6 && gContestResources->field_4[i].effectStringId != CONTEST_STRING_NONE)
+                    if (i != r6 && eContestantStatus[i].effectStringId != CONTEST_STRING_NONE)
                         break;
                 }
                 if (i == 4)
                 {
-                    sub_80DD45C(r6, gContestResources->field_4[r6].effectStringId2);
-                    gContestResources->field_4[r6].effectStringId2 = CONTEST_STRING_NONE;
+                    sub_80DD45C(r6, eContestantStatus[r6].effectStringId2);
+                    eContestantStatus[r6].effectStringId2 = CONTEST_STRING_NONE;
                     gTasks[taskId].data[0] = 24;
                 }
                 else
@@ -1745,15 +1747,15 @@ static void sub_80D8B38(u8 taskId)
             gTasks[taskId].data[0] = 23;
         return;
     case 48:
-        if (gContestResources->field_4[r6].turnOrderModAction == 1)
+        if (eContestantStatus[r6].turnOrderModAction == 1)
         {
             sub_80DD720(5);
         }
-        else if (gContestResources->field_4[r6].turnOrderModAction == 2)
+        else if (eContestantStatus[r6].turnOrderModAction == 2)
         {
             sub_80DD720(6);
         }
-        else if (gContestResources->field_4[r6].turnOrderModAction == 3)
+        else if (eContestantStatus[r6].turnOrderModAction == 3)
         {
             sub_80DD720(7);
         }
@@ -1773,7 +1775,7 @@ static void sub_80D8B38(u8 taskId)
         gTasks[taskId].data[0] = 12;
         return;
     case 12:
-        sub_80DC028(0, gContestResources->field_4[r6].appeal2, r6);
+        sub_80DC028(0, eContestantStatus[r6].appeal2, r6);
         gTasks[taskId].data[0] = 13;
         return;
     case 13:
@@ -1781,7 +1783,7 @@ static void sub_80D8B38(u8 taskId)
             gTasks[taskId].data[0] = 35;
         return;
     case 35:
-        if (gContestResources->field_4[r6].conditionMod == 1)
+        if (eContestantStatus[r6].conditionMod == 1)
             sub_80DD720(8);
         gTasks[taskId].data[0] = 36;
         return;
@@ -1826,8 +1828,8 @@ static void sub_80D8B38(u8 taskId)
                 r3 = 0;
                 for (r2 = 0; r2 < 4; r2++)
                 {
-                    if (r2 != r6 && gUnknown_02039F26[r2] == i
-                        && gContestResources->field_4[r2].effectStringId != CONTEST_STRING_NONE)
+                    if (r2 != r6 && gContestantTurnOrder[r2] == i
+                        && eContestantStatus[r2].effectStringId != CONTEST_STRING_NONE)
                     {
                         r3 = 1;
                         break;
@@ -1838,9 +1840,9 @@ static void sub_80D8B38(u8 taskId)
             }
             if (r3)
             {
-                gTasks[taskId].data[1] = gUnknown_02039F26[r2];
-                sub_80DD45C(r2, gContestResources->field_4[r2].effectStringId);
-                gContestResources->field_4[r2].effectStringId = CONTEST_STRING_NONE;
+                gTasks[taskId].data[1] = gContestantTurnOrder[r2];
+                sub_80DD45C(r2, eContestantStatus[r2].effectStringId);
+                eContestantStatus[r2].effectStringId = CONTEST_STRING_NONE;
                 gTasks[taskId].data[0] = 27;
             }
             else
@@ -1857,19 +1859,19 @@ static void sub_80D8B38(u8 taskId)
             gTasks[taskId].data[0] = 28;
         return;
     case 28:
-        for (i = 0; gTasks[taskId].data[1] != gUnknown_02039F26[i]; i++)
+        for (i = 0; gTasks[taskId].data[1] != gContestantTurnOrder[i]; i++)
             ;
-        sub_80DC028(gContestResources->field_4[i].appeal2 + gContestResources->field_4[i].jam, -gContestResources->field_4[i].jam, i);
+        sub_80DC028(eContestantStatus[i].appeal2 + eContestantStatus[i].jam, -eContestantStatus[i].jam, i);
         gTasks[taskId].data[0] = 29;
         return;
     case 29:
-        for (i = 0; gTasks[taskId].data[1] != gUnknown_02039F26[i]; i++)
+        for (i = 0; gTasks[taskId].data[1] != gContestantTurnOrder[i]; i++)
             ;
         if (!gContestResources->field_14[i].unk2_2)
             gTasks[taskId].data[0] = 39;
         return;
     case 39:
-        for (i = 0; gTasks[taskId].data[1] != gUnknown_02039F26[i]; i++)
+        for (i = 0; gTasks[taskId].data[1] != gContestantTurnOrder[i]; i++)
             ;
         if (sub_80DB5B8(i, 1))
         {
@@ -1891,17 +1893,17 @@ static void sub_80D8B38(u8 taskId)
     case 30:
         for (i = 0; i < 4; i++)
         {
-            if (gUnknown_02039F26[i] == gTasks[taskId].data[1])
+            if (gContestantTurnOrder[i] == gTasks[taskId].data[1])
                 break;
         }
         if (sub_80DB798(i))
             PlaySE(SE_C_PASI);
         else
             PlaySE(SE_C_SYU);
-        if (gContestResources->field_4[i].judgesAttentionWasRemoved)
+        if (eContestantStatus[i].judgesAttentionWasRemoved)
         {
             sub_80DC674(i);
-            gContestResources->field_4[i].judgesAttentionWasRemoved = 0;
+            eContestantStatus[i].judgesAttentionWasRemoved = 0;
         }
         gTasks[taskId].data[1]++;
         gTasks[taskId].data[0] = 26;
@@ -1910,8 +1912,8 @@ static void sub_80D8B38(u8 taskId)
         if (gTasks[taskId].data[10]++ > 9)
         {
             gTasks[taskId].data[10] = 0;
-            if (gContestResources->field_4[r6].numTurnsSkipped != 0
-                || gContestResources->field_4[r6].turnSkipped)
+            if (eContestantStatus[r6].numTurnsSkipped != 0
+                || eContestantStatus[r6].turnSkipped)
             {
                 sub_80DB89C();
                 StringCopy(gStringVar1, gContestMons[r6].nickname);
@@ -1924,15 +1926,15 @@ static void sub_80D8B38(u8 taskId)
     case 52:
         if (!Contest_RunTextPrinters())
         {
-            if (!gContestResources->field_4[r6].unk15_6)
+            if (!eContestantStatus[r6].unk15_6)
                 gTasks[taskId].data[0] = 17;
             else
                 gTasks[taskId].data[0] = 14;
         }
         return;
     case 14:
-        r3 = gContestResources->field_4[r6].unk16;
-        if (gContestResources->field_4[r6].unk16 != 0)
+        r3 = eContestantStatus[r6].unk16;
+        if (eContestantStatus[r6].unk16 != 0)
         {
             sub_80DB89C();
             if (r3 == 1)
@@ -1968,13 +1970,13 @@ static void sub_80D8B38(u8 taskId)
         {
             if (++gTasks[taskId].data[10] > 50)
             {
-                if (!gContestResources->field_4[r6].hasJudgesAttention)
+                if (!eContestantStatus[r6].hasJudgesAttention)
                 {
                     sub_80DC028(
-                        gContestResources->field_4[r6].appeal2,
-                        gContestResources->field_4[r6].unk17,
+                        eContestantStatus[r6].appeal2,
+                        eContestantStatus[r6].unk17,
                         r6);
-                    gContestResources->field_4[r6].appeal2 += gContestResources->field_4[r6].unk17;
+                    eContestantStatus[r6].appeal2 += eContestantStatus[r6].unk17;
                 }
                 gTasks[taskId].data[0] = 16;
             }
@@ -1988,7 +1990,7 @@ static void sub_80D8B38(u8 taskId)
         }
         return;
     case 17:
-        if (gContestResources->field_4[r6].disappointedRepeat)
+        if (eContestantStatus[r6].disappointedRepeat)
         {
             sub_80DB89C();
             StringCopy(gStringVar1, gContestMons[r6].nickname);
@@ -2010,8 +2012,8 @@ static void sub_80D8B38(u8 taskId)
     case 19:
         if (!Contest_RunTextPrinters())
         {
-            sub_80DC028(gContestResources->field_4[r6].appeal2, -gContestResources->field_4[r6].unk18, r6);
-            gContestResources->field_4[r6].appeal2 -= gContestResources->field_4[r6].unk18;
+            sub_80DC028(eContestantStatus[r6].appeal2, -eContestantStatus[r6].unk18, r6);
+            eContestantStatus[r6].appeal2 -= eContestantStatus[r6].unk18;
             gTasks[taskId].data[0] = 18;
         }
         return;
@@ -2032,18 +2034,18 @@ static void sub_80D8B38(u8 taskId)
         else
         {
             r3 = gContestResources->field_10->bits_0;
-            if (gContestResources->field_4[r6].overrideCategoryExcitementMod)
+            if (eContestantStatus[r6].overrideCategoryExcitementMod)
             {
                 r3 = 1;
-                StringCopy(gStringVar3, gMoveNames[gContestResources->field_4[r6].currMove]);
+                StringCopy(gStringVar3, gMoveNames[eContestantStatus[r6].currMove]);
             }
             else
             {
-                StringCopy(gStringVar3, gUnknown_08587F08[gContestMoves[gContestResources->field_4[r6].currMove].contestCategory]);
+                StringCopy(gStringVar3, gUnknown_08587F08[gContestMoves[eContestantStatus[r6].currMove].contestCategory]);
             }
             if (r3 > 0)
             {
-                if (gContestResources->field_4[r6].disappointedRepeat)
+                if (eContestantStatus[r6].disappointedRepeat)
                     r3 = 0;
             }
             sub_80DB89C();
@@ -2134,8 +2136,8 @@ static void sub_80D8B38(u8 taskId)
                 if (gTasks[taskId].data[11]++ > 29)
                 {
                     gTasks[taskId].data[11] = 0;
-                    sub_80DC028(gContestResources->field_4[r6].appeal2, gContestResources->field_10->unk2, r6);
-                    gContestResources->field_4[r6].appeal2 += gContestResources->field_10->unk2;
+                    sub_80DC028(eContestantStatus[r6].appeal2, gContestResources->field_10->unk2, r6);
+                    eContestantStatus[r6].appeal2 += gContestResources->field_10->unk2;
                     gTasks[taskId].data[10]++;
                 }
             }
@@ -2171,7 +2173,7 @@ static void sub_80D8B38(u8 taskId)
         sub_80DB89C();
         StringCopy(gStringVar3, gContestMons[gContestResources->field_10->excitementFreezer].nickname);
         StringCopy(gStringVar1, gContestMons[r6].nickname);
-        StringCopy(gStringVar2, gMoveNames[gContestResources->field_4[r6].currMove]);
+        StringCopy(gStringVar2, gMoveNames[eContestantStatus[r6].currMove]);
         StringExpandPlaceholders(gStringVar4, gText_0827E7EA);
         Contest_StartTextPrinter(gStringVar4, 1);
         gTasks[taskId].data[0] = 58;
@@ -2193,11 +2195,11 @@ static void sub_80D8B38(u8 taskId)
         }
         return;
     case 33:
-        if (gContestResources->field_4[r6].hasJudgesAttention)
-            gContestResources->field_4[r6].hasJudgesAttention = 0;
+        if (eContestantStatus[r6].hasJudgesAttention)
+            eContestantStatus[r6].hasJudgesAttention = 0;
         sub_80DC9B4(r6);
         StringCopy(gStringVar1, gContestMons[r6].nickname);
-        StringCopy(gStringVar2, gMoveNames[gContestResources->field_4[r6].currMove]);
+        StringCopy(gStringVar2, gMoveNames[eContestantStatus[r6].currMove]);
         StringExpandPlaceholders(gStringVar4, gText_0827E58A);
         Contest_StartTextPrinter(gStringVar4, 1);
         gTasks[taskId].data[0] = 34;
@@ -2577,7 +2579,7 @@ static void sub_80DA830(u8 taskId)
         DestroyTask(taskId);
         gFieldCallback = sub_80DA874;
         FreeAllWindowBuffers();
-        sub_80D7A5C();
+        FreeContestResources();
         FreeMonSpritesGfx();
         SetMainCallback2(CB2_ReturnToField);
     }
@@ -2831,7 +2833,7 @@ static void sub_80DAEA4(void)
 
     for (i = 0; i < 4; i++)
     {
-        FillWindowPixelBuffer(gUnknown_02039F26[i], PIXEL_FILL(0));
+        FillWindowPixelBuffer(gContestantTurnOrder[i], PIXEL_FILL(0));
         sub_80DAF04(i);
         sub_80DAF88(i);
     }
@@ -2862,7 +2864,7 @@ static void sub_80DAF1C(u8 a0, u8 a1)
     offset = GetStringRightAlignXOffset(7, gDisplayedStringBattle, 0x60);
     if (offset > 55)
         offset = 55;
-    Contest_PrintTextToBg0WindowAt(gUnknown_02039F26[a0], gDisplayedStringBattle, offset, 1, 7);
+    Contest_PrintTextToBg0WindowAt(gContestantTurnOrder[a0], gDisplayedStringBattle, offset, 1, 7);
 }
 
 static void sub_80DAF88(u8 a0)
@@ -2873,7 +2875,7 @@ static void sub_80DAF88(u8 a0)
 static void sub_80DAFA0(u8 a0, u8 a1)
 {
     sub_80DAED4(gContestMons[a0].nickname, a1);
-    Contest_PrintTextToBg0WindowAt(gUnknown_02039F26[a0], gDisplayedStringBattle, 5, 1, 7);
+    Contest_PrintTextToBg0WindowAt(gContestantTurnOrder[a0], gDisplayedStringBattle, 5, 1, 7);
 }
 
 static u16 sub_80DAFE0(u8 who, u8 contestCategory)
@@ -3058,7 +3060,7 @@ static void prints_contest_move_description(u16 a)
 
 static void sub_80DB4E0(u16 move, u8 b)
 {
-    u8 r7 = gUnknown_02039F26[b] * 5 + 2;
+    u8 r7 = gContestantTurnOrder[b] * 5 + 2;
 
     if (!Contest_IsMonsTurnDisabled(b) && move != MOVE_NONE)
     {
@@ -3078,7 +3080,7 @@ static void sub_80DB584(void)
     s32 i;
 
     for (i = 0; i < 4; i++)
-        sub_80DB4E0(gContestResources->field_4[i].currMove, i);
+        sub_80DB4E0(eContestantStatus[i].currMove, i);
 }
 
 static u16 sub_80DB5B0(void)
@@ -3093,7 +3095,7 @@ static bool8 sub_80DB5B8(u8 contestantIdx, bool8 resetMod)
 
     if (eContestantStatus[contestantIdx].conditionMod == 0)
         return FALSE;
-    r6 = gUnknown_02039F26[contestantIdx] * 5 + 2;
+    r6 = gContestantTurnOrder[contestantIdx] * 5 + 2;
     r4 = eContestantStatus[contestantIdx].condition / 10;
     if (eContestantStatus[contestantIdx].conditionMod == 1)
     {
@@ -3123,7 +3125,7 @@ static void sub_80DB69C(void)
 
     for (i = 0; i < 4; i++)
     {
-        u8 r4 = gUnknown_02039F26[i] * 5 + 2;
+        u8 r4 = gContestantTurnOrder[i] * 5 + 2;
         u16 r5 = sub_80DB5B0();
 
         r6 = eContestantStatus[i].condition / 10;
@@ -3162,7 +3164,7 @@ static bool8 sub_80DB798(u8 a)
 {
     bool8 r9 = TRUE;
     u16 r8 = 0;
-    u8 r7 = gUnknown_02039F26[a] * 5 + 2;
+    u8 r7 = gContestantTurnOrder[a] * 5 + 2;
 
     if (eContestantStatus[a].resistant != 0 || eContestantStatus[a].immune != 0 || eContestantStatus[a].jamSafetyCount != 0 || eContestantStatus[a].jamReduction != 0)
         r8 = sub_80DB748(0);
@@ -3272,7 +3274,7 @@ static void sub_80DB944(void)
             }
         }
     }
-    sub_80DCE58(1);
+    SortContestants(TRUE);
     sub_80DD590();
 }
 
@@ -3614,7 +3616,7 @@ static void sub_80DC0F4(u8 taskId)
             r11 = 1;
             r5-= 8;
         }
-        ContestBG_FillBoxWithTile(0, r6, r5 + 22, gUnknown_02039F26[r7] * 5 + 2 + r11,  1, 1, 17);
+        ContestBG_FillBoxWithTile(0, r6, r5 + 22, gContestantTurnOrder[r7] * 5 + 2 + r11,  1, 1, 17);
         if (r1 > 0)
         {
             PlaySE(SE_C_GAJI);
@@ -3638,7 +3640,7 @@ static void sub_80DC2BC(void)
     LoadSpriteSheet(&gUnknown_08587A74);
     for (i = 0; i < 4; i++)
     {
-        u8 y = gUnknown_08587A6C[gUnknown_02039F26[i]];
+        u8 y = gUnknown_08587A6C[gContestantTurnOrder[i]];
 
         gContestResources->field_14[i].unk0 = CreateSprite(&gSpriteTemplate_8587AD0, 180, y, 1);
     }
@@ -3707,7 +3709,7 @@ static void sub_80DC44C(void)
     s32 i;
 
     for (i = 0; i < 4; i++)
-        gSprites[gContestResources->field_14[i].unk0].pos1.y = gUnknown_08587A6C[gUnknown_02039F26[i]];
+        gSprites[gContestResources->field_14[i].unk0].pos1.y = gUnknown_08587A6C[gContestantTurnOrder[i]];
 }
 
 static void sub_80DC490(bool8 a)
@@ -3716,7 +3718,7 @@ static void sub_80DC490(bool8 a)
 
     for (i = 0; i < 4; i++)
     {
-        if (gUnknown_02039F26[i] > 1)
+        if (gContestantTurnOrder[i] > 1)
         {
             if (!a)
                 gSprites[gContestResources->field_14[i].unk0].pos1.x = 180;
@@ -3736,7 +3738,7 @@ static void sub_80DC4F0(void)
         LoadCompressedSpriteSheet(&gUnknown_08587AE8[i]);
         gContestResources->field_14[i].unk1 = CreateSprite(&gSpriteTemplate_8587B18[i],
                                                            204,
-                                                           gUnknown_08587A70[gUnknown_02039F26[i]],
+                                                           gUnknown_08587A70[gContestantTurnOrder[i]],
                                                            0);
         SetSubspriteTables(&gSprites[gContestResources->field_14[i].unk1], gSubspriteTables_8587B80);
         gSprites[gContestResources->field_14[i].unk1].invisible = TRUE;
@@ -3902,7 +3904,7 @@ static void sub_80DC9B4(u8 a)
 static u8 sub_80DC9EC(u8 a)
 {
     u8 spriteId1, spriteId2;
-    u8 x = gUnknown_02039F26[a] * 40 + 32;
+    u8 x = gContestantTurnOrder[a] * 40 + 32;
 
     LoadCompressedSpriteSheet(&sUnknown_08589904[a]);
     LoadSpritePalette(&sUnknown_08589924[a]);
@@ -3913,12 +3915,12 @@ static u8 sub_80DC9EC(u8 a)
     CopySpriteTiles(0,
                     3,
                     (void *)VRAM,
-                    (u16 *)(BG_SCREEN_ADDR(28) + gUnknown_02039F26[a] * 5 * 64 + 0x26),
+                    (u16 *)(BG_SCREEN_ADDR(28) + gContestantTurnOrder[a] * 5 * 64 + 0x26),
                     gContestResources->field_34);
 
     CopySpriteTiles(0,
                     3, (void *)VRAM,
-                    (u16 *)(BG_SCREEN_ADDR(28) + gUnknown_02039F26[a] * 5 * 64 + 0x36),
+                    (u16 *)(BG_SCREEN_ADDR(28) + gContestantTurnOrder[a] * 5 * 64 + 0x36),
                     gContestResources->field_38);
 
     CpuFill32(0, gContestResources->field_34 + 0x500, 0x300);
@@ -4056,7 +4058,7 @@ static void sub_80DCD48(void)
                 txtPtr = StringCopy(txtPtr, gText_OneDash);
             }
             ConvertIntToDecimalStringN(txtPtr, value, STR_CONV_MODE_LEFT_ALIGN, 4);
-            Contest_PrintTextToBg0WindowAt(gUnknown_02039F26[i], text, 55, 1, 7);
+            Contest_PrintTextToBg0WindowAt(gContestantTurnOrder[i], text, 55, 1, 7);
         }
         for (i = 0; i < 4; i++)
         {
@@ -4068,88 +4070,122 @@ static void sub_80DCD48(void)
                 txtPtr = StringCopy(txtPtr, gText_OneDash);
             }
             ConvertIntToDecimalStringN(txtPtr, value, STR_CONV_MODE_LEFT_ALIGN, 4);
-            Contest_PrintTextToBg0WindowAt(gUnknown_02039F26[i], text, 5, 1, 7);
+            Contest_PrintTextToBg0WindowAt(gContestantTurnOrder[i], text, 5, 1, 7);
         }
         sub_80DB2BC();
         break;
     }
 }
 
-void sub_80DCE58(u8 a)
+void SortContestants(bool8 useRanking)
 {
-    u8 sp0[4];
-    u16 sp4[4] = {0};
+    u8 scratch[CONTESTANT_COUNT];
+    u16 randomOrdering[CONTESTANT_COUNT] = {0};
     s32 i;
-    s32 r2;
-    s32 r4;
+    s32 v3;
 
-    for (i = 0; i < 4; i++)
+    // Generate a unique random number for each contestant.
+    for (i = 0; i < CONTESTANT_COUNT; i++)
     {
-        sp4[i] = Random();
-        for (r2 = 0; r2 < i; r2++)
+        s32 j;
+        randomOrdering[i] = Random();
+
+        // Loop through all the numbers generated so far.
+        for (j = 0; j < i; j++)
         {
-            if (sp4[i] == sp4[r2])
+            if (randomOrdering[i] == randomOrdering[j])
             {
+                // This number isn't unique; try generating again.
                 i--;
                 break;
             }
         }
     }
 
-    if (a == 0)
+    if (!useRanking)
     {
-        for (i = 0; i < 4; i++)
+        // Order based on the results of the Conditions round using Insertion Sort.
+        // Use the randomOrdering to break ties.
+        for (i = 0; i < CONTESTANT_COUNT; i++)
         {
-            gUnknown_02039F26[i] = i;
-            for (r4 = 0; r4 < i; r4++)
+            // Append this contestant to the list.
+            gContestantTurnOrder[i] = i;
+
+            // Determine where the contestant should be ordered.
+            for (v3 = 0; v3 < i; v3++)
             {
-                if (gContestMonConditions[gUnknown_02039F26[r4]] < gContestMonConditions[i]
-                 || (gContestMonConditions[gUnknown_02039F26[r4]] == gContestMonConditions[i] && sp4[gUnknown_02039F26[r4]] < sp4[i]))
+                if (gContestMonConditions[gContestantTurnOrder[v3]] < gContestMonConditions[i]
+                 || (gContestMonConditions[gContestantTurnOrder[v3]] == gContestMonConditions[i] && randomOrdering[gContestantTurnOrder[v3]] < randomOrdering[i]))
                 {
-                    for (r2 = i; r2 > r4; r2--)
-                        gUnknown_02039F26[r2] = gUnknown_02039F26[r2 - 1];
-                    gUnknown_02039F26[r4] = i;
+                    // Shift everything larger up to make room.
+                    s32 j;
+                    for (j = i; j > v3; j--)
+                        gContestantTurnOrder[j] = gContestantTurnOrder[j - 1];
+                        
+                    // Insert into the new spot.
+                    gContestantTurnOrder[v3] = i;
                     break;
                 }
             }
-            if (r4 == i)
-                gUnknown_02039F26[i] = i;
+
+            // This is redundant.
+            // Perhaps GF switched from true insertion sort to in-place insertion sort, and forgot to
+            // remove this check?
+            if (v3 == i)
+                gContestantTurnOrder[i] = i;
         }
-        memcpy(sp0, gUnknown_02039F26, sizeof(sp0));
-        for (i = 0; i < 4; i++)
-            gUnknown_02039F26[sp0[i]] = i;
+
+        // Invert gContestantTurnOrder; above, it was a list of contestant IDs. Now it's a list of turn orderings.
+        // 
+        // For example, if contestant 3 had the first turn, then `gContestantTurnOrder[1] = 3`. The turn is the index,
+        // the contestant is the data. After inverting the list, `gContestantTurnOrder[3] = 1`. The contestant is the index,
+        // and the turn is the data.
+        memcpy(scratch, gContestantTurnOrder, sizeof(scratch));
+        for (i = 0; i < CONTESTANT_COUNT; i++)
+            gContestantTurnOrder[scratch[i]] = i;
     }
     else
     {
-        memset(sp0, 0xFF, sizeof(sp0));
-        for (i = 0; i < 4; i++)
+        // Order contestants based on their ranking.
+        // If contestants have tied ranking, fill in the next available slot.
+        //
+        // Note that ranking is calculated so that shared places still take up a ranking
+        // space. A ranking like [1, 2, 2, 3] is not possible; it would be [1, 2, 2, 4]
+        // instead.
+        memset(scratch, 0xFF, sizeof(scratch));
+        for (i = 0; i < CONTESTANT_COUNT; i++)
         {
-            u8 r2 = eContestantStatus[i].ranking;
+            u8 j = eContestantStatus[i].ranking;
 
             while (1)
             {
-                u8 *ptr = &sp0[r2];
+                u8 *ptr = &scratch[j];
                 if (*ptr == 0xFF)
                 {
                     *ptr = i;
-                    gUnknown_02039F26[i] = r2;
+                    gContestantTurnOrder[i] = j;
                     break;
                 }
-                r2++;
+                j++;
             }
         }
-        for (i = 0; i < 3; i++)
-        {
-            for (r4 = 3; r4 > i; r4--)
-            {
-                if (eContestantStatus[r4 - 1].ranking == eContestantStatus[r4].ranking
-                 && gUnknown_02039F26[r4 - 1] < gUnknown_02039F26[r4]
-                 && sp4[r4 - 1] < sp4[r4])
-                {
-                    u8 temp = gUnknown_02039F26[r4];
 
-                    gUnknown_02039F26[r4] = gUnknown_02039F26[r4 - 1];
-                    gUnknown_02039F26[r4 - 1] = temp;
+        // Randomize the order of contestants with tied rankings using Selection Sort.
+        // 
+        // Look through the array for tied ranks, and use randomOrdering to break the tie.
+        // This ensures that contestants with the same rank will be randomly ordered. This
+        // uses an in-place slection sort, which involves a lot of extra swapping.
+        for (i = 0; i < CONTESTANT_COUNT - 1; i++)
+        {
+            for (v3 = CONTESTANT_COUNT - 1; v3 > i; v3--)
+            {
+                if (eContestantStatus[v3 - 1].ranking == eContestantStatus[v3].ranking
+                 && gContestantTurnOrder[v3 - 1] < gContestantTurnOrder[v3]
+                 && randomOrdering[v3 - 1] < randomOrdering[v3])
+                {
+                    u8 temp = gContestantTurnOrder[v3];
+                    gContestantTurnOrder[v3] = gContestantTurnOrder[v3 - 1];
+                    gContestantTurnOrder[v3 - 1] = temp;
                 }
             }
         }
@@ -4162,7 +4198,7 @@ static void sub_80DD04C(void)
 
     for (i = 0; i < 4; i++)
     {
-        LoadPalette(&gHeap[0x1A004] + (i + 5) * 32, (gUnknown_02039F26[i] + 5) * 16, 32);
+        LoadPalette(&gHeap[0x1A004] + (i + 5) * 32, (gContestantTurnOrder[i] + 5) * 16, 32);
     }
     sub_80DAEA4();
 }
@@ -4343,7 +4379,7 @@ static void sub_80DD590(void)
 
     for (i = 0; i < 4; i++)
     {
-        sp0[i] = gUnknown_02039F26[i];
+        sp0[i] = gContestantTurnOrder[i];
         sp4[i] = 0;
     }
 
@@ -4372,7 +4408,7 @@ static void sub_80DD590(void)
             for (; j < 4; j++)
             {
                 if (sp4[j] == 0 && eContestantStatus[j].nextTurnOrder == 0xFF
-                 && gUnknown_02039F26[r12] > gUnknown_02039F26[j])
+                 && gContestantTurnOrder[r12] > gContestantTurnOrder[j])
                     r12 = j;
             }
             sp0[r12] = i;
@@ -4385,7 +4421,7 @@ static void sub_80DD590(void)
         eContestResources8.turnOrder[i] = sp0[i];
         eContestantStatus[i].nextTurnOrder = 0xFF;
         eContestantStatus[i].turnOrderMod = 0;
-        gUnknown_02039F26[i] = sp0[i];
+        gContestantTurnOrder[i] = sp0[i];
     }
 }
 
@@ -4710,7 +4746,7 @@ static void sub_80DE008(bool8 a)
         if (eContestantStatus[i].turnOrderMod != 0 && a)
         {
             CpuCopy32(GetTurnOrderNumberGfx(i), (void *)(VRAM + 0x10000 + (gSprites[gContestResources->field_14[i].unk1].oam.tileNum + 6) * 32), 32);
-            gSprites[gContestResources->field_14[i].unk1].pos1.y = gUnknown_08587A70[gUnknown_02039F26[i]];
+            gSprites[gContestResources->field_14[i].unk1].pos1.y = gUnknown_08587A70[gContestantTurnOrder[i]];
             gSprites[gContestResources->field_14[i].unk1].invisible = FALSE;
         }
         else
@@ -4739,7 +4775,7 @@ static void sub_80DE12C(void)
     {
         if (eContestResources8.unnervedPokes[r7] != 0 && !Contest_IsMonsTurnDisabled(r7))
         {
-            u32 r6 = gUnknown_02039F26[r7] * 5 + 2;
+            u32 r6 = gContestantTurnOrder[r7] * 5 + 2;
             u16 var = sub_80DB748(3);
 
             ContestBG_FillBoxWithIncrementingTile(0, var, 0x14, r6, r10, r8, r9, r8);
@@ -4851,7 +4887,7 @@ static void sub_80DE4A8(u8 taskId)
     {
     case 0:
         for (i = 0; i < 4; i++)
-            eContest.unk19218[i] = gUnknown_02039F26[i];
+            eContest.unk19218[i] = gContestantTurnOrder[i];
         sub_80DBF90();
         sub_80DC864();
         sub_80DB69C();
@@ -5321,13 +5357,13 @@ static void sub_80DF080(u8 contestant)
 
     if (!gContestResources->field_10->excitementFrozen
         && gContestResources->field_10->bits_0 > 0
-        && !gContestResources->field_4[contestant].disappointedRepeat)
+        && !eContestantStatus[contestant].disappointedRepeat)
     {
         gContestResources->field_1c[contestant].unkC |= 1;
         gContestResources->field_1c[contestant].unkE_2 = 1;
     }
 
-    if (gContestResources->field_4[contestant].nervous)
+    if (eContestantStatus[contestant].nervous)
         gContestResources->field_1c[contestant].unkC |= 2;
 
     if (!gContestResources->field_10->excitementFrozen
@@ -5337,34 +5373,34 @@ static void sub_80DF080(u8 contestant)
         gContestResources->field_1c[contestant].unkC |= 4;
     }
 
-    if (gContestResources->field_4[contestant].unk15_6
-        && gContestResources->field_4[contestant].unk16 != 0)
+    if (eContestantStatus[contestant].unk15_6
+        && eContestantStatus[contestant].unk16 != 0)
     {
         gContestResources->field_1c[contestant].unkC |= 8;
     }
 
     for (i = 0; i < 4; i++)
     {
-        if (i != contestant && gContestResources->field_4[i].jam != 0)
+        if (i != contestant && eContestantStatus[i].jam != 0)
         {
             gContestResources->field_1c[contestant].unkC |= 0x10;
             gContestResources->field_1c[i].unkC |= 0x40;
         }
     }
 
-    if (gContestResources->field_4[contestant].numTurnsSkipped != 0
-        || gContestResources->field_4[contestant].noMoreTurns)
+    if (eContestantStatus[contestant].numTurnsSkipped != 0
+        || eContestantStatus[contestant].noMoreTurns)
     {
         gContestResources->field_1c[contestant].unkC |= 0x20;
     }
-    else if (!gContestResources->field_4[contestant].nervous)
+    else if (!eContestantStatus[contestant].nervous)
     {
         gContestResources->field_1c[contestant].unkC |= 0x80;
         gContestResources->field_1c[contestant].unkE_1 = 1;
-        gContestResources->field_1c[contestant].unk0[eContest.turnNumber] = gContestResources->field_4[contestant].currMove;
+        gContestResources->field_1c[contestant].unk0[eContest.turnNumber] = eContestantStatus[contestant].currMove;
     }
 
-    if (gContestResources->field_4[contestant].disappointedRepeat)
+    if (eContestantStatus[contestant].disappointedRepeat)
         gContestResources->field_1c[contestant].unkD |= 2;
 
     if (eContest.applauseLevel == 4
@@ -5634,7 +5670,7 @@ static void sub_80DF750(void)
         for (i = 0; i < 4; i++)
         {
             txtPtr = StringCopy(text1, gText_CDot);
-            Contest_PrintTextToBg0WindowAt(gUnknown_02039F26[i], text1, 5, 1, 7);
+            Contest_PrintTextToBg0WindowAt(gContestantTurnOrder[i], text1, 5, 1, 7);
             bits = gContestResources->field_1c[i].unkC;
             for (j = 7; j > -1; j--) // Weird loop.
             {
@@ -5646,8 +5682,8 @@ static void sub_80DF750(void)
                 text2[j] = text1[j];
 
             text2[j] = EOS;
-            Contest_PrintTextToBg0WindowAt(gUnknown_02039F26[i], text2, 5, 1, 7);
-            Contest_PrintTextToBg0WindowAt(gUnknown_02039F26[i], text1 + j, 55, 1, 7);
+            Contest_PrintTextToBg0WindowAt(gContestantTurnOrder[i], text2, 5, 1, 7);
+            Contest_PrintTextToBg0WindowAt(gContestantTurnOrder[i], text1 + j, 55, 1, 7);
         }
     }
     else
@@ -5667,8 +5703,8 @@ static void sub_80DF750(void)
                 text2[j] = text1[j];
 
             text2[j] = EOS;
-            Contest_PrintTextToBg0WindowAt(gUnknown_02039F26[i], text2, 5, 1, 7);
-            Contest_PrintTextToBg0WindowAt(gUnknown_02039F26[i], text1 + j, 55, 1, 7);
+            Contest_PrintTextToBg0WindowAt(gContestantTurnOrder[i], text2, 5, 1, 7);
+            Contest_PrintTextToBg0WindowAt(gContestantTurnOrder[i], text1 + j, 55, 1, 7);
         }
     }
     sub_80DB2BC();

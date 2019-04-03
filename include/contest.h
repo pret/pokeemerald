@@ -1,6 +1,8 @@
 #ifndef GUARD_CONTEST_H
 #define GUARD_CONTEST_H
 
+#define CONTESTANT_COUNT 4
+
 enum
 {
     CONTEST_CATEGORY_COOL,
@@ -258,7 +260,7 @@ struct Contest
 {
     /*0x0*/ u8 playerMoveChoice;
     /*0x1*/ u8 turnNumber;
-    /*0x2*/ u8 unk19206[4];    // seems to only be used by an unref function
+    /*0x2*/ u8 unused2[CONTESTANT_COUNT];
     /*0x6*/ u16 unk1920A_0:1;  // Task active flags?
     u16 unk1920A_1:1;
     u16 unk1920A_2:1;
@@ -279,7 +281,7 @@ struct Contest
     /*0x11*/ u8 unk19215;
     /*0x12*/ u8 unk19216;    // sprite ID
     /*0x13*/ s8 applauseLevel;
-    /*0x19218*/ u8 unk19218[4];
+    /*0x19218*/ u8 unk19218[CONTESTANT_COUNT];
     /*0x1921C*/ u32 unk1921C;   // saved RNG value?
     u16 unk19220[5][4];  // move history?
     u8 unk19248[5][4];  // excitement history
@@ -339,11 +341,11 @@ struct ContestantStatus
 
 struct UnknownContestStruct7
 {
-    u8 turnOrder[4];
+    u8 turnOrder[CONTESTANT_COUNT];
     s16 jam;
     s16 jam2;
     u8 jamQueue[5];
-    u8 unnervedPokes[4];
+    u8 unnervedPokes[CONTESTANT_COUNT];
     u8 contestant;
 };
 
@@ -407,9 +409,9 @@ struct ContestResourcesField20
 struct ContestResources
 {
     struct Contest *contest;
-    struct ContestantStatus *field_4;
+    struct ContestantStatus *status;
     struct UnknownContestStruct7 *field_8;
-    struct ContestAIInfo *field_C;
+    struct ContestAIInfo *aiData;
     struct UnknownContestStruct5 *field_10;
     struct UnknownContestStruct4 *field_14;
     struct ContestStruct_field_18 *field_18;
@@ -422,9 +424,9 @@ struct ContestResources
 };
 
 #define eContest (*gContestResources->contest)
-#define eContestantStatus (gContestResources->field_4)
+#define eContestantStatus (gContestResources->status)
 #define eContestResources8 (*gContestResources->field_8)
-#define eContestAI (*gContestResources->field_C)
+#define eContestAI (*gContestResources->aiData)
 #define eContestResources10 (*gContestResources->field_10)
 #define eContestResources14 (*gContestResources->field_14)
 #define eUnknownHeap18000 (gHeap + 0x18000)
@@ -440,7 +442,7 @@ extern s16 gUnknown_02039F18[4];
 extern u8 gContestFinalStandings[4];
 extern u8 gContestMonPartyIndex;
 extern u8 gContestPlayerMonIndex;
-extern u8 gUnknown_02039F26[4];
+extern u8 gContestantTurnOrder[4];
 extern u8 gIsLinkContest;
 extern u8 gUnknown_02039F2B;
 extern u16 gSpecialVar_ContestCategory;
@@ -467,7 +469,7 @@ void sub_80DB09C(u8 contestCategory);
 bool8 IsSpeciesNotUnown(u16 species);
 bool8 Contest_IsMonsTurnDisabled(u8 a);
 void sub_80DBED4(void);
-void sub_80DCE58(u8 a);
+void SortContestants(bool8 a);
 void SetContestantEffectStringID(u8 a, u8 b);
 void SetContestantEffectStringID2(u8 a, u8 b);
 void SetStartledString(u8 contestant, u8 jam);

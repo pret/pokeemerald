@@ -3069,7 +3069,7 @@ _080F8678:\n\
 
 static void sub_80F86B8(u8 taskId)
 {
-    sub_80DCE58(0);
+    SortContestants(FALSE);
     SetTaskFuncWithFollowupFunc(taskId, sub_80FCFD0, sub_80F8714);
 }
 
