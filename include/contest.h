@@ -14,6 +14,10 @@
 // Prints the ContestResourcesField1C::unk_D value as a bitstring for each contestant.
 #define CONTEST_DEBUG_MODE_PRINT_UNK_D 3
 
+#define LINK_CONTEST_FLAG_IS_LINK       (1 << 0)
+#define LINK_CONTEST_FLAG_IS_WIRELESS   (1 << 1)
+#define LINK_CONTEST_FLAG_HAS_RS_PLAYER (1 << 2)
+
 enum
 {
     CONTEST_CATEGORY_COOL,
@@ -250,7 +254,7 @@ struct ContestPokemon
 
 struct Shared1A004
 {
-    u16 unk18004[16][16]; // Saved palette data before a move happens?
+    u16 cachedWindowPalettes[16][16]; // Saved palette data before a move happens?
     u16 unk18204[PLTT_BUFFER_SIZE];     // Saved copy of gPlttBufferUnfaded
     u16 unk18604[PLTT_BUFFER_SIZE];     // Saved copy of gPlttBufferFaded
     u8 savedJunk[0x800];
@@ -297,7 +301,7 @@ struct Contest
     u16 unk19220[5][4];  // move history?
     u8 unk19248[5][4];  // excitement history
     u8 applauseMeterSpriteId;    // sprite ID
-    /*0x1925D*/ u8 unk1925D;
+    /*0x1925D*/ u8 contestSetupState;
     /*0x1925E*/ u8 unk1925E;
 };
 
@@ -428,7 +432,7 @@ struct ContestResources
     struct ContestStruct_field_18 *field_18;
     struct ContestResourcesField1C * field_1c;
     struct ContestResourcesField20 * field_20;
-    u8 * ContestantInfoTilemaps[CONTESTANT_COUNT];
+    u8 * contestBgTilemaps[CONTESTANT_COUNT];
     void * field_34;
     void * field_38;
     void * field_3c;
@@ -440,7 +444,7 @@ struct ContestResources
 #define eContestAI (*gContestResources->aiData)
 #define eContestResources10 (*gContestResources->field_10)
 #define eContestResources14 (*gContestResources->field_14)
-#define eUnknownHeap18000 (gHeap + 0x18000)
+#define eUnzippedContestAudienceGfx (gHeap + 0x18000)
 #define eUnknownHeap19000 (gHeap + 0x19000)
 #define eContestDebugMode (gHeap[0x1a000])
 #define eUnknownHeap1A004 (*(struct Shared1A004 *)(gHeap + 0x1a004))
@@ -454,7 +458,7 @@ extern u8 gContestFinalStandings[4];
 extern u8 gContestMonPartyIndex;
 extern u8 gContestPlayerMonIndex;
 extern u8 gContestantTurnOrder[4];
-extern u8 gIsLinkContest;
+extern u8 gLinkContestFlags;
 extern u8 gUnknown_02039F2B;
 extern u16 gSpecialVar_ContestCategory;
 extern u16 gSpecialVar_ContestRank;
@@ -471,7 +475,7 @@ extern u32 gContestRngValue;
 // contest.c
 void ResetLinkContestBoolean(void);
 void LoadContestBgAfterMoveAnim(void);
-void CB2_ContestMain(void);
+void CB2_StartContest(void);
 void sub_80DA8C8(u8 partyIndex);
 void sub_80DAB8C(u8 contestType, u8 rank);
 void sub_80DACBC(u8 contestType, u8 rank, bool32 isPostgame);

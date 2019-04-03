@@ -45,8 +45,25 @@
 #include "constants/rgb.h"
 #include "contest_ai.h"
 
-#define CONTESTANT_WINDOW_START 5
 #define APPLAUSE_METER_GFX_TAG 0xABE2
+
+// An index into a palette where the text color for each contestant is stored.
+// Contestant 0 will use palette color 10, contestant 1 will use color 11, etc.
+#define CONTESTANT_TEXT_COLOR_START 10
+
+#define CONTEST_WINDOW_UNK_0 0
+#define CONTEST_WINDOW_UNK_1 1
+#define CONTEST_WINDOW_UNK_2 2
+#define CONTEST_WINDOW_UNK_3 3
+#define CONTEST_WINDOW_UNK_4 4
+#define CONTEST_WINDOW_CONTESTANT1 5
+#define CONTEST_WINDOW_CONTESTANT2 6
+#define CONTEST_WINDOW_CONTESTANT3 7
+#define CONTEST_WINDOW_CONTESTANT4 8
+#define CONTEST_WINDOW_UNK_9 9
+#define CONTEST_WINDOW_UNK_10 10
+
+#define CONTESTANT_WINDOW_START CONTEST_WINDOW_CONTESTANT1
 
 // This file's functions.
 static void sub_80D782C(void);
@@ -55,11 +72,11 @@ static void sub_80D7CB4(u8 taskId);
 static void sub_80D7DAC(u8 taskId);
 static void sub_80D7DC8(u8 taskId);
 static void sub_80D7DE8(u8 taskId);
-static bool8 sub_80D7E44(u8 *);
+static bool8 SetupContestGraphics(u8 *stateVar);
 static void sub_80D80C8(u8 taskId);
 static void sub_80D8108(u8 taskId);
 static void vblank_cb_battle(void);
-static void sub_80D823C(void);
+static void CB2_ContestMain(void);
 static void sub_80D833C(u8 taskId);
 static void sub_80D8424(u8 taskId);
 static void sub_80D8610(u8 taskId);
@@ -97,10 +114,10 @@ static void sub_80DA7EC(u8);
 static void sub_80DA830(u8);
 static void sub_80DA874(void);
 static bool8 sub_80DA8A4(void);
-static void sub_80DAF04(u8);
-static void sub_80DAF1C(u8 a0, u8 a1);
-static void sub_80DAF88(u8);
-static void sub_80DAFA0(u8, u8);
+static void PrintContestantTrainerName(u8);
+static void PrintContestantTrainerNameWithColor(u8 a0, u8 a1);
+static void PrintContestantMonName(u8);
+static void PrintContestantMonNameWithColor(u8, u8);
 static u8 sub_80DB0C4(void);
 static u8 sub_80DB120(void);
 static u8 sub_80DB174(u16, u32, u32, u32);
@@ -110,7 +127,7 @@ static void sub_80DB89C(void);
 static u16 GetChosenMove(u8);
 static void sub_80DB918(void);
 static void sub_80DBF68(void);
-static void sub_80DBF90(void);
+static void FillContestantWindowBgs(void);
 static void sub_80DC2BC(void);
 static void sub_80DC490(bool8);
 static void sub_80DC4F0(void);
@@ -118,7 +135,7 @@ static void CreateApplauseMeterSprite(void);
 static void sub_80DC5E8(void);
 static void sub_80DC7EC(void);
 static void ContestDebugDoPrint(void);
-static void sub_80DD04C(void);
+static void DrawContestantWindows(void);
 static void ApplyNextTurnOrder(void);
 static void StartMoveApplauseMeterOnscreen(void);
 static void TryMoveApplauseMeterOffscreen(void);
@@ -204,7 +221,7 @@ EWRAM_DATA u8 gContestFinalStandings[4] = {0};
 EWRAM_DATA u8 gContestMonPartyIndex = 0;
 EWRAM_DATA u8 gContestPlayerMonIndex = 0;
 EWRAM_DATA u8 gContestantTurnOrder[4] = {0};
-EWRAM_DATA u8 gIsLinkContest = 0;
+EWRAM_DATA u8 gLinkContestFlags = 0;
 // Bit 0: Is a link contest
 // Bit 1: Link contest uses wireless adapter
 EWRAM_DATA u8 gUnknown_02039F2B = 0;
@@ -221,7 +238,7 @@ EWRAM_DATA u8 gUnknown_02039F5D = 0;
 // IWRAM common vars.
 u32 gContestRngValue;
 
-extern const u8 *const gUnknown_0827E8DA[];
+extern const u8 gText_LinkStandby4[];
 extern const u8 gText_0827D55A[];
 extern const u8 gText_0827E793[];
 extern const u8 gText_0827E32E[];
@@ -577,7 +594,7 @@ const u16 gUnknown_08587C30[] = INCBIN_U16("graphics/unknown/unknown_587C30.gbap
 
 #include "data/contest_text_tables.h"
 
-static const struct BgTemplate sContestantInfoBgTemplates[] =
+static const struct BgTemplate sContestBgTemplates[] =
 {
     {
         .bg = 0,
@@ -619,7 +636,7 @@ static const struct BgTemplate sContestantInfoBgTemplates[] =
 
 static const struct WindowTemplate sContestWindowTemplates[] =
 {
-    {
+    [CONTEST_WINDOW_UNK_0] = {
         .bg = 0,
         .tilemapLeft = 18,
         .tilemapTop = 0,
@@ -628,7 +645,7 @@ static const struct WindowTemplate sContestWindowTemplates[] =
         .paletteNum = 0xF,
         .baseBlock = 0x200
     },
-    {
+    [CONTEST_WINDOW_UNK_1] = {
         .bg = 0,
         .tilemapLeft = 18,
         .tilemapTop = 5,
@@ -637,7 +654,7 @@ static const struct WindowTemplate sContestWindowTemplates[] =
         .paletteNum = 0xF,
         .baseBlock = 0x218
     },
-    {
+    [CONTEST_WINDOW_UNK_2] = {
         .bg = 0,
         .tilemapLeft = 18,
         .tilemapTop = 10,
@@ -646,7 +663,7 @@ static const struct WindowTemplate sContestWindowTemplates[] =
         .paletteNum = 0xF,
         .baseBlock = 0x230
     },
-    {
+    [CONTEST_WINDOW_UNK_3] = {
         .bg = 0,
         .tilemapLeft = 18,
         .tilemapTop = 15,
@@ -655,7 +672,7 @@ static const struct WindowTemplate sContestWindowTemplates[] =
         .paletteNum = 0xF,
         .baseBlock = 0x248
     },
-    {
+    [CONTEST_WINDOW_UNK_4] = {
         .bg = 0,
         .tilemapLeft = 1,
         .tilemapTop = 15,
@@ -664,7 +681,7 @@ static const struct WindowTemplate sContestWindowTemplates[] =
         .paletteNum = 0xF,
         .baseBlock = 0x260
     },
-    [CONTESTANT_WINDOW_START] = {
+    [CONTEST_WINDOW_CONTESTANT1] = {
         .bg = 0,
         .tilemapLeft = 1,
         .tilemapTop = 0x1F,
@@ -673,7 +690,7 @@ static const struct WindowTemplate sContestWindowTemplates[] =
         .paletteNum = 0xF,
         .baseBlock = 0x2A4
     },
-    {
+    [CONTEST_WINDOW_CONTESTANT2] = {
         .bg = 0,
         .tilemapLeft = 1,
         .tilemapTop = 0x21,
@@ -682,7 +699,7 @@ static const struct WindowTemplate sContestWindowTemplates[] =
         .paletteNum = 0xF,
         .baseBlock = 0x2B6
     },
-    {
+    [CONTEST_WINDOW_CONTESTANT3] = {
         .bg = 0,
         .tilemapLeft = 1,
         .tilemapTop = 0x23,
@@ -691,7 +708,7 @@ static const struct WindowTemplate sContestWindowTemplates[] =
         .paletteNum = 0xF,
         .baseBlock = 0x2C8
     },
-    {
+    [CONTEST_WINDOW_CONTESTANT4] = {
         .bg = 0,
         .tilemapLeft = 1,
         .tilemapTop = 0x25,
@@ -700,7 +717,7 @@ static const struct WindowTemplate sContestWindowTemplates[] =
         .paletteNum = 0xF,
         .baseBlock = 0x2DA
     },
-    {
+    [CONTEST_WINDOW_UNK_9] = {
         .bg = 0,
         .tilemapLeft = 16,
         .tilemapTop = 0x1F,
@@ -709,7 +726,7 @@ static const struct WindowTemplate sContestWindowTemplates[] =
         .paletteNum = 0xF,
         .baseBlock = 0x2EC
     },
-    {
+    [CONTEST_WINDOW_UNK_10] = {
         .bg = 0,
         .tilemapLeft = 11,
         .tilemapTop = 0x23,
@@ -861,7 +878,7 @@ static void TaskDummy1(u8 taskId)
 
 void ResetLinkContestBoolean(void)
 {
-    gIsLinkContest = 0;
+    gLinkContestFlags = 0;
 }
 
 static void SetupContestGpuRegs(void)
@@ -904,7 +921,7 @@ void LoadContestBgAfterMoveAnim(void)
     {
         u32 contestantWindowId = CONTESTANT_WINDOW_START + i;
 
-        LoadPalette(eUnknownHeap1A004.unk18004[contestantWindowId], 16 * (CONTESTANT_WINDOW_START + gContestantTurnOrder[i]), sizeof((eUnknownHeap1A004.unk18004[contestantWindowId])));
+        LoadPalette(eUnknownHeap1A004.cachedWindowPalettes[contestantWindowId], 16 * (CONTESTANT_WINDOW_START + gContestantTurnOrder[i]), sizeof((eUnknownHeap1A004.cachedWindowPalettes[contestantWindowId])));
     }
 }
 
@@ -913,11 +930,11 @@ static void InitContestInfoBgs(void)
     s32 i;
 
     ResetBgsAndClearDma3BusyFlags(0);
-    InitBgsFromTemplates(0, sContestantInfoBgTemplates, ARRAY_COUNT(sContestantInfoBgTemplates));
+    InitBgsFromTemplates(0, sContestBgTemplates, ARRAY_COUNT(sContestBgTemplates));
     SetBgAttribute(3, BG_ATTR_WRAPAROUND, 1);
     for (i = 0; i < CONTESTANT_COUNT; i++)
     {
-        SetBgTilemapBuffer(i, gContestResources->ContestantInfoTilemaps[i]);
+        SetBgTilemapBuffer(i, gContestResources->contestBgTilemaps[i]);
     }
 }
 
@@ -925,7 +942,7 @@ static void InitContestWindows(void)
 {
     InitWindows(sContestWindowTemplates);
     DeactivateAllTextPrinters();
-    if (gIsLinkContest & 1)
+    if (gLinkContestFlags & LINK_CONTEST_FLAG_IS_LINK)
     {
         gTextFlags.canABSpeedUpPrint = FALSE;
     }
@@ -970,7 +987,7 @@ static void InitContestResources(void)
     *gContestResources->field_10 = (struct UnknownContestStruct5){};
     memset(gContestResources->field_14, 0, CONTESTANT_COUNT * sizeof(struct UnknownContestStruct4));
     
-    if (!(gIsLinkContest & 1))
+    if (!(gLinkContestFlags & LINK_CONTEST_FLAG_IS_LINK))
         SortContestants(FALSE);
     
     for (i = 0; i < CONTESTANT_COUNT; i++)
@@ -996,15 +1013,15 @@ static void AllocContestResources(void)
     gContestResources->field_18 = AllocZeroed(sizeof(struct ContestStruct_field_18));
     gContestResources->field_1c = AllocZeroed(sizeof(struct ContestResourcesField1C) * CONTESTANT_COUNT);
     gContestResources->field_20 = AllocZeroed(sizeof(struct ContestResourcesField20));
-    gContestResources->ContestantInfoTilemaps[0] = AllocZeroed(0x1000);
-    gContestResources->ContestantInfoTilemaps[1] = AllocZeroed(0x1000);
-    gContestResources->ContestantInfoTilemaps[2] = AllocZeroed(0x1000);
-    gContestResources->ContestantInfoTilemaps[3] = AllocZeroed(0x1000);
+    gContestResources->contestBgTilemaps[0] = AllocZeroed(0x1000);
+    gContestResources->contestBgTilemaps[1] = AllocZeroed(0x1000);
+    gContestResources->contestBgTilemaps[2] = AllocZeroed(0x1000);
+    gContestResources->contestBgTilemaps[3] = AllocZeroed(0x1000);
     gContestResources->field_34 = AllocZeroed(0x800);
     gContestResources->field_38 = AllocZeroed(0x800);
     gContestResources->field_3c = AllocZeroed(0x2000);
     gUnknown_0202305C = gContestResources->field_3c;
-    gUnknown_02023060 = gContestResources->ContestantInfoTilemaps[1];
+    gUnknown_02023060 = gContestResources->contestBgTilemaps[1];
 }
 
 static void FreeContestResources(void)
@@ -1018,10 +1035,10 @@ static void FreeContestResources(void)
     FREE_AND_SET_NULL(gContestResources->field_18);
     FREE_AND_SET_NULL(gContestResources->field_1c);
     FREE_AND_SET_NULL(gContestResources->field_20);
-    FREE_AND_SET_NULL(gContestResources->ContestantInfoTilemaps[0]);
-    FREE_AND_SET_NULL(gContestResources->ContestantInfoTilemaps[1]);
-    FREE_AND_SET_NULL(gContestResources->ContestantInfoTilemaps[2]);
-    FREE_AND_SET_NULL(gContestResources->ContestantInfoTilemaps[3]);
+    FREE_AND_SET_NULL(gContestResources->contestBgTilemaps[0]);
+    FREE_AND_SET_NULL(gContestResources->contestBgTilemaps[1]);
+    FREE_AND_SET_NULL(gContestResources->contestBgTilemaps[2]);
+    FREE_AND_SET_NULL(gContestResources->contestBgTilemaps[3]);
     FREE_AND_SET_NULL(gContestResources->field_34);
     FREE_AND_SET_NULL(gContestResources->field_38);
     FREE_AND_SET_NULL(gContestResources->field_3c);
@@ -1030,7 +1047,7 @@ static void FreeContestResources(void)
     gUnknown_02023060 = NULL;
 }
 
-void CB2_ContestMain(void)
+void CB2_StartContest(void)
 {
     switch (gMain.state)
     {
@@ -1060,9 +1077,9 @@ void CB2_ContestMain(void)
         gMain.state++;
         break;
     case 2:
-        if (sub_80D7E44(&eContest.unk1925D))
+        if (SetupContestGraphics(&eContest.contestSetupState))
         {
-            eContest.unk1925D = 0;
+            eContest.contestSetupState = 0;
             gMain.state++;
         }
         break;
@@ -1074,10 +1091,10 @@ void CB2_ContestMain(void)
         gPaletteFade.bufferTransferDisabled = FALSE;
         SetVBlankCallback(vblank_cb_battle);
         eContest.mainTaskId = CreateTask(sub_80D7C7C, 10);
-        SetMainCallback2(sub_80D823C);
-        if (gIsLinkContest & 2)
+        SetMainCallback2(CB2_ContestMain);
+        if (gLinkContestFlags & LINK_CONTEST_FLAG_IS_WIRELESS)
         {
-            sub_800E0E8();
+            LoadWirelessStatusIndicatorSprite();
             CreateWirelessStatusIndicatorSprite(8, 8);
         }
         break;
@@ -1095,9 +1112,9 @@ static void sub_80D7C7C(u8 taskId)
 
 static void sub_80D7CB4(u8 taskId)
 {
-    if (gIsLinkContest & 1)
+    if (gLinkContestFlags & LINK_CONTEST_FLAG_IS_LINK)
     {
-        if (gIsLinkContest & 2)
+        if (gLinkContestFlags & LINK_CONTEST_FLAG_IS_WIRELESS)
         {
             switch (gTasks[taskId].data[0])
             {
@@ -1123,7 +1140,7 @@ static void sub_80D7CB4(u8 taskId)
         if (!gPaletteFade.active)
         {
             gPaletteFade.bufferTransferDisabled = FALSE;
-            if (!(gIsLinkContest & 2))
+            if (!(gLinkContestFlags & LINK_CONTEST_FLAG_IS_WIRELESS))
                 sub_80DBF68();
             CreateTask(sub_80D7DAC, 0);
             gTasks[taskId].data[0] = 0;
@@ -1159,12 +1176,12 @@ static void sub_80D7DE8(u8 taskId)
     }
 }
 
-static u8 sub_80D7E44(u8 *a)
+static bool8 SetupContestGraphics(u8 *stateVar)
 {
-    u16 sp0[16];
-    u16 sp20[16];
+    u16 tempPalette1[16];
+    u16 tempPalette2[16];
 
-    switch (*a)
+    switch (*stateVar)
     {
     case 0:
         gPaletteFade.bufferTransferDisabled = TRUE;
@@ -1177,7 +1194,7 @@ static u8 sub_80D7E44(u8 *a)
         break;
     case 2:
         LZDecompressVram(gContestAudienceGfx, (void *)(BG_SCREEN_ADDR(4)));
-        DmaCopyLarge32(3, (void *)(BG_SCREEN_ADDR(4)), eUnknownHeap18000, 0x2000, 0x1000);
+        DmaCopyLarge32(3, (void *)(BG_SCREEN_ADDR(4)), eUnzippedContestAudienceGfx, 0x2000, 0x1000);
         break;
     case 3:
         CopyToBgTilemapBuffer(3, gOldContestGfx, 0, 0);
@@ -1187,20 +1204,20 @@ static u8 sub_80D7E44(u8 *a)
         CopyToBgTilemapBuffer(2, gUnknown_08C17170, 0, 0);
         CopyBgTilemapBufferToVram(2);
         // This is a bug, and copies random junk. savedJunk is never read.
-        DmaCopy32Defvars(3, gContestResources->ContestantInfoTilemaps[2], eUnknownHeap1A004.savedJunk, 0x800);
+        DmaCopy32Defvars(3, gContestResources->contestBgTilemaps[2], eUnknownHeap1A004.savedJunk, sizeof(eUnknownHeap1A004.savedJunk));
         break;
     case 5:
         LoadCompressedPalette(gOldContestPalette, 0, 0x200);
-        CpuCopy32(gPlttBufferUnfaded + 128, sp0, 16 * sizeof(u16));
-        CpuCopy32(gPlttBufferUnfaded + (CONTESTANT_WINDOW_START + gContestPlayerMonIndex) * 16, sp20, 16 * sizeof(u16));
-        CpuCopy32(sp20, gPlttBufferUnfaded + 128, 16 * sizeof(u16));
-        CpuCopy32(sp0, gPlttBufferUnfaded + (CONTESTANT_WINDOW_START + gContestPlayerMonIndex) * 16, 16 * sizeof(u16));
-        DmaCopy32Defvars(3, gPlttBufferUnfaded, eUnknownHeap1A004.unk18004, sizeof(eUnknownHeap1A004.unk18004));
+        CpuCopy32(gPlttBufferUnfaded + 128, tempPalette1, 16 * sizeof(u16));
+        CpuCopy32(gPlttBufferUnfaded + (CONTESTANT_WINDOW_START + gContestPlayerMonIndex) * 16, tempPalette2, 16 * sizeof(u16));
+        CpuCopy32(tempPalette2, gPlttBufferUnfaded + 128, 16 * sizeof(u16));
+        CpuCopy32(tempPalette1, gPlttBufferUnfaded + (CONTESTANT_WINDOW_START + gContestPlayerMonIndex) * 16, 16 * sizeof(u16));
+        DmaCopy32Defvars(3, gPlttBufferUnfaded, eUnknownHeap1A004.cachedWindowPalettes, sizeof(eUnknownHeap1A004.cachedWindowPalettes));
         sub_80D782C();
         break;
     case 6:
-        sub_80DD04C();
-        sub_80DBF90();
+        DrawContestantWindows();
+        FillContestantWindowBgs();
         sub_80DB2BC();
         eContest.unk19216 = sub_80DB120();
         sub_80DC2BC();
@@ -1226,11 +1243,11 @@ static u8 sub_80D7E44(u8 *a)
         ShowBg(1);
         break;
     default:
-        *a = 0;
+        *stateVar = 0;
         return 1;
     }
 
-    (*a)++;
+    (*stateVar)++;
     return 0;
 }
 
@@ -1289,7 +1306,7 @@ static void sub_80D8108(u8 taskId)
     }
 }
 
-static void sub_80D823C(void)
+static void CB2_ContestMain(void)
 {
     s32 i;
 
@@ -1486,7 +1503,7 @@ static void sub_80D883C(s8 a0)
 
 static void sub_80D8894(u8 taskId)
 {
-    if (gIsLinkContest & 1)
+    if (gLinkContestFlags & LINK_CONTEST_FLAG_IS_LINK)
     {
         u16 move = GetChosenMove(gContestPlayerMonIndex);
         u8 taskId2;
@@ -1561,7 +1578,7 @@ static void sub_80D8A88(u8 taskId)
     {
         eContest.unk19214 = 0;
         eContest.unk1921C = gRngValue;
-        if ((gIsLinkContest & 1) && sub_80DA8A4())
+        if ((gLinkContestFlags & LINK_CONTEST_FLAG_IS_LINK) && sub_80DA8A4())
         {
             s32 i;
 
@@ -1590,7 +1607,7 @@ static void sub_80D8B38(u8 taskId)
             ;
         eContest.unk19215 = i;
         r6 = eContest.unk19215;
-        if (gIsLinkContest & 1)
+        if (gLinkContestFlags & LINK_CONTEST_FLAG_IS_LINK)
         {
             u8 taskId2;
 
@@ -2318,7 +2335,7 @@ static void sub_80DA198(u8 taskId)
     switch (gTasks[taskId].data[0])
     {
     case 0:
-        if (gIsLinkContest & 1)
+        if (gLinkContestFlags & LINK_CONTEST_FLAG_IS_LINK)
         {
             u8 taskId2;
 
@@ -2504,7 +2521,7 @@ static void sub_80DA5E8(u8 taskId)
         gUnknown_02039F10[i] = eContestantStatus[i].pointTotal;
     sub_80DBD18();
     sub_80DB89C();
-    if (!(gIsLinkContest & 1))
+    if (!(gLinkContestFlags & LINK_CONTEST_FLAG_IS_LINK))
         BravoTrainerPokemonProfile_BeforeInterview1(eContestantStatus[gContestPlayerMonIndex].prevMove);
     else
     {
@@ -2549,7 +2566,7 @@ static void sub_80DA740(u8 taskId)
     if (gTasks[taskId].data[0]++ >= 50)
     {
         gTasks[taskId].data[0] = 0;
-        if (gIsLinkContest & 1)
+        if (gLinkContestFlags & LINK_CONTEST_FLAG_IS_LINK)
         {
             gTasks[taskId].func = sub_80DA7A0;
         }
@@ -2599,7 +2616,7 @@ static void sub_80DA874(void)
 
 static void sub_80DA884(void)
 {
-    if (!(gIsLinkContest & 1))
+    if (!(gLinkContestFlags & LINK_CONTEST_FLAG_IS_LINK))
         gContestPlayerMonIndex = 3;
 }
 
@@ -2621,7 +2638,7 @@ void sub_80DA8C8(u8 partyIndex)
     s16 tough;
 
     StringCopy(name, gSaveBlock2Ptr->playerName);
-    if (gIsLinkContest & 1)
+    if (gLinkContestFlags & LINK_CONTEST_FLAG_IS_LINK)
     {
         sub_80DF9D4(name);
     }
@@ -2635,7 +2652,7 @@ void sub_80DA8C8(u8 partyIndex)
     gContestMons[gContestPlayerMonIndex].species = GetMonData(&gPlayerParty[partyIndex], MON_DATA_SPECIES);
     GetMonData(&gPlayerParty[partyIndex], MON_DATA_NICKNAME, name);
     StringGetEnd10(name);
-    if (gIsLinkContest & 1)
+    if (gLinkContestFlags & LINK_CONTEST_FLAG_IS_LINK)
     {
         sub_80DF9E0(name, GetMonData(&gPlayerParty[partyIndex], MON_DATA_LANGUAGE));
     }
@@ -2697,7 +2714,7 @@ void sub_80DAB8C(u8 contestType, u8 rank)
 
     sub_80DA884();
 
-    if (FlagGet(FLAG_SYS_GAME_CLEAR) && !(gIsLinkContest & 1))
+    if (FlagGet(FLAG_SYS_GAME_CLEAR) && !(gLinkContestFlags & LINK_CONTEST_FLAG_IS_LINK))
         r7 = TRUE;
 
     // Find all suitable opponents
@@ -2833,55 +2850,55 @@ u8 sub_80DAE0C(struct Pokemon *pkmn)
     return retVal;
 }
 
-static void sub_80DAEA4(void)
+static void DrawContestantWindowText(void)
 {
     s32 i;
 
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < CONTESTANT_COUNT; i++)
     {
         FillWindowPixelBuffer(gContestantTurnOrder[i], PIXEL_FILL(0));
-        sub_80DAF04(i);
-        sub_80DAF88(i);
+        PrintContestantTrainerName(i);
+        PrintContestantMonName(i);
     }
 }
 
-static u8 *sub_80DAED4(const u8 *src, u8 color)
+static u8 *Contest_CopyStringWithColor(const u8 *string, u8 color)
 {
     u8 * ptr = StringCopy(gDisplayedStringBattle, gText_ColorTransparent);
-    ptr[-1] = color;
-    ptr = StringCopy(ptr, src);
+    ptr[-1] = color; // Overwrites the "{COLOR TRANSPARENT}" part of the string.
+    ptr = StringCopy(ptr, string);
 
     return ptr;
 }
 
-static void sub_80DAF04(u8 a0)
+static void PrintContestantTrainerName(u8 contestant)
 {
-    sub_80DAF1C(a0, a0 + 10);
+    PrintContestantTrainerNameWithColor(contestant, contestant + CONTESTANT_TEXT_COLOR_START);
 }
 
-static void sub_80DAF1C(u8 a0, u8 a1)
+static void PrintContestantTrainerNameWithColor(u8 contestant, u8 color)
 {
     u8 buffer[32];
     s32 offset;
 
     StringCopy(buffer, gText_Slash);
-    StringAppend(buffer, gContestMons[a0].trainerName);
-    sub_80DAED4(buffer, a1);
+    StringAppend(buffer, gContestMons[contestant].trainerName);
+    Contest_CopyStringWithColor(buffer, color);
     offset = GetStringRightAlignXOffset(7, gDisplayedStringBattle, 0x60);
     if (offset > 55)
         offset = 55;
-    Contest_PrintTextToBg0WindowAt(gContestantTurnOrder[a0], gDisplayedStringBattle, offset, 1, 7);
+    Contest_PrintTextToBg0WindowAt(gContestantTurnOrder[contestant], gDisplayedStringBattle, offset, 1, 7);
 }
 
-static void sub_80DAF88(u8 a0)
+static void PrintContestantMonName(u8 contestant)
 {
-    sub_80DAFA0(a0, a0 + 10);
+    PrintContestantMonNameWithColor(contestant, contestant + CONTESTANT_TEXT_COLOR_START);
 }
 
-static void sub_80DAFA0(u8 a0, u8 a1)
+static void PrintContestantMonNameWithColor(u8 contestant, u8 color)
 {
-    sub_80DAED4(gContestMons[a0].nickname, a1);
-    Contest_PrintTextToBg0WindowAt(gContestantTurnOrder[a0], gDisplayedStringBattle, 5, 1, 7);
+    Contest_CopyStringWithColor(gContestMons[contestant].nickname, color);
+    Contest_PrintTextToBg0WindowAt(gContestantTurnOrder[contestant], gDisplayedStringBattle, 5, 1, 7);
 }
 
 static u16 sub_80DAFE0(u8 who, u8 contestCategory)
@@ -2993,8 +3010,9 @@ bool8 IsSpeciesNotUnown(u16 species)
 
 static void sub_80DB2BC(void)
 {
-    CpuCopy16(gContestResources->ContestantInfoTilemaps[0], gContestResources->ContestantInfoTilemaps[0] + 0x500, 0x280);
-    CpuCopy16(gContestResources->ContestantInfoTilemaps[2], gContestResources->ContestantInfoTilemaps[2] + 0x500, 0x280);
+    
+    CpuCopy16(gContestResources->contestBgTilemaps[0], gContestResources->contestBgTilemaps[0] + 0x500, 0x280);
+    CpuCopy16(gContestResources->contestBgTilemaps[2], gContestResources->contestBgTilemaps[2] + 0x500, 0x280);
 }
 
 static u16 sub_80DB2EC(u16 a0, u8 a1)
@@ -3454,7 +3472,7 @@ static void DetermineFinalStandings(void)
 
 void sub_80DBED4(void)
 {
-    if ((gIsLinkContest & 1))
+    if ((gLinkContestFlags & LINK_CONTEST_FLAG_IS_LINK))
     {
         gSaveBlock2Ptr->contestLinkResults[gSpecialVar_ContestCategory][gContestFinalStandings[gContestPlayerMonIndex]] =
         ((gSaveBlock2Ptr->contestLinkResults[gSpecialVar_ContestCategory][gContestFinalStandings[gContestPlayerMonIndex]] + 1) > 9999) ? 9999 :
@@ -3487,14 +3505,14 @@ static void sub_80DBF68(void)
     gBattle_BG0_Y = 0;
     gBattle_BG2_Y = 0;
     sub_80DB89C();
-    Contest_StartTextPrinter((u8*) &gUnknown_0827E8DA, 0);
+    Contest_StartTextPrinter(gText_LinkStandby4, 0);
 }
 
-static void sub_80DBF90(void)
+static void FillContestantWindowBgs(void)
 {
     int i;
 
-    for(i = 0; i < 4; i++)
+    for(i = 0; i < CONTESTANT_COUNT; i++)
     {
         ContestBG_FillBoxWithTile(0, 0, 0x16, 2 + i * 5, 8, 2, 0x11);
     }
@@ -4021,7 +4039,7 @@ static void ContestDebugTogglePointTotal(void)
 
     if(eContestDebugMode == CONTEST_DEBUG_MODE_OFF)
     {
-        sub_80DAEA4();
+        DrawContestantWindowText();
         sub_80DB2BC();
     }
     else
@@ -4198,15 +4216,16 @@ void SortContestants(bool8 useRanking)
     }
 }
 
-static void sub_80DD04C(void)
+static void DrawContestantWindows(void)
 {
     s32 i;
 
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < CONTESTANT_COUNT; i++)
     {
-        LoadPalette(&gHeap[0x1A004] + (i + CONTESTANT_WINDOW_START) * 32, (gContestantTurnOrder[i] + CONTESTANT_WINDOW_START) * 16, 32);
+        s32 windowId = i + CONTESTANT_WINDOW_START;
+        LoadPalette(eUnknownHeap1A004.cachedWindowPalettes[windowId], (gContestantTurnOrder[i] + CONTESTANT_WINDOW_START) * 16, sizeof(eUnknownHeap1A004.cachedWindowPalettes[0]));
     }
-    sub_80DAEA4();
+    DrawContestantWindowText();
 }
 
 static void sub_80DD080(u8 contestant)
@@ -4694,7 +4713,7 @@ static void sub_80DDE30(u8 taskId)
         }
         else
         {
-            RequestDma3Copy(eUnknownHeap18000, (void *)(BG_SCREEN_ADDR(4)), 0x1000, 1);
+            RequestDma3Copy(eUnzippedContestAudienceGfx, (void *)(BG_SCREEN_ADDR(4)), 0x1000, 1);
             gTasks[taskId].data[12]++;
         }
 
@@ -4858,7 +4877,7 @@ static void sub_80DE224(void)
     SetGpuReg(REG_OFFSET_BG1HOFS, gBattle_BG1_X);
     SetGpuReg(REG_OFFSET_BG1VOFS, gBattle_BG1_Y);
 
-    CpuFill32(0, gContestResources->ContestantInfoTilemaps[1], 0x1000);
+    CpuFill32(0, gContestResources->contestBgTilemaps[1], 0x1000);
 
     CopyToBgTilemapBuffer(1, gUnknown_08C17980, 0, 0);
     Contest_SetBgCopyFlags(1);
@@ -4876,7 +4895,7 @@ static void sub_80DE350(void)
     u16 bg1Cnt;
 
     RequestDma3Fill(0,(void *)(BG_CHAR_ADDR(2)), 0x2000, 0x1);
-    CpuFill32(0, gContestResources->ContestantInfoTilemaps[1], 0x1000);
+    CpuFill32(0, gContestResources->contestBgTilemaps[1], 0x1000);
     Contest_SetBgCopyFlags(1);
     bg1Cnt = GetGpuReg(REG_OFFSET_BG1CNT);
     ((vBgCnt *) &bg1Cnt)->priority = 1;
@@ -4924,18 +4943,18 @@ static void sub_80DE4A8(u8 taskId)
     switch (gTasks[taskId].data[0])
     {
     case 0:
-        for (i = 0; i < 4; i++)
+        for (i = 0; i < CONTESTANT_COUNT; i++)
             eContest.prevTurnOrder[i] = gContestantTurnOrder[i];
-        sub_80DBF90();
+        FillContestantWindowBgs();
         sub_80DC864();
         sub_80DB69C();
-        sub_80DD04C();
+        DrawContestantWindows();
         sub_80DE008(TRUE);
         sub_80DC44C();
         gTasks[taskId].data[0] = 1;
         break;
     case 1:
-        if (gIsLinkContest & 1)
+        if (gLinkContestFlags & LINK_CONTEST_FLAG_IS_LINK)
         {
             u8 taskId2;
 
@@ -5242,7 +5261,7 @@ static void Contest_StartTextPrinter(const u8 *currChar, bool32 b)
     }
     else
     {
-        if (gIsLinkContest & 1)
+        if (gLinkContestFlags & LINK_CONTEST_FLAG_IS_LINK)
             speed = 4;
         else
             speed = GetPlayerTextSpeedDelay();
@@ -5253,15 +5272,15 @@ static void Contest_StartTextPrinter(const u8 *currChar, bool32 b)
     Contest_SetBgCopyFlags(0);
 }
 
-static void ContestBG_FillBoxWithIncrementingTile(u8 a, u16 b, u8 c, u8 d, u8 e, u8 f, u8 g, s16 h)
+static void ContestBG_FillBoxWithIncrementingTile(u8 bg, u16 firstTileNum, u8 x, u8 y, u8 width, u8 height, u8 paletteSlot, s16 tileNumData)
 {
-    WriteSequenceToBgTilemapBuffer(a, b, c, d, e, f, g, h);
-    Contest_SetBgCopyFlags(a);
+    WriteSequenceToBgTilemapBuffer(bg, firstTileNum, x, y, width, height, paletteSlot, tileNumData);
+    Contest_SetBgCopyFlags(bg);
 }
 
-static void ContestBG_FillBoxWithTile(u8 a, u16 b, u8 c, u8 d, u8 e, u8 f, u8 g)
+static void ContestBG_FillBoxWithTile(u8 bg, u16 firstTileNum, u8 x, u8 y, u8 width, u8 height, u8 paletteSlot)
 {
-    ContestBG_FillBoxWithIncrementingTile(a, b, c, d, e, f, g, 0);
+    ContestBG_FillBoxWithIncrementingTile(bg, firstTileNum, x, y, width, height, paletteSlot, 0);
 }
 
 static bool32 Contest_RunTextPrinters(void)
@@ -5324,7 +5343,7 @@ bool8 sub_80DEDA8(u8 a)
         gSaveBlock1Ptr->contestWinners[r4].trainerId = gContestMons[i].otId;
         StringCopy(gSaveBlock1Ptr->contestWinners[r4].monName, gContestMons[i].nickname);
         StringCopy(gSaveBlock1Ptr->contestWinners[r4].trainerName, gContestMons[i].trainerName);
-        if(gIsLinkContest & 1)
+        if(gLinkContestFlags & LINK_CONTEST_FLAG_IS_LINK)
             gSaveBlock1Ptr->contestWinners[r4].contestRank = 4;
         else
             gSaveBlock1Ptr->contestWinners[r4].contestRank = gSpecialVar_ContestRank;
@@ -5677,7 +5696,7 @@ void ContestDebugToggleBitfields(bool8 showUnkD)
 
     if (eContestDebugMode == CONTEST_DEBUG_MODE_OFF)
     {
-        sub_80DAEA4();
+        DrawContestantWindowText();
         sub_80DB2BC();
     }
     else

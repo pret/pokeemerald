@@ -2254,7 +2254,7 @@ void DestroyWirelessStatusIndicatorSprite(void)
     }
 }
 
-void sub_800E0E8(void)
+void LoadWirelessStatusIndicatorSprite(void)
 {
     if (GetSpriteTileStartByTag(sWirelessStatusIndicatorSpriteSheet.tag) == 0xFFFF)
     {

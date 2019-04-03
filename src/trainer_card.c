@@ -381,7 +381,7 @@ static void sub_80C2760(u8 taskId)
     case 7:
         if (gWirelessCommType == 1 && gReceivedRemoteLinkPlayers == TRUE)
         {
-            sub_800E0E8();
+            LoadWirelessStatusIndicatorSprite();
             CreateWirelessStatusIndicatorSprite(230, 150);
         }
         BlendPalettes(0xFFFFFFFF, 16, sData->var_52C);

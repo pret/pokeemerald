@@ -445,7 +445,7 @@ static void CB2_TradeEvolutionSceneLoadGraphics(void)
     case 6:
         if (gWirelessCommType)
         {
-            sub_800E0E8();
+            LoadWirelessStatusIndicatorSprite();
             CreateWirelessStatusIndicatorSprite(0, 0);
         }
         BlendPalettes(-1,0x10, 0);

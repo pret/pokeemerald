@@ -72,22 +72,22 @@ static void sub_80FC5DC(u8 taskId)
 
     gContestPlayerMonIndex = GetMultiplayerId();
     gNumLinkContestPlayers = GetLinkPlayerCount();
-    gIsLinkContest = 1;
+    gLinkContestFlags = LINK_CONTEST_FLAG_IS_LINK;
     if (gWirelessCommType == 1)
-        gIsLinkContest = 3;
+        gLinkContestFlags = LINK_CONTEST_FLAG_IS_LINK | LINK_CONTEST_FLAG_IS_WIRELESS;
 
     for (i = 0; i < gNumLinkContestPlayers && (u32)(gLinkPlayers[i].version & 0xFF) - 1 > VERSION_RUBY - 1; i++)
         ;
 
     if (i < gNumLinkContestPlayers)
-        gIsLinkContest |= 0x4;
+        gLinkContestFlags |= LINK_CONTEST_FLAG_HAS_RS_PLAYER;
 
     SwitchTaskToFollowupFunc(taskId);
 }
 
 bool32 sub_80FC670(s16 *arg0)
 {
-    if (gIsLinkContest & 0x4)
+    if (gLinkContestFlags & LINK_CONTEST_FLAG_HAS_RS_PLAYER)
         return TRUE;
     
     switch (*arg0)
