@@ -1,7 +1,10 @@
 #ifndef GUARD_CONTEST_H
 #define GUARD_CONTEST_H
 
+#include "palette.h"
+
 #define CONTESTANT_COUNT 4
+#define APPLAUSE_METER_SIZE 5
 
 #define CONTEST_DEBUG_MODE_OFF 0
 // Prints the totalPoints value for each contestant.
@@ -247,10 +250,10 @@ struct ContestPokemon
 
 struct Shared1A004
 {
-    /*0x18004*/ u16 unk18004[16][16];
-    /*0x18204*/ u16 unk18204[0x200];
-    /*0x18604*/ u16 unk18604[0x200];
-    /*0x18A04*/ u8 unk18A04[0x800];
+    u16 unk18004[16][16]; // Saved palette data before a move happens?
+    u16 unk18204[PLTT_BUFFER_SIZE];     // Saved copy of gPlttBufferUnfaded
+    u16 unk18604[PLTT_BUFFER_SIZE];     // Saved copy of gPlttBufferFaded
+    u8 savedJunk[0x800];
 };
 
 struct ContestStruct_field_18
@@ -274,8 +277,8 @@ struct Contest
     u16 unk1920A_2:1;
     u16 unk1920A_3:1;
     u16 unk1920A_4:1;
-    u16 unk1920A_5:1;
-    u16 unk1920A_6:1;
+    u16 isShowingApplauseMeter:1;
+    u16 applauseMeterIsMoving:1;
     u16 unk1920A_7:1;
     /*0x7*/ u16 unk1920B_0:1;
     u16 unk1920B_1:1;

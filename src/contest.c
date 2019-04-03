@@ -45,6 +45,9 @@
 #include "constants/rgb.h"
 #include "contest_ai.h"
 
+#define CONTESTANT_WINDOW_START 5
+#define APPLAUSE_METER_GFX_TAG 0xABE2
+
 // This file's functions.
 static void sub_80D782C(void);
 static void sub_80D7C7C(u8 taskId);
@@ -117,8 +120,8 @@ static void sub_80DC7EC(void);
 static void ContestDebugDoPrint(void);
 static void sub_80DD04C(void);
 static void ApplyNextTurnOrder(void);
-static void sub_80DDB0C(void);
-static void sub_80DDBE8(void);
+static void StartMoveApplauseMeterOnscreen(void);
+static void TryMoveApplauseMeterOffscreen(void);
 static void sub_80DE224(void);
 static void sub_80DE350(void);
 static void sub_80DE424(u8);
@@ -127,7 +130,7 @@ static void sub_80DEA20(void);
 static void Contest_StartTextPrinter(const u8 *, u32);
 static void ContestBG_FillBoxWithIncrementingTile(u8, u16, u8, u8, u8, u8, u8, s16);
 static bool32 Contest_RunTextPrinters(void);
-static void Contest_SetBgCopyFlags(u32);
+static void Contest_SetBgCopyFlags(u32 flagIndex);
 static void sub_80DBD18(void);
 static void sub_80DD080(u8);
 static void sub_80DE9DC(u8);
@@ -148,9 +151,9 @@ static bool8 sub_80DB798(u8);
 static void sub_80DB884(void);
 static void sub_80DC9B4(u8);
 static void sub_80DDED0(s8, s8);
-static void sub_80DDCDC(s8);
+static void ShowAndUpdateApplauseMeter(s8 unused);
 static void sub_80DDE0C(void);
-static void sub_80DD940(void);
+static void UpdateApplauseMeter(void);
 static void sub_80DB944(void);
 static void sub_80DBA18(void);
 static void sub_80DC3AC(void);
@@ -169,11 +172,11 @@ static void sub_80DC81C(u8);
 static void sub_80DC87C(u8);
 static void sub_80DCC84(struct Sprite *);
 static void sub_80DCCD8(struct Sprite *sprite);
-static u8 sub_80DDA20(void);
-static void c3_08130B10(u8);
-static void sub_80DDB6C(u8);
-static void task08_080CD1CC(u8);
-static void sub_80DDD20(u8);
+static u8 StartApplauseOverflowAnimation(void);
+static void Task_ApplauseOverflowAnimation(u8);
+static void Task_MoveApplauseMeterOnscreen(u8);
+static void Task_MoveApplauseMeterOffscreen(u8);
+static void Task_ShowAndUpdateApplauseMeter(u8);
 static void sub_80DDE30(u8);
 static void sub_80DDF80(u8);
 static const u8 *GetTurnOrderNumberGfx(u8);
@@ -470,20 +473,20 @@ const struct SpriteTemplate gSpriteTemplate_8587B98 =
     .callback = SpriteCallbackDummy
 };
 
-const struct CompressedSpriteSheet gUnknown_08587BB0 =
+static const struct CompressedSpriteSheet sApplauseMeterSpriteSheet =
 {
     .data = gContestApplauseGfx,
     .size = 0x400,
-    .tag = 0xABE2
+    .tag = APPLAUSE_METER_GFX_TAG
 };
 
-const struct SpritePalette gUnknown_08587BB8 =
+static const struct SpritePalette sApplauseMeterPalette =
 {
     .data = gContestPal,
-    .tag = 0xABE2
+    .tag = APPLAUSE_METER_GFX_TAG
 };
 
-const struct OamData gOamData_8587BC0 =
+static const struct OamData sApplauseMeterOamData =
 {
     .y = 0,
     .affineMode = 0,
@@ -500,11 +503,11 @@ const struct OamData gOamData_8587BC0 =
     .affineParam = 0
 };
 
-const struct SpriteTemplate gSpriteTemplate_8587BC8 =
+static const struct SpriteTemplate sApplauseMeterSpriteTemplate =
 {
-    .tileTag = 0xABE2,
-    .paletteTag = 0xABE2,
-    .oam = &gOamData_8587BC0,
+    .tileTag = APPLAUSE_METER_GFX_TAG,
+    .paletteTag = APPLAUSE_METER_GFX_TAG,
+    .oam = &sApplauseMeterOamData,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
@@ -661,7 +664,7 @@ static const struct WindowTemplate sContestWindowTemplates[] =
         .paletteNum = 0xF,
         .baseBlock = 0x260
     },
-    {
+    [CONTESTANT_WINDOW_START] = {
         .bg = 0,
         .tilemapLeft = 1,
         .tilemapTop = 0x1F,
@@ -893,15 +896,15 @@ void LoadContestBgAfterMoveAnim(void)
 
     LZDecompressVram(gContestMiscGfx, (void *)VRAM);
     LZDecompressVram(gContestAudienceGfx, (void *)(BG_SCREEN_ADDR(4)));
-    CopyToBgTilemapBuffer(3, gUnknown_08C16FA8, 0, 0);
+    CopyToBgTilemapBuffer(3, gOldContestGfx, 0, 0);
     CopyBgTilemapBufferToVram(3);
-    LoadCompressedPalette(gUnknown_08C16E90, 0, 0x200);
+    LoadCompressedPalette(gOldContestPalette, 0, 0x200);
     sub_80D782C();
-    for (i = 0; i < MAX_MON_MOVES; i++)
+    for (i = 0; i < CONTESTANT_COUNT; i++)
     {
-        u32 var = 5 + i;
+        u32 contestantWindowId = CONTESTANT_WINDOW_START + i;
 
-        LoadPalette(eUnknownHeap1A004.unk18004[var], 16 * (5 + gContestantTurnOrder[i]), 16 * sizeof(u16));
+        LoadPalette(eUnknownHeap1A004.unk18004[contestantWindowId], 16 * (CONTESTANT_WINDOW_START + gContestantTurnOrder[i]), sizeof((eUnknownHeap1A004.unk18004[contestantWindowId])));
     }
 }
 
@@ -1177,21 +1180,22 @@ static u8 sub_80D7E44(u8 *a)
         DmaCopyLarge32(3, (void *)(BG_SCREEN_ADDR(4)), eUnknownHeap18000, 0x2000, 0x1000);
         break;
     case 3:
-        CopyToBgTilemapBuffer(3, gUnknown_08C16FA8, 0, 0);
+        CopyToBgTilemapBuffer(3, gOldContestGfx, 0, 0);
         CopyBgTilemapBufferToVram(3);
         break;
     case 4:
         CopyToBgTilemapBuffer(2, gUnknown_08C17170, 0, 0);
         CopyBgTilemapBufferToVram(2);
-        DmaCopy32Defvars(3, gContestResources->ContestantInfoTilemaps[2], eUnknownHeap1A004.unk18A04, 0x800);
+        // This is a bug, and copies random junk. savedJunk is never read.
+        DmaCopy32Defvars(3, gContestResources->ContestantInfoTilemaps[2], eUnknownHeap1A004.savedJunk, 0x800);
         break;
     case 5:
-        LoadCompressedPalette(gUnknown_08C16E90, 0, 0x200);
+        LoadCompressedPalette(gOldContestPalette, 0, 0x200);
         CpuCopy32(gPlttBufferUnfaded + 128, sp0, 16 * sizeof(u16));
-        CpuCopy32(gPlttBufferUnfaded + (5 + gContestPlayerMonIndex) * 16, sp20, 16 * sizeof(u16));
+        CpuCopy32(gPlttBufferUnfaded + (CONTESTANT_WINDOW_START + gContestPlayerMonIndex) * 16, sp20, 16 * sizeof(u16));
         CpuCopy32(sp20, gPlttBufferUnfaded + 128, 16 * sizeof(u16));
-        CpuCopy32(sp0, gPlttBufferUnfaded + (5 + gContestPlayerMonIndex) * 16, 16 * sizeof(u16));
-        DmaCopy32Defvars(3, gPlttBufferUnfaded, eUnknownHeap1A004.unk18004, 0x200);
+        CpuCopy32(sp0, gPlttBufferUnfaded + (CONTESTANT_WINDOW_START + gContestPlayerMonIndex) * 16, 16 * sizeof(u16));
+        DmaCopy32Defvars(3, gPlttBufferUnfaded, eUnknownHeap1A004.unk18004, sizeof(eUnknownHeap1A004.unk18004));
         sub_80D782C();
         break;
     case 6:
@@ -1270,13 +1274,13 @@ static void sub_80D8108(u8 taskId)
         ((struct BgCnt *)&bg2Cnt)->priority = 0;
         SetGpuReg(REG_OFFSET_BG0CNT, bg0Cnt);
         SetGpuReg(REG_OFFSET_BG2CNT, bg2Cnt);
-        sub_80DDB0C();
+        StartMoveApplauseMeterOnscreen();
         gTasks[taskId].data[0]++;
         break;
     }
     case 4:
     default:
-        if (eContest.unk1920A_6)
+        if (eContest.applauseMeterIsMoving)
             break;
         gTasks[taskId].data[0] = 0;
         gTasks[taskId].data[1] = 0;
@@ -1329,7 +1333,7 @@ static void sub_80D833C(u8 taskId)
         gBattle_BG0_Y = 0;
         gBattle_BG2_Y = 0;
         ContestDebugDoPrint();
-        DmaCopy32Defvars(3, gPlttBufferUnfaded, eUnknownHeap1A004.unk18204, 0x400);
+        DmaCopy32Defvars(3, gPlttBufferUnfaded, eUnknownHeap1A004.unk18204, PLTT_BUFFER_SIZE * 2);
         ConvertIntToDecimalStringN(gStringVar1, eContest.turnNumber + 1, STR_CONV_MODE_LEFT_ALIGN, 1);
         if (!Contest_IsMonsTurnDisabled(gContestPlayerMonIndex))
             StringCopy(gDisplayedStringBattle, gText_0827D507);
@@ -1396,8 +1400,8 @@ static void sub_80D8490(u8 taskId)
         }
         r5 = StringCopy(r5, gMoveNames[move]);
 
-        FillWindowPixelBuffer(i + 5, PIXEL_FILL(0));
-        Contest_PrintTextToBg0WindowAt(i + 5, sp8, 5, 1, 7);
+        FillWindowPixelBuffer(i + CONTESTANT_WINDOW_START, PIXEL_FILL(0));
+        Contest_PrintTextToBg0WindowAt(i + CONTESTANT_WINDOW_START, sp8, 5, 1, 7);
     }
 
     sub_80D880C(eContest.playerMoveChoice);
@@ -1484,10 +1488,10 @@ static void sub_80D8894(u8 taskId)
 {
     if (gIsLinkContest & 1)
     {
-        u16 var = GetChosenMove(gContestPlayerMonIndex);
+        u16 move = GetChosenMove(gContestPlayerMonIndex);
         u8 taskId2;
 
-        eContestantStatus[gContestPlayerMonIndex].currMove = var;
+        eContestantStatus[gContestPlayerMonIndex].currMove = move;
         taskId2 = CreateTask(sub_80FC9F8, 0);
         SetTaskFuncWithFollowupFunc(taskId2, sub_80FC9F8, sub_80D892C);
         gTasks[taskId].func = TaskDummy1;
@@ -1516,16 +1520,16 @@ static void sub_80D895C(u8 taskId)
     gBattle_BG2_Y = 0;
     sub_80DC490(FALSE);
 
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < CONTESTANT_COUNT; i++)
     {
-        FillWindowPixelBuffer(5 + i, PIXEL_FILL(0));
-        PutWindowTilemap(5 + i);
-        CopyWindowToVram(5 + i, 2);
+        FillWindowPixelBuffer(CONTESTANT_WINDOW_START + i, PIXEL_FILL(0));
+        PutWindowTilemap(CONTESTANT_WINDOW_START + i);
+        CopyWindowToVram(CONTESTANT_WINDOW_START + i, 2);
     }
     Contest_SetBgCopyFlags(0);
-
-    DmaCopy32Defvars(3, gPlttBufferFaded, eUnknownHeap1A004.unk18604, 0x400);
-    LoadPalette(eUnknownHeap1A004.unk18204, 0, 0x400);
+    // This seems to be a bug; it should have just copied PLTT_BUFFER_SIZE.
+    DmaCopy32Defvars(3, gPlttBufferFaded, eUnknownHeap1A004.unk18604, PLTT_BUFFER_SIZE * 2);
+    LoadPalette(eUnknownHeap1A004.unk18204, 0, PLTT_BUFFER_SIZE * 2);
     gTasks[taskId].data[0] = 0;
     gTasks[taskId].data[1] = 0;
     gTasks[taskId].func = sub_80D8A04;
@@ -1538,7 +1542,7 @@ static void sub_80D8A04(u8 taskId)
         gTasks[taskId].data[0] = 0;
         if (++gTasks[taskId].data[1] == 2)
         {
-            sub_80DDBE8();
+            TryMoveApplauseMeterOffscreen();
             sub_80DE69C(1);
             gTasks[taskId].func = sub_80D8A50;
         }
@@ -1547,7 +1551,7 @@ static void sub_80D8A04(u8 taskId)
 
 static void sub_80D8A50(u8 taskId)
 {
-    if (!eContest.unk1920A_6 && !eContest.unk1920B_1)
+    if (!eContest.applauseMeterIsMoving && !eContest.unk1920B_1)
         gTasks[taskId].func = sub_80D8A88;
 }
 
@@ -2088,12 +2092,12 @@ static void sub_80D8B38(u8 taskId)
         case 1:
             if (!eContest.unk1920B_0 && !Contest_RunTextPrinters())
             {
-                sub_80DDCDC(-1);
+                ShowAndUpdateApplauseMeter(-1);
                 gTasks[taskId].data[10]++;
             }
             break;
         case 2:
-            if (!eContest.unk1920A_5)
+            if (!eContest.isShowingApplauseMeter)
             {
                 if (gTasks[taskId].data[11]++ > 29)
                 {
@@ -2128,12 +2132,12 @@ static void sub_80D8B38(u8 taskId)
             {
                 sub_80DDE0C();
                 PlaySE(SE_W227B);
-                sub_80DDCDC(1);
+                ShowAndUpdateApplauseMeter(1);
                 gTasks[taskId].data[10]++;
             }
             break;
         case 2:
-            if (!eContest.unk1920A_5)
+            if (!eContest.isShowingApplauseMeter)
             {
                 if (gTasks[taskId].data[11]++ > 29)
                 {
@@ -2211,16 +2215,16 @@ static void sub_80D8B38(u8 taskId)
             gTasks[taskId].data[0] = 55;
         return;
     case 55:
-        sub_80DDBE8();
+        TryMoveApplauseMeterOffscreen();
         gTasks[taskId].data[0] = 56;
         return;
     case 56:
-        if (!eContest.unk1920A_6)
+        if (!eContest.applauseMeterIsMoving)
         {
             if (eContest.applauseLevel > 4)
             {
                 eContest.applauseLevel = 0;
-                sub_80DD940();
+                UpdateApplauseMeter();
             }
             gTasks[taskId].data[0] = 10;
         }
@@ -2394,7 +2398,7 @@ static void sub_80DA31C(u8 taskId)
 
 static void sub_80DA348(u8 taskId)
 {
-    DmaCopy32Defvars(3, eUnknownHeap1A004.unk18204, gPlttBufferUnfaded, 0x400);
+    DmaCopy32Defvars(3, eUnknownHeap1A004.unk18204, gPlttBufferUnfaded, PLTT_BUFFER_SIZE * 2);
     gTasks[taskId].data[0] = 0;
     gTasks[taskId].data[1] = 2;
     gTasks[taskId].func = sub_80DA38C;
@@ -2479,14 +2483,14 @@ static void sub_80DA51C(u8 taskId)
     }
     else
     {
-        sub_80DDB0C();
+        StartMoveApplauseMeterOnscreen();
         gTasks[taskId].func = sub_80DA5B4;
     }
 }
 
 static void sub_80DA5B4(u8 taskId)
 {
-    if (!eContest.unk1920A_6)
+    if (!eContest.applauseMeterIsMoving)
         gTasks[taskId].func = sub_80D833C;
 }
 
@@ -3225,7 +3229,7 @@ static void sub_80DB918(void)
 {
     s32 i;
 
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < CONTESTANT_COUNT; i++)
         eContestantStatus[i].currMove = GetChosenMove(i);
 }
 
@@ -3718,7 +3722,7 @@ static void sub_80DC490(bool8 a)
 {
     s32 i;
 
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < CONTESTANT_COUNT; i++)
     {
         if (gContestantTurnOrder[i] > 1)
         {
@@ -3751,9 +3755,9 @@ static void CreateApplauseMeterSprite(void)
 {
     u8 spriteId;
 
-    LoadCompressedSpriteSheet(&gUnknown_08587BB0);
-    LoadSpritePalette(&gUnknown_08587BB8);
-    spriteId = CreateSprite(&gSpriteTemplate_8587BC8, 30, 44, 1);
+    LoadCompressedSpriteSheet(&sApplauseMeterSpriteSheet);
+    LoadSpritePalette(&sApplauseMeterPalette);
+    spriteId = CreateSprite(&sApplauseMeterSpriteTemplate, 30, 44, 1);
     gSprites[spriteId].invisible = TRUE;
     eContest.applauseMeterSpriteId = spriteId;
 }
@@ -3790,7 +3794,7 @@ static void sub_80DC6A4(u8 taskId)
     {
         gTasks[eContest.unk19211].data[r4 * 4 + 0] = 0xFF;
         gTasks[eContest.unk19211].data[r4 * 4 + 1] = 0;
-        BlendPalette((eContest.prevTurnOrder[r4] + 5) * 16 + 6, 2, 0, RGB(31, 31, 18));
+        BlendPalette((eContest.prevTurnOrder[r4] + CONTESTANT_WINDOW_START) * 16 + 6, 2, 0, RGB(31, 31, 18));
         DestroyTask(taskId);
     }
 }
@@ -3815,7 +3819,7 @@ static void sub_80DC728(u8 taskId)
                 gTasks[taskId].data[r3 + 1] ^= 1;
 
             BlendPalette(
-              (eContest.prevTurnOrder[i] + 5) * 16 + 6,
+              (eContest.prevTurnOrder[i] + CONTESTANT_WINDOW_START) * 16 + 6,
               2,
               gTasks[taskId].data[r3 + 0],
               RGB(31, 31, 18));
@@ -3853,12 +3857,12 @@ static void sub_80DC87C(u8 a)
 
     sub_80DC81C(a);
 
-    r0 = a + 5;
+    r0 = a + CONTESTANT_WINDOW_START;
     DmaCopy16Defvars(3,
                      gPlttBufferUnfaded + r0 * 16 + 10,
                      gPlttBufferFaded   + r0 * 16 + 10,
                      2);
-    var = (a + 5) * 16 + 12 + a;
+    var = (a + CONTESTANT_WINDOW_START) * 16 + 12 + a;
     DmaCopy16Defvars(3,
                      gPlttBufferUnfaded + var,
                      gPlttBufferFaded + var,
@@ -3888,8 +3892,8 @@ static void sub_80DC8D0(u8 taskId)
                  || gTasks[taskId].data[r3 + 0] == 0)
                     gTasks[taskId].data[r3 + 1] ^= 1;
 
-                BlendPalette((i + 5) * 16 + 10, 1, gTasks[taskId].data[r3 + 0], RGB(31, 31, 18));
-                BlendPalette((i + 5) * 16 + 12 + i, 1, gTasks[taskId].data[r3 + 0], RGB(31, 31, 18));
+                BlendPalette((i + CONTESTANT_WINDOW_START) * 16 + 10, 1, gTasks[taskId].data[r3 + 0], RGB(31, 31, 18));
+                BlendPalette((i + CONTESTANT_WINDOW_START) * 16 + 12 + i, 1, gTasks[taskId].data[r3 + 0], RGB(31, 31, 18));
             }
         }
     }
@@ -4200,7 +4204,7 @@ static void sub_80DD04C(void)
 
     for (i = 0; i < 4; i++)
     {
-        LoadPalette(&gHeap[0x1A004] + (i + 5) * 32, (gContestantTurnOrder[i] + 5) * 16, 32);
+        LoadPalette(&gHeap[0x1A004] + (i + CONTESTANT_WINDOW_START) * 32, (gContestantTurnOrder[i] + CONTESTANT_WINDOW_START) * 16, 32);
     }
     sub_80DAEA4();
 }
@@ -4507,23 +4511,23 @@ static void sub_80DD720(u8 a)
     eContest.unk1920A_4 = 1;
 }
 
-static void sub_80DD940(void)
+static void UpdateApplauseMeter(void)
 {
     s32 i;
 
-    for (i = 0; i < 5; i++)
+    for (i = 0; i < APPLAUSE_METER_SIZE; i++)
     {
         const u8 *src;
 
         if (i < eContest.applauseLevel)
-            src = gContestApplauseMeterGfx + 64;
+            src = &gContestApplauseMeterGfx[64];
         else
             src = gContestApplauseMeterGfx;
         CpuCopy32(src, (void *)(VRAM + 0x10000 + (gSprites[eContest.applauseMeterSpriteId].oam.tileNum + 17 + i) * 32), 32);
         CpuCopy32(src + 32, (void *)(VRAM + 0x10000 + (gSprites[eContest.applauseMeterSpriteId].oam.tileNum + 25 + i) * 32), 32);
 
         if (eContest.applauseLevel > 4)
-            sub_80DDA20();
+            StartApplauseOverflowAnimation();
     }
 }
 
@@ -4532,46 +4536,54 @@ s8 Contest_GetMoveExcitement(u16 move)
     return gContestExcitementTable[gSpecialVar_ContestCategory][gContestMoves[move].contestCategory];
 }
 
-static u8 sub_80DDA20(void)
+static u8 StartApplauseOverflowAnimation(void)
 {
-    u8 taskId = CreateTask(c3_08130B10, 10);
+    u8 taskId = CreateTask(Task_ApplauseOverflowAnimation, 10);
 
     gTasks[taskId].data[1] = 1;
-    gTasks[taskId].data[2] = IndexOfSpritePaletteTag(0x0ABE2);
+    gTasks[taskId].data[2] = IndexOfSpritePaletteTag(APPLAUSE_METER_GFX_TAG);
     return taskId;
 }
 
-static void c3_08130B10(u8 taskId)
+static void Task_ApplauseOverflowAnimation(u8 taskId)
 {
+    // Skip every other frame.
     if (++gTasks[taskId].data[0] == 1)
     {
         gTasks[taskId].data[0] = 0;
+        
+        // Alternate between normal colors and white.
         if (gTasks[taskId].data[3] == 0)
             gTasks[taskId].data[4]++;
         else
             gTasks[taskId].data[4]--;
-        BlendPalette(264 + gTasks[taskId].data[2] * 16, 1, gTasks[taskId].data[4], RGB(31, 31, 31));
+        
+        BlendPalette(264 + gTasks[taskId].data[2] * 16, 1, gTasks[taskId].data[4], RGB_WHITE);
+
+        // At the maximum or minimum blending, switch directions.
         if (gTasks[taskId].data[4] == 0 || gTasks[taskId].data[4] == 16)
         {
             gTasks[taskId].data[3] ^= 1;
+
+            // Continue the animation until the applause meter is cleared.
             if (eContest.applauseLevel < 5)
             {
-                BlendPalette(264 + gTasks[taskId].data[2] * 16, 1, 0, RGB(31, 0, 0));
+                BlendPalette(264 + gTasks[taskId].data[2] * 16, 1, 0, RGB_RED);
                 DestroyTask(taskId);
             }
         }
     }
 }
 
-static void sub_80DDB0C(void)
+static void StartMoveApplauseMeterOnscreen(void)
 {
-    CreateTask(sub_80DDB6C, 10);
+    CreateTask(Task_MoveApplauseMeterOnscreen, 10);
     gSprites[eContest.applauseMeterSpriteId].pos2.x = -70;
     gSprites[eContest.applauseMeterSpriteId].invisible = FALSE;
-    eContest.unk1920A_6 = 1;
+    eContest.applauseMeterIsMoving = TRUE;
 }
 
-static void sub_80DDB6C(u8 taskId)
+static void Task_MoveApplauseMeterOnscreen(u8 taskId)
 {
     struct Sprite *sprite = &gSprites[eContest.applauseMeterSpriteId];
 
@@ -4582,26 +4594,26 @@ static void sub_80DDB6C(u8 taskId)
         sprite->pos2.x = 0;
     if (sprite->pos2.x == 0)
     {
-        eContest.unk1920A_6 = 0;
+        eContest.applauseMeterIsMoving = FALSE;
         DestroyTask(taskId);
     }
 }
 
-static void sub_80DDBE8(void)
+static void TryMoveApplauseMeterOffscreen(void)
 {
     if (gSprites[eContest.applauseMeterSpriteId].invisible == TRUE)
     {
-        eContest.unk1920A_6 = 0;
+        eContest.applauseMeterIsMoving = FALSE;
     }
     else
     {
-        CreateTask(task08_080CD1CC, 10);
+        CreateTask(Task_MoveApplauseMeterOffscreen, 10);
         gSprites[eContest.applauseMeterSpriteId].pos2.x = 0;
-        eContest.unk1920A_6 = 1;
+        eContest.applauseMeterIsMoving = TRUE;
     }
 }
 
-static void task08_080CD1CC(u8 taskId)
+static void Task_MoveApplauseMeterOffscreen(u8 taskId)
 {
     struct Sprite *sprite = &gSprites[eContest.applauseMeterSpriteId];
 
@@ -4613,29 +4625,29 @@ static void task08_080CD1CC(u8 taskId)
     if (sprite->pos2.x == -70)
     {
         sprite->invisible = TRUE;
-        eContest.unk1920A_6 = 0;
+        eContest.applauseMeterIsMoving = FALSE;
         DestroyTask(taskId);
     }
 }
 
-static void sub_80DDCDC(s8 a)
+static void ShowAndUpdateApplauseMeter(s8 unused)
 {
-    u8 taskId = CreateTask(sub_80DDD20, 5);
+    u8 taskId = CreateTask(Task_ShowAndUpdateApplauseMeter, 5);
 
-    gTasks[taskId].data[0] = a;
-    eContest.unk1920A_5 = 1;
+    gTasks[taskId].data[0] = unused;
+    eContest.isShowingApplauseMeter = TRUE;
 }
 
-static void sub_80DDD20(u8 taskId)
+static void Task_ShowAndUpdateApplauseMeter(u8 taskId)
 {
     switch (gTasks[taskId].data[10])
     {
     case 0:
-        sub_80DDB0C();
+        StartMoveApplauseMeterOnscreen();
         gTasks[taskId].data[10]++;
         break;
     case 1:
-        if (!eContest.unk1920A_6)
+        if (!eContest.applauseMeterIsMoving)
         {
             gTasks[taskId].data[10]++;
         }
@@ -4644,21 +4656,23 @@ static void sub_80DDD20(u8 taskId)
         if (gTasks[taskId].data[11]++ > 20)
         {
             gTasks[taskId].data[11] = 0;
-            sub_80DD940();
-            eContest.unk1920A_5 = 0;
+            UpdateApplauseMeter();
+            eContest.isShowingApplauseMeter = FALSE;
             DestroyTask(taskId);
         }
         break;
     }
 }
 
-void unref_sub_80DDDA8(void)
+// Unused.
+void HideApplauseMeterNoAnim(void)
 {
     gSprites[eContest.applauseMeterSpriteId].pos2.x = 0;
     gSprites[eContest.applauseMeterSpriteId].invisible = FALSE;
 }
 
-void unref_sub_80DDDE4(void)
+// Unused.
+void ShowApplauseMeterNoAnim(void)
 {
     gSprites[eContest.applauseMeterSpriteId].invisible = TRUE;
 }
@@ -5256,9 +5270,9 @@ static bool32 Contest_RunTextPrinters(void)
     return IsTextPrinterActive(4);
 }
 
-static void Contest_SetBgCopyFlags(u32 var)
+static void Contest_SetBgCopyFlags(u32 flagIndex)
 {
-    sContestBgCopyFlags |= 1 << var;
+    sContestBgCopyFlags |= 1 << flagIndex;
 }
 
 void ResetContestLinkResults(void)
