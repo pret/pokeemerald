@@ -192,6 +192,7 @@ u8 GetBattlerYDelta(u8 battlerId, u16 species)
     {
         if (species == SPECIES_UNOWN)
         {
+            /*
             if (IsContest())
             {
                 if (gContestResources->field_18->unk4_0)
@@ -213,6 +214,7 @@ u8 GetBattlerYDelta(u8 battlerId, u16 species)
             else
                 coordSpecies = letter + SPECIES_UNOWN_B - 1;
             ret = gMonBackPicCoords[coordSpecies].y_offset;
+            */
         }
         else if (species == SPECIES_CASTFORM)
         {
@@ -231,6 +233,7 @@ u8 GetBattlerYDelta(u8 battlerId, u16 species)
     {
         if (species == SPECIES_UNOWN)
         {
+            /*
             spriteInfo = gBattleSpritesDataPtr->battlerData;
             if (!spriteInfo[battlerId].transformSpecies)
                 personality = GetMonData(&gEnemyParty[gBattlerPartyIndexes[battlerId]], MON_DATA_PERSONALITY);
@@ -242,6 +245,7 @@ u8 GetBattlerYDelta(u8 battlerId, u16 species)
             else
                 coordSpecies = letter + SPECIES_UNOWN_B - 1;
             ret = gMonFrontPicCoords[coordSpecies].y_offset;
+            */
         }
         else if (species == SPECIES_CASTFORM)
         {
@@ -2118,12 +2122,14 @@ s16 GetBattlerSpriteCoordAttr(u8 battlerId, u8 attr)
         }
         if (species == SPECIES_UNOWN)
         {
+            /*
             letter = GET_UNOWN_LETTER(personality);
             if (!letter)
                 unownSpecies = SPECIES_UNOWN;
             else
                 unownSpecies = letter + SPECIES_UNOWN_B - 1;
             coords = &gMonBackPicCoords[unownSpecies];
+            */
         }
         else if (species == SPECIES_CASTFORM)
         {
@@ -2156,12 +2162,14 @@ s16 GetBattlerSpriteCoordAttr(u8 battlerId, u8 attr)
 
             if (species == SPECIES_UNOWN)
             {
+                /*
                 letter = GET_UNOWN_LETTER(personality);
                 if (!letter)
                     unownSpecies = SPECIES_UNOWN;
                 else
                     unownSpecies = letter + SPECIES_UNOWN_B - 1;
                 coords = &gMonBackPicCoords[unownSpecies];
+                */
             }
             else if (species > NUM_SPECIES)
             {
@@ -2188,12 +2196,14 @@ s16 GetBattlerSpriteCoordAttr(u8 battlerId, u8 attr)
 
             if (species == SPECIES_UNOWN)
             {
+                /*
                 letter = GET_UNOWN_LETTER(personality);
                 if (!letter)
                     unownSpecies = SPECIES_UNOWN;
                 else
                     unownSpecies = letter + SPECIES_UNOWN_B - 1;
                 coords = &gMonFrontPicCoords[unownSpecies];
+                */
             }
             else if (species == SPECIES_CASTFORM)
             {

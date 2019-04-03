@@ -87,6 +87,7 @@ void HandleLoadSpecialPokePic(const struct CompressedSpriteSheet *src, void *des
 
 void LoadSpecialPokePic(const struct CompressedSpriteSheet *src, void *dest, s32 species, u32 personality, bool8 isFrontPic)
 {
+    /*
     if (species == SPECIES_UNOWN)
     {
         u16 i = (((personality & 0x3000000) >> 18) | ((personality & 0x30000) >> 12) | ((personality & 0x300) >> 6) | (personality & 3)) % 0x1C;
@@ -102,7 +103,7 @@ void LoadSpecialPokePic(const struct CompressedSpriteSheet *src, void *dest, s32
         else
             LZ77UnCompWram(gMonFrontPicTable[i].data, dest);
     }
-    else if (species > NUM_SPECIES) // is species unknown? draw the ? icon
+    else*/ if (species > NUM_SPECIES) // is species unknown? draw the ? icon
         LZ77UnCompWram(gMonFrontPicTable[0].data, dest);
     else
         LZ77UnCompWram(src->data, dest);
@@ -508,6 +509,7 @@ void DecompressPicFromTable_2(const struct CompressedSpriteSheet *src, void* buf
 
 void LoadSpecialPokePic_2(const struct CompressedSpriteSheet *src, void *dest, s32 species, u32 personality, bool8 isFrontPic) // a copy of LoadSpecialPokePic
 {
+    /*
     if (species == SPECIES_UNOWN)
     {
         u16 i = (((personality & 0x3000000) >> 18) | ((personality & 0x30000) >> 12) | ((personality & 0x300) >> 6) | (personality & 3)) % 0x1C;
@@ -523,7 +525,7 @@ void LoadSpecialPokePic_2(const struct CompressedSpriteSheet *src, void *dest, s
         else
             LZ77UnCompWram(gMonFrontPicTable[i].data, dest);
     }
-    else if (species > NUM_SPECIES) // is species unknown? draw the ? icon
+    else*/ if (species > NUM_SPECIES) // is species unknown? draw the ? icon
         LZ77UnCompWram(gMonFrontPicTable[0].data, dest);
     else
         LZ77UnCompWram(src->data, dest);
@@ -566,6 +568,7 @@ void HandleLoadSpecialPokePic_DontHandleDeoxys(const struct CompressedSpriteShee
 
 void LoadSpecialPokePic_DontHandleDeoxys(const struct CompressedSpriteSheet *src, void *dest, s32 species, u32 personality, bool8 isFrontPic)
 {
+    /*
     if (species == SPECIES_UNOWN)
     {
         u16 i = (((personality & 0x3000000) >> 18) | ((personality & 0x30000) >> 12) | ((personality & 0x300) >> 6) | (personality & 3)) % 0x1C;
@@ -581,7 +584,7 @@ void LoadSpecialPokePic_DontHandleDeoxys(const struct CompressedSpriteSheet *src
         else
             LZ77UnCompWram(gMonFrontPicTable[i].data, dest);
     }
-    else if (species > NUM_SPECIES) // is species unknown? draw the ? icon
+    else*/ if (species > NUM_SPECIES) // is species unknown? draw the ? icon
         LZ77UnCompWram(gMonFrontPicTable[0].data, dest);
     else
         LZ77UnCompWram(src->data, dest);

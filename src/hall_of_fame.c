@@ -40,8 +40,8 @@ struct HallofFameMon
 {
     u32 tid;
     u32 personality;
-    u16 species:9;
-    u16 lvl:7;
+    u16 species;
+    u8 lvl;
     u8 nick[POKEMON_NAME_LENGTH];
 };
 
@@ -64,7 +64,7 @@ static EWRAM_DATA struct HofGfx *sHofGfxPtr = NULL;
 
 extern struct MusicPlayerInfo gMPlayInfo_BGM;
 
-#define HALL_OF_FAME_MAX_TEAMS 50
+#define HALL_OF_FAME_MAX_TEAMS 30
 
 // this file's functions
 static void ClearVramOamPltt_LoadHofPal(void);
