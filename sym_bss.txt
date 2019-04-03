@@ -89,14 +89,7 @@ gUnknown_030012F2: @ 30012F2
 gUnknown_030012F4: @ 30012F4
 	.space 0x4
 
-gUnknown_030012F8: @ 30012F8
-	.space 0x2
-
-gUnknown_030012FA: @ 30012FA
-	.space 0x2
-
-gUnknown_030012FC: @ 30012FC
-	.space 0x4
+	.include "src/faraway_island.o"
 
 gUnknown_03001300: @ 3001300
 	.space 0x40

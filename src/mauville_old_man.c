@@ -1193,7 +1193,7 @@ static void Task_StoryListMenu(u8 taskId) // Task_StoryListMenu
                 gSpecialVar_Result = 1;
                 sSelectedStory = selection;
             }
-            sub_80E2A78(sStorytellerWindowId);
+            ClearToTransparentAndRemoveWindow(sStorytellerWindowId);
             DestroyTask(taskId);
             EnableBothScriptContexts();
             break;

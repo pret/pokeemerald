@@ -154,9 +154,18 @@ const u8 sWireless_RSEtoASCIITable[] = {
     0x20, 0x2b, 0x5b, 0x5c, 0x5d, 0x5e, 0x5f, 0x20,
     0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x00
 };
-const struct OamData sWirelessStatusIndicatorOamData = {
+const struct OamData sWirelessStatusIndicatorOamData =
+{
+    .y = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(16x16),
-    .size = SPRITE_SIZE(16x16)
+    .x = 0,
+    .size = SPRITE_SIZE(16x16),
+    .tileNum = 0,
+    .priority = 0,
+    .paletteNum = 0,
 };
 static const union AnimCmd sWirelessStatusIndicatorAnim0[] = {
     // 3 bars
@@ -5182,3 +5191,4 @@ u32 GetRfuRecvQueueLength(void)
 {
     return gUnknown_03005000.unk_124.unk_8c2;
 }
+

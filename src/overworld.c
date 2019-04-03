@@ -2960,7 +2960,7 @@ static void InitLinkPlayerEventObjectPos(struct EventObject *eventObj, s16 x, s1
     eventObj->currentCoords.y = y;
     eventObj->previousCoords.x = x;
     eventObj->previousCoords.y = y;
-    sub_8093038(x, y, &eventObj->initialCoords.x, &eventObj->initialCoords.y);
+    SetSpritePosToMapCoords(x, y, &eventObj->initialCoords.x, &eventObj->initialCoords.y);
     eventObj->initialCoords.x += 8;
     EventObjectUpdateZCoord(eventObj);
 }

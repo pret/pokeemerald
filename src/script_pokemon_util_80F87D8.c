@@ -395,7 +395,7 @@ static void sub_80F8EE8(u8 taskId)
         task->data[0]++;
         break;
     case 4:
-        sub_80E2A78(gTasks[taskId].data[5]);
+        ClearToTransparentAndRemoveWindow(gTasks[taskId].data[5]);
         DestroyTask(taskId);
         break;
     }
