@@ -114,7 +114,7 @@ static void sub_80DC4F0(void);
 static void CreateApplauseMeterSprite(void);
 static void sub_80DC5E8(void);
 static void sub_80DC7EC(void);
-static void sub_80DCD48(void);
+static void ContestDebugDoPrint(void);
 static void sub_80DD04C(void);
 static void ApplyNextTurnOrder(void);
 static void sub_80DDB0C(void);
@@ -186,7 +186,7 @@ static void sub_80DEA5C(void);
 static void sub_80DF250(void);
 static void sub_80DF4F8(void);
 static void sub_80DF080(u8);
-static void sub_80DF750(void);
+static void ContestDebugPrintBitStrings(void);
 static void sub_80DF9D4(u8 *);
 static void sub_80DF9E0(u8 *, s32);
 static void sub_80DB2BC(void);
@@ -574,7 +574,7 @@ const u16 gUnknown_08587C30[] = INCBIN_U16("graphics/unknown/unknown_587C30.gbap
 
 #include "data/contest_text_tables.h"
 
-const struct BgTemplate gUnknown_08587F34[] =
+static const struct BgTemplate sContestantInfoBgTemplates[] =
 {
     {
         .bg = 0,
@@ -614,7 +614,7 @@ const struct BgTemplate gUnknown_08587F34[] =
     }
 };
 
-const struct WindowTemplate gUnknown_08587F44[] =
+static const struct WindowTemplate sContestWindowTemplates[] =
 {
     {
         .bg = 0,
@@ -861,7 +861,7 @@ void ResetLinkContestBoolean(void)
     gIsLinkContest = 0;
 }
 
-static void sub_80D7678(void)
+static void SetupContestGpuRegs(void)
 {
     u16 savedIme;
 
@@ -905,22 +905,22 @@ void LoadContestBgAfterMoveAnim(void)
     }
 }
 
-static void sub_80D779C(void)
+static void InitContestInfoBgs(void)
 {
     s32 i;
 
     ResetBgsAndClearDma3BusyFlags(0);
-    InitBgsFromTemplates(0, gUnknown_08587F34, ARRAY_COUNT(gUnknown_08587F34));
+    InitBgsFromTemplates(0, sContestantInfoBgTemplates, ARRAY_COUNT(sContestantInfoBgTemplates));
     SetBgAttribute(3, BG_ATTR_WRAPAROUND, 1);
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < CONTESTANT_COUNT; i++)
     {
-        SetBgTilemapBuffer(i, gContestResources->field_24[i]);
+        SetBgTilemapBuffer(i, gContestResources->ContestantInfoTilemaps[i]);
     }
 }
 
-static void sub_80D77E4(void)
+static void InitContestWindows(void)
 {
-    InitWindows(gUnknown_08587F44);
+    InitWindows(sContestWindowTemplates);
     DeactivateAllTextPrinters();
     if (gIsLinkContest & 1)
     {
@@ -973,8 +973,10 @@ static void InitContestResources(void)
     for (i = 0; i < CONTESTANT_COUNT; i++)
     {
         eContestantStatus[i].nextTurnOrder = 0xFF;
-        eContest.unk19218[i] = gContestantTurnOrder[i];
+        eContest.prevTurnOrder[i] = gContestantTurnOrder[i];
     }
+    // Calling this here while all the nextTurnOrder values are 0xFF will actually
+    // just reverse the turn order.
     ApplyNextTurnOrder();
     memset(gContestResources->field_1c, 0, sizeof(*gContestResources->field_1c) * CONTESTANT_COUNT);
 }
@@ -991,15 +993,15 @@ static void AllocContestResources(void)
     gContestResources->field_18 = AllocZeroed(sizeof(struct ContestStruct_field_18));
     gContestResources->field_1c = AllocZeroed(sizeof(struct ContestResourcesField1C) * CONTESTANT_COUNT);
     gContestResources->field_20 = AllocZeroed(sizeof(struct ContestResourcesField20));
-    gContestResources->field_24[0] = AllocZeroed(0x1000);
-    gContestResources->field_24[1] = AllocZeroed(0x1000);
-    gContestResources->field_24[2] = AllocZeroed(0x1000);
-    gContestResources->field_24[3] = AllocZeroed(0x1000);
+    gContestResources->ContestantInfoTilemaps[0] = AllocZeroed(0x1000);
+    gContestResources->ContestantInfoTilemaps[1] = AllocZeroed(0x1000);
+    gContestResources->ContestantInfoTilemaps[2] = AllocZeroed(0x1000);
+    gContestResources->ContestantInfoTilemaps[3] = AllocZeroed(0x1000);
     gContestResources->field_34 = AllocZeroed(0x800);
     gContestResources->field_38 = AllocZeroed(0x800);
     gContestResources->field_3c = AllocZeroed(0x2000);
     gUnknown_0202305C = gContestResources->field_3c;
-    gUnknown_02023060 = gContestResources->field_24[1];
+    gUnknown_02023060 = gContestResources->ContestantInfoTilemaps[1];
 }
 
 static void FreeContestResources(void)
@@ -1013,10 +1015,10 @@ static void FreeContestResources(void)
     FREE_AND_SET_NULL(gContestResources->field_18);
     FREE_AND_SET_NULL(gContestResources->field_1c);
     FREE_AND_SET_NULL(gContestResources->field_20);
-    FREE_AND_SET_NULL(gContestResources->field_24[0]);
-    FREE_AND_SET_NULL(gContestResources->field_24[1]);
-    FREE_AND_SET_NULL(gContestResources->field_24[2]);
-    FREE_AND_SET_NULL(gContestResources->field_24[3]);
+    FREE_AND_SET_NULL(gContestResources->ContestantInfoTilemaps[0]);
+    FREE_AND_SET_NULL(gContestResources->ContestantInfoTilemaps[1]);
+    FREE_AND_SET_NULL(gContestResources->ContestantInfoTilemaps[2]);
+    FREE_AND_SET_NULL(gContestResources->ContestantInfoTilemaps[3]);
     FREE_AND_SET_NULL(gContestResources->field_34);
     FREE_AND_SET_NULL(gContestResources->field_38);
     FREE_AND_SET_NULL(gContestResources->field_3c);
@@ -1025,7 +1027,7 @@ static void FreeContestResources(void)
     gUnknown_02023060 = NULL;
 }
 
-void sub_80D7B24(void)
+void CB2_ContestMain(void)
 {
     switch (gMain.state)
     {
@@ -1036,9 +1038,9 @@ void sub_80D7B24(void)
         FREE_AND_SET_NULL(gMonSpritesGfxPtr->firstDecompressed);
         gMonSpritesGfxPtr->firstDecompressed = AllocZeroed(0x4000);
         SetVBlankCallback(NULL);
-        sub_80D779C();
-        sub_80D77E4();
-        sub_80D7678();
+        InitContestInfoBgs();
+        InitContestWindows();
+        SetupContestGpuRegs();
         ScanlineEffect_Clear();
         ResetPaletteFade();
         gPaletteFade.bufferTransferDisabled = TRUE;
@@ -1046,7 +1048,7 @@ void sub_80D7B24(void)
         ResetTasks();
         FreeAllSpritePalettes();
         gReservedSpritePaletteCount = 4;
-        eUnknownHeap1A000 = 0;
+        eContestDebugMode = CONTEST_DEBUG_MODE_OFF;
         ClearBattleMonForms();
         InitContestResources();
         gMain.state++;
@@ -1181,7 +1183,7 @@ static u8 sub_80D7E44(u8 *a)
     case 4:
         CopyToBgTilemapBuffer(2, gUnknown_08C17170, 0, 0);
         CopyBgTilemapBufferToVram(2);
-        DmaCopy32Defvars(3, gContestResources->field_24[2], eUnknownHeap1A004.unk18A04, 0x800);
+        DmaCopy32Defvars(3, gContestResources->ContestantInfoTilemaps[2], eUnknownHeap1A004.unk18A04, 0x800);
         break;
     case 5:
         LoadCompressedPalette(gUnknown_08C16E90, 0, 0x200);
@@ -1326,7 +1328,7 @@ static void sub_80D833C(u8 taskId)
     {
         gBattle_BG0_Y = 0;
         gBattle_BG2_Y = 0;
-        sub_80DCD48();
+        ContestDebugDoPrint();
         DmaCopy32Defvars(3, gPlttBufferUnfaded, eUnknownHeap1A004.unk18204, 0x400);
         ConvertIntToDecimalStringN(gStringVar1, eContest.turnNumber + 1, STR_CONV_MODE_LEFT_ALIGN, 1);
         if (!Contest_IsMonsTurnDisabled(gContestPlayerMonIndex))
@@ -1579,7 +1581,7 @@ static void sub_80D8B38(u8 taskId)
     switch (gTasks[taskId].data[0])
     {
     case 0:
-        sub_80DCD48();
+        ContestDebugDoPrint();
         for (i = 0; eContest.unk19214 != gContestResources->field_8->turnOrder[i]; i++)
             ;
         eContest.unk19215 = i;
@@ -1608,7 +1610,7 @@ static void sub_80D8B38(u8 taskId)
         return;
     case 2:
         sub_80DF080(r6);
-        sub_80DF750();
+        ContestDebugPrintBitStrings();
         if (eContestantStatus[r6].numTurnsSkipped != 0
             || eContestantStatus[r6].noMoreTurns)
         {
@@ -2018,7 +2020,7 @@ static void sub_80D8B38(u8 taskId)
         }
         return;
     case 18:
-        sub_80DCD48();
+        ContestDebugDoPrint();
         if (!gContestResources->field_14[r6].unk2_2)
         {
             gTasks[taskId].data[10] = 0;
@@ -2426,7 +2428,7 @@ static void sub_80DA3CC(u8 taskId)
         {
             gTasks[taskId].data[0] = 0;
             gTasks[taskId].func = sub_80DA464;
-            sub_80DCD48();
+            ContestDebugDoPrint();
         }
     }
 }
@@ -2504,7 +2506,7 @@ static void sub_80DA5E8(u8 taskId)
     {
         sub_80DF250();
         sub_80DF4F8();
-        sub_80DF750();
+        ContestDebugPrintBitStrings();
     }
     gContestRngValue = gRngValue;
     StringExpandPlaceholders(gStringVar4, gText_0827D597);
@@ -2987,8 +2989,8 @@ bool8 IsSpeciesNotUnown(u16 species)
 
 static void sub_80DB2BC(void)
 {
-    CpuCopy16(gContestResources->field_24[0], gContestResources->field_24[0] + 0x500, 0x280);
-    CpuCopy16(gContestResources->field_24[2], gContestResources->field_24[2] + 0x500, 0x280);
+    CpuCopy16(gContestResources->ContestantInfoTilemaps[0], gContestResources->ContestantInfoTilemaps[0] + 0x500, 0x280);
+    CpuCopy16(gContestResources->ContestantInfoTilemaps[2], gContestResources->ContestantInfoTilemaps[2] + 0x500, 0x280);
 }
 
 static u16 sub_80DB2EC(u16 a0, u8 a1)
@@ -3788,7 +3790,7 @@ static void sub_80DC6A4(u8 taskId)
     {
         gTasks[eContest.unk19211].data[r4 * 4 + 0] = 0xFF;
         gTasks[eContest.unk19211].data[r4 * 4 + 1] = 0;
-        BlendPalette((eContest.unk19218[r4] + 5) * 16 + 6, 2, 0, RGB(31, 31, 18));
+        BlendPalette((eContest.prevTurnOrder[r4] + 5) * 16 + 6, 2, 0, RGB(31, 31, 18));
         DestroyTask(taskId);
     }
 }
@@ -3813,7 +3815,7 @@ static void sub_80DC728(u8 taskId)
                 gTasks[taskId].data[r3 + 1] ^= 1;
 
             BlendPalette(
-              (eContest.unk19218[i] + 5) * 16 + 6,
+              (eContest.prevTurnOrder[i] + 5) * 16 + 6,
               2,
               gTasks[taskId].data[r3 + 0],
               RGB(31, 31, 18));
@@ -4006,45 +4008,45 @@ static void sub_80DCCD8(struct Sprite *sprite)
 }
 
 // Unused.
-static void sub_80DCD08(void)
+static void ContestDebugTogglePointTotal(void)
 {
-    if(eUnknownHeap1A000 == 1)
-        eUnknownHeap1A000 = 0;
+    if(eContestDebugMode == CONTEST_DEBUG_MODE_PRINT_POINT_TOTAL)
+        eContestDebugMode = CONTEST_DEBUG_MODE_OFF;
     else
-        eUnknownHeap1A000 = 1;
+        eContestDebugMode = CONTEST_DEBUG_MODE_PRINT_POINT_TOTAL;
 
-    if(eUnknownHeap1A000 == 0)
+    if(eContestDebugMode == CONTEST_DEBUG_MODE_OFF)
     {
         sub_80DAEA4();
         sub_80DB2BC();
     }
     else
     {
-        sub_80DCD48();
+        ContestDebugDoPrint();
     }
 }
 
-static void sub_80DCD48(void)
+static void ContestDebugDoPrint(void)
 {
     u8 i;
     s16 value;
     u8 *txtPtr;
     u8 text[8];
 
-    if (gUnknown_020322D5 == 0)
+    if (!gEnableContestDebugging)
         return;
 
-    switch (eUnknownHeap1A000)
+    switch (eContestDebugMode)
     {
-    case 0:
+    case CONTEST_DEBUG_MODE_OFF:
         break;
-    case 2:
-    case 3:
-        sub_80DF750();
+    case CONTEST_DEBUG_MODE_PRINT_UNK_C:
+    case CONTEST_DEBUG_MODE_PRINT_UNK_D:
+        ContestDebugPrintBitStrings();
         break;
-    // The only other possible value is 1, which is only set by sub_80DCD08, which is unused.
-    // So this code is unreachable.
-    // case 1:
+    // The only other possible value is 1, which is only set by ContestDebugTogglePointTotal.
+    //
+    // case CONTEST_DEBUG_MODE_PRINT_POINT_TOTAL:
     default:
         for (i = 0; i < 4; i++)
             FillWindowPixelBuffer(i, PIXEL_FILL(0));
@@ -4842,7 +4844,7 @@ static void sub_80DE224(void)
     SetGpuReg(REG_OFFSET_BG1HOFS, gBattle_BG1_X);
     SetGpuReg(REG_OFFSET_BG1VOFS, gBattle_BG1_Y);
 
-    CpuFill32(0, gContestResources->field_24[1], 0x1000);
+    CpuFill32(0, gContestResources->ContestantInfoTilemaps[1], 0x1000);
 
     CopyToBgTilemapBuffer(1, gUnknown_08C17980, 0, 0);
     Contest_SetBgCopyFlags(1);
@@ -4860,7 +4862,7 @@ static void sub_80DE350(void)
     u16 bg1Cnt;
 
     RequestDma3Fill(0,(void *)(BG_CHAR_ADDR(2)), 0x2000, 0x1);
-    CpuFill32(0, gContestResources->field_24[1], 0x1000);
+    CpuFill32(0, gContestResources->ContestantInfoTilemaps[1], 0x1000);
     Contest_SetBgCopyFlags(1);
     bg1Cnt = GetGpuReg(REG_OFFSET_BG1CNT);
     ((vBgCnt *) &bg1Cnt)->priority = 1;
@@ -4909,7 +4911,7 @@ static void sub_80DE4A8(u8 taskId)
     {
     case 0:
         for (i = 0; i < 4; i++)
-            eContest.unk19218[i] = gContestantTurnOrder[i];
+            eContest.prevTurnOrder[i] = gContestantTurnOrder[i];
         sub_80DBF90();
         sub_80DC864();
         sub_80DB69C();
@@ -5645,32 +5647,32 @@ static void sub_80DF4F8(void)
 }
 
 // Unused
-void sub_80DF704(u8 arg0)
+void ContestDebugToggleBitfields(bool8 showUnkD)
 {
-    if (eUnknownHeap1A000 == 0)
+    if (eContestDebugMode == CONTEST_DEBUG_MODE_OFF)
     {
-        if (arg0 == 0)
-            eUnknownHeap1A000 = 2;
+        if (!showUnkD)
+            eContestDebugMode = CONTEST_DEBUG_MODE_PRINT_UNK_C;
         else
-            eUnknownHeap1A000 = 3;
+            eContestDebugMode = CONTEST_DEBUG_MODE_PRINT_UNK_D;
     }
     else
     {
-        eUnknownHeap1A000 = 0;
+        eContestDebugMode = CONTEST_DEBUG_MODE_OFF;
     }
 
-    if (eUnknownHeap1A000 == 0)
+    if (eContestDebugMode == CONTEST_DEBUG_MODE_OFF)
     {
         sub_80DAEA4();
         sub_80DB2BC();
     }
     else
     {
-        sub_80DF750();
+        ContestDebugPrintBitStrings();
     }
 }
 
-static void sub_80DF750(void)
+static void ContestDebugPrintBitStrings(void)
 {
     u8 i;
     s8 j;
@@ -5679,17 +5681,18 @@ static void sub_80DF750(void)
     u8 *txtPtr;
     u32 bits;
 
-    if (gUnknown_020322D5 == 0)
+    if (!gEnableContestDebugging)
         return;
-    if (eUnknownHeap1A000 != 2 && eUnknownHeap1A000 != 3)
+    
+    if (eContestDebugMode != CONTEST_DEBUG_MODE_PRINT_UNK_C && eContestDebugMode != CONTEST_DEBUG_MODE_PRINT_UNK_D)
         return;
 
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < CONTESTANT_COUNT; i++)
         FillWindowPixelBuffer(i, PIXEL_FILL(0));
 
-    if (eUnknownHeap1A000 == 2)
+    if (eContestDebugMode == CONTEST_DEBUG_MODE_PRINT_UNK_C)
     {
-        for (i = 0; i < 4; i++)
+        for (i = 0; i < CONTESTANT_COUNT; i++)
         {
             txtPtr = StringCopy(text1, gText_CDot);
             Contest_PrintTextToBg0WindowAt(gContestantTurnOrder[i], text1, 5, 1, 7);
@@ -5710,7 +5713,7 @@ static void sub_80DF750(void)
     }
     else
     {
-        for (i = 0; i < 4; i++)
+        for (i = 0; i < CONTESTANT_COUNT; i++)
         {
             StringCopy(text1, gText_BDot);
             bits = gContestResources->field_1c[i].unkD;

@@ -2830,7 +2830,7 @@ void sub_80F8390(void)
 
 void sub_80F83D0(void)
 {
-    SetMainCallback2(sub_80D7B24);
+    SetMainCallback2(CB2_ContestMain);
 }
 
 static void sub_80F83E0(u8 taskId)

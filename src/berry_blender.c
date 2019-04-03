@@ -2037,7 +2037,7 @@ static void sub_8081744(void)
             sBerryBlenderData->field_4C--;
         sBerryBlenderData->field_72 = 0;
     }
-    if (gUnknown_020322D5 && gMain.newKeys & L_BUTTON)
+    if (gEnableContestDebugging && gMain.newKeys & L_BUTTON)
         sBerryBlenderData->field_123 ^= 1;
 }
 

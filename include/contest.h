@@ -3,6 +3,14 @@
 
 #define CONTESTANT_COUNT 4
 
+#define CONTEST_DEBUG_MODE_OFF 0
+// Prints the totalPoints value for each contestant.
+#define CONTEST_DEBUG_MODE_PRINT_POINT_TOTAL 1
+// Prints the ContestResourcesField1C::unk_C value as a bitstring for each contestant.
+#define CONTEST_DEBUG_MODE_PRINT_UNK_C 2
+// Prints the ContestResourcesField1C::unk_D value as a bitstring for each contestant.
+#define CONTEST_DEBUG_MODE_PRINT_UNK_D 3
+
 enum
 {
     CONTEST_CATEGORY_COOL,
@@ -281,7 +289,7 @@ struct Contest
     /*0x11*/ u8 unk19215;
     /*0x12*/ u8 unk19216;    // sprite ID
     /*0x13*/ s8 applauseLevel;
-    /*0x19218*/ u8 unk19218[CONTESTANT_COUNT];
+    /*0x19218*/ u8 prevTurnOrder[CONTESTANT_COUNT];
     /*0x1921C*/ u32 unk1921C;   // saved RNG value?
     u16 unk19220[5][4];  // move history?
     u8 unk19248[5][4];  // excitement history
@@ -417,7 +425,7 @@ struct ContestResources
     struct ContestStruct_field_18 *field_18;
     struct ContestResourcesField1C * field_1c;
     struct ContestResourcesField20 * field_20;
-    u8 * field_24[4];
+    u8 * ContestantInfoTilemaps[CONTESTANT_COUNT];
     void * field_34;
     void * field_38;
     void * field_3c;
@@ -431,7 +439,7 @@ struct ContestResources
 #define eContestResources14 (*gContestResources->field_14)
 #define eUnknownHeap18000 (gHeap + 0x18000)
 #define eUnknownHeap19000 (gHeap + 0x19000)
-#define eUnknownHeap1A000 (gHeap[0x1a000])
+#define eContestDebugMode (gHeap[0x1a000])
 #define eUnknownHeap1A004 (*(struct Shared1A004 *)(gHeap + 0x1a004))
 
 extern struct ContestPokemon gContestMons[4];
@@ -460,7 +468,7 @@ extern u32 gContestRngValue;
 // contest.c
 void ResetLinkContestBoolean(void);
 void LoadContestBgAfterMoveAnim(void);
-void sub_80D7B24(void);
+void CB2_ContestMain(void);
 void sub_80DA8C8(u8 partyIndex);
 void sub_80DAB8C(u8 contestType, u8 rank);
 void sub_80DACBC(u8 contestType, u8 rank, bool32 isPostgame);

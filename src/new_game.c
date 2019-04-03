@@ -56,7 +56,7 @@ static void ResetMiniGamesResults(void);
 
 // EWRAM vars
 EWRAM_DATA bool8 gDifferentSaveFile = FALSE;
-EWRAM_DATA bool8 gUnknown_020322D5 = FALSE;
+EWRAM_DATA bool8 gEnableContestDebugging = FALSE;
 
 // const rom data
 static const struct ContestWinner sContestWinnerPicDummy =
