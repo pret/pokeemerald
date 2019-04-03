@@ -28,6 +28,7 @@
 #include "gba/io_reg.h"
 
 extern const struct CompressedSpriteSheet gMonFrontPicTable[];
+extern const u8 *gUnknown_08625B54[];
 
 EWRAM_DATA static u8 sUnknown_0203CF48[3] = {0};
 EWRAM_DATA static struct ListMenuItem *sUnknown_0203CF4C = NULL;
@@ -259,7 +260,7 @@ static void sub_81D1D44(u8 windowId, s32 itemId, u8 y)
     u8 buffer[30];
     u16 length;
 
-	if (itemId == LIST_CANCEL)
+    if (itemId == LIST_CANCEL)
         return;
 
     StringCopy(buffer, gSaveBlock1Ptr->mail[6 + itemId].playerName);
@@ -1639,3 +1640,437 @@ static void sub_81D35E8(struct Sprite *sprite)
         id = gSprites[id].data[5];
     }
 }
+
+
+#ifdef NONMATCHING
+void DrawLevelUpWindowPg1(u8 arg0, u16 *statStoreLocation1, u16 *statStoreLocation2, u8 arg3, u8 arg4, u8 arg5)
+{
+    s32 i;
+    s16 array[6];
+    u8 *text;
+    u8 *text2;
+    s16 *ptr;
+    u8 something[14];
+    s32 var;
+    u8 var2;
+    s32 var3;
+    
+    
+    
+    
+
+    FillWindowPixelBuffer(arg0, arg3 * 16 | arg3);
+    
+    
+    array[0] = statStoreLocation2[0] - statStoreLocation1[0];
+    array[1] = statStoreLocation2[1] - statStoreLocation1[1];
+    array[2] = statStoreLocation2[2] - statStoreLocation1[2];
+    array[3] = statStoreLocation2[4] - statStoreLocation1[4];
+    array[4] = statStoreLocation2[5] - statStoreLocation1[5];
+    array[5] = statStoreLocation2[3] - statStoreLocation1[3];
+    
+    
+    for(i = 0; i < 6; i++)
+    {
+        AddTextPrinterParameterized3(arg0, 1, 0, 15 * i, &arg3, TEXT_SPEED_FF, gUnknown_08625B54[i]);
+        ptr = &array[i];
+        text = (u8 *) gText_Dash;
+        
+        if(*ptr >= 0)
+        {
+            text = (u8 *) gText_UnkCtrlF904;
+        }
+        
+        StringCopy(text2, text);
+        AddTextPrinterParameterized3(arg0, 1, 56, 15 * i, &arg3, TEXT_SPEED_FF, text2);
+        var3 = *ptr;
+        var = var3;
+        
+        if(var3 < 0)
+        {
+            var = -var3;
+        }
+        
+        var2 = 12;
+        
+        if(var <= 9)
+        {
+            var2 = 18;
+        }
+        
+        if(var3 < 0)
+        {
+            var3 = -var3;
+        }
+        
+        ConvertIntToDecimalStringN(text2, var3, 0, 2);
+        AddTextPrinterParameterized3(arg0, 1, var2 + 56, 15 * i, &arg3, TEXT_SPEED_FF, text2);  
+    }
+}
+#else
+NAKED
+void DrawLevelUpWindowPg1(u16 arg0, u16 *statStoreLocation1, u16 *statStoreLocation2, u8 arg3, u8 arg4, u8 arg5)
+{
+    asm(".syntax unified\n\
+push {r4-r7,lr}\n\
+    mov r7, r10\n\
+    mov r6, r9\n\
+    mov r5, r8\n\
+    push {r5-r7}\n\
+    sub sp, 0x2C\n\
+    mov r8, r0\n\
+    adds r6, r1, 0\n\
+    adds r5, r2, 0\n\
+    adds r4, r3, 0\n\
+    ldr r3, [sp, 0x4C]\n\
+    ldr r0, [sp, 0x50]\n\
+    mov r9, r0\n\
+    lsls r4, 24\n\
+    lsrs r4, 24\n\
+    lsls r3, 24\n\
+    lsrs r3, 24\n\
+    mov r1, r9\n\
+    lsls r1, 24\n\
+    lsrs r1, 24\n\
+    mov r9, r1\n\
+    mov r0, r8\n\
+    lsls r0, 24\n\
+    lsrs r0, 24\n\
+    mov r8, r0\n\
+    lsls r1, r4, 4\n\
+    orrs r1, r4\n\
+    lsls r1, 24\n\
+    lsrs r1, 24\n\
+    str r3, [sp, 0x28]\n\
+    bl FillWindowPixelBuffer\n\
+    add r2, sp, 0xC\n\
+    ldrh r0, [r5]\n\
+    ldrh r1, [r6]\n\
+    subs r0, r1\n\
+    strh r0, [r2]\n\
+    ldrh r0, [r5, 0x2]\n\
+    ldrh r1, [r6, 0x2]\n\
+    subs r0, r1\n\
+    strh r0, [r2, 0x2]\n\
+    ldrh r0, [r5, 0x4]\n\
+    ldrh r1, [r6, 0x4]\n\
+    subs r0, r1\n\
+    strh r0, [r2, 0x4]\n\
+    ldrh r0, [r5, 0x8]\n\
+    ldrh r1, [r6, 0x8]\n\
+    subs r0, r1\n\
+    strh r0, [r2, 0x6]\n\
+    ldrh r0, [r5, 0xA]\n\
+    ldrh r1, [r6, 0xA]\n\
+    subs r0, r1\n\
+    strh r0, [r2, 0x8]\n\
+    ldrh r0, [r5, 0x6]\n\
+    ldrh r1, [r6, 0x6]\n\
+    subs r0, r1\n\
+    strh r0, [r2, 0xA]\n\
+    add r0, sp, 0x24\n\
+    strb r4, [r0]\n\
+    ldr r3, [sp, 0x28]\n\
+    strb r3, [r0, 0x1]\n\
+    mov r1, r9\n\
+    strb r1, [r0, 0x2]\n\
+    movs r7, 0\n\
+    mov r10, r0\n\
+    movs r0, 0x1\n\
+    negs r0, r0\n\
+    mov r9, r0\n\
+    add r6, sp, 0x18\n\
+_081D36CA:\n\
+    lsls r0, r7, 4\n\
+    subs r0, r7\n\
+    lsls r0, 24\n\
+    lsrs r5, r0, 24\n\
+    mov r1, r10\n\
+    str r1, [sp]\n\
+    mov r0, r9\n\
+    str r0, [sp, 0x4]\n\
+    ldr r1, =gUnknown_08625B54\n\
+    lsls r0, r7, 2\n\
+    adds r0, r1\n\
+    ldr r0, [r0]\n\
+    str r0, [sp, 0x8]\n\
+    mov r0, r8\n\
+    movs r1, 0x1\n\
+    movs r2, 0\n\
+    adds r3, r5, 0\n\
+    bl AddTextPrinterParameterized3\n\
+    lsls r0, r7, 1\n\
+    mov r4, sp\n\
+    adds r4, r0\n\
+    adds r4, 0xC\n\
+    movs r1, 0\n\
+    ldrsh r0, [r4, r1]\n\
+    ldr r1, =gText_Dash\n\
+    cmp r0, 0\n\
+    blt _081D3704\n\
+    ldr r1, =gText_UnkCtrlF904\n\
+_081D3704:\n\
+    adds r0, r6, 0\n\
+    bl StringCopy\n\
+    mov r0, r10\n\
+    str r0, [sp]\n\
+    mov r1, r9\n\
+    str r1, [sp, 0x4]\n\
+    str r6, [sp, 0x8]\n\
+    mov r0, r8\n\
+    movs r1, 0x1\n\
+    movs r2, 0x38\n\
+    adds r3, r5, 0\n\
+    bl AddTextPrinterParameterized3\n\
+    movs r0, 0\n\
+    ldrsh r1, [r4, r0]\n\
+    adds r0, r1, 0\n\
+    cmp r1, 0\n\
+    bge _081D372C\n\
+    negs r0, r1\n\
+_081D372C:\n\
+    movs r4, 0xC\n\
+    cmp r0, 0x9\n\
+    bgt _081D3734\n\
+    movs r4, 0x12\n\
+_081D3734:\n\
+    cmp r1, 0\n\
+    bge _081D373A\n\
+    negs r1, r1\n\
+_081D373A:\n\
+    adds r0, r6, 0\n\
+    movs r2, 0\n\
+    movs r3, 0x2\n\
+    bl ConvertIntToDecimalStringN\n\
+    adds r2, r4, 0\n\
+    adds r2, 0x38\n\
+    mov r1, r10\n\
+    str r1, [sp]\n\
+    mov r0, r9\n\
+    str r0, [sp, 0x4]\n\
+    str r6, [sp, 0x8]\n\
+    mov r0, r8\n\
+    movs r1, 0x1\n\
+    adds r3, r5, 0\n\
+    bl AddTextPrinterParameterized3\n\
+    adds r0, r7, 0x1\n\
+    lsls r0, 16\n\
+    lsrs r7, r0, 16\n\
+    cmp r7, 0x5\n\
+    bls _081D36CA\n\
+    add sp, 0x2C\n\
+    pop {r3-r5}\n\
+    mov r8, r3\n\
+    mov r9, r4\n\
+    mov r10, r5\n\
+    pop {r4-r7}\n\
+    pop {r0}\n\
+    bx r0\n\
+    .pool\n\
+    .syntax divided");
+}
+#endif // NONMATCHING
+
+#ifdef NONMATCHING
+void DrawLevelUpWindowPg2(u16 arg0, u16* statStoreLocation1, u8 arg2, u8 arg3, u8 arg4)
+{
+    s32 i;
+    s32 var;
+    s32 var2;
+    u8 text;
+    s16 array[6];
+    u8 *something;
+    u8 some;
+    FillWindowPixelBuffer(arg0, arg2 * 16 | arg2);
+    array[0] = statStoreLocation1[0];
+    array[1] = statStoreLocation1[1];
+    array[2] = statStoreLocation1[2];
+    array[3] = statStoreLocation1[4];
+    array[4] = statStoreLocation1[5];
+    array[5] = statStoreLocation1[3];
+    for(i = 0; i <= 5; i++)
+    {
+        var = array[i];
+        var2 = 3;
+        if(var <= 99)
+        {
+            var2 = 1;
+            if(var > 9)
+            {
+                var2 = 2;
+            }
+        }   
+        something = ConvertIntToDecimalStringN(&text, array[i], 0, var2);
+        some = (((4 - *something) * 2) + *something) * 2;
+        AddTextPrinterParameterized3(arg0, 1, 0, 15 * i, &arg2, TEXT_SPEED_FF, gUnknown_08625B54[i]);
+        AddTextPrinterParameterized3(arg0, 1, some + 56, 15 * i, &arg2, TEXT_SPEED_FF, &text);
+    }
+}
+#else
+NAKED
+void DrawLevelUpWindowPg2(u16 arg0, u16* statStoreLocation1, u8 arg2, u8 arg3, u8 arg4)
+{
+    asm(".syntax unified\n\
+    push {r4-r7,lr}\n\
+    mov r7, r10\n\
+    mov r6, r9\n\
+    mov r5, r8\n\
+    push {r5-r7}\n\
+    sub sp, 0x2C\n\
+    mov r8, r0\n\
+    adds r5, r1, 0\n\
+    adds r4, r2, 0\n\
+    adds r6, r3, 0\n\
+    ldr r2, [sp, 0x4C]\n\
+    lsls r4, 24\n\
+    lsrs r4, 24\n\
+    lsls r6, 24\n\
+    lsrs r6, 24\n\
+    lsls r2, 24\n\
+    lsrs r2, 24\n\
+    lsls r0, 24\n\
+    lsrs r0, 24\n\
+    mov r8, r0\n\
+    lsls r1, r4, 4\n\
+    orrs r1, r4\n\
+    lsls r1, 24\n\
+    lsrs r1, 24\n\
+    str r2, [sp, 0x28]\n\
+    bl FillWindowPixelBuffer\n\
+    add r1, sp, 0xC\n\
+    ldrh r0, [r5]\n\
+    strh r0, [r1]\n\
+    ldrh r0, [r5, 0x2]\n\
+    strh r0, [r1, 0x2]\n\
+    ldrh r0, [r5, 0x4]\n\
+    strh r0, [r1, 0x4]\n\
+    ldrh r0, [r5, 0x8]\n\
+    strh r0, [r1, 0x6]\n\
+    ldrh r0, [r5, 0xA]\n\
+    strh r0, [r1, 0x8]\n\
+    ldrh r0, [r5, 0x6]\n\
+    strh r0, [r1, 0xA]\n\
+    add r0, sp, 0x24\n\
+    strb r4, [r0]\n\
+    strb r6, [r0, 0x1]\n\
+    ldr r2, [sp, 0x28]\n\
+    strb r2, [r0, 0x2]\n\
+    movs r6, 0\n\
+    add r1, sp, 0x18\n\
+    mov r9, r1\n\
+    mov r7, r8\n\
+    mov r10, r0\n\
+    movs r2, 0x1\n\
+    negs r2, r2\n\
+    mov r8, r2\n\
+_081D37EE:\n\
+    lsls r1, r6, 1\n\
+    mov r0, sp\n\
+    adds r0, r1\n\
+    adds r0, 0xC\n\
+    movs r2, 0\n\
+    ldrsh r0, [r0, r2]\n\
+    movs r4, 0x3\n\
+    cmp r0, 0x63\n\
+    bgt _081D3808\n\
+    movs r4, 0x1\n\
+    cmp r0, 0x9\n\
+    ble _081D3808\n\
+    movs r4, 0x2\n\
+_081D3808:\n\
+    mov r0, sp\n\
+    adds r0, r1\n\
+    adds r0, 0xC\n\
+    movs r2, 0\n\
+    ldrsh r1, [r0, r2]\n\
+    mov r0, r9\n\
+    movs r2, 0\n\
+    adds r3, r4, 0\n\
+    bl ConvertIntToDecimalStringN\n\
+    movs r0, 0x4\n\
+    subs r0, r4\n\
+    lsls r4, r0, 1\n\
+    adds r4, r0\n\
+    lsls r4, 17\n\
+    lsrs r4, 16\n\
+    lsls r5, r6, 4\n\
+    subs r5, r6\n\
+    lsls r5, 24\n\
+    lsrs r5, 24\n\
+    mov r0, r10\n\
+    str r0, [sp]\n\
+    mov r1, r8\n\
+    str r1, [sp, 0x4]\n\
+    ldr r1, =gUnknown_08625B54\n\
+    lsls r0, r6, 2\n\
+    adds r0, r1\n\
+    ldr r0, [r0]\n\
+    str r0, [sp, 0x8]\n\
+    adds r0, r7, 0\n\
+    movs r1, 0x1\n\
+    movs r2, 0\n\
+    adds r3, r5, 0\n\
+    bl AddTextPrinterParameterized3\n\
+    adds r4, 0x38\n\
+    lsls r4, 24\n\
+    lsrs r4, 24\n\
+    mov r2, r10\n\
+    str r2, [sp]\n\
+    mov r0, r8\n\
+    str r0, [sp, 0x4]\n\
+    mov r1, r9\n\
+    str r1, [sp, 0x8]\n\
+    adds r0, r7, 0\n\
+    movs r1, 0x1\n\
+    adds r2, r4, 0\n\
+    adds r3, r5, 0\n\
+    bl AddTextPrinterParameterized3\n\
+    adds r0, r6, 0x1\n\
+    lsls r0, 16\n\
+    lsrs r6, r0, 16\n\
+    cmp r6, 0x5\n\
+    bls _081D37EE\n\
+    add sp, 0x2C\n\
+    pop {r3-r5}\n\
+    mov r8, r3\n\
+    mov r9, r4\n\
+    mov r10, r5\n\
+    pop {r4-r7}\n\
+    pop {r0}\n\
+    bx r0\n\
+    .pool\n\
+    .syntax divided");
+}
+#endif // NONMATCHING
+
+void GetMonLevelUpWindowStats(struct Pokemon* mon, u16* statStoreLocation)
+{
+    statStoreLocation[0] = GetMonData(mon, MON_DATA_MAX_HP);
+    statStoreLocation[1] = GetMonData(mon, MON_DATA_ATK);
+    statStoreLocation[2] = GetMonData(mon, MON_DATA_DEF);
+    statStoreLocation[3] = GetMonData(mon, MON_DATA_SPEED);
+    statStoreLocation[4] = GetMonData(mon, MON_DATA_SPATK);
+    statStoreLocation[5] = GetMonData(mon, MON_DATA_SPDEF);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
