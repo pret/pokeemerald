@@ -100,7 +100,7 @@ gBattleScriptsForMoveEffects:: @ 82D86A8
 	.4byte BattleScript_EffectMimic
 	.4byte BattleScript_EffectMetronome
 	.4byte BattleScript_EffectLeechSeed
-	.4byte BattleScript_EffectSplash
+	.4byte BattleScript_EffectDoNothing
 	.4byte BattleScript_EffectDisable
 	.4byte BattleScript_EffectLevelDamage
 	.4byte BattleScript_EffectPsywave
@@ -345,7 +345,7 @@ gBattleScriptsForMoveEffects:: @ 82D86A8
 	.4byte BattleScript_EffectPartingShot
 	.4byte BattleScript_EffectSpectralThief
 	.4byte BattleScript_EffectVCreate
-	
+
 BattleScript_EffectVCreate:
 	setmoveeffect MOVE_EFFECT_V_CREATE | MOVE_EFFECT_AFFECTS_USER
 	goto BattleScript_EffectHit
@@ -2835,15 +2835,32 @@ BattleScript_DoLeechSeed::
 	waitmessage 0x40
 	goto BattleScript_MoveEnd
 
-BattleScript_EffectSplash::
+BattleScript_EffectDoNothing::
 	attackcanceler
 	attackstring
 	ppreduce
+	jumpifmove MOVE_HOLD_HANDS, BattleScript_EffectHoldHands
 	attackanimation
 	waitanimation
+	jumpifmove MOVE_CELEBRATE, BattleScript_EffectCelebrate
+	jumpifmove MOVE_HAPPY_HOUR, BattleScript_EffectHappyHour
 	incrementgamestat GAME_STAT_USED_SPLASH
 	printstring STRINGID_BUTNOTHINGHAPPENED
 	waitmessage 0x40
+	goto BattleScript_MoveEnd
+BattleScript_EffectHoldHands:
+	jumpifsideaffecting BS_TARGET, SIDE_STATUS_CRAFTY_SHIELD, BattleScript_ButItFailed
+	jumpifnotbattletype BATTLE_TYPE_TWO_OPPONENTS | BATTLE_TYPE_DOUBLE, BattleScript_ButItFailed
+	attackanimation
+	waitanimation
+	goto BattleScript_MoveEnd
+BattleScript_EffectCelebrate:
+	printstring STRINGID_CELEBRATEMESSAGE
+	waitmessage 0x40
+	goto BattleScript_MoveEnd
+BattleScript_EffectHappyHour:
+	setmoveeffect MOVE_EFFECT_HAPPY_HOUR
+	seteffectprimary
 	goto BattleScript_MoveEnd
 
 BattleScript_EffectDisable::

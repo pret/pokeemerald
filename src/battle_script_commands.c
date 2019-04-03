@@ -2006,6 +2006,11 @@ void SetMoveEffect(bool32 primary, u32 certain)
         affectsUser = MOVE_EFFECT_AFFECTS_USER;
         gBattleScripting.battler = gBattlerTarget; // theoretically the attacker
     }
+    
+    // Just in case this flag is still set
+    if (gBattleScripting.moveEffect & MOVE_EFFECT_CERTAIN)
+        gBattleScripting.moveEffect &= ~(MOVE_EFFECT_CERTAIN);
+    
     else
     {
         gEffectBattler = gBattlerTarget;
@@ -2363,6 +2368,13 @@ void SetMoveEffect(bool32 primary, u32 certain)
                 }
                 BattleScriptPush(gBattlescriptCurrInstr + 1);
                 gBattlescriptCurrInstr = sMoveEffectBS_Ptrs[gBattleScripting.moveEffect];
+                break;
+            case MOVE_EFFECT_HAPPY_HOUR:
+                if (GET_BATTLER_SIDE(gBattlerAttacker) == B_SIDE_PLAYER)
+                {
+                    gBattleStruct->moneyMultiplier *= 2;
+                }
+                gBattlescriptCurrInstr++;
                 break;
             case MOVE_EFFECT_TRI_ATTACK:
                 if (gBattleMons[gEffectBattler].status1)
