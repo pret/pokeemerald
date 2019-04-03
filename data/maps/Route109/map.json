@@ -152,7 +152,7 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route109_EventScript_290D5A",
+      "script": "Route109_EventScript_ItemPPUp",
       "flag": "FLAG_ITEM_ROUTE_109_PP_UP"
     },
     {
@@ -321,7 +321,7 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route109_EventScript_290D67",
+      "script": "Route109_EventScript_ItemPotion",
       "flag": "FLAG_ITEM_ROUTE_109_POTION"
     },
     {
