@@ -392,6 +392,7 @@ enum
     BODY_COLOR_PINK
 };
 
+#define EVO_MEGA_EVOLUTION   0xffff // Not an actual evolution, used to temporarily mega evolve in battle.
 #define EVO_FRIENDSHIP       0x0001 // Pokémon levels up with friendship ≥ 220
 #define EVO_FRIENDSHIP_DAY   0x0002 // Pokémon levels up during the day with friendship ≥ 220
 #define EVO_FRIENDSHIP_NIGHT 0x0003 // Pokémon levels up at night with friendship ≥ 220
@@ -421,7 +422,7 @@ enum
 #define EVO_ITEM_FEMALE      0x001B // specified item is used on a female Pokémon
 #define EVO_LEVEL_RAIN       0x001B // Pokémon reaches the specified level while it's raining
 #define EVO_SPECIFIC_MON_IN_PARTY  0x001C // Pokémon levels up with a specified Pokémon in party
-#define EVO_LEVEL_SPECIFIC_MON_TYPE_IN_PARTY  0x001D // Pokémon levels up with a specified Pokémon in party
+#define EVO_LEVEL_SPECIFIC_MON_TYPE_IN_PARTY  0x001D // Pokémon reaches the specified level with a specified Pokémon in party
 
 struct Evolution
 {
@@ -430,7 +431,7 @@ struct Evolution
     u16 targetSpecies;
 };
 
-#define EVOS_PER_MON 5
+#define EVOS_PER_MON 8
 
 extern u8 gPlayerPartyCount;
 extern struct Pokemon gPlayerParty[PARTY_SIZE];
