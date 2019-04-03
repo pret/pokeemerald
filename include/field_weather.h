@@ -3,6 +3,14 @@
 
 #include "sprite.h"
 
+#define MAX_RAIN_SPRITES      24
+#define NUM_CLOUD_SPRITES      3
+#define NUM_FOG1_SPRITES      20
+#define NUM_ASH_SPRITES       20
+#define NUM_FOG2_SPRITES      20
+#define NUM_SANDSTORM_SPRITES 20
+#define NUM_SWIRL_SANDSTORM_SPRITES 5
+
 // Controls how the weather should be changing the screen palettes.
 enum
 {
@@ -27,18 +35,18 @@ struct Weather
     {
         struct
         {
-            struct Sprite *rainSprites[24];
+            struct Sprite *rainSprites[MAX_RAIN_SPRITES];
             struct Sprite *snowflakeSprites[101];
-            struct Sprite *cloudSprites[3];
+            struct Sprite *cloudSprites[NUM_CLOUD_SPRITES];
         } s1;
         struct
         {
             u8 filler0[0xA0];
-            struct Sprite *fog1Sprites[20];
-            struct Sprite *ashSprites[20];
-            struct Sprite *fog2Sprites[20];
-            struct Sprite *sandstormSprites1[20];
-            struct Sprite *sandstormSprites2[5];
+            struct Sprite *fog1Sprites[NUM_FOG1_SPRITES];
+            struct Sprite *ashSprites[NUM_ASH_SPRITES];
+            struct Sprite *fog2Sprites[NUM_FOG2_SPRITES];
+            struct Sprite *sandstormSprites1[NUM_SANDSTORM_SPRITES];
+            struct Sprite *sandstormSprites2[NUM_SWIRL_SANDSTORM_SPRITES];
         } s2;
     } sprites;
     u8 gammaShifts[19][32];
@@ -62,57 +70,57 @@ struct Weather
     bool8 weatherChangeComplete;
     u8 weatherPicSpritePalIndex;
     u8 altGammaSpritePalIndex;
-    u16 unknown_6D6;
-    u8 unknown_6D8;
-    u8 unknown_6D9;
+    u16 rainSpriteVisibleCounter;
+    u8 curRainSpriteIndex;
+    u8 targetRainSpriteCount;
     u8 rainSpriteCount;
-    u8 unknown_6DB;
-    u8 unknown_6DC;
+    u8 rainSpriteVisibleDelay;
+    u8 isHeavyRain;
     u8 rainStrength;
     /*0x6DE*/ u8 cloudSpritesCreated;
     u8 filler_6DF[1];
-    u16 unknown_6E0;
+    u16 snowflakeVisibleCounter;
     u16 unknown_6E2;
     u8 snowflakeSpriteCount;
-    u8 unknown_6E5;
+    u8 targetSnowflakeSpriteCount;
     u16 unknown_6E6;
     u16 thunderCounter;
     u8 unknown_6EA;
     u8 unknown_6EB;
     u8 unknown_6EC;
-    u8 unknown_6ED;
+    u8 thunderTriggered;
     u16 fog1ScrollPosX;
-    u16 unknown_6F0;
-    u16 unknown_6F2;
+    u16 fog1ScrollCounter;
+    u16 fog1ScrollOffset;
     u8 lightenedFogSpritePals[6];
     u8 lightenedFogSpritePalsCount;
     u8 fog1SpritesCreated;
-    u16 unknown_6FC;
+    u16 ashBaseSpritesX;
     u16 unknown_6FE;
     u8 ashSpritesCreated;
     u8 filler_701[3];
-    u32 unknown_704;
-    u32 unknown_708;
+    u32 sandstormXOffset;
+    u32 sandstormYOffset;
     u8 filler_70C[2];
-    u16 unknown_70E;
-    u16 unknown_710;
-    u16 unknown_712;
-    u16 unknown_714;
-    u8 sandstormSprites1Created;
-    u8 sandstormSprites2Created;
-    u16 unknown_718;
-    u16 unknown_71A;
-    u16 unknown_71C;
-    u16 unknown_71E;
-    u16 unknown_720;
-    u16 unknown_722;
+    u16 sandstormBaseSpritesX;
+    u16 sandstormPosY;
+    u16 sandstormWaveIndex;
+    u16 sandstormWaveCounter;
+    u8 sandstormSpritesCreated;
+    u8 sandstormSwirlSpritesCreated;
+    u16 fog2BaseSpritesX;
+    u16 fog2PosY;
+    u16 fog2ScrollXCounter;
+    u16 fog2ScrollYCounter;
+    u16 fog2XOffset;
+    u16 fog2YOffset;
     u8 fog2SpritesCreated;
     u8 filler_725[1];
-    u16 unknown_726;
-    u16 unknown_728;
-    u16 unknown_72A;
-    u16 unknown_72C;
-    u8 unknown_72E;
+    u16 bubblesDelayCounter;
+    u16 bubblesDelayIndex;
+    u16 bubblesCoordsIndex;
+    u16 bubblesSpriteCount;
+    u8 bubblesSpritesCreated;
     u8 filler_72F;
     u16 currBlendEVA;
     u16 currBlendEVB;
@@ -174,10 +182,10 @@ void Clouds_InitVars(void);
 void Clouds_Main(void);
 void Clouds_InitAll(void);
 bool8 Clouds_Finish(void);
-void Weather2_InitVars(void);
-void Weather2_Main(void);
-void Weather2_InitAll(void);
-bool8 Weather2_Finish(void);
+void Sunny_InitVars(void);
+void Sunny_Main(void);
+void Sunny_InitAll(void);
+bool8 Sunny_Finish(void);
 void LightRain_InitVars(void);
 void LightRain_Main(void);
 void LightRain_InitAll(void);

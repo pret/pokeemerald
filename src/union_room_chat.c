@@ -2074,7 +2074,7 @@ static void sub_801FDDC(u8 left, u8 top, u8 initialCursorPos)
         PutWindowTilemap(gUnknown_02022C88->unk18);
         AddTextPrinterParameterized(gUnknown_02022C88->unk18, 1, gText_Yes, 8, 1, TEXT_SPEED_FF, NULL);
         AddTextPrinterParameterized(gUnknown_02022C88->unk18, 1, gText_No, 8, 17, TEXT_SPEED_FF, NULL);
-        sub_8098858(gUnknown_02022C88->unk18, 1, 13);
+        DrawTextBorderOuter(gUnknown_02022C88->unk18, 1, 13);
         InitMenuInUpperLeftCornerPlaySoundWhenAPressed(gUnknown_02022C88->unk18, 2, initialCursorPos);
     }
 }
@@ -2140,7 +2140,7 @@ static void sub_801FF18(int arg0, u16 arg1)
     PutWindowTilemap(windowId);
     if (gUnknown_082F2D40[arg0].unk4 == 1)
     {
-        sub_80989E0(windowId, 0xA, 2);
+        DrawTextBorderInner(windowId, 0xA, 2);
         AddTextPrinterParameterized5(
             windowId,
             1,
@@ -2154,7 +2154,7 @@ static void sub_801FF18(int arg0, u16 arg1)
     }
     else
     {
-        sub_8098858(windowId, 0xA, 2);
+        DrawTextBorderOuter(windowId, 0xA, 2);
         AddTextPrinterParameterized5(
             windowId,
             1,
@@ -2316,7 +2316,7 @@ static bool32 sub_8020368(void)
 static void sub_80203B0(void)
 {
     FillWindowPixelBuffer(3, PIXEL_FILL(1));
-    sub_8098858(3, 1, 13);
+    DrawTextBorderOuter(3, 1, 13);
     PrintTextArray(3, 2, 8, 1, 14, 5, gUnknown_082F2DC8);
     sub_81983AC(3, 2, 0, 1, 14, 5, sub_801F0B0());
     PutWindowTilemap(3);

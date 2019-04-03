@@ -778,7 +778,7 @@ static void sub_80F677C(u8 taskId)
     if (!gReceivedRemoteLinkPlayers)
     {
         if (gIsLinkContest & 0x2)
-            sub_800E084();
+            DestroyWirelessStatusIndicatorSprite();
 
         sub_80F7144();
         gTasks[taskId].func = sub_80F67C4;

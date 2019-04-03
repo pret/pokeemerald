@@ -91,7 +91,7 @@ static const struct WeatherCallbacks sWeatherFuncs[] =
 {
     {None_Init,          None_Main,      None_Init,         None_Finish},
     {Clouds_InitVars,    Clouds_Main,    Clouds_InitAll,    Clouds_Finish},
-    {Weather2_InitVars,  Weather2_Main,  Weather2_InitAll,  Weather2_Finish},
+    {Sunny_InitVars,     Sunny_Main,     Sunny_InitAll,     Sunny_Finish},
     {LightRain_InitVars, LightRain_Main, LightRain_InitAll, LightRain_Finish},
     {Snow_InitVars,      Snow_Main,      Snow_InitAll,      Snow_Finish},
     {MedRain_InitVars,   Rain_Main,      MedRain_InitAll,   Rain_Finish},
@@ -167,15 +167,15 @@ void StartWeather(void)
         gWeatherPtr->altGammaSpritePalIndex = index;
         gWeatherPtr->weatherPicSpritePalIndex = AllocSpritePalette(0x1201);
         gWeatherPtr->rainSpriteCount = 0;
-        gWeatherPtr->unknown_6D8 = 0;
+        gWeatherPtr->curRainSpriteIndex = 0;
         gWeatherPtr->cloudSpritesCreated = 0;
         gWeatherPtr->snowflakeSpriteCount = 0;
         gWeatherPtr->ashSpritesCreated = 0;
         gWeatherPtr->fog1SpritesCreated = 0;
         gWeatherPtr->fog2SpritesCreated = 0;
-        gWeatherPtr->sandstormSprites1Created = 0;
-        gWeatherPtr->sandstormSprites2Created = 0;
-        gWeatherPtr->unknown_72E = 0;
+        gWeatherPtr->sandstormSpritesCreated = 0;
+        gWeatherPtr->sandstormSwirlSpritesCreated = 0;
+        gWeatherPtr->bubblesSpritesCreated = 0;
         gWeatherPtr->lightenedFogSpritePalsCount = 0;
         Weather_SetBlendCoeffs(16, 0);
         gWeatherPtr->currWeather = 0;
@@ -234,7 +234,8 @@ static void Task_WeatherMain(u8 taskId)
 {
     if (gWeatherPtr->currWeather != gWeatherPtr->nextWeather)
     {
-        if (!sWeatherFuncs[gWeatherPtr->currWeather].finish() && gWeatherPtr->palProcessingState != WEATHER_PAL_STATE_SCREEN_FADING_OUT)
+        if (!sWeatherFuncs[gWeatherPtr->currWeather].finish()
+            && gWeatherPtr->palProcessingState != WEATHER_PAL_STATE_SCREEN_FADING_OUT)
         {
             // Finished cleaning up previous weather. Now transition to next weather.
             sWeatherFuncs[gWeatherPtr->nextWeather].initVars();

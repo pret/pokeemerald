@@ -1,16 +1,16 @@
 #ifndef GUARD_MEVENT_801BAAC_H
 #define GUARD_MEVENT_801BAAC_H
 
-bool32 sub_801BAAC(struct MEventBuffer_32E0_Sub * r5, struct MEventBuffer_3430_Sub * r6);
-bool32 sub_801C6C8(const struct MEventBuffer_3120_Sub * a0);
-s32 sub_801BB74(void);
-s32 sub_801C758(void);
-s32 sub_801BDA4(bool32 flag);
-void sub_801BB48(void);
-s32 sub_801CA50(bool32 flag);
-void sub_801C72C(void);
-u32 sub_801CCD0(u16 input);
-void sub_801CC80(void);
-void sub_801CC38(void);
+bool32 InitWonderCardResources(struct MEventBuffer_32E0_Sub * r5, struct MEventBuffer_3430_Sub * r6);
+bool32 InitWonderNewsResources(const struct MEventBuffer_3120_Sub * a0);
+s32 FadeToWonderCardMenu(void);
+s32 FadeToWonderNewsMenu(void);
+s32 FadeOutFromWonderCard(bool32 flag);
+void DestroyWonderCardResources(void);
+s32 FadeOutFromWonderNews(bool32 flag);
+void DestroyWonderNewsResources(void);
+u32 MENews_GetInput(u16 input);
+void MENews_AddScrollIndicatorArrowPair(void);
+void MENews_RemoveScrollIndicatorArrowPair(void);
 
 #endif //GUARD_MEVENT_801BAAC_H

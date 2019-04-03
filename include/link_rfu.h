@@ -260,7 +260,7 @@ u32 sub_8010714(u16 a0, const u8 *a1);
 void sub_8011DC0(const u8 *a0, u16 a1);
 bool8 sub_800EF1C(void);
 bool32 sub_800EF58(bool32 a0);
-void sub_800E084(void);
+void DestroyWirelessStatusIndicatorSprite(void);
 void sub_801103C(void);
 void sub_8011C5C(void);
 void sub_80106D4(void);

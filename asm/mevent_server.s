@@ -39,8 +39,8 @@ mevent_srv_new_wcard: @ 801D0A0
 	.pool
 	thumb_func_end mevent_srv_new_wcard
 
-	thumb_func_start sub_801D0C4
-sub_801D0C4: @ 801D0C4
+	thumb_func_start mevent_srv_common_do_exec
+mevent_srv_common_do_exec: @ 801D0C4
 	push {r4-r6,lr}
 	adds r6, r0, 0
 	ldr r4, =gUnknown_02022C7C
@@ -69,7 +69,7 @@ _0801D0F8:
 	pop {r4-r6}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_801D0C4
+	thumb_func_end mevent_srv_common_do_exec
 
 	thumb_func_start mevent_srv_init_common
 mevent_srv_init_common: @ 801D100
@@ -493,7 +493,7 @@ _0801D422:
 	b _0801D464
 _0801D43C:
 	ldr r4, [r5, 0x1C]
-	bl sub_801B00C
+	bl sav1_get_mevent_buffer_0
 	adds r1, r0, 0
 	movs r2, 0xDE
 	lsls r2, 1

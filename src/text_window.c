@@ -113,7 +113,7 @@ void LoadUserWindowBorderGfx(u8 windowId, u16 destOffset, u8 palOffset)
     LoadWindowGfx(windowId, gSaveBlock2Ptr->optionsWindowFrameType, destOffset, palOffset);
 }
 
-void sub_8098858(u8 windowId, u16 tileNum, u8 palNum)
+void DrawTextBorderOuter(u8 windowId, u16 tileNum, u8 palNum)
 {
     u8 bgLayer = GetWindowAttribute(windowId, WINDOW_BG);
     u16 tilemapLeft = GetWindowAttribute(windowId, WINDOW_TILEMAP_LEFT);
@@ -131,7 +131,7 @@ void sub_8098858(u8 windowId, u16 tileNum, u8 palNum)
     FillBgTilemapBufferRect(bgLayer, tileNum + 8, tilemapLeft + width,  tilemapTop + height,    1,      1,      palNum);
 }
 
-void sub_80989E0(u8 windowId, u16 tileNum, u8 palNum)
+void DrawTextBorderInner(u8 windowId, u16 tileNum, u8 palNum)
 {
     u8 bgLayer = GetWindowAttribute(windowId, WINDOW_BG);
     u16 tilemapLeft = GetWindowAttribute(windowId, WINDOW_TILEMAP_LEFT);

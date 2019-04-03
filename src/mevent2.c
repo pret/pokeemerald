@@ -14,7 +14,7 @@
 static EWRAM_DATA bool32 gUnknown_02022C70 = FALSE;
 
 static void sub_801B180(void);
-static void sub_801B14C(void);
+static void s_DestroyWonderNews(void);
 static bool32 sub_801B114(const struct MEventBuffer_3120_Sub *data);
 static bool32 sub_801B2CC(const struct MEventBuffer_32E0_Sub *data);
 static void sub_801B330(void);
@@ -29,7 +29,7 @@ void sub_801AFD8(void)
     sub_811F8BC();
 }
 
-struct MEventBuffer_3120_Sub *sub_801B00C(void)
+struct MEventBuffer_3120_Sub *sav1_get_mevent_buffer_0(void)
 {
     return &gSaveBlock1Ptr->unk_322C.buffer_000.data;
 }
@@ -54,9 +54,9 @@ u16 *sub_801B058(void)
     return gSaveBlock1Ptr->unk_322C.unk_338;
 }
 
-void sub_801B06C(void)
+void DestroyWonderNews(void)
 {
-    sub_801B14C();
+    s_DestroyWonderNews();
 }
 
 bool32 sub_801B078(const struct MEventBuffer_3120_Sub *src)
@@ -64,13 +64,13 @@ bool32 sub_801B078(const struct MEventBuffer_3120_Sub *src)
     if (!sub_801B114(src))
         return FALSE;
 
-    sub_801B14C();
+    s_DestroyWonderNews();
     gSaveBlock1Ptr->unk_322C.buffer_000.data = *src;
     gSaveBlock1Ptr->unk_322C.buffer_000.crc = CalcCRC16WithTable((void *)&gSaveBlock1Ptr->unk_322C.buffer_000.data, sizeof(struct MEventBuffer_3120_Sub));
     return TRUE;
 }
 
-bool32 sub_801B0CC(void)
+bool32 ValidateReceivedWonderNews(void)
 {
     if (CalcCRC16WithTable((void *)&gSaveBlock1Ptr->unk_322C.buffer_000.data, sizeof(struct MEventBuffer_3120_Sub)) != gSaveBlock1Ptr->unk_322C.buffer_000.crc)
         return FALSE;
@@ -88,7 +88,7 @@ static bool32 sub_801B114(const struct MEventBuffer_3120_Sub *data)
     return TRUE;
 }
 
-bool32 sub_801B128(void)
+bool32 WonderNews_Test_Unk_02(void)
 {
     const struct MEventBuffer_3120_Sub *data = &gSaveBlock1Ptr->unk_322C.buffer_000.data;
     if (data->unk_02 == 0)
@@ -97,9 +97,9 @@ bool32 sub_801B128(void)
     return TRUE;
 }
 
-static void sub_801B14C(void)
+static void s_DestroyWonderNews(void)
 {
-    CpuFill32(0, sub_801B00C(), sizeof(gSaveBlock1Ptr->unk_322C.buffer_000.data));
+    CpuFill32(0, sav1_get_mevent_buffer_0(), sizeof(gSaveBlock1Ptr->unk_322C.buffer_000.data));
     gSaveBlock1Ptr->unk_322C.buffer_000.crc = 0;
 }
 
@@ -113,7 +113,7 @@ bool32 sub_801B1A4(const u8 *src)
 {
     const u8 *r5 = (const u8 *)&gSaveBlock1Ptr->unk_322C.buffer_000.data;
     u32 i;
-    if (!sub_801B0CC())
+    if (!ValidateReceivedWonderNews())
         return FALSE;
 
     for (i = 0; i < sizeof(struct MEventBuffer_3120_Sub); i++)
@@ -125,7 +125,7 @@ bool32 sub_801B1A4(const u8 *src)
     return TRUE;
 }
 
-void sub_801B1E8(void)
+void DestroyWonderCard(void)
 {
     sub_801B330();
     sub_801B368();
@@ -143,7 +143,7 @@ bool32 sub_801B21C(const struct MEventBuffer_32E0_Sub *data)
     if (!sub_801B2CC(data))
         return FALSE;
 
-    sub_801B1E8();
+    DestroyWonderCard();
     memcpy(&gSaveBlock1Ptr->unk_322C.buffer_1c0.data, data, sizeof(struct MEventBuffer_32E0_Sub));
     gSaveBlock1Ptr->unk_322C.buffer_1c0.crc = CalcCRC16WithTable((void *)&gSaveBlock1Ptr->unk_322C.buffer_1c0.data, sizeof(struct MEventBuffer_32E0_Sub));
     r2 = &gSaveBlock1Ptr->unk_322C.buffer_310.data;
@@ -152,7 +152,7 @@ bool32 sub_801B21C(const struct MEventBuffer_32E0_Sub *data)
     return TRUE;
 }
 
-bool32 sub_801B27C(void)
+bool32 ValidateReceivedWonderCard(void)
 {
     if (gSaveBlock1Ptr->unk_322C.buffer_1c0.crc != CalcCRC16WithTable((void *)&gSaveBlock1Ptr->unk_322C.buffer_1c0.data, sizeof(struct MEventBuffer_32E0_Sub)))
         return FALSE;
@@ -180,7 +180,7 @@ static bool32 sub_801B2CC(const struct MEventBuffer_32E0_Sub *data)
     return TRUE;
 }
 
-bool32 sub_801B308(void)
+bool32 WonderCard_Test_Unk_08_6(void)
 {
     const struct MEventBuffer_32E0_Sub *data = &gSaveBlock1Ptr->unk_322C.buffer_1c0.data;
     if (data->unk_08_6 == 0)
@@ -201,9 +201,9 @@ static void sub_801B368(void)
     gSaveBlock1Ptr->unk_322C.buffer_310.crc = 0;
 }
 
-u16 sub_801B39C(void)
+u16 GetWonderCardFlagID(void)
 {
-    if (sub_801B27C())
+    if (ValidateReceivedWonderCard())
         return gSaveBlock1Ptr->unk_322C.buffer_1c0.data.unk_00;
 
     return 0;
@@ -215,7 +215,7 @@ void sub_801B3C0(struct MEventBuffer_32E0_Sub *buffer)
         buffer->unk_08_6 = 0;
 }
 
-static bool32 sub_801B3D8(u16 a0)
+static bool32 IsWonderCardFlagIDInValidRange(u16 a0)
 {
     if (a0 >= 1000 && a0 < 1020)
         return TRUE;
@@ -247,10 +247,10 @@ static const u16 sMysteryGiftFlags[] =
     FLAG_UNUSED_MYSTERY_GIFT_0x14D,
 };
 
-bool32 sub_801B3F8(void)
+bool32 CheckReceivedGiftFromWonderCard(void)
 {
-    u16 value = sub_801B39C();
-    if (!sub_801B3D8(value))
+    u16 value = GetWonderCardFlagID();
+    if (!IsWonderCardFlagIDInValidRange(value))
         return FALSE;
 
     if (FlagGet(sMysteryGiftFlags[value - 1000]) == TRUE)
@@ -300,7 +300,7 @@ static bool32 sub_801B4A4(const u16 *data)
 static int sub_801B4CC(void)
 {
     struct MEventBuffer_32E0_Sub *data;
-    if (!sub_801B27C())
+    if (!ValidateReceivedWonderCard())
         return 0;
 
     data = &gSaveBlock1Ptr->unk_322C.buffer_1c0.data;
@@ -353,7 +353,7 @@ void sub_801B580(struct MEventStruct_Unk1442CC *data, bool32 a1)
         data->unk_10 = 0x0200;
     }
 
-    if (sub_801B27C())
+    if (ValidateReceivedWonderCard())
     {
         data->unk_14 = sav1_get_mevent_buffer_1()->unk_00;
         data->unk_20 = *sav1_get_mevent_buffer_2();
@@ -554,7 +554,7 @@ bool32 sub_801B94C(u16 a0)
     if (a0 == 0)
         return FALSE;
 
-    if (!sub_801B27C())
+    if (!ValidateReceivedWonderCard())
         return FALSE;
 
     if (gSaveBlock1Ptr->unk_322C.buffer_1c0.data.unk_00 != a0)

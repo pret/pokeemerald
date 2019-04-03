@@ -405,7 +405,7 @@ bool32 sub_80991F8(void)
 u8 *sub_8099244(void)
 {
     struct RamScriptData *scriptData = &gSaveBlock1Ptr->ramScript.data;
-    if (!sub_801B27C())
+    if (!ValidateReceivedWonderCard())
         return NULL;
     if (scriptData->magic != RAM_SCRIPT_MAGIC)
         return NULL;

@@ -160,7 +160,7 @@ int main(int argc, char *argv[])
 	// get filename
 	for (arg=1; arg<argc; arg++)
 	{
-		if ((ARGV[0] != '-')) { argfile=ARGV; }
+		if (ARGV[0] != '-') { argfile=ARGV; }
 		if (strncmp("--silent", &ARGV[0], 7) == 0) { silent = 1; }
 	}
 
