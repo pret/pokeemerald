@@ -96,12 +96,12 @@ static bool32 mevent_receive_func(struct mevent_srv_sub * svr)
                 svr->recvCRC = header.crc;
                 if (svr->recvSize > ME_SEND_BUF_SIZE)
                 {
-                    sub_8010198();
+                    LinkRfu_FatalError();
                     return FALSE;
                 }
                 else if (svr->recvIdent != header.ident)
                 {
-                    sub_8010198();
+                    LinkRfu_FatalError();
                     return FALSE;
                 }
                 else
@@ -133,7 +133,7 @@ static bool32 mevent_receive_func(struct mevent_srv_sub * svr)
         case 2:
             if (CalcCRC16WithTable(svr->recvBfr, svr->recvSize) != svr->recvCRC)
             {
-                sub_8010198();
+                LinkRfu_FatalError();
                 return FALSE;
             }
             else
@@ -192,7 +192,7 @@ static bool32 mevent_send_func(struct mevent_srv_sub * svr)
             if (IsLinkTaskFinished())
             {
                 if (CalcCRC16WithTable(svr->sendBfr, svr->sendSize) != svr->sendCRC)
-                    sub_8010198();
+                    LinkRfu_FatalError();
                 else
                     ++svr->seqno;
             }

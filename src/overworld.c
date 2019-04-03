@@ -2287,7 +2287,7 @@ static void SetKeyInterceptCallback(u16 (*func)(u32))
 static void CheckRfuKeepAliveTimer(void)
 {
     if (gWirelessCommType != 0 && ++sRfuKeepAliveTimer > 60)
-        sub_8010198();
+        LinkRfu_FatalError();
 }
 
 static void ResetAllTradingStates(void)
