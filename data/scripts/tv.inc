@@ -36,12 +36,12 @@ EventScript_27EE8A:: @ 827EE8A
 	end
 
 EventScript_27EE9A:: @ 827EE9A
-	msgbox LittlerootTown_BrendansHouse_1F_Text_1F7F0F, MSGBOX_DEFAULT
+//	msgbox LittlerootTown_BrendansHouse_1F_Text_1F7F0F, MSGBOX_DEFAULT since this has no clear label am leaving this reference in so we can look it up later in case you guys want to use the TV for things
 	releaseall
 	end
 
 EventScript_27EEA4:: @ 827EEA4
-	msgbox LittlerootTown_BrendansHouse_1F_Text_1F826F, MSGBOX_DEFAULT
+//	msgbox LittlerootTown_BrendansHouse_1F_Text_1F826F, MSGBOX_DEFAULT roaming Pokemon activated by the TV
 	special InitRoamer
 	clearflag FLAG_SYS_TV_LATIAS_LATIOS
 	setflag FLAG_LATIOS_OR_LATIAS_ROAMING

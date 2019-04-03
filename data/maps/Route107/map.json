@@ -1,123 +1,126 @@
 {
-  "id": "MAP_ROUTE107",
-  "name": "Route107",
-  "layout": "LAYOUT_ROUTE107",
-  "music": "MUS_NEXTROAD",
-  "region_map_section": "MAPSEC_ROUTE_107",
-  "requires_flash": false,
-  "weather": "WEATHER_SUNNY",
-  "map_type": "MAP_TYPE_ROUTE",
-  "allow_bike": true,
-  "allow_escape_rope": false,
-  "allow_running": true,
-  "show_map_name": true,
-  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
-  "connections": [
-    {
-      "direction": "left",
-      "offset": 0,
-      "map": "MAP_DEWFORD_TOWN"
-    },
-    {
-      "direction": "right",
-      "offset": 0,
-      "map": "MAP_ROUTE108"
-    }
-  ],
-  "object_events": [
-    {
-      "graphics_id": "EVENT_OBJ_GFX_SWIMMER_M",
-      "x": 41,
-      "y": 10,
-      "elevation": 1,
-      "movement_type": "MOVEMENT_TYPE_ROTATE_CLOCKWISE",
-      "movement_range_x": 1,
-      "movement_range_y": 1,
-      "trainer_type": 1,
-      "trainer_sight_or_berry_tree_id": 3,
-      "script": "Route107_EventScript_1EE595",
-      "flag": "0"
-    },
-    {
-      "graphics_id": "EVENT_OBJ_GFX_SWIMMER_M",
-      "x": 23,
-      "y": 11,
-      "elevation": 1,
-      "movement_type": "MOVEMENT_TYPE_WALK_SEQUENCE_RIGHT_DOWN_LEFT_UP",
-      "movement_range_x": 6,
-      "movement_range_y": 2,
-      "trainer_type": 1,
-      "trainer_sight_or_berry_tree_id": 2,
-      "script": "Route107_EventScript_1EE5AC",
-      "flag": "0"
-    },
-    {
-      "graphics_id": "EVENT_OBJ_GFX_SWIMMER_F",
-      "x": 16,
-      "y": 7,
-      "elevation": 1,
-      "movement_type": "MOVEMENT_TYPE_FACE_DOWN_AND_UP",
-      "movement_range_x": 0,
-      "movement_range_y": 0,
-      "trainer_type": 1,
-      "trainer_sight_or_berry_tree_id": 5,
-      "script": "Route107_EventScript_1EE60E",
-      "flag": "0"
-    },
-    {
-      "graphics_id": "EVENT_OBJ_GFX_SWIMMER_F",
-      "x": 50,
-      "y": 11,
-      "elevation": 1,
-      "movement_type": "MOVEMENT_TYPE_WALK_IN_PLACE_UP",
-      "movement_range_x": 1,
-      "movement_range_y": 1,
-      "trainer_type": 1,
-      "trainer_sight_or_berry_tree_id": 5,
-      "script": "Route107_EventScript_1EE625",
-      "flag": "0"
-    },
-    {
-      "graphics_id": "EVENT_OBJ_GFX_SWIMMER_F",
-      "x": 33,
-      "y": 4,
-      "elevation": 1,
-      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
-      "movement_range_x": 1,
-      "movement_range_y": 1,
-      "trainer_type": 1,
-      "trainer_sight_or_berry_tree_id": 1,
-      "script": "Route107_EventScript_1EE63C",
-      "flag": "0"
-    },
-    {
-      "graphics_id": "EVENT_OBJ_GFX_TUBER_M_SWIMMING",
-      "x": 32,
-      "y": 4,
-      "elevation": 1,
-      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
-      "movement_range_x": 1,
-      "movement_range_y": 1,
-      "trainer_type": 1,
-      "trainer_sight_or_berry_tree_id": 1,
-      "script": "Route107_EventScript_1EE657",
-      "flag": "0"
-    },
-    {
-      "graphics_id": "EVENT_OBJ_GFX_SWIMMER_M",
-      "x": 50,
-      "y": 5,
-      "elevation": 1,
-      "movement_type": "MOVEMENT_TYPE_WALK_IN_PLACE_DOWN",
-      "movement_range_x": 1,
-      "movement_range_y": 1,
-      "trainer_type": 1,
-      "trainer_sight_or_berry_tree_id": 5,
-      "script": "Route107_EventScript_1EE672",
-      "flag": "0"
-    }
-  ],
-  "warp_events": [],
-  "coord_events": [],
-  "bg_events": []
+    "allow_bike": true,
+    "allow_escape_rope": false,
+    "allow_running": true,
+    "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+    "bg_events": [
+    ],
+    "connections": [
+        {
+            "direction": "left",
+            "map": "MAP_DEWFORD_TOWN",
+            "offset": 0
+        },
+        {
+            "direction": "right",
+            "map": "MAP_ROUTE108",
+            "offset": 0
+        }
+    ],
+    "coord_events": [
+    ],
+    "id": "MAP_ROUTE107",
+    "layout": "LAYOUT_ROUTE107",
+    "map_type": "MAP_TYPE_ROUTE",
+    "music": "MUS_NEXTROAD",
+    "name": "Route107",
+    "object_events": [
+        {
+            "elevation": 1,
+            "flag": "0",
+            "graphics_id": "EVENT_OBJ_GFX_SWIMMER_M",
+            "movement_range_x": 1,
+            "movement_range_y": 1,
+            "movement_type": "MOVEMENT_TYPE_ROTATE_CLOCKWISE",
+            "script": "Route107_EventScript_1EE595",
+            "trainer_sight_or_berry_tree_id": "",
+            "trainer_type": "",
+            "x": 41,
+            "y": 10
+        },
+        {
+            "elevation": 1,
+            "flag": "0",
+            "graphics_id": "EVENT_OBJ_GFX_SWIMMER_M",
+            "movement_range_x": 6,
+            "movement_range_y": 2,
+            "movement_type": "MOVEMENT_TYPE_WALK_SEQUENCE_RIGHT_DOWN_LEFT_UP",
+            "script": "Route107_EventScript_1EE5AC",
+            "trainer_sight_or_berry_tree_id": "",
+            "trainer_type": "",
+            "x": 23,
+            "y": 11
+        },
+        {
+            "elevation": 1,
+            "flag": "0",
+            "graphics_id": "EVENT_OBJ_GFX_SWIMMER_F",
+            "movement_range_x": 0,
+            "movement_range_y": 0,
+            "movement_type": "MOVEMENT_TYPE_FACE_DOWN_AND_UP",
+            "script": "Route107_EventScript_1EE60E",
+            "trainer_sight_or_berry_tree_id": "",
+            "trainer_type": "",
+            "x": 16,
+            "y": 7
+        },
+        {
+            "elevation": 1,
+            "flag": "0",
+            "graphics_id": "EVENT_OBJ_GFX_SWIMMER_F",
+            "movement_range_x": 1,
+            "movement_range_y": 1,
+            "movement_type": "MOVEMENT_TYPE_WALK_IN_PLACE_UP",
+            "script": "Route107_EventScript_1EE625",
+            "trainer_sight_or_berry_tree_id": "",
+            "trainer_type": "",
+            "x": 50,
+            "y": 11
+        },
+        {
+            "elevation": 1,
+            "flag": "0",
+            "graphics_id": "EVENT_OBJ_GFX_SWIMMER_F",
+            "movement_range_x": 1,
+            "movement_range_y": 1,
+            "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+            "script": "Route107_EventScript_1EE63C",
+            "trainer_sight_or_berry_tree_id": "",
+            "trainer_type": "",
+            "x": 33,
+            "y": 4
+        },
+        {
+            "elevation": 1,
+            "flag": "0",
+            "graphics_id": "EVENT_OBJ_GFX_TUBER_M_SWIMMING",
+            "movement_range_x": 1,
+            "movement_range_y": 1,
+            "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+            "script": "Route107_EventScript_1EE657",
+            "trainer_sight_or_berry_tree_id": "",
+            "trainer_type": "",
+            "x": 32,
+            "y": 4
+        },
+        {
+            "elevation": 1,
+            "flag": "0",
+            "graphics_id": "EVENT_OBJ_GFX_SWIMMER_M",
+            "movement_range_x": 1,
+            "movement_range_y": 1,
+            "movement_type": "MOVEMENT_TYPE_WALK_IN_PLACE_DOWN",
+            "script": "Route107_EventScript_1EE672",
+            "trainer_sight_or_berry_tree_id": "",
+            "trainer_type": "",
+            "x": 50,
+            "y": 5
+        }
+    ],
+    "region_map_section": "MAPSEC_ROUTE_107",
+    "requires_flash": false,
+    "show_map_name": true,
+    "warp_events": [
+    ],
+    "weather": "WEATHER_SUNNY"
 }

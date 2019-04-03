@@ -1,420 +1,439 @@
-LittlerootTown_MaysHouse_1F_MapScripts:: @ 81F88A5
-	map_script 1, LittlerootTown_MaysHouse_1F_MapScript1_1F88B5
-	map_script 3, LittlerootTown_MaysHouse_1F_MapScript1_1F88F4
-	map_script 2, LittlerootTown_MaysHouse_1F_MapScript2_1F893A
+LittlerootTown_MaysHouse_1F_MapScripts:: 
+	map_script 3, YamakiTown_PlayerHouse_MapScript2
+	map_script 2, YamakiTown_PlayerHouse_MapScript1
 	.byte 0
 
-LittlerootTown_MaysHouse_1F_MapScript1_1F88B5: @ 81F88B5
-	compare VAR_0x4092, 6
-	call_if_lt LittlerootTown_MaysHouse_1F_EventScript_1F88CA
-	call_if_set FLAG_RECEIVED_RUNNING_SHOES, LittlerootTown_MaysHouse_1F_EventScript_1F88DD
-	end
-
-LittlerootTown_MaysHouse_1F_EventScript_1F88CA:: @ 81F88CA
-	setmetatile 5, 4, 624, 1
-	setmetatile 5, 2, 616, 1
-	return
-
-LittlerootTown_MaysHouse_1F_EventScript_1F88DD:: @ 81F88DD
-	checkplayergender
-	compare VAR_RESULT, 1
-	goto_if_eq LittlerootTown_MaysHouse_1F_EventScript_1F88EA
-	return
-
-LittlerootTown_MaysHouse_1F_EventScript_1F88EA:: @ 81F88EA
-	setmetatile 6, 7, 659, 1
-	return
-
-LittlerootTown_MaysHouse_1F_MapScript1_1F88F4: @ 81F88F4
-	compare VAR_0x4092, 3
-	call_if_eq LittlerootTown_MaysHouse_1F_EventScript_1F892E
-	compare VAR_0x4092, 5
-	call_if_eq LittlerootTown_MaysHouse_1F_EventScript_1F8916
-	compare VAR_0x4092, 6
-	call_if_eq LittlerootTown_MaysHouse_1F_EventScript_1F8922
-	end
-
-LittlerootTown_MaysHouse_1F_EventScript_1F8916:: @ 81F8916
-	setobjectxyperm 1, 2, 4
-	setobjectmovementtype 1, MOVEMENT_TYPE_FACE_UP
-	return
-
-LittlerootTown_MaysHouse_1F_EventScript_1F8922:: @ 81F8922
-	setobjectxyperm 1, 6, 5
-	setobjectmovementtype 1, MOVEMENT_TYPE_FACE_UP
-	return
-
-LittlerootTown_MaysHouse_1F_EventScript_1F892E:: @ 81F892E
-	setobjectxyperm 1, 1, 8
-	setobjectmovementtype 1, MOVEMENT_TYPE_FACE_UP
-	return
-
-LittlerootTown_MaysHouse_1F_MapScript2_1F893A: @ 81F893A
-	map_script_2 VAR_0x4092, 3, LittlerootTown_MaysHouse_1F_EventScript_1F898C
-	map_script_2 VAR_0x4092, 5, LittlerootTown_MaysHouse_1F_EventScript_1F8964
-	map_script_2 VAR_0x4092, 6, LittlerootTown_MaysHouse_1F_EventScript_1F899D
-	map_script_2 VAR_0x408C, 1, LittlerootTown_MaysHouse_1F_EventScript_1F89AE
-	map_script_2 VAR_0x4082, 3, LittlerootTown_MaysHouse_1F_EventScript_292AF2
+YamakiTown_PlayerHouse_MapScript1:
+	map_script_2 VAR_0x408C, 6, YamakiTown_PlayerHouse_EggsHatched
+	map_script_2 VAR_0x408C, 4, YamakiTown_PlayerHouse_EndOfDay
+	map_script_2 VAR_0x408C, 1, YamakiTown_PlayerHouse_MomIntro
 	.2byte 0
-
-LittlerootTown_MaysHouse_1F_EventScript_1F8964:: @ 81F8964
-	lockall
-	msgbox LittlerootTown_MaysHouse_1F_Text_1F7B67, MSGBOX_DEFAULT
+	
+YamakiTown_PlayerHouse_MapScript2:
+	compare VAR_0x408C, 6
+	call_if_eq YamakiTown_PlayerHouse_SisterStarterChase
+	compare VAR_0x408C, 4
+	call_if_eq YamakiTown_PlayerHouse_SisterPositionAtTable
+	end
+	
+YamakiTown_PlayerHouse_SisterPositionAtTable::
+	setobjectxyperm 2, 8, 6
+	setobjectmovementtype 2, MOVEMENT_TYPE_FACE_LEFT
+	return
+	
+YamakiTown_PlayerHouse_SisterStarterChase::
+	setobjectxyperm 2, 2, 5
+	setobjectmovementtype 2, MOVEMENT_TYPE_WALK_SEQUENCE_LEFT_UP_RIGHT_DOWN
+	setobjectmovementtype 1, MOVEMENT_TYPE_FACE_LEFT
+	return
+	
+YamakiTown_PlayerHouse_EggsHatched::
+	lock
+	applymovement EVENT_OBJ_ID_PLAYER, YamakiTown_PlayerHouse_Movement_WalkAroundSisAndStarter
+	waitmovement 0
+	applymovement 1, YamakiTown_PlayerHouse_Movement_ExcMark
+	waitmovement 0
+	msgbox YamakiTown_PlayerHouse_EggsHatched_Text1, MSGBOX_DEFAULT
 	closemessage
-	applymovement EVENT_OBJ_ID_PLAYER, LittlerootTown_MaysHouse_1F_Movement_1F898A
-	applymovement 1, LittlerootTown_MaysHouse_1F_Movement_1F898A
+	bufferleadmonspeciesname 0
+	playmoncry SPECIES_CHARMANDER, 0
+	msgbox YamakiTown_PlayerHouseUpstairs_PlaceholderCry, MSGBOX_DEFAULT
+	closemessage
+	waitmoncry
+	applymovement 1, YamakiTown_PlayerHouse_Movement_Heart
 	waitmovement 0
-	warp MAP_LITTLEROOT_TOWN_MAYS_HOUSE_2F, 255, 1, 1
-	waitstate
-	releaseall
+	msgbox YamakiTown_PlayerHouse_EggsHatched_Text2, MSGBOX_YESNO
+	compare VAR_RESULT, 1
+	call_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_2723DD
+	closemessage
+	setvar VAR_0x408C, 7
+	release
 	end
-
-LittlerootTown_MaysHouse_1F_Movement_1F898A: @ 81F898A
-	walk_up
-	step_end
-
-LittlerootTown_MaysHouse_1F_EventScript_1F898C:: @ 81F898C
-	lockall
-	setvar VAR_0x8004, 1
-	setvar VAR_0x8005, 1
-	goto LittlerootTown_MaysHouse_1F_EventScript_292704
+	
+YamakiTown_PlayerHouse_MomIntro::
+	lock
+	applymovement EVENT_OBJ_ID_PLAYER, YamakiTown_PlayerHouse_Movement_WalkToTable
+	waitmovement 0
+	applymovement 1, YamakiTown_PlayerHouse_Movement_FaceDown
+	waitmovement 0
+	msgbox YamakiTown_PlayerHouse_MomIntro_Text1, MSGBOX_DEFAULT
+	closemessage
+	applymovement 1, YamakiTown_PlayerHouse_Movement_FaceRight
+	waitmovement 0
+	clearflag FLAG_HIDE_LITTLEROOT_TOWN_FAT_MAN
+	showobjectat 3, MAP_LITTLEROOT_TOWN
+	setvar VAR_0x408C, 2
+	release
 	end
-
-LittlerootTown_MaysHouse_1F_EventScript_1F899D:: @ 81F899D
-	lockall
-	setvar VAR_0x8004, 1
-	setvar VAR_0x8005, 1
-	goto LittlerootTown_MaysHouse_1F_EventScript_2928DC
+	
+YamakiTown_PlayerHouse_SisterScript::
+	lock
+	compare VAR_0x408C, 2
+	goto_if_eq YamakiTown_PlayerHouse_SisterIntro
+	compare VAR_0x408C, 7
+	goto_if_eq YamakiTown_PlayerHouse_SisterAfterStarter
+	faceplayer
+	release
 	end
-
-LittlerootTown_MaysHouse_1F_EventScript_1F89AE:: @ 81F89AE
+	
+YamakiTown_PlayerHouse_SisterAfterStarter::
+	faceplayer
+	msgbox YamakiTown_PlayerHouse_SisterStarter_Text, MSGBOX_DEFAULT
+	closemessage
+	release
+	end
+	
+YamakiTown_PlayerHouse_MomScript::
+	lock
+	faceplayer
+	compare VAR_0x408C, 7
+	goto_if_eq YamakiTown_PlayerHouse_MomScript_EggsHatched
+	release
+	end
+	
+YamakiTown_PlayerHouse_MomScript_EggsHatched::
+	msgbox YamakiTown_PlayerHouse_MomScript_EggsHatched_Text, MSGBOX_DEFAULT
+	closemessage
+	release
+	end
+	
+YamakiTown_PlayerHouse_SisterStarterScript_Deino::
+	lock
+	faceplayer
+	playmoncry SPECIES_BAGON, 0
+	msgbox YamakiTown_PlayerHouse_DeinoCry, MSGBOX_DEFAULT
+	closemessage
+	waitmoncry
+	release
+	end
+	
+YamakiTown_PlayerHouse_SisterStarterScript_Dratini::
+	lock
+	faceplayer
+	playmoncry SPECIES_DRATINI, 0
+	msgbox YamakiTown_PlayerHouse_DratiniCry, MSGBOX_DEFAULT
+	closemessage
+	waitmoncry
+	release
+	end
+	
+YamakiTown_PlayerHouse_SisterStarterScript_Goomy::
+	lock
+	faceplayer
+	playmoncry SPECIES_CHARMANDER, 0
+	msgbox YamakiTown_PlayerHouse_GoomyCry, MSGBOX_DEFAULT
+	closemessage
+	waitmoncry
+	release
+	end
+	
+YamakiTown_PlayerHouse_SisterIntro::
+	lock
+	msgbox YamakiTown_PlayerHouse_SisterIntro_Text1, MSGBOX_DEFAULT
+	closemessage
+	faceplayer
+	msgbox YamakiTown_PlayerHouse_SisterIntro_Text2, MSGBOX_DEFAULT
+	closemessage
+	applymovement EVENT_OBJ_ID_PLAYER, YamakiTown_PlayerHouse_Movement_MoveAside
+	waitmovement 0
+	applymovement 2, YamakiTown_PlayerHouse_Movement_SisterWalksToTable
+	waitmovement 0
+	applymovement EVENT_OBJ_ID_PLAYER, YamakiTown_PlayerHouse_Movement_TryToLeave
+	waitmovement 0
+	applymovement 1, YamakiTown_PlayerHouse_Movement_FaceLeft
+	waitmovement 0
+	msgbox YamakiTown_PlayerHouse_SisterIntro_Text3, MSGBOX_DEFAULT
+	closemessage	
+	applymovement 2, YamakiTown_PlayerHouse_Movement_SisterRunsToMom
+	waitmovement 0
+	msgbox YamakiTown_PlayerHouse_SisterIntro_Text4, MSGBOX_DEFAULT
+	closemessage
+	applymovement 1, YamakiTown_PlayerHouse_Movement_FaceDown
+	waitmovement 0
+	msgbox YamakiTown_PlayerHouse_SisterIntro_Text5, MSGBOX_DEFAULT
+	closemessage
+	applymovement EVENT_OBJ_ID_PLAYER, YamakiTown_PlayerHouse_Movement_FaceRight
+	waitmovement 0
+	applymovement 1, YamakiTown_PlayerHouse_Movement_FaceLeft
+	waitmovement 0
+	msgbox YamakiTown_PlayerHouse_SisterIntro_Text6, MSGBOX_DEFAULT
+	closemessage
+	applymovement 1, YamakiTown_PlayerHouse_Movement_FaceRight
+	waitmovement 0
+	applymovement EVENT_OBJ_ID_PLAYER, YamakiTown_PlayerHouse_Movement_FaceDown
+	waitmovement 0
+	setvar VAR_0x408C, 3
+	release
+	end
+	
+YamakiTown_PlayerHouse_Roadblock::
+	compare VAR_0x408C, 2
+	goto_if_eq YamakiTown_PlayerHouse_RoadblockScript
+	end
+	
+YamakiTown_PlayerHouse_RoadblockScript::
 	lockall
-	playse SE_PIN
-	applymovement 4, LittlerootTown_MaysHouse_1F_Movement_272598
+	applymovement 1, YamakiTown_PlayerHouse_Movement_FaceLeft
 	waitmovement 0
-	applymovement 4, LittlerootTown_MaysHouse_1F_Movement_27259A
+	msgbox YamakiTown_PlayerHouse_Roadblock_Text, MSGBOX_DEFAULT
+	closemessage
+	applymovement EVENT_OBJ_ID_PLAYER, YamakiTown_PlayerHouse_Movement_StepUp
 	waitmovement 0
-	applymovement EVENT_OBJ_ID_PLAYER, LittlerootTown_MaysHouse_1F_Movement_2725A8
-	applymovement 4, LittlerootTown_MaysHouse_1F_Movement_1F89EC
+	applymovement 1, YamakiTown_PlayerHouse_Movement_FaceRight
 	waitmovement 0
-	special GetRivalSonDaughterString
-	msgbox LittlerootTown_MaysHouse_1F_Text_1F8BC5, MSGBOX_DEFAULT
-	setflag FLAG_MET_RIVAL_MOM
 	setvar VAR_0x408C, 2
 	releaseall
 	end
+	
+YamakiTown_PlayerHouse_EndOfDay::
+	lock
+	applymovement 1, YamakiTown_PlayerHouse_Movement_ExcMark
+	waitmovement 0
+	applymovement 1, YamakiTown_PlayerHouse_Movement_FaceLeft
+	waitmovement 0
+	msgbox YamakiTown_PlayerHouse_EndOfDay_Text1, MSGBOX_DEFAULT
+	closemessage
+	applymovement 1, YamakiTown_PlayerHouse_Movement_FaceDown
+	waitmovement 0
+	applymovement EVENT_OBJ_ID_PLAYER, YamakiTown_PlayerHouse_Movement_PlayerWalksToTable
+	waitmovement 0
+	msgbox YamakiTown_PlayerHouse_EndOfDay_Text2, MSGBOX_DEFAULT
+	closemessage
+	applymovement 2, YamakiTown_PlayerHouse_Movement_SisterWalksToTable2
+	waitmovement 0
+	applymovement EVENT_OBJ_ID_PLAYER, YamakiTown_PlayerHouse_Movement_FaceLeft
+	waitmovement 0
+	msgbox YamakiTown_PlayerHouse_EndOfDay_Text3, MSGBOX_DEFAULT
+	closemessage
+	applymovement 1, YamakiTown_PlayerHouse_Movement_FaceLeft
+	waitmovement 0
+	msgbox YamakiTown_PlayerHouse_EndOfDay_Text4, MSGBOX_DEFAULT
+	closemessage
+	msgbox YamakiTown_PlayerHouse_EndOfDay_Text5, MSGBOX_DEFAULT
+	closemessage
+	applymovement 2, YamakiTown_PlayerHouse_Movement_SisterGoesUpstairs
+	waitmovement 0
+	removeobject 2
+	setflag FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F_POKE_BALL
+	applymovement 1, YamakiTown_PlayerHouse_Movement_FaceRight
+	waitmovement 0
+	clearflag FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_2F_POKE_BALL
+	applymovement EVENT_OBJ_ID_PLAYER, YamakiTown_PlayerHouse_Movement_PlayerGoingUpstairs
+	waitmovement 0
+	warpsilent MAP_LITTLEROOT_TOWN_MAYS_HOUSE_2F, 255, 7, 4
+	setvar VAR_0x408C, 5
+	release
+	end
+	
+YamakiTown_PlayerHouse_Movement_WalkAroundSisAndStarter:
+	delay_4
+	walk_right
+	walk_right
+	walk_down
+	walk_down
+	walk_down
+	face_right
+	step_end
+	
+YamakiTown_PlayerHouse_Movement_ExcMark:
+	emote_exclamation_mark
+	step_end
 
-LittlerootTown_MaysHouse_1F_Movement_1F89EC: @ 81F89EC
+YamakiTown_PlayerHouse_Movement_Heart:
+	emote_heart
+	step_end
+
+YamakiTown_PlayerHouse_Movement_PlayerGoingUpstairs:
+	walk_left
+	walk_left
+	walk_left
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	step_end
+	
+YamakiTown_PlayerHouse_Movement_WalkToTable:
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_right
+	walk_right
+	walk_right
+	face_up
+	step_end
+	
+YamakiTown_PlayerHouse_Movement_FaceDown:
+	face_down
+	step_end
+	
+YamakiTown_PlayerHouse_Movement_StepUp:
+	walk_up
+	step_end
+	
+YamakiTown_PlayerHouse_Movement_FaceUp:
+	face_up
+	step_end
+	
+YamakiTown_PlayerHouse_Movement_MoveAside:
+	walk_up
+	face_down
+	step_end
+	
+YamakiTown_PlayerHouse_Movement_FaceRight:
+	face_right
+	step_end
+	
+YamakiTown_PlayerHouse_Movement_SisterWalksToTable:
+	walk_left
+	walk_left
+	walk_up
+	face_left
+	step_end
+	
+YamakiTown_PlayerHouse_Movement_SisterWalksToTable2:
+	walk_down
+	walk_down
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_up
+	face_right
+	step_end
+	
+YamakiTown_PlayerHouse_Movement_PlayerWalksToTable:
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_up
+	step_end
+	
+YamakiTown_PlayerHouse_Movement_FaceLeft:
+	face_left
+	step_end
+	
+YamakiTown_PlayerHouse_Movement_TryToLeave:
 	walk_down
 	walk_left
 	walk_left
 	walk_left
 	walk_left
 	walk_left
-	step_end
-
-LittlerootTown_BrendansHouse_1F_EventScript_1F89F3:: @ 81F89F3
-LittlerootTown_MaysHouse_1F_EventScript_1F89F3:: @ 81F89F3
-	lock
-	faceplayer
-	goto_if_set FLAG_DEFEATED_RIVAL_ROUTE103, LittlerootTown_BrendansHouse_1F_EventScript_1F8A33
-	goto_if_set FLAG_SYS_POKEMON_GET, LittlerootTown_BrendansHouse_1F_EventScript_1F8A29
-	compare VAR_0x408D, 3
-	goto_if_eq LittlerootTown_BrendansHouse_1F_EventScript_1F8A1F
-	special GetRivalSonDaughterString
-	msgbox LittlerootTown_BrendansHouse_1F_Text_1F8CA5, MSGBOX_DEFAULT
-	release
-	end
-
-LittlerootTown_BrendansHouse_1F_EventScript_1F8A1F:: @ 81F8A1F
-	msgbox LittlerootTown_BrendansHouse_1F_Text_1F8D37, MSGBOX_DEFAULT
-	release
-	end
-
-LittlerootTown_BrendansHouse_1F_EventScript_1F8A29:: @ 81F8A29
-	msgbox LittlerootTown_BrendansHouse_1F_Text_1F8D93, MSGBOX_DEFAULT
-	release
-	end
-
-LittlerootTown_BrendansHouse_1F_EventScript_1F8A33:: @ 81F8A33
-	msgbox LittlerootTown_BrendansHouse_1F_Text_1F8E01, MSGBOX_DEFAULT
-	release
-	end
-
-LittlerootTown_BrendansHouse_1F_EventScript_1F8A3D:: @ 81F8A3D
-LittlerootTown_MaysHouse_1F_EventScript_1F8A3D:: @ 81F8A3D
-	lock
-	faceplayer
-	special GetPlayerBigGuyGirlString
-	msgbox LittlerootTown_BrendansHouse_1F_Text_1F9262, MSGBOX_DEFAULT
-	release
-	end
-
-LittlerootTown_MaysHouse_1F_EventScript_1F8A4C:: @ 81F8A4C
-	lockall
-	setvar VAR_0x8004, 1
-	setvar VAR_0x8005, 1
-	applymovement VAR_0x8004, LittlerootTown_MaysHouse_1F_Movement_2725A8
-	waitmovement 0
-	goto LittlerootTown_MaysHouse_1F_EventScript_292765
-	end
-
-LittlerootTown_MaysHouse_1F_EventScript_1F8A67:: @ 81F8A67
-	lockall
-	setvar VAR_0x8008, 0
-	goto LittlerootTown_MaysHouse_1F_EventScript_1F8A8B
-	end
-
-LittlerootTown_MaysHouse_1F_EventScript_1F8A73:: @ 81F8A73
-	lockall
-	setvar VAR_0x8008, 1
-	goto LittlerootTown_MaysHouse_1F_EventScript_1F8A8B
-	end
-
-LittlerootTown_MaysHouse_1F_EventScript_1F8A7F:: @ 81F8A7F
-	lockall
-	setvar VAR_0x8008, 2
-	goto LittlerootTown_MaysHouse_1F_EventScript_1F8A8B
-	end
-
-LittlerootTown_MaysHouse_1F_EventScript_1F8A8B:: @ 81F8A8B
-	playse SE_KAIDAN
-	delay 10
-	addobject 7
-	delay 30
-	playse SE_PIN
-	applymovement 7, LittlerootTown_MaysHouse_1F_Movement_272598
-	waitmovement 0
-	applymovement 7, LittlerootTown_MaysHouse_1F_Movement_27259A
-	waitmovement 0
-	compare VAR_0x8008, 1
-	call_if_ne LittlerootTown_MaysHouse_1F_EventScript_1F8B2A
-	playbgm MUS_GIRL_SUP, 1
-	compare VAR_0x8008, 0
-	call_if_eq LittlerootTown_MaysHouse_1F_EventScript_1F8B35
-	compare VAR_0x8008, 1
-	call_if_eq LittlerootTown_MaysHouse_1F_EventScript_1F8B40
-	compare VAR_0x8008, 2
-	call_if_eq LittlerootTown_MaysHouse_1F_EventScript_1F8B4B
-	msgbox LittlerootTown_MaysHouse_1F_Text_1F8EC6, MSGBOX_DEFAULT
-	closemessage
-	compare VAR_0x8008, 0
-	call_if_eq LittlerootTown_MaysHouse_1F_EventScript_1F8B6A
-	compare VAR_0x8008, 1
-	call_if_eq LittlerootTown_MaysHouse_1F_EventScript_1F8B7C
-	compare VAR_0x8008, 2
-	call_if_eq LittlerootTown_MaysHouse_1F_EventScript_1F8B8E
-	playse SE_KAIDAN
-	removeobject 7
-	setflag FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_BRENDAN
-	setflag FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_2F_POKE_BALL
-	clearflag FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_RIVAL_BEDROOM
-	delay 30
-	setvar VAR_0x408D, 3
-	setvar VAR_0x4050, 1
-	savebgm MUS_DUMMY
-	fadedefaultbgm
-	releaseall
-	end
-
-LittlerootTown_MaysHouse_1F_EventScript_1F8B2A:: @ 81F8B2A
-	applymovement EVENT_OBJ_ID_PLAYER, LittlerootTown_MaysHouse_1F_Movement_2725AA
-	waitmovement 0
-	return
-
-LittlerootTown_MaysHouse_1F_EventScript_1F8B35:: @ 81F8B35
-	applymovement 7, LittlerootTown_MaysHouse_1F_Movement_1F8B56
-	waitmovement 0
-	return
-
-LittlerootTown_MaysHouse_1F_EventScript_1F8B40:: @ 81F8B40
-	applymovement 7, LittlerootTown_MaysHouse_1F_Movement_1F8B5E
-	waitmovement 0
-	return
-
-LittlerootTown_MaysHouse_1F_EventScript_1F8B4B:: @ 81F8B4B
-	applymovement 7, LittlerootTown_MaysHouse_1F_Movement_1F8B62
-	waitmovement 0
-	return
-
-LittlerootTown_MaysHouse_1F_Movement_1F8B56: @ 81F8B56
-	walk_in_place_fastest_left
 	walk_left
-	walk_in_place_fastest_up
-	walk_up
-	walk_up
-	walk_up
-	walk_up
-	step_end
-
-LittlerootTown_MaysHouse_1F_Movement_1F8B5E: @ 81F8B5E
-	walk_up
-	walk_up
-	walk_up
-	step_end
-
-LittlerootTown_MaysHouse_1F_Movement_1F8B62: @ 81F8B62
-	walk_in_place_fastest_right
-	walk_right
-	walk_in_place_fastest_up
-	walk_up
-	walk_up
-	walk_up
-	walk_up
-	step_end
-
-LittlerootTown_MaysHouse_1F_EventScript_1F8B6A:: @ 81F8B6A
-	applymovement EVENT_OBJ_ID_PLAYER, LittlerootTown_MaysHouse_1F_Movement_1F8BA0
-	applymovement 7, LittlerootTown_MaysHouse_1F_Movement_1F8BAF
-	waitmovement 0
-	return
-
-LittlerootTown_MaysHouse_1F_EventScript_1F8B7C:: @ 81F8B7C
-	applymovement EVENT_OBJ_ID_PLAYER, LittlerootTown_MaysHouse_1F_Movement_1F8BA4
-	applymovement 7, LittlerootTown_MaysHouse_1F_Movement_1F8BB5
-	waitmovement 0
-	return
-
-LittlerootTown_MaysHouse_1F_EventScript_1F8B8E:: @ 81F8B8E
-	applymovement EVENT_OBJ_ID_PLAYER, LittlerootTown_MaysHouse_1F_Movement_1F8BAB
-	applymovement 7, LittlerootTown_MaysHouse_1F_Movement_1F8BBF
-	waitmovement 0
-	return
-
-LittlerootTown_MaysHouse_1F_Movement_1F8BA0: @ 81F8BA0
-	delay_16
-	delay_8
-	walk_in_place_fastest_right
-	step_end
-
-LittlerootTown_MaysHouse_1F_Movement_1F8BA4: @ 81F8BA4
-	delay_16
-	delay_8
-	walk_in_place_fastest_right
-	delay_16
-	delay_16
-	walk_in_place_fastest_up
-	step_end
-
-LittlerootTown_MaysHouse_1F_Movement_1F8BAB: @ 81F8BAB
-	delay_16
-	delay_8
-	walk_in_place_fastest_left
-	step_end
-
-LittlerootTown_MaysHouse_1F_Movement_1F8BAF: @ 81F8BAF
-	walk_in_place_fastest_right
-	walk_right
-	walk_in_place_fastest_up
-	walk_up
-	walk_up
-	step_end
-
-LittlerootTown_MaysHouse_1F_Movement_1F8BB5: @ 81F8BB5
-	walk_in_place_fastest_right
-	walk_right
-	walk_in_place_fastest_up
-	walk_up
-	walk_up
-	walk_in_place_fastest_left
 	walk_left
-	walk_in_place_fastest_up
-	walk_up
+	face_down
 	step_end
-
-LittlerootTown_MaysHouse_1F_Movement_1F8BBF: @ 81F8BBF
-	walk_in_place_fastest_left
-	walk_left
-	walk_in_place_fastest_up
-	walk_up
-	walk_up
+	
+YamakiTown_PlayerHouse_Movement_SisterRunsToMom:
+	walk_fast_down
+	walk_fast_left
+	walk_fast_left
+	walk_fast_left
+	walk_fast_up
 	step_end
+	
+YamakiTown_PlayerHouse_Movement_SisterGoesUpstairs:
+	walk_fast_left
+	walk_fast_left
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	step_end
+	
+YamakiTown_PlayerHouse_MomIntro_Text1:
+	.string "Mom: Morning, honey.\n"
+	.string "Did {COLOR POKEMON_COLOR}Farfetch'd{COLOR NO_COLOR} come by today?\p"
+	.string "No? Oh, I'm sorry.\n"
+	.string "I'm sure they'll respond to you soon!\p"
+	.string "By the way, Fan Zheng came by,\n"
+	.string "asking for you. He says he found\l"
+	.string "something he wants to show you.\p"
+	.string "Before you go out, can you wake\n"
+	.string "up your sister for me?\p"
+	.string "She's still asleep, and I need her\n"
+	.string "help feeding the Ponyta today.$"
+	
+YamakiTown_PlayerHouse_Roadblock_Text:
+	.string "Did you wake up your sister yet?$"
+	
+YamakiTown_PlayerHouse_SisterIntro_Text1:
+	.string "Sister: Uuuugghhh...\n"
+	.string "Alright, I'm coming.$"
 
-LittlerootTown_BrendansHouse_1F_Text_1F8BC5: @ 81F8BC5
-LittlerootTown_MaysHouse_1F_Text_1F8BC5: @ 81F8BC5
-	.string "Oh, hello. And you are?\p"
-	.string "… … … … … … … … …\n"
-	.string "… … … … … … … … …\p"
-	.string "Oh, you're {PLAYER}{KUN}, our new next-door\n"
-	.string "neighbor! Hi!\p"
-	.string "We have a {STR_VAR_1} about the same\n"
-	.string "age as you.\p"
-	.string "Our {STR_VAR_1} was excited about making\n"
-	.string "a new friend.\p"
-	.string "Our {STR_VAR_1} is upstairs, I think.$"
+YamakiTown_PlayerHouse_SisterIntro_Text2:
+	.string "Good morning, {PLAYER}.$"
+	
+YamakiTown_PlayerHouse_SisterIntro_Text3:
+	.string "Mom: I'll have breakfast ready\n"
+	.string "when you're done. Be careful!$"
+	
+YamakiTown_PlayerHouse_SisterIntro_Text4:
+	.string "Sister: What, {PLAYER} is going\n"
+	.string "out? I want to go too!$"
+	
+YamakiTown_PlayerHouse_SisterIntro_Text5:
+	.string "Mom: Well, alright.$"
 
-LittlerootTown_BrendansHouse_1F_Text_1F8CA5: @ 81F8CA5
-	.string "Like child, like father.\p"
-	.string "My husband is as wild about POKéMON\n"
-	.string "as our child.\p"
-	.string "If he's not at his LAB, he's likely\n"
-	.string "scrabbling about in grassy places.$"
+YamakiTown_PlayerHouse_SisterIntro_Text6:
+	.string "{PLAYER}, do you mind taking\n"
+	.string "her with you?\p"
+	.string "I'm sure Fan Zheng wouldn't\n"
+	.string "mind having her along.$"
+	
+YamakiTown_PlayerHouse_EndOfDay_Text1:
+	.string "Mom: {PLAYER}! It's so late! I\n"
+	.string "hope it was at least worthwhile.\p"
+	.string "Sister has been complaining\n"
+	.string "all day!$"
 
-LittlerootTown_BrendansHouse_1F_Text_1F8D37: @ 81F8D37
-	.string "That {RIVAL}!\p"
-	.string "I guess our child is too busy with\n"
-	.string "POKéMON to notice that you came\l"
-	.string "to visit, {PLAYER}{KUN}.$"
+YamakiTown_PlayerHouse_EndOfDay_Text2:
+	.string "What are these?! Whatever they\n"
+	.string "are, I don't like the look of\l"
+	.string "them.\p"
+	.string "It's getting late now so you can\n"
+	.string "keep them tonight, but I want\l"
+	.string "them gone by the morning!$"
 
-LittlerootTown_BrendansHouse_1F_Text_1F8D93: @ 81F8D93
-	.string "Oh, {RIVAL} went out to ROUTE 103\n"
-	.string "just a little while ago.\p"
-	.string "Like father, like child.\n"
-	.string "{RIVAL} can't stay quietly at home.$"
-
-LittlerootTown_BrendansHouse_1F_Text_1F8E01: @ 81F8E01
-	.string "I think it's wonderful for people to\n"
-	.string "travel with POKéMON.\p"
-	.string "But you should go home every so often\n"
-	.string "to let your mother know you're okay.\p"
-	.string "She might not say it, but I'm sure she\n"
-	.string "worries about you, {PLAYER}{KUN}.$"
-
-LittlerootTown_MaysHouse_1F_Text_1F8EC6: @ 81F8EC6
-	.string "Huh?\n"
-	.string "Who… Who are you?\p"
-	.string "… … … … … … … …\n"
-	.string "… … … … … … … …\p"
-	.string "Oh, you're {PLAYER}{KUN}.\n"
-	.string "So your move was today.\p"
-	.string "Um… I'm MAY.\n"
-	.string "Glad to meet you!\p"
-	.string "I…\n"
-	.string "I have this dream of becoming friends\l"
-	.string "with POKéMON all over the world.\p"
-	.string "I… I heard about you, {PLAYER}{KUN}, from\n"
-	.string "my dad, PROF. BIRCH.\p"
-	.string "I was hoping that you would be nice,\n"
-	.string "{PLAYER}{KUN}, and that we could be friends.\p"
-	.string "Oh, this is silly, isn't it?\n"
-	.string "I… I've just met you, {PLAYER}{KUN}.\p"
-	.string "Eheheh…\p"
-	.string "Oh, no! I forgot!\p"
-	.string "I was supposed to go help Dad catch\n"
-	.string "some wild POKéMON!\p"
-	.string "{PLAYER}{KUN}, I'll catch you later!$"
-
-LittlerootTown_BrendansHouse_1F_Text_1F90B4: @ 81F90B4
-	.string "Hey!\n"
-	.string "You…\p"
-	.string "Who are you?\p"
-	.string "Oh, you're {PLAYER}, aren't you?\n"
-	.string "Moved in next door, right?\p"
-	.string "I didn't know that you're a girl.\p"
-	.string "Dad, PROF. BIRCH, said that our new\n"
-	.string "next-door neighbor is a GYM LEADER's\l"
-	.string "kid, so I assumed you'd be a guy.\p"
-	.string "My name's BRENDAN.\n"
-	.string "So, hi, neighbor!\p"
-	.string "Huh? Hey, {PLAYER}, don't you have\n"
-	.string "a POKéMON?\p"
-	.string "Do you want me to go catch you one?\p"
-	.string "Aw, darn, I forgot…\p"
-	.string "I'm supposed to go help my dad catch\n"
-	.string "some wild POKéMON.\p"
-	.string "Some other time, okay?$"
-
-LittlerootTown_BrendansHouse_1F_Text_1F9262: @ 81F9262
-	.string "Hi, neighbor!\p"
-	.string "Do you already have your\n"
-	.string "own POKéMON?$"
+YamakiTown_PlayerHouse_EndOfDay_Text3:
+	.string "Sister: Oh they look amazing!\n"
+	.string "I wonder what they will hatch\l"
+	.string "into. Can I have one?$"
+	
+YamakiTown_PlayerHouse_EndOfDay_Text4:
+	.string "Mom: N-$"
+	
+YamakiTown_PlayerHouse_EndOfDay_Text5:
+	.string "Sister: Oh, Fan Zheng said this\n"
+	.string "was for me? Thanks! You're the\l"
+	.string "best, I'm gunna go put this in\l"
+	.string "my room straight away!$"
+	
+YamakiTown_PlayerHouse_GoomyCry:
+	.string "{COLOR POKEMON_COLOR}Goomy:{COLOR NO_COLOR} Placeholder cry!$"
+	
+YamakiTown_PlayerHouse_DeinoCry:
+	.string "{COLOR POKEMON_COLOR}Deino:{COLOR NO_COLOR} Placeholder cry!$"
+	
+YamakiTown_PlayerHouse_DratiniCry:
+	.string "{COLOR POKEMON_COLOR}Dratini:{COLOR NO_COLOR} Placeholder cry!$"
+	
+YamakiTown_PlayerHouse_SisterStarter_Text:
+	.string "I LOVE POKéMON! I LOVE POKéMON!\n"
+	.string "I LOVE POKéMON! I LOVE POKéMON!$"
+	
+YamakiTown_PlayerHouse_MomScript_EggsHatched_Text:
+	.string "Why don't you go show\n"
+	.string "{COLOR POKEMON_COLOR}{STR_VAR_1}{COLOR NO_COLOR} to Fan Zheng?$"
+	
+YamakiTown_PlayerHouse_EggsHatched_Text1:
+	.string "Mom: Oh? Your Egg hatched too?$"
+	
+YamakiTown_PlayerHouse_EggsHatched_Text2:
+	.string "What a cute Pokémon!\n"
+	.string "Have you given it a name?$"
