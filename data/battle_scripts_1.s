@@ -2384,7 +2384,7 @@ BattleScript_EffectWish::
 BattleScript_EffectAssist::
 	attackcanceler
 	attackstring
-	asistattackselect BattleScript_ButItFailedPpReduce
+	assistattackselect BattleScript_ButItFailedPpReduce
 	attackanimation
 	waitanimation
 	setbyte sB_ANIM_TURN, 0x0

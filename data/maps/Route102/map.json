@@ -100,7 +100,7 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route102_EventScript_290CD8",
+      "script": "Route102_EventScript_ItemPotion",
       "flag": "FLAG_ITEM_ROUTE_102_POTION"
     },
     {
