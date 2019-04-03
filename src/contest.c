@@ -116,7 +116,7 @@ static void sub_80DC5E8(void);
 static void sub_80DC7EC(void);
 static void sub_80DCD48(void);
 static void sub_80DD04C(void);
-static void sub_80DD590(void);
+static void ApplyNextTurnOrder(void);
 static void sub_80DDB0C(void);
 static void sub_80DDBE8(void);
 static void sub_80DE224(void);
@@ -975,7 +975,7 @@ static void InitContestResources(void)
         eContestantStatus[i].nextTurnOrder = 0xFF;
         eContest.unk19218[i] = gContestantTurnOrder[i];
     }
-    sub_80DD590();
+    ApplyNextTurnOrder();
     memset(gContestResources->field_1c, 0, sizeof(*gContestResources->field_1c) * CONTESTANT_COUNT);
 }
 
@@ -3275,7 +3275,7 @@ static void sub_80DB944(void)
         }
     }
     SortContestants(TRUE);
-    sub_80DD590();
+    ApplyNextTurnOrder();
 }
 
 static void sub_80DBA18(void)
@@ -4369,59 +4369,81 @@ void MakeContestantNervous(u8 p)
     eContestantStatus[p].currMove = MOVE_NONE;
 }
 
-static void sub_80DD590(void)
+// This function calculates the new turn order for the next round. The
+// algorithm first checks for explicit turn assignments in the
+// ContestantStatus::nextTurnOrder field of each contestant. The remaining
+// turns are assigned such that the turn order will reverse.
+//
+// For example, if no pokemon have a defined nextTurnOrder, then the 4th
+// will become 1st, the 3rd will become 2nd, etc.
+//
+// Note: This function assumes that multiple pokemon cannot have the same
+// nextTurnOrder value.
+static void ApplyNextTurnOrder(void)
 {
-    u8 r12 = 0;
+    u8 nextContestant = 0;
     s32 i;
     s32 j;
-    u8 sp0[4];
-    u8 sp4[4];
+    u8 newTurnOrder[CONTESTANT_COUNT];
+    bool8 isContestantOrdered[CONTESTANT_COUNT];
 
-    for (i = 0; i < 4; i++)
+    // Copy the current turn order.
+    for (i = 0; i < CONTESTANT_COUNT; i++)
     {
-        sp0[i] = gContestantTurnOrder[i];
-        sp4[i] = 0;
+        newTurnOrder[i] = gContestantTurnOrder[i];
+        isContestantOrdered[i] = FALSE;
     }
 
-    for (i = 0; i < 4; i++)
+    // For each turn, assign a contestant to that turn.
+    for (i = 0; i < CONTESTANT_COUNT; i++)
     {
-        for (j = 0; j < 4; j++)
+        // Look for explicit turn assignments.
+        for (j = 0; j < CONTESTANT_COUNT; j++)
         {
             if (eContestantStatus[j].nextTurnOrder == i)
             {
-                sp0[j] = i;
-                sp4[j] = 1;
+                newTurnOrder[j] = i;
+                isContestantOrdered[j] = TRUE;
                 break;
             }
         }
-        if (j == 4)
+
+        if (j == CONTESTANT_COUNT)
         {
-            for (j = 0; j < 4; j++)
+            // No contestant was assigned to this turn. Look for the unassigned contestant
+            // with the highest turn order.
+            //
+            // First, look for the first unassigned contestant.
+            for (j = 0; j < CONTESTANT_COUNT; j++)
             {
-                if (sp4[j] == 0 && eContestantStatus[j].nextTurnOrder == 0xFF)
+                if (!isContestantOrdered[j] && eContestantStatus[j].nextTurnOrder == 0xFF)
                 {
-                    r12 = j;
+                    nextContestant = j;
                     j++;
                     break;
                 }
             }
-            for (; j < 4; j++)
+
+            // Then, look for a better candidate, with a higher turn order.
+            for (; j < CONTESTANT_COUNT; j++)
             {
-                if (sp4[j] == 0 && eContestantStatus[j].nextTurnOrder == 0xFF
-                 && gContestantTurnOrder[r12] > gContestantTurnOrder[j])
-                    r12 = j;
+                if (!isContestantOrdered[j] && eContestantStatus[j].nextTurnOrder == 0xFF
+                 && gContestantTurnOrder[nextContestant] > gContestantTurnOrder[j])
+                    nextContestant = j;
             }
-            sp0[r12] = i;
-            sp4[r12] = 1;
+
+            // Assign the contestant to this turn.
+            newTurnOrder[nextContestant] = i;
+            isContestantOrdered[nextContestant] = TRUE;
         }
     }
 
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < CONTESTANT_COUNT; i++)
     {
-        eContestResources8.turnOrder[i] = sp0[i];
+        eContestResources8.turnOrder[i] = newTurnOrder[i];
         eContestantStatus[i].nextTurnOrder = 0xFF;
         eContestantStatus[i].turnOrderMod = 0;
-        gContestantTurnOrder[i] = sp0[i];
+        gContestantTurnOrder[i] = newTurnOrder[i];
     }
 }
 
