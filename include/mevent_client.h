@@ -1,5 +1,5 @@
-#ifndef GUARD_MEVENT_SERVER_ISH_H
-#define GUARD_MEVENT_SERVER_ISH_H
+#ifndef GUARD_MEVENT_CLIENT_H
+#define GUARD_MEVENT_CLIENT_H
 
 #include "mevent_server_helpers.h"
 
@@ -30,4 +30,4 @@ void mevent_client_inc_flag(void);
 void * mevent_client_get_buffer(void);
 void mevent_client_set_param(u32 a0);
 
-#endif //GUARD_MEVENT_SERVER_ISH_H
+#endif //GUARD_MEVENT_CLIENT_H

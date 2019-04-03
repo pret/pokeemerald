@@ -60,7 +60,7 @@ VerdanturfTown_PokemonCenter_2F_EventScript_276B03:: @ 8276B03
 	end
 
 OldaleTown_PokemonCenter_2F_EventScript_276B19:: @ 8276B19
-	execram
+	gotoram
 
 OldaleTown_PokemonCenter_2F_EventScript_276B1A:: @ 8276B1A
 	msgbox gUnknown_08273178, MSGBOX_NPC
