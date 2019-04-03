@@ -1205,12 +1205,6 @@ SECTIONS {
         . = 0x8B00000 - gap1_start;
     } =0
 
-    anim_mon_front_pic_data :
-    ALIGN(4)
-    {
-        src/anim_mon_front_pics.o(.rodata);
-    } =0
-
     gap2 :
     {
         gap2_start = ABSOLUTE(.);

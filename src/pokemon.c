@@ -1390,7 +1390,7 @@ const s8 gNatureStatTable[][5] =
 
 // SPECIES_NONE are ignored in the following two tables, so decrement before accessing these arrays to get the right result
 
-static const u8 sMonFrontAnimIdsTable[] =
+static const u8 sMonFrontAnimIdsTable[NUM_SPECIES - 1] =
 {
     [SPECIES_BULBASAUR - 1] = 0x06,
     [SPECIES_IVYSAUR - 1] = 0x17,
