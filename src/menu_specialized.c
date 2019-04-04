@@ -1653,10 +1653,10 @@ void DrawLevelUpWindowPg1(u16 arg0, u16 *statStoreLocation1, u16 *statStoreLocat
     s32 var;
     u8 padding;
     s32 var3;
-	u8 color[11];
+    u8 color[11];
     
     FillWindowPixelBuffer(arg0, PIXEL_FILL(arg3));
-	
+    
     array[0] = statStoreLocation2[STAT_HP] - statStoreLocation1[STAT_HP];
     array[1] = statStoreLocation2[STAT_ATK] - statStoreLocation1[STAT_ATK];
     array[2] = statStoreLocation2[STAT_DEF] - statStoreLocation1[STAT_DEF];
@@ -1665,28 +1665,28 @@ void DrawLevelUpWindowPg1(u16 arg0, u16 *statStoreLocation1, u16 *statStoreLocat
     array[5] = statStoreLocation2[STAT_SPEED] - statStoreLocation1[STAT_SPEED];
    
     color[0] = arg3;
-	color[1] = arg4;
-	color[2] = arg5;
+    color[1] = arg4;
+    color[2] = arg5;
     
     for(i = 0; i <= 5; i++)
     {
         AddTextPrinterParameterized3(arg0, 
-									 1, 
-									 0, 
-									 15 * i, 
-									 color, 
-									 TEXT_SPEED_FF, 
-									 gUnknown_08625B54[i]);
+                                     1, 
+                                     0, 
+                                     15 * i, 
+                                     color, 
+                                     TEXT_SPEED_FF, 
+                                     gUnknown_08625B54[i]);
         statVal = &array[i];
         text = array[i] >= 0 ? (u8 *) gText_UnkCtrlF904 : (u8 *) gText_Dash;//Plus sign for stat gain, dash for none maybe  
         StringCopy(&text2, text);
         AddTextPrinterParameterized3(arg0, 
-									 1, 
-									 56, 
-									 15 * i, 
-									 color, 
-									 TEXT_SPEED_FF, 
-									 &text2);
+                                     1, 
+                                     56, 
+                                     15 * i, 
+                                     color, 
+                                     TEXT_SPEED_FF, 
+                                     &text2);
         var3 = *statVal;
         var = var3;
         
@@ -1709,12 +1709,12 @@ void DrawLevelUpWindowPg1(u16 arg0, u16 *statStoreLocation1, u16 *statStoreLocat
         
         ConvertIntToDecimalStringN(&text2, var3, STR_CONV_MODE_LEFT_ALIGN, 2);
         AddTextPrinterParameterized3(arg0, 
-									 1, 
-									 padding + 56, 
-									 15 * i, 
-									 color, 
-									 TEXT_SPEED_FF, 
-									 &text2);  
+                                     1, 
+                                     padding + 56, 
+                                     15 * i, 
+                                     color, 
+                                     TEXT_SPEED_FF, 
+                                     &text2);  
     }
 }
 #else
@@ -1889,21 +1889,21 @@ void DrawLevelUpWindowPg2(u16 arg0, u16 *statStoreLocation1, u8 arg2, u8 arg3, u
     s32 numDigits;
     u8 text;
     s16 array[6];
-	u8 color[11];
-	
+    u8 color[11];
+    
     FillWindowPixelBuffer(arg0, PIXEL_FILL(arg2));
-	
+    
     array[0] = statStoreLocation1[STAT_HP];
     array[1] = statStoreLocation1[STAT_ATK];
     array[2] = statStoreLocation1[STAT_DEF];
     array[3] = statStoreLocation1[STAT_SPATK];
     array[4] = statStoreLocation1[STAT_SPDEF];
     array[5] = statStoreLocation1[STAT_SPEED];
-	
-	color[0] = arg2;
-	color[1] = arg3;
-	color[2] = arg4;
-	
+    
+    color[0] = arg2;
+    color[1] = arg3;
+    color[2] = arg4;
+    
     for(i = 0; i <= 5; i++)
     {
         numDigits = 3; //3 digit stat
@@ -1917,19 +1917,19 @@ void DrawLevelUpWindowPg2(u16 arg0, u16 *statStoreLocation1, u8 arg2, u8 arg3, u
         }   
         ConvertIntToDecimalStringN(&text, array[i], STR_CONV_MODE_LEFT_ALIGN, numDigits);
         AddTextPrinterParameterized3(arg0, 
-									 1, 
-									 0, 
-									 15 * i, 
-									 color, 
-									 TEXT_SPEED_FF, 
-									 gUnknown_08625B54[i]);
+                                     1, 
+                                     0, 
+                                     15 * i, 
+                                     color, 
+                                     TEXT_SPEED_FF, 
+                                     gUnknown_08625B54[i]);
         AddTextPrinterParameterized3(arg0, 
-									 1, 
-									 6 * (4 - numDigits) + 56, 
-									 15 * i, 
-									 color, 
-									 TEXT_SPEED_FF, 
-									 &text);
+                                     1, 
+                                     6 * (4 - numDigits) + 56, 
+                                     15 * i, 
+                                     color, 
+                                     TEXT_SPEED_FF, 
+                                     &text);
     }
 }
 #else
@@ -2071,32 +2071,10 @@ _081D3808:\n\
 
 void GetMonLevelUpWindowStats(struct Pokemon *mon, u16 *statStoreLocation)
 {
-	statStoreLocation[STAT_HP] = GetMonData(mon, MON_DATA_MAX_HP);
+    statStoreLocation[STAT_HP] = GetMonData(mon, MON_DATA_MAX_HP);
     statStoreLocation[STAT_ATK] = GetMonData(mon, MON_DATA_ATK);
     statStoreLocation[STAT_DEF] = GetMonData(mon, MON_DATA_DEF);
     statStoreLocation[STAT_SPEED] = GetMonData(mon, MON_DATA_SPEED);
     statStoreLocation[STAT_SPATK] = GetMonData(mon, MON_DATA_SPATK);
     statStoreLocation[STAT_SPDEF] = GetMonData(mon, MON_DATA_SPDEF);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
