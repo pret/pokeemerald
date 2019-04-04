@@ -21,7 +21,7 @@
 #include "trig.h"
 #include "field_effect.h"
 #include "pokemon_icon.h"
-#include "data2.h"
+#include "data.h"
 #include "strings.h"
 #include "menu.h"
 #include "text_window.h"

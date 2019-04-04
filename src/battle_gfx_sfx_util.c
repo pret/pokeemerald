@@ -19,7 +19,7 @@
 #include "m4a.h"
 #include "constants/species.h"
 #include "decompress.h"
-#include "data2.h"
+#include "data.h"
 #include "palette.h"
 #include "contest.h"
 #include "constants/songs.h"
@@ -32,16 +32,8 @@ extern struct MusicPlayerInfo gMPlayInfo_BGM;
 extern const u8 gUnknown_0831C604[];
 extern const u8 * const gBattleAnims_General[];
 extern const u8 * const gBattleAnims_Special[];
-extern const struct CompressedSpriteSheet gMonFrontPicTable[];
-extern const struct CompressedSpriteSheet gMonBackPicTable[];
-extern const struct CompressedSpriteSheet gTrainerFrontPicTable[];
-extern const struct CompressedSpriteSheet gTrainerBackPicTable[];
-extern const struct CompressedSpritePalette gTrainerFrontPicPaletteTable[];
-extern const struct CompressedSpritePalette gTrainerBackPicPaletteTable[];
-extern const union AnimCmd* const * const gMonAnimationsSpriteAnimsPtrTable[];
 extern const struct CompressedSpriteSheet gSpriteSheet_EnemyShadow;
 extern const struct SpriteTemplate gSpriteTemplate_EnemyShadow;
-extern const u8 gEnemyMonElevation[];
 
 // this file's functions
 static u8 sub_805D4A8(u16 move);
@@ -932,7 +924,7 @@ void HandleSpeciesGfxDataChange(u8 battlerAtk, u8 battlerDef, bool8 notTransform
 
         if (targetSpecies == SPECIES_CASTFORM)
         {
-            gSprites[gBattlerSpriteIds[battlerAtk]].anims = gMonAnimationsSpriteAnimsPtrTable[targetSpecies];
+            gSprites[gBattlerSpriteIds[battlerAtk]].anims = gMonFrontAnimsPtrTable[targetSpecies];
             LZDecompressWram(lzPaletteData, gBattleStruct->castformPalette[0]);
             LoadPalette(gBattleStruct->castformPalette[0] + gBattleMonForms[battlerDef] * 16, paletteOffset, 32);
         }

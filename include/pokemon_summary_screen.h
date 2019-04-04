@@ -4,7 +4,9 @@
 #include "main.h"
 
 extern u8 gLastViewedMonIndex;
+
 extern const u8 *const gMoveDescriptionPointers[];
+extern const u8 *const gNatureNamePointers[];
 
 void ShowPokemonSummaryScreen(u8 mode, void *mons, u8 monIndex, u8 maxMonIndex, void (*callback)(void));
 void sub_81C4F98(u8, void(*)(void));

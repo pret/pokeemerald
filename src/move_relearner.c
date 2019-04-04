@@ -3,7 +3,7 @@
 #include "battle.h"
 #include "bg.h"
 #include "contest_effect.h"
-#include "data2.h"
+#include "data.h"
 #include "event_data.h"
 #include "field_screen_effect.h"
 #include "gpu_regs.h"

@@ -10,7 +10,7 @@
 #include "battle_pyramid_bag.h"
 #include "bg.h"
 #include "contest.h"
-#include "data2.h"
+#include "data.h"
 #include "decompress.h"
 #include "easy_chat.h"
 #include "event_data.h"

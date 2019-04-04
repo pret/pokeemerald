@@ -7,7 +7,7 @@
 #include "berry_powder.h"
 #include "bike.h"
 #include "coins.h"
-#include "data2.h"
+#include "data.h"
 #include "event_data.h"
 #include "event_object_movement.h"
 #include "fieldmap.h"

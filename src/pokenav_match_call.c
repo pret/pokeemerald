@@ -1,12 +1,11 @@
 #include "global.h"
 #include "battle_setup.h"
+#include "data.h"
 #include "event_data.h"
 #include "string_util.h"
 #include "battle.h"
 #include "gym_leader_rematch.h"
 #include "match_call.h"
-
-extern const u8 gTrainerClassNames[][13];
 
 // Static type declarations
 
