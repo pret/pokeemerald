@@ -18,12 +18,13 @@
 #if defined (__APPLE__) || defined (__CYGWIN__) || defined (_MSC_VER)
 #define _(x) x
 #define __(x) x
-#define INCBIN_U8 {0}
-#define INCBIN_U16 {0}
-#define INCBIN_U32 {0}
-#define INCBIN_S8 {0}
-#define INCBIN_S16 {0}
-#define INCBIN_S32 {0}
+// CLion is an idiot
+#define INCBIN_U8(x) {0}
+#define INCBIN_U16(x) {0}
+#define INCBIN_U32(x) {0}
+#define INCBIN_S8(x) {0}
+#define INCBIN_S16(x) {0}
+#define INCBIN_S32(x) {0}
 #endif // IDE support
 
 #define ARRAY_COUNT(array) (size_t)(sizeof(array) / sizeof((array)[0]))
