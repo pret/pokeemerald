@@ -24,6 +24,7 @@ gUnknown_02022C90: @ 2022C90
 	.include "src/berry_powder.o"
 
 	.align 2
+	@ dodrio_berry_picking
 gUnknown_02022C98: @ 2022C98
 	.space 0x4
 
@@ -45,6 +46,7 @@ gUnknown_02022CF4: @ 2022CF4
 gUnknown_02022CF8: @ 2022CF8
 	.space 0x4
 
+    @ pokemon_jump
 gUnknown_02022CFC: @ 2022CFC
 	.space 0x4
 
@@ -172,6 +174,7 @@ gUnknown_02022D00: @ 2022D00
 	.include "src/unk_pokedex_area_screen_helper.o"
 	.include "src/battle_pyramid_bag.o"
 
+    @ pokenav
 gUnknown_0203CF3C: @ 203CF3C
 	.space 0x4
 
