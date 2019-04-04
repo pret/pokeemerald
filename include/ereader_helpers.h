@@ -3,9 +3,10 @@
 
 struct Unk81D38FC
 {
-    u8 unk0[12];
-    u8 unkC[0x148];
-    u8 unk154[0x11C];
+    u8 unk0;
+    u8 filler_1[3];
+    u8 unk4[0x148];
+    u8 unk14C[0x124];
     int checksum;
 };
 
@@ -38,7 +39,7 @@ struct Unk81D3998
 };
 
 bool8 EReader_IsReceivedDataValid(struct EReaderTrainerHillSet *buffer);
-bool32 TryWriteTrainerHill(struct Unk81D38FC *arg0);
+bool32 TryWriteTrainerHill(struct EReaderTrainerHillSet *arg0);
 bool32 ReadTrainerHillAndValidate(void);
 int sub_81D3D70(u8, u32, u32*, u32*);
 void sub_81D3F9C(void);
