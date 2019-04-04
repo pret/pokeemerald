@@ -214,18 +214,9 @@ static bool32 sub_801FD88(u8 *state);
 static void sub_8020ABC(struct Sprite *sprite);
 static void sub_8020AF4(struct Sprite *sprite);
 
-extern struct UnionRoomChat *gUnknown_02022C84;
-extern struct UnionRoomChat2 *gUnknown_02022C88;
-extern struct UnionRoomChat3 *gUnknown_02022C8C;
-extern const u16 gUnknown_082F2C20[];
-extern const u16 gUnknown_082F2C40[];
-extern const struct SpritePalette gUnknown_082F315C;
-extern const struct SpriteTemplate gUnknown_082F319C;
-extern const u16 gUnknown_082F2DF0[];
-extern const struct SpriteTemplate gUnknown_082F31BC;
-extern const struct SpriteTemplate gUnknown_082F31D4;
-extern const struct SpriteTemplate gUnknown_082F322C;
-extern const struct SpriteTemplate gUnknown_082F3244;
+EWRAM_DATA struct UnionRoomChat *gUnknown_02022C84 = NULL;
+EWRAM_DATA struct UnionRoomChat2 *gUnknown_02022C88 = NULL;
+EWRAM_DATA struct UnionRoomChat3 *gUnknown_02022C8C = NULL;
 
 void (*const gUnknown_082F2A7C[])(void) =
     {
