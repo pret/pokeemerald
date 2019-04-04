@@ -4178,7 +4178,7 @@ _0802CA32:
 	beq _0802CAF4
 	ldrh r2, [r7]
 	lsls r0, r2, 3
-	ldr r1, =gMonStillFrontPicTable
+	ldr r1, =gMonFrontPicTable
 	adds r0, r1
 	ldr r3, [r7, 0x8]
 	mov r1, r8

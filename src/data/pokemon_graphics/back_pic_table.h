@@ -808,5 +808,5 @@ const struct CompressedSpriteSheet gMonBackPicTable[] =
 	[SPECIES_STAKATAKA] = {gMonBackPic_Stakataka, 0x800, SPECIES_STAKATAKA},
 	[SPECIES_BLACEPHALON] = {gMonBackPic_Blacephalon, 0x800, SPECIES_BLACEPHALON},
 	[SPECIES_ZERAORA] = {gMonBackPic_Zeraora, 0x800, SPECIES_ZERAORA},
-    [SPECIES_EGG] = {gMonStillFrontPic_Egg, 0x800, SPECIES_EGG},
+    [SPECIES_EGG] = {gMonFrontPic_Egg, 0x800, SPECIES_EGG},
 };

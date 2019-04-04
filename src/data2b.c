@@ -256,7 +256,6 @@ const union AffineAnimCmd * const gUnknown_082FF6C0[] =
 
 #include "data/pokemon_graphics/unknown_anims.h"
 #include "data/pokemon_graphics/front_pic_coordinates.h"
-#include "data/pokemon_graphics/still_front_pic_table.h"
 #include "data/pokemon_graphics/back_pic_coordinates.h"
 
 #include "data/pokemon_graphics/back_pic_table.h"
