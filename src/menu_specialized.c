@@ -1643,47 +1643,51 @@ static void sub_81D35E8(struct Sprite *sprite)
 
 
 #ifdef NONMATCHING
-void DrawLevelUpWindowPg1(u8 arg0, u16 *statStoreLocation1, u16 *statStoreLocation2, u8 arg3, u8 arg4, u8 arg5)
+void DrawLevelUpWindowPg1(u16 arg0, u16 *statStoreLocation1, u16 *statStoreLocation2, u8 arg3, u8 arg4, u8 arg5)
 {
-    s32 i;
+    u16 i;
     s16 array[6];
     u8 *text;
-    u8 *text2;
-    s16 *ptr;
-    u8 something[14];
+    u8 text2;
+    s16 *statVal;
     s32 var;
-    u8 var2;
+    u8 padding;
     s32 var3;
+	u8 color[11];
     
+    FillWindowPixelBuffer(arg0, PIXEL_FILL(arg3));
+	
+    array[0] = statStoreLocation2[STAT_HP] - statStoreLocation1[STAT_HP];
+    array[1] = statStoreLocation2[STAT_ATK] - statStoreLocation1[STAT_ATK];
+    array[2] = statStoreLocation2[STAT_DEF] - statStoreLocation1[STAT_DEF];
+    array[3] = statStoreLocation2[STAT_SPATK] - statStoreLocation1[STAT_SPATK];
+    array[4] = statStoreLocation2[STAT_SPDEF] - statStoreLocation1[STAT_SPDEF];
+    array[5] = statStoreLocation2[STAT_SPEED] - statStoreLocation1[STAT_SPEED];
+   
+    color[0] = arg3;
+	color[1] = arg4;
+	color[2] = arg5;
     
-    
-    
-
-    FillWindowPixelBuffer(arg0, arg3 * 16 | arg3);
-    
-    
-    array[0] = statStoreLocation2[0] - statStoreLocation1[0];
-    array[1] = statStoreLocation2[1] - statStoreLocation1[1];
-    array[2] = statStoreLocation2[2] - statStoreLocation1[2];
-    array[3] = statStoreLocation2[4] - statStoreLocation1[4];
-    array[4] = statStoreLocation2[5] - statStoreLocation1[5];
-    array[5] = statStoreLocation2[3] - statStoreLocation1[3];
-    
-    
-    for(i = 0; i < 6; i++)
+    for(i = 0; i <= 5; i++)
     {
-        AddTextPrinterParameterized3(arg0, 1, 0, 15 * i, &arg3, TEXT_SPEED_FF, gUnknown_08625B54[i]);
-        ptr = &array[i];
-        text = (u8 *) gText_Dash;
-        
-        if(*ptr >= 0)
-        {
-            text = (u8 *) gText_UnkCtrlF904;
-        }
-        
-        StringCopy(text2, text);
-        AddTextPrinterParameterized3(arg0, 1, 56, 15 * i, &arg3, TEXT_SPEED_FF, text2);
-        var3 = *ptr;
+        AddTextPrinterParameterized3(arg0, 
+									 1, 
+									 0, 
+									 15 * i, 
+									 color, 
+									 TEXT_SPEED_FF, 
+									 gUnknown_08625B54[i]);
+        statVal = &array[i];
+        text = array[i] >= 0 ? (u8 *) gText_UnkCtrlF904 : (u8 *) gText_Dash;//Plus sign for stat gain, dash for none maybe  
+        StringCopy(&text2, text);
+        AddTextPrinterParameterized3(arg0, 
+									 1, 
+									 56, 
+									 15 * i, 
+									 color, 
+									 TEXT_SPEED_FF, 
+									 &text2);
+        var3 = *statVal;
         var = var3;
         
         if(var3 < 0)
@@ -1691,11 +1695,11 @@ void DrawLevelUpWindowPg1(u8 arg0, u16 *statStoreLocation1, u16 *statStoreLocati
             var = -var3;
         }
         
-        var2 = 12;
+        padding = 12; //amount of padding
         
         if(var <= 9)
         {
-            var2 = 18;
+            padding = 18; //more padding for single digit numbers
         }
         
         if(var3 < 0)
@@ -1703,8 +1707,14 @@ void DrawLevelUpWindowPg1(u8 arg0, u16 *statStoreLocation1, u16 *statStoreLocati
             var3 = -var3;
         }
         
-        ConvertIntToDecimalStringN(text2, var3, 0, 2);
-        AddTextPrinterParameterized3(arg0, 1, var2 + 56, 15 * i, &arg3, TEXT_SPEED_FF, text2);  
+        ConvertIntToDecimalStringN(&text2, var3, STR_CONV_MODE_LEFT_ALIGN, 2);
+        AddTextPrinterParameterized3(arg0, 
+									 1, 
+									 padding + 56, 
+									 15 * i, 
+									 color, 
+									 TEXT_SPEED_FF, 
+									 &text2);  
     }
 }
 #else
@@ -1872,43 +1882,59 @@ _081D373A:\n\
 #endif // NONMATCHING
 
 #ifdef NONMATCHING
-void DrawLevelUpWindowPg2(u16 arg0, u16* statStoreLocation1, u8 arg2, u8 arg3, u8 arg4)
+void DrawLevelUpWindowPg2(u16 arg0, u16 *statStoreLocation1, u8 arg2, u8 arg3, u8 arg4)
 {
     s32 i;
-    s32 var;
-    s32 var2;
+    s16 *var;
+    s32 numDigits;
     u8 text;
     s16 array[6];
-    u8 *something;
-    u8 some;
-    FillWindowPixelBuffer(arg0, arg2 * 16 | arg2);
-    array[0] = statStoreLocation1[0];
-    array[1] = statStoreLocation1[1];
-    array[2] = statStoreLocation1[2];
-    array[3] = statStoreLocation1[4];
-    array[4] = statStoreLocation1[5];
-    array[5] = statStoreLocation1[3];
+	u8 color[11];
+	
+    FillWindowPixelBuffer(arg0, PIXEL_FILL(arg2));
+	
+    array[0] = statStoreLocation1[STAT_HP];
+    array[1] = statStoreLocation1[STAT_ATK];
+    array[2] = statStoreLocation1[STAT_DEF];
+    array[3] = statStoreLocation1[STAT_SPATK];
+    array[4] = statStoreLocation1[STAT_SPDEF];
+    array[5] = statStoreLocation1[STAT_SPEED];
+	
+	color[0] = arg2;
+	color[1] = arg3;
+	color[2] = arg4;
+	
     for(i = 0; i <= 5; i++)
     {
-        var = array[i];
-        var2 = 3;
-        if(var <= 99)
+        numDigits = 3; //3 digit stat
+        if(array[i] <= 99)
         {
-            var2 = 1;
-            if(var > 9)
+            numDigits = 1; //1 digit stat
+            if(array[i] > 9)
             {
-                var2 = 2;
+                numDigits = 2; //2 digit stat
             }
         }   
-        something = ConvertIntToDecimalStringN(&text, array[i], 0, var2);
-        some = (((4 - *something) * 2) + *something) * 2;
-        AddTextPrinterParameterized3(arg0, 1, 0, 15 * i, &arg2, TEXT_SPEED_FF, gUnknown_08625B54[i]);
-        AddTextPrinterParameterized3(arg0, 1, some + 56, 15 * i, &arg2, TEXT_SPEED_FF, &text);
+        ConvertIntToDecimalStringN(&text, array[i], STR_CONV_MODE_LEFT_ALIGN, numDigits);
+        AddTextPrinterParameterized3(arg0, 
+									 1, 
+									 0, 
+									 15 * i, 
+									 color, 
+									 TEXT_SPEED_FF, 
+									 gUnknown_08625B54[i]);
+        AddTextPrinterParameterized3(arg0, 
+									 1, 
+									 6 * (4 - numDigits) + 56, 
+									 15 * i, 
+									 color, 
+									 TEXT_SPEED_FF, 
+									 &text);
     }
 }
 #else
 NAKED
-void DrawLevelUpWindowPg2(u16 arg0, u16* statStoreLocation1, u8 arg2, u8 arg3, u8 arg4)
+void DrawLevelUpWindowPg2(u16 arg0, u16 *statStoreLocation1, u8 arg2, u8 arg3, u8 arg4)
 {
     asm(".syntax unified\n\
     push {r4-r7,lr}\n\
@@ -2043,14 +2069,14 @@ _081D3808:\n\
 }
 #endif // NONMATCHING
 
-void GetMonLevelUpWindowStats(struct Pokemon* mon, u16* statStoreLocation)
+void GetMonLevelUpWindowStats(struct Pokemon *mon, u16 *statStoreLocation)
 {
-    statStoreLocation[0] = GetMonData(mon, MON_DATA_MAX_HP);
-    statStoreLocation[1] = GetMonData(mon, MON_DATA_ATK);
-    statStoreLocation[2] = GetMonData(mon, MON_DATA_DEF);
-    statStoreLocation[3] = GetMonData(mon, MON_DATA_SPEED);
-    statStoreLocation[4] = GetMonData(mon, MON_DATA_SPATK);
-    statStoreLocation[5] = GetMonData(mon, MON_DATA_SPDEF);
+	statStoreLocation[STAT_HP] = GetMonData(mon, MON_DATA_MAX_HP);
+    statStoreLocation[STAT_ATK] = GetMonData(mon, MON_DATA_ATK);
+    statStoreLocation[STAT_DEF] = GetMonData(mon, MON_DATA_DEF);
+    statStoreLocation[STAT_SPEED] = GetMonData(mon, MON_DATA_SPEED);
+    statStoreLocation[STAT_SPATK] = GetMonData(mon, MON_DATA_SPATK);
+    statStoreLocation[STAT_SPDEF] = GetMonData(mon, MON_DATA_SPDEF);
 }
 
 
