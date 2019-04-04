@@ -28,7 +28,6 @@
 #include "gba/io_reg.h"
 
 extern const struct CompressedSpriteSheet gMonFrontPicTable[];
-extern const u8 *gUnknown_08625B54[];
 
 EWRAM_DATA static u8 sUnknown_0203CF48[3] = {0};
 EWRAM_DATA static struct ListMenuItem *sUnknown_0203CF4C = NULL;
@@ -39,7 +38,7 @@ static void sub_81D2634(struct UnknownStruct_81D1ED4 *a0);
 static void MoveRelearnerCursorCallback(s32 itemIndex, bool8 onInit, struct ListMenu *list);
 static void nullsub_79(void);
 static void sub_81D3408(struct Sprite *sprite);
-/*static*/ void sub_81D3564(struct Sprite *sprite);
+static void sub_81D3564(struct Sprite *sprite);
 static void sub_81D35E8(struct Sprite *sprite);
 
 static const struct WindowTemplate sUnknown_086253E8[] =
@@ -1474,9 +1473,82 @@ static void sub_81D32F4(struct Sprite *sprite)
     }
 }
 
-// Todo: Move these variables to C.
-extern const s16 gUnknown_08625B2C[][2];
-extern const struct SpriteTemplate gUnknown_08625B14;
+static const struct OamData sOamData_8625AD0 =
+{
+    .y = 0,
+    .affineMode = 0,
+    .objMode = 0,
+    .mosaic = 0,
+    .bpp = 0,
+    .shape = 0,
+    .x = 0,
+    .matrixNum = 0,
+    .size = 1,
+    .tileNum = 0,
+    .priority = 0,
+    .paletteNum = 0,
+    .affineParam = 0
+};
+
+static const union AnimCmd sSpriteAnim_8625AD8[] =
+{
+    ANIMCMD_FRAME(0, 5),
+    ANIMCMD_FRAME(4, 5),
+    ANIMCMD_FRAME(8, 5),
+    ANIMCMD_FRAME(12, 5),
+    ANIMCMD_FRAME(16, 5),
+    ANIMCMD_FRAME(20, 5),
+    ANIMCMD_FRAME(24, 5),
+    ANIMCMD_END
+};
+
+static const union AnimCmd *const sSpriteAnimTable_8625AF8[] =
+{
+    sSpriteAnim_8625AD8,
+    sSpriteAnim_8625AD8 + 2,
+};
+
+// unused
+static const union AnimCmd *const sSpriteAnimTable_8625B00[] =
+{
+    sSpriteAnim_8625AD8 + 4,
+    sSpriteAnim_8625AD8 + 6,
+};
+
+// unused
+static const union AnimCmd *const sSpriteAnimTable_8625B08[] =
+{
+    sSpriteAnim_8625AD8 + 8,
+    sSpriteAnim_8625AD8 + 10,
+};
+
+// unused
+static const union AnimCmd *const *const sUnknown_08625B10 = sSpriteAnimTable_8625B08;
+
+const struct SpriteTemplate gUnknown_08625B14 =
+{
+    .tileTag = 104,
+    .paletteTag = 104,
+    .oam = &sOamData_8625AD0,
+    .anims = sSpriteAnimTable_8625AF8,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_81D3564,
+};
+
+static const s16 gUnknown_08625B2C[][2] =
+{
+    {0,   -35},
+    {20,  -28},
+    {33,  -10},
+    {33,   10},
+    {20,   28},
+    {0,    35},
+    {-20,  28},
+    {-33,  10},
+    {-33, -10},
+    {-20, -28},
+};
 
 void sub_81D3314(struct Sprite *sprite)
 {
@@ -1595,7 +1667,7 @@ void sub_81D354C(struct Sprite **sprites)
     FreeSpritePaletteByTag(104);
 }
 
-/*static*/ void sub_81D3564(struct Sprite *sprite)
+static void sub_81D3564(struct Sprite *sprite)
 {
     if (sprite->data[1] != 0)
     {
@@ -1641,440 +1713,127 @@ static void sub_81D35E8(struct Sprite *sprite)
     }
 }
 
-
-#ifdef NONMATCHING
-void DrawLevelUpWindowPg1(u16 arg0, u16 *statStoreLocation1, u16 *statStoreLocation2, u8 arg3, u8 arg4, u8 arg5)
+static const u8 *const sLvlUpStatStrings[] =
 {
-    u16 i;
-    s16 array[6];
-    u8 *text;
-    u8 text2;
-    s16 *statVal;
-    s32 var;
-    u8 padding;
-    s32 var3;
-    u8 color[11];
-    
-    FillWindowPixelBuffer(arg0, PIXEL_FILL(arg3));
-    
-    array[0] = statStoreLocation2[STAT_HP] - statStoreLocation1[STAT_HP];
-    array[1] = statStoreLocation2[STAT_ATK] - statStoreLocation1[STAT_ATK];
-    array[2] = statStoreLocation2[STAT_DEF] - statStoreLocation1[STAT_DEF];
-    array[3] = statStoreLocation2[STAT_SPATK] - statStoreLocation1[STAT_SPATK];
-    array[4] = statStoreLocation2[STAT_SPDEF] - statStoreLocation1[STAT_SPDEF];
-    array[5] = statStoreLocation2[STAT_SPEED] - statStoreLocation1[STAT_SPEED];
-   
-    color[0] = arg3;
-    color[1] = arg4;
-    color[2] = arg5;
-    
-    for(i = 0; i <= 5; i++)
+    gUnknown_085EEA46,
+    gUnknown_085EEA4E,
+    gUnknown_085EEA55,
+    gUnknown_085EEA63,
+    gUnknown_085EEA6B,
+    gUnknown_085EEA5D
+};
+
+void DrawLevelUpWindowPg1(u16 windowId, u16 *statsBefore, u16 *statsAfter, u8 bgClr, u8 fgClr, u8 shadowClr)
+{
+    u16 i, x;
+    s16 statsDiff[NUM_STATS];
+    u8 text[12];
+    u8 color[3];
+
+    FillWindowPixelBuffer(windowId, PIXEL_FILL(bgClr));
+
+    statsDiff[0] = statsAfter[STAT_HP]    - statsBefore[STAT_HP];
+    statsDiff[1] = statsAfter[STAT_ATK]   - statsBefore[STAT_ATK];
+    statsDiff[2] = statsAfter[STAT_DEF]   - statsBefore[STAT_DEF];
+    statsDiff[3] = statsAfter[STAT_SPATK] - statsBefore[STAT_SPATK];
+    statsDiff[4] = statsAfter[STAT_SPDEF] - statsBefore[STAT_SPDEF];
+    statsDiff[5] = statsAfter[STAT_SPEED] - statsBefore[STAT_SPEED];
+
+    color[0] = bgClr;
+    color[1] = fgClr;
+    color[2] = shadowClr;
+
+    for (i = 0; i < NUM_STATS; i++)
     {
-        AddTextPrinterParameterized3(arg0, 
-                                     1, 
-                                     0, 
-                                     15 * i, 
-                                     color, 
-                                     TEXT_SPEED_FF, 
-                                     gUnknown_08625B54[i]);
-        statVal = &array[i];
-        text = array[i] >= 0 ? (u8 *) gText_UnkCtrlF904 : (u8 *) gText_Dash;//Plus sign for stat gain, dash for none maybe  
-        StringCopy(&text2, text);
-        AddTextPrinterParameterized3(arg0, 
-                                     1, 
-                                     56, 
-                                     15 * i, 
-                                     color, 
-                                     TEXT_SPEED_FF, 
-                                     &text2);
-        var3 = *statVal;
-        var = var3;
-        
-        if(var3 < 0)
-        {
-            var = -var3;
-        }
-        
-        padding = 12; //amount of padding
-        
-        if(var <= 9)
-        {
-            padding = 18; //more padding for single digit numbers
-        }
-        
-        if(var3 < 0)
-        {
-            var3 = -var3;
-        }
-        
-        ConvertIntToDecimalStringN(&text2, var3, STR_CONV_MODE_LEFT_ALIGN, 2);
-        AddTextPrinterParameterized3(arg0, 
-                                     1, 
-                                     padding + 56, 
-                                     15 * i, 
-                                     color, 
-                                     TEXT_SPEED_FF, 
-                                     &text2);  
+
+        AddTextPrinterParameterized3(windowId,
+                                     1,
+                                     0,
+                                     15 * i,
+                                     color,
+                                     -1,
+                                     sLvlUpStatStrings[i]);
+
+        StringCopy(text, (statsDiff[i] >= 0) ? gText_UnkCtrlF904 : gText_Dash);
+        AddTextPrinterParameterized3(windowId,
+                                     1,
+                                     56,
+                                     15 * i,
+                                     color,
+                                     -1,
+                                     text);
+        if (abs(statsDiff[i]) <= 9)
+            x = 18;
+        else
+            x = 12;
+
+        ConvertIntToDecimalStringN(text, abs(statsDiff[i]), STR_CONV_MODE_LEFT_ALIGN, 2);
+        AddTextPrinterParameterized3(windowId,
+                                     1,
+                                     56 + x,
+                                     15 * i,
+                                     color,
+                                     -1,
+                                     text);
     }
 }
-#else
-NAKED
-void DrawLevelUpWindowPg1(u16 arg0, u16 *statStoreLocation1, u16 *statStoreLocation2, u8 arg3, u8 arg4, u8 arg5)
-{
-    asm(".syntax unified\n\
-push {r4-r7,lr}\n\
-    mov r7, r10\n\
-    mov r6, r9\n\
-    mov r5, r8\n\
-    push {r5-r7}\n\
-    sub sp, 0x2C\n\
-    mov r8, r0\n\
-    adds r6, r1, 0\n\
-    adds r5, r2, 0\n\
-    adds r4, r3, 0\n\
-    ldr r3, [sp, 0x4C]\n\
-    ldr r0, [sp, 0x50]\n\
-    mov r9, r0\n\
-    lsls r4, 24\n\
-    lsrs r4, 24\n\
-    lsls r3, 24\n\
-    lsrs r3, 24\n\
-    mov r1, r9\n\
-    lsls r1, 24\n\
-    lsrs r1, 24\n\
-    mov r9, r1\n\
-    mov r0, r8\n\
-    lsls r0, 24\n\
-    lsrs r0, 24\n\
-    mov r8, r0\n\
-    lsls r1, r4, 4\n\
-    orrs r1, r4\n\
-    lsls r1, 24\n\
-    lsrs r1, 24\n\
-    str r3, [sp, 0x28]\n\
-    bl FillWindowPixelBuffer\n\
-    add r2, sp, 0xC\n\
-    ldrh r0, [r5]\n\
-    ldrh r1, [r6]\n\
-    subs r0, r1\n\
-    strh r0, [r2]\n\
-    ldrh r0, [r5, 0x2]\n\
-    ldrh r1, [r6, 0x2]\n\
-    subs r0, r1\n\
-    strh r0, [r2, 0x2]\n\
-    ldrh r0, [r5, 0x4]\n\
-    ldrh r1, [r6, 0x4]\n\
-    subs r0, r1\n\
-    strh r0, [r2, 0x4]\n\
-    ldrh r0, [r5, 0x8]\n\
-    ldrh r1, [r6, 0x8]\n\
-    subs r0, r1\n\
-    strh r0, [r2, 0x6]\n\
-    ldrh r0, [r5, 0xA]\n\
-    ldrh r1, [r6, 0xA]\n\
-    subs r0, r1\n\
-    strh r0, [r2, 0x8]\n\
-    ldrh r0, [r5, 0x6]\n\
-    ldrh r1, [r6, 0x6]\n\
-    subs r0, r1\n\
-    strh r0, [r2, 0xA]\n\
-    add r0, sp, 0x24\n\
-    strb r4, [r0]\n\
-    ldr r3, [sp, 0x28]\n\
-    strb r3, [r0, 0x1]\n\
-    mov r1, r9\n\
-    strb r1, [r0, 0x2]\n\
-    movs r7, 0\n\
-    mov r10, r0\n\
-    movs r0, 0x1\n\
-    negs r0, r0\n\
-    mov r9, r0\n\
-    add r6, sp, 0x18\n\
-_081D36CA:\n\
-    lsls r0, r7, 4\n\
-    subs r0, r7\n\
-    lsls r0, 24\n\
-    lsrs r5, r0, 24\n\
-    mov r1, r10\n\
-    str r1, [sp]\n\
-    mov r0, r9\n\
-    str r0, [sp, 0x4]\n\
-    ldr r1, =gUnknown_08625B54\n\
-    lsls r0, r7, 2\n\
-    adds r0, r1\n\
-    ldr r0, [r0]\n\
-    str r0, [sp, 0x8]\n\
-    mov r0, r8\n\
-    movs r1, 0x1\n\
-    movs r2, 0\n\
-    adds r3, r5, 0\n\
-    bl AddTextPrinterParameterized3\n\
-    lsls r0, r7, 1\n\
-    mov r4, sp\n\
-    adds r4, r0\n\
-    adds r4, 0xC\n\
-    movs r1, 0\n\
-    ldrsh r0, [r4, r1]\n\
-    ldr r1, =gText_Dash\n\
-    cmp r0, 0\n\
-    blt _081D3704\n\
-    ldr r1, =gText_UnkCtrlF904\n\
-_081D3704:\n\
-    adds r0, r6, 0\n\
-    bl StringCopy\n\
-    mov r0, r10\n\
-    str r0, [sp]\n\
-    mov r1, r9\n\
-    str r1, [sp, 0x4]\n\
-    str r6, [sp, 0x8]\n\
-    mov r0, r8\n\
-    movs r1, 0x1\n\
-    movs r2, 0x38\n\
-    adds r3, r5, 0\n\
-    bl AddTextPrinterParameterized3\n\
-    movs r0, 0\n\
-    ldrsh r1, [r4, r0]\n\
-    adds r0, r1, 0\n\
-    cmp r1, 0\n\
-    bge _081D372C\n\
-    negs r0, r1\n\
-_081D372C:\n\
-    movs r4, 0xC\n\
-    cmp r0, 0x9\n\
-    bgt _081D3734\n\
-    movs r4, 0x12\n\
-_081D3734:\n\
-    cmp r1, 0\n\
-    bge _081D373A\n\
-    negs r1, r1\n\
-_081D373A:\n\
-    adds r0, r6, 0\n\
-    movs r2, 0\n\
-    movs r3, 0x2\n\
-    bl ConvertIntToDecimalStringN\n\
-    adds r2, r4, 0\n\
-    adds r2, 0x38\n\
-    mov r1, r10\n\
-    str r1, [sp]\n\
-    mov r0, r9\n\
-    str r0, [sp, 0x4]\n\
-    str r6, [sp, 0x8]\n\
-    mov r0, r8\n\
-    movs r1, 0x1\n\
-    adds r3, r5, 0\n\
-    bl AddTextPrinterParameterized3\n\
-    adds r0, r7, 0x1\n\
-    lsls r0, 16\n\
-    lsrs r7, r0, 16\n\
-    cmp r7, 0x5\n\
-    bls _081D36CA\n\
-    add sp, 0x2C\n\
-    pop {r3-r5}\n\
-    mov r8, r3\n\
-    mov r9, r4\n\
-    mov r10, r5\n\
-    pop {r4-r7}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .pool\n\
-    .syntax divided");
-}
-#endif // NONMATCHING
 
-#ifdef NONMATCHING
-void DrawLevelUpWindowPg2(u16 arg0, u16 *statStoreLocation1, u8 arg2, u8 arg3, u8 arg4)
+void DrawLevelUpWindowPg2(u16 windowId, u16 *currStats, u8 bgClr, u8 fgClr, u8 shadowClr)
 {
-    s32 i;
-    s16 *var;
-    s32 numDigits;
-    u8 text;
-    s16 array[6];
-    u8 color[11];
-    
-    FillWindowPixelBuffer(arg0, PIXEL_FILL(arg2));
-    
-    array[0] = statStoreLocation1[STAT_HP];
-    array[1] = statStoreLocation1[STAT_ATK];
-    array[2] = statStoreLocation1[STAT_DEF];
-    array[3] = statStoreLocation1[STAT_SPATK];
-    array[4] = statStoreLocation1[STAT_SPDEF];
-    array[5] = statStoreLocation1[STAT_SPEED];
-    
-    color[0] = arg2;
-    color[1] = arg3;
-    color[2] = arg4;
-    
-    for(i = 0; i <= 5; i++)
+    u16 i, numDigits, x;
+    s16 stats[NUM_STATS];
+    u8 text[12];
+    u8 color[3];
+
+    FillWindowPixelBuffer(windowId, PIXEL_FILL(bgClr));
+
+    stats[0] = currStats[STAT_HP];
+    stats[1] = currStats[STAT_ATK];
+    stats[2] = currStats[STAT_DEF];
+    stats[3] = currStats[STAT_SPATK];
+    stats[4] = currStats[STAT_SPDEF];
+    stats[5] = currStats[STAT_SPEED];
+
+    color[0] = bgClr;
+    color[1] = fgClr;
+    color[2] = shadowClr;
+
+    for (i = 0; i < NUM_STATS; i++)
     {
-        numDigits = 3; //3 digit stat
-        if(array[i] <= 99)
-        {
-            numDigits = 1; //1 digit stat
-            if(array[i] > 9)
-            {
-                numDigits = 2; //2 digit stat
-            }
-        }   
-        ConvertIntToDecimalStringN(&text, array[i], STR_CONV_MODE_LEFT_ALIGN, numDigits);
-        AddTextPrinterParameterized3(arg0, 
-                                     1, 
-                                     0, 
-                                     15 * i, 
-                                     color, 
-                                     TEXT_SPEED_FF, 
-                                     gUnknown_08625B54[i]);
-        AddTextPrinterParameterized3(arg0, 
-                                     1, 
-                                     6 * (4 - numDigits) + 56, 
-                                     15 * i, 
-                                     color, 
-                                     TEXT_SPEED_FF, 
-                                     &text);
+        if (stats[i] > 99)
+            numDigits = 3;
+        else if (stats[i] > 9)
+            numDigits = 2;
+        else
+            numDigits = 1;
+
+        ConvertIntToDecimalStringN(text, stats[i], STR_CONV_MODE_LEFT_ALIGN, numDigits);
+        x = 6 * (4 - numDigits);
+
+        AddTextPrinterParameterized3(windowId,
+                                     1,
+                                     0,
+                                     15 * i,
+                                     color,
+                                     -1,
+                                     sLvlUpStatStrings[i]);
+
+        AddTextPrinterParameterized3(windowId,
+                                     1,
+                                     56 + x,
+                                     15 * i,
+                                     color,
+                                     -1,
+                                     text);
     }
 }
-#else
-NAKED
-void DrawLevelUpWindowPg2(u16 arg0, u16 *statStoreLocation1, u8 arg2, u8 arg3, u8 arg4)
-{
-    asm(".syntax unified\n\
-    push {r4-r7,lr}\n\
-    mov r7, r10\n\
-    mov r6, r9\n\
-    mov r5, r8\n\
-    push {r5-r7}\n\
-    sub sp, 0x2C\n\
-    mov r8, r0\n\
-    adds r5, r1, 0\n\
-    adds r4, r2, 0\n\
-    adds r6, r3, 0\n\
-    ldr r2, [sp, 0x4C]\n\
-    lsls r4, 24\n\
-    lsrs r4, 24\n\
-    lsls r6, 24\n\
-    lsrs r6, 24\n\
-    lsls r2, 24\n\
-    lsrs r2, 24\n\
-    lsls r0, 24\n\
-    lsrs r0, 24\n\
-    mov r8, r0\n\
-    lsls r1, r4, 4\n\
-    orrs r1, r4\n\
-    lsls r1, 24\n\
-    lsrs r1, 24\n\
-    str r2, [sp, 0x28]\n\
-    bl FillWindowPixelBuffer\n\
-    add r1, sp, 0xC\n\
-    ldrh r0, [r5]\n\
-    strh r0, [r1]\n\
-    ldrh r0, [r5, 0x2]\n\
-    strh r0, [r1, 0x2]\n\
-    ldrh r0, [r5, 0x4]\n\
-    strh r0, [r1, 0x4]\n\
-    ldrh r0, [r5, 0x8]\n\
-    strh r0, [r1, 0x6]\n\
-    ldrh r0, [r5, 0xA]\n\
-    strh r0, [r1, 0x8]\n\
-    ldrh r0, [r5, 0x6]\n\
-    strh r0, [r1, 0xA]\n\
-    add r0, sp, 0x24\n\
-    strb r4, [r0]\n\
-    strb r6, [r0, 0x1]\n\
-    ldr r2, [sp, 0x28]\n\
-    strb r2, [r0, 0x2]\n\
-    movs r6, 0\n\
-    add r1, sp, 0x18\n\
-    mov r9, r1\n\
-    mov r7, r8\n\
-    mov r10, r0\n\
-    movs r2, 0x1\n\
-    negs r2, r2\n\
-    mov r8, r2\n\
-_081D37EE:\n\
-    lsls r1, r6, 1\n\
-    mov r0, sp\n\
-    adds r0, r1\n\
-    adds r0, 0xC\n\
-    movs r2, 0\n\
-    ldrsh r0, [r0, r2]\n\
-    movs r4, 0x3\n\
-    cmp r0, 0x63\n\
-    bgt _081D3808\n\
-    movs r4, 0x1\n\
-    cmp r0, 0x9\n\
-    ble _081D3808\n\
-    movs r4, 0x2\n\
-_081D3808:\n\
-    mov r0, sp\n\
-    adds r0, r1\n\
-    adds r0, 0xC\n\
-    movs r2, 0\n\
-    ldrsh r1, [r0, r2]\n\
-    mov r0, r9\n\
-    movs r2, 0\n\
-    adds r3, r4, 0\n\
-    bl ConvertIntToDecimalStringN\n\
-    movs r0, 0x4\n\
-    subs r0, r4\n\
-    lsls r4, r0, 1\n\
-    adds r4, r0\n\
-    lsls r4, 17\n\
-    lsrs r4, 16\n\
-    lsls r5, r6, 4\n\
-    subs r5, r6\n\
-    lsls r5, 24\n\
-    lsrs r5, 24\n\
-    mov r0, r10\n\
-    str r0, [sp]\n\
-    mov r1, r8\n\
-    str r1, [sp, 0x4]\n\
-    ldr r1, =gUnknown_08625B54\n\
-    lsls r0, r6, 2\n\
-    adds r0, r1\n\
-    ldr r0, [r0]\n\
-    str r0, [sp, 0x8]\n\
-    adds r0, r7, 0\n\
-    movs r1, 0x1\n\
-    movs r2, 0\n\
-    adds r3, r5, 0\n\
-    bl AddTextPrinterParameterized3\n\
-    adds r4, 0x38\n\
-    lsls r4, 24\n\
-    lsrs r4, 24\n\
-    mov r2, r10\n\
-    str r2, [sp]\n\
-    mov r0, r8\n\
-    str r0, [sp, 0x4]\n\
-    mov r1, r9\n\
-    str r1, [sp, 0x8]\n\
-    adds r0, r7, 0\n\
-    movs r1, 0x1\n\
-    adds r2, r4, 0\n\
-    adds r3, r5, 0\n\
-    bl AddTextPrinterParameterized3\n\
-    adds r0, r6, 0x1\n\
-    lsls r0, 16\n\
-    lsrs r6, r0, 16\n\
-    cmp r6, 0x5\n\
-    bls _081D37EE\n\
-    add sp, 0x2C\n\
-    pop {r3-r5}\n\
-    mov r8, r3\n\
-    mov r9, r4\n\
-    mov r10, r5\n\
-    pop {r4-r7}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .pool\n\
-    .syntax divided");
-}
-#endif // NONMATCHING
 
-void GetMonLevelUpWindowStats(struct Pokemon *mon, u16 *statStoreLocation)
+void GetMonLevelUpWindowStats(struct Pokemon *mon, u16 *currStats)
 {
-    statStoreLocation[STAT_HP] = GetMonData(mon, MON_DATA_MAX_HP);
-    statStoreLocation[STAT_ATK] = GetMonData(mon, MON_DATA_ATK);
-    statStoreLocation[STAT_DEF] = GetMonData(mon, MON_DATA_DEF);
-    statStoreLocation[STAT_SPEED] = GetMonData(mon, MON_DATA_SPEED);
-    statStoreLocation[STAT_SPATK] = GetMonData(mon, MON_DATA_SPATK);
-    statStoreLocation[STAT_SPDEF] = GetMonData(mon, MON_DATA_SPDEF);
+    currStats[STAT_HP]    = GetMonData(mon, MON_DATA_MAX_HP);
+    currStats[STAT_ATK]   = GetMonData(mon, MON_DATA_ATK);
+    currStats[STAT_DEF]   = GetMonData(mon, MON_DATA_DEF);
+    currStats[STAT_SPEED] = GetMonData(mon, MON_DATA_SPEED);
+    currStats[STAT_SPATK] = GetMonData(mon, MON_DATA_SPATK);
+    currStats[STAT_SPDEF] = GetMonData(mon, MON_DATA_SPDEF);
 }

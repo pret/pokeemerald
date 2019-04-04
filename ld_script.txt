@@ -622,7 +622,6 @@ SECTIONS {
         data/pokenav.o(.rodata);
         src/pokenav_match_call.o(.rodata);
         src/menu_specialized.o(.rodata);
-        data/menu_specialized.o(.rodata);
         data/ereader_helpers.o(.rodata);
         src/faraway_island.o(.rodata);
         data/ereader_screen.o(.rodata);

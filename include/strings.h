@@ -471,6 +471,12 @@ extern const u8 gText_EggCantBattle[];
 extern const u8 gText_PkmnAlreadySelected[];
 extern const u8 gText_PkmnAlreadyInBattle[];
 extern const u8 gText_PkmnCantSwitchOut[];
+extern const u8 gUnknown_085EEA46[];
+extern const u8 gUnknown_085EEA4E[];
+extern const u8 gUnknown_085EEA55[];
+extern const u8 gUnknown_085EEA63[];
+extern const u8 gUnknown_085EEA6B[];
+extern const u8 gUnknown_085EEA5D[];
 extern const u8 gText_Dash[];
 extern const u8 gText_UnkCtrlF904[];
 
