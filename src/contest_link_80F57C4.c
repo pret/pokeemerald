@@ -356,7 +356,7 @@ static void sub_80F5CE4(u8 taskId)
         switch (gTasks[taskId].data[0])
         {
         case 0:
-            sub_80DBED4();
+            SaveLinkContestResults();
             if (gContestFinalStandings[gContestPlayerMonIndex] == 0)
             {
                 IncrementGameStat(GAME_STAT_WON_LINK_CONTEST);

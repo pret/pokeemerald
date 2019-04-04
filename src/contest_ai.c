@@ -1402,7 +1402,7 @@ static void ContestAICmd_unk_63(void)
 {
     u8 var = sub_81563B0(gAIScriptPtr[1]);
     u8 var2 = gAIScriptPtr[2];
-    u16 move = eContest.unk19220[var2][var];
+    u16 move = eContest.moveHistory[var2][var];
 
     eContestAI.scriptResult = gContestMoves[move].effect;
     gAIScriptPtr += 3;
@@ -1452,7 +1452,7 @@ static void ContestAICmd_unk_68(void)
 {
     u8 var = sub_81563B0(gAIScriptPtr[1]);
     u8 var2 = gAIScriptPtr[2];
-    s8 result = eContest.unk19248[var2][var];
+    s8 result = eContest.excitementHistory[var2][var];
 
     eContestAI.scriptResult = result;
     gAIScriptPtr += 3;
@@ -1502,7 +1502,7 @@ static void ContestAICmd_unk_6D(void)
 {
     u8 var = sub_81563B0(gAIScriptPtr[1]);
     u8 var2 = gAIScriptPtr[2];
-    u16 move = eContest.unk19220[var2][var];
+    u16 move = eContest.moveHistory[var2][var];
 
     eContestAI.scriptResult = gContestEffects[gContestMoves[move].effect].effectType;
     gAIScriptPtr += 3;

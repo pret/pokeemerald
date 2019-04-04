@@ -5,6 +5,7 @@
 
 #define CONTESTANT_COUNT 4
 #define APPLAUSE_METER_SIZE 5
+#define CONTEST_TURN_COUNT 5
 
 #define CONTEST_DEBUG_MODE_OFF 0
 // Prints the totalPoints value for each contestant.
@@ -298,9 +299,9 @@ struct Contest
     /*0x13*/ s8 applauseLevel;
     /*0x19218*/ u8 prevTurnOrder[CONTESTANT_COUNT];
     /*0x1921C*/ u32 unk1921C;   // saved RNG value?
-    u16 unk19220[5][4];  // move history?
-    u8 unk19248[5][4];  // excitement history
-    u8 applauseMeterSpriteId;    // sprite ID
+    u16 moveHistory[CONTEST_TURN_COUNT][CONTESTANT_COUNT];
+    u8 excitementHistory[CONTEST_TURN_COUNT][CONTESTANT_COUNT];
+    u8 applauseMeterSpriteId;
     /*0x1925D*/ u8 contestSetupState;
     /*0x1925E*/ u8 unk1925E;
 };
@@ -483,7 +484,7 @@ u8 sub_80DAE0C(struct Pokemon *pkmn);
 void sub_80DB09C(u8 contestCategory);
 bool8 IsSpeciesNotUnown(u16 species);
 bool8 Contest_IsMonsTurnDisabled(u8 a);
-void sub_80DBED4(void);
+void SaveLinkContestResults(void);
 void SortContestants(bool8 a);
 void SetContestantEffectStringID(u8 a, u8 b);
 void SetContestantEffectStringID2(u8 a, u8 b);
