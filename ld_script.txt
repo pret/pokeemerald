@@ -420,7 +420,6 @@ SECTIONS {
         src/mevent_client.o(.rodata);
         src/mevent_scripts.o(.rodata);
         src/union_room_chat.o(.rodata);
-        data/union_room_chat.o(.rodata);
         data/berry_crush.o(.rodata);
         data/berry_powder.o(.rodata);
         data/dodrio_berry_picking.o(.rodata);

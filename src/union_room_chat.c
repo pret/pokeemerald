@@ -211,6 +211,8 @@ static bool32 sub_801FC9C(u8 *state);
 static bool32 sub_801FCEC(u8 *state);
 static bool32 sub_801FD30(u8 *state);
 static bool32 sub_801FD88(u8 *state);
+static void sub_8020ABC(struct Sprite *sprite);
+static void sub_8020AF4(struct Sprite *sprite);
 
 extern struct UnionRoomChat *gUnknown_02022C84;
 extern struct UnionRoomChat2 *gUnknown_02022C88;
@@ -417,6 +419,138 @@ const struct CompressedSpriteSheet gUnknown_082F3134[] = {
     {gUnknown_082F3094, 0x0040, 0x0002},
     {gUnknown_082F30E0, 0x0080, 0x0003},
     {gUnknown_08DD4CF8, 0x0400, 0x0004}
+};
+
+const struct SpritePalette gUnknown_082F315C = {
+    gUnknown_082F2DF0, 0x0000
+};
+
+const struct OamData gUnknown_082F3164 = {
+    .shape = ST_OAM_H_RECTANGLE,
+    .size = 3,
+    .priority = 1
+};
+
+const union AnimCmd gUnknown_082F316C[] = {
+    ANIMCMD_FRAME(0x00, 30),
+    ANIMCMD_END
+};
+
+const union AnimCmd gUnknown_082F3174[] = {
+    ANIMCMD_FRAME(0x20, 30),
+    ANIMCMD_END
+};
+
+const union AnimCmd gUnknown_082F317C[] = {
+    ANIMCMD_FRAME(0x40, 30),
+    ANIMCMD_END
+};
+
+const union AnimCmd gUnknown_082F3184[] = {
+    ANIMCMD_FRAME(0x60, 30),
+    ANIMCMD_END
+};
+
+const union AnimCmd *const gUnknown_082F318C[] = {
+    gUnknown_082F316C,
+    gUnknown_082F3174,
+    gUnknown_082F317C,
+    gUnknown_082F3184
+};
+
+const struct SpriteTemplate gUnknown_082F319C = {
+    .tileTag = 0x0000,
+    .paletteTag = 0x0000,
+    .oam = &gUnknown_082F3164,
+    .anims = gUnknown_082F318C,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCallbackDummy
+};
+
+const struct OamData gUnknown_082F31B4 = {
+    .shape = ST_OAM_V_RECTANGLE,
+    .size = 0,
+    .priority = 2
+};
+
+const struct SpriteTemplate gUnknown_082F31BC = {
+    .tileTag = 0x0002,
+    .paletteTag = 0x0000,
+    .oam = &gUnknown_082F31B4,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_8020ABC
+};
+
+const struct SpriteTemplate gUnknown_082F31D4 = {
+    .tileTag = 0x0001,
+    .paletteTag = 0x0000,
+    .oam = &gUnknown_082F31B4,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_8020AF4
+};
+
+const struct OamData gUnknown_082F31EC = {
+    .shape = ST_OAM_SQUARE,
+    .size = 1,
+    .priority = 2
+};
+
+const struct OamData gUnknown_082F31F4 = {
+    .shape = ST_OAM_H_RECTANGLE,
+    .size = 2,
+    .priority = 2
+};
+
+const union AnimCmd gUnknown_082F31FC[] = {
+    ANIMCMD_FRAME(0x00, 2),
+    ANIMCMD_END
+};
+
+const union AnimCmd gUnknown_082F3204[] = {
+    ANIMCMD_FRAME(0x08, 2),
+    ANIMCMD_END
+};
+
+const union AnimCmd gUnknown_082F320C[] = {
+    ANIMCMD_FRAME(0x10, 2),
+    ANIMCMD_END
+};
+
+const union AnimCmd gUnknown_082F3214[] = {
+    ANIMCMD_FRAME(0x18, 2),
+    ANIMCMD_END
+};
+
+const union AnimCmd *const gUnknown_082F321C[] = {
+    gUnknown_082F31FC,
+    gUnknown_082F3204,
+    gUnknown_082F320C,
+    gUnknown_082F3214
+};
+
+const struct SpriteTemplate gUnknown_082F322C = {
+    .tileTag = 0x0003,
+    .paletteTag = 0x0000,
+    .oam = &gUnknown_082F31EC,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCallbackDummy
+};
+
+const struct SpriteTemplate gUnknown_082F3244 = {
+    .tileTag = 0x0004,
+    .paletteTag = 0x0000,
+    .oam = &gUnknown_082F31F4,
+    .anims = gUnknown_082F321C,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCallbackDummy
 };
 
 void sub_801DD98(void)
@@ -2754,7 +2888,7 @@ static void sub_8020A68(void)
     gUnknown_02022C8C->unk4 = &gSprites[spriteId];
 }
 
-void sub_8020ABC(struct Sprite *sprite)
+static void sub_8020ABC(struct Sprite *sprite)
 {
     int var0 = sub_801F198();
     if (var0 == 15)
@@ -2768,7 +2902,7 @@ void sub_8020ABC(struct Sprite *sprite)
     }
 }
 
-void sub_8020AF4(struct Sprite *sprite)
+static void sub_8020AF4(struct Sprite *sprite)
 {
     if (++sprite->data[0] > 4)
     {
