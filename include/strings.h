@@ -471,6 +471,8 @@ extern const u8 gText_EggCantBattle[];
 extern const u8 gText_PkmnAlreadySelected[];
 extern const u8 gText_PkmnAlreadyInBattle[];
 extern const u8 gText_PkmnCantSwitchOut[];
+extern const u8 gText_Dash[];
+extern const u8 gText_UnkCtrlF904[];
 
 //pokedex text
 extern const u8 gText_CryOf[];
