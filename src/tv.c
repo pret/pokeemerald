@@ -37,7 +37,7 @@
 #include "decoration.h"
 #include "secret_base.h"
 #include "tv.h"
-#include "data2.h"
+#include "data.h"
 #include "constants/layouts.h"
 #include "constants/metatile_behaviors.h"
 

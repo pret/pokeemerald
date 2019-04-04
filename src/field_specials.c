@@ -3,7 +3,7 @@
 #include "battle.h"
 #include "battle_tower.h"
 #include "cable_club.h"
-#include "data2.h"
+#include "data.h"
 #include "decoration.h"
 #include "diploma.h"
 #include "event_data.h"
@@ -59,20 +59,20 @@
 
 EWRAM_DATA bool8 gBikeCyclingChallenge = FALSE;
 EWRAM_DATA u8 gBikeCollisions = 0;
-EWRAM_DATA u32 gBikeCyclingTimer = 0;
-EWRAM_DATA u8 gUnknown_0203AB5C = 0;
-EWRAM_DATA u8 gUnknown_0203AB5D = 0;
-EWRAM_DATA u8 gUnknown_0203AB5E = 0;
-EWRAM_DATA u16 gUnknown_0203AB60 = 0;
-EWRAM_DATA u16 gUnknown_0203AB62 = 0;
-EWRAM_DATA struct ListMenuItem *gUnknown_0203AB64 = NULL;
-EWRAM_DATA u16 gUnknown_0203AB68 = 0;
-EWRAM_DATA u16 gUnknown_0203AB6A = 0;
-EWRAM_DATA u8 gUnknown_0203AB6C = 0;
-EWRAM_DATA u8 gUnknown_0203AB6D = 0;
-EWRAM_DATA u8 gUnknown_0203AB6E = 0;
-EWRAM_DATA u8 gUnknown_0203AB6F = 0;
-EWRAM_DATA u32 gUnknown_0203AB70 = 0;
+static EWRAM_DATA u32 gBikeCyclingTimer = 0;
+static EWRAM_DATA u8 gUnknown_0203AB5C = 0;
+static EWRAM_DATA u8 gUnknown_0203AB5D = 0;
+static EWRAM_DATA u8 gUnknown_0203AB5E = 0;
+static EWRAM_DATA u16 gUnknown_0203AB60 = 0;
+static EWRAM_DATA u16 gUnknown_0203AB62 = 0;
+static EWRAM_DATA struct ListMenuItem *gUnknown_0203AB64 = NULL;
+static EWRAM_DATA u16 gUnknown_0203AB68 = 0;
+static EWRAM_DATA u16 gUnknown_0203AB6A = 0;
+static EWRAM_DATA u8 gUnknown_0203AB6C = 0;
+static EWRAM_DATA u8 gUnknown_0203AB6D = 0;
+static EWRAM_DATA u8 gUnknown_0203AB6E = 0;
+static EWRAM_DATA u8 gUnknown_0203AB6F = 0;
+static EWRAM_DATA u32 gUnknown_0203AB70 = 0;
 
 struct ListMenuTemplate gUnknown_030061D0;
 

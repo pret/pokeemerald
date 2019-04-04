@@ -21,6 +21,8 @@
 #include "menu.h"
 #include "gpu_regs.h"
 #include "graphics.h"
+#include "pokemon_summary_screen.h"
+#include "item_menu.h"
 
 struct UsePokeblockSubStruct
 {
@@ -83,8 +85,6 @@ struct UsePokeblockStruct
     /*0x7FD0*/ struct UsePokeblockSubStruct info;
 };
 
-extern u16 gKeyRepeatStartDelay;
-
 extern void sub_81D21DC(u8);
 
 // this file's functions
@@ -133,7 +133,6 @@ void sub_8168168(struct Sprite *sprite);
 
 extern const struct BgTemplate gUnknown_085DFCCC[4];
 extern const struct WindowTemplate gUnknown_085DFCDC[];
-extern u16 gSpecialVar_ItemId;
 extern const struct WindowTemplate sUsePokeblockYesNoWinTemplate[];
 extern const u8* sContestStatNames[];
 extern const u32 gUnknown_085DFCB0[];
@@ -151,8 +150,6 @@ extern const u16 gUnknown_08623208[];
 extern const u8 gUnknown_085DFCC9[];
 extern const struct SpritePalette gUnknown_085DFDB8;
 extern const struct SpriteTemplate gUnknown_085DFDA0;
-
-extern const u8 *const gNatureNamePointers[];
 
 // ram variables
 EWRAM_DATA struct UsePokeblockSubStruct *gUnknown_0203BC90 = NULL;

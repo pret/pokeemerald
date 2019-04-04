@@ -284,7 +284,7 @@ static const union AnimCmd gUnknown_082FF704[] =
     ANIMCMD_END,
 };
 
-const union AnimCmd *const gPlayerMonSpriteAnimsTable[] =
+const union AnimCmd *const gUnknown_082FF70C[] =
 {
     gUnknown_082FF6EC,
     gUnknown_082FF6F4,

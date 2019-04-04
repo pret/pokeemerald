@@ -1,11 +1,12 @@
 #include "global.h"
 #include "alloc.h"
 #include "battle.h"
+#include "battle_gfx_sfx_util.h"
 #include "bg.h"
 #include "contest.h"
 #include "contest_painting.h"
 #include "contest_painting_effects.h"
-#include "battle_gfx_sfx_util.h"
+#include "data.h"
 #include "decompress.h"
 #include "gpu_regs.h"
 #include "international_string_util.h"
@@ -44,8 +45,6 @@ static void VBlankCB_ContestPainting(void);
 static void sub_8130380(u8 *spritePixels, u16 *palette, u16 (*destColorBuffer)[64][64]);
 
 extern const u8 gUnknown_0827EA0C[];
-extern const struct CompressedSpriteSheet gMonFrontPicTable[];
-extern const struct CompressedSpriteSheet gMonBackPicTable[];
 extern const u8 gContestCoolness[];
 extern const u8 gContestBeauty[];
 extern const u8 gContestCuteness[];

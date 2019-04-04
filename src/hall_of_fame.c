@@ -32,7 +32,7 @@
 #include "menu.h"
 #include "fldeff_misc.h"
 #include "trainer_pokemon_sprites.h"
-#include "data2.h"
+#include "data.h"
 #include "rom_81520A8.h"
 #include "constants/rgb.h"
 

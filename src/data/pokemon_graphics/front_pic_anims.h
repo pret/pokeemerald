@@ -6948,7 +6948,7 @@ static const union AnimCmd *const sAnims_UNOWN_QMARK[] ={
 #define ANIM_CMD(name)             [SPECIES_##name] = sAnims_##name
 #define ANIM_CMD_FULL(name, anims) [SPECIES_##name] = anims
 
-const union AnimCmd *const *const gMonAnimationsSpriteAnimsPtrTable[] =
+const union AnimCmd *const *const gMonFrontAnimsPtrTable[] =
 {
     ANIM_CMD(NONE),
     ANIM_CMD(BULBASAUR),
