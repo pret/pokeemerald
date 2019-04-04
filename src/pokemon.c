@@ -3449,10 +3449,10 @@ void SetMultiuseSpriteTemplateToPokemon(u16 speciesTag, u8 battlerPosition)
     gMultiuseSpriteTemplate.paletteTag = speciesTag;
     if (battlerPosition == B_POSITION_PLAYER_LEFT || battlerPosition == B_POSITION_PLAYER_RIGHT)
         gMultiuseSpriteTemplate.anims = gPlayerMonSpriteAnimsTable;
-    else if (species > SPECIES_SHINY_TAG)
-        gMultiuseSpriteTemplate.anims = gMonAnimationsSpriteAnimsPtrTable[species - SPECIES_SHINY_TAG];
+    else if (speciesTag > SPECIES_SHINY_TAG)
+        gMultiuseSpriteTemplate.anims = gMonAnimationsSpriteAnimsPtrTable[speciesTag - SPECIES_SHINY_TAG];
     else
-        gMultiuseSpriteTemplate.anims = gMonAnimationsSpriteAnimsPtrTable[species];
+        gMultiuseSpriteTemplate.anims = gMonAnimationsSpriteAnimsPtrTable[speciesTag];
 }
 
 void SetMultiuseSpriteTemplateToTrainerBack(u16 trainerSpriteId, u8 battlerPosition)
