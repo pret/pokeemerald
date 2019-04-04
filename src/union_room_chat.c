@@ -190,22 +190,33 @@ static void sub_80209E0(void);
 static bool32 sub_8020A1C(void);
 static void sub_80207C0(s16);
 static void sub_8020818(s16);
+static bool32 sub_801F658(u8 *state);
+static bool32 sub_801F6F8(u8 *state);
+static bool32 sub_801F730(u8 *state);
+static bool32 sub_801F768(u8 *state);
+static bool32 sub_801F7D4(u8 *state);
+static bool32 sub_801F7E0(u8 *state);
+static bool32 sub_801F82C(u8 *state);
+static bool32 sub_801F870(u8 *state);
+static bool32 sub_801F8DC(u8 *state);
+static bool32 sub_801F984(u8 *state);
+static bool32 sub_801FA2C(u8 *state);
+static bool32 sub_801FA68(u8 *state);
+static bool32 sub_801FB44(u8 *state);
+static bool32 sub_801FB70(u8 *state);
+static bool32 sub_801FBB4(u8 *state);
+static bool32 sub_801FBF8(u8 *state);
+static bool32 sub_801FC4C(u8 *state);
+static bool32 sub_801FC9C(u8 *state);
+static bool32 sub_801FCEC(u8 *state);
+static bool32 sub_801FD30(u8 *state);
+static bool32 sub_801FD88(u8 *state);
 
 extern struct UnionRoomChat *gUnknown_02022C84;
 extern struct UnionRoomChat2 *gUnknown_02022C88;
 extern struct UnionRoomChat3 *gUnknown_02022C8C;
-
-extern const u8 *const gUnknown_082F2BA8[][10];
-extern const u8 gUnknown_082F2AA8[];
-extern const struct BgTemplate gUnknown_082F2C60[4];
-extern const struct WindowTemplate gUnknown_082F2C70[];
-extern const struct Unk82F2C98 gUnknown_082F2C98[];
-extern const struct Unk82F2D40 gUnknown_082F2D40[];
-extern const u8 gText_Ellipsis[];
-extern const struct MenuAction gUnknown_082F2DC8[];
 extern const u16 gUnknown_082F2C20[];
 extern const u16 gUnknown_082F2C40[];
-extern const struct CompressedSpriteSheet gUnknown_082F3134[];
 extern const struct SpritePalette gUnknown_082F315C;
 extern const struct SpriteTemplate gUnknown_082F319C;
 extern const u16 gUnknown_082F2DF0[];
@@ -214,6 +225,199 @@ extern const struct SpriteTemplate gUnknown_082F31D4;
 extern const struct SpriteTemplate gUnknown_082F322C;
 extern const struct SpriteTemplate gUnknown_082F3244;
 
+void (*const gUnknown_082F2A7C[])(void) =
+    {
+        sub_801DFAC,
+        sub_801E030,
+        sub_801E120,
+        sub_801E240,
+        sub_801E764,
+        sub_801E838,
+        sub_801E460,
+        sub_801E5C4,
+        sub_801E668,
+        sub_801E978,
+    };
+
+static const u8 sUnknown_082F2AA4[] = {9, 9, 9, 9};
+
+static const u8 gUnknown_082F2AA8[] = {
+    CHAR_SPACE, 0x16, 0x17, 0x68, 0x19, 0x1A, 0x1B, 0x1C,
+    0x1D, 0x1E, CHAR_SPACE, 0x20, 0x21, 0x22, 0x23, 0x24,
+    0x25, 0x26, 0x27, 0x28, 0x29, 0x15, 0x01, 0x02,
+    CHAR_SPACE, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, CHAR_SPACE,
+    0x0B, 0x0C, 0x0D, 0x0E, 0x0F, 0x10, 0x11, 0x12,
+    0x13, 0x14, 0x2A, 0x2B, 0x2C, 0x2D, CHAR_SPACE, CHAR_SPACE,
+    CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, 0x35, 0x36, CHAR_SPACE,
+    CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE,
+    CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE,
+    CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE,
+    CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, 0x53, 0x54, 0x55, 0x56, CHAR_SPACE,
+    CHAR_SPACE, CHAR_SPACE, 0x6F, 0x5B, 0x5C, 0x5D, CHAR_SPACE, CHAR_SPACE,
+    CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE,
+    0x03, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, 0x5A,
+    CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE,
+    CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE,
+    CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, 0x84, 0x85, 0x86, CHAR_SPACE,
+    CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE,
+    CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE,
+    CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE,
+    0xA0, CHAR_0, CHAR_1, CHAR_2, CHAR_3, CHAR_4, CHAR_5, CHAR_6,
+    CHAR_7, CHAR_8, CHAR_9, CHAR_EXCL_MARK, CHAR_QUESTION_MARK, CHAR_PERIOD, CHAR_HYPHEN, 0xAF,
+    CHAR_ELLIPSIS, CHAR_DBL_QUOT_LEFT, CHAR_DBL_QUOT_RIGHT, CHAR_SGL_QUOT_LEFT, CHAR_SGL_QUOT_RIGHT, CHAR_MALE, CHAR_FEMALE, CHAR_CURRENCY,
+    CHAR_COMMA, CHAR_MULT_SIGN, CHAR_SLASH, CHAR_a, CHAR_b, CHAR_c, CHAR_d, CHAR_e,
+    CHAR_f, CHAR_g, CHAR_h, CHAR_i, CHAR_j, CHAR_k, CHAR_l, CHAR_m,
+    CHAR_n, CHAR_o, CHAR_p, CHAR_q, CHAR_r, CHAR_s, CHAR_t, CHAR_u,
+    CHAR_v, CHAR_w, CHAR_x, CHAR_y, CHAR_z, CHAR_A, CHAR_B, CHAR_C,
+    CHAR_D, CHAR_E, CHAR_F, CHAR_G, CHAR_H, CHAR_I, CHAR_J, CHAR_K,
+    CHAR_L, CHAR_M, CHAR_N, CHAR_O, CHAR_P, CHAR_Q, CHAR_R, CHAR_S,
+    CHAR_T, CHAR_U, CHAR_V, CHAR_W, CHAR_X, CHAR_Y, CHAR_Z, 0xEF,
+    CHAR_COLON, 0xF4, 0xF5, 0xF6, 0xF1, 0xF2, 0xF3, CHAR_SPACE,
+    CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE
+};
+
+const u8 *const gUnknown_082F2BA8[][10] = {
+    {gUnknown_0862B9F9, gUnknown_0862B9FF, gUnknown_0862BA05, gUnknown_0862BA0B, gUnknown_0862BA11, gUnknown_0862BA17, gUnknown_0862BA1D, gUnknown_0862BA23, gUnknown_0862BA29, gUnknown_0862BA2F},
+    {gUnknown_0862BA35, gUnknown_0862BA3B, gUnknown_0862BA41, gUnknown_0862BA47, gUnknown_0862BA4D, gUnknown_0862BA53, gUnknown_0862BA59, gUnknown_0862BA5F, gUnknown_0862BA65, gUnknown_0862BA6B},
+    {gUnknown_0862BA79, gUnknown_0862BA84, gUnknown_0862BA8F, gUnknown_0862BA9A, gUnknown_0862BAA3, gUnknown_0862BAAE, gUnknown_0862BAB9, gUnknown_0862BAC4, gUnknown_0862BACF, gUnknown_0862BADA}
+};
+
+const u16 gUnknown_082F2C20[] = INCBIN_U16("graphics/interface/unk_palette1.gbapal");
+const u16 gUnknown_082F2C40[] = INCBIN_U16("graphics/interface/unk_palette2.gbapal");
+
+const struct BgTemplate gUnknown_082F2C60[] = {
+    {
+        .bg = 0,
+        .charBaseIndex = 0,
+        .mapBaseIndex = 7,
+        .screenSize = 0,
+        .paletteMode = 0,
+        .priority = 0,
+        .baseTile = 0
+    }, {
+        .bg = 1,
+        .charBaseIndex = 3,
+        .mapBaseIndex = 31,
+        .screenSize = 0,
+        .paletteMode = 0,
+        .priority = 1,
+        .baseTile = 0
+    }, {
+        .bg = 2,
+        .charBaseIndex = 2,
+        .mapBaseIndex = 23,
+        .screenSize = 0,
+        .paletteMode = 0,
+        .priority = 2,
+        .baseTile = 0
+    }, {
+        .bg = 3,
+        .charBaseIndex = 1,
+        .mapBaseIndex = 15,
+        .screenSize = 0,
+        .paletteMode = 0,
+        .priority = 3,
+        .baseTile = 1
+    }
+};
+
+const struct WindowTemplate gUnknown_082F2C70[] = {
+    {
+        .bg = 0x03,
+        .tilemapLeft = 0x08,
+        .tilemapTop = 0x01,
+        .width = 0x15,
+        .height = 0x13,
+        .paletteNum = 0x0f,
+        .baseBlock = 0x0001,
+    }, {
+        .bg = 0x01,
+        .tilemapLeft = 0x09,
+        .tilemapTop = 0x12,
+        .width = 0x0f,
+        .height = 0x02,
+        .paletteNum = 0x0c,
+        .baseBlock = 0x007a,
+    }, {
+        .bg = 0x01,
+        .tilemapLeft = 0x00,
+        .tilemapTop = 0x02,
+        .width = 0x06,
+        .height = 0x0f,
+        .paletteNum = 0x07,
+        .baseBlock = 0x0020,
+    }, {
+        .bg = 0x00,
+        .tilemapLeft = 0x01,
+        .tilemapTop = 0x02,
+        .width = 0x07,
+        .height = 0x09,
+        .paletteNum = 0x0e,
+        .baseBlock = 0x0013,
+    }, { 0xFF }
+};
+
+const struct Unk82F2C98 gUnknown_082F2C98[] = {
+    {0x00000000, sub_801F658},
+    {0x00000003, sub_801F6F8},
+    {0x00000004, sub_801F730},
+    {0x00000005, sub_801F768},
+    {0x00000001, sub_801F7D4},
+    {0x00000006, sub_801F7E0},
+    {0x00000007, sub_801F82C},
+    {0x00000008, sub_801F870},
+    {0x00000009, sub_801F8DC},
+    {0x0000000a, sub_801F984},
+    {0x0000000b, sub_801FA2C},
+    {0x0000000c, sub_801FA68},
+    {0x00000002, sub_801FB44},
+    {0x0000000d, sub_801FB70},
+    {0x00000012, sub_801FBB4},
+    {0x00000013, sub_801FBF8},
+    {0x0000000e, sub_801FC4C},
+    {0x0000000f, sub_801FC9C},
+    {0x00000010, sub_801FCEC},
+    {0x00000011, sub_801FD30},
+    {0x00000014, sub_801FD88}
+};
+
+const struct Unk82F2D40 gUnknown_082F2D40[] = {
+    {gText_QuitChatting, 0x01, 0x00, 0x01, 0x00, 0x00, 0x00, 0x00},
+    {gText_RegisterTextWhere, 0x01, 0x00, 0x01, 0x00, 0x00, 0x00, 0x00},
+    {gText_RegisterTextHere, 0x01, 0x00, 0x01, 0x00, 0x00, 0x00, 0x00},
+    {gText_InputText, 0x01, 0x00, 0x01, 0x00, 0x00, 0x00, 0x00},
+    {gText_ExitingChat, 0x02, 0x00, 0x01, 0x00, 0x00, 0x00, 0x00},
+    {gText_LeaderLeftEndingChat, 0x02, 0x00, 0x01, 0x00, 0x00, 0x01, 0x00},
+    {gText_RegisteredTextChanged, 0x02, 0x00, 0x01, 0x00, 0x00, 0x00, 0x01},
+    {gText_AlreadySavedFile_Unused, 0x02, 0x00, 0x01, 0x00, 0x00, 0x00, 0x01},
+    {gText_SavingDontTurnOff_Unused, 0x02, 0x00, 0x01, 0x00, 0x00, 0x00, 0x01},
+    {gText_PlayerSavedGame_Unused, 0x02, 0x00, 0x01, 0x00, 0x00, 0x01, 0x01},
+    {gText_IfLeaderLeavesChatEnds, 0x02, 0x00, 0x01, 0x00, 0x00, 0x00, 0x01}
+};
+
+const u8 gText_Ellipsis[] = _("…");
+
+const struct MenuAction gUnknown_082F2DC8[] = {
+    {gText_Upper, NULL},
+    {gText_Lower, NULL},
+    {gText_Symbols, NULL},
+    {gText_Register2, NULL},
+    {gText_Exit2, NULL},
+};
+
+const u16 gUnknown_082F2DF0[] = INCBIN_U16("graphics/interface/unk_palette3.gbapal");
+const u32 gUnknown_082F2E10[] = INCBIN_U32("graphics/interface/unk_cursor.4bpp.lz");
+const u32 gUnknown_082F3094[] = INCBIN_U32("graphics/interface/unk_dash.4bpp.lz");
+const u32 gUnknown_082F30B4[] = INCBIN_U32("graphics/interface/unk_cursor_arrow.4bpp.lz");
+const u32 gUnknown_082F30E0[] = INCBIN_U32("graphics/interface/unk_rbutton.4bpp.lz");
+
+const struct CompressedSpriteSheet gUnknown_082F3134[] = {
+    {gUnknown_082F2E10, 0x1000, 0x0000},
+    {gUnknown_082F30B4, 0x0040, 0x0001},
+    {gUnknown_082F3094, 0x0040, 0x0002},
+    {gUnknown_082F30E0, 0x0080, 0x0003},
+    {gUnknown_08DD4CF8, 0x0400, 0x0004}
+};
 
 void sub_801DD98(void)
 {
@@ -304,20 +508,6 @@ static void sub_801DF38(void)
     BuildOamBuffer();
     UpdatePaletteFade();
 }
-
-void (*const gUnknown_082F2A7C[])(void) =
-{
-    sub_801DFAC,
-    sub_801E030,
-    sub_801E120,
-    sub_801E240,
-    sub_801E764,
-    sub_801E838,
-    sub_801E460,
-    sub_801E5C4,
-    sub_801E668,
-    sub_801E978,
-};
 
 static void sub_801DF54(u8 taskId)
 {
@@ -938,8 +1128,6 @@ static void sub_801EBD4(u16 arg0)
     gUnknown_02022C84->unk4 = arg0;
     gUnknown_02022C84->unk6 = 0;
 }
-
-static const u8 sUnknown_082F2AA4[] = {9, 9, 9, 9};
 
 static bool32 sub_801EBE4(void)
 {
