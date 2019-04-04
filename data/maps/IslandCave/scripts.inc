@@ -1,7 +1,7 @@
 IslandCave_MapScripts:: @ 8238E2A
 	map_script MAP_SCRIPT_ON_RESUME, IslandCave_MapScript1_238E3A
 	map_script MAP_SCRIPT_ON_LOAD, IslandCave_MapScript1_238E58
-	map_script MAP_SCRIPT_ON_TRANSITION, IslandCave_MapScript1_238E99
+	map_script MAP_SCRIPT_ON_TRANSITION, IslandCave_OnTransition
 	.byte 0
 
 IslandCave_MapScript1_238E3A: @ 8238E3A
@@ -28,7 +28,7 @@ IslandCave_EventScript_238E62:: @ 8238E62
 	setmetatile 9, 20, 565, 1
 	return
 
-IslandCave_MapScript1_238E99: @ 8238E99
+IslandCave_OnTransition: @ 8238E99
 	setflag FLAG_LANDMARK_ISLAND_CAVE
 	call IslandCave_EventScript_238F45
 	call_if_unset FLAG_DEFEATED_REGICE, IslandCave_EventScript_238EAB
