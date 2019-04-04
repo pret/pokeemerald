@@ -26,17 +26,17 @@ static void sub_81D414C(void);
 static void sub_81D3F1C(u32, u32*, u32*);
 static void sub_81D3F68(void);
 
-extern struct Unknown030012C8 gUnknown_030012C8;
-extern u16 gUnknown_030012E0;
-extern u16 gUnknown_030012E2;
-extern u16 gUnknown_030012E4;
-extern u16 gUnknown_030012E6;
-extern u32 gUnknown_030012E8;
-extern u16 gUnknown_030012EC;
-extern u16 gUnknown_030012EE;
-extern u16 gUnknown_030012F0;
-extern u16 gUnknown_030012F2;
-extern u16 gUnknown_030012F4;
+IWRAM_DATA struct Unknown030012C8 gUnknown_030012C8;
+IWRAM_DATA u16 gUnknown_030012E0;
+IWRAM_DATA u16 gUnknown_030012E2;
+IWRAM_DATA u16 gUnknown_030012E4;
+IWRAM_DATA u16 gUnknown_030012E6;
+IWRAM_DATA u32 gUnknown_030012E8;
+IWRAM_DATA u16 gUnknown_030012EC;
+IWRAM_DATA u16 gUnknown_030012EE;
+IWRAM_DATA u16 gUnknown_030012F0;
+IWRAM_DATA u16 gUnknown_030012F2;
+IWRAM_DATA u16 gUnknown_030012F4;
 
 extern const u8 gUnknown_08625B6C[];
 
@@ -45,7 +45,7 @@ static u8 sub_81D38D4(void)
     return (gSaveBlock1Ptr->trainerHill.unused + 1) % 256;
 }
 
-static bool32 sub_81D38FC(struct Unk81D38FC *arg0)
+static bool32 Struct_Unk81D38FC_ValidateChecksum(struct Unk81D38FC *arg0)
 {
     int checksum = CalcByteArraySum(arg0->unk0, 0x270);
     if (checksum != arg0->checksum)
@@ -54,43 +54,42 @@ static bool32 sub_81D38FC(struct Unk81D38FC *arg0)
     return TRUE;
 }
 
-bool8 sub_81D3920(u8 *buffer)
+bool8 EReader_IsReceivedDataValid(struct EReaderTrainerHillSet *buffer)
 {
     u32 i;
     u32 checksum;
-    int var0 = buffer[0];
+    int var0 = buffer->unk_0;
     if (var0 < 1 || var0 > 8)
         return FALSE;
 
     for (i = 0; i < var0; i++)
     {
-        struct Unk81D38FC *var1 = (struct Unk81D38FC *)(&buffer[i * (sizeof(struct Unk81D38FC)) + 8]);
-        if (!sub_81D38FC(var1))
+        if (!Struct_Unk81D38FC_ValidateChecksum(&buffer->unk_8[i]))
             return FALSE;
     }
 
-    checksum = CalcByteArraySum(buffer + 8, var0 * 0x274);
-    if (checksum != ((int *)buffer)[1])
+    checksum = CalcByteArraySum((u8 *)buffer->unk_8, var0 * sizeof(struct Unk81D38FC));
+    if (checksum != buffer->checksum)
         return FALSE;
 
     return TRUE;
 }
 
-static bool32 sub_81D396C(u8 *buffer)
+static bool32 TrainerHill_VerifyChecksum(struct EReaderTrainerHillSet *buffer)
 {
     u32 checksum;
-    int var0 = buffer[0];
+    int var0 = buffer->unk_0;
     if (var0 < 1 || var0 > 8)
         return FALSE;
 
-    checksum = CalcByteArraySum(buffer + 8, 0xEE0);
-    if (checksum != ((int *)buffer)[1])
+    checksum = CalcByteArraySum((u8 *)buffer->unk_8, sizeof(struct EReaderTrainerHillSet) - offsetof(struct EReaderTrainerHillSet, unk_8));
+    if (checksum != buffer->checksum)
         return FALSE;
 
     return TRUE;
 }
 
-static bool32 sub_81D3998(struct Unk81D38FC *arg0, u8 *buffer2)
+static bool32 TryWriteTrainerHill_r(struct Unk81D38FC *arg0, u8 *buffer2)
 {
     int i;
     const u8 *ereaderVals;
@@ -131,44 +130,44 @@ static bool32 sub_81D3998(struct Unk81D38FC *arg0, u8 *buffer2)
     }
 
     ((int *)buffer2)[1] = CalcByteArraySum(buffer2 + 8, 0xEE0);
-    if (sub_8153634(SECTOR_ID_TRAINER_HILL, buffer2) != 1)
+    if (TryWriteSpecialSaveSection(SECTOR_ID_TRAINER_HILL, (u8 *)buffer2) != 1)
         return FALSE;
 
     return TRUE;
 }
 
-bool32 sub_81D3AB0(struct Unk81D38FC *arg0)
+bool32 TryWriteTrainerHill(struct Unk81D38FC *arg0)
 {
     u8 *var0 = AllocZeroed(0x1000);
-    bool32 result = sub_81D3998(arg0, var0);
+    bool32 result = TryWriteTrainerHill_r(arg0, var0);
     Free(var0);
     return result;
 }
 
-static bool32 sub_81D3AD8(u8 *arg0, u8 *arg1)
+static bool32 TryReadTrainerHill_r(struct EReaderTrainerHillSet *arg0, u8 *arg1)
 {
-    if (TryCopySpecialSaveSection(SECTOR_ID_TRAINER_HILL, arg1) != 1)
+    if (TryReadSpecialSaveSection(SECTOR_ID_TRAINER_HILL, arg1) != 1)
         return FALSE;
 
-    memcpy(arg0, arg1, 0xEE8);
-    if (!sub_81D396C(arg0))
+    memcpy(arg0, arg1, sizeof(struct EReaderTrainerHillSet));
+    if (!TrainerHill_VerifyChecksum(arg0))
         return FALSE;
 
     return TRUE;
 }
 
-static bool32 sub_81D3B0C(u8 *arg0)
+static bool32 TryReadTrainerHill(struct EReaderTrainerHillSet *arg0)
 {
     u8 *var0 = AllocZeroed(0x1000);
-    bool32 result = sub_81D3AD8(arg0, var0);
+    bool32 result = TryReadTrainerHill_r(arg0, var0);
     Free(var0);
     return result;
 }
 
-bool32 sub_81D3B34(void)
+bool32 ReadTrainerHillAndValidate(void)
 {
-    u8 *var0 = AllocZeroed(0x1000);
-    bool32 result = sub_81D3B0C(var0);
+    struct EReaderTrainerHillSet *var0 = AllocZeroed(0x1000);
+    bool32 result = TryReadTrainerHill(var0);
     Free(var0);
     return result;
 }

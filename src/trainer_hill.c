@@ -428,7 +428,7 @@ void CopyTrainerHillTrainerText(u8 which, u16 trainerId)
 static void TrainerHillStartChallenge(void)
 {
     nullsub_2();
-    if (!sub_81D3B34())
+    if (!ReadTrainerHillAndValidate())
         gSaveBlock1Ptr->trainerHill.field_3D6E_0f = 1;
     else
         gSaveBlock1Ptr->trainerHill.field_3D6E_0f = 0;
