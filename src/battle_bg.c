@@ -5,6 +5,7 @@
 #include "battle_message.h"
 #include "battle_setup.h"
 #include "bg.h"
+#include "data.h"
 #include "decompress.h"
 #include "gpu_regs.h"
 #include "graphics.h"
