@@ -38,7 +38,7 @@ IWRAM_DATA u16 gUnknown_030012F0;
 IWRAM_DATA u16 gUnknown_030012F2;
 IWRAM_DATA u16 gUnknown_030012F4;
 
-extern const u8 gUnknown_08625B6C[];
+extern const u8 gUnknown_08625B6C[][0x148];
 
 static u8 sub_81D38D4(void)
 {
@@ -47,7 +47,7 @@ static u8 sub_81D38D4(void)
 
 static bool32 Struct_Unk81D38FC_ValidateChecksum(struct Unk81D38FC *arg0)
 {
-    int checksum = CalcByteArraySum(arg0->unk0, 0x270);
+    int checksum = CalcByteArraySum((u8 *)arg0, 0x270);
     if (checksum != arg0->checksum)
         return FALSE;
 
@@ -89,56 +89,47 @@ static bool32 TrainerHill_VerifyChecksum(struct EReaderTrainerHillSet *buffer)
     return TRUE;
 }
 
-static bool32 TryWriteTrainerHill_r(struct Unk81D38FC *arg0, u8 *buffer2)
+static bool32 TryWriteTrainerHill_r(struct EReaderTrainerHillSet *arg0, struct Unk81D3998 *buffer2)
 {
     int i;
-    const u8 *ereaderVals;
 
     memset(buffer2, 0, 0x1000);
-    buffer2[0] = arg0->unk0[0];
-    buffer2[1] = sub_81D38D4();
-    buffer2[2] = (arg0->unk0[0] + 1) / 2;
+    buffer2->unk_000 = arg0->unk_0;
+    buffer2->unk_001 = sub_81D38D4();
+    buffer2->unk_002 = (arg0->unk_0 + 1) / 2;
 
-    for (i = 0; i < arg0->unk0[0]; i++)
+    for (i = 0; i < arg0->unk_0; i++)
     {
         if (!(i & 1))
         {
-            u8 *var0 = &buffer2[(i / 2) * 0x3B8];
-            u8 *var1 = arg0[i].unk0;
-            var0[8] = var1[8];
-            memcpy(&var0[0x29C], &var1[0x154], 0x124);
-            var0 += 0xC;
-            var1 += 0xC;
-            memcpy(var0, var1, 0x148);
+            buffer2->unk_008[i / 2].unk_000[0] = arg0->unk_8[i].unk0;
+            memcpy(buffer2->unk_008[i / 2].unk_294, arg0->unk_8[i].unk14C, 0x124);
+            memcpy(buffer2->unk_008[i / 2].unk_004, arg0->unk_8[i].unk4, 0x148);
         }
         else
         {
-            u8 *var0 = &buffer2[(i / 2) * 0x3B8];
-            u8 *var1 = arg0[i].unk0;
-            var0[9] = var1[8];
-            memcpy(&var0[0x154], &var1[0xC], 0x148);
+            buffer2->unk_008[i / 2].unk_000[1] = arg0->unk_8[i].unk0;
+            memcpy(buffer2->unk_008[i / 2].unk_14C, arg0->unk_8[i].unk4, 0x148);
         }
     }
 
     if (i & 1)
     {
-        u8 *var0 = &buffer2[(i / 2) * 0x3B8];
-        var0 += 0x154;
-
-        ereaderVals = gUnknown_08625B6C;
-        memcpy(var0, &ereaderVals[(i / 2) * 0x148], 0x148);
+        u8 * dest = buffer2->unk_008[i / 2].unk_14C;
+        const u8 (* src)[0x148] = gUnknown_08625B6C;
+        memcpy(dest, src[i / 2], 0x148);
     }
 
-    ((int *)buffer2)[1] = CalcByteArraySum(buffer2 + 8, 0xEE0);
+    buffer2->checksum = CalcByteArraySum((u8 *)buffer2->unk_008, sizeof(struct Unk81D3998) - offsetof(struct Unk81D3998, unk_008));
     if (TryWriteSpecialSaveSection(SECTOR_ID_TRAINER_HILL, (u8 *)buffer2) != 1)
         return FALSE;
 
     return TRUE;
 }
 
-bool32 TryWriteTrainerHill(struct Unk81D38FC *arg0)
+bool32 TryWriteTrainerHill(struct EReaderTrainerHillSet *arg0)
 {
-    u8 *var0 = AllocZeroed(0x1000);
+    struct Unk81D3998 *var0 = AllocZeroed(0x1000);
     bool32 result = TryWriteTrainerHill_r(arg0, var0);
     Free(var0);
     return result;

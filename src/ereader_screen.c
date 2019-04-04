@@ -416,7 +416,7 @@ static void sub_81D5084(u8 taskId)
         }
         break;
     case 17:
-        if (TryWriteTrainerHill((struct Unk81D38FC *)&gDecompressionBuffer))
+        if (TryWriteTrainerHill((struct EReaderTrainerHillSet *)&gDecompressionBuffer))
         {
             AddTextPrinterToWindow1(gUnknown_085EE0FA);
             sub_81D505C(&data->unk0);
