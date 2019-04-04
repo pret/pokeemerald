@@ -1,7 +1,7 @@
 DesertRuins_MapScripts:: @ 822D95B
 	map_script MAP_SCRIPT_ON_RESUME, DesertRuins_MapScript1_22D96B
 	map_script MAP_SCRIPT_ON_LOAD, DesertRuins_MapScript1_22D989
-	map_script MAP_SCRIPT_ON_TRANSITION, DesertRuins_MapScript1_22D9CA
+	map_script MAP_SCRIPT_ON_TRANSITION, DesertRuins_OnTransition
 	.byte 0
 
 DesertRuins_MapScript1_22D96B: @ 822D96B
@@ -28,7 +28,7 @@ DesertRuins_EventScript_22D993:: @ 822D993
 	setmetatile 9, 20, 565, 1
 	return
 
-DesertRuins_MapScript1_22D9CA: @ 822D9CA
+DesertRuins_OnTransition: @ 822D9CA
 	setflag FLAG_LANDMARK_DESERT_RUINS
 	call_if_unset FLAG_DEFEATED_REGIROCK, DesertRuins_EventScript_22D9D7
 	end

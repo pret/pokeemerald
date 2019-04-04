@@ -4882,7 +4882,7 @@ bool8 ECWord_CheckIfOutsideOfValidRange(u16 easyChatWord)
     {
     case EC_GROUP_POKEMON:
     case EC_GROUP_POKEMON_2:
-        numWordsInGroup = gUnknown_085F5490;
+        numWordsInGroup = gNumSpeciesNames;
         break;
     case EC_GROUP_MOVE_1:
     case EC_GROUP_MOVE_2:
