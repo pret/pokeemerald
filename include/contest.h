@@ -7,13 +7,16 @@
 #define APPLAUSE_METER_SIZE 5
 #define CONTEST_TURN_COUNT 5
 
-#define CONTEST_DEBUG_MODE_OFF 0
-// Prints the totalPoints value for each contestant.
-#define CONTEST_DEBUG_MODE_PRINT_POINT_TOTAL 1
-// Prints the ContestResourcesField1C::unk_C value as a bitstring for each contestant.
-#define CONTEST_DEBUG_MODE_PRINT_UNK_C 2
-// Prints the ContestResourcesField1C::unk_D value as a bitstring for each contestant.
-#define CONTEST_DEBUG_MODE_PRINT_UNK_D 3
+enum
+{
+    CONTEST_DEBUG_MODE_OFF,
+    // Prints the totalPoints value for each contestant.
+    CONTEST_DEBUG_MODE_PRINT_POINT_TOTAL,
+    // Prints the ContestResourcesField1C::unk_C value as a bitstring for each contestant.
+    CONTEST_DEBUG_MODE_PRINT_UNK_C,
+    // Prints the ContestResourcesField1C::unk_D value as a bitstring for each contestant.
+    CONTEST_DEBUG_MODE_PRINT_UNK_D
+};
 
 #define LINK_CONTEST_FLAG_IS_LINK       (1 << 0)
 #define LINK_CONTEST_FLAG_IS_WIRELESS   (1 << 1)

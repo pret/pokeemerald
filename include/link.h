@@ -235,7 +235,7 @@ void LinkVSync(void);
 void Timer3Intr(void);
 void SerialCB(void);
 bool32 InUnionRoom(void);
-void LoadWirelessStatusIndicatorSprite(void);
+void LoadWirelessStatusIndicatorSpriteGfx(void);
 bool8 IsLinkTaskFinished(void);
 void CreateWirelessStatusIndicatorSprite(u8, u8);
 void sub_800ADF8(void);

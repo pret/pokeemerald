@@ -28,6 +28,7 @@
 #include "item_menu_icons.h"
 #include "decompress.h"
 #include "international_string_util.h"
+#include "constants/rgb.h"
 
 // There are 4 windows used in berry tag screen.
 enum
@@ -279,7 +280,7 @@ static bool8 InitBerryTagScreen(void)
         gMain.state++;
         break;
     case 15:
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0x10, 0, 0);
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0x10, 0, RGB_BLACK);
         gPaletteFade.bufferTransferDisabled = 0;
         gMain.state++;
         break;
@@ -513,7 +514,7 @@ static void DestroyFlavorCircleSprites(void)
 static void PrepareToCloseBerryTagScreen(u8 taskId)
 {
     PlaySE(SE_SELECT);
-    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 0x10, 0);
+    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 0x10, RGB_BLACK);
     gTasks[taskId].func = Task_CloseBerryTagScreen;
 }
 

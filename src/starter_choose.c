@@ -22,6 +22,7 @@
 #include "window.h"
 #include "constants/songs.h"
 #include "constants/species.h"
+#include "constants/rgb.h"
 
 #define STARTER_MON_COUNT   3
 
@@ -429,7 +430,7 @@ void CB2_ChooseStarter(void)
     LoadCompressedSpriteSheet(&gUnknown_085B1ED8[0]);
     LoadCompressedSpriteSheet(&gUnknown_085B1EE8[0]);
     LoadSpritePalettes(gUnknown_085B1EF8);
-    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0x10, 0, 0);
+    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0x10, 0, RGB_BLACK);
 
     EnableInterrupts(DISPSTAT_VBLANK);
     SetVBlankCallback(VblankCB_StarterChoose);

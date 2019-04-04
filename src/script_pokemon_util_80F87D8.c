@@ -477,7 +477,7 @@ void sub_80F90DC(void)
     {
         if (gReceivedRemoteLinkPlayers)
         {
-            LoadWirelessStatusIndicatorSprite();
+            LoadWirelessStatusIndicatorSpriteGfx();
             CreateWirelessStatusIndicatorSprite(8, 8);
         }
     }

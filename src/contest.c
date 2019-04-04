@@ -51,21 +51,24 @@
 // Contestant 0 will use palette color 10, contestant 1 will use color 11, etc.
 #define CONTESTANT_TEXT_COLOR_START 10
 
+enum
+{
 // The "{Pokemon Name} / {Trainer Name}" windows.
-#define CONTEST_WINDOW_CONTESTANT0_NAME 0
-#define CONTEST_WINDOW_CONTESTANT1_NAME 1
-#define CONTEST_WINDOW_CONTESTANT2_NAME 2
-#define CONTEST_WINDOW_CONTESTANT3_NAME 3
-#define CONTEST_WINDOW_GENERAL_TEXT 4
-// The available moves, from top to bottom
-#define CONTEST_WINDOW_MOVE0 5
-#define CONTEST_WINDOW_MOVE1 6
-#define CONTEST_WINDOW_MOVE2 7
-#define CONTEST_WINDOW_MOVE3 8
-// The small "/" character between the move category and the
-// appeal/jam display
-#define CONTEST_WINDOW_SLASH 9
-#define CONTEST_WINDOW_MOVE_DESCRIPTION 10
+    CONTEST_WINDOW_CONTESTANT0_NAME,
+    CONTEST_WINDOW_CONTESTANT1_NAME,
+    CONTEST_WINDOW_CONTESTANT2_NAME,
+    CONTEST_WINDOW_CONTESTANT3_NAME,
+    CONTEST_WINDOW_GENERAL_TEXT,
+    // The available moves, from top to bottom
+    CONTEST_WINDOW_MOVE0,
+    CONTEST_WINDOW_MOVE1,
+    CONTEST_WINDOW_MOVE2,
+    CONTEST_WINDOW_MOVE3,
+    // The small "/" character between the move category and the
+    // appeal/jam display
+    CONTEST_WINDOW_SLASH,
+    CONTEST_WINDOW_MOVE_DESCRIPTION
+};
 
 #define MOVE_WINDOWS_START CONTEST_WINDOW_MOVE0
 
@@ -1098,7 +1101,7 @@ void CB2_StartContest(void)
         SetMainCallback2(CB2_ContestMain);
         if (gLinkContestFlags & LINK_CONTEST_FLAG_IS_WIRELESS)
         {
-            LoadWirelessStatusIndicatorSprite();
+            LoadWirelessStatusIndicatorSpriteGfx();
             CreateWirelessStatusIndicatorSprite(8, 8);
         }
         break;
@@ -2576,7 +2579,7 @@ static void sub_80DA740(u8 taskId)
         }
         else
         {
-            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
+            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
             gTasks[taskId].func = sub_80DA830;
         }
     }
@@ -2595,7 +2598,7 @@ static void sub_80DA7A0(u8 taskId)
 static void sub_80DA7EC(u8 taskId)
 {
     DestroyTask(taskId);
-    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
+    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
     gTasks[eContest.mainTaskId].func = sub_80DA830;
 }
 

@@ -11,6 +11,7 @@
 #include "text.h"
 #include "text_window.h"
 #include "window.h"
+#include "constants/rgb.h"
 
 // Static type declarations
 
@@ -145,7 +146,7 @@ static void FieldUpdateRegionMap(void)
             schedule_bg_copy_tilemap_to_vram(0);
             DrawStdFrameWithCustomTileAndPalette(0, 0, 0x27, 0xd);
             PrintRegionMapSecName();
-            BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, 0);
+            BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB_BLACK);
             sFieldRegionMapHandler->state++;
             break;
         case 2:
@@ -173,7 +174,7 @@ static void FieldUpdateRegionMap(void)
             }
             break;
         case 5:
-            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
+            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
             sFieldRegionMapHandler->state++;
             break;
         case 6:

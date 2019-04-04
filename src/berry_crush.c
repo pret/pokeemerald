@@ -511,7 +511,7 @@ int sub_802104C(void)
         CopyBgTilemapBufferToVram(3);
         break;
     case 8:
-        LoadWirelessStatusIndicatorSprite();
+        LoadWirelessStatusIndicatorSpriteGfx();
         CreateWirelessStatusIndicatorSprite(0,  0);
         sub_8022730(var0);
         SetGpuReg(REG_OFFSET_BG1VOFS, -gSpriteCoordOffsetY);

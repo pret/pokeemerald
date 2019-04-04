@@ -909,7 +909,7 @@ static void sub_80F6AE8(void)
 
     if (gLinkContestFlags & LINK_CONTEST_FLAG_IS_WIRELESS)
     {
-        LoadWirelessStatusIndicatorSprite();
+        LoadWirelessStatusIndicatorSpriteGfx();
         CreateWirelessStatusIndicatorSprite(8, 8);
         gSprites[gWirelessStatusIndicatorSpriteId].subpriority = 1;
         sheet = LoadSpriteSheet(&gUnknown_0858D8E0);
