@@ -416,7 +416,7 @@ _0802AD0C:
 	ldr r0, [r4]
 	adds r0, 0xA4
 	bl sub_802D074
-	bl sub_800E0E8
+	bl LoadWirelessStatusIndicatorSprite
 	movs r0, 0
 	movs r1, 0
 	bl CreateWirelessStatusIndicatorSprite
