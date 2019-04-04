@@ -3421,8 +3421,8 @@ void SetMultiuseSpriteTemplateToPokemon(u16 species, u8 battlerPosition)
     gMultiuseSpriteTemplate.paletteTag = species;
     if (battlerPosition == B_POSITION_PLAYER_LEFT || battlerPosition == B_POSITION_PLAYER_RIGHT)
         gMultiuseSpriteTemplate.anims = gPlayerMonSpriteAnimsTable;
-    else if (species > 500)
-        gMultiuseSpriteTemplate.anims = gMonAnimationsSpriteAnimsPtrTable[species - 500];
+    else if (species > 5000)
+        gMultiuseSpriteTemplate.anims = gMonAnimationsSpriteAnimsPtrTable[species - 5000];
     else
         gMultiuseSpriteTemplate.anims = gMonAnimationsSpriteAnimsPtrTable[species];
 }
