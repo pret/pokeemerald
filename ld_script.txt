@@ -303,7 +303,6 @@ SECTIONS {
         asm/pokenav.o(.text);
         src/pokenav_match_call.o(.text);
         src/menu_specialized.o(.text);
-        asm/menu_specialized.o(.text);
         src/ereader_helpers.o(.text);
         src/faraway_island.o(.text);
         src/ereader_screen.o(.text);

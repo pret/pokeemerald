@@ -6295,16 +6295,16 @@ static void sub_804F100(void)
 {
     struct StatsArray currentStats;
 
-    GetMonLevelUpWindowStats(&gPlayerParty[gBattleStruct->expGetterMonId], &currentStats);
-    DrawLevelUpWindowPg1(0xD, gBattleResources->statsBeforeLvlUp, &currentStats, 0xE, 0xD, 0xF);
+    GetMonLevelUpWindowStats(&gPlayerParty[gBattleStruct->expGetterMonId], (u16*) &currentStats);
+    DrawLevelUpWindowPg1(0xD, (u16*) gBattleResources->statsBeforeLvlUp,(u16*) &currentStats, 0xE, 0xD, 0xF);
 }
 
 static void sub_804F144(void)
 {
     struct StatsArray currentStats;
 
-    GetMonLevelUpWindowStats(&gPlayerParty[gBattleStruct->expGetterMonId], &currentStats);
-    DrawLevelUpWindowPg2(0xD, &currentStats, 0xE, 0xD, 0xF);
+    GetMonLevelUpWindowStats(&gPlayerParty[gBattleStruct->expGetterMonId], (u16*) &currentStats);
+    DrawLevelUpWindowPg2(0xD, (u16*) &currentStats, 0xE, 0xD, 0xF);
 }
 
 static void sub_804F17C(void)
