@@ -15,12 +15,7 @@
 	.include "src/mevent_server.o"
 	.include "src/mevent_client.o"
 	.include "src/union_room_chat.o"
-
-	@ berry_crush
-	.align 2
-gUnknown_02022C90: @ 2022C90
-	.space 0x4
-
+	.include "src/berry_crush.o"
 	.include "src/berry_powder.o"
 
 	.align 2
