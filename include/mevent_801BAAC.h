@@ -1,8 +1,8 @@
 #ifndef GUARD_MEVENT_801BAAC_H
 #define GUARD_MEVENT_801BAAC_H
 
-bool32 InitWonderCardResources(struct MEventBuffer_32E0_Sub * r5, struct MEventBuffer_3430_Sub * r6);
-bool32 InitWonderNewsResources(const struct MEventBuffer_3120_Sub * a0);
+bool32 InitWonderCardResources(struct WonderCard * r5, struct MEventBuffer_3430_Sub * r6);
+bool32 InitWonderNewsResources(const struct WonderNews * a0);
 s32 FadeToWonderCardMenu(void);
 s32 FadeToWonderNewsMenu(void);
 s32 FadeOutFromWonderCard(bool32 flag);
