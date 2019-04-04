@@ -47,6 +47,7 @@
 	.include "src/mirage_tower.o"
 	.include "src/berry_fix_program.o"
 
+    @ pokenav
 gUnknown_030012BC: @ 30012BC
 	.space 0x4
 
@@ -56,6 +57,7 @@ gUnknown_030012C0: @ 30012C0
 gUnknown_030012C4: @ 30012C4
 	.space 0x4
 
+    @ ereader_helpers
 gUnknown_030012C8: @ 30012C8
 	.space 0x18
 
@@ -90,22 +92,7 @@ gUnknown_030012F4: @ 30012F4
 	.space 0x4
 
 	.include "src/faraway_island.o"
-
-gUnknown_03001300: @ 3001300
-	.space 0x40
-
-gMPlayTrack_BGM: @ 3001340
-	.space 0x320
-
-gMPlayTrack_SE1: @ 3001660
-	.space 0xF0
-
-gMPlayTrack_SE2: @ 3001750
-	.space 0x2D0
-
-gMPlayTrack_SE3: @ 3001A20
-	.space 0x50
-
+	.include "asm/m4a_1.o"
 	.include "src/agb_flash.o"
 	.include "src/siirtc.o"
 	.include "*libgcc.a:dp-bit.o"
