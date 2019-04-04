@@ -50,6 +50,7 @@
 #include "pokemon_summary_screen.h"
 #include "pokenav.h"
 #include "menu_specialized.h"
+#include "data.h"
 
 extern struct MusicPlayerInfo gMPlayInfo_BGM;
 
