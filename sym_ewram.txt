@@ -14,18 +14,10 @@
 	.include "src/mevent_801BAAC.o"
 	.include "src/mevent_server.o"
 	.include "src/mevent_client.o"
+	.include "src/union_room_chat.o"
 
-	@ union_room_chat
+	@ berry_crush
 	.align 2
-gUnknown_02022C84: @ 2022C84
-	.space 0x4
-
-gUnknown_02022C88: @ 2022C88
-	.space 0x4
-
-gUnknown_02022C8C: @ 2022C8C
-	.space 0x4
-
 gUnknown_02022C90: @ 2022C90
 	.space 0x4
 
