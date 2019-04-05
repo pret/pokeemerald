@@ -444,7 +444,7 @@ void sub_8126968(void)
     if (gUnknown_0203A17C.isPlayerRoom == FALSE)
     {
         gUnknown_0203A17C.items = gSaveBlock1Ptr->secretBases[0].decorations;
-        gUnknown_0203A17C.pos = gSaveBlock1Ptr->secretBases[0].decorationPos;
+        gUnknown_0203A17C.pos = gSaveBlock1Ptr->secretBases[0].decorationPositions;
     }
     if (gUnknown_0203A17C.isPlayerRoom == TRUE)
     {
@@ -507,7 +507,7 @@ void sub_8126AD8(u8 taskId)
 {
     sub_8126ABC();
     gUnknown_0203A17C.items = gSaveBlock1Ptr->secretBases[0].decorations;
-    gUnknown_0203A17C.pos = gSaveBlock1Ptr->secretBases[0].decorationPos;
+    gUnknown_0203A17C.pos = gSaveBlock1Ptr->secretBases[0].decorationPositions;
     gUnknown_0203A17C.size = sizeof(gSaveBlock1Ptr->secretBases[0].decorations);
     gUnknown_0203A17C.isPlayerRoom = FALSE;
     gTasks[taskId].func = sub_8126B80;
@@ -1165,52 +1165,40 @@ u16 sub_8127B54(u8 decor, u8 a1)
 
 void sub_8127B90(u16 mapX, u16 mapY, u8 decWidth, u8 decHeight, u16 decor)
 {
-    u16 i;
-    u16 j;
+    u16 i, j;
+    s16 x, y;
     u16 behavior;
     u16 impassableFlag;
-    u16 v0;
-    u16 v1;
-    s16 decLeft;
-    s16 decBottom;
+    u16 posterSide;
+    u16 elevation;
 
-    for (i = 0; i < decHeight; i ++)
+    for (j = 0; j < decHeight; j++)
     {
-        decBottom = mapY - decHeight + 1 + i;
-        for (j = 0; j < decWidth; j ++)
+        y = mapY - decHeight + 1 + j;
+        for (i = 0; i < decWidth; i++)
         {
-            decLeft = mapX + j;
-            behavior = GetBehaviorByMetatileId(0x200 + gDecorations[decor].tiles[i * decWidth + j]);
+            x = mapX + i;
+            behavior = GetBehaviorByMetatileId(0x200 + gDecorations[decor].tiles[j * decWidth + i]);
             if (MetatileBehavior_IsSecretBaseImpassable(behavior) == TRUE || (gDecorations[decor].permission != DECORPERM_PASS_FLOOR && (behavior >> 12)))
-            {
                 impassableFlag = METATILE_COLLISION_MASK;
-            }
             else
-            {
-                impassableFlag = 0x000;
-            }
-            if (gDecorations[decor].permission != DECORPERM_NA_WALL && MetatileBehavior_IsSecretBaseNorthWall(MapGridGetMetatileBehaviorAt(decLeft, decBottom)) == TRUE)
-            {
-                v0 = 1;
-            }
+                impassableFlag = 0;
+
+            if (gDecorations[decor].permission != DECORPERM_NA_WALL && MetatileBehavior_IsSecretBaseNorthWall(MapGridGetMetatileBehaviorAt(x, y)) == TRUE)
+                posterSide = 1;
             else
-            {
-                v0 = 0;
-            }
-            v1 = sub_8127B54(gDecorations[decor].id, i * decWidth + j);
-            if (v1 != 0xFFFF)
-            {
-                MapGridSetMetatileEntryAt(decLeft, decBottom, (gDecorations[decor].tiles[i * decWidth + j] + (0x200 | v0)) | impassableFlag | v1);
-            }
+                posterSide = 0;
+
+            elevation = sub_8127B54(gDecorations[decor].id, j * decWidth + i);
+            if (elevation != 0xFFFF)
+                MapGridSetMetatileEntryAt(x, y, (gDecorations[decor].tiles[j * decWidth + i] + (0x200 | posterSide)) | impassableFlag | elevation);
             else
-            {
-                MapGridSetMetatileIdAt(decLeft, decBottom, (gDecorations[decor].tiles[i * decWidth + j] + (0x200 | v0)) | impassableFlag);
-            }
+                MapGridSetMetatileIdAt(x, y, (gDecorations[decor].tiles[j * decWidth + i] + (0x200 | posterSide)) | impassableFlag);
         }
     }
 }
 
-void sub_8127D38(u16 mapX, u16 mapY, u16 decor)
+void ShowDecorationOnMap(u16 mapX, u16 mapY, u16 decor)
 {
     switch (gDecorations[decor].shape)
     {
@@ -1264,13 +1252,15 @@ void sub_8127E18(void)
                     break;
                 }
             }
-            VarSet(UNKNOWN_VAR_OFFSET_3F20 + gMapHeader.events->eventObjects[j].graphicsId, sPlaceDecorationGraphicsDataBuffer.decoration->tiles[0]);
+            VarSet(
+                VAR_OBJ_GFX_ID_0 + (gMapHeader.events->eventObjects[j].graphicsId - EVENT_OBJ_GFX_VAR_0),
+                sPlaceDecorationGraphicsDataBuffer.decoration->tiles[0]);
             gSpecialVar_0x8005 = gMapHeader.events->eventObjects[j].localId;
             gSpecialVar_0x8006 = sCurDecorMapX;
             gSpecialVar_0x8007 = sCurDecorMapY;
-            show_sprite(gSpecialVar_0x8005, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
-            sub_808EBA8(gSpecialVar_0x8005, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, gSpecialVar_0x8006, gSpecialVar_0x8007);
-            sub_808F254(gSpecialVar_0x8005, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
+            TrySpawnEventObject(gSpecialVar_0x8005, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
+            TryMoveEventObjectToMapCoords(gSpecialVar_0x8005, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, gSpecialVar_0x8006, gSpecialVar_0x8007);
+            TryOverrideEventObjectTemplateCoords(gSpecialVar_0x8005, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
             break;
         }
     }
@@ -1591,7 +1581,7 @@ bool8 sub_812853C(u8 taskId, const struct Decoration *decoration)
                 }
             }
             break;
-        case DECORPERM_SOLID_MAT:
+        case DECORPERM_SPRITE:
             curY = gTasks[taskId].data[1];
             for (j=0; j<mapX; j++)
             {
@@ -1599,14 +1589,14 @@ bool8 sub_812853C(u8 taskId, const struct Decoration *decoration)
                 behaviorAt = MapGridGetMetatileBehaviorAt(curX, curY);
                 if (decoration->shape == DECORSHAPE_1x2)
                 {
-                    if (!MetatileBehavior_IsLargeMatCenter(behaviorAt))
+                    if (!MetatileBehavior_HoldsLargeDecoration(behaviorAt))
                     {
                         return FALSE;
                     }
                 }
-                else if (!MetatileBehavior_IsSecretBaseLargeMatEdge(behaviorAt))
+                else if (!MetatileBehavior_HoldsSmallDecoration(behaviorAt))
                 {
-                    if (!MetatileBehavior_IsLargeMatCenter(behaviorAt))
+                    if (!MetatileBehavior_HoldsLargeDecoration(behaviorAt))
                     {
                         return FALSE;
                     }
@@ -1646,9 +1636,9 @@ void sub_81289F0(u8 taskId)
 {
     ClearDialogWindowAndFrame(0, 0);
     sub_8128AAC(taskId);
-    if (gDecorations[gCurDecorInventoryItems[gCurDecorationIndex]].permission != DECORPERM_SOLID_MAT)
+    if (gDecorations[gCurDecorInventoryItems[gCurDecorationIndex]].permission != DECORPERM_SPRITE)
     {
-        sub_8127D38(gTasks[taskId].data[0], gTasks[taskId].data[1], gCurDecorInventoryItems[gCurDecorationIndex]);
+        ShowDecorationOnMap(gTasks[taskId].data[0], gTasks[taskId].data[1], gCurDecorInventoryItems[gCurDecorationIndex]);
     }
     else
     {
@@ -1750,7 +1740,7 @@ void sub_8128C64(u8 taskId)
     switch (data[2])
     {
         case 0:
-            sub_80E9578();
+            HideSecretBaseDecorationSprites();
             data[2] ++;
             break;
         case 1:
@@ -2043,7 +2033,7 @@ u8 gpu_pal_decompress_alloc_tag_and_upload(struct PlaceDecorationGraphicsDataBuf
 {
     sub_8129048(data);
     data->decoration = &gDecorations[decor];
-    if (data->decoration->permission == DECORPERM_SOLID_MAT)
+    if (data->decoration->permission == DECORPERM_SPRITE)
     {
         return AddPseudoEventObject(data->decoration->tiles[0], SpriteCallbackDummy, 0, 0, 1);
     }
@@ -2104,7 +2094,7 @@ u8 AddDecorationIconObjectFromEventObject(u16 tilesTag, u16 paletteTag, u8 decor
 
     sub_8129048(&sPlaceDecorationGraphicsDataBuffer);
     sPlaceDecorationGraphicsDataBuffer.decoration = &gDecorations[decor];
-    if (sPlaceDecorationGraphicsDataBuffer.decoration->permission != DECORPERM_SOLID_MAT)
+    if (sPlaceDecorationGraphicsDataBuffer.decoration->permission != DECORPERM_SPRITE)
     {
         sub_81291E8(&sPlaceDecorationGraphicsDataBuffer);
         SetDecorSelectionBoxOamAttributes(sPlaceDecorationGraphicsDataBuffer.decoration->shape);
@@ -2192,7 +2182,7 @@ void sub_8129708(void)
     {
         gSpecialVar_Result = 1;
     }
-    else if (gDecorations[gUnknown_0203A17C.items[sDecorRearrangementDataBuffer[gSpecialVar_0x8004].idx]].permission == DECORPERM_SOLID_MAT)
+    else if (gDecorations[gUnknown_0203A17C.items[sDecorRearrangementDataBuffer[gSpecialVar_0x8004].idx]].permission == DECORPERM_SPRITE)
     {
         gSpecialVar_0x8005 = sDecorRearrangementDataBuffer[gSpecialVar_0x8004].flagId;
         sub_81296EC(sDecorRearrangementDataBuffer[gSpecialVar_0x8004].idx);
@@ -2235,7 +2225,7 @@ void sub_81297F8(void)
         perm = gDecorations[gUnknown_0203A17C.items[sDecorRearrangementDataBuffer[i].idx]].permission;
         posX = gUnknown_0203A17C.pos[sDecorRearrangementDataBuffer[i].idx] >> 4;
         posY = gUnknown_0203A17C.pos[sDecorRearrangementDataBuffer[i].idx] & 0x0F;
-        if (perm != DECORPERM_SOLID_MAT)
+        if (perm != DECORPERM_SPRITE)
         {
             for (y = 0; y < sDecorRearrangementDataBuffer[i].height; y ++)
             {
@@ -2522,7 +2512,7 @@ bool8 sub_8129FC8(u8 taskId)
     {
         if (gUnknown_0203A17C.items[i] != 0)
         {
-            if (gDecorations[gUnknown_0203A17C.items[i]].permission == DECORPERM_SOLID_MAT)
+            if (gDecorations[gUnknown_0203A17C.items[i]].permission == DECORPERM_SPRITE)
             {
                 sub_8129D8C(gUnknown_0203A17C.items[i], sDecorRearrangementDataBuffer);
                 if (sub_8129E74(taskId, i, sDecorRearrangementDataBuffer) == TRUE)
@@ -2550,7 +2540,7 @@ void sub_812A040(u8 left, u8 top, u8 right, u8 bottom)
         decorIdx = gUnknown_0203A17C.items[i];
         xOff = gUnknown_0203A17C.pos[i] >> 4;
         yOff = gUnknown_0203A17C.pos[i] & 0x0F;
-        if (decorIdx != 0 && gDecorations[decorIdx].permission == DECORPERM_SOLID_MAT && left <= xOff && top <= yOff && right >= xOff && bottom >= yOff)
+        if (decorIdx != 0 && gDecorations[decorIdx].permission == DECORPERM_SPRITE && left <= xOff && top <= yOff && right >= xOff && bottom >= yOff)
         {
             sDecorRearrangementDataBuffer[sCurDecorSelectedInRearrangement].idx = i;
             sub_8129F20();
@@ -2656,7 +2646,7 @@ void sub_812A2C4(u8 taskId)
     switch (data[2])
     {
         case 0:
-            sub_80E9578();
+            HideSecretBaseDecorationSprites();
             data[2] ++;
             break;
         case 1:

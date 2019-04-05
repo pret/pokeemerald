@@ -11,7 +11,7 @@ SecretBase_RedCave1_MapScript2_23B498: @ 823B498
 
 SecretBase_RedCave1_MapScript1_23B4A2: @ 823B4A2
 	call SecretBase_RedCave1_EventScript_275CE1
-	special sub_80E95D4
+	special SetSecretBaseOwnerGfxId
 	special sub_80EB1AC
 	end
 
