@@ -74,14 +74,14 @@ EventScript_RockSmash:: @ 82907A6
 	closemessage
 	dofieldeffect FLDEFF_USE_ROCK_SMASH
 	waitstate
-	goto EventScript_RockSmash
+	goto EventScript_SmashRock
 	end
 
 EventScript_FldEffRockSmash:: @ 82907F0
 	lockall
 	dofieldeffect FLDEFF_USE_ROCK_SMASH
 	waitstate
-	goto EventScript_RockSmash
+	goto EventScript_SmashRock
 	end
 
 EventScript_SmashRock:: @ 82907FB
