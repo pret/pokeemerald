@@ -449,6 +449,7 @@ const u32 *const gItemIconTable[][2] =
     [ITEM_DRACO_PLATE] = {gItemIcon_DracoPlate, gItemIconPalette_DracoPlate},
     [ITEM_DREAD_PLATE] = {gItemIcon_DreadPlate, gItemIconPalette_DreadPlate},
     [ITEM_IRON_PLATE] = {gItemIcon_IronPlate, gItemIconPalette_IronPlate},
+    [ITEM_HONEY] = {gItemIcon_Honey, gItemIconPalette_Honey},
 	// Gen 5 Items
     [ITEM_EVIOLITE] = {gItemIcon_Eviolite, gItemIconPalette_Eviolite},
     [ITEM_FLOAT_STONE] = {gItemIcon_FloatStone, gItemIconPalette_FloatStone},

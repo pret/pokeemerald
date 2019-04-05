@@ -3628,7 +3628,6 @@ AI_HPAware_DiscouragedEffectsWhenTargetLowHP: @ 82DE2B1
     .byte EFFECT_LIGHT_SCREEN
     .byte EFFECT_OHKO
     .byte EFFECT_SUPER_FANG
-    .byte EFFECT_SUPER_FANG
     .byte EFFECT_MIST
     .byte EFFECT_FOCUS_ENERGY
     .byte EFFECT_CONFUSE

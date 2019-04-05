@@ -452,3 +452,4 @@ const u8 gGrassySeedItemDescription[] = _("Boosts Defense on\nGrassy Terrain,\nb
 const u8 gMistySeedItemDescription[] = _("Boosts Sp. Def. on\nMisty Terrain,\nbut only one time.");
 const u8 gPsychicSeedItemDescription[] = _("Boosts Sp. Def. on\nPsychic Terrain,\nbut only one time.");
 const u8 gAdrenalineOrbItemDescription[] = _("Boosts Speed if the\nuser is intimidated,\nbut only one time.");
+const u8 gHoneyItemDescription[] = _("A sweet honey that\nattracts wild Pokémon\nin grass or on trees.");

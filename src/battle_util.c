@@ -5886,6 +5886,8 @@ bool32 CanBattlerGetOrLoseItem(u8 battlerId, u16 itemId)
         return FALSE;
     else if (ItemId_GetHoldEffect(itemId) == HOLD_EFFECT_MEGA_STONE && GetMegaEvolutionSpecies(species, itemId) != SPECIES_NONE)
         return FALSE;
+    else if (species == SPECIES_GIRATINA && itemId == ITEM_GRISEOUS_ORB)
+        return FALSE;
     else
         return TRUE;
 }
