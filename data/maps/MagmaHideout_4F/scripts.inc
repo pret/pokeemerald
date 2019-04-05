@@ -12,8 +12,8 @@ MagmaHideout_4F_EventScript_23A560:: @ 823A560
 	setfieldeffectargument 0, 18
 	setfieldeffectargument 1, 42
 	setfieldeffectargument 2, 0
-	dofieldeffect 54
-	waitfieldeffect 54
+	dofieldeffect FLDEFF_SPARKLE
+	waitfieldeffect FLDEFF_SPARKLE
 	setvar VAR_RESULT, 1
 	playfanfare MUS_ME_TAMA
 	playse SE_TAMA

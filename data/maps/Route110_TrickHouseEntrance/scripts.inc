@@ -759,8 +759,8 @@ Route110_TrickHouseEntrance_EventScript_26A459:: @ 826A459
 	setfieldeffectargument 0, VAR_0x8004
 	setfieldeffectargument 1, VAR_0x8005
 	setfieldeffectargument 2, VAR_0x8006
-	dofieldeffect 54
-	waitfieldeffect 54
+	dofieldeffect FLDEFF_SPARKLE
+	waitfieldeffect FLDEFF_SPARKLE
 	delay 10
 	return
 

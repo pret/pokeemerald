@@ -339,7 +339,7 @@ EventScript_275A50:: @ 8275A50
 	msgbox gText_23B704, MSGBOX_YESNO
 	compare VAR_RESULT, 0
 	goto_if_eq EventScript_275CDE
-	msgbox Route103_Text_290771, MSGBOX_DEFAULT
+	msgbox Text_MonUsedHM, MSGBOX_DEFAULT
 	closemessage
 	dofieldeffect FLDEFF_USE_SECRET_POWER_CAVE
 	waitstate
@@ -371,7 +371,7 @@ EventScript_275AA9:: @ 8275AA9
 	msgbox Text_274779, MSGBOX_YESNO
 	compare VAR_RESULT, 0
 	goto_if_eq EventScript_275CDE
-	msgbox Route103_Text_290771, MSGBOX_DEFAULT
+	msgbox Text_MonUsedHM, MSGBOX_DEFAULT
 	closemessage
 	dofieldeffect FLDEFF_USE_SECRET_POWER_TREE
 	waitstate
@@ -403,7 +403,7 @@ EventScript_275B02:: @ 8275B02
 	msgbox Text_274825, MSGBOX_YESNO
 	compare VAR_RESULT, 0
 	goto_if_eq EventScript_275CDE
-	msgbox Route103_Text_290771, MSGBOX_DEFAULT
+	msgbox Text_MonUsedHM, MSGBOX_DEFAULT
 	closemessage
 	dofieldeffect FLDEFF_USE_SECRET_POWER_SHRUB
 	waitstate
@@ -508,7 +508,7 @@ EventScript_275BE8:: @ 8275BE8
 	goto_if_eq EventScript_275CDE
 	bufferpartymonnick 0, VAR_0x8004
 	buffermovename 1, MOVE_SECRET_POWER
-	msgbox Route103_Text_290771, MSGBOX_DEFAULT
+	msgbox Text_MonUsedHM, MSGBOX_DEFAULT
 	closemessage
 	closemessage
 	compare VAR_0x8007, 1

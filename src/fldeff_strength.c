@@ -30,7 +30,7 @@ bool8 SetUpFieldMove_Strength(void)
 static void FldEff_UseStrength(void)
 {
     gFieldEffectArguments[0] = GetCursorSelectionMonId();
-    ScriptContext1_SetupScript(FieryPath_EventScript_2908FD);
+    ScriptContext1_SetupScript(EventScript_FldEffStrength);
 }
 
 bool8 sub_8145E2C(void)

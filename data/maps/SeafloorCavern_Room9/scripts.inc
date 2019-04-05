@@ -40,8 +40,8 @@ SeafloorCavern_Room9_EventScript_234DC9:: @ 8234DC9
 	setfieldeffectargument 0, 16
 	setfieldeffectargument 1, 42
 	setfieldeffectargument 2, 0
-	dofieldeffect 54
-	waitfieldeffect 54
+	dofieldeffect FLDEFF_SPARKLE
+	waitfieldeffect FLDEFF_SPARKLE
 	closemessage
 	setvar VAR_RESULT, 0
 	playfanfare MUS_ME_TAMA

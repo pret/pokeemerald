@@ -381,10 +381,10 @@ extern const u8 SecretBase_RedCave1_Text_2758CC[];
 extern const u8 BattleFrontier_BattlePyramidEmptySquare_EventScript_252C88[];
 
 //field effects
-extern const u8 FieryPath_EventScript_2908FD[];
-extern const u8 EventScript_290CAE[];
+extern const u8 EventScript_FldEffStrength[];
+extern const u8 EventScript_FailSweetScent[];
 extern const u8 EventScript_2926F8[];
-extern const u8 Route111_EventScript_2907F0[];
+extern const u8 EventScript_FldEffRockSmash[];
 
 //player pc
 extern const u8 LittlerootTown_BrendansHouse_2F_EventScript_1F863F[];
