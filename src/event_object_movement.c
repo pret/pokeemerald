@@ -1949,7 +1949,7 @@ void EventObjectSetGraphicsId(struct EventObject *eventObject, u8 graphicsId)
     sprite->oam.paletteNum = paletteSlot;
     eventObject->inanimate = graphicsInfo->inanimate;
     eventObject->graphicsId = graphicsId;
-    sub_8093038(eventObject->currentCoords.x, eventObject->currentCoords.y, &sprite->pos1.x, &sprite->pos1.y);
+    SetSpritePosToMapCoords(eventObject->currentCoords.x, eventObject->currentCoords.y, &sprite->pos1.x, &sprite->pos1.y);
     sprite->centerToCornerVecX = -(graphicsInfo->width >> 1);
     sprite->centerToCornerVecY = -(graphicsInfo->height >> 1);
     sprite->pos1.x += 8;
@@ -2253,7 +2253,7 @@ void sub_808EB08(struct EventObject *eventObject, s16 x, s16 y)
     sprite = &gSprites[eventObject->spriteId];
     graphicsInfo = GetEventObjectGraphicsInfo(eventObject->graphicsId);
     SetEventObjectCoords(eventObject, x, y);
-    sub_8093038(eventObject->currentCoords.x, eventObject->currentCoords.y, &sprite->pos1.x, &sprite->pos1.y);
+    SetSpritePosToMapCoords(eventObject->currentCoords.x, eventObject->currentCoords.y, &sprite->pos1.x, &sprite->pos1.y);
     sprite->centerToCornerVecX = -(graphicsInfo->width >> 1);
     sprite->centerToCornerVecY = -(graphicsInfo->height >> 1);
     sprite->pos1.x += 8;
@@ -4414,8 +4414,8 @@ bool8 CopyablePlayerMovement_GoSpeed0(struct EventObject *eventObject, struct Sp
     direction = playerDirection;
     if (EventObjectIsFarawayIslandMew(eventObject))
     {
-        direction = sub_81D427C();
-        if (direction == 0)
+        direction = GetMewMoveDirection();
+        if (direction == DIR_NONE)
         {
             direction = playerDirection;
             direction = state_to_direction(gInitialMovementTypeFacingDirections[eventObject->movementType], eventObject->directionSequenceIndex, direction);
@@ -5024,44 +5024,37 @@ static void MoveCoordsInDirection(u32 dir, s16 *x, s16 *y, s16 deltaX, s16 delta
         *y -= dy2;
 }
 
-void sub_8092FF0(s16 x, s16 y, s16 *dest_x, s16 *dest_y)
+void sub_8092FF0(s16 x, s16 y, s16 *destX, s16 *destY)
 {
-    *dest_x = (x - gSaveBlock1Ptr->pos.x) << 4;
-    *dest_y = (y - gSaveBlock1Ptr->pos.y) << 4;
-    *dest_x -= gTotalCameraPixelOffsetX;
-    *dest_y -= gTotalCameraPixelOffsetY;
+    *destX = (x - gSaveBlock1Ptr->pos.x) << 4;
+    *destY = (y - gSaveBlock1Ptr->pos.y) << 4;
+    *destX -= gTotalCameraPixelOffsetX;
+    *destY -= gTotalCameraPixelOffsetY;
 }
 
-void sub_8093038(s16 x, s16 y, s16 *dest_x, s16 *dest_y)
+void SetSpritePosToMapCoords(s16 mapX, s16 mapY, s16 *destX, s16 *destY)
 {
-    s16 dx;
-    s16 dy;
-
-    dx = -gTotalCameraPixelOffsetX - gFieldCamera.x;
-    dy = -gTotalCameraPixelOffsetY - gFieldCamera.y;
+    s16 dx = -gTotalCameraPixelOffsetX - gFieldCamera.x;
+    s16 dy = -gTotalCameraPixelOffsetY - gFieldCamera.y;
     if (gFieldCamera.x > 0)
-    {
-        dx += 0x10;
-    }
+        dx += 1 << 4;
+
     if (gFieldCamera.x < 0)
-    {
-        dx -= 0x10;
-    }
+        dx -= 1 << 4;
+
     if (gFieldCamera.y > 0)
-    {
-        dy += 0x10;
-    }
+        dy += 1 << 4;
+
     if (gFieldCamera.y < 0)
-    {
-        dy -= 0x10;
-    }
-    *dest_x = ((x - gSaveBlock1Ptr->pos.x) << 4) + dx;
-    *dest_y = ((y - gSaveBlock1Ptr->pos.y) << 4) + dy;
+        dy -= 1 << 4;
+
+    *destX = ((mapX - gSaveBlock1Ptr->pos.x) << 4) + dx;
+    *destY = ((mapY - gSaveBlock1Ptr->pos.y) << 4) + dy;
 }
 
 void sub_80930E0(s16 *x, s16 *y, s16 dx, s16 dy)
 {
-    sub_8093038(*x, *y, x, y);
+    SetSpritePosToMapCoords(*x, *y, x, y);
     *x += dx;
     *y += dy;
 }

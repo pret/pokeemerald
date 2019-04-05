@@ -212,6 +212,7 @@
 #define SIDE_STATUS_QUICK_GUARD             (1 << 18)
 #define SIDE_STATUS_WIDE_GUARD              (1 << 19)
 #define SIDE_STATUS_CRAFTY_SHIELD           (1 << 20)
+#define SIDE_STATUS_MAT_BLOCK               (1 << 21)
 
 // Field affecting statuses.
 #define STATUS_FIELD_MAGIC_ROOM         0x1
@@ -326,6 +327,7 @@
 #define MOVE_EFFECT_FEINT               0x3E
 #define MOVE_EFFECT_SPECTRAL_THIEF      0x3F
 #define MOVE_EFFECT_V_CREATE            0x40
+#define MOVE_EFFECT_HAPPY_HOUR          0x41
 #define MOVE_EFFECT_AFFECTS_USER        0x4000
 #define MOVE_EFFECT_CERTAIN             0x8000
 

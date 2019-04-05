@@ -23,7 +23,7 @@
 #include "constants/songs.h"
 #include "constants/vars.h"
 
-extern struct MapPosition gPlayerFacingPosition;
+EWRAM_DATA struct MapPosition gPlayerFacingPosition = {0};
 
 static void sub_80F9C90(u8);
 static void sub_80F9DFC(u8);

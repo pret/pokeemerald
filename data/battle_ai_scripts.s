@@ -249,6 +249,7 @@ AI_CheckBadMove_CheckEffect: @ 82DC045
 	if_effect EFFECT_SHELL_SMASH, AI_CBM_ShellSmash
 	if_effect EFFECT_LAST_RESORT, AI_CBM_LastResort
 	if_effect EFFECT_BELCH, AI_CBM_Belch
+	if_effect EFFECT_DO_NOTHING, Score_Minus8
 	end
 	
 AI_CBM_Belch:
@@ -2078,7 +2079,7 @@ AI_CV_Encore_EncouragedMovesToEncore:
     .byte EFFECT_POISON
     .byte EFFECT_PARALYZE
     .byte EFFECT_LEECH_SEED
-    .byte EFFECT_SPLASH
+    .byte EFFECT_DO_NOTHING
     .byte EFFECT_ATTACK_UP_2
     .byte EFFECT_ENCORE
     .byte EFFECT_CONVERSION_2
@@ -3627,7 +3628,6 @@ AI_HPAware_DiscouragedEffectsWhenTargetLowHP: @ 82DE2B1
     .byte EFFECT_TOXIC
     .byte EFFECT_LIGHT_SCREEN
     .byte EFFECT_OHKO
-    .byte EFFECT_SUPER_FANG
     .byte EFFECT_SUPER_FANG
     .byte EFFECT_MIST
     .byte EFFECT_FOCUS_ENERGY

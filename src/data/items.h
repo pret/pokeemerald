@@ -9136,4 +9136,21 @@ const struct Item gItems[] =
         .battleUseFunc = NULL,
         .secondaryId = 0,
     },
+	[ITEM_HONEY] =
+    {
+        .name = _("Honey"),
+        .itemId = ITEM_HONEY,
+        .price = 100,
+        .holdEffect = HOLD_EFFECT_NONE,
+        .holdEffectParam = 0,
+        .description = gHoneyItemDescription,
+        .importance = 0,
+        .unk19 = 0,
+        .pocket = POCKET_ITEMS,
+        .type = 4,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .battleUsage = 0,
+        .battleUseFunc = NULL,
+        .secondaryId = 0,
+    },
 };

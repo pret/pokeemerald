@@ -1228,7 +1228,7 @@ static void Task_TradeEvolutionScene(u8 taskID)
             if (!gPaletteFade.active)
             {
                 if (gWirelessCommType)
-                    sub_800E084();
+                    DestroyWirelessStatusIndicatorSprite();
 
                 Free(GetBgTilemapBuffer(3));
                 Free(GetBgTilemapBuffer(1));

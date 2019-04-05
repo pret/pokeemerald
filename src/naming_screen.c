@@ -449,7 +449,7 @@ static u8 sub_80E3274(void)
 static bool8 MainState_BeginFadeIn(void)
 {
     sub_80E4CF8(3, gUnknown_08DD4544);
-    gNamingScreenData->currentPage = 1;
+    gNamingScreenData->currentPage = PAGE_UPPER;
     sub_80E4CF8(2, gUnknown_08DD46E0);
     sub_80E4CF8(1, gUnknown_08DD4620);
     sub_80E4DE4(gNamingScreenData->windows[1], 0);
@@ -1856,7 +1856,7 @@ static const struct NamingScreenTemplate playerNamingScreenTemplate =
     .maxChars = 7,
     .iconFunction = 1,
     .addGenderIcon = 0,
-    .initialPage = 1,
+    .initialPage = PAGE_UPPER,
     .unused = 35,
     .title = gText_YourName,
 };
@@ -1867,7 +1867,7 @@ static const struct NamingScreenTemplate pcBoxNamingTemplate =
     .maxChars = 8,
     .iconFunction = 2,
     .addGenderIcon = 0,
-    .initialPage = 1,
+    .initialPage = PAGE_UPPER,
     .unused = 19,
     .title = gText_BoxName,
 };
@@ -1878,7 +1878,7 @@ static const struct NamingScreenTemplate monNamingScreenTemplate =
     .maxChars = 10,
     .iconFunction = 3,
     .addGenderIcon = 1,
-    .initialPage = 1,
+    .initialPage = PAGE_UPPER,
     .unused = 35,
     .title = gText_PkmnsNickname,
 };
@@ -1889,7 +1889,7 @@ static const struct NamingScreenTemplate wandaWordsScreenTemplate =
     .maxChars = 15,
     .iconFunction = 4,
     .addGenderIcon = 0,
-    .initialPage = 1,
+    .initialPage = PAGE_UPPER,
     .unused = 11,
     .title = gText_TellHimTheWords,
 };
@@ -1906,52 +1906,43 @@ static const struct NamingScreenTemplate *const sNamingScreenTemplates[] =
 const struct OamData gOamData_858BFEC =
 {
     .y = 0,
-    .affineMode = 0,
-    .objMode = 0,
-    .mosaic = 0,
-    .bpp = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(8x8),
     .x = 0,
-    .matrixNum = 0,
     .size = SPRITE_SIZE(8x8),
     .tileNum = 0,
     .priority = 0,
     .paletteNum = 0,
-    .affineParam = 0,
 };
 
 const struct OamData gOamData_858BFF4 =
 {
     .y = 0,
-    .affineMode = 0,
-    .objMode = 0,
-    .mosaic = 0,
-    .bpp = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(16x16),
     .x = 0,
-    .matrixNum = 0,
     .size = SPRITE_SIZE(16x16),
     .tileNum = 0,
     .priority = 0,
     .paletteNum = 0,
-    .affineParam = 0,
 };
 
 const struct OamData gOamData_858BFFC =
 {
     .y = 0,
-    .affineMode = 0,
-    .objMode = 0,
-    .mosaic = 0,
-    .bpp = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(32x16),
     .x = 0,
-    .matrixNum = 0,
     .size = SPRITE_SIZE(32x16),
     .tileNum = 0,
     .priority = 0,
     .paletteNum = 0,
-    .affineParam = 0,
 };
 
 static const struct Subsprite gUnknown_0858C004[] =
@@ -2203,3 +2194,5 @@ static const struct SpritePalette gUnknown_0858C230[] =
     {gNamingScreenMenu_Pal + 0x40,  0x0007},
     {NULL}
 };
+
+

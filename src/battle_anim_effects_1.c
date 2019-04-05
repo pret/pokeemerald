@@ -1097,7 +1097,7 @@ const struct SpriteTemplate gUnknown_085928D0 =
     .callback = sub_8100A50,
 };
 
-const struct SpriteTemplate gUnknown_085928E8 =
+const struct SpriteTemplate gVineWhipSpriteTemplate =
 {
     .tileTag = ANIM_TAG_WHIP_HIT,
     .paletteTag = ANIM_TAG_WHIP_HIT,
@@ -4007,7 +4007,7 @@ void sub_81009F8(struct Sprite* sprite)
 
 void sub_8100A50(struct Sprite* sprite)
 {
-    if (GetBattlerSide(gBattleAnimAttacker) == 0)
+    if (GetBattlerSide(gBattleAnimAttacker) == B_SIDE_PLAYER)
         StartSpriteAnim(sprite, 1);
 
     sprite->callback = sub_81009DC;

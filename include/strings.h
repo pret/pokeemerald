@@ -471,6 +471,8 @@ extern const u8 gText_EggCantBattle[];
 extern const u8 gText_PkmnAlreadySelected[];
 extern const u8 gText_PkmnAlreadyInBattle[];
 extern const u8 gText_PkmnCantSwitchOut[];
+extern const u8 gText_Dash[];
+extern const u8 gText_UnkCtrlF904[];
 
 //pokedex text
 extern const u8 gText_CryOf[];
@@ -2672,5 +2674,29 @@ extern const u8 gText_CommunicationCompleted[];
 extern const u8 gText_HaventReceivedGiftOkayToDiscard[];
 extern const u8 gText_SendingWonderCard[];
 extern const u8 gText_SendingWonderNews[];
+extern const u8 gText_WirelessCommStatus[];
+extern const u8 gText_PeopleTrading[];
+extern const u8 gText_PeopleBattling[];
+extern const u8 gText_PeopleInUnionRoom[];
+extern const u8 gText_PeopleCommunicating[];
+extern const u8 gText_CommStandbyAwaitingOtherPlayer[];
+extern const u8 gText_RefusedBattle[];
+extern const u8 gText_BattleWasRefused[];
+extern const u8 gText_QuitChatting[];
+extern const u8 gText_RegisterTextWhere[];
+extern const u8 gText_RegisterTextHere[];
+extern const u8 gText_InputText[];
+extern const u8 gText_ExitingChat[];
+extern const u8 gText_LeaderLeftEndingChat[];
+extern const u8 gText_RegisteredTextChanged[];
+extern const u8 gText_AlreadySavedFile_Unused[];
+extern const u8 gText_SavingDontTurnOff_Unused[];
+extern const u8 gText_PlayerSavedGame_Unused[];
+extern const u8 gText_IfLeaderLeavesChatEnds[];
+extern const u8 gText_Upper[];
+extern const u8 gText_Lower[];
+extern const u8 gText_Symbols[];
+extern const u8 gText_Register2[];
+extern const u8 gText_Exit2[];
 
 #endif // GUARD_STRINGS_H

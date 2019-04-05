@@ -391,10 +391,18 @@ const struct SpritePalette gUnknown_085A73E0 = {
     Unknown_085A7328, OVERWORLD_PLACE_DECOR_PLAYER_PAL_TAG
 };
 
-const struct OamData Unknown_085A73E8 = {
+const struct OamData Unknown_085A73E8 =
+{
+    .y = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(16x16),
+    .x = 0,
     .size = SPRITE_SIZE(16x16),
-    .priority = 1
+    .tileNum = 0,
+    .priority = 1,
+    .paletteNum = 0,
 };
 
 const union AnimCmd Unknown_085A73F0[] = {
@@ -2740,3 +2748,4 @@ void sub_812A478(u8 taskId)
     StringExpandPlaceholders(gStringVar4, gText_DecorationThrownAway);
     DisplayItemMessageOnField(taskId, gStringVar4, sub_8127A5C);
 }
+

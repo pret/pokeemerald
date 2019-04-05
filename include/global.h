@@ -822,7 +822,7 @@ struct MysteryEventStruct
     u8 unk_1;
 };
 
- struct MEventBuffer_3120_Sub
+ struct WonderNews
 {
     u16 unk_00;
     u8 unk_02;
@@ -831,13 +831,13 @@ struct MysteryEventStruct
     u8 unk_2C[10][40];
 };
 
- struct MEventBuffer_3120
+ struct WonderNewsSaveStruct
 {
     u32 crc;
-    struct MEventBuffer_3120_Sub data;
+    struct WonderNews data;
 };
 
- struct MEventBuffer_32E0_Sub
+ struct WonderCard
 {
     u16 unk_00;
     u16 unk_02;
@@ -853,10 +853,10 @@ struct MysteryEventStruct
     u8 unk_122[40];
 };
 
- struct MEventBuffer_32E0
+ struct WonderCardSaveStruct
 {
     u32 crc;
-    struct MEventBuffer_32E0_Sub data;
+    struct WonderCard data;
 };
 
  struct MEventBuffer_3430_Sub
@@ -876,8 +876,8 @@ struct MysteryEventStruct
 
  struct MEventBuffers
 {
-    /*0x000 0x322C*/ struct MEventBuffer_3120 buffer_000;
-    /*0x1c0 0x33EC*/ struct MEventBuffer_32E0 buffer_1c0;
+    /*0x000 0x322C*/ struct WonderNewsSaveStruct wonderNews;
+    /*0x1c0 0x33EC*/ struct WonderCardSaveStruct wonderCard;
     /*0x310 0x353C*/ struct MEventBuffer_3430 buffer_310;
     /*0x338 0x3564*/ u16 unk_338[4];
     /*0x340 0x356C*/ struct MysteryEventStruct unk_340;

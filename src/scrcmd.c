@@ -281,7 +281,7 @@ bool8 ScrCmd_callstd_if(struct ScriptContext *ctx)
     return FALSE;
 }
 
-bool8 ScrCmd_gotoram(struct ScriptContext *ctx)
+bool8 ScrCmd_returnram(struct ScriptContext *ctx)
 {
     ScriptJump(ctx, gUnknown_020375C0);
     return FALSE;
@@ -2215,9 +2215,9 @@ bool8 ScrCmd_checkmonobedience(struct ScriptContext *ctx)
     return FALSE;
 }
 
-bool8 ScrCmd_cmdCF(struct ScriptContext *ctx)
+bool8 ScrCmd_gotoram(struct ScriptContext *ctx)
 {
-    const u8* v1 = sub_8099244();
+    const u8* v1 = GetSavedRamScriptIfValid();
 
     if (v1)
     {

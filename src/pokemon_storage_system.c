@@ -4419,7 +4419,7 @@ static void PrintStorageActionText(u8 id)
     DynamicPlaceholderTextUtil_ExpandPlaceholders(sPSSData->field_2190, gPCStorageActionTexts[id].text);
     FillWindowPixelBuffer(1, PIXEL_FILL(1));
     AddTextPrinterParameterized(1, 1, sPSSData->field_2190, 0, 1, TEXT_SPEED_FF, NULL);
-    sub_8098858(1, 2, 14);
+    DrawTextBorderOuter(1, 2, 14);
     PutWindowTilemap(1);
     CopyWindowToVram(1, 2);
     schedule_bg_copy_tilemap_to_vram(0);

@@ -89,7 +89,7 @@ u8 AddPseudoEventObject(u16, void (*)(struct Sprite *), s16 x, s16 y, u8 subprio
 u8 show_sprite(u8, u8, u8);
 u8 SpawnSpecialEventObjectParameterized(u8 graphicsId, u8 movementBehavior, u8 localId, s16 x, s16 y, u8 z);
 u8 SpawnSpecialEventObject(struct EventObjectTemplate *);
-void sub_8093038(s16, s16, s16 *, s16 *);
+void SetSpritePosToMapCoords(s16, s16, s16 *, s16 *);
 void CameraObjectReset1(void);
 void EventObjectSetGraphicsId(struct EventObject *, u8 graphicsId);
 void EventObjectTurn(struct EventObject *, u8);
@@ -413,5 +413,10 @@ u8 MovementType_RunInPlace_Step0(struct EventObject *, struct Sprite *);
 u8 MovementType_Invisible_Step0(struct EventObject *, struct Sprite *);
 u8 MovementType_Invisible_Step1(struct EventObject *, struct Sprite *);
 u8 MovementType_Invisible_Step2(struct EventObject *, struct Sprite *);
+void sub_8097C44(u8 var, bool32 var2);
+bool32 sub_8097C8C(u8 var);
+void sub_8097BB4(u8 var1, u8 graphicsId);
+void sub_8097CC4(u8 var1, u8 var2);
+bool32 sub_8097D9C(u8 var);
 
 #endif //GUARD_FIELD_EVENT_OBJ_H

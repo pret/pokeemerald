@@ -23,7 +23,7 @@
 #include "palette.h"
 #include "pokeball.h"
 #include "pokedex.h"
-#include "pokemon_3.h"
+#include "pokemon.h"
 #include "random.h"
 #include "rtc.h"
 #include "save.h"
@@ -38,6 +38,7 @@
 #include "text_window.h"
 #include "title_screen.h"
 #include "window.h"
+#include "mystery_gift.h"
 
 /*
  * Main menu state machine
@@ -1083,7 +1084,7 @@ static void Task_HandleMainMenuAPressed(u8 taskId)
                 DestroyTask(taskId);
                 break;
             case ACTION_EREADER:
-                SetMainCallback2(sub_801867C);
+                SetMainCallback2(c2_ereader);
                 DestroyTask(taskId);
                 break;
             case ACTION_INVALID:

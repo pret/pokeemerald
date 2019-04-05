@@ -3940,6 +3940,8 @@ extern const u32 gItemIcon_DreadPlate[];
 extern const u32 gItemIconPalette_DreadPlate[];
 extern const u32 gItemIcon_IronPlate[];
 extern const u32 gItemIconPalette_IronPlate[];
+extern const u32 gItemIcon_Honey[];
+extern const u32 gItemIconPalette_Honey[];
 // Gen 5 Items
 extern const u32 gItemIcon_Eviolite[];
 extern const u32 gItemIconPalette_Eviolite[];
@@ -4663,8 +4665,6 @@ extern const u32 gBattleAnimBackgroundTilemap_ScaryFaceOpponent[];
 extern const u32 gBattleAnimBackgroundTilemap_ScaryFaceContest[];
 extern const u32 gBattleAnimSpriteSheet_284[];
 extern const u32 gBattleAnimSpriteSheet_285[];
-extern const u32 gBattleAnimSpriteSheet_289[];
-extern const u32 gBattleAnimSpriteSheet_290[];
 
 extern const u32 gBattleAnimSpritePalette_000[];
 extern const u32 gBattleAnimSpritePalette_001[];
@@ -4948,9 +4948,6 @@ extern const u32 gBattleAnimSpritePalette_285[];
 extern const u32 gBattleAnimSpritePalette_286[];
 extern const u32 gBattleAnimSpritePalette_287[];
 extern const u32 gBattleAnimSpritePalette_288[];
-extern const u32 gBattleAnimSpritePalette_289[];
-extern const u32 gBattleAnimSpritePalette_290[];
-extern const u32 gBattleAnimSpritePalette_291[];
 
 extern const u32 gBattleAnimBackgroundImage_00[];
 extern const u32 gBattleAnimBackgroundImage_02[];
@@ -5032,6 +5029,14 @@ extern const u32 gUnknown_08C16FA8[];
 extern const u32 gUnknown_08C16E90[];
 extern const u32 gUnknown_08C17170[];
 extern const u32 gUnknown_08C17980[];
+extern const u32 gTiles_8C19450[];
+extern const u32 gContestNextTurnGfx[];
+extern const u16 gContestPal[];
+extern const u32 gUnknown_08C19168[];
+extern const u32 gContestApplauseGfx[];
+extern const u32 gContestJudgeGfx[];
+extern const u32 gContestJudgeSymbolsGfx[];
+extern const u32 gContest3Pal[];
 
 extern const u32 gUnknown_08D95E00[];
 extern const u32 gUnknown_08D960D0[];
@@ -5180,6 +5185,7 @@ extern const u16 gUnknown_08DD4BB0[];
 extern const u16 gUnknown_08DD4BD0[];
 extern const u32 gUnknown_08DD4BF0[];
 extern const u32 gUnknown_08DD4C4C[];
+extern const u32 gUnknown_08DD4CF8[];
 extern const u16 gLinkMiscMenu_Pal[];
 extern const u32 gLinkMiscMenu_Gfx[];
 extern const u32 gLinkMiscMenu_Tilemap[];
@@ -5191,5 +5197,14 @@ extern const u16 gPokenavConditionCancel_Pal[];
 // Berry Crush
 extern const u32 gUnknown_08DE34B8[];
 extern const u16 gUnknown_08DE3398[];
+
+// New Battle Anim Particles
+extern const u32 gBattleAnimSpriteGfx_WhiteStreak[];
+extern const u32 gBattleAnimSpritePal_WhiteStreak[];
+extern const u32 gBattleAnimSpriteGfx_PurpleJab[];
+extern const u32 gBattleAnimSpritePal_PurpleJab[];
+extern const u32 gBattleAnimSpritePal_ToxicSpikes[];
+extern const u32 gBattleAnimSpriteGfx_EnergyBall[];
+extern const u32 gBattleAnimSpritePal_EnergyBall[];
 
 #endif //GUARD_GRAPHICS_H
