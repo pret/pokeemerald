@@ -2006,16 +2006,13 @@ void SetMoveEffect(bool32 primary, u32 certain)
         affectsUser = MOVE_EFFECT_AFFECTS_USER;
         gBattleScripting.battler = gBattlerTarget; // theoretically the attacker
     }
-    
-    // Just in case this flag is still set
-    if (gBattleScripting.moveEffect & MOVE_EFFECT_CERTAIN)
-        gBattleScripting.moveEffect &= ~(MOVE_EFFECT_CERTAIN);
-    
     else
     {
         gEffectBattler = gBattlerTarget;
         gBattleScripting.battler = gBattlerAttacker;
     }
+     // Just in case this flag is still set
+    gBattleScripting.moveEffect &= ~(MOVE_EFFECT_CERTAIN);
 
     if (GetBattlerAbility(gEffectBattler) == ABILITY_SHIELD_DUST && !(gHitMarker & HITMARKER_IGNORE_SAFEGUARD)
         && !primary && gBattleScripting.moveEffect <= 9)
