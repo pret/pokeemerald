@@ -37,7 +37,7 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "MtPyre_2F_EventScript_2912FD",
+      "script": "MtPyre_2F_EventScript_ItemUltraBall",
       "flag": "FLAG_ITEM_MT_PYRE_2F_ULTRA_BALL"
     },
     {

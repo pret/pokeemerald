@@ -297,7 +297,7 @@ static void atkDA_tryswapabilities(void);
 static void atkDB_tryimprison(void);
 static void atkDC_trysetgrudge(void);
 static void atkDD_weightdamagecalculation(void);
-static void atkDE_asistattackselect(void);
+static void atkDE_assistattackselect(void);
 static void atkDF_trysetmagiccoat(void);
 static void atkE0_trysetsnatch(void);
 static void atkE1_trygetintimidatetarget(void);
@@ -549,7 +549,7 @@ void (* const gBattleScriptingCommandsTable[])(void) =
     atkDB_tryimprison,
     atkDC_trysetgrudge,
     atkDD_weightdamagecalculation,
-    atkDE_asistattackselect,
+    atkDE_assistattackselect,
     atkDF_trysetmagiccoat,
     atkE0_trysetsnatch,
     atkE1_trygetintimidatetarget,
@@ -9660,7 +9660,7 @@ static void atkDD_weightdamagecalculation(void)
     gBattlescriptCurrInstr++;
 }
 
-static void atkDE_asistattackselect(void)
+static void atkDE_assistattackselect(void)
 {
     s32 chooseableMovesNo = 0;
     struct Pokemon* party;

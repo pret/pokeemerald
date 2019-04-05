@@ -2688,5 +2688,21 @@ extern const u8 gText_PeopleCommunicating[];
 extern const u8 gText_CommStandbyAwaitingOtherPlayer[];
 extern const u8 gText_RefusedBattle[];
 extern const u8 gText_BattleWasRefused[];
+extern const u8 gText_QuitChatting[];
+extern const u8 gText_RegisterTextWhere[];
+extern const u8 gText_RegisterTextHere[];
+extern const u8 gText_InputText[];
+extern const u8 gText_ExitingChat[];
+extern const u8 gText_LeaderLeftEndingChat[];
+extern const u8 gText_RegisteredTextChanged[];
+extern const u8 gText_AlreadySavedFile_Unused[];
+extern const u8 gText_SavingDontTurnOff_Unused[];
+extern const u8 gText_PlayerSavedGame_Unused[];
+extern const u8 gText_IfLeaderLeavesChatEnds[];
+extern const u8 gText_Upper[];
+extern const u8 gText_Lower[];
+extern const u8 gText_Symbols[];
+extern const u8 gText_Register2[];
+extern const u8 gText_Exit2[];
 
 #endif // GUARD_STRINGS_H

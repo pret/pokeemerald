@@ -38,7 +38,7 @@ struct BardSong
 
 // Exported ROM declarations
 
-extern const u16 gUnknown_085F5490;
+extern const u16 gNumSpeciesNames;
 extern const u16 gUnknown_085FA1D4;
 const struct BardSound *GetWordSounds(u16 word);
 void GetWordPhonemes(struct BardSong *song, u16 word);

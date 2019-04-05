@@ -42,8 +42,8 @@
 #include "constants/vars.h"
 #include "event_obj_lock.h"
 
-extern u8 Route102_EventScript_274482[];
-extern u8 Route102_EventScript_2744C0[];
+extern u8 BerryTree_EventScript_274482[];
+extern u8 BerryTree_EventScript_2744C0[];
 extern u8 BattleFrontier_OutsideEast_EventScript_242CFC[];
 
 void SetUpItemUseCallback(u8 taskId);
@@ -669,7 +669,7 @@ void sub_80FDD74(u8 taskId)
 {
     RemoveBagItem(gSpecialVar_ItemId, 1);
     ScriptContext2_Enable();
-    ScriptContext1_SetupScript(Route102_EventScript_274482);
+    ScriptContext1_SetupScript(BerryTree_EventScript_274482);
     DestroyTask(taskId);
 }
 
@@ -694,7 +694,7 @@ void ItemUseOutOfBattle_WailmerPail(u8 taskId)
 void sub_80FDE08(u8 taskId)
 {
     ScriptContext2_Enable();
-    ScriptContext1_SetupScript(Route102_EventScript_2744C0);
+    ScriptContext1_SetupScript(BerryTree_EventScript_2744C0);
     DestroyTask(taskId);
 }
 

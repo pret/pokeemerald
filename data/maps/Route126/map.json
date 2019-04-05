@@ -92,7 +92,7 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route126_EventScript_291025",
+      "script": "Route126_EventScript_ItemGreenShard",
       "flag": "FLAG_ITEM_ROUTE_126_GREEN_SHARD"
     },
     {

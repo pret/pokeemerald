@@ -1,8 +1,8 @@
 SouthernIsland_Exterior_MapScripts:: @ 82429C8
-	map_script MAP_SCRIPT_ON_TRANSITION, SouthernIsland_Exterior_MapScript1_2429CE
+	map_script MAP_SCRIPT_ON_TRANSITION, SouthernIsland_Exterior_OnTransition
 	.byte 0
 
-SouthernIsland_Exterior_MapScript1_2429CE: @ 82429CE
+SouthernIsland_Exterior_OnTransition: @ 82429CE
 	setflag FLAG_LANDMARK_SOUTHERN_ISLAND
 	end
 
