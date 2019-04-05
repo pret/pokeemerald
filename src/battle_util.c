@@ -3700,7 +3700,7 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
         {
         case HOLD_EFFECT_DOUBLE_PRIZE:
             if (GetBattlerSide(battlerId) == B_SIDE_PLAYER)
-                gBattleStruct->moneyMultiplier = 2;
+                gBattleStruct->moneyMultiplier *= 2;
             break;
         case HOLD_EFFECT_RESTORE_STATS:
             for (i = 0; i < NUM_BATTLE_STATS; i++)
