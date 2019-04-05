@@ -212,6 +212,7 @@
 #define SIDE_STATUS_QUICK_GUARD             (1 << 18)
 #define SIDE_STATUS_WIDE_GUARD              (1 << 19)
 #define SIDE_STATUS_CRAFTY_SHIELD           (1 << 20)
+#define SIDE_STATUS_MAT_BLOCK               (1 << 21)
 
 // Field affecting statuses.
 #define STATUS_FIELD_MAGIC_ROOM         0x1

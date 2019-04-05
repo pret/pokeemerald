@@ -906,6 +906,9 @@ bool32 IsBattlerProtected(u8 battlerId, u16 move)
     else if (gSideStatuses[GetBattlerSide(battlerId)] & SIDE_STATUS_CRAFTY_SHIELD
              && gBattleMoves[move].power == 0)
         return TRUE;
+    else if (gSideStatuses[GetBattlerSide(battlerId)] & SIDE_STATUS_MAT_BLOCK
+             && gBattleMoves[move].power != 0)
+        return TRUE;
     else
         return FALSE;
 }
@@ -2740,6 +2743,7 @@ void SetMoveEffect(bool32 primary, u32 certain)
                     || gSideStatuses[GetBattlerSide(gBattlerTarget)] & SIDE_STATUS_WIDE_GUARD
                     || gSideStatuses[GetBattlerSide(gBattlerTarget)] & SIDE_STATUS_QUICK_GUARD
                     || gSideStatuses[GetBattlerSide(gBattlerTarget)] & SIDE_STATUS_CRAFTY_SHIELD
+                    || gSideStatuses[GetBattlerSide(gBattlerTarget)] & SIDE_STATUS_MAT_BLOCK
                     || gProtectStructs[gBattlerTarget].spikyShielded
                     || gProtectStructs[gBattlerTarget].kingsShielded
                     || gProtectStructs[gBattlerTarget].banefulBunkered)
@@ -2748,6 +2752,7 @@ void SetMoveEffect(bool32 primary, u32 certain)
                     gSideStatuses[GetBattlerSide(gBattlerTarget)] &= ~(SIDE_STATUS_WIDE_GUARD);
                     gSideStatuses[GetBattlerSide(gBattlerTarget)] &= ~(SIDE_STATUS_QUICK_GUARD);
                     gSideStatuses[GetBattlerSide(gBattlerTarget)] &= ~(SIDE_STATUS_CRAFTY_SHIELD);
+                    gSideStatuses[GetBattlerSide(gBattlerTarget)] &= ~(SIDE_STATUS_MAT_BLOCK);
                     gProtectStructs[gBattlerTarget].spikyShielded = 0;
                     gProtectStructs[gBattlerTarget].kingsShielded = 0;
                     gProtectStructs[gBattlerTarget].banefulBunkered = 0;
@@ -7411,6 +7416,12 @@ static void atk77_setprotectlike(void)
                 gSideStatuses[side] |= SIDE_STATUS_CRAFTY_SHIELD;
                 gBattleCommunication[MULTISTRING_CHOOSER] = 3;
                 gDisableStructs[gBattlerAttacker].protectUses++;
+                fail = FALSE;
+            }
+            else if (gCurrentMove == MOVE_MAT_BLOCK && !(gSideStatuses[side] & SIDE_STATUS_MAT_BLOCK))
+            {
+                gSideStatuses[side] |= SIDE_STATUS_MAT_BLOCK;
+                gBattleCommunication[MULTISTRING_CHOOSER] = 3;
                 fail = FALSE;
             }
         }
