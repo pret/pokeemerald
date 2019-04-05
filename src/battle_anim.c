@@ -117,651 +117,1011 @@ EWRAM_DATA u8 gUnknown_02038440 = 0;
 
 const struct OamData gUnknown_08524904 =
 {
+    .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
+    .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(8x8),
+    .x = 0,
     .size = SPRITE_SIZE(8x8),
+    .tileNum = 0,
     .priority = 2,
+    .paletteNum = 0,
 };
 
 
 const struct OamData gUnknown_0852490C =
 {
+    .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
+    .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(16x16),
+    .x = 0,
     .size = SPRITE_SIZE(16x16),
+    .tileNum = 0,
     .priority = 2,
+    .paletteNum = 0,
 };
 
 const struct OamData gUnknown_08524914 =
 {
+    .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
+    .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(32x32),
+    .x = 0,
     .size = SPRITE_SIZE(32x32),
+    .tileNum = 0,
     .priority = 2,
+    .paletteNum = 0,
 };
 
 const struct OamData gUnknown_0852491C =
 {
+    .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
+    .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(64x64),
+    .x = 0,
     .size = SPRITE_SIZE(64x64),
+    .tileNum = 0,
     .priority = 2,
+    .paletteNum = 0,
 };
 
 const struct OamData gUnknown_08524924 =
 {
+    .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
+    .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(16x8),
+    .x = 0,
     .size = SPRITE_SIZE(16x8),
+    .tileNum = 0,
     .priority = 2,
+    .paletteNum = 0,
 };
 
 const struct OamData gUnknown_0852492C =
 {
+    .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
+    .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(32x8),
+    .x = 0,
     .size = SPRITE_SIZE(32x8),
+    .tileNum = 0,
     .priority = 2,
+    .paletteNum = 0,
 };
 
 const struct OamData gUnknown_08524934 =
 {
+    .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
+    .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(32x16),
+    .x = 0,
     .size = SPRITE_SIZE(32x16),
+    .tileNum = 0,
     .priority = 2,
+    .paletteNum = 0,
 };
 
 const struct OamData gUnknown_0852493C =
 {
+    .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
+    .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(64x32),
+    .x = 0,
     .size = SPRITE_SIZE(64x32),
+    .tileNum = 0,
     .priority = 2,
+    .paletteNum = 0,
 };
 
 const struct OamData gUnknown_08524944 =
 {
+    .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
+    .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(8x16),
+    .x = 0,
     .size = SPRITE_SIZE(8x16),
+    .tileNum = 0,
     .priority = 2,
+    .paletteNum = 0,
 };
 
 const struct OamData gUnknown_0852494C =
 {
+    .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
+    .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(8x32),
+    .x = 0,
     .size = SPRITE_SIZE(8x32),
+    .tileNum = 0,
     .priority = 2,
+    .paletteNum = 0,
 };
 
 const struct OamData gUnknown_08524954 =
 {
+    .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
+    .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(16x32),
+    .x = 0,
     .size = SPRITE_SIZE(16x32),
+    .tileNum = 0,
     .priority = 2,
+    .paletteNum = 0,
 };
 
 const struct OamData gUnknown_0852495C =
 {
+    .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
+    .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(32x64),
+    .x = 0,
     .size = SPRITE_SIZE(32x64),
+    .tileNum = 0,
     .priority = 2,
+    .paletteNum = 0,
 };
 
 const struct OamData gUnknown_08524964 =
 {
+    .y = 0,
     .affineMode = ST_OAM_AFFINE_NORMAL,
     .objMode = ST_OAM_OBJ_NORMAL,
+    .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(8x8),
+    .x = 0,
     .size = SPRITE_SIZE(8x8),
+    .tileNum = 0,
     .priority = 2,
+    .paletteNum = 0,
 };
 
 const struct OamData gUnknown_0852496C =
 {
+    .y = 0,
     .affineMode = ST_OAM_AFFINE_NORMAL,
     .objMode = ST_OAM_OBJ_NORMAL,
+    .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(16x16),
+    .x = 0,
     .size = SPRITE_SIZE(16x16),
+    .tileNum = 0,
     .priority = 2,
+    .paletteNum = 0,
 };
 
 const struct OamData gUnknown_08524974 =
 {
+    .y = 0,
     .affineMode = ST_OAM_AFFINE_NORMAL,
     .objMode = ST_OAM_OBJ_NORMAL,
+    .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(32x32),
+    .x = 0,
     .size = SPRITE_SIZE(32x32),
+    .tileNum = 0,
     .priority = 2,
+    .paletteNum = 0,
 };
 
 const struct OamData gUnknown_0852497C =
 {
+    .y = 0,
     .affineMode = ST_OAM_AFFINE_NORMAL,
     .objMode = ST_OAM_OBJ_NORMAL,
+    .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(64x64),
+    .x = 0,
     .size = SPRITE_SIZE(64x64),
+    .tileNum = 0,
     .priority = 2,
+    .paletteNum = 0,
 };
 
 const struct OamData gUnknown_08524984 =
 {
+    .y = 0,
     .affineMode = ST_OAM_AFFINE_NORMAL,
     .objMode = ST_OAM_OBJ_NORMAL,
+    .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(16x8),
+    .x = 0,
     .size = SPRITE_SIZE(16x8),
+    .tileNum = 0,
     .priority = 2,
+    .paletteNum = 0,
 };
 
 const struct OamData gUnknown_0852498C =
 {
+    .y = 0,
     .affineMode = ST_OAM_AFFINE_NORMAL,
     .objMode = ST_OAM_OBJ_NORMAL,
+    .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(32x8),
+    .x = 0,
     .size = SPRITE_SIZE(32x8),
+    .tileNum = 0,
     .priority = 2,
+    .paletteNum = 0,
 };
 
 const struct OamData gUnknown_08524994 =
 {
+    .y = 0,
     .affineMode = ST_OAM_AFFINE_NORMAL,
     .objMode = ST_OAM_OBJ_NORMAL,
+    .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(32x16),
+    .x = 0,
     .size = SPRITE_SIZE(32x16),
+    .tileNum = 0,
     .priority = 2,
+    .paletteNum = 0,
 };
 
 const struct OamData gUnknown_0852499C =
 {
+    .y = 0,
     .affineMode = ST_OAM_AFFINE_NORMAL,
     .objMode = ST_OAM_OBJ_NORMAL,
+    .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(64x32),
+    .x = 0,
     .size = SPRITE_SIZE(64x32),
+    .tileNum = 0,
     .priority = 2,
+    .paletteNum = 0,
 };
 
 const struct OamData gUnknown_085249A4 =
 {
+    .y = 0,
     .affineMode = ST_OAM_AFFINE_NORMAL,
     .objMode = ST_OAM_OBJ_NORMAL,
+    .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(8x16),
+    .x = 0,
     .size = SPRITE_SIZE(8x16),
+    .tileNum = 0,
     .priority = 2,
+    .paletteNum = 0,
 };
 
 const struct OamData gUnknown_085249AC =
 {
+    .y = 0,
     .affineMode = ST_OAM_AFFINE_NORMAL,
     .objMode = ST_OAM_OBJ_NORMAL,
+    .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(8x32),
+    .x = 0,
     .size = SPRITE_SIZE(8x32),
+    .tileNum = 0,
     .priority = 2,
+    .paletteNum = 0,
 };
 
 const struct OamData gUnknown_085249B4 =
 {
+    .y = 0,
     .affineMode = ST_OAM_AFFINE_NORMAL,
     .objMode = ST_OAM_OBJ_NORMAL,
+    .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(16x32),
+    .x = 0,
     .size = SPRITE_SIZE(16x32),
+    .tileNum = 0,
     .priority = 2,
+    .paletteNum = 0,
 };
 
 const struct OamData gUnknown_085249BC =
 {
+    .y = 0,
     .affineMode = ST_OAM_AFFINE_NORMAL,
     .objMode = ST_OAM_OBJ_NORMAL,
+    .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(32x64),
+    .x = 0,
     .size = SPRITE_SIZE(32x64),
+    .tileNum = 0,
     .priority = 2,
+    .paletteNum = 0,
 };
 
 const struct OamData gUnknown_085249C4 =
 {
+    .y = 0,
     .affineMode = ST_OAM_AFFINE_DOUBLE,
     .objMode = ST_OAM_OBJ_NORMAL,
+    .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(8x8),
+    .x = 0,
     .size = SPRITE_SIZE(8x8),
+    .tileNum = 0,
     .priority = 2,
+    .paletteNum = 0,
 };
 
 const struct OamData gUnknown_085249CC =
 {
+    .y = 0,
     .affineMode = ST_OAM_AFFINE_DOUBLE,
     .objMode = ST_OAM_OBJ_NORMAL,
+    .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(16x16),
+    .x = 0,
     .size = SPRITE_SIZE(16x16),
+    .tileNum = 0,
     .priority = 2,
+    .paletteNum = 0,
 };
 
 const struct OamData gUnknown_085249D4 =
 {
+    .y = 0,
     .affineMode = ST_OAM_AFFINE_DOUBLE,
     .objMode = ST_OAM_OBJ_NORMAL,
+    .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(32x32),
+    .x = 0,
     .size = SPRITE_SIZE(32x32),
+    .tileNum = 0,
     .priority = 2,
+    .paletteNum = 0,
 };
 
 const struct OamData gUnknown_085249DC =
 {
+    .y = 0,
     .affineMode = ST_OAM_AFFINE_DOUBLE,
     .objMode = ST_OAM_OBJ_NORMAL,
+    .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(64x64),
+    .x = 0,
     .size = SPRITE_SIZE(64x64),
+    .tileNum = 0,
     .priority = 2,
+    .paletteNum = 0,
 };
 
 const struct OamData gUnknown_085249E4 =
 {
+    .y = 0,
     .affineMode = ST_OAM_AFFINE_DOUBLE,
     .objMode = ST_OAM_OBJ_NORMAL,
+    .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(16x8),
+    .x = 0,
     .size = SPRITE_SIZE(16x8),
+    .tileNum = 0,
     .priority = 2,
+    .paletteNum = 0,
 };
 
 const struct OamData gUnknown_085249EC =
 {
+    .y = 0,
     .affineMode = ST_OAM_AFFINE_DOUBLE,
     .objMode = ST_OAM_OBJ_NORMAL,
+    .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(32x8),
+    .x = 0,
     .size = SPRITE_SIZE(32x8),
+    .tileNum = 0,
     .priority = 2,
+    .paletteNum = 0,
 };
 
 const struct OamData gUnknown_085249F4 =
 {
+    .y = 0,
     .affineMode = ST_OAM_AFFINE_DOUBLE,
     .objMode = ST_OAM_OBJ_NORMAL,
+    .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(32x16),
+    .x = 0,
     .size = SPRITE_SIZE(32x16),
+    .tileNum = 0,
     .priority = 2,
+    .paletteNum = 0,
 };
 
 const struct OamData gUnknown_085249FC =
 {
+    .y = 0,
     .affineMode = ST_OAM_AFFINE_DOUBLE,
     .objMode = ST_OAM_OBJ_NORMAL,
+    .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(64x32),
+    .x = 0,
     .size = SPRITE_SIZE(64x32),
+    .tileNum = 0,
     .priority = 2,
+    .paletteNum = 0,
 };
 
 const struct OamData gUnknown_08524A04 =
 {
+    .y = 0,
     .affineMode = ST_OAM_AFFINE_DOUBLE,
     .objMode = ST_OAM_OBJ_NORMAL,
+    .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(8x16),
+    .x = 0,
     .size = SPRITE_SIZE(8x16),
+    .tileNum = 0,
     .priority = 2,
+    .paletteNum = 0,
 };
 
 const struct OamData gUnknown_08524A0C =
 {
+    .y = 0,
     .affineMode = ST_OAM_AFFINE_DOUBLE,
     .objMode = ST_OAM_OBJ_NORMAL,
+    .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(8x32),
+    .x = 0,
     .size = SPRITE_SIZE(8x32),
+    .tileNum = 0,
     .priority = 2,
+    .paletteNum = 0,
 };
 
 const struct OamData gUnknown_08524A14 =
 {
+    .y = 0,
     .affineMode = ST_OAM_AFFINE_DOUBLE,
     .objMode = ST_OAM_OBJ_NORMAL,
+    .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(16x32),
+    .x = 0,
     .size = SPRITE_SIZE(16x32),
+    .tileNum = 0,
     .priority = 2,
+    .paletteNum = 0,
 };
 
 const struct OamData gUnknown_08524A1C =
 {
+    .y = 0,
     .affineMode = ST_OAM_AFFINE_DOUBLE,
     .objMode = ST_OAM_OBJ_NORMAL,
+    .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(32x64),
+    .x = 0,
     .size = SPRITE_SIZE(32x64),
+    .tileNum = 0,
     .priority = 2,
+    .paletteNum = 0,
 };
 
 const struct OamData gUnknown_08524A24 =
 {
+    .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_BLEND,
+    .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(8x8),
+    .x = 0,
     .size = SPRITE_SIZE(8x8),
+    .tileNum = 0,
     .priority = 2,
+    .paletteNum = 0,
 };
 
 const struct OamData gUnknown_08524A2C =
 {
+    .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_BLEND,
+    .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(16x16),
+    .x = 0,
     .size = SPRITE_SIZE(16x16),
+    .tileNum = 0,
     .priority = 2,
+    .paletteNum = 0,
 };
 
 const struct OamData gUnknown_08524A34 =
 {
+    .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_BLEND,
+    .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(32x32),
+    .x = 0,
     .size = SPRITE_SIZE(32x32),
+    .tileNum = 0,
     .priority = 2,
+    .paletteNum = 0,
 };
 
 const struct OamData gUnknown_08524A3C =
 {
+    .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_BLEND,
+    .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(64x64),
+    .x = 0,
     .size = SPRITE_SIZE(64x64),
+    .tileNum = 0,
     .priority = 2,
+    .paletteNum = 0,
 };
 
 const struct OamData gUnknown_08524A44 =
 {
+    .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_BLEND,
+    .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(16x8),
+    .x = 0,
     .size = SPRITE_SIZE(16x8),
+    .tileNum = 0,
     .priority = 2,
+    .paletteNum = 0,
 };
 
 const struct OamData gUnknown_08524A4C =
 {
+    .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_BLEND,
+    .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(32x8),
+    .x = 0,
     .size = SPRITE_SIZE(32x8),
+    .tileNum = 0,
     .priority = 2,
+    .paletteNum = 0,
 };
 
 const struct OamData gUnknown_08524A54 =
 {
+    .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_BLEND,
+    .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(32x16),
+    .x = 0,
     .size = SPRITE_SIZE(32x16),
+    .tileNum = 0,
     .priority = 2,
+    .paletteNum = 0,
 };
 
 const struct OamData gUnknown_08524A5C =
 {
+    .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_BLEND,
+    .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(64x32),
+    .x = 0,
     .size = SPRITE_SIZE(64x32),
+    .tileNum = 0,
     .priority = 2,
+    .paletteNum = 0,
 };
 
 const struct OamData gUnknown_08524A64 =
 {
+    .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_BLEND,
+    .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(8x16),
+    .x = 0,
     .size = SPRITE_SIZE(8x16),
+    .tileNum = 0,
     .priority = 2,
+    .paletteNum = 0,
 };
 
 const struct OamData gUnknown_08524A6C =
 {
+    .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_BLEND,
+    .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(8x32),
+    .x = 0,
     .size = SPRITE_SIZE(8x32),
+    .tileNum = 0,
     .priority = 2,
+    .paletteNum = 0,
 };
 
 const struct OamData gUnknown_08524A74 =
 {
+    .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_BLEND,
+    .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(16x32),
+    .x = 0,
     .size = SPRITE_SIZE(16x32),
+    .tileNum = 0,
     .priority = 2,
+    .paletteNum = 0,
 };
 
 const struct OamData gUnknown_08524A7C =
 {
+    .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_BLEND,
+    .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(32x64),
+    .x = 0,
     .size = SPRITE_SIZE(32x64),
+    .tileNum = 0,
     .priority = 2,
+    .paletteNum = 0,
 };
 
 const struct OamData gUnknown_08524A84 =
 {
+    .y = 0,
     .affineMode = ST_OAM_AFFINE_NORMAL,
     .objMode = ST_OAM_OBJ_BLEND,
+    .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(8x8),
+    .x = 0,
     .size = SPRITE_SIZE(8x8),
+    .tileNum = 0,
     .priority = 2,
+    .paletteNum = 0,
 };
 
 const struct OamData gUnknown_08524A8C =
 {
+    .y = 0,
     .affineMode = ST_OAM_AFFINE_NORMAL,
     .objMode = ST_OAM_OBJ_BLEND,
+    .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(16x16),
+    .x = 0,
     .size = SPRITE_SIZE(16x16),
+    .tileNum = 0,
     .priority = 2,
+    .paletteNum = 0,
 };
 
 const struct OamData gUnknown_08524A94 =
 {
+    .y = 0,
     .affineMode = ST_OAM_AFFINE_NORMAL,
     .objMode = ST_OAM_OBJ_BLEND,
+    .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(32x32),
+    .x = 0,
     .size = SPRITE_SIZE(32x32),
+    .tileNum = 0,
     .priority = 2,
+    .paletteNum = 0,
 };
 
 const struct OamData gUnknown_08524A9C =
 {
+    .y = 0,
     .affineMode = ST_OAM_AFFINE_NORMAL,
     .objMode = ST_OAM_OBJ_BLEND,
+    .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(64x64),
+    .x = 0,
     .size = SPRITE_SIZE(64x64),
+    .tileNum = 0,
     .priority = 2,
+    .paletteNum = 0,
 };
 
 const struct OamData gUnknown_08524AA4 =
 {
+    .y = 0,
     .affineMode = ST_OAM_AFFINE_NORMAL,
     .objMode = ST_OAM_OBJ_BLEND,
+    .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(16x8),
+    .x = 0,
     .size = SPRITE_SIZE(16x8),
+    .tileNum = 0,
     .priority = 2,
+    .paletteNum = 0,
 };
 
 const struct OamData gUnknown_08524AAC =
 {
+    .y = 0,
     .affineMode = ST_OAM_AFFINE_NORMAL,
     .objMode = ST_OAM_OBJ_BLEND,
+    .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(32x8),
+    .x = 0,
     .size = SPRITE_SIZE(32x8),
+    .tileNum = 0,
     .priority = 2,
+    .paletteNum = 0,
 };
 
 const struct OamData gUnknown_08524AB4 =
 {
+    .y = 0,
     .affineMode = ST_OAM_AFFINE_NORMAL,
     .objMode = ST_OAM_OBJ_BLEND,
+    .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(32x16),
+    .x = 0,
     .size = SPRITE_SIZE(32x16),
+    .tileNum = 0,
     .priority = 2,
+    .paletteNum = 0,
 };
 
 const struct OamData gUnknown_08524ABC =
 {
+    .y = 0,
     .affineMode = ST_OAM_AFFINE_NORMAL,
     .objMode = ST_OAM_OBJ_BLEND,
+    .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(64x32),
+    .x = 0,
     .size = SPRITE_SIZE(64x32),
+    .tileNum = 0,
     .priority = 2,
+    .paletteNum = 0,
 };
 
 const struct OamData gUnknown_08524AC4 =
 {
+    .y = 0,
     .affineMode = ST_OAM_AFFINE_NORMAL,
     .objMode = ST_OAM_OBJ_BLEND,
+    .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(8x16),
+    .x = 0,
     .size = SPRITE_SIZE(8x16),
+    .tileNum = 0,
     .priority = 2,
+    .paletteNum = 0,
 };
 
 const struct OamData gUnknown_08524ACC =
 {
+    .y = 0,
     .affineMode = ST_OAM_AFFINE_NORMAL,
     .objMode = ST_OAM_OBJ_BLEND,
+    .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(8x32),
+    .x = 0,
     .size = SPRITE_SIZE(8x32),
+    .tileNum = 0,
     .priority = 2,
+    .paletteNum = 0,
 };
 
 const struct OamData gUnknown_08524AD4 =
 {
+    .y = 0,
     .affineMode = ST_OAM_AFFINE_NORMAL,
     .objMode = ST_OAM_OBJ_BLEND,
+    .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(16x32),
+    .x = 0,
     .size = SPRITE_SIZE(16x32),
+    .tileNum = 0,
     .priority = 2,
+    .paletteNum = 0,
 };
 
 const struct OamData gUnknown_08524ADC =
 {
+    .y = 0,
     .affineMode = ST_OAM_AFFINE_NORMAL,
     .objMode = ST_OAM_OBJ_BLEND,
+    .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(32x64),
+    .x = 0,
     .size = SPRITE_SIZE(32x64),
+    .tileNum = 0,
     .priority = 2,
+    .paletteNum = 0,
 };
 
 const struct OamData gUnknown_08524AE4 =
 {
+    .y = 0,
     .affineMode = ST_OAM_AFFINE_DOUBLE,
     .objMode = ST_OAM_OBJ_BLEND,
+    .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(8x8),
+    .x = 0,
     .size = SPRITE_SIZE(8x8),
+    .tileNum = 0,
     .priority = 2,
+    .paletteNum = 0,
 };
 
 const struct OamData gUnknown_08524AEC =
 {
+    .y = 0,
     .affineMode = ST_OAM_AFFINE_DOUBLE,
     .objMode = ST_OAM_OBJ_BLEND,
+    .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(16x16),
+    .x = 0,
     .size = SPRITE_SIZE(16x16),
+    .tileNum = 0,
     .priority = 2,
+    .paletteNum = 0,
 };
 
 const struct OamData gUnknown_08524AF4 =
 {
+    .y = 0,
     .affineMode = ST_OAM_AFFINE_DOUBLE,
     .objMode = ST_OAM_OBJ_BLEND,
+    .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(32x32),
+    .x = 0,
     .size = SPRITE_SIZE(32x32),
+    .tileNum = 0,
     .priority = 2,
+    .paletteNum = 0,
 };
 
 const struct OamData gUnknown_08524AFC =
 {
+    .y = 0,
     .affineMode = ST_OAM_AFFINE_DOUBLE,
     .objMode = ST_OAM_OBJ_BLEND,
+    .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(64x64),
+    .x = 0,
     .size = SPRITE_SIZE(64x64),
+    .tileNum = 0,
     .priority = 2,
+    .paletteNum = 0,
 };
 
 const struct OamData gUnknown_08524B04 =
 {
+    .y = 0,
     .affineMode = ST_OAM_AFFINE_DOUBLE,
     .objMode = ST_OAM_OBJ_BLEND,
+    .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(16x8),
+    .x = 0,
     .size = SPRITE_SIZE(16x8),
+    .tileNum = 0,
     .priority = 2,
+    .paletteNum = 0,
 };
 
 const struct OamData gUnknown_08524B0C =
 {
+    .y = 0,
     .affineMode = ST_OAM_AFFINE_DOUBLE,
     .objMode = ST_OAM_OBJ_BLEND,
+    .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(32x8),
+    .x = 0,
     .size = SPRITE_SIZE(32x8),
+    .tileNum = 0,
     .priority = 2,
+    .paletteNum = 0,
 };
 
 const struct OamData gUnknown_08524B14 =
 {
+    .y = 0,
     .affineMode = ST_OAM_AFFINE_DOUBLE,
     .objMode = ST_OAM_OBJ_BLEND,
+    .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(32x16),
+    .x = 0,
     .size = SPRITE_SIZE(32x16),
+    .tileNum = 0,
     .priority = 2,
+    .paletteNum = 0,
 };
 
 const struct OamData gUnknown_08524B1C =
 {
+    .y = 0,
     .affineMode = ST_OAM_AFFINE_DOUBLE,
     .objMode = ST_OAM_OBJ_BLEND,
+    .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(64x32),
+    .x = 0,
     .size = SPRITE_SIZE(64x32),
+    .tileNum = 0,
     .priority = 2,
+    .paletteNum = 0,
 };
 
 const struct OamData gUnknown_08524B24 =
 {
+    .y = 0,
     .affineMode = ST_OAM_AFFINE_DOUBLE,
     .objMode = ST_OAM_OBJ_BLEND,
+    .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(8x16),
+    .x = 0,
     .size = SPRITE_SIZE(8x16),
+    .tileNum = 0,
     .priority = 2,
+    .paletteNum = 0,
 };
 
 const struct OamData gUnknown_08524B2C =
 {
+    .y = 0,
     .affineMode = ST_OAM_AFFINE_DOUBLE,
     .objMode = ST_OAM_OBJ_BLEND,
+    .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(8x32),
+    .x = 0,
     .size = SPRITE_SIZE(8x32),
+    .tileNum = 0,
     .priority = 2,
+    .paletteNum = 0,
 };
 
 const struct OamData gUnknown_08524B34 =
 {
+    .y = 0,
     .affineMode = ST_OAM_AFFINE_DOUBLE,
     .objMode = ST_OAM_OBJ_BLEND,
+    .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(16x32),
+    .x = 0,
     .size = SPRITE_SIZE(16x32),
+    .tileNum = 0,
     .priority = 2,
+    .paletteNum = 0,
 };
 
 const struct OamData gUnknown_08524B3C =
 {
+    .y = 0,
     .affineMode = ST_OAM_AFFINE_DOUBLE,
     .objMode = ST_OAM_OBJ_BLEND,
+    .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(32x64),
+    .x = 0,
     .size = SPRITE_SIZE(32x64),
+    .tileNum = 0,
     .priority = 2,
+    .paletteNum = 0,
 };
 
 const struct CompressedSpriteSheet gBattleAnimPicTable[] =
@@ -3098,3 +3458,5 @@ static void ScriptCmd_stopsound(void)
     m4aMPlayStop(&gMPlayInfo_SE2);
     sBattleAnimScriptPtr++;
 }
+
+

@@ -152,16 +152,14 @@ const struct OamData gUnknown_085B0830 =
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .mosaic = 1,
+    .mosaic = TRUE,
     .bpp = ST_OAM_8BPP,
     .shape = SPRITE_SHAPE(64x64),
     .x = 0,
-    .matrixNum = 0,
     .size = SPRITE_SIZE(64x64),
     .tileNum = 0,
     .priority = 0,
     .paletteNum = 0,
-    .affineParam = 0,
 };
 
 const u16 gUnknown_085B0838[] = {RGB(0, 0, 0), RGB(0, 0, 0)};
@@ -705,3 +703,4 @@ static void sub_8130884(u8 arg0, u8 arg1)
     sub_8130688(arg0);
     sub_8130430(arg0, arg1);
 }
+

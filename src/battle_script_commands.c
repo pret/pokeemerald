@@ -297,7 +297,7 @@ static void atkDA_tryswapabilities(void);
 static void atkDB_tryimprison(void);
 static void atkDC_setstealthrock(void);
 static void atkDD_setuserstatus3(void);
-static void atkDE_asistattackselect(void);
+static void atkDE_assistattackselect(void);
 static void atkDF_trysetmagiccoat(void);
 static void atkE0_trysetsnatch(void);
 static void atkE1_trygetintimidatetarget(void);
@@ -556,7 +556,7 @@ void (* const gBattleScriptingCommandsTable[])(void) =
     atkDB_tryimprison,
     atkDC_setstealthrock,
     atkDD_setuserstatus3,
-    atkDE_asistattackselect,
+    atkDE_assistattackselect,
     atkDF_trysetmagiccoat,
     atkE0_trysetsnatch,
     atkE1_trygetintimidatetarget,
@@ -5972,16 +5972,16 @@ static void sub_804F100(void)
 {
     struct StatsArray currentStats;
 
-    GetMonLevelUpWindowStats(&gPlayerParty[gBattleStruct->expGetterMonId], &currentStats);
-    DrawLevelUpWindowPg1(0xD, gBattleResources->statsBeforeLvlUp, &currentStats, 0xE, 0xD, 0xF);
+    GetMonLevelUpWindowStats(&gPlayerParty[gBattleStruct->expGetterMonId], (u16*) &currentStats);
+    DrawLevelUpWindowPg1(0xD, (u16*) gBattleResources->statsBeforeLvlUp,(u16*) &currentStats, 0xE, 0xD, 0xF);
 }
 
 static void sub_804F144(void)
 {
     struct StatsArray currentStats;
 
-    GetMonLevelUpWindowStats(&gPlayerParty[gBattleStruct->expGetterMonId], &currentStats);
-    DrawLevelUpWindowPg2(0xD, &currentStats, 0xE, 0xD, 0xF);
+    GetMonLevelUpWindowStats(&gPlayerParty[gBattleStruct->expGetterMonId], (u16*) &currentStats);
+    DrawLevelUpWindowPg2(0xD, (u16*) &currentStats, 0xE, 0xD, 0xF);
 }
 
 static void sub_804F17C(void)
@@ -10367,7 +10367,7 @@ static void atkDD_setuserstatus3(void)
     }
 }
 
-static void atkDE_asistattackselect(void)
+static void atkDE_assistattackselect(void)
 {
     s32 chooseableMovesNo = 0;
     struct Pokemon* party;

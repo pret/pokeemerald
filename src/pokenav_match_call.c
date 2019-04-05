@@ -73,20 +73,15 @@ struct MatchCallStruct4 {
     const match_call_text_data_t *textData;
 };
 
+// Note: Type1 and Type5 have identical struct layouts.
 struct MatchCallStruct5 {
     u8 type;
     u8 v1;
     u16 flag;
-    u16 v4;
+    u16 rematchTableIdx;
     const u8 *desc;
     const u8 *name;
     const match_call_text_data_t *textData;
-};
-
-#define MATCHCALLDEF(name, type_, ...) \
-static const struct MatchCallStruct##type_ name = { \
-    .type = type_, \
-    __VA_ARGS__ \
 };
 
 typedef union {
@@ -328,7 +323,15 @@ static const match_call_text_data_t sMrStoneTextScripts[] = {
     { NULL,                         0xFFFF,              0xFFFF }
 };
 
-MATCHCALLDEF(sMrStoneMatchCallHeader, 0, 10, 0xffff, gMrStoneMatchCallDesc, gMrStoneMatchCallName, sMrStoneTextScripts);
+static const struct MatchCallStruct0 sMrStoneMatchCallHeader =
+{
+    .type = 0,
+    .v1 = 10,
+    .flag = 0xFFFF,
+    .desc = gMrStoneMatchCallDesc,
+    .name = gMrStoneMatchCallName,
+    .textData = sMrStoneTextScripts
+};
 
 static const match_call_text_data_t sNormanTextScripts[] = {
     { gText_Norman_Pokenav_2B5719, FLAG_ENABLE_NORMAN_MATCH_CALL,           0xFFFF },
@@ -343,9 +346,25 @@ static const match_call_text_data_t sNormanTextScripts[] = {
     { NULL,                        0xFFFF,               0xFFFF }
 };
 
-MATCHCALLDEF(sNormanMatchCallHeader, 5, 7, FLAG_ENABLE_NORMAN_MATCH_CALL, 0x45, gNormanMatchCallDesc, gNormanMatchCallName, sNormanTextScripts);
+static const struct MatchCallStruct5 sNormanMatchCallHeader =
+{
+    .type = 5,
+    .v1 = 7,
+    .flag = FLAG_ENABLE_NORMAN_MATCH_CALL,
+    .rematchTableIdx = REMATCH_NORMAN,
+    .desc = gNormanMatchCallDesc,
+    .name = gNormanMatchCallName,
+    .textData = sNormanTextScripts
+};
 
-MATCHCALLDEF(sProfBirchMatchCallHeader, 3, 0, FLAG_ENABLE_PROF_BIRCH_MATCH_CALL, gProfBirchMatchCallDesc, gProfBirchMatchCallName)
+static const struct MatchCallStruct3 sProfBirchMatchCallHeader =
+{
+    .type = 3,
+    .v1 = 0,
+    .flag = FLAG_ENABLE_PROF_BIRCH_MATCH_CALL,
+    .desc = gProfBirchMatchCallDesc,
+    .name = gProfBirchMatchCallName
+};
 
 static const match_call_text_data_t sMomTextScripts[] = {
     { gText_Mom_Pokenav_2B227B, 0xffff,              0xffff },
@@ -354,7 +373,15 @@ static const match_call_text_data_t sMomTextScripts[] = {
     { NULL,                     0xffff,              0xffff }
 };
 
-MATCHCALLDEF(sMomMatchCallHeader, 0, 0, FLAG_ENABLE_MOM_MATCH_CALL, gMomMatchCallDesc, gMomMatchCallName, sMomTextScripts);
+static const struct MatchCallStruct0 sMomMatchCallHeader =
+{
+    .type = 0,
+    .v1 = 0,
+    .flag = FLAG_ENABLE_MOM_MATCH_CALL,
+    .desc = gMomMatchCallDesc,
+    .name = gMomMatchCallName,
+    .textData = sMomTextScripts
+};
 
 static const match_call_text_data_t sStevenTextScripts[] = {
     { gText_Steven_Pokenav_2B5B95, 0xffff,              0xffff },
@@ -367,7 +394,15 @@ static const match_call_text_data_t sStevenTextScripts[] = {
     { NULL,                        0xffff,              0xffff },
 };
 
-MATCHCALLDEF(sStevenMatchCallHeader, 0, 0xd5, FLAG_REGISTERED_STEVEN_POKENAV, gStevenMatchCallDesc, gStevenMatchCallName, sStevenTextScripts);
+static const struct MatchCallStruct0 sStevenMatchCallHeader =
+{
+    .type = 0,
+    .v1 = 0xD5,
+    .flag = FLAG_REGISTERED_STEVEN_POKENAV,
+    .desc = gStevenMatchCallDesc,
+    .name = gStevenMatchCallName,
+    .textData = sStevenTextScripts
+};
 
 static const match_call_text_data_t sMayTextScripts[] = {
     { gText_May_Pokenav_2B3AB3, 0xFFFF,              0xFFFF },
@@ -388,7 +423,15 @@ static const match_call_text_data_t sMayTextScripts[] = {
     { NULL,                     0xFFFF,              0xFFFF }
 };
 
-MATCHCALLDEF(sMayMatchCallHeader, 4, MALE, FLAG_ENABLE_RIVAL_MATCH_CALL, gMayBrendanMatchCallDesc, gExpandedPlaceholder_May, sMayTextScripts);
+static const struct MatchCallStruct4 sMayMatchCallHeader =
+{
+    .type = 4,
+    .gender = MALE,
+    .flag = FLAG_ENABLE_RIVAL_MATCH_CALL,
+    .desc = gMayBrendanMatchCallDesc,
+    .name = gExpandedPlaceholder_May,
+    .textData = sMayTextScripts
+};
 
 static const match_call_text_data_t sBrendanTextScripts[] = {
     { gText_Brendan_Pokenav_2B43EF, 0xFFFF,              0xFFFF },
@@ -409,7 +452,15 @@ static const match_call_text_data_t sBrendanTextScripts[] = {
     { NULL,                         0xFFFF,              0xFFFF }
 };
 
-MATCHCALLDEF(sBrendanMatchCallHeader, 4, FEMALE, FLAG_ENABLE_RIVAL_MATCH_CALL, gMayBrendanMatchCallDesc, gExpandedPlaceholder_Brendan, sBrendanTextScripts);
+static const struct MatchCallStruct4 sBrendanMatchCallHeader =
+{
+    .type = 4,
+    .gender = FEMALE,
+    .flag = FLAG_ENABLE_RIVAL_MATCH_CALL,
+    .desc = gMayBrendanMatchCallDesc,
+    .name = gExpandedPlaceholder_Brendan,
+    .textData = sBrendanTextScripts
+};
 
 static const match_call_text_data_t sWallyTextScripts[] = {
     { gText_Wally_Pokenav_2B4DE2, 0xFFFF,     0xFFFF },
@@ -429,7 +480,16 @@ const struct MatchCallSubstruct2 sWallyAdditionalData[] = {
     { 0xFFFF,     0xD5 }
 };
 
-MATCHCALLDEF(sWallyMatchCallHeader, 2, 0, FLAG_ENABLE_WALLY_MATCH_CALL, REMATCH_WALLY_3, gWallyMatchCallDesc, sWallyTextScripts, sWallyAdditionalData);
+static const struct MatchCallStruct2 sWallyMatchCallHeader =
+{
+    .type = 2,
+    .v1 = 0,
+    .flag = FLAG_ENABLE_WALLY_MATCH_CALL,
+    .rematchTableIdx = REMATCH_WALLY_3,
+    .desc = gWallyMatchCallDesc,
+    .textData = sWallyTextScripts,
+    .v10 = sWallyAdditionalData
+};
 
 static const match_call_text_data_t sScottTextScripts[] = {
     { gText_Scott_Pokenav_2B5184, 0xFFFF,              0xFFFF },
@@ -443,7 +503,15 @@ static const match_call_text_data_t sScottTextScripts[] = {
 };
 
 
-MATCHCALLDEF(sScottMatchCallHeader, 0, 0xD5, FLAG_ENABLE_SCOTT_MATCH_CALL, gScottMatchCallDesc, gScottMatchCallName, sScottTextScripts);
+static const struct MatchCallStruct0 sScottMatchCallHeader =
+{
+    .type = 0,
+    .v1 = 0xD5,
+    .flag = FLAG_ENABLE_SCOTT_MATCH_CALL,
+    .desc = gScottMatchCallDesc,
+    .name = gScottMatchCallName,
+    .textData = sScottTextScripts
+};
 
 static const match_call_text_data_t sRoxanneTextScripts[] = {
     { gText_Roxanne_Pokenav_2B2456, 0xFFFE,              0xFFFF },
@@ -453,7 +521,16 @@ static const match_call_text_data_t sRoxanneTextScripts[] = {
     { NULL,                         0xFFFF,              0xFFFF }
 };
 
-MATCHCALLDEF(sRoxanneMatchCallHeader, 5, 10, FLAG_ENABLE_ROXANNE_MATCH_CALL, 0x41, gRoxanneMatchCallDesc, NULL, sRoxanneTextScripts);
+static const struct MatchCallStruct5 sRoxanneMatchCallHeader =
+{
+    .type = 5,
+    .v1 = 10,
+    .flag = FLAG_ENABLE_ROXANNE_MATCH_CALL,
+    .rematchTableIdx = REMATCH_ROXANNE,
+    .desc = gRoxanneMatchCallDesc,
+    .name = NULL,
+    .textData = sRoxanneTextScripts
+};
 
 static const match_call_text_data_t sBrawlyTextScripts[] = {
     { gText_Brawly_Pokenav_2B2659, 0xFFFE,              0xFFFF },
@@ -463,7 +540,16 @@ static const match_call_text_data_t sBrawlyTextScripts[] = {
     { NULL,                        0xFFFF,              0xFFFF }
 };
 
-MATCHCALLDEF(sBrawlyMatchCallHeader, 5, 2, FLAG_ENABLE_BRAWLY_MATCH_CALL, 0x42, gBrawlyMatchCallDesc, NULL, sBrawlyTextScripts);
+static const struct MatchCallStruct5 sBrawlyMatchCallHeader =
+{
+    .type = 5,
+    .v1 = 2,
+    .flag = FLAG_ENABLE_BRAWLY_MATCH_CALL,
+    .rematchTableIdx = REMATCH_BRAWLY,
+    .desc = gBrawlyMatchCallDesc,
+    .name = NULL,
+    .textData = sBrawlyTextScripts
+};
 
 static const match_call_text_data_t sWattsonTextScripts[] = {
     { gText_Wattson_Pokenav_2B2912, 0xFFFE,              0xFFFF },
@@ -473,7 +559,16 @@ static const match_call_text_data_t sWattsonTextScripts[] = {
     { NULL,                         0xFFFF,              0xFFFF }
 };
 
-MATCHCALLDEF(sWattsonMatchCallHeader, 5, 9, FLAG_ENABLE_WATTSON_MATCH_CALL, 0x43, gWattsonMatchCallDesc, NULL, sWattsonTextScripts);
+static const struct MatchCallStruct5 sWattsonMatchCallHeader =
+{
+    .type = 5,
+    .v1 = 9,
+    .flag = FLAG_ENABLE_WATTSON_MATCH_CALL,
+    .rematchTableIdx = REMATCH_WATTSON,
+    .desc = gWattsonMatchCallDesc,
+    .name = NULL,
+    .textData = sWattsonTextScripts
+};
 
 static const match_call_text_data_t sFlanneryTextScripts[] = {
     { gText_Flannery_Pokenav_2B2B4D, 0xFFFE,              0xFFFF },
@@ -483,7 +578,16 @@ static const match_call_text_data_t sFlanneryTextScripts[] = {
     { NULL,                          0xFFFF,              0xFFFF }
 };
 
-MATCHCALLDEF(sFlanneryMatchCallHeader, 5, 3, FLAG_ENABLE_FLANNERY_MATCH_CALL, 0x44, gFlanneryMatchCallDesc, NULL, sFlanneryTextScripts);
+static const struct MatchCallStruct5 sFlanneryMatchCallHeader =
+{
+    .type = 5,
+    .v1 = 3,
+    .flag = FLAG_ENABLE_FLANNERY_MATCH_CALL,
+    .rematchTableIdx = REMATCH_FLANNERY,
+    .desc = gFlanneryMatchCallDesc,
+    .name = NULL,
+    .textData = sFlanneryTextScripts
+};
 
 static const match_call_text_data_t sWinonaTextScripts[] = {
     { gText_Winona_Pokenav_2B2DA4, 0xFFFE,              0xFFFF },
@@ -493,7 +597,16 @@ static const match_call_text_data_t sWinonaTextScripts[] = {
     { NULL,                        0xFFFF,              0xFFFF }
 };
 
-MATCHCALLDEF(sWinonaMatchCallHeader, 5, 11, FLAG_ENABLE_WINONA_MATCH_CALL, 0x46, gWinonaMatchCallDesc, NULL, sWinonaTextScripts);
+static const struct MatchCallStruct5 sWinonaMatchCallHeader =
+{
+    .type = 5,
+    .v1 = 11,
+    .flag = FLAG_ENABLE_WINONA_MATCH_CALL,
+    .rematchTableIdx = REMATCH_WINONA,
+    .desc = gWinonaMatchCallDesc,
+    .name = NULL,
+    .textData = sWinonaTextScripts
+};
 
 static const match_call_text_data_t sTateLizaTextScripts[] = {
     { gText_TateLiza_Pokenav_2B2F97, 0xFFFE,              0xFFFF },
@@ -503,7 +616,16 @@ static const match_call_text_data_t sTateLizaTextScripts[] = {
     { NULL,                          0xFFFF,              0xFFFF }
 };
 
-MATCHCALLDEF(sTateLizaMatchCallHeader, 5, 13, FLAG_ENABLE_TATE_AND_LIZA_MATCH_CALL, 0x47, gTateLizaMatchCallDesc, NULL, sTateLizaTextScripts);
+static const struct MatchCallStruct5 sTateLizaMatchCallHeader =
+{
+    .type = 5,
+    .v1 = 13,
+    .flag = FLAG_ENABLE_TATE_AND_LIZA_MATCH_CALL,
+    .rematchTableIdx = REMATCH_TATE_AND_LIZA,
+    .desc = gTateLizaMatchCallDesc,
+    .name = NULL,
+    .textData = sTateLizaTextScripts
+};
 
 static const match_call_text_data_t sJuanTextScripts[] = {
     { gText_Juan_Pokenav_2B3249, 0xFFFE,              0xFFFF },
@@ -513,42 +635,96 @@ static const match_call_text_data_t sJuanTextScripts[] = {
     { NULL,                      0xFFFF,              0xFFFF }
 };
 
-MATCHCALLDEF(sJuanMatchCallHeader, 5, 14, FLAG_ENABLE_JUAN_MATCH_CALL, 0x48, gJuanMatchCallDesc, NULL, sJuanTextScripts);
+static const struct MatchCallStruct5 sJuanMatchCallHeader =
+{
+    .type = 5,
+    .v1 = 14,
+    .flag = FLAG_ENABLE_JUAN_MATCH_CALL,
+    .rematchTableIdx = REMATCH_JUAN,
+    .desc = gJuanMatchCallDesc,
+    .name = NULL,
+    .textData = sJuanTextScripts
+};
 
 static const match_call_text_data_t sSidneyTextScripts[] = {
     { gText_Sidney_Pokenav_2B34CC, 0xFFFF, 0xFFFF },
     { NULL,                        0xFFFF, 0xFFFF }
 };
 
-MATCHCALLDEF(sSidneyMatchCallHeader, 5, 15, FLAG_REMATCH_JUAN, 0x49, gEliteFourMatchCallDesc, NULL, sSidneyTextScripts);
+static const struct MatchCallStruct5 sSidneyMatchCallHeader =
+{
+    .type = 5,
+    .v1 = 15,
+    .flag = FLAG_REMATCH_SIDNEY,
+    .rematchTableIdx = REMATCH_SIDNEY,
+    .desc = gEliteFourMatchCallDesc,
+    .name = NULL,
+    .textData = sSidneyTextScripts
+};
 
 static const match_call_text_data_t sPhoebeTextScripts[] = {
     { gText_Phoebe_Pokenav_2B3561, 0xFFFF, 0xFFFF },
     { NULL,                        0xFFFF, 0xFFFF }
 };
 
-MATCHCALLDEF(sPhoebeMatchCallHeader, 5, 15, FLAG_REMATCH_SIDNEY, 0x4A, gEliteFourMatchCallDesc, NULL, sPhoebeTextScripts);
+static const struct MatchCallStruct5 sPhoebeMatchCallHeader =
+{
+    .type = 5,
+    .v1 = 15,
+    .flag = FLAG_REMATCH_PHOEBE,
+    .rematchTableIdx = REMATCH_PHOEBE,
+    .desc = gEliteFourMatchCallDesc,
+    .name = NULL,
+    .textData = sPhoebeTextScripts
+};
 
 static const match_call_text_data_t sGlaciaTextScripts[] = {
     { gText_Glacia_Pokenav_2B35E4, 0xFFFF, 0xFFFF },
     { NULL,                        0xFFFF, 0xFFFF }
 };
 
-MATCHCALLDEF(sGlaciaMatchCallHeader, 5, 15, FLAG_REMATCH_PHOEBE, 0x4B, gEliteFourMatchCallDesc, NULL, sGlaciaTextScripts);
+static const struct MatchCallStruct5 sGlaciaMatchCallHeader =
+{
+    .type = 5,
+    .v1 = 15,
+    .flag = FLAG_REMATCH_GLACIA,
+    .rematchTableIdx = REMATCH_GLACIA,
+    .desc = gEliteFourMatchCallDesc,
+    .name = NULL,
+    .textData = sGlaciaTextScripts
+};
 
 static const match_call_text_data_t sDrakeTextScripts[] = {
     { gText_Drake_Pokenav_2B368B, 0xFFFF, 0xFFFF },
     { NULL,                       0xFFFF, 0xFFFF }
 };
 
-MATCHCALLDEF(sDrakeMatchCallHeader, 5, 15, FLAG_REMATCH_GLACIA, 0x4C, gEliteFourMatchCallDesc, NULL, sDrakeTextScripts);
+static const struct MatchCallStruct5 sDrakeMatchCallHeader =
+{
+    .type = 5,
+    .v1 = 15,
+    .flag = FLAG_REMATCH_DRAKE,
+    .rematchTableIdx = REMATCH_DRAKE,
+    .desc = gEliteFourMatchCallDesc,
+    .name = NULL,
+    .textData = sDrakeTextScripts
+};
 
 static const match_call_text_data_t sWallaceTextScripts[] = {
     { gText_Wallace_Pokenav_2B3790, 0xFFFF, 0xFFFF },
     { NULL,                         0xFFFF, 0xFFFF }
 };
 
-MATCHCALLDEF(sWallaceMatchCallHeader, 5, 15, FLAG_REMATCH_DRAKE, 0x4D, gChampionMatchCallDesc, NULL, sWallaceTextScripts);
+static const struct MatchCallStruct5 sWallaceMatchCallHeader =
+{
+    .type = 5,
+    .v1 = 15,
+    .flag = FLAG_REMATCH_WALLACE,
+    .rematchTableIdx = REMATCH_WALLACE,
+    .desc = gChampionMatchCallDesc,
+    .name = NULL,
+    .textData = sWallaceTextScripts
+};
 
 static const match_call_t sMatchCallHeaders[] = {
     {.type0 = &sMrStoneMatchCallHeader},
@@ -680,7 +856,7 @@ bool32 MatchCallFlagGetByIndex(u32 idx)
     match_call_t matchCall;
     u32 i;
 
-    if (idx > 20)
+    if (idx > ARRAY_COUNT(sMatchCallHeaders) - 1)
         return FALSE;
     matchCall = sMatchCallHeaders[idx];
     i = MatchCallGetFunctionIndex(matchCall);
@@ -727,7 +903,7 @@ u8 sub_81D16DC(u32 idx)
     match_call_t matchCall;
     u32 i;
 
-    if (idx > 20)
+    if (idx > ARRAY_COUNT(sMatchCallHeaders) - 1)
         return 0;
     matchCall = sMatchCallHeaders[idx];
     i = MatchCallGetFunctionIndex(matchCall);
@@ -771,7 +947,7 @@ bool32 MatchCall_IsRematchable(u32 idx)
     match_call_t matchCall;
     u32 i;
 
-    if (idx > 20)
+    if (idx > ARRAY_COUNT(sMatchCallHeaders) - 1)
         return 0;
     matchCall = sMatchCallHeaders[idx];
     i = MatchCallGetFunctionIndex(matchCall);
@@ -810,13 +986,13 @@ bool32 sub_81D17E8(u32 idx)
     match_call_t matchCall;
     u32 i;
 
-    if (idx > 20)
+    if (idx > ARRAY_COUNT(sMatchCallHeaders) - 1)
         return FALSE;
     matchCall = sMatchCallHeaders[idx];
     i = MatchCallGetFunctionIndex(matchCall);
     if (gUnknown_08625338[i](matchCall))
         return TRUE;
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < ARRAY_COUNT(sMatchCallCheckPageOverrides); i++)
     {
         if (sMatchCallCheckPageOverrides[i].idx == idx)
             return TRUE;
@@ -854,7 +1030,7 @@ u32 MatchCall_GetRematchTableIdx(u32 idx)
     match_call_t matchCall;
     u32 i;
 
-    if (idx > 20)
+    if (idx > ARRAY_COUNT(sMatchCallHeaders) - 1)
         return REMATCH_TABLE_ENTRIES;
     matchCall = sMatchCallHeaders[idx];
     i = MatchCallGetFunctionIndex(matchCall);
@@ -891,7 +1067,7 @@ void MatchCall_GetMessage(u32 idx, u8 *dest)
     match_call_t matchCall;
     u32 i;
 
-    if (idx > 20)
+    if (idx > ARRAY_COUNT(sMatchCallHeaders) - 1)
         return;
     matchCall = sMatchCallHeaders[idx];
     i = MatchCallGetFunctionIndex(matchCall);
@@ -906,9 +1082,9 @@ static void MatchCall_GetMessage_Type0(match_call_t matchCall, u8 *dest)
 static void MatchCall_GetMessage_Type1(match_call_t matchCall, u8 *dest)
 {
     if (matchCall.common->type != 5)
-        sub_81D1920(matchCall.type5->textData, dest);
+        sub_81D1920(matchCall.type1->textData, dest);
     else
-        sub_81D199C(matchCall.type1->textData, matchCall.type1->rematchTableIdx, dest);
+        sub_81D199C(matchCall.type5->textData, matchCall.type5->rematchTableIdx, dest);
 }
 
 static void MatchCall_GetMessage_Type2(match_call_t matchCall, u8 *dest)
@@ -1093,7 +1269,7 @@ void sub_81D1A78(u32 idx, const u8 **desc, const u8 **name)
     match_call_t matchCall;
     u32 i;
 
-    if (idx > 20)
+    if (idx > ARRAY_COUNT(sMatchCallHeaders) - 1)
         return;
     matchCall = sMatchCallHeaders[idx];
     i = MatchCallGetFunctionIndex(matchCall);
@@ -1146,11 +1322,11 @@ const u8 *sub_81D1B40(u32 idx, u32 offset)
 {
     u32 i;
 
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < ARRAY_COUNT(sMatchCallCheckPageOverrides); i++)
     {
         if (sMatchCallCheckPageOverrides[i].idx == idx)
         {
-            for (; i + 1 < 4 && sMatchCallCheckPageOverrides[i + 1].idx == idx; i++)
+            for (; i + 1 < ARRAY_COUNT(sMatchCallCheckPageOverrides) && sMatchCallCheckPageOverrides[i + 1].idx == idx; i++)
             {
                 if (!FlagGet(sMatchCallCheckPageOverrides[i + 1].v4))
                     break;
@@ -1244,7 +1420,7 @@ s32 sub_81D1BD0(u32 idx)
 {
     u32 i;
 
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < ARRAY_COUNT(sMatchCallCheckPageOverrides); i++)
     {
         if (sMatchCallCheckPageOverrides[i].idx == idx)
             return sMatchCallCheckPageOverrides[i].v2;
@@ -1256,7 +1432,7 @@ bool32 sub_81D1BF8(u32 idx)
 {
     s32 i;
 
-    for (i = 0; i < 21; i++)
+    for (i = 0; i < (s32)ARRAY_COUNT(sMatchCallHeaders); i++)
     {
         u32 r0 = MatchCall_GetRematchTableIdx(i);
         if (r0 != REMATCH_TABLE_ENTRIES && r0 == idx)

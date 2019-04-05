@@ -43,8 +43,8 @@ struct Menu
     u8 fontId;
     u8 optionWidth;
     u8 optionHeight;
-    u8 horizontalCount;
-    u8 verticalCount;
+    u8 columns;
+    u8 rows;
     bool8 APressMuted;
 };
 
@@ -1283,8 +1283,8 @@ u8 sub_8198F58(u8 windowId, u8 fontId, u8 left, u8 top, u8 a4, u8 cursorHeight, 
     sMenu.fontId = fontId;
     sMenu.optionWidth = a4;
     sMenu.optionHeight = cursorHeight;
-    sMenu.horizontalCount = a6;
-    sMenu.verticalCount = a7;
+    sMenu.columns = a6;
+    sMenu.rows = a7;
 
     pos = a9;
 
@@ -1308,16 +1308,16 @@ void sub_8199060(u8 oldCursorPos, u8 newCursorPos)
 {
     u8 cursorWidth = GetMenuCursorDimensionByFont(sMenu.fontId, 0);
     u8 cursorHeight = GetMenuCursorDimensionByFont(sMenu.fontId, 1);
-    u8 xPos = (oldCursorPos % sMenu.horizontalCount) * sMenu.optionWidth + sMenu.left;
-    u8 yPos = (oldCursorPos / sMenu.horizontalCount) * sMenu.optionHeight + sMenu.top;
+    u8 xPos = (oldCursorPos % sMenu.columns) * sMenu.optionWidth + sMenu.left;
+    u8 yPos = (oldCursorPos / sMenu.columns) * sMenu.optionHeight + sMenu.top;
     FillWindowPixelRect(sMenu.windowId,
                         PIXEL_FILL(1),
                         xPos,
                         yPos,
                         cursorWidth,
                         cursorHeight);
-    xPos = (newCursorPos % sMenu.horizontalCount) * sMenu.optionWidth + sMenu.left;
-    yPos = (newCursorPos / sMenu.horizontalCount) * sMenu.optionHeight + sMenu.top;
+    xPos = (newCursorPos % sMenu.columns) * sMenu.optionWidth + sMenu.left;
+    yPos = (newCursorPos / sMenu.columns) * sMenu.optionHeight + sMenu.top;
     AddTextPrinterParameterized(sMenu.windowId,
                       sMenu.fontId,
                       gText_SelectorArrow3,
@@ -1333,13 +1333,13 @@ u8 sub_8199134(s8 deltaX, s8 deltaY)
 
     if (deltaX != 0)
     {
-        if ((sMenu.cursorPos % sMenu.horizontalCount) + deltaX < 0)
+        if ((sMenu.cursorPos % sMenu.columns) + deltaX < 0)
         {
-            sMenu.cursorPos += sMenu.horizontalCount - 1;
+            sMenu.cursorPos += sMenu.columns - 1;
         }
-        else if ((sMenu.cursorPos % sMenu.horizontalCount) + deltaX >= sMenu.horizontalCount)
+        else if ((sMenu.cursorPos % sMenu.columns) + deltaX >= sMenu.columns)
         {
-            sMenu.cursorPos = (sMenu.cursorPos / sMenu.horizontalCount) * sMenu.horizontalCount;
+            sMenu.cursorPos = (sMenu.cursorPos / sMenu.columns) * sMenu.columns;
         }
         else
         {
@@ -1349,17 +1349,17 @@ u8 sub_8199134(s8 deltaX, s8 deltaY)
 
     if (deltaY != 0)
     {
-        if ((sMenu.cursorPos / sMenu.horizontalCount) + deltaY < 0)
+        if ((sMenu.cursorPos / sMenu.columns) + deltaY < 0)
         {
-            sMenu.cursorPos += sMenu.horizontalCount * (sMenu.verticalCount - 1);
+            sMenu.cursorPos += sMenu.columns * (sMenu.rows - 1);
         }
-        else if ((sMenu.cursorPos / sMenu.horizontalCount) + deltaY >= sMenu.verticalCount)
+        else if ((sMenu.cursorPos / sMenu.columns) + deltaY >= sMenu.rows)
         {
-            sMenu.cursorPos -= sMenu.horizontalCount * (sMenu.verticalCount - 1);
+            sMenu.cursorPos -= sMenu.columns * (sMenu.rows - 1);
         }
         else
         {
-            sMenu.cursorPos += (sMenu.horizontalCount * deltaY);
+            sMenu.cursorPos += (sMenu.columns * deltaY);
         }
     }
 
@@ -1381,8 +1381,8 @@ u8 sub_81991F8(s8 deltaX, s8 deltaY)
 
     if (deltaX != 0)
     {
-        if (((sMenu.cursorPos % sMenu.horizontalCount) + deltaX >= 0) &&
-        ((sMenu.cursorPos % sMenu.horizontalCount) + deltaX < sMenu.horizontalCount))
+        if (((sMenu.cursorPos % sMenu.columns) + deltaX >= 0) &&
+        ((sMenu.cursorPos % sMenu.columns) + deltaX < sMenu.columns))
         {
             sMenu.cursorPos += deltaX;
         }
@@ -1390,10 +1390,10 @@ u8 sub_81991F8(s8 deltaX, s8 deltaY)
 
     if (deltaY != 0)
     {
-        if (((sMenu.cursorPos / sMenu.horizontalCount) + deltaY >= 0) &&
-        ((sMenu.cursorPos / sMenu.horizontalCount) + deltaY < sMenu.verticalCount))
+        if (((sMenu.cursorPos / sMenu.columns) + deltaY >= 0) &&
+        ((sMenu.cursorPos / sMenu.columns) + deltaY < sMenu.rows))
         {
-            sMenu.cursorPos += (sMenu.horizontalCount * deltaY);
+            sMenu.cursorPos += (sMenu.columns * deltaY);
         }
     }
 
@@ -1661,16 +1661,14 @@ void CreateYesNoMenu(const struct WindowTemplate *window, u16 baseTileNum, u8 pa
     InitMenuInUpperLeftCornerPlaySoundWhenAPressed(sYesNoWindowId, 2, initialCursorPos);
 }
 
-void sub_81997AC(u8 windowId, u8 a4, u8 a6, u8 a7, const struct MenuAction *strs)
+void PrintMenuGridTable(u8 windowId, u8 optionWidth, u8 columns, u8 rows, const struct MenuAction *strs)
 {
-    u32 i;
-    u32 j;
-    for (i = 0; i < a7; i++)
+    u32 i, j;
+
+    for (i = 0; i < rows; i++)
     {
-        for (j = 0; j < a6; j++)
-        {
-            AddTextPrinterParameterized(windowId, 1, strs[(i * a6) + j].text, (a4 * j) + 8, (i * 16) + 1, 0xFF, NULL);
-        }
+        for (j = 0; j < columns; j++)
+            AddTextPrinterParameterized(windowId, 1, strs[(i * columns) + j].text, (optionWidth * j) + 8, (i * 16) + 1, 0xFF, NULL);
     }
     CopyWindowToVram(windowId, 2);
 }
@@ -1706,20 +1704,20 @@ void sub_819983C(u8 windowId, u8 a4, u8 itemCount, u8 itemCount2, const struct M
     CopyWindowToVram(windowId, 2);
 }
 
-u8 sub_8199944(u8 windowId, u8 optionWidth, u8 horizontalCount, u8 verticalCount, u8 initialCursorPos)
+u8 sub_8199944(u8 windowId, u8 optionWidth, u8 columns, u8 rows, u8 initialCursorPos)
 {
     s32 pos;
 
     sMenu.left = 0;
     sMenu.top = 1;
     sMenu.minCursorPos = 0;
-    sMenu.maxCursorPos = (horizontalCount * verticalCount) - 1;
+    sMenu.maxCursorPos = (columns * rows) - 1;
     sMenu.windowId = windowId;
     sMenu.fontId = 1;
     sMenu.optionWidth = optionWidth;
     sMenu.optionHeight = 16;
-    sMenu.horizontalCount = horizontalCount;
-    sMenu.verticalCount = verticalCount;
+    sMenu.columns = columns;
+    sMenu.rows = rows;
 
     pos = initialCursorPos;
 
