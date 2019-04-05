@@ -10503,7 +10503,6 @@ static void atkE5_pickup(void)
     s32 i;
     u16 species, heldItem;
     u8 ability;
-    u8 level;
     u8 lvlDivBy10;
 
     if (InBattlePike())
@@ -10539,8 +10538,7 @@ static void atkE5_pickup(void)
         {
             species = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2);
             heldItem = GetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM);
-            level = GetMonData(&gPlayerParty[i], MON_DATA_LEVEL);
-            lvlDivBy10 = (level - 1) / 10; //Moving this here makes it easier to add in abilities like Honey Gather
+            lvlDivBy10 = (GetMonData(&gPlayerParty[i], MON_DATA_LEVEL)-1) / 10; //Moving this here makes it easier to add in abilities like Honey Gather
             if (lvlDivBy10 > 9)
                 lvlDivBy10 = 9;
 
