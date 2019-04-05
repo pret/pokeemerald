@@ -2006,6 +2006,11 @@ void SetMoveEffect(bool32 primary, u32 certain)
         affectsUser = MOVE_EFFECT_AFFECTS_USER;
         gBattleScripting.battler = gBattlerTarget; // theoretically the attacker
     }
+    
+    // Just in case this flag is still set
+    if (gBattleScripting.moveEffect & MOVE_EFFECT_CERTAIN)
+        gBattleScripting.moveEffect &= ~(MOVE_EFFECT_CERTAIN);
+    
     else
     {
         gEffectBattler = gBattlerTarget;
@@ -2363,6 +2368,13 @@ void SetMoveEffect(bool32 primary, u32 certain)
                 }
                 BattleScriptPush(gBattlescriptCurrInstr + 1);
                 gBattlescriptCurrInstr = sMoveEffectBS_Ptrs[gBattleScripting.moveEffect];
+                break;
+            case MOVE_EFFECT_HAPPY_HOUR:
+                if (GET_BATTLER_SIDE(gBattlerAttacker) == B_SIDE_PLAYER)
+                {
+                    gBattleStruct->moneyMultiplier *= 2;
+                }
+                gBattlescriptCurrInstr++;
                 break;
             case MOVE_EFFECT_TRI_ATTACK:
                 if (gBattleMons[gEffectBattler].status1)
@@ -10546,6 +10558,7 @@ static void atkE5_pickup(void)
     s32 i;
     u16 species, heldItem;
     u8 ability;
+    u8 lvlDivBy10;
 
     if (InBattlePike())
     {
@@ -10580,6 +10593,9 @@ static void atkE5_pickup(void)
         {
             species = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2);
             heldItem = GetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM);
+            lvlDivBy10 = (GetMonData(&gPlayerParty[i], MON_DATA_LEVEL)-1) / 10; //Moving this here makes it easier to add in abilities like Honey Gather
+            if (lvlDivBy10 > 9)
+                lvlDivBy10 = 9;
 
             if (GetMonData(&gPlayerParty[i], MON_DATA_ALT_ABILITY))
                 ability = gBaseStats[species].ability2;
@@ -10594,9 +10610,6 @@ static void atkE5_pickup(void)
             {
                 s32 j;
                 s32 rand = Random() % 100;
-                u8 lvlDivBy10 = (GetMonData(&gPlayerParty[i], MON_DATA_LEVEL) - 1) / 10;
-                if (lvlDivBy10 > 9)
-                    lvlDivBy10 = 9;
 
                 for (j = 0; j < 9; j++)
                 {

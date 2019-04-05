@@ -3700,7 +3700,7 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
         {
         case HOLD_EFFECT_DOUBLE_PRIZE:
             if (GetBattlerSide(battlerId) == B_SIDE_PLAYER)
-                gBattleStruct->moneyMultiplier = 2;
+                gBattleStruct->moneyMultiplier *= 2;
             break;
         case HOLD_EFFECT_RESTORE_STATS:
             for (i = 0; i < NUM_BATTLE_STATS; i++)
@@ -5885,6 +5885,8 @@ bool32 CanBattlerGetOrLoseItem(u8 battlerId, u16 itemId)
     else if (species == SPECIES_GROUDON && itemId == ITEM_RED_ORB)
         return FALSE;
     else if (ItemId_GetHoldEffect(itemId) == HOLD_EFFECT_MEGA_STONE && GetMegaEvolutionSpecies(species, itemId) != SPECIES_NONE)
+        return FALSE;
+    else if (species == SPECIES_GIRATINA && itemId == ITEM_GRISEOUS_ORB)
         return FALSE;
     else
         return TRUE;

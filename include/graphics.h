@@ -3940,6 +3940,8 @@ extern const u32 gItemIcon_DreadPlate[];
 extern const u32 gItemIconPalette_DreadPlate[];
 extern const u32 gItemIcon_IronPlate[];
 extern const u32 gItemIconPalette_IronPlate[];
+extern const u32 gItemIcon_Honey[];
+extern const u32 gItemIconPalette_Honey[];
 // Gen 5 Items
 extern const u32 gItemIcon_Eviolite[];
 extern const u32 gItemIconPalette_Eviolite[];

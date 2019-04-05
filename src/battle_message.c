@@ -653,9 +653,11 @@ static const u8 sText_SafetyGooglesProtected[] = _("{B_DEF_NAME_WITH_PREFIX} is 
 static const u8 sText_FlowerVeilProtected[] = _("{B_DEF_NAME_WITH_PREFIX} surrounded itself\nwith a veil of petals!");
 static const u8 sText_SweetVeilProtected[] = _("{B_DEF_NAME_WITH_PREFIX} surrounded itself\nwith a veil of sweetness!");
 static const u8 sText_AromaVeilProtected[] = _("{B_DEF_NAME_WITH_PREFIX} is protected\nby an aromatic veil!");
+static const u8 sText_CelebrateMessage[] = _("Congratulations, {B_PLAYER_NAME}!");
 
 const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT] =
 {
+    [STRINGID_CELEBRATEMESSAGE - 12] = sText_CelebrateMessage,
     [STRINGID_AROMAVEILPROTECTED - 12] = sText_AromaVeilProtected,
     [STRINGID_SWEETVEILPROTECTED - 12] = sText_SweetVeilProtected,
     [STRINGID_FLOWERVEILPROTECTED - 12] = sText_FlowerVeilProtected,
