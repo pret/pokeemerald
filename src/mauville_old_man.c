@@ -914,7 +914,7 @@ struct Story
 };
 
 static const struct Story sStorytellerStories[] = {
-    {GAME_STAT_50, 1, MauvilleCity_PokemonCenter_1F_Text_28E930, MauvilleCity_PokemonCenter_1F_Text_28E947, MauvilleCity_PokemonCenter_1F_Text_28E956},
+    {GAME_STAT_NUM_UNION_ROOM_BATTLES, 1, MauvilleCity_PokemonCenter_1F_Text_28E930, MauvilleCity_PokemonCenter_1F_Text_28E947, MauvilleCity_PokemonCenter_1F_Text_28E956},
     {GAME_STAT_STARTED_TRENDS, 1, MauvilleCity_PokemonCenter_1F_Text_28E9D7, MauvilleCity_PokemonCenter_1F_Text_28E9EF, MauvilleCity_PokemonCenter_1F_Text_28E9FE},
     {GAME_STAT_PLANTED_BERRIES, 1, MauvilleCity_PokemonCenter_1F_Text_28EA7D, MauvilleCity_PokemonCenter_1F_Text_28EA98, MauvilleCity_PokemonCenter_1F_Text_28EAA8},
     {GAME_STAT_TRADED_BIKES, 1, MauvilleCity_PokemonCenter_1F_Text_28EB19, MauvilleCity_PokemonCenter_1F_Text_28EB31, MauvilleCity_PokemonCenter_1F_Text_28EB3E},
@@ -1193,7 +1193,7 @@ static void Task_StoryListMenu(u8 taskId) // Task_StoryListMenu
                 gSpecialVar_Result = 1;
                 sSelectedStory = selection;
             }
-            sub_80E2A78(sStorytellerWindowId);
+            ClearToTransparentAndRemoveWindow(sStorytellerWindowId);
             DestroyTask(taskId);
             EnableBothScriptContexts();
             break;

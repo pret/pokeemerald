@@ -296,7 +296,7 @@ static void atkDA_tryswapabilities(void);
 static void atkDB_tryimprison(void);
 static void atkDC_trysetgrudge(void);
 static void atkDD_weightdamagecalculation(void);
-static void atkDE_asistattackselect(void);
+static void atkDE_assistattackselect(void);
 static void atkDF_trysetmagiccoat(void);
 static void atkE0_trysetsnatch(void);
 static void atkE1_trygetintimidatetarget(void);
@@ -548,7 +548,7 @@ void (* const gBattleScriptingCommandsTable[])(void) =
     atkDB_tryimprison,
     atkDC_trysetgrudge,
     atkDD_weightdamagecalculation,
-    atkDE_asistattackselect,
+    atkDE_assistattackselect,
     atkDF_trysetmagiccoat,
     atkE0_trysetsnatch,
     atkE1_trygetintimidatetarget,
@@ -4480,28 +4480,6 @@ static void atk48_playstatchangeanimation(void)
     }
 }
 
-enum
-{
-    ATK49_RAGE,
-    ATK49_DEFROST,
-    ATK49_SYNCHRONIZE_TARGET,
-    ATK49_MOVE_END_ABILITIES,
-    ATK49_STATUS_IMMUNITY_ABILITIES,
-    ATK49_SYNCHRONIZE_ATTACKER,
-    ATK49_CHOICE_MOVE,
-    ATK49_CHANGED_ITEMS,
-    ATK49_ATTACKER_INVISIBLE,
-    ATK49_ATTACKER_VISIBLE,
-    ATK49_TARGET_VISIBLE,
-    ATK49_ITEM_EFFECTS_ALL,
-    ATK49_KINGSROCK_SHELLBELL,
-    ATK49_SUBSTITUTE,
-    ATK49_UPDATE_LAST_MOVES,
-    ATK49_MIRROR_MOVE,
-    ATK49_NEXT_TARGET,
-    ATK49_COUNT,
-};
-
 static void atk49_moveend(void)
 {
     s32 i;
@@ -6317,16 +6295,16 @@ static void sub_804F100(void)
 {
     struct StatsArray currentStats;
 
-    GetMonLevelUpWindowStats(&gPlayerParty[gBattleStruct->expGetterMonId], &currentStats);
-    DrawLevelUpWindowPg1(0xD, gBattleResources->statsBeforeLvlUp, &currentStats, 0xE, 0xD, 0xF);
+    GetMonLevelUpWindowStats(&gPlayerParty[gBattleStruct->expGetterMonId], (u16*) &currentStats);
+    DrawLevelUpWindowPg1(0xD, (u16*) gBattleResources->statsBeforeLvlUp,(u16*) &currentStats, 0xE, 0xD, 0xF);
 }
 
 static void sub_804F144(void)
 {
     struct StatsArray currentStats;
 
-    GetMonLevelUpWindowStats(&gPlayerParty[gBattleStruct->expGetterMonId], &currentStats);
-    DrawLevelUpWindowPg2(0xD, &currentStats, 0xE, 0xD, 0xF);
+    GetMonLevelUpWindowStats(&gPlayerParty[gBattleStruct->expGetterMonId], (u16*) &currentStats);
+    DrawLevelUpWindowPg2(0xD, (u16*) &currentStats, 0xE, 0xD, 0xF);
 }
 
 static void sub_804F17C(void)
@@ -7209,6 +7187,9 @@ static void atk88_negativedamage(void)
 
     gBattlescriptCurrInstr++;
 }
+
+#define STAT_CHANGE_WORKED      0
+#define STAT_CHANGE_DIDNT_WORK  1
 
 static u8 ChangeStatBuffs(s8 statValue, u8 statId, u8 flags, const u8 *BS_ptr)
 {
@@ -9679,7 +9660,7 @@ static void atkDD_weightdamagecalculation(void)
     gBattlescriptCurrInstr++;
 }
 
-static void atkDE_asistattackselect(void)
+static void atkDE_assistattackselect(void)
 {
     s32 chooseableMovesNo = 0;
     struct Pokemon* party;

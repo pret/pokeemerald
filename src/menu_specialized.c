@@ -2,7 +2,10 @@
 #include "alloc.h"
 #include "battle_main.h"
 #include "contest_effect.h"
+#include "data2.h"
+#include "decompress.h"
 #include "gpu_regs.h"
+#include "graphics.h"
 #include "menu.h"
 #include "international_string_util.h"
 #include "menu.h"
@@ -11,15 +14,21 @@
 #include "palette.h"
 #include "player_pc.h"
 #include "pokemon_summary_screen.h"
+#include "pokemon_storage_system.h"
 #include "scanline_effect.h"
 #include "sound.h"
 #include "strings.h"
 #include "string_util.h"
+#include "text.h"
 #include "text_window.h"
 #include "trig.h"
 #include "window.h"
 #include "constants/songs.h"
+#include "constants/species.h"
 #include "gba/io_reg.h"
+
+extern const struct CompressedSpriteSheet gMonFrontPicTable[];
+extern const u8 *gUnknown_08625B54[];
 
 EWRAM_DATA static u8 sUnknown_0203CF48[3] = {0};
 EWRAM_DATA static struct ListMenuItem *sUnknown_0203CF4C = NULL;
@@ -29,6 +38,9 @@ static void sub_81D24A4(struct UnknownStruct_81D1ED4 *a0);
 static void sub_81D2634(struct UnknownStruct_81D1ED4 *a0);
 static void MoveRelearnerCursorCallback(s32 itemIndex, bool8 onInit, struct ListMenu *list);
 static void nullsub_79(void);
+static void sub_81D3408(struct Sprite *sprite);
+/*static*/ void sub_81D3564(struct Sprite *sprite);
+static void sub_81D35E8(struct Sprite *sprite);
 
 static const struct WindowTemplate sUnknown_086253E8[] =
 {
@@ -248,7 +260,7 @@ static void sub_81D1D44(u8 windowId, s32 itemId, u8 y)
     u8 buffer[30];
     u16 length;
 
-	if (itemId == LIST_CANCEL)
+    if (itemId == LIST_CANCEL)
         return;
 
     StringCopy(buffer, gSaveBlock1Ptr->mail[6 + itemId].playerName);
@@ -1074,4 +1086,995 @@ bool16 MoveRelearnerRunTextPrinters(void)
 void MoveRelearnerCreateYesNoMenu(void)
 {
     CreateYesNoMenu(&sMoveRelearnerYesNoMenuTemplate, 1, 0xE, 0);
+}
+
+s32 GetBoxOrPartyMonData(u16 boxId, u16 monId, s32 request, u8 *dst)
+{
+    s32 ret;
+
+    if (boxId == TOTAL_BOXES_COUNT) // Party mon.
+    {
+        if (request == MON_DATA_NICKNAME || request == MON_DATA_OT_NAME)
+            ret = GetMonData(&gPlayerParty[monId], request, dst);
+        else
+            ret = GetMonData(&gPlayerParty[monId], request);
+    }
+    else
+    {
+        if (request == MON_DATA_NICKNAME || request == MON_DATA_OT_NAME)
+            ret = GetAndCopyBoxMonDataAt(boxId, monId, request, dst);
+        else
+            ret = GetBoxMonDataAt(boxId, monId, request);
+    }
+
+    return ret;
+}
+
+static u8 *sub_81D2CD0(u8 *dst, u16 boxId, u16 monId)
+{
+    u16 species, level, gender;
+    struct BoxPokemon *boxMon;
+    u8 *str;
+
+    *(dst++) = EXT_CTRL_CODE_BEGIN;
+    *(dst++) = 4;
+    *(dst++) = 8;
+    *(dst++) = 0;
+    *(dst++) = 9;
+    if (GetBoxOrPartyMonData(boxId, monId, MON_DATA_IS_EGG, NULL))
+    {
+        return StringCopyPadded(dst, gText_EggNickname, 0, 12);
+    }
+    else
+    {
+        GetBoxOrPartyMonData(boxId, monId, MON_DATA_NICKNAME, dst);
+        StringGetEnd10(dst);
+        species = GetBoxOrPartyMonData(boxId, monId, MON_DATA_SPECIES, NULL);
+        if (boxId == TOTAL_BOXES_COUNT) // Party mon.
+        {
+            level = GetMonData(&gPlayerParty[monId], MON_DATA_LEVEL);
+            gender = GetMonGender(&gPlayerParty[monId]);
+        }
+        else
+        {
+            // Needed to match, feel free to remove.
+            boxId++;boxId--;
+            monId++;monId--;
+
+            boxMon = GetBoxedMonPtr(boxId, monId);
+            gender = GetBoxMonGender(boxMon);
+            level = GetLevelFromBoxMonExp(boxMon);
+        }
+
+        if ((species == SPECIES_NIDORAN_F || species == SPECIES_NIDORAN_M) && !StringCompare(dst, gSpeciesNames[species]))
+            gender = MON_GENDERLESS;
+
+        for (str = dst; *str != EOS; str++)
+            ;
+
+        *(str++) = EXT_CTRL_CODE_BEGIN;
+        *(str++) = 0x12;
+        *(str++) = 0x3C;
+
+        switch (gender)
+        {
+        default:
+            *(str++) = CHAR_SPACE;
+            break;
+        case MON_MALE:
+            *(str++) = EXT_CTRL_CODE_BEGIN;
+            *(str++) = EXT_CTRL_CODE_COLOR;
+            *(str++) = 4;
+            *(str++) = EXT_CTRL_CODE_BEGIN;
+            *(str++) = 3;
+            *(str++) = 5;
+            *(str++) = CHAR_MALE;
+            break;
+        case MON_FEMALE:
+            *(str++) = EXT_CTRL_CODE_BEGIN;
+            *(str++) = EXT_CTRL_CODE_COLOR;
+            *(str++) = 6;
+            *(str++) = EXT_CTRL_CODE_BEGIN;
+            *(str++) = 3;
+            *(str++) = 7;
+            *(str++) = CHAR_FEMALE;
+            break;
+        }
+
+        *(str++) = EXT_CTRL_CODE_BEGIN;
+        *(str++) = 4;
+        *(str++) = 8;
+        *(str++) = 0;
+        *(str++) = 9;
+        *(str++) = CHAR_SLASH;
+        *(str++) = CHAR_SPECIAL_F9;
+        *(str++) = 5;
+        str = ConvertIntToDecimalStringN(str, level, STR_CONV_MODE_LEFT_ALIGN, 3);
+        *(str++) = CHAR_SPACE;
+        *str = EOS;
+
+        return str;
+    }
+}
+
+static u8 *sub_81D2E7C(u8 *dst, const u8 *src, s16 n)
+{
+    while (*src != EOS)
+    {
+        *(dst++) = *(src++);
+        n--;
+    }
+    while (n-- > 0)
+        *(dst++) = CHAR_SPACE;
+
+    *dst = EOS;
+    return dst;
+}
+
+void sub_81D2ED4(u8 *dst, u8 *nameDst, u16 boxId, u16 monId, u16 arg5, u16 arg6, bool8 arg7)
+{
+    u16 i;
+
+    if (!arg7)
+        arg6--;
+
+    if (arg5 != arg6)
+    {
+        sub_81D2CD0(nameDst, boxId, monId);
+        dst[0] = EXT_CTRL_CODE_BEGIN;
+        dst[1] = 4;
+        dst[2] = 8;
+        dst[3] = 0;
+        dst[4] = 9;
+        if (boxId == TOTAL_BOXES_COUNT) // Party mon.
+        {
+            sub_81D2E7C(dst + 5, gText_InParty, 8);
+        }
+        else
+        {
+            boxId++;boxId--; // Again...Someone fix this maybe?
+            sub_81D2E7C(dst + 5, GetBoxNamePtr(boxId), 8);
+        }
+    }
+    else
+    {
+        for (i = 0; i < 12; i++)
+            nameDst[i] = CHAR_SPACE;
+        nameDst[i] = EOS;
+        for (i = 0; i < 8; i++)
+            dst[i] = CHAR_SPACE;
+        dst[i] = EOS;
+    }
+}
+
+void sub_81D2F78(struct UnknownStruct_81D1ED4 *arg0, u8 *sheen, u16 boxId, u16 monId, u16 arg5, u16 id, u16 arg7, bool8 arg8)
+{
+    u16 i;
+
+    if (!arg8)
+        arg7--;
+
+    if (arg5 != arg7)
+    {
+        arg0->unk0[id][0] = GetBoxOrPartyMonData(boxId, monId, MON_DATA_COOL, NULL);
+        arg0->unk0[id][1] = GetBoxOrPartyMonData(boxId, monId, MON_DATA_TOUGH, NULL);
+        arg0->unk0[id][2] = GetBoxOrPartyMonData(boxId, monId, MON_DATA_SMART, NULL);
+        arg0->unk0[id][3] = GetBoxOrPartyMonData(boxId, monId, MON_DATA_CUTE, NULL);
+        arg0->unk0[id][4] = GetBoxOrPartyMonData(boxId, monId, MON_DATA_BEAUTY, NULL);
+
+        sheen[id] = (GetBoxOrPartyMonData(boxId, monId, MON_DATA_SHEEN, NULL) != 0xFF)
+                 ? GetBoxOrPartyMonData(boxId, monId, MON_DATA_SHEEN, NULL) / 29u
+                 : 9;
+
+        sub_81D2754(arg0->unk0[id], arg0->unk14[id]);
+    }
+    else
+    {
+        for (i = 0; i < 5; i++)
+        {
+            arg0->unk0[id][i] = 0;
+            arg0->unk14[id][i].unk0 = 155;
+            arg0->unk14[id][i].unk2 = 91;
+        }
+    }
+}
+
+void sub_81D3094(void *tilesDst, void *palDst, u16 boxId, u16 monId, u16 arg5, u16 arg6, bool8 arg7)
+{
+    if (!arg7)
+        arg6--;
+
+    if (arg5 != arg6)
+    {
+        u16 species = GetBoxOrPartyMonData(boxId, monId, MON_DATA_SPECIES2, NULL);
+        u32 trainerId = GetBoxOrPartyMonData(boxId, monId, MON_DATA_OT_ID, NULL);
+        u32 personality = GetBoxOrPartyMonData(boxId, monId, MON_DATA_PERSONALITY, NULL);
+
+        LoadSpecialPokePic(&gMonFrontPicTable[species], tilesDst, species, personality, TRUE);
+        LZ77UnCompWram(GetFrontSpritePalFromSpeciesAndPersonality(species, trainerId, personality), palDst);
+    }
+}
+
+bool8 sub_81D312C(s16 *var)
+{
+    *var += 24;
+    if (*var > 0)
+        *var = 0;
+
+    return (*var != 0);
+}
+
+bool8 sub_81D3150(s16 *var)
+{
+    *var -= 24;
+    if (*var < -80)
+        *var = -80;
+
+    return (*var != -80);
+}
+
+bool8 sub_81D3178(struct UnknownStruct_81D1ED4 *arg0, s16 *arg1)
+{
+    bool8 var1 = sub_81D2074(arg0);
+    bool8 var2 = sub_81D312C(arg1);
+
+    return ((var1 != 0) || (var2 != 0));
+}
+
+bool8 sub_81D31A4(struct UnknownStruct_81D1ED4 *arg0, s16 *arg1)
+{
+    bool8 var1 = sub_81D2074(arg0);
+    bool8 var2 = sub_81D3150(arg1);
+
+    return ((var1 != 0) || (var2 != 0));
+}
+
+static const u32 gUnknown_08625560[] = INCBIN_U32("graphics/pokenav/pokeball.4bpp");
+static const u32 gUnknown_08625660[] = INCBIN_U32("graphics/pokenav/pokeball_placeholder.4bpp");
+static const u16 gUnknown_08625680[] = INCBIN_U16("graphics/pokenav/sparkle.gbapal");
+static const u32 gUnknown_086256A0[] = INCBIN_U32("graphics/pokenav/sparkle.4bpp");
+
+static const struct OamData sOamData_8625A20 =
+{
+    .y = 0,
+    .affineMode = 0,
+    .objMode = 0,
+    .mosaic = 0,
+    .bpp = 0,
+    .shape = 0,
+    .x = 0,
+    .matrixNum = 0,
+    .size = 3,
+    .tileNum = 0,
+    .priority = 1,
+    .paletteNum = 0,
+    .affineParam = 0
+};
+
+static const struct OamData sOamData_8625A28 =
+{
+    .y = 0,
+    .affineMode = 0,
+    .objMode = 0,
+    .mosaic = 0,
+    .bpp = 0,
+    .shape = 0,
+    .x = 0,
+    .matrixNum = 0,
+    .size = 1,
+    .tileNum = 0,
+    .priority = 2,
+    .paletteNum = 0,
+    .affineParam = 0
+};
+
+static const union AnimCmd sSpriteAnim_8625A30[] =
+{
+    ANIMCMD_FRAME(0, 5),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sSpriteAnim_8625A38[] =
+{
+    ANIMCMD_FRAME(4, 5),
+    ANIMCMD_END
+};
+
+static const union AnimCmd *const sSpriteAnimTable_8625A40[] =
+{
+    sSpriteAnim_8625A30,
+    sSpriteAnim_8625A38
+};
+
+void sub_81D31D0(struct SpriteSheet *sheet, struct SpriteTemplate *template, struct SpritePalette *pal)
+{
+    struct SpriteSheet dataSheet = {NULL, 0x800, 100};
+
+    struct SpriteTemplate dataTemplate =
+    {
+        .tileTag = 100,
+        .paletteTag = 100,
+        .oam = &sOamData_8625A20,
+        .anims = gDummySpriteAnimTable,
+        .images = NULL,
+        .affineAnims = gDummySpriteAffineAnimTable,
+        .callback = SpriteCallbackDummy,
+    };
+
+    struct SpritePalette dataPal = {NULL, 100};
+
+    *sheet = dataSheet;
+    *template = dataTemplate;
+    *pal = dataPal;
+}
+
+void sub_81D321C(struct SpriteSheet *sheets, struct SpriteTemplate * template, struct SpritePalette *pals)
+{
+    u8 i;
+
+    struct SpriteSheet dataSheets[] =
+    {
+        {gUnknown_08625560, 0x100, 101},
+        {gUnknown_08625660, 0x20, 103},
+        {gPokenavConditionCancel_Gfx, 0x100, 102},
+        {},
+    };
+
+    struct SpritePalette dataPals[] =
+    {
+        {gPokenavConditionCancel_Pal, 101},
+        {gPokenavConditionCancel_Pal + 16, 102},
+        {},
+    };
+
+    struct SpriteTemplate dataTemplate =
+    {
+        .tileTag = 101,
+        .paletteTag = 101,
+        .oam = &sOamData_8625A28,
+        .anims = sSpriteAnimTable_8625A40,
+        .images = NULL,
+        .affineAnims = gDummySpriteAffineAnimTable,
+        .callback = SpriteCallbackDummy,
+    };
+
+    for (i = 0; i < ARRAY_COUNT(dataSheets); i++)
+        *(sheets++) = dataSheets[i];
+
+    *template = dataTemplate;
+
+    for (i = 0; i < ARRAY_COUNT(dataPals); i++)
+        *(pals++) = dataPals[i];
+}
+
+void sub_81D32B0(struct SpriteSheet *sheet, struct SpritePalette *pal)
+{
+    struct SpriteSheet dataSheet = {gUnknown_086256A0, 0x380, 104};
+    struct SpritePalette dataPal = {gUnknown_08625680, 104};
+
+    *sheet = dataSheet;
+    *pal = dataPal;
+}
+
+static void sub_81D32D4(struct Sprite *sprite)
+{
+    if (++sprite->data[1] > 60)
+    {
+        sprite->data[1] = 0;
+        sub_81D3408(sprite);
+    }
+}
+
+static void sub_81D32F4(struct Sprite *sprite)
+{
+    if (sprite->animEnded)
+    {
+        sprite->data[1] = 0;
+        sprite->callback = sub_81D32D4;
+    }
+}
+
+// Todo: Move these variables to C.
+extern const s16 gUnknown_08625B2C[][2];
+extern const struct SpriteTemplate gUnknown_08625B14;
+
+void sub_81D3314(struct Sprite *sprite)
+{
+    struct Sprite *sprite2 = &gSprites[sprite->data[4]];
+
+    if (sprite2 != NULL)
+    {
+        sprite->pos1.x = sprite2->pos1.x + sprite2->pos2.x + gUnknown_08625B2C[sprite->data[0]][0];
+        sprite->pos1.y = sprite2->pos1.y + sprite2->pos2.y + gUnknown_08625B2C[sprite->data[0]][1];
+    }
+    else
+    {
+        sprite->pos1.x = gUnknown_08625B2C[sprite->data[0]][0] + 40;
+        sprite->pos1.y = gUnknown_08625B2C[sprite->data[0]][1] + 104;
+    }
+}
+
+void sub_81D338C(u8 arg0, u8 arg1, struct Sprite **sprites)
+{
+    u16 i;
+
+    for (i = 0; i < 10; i++)
+    {
+        if (sprites[i] != NULL)
+        {
+            sprites[i]->data[0] = i;
+            sprites[i]->data[1] = (i * 16) + 1;
+            sprites[i]->data[2] = arg0;
+            sprites[i]->data[3] = i;
+            if (arg1 == 0 || arg0 != 9)
+            {
+                sprites[i]->callback = sub_81D3564;
+            }
+            else
+            {
+                sub_81D3314(sprites[i]);
+                sub_81D35E8(sprites[i]);
+                sprites[i]->callback = sub_81D32F4;
+                sprites[i]->invisible = FALSE;
+            }
+        }
+    }
+}
+
+static void sub_81D3408(struct Sprite *sprite)
+{
+    u16 i;
+    u8 id = sprite->data[5];
+
+    for (i = 0; i < sprite->data[2] + 1; i++)
+    {
+        gSprites[id].data[1] = (gSprites[id].data[0] * 16) + 1;
+        gSprites[id].callback = sub_81D3564;
+        id = gSprites[id].data[5];
+    }
+}
+
+void sub_81D3464(struct Sprite **sprites)
+{
+    u8 i;
+
+    for (i = 0; i < 10; i++)
+        sprites[i] = NULL;
+}
+
+void sub_81D3480(struct Sprite **sprites, u8 arg1, u8 arg2)
+{
+    u16 i, spriteId, firstSpriteId = 0;
+    u8 count = arg2;
+
+    for (i = 0; i < count + 1; i++)
+    {
+        spriteId = CreateSprite(&gUnknown_08625B14, 0, 0, 0);
+        if (spriteId != MAX_SPRITES)
+        {
+            sprites[i] = &gSprites[spriteId];
+            sprites[i]->invisible = TRUE;
+            sprites[i]->data[4] = arg1;
+            if (i != 0)
+                sprites[i - 1]->data[5] = spriteId;
+            else
+                firstSpriteId = spriteId;
+        }
+        else
+        {
+            break;
+        }
+    }
+
+    sprites[count]->data[5] = firstSpriteId;
+    sub_81D338C(count, 1, sprites);
+}
+
+void sub_81D3520(struct Sprite **sprites)
+{
+    u16 i;
+
+    for (i = 0; i < 10; i++)
+    {
+        if (sprites[i] != NULL)
+        {
+            DestroySprite(sprites[i]);
+            sprites[i] = NULL;
+        }
+        else
+        {
+            break;
+        }
+    }
+}
+
+void sub_81D354C(struct Sprite **sprites)
+{
+    sub_81D3520(sprites);
+    FreeSpriteTilesByTag(104);
+    FreeSpritePaletteByTag(104);
+}
+
+/*static*/ void sub_81D3564(struct Sprite *sprite)
+{
+    if (sprite->data[1] != 0)
+    {
+        if (--sprite->data[1] != 0)
+            return;
+
+        SeekSpriteAnim(sprite, 0);
+        sprite->invisible = FALSE;
+    }
+
+    sub_81D3314(sprite);
+    if (sprite->animEnded)
+    {
+        sprite->invisible = TRUE;
+        if (sprite->data[3] == sprite->data[2])
+        {
+            if (sprite->data[3] == 9)
+            {
+                sub_81D35E8(sprite);
+                sprite->callback = sub_81D32F4;
+            }
+            else
+            {
+                sprite->callback = sub_81D32D4;
+            }
+        }
+        else
+        {
+            sprite->callback = SpriteCallbackDummy;
+        }
+    }
+}
+
+static void sub_81D35E8(struct Sprite *sprite)
+{
+    u8 i, id = sprite->data[5];
+
+    for (i = 0; i < sprite->data[2] + 1; i++)
+    {
+        SeekSpriteAnim(&gSprites[id], 0);
+        gSprites[id].invisible = FALSE;
+        id = gSprites[id].data[5];
+    }
+}
+
+
+#ifdef NONMATCHING
+void DrawLevelUpWindowPg1(u16 arg0, u16 *statStoreLocation1, u16 *statStoreLocation2, u8 arg3, u8 arg4, u8 arg5)
+{
+    u16 i;
+    s16 array[6];
+    u8 *text;
+    u8 text2;
+    s16 *statVal;
+    s32 var;
+    u8 padding;
+    s32 var3;
+    u8 color[11];
+    
+    FillWindowPixelBuffer(arg0, PIXEL_FILL(arg3));
+    
+    array[0] = statStoreLocation2[STAT_HP] - statStoreLocation1[STAT_HP];
+    array[1] = statStoreLocation2[STAT_ATK] - statStoreLocation1[STAT_ATK];
+    array[2] = statStoreLocation2[STAT_DEF] - statStoreLocation1[STAT_DEF];
+    array[3] = statStoreLocation2[STAT_SPATK] - statStoreLocation1[STAT_SPATK];
+    array[4] = statStoreLocation2[STAT_SPDEF] - statStoreLocation1[STAT_SPDEF];
+    array[5] = statStoreLocation2[STAT_SPEED] - statStoreLocation1[STAT_SPEED];
+   
+    color[0] = arg3;
+    color[1] = arg4;
+    color[2] = arg5;
+    
+    for(i = 0; i <= 5; i++)
+    {
+        AddTextPrinterParameterized3(arg0, 
+                                     1, 
+                                     0, 
+                                     15 * i, 
+                                     color, 
+                                     TEXT_SPEED_FF, 
+                                     gUnknown_08625B54[i]);
+        statVal = &array[i];
+        text = array[i] >= 0 ? (u8 *) gText_UnkCtrlF904 : (u8 *) gText_Dash;//Plus sign for stat gain, dash for none maybe  
+        StringCopy(&text2, text);
+        AddTextPrinterParameterized3(arg0, 
+                                     1, 
+                                     56, 
+                                     15 * i, 
+                                     color, 
+                                     TEXT_SPEED_FF, 
+                                     &text2);
+        var3 = *statVal;
+        var = var3;
+        
+        if(var3 < 0)
+        {
+            var = -var3;
+        }
+        
+        padding = 12; //amount of padding
+        
+        if(var <= 9)
+        {
+            padding = 18; //more padding for single digit numbers
+        }
+        
+        if(var3 < 0)
+        {
+            var3 = -var3;
+        }
+        
+        ConvertIntToDecimalStringN(&text2, var3, STR_CONV_MODE_LEFT_ALIGN, 2);
+        AddTextPrinterParameterized3(arg0, 
+                                     1, 
+                                     padding + 56, 
+                                     15 * i, 
+                                     color, 
+                                     TEXT_SPEED_FF, 
+                                     &text2);  
+    }
+}
+#else
+NAKED
+void DrawLevelUpWindowPg1(u16 arg0, u16 *statStoreLocation1, u16 *statStoreLocation2, u8 arg3, u8 arg4, u8 arg5)
+{
+    asm(".syntax unified\n\
+push {r4-r7,lr}\n\
+    mov r7, r10\n\
+    mov r6, r9\n\
+    mov r5, r8\n\
+    push {r5-r7}\n\
+    sub sp, 0x2C\n\
+    mov r8, r0\n\
+    adds r6, r1, 0\n\
+    adds r5, r2, 0\n\
+    adds r4, r3, 0\n\
+    ldr r3, [sp, 0x4C]\n\
+    ldr r0, [sp, 0x50]\n\
+    mov r9, r0\n\
+    lsls r4, 24\n\
+    lsrs r4, 24\n\
+    lsls r3, 24\n\
+    lsrs r3, 24\n\
+    mov r1, r9\n\
+    lsls r1, 24\n\
+    lsrs r1, 24\n\
+    mov r9, r1\n\
+    mov r0, r8\n\
+    lsls r0, 24\n\
+    lsrs r0, 24\n\
+    mov r8, r0\n\
+    lsls r1, r4, 4\n\
+    orrs r1, r4\n\
+    lsls r1, 24\n\
+    lsrs r1, 24\n\
+    str r3, [sp, 0x28]\n\
+    bl FillWindowPixelBuffer\n\
+    add r2, sp, 0xC\n\
+    ldrh r0, [r5]\n\
+    ldrh r1, [r6]\n\
+    subs r0, r1\n\
+    strh r0, [r2]\n\
+    ldrh r0, [r5, 0x2]\n\
+    ldrh r1, [r6, 0x2]\n\
+    subs r0, r1\n\
+    strh r0, [r2, 0x2]\n\
+    ldrh r0, [r5, 0x4]\n\
+    ldrh r1, [r6, 0x4]\n\
+    subs r0, r1\n\
+    strh r0, [r2, 0x4]\n\
+    ldrh r0, [r5, 0x8]\n\
+    ldrh r1, [r6, 0x8]\n\
+    subs r0, r1\n\
+    strh r0, [r2, 0x6]\n\
+    ldrh r0, [r5, 0xA]\n\
+    ldrh r1, [r6, 0xA]\n\
+    subs r0, r1\n\
+    strh r0, [r2, 0x8]\n\
+    ldrh r0, [r5, 0x6]\n\
+    ldrh r1, [r6, 0x6]\n\
+    subs r0, r1\n\
+    strh r0, [r2, 0xA]\n\
+    add r0, sp, 0x24\n\
+    strb r4, [r0]\n\
+    ldr r3, [sp, 0x28]\n\
+    strb r3, [r0, 0x1]\n\
+    mov r1, r9\n\
+    strb r1, [r0, 0x2]\n\
+    movs r7, 0\n\
+    mov r10, r0\n\
+    movs r0, 0x1\n\
+    negs r0, r0\n\
+    mov r9, r0\n\
+    add r6, sp, 0x18\n\
+_081D36CA:\n\
+    lsls r0, r7, 4\n\
+    subs r0, r7\n\
+    lsls r0, 24\n\
+    lsrs r5, r0, 24\n\
+    mov r1, r10\n\
+    str r1, [sp]\n\
+    mov r0, r9\n\
+    str r0, [sp, 0x4]\n\
+    ldr r1, =gUnknown_08625B54\n\
+    lsls r0, r7, 2\n\
+    adds r0, r1\n\
+    ldr r0, [r0]\n\
+    str r0, [sp, 0x8]\n\
+    mov r0, r8\n\
+    movs r1, 0x1\n\
+    movs r2, 0\n\
+    adds r3, r5, 0\n\
+    bl AddTextPrinterParameterized3\n\
+    lsls r0, r7, 1\n\
+    mov r4, sp\n\
+    adds r4, r0\n\
+    adds r4, 0xC\n\
+    movs r1, 0\n\
+    ldrsh r0, [r4, r1]\n\
+    ldr r1, =gText_Dash\n\
+    cmp r0, 0\n\
+    blt _081D3704\n\
+    ldr r1, =gText_UnkCtrlF904\n\
+_081D3704:\n\
+    adds r0, r6, 0\n\
+    bl StringCopy\n\
+    mov r0, r10\n\
+    str r0, [sp]\n\
+    mov r1, r9\n\
+    str r1, [sp, 0x4]\n\
+    str r6, [sp, 0x8]\n\
+    mov r0, r8\n\
+    movs r1, 0x1\n\
+    movs r2, 0x38\n\
+    adds r3, r5, 0\n\
+    bl AddTextPrinterParameterized3\n\
+    movs r0, 0\n\
+    ldrsh r1, [r4, r0]\n\
+    adds r0, r1, 0\n\
+    cmp r1, 0\n\
+    bge _081D372C\n\
+    negs r0, r1\n\
+_081D372C:\n\
+    movs r4, 0xC\n\
+    cmp r0, 0x9\n\
+    bgt _081D3734\n\
+    movs r4, 0x12\n\
+_081D3734:\n\
+    cmp r1, 0\n\
+    bge _081D373A\n\
+    negs r1, r1\n\
+_081D373A:\n\
+    adds r0, r6, 0\n\
+    movs r2, 0\n\
+    movs r3, 0x2\n\
+    bl ConvertIntToDecimalStringN\n\
+    adds r2, r4, 0\n\
+    adds r2, 0x38\n\
+    mov r1, r10\n\
+    str r1, [sp]\n\
+    mov r0, r9\n\
+    str r0, [sp, 0x4]\n\
+    str r6, [sp, 0x8]\n\
+    mov r0, r8\n\
+    movs r1, 0x1\n\
+    adds r3, r5, 0\n\
+    bl AddTextPrinterParameterized3\n\
+    adds r0, r7, 0x1\n\
+    lsls r0, 16\n\
+    lsrs r7, r0, 16\n\
+    cmp r7, 0x5\n\
+    bls _081D36CA\n\
+    add sp, 0x2C\n\
+    pop {r3-r5}\n\
+    mov r8, r3\n\
+    mov r9, r4\n\
+    mov r10, r5\n\
+    pop {r4-r7}\n\
+    pop {r0}\n\
+    bx r0\n\
+    .pool\n\
+    .syntax divided");
+}
+#endif // NONMATCHING
+
+#ifdef NONMATCHING
+void DrawLevelUpWindowPg2(u16 arg0, u16 *statStoreLocation1, u8 arg2, u8 arg3, u8 arg4)
+{
+    s32 i;
+    s16 *var;
+    s32 numDigits;
+    u8 text;
+    s16 array[6];
+    u8 color[11];
+    
+    FillWindowPixelBuffer(arg0, PIXEL_FILL(arg2));
+    
+    array[0] = statStoreLocation1[STAT_HP];
+    array[1] = statStoreLocation1[STAT_ATK];
+    array[2] = statStoreLocation1[STAT_DEF];
+    array[3] = statStoreLocation1[STAT_SPATK];
+    array[4] = statStoreLocation1[STAT_SPDEF];
+    array[5] = statStoreLocation1[STAT_SPEED];
+    
+    color[0] = arg2;
+    color[1] = arg3;
+    color[2] = arg4;
+    
+    for(i = 0; i <= 5; i++)
+    {
+        numDigits = 3; //3 digit stat
+        if(array[i] <= 99)
+        {
+            numDigits = 1; //1 digit stat
+            if(array[i] > 9)
+            {
+                numDigits = 2; //2 digit stat
+            }
+        }   
+        ConvertIntToDecimalStringN(&text, array[i], STR_CONV_MODE_LEFT_ALIGN, numDigits);
+        AddTextPrinterParameterized3(arg0, 
+                                     1, 
+                                     0, 
+                                     15 * i, 
+                                     color, 
+                                     TEXT_SPEED_FF, 
+                                     gUnknown_08625B54[i]);
+        AddTextPrinterParameterized3(arg0, 
+                                     1, 
+                                     6 * (4 - numDigits) + 56, 
+                                     15 * i, 
+                                     color, 
+                                     TEXT_SPEED_FF, 
+                                     &text);
+    }
+}
+#else
+NAKED
+void DrawLevelUpWindowPg2(u16 arg0, u16 *statStoreLocation1, u8 arg2, u8 arg3, u8 arg4)
+{
+    asm(".syntax unified\n\
+    push {r4-r7,lr}\n\
+    mov r7, r10\n\
+    mov r6, r9\n\
+    mov r5, r8\n\
+    push {r5-r7}\n\
+    sub sp, 0x2C\n\
+    mov r8, r0\n\
+    adds r5, r1, 0\n\
+    adds r4, r2, 0\n\
+    adds r6, r3, 0\n\
+    ldr r2, [sp, 0x4C]\n\
+    lsls r4, 24\n\
+    lsrs r4, 24\n\
+    lsls r6, 24\n\
+    lsrs r6, 24\n\
+    lsls r2, 24\n\
+    lsrs r2, 24\n\
+    lsls r0, 24\n\
+    lsrs r0, 24\n\
+    mov r8, r0\n\
+    lsls r1, r4, 4\n\
+    orrs r1, r4\n\
+    lsls r1, 24\n\
+    lsrs r1, 24\n\
+    str r2, [sp, 0x28]\n\
+    bl FillWindowPixelBuffer\n\
+    add r1, sp, 0xC\n\
+    ldrh r0, [r5]\n\
+    strh r0, [r1]\n\
+    ldrh r0, [r5, 0x2]\n\
+    strh r0, [r1, 0x2]\n\
+    ldrh r0, [r5, 0x4]\n\
+    strh r0, [r1, 0x4]\n\
+    ldrh r0, [r5, 0x8]\n\
+    strh r0, [r1, 0x6]\n\
+    ldrh r0, [r5, 0xA]\n\
+    strh r0, [r1, 0x8]\n\
+    ldrh r0, [r5, 0x6]\n\
+    strh r0, [r1, 0xA]\n\
+    add r0, sp, 0x24\n\
+    strb r4, [r0]\n\
+    strb r6, [r0, 0x1]\n\
+    ldr r2, [sp, 0x28]\n\
+    strb r2, [r0, 0x2]\n\
+    movs r6, 0\n\
+    add r1, sp, 0x18\n\
+    mov r9, r1\n\
+    mov r7, r8\n\
+    mov r10, r0\n\
+    movs r2, 0x1\n\
+    negs r2, r2\n\
+    mov r8, r2\n\
+_081D37EE:\n\
+    lsls r1, r6, 1\n\
+    mov r0, sp\n\
+    adds r0, r1\n\
+    adds r0, 0xC\n\
+    movs r2, 0\n\
+    ldrsh r0, [r0, r2]\n\
+    movs r4, 0x3\n\
+    cmp r0, 0x63\n\
+    bgt _081D3808\n\
+    movs r4, 0x1\n\
+    cmp r0, 0x9\n\
+    ble _081D3808\n\
+    movs r4, 0x2\n\
+_081D3808:\n\
+    mov r0, sp\n\
+    adds r0, r1\n\
+    adds r0, 0xC\n\
+    movs r2, 0\n\
+    ldrsh r1, [r0, r2]\n\
+    mov r0, r9\n\
+    movs r2, 0\n\
+    adds r3, r4, 0\n\
+    bl ConvertIntToDecimalStringN\n\
+    movs r0, 0x4\n\
+    subs r0, r4\n\
+    lsls r4, r0, 1\n\
+    adds r4, r0\n\
+    lsls r4, 17\n\
+    lsrs r4, 16\n\
+    lsls r5, r6, 4\n\
+    subs r5, r6\n\
+    lsls r5, 24\n\
+    lsrs r5, 24\n\
+    mov r0, r10\n\
+    str r0, [sp]\n\
+    mov r1, r8\n\
+    str r1, [sp, 0x4]\n\
+    ldr r1, =gUnknown_08625B54\n\
+    lsls r0, r6, 2\n\
+    adds r0, r1\n\
+    ldr r0, [r0]\n\
+    str r0, [sp, 0x8]\n\
+    adds r0, r7, 0\n\
+    movs r1, 0x1\n\
+    movs r2, 0\n\
+    adds r3, r5, 0\n\
+    bl AddTextPrinterParameterized3\n\
+    adds r4, 0x38\n\
+    lsls r4, 24\n\
+    lsrs r4, 24\n\
+    mov r2, r10\n\
+    str r2, [sp]\n\
+    mov r0, r8\n\
+    str r0, [sp, 0x4]\n\
+    mov r1, r9\n\
+    str r1, [sp, 0x8]\n\
+    adds r0, r7, 0\n\
+    movs r1, 0x1\n\
+    adds r2, r4, 0\n\
+    adds r3, r5, 0\n\
+    bl AddTextPrinterParameterized3\n\
+    adds r0, r6, 0x1\n\
+    lsls r0, 16\n\
+    lsrs r6, r0, 16\n\
+    cmp r6, 0x5\n\
+    bls _081D37EE\n\
+    add sp, 0x2C\n\
+    pop {r3-r5}\n\
+    mov r8, r3\n\
+    mov r9, r4\n\
+    mov r10, r5\n\
+    pop {r4-r7}\n\
+    pop {r0}\n\
+    bx r0\n\
+    .pool\n\
+    .syntax divided");
+}
+#endif // NONMATCHING
+
+void GetMonLevelUpWindowStats(struct Pokemon *mon, u16 *statStoreLocation)
+{
+    statStoreLocation[STAT_HP] = GetMonData(mon, MON_DATA_MAX_HP);
+    statStoreLocation[STAT_ATK] = GetMonData(mon, MON_DATA_ATK);
+    statStoreLocation[STAT_DEF] = GetMonData(mon, MON_DATA_DEF);
+    statStoreLocation[STAT_SPEED] = GetMonData(mon, MON_DATA_SPEED);
+    statStoreLocation[STAT_SPATK] = GetMonData(mon, MON_DATA_SPATK);
+    statStoreLocation[STAT_SPDEF] = GetMonData(mon, MON_DATA_SPDEF);
 }

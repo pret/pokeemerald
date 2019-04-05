@@ -1,6 +1,6 @@
 NewMauville_Entrance_MapScripts:: @ 82372AD
 	map_script MAP_SCRIPT_ON_LOAD, NewMauville_Entrance_MapScript1_2372B8
-	map_script MAP_SCRIPT_ON_TRANSITION, NewMauville_Entrance_MapScript1_2372FB
+	map_script MAP_SCRIPT_ON_TRANSITION, NewMauville_Entrance_OnTransition
 	.byte 0
 
 NewMauville_Entrance_MapScript1_2372B8: @ 82372B8
@@ -17,7 +17,7 @@ NewMauville_Entrance_EventScript_2372C4:: @ 82372C4
 	setmetatile 5, 1, 798, 1
 	return
 
-NewMauville_Entrance_MapScript1_2372FB: @ 82372FB
+NewMauville_Entrance_OnTransition: @ 82372FB
 	setflag FLAG_LANDMARK_NEW_MAUVILLE
 	end
 

@@ -4765,6 +4765,14 @@ extern const u32 gUnknown_08C16FA8[];
 extern const u32 gUnknown_08C16E90[];
 extern const u32 gUnknown_08C17170[];
 extern const u32 gUnknown_08C17980[];
+extern const u32 gTiles_8C19450[];
+extern const u32 gContestNextTurnGfx[];
+extern const u16 gContestPal[];
+extern const u32 gUnknown_08C19168[];
+extern const u32 gContestApplauseGfx[];
+extern const u32 gContestJudgeGfx[];
+extern const u32 gContestJudgeSymbolsGfx[];
+extern const u32 gContest3Pal[];
 
 extern const u32 gUnknown_08D95E00[];
 extern const u32 gUnknown_08D960D0[];
@@ -4907,5 +4915,23 @@ extern const u16 gEasyChatRightWindow_Pal[];
 
 // Use Pokeblock
 extern const u32 gUsePokeblockCondition_Gfx[];
+
+// Union Room Chat
+extern const u16 gUnknown_08DD4BB0[];
+extern const u16 gUnknown_08DD4BD0[];
+extern const u32 gUnknown_08DD4BF0[];
+extern const u32 gUnknown_08DD4C4C[];
+extern const u32 gUnknown_08DD4CF8[];
+extern const u16 gLinkMiscMenu_Pal[];
+extern const u32 gLinkMiscMenu_Gfx[];
+extern const u32 gLinkMiscMenu_Tilemap[];
+
+// Use Pokeblock
+extern const u8 gPokenavConditionCancel_Gfx[];
+extern const u16 gPokenavConditionCancel_Pal[];
+
+// Berry Crush
+extern const u32 gUnknown_08DE34B8[];
+extern const u16 gUnknown_08DE3398[];
 
 #endif //GUARD_GRAPHICS_H

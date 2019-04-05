@@ -2454,7 +2454,7 @@ sub_8027BEC: @ 8027BEC
 	adds r0, r7, 0
 	adds r1, r4, 0
 	movs r2, 0xD
-	bl sub_8098858
+	bl DrawTextBorderOuter
 	adds r0, r7, 0
 	movs r1, 0x11
 	bl FillWindowPixelBuffer

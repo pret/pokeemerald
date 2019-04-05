@@ -1,7 +1,7 @@
 #ifndef GUARD_FARAWAY_ISLAND_H
 #define GUARD_FARAWAY_ISLAND_H
 
-u32 sub_81D427C(void);
+u32 GetMewMoveDirection(void);
 bool8 sub_81D4A58(struct EventObject*);
 void UpdateFarawayIslandStepCounter(void);
 bool8 EventObjectIsFarawayIslandMew(struct EventObject *);
