@@ -1476,18 +1476,13 @@ static void sub_81D32F4(struct Sprite *sprite)
 static const struct OamData sOamData_8625AD0 =
 {
     .y = 0,
-    .affineMode = 0,
-    .objMode = 0,
-    .mosaic = 0,
-    .bpp = 0,
-    .shape = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .bpp = ST_OAM_4BPP,
+    .shape = SPRITE_SHAPE(16x16),
     .x = 0,
-    .matrixNum = 0,
-    .size = 1,
-    .tileNum = 0,
+    .size = SPRITE_SIZE(16x16),
     .priority = 0,
-    .paletteNum = 0,
-    .affineParam = 0
 };
 
 static const union AnimCmd sSpriteAnim_8625AD8[] =
