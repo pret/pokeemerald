@@ -10,7 +10,7 @@ Route120_EventScript_2906BB:: @ 82906BB
 Route121_EventScript_2906BB:: @ 82906BB
 Route123_EventScript_2906BB:: @ 82906BB
 	lockall
-	goto_if_unset FLAG_BADGE01_GET, Route103_EventScript_290721
+	goto_if_unset FLAG_BADGE01_GET, Route103_EventScript_CheckTreeCantCut
 	checkpartymove MOVE_CUT
 	compare VAR_RESULT, 6
 	goto_if_eq Route103_EventScript_290721
@@ -45,7 +45,7 @@ Route103_Movement_29071F: @ 829071F
 	cut_tree
 	step_end
 
-Route103_EventScript_290721:: @ 8290721
+Route103_EventScript_CheckTreeCantCut:: @ 8290721
 	msgbox Route103_Text_29077D, MSGBOX_DEFAULT
 	releaseall
 	end
