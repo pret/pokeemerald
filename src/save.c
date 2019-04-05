@@ -1,5 +1,7 @@
 #include "global.h"
+#include "agb_flash.h"
 #include "gba/flash_internal.h"
+#include "fieldmap.h"
 #include "save.h"
 #include "task.h"
 #include "decompress.h"
@@ -8,6 +10,7 @@
 #include "pokemon_storage_system.h"
 #include "main.h"
 #include "trainer_hill.h"
+#include "link.h"
 #include "constants/game_stat.h"
 
 static u16 CalculateChecksum(void *data, u16 size);
@@ -69,12 +72,6 @@ const struct SaveSectionOffsets gSaveSectionOffsets[] =
     SAVEBLOCK_CHUNK(gPokemonStorage, 7),
     SAVEBLOCK_CHUNK(gPokemonStorage, 8),
 };
-
-extern void DoSaveFailedScreen(u8); // save_failed_screen
-extern bool32 ProgramFlashSectorAndVerify(u8 sector, u8 *data);
-extern void save_serialize_map(void);
-extern void sub_800ADF8(void);
-extern bool8 IsLinkTaskFinished(void);
 
 // iwram common
 u16 gLastWrittenSector;
@@ -659,10 +656,10 @@ static void UpdateSaveAddresses(void)
 u8 HandleSavingData(u8 saveType)
 {
     u8 i;
-    u32 *backupVar = gUnknown_0203CF5C;
+    u32 *backupVar = gTrainerHillVBlankCounter;
     u8 *tempAddr;
 
-    gUnknown_0203CF5C = NULL;
+    gTrainerHillVBlankCounter = NULL;
     UpdateSaveAddresses();
     switch (saveType)
     {
@@ -705,7 +702,7 @@ u8 HandleSavingData(u8 saveType)
         save_write_to_flash(0xFFFF, gRamSaveSectionLocations);
         break;
     }
-    gUnknown_0203CF5C = backupVar;
+    gTrainerHillVBlankCounter = backupVar;
     return 0;
 }
 
@@ -852,7 +849,7 @@ u16 sub_815355C(void)
     return 0;
 }
 
-u32 TryCopySpecialSaveSection(u8 sector, u8* dst)
+u32 TryReadSpecialSaveSection(u8 sector, u8* dst)
 {
     s32 i;
     s32 size;
@@ -861,7 +858,7 @@ u32 TryCopySpecialSaveSection(u8 sector, u8* dst)
     if (sector != SECTOR_ID_TRAINER_HILL && sector != SECTOR_ID_RECORDED_BATTLE)
         return 0xFF;
     ReadFlash(sector, 0, (u8 *)&gSaveDataBuffer, sizeof(struct SaveSection));
-    if (*(u32*)(&gSaveDataBuffer.data[0]) != 0xB39D)
+    if (*(u32*)(&gSaveDataBuffer.data[0]) != SPECIAL_SECTION_SENTINEL)
         return 0xFF;
     // copies whole save section except u32 counter
     i = 0;
@@ -872,7 +869,7 @@ u32 TryCopySpecialSaveSection(u8 sector, u8* dst)
     return 1;
 }
 
-u32 TrySaveToSpecialSaveSection(u8 sector, u8* src)
+u32 TryWriteSpecialSaveSection(u8 sector, u8* src)
 {
     s32 i;
     s32 size;
@@ -883,7 +880,7 @@ u32 TrySaveToSpecialSaveSection(u8 sector, u8* src)
         return 0xFF;
 
     savDataBuffer = &gSaveDataBuffer;
-    *(u32*)(savDataBuffer) = 0xB39D;
+    *(u32*)(savDataBuffer) = SPECIAL_SECTION_SENTINEL;
 
     // copies whole save section except u32 counter
     i = 0;

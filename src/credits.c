@@ -1056,10 +1056,10 @@ static const struct OamData gUnknown_085E703C =
     .objMode = 0,
     .mosaic = 0,
     .bpp = 0,
-    .shape = 0,
+    .shape = SPRITE_SHAPE(64x64),
     .x = 0,
     .matrixNum = 0,
-    .size = 3,
+    .size = SPRITE_SIZE(64x64),
     .tileNum = 0,
     .priority = 1,
     .paletteNum = 0,
@@ -1592,7 +1592,7 @@ static void sub_8175DA0(u8 taskIdB)
     case 5:
         if (!gPaletteFade.active)
         {
-            FillWindowPixelBuffer(0, 0);
+            FillWindowPixelBuffer(0, PIXEL_FILL(0));
             CopyWindowToVram(0, 2);
             gTasks[taskIdB].data[TDB_0] = 2;
         }

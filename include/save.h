@@ -33,6 +33,7 @@ struct SaveSectionOffsets
 #define NUM_SECTORS_PER_SLOT 16
 
 #define UNKNOWN_CHECK_VALUE 0x8012025
+#define SPECIAL_SECTION_SENTINEL 0xB39D
 
 // SetDamagedSectorBits states
 enum
@@ -88,8 +89,11 @@ bool8 CheckSaveFile(void);
 u8 Save_LoadGameData(u8 a1);
 u16 sub_815355C(void);
 u8 sub_81534D0(u8);
-u32 TryCopySpecialSaveSection(u8 sector, u8* dst);
-u32 TrySaveToSpecialSaveSection(u8 sector, u8* src);
+u32 TryReadSpecialSaveSection(u8 sector, u8* dst);
+u32 TryWriteSpecialSaveSection(u8 sector, u8* src);
 void sub_8153688(u8 taskId);
+
+// save_failed_screen.c
+void DoSaveFailedScreen(u8 saveType);
 
 #endif // GUARD_SAVE_H

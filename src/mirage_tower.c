@@ -142,10 +142,10 @@ static const struct OamData gOamData_8617DF4 =
     .objMode = 0,
     .mosaic = 0,
     .bpp = 0,
-    .shape = 0,
+    .shape = SPRITE_SHAPE(16x16),
     .x = 0,
     .matrixNum = 0,
-    .size = 1,
+    .size = SPRITE_SIZE(16x16),
     .tileNum = 0,
     .priority = 0,
     .paletteNum = 3,
@@ -192,10 +192,10 @@ static const struct OamData sCeilingCrumble2OamData =
     .objMode = ST_OAM_OBJ_NORMAL,
     .mosaic = 0,
     .bpp = ST_OAM_4BPP,
-    .shape = ST_OAM_SQUARE,
+    .shape = SPRITE_SHAPE(8x8),
     .x = 0,
     .matrixNum = 0,
-    .size = 0,
+    .size = SPRITE_SIZE(8x8),
     .tileNum = 0,
     .priority = 0,
     .paletteNum = 0,
@@ -230,10 +230,10 @@ static const struct OamData sCeilingCrumble1OamData =
     .objMode = ST_OAM_OBJ_NORMAL,
     .mosaic = 0,
     .bpp = ST_OAM_4BPP,
-    .shape = ST_OAM_SQUARE,
+    .shape = SPRITE_SHAPE(16x16),
     .x = 0,
     .matrixNum = 0,
-    .size = 1,
+    .size = SPRITE_SIZE(16x16),
     .tileNum = 0,
     .priority = 0,
     .paletteNum = 0,
@@ -317,7 +317,7 @@ void SetMirageTowerVisibility(void)
     u16 rand;
     bool8 visible;
 
-    if (VarGet(VAR_0x40CB))
+    if (VarGet(VAR_ROUTE_111_STATE))
     {
         FlagClear(FLAG_MIRAGE_TOWER_VISIBLE);
         return;

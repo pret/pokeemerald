@@ -40,7 +40,7 @@ static const u32 gUnknown_0862AF30[] = INCBIN_U32("graphics/battle_transitions/f
 static const u32 gUnknown_0862B0DC[] = INCBIN_U32("graphics/battle_transitions/frontier_transition_circles.4bpp.lz");
 static const u16 gUnknown_0862B53C[] = INCBIN_U16("graphics/battle_transitions/frontier_transition.gbapal");
 
-// Unused Empty data. Feel free to delete.
+// Unused Empty data.
 static const u8 sFiller[0x1C0] = {0};
 
 static const struct OamData sOamData_862B71C =
@@ -50,10 +50,10 @@ static const struct OamData sOamData_862B71C =
     .objMode = 0,
     .mosaic = 0,
     .bpp = 0,
-    .shape = 0,
+    .shape = SPRITE_SHAPE(64x64),
     .x = 0,
     .matrixNum = 0,
-    .size = 3,
+    .size = SPRITE_SIZE(64x64),
     .tileNum = 0,
     .priority = 1,
     .paletteNum = 0,
@@ -62,12 +62,15 @@ static const struct OamData sOamData_862B71C =
 
 static const struct CompressedSpriteSheet sUnknown_0862B724 =
 {
-    gUnknown_0862B0DC, 0x1800, 11920
+    .data = gUnknown_0862B0DC,
+    .size = 0x1800,
+    .tag = 11920
 };
 
 static const struct SpritePalette sUnknown_0862B72C =
 {
-    gUnknown_0862B53C, 11920
+    .data = gUnknown_0862B53C,
+    .tag = 11920
 };
 
 static const union AnimCmd sSpriteAnim_862B734[] =

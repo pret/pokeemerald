@@ -1,8 +1,10 @@
 #include "global.h"
 #include "battle.h"
+#include "battle_anim.h"
 #include "battle_ai_script_commands.h"
 #include "battle_factory.h"
 #include "battle_setup.h"
+#include "data.h"
 #include "item.h"
 #include "pokemon.h"
 #include "random.h"
@@ -2216,7 +2218,7 @@ static void BattleAICmd_if_flash_fired(void)
 {
     u8 battlerId = BattleAI_GetWantedBattler(gAIScriptPtr[1]);
 
-    if (gBattleResources->flags->flags[battlerId] & UNKNOWN_FLAG_FLASH_FIRE)
+    if (gBattleResources->flags->flags[battlerId] & RESOURCE_FLAG_FLASH_FIRE)
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 2);
     else
         gAIScriptPtr += 6;

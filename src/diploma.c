@@ -13,8 +13,7 @@
 #include "text.h"
 #include "overworld.h"
 #include "menu.h"
-
-extern bool16 sub_80C0944(void);
+#include "pokedex.h"
 
 extern const u8 gText_DexNational[];
 extern const u8 gText_DexHoenn[];
@@ -197,7 +196,7 @@ static void InitDiplomaWindow(void)
     InitWindows(sDiplomaWinTemplates);
     DeactivateAllTextPrinters();
     LoadPalette(gUnknown_0860F074, 0xF0, 0x20);
-    FillWindowPixelBuffer(0, 0);
+    FillWindowPixelBuffer(0, PIXEL_FILL(0));
     PutWindowTilemap(0);
 }
 

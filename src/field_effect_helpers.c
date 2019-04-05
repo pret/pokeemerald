@@ -191,7 +191,7 @@ void ShowWarpArrowSprite(u8 spriteId, u8 direction, s16 x, s16 y)
     sprite = &gSprites[spriteId];
     if (sprite->invisible || sprite->data[0] != x || sprite->data[1] != y)
     {
-        sub_8093038(x, y, &x2, &y2);
+        SetSpritePosToMapCoords(x, y, &x2, &y2);
         sprite = &gSprites[spriteId];
         sprite->pos1.x = x2 + 8;
         sprite->pos1.y = y2 + 8;
@@ -1508,7 +1508,7 @@ void sub_8155F80(struct Sprite *sprite)
                 }
             }
             SetGpuReg(REG_OFFSET_BG0VOFS, 0);
-            FieldEffectStop(sprite, FLDEFF_64);
+            FieldEffectStop(sprite, FLDEFF_RAYQUAZA);
             break;
     }
 

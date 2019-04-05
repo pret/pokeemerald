@@ -1,10 +1,10 @@
 #ifndef GUARD_BATTLE_SETUP_H
 #define GUARD_BATTLE_SETUP_H
 
+#include "gym_leader_rematch.h"
+
 #define REMATCHES_COUNT 5
-#define REMATCH_TABLE_ENTRIES 78
-#define REMATCH_WALLY_ENTRY 64
-#define REMATCH_ELITE_FOUR_ENTRIES 73
+#define REMATCH_ELITE_FOUR_ENTRIES REMATCH_SIDNEY
 
 struct RematchTrainer
 {

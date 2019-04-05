@@ -4,7 +4,7 @@
 #include "battle_records.h"
 #include "battle_setup.h"
 #include "cable_club.h"
-#include "data2.h"
+#include "data.h"
 #include "event_data.h"
 #include "field_message_box.h"
 #include "field_specials.h"
@@ -17,7 +17,8 @@
 #include "menu.h"
 #include "overworld.h"
 #include "palette.h"
-#include "rom_8011DC0.h"
+#include "union_room.h"
+#include "mevent2.h"
 #include "script.h"
 #include "script_pokemon_util_80F87D8.h"
 #include "sound.h"
@@ -92,7 +93,9 @@ static void sub_80B23B0(u16 windowId, u32 value)
 
 static void sub_80B241C(u16 windowId)
 {
-    sub_819746C(windowId, FALSE);
+    // Following this call with a copy-to-vram with mode 3 is identical to
+    // calling ClearStdWindowAndFrame(windowId, TRUE).
+    ClearStdWindowAndFrame(windowId, FALSE);
     CopyWindowToVram(windowId, 3);
 }
 

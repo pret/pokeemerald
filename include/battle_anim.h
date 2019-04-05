@@ -73,7 +73,7 @@ void sub_8118FBC(int bgId, u8 arg1, u8 arg2, u8 battlerPosition, u8 arg4, u8 *ar
 void HandleIntroSlide(u8 terrainId);
 int GetAnimBgAttribute(u8 bgId, u8 attributeId);
 
-// battle_anim_80A5C6C.s
+// battle_anim_mons.s
 void TranslateSpriteInEllipseOverDuration(struct Sprite *sprite);
 void sub_80A8AEC(struct Sprite *sprite);
 void sub_80A8A6C(struct Sprite *sprite);
@@ -155,6 +155,9 @@ void sub_80A6DEC(struct Sprite *sprite);
 void DestroyAnimVisualTaskAndDisableBlend(u8 taskId);
 void DestroySpriteAndFreeResources_(struct Sprite *sprite);
 void SetBattlerSpriteYOffsetFromOtherYScale(u8 spriteId, u8 otherSpriteId);
+u8 GetBattlerSide(u8 battler);
+u8 GetBattlerPosition(u8 battler);
+u8 GetBattlerAtPosition(u8 position);
 
 enum
 {
@@ -193,7 +196,7 @@ u8 GetSubstituteSpriteDefault_Y(u8 battlerId);
 void sub_80A64EC(struct Sprite *sprite);
 void sub_80A718C(struct Sprite *sprite);
 
-// battle_anim_80A9C70.s
+// battle_anim_status_effects.s
 #define STAT_ANIM_PLUS1  15
 #define STAT_ANIM_PLUS2  39
 #define STAT_ANIM_MINUS1 22
@@ -207,7 +210,8 @@ void LaunchStatusAnimation(u8 battlerId, u8 statusAnimId);
 // ground.c
 void sub_81152DC(u8 taskId);
 
-// battle_anim_8170478.s
+// battle_anim_special.c
+void sub_8172EF0(u8 battler, struct Pokemon *mon);
 u8 ItemIdToBallId(u16 itemId);
 u8 AnimateBallOpenParticles(u8 x, u8 y, u8 priority, u8 subpriority, u8 ballId);
 u8 LaunchBallFadeMonTask(bool8 unFadeLater, u8 battlerId, u32 selectedPalettes, u8 ballId);
@@ -215,6 +219,19 @@ u8 LaunchBallFadeMonTask(bool8 unFadeLater, u8 battlerId, u32 selectedPalettes, 
 // battle_anim_utility_funcs.s
 void sub_8116EB4(u8);
 void sub_8117854(u8 taskId, int unused, u16 arg2, u8 battler1, u8 arg4, u8 arg5, u8 arg6, u8 arg7, const u32 *arg8, const u32 *arg9, const u32 *palette);
+
+// battle_anim_effects_1.c
+void sub_810310C(u8 battler, struct Sprite* sprite);
+void AnimMoveTwisterParticle(struct Sprite* sprite);
+
+// water.c
+void sub_8108C94(struct Sprite *sprite);
+
+// flying.c
+void sub_810E2C8(struct Sprite *sprite);
+
+// smokescreen.c
+u8 sub_807521C(s16 x, s16 y, u8 a3);
 
 u32 UnpackSelectedBattleAnimPalettes(s16);
 

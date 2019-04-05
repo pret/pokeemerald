@@ -1,5 +1,6 @@
 #include "global.h"
 #include "battle.h"
+#include "battle_anim.h"
 #include "battle_ai_script_commands.h"
 #include "battle_arena.h"
 #include "battle_controllers.h"
@@ -12,7 +13,7 @@
 #include "battle_tower.h"
 #include "berry.h"
 #include "bg.h"
-#include "data2.h"
+#include "data.h"
 #include "decompress.h"
 #include "dma3.h"
 #include "event_data.h"
@@ -57,6 +58,7 @@
 #include "constants/songs.h"
 #include "constants/species.h"
 #include "constants/trainers.h"
+#include "cable_club.h"
 
 extern struct MusicPlayerInfo gMPlayInfo_SE1;
 extern struct MusicPlayerInfo gMPlayInfo_SE2;
@@ -68,9 +70,6 @@ extern const u8 *const gBattlescriptsForBallThrow[];
 extern const u8 *const gBattlescriptsForRunningByItem[];
 extern const u8 *const gBattlescriptsForUsingItem[];
 extern const u8 *const gBattlescriptsForSafariActions[];
-
-// functions
-extern void sub_80B3AF8(u8 taskId); // cable club
 
 // this file's functions
 static void CB2_InitBattleInternal(void);
@@ -294,35 +293,31 @@ static const u8 sText_ShedinjaJpnName[] = _("ヌケニン"); // Nukenin
 const struct OamData gOamData_831ACA8 =
 {
     .y = 0,
-    .affineMode = 1,
-    .objMode = 0,
-    .mosaic = 0,
-    .bpp = 0,
-    .shape = 0,
+    .affineMode = ST_OAM_AFFINE_NORMAL,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .bpp = ST_OAM_4BPP,
+    .shape = SPRITE_SHAPE(64x64),
     .x = 0,
-    .matrixNum = 0,
-    .size = 3,
+    .size = SPRITE_SIZE(64x64),
     .tileNum = 0,
     .priority = 2,
     .paletteNum = 0,
-    .affineParam = 0
+    .affineParam = 0,
 };
 
 const struct OamData gOamData_831ACB0 =
 {
     .y = 0,
-    .affineMode = 1,
-    .objMode = 0,
-    .mosaic = 0,
-    .bpp = 0,
-    .shape = 0,
+    .affineMode = ST_OAM_AFFINE_NORMAL,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .bpp = ST_OAM_4BPP,
+    .shape = SPRITE_SHAPE(64x64),
     .x = 0,
-    .matrixNum = 0,
-    .size = 3,
+    .size = SPRITE_SIZE(64x64),
     .tileNum = 0,
     .priority = 2,
     .paletteNum = 2,
-    .affineParam = 0
+    .affineParam = 0,
 };
 
 // Unknown and unused data. Feel free to remove.
@@ -3279,7 +3274,7 @@ void FaintClearSetData(void)
     gProtectStructs[gActiveBattler].targetNotAffected = 0;
     gProtectStructs[gActiveBattler].chargingTurn = 0;
     gProtectStructs[gActiveBattler].fleeFlag = 0;
-    gProtectStructs[gActiveBattler].usedImprisionedMove = 0;
+    gProtectStructs[gActiveBattler].usedImprisonedMove = 0;
     gProtectStructs[gActiveBattler].loveImmobility = 0;
     gProtectStructs[gActiveBattler].usedDisabledMove = 0;
     gProtectStructs[gActiveBattler].usedTauntedMove = 0;
@@ -5892,3 +5887,5 @@ static void HandleAction_ActionFinished(void)
     gBattleScripting.multihitMoveEffect = 0;
     gBattleResources->battleScriptsStack->size = 0;
 }
+
+

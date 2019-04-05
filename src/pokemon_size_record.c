@@ -1,5 +1,7 @@
 #include "global.h"
+#include "data.h"
 #include "event_data.h"
+#include "pokedex.h"
 #include "pokemon.h"
 #include "pokemon_size_record.h"
 #include "string_util.h"
@@ -14,9 +16,6 @@ struct UnknownStruct
     u8 unk2;
     u16 unk4;
 };
-
-extern u16 GetPokedexHeightWeight(u16 dexNo, bool8 height);
-extern u16 SpeciesToNationalPokedexNum(u16 species);
 
 static const struct UnknownStruct sBigMonSizeTable[] =
 {
@@ -47,7 +46,6 @@ static const u8 sGiftRibbonsMonDataIds[] =
 
 extern const u8 gText_DecimalPoint[];
 extern const u8 gText_Marco[];
-extern const u8 gSpeciesNames[][POKEMON_NAME_LENGTH + 1];
 
 #define CM_PER_INCH 2.54
 

@@ -1,8 +1,8 @@
 Route111_OldLadysRestStop_MapScripts:: @ 822A916
-	map_script MAP_SCRIPT_ON_TRANSITION, Route111_OldLadysRestStop_MapScript1_22A91C
+	map_script MAP_SCRIPT_ON_TRANSITION, Route111_OldLadysRestStop_OnTransition
 	.byte 0
 
-Route111_OldLadysRestStop_MapScript1_22A91C: @ 822A91C
+Route111_OldLadysRestStop_OnTransition: @ 822A91C
 	setflag FLAG_LANDMARK_OLD_LADY_REST_SHOP
 	end
 

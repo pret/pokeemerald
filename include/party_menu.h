@@ -62,7 +62,7 @@ u8 sub_81B1B5C(const u8* str, u8 b);
 bool8 sub_81B1BD4(void);
 void sub_81B1F18(u8 taskId, u8 slot, s8 c, s16 HPDifference, TaskFunc func);
 u8 pokemon_ailments_get_primary(u32 status);
-u8 sub_81B205C(struct Pokemon *mon);
+u8 GetMonAilment(struct Pokemon *mon);
 void display_pokemon_menu_message(u32 stringID);
 void sub_81B47E0(u8 taskId);
 bool8 FieldCallback_PrepareFadeInFromMenu(void);

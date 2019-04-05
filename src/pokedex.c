@@ -1,7 +1,7 @@
 #include "global.h"
 #include "battle_main.h"
 #include "bg.h"
-#include "data2.h"
+#include "data.h"
 #include "decompress.h"
 #include "event_data.h"
 #include "gpu_regs.h"
@@ -248,10 +248,10 @@ static const struct OamData sOamData_855CFE4 =
     .objMode = 0,
     .mosaic = 0,
     .bpp = 0,
-    .shape = ST_OAM_SQUARE,
+    .shape = SPRITE_SHAPE(8x8),
     .x = 0,
     .matrixNum = 0,
-    .size = 0,
+    .size = SPRITE_SIZE(8x8),
     .tileNum = 0,
     .priority = 1,
     .paletteNum = 0,
@@ -265,10 +265,10 @@ static const struct OamData sOamData_855CFEC =
     .objMode = 0,
     .mosaic = 0,
     .bpp = 0,
-    .shape = ST_OAM_H_RECTANGLE,
+    .shape = SPRITE_SHAPE(16x8),
     .x = 0,
     .matrixNum = 0,
-    .size = 0,
+    .size = SPRITE_SIZE(16x8),
     .tileNum = 0,
     .priority = 0,
     .paletteNum = 0,
@@ -282,10 +282,10 @@ static const struct OamData sOamData_855CFF4 =
     .objMode = 0,
     .mosaic = 0,
     .bpp = 0,
-    .shape = ST_OAM_H_RECTANGLE,
+    .shape = SPRITE_SHAPE(32x16),
     .x = 0,
     .matrixNum = 0,
-    .size = 2,
+    .size = SPRITE_SIZE(32x16),
     .tileNum = 0,
     .priority = 0,
     .paletteNum = 0,
@@ -299,10 +299,10 @@ static const struct OamData sOamData_855CFFC =
     .objMode = 2,
     .mosaic = 0,
     .bpp = 0,
-    .shape = ST_OAM_SQUARE,
+    .shape = SPRITE_SHAPE(32x32),
     .x = 0,
     .matrixNum = 0,
-    .size = 2,
+    .size = SPRITE_SIZE(32x32),
     .tileNum = 0,
     .priority = 1,
     .paletteNum = 0,
@@ -316,10 +316,10 @@ static const struct OamData sOamData_855D004 =
     .objMode = 0,
     .mosaic = 0,
     .bpp = 0,
-    .shape = ST_OAM_H_RECTANGLE,
+    .shape = SPRITE_SHAPE(64x32),
     .x = 0,
     .matrixNum = 0,
-    .size = 3,
+    .size = SPRITE_SIZE(64x32),
     .tileNum = 0,
     .priority = 0,
     .paletteNum = 0,
@@ -333,10 +333,10 @@ static const struct OamData sOamData_855D00C =
     .objMode = 0,
     .mosaic = 0,
     .bpp = 0,
-    .shape = ST_OAM_V_RECTANGLE,
+    .shape = SPRITE_SHAPE(8x16),
     .x = 0,
     .matrixNum = 0,
-    .size = 0,
+    .size = SPRITE_SIZE(8x16),
     .tileNum = 0,
     .priority = 0,
     .paletteNum = 0,
@@ -2152,7 +2152,7 @@ static void CreateCaughtBall(u16 a, u8 x, u8 y, u16 unused)
     if (a)
         BlitBitmapToWindow(0, gUnknown_0855D2BE, x * 8, y * 8, 8, 16);
     else
-        FillWindowPixelRect(0, 0, x * 8, y * 8, 8, 16);
+        FillWindowPixelRect(0, PIXEL_FILL(0), x * 8, y * 8, 8, 16);
 }
 
 static u8 CreateMonName(u16 num, u8 left, u8 top)
@@ -2170,7 +2170,7 @@ static u8 CreateMonName(u16 num, u8 left, u8 top)
 
 void sub_80BD28C(u8 x, u8 y, u16 unused)
 {
-    FillWindowPixelRect(0, 0, x * 8, y * 8, 0x60, 16);
+    FillWindowPixelRect(0, PIXEL_FILL(0), x * 8, y * 8, 0x60, 16);
 }
 
 static void CreateInitialPokemonSprites(u16 selectedMon, u16 b)
@@ -2927,7 +2927,7 @@ void sub_80BEA24(u8 taskId)
         case 1:
             DecompressAndLoadBgGfxUsingHeap(3, gPokedexMenu_Gfx, 0x2000, 0, 0);
             CopyToBgTilemapBuffer(3, gPokedexTilemap_DescriptionScreen, 0, 0);
-            FillWindowPixelBuffer(0, 0);
+            FillWindowPixelBuffer(0, PIXEL_FILL(0));
             PutWindowTilemap(0);
             PutWindowTilemap(1);
             sub_80C0D30(1, sPokedexListItem->dexNum);
@@ -3222,7 +3222,7 @@ void sub_80BF250(u8 taskId)
         case 1:
             DecompressAndLoadBgGfxUsingHeap(3, &gPokedexMenu_Gfx, 0x2000, 0, 0);
             CopyToBgTilemapBuffer(3, &gPokedexTilemap_CryScreen, 0, 0);
-            FillWindowPixelBuffer(0, 0);
+            FillWindowPixelBuffer(0, PIXEL_FILL(0));
             PutWindowTilemap(0);
             PutWindowTilemap(3);
             PutWindowTilemap(2);
@@ -3416,7 +3416,7 @@ void sub_80BF82C(u8 taskId)
         case 1:
             DecompressAndLoadBgGfxUsingHeap(3, gPokedexMenu_Gfx, 0x2000, 0, 0);
             CopyToBgTilemapBuffer(3, gPokedexTilemap_SizeScreen, 0, 0);
-            FillWindowPixelBuffer(0, 0);
+            FillWindowPixelBuffer(0, PIXEL_FILL(0));
             PutWindowTilemap(0);
             gMain.state++;
             break;
@@ -3766,7 +3766,7 @@ void sub_80BFE38(u8 taskId)
         case 1:
             DecompressAndLoadBgGfxUsingHeap(3, gPokedexMenu_Gfx, 0x2000, 0, 0);
             CopyToBgTilemapBuffer(3, gPokedexTilemap_DescriptionScreen, 0, 0);
-            FillWindowPixelBuffer(0, 0);
+            FillWindowPixelBuffer(0, PIXEL_FILL(0));
             PutWindowTilemap(0);
             PutWindowTilemap(1);
             sub_80C0D30(1, gTasks[taskId].data[1]);
@@ -4784,7 +4784,7 @@ void sub_80C1270(const u8 *str, u32 left, u32 top)
 
 void sub_80C12B0(u32 x, u32 y, u32 width, u32 height)
 {
-    FillWindowPixelRect(0, 0, x, y, width, height);
+    FillWindowPixelRect(0, PIXEL_FILL(0), x, y, width, height);
 }
 
 void sub_80C12E0(u8 taskId)

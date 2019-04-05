@@ -20,7 +20,7 @@ PetalburgCity_EventScript_1DC307:: @ 81DC307
 	return
 
 PetalburgCity_EventScript_1DC30F:: @ 81DC30F
-	setflag FLAG_SPECIAL_FLAG_0x4000
+	setflag FLAG_HIDE_MAP_NAME_POPUP
 	savebgm MUS_TSURETEK
 	return
 
@@ -48,7 +48,7 @@ PetalburgCity_EventScript_1DC32E:: @ 81DC32E
 	waitmovement 2, MAP_PETALBURG_CITY
 	msgbox PetalburgCity_Text_1EC297, MSGBOX_DEFAULT
 	closemessage
-	clearflag FLAG_SPECIAL_FLAG_0x4000
+	clearflag FLAG_HIDE_MAP_NAME_POPUP
 	setvar VAR_PETALBURG_STATE, 3
 	fadedefaultbgm
 	clearflag FLAG_SPECIAL_FLAG_0x4001
@@ -61,7 +61,7 @@ PetalburgCity_EventScript_1DC32E:: @ 81DC32E
 
 PetalburgCity_EventScript_1DC390:: @ 81DC390
 	lockall
-	setflag FLAG_SPECIAL_FLAG_0x4000
+	setflag FLAG_HIDE_MAP_NAME_POPUP
 	applymovement 5, PetalburgCity_Movement_1DC41B
 	applymovement EVENT_OBJ_ID_PLAYER, PetalburgCity_Movement_1DC406
 	waitmovement 0
@@ -76,7 +76,7 @@ PetalburgCity_EventScript_1DC390:: @ 81DC390
 	hideobjectat EVENT_OBJ_ID_PLAYER, MAP_PETALBURG_CITY
 	closedoor VAR_0x8004, VAR_0x8005
 	waitdooranim
-	clearflag FLAG_SPECIAL_FLAG_0x4000
+	clearflag FLAG_HIDE_MAP_NAME_POPUP
 	fadedefaultbgm
 	clearflag FLAG_SPECIAL_FLAG_0x4001
 	warp MAP_PETALBURG_CITY_WALLYS_HOUSE, 255, 2, 4
@@ -551,7 +551,7 @@ PetalburgCity_EventScript_1DC6E9:: @ 81DC6E9
 	waitmovement 0
 	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceRight
 	waitmovement 0
-	setvar VAR_0x40D1, 1
+	setvar VAR_SCOTT_STATE, 1
 	msgbox PetalburgCity_Text_1DCB31, MSGBOX_DEFAULT
 	closemessage
 	applymovement 9, Common_Movement_WalkInPlaceRight
@@ -572,7 +572,7 @@ PetalburgCity_EventScript_1DC6E9:: @ 81DC6E9
 	call_if_eq PetalburgCity_EventScript_1DC7B2
 	compare VAR_0x8008, 3
 	call_if_eq PetalburgCity_EventScript_1DC7C4
-	setvar VAR_0x40C9, 1
+	setvar VAR_SCOTT_PETALBURG_ENCOUNTER, 1
 	removeobject 9
 	releaseall
 	end

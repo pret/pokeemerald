@@ -12,10 +12,6 @@
 #include "menu.h"
 #include "dynamic_placeholder_text_util.h"
 
-extern u8 GetKeypadIconWidth(u8 keypadIconId);
-extern u16 Font6Func(struct TextPrinter *textPrinter);
-extern u32 GetGlyphWidthFont6(u16 glyphId, bool32 isJapanese);
-
 EWRAM_DATA struct TextPrinter gTempTextPrinter = {0};
 EWRAM_DATA struct TextPrinter gTextPrinters[NUM_TEXT_PRINTERS] = {0};
 
@@ -1581,7 +1577,7 @@ u16 RenderText(struct TextPrinter *textPrinter)
                 textPrinter->printerTemplate.currentChar++;
                 return 2;
             case 15:
-                FillWindowPixelBuffer(textPrinter->printerTemplate.windowId, textPrinter->printerTemplate.bgColor | textPrinter->printerTemplate.bgColor << 4);
+                FillWindowPixelBuffer(textPrinter->printerTemplate.windowId, PIXEL_FILL(textPrinter->printerTemplate.bgColor));
                 textPrinter->printerTemplate.currentX = textPrinter->printerTemplate.x;
                 textPrinter->printerTemplate.currentY = textPrinter->printerTemplate.y;
                 return 2;
@@ -1605,7 +1601,7 @@ u16 RenderText(struct TextPrinter *textPrinter)
                 textPrinter->printerTemplate.currentX = *textPrinter->printerTemplate.currentChar + textPrinter->printerTemplate.x;
                 textPrinter->printerTemplate.currentChar++;
                 return 2;
-            case 19:
+            case EXT_CTRL_CODE_CLEAR_TO:
                 {
                     widthHelper = *textPrinter->printerTemplate.currentChar;
                     widthHelper += textPrinter->printerTemplate.x;
@@ -1619,7 +1615,7 @@ u16 RenderText(struct TextPrinter *textPrinter)
                     }
                 }
                 return 2;
-            case 20:
+            case EXT_CTRL_CODE_MIN_LETTER_SPACING:
                 textPrinter->minLetterSpacing = *textPrinter->printerTemplate.currentChar++;
                 return 2;
             case EXT_CTRL_CODE_JPN:
@@ -1702,7 +1698,7 @@ u16 RenderText(struct TextPrinter *textPrinter)
     case 2:
         if (TextPrinterWaitWithDownArrow(textPrinter))
         {
-            FillWindowPixelBuffer(textPrinter->printerTemplate.windowId, (textPrinter->printerTemplate.bgColor << 4) | textPrinter->printerTemplate.bgColor);
+            FillWindowPixelBuffer(textPrinter->printerTemplate.windowId, PIXEL_FILL(textPrinter->printerTemplate.bgColor));
             textPrinter->printerTemplate.currentX = textPrinter->printerTemplate.x;
             textPrinter->printerTemplate.currentY = textPrinter->printerTemplate.y;
             textPrinter->state = 0;
@@ -1724,12 +1720,12 @@ u16 RenderText(struct TextPrinter *textPrinter)
             int speed = gWindowVerticalScrollSpeeds[scrollSpeed];
             if (textPrinter->scrollDistance < speed)
             {
-                ScrollWindow(textPrinter->printerTemplate.windowId, 0, textPrinter->scrollDistance, textPrinter->printerTemplate.bgColor << 4 | textPrinter->printerTemplate.bgColor);
+                ScrollWindow(textPrinter->printerTemplate.windowId, 0, textPrinter->scrollDistance, PIXEL_FILL(textPrinter->printerTemplate.bgColor));
                 textPrinter->scrollDistance = 0;
             }
             else
             {
-                ScrollWindow(textPrinter->printerTemplate.windowId, 0, speed, textPrinter->printerTemplate.bgColor << 4 | textPrinter->printerTemplate.bgColor);
+                ScrollWindow(textPrinter->printerTemplate.windowId, 0, speed, PIXEL_FILL(textPrinter->printerTemplate.bgColor));
                 textPrinter->scrollDistance -= speed;
             }
             CopyWindowToVram(textPrinter->printerTemplate.windowId, 2);

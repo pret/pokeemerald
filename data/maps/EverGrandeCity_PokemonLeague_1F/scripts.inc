@@ -1,9 +1,9 @@
 EverGrandeCity_PokemonLeague_1F_MapScripts:: @ 82295D2
-	map_script MAP_SCRIPT_ON_TRANSITION, EverGrandeCity_PokemonLeague_1F_MapScript1_2295DD
+	map_script MAP_SCRIPT_ON_TRANSITION, EverGrandeCity_PokemonLeague_1F_OnTransition
 	map_script MAP_SCRIPT_ON_RESUME, EverGrandeCity_PokemonLeague_1F_MapScript1_277C30
 	.byte 0
 
-EverGrandeCity_PokemonLeague_1F_MapScript1_2295DD: @ 82295DD
+EverGrandeCity_PokemonLeague_1F_OnTransition: @ 82295DD
 	setrespawn HEAL_LOCATION_EVER_GRANDE_CITY_2
 	setflag FLAG_LANDMARK_POKEMON_LEAGUE
 	call_if_unset FLAG_ENTERED_ELITE_FOUR, EverGrandeCity_PokemonLeague_1F_EventScript_2295ED

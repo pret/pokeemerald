@@ -1,5 +1,6 @@
 #include "global.h"
 #include "battle.h"
+#include "battle_anim.h"
 #include "recorded_battle.h"
 #include "main.h"
 #include "pokemon.h"
@@ -321,7 +322,7 @@ static bool32 RecordedBattleToSave(struct RecordedBattleSave *battleSave, struct
 
     saveSection->checksum = CalcByteArraySum((void*)(saveSection), sizeof(*saveSection) - 4);
 
-    if (TrySaveToSpecialSaveSection(31, (void*)(saveSection)) != 1)
+    if (TryWriteSpecialSaveSection(SECTOR_ID_RECORDED_BATTLE, (void*)(saveSection)) != 1)
         return FALSE;
     else
         return TRUE;
@@ -490,7 +491,7 @@ bool32 MoveRecordedBattleToSaveData(void)
 
 static bool32 TryCopyRecordedBattleSaveData(struct RecordedBattleSave *dst, struct SaveSection *saveBuffer)
 {
-    if (TryCopySpecialSaveSection(SECTOR_ID_RECORDED_BATTLE, (void*)(saveBuffer)) != 1)
+    if (TryReadSpecialSaveSection(SECTOR_ID_RECORDED_BATTLE, (void*)(saveBuffer)) != 1)
         return FALSE;
 
     memcpy(dst, saveBuffer, sizeof(struct RecordedBattleSave));

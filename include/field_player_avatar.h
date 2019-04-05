@@ -1,17 +1,6 @@
 #ifndef GUARD_FIELD_PLAYER_AVATAR_H
 #define GUARD_FIELD_PLAYER_AVATAR_H
 
-enum {
-    PLAYER_AVATAR_STATE_NORMAL,
-    PLAYER_AVATAR_STATE_MACH_BIKE,
-    PLAYER_AVATAR_STATE_ACRO_BIKE,
-    PLAYER_AVATAR_STATE_SURFING,
-    PLAYER_AVATAR_STATE_UNDERWATER,
-    PLAYER_AVATAR_STATE_FIELD_MOVE,
-    PLAYER_AVATAR_STATE_FISHING,
-    PLAYER_AVATAR_STATE_WATERING,
-};
-
 void player_step(u8 a, u16 b, u16 c);
 void ClearPlayerAvatarInfo(void);
 void SetPlayerAvatarExtraStateTransition(u8, u8);
@@ -63,5 +52,16 @@ u8 sub_808BCD0(void);
 void sub_808B578(void);
 u8 GetFRLGAvatarGraphicsIdByGender(u8);
 u8 GetRSAvatarGraphicsIdByGender(u8);
+void sub_808B980(u8 direction);
+void sub_808B9BC(u8 direction);
+void sub_808B9A4(u8 direction);
+void sub_808C1B4(u8 direction);
+void sub_808B9D4(u8 direction);
+void sub_808D194(void);
+void sub_808D1C8(void);
+bool32 sub_808D1B4(void);
+bool32 sub_808D1E8(void);
+void sub_808C0A8(u8 a);
+u8 player_get_pos_including_state_based_drift(s16 *x, s16 *y);
 
 #endif // GUARD_FIELD_PLAYER_AVATAR_H

@@ -235,7 +235,7 @@ gSpecials:: @ 81DBA64
 	def_special sub_81B9770
 	def_special sub_81B9718
 	def_special sub_81B96D0
-	def_special TeachMoveTutorMove
+	def_special TeachMoveRelearnerMove
 	def_special GetRecordedCyclingRoadResults
 	def_special Special_BeginCyclingRoadChallenge
 	def_special GetPlayerAvatarBike
@@ -327,7 +327,7 @@ gSpecials:: @ 81DBA64
 	def_special SetUpTrainerMovement
 	def_special DoSealedChamberShakingEffect2
 	def_special FoundBlackGlasses
-	def_special sub_80AC81C
+	def_special StartDroughtWeatherBlend
 	def_special DoDiveWarp
 	def_special DoFallWarp
 	def_special ShowContestEntryMonPic
@@ -434,7 +434,7 @@ gSpecials:: @ 81DBA64
 	def_special sub_81B8958
 	def_special sub_8018090
 	def_special sub_813990C
-	def_special sub_801B27C
+	def_special ValidateReceivedWonderCard
 	def_special HasAtLeastOneBerry
 	def_special sub_802C920
 	def_special sub_802E3C4
@@ -471,11 +471,11 @@ gSpecials:: @ 81DBA64
 	def_special sub_813AA04
 	def_special sub_813AA18
 	def_special sub_813AA44
-	def_special sub_80248B0
-	def_special sub_8024918
-	def_special sub_80246D4
-	def_special sub_802477C
-	def_special sub_802488C
+	def_special DisplayBerryPowderVendorMenu
+	def_special RemoveBerryPowderVendorMenu
+	def_special HasEnoughBerryPowder
+	def_special TakeBerryPowder
+	def_special PrintPlayerBerryPowderAmount
 	def_special sub_813A820
 	def_special sub_813A854
 	def_special sub_813B7D8
@@ -499,8 +499,8 @@ gSpecials:: @ 81DBA64
 	def_special sub_813B21C
 	def_special SetMatchCallRegisteredFlag
 	def_special sub_8175280
-	def_special sub_813B2E4
-	def_special sub_813B374
+	def_special CreateUnusualWeatherEvent
+	def_special GetUnusualWeatherMapNameAndType
 	def_special sub_813B490
 	def_special sub_80A08CC
 	def_special Unused_SetWeatherSunny

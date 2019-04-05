@@ -195,7 +195,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_1F9E80:: @ 81F9E80
 	setflag FLAG_HIDE_LITTLEROOT_TOWN_BIRCH
 	setflag FLAG_HIDE_LITTLEROOT_TOWN_RIVAL
 	setvar VAR_0x40D3, 2
-	setvar VAR_0x40F5, 0
+	setvar VAR_SCOTT_CALL_STEP_COUNTER, 0
 	setflag FLAG_SCOTT_CALL_NATIONAL_DEX
 	releaseall
 	end
@@ -347,7 +347,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_1FA06C:: @ 81FA06C
 LittlerootTown_ProfessorBirchsLab_EventScript_1FA0A1:: @ 81FA0A1
 	call LittlerootTown_ProfessorBirchsLab_EventScript_1FA24F
 	removeobject 4
-	msgbox gUnknown_08273374, MSGBOX_YESNO
+	msgbox gText_NicknameThisPokemon, MSGBOX_YESNO
 	compare VAR_RESULT, 0
 	goto_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_1FA0FD
 	call LittlerootTown_ProfessorBirchsLab_EventScript_27378B
@@ -358,7 +358,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_1FA0A1:: @ 81FA0A1
 LittlerootTown_ProfessorBirchsLab_EventScript_1FA0CC:: @ 81FA0CC
 	call LittlerootTown_ProfessorBirchsLab_EventScript_1FA24F
 	removeobject 4
-	msgbox gUnknown_08273374, MSGBOX_YESNO
+	msgbox gText_NicknameThisPokemon, MSGBOX_YESNO
 	compare VAR_RESULT, 0
 	goto_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_1FA0F2
 	call LittlerootTown_ProfessorBirchsLab_EventScript_273797
@@ -392,7 +392,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_1FA10D:: @ 81FA10D
 LittlerootTown_ProfessorBirchsLab_EventScript_1FA142:: @ 81FA142
 	call LittlerootTown_ProfessorBirchsLab_EventScript_1FA24F
 	removeobject 5
-	msgbox gUnknown_08273374, MSGBOX_YESNO
+	msgbox gText_NicknameThisPokemon, MSGBOX_YESNO
 	compare VAR_RESULT, 0
 	goto_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_1FA19E
 	call LittlerootTown_ProfessorBirchsLab_EventScript_27378B
@@ -403,7 +403,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_1FA142:: @ 81FA142
 LittlerootTown_ProfessorBirchsLab_EventScript_1FA16D:: @ 81FA16D
 	call LittlerootTown_ProfessorBirchsLab_EventScript_1FA24F
 	removeobject 5
-	msgbox gUnknown_08273374, MSGBOX_YESNO
+	msgbox gText_NicknameThisPokemon, MSGBOX_YESNO
 	compare VAR_RESULT, 0
 	goto_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_1FA193
 	call LittlerootTown_ProfessorBirchsLab_EventScript_273797
@@ -437,7 +437,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_1FA1AE:: @ 81FA1AE
 LittlerootTown_ProfessorBirchsLab_EventScript_1FA1E3:: @ 81FA1E3
 	call LittlerootTown_ProfessorBirchsLab_EventScript_1FA24F
 	removeobject 6
-	msgbox gUnknown_08273374, MSGBOX_YESNO
+	msgbox gText_NicknameThisPokemon, MSGBOX_YESNO
 	compare VAR_RESULT, 0
 	goto_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_1FA23F
 	call LittlerootTown_ProfessorBirchsLab_EventScript_27378B
@@ -448,7 +448,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_1FA1E3:: @ 81FA1E3
 LittlerootTown_ProfessorBirchsLab_EventScript_1FA20E:: @ 81FA20E
 	call LittlerootTown_ProfessorBirchsLab_EventScript_1FA24F
 	removeobject 6
-	msgbox gUnknown_08273374, MSGBOX_YESNO
+	msgbox gText_NicknameThisPokemon, MSGBOX_YESNO
 	compare VAR_RESULT, 0
 	goto_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_1FA234
 	call LittlerootTown_ProfessorBirchsLab_EventScript_273797
@@ -570,7 +570,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_1FA3AC:: @ 81FA3AC
 	setflag FLAG_SYS_POKEDEX_GET
 	special sub_81AFDA0
 	setflag FLAG_RECEIVED_POKEDEX_FROM_BIRCH
-	setvar VAR_0x40CD, 1
+	setvar VAR_CABLE_CLUB_TUTORIAL_STATE, 1
 	return
 
 LittlerootTown_ProfessorBirchsLab_EventScript_1FA3C4:: @ 81FA3C4

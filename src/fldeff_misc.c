@@ -23,7 +23,7 @@
 #include "constants/songs.h"
 #include "constants/vars.h"
 
-extern struct MapPosition gPlayerFacingPosition;
+EWRAM_DATA struct MapPosition gPlayerFacingPosition = {0};
 
 static void sub_80F9C90(u8);
 static void sub_80F9DFC(u8);
@@ -93,8 +93,8 @@ static const struct OamData gOamData_858E4D8 =
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
     .bpp = ST_OAM_4BPP,
-    .shape = ST_OAM_SQUARE,
-    .size = 1,
+    .shape = SPRITE_SHAPE(16x16),
+    .size = SPRITE_SIZE(16x16),
     .priority = 2,
 };
 
@@ -246,8 +246,8 @@ static const struct OamData gOamData_858E658 =
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
     .bpp = ST_OAM_4BPP,
-    .shape = ST_OAM_V_RECTANGLE,
-    .size = 2,
+    .shape = SPRITE_SHAPE(16x32),
+    .size = SPRITE_SIZE(16x32),
     .priority = 2,
 };
 
@@ -1126,7 +1126,7 @@ void GetShieldToyTVDecorationInfo(void)
         if (!VarGet(VAR_CURRENT_SECRET_BASE))
             return;
 
-        VarSet(VAR_0x40EE, VarGet(VAR_0x40EE) | 0x10);
+        VarSet(VAR_SECRET_BASE_LOW_TV_FLAGS, VarGet(VAR_SECRET_BASE_LOW_TV_FLAGS) | 0x10);
         break;
     case 734:
         ConvertIntToDecimalStringN(gStringVar1, 50, STR_CONV_MODE_LEFT_ALIGN, 2);
@@ -1137,7 +1137,7 @@ void GetShieldToyTVDecorationInfo(void)
         if (!VarGet(VAR_CURRENT_SECRET_BASE))
             return;
 
-        VarSet(VAR_0x40EE, VarGet(VAR_0x40EE) | 0x20);
+        VarSet(VAR_SECRET_BASE_LOW_TV_FLAGS, VarGet(VAR_SECRET_BASE_LOW_TV_FLAGS) | 0x20);
         break;
     case 756:
         gSpecialVar_Result = 1;
@@ -1145,7 +1145,7 @@ void GetShieldToyTVDecorationInfo(void)
         if (!VarGet(VAR_CURRENT_SECRET_BASE))
             return;
 
-        VarSet(VAR_0x40EE, VarGet(VAR_0x40EE) | 0x80);
+        VarSet(VAR_SECRET_BASE_LOW_TV_FLAGS, VarGet(VAR_SECRET_BASE_LOW_TV_FLAGS) | 0x80);
         break;
     case 757:
         gSpecialVar_Result = 2;
@@ -1153,7 +1153,7 @@ void GetShieldToyTVDecorationInfo(void)
         if (!VarGet(VAR_CURRENT_SECRET_BASE))
             return;
 
-        VarSet(VAR_0x40EE, VarGet(VAR_0x40EE) | 0x80);
+        VarSet(VAR_SECRET_BASE_LOW_TV_FLAGS, VarGet(VAR_SECRET_BASE_LOW_TV_FLAGS) | 0x80);
         break;
     case 758:
         gSpecialVar_Result = 3;
@@ -1161,7 +1161,7 @@ void GetShieldToyTVDecorationInfo(void)
         if (!VarGet(VAR_CURRENT_SECRET_BASE))
             return;
 
-        VarSet(VAR_0x40EE, VarGet(VAR_0x40EE) | 0x80);
+        VarSet(VAR_SECRET_BASE_LOW_TV_FLAGS, VarGet(VAR_SECRET_BASE_LOW_TV_FLAGS) | 0x80);
         break;
     }
 }

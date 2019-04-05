@@ -1,5 +1,6 @@
 #include "global.h"
 #include "battle.h"
+#include "battle_anim.h"
 #include "constants/battle_script_commands.h"
 #include "constants/abilities.h"
 #include "constants/moves.h"
@@ -106,10 +107,10 @@ void PressurePPLose(u8 target, u8 attacker, u16 move)
     }
 }
 
-void PressurePPLoseOnUsingImprision(u8 attacker)
+void PressurePPLoseOnUsingImprison(u8 attacker)
 {
     int i, j;
-    int imprisionPos = 4;
+    int imprisonPos = 4;
     u8 atkSide = GetBattlerSide(attacker);
 
     for (i = 0; i < gBattlersCount; i++)
@@ -123,19 +124,19 @@ void PressurePPLoseOnUsingImprision(u8 attacker)
             }
             if (j != MAX_MON_MOVES)
             {
-                imprisionPos = j;
+                imprisonPos = j;
                 if (gBattleMons[attacker].pp[j] != 0)
                     gBattleMons[attacker].pp[j]--;
             }
         }
     }
 
-    if (imprisionPos != 4
+    if (imprisonPos != 4
         && !(gBattleMons[attacker].status2 & STATUS2_TRANSFORMED)
-        && !(gDisableStructs[attacker].mimickedMoves & gBitTable[imprisionPos]))
+        && !(gDisableStructs[attacker].mimickedMoves & gBitTable[imprisonPos]))
     {
         gActiveBattler = attacker;
-        BtlController_EmitSetMonData(0, REQUEST_PPMOVE1_BATTLE + imprisionPos, 0, 1, &gBattleMons[gActiveBattler].pp[imprisionPos]);
+        BtlController_EmitSetMonData(0, REQUEST_PPMOVE1_BATTLE + imprisonPos, 0, 1, &gBattleMons[gActiveBattler].pp[imprisonPos]);
         MarkBattlerForControllerExec(gActiveBattler);
     }
 }
@@ -224,7 +225,7 @@ bool8 WasUnableToUseMove(u8 battler)
 {
     if (gProtectStructs[battler].prlzImmobility
         || gProtectStructs[battler].targetNotAffected
-        || gProtectStructs[battler].usedImprisionedMove
+        || gProtectStructs[battler].usedImprisonedMove
         || gProtectStructs[battler].loveImmobility
         || gProtectStructs[battler].usedDisabledMove
         || gProtectStructs[battler].usedTauntedMove
@@ -365,12 +366,12 @@ u8 TrySetCantSelectMoveBattleScript(void)
         gCurrentMove = move;
         if (gBattleTypeFlags & BATTLE_TYPE_PALACE)
         {
-            gPalaceSelectionBattleScripts[gActiveBattler] = BattleScript_SelectingImprisionedMoveInPalace;
+            gPalaceSelectionBattleScripts[gActiveBattler] = BattleScript_SelectingImprisonedMoveInPalace;
             gProtectStructs[gActiveBattler].palaceUnableToUseMove = 1;
         }
         else
         {
-            gSelectionBattleScripts[gActiveBattler] = BattleScript_SelectingImprisionedMove;
+            gSelectionBattleScripts[gActiveBattler] = BattleScript_SelectingImprisonedMove;
             limitations++;
         }
     }
@@ -438,7 +439,7 @@ u8 CheckMoveLimitations(u8 battlerId, u8 unusableMoves, u8 check)
             unusableMoves |= gBitTable[i];
         if (gDisableStructs[battlerId].tauntTimer && check & MOVE_LIMITATION_TAUNT && gBattleMoves[gBattleMons[battlerId].moves[i]].power == 0)
             unusableMoves |= gBitTable[i];
-        if (GetImprisonedMovesCount(battlerId, gBattleMons[battlerId].moves[i]) && check & MOVE_LIMITATION_IMPRISION)
+        if (GetImprisonedMovesCount(battlerId, gBattleMons[battlerId].moves[i]) && check & MOVE_LIMITATION_IMPRISON)
             unusableMoves |= gBitTable[i];
         if (gDisableStructs[battlerId].encoreTimer && gDisableStructs[battlerId].encoredMove != gBattleMons[battlerId].moves[i])
             unusableMoves |= gBitTable[i];
@@ -469,7 +470,7 @@ bool8 AreAllMovesUnusable(void)
 u8 GetImprisonedMovesCount(u8 battlerId, u16 move)
 {
     s32 i;
-    u8 imprisionedMoves = 0;
+    u8 imprisonedMoves = 0;
     u8 battlerSide = GetBattlerSide(battlerId);
 
     for (i = 0; i < gBattlersCount; i++)
@@ -483,11 +484,11 @@ u8 GetImprisonedMovesCount(u8 battlerId, u16 move)
                     break;
             }
             if (j < MAX_MON_MOVES)
-                imprisionedMoves++;
+                imprisonedMoves++;
         }
     }
 
-    return imprisionedMoves;
+    return imprisonedMoves;
 }
 
 enum
@@ -1466,7 +1467,7 @@ u8 AtkCanceller_UnableToUseMove(void)
         case CANCELLER_IMPRISONED: // imprisoned
             if (GetImprisonedMovesCount(gBattlerAttacker, gCurrentMove))
             {
-                gProtectStructs[gBattlerAttacker].usedImprisionedMove = 1;
+                gProtectStructs[gBattlerAttacker].usedImprisonedMove = 1;
                 CancelMultiTurnMoves(gBattlerAttacker);
                 gBattlescriptCurrInstr = BattleScript_MoveUsedIsImprisoned;
                 gHitMarker |= HITMARKER_UNABLE_TO_USE_MOVE;
@@ -1526,7 +1527,7 @@ u8 AtkCanceller_UnableToUseMove(void)
                 }
                 else
                 {
-                    BattleScriptPush(BattleScript_MoveUsedIsParalyzedCantAttack);
+                    BattleScriptPush(BattleScript_MoveUsedIsInLoveCantAttack);
                     gHitMarker |= HITMARKER_UNABLE_TO_USE_MOVE;
                     gProtectStructs[gBattlerAttacker].loveImmobility = 1;
                     CancelMultiTurnMoves(gBattlerAttacker);
@@ -2040,7 +2041,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                 case ABILITY_FLASH_FIRE:
                     if (moveType == TYPE_FIRE && !(gBattleMons[battler].status1 & STATUS1_FREEZE))
                     {
-                        if (!(gBattleResources->flags->flags[battler] & UNKNOWN_FLAG_FLASH_FIRE))
+                        if (!(gBattleResources->flags->flags[battler] & RESOURCE_FLAG_FLASH_FIRE))
                         {
                             gBattleCommunication[MULTISTRING_CHOOSER] = 0;
                             if (gProtectStructs[gBattlerAttacker].notFirstStrike)
@@ -2048,7 +2049,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                             else
                                 gBattlescriptCurrInstr = BattleScript_FlashFireBoost_PPLoss;
 
-                            gBattleResources->flags->flags[battler] |= UNKNOWN_FLAG_FLASH_FIRE;
+                            gBattleResources->flags->flags[battler] |= RESOURCE_FLAG_FLASH_FIRE;
                             effect = 2;
                         }
                         else

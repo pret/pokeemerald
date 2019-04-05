@@ -10,7 +10,6 @@
 #include "field_screen_effect.h"
 #include "field_special_scene.h"
 #include "field_weather.h"
-// #include "fldeff_flash.h"
 #include "gpu_regs.h"
 #include "link.h"
 #include "link_rfu.h"
@@ -31,22 +30,9 @@
 #include "constants/event_object_movement_constants.h"
 #include "constants/songs.h"
 #include "constants/rgb.h"
-
-extern bool32 sub_81D6534(void);
-extern bool8 walkrun_is_standing_still(void);
-extern void ScriptUnfreezeEventObjects(void);
-extern void sub_80FB768(void);
-extern void sub_808D194(void);
-extern void sub_808D1C8(void);
-extern bool32 sub_808D1B4(void);
-extern bool32 sub_808D1E8(void);
-extern void sub_80B6B68(void);
-extern void sub_80B6E4C(u8, u8);
-extern void sub_80B75D8(u8);
-extern void sub_80B7A74(u8);
-extern void sub_808C0A8(u8);
-extern u8 GetMapPairFadeToType(u8, u8);
-extern u8 GetMapPairFadeFromType(u8, u8);
+#include "trainer_hill.h"
+#include "event_obj_lock.h"
+#include "fldeff.h"
 
 extern const u16 gUnknown_82EC7CC[];
 
@@ -58,7 +44,7 @@ static void task0A_fade_n_map_maybe(u8);
 static void sub_808115C(u8);
 static void palette_bg_faded_fill_white(void);
 static void sub_80AF438(u8);
-static bool32 sub_80AF71C(void);
+static bool32 WaitForWeatherFadeIn(void);
 static void task0A_mpl_807E31C(u8 taskId);
 static void sub_80AFA0C(u8 taskId);
 static void sub_80AFA88(u8 taskId);
@@ -133,7 +119,7 @@ static void sub_80AF0F4(u8 arg)
 
 static void task0A_nop_for_a_while(u8 taskId)
 {
-    if (sub_80AF71C() == TRUE)
+    if (WaitForWeatherFadeIn() == TRUE)
         DestroyTask(taskId);
 }
 
@@ -147,14 +133,14 @@ void sub_80AF128(void)
 
 static void task0A_asap_script_env_2_enable_and_set_ctx_running(u8 taskID)
 {
-    if (sub_80AF71C() == TRUE)
+    if (WaitForWeatherFadeIn() == TRUE)
     {
         DestroyTask(taskID);
         EnableBothScriptContexts();
     }
 }
 
-void sub_80AF168(void)
+void FieldCallback_ReturnToEventScript2(void)
 {
     ScriptContext2_Enable();
     Overworld_PlaySpecialMapMusic();
@@ -187,7 +173,7 @@ static void task_mpl_807DD60(u8 taskId)
         }
         break;
     case 2:
-        if (sub_80AF71C() == TRUE)
+        if (WaitForWeatherFadeIn() == TRUE)
         {
             ScriptContext2_Disable();
             DestroyTask(taskId);
@@ -227,7 +213,7 @@ static void sub_80AF234(u8 taskId)
         }
         break;
     case 2:
-        if (sub_80AF71C() == TRUE)
+        if (WaitForWeatherFadeIn() == TRUE)
         {
             sub_8009F18();
             ScriptContext2_Disable();
@@ -347,7 +333,7 @@ static void sub_80AF438(u8 taskId)
         task->data[0] = 1;
         break;
     case 1:
-        if (sub_80AF71C())
+        if (WaitForWeatherFadeIn())
         {
             u8 eventObjId;
             sub_80AF0F4(1);
@@ -395,7 +381,7 @@ static void task_map_chg_seq_0807E20C(u8 taskId)
         task->data[0] = 1;
         break;
     case 1:
-        if (sub_80AF71C())
+        if (WaitForWeatherFadeIn())
         {
             u8 eventObjId;
             sub_80AF0F4(1);
@@ -428,7 +414,7 @@ static void task_map_chg_seq_0807E2CC(u8 taskId)
         gTasks[taskId].data[0]++;
         break;
     case 1:
-        if (sub_80AF71C())
+        if (WaitForWeatherFadeIn())
         {
             UnfreezeEventObjects();
             ScriptContext2_Disable();
@@ -440,7 +426,7 @@ static void task_map_chg_seq_0807E2CC(u8 taskId)
 
 static void sub_80AF660(u8 taskId)
 {
-    if (sub_80AF71C() == TRUE)
+    if (WaitForWeatherFadeIn() == TRUE)
     {
         DestroyTask(taskId);
         CreateTask(sub_809FA34, 80);
@@ -462,7 +448,7 @@ bool8 sub_80AF6A4(void)
 
 static void task_mpl_807E3C8(u8 taskId)
 {
-    if (sub_80AF71C() == 1)
+    if (WaitForWeatherFadeIn() == 1)
     {
         ScriptContext2_Disable();
         DestroyTask(taskId);
@@ -490,7 +476,7 @@ static bool32 PaletteFadeActive(void)
     return gPaletteFade.active;
 }
 
-static bool32 sub_80AF71C(void)
+static bool32 WaitForWeatherFadeIn(void)
 {
     if (IsWeatherNotFadingIn() == TRUE)
         return TRUE;
@@ -1021,7 +1007,7 @@ static void task0A_mpl_807E31C(u8 taskId)
         gTasks[taskId].data[0]++;
         break;
     case 1:
-        if (sub_80AF71C() && sub_808D1B4() != TRUE)
+        if (WaitForWeatherFadeIn() && sub_808D1B4() != TRUE)
         {
             UnfreezeEventObjects();
             ScriptContext2_Disable();

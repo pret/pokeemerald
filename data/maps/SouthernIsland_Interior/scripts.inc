@@ -15,9 +15,9 @@ SouthernIsland_Interior_EventScript_242A5A:: @ 8242A5A
 	return
 
 SouthernIsland_Interior_MapScript1_242A6E: @ 8242A6E
-	compare VAR_0x40D5, 0
+	compare VAR_ROAMER_POKEMON, 0
 	call_if_eq SouthernIsland_Interior_EventScript_242A8A
-	compare VAR_0x40D5, 0
+	compare VAR_ROAMER_POKEMON, 0
 	call_if_ne SouthernIsland_Interior_EventScript_242A95
 	call SouthernIsland_Interior_EventScript_242AA0
 	end
@@ -77,9 +77,9 @@ SouthernIsland_Interior_EventScript_242AD0:: @ 8242AD0
 	delay 50
 	special RemoveCameraObject
 	setvar VAR_LAST_TALKED, 2
-	compare VAR_0x40D5, 0
+	compare VAR_ROAMER_POKEMON, 0
 	call_if_eq SouthernIsland_Interior_EventScript_242BA4
-	compare VAR_0x40D5, 0
+	compare VAR_ROAMER_POKEMON, 0
 	call_if_ne SouthernIsland_Interior_EventScript_242BB7
 	setflag FLAG_SYS_CTRL_OBJ_DELETE
 	special BattleSetup_StartLatiBattle

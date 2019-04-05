@@ -5,6 +5,7 @@
 #include "battle_message.h"
 #include "battle_setup.h"
 #include "bg.h"
+#include "data.h"
 #include "decompress.h"
 #include "gpu_regs.h"
 #include "graphics.h"
@@ -42,10 +43,10 @@ static const struct OamData gUnknown_0831A988 =
     .objMode = 0,
     .mosaic = 0,
     .bpp = 0,
-    .shape = 0,
+    .shape = SPRITE_SHAPE(64x64),
     .x = 0,
     .matrixNum = 0,
-    .size = 3,
+    .size = SPRITE_SIZE(64x64),
     .tileNum = 0,
     .priority = 0,
     .paletteNum = 0,
@@ -59,10 +60,10 @@ static const struct OamData gUnknown_0831A990 =
     .objMode = 0,
     .mosaic = 0,
     .bpp = 0,
-    .shape = 0,
+    .shape = SPRITE_SHAPE(64x64),
     .x = 0,
     .matrixNum = 0,
-    .size = 3,
+    .size = SPRITE_SIZE(64x64),
     .tileNum = 64,
     .priority = 0,
     .paletteNum = 0,
@@ -709,7 +710,7 @@ void LoadBattleMenuWindowGfx(void)
 
     if (gBattleTypeFlags & BATTLE_TYPE_ARENA)
     {
-        sub_81978B0(0x70);
+        Menu_LoadStdPalAt(0x70);
         LoadMessageBoxGfx(0, 0x30, 0x70);
         gPlttBufferUnfaded[0x76] = 0;
         CpuCopy16(&gPlttBufferUnfaded[0x76], &gPlttBufferFaded[0x76], 2);

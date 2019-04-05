@@ -196,19 +196,33 @@ enum
     CONTEST_STRING_NONE = 255
 };
 
+enum {
+    CONTEST_RANK_NORMAL,
+    CONTEST_RANK_SUPER,
+    CONTEST_RANK_HYPER,
+    CONTEST_RANK_MASTER,
+    CONTEST_RANK_LINK
+};
+
+enum {
+    CONTEST_FILTER_NONE,
+    CONTEST_FILTER_NO_POSTGAME,
+    CONTEST_FILTER_ONLY_POSTGAME
+};
+
 struct ContestPokemon
 {
     /*0x00*/ u16 species;
     /*0x02*/ u8 nickname[POKEMON_NAME_LENGTH + 1];
-    /*0x0D*/ u8 trainerName[8];
+    /*0x0D*/ u8 trainerName[PLAYER_NAME_LENGTH + 1];
     /*0x15*/ u8 trainerGfxId;
     /*0x18*/ u32 flags;
-    /*0x1C*/ u8 whichRank:2;
-    u8 aiPool_Cool:1;
-    u8 aiPool_Beauty:1;
-    u8 aiPool_Cute:1;
-    u8 aiPool_Smart:1;
-    u8 aiPool_Tough:1;
+    /*0x1C*/ u8 whichRank:2; // 0x1 0x2
+    u8 aiPool_Cool:1; // 0x4
+    u8 aiPool_Beauty:1; // 0x8
+    u8 aiPool_Cute:1; // 0x10
+    u8 aiPool_Smart:1; // 0x20
+    u8 aiPool_Tough:1; // 0x40
     /*0x1E*/ u16 moves[4]; // moves
     /*0x26*/ u8 cool; // cool
     /*0x27*/ u8 beauty; // beauty
@@ -219,7 +233,7 @@ struct ContestPokemon
     /*0x2C*/ u8 unk2C[12];
     /*0x38*/ u32 personality;  // personality
     /*0x3C*/ u32 otId;  // otId
-}; // wow
+};
 
 struct Shared18000
 {
@@ -478,5 +492,6 @@ bool32 sub_80FC4F4(void *, u16);
 bool8 sub_80FC55C(void);
 bool8 sub_80FC530(u8);
 u8 sub_80F86E0(u8 *);
+void sub_80FC9F8(u8 taskId);
 
 #endif //GUARD_CONTEST_H

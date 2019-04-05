@@ -1,13 +1,14 @@
 #include "global.h"
-#include "battle.h" // to get rid of once gMonSpritesGfxPtr is put elsewhere
+#include "alloc.h"
+#include "battle.h"
 #include "bg.h"
-#include "data2.h"
+#include "data.h"
 #include "decompress.h"
 #include "event_data.h"
 #include "gpu_regs.h"
 #include "graphics.h"
+#include "item_menu.h"
 #include "main.h"
-#include "alloc.h"
 #include "menu.h"
 #include "menu_helpers.h"
 #include "m4a.h"
@@ -49,13 +50,9 @@ struct PokeblockFeedStruct
     u8 unused;
 };
 
-extern u16 gSpecialVar_ItemId;
 extern struct MusicPlayerInfo gMPlayInfo_BGM;
 
-extern const struct CompressedSpriteSheet gMonFrontPicTable[];
 extern const u16 gUnknown_0860F074[];
-
-extern bool8 sub_81221EC(void);
 
 // this file's functions
 static void HandleInitBackgrounds(void);
@@ -465,10 +462,10 @@ static const struct OamData sThrownPokeblockOamData =
     .objMode = 0,
     .mosaic = 0,
     .bpp = 0,
-    .shape = 0,
+    .shape = SPRITE_SHAPE(8x8),
     .x = 0,
     .matrixNum = 0,
-    .size = 0,
+    .size = SPRITE_SIZE(8x8),
     .tileNum = 0,
     .priority = 1,
     .paletteNum = 0,
@@ -581,7 +578,7 @@ static bool8 TransitionToPokeblockFeedScene(void)
         gMain.state++;
         break;
     case 10:
-        SetWindowBorderStyle(0, 1, 1, 14);
+        DrawStdFrameWithCustomTileAndPalette(0, 1, 1, 14);
         gMain.state++;
         break;
     case 11:
@@ -704,7 +701,7 @@ static void HandleInitWindows(void)
     DeactivateAllTextPrinters();
     LoadUserWindowBorderGfx(0, 1, 0xE0);
     LoadPalette(gUnknown_0860F074, 0xF0, 0x20);
-    FillWindowPixelBuffer(0, 0);
+    FillWindowPixelBuffer(0, PIXEL_FILL(0));
     PutWindowTilemap(0);
     schedule_bg_copy_tilemap_to_vram(0);
 }

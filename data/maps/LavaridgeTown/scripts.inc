@@ -37,7 +37,7 @@ LavaridgeTown_EventScript_1EA53F:: @ 81EA53F
 	return
 
 LavaridgeTown_EventScript_1EA543:: @ 81EA543
-	setflag FLAG_SPECIAL_FLAG_0x4000
+	setflag FLAG_HIDE_MAP_NAME_POPUP
 	return
 
 LavaridgeTown_MapScript2_1EA547: @ 81EA547
@@ -95,7 +95,7 @@ LavaridgeTown_EventScript_1EA5FF:: @ 81EA5FF
 	call_if_ne LavaridgeTown_EventScript_1EA6C9
 	removeobject 7
 	setvar VAR_LAVARIDGE_RIVAL_STATE, 2
-	clearflag FLAG_SPECIAL_FLAG_0x4000
+	clearflag FLAG_HIDE_MAP_NAME_POPUP
 	savebgm MUS_DUMMY
 	fadedefaultbgm
 	releaseall

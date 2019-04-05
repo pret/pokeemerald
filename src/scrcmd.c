@@ -7,7 +7,7 @@
 #include "contest.h"
 #include "contest_link_80F57C4.h"
 #include "contest_painting.h"
-#include "data2.h"
+#include "data.h"
 #include "decoration.h"
 #include "decoration_inventory.h"
 #include "event_data.h"
@@ -281,7 +281,7 @@ bool8 ScrCmd_callstd_if(struct ScriptContext *ctx)
     return FALSE;
 }
 
-bool8 ScrCmd_gotoram(struct ScriptContext *ctx)
+bool8 ScrCmd_returnram(struct ScriptContext *ctx)
 {
     ScriptJump(ctx, gUnknown_020375C0);
     return FALSE;
@@ -1302,7 +1302,7 @@ bool8 ScrCmd_cmdDB(struct ScriptContext *ctx)
     if (msg == NULL)
         msg = (const u8 *)ctx->data[0];
     sub_81973A4();
-    NewMenuHelpers_DrawDialogueFrame(0, 1);
+    DrawDialogueFrame(0, 1);
     AddTextPrinterParameterized(0, 1, msg, 0, 1, 0, 0);
     return FALSE;
 }
@@ -1517,9 +1517,9 @@ bool8 ScrCmd_braillemessage(struct ScriptContext *ctx)
     winTemplate = CreateWindowTemplate(0, xWindow, yWindow + 1, width, height, 0xF, 0x1);
     gUnknown_03000F30 = AddWindow(&winTemplate);
     LoadUserWindowBorderGfx(gUnknown_03000F30, 0x214, 0xE0);
-    NewMenuHelpers_DrawStdWindowFrame(gUnknown_03000F30, 0);
+    DrawStdWindowFrame(gUnknown_03000F30, 0);
     PutWindowTilemap(gUnknown_03000F30);
-    FillWindowPixelBuffer(gUnknown_03000F30, 0x11);
+    FillWindowPixelBuffer(gUnknown_03000F30, PIXEL_FILL(1));
     AddTextPrinterParameterized(gUnknown_03000F30, 6, gStringVar4, xText, yText, 0xFF, 0x0);
     CopyWindowToVram(gUnknown_03000F30, 3);
     return FALSE;
@@ -2215,9 +2215,9 @@ bool8 ScrCmd_checkmonobedience(struct ScriptContext *ctx)
     return FALSE;
 }
 
-bool8 ScrCmd_cmdCF(struct ScriptContext *ctx)
+bool8 ScrCmd_gotoram(struct ScriptContext *ctx)
 {
-    const u8* v1 = sub_8099244();
+    const u8* v1 = GetSavedRamScriptIfValid();
 
     if (v1)
     {
@@ -2254,7 +2254,7 @@ bool8 ScrCmd_setmonmetlocation(struct ScriptContext *ctx)
 
 void sub_809BDB4(void)
 {
-    sub_819746C(gUnknown_03000F30, 1);
+    ClearStdWindowAndFrame(gUnknown_03000F30, 1);
     RemoveWindow(gUnknown_03000F30);
 }
 

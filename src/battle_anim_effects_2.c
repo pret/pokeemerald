@@ -16,9 +16,6 @@
 #include "constants/rgb.h"
 #include "constants/songs.h"
 
-extern void sub_8108C94(struct Sprite *);
-extern void sub_810310C(u8, struct Sprite *);
-
 void sub_8103448(struct Sprite *);
 void sub_8103498(struct Sprite *);
 void sub_810358C(struct Sprite *);
@@ -892,7 +889,7 @@ const struct SpriteTemplate gUnknown_08593958 =
     .callback = sub_8105DE8,
 };
 
-const struct SpriteTemplate gUnknown_08593970 =
+const struct SpriteTemplate gMagentaHeartSpriteTemplate =
 {
     .tileTag = ANIM_TAG_MAGENTA_HEART,
     .paletteTag = ANIM_TAG_MAGENTA_HEART,
@@ -3289,7 +3286,7 @@ static void sub_810627C(struct Sprite *sprite)
     }
 }
 
-void sub_81062E8(u8 taskId)
+void AnimTask_HeartsBackground(u8 taskId)
 {
     struct BattleAnimBgData animBg;
 

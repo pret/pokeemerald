@@ -6,6 +6,7 @@
 #include "contest.h"
 #include "contest_link_80F57C4.h"
 #include "contest_link_80FC4F4.h"
+#include "data.h"
 #include "decompress.h"
 #include "dma3.h"
 #include "event_data.h"
@@ -39,6 +40,7 @@
 #include "constants/rgb.h"
 #include "constants/songs.h"
 #include "constants/vars.h"
+#include "contest.h"
 
 struct ContestLinkUnk0
 {
@@ -85,7 +87,6 @@ struct ContestLink80F57C4
 
 EWRAM_DATA struct ContestLink80F57C4 *gUnknown_0203A034 = NULL;
 
-extern const struct CompressedSpriteSheet gMonFrontPicTable[];
 extern const struct BgTemplate gUnknown_0858D888[4];
 extern const struct WindowTemplate gUnknown_0858D898[];
 extern const struct CompressedSpriteSheet gUnknown_0858D878[];
@@ -98,8 +99,6 @@ extern const struct SpriteTemplate gSpriteTemplate_858D7F8;
 extern const struct SpriteSheet gUnknown_0858D810[];
 extern const struct SpritePalette gUnknown_0858D850;
 extern const struct SpriteTemplate gSpriteTemplate_858D860;
-
-extern void sub_81D9DE4(u8);
 
 static void sub_80F6A9C(void);
 static void sub_80F71C8(void);
@@ -779,7 +778,7 @@ static void sub_80F677C(u8 taskId)
     if (!gReceivedRemoteLinkPlayers)
     {
         if (gIsLinkContest & 0x2)
-            sub_800E084();
+            DestroyWirelessStatusIndicatorSprite();
 
         sub_80F7144();
         gTasks[taskId].func = sub_80F67C4;
@@ -935,7 +934,7 @@ static void sub_80F6AE8(void)
 //     windowTemplate.width = 30;
 //     windowTemplate.height = 2;
 //     windowId = AddWindow(&windowTemplate);
-//     FillWindowPixelBuffer(windowId, 0x11);
+//     FillWindowPixelBuffer(windowId, PIXEL_FILL(1));
 //     origWidth = GetStringWidth(1, text, 0) + 9;
 //     strWidth = origWidth;
 //     if (strWidth < 0)

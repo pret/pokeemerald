@@ -6,20 +6,9 @@
 #include "palette.h"
 #include "decompress.h"
 #include "trainer_pokemon_sprites.h"
-#include "data2.h"
+#include "data.h"
 #include "pokemon.h"
 #include "constants/trainers.h"
-
-extern const struct CompressedSpriteSheet gMonFrontPicTable[NUM_SPECIES];
-extern const struct CompressedSpriteSheet gMonBackPicTable[NUM_SPECIES];
-extern const struct CompressedSpriteSheet gTrainerFrontPicTable[];
-extern const struct CompressedSpriteSheet gTrainerBackPicTable[];
-extern const struct CompressedSpritePalette gTrainerFrontPicPaletteTable[];
-extern const union AffineAnimCmd *const gUnknown_082FF618[];
-extern const union AffineAnimCmd *const gUnknown_082FF694[];
-extern const union AnimCmd *const gPlayerMonSpriteAnimsTable[];
-extern const union AnimCmd *const *const gMonAnimationsSpriteAnimsPtrTable[NUM_SPECIES];
-extern const union AnimCmd *const *const gTrainerFrontAnimsPtrTable[];
 
 // Static type declarations
 
@@ -43,13 +32,18 @@ static EWRAM_DATA struct PicData sSpritePics[PICS_COUNT] = {};
 // .rodata
 
 static const struct PicData sDummyPicData = {};
+
 static const struct OamData gUnknown_0860B064 =
 {
-    .size = 3
+    .shape = SPRITE_SHAPE(64x64),
+    .size = SPRITE_SIZE(64x64)
 };
+
 static const struct OamData gUnknown_0860B06C =
 {
-    .affineMode = 1, .size = 3
+    .affineMode = 1,
+    .shape = SPRITE_SHAPE(64x64),
+    .size = SPRITE_SIZE(64x64)
 };
 
 // .text
@@ -144,7 +138,7 @@ static void LoadPicPaletteBySlot(u16 species, u32 otId, u32 personality, u8 pale
 static void AssignSpriteAnimsTable(bool8 isTrainer)
 {
     if (!isTrainer)
-        sCreatingSpriteTemplate.anims = gPlayerMonSpriteAnimsTable;
+        sCreatingSpriteTemplate.anims = gUnknown_082FF70C;
     else
         sCreatingSpriteTemplate.anims = gTrainerFrontAnimsPtrTable[0];
 }
@@ -265,7 +259,7 @@ u16 CreatePicSprite2(u16 species, u32 otId, u32 personality, u8 flags, s16 x, s1
         images[j].size = 0x800;
     }
     sCreatingSpriteTemplate.tileTag = 0xFFFF;
-    sCreatingSpriteTemplate.anims = gMonAnimationsSpriteAnimsPtrTable[species];
+    sCreatingSpriteTemplate.anims = gMonFrontAnimsPtrTable[species];
     sCreatingSpriteTemplate.images = images;
     if (flags2 == 0x01)
     {

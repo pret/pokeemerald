@@ -54,7 +54,8 @@ const u16 gUnknown_085B8378[] = INCBIN_U16("graphics/pokedex/cry_meter_map.bin")
 const u16 gUnknown_085B8418[] = INCBIN_U16("graphics/pokedex/cry_meter.gbapal");
 const u8 gUnknown_085B8438[] = INCBIN_U8("graphics/pokedex/cry_meter.4bpp.lz");
 
-const u16 gUnknown_085B8770[][72] = {
+const u16 gUnknown_085B8770[][72] =
+{
     {
         0x0000, 0x0004, 0x0008, 0x000C, 0x0010, 0x0014, 0x0018, 0x001C,
         0x0400, 0x0404, 0x0408, 0x040C, 0x0410, 0x0414, 0x0418, 0x041C,
@@ -142,7 +143,8 @@ const u16 gUnknown_085B8BF0[] = INCBIN_U16("graphics/pokedex/85B8C10.gbapal");
 const u8 gUnknown_085B8C10[] = INCBIN_U8("graphics/pokedex/85B8C10.4bpp");
 
 const u8 gUnknown_085B8C30[] = {0xF0, 0x0F};
-const u8 gUnknown_085B8C32[][16] = {
+const u8 gUnknown_085B8C32[][16] =
+{
     {
         0x0F, 0x0E, 0x0D, 0x0C, 0x0B, 0x0A, 0x09, 0x08,
         0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F
@@ -152,23 +154,33 @@ const u8 gUnknown_085B8C32[][16] = {
     }
 };
 
-const union AnimCmd gSpriteAnim_85B8C54[] = {
+const union AnimCmd gSpriteAnim_85B8C54[] =
+{
     ANIMCMD_FRAME(0, 30),
     ANIMCMD_END
 };
 
-const union AnimCmd *const gSpriteAnimTable_85B8C5C[] = {
+const union AnimCmd *const gSpriteAnimTable_85B8C5C[] =
+{
     gSpriteAnim_85B8C54
 };
 
-const struct OamData gOamData_85B8C60 = {
+const struct OamData gOamData_85B8C60 =
+{
     .y = 160,
     .affineMode = ST_OAM_AFFINE_NORMAL,
-    .size = 3,
-    .priority = 1
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .bpp = ST_OAM_4BPP,
+    .shape = SPRITE_SHAPE(64x64),
+    .x = 0,
+    .size = SPRITE_SIZE(64x64),
+    .tileNum = 0,
+    .priority = 1,
+    .paletteNum = 0,
 };
 
-const struct SpriteTemplate gUnknown_085B8C68 = {
+const struct SpriteTemplate gUnknown_085B8C68 =
+{
     0x2000,
     0x2000,
     &gOamData_85B8C60,
@@ -178,12 +190,14 @@ const struct SpriteTemplate gUnknown_085B8C68 = {
     sub_814596C
 };
 
-const struct SpriteSheet gCryMeterNeedleSpriteSheets[] = {
+const struct SpriteSheet gCryMeterNeedleSpriteSheets[] =
+{
     {CryMeterNeedleTiles, 0x800, 0x2000},
     {}
 };
 
-const struct SpritePalette gCryMeterNeedleSpritePalettes[] = {
+const struct SpritePalette gCryMeterNeedleSpritePalettes[] =
+{
     {CryMeterNeedlePalette, 0x2000},
     {}
 };
@@ -512,3 +526,4 @@ static void sub_8145B24(s8 a0)
     sCryVolumeMeter->unk1 = r2;
     sCryVolumeMeter->unk2 = 5;
 }
+

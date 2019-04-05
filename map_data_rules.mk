@@ -3,7 +3,7 @@
 MAPS_DIR = $(DATA_ASM_SUBDIR)/maps
 LAYOUTS_DIR = $(DATA_ASM_SUBDIR)/layouts
 
-MAP_DIRS := $(dir $(wildcard $(MAPS_DIR)/*/))
+MAP_DIRS := $(dir $(wildcard $(MAPS_DIR)/*/map.json))
 MAP_CONNECTIONS := $(patsubst $(MAPS_DIR)/%/,$(MAPS_DIR)/%/connections.inc,$(MAP_DIRS))
 MAP_EVENTS := $(patsubst $(MAPS_DIR)/%/,$(MAPS_DIR)/%/events.inc,$(MAP_DIRS))
 MAP_HEADERS := $(patsubst $(MAPS_DIR)/%/,$(MAPS_DIR)/%/header.inc,$(MAP_DIRS))

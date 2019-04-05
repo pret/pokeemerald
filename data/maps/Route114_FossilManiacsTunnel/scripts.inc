@@ -27,7 +27,7 @@ Route114_FossilManiacsTunnel_EventScript_22AF66:: @ 822AF66
 	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceDown
 	waitmovement 0
 	msgbox Route114_FossilManiacsTunnel_Text_22B1F7, MSGBOX_DEFAULT
-	setvar VAR_0x40CC, 2
+	setvar VAR_FOSSIL_MANIAC_STATE, 2
 	releaseall
 	end
 

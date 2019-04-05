@@ -6,7 +6,8 @@
 
 u32 filler_03002F58;
 u32 filler_03002F5C;
-u8 gUnknown_03002F60;
+// This global is set to 0 and never changed.
+u8 gTransparentTileNumber;
 u32 filler_03002F64;
 void *gUnknown_03002F70[4];
 extern u32 gUnneededFireRedVariable;
@@ -106,7 +107,7 @@ bool16 InitWindows(const struct WindowTemplate *templates)
         }
     }
 
-    gUnknown_03002F60 = 0;
+    gTransparentTileNumber = 0;
     return TRUE;
 }
 
@@ -359,13 +360,14 @@ void PutWindowRectTilemapOverridePalette(u8 windowId, u8 x, u8 y, u8 width, u8 h
     }
 }
 
+// Fills a window with transparent tiles.
 void ClearWindowTilemap(u8 windowId)
 {
     struct Window windowLocal = gWindows[windowId];
 
     FillBgTilemapBufferRect(
         windowLocal.window.bg,
-        gUnknown_03002F60,
+        gTransparentTileNumber,
         windowLocal.window.tilemapLeft,
         windowLocal.window.tilemapTop,
         windowLocal.window.width,
@@ -451,6 +453,7 @@ void CopyToWindowPixelBuffer(u8 windowId, const void *src, u16 size, u16 tileOff
         LZ77UnCompWram(src, gWindows[windowId].tileData + (0x20 * tileOffset));
 }
 
+// Sets all pixels within the window to the fillValue color.
 void FillWindowPixelBuffer(u8 windowId, u8 fillValue)
 {
     int fillSize = gWindows[windowId].window.width * gWindows[windowId].window.height;

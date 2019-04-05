@@ -7,7 +7,8 @@
 	.include "src/sprite.o"
 	.include "src/link.o"
 	.include "src/link_rfu.o"
-	.include "src/rom_8011DC0.o"
+	.include "src/union_room.o"
+	.include "src/union_room_battle.o"
 	.include "src/rtc.o"
 	.include "src/main_menu.o"
 	.include "src/rom_8034C54.o"
@@ -46,6 +47,7 @@
 	.include "src/mirage_tower.o"
 	.include "src/berry_fix_program.o"
 
+    @ pokenav
 gUnknown_030012BC: @ 30012BC
 	.space 0x4
 
@@ -55,63 +57,9 @@ gUnknown_030012C0: @ 30012C0
 gUnknown_030012C4: @ 30012C4
 	.space 0x4
 
-gUnknown_030012C8: @ 30012C8
-	.space 0x18
-
-gUnknown_030012E0: @ 30012E0
-	.space 0x2
-
-gUnknown_030012E2: @ 30012E2
-	.space 0x2
-
-gUnknown_030012E4: @ 30012E4
-	.space 0x2
-
-gUnknown_030012E6: @ 30012E6
-	.space 0x2
-
-gUnknown_030012E8: @ 30012E8
-	.space 0x4
-
-gUnknown_030012EC: @ 30012EC
-	.space 0x2
-
-gUnknown_030012EE: @ 30012EE
-	.space 0x2
-
-gUnknown_030012F0: @ 30012F0
-	.space 0x2
-
-gUnknown_030012F2: @ 30012F2
-	.space 0x2
-
-gUnknown_030012F4: @ 30012F4
-	.space 0x4
-
-gUnknown_030012F8: @ 30012F8
-	.space 0x2
-
-gUnknown_030012FA: @ 30012FA
-	.space 0x2
-
-gUnknown_030012FC: @ 30012FC
-	.space 0x4
-
-gUnknown_03001300: @ 3001300
-	.space 0x40
-
-gMPlayTrack_BGM: @ 3001340
-	.space 0x320
-
-gMPlayTrack_SE1: @ 3001660
-	.space 0xF0
-
-gMPlayTrack_SE2: @ 3001750
-	.space 0x2D0
-
-gMPlayTrack_SE3: @ 3001A20
-	.space 0x50
-
+    .include "src/ereader_helpers.o"
+	.include "src/faraway_island.o"
+	.include "asm/m4a_1.o"
 	.include "src/agb_flash.o"
 	.include "src/siirtc.o"
 	.include "*libgcc.a:dp-bit.o"

@@ -7,7 +7,7 @@
 #include "battle_setup.h"
 #include "battle_tv.h"
 #include "bg.h"
-#include "data2.h"
+#include "data.h"
 #include "item.h"
 #include "item_menu.h"
 #include "link.h"
@@ -30,10 +30,6 @@
 #include "constants/moves.h"
 #include "constants/songs.h"
 #include "constants/trainers.h"
-
-extern const struct CompressedSpritePalette gTrainerBackPicPaletteTable[];
-
-extern void sub_8172EF0(u8 battlerId, struct Pokemon *mon);
 
 // this file's functions
 static void WallyHandleGetMonData(void);
@@ -92,7 +88,7 @@ static void WallyHandleBattleAnimation(void);
 static void WallyHandleLinkStandbyMsg(void);
 static void WallyHandleResetActionMoveSelection(void);
 static void WallyHandleCmd55(void);
-static void nullsub_118(void);
+static void WallyCmdEnd(void);
 
 static void WallyBufferRunCommand(void);
 static void WallyBufferExecCompleted(void);
@@ -161,10 +157,10 @@ static void (*const sWallyBufferCommands[CONTROLLER_CMDS_COUNT])(void) =
     WallyHandleLinkStandbyMsg,
     WallyHandleResetActionMoveSelection,
     WallyHandleCmd55,
-    nullsub_118
+    WallyCmdEnd
 };
 
-static void nullsub_117(void)
+static void SpriteCB_Null7(void)
 {
 }
 
@@ -1559,6 +1555,6 @@ static void WallyHandleCmd55(void)
         gBattlerControllerFuncs[gActiveBattler] = sub_80587B0;
 }
 
-static void nullsub_118(void)
+static void WallyCmdEnd(void)
 {
 }

@@ -36,8 +36,6 @@ static void sub_81162F8(u8);
 static void sub_81163D0(struct Sprite *);
 static void sub_81165E4(struct Sprite *);
 
-extern void sub_810E2C8(struct Sprite *);
-
 const union AnimCmd gUnknown_0859722C[] =
 {
     ANIMCMD_FRAME(0, 8),

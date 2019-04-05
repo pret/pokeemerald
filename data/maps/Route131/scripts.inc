@@ -3,7 +3,7 @@ Route131_MapScripts:: @ 81F7404
 	.byte 0
 
 Route131_MapScript1_1F740A: @ 81F740A
-	compare VAR_0x405E, 4
+	compare VAR_RAYQUAZA_STATE, 4
 	call_if_ge Route131_EventScript_1F741F
 	call Route131_EventScript_1F741B
 	end

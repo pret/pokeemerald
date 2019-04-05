@@ -9,7 +9,7 @@
 #include "battle_setup.h"
 #include "battle_tv.h"
 #include "bg.h"
-#include "data2.h"
+#include "data.h"
 #include "item.h"
 #include "item_menu.h"
 #include "link.h"
@@ -35,13 +35,6 @@
 #include "constants/trainers.h"
 
 extern struct MusicPlayerInfo gMPlayInfo_BGM;
-
-extern const struct CompressedSpritePalette gTrainerFrontPicPaletteTable[];
-extern const struct CompressedSpritePalette gTrainerBackPicPaletteTable[];
-
-extern void sub_8172EF0(u8 battlerId, struct Pokemon *mon);
-extern void sub_81AABB0(void);
-extern void sub_81851A8(u8 *);
 
 // this file's functions
 static void PlayerHandleGetMonData(void);
@@ -99,7 +92,7 @@ static void PlayerHandleBattleAnimation(void);
 static void PlayerHandleLinkStandbyMsg(void);
 static void PlayerHandleResetActionMoveSelection(void);
 static void PlayerHandleCmd55(void);
-static void nullsub_22(void);
+static void PlayerCmdEnd(void);
 
 static void PlayerBufferRunCommand(void);
 static void HandleInputChooseTarget(void);
@@ -186,7 +179,7 @@ static void (*const sPlayerBufferCommands[CONTROLLER_CMDS_COUNT])(void) =
     PlayerHandleLinkStandbyMsg,
     PlayerHandleResetActionMoveSelection,
     PlayerHandleCmd55,
-    nullsub_22
+    PlayerCmdEnd
 };
 
 static const u8 sTargetIdentities[] = {B_POSITION_PLAYER_LEFT, B_POSITION_PLAYER_RIGHT, B_POSITION_OPPONENT_RIGHT, B_POSITION_OPPONENT_LEFT};
@@ -3105,6 +3098,6 @@ static void PlayerHandleCmd55(void)
     gBattlerControllerFuncs[gActiveBattler] = sub_80587B0;
 }
 
-static void nullsub_22(void)
+static void PlayerCmdEnd(void)
 {
 }

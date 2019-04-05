@@ -430,21 +430,21 @@ EventScript_275B4D:: @ 8275B4D
 EventScript_275B5B:: @ 8275B5B
 	closemessage
 	playse SE_KAIDAN
-	setvar VAR_0x4097, 0
+	setvar VAR_INIT_SECRET_BASE, 0
 	setflag FLAG_DECORATION_0
 	special SavePlayerSecretBase
 	special sub_80E9068
 	setvar VAR_0x8004, 0
 	setvar VAR_0x8005, 0
 	special sub_80E933C
-	setvar VAR_0x4089, 1
+	setvar VAR_SECRET_BASE_INITIALIZED, 1
 	waitstate
 	end
 
 SecretBase_RedCave1_EventScript_275B81:: @ 8275B81
 	applymovement EVENT_OBJ_ID_PLAYER, SecretBase_RedCave1_Movement_275BB4
 	waitmovement 0
-	setvar VAR_0x4097, 1
+	setvar VAR_INIT_SECRET_BASE, 1
 	msgbox SecretBase_RedCave1_Text_23B759, MSGBOX_YESNO
 	compare VAR_RESULT, 1
 	goto_if_eq SecretBase_RedCave1_EventScript_275BAB
@@ -467,21 +467,21 @@ SecretBase_RedCave1_Movement_275BB4: @ 8275BB4
 
 EventScript_275BB7:: @ 8275BB7
 	lockall
-	setvar VAR_0x4097, 1
+	setvar VAR_INIT_SECRET_BASE, 1
 	playse SE_KAIDAN
 	special IsCurrentSecretBaseOwnedByPlayer
 	compare VAR_RESULT, 0
 	goto_if_eq EventScript_275BDB
 	clearflag FLAG_DECORATION_0
 	special sub_80E9068
-	setvar VAR_0x4089, 0
+	setvar VAR_SECRET_BASE_INITIALIZED, 0
 	waitstate
 	end
 
 EventScript_275BDB:: @ 8275BDB
 	setflag FLAG_DECORATION_0
 	special sub_80E9068
-	setvar VAR_0x4089, 0
+	setvar VAR_SECRET_BASE_INITIALIZED, 0
 	waitstate
 	end
 
@@ -570,7 +570,7 @@ EventScript_275D0C:: @ 8275D0C
 	setvar VAR_0x8004, 0
 	setvar VAR_0x8005, 0
 	special sub_80E933C
-	setvar VAR_0x4089, 1
+	setvar VAR_SECRET_BASE_INITIALIZED, 1
 	end
 
 EventScript_275D1F:: @ 8275D1F
@@ -1052,7 +1052,7 @@ Text_276731: @ 8276731
 	.string "This data is already registered.\n"
 	.string "Would you like to delete it?$"
 
-Text_27676F: @ 827676F
+Text_TooManyBasesDeleteSome: @ 827676F
 	.string "Up to 10 locations can be registered.\p"
 	.string "Delete a location if you want to\n"
 	.string "register another location.$"
@@ -1063,10 +1063,10 @@ Text_2767D1: @ 82767D1
 Text_2767E9: @ 82767E9
 	.string "Data has been unregistered.$"
 
-Text_276805: @ 8276805
+Text_SecretBaseBootUpPC: @ 8276805
 	.string "{PLAYER} booted up the PC.$"
 
-Text_27681A: @ 827681A
+Text_SecretBasePCStartMenu: @ 827681A
 	.string "What would you like to do?$"
 
 Text_276835: @ 8276835

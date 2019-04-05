@@ -99,6 +99,8 @@
 //
 #define EXT_CTRL_CODE_CLEAR     0x11
 //
+#define EXT_CTRL_CODE_CLEAR_TO  0x13
+#define EXT_CTRL_CODE_MIN_LETTER_SPACING 0x14
 #define EXT_CTRL_CODE_JPN       0x15
 #define EXT_CTRL_CODE_ENG       0x16
 
@@ -283,5 +285,9 @@ u32 GetGlyphWidthFont2(u16 glyphId, bool32 isJapanese);
 void DecompressGlyphFont1(u16 glyphId, bool32 isJapanese);
 u32 GetGlyphWidthFont1(u16 glyphId, bool32 isJapanese);
 void DecompressGlyphFont9(u16 glyphId);
+
+// unk_text_util_2.c
+u16 Font6Func(struct TextPrinter *textPrinter);
+u32 GetGlyphWidthFont6(u16 glyphId, bool32 isJapanese);
 
 #endif // GUARD_TEXT_H

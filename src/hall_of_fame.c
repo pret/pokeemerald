@@ -32,7 +32,7 @@
 #include "menu.h"
 #include "fldeff_misc.h"
 #include "trainer_pokemon_sprites.h"
-#include "data2.h"
+#include "data.h"
 #include "rom_81520A8.h"
 #include "constants/rgb.h"
 
@@ -65,8 +65,6 @@ static EWRAM_DATA struct HofGfx *sHofGfxPtr = NULL;
 extern struct MusicPlayerInfo gMPlayInfo_BGM;
 
 #define HALL_OF_FAME_MAX_TEAMS 50
-
-extern void ReturnFromHallOfFamePC(void);
 
 // this file's functions
 static void ClearVramOamPltt_LoadHofPal(void);
@@ -180,10 +178,10 @@ static const struct OamData sOamData_85E53FC =
     .objMode = 0,
     .mosaic = 0,
     .bpp = 0,
-    .shape = 0,
+    .shape = SPRITE_SHAPE(8x8),
     .x = 0,
     .matrixNum = 0,
-    .size = 0,
+    .size = SPRITE_SIZE(8x8),
     .tileNum = 0,
     .priority = 0,
     .paletteNum = 0,
@@ -490,7 +488,7 @@ static void Task_Hof_InitTeamSaveData(u8 taskId)
     }
     *lastSavedTeam = *sHofMonPtr;
 
-    NewMenuHelpers_DrawDialogueFrame(0, 0);
+    DrawDialogueFrame(0, 0);
     AddTextPrinterParameterized2(0, 1, gText_SavingDontTurnOffPower, 0, NULL, 2, 1, 3);
     CopyWindowToVram(0, 3);
     gTasks[taskId].func = Task_Hof_TrySaveData;
@@ -570,7 +568,7 @@ static void Task_Hof_DisplayMon(u8 taskId)
     gSprites[spriteId].tSpecies = currMon->species;
     gSprites[spriteId].callback = SpriteCB_GetOnScreenAndAnimate;
     gTasks[taskId].tMonSpriteId(currMonId) = spriteId;
-    sub_8197434(0, TRUE);
+    ClearDialogWindowAndFrame(0, TRUE);
     gTasks[taskId].func = Task_Hof_PrintMonInfoAfterAnimating;
 }
 
@@ -649,7 +647,7 @@ static void sub_8173DC0(u8 taskId)
                 gSprites[gTasks[taskId].tMonSpriteId(i)].oam.priority = 1;
         }
         BeginNormalPaletteFade(sUnknown_0203BCD4, 0, 12, 12, RGB(16, 29, 24));
-        FillWindowPixelBuffer(0, 0);
+        FillWindowPixelBuffer(0, PIXEL_FILL(0));
         CopyWindowToVram(0, 3);
         gTasks[taskId].tFrameCount = 7;
         gTasks[taskId].func = sub_8173EA4;
@@ -697,7 +695,7 @@ static void Task_Hof_WaitAndPrintPlayerInfo(u8 taskId)
     {
         FillBgTilemapBufferRect_Palette0(0, 0, 0, 0, 0x20, 0x20);
         HallOfFame_PrintPlayerInfo(1, 2);
-        NewMenuHelpers_DrawDialogueFrame(0, 0);
+        DrawDialogueFrame(0, 0);
         AddTextPrinterParameterized2(0, 1, gText_LeagueChamp, 0, NULL, 2, 1, 3);
         CopyWindowToVram(0, 3);
         gTasks[taskId].func = Task_Hof_ExitOnKeyPressed;
@@ -1066,7 +1064,7 @@ static void Task_HofPC_HandleExit(u8 taskId)
 static void Task_HofPC_PrintDataIsCorrupted(u8 taskId)
 {
     sub_8198180(gText_UnkCtrlF800Exit, 8, TRUE);
-    NewMenuHelpers_DrawDialogueFrame(0, 0);
+    DrawDialogueFrame(0, 0);
     AddTextPrinterParameterized2(0, 1, gText_HOFCorrupted, 0, NULL, 2, 1, 3);
     CopyWindowToVram(0, 3);
     gTasks[taskId].func = Task_HofPC_ExitOnButtonPress;
@@ -1086,7 +1084,7 @@ static void Task_HofPC_ExitOnButtonPress(u8 taskId)
 
 static void HallOfFame_PrintWelcomeText(u8 unusedPossiblyWindowId, u8 unused2)
 {
-    FillWindowPixelBuffer(0, 0);
+    FillWindowPixelBuffer(0, PIXEL_FILL(0));
     PutWindowTilemap(0);
     AddTextPrinterParameterized3(0, 1, GetStringCenterAlignXOffset(1, gText_WelcomeToHOF, 0xD0), 1, sUnknown_085E5388, 0, gText_WelcomeToHOF);
     CopyWindowToVram(0, 3);
@@ -1099,7 +1097,7 @@ static void HallOfFame_PrintMonInfo(struct HallofFameMon* currMon, u8 unused1, u
     s32 dexNumber;
     s32 width;
 
-    FillWindowPixelBuffer(0, 0);
+    FillWindowPixelBuffer(0, PIXEL_FILL(0));
     PutWindowTilemap(0);
 
     // dex number
@@ -1180,9 +1178,9 @@ static void HallOfFame_PrintPlayerInfo(u8 unused1, u8 unused2)
     u32 width;
     u16 trainerId;
 
-    FillWindowPixelBuffer(1, 0x11);
+    FillWindowPixelBuffer(1, PIXEL_FILL(1));
     PutWindowTilemap(1);
-    SetWindowBorderStyle(1, FALSE, 0x21D, 0xD);
+    DrawStdFrameWithCustomTileAndPalette(1, FALSE, 0x21D, 0xD);
     AddTextPrinterParameterized3(1, 1, 0, 1, sUnknown_085E538C, -1, gText_Name);
 
     width = GetStringRightAlignXOffset(1, gSaveBlock2Ptr->playerName, 0x70);

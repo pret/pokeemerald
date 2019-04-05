@@ -222,10 +222,10 @@ static const struct OamData sOamData_PokeblockCase =
     .objMode = 0,
     .mosaic = 0,
     .bpp = 0,
-    .shape = 0,
+    .shape = SPRITE_SHAPE(64x64),
     .x = 0,
     .matrixNum = 0,
-    .size = 3,
+    .size = SPRITE_SIZE(64x64),
     .tileNum = 0,
     .priority = 2,
     .paletteNum = 0,
@@ -665,7 +665,7 @@ static void HandleInitWindows(void)
 
     for (i = 0; i < ARRAY_COUNT(sWindowTemplatesForPokeblockMenu) - 1; i++)
     {
-        FillWindowPixelBuffer(i, 0);
+        FillWindowPixelBuffer(i, PIXEL_FILL(0));
     }
 
     schedule_bg_copy_tilemap_to_vram(0);
@@ -709,7 +709,7 @@ static void HandlePokeblockListMenuItems(void)
 
     StringCopy(sPokeblockMenu->menuItemsStrings[i], gText_StowCase);
     sPokeblockMenu->items[i].name = sPokeblockMenu->menuItemsStrings[i];
-    sPokeblockMenu->items[i].id = LIST_B_PRESSED;
+    sPokeblockMenu->items[i].id = LIST_CANCEL;
 
     gMultiuseListMenuTemplate = sPokeblockListMenuTemplate;
     gMultiuseListMenuTemplate.fontId = 7;
@@ -749,9 +749,9 @@ static void sub_8135FCC(s32 pkblId)
     struct Pokeblock *pokeblock;
     u16 rectTilemapSrc[2];
 
-    FillWindowPixelBuffer(7, 0);
+    FillWindowPixelBuffer(7, PIXEL_FILL(0));
 
-    if (pkblId != LIST_B_PRESSED)
+    if (pkblId != LIST_CANCEL)
     {
         pokeblock = &gSaveBlock1Ptr->pokeblocks[pkblId];
         rectTilemapSrc[0] = 0x17;
@@ -959,7 +959,7 @@ static void Task_FreeDataAndExitPokeblockCase(u8 taskId)
     if (!gPaletteFade.active)
     {
         if (sPokeblockMenu->caseId == PBLOCK_CASE_FEEDER || sPokeblockMenu->caseId == PBLOCK_CASE_GIVE)
-            gFieldCallback = sub_80AF168;
+            gFieldCallback = FieldCallback_ReturnToEventScript2;
 
         DestroyListMenuTask(data[0], &sSavedPokeblockData.lastItemPage, &sSavedPokeblockData.lastItemPos);
         sub_8136418();
@@ -1011,7 +1011,7 @@ static void Task_HandlePokeblockMenuInput(u8 taskId)
             {
             case LIST_NOTHING_CHOSEN:
                 break;
-            case LIST_B_PRESSED:
+            case LIST_CANCEL:
                 PlaySE(SE_SELECT);
                 gSpecialVar_Result = 0xFFFF;
                 gSpecialVar_ItemId = 0;
@@ -1066,7 +1066,7 @@ static void Task_HandlePokeblocksSwapInput(u8 taskId)
         {
         case LIST_NOTHING_CHOSEN:
             break;
-        case LIST_B_PRESSED: // same id as STOW CASE field
+        case LIST_CANCEL: // same id as STOW CASE field
             PlaySE(SE_SELECT);
             if (gMain.newKeys & A_BUTTON)
                 HandlePokeblocksSwap(taskId, FALSE);
@@ -1120,7 +1120,7 @@ static void PutPokeblockOptionsWindow(u8 taskId)
         data[1] = 9;
 
     sub_8136418();
-    SetWindowBorderStyle(data[1], 0, 1, 0xE);
+    DrawStdFrameWithCustomTileAndPalette(data[1], 0, 1, 0xE);
     sub_81995E4(data[1], sPokeblockMenu->optionsNo, sPokeblockMenuActions, sPokeblockMenu->pokeblockOptionsIds);
     InitMenuInUpperLeftCornerPlaySoundWhenAPressed(data[1], sPokeblockMenu->optionsNo, 0);
     PutWindowTilemap(data[1]);
@@ -1173,7 +1173,7 @@ static void PokeblockAction_Toss(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
 
-    sub_8198070(data[1], FALSE);
+    ClearStdWindowAndFrameToTransparent(data[1], FALSE);
     StringCopy(gStringVar1, gPokeblockNames[gSaveBlock1Ptr->pokeblocks[gSpecialVar_ItemId].color]);
     StringExpandPlaceholders(gStringVar4, gText_ThrowAwayVar1);
     DisplayMessageAndContinueTask(taskId, 10, 10, 13, 1, GetPlayerTextSpeedDelay(), gStringVar4, CreateTossPokeblockYesNoMenu);
@@ -1219,7 +1219,7 @@ static void HandleErasePokeblock(u8 taskId)
 
 static void TossPokeblockChoice_No(u8 taskId)
 {
-    sub_8197DF8(10, FALSE);
+    ClearDialogWindowAndFrameToTransparent(10, FALSE);
     schedule_bg_copy_tilemap_to_vram(1);
     sub_81363BC();
     gTasks[taskId].func = Task_HandlePokeblockMenuInput;
@@ -1266,7 +1266,7 @@ static void PokeblockAction_Cancel(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
 
-    sub_8198070(data[1], FALSE);
+    ClearStdWindowAndFrameToTransparent(data[1], FALSE);
     schedule_bg_copy_tilemap_to_vram(1);
     sub_81363BC();
     gTasks[taskId].func = Task_HandlePokeblockMenuInput;

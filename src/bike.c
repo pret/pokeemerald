@@ -3,22 +3,13 @@
 #include "event_object_movement.h"
 #include "field_player_avatar.h"
 #include "fieldmap.h"
-#include "global.fieldmap.h"
+#include "field_specials.h"
 #include "metatile_behavior.h"
 #include "overworld.h"
 #include "sound.h"
 #include "constants/flags.h"
 #include "constants/map_types.h"
 #include "constants/songs.h"
-
-extern bool8 gBikeCyclingChallenge;
-extern u8 gBikeCollisions;
-
-extern u8 sub_808B980(u8 direction);
-extern u8 sub_808B9BC(u8 direction);
-extern u8 sub_808B9A4(u8 direction);
-extern u8 sub_808C1B4(u8 direction);
-extern u8 sub_808B9D4(u8 direction);
 
 // this file's functions
 static void MovePlayerOnMachBike(u8, u16, u16);

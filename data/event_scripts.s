@@ -17,6 +17,8 @@
 #include "constants/trainers.h"
 #include "constants/vars.h"
 #include "constants/weather.h"
+#include "constants/trainer_hill.h"
+#include "constants/battle.h"
 	.include "asm/macros.inc"
 	.include "asm/macros/event.inc"
 	.include "constants/constants.inc"
@@ -47,7 +49,7 @@ gSpecialVars:: @ 81DBA0C
 	.4byte gSpecialVar_ContestCategory
 	.4byte gSpecialVar_MonBoxId
 	.4byte gSpecialVar_MonBoxPos
-	.4byte gSpecialVar_0x8014
+	.4byte gSpecialVar_Unused_0x8014
 	.4byte gTrainerBattleOpponent_A
 
 	.include "data/specials.inc"
@@ -440,28 +442,28 @@ gStdScripts_End:: @ 81DC2CC
 EventScript_SecretBasePC:: @ 823B4BB
 	lockall
 	playse SE_PC_LOGIN
-	message Text_276805
+	message Text_SecretBaseBootUpPC
 	dofieldeffect FLDEFF_PCTURN_ON
 	waitstate
 	waitmessage
 	waitbuttonpress
 	playse SE_SELECT
-	goto EventScript_23B4D3
+	goto EventScript_SecretBasePCShowMainMenu
 	end
 
-EventScript_23B4D3:: @ 823B4D3
-	message Text_27681A
+EventScript_SecretBasePCShowMainMenu:: @ 823B4D3
+	message Text_SecretBasePCStartMenu
 	waitmessage
-	goto_if_set FLAG_DECORATION_16, EventScript_23B4EF
+	goto_if_set FLAG_DECORATION_16, EventScript_SecretBasePCMainMenuChoice
 	goto EventScript_23B531
 	end
 
-gUnknown_0823B4E8:: @ 823B4E8
+gUnknown_0823B4E8:: @ 823B4E8 ;EventScript_SecretBasePCCancel?
 	lockall
-	goto EventScript_23B4D3
+	goto EventScript_SecretBasePCShowMainMenu
 	end
 
-EventScript_23B4EF:: @ 823B4EF
+EventScript_SecretBasePCMainMenuChoice:: @ 823B4EF
 	multichoice 0, 0, 6, 0
 	switch VAR_RESULT
 	case 0, EventScript_23B581
@@ -483,7 +485,7 @@ EventScript_23B531:: @ 823B531
 EventScript_23B568:: @ 823B568
 	msgbox Text_2766AA, MSGBOX_YESNO
 	compare VAR_RESULT, 0
-	goto_if_eq EventScript_23B4D3
+	goto_if_eq EventScript_SecretBasePCShowMainMenu
 	closemessage
 	special PackUpPlayersCurrentSecretBase
 	releaseall
@@ -499,7 +501,7 @@ EventScript_23B585:: @ 823B585
 
 EventScript_RecordMixingSecretBasePC:: @ 823B589
 	lockall
-	message Text_276805
+	message Text_SecretBaseBootUpPC
 	playse SE_PC_LOGIN
 	dofieldeffect FLDEFF_PCTURN_ON
 	waitstate
@@ -510,7 +512,7 @@ EventScript_RecordMixingSecretBasePC:: @ 823B589
 	end
 
 EventScript_23B5A1:: @ 823B5A1
-	message Text_27681A
+	message Text_SecretBasePCStartMenu
 	waitmessage
 	multichoice 0, 0, 7, 0
 	switch VAR_RESULT
@@ -531,7 +533,7 @@ EventScript_23B5F0:: @ 823B5F0
 	compare VAR_RESULT, 1
 	goto_if_eq EventScript_23B62F
 	compare VAR_RESULT, 2
-	goto_if_eq EventScript_23B652
+	goto_if_eq EventScript_CantRegisterTooManyBases
 	special LoadVar1CurrentSecretBaseTrainerName
 	msgbox Text_276707, MSGBOX_YESNO
 	compare VAR_RESULT, 0
@@ -552,8 +554,8 @@ EventScript_23B62F:: @ 823B62F
 	releaseall
 	end
 
-EventScript_23B652:: @ 823B652
-	msgbox Text_27676F, MSGBOX_SIGN
+EventScript_CantRegisterTooManyBases:: @ 823B652
+	msgbox Text_TooManyBasesDeleteSome, MSGBOX_SIGN
 	special DoSecretBasePCTurnOffEffect
 	closemessage
 	releaseall
@@ -1094,10 +1096,10 @@ EverGrandeCity_HallOfFame_EventScript_2717C1:: @ 82717C1
 	special sub_81AFDD0
 	setflag FLAG_IS_CHAMPION
 	call EverGrandeCity_HallOfFame_EventScript_271829
-	compare VAR_0x40CC, 0
+	compare VAR_FOSSIL_MANIAC_STATE, 0
 	call_if_eq EverGrandeCity_HallOfFame_EventScript_271839
 	clearflag FLAG_HIDE_LILCOVE_MOTEL_GAME_DESIGNERS
-	call EverGrandeCity_HallOfFame_EventScript_2718CC
+	call EverGrandeCity_HallOfFame_EventScript_ResetEliteFour
 	setflag FLAG_HIDE_SLATEPORT_CITY_STERNS_SHIPYARD_MR_BRINEY
 	clearflag FLAG_HIDE_SS_TIDAL_CORRIDOR_MR_BRINEY
 	clearflag FLAG_HIDE_MOSSDEEP_CITY_STEVENS_HOUSE_INVISIBLE_NINJA_BOY
@@ -1127,7 +1129,7 @@ EverGrandeCity_HallOfFame_EventScript_271829:: @ 8271829
 	return
 
 EverGrandeCity_HallOfFame_EventScript_271839:: @ 8271839
-	setvar VAR_0x40CC, 1
+	setvar VAR_FOSSIL_MANIAC_STATE, 1
 	return
 
 EverGrandeCity_HallOfFame_EventScript_27183F:: @ 827183F
@@ -1145,7 +1147,7 @@ EverGrandeCity_HallOfFame_EventScript_271851:: @ 8271851
 	return
 
 EventScript_WhiteOut:: @ 8271857
-	call EverGrandeCity_HallOfFame_EventScript_2718CC
+	call EverGrandeCity_HallOfFame_EventScript_ResetEliteFour
 	goto EventScript_ResetMrBriney
 	end
 
@@ -1190,7 +1192,7 @@ EventScript_MoveMrBrineyToRoute108:: @ 82718B3
 	clearflag FLAG_HIDE_ROUTE_109_MR_BRINEY_BOAT
 	end
 
-EverGrandeCity_HallOfFame_EventScript_2718CC:: @ 82718CC
+EverGrandeCity_HallOfFame_EventScript_ResetEliteFour:: @ 82718CC
 	clearflag FLAG_DEFEATED_ELITE_4_SYDNEY
 	clearflag FLAG_DEFEATED_ELITE_4_PHOEBE
 	clearflag FLAG_DEFEATED_ELITE_4_GLACIA
@@ -1335,13 +1337,13 @@ OldaleTown_PokemonCenter_1F_EventScript_271A19:: @ 8271A19
 OldaleTown_PokemonCenter_1F_EventScript_271A43:: @ 8271A43
 	specialvar VAR_RESULT, IsPokerusInParty
 	compare VAR_RESULT, 1
-	goto_if_eq OldaleTown_PokemonCenter_1F_EventScript_271A5F
+	goto_if_eq OldaleTown_PokemonCenter_1F_EventScript_Explain_Pokerus
 	compare VAR_RESULT, 0
 	goto_if_eq OldaleTown_PokemonCenter_1F_EventScript_2719B1
 	end
 
-OldaleTown_PokemonCenter_1F_EventScript_271A5F:: @ 8271A5F
-	message gUnknown_08272F07
+OldaleTown_PokemonCenter_1F_EventScript_Explain_Pokerus:: @ 8271A5F
+	message gText_PokerusExplanation
 	setflag FLAG_POKERUS_EXPLAINED
 	return
 
@@ -1435,7 +1437,7 @@ EventScript_271B85:: @ 8271B85
 EventScript_271B95:: @ 8271B95
 	message gUnknown_08272A78
 	waitfanfare
-	msgbox gUnknown_08272A9A, MSGBOX_DEFAULT
+	msgbox gText_PutItemInPocket, MSGBOX_DEFAULT
 	setvar VAR_RESULT, 1
 	return
 
@@ -1489,13 +1491,13 @@ Std_FindItem:: @ 8271BFD
 	checkitemtype VAR_0x8000
 	call EventScript_271B08
 	compare VAR_0x8007, 1
-	call_if_eq EventScript_271C3A
+	call_if_eq EventScript_PickItemUp
 	compare VAR_0x8007, 0
 	call_if_eq EventScript_271CA1
 	release
 	return
 
-EventScript_271C3A:: @ 8271C3A
+EventScript_PickItemUp:: @ 8271C3A
 	removeobject VAR_LAST_TALKED
 	giveitem VAR_0x8004, VAR_0x8005
 	specialvar VAR_RESULT, sub_81398C0
@@ -1511,20 +1513,20 @@ EventScript_271C3A:: @ 8271C3A
 	special CallBattlePyramidFunction
 	compare VAR_RESULT, 1
 	goto_if_eq EventScript_271C86
-	msgbox gUnknown_08272A9A, MSGBOX_DEFAULT
+	msgbox gText_PutItemInPocket, MSGBOX_DEFAULT
 	return
 
 EventScript_271C86:: @ 8271C86
-	msgbox gUnknown_08272AEA, MSGBOX_DEFAULT
+	msgbox gText_PlayerPutItemInBag, MSGBOX_DEFAULT
 	return
 
 EventScript_271C8F:: @ 8271C8F
 	bufferitemnameplural 0, VAR_0x8004, VAR_0x8005
-	message gUnknown_082731A9
+	message gText_PlayerFoundOneItemTwoLines
 	return
 
 EventScript_271C9B:: @ 8271C9B
-	message gUnknown_08272ABF
+	message gText_PlayerFoundOneItem
 	return
 
 EventScript_271CA1:: @ 8271CA1
@@ -1559,12 +1561,12 @@ EventScript_271CE8:: @ 8271CE8
 
 EventScript_271D0E:: @ 8271D0E
 	bufferitemnameplural 0, VAR_0x8004, 1
-	message gUnknown_082731A9
+	message gText_PlayerFoundOneItemTwoLines
 	goto EventScript_271D2A
 	end
 
 EventScript_271D1F:: @ 8271D1F
-	message gUnknown_08272ABF
+	message gText_PlayerFoundOneItem
 	goto EventScript_271D2A
 	end
 
@@ -1573,14 +1575,14 @@ EventScript_271D2A:: @ 8271D2A
 	waitfanfare
 	bufferitemnameplural 1, VAR_0x8004, 1
 	copyvar VAR_0x8004, VAR_0x8008
-	msgbox gUnknown_08272A9A, MSGBOX_DEFAULT
+	msgbox gText_PutItemInPocket, MSGBOX_DEFAULT
 	special sub_80EDCE8
 	special SetFlagInVar
 	releaseall
 	end
 
 EventScript_271D47:: @ 8271D47
-	msgbox gUnknown_08272ABF, MSGBOX_DEFAULT
+	msgbox gText_PlayerFoundOneItem, MSGBOX_DEFAULT
 	msgbox gText_TooBadBagIsFull, MSGBOX_DEFAULT
 	setvar VAR_RESULT, 0
 	releaseall
@@ -1589,7 +1591,7 @@ EventScript_271D47:: @ 8271D47
 EventScript_271D5E:: @ 8271D5E
 	lock
 	faceplayer
-	msgbox Text_27260D, MSGBOX_YESNO
+	msgbox Text_WouldYouLikeToMixRecords, MSGBOX_YESNO
 	compare VAR_RESULT, 1
 	goto_if_eq EventScript_271D83
 	compare VAR_RESULT, 0
@@ -1603,7 +1605,7 @@ EventScript_271D83:: @ 8271D83
 	faceplayer
 
 EventScript_271D89:: @ 8271D89
-	message Text_272640
+	message Text_WouldNotLikeToMixRecords
 	waitmessage
 	waitbuttonpress
 	release
@@ -1614,7 +1616,7 @@ EventScript_PC:: @ 8271D92
 	setvar VAR_0x8004, 0
 	special DoPCTurnOnEffect
 	playse SE_PC_ON
-	msgbox Text_27265A, MSGBOX_DEFAULT
+	msgbox Text_BootUpPC, MSGBOX_DEFAULT
 	goto EventScript_271DAC
 	end
 
@@ -1637,7 +1639,7 @@ EventScript_271DBC:: @ 8271DBC
 
 EventScript_271DF9:: @ 8271DF9
 	playse SE_PC_LOGIN
-	msgbox gUnknown_082726C2, MSGBOX_DEFAULT
+	msgbox gText_AccessedPlayersPC, MSGBOX_DEFAULT
 	special PlayerPC
 	waitstate
 	goto EventScript_271DAC
@@ -1647,18 +1649,18 @@ EventScript_271E0E:: @ 8271E0E
 	playse SE_PC_LOGIN
 	call_if_unset FLAG_SYS_PC_LANETTE, EventScript_271E35
 	call_if_set FLAG_SYS_PC_LANETTE, EventScript_271E3E
-	msgbox gUnknown_082726A3, MSGBOX_DEFAULT
+	msgbox gText_StorageSystemOpened, MSGBOX_DEFAULT
 	special ShowPokemonStorageSystemPC
 	waitstate
 	goto EventScript_271DAC
 	end
 
 EventScript_271E35:: @ 8271E35
-	msgbox gUnknown_0827268C, MSGBOX_DEFAULT
+	msgbox gText_AccessedSomeonesPC, MSGBOX_DEFAULT
 	return
 
 EventScript_271E3E:: @ 8271E3E
-	msgbox gUnknown_082726D4, MSGBOX_DEFAULT
+	msgbox gText_AccessedLanettesPC, MSGBOX_DEFAULT
 	return
 
 EventScript_271E47:: @ 8271E47
@@ -1715,20 +1717,20 @@ Route109_EventScript_271E95:: @ 8271E95
 EventScript_UseSurf:: @ 8271EA0
 	checkpartymove MOVE_SURF
 	compare VAR_RESULT, 6
-	goto_if_eq EventScript_271ED6
+	goto_if_eq EventScript_CantSurf
 	bufferpartymonnick 0, VAR_RESULT
 	setfieldeffectargument 0, VAR_RESULT
 	lockall
-	msgbox gUnknown_08272FD6, MSGBOX_YESNO
+	msgbox gText_WantToUseSurf, MSGBOX_YESNO
 	compare VAR_RESULT, 0
-	goto_if_eq EventScript_271ED5
-	msgbox gUnknown_0827300D, MSGBOX_DEFAULT
+	goto_if_eq EventScript_CancelSurf
+	msgbox gText_PlayerUsedSurf, MSGBOX_DEFAULT
 	dofieldeffect FLDEFF_USE_SURF
 
-EventScript_271ED5:: @ 8271ED5
+EventScript_CancelSurf:: @ 8271ED5
 	releaseall
 
-EventScript_271ED6:: @ 8271ED6
+EventScript_CantSurf:: @ 8271ED6
 	end
 
 Common_EventScript_SetupRivalGender:: @ 8271ED7
@@ -2462,56 +2464,56 @@ Movement_2725CB:: @ 82725CB
 	step_end
 
 EventScript_PictureBookShelf:: @ 82725CE
-	msgbox Text_2A81E5, MSGBOX_SIGN
+	msgbox Text_PictureBookShelf, MSGBOX_SIGN
 	end
 
 EventScript_BookShelf:: @ 82725D7
-	msgbox Text_2A820D, MSGBOX_SIGN
+	msgbox Text_BookShelf, MSGBOX_SIGN
 	end
 
-EventScript_PokemonCenterBookshelf:: @ 82725E0
-	msgbox Text_2A8232, MSGBOX_SIGN
+EventScript_PokemonCenterBookShelf:: @ 82725E0
+	msgbox Text_PokemonCenterBookShelf, MSGBOX_SIGN
 	end
 
 EventScript_Vase:: @ 82725E9
-	msgbox Text_2A8276, MSGBOX_SIGN
+	msgbox Text_Vase, MSGBOX_SIGN
 	end
 
-EventScript_TrashCan:: @ 82725F2
-	msgbox Text_2A82B3, MSGBOX_SIGN
+EventScript_EmptyTrashCan:: @ 82725F2
+	msgbox Text_EmptyTrashCan, MSGBOX_SIGN
 	end
 
 EventScript_ShopShelf:: @ 82725FB
-	msgbox Text_2A82BF, MSGBOX_SIGN
+	msgbox Text_ShopShelf, MSGBOX_SIGN
 	end
 
 EventScript_Blueprint:: @ 8272604
-	msgbox Text_2A82F7, MSGBOX_SIGN
+	msgbox Text_Blueprint, MSGBOX_SIGN
 	end
 
-Text_27260D: @ 827260D
+Text_WouldYouLikeToMixRecords: @ 827260D
 	.string "Would you like to mix records with\n"
 	.string "other TRAINERS?$"
 
-Text_272640: @ 8272640
+Text_WouldNotLikeToMixRecords: @ 8272640
 	.string "We hope to see you again!$"
 
-Text_27265A: @ 827265A
+Text_BootUpPC: @ 827265A
 	.string "{PLAYER} booted up the PC.$"
 
 gText_WhichPCShouldBeAccessed:: @ 827266F
 	.string "Which PC should be accessed?$"
 
-gUnknown_0827268C:: @ 827268C
+gText_AccessedSomeonesPC:: @ 827268C
 	.string "Accessed SOMEONE'S PC.$"
 
-gUnknown_082726A3:: @ 82726A3
+gText_StorageSystemOpened:: @ 82726A3
 	.string "POKéMON Storage System opened.$"
 
-gUnknown_082726C2:: @ 82726C2
+gText_AccessedPlayersPC:: @ 82726C2
 	.string "Accessed {PLAYER}'s PC.$"
 
-gUnknown_082726D4:: @ 82726D4
+gText_AccessedLanettesPC:: @ 82726D4
 	.string "Accessed LANETTE's PC.$"
 
 gUnknown_082726EB:: @ 82726EB
@@ -2559,16 +2561,16 @@ gUnknown_08272A78:: @ 8272A78
 gUnknown_08272A89:: @ 8272A89
 	.string "The BAG is full…$"
 
-gUnknown_08272A9A:: @ 8272A9A
+gText_PutItemInPocket:: @ 8272A9A
 	.string "{PLAYER} put away the {STR_VAR_2}\nin the {STR_VAR_3} POCKET.$"
 
-gUnknown_08272ABF:: @ 8272ABF
+gText_PlayerFoundOneItem:: @ 8272ABF
 	.string "{PLAYER} found one {STR_VAR_2}!$"
 
 gText_TooBadBagIsFull:: @ 8272AD0
 	.string "Too bad!\nThe BAG is full…$"
 
-gUnknown_08272AEA:: @ 8272AEA
+gText_PlayerPutItemInBag:: @ 8272AEA
 	.string "{PLAYER} put away the {STR_VAR_2}\nin the BAG.$"
 
 gUnknown_08272B09:: @ 8272B09
@@ -2595,13 +2597,13 @@ gUnknown_08272C1D:: @ 8272C1D
 gUnknown_08272C5F:: @ 8272C5F
 	.string "The sandstorm is vicious.\nIt's impossible to keep going.$"
 
-gUnknown_08272C98:: @ 8272C98
+gText_SelectWithoutRegisteredItem:: @ 8272C98
 	.string "An item in the BAG can be\nregistered to SELECT for easy use.$"
 
 gUnknown_08272CD5:: @ 8272CD5
 	.string "There's an e-mail from POKéMON TRAINER\nSCHOOL.\p… … … … … …\pA POKéMON may learn up to four moves.\pA TRAINER's expertise is tested on the\nmove sets chosen for POKéMON.\p… … … … … …$"
 
-gUnknown_08272D87:: @ 8272D87
+gText_PlayerHouseBootPC:: @ 8272D87
 	.string "{PLAYER} booted up the PC.$"
 
 gUnknown_08272D9C:: @ 8272D9C
@@ -2613,13 +2615,13 @@ gUnknown_08272DB3:: @ 8272DB3
 gUnknown_08272DE3:: @ 8272DE3
 	.string "{PLAYER} is out of usable\nPOKéMON!\p{PLAYER} whited out!$"
 
-gUnknown_08272E0F:: @ 8272E0F
+gText_RegisteredTrainerinPokeNav:: @ 8272E0F
 	.string "Registered {STR_VAR_1} {STR_VAR_2}\nin the POKéNAV.$"
 
 gUnknown_08272E30:: @ 8272E30
 	.string "Do you know the TM SECRET POWER?\pOur group, we love the TM SECRET\nPOWER.\pOne of our members will give it to you.\nCome back and show me if you get it.\pWe'll accept you as a member and sell\nyou good stuff in secrecy.$"
 
-gUnknown_08272F07:: @ 8272F07
+gText_PokerusExplanation:: @ 8272F07
 	.string "Your POKéMON may be infected with\nPOKéRUS.\pLittle is known about the POKéRUS\nexcept that they are microscopic life-\lforms that attach to POKéMON.\pWhile infected, POKéMON are said to\ngrow exceptionally well.$"
 
 	.include "data/text/surf.inc"
@@ -2648,13 +2650,13 @@ gUnknown_08273161:: @ 8273161
 gUnknown_08273178:: @ 8273178
 	.string "Thank you for accessing the\nMYSTERY GIFT System.$"
 
-gUnknown_082731A9:: @ 82731A9
+gText_PlayerFoundOneItemTwoLines:: @ 82731A9
 	.string "{PLAYER} found one {STR_VAR_1}\n{STR_VAR_2}!$"
 
-gUnknown_082731BD:: @ 82731BD
+gText_Sudowoodo_Attacked:: @ 82731BD
 	.string "The weird tree doesn't like the\nWAILMER PAIL!\pThe weird tree attacked!$"
 
-gUnknown_08273204:: @ 8273204
+gText_LegendaryFlewAway:: @ 8273204
 	.string "The {STR_VAR_1} flew away!$"
 
 gText_PkmnTransferredSomeonesPC:: @ 8273216
@@ -2672,7 +2674,7 @@ gText_PkmnBoxLanettesPCFull:: @ 82732D9
 gUnknown_0827331C:: @ 827331C
 	.string "There's no more room for POKéMON!\pThe POKéMON BOXES are full and\ncan't accept any more!$"
 
-gUnknown_08273374:: @ 8273374
+gText_NicknameThisPokemon:: @ 8273374
 	.string "Do you want to give a nickname to\nthis {STR_VAR_1}?$"
 
 gUnknown_0827339F:: @ 827339F
@@ -2699,14 +2701,14 @@ gUnknown_08273594:: @ 8273594
 gUnknown_082735F2:: @ 82735F2
 	.string "It appears to be for use at\nthe LILYCOVE CITY port.\pWhy not give it a try and see what\nit is about?$"
 
-gUnknown_08273656:: @ 8273656
+gText_UnusualWeatherEnded_Rain:: @ 8273656
 	.string "The massive downpour appears to\nhave stopped…$"
 
-gUnknown_08273684:: @ 8273684
+gText_UnusualWeatherEnded_Sun:: @ 8273684
 	.string "The intense sunshine appears to\nhave subsided…$"
 
-EventScript_2736B3:: @ 82736B3
-	msgbox gUnknown_08272C98, MSGBOX_SIGN
+EventScript_SelectWithoutRegisteredItem:: @ 82736B3
+	msgbox gText_SelectWithoutRegisteredItem, MSGBOX_SIGN
 	end
 
 EventScript_Poison:: @ 82736BC
@@ -2750,7 +2752,7 @@ EventScript_2736F8:: @ 82736F8
 	goto_if_eq BattleFrontier_BattlePyramidTop_EventScript_252B42
 	compare VAR_RESULT, 2
 	goto_if_eq BattleFrontier_BattlePyramidTop_EventScript_252B42
-	setvar VAR_0x8004, 10
+	setvar VAR_0x8004, TRAINER_HILL_FUNC_10
 	special CallTrainerHillFunction
 	compare VAR_RESULT, 1
 	goto_if_eq TrainerHill_1F_EventScript_2C83C9
@@ -2860,7 +2862,7 @@ TerraCave_End_EventScript_273776:: @ 8273776
 	removeobject VAR_LAST_TALKED
 	fadescreenswapbuffers 0
 	bufferspeciesname 0, VAR_0x8004
-	msgbox gUnknown_08273204, MSGBOX_DEFAULT
+	msgbox gText_LegendaryFlewAway, MSGBOX_DEFAULT
 	release
 	end
 
@@ -2991,47 +2993,47 @@ EventScript_2738FF:: @ 82738FF
 	releaseall
 	end
 
-Route114_EventScript_273913:: @ 8273913
+UnusualWeather_EventScript_PlaceTilesRoute114North:: @ 8273913
 	setmetatile 7, 3, 839, 1
 	setmetatile 7, 4, 847, 0
 	return
 
-Route114_EventScript_273926:: @ 8273926
+UnusualWeather_EventScript_PlaceTilesRoute114South:: @ 8273926
 	setmetatile 6, 45, 601, 1
 	setmetatile 6, 46, 609, 0
 	return
 
-Route115_EventScript_273939:: @ 8273939
+UnusualWeather_EventScript_PlaceTilesRoute115West:: @ 8273939
 	setmetatile 21, 5, 601, 1
 	setmetatile 21, 6, 609, 0
 	return
 
-Route115_EventScript_27394C:: @ 827394C
+UnusualWeather_EventScript_PlaceTilesRoute115East:: @ 827394C
 	setmetatile 36, 9, 601, 1
 	setmetatile 36, 10, 609, 0
 	return
 
-Route116_EventScript_27395F:: @ 827395F
+UnusualWeather_EventScript_PlaceTilesRoute116North:: @ 827395F
 	setmetatile 59, 12, 159, 1
 	setmetatile 59, 13, 167, 0
 	return
 
-Route116_EventScript_273972:: @ 8273972
+UnusualWeather_EventScript_PlaceTilesRoute116South:: @ 8273972
 	setmetatile 79, 5, 159, 1
 	setmetatile 79, 6, 167, 0
 	return
 
-Route118_EventScript_273985:: @ 8273985
+UnusualWeather_EventScript_PlaceTilesRoute118East:: @ 8273985
 	setmetatile 42, 5, 159, 1
 	setmetatile 42, 6, 167, 0
 	return
 
-Route118_EventScript_273998:: @ 8273998
+UnusualWeather_EventScript_PlaceTilesRoute118West:: @ 8273998
 	setmetatile 9, 5, 159, 1
 	setmetatile 9, 6, 167, 0
 	return
 
-Route105_EventScript_2739AB:: @ 82739AB
+UnusualWeather_EventScript_PlaceTilesRoute105North:: @ 82739AB
 	setmetatile 10, 28, 334, 0
 	setmetatile 11, 28, 334, 0
 	setmetatile 9, 29, 334, 0
@@ -3046,7 +3048,7 @@ Route105_EventScript_2739AB:: @ 82739AB
 	setmetatile 11, 31, 334, 0
 	return
 
-Route105_EventScript_273A18:: @ 8273A18
+UnusualWeather_EventScript_PlaceTilesRoute105South:: @ 8273A18
 	setmetatile 20, 53, 334, 0
 	setmetatile 21, 53, 334, 0
 	setmetatile 19, 54, 334, 0
@@ -3061,7 +3063,7 @@ Route105_EventScript_273A18:: @ 8273A18
 	setmetatile 21, 56, 334, 0
 	return
 
-Route125_EventScript_273A85:: @ 8273A85
+UnusualWeather_EventScript_PlaceTilesRoute125West:: @ 8273A85
 	setmetatile 8, 16, 334, 0
 	setmetatile 9, 16, 334, 0
 	setmetatile 7, 17, 334, 0
@@ -3076,7 +3078,7 @@ Route125_EventScript_273A85:: @ 8273A85
 	setmetatile 9, 19, 334, 0
 	return
 
-Route125_EventScript_273AF2:: @ 8273AF2
+UnusualWeather_EventScript_PlaceTilesRoute125East:: @ 8273AF2
 	setmetatile 53, 18, 334, 0
 	setmetatile 54, 18, 334, 0
 	setmetatile 52, 19, 334, 0
@@ -3091,7 +3093,7 @@ Route125_EventScript_273AF2:: @ 8273AF2
 	setmetatile 54, 21, 334, 0
 	return
 
-Route127_EventScript_273B5F:: @ 8273B5F
+UnusualWeather_EventScript_PlaceTilesRoute127North:: @ 8273B5F
 	setmetatile 57, 9, 334, 0
 	setmetatile 58, 9, 334, 0
 	setmetatile 56, 10, 334, 0
@@ -3106,7 +3108,7 @@ Route127_EventScript_273B5F:: @ 8273B5F
 	setmetatile 58, 12, 334, 0
 	return
 
-Route127_EventScript_273BCC:: @ 8273BCC
+UnusualWeather_EventScript_PlaceTilesRoute127South:: @ 8273BCC
 	setmetatile 61, 30, 334, 0
 	setmetatile 62, 30, 334, 0
 	setmetatile 60, 31, 334, 0
@@ -3121,7 +3123,7 @@ Route127_EventScript_273BCC:: @ 8273BCC
 	setmetatile 62, 33, 334, 0
 	return
 
-Route129_EventScript_273C39:: @ 8273C39
+UnusualWeather_EventScript_PlaceTilesRoute129West:: @ 8273C39
 	setmetatile 16, 14, 334, 0
 	setmetatile 17, 14, 334, 0
 	setmetatile 15, 15, 334, 0
@@ -3136,7 +3138,7 @@ Route129_EventScript_273C39:: @ 8273C39
 	setmetatile 17, 17, 334, 0
 	return
 
-Route129_EventScript_273CA6:: @ 8273CA6
+UnusualWeather_EventScript_PlaceTilesRoute129East:: @ 8273CA6
 	setmetatile 42, 19, 334, 0
 	setmetatile 43, 19, 334, 0
 	setmetatile 41, 20, 334, 0
@@ -3159,117 +3161,109 @@ Route118_EventScript_273D13:: @ 8273D13
 Route125_EventScript_273D13:: @ 8273D13
 Route127_EventScript_273D13:: @ 8273D13
 Route129_EventScript_273D13:: @ 8273D13
-	setflag FLAG_SPECIAL_FLAG_0x4000
+	setflag FLAG_HIDE_MAP_NAME_POPUP
 	return
 
-Route105_EventScript_273D17:: @ 8273D17
-Route125_EventScript_273D17:: @ 8273D17
-Route127_EventScript_273D17:: @ 8273D17
-Route129_EventScript_273D17:: @ 8273D17
+UnusualWeather_StartKyogreWeather:: @ 8273D17
 	setweather WEATHER_RAIN_HEAVY
 	return
 
-Route114_EventScript_273D1B:: @ 8273D1B
-Route115_EventScript_273D1B:: @ 8273D1B
-Route116_EventScript_273D1B:: @ 8273D1B
-Route118_EventScript_273D1B:: @ 8273D1B
+UnusualWeather_StartGroudonWeather:: @ 8273D1B
 	setweather WEATHER_DROUGHT
 	return
 
-gUnknown_08273D1F:: @ 8273D1F
-
-gUnknown_08273D1F:: @ 8273D1F
+UnusualWeather_EventScript_EndEventAndCleanup_1:: @ 8273D1F
 	lockall
-	compare VAR_0x4037, 9
-	goto_if_ge Route105_EventScript_273D51
-	goto Route105_EventScript_273D5F
+	compare VAR_UNUSUAL_WEATHER_LOCATION, UNUSUAL_WEATHER_KYOGRE_LOCATIONS_START
+	goto_if_ge UnusualWeather_EventScript_ShowRainEndedMessage
+	goto UnusualWeather_EventScript_ShowSunEndedMessage
 	end
 
-Route105_EventScript_273D31:: @ 8273D31
+UnusualWeather_EventScript_EndEventAndCleanup_2:: @ 8273D31
 	closemessage
 	fadescreenswapbuffers 1
 	setweather WEATHER_SUNNY
 	doweather
-	call Route105_EventScript_273D6D
+	call UnusualWeather_EventScript_CleanupMapTiles
 	special DrawWholeMapView
-	setvar VAR_0x4037, 0
-	setvar VAR_0x4039, 0
-	clearflag FLAG_SPECIAL_FLAG_0x4000
+	setvar VAR_UNUSUAL_WEATHER_LOCATION, UNUSUAL_WEATHER_NONE
+	setvar VAR_SHOULD_END_UNUSUAL_WEATHER, 0
+	clearflag FLAG_HIDE_MAP_NAME_POPUP
 	fadescreenswapbuffers 0
 	releaseall
 	end
 
-Route105_EventScript_273D51:: @ 8273D51
-	msgbox gUnknown_08273656, MSGBOX_DEFAULT
-	goto Route105_EventScript_273D31
+UnusualWeather_EventScript_ShowRainEndedMessage:: @ 8273D51
+	msgbox gText_UnusualWeatherEnded_Rain, MSGBOX_DEFAULT
+	goto UnusualWeather_EventScript_EndEventAndCleanup_2
 	end
 
-Route105_EventScript_273D5F:: @ 8273D5F
-	msgbox gUnknown_08273684, MSGBOX_DEFAULT
-	goto Route105_EventScript_273D31
+UnusualWeather_EventScript_ShowSunEndedMessage:: @ 8273D5F
+	msgbox gText_UnusualWeatherEnded_Sun, MSGBOX_DEFAULT
+	goto UnusualWeather_EventScript_EndEventAndCleanup_2
 	end
 
-Route105_EventScript_273D6D:: @ 8273D6D
-	switch VAR_0x4037
-	case 1, Route105_EventScript_273E23
-	case 2, Route105_EventScript_273E36
-	case 3, Route105_EventScript_273E49
-	case 4, Route105_EventScript_273E5C
-	case 5, Route105_EventScript_273E6F
-	case 6, Route105_EventScript_273E82
-	case 7, Route105_EventScript_273E95
-	case 8, Route105_EventScript_273EA8
-	case 9, Route105_EventScript_273EBB
-	case 10, Route105_EventScript_273F28
-	case 11, Route105_EventScript_273F95
-	case 12, Route105_EventScript_274002
-	case 13, Route105_EventScript_27406F
-	case 14, Route105_EventScript_2740DC
-	case 15, Route105_EventScript_274149
-	case 16, Route105_EventScript_2741B6
+UnusualWeather_EventScript_CleanupMapTiles:: @ 8273D6D
+	switch VAR_UNUSUAL_WEATHER_LOCATION
+	case UNUSUAL_WEATHER_ROUTE_114_NORTH, UnusualWeather_EventScript_CleanupRoute114North
+	case UNUSUAL_WEATHER_ROUTE_114_SOUTH, UnusualWeather_EventScript_CleanupRoute114South
+	case UNUSUAL_WEATHER_ROUTE_115_WEST, UnusualWeather_EventScript_CleanupRoute115West
+	case UNUSUAL_WEATHER_ROUTE_115_EAST, UnusualWeather_EventScript_CleanupRoute115East
+	case UNUSUAL_WEATHER_ROUTE_116_NORTH, UnusualWeather_EventScript_CleanupRoute116North
+	case UNUSUAL_WEATHER_ROUTE_116_SOUTH, UnusualWeather_EventScript_CleanupRoute116South
+	case UNUSUAL_WEATHER_ROUTE_118_EAST, UnusualWeather_EventScript_CleanupRoute118East
+	case UNUSUAL_WEATHER_ROUTE_118_WEST, UnusualWeather_EventScript_CleanupRoute118West
+	case UNUSUAL_WEATHER_ROUTE_105_NORTH, UnusualWeather_EventScript_CleanupRoute105North
+	case UNUSUAL_WEATHER_ROUTE_105_SOUTH, UnusualWeather_EventScript_CleanupRoute105South
+	case UNUSUAL_WEATHER_ROUTE_125_WEST, UnusualWeather_EventScript_CleanupRoute125West
+	case UNUSUAL_WEATHER_ROUTE_125_EAST, UnusualWeather_EventScript_CleanupRoute125East
+	case UNUSUAL_WEATHER_ROUTE_127_NORTH, UnusualWeather_EventScript_CleanupRoute127North
+	case UNUSUAL_WEATHER_ROUTE_127_SOUTH, UnusualWeather_EventScript_CleanupRoute127South
+	case UNUSUAL_WEATHER_ROUTE_129_WEST, UnusualWeather_EventScript_CleanupRoute129West
+	case UNUSUAL_WEATHER_ROUTE_129_EAST, UnusualWeather_EventScript_CleanupRoute129East
 	return
 
-Route105_EventScript_273E23:: @ 8273E23
+UnusualWeather_EventScript_CleanupRoute114North:: @ 8273E23
 	setmetatile 7, 3, 617, 1
 	setmetatile 7, 4, 617, 1
 	return
 
-Route105_EventScript_273E36:: @ 8273E36
+UnusualWeather_EventScript_CleanupRoute114South:: @ 8273E36
 	setmetatile 6, 45, 613, 1
 	setmetatile 6, 46, 613, 1
 	return
 
-Route105_EventScript_273E49:: @ 8273E49
+UnusualWeather_EventScript_CleanupRoute115West:: @ 8273E49
 	setmetatile 21, 5, 613, 1
 	setmetatile 21, 6, 613, 1
 	return
 
-Route105_EventScript_273E5C:: @ 8273E5C
+UnusualWeather_EventScript_CleanupRoute115East:: @ 8273E5C
 	setmetatile 36, 9, 613, 1
 	setmetatile 36, 10, 613, 1
 	return
 
-Route105_EventScript_273E6F:: @ 8273E6F
+UnusualWeather_EventScript_CleanupRoute116North:: @ 8273E6F
 	setmetatile 59, 12, 124, 1
 	setmetatile 59, 13, 124, 1
 	return
 
-Route105_EventScript_273E82:: @ 8273E82
+UnusualWeather_EventScript_CleanupRoute116South:: @ 8273E82
 	setmetatile 79, 5, 124, 1
 	setmetatile 79, 6, 124, 1
 	return
 
-Route105_EventScript_273E95:: @ 8273E95
+UnusualWeather_EventScript_CleanupRoute118East:: @ 8273E95
 	setmetatile 42, 5, 124, 1
 	setmetatile 42, 6, 121, 1
 	return
 
-Route105_EventScript_273EA8:: @ 8273EA8
+UnusualWeather_EventScript_CleanupRoute118West:: @ 8273EA8
 	setmetatile 9, 5, 124, 1
 	setmetatile 9, 6, 121, 1
 	return
 
-Route105_EventScript_273EBB:: @ 8273EBB
+UnusualWeather_EventScript_CleanupRoute105North:: @ 8273EBB
 	setmetatile 10, 28, 368, 0
 	setmetatile 11, 28, 368, 0
 	setmetatile 9, 29, 368, 0
@@ -3284,7 +3278,7 @@ Route105_EventScript_273EBB:: @ 8273EBB
 	setmetatile 11, 31, 368, 0
 	return
 
-Route105_EventScript_273F28:: @ 8273F28
+UnusualWeather_EventScript_CleanupRoute105South:: @ 8273F28
 	setmetatile 20, 53, 368, 0
 	setmetatile 21, 53, 368, 0
 	setmetatile 19, 54, 368, 0
@@ -3299,7 +3293,7 @@ Route105_EventScript_273F28:: @ 8273F28
 	setmetatile 21, 56, 368, 0
 	return
 
-Route105_EventScript_273F95:: @ 8273F95
+UnusualWeather_EventScript_CleanupRoute125West:: @ 8273F95
 	setmetatile 8, 16, 368, 0
 	setmetatile 9, 16, 368, 0
 	setmetatile 7, 17, 368, 0
@@ -3314,7 +3308,7 @@ Route105_EventScript_273F95:: @ 8273F95
 	setmetatile 9, 19, 368, 0
 	return
 
-Route105_EventScript_274002:: @ 8274002
+UnusualWeather_EventScript_CleanupRoute125East:: @ 8274002
 	setmetatile 53, 18, 368, 0
 	setmetatile 54, 18, 368, 0
 	setmetatile 52, 19, 368, 0
@@ -3329,7 +3323,7 @@ Route105_EventScript_274002:: @ 8274002
 	setmetatile 54, 21, 368, 0
 	return
 
-Route105_EventScript_27406F:: @ 827406F
+UnusualWeather_EventScript_CleanupRoute127North:: @ 827406F
 	setmetatile 57, 9, 368, 0
 	setmetatile 58, 9, 368, 0
 	setmetatile 56, 10, 368, 0
@@ -3344,7 +3338,7 @@ Route105_EventScript_27406F:: @ 827406F
 	setmetatile 58, 12, 368, 0
 	return
 
-Route105_EventScript_2740DC:: @ 82740DC
+UnusualWeather_EventScript_CleanupRoute127South:: @ 82740DC
 	setmetatile 61, 30, 368, 0
 	setmetatile 62, 30, 368, 0
 	setmetatile 60, 31, 368, 0
@@ -3359,7 +3353,7 @@ Route105_EventScript_2740DC:: @ 82740DC
 	setmetatile 62, 33, 368, 0
 	return
 
-Route105_EventScript_274149:: @ 8274149
+UnusualWeather_EventScript_CleanupRoute129West:: @ 8274149
 	setmetatile 16, 14, 368, 0
 	setmetatile 17, 14, 368, 0
 	setmetatile 15, 15, 368, 0
@@ -3374,7 +3368,7 @@ Route105_EventScript_274149:: @ 8274149
 	setmetatile 17, 17, 368, 0
 	return
 
-Route105_EventScript_2741B6:: @ 82741B6
+UnusualWeather_EventScript_CleanupRoute129East:: @ 82741B6
 	setmetatile 42, 19, 368, 0
 	setmetatile 43, 19, 368, 0
 	setmetatile 41, 20, 368, 0
@@ -3389,50 +3383,47 @@ Route105_EventScript_2741B6:: @ 82741B6
 	setmetatile 43, 22, 368, 0
 	return
 
-Underwater3_EventScript_274223:: @ 8274223
-Underwater5_EventScript_274223:: @ 8274223
-Underwater6_EventScript_274223:: @ 8274223
-Underwater7_EventScript_274223:: @ 8274223
-	switch VAR_0x4037
-	case 9, Underwater3_EventScript_274281
-	case 10, Underwater3_EventScript_27428A
-	case 11, Underwater3_EventScript_274293
-	case 12, Underwater3_EventScript_27429C
-	case 13, Underwater3_EventScript_2742A5
-	case 14, Underwater3_EventScript_2742AE
-	case 15, Underwater3_EventScript_2742B7
-	case 16, Underwater3_EventScript_2742C0
+UnusualWeather_Underwater_SetupEscapeWarp:: @ 8274223
+	switch VAR_UNUSUAL_WEATHER_LOCATION
+	case UNUSUAL_WEATHER_ROUTE_105_NORTH, UnusualWeather_Underwater_SetupEscapeWarpRoute105North
+	case UNUSUAL_WEATHER_ROUTE_105_SOUTH, UnusualWeather_Underwater_SetupEscapeWarpRoute105South
+	case UNUSUAL_WEATHER_ROUTE_125_WEST, UnusualWeather_Underwater_SetupEscapeWarpRoute125West
+	case UNUSUAL_WEATHER_ROUTE_125_EAST, UnusualWeather_Underwater_SetupEscapeWarpRoute125East
+	case UNUSUAL_WEATHER_ROUTE_127_NORTH, UnusualWeather_Underwater_SetupEscapeWarpRoute127North
+	case UNUSUAL_WEATHER_ROUTE_127_SOUTH, UnusualWeather_Underwater_SetupEscapeWarpRoute127South
+	case UNUSUAL_WEATHER_ROUTE_129_WEST, UnusualWeather_Underwater_SetupEscapeWarpRoute129West
+	case UNUSUAL_WEATHER_ROUTE_129_EAST, UnusualWeather_Underwater_SetupEscapeWarpRoute129East
 	return
 
-Underwater3_EventScript_274281:: @ 8274281
+UnusualWeather_Underwater_SetupEscapeWarpRoute105North:: @ 8274281
 	setescapewarp MAP_ROUTE105, 255, 11, 29
 	return
 
-Underwater3_EventScript_27428A:: @ 827428A
+UnusualWeather_Underwater_SetupEscapeWarpRoute105South:: @ 827428A
 	setescapewarp MAP_ROUTE105, 255, 21, 54
 	return
 
-Underwater3_EventScript_274293:: @ 8274293
+UnusualWeather_Underwater_SetupEscapeWarpRoute125West:: @ 8274293
 	setescapewarp MAP_ROUTE125, 255, 9, 17
 	return
 
-Underwater3_EventScript_27429C:: @ 827429C
+UnusualWeather_Underwater_SetupEscapeWarpRoute125East:: @ 827429C
 	setescapewarp MAP_ROUTE125, 255, 54, 19
 	return
 
-Underwater3_EventScript_2742A5:: @ 82742A5
+UnusualWeather_Underwater_SetupEscapeWarpRoute127North:: @ 82742A5
 	setescapewarp MAP_ROUTE127, 255, 58, 10
 	return
 
-Underwater3_EventScript_2742AE:: @ 82742AE
+UnusualWeather_Underwater_SetupEscapeWarpRoute127South:: @ 82742AE
 	setescapewarp MAP_ROUTE127, 255, 62, 31
 	return
 
-Underwater3_EventScript_2742B7:: @ 82742B7
+UnusualWeather_Underwater_SetupEscapeWarpRoute129West:: @ 82742B7
 	setescapewarp MAP_ROUTE129, 255, 17, 15
 	return
 
-Underwater3_EventScript_2742C0:: @ 82742C0
+UnusualWeather_Underwater_SetupEscapeWarpRoute129East:: @ 82742C0
 	setescapewarp MAP_ROUTE129, 255, 43, 20
 	return
 
@@ -3442,7 +3433,7 @@ Std_RegisteredInMatchCall:: @ 82742C9
 	closemessage
 	delay 30
 	playfanfare MUS_ME_TORE_EYE
-	msgbox gUnknown_08272E0F, MSGBOX_DEFAULT
+	msgbox gText_RegisteredTrainerinPokeNav, MSGBOX_DEFAULT
 	waitfanfare
 	closemessage
 	delay 30
@@ -4216,31 +4207,31 @@ MauvilleCity_GameCorner_EventScript_2A5B0D:: @ 82A5B0D
 	.include "data/text/berries.inc"
 	.include "data/text/shoal_cave.inc"
 
-Text_2A81E5: @ 82A81E5
+Text_PictureBookShelf: @ 82A81E5
 	.string "There's a set of POKéMON picture books.$"
 
-Text_2A820D: @ 82A820D
+Text_BookShelf: @ 82A820D
 	.string "It's filled with all sorts of books.$"
 
-Text_2A8232: @ 82A8232
+Text_PokemonCenterBookShelf: @ 82A8232
 	.string "POKéMON magazines!\n"
 	.string "POKéMON PAL…\p"
 	.string "POKéMON HANDBOOK…\n"
 	.string "ADORABLE POKéMON…$"
 
-Text_2A8276: @ 82A8276
+Text_Vase: @ 82A8276
 	.string "This vase looks expensive…\n"
 	.string "Peered inside…\p"
 	.string "But, it was empty.$"
 
-Text_2A82B3: @ 82A82B3
+Text_EmptyTrashCan: @ 82A82B3
 	.string "It's empty.$"
 
-Text_2A82BF: @ 82A82BF
+Text_ShopShelf: @ 82A82BF
 	.string "The shelves brim with all sorts of\n"
 	.string "POKéMON merchandise.$"
 
-Text_2A82F7: @ 82A82F7
+Text_Blueprint: @ 82A82F7
 	.string "A blueprint of some sort?\n"
 	.string "It's too complicated!$"
 
@@ -6928,16 +6919,16 @@ TrainerHill_3F_MapScript1_2C8336: @ 82C8336
 TrainerHill_4F_MapScript1_2C8336: @ 82C8336
 TrainerHill_Roof_MapScript1_2C8336: @ 82C8336
 	setvar VAR_TEMP_2, 0
-	setvar VAR_0x8004, 4
+	setvar VAR_0x8004, TRAINER_HILL_FUNC_RESUME_TIMER
 	special CallTrainerHillFunction
 	setvar VAR_0x8004, 1
 	setvar VAR_0x8005, 5
 	special CallFrontierUtilFunc
-	compare VAR_RESULT, 2
+	compare VAR_RESULT, B_OUTCOME_LOST
 	goto_if_eq TrainerHill_1F_EventScript_2C83C9
-	compare VAR_RESULT, 3
+	compare VAR_RESULT, B_OUTCOME_DREW
 	goto_if_eq TrainerHill_1F_EventScript_2C83C9
-	compare VAR_RESULT, 9
+	compare VAR_RESULT, B_OUTCOME_FORFEITED
 	goto_if_eq TrainerHill_1F_EventScript_2C83C9
 	end
 
@@ -6961,7 +6952,7 @@ TrainerHill_Roof_MapScript2_2C8381: @ 82C8381
 
 EventScript_TrainerHillTimer:: @ 82C8393
 	lockall
-	setvar VAR_0x8004, 7
+	setvar VAR_0x8004, TRAINER_HILL_FUNC_7
 	special CallTrainerHillFunction
 	msgbox TrainerHill_Entrance_Text_268D47, MSGBOX_DEFAULT
 	releaseall
@@ -6969,7 +6960,7 @@ EventScript_TrainerHillTimer:: @ 82C8393
 
 TrainerHill_1F_EventScript_2C83A6:: @ 82C83A6
 	setvar VAR_TEMP_2, 1
-	setvar VAR_0x8004, 9
+	setvar VAR_0x8004, TRAINER_HILL_FUNC_9
 	special CallTrainerHillFunction
 	compare VAR_RESULT, 1
 	goto_if_eq TrainerHill_1F_EventScript_2C83BF
@@ -6981,9 +6972,9 @@ TrainerHill_1F_EventScript_2C83BF:: @ 82C83BF
 	end
 
 TrainerHill_1F_EventScript_2C83C9:: @ 82C83C9
-	setvar VAR_0x8004, 12
+	setvar VAR_0x8004, TRAINER_HILL_FUNC_12
 	special CallTrainerHillFunction
-	setvar VAR_0x8004, 5
+	setvar VAR_0x8004, TRAINER_HILL_FUNC_SET_LOST
 	special CallTrainerHillFunction
 	setvar VAR_TEMP_1, 1
 	end
@@ -7001,7 +6992,7 @@ TrainerHill_1F_Movement_2C83EE:: @ 82C83EE
 
 EventScript_2C83F0:: @ 82C83F0
 	trainerbattle TRAINER_BATTLE_12, TRAINER_PHILLIP, 0, BattleFacility_TrainerBattle_PlaceholderText, BattleFacility_TrainerBattle_PlaceholderText
-	setvar VAR_0x8004, 11
+	setvar VAR_0x8004, TRAINER_HILL_FUNC_11
 	special CallTrainerHillFunction
 	waitmessage
 	waitbuttonpress

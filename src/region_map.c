@@ -36,6 +36,13 @@
 
 // Static type declarations
 
+struct FlagControlledFlyDest
+{
+    const u8 *const *name;
+    u16 mapSecId;
+    u16 flag;
+};
+
 // Static RAM declarations
 
 static EWRAM_DATA struct RegionMap *gRegionMap = NULL;
@@ -106,7 +113,8 @@ static const u8 sRegionMap_MapSectionLayout[] = INCBIN_U8("graphics/pokenav/regi
 
 #include "data/region_map/region_map_entries.h"
 
-static const u16 sRegionMap_SpecialPlaceLocations[][2] = {
+static const u16 sRegionMap_SpecialPlaceLocations[][2] =
+{
     {MAPSEC_UNDERWATER_TERRA_CAVE,     MAPSEC_ROUTE_105},
     {MAPSEC_UNDERWATER_124,            MAPSEC_ROUTE_124},
     {MAPSEC_UNDERWATER_UNK1,           MAPSEC_ROUTE_129},
@@ -133,13 +141,15 @@ static const u16 sRegionMap_SpecialPlaceLocations[][2] = {
     {MAPSEC_NONE,                      MAPSEC_NONE}
 };
 
-static const u16 sRegionMap_MarineCaveMapSecIds[] = {
+static const u16 sRegionMap_MarineCaveMapSecIds[] =
+{
     MAPSEC_MARINE_CAVE,
     MAPSEC_UNDERWATER_MARINE_CAVE,
     MAPSEC_UNDERWATER_MARINE_CAVE
 };
 
-static const u16 sTerraCaveMapSectionIds[] = {
+static const u16 sTerraCaveMapSectionIds[] =
+{
     MAPSEC_ROUTE_114,
     MAPSEC_ROUTE_114,
     MAPSEC_ROUTE_115,
@@ -158,7 +168,8 @@ static const u16 sTerraCaveMapSectionIds[] = {
     MAPSEC_ROUTE_129
 };
 
-static const struct UCoords16 sTerraCaveLocationCoords[] = {
+static const struct UCoords16 sTerraCaveLocationCoords[] =
+{
     {0x00, 0x0a},
     {0x00, 0x0c},
     {0x18, 0x03},
@@ -169,21 +180,27 @@ static const struct UCoords16 sTerraCaveLocationCoords[] = {
     {0x18, 0x0a}
 };
 
-static const u8 sRegionMap_MapSecAquaHideoutOld[] = {
+static const u8 sRegionMap_MapSecAquaHideoutOld[] =
+{
     MAPSEC_AQUA_HIDEOUT_OLD
 };
 
-static const struct OamData sRegionMapCursorOam = {
-    .size = 1, .priority = 1
+static const struct OamData sRegionMapCursorOam =
+{
+    .shape = SPRITE_SHAPE(16x16),
+    .size = SPRITE_SIZE(16x16),
+    .priority = 1
 };
 
-static const union AnimCmd sRegionMapCursorAnim1[] = {
+static const union AnimCmd sRegionMapCursorAnim1[] =
+{
     ANIMCMD_FRAME(0, 20),
     ANIMCMD_FRAME(4, 20),
     ANIMCMD_JUMP(0)
 };
 
-static const union AnimCmd sRegionMapCursorAnim2[] = {
+static const union AnimCmd sRegionMapCursorAnim2[] =
+{
     ANIMCMD_FRAME( 0, 10),
     ANIMCMD_FRAME(16, 10),
     ANIMCMD_FRAME(32, 10),
@@ -191,37 +208,49 @@ static const union AnimCmd sRegionMapCursorAnim2[] = {
     ANIMCMD_JUMP(0)
 };
 
-static const union AnimCmd *const sRegionMapCursorAnimTable[] = {
+static const union AnimCmd *const sRegionMapCursorAnimTable[] =
+{
     sRegionMapCursorAnim1,
     sRegionMapCursorAnim2
 };
 
-static const struct SpritePalette sRegionMapCursorSpritePalette = { sRegionMapCursorPal, 0 };
-
-static const struct SpriteTemplate sRegionMapCursorSpriteTemplate = {
-    0,
-    0,
-    &sRegionMapCursorOam,
-    sRegionMapCursorAnimTable,
-    NULL,
-    gDummySpriteAffineAnimTable,
-    SpriteCallback_CursorFull
+static const struct SpritePalette sRegionMapCursorSpritePalette =
+{
+    .data = sRegionMapCursorPal,
+    .tag = 0
 };
 
-static const struct OamData sRegionMapPlayerIconOam = {
-    .size = 1, .priority = 2
+static const struct SpriteTemplate sRegionMapCursorSpriteTemplate =
+{
+    .tileTag = 0,
+    .paletteTag = 0,
+    .oam = &sRegionMapCursorOam,
+    .anims = sRegionMapCursorAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCallback_CursorFull
 };
 
-static const union AnimCmd sRegionMapPlayerIconAnim1[] = {
+static const struct OamData sRegionMapPlayerIconOam =
+{
+    .shape = SPRITE_SHAPE(16x16),
+    .size = SPRITE_SIZE(16x16),
+    .priority = 2
+};
+
+static const union AnimCmd sRegionMapPlayerIconAnim1[] =
+{
     ANIMCMD_FRAME(0, 5),
     ANIMCMD_END
 };
 
-static const union AnimCmd *const sRegionMapPlayerIconAnimTable[] = {
+static const union AnimCmd *const sRegionMapPlayerIconAnimTable[] =
+{
     sRegionMapPlayerIconAnim1
 };
 
-static const u8 sRegionMapEventSectionIds[] = {
+static const u8 sRegionMapEventSectionIds[] =
+{
     MAPSEC_BIRTH_ISLAND_2,
     MAPSEC_FARAWAY_ISLAND,
     MAPSEC_NAVEL_ROCK2
@@ -237,7 +266,8 @@ static const u16 Unknown_085A1D48[] = INCBIN_U16("graphics/pokenav/fly_target_ic
 
 static const u32 sUnknown_085A1D68[] = INCBIN_U32("graphics/pokenav/fly_target_icons.4bpp.lz");
 
-static const u8 sMapHealLocations[][3] = {
+static const u8 sMapHealLocations[][3] =
+{
     {MAP_GROUP(LITTLEROOT_TOWN), MAP_NUM(LITTLEROOT_TOWN), HEAL_LOCATION_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F},
     {MAP_GROUP(OLDALE_TOWN), MAP_NUM(OLDALE_TOWN), HEAL_LOCATION_OLDALE_TOWN},
     {MAP_GROUP(DEWFORD_TOWN), MAP_NUM(DEWFORD_TOWN), HEAL_LOCATION_DEWFORD_TOWN},
@@ -290,83 +320,150 @@ static const u8 sMapHealLocations[][3] = {
     {MAP_GROUP(ROUTE134), MAP_NUM(ROUTE134), 0}
 };
 
-static const u8 *const gUnknown_085A1ED4[] = {
+static const u8 *const gUnknown_085A1ED4[] =
+{
     gText_PokemonLeague,
     gText_PokemonCenter
 };
 
-static const struct {
-    const u8 *const *name;
-    u16 mapSecId;
-    u16 flag;
-} gUnknown_085A1EDC[] = {
-    gUnknown_085A1ED4,
-    MAPSEC_EVER_GRANDE_CITY,
-    FLAG_LANDMARK_POKEMON_LEAGUE
+static const struct FlagControlledFlyDest gUnknown_085A1EDC[] =
+{
+    {
+        .name = gUnknown_085A1ED4,
+        .mapSecId = MAPSEC_EVER_GRANDE_CITY,
+        .flag = FLAG_LANDMARK_POKEMON_LEAGUE
+    }
 };
 
-static const struct BgTemplate gUnknown_085A1EE4[] = {
-    { .bg = 0, .charBaseIndex = 0, .mapBaseIndex = 31, .screenSize = 0, .paletteMode = 0, .priority = 0 },
-    { .bg = 1, .charBaseIndex = 3, .mapBaseIndex = 30, .screenSize = 0, .paletteMode = 0, .priority = 1 },
-    { .bg = 2, .charBaseIndex = 2, .mapBaseIndex = 28, .screenSize = 2, .paletteMode = 1, .priority = 2 }
+static const struct BgTemplate gUnknown_085A1EE4[] =
+{
+    {
+        .bg = 0,
+        .charBaseIndex = 0,
+        .mapBaseIndex = 31,
+        .screenSize = 0,
+        .paletteMode = 0,
+        .priority = 0
+    },
+    {
+        .bg = 1,
+        .charBaseIndex = 3,
+        .mapBaseIndex = 30,
+        .screenSize = 0,
+        .paletteMode = 0,
+        .priority = 1
+    },
+    {
+        .bg = 2,
+        .charBaseIndex = 2,
+        .mapBaseIndex = 28,
+        .screenSize = 2,
+        .paletteMode = 1,
+        .priority = 2
+    }
 };
 
-static const struct WindowTemplate gUnknown_085A1EF0[] = {
-    { 0, 17, 17, 12,  2, 15, 0x01 },
-    { 0, 17, 15, 12,  4, 15, 0x19 },
-    { 0,  1, 18, 14,  2, 15, 0x49 },
+static const struct WindowTemplate gUnknown_085A1EF0[] =
+{
+    {
+        .bg = 0,
+        .tilemapLeft = 17,
+        .tilemapTop = 17,
+        .width = 12,
+        .height = 2,
+        .paletteNum = 15,
+        .baseBlock = 0x01
+    },
+    {
+        .bg = 0,
+        .tilemapLeft = 17,
+        .tilemapTop = 15,
+        .width = 12,
+        .height = 4,
+        .paletteNum = 15,
+        .baseBlock = 0x19
+    },
+    {
+        .bg = 0,
+        .tilemapLeft = 1,
+        .tilemapTop = 18,
+        .width = 14,
+        .height = 2,
+        .paletteNum = 15,
+        .baseBlock = 0x49
+    },
     DUMMY_WIN_TEMPLATE
 };
 
-static const struct SpritePalette gUnknown_085A1F10 = {
-    Unknown_085A1D48, 2
+static const struct SpritePalette gUnknown_085A1F10 =
+{
+    .data = Unknown_085A1D48,
+    .tag = 2
 };
 
-static const u16 sUnknown_085A1F18[][2] = {
-    {FLAG_LANDMARK_BATTLE_FRONTIER, MAPSEC_BATTLE_FRONTIER},
-    {-1, MAPSEC_NONE}
+static const u16 sUnknown_085A1F18[][2] =
+{
+    {
+        FLAG_LANDMARK_BATTLE_FRONTIER,
+        MAPSEC_BATTLE_FRONTIER
+    },
+    {
+        -1,
+        MAPSEC_NONE
+    }
 };
 
-static const struct OamData gOamData_085A1F20 = {
+static const struct OamData gOamData_085A1F20 =
+{
+    .shape = SPRITE_SHAPE(8x8),
+    .size = SPRITE_SIZE(8x8),
     .priority = 2
 };
 
-static const union AnimCmd gUnknown_085A1F28[] = {
+static const union AnimCmd gUnknown_085A1F28[] =
+{
     ANIMCMD_FRAME( 0, 5),
     ANIMCMD_END
 };
 
-static const union AnimCmd gUnknown_085A1F30[] = {
+static const union AnimCmd gUnknown_085A1F30[] =
+{
     ANIMCMD_FRAME( 1, 5),
     ANIMCMD_END
 };
 
-static const union AnimCmd gUnknown_085A1F38[] = {
+static const union AnimCmd gUnknown_085A1F38[] =
+{
     ANIMCMD_FRAME( 3, 5),
     ANIMCMD_END
 };
 
-static const union AnimCmd gUnknown_085A1F40[] = {
+static const union AnimCmd gUnknown_085A1F40[] =
+{
     ANIMCMD_FRAME( 5, 5),
     ANIMCMD_END
 };
 
-static const union AnimCmd gUnknown_085A1F48[] = {
+static const union AnimCmd gUnknown_085A1F48[] =
+{
     ANIMCMD_FRAME( 6, 5),
     ANIMCMD_END
 };
 
-static const union AnimCmd gUnknown_085A1F50[] = {
+static const union AnimCmd gUnknown_085A1F50[] =
+{
     ANIMCMD_FRAME( 8, 5),
     ANIMCMD_END
 };
 
-static const union AnimCmd gUnknown_085A1F58[] = {
+static const union AnimCmd gUnknown_085A1F58[] =
+{
     ANIMCMD_FRAME(10, 5),
     ANIMCMD_END
 };
 
-static const union AnimCmd *const gUnknown_085A1F60[] = {
+static const union AnimCmd *const gUnknown_085A1F60[] =
+{
     gUnknown_085A1F28,
     gUnknown_085A1F30,
     gUnknown_085A1F38,
@@ -376,14 +473,15 @@ static const union AnimCmd *const gUnknown_085A1F60[] = {
     gUnknown_085A1F58
 };
 
-static const struct SpriteTemplate gUnknown_085A1F7C = {
-    2,
-    2,
-    &gOamData_085A1F20,
-    gUnknown_085A1F60,
-    NULL,
-    gDummySpriteAffineAnimTable,
-    SpriteCallbackDummy
+static const struct SpriteTemplate gUnknown_085A1F7C =
+{
+    .tileTag = 2,
+    .paletteTag = 2,
+    .oam = &gOamData_085A1F20,
+    .anims = gUnknown_085A1F60,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCallbackDummy
 };
 
 // .text
@@ -883,7 +981,7 @@ static void RegionMap_InitializeStateBasedOnPlayerLocation(void)
         case MAP_TYPE_CITY:
         case MAP_TYPE_ROUTE:
         case MAP_TYPE_UNDERWATER:
-        case MAP_TYPE_6:
+        case MAP_TYPE_OCEAN_ROUTE:
             gRegionMap->mapSecId = gMapHeader.regionMapSectionId;
             gRegionMap->playerIsInCave = FALSE;
             mapWidth = gMapHeader.mapLayout->width;
@@ -896,7 +994,7 @@ static void RegionMap_InitializeStateBasedOnPlayerLocation(void)
             }
             break;
         case MAP_TYPE_UNDERGROUND:
-        case MAP_TYPE_7:
+        case MAP_TYPE_UNUSED_2:
             if (gMapHeader.flags & 0x02)
             {
                 mapHeader = Overworld_GetMapHeaderByGroupAndId(gSaveBlock1Ptr->escapeWarp.mapGroup, gSaveBlock1Ptr->escapeWarp.mapNum);
@@ -1159,7 +1257,7 @@ static u16 RegionMap_GetTerraCaveMapSecId(void)
 {
     s16 idx;
 
-    idx = VarGet(VAR_0x4037) - 1;
+    idx = VarGet(VAR_UNUSUAL_WEATHER_LOCATION) - 1;
     if (idx < 0 || idx > 15)
     {
         idx = 0;
@@ -1171,7 +1269,7 @@ static void RegionMap_GetMarineCaveCoords(u16 *x, u16 *y)
 {
     u16 idx;
 
-    idx = VarGet(VAR_0x4037);
+    idx = VarGet(VAR_UNUSUAL_WEATHER_LOCATION);
     if (idx < 9 || idx > 16)
     {
         idx = 9;
@@ -1622,7 +1720,7 @@ void MCB2_FlyMap(void)
         case 7:
             LoadPalette(sRegionMapFramePal, 0x10, 0x20);
             PutWindowTilemap(2);
-            FillWindowPixelBuffer(2, 0x00);
+            FillWindowPixelBuffer(2, PIXEL_FILL(0));
             AddTextPrinterParameterized(2, 1, gText_FlyToWhere, 0, 1, 0, NULL);
             schedule_bg_copy_tilemap_to_vram(0);
             gMain.state++;
@@ -1679,7 +1777,7 @@ static void sub_8124904(void)
     if (sFlyMap->regionMap.iconDrawType > MAPSECTYPE_NONE && sFlyMap->regionMap.iconDrawType <= MAPSECTYPE_BATTLE_FRONTIER)
     {
         flag = FALSE;
-        for (i = 0; i < 1; i++)
+        for (i = 0; i < ARRAY_COUNT(gUnknown_085A1EDC); i++)
         {
             if (sFlyMap->regionMap.mapSecId == gUnknown_085A1EDC[i].mapSecId)
             {
@@ -1687,8 +1785,8 @@ static void sub_8124904(void)
                 {
                     StringLength(gUnknown_085A1EDC[i].name[sFlyMap->regionMap.posWithinMapSec]);
                     flag = TRUE;
-                    sub_8198070(0, FALSE);
-                    SetWindowBorderStyle(1, FALSE, 0x65, 0x0d);
+                    ClearStdWindowAndFrameToTransparent(0, FALSE);
+                    DrawStdFrameWithCustomTileAndPalette(1, FALSE, 0x65, 0x0d);
                     AddTextPrinterParameterized(1, 1, sFlyMap->regionMap.mapSecName, 0, 1, 0, NULL);
                     name = gUnknown_085A1EDC[i].name[sFlyMap->regionMap.posWithinMapSec];
                     AddTextPrinterParameterized(1, 1, name, GetStringRightAlignXOffset(1, name, 0x60), 0x11, 0, NULL);
@@ -1702,12 +1800,12 @@ static void sub_8124904(void)
         {
             if (gUnknown_03001180 == TRUE)
             {
-                sub_8198070(1, FALSE);
-                SetWindowBorderStyle(0, FALSE, 0x65, 0x0d);
+                ClearStdWindowAndFrameToTransparent(1, FALSE);
+                DrawStdFrameWithCustomTileAndPalette(0, FALSE, 0x65, 0x0d);
             }
             else
             {
-                FillWindowPixelBuffer(0, 0x11);
+                FillWindowPixelBuffer(0, PIXEL_FILL(1));
             }
             AddTextPrinterParameterized(0, 1, sFlyMap->regionMap.mapSecName, 0, 1, 0, NULL);
             schedule_bg_copy_tilemap_to_vram(0);
@@ -1718,10 +1816,10 @@ static void sub_8124904(void)
     {
         if (gUnknown_03001180 == TRUE)
         {
-            sub_8198070(1, FALSE);
-            SetWindowBorderStyle(0, FALSE, 0x65, 0x0d);
+            ClearStdWindowAndFrameToTransparent(1, FALSE);
+            DrawStdFrameWithCustomTileAndPalette(0, FALSE, 0x65, 0x0d);
         }
-        FillWindowPixelBuffer(0, 0x11);
+        FillWindowPixelBuffer(0, PIXEL_FILL(1));
         CopyWindowToVram(0, 2);
         schedule_bg_copy_tilemap_to_vram(0);
         gUnknown_03001180 = FALSE;
