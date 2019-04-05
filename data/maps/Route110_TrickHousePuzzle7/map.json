@@ -63,7 +63,7 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route110_TrickHousePuzzle7_EventScript_291469",
+      "script": "Route110_TrickHousePuzzle7_EventScript_ItemTropicMail",
       "flag": "FLAG_ITEM_TRICK_HOUSE_PUZZLE_7_TROPIC_MAIL"
     },
     {

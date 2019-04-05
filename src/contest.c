@@ -218,12 +218,6 @@ EWRAM_DATA u8 gUnknown_02039F5D = 0;
 // IWRAM common vars.
 u32 gContestRngValue;
 
-extern const u16 gUnknown_08587C30[];
-extern const struct BgTemplate gUnknown_08587F34[4];
-extern const struct WindowTemplate gUnknown_08587F44[];
-extern const u8 *const gUnknown_08587D90[];
-extern const u8 *const gUnknown_08587F08[];
-extern const u8 *const gUnknown_08587F1C[];
 extern const u8 *const gUnknown_0827E8DA[];
 extern const u8 gText_0827D55A[];
 extern const u8 gText_0827E793[];
@@ -248,33 +242,604 @@ extern const u8 gText_Contest_Fear[];
 extern const u8 gText_BDot[];
 extern const u8 gText_CDot[];
 extern const u8 *const gUnknown_08587E10[];
-extern const struct ContestPokemon gContestOpponents[96];
-extern const u8 gUnknown_085898A4[96];
-extern const struct CompressedSpriteSheet gUnknown_08587C00;
-extern const struct SpriteTemplate gSpriteTemplate_8587BE8;
-extern const struct CompressedSpriteSheet gUnknown_08587C08;
-extern const struct CompressedSpritePalette gUnknown_08587C10;
-extern const struct SpriteTemplate gSpriteTemplate_8587C18;
 extern const union AffineAnimCmd *const gUnknown_082FF6C0[];
 extern const union AffineAnimCmd *const gUnknown_082FF694[];
-extern const u8 *const gContestEffectDescriptionPointers[];
-extern const struct SpriteSheet gUnknown_08587A74;
-extern const u8 gUnknown_08587A6C[];
 extern const struct SpriteTemplate gSpriteTemplate_8587AD0;
-extern const struct SpritePalette gUnknown_08587B08;
-extern const struct CompressedSpriteSheet gUnknown_08587AE8[];
 extern const struct SpriteTemplate gSpriteTemplate_8587B18[];
-extern const u8 gUnknown_08587A70[];
-extern const struct SubspriteTable gSubspriteTables_8587B80[];
-extern const struct CompressedSpriteSheet gUnknown_08587BB0;
-extern const struct SpritePalette gUnknown_08587BB8;
-extern const struct SpriteTemplate gSpriteTemplate_8587BC8;
 extern void (*const gContestEffectFuncs[])(void);
-extern const s8 gContestExcitementTable[][5];
-extern const struct ContestWinner gUnknown_08587FA4[];
-extern const struct CompressedSpriteSheet gUnknown_08589904[];
-extern const struct SpritePalette gUnknown_08589924[];
-extern const struct SpriteTemplate gSpriteTemplate_858998C[];
+
+static const u8 gUnknown_08587A6C[] =
+{
+    0x24, 0x4C, 0x74, 0x9C
+};
+
+static const u8 gUnknown_08587A70[] =
+{
+    0x24, 0x4C, 0x74, 0x9C
+};
+
+static const struct SpriteSheet gUnknown_08587A74 =
+{
+    .data = gTiles_8C19450,
+    .size = 0x20,
+    .tag = 0x4E20
+};
+
+static const struct OamData gOamData_8587A7C =
+{
+    .y = 0,
+    .affineMode = 0,
+    .objMode = 0,
+    .mosaic = 0,
+    .bpp = 0,
+    .shape = SPRITE_SHAPE(8x8),
+    .x = 0,
+    .matrixNum = 0,
+    .size = SPRITE_SIZE(8x8),
+    .tileNum = 0,
+    .priority = 0,
+    .paletteNum = 0,
+    .affineParam = 0
+};
+
+static const union AffineAnimCmd gSpriteAffineAnim_8587A84[] =
+{
+    AFFINEANIMCMD_FRAME(0x100, 0x100, 0, 0),
+    AFFINEANIMCMD_END,
+};
+
+static const union AffineAnimCmd gSpriteAffineAnim_8587A94[] =
+{
+    AFFINEANIMCMD_FRAME(0x100, 0x100, 0, 0),
+    AFFINEANIMCMD_FRAME(0xFFF6, 0xFFF6, -20, 20),
+    AFFINEANIMCMD_END
+};
+
+static const union AffineAnimCmd gSpriteAffineAnim_8587AAC[] =
+{
+    AFFINEANIMCMD_FRAME(0x38, 0x38, 0, 0),
+    AFFINEANIMCMD_FRAME(10, 10, 20, 20),
+    AFFINEANIMCMD_END
+};
+
+static const union AffineAnimCmd* const gSpriteAffineAnimTable_8587AC4[] =
+{
+    gSpriteAffineAnim_8587A84,
+    gSpriteAffineAnim_8587A94,
+    gSpriteAffineAnim_8587AAC
+};
+
+static const struct SpriteTemplate gSpriteTemplate_8587AD0 =
+{
+    .tileTag = 0x4E20,
+    .paletteTag = 0xABE0,
+    .oam = &gOamData_8587A7C,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gSpriteAffineAnimTable_8587AC4,
+    .callback = SpriteCallbackDummy
+};
+
+static const struct CompressedSpriteSheet gUnknown_08587AE8[] =
+{
+    {
+        .data = gContestNextTurnGfx,
+        .size = 0x100,
+        .tag = 0x4E22
+    },
+    {
+        .data = gContestNextTurnGfx,
+        .size = 0x100,
+        .tag = 0x4E23
+    },
+    {
+        .data = gContestNextTurnGfx,
+        .size = 0x100,
+        .tag = 0x4E24
+    },
+    {
+        .data = gContestNextTurnGfx,
+        .size = 0x100,
+        .tag = 0x4E25
+    }
+};
+
+static const struct SpritePalette gUnknown_08587B08 =
+{
+    .data = gContestPal,
+    .tag = 0x4E22
+};
+
+static const struct OamData gOamData_8587B10 =
+{
+    .y = 0,
+    .affineMode = 0,
+    .objMode = 0,
+    .mosaic = 0,
+    .bpp = 0,
+    .shape = SPRITE_SHAPE(32x8),
+    .x = 0,
+    .matrixNum = 0,
+    .size = SPRITE_SIZE(32x8),
+    .tileNum = 0,
+    .priority = 0,
+    .paletteNum = 0,
+    .affineParam = 0
+};
+
+static const struct SpriteTemplate gSpriteTemplate_8587B18[] =
+{
+    {
+        .tileTag = 0x4E22,
+        .paletteTag = 0x4E22,
+        .oam = &gOamData_8587B10,
+        .anims = gDummySpriteAnimTable,
+        .images = NULL,
+        .affineAnims = gDummySpriteAffineAnimTable,
+        .callback = SpriteCallbackDummy,
+    },
+    {
+        .tileTag = 0x4E23,
+        .paletteTag = 0x4E22,
+        .oam = &gOamData_8587B10,
+        .anims = gDummySpriteAnimTable,
+        .images = NULL,
+        .affineAnims = gDummySpriteAffineAnimTable,
+        .callback = SpriteCallbackDummy,
+    },
+    {
+        .tileTag = 0x4E24,
+        .paletteTag = 0x4E22,
+        .oam = &gOamData_8587B10,
+        .anims = gDummySpriteAnimTable,
+        .images = NULL,
+        .affineAnims = gDummySpriteAffineAnimTable,
+        .callback = SpriteCallbackDummy,
+    },
+    {
+        .tileTag = 0x4E25,
+        .paletteTag = 0x4E22,
+        .oam = &gOamData_8587B10,
+        .anims = gDummySpriteAnimTable,
+        .images = NULL,
+        .affineAnims = gDummySpriteAffineAnimTable,
+        .callback = SpriteCallbackDummy,
+    }
+};
+
+const struct Subsprite gSubspriteTable_8587B78[] =
+{
+    {
+        .x = -28,
+        .y = -4,
+        .shape = ST_OAM_H_RECTANGLE,
+        .size = 1,
+        .tileOffset = 0,
+        .priority = 0
+    },
+    {
+        .x = 4,
+        .y = -4,
+        .shape = ST_OAM_H_RECTANGLE,
+        .size = 1,
+        .tileOffset = 4,
+        .priority = 0
+    }
+};
+
+const struct SubspriteTable gSubspriteTables_8587B80[] =
+{
+    {
+        .subspriteCount = 2,
+        .subsprites = gSubspriteTable_8587B78
+    }
+};
+
+const struct CompressedSpriteSheet gUnknown_08587B88 =
+{
+    .data = gUnknown_08C19168,
+    .size = 0x180,
+    .tag = 0xABE1
+};
+
+const struct OamData gOamData_8587B90 =
+{
+    .y = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .bpp = ST_OAM_4BPP,
+    .shape = SPRITE_SHAPE(16x16),
+    .x = 0,
+    .size = SPRITE_SIZE(16x16),
+    .tileNum = 0,
+    .priority = 0,
+    .paletteNum = 0,
+};
+
+const struct SpriteTemplate gSpriteTemplate_8587B98 =
+{
+    .tileTag = 0xABE1,
+    .paletteTag = 0xABE0,
+    .oam = &gOamData_8587B90,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCallbackDummy
+};
+
+const struct CompressedSpriteSheet gUnknown_08587BB0 =
+{
+    .data = gContestApplauseGfx,
+    .size = 0x400,
+    .tag = 0xABE2
+};
+
+const struct SpritePalette gUnknown_08587BB8 =
+{
+    .data = gContestPal,
+    .tag = 0xABE2
+};
+
+const struct OamData gOamData_8587BC0 =
+{
+    .y = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .bpp = ST_OAM_4BPP,
+    .shape = SPRITE_SHAPE(64x32),
+    .x = 0,
+    .size = SPRITE_SIZE(64x32),
+    .tileNum = 0,
+    .priority = 0,
+    .paletteNum = 0,
+};
+
+const struct SpriteTemplate gSpriteTemplate_8587BC8 =
+{
+    .tileTag = 0xABE2,
+    .paletteTag = 0xABE2,
+    .oam = &gOamData_8587BC0,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCallbackDummy
+};
+
+const struct OamData gOamData_8587BE0 =
+{
+    .y = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .bpp = ST_OAM_4BPP,
+    .shape = SPRITE_SHAPE(64x64),
+    .x = 0,
+    .size = SPRITE_SIZE(64x64),
+    .tileNum = 0,
+    .priority = 3,
+    .paletteNum = 2,
+};
+
+const struct SpriteTemplate gSpriteTemplate_8587BE8 =
+{
+    .tileTag = 0x4E21,
+    .paletteTag = 0x4E21,
+    .oam = &gOamData_8587BE0,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCallbackDummy
+};
+
+const struct CompressedSpriteSheet gUnknown_08587C00 =
+{
+    .data = gContestJudgeGfx,
+    .size = 0x800,
+    .tag = 0x4E21
+};
+
+const struct CompressedSpriteSheet gUnknown_08587C08 =
+{
+    .data = gContestJudgeSymbolsGfx,
+    .size = 0x380,
+    .tag = 0xABE0
+};
+
+const struct CompressedSpritePalette gUnknown_08587C10 =
+{
+    .data = gContest3Pal,
+    .tag = 0xABE0
+};
+
+const struct SpriteTemplate gSpriteTemplate_8587C18 =
+{
+    .tileTag = 0xABE0,
+    .paletteTag = 0xABE0,
+    .oam = &gUnknown_0852490C,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCallbackDummy
+};
+
+const u16 gUnknown_08587C30[] = INCBIN_U16("graphics/unknown/unknown_587C30.gbapal");
+
+#include "data/contest_text_tables.h"
+
+const struct BgTemplate gUnknown_08587F34[] =
+{
+    {
+        .bg = 0,
+        .charBaseIndex = 0,
+        .mapBaseIndex = 0x18,
+        .screenSize = 2,
+        .paletteMode = 0,
+        .priority = 0,
+        .baseTile = 0
+    },
+    {
+        .bg = 1,
+        .charBaseIndex = 2,
+        .mapBaseIndex = 0x1E,
+        .screenSize = 2,
+        .paletteMode = 0,
+        .priority = 1,
+        .baseTile = 0
+    },
+    {
+        .bg = 2,
+        .charBaseIndex = 0,
+        .mapBaseIndex = 0x1C,
+        .screenSize = 2,
+        .paletteMode = 0,
+        .priority = 0,
+        .baseTile = 0
+    },
+    {
+        .bg = 3,
+        .charBaseIndex = 0,
+        .mapBaseIndex = 0x1A,
+        .screenSize = 0,
+        .paletteMode = 0,
+        .priority = 3,
+        .baseTile = 0
+    }
+};
+
+const struct WindowTemplate gUnknown_08587F44[] =
+{
+    {
+        .bg = 0,
+        .tilemapLeft = 18,
+        .tilemapTop = 0,
+        .width = 12,
+        .height = 2,
+        .paletteNum = 0xF,
+        .baseBlock = 0x200
+    },
+    {
+        .bg = 0,
+        .tilemapLeft = 18,
+        .tilemapTop = 5,
+        .width = 12,
+        .height = 2,
+        .paletteNum = 0xF,
+        .baseBlock = 0x218
+    },
+    {
+        .bg = 0,
+        .tilemapLeft = 18,
+        .tilemapTop = 10,
+        .width = 12,
+        .height = 2,
+        .paletteNum = 0xF,
+        .baseBlock = 0x230
+    },
+    {
+        .bg = 0,
+        .tilemapLeft = 18,
+        .tilemapTop = 15,
+        .width = 12,
+        .height = 2,
+        .paletteNum = 0xF,
+        .baseBlock = 0x248
+    },
+    {
+        .bg = 0,
+        .tilemapLeft = 1,
+        .tilemapTop = 15,
+        .width = 17,
+        .height = 4,
+        .paletteNum = 0xF,
+        .baseBlock = 0x260
+    },
+    {
+        .bg = 0,
+        .tilemapLeft = 1,
+        .tilemapTop = 0x1F,
+        .width = 9,
+        .height = 2,
+        .paletteNum = 0xF,
+        .baseBlock = 0x2A4
+    },
+    {
+        .bg = 0,
+        .tilemapLeft = 1,
+        .tilemapTop = 0x21,
+        .width = 9,
+        .height = 2,
+        .paletteNum = 0xF,
+        .baseBlock = 0x2B6
+    },
+    {
+        .bg = 0,
+        .tilemapLeft = 1,
+        .tilemapTop = 0x23,
+        .width = 9,
+        .height = 2,
+        .paletteNum = 0xF,
+        .baseBlock = 0x2C8
+    },
+    {
+        .bg = 0,
+        .tilemapLeft = 1,
+        .tilemapTop = 0x25,
+        .width = 9,
+        .height = 2,
+        .paletteNum = 0xF,
+        .baseBlock = 0x2DA
+    },
+    {
+        .bg = 0,
+        .tilemapLeft = 16,
+        .tilemapTop = 0x1F,
+        .width = 1,
+        .height = 2,
+        .paletteNum = 0xF,
+        .baseBlock = 0x2EC
+    },
+    {
+        .bg = 0,
+        .tilemapLeft = 11,
+        .tilemapTop = 0x23,
+        .width = 18,
+        .height = 4,
+        .paletteNum = 0xF,
+        .baseBlock = 0x2EE
+    },
+    DUMMY_WIN_TEMPLATE
+};
+
+#include "data/contest_opponents.h"
+
+static const struct CompressedSpriteSheet sUnknown_08589904[] =
+{
+    {
+        .data = gBlankGfxCompressed,
+        .size = 0x1000,
+        .tag = 0x80E8
+    },
+    {
+        .data = gBlankGfxCompressed,
+        .size = 0x1000,
+        .tag = 0x80E9
+    },
+    {
+        .data = gBlankGfxCompressed,
+        .size = 0x1000,
+        .tag = 0x80EA
+    },
+    {
+        .data = gBlankGfxCompressed,
+        .size = 0x1000,
+        .tag = 0x80EB
+    }
+};
+
+// Yup this is super dangerous but that's how it is here
+static const struct SpritePalette sUnknown_08589924[] =
+{
+    {
+        .data = (u16*)(gHeap + 0x1A0A4),
+        .tag = 0x80E8
+    },
+    {
+        .data = (u16*)(gHeap + 0x1A0C4),
+        .tag = 0x80E9
+    },
+    {
+        .data = (u16*)(gHeap + 0x1A0E4),
+        .tag = 0x80EA
+    },
+    {
+        .data = (u16*)(gHeap + 0x1A104),
+        .tag = 0x80EB
+    }
+};
+
+const struct OamData gOamData_8589944 =
+{
+    .y = 0,
+    .affineMode = ST_OAM_AFFINE_DOUBLE,
+    .objMode = ST_OAM_OBJ_BLEND,
+    .bpp = ST_OAM_4BPP,
+    .shape = SPRITE_SHAPE(64x64),
+    .x = 0,
+    .size = SPRITE_SIZE(64x64),
+    .tileNum = 0,
+    .priority = 0,
+    .paletteNum = 0,
+    .affineParam = 0,
+};
+
+const union AffineAnimCmd gSpriteAffineAnim_858994C[] =
+{
+    AFFINEANIMCMD_FRAME(0x100, 0x100, 0, 0),
+    AFFINEANIMCMD_END
+};
+
+const union AffineAnimCmd gSpriteAffineAnim_858995C[] =
+{
+    AFFINEANIMCMD_FRAME(3, 3, 0, 15),
+    AFFINEANIMCMD_FRAME(-3, -3, 0, 15),
+    AFFINEANIMCMD_FRAME(3, 3, 0, 15),
+    AFFINEANIMCMD_FRAME(-3, -3, 0, 15),
+    AFFINEANIMCMD_END
+};
+
+const union AffineAnimCmd *const gSpriteAffineAnimTable_8589984[] =
+{
+    gSpriteAffineAnim_858994C,
+    gSpriteAffineAnim_858995C
+};
+
+const struct SpriteTemplate gSpriteTemplate_858998C[] =
+{
+    {
+        .tileTag = 0x80E8,
+        .paletteTag = 0x80E8,
+        .oam = &gOamData_8589944,
+        .anims = gDummySpriteAnimTable,
+        .images = NULL,
+        .affineAnims = gSpriteAffineAnimTable_8589984,
+        .callback = SpriteCallbackDummy
+    },
+    {
+        .tileTag = 0x80E9,
+        .paletteTag = 0x80E9,
+        .oam = &gOamData_8589944,
+        .anims = gDummySpriteAnimTable,
+        .images = NULL,
+        .affineAnims = gSpriteAffineAnimTable_8589984,
+        .callback = SpriteCallbackDummy
+    },
+    {
+        .tileTag = 0x80EA,
+        .paletteTag = 0x80EA,
+        .oam = &gOamData_8589944,
+        .anims = gDummySpriteAnimTable,
+        .images = NULL,
+        .affineAnims = gSpriteAffineAnimTable_8589984,
+        .callback = SpriteCallbackDummy
+    },
+    {
+        .tileTag = 0x80EB,
+        .paletteTag = 0x80EB,
+        .oam = &gOamData_8589944,
+        .anims = gDummySpriteAnimTable,
+        .images = NULL,
+        .affineAnims = gSpriteAffineAnimTable_8589984,
+        .callback = SpriteCallbackDummy
+    }
+};
+
+const s8 gContestExcitementTable[][5] =
+{
+    { 1,  0, -1, -1,  0},
+    { 0,  1,  0, -1, -1},
+    {-1,  0,  1,  0, -1},
+    {-1, -1,  0,  1,  0},
+    { 0, -1, -1,  0,  1}
+};
 
 static void TaskDummy1(u8 taskId)
 {
@@ -2118,7 +2683,7 @@ void sub_80DAB8C(u8 contestType, u8 rank)
         r7 = TRUE;
 
     // Find all suitable opponents
-    r3 = gUnknown_085898A4;
+    r3 = gPostgameContestOpponentFilter;
     for (i = 0; i < ARRAY_COUNT(gContestOpponents); i++)
     {
         if (rank == gContestOpponents[i].whichRank)
@@ -2178,12 +2743,12 @@ void sub_80DACBC(u8 contestType, u8 rank, bool32 isPostgame)
 
         if (isPostgame == TRUE)
         {
-            if (gUnknown_085898A4[i] == 1)
+            if (gPostgameContestOpponentFilter[i] == CONTEST_FILTER_NO_POSTGAME)
                 continue;
         }
         else
         {
-            if (gUnknown_085898A4[i] == 2)
+            if (gPostgameContestOpponentFilter[i] == CONTEST_FILTER_ONLY_POSTGAME)
                 continue;
         }
         if ((contestType == CONTEST_CATEGORY_COOL && gContestOpponents[i].aiPool_Cool)
@@ -3317,8 +3882,8 @@ static u8 sub_80DC9EC(u8 a)
     u8 spriteId1, spriteId2;
     u8 x = gUnknown_02039F26[a] * 40 + 32;
 
-    LoadCompressedSpriteSheet(&gUnknown_08589904[a]);
-    LoadSpritePalette(&gUnknown_08589924[a]);
+    LoadCompressedSpriteSheet(&sUnknown_08589904[a]);
+    LoadSpritePalette(&sUnknown_08589924[a]);
     spriteId1 = CreateSprite(&gSpriteTemplate_858998C[a], 184, x, 29);
     spriteId2 = CreateSprite(&gSpriteTemplate_858998C[a], 248, x, 29);
     gSprites[spriteId2].oam.tileNum += 64;
@@ -5186,3 +5751,5 @@ void sub_80DFA08(struct ContestPokemon *mon, s32 language)
         name[PLAYER_NAME_LENGTH] = EOS;
     }
 }
+
+

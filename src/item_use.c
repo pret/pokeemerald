@@ -1,6 +1,7 @@
 #include "global.h"
 #include "item_use.h"
 #include "battle.h"
+#include "battle_anim.h"
 #include "battle_pyramid.h"
 #include "battle_pyramid_bag.h"
 #include "berry.h"
@@ -42,8 +43,8 @@
 #include "constants/vars.h"
 #include "event_obj_lock.h"
 
-extern u8 Route102_EventScript_274482[];
-extern u8 Route102_EventScript_2744C0[];
+extern u8 BerryTree_EventScript_274482[];
+extern u8 BerryTree_EventScript_2744C0[];
 extern u8 BattleFrontier_OutsideEast_EventScript_242CFC[];
 
 void SetUpItemUseCallback(u8 taskId);
@@ -389,7 +390,7 @@ bool8 sub_80FD6D4(const struct MapEvents *events, s16 x, s16 y)
 
 bool8 sub_80FD730(struct MapConnection *connection, int x, int y)
 {
-    
+
     u16 localX, localY;
     u32 localOffset;
     s32 localLength;
@@ -669,7 +670,7 @@ void sub_80FDD74(u8 taskId)
 {
     RemoveBagItem(gSpecialVar_ItemId, 1);
     ScriptContext2_Enable();
-    ScriptContext1_SetupScript(Route102_EventScript_274482);
+    ScriptContext1_SetupScript(BerryTree_EventScript_274482);
     DestroyTask(taskId);
 }
 
@@ -694,7 +695,7 @@ void ItemUseOutOfBattle_WailmerPail(u8 taskId)
 void sub_80FDE08(u8 taskId)
 {
     ScriptContext2_Enable();
-    ScriptContext1_SetupScript(Route102_EventScript_2744C0);
+    ScriptContext1_SetupScript(BerryTree_EventScript_2744C0);
     DestroyTask(taskId);
 }
 
@@ -1118,3 +1119,4 @@ void ItemUseOutOfBattle_CannotUse(u8 taskId)
 {
     DisplayDadsAdviceCannotUseItemMessage(taskId, gTasks[taskId].data[3]);
 }
+

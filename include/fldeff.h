@@ -10,6 +10,7 @@ void FixLongGrassMetatilesWindowTop(s16 x, s16 y);
 void FixLongGrassMetatilesWindowBottom(s16 x, s16 y);
 
 extern const struct SpritePalette gFieldEffectObjectPaletteInfo6;
+extern struct MapPosition gPlayerFacingPosition;
 
 // groundshake
 bool8 sub_81BE66C(void);

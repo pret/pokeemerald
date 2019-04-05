@@ -1,9 +1,9 @@
 EverGrandeCity_PokemonLeague_1F_MapScripts:: @ 82295D2
-	map_script MAP_SCRIPT_ON_TRANSITION, EverGrandeCity_PokemonLeague_1F_MapScript1_2295DD
+	map_script MAP_SCRIPT_ON_TRANSITION, EverGrandeCity_PokemonLeague_1F_OnTransition
 	map_script MAP_SCRIPT_ON_RESUME, EverGrandeCity_PokemonLeague_1F_MapScript1_277C30
 	.byte 0
 
-EverGrandeCity_PokemonLeague_1F_MapScript1_2295DD: @ 82295DD
+EverGrandeCity_PokemonLeague_1F_OnTransition: @ 82295DD
 	setrespawn HEAL_LOCATION_EVER_GRANDE_CITY_2
 	setflag FLAG_LANDMARK_POKEMON_LEAGUE
 	call_if_unset FLAG_ENTERED_ELITE_FOUR, EverGrandeCity_PokemonLeague_1F_EventScript_2295ED
@@ -47,17 +47,29 @@ EverGrandeCity_PokemonLeague_1F_Pokemart_229624: @ 8229624
 
 EverGrandeCity_PokemonLeague_1F_EventScript_229636:: @ 8229636
 	special SavePlayerParty
-		
-	trainerbattle 10, TRAINER_WALLACE, 0, NULL, EverGrandeCity_PokemonLeague_1F_Text_2296E8
+	
+	fadescreen 1
+    special ChooseHalfPartyForBattle
+    waitstate
+	@ Check here to see if the player didn't choose Cancel.
+	
+	special ReducePlayerPartyToSelectedMons
+    setvar VAR_0x8004, 2
+    setvar VAR_0x8005, 4
+    special CallFrontierUtilFunc
+	
+	trainerbattle 10, 1, 0, NULL, EverGrandeCity_PokemonLeague_1F_Text_2296E8
 	trainerbattle 11, TRAINER_ALEXA, 0, NULL, EverGrandeCity_PokemonLeague_1F_Text_2297EF
 	
 	setvar VAR_0x8004, SPECIAL_BATTLE_MULTI
-	setvar VAR_0x8005, 0
+	setvar VAR_0x8005, 2 | 0x80
 	setvar VAR_0x8006, TRAINER_EDWARDO
 	setvar VAR_0x8007, TRAINER_BACK_PIC_LEAF
 	special DoSpecialTrainerBattle
-	
 	waitstate
+	
+	setvar VAR_0x8004, 6
+    special CallFrontierUtilFunc
 	
 	special LoadPlayerParty
 	

@@ -12,7 +12,7 @@ gScriptCmdTable:: @ 81DB67C
 	.4byte ScrCmd_callstd
 	.4byte ScrCmd_gotostd_if
 	.4byte ScrCmd_callstd_if
-	.4byte ScrCmd_gotoram
+	.4byte ScrCmd_returnram
 	.4byte ScrCmd_killscript
 	.4byte ScrCmd_setmysteryeventstatus
 	.4byte ScrCmd_loadword
@@ -207,7 +207,7 @@ gScriptCmdTable:: @ 81DB67C
 	.4byte ScrCmd_nop1
 	.4byte ScrCmd_setmonobedient
 	.4byte ScrCmd_checkmonobedience
-	.4byte ScrCmd_cmdCF
+	.4byte ScrCmd_gotoram
 	.4byte ScrCmd_nop1
 	.4byte ScrCmd_warpD1
 	.4byte ScrCmd_setmonmetlocation

@@ -2287,7 +2287,7 @@ static void SetKeyInterceptCallback(u16 (*func)(u32))
 static void CheckRfuKeepAliveTimer(void)
 {
     if (gWirelessCommType != 0 && ++sRfuKeepAliveTimer > 60)
-        sub_8010198();
+        LinkRfu_FatalError();
 }
 
 static void ResetAllTradingStates(void)
@@ -2960,7 +2960,7 @@ static void InitLinkPlayerEventObjectPos(struct EventObject *eventObj, s16 x, s1
     eventObj->currentCoords.y = y;
     eventObj->previousCoords.x = x;
     eventObj->previousCoords.y = y;
-    sub_8093038(x, y, &eventObj->initialCoords.x, &eventObj->initialCoords.y);
+    SetSpritePosToMapCoords(x, y, &eventObj->initialCoords.x, &eventObj->initialCoords.y);
     eventObj->initialCoords.x += 8;
     EventObjectUpdateZCoord(eventObj);
 }

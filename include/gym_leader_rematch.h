@@ -75,11 +75,17 @@ enum {
     REMATCH_WINONA,
     REMATCH_TATE_AND_LIZA,
     REMATCH_JUAN,
+
+    // Entries below SIDNEY are considered part of REMATCH_ELITE_FOUR_ENTRIES.
     REMATCH_SIDNEY,
     REMATCH_PHOEBE,
     REMATCH_GLACIA,
     REMATCH_DRAKE,
-    REMATCH_WALLACE
+    REMATCH_WALLACE,
+
+    // The total number of rematch entries. This must be the last element
+    // in the enum.
+    REMATCH_TABLE_ENTRIES
 };
 
 void UpdateGymLeaderRematch(void);

@@ -620,7 +620,7 @@ struct BattleScripting
     u8 animArg2;
     u16 tripleKickPower;
     u8 atk49_state;
-    u8 battlerWithAbility;
+    u8 unused_15;
     u8 unused_16;
     u8 battler;
     u8 animTurn;
@@ -646,9 +646,7 @@ struct BattleScripting
 };
 
 // rom_80A5C6C
-u8 GetBattlerSide(u8 battler);
-u8 GetBattlerPosition(u8 battler);
-u8 GetBattlerAtPosition(u8 position);
+
 
 struct BattleSpriteInfo
 {
@@ -859,5 +857,6 @@ extern u8 gHealthboxSpriteIds[MAX_BATTLERS_COUNT];
 extern u8 gMultiUsePlayerCursor;
 extern u8 gNumberOfMovesToChoose;
 extern u8 gUnknown_03005D7C[MAX_BATTLERS_COUNT];
+extern const u8 gTrainerClassNames[][13];
 
 #endif // GUARD_BATTLE_H

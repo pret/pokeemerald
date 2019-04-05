@@ -11,13 +11,13 @@
 #include "overworld.h"
 #include "random.h"
 #include "palette.h"
-#include "rom_8011DC0.h"
+#include "union_room.h"
 #include "string_util.h"
 #include "task.h"
 #include "text.h"
 #include "constants/species.h"
 #include "save.h"
-#include "rom_8011DC0.h"
+#include "mystery_gift.h"
 
 extern u16 gHeldKeyCodeToSend;
 
@@ -154,9 +154,18 @@ const u8 sWireless_RSEtoASCIITable[] = {
     0x20, 0x2b, 0x5b, 0x5c, 0x5d, 0x5e, 0x5f, 0x20,
     0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x00
 };
-const struct OamData sWirelessStatusIndicatorOamData = {
+const struct OamData sWirelessStatusIndicatorOamData =
+{
+    .y = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(16x16),
-    .size = SPRITE_SIZE(16x16)
+    .x = 0,
+    .size = SPRITE_SIZE(16x16),
+    .tileNum = 0,
+    .priority = 0,
+    .paletteNum = 0,
 };
 static const union AnimCmd sWirelessStatusIndicatorAnim0[] = {
     // 3 bars
@@ -310,10 +319,22 @@ const char gUnknown_082ED7EC[] = "PokemonSioInfo";
 const char gUnknown_082ED7FC[] = "LINK LOSS DISCONNECT!";
 const char gUnknown_082ED814[] = "LINK LOSS RECOVERY NOW";
 
-extern const char gUnknown_082ED82C[];
-extern const char gUnknown_082ED84B[];
-extern const char gUnknown_082ED85B[];
-extern const char gUnknown_082ED868[];
+ALIGNED(4) const char gUnknown_082ED82C[31] = {' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',0x00};
+const char gUnknown_082ED84B[16] = {' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',0x00};
+const char gUnknown_082ED85B[9] = {' ',' ',' ',' ',' ',' ',' ',' ',0x00};
+ALIGNED(4) const char gUnknown_082ED864[2] = {' ',0x00};
+const char gUnknown_082ED866[2] = {'*',0x00};
+const char gUnknown_082ED868[8] = "NOWSLOT";
+const char gUnknown_082ED870[12] = "           ";
+const char gUnknown_082ED87C[12] = "CLOCK DRIFT";
+const char gUnknown_082ED888[12] = "BUSY SEND  ";
+const char gUnknown_082ED894[12] = "CMD REJECT ";
+const char gUnknown_082ED8A0[12] = "CLOCK SLAVE";
+const char gUnknown_082ED8A8[3][8] = {
+    "CHILD ",
+    "PARENT",
+    "SEARCH"
+};
 
 // .text
 
@@ -2231,7 +2252,7 @@ void CreateWirelessStatusIndicatorSprite(u8 x, u8 y)
     }
 }
 
-void sub_800E084(void)
+void DestroyWirelessStatusIndicatorSprite(void)
 {
     if (gSprites[gWirelessStatusIndicatorSpriteId].data[7] == 0x1234)
     {
@@ -2344,7 +2365,7 @@ void sub_800E174(void)
         CpuCopy16(gMain.oamBuffer + 125, (struct OamData *)OAM + 125, sizeof(struct OamData));
         if (sub_8011A74() == 1)
         {
-            sub_800E084();
+            DestroyWirelessStatusIndicatorSprite();
         }
     }
 }
@@ -3653,7 +3674,7 @@ void sub_8010168(void)
         gUnknown_03005000.unk_00 = sub_8010148;
 }
 
-void sub_8010198(void)
+void LinkRfu_FatalError(void)
 {
     sub_800D630();
     gUnknown_03005000.unk_ce4 = 1;
@@ -4197,7 +4218,7 @@ void sub_8010DB4(void)
 {
     if (gUnknown_03005000.unk_ee == 1 && gUnknown_03004140.unk_02 == 0)
     {
-        if (gMain.callback2 == sub_8018438 || gUnknown_03004140.unk_3c->unk_04)
+        if (gMain.callback2 == c2_mystery_gift_e_reader_run || gUnknown_03004140.unk_3c->unk_04)
             gWirelessCommType = 2;
         SetMainCallback2(CB2_LinkError);
         gMain.savedCallback = CB2_LinkError;
@@ -5170,3 +5191,4 @@ u32 GetRfuRecvQueueLength(void)
 {
     return gUnknown_03005000.unk_124.unk_8c2;
 }
+

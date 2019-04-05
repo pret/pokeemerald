@@ -274,7 +274,7 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route110_EventScript_290D81",
+      "script": "Route110_EventScript_ItemDireHit",
       "flag": "FLAG_ITEM_ROUTE_110_DIRE_HIT"
     },
     {
@@ -287,7 +287,7 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route110_EventScript_290D74",
+      "script": "Route110_EventScript_ItemRareCandy",
       "flag": "FLAG_ITEM_ROUTE_109_RARE_CANDY"
     },
     {
@@ -482,7 +482,7 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route110_EventScript_290D8E",
+      "script": "Route110_EventScript_ItemElixir",
       "flag": "FLAG_ITEM_ROUTE_110_ELIXIR"
     },
     {

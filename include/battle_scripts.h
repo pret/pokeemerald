@@ -300,5 +300,7 @@ extern const u8 BattleScript_PowderMoveNoEffect[];
 extern const u8 BattleScript_GrassyTerrainLoop[];
 extern const u8 BattleScript_VCreateStatLoss[];
 extern const u8 BattleScript_SpikyShieldEffect[];
+extern const u8 BattleScript_FlowerVeilProtectsRet[];
+extern const u8 BattleScript_SweetVeilProtectsRet[];
 
 #endif // GUARD_BATTLE_SCRIPTS_H

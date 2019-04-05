@@ -1294,7 +1294,7 @@ void sub_810B55C(u8 taskId)
 bool8 sub_810B614(struct Task *task, u8 taskId)
 {
     u8 spriteId = CreateSprite(&gUnknown_085956C0, task->data[13], task->data[14], task->data[12]);
-    
+
     if (spriteId != MAX_SPRITES)
     {
         gSprites[spriteId].callback = sub_810B684;
