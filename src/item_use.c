@@ -1120,12 +1120,3 @@ void ItemUseOutOfBattle_CannotUse(u8 taskId)
     DisplayDadsAdviceCannotUseItemMessage(taskId, gTasks[taskId].data[3]);
 }
 
-void ItemUseOutOfBattle_Honey(u8 taskId)
-{
-    //As a placeholder, just acts like White Flute
-    FlagSet(FLAG_SYS_ENC_UP_ITEM);
-    FlagClear(FLAG_SYS_ENC_DOWN_ITEM);
-    StringExpandPlaceholders(gStringVar4, gText_UsedVar2WildLured);
-    gTasks[taskId].data[8] = 0;
-    gTasks[taskId].func = sub_80FE1D0;
-}
