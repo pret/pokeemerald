@@ -3485,7 +3485,7 @@ static void sub_80B9978(struct Task *task)
         eventObject = &gEventObjects[gPlayerAvatar.eventObjectId];
         sprite = &gSprites[eventObject->spriteId];
         eventObject->inanimate = 0;
-        sub_808EB08(eventObject, eventObject->currentCoords.x, eventObject->currentCoords.y);
+        MoveEventObjectToMapCoords(eventObject, eventObject->currentCoords.x, eventObject->currentCoords.y);
         sprite->pos2.x = 0;
         sprite->pos2.y = 0;
         sprite->coordOffsetEnabled = 1;

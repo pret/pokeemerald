@@ -9,7 +9,7 @@ enum DecorPerm {
     DECORPERM_PASS_FLOOR,
     DECORPERM_BEHIND_FLOOR,
     DECORPERM_NA_WALL,
-    DECORPERM_SOLID_MAT
+    DECORPERM_SPRITE
 };
 
 enum DecorShape {
@@ -68,7 +68,7 @@ extern EWRAM_DATA u8 gCurDecorationIndex;
 
 void sub_8126968(void);
 void sub_8126AD8(u8 taskId);
-void sub_8127D38(u16 mapX, u16 mapY, u16 decor);
+void ShowDecorationOnMap(u16 mapX, u16 mapY, u16 decor);
 void sub_8126B2C(u8 taskId);
 void sub_8127208(u8 taskId);
 void sub_8127250(u8 *dest, u8 decorCat);
