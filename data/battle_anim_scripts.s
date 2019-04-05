@@ -2028,6 +2028,17 @@ Move_LEAF_STORM:
 	end
 	
 Move_POWER_WHIP:
+	loadspritegfx ANIM_TAG_WHIP_HIT
+	playsewithpan SE_W026, SOUND_PAN_ATTACKER
+	createsprite gHorizontalLungeSpriteTemplate, ANIM_ATTACKER, 2, 4, 10
+	delay 6
+	playsewithpan SE_W010, SOUND_PAN_TARGET
+	createsprite gVineWhipSpriteTemplate, ANIM_TARGET, 2, 0, 0
+	delay 6
+	call SetImpactBackground
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_TARGET, 2, 0, 8, 1
+	restorebg
+	waitbgfadein
 	end
 	
 Move_ROCK_WRECKER:
@@ -3221,6 +3232,25 @@ Ember1:
 	delay 4
 	return
 
+SetImpactBackground:
+	delay 2
+	createvisualtask AnimTask_IsContest, 2
+	jumprettrue SetImpactContestsBG
+	createvisualtask AnimTask_IsTargetPlayerSide, 2
+	jumpretfalse SetImpactOpponentBG
+	jumprettrue SetImpactPlayerBG
+SetImpactBackgroundRet:
+	return
+SetImpactOpponentBG:
+	changebg BG_IMPACT_OPPONENT
+	goto SetImpactBackgroundRet
+SetImpactPlayerBG:
+	changebg BG_IMPACT_PLAYER
+	goto SetImpactBackgroundRet
+SetImpactContestsBG:
+	changebg BG_IMPACT_CONTESTS
+	goto SetImpactBackgroundRet
+
 Move_MEGA_PUNCH:
 	loadspritegfx ANIM_TAG_IMPACT
 	loadspritegfx ANIM_TAG_HANDS_AND_FEET
@@ -3245,24 +3275,6 @@ Move_MEGA_PUNCH:
 	restorebg
 	waitbgfadein
 	end
-SetImpactBackground:
-	delay 2
-	createvisualtask AnimTask_IsContest, 2
-	jumprettrue SetImpactContestsBG
-	createvisualtask AnimTask_IsTargetPlayerSide, 2
-	jumpretfalse SetImpactOpponentBG
-	jumprettrue SetImpactPlayerBG
-SetImpactBackgroundRet:
-	return
-SetImpactOpponentBG:
-	changebg BG_IMPACT_OPPONENT
-	goto SetImpactBackgroundRet
-SetImpactPlayerBG:
-	changebg BG_IMPACT_PLAYER
-	goto SetImpactBackgroundRet
-SetImpactContestsBG:
-	changebg BG_IMPACT_CONTESTS
-	goto SetImpactBackgroundRet
 
 Move_MEGA_KICK:
 	loadspritegfx ANIM_TAG_IMPACT
