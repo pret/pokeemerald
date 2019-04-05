@@ -9136,7 +9136,7 @@ const struct Item gItems[] =
         .battleUseFunc = NULL,
         .secondaryId = 0,
     },
-        [ITEM_HONEY] =
+	[ITEM_HONEY] =
     {
         .name = _("Honey"),
         .itemId = ITEM_HONEY,
