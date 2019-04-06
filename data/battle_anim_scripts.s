@@ -2960,7 +2960,7 @@ SkyAttackSetUpAgainstPartner:
 SkyAttackUnleash:
 	loadspritegfx ANIM_TAG_IMPACT
 	loadspritegfx ANIM_TAG_BIRD
-	call SetFlyingBg
+	call SetSkyBg
 	monbg ANIM_ATTACKER
 	createvisualtask sub_8116620, 10, 2, 0, 0, 16, RGB_WHITE
 	delay 4
@@ -2977,7 +2977,7 @@ SkyAttackUnleash:
 	createvisualtask sub_8116620, 10, 2, 0, 15, 0, RGB_WHITE
 	waitforvisualfinish
 	clearmonbg ANIM_ATTACKER
-	call UnsetFlyingBg
+	call UnsetSkyBg
 	goto SkyAttackEnd
 
 Move_FLASH:
@@ -5392,7 +5392,7 @@ Move_WITHDRAW:
 
 Move_AURORA_BEAM:
 	loadspritegfx ANIM_TAG_RAINBOW_RINGS
-	fadetobg BG_AURORABEAM
+	fadetobg BG_AURORA
 	waitbgfadein
 	playsewithpan SE_W062, SOUND_PAN_ATTACKER
 	setarg 7, 0
@@ -6195,7 +6195,7 @@ Move_AEROBLAST:
 	loadspritegfx ANIM_TAG_AIR_WAVE_2
 	loadspritegfx ANIM_TAG_IMPACT
 	monbg ANIM_DEF_PARTNER
-	call SetFlyingBg
+	call SetSkyBg
 	monbgprio_28 ANIM_TARGET
 	setalpha 12, 8
 	call Aeroblast1
@@ -6211,7 +6211,7 @@ Move_AEROBLAST:
 	clearmonbg ANIM_DEF_PARTNER
 	blendoff
 	delay 0
-	call UnsetFlyingBg
+	call UnsetSkyBg
 	end
 Aeroblast1:
 	playsewithpan SE_W026, SOUND_PAN_ATTACKER
@@ -9419,7 +9419,7 @@ Move_SEISMIC_TOSS:
 	waitforvisualfinish
 	createvisualtask AnimTask_GetSeismicTossDamageLevel, 3
 	delay 1
-	fadetobg BG_SEISMICTOSS_SKUUPPERCUT
+	fadetobg BG_IN_AIR
 	waitbgfadeout
 	createvisualtask sub_811152C, 3
 	playsewithpan SE_W327, 0
@@ -9589,7 +9589,7 @@ Move_SKY_UPPERCUT:
 	loadspritegfx ANIM_TAG_IMPACT
 	monbg ANIM_DEF_PARTNER
 	monbgprio_28 ANIM_TARGET
-	fadetobg BG_SEISMICTOSS_SKUUPPERCUT
+	fadetobg BG_IN_AIR
 	waitbgfadeout
 	playsewithpan SE_W327, SOUND_PAN_ATTACKER
 	createvisualtask sub_810DABC, 5, 55
@@ -10165,21 +10165,21 @@ UnsetPsychicBackground:
 	waitbgfadein
 	return
 
-SetFlyingBg:
-	jumpifcontest SetBgFlyingContest
-	fadetobg BG_FLYING
+SetSkyBg:
+	jumpifcontest SetSkyBgContest
+	fadetobg BG_SKY
 	waitbgfadeout
 	createvisualtask sub_8117660, 5, -2304, 768, 1, -1
-SetBgFlyingContinue:
+SetSkyBgContinue:
 	waitbgfadein
 	return
-SetBgFlyingContest:
-	fadetobg BG_FLYING_CONTESTS
+SetSkyBgContest:
+	fadetobg BG_SKY_CONTESTS
 	waitbgfadeout
 	createvisualtask sub_8117660, 5, 2304, 768, 0, -1
-	goto SetBgFlyingContinue
+	goto SetSkyBgContinue
 
-UnsetFlyingBg:
+UnsetSkyBg:
 	restorebg
 	waitbgfadeout
 	setarg 7, -1
