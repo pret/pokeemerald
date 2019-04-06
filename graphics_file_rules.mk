@@ -325,10 +325,10 @@ $(BATINTGFXDIR)/textbox.gbapal: $(BATINTGFXDIR)/textbox_0.gbapal \
 								$(BATINTGFXDIR)/textbox_1.gbapal
 	@cat $^ >$@
 
-$(BTLANMSPRGFXDIR)/010.4bpp: $(BTLANMSPRGFXDIR)/010_0.4bpp \
-						 	 $(BTLANMSPRGFXDIR)/010_1.4bpp \
-						 	 $(BTLANMSPRGFXDIR)/010_2.4bpp \
-						 	 $(BTLANMSPRGFXDIR)/010_3.4bpp
+$(BTLANMSPRGFXDIR)/ice_cube.4bpp: $(BTLANMSPRGFXDIR)/ice_cube_0.4bpp \
+						 	 $(BTLANMSPRGFXDIR)/ice_cube_1.4bpp \
+						 	 $(BTLANMSPRGFXDIR)/ice_cube_2.4bpp \
+						 	 $(BTLANMSPRGFXDIR)/ice_cube_3.4bpp
 	@cat $^ >$@
 
 $(UNUSEDGFXDIR)/obi_palpak1.gbapal: $(UNUSEDGFXDIR)/old_pal1.gbapal \
@@ -384,23 +384,23 @@ $(UNUSEDGFXDIR)/old_contest_2.4bpp: $(UNUSEDGFXDIR)/old_contest_2_1.4bpp \
 $(UNKNOWNGFXDIR)/unknown_C19470.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 36
 
-$(BTLANMSPRGFXDIR)/141.4bpp: $(BTLANMSPRGFXDIR)/141_0.4bpp \
-						  $(BTLANMSPRGFXDIR)/141_1.4bpp \
-						  $(BTLANMSPRGFXDIR)/141_2.4bpp \
-						  $(BTLANMSPRGFXDIR)/141_3.4bpp \
-						  $(BTLANMSPRGFXDIR)/141_4.4bpp
+$(BTLANMSPRGFXDIR)/ice_crystals.4bpp: $(BTLANMSPRGFXDIR)/ice_crystals_0.4bpp \
+						  $(BTLANMSPRGFXDIR)/ice_crystals_1.4bpp \
+						  $(BTLANMSPRGFXDIR)/ice_crystals_2.4bpp \
+						  $(BTLANMSPRGFXDIR)/ice_crystals_3.4bpp \
+						  $(BTLANMSPRGFXDIR)/ice_crystals_4.4bpp
 	@cat $^ >$@
 
-$(BTLANMSPRGFXDIR)/074.4bpp: $(BTLANMSPRGFXDIR)/074_0.4bpp \
-						  $(BTLANMSPRGFXDIR)/074_1.4bpp
+$(BTLANMSPRGFXDIR)/mud_sand.4bpp: $(BTLANMSPRGFXDIR)/mud_sand_0.4bpp \
+						  $(BTLANMSPRGFXDIR)/mud_sand_1.4bpp
 	@cat $^ >$@
 
-$(BTLANMSPRGFXDIR)/159.4bpp: $(BTLANMSPRGFXDIR)/159_0.4bpp \
-						  $(BTLANMSPRGFXDIR)/159_1.4bpp
+$(BTLANMSPRGFXDIR)/flower.4bpp: $(BTLANMSPRGFXDIR)/flower_0.4bpp \
+						  $(BTLANMSPRGFXDIR)/flower_1.4bpp
 	@cat $^ >$@
 
-$(BTLANMSPRGFXDIR)/001.4bpp: $(BTLANMSPRGFXDIR)/001_0.4bpp \
-						  $(BTLANMSPRGFXDIR)/001_1.4bpp
+$(BTLANMSPRGFXDIR)/spark.4bpp: $(BTLANMSPRGFXDIR)/spark_0.4bpp \
+						  $(BTLANMSPRGFXDIR)/spark_1.4bpp
 	@cat $^ >$@
 
 $(MASKSGFXDIR)/unknown_C2EA50.4bpp: %.4bpp: %.png

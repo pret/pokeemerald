@@ -6,7 +6,7 @@
 #include "battle_message.h"
 #include "battle_interface.h"
 #include "bg.h"
-#include "data2.h"
+#include "data.h"
 #include "item_use.h"
 #include "link.h"
 #include "main.h"
@@ -26,9 +26,6 @@
 #include "constants/songs.h"
 
 extern struct MusicPlayerInfo gMPlayInfo_BGM;
-
-extern const struct CompressedSpritePalette gTrainerFrontPicPaletteTable[];
-extern const struct CompressedSpritePalette gTrainerBackPicPaletteTable[];
 
 // this file's functions
 static void RecordedPlayerHandleGetMonData(void);

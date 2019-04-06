@@ -5,6 +5,7 @@
 #include "battle_ai_script_commands.h"
 #include "battle_factory.h"
 #include "battle_setup.h"
+#include "data.h"
 #include "item.h"
 #include "pokemon.h"
 #include "random.h"

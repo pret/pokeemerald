@@ -190,7 +190,7 @@ const struct SpriteTemplate gWaterBubbleSpriteTemplate =
 const struct SpriteTemplate gGreenPoisonDrip =
 {
 	.tileTag = ANIM_TAG_POISON_BUBBLE,
-	.paletteTag = ANIM_TAG_UNUSED_VINE ,
+	.paletteTag = ANIM_TAG_VINE,
 	.oam = &gUnknown_085249CC,
 	.anims = gUnknown_08596168,
 	.images = NULL,
@@ -201,7 +201,7 @@ const struct SpriteTemplate gGreenPoisonDrip =
 const struct SpriteTemplate gGreenPoisonBubble =
 {
 	.tileTag = ANIM_TAG_POISON_BUBBLE,
-	.paletteTag = ANIM_TAG_UNUSED_VINE ,
+	.paletteTag = ANIM_TAG_VINE,
 	.oam = &gUnknown_085249CC,
 	.anims = gUnknown_08596164,
 	.images = NULL,

@@ -21,7 +21,7 @@
 #include "alloc.h"
 #include "string_util.h"
 #include "util.h"
-#include "data2.h"
+#include "data.h"
 #include "reset_rtc_screen.h"
 #include "reshow_battle_screen.h"
 #include "constants/abilities.h"

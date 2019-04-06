@@ -32,7 +32,7 @@
 #include "palette.h"
 #include "decompress.h"
 #include "start_menu.h"
-#include "data2.h"
+#include "data.h"
 #include "field_screen_effect.h"
 #include "script_pokemon_util_80F87D8.h"
 #include "international_string_util.h"

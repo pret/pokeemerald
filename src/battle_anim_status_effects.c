@@ -44,8 +44,8 @@ static const union AnimCmd *const sSpriteAnimTable_853EDF8[] =
 
 const struct SpriteTemplate gUnknown_0853EDFC =
 {
-    .tileTag = ANIM_TAG_UNUSED_ORB,
-    .paletteTag = ANIM_TAG_UNUSED_ORB,
+    .tileTag = ANIM_TAG_ORB,
+    .paletteTag = ANIM_TAG_ORB,
     .oam = &gUnknown_0852490C,
     .anims = sSpriteAnimTable_853EDF8,
     .images = NULL,
@@ -55,8 +55,8 @@ const struct SpriteTemplate gUnknown_0853EDFC =
 
 const struct SpriteTemplate gUnknown_0853EE14 =
 {
-    .tileTag = ANIM_TAG_UNUSED_ORB,
-    .paletteTag = ANIM_TAG_UNUSED_ORB,
+    .tileTag = ANIM_TAG_ORB,
+    .paletteTag = ANIM_TAG_ORB,
     .oam = &gUnknown_0852490C,
     .anims = sSpriteAnimTable_853EDF8,
     .images = NULL,
@@ -125,8 +125,8 @@ const struct SpriteTemplate gUnknown_0853EE84 =
 
 const struct SpriteTemplate gUnknown_0853EE9C =
 {
-    .tileTag = ANIM_TAG_UNUSED_MONSTER_FOOT,
-    .paletteTag = ANIM_TAG_UNUSED_MONSTER_FOOT,
+    .tileTag = ANIM_TAG_MONSTER_FOOT,
+    .paletteTag = ANIM_TAG_MONSTER_FOOT,
     .oam = &gUnknown_08524914,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -195,8 +195,8 @@ static const union AffineAnimCmd *const sSpriteAffineAnimTable_853EEF8[] =
 
 const struct SpriteTemplate gUnknown_0853EF18 =
 {
-    .tileTag = ANIM_TAG_UNUSED_ORB,
-    .paletteTag = ANIM_TAG_UNUSED_ORB,
+    .tileTag = ANIM_TAG_ORB,
+    .paletteTag = ANIM_TAG_ORB,
     .oam = &gUnknown_085249CC,
     .anims = sSpriteAnimTable_853EEF8,
     .images = NULL,

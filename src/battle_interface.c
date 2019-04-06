@@ -24,9 +24,10 @@
 #include "battle_anim.h"
 #include "constants/battle_anim.h"
 #include "constants/rgb.h"
-#include "data2.h"
 #include "battle_debug.h"
 #include "constants/battle_config.h"
+#include "data.h"
+#include "pokemon_summary_screen.h"
 
 enum
 {   // Corresponds to gHealthboxElementsGfxTable (and the tables after it) in graphics.c
@@ -150,8 +151,6 @@ enum
     HEALTHBOX_GFX_116, //unknown_D12FEC
     HEALTHBOX_GFX_117, //unknown_D1300C
 };
-
-extern const u8 *const gNatureNamePointers[];
 
 // strings
 extern const u8 gText_Slash[];

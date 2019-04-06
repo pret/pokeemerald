@@ -412,9 +412,9 @@ static void PlayerPC_Mailbox(u8 taskId)
     }
 }
 
-static void PlayerPC_Decoration(u8 var)
+static void PlayerPC_Decoration(u8 taskId)
 {
-    sub_8126B2C(var); //DoPlayerPCDecoration(var);
+    DoPlayerRoomDecorationMenu(taskId);
 }
 
 static void PlayerPC_TurnOff(u8 taskId)

@@ -42,11 +42,11 @@ AbandonedShip_HiddenFloorRooms_EventScript_238CE3:: @ 8238CE3
 	setfieldeffectargument 0, 10
 	setfieldeffectargument 1, 10
 	setfieldeffectargument 2, 0
-	dofieldeffect 54
+	dofieldeffect FLDEFF_SPARKLE
 	specialvar VAR_RESULT, FoundAbandonedShipRoom4Key
 	compare VAR_RESULT, 0
 	call_if_eq AbandonedShip_HiddenFloorRooms_EventScript_238DD3
-	waitfieldeffect 54
+	waitfieldeffect FLDEFF_SPARKLE
 	delay 10
 	end
 
@@ -60,7 +60,7 @@ AbandonedShip_HiddenFloorRooms_EventScript_238D0D:: @ 8238D0D
 	delay 20
 	compare VAR_RESULT, 0
 	call_if_eq AbandonedShip_HiddenFloorRooms_EventScript_238DB3
-	waitfieldeffect 54
+	waitfieldeffect FLDEFF_SPARKLE
 	delay 10
 	end
 
@@ -72,15 +72,15 @@ AbandonedShip_HiddenFloorRooms_EventScript_238D33:: @ 8238D33
 	setfieldeffectargument 0, 8
 	setfieldeffectargument 1, 5
 	setfieldeffectargument 2, 0
-	dofieldeffect 54
+	dofieldeffect FLDEFF_SPARKLE
 	setfieldeffectargument 0, 11
 	setfieldeffectargument 1, 3
 	setfieldeffectargument 2, 0
-	dofieldeffect 54
+	dofieldeffect FLDEFF_SPARKLE
 	specialvar VAR_RESULT, FoundAbandonedShipRoom6Key
 	compare VAR_RESULT, 0
 	call_if_eq AbandonedShip_HiddenFloorRooms_EventScript_238DE3
-	waitfieldeffect 54
+	waitfieldeffect FLDEFF_SPARKLE
 	delay 10
 	end
 
@@ -89,19 +89,19 @@ AbandonedShip_HiddenFloorRooms_EventScript_238D6B:: @ 8238D6B
 	setfieldeffectargument 0, 16
 	setfieldeffectargument 1, 3
 	setfieldeffectargument 2, 0
-	dofieldeffect 54
+	dofieldeffect FLDEFF_SPARKLE
 	setfieldeffectargument 0, 25
 	setfieldeffectargument 1, 2
 	setfieldeffectargument 2, 0
-	dofieldeffect 54
+	dofieldeffect FLDEFF_SPARKLE
 	setfieldeffectargument 0, 24
 	setfieldeffectargument 1, 6
 	setfieldeffectargument 2, 0
-	dofieldeffect 54
+	dofieldeffect FLDEFF_SPARKLE
 	specialvar VAR_RESULT, FoundAbandonedShipRoom2Key
 	compare VAR_RESULT, 0
 	call_if_eq AbandonedShip_HiddenFloorRooms_EventScript_238DC3
-	waitfieldeffect 54
+	waitfieldeffect FLDEFF_SPARKLE
 	delay 10
 	end
 
@@ -112,28 +112,28 @@ AbandonedShip_HiddenFloorRooms_EventScript_238DB3:: @ 8238DB3
 	setfieldeffectargument 0, 42
 	setfieldeffectargument 1, 10
 	setfieldeffectargument 2, 0
-	dofieldeffect 54
+	dofieldeffect FLDEFF_SPARKLE
 	return
 
 AbandonedShip_HiddenFloorRooms_EventScript_238DC3:: @ 8238DC3
 	setfieldeffectargument 0, 20
 	setfieldeffectargument 1, 5
 	setfieldeffectargument 2, 0
-	dofieldeffect 54
+	dofieldeffect FLDEFF_SPARKLE
 	return
 
 AbandonedShip_HiddenFloorRooms_EventScript_238DD3:: @ 8238DD3
 	setfieldeffectargument 0, 1
 	setfieldeffectargument 1, 12
 	setfieldeffectargument 2, 0
-	dofieldeffect 54
+	dofieldeffect FLDEFF_SPARKLE
 	return
 
 AbandonedShip_HiddenFloorRooms_EventScript_238DE3:: @ 8238DE3
 	setfieldeffectargument 0, 1
 	setfieldeffectargument 1, 2
 	setfieldeffectargument 2, 0
-	dofieldeffect 54
+	dofieldeffect FLDEFF_SPARKLE
 	return
 
 AbandonedShip_HiddenFloorRooms_EventScript_238DF3:: @ 8238DF3

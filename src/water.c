@@ -894,9 +894,9 @@ void AnimTask_CreateSurfWave(u8 taskId)
     {
         sub_80A6D60(&animBg, gUnknown_08D963A4, 1);
     }
-    AnimLoadCompressedBgGfx(animBg.bgId, gBattleAnimBackgroundImage_Surf, animBg.tilesOffset);
+    AnimLoadCompressedBgGfx(animBg.bgId, gBattleAnimBgImage_Surf, animBg.tilesOffset);
     if (gBattleAnimArgs[0] == 0)
-        LoadCompressedPalette(gBattleAnimBackgroundPalette_Surf, animBg.paletteId * 16, 32);
+        LoadCompressedPalette(gBattleAnimBgPalette_Surf, animBg.paletteId * 16, 32);
     else
         LoadCompressedPalette(gBattleAnimBackgroundImageMuddyWater_Pal, animBg.paletteId * 16, 32);
     taskId2 = CreateTask(sub_8107D58, gTasks[taskId].priority + 1);
@@ -1009,7 +1009,7 @@ _081079E0:\n\
 _081079EA:\n\
 	mov r0, sp\n\
 	ldrb r0, [r0, 0x9]\n\
-	ldr r1, =gBattleAnimBackgroundImage_Surf\n\
+	ldr r1, =gBattleAnimBgImage_Surf\n\
 	mov r2, sp\n\
 	ldrh r2, [r2, 0xA]\n\
 	bl AnimLoadCompressedBgGfx\n\
@@ -1018,7 +1018,7 @@ _081079EA:\n\
 	ldrsh r0, [r0, r1]\n\
 	cmp r0, 0\n\
 	bne _08107A24\n\
-	ldr r0, =gBattleAnimBackgroundPalette_Surf\n\
+	ldr r0, =gBattleAnimBgPalette_Surf\n\
 	mov r1, sp\n\
 	ldrb r1, [r1, 0x8]\n\
 	lsls r1, 4\n\

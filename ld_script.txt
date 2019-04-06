@@ -427,8 +427,7 @@ SECTIONS {
         src/rtc.o(.rodata);
         src/main_menu.o(.rodata);
         src/rom_8034C54.o(.rodata);
-        src/data2b.o(.rodata);
-        src/battle_data.o(.rodata);
+        src/data.o(.rodata);
         src/battle_bg.o(.rodata);
         src/battle_main.o(.rodata);
         src/battle_util.o(.rodata);
@@ -622,7 +621,6 @@ SECTIONS {
         data/pokenav.o(.rodata);
         src/pokenav_match_call.o(.rodata);
         src/menu_specialized.o(.rodata);
-        data/menu_specialized.o(.rodata);
         data/ereader_helpers.o(.rodata);
         src/faraway_island.o(.rodata);
         data/ereader_screen.o(.rodata);

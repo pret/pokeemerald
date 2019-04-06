@@ -18,7 +18,7 @@
 #include "trainer_see.h"
 #include "new_game.h"
 #include "string_util.h"
-#include "data2.h"
+#include "data.h"
 #include "link.h"
 #include "field_message_box.h"
 #include "tv.h"

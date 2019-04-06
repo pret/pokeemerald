@@ -24,7 +24,7 @@
 #include "menu.h"
 #include "sound.h"
 #include "pokemon_icon.h"
-#include "data2.h"
+#include "data.h"
 #include "international_string_util.h"
 #include "trainer_pokemon_sprites.h"
 #include "scanline_effect.h"
@@ -58,9 +58,6 @@ struct UnkStruct_860DD10
     u8 y;
     u16 src;
 };
-
-// text
-extern const u8 gTrainerClassNames[][13];
 
 // This file's functions.
 static u8 GetDomeTrainerMonIvs(u16 trainerId);

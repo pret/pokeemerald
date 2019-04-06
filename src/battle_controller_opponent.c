@@ -10,7 +10,7 @@
 #include "battle_tower.h"
 #include "battle_tv.h"
 #include "bg.h"
-#include "data2.h"
+#include "data.h"
 #include "frontier_util.h"
 #include "item.h"
 #include "link.h"
@@ -35,8 +35,6 @@
 #include "trainer_hill.h"
 
 extern struct MusicPlayerInfo gMPlayInfo_BGM;
-
-extern const struct CompressedSpritePalette gTrainerFrontPicPaletteTable[];
 
 // this file's functions
 static void OpponentHandleGetMonData(void);

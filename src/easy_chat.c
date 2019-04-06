@@ -2,7 +2,7 @@
 #include "alloc.h"
 #include "bard_music.h"
 #include "bg.h"
-#include "data2.h"
+#include "data.h"
 #include "decompress.h"
 #include "dewford_trend.h"
 #include "dynamic_placeholder_text_util.h"
