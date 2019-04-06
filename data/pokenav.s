@@ -1436,7 +1436,7 @@ gUnknown_08622850:: @ 8622850
 	spr_template 8, 13, gUnknown_08622848, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
 
 gUnknown_08622868:: @ 8622868
-	.incbin "graphics/pokenav/zoom_tiles.gbapal"
+	.incbin "graphics/pokenav/8622868.gbapal"
 
 gUnknown_08622888:: @ 8622888
 	.incbin "graphics/pokenav/zoom_tiles.4bpp.lz"
