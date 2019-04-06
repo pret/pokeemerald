@@ -946,7 +946,7 @@ sub_81C9958: @ 81C9958
 	strb r0, [r4, 0xC]
 	ldr r0, =sub_81C9A10
 	movs r1, 0x1
-	bl sub_81C7078
+	bl CreateLoopedTask
 	str r0, [r4, 0x4]
 	ldr r0, =sub_81C99FC
 	str r0, [r4]
@@ -970,7 +970,7 @@ sub_81C9990: @ 81C9990
 	adds r4, r0
 	ldr r0, [r4]
 	movs r1, 0x1
-	bl sub_81C7078
+	bl CreateLoopedTask
 	str r0, [r5, 0x4]
 	ldr r0, =sub_81C99FC
 	str r0, [r5]
@@ -1015,7 +1015,7 @@ sub_81C99FC: @ 81C99FC
 	movs r0, 0x2
 	bl GetSubstructPtr
 	ldr r0, [r0, 0x4]
-	bl sub_81C70D8
+	bl IsLoopedTaskActive
 	pop {r1}
 	bx r1
 	thumb_func_end sub_81C99FC
@@ -3145,7 +3145,7 @@ sub_81CAAE8: @ 81CAAE8
 	str r0, [r4, 0x10]
 	ldr r0, =sub_81CAD20
 	movs r1, 0x1
-	bl sub_81C7078
+	bl CreateLoopedTask
 	str r0, [r4, 0x14]
 	movs r0, 0x1
 	b _081CAB1E
@@ -3224,7 +3224,7 @@ _081CAB84:
 	ldr r0, =sub_81CAC04
 	str r0, [r4, 0x18]
 	strh r2, [r4]
-	bl sub_81C875C
+	bl GetSelectedMatchCall
 	lsls r0, 2
 	adds r1, r4, r0
 	ldrb r0, [r1, 0x1C]
@@ -4097,7 +4097,7 @@ sub_81CB1D0: @ 81CB1D0
 	movs r0, 0x5
 	bl GetSubstructPtr
 	adds r4, r0, 0
-	bl sub_81C875C
+	bl GetSelectedMatchCall
 	adds r1, r0, 0
 	lsls r0, r1, 2
 	adds r4, r0
@@ -4169,7 +4169,7 @@ sub_81CB260: @ 81CB260
 	strb r0, [r4, 0x19]
 	ldr r0, =sub_81CB324
 	movs r1, 0x1
-	bl sub_81C7078
+	bl CreateLoopedTask
 	str r0, [r4, 0x4]
 	ldr r0, =sub_81CB310
 	str r0, [r4]
@@ -4196,7 +4196,7 @@ sub_81CB29C: @ 81CB29C
 	adds r4, r0
 	ldr r0, [r4]
 	movs r1, 0x1
-	bl sub_81C7078
+	bl CreateLoopedTask
 	str r0, [r5, 0x4]
 	ldr r0, =sub_81CB310
 	str r0, [r5]
@@ -4244,7 +4244,7 @@ sub_81CB310: @ 81CB310
 	movs r0, 0x6
 	bl GetSubstructPtr
 	ldr r0, [r0, 0x4]
-	bl sub_81C70D8
+	bl IsLoopedTaskActive
 	pop {r1}
 	bx r1
 	thumb_func_end sub_81CB310
@@ -4471,7 +4471,7 @@ _081CB52A:
 	beq _081CB572
 	b _081CB580
 _081CB534:
-	bl sub_81C868C
+	bl MatchCall_MoveCursorDown
 	cmp r0, 0x1
 	beq _081CB54C
 	cmp r0, 0x1
@@ -4540,7 +4540,7 @@ _081CB5A2:
 	beq _081CB5EA
 	b _081CB5F8
 _081CB5AC:
-	bl sub_81C8658
+	bl MatchCall_MoveCursorUp
 	cmp r0, 0x1
 	beq _081CB5C4
 	cmp r0, 0x1
@@ -4609,7 +4609,7 @@ _081CB61A:
 	beq _081CB662
 	b _081CB670
 _081CB624:
-	bl sub_81C870C
+	bl MatchCall_PageDown
 	cmp r0, 0x1
 	beq _081CB63C
 	cmp r0, 0x1
@@ -4678,7 +4678,7 @@ _081CB692:
 	beq _081CB6DA
 	b _081CB6E8
 _081CB69C:
-	bl sub_81C86CC
+	bl MatchCall_PageUp
 	cmp r0, 0x1
 	beq _081CB6B4
 	cmp r0, 0x1
@@ -5118,7 +5118,7 @@ _081CB9E8:
 	.4byte _081CBA40
 	.4byte _081CBA4A
 _081CB9FC:
-	bl sub_81C8770
+	bl GetMatchCallListTopIndex
 	bl sub_81CB0E4
 	adds r5, r0, 0
 	cmp r5, 0
@@ -5250,7 +5250,7 @@ _081CBAF4:
 	.4byte _081CBB4C
 	.4byte _081CBB56
 _081CBB08:
-	bl sub_81C8770
+	bl GetMatchCallListTopIndex
 	bl sub_81CB128
 	adds r5, r0, 0
 	cmp r5, 0
@@ -5744,7 +5744,7 @@ sub_81CBEF8: @ 81CBEF8
 	sub sp, 0x2C
 	adds r5, r0, 0
 	adds r4, r1, 0
-	bl sub_81C875C
+	bl GetSelectedMatchCall
 	adds r0, r4
 	bl sub_81CAEA4
 	lsls r0, 16
@@ -6058,7 +6058,7 @@ sub_81CC158: @ 81CC158
 	push {r4,r5,lr}
 	sub sp, 0xC
 	adds r4, r0, 0
-	bl sub_81C875C
+	bl GetSelectedMatchCall
 	adds r1, r4, 0
 	adds r1, 0xF
 	bl sub_81CAF78
@@ -6344,7 +6344,7 @@ sub_81CC370: @ 81CC370
 sub_81CC39C: @ 81CC39C
 	push {r4-r7,lr}
 	adds r7, r0, 0
-	bl sub_81C875C
+	bl GetSelectedMatchCall
 	bl sub_81CAF04
 	cmp r0, 0
 	blt _081CC400
@@ -6666,7 +6666,7 @@ sub_81CC5F4: @ 81CC5F4
 	beq _081CC624
 	ldr r0, =sub_81CC6F4
 	movs r1, 0x1
-	bl sub_81C7078
+	bl CreateLoopedTask
 	str r0, [r4, 0x4]
 	ldr r0, =sub_81CC6BC
 	str r0, [r4]
@@ -6693,7 +6693,7 @@ sub_81CC62C: @ 81CC62C
 	adds r4, r0
 	ldr r0, [r4]
 	movs r1, 0x1
-	bl sub_81C7078
+	bl CreateLoopedTask
 	str r0, [r5, 0x4]
 	ldr r0, =sub_81CC6BC
 	str r0, [r5]
@@ -6753,7 +6753,7 @@ sub_81CC6BC: @ 81CC6BC
 	movs r0, 0x4
 	bl GetSubstructPtr
 	ldr r0, [r0, 0x4]
-	bl sub_81C70D8
+	bl IsLoopedTaskActive
 	pop {r1}
 	bx r1
 	thumb_func_end sub_81CC6BC
@@ -7518,7 +7518,7 @@ sub_81CCD10: @ 81CCD10
 	push {lr}
 	ldr r0, =sub_81CCD34
 	movs r1, 0x1
-	bl sub_81C7078
+	bl CreateLoopedTask
 	pop {r0}
 	bx r0
 	.pool
@@ -7528,7 +7528,7 @@ sub_81CCD10: @ 81CCD10
 sub_81CCD24: @ 81CCD24
 	push {lr}
 	ldr r0, =sub_81CCD34
-	bl sub_81C7124
+	bl FuncIsActiveLoopedTask
 	pop {r1}
 	bx r1
 	.pool
@@ -9642,7 +9642,7 @@ sub_81CDDD4: @ 81CDDD4
 	strb r0, [r1]
 	ldr r0, =sub_81CDE94
 	movs r1, 0x1
-	bl sub_81C7078
+	bl CreateLoopedTask
 	str r0, [r4]
 	ldr r0, =0x00001810
 	adds r1, r4, r0
@@ -9675,7 +9675,7 @@ sub_81CDE2C: @ 81CDE2C
 	adds r4, r0
 	ldr r0, [r4]
 	movs r1, 0x1
-	bl sub_81C7078
+	bl CreateLoopedTask
 	str r0, [r5]
 	ldr r0, =0x00001810
 	adds r5, r0
@@ -9707,7 +9707,7 @@ sub_81CDE80: @ 81CDE80
 	movs r0, 0xC
 	bl GetSubstructPtr
 	ldr r0, [r0]
-	bl sub_81C70D8
+	bl IsLoopedTaskActive
 	pop {r1}
 	bx r1
 	thumb_func_end sub_81CDE80
@@ -11639,7 +11639,7 @@ sub_81CEF3C: @ 81CEF3C
 	str r0, [r4]
 	ldr r0, =sub_81CF11C
 	movs r1, 0x1
-	bl sub_81C7078
+	bl CreateLoopedTask
 	str r0, [r4, 0x4]
 	movs r0, 0
 	str r0, [r4, 0x18]
@@ -11726,7 +11726,7 @@ sub_81CF010: @ 81CF010
 	push {r4,lr}
 	adds r4, r0, 0
 	ldr r0, [r4, 0x4]
-	bl sub_81C70D8
+	bl IsLoopedTaskActive
 	cmp r0, 0
 	bne _081CF022
 	ldr r0, =sub_81CF030
@@ -11796,7 +11796,7 @@ _081CF088:
 	movs r0, 0
 	b _081CF0A6
 _081CF096:
-	bl sub_81C875C
+	bl GetSelectedMatchCall
 	ldr r1, [r4, 0x20]
 	strh r0, [r1, 0x2]
 	str r5, [r4, 0x1C]
@@ -11862,7 +11862,7 @@ sub_81CF0F0: @ 81CF0F0
 	movs r0, 0x7
 	bl GetSubstructPtr
 	adds r4, r0, 0
-	bl sub_81C875C
+	bl GetSelectedMatchCall
 	ldr r1, [r4, 0x20]
 	lsls r0, 2
 	adds r1, r0
@@ -12177,7 +12177,7 @@ sub_81CF330: @ 81CF330
 	beq _081CF360
 	ldr r0, =sub_81CF418
 	movs r1, 0x1
-	bl sub_81C7078
+	bl CreateLoopedTask
 	str r0, [r4, 0x4]
 	ldr r0, =sub_81CF3E4
 	str r0, [r4]
@@ -12206,7 +12206,7 @@ sub_81CF368: @ 81CF368
 	beq _081CF398
 	ldr r0, =sub_81CF418
 	movs r1, 0x1
-	bl sub_81C7078
+	bl CreateLoopedTask
 	str r0, [r4, 0x4]
 	ldr r0, =sub_81CF3E4
 	str r0, [r4]
@@ -12234,7 +12234,7 @@ sub_81CF3A0: @ 81CF3A0
 	adds r4, r0
 	ldr r0, [r4]
 	movs r1, 0x1
-	bl sub_81C7078
+	bl CreateLoopedTask
 	str r0, [r5, 0x4]
 	ldr r0, =sub_81CF3E4
 	str r0, [r5]
@@ -12261,7 +12261,7 @@ sub_81CF3E4: @ 81CF3E4
 	movs r0, 0x8
 	bl GetSubstructPtr
 	ldr r0, [r0, 0x4]
-	bl sub_81C70D8
+	bl IsLoopedTaskActive
 	pop {r1}
 	bx r1
 	thumb_func_end sub_81CF3E4
@@ -12451,7 +12451,7 @@ _081CF592:
 	beq _081CF5D8
 	b _081CF5E6
 _081CF59C:
-	bl sub_81C8658
+	bl MatchCall_MoveCursorUp
 	cmp r0, 0x1
 	beq _081CF5B4
 	cmp r0, 0x1
@@ -12519,7 +12519,7 @@ _081CF60A:
 	beq _081CF650
 	b _081CF65E
 _081CF614:
-	bl sub_81C868C
+	bl MatchCall_MoveCursorDown
 	cmp r0, 0x1
 	beq _081CF62C
 	cmp r0, 0x1
@@ -12587,7 +12587,7 @@ _081CF682:
 	beq _081CF6C8
 	b _081CF6D6
 _081CF68C:
-	bl sub_81C86CC
+	bl MatchCall_PageUp
 	cmp r0, 0x1
 	beq _081CF6A4
 	cmp r0, 0x1
@@ -12655,7 +12655,7 @@ _081CF6FA:
 	beq _081CF740
 	b _081CF74E
 _081CF704:
-	bl sub_81C870C
+	bl MatchCall_PageDown
 	cmp r0, 0x1
 	beq _081CF71C
 	cmp r0, 0x1
@@ -13008,7 +13008,7 @@ sub_81CF9BC: @ 81CF9BC
 	str r0, [r4]
 	ldr r0, =sub_81CFB74
 	movs r1, 0x1
-	bl sub_81C7078
+	bl CreateLoopedTask
 	str r0, [r4, 0x4]
 	movs r0, 0
 	str r0, [r4, 0x14]
@@ -13082,7 +13082,7 @@ sub_81CFA68: @ 81CFA68
 	push {r4,lr}
 	adds r4, r0, 0
 	ldr r0, [r4, 0x4]
-	bl sub_81C70D8
+	bl IsLoopedTaskActive
 	cmp r0, 0
 	bne _081CFA7A
 	ldr r0, =sub_81CFA88
@@ -13152,7 +13152,7 @@ _081CFAE0:
 	movs r0, 0
 	b _081CFAFE
 _081CFAEE:
-	bl sub_81C875C
+	bl GetSelectedMatchCall
 	ldr r1, [r4, 0x1C]
 	strh r0, [r1, 0x2]
 	str r5, [r4, 0x18]
@@ -13218,7 +13218,7 @@ sub_81CFB48: @ 81CFB48
 	movs r0, 0x9
 	bl GetSubstructPtr
 	adds r4, r0, 0
-	bl sub_81C875C
+	bl GetSelectedMatchCall
 	ldr r1, [r4, 0x1C]
 	lsls r0, 2
 	adds r1, r0
@@ -13563,7 +13563,7 @@ sub_81CFDD0: @ 81CFDD0
 	beq _081CFE00
 	ldr r0, =sub_81CFEB8
 	movs r1, 0x1
-	bl sub_81C7078
+	bl CreateLoopedTask
 	str r0, [r4, 0x4]
 	ldr r0, =sub_81CFE84
 	str r0, [r4]
@@ -13592,7 +13592,7 @@ sub_81CFE08: @ 81CFE08
 	beq _081CFE38
 	ldr r0, =sub_81CFEB8
 	movs r1, 0x1
-	bl sub_81C7078
+	bl CreateLoopedTask
 	str r0, [r4, 0x4]
 	ldr r0, =sub_81CFE84
 	str r0, [r4]
@@ -13620,7 +13620,7 @@ sub_81CFE40: @ 81CFE40
 	adds r4, r0
 	ldr r0, [r4]
 	movs r1, 0x1
-	bl sub_81C7078
+	bl CreateLoopedTask
 	str r0, [r5, 0x4]
 	ldr r0, =sub_81CFE84
 	str r0, [r5]
@@ -13647,7 +13647,7 @@ sub_81CFE84: @ 81CFE84
 	movs r0, 0xA
 	bl GetSubstructPtr
 	ldr r0, [r0, 0x4]
-	bl sub_81C70D8
+	bl IsLoopedTaskActive
 	pop {r1}
 	bx r1
 	thumb_func_end sub_81CFE84
@@ -13825,7 +13825,7 @@ _081D0016:
 	beq _081D005C
 	b _081D006A
 _081D0020:
-	bl sub_81C8658
+	bl MatchCall_MoveCursorUp
 	cmp r0, 0x1
 	beq _081D0038
 	cmp r0, 0x1
@@ -13893,7 +13893,7 @@ _081D008E:
 	beq _081D00D4
 	b _081D00E2
 _081D0098:
-	bl sub_81C868C
+	bl MatchCall_MoveCursorDown
 	cmp r0, 0x1
 	beq _081D00B0
 	cmp r0, 0x1
@@ -13961,7 +13961,7 @@ _081D0106:
 	beq _081D014C
 	b _081D015A
 _081D0110:
-	bl sub_81C86CC
+	bl MatchCall_PageUp
 	cmp r0, 0x1
 	beq _081D0128
 	cmp r0, 0x1
@@ -14029,7 +14029,7 @@ _081D017E:
 	beq _081D01C4
 	b _081D01D2
 _081D0188:
-	bl sub_81C870C
+	bl MatchCall_PageDown
 	cmp r0, 0x1
 	beq _081D01A0
 	cmp r0, 0x1
@@ -14169,7 +14169,7 @@ sub_81D024C: @ 81D024C
 sub_81D0288: @ 81D0288
 	push {r4,r5,lr}
 	adds r5, r0, 0
-	bl sub_81C875C
+	bl GetSelectedMatchCall
 	adds r4, r0, 0
 	bl sub_81CFB38
 	adds r2, r0, 0
@@ -15103,7 +15103,7 @@ sub_81D0978: @ 81D0978
 	beq _081D09A8
 	ldr r0, =sub_81D0A6C
 	movs r1, 0x1
-	bl sub_81C7078
+	bl CreateLoopedTask
 	str r0, [r4, 0x4]
 	ldr r0, =sub_81D0A58
 	str r0, [r4]
@@ -15130,7 +15130,7 @@ sub_81D09B0: @ 81D09B0
 	adds r4, r0
 	ldr r0, [r4]
 	movs r1, 0x1
-	bl sub_81C7078
+	bl CreateLoopedTask
 	str r0, [r5, 0x4]
 	ldr r0, =sub_81D0A58
 	str r0, [r5]
@@ -15196,7 +15196,7 @@ sub_81D0A58: @ 81D0A58
 	movs r0, 0xE
 	bl GetSubstructPtr
 	ldr r0, [r0, 0x4]
-	bl sub_81C70D8
+	bl IsLoopedTaskActive
 	pop {r1}
 	bx r1
 	thumb_func_end sub_81D0A58
