@@ -854,7 +854,7 @@ void GetCurSecretBaseRegistrationValidity(void)
 {
     if (IsSecretBaseRegistered(VarGet(VAR_CURRENT_SECRET_BASE)) == TRUE)
         gSpecialVar_Result = 1;
-    else if (GetNumRegisteredSecretBases() > 9)
+    else if (GetNumRegisteredSecretBases() >= 10)
         gSpecialVar_Result = 2;
     else
         gSpecialVar_Result = 0;
@@ -868,7 +868,7 @@ void ToggleCurSecretBaseRegistry(void)
 
 void ShowSecretBaseDecorationMenu(void)
 {
-    CreateTask(sub_8126AD8, 0);
+    CreateTask(DoSecretBaseDecorationMenu, 0);
 }
 
 void ShowSecretBaseRegistryMenu(void)

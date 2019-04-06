@@ -142,7 +142,7 @@ void ScrSpecial_DoesPlayerHaveNoDecorations(void)
 
     for (i = 0; i < 8; i++)
     {
-        if (CountDecorationCategoryN(i))
+        if (GetNumOwnedDecorationsInCategory(i))
         {
             gSpecialVar_Result = FALSE;
             return;
@@ -157,21 +157,21 @@ void ScrSpecial_IsDecorationFull(void)
     if (gDecorations[gSpecialVar_0x8004].category != gDecorations[gSpecialVar_0x8006].category
         && GetFirstEmptyDecorSlot(gDecorations[gSpecialVar_0x8004].category) == -1)
     {
-        sub_8127250(gStringVar2, gDecorations[gSpecialVar_0x8004].category);
+        CopyDecorationCategoryName(gStringVar2, gDecorations[gSpecialVar_0x8004].category);
         gSpecialVar_Result = TRUE;
     }
 }
 
 void ScrSpecial_TraderMenuGiveDecoration(void)
 {
-    CreateTask(sub_8127208, 0);
+    CreateTask(ShowDecorationCategoriesWindow, 0);
 }
 
 void sub_8133DA0(u8 taskId)
 {
     if (IsSelectedDecorInThePC() == TRUE)
     {
-        gSpecialVar_0x8006 = gCurDecorInventoryItems[gCurDecorationIndex];
+        gSpecialVar_0x8006 = gCurDecorationItems[gCurDecorationIndex];
         StringCopy(gStringVar3, gDecorations[gSpecialVar_0x8004].name);
         StringCopy(gStringVar2, gDecorations[gSpecialVar_0x8006].name);
     }
@@ -183,7 +183,7 @@ void sub_8133DA0(u8 taskId)
     EnableBothScriptContexts();
 }
 
-void sub_8133E1C(u8 taskId)
+void ExitTraderMenu(u8 taskId)
 {
     gSpecialVar_0x8006 = 0;
     DestroyTask(taskId);
