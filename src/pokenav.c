@@ -34,7 +34,7 @@ struct UnknownSubSubStruct_0203CF40 {
     u8 unk2;
     u8 unk3;
     u8 unk4;
-    u8 unk5;
+    u8 fontId;
     u16 unk6;
     u16 windowId;
     u16 unkA;
@@ -80,12 +80,12 @@ struct UnknownInnerStruct_81C81D4
     u32 unk28;
     s32 unk2C;
     u32 unk30;
-    void (*unk34)(u32, char*);
+    void (*unk34)(u32, u8*);
     void (*unk38)(u16, u32, u32);
-    u32 unk3C;
-    u32 unk40;
-    u32 unk44;
-    char unk48[0x40];
+    struct Sprite *rightArrow;
+    struct Sprite *upArrow;
+    struct Sprite *downArrow;
+    u8 unkTextBuffer[0x40];
 };
 
 // Generally at index 0x11 (17)
@@ -117,12 +117,27 @@ struct CompressedSpritePalette_
     u32 tag;
 };
 
+struct UnknownStruct_81C9160
+{
+    u32 unk0;
+    u16 unk4;
+    u16 unk6;
+    u8 unk8;
+    u8 unk9;
+    u8 unkA;
+    u8 unkB;
+    u8 unkC;
+    u8 unkD;
+    u8 unkE;
+    void (*unk10)(u32, u8 *a1);
+    void (*unk14)(u16 a0, u32 a1, u32 a2);
+};
+
 extern u32 sub_81C9430(void);
 extern void sub_81CAADC(void);
 extern u32 sub_81C99D4(void);
 extern void sub_8199D98(void);
 extern void sub_81C7D28(void);
-extern void sub_81C8FE0(void);
 extern u32 sub_81C9298(void);
 extern u32 sub_81C941C(void);
 extern u32 sub_81C9924(void);
@@ -180,16 +195,22 @@ extern u32 sub_81D04B8(void);
 extern u32 sub_81D09F4(void);
 extern u32 sub_81CFA04(void);
 extern u32 sub_81CFE08(void);
-extern u32 sub_81C91AC(struct UnknownSubStruct_81C81D4 *a0, const void *a1, void *a2, s32 a3);
-extern u32 sub_81C9160(struct UnknownSubSubStruct_81C81D4 *a0, void *a1);
-extern void sub_81C8ED0(void);
 extern void sub_81C7CB4(struct Sprite* sprite);
 extern void sub_81CBD48(u16 windowId, u32 a1);
-extern void sub_81C8EF8(struct UnknownSubSubStruct_81C81D4 *a0, struct UnknownInnerStruct_81C81D4 *a1);
-extern void sub_81C9008(struct UnknownInnerStruct_81C81D4 *a0, u32 a1);
-extern void sub_81C8DBC(struct UnknownInnerStruct_81C81D4 *a0, u32 a1);
-extern void sub_81C8E54(struct UnknownSubSubStruct_81C81D4 *a0, struct UnknownInnerStruct_81C81D4 *a1, u32 a2);
+extern u8 *sub_81CAFD8(u16 a0, u32 a1);
+extern void sub_81DB620(u32 windowId, u32 a1, u32 a2, u32 a3, u32 a4);
 
+u32 sub_81C91AC(struct UnknownInnerStruct_81C81D4 *a0, const struct BgTemplate *a1, struct UnknownStruct_81C9160 *a2, s32 a3);
+void sub_81C9160(struct UnknownSubSubStruct_81C81D4 *a0, struct UnknownStruct_81C9160 *a1);
+void SpriteCB_MatchCallUpArrow(struct Sprite *sprite);
+void SpriteCB_MatchCallDownArrow(struct Sprite *sprite);
+void SpriteCB_MatchCallRightArrow(struct Sprite *sprite);
+void ToggleMatchCallArrows(struct UnknownInnerStruct_81C81D4 *a0, u32 a1);
+void sub_81C8FE0(struct UnknownInnerStruct_81C81D4 *a0);
+void sub_81C8EF8(struct UnknownSubSubStruct_81C81D4 *a0, struct UnknownInnerStruct_81C81D4 *a1);
+void sub_81C8ED0(void);
+void sub_81C8E54(struct UnknownSubSubStruct_81C81D4 *a0, struct UnknownInnerStruct_81C81D4 *a1, u32 a2);
+void PrintMatchCallFieldNames(struct UnknownInnerStruct_81C81D4 *a0, u32 a1);
 void sub_81C8D4C(struct UnknownSubSubStruct_81C81D4 *a0, struct UnknownInnerStruct_81C81D4 *a1);
 void sub_81C8CB4(struct UnknownSubSubStruct_81C81D4 *a0, struct UnknownInnerStruct_81C81D4 *a1);
 void sub_81C8B70(struct UnknownSubSubStruct_0203CF40 *a0, u32 a1, u32 a2);
@@ -636,11 +657,102 @@ static const struct SpriteTemplate sUnknown_0861FB44 =
     .callback = SpriteCallbackDummy
 };
 
+static const u16 sMatchcallArrowPaletteData[] = INCBIN_U16("graphics/pokenav/arrows_matchcall.gbapal");
+static const u32 sMatchcallArrowSpriteSheetData[] = INCBIN_U32("graphics/pokenav/arrows_matchcall.4bpp.lz");
+
+static const u8 sPokenavColors_0861FBE4[] =
+{
+    0, 2, 5
+};
+
+static const u8 *const sMatchCallFieldNames[] =
+{
+    gText_NavgearMatchCall_Strategy,
+    gText_NavgearMatchCall_TrainerPokemon,
+    gText_NavgearMatchCall_SelfIntroduction
+};
+
+static const u8 sMatchCallFieldColors[] =
+{
+    1, 4, 5
+};
+
+static const u8 sUnknown_0861FBF7[] =
+{
+    2, 4, 6, 7, 0
+};
+
+static const struct CompressedSpriteSheet sMatchcallArrowSpriteSheet[] =
+{
+    {
+        .data = sMatchcallArrowSpriteSheetData,
+        .size = 192,
+        .tag = 0xA
+    }
+};
+
+static const struct SpritePalette sMatchcallArrowPalette[] =
+{
+    {
+        .data = sMatchcallArrowPaletteData,
+        .tag = 0x14
+    },
+    {}
+};
+
+static const struct OamData sMatchCallRightArrowSpriteOam =
+{
+    .y = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .bpp = ST_OAM_4BPP,
+    .shape = 2, //SPRITE_SHAPE(16x8),
+    .x = 0,
+    .size = 0, //SPRITE_SIZE(16x8),
+    .tileNum = 0,
+    .priority = 2,
+    .paletteNum = 0
+};
+
+static const struct SpriteTemplate sMatchCallRightArrowSprite =
+{
+    .tileTag = 0xA,
+    .paletteTag = 0x14,
+    .oam = &sMatchCallRightArrowSpriteOam,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCB_MatchCallRightArrow
+};
+
+static const struct OamData sMatchCallUpDownArrowSpriteOam =
+{
+    .y = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .bpp = ST_OAM_4BPP,
+    .shape = 1, //SPRITE_SHAPE(8x16),
+    .x = 0,
+    .size = 0, //SPRITE_SIZE(8x16),
+    .tileNum = 0,
+    .priority = 2,
+    .paletteNum = 0
+};
+
+static const struct SpriteTemplate sMatchCallUpDownArrowSprite =
+{
+    .tileTag = 0xA,
+    .paletteTag = 0x14,
+    .oam = &sMatchCallUpDownArrowSpriteOam,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCallbackDummy
+};
+
 EWRAM_DATA u8 gUnknown_0203CF3C = 0;
 EWRAM_DATA struct UnknownStruct_0203CF40 *gUnknown_0203CF40 = NULL;
 EWRAM_DATA u32 gUnknown_0203CF44 = 0;
-
-extern const u8 gUnknown_0861FBE4[3];
 
 // code
 u32 sub_81C7078(u32 (*func)(s32), u32 priority)
@@ -1670,7 +1782,7 @@ void sub_81C817C(struct Sprite *sprite)
     }
 }
 
-bool32 sub_81C81D4(const void *arg0, void *arg1, s32 arg2)
+bool32 sub_81C81D4(const struct BgTemplate *arg0, struct UnknownStruct_81C9160 *arg1, s32 arg2)
 {
     u32 v1;
     struct UnknownSubStruct_81C81D4 *structPtr;
@@ -1682,7 +1794,7 @@ bool32 sub_81C81D4(const void *arg0, void *arg1, s32 arg2)
     
     sub_81C9160(&structPtr->unk888, arg1);
 
-    v1 = sub_81C91AC(structPtr, arg0, arg1, arg2);
+    v1 = sub_81C91AC(&structPtr->unk0, arg0, arg1, arg2);
     if (v1 == 0)
         return FALSE;
     
@@ -1700,7 +1812,7 @@ void sub_81C8234(void)
     struct UnknownSubStruct_81C81D4 *structPtr;
 
     structPtr = GetSubstructPtr(0x11);
-    sub_81C8FE0();
+    sub_81C8FE0(&structPtr->unk0);
     RemoveWindow(structPtr->unk0.unk0.windowId);
     FreeSubstruct(0x11);
 }
@@ -1807,13 +1919,13 @@ u32 sub_81C83F0(s32 a0)
     {
     case 0:
         v1 = (structPtr->unk0.unkA + structPtr->unk0.unkC + structPtr->unk10) & 0xF;
-        structPtr->unk34(structPtr->unk1C, structPtr->unk48);
+        structPtr->unk34(structPtr->unk1C, structPtr->unkTextBuffer);
         if (structPtr->unk38 != NULL)
             // Accessing unk0.windowId as if it were a u16...?
             // It's accessed as a u8 again in the very next line...
             structPtr->unk38(*(u16*)(&structPtr->unk0.windowId), structPtr->unk14, v1);
         
-        AddTextPrinterParameterized(structPtr->unk0.windowId, structPtr->unk0.unk5, structPtr->unk48, 8, (v1 << 4) | 1, 255, (void (*)(struct TextPrinterTemplate*, u16))a0);
+        AddTextPrinterParameterized(structPtr->unk0.windowId, structPtr->unk0.fontId, structPtr->unkTextBuffer, 8, (v1 << 4) + 1, 255, NULL);
         
         if (++structPtr->unk0.unkC >= structPtr->unk0.unkE)
         {
@@ -2245,7 +2357,7 @@ u32 sub_81C8870(s32 a0)
     switch (a0)
     {
     case 0:
-        sub_81C9008(&structPtr->unk0, 1);
+        ToggleMatchCallArrows(&structPtr->unk0, 1);
         // fall-through
     case 1:
         if (structPtr->unk89C != structPtr->unk888.unk6)
@@ -2299,19 +2411,19 @@ u32 sub_81C8958(s32 a0)
         sub_81C8CB4(&structPtr->unk888, &structPtr->unk0);
         break;
     case 1:
-        sub_81C8DBC(&structPtr->unk0, 0);
+        PrintMatchCallFieldNames(&structPtr->unk0, 0);
         break;
     case 2:
         sub_81C8E54(&structPtr->unk888, &structPtr->unk0, 0);
         break;
     case 3:
-        sub_81C8DBC(&structPtr->unk0, 1);
+        PrintMatchCallFieldNames(&structPtr->unk0, 1);
         break;
     case 4:
         sub_81C8E54(&structPtr->unk888, &structPtr->unk0, 1);
         break;
     case 5:
-        sub_81C8DBC(&structPtr->unk0, 2);
+        PrintMatchCallFieldNames(&structPtr->unk0, 2);
         break;
     case 6:
         sub_81C8E54(&structPtr->unk888, &structPtr->unk0, 2);
@@ -2409,7 +2521,7 @@ u32 sub_81C8A28(s32 a0)
             return 1;
         return 9;
     case 6:
-        sub_81C9008(subPtr0, 0);
+        ToggleMatchCallArrows(subPtr0, 0);
         return 4;
     }
 }
@@ -2483,24 +2595,249 @@ void sub_81C8C64(struct UnknownSubSubStruct_0203CF40 *a0, u32 a1)
 
 void sub_81C8CB4(struct UnknownSubSubStruct_81C81D4 *a0, struct UnknownInnerStruct_81C81D4 *a1)
 {
-    u8 buffer[ARRAY_COUNT(gUnknown_0861FBE4)];
+    u8 colors[3];
 
 
-    memcpy(buffer, gUnknown_0861FBE4, ARRAY_COUNT(gUnknown_0861FBE4));
+    memcpy(colors, sPokenavColors_0861FBE4, ARRAY_COUNT(sPokenavColors_0861FBE4));
 
-    a1->unk34(a0->unk10 + a0->unkC * a0->unk0, a1->unk48);
+    a1->unk34(a0->unk10 + a0->unkC * a0->unk0, a1->unkTextBuffer);
     a1->unk38(a1->unk0.windowId, a0->unk0, a1->unk0.unkA);
     FillWindowPixelRect(a1->unk0.windowId, PIXEL_FILL(4), 0, a1->unk0.unkA * 16, a1->unk0.unk4 * 8, 16);
-    AddTextPrinterParameterized3(a1->unk0.windowId, a1->unk0.unk5, 8, (a1->unk0.unkA * 16) + 1, buffer, TEXT_SPEED_FF, a1->unk48);
+    AddTextPrinterParameterized3(a1->unk0.windowId, a1->unk0.fontId, 8, (a1->unk0.unkA * 16) + 1, colors, TEXT_SPEED_FF, a1->unkTextBuffer);
     sub_81C8C64(&a1->unk0, 1);
     CopyWindowRectToVram(a1->unk0.windowId, 3, 0, a1->unk0.unkA * 2, a1->unk0.unk4, 2);
 }
 
 void sub_81C8D4C(struct UnknownSubSubStruct_81C81D4 *a0, struct UnknownInnerStruct_81C81D4 *a1)
 {
-    a1->unk34(a0->unk10 + a0->unkC * a0->unk0, a1->unk48);
+    a1->unk34(a0->unk10 + a0->unkC * a0->unk0, a1->unkTextBuffer);
     FillWindowPixelRect(a1->unk0.windowId, PIXEL_FILL(1), 0, a1->unk0.unkA * 16, a1->unk0.unk4 * 8, 16);
-    AddTextPrinterParameterized(a1->unk0.windowId, a1->unk0.unk5, a1->unk48, 8, a1->unk0.unkA * 16 + 1, TEXT_SPEED_FF, NULL);
+    AddTextPrinterParameterized(a1->unk0.windowId, a1->unk0.fontId, a1->unkTextBuffer, 8, a1->unk0.unkA * 16 + 1, TEXT_SPEED_FF, NULL);
     sub_81C8C64(&a1->unk0, 0);
     CopyWindowToVram(a1->unk0.windowId, 3);
+}
+
+void PrintMatchCallFieldNames(struct UnknownInnerStruct_81C81D4 *a0, u32 fieldId)
+{
+    const u8 *fieldNames[3];
+    u8 colors[3];
+    u32 r4;
+    u32 r5;
+    u32 tmp;
+    u32 one;
+
+    memcpy(fieldNames, sMatchCallFieldNames, sizeof(sMatchCallFieldNames));
+    memcpy(colors, sMatchCallFieldColors, sizeof(sMatchCallFieldColors));
+
+    r4 = a0->unk0.unkA;
+    tmp = fieldId * 2 + 1;
+    r4 += tmp;
+    r4 &= 0xF;
+    FillWindowPixelRect(a0->unk0.windowId, PIXEL_FILL(1), 0, r4 << 4, a0->unk0.unk4, 16);
+    
+    // This is a fake match. It should be this:
+    // AddTextPrinterParameterized3(a0->unk0.windowId, 7, 2, r4 << 4 + 1, colors, TEXT_SPEED_FF, fieldNames[fieldId]);
+    // But the original GCC does some clever reuse of the `1` constant that the current GCC doesn't.
+    one = 1;
+    AddTextPrinterParameterized3(a0->unk0.windowId, 7, 2, (r4 << 4) + one, colors, one - 2, fieldNames[fieldId]);
+    CopyWindowRectToVram(a0->unk0.windowId, 2, 0, r4 << 1, a0->unk0.unk4, 2);
+}
+
+void sub_81C8E54(struct UnknownSubSubStruct_81C81D4 *a0, struct UnknownInnerStruct_81C81D4 *a1, u32 a2)
+{
+    const u8 *str;
+    u32 r6;
+
+    r6 = (a1->unk0.unkA + sUnknown_0861FBF7[a2]) & 0xF;
+
+    str = sub_81CAFD8(a0->unk0, a2);
+    if (str != NULL) {
+        sub_81DB620(a1->unk0.windowId, 1, r6 * 2, a1->unk0.unk4 - 1, 2);
+        AddTextPrinterParameterized(a1->unk0.windowId, 7, str, 2, (r6 << 4) + 1, TEXT_SPEED_FF, NULL);
+        CopyWindowRectToVram(a1->unk0.windowId, 2, 0, r6 * 2, a1->unk0.unk4, 2);
+    }
+}
+
+void sub_81C8ED0(void)
+{
+    u32 i;
+    const struct CompressedSpriteSheet *ptr;
+    
+    for (i = 0, ptr = sMatchcallArrowSpriteSheet; i < ARRAY_COUNT(sMatchcallArrowSpriteSheet); ptr++, i++)
+    {
+        LoadCompressedSpriteSheet(ptr);
+    }
+    sub_81C795C(sMatchcallArrowPalette);
+}
+
+void sub_81C8EF8(struct UnknownSubSubStruct_81C81D4 *a0, struct UnknownInnerStruct_81C81D4 *a1)
+{
+    register u32 spriteId asm("r3");
+    s16 temp;
+
+    spriteId = (u8)CreateSprite(&sMatchCallRightArrowSprite, a1->unk0.unk2 * 8 + 3, (a1->unk0.unk3 + 1) * 8, 7);
+    a1->rightArrow = &gSprites[spriteId];
+
+    temp = a1->unk0.unk2 * 8 + (a1->unk0.unk4 - 1) * 4;
+    spriteId = (u8)CreateSprite(&sMatchCallUpDownArrowSprite, temp, a1->unk0.unk3 * 8 + a0->unk8 * 16, 7);
+    a1->downArrow = &gSprites[spriteId];
+    a1->downArrow->oam.tileNum += 2;
+    a1->downArrow->callback = SpriteCB_MatchCallDownArrow;
+
+    spriteId = (u8)CreateSprite(&sMatchCallUpDownArrowSprite, temp, a1->unk0.unk3 * 8, 7);
+    a1->upArrow = &gSprites[spriteId];
+    a1->upArrow->oam.tileNum += 4;
+    a1->upArrow->callback = SpriteCB_MatchCallUpArrow;
+}
+
+void sub_81C8FE0(struct UnknownInnerStruct_81C81D4 *a0)
+{
+    DestroySprite(a0->rightArrow);
+    DestroySprite(a0->upArrow);
+    DestroySprite(a0->downArrow);
+    FreeSpriteTilesByTag(0xA);
+    FreeSpritePaletteByTag(0x14);
+}
+
+void ToggleMatchCallArrows(struct UnknownInnerStruct_81C81D4 *a0, bool32 shouldHide)
+{
+    if (shouldHide)
+    {
+        a0->rightArrow->callback = SpriteCallbackDummy;
+        a0->upArrow->callback = SpriteCallbackDummy;
+        a0->downArrow->callback = SpriteCallbackDummy;
+    }
+    else
+    {
+        a0->rightArrow->callback = SpriteCB_MatchCallRightArrow;
+        a0->upArrow->callback = SpriteCB_MatchCallUpArrow;
+        a0->downArrow->callback = SpriteCB_MatchCallDownArrow;
+    }
+    a0->rightArrow->invisible = shouldHide;
+    a0->upArrow->invisible = shouldHide;
+    a0->downArrow->invisible = shouldHide;
+}
+
+void SpriteCB_MatchCallRightArrow(struct Sprite *sprite)
+{
+    struct UnknownSubStruct_81C81D4 *structPtr;
+    structPtr = GetSubstructPtr(0x11);
+    sprite->pos2.y = structPtr->unk888.unk6 << 4;
+}
+
+void SpriteCB_MatchCallDownArrow(struct Sprite *sprite)
+{
+    if (sprite->data[7] == 0 && sub_81C84C0())
+        sprite->invisible = FALSE;
+    else
+        sprite->invisible = TRUE;
+    
+    if (++sprite->data[0] > 3)
+    {
+        s16 offset;
+
+        sprite->data[0] = 0;
+        offset = (sprite->data[1] + 1) & 7;
+        sprite->data[1] = offset;
+        sprite->pos2.y = offset;
+    }
+}
+
+void SpriteCB_MatchCallUpArrow(struct Sprite *sprite)
+{
+    if (sprite->data[7] == 0 && sub_81C84A4())
+        sprite->invisible = FALSE;
+    else
+        sprite->invisible = TRUE;
+    
+    if (++sprite->data[0] > 3)
+    {
+        s16 offset;
+
+        sprite->data[0] = 0;
+        offset = (sprite->data[1] + 1) & 7;
+        sprite->data[1] = offset;
+        sprite->pos2.y = -1 * offset;
+    }
+}
+
+void ToggleMatchCallVerticalArrows(bool32 shouldHide)
+{
+    struct UnknownSubStruct_81C81D4 *structPtr;
+    structPtr = GetSubstructPtr(0x11);
+    structPtr->unk0.upArrow->data[7] = shouldHide;
+    structPtr->unk0.downArrow->data[7] = shouldHide;
+}
+
+void sub_81C9160(struct UnknownSubSubStruct_81C81D4 *a0, struct UnknownStruct_81C9160 *a1)
+{
+    u32 unused1 = a0->unk10 = a1->unk0;
+    u32 v0 = a1->unk6;
+    u32 zero = 0;
+    u32 unused2 = a0->unk0 = v0;
+    u32 v1 = a0->unk2 = a1->unk4;
+
+    a0->unkC = a1->unk8;
+    a0->unk8 = a1->unkC;
+    if (a0->unk8 >= (u16)v1)
+    {
+        a0->unk0 = 0;
+        a0->unk4 = 0;
+        a0->unk6 = v0; 
+    }
+    else
+    {
+        s32 v2;
+        a0->unk4 = a0->unk2 - a0->unk8;
+        v2 = a0->unk0 + a0->unk8;
+        if (v2 > a0->unk2) {
+            a0->unk6 = v2 - a0->unk2;
+            a0->unk0 = v0 - a0->unk6;
+        }
+        else
+        {
+            a0->unk6 = 0;
+        }
+    }
+}
+
+u32 sub_81C91AC(struct UnknownInnerStruct_81C81D4 *a0, const struct BgTemplate *a1, struct UnknownStruct_81C9160 *a2, s32 a3)
+{
+    register u32 raw_bg asm("r4") = ((a1->bg) << 30);
+    u8 bg = raw_bg >> 30;
+    u32 unknown = 0;
+    struct WindowTemplate template;
+    u8 bg_again;
+
+    a0->unk0.bg = bg;
+    a0->unk0.unk6 = a3;
+    a0->unk34 = a2->unk10;
+    a0->unk38 = a2->unk14;
+    a0->unk0.unk1 = a2->unkD;
+    a0->unk0.unk2 = a2->unk9;
+    a0->unk0.unk3 = a2->unkB;
+    a0->unk0.unk4 = a2->unkA;
+    a0->unk0.fontId = a2->unkE;
+    
+    template.bg = raw_bg >> 30;
+    template.tilemapLeft = a2->unk9;
+    template.tilemapTop = 0;
+    template.width = a2->unkA;
+    template.height = 32;
+    template.paletteNum = a2->unkD;
+    template.baseBlock = a3 + 2;
+
+    a0->unk0.windowId = AddWindow(&template);
+    if (a0->unk0.windowId == 0xFF)
+    {
+        return 0;
+    }
+    else
+    {
+        a0->unk0.unkA = unknown;
+        a0->rightArrow = NULL;
+        a0->upArrow = NULL;
+        a0->downArrow = NULL;
+        return 1;
+    }
 }

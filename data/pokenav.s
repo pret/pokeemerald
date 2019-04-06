@@ -3,60 +3,6 @@
 
 	.section .rodata
 
-gUnknown_0861FB5C:: @ 861FB5C
-	.incbin "graphics/pokenav/arrows_matchcall.gbapal"
-	
-gUnknown_0861FB7C:: @ 861FB7C
-	.incbin "graphics/pokenav/arrows_matchcall.4bpp.lz"
-
-gUnknown_0861FBE4:: @ 861FBE4
-	.byte 0x0
-	.byte 0x2
-	.byte 0x5
-	.byte 0x0
-
-gUnknown_0861FBE8:: @ 861FBE8
-	.4byte gUnknown_085EBEA8
-	.4byte gUnknown_085EBEB1
-	.4byte gUnknown_085EBEC3
-
-gUnknown_0861FBF4:: @ 861FBF4
-	.byte 0x1
-	.byte 0x4
-	.byte 0x5
-
-gUnknown_0861FBF7:: @ 861FBF7
-	.byte 0x2
-	.byte 0x4
-	.byte 0x6
-	.byte 0x7
-	.byte 0x0
-
-gUnknown_0861FBFC:: @ 861FBFC
-	.4byte gUnknown_0861FB7C
-	.2byte 0xC0
-	.2byte 0xA
-
-gUnknown_0861FC04:: @ 861FC04
-	.4byte gUnknown_0861FB5C
-	.4byte 0x14
-	.4byte 0x0
-	.4byte 0x0
-	
-gUnknown_0861FC14:: @ 861FC14
-	.4byte 0x8000
-	.4byte 0x800
-
-gUnknown_0861FC1C:: @ 861FC1C
-	spr_template 10, 20, gUnknown_0861FC14, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, sub_81C9080
-	
-gUnknown_0861FC34:: @ 861FC34
-	.4byte 0x4000
-	.4byte 0x800
-
-gUnknown_0861FC3C:: @ 861FC3C
-	spr_template 10, 20, gUnknown_0861FC34, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
-
 gUnknown_0861FC54:: @ 861FC54
 	.byte 2
 	.byte 3
@@ -1313,7 +1259,7 @@ gUnknown_0862278C:: @ 862278C
 	.4byte 0x20206A
 
 gUnknown_08622794:: @ 8622794
-	.4byte 0x3077
+	.4byte 0x00003077
 
 gUnknown_08622798:: @ 8622798
 	.4byte NULL

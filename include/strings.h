@@ -986,6 +986,9 @@ extern const u8 gText_SomeonesPC[];
 extern const u8 gText_PlayersPC[];
 extern const u8 gText_WhichPCShouldBeAccessed[];
 
+extern const u8 gText_NavgearMatchCall_Strategy[];
+extern const u8 gText_NavgearMatchCall_TrainerPokemon[];
+extern const u8 gText_NavgearMatchCall_SelfIntroduction[];
 extern const u8 gText_Navgear_ClearButtonList[];
 extern const u8 gText_NavgearMap_ZoomedOutButtons[];
 extern const u8 gText_NavgearMap_ZoomedInButtons[];
