@@ -3674,7 +3674,7 @@ void sub_8010168(void)
         gUnknown_03005000.unk_00 = sub_8010148;
 }
 
-void sub_8010198(void)
+void LinkRfu_FatalError(void)
 {
     sub_800D630();
     gUnknown_03005000.unk_ce4 = 1;

@@ -256,7 +256,7 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route123_EventScript_2906BB",
+      "script": "EventScript_CutTree",
       "flag": "FLAG_TEMP_11"
     },
     {
@@ -269,7 +269,7 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route123_EventScript_2906BB",
+      "script": "EventScript_CutTree",
       "flag": "FLAG_TEMP_12"
     },
     {
@@ -282,7 +282,7 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route123_EventScript_2906BB",
+      "script": "EventScript_CutTree",
       "flag": "FLAG_TEMP_13"
     },
     {
@@ -295,7 +295,7 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route123_EventScript_290FB0",
+      "script": "Route123_EventScript_ItemCalcium",
       "flag": "FLAG_ITEM_ROUTE_123_CALCIUM"
     },
     {
@@ -438,7 +438,7 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route123_EventScript_290FBD",
+      "script": "Route123_EventScript_ItemUltraBall",
       "flag": "FLAG_ITEM_ROUTE_123_ULTRA_BALL"
     },
     {
@@ -451,7 +451,7 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route123_EventScript_290FCA",
+      "script": "Route123_EventScript_ItemElixir",
       "flag": "FLAG_ITEM_ROUTE_123_ELIXIR"
     },
     {
@@ -542,7 +542,7 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route123_EventScript_290FD7",
+      "script": "Route123_EventScript_ItemPPUp",
       "flag": "FLAG_ITEM_ROUTE_123_PP_UP"
     },
     {
@@ -581,7 +581,7 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route123_EventScript_290FE4",
+      "script": "Route123_EventScript_ItemRevivalHerb",
       "flag": "FLAG_ITEM_ROUTE_123_REVIVAL_HERB"
     }
   ],

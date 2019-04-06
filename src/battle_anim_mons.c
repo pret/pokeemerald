@@ -3,7 +3,7 @@
 #include "battle_anim.h"
 #include "bg.h"
 #include "contest.h"
-#include "data2.h"
+#include "data.h"
 #include "decompress.h"
 #include "dma3.h"
 #include "gpu_regs.h"
@@ -27,11 +27,6 @@
 #define IS_DOUBLE_BATTLE() ((gBattleTypeFlags & BATTLE_TYPE_DOUBLE))
 
 extern const struct OamData gUnknown_0852497C;
-extern const struct MonCoords gMonFrontPicCoords[];
-extern const struct MonCoords gMonBackPicCoords[];
-extern const u8 gEnemyMonElevation[];
-extern const struct CompressedSpriteSheet gMonFrontPicTable[];
-extern const union AffineAnimCmd *gUnknown_082FF6C0[];
 
 static void sub_80A6FB4(struct Sprite *sprite);
 static void sub_80A7144(struct Sprite *sprite);

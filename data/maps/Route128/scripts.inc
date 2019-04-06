@@ -48,8 +48,8 @@ Route128_EventScript_1F6B57:: @ 81F6B57
 	removeobject 4
 	delay 100
 	setfieldeffectargument 0, 1
-	dofieldeffect 30
-	waitfieldeffect 30
+	dofieldeffect FLDEFF_NPCFLY_OUT
+	waitfieldeffect FLDEFF_NPCFLY_OUT
 	addobject 3
 	applymovement 3, Route128_Movement_1F6C87
 	waitmovement 0
@@ -69,10 +69,10 @@ Route128_EventScript_1F6B57:: @ 81F6B57
 	waitmovement 0
 	delay 50
 	setfieldeffectargument 0, 1
-	dofieldeffect 30
+	dofieldeffect FLDEFF_NPCFLY_OUT
 	delay 15
 	removeobject 3
-	waitfieldeffect 30
+	waitfieldeffect FLDEFF_NPCFLY_OUT
 	clearflag FLAG_HIDE_MAP_NAME_POPUP
 	setvar VAR_ROUTE128_STATE, 2
 	releaseall

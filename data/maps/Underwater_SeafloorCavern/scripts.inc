@@ -1,10 +1,10 @@
 Underwater_SeafloorCavern_MapScripts:: @ 823433B
 	map_script MAP_SCRIPT_ON_RESUME, Underwater_SeafloorCavern_MapScript1_2343D3
-	map_script MAP_SCRIPT_ON_TRANSITION, Underwater_SeafloorCavern_MapScript1_23434B
+	map_script MAP_SCRIPT_ON_TRANSITION, Underwater_SeafloorCavern_OnTransition
 	map_script MAP_SCRIPT_ON_LOAD, Underwater_SeafloorCavern_MapScript1_23435C
 	.byte 0
 
-Underwater_SeafloorCavern_MapScript1_23434B: @ 823434B
+Underwater_SeafloorCavern_OnTransition: @ 823434B
 	setflag FLAG_LANDMARK_SEAFLOOR_CAVERN
 	goto_if_set FLAG_KYOGRE_ESCAPED_SEAFLOOR_CAVERN, Underwater_SeafloorCavern_EventScript_234358
 	end
@@ -36,11 +36,11 @@ Underwater_SeafloorCavern_MapScript1_2343D3: @ 82343D3
 	setdivewarp MAP_SEAFLOOR_CAVERN_ENTRANCE, 255, 10, 17
 	end
 
-Underwater_SeafloorCavern_EventScript_2343DC:: @ 82343DC
-	msgbox Underwater_SeafloorCavern_Text_2343E5, MSGBOX_SIGN
+Underwater_SeafloorCavern_EventScript_CheckStolenSub:: @ 82343DC
+	msgbox Underwater_SeafloorCavern_Text_SubExplorer1, MSGBOX_SIGN
 	end
 
-Underwater_SeafloorCavern_Text_2343E5: @ 82343E5
+Underwater_SeafloorCavern_Text_SubExplorer1: @ 82343E5
 	.string "“SUBMARINE EXPLORER 1” is painted\n"
 	.string "on the hull.\p"
 	.string "This is the submarine TEAM AQUA\n"

@@ -537,7 +537,7 @@ bool8 RemoveBagItem(u16 itemId, u16 count)
         if (totalQuantity < count)
             return FALSE;   // We don't have enough of the item
 
-        if (CurrentMapIsSecretBase() == TRUE)
+        if (CurMapIsSecretBase() == TRUE)
         {
             VarSet(VAR_SECRET_BASE_LOW_TV_FLAGS, VarGet(VAR_SECRET_BASE_LOW_TV_FLAGS) | 0x200);
             VarSet(VAR_SECRET_BASE_LAST_ITEM_USED, itemId);

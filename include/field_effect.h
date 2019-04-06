@@ -1,9 +1,7 @@
 #ifndef GUARD_FIELD_EFFECTS_H
 #define GUARD_FIELD_EFFECTS_H
 
-extern const struct CompressedSpritePalette gTrainerFrontPicPaletteTable[2];
 extern const struct SpritePalette gNewGameBirchObjectPaletteInfo;
-extern const struct CompressedSpriteSheet gTrainerFrontPicTable[2];
 extern const struct SpriteTemplate gNewGameBirchObjectTemplate;
 extern const struct OamData gNewGameBirchOamAttributes;
 
@@ -53,4 +51,4 @@ void FreeResourcesAndDestroySprite(struct Sprite *sprite, u8 spriteId);
 u8 CreateMonSprite_PicBox(u16 species, s16 x, s16 y, u8 subpriority);
 void StartEscapeRopeFieldEffect(void);
 
-#endif //GUARD_FIELD_EFFECTS_H
+#endif // GUARD_FIELD_EFFECTS_H

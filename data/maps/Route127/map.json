@@ -71,7 +71,7 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route127_EventScript_291032",
+      "script": "Route127_EventScript_ItemZinc",
       "flag": "FLAG_ITEM_ROUTE_127_ZINC"
     },
     {
@@ -84,7 +84,7 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route127_EventScript_29103F",
+      "script": "Route127_EventScript_ItemCarbos",
       "flag": "FLAG_ITEM_ROUTE_127_CARBOS"
     },
     {
@@ -175,7 +175,7 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route127_EventScript_29104C",
+      "script": "Route127_EventScript_ItemRareCandy",
       "flag": "FLAG_ITEM_ROUTE_127_RARE_CANDY"
     }
   ],

@@ -402,7 +402,7 @@ static void sub_81D5084(u8 taskId)
         }
         break;
     case 15:
-        data->unkE = sub_81D3920(gDecompressionBuffer);
+        data->unkE = EReader_IsReceivedDataValid((struct EReaderTrainerHillSet *)gDecompressionBuffer);
         sub_800ABF4(data->unkE);
         data->unk8 = 16;
         break;
@@ -416,7 +416,7 @@ static void sub_81D5084(u8 taskId)
         }
         break;
     case 17:
-        if (sub_81D3AB0((struct Unk81D38FC *)&gDecompressionBuffer))
+        if (TryWriteTrainerHill((struct EReaderTrainerHillSet *)&gDecompressionBuffer))
         {
             AddTextPrinterToWindow1(gUnknown_085EE0FA);
             sub_81D505C(&data->unk0);

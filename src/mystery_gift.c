@@ -25,7 +25,7 @@
 #include "mevent_801BAAC.h"
 #include "save.h"
 #include "link.h"
-#include "mevent_server_ish.h"
+#include "mevent_client.h"
 #include "event_data.h"
 #include "link_rfu.h"
 #include "mevent_news.h"
@@ -815,11 +815,11 @@ static bool32 HandleLoadWonderCardOrNews(u8 * state, bool32 cardOrNews)
     case 0:
         if (cardOrNews == 0)
         {
-            InitWonderCardResources(sav1_get_mevent_buffer_1(), sav1_get_mevent_buffer_2());
+            InitWonderCardResources(GetSavedWonderCard(), sav1_get_mevent_buffer_2());
         }
         else
         {
-            InitWonderNewsResources(sav1_get_mevent_buffer_0());
+            InitWonderNewsResources(GetSavedWonderNews());
         }
         (*state)++;
         break;
@@ -1269,7 +1269,7 @@ void task00_mystery_gift(u8 taskId)
         {
             ClearScreenInBg0(TRUE);
             data->state = 7;
-            mevent_srv_ish_do_init(data->IsCardOrNews);
+            mevent_client_do_init(data->IsCardOrNews);
         }
         else if (gSpecialVar_Result == 5)
         {
@@ -1282,7 +1282,7 @@ void task00_mystery_gift(u8 taskId)
         data->state = 8;
         break;
     case  8:
-        switch (mevent_srv_ish_do_exec(&data->curPromptWindowId))
+        switch (mevent_client_do_exec(&data->curPromptWindowId))
         {
         case 6:
             task_add_05_task_del_08FA224_when_no_RfuFunc();
@@ -1290,8 +1290,8 @@ void task00_mystery_gift(u8 taskId)
             data->state = 13;
             break;
         case 5:
-            memcpy(data->buffer, mevent_srv_ish_get_buffer(), 0x40);
-            mevent_srv_ish_inc_flag();
+            memcpy(data->buffer, mevent_client_get_buffer(), 0x40);
+            mevent_client_inc_flag();
             break;
         case 3:
             data->state = 10;
@@ -1306,29 +1306,29 @@ void task00_mystery_gift(u8 taskId)
         }
         break;
     case  9:
-        switch ((u32)mevent_message_print_and_prompt_yes_no(&data->textState, &data->curPromptWindowId, FALSE, mevent_srv_ish_get_buffer()))
+        switch ((u32)mevent_message_print_and_prompt_yes_no(&data->textState, &data->curPromptWindowId, FALSE, mevent_client_get_buffer()))
         {
         case 0:
-            mevent_srv_ish_set_param(0);
-            mevent_srv_ish_inc_flag();
+            mevent_client_set_param(0);
+            mevent_client_inc_flag();
             data->state = 7;
             break;
         case 1:
-            mevent_srv_ish_set_param(1);
-            mevent_srv_ish_inc_flag();
+            mevent_client_set_param(1);
+            mevent_client_inc_flag();
             data->state = 7;
             break;
         case -1u:
-            mevent_srv_ish_set_param(1);
-            mevent_srv_ish_inc_flag();
+            mevent_client_set_param(1);
+            mevent_client_inc_flag();
             data->state = 7;
             break;
         }
         break;
     case 10:
-        if (MG_PrintTextOnWindow1AndWaitButton(&data->textState, mevent_srv_ish_get_buffer()))
+        if (MG_PrintTextOnWindow1AndWaitButton(&data->textState, mevent_client_get_buffer()))
         {
-            mevent_srv_ish_inc_flag();
+            mevent_client_inc_flag();
             data->state = 7;
         }
         break;
@@ -1342,19 +1342,19 @@ void task00_mystery_gift(u8 taskId)
             }
             else
             {
-                mevent_srv_ish_set_param(0);
-                mevent_srv_ish_inc_flag();
+                mevent_client_set_param(0);
+                mevent_client_inc_flag();
                 data->state = 7;
             }
             break;
         case 1:
-            mevent_srv_ish_set_param(1);
-            mevent_srv_ish_inc_flag();
+            mevent_client_set_param(1);
+            mevent_client_inc_flag();
             data->state = 7;
             break;
         case -1u:
-            mevent_srv_ish_set_param(1);
-            mevent_srv_ish_inc_flag();
+            mevent_client_set_param(1);
+            mevent_client_inc_flag();
             data->state = 7;
             break;
         }
@@ -1363,18 +1363,18 @@ void task00_mystery_gift(u8 taskId)
         switch ((u32)mevent_message_print_and_prompt_yes_no(&data->textState, &data->curPromptWindowId, FALSE, gText_HaventReceivedCardsGift))
         {
         case 0:
-            mevent_srv_ish_set_param(0);
-            mevent_srv_ish_inc_flag();
+            mevent_client_set_param(0);
+            mevent_client_inc_flag();
             data->state = 7;
             break;
         case 1:
-            mevent_srv_ish_set_param(1);
-            mevent_srv_ish_inc_flag();
+            mevent_client_set_param(1);
+            mevent_client_inc_flag();
             data->state = 7;
             break;
         case -1u:
-            mevent_srv_ish_set_param(1);
-            mevent_srv_ish_inc_flag();
+            mevent_client_set_param(1);
+            mevent_client_inc_flag();
             data->state = 7;
             break;
         }

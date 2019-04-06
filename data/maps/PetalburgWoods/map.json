@@ -24,7 +24,7 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "PetalburgWoods_EventScript_2906BB",
+      "script": "EventScript_CutTree",
       "flag": "FLAG_TEMP_11"
     },
     {
@@ -37,7 +37,7 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "PetalburgWoods_EventScript_2906BB",
+      "script": "EventScript_CutTree",
       "flag": "FLAG_TEMP_12"
     },
     {
@@ -76,7 +76,7 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "PetalburgWoods_EventScript_29110F",
+      "script": "PetalburgWoods_EventScript_ItemGreatBall",
       "flag": "FLAG_ITEM_PETALBURG_WOODS_GREAT_BALL"
     },
     {
@@ -89,7 +89,7 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "PetalburgWoods_EventScript_291102",
+      "script": "PetalburgWoods_EventScript_ItemXAttack",
       "flag": "FLAG_ITEM_PETALBURG_WOODS_X_ATTACK"
     },
     {
@@ -102,7 +102,7 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "PetalburgWoods_EventScript_29111C",
+      "script": "PetalburgWoods_EventScript_ItemEther",
       "flag": "FLAG_ITEM_PETALBURG_WOODS_ETHER"
     },
     {
@@ -167,7 +167,7 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "PetalburgWoods_EventScript_291129",
+      "script": "PetalburgWoods_EventScript_ItemParalyzeHeal",
       "flag": "FLAG_ITEM_PETALBURD_WOODS_PARALYZE_HEAL"
     },
     {

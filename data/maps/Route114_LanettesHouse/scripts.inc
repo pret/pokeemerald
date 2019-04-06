@@ -1,8 +1,8 @@
 Route114_LanettesHouse_MapScripts:: @ 822B2C8
-	map_script MAP_SCRIPT_ON_TRANSITION, Route114_LanettesHouse_MapScript1_22B2CE
+	map_script MAP_SCRIPT_ON_TRANSITION, Route114_LanettesHouse_OnTransition
 	.byte 0
 
-Route114_LanettesHouse_MapScript1_22B2CE: @ 822B2CE
+Route114_LanettesHouse_OnTransition: @ 822B2CE
 	setflag FLAG_LANDMARK_LANETTES_HOUSE
 	end
 

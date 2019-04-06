@@ -191,7 +191,7 @@ static const u8 sTileBitAttributes[] =
     [MB_SECRET_BASE_UNUSED] = TILE_ATTRIBUTES(TRUE, FALSE, FALSE),
     [MB_BLOCK_DECORATION] = TILE_ATTRIBUTES(TRUE, FALSE, FALSE),
     [MB_SECRET_BASE_DECORATION] = TILE_ATTRIBUTES(FALSE, FALSE, FALSE),
-    [MB_SECRET_BASE_LARGE_MAT_EDGE] = TILE_ATTRIBUTES(TRUE, FALSE, FALSE),
+    [MB_HOLDS_SMALL_DECORATION] = TILE_ATTRIBUTES(TRUE, FALSE, FALSE),
     [MB_UNUSED_B6] = TILE_ATTRIBUTES(FALSE, FALSE, FALSE),
     [MB_SECRET_BASE_NORTH_WALL] = TILE_ATTRIBUTES(FALSE, FALSE, FALSE),
     [MB_SECRET_BASE_BALLOON] = TILE_ATTRIBUTES(TRUE, FALSE, FALSE),
@@ -205,7 +205,7 @@ static const u8 sTileBitAttributes[] =
     [MB_IMPASSABLE_SOUTH_AND_NORTH] = TILE_ATTRIBUTES(TRUE, FALSE, FALSE),
     [MB_IMPASSABLE_WEST_AND_EAST] = TILE_ATTRIBUTES(TRUE, FALSE, FALSE),
     [MB_SECRET_BASE_HOLE] = TILE_ATTRIBUTES(TRUE, FALSE, FALSE),
-    [MB_LARGE_MAT_CENTER] = TILE_ATTRIBUTES(TRUE, FALSE, FALSE),
+    [MB_HOLDS_LARGE_DECORATION] = TILE_ATTRIBUTES(TRUE, FALSE, FALSE),
     [MB_SECRET_BASE_TV_SHIELD] = TILE_ATTRIBUTES(TRUE, FALSE, FALSE),
     [MB_PLAYER_ROOM_PC_ON] = TILE_ATTRIBUTES(TRUE, FALSE, FALSE),
     [MB_C6] = TILE_ATTRIBUTES(FALSE, FALSE, FALSE),
@@ -751,17 +751,17 @@ bool8 Unref_MetatileBehavior_IsSecretBaseUnused_B2_2(u8 metatileBehavior)
         return FALSE;
 }
 
-bool8 MetatileBehavior_IsSecretBaseLargeMatEdge(u8 metatileBehavior)
+bool8 MetatileBehavior_HoldsSmallDecoration(u8 metatileBehavior)
 {
-    if (metatileBehavior == MB_SECRET_BASE_LARGE_MAT_EDGE)
+    if (metatileBehavior == MB_HOLDS_SMALL_DECORATION)
         return TRUE;
     else
         return FALSE;
 }
 
-bool8 MetatileBehavior_IsLargeMatCenter(u8 metatileBehavior)
+bool8 MetatileBehavior_HoldsLargeDecoration(u8 metatileBehavior)
 {
-    if (metatileBehavior == MB_LARGE_MAT_CENTER)
+    if (metatileBehavior == MB_HOLDS_LARGE_DECORATION)
         return TRUE;
     else
         return FALSE;

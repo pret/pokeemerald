@@ -1,10 +1,14 @@
 #include "global.h"
-#include "data2.h"
+#include "data.h"
 #include "decompress.h"
 #include "sprite.h"
 #include "util.h"
 
 static void sub_8075370(struct Sprite *);
+
+extern const struct CompressedSpriteSheet gUnknown_0831C620;
+extern const struct CompressedSpritePalette gUnknown_0831C628;
+extern const struct SpriteTemplate gUnknown_0831C688;
 
 u8 sub_807521C(s16 x, s16 y, u8 a3)
 {

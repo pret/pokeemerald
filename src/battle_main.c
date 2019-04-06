@@ -13,7 +13,7 @@
 #include "battle_tower.h"
 #include "berry.h"
 #include "bg.h"
-#include "data2.h"
+#include "data.h"
 #include "decompress.h"
 #include "dma3.h"
 #include "event_data.h"

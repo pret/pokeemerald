@@ -2,7 +2,7 @@
 #include "alloc.h"
 #include "battle_main.h"
 #include "contest_effect.h"
-#include "data2.h"
+#include "data.h"
 #include "decompress.h"
 #include "gpu_regs.h"
 #include "graphics.h"
@@ -38,7 +38,7 @@ static void sub_81D2634(struct UnknownStruct_81D1ED4 *a0);
 static void MoveRelearnerCursorCallback(s32 itemIndex, bool8 onInit, struct ListMenu *list);
 static void nullsub_79(void);
 static void sub_81D3408(struct Sprite *sprite);
-/*static*/ void sub_81D3564(struct Sprite *sprite);
+static void sub_81D3564(struct Sprite *sprite);
 static void sub_81D35E8(struct Sprite *sprite);
 
 static const struct WindowTemplate sUnknown_086253E8[] =
@@ -259,7 +259,7 @@ static void sub_81D1D44(u8 windowId, s32 itemId, u8 y)
     u8 buffer[30];
     u16 length;
 
-	if (itemId == LIST_CANCEL)
+    if (itemId == LIST_CANCEL)
         return;
 
     StringCopy(buffer, gSaveBlock1Ptr->mail[6 + itemId].playerName);
@@ -1473,9 +1473,77 @@ static void sub_81D32F4(struct Sprite *sprite)
     }
 }
 
-// Todo: Move these variables to C.
-extern const s16 gUnknown_08625B2C[][2];
-extern const struct SpriteTemplate gUnknown_08625B14;
+static const struct OamData sOamData_8625AD0 =
+{
+    .y = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .bpp = ST_OAM_4BPP,
+    .shape = SPRITE_SHAPE(16x16),
+    .x = 0,
+    .size = SPRITE_SIZE(16x16),
+    .priority = 0,
+};
+
+static const union AnimCmd sSpriteAnim_8625AD8[] =
+{
+    ANIMCMD_FRAME(0, 5),
+    ANIMCMD_FRAME(4, 5),
+    ANIMCMD_FRAME(8, 5),
+    ANIMCMD_FRAME(12, 5),
+    ANIMCMD_FRAME(16, 5),
+    ANIMCMD_FRAME(20, 5),
+    ANIMCMD_FRAME(24, 5),
+    ANIMCMD_END
+};
+
+static const union AnimCmd *const sSpriteAnimTable_8625AF8[] =
+{
+    sSpriteAnim_8625AD8,
+    sSpriteAnim_8625AD8 + 2,
+};
+
+// unused
+static const union AnimCmd *const sSpriteAnimTable_8625B00[] =
+{
+    sSpriteAnim_8625AD8 + 4,
+    sSpriteAnim_8625AD8 + 6,
+};
+
+// unused
+static const union AnimCmd *const sSpriteAnimTable_8625B08[] =
+{
+    sSpriteAnim_8625AD8 + 8,
+    sSpriteAnim_8625AD8 + 10,
+};
+
+// unused
+static const union AnimCmd *const *const sUnknown_08625B10 = sSpriteAnimTable_8625B08;
+
+const struct SpriteTemplate gUnknown_08625B14 =
+{
+    .tileTag = 104,
+    .paletteTag = 104,
+    .oam = &sOamData_8625AD0,
+    .anims = sSpriteAnimTable_8625AF8,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_81D3564,
+};
+
+static const s16 gUnknown_08625B2C[][2] =
+{
+    {0,   -35},
+    {20,  -28},
+    {33,  -10},
+    {33,   10},
+    {20,   28},
+    {0,    35},
+    {-20,  28},
+    {-33,  10},
+    {-33, -10},
+    {-20, -28},
+};
 
 void sub_81D3314(struct Sprite *sprite)
 {
@@ -1594,7 +1662,7 @@ void sub_81D354C(struct Sprite **sprites)
     FreeSpritePaletteByTag(104);
 }
 
-/*static*/ void sub_81D3564(struct Sprite *sprite)
+static void sub_81D3564(struct Sprite *sprite)
 {
     if (sprite->data[1] != 0)
     {
@@ -1638,4 +1706,129 @@ static void sub_81D35E8(struct Sprite *sprite)
         gSprites[id].invisible = FALSE;
         id = gSprites[id].data[5];
     }
+}
+
+static const u8 *const sLvlUpStatStrings[] =
+{
+    gUnknown_085EEA46,
+    gUnknown_085EEA4E,
+    gUnknown_085EEA55,
+    gUnknown_085EEA63,
+    gUnknown_085EEA6B,
+    gUnknown_085EEA5D
+};
+
+void DrawLevelUpWindowPg1(u16 windowId, u16 *statsBefore, u16 *statsAfter, u8 bgClr, u8 fgClr, u8 shadowClr)
+{
+    u16 i, x;
+    s16 statsDiff[NUM_STATS];
+    u8 text[12];
+    u8 color[3];
+
+    FillWindowPixelBuffer(windowId, PIXEL_FILL(bgClr));
+
+    statsDiff[0] = statsAfter[STAT_HP]    - statsBefore[STAT_HP];
+    statsDiff[1] = statsAfter[STAT_ATK]   - statsBefore[STAT_ATK];
+    statsDiff[2] = statsAfter[STAT_DEF]   - statsBefore[STAT_DEF];
+    statsDiff[3] = statsAfter[STAT_SPATK] - statsBefore[STAT_SPATK];
+    statsDiff[4] = statsAfter[STAT_SPDEF] - statsBefore[STAT_SPDEF];
+    statsDiff[5] = statsAfter[STAT_SPEED] - statsBefore[STAT_SPEED];
+
+    color[0] = bgClr;
+    color[1] = fgClr;
+    color[2] = shadowClr;
+
+    for (i = 0; i < NUM_STATS; i++)
+    {
+
+        AddTextPrinterParameterized3(windowId,
+                                     1,
+                                     0,
+                                     15 * i,
+                                     color,
+                                     -1,
+                                     sLvlUpStatStrings[i]);
+
+        StringCopy(text, (statsDiff[i] >= 0) ? gText_UnkCtrlF904 : gText_Dash);
+        AddTextPrinterParameterized3(windowId,
+                                     1,
+                                     56,
+                                     15 * i,
+                                     color,
+                                     -1,
+                                     text);
+        if (abs(statsDiff[i]) <= 9)
+            x = 18;
+        else
+            x = 12;
+
+        ConvertIntToDecimalStringN(text, abs(statsDiff[i]), STR_CONV_MODE_LEFT_ALIGN, 2);
+        AddTextPrinterParameterized3(windowId,
+                                     1,
+                                     56 + x,
+                                     15 * i,
+                                     color,
+                                     -1,
+                                     text);
+    }
+}
+
+void DrawLevelUpWindowPg2(u16 windowId, u16 *currStats, u8 bgClr, u8 fgClr, u8 shadowClr)
+{
+    u16 i, numDigits, x;
+    s16 stats[NUM_STATS];
+    u8 text[12];
+    u8 color[3];
+
+    FillWindowPixelBuffer(windowId, PIXEL_FILL(bgClr));
+
+    stats[0] = currStats[STAT_HP];
+    stats[1] = currStats[STAT_ATK];
+    stats[2] = currStats[STAT_DEF];
+    stats[3] = currStats[STAT_SPATK];
+    stats[4] = currStats[STAT_SPDEF];
+    stats[5] = currStats[STAT_SPEED];
+
+    color[0] = bgClr;
+    color[1] = fgClr;
+    color[2] = shadowClr;
+
+    for (i = 0; i < NUM_STATS; i++)
+    {
+        if (stats[i] > 99)
+            numDigits = 3;
+        else if (stats[i] > 9)
+            numDigits = 2;
+        else
+            numDigits = 1;
+
+        ConvertIntToDecimalStringN(text, stats[i], STR_CONV_MODE_LEFT_ALIGN, numDigits);
+        x = 6 * (4 - numDigits);
+
+        AddTextPrinterParameterized3(windowId,
+                                     1,
+                                     0,
+                                     15 * i,
+                                     color,
+                                     -1,
+                                     sLvlUpStatStrings[i]);
+
+        AddTextPrinterParameterized3(windowId,
+                                     1,
+                                     56 + x,
+                                     15 * i,
+                                     color,
+                                     -1,
+                                     text);
+    }
+}
+
+void GetMonLevelUpWindowStats(struct Pokemon *mon, u16 *currStats)
+{
+    currStats[STAT_HP]    = GetMonData(mon, MON_DATA_MAX_HP);
+    currStats[STAT_ATK]   = GetMonData(mon, MON_DATA_ATK);
+    currStats[STAT_DEF]   = GetMonData(mon, MON_DATA_DEF);
+    currStats[STAT_SPEED] = GetMonData(mon, MON_DATA_SPEED);
+    currStats[STAT_SPATK] = GetMonData(mon, MON_DATA_SPATK);
+    currStats[STAT_SPDEF] = GetMonData(mon, MON_DATA_SPDEF);
 }

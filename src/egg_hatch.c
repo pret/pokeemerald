@@ -33,6 +33,7 @@
 #include "naming_screen.h"
 #include "pokemon_storage_system.h"
 #include "field_screen_effect.h"
+#include "data.h"
 #include "battle.h" // to get rid of later
 
 struct EggHatchData
@@ -52,7 +53,6 @@ struct EggHatchData
     u8 textColor[3];
 };
 
-extern const struct CompressedSpriteSheet gMonFrontPicTable[];
 extern const u32 gUnknown_08331F60[]; // tilemap gameboy circle
 extern const u8 gText_HatchedFromEgg[];
 extern const u8 gText_NickHatchPrompt[];

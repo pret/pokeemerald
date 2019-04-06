@@ -8,7 +8,7 @@
 #include "battle_setup.h"
 #include "battle_tower.h"
 #include "bg.h"
-#include "data2.h"
+#include "data.h"
 #include "item_use.h"
 #include "link.h"
 #include "main.h"
@@ -26,9 +26,6 @@
 #include "constants/battle_anim.h"
 #include "constants/songs.h"
 #include "constants/trainers.h"
-
-extern const struct CompressedSpritePalette gTrainerFrontPicPaletteTable[];
-extern const struct CompressedSpritePalette gTrainerBackPicPaletteTable[];
 
 // this file's functions
 static void PlayerPartnerHandleGetMonData(void);

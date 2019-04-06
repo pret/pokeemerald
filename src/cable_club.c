@@ -4,7 +4,7 @@
 #include "battle_records.h"
 #include "battle_setup.h"
 #include "cable_club.h"
-#include "data2.h"
+#include "data.h"
 #include "event_data.h"
 #include "field_message_box.h"
 #include "field_specials.h"

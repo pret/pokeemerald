@@ -189,8 +189,8 @@ const union AffineAnimCmd *const gUnknown_08593300[] =
 
 const struct SpriteTemplate gUnknown_08593304 =
 {
-    .tileTag = ANIM_TAG_UNUSED_EXPLOSION,
-    .paletteTag = ANIM_TAG_UNUSED_EXPLOSION,
+    .tileTag = ANIM_TAG_EXPLOSION_6,
+    .paletteTag = ANIM_TAG_EXPLOSION_6,
     .oam = &gUnknown_08524974,
     .anims = gUnknown_085932E4,
     .images = NULL,
@@ -359,8 +359,8 @@ const struct SpriteTemplate gUnknown_08593488 =
 
 const struct SpriteTemplate gUnknown_085934A0 =
 {
-    .tileTag = ANIM_TAG_UNUSED_VOID_LINES,
-    .paletteTag = ANIM_TAG_UNUSED_VOID_LINES,
+    .tileTag = ANIM_TAG_VOID_LINES,
+    .paletteTag = ANIM_TAG_VOID_LINES,
     .oam = &gUnknown_08524A3C,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -3067,7 +3067,7 @@ void sub_8105CB4(u8 taskId)
         paletteNums[i] = AllocSpritePalette(ANIM_SPRITES_START - i);
 
     gMonSpritesGfxPtr->field_17C = AllocZeroed(0x2000);
-    LZDecompressWram(gBattleAnimSpritePalette_206, gMonSpritesGfxPtr->field_17C);
+    LZDecompressWram(gBattleAnimSpritePal_MusicNotes2, gMonSpritesGfxPtr->field_17C);
     for (i = 0; i < 3; i++)
         LoadPalette(&gMonSpritesGfxPtr->field_17C[i * 32], (u16)((paletteNums[i] << 4) + 0x100), 32);
 
@@ -3381,11 +3381,11 @@ void sub_81064F8(u8 taskId)
     SetGpuReg(REG_OFFSET_BG1VOFS, gBattle_BG1_Y);
     sub_80A6B30(&animBg);
     if (IsContest())
-        sub_80A6D60(&animBg, &gBattleAnimBackgroundTilemap_ScaryFaceContest, 0);
+        sub_80A6D60(&animBg, &gBattleAnimBgTilemap_ScaryFaceContest, 0);
     else if (GetBattlerSide(gBattleAnimTarget) == B_SIDE_OPPONENT)
-        sub_80A6D60(&animBg, &gBattleAnimBackgroundTilemap_ScaryFacePlayer, 0);
+        sub_80A6D60(&animBg, &gBattleAnimBgTilemap_ScaryFacePlayer, 0);
     else
-        sub_80A6D60(&animBg, &gBattleAnimBackgroundTilemap_ScaryFaceOpponent, 0);
+        sub_80A6D60(&animBg, &gBattleAnimBgTilemap_ScaryFaceOpponent, 0);
 
     AnimLoadCompressedBgGfx(animBg.bgId, gUnknown_08C249F8, animBg.tilesOffset);
     LoadCompressedPalette(gUnknown_08C249D0, animBg.paletteId * 16, 32);

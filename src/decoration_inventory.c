@@ -32,7 +32,7 @@ void SetDecorationInventoriesPointers(void)
     SET_DECOR_INV(5, gSaveBlock1Ptr->decorPoster);
     SET_DECOR_INV(6, gSaveBlock1Ptr->decorDoll);
     SET_DECOR_INV(7, gSaveBlock1Ptr->decorCushion);
-    sub_8126968();
+    InitDecorationContextItems();
 }
 
 static void ClearDecorationInventory(u8 idx)
@@ -120,7 +120,7 @@ bool8 DecorationCheckSpace(u8 decor)
 s8 DecorationRemove(u8 decor)
 {
     u8 i;
-    u8 idx;
+    u8 category;
 
     i = 0;
     if (decor == DECOR_NONE)
@@ -129,38 +129,38 @@ s8 DecorationRemove(u8 decor)
     }
     for (i = 0; i < gDecorationInventories[gDecorations[decor].category].size; i ++)
     {
-        idx = gDecorations[decor].category;
-        if (gDecorationInventories[idx].items[i] == decor)
+        category = gDecorations[decor].category;
+        if (gDecorationInventories[category].items[i] == decor)
         {
-            gDecorationInventories[idx].items[i] = DECOR_NONE;
-            CondenseDecorationCategoryN(idx);
+            gDecorationInventories[category].items[i] = DECOR_NONE;
+            CondenseDecorationsInCategory(category);
             return 1;
         }
     }
     return 0;
 }
 
-void CondenseDecorationCategoryN(u8 idx)
+void CondenseDecorationsInCategory(u8 category)
 {
     u8 i;
     u8 j;
     u8 tmp;
 
-    for (i = 0; i < gDecorationInventories[idx].size; i ++)
+    for (i = 0; i < gDecorationInventories[category].size; i ++)
     {
-        for (j = i + 1; j < gDecorationInventories[idx].size; j ++)
+        for (j = i + 1; j < gDecorationInventories[category].size; j ++)
         {
-            if (gDecorationInventories[idx].items[j] != DECOR_NONE && (gDecorationInventories[idx].items[i] == DECOR_NONE || gDecorationInventories[idx].items[i] > gDecorationInventories[idx].items[j]))
+            if (gDecorationInventories[category].items[j] != DECOR_NONE && (gDecorationInventories[category].items[i] == DECOR_NONE || gDecorationInventories[category].items[i] > gDecorationInventories[category].items[j]))
             {
-                tmp = gDecorationInventories[idx].items[i];
-                gDecorationInventories[idx].items[i] = gDecorationInventories[idx].items[j];
-                gDecorationInventories[idx].items[j] = tmp;
+                tmp = gDecorationInventories[category].items[i];
+                gDecorationInventories[category].items[i] = gDecorationInventories[category].items[j];
+                gDecorationInventories[category].items[j] = tmp;
             }
         }
     }
 }
 
-u8 CountDecorationCategoryN(u8 idx)
+u8 GetNumOwnedDecorationsInCategory(u8 idx)
 {
     u8 i;
     u8 ct;
@@ -176,15 +176,14 @@ u8 CountDecorationCategoryN(u8 idx)
     return ct;
 }
 
-u8 CountDecorations(void)
+u8 GetNumOwnedDecorations(void)
 {
-    u8 idx;
-    u8 ct;
+    u8 category;
+    u8 count;
 
-    ct = 0;
-    for (idx = 0; idx < 8; idx ++)
-    {
-        ct += CountDecorationCategoryN(idx);
-    }
-    return ct;
+    count = 0;
+    for (category = 0; category < DECORCAT_COUNT; category++)
+        count += GetNumOwnedDecorationsInCategory(category);
+
+    return count;
 }
