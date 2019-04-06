@@ -3381,11 +3381,11 @@ void sub_81064F8(u8 taskId)
     SetGpuReg(REG_OFFSET_BG1VOFS, gBattle_BG1_Y);
     sub_80A6B30(&animBg);
     if (IsContest())
-        sub_80A6D60(&animBg, &gBattleAnimBackgroundTilemap_ScaryFaceContest, 0);
+        sub_80A6D60(&animBg, &gBattleAnimBgTilemap_ScaryFaceContest, 0);
     else if (GetBattlerSide(gBattleAnimTarget) == B_SIDE_OPPONENT)
-        sub_80A6D60(&animBg, &gBattleAnimBackgroundTilemap_ScaryFacePlayer, 0);
+        sub_80A6D60(&animBg, &gBattleAnimBgTilemap_ScaryFacePlayer, 0);
     else
-        sub_80A6D60(&animBg, &gBattleAnimBackgroundTilemap_ScaryFaceOpponent, 0);
+        sub_80A6D60(&animBg, &gBattleAnimBgTilemap_ScaryFaceOpponent, 0);
 
     AnimLoadCompressedBgGfx(animBg.bgId, gUnknown_08C249F8, animBg.tilesOffset);
     LoadCompressedPalette(gUnknown_08C249D0, animBg.paletteId * 16, 32);
