@@ -61,9 +61,9 @@ struct NamingScreenData {
 
 enum
 {
+    PAGE_OTHERS,
     PAGE_UPPER,
     PAGE_LOWER,
-    PAGE_OTHERS,
 };
 
 enum

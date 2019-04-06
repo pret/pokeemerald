@@ -105,34 +105,34 @@ static const struct BallCaptureSuccessStarData sBallCaptureSuccessStarData[] =
 
 const struct CompressedSpriteSheet gBallOpenParticleSpritesheets[] =
 {
-    {gBattleAnimSpriteSheet_Particles, 0x100, 0xD6EC},
-    {gBattleAnimSpriteSheet_Particles, 0x100, 0xD6ED},
-    {gBattleAnimSpriteSheet_Particles, 0x100, 0xD6EE},
-    {gBattleAnimSpriteSheet_Particles, 0x100, 0xD6EF},
-    {gBattleAnimSpriteSheet_Particles, 0x100, 0xD6F0},
-    {gBattleAnimSpriteSheet_Particles, 0x100, 0xD6F1},
-    {gBattleAnimSpriteSheet_Particles, 0x100, 0xD6F2},
-    {gBattleAnimSpriteSheet_Particles, 0x100, 0xD6F3},
-    {gBattleAnimSpriteSheet_Particles, 0x100, 0xD6F4},
-    {gBattleAnimSpriteSheet_Particles, 0x100, 0xD6F5},
-    {gBattleAnimSpriteSheet_Particles, 0x100, 0xD6F6},
-    {gBattleAnimSpriteSheet_Particles, 0x100, 0xD6F7},
+    {gBattleAnimSpriteGfx_Particles, 0x100, 0xD6EC},
+    {gBattleAnimSpriteGfx_Particles, 0x100, 0xD6ED},
+    {gBattleAnimSpriteGfx_Particles, 0x100, 0xD6EE},
+    {gBattleAnimSpriteGfx_Particles, 0x100, 0xD6EF},
+    {gBattleAnimSpriteGfx_Particles, 0x100, 0xD6F0},
+    {gBattleAnimSpriteGfx_Particles, 0x100, 0xD6F1},
+    {gBattleAnimSpriteGfx_Particles, 0x100, 0xD6F2},
+    {gBattleAnimSpriteGfx_Particles, 0x100, 0xD6F3},
+    {gBattleAnimSpriteGfx_Particles, 0x100, 0xD6F4},
+    {gBattleAnimSpriteGfx_Particles, 0x100, 0xD6F5},
+    {gBattleAnimSpriteGfx_Particles, 0x100, 0xD6F6},
+    {gBattleAnimSpriteGfx_Particles, 0x100, 0xD6F7},
 };
 
 const struct CompressedSpritePalette gBallOpenParticlePalettes[] =
 {
-    {gBattleAnimSpritePalette_136, 0xD6EC},
-    {gBattleAnimSpritePalette_136, 0xD6ED},
-    {gBattleAnimSpritePalette_136, 0xD6EE},
-    {gBattleAnimSpritePalette_136, 0xD6EF},
-    {gBattleAnimSpritePalette_136, 0xD6F0},
-    {gBattleAnimSpritePalette_136, 0xD6F1},
-    {gBattleAnimSpritePalette_136, 0xD6F2},
-    {gBattleAnimSpritePalette_136, 0xD6F3},
-    {gBattleAnimSpritePalette_136, 0xD6F4},
-    {gBattleAnimSpritePalette_136, 0xD6F5},
-    {gBattleAnimSpritePalette_136, 0xD6F6},
-    {gBattleAnimSpritePalette_136, 0xD6F7},
+    {gBattleAnimSpritePal_CircleImpact, 0xD6EC},
+    {gBattleAnimSpritePal_CircleImpact, 0xD6ED},
+    {gBattleAnimSpritePal_CircleImpact, 0xD6EE},
+    {gBattleAnimSpritePal_CircleImpact, 0xD6EF},
+    {gBattleAnimSpritePal_CircleImpact, 0xD6F0},
+    {gBattleAnimSpritePal_CircleImpact, 0xD6F1},
+    {gBattleAnimSpritePal_CircleImpact, 0xD6F2},
+    {gBattleAnimSpritePal_CircleImpact, 0xD6F3},
+    {gBattleAnimSpritePal_CircleImpact, 0xD6F4},
+    {gBattleAnimSpritePal_CircleImpact, 0xD6F5},
+    {gBattleAnimSpritePal_CircleImpact, 0xD6F6},
+    {gBattleAnimSpritePal_CircleImpact, 0xD6F7},
 };
 
 const union AnimCmd gUnknown_085E5154[] =
@@ -357,8 +357,8 @@ const u16 gUnknown_085E5310[] =
 
 const struct SpriteTemplate gBattleAnimSpriteTemplate_85E5338 =
 {
-    .tileTag = ANIM_TAG_UNUSED_RED_BRICK,
-    .paletteTag = ANIM_TAG_UNUSED_RED_BRICK,
+    .tileTag = ANIM_TAG_RED_BRICK,
+    .paletteTag = ANIM_TAG_RED_BRICK,
     .oam = &gUnknown_0852490C,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -1314,7 +1314,7 @@ static void sub_8171BAC(struct Sprite *sprite)
 
     if (sprite->animEnded)
         sprite->invisible = 1;
-    
+
     if (gSprites[gBattlerSpriteIds[gBattleAnimTarget]].affineAnimEnded)
     {
         StartSpriteAffineAnim(&gSprites[gBattlerSpriteIds[gBattleAnimTarget]], 0);
@@ -1323,7 +1323,7 @@ static void sub_8171BAC(struct Sprite *sprite)
     else
     {
         gSprites[gBattlerSpriteIds[gBattleAnimTarget]].data[1] -= 288;
-        gSprites[gBattlerSpriteIds[gBattleAnimTarget]].pos2.y = gSprites[gBattlerSpriteIds[gBattleAnimTarget]].data[1] >> 8;   
+        gSprites[gBattlerSpriteIds[gBattleAnimTarget]].pos2.y = gSprites[gBattlerSpriteIds[gBattleAnimTarget]].data[1] >> 8;
     }
 
     if (sprite->animEnded && next)
@@ -1907,7 +1907,7 @@ void sub_8172BF0(u8 taskId)
     u8 spriteId;
     u32 x;
     u32 done;
-    
+
     done = FALSE;
     spriteId = gBattlerSpriteIds[gBattleAnimAttacker];
     switch (gTasks[taskId].data[10])
@@ -2063,7 +2063,7 @@ static void sub_8172FEC(u8 taskId)
         gTasks[taskId].data[13]++;
         return;
     }
-    
+
     if (gBattleSpritesDataPtr->animationData->field_A)
         return;
 

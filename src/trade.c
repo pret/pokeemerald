@@ -4,7 +4,7 @@
 #include "battle_interface.h"
 #include "bg.h"
 #include "cable_club.h"
-#include "data2.h"
+#include "data.h"
 #include "daycare.h"
 #include "decompress.h"
 #include "event_data.h"
@@ -1383,10 +1383,6 @@ static const u8 gUnknown_08339090[][2] =
     {16, -1},
     {0,  0}
 };
-
-// external to this file
-extern const struct CompressedSpriteSheet gMonFrontPicTable[];
-extern const struct MonCoords gMonFrontPicCoords[];
 
 static bool8 sub_8077170(const void *a0, u32 a1)
 {

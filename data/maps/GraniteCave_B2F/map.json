@@ -24,7 +24,7 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "GraniteCave_B2F_EventScript_29116A",
+      "script": "GraniteCave_B2F_EventScript_ItemRepel",
       "flag": "FLAG_ITEM_GRANITE_CAVE_B2F_REPEL"
     },
     {
@@ -37,7 +37,7 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "GraniteCave_B2F_EventScript_291177",
+      "script": "GraniteCave_B2F_EventScript_ItemRareCandy",
       "flag": "FLAG_ITEM_GRANITE_CAVE_B2F_RARE_CANDY"
     },
     {

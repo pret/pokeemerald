@@ -125,7 +125,7 @@ static void SetUnionRoomPlayerGfx(u32 playerIdx, u32 gfxId)
 
 static void CreateUnionRoomPlayerEventObject(u32 playerIdx)
 {
-    show_sprite(gUnknown_082F0774[playerIdx], gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
+    TrySpawnEventObject(gUnknown_082F0774[playerIdx], gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
 }
 
 static void RemoveUnionRoomPlayerEventObject(u32 playerIdx)

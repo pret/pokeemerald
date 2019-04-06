@@ -2,7 +2,7 @@
 #include "apprentice.h"
 #include "battle.h"
 #include "battle_tower.h"
-#include "data2.h"
+#include "data.h"
 #include "event_data.h"
 #include "event_object_movement.h"
 #include "field_player_avatar.h"

@@ -305,7 +305,6 @@ SECTIONS {
         asm/pokenav.o(.text);
         src/pokenav_match_call.o(.text);
         src/menu_specialized.o(.text);
-        asm/menu_specialized.o(.text);
         src/ereader_helpers.o(.text);
         src/faraway_island.o(.text);
         src/ereader_screen.o(.text);
@@ -424,7 +423,6 @@ SECTIONS {
         src/mevent_client.o(.rodata);
         src/mevent_scripts.o(.rodata);
         src/union_room_chat.o(.rodata);
-        data/union_room_chat.o(.rodata);
         data/berry_crush.o(.rodata);
         data/berry_powder.o(.rodata);
         data/dodrio_berry_picking.o(.rodata);
@@ -432,8 +430,7 @@ SECTIONS {
         src/rtc.o(.rodata);
         src/main_menu.o(.rodata);
         src/rom_8034C54.o(.rodata);
-        src/data2b.o(.rodata);
-        src/battle_data.o(.rodata);
+        src/data.o(.rodata);
         src/battle_bg.o(.rodata);
         src/battle_main.o(.rodata);
         src/battle_util.o(.rodata);
@@ -627,7 +624,6 @@ SECTIONS {
         data/pokenav.o(.rodata);
         src/pokenav_match_call.o(.rodata);
         src/menu_specialized.o(.rodata);
-        data/menu_specialized.o(.rodata);
         data/ereader_helpers.o(.rodata);
         src/faraway_island.o(.rodata);
         data/ereader_screen.o(.rodata);

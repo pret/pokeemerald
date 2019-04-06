@@ -15,8 +15,8 @@ extern const u8 EventScript_TryDoDoubleTrainerBattle[];
 extern const u8 EventScript_TryDoNormalTrainerBattle[];
 extern const u8 EventScript_TryDoDoubleRematchBattle[];
 extern const u8 EventScript_TryDoRematchBattle[];
-extern const u8 EventScript_SecretPower1[];
-extern const u8 EventScript_SecretPower2[];
+extern const u8 SecretBase_EventScript_DollInteract[];
+extern const u8 SecretBase_EventScript_CushionInteract[];
 
 
 extern const u8 gTVBravoTrainerText00[];
@@ -528,8 +528,6 @@ extern const u8 EventScript_PlayerPCMale[];
 extern const u8 EventScript_PlayerPCFemale[];
 extern const u8 EventScript_SecretBasePC[];
 extern const u8 EventScript_RecordMixingSecretBasePC[];
-extern const u8 EventScript_SecretPower1[];
-extern const u8 EventScript_SecretPower2[];
 extern const u8 EventScript_PC[];
 extern const u8 EventScript_TestSignpostMsg[];
 extern const u8 EventScript_HiddenItemScript[];

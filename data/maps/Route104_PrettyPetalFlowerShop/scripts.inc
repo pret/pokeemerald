@@ -1,8 +1,8 @@
 Route104_PrettyPetalFlowerShop_MapScripts:: @ 822A34C
-	map_script MAP_SCRIPT_ON_TRANSITION, Route104_PrettyPetalFlowerShop_MapScript1_22A352
+	map_script MAP_SCRIPT_ON_TRANSITION, Route104_PrettyPetalFlowerShop_OnTransition
 	.byte 0
 
-Route104_PrettyPetalFlowerShop_MapScript1_22A352: @ 822A352
+Route104_PrettyPetalFlowerShop_OnTransition: @ 822A352
 	setflag FLAG_LANDMARK_FLOWER_SHOP
 	goto_if_unset FLAG_MET_PRETTY_PETAL_SHOP_OWNER, Route104_PrettyPetalFlowerShop_EventScript_22A36B
 	goto_if_unset FLAG_BADGE03_GET, Route104_PrettyPetalFlowerShop_EventScript_22A36B

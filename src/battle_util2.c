@@ -25,7 +25,7 @@ void AllocateBattleResources(void)
     gBattleResources->flags = AllocZeroed(sizeof(*gBattleResources->flags));
     gBattleResources->battleScriptsStack = AllocZeroed(sizeof(*gBattleResources->battleScriptsStack));
     gBattleResources->battleCallbackStack = AllocZeroed(sizeof(*gBattleResources->battleCallbackStack));
-    gBattleResources->statsBeforeLvlUp = AllocZeroed(sizeof(*gBattleResources->statsBeforeLvlUp));
+    gBattleResources->beforeLvlUp = AllocZeroed(sizeof(*gBattleResources->beforeLvlUp));
     gBattleResources->ai = AllocZeroed(sizeof(*gBattleResources->ai));
     gBattleResources->battleHistory = AllocZeroed(sizeof(*gBattleResources->battleHistory));
     gBattleResources->AI_ScriptsStack = AllocZeroed(sizeof(*gBattleResources->AI_ScriptsStack));
@@ -56,7 +56,7 @@ void FreeBattleResources(void)
         FREE_AND_SET_NULL(gBattleResources->flags);
         FREE_AND_SET_NULL(gBattleResources->battleScriptsStack);
         FREE_AND_SET_NULL(gBattleResources->battleCallbackStack);
-        FREE_AND_SET_NULL(gBattleResources->statsBeforeLvlUp);
+        FREE_AND_SET_NULL(gBattleResources->beforeLvlUp);
         FREE_AND_SET_NULL(gBattleResources->ai);
         FREE_AND_SET_NULL(gBattleResources->battleHistory);
         FREE_AND_SET_NULL(gBattleResources->AI_ScriptsStack);

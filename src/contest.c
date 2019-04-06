@@ -11,7 +11,7 @@
 #include "battle.h"
 #include "battle_anim.h"
 #include "contest.h"
-#include "data2.h"
+#include "data.h"
 #include "decompress.h"
 #include "graphics.h"
 #include "link.h"
@@ -41,7 +41,7 @@
 #include "contest_link_80FC4F4.h"
 #include "script_pokemon_util_80F87D8.h"
 #include "international_string_util.h"
-#include "data2.h"
+#include "data.h"
 #include "constants/rgb.h"
 #include "contest_ai.h"
 
@@ -242,8 +242,6 @@ extern const u8 gText_Contest_Fear[];
 extern const u8 gText_BDot[];
 extern const u8 gText_CDot[];
 extern const u8 *const gUnknown_08587E10[];
-extern const union AffineAnimCmd *const gUnknown_082FF6C0[];
-extern const union AffineAnimCmd *const gUnknown_082FF694[];
 extern const struct SpriteTemplate gSpriteTemplate_8587AD0;
 extern const struct SpriteTemplate gSpriteTemplate_8587B18[];
 extern void (*const gContestEffectFuncs[])(void);

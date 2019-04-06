@@ -1,8 +1,8 @@
 Route114_FossilManiacsHouse_MapScripts:: @ 822AD30
-	map_script MAP_SCRIPT_ON_TRANSITION, Route114_FossilManiacsHouse_MapScript1_22AD36
+	map_script MAP_SCRIPT_ON_TRANSITION, Route114_FossilManiacsHouse_OnTransition
 	.byte 0
 
-Route114_FossilManiacsHouse_MapScript1_22AD36: @ 822AD36
+Route114_FossilManiacsHouse_OnTransition: @ 822AD36
 	setflag FLAG_LANDMARK_FOSSIL_MANIACS_HOUSE
 	end
 

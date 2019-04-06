@@ -32,8 +32,6 @@ u8 sub_81D1DC0(struct PlayerPCItemPageStruct *page);
 void sub_81D1E90(struct PlayerPCItemPageStruct *page);
 void sub_81D1EC0(void);
 void sub_81D1D04(u8 a0);
-void DrawLevelUpWindowPg1(u16 arg0, void* statStoreLocation1, void* statStoreLocation2, u8 arg3, u8 arg4, u8 arg5);
-void DrawLevelUpWindowPg2(u16 arg0, void* statStoreLocation1, u8 arg2, u8 arg3, u8 arg4);
 void sub_81D1ED4(struct UnknownStruct_81D1ED4 *a0);
 void sub_81D2108(struct UnknownStruct_81D1ED4 *arg0);
 void sub_81D20AC(struct UnknownStruct_81D1ED4 *arg0);
@@ -47,7 +45,6 @@ bool16 MoveRelearnerRunTextPrinters(void);
 void MoveRelearnerCreateYesNoMenu(void);
 u8 LoadMoveRelearnerMovesList(const struct ListMenuItem *items, u16 numChoices);
 void InitMoveRelearnerWindows(bool8 useContextWindow);
-void GetMonLevelUpWindowStats(struct Pokemon* mon, void* statStoreLocation);
 s32 GetBoxOrPartyMonData(u16 boxId, u16 monId, s32 request, u8 *dst);
 void sub_81D2ED4(u8 *dst, u8 *nameDst, u16 boxId, u16 monId, u16 arg5, u16 arg6, bool8 arg7);
 void sub_81D2F78(struct UnknownStruct_81D1ED4 *arg0, u8 *sheen, u16 boxId, u16 monId, u16 arg5, u16 id, u16 arg7, bool8 arg8);
@@ -63,5 +60,8 @@ void sub_81D3464(struct Sprite **sprites);
 void sub_81D3480(struct Sprite **sprites, u8 arg1, u8 arg2);
 void sub_81D3520(struct Sprite **sprites);
 void sub_81D354C(struct Sprite **sprites);
+void DrawLevelUpWindowPg1(u16 windowId, u16 *statsBefore, u16 *statsAfter, u8 bgClr, u8 fgClr, u8 shadowClr);
+void DrawLevelUpWindowPg2(u16 windowId, u16 *currStats, u8 bgClr, u8 fgClr, u8 shadowClr);
+void GetMonLevelUpWindowStats(struct Pokemon *mon, u16 *currStats);
 
 #endif // GUARD_MENU_SPECIALIZED_H

@@ -5,7 +5,7 @@
 #include "battle_message.h"
 #include "battle_setup.h"
 #include "battle_tower.h"
-#include "data2.h"
+#include "data.h"
 #include "event_data.h"
 #include "frontier_util.h"
 #include "international_string_util.h"
@@ -38,7 +38,6 @@ struct BattleWindowText
     u8 shadowColor;
 };
 
-extern const u8 gTrainerClassNames[][13];
 extern const u16 gUnknown_08D85620[];
 
 // this file's functions
