@@ -105,34 +105,34 @@ static const struct BallCaptureSuccessStarData sBallCaptureSuccessStarData[] =
 
 const struct CompressedSpriteSheet gBallOpenParticleSpritesheets[] =
 {
-    {gBattleAnimSpriteSheet_Particles, 0x100, 0xD6EC},
-    {gBattleAnimSpriteSheet_Particles, 0x100, 0xD6ED},
-    {gBattleAnimSpriteSheet_Particles, 0x100, 0xD6EE},
-    {gBattleAnimSpriteSheet_Particles, 0x100, 0xD6EF},
-    {gBattleAnimSpriteSheet_Particles, 0x100, 0xD6F0},
-    {gBattleAnimSpriteSheet_Particles, 0x100, 0xD6F1},
-    {gBattleAnimSpriteSheet_Particles, 0x100, 0xD6F2},
-    {gBattleAnimSpriteSheet_Particles, 0x100, 0xD6F3},
-    {gBattleAnimSpriteSheet_Particles, 0x100, 0xD6F4},
-    {gBattleAnimSpriteSheet_Particles, 0x100, 0xD6F5},
-    {gBattleAnimSpriteSheet_Particles, 0x100, 0xD6F6},
-    {gBattleAnimSpriteSheet_Particles, 0x100, 0xD6F7},
+    {gBattleAnimSpriteGfx_Particles, 0x100, 0xD6EC},
+    {gBattleAnimSpriteGfx_Particles, 0x100, 0xD6ED},
+    {gBattleAnimSpriteGfx_Particles, 0x100, 0xD6EE},
+    {gBattleAnimSpriteGfx_Particles, 0x100, 0xD6EF},
+    {gBattleAnimSpriteGfx_Particles, 0x100, 0xD6F0},
+    {gBattleAnimSpriteGfx_Particles, 0x100, 0xD6F1},
+    {gBattleAnimSpriteGfx_Particles, 0x100, 0xD6F2},
+    {gBattleAnimSpriteGfx_Particles, 0x100, 0xD6F3},
+    {gBattleAnimSpriteGfx_Particles, 0x100, 0xD6F4},
+    {gBattleAnimSpriteGfx_Particles, 0x100, 0xD6F5},
+    {gBattleAnimSpriteGfx_Particles, 0x100, 0xD6F6},
+    {gBattleAnimSpriteGfx_Particles, 0x100, 0xD6F7},
 };
 
 const struct CompressedSpritePalette gBallOpenParticlePalettes[] =
 {
-    {gBattleAnimSpritePalette_CircleImpact, 0xD6EC},
-    {gBattleAnimSpritePalette_CircleImpact, 0xD6ED},
-    {gBattleAnimSpritePalette_CircleImpact, 0xD6EE},
-    {gBattleAnimSpritePalette_CircleImpact, 0xD6EF},
-    {gBattleAnimSpritePalette_CircleImpact, 0xD6F0},
-    {gBattleAnimSpritePalette_CircleImpact, 0xD6F1},
-    {gBattleAnimSpritePalette_CircleImpact, 0xD6F2},
-    {gBattleAnimSpritePalette_CircleImpact, 0xD6F3},
-    {gBattleAnimSpritePalette_CircleImpact, 0xD6F4},
-    {gBattleAnimSpritePalette_CircleImpact, 0xD6F5},
-    {gBattleAnimSpritePalette_CircleImpact, 0xD6F6},
-    {gBattleAnimSpritePalette_CircleImpact, 0xD6F7},
+    {gBattleAnimSpritePal_CircleImpact, 0xD6EC},
+    {gBattleAnimSpritePal_CircleImpact, 0xD6ED},
+    {gBattleAnimSpritePal_CircleImpact, 0xD6EE},
+    {gBattleAnimSpritePal_CircleImpact, 0xD6EF},
+    {gBattleAnimSpritePal_CircleImpact, 0xD6F0},
+    {gBattleAnimSpritePal_CircleImpact, 0xD6F1},
+    {gBattleAnimSpritePal_CircleImpact, 0xD6F2},
+    {gBattleAnimSpritePal_CircleImpact, 0xD6F3},
+    {gBattleAnimSpritePal_CircleImpact, 0xD6F4},
+    {gBattleAnimSpritePal_CircleImpact, 0xD6F5},
+    {gBattleAnimSpritePal_CircleImpact, 0xD6F6},
+    {gBattleAnimSpritePal_CircleImpact, 0xD6F7},
 };
 
 const union AnimCmd gUnknown_085E5154[] =
