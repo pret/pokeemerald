@@ -1121,8 +1121,8 @@ const union AnimCmd *const gUnknown_08592918[] =
 
 const struct SpriteTemplate gUnknown_0859291C =
 {
-    .tileTag = ANIM_TAG_UNUSED_HIT,
-    .paletteTag = ANIM_TAG_UNUSED_HIT,
+    .tileTag = ANIM_TAG_HIT,
+    .paletteTag = ANIM_TAG_HIT,
     .oam = &gUnknown_08524914,
     .anims = gUnknown_08592918,
     .images = NULL,
@@ -1132,8 +1132,8 @@ const struct SpriteTemplate gUnknown_0859291C =
 
 const struct SpriteTemplate gUnknown_08592934 =
 {
-    .tileTag = ANIM_TAG_UNUSED_HIT_2,
-    .paletteTag = ANIM_TAG_UNUSED_HIT_2,
+    .tileTag = ANIM_TAG_HIT_2,
+    .paletteTag = ANIM_TAG_HIT_2,
     .oam = &gUnknown_08524914,
     .anims = gUnknown_08592918,
     .images = NULL,
@@ -1442,8 +1442,8 @@ const union AnimCmd *const gUnknown_08592BF4[] =
 
 const struct SpriteTemplate gUnknown_08592BFC =
 {
-    .tileTag = ANIM_TAG_UNUSED_BUBBLE_BURST,
-    .paletteTag = ANIM_TAG_UNUSED_BUBBLE_BURST,
+    .tileTag = ANIM_TAG_BUBBLE_BURST,
+    .paletteTag = ANIM_TAG_BUBBLE_BURST,
     .oam = &gUnknown_0852490C,
     .anims = gUnknown_08592BF4,
     .images = NULL,

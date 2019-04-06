@@ -11,10 +11,10 @@
 #define ANIM_TAG_SPARK                      (ANIM_SPRITES_START + 1)
 #define ANIM_TAG_PENCIL                     (ANIM_SPRITES_START + 2)
 #define ANIM_TAG_AIR_WAVE                   (ANIM_SPRITES_START + 3)
-#define ANIM_TAG_ORB                 (ANIM_SPRITES_START + 4) // unused
+#define ANIM_TAG_ORB                 (ANIM_SPRITES_START + 4)
 #define ANIM_TAG_SWORD                      (ANIM_SPRITES_START + 5)
 #define ANIM_TAG_SEED                       (ANIM_SPRITES_START + 6)
-#define ANIM_TAG_EXPLOSION_6           (ANIM_SPRITES_START + 7) // unused
+#define ANIM_TAG_EXPLOSION_6           (ANIM_SPRITES_START + 7)
 #define ANIM_TAG_PINK_ORB            (ANIM_SPRITES_START + 8) // unused
 #define ANIM_TAG_GUST                       (ANIM_SPRITES_START + 9)
 #define ANIM_TAG_ICE_CUBE                   (ANIM_SPRITES_START + 10)
@@ -28,8 +28,8 @@
 #define ANIM_TAG_CONVERSION                 (ANIM_SPRITES_START + 18)
 #define ANIM_TAG_GLASS               (ANIM_SPRITES_START + 19) // unused
 #define ANIM_TAG_HORN_HIT                   (ANIM_SPRITES_START + 20)
-#define ANIM_TAG_HIT                 (ANIM_SPRITES_START + 21) // unused
-#define ANIM_TAG_HIT_2               (ANIM_SPRITES_START + 22) // unused
+#define ANIM_TAG_HIT                 (ANIM_SPRITES_START + 21)
+#define ANIM_TAG_HIT_2               (ANIM_SPRITES_START + 22)
 #define ANIM_TAG_BLUE_SHARDS         (ANIM_SPRITES_START + 23) // unused
 #define ANIM_TAG_CLOSING_EYE         (ANIM_SPRITES_START + 24) // unused
 #define ANIM_TAG_WAVING_HAND         (ANIM_SPRITES_START + 25) // unused
@@ -39,7 +39,7 @@
 #define ANIM_TAG_SMALL_EMBER                (ANIM_SPRITES_START + 29)
 #define ANIM_TAG_GRAY_SMOKE                 (ANIM_SPRITES_START + 30)
 #define ANIM_TAG_BLUE_STAR                  (ANIM_SPRITES_START + 31)
-#define ANIM_TAG_BUBBLE_BURST        (ANIM_SPRITES_START + 32) // unused
+#define ANIM_TAG_BUBBLE_BURST        (ANIM_SPRITES_START + 32)
 #define ANIM_TAG_FIRE                       (ANIM_SPRITES_START + 33)
 #define ANIM_TAG_SPINNING_FIRE       (ANIM_SPRITES_START + 34) // unused
 #define ANIM_TAG_FIRE_PLUME                 (ANIM_SPRITES_START + 35)
@@ -58,7 +58,7 @@
 #define ANIM_TAG_SPARKLE_1                  (ANIM_SPRITES_START + 48)
 #define ANIM_TAG_SPARKLE_2                  (ANIM_SPRITES_START + 49)
 #define ANIM_TAG_HUMANOID_FOOT              (ANIM_SPRITES_START + 50)
-#define ANIM_TAG_MONSTER_FOOT        (ANIM_SPRITES_START + 51) // unused
+#define ANIM_TAG_MONSTER_FOOT        (ANIM_SPRITES_START + 51)
 #define ANIM_TAG_HUMANOID_HAND       (ANIM_SPRITES_START + 52) // unused
 #define ANIM_TAG_NOISE_LINE                 (ANIM_SPRITES_START + 53)
 #define ANIM_TAG_YELLOW_UNK          (ANIM_SPRITES_START + 54) // unused
@@ -185,7 +185,7 @@
 #define ANIM_TAG_LARGE_FRESH_EGG            (ANIM_SPRITES_START + 175)
 #define ANIM_TAG_SHADOW_BALL                (ANIM_SPRITES_START + 176)
 #define ANIM_TAG_LICK                       (ANIM_SPRITES_START + 177)
-#define ANIM_TAG_VOID_LINES          (ANIM_SPRITES_START + 178) // unused
+#define ANIM_TAG_VOID_LINES          (ANIM_SPRITES_START + 178)
 #define ANIM_TAG_STRING                     (ANIM_SPRITES_START + 179)
 #define ANIM_TAG_WEB_THREAD                 (ANIM_SPRITES_START + 180)
 #define ANIM_TAG_SPIDER_WEB                 (ANIM_SPRITES_START + 181)
@@ -276,7 +276,7 @@
 #define ANIM_TAG_GREEN_SPIKE                (ANIM_SPRITES_START + 266)
 #define ANIM_TAG_WHITE_CIRCLE_OF_LIGHT      (ANIM_SPRITES_START + 267)
 #define ANIM_TAG_GLOWY_BLUE_ORB             (ANIM_SPRITES_START + 268)
-#define ANIM_TAG_RED_BRICK           (ANIM_SPRITES_START + 269) // unused
+#define ANIM_TAG_RED_BRICK           (ANIM_SPRITES_START + 269)
 #define ANIM_TAG_WHITE_FEATHER              (ANIM_SPRITES_START + 270)
 #define ANIM_TAG_SPARKLE_6                  (ANIM_SPRITES_START + 271)
 #define ANIM_TAG_SPLASH                     (ANIM_SPRITES_START + 272)
