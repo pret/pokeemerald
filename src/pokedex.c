@@ -4558,22 +4558,25 @@ void sub_80C0C6C(u8 windowId, u16 b, u8 left, u8 top)
 
 void sub_80C0D30(u8 windowId, u16 a1)
 {
-    u8 image[32 * 4];
+    u8 image[32 * 4] = {0};
     const u8 * r12 = gMonFootprintTable[NationalPokedexNumToSpecies(a1)];
     u16 r5 = 0;
     u16 i;
     u16 j;
 
-    for (i = 0; i < 32; i++)
+    if (r12 != NULL)
     {
-        u8 r3 = r12[i];
-        for (j = 0; j < 4; j++)
+        for (i = 0; i < 32; i++)
         {
-            u8 value = ((r3 >> (2 * j)) & 1 ? 2 : 0);
-            if ((2 << (2 * j)) & r3)
-                value |= 0x20;
-            image[r5] = value;
-            r5++;
+            u8 r3 = r12[i];
+            for (j = 0; j < 4; j++)
+            {
+                u8 value = ((r3 >> (2 * j)) & 1 ? 2 : 0);
+                if ((2 << (2 * j)) & r3)
+                    value |= 0x20;
+                image[r5] = value;
+                r5++;
+            }
         }
     }
     CopyToWindowPixelBuffer(windowId, image, sizeof(image), 0);
