@@ -47,6 +47,7 @@
 #include "berry_crush.h"
 #include "mystery_gift.h"
 #include "union_room_player_avatar.h"
+#include "pokemon_jump.h"
 
 EWRAM_DATA u8 gUnknown_02022C20[12] = {};
 EWRAM_DATA u8 gUnknown_02022C2C = 0;
@@ -97,7 +98,6 @@ bool32 sub_8017678(struct UnkStruct_Shared *arg0, struct UnkStruct_Shared *arg1)
 u32 sub_8018120(struct TradeUnkStruct *arg0, u8 multiplayerId);
 void sub_801807C(struct TradeUnkStruct *arg0);
 void sub_801AC54(void);
-void sub_802A9A8(u8 monId, MainCallback callback);
 void sub_802493C(u8 monId, MainCallback callback);
 void sub_80149D8(void);
 void MG_DrawTextBorder(u8 windowId);
