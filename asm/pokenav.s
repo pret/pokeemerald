@@ -5961,7 +5961,7 @@ sub_81CC09C: @ 81CC09C
 	ldrb r0, [r4, 0x14]
 	movs r1, 0x1
 	movs r2, 0x4
-	bl sub_8098858
+	bl DrawTextBorderOuter
 	ldrb r0, [r4, 0x14]
 	movs r1, 0x11
 	bl FillWindowPixelBuffer
@@ -7211,7 +7211,7 @@ sub_81CCA1C: @ 81CCA1C
 	ldrb r0, [r5, 0x8]
 	movs r1, 0x42
 	movs r2, 0x4
-	bl sub_8098858
+	bl DrawTextBorderOuter
 	ldr r1, =gUnknown_08622888
 	str r4, [sp]
 	movs r0, 0x1
@@ -8696,7 +8696,7 @@ sub_81CD624: @ 81CD624
 	adds r1, r6, 0
 	movs r2, 0x2D
 	movs r3, 0
-	bl sub_81D2C68
+	bl GetBoxOrPartyMonData
 	cmp r0, 0
 	beq _081CD690
 	ldr r1, =gText_EggNickname
@@ -8711,14 +8711,14 @@ _081CD690:
 	adds r1, r6, 0
 	movs r2, 0x2
 	adds r3, r5, 0
-	bl sub_81D2C68
+	bl GetBoxOrPartyMonData
 	adds r0, r5, 0
 	bl StringGetEnd10
 	adds r0, r4, 0
 	adds r1, r6, 0
 	movs r2, 0xB
 	movs r3, 0
-	bl sub_81D2C68
+	bl GetBoxOrPartyMonData
 	lsls r0, 16
 	lsrs r7, r0, 16
 	cmp r4, 0xE
@@ -9185,7 +9185,7 @@ _081CDA5A:
 	adds r1, r7, 0
 	movs r2, 0x16
 	movs r3, 0
-	bl sub_81D2C68
+	bl GetBoxOrPartyMonData
 	mov r1, r9
 	lsls r5, r1, 2
 	adds r4, r5, r1
@@ -9197,7 +9197,7 @@ _081CDA5A:
 	adds r1, r7, 0
 	movs r2, 0x2F
 	movs r3, 0
-	bl sub_81D2C68
+	bl GetBoxOrPartyMonData
 	ldr r1, =0x00006429
 	add r1, r8
 	adds r1, r4
@@ -9206,7 +9206,7 @@ _081CDA5A:
 	adds r1, r7, 0
 	movs r2, 0x21
 	movs r3, 0
-	bl sub_81D2C68
+	bl GetBoxOrPartyMonData
 	ldr r1, =0x0000642a
 	add r1, r8
 	adds r1, r4
@@ -9215,7 +9215,7 @@ _081CDA5A:
 	adds r1, r7, 0
 	movs r2, 0x18
 	movs r3, 0
-	bl sub_81D2C68
+	bl GetBoxOrPartyMonData
 	ldr r1, =0x0000642b
 	add r1, r8
 	adds r1, r4
@@ -9224,7 +9224,7 @@ _081CDA5A:
 	adds r1, r7, 0
 	movs r2, 0x17
 	movs r3, 0
-	bl sub_81D2C68
+	bl GetBoxOrPartyMonData
 	ldr r1, =0x0000642c
 	add r1, r8
 	adds r1, r4
@@ -9238,14 +9238,14 @@ _081CDA5A:
 	adds r1, r7, 0
 	movs r2, 0x30
 	movs r3, 0
-	bl sub_81D2C68
+	bl GetBoxOrPartyMonData
 	cmp r0, 0xFF
 	beq _081CDB10
 	adds r0, r6, 0
 	adds r1, r7, 0
 	movs r2, 0x30
 	movs r3, 0
-	bl sub_81D2C68
+	bl GetBoxOrPartyMonData
 	movs r1, 0x1D
 	bl __udivsi3
 	b _081CDB12
@@ -9258,7 +9258,7 @@ _081CDB12:
 	adds r1, r7, 0
 	movs r2, 0x8
 	movs r3, 0
-	bl sub_81D2C68
+	bl GetBoxOrPartyMonData
 	ldr r1, =0x00006783
 	add r1, r8
 	add r1, r9
@@ -9355,7 +9355,7 @@ _081CDBD0:
 	adds r1, r6, 0
 	movs r2, 0x41
 	movs r3, 0
-	bl sub_81D2C68
+	bl GetBoxOrPartyMonData
 	adds r4, r0, 0
 	lsls r4, 16
 	lsrs r4, 16
@@ -9363,13 +9363,13 @@ _081CDBD0:
 	adds r1, r6, 0
 	movs r2, 0x1
 	movs r3, 0
-	bl sub_81D2C68
+	bl GetBoxOrPartyMonData
 	mov r8, r0
 	adds r0, r5, 0
 	adds r1, r6, 0
 	movs r2, 0
 	movs r3, 0
-	bl sub_81D2C68
+	bl GetBoxOrPartyMonData
 	adds r5, r0, 0
 	lsls r0, r4, 3
 	ldr r1, =gMonFrontPicTable

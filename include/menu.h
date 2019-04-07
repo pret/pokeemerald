@@ -31,11 +31,11 @@ u16 AddTextPrinterParameterized2(u8 windowId, u8 fontId, const u8 *str, u8 speed
 void PrintPlayerNameOnWindow(u8, const u8*, u16, u16);
 void DisplayItemMessageOnField(u8 taskId, const u8 *src, TaskFunc callback);
 void ClearDialogWindowAndFrame(u8 windowId, bool8 copyToVram);
-void SetStandardWindowBorderStyle(u8 a0, u8 a1);
+void SetStandardWindowBorderStyle(u8 windowId, bool8 copyToVram);
 void DisplayYesNoMenuDefaultYes(void);
 u32 GetPlayerTextSpeed(void);
 u8 GetPlayerTextSpeedDelay(void);
-void sub_81978B0(u16 arg0);
+void Menu_LoadStdPalAt(u16 arg0);
 void AddTextPrinterWithCallbackForMessage(bool8 a1, void (*callback)(struct TextPrinterTemplate *, u16));
 void sub_8199DF0(u32 bg, u8 a1, int a2, int a3);
 void AddTextPrinterParameterized3(u8 windowId, u8 fontId, u8 left, u8 top, const u8 *color, s8 speed, const u8 *str);
@@ -69,7 +69,7 @@ u16 copy_decompressed_tile_data_to_vram(u8 bgId, const void *src, u16 size, u16 
 void AddTextPrinterForMessage(bool8 allowSkippingDelayWithButtonPress);
 void AddItemMenuActionTextPrinters(u8 windowId, u8 fontId, u8 left, u8 top, u8 letterSpacing, u8 lineHeight, u8 itemCount, const struct MenuAction *strs, const u8 *a8);
 void sub_8198DBC(u8 windowId, u8 fontId, u8 left, u8 top, u8 a4, u8 itemCount, u8 itemCount2, const struct MenuAction *strs, const u8 *a8);
-u8 sub_8199944(u8 windowId, u8 optionWidth, u8 horizontalCount, u8 verticalCount, u8 initialCursorPos);
+u8 sub_8199944(u8 windowId, u8 optionWidth, u8 columns, u8 rows, u8 initialCursorPos);
 u8 sub_8199134(s8, s8);
 u8 GetStartMenuWindowId(void);
 void sub_819A2BC(u8, u8);
@@ -91,7 +91,7 @@ void sub_8199C30(u8 bgId, u8 left, u8 top, u8 width, u8 height, u8 palette);
 void sub_8199D3C(void *ptr, int delta, int width, int height, bool32 is8BPP);
 void sub_8198204(const u8 *string, const u8 *string2, u8 a3, u8 a4, bool8 copyToVram);
 void sub_8197AE8(bool8 copyToVram);
-void sub_81997AC(u8 windowId, u8 a4, u8 a6, u8 a7, const struct MenuAction *strs);
+void PrintMenuGridTable(u8 windowId, u8 optionWidth, u8 columns, u8 rows, const struct MenuAction *strs);
 s8 Menu_ProcessInputGridLayout(void);
 u8 InitMenuInUpperLeftCorner(u8 windowId, u8 itemCount, u8 initialCursorPos, bool8 APressMuted);
 s8 Menu_ProcessInputNoWrapAround_other(void);
@@ -100,5 +100,8 @@ u8 sub_81980F0(u8 bg, u8 xPos, u8 yPos, u8 palette, u16 baseTile);
 void sub_8198314(void);
 void sub_8198180(const u8 *string, u8 a2, bool8 copyToVram);
 void ResetBgPositions(void);
+void AddTextPrinterWithCustomSpeedForMessage(bool8 allowSkippingDelayWithButtonPress, u8 speed);
+void sub_8198C78(void);
+void PrintTextArray(u8 windowId, u8 fontId, u8 left, u8 top, u8 lineHeight, u8 itemCount, const struct MenuAction *strs);
 
 #endif // GUARD_MENU_H

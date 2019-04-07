@@ -1,12 +1,12 @@
 TrainerHill_Entrance_MapScripts:: @ 82680AC
 	map_script MAP_SCRIPT_ON_RESUME, TrainerHill_Entrance_MapScript1_2680D0
 	map_script MAP_SCRIPT_ON_RETURN_TO_FIELD, TrainerHill_Entrance_MapScript1_26811B
-	map_script MAP_SCRIPT_ON_TRANSITION, TrainerHill_Entrance_MapScript1_2680C6
+	map_script MAP_SCRIPT_ON_TRANSITION, TrainerHill_Entrance_OnTransition
 	map_script MAP_SCRIPT_ON_LOAD, TrainerHill_Entrance_MapScript1_268128
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, TrainerHill_Entrance_MapScript2_26813E
 	.byte 0
 
-TrainerHill_Entrance_MapScript1_2680C6: @ 82680C6
+TrainerHill_Entrance_OnTransition: @ 82680C6
 	setflag FLAG_LANDMARK_TRAINER_HILL
 	getplayerxy VAR_TEMP_D, VAR_RESULT
 	end

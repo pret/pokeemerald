@@ -23,7 +23,7 @@
 #include "palette.h"
 #include "pokeball.h"
 #include "pokedex.h"
-#include "pokemon_3.h"
+#include "pokemon.h"
 #include "random.h"
 #include "rtc.h"
 #include "save.h"
@@ -38,6 +38,7 @@
 #include "text_window.h"
 #include "title_screen.h"
 #include "window.h"
+#include "mystery_gift.h"
 
 /*
  * Main menu state machine
@@ -525,7 +526,7 @@ enum
     ACTION_OPTION,
     ACTION_MYSTERY_GIFT,
     ACTION_MYSTERY_EVENTS,
-    ACTION_UNKNOWN, // TODO: change when rom_8011DC0 decompiled
+    ACTION_EREADER,
     ACTION_INVALID
 };
 
@@ -1033,7 +1034,7 @@ static void Task_HandleMainMenuAPressed(u8 taskId)
                         }
                         else
                         {
-                            action = ACTION_UNKNOWN;
+                            action = ACTION_EREADER;
                         }
                         break;
                     case 3:
@@ -1082,8 +1083,8 @@ static void Task_HandleMainMenuAPressed(u8 taskId)
                 SetMainCallback2(CB2_InitMysteryEventMenu);
                 DestroyTask(taskId);
                 break;
-            case ACTION_UNKNOWN:
-                SetMainCallback2(sub_801867C);
+            case ACTION_EREADER:
+                SetMainCallback2(c2_ereader);
                 DestroyTask(taskId);
                 break;
             case ACTION_INVALID:

@@ -4,7 +4,7 @@
 #include "battle_anim.h"
 #include "bg.h"
 #include "contest.h"
-#include "data2.h"
+#include "data.h"
 #include "decompress.h"
 #include "dma3.h"
 #include "gpu_regs.h"
@@ -25,8 +25,6 @@
 #include "constants/weather.h"
 
 extern const struct SpriteTemplate gUnknown_08593114;
-extern const union AffineAnimCmd *const gUnknown_082FF6C0[];
-extern const union AffineAnimCmd *const gUnknown_082FF694[];
 
 void sub_815A0D4(struct Sprite *);
 void sub_815A1B0(struct Sprite *);

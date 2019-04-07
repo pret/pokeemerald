@@ -1,4 +1,5 @@
 #include "global.h"
+#include "data.h"
 #include "event_data.h"
 #include "pokedex.h"
 #include "pokemon.h"
@@ -45,7 +46,6 @@ static const u8 sGiftRibbonsMonDataIds[] =
 
 extern const u8 gText_DecimalPoint[];
 extern const u8 gText_Marco[];
-extern const u8 gSpeciesNames[][POKEMON_NAME_LENGTH + 1];
 
 #define CM_PER_INCH 2.54
 

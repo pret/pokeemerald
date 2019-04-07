@@ -50,5 +50,6 @@ void SpriteCB_HallOfFameMonitor(struct Sprite *);
 
 // field_region_map.c
 void FieldInitRegionMap(MainCallback callback);
+void sub_8088B94(int x, int y, int a2);
 
 #endif //GUARD_FIELDMAP_H

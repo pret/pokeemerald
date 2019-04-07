@@ -6,76 +6,20 @@
 	.include "src/string_util.o"
 	.include "src/link.o"
 	.include "src/link_rfu.o"
+	.include "src/union_room.o"
+	.include "src/mystery_gift.o"
+	.include "src/union_room_player_avatar.o"
+	.include "src/union_room_battle.o"
+	.include "src/mevent2.o"
+	.include "src/mevent_801BAAC.o"
+	.include "src/mevent_server.o"
+	.include "src/mevent_client.o"
+	.include "src/union_room_chat.o"
+	.include "src/berry_crush.o"
+	.include "src/berry_powder.o"
 
-gUnknown_02022C20: @ 2022C20
-	.space 0xC
-
-gUnknown_02022C2C: @ 2022C2C
-	.space 0x1
-
-gUnknown_02022C2D: @ 2022C2D
-	.space 0x3
-
-gUnknown_02022C30: @ 2022C30
-	.space 0x8
-
-gUnknown_02022C38: @ 2022C38
-	.space 0x4
-
-gUnknown_02022C3C: @ 2022C3C
-	.space 0x2
-
-gUnknown_02022C3E: @ 2022C3E
-	.space 0x2
-
-gUnknown_02022C40: @ 2022C40
-	.space 0x18
-
-gUnknown_02022C58: @ 2022C58
-	.space 0x8
-
-gUnknown_02022C60: @ 2022C60
-	.space 0x4
-
-gUnknown_02022C64: @ 2022C64
-	.space 0x4
-
-gUnknown_02022C68: @ 2022C68
-	.space 0x4
-
-gUnknown_02022C6C: @ 2022C6C
-	.space 0x4
-
-gUnknown_02022C70: @ 2022C70
-	.space 0x4
-
-gUnknown_02022C74: @ 2022C74
-	.space 0x4
-
-gUnknown_02022C78: @ 2022C78
-	.space 0x4
-
-gUnknown_02022C7C: @ 2022C7C
-	.space 0x4
-
-gUnknown_02022C80: @ 2022C80
-	.space 0x4
-
-gUnknown_02022C84: @ 2022C84
-	.space 0x4
-
-gUnknown_02022C88: @ 2022C88
-	.space 0x4
-
-gUnknown_02022C8C: @ 2022C8C
-	.space 0x4
-
-gUnknown_02022C90: @ 2022C90
-	.space 0x4
-
-gUnknown_02022C94: @ 2022C94
-	.space 0x4
-
+	.align 2
+	@ dodrio_berry_picking
 gUnknown_02022C98: @ 2022C98
 	.space 0x4
 
@@ -97,6 +41,7 @@ gUnknown_02022CF4: @ 2022CF4
 gUnknown_02022CF8: @ 2022CF8
 	.space 0x4
 
+    @ pokemon_jump
 gUnknown_02022CFC: @ 2022CFC
 	.space 0x4
 
@@ -128,7 +73,7 @@ gUnknown_02022D00: @ 2022D00
 	.include "src/palette.o"
 	.include "src/sound.o"
 	.include "src/battle_anim.o"
-	.include "src/battle_anim_80A5C6C.o"
+	.include "src/battle_anim_mons.o"
 
 	.space 0xC
 	.include "src/field_weather.o"
@@ -173,17 +118,13 @@ gUnknown_02022D00: @ 2022D00
 	.include "src/decoration.o"
 	.include "src/slot_machine.o"
 	.include "src/battle_ai_script_commands.o"
-	
-.align 2
-gPlayerFacingPosition: @ 203AB40
-	.space 0x8
-	
+	.include "src/fldeff_misc.o"
 	.include "src/pokeblock.o"
 	.include "src/field_specials.o"
-    .include "src/battle_records.o"
-    .include "src/pokedex_area_screen.o"
-    .include "src/evolution_scene.o"
-    .include "src/roulette.o"
+	.include "src/battle_records.o"
+	.include "src/pokedex_area_screen.o"
+	.include "src/evolution_scene.o"
+	.include "src/roulette.o"
 	.include "src/pokedex_cry_screen.o"
 	.include "src/coins.o"
 	.include "src/battle_transition.o"
@@ -192,7 +133,7 @@ gPlayerFacingPosition: @ 203AB40
 	.include "src/rom_81520A8.o"
 	.include "src/save.o"
 	.include "src/mystery_event_script.o"
-	.include "src/learn_move.o"
+	.include "src/move_relearner.o"
 	.include "src/decoration_inventory.o"
 	.include "src/roamer.o"
 	.include "src/battle_tower.o"
@@ -229,14 +170,7 @@ gPlayerFacingPosition: @ 203AB40
 	.include "src/battle_pyramid_bag.o"
     .include "src/pokenav.o"
 
-gUnknown_0203CF48: @ 203CF48
-	.space 0x4
-
-gUnknown_0203CF4C: @ 203CF4C
-	.space 0x4
-
-gUnknown_0203CF50: @ 203CF50
-	.space 0x4
-
+	.include "src/menu_specialized.o"
+	.include "src/faraway_island.o"
 	.include "src/trainer_hill.o"
 	.include "src/rayquaza_scene.o"

@@ -100,7 +100,7 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "PetalburgCity_EventScript_2910B4",
+      "script": "PetalburgCity_EventScript_ItemMaxRevive",
       "flag": "FLAG_ITEM_PETALBURG_CITY_MAX_REVIVE"
     },
     {
@@ -113,7 +113,7 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "PetalburgCity_EventScript_2910C1",
+      "script": "PetalburgCity_EventScript_ItemEther",
       "flag": "FLAG_ITEM_PETALBURG_CITY_ETHER"
     },
     {

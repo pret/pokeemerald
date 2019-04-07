@@ -23,9 +23,7 @@
 #include "constants/rgb.h"
 #include "constants/songs.h"
 
-#define VERSION_BANNER_SHAPE 1
 #define VERSION_BANNER_RIGHT_TILEOFFSET 64
-#define VERSION_BANNER_BYTES 0x1000
 #define VERSION_BANNER_LEFT_X 98
 #define VERSION_BANNER_RIGHT_X 162
 #define VERSION_BANNER_Y 2
@@ -64,16 +62,41 @@ static const u32 sTitleScreenRayquazaTilemap[] = INCBIN_U32("graphics/title_scre
 static const u32 sTitleScreenLogoShineGfx[] = INCBIN_U32("graphics/title_screen/logo_shine.4bpp.lz");
 static const u32 sTitleScreenCloudsGfx[] = INCBIN_U32("graphics/title_screen/clouds.4bpp.lz");
 
-const u16 gIntroWaterDropData[] =
+const u16 gIntroWaterDropAlphaBlend[] =
 {
-    0x0010, 0x0110, 0x0210, 0x0310, 0x0410, 0x0510, 0x0610, 0x0710,
-    0x0810, 0x0910, 0x0a10, 0x0b10, 0x0c10, 0x0d10, 0x0e10, 0x0f10,
-    0x100f, 0x100e, 0x100d, 0x100c, 0x100b, 0x100a, 0x1009, 0x1008,
-    0x1007, 0x1006, 0x1005, 0x1004, 0x1003, 0x1002, 0x1001, 0x1000,
-    0x1000, 0x1000, 0x1000, 0x1000, 0x1000, 0x1000, 0x1000, 0x1000,
-    0x1000, 0x1000, 0x1000, 0x1000, 0x1000, 0x1000, 0x1000, 0x1000,
-    0x1000, 0x1000, 0x1000, 0x1000, 0x1000, 0x1000, 0x1000, 0x1000,
-    0x1000, 0x1000, 0x1000, 0x1000, 0x1000, 0x1000, 0x1000, 0x1000,
+    BLDALPHA_BLEND(16, 0),
+    BLDALPHA_BLEND(16, 1),
+    BLDALPHA_BLEND(16, 2),
+    BLDALPHA_BLEND(16, 3),
+    BLDALPHA_BLEND(16, 4),
+    BLDALPHA_BLEND(16, 5),
+    BLDALPHA_BLEND(16, 6),
+    BLDALPHA_BLEND(16, 7),
+    BLDALPHA_BLEND(16, 8),
+    BLDALPHA_BLEND(16, 9),
+    BLDALPHA_BLEND(16, 10),
+    BLDALPHA_BLEND(16, 11),
+    BLDALPHA_BLEND(16, 12),
+    BLDALPHA_BLEND(16, 13),
+    BLDALPHA_BLEND(16, 14),
+    BLDALPHA_BLEND(16, 15),
+    BLDALPHA_BLEND(15, 16),
+    BLDALPHA_BLEND(14, 16),
+    BLDALPHA_BLEND(13, 16),
+    BLDALPHA_BLEND(12, 16),
+    BLDALPHA_BLEND(11, 16),
+    BLDALPHA_BLEND(10, 16),
+    BLDALPHA_BLEND(9, 16),
+    BLDALPHA_BLEND(8, 16),
+    BLDALPHA_BLEND(7, 16),
+    BLDALPHA_BLEND(6, 16),
+    BLDALPHA_BLEND(5, 16),
+    BLDALPHA_BLEND(4, 16),
+    BLDALPHA_BLEND(3, 16),
+    BLDALPHA_BLEND(2, 16),
+    BLDALPHA_BLEND(1, 16),
+    BLDALPHA_BLEND(0, 16),
+    [32 ... 63] = BLDALPHA_BLEND(0, 16)
 };
 
 static const struct OamData sVersionBannerLeftOamData =
@@ -83,10 +106,10 @@ static const struct OamData sVersionBannerLeftOamData =
     .objMode = 0,
     .mosaic = 0,
     .bpp = 1,
-    .shape = VERSION_BANNER_SHAPE,
+    .shape = SPRITE_SHAPE(64x32),
     .x = 0,
     .matrixNum = 0,
-    .size = 3,
+    .size = SPRITE_SIZE(64x32),
     .tileNum = 0,
     .priority = 0,
     .paletteNum = 0,
@@ -100,10 +123,10 @@ static const struct OamData sVersionBannerRightOamData =
     .objMode = 0,
     .mosaic = 0,
     .bpp = 1,
-    .shape = VERSION_BANNER_SHAPE,
+    .shape = SPRITE_SHAPE(64x32),
     .x = 0,
     .matrixNum = 0,
-    .size = 3,
+    .size = SPRITE_SIZE(64x32),
     .tileNum = 0,
     .priority = 0,
     .paletteNum = 0,
@@ -156,8 +179,12 @@ static const struct SpriteTemplate sVersionBannerRightSpriteTemplate =
 
 static const struct CompressedSpriteSheet sSpriteSheet_EmeraldVersion[] =
 {
-    {gTitleScreenEmeraldVersionGfx, VERSION_BANNER_BYTES, 1000},
-    {NULL},
+    {
+        .data = gTitleScreenEmeraldVersionGfx,
+        .size = 0x1000,
+        .tag = 1000
+    },
+    {},
 };
 
 static const struct OamData sOamData_CopyrightBanner =
@@ -167,10 +194,10 @@ static const struct OamData sOamData_CopyrightBanner =
     .objMode = 0,
     .mosaic = 0,
     .bpp = 0,
-    .shape = 1,
+    .shape = SPRITE_SHAPE(32x8),
     .x = 0,
     .matrixNum = 0,
-    .size = 1,
+    .size = SPRITE_SIZE(32x8),
     .tileNum = 0,
     .priority = 0,
     .paletteNum = 0,
@@ -255,14 +282,21 @@ static const struct SpriteTemplate sStartCopyrightBannerSpriteTemplate =
 
 static const struct CompressedSpriteSheet sSpriteSheet_PressStart[] =
 {
-    {gTitleScreenPressStartGfx, 0x520, 1001},
-    {NULL},
+    {
+        .data = gTitleScreenPressStartGfx,
+        .size = 0x520,
+        .tag = 1001
+    },
+    {},
 };
 
 static const struct SpritePalette sSpritePalette_PressStart[] =
 {
-    {gTitleScreenPressStartPal, 1001},
-    {NULL},
+    {
+        .data = gTitleScreenPressStartPal,
+        .tag = 1001
+    },
+    {},
 };
 
 static const struct OamData sPokemonLogoShineOamData =
@@ -272,10 +306,10 @@ static const struct OamData sPokemonLogoShineOamData =
     .objMode = 0,
     .mosaic = 0,
     .bpp = 0,
-    .shape = 0,
+    .shape = SPRITE_SHAPE(64x64),
     .x = 0,
     .matrixNum = 0,
-    .size = 3,
+    .size = SPRITE_SIZE(64x64),
     .tileNum = 0,
     .priority = 0,
     .paletteNum = 0,
@@ -306,8 +340,12 @@ static const struct SpriteTemplate sPokemonLogoShineSpriteTemplate =
 
 static const struct CompressedSpriteSheet sPokemonLogoShineSpriteSheet[] =
 {
-    {sTitleScreenLogoShineGfx, 0x800, 1002},
-    {NULL},
+    {
+        .data = sTitleScreenLogoShineGfx,
+        .size = 0x800,
+        .tag = 1002
+    },
+    {},
 };
 
 // code
@@ -324,7 +362,7 @@ static void SpriteCB_VersionBannerLeft(struct Sprite *sprite)
             sprite->pos1.y++;
         if (sprite->data[0] != 0)
             sprite->data[0]--;
-        SetGpuReg(REG_OFFSET_BLDALPHA, gIntroWaterDropData[sprite->data[0]]);
+        SetGpuReg(REG_OFFSET_BLDALPHA, gIntroWaterDropAlphaBlend[sprite->data[0]]);
     }
 }
 

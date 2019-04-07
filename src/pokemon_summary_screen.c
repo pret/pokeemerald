@@ -9,7 +9,7 @@
 #include "bg.h"
 #include "contest.h"
 #include "contest_effect.h"
-#include "data2.h"
+#include "data.h"
 #include "daycare.h"
 #include "decompress.h"
 #include "dynamic_placeholder_text_util.h"
@@ -164,7 +164,6 @@ static EWRAM_DATA struct PokemonSummaryScreenData
 EWRAM_DATA u8 gLastViewedMonIndex = 0;
 static EWRAM_DATA u8 sUnknown_0203CF21 = 0;
 ALIGNED(4) static EWRAM_DATA u8 sUnknownTaskId = 0;
-extern const struct CompressedSpriteSheet gMonFrontPicTable[];
 
 struct UnkStruct_61CC04
 {
@@ -710,10 +709,10 @@ static const struct OamData sOamData_MoveTypes =
     .objMode = 0,
     .mosaic = 0,
     .bpp = 0,
-    .shape = 1,
+    .shape = SPRITE_SHAPE(32x16),
     .x = 0,
     .matrixNum = 0,
-    .size = 2,
+    .size = SPRITE_SIZE(32x16),
     .tileNum = 0,
     .priority = 1,
     .paletteNum = 0,
@@ -886,10 +885,10 @@ static const struct OamData gOamData_861CFF4 =
     .objMode = 0,
     .mosaic = 0,
     .bpp = 0,
-    .shape = 0,
+    .shape = SPRITE_SHAPE(16x16),
     .x = 0,
     .matrixNum = 0,
-    .size = 1,
+    .size = SPRITE_SIZE(16x16),
     .tileNum = 0,
     .priority = 1,
     .paletteNum = 0,
@@ -975,10 +974,10 @@ static const struct OamData sOamData_StatusCondition =
     .objMode = 0,
     .mosaic = 0,
     .bpp = 0,
-    .shape = 1,
+    .shape = SPRITE_SHAPE(32x8),
     .x = 0,
     .matrixNum = 0,
-    .size = 1,
+    .size = SPRITE_SIZE(32x8),
     .tileNum = 0,
     .priority = 3,
     .paletteNum = 0,

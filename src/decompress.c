@@ -1,14 +1,12 @@
 #include "global.h"
-#include "decompress.h"
-#include "constants/species.h"
-#include "text.h"
 #include "alloc.h"
+#include "data.h"
+#include "decompress.h"
 #include "pokemon.h"
+#include "text.h"
+#include "constants/species.h"
 
 EWRAM_DATA ALIGNED(4) u8 gDecompressionBuffer[0x4000] = {0};
-
-extern const struct CompressedSpriteSheet gMonFrontPicTable[];
-extern const struct CompressedSpriteSheet gMonBackPicTable[];
 
 static void DuplicateDeoxysTiles(void *pointer, s32 species);
 

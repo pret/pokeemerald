@@ -230,7 +230,7 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route120_EventScript_290F48",
+      "script": "Route120_EventScript_ItemNugget",
       "flag": "FLAG_ITEM_ROUTE_120_NUGGET"
     },
     {
@@ -295,7 +295,7 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route120_EventScript_2906BB",
+      "script": "EventScript_CutTree",
       "flag": "FLAG_TEMP_11"
     },
     {
@@ -308,7 +308,7 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route120_EventScript_290F55",
+      "script": "Route120_EventScript_ItemFullHeal",
       "flag": "FLAG_ITEM_ROUTE_120_FULL_HEAL"
     },
     {
@@ -386,7 +386,7 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route120_EventScript_290F6F",
+      "script": "Route120_EventScript_ItemNestBall",
       "flag": "FLAG_ITEM_ROUTE_120_NEST_BALL"
     },
     {
@@ -399,7 +399,7 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route120_EventScript_290F62",
+      "script": "Route120_EventScript_ItemHyperPotion",
       "flag": "FLAG_ITEM_ROUTE_120_HYPER_POTION"
     },
     {
@@ -438,7 +438,7 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route120_EventScript_2906BB",
+      "script": "EventScript_CutTree",
       "flag": "FLAG_TEMP_14"
     },
     {
@@ -451,7 +451,7 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route120_EventScript_2906BB",
+      "script": "EventScript_CutTree",
       "flag": "FLAG_TEMP_12"
     },
     {
@@ -594,7 +594,7 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route120_EventScript_290F7C",
+      "script": "Route120_EventScript_ItemRevive",
       "flag": "FLAG_ITEM_ROUTE_120_REVIVE"
     }
   ],

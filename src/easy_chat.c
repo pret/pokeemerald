@@ -2,7 +2,7 @@
 #include "alloc.h"
 #include "bard_music.h"
 #include "bg.h"
-#include "data2.h"
+#include "data.h"
 #include "decompress.h"
 #include "dewford_trend.h"
 #include "dynamic_placeholder_text_util.h"
@@ -14,8 +14,8 @@
 #include "gpu_regs.h"
 #include "graphics.h"
 #include "international_string_util.h"
-#include "link.h"
 #include "main.h"
+#include "mevent.h"
 #include "menu.h"
 #include "overworld.h"
 #include "palette.h"
@@ -772,10 +772,10 @@ static const struct OamData sOamData_8597D10 = {
     .objMode = ST_OAM_OBJ_NORMAL,
     .mosaic = 0,
     .bpp = ST_OAM_4BPP,
-    .shape = ST_OAM_SQUARE,
+    .shape = SPRITE_SHAPE(8x8),
     .x = 0,
     .matrixNum = 0,
-    .size = 0,
+    .size = SPRITE_SIZE(8x8),
     .tileNum = 0,
     .priority = 3,
     .paletteNum = 0,
@@ -798,10 +798,10 @@ static const struct OamData sUnknown_08597D30 = {
     .objMode = ST_OAM_OBJ_NORMAL,
     .mosaic = 0,
     .bpp = ST_OAM_4BPP,
-    .shape = ST_OAM_H_RECTANGLE,
+    .shape = SPRITE_SHAPE(64x32),
     .x = 0,
     .matrixNum = 0,
-    .size = 3,
+    .size = SPRITE_SIZE(64x32),
     .tileNum = 0,
     .priority = 1,
     .paletteNum = 0,
@@ -851,10 +851,10 @@ static const struct OamData sUnknown_08597D80 = {
     .objMode = ST_OAM_OBJ_NORMAL,
     .mosaic = 0,
     .bpp = ST_OAM_4BPP,
-    .shape = ST_OAM_H_RECTANGLE,
+    .shape = SPRITE_SHAPE(64x32),
     .x = 0,
     .matrixNum = 0,
-    .size = 3,
+    .size = SPRITE_SIZE(64x32),
     .tileNum = 0,
     .priority = 1,
     .paletteNum = 0,
@@ -913,10 +913,10 @@ static const struct OamData sUnknown_08597DE8 = {
     .objMode = ST_OAM_OBJ_NORMAL,
     .mosaic = 0,
     .bpp = ST_OAM_4BPP,
-    .shape = ST_OAM_SQUARE,
+    .shape = SPRITE_SHAPE(64x64),
     .x = 0,
     .matrixNum = 0,
-    .size = 3,
+    .size = SPRITE_SIZE(64x64),
     .tileNum = 0,
     .priority = 3,
     .paletteNum = 0,
@@ -939,10 +939,10 @@ static const struct OamData sUnknown_08597E08 = {
     .objMode = ST_OAM_OBJ_NORMAL,
     .mosaic = 0,
     .bpp = ST_OAM_4BPP,
-    .shape = ST_OAM_H_RECTANGLE,
+    .shape = SPRITE_SHAPE(32x8),
     .x = 0,
     .matrixNum = 0,
-    .size = 1,
+    .size = SPRITE_SIZE(32x8),
     .tileNum = 0,
     .priority = 1,
     .paletteNum = 0,
@@ -955,10 +955,10 @@ static const struct OamData gUnknown_08597E10 = {
     .objMode = ST_OAM_OBJ_NORMAL,
     .mosaic = 0,
     .bpp = ST_OAM_4BPP,
-    .shape = ST_OAM_SQUARE,
+    .shape = SPRITE_SHAPE(16x16),
     .x = 0,
     .matrixNum = 0,
-    .size = 1,
+    .size = SPRITE_SIZE(16x16),
     .tileNum = 0,
     .priority = 1,
     .paletteNum = 0,
@@ -1318,7 +1318,7 @@ void ShowEasyChatScreen(void)
         words = gSaveBlock2Ptr->apprentices[0].easyChatWords;
         break;
     case EASY_CHAT_TYPE_QUESTIONNAIRE:
-        words = GetSaveBlock1Field3564();
+        words = sub_801B058();
         break;
     default:
         return;
@@ -3721,7 +3721,7 @@ static void sub_811D0BC(void)
 {
     FillBgTilemapBufferRect(0, 0, 0, 0, 32, 20, 17);
     LoadUserWindowBorderGfx(1, 1, 0xE0);
-    sub_8098858(1, 1, 14);
+    DrawTextBorderOuter(1, 1, 14);
     sub_811D104(0);
     PutWindowTilemap(1);
     CopyBgTilemapBufferToVram(0);
@@ -4882,7 +4882,7 @@ bool8 ECWord_CheckIfOutsideOfValidRange(u16 easyChatWord)
     {
     case EC_GROUP_POKEMON:
     case EC_GROUP_POKEMON_2:
-        numWordsInGroup = gUnknown_085F5490;
+        numWordsInGroup = gNumSpeciesNames;
         break;
     case EC_GROUP_MOVE_1:
     case EC_GROUP_MOVE_2:
@@ -5531,7 +5531,7 @@ void InitializeEasyChatWordArray(u16 *words, u16 length)
 void sub_811F8BC(void)
 {
     int i;
-    u16 *words = GetSaveBlock1Field3564();
+    u16 *words = sub_801B058();
     for (i = 0; i < 4; i++)
         words[i] = 0xFFFF;
 }

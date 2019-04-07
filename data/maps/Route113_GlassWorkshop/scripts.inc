@@ -1,8 +1,8 @@
 Route113_GlassWorkshop_MapScripts:: @ 826ED03
-	map_script MAP_SCRIPT_ON_TRANSITION, Route113_GlassWorkshop_MapScript1_26ED09
+	map_script MAP_SCRIPT_ON_TRANSITION, Route113_GlassWorkshop_OnTransition
 	.byte 0
 
-Route113_GlassWorkshop_MapScript1_26ED09: @ 826ED09
+Route113_GlassWorkshop_OnTransition: @ 826ED09
 	setflag FLAG_LANDMARK_GLASS_WORKSHOP
 	compare VAR_GLASS_WORKSHOP_STATE, 1
 	call_if_eq Route113_GlassWorkshop_EventScript_26ED18

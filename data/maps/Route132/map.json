@@ -61,7 +61,7 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route132_EventScript_291059",
+      "script": "Route132_EventScript_ItemRareCandy",
       "flag": "FLAG_ITEM_ROUTE_132_RARE_CANDY"
     },
     {
@@ -152,7 +152,7 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route132_EventScript_291066",
+      "script": "Route132_EventScript_ItemProtein",
       "flag": "FLAG_ITEM_ROUTE_132_PROTEIN"
     }
   ],

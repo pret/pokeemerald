@@ -3,7 +3,7 @@
 #include "battle.h"
 #include "battle_message.h"
 #include "bg.h"
-#include "data2.h"
+#include "data.h"
 #include "decompress.h"
 #include "evolution_scene.h"
 #include "evolution_graphics.h"
@@ -51,8 +51,6 @@ void (*gCB2_AfterEvolution)(void);
 
 #define sEvoCursorPos           gBattleCommunication[1] // when learning a new move
 #define sEvoGraphicsTaskID      gBattleCommunication[2]
-
-extern const struct CompressedSpriteSheet gMonFrontPicTable[];
 
 // this file's functions
 static void Task_EvolutionScene(u8 taskID);
@@ -1228,7 +1226,7 @@ static void Task_TradeEvolutionScene(u8 taskID)
             if (!gPaletteFade.active)
             {
                 if (gWirelessCommType)
-                    sub_800E084();
+                    DestroyWirelessStatusIndicatorSprite();
 
                 Free(GetBgTilemapBuffer(3));
                 Free(GetBgTilemapBuffer(1));

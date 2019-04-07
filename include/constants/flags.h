@@ -287,7 +287,7 @@
 #define FLAG_RECEIVED_TM41                   0x109
 #define FLAG_RECEIVED_LAVARIDGE_EGG          0x10A
 #define FLAG_RECEIVED_REVIVED_FOSSIL_MON     0x10B
-#define FLAG_DECORATION_16                   0x10C
+#define FLAG_SECRET_BASE_REGISTRY_ENABLED    0x10C
 #define FLAG_RECEIVED_TM46                   0x10D
 #define FLAG_CONTEST_SKETCH_CREATED          0x10E
 #define FLAG_EVIL_TEAM_ESCAPED_STERN_SPOKE   0x10F
@@ -336,24 +336,23 @@
 #define FLAG_RECEIVED_AURORA_TICKET          0x13A // RECEIVED Aurora Ticket in Mystery Gift
 #define FLAG_RECEIVED_MYSTIC_TICKET          0x13B // RECEIVED Mystic Ticket in Mystery Gift
 #define FLAG_RECEIVED_OLD_SEA_MAP            0x13C // RECEIVED Old Sea Map in Mystery Gift
-
-#define FLAG_UNUSED_0x13D                    0x13D // Unused Flag
-#define FLAG_UNUSED_0x13E                    0x13E // Unused Flag
-#define FLAG_UNUSED_0x13F                    0x13F // Unused Flag
-#define FLAG_UNUSED_0x140                    0x140 // Unused Flag
-#define FLAG_UNUSED_0x141                    0x141 // Unused Flag
-#define FLAG_UNUSED_0x142                    0x142 // Unused Flag
-#define FLAG_UNUSED_0x143                    0x143 // Unused Flag
-#define FLAG_UNUSED_0x144                    0x144 // Unused Flag
-#define FLAG_UNUSED_0x145                    0x145 // Unused Flag
-#define FLAG_UNUSED_0x146                    0x146 // Unused Flag
-#define FLAG_UNUSED_0x147                    0x147 // Unused Flag
-#define FLAG_UNUSED_0x148                    0x148 // Unused Flag
-#define FLAG_UNUSED_0x149                    0x149 // Unused Flag
-#define FLAG_UNUSED_0x14A                    0x14A // Unused Flag
-#define FLAG_UNUSED_0x14B                    0x14B // Unused Flag
-#define FLAG_UNUSED_0x14C                    0x14C // Unused Flag
-#define FLAG_UNUSED_0x14D                    0x14D // Unused Flag
+#define FLAG_UNUSED_MYSTERY_GIFT_0x13D       0x13D
+#define FLAG_UNUSED_MYSTERY_GIFT_0x13E       0x13E
+#define FLAG_UNUSED_MYSTERY_GIFT_0x13F       0x13F
+#define FLAG_UNUSED_MYSTERY_GIFT_0x140       0x140
+#define FLAG_UNUSED_MYSTERY_GIFT_0x141       0x141
+#define FLAG_UNUSED_MYSTERY_GIFT_0x142       0x142
+#define FLAG_UNUSED_MYSTERY_GIFT_0x143       0x143
+#define FLAG_UNUSED_MYSTERY_GIFT_0x144       0x144
+#define FLAG_UNUSED_MYSTERY_GIFT_0x145       0x145
+#define FLAG_UNUSED_MYSTERY_GIFT_0x146       0x146
+#define FLAG_UNUSED_MYSTERY_GIFT_0x147       0x147
+#define FLAG_UNUSED_MYSTERY_GIFT_0x148       0x148
+#define FLAG_UNUSED_MYSTERY_GIFT_0x149       0x149
+#define FLAG_UNUSED_MYSTERY_GIFT_0x14A       0x14A
+#define FLAG_UNUSED_MYSTERY_GIFT_0x14B       0x14B
+#define FLAG_UNUSED_MYSTERY_GIFT_0x14C       0x14C
+#define FLAG_UNUSED_MYSTERY_GIFT_0x14D       0x14D
 
 #define FLAG_MIRAGE_TOWER_VISIBLE            0x14E
 #define FLAG_CHOSE_CLAW_FOSSIL               0x14F // Player chose Claw Fossil
@@ -446,13 +445,14 @@
 #define FLAG_REMATCH_NORMAN                  0x1A2
 #define FLAG_REMATCH_WINONA                  0x1A3
 #define FLAG_REMATCH_TATE_AND_LIZA           0x1A4
-#define FLAG_REMATCH_JUAN                    0x1A5
-#define FLAG_REMATCH_SIDNEY                  0x1A6
-#define FLAG_REMATCH_PHOEBE                  0x1A7
-#define FLAG_REMATCH_GLACIA                  0x1A8
-#define FLAG_REMATCH_DRAKE                   0x1A9
-#define FLAG_REMATCH_WALLACE                 0x1AA
+// Note: FLAG_REMATCH_JUAN is handled by FLAG_ENABLE_JUAN_MATCH_CALL instead.
+#define FLAG_REMATCH_SIDNEY                  0x1A5
+#define FLAG_REMATCH_PHOEBE                  0x1A6
+#define FLAG_REMATCH_GLACIA                  0x1A7
+#define FLAG_REMATCH_DRAKE                   0x1A8
+#define FLAG_REMATCH_WALLACE                 0x1A9
 
+#define FLAG_UNUSED_0x1AA                    0x1AA // Unused Flag
 #define FLAG_UNUSED_0x1AB                    0x1AB // Unused Flag
 
 #define FLAG_DEFEATED_DEOXYS                 0x1AC

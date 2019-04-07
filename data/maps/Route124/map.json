@@ -115,7 +115,7 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route124_EventScript_290FF1",
+      "script": "Route124_EventScript_ItemRedShard",
       "flag": "FLAG_ITEM_ROUTE_124_RED_SHARD"
     },
     {
@@ -128,7 +128,7 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route124_EventScript_290FFE",
+      "script": "Route124_EventScript_ItemBlueShard",
       "flag": "FLAG_ITEM_ROUTE_124_BLUE_SHARD"
     },
     {
@@ -141,7 +141,7 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route124_EventScript_29100B",
+      "script": "Route124_EventScript_ItemYellowShard",
       "flag": "FLAG_ITEM_ROUTE_124_YELLOW_SHARD"
     },
     {

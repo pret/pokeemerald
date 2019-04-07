@@ -1,10 +1,10 @@
 Route110_TrickHouseEntrance_MapScripts:: @ 8269A50
-	map_script MAP_SCRIPT_ON_TRANSITION, Route110_TrickHouseEntrance_MapScript1_269A60
+	map_script MAP_SCRIPT_ON_TRANSITION, Route110_TrickHouseEntrance_OnTransition
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, Route110_TrickHouseEntrance_MapScript2_269CEE
 	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, Route110_TrickHouseEntrance_MapScript2_269BD3
 	.byte 0
 
-Route110_TrickHouseEntrance_MapScript1_269A60: @ 8269A60
+Route110_TrickHouseEntrance_OnTransition: @ 8269A60
 	setflag FLAG_LANDMARK_TRICK_HOUSE
 	compare VAR_TRICK_HOUSE_STATE, 1
 	goto_if_eq Route110_TrickHouseEntrance_EventScript_269AF3
@@ -27,7 +27,7 @@ Route110_TrickHouseEntrance_MapScript1_269A60: @ 8269A60
 
 Route110_TrickHouseEntrance_EventScript_269AD7:: @ 8269AD7
 	setvar VAR_TRICK_HOUSE_ENTRANCE_STATE_1, 1
-	compare VAR_0x4044, 8
+	compare VAR_TRICK_HOUSE_LEVEL, 8
 	goto_if_eq Route110_TrickHouseEntrance_EventScript_269AED
 	setvar VAR_TRICK_HOUSE_ENTRANCE_STATE_3, 2
 	end
@@ -44,21 +44,21 @@ Route110_TrickHouseEntrance_EventScript_269AF3:: @ 8269AF3
 
 Route110_TrickHouseEntrance_EventScript_269B03:: @ 8269B03
 	setvar VAR_TRICK_HOUSE_ENTRANCE_STATE_3, 0
-	compare VAR_0x4044, 1
+	compare VAR_TRICK_HOUSE_LEVEL, 1
 	call_if_eq Route110_TrickHouseEntrance_EventScript_269B61
-	compare VAR_0x4044, 2
+	compare VAR_TRICK_HOUSE_LEVEL, 2
 	call_if_eq Route110_TrickHouseEntrance_EventScript_269B6B
-	compare VAR_0x4044, 3
+	compare VAR_TRICK_HOUSE_LEVEL, 3
 	call_if_eq Route110_TrickHouseEntrance_EventScript_269B75
-	compare VAR_0x4044, 4
+	compare VAR_TRICK_HOUSE_LEVEL, 4
 	call_if_eq Route110_TrickHouseEntrance_EventScript_269B7F
-	compare VAR_0x4044, 5
+	compare VAR_TRICK_HOUSE_LEVEL, 5
 	call_if_eq Route110_TrickHouseEntrance_EventScript_269B89
-	compare VAR_0x4044, 6
+	compare VAR_TRICK_HOUSE_LEVEL, 6
 	call_if_eq Route110_TrickHouseEntrance_EventScript_269B93
-	compare VAR_0x4044, 7
+	compare VAR_TRICK_HOUSE_LEVEL, 7
 	call_if_eq Route110_TrickHouseEntrance_EventScript_269B9D
-	compare VAR_0x4044, 8
+	compare VAR_TRICK_HOUSE_LEVEL, 8
 	call_if_eq Route110_TrickHouseEntrance_EventScript_269BA7
 	return
 
@@ -139,7 +139,7 @@ Route110_TrickHouseEntrance_EventScript_269C15:: @ 8269C15
 Route110_TrickHouseEntrance_EventScript_269C26:: @ 8269C26
 	addobject 1
 	hideobjectat 1, MAP_ROUTE110_TRICK_HOUSE_ENTRANCE
-	switch VAR_0x4044
+	switch VAR_TRICK_HOUSE_LEVEL
 	case 0, Route110_TrickHouseEntrance_EventScript_269C8C
 	case 1, Route110_TrickHouseEntrance_EventScript_269C94
 	case 2, Route110_TrickHouseEntrance_EventScript_269C9C
@@ -205,7 +205,7 @@ Route110_TrickHouseEntrance_MapScript2_269CEE: @ 8269CEE
 Route110_TrickHouseEntrance_EventScript_269CF8:: @ 8269CF8
 	lockall
 	delay 20
-	compare VAR_0x4044, 0
+	compare VAR_TRICK_HOUSE_LEVEL, 0
 	call_if_eq Route110_TrickHouseEntrance_EventScript_269E48
 	msgbox Route110_TrickHouseEntrance_Text_26A78C, MSGBOX_DEFAULT
 	closemessage
@@ -240,21 +240,21 @@ Route110_TrickHouseEntrance_EventScript_269D6E:: @ 8269D6E
 	waitmovement 0
 	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_Delay48
 	waitmovement 0
-	compare VAR_0x4044, 0
+	compare VAR_TRICK_HOUSE_LEVEL, 0
 	call_if_eq Route110_TrickHouseEntrance_EventScript_269DEE
-	compare VAR_0x4044, 1
+	compare VAR_TRICK_HOUSE_LEVEL, 1
 	call_if_eq Route110_TrickHouseEntrance_EventScript_269DF7
-	compare VAR_0x4044, 2
+	compare VAR_TRICK_HOUSE_LEVEL, 2
 	call_if_eq Route110_TrickHouseEntrance_EventScript_269E00
-	compare VAR_0x4044, 3
+	compare VAR_TRICK_HOUSE_LEVEL, 3
 	call_if_eq Route110_TrickHouseEntrance_EventScript_269E09
-	compare VAR_0x4044, 4
+	compare VAR_TRICK_HOUSE_LEVEL, 4
 	call_if_eq Route110_TrickHouseEntrance_EventScript_269E12
-	compare VAR_0x4044, 5
+	compare VAR_TRICK_HOUSE_LEVEL, 5
 	call_if_eq Route110_TrickHouseEntrance_EventScript_269E1B
-	compare VAR_0x4044, 6
+	compare VAR_TRICK_HOUSE_LEVEL, 6
 	call_if_eq Route110_TrickHouseEntrance_EventScript_269E24
-	compare VAR_0x4044, 7
+	compare VAR_TRICK_HOUSE_LEVEL, 7
 	call_if_eq Route110_TrickHouseEntrance_EventScript_269E2D
 	closemessage
 	setvar VAR_TRICK_HOUSE_ENTRANCE_STATE_2, 1
@@ -343,19 +343,19 @@ Route110_TrickHouseEntrance_EventScript_269E8F:: @ 8269E8F
 	applymovement 1, Common_Movement_FacePlayer
 	waitmovement 0
 	msgbox Route110_TrickHouseEntrance_Text_26AA82, MSGBOX_DEFAULT
-	compare VAR_0x4044, 1
+	compare VAR_TRICK_HOUSE_LEVEL, 1
 	goto_if_eq Route110_TrickHouseEntrance_EventScript_269EEF
-	compare VAR_0x4044, 2
+	compare VAR_TRICK_HOUSE_LEVEL, 2
 	goto_if_eq Route110_TrickHouseEntrance_EventScript_269F1B
-	compare VAR_0x4044, 3
+	compare VAR_TRICK_HOUSE_LEVEL, 3
 	goto_if_eq Route110_TrickHouseEntrance_EventScript_269F47
-	compare VAR_0x4044, 4
+	compare VAR_TRICK_HOUSE_LEVEL, 4
 	goto_if_eq Route110_TrickHouseEntrance_EventScript_269F73
-	compare VAR_0x4044, 5
+	compare VAR_TRICK_HOUSE_LEVEL, 5
 	goto_if_eq Route110_TrickHouseEntrance_EventScript_269F9F
-	compare VAR_0x4044, 6
+	compare VAR_TRICK_HOUSE_LEVEL, 6
 	goto_if_eq Route110_TrickHouseEntrance_EventScript_269FCB
-	compare VAR_0x4044, 7
+	compare VAR_TRICK_HOUSE_LEVEL, 7
 	goto_if_eq Route110_TrickHouseEntrance_EventScript_269FF7
 	end
 
@@ -510,7 +510,7 @@ Route110_TrickHouseEntrance_EventScript_26A126:: @ 826A126
 	waitmovement 0
 	applymovement EVENT_OBJ_ID_PLAYER, Route110_TrickHouseEntrance_Movement_26A1A7
 	waitmovement 0
-	switch VAR_0x4044
+	switch VAR_TRICK_HOUSE_LEVEL
 	case 0, Route110_TrickHouseEntrance_EventScript_26A1A9
 	case 1, Route110_TrickHouseEntrance_EventScript_26A1B4
 	case 2, Route110_TrickHouseEntrance_EventScript_26A1BF
@@ -579,7 +579,7 @@ Route110_TrickHouseEntrance_EventScript_26A201:: @ 826A201
 	end
 
 Route110_TrickHouseEntrance_EventScript_26A20B:: @ 826A20B
-	compare VAR_0x4044, 8
+	compare VAR_TRICK_HOUSE_LEVEL, 8
 	goto_if_eq Route110_TrickHouseEntrance_EventScript_26A220
 	msgbox Route110_TrickHouseEntrance_Text_26A878, MSGBOX_DEFAULT
 	releaseall
@@ -592,7 +592,7 @@ Route110_TrickHouseEntrance_EventScript_26A220:: @ 826A220
 
 Route110_TrickHouseEntrance_EventScript_26A22A:: @ 826A22A
 	lockall
-	switch VAR_0x4044
+	switch VAR_TRICK_HOUSE_LEVEL
 	case 0, Route110_TrickHouseEntrance_EventScript_26A289
 	case 1, Route110_TrickHouseEntrance_EventScript_26A2B2
 	case 2, Route110_TrickHouseEntrance_EventScript_26A2DB
@@ -727,11 +727,11 @@ Route110_TrickHouseEntrance_EventScript_26A3F8:: @ 826A3F8
 	lockall
 	msgbox Route110_TrickHouseEntrance_Text_26A474, MSGBOX_DEFAULT
 	releaseall
-	compare VAR_0x4044, 0
+	compare VAR_TRICK_HOUSE_LEVEL, 0
 	call_if_eq Route110_TrickHouseEntrance_EventScript_26A429
-	compare VAR_0x4044, 1
+	compare VAR_TRICK_HOUSE_LEVEL, 1
 	call_if_eq Route110_TrickHouseEntrance_EventScript_26A439
-	compare VAR_0x4044, 2
+	compare VAR_TRICK_HOUSE_LEVEL, 2
 	call_if_eq Route110_TrickHouseEntrance_EventScript_26A449
 	setvar VAR_TRICK_HOUSE_ENTRANCE_STATE_1, 1
 	end
@@ -759,8 +759,8 @@ Route110_TrickHouseEntrance_EventScript_26A459:: @ 826A459
 	setfieldeffectargument 0, VAR_0x8004
 	setfieldeffectargument 1, VAR_0x8005
 	setfieldeffectargument 2, VAR_0x8006
-	dofieldeffect 54
-	waitfieldeffect 54
+	dofieldeffect FLDEFF_SPARKLE
+	waitfieldeffect FLDEFF_SPARKLE
 	delay 10
 	return
 

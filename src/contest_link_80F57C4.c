@@ -6,6 +6,7 @@
 #include "contest.h"
 #include "contest_link_80F57C4.h"
 #include "contest_link_80FC4F4.h"
+#include "data.h"
 #include "decompress.h"
 #include "dma3.h"
 #include "event_data.h"
@@ -86,7 +87,6 @@ struct ContestLink80F57C4
 
 EWRAM_DATA struct ContestLink80F57C4 *gUnknown_0203A034 = NULL;
 
-extern const struct CompressedSpriteSheet gMonFrontPicTable[];
 extern const struct BgTemplate gUnknown_0858D888[4];
 extern const struct WindowTemplate gUnknown_0858D898[];
 extern const struct CompressedSpriteSheet gUnknown_0858D878[];
@@ -778,7 +778,7 @@ static void sub_80F677C(u8 taskId)
     if (!gReceivedRemoteLinkPlayers)
     {
         if (gIsLinkContest & 0x2)
-            sub_800E084();
+            DestroyWirelessStatusIndicatorSprite();
 
         sub_80F7144();
         gTasks[taskId].func = sub_80F67C4;

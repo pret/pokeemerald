@@ -471,21 +471,21 @@ struct SecretBaseParty
     u8 EVs[PARTY_SIZE];
 };
 
-struct SecretBaseRecord
+struct SecretBase
 {
     /*0x1A9C*/ u8 secretBaseId;
     /*0x1A9D*/ u8 sbr_field_1_0:4;
     /*0x1A9D*/ u8 gender:1;
-    /*0x1A9D*/ u8 sbr_field_1_5:1;
-    /*0x1A9D*/ u8 sbr_field_1_6:2;
+    /*0x1A9D*/ u8 battledOwnerToday:1;
+    /*0x1A9D*/ u8 registryStatus:2;
     /*0x1A9E*/ u8 trainerName[PLAYER_NAME_LENGTH];
     /*0x1AA5*/ u8 trainerId[4]; // byte 0 is used for determining trainer class
     /*0x1AA9*/ u8 language;
-    /*0x1AAA*/ u16 sbr_field_e;
-    /*0x1AAC*/ u8 sbr_field_10;
+    /*0x1AAA*/ u16 numSecretBasesReceived;
+    /*0x1AAC*/ u8 numTimesEntered;
     /*0x1AAD*/ u8 sbr_field_11;
     /*0x1AAE*/ u8 decorations[16];
-    /*0x1ABE*/ u8 decorationPos[16];
+    /*0x1ABE*/ u8 decorationPositions[16];
     /*0x1AD0*/ struct SecretBaseParty party;
 };
 
@@ -808,6 +808,76 @@ struct SaveTrainerHill
     /*0x3D6E*/ u16 tag:2; // x40, x80 = xC0
 };
 
+struct MysteryEventStruct
+{
+    u8 unk_0_0:2;
+    u8 unk_0_2:3;
+    u8 unk_0_5:3;
+    u8 unk_1;
+};
+
+ struct WonderNews
+{
+    u16 unk_00;
+    u8 unk_02;
+    u8 unk_03;
+    u8 unk_04[40];
+    u8 unk_2C[10][40];
+};
+
+ struct WonderNewsSaveStruct
+{
+    u32 crc;
+    struct WonderNews data;
+};
+
+ struct WonderCard
+{
+    u16 unk_00;
+    u16 unk_02;
+    u32 unk_04;
+    u8 unk_08_0:2;
+    u8 unk_08_2:4;
+    u8 unk_08_6:2;
+    u8 unk_09;
+    u8 unk_0A[40];
+    u8 unk_32[40];
+    u8 unk_5A[4][40];
+    u8 unk_FA[40];
+    u8 unk_122[40];
+};
+
+ struct WonderCardSaveStruct
+{
+    u32 crc;
+    struct WonderCard data;
+};
+
+ struct MEventBuffer_3430_Sub
+{
+    u16 unk_00;
+    u16 unk_02;
+    u16 unk_04;
+    u16 unk_06;
+    u16 unk_08[2][7];
+};
+
+ struct MEventBuffer_3430
+{
+    u32 crc;
+    struct MEventBuffer_3430_Sub data;
+};
+
+ struct MEventBuffers
+{
+    /*0x000 0x322C*/ struct WonderNewsSaveStruct wonderNews;
+    /*0x1c0 0x33EC*/ struct WonderCardSaveStruct wonderCard;
+    /*0x310 0x353C*/ struct MEventBuffer_3430 buffer_310;
+    /*0x338 0x3564*/ u16 unk_338[4];
+    /*0x340 0x356C*/ struct MysteryEventStruct unk_340;
+    /*0x344 0x3570*/ u32 unk_344[2][5];
+}; // 0x36C 0x3598
+
 struct SaveBlock1
 {
     /*0x00*/ struct Coords16 pos;
@@ -845,7 +915,7 @@ struct SaveBlock1
     /*0x139C*/ u16 vars[VARS_COUNT];
     /*0x159C*/ u32 gameStats[NUM_GAME_STATS];
     /*0x169C*/ struct BerryTree berryTrees[BERRY_TREES_COUNT];
-    /*0x1A9C*/ struct SecretBaseRecord secretBases[SECRET_BASES_COUNT];
+    /*0x1A9C*/ struct SecretBase secretBases[SECRET_BASES_COUNT];
     /*0x271C*/ u8 playerRoomDecor[12];
     /*0x2728*/ u8 playerRoomDecorPos[12];
     /*0x2734*/ u8 decorDesk[10];
@@ -884,14 +954,16 @@ struct SaveBlock1
     /*0x31A8*/ u8 giftRibbons[52];
     /*0x31DC*/ struct Roamer roamer;
     /*0x31F8*/ struct EnigmaBerry enigmaBerry;
-    /*0x322C*/ u8 field_322C[1260];
+    /*0x322C*/ struct MEventBuffers unk_322C;
+    /*0x3598*/ u8 field_3598[0x180];
     /*0x3718*/ u32 trainerHillTimes[4];
     /*0x3728*/ struct RamScript ramScript;
     /*0x3B14*/ struct RecordMixingGift recordMixingGift;
     /*0x3B24*/ u8 seen2[DEX_FLAGS_NO];
     /*0x3B58*/ LilycoveLady lilycoveLady;
     /*0x3B98*/ struct TrainerNameRecord trainerNameRecords[20];
-    /*0x3C88*/ u8 filler_3C88[0xDC];
+    /*0x3C88*/ u8 unk3C88[10][21];
+    /*0x3D5A*/ u8 filler3D5A[0xA];
     /*0x3D64*/ struct SaveTrainerHill trainerHill;
     /*0x3D70*/ struct WaldaPhrase waldaPhrase;
     // sizeof: 0x3D88

@@ -1,6 +1,6 @@
 #include "global.h"
 #include "bg.h"
-#include "data2.h"
+#include "data.h"
 #include "decompress.h"
 #include "decoration.h"
 #include "decoration_inventory.h"
@@ -918,7 +918,7 @@ static void Task_BuyMenu(u8 taskId)
         {
         case LIST_NOTHING_CHOSEN:
             break;
-        case LIST_B_PRESSED:
+        case LIST_CANCEL:
             PlaySE(SE_SELECT);
             ExitBuyMenu(taskId);
             break;

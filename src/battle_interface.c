@@ -23,7 +23,8 @@
 #include "battle_anim.h"
 #include "constants/battle_anim.h"
 #include "constants/rgb.h"
-#include "data2.h"
+#include "data.h"
+#include "pokemon_summary_screen.h"
 
 struct TestingBar
 {
@@ -157,8 +158,6 @@ enum
     HEALTHBOX_GFX_117, //unknown_D1300C
 };
 
-extern const u8 *const gNatureNamePointers[];
-
 // strings
 extern const u8 gText_Slash[];
 extern const u8 gText_HighlightDarkGrey[];
@@ -207,10 +206,10 @@ static const struct OamData sUnknown_0832C138 =
     .objMode = 0,
     .mosaic = 0,
     .bpp = 0,
-    .shape = 1,
+    .shape = SPRITE_SHAPE(64x32),
     .x = 0,
     .matrixNum = 0,
-    .size = 3,
+    .size = SPRITE_SIZE(64x32),
     .tileNum = 0,
     .priority = 1,
     .paletteNum = 0,
@@ -279,10 +278,10 @@ static const struct OamData sOamData_Healthbar =
     .objMode = 0,
     .mosaic = 0,
     .bpp = 0,
-    .shape = 1,
+    .shape = SPRITE_SHAPE(32x8),
     .x = 0,
     .matrixNum = 0,
-    .size = 1,
+    .size = SPRITE_SIZE(32x8),
     .tileNum = 0,
     .priority = 1,
     .paletteNum = 0,
@@ -446,10 +445,10 @@ static const struct OamData sUnknown_0832C354 =
     .objMode = 0,
     .mosaic = 0,
     .bpp = 0,
-    .shape = 1,
+    .shape = SPRITE_SHAPE(64x32),
     .x = 0,
     .matrixNum = 0,
-    .size = 3,
+    .size = SPRITE_SIZE(64x32),
     .tileNum = 0,
     .priority = 1,
     .paletteNum = 0,
@@ -463,10 +462,10 @@ static const struct OamData sOamData_StatusSummaryBalls =
     .objMode = 0,
     .mosaic = 0,
     .bpp = 0,
-    .shape = 0,
+    .shape = SPRITE_SHAPE(8x8),
     .x = 0,
     .matrixNum = 0,
-    .size = 0,
+    .size = SPRITE_SIZE(8x8),
     .tileNum = 0,
     .priority = 1,
     .paletteNum = 0,

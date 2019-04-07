@@ -22,7 +22,7 @@ OldaleTown_PokemonCenter_2F_EventScript_276AD5:: @ 8276AD5
 	specialvar VAR_RESULT, sub_813B514
 	compare VAR_RESULT, 1
 	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_276AFB
-	specialvar VAR_RESULT, sub_801B27C
+	specialvar VAR_RESULT, ValidateReceivedWonderCard
 	compare VAR_RESULT, 0
 	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_276AFF
 	goto OldaleTown_PokemonCenter_2F_EventScript_276AFB
@@ -60,7 +60,7 @@ VerdanturfTown_PokemonCenter_2F_EventScript_276B03:: @ 8276B03
 	end
 
 OldaleTown_PokemonCenter_2F_EventScript_276B19:: @ 8276B19
-	execram
+	gotoram
 
 OldaleTown_PokemonCenter_2F_EventScript_276B1A:: @ 8276B1A
 	msgbox gUnknown_08273178, MSGBOX_NPC

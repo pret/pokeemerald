@@ -403,6 +403,38 @@
 	.byte \param0
 	.byte \param1
 	.endm
+	
+	@ Help macros for 5 uses of moveend command
+	
+	@ All cases
+	.macro moveendall
+	setbyte sMOVEEND_STATE, 0
+	moveend 0, 0
+	.endm
+	
+	@ Chosen case
+	.macro moveendcase case:req
+	setbyte sMOVEEND_STATE, \case
+	moveend 1, 0
+	.endm
+	
+	@ All cases from (inclusive)
+	.macro moveendfrom from:req
+	setbyte sMOVEEND_STATE, \from
+	moveend 0, 0
+	.endm
+	
+	@ All cases from 0 to (not inclusive)
+	.macro moveendto to:req
+	setbyte sMOVEEND_STATE, 0
+	moveend 2, \to
+	.endm
+	
+	@ Cases from (inclusive) to (not inclusive)
+	.macro moveendfromto from:req, to:req
+	setbyte sMOVEEND_STATE, \from
+	moveend 2, \to
+	.endm
 
 	.macro typecalc2
 	.byte 0x4a
@@ -1092,7 +1124,7 @@
 	.byte 0xdd
 	.endm
 
-	.macro asistattackselect param0:req
+	.macro assistattackselect param0:req
 	.byte 0xde
 	.4byte \param0
 	.endm
