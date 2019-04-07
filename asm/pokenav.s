@@ -253,7 +253,7 @@ sub_81C941C: @ 81C941C
 sub_81C9430: @ 81C9430
 	push {lr}
 	movs r0, 0x1
-	bl FreeSubstruct
+	bl FreePokenavSubstruct
 	pop {r0}
 	bx r0
 	thumb_func_end sub_81C9430
@@ -1003,7 +1003,7 @@ sub_81C99D4: @ 81C99D4
 	bl sub_81C9FEC
 	bl sub_81CA994
 	movs r0, 0x2
-	bl FreeSubstruct
+	bl FreePokenavSubstruct
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -1715,7 +1715,7 @@ _081C9FCA:
 	cmp r5, 0x1
 	bls _081C9FCA
 	ldr r0, =gUnknown_086201D4
-	bl sub_81C795C
+	bl Pokenav_AllocAndLoadPalettes
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -3173,7 +3173,7 @@ sub_81CAB24: @ 81CAB24
 sub_81CAB38: @ 81CAB38
 	push {lr}
 	movs r0, 0x5
-	bl FreeSubstruct
+	bl FreePokenavSubstruct
 	pop {r0}
 	bx r0
 	thumb_func_end sub_81CAB38
@@ -4232,7 +4232,7 @@ sub_81CB2E0: @ 81CB2E0
 	ldrb r0, [r4, 0x14]
 	bl RemoveWindow
 	movs r0, 0x6
-	bl FreeSubstruct
+	bl FreePokenavSubstruct
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -5325,7 +5325,7 @@ _081CBB9A:
 	bl IsPaletteFadeActive
 	cmp r0, 0
 	bne _081CBBAA
-	bl sub_81C78C0
+	bl MainMenuLoopedTaskIsBusy
 	cmp r0, 0
 	beq _081CBBAE
 _081CBBAA:
@@ -6166,7 +6166,7 @@ _081CC224:
 	cmp r5, 0
 	beq _081CC224
 	ldr r0, =gUnknown_08622818
-	bl sub_81C795C
+	bl Pokenav_AllocAndLoadPalettes
 	movs r0, 0
 	str r0, [r6, 0x1C]
 	ldr r1, =0x00001828
@@ -6551,9 +6551,9 @@ sub_81CC524: @ 81CC524
 	orrs r0, r1
 	strb r0, [r3, 0x15]
 	movs r0, 0x10
-	bl FreeSubstruct
+	bl FreePokenavSubstruct
 	movs r0, 0x3
-	bl FreeSubstruct
+	bl FreePokenavSubstruct
 	pop {r0}
 	bx r0
 	.pool
@@ -6725,9 +6725,9 @@ sub_81CC670: @ 81CC670
 	ldrb r0, [r4, 0x8]
 	bl RemoveWindow
 	movs r0, 0x10
-	bl FreeSubstruct
+	bl FreePokenavSubstruct
 	movs r0, 0x4
-	bl FreeSubstruct
+	bl FreePokenavSubstruct
 	bl SetPokenavVBlankCallback
 	movs r0, 0
 	bl SetBgMode
@@ -7103,7 +7103,7 @@ _081CC982:
 	movs r0, 0
 	b _081CC9BA
 _081CC996:
-	bl sub_81C78C0
+	bl MainMenuLoopedTaskIsBusy
 	cmp r0, 0
 	beq _081CC9A2
 _081CC99E:
@@ -7138,7 +7138,7 @@ _081CC9C6:
 	cmp r5, 0
 	beq _081CC9C6
 	ldr r0, =gUnknown_08623100
-	bl sub_81C795C
+	bl Pokenav_AllocAndLoadPalettes
 	bl sub_81CCE58
 	pop {r4,r5}
 	pop {r0}
@@ -8115,10 +8115,10 @@ sub_81CD1C0: @ 81CD1C0
 	cmp r0, 0
 	bne _081CD1DA
 	movs r0, 0x12
-	bl FreeSubstruct
+	bl FreePokenavSubstruct
 _081CD1DA:
 	movs r0, 0xB
-	bl FreeSubstruct
+	bl FreePokenavSubstruct
 	pop {r0}
 	bx r0
 	thumb_func_end sub_81CD1C0
@@ -10195,7 +10195,7 @@ _081CE33E:
 	bl IsPaletteFadeActive
 	cmp r0, 0
 	bne _081CE34E
-	bl sub_81C78C0
+	bl MainMenuLoopedTaskIsBusy
 	cmp r0, 0
 	beq _081CE352
 _081CE34E:
@@ -11072,7 +11072,7 @@ _081CEA78:
 	mov r0, sp
 	bl LoadSpriteSheets
 	mov r0, r10
-	bl sub_81C795C
+	bl Pokenav_AllocAndLoadPalettes
 	movs r4, 0
 	add r0, sp, 0x50
 	mov r8, r0
@@ -11233,7 +11233,7 @@ _081CEBC6:
 	mov r3, r10
 	str r0, [r3, 0x8]
 	mov r0, r10
-	bl sub_81C795C
+	bl Pokenav_AllocAndLoadPalettes
 	add sp, 0x58
 	pop {r3-r5}
 	mov r8, r3
@@ -11357,7 +11357,7 @@ _081CECF0:
 	bl sub_81CEBF4
 	bl sub_81CEE68
 	movs r0, 0xC
-	bl FreeSubstruct
+	bl FreePokenavSubstruct
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -11713,10 +11713,10 @@ sub_81CEFF0: @ 81CEFF0
 	cmp r0, 0
 	bne _081CF004
 	movs r0, 0x12
-	bl FreeSubstruct
+	bl FreePokenavSubstruct
 _081CF004:
 	movs r0, 0x7
-	bl FreeSubstruct
+	bl FreePokenavSubstruct
 	pop {r0}
 	bx r0
 	thumb_func_end sub_81CEFF0
@@ -12276,7 +12276,7 @@ sub_81CF3F8: @ 81CF3F8
 	ldrb r0, [r4, 0x8]
 	bl RemoveWindow
 	movs r0, 0x8
-	bl FreeSubstruct
+	bl FreePokenavSubstruct
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -12722,7 +12722,7 @@ _081CF778:
 	bl IsPaletteFadeActive
 	cmp r0, 0
 	bne _081CF788
-	bl sub_81C78C0
+	bl MainMenuLoopedTaskIsBusy
 	cmp r0, 0
 	beq _081CF78C
 _081CF788:
@@ -13069,10 +13069,10 @@ sub_81CFA48: @ 81CFA48
 	cmp r0, 0
 	bne _081CFA5C
 	movs r0, 0x12
-	bl FreeSubstruct
+	bl FreePokenavSubstruct
 _081CFA5C:
 	movs r0, 0x9
-	bl FreeSubstruct
+	bl FreePokenavSubstruct
 	pop {r0}
 	bx r0
 	thumb_func_end sub_81CFA48
@@ -13662,7 +13662,7 @@ sub_81CFE98: @ 81CFE98
 	ldrb r0, [r4, 0x8]
 	bl RemoveWindow
 	movs r0, 0xA
-	bl FreeSubstruct
+	bl FreePokenavSubstruct
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -14096,7 +14096,7 @@ _081D01FC:
 	bl IsPaletteFadeActive
 	cmp r0, 0
 	bne _081D020C
-	bl sub_81C78C0
+	bl MainMenuLoopedTaskIsBusy
 	cmp r0, 0
 	beq _081D0210
 _081D020C:
@@ -14428,7 +14428,7 @@ sub_81D04A0: @ 81D04A0
 sub_81D04B8: @ 81D04B8
 	push {lr}
 	movs r0, 0xD
-	bl FreeSubstruct
+	bl FreePokenavSubstruct
 	pop {r0}
 	bx r0
 	thumb_func_end sub_81D04B8
@@ -15184,7 +15184,7 @@ sub_81D09F4: @ 81D09F4
 	ldr r0, [r4, 0x14]
 	bl DestroySprite
 	movs r0, 0xE
-	bl FreeSubstruct
+	bl FreePokenavSubstruct
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -16381,7 +16381,7 @@ sub_81D13FC: @ 81D13FC
 	ldr r0, =gUnknown_08624C78
 	bl LoadCompressedSpriteSheet
 	ldr r0, =gUnknown_08624C80
-	bl sub_81C795C
+	bl Pokenav_AllocAndLoadPalettes
 	ldr r0, =gUnknown_08624D04
 	movs r1, 0
 	movs r2, 0

@@ -44460,7 +44460,7 @@ _0802D178:
 	bl CopyBgTilemapBufferToVram
 	movs r0, 0x1
 	bl CopyBgTilemapBufferToVram
-	bl sub_8199D98
+	bl ResetBgPositions
 	b _0802D2CC
 	.pool
 _0802D298:

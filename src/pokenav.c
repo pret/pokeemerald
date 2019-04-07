@@ -26,10 +26,21 @@ enum
     MODE_FORCE_CALL_2, // Set after making a call, has to exit Pokenav.
 };
 
+enum
+{
+    NAVMENU_CB_UNK_0,
+    NAVMENU_CB_UNK_1,
+    NAVMENU_CB_UNK_2,
+    NAVMENU_CB_UNK_3,
+    NAVMENU_CB_UNK_4,
+    NAVMENU_CB_UNK_5,
+    NAVMENU_CB_UNK_6
+};
+
 // Return values of LoopedTask functions.
-#define LT_INC_AND_STOP 0
+#define LT_INC_AND_PAUSE 0
 #define LT_INC_AND_CONTINUE 1
-#define LT_STOP 2
+#define LT_PAUSE 2
 #define LT_CONTINUE 3
 #define LT_FINISH 4
 #define LT_SET_STATE(newState) (newState + 5)
@@ -72,7 +83,7 @@ struct MatchCallWindowState {
 };
 
 // Generally at index 0.
-struct UnknownSubStruct_0203CF40
+struct PokenavMainMenuResources
 {
     void (*unk0)(u32);
     u32 (*unk4)(void);
@@ -80,7 +91,7 @@ struct UnknownSubStruct_0203CF40
     u32 currentTaskId;
     u32 unk10;
     u32 unk14;
-    struct Sprite *unk18;
+    struct Sprite *spinningNavgear;
     struct Sprite *unk1C[2];
     struct Sprite *unk24[2];
     u8 tilemapBuffer[0x800];
@@ -120,8 +131,8 @@ struct UnknownSubStruct_81C81D4
 
 struct PokenavResources
 {
-    u32 (*field0)(void);
-    u32 field4;
+    u32 (*currentMenuCb1)(void);
+    u32 currentMenuIndex;
     u16 mode;
     u16 fieldA;
     bool32 hasAnyRibbons;
@@ -154,8 +165,7 @@ struct MatchCallListTemplate
 extern u32 sub_81C9430(void);
 extern void sub_81CAADC(void);
 extern u32 sub_81C99D4(void);
-extern void sub_8199D98(void);
-extern void sub_81C7D28(void);
+extern void InitHoenMapHeaderSprites(void);
 extern u32 sub_81C9298(void);
 extern u32 sub_81C941C(void);
 extern u32 sub_81C9924(void);
@@ -213,7 +223,7 @@ extern u32 sub_81D04B8(void);
 extern u32 sub_81D09F4(void);
 extern u32 sub_81CFA04(void);
 extern u32 sub_81CFE08(void);
-extern void sub_81C7CB4(struct Sprite* sprite);
+extern void SpriteCB_SpinningNavgear(struct Sprite* sprite);
 extern void sub_81CBD48(u16 windowId, u32 a1);
 extern u8 *sub_81CAFD8(u16 a0, u32 a1);
 extern void sub_81DB620(u32 windowId, u32 a1, u32 a2, u32 a3, u32 a4);
@@ -244,35 +254,35 @@ void sub_81C837C(struct MatchCallWindowState *a0, struct UnknownInnerStruct_81C8
 void sub_81C835C(struct UnknownSubSubStruct_0203CF40 *a0);
 void sub_81C82E4(struct UnknownSubStruct_81C81D4 *a0);
 u32 LoopedTask_sub_81C8254(s32 a0);
-u32 LoopedTask_sub_81C791C(s32 a0);
-bool32 sub_81C756C(u32 a0);
-bool32 sub_81C76C4(void);
+u32 LoopedTask_ScrollMenuHeaderUp(s32 a0);
+bool32 SetActivePokenavMenu(u32 a0);
+bool32 InitPokenavMainMenu(void);
 static bool32 AnyMonHasRibbon(void);
 u32 sub_81C75E0(void);
 u32 sub_81C75D4(void);
-u32 sub_81C76FC(void);
+u32 PokenavMainMenuLoopedTaskIsActive(void);
 u32 sub_81C786C(void);
-u32 LoopedTask_sub_81C7764(s32 a0);
-u32 LoopedTask_sub_81C78D4(s32 a0);
-bool32 sub_81C7738(void);
+u32 LoopedTask_InitPokenavMenu(s32 a0);
+u32 LoopedTask_ScrollMenuHeaderDown(s32 a0);
+bool32 WaitForPokenavShutdownFade(void);
 void CopyPaletteIntoBufferUnfaded(const u16 *palette, u32 a1, u32 a2);
 void sub_81C7834(void *func1, void *func2);
-static void InitMainStruct(struct PokenavResources *a0);
-void FreeSubstruct(u32 index);
+static void InitPokenavResources(struct PokenavResources *a0);
+void FreePokenavSubstruct(u32 index);
 void sub_81C7850(u32 a0);
 void sub_81C7BF8(u32 a0);
 void Task_RunLoopedTask_LinkMode(u8 a0);
 void Task_RunLoopedTask(u8 taskId);
 void sub_81C742C(u8 taskId);
-void sub_81C7710(void);
+void ShutdownPokenav(void);
 static void InitKeys_(void);
-static void FreeVars(void);
+static void FreePokenavResources(void);
 static void VBlankCB_Pokenav(void);
 static void CB2_Pokenav(void);
-void sub_81C7C28(void);
+void InitPokenavMainMenuResources(void);
 void sub_81C72BC(void);
 void sub_81C7B74(void);
-void sub_81C7C94(void);
+void CleanupPokenavMainMenuResources(void);
 void sub_81C7F24(u32 arg0);
 void sub_81C7E58(u32 arg0);
 void sub_81C8110(bool32 arg0);
@@ -283,7 +293,7 @@ void sub_81C814C(struct Sprite *sprite, s32 arg1, s32 arg2, s32 arg3);
 void sub_81C817C(struct Sprite *sprite);
 
 // Const rom data.
-u32 (*const gUnknown_0861F3EC[15][7])(void) =
+u32 (*const PokenavMenuCallbacks[15][7])(void) =
 {
     {
         sub_81C9298,
@@ -422,11 +432,11 @@ u32 (*const gUnknown_0861F3EC[15][7])(void) =
     },
 };
 
-const u16 gUnknown_0861F590[] = INCBIN_U16("graphics/pokenav/icon2.gbapal");
-const u32 gUnknown_0861F5B0[] = INCBIN_U32("graphics/pokenav/icon2.4bpp.lz");
-const u32 gUnknown_0861F994[] = INCBIN_U32("graphics/pokenav/icon2_unused.4bpp.lz");
+const u16 gSpinningNavgearPaletteData[] = INCBIN_U16("graphics/pokenav/icon2.gbapal");
+const u32 gSpinningNavgearGfx[] = INCBIN_U32("graphics/pokenav/icon2.4bpp.lz");
+const u32 gUnused_SpinningNavgearGfx2[] = INCBIN_U32("graphics/pokenav/icon2_unused.4bpp.lz");
 
-const struct BgTemplate gUnknown_0861FA04[] =
+const struct BgTemplate gPokenavMainMenuBgTemplates[] =
 {
     {
         .bg = 0,
@@ -482,25 +492,25 @@ const u8 gMenuButtonReminderColor[4] =
     4, 1, 2, 0
 };
 
-static const struct CompressedSpriteSheet sUnknown_0861FA4C[] =
+static const struct CompressedSpriteSheet gSpinningNavgearSpriteSheet[] =
 {
     {
-        .data = gUnknown_0861F5B0,
+        .data = gSpinningNavgearGfx,
         .size = 0x1000,
         .tag = 0,
     }
 };
 
-static const struct SpritePalette sUnknown_0861FA54[] =
+static const struct SpritePalette gSpinningNavgearPalette[] =
 {
     {
-        .data = gUnknown_0861F590,
+        .data = gSpinningNavgearPaletteData,
         .tag = 0,
     },
     {}
 };
 
-static const struct CompressedSpriteSheet sUnknown_0861FA64 =
+static const struct CompressedSpriteSheet sPokenavHoenMapLeftHeaderSpriteSheet =
 {
     .data = gPokenavLeftHeaderHoennMap_Gfx,
     .size = 0xC00,
@@ -573,7 +583,7 @@ static const struct CompressedSpritePalette_ sUnknown_0861FA9C[] =
     }
 };
 
-static const struct OamData sUnknown_0861FAD4 =
+static const struct OamData sSpinningNavgearSpriteOam =
 {
     .y = 0,
     .affineMode = 0,
@@ -590,7 +600,7 @@ static const struct OamData sUnknown_0861FAD4 =
     .affineParam = 0
 };
 
-static const union AnimCmd sUnknown_0861FADC[] =
+static const union AnimCmd sSpinningNavgarAnims[] =
 {
     ANIMCMD_FRAME(0, 8),
     ANIMCMD_FRAME(16, 8),
@@ -603,23 +613,23 @@ static const union AnimCmd sUnknown_0861FADC[] =
     ANIMCMD_JUMP(0)
 };
 
-static const union AnimCmd *const sUnknown_0861FB00[] =
+static const union AnimCmd *const sSpinningNavgarAnimTable[] =
 {
-    sUnknown_0861FADC
+    sSpinningNavgarAnims
 };
 
-static const struct SpriteTemplate sUnknown_0861FB04 =
+static const struct SpriteTemplate sSpinningNavgearSpriteTemplate =
 {
     .tileTag = 0,
     .paletteTag = 0,
-    .oam = &sUnknown_0861FAD4,
-    .anims = sUnknown_0861FB00,
+    .oam = &sSpinningNavgearSpriteOam,
+    .anims = sSpinningNavgarAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_81C7CB4
+    .callback = SpriteCB_SpinningNavgear
 };
 
-static const struct OamData sUnknown_0861FB1C =
+static const struct OamData sPokenavLeftHeaderHoenMapSpriteOam =
 {
     .y = 0,
     .affineMode = 0,
@@ -653,11 +663,11 @@ static const struct OamData sUnknown_0861FB24 =
     .affineParam = 0
 };
 
-static const struct SpriteTemplate sUnknown_0861FB2C =
+static const struct SpriteTemplate sPokenavLeftHeaderHoenMapSpriteTemplate =
 {
     .tileTag = 2,
     .paletteTag = 1,
-    .oam = &sUnknown_0861FB1C,
+    .oam = &sPokenavLeftHeaderHoenMapSpriteOam,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
@@ -828,7 +838,7 @@ void Task_RunLoopedTask(u8 taskId)
         case LT_INC_AND_CONTINUE:
             (*state)++;
             break;
-        case LT_INC_AND_STOP:
+        case LT_INC_AND_PAUSE:
             (*state)++;
             return;
         case LT_FINISH:
@@ -840,13 +850,13 @@ void Task_RunLoopedTask(u8 taskId)
             break;
         case LT_CONTINUE:
             break;
-        case LT_STOP:
+        case LT_PAUSE:
             return;
         }
     }
 }
 
-// Every "Continue" action stops instead.
+// Every "Continue" action pauses instead.
 void Task_RunLoopedTask_LinkMode(u8 taskId)
 {
     LoopedTask task;
@@ -861,7 +871,7 @@ void Task_RunLoopedTask_LinkMode(u8 taskId)
     action = task(*state);
     switch (action)
     {
-    case LT_INC_AND_STOP:
+    case LT_INC_AND_PAUSE:
     case LT_INC_AND_CONTINUE:
         (*state)++;
         break;
@@ -872,7 +882,7 @@ void Task_RunLoopedTask_LinkMode(u8 taskId)
     default:
         *state = LOOPED_TASK_DECODE_STATE(action);
         break;
-    case LT_STOP:
+    case LT_PAUSE:
     case LT_CONTINUE:
         break;
     }
@@ -887,7 +897,7 @@ void CB2_InitPokeNav(void)
     }
     else
     {
-        InitMainStruct(gPokenavResources);
+        InitPokenavResources(gPokenavResources);
         ResetTasks();
         SetVBlankCallback(NULL);
         CreateTask(sub_81C742C, 0);
@@ -915,7 +925,7 @@ void sub_81C72BC(void)
     }
     else
     {
-        InitMainStruct(gPokenavResources);
+        InitPokenavResources(gPokenavResources);
         gPokenavResources->mode = MODE_FORCE_CALL_1;
         ResetTasks();
         ResetSpriteData();
@@ -927,19 +937,18 @@ void sub_81C72BC(void)
     }
 }
 
-static void FreeVars(void)
+static void FreePokenavResources(void)
 {
     s32 i;
 
     for (i = 0; i < SUBSTRUCT_COUNT; i++)
-        FreeSubstruct(i);
+        FreePokenavSubstruct(i);
 
     FREE_AND_SET_NULL(gPokenavResources);
     InitKeys();
 }
 
-// Clears PokenavResources
-static void InitMainStruct(struct PokenavResources *a0)
+static void InitPokenavResources(struct PokenavResources *a0)
 {
     s32 i;
 
@@ -947,9 +956,9 @@ static void InitMainStruct(struct PokenavResources *a0)
         a0->field10[i] = NULL;
 
     a0->mode = MODE_NORMAL;
-    a0->field4 = 0;
+    a0->currentMenuIndex = 0;
     a0->hasAnyRibbons = AnyMonHasRibbon();
-    a0->field0 = NULL;
+    a0->currentMenuCb1 = NULL;
 }
 
 static bool32 AnyMonHasRibbon(void)
@@ -1004,13 +1013,14 @@ void sub_81C742C(u8 taskId)
     switch (data[0])
     {
     case 0:
-        sub_81C76C4();
+        InitPokenavMainMenu();
         data[0] = 1;
         break;
     case 1:
-        if (sub_81C76FC())
+        // Wait for LoopedTask_InitPokenavMenu to finish
+        if (PokenavMainMenuLoopedTaskIsActive())
             break;
-        sub_81C756C(UNKNOWN_OFFSET);
+        SetActivePokenavMenu(0 + UNKNOWN_OFFSET);
         data[0] = 4;
         break;
     case 2:
@@ -1021,20 +1031,20 @@ void sub_81C742C(u8 taskId)
         v1 = sub_81C75E0();
         if (v1 == -1)
         {
-            sub_81C7710();
+            ShutdownPokenav();
             data[0] = 5;
         }
         else if (v1 >= UNKNOWN_OFFSET)
         {
-            gUnknown_0861F3EC[gPokenavResources->field4][6]();
-            gUnknown_0861F3EC[gPokenavResources->field4][5]();
-            if (sub_81C756C(v1))
+            PokenavMenuCallbacks[gPokenavResources->currentMenuIndex][NAVMENU_CB_UNK_6]();
+            PokenavMenuCallbacks[gPokenavResources->currentMenuIndex][NAVMENU_CB_UNK_5]();
+            if (SetActivePokenavMenu(v1))
             {
                 data[0] = 4;
             }
             else
             {
-                sub_81C7710();
+                ShutdownPokenav();
                 data[0] = 5;
             }
         }
@@ -1050,12 +1060,12 @@ void sub_81C742C(u8 taskId)
             data[0] = 3;
         break;
     case 5:
-        if (!sub_81C7738())
+        if (!WaitForPokenavShutdownFade())
         {
             bool32 calledFromScript = (gPokenavResources->mode != MODE_NORMAL);
 
             sub_81C9430();
-            FreeVars();
+            FreePokenavResources();
             if (calledFromScript)
                 SetMainCallback2(CB2_ReturnToFieldContinueScriptPlayMapMusic);
             else
@@ -1065,19 +1075,19 @@ void sub_81C742C(u8 taskId)
     }
 }
 
-bool32 sub_81C756C(u32 a0)
+bool32 SetActivePokenavMenu(u32 indexWithOffset)
 {
-    u32 index = a0 - UNKNOWN_OFFSET;
+    u32 index = indexWithOffset - UNKNOWN_OFFSET;
 
     InitKeys_();
-    if (!gUnknown_0861F3EC[index][0]())
+    if (!PokenavMenuCallbacks[index][NAVMENU_CB_UNK_0]())
         return FALSE;
-    if (!gUnknown_0861F3EC[index][2]())
+    if (!PokenavMenuCallbacks[index][NAVMENU_CB_UNK_2]())
         return FALSE;
 
-    sub_81C7834(gUnknown_0861F3EC[index][3], gUnknown_0861F3EC[index][4]);
-    gPokenavResources->field0 = gUnknown_0861F3EC[index][1];
-    gPokenavResources->field4 = index;
+    sub_81C7834(PokenavMenuCallbacks[index][NAVMENU_CB_UNK_3], PokenavMenuCallbacks[index][NAVMENU_CB_UNK_4]);
+    gPokenavResources->currentMenuCb1 = PokenavMenuCallbacks[index][NAVMENU_CB_UNK_1];
+    gPokenavResources->currentMenuIndex = index;
     return TRUE;
 }
 
@@ -1088,7 +1098,7 @@ u32 sub_81C75D4(void)
 
 u32 sub_81C75E0(void)
 {
-    return gPokenavResources->field0();
+    return gPokenavResources->currentMenuCb1();
 }
 
 static void InitKeys_(void)
@@ -1116,7 +1126,7 @@ void *GetSubstructPtr(u32 index)
     return gPokenavResources->field10[index];
 }
 
-void FreeSubstruct(u32 index)
+void FreePokenavSubstruct(u32 index)
 {
     if (gPokenavResources->field10[index] != NULL)
         FREE_AND_SET_NULL(gPokenavResources->field10[index]);
@@ -1151,39 +1161,39 @@ bool32 CanViewRibbonsMenu(void)
     return gPokenavResources->hasAnyRibbons;
 }
 
-bool32 sub_81C76C4(void)
+bool32 InitPokenavMainMenu(void)
 {
-    struct UnknownSubStruct_0203CF40 *structPtr;
+    struct PokenavMainMenuResources *structPtr;
     
-    structPtr = AllocSubstruct(0, sizeof(struct UnknownSubStruct_0203CF40));
+    structPtr = AllocSubstruct(0, sizeof(struct PokenavMainMenuResources));
     if (structPtr == NULL)
         return FALSE;
 
     ResetSpriteData();
     FreeAllSpritePalettes();
-    structPtr->currentTaskId = CreateLoopedTask(LoopedTask_sub_81C7764, 1);
+    structPtr->currentTaskId = CreateLoopedTask(LoopedTask_InitPokenavMenu, 1);
     return TRUE;
 }
 
-u32 sub_81C76FC(void)
+u32 PokenavMainMenuLoopedTaskIsActive(void)
 {
-    struct UnknownSubStruct_0203CF40 *structPtr = GetSubstructPtr(0);
+    struct PokenavMainMenuResources *structPtr = GetSubstructPtr(0);
     return IsLoopedTaskActive(structPtr->currentTaskId);
 }
 
-void sub_81C7710(void)
+void ShutdownPokenav(void)
 {
     PlaySE(SE_PN_OFF);
     sub_81CAADC();
     BeginNormalPaletteFade(0xFFFFFFFF, -1, 0, 16, RGB_BLACK);
 }
 
-bool32 sub_81C7738(void)
+bool32 WaitForPokenavShutdownFade(void)
 {
     if (!gPaletteFade.active)
     {
         sub_81C99D4();
-        sub_81C7C94();
+        CleanupPokenavMainMenuResources();
         FreeAllWindowBuffers();
         return FALSE;
     }
@@ -1191,9 +1201,9 @@ bool32 sub_81C7738(void)
     return TRUE;
 }
 
-u32 LoopedTask_sub_81C7764(s32 a0)
+u32 LoopedTask_InitPokenavMenu(s32 a0)
 {
-    struct UnknownSubStruct_0203CF40 *structPtr;
+    struct PokenavMainMenuResources *structPtr;
 
     switch (a0)
     {
@@ -1201,10 +1211,10 @@ u32 LoopedTask_sub_81C7764(s32 a0)
         SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_ON | DISPCNT_OBJ_1D_MAP);
         FreeAllWindowBuffers();
         ResetBgsAndClearDma3BusyFlags(0);
-        InitBgsFromTemplates(0, gUnknown_0861FA04, ARRAY_COUNT(gUnknown_0861FA04));
-        sub_8199D98();
+        InitBgsFromTemplates(0, gPokenavMainMenuBgTemplates, ARRAY_COUNT(gPokenavMainMenuBgTemplates));
+        ResetBgPositions();
         reset_temp_tile_data_buffers();
-        return 1;
+        return LT_INC_AND_CONTINUE;
     case 1:
         structPtr = GetSubstructPtr(0);
         decompress_and_copy_tile_data_to_vram(0, &gPokenavHeader_Gfx, 0, 0, 0);
@@ -1212,29 +1222,29 @@ u32 LoopedTask_sub_81C7764(s32 a0)
         CopyToBgTilemapBuffer(0, &gPokenavHeader_Tilemap, 0, 0);
         CopyPaletteIntoBufferUnfaded(gPokenavHeader_Pal, 0, 0x20);
         CopyBgTilemapBufferToVram(0);
-        return 0;
+        return LT_INC_AND_PAUSE;
     case 2:
         if (free_temp_tile_data_buffers_if_possible())
-            return 2;
+            return LT_PAUSE;
 
         sub_81C7B74();
-        return 0;
+        return LT_INC_AND_PAUSE;
     case 3:
         if (IsDma3ManagerBusyWithBgCopy())
-            return 2;
+            return LT_PAUSE;
 
-        sub_81C7C28();
-        sub_81C7D28();
+        InitPokenavMainMenuResources();
+        InitHoenMapHeaderSprites();
         ShowBg(0);
-        return 4;
+        return LT_FINISH;
     default:
-        return 4;
+        return LT_FINISH;
     }
 }
 
 void sub_81C7834(void *func1, void *func2) // Fix types later.
 {
-    struct UnknownSubStruct_0203CF40 *structPtr = GetSubstructPtr(0);
+    struct PokenavMainMenuResources *structPtr = GetSubstructPtr(0);
     structPtr->unk0 = func1;
     structPtr->unk4 = func2;
     structPtr->unk8 = 0;
@@ -1242,57 +1252,57 @@ void sub_81C7834(void *func1, void *func2) // Fix types later.
 
 void sub_81C7850(u32 a0)
 {
-    struct UnknownSubStruct_0203CF40 *structPtr = GetSubstructPtr(0);
+    struct PokenavMainMenuResources *structPtr = GetSubstructPtr(0);
     structPtr->unk8 = 0;
     structPtr->unk0(a0);
 }
 
 u32 sub_81C786C(void)
 {
-    struct UnknownSubStruct_0203CF40 *structPtr = GetSubstructPtr(0);
+    struct PokenavMainMenuResources *structPtr = GetSubstructPtr(0);
     return structPtr->unk4();
 }
 
 void sub_81C7880(void)
 {
-    struct UnknownSubStruct_0203CF40 *structPtr = GetSubstructPtr(0);
-    structPtr->currentTaskId = CreateLoopedTask(LoopedTask_sub_81C78D4, 4);
+    struct PokenavMainMenuResources *structPtr = GetSubstructPtr(0);
+    structPtr->currentTaskId = CreateLoopedTask(LoopedTask_ScrollMenuHeaderDown, 4);
 }
 
 void sub_81C78A0(void)
 {
-    struct UnknownSubStruct_0203CF40 *structPtr = GetSubstructPtr(0);
-    structPtr->currentTaskId = CreateLoopedTask(LoopedTask_sub_81C791C, 4);
+    struct PokenavMainMenuResources *structPtr = GetSubstructPtr(0);
+    structPtr->currentTaskId = CreateLoopedTask(LoopedTask_ScrollMenuHeaderUp, 4);
 }
 
-bool32 sub_81C78C0(void)
+bool32 MainMenuLoopedTaskIsBusy(void)
 {
-    struct UnknownSubStruct_0203CF40 *structPtr = GetSubstructPtr(0);
+    struct PokenavMainMenuResources *structPtr = GetSubstructPtr(0);
     return IsLoopedTaskActive(structPtr->currentTaskId);
 }
 
-u32 LoopedTask_sub_81C78D4(s32 a0)
+u32 LoopedTask_ScrollMenuHeaderDown(s32 a0)
 {
     switch (a0)
     {
     default:
-        return 4;
+        return LT_FINISH;
     case 1:
-        return 0;
+        return LT_INC_AND_PAUSE;
     case 0:
-        return 0;
+        return LT_INC_AND_PAUSE;
     case 2:
         if (ChangeBgY(0, 384, 1) >= 0x2000u)
         {
             ChangeBgY(0, 0x2000, 0);
-            return 4;
+            return LT_FINISH;
         }
 
-        return 2;
+        return LT_PAUSE;
     }
 }
 
-u32 LoopedTask_sub_81C791C(s32 a0)
+u32 LoopedTask_ScrollMenuHeaderUp(s32 a0)
 {
     if (ChangeBgY(0, 384, 2) <= 0)
     {
@@ -1307,7 +1317,7 @@ void CopyPaletteIntoBufferUnfaded(const u16 *palette, u32 bufferOffset, u32 size
     CpuCopy16(palette, gPlttBufferUnfaded + bufferOffset, size);
 }
 
-void sub_81C795C(const struct SpritePalette *palettes)
+void Pokenav_AllocAndLoadPalettes(const struct SpritePalette *palettes)
 {
     const struct SpritePalette *current;
     u32 index;
@@ -1470,7 +1480,7 @@ _081C7AAE:\n\
 
 void sub_81C7AC0(s32 a0)
 {
-    struct UnknownSubStruct_0203CF40 *structPtr = GetSubstructPtr(0);
+    struct PokenavMainMenuResources *structPtr = GetSubstructPtr(0);
 
     switch (a0)
     {
@@ -1509,7 +1519,7 @@ void InitBgTemplates(const struct BgTemplate *templates, s32 count)
 
 void sub_81C7B74(void)
 {
-    struct UnknownSubStruct_0203CF40 *structPtr = GetSubstructPtr(0);
+    struct PokenavMainMenuResources *structPtr = GetSubstructPtr(0);
 
     InitWindows(&gUnknown_0861FA08[0]);
     structPtr->unk10 = 0;
@@ -1520,7 +1530,7 @@ void sub_81C7B74(void)
 
 void sub_81C7BA4(u32 a0)
 {
-    struct UnknownSubStruct_0203CF40 *structPtr = GetSubstructPtr(0);
+    struct PokenavMainMenuResources *structPtr = GetSubstructPtr(0);
 
     sub_81C7BF8(structPtr->unk10);
     AddTextPrinterParameterized3(structPtr->unk10, 1, 0, 1, gMenuButtonReminderColor, 0, sMenuButtonReminders[a0]);
@@ -1537,66 +1547,66 @@ void sub_81C7BF8(u32 windowId)
     FillWindowPixelRect(windowId, PIXEL_FILL(5), 0, 0, 0x80, 1);
 }
 
-void sub_81C7C28(void)
+void InitPokenavMainMenuResources(void)
 {
     s32 i;
     u8 spriteId;
-    struct UnknownSubStruct_0203CF40 *structPtr = GetSubstructPtr(0);
+    struct PokenavMainMenuResources *structPtr = GetSubstructPtr(0);
 
-    for (i = 0; i < ARRAY_COUNT(sUnknown_0861FA4C); i++)
-        LoadCompressedSpriteSheet(&sUnknown_0861FA4C[i]);
+    for (i = 0; i < ARRAY_COUNT(gSpinningNavgearSpriteSheet); i++)
+        LoadCompressedSpriteSheet(&gSpinningNavgearSpriteSheet[i]);
 
-    sub_81C795C(sUnknown_0861FA54);
+    Pokenav_AllocAndLoadPalettes(gSpinningNavgearPalette);
     structPtr->unk14 = ~1 & ~(0x10000 << IndexOfSpritePaletteTag(0));
-    spriteId = CreateSprite(&sUnknown_0861FB04, 220, 12, 0);
-    structPtr->unk18 = &gSprites[spriteId];
+    spriteId = CreateSprite(&sSpinningNavgearSpriteTemplate, 220, 12, 0);
+    structPtr->spinningNavgear = &gSprites[spriteId];
 }
 
-void sub_81C7C94(void)
+void CleanupPokenavMainMenuResources(void)
 {
-    struct UnknownSubStruct_0203CF40 *structPtr = GetSubstructPtr(0);
+    struct PokenavMainMenuResources *structPtr = GetSubstructPtr(0);
 
-    DestroySprite(structPtr->unk18);
+    DestroySprite(structPtr->spinningNavgear);
     FreeSpriteTilesByTag(0);
     FreeSpritePaletteByTag(0);
 }
 
-void sub_81C7CB4(struct Sprite *sprite)
+void SpriteCB_SpinningNavgear(struct Sprite *sprite)
 {
     sprite->pos2.y = (GetBgY(0) / 256u) * -1;
 }
 
 struct Sprite *sub_81C7CCC(void)
 {
-    struct UnknownSubStruct_0203CF40 *structPtr = GetSubstructPtr(0);
+    struct PokenavMainMenuResources *structPtr = GetSubstructPtr(0);
 
-    structPtr->unk18->callback = SpriteCallbackDummy;
-    return structPtr->unk18;
+    structPtr->spinningNavgear->callback = SpriteCallbackDummy;
+    return structPtr->spinningNavgear;
 }
 
 void sub_81C7CE4(void)
 {
-    struct UnknownSubStruct_0203CF40 *structPtr = GetSubstructPtr(0);
+    struct PokenavMainMenuResources *structPtr = GetSubstructPtr(0);
 
-    structPtr->unk18->pos1.x = 220;
-    structPtr->unk18->pos1.y = 12;
-    structPtr->unk18->callback = sub_81C7CB4;
-    structPtr->unk18->invisible = FALSE;
-    structPtr->unk18->oam.priority = 0;
-    structPtr->unk18->subpriority = 0;
+    structPtr->spinningNavgear->pos1.x = 220;
+    structPtr->spinningNavgear->pos1.y = 12;
+    structPtr->spinningNavgear->callback = SpriteCB_SpinningNavgear;
+    structPtr->spinningNavgear->invisible = FALSE;
+    structPtr->spinningNavgear->oam.priority = 0;
+    structPtr->spinningNavgear->subpriority = 0;
 }
 
-void sub_81C7D28(void)
+void InitHoenMapHeaderSprites(void)
 {
     s32 i, spriteId;
-    struct UnknownSubStruct_0203CF40 *structPtr = GetSubstructPtr(0);
+    struct PokenavMainMenuResources *structPtr = GetSubstructPtr(0);
 
-    LoadCompressedSpriteSheet(&sUnknown_0861FA64);
+    LoadCompressedSpriteSheet(&sPokenavHoenMapLeftHeaderSpriteSheet);
     AllocSpritePalette(1);
     AllocSpritePalette(2);
     for (i = 0; i < 2; i++)
     {
-        spriteId = CreateSprite(&sUnknown_0861FB2C, 0, 0, 1);
+        spriteId = CreateSprite(&sPokenavLeftHeaderHoenMapSpriteTemplate, 0, 0, 1);
         structPtr->unk1C[i] = &gSprites[spriteId];
         structPtr->unk1C[i]->invisible = TRUE;
         structPtr->unk1C[i]->pos2.x = i * 64;
@@ -1620,7 +1630,7 @@ void sub_81C7DFC(u32 arg0)
 
 void sub_81C7E14(u32 arg0)
 {
-    struct UnknownSubStruct_0203CF40 *structPtr = GetSubstructPtr(0);
+    struct PokenavMainMenuResources *structPtr = GetSubstructPtr(0);
 
     if (arg0 == 4)
         structPtr->unk1C[1]->oam.tileNum = GetSpriteTileStartByTag(2) + 32;
@@ -1630,7 +1640,7 @@ void sub_81C7E14(u32 arg0)
 
 void sub_81C7E58(u32 arg0)
 {
-    struct UnknownSubStruct_0203CF40 *structPtr;
+    struct PokenavMainMenuResources *structPtr;
     u32 size, tag;
 
     if (arg0 >= 6)
@@ -1690,7 +1700,7 @@ void sub_81C7FC4(u32 arg0, bool32 arg1)
 void sub_81C7FDC(void)
 {
     s32 i;
-    struct UnknownSubStruct_0203CF40 *structPtr = GetSubstructPtr(0);
+    struct PokenavMainMenuResources *structPtr = GetSubstructPtr(0);
 
     for (i = 0; i < 2; i++)
     {
@@ -1701,7 +1711,7 @@ void sub_81C7FDC(void)
 
 bool32 sub_81C8010(void)
 {
-    struct UnknownSubStruct_0203CF40 *structPtr = GetSubstructPtr(0);
+    struct PokenavMainMenuResources *structPtr = GetSubstructPtr(0);
 
     if (structPtr->unk1C[0]->callback == SpriteCallbackDummy && structPtr->unk24[0]->callback == SpriteCallbackDummy)
         return FALSE;
@@ -1712,7 +1722,7 @@ bool32 sub_81C8010(void)
 void sub_81C803C(u32 arg0, bool32 arg1)
 {
     s32 var1, var2, i;
-    struct UnknownSubStruct_0203CF40 *structPtr = GetSubstructPtr(0);
+    struct PokenavMainMenuResources *structPtr = GetSubstructPtr(0);
 
     if (!arg1)
         var1 = -96, var2 = 32;
@@ -1729,7 +1739,7 @@ void sub_81C803C(u32 arg0, bool32 arg1)
 void sub_81C8088(u32 arg0, bool32 arg1)
 {
     s32 var1, var2, i;
-    struct UnknownSubStruct_0203CF40 *structPtr = GetSubstructPtr(0);
+    struct PokenavMainMenuResources *structPtr = GetSubstructPtr(0);
 
     if (!arg1)
         var1 = -96, var2 = 16;
@@ -1746,7 +1756,7 @@ void sub_81C8088(u32 arg0, bool32 arg1)
 void sub_81C80D4(bool32 arg0)
 {
     s32 var1, var2, i;
-    struct UnknownSubStruct_0203CF40 *structPtr = GetSubstructPtr(0);
+    struct PokenavMainMenuResources *structPtr = GetSubstructPtr(0);
 
     if (!arg0)
         var1 = 32, var2 = -96;
@@ -1762,7 +1772,7 @@ void sub_81C80D4(bool32 arg0)
 void sub_81C8110(bool32 arg0)
 {
     s32 var1, var2, i;
-    struct UnknownSubStruct_0203CF40 *structPtr = GetSubstructPtr(0);
+    struct PokenavMainMenuResources *structPtr = GetSubstructPtr(0);
 
     if (!arg0)
         var1 = 16, var2 = -96;
@@ -1836,7 +1846,7 @@ void sub_81C8234(void)
     structPtr = GetSubstructPtr(0x11);
     sub_81C8FE0(&structPtr->unk0);
     RemoveWindow(structPtr->unk0.unk0.windowId);
-    FreeSubstruct(0x11);
+    FreePokenavSubstruct(0x11);
 }
 
 u32 LoopedTask_sub_81C8254(s32 a0)
@@ -2688,7 +2698,7 @@ void sub_81C8ED0(void)
     {
         LoadCompressedSpriteSheet(ptr);
     }
-    sub_81C795C(sMatchcallArrowPalette);
+    Pokenav_AllocAndLoadPalettes(sMatchcallArrowPalette);
 }
 
 void sub_81C8EF8(struct MatchCallWindowState *a0, struct UnknownInnerStruct_81C81D4 *a1)
