@@ -1763,6 +1763,7 @@ static const u8 sMonFrontAnimIdsTable[NUM_SPECIES - 1] =
     [SPECIES_JIRACHI - 1] = 0x0d,
     [SPECIES_DEOXYS - 1] = 0x1b,
     [SPECIES_CHIMECHO - 1] = 0x1d,
+    [SPECIES_MOTHIM - 1] = 0x1d,
 };
 
 static const u8 sMonAnimationDelayTable[NUM_SPECIES - 1] =

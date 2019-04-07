@@ -5023,9 +5023,19 @@ static const union AnimCmd sAnim_WORMADAM_1[] =
 
 static const union AnimCmd sAnim_MOTHIM_1[] =
 {
-	ANIMCMD_FRAME(0, 30),
-	ANIMCMD_FRAME(1, 30),
-	ANIMCMD_FRAME(0, 1),
+    ANIMCMD_FRAME(0, 4),
+    ANIMCMD_FRAME(1, 4),
+    ANIMCMD_FRAME(0, 6),
+    ANIMCMD_FRAME(1, 6),
+    ANIMCMD_FRAME(0, 5),
+    ANIMCMD_FRAME(1, 5),
+    ANIMCMD_FRAME(0, 25),
+    ANIMCMD_FRAME(1, 6),
+    ANIMCMD_FRAME(0, 6),
+    ANIMCMD_FRAME(1, 4),
+    ANIMCMD_FRAME(0, 4),
+    ANIMCMD_FRAME(1, 5),
+    ANIMCMD_FRAME(0, 5),
 	ANIMCMD_END,
 };
 
