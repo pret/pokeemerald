@@ -121,9 +121,9 @@ static const u8 sPokenavColors_0861FBE4[] =
 
 static const u8 *const sMatchCallFieldNames[] =
 {
-    gText_NavgearMatchCall_Strategy,
-    gText_NavgearMatchCall_TrainerPokemon,
-    gText_NavgearMatchCall_SelfIntroduction
+    gText_PokenavMatchCall_Strategy,
+    gText_PokenavMatchCall_TrainerPokemon,
+    gText_PokenavMatchCall_SelfIntroduction
 };
 
 static const u8 sMatchCallFieldColors[] =

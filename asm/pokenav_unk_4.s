@@ -1787,7 +1787,7 @@ sub_81CC058: @ 81CC058
 	ldrb r0, [r4, 0x14]
 	movs r1, 0x3
 	bl CopyWindowToVram
-	bl PauseSpinningNavgearSprite
+	bl PauseSpinningPokenavSprite
 	movs r2, 0
 	movs r1, 0x18
 	strh r1, [r0, 0x20]
@@ -1971,7 +1971,7 @@ _081CC1C4:
 sub_81CC1DC: @ 81CC1DC
 	push {lr}
 	sub sp, 0x8
-	bl ResumeSpinningNavgearSprite
+	bl ResumeSpinningPokenavSprite
 	movs r0, 0x20
 	str r0, [sp]
 	movs r0, 0x14

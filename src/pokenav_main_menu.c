@@ -15,28 +15,28 @@
 
 enum
 {
-    NAVGEAR_GFX_MAIN_MENU,
-    NAVGEAR_GFX_CONDITION_MENU,
-    NAVGEAR_GFX_RIBBONS_MENU,
-    NAVGEAR_GFX_MATCH_CALL_MENU,
+    POKENAV_GFX_MAIN_MENU,
+    POKENAV_GFX_CONDITION_MENU,
+    POKENAV_GFX_RIBBONS_MENU,
+    POKENAV_GFX_MATCH_CALL_MENU,
     
     // One of these is for the zoomed-in map, and the other is for the
     // zoomed-out map. Don't know which is which yet.
-    NAVGEAR_GFX_MAP_MENU_UNK0,
-    NAVGEAR_GFX_MAP_MENU_UNK1,
+    POKENAV_GFX_MAP_MENU_UNK0,
+    POKENAV_GFX_MAP_MENU_UNK1,
 
-    NAVGEAR_GFX_PARTY_MENU,
-    NAVGEAR_GFX_SEARCH_MENU,
-    NAVGEAR_GFX_COOL_MENU,
-    NAVGEAR_GFX_BEAUTY_MENU,
-    NAVGEAR_GFX_CUTE_MENU,
-    NAVGEAR_GFX_SMART_MENU,
-    NAVGEAR_GFX_TOUGH_MENU,
+    POKENAV_GFX_PARTY_MENU,
+    POKENAV_GFX_SEARCH_MENU,
+    POKENAV_GFX_COOL_MENU,
+    POKENAV_GFX_BEAUTY_MENU,
+    POKENAV_GFX_CUTE_MENU,
+    POKENAV_GFX_SMART_MENU,
+    POKENAV_GFX_TOUGH_MENU,
 
-    NAVGEAR_GFX_MENUS_END
+    POKENAV_GFX_MENUS_END
 };
 
-#define NAVGEAR_GFX_SUBMENUS_START NAVGEAR_GFX_PARTY_MENU
+#define POKENAV_GFX_SUBMENUS_START POKENAV_GFX_PARTY_MENU
 
 struct PokenavMainMenuResources
 {
@@ -46,7 +46,7 @@ struct PokenavMainMenuResources
     u32 currentTaskId;
     u32 unk10;
     u32 unk14;
-    struct Sprite *spinningNavgear;
+    struct Sprite *spinningPokenav;
     struct Sprite *leftHeaderSprites[2];
     struct Sprite *submenuLeftHeaderSprites[2];
     u8 tilemapBuffer[0x800];
@@ -79,12 +79,12 @@ u32 LoopedTask_ScrollMenuHeaderUp(s32 a0);
 void sub_81C7BF8(u32 a0);
 
 
-void SpriteCB_SpinningNavgear(struct Sprite* sprite);
+void SpriteCB_SpinningPokenav(struct Sprite* sprite);
 u32 LoopedTask_InitPokenavMenu(s32 a0);
 
-const u16 gSpinningNavgearPaletteData[] = INCBIN_U16("graphics/pokenav/icon2.gbapal");
-const u32 gSpinningNavgearGfx[] = INCBIN_U32("graphics/pokenav/icon2.4bpp.lz");
-const u32 gUnused_SpinningNavgearGfx2[] = INCBIN_U32("graphics/pokenav/icon2_unused.4bpp.lz");
+const u16 gSpinningPokenavPaletteData[] = INCBIN_U16("graphics/pokenav/icon2.gbapal");
+const u32 gSpinningPokenavGfx[] = INCBIN_U32("graphics/pokenav/icon2.4bpp.lz");
+const u32 gUnused_SpinningPokenavGfx2[] = INCBIN_U32("graphics/pokenav/icon2_unused.4bpp.lz");
 
 const struct BgTemplate gPokenavMainMenuBgTemplates[] =
 {
@@ -123,18 +123,18 @@ const struct WindowTemplate gUnknown_0861FA08[2] =
 
 const u8 *const (sMenuButtonReminders[12]) =
 {
-    gText_Navgear_ClearButtonList,
-    gText_NavgearMap_ZoomedOutButtons,
-    gText_NavgearMap_ZoomedInButtons,
-    gText_NavgearCondition_MonListButtons,
-    gText_NavgearCondition_MonStatusButtons,
-    gText_NavgearCondition_MarkingButtons,
-    gText_NavgearMatchCall_TrainerListButtons,
-    gText_NavgearMatchCall_CallMenuButtons,
-    gText_NavgearMatchCall_CheckTrainerButtons,
-    gText_NavgearRibbons_MonListButtons,
-    gText_NavgearRibbons_RibbonListButtons,
-    gText_NavgearRibbons_RibbonCheckButtons,
+    gText_Pokenav_ClearButtonList,
+    gText_PokenavMap_ZoomedOutButtons,
+    gText_PokenavMap_ZoomedInButtons,
+    gText_PokenavCondition_MonListButtons,
+    gText_PokenavCondition_MonStatusButtons,
+    gText_PokenavCondition_MarkingButtons,
+    gText_PokenavMatchCall_TrainerListButtons,
+    gText_PokenavMatchCall_CallMenuButtons,
+    gText_PokenavMatchCall_CheckTrainerButtons,
+    gText_PokenavRibbons_MonListButtons,
+    gText_PokenavRibbons_RibbonListButtons,
+    gText_PokenavRibbons_RibbonCheckButtons,
 };
 
 const u8 gMenuButtonReminderColor[4] =
@@ -142,19 +142,19 @@ const u8 gMenuButtonReminderColor[4] =
     4, 1, 2, 0
 };
 
-static const struct CompressedSpriteSheet gSpinningNavgearSpriteSheet[] =
+static const struct CompressedSpriteSheet gSpinningPokenavSpriteSheet[] =
 {
     {
-        .data = gSpinningNavgearGfx,
+        .data = gSpinningPokenavGfx,
         .size = 0x1000,
         .tag = 0,
     }
 };
 
-static const struct SpritePalette gSpinningNavgearPalette[] =
+static const struct SpritePalette gSpinningPokenavPalette[] =
 {
     {
-        .data = gSpinningNavgearPaletteData,
+        .data = gSpinningPokenavPaletteData,
         .tag = 0,
     },
     {}
@@ -169,32 +169,32 @@ static const struct CompressedSpriteSheet sPokenavHoenMapLeftHeaderSpriteSheet =
 
 static const struct CompressedSpriteSheet sPokenavMenuLeftHeaderSpriteSheets[] =
 {
-    [NAVGEAR_GFX_MAIN_MENU] = {
+    [POKENAV_GFX_MAIN_MENU] = {
         .data = gPokenavLeftHeaderMainMenu_Gfx,
         .size = 0x20,
         .tag = 3
     },
-    [NAVGEAR_GFX_CONDITION_MENU] = {
+    [POKENAV_GFX_CONDITION_MENU] = {
         .data = gPokenavLeftHeaderCondition_Gfx,
         .size = 0x20,
         .tag = 1
     },
-    [NAVGEAR_GFX_RIBBONS_MENU] = {
+    [POKENAV_GFX_RIBBONS_MENU] = {
         .data = gPokenavLeftHeaderRibbons_Gfx,
         .size = 0x20,
         .tag = 2
     },
-    [NAVGEAR_GFX_MATCH_CALL_MENU] = {
+    [POKENAV_GFX_MATCH_CALL_MENU] = {
         .data = gPokenavLeftHeaderMatchCall_Gfx,
         .size = 0x20,
         .tag = 4
     },
-    [NAVGEAR_GFX_MAP_MENU_UNK0] = {
+    [POKENAV_GFX_MAP_MENU_UNK0] = {
         .data = gPokenavLeftHeaderHoennMap_Gfx,
         .size = 0x20,
         .tag = 0
     },
-    [NAVGEAR_GFX_MAP_MENU_UNK1] = {
+    [POKENAV_GFX_MAP_MENU_UNK1] = {
         .data = gPokenavLeftHeaderHoennMap_Gfx,
         .size = 0x40,
         .tag = 0
@@ -203,37 +203,37 @@ static const struct CompressedSpriteSheet sPokenavMenuLeftHeaderSpriteSheets[] =
 
 static const struct CompressedSpriteSheetNoSize sPokenavSubMenuLeftHeaderSpriteSheets[] =
 {
-    [NAVGEAR_GFX_PARTY_MENU - NAVGEAR_GFX_SUBMENUS_START] = {
+    [POKENAV_GFX_PARTY_MENU - POKENAV_GFX_SUBMENUS_START] = {
         .data = gPokenavLeftHeaderParty_Gfx,
         .tag = 1
     },
-    [NAVGEAR_GFX_SEARCH_MENU - NAVGEAR_GFX_SUBMENUS_START] = {
+    [POKENAV_GFX_SEARCH_MENU - POKENAV_GFX_SUBMENUS_START] = {
         .data = gPokenavLeftHeaderSearch_Gfx,
         .tag = 1
     },
-    [NAVGEAR_GFX_COOL_MENU - NAVGEAR_GFX_SUBMENUS_START] = {
+    [POKENAV_GFX_COOL_MENU - POKENAV_GFX_SUBMENUS_START] = {
         .data = gPokenavLeftHeaderCool_Gfx,
         .tag = 4
     },
-    [NAVGEAR_GFX_BEAUTY_MENU - NAVGEAR_GFX_SUBMENUS_START] = {
+    [POKENAV_GFX_BEAUTY_MENU - POKENAV_GFX_SUBMENUS_START] = {
         .data = gPokenavLeftHeaderBeauty_Gfx,
         .tag = 1
     },
-    [NAVGEAR_GFX_CUTE_MENU - NAVGEAR_GFX_SUBMENUS_START] = {
+    [POKENAV_GFX_CUTE_MENU - POKENAV_GFX_SUBMENUS_START] = {
         .data = gPokenavLeftHeaderCute_Gfx,
         .tag = 2
     },
-    [NAVGEAR_GFX_SMART_MENU - NAVGEAR_GFX_SUBMENUS_START] = {
+    [POKENAV_GFX_SMART_MENU - POKENAV_GFX_SUBMENUS_START] = {
         .data = gPokenavLeftHeaderSmart_Gfx,
         .tag = 0
     },
-    [NAVGEAR_GFX_TOUGH_MENU - NAVGEAR_GFX_SUBMENUS_START] = {
+    [POKENAV_GFX_TOUGH_MENU - POKENAV_GFX_SUBMENUS_START] = {
         .data = gPokenavLeftHeaderTough_Gfx,
         .tag = 0
     }
 };
 
-static const struct OamData sSpinningNavgearSpriteOam =
+static const struct OamData sSpinningPokenavSpriteOam =
 {
     .y = 0,
     .affineMode = 0,
@@ -250,7 +250,7 @@ static const struct OamData sSpinningNavgearSpriteOam =
     .affineParam = 0
 };
 
-static const union AnimCmd sSpinningNavgearAnims[] =
+static const union AnimCmd sSpinningPokenavAnims[] =
 {
     ANIMCMD_FRAME(0, 8),
     ANIMCMD_FRAME(16, 8),
@@ -263,20 +263,20 @@ static const union AnimCmd sSpinningNavgearAnims[] =
     ANIMCMD_JUMP(0)
 };
 
-static const union AnimCmd *const sSpinningNavgearAnimTable[] =
+static const union AnimCmd *const sSpinningPokenavAnimTable[] =
 {
-    sSpinningNavgearAnims
+    sSpinningPokenavAnims
 };
 
-static const struct SpriteTemplate sSpinningNavgearSpriteTemplate =
+static const struct SpriteTemplate sSpinningPokenavSpriteTemplate =
 {
     .tileTag = 0,
     .paletteTag = 0,
-    .oam = &sSpinningNavgearSpriteOam,
-    .anims = sSpinningNavgearAnimTable,
+    .oam = &sSpinningPokenavSpriteOam,
+    .anims = sSpinningPokenavAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = SpriteCB_SpinningNavgear
+    .callback = SpriteCB_SpinningPokenav
 };
 
 static const struct OamData sPokenavLeftHeaderHoenMapSpriteOam =
@@ -727,48 +727,48 @@ void InitPokenavMainMenuResources(void)
     u8 spriteId;
     struct PokenavMainMenuResources *structPtr = GetSubstructPtr(0);
 
-    for (i = 0; i < ARRAY_COUNT(gSpinningNavgearSpriteSheet); i++)
-        LoadCompressedSpriteSheet(&gSpinningNavgearSpriteSheet[i]);
+    for (i = 0; i < ARRAY_COUNT(gSpinningPokenavSpriteSheet); i++)
+        LoadCompressedSpriteSheet(&gSpinningPokenavSpriteSheet[i]);
 
-    Pokenav_AllocAndLoadPalettes(gSpinningNavgearPalette);
+    Pokenav_AllocAndLoadPalettes(gSpinningPokenavPalette);
     structPtr->unk14 = ~1 & ~(0x10000 << IndexOfSpritePaletteTag(0));
-    spriteId = CreateSprite(&sSpinningNavgearSpriteTemplate, 220, 12, 0);
-    structPtr->spinningNavgear = &gSprites[spriteId];
+    spriteId = CreateSprite(&sSpinningPokenavSpriteTemplate, 220, 12, 0);
+    structPtr->spinningPokenav = &gSprites[spriteId];
 }
 
 void CleanupPokenavMainMenuResources(void)
 {
     struct PokenavMainMenuResources *structPtr = GetSubstructPtr(0);
 
-    DestroySprite(structPtr->spinningNavgear);
+    DestroySprite(structPtr->spinningPokenav);
     FreeSpriteTilesByTag(0);
     FreeSpritePaletteByTag(0);
 }
 
-void SpriteCB_SpinningNavgear(struct Sprite *sprite)
+void SpriteCB_SpinningPokenav(struct Sprite *sprite)
 {
     // If the background starts scrolling, follow it.
     sprite->pos2.y = (GetBgY(0) / 256u) * -1;
 }
 
-struct Sprite *PauseSpinningNavgearSprite(void)
+struct Sprite *PauseSpinningPokenavSprite(void)
 {
     struct PokenavMainMenuResources *structPtr = GetSubstructPtr(0);
 
-    structPtr->spinningNavgear->callback = SpriteCallbackDummy;
-    return structPtr->spinningNavgear;
+    structPtr->spinningPokenav->callback = SpriteCallbackDummy;
+    return structPtr->spinningPokenav;
 }
 
-void ResumeSpinningNavgearSprite(void)
+void ResumeSpinningPokenavSprite(void)
 {
     struct PokenavMainMenuResources *structPtr = GetSubstructPtr(0);
 
-    structPtr->spinningNavgear->pos1.x = 220;
-    structPtr->spinningNavgear->pos1.y = 12;
-    structPtr->spinningNavgear->callback = SpriteCB_SpinningNavgear;
-    structPtr->spinningNavgear->invisible = FALSE;
-    structPtr->spinningNavgear->oam.priority = 0;
-    structPtr->spinningNavgear->subpriority = 0;
+    structPtr->spinningPokenav->pos1.x = 220;
+    structPtr->spinningPokenav->pos1.y = 12;
+    structPtr->spinningPokenav->callback = SpriteCB_SpinningPokenav;
+    structPtr->spinningPokenav->invisible = FALSE;
+    structPtr->spinningPokenav->oam.priority = 0;
+    structPtr->spinningPokenav->subpriority = 0;
 }
 
 void InitHoenMapHeaderSprites(void)
@@ -797,10 +797,10 @@ void InitHoenMapHeaderSprites(void)
 
 void LoadLeftHeaderGfxForIndex(u32 arg0)
 {
-    if (arg0 < NAVGEAR_GFX_SUBMENUS_START)
+    if (arg0 < POKENAV_GFX_SUBMENUS_START)
         LoadLeftHeaderGfxForMenu(arg0);
     else
-        LoadLeftHeaderGfxForSubMenu(arg0 - NAVGEAR_GFX_SUBMENUS_START);
+        LoadLeftHeaderGfxForSubMenu(arg0 - POKENAV_GFX_SUBMENUS_START);
 }
 
 void sub_81C7E14(u32 arg0)
@@ -818,7 +818,7 @@ void LoadLeftHeaderGfxForMenu(u32 index)
     struct PokenavMainMenuResources *structPtr;
     u32 size, tag;
 
-    if (index >= NAVGEAR_GFX_SUBMENUS_START)
+    if (index >= POKENAV_GFX_SUBMENUS_START)
         return;
 
     structPtr = GetSubstructPtr(0);
@@ -829,7 +829,7 @@ void LoadLeftHeaderGfxForMenu(u32 index)
     RequestDma3Copy(gDecompressionBuffer, (void *)VRAM + 0x10000 + (GetSpriteTileStartByTag(2) * 32), size, 1);
     structPtr->leftHeaderSprites[1]->oam.tileNum = GetSpriteTileStartByTag(2) + sPokenavMenuLeftHeaderSpriteSheets[index].size;
 
-    if (index == NAVGEAR_GFX_MAP_MENU_UNK0 || index == NAVGEAR_GFX_MAP_MENU_UNK1)
+    if (index == POKENAV_GFX_MAP_MENU_UNK0 || index == POKENAV_GFX_MAP_MENU_UNK1)
         structPtr->leftHeaderSprites[1]->pos2.x = 56;
     else
         structPtr->leftHeaderSprites[1]->pos2.x = 64;
@@ -839,7 +839,7 @@ void LoadLeftHeaderGfxForSubMenu(u32 arg0)
 {
     u32 size, tag;
 
-    if (arg0 >= NAVGEAR_GFX_MENUS_END - NAVGEAR_GFX_SUBMENUS_START)
+    if (arg0 >= POKENAV_GFX_MENUS_END - POKENAV_GFX_SUBMENUS_START)
         return;
 
     tag = sPokenavSubMenuLeftHeaderSpriteSheets[arg0].tag;
