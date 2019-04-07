@@ -1215,14 +1215,14 @@ _081C9BEC:
 	cmp r0, 0x4
 	bne _081C9C06
 	movs r0, 0x7
-	bl sub_81C7DFC
+	bl LoadLeftHeaderGfxForIndex
 _081C9BFE:
 	movs r0, 0x1
-	bl sub_81C7DFC
+	bl LoadLeftHeaderGfxForIndex
 	b _081C9AD6
 _081C9C06:
 	movs r0, 0
-	bl sub_81C7DFC
+	bl LoadLeftHeaderGfxForIndex
 	b _081C9AD6
 _081C9C0E:
 	bl IsPaletteFadeActive
@@ -1339,7 +1339,7 @@ _081C9CDC:
 	bne _081C9D34
 	bl sub_81CA0C8
 	movs r0, 0x1
-	bl sub_81C7DFC
+	bl LoadLeftHeaderGfxForIndex
 	movs r0, 0
 	b _081C9D3E
 _081C9CFA:
@@ -1410,7 +1410,7 @@ _081C9D72:
 	bne _081C9DCA
 	bl sub_81CA0C8
 	movs r0, 0
-	bl sub_81C7DFC
+	bl LoadLeftHeaderGfxForIndex
 	movs r0, 0
 	b _081C9DD4
 _081C9D90:
@@ -1476,7 +1476,7 @@ _081C9E04:
 	cmp r0, 0
 	bne _081C9E48
 	movs r0, 0x7
-	bl sub_81C7DFC
+	bl LoadLeftHeaderGfxForIndex
 	bl sub_81CA0C8
 	movs r0, 0
 	b _081C9E52
@@ -4419,7 +4419,7 @@ _081CB4A6:
 	bl ShowBg
 	bl sub_81CC214
 	movs r0, 0x3
-	bl sub_81C7DFC
+	bl LoadLeftHeaderGfxForIndex
 	movs r0, 0x3
 	movs r1, 0x1
 	movs r2, 0
@@ -5938,7 +5938,7 @@ sub_81CC058: @ 81CC058
 	ldrb r0, [r4, 0x14]
 	movs r1, 0x3
 	bl CopyWindowToVram
-	bl sub_81C7CCC
+	bl PauseSpinningNavgearSprite
 	movs r2, 0
 	movs r1, 0x18
 	strh r1, [r0, 0x20]
@@ -6122,7 +6122,7 @@ _081CC1C4:
 sub_81CC1DC: @ 81CC1DC
 	push {lr}
 	sub sp, 0x8
-	bl sub_81C7CE4
+	bl ResumeSpinningNavgearSprite
 	movs r0, 0x20
 	str r0, [sp]
 	movs r0, 0x14
@@ -6900,7 +6900,7 @@ _081CC804:
 	movs r4, 0x4
 _081CC812:
 	adds r0, r4, 0
-	bl sub_81C7DFC
+	bl LoadLeftHeaderGfxForIndex
 	adds r0, r4, 0
 	movs r1, 0x1
 	movs r2, 0x1
@@ -10052,7 +10052,7 @@ _081CE1EC:
 	b _081CDFB0
 _081CE1FC:
 	movs r0, 0x6
-	bl sub_81C7DFC
+	bl LoadLeftHeaderGfxForIndex
 	movs r0, 0x1
 	movs r1, 0x1
 	movs r2, 0
@@ -12398,7 +12398,7 @@ _081CF4F6:
 	lsls r4, 24
 	lsrs r4, 24
 	adds r0, r4, 0
-	bl sub_81C7DFC
+	bl LoadLeftHeaderGfxForIndex
 	adds r0, r4, 0
 	movs r1, 0x1
 	movs r2, 0
@@ -13779,7 +13779,7 @@ _081CFFA4:
 	cmp r0, 0
 	bne _081CFF32
 	movs r0, 0x2
-	bl sub_81C7DFC
+	bl LoadLeftHeaderGfxForIndex
 	movs r0, 0x2
 	movs r1, 0x1
 	movs r2, 0
