@@ -2,12 +2,14 @@
 #include "alloc.h"
 #include "apprentice.h"
 #include "battle.h"
+#include "battle_anim.h"
 #include "battle_controllers.h"
 #include "battle_message.h"
 #include "battle_pike.h"
 #include "battle_pyramid.h"
 #include "battle_setup.h"
 #include "battle_tower.h"
+#include "data.h"
 #include "event_data.h"
 #include "evolution_scene.h"
 #include "field_specials.h"
@@ -49,29 +51,6 @@ struct SpeciesItem
     u16 species;
     u16 item;
 };
-
-extern const struct SpriteFrameImage gUnknown_082FF3A8[];
-extern const struct SpriteFrameImage gUnknown_082FF3C8[];
-extern const struct SpriteFrameImage gUnknown_082FF3E8[];
-extern const struct SpriteFrameImage gUnknown_082FF408[];
-extern const struct SpriteFrameImage gTrainerBackPicTable_Brendan[];
-extern const struct SpriteFrameImage gTrainerBackPicTable_May[];
-extern const struct SpriteFrameImage gTrainerBackPicTable_Red[];
-extern const struct SpriteFrameImage gTrainerBackPicTable_Leaf[];
-extern const struct SpriteFrameImage gTrainerBackPicTable_RubySapphireBrendan[];
-extern const struct SpriteFrameImage gTrainerBackPicTable_RubySapphireMay[];
-extern const struct SpriteFrameImage gTrainerBackPicTable_Wally[];
-extern const struct SpriteFrameImage gTrainerBackPicTable_Steven[];
-extern const union AffineAnimCmd *const gUnknown_082FF618[];
-extern const union AffineAnimCmd *const gUnknown_082FF694[];
-extern const union AnimCmd *gPlayerMonSpriteAnimsTable[];
-extern const union AnimCmd *const *const gMonAnimationsSpriteAnimsPtrTable[];
-extern const union AnimCmd *const *const gTrainerBackAnimsPtrTable[];
-extern const union AnimCmd *const *const gTrainerFrontAnimsPtrTable[];
-extern const u8 gSpeciesNames[][POKEMON_NAME_LENGTH + 1];
-extern const struct CompressedSpritePalette gMonPaletteTable[];
-extern const struct CompressedSpritePalette gMonShinyPaletteTable[];
-extern const u8 gTrainerClassNames[][13];
 
 // this file's functions
 static u16 CalculateBoxMonChecksum(struct BoxPokemon *boxMon);
@@ -1809,419 +1788,63 @@ static const u8 sMonFrontAnimIdsTable[] =
     [SPECIES_CHIMECHO - 1] = 0x1d,
 };
 
-static const u8 sMonAnimationDelayTable[] =
+static const u8 sMonAnimationDelayTable[NUM_SPECIES - 1] =
 {
-    [SPECIES_BULBASAUR - 1] = 0x00,
-    [SPECIES_IVYSAUR - 1] = 0x00,
-    [SPECIES_VENUSAUR - 1] = 0x00,
-    [SPECIES_CHARMANDER - 1] = 0x00,
-    [SPECIES_CHARMELEON - 1] = 0x00,
-    [SPECIES_CHARIZARD - 1] = 0x00,
-    [SPECIES_SQUIRTLE - 1] = 0x00,
-    [SPECIES_WARTORTLE - 1] = 0x00,
     [SPECIES_BLASTOISE - 1] = 0x32,
-    [SPECIES_CATERPIE - 1] = 0x00,
-    [SPECIES_METAPOD - 1] = 0x00,
-    [SPECIES_BUTTERFREE - 1] = 0x00,
     [SPECIES_WEEDLE - 1] = 0x0a,
     [SPECIES_KAKUNA - 1] = 0x14,
     [SPECIES_BEEDRILL - 1] = 0x23,
-    [SPECIES_PIDGEY - 1] = 0x00,
     [SPECIES_PIDGEOTTO - 1] = 0x19,
-    [SPECIES_PIDGEOT - 1] = 0x00,
-    [SPECIES_RATTATA - 1] = 0x00,
-    [SPECIES_RATICATE - 1] = 0x00,
-    [SPECIES_SPEAROW - 1] = 0x00,
     [SPECIES_FEAROW - 1] = 0x02,
     [SPECIES_EKANS - 1] = 0x1e,
-    [SPECIES_ARBOK - 1] = 0x00,
-    [SPECIES_PIKACHU - 1] = 0x00,
-    [SPECIES_RAICHU - 1] = 0x00,
-    [SPECIES_SANDSHREW - 1] = 0x00,
-    [SPECIES_SANDSLASH - 1] = 0x00,
     [SPECIES_NIDORAN_F - 1] = 0x1c,
-    [SPECIES_NIDORINA - 1] = 0x00,
-    [SPECIES_NIDOQUEEN - 1] = 0x00,
-    [SPECIES_NIDORAN_M - 1] = 0x00,
-    [SPECIES_NIDORINO - 1] = 0x00,
     [SPECIES_NIDOKING - 1] = 0x19,
-    [SPECIES_CLEFAIRY - 1] = 0x00,
-    [SPECIES_CLEFABLE - 1] = 0x00,
-    [SPECIES_VULPIX - 1] = 0x00,
-    [SPECIES_NINETALES - 1] = 0x00,
-    [SPECIES_JIGGLYPUFF - 1] = 0x00,
-    [SPECIES_WIGGLYTUFF - 1] = 0x00,
-    [SPECIES_ZUBAT - 1] = 0x00,
-    [SPECIES_GOLBAT - 1] = 0x00,
-    [SPECIES_ODDISH - 1] = 0x00,
-    [SPECIES_GLOOM - 1] = 0x00,
-    [SPECIES_VILEPLUME - 1] = 0x00,
     [SPECIES_PARAS - 1] = 0x0a,
     [SPECIES_PARASECT - 1] = 0x2d,
     [SPECIES_VENONAT - 1] = 0x14,
-    [SPECIES_VENOMOTH - 1] = 0x00,
     [SPECIES_DIGLETT - 1] = 0x19,
     [SPECIES_DUGTRIO - 1] = 0x23,
     [SPECIES_MEOWTH - 1] = 0x28,
     [SPECIES_PERSIAN - 1] = 0x14,
-    [SPECIES_PSYDUCK - 1] = 0x00,
-    [SPECIES_GOLDUCK - 1] = 0x00,
     [SPECIES_MANKEY - 1] = 0x14,
-    [SPECIES_PRIMEAPE - 1] = 0x00,
     [SPECIES_GROWLITHE - 1] = 0x1e,
     [SPECIES_ARCANINE - 1] = 0x28,
-    [SPECIES_POLIWAG - 1] = 0x00,
     [SPECIES_POLIWHIRL - 1] = 0x05,
-    [SPECIES_POLIWRATH - 1] = 0x00,
-    [SPECIES_ABRA - 1] = 0x00,
-    [SPECIES_KADABRA - 1] = 0x00,
-    [SPECIES_ALAKAZAM - 1] = 0x00,
-    [SPECIES_MACHOP - 1] = 0x00,
-    [SPECIES_MACHOKE - 1] = 0x00,
-    [SPECIES_MACHAMP - 1] = 0x00,
-    [SPECIES_BELLSPROUT - 1] = 0x00,
     [SPECIES_WEEPINBELL - 1] = 0x03,
-    [SPECIES_VICTREEBEL - 1] = 0x00,
-    [SPECIES_TENTACOOL - 1] = 0x00,
-    [SPECIES_TENTACRUEL - 1] = 0x00,
-    [SPECIES_GEODUDE - 1] = 0x00,
-    [SPECIES_GRAVELER - 1] = 0x00,
-    [SPECIES_GOLEM - 1] = 0x00,
-    [SPECIES_PONYTA - 1] = 0x00,
-    [SPECIES_RAPIDASH - 1] = 0x00,
-    [SPECIES_SLOWPOKE - 1] = 0x00,
-    [SPECIES_SLOWBRO - 1] = 0x00,
-    [SPECIES_MAGNEMITE - 1] = 0x00,
-    [SPECIES_MAGNETON - 1] = 0x00,
-    [SPECIES_FARFETCHD - 1] = 0x00,
-    [SPECIES_DODUO - 1] = 0x00,
-    [SPECIES_DODRIO - 1] = 0x00,
-    [SPECIES_SEEL - 1] = 0x00,
-    [SPECIES_DEWGONG - 1] = 0x00,
-    [SPECIES_GRIMER - 1] = 0x00,
     [SPECIES_MUK - 1] = 0x2d,
     [SPECIES_SHELLDER - 1] = 0x14,
-    [SPECIES_CLOYSTER - 1] = 0x00,
-    [SPECIES_GASTLY - 1] = 0x00,
     [SPECIES_HAUNTER - 1] = 0x17,
-    [SPECIES_GENGAR - 1] = 0x00,
-    [SPECIES_ONIX - 1] = 0x00,
     [SPECIES_DROWZEE - 1] = 0x30,
     [SPECIES_HYPNO - 1] = 0x28,
-    [SPECIES_KRABBY - 1] = 0x00,
-    [SPECIES_KINGLER - 1] = 0x00,
-    [SPECIES_VOLTORB - 1] = 0x00,
-    [SPECIES_ELECTRODE - 1] = 0x00,
-    [SPECIES_EXEGGCUTE - 1] = 0x00,
-    [SPECIES_EXEGGUTOR - 1] = 0x00,
-    [SPECIES_CUBONE - 1] = 0x00,
-    [SPECIES_MAROWAK - 1] = 0x00,
-    [SPECIES_HITMONLEE - 1] = 0x00,
     [SPECIES_HITMONCHAN - 1] = 0x19,
-    [SPECIES_LICKITUNG - 1] = 0x00,
-    [SPECIES_KOFFING - 1] = 0x00,
-    [SPECIES_WEEZING - 1] = 0x00,
-    [SPECIES_RHYHORN - 1] = 0x00,
-    [SPECIES_RHYDON - 1] = 0x00,
-    [SPECIES_CHANSEY - 1] = 0x00,
-    [SPECIES_TANGELA - 1] = 0x00,
-    [SPECIES_KANGASKHAN - 1] = 0x00,
-    [SPECIES_HORSEA - 1] = 0x00,
-    [SPECIES_SEADRA - 1] = 0x00,
-    [SPECIES_GOLDEEN - 1] = 0x00,
-    [SPECIES_SEAKING - 1] = 0x00,
-    [SPECIES_STARYU - 1] = 0x00,
-    [SPECIES_STARMIE - 1] = 0x00,
-    [SPECIES_MR_MIME - 1] = 0x00,
     [SPECIES_SCYTHER - 1] = 0x0a,
-    [SPECIES_JYNX - 1] = 0x00,
-    [SPECIES_ELECTABUZZ - 1] = 0x00,
-    [SPECIES_MAGMAR - 1] = 0x00,
-    [SPECIES_PINSIR - 1] = 0x00,
     [SPECIES_TAUROS - 1] = 0x0a,
-    [SPECIES_MAGIKARP - 1] = 0x00,
-    [SPECIES_GYARADOS - 1] = 0x00,
-    [SPECIES_LAPRAS - 1] = 0x00,
-    [SPECIES_DITTO - 1] = 0x00,
-    [SPECIES_EEVEE - 1] = 0x00,
-    [SPECIES_VAPOREON - 1] = 0x00,
-    [SPECIES_JOLTEON - 1] = 0x00,
-    [SPECIES_FLAREON - 1] = 0x00,
-    [SPECIES_PORYGON - 1] = 0x00,
-    [SPECIES_OMANYTE - 1] = 0x00,
-    [SPECIES_OMASTAR - 1] = 0x00,
-    [SPECIES_KABUTO - 1] = 0x00,
-    [SPECIES_KABUTOPS - 1] = 0x00,
-    [SPECIES_AERODACTYL - 1] = 0x00,
-    [SPECIES_SNORLAX - 1] = 0x00,
-    [SPECIES_ARTICUNO - 1] = 0x00,
-    [SPECIES_ZAPDOS - 1] = 0x00,
-    [SPECIES_MOLTRES - 1] = 0x00,
-    [SPECIES_DRATINI - 1] = 0x00,
-    [SPECIES_DRAGONAIR - 1] = 0x00,
-    [SPECIES_DRAGONITE - 1] = 0x00,
-    [SPECIES_MEWTWO - 1] = 0x00,
-    [SPECIES_MEW - 1] = 0x00,
-    [SPECIES_CHIKORITA - 1] = 0x00,
-    [SPECIES_BAYLEEF - 1] = 0x00,
-    [SPECIES_MEGANIUM - 1] = 0x00,
-    [SPECIES_CYNDAQUIL - 1] = 0x00,
-    [SPECIES_QUILAVA - 1] = 0x00,
     [SPECIES_TYPHLOSION - 1] = 0x14,
-    [SPECIES_TOTODILE - 1] = 0x00,
-    [SPECIES_CROCONAW - 1] = 0x00,
     [SPECIES_FERALIGATR - 1] = 0x05,
-    [SPECIES_SENTRET - 1] = 0x00,
-    [SPECIES_FURRET - 1] = 0x00,
-    [SPECIES_HOOTHOOT - 1] = 0x00,
-    [SPECIES_NOCTOWL - 1] = 0x00,
-    [SPECIES_LEDYBA - 1] = 0x00,
-    [SPECIES_LEDIAN - 1] = 0x00,
-    [SPECIES_SPINARAK - 1] = 0x00,
-    [SPECIES_ARIADOS - 1] = 0x00,
-    [SPECIES_CROBAT - 1] = 0x00,
-    [SPECIES_CHINCHOU - 1] = 0x00,
-    [SPECIES_LANTURN - 1] = 0x00,
-    [SPECIES_PICHU - 1] = 0x00,
-    [SPECIES_CLEFFA - 1] = 0x00,
-    [SPECIES_IGGLYBUFF - 1] = 0x00,
-    [SPECIES_TOGEPI - 1] = 0x00,
-    [SPECIES_TOGETIC - 1] = 0x00,
     [SPECIES_NATU - 1] = 0x1e,
-    [SPECIES_XATU - 1] = 0x00,
     [SPECIES_MAREEP - 1] = 0x32,
-    [SPECIES_FLAAFFY - 1] = 0x00,
     [SPECIES_AMPHAROS - 1] = 0x0a,
-    [SPECIES_BELLOSSOM - 1] = 0x00,
-    [SPECIES_MARILL - 1] = 0x00,
-    [SPECIES_AZUMARILL - 1] = 0x00,
-    [SPECIES_SUDOWOODO - 1] = 0x00,
     [SPECIES_POLITOED - 1] = 0x28,
-    [SPECIES_HOPPIP - 1] = 0x00,
-    [SPECIES_SKIPLOOM - 1] = 0x00,
-    [SPECIES_JUMPLUFF - 1] = 0x00,
-    [SPECIES_AIPOM - 1] = 0x00,
-    [SPECIES_SUNKERN - 1] = 0x00,
-    [SPECIES_SUNFLORA - 1] = 0x00,
-    [SPECIES_YANMA - 1] = 0x00,
-    [SPECIES_WOOPER - 1] = 0x00,
-    [SPECIES_QUAGSIRE - 1] = 0x00,
-    [SPECIES_ESPEON - 1] = 0x00,
-    [SPECIES_UMBREON - 1] = 0x00,
-    [SPECIES_MURKROW - 1] = 0x00,
-    [SPECIES_SLOWKING - 1] = 0x00,
-    [SPECIES_MISDREAVUS - 1] = 0x00,
-    [SPECIES_UNOWN - 1] = 0x00,
-    [SPECIES_WOBBUFFET - 1] = 0x00,
-    [SPECIES_GIRAFARIG - 1] = 0x00,
-    [SPECIES_PINECO - 1] = 0x00,
-    [SPECIES_FORRETRESS - 1] = 0x00,
     [SPECIES_DUNSPARCE - 1] = 0x0a,
-    [SPECIES_GLIGAR - 1] = 0x00,
     [SPECIES_STEELIX - 1] = 0x2d,
-    [SPECIES_SNUBBULL - 1] = 0x00,
-    [SPECIES_GRANBULL - 1] = 0x00,
     [SPECIES_QWILFISH - 1] = 0x27,
     [SPECIES_SCIZOR - 1] = 0x13,
-    [SPECIES_SHUCKLE - 1] = 0x00,
-    [SPECIES_HERACROSS - 1] = 0x00,
-    [SPECIES_SNEASEL - 1] = 0x00,
-    [SPECIES_TEDDIURSA - 1] = 0x00,
-    [SPECIES_URSARING - 1] = 0x00,
-    [SPECIES_SLUGMA - 1] = 0x00,
-    [SPECIES_MAGCARGO - 1] = 0x00,
-    [SPECIES_SWINUB - 1] = 0x00,
-    [SPECIES_PILOSWINE - 1] = 0x00,
-    [SPECIES_CORSOLA - 1] = 0x00,
-    [SPECIES_REMORAID - 1] = 0x00,
     [SPECIES_OCTILLERY - 1] = 0x14,
-    [SPECIES_DELIBIRD - 1] = 0x00,
-    [SPECIES_MANTINE - 1] = 0x00,
-    [SPECIES_SKARMORY - 1] = 0x00,
-    [SPECIES_HOUNDOUR - 1] = 0x00,
-    [SPECIES_HOUNDOOM - 1] = 0x00,
-    [SPECIES_KINGDRA - 1] = 0x00,
-    [SPECIES_PHANPY - 1] = 0x00,
-    [SPECIES_DONPHAN - 1] = 0x00,
-    [SPECIES_PORYGON2 - 1] = 0x00,
-    [SPECIES_STANTLER - 1] = 0x00,
-    [SPECIES_SMEARGLE - 1] = 0x00,
-    [SPECIES_TYROGUE - 1] = 0x00,
-    [SPECIES_HITMONTOP - 1] = 0x00,
     [SPECIES_SMOOCHUM - 1] = 0x28,
-    [SPECIES_ELEKID - 1] = 0x00,
-    [SPECIES_MAGBY - 1] = 0x00,
-    [SPECIES_MILTANK - 1] = 0x00,
-    [SPECIES_BLISSEY - 1] = 0x00,
-    [SPECIES_RAIKOU - 1] = 0x00,
-    [SPECIES_ENTEI - 1] = 0x00,
-    [SPECIES_SUICUNE - 1] = 0x00,
-    [SPECIES_LARVITAR - 1] = 0x00,
-    [SPECIES_PUPITAR - 1] = 0x00,
     [SPECIES_TYRANITAR - 1] = 0x0a,
     [SPECIES_LUGIA - 1] = 0x14,
-    [SPECIES_HO_OH - 1] = 0x00,
-    [SPECIES_CELEBI - 1] = 0x00,
-    [SPECIES_OLD_UNOWN_B - 1] = 0x00,
-    [SPECIES_OLD_UNOWN_C - 1] = 0x00,
-    [SPECIES_OLD_UNOWN_D - 1] = 0x00,
-    [SPECIES_OLD_UNOWN_E - 1] = 0x00,
-    [SPECIES_OLD_UNOWN_F - 1] = 0x00,
-    [SPECIES_OLD_UNOWN_G - 1] = 0x00,
-    [SPECIES_OLD_UNOWN_H - 1] = 0x00,
-    [SPECIES_OLD_UNOWN_I - 1] = 0x00,
-    [SPECIES_OLD_UNOWN_J - 1] = 0x00,
-    [SPECIES_OLD_UNOWN_K - 1] = 0x00,
-    [SPECIES_OLD_UNOWN_L - 1] = 0x00,
-    [SPECIES_OLD_UNOWN_M - 1] = 0x00,
-    [SPECIES_OLD_UNOWN_N - 1] = 0x00,
-    [SPECIES_OLD_UNOWN_O - 1] = 0x00,
-    [SPECIES_OLD_UNOWN_P - 1] = 0x00,
-    [SPECIES_OLD_UNOWN_Q - 1] = 0x00,
-    [SPECIES_OLD_UNOWN_R - 1] = 0x00,
-    [SPECIES_OLD_UNOWN_S - 1] = 0x00,
-    [SPECIES_OLD_UNOWN_T - 1] = 0x00,
-    [SPECIES_OLD_UNOWN_U - 1] = 0x00,
-    [SPECIES_OLD_UNOWN_V - 1] = 0x00,
-    [SPECIES_OLD_UNOWN_W - 1] = 0x00,
-    [SPECIES_OLD_UNOWN_X - 1] = 0x00,
-    [SPECIES_OLD_UNOWN_Y - 1] = 0x00,
-    [SPECIES_OLD_UNOWN_Z - 1] = 0x00,
-    [SPECIES_TREECKO - 1] = 0x00,
-    [SPECIES_GROVYLE - 1] = 0x00,
-    [SPECIES_SCEPTILE - 1] = 0x00,
-    [SPECIES_TORCHIC - 1] = 0x00,
-    [SPECIES_COMBUSKEN - 1] = 0x00,
-    [SPECIES_BLAZIKEN - 1] = 0x00,
-    [SPECIES_MUDKIP - 1] = 0x00,
-    [SPECIES_MARSHTOMP - 1] = 0x00,
-    [SPECIES_SWAMPERT - 1] = 0x00,
-    [SPECIES_POOCHYENA - 1] = 0x00,
-    [SPECIES_MIGHTYENA - 1] = 0x00,
-    [SPECIES_ZIGZAGOON - 1] = 0x00,
-    [SPECIES_LINOONE - 1] = 0x00,
-    [SPECIES_WURMPLE - 1] = 0x00,
-    [SPECIES_SILCOON - 1] = 0x00,
-    [SPECIES_BEAUTIFLY - 1] = 0x00,
-    [SPECIES_CASCOON - 1] = 0x00,
-    [SPECIES_DUSTOX - 1] = 0x00,
-    [SPECIES_LOTAD - 1] = 0x00,
-    [SPECIES_LOMBRE - 1] = 0x00,
-    [SPECIES_LUDICOLO - 1] = 0x00,
-    [SPECIES_SEEDOT - 1] = 0x00,
-    [SPECIES_NUZLEAF - 1] = 0x00,
-    [SPECIES_SHIFTRY - 1] = 0x00,
-    [SPECIES_NINCADA - 1] = 0x00,
-    [SPECIES_NINJASK - 1] = 0x00,
-    [SPECIES_SHEDINJA - 1] = 0x00,
-    [SPECIES_TAILLOW - 1] = 0x00,
-    [SPECIES_SWELLOW - 1] = 0x00,
-    [SPECIES_SHROOMISH - 1] = 0x00,
-    [SPECIES_BRELOOM - 1] = 0x00,
-    [SPECIES_SPINDA - 1] = 0x00,
-    [SPECIES_WINGULL - 1] = 0x00,
-    [SPECIES_PELIPPER - 1] = 0x00,
-    [SPECIES_SURSKIT - 1] = 0x00,
-    [SPECIES_MASQUERAIN - 1] = 0x00,
-    [SPECIES_WAILMER - 1] = 0x00,
     [SPECIES_WAILORD - 1] = 0x0a,
-    [SPECIES_SKITTY - 1] = 0x00,
-    [SPECIES_DELCATTY - 1] = 0x00,
     [SPECIES_KECLEON - 1] = 0x1e,
-    [SPECIES_BALTOY - 1] = 0x00,
-    [SPECIES_CLAYDOL - 1] = 0x00,
-    [SPECIES_NOSEPASS - 1] = 0x00,
-    [SPECIES_TORKOAL - 1] = 0x00,
-    [SPECIES_SABLEYE - 1] = 0x00,
-    [SPECIES_BARBOACH - 1] = 0x00,
-    [SPECIES_WHISCASH - 1] = 0x00,
-    [SPECIES_LUVDISC - 1] = 0x00,
-    [SPECIES_CORPHISH - 1] = 0x00,
-    [SPECIES_CRAWDAUNT - 1] = 0x00,
-    [SPECIES_FEEBAS - 1] = 0x00,
     [SPECIES_MILOTIC - 1] = 0x2d,
-    [SPECIES_CARVANHA - 1] = 0x00,
-    [SPECIES_SHARPEDO - 1] = 0x00,
-    [SPECIES_TRAPINCH - 1] = 0x00,
-    [SPECIES_VIBRAVA - 1] = 0x00,
-    [SPECIES_FLYGON - 1] = 0x00,
-    [SPECIES_MAKUHITA - 1] = 0x00,
-    [SPECIES_HARIYAMA - 1] = 0x00,
-    [SPECIES_ELECTRIKE - 1] = 0x00,
-    [SPECIES_MANECTRIC - 1] = 0x00,
-    [SPECIES_NUMEL - 1] = 0x00,
-    [SPECIES_CAMERUPT - 1] = 0x00,
     [SPECIES_SPHEAL - 1] = 0x0f,
-    [SPECIES_SEALEO - 1] = 0x00,
-    [SPECIES_WALREIN - 1] = 0x00,
-    [SPECIES_CACNEA - 1] = 0x00,
-    [SPECIES_CACTURNE - 1] = 0x00,
     [SPECIES_SNORUNT - 1] = 0x14,
-    [SPECIES_GLALIE - 1] = 0x00,
-    [SPECIES_LUNATONE - 1] = 0x00,
-    [SPECIES_SOLROCK - 1] = 0x00,
-    [SPECIES_AZURILL - 1] = 0x00,
-    [SPECIES_SPOINK - 1] = 0x00,
     [SPECIES_GRUMPIG - 1] = 0x0f,
-    [SPECIES_PLUSLE - 1] = 0x00,
-    [SPECIES_MINUN - 1] = 0x00,
-    [SPECIES_MAWILE - 1] = 0x00,
-    [SPECIES_MEDITITE - 1] = 0x00,
-    [SPECIES_MEDICHAM - 1] = 0x00,
-    [SPECIES_SWABLU - 1] = 0x00,
-    [SPECIES_ALTARIA - 1] = 0x00,
     [SPECIES_WYNAUT - 1] = 0x0f,
-    [SPECIES_DUSKULL - 1] = 0x00,
     [SPECIES_DUSCLOPS - 1] = 0x1e,
-    [SPECIES_ROSELIA - 1] = 0x00,
-    [SPECIES_SLAKOTH - 1] = 0x00,
-    [SPECIES_VIGOROTH - 1] = 0x00,
-    [SPECIES_SLAKING - 1] = 0x00,
-    [SPECIES_GULPIN - 1] = 0x00,
-    [SPECIES_SWALOT - 1] = 0x00,
-    [SPECIES_TROPIUS - 1] = 0x00,
-    [SPECIES_WHISMUR - 1] = 0x00,
-    [SPECIES_LOUDRED - 1] = 0x00,
-    [SPECIES_EXPLOUD - 1] = 0x00,
-    [SPECIES_CLAMPERL - 1] = 0x00,
-    [SPECIES_HUNTAIL - 1] = 0x00,
-    [SPECIES_GOREBYSS - 1] = 0x00,
     [SPECIES_ABSOL - 1] = 0x2d,
-    [SPECIES_SHUPPET - 1] = 0x00,
-    [SPECIES_BANETTE - 1] = 0x00,
-    [SPECIES_SEVIPER - 1] = 0x00,
-    [SPECIES_ZANGOOSE - 1] = 0x00,
-    [SPECIES_RELICANTH - 1] = 0x00,
-    [SPECIES_ARON - 1] = 0x00,
-    [SPECIES_LAIRON - 1] = 0x00,
-    [SPECIES_AGGRON - 1] = 0x00,
-    [SPECIES_CASTFORM - 1] = 0x00,
-    [SPECIES_VOLBEAT - 1] = 0x00,
-    [SPECIES_ILLUMISE - 1] = 0x00,
-    [SPECIES_LILEEP - 1] = 0x00,
-    [SPECIES_CRADILY - 1] = 0x00,
-    [SPECIES_ANORITH - 1] = 0x00,
-    [SPECIES_ARMALDO - 1] = 0x00,
-    [SPECIES_RALTS - 1] = 0x00,
-    [SPECIES_KIRLIA - 1] = 0x00,
-    [SPECIES_GARDEVOIR - 1] = 0x00,
-    [SPECIES_BAGON - 1] = 0x00,
-    [SPECIES_SHELGON - 1] = 0x00,
     [SPECIES_SALAMENCE - 1] = 0x46,
-    [SPECIES_BELDUM - 1] = 0x00,
-    [SPECIES_METANG - 1] = 0x00,
-    [SPECIES_METAGROSS - 1] = 0x00,
-    [SPECIES_REGIROCK - 1] = 0x00,
-    [SPECIES_REGICE - 1] = 0x00,
-    [SPECIES_REGISTEEL - 1] = 0x00,
     [SPECIES_KYOGRE - 1] = 0x3c,
-    [SPECIES_GROUDON - 1] = 0x00,
     [SPECIES_RAYQUAZA - 1] = 0x3c,
-    [SPECIES_LATIAS - 1] = 0x00,
-    [SPECIES_LATIOS - 1] = 0x00,
-    [SPECIES_JIRACHI - 1] = 0x00,
-    [SPECIES_DEOXYS - 1] = 0x00,
-    [SPECIES_CHIMECHO - 1] = 0x00,
 };
 
 const u8 gPPUpGetMask[] = {0x03, 0x0c, 0x30, 0xc0}; // Masks for getting PP Up count, also PP Max values
@@ -3670,7 +3293,7 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
         }
 
         // flash fire triggered
-        if ((gBattleResources->flags->flags[battlerIdAtk] & UNKNOWN_FLAG_FLASH_FIRE) && type == TYPE_FIRE)
+        if ((gBattleResources->flags->flags[battlerIdAtk] & RESOURCE_FLAG_FLASH_FIRE) && type == TYPE_FIRE)
             damage = (15 * damage) / 10;
     }
 
@@ -3790,7 +3413,7 @@ u8 GetGenderFromSpeciesAndPersonality(u16 species, u32 personality)
         return MON_MALE;
 }
 
-void SetMultiuseSpriteTemplateToPokemon(u16 species, u8 battlerPosition)
+void SetMultiuseSpriteTemplateToPokemon(u16 speciesTag, u8 battlerPosition)
 {
     if (gMonSpritesGfxPtr != NULL)
         gMultiuseSpriteTemplate = gMonSpritesGfxPtr->templates[battlerPosition];
@@ -3801,13 +3424,13 @@ void SetMultiuseSpriteTemplateToPokemon(u16 species, u8 battlerPosition)
     else
         gMultiuseSpriteTemplate = gUnknown_08329D98[battlerPosition];
 
-    gMultiuseSpriteTemplate.paletteTag = species;
+    gMultiuseSpriteTemplate.paletteTag = speciesTag;
     if (battlerPosition == B_POSITION_PLAYER_LEFT || battlerPosition == B_POSITION_PLAYER_RIGHT)
-        gMultiuseSpriteTemplate.anims = gPlayerMonSpriteAnimsTable;
-    else if (species > 500)
-        gMultiuseSpriteTemplate.anims = gMonAnimationsSpriteAnimsPtrTable[species - 500];
+        gMultiuseSpriteTemplate.anims = gUnknown_082FF70C;
+    else if (speciesTag > SPECIES_SHINY_TAG)
+        gMultiuseSpriteTemplate.anims = gMonFrontAnimsPtrTable[speciesTag - SPECIES_SHINY_TAG];
     else
-        gMultiuseSpriteTemplate.anims = gMonAnimationsSpriteAnimsPtrTable[species];
+        gMultiuseSpriteTemplate.anims = gMonFrontAnimsPtrTable[speciesTag];
 }
 
 void SetMultiuseSpriteTemplateToTrainerBack(u16 trainerSpriteId, u8 battlerPosition)
@@ -4821,7 +4444,7 @@ u8 GetMonAbility(struct Pokemon *mon)
     return GetAbilityBySpecies(species, altAbility);
 }
 
-void CreateSecretBaseEnemyParty(struct SecretBaseRecord *secretBaseRecord)
+void CreateSecretBaseEnemyParty(struct SecretBase *secretBaseRecord)
 {
     s32 i, j;
 
@@ -5818,7 +5441,7 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 type, u16 evolutionItem)
                 if (gEvolutionTable[species][i].param == heldItem)
                 {
                     heldItem = 0;
-                    SetMonData(mon, MON_DATA_HELD_ITEM, (u8 *)&heldItem);
+                    SetMonData(mon, MON_DATA_HELD_ITEM, &heldItem);
                     targetSpecies = gEvolutionTable[species][i].targetSpecies;
                 }
                 break;
@@ -7174,7 +6797,7 @@ static void sub_806F1FC(struct Unknown_806F160_Struct* structPtr)
             structPtr->frameImages[i * structPtr->field_0_0 + j].data = &structPtr->byteArrays[i][j * 0x800];
         }
         structPtr->templates[i].images = &structPtr->frameImages[i * structPtr->field_0_0];
-        structPtr->templates[i].anims = gPlayerMonSpriteAnimsTable;
+        structPtr->templates[i].anims = gUnknown_082FF70C;
         structPtr->templates[i].paletteTag = i;
     }
 }

@@ -1,8 +1,8 @@
 Route123_BerryMastersHouse_MapScripts:: @ 826F83B
-	map_script MAP_SCRIPT_ON_TRANSITION, Route123_BerryMastersHouse_MapScript1_26F841
+	map_script MAP_SCRIPT_ON_TRANSITION, Route123_BerryMastersHouse_OnTransition
 	.byte 0
 
-Route123_BerryMastersHouse_MapScript1_26F841: @ 826F841
+Route123_BerryMastersHouse_OnTransition: @ 826F841
 	setflag FLAG_LANDMARK_BERRY_MASTERS_HOUSE
 	end
 

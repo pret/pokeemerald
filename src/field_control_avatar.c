@@ -3,6 +3,7 @@
 #include "bike.h"
 #include "coord_event_weather.h"
 #include "daycare.h"
+#include "faraway_island.h"
 #include "event_data.h"
 #include "event_object_movement.h"
 #include "event_scripts.h"
@@ -15,10 +16,10 @@
 #include "fldeff_misc.h"
 #include "item_menu.h"
 #include "link.h"
+#include "match_call.h"
 #include "metatile_behavior.h"
 #include "overworld.h"
 #include "pokemon.h"
-#include "pokenav.h"
 #include "safari_zone.h"
 #include "script.h"
 #include "secret_base.h"
@@ -32,7 +33,6 @@
 #include "constants/map_types.h"
 #include "constants/maps.h"
 #include "constants/songs.h"
-#include "match_call.h"
 
 static EWRAM_DATA u8 sWildEncounterImmunitySteps = 0;
 static EWRAM_DATA u16 sPreviousPlayerMetatileBehavior = 0;
@@ -227,8 +227,8 @@ static bool8 TryStartInteractionScript(struct MapPosition *position, u16 metatil
      && script != EventScript_PlayerPCFemale
      && script != EventScript_SecretBasePC
      && script != EventScript_RecordMixingSecretBasePC
-     && script != EventScript_SecretPower1
-     && script != EventScript_SecretPower2
+     && script != SecretBase_EventScript_DollInteract
+     && script != SecretBase_EventScript_CushionInteract
      && script != EventScript_PC)
         PlaySE(SE_SELECT);
 
@@ -354,7 +354,7 @@ static const u8 *GetInteractedBackgroundEventScript(struct MapPosition *position
         if (direction == DIR_NORTH)
         {
             gSpecialVar_0x8004 = bgEvent->bgUnion.secretBaseId;
-            if (sub_80E9680())
+            if (TrySetCurSecretBase())
                 return EventScript_2759F1;
         }
         return NULL;
@@ -390,11 +390,11 @@ static const u8 *GetInteractedMetatileScript(struct MapPosition *position, u8 me
     if (MetatileBehavior_IsBookShelf(metatileBehavior) == TRUE)
         return EventScript_BookShelf;
     if (MetatileBehavior_IsPokeCenterBookShelf(metatileBehavior) == TRUE)
-        return EventScript_PokemonCenterBookshelf;
+        return EventScript_PokemonCenterBookShelf;
     if (MetatileBehavior_IsVase(metatileBehavior) == TRUE)
         return EventScript_Vase;
     if (MetatileBehavior_IsTrashCan(metatileBehavior) == TRUE)
-        return EventScript_TrashCan;
+        return EventScript_EmptyTrashCan;
     if (MetatileBehavior_IsShopShelf(metatileBehavior) == TRUE)
         return EventScript_ShopShelf;
     if (MetatileBehavior_IsBlueprint(metatileBehavior) == TRUE)
@@ -421,23 +421,23 @@ static const u8 *GetInteractedMetatileScript(struct MapPosition *position, u8 me
             return EventScript_SecretBaseShieldOrToyTV;
         if (MetatileBehavior_IsMB_C6(metatileBehavior) == TRUE)
         {
-            sub_80EB56C();
+            SetSecretBaseSecretsTvFlags_MiscFurnature();
             return NULL;
         }
-        if (MetatileBehavior_IsLargeMatCenter(metatileBehavior) == TRUE)
+        if (MetatileBehavior_HoldsLargeDecoration(metatileBehavior) == TRUE)
         {
-            sub_80EB9E0();
+            SetSecretBaseSecretsTvFlags_LargeDecorationSpot();
             return NULL;
         }
-        if (MetatileBehavior_IsSecretBaseLargeMatEdge(metatileBehavior) == TRUE)
+        if (MetatileBehavior_HoldsSmallDecoration(metatileBehavior) == TRUE)
         {
-            sub_80EBB28();
+            SetSecretBaseSecretsTvFlags_SmallDecorationSpot();
             return NULL;
         }
     }
     else if (MetatileBehavior_IsSecretBasePoster(metatileBehavior) == TRUE)
     {
-        sub_80EB498();
+        SetSecretBaseSecretsTvFlags_Poster();
         return NULL;
     }
 
@@ -541,7 +541,7 @@ static bool8 TryStartStepCountScript(u16 metatileBehavior)
 
     IncrementRematchStepCounter();
     UpdateHappinessStepCounter();
-    sub_81D4998();
+    UpdateFarawayIslandStepCounter();
 
     if (!(gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_6) && !MetatileBehavior_IsForcedMovementTile(metatileBehavior))
     {

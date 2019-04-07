@@ -1,8 +1,8 @@
 Route109_SeashoreHouse_MapScripts:: @ 82693F4
-	map_script MAP_SCRIPT_ON_TRANSITION, Route109_SeashoreHouse_MapScript1_2693FA
+	map_script MAP_SCRIPT_ON_TRANSITION, Route109_SeashoreHouse_OnTransition
 	.byte 0
 
-Route109_SeashoreHouse_MapScript1_2693FA: @ 82693FA
+Route109_SeashoreHouse_OnTransition: @ 82693FA
 	setflag FLAG_LANDMARK_SEASHORE_HOUSE
 	end
 

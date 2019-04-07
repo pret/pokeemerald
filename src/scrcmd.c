@@ -7,7 +7,7 @@
 #include "contest.h"
 #include "contest_link_80F57C4.h"
 #include "contest_painting.h"
-#include "data2.h"
+#include "data.h"
 #include "decoration.h"
 #include "decoration_inventory.h"
 #include "event_data.h"
@@ -281,7 +281,7 @@ bool8 ScrCmd_callstd_if(struct ScriptContext *ctx)
     return FALSE;
 }
 
-bool8 ScrCmd_gotoram(struct ScriptContext *ctx)
+bool8 ScrCmd_returnram(struct ScriptContext *ctx)
 {
     ScriptJump(ctx, gUnknown_020375C0);
     return FALSE;
@@ -1068,7 +1068,7 @@ bool8 ScrCmd_addobject(struct ScriptContext *ctx)
 {
     u16 objectId = VarGet(ScriptReadHalfword(ctx));
 
-    show_sprite(objectId, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
+    TrySpawnEventObject(objectId, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
     return FALSE;
 }
 
@@ -1078,7 +1078,7 @@ bool8 ScrCmd_addobject_at(struct ScriptContext *ctx)
     u8 mapGroup = ScriptReadByte(ctx);
     u8 mapNum = ScriptReadByte(ctx);
 
-    show_sprite(objectId, mapNum, mapGroup);
+    TrySpawnEventObject(objectId, mapNum, mapGroup);
     return FALSE;
 }
 
@@ -1088,7 +1088,7 @@ bool8 ScrCmd_setobjectxy(struct ScriptContext *ctx)
     u16 x = VarGet(ScriptReadHalfword(ctx));
     u16 y = VarGet(ScriptReadHalfword(ctx));
 
-    sub_808EBA8(localId, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, x, y);
+    TryMoveEventObjectToMapCoords(localId, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, x, y);
     return FALSE;
 }
 
@@ -1106,7 +1106,7 @@ bool8 ScrCmd_moveobjectoffscreen(struct ScriptContext *ctx)
 {
     u16 localId = VarGet(ScriptReadHalfword(ctx));
 
-    sub_808F254(localId, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
+    TryOverrideEventObjectTemplateCoords(localId, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
     return FALSE;
 }
 
@@ -2215,9 +2215,9 @@ bool8 ScrCmd_checkmonobedience(struct ScriptContext *ctx)
     return FALSE;
 }
 
-bool8 ScrCmd_cmdCF(struct ScriptContext *ctx)
+bool8 ScrCmd_gotoram(struct ScriptContext *ctx)
 {
-    const u8* v1 = sub_8099244();
+    const u8* v1 = GetSavedRamScriptIfValid();
 
     if (v1)
     {

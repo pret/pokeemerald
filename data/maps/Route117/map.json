@@ -204,7 +204,7 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route117_EventScript_290EB9",
+      "script": "Route117_EventScript_ItemGreatBall",
       "flag": "FLAG_ITEM_ROUTE_117_GREAT_BALL"
     },
     {
@@ -217,7 +217,7 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route117_EventScript_2906BB",
+      "script": "EventScript_CutTree",
       "flag": "FLAG_TEMP_11"
     },
     {
@@ -230,7 +230,7 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route117_EventScript_290EC6",
+      "script": "Route117_EventScript_ItemRevive",
       "flag": "FLAG_ITEM_ROUTE_117_REVIVE"
     },
     {

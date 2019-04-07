@@ -14,25 +14,25 @@ gSpecials:: @ 81DBA64
 	def_special sub_80AF9F8
 	def_special CleanupLinkRoomState
 	def_special ExitLinkRoom
-	def_special sub_80E8E18
-	def_special sub_80E8BC8
-	def_special sub_80E9068
-	def_special sub_80E9A90
-	def_special sub_80E9AC0
-	def_special sub_80E9744
-	def_special sub_80E9BDC
-	def_special sub_80E9C2C
-	def_special sub_80E9C74
-	def_special sub_80E9C88
-	def_special sub_80EA2E4
-	def_special sub_80EA354
-	def_special sub_80E933C
+	def_special SetPlayerSecretBase
+	def_special CheckPlayerHasSecretBase
+	def_special EnterSecretBase
+	def_special ClearAndLeaveSecretBase
+	def_special MoveOutOfSecretBase
+	def_special IsCurSecretBaseOwnedByAnotherPlayer
+	def_special GetCurSecretBaseRegistrationValidity
+	def_special ToggleCurSecretBaseRegistry
+	def_special ShowSecretBaseDecorationMenu
+	def_special ShowSecretBaseRegistryMenu
+	def_special PrepSecretBaseBattleFlags
+	def_special GetSecretBaseOwnerInteractionState
+	def_special InitSecretBaseDecorationSprites
 	def_special sub_8127E18
 	def_special sub_81297AC
-	def_special sub_80E8C98
-	def_special sub_80E95D4
+	def_special GetSecretBaseTypeInFrontOfPlayer
+	def_special SetSecretBaseOwnerGfxId
 	def_special sub_8129708
-	def_special sub_80E91F8
+	def_special EnterNewlyCreatedSecretBase
 	def_special sub_80EA30C
 	def_special DoSecretBasePCTurnOffEffect
 	def_special RecordMixingPlayerSpotTriggered
@@ -313,7 +313,7 @@ gSpecials:: @ 81DBA64
 	def_special sub_80AFC60
 	def_special PutZigzagoonInPlayerParty
 	def_special IsStarterInParty
-	def_special sub_80E980C
+	def_special CopyCurSecretBaseOwnerName_StrVar1
 	def_special ScriptCheckFreePokemonStorageSpace
 	def_special DoSealedChamberShakingEffect1
 	def_special sub_8139B60
@@ -327,7 +327,7 @@ gSpecials:: @ 81DBA64
 	def_special SetUpTrainerMovement
 	def_special DoSealedChamberShakingEffect2
 	def_special FoundBlackGlasses
-	def_special sub_80AC81C
+	def_special StartDroughtWeatherBlend
 	def_special DoDiveWarp
 	def_special DoFallWarp
 	def_special ShowContestEntryMonPic
@@ -340,7 +340,7 @@ gSpecials:: @ 81DBA64
 	def_special ScriptGetPartyMonSpecies
 	def_special sub_81B98DC
 	def_special nullsub_54
-	def_special sub_80E9B70
+	def_special MoveOutOfSecretBaseFromOutside
 	def_special LoadPlayerBag
 	def_special sub_80B05B4
 	def_special SetPacifidlogTMReceivedDay
@@ -361,17 +361,17 @@ gSpecials:: @ 81DBA64
 	def_special sub_80EED10
 	def_special sub_80EED34
 	def_special sub_80EB1AC
-	def_special sub_80EBE7C
+	def_special SetSecretBaseSecretsTvFlags_SandOrnament
 	def_special sub_80EB300
 	def_special sub_80EB438
 	def_special sub_80EB368
 	def_special sub_80EB3D0
 	def_special sub_80EB290
 	def_special sub_80EB2C8
-	def_special sub_80EB56C
-	def_special sub_80EB9E0
-	def_special sub_80EBB28
-	def_special sub_80EB498
+	def_special SetSecretBaseSecretsTvFlags_MiscFurnature
+	def_special SetSecretBaseSecretsTvFlags_LargeDecorationSpot
+	def_special SetSecretBaseSecretsTvFlags_SmallDecorationSpot
+	def_special SetSecretBaseSecretsTvFlags_Poster
 	def_special sub_818D9C0
 	def_special sub_818DAEC
 	def_special sub_818DBE8
@@ -434,7 +434,7 @@ gSpecials:: @ 81DBA64
 	def_special sub_81B8958
 	def_special sub_8018090
 	def_special sub_813990C
-	def_special sub_801B27C
+	def_special ValidateReceivedWonderCard
 	def_special HasAtLeastOneBerry
 	def_special sub_802C920
 	def_special sub_802E3C4
@@ -471,11 +471,11 @@ gSpecials:: @ 81DBA64
 	def_special sub_813AA04
 	def_special sub_813AA18
 	def_special sub_813AA44
-	def_special sub_80248B0
-	def_special sub_8024918
-	def_special sub_80246D4
-	def_special sub_802477C
-	def_special sub_802488C
+	def_special DisplayBerryPowderVendorMenu
+	def_special RemoveBerryPowderVendorMenu
+	def_special HasEnoughBerryPowder
+	def_special TakeBerryPowder
+	def_special PrintPlayerBerryPowderAmount
 	def_special sub_813A820
 	def_special sub_813A854
 	def_special sub_813B7D8

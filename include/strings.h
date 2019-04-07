@@ -9,6 +9,12 @@ extern const u8 gText_OpenLevel[];
 extern const u8 gText_Mom[];
 extern const u8 gText_Dad[];
 
+extern const u8 gText_GetsAPokeBlockQuestion[];
+extern const u8 gText_WontEatAnymore[];
+extern const u8 gText_WasEnhanced[];
+extern const u8 gText_NothingChanged[];
+extern const u8 gText_NatureSlash[];
+
 extern const u8 gText_Cool[];
 extern const u8 gText_Beauty[];
 extern const u8 gText_Cute[];
@@ -126,7 +132,7 @@ extern const u8 gText_ApostropheSBase[];
 extern const u8 gText_NoRegistry[];
 extern const u8 gText_OkayToDeleteFromRegistry[];
 extern const u8 gText_RegisteredDataDeleted[];
-extern const u8 gUnknown_085EA79D[];
+extern const u8 gText_DelRegist[];
 extern const u8 gText_CommErrorEllipsis[];
 extern const u8 gText_MoveCloserToLinkPartner[];
 extern const u8 gText_CommErrorCheckConnections[];
@@ -188,6 +194,7 @@ extern const u8 gText_SeeYaDescription[];
 
 extern const u8 gText_EggNickname[];
 extern const u8 gText_Pokemon[];
+extern const u8 gText_InParty[];
 extern const u8 gText_InGameClockUsable[];
 
 // reset rtc screen texts
@@ -464,6 +471,14 @@ extern const u8 gText_EggCantBattle[];
 extern const u8 gText_PkmnAlreadySelected[];
 extern const u8 gText_PkmnAlreadyInBattle[];
 extern const u8 gText_PkmnCantSwitchOut[];
+extern const u8 gUnknown_085EEA46[];
+extern const u8 gUnknown_085EEA4E[];
+extern const u8 gUnknown_085EEA55[];
+extern const u8 gUnknown_085EEA63[];
+extern const u8 gUnknown_085EEA6B[];
+extern const u8 gUnknown_085EEA5D[];
+extern const u8 gText_Dash[];
+extern const u8 gText_UnkCtrlF904[];
 
 //pokedex text
 extern const u8 gText_CryOf[];
@@ -2562,5 +2577,132 @@ extern const u8 gUnknown_0862BAB9[];
 extern const u8 gUnknown_0862BAC4[];
 extern const u8 gUnknown_0862BACF[];
 extern const u8 gUnknown_0862BADA[];
+
+// E-Reader
+extern const u8 gUnknown_085EDFD6[];
+extern const u8 gUnknown_085EDFF5[];
+extern const u8 gUnknown_085EE014[];
+extern const u8 gUnknown_085EE035[];
+extern const u8 gUnknown_085EE05C[];
+extern const u8 gUnknown_085EE06B[];
+extern const u8 gUnknown_085EE080[];
+extern const u8 gUnknown_085EE097[];
+extern const u8 gUnknown_085EE0A3[];
+extern const u8 gUnknown_085EE0BF[];
+extern const u8 gUnknown_085EE0DC[];
+extern const u8 gUnknown_085EE0FA[];
+extern const u8 gUnknown_085EE107[];
+extern const u8 gUnknown_085EE120[];
+extern const u8 gUnknown_085EE12D[];
+extern const u8 gUnknown_085EE14B[];
+extern const u8 gUnknown_085EE14F[];
+extern const u8 gUnknown_085EE154[];
+
+// Berry Powder Menu
+extern const u8 gText_Powder[];
+
+// Union Room Chat
+extern const u8 gText_F700JoinedChat[];
+extern const u8 gText_F700LeftChat[];
+extern const u8 gText_Hello[];
+extern const u8 gText_Pokemon2[];
+extern const u8 gText_Trade[];
+extern const u8 gText_Battle[];
+extern const u8 gText_Lets[];
+extern const u8 gText_Ok[];
+extern const u8 gText_Sorry[];
+extern const u8 gText_YayUnkF9F9[];
+extern const u8 gText_ThankYou[];
+extern const u8 gText_ByeBye[];
+
+// Mystery Gift
+extern const u8 gText_MysteryGift[];
+extern const u8 gText_PickOKCancel[];
+extern const u8 gText_PickOKExit[];
+extern const u8 gJPText_MysteryGift[];
+extern const u8 gJPText_DecideStop[];
+extern const u8 gText_WonderCards[];
+extern const u8 gText_WonderNews[];
+extern const u8 gText_Exit3[];
+extern const u8 gText_WirelessCommunication[];
+extern const u8 gText_Friend2[];
+extern const u8 gText_Cancel2[];
+extern const u8 gText_Receive[];
+extern const u8 gText_Send[];
+extern const u8 gText_Toss[];
+extern const u8 gText_VarietyOfEventsImportedWireless[];
+extern const u8 gText_WonderCardsInPossession[];
+extern const u8 gText_ReadNewsThatArrived[];
+extern const u8 gText_ReturnToTitle[];
+extern const u8 gText_WhatToDoWithCards[];
+extern const u8 gText_WhatToDoWithNews[];
+extern const u8 gText_IfThrowAwayCardEventWontHappen[];
+extern const u8 gText_OkayToDiscardNews[];
+extern const u8 gText_WonderNewsThrownAway[];
+extern const u8 gText_WonderCardThrownAway[];
+extern const u8 gText_DataWillBeSaved[];
+extern const u8 gText_SaveCompletedPressA[];
+extern const u8 gText_NothingSentOver[];
+extern const u8 gText_RecordUploadedViaWireless[];
+extern const u8 gText_WonderCardReceivedFrom[];
+extern const u8 gText_WonderCardReceived[];
+extern const u8 gText_WonderNewsReceivedFrom[];
+extern const u8 gText_WonderNewsReceived[];
+extern const u8 gText_NewStampReceived[];
+extern const u8 gText_AlreadyHadCard[];
+extern const u8 gText_AlreadyHadStamp[];
+extern const u8 gText_AlreadyHadNews[];
+extern const u8 gText_NoMoreRoomForStamps[];
+extern const u8 gText_CommunicationCanceled[];
+extern const u8 gText_CantAcceptNewsFromTrainer[];
+extern const u8 gText_CantAcceptCardFromTrainer[];
+extern const u8 gText_CommunicationError[];
+extern const u8 gText_NewTrainerReceived[];
+extern const u8 gText_RecordUploadedViaWireless[];
+extern const u8 gText_WonderCardSentTo[];
+extern const u8 gText_WonderNewsSentTo[];
+extern const u8 gText_StampSentTo[];
+extern const u8 gText_OtherTrainerHasCard[];
+extern const u8 gText_OtherTrainerHasStamp[];
+extern const u8 gText_OtherTrainerHasNews[];
+extern const u8 gText_NoMoreRoomForStamps[];
+extern const u8 gText_OtherTrainerCanceled[];
+extern const u8 gText_GiftSentTo[];
+extern const u8 gText_CantSendGiftToTrainer[];
+extern const u8 gText_DontHaveCardNewOneInput[];
+extern const u8 gText_DontHaveNewsNewOneInput[];
+extern const u8 gText_WhereShouldCardBeAccessed[];
+extern const u8 gText_WhereShouldNewsBeAccessed[];
+extern const u8 gText_Communicating[];
+extern const u8 gText_ThrowAwayWonderCard[];
+extern const u8 gText_HaventReceivedCardsGift[];
+extern const u8 gText_CommunicationCompleted[];
+extern const u8 gText_HaventReceivedGiftOkayToDiscard[];
+extern const u8 gText_SendingWonderCard[];
+extern const u8 gText_SendingWonderNews[];
+extern const u8 gText_WirelessCommStatus[];
+extern const u8 gText_PeopleTrading[];
+extern const u8 gText_PeopleBattling[];
+extern const u8 gText_PeopleInUnionRoom[];
+extern const u8 gText_PeopleCommunicating[];
+extern const u8 gText_CommStandbyAwaitingOtherPlayer[];
+extern const u8 gText_RefusedBattle[];
+extern const u8 gText_BattleWasRefused[];
+extern const u8 gText_QuitChatting[];
+extern const u8 gText_RegisterTextWhere[];
+extern const u8 gText_RegisterTextHere[];
+extern const u8 gText_InputText[];
+extern const u8 gText_ExitingChat[];
+extern const u8 gText_LeaderLeftEndingChat[];
+extern const u8 gText_RegisteredTextChanged[];
+extern const u8 gText_AlreadySavedFile_Unused[];
+extern const u8 gText_SavingDontTurnOff_Unused[];
+extern const u8 gText_PlayerSavedGame_Unused[];
+extern const u8 gText_IfLeaderLeavesChatEnds[];
+extern const u8 gText_Upper[];
+extern const u8 gText_Lower[];
+extern const u8 gText_Symbols[];
+extern const u8 gText_Register2[];
+extern const u8 gText_Exit2[];
 
 #endif // GUARD_STRINGS_H

@@ -732,11 +732,11 @@ SlateportCity_EventScript_1DD36E:: @ 81DD36E
 
 SlateportCity_EventScript_1DD39A:: @ 81DD39A
 	setvar VAR_0x8004, 1
-	specialvar VAR_RESULT, sub_80246D4
+	specialvar VAR_RESULT, HasEnoughBerryPowder
 	compare VAR_RESULT, 0
 	goto_if_eq SlateportCity_EventScript_1DD3C0
 	msgbox SlateportCity_Text_1DEE40, MSGBOX_DEFAULT
-	special sub_80248B0
+	special DisplayBerryPowderVendorMenu
 	goto SlateportCity_EventScript_1DD3CA
 	end
 
@@ -846,7 +846,7 @@ SlateportCity_EventScript_1DD536:: @ 81DD536
 
 SlateportCity_EventScript_1DD54A:: @ 81DD54A
 	msgbox SlateportCity_Text_1DEFBC, MSGBOX_DEFAULT
-	special sub_8024918
+	special RemoveBerryPowderVendorMenu
 	release
 	end
 
@@ -855,26 +855,26 @@ SlateportCity_EventScript_1DD557:: @ 81DD557
 	compare VAR_RESULT, 0
 	goto_if_eq SlateportCity_EventScript_1DD3CA
 	copyvar VAR_0x8004, VAR_0x8009
-	specialvar VAR_RESULT, sub_80246D4
+	specialvar VAR_RESULT, HasEnoughBerryPowder
 	compare VAR_RESULT, 0
 	goto_if_eq SlateportCity_EventScript_1DD5CE
 	giveitem_std VAR_0x8008
 	compare VAR_RESULT, 0
 	goto_if_eq SlateportCity_EventScript_1DD5C1
 	copyvar VAR_0x8004, VAR_0x8009
-	special sub_802477C
-	special sub_802488C
+	special TakeBerryPowder
+	special PrintPlayerBerryPowderAmount
 	msgbox SlateportCity_Text_1DEEF7, MSGBOX_YESNO
 	compare VAR_RESULT, 1
 	goto_if_eq SlateportCity_EventScript_1DD3CA
 	msgbox SlateportCity_Text_1DEF79, MSGBOX_DEFAULT
-	special sub_8024918
+	special RemoveBerryPowderVendorMenu
 	release
 	end
 
 SlateportCity_EventScript_1DD5C1:: @ 81DD5C1
 	msgbox gUnknown_08272A89, MSGBOX_DEFAULT
-	special sub_8024918
+	special RemoveBerryPowderVendorMenu
 	release
 	end
 

@@ -1,11 +1,12 @@
 #include "global.h"
 #include "alloc.h"
 #include "battle.h"
+#include "battle_gfx_sfx_util.h"
 #include "bg.h"
 #include "contest.h"
 #include "contest_painting.h"
 #include "contest_painting_effects.h"
-#include "battle_gfx_sfx_util.h"
+#include "data.h"
 #include "decompress.h"
 #include "gpu_regs.h"
 #include "international_string_util.h"
@@ -44,8 +45,6 @@ static void VBlankCB_ContestPainting(void);
 static void sub_8130380(u8 *spritePixels, u16 *palette, u16 (*destColorBuffer)[64][64]);
 
 extern const u8 gUnknown_0827EA0C[];
-extern const struct CompressedSpriteSheet gMonFrontPicTable[];
-extern const struct CompressedSpriteSheet gMonBackPicTable[];
 extern const u8 gContestCoolness[];
 extern const u8 gContestBeauty[];
 extern const u8 gContestCuteness[];
@@ -152,16 +151,14 @@ const struct OamData gUnknown_085B0830 =
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .mosaic = 1,
+    .mosaic = TRUE,
     .bpp = ST_OAM_8BPP,
     .shape = SPRITE_SHAPE(64x64),
     .x = 0,
-    .matrixNum = 0,
     .size = SPRITE_SIZE(64x64),
     .tileNum = 0,
     .priority = 0,
     .paletteNum = 0,
-    .affineParam = 0,
 };
 
 const u16 gUnknown_085B0838[] = {RGB(0, 0, 0), RGB(0, 0, 0)};
@@ -705,3 +702,4 @@ static void sub_8130884(u8 arg0, u8 arg1)
     sub_8130688(arg0);
     sub_8130430(arg0, arg1);
 }
+

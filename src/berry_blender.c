@@ -940,7 +940,7 @@ static void InitBerryBlenderWindows(void)
             FillWindowPixelBuffer(i, PIXEL_FILL(0));
 
         FillBgTilemapBufferRect_Palette0(0, 0, 0, 0, 0x1E, 0x14);
-        sub_81978B0(0xE0);
+        Menu_LoadStdPalAt(0xE0);
     }
 }
 

@@ -222,7 +222,7 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route111_EventScript_2907A6",
+      "script": "EventScript_RockSmash",
       "flag": "FLAG_TEMP_11"
     },
     {
@@ -235,7 +235,7 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route111_EventScript_2907A6",
+      "script": "EventScript_RockSmash",
       "flag": "FLAG_TEMP_12"
     },
     {
@@ -261,7 +261,7 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route111_EventScript_290D9B",
+      "script": "Route111_EventScript_ItemTM37",
       "flag": "FLAG_ITEM_ROUTE_111_TM_37"
     },
     {
@@ -352,7 +352,7 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route111_EventScript_290DA8",
+      "script": "Route111_EventScript_ItemStardust",
       "flag": "FLAG_ITEM_ROUTE_111_STARDUST"
     },
     {
@@ -365,7 +365,7 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route111_EventScript_290DB5",
+      "script": "Route111_EventScript_ItemHPUp",
       "flag": "FLAG_ITEM_ROUTE_111_HP_UP"
     },
     {
@@ -378,7 +378,7 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route111_EventScript_2906BB",
+      "script": "EventScript_CutTree",
       "flag": "FLAG_TEMP_13"
     },
     {
@@ -573,7 +573,7 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route111_EventScript_290DC2",
+      "script": "Route111_EventScript_ItemElixir",
       "flag": "FLAG_ITEM_ROUTE_111_ELIXIR"
     },
     {

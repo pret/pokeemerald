@@ -1,14 +1,13 @@
 #include "global.h"
 #include "script.h"
 #include "event_data.h"
+#include "mevent.h"
 #include "util.h"
 #include "constants/map_scripts.h"
 
 #define RAM_SCRIPT_MAGIC 51
 
 extern const u8* gUnknown_020375C0;
-
-extern bool32 sub_801B27C(void);
 
 // ewram bss
 IWRAM_DATA static u8 sScriptContext1Status;
@@ -387,7 +386,7 @@ const u8 *GetRamScript(u8 objectId, const u8 *script)
     }
 }
 
-bool32 sub_80991F8(void)
+bool32 ValidateSavedRamScript(void)
 {
     struct RamScriptData *scriptData = &gSaveBlock1Ptr->ramScript.data;
     if (scriptData->magic != RAM_SCRIPT_MAGIC)
@@ -403,10 +402,10 @@ bool32 sub_80991F8(void)
     return TRUE;
 }
 
-u8 *sub_8099244(void)
+u8 *GetSavedRamScriptIfValid(void)
 {
     struct RamScriptData *scriptData = &gSaveBlock1Ptr->ramScript.data;
-    if (!sub_801B27C())
+    if (!ValidateReceivedWonderCard())
         return NULL;
     if (scriptData->magic != RAM_SCRIPT_MAGIC)
         return NULL;
@@ -427,7 +426,7 @@ u8 *sub_8099244(void)
     }
 }
 
-void sub_80992A0(u8 *script, u16 scriptSize)
+void InitRamScript_NoEventObject(u8 *script, u16 scriptSize)
 {
     if (scriptSize > sizeof(gSaveBlock1Ptr->ramScript.data.script))
         scriptSize = sizeof(gSaveBlock1Ptr->ramScript.data.script);

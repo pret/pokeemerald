@@ -17,7 +17,7 @@
 #include "string_util.h"
 #include "international_string_util.h"
 #include "window.h"
-#include "data2.h"
+#include "data.h"
 #include "decompress.h"
 #include "pokemon_summary_screen.h"
 #include "sound.h"

@@ -2,7 +2,10 @@
 #include "alloc.h"
 #include "battle_main.h"
 #include "contest_effect.h"
+#include "data.h"
+#include "decompress.h"
 #include "gpu_regs.h"
+#include "graphics.h"
 #include "menu.h"
 #include "international_string_util.h"
 #include "menu.h"
@@ -11,15 +14,20 @@
 #include "palette.h"
 #include "player_pc.h"
 #include "pokemon_summary_screen.h"
+#include "pokemon_storage_system.h"
 #include "scanline_effect.h"
 #include "sound.h"
 #include "strings.h"
 #include "string_util.h"
+#include "text.h"
 #include "text_window.h"
 #include "trig.h"
 #include "window.h"
 #include "constants/songs.h"
+#include "constants/species.h"
 #include "gba/io_reg.h"
+
+extern const struct CompressedSpriteSheet gMonFrontPicTable[];
 
 EWRAM_DATA static u8 sUnknown_0203CF48[3] = {0};
 EWRAM_DATA static struct ListMenuItem *sUnknown_0203CF4C = NULL;
@@ -29,6 +37,9 @@ static void sub_81D24A4(struct UnknownStruct_81D1ED4 *a0);
 static void sub_81D2634(struct UnknownStruct_81D1ED4 *a0);
 static void MoveRelearnerCursorCallback(s32 itemIndex, bool8 onInit, struct ListMenu *list);
 static void nullsub_79(void);
+static void sub_81D3408(struct Sprite *sprite);
+static void sub_81D3564(struct Sprite *sprite);
+static void sub_81D35E8(struct Sprite *sprite);
 
 static const struct WindowTemplate sUnknown_086253E8[] =
 {
@@ -73,9 +84,7 @@ static const struct ScanlineEffectParams sUnknown_08625404 =
     .dmaDest = (void*)REG_ADDR_WIN0H,
     .dmaControl = SCANLINE_EFFECT_DMACNT_32BIT,
     .initState = 1,
-    .unused9 = 0
 };
-
 
 static const u8 sUnknown_08625410[] =
 {
@@ -201,38 +210,26 @@ static const struct ListMenuTemplate sMoveRelearnerMovesListTemplate =
 
 bool8 sub_81D1C44(u8 count)
 {
-    u32 i;
-    struct ListMenuItem **v1;
-    v1 = &sUnknown_0203CF4C;
-    *v1 = Alloc(count * sizeof(struct ListMenuItem) + sizeof(struct ListMenuItem));
-    
+    u8 i;
+
+    sUnknown_0203CF4C = Alloc(count * sizeof(*sUnknown_0203CF4C) + sizeof(*sUnknown_0203CF4C));
     if (sUnknown_0203CF4C == NULL)
         return FALSE;
-    
-    for (i = 0; i < ARRAY_COUNT(sUnknown_0203CF48); i = (u8)(i + 1))
-    {
-        sUnknown_0203CF48[i] |= 0xFF;
-    }
+
+    for (i = 0; i < ARRAY_COUNT(sUnknown_0203CF48); i++)
+        sUnknown_0203CF48[i] = 0xFF;
 
     return TRUE;
 }
 
 u8 sub_81D1C84(u8 a0)
 {
-    struct WindowTemplate template;
-
-    u8 windowId = sUnknown_0203CF48[a0];
-    if (windowId == 0xFF)
+    if (sUnknown_0203CF48[a0] == 0xFF)
     {
         if (a0 == 2)
         {
-            u32 v1;
-            u32 v2;
-            s32 v3;
-
-            template = sUnknown_086253E8[2];
-            v3 = GetMaxWidthInMenuTable(&gMailboxMailOptions[0], 4);
-            template.width = v3;
+            struct WindowTemplate template = sUnknown_086253E8[2];
+            template.width = GetMaxWidthInMenuTable(&gMailboxMailOptions[0], 4);
             sUnknown_0203CF48[2] = AddWindow(&template);
         }
         else
@@ -262,9 +259,9 @@ static void sub_81D1D44(u8 windowId, s32 itemId, u8 y)
     u8 buffer[30];
     u16 length;
 
-	if (itemId == LIST_CANCEL)
+    if (itemId == LIST_CANCEL)
         return;
-    
+
     StringCopy(buffer, gSaveBlock1Ptr->mail[6 + itemId].playerName);
     sub_81DB52C(buffer);
     length = StringLength(buffer);
@@ -324,8 +321,8 @@ void sub_81D1EC0(void)
 
 void sub_81D1ED4(struct UnknownStruct_81D1ED4 *a0)
 {
-    u8 j;
-    u8 i;
+    u8 i, j;
+
     for (j = 0; j < 5; j++)
     {
         for (i = 0; i < 10; i++)
@@ -348,130 +345,33 @@ void sub_81D1ED4(struct UnknownStruct_81D1ED4 *a0)
     a0->unk352 = 0;
 }
 
-NAKED
-void sub_81D1F84(struct UnknownStruct_81D1ED4 *arg0, struct UnknownSubStruct_81D1ED4 arg1[4][5], struct UnknownSubStruct_81D1ED4 arg2[4][5])
+void sub_81D1F84(struct UnknownStruct_81D1ED4 *arg0, struct UnknownSubStruct_81D1ED4 *arg1, struct UnknownSubStruct_81D1ED4 *arg2)
 {
-    asm(".syntax unified\n\
-    push {r4-r7,lr}\n\
-	mov r7, r10\n\
-	mov r6, r9\n\
-	mov r5, r8\n\
-	push {r5-r7}\n\
-	sub sp, 0x8\n\
-	mov r8, r0\n\
-	str r1, [sp]\n\
-	mov r9, r2\n\
-	movs r7, 0\n\
-_081D1F98:\n\
-	lsls r4, r7, 2\n\
-	ldr r1, [sp]\n\
-	adds r0, r4, r1\n\
-	ldrh r1, [r0]\n\
-	lsls r5, r1, 8\n\
-	mov r2, r9\n\
-	adds r0, r4, r2\n\
-	ldrh r0, [r0]\n\
-	subs r0, r1\n\
-	lsls r0, 8\n\
-	movs r1, 0xA\n\
-	bl __divsi3\n\
-	adds r6, r0, 0\n\
-	movs r3, 0\n\
-	adds r7, 0x1\n\
-	mov r10, r7\n\
-	mov r12, r4\n\
-_081D1FBC:\n\
-	lsls r0, r3, 2\n\
-	adds r0, r3\n\
-	lsls r0, 2\n\
-	add r0, r12\n\
-	add r0, r8\n\
-	asrs r2, r5, 8\n\
-	asrs r1, r5, 7\n\
-	movs r7, 0x1\n\
-	ands r1, r7\n\
-	adds r2, r1\n\
-	adds r0, 0x64\n\
-	strh r2, [r0]\n\
-	adds r5, r6\n\
-	adds r0, r3, 0x1\n\
-	lsls r0, 16\n\
-	lsrs r3, r0, 16\n\
-	cmp r3, 0x8\n\
-	bls _081D1FBC\n\
-	lsls r0, r3, 2\n\
-	adds r0, r3\n\
-	lsls r0, 2\n\
-	adds r0, r4, r0\n\
-	add r0, r8\n\
-	mov r1, r9\n\
-	adds r2, r4, r1\n\
-	ldrh r1, [r2]\n\
-	adds r0, 0x64\n\
-	strh r1, [r0]\n\
-	ldr r7, [sp]\n\
-	adds r0, r4, r7\n\
-	ldrh r1, [r0, 0x2]\n\
-	lsls r5, r1, 8\n\
-	ldrh r0, [r2, 0x2]\n\
-	subs r0, r1\n\
-	lsls r0, 8\n\
-	movs r1, 0xA\n\
-	bl __divsi3\n\
-	adds r6, r0, 0\n\
-	movs r3, 0\n\
-	str r4, [sp, 0x4]\n\
-	movs r0, 0x1\n\
-	mov r12, r0\n\
-_081D2012:\n\
-	lsls r0, r3, 2\n\
-	adds r0, r3\n\
-	lsls r0, 2\n\
-	ldr r1, [sp, 0x4]\n\
-	adds r0, r1, r0\n\
-	add r0, r8\n\
-	asrs r2, r5, 8\n\
-	asrs r1, r5, 7\n\
-	mov r7, r12\n\
-	ands r1, r7\n\
-	adds r2, r1\n\
-	adds r0, 0x66\n\
-	strh r2, [r0]\n\
-	adds r5, r6\n\
-	adds r0, r3, 0x1\n\
-	lsls r0, 16\n\
-	lsrs r3, r0, 16\n\
-	cmp r3, 0x8\n\
-	bls _081D2012\n\
-	lsls r0, r3, 2\n\
-	adds r0, r3\n\
-	lsls r0, 2\n\
-	adds r0, r4, r0\n\
-	add r0, r8\n\
-	mov r2, r9\n\
-	adds r1, r4, r2\n\
-	ldrh r1, [r1, 0x2]\n\
-	adds r0, 0x66\n\
-	strh r1, [r0]\n\
-	mov r7, r10\n\
-	lsls r0, r7, 16\n\
-	lsrs r7, r0, 16\n\
-	cmp r7, 0x4\n\
-	bls _081D1F98\n\
-	ldr r1, =0x00000352\n\
-	add r1, r8\n\
-	movs r0, 0\n\
-	strh r0, [r1]\n\
-	add sp, 0x8\n\
-	pop {r3-r5}\n\
-	mov r8, r3\n\
-	mov r9, r4\n\
-	mov r10, r5\n\
-	pop {r4-r7}\n\
-	pop {r0}\n\
-	bx r0\n\
-	.pool\n\
-    .syntax divided");
+    u16 i, j;
+    s32 r5, r6;
+
+    for (i = 0; i < 5; i++)
+    {
+        r5 = arg1[i].unk0 << 8;
+        r6 = ((arg2[i].unk0 - arg1[i].unk0) << 8) / 10;
+        for (j = 0; j < 9; j++)
+        {
+            arg0->unk64[j][i].unk0 = (r5 >> 8) + ((r5 >> 7) & 1);
+            r5 += r6;
+        }
+        arg0->unk64[j][i].unk0 = arg2[i].unk0;
+
+        r5 = arg1[i].unk2 << 8;
+        r6 = ((arg2[i].unk2 - arg1[i].unk2) << 8) / 10;
+        for (j = 0; j < 9; j++)
+        {
+            arg0->unk64[j][i].unk2 = (r5 >> 8) + ((r5 >> 7) & 1);
+            r5 += r6;
+        }
+        arg0->unk64[j][i].unk2 = arg2[i].unk2;
+    }
+
+    arg0->unk352 = 0;
 }
 
 bool32 sub_81D2074(struct UnknownStruct_81D1ED4 *a0)
@@ -479,13 +379,12 @@ bool32 sub_81D2074(struct UnknownStruct_81D1ED4 *a0)
     if (a0->unk352 < 10)
     {
         sub_81D2230(a0);
-        return ++a0->unk352 != 10;
+        return (++a0->unk352 != 10);
     }
     else
     {
         return FALSE;
     }
-    
 }
 
 void sub_81D20AC(struct UnknownStruct_81D1ED4 *a0)
@@ -496,6 +395,7 @@ void sub_81D20AC(struct UnknownStruct_81D1ED4 *a0)
 bool8 sub_81D20BC(struct UnknownStruct_81D1ED4 *arg0)
 {
     struct ScanlineEffectParams params;
+
     switch (arg0->unk355)
     {
     case 0:
@@ -512,170 +412,32 @@ bool8 sub_81D20BC(struct UnknownStruct_81D1ED4 *arg0)
     }
 }
 
-NAKED
 void sub_81D2108(struct UnknownStruct_81D1ED4 *arg0)
 {
-    // Three of the additions are in the wrong order.
-#ifdef NONMATCHING
     u16 i;
-    u32 v3;
-    u32 v4;
-    u16 *scanBuffer1;
-    u16 *scanBuffer2;
-    u32 scanBufferWidth;
-    u32 mask;
-    u16 *unkBuff1;
-    u16 *unkBuff2;
-    u16 *unkBuff3;
-    u16 *unkBuff4;
 
     if (arg0->unk354 == 0)
         return;
-    
+
     sub_81D24A4(arg0);
     sub_81D2634(arg0);
 
-    i = 0;
-    scanBuffer1 = gScanlineEffectRegBuffers[0];
-    scanBufferWidth = ARRAY_COUNT(gScanlineEffectRegBuffers[0]);
-    scanBuffer2 = scanBuffer1 + scanBufferWidth;
-
-    // This function accesses the arrays "manually", where every other entry
-    // is just handled differently, rather than a pairwise struct.
-    unkBuff1 = (u16*)&arg0->unk13C[0].unk0;
-    mask = 0xFFFF;
-    unkBuff2 = (u16*)&arg0->unk13C[0].unk2;
-    unkBuff3 = (u16*)&arg0->unk248[0].unk0;
-    unkBuff4 = (u16*)&arg0->unk248[0].unk2;
-
-    for (; i < 0x42; i++)
+    for (i = 0; i < 66; i++)
     {
-        u32 offset1;
-        register u32 offset2 asm("r2");
-        u32 offset3;
-
-        offset1 = (i + 0x37) * 2;
-        offset2 = i + 0x37;
-        scanBuffer2[offset1] = (scanBuffer1[offset1] = (unkBuff1[i * 2] << 8) | unkBuff2[i * 2]) & mask;
-
-        offset3 = offset2 * 2 + 1;
-        scanBuffer2[offset3] = (scanBuffer1[offset3] = (unkBuff3[i * 2] << 8) | unkBuff4[i * 2]) & mask;
+        gScanlineEffectRegBuffers[1][(i + 55) * 2]     = gScanlineEffectRegBuffers[0][(i + 55) * 2]     = (arg0->unk140[i][0] << 8) | (arg0->unk140[i][1]);
+        gScanlineEffectRegBuffers[1][(i + 55) * 2 + 1] = gScanlineEffectRegBuffers[0][(i + 55) * 2 + 1] = (arg0->unk248[i][0] << 8) | (arg0->unk248[i][1]);
     }
 
     arg0->unk354 = 0;
-#else
-    asm(".syntax unified\n\
-    push {r4-r7,lr}\n\
-	mov r7, r10\n\
-	mov r6, r9\n\
-	mov r5, r8\n\
-	push {r5-r7}\n\
-	sub sp, 0x10\n\
-	adds r6, r0, 0\n\
-	movs r1, 0xD5\n\
-	lsls r1, 2\n\
-	adds r0, r6, r1\n\
-	ldrb r0, [r0]\n\
-	cmp r0, 0\n\
-	beq _081D21BE\n\
-	adds r0, r6, 0\n\
-	bl sub_81D24A4\n\
-	adds r0, r6, 0\n\
-	bl sub_81D2634\n\
-	movs r7, 0\n\
-	ldr r5, =gScanlineEffectRegBuffers\n\
-	mov r12, r5\n\
-	movs r0, 0xF0\n\
-	lsls r0, 3\n\
-	add r0, r12\n\
-	mov r9, r0\n\
-	movs r1, 0xA0\n\
-	lsls r1, 1\n\
-	adds r1, r6, r1\n\
-	str r1, [sp]\n\
-	ldr r5, =0x0000ffff\n\
-	mov r8, r5\n\
-	movs r0, 0xA1\n\
-	lsls r0, 1\n\
-	adds r0, r6, r0\n\
-	str r0, [sp, 0x4]\n\
-	movs r1, 0x92\n\
-	lsls r1, 2\n\
-	adds r1, r6, r1\n\
-	str r1, [sp, 0x8]\n\
-	ldr r5, =0x0000024a\n\
-	adds r5, r6\n\
-	mov r10, r5\n\
-_081D215E:\n\
-	adds r2, r7, 0\n\
-	adds r2, 0x37\n\
-	lsls r3, r2, 2\n\
-	mov r0, r9\n\
-	adds r0, r3, r0\n\
-	str r0, [sp, 0xC]\n\
-	add r3, r12\n\
-	lsls r4, r7, 2\n\
-	ldr r1, [sp]\n\
-	adds r0, r1, r4\n\
-	ldrh r0, [r0]\n\
-	lsls r0, 8\n\
-	ldr r5, [sp, 0x4]\n\
-	adds r1, r5, r4\n\
-	ldrh r1, [r1]\n\
-	orrs r0, r1\n\
-	strh r0, [r3]\n\
-	mov r1, r8\n\
-	ands r0, r1\n\
-	ldr r5, [sp, 0xC]\n\
-	strh r0, [r5]\n\
-	lsls r2, 1\n\
-	adds r2, 0x1\n\
-	lsls r2, 1\n\
-	mov r0, r9\n\
-	adds r3, r2, r0\n\
-	add r2, r12\n\
-	ldr r1, [sp, 0x8]\n\
-	adds r0, r1, r4\n\
-	ldrh r0, [r0]\n\
-	lsls r0, 8\n\
-	add r4, r10\n\
-	ldrh r1, [r4]\n\
-	orrs r0, r1\n\
-	strh r0, [r2]\n\
-	mov r5, r8\n\
-	ands r0, r5\n\
-	strh r0, [r3]\n\
-	adds r0, r7, 0x1\n\
-	lsls r0, 16\n\
-	lsrs r7, r0, 16\n\
-	cmp r7, 0x41\n\
-	bls _081D215E\n\
-	movs r0, 0xD5\n\
-	lsls r0, 2\n\
-	adds r1, r6, r0\n\
-	movs r0, 0\n\
-	strb r0, [r1]\n\
-_081D21BE:\n\
-	add sp, 0x10\n\
-	pop {r3-r5}\n\
-	mov r8, r3\n\
-	mov r9, r4\n\
-	mov r10, r5\n\
-	pop {r4-r7}\n\
-	pop {r0}\n\
-	bx r0\n\
-	.pool\n\
-    .syntax divided");
-#endif
 }
 
 void sub_81D21DC(u8 bg)
 {
-    u8 flags;
+    u32 flags;
 
     if (bg > 3)
         bg = 0;
-    
+
     // Unset the WINOUT flag for the bg.
     flags = (WINOUT_WIN01_BG_ALL | WINOUT_WIN01_OBJ) & ~(1 << bg);
 
@@ -691,883 +453,458 @@ void sub_81D2230(struct UnknownStruct_81D1ED4 *arg0)
 {
     u16 i;
     for (i = 0; i < 5; i++)
-    {
         arg0->unk12C[i] = arg0->unk64[arg0->unk352][i];
-    }
+
     arg0->unk354 = 1;
 }
 
-NAKED
-static void sub_81D2278(void *a0, void *a1, u16 *a2, u16 *a3, u8 a38, u32 a3C)
+/* TODO
+static void sub_81D2278(struct UnknownStruct_81D1ED4 *arg0, u16 arg1[66][2], struct UnknownSubStruct_81D1ED4 *arg2, struct UnknownSubStruct_81D1ED4 *arg3, u8 arg4, u16 arg5[66][2])
 {
-#ifdef NONMATCHING
-    // a0 => sp0
-    // a1 => r6
-    // a2 => r5
-    // a3 => sp4
-    // a38 => r9
-    // a3C => r7
-    u32 v1; // r10
-    u32 v2; // sp8
-    u32 v3; // spC
-    u32 v4;
-    u32 v5;
-    u16 v6; // r8
-    u32 v7;
-    u32 v8; // sp10
+    s32 var_2C = 0;
+    u16 r8;
+    s32 r10, r4, r2, r0, r1, var_30;
 
-    v3 = 0;
-
-    // v4 => r4
-    // v5 => r0
-    // v7 => r1
-    if (a2[1] < a3[1])
+    if (arg2->unk2 < arg3->unk2)
     {
-        v1 = a2[1];
-        v5 = a3[1];
-        v7 = a2[0];
-        v4 = v7 << 10;
-        v2 = a3[0];
+        r2 = arg2->unk2;
+        r10 = arg2->unk2;
+        r0 = arg3->unk2;
+        r1 = arg2->unk0;
+        r4 = r1 << 10;
+        var_30 = arg3->unk0;
     }
     else
     {
-        v5 = a2[1];
-        v1 = a3[1];
-        v7 = a3[0];
-        v4 = v7 << 10;
-        v2 = a2[0];
+        r0 = arg2->unk0;
+        r10 = arg3->unk2;
+        r1 = arg3->unk0;
+        r4 = r1 << 10;
+        var_30 = arg2->unk0;
+        r2 = arg3->unk2;
     }
+    r8 = r0 - r2;
+    if (r8 != 0)
+        var_2C = ((var_30 - r1) << 10) / r8;
 
-    v6 = v5 - v1;
-    if (v6 != 0)
+    r8++;
+    if (arg5 == NULL)
     {
-        v3 = (v2 - v7) / v6;
-    }
-    v6++;
 
-    if (a3C == 0)
-    {
-        v8 = 
     }
-#else
-    asm(".syntax unified\n\
-    push {r4-r7,lr}\n\
-	mov r7, r10\n\
-	mov r6, r9\n\
-	mov r5, r8\n\
-	push {r5-r7}\n\
-	sub sp, 0x18\n\
-	str r0, [sp]\n\
-	adds r6, r1, 0\n\
-	adds r5, r2, 0\n\
-	str r3, [sp, 0x4]\n\
-	ldr r0, [sp, 0x38]\n\
-	ldr r7, [sp, 0x3C]\n\
-	lsls r0, 24\n\
-	lsrs r0, 24\n\
-	mov r9, r0\n\
-	movs r0, 0\n\
-	str r0, [sp, 0xC]\n\
-	ldrh r0, [r5, 0x2]\n\
-	ldrh r1, [r3, 0x2]\n\
-	cmp r0, r1\n\
-	bcs _081D22B2\n\
-	adds r2, r0, 0\n\
-	mov r10, r2\n\
-	ldrh r0, [r3, 0x2]\n\
-	ldrh r1, [r5]\n\
-	lsls r4, r1, 10\n\
-	ldrh r3, [r3]\n\
-	str r3, [sp, 0x8]\n\
-	b _081D22C6\n\
-_081D22B2:\n\
-	ldrh r0, [r5, 0x2]\n\
-	ldr r1, [sp, 0x4]\n\
-	ldrh r1, [r1, 0x2]\n\
-	mov r10, r1\n\
-	ldr r2, [sp, 0x4]\n\
-	ldrh r1, [r2]\n\
-	lsls r4, r1, 10\n\
-	ldrh r3, [r5]\n\
-	str r3, [sp, 0x8]\n\
-	mov r2, r10\n\
-_081D22C6:\n\
-	subs r0, r2\n\
-	lsls r0, 16\n\
-	lsrs r0, 16\n\
-	mov r8, r0\n\
-	cmp r0, 0\n\
-	beq _081D22DE\n\
-	subs r0, r3, r1\n\
-	lsls r0, 10\n\
-	mov r1, r8\n\
-	bl __divsi3\n\
-	str r0, [sp, 0xC]\n\
-_081D22DE:\n\
-	mov r0, r8\n\
-	adds r0, 0x1\n\
-	lsls r0, 16\n\
-	lsrs r0, 16\n\
-	mov r8, r0\n\
-	cmp r7, 0\n\
-	bne _081D2328\n\
-	mov r0, r10\n\
-	subs r0, 0x38\n\
-	lsls r0, 2\n\
-	adds r6, r0\n\
-	movs r5, 0\n\
-	mov r3, r9\n\
-	lsls r3, 1\n\
-	mov r12, r3\n\
-	ldr r0, [sp, 0x8]\n\
-	add r0, r9\n\
-	str r0, [sp, 0x10]\n\
-	cmp r7, r8\n\
-	bcs _081D23B6\n\
-	movs r7, 0x1\n\
-_081D2308:\n\
-	adds r2, r3, r6\n\
-	asrs r1, r4, 10\n\
-	asrs r0, r4, 9\n\
-	ands r0, r7\n\
-	adds r1, r0\n\
-	add r1, r9\n\
-	strh r1, [r2]\n\
-	ldr r1, [sp, 0xC]\n\
-	adds r4, r1\n\
-	adds r6, 0x4\n\
-	adds r0, r5, 0x1\n\
-	lsls r0, 16\n\
-	lsrs r5, r0, 16\n\
-	cmp r5, r8\n\
-	bcc _081D2308\n\
-	b _081D23B6\n\
-_081D2328:\n\
-	ldr r2, [sp, 0xC]\n\
-	cmp r2, 0\n\
-	ble _081D23C0\n\
-	mov r0, r10\n\
-	subs r0, 0x38\n\
-	lsls r0, 2\n\
-	adds r7, r0\n\
-	movs r5, 0\n\
-	mov r3, r9\n\
-	lsls r3, 1\n\
-	mov r12, r3\n\
-	ldr r0, [sp, 0x8]\n\
-	add r0, r9\n\
-	str r0, [sp, 0x10]\n\
-	cmp r5, r8\n\
-	bcs _081D237A\n\
-	ldr r0, =0x00026bff\n\
-	cmp r4, r0\n\
-	bgt _081D237A\n\
-	mov r1, r12\n\
-	str r1, [sp, 0x14]\n\
-_081D2352:\n\
-	ldr r3, [sp, 0x14]\n\
-	adds r2, r3, r7\n\
-	asrs r1, r4, 10\n\
-	asrs r0, r4, 9\n\
-	movs r3, 0x1\n\
-	ands r0, r3\n\
-	adds r1, r0\n\
-	add r1, r9\n\
-	strh r1, [r2]\n\
-	ldr r0, [sp, 0xC]\n\
-	adds r4, r0\n\
-	adds r7, 0x4\n\
-	adds r0, r5, 0x1\n\
-	lsls r0, 16\n\
-	lsrs r5, r0, 16\n\
-	cmp r5, r8\n\
-	bcs _081D237A\n\
-	ldr r1, =0x00026bff\n\
-	cmp r4, r1\n\
-	ble _081D2352\n\
-_081D237A:\n\
-	mov r2, r10\n\
-	adds r1, r2, r5\n\
-	ldr r3, [sp]\n\
-	movs r2, 0xD4\n\
-	lsls r2, 2\n\
-	adds r0, r3, r2\n\
-	strh r1, [r0]\n\
-	ldrh r0, [r0]\n\
-	subs r0, 0x38\n\
-	lsls r0, 2\n\
-	adds r6, r0\n\
-	cmp r5, r8\n\
-	bcs _081D23B6\n\
-	mov r3, r12\n\
-	movs r7, 0x1\n\
-_081D2398:\n\
-	adds r2, r3, r6\n\
-	asrs r1, r4, 10\n\
-	asrs r0, r4, 9\n\
-	ands r0, r7\n\
-	adds r1, r0\n\
-	add r1, r9\n\
-	strh r1, [r2]\n\
-	ldr r0, [sp, 0xC]\n\
-	adds r4, r0\n\
-	adds r6, 0x4\n\
-	adds r0, r5, 0x1\n\
-	lsls r0, 16\n\
-	lsrs r5, r0, 16\n\
-	cmp r5, r8\n\
-	bcc _081D2398\n\
-_081D23B6:\n\
-	subs r0, r6, 0x4\n\
-	b _081D248C\n\
-	.pool\n\
-_081D23C0:\n\
-	ldr r1, [sp, 0xC]\n\
-	cmp r1, 0\n\
-	bge _081D2464\n\
-	mov r0, r10\n\
-	subs r0, 0x38\n\
-	lsls r0, 2\n\
-	adds r6, r0\n\
-	movs r5, 0\n\
-	mov r2, r9\n\
-	lsls r2, 1\n\
-	mov r12, r2\n\
-	ldr r3, [sp, 0x8]\n\
-	add r3, r9\n\
-	str r3, [sp, 0x10]\n\
-	cmp r5, r8\n\
-	bcs _081D241E\n\
-	adds r3, r2, r6\n\
-	asrs r1, r4, 10\n\
-	asrs r0, r4, 9\n\
-	movs r2, 0x1\n\
-	ands r0, r2\n\
-	adds r1, r0\n\
-	add r1, r9\n\
-	strh r1, [r3]\n\
-	b _081D2414\n\
-_081D23F2:\n\
-	ldr r0, [sp, 0xC]\n\
-	adds r4, r0\n\
-	adds r6, 0x4\n\
-	adds r0, r5, 0x1\n\
-	lsls r0, 16\n\
-	lsrs r5, r0, 16\n\
-	cmp r5, r8\n\
-	bcs _081D241E\n\
-	mov r1, r12\n\
-	adds r3, r1, r6\n\
-	asrs r2, r4, 10\n\
-	asrs r0, r4, 9\n\
-	movs r1, 0x1\n\
-	ands r0, r1\n\
-	adds r2, r0\n\
-	add r2, r9\n\
-	strh r2, [r3]\n\
-_081D2414:\n\
-	ldr r0, =0x00026bff\n\
-	cmp r4, r0\n\
-	bgt _081D23F2\n\
-	movs r0, 0x9B\n\
-	strh r0, [r3]\n\
-_081D241E:\n\
-	mov r2, r10\n\
-	adds r1, r2, r5\n\
-	ldr r3, [sp]\n\
-	movs r2, 0xD4\n\
-	lsls r2, 2\n\
-	adds r0, r3, r2\n\
-	strh r1, [r0]\n\
-	ldrh r0, [r0]\n\
-	subs r0, 0x38\n\
-	lsls r0, 2\n\
-	adds r7, r0\n\
-	cmp r5, r8\n\
-	bcs _081D245A\n\
-	mov r3, r12\n\
-	movs r6, 0x1\n\
-_081D243C:\n\
-	adds r2, r3, r7\n\
-	asrs r1, r4, 10\n\
-	asrs r0, r4, 9\n\
-	ands r0, r6\n\
-	adds r1, r0\n\
-	add r1, r9\n\
-	strh r1, [r2]\n\
-	ldr r0, [sp, 0xC]\n\
-	adds r4, r0\n\
-	adds r7, 0x4\n\
-	adds r0, r5, 0x1\n\
-	lsls r0, 16\n\
-	lsrs r5, r0, 16\n\
-	cmp r5, r8\n\
-	bcc _081D243C\n\
-_081D245A:\n\
-	subs r0, r7, 0x4\n\
-	b _081D248C\n\
-	.pool\n\
-_081D2464:\n\
-	ldr r1, [sp]\n\
-	movs r2, 0xD4\n\
-	lsls r2, 2\n\
-	adds r0, r1, r2\n\
-	mov r3, r10\n\
-	strh r3, [r0]\n\
-	mov r0, r10\n\
-	subs r0, 0x38\n\
-	lsls r0, 2\n\
-	adds r6, r0\n\
-	adds r7, r0\n\
-	ldrh r0, [r5]\n\
-	adds r0, 0x1\n\
-	strh r0, [r6, 0x2]\n\
-	ldr r1, [sp, 0x4]\n\
-	ldrh r0, [r1]\n\
-	strh r0, [r7]\n\
-	movs r0, 0x9B\n\
-	strh r0, [r7, 0x2]\n\
-	b _081D2494\n\
-_081D248C:\n\
-	add r0, r12\n\
-	mov r2, sp\n\
-	ldrh r2, [r2, 0x10]\n\
-	strh r2, [r0]\n\
-_081D2494:\n\
-	add sp, 0x18\n\
-	pop {r3-r5}\n\
-	mov r8, r3\n\
-	mov r9, r4\n\
-	mov r10, r5\n\
-	pop {r4-r7}\n\
-	pop {r0}\n\
-	bx r0\n\
-    .syntax divided");
-#endif
+}
+*/
+NAKED
+static void sub_81D2278(struct UnknownStruct_81D1ED4 *arg0, u16 arg1[66][2], struct UnknownSubStruct_81D1ED4 *arg2, struct UnknownSubStruct_81D1ED4 *arg3, u8 arg4, u16 arg5[66][2])
+{
+    asm_unified("\n\
+                push {r4-r7,lr}\n\
+                mov r7, r10\n\
+                mov r6, r9\n\
+                mov r5, r8\n\
+                push {r5-r7}\n\
+                sub sp, 0x18\n\
+                str r0, [sp]\n\
+                adds r6, r1, 0\n\
+                adds r5, r2, 0\n\
+                str r3, [sp, 0x4]\n\
+                ldr r0, [sp, 0x38]\n\
+                ldr r7, [sp, 0x3C]\n\
+                lsls r0, 24\n\
+                lsrs r0, 24\n\
+                mov r9, r0\n\
+                movs r0, 0\n\
+                str r0, [sp, 0xC]\n\
+                ldrh r0, [r5, 0x2]\n\
+                ldrh r1, [r3, 0x2]\n\
+                cmp r0, r1\n\
+                bcs _081D22B2\n\
+                adds r2, r0, 0\n\
+                mov r10, r2\n\
+                ldrh r0, [r3, 0x2]\n\
+                ldrh r1, [r5]\n\
+                lsls r4, r1, 10\n\
+                ldrh r3, [r3]\n\
+                str r3, [sp, 0x8]\n\
+                b _081D22C6\n\
+            _081D22B2:\n\
+                ldrh r0, [r5, 0x2]\n\
+                ldr r1, [sp, 0x4]\n\
+                ldrh r1, [r1, 0x2]\n\
+                mov r10, r1\n\
+                ldr r2, [sp, 0x4]\n\
+                ldrh r1, [r2]\n\
+                lsls r4, r1, 10\n\
+                ldrh r3, [r5]\n\
+                str r3, [sp, 0x8]\n\
+                mov r2, r10\n\
+            _081D22C6:\n\
+                subs r0, r2\n\
+                lsls r0, 16\n\
+                lsrs r0, 16\n\
+                mov r8, r0\n\
+                cmp r0, 0\n\
+                beq _081D22DE\n\
+                subs r0, r3, r1\n\
+                lsls r0, 10\n\
+                mov r1, r8\n\
+                bl __divsi3\n\
+                str r0, [sp, 0xC]\n\
+            _081D22DE:\n\
+                mov r0, r8\n\
+                adds r0, 0x1\n\
+                lsls r0, 16\n\
+                lsrs r0, 16\n\
+                mov r8, r0\n\
+                cmp r7, 0\n\
+                bne _081D2328\n\
+                mov r0, r10\n\
+                subs r0, 0x38\n\
+                lsls r0, 2\n\
+                adds r6, r0\n\
+                movs r5, 0\n\
+                mov r3, r9\n\
+                lsls r3, 1\n\
+                mov r12, r3\n\
+                ldr r0, [sp, 0x8]\n\
+                add r0, r9\n\
+                str r0, [sp, 0x10]\n\
+                cmp r7, r8\n\
+                bcs _081D23B6\n\
+                movs r7, 0x1\n\
+            _081D2308:\n\
+                adds r2, r3, r6\n\
+                asrs r1, r4, 10\n\
+                asrs r0, r4, 9\n\
+                ands r0, r7\n\
+                adds r1, r0\n\
+                add r1, r9\n\
+                strh r1, [r2]\n\
+                ldr r1, [sp, 0xC]\n\
+                adds r4, r1\n\
+                adds r6, 0x4\n\
+                adds r0, r5, 0x1\n\
+                lsls r0, 16\n\
+                lsrs r5, r0, 16\n\
+                cmp r5, r8\n\
+                bcc _081D2308\n\
+                b _081D23B6\n\
+            _081D2328:\n\
+                ldr r2, [sp, 0xC]\n\
+                cmp r2, 0\n\
+                ble _081D23C0\n\
+                mov r0, r10\n\
+                subs r0, 0x38\n\
+                lsls r0, 2\n\
+                adds r7, r0\n\
+                movs r5, 0\n\
+                mov r3, r9\n\
+                lsls r3, 1\n\
+                mov r12, r3\n\
+                ldr r0, [sp, 0x8]\n\
+                add r0, r9\n\
+                str r0, [sp, 0x10]\n\
+                cmp r5, r8\n\
+                bcs _081D237A\n\
+                ldr r0, =0x00026bff\n\
+                cmp r4, r0\n\
+                bgt _081D237A\n\
+                mov r1, r12\n\
+                str r1, [sp, 0x14]\n\
+            _081D2352:\n\
+                ldr r3, [sp, 0x14]\n\
+                adds r2, r3, r7\n\
+                asrs r1, r4, 10\n\
+                asrs r0, r4, 9\n\
+                movs r3, 0x1\n\
+                ands r0, r3\n\
+                adds r1, r0\n\
+                add r1, r9\n\
+                strh r1, [r2]\n\
+                ldr r0, [sp, 0xC]\n\
+                adds r4, r0\n\
+                adds r7, 0x4\n\
+                adds r0, r5, 0x1\n\
+                lsls r0, 16\n\
+                lsrs r5, r0, 16\n\
+                cmp r5, r8\n\
+                bcs _081D237A\n\
+                ldr r1, =0x00026bff\n\
+                cmp r4, r1\n\
+                ble _081D2352\n\
+            _081D237A:\n\
+                mov r2, r10\n\
+                adds r1, r2, r5\n\
+                ldr r3, [sp]\n\
+                movs r2, 0xD4\n\
+                lsls r2, 2\n\
+                adds r0, r3, r2\n\
+                strh r1, [r0]\n\
+                ldrh r0, [r0]\n\
+                subs r0, 0x38\n\
+                lsls r0, 2\n\
+                adds r6, r0\n\
+                cmp r5, r8\n\
+                bcs _081D23B6\n\
+                mov r3, r12\n\
+                movs r7, 0x1\n\
+            _081D2398:\n\
+                adds r2, r3, r6\n\
+                asrs r1, r4, 10\n\
+                asrs r0, r4, 9\n\
+                ands r0, r7\n\
+                adds r1, r0\n\
+                add r1, r9\n\
+                strh r1, [r2]\n\
+                ldr r0, [sp, 0xC]\n\
+                adds r4, r0\n\
+                adds r6, 0x4\n\
+                adds r0, r5, 0x1\n\
+                lsls r0, 16\n\
+                lsrs r5, r0, 16\n\
+                cmp r5, r8\n\
+                bcc _081D2398\n\
+            _081D23B6:\n\
+                subs r0, r6, 0x4\n\
+                b _081D248C\n\
+                .pool\n\
+            _081D23C0:\n\
+                ldr r1, [sp, 0xC]\n\
+                cmp r1, 0\n\
+                bge _081D2464\n\
+                mov r0, r10\n\
+                subs r0, 0x38\n\
+                lsls r0, 2\n\
+                adds r6, r0\n\
+                movs r5, 0\n\
+                mov r2, r9\n\
+                lsls r2, 1\n\
+                mov r12, r2\n\
+                ldr r3, [sp, 0x8]\n\
+                add r3, r9\n\
+                str r3, [sp, 0x10]\n\
+                cmp r5, r8\n\
+                bcs _081D241E\n\
+                adds r3, r2, r6\n\
+                asrs r1, r4, 10\n\
+                asrs r0, r4, 9\n\
+                movs r2, 0x1\n\
+                ands r0, r2\n\
+                adds r1, r0\n\
+                add r1, r9\n\
+                strh r1, [r3]\n\
+                b _081D2414\n\
+            _081D23F2:\n\
+                ldr r0, [sp, 0xC]\n\
+                adds r4, r0\n\
+                adds r6, 0x4\n\
+                adds r0, r5, 0x1\n\
+                lsls r0, 16\n\
+                lsrs r5, r0, 16\n\
+                cmp r5, r8\n\
+                bcs _081D241E\n\
+                mov r1, r12\n\
+                adds r3, r1, r6\n\
+                asrs r2, r4, 10\n\
+                asrs r0, r4, 9\n\
+                movs r1, 0x1\n\
+                ands r0, r1\n\
+                adds r2, r0\n\
+                add r2, r9\n\
+                strh r2, [r3]\n\
+            _081D2414:\n\
+                ldr r0, =0x00026bff\n\
+                cmp r4, r0\n\
+                bgt _081D23F2\n\
+                movs r0, 0x9B\n\
+                strh r0, [r3]\n\
+            _081D241E:\n\
+                mov r2, r10\n\
+                adds r1, r2, r5\n\
+                ldr r3, [sp]\n\
+                movs r2, 0xD4\n\
+                lsls r2, 2\n\
+                adds r0, r3, r2\n\
+                strh r1, [r0]\n\
+                ldrh r0, [r0]\n\
+                subs r0, 0x38\n\
+                lsls r0, 2\n\
+                adds r7, r0\n\
+                cmp r5, r8\n\
+                bcs _081D245A\n\
+                mov r3, r12\n\
+                movs r6, 0x1\n\
+            _081D243C:\n\
+                adds r2, r3, r7\n\
+                asrs r1, r4, 10\n\
+                asrs r0, r4, 9\n\
+                ands r0, r6\n\
+                adds r1, r0\n\
+                add r1, r9\n\
+                strh r1, [r2]\n\
+                ldr r0, [sp, 0xC]\n\
+                adds r4, r0\n\
+                adds r7, 0x4\n\
+                adds r0, r5, 0x1\n\
+                lsls r0, 16\n\
+                lsrs r5, r0, 16\n\
+                cmp r5, r8\n\
+                bcc _081D243C\n\
+            _081D245A:\n\
+                subs r0, r7, 0x4\n\
+                b _081D248C\n\
+                .pool\n\
+            _081D2464:\n\
+                ldr r1, [sp]\n\
+                movs r2, 0xD4\n\
+                lsls r2, 2\n\
+                adds r0, r1, r2\n\
+                mov r3, r10\n\
+                strh r3, [r0]\n\
+                mov r0, r10\n\
+                subs r0, 0x38\n\
+                lsls r0, 2\n\
+                adds r6, r0\n\
+                adds r7, r0\n\
+                ldrh r0, [r5]\n\
+                adds r0, 0x1\n\
+                strh r0, [r6, 0x2]\n\
+                ldr r1, [sp, 0x4]\n\
+                ldrh r0, [r1]\n\
+                strh r0, [r7]\n\
+                movs r0, 0x9B\n\
+                strh r0, [r7, 0x2]\n\
+                b _081D2494\n\
+            _081D248C:\n\
+                add r0, r12\n\
+                mov r2, sp\n\
+                ldrh r2, [r2, 0x10]\n\
+                strh r2, [r0]\n\
+            _081D2494:\n\
+                add sp, 0x18\n\
+                pop {r3-r5}\n\
+                mov r8, r3\n\
+                mov r9, r4\n\
+                mov r10, r5\n\
+                pop {r4-r7}\n\
+                pop {r0}\n\
+                bx r0\n\
+    ");
 }
 
-NAKED
-static void sub_81D24A4(struct UnknownStruct_81D1ED4 *a0)
+static void sub_81D24A4(struct UnknownStruct_81D1ED4 *arg0)
 {
-    asm(".syntax unified\n\
-    push {r4-r7,lr}\n\
-	sub sp, 0x8\n\
-	adds r4, r0, 0\n\
-	movs r0, 0x97\n\
-	lsls r0, 1\n\
-	adds r2, r4, r0\n\
-	movs r3, 0x99\n\
-	lsls r3, 1\n\
-	adds r1, r4, r3\n\
-	ldrh r0, [r2]\n\
-	ldrh r3, [r1]\n\
-	cmp r0, r3\n\
-	bcs _081D24E0\n\
-	adds r7, r0, 0\n\
-	movs r0, 0xA0\n\
-	lsls r0, 1\n\
-	adds r1, r4, r0\n\
-	movs r3, 0x96\n\
-	lsls r3, 1\n\
-	adds r2, r4, r3\n\
-	subs r0, 0x10\n\
-	adds r3, r4, r0\n\
-	movs r0, 0x1\n\
-	str r0, [sp]\n\
-	movs r0, 0\n\
-	str r0, [sp, 0x4]\n\
-	adds r0, r4, 0\n\
-	bl sub_81D2278\n\
-	b _081D2500\n\
-_081D24E0:\n\
-	ldrh r7, [r1]\n\
-	movs r2, 0xA0\n\
-	lsls r2, 1\n\
-	adds r1, r4, r2\n\
-	movs r3, 0x98\n\
-	lsls r3, 1\n\
-	adds r2, r4, r3\n\
-	movs r0, 0x96\n\
-	lsls r0, 1\n\
-	adds r3, r4, r0\n\
-	movs r0, 0\n\
-	str r0, [sp]\n\
-	str r0, [sp, 0x4]\n\
-	adds r0, r4, 0\n\
-	bl sub_81D2278\n\
-_081D2500:\n\
-	movs r1, 0xA0\n\
-	lsls r1, 1\n\
-	adds r5, r4, r1\n\
-	movs r3, 0x98\n\
-	lsls r3, 1\n\
-	adds r2, r4, r3\n\
-	movs r0, 0x9A\n\
-	lsls r0, 1\n\
-	adds r6, r4, r0\n\
-	movs r0, 0x1\n\
-	str r0, [sp]\n\
-	movs r0, 0\n\
-	str r0, [sp, 0x4]\n\
-	adds r0, r4, 0\n\
-	adds r1, r5, 0\n\
-	adds r3, r6, 0\n\
-	bl sub_81D2278\n\
-	movs r2, 0\n\
-	movs r1, 0x9B\n\
-	lsls r1, 1\n\
-	adds r0, r4, r1\n\
-	movs r3, 0x9D\n\
-	lsls r3, 1\n\
-	adds r1, r4, r3\n\
-	ldrh r0, [r0]\n\
-	ldrh r1, [r1]\n\
-	cmp r0, r1\n\
-	bhi _081D253C\n\
-	movs r2, 0x1\n\
-_081D253C:\n\
-	movs r0, 0x9C\n\
-	lsls r0, 1\n\
-	adds r3, r4, r0\n\
-	str r2, [sp]\n\
-	movs r1, 0x92\n\
-	lsls r1, 2\n\
-	adds r0, r4, r1\n\
-	str r0, [sp, 0x4]\n\
-	adds r0, r4, 0\n\
-	adds r1, r5, 0\n\
-	adds r2, r6, 0\n\
-	bl sub_81D2278\n\
-	movs r2, 0x38\n\
-	cmp r2, r7\n\
-	bcs _081D257E\n\
-	adds r6, r5, 0\n\
-	movs r3, 0\n\
-	movs r0, 0xA1\n\
-	lsls r0, 1\n\
-	adds r5, r4, r0\n\
-_081D2566:\n\
-	adds r0, r2, 0\n\
-	subs r0, 0x38\n\
-	lsls r0, 2\n\
-	adds r1, r6, r0\n\
-	strh r3, [r1]\n\
-	adds r0, r5, r0\n\
-	strh r3, [r0]\n\
-	adds r0, r2, 0x1\n\
-	lsls r0, 16\n\
-	lsrs r2, r0, 16\n\
-	cmp r2, r7\n\
-	bcc _081D2566\n\
-_081D257E:\n\
-	movs r1, 0x97\n\
-	lsls r1, 1\n\
-	adds r0, r4, r1\n\
-	ldrh r2, [r0]\n\
-	movs r3, 0xD4\n\
-	lsls r3, 2\n\
-	adds r0, r4, r3\n\
-	ldrh r1, [r0]\n\
-	cmp r2, r1\n\
-	bhi _081D25B2\n\
-	movs r1, 0xA0\n\
-	lsls r1, 1\n\
-	adds r3, r4, r1\n\
-	movs r5, 0x9B\n\
-	adds r1, r0, 0\n\
-_081D259C:\n\
-	adds r0, r2, 0\n\
-	subs r0, 0x38\n\
-	lsls r0, 2\n\
-	adds r0, r3, r0\n\
-	strh r5, [r0]\n\
-	adds r0, r2, 0x1\n\
-	lsls r0, 16\n\
-	lsrs r2, r0, 16\n\
-	ldrh r0, [r1]\n\
-	cmp r2, r0\n\
-	bls _081D259C\n\
-_081D25B2:\n\
-	movs r2, 0x9B\n\
-	lsls r2, 1\n\
-	adds r1, r4, r2\n\
-	movs r3, 0xD4\n\
-	lsls r3, 2\n\
-	adds r0, r4, r3\n\
-	ldrh r0, [r0]\n\
-	ldrh r1, [r1]\n\
-	cmp r0, r1\n\
-	bcs _081D25C8\n\
-	adds r0, r1, 0\n\
-_081D25C8:\n\
-	adds r0, 0x1\n\
-	lsls r0, 16\n\
-	lsrs r2, r0, 16\n\
-	cmp r2, 0x79\n\
-	bhi _081D25F8\n\
-	movs r0, 0xA0\n\
-	lsls r0, 1\n\
-	adds r6, r4, r0\n\
-	movs r3, 0\n\
-	movs r1, 0xA1\n\
-	lsls r1, 1\n\
-	adds r5, r4, r1\n\
-_081D25E0:\n\
-	adds r0, r2, 0\n\
-	subs r0, 0x38\n\
-	lsls r0, 2\n\
-	adds r1, r6, r0\n\
-	strh r3, [r1]\n\
-	adds r0, r5, r0\n\
-	strh r3, [r0]\n\
-	adds r0, r2, 0x1\n\
-	lsls r0, 16\n\
-	lsrs r2, r0, 16\n\
-	cmp r2, 0x79\n\
-	bls _081D25E0\n\
-_081D25F8:\n\
-	movs r2, 0x38\n\
-	movs r3, 0xA0\n\
-	lsls r3, 1\n\
-	adds r5, r4, r3\n\
-	movs r0, 0xA1\n\
-	lsls r0, 1\n\
-	adds r4, r0\n\
-	movs r6, 0x9B\n\
-_081D2608:\n\
-	adds r0, r2, 0\n\
-	subs r0, 0x38\n\
-	lsls r1, r0, 2\n\
-	adds r3, r5, r1\n\
-	ldrh r0, [r3]\n\
-	cmp r0, 0\n\
-	bne _081D2620\n\
-	adds r0, r4, r1\n\
-	ldrh r0, [r0]\n\
-	cmp r0, 0\n\
-	beq _081D2620\n\
-	strh r6, [r3]\n\
-_081D2620:\n\
-	adds r0, r2, 0x1\n\
-	lsls r0, 16\n\
-	lsrs r2, r0, 16\n\
-	cmp r2, 0x79\n\
-	bls _081D2608\n\
-	add sp, 0x8\n\
-	pop {r4-r7}\n\
-	pop {r0}\n\
-	bx r0\n\
-    .syntax divided");
-}
+    u16 i, r6, varMax;
 
-NAKED
-static void sub_81D2634(struct UnknownStruct_81D1ED4 *a0)
-{
-    asm(".syntax unified\n\
-	push {r4-r6,lr}\n\
-	sub sp, 0x8\n\
-	adds r4, r0, 0\n\
-	movs r0, 0x97\n\
-	lsls r0, 1\n\
-	adds r2, r4, r0\n\
-	movs r3, 0x9F\n\
-	lsls r3, 1\n\
-	adds r1, r4, r3\n\
-	ldrh r0, [r2]\n\
-	ldrh r5, [r1]\n\
-	cmp r0, r5\n\
-	bcs _081D266E\n\
-	adds r6, r0, 0\n\
-	movs r0, 0x92\n\
-	lsls r0, 2\n\
-	adds r1, r4, r0\n\
-	subs r3, 0x12\n\
-	adds r2, r4, r3\n\
-	movs r5, 0x9E\n\
-	lsls r5, 1\n\
-	adds r3, r4, r5\n\
-	movs r0, 0\n\
-	str r0, [sp]\n\
-	str r0, [sp, 0x4]\n\
-	adds r0, r4, 0\n\
-	bl sub_81D2278\n\
-	b _081D2690\n\
-_081D266E:\n\
-	ldrh r6, [r1]\n\
-	movs r0, 0x92\n\
-	lsls r0, 2\n\
-	adds r1, r4, r0\n\
-	movs r3, 0x9E\n\
-	lsls r3, 1\n\
-	adds r2, r4, r3\n\
-	movs r5, 0x96\n\
-	lsls r5, 1\n\
-	adds r3, r4, r5\n\
-	movs r0, 0x1\n\
-	str r0, [sp]\n\
-	movs r0, 0\n\
-	str r0, [sp, 0x4]\n\
-	adds r0, r4, 0\n\
-	bl sub_81D2278\n\
-_081D2690:\n\
-	movs r0, 0x92\n\
-	lsls r0, 2\n\
-	adds r5, r4, r0\n\
-	movs r1, 0x9E\n\
-	lsls r1, 1\n\
-	adds r2, r4, r1\n\
-	movs r0, 0x9C\n\
-	lsls r0, 1\n\
-	adds r3, r4, r0\n\
-	movs r0, 0\n\
-	str r0, [sp]\n\
-	str r0, [sp, 0x4]\n\
-	adds r0, r4, 0\n\
-	adds r1, r5, 0\n\
-	bl sub_81D2278\n\
-	cmp r6, 0x38\n\
-	ble _081D26C8\n\
-	movs r0, 0\n\
-	adds r1, r5, 0\n\
-	adds r2, r6, 0\n\
-	subs r2, 0x38\n\
-_081D26BC:\n\
-	strh r0, [r1]\n\
-	strh r0, [r1, 0x2]\n\
-	adds r1, 0x4\n\
-	subs r2, 0x1\n\
-	cmp r2, 0\n\
-	bne _081D26BC\n\
-_081D26C8:\n\
-	movs r1, 0x97\n\
-	lsls r1, 1\n\
-	adds r0, r4, r1\n\
-	ldrh r2, [r0]\n\
-	movs r3, 0xD4\n\
-	lsls r3, 2\n\
-	adds r0, r4, r3\n\
-	ldrh r5, [r0]\n\
-	cmp r2, r5\n\
-	bgt _081D26F6\n\
-	movs r3, 0x9B\n\
-	adds r1, r0, 0\n\
-	lsls r0, r2, 2\n\
-	movs r5, 0xB5\n\
-	lsls r5, 1\n\
-	adds r0, r5\n\
-	adds r0, r4\n\
-_081D26EA:\n\
-	strh r3, [r0]\n\
-	adds r0, 0x4\n\
-	adds r2, 0x1\n\
-	ldrh r5, [r1]\n\
-	cmp r2, r5\n\
-	ble _081D26EA\n\
-_081D26F6:\n\
-	movs r1, 0x9D\n\
-	lsls r1, 1\n\
-	adds r0, r4, r1\n\
-	ldrh r0, [r0]\n\
-	adds r1, r0, 0x1\n\
-	movs r2, 0xD4\n\
-	lsls r2, 2\n\
-	adds r0, r4, r2\n\
-	ldrh r0, [r0]\n\
-	cmp r0, r1\n\
-	bge _081D270E\n\
-	adds r0, r1, 0\n\
-_081D270E:\n\
-	adds r2, r0, 0\n\
-	cmp r2, 0x79\n\
-	bgt _081D272C\n\
-	movs r1, 0\n\
-	lsls r0, r2, 2\n\
-	movs r3, 0xB4\n\
-	lsls r3, 1\n\
-	adds r0, r3\n\
-	adds r0, r4\n\
-_081D2720:\n\
-	strh r1, [r0]\n\
-	strh r1, [r0, 0x2]\n\
-	adds r0, 0x4\n\
-	adds r2, 0x1\n\
-	cmp r2, 0x79\n\
-	ble _081D2720\n\
-_081D272C:\n\
-	movs r3, 0\n\
-	movs r5, 0x92\n\
-	lsls r5, 2\n\
-	adds r1, r4, r5\n\
-	movs r2, 0x41\n\
-_081D2736:\n\
-	ldrh r0, [r1]\n\
-	ldrh r4, [r1, 0x2]\n\
-	cmp r0, r4\n\
-	bcc _081D2742\n\
-	strh r3, [r1, 0x2]\n\
-	strh r3, [r1]\n\
-_081D2742:\n\
-	adds r1, 0x4\n\
-	subs r2, 0x1\n\
-	cmp r2, 0\n\
-	bge _081D2736\n\
-	add sp, 0x8\n\
-	pop {r4-r6}\n\
-	pop {r0}\n\
-	bx r0\n\
-    .syntax divided");
-}
-
-NAKED
-void sub_81D2754(struct UnknownStruct_81D1ED4 *arg0, struct UnknownSubStruct_81D1ED4 *arg1)
-{
-    // There are some register-renaming issues here. The cause of the problem seems to be that
-    // GCC tries to save sUnknown_08625410 in a register, instead of loading the constant repeatedly.
-    // But this is one too many things to keep track of, so GCC is forced to use the stack.
-#ifdef NONMATCHING
-    u8* v1;
-    u8 v2;
-    u8 v3;
-    s8 v4;
-    u16 v5;
-
-    v1 = arg0->unk0[0];
-    v2 = sUnknown_08625410[*v1];
-    v1++;
-    arg1[0].unk0 = 0x9B;
-    arg1[0].unk2 = 0x5B - v2;
-    for (v3 = 0x40, v4 = 0, v5 = 1; v5 < 5; v5++)
+    if (arg0->unk12C[0].unk2 < arg0->unk12C[1].unk2)
     {
-        v3 += 0x33;
-        v4--;
-        if (v4 < 0)
-        {
-            v4 = 4;
-        }
-        if (v4 == 2)
-        {
-            v3++;
-        }
+        r6 = arg0->unk12C[0].unk2;
+        sub_81D2278(arg0, arg0->unk140, &arg0->unk12C[0], &arg0->unk12C[1], 1, NULL);
+    }
+    else
+    {
+        r6 = arg0->unk12C[1].unk2;
+        sub_81D2278(arg0, arg0->unk140, &arg0->unk12C[1], &arg0->unk12C[0], 0, NULL);
+    }
 
-        v2 = sUnknown_08625410[*v1];
-        v1++;
-        arg1[v4].unk0 = ((gSineTable[v3 + 0x40] * v2) >> 8) + 0x9B;
-        arg1[v4].unk2 = ((gSineTable[v3] * v2) >> 8) - 0x5B;
-        if (v4 <= 2 && (v2 != 0x20 || v4 != 2))
+    sub_81D2278(arg0, arg0->unk140, &arg0->unk12C[1], &arg0->unk12C[2], 1, NULL);
+
+    i = (arg0->unk12C[2].unk2 <= arg0->unk12C[3].unk2);
+    sub_81D2278(arg0, arg0->unk140, &arg0->unk12C[2], &arg0->unk12C[3], i, arg0->unk248);
+    for (i = 56; i < r6; i++)
+    {
+        arg0->unk140[i - 56][0] = 0;
+        arg0->unk140[i - 56][1] = 0;
+    }
+
+    for (i = arg0->unk12C[0].unk2; i <= arg0->unk350; i++)
+        arg0->unk140[i - 56][0] = 155;
+
+    varMax = max(arg0->unk350, arg0->unk12C[2].unk2);
+    for (i = varMax + 1; i < 122; i++)
+    {
+        arg0->unk140[i - 56][0] = 0;
+        arg0->unk140[i - 56][1] = 0;
+    }
+
+    for (i = 56; i < 122; i++)
+    {
+        if (arg0->unk140[i - 56][0] == 0 && arg0->unk140[i - 56][1] != 0)
+            arg0->unk140[i - 56][0] = 155;
+    }
+}
+
+static void sub_81D2634(struct UnknownStruct_81D1ED4 *arg0)
+{
+    s32 i, r6, varMax;
+
+    if (arg0->unk12C[0].unk2 < arg0->unk12C[4].unk2)
+    {
+        r6 = arg0->unk12C[0].unk2;
+        sub_81D2278(arg0, arg0->unk248, &arg0->unk12C[0], &arg0->unk12C[4], 0, NULL);
+    }
+    else
+    {
+        r6 = arg0->unk12C[4].unk2;
+        sub_81D2278(arg0, arg0->unk248, &arg0->unk12C[4], &arg0->unk12C[0], 1, NULL);
+    }
+
+    sub_81D2278(arg0, arg0->unk248, &arg0->unk12C[4], &arg0->unk12C[3], 0, NULL);
+
+    for (i = 56; i < r6; i++)
+    {
+        arg0->unk140[i + 10][0] = 0;
+        arg0->unk140[i + 10][1] = 0;
+    }
+
+    for (i = arg0->unk12C[0].unk2; i <= arg0->unk350; i++)
+        arg0->unk140[i + 10][1] = 155;
+
+    varMax = max(arg0->unk350, arg0->unk12C[3].unk2 + 1);
+    for (i = varMax; i < 122; i++)
+    {
+        arg0->unk140[i + 10][0] = 0;
+        arg0->unk140[i + 10][1] = 0;
+    }
+
+    for (i = 0; i < 66; i++)
+    {
+        if (arg0->unk248[i][0] >= arg0->unk248[i][1])
         {
-            arg1[v4].unk0 = arg1[v4].unk0 + 1;
+            arg0->unk248[i][1] = 0;
+            arg0->unk248[i][0] = 0;
         }
     }
-#else
-    asm(".syntax unified\n\
-	push {r4-r7,lr}\n\
-	mov r7, r10\n\
-	mov r6, r9\n\
-	mov r5, r8\n\
-	push {r5-r7}\n\
-	adds r6, r0, 0\n\
-	mov r8, r1\n\
-	ldr r1, =sUnknown_08625410\n\
-	ldrb r0, [r6]\n\
-	adds r0, r1\n\
-	ldrb r2, [r0]\n\
-	adds r6, 0x1\n\
-	movs r0, 0x9B\n\
-	mov r3, r8\n\
-	strh r0, [r3]\n\
-	movs r0, 0x5B\n\
-	subs r0, r2\n\
-	strh r0, [r3, 0x2]\n\
-	movs r7, 0x40\n\
-	movs r0, 0\n\
-	mov r12, r0\n\
-	movs r2, 0x1\n\
-	mov r9, r2\n\
-	ldr r3, =gSineTable\n\
-	mov r10, r3\n\
-_081D2786:\n\
-	adds r0, r7, 0\n\
-	adds r0, 0x33\n\
-	lsls r0, 24\n\
-	lsrs r7, r0, 24\n\
-	mov r1, r12\n\
-	lsls r0, r1, 24\n\
-	movs r2, 0xFF\n\
-	lsls r2, 24\n\
-	adds r0, r2\n\
-	lsrs r3, r0, 24\n\
-	mov r12, r3\n\
-	cmp r0, 0\n\
-	bge _081D27A4\n\
-	movs r0, 0x4\n\
-	mov r12, r0\n\
-_081D27A4:\n\
-	mov r1, r12\n\
-	lsls r0, r1, 24\n\
-	asrs r4, r0, 24\n\
-	cmp r4, 0x2\n\
-	bne _081D27B4\n\
-	adds r0, r7, 0x1\n\
-	lsls r0, 24\n\
-	lsrs r7, r0, 24\n\
-_081D27B4:\n\
-	ldrb r0, [r6]\n\
-	ldr r2, =sUnknown_08625410\n\
-	adds r0, r2\n\
-	ldrb r2, [r0]\n\
-	adds r6, 0x1\n\
-	lsls r0, r4, 2\n\
-	mov r1, r8\n\
-	adds r3, r0, r1\n\
-	adds r0, r7, 0\n\
-	adds r0, 0x40\n\
-	lsls r0, 1\n\
-	add r0, r10\n\
-	movs r1, 0\n\
-	ldrsh r0, [r0, r1]\n\
-	muls r0, r2\n\
-	asrs r5, r0, 8\n\
-	adds r0, r5, 0\n\
-	adds r0, 0x9B\n\
-	strh r0, [r3]\n\
-	lsls r0, r7, 1\n\
-	add r0, r10\n\
-	movs r1, 0\n\
-	ldrsh r0, [r0, r1]\n\
-	adds r1, r2, 0\n\
-	muls r1, r0\n\
-	asrs r1, 8\n\
-	movs r0, 0x5B\n\
-	subs r0, r1\n\
-	strh r0, [r3, 0x2]\n\
-	cmp r4, 0x2\n\
-	bgt _081D2800\n\
-	cmp r2, 0x20\n\
-	bne _081D27FA\n\
-	cmp r4, 0x2\n\
-	beq _081D2800\n\
-_081D27FA:\n\
-	adds r0, r5, 0\n\
-	adds r0, 0x9C\n\
-	strh r0, [r3]\n\
-_081D2800:\n\
-	mov r0, r9\n\
-	adds r0, 0x1\n\
-	lsls r0, 16\n\
-	lsrs r0, 16\n\
-	mov r9, r0\n\
-	cmp r0, 0x4\n\
-	bls _081D2786\n\
-	pop {r3-r5}\n\
-	mov r8, r3\n\
-	mov r9, r4\n\
-	mov r10, r5\n\
-	pop {r4-r7}\n\
-	pop {r0}\n\
-	bx r0\n\
-	.pool\n\
-    .syntax divided");
-#endif
+}
+
+void sub_81D2754(u8 *arg0, struct UnknownSubStruct_81D1ED4 *arg1)
+{
+    u8 r2, r7;
+    s8 r12;
+    u16 i;
+
+    r2 = sUnknown_08625410[*(arg0++)];
+    arg1->unk0 = 155;
+    arg1->unk2 = 91 - r2;
+
+    r7 = 64;
+    r12 = 0;
+    for (i = 1; i < 5; i++)
+    {
+        r7 += 51;
+        if (--r12 < 0)
+            r12 = 4;
+
+        if (r12 == 2)
+            r7++;
+
+        r2 = sUnknown_08625410[*(arg0++)];
+        arg1[r12].unk0 = 155 + ((r2 * gSineTable[64 + r7]) >> 8);
+        arg1[r12].unk2 = 91  - ((r2 * gSineTable[r7]) >> 8);
+
+        if (r12 < 3 && (r2 != 32 || r12 != 2))
+            arg1[r12].unk0 = 156 + ((r2 * gSineTable[64 + r7]) >> 8);
+    }
 }
 
 void InitMoveRelearnerWindows(bool8 useContextWindow)
@@ -1578,7 +915,7 @@ void InitMoveRelearnerWindows(bool8 useContextWindow)
     DeactivateAllTextPrinters();
     LoadUserWindowBorderGfx(0, 1, 0xE0);
     LoadPalette(gUnknown_0860F074, 0xF0, 0x20);
-    
+
     for (i = 0; i < 5; i++)
     {
         FillWindowPixelBuffer(i, PIXEL_FILL(1));
@@ -1624,314 +961,86 @@ u8 LoadMoveRelearnerMovesList(const struct ListMenuItem *items, u16 numChoices)
     return gMultiuseListMenuTemplate.maxShowed;
 }
 
-NAKED
 static void MoveRelearnerLoadBattleMoveDescription(u32 chosenMove)
 {
-    // Two small issues, and a few renamed registers.
-#ifdef NONMATCHING
-    u8 offset;
-    s32 width;
+    s32 x;
     const struct BattleMove *move;
     u8 buffer[0x20];
-    const u8 *labelStr;
+    const u8 *str;
 
     FillWindowPixelBuffer(0, PIXEL_FILL(1));
-    labelStr = gText_MoveRelearnerBattleMoves;
-    offset = GetStringCenterAlignXOffset(1, labelStr, 0x80);
-    AddTextPrinterParameterized(0, 1, labelStr, offset, 1, TEXT_SPEED_FF, NULL);
+    str = gText_MoveRelearnerBattleMoves;
+    x = GetStringCenterAlignXOffset(1, str, 0x80);
+    AddTextPrinterParameterized(0, 1, str, x, 1, TEXT_SPEED_FF, NULL);
 
-    labelStr = gText_MoveRelearnerPP;
-    AddTextPrinterParameterized(0, 1, labelStr, 4, 0x29, TEXT_SPEED_FF, NULL);
+    str = gText_MoveRelearnerPP;
+    AddTextPrinterParameterized(0, 1, str, 4, 0x29, TEXT_SPEED_FF, NULL);
 
-    labelStr = gText_MoveRelearnerPower;
-    offset = GetStringRightAlignXOffset(1, labelStr, 0x6A);
-    AddTextPrinterParameterized(0, 1, labelStr, offset, 0x19, TEXT_SPEED_FF, NULL);
+    str = gText_MoveRelearnerPower;
+    x = GetStringRightAlignXOffset(1, str, 0x6A);
+    AddTextPrinterParameterized(0, 1, str, x, 0x19, TEXT_SPEED_FF, NULL);
 
-    labelStr = gText_MoveRelearnerAccuracy;
-    offset = GetStringRightAlignXOffset(1, labelStr, 0x6A);
-    AddTextPrinterParameterized(0, 1, labelStr, offset, 0x29, TEXT_SPEED_FF, NULL);
+    str = gText_MoveRelearnerAccuracy;
+    x = GetStringRightAlignXOffset(1, str, 0x6A);
+    AddTextPrinterParameterized(0, 1, str, x, 0x29, TEXT_SPEED_FF, NULL);
     if (chosenMove == LIST_CANCEL)
     {
         CopyWindowToVram(0, 2);
         return;
     }
     move = &gBattleMoves[chosenMove];
-    labelStr = gTypeNames[move->type];
-    // GCC tries to be smart, and preserves the same 0x19 from above for this.
-    // The original asm just loads the constant 0x19 twice.
-    AddTextPrinterParameterized(0, 1, labelStr, 4, 0x19, TEXT_SPEED_FF, NULL);
+    str = gTypeNames[move->type];
+    AddTextPrinterParameterized(0, 1, str, 4, 0x19, TEXT_SPEED_FF, NULL);
 
-    // GCC tries to generate this as:
-    //   add r4, r0, 0
-    //   add r4, r4, 4
-    // But the original asm is:
-    //   add r4, r0, 4
-    width = 4 + GetStringWidth(1, gText_MoveRelearnerPP, 0);
-
+    x = 4 + GetStringWidth(1, gText_MoveRelearnerPP, 0);
     ConvertIntToDecimalStringN(buffer, move->pp, 0, 2);
-    AddTextPrinterParameterized(0, 1, buffer, width, 0x29, TEXT_SPEED_FF, NULL);
-    
+    AddTextPrinterParameterized(0, 1, buffer, x, 0x29, TEXT_SPEED_FF, NULL);
 
     if (move->power < 2)
     {
-        labelStr = gText_ThreeDashes;
+        str = gText_ThreeDashes;
     }
     else
     {
         ConvertIntToDecimalStringN(buffer, move->power, 0, 3);
-        labelStr = buffer;
+        str = buffer;
     }
-    AddTextPrinterParameterized(0, 1, labelStr, 0x6A, 0x19, TEXT_SPEED_FF, NULL);
+    AddTextPrinterParameterized(0, 1, str, 0x6A, 0x19, TEXT_SPEED_FF, NULL);
 
     if (move->accuracy == 0)
     {
-        labelStr = gText_ThreeDashes;
+        str = gText_ThreeDashes;
     }
     else
     {
         ConvertIntToDecimalStringN(buffer, move->accuracy, 0, 3);
-        labelStr = buffer;
+        str = buffer;
     }
-    AddTextPrinterParameterized(0, 1, labelStr, 0x6A, 0x29, TEXT_SPEED_FF, NULL);
-    labelStr = gMoveDescriptionPointers[chosenMove - 1];
-    AddTextPrinterParameterized(0, 7, labelStr, 0, 0x41, 0, NULL);
-#else
-    asm(".syntax unified\n\
-    push {r4-r7,lr}\n\
-	mov r7, r10\n\
-	mov r6, r9\n\
-	mov r5, r8\n\
-	push {r5-r7}\n\
-	sub sp, 0x2C\n\
-	mov r9, r0\n\
-	movs r0, 0\n\
-	movs r1, 0x11\n\
-	bl FillWindowPixelBuffer\n\
-	ldr r5, =gText_MoveRelearnerBattleMoves\n\
-	movs r0, 0x1\n\
-	adds r1, r5, 0\n\
-	movs r2, 0x80\n\
-	bl GetStringCenterAlignXOffset\n\
-	adds r4, r0, 0\n\
-	lsls r3, r4, 24\n\
-	lsrs r3, 24\n\
-	movs r0, 0x1\n\
-	str r0, [sp]\n\
-	movs r0, 0xFF\n\
-	mov r8, r0\n\
-	str r0, [sp, 0x4]\n\
-	movs r7, 0\n\
-	str r7, [sp, 0x8]\n\
-	movs r0, 0\n\
-	movs r1, 0x1\n\
-	adds r2, r5, 0\n\
-	bl AddTextPrinterParameterized\n\
-	ldr r5, =gText_MoveRelearnerPP\n\
-	movs r1, 0x29\n\
-	mov r10, r1\n\
-	str r1, [sp]\n\
-	mov r0, r8\n\
-	str r0, [sp, 0x4]\n\
-	str r7, [sp, 0x8]\n\
-	movs r0, 0\n\
-	movs r1, 0x1\n\
-	adds r2, r5, 0\n\
-	movs r3, 0x4\n\
-	bl AddTextPrinterParameterized\n\
-	ldr r5, =gText_MoveRelearnerPower\n\
-	movs r0, 0x1\n\
-	adds r1, r5, 0\n\
-	movs r2, 0x6A\n\
-	bl GetStringRightAlignXOffset\n\
-	adds r4, r0, 0\n\
-	lsls r3, r4, 24\n\
-	lsrs r3, 24\n\
-	movs r1, 0x19\n\
-	str r1, [sp]\n\
-	mov r0, r8\n\
-	str r0, [sp, 0x4]\n\
-	str r7, [sp, 0x8]\n\
-	movs r0, 0\n\
-	movs r1, 0x1\n\
-	adds r2, r5, 0\n\
-	bl AddTextPrinterParameterized\n\
-	ldr r5, =gText_MoveRelearnerAccuracy\n\
-	movs r0, 0x1\n\
-	adds r1, r5, 0\n\
-	movs r2, 0x6A\n\
-	bl GetStringRightAlignXOffset\n\
-	adds r4, r0, 0\n\
-	lsls r3, r4, 24\n\
-	lsrs r3, 24\n\
-	mov r1, r10\n\
-	str r1, [sp]\n\
-	mov r0, r8\n\
-	str r0, [sp, 0x4]\n\
-	str r7, [sp, 0x8]\n\
-	movs r0, 0\n\
-	movs r1, 0x1\n\
-	adds r2, r5, 0\n\
-	bl AddTextPrinterParameterized\n\
-	movs r0, 0x2\n\
-	negs r0, r0\n\
-	cmp r9, r0\n\
-	bne _081D29C4\n\
-	movs r0, 0\n\
-	movs r1, 0x2\n\
-	bl CopyWindowToVram\n\
-	b _081D2AB6\n\
-	.pool\n\
-_081D29C4:\n\
-	mov r1, r9\n\
-	lsls r0, r1, 1\n\
-	add r0, r9\n\
-	lsls r0, 2\n\
-	ldr r1, =gBattleMoves\n\
-	adds r6, r0, r1\n\
-	ldrb r1, [r6, 0x2]\n\
-	lsls r0, r1, 3\n\
-	subs r0, r1\n\
-	ldr r1, =gTypeNames\n\
-	adds r5, r0, r1\n\
-	movs r0, 0x19\n\
-	str r0, [sp]\n\
-	mov r1, r8\n\
-	str r1, [sp, 0x4]\n\
-	str r7, [sp, 0x8]\n\
-	movs r0, 0\n\
-	movs r1, 0x1\n\
-	adds r2, r5, 0\n\
-	movs r3, 0x4\n\
-	bl AddTextPrinterParameterized\n\
-	ldr r1, =gText_MoveRelearnerPP\n\
-	movs r0, 0x1\n\
-	movs r2, 0\n\
-	bl GetStringWidth\n\
-	adds r4, r0, 0x4\n\
-	ldrb r1, [r6, 0x4]\n\
-	add r0, sp, 0xC\n\
-	movs r2, 0\n\
-	movs r3, 0x2\n\
-	bl ConvertIntToDecimalStringN\n\
-	lsls r3, r4, 24\n\
-	lsrs r3, 24\n\
-	mov r0, r10\n\
-	str r0, [sp]\n\
-	mov r1, r8\n\
-	str r1, [sp, 0x4]\n\
-	str r7, [sp, 0x8]\n\
-	movs r0, 0\n\
-	movs r1, 0x1\n\
-	add r2, sp, 0xC\n\
-	bl AddTextPrinterParameterized\n\
-	ldrb r0, [r6, 0x1]\n\
-	cmp r0, 0x1\n\
-	bhi _081D2A3C\n\
-	ldr r5, =gText_ThreeDashes\n\
-	b _081D2A4A\n\
-	.pool\n\
-_081D2A3C:\n\
-	ldrb r1, [r6, 0x1]\n\
-	add r0, sp, 0xC\n\
-	movs r2, 0\n\
-	movs r3, 0x3\n\
-	bl ConvertIntToDecimalStringN\n\
-	add r5, sp, 0xC\n\
-_081D2A4A:\n\
-	movs r0, 0x19\n\
-	str r0, [sp]\n\
-	movs r0, 0xFF\n\
-	str r0, [sp, 0x4]\n\
-	movs r0, 0\n\
-	str r0, [sp, 0x8]\n\
-	movs r1, 0x1\n\
-	adds r2, r5, 0\n\
-	movs r3, 0x6A\n\
-	bl AddTextPrinterParameterized\n\
-	ldrb r0, [r6, 0x3]\n\
-	cmp r0, 0\n\
-	bne _081D2A70\n\
-	ldr r5, =gText_ThreeDashes\n\
-	b _081D2A7E\n\
-	.pool\n\
-_081D2A70:\n\
-	ldrb r1, [r6, 0x3]\n\
-	add r0, sp, 0xC\n\
-	movs r2, 0\n\
-	movs r3, 0x3\n\
-	bl ConvertIntToDecimalStringN\n\
-	add r5, sp, 0xC\n\
-_081D2A7E:\n\
-	movs r0, 0x29\n\
-	str r0, [sp]\n\
-	movs r0, 0xFF\n\
-	str r0, [sp, 0x4]\n\
-	movs r4, 0\n\
-	str r4, [sp, 0x8]\n\
-	movs r0, 0\n\
-	movs r1, 0x1\n\
-	adds r2, r5, 0\n\
-	movs r3, 0x6A\n\
-	bl AddTextPrinterParameterized\n\
-	ldr r1, =gMoveDescriptionPointers\n\
-	mov r0, r9\n\
-	subs r0, 0x1\n\
-	lsls r0, 2\n\
-	adds r0, r1\n\
-	ldr r5, [r0]\n\
-	movs r0, 0x41\n\
-	str r0, [sp]\n\
-	str r4, [sp, 0x4]\n\
-	str r4, [sp, 0x8]\n\
-	movs r0, 0\n\
-	movs r1, 0x7\n\
-	adds r2, r5, 0\n\
-	movs r3, 0\n\
-	bl AddTextPrinterParameterized\n\
-_081D2AB6:\n\
-	add sp, 0x2C\n\
-	pop {r3-r5}\n\
-	mov r8, r3\n\
-	mov r9, r4\n\
-	mov r10, r5\n\
-	pop {r4-r7}\n\
-	pop {r0}\n\
-	bx r0\n\
-	.pool\n\
-    .syntax divided");
-#endif
+    AddTextPrinterParameterized(0, 1, str, 0x6A, 0x29, TEXT_SPEED_FF, NULL);
+
+    str = gMoveDescriptionPointers[chosenMove - 1];
+    AddTextPrinterParameterized(0, 7, str, 0, 0x41, 0, NULL);
 }
 
-NAKED
 static void MoveRelearnerMenuLoadContestMoveDescription(u32 chosenMove)
 {
-#ifdef NONMATCHING
-    //u8 offset;
-    const u8 *labelStr;
+    s32 x;
+    const u8 *str;
     const struct ContestMove *move;
-    u8 category;
-    const u8 **temp;
 
     MoveRelearnerShowHideHearts(chosenMove);
     FillWindowPixelBuffer(1, PIXEL_FILL(1));
-    labelStr = gText_MoveRelearnerContestMovesTitle;
-    // GCC compiles these as:
-    //   add r3, r0, 0
-    //   lsls r3, r3, 24
-    //   lsrs r3, r3, 24
-    // But in the original asm:
-    //   lsls r3, r0, 24
-    //   lsrs r3, r3, 24
-    //offset = GetStringCenterAlignXOffset(1, labelStr, 0x80);
-    AddTextPrinterParameterized(1, 1, labelStr, GetStringCenterAlignXOffset(1, labelStr, 0x80), 1, TEXT_SPEED_FF, NULL);
+    str = gText_MoveRelearnerContestMovesTitle;
+    x = GetStringCenterAlignXOffset(1, str, 0x80);
+    AddTextPrinterParameterized(1, 1, str, x, 1, TEXT_SPEED_FF, NULL);
 
-    labelStr = gText_MoveRelearnerAppeal;
-    //offset = GetStringRightAlignXOffset(1, labelStr, 0x5C);
-    AddTextPrinterParameterized(1, 1, labelStr, GetStringCenterAlignXOffset(1, labelStr, 0x5C), 0x19, TEXT_SPEED_FF, NULL);
+    str = gText_MoveRelearnerAppeal;
+    x = GetStringRightAlignXOffset(1, str, 0x5C);
+    AddTextPrinterParameterized(1, 1, str, x, 0x19, TEXT_SPEED_FF, NULL);
 
-    labelStr = gText_MoveRelearnerJam;
-    //offset = GetStringRightAlignXOffset(1, labelStr, 0x5C);
-    AddTextPrinterParameterized(1, 1, labelStr, GetStringCenterAlignXOffset(1, labelStr, 0x5C), 0x29, TEXT_SPEED_FF, NULL);
+    str = gText_MoveRelearnerJam;
+    x = GetStringRightAlignXOffset(1, str, 0x5C);
+    AddTextPrinterParameterized(1, 1, str, x, 0x29, TEXT_SPEED_FF, NULL);
 
     if (chosenMove == MENU_NOTHING_CHOSEN)
     {
@@ -1940,128 +1049,13 @@ static void MoveRelearnerMenuLoadContestMoveDescription(u32 chosenMove)
     }
 
     move = &gContestMoves[chosenMove];
-    temp = (const u8**)gContestMoveTypeTextPointers;
-    category = move->contestCategory;
-    labelStr = temp[category];
-    AddTextPrinterParameterized(1, 1, labelStr, 4, 0x19, TEXT_SPEED_FF, NULL);
+    str = gContestMoveTypeTextPointers[move->contestCategory];
+    AddTextPrinterParameterized(1, 1, str, 4, 0x19, TEXT_SPEED_FF, NULL);
 
-    labelStr = gContestEffectDescriptionPointers[move->effect];
-    AddTextPrinterParameterized(1, 1, labelStr, 0, 0x41, TEXT_SPEED_FF, NULL);
+    str = gContestEffectDescriptionPointers[move->effect];
+    AddTextPrinterParameterized(1, 7, str, 0, 0x41, TEXT_SPEED_FF, NULL);
 
     CopyWindowToVram(1, 2);
-#else
-    asm(".syntax unified\n\
-    push {r4-r7,lr}\n\
-	mov r7, r8\n\
-	push {r7}\n\
-	sub sp, 0xC\n\
-	adds r4, r0, 0\n\
-	bl MoveRelearnerShowHideHearts\n\
-	movs r0, 0x1\n\
-	movs r1, 0x11\n\
-	bl FillWindowPixelBuffer\n\
-	ldr r5, =gText_MoveRelearnerContestMovesTitle\n\
-	movs r0, 0x1\n\
-	adds r1, r5, 0\n\
-	movs r2, 0x80\n\
-	bl GetStringCenterAlignXOffset\n\
-	lsls r3, r0, 24\n\
-	lsrs r3, 24\n\
-	movs r0, 0x1\n\
-	str r0, [sp]\n\
-	movs r7, 0xFF\n\
-	str r7, [sp, 0x4]\n\
-	movs r6, 0\n\
-	str r6, [sp, 0x8]\n\
-	movs r1, 0x1\n\
-	adds r2, r5, 0\n\
-	bl AddTextPrinterParameterized\n\
-	ldr r5, =gText_MoveRelearnerAppeal\n\
-	movs r0, 0x1\n\
-	adds r1, r5, 0\n\
-	movs r2, 0x5C\n\
-	bl GetStringRightAlignXOffset\n\
-	lsls r3, r0, 24\n\
-	lsrs r3, 24\n\
-	movs r0, 0x19\n\
-	mov r8, r0\n\
-	str r0, [sp]\n\
-	str r7, [sp, 0x4]\n\
-	str r6, [sp, 0x8]\n\
-	movs r0, 0x1\n\
-	movs r1, 0x1\n\
-	adds r2, r5, 0\n\
-	bl AddTextPrinterParameterized\n\
-	ldr r5, =gText_MoveRelearnerJam\n\
-	movs r0, 0x1\n\
-	adds r1, r5, 0\n\
-	movs r2, 0x5C\n\
-	bl GetStringRightAlignXOffset\n\
-	lsls r3, r0, 24\n\
-	lsrs r3, 24\n\
-	movs r0, 0x29\n\
-	str r0, [sp]\n\
-	str r7, [sp, 0x4]\n\
-	str r6, [sp, 0x8]\n\
-	movs r0, 0x1\n\
-	movs r1, 0x1\n\
-	adds r2, r5, 0\n\
-	bl AddTextPrinterParameterized\n\
-	movs r0, 0x2\n\
-	negs r0, r0\n\
-	cmp r4, r0\n\
-	bne _081D2B6C\n\
-	movs r0, 0x1\n\
-	movs r1, 0x2\n\
-	bl CopyWindowToVram\n\
-	b _081D2BB8\n\
-	.pool\n\
-_081D2B6C:\n\
-	lsls r4, 3\n\
-	ldr r0, =gContestMoves\n\
-	adds r4, r0\n\
-	ldr r1, =gContestMoveTypeTextPointers\n\
-	ldrb r0, [r4, 0x1]\n\
-	lsls r0, 29\n\
-	lsrs r0, 27\n\
-	adds r0, r1\n\
-	ldr r5, [r0]\n\
-	mov r0, r8\n\
-	str r0, [sp]\n\
-	str r7, [sp, 0x4]\n\
-	str r6, [sp, 0x8]\n\
-	movs r0, 0x1\n\
-	movs r1, 0x1\n\
-	adds r2, r5, 0\n\
-	movs r3, 0x4\n\
-	bl AddTextPrinterParameterized\n\
-	ldr r1, =gContestEffectDescriptionPointers\n\
-	ldrb r0, [r4]\n\
-	lsls r0, 2\n\
-	adds r0, r1\n\
-	ldr r5, [r0]\n\
-	movs r0, 0x41\n\
-	str r0, [sp]\n\
-	str r7, [sp, 0x4]\n\
-	str r6, [sp, 0x8]\n\
-	movs r0, 0x1\n\
-	movs r1, 0x7\n\
-	adds r2, r5, 0\n\
-	movs r3, 0\n\
-	bl AddTextPrinterParameterized\n\
-	movs r0, 0x1\n\
-	movs r1, 0x2\n\
-	bl CopyWindowToVram\n\
-_081D2BB8:\n\
-	add sp, 0xC\n\
-	pop {r3}\n\
-	mov r8, r3\n\
-	pop {r4-r7}\n\
-	pop {r0}\n\
-	bx r0\n\
-	.pool\n\
-    .syntax divided");
-#endif
 }
 
 static void MoveRelearnerCursorCallback(s32 itemIndex, bool8 onInit, struct ListMenu *list)
@@ -2091,4 +1085,750 @@ bool16 MoveRelearnerRunTextPrinters(void)
 void MoveRelearnerCreateYesNoMenu(void)
 {
     CreateYesNoMenu(&sMoveRelearnerYesNoMenuTemplate, 1, 0xE, 0);
+}
+
+s32 GetBoxOrPartyMonData(u16 boxId, u16 monId, s32 request, u8 *dst)
+{
+    s32 ret;
+
+    if (boxId == TOTAL_BOXES_COUNT) // Party mon.
+    {
+        if (request == MON_DATA_NICKNAME || request == MON_DATA_OT_NAME)
+            ret = GetMonData(&gPlayerParty[monId], request, dst);
+        else
+            ret = GetMonData(&gPlayerParty[monId], request);
+    }
+    else
+    {
+        if (request == MON_DATA_NICKNAME || request == MON_DATA_OT_NAME)
+            ret = GetAndCopyBoxMonDataAt(boxId, monId, request, dst);
+        else
+            ret = GetBoxMonDataAt(boxId, monId, request);
+    }
+
+    return ret;
+}
+
+static u8 *sub_81D2CD0(u8 *dst, u16 boxId, u16 monId)
+{
+    u16 species, level, gender;
+    struct BoxPokemon *boxMon;
+    u8 *str;
+
+    *(dst++) = EXT_CTRL_CODE_BEGIN;
+    *(dst++) = 4;
+    *(dst++) = 8;
+    *(dst++) = 0;
+    *(dst++) = 9;
+    if (GetBoxOrPartyMonData(boxId, monId, MON_DATA_IS_EGG, NULL))
+    {
+        return StringCopyPadded(dst, gText_EggNickname, 0, 12);
+    }
+    else
+    {
+        GetBoxOrPartyMonData(boxId, monId, MON_DATA_NICKNAME, dst);
+        StringGetEnd10(dst);
+        species = GetBoxOrPartyMonData(boxId, monId, MON_DATA_SPECIES, NULL);
+        if (boxId == TOTAL_BOXES_COUNT) // Party mon.
+        {
+            level = GetMonData(&gPlayerParty[monId], MON_DATA_LEVEL);
+            gender = GetMonGender(&gPlayerParty[monId]);
+        }
+        else
+        {
+            // Needed to match, feel free to remove.
+            boxId++;boxId--;
+            monId++;monId--;
+
+            boxMon = GetBoxedMonPtr(boxId, monId);
+            gender = GetBoxMonGender(boxMon);
+            level = GetLevelFromBoxMonExp(boxMon);
+        }
+
+        if ((species == SPECIES_NIDORAN_F || species == SPECIES_NIDORAN_M) && !StringCompare(dst, gSpeciesNames[species]))
+            gender = MON_GENDERLESS;
+
+        for (str = dst; *str != EOS; str++)
+            ;
+
+        *(str++) = EXT_CTRL_CODE_BEGIN;
+        *(str++) = 0x12;
+        *(str++) = 0x3C;
+
+        switch (gender)
+        {
+        default:
+            *(str++) = CHAR_SPACE;
+            break;
+        case MON_MALE:
+            *(str++) = EXT_CTRL_CODE_BEGIN;
+            *(str++) = EXT_CTRL_CODE_COLOR;
+            *(str++) = 4;
+            *(str++) = EXT_CTRL_CODE_BEGIN;
+            *(str++) = 3;
+            *(str++) = 5;
+            *(str++) = CHAR_MALE;
+            break;
+        case MON_FEMALE:
+            *(str++) = EXT_CTRL_CODE_BEGIN;
+            *(str++) = EXT_CTRL_CODE_COLOR;
+            *(str++) = 6;
+            *(str++) = EXT_CTRL_CODE_BEGIN;
+            *(str++) = 3;
+            *(str++) = 7;
+            *(str++) = CHAR_FEMALE;
+            break;
+        }
+
+        *(str++) = EXT_CTRL_CODE_BEGIN;
+        *(str++) = 4;
+        *(str++) = 8;
+        *(str++) = 0;
+        *(str++) = 9;
+        *(str++) = CHAR_SLASH;
+        *(str++) = CHAR_SPECIAL_F9;
+        *(str++) = 5;
+        str = ConvertIntToDecimalStringN(str, level, STR_CONV_MODE_LEFT_ALIGN, 3);
+        *(str++) = CHAR_SPACE;
+        *str = EOS;
+
+        return str;
+    }
+}
+
+static u8 *sub_81D2E7C(u8 *dst, const u8 *src, s16 n)
+{
+    while (*src != EOS)
+    {
+        *(dst++) = *(src++);
+        n--;
+    }
+    while (n-- > 0)
+        *(dst++) = CHAR_SPACE;
+
+    *dst = EOS;
+    return dst;
+}
+
+void sub_81D2ED4(u8 *dst, u8 *nameDst, u16 boxId, u16 monId, u16 arg5, u16 arg6, bool8 arg7)
+{
+    u16 i;
+
+    if (!arg7)
+        arg6--;
+
+    if (arg5 != arg6)
+    {
+        sub_81D2CD0(nameDst, boxId, monId);
+        dst[0] = EXT_CTRL_CODE_BEGIN;
+        dst[1] = 4;
+        dst[2] = 8;
+        dst[3] = 0;
+        dst[4] = 9;
+        if (boxId == TOTAL_BOXES_COUNT) // Party mon.
+        {
+            sub_81D2E7C(dst + 5, gText_InParty, 8);
+        }
+        else
+        {
+            boxId++;boxId--; // Again...Someone fix this maybe?
+            sub_81D2E7C(dst + 5, GetBoxNamePtr(boxId), 8);
+        }
+    }
+    else
+    {
+        for (i = 0; i < 12; i++)
+            nameDst[i] = CHAR_SPACE;
+        nameDst[i] = EOS;
+        for (i = 0; i < 8; i++)
+            dst[i] = CHAR_SPACE;
+        dst[i] = EOS;
+    }
+}
+
+void sub_81D2F78(struct UnknownStruct_81D1ED4 *arg0, u8 *sheen, u16 boxId, u16 monId, u16 arg5, u16 id, u16 arg7, bool8 arg8)
+{
+    u16 i;
+
+    if (!arg8)
+        arg7--;
+
+    if (arg5 != arg7)
+    {
+        arg0->unk0[id][0] = GetBoxOrPartyMonData(boxId, monId, MON_DATA_COOL, NULL);
+        arg0->unk0[id][1] = GetBoxOrPartyMonData(boxId, monId, MON_DATA_TOUGH, NULL);
+        arg0->unk0[id][2] = GetBoxOrPartyMonData(boxId, monId, MON_DATA_SMART, NULL);
+        arg0->unk0[id][3] = GetBoxOrPartyMonData(boxId, monId, MON_DATA_CUTE, NULL);
+        arg0->unk0[id][4] = GetBoxOrPartyMonData(boxId, monId, MON_DATA_BEAUTY, NULL);
+
+        sheen[id] = (GetBoxOrPartyMonData(boxId, monId, MON_DATA_SHEEN, NULL) != 0xFF)
+                 ? GetBoxOrPartyMonData(boxId, monId, MON_DATA_SHEEN, NULL) / 29u
+                 : 9;
+
+        sub_81D2754(arg0->unk0[id], arg0->unk14[id]);
+    }
+    else
+    {
+        for (i = 0; i < 5; i++)
+        {
+            arg0->unk0[id][i] = 0;
+            arg0->unk14[id][i].unk0 = 155;
+            arg0->unk14[id][i].unk2 = 91;
+        }
+    }
+}
+
+void sub_81D3094(void *tilesDst, void *palDst, u16 boxId, u16 monId, u16 arg5, u16 arg6, bool8 arg7)
+{
+    if (!arg7)
+        arg6--;
+
+    if (arg5 != arg6)
+    {
+        u16 species = GetBoxOrPartyMonData(boxId, monId, MON_DATA_SPECIES2, NULL);
+        u32 trainerId = GetBoxOrPartyMonData(boxId, monId, MON_DATA_OT_ID, NULL);
+        u32 personality = GetBoxOrPartyMonData(boxId, monId, MON_DATA_PERSONALITY, NULL);
+
+        LoadSpecialPokePic(&gMonFrontPicTable[species], tilesDst, species, personality, TRUE);
+        LZ77UnCompWram(GetFrontSpritePalFromSpeciesAndPersonality(species, trainerId, personality), palDst);
+    }
+}
+
+bool8 sub_81D312C(s16 *var)
+{
+    *var += 24;
+    if (*var > 0)
+        *var = 0;
+
+    return (*var != 0);
+}
+
+bool8 sub_81D3150(s16 *var)
+{
+    *var -= 24;
+    if (*var < -80)
+        *var = -80;
+
+    return (*var != -80);
+}
+
+bool8 sub_81D3178(struct UnknownStruct_81D1ED4 *arg0, s16 *arg1)
+{
+    bool8 var1 = sub_81D2074(arg0);
+    bool8 var2 = sub_81D312C(arg1);
+
+    return ((var1 != 0) || (var2 != 0));
+}
+
+bool8 sub_81D31A4(struct UnknownStruct_81D1ED4 *arg0, s16 *arg1)
+{
+    bool8 var1 = sub_81D2074(arg0);
+    bool8 var2 = sub_81D3150(arg1);
+
+    return ((var1 != 0) || (var2 != 0));
+}
+
+static const u32 gUnknown_08625560[] = INCBIN_U32("graphics/pokenav/pokeball.4bpp");
+static const u32 gUnknown_08625660[] = INCBIN_U32("graphics/pokenav/pokeball_placeholder.4bpp");
+static const u16 gUnknown_08625680[] = INCBIN_U16("graphics/pokenav/sparkle.gbapal");
+static const u32 gUnknown_086256A0[] = INCBIN_U32("graphics/pokenav/sparkle.4bpp");
+
+static const struct OamData sOamData_8625A20 =
+{
+    .y = 0,
+    .affineMode = 0,
+    .objMode = 0,
+    .mosaic = 0,
+    .bpp = 0,
+    .shape = 0,
+    .x = 0,
+    .matrixNum = 0,
+    .size = 3,
+    .tileNum = 0,
+    .priority = 1,
+    .paletteNum = 0,
+    .affineParam = 0
+};
+
+static const struct OamData sOamData_8625A28 =
+{
+    .y = 0,
+    .affineMode = 0,
+    .objMode = 0,
+    .mosaic = 0,
+    .bpp = 0,
+    .shape = 0,
+    .x = 0,
+    .matrixNum = 0,
+    .size = 1,
+    .tileNum = 0,
+    .priority = 2,
+    .paletteNum = 0,
+    .affineParam = 0
+};
+
+static const union AnimCmd sSpriteAnim_8625A30[] =
+{
+    ANIMCMD_FRAME(0, 5),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sSpriteAnim_8625A38[] =
+{
+    ANIMCMD_FRAME(4, 5),
+    ANIMCMD_END
+};
+
+static const union AnimCmd *const sSpriteAnimTable_8625A40[] =
+{
+    sSpriteAnim_8625A30,
+    sSpriteAnim_8625A38
+};
+
+void sub_81D31D0(struct SpriteSheet *sheet, struct SpriteTemplate *template, struct SpritePalette *pal)
+{
+    struct SpriteSheet dataSheet = {NULL, 0x800, 100};
+
+    struct SpriteTemplate dataTemplate =
+    {
+        .tileTag = 100,
+        .paletteTag = 100,
+        .oam = &sOamData_8625A20,
+        .anims = gDummySpriteAnimTable,
+        .images = NULL,
+        .affineAnims = gDummySpriteAffineAnimTable,
+        .callback = SpriteCallbackDummy,
+    };
+
+    struct SpritePalette dataPal = {NULL, 100};
+
+    *sheet = dataSheet;
+    *template = dataTemplate;
+    *pal = dataPal;
+}
+
+void sub_81D321C(struct SpriteSheet *sheets, struct SpriteTemplate * template, struct SpritePalette *pals)
+{
+    u8 i;
+
+    struct SpriteSheet dataSheets[] =
+    {
+        {gUnknown_08625560, 0x100, 101},
+        {gUnknown_08625660, 0x20, 103},
+        {gPokenavConditionCancel_Gfx, 0x100, 102},
+        {},
+    };
+
+    struct SpritePalette dataPals[] =
+    {
+        {gPokenavConditionCancel_Pal, 101},
+        {gPokenavConditionCancel_Pal + 16, 102},
+        {},
+    };
+
+    struct SpriteTemplate dataTemplate =
+    {
+        .tileTag = 101,
+        .paletteTag = 101,
+        .oam = &sOamData_8625A28,
+        .anims = sSpriteAnimTable_8625A40,
+        .images = NULL,
+        .affineAnims = gDummySpriteAffineAnimTable,
+        .callback = SpriteCallbackDummy,
+    };
+
+    for (i = 0; i < ARRAY_COUNT(dataSheets); i++)
+        *(sheets++) = dataSheets[i];
+
+    *template = dataTemplate;
+
+    for (i = 0; i < ARRAY_COUNT(dataPals); i++)
+        *(pals++) = dataPals[i];
+}
+
+void sub_81D32B0(struct SpriteSheet *sheet, struct SpritePalette *pal)
+{
+    struct SpriteSheet dataSheet = {gUnknown_086256A0, 0x380, 104};
+    struct SpritePalette dataPal = {gUnknown_08625680, 104};
+
+    *sheet = dataSheet;
+    *pal = dataPal;
+}
+
+static void sub_81D32D4(struct Sprite *sprite)
+{
+    if (++sprite->data[1] > 60)
+    {
+        sprite->data[1] = 0;
+        sub_81D3408(sprite);
+    }
+}
+
+static void sub_81D32F4(struct Sprite *sprite)
+{
+    if (sprite->animEnded)
+    {
+        sprite->data[1] = 0;
+        sprite->callback = sub_81D32D4;
+    }
+}
+
+static const struct OamData sOamData_8625AD0 =
+{
+    .y = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .bpp = ST_OAM_4BPP,
+    .shape = SPRITE_SHAPE(16x16),
+    .x = 0,
+    .size = SPRITE_SIZE(16x16),
+    .priority = 0,
+};
+
+static const union AnimCmd sSpriteAnim_8625AD8[] =
+{
+    ANIMCMD_FRAME(0, 5),
+    ANIMCMD_FRAME(4, 5),
+    ANIMCMD_FRAME(8, 5),
+    ANIMCMD_FRAME(12, 5),
+    ANIMCMD_FRAME(16, 5),
+    ANIMCMD_FRAME(20, 5),
+    ANIMCMD_FRAME(24, 5),
+    ANIMCMD_END
+};
+
+static const union AnimCmd *const sSpriteAnimTable_8625AF8[] =
+{
+    sSpriteAnim_8625AD8,
+    sSpriteAnim_8625AD8 + 2,
+};
+
+// unused
+static const union AnimCmd *const sSpriteAnimTable_8625B00[] =
+{
+    sSpriteAnim_8625AD8 + 4,
+    sSpriteAnim_8625AD8 + 6,
+};
+
+// unused
+static const union AnimCmd *const sSpriteAnimTable_8625B08[] =
+{
+    sSpriteAnim_8625AD8 + 8,
+    sSpriteAnim_8625AD8 + 10,
+};
+
+// unused
+static const union AnimCmd *const *const sUnknown_08625B10 = sSpriteAnimTable_8625B08;
+
+const struct SpriteTemplate gUnknown_08625B14 =
+{
+    .tileTag = 104,
+    .paletteTag = 104,
+    .oam = &sOamData_8625AD0,
+    .anims = sSpriteAnimTable_8625AF8,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_81D3564,
+};
+
+static const s16 gUnknown_08625B2C[][2] =
+{
+    {0,   -35},
+    {20,  -28},
+    {33,  -10},
+    {33,   10},
+    {20,   28},
+    {0,    35},
+    {-20,  28},
+    {-33,  10},
+    {-33, -10},
+    {-20, -28},
+};
+
+void sub_81D3314(struct Sprite *sprite)
+{
+    struct Sprite *sprite2 = &gSprites[sprite->data[4]];
+
+    if (sprite2 != NULL)
+    {
+        sprite->pos1.x = sprite2->pos1.x + sprite2->pos2.x + gUnknown_08625B2C[sprite->data[0]][0];
+        sprite->pos1.y = sprite2->pos1.y + sprite2->pos2.y + gUnknown_08625B2C[sprite->data[0]][1];
+    }
+    else
+    {
+        sprite->pos1.x = gUnknown_08625B2C[sprite->data[0]][0] + 40;
+        sprite->pos1.y = gUnknown_08625B2C[sprite->data[0]][1] + 104;
+    }
+}
+
+void sub_81D338C(u8 arg0, u8 arg1, struct Sprite **sprites)
+{
+    u16 i;
+
+    for (i = 0; i < 10; i++)
+    {
+        if (sprites[i] != NULL)
+        {
+            sprites[i]->data[0] = i;
+            sprites[i]->data[1] = (i * 16) + 1;
+            sprites[i]->data[2] = arg0;
+            sprites[i]->data[3] = i;
+            if (arg1 == 0 || arg0 != 9)
+            {
+                sprites[i]->callback = sub_81D3564;
+            }
+            else
+            {
+                sub_81D3314(sprites[i]);
+                sub_81D35E8(sprites[i]);
+                sprites[i]->callback = sub_81D32F4;
+                sprites[i]->invisible = FALSE;
+            }
+        }
+    }
+}
+
+static void sub_81D3408(struct Sprite *sprite)
+{
+    u16 i;
+    u8 id = sprite->data[5];
+
+    for (i = 0; i < sprite->data[2] + 1; i++)
+    {
+        gSprites[id].data[1] = (gSprites[id].data[0] * 16) + 1;
+        gSprites[id].callback = sub_81D3564;
+        id = gSprites[id].data[5];
+    }
+}
+
+void sub_81D3464(struct Sprite **sprites)
+{
+    u8 i;
+
+    for (i = 0; i < 10; i++)
+        sprites[i] = NULL;
+}
+
+void sub_81D3480(struct Sprite **sprites, u8 arg1, u8 arg2)
+{
+    u16 i, spriteId, firstSpriteId = 0;
+    u8 count = arg2;
+
+    for (i = 0; i < count + 1; i++)
+    {
+        spriteId = CreateSprite(&gUnknown_08625B14, 0, 0, 0);
+        if (spriteId != MAX_SPRITES)
+        {
+            sprites[i] = &gSprites[spriteId];
+            sprites[i]->invisible = TRUE;
+            sprites[i]->data[4] = arg1;
+            if (i != 0)
+                sprites[i - 1]->data[5] = spriteId;
+            else
+                firstSpriteId = spriteId;
+        }
+        else
+        {
+            break;
+        }
+    }
+
+    sprites[count]->data[5] = firstSpriteId;
+    sub_81D338C(count, 1, sprites);
+}
+
+void sub_81D3520(struct Sprite **sprites)
+{
+    u16 i;
+
+    for (i = 0; i < 10; i++)
+    {
+        if (sprites[i] != NULL)
+        {
+            DestroySprite(sprites[i]);
+            sprites[i] = NULL;
+        }
+        else
+        {
+            break;
+        }
+    }
+}
+
+void sub_81D354C(struct Sprite **sprites)
+{
+    sub_81D3520(sprites);
+    FreeSpriteTilesByTag(104);
+    FreeSpritePaletteByTag(104);
+}
+
+static void sub_81D3564(struct Sprite *sprite)
+{
+    if (sprite->data[1] != 0)
+    {
+        if (--sprite->data[1] != 0)
+            return;
+
+        SeekSpriteAnim(sprite, 0);
+        sprite->invisible = FALSE;
+    }
+
+    sub_81D3314(sprite);
+    if (sprite->animEnded)
+    {
+        sprite->invisible = TRUE;
+        if (sprite->data[3] == sprite->data[2])
+        {
+            if (sprite->data[3] == 9)
+            {
+                sub_81D35E8(sprite);
+                sprite->callback = sub_81D32F4;
+            }
+            else
+            {
+                sprite->callback = sub_81D32D4;
+            }
+        }
+        else
+        {
+            sprite->callback = SpriteCallbackDummy;
+        }
+    }
+}
+
+static void sub_81D35E8(struct Sprite *sprite)
+{
+    u8 i, id = sprite->data[5];
+
+    for (i = 0; i < sprite->data[2] + 1; i++)
+    {
+        SeekSpriteAnim(&gSprites[id], 0);
+        gSprites[id].invisible = FALSE;
+        id = gSprites[id].data[5];
+    }
+}
+
+static const u8 *const sLvlUpStatStrings[] =
+{
+    gUnknown_085EEA46,
+    gUnknown_085EEA4E,
+    gUnknown_085EEA55,
+    gUnknown_085EEA63,
+    gUnknown_085EEA6B,
+    gUnknown_085EEA5D
+};
+
+void DrawLevelUpWindowPg1(u16 windowId, u16 *statsBefore, u16 *statsAfter, u8 bgClr, u8 fgClr, u8 shadowClr)
+{
+    u16 i, x;
+    s16 statsDiff[NUM_STATS];
+    u8 text[12];
+    u8 color[3];
+
+    FillWindowPixelBuffer(windowId, PIXEL_FILL(bgClr));
+
+    statsDiff[0] = statsAfter[STAT_HP]    - statsBefore[STAT_HP];
+    statsDiff[1] = statsAfter[STAT_ATK]   - statsBefore[STAT_ATK];
+    statsDiff[2] = statsAfter[STAT_DEF]   - statsBefore[STAT_DEF];
+    statsDiff[3] = statsAfter[STAT_SPATK] - statsBefore[STAT_SPATK];
+    statsDiff[4] = statsAfter[STAT_SPDEF] - statsBefore[STAT_SPDEF];
+    statsDiff[5] = statsAfter[STAT_SPEED] - statsBefore[STAT_SPEED];
+
+    color[0] = bgClr;
+    color[1] = fgClr;
+    color[2] = shadowClr;
+
+    for (i = 0; i < NUM_STATS; i++)
+    {
+
+        AddTextPrinterParameterized3(windowId,
+                                     1,
+                                     0,
+                                     15 * i,
+                                     color,
+                                     -1,
+                                     sLvlUpStatStrings[i]);
+
+        StringCopy(text, (statsDiff[i] >= 0) ? gText_UnkCtrlF904 : gText_Dash);
+        AddTextPrinterParameterized3(windowId,
+                                     1,
+                                     56,
+                                     15 * i,
+                                     color,
+                                     -1,
+                                     text);
+        if (abs(statsDiff[i]) <= 9)
+            x = 18;
+        else
+            x = 12;
+
+        ConvertIntToDecimalStringN(text, abs(statsDiff[i]), STR_CONV_MODE_LEFT_ALIGN, 2);
+        AddTextPrinterParameterized3(windowId,
+                                     1,
+                                     56 + x,
+                                     15 * i,
+                                     color,
+                                     -1,
+                                     text);
+    }
+}
+
+void DrawLevelUpWindowPg2(u16 windowId, u16 *currStats, u8 bgClr, u8 fgClr, u8 shadowClr)
+{
+    u16 i, numDigits, x;
+    s16 stats[NUM_STATS];
+    u8 text[12];
+    u8 color[3];
+
+    FillWindowPixelBuffer(windowId, PIXEL_FILL(bgClr));
+
+    stats[0] = currStats[STAT_HP];
+    stats[1] = currStats[STAT_ATK];
+    stats[2] = currStats[STAT_DEF];
+    stats[3] = currStats[STAT_SPATK];
+    stats[4] = currStats[STAT_SPDEF];
+    stats[5] = currStats[STAT_SPEED];
+
+    color[0] = bgClr;
+    color[1] = fgClr;
+    color[2] = shadowClr;
+
+    for (i = 0; i < NUM_STATS; i++)
+    {
+        if (stats[i] > 99)
+            numDigits = 3;
+        else if (stats[i] > 9)
+            numDigits = 2;
+        else
+            numDigits = 1;
+
+        ConvertIntToDecimalStringN(text, stats[i], STR_CONV_MODE_LEFT_ALIGN, numDigits);
+        x = 6 * (4 - numDigits);
+
+        AddTextPrinterParameterized3(windowId,
+                                     1,
+                                     0,
+                                     15 * i,
+                                     color,
+                                     -1,
+                                     sLvlUpStatStrings[i]);
+
+        AddTextPrinterParameterized3(windowId,
+                                     1,
+                                     56 + x,
+                                     15 * i,
+                                     color,
+                                     -1,
+                                     text);
+    }
+}
+
+void GetMonLevelUpWindowStats(struct Pokemon *mon, u16 *currStats)
+{
+    currStats[STAT_HP]    = GetMonData(mon, MON_DATA_MAX_HP);
+    currStats[STAT_ATK]   = GetMonData(mon, MON_DATA_ATK);
+    currStats[STAT_DEF]   = GetMonData(mon, MON_DATA_DEF);
+    currStats[STAT_SPEED] = GetMonData(mon, MON_DATA_SPEED);
+    currStats[STAT_SPATK] = GetMonData(mon, MON_DATA_SPATK);
+    currStats[STAT_SPDEF] = GetMonData(mon, MON_DATA_SPDEF);
 }

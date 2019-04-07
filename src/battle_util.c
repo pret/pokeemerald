@@ -1,5 +1,6 @@
 #include "global.h"
 #include "battle.h"
+#include "battle_anim.h"
 #include "constants/battle_script_commands.h"
 #include "constants/abilities.h"
 #include "constants/moves.h"
@@ -2040,7 +2041,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                 case ABILITY_FLASH_FIRE:
                     if (moveType == TYPE_FIRE && !(gBattleMons[battler].status1 & STATUS1_FREEZE))
                     {
-                        if (!(gBattleResources->flags->flags[battler] & UNKNOWN_FLAG_FLASH_FIRE))
+                        if (!(gBattleResources->flags->flags[battler] & RESOURCE_FLAG_FLASH_FIRE))
                         {
                             gBattleCommunication[MULTISTRING_CHOOSER] = 0;
                             if (gProtectStructs[gBattlerAttacker].notFirstStrike)
@@ -2048,7 +2049,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                             else
                                 gBattlescriptCurrInstr = BattleScript_FlashFireBoost_PPLoss;
 
-                            gBattleResources->flags->flags[battler] |= UNKNOWN_FLAG_FLASH_FIRE;
+                            gBattleResources->flags->flags[battler] |= RESOURCE_FLAG_FLASH_FIRE;
                             effect = 2;
                         }
                         else

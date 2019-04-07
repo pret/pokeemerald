@@ -1,7 +1,7 @@
 #ifndef GUARD_FIELD_EFFECT_CONSTANTS_H
 #define GUARD_FIELD_EFFECT_CONSTANTS_H
 
-#define FLDEFF_EXCLAMATION_MARK_ICON     0
+#define FLDEFF_EXCLAMATION_MARK_ICON     0 
 #define FLDEFF_USE_CUT_ON_GRASS          1
 #define FLDEFF_USE_CUT_ON_TREE           2
 #define FLDEFF_SHADOW                    3
@@ -61,11 +61,11 @@
 #define FLDEFF_SECRET_POWER_SHRUB        57
 #define FLDEFF_CUT_GRASS                 58
 #define FLDEFF_FIELD_MOVE_SHOW_MON_INIT  59
-#define FLDEFF_USE_TOMB_PUZZLE_EFFECT      60
+#define FLDEFF_USE_TOMB_PUZZLE_EFFECT    60
 #define FLDEFF_PCTURN_ON                 61
 #define FLDEFF_HALL_OF_FAME_RECORD       62
 #define FLDEFF_USE_TELEPORT              63
-#define FLDEFF_64                        64
+#define FLDEFF_RAYQUAZA                  64
 #define FLDEFF_65                        65
 #define FLDEFF_MOVE_DEOXYS_ROCK          66
 

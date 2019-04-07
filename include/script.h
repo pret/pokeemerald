@@ -57,9 +57,9 @@ u32 CalculateRamScriptChecksum(void);
 void ClearRamScript(void);
 bool8 InitRamScript(const u8 *script, u16 scriptSize, u8 mapGroup, u8 mapNum, u8 objectId);
 const u8 *GetRamScript(u8 objectId, const u8 *script);
-bool32 sub_80991F8(void);
-u8 *sub_8099244(void);
-void sub_80992A0(u8 *script, u16 scriptSize);
+bool32 ValidateSavedRamScript(void);
+u8 *GetSavedRamScriptIfValid(void);
+void InitRamScript_NoEventObject(u8 *script, u16 scriptSize);
 
 // srccmd.h
 void sub_809BE48(u16 npcId);

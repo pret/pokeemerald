@@ -62,70 +62,12 @@
 
 #define BATTLE_BUFFER_LINK_SIZE 0x1000
 
-struct TrainerMonNoItemDefaultMoves
-{
-    u16 iv;
-    u8 lvl;
-    u16 species;
-};
-
-struct TrainerMonItemDefaultMoves
-{
-    u16 iv;
-    u8 lvl;
-    u16 species;
-    u16 heldItem;
-};
-
-struct TrainerMonNoItemCustomMoves
-{
-    u16 iv;
-    u8 lvl;
-    u16 species;
-    u16 moves[4];
-};
-
-struct TrainerMonItemCustomMoves
-{
-    u16 iv;
-    u8 lvl;
-    u16 species;
-    u16 heldItem;
-    u16 moves[4];
-};
-
-union TrainerMonPtr
-{
-    const struct TrainerMonNoItemDefaultMoves *NoItemDefaultMoves;
-    const struct TrainerMonNoItemCustomMoves *NoItemCustomMoves;
-    const struct TrainerMonItemDefaultMoves *ItemDefaultMoves;
-    const struct TrainerMonItemCustomMoves *ItemCustomMoves;
-};
-
-struct Trainer
-{
-    /*0x00*/ u8 partyFlags;
-    /*0x01*/ u8 trainerClass;
-    /*0x02*/ u8 encounterMusic_gender; // last bit is gender
-    /*0x03*/ u8 trainerPic;
-    /*0x04*/ u8 trainerName[12];
-    /*0x10*/ u16 items[4];
-    /*0x18*/ bool8 doubleBattle;
-    /*0x1C*/ u32 aiFlags;
-    /*0x20*/ u8 partySize;
-    /*0x24*/ union TrainerMonPtr party;
-};
-
-extern const struct Trainer gTrainers[];
-
-#define TRAINER_ENCOUNTER_MUSIC(trainer)((gTrainers[trainer].encounterMusic_gender & 0x7F))
-
-struct UnknownFlags
+struct ResourceFlags
 {
     u32 flags[4];
 };
 
-#define UNKNOWN_FLAG_FLASH_FIRE 1
+#define RESOURCE_FLAG_FLASH_FIRE 1
 
 struct DisableStruct
 {
@@ -276,21 +218,16 @@ struct BattleCallbacksStack
 
 struct StatsArray
 {
-    u16 hp;
-    u16 atk;
-    u16 def;
-    u16 spd;
-    u16 spAtk;
-    u16 spDef;
+    u16 stats[NUM_STATS];
 };
 
 struct BattleResources
 {
-    struct SecretBaseRecord* secretBase;
-    struct UnknownFlags *flags;
+    struct SecretBase* secretBase;
+    struct ResourceFlags *flags;
     struct BattleScriptsStack* battleScriptsStack;
     struct BattleCallbacksStack* battleCallbackStack;
-    struct StatsArray* statsBeforeLvlUp;
+    struct StatsArray* beforeLvlUp;
     struct AI_ThinkingStruct *ai;
     struct BattleHistory *battleHistory;
     struct BattleScriptsStack *AI_ScriptsStack;
@@ -564,9 +501,7 @@ struct BattleScripting
 };
 
 // rom_80A5C6C
-u8 GetBattlerSide(u8 battler);
-u8 GetBattlerPosition(u8 battler);
-u8 GetBattlerAtPosition(u8 position);
+
 
 struct BattleSpriteInfo
 {

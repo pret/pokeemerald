@@ -33,8 +33,6 @@
 
 #define subsprite_table(ptr) {.subsprites = ptr, .subspriteCount = (sizeof ptr) / (sizeof(struct Subsprite))}
 
-extern struct CompressedSpritePalette gMonPaletteTable[]; // GF made a mistake and did not extern it as const.
-
 EWRAM_DATA s32 gFieldEffectArguments[8] = {0};
 
 // Static type declarations
@@ -237,7 +235,9 @@ static void Fldeff_MoveDeoxysRock_Step(u8 taskId);
 static IWRAM_DATA u8 sActiveList[32];
 
 // External declarations
-
+extern struct CompressedSpritePalette gMonPaletteTable[]; // GF made a mistake and did not extern it as const.
+extern const struct CompressedSpritePalette gTrainerFrontPicPaletteTable[];
+extern const struct CompressedSpriteSheet gTrainerFrontPicTable[];
 extern u8 *gFieldEffectScriptPointers[];
 extern const struct SpriteTemplate *const gFieldEffectObjectTemplatePointers[];
 
@@ -284,20 +284,44 @@ bool8 (*const gFieldEffectScriptFuncs[])(u8 **, u32 *) =
 
 const struct OamData gNewGameBirchOamAttributes =
 {
+    .y = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(64x64),
-    .size = SPRITE_SIZE(64x64)
+    .x = 0,
+    .size = SPRITE_SIZE(64x64),
+    .tileNum = 0,
+    .priority = 0,
+    .paletteNum = 0,
 };
 
 const struct OamData gOamData_855C218 =
 {
+    .y = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(8x8),
-    .size = SPRITE_SIZE(8x8)
+    .x = 0,
+    .size = SPRITE_SIZE(8x8),
+    .tileNum = 0,
+    .priority = 0,
+    .paletteNum = 0,
 };
 
 const struct OamData gOamData_855C220 =
 {
+    .y = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(16x16),
-    .size = SPRITE_SIZE(16x16)
+    .x = 0,
+    .size = SPRITE_SIZE(16x16),
+    .tileNum = 0,
+    .priority = 0,
+    .paletteNum = 0,
 };
 
 const struct SpriteFrameImage gNewGameBirchPicTable[] =
@@ -347,8 +371,16 @@ const struct SpritePalette gFieldEffectObjectPaletteInfo5 =
 
 const struct OamData gOamData_855C26C =
 {
+    .y = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(32x16),
-    .size = SPRITE_SIZE(32x16)
+    .x = 0,
+    .size = SPRITE_SIZE(32x16),
+    .tileNum = 0,
+    .priority = 0,
+    .paletteNum = 0,
 };
 
 const struct SpriteFrameImage gSpriteImageTable_855C274[] =
@@ -3453,7 +3485,7 @@ static void sub_80B9978(struct Task *task)
         eventObject = &gEventObjects[gPlayerAvatar.eventObjectId];
         sprite = &gSprites[eventObject->spriteId];
         eventObject->inanimate = 0;
-        sub_808EB08(eventObject, eventObject->currentCoords.x, eventObject->currentCoords.y);
+        MoveEventObjectToMapCoords(eventObject, eventObject->currentCoords.x, eventObject->currentCoords.y);
         sprite->pos2.x = 0;
         sprite->pos2.y = 0;
         sprite->coordOffsetEnabled = 1;
@@ -3759,3 +3791,4 @@ static void Fldeff_MoveDeoxysRock_Step(u8 taskId)
             break;
     }
 }
+

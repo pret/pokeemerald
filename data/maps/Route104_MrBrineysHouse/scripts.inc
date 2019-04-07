@@ -1,8 +1,8 @@
 Route104_MrBrineysHouse_MapScripts:: @ 8229D2E
-	map_script MAP_SCRIPT_ON_TRANSITION, Route104_MrBrineysHouse_MapScript1_229D34
+	map_script MAP_SCRIPT_ON_TRANSITION, Route104_MrBrineysHouse_OnTransition
 	.byte 0
 
-Route104_MrBrineysHouse_MapScript1_229D34: @ 8229D34
+Route104_MrBrineysHouse_OnTransition: @ 8229D34
 	setflag FLAG_LANDMARK_MR_BRINEY_HOUSE
 	compare VAR_BRINEY_HOUSE_STATE, 1
 	call_if_eq Route104_MrBrineysHouse_EventScript_229D50

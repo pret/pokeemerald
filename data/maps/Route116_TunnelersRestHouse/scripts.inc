@@ -1,8 +1,8 @@
 Route116_TunnelersRestHouse_MapScripts:: @ 822B850
-	map_script MAP_SCRIPT_ON_TRANSITION, Route116_TunnelersRestHouse_MapScript1_22B856
+	map_script MAP_SCRIPT_ON_TRANSITION, Route116_TunnelersRestHouse_OnTransition
 	.byte 0
 
-Route116_TunnelersRestHouse_MapScript1_22B856: @ 822B856
+Route116_TunnelersRestHouse_OnTransition: @ 822B856
 	setflag FLAG_LANDMARK_TUNNELERS_REST_HOUSE
 	end
 

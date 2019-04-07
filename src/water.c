@@ -483,7 +483,7 @@ extern const struct SpriteTemplate gUnknown_08597388;
 void AnimTask_CreateRaindrops(u8 taskId)
 {
     u8 x, y;
-    
+
     if (gTasks[taskId].data[0] == 0)
     {
         gTasks[taskId].data[1] = gBattleAnimArgs[0];
@@ -520,7 +520,7 @@ void sub_8107228(struct Sprite *sprite)
 void sub_8107260(struct Sprite *sprite)
 {
     u8 spriteId;
-    
+
     if (GetBattlerSide(gBattleAnimAttacker) != B_SIDE_PLAYER)
     {
         sprite->pos1.x = GetBattlerSpriteCoord(gBattleAnimAttacker, 2) - gBattleAnimArgs[0];
@@ -559,7 +559,7 @@ void sub_8107380(struct Sprite *sprite)
     u8 otherSpriteId = sprite->data[5];
     u8 timer = gSprites[otherSpriteId].data[4];
     u16 trigIndex = gSprites[otherSpriteId].data[3];
-    
+
     sprite->data[0] = 1;
     AnimTranslateLinear(sprite);
     sprite->pos2.x += Sin(trigIndex >> 8, gSprites[otherSpriteId].data[0]);
@@ -593,7 +593,7 @@ void sub_8107430(struct Sprite *sprite)
 void sub_810744C(struct Sprite *sprite)
 {
     s16 unkArg;
-    
+
     InitSpritePosToAnimAttacker(sprite, TRUE);
     if (GetBattlerSide(gBattleAnimAttacker) != B_SIDE_PLAYER)
         unkArg = -gBattleAnimArgs[2];
@@ -636,7 +636,7 @@ void sub_810756C(u8 taskId)
     u16 *palPtr1;
     u16 *palPtr2;
     u16 rgbBuffer;
-    
+
     if (++gTasks[taskId].data[10] == 3)
     {
         gTasks[taskId].data[10] = 0;
@@ -724,7 +724,7 @@ _081075DE:\n\
 void sub_81075EC(struct Sprite *sprite)
 {
     u16 retArg;
-    
+
     InitSpritePosToAnimAttacker(sprite, TRUE);
     sprite->data[0] = 30;
     sprite->data[1] = sprite->pos1.x;
@@ -781,7 +781,7 @@ void sub_81076F4(u8 taskId)
 void sub_8107730(struct Sprite *sprite)
 {
     u8 priority;
-    
+
     sprite->pos1.x = GetBattlerSpriteCoord(gBattleAnimAttacker, 0);
     sprite->pos1.y = GetBattlerSpriteCoord(gBattleAnimAttacker, 1);
     sprite->pos2.y = -10;
@@ -797,7 +797,7 @@ void sub_8107730(struct Sprite *sprite)
         {
             sprite->pos2.x = -10;
             sprite->subpriority = priority - 2;
-        }   
+        }
     }
     else
     {
@@ -876,7 +876,7 @@ void AnimTask_CreateSurfWave(u8 taskId)
 {
     struct BattleAnimBgData animBg;
     u8 taskId2;
-    
+
     SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT1_BG1 | BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_ALL);
     SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(0, 16));
     SetAnimBgAttribute(1, BG_ANIM_PRIORITY, 1);
@@ -894,9 +894,9 @@ void AnimTask_CreateSurfWave(u8 taskId)
     {
         sub_80A6D60(&animBg, gUnknown_08D963A4, 1);
     }
-    AnimLoadCompressedBgGfx(animBg.bgId, gBattleAnimBackgroundImage_Surf, animBg.tilesOffset);
+    AnimLoadCompressedBgGfx(animBg.bgId, gBattleAnimBgImage_Surf, animBg.tilesOffset);
     if (gBattleAnimArgs[0] == 0)
-        LoadCompressedPalette(gBattleAnimBackgroundPalette_Surf, animBg.paletteId * 16, 32);
+        LoadCompressedPalette(gBattleAnimBgPalette_Surf, animBg.paletteId * 16, 32);
     else
         LoadCompressedPalette(gBattleAnimBackgroundImageMuddyWater_Pal, animBg.paletteId * 16, 32);
     taskId2 = CreateTask(sub_8107D58, gTasks[taskId].priority + 1);
@@ -1009,7 +1009,7 @@ _081079E0:\n\
 _081079EA:\n\
 	mov r0, sp\n\
 	ldrb r0, [r0, 0x9]\n\
-	ldr r1, =gBattleAnimBackgroundImage_Surf\n\
+	ldr r1, =gBattleAnimBgImage_Surf\n\
 	mov r2, sp\n\
 	ldrh r2, [r2, 0xA]\n\
 	bl AnimLoadCompressedBgGfx\n\
@@ -1018,7 +1018,7 @@ _081079EA:\n\
 	ldrsh r0, [r0, r1]\n\
 	cmp r0, 0\n\
 	bne _08107A24\n\
-	ldr r0, =gBattleAnimBackgroundPalette_Surf\n\
+	ldr r0, =gBattleAnimBgPalette_Surf\n\
 	mov r1, sp\n\
 	ldrb r1, [r1, 0x8]\n\
 	lsls r1, 4\n\
@@ -1182,7 +1182,7 @@ void sub_8107B84(u8 taskId)
     s16 unkUse;
     u32 palOffset;
     u16 palNum;
-    
+
     *BGptrX += gTasks[taskId].data[0];
     *BGptrY += gTasks[taskId].data[1];
     sub_80A6B30(&animBg);
@@ -1412,7 +1412,7 @@ void sub_8107D58(u8 taskId)
     struct ScanlineEffectParams params;
     struct Task *task = &gTasks[taskId];
     // u16 *scanlineBuffer;
-    
+
     switch (task->data[0])
     {
         case 0:
@@ -1883,7 +1883,7 @@ void sub_8108034(struct Sprite *sprite)
 {
     s16 randData;
     s16 randData2;
-    
+
     sprite->oam.tileNum += 8;
     InitSpritePosToAnimTarget(sprite, TRUE);
     randData = (Random2() & 0xFF) | 256;
@@ -1911,7 +1911,7 @@ void sub_8108098(struct Sprite *sprite)
 void sub_81080E4(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
-    
+
     task->data[15] = GetAnimBattlerSpriteId(ANIM_ATTACKER);
     task->data[5] = gSprites[task->data[15]].pos1.y;
     task->data[1] = sub_8108384();
@@ -1922,7 +1922,7 @@ void sub_81080E4(u8 taskId)
 void sub_8108140(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
-    
+
     switch (task->data[0])
     {
         case 0:
@@ -2011,7 +2011,7 @@ u8 sub_8108384(void)
     u16 maxhp;
     u16 partyIndex;
     struct Pokemon *slot;
-    
+
     if (GetBattlerSide(gBattleAnimAttacker) == B_SIDE_PLAYER)
     {
         partyIndex = gBattlerPartyIndexes[gBattleAnimAttacker];
@@ -2045,7 +2045,7 @@ void sub_8108408(struct Task *task, u8 taskId)
     u8 subpriority = GetBattlerSpriteSubpriority(gBattleAnimAttacker) - 1;
     s16 increment = 4 - task->data[1];
     u8 spriteId;
-    
+
     if (increment <= 0)
         increment = 1;
     for (i = 0; i < 20; i += increment)
@@ -2094,7 +2094,7 @@ void sub_810851C(struct Sprite *sprite)
 void sub_81085C8(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
-    
+
     task->data[1] = sub_8108384();
     if (GetBattlerSide(gBattleAnimAttacker) == B_SIDE_PLAYER)
     {
@@ -2116,7 +2116,7 @@ void sub_810862C(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
     u8 taskId2;
-    
+
     switch (task->data[0])
     {
         case 0:
@@ -2159,7 +2159,7 @@ void sub_810871C(struct Task *task, u8 taskId)
 {
     u16 yPosArg = ((gSineTable[task->data[8]] + 3) >> 4) + task->data[6];
     u8 spriteId = CreateSprite(&gUnknown_08595268, task->data[7], 0, 0);
-    
+
     if (spriteId != MAX_SPRITES)
     {
         gSprites[spriteId].callback = sub_81087C0;
@@ -2212,7 +2212,7 @@ void sub_810886C(struct Sprite *sprite)
 void sub_81088E4(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
-    
+
     task->data[3] = GetBattlerSpriteCoord(gBattleAnimAttacker, 2);
     task->data[4] = GetBattlerSpriteCoord(gBattleAnimAttacker, 3);
     task->data[7] = (GetBattlerSide(gBattleAnimAttacker) == B_SIDE_PLAYER) ? 1 : -1;
@@ -2229,7 +2229,7 @@ void sub_81088E4(u8 taskId)
 void sub_8108978(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
-    
+
     switch (task->data[0])
     {
         case 0:
@@ -2298,7 +2298,7 @@ void sub_8108978(u8 taskId)
 void sub_8108AC0(struct Task *task)
 {
     u8 spriteId;
-    
+
     if (++task->data[2] > 1)
     {
         task->data[2] = 0;
@@ -2334,7 +2334,7 @@ void sub_8108B2C(struct Sprite *sprite)
 void sub_8108B94(struct Sprite *sprite)
 {
     u16 i;
-    
+
     if (TranslateAnimHorizontalArc(sprite))
     {
         for (i = 0; i < NUM_TASKS; i++)
@@ -2397,7 +2397,7 @@ void sub_8108CDC(struct Sprite *sprite)
 {
     int xDiff = sprite->data[1] - sprite->pos1.x;
     int yDiff = sprite->data[2] - sprite->pos1.y;
-    
+
     sprite->pos2.x = (sprite->data[0] * xDiff) / sprite->data[3];
     sprite->pos2.y = (sprite->data[0] * yDiff) / sprite->data[3];
     if (++sprite->data[5] == sprite->data[4])
@@ -2420,7 +2420,7 @@ void sub_8108D54(struct Sprite *sprite, int xDiff, int yDiff)
     s16 randomSomethingX = -xDiff + (Random2() % 10) - 5;
     s16 i;
     u8 spriteId;
-    
+
     for (i = 0; i <= 0; i++)
     {
         spriteId = CreateSprite(&gUnknown_08595310, combinedX, combinedY + something, 130);
