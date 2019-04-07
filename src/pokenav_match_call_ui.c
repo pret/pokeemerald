@@ -136,7 +136,7 @@ static const u8 sUnknown_0861FBF7[] =
     2, 4, 6, 7, 0
 };
 
-static const struct CompressedSpriteSheet sMatchcallArrowSpriteSheet[] =
+static const struct CompressedSpriteSheet sMatchcallArrowSpriteSheets[] =
 {
     {
         .data = sMatchcallArrowSpriteSheetData,
@@ -145,7 +145,7 @@ static const struct CompressedSpriteSheet sMatchcallArrowSpriteSheet[] =
     }
 };
 
-static const struct SpritePalette sMatchcallArrowPalette[] =
+static const struct SpritePalette sMatchcallArrowPalettes[] =
 {
     {
         .data = sMatchcallArrowPaletteData,
@@ -160,9 +160,9 @@ static const struct OamData sMatchCallRightArrowSpriteOam =
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
     .bpp = ST_OAM_4BPP,
-    .shape = 2, //SPRITE_SHAPE(16x8),
+    .shape = SPRITE_SHAPE(8x16),
     .x = 0,
-    .size = 0, //SPRITE_SIZE(16x8),
+    .size = SPRITE_SIZE(8x16),
     .tileNum = 0,
     .priority = 2,
     .paletteNum = 0
@@ -185,9 +185,9 @@ static const struct OamData sMatchCallUpDownArrowSpriteOam =
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
     .bpp = ST_OAM_4BPP,
-    .shape = 1, //SPRITE_SHAPE(8x16),
+    .shape = SPRITE_SHAPE(16x8),
     .x = 0,
-    .size = 0, //SPRITE_SIZE(8x16),
+    .size = SPRITE_SIZE(16x8),
     .tileNum = 0,
     .priority = 2,
     .paletteNum = 0
@@ -282,10 +282,8 @@ u32 LoopedTask_sub_81C8254(s32 a0)
 void sub_81C82E4(struct UnknownSubStruct_81C81D4 *a0)
 {
     u16 v1 = (a0->unk0.unk0.unk1 << 12) | a0->unk0.unk0.unk6;
-    // TODO: When #553 is merged, use a PALETTE_NUM_TO_FILL_VALUE(1) macro here...
-    sub_8199DF0(a0->unk0.unk0.bg, 0x11, a0->unk0.unk0.unk6, 1);
-    // ...and PALETTE_NUM_TO_FILL_VALUE(4) here.
-    sub_8199DF0(a0->unk0.unk0.bg, 0x44, a0->unk0.unk0.unk6 + 1, 1);
+    sub_8199DF0(a0->unk0.unk0.bg, PIXEL_FILL(1), a0->unk0.unk0.unk6, 1);
+    sub_8199DF0(a0->unk0.unk0.bg, PIXEL_FILL(4), a0->unk0.unk0.unk6 + 1, 1);
     SetBgTilemapBuffer(a0->unk0.unk0.bg, a0->tilemapBuffer);
     FillBgTilemapBufferRect_Palette0(a0->unk0.unk0.bg, v1, 0, 0, 32, 32);
     ChangeBgY(a0->unk0.unk0.bg, 0, 0);
@@ -1086,11 +1084,11 @@ void sub_81C8ED0(void)
     u32 i;
     const struct CompressedSpriteSheet *ptr;
     
-    for (i = 0, ptr = sMatchcallArrowSpriteSheet; i < ARRAY_COUNT(sMatchcallArrowSpriteSheet); ptr++, i++)
+    for (i = 0, ptr = sMatchcallArrowSpriteSheets; i < ARRAY_COUNT(sMatchcallArrowSpriteSheets); ptr++, i++)
     {
         LoadCompressedSpriteSheet(ptr);
     }
-    Pokenav_AllocAndLoadPalettes(sMatchcallArrowPalette);
+    Pokenav_AllocAndLoadPalettes(sMatchcallArrowPalettes);
 }
 
 void sub_81C8EF8(struct MatchCallWindowState *a0, struct UnknownInnerStruct_81C81D4 *a1)

@@ -1132,7 +1132,7 @@ static void sub_80B0318(u8 taskId)
         data[0] = 1;
         break;
     case 1:
-        sub_8199DF0(0, 17, 0, 1);
+        sub_8199DF0(0, PIXEL_FILL(1), 0, 1);
         sub_80B028C(data[1]);
         sub_80B003C(data[2], data[3], 1, 160, 1, 2);
         data[0] = 2;
@@ -1179,7 +1179,7 @@ static void sub_80B0318(u8 taskId)
             if (sub_80B02C8(data[5]) == TRUE)
             {
                 data[0] = 5;
-                sub_8199DF0(0, 0, 0, 1);
+                sub_8199DF0(0, PIXEL_FILL(0), 0, 1);
             }
         }
         break;

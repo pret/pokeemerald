@@ -71,7 +71,7 @@ void ShowLeftHeaderSubmenuSprites(u32 arg0, bool32 arg1);
 void MoveLeftHeader(struct Sprite *sprite, s32 arg1, s32 arg2, s32 arg3);
 void SpriteCB_MoveLeftHeader(struct Sprite *sprite);
 void InitPokenavMainMenuResources(void);
-void InitHoenMapHeaderSprites(void);
+void InitHoennMapHeaderSprites(void);
 void sub_81C7B74(void);
 void CopyPaletteIntoBufferUnfaded(const u16 *palette, u32 a1, u32 a2);
 u32 LoopedTask_ScrollMenuHeaderDown(s32 a0);
@@ -121,7 +121,7 @@ const struct WindowTemplate gUnknown_0861FA08[2] =
     },
 };
 
-const u8 *const (sMenuButtonReminders[12]) =
+const u8 *const sMenuButtonReminders[12] =
 {
     gText_Pokenav_ClearButtonList,
     gText_PokenavMap_ZoomedOutButtons,
@@ -137,9 +137,9 @@ const u8 *const (sMenuButtonReminders[12]) =
     gText_PokenavRibbons_RibbonCheckButtons,
 };
 
-const u8 gMenuButtonReminderColor[4] =
+const u8 gMenuButtonReminderColor[3] =
 {
-    4, 1, 2, 0
+    4, 1, 2
 };
 
 static const struct CompressedSpriteSheet gSpinningPokenavSpriteSheet[] =
@@ -151,7 +151,7 @@ static const struct CompressedSpriteSheet gSpinningPokenavSpriteSheet[] =
     }
 };
 
-static const struct SpritePalette gSpinningPokenavPalette[] =
+static const struct SpritePalette gSpinningNavgearPalettes[] =
 {
     {
         .data = gSpinningPokenavPaletteData,
@@ -160,7 +160,7 @@ static const struct SpritePalette gSpinningPokenavPalette[] =
     {}
 };
 
-static const struct CompressedSpriteSheet sPokenavHoenMapLeftHeaderSpriteSheet =
+static const struct CompressedSpriteSheet sPokenavHoennMapLeftHeaderSpriteSheet =
 {
     .data = gPokenavLeftHeaderHoennMap_Gfx,
     .size = 0xC00,
@@ -236,18 +236,15 @@ static const struct CompressedSpriteSheetNoSize sPokenavSubMenuLeftHeaderSpriteS
 static const struct OamData sSpinningPokenavSpriteOam =
 {
     .y = 0,
-    .affineMode = 0,
-    .objMode = 0,
-    .mosaic = 0,
-    .bpp = 0,
-    .shape = 0, // FIXME: Use SPRITE_SHAPE
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .bpp = ST_OAM_4BPP,
+    .shape = SPRITE_SHAPE(32x32),
     .x = 0,
-    .matrixNum = 0,
-    .size = 2, // FIXME: Use SPRITE_SIZE
+    .size = SPRITE_SIZE(32x32),
     .tileNum = 0,
     .priority = 0,
     .paletteNum = 0,
-    .affineParam = 0
 };
 
 static const union AnimCmd sSpinningPokenavAnims[] =
@@ -279,45 +276,40 @@ static const struct SpriteTemplate sSpinningPokenavSpriteTemplate =
     .callback = SpriteCB_SpinningPokenav
 };
 
-static const struct OamData sPokenavLeftHeaderHoenMapSpriteOam =
+static const struct OamData sPokenavLeftHeaderHoennMapSpriteOam =
 {
     .y = 0,
-    .affineMode = 0,
-    .objMode = 0,
-    .mosaic = 0,
-    .bpp = 0,
-    .shape = 1,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .bpp = ST_OAM_4BPP,
+    .shape = SPRITE_SHAPE(64x32),
     .x = 0,
-    .matrixNum = 0,
-    .size = 3,
+    .size = SPRITE_SIZE(64x32),
     .tileNum = 0,
     .priority = 1,
     .paletteNum = 0,
-    .affineParam = 0
 };
 
 static const struct OamData sUnknown_0861FB24 =
 {
     .y = 0,
-    .affineMode = 0,
-    .objMode = 0,
-    .mosaic = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
     .bpp = 0,
-    .shape = 1,
+    .shape = SPRITE_SHAPE(32x16),
     .x = 0,
     .matrixNum = 0,
-    .size = 2,
+    .size = SPRITE_SIZE(32x16),
     .tileNum = 0,
     .priority = 1,
     .paletteNum = 0,
-    .affineParam = 0
 };
 
-static const struct SpriteTemplate sPokenavLeftHeaderHoenMapSpriteTemplate =
+static const struct SpriteTemplate sPokenavLeftHeaderHoennMapSpriteTemplate =
 {
     .tileTag = 2,
     .paletteTag = 1,
-    .oam = &sPokenavLeftHeaderHoenMapSpriteOam,
+    .oam = &sPokenavLeftHeaderHoennMapSpriteOam,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
@@ -408,7 +400,7 @@ u32 LoopedTask_InitPokenavMenu(s32 a0)
             return LT_PAUSE;
 
         InitPokenavMainMenuResources();
-        InitHoenMapHeaderSprites();
+        InitHoennMapHeaderSprites();
         ShowBg(0);
         return LT_FINISH;
     default:
@@ -730,7 +722,7 @@ void InitPokenavMainMenuResources(void)
     for (i = 0; i < ARRAY_COUNT(gSpinningPokenavSpriteSheet); i++)
         LoadCompressedSpriteSheet(&gSpinningPokenavSpriteSheet[i]);
 
-    Pokenav_AllocAndLoadPalettes(gSpinningPokenavPalette);
+    Pokenav_AllocAndLoadPalettes(gSpinningNavgearPalettes);
     structPtr->unk14 = ~1 & ~(0x10000 << IndexOfSpritePaletteTag(0));
     spriteId = CreateSprite(&sSpinningPokenavSpriteTemplate, 220, 12, 0);
     structPtr->spinningPokenav = &gSprites[spriteId];
@@ -771,17 +763,17 @@ void ResumeSpinningPokenavSprite(void)
     structPtr->spinningPokenav->subpriority = 0;
 }
 
-void InitHoenMapHeaderSprites(void)
+void InitHoennMapHeaderSprites(void)
 {
     s32 i, spriteId;
     struct PokenavMainMenuResources *structPtr = GetSubstructPtr(0);
 
-    LoadCompressedSpriteSheet(&sPokenavHoenMapLeftHeaderSpriteSheet);
+    LoadCompressedSpriteSheet(&sPokenavHoennMapLeftHeaderSpriteSheet);
     AllocSpritePalette(1);
     AllocSpritePalette(2);
     for (i = 0; i < (s32)ARRAY_COUNT(structPtr->leftHeaderSprites); i++)
     {
-        spriteId = CreateSprite(&sPokenavLeftHeaderHoenMapSpriteTemplate, 0, 0, 1);
+        spriteId = CreateSprite(&sPokenavLeftHeaderHoennMapSpriteTemplate, 0, 0, 1);
         structPtr->leftHeaderSprites[i] = &gSprites[spriteId];
         structPtr->leftHeaderSprites[i]->invisible = TRUE;
         structPtr->leftHeaderSprites[i]->pos2.x = i * 64;

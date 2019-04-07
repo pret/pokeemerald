@@ -278,7 +278,6 @@ u32 (*const PokenavMenuCallbacks[15][7])(void) =
     },
 };
 
-
 EWRAM_DATA u8 gNextLoopedTaskId = 0;
 EWRAM_DATA struct PokenavResources *gPokenavResources = NULL;
 
