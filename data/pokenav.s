@@ -3,6 +3,7 @@
 
 	.section .rodata
 
+// pokenav_unk_1.s
 gUnknown_0861FC54:: @ 861FC54
 	.byte 2
 	.byte 3
@@ -13,6 +14,7 @@ gUnknown_0861FC54:: @ 861FC54
 gUnknown_0861FC59:: @ 861FC59
 	.byte 0, 1, 4, 4, 4, 4, 0, 1, 2, 4, 4, 4, 0, 1, 2, 3, 4, 4, 5, 6, 7, 4, 4, 4, 8, 9, 10, 11, 12, 13, 0
 
+// pokenav_unk_2.s
 gUnknown_0861FC78:: @ 861FC78
 	.incbin "graphics/pokenav/bg.gbapal"
 
@@ -201,7 +203,8 @@ gUnknown_08620384:: @ 8620384
 	 .4byte 0x4000040
 	 .4byte 0xa2600001
 	 .byte 1, 0, 0, 0
-	 
+
+// pokenav_unk_3.s	 
 gUnknown_08620390:: @ 8620390
 	.string "Becalm fighting emotions.$"
 
@@ -1227,6 +1230,7 @@ gUnknown_08622508:: @ 8622508
 gUnknown_0862250A:: @ 862250A
 	.byte 0, 1, 2, 0, 0, 0
 
+// pokenav_unk_4.s
 gUnknown_08622510:: @ 8622510
 	.incbin "graphics/pokenav/ui_matchcall.gbapal"
 
@@ -1323,6 +1327,7 @@ gUnknown_08622848:: @ 8622848
 gUnknown_08622850:: @ 8622850
 	spr_template 8, 13, gUnknown_08622848, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
 
+// pokenav_unk_5.s
 gUnknown_08622868:: @ 8622868
 	.incbin "graphics/pokenav/8622868.gbapal"
 
@@ -1456,6 +1461,10 @@ gUnknown_086231C8:: @ 86231C8
 gUnknown_086231D0:: @ 86231D0
 	spr_template 6, 11, gUnknown_086231C8, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, sub_81CCEF4
 
+// pokenav_unk_6.s
+// <none>
+
+// pokenav_unk_7.s
 gUnknown_086231E8:: @ 86231E8
 	.incbin "graphics/pokenav/86231E8.gbapal"
 
@@ -1488,6 +1497,7 @@ gUnknown_08623374:: @ 8623374
 gUnknown_0862337C:: @ 862337C
 	window_template 1, 13, 0x1C, 3, 2, 15, 0x44
 
+// pokenav_unk_8.s
 gUnknown_08623384:: @ 8623384
 	.4byte NULL
 	.4byte sub_81CE37C
@@ -1548,6 +1558,7 @@ gUnknown_086235D4:: @ 86235D4
 	.string "{UNK_SPACER}$"
 	.align 2
 
+// pokenav_unk_9.s
 gUnknown_086235D8:: @ 86235D8
 	.4byte sub_81CFB8C
 	.4byte sub_81CFC2C
@@ -1595,6 +1606,7 @@ gUnknown_086237F4:: @ 86237F4
 	.string "{UNK_SPACER}$"
 	.align 2
 
+// pokenav_unk_10.s
 gUnknown_086237F8:: @ 86237F8
 	.byte 1, 1, 0, 0
 	.byte 3, 4, 1, 0
