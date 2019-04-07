@@ -168,17 +168,8 @@ gUnknown_02022D00: @ 2022D00
 	.include "src/pokemon_summary_screen.o"
 	.include "src/unk_pokedex_area_screen_helper.o"
 	.include "src/battle_pyramid_bag.o"
-
-    @ pokenav
-gUnknown_0203CF3C: @ 203CF3C
-	.space 0x4
-
-gUnknown_0203CF40: @ 203CF40
-	.space 0x4
-
-gUnknown_0203CF44: @ 203CF44
-	.space 0x4
-
+	.include "src/pokenav.o"
+	.include "src/pokenav_match_call_ui.o"
 	.include "src/menu_specialized.o"
 	.include "src/faraway_island.o"
 	.include "src/trainer_hill.o"

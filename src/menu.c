@@ -1919,7 +1919,7 @@ void sub_8199D3C(void *ptr, int delta, int width, int height, bool32 is8BPP)
     }
 }
 
-void sub_8199D98(void)
+void ResetBgPositions(void)
 {
     ChangeBgX(0, 0, 0);
     ChangeBgX(1, 0, 0);

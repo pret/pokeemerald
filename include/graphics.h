@@ -4019,6 +4019,13 @@ extern const u32 gPokenavLeftHeaderMainMenu_Gfx[];
 extern const u32 gPokenavLeftHeaderCondition_Gfx[];
 extern const u32 gPokenavLeftHeaderRibbons_Gfx[];
 extern const u32 gPokenavLeftHeaderMatchCall_Gfx[];
+extern const u32 gPokenavLeftHeaderParty_Gfx[];
+extern const u32 gPokenavLeftHeaderSearch_Gfx[];
+extern const u32 gPokenavLeftHeaderCool_Gfx[];
+extern const u32 gPokenavLeftHeaderBeauty_Gfx[];
+extern const u32 gPokenavLeftHeaderCute_Gfx[];
+extern const u32 gPokenavLeftHeaderSmart_Gfx[];
+extern const u32 gPokenavLeftHeaderTough_Gfx[];
 
 extern const u32 gPageInfoTilemap[];
 extern const u32 gUnknown_08D98CC8[];
