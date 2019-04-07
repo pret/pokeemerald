@@ -762,11 +762,41 @@ const u8 *const gMonIconTable[] =
 	[SPECIES_BLACEPHALON] = gMonIcon_Blacephalon,
 	[SPECIES_ZERAORA] = gMonIcon_Zeraora,
     [SPECIES_EGG] = gMonIcon_Egg,
+    [SPECIES_UNOWN_A] = gMonIcon_UnownA,
+    [SPECIES_UNOWN_B] = gMonIcon_UnownB,
+    [SPECIES_UNOWN_C] = gMonIcon_UnownC,
+    [SPECIES_UNOWN_D] = gMonIcon_UnownD,
+    [SPECIES_UNOWN_E] = gMonIcon_UnownE,
+    [SPECIES_UNOWN_F] = gMonIcon_UnownF,
+    [SPECIES_UNOWN_G] = gMonIcon_UnownG,
+    [SPECIES_UNOWN_H] = gMonIcon_UnownH,
+    [SPECIES_UNOWN_I] = gMonIcon_UnownI,
+    [SPECIES_UNOWN_J] = gMonIcon_UnownJ,
+    [SPECIES_UNOWN_K] = gMonIcon_UnownK,
+    [SPECIES_UNOWN_L] = gMonIcon_UnownL,
+    [SPECIES_UNOWN_M] = gMonIcon_UnownM,
+    [SPECIES_UNOWN_N] = gMonIcon_UnownN,
+    [SPECIES_UNOWN_O] = gMonIcon_UnownO,
+    [SPECIES_UNOWN_P] = gMonIcon_UnownP,
+    [SPECIES_UNOWN_Q] = gMonIcon_UnownQ,
+    [SPECIES_UNOWN_R] = gMonIcon_UnownR,
+    [SPECIES_UNOWN_S] = gMonIcon_UnownS,
+    [SPECIES_UNOWN_T] = gMonIcon_UnownT,
+    [SPECIES_UNOWN_U] = gMonIcon_UnownU,
+    [SPECIES_UNOWN_V] = gMonIcon_UnownV,
+    [SPECIES_UNOWN_W] = gMonIcon_UnownW,
+    [SPECIES_UNOWN_X] = gMonIcon_UnownX,
+    [SPECIES_UNOWN_Y] = gMonIcon_UnownY,
+    [SPECIES_UNOWN_Z] = gMonIcon_UnownZ,
+    [SPECIES_UNOWN_EMARK] = gMonIcon_UnownExclamationMark,
+    [SPECIES_UNOWN_QMARK] = gMonIcon_UnownQuestionMark,
+
 };
 
-const u8 gMonIconPaletteIndices[NUM_SPECIES + 1] =
+const u8 gMonIconPaletteIndices[] =
 {
     [0 ... SPECIES_EGG] = 1,
+    [SPECIES_UNOWN_A ... SPECIES_UNOWN_QMARK] = 0,
 };
 
 const struct SpritePalette gMonIconPaletteTable[] =
@@ -937,14 +967,7 @@ u16 GetIconSpecies(u16 species, u32 personality)
 
     if (species == SPECIES_UNOWN)
     {
-        /*
-        u16 letter = GetUnownLetterByPersonality(personality);
-        if (letter == 0)
-            letter = SPECIES_UNOWN;
-        else
-            letter += (SPECIES_UNOWN_B - 1);
-        result = letter;
-        */
+        result = GetUnownSpeciesId(personality);
     }
     else
     {
@@ -971,20 +994,14 @@ u16 sub_80D2E84(u16 species)
 
     if (MailSpeciesToSpecies(species, &value) == SPECIES_UNOWN)
     {
-        /*
-        if (value == 0)
-            value += SPECIES_UNOWN;
-        else
-            value += (SPECIES_UNOWN_B - 1);
+        value += SPECIES_UNOWN_A;
         return value;
-        */
     }
     else
     {
-        /*
-        if (species > (SPECIES_UNOWN_B - 1))
-            species = SPECIES_OLD_UNOWN_J; // That's an oddly specific species.
-        */
+        if (species > NUM_SPECIES)
+            species = 0;
+
         return GetIconSpecies(species, 0);
     }
 }

@@ -24,6 +24,7 @@
 #include "pokeblock.h"
 #include "pokemon.h"
 #include "pokemon_animation.h"
+#include "pokemon_icon.h"
 #include "pokemon_summary_screen.h"
 #include "pokemon_storage_system.h"
 #include "random.h"
@@ -3383,6 +3384,11 @@ u8 GetGenderFromSpeciesAndPersonality(u16 species, u32 personality)
         return MON_FEMALE;
     else
         return MON_MALE;
+}
+
+u32 GetUnownSpeciesId(u32 personality)
+{
+    return GetUnownLetterByPersonality(personality) + SPECIES_UNOWN_A;
 }
 
 void SetMultiuseSpriteTemplateToPokemon(u16 speciesTag, u8 battlerPosition)

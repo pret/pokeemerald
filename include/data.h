@@ -92,7 +92,6 @@ extern const union AffineAnimCmd *const gUnknown_082FF6C0[];
 
 extern const union AnimCmd *const gUnknown_082FF70C[];
 extern const struct MonCoords gMonFrontPicCoords[];
-extern const struct CompressedSpriteSheet gMonStillFrontPicTable[];
 extern const struct MonCoords gMonBackPicCoords[];
 extern const struct CompressedSpriteSheet gMonBackPicTable[];
 extern const struct CompressedSpritePalette gMonPaletteTable[];
