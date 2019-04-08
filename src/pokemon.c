@@ -3321,7 +3321,7 @@ void GiveBoxMonInitialMoveset(struct BoxPokemon *boxMon)
     s32 level = GetLevelFromBoxMonExp(boxMon);
     s32 i;
 
-    for (i = 0; gLevelUpLearnsets[species][i] != LEVEL_UP_END; i++)
+    for (i = 0; gLevelUpLearnsets[species][i] != 0xFFFF; i++)
     {
         u16 moveLevel;
         u16 move;
@@ -3333,7 +3333,7 @@ void GiveBoxMonInitialMoveset(struct BoxPokemon *boxMon)
 
         move = LEVEL_UP_GET_MOVE(gLevelUpLearnsets[species][i]);
 
-        if (GiveMoveToBoxMon(boxMon, move) == LEVEL_UP_END)
+        if (GiveMoveToBoxMon(boxMon, move) == 0xFFFF)
             DeleteFirstMoveAndGiveMoveToBoxMon(boxMon, move);
     }
 }
@@ -3355,7 +3355,7 @@ u16 MonTryLearningNewMove(struct Pokemon *mon, bool8 firstMove)
         while ((gLevelUpLearnsets[species][sLearningMoveTableID] & LEVEL_UP_LEVEL_MASK) != LEVEL_UP_NUM_AS_LEVEL(level))
         {
             sLearningMoveTableID++;
-            if (gLevelUpLearnsets[species][sLearningMoveTableID] == LEVEL_UP_END)
+            if (gLevelUpLearnsets[species][sLearningMoveTableID] == 0xFFFF)
                 return 0;
         }
     }
@@ -6487,7 +6487,7 @@ u8 GetMoveRelearnerMoves(struct Pokemon *mon, u16 *moves)
     {
         u16 moveLevel;
 
-        if (gLevelUpLearnsets[species][i] == LEVEL_UP_END)
+        if (gLevelUpLearnsets[species][i] == 0xFFFF)
             break;
 
         moveLevel = gLevelUpLearnsets[species][i] & LEVEL_UP_LEVEL_MASK;
@@ -6516,7 +6516,7 @@ u8 GetLevelUpMovesBySpecies(u16 species, u16 *moves)
     u8 numMoves = 0;
     int i;
 
-    for (i = 0; i < 20 && gLevelUpLearnsets[species][i] != LEVEL_UP_END; i++)
+    for (i = 0; i < 20 && gLevelUpLearnsets[species][i] != 0xFFFF; i++)
          moves[numMoves++] = LEVEL_UP_GET_MOVE(gLevelUpLearnsets[species][i]);
 
      return numMoves;
@@ -6541,7 +6541,7 @@ u8 GetNumberOfRelearnableMoves(struct Pokemon *mon)
     {
         u16 moveLevel;
 
-        if (gLevelUpLearnsets[species][i] == LEVEL_UP_END)
+        if (gLevelUpLearnsets[species][i] == 0xFFFF)
             break;
 
         moveLevel = gLevelUpLearnsets[species][i] & LEVEL_UP_LEVEL_MASK;

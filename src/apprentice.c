@@ -1292,7 +1292,7 @@ static u16 sub_819FF98(u8 arg0)
     else
         level = 60;
 
-    for (j = 0; learnset[j] != LEVEL_UP_END; j++)
+    for (j = 0; learnset[j] != 0xFFFF; j++)
     {
         if ((learnset[j] & LEVEL_UP_LEVEL_MASK) > LEVEL_UP_NUM_AS_LEVEL(level))
             break;
@@ -1395,7 +1395,7 @@ static void GetLatestLearnedMoves(u16 species, u16 *moves)
         level = 60;
 
     learnset = gLevelUpLearnsets[species];
-    for (i = 0; learnset[i] != LEVEL_UP_END; i++)
+    for (i = 0; learnset[i] != 0xFFFF; i++)
     {
         if ((learnset[i] & LEVEL_UP_LEVEL_MASK) > LEVEL_UP_NUM_AS_LEVEL(level))
             break;
