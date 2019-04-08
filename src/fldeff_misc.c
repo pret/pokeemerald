@@ -23,7 +23,7 @@
 #include "constants/songs.h"
 #include "constants/vars.h"
 
-extern struct MapPosition gPlayerFacingPosition;
+EWRAM_DATA struct MapPosition gPlayerFacingPosition = {0};
 
 static void sub_80F9C90(u8);
 static void sub_80F9DFC(u8);
@@ -488,8 +488,8 @@ static void sub_80F9DFC(u8 taskId)
 
 static void SetCurrentSecretBase(void)
 {
-    sub_80E9608(&gPlayerFacingPosition, gMapHeader.events);
-    sub_80E8B6C();
+    SetCurSecretBaseIdFromPosition(&gPlayerFacingPosition, gMapHeader.events);
+    TrySetCurSecretBaseIndex();
 }
 
 static void AdjustSecretPowerSpritePixelOffsets(void)
@@ -544,7 +544,7 @@ bool8 SetUpFieldMove_SecretPower(void)
 {
     u8 mb;
 
-    sub_80E8BC8();
+    CheckPlayerHasSecretBase();
 
     if (gSpecialVar_Result == 1 || GetPlayerFacingDirection() != DIR_NORTH)
         return FALSE;
@@ -623,10 +623,8 @@ static void CaveEntranceSpriteCallback2(struct Sprite *sprite)
 {
     if (sprite->data[0] < 40)
     {
-        sprite->data[0]++;
-
-        if (sprite->data[0] == 20)
-            sub_80E8D4C();
+        if (++sprite->data[0] == 20)
+            ToggleSecretBaseEntranceMetatile();
     }
     else
     {
@@ -681,7 +679,7 @@ bool8 FldEff_SecretPowerTree(void)
                  148);
 
     if (gFieldEffectArguments[7] == 1 || gFieldEffectArguments[7] == 3)
-        sub_80E8D4C();
+        ToggleSecretBaseEntranceMetatile();
 
     return FALSE;
 }
@@ -702,7 +700,7 @@ static void TreeEntranceSpriteCallback2(struct Sprite *sprite)
     if (sprite->data[0] >= 40)
     {
         if (gFieldEffectArguments[7] == 0 || gFieldEffectArguments[7] == 2)
-            sub_80E8D4C();
+            ToggleSecretBaseEntranceMetatile();
 
         sprite->data[0] = 0;
         sprite->callback = TreeEntranceSpriteCallbackEnd;
@@ -764,7 +762,7 @@ static void ShrubEntranceSpriteCallback2(struct Sprite *sprite)
         sprite->data[0]++;
 
         if (sprite->data[0] == 20)
-            sub_80E8D4C();
+            ToggleSecretBaseEntranceMetatile();
     }
     else
     {
@@ -1168,7 +1166,7 @@ void GetShieldToyTVDecorationInfo(void)
 
 bool8 sub_80FADE4(u16 metatileId, u8 arg1)
 {
-    if (!CurrentMapIsSecretBase())
+    if (!CurMapIsSecretBase())
         return FALSE;
 
     if (!arg1)

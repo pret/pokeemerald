@@ -1124,7 +1124,7 @@
 	.byte 0xdd
 	.endm
 
-	.macro asistattackselect param0:req
+	.macro assistattackselect param0:req
 	.byte 0xde
 	.4byte \param0
 	.endm

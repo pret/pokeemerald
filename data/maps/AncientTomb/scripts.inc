@@ -1,7 +1,7 @@
 AncientTomb_MapScripts:: @ 8238FB3
 	map_script MAP_SCRIPT_ON_RESUME, AncientTomb_MapScript1_238FC3
 	map_script MAP_SCRIPT_ON_LOAD, AncientTomb_MapScript1_238FF2
-	map_script MAP_SCRIPT_ON_TRANSITION, AncientTomb_MapScript1_238FE1
+	map_script MAP_SCRIPT_ON_TRANSITION, AncientTomb_OnTransition
 	.byte 0
 
 AncientTomb_MapScript1_238FC3: @ 8238FC3
@@ -15,7 +15,7 @@ AncientTomb_EventScript_238FCD:: @ 8238FCD
 	removeobject VAR_LAST_TALKED
 	return
 
-AncientTomb_MapScript1_238FE1: @ 8238FE1
+AncientTomb_OnTransition: @ 8238FE1
 	setflag FLAG_LANDMARK_ANCIENT_TOMB
 	call_if_unset FLAG_DEFEATED_REGISTEEL, AncientTomb_EventScript_238FEE
 	end

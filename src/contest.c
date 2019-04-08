@@ -11,7 +11,7 @@
 #include "battle.h"
 #include "battle_anim.h"
 #include "contest.h"
-#include "data2.h"
+#include "data.h"
 #include "decompress.h"
 #include "graphics.h"
 #include "link.h"
@@ -41,7 +41,7 @@
 #include "contest_link_80FC4F4.h"
 #include "script_pokemon_util_80F87D8.h"
 #include "international_string_util.h"
-#include "data2.h"
+#include "data.h"
 #include "constants/rgb.h"
 #include "contest_ai.h"
 
@@ -269,8 +269,6 @@ extern const u8 gText_Contest_Fear[];
 extern const u8 gText_BDot[];
 extern const u8 gText_CDot[];
 extern const u8 *const gUnknown_08587E10[];
-extern const union AffineAnimCmd *const gUnknown_082FF6C0[];
-extern const union AffineAnimCmd *const gUnknown_082FF694[];
 extern const struct SpriteTemplate gSpriteTemplate_8587AD0;
 extern const struct SpriteTemplate gSpriteTemplate_8587B18[];
 extern void (*const gContestEffectFuncs[])(void);
@@ -472,18 +470,15 @@ const struct CompressedSpriteSheet gUnknown_08587B88 =
 const struct OamData gOamData_8587B90 =
 {
     .y = 0,
-    .affineMode = 0,
-    .objMode = 0,
-    .mosaic = 0,
-    .bpp = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(16x16),
     .x = 0,
-    .matrixNum = 0,
     .size = SPRITE_SIZE(16x16),
     .tileNum = 0,
     .priority = 0,
     .paletteNum = 0,
-    .affineParam = 0
 };
 
 const struct SpriteTemplate gSpriteTemplate_8587B98 =
@@ -513,18 +508,15 @@ static const struct SpritePalette sApplauseMeterPalette =
 static const struct OamData sApplauseMeterOamData =
 {
     .y = 0,
-    .affineMode = 0,
-    .objMode = 0,
-    .mosaic = 0,
-    .bpp = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(64x32),
     .x = 0,
-    .matrixNum = 0,
     .size = SPRITE_SIZE(64x32),
     .tileNum = 0,
     .priority = 0,
     .paletteNum = 0,
-    .affineParam = 0
 };
 
 static const struct SpriteTemplate sApplauseMeterSpriteTemplate =
@@ -541,18 +533,15 @@ static const struct SpriteTemplate sApplauseMeterSpriteTemplate =
 const struct OamData gOamData_8587BE0 =
 {
     .y = 0,
-    .affineMode = 0,
-    .objMode = 0,
-    .mosaic = 0,
-    .bpp = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(64x64),
     .x = 0,
-    .matrixNum = 0,
     .size = SPRITE_SIZE(64x64),
     .tileNum = 0,
     .priority = 3,
     .paletteNum = 2,
-    .affineParam = 0
 };
 
 const struct SpriteTemplate gSpriteTemplate_8587BE8 =
@@ -795,18 +784,16 @@ static const struct SpritePalette sUnknown_08589924[] =
 const struct OamData gOamData_8589944 =
 {
     .y = 0,
-    .affineMode = 3,
-    .objMode = 1,
-    .mosaic = 0,
-    .bpp = 0,
+    .affineMode = ST_OAM_AFFINE_DOUBLE,
+    .objMode = ST_OAM_OBJ_BLEND,
+    .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(64x64),
     .x = 0,
-    .matrixNum = 0,
     .size = SPRITE_SIZE(64x64),
     .tileNum = 0,
     .priority = 0,
     .paletteNum = 0,
-    .affineParam = 0
+    .affineParam = 0,
 };
 
 const union AffineAnimCmd gSpriteAffineAnim_858994C[] =
@@ -5885,3 +5872,5 @@ void sub_80DFA08(struct ContestPokemon *mon, s32 language)
         name[PLAYER_NAME_LENGTH] = EOS;
     }
 }
+
+

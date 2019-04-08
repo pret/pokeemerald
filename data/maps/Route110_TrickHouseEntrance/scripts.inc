@@ -1,10 +1,10 @@
 Route110_TrickHouseEntrance_MapScripts:: @ 8269A50
-	map_script MAP_SCRIPT_ON_TRANSITION, Route110_TrickHouseEntrance_MapScript1_269A60
+	map_script MAP_SCRIPT_ON_TRANSITION, Route110_TrickHouseEntrance_OnTransition
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, Route110_TrickHouseEntrance_MapScript2_269CEE
 	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, Route110_TrickHouseEntrance_MapScript2_269BD3
 	.byte 0
 
-Route110_TrickHouseEntrance_MapScript1_269A60: @ 8269A60
+Route110_TrickHouseEntrance_OnTransition: @ 8269A60
 	setflag FLAG_LANDMARK_TRICK_HOUSE
 	compare VAR_TRICK_HOUSE_STATE, 1
 	goto_if_eq Route110_TrickHouseEntrance_EventScript_269AF3
@@ -759,8 +759,8 @@ Route110_TrickHouseEntrance_EventScript_26A459:: @ 826A459
 	setfieldeffectargument 0, VAR_0x8004
 	setfieldeffectargument 1, VAR_0x8005
 	setfieldeffectargument 2, VAR_0x8006
-	dofieldeffect 54
-	waitfieldeffect 54
+	dofieldeffect FLDEFF_SPARKLE
+	waitfieldeffect FLDEFF_SPARKLE
 	delay 10
 	return
 

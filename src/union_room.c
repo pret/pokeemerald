@@ -32,7 +32,7 @@
 #include "palette.h"
 #include "decompress.h"
 #include "start_menu.h"
-#include "data2.h"
+#include "data.h"
 #include "field_screen_effect.h"
 #include "script_pokemon_util_80F87D8.h"
 #include "international_string_util.h"
@@ -47,6 +47,7 @@
 #include "berry_crush.h"
 #include "mystery_gift.h"
 #include "union_room_player_avatar.h"
+#include "pokemon_jump.h"
 
 EWRAM_DATA u8 gUnknown_02022C20[12] = {};
 EWRAM_DATA u8 gUnknown_02022C2C = 0;
@@ -62,8 +63,6 @@ EWRAM_DATA struct TradeUnkStruct gUnknown_02022C40 = {};
 IWRAM_DATA struct UnkStruct_Leader *gUnknown_03000DA0;
 IWRAM_DATA struct UnkStruct_Group *gUnknown_03000DA4;
 IWRAM_DATA struct UnkStruct_URoom *gUnknown_03000DA8;
-IWRAM_DATA void *gUnknown_03000DAC;
-IWRAM_DATA bool32 gUnknown_03000DB0;
 
 // this file's functions
 void sub_80173E0(u8 windowId, u8 arg1, const u8 *str, u8 arg3, u8 arg4, u8 arg5);
@@ -99,7 +98,6 @@ bool32 sub_8017678(struct UnkStruct_Shared *arg0, struct UnkStruct_Shared *arg1)
 u32 sub_8018120(struct TradeUnkStruct *arg0, u8 multiplayerId);
 void sub_801807C(struct TradeUnkStruct *arg0);
 void sub_801AC54(void);
-void sub_802A9A8(u8 monId, MainCallback callback);
 void sub_802493C(u8 monId, MainCallback callback);
 void sub_80149D8(void);
 void MG_DrawTextBorder(u8 windowId);
@@ -2334,7 +2332,7 @@ void sub_8013F90(u8 taskId)
         if (GetBlockReceivedStatus() == 3)
         {
             gEnemyParty[0] = *(struct Pokemon*)(gBlockRecvBuffer[GetMultiplayerId() ^ 1]);
-            IncrementGameStat(GAME_STAT_50);
+            IncrementGameStat(GAME_STAT_NUM_UNION_ROOM_BATTLES);
             ResetBlockReceivedFlags();
             gTasks[taskId].data[0]++;
         }

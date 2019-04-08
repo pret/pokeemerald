@@ -463,7 +463,7 @@
 #define MUS_RG_SOUSA 535        // Starting Tutorial
 #define MUS_RG_SEKAIKAN 536     // Starting Tutorial 2
 #define MUS_RG_SEIBETU 537      // Starting Tutorial 3
-#define MUS_RG_JUMP 538         // Jumping Minigame
+#define MUS_RG_JUMP 538         // Pokemon Jump Minigame
 #define MUS_RG_UNION 539        // Union Room
 #define MUS_RG_NETWORK 540      // Network Center
 #define MUS_RG_OKURIMONO 541    // Mystery Gift

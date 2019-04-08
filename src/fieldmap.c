@@ -52,15 +52,15 @@ struct MapHeader const *const mapconnection_get_mapheader(struct MapConnection *
 void InitMap(void)
 {
     InitMapLayoutData(&gMapHeader);
-    sub_80E8EE0(gMapHeader.events);
+    SetOccupiedSecretBaseEntranceMetatiles(gMapHeader.events);
     RunOnLoadMapScript();
 }
 
 void InitMapFromSavedGame(void)
 {
     InitMapLayoutData(&gMapHeader);
-    sub_80E9238(0);
-    sub_80E8EE0(gMapHeader.events);
+    InitSecretBaseAppearance(FALSE);
+    SetOccupiedSecretBaseEntranceMetatiles(gMapHeader.events);
     LoadSavedMapView();
     RunOnLoadMapScript();
     UpdateTVScreensOnMap(gBackupMapLayout.width, gBackupMapLayout.height);

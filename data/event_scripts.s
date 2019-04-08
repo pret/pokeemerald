@@ -454,7 +454,7 @@ EventScript_SecretBasePC:: @ 823B4BB
 EventScript_SecretBasePCShowMainMenu:: @ 823B4D3
 	message Text_SecretBasePCStartMenu
 	waitmessage
-	goto_if_set FLAG_DECORATION_16, EventScript_SecretBasePCMainMenuChoice
+	goto_if_set FLAG_SECRET_BASE_REGISTRY_ENABLED, EventScript_SecretBasePCMainMenuChoice
 	goto EventScript_23B531
 	end
 
@@ -487,16 +487,16 @@ EventScript_23B568:: @ 823B568
 	compare VAR_RESULT, 0
 	goto_if_eq EventScript_SecretBasePCShowMainMenu
 	closemessage
-	special sub_80E9AC0
+	special MoveOutOfSecretBase
 	releaseall
 	end
 
 EventScript_23B581:: @ 823B581
-	special sub_80E9C74
+	special ShowSecretBaseDecorationMenu
 	end
 
 EventScript_23B585:: @ 823B585
-	special sub_80E9C88
+	special ShowSecretBaseRegistryMenu
 	end
 
 EventScript_RecordMixingSecretBasePC:: @ 823B589
@@ -529,17 +529,17 @@ gUnknown_0823B5E9:: @ 823B5E9
 	end
 
 EventScript_23B5F0:: @ 823B5F0
-	special sub_80E9BDC
+	special GetCurSecretBaseRegistrationValidity
 	compare VAR_RESULT, 1
 	goto_if_eq EventScript_23B62F
 	compare VAR_RESULT, 2
 	goto_if_eq EventScript_CantRegisterTooManyBases
-	special sub_80E980C
-	msgbox Text_276707, MSGBOX_YESNO
+	special CopyCurSecretBaseOwnerName_StrVar1
+	msgbox Text_WantToRegisterSecretBase, MSGBOX_YESNO
 	compare VAR_RESULT, 0
 	goto_if_eq EventScript_23B5A1
 	msgbox Text_2767D1, MSGBOX_SIGN
-	special sub_80E9C2C
+	special ToggleCurSecretBaseRegistry
 	special DoSecretBasePCTurnOffEffect
 	releaseall
 	end
@@ -549,7 +549,7 @@ EventScript_23B62F:: @ 823B62F
 	compare VAR_RESULT, 0
 	goto_if_eq EventScript_23B5A1
 	msgbox Text_2767E9, MSGBOX_SIGN
-	special sub_80E9C2C
+	special ToggleCurSecretBaseRegistry
 	special DoSecretBasePCTurnOffEffect
 	releaseall
 	end
@@ -573,23 +573,23 @@ EventScript_23B66E:: @ 823B66E
 	end
 
 EventScript_23B674:: @ 823B674
-	special sub_80EB498
+	special SetSecretBaseSecretsTvFlags_Poster
 	end
 
 EventScript_23B678:: @ 823B678
-	special sub_80EB56C
+	special SetSecretBaseSecretsTvFlags_MiscFurnature
 	end
 
 EventScript_23B67C:: @ 823B67C
-	special sub_80EB9E0
+	special SetSecretBaseSecretsTvFlags_LargeDecorationSpot
 	end
 
 EventScript_23B680:: @ 823B680
-	special sub_80EBB28
+	special SetSecretBaseSecretsTvFlags_SmallDecorationSpot
 	end
 
 EventScript_SecretBaseSandOrnament:: @ 823B684
-	special sub_80EBE7C
+	special SetSecretBaseSecretsTvFlags_SandOrnament
 	dofieldeffect FLDEFF_SAND_PILLAR
 	waitstate
 	end

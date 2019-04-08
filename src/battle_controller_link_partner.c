@@ -9,7 +9,7 @@
 #include "battle_tower.h"
 #include "battle_tv.h"
 #include "bg.h"
-#include "data2.h"
+#include "data.h"
 #include "link.h"
 #include "main.h"
 #include "m4a.h"
@@ -28,9 +28,6 @@
 #include "constants/songs.h"
 #include "constants/trainers.h"
 #include "recorded_battle.h"
-
-extern const struct CompressedSpritePalette gTrainerFrontPicPaletteTable[];
-extern const struct CompressedSpritePalette gTrainerBackPicPaletteTable[];
 
 // this file's functions
 static void LinkPartnerHandleGetMonData(void);

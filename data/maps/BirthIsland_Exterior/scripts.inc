@@ -68,9 +68,9 @@ BirthIsland_Exterior_EventScript_267FC1:: @ 8267FC1
 	setfieldeffectargument 0, 1
 	setfieldeffectargument 1, 58
 	setfieldeffectargument 2, 26
-	dofieldeffect 65
+	dofieldeffect FLDEFF_65
 	playbgm MUS_RG_DEOEYE, 0
-	waitfieldeffect 65
+	waitfieldeffect FLDEFF_65
 	addobject 2
 	applymovement 2, BirthIsland_Exterior_Movement_268054
 	waitmovement 0

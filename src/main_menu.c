@@ -23,7 +23,7 @@
 #include "palette.h"
 #include "pokeball.h"
 #include "pokedex.h"
-#include "pokemon_3.h"
+#include "pokemon.h"
 #include "random.h"
 #include "rtc.h"
 #include "save.h"

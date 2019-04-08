@@ -139,7 +139,7 @@ void sub_8022960(struct BerryCrushGame *);
 void sub_8022524(struct BerryCrushGame_138 *, u16);
 void sub_8022B28(struct Sprite *);
 
-extern struct BerryCrushGame *gUnknown_02022C90;
+static EWRAM_DATA struct BerryCrushGame *gUnknown_02022C90 = NULL;
 
 extern const struct BgTemplate gUnknown_082F32C8[4];
 extern const u8 gBerryCrushGrinderTopTilemap[];

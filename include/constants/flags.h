@@ -287,7 +287,7 @@
 #define FLAG_RECEIVED_TM41                   0x109
 #define FLAG_RECEIVED_LAVARIDGE_EGG          0x10A
 #define FLAG_RECEIVED_REVIVED_FOSSIL_MON     0x10B
-#define FLAG_DECORATION_16                   0x10C
+#define FLAG_SECRET_BASE_REGISTRY_ENABLED    0x10C
 #define FLAG_RECEIVED_TM46                   0x10D
 #define FLAG_CONTEST_SKETCH_CREATED          0x10E
 #define FLAG_EVIL_TEAM_ESCAPED_STERN_SPOKE   0x10F
@@ -445,13 +445,14 @@
 #define FLAG_REMATCH_NORMAN                  0x1A2
 #define FLAG_REMATCH_WINONA                  0x1A3
 #define FLAG_REMATCH_TATE_AND_LIZA           0x1A4
-#define FLAG_REMATCH_JUAN                    0x1A5
-#define FLAG_REMATCH_SIDNEY                  0x1A6
-#define FLAG_REMATCH_PHOEBE                  0x1A7
-#define FLAG_REMATCH_GLACIA                  0x1A8
-#define FLAG_REMATCH_DRAKE                   0x1A9
-#define FLAG_REMATCH_WALLACE                 0x1AA
+// Note: FLAG_REMATCH_JUAN is handled by FLAG_ENABLE_JUAN_MATCH_CALL instead.
+#define FLAG_REMATCH_SIDNEY                  0x1A5
+#define FLAG_REMATCH_PHOEBE                  0x1A6
+#define FLAG_REMATCH_GLACIA                  0x1A7
+#define FLAG_REMATCH_DRAKE                   0x1A8
+#define FLAG_REMATCH_WALLACE                 0x1A9
 
+#define FLAG_UNUSED_0x1AA                    0x1AA // Unused Flag
 #define FLAG_UNUSED_0x1AB                    0x1AB // Unused Flag
 
 #define FLAG_DEFEATED_DEOXYS                 0x1AC

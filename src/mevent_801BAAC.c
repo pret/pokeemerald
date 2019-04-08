@@ -36,7 +36,7 @@ struct UnkStruct_203F3C8_02DC
 
 struct UnkStruct_203F3C8
 {
-    /*0000*/ struct MEventBuffer_32E0_Sub unk_0000;
+    /*0000*/ struct WonderCard unk_0000;
     /*014c*/ struct MEventBuffer_3430_Sub unk_014C;
     /*0170*/ const struct UnkStruct_8467FB8 * unk_0170;
     /*0174*/ u8 unk_0174;
@@ -151,7 +151,7 @@ const struct UnkStruct_8467FB8 gUnknown_082F1D60[8] = {
     {1, 0, 0, 7, gWonderCardBgGfx8, gWonderCardBgTilemap8, gWonderCardBgPal8}
 };
 
-bool32 InitWonderCardResources(struct MEventBuffer_32E0_Sub * r5, struct MEventBuffer_3430_Sub * r6)
+bool32 InitWonderCardResources(struct WonderCard * r5, struct MEventBuffer_3430_Sub * r6)
 {
     if (r5 == NULL || r6 == NULL)
         return FALSE;
@@ -466,7 +466,7 @@ void sub_801C61C(void)
 
 struct UnkStruct_203F3CC
 {
-    /*0000*/ struct MEventBuffer_3120_Sub unk_0000;
+    /*0000*/ struct WonderNews unk_0000;
     /*01bc*/ const struct UnkStruct_8467FB8 * unk_01BC;
     /*01c0*/ u8 unk_01C0_0:1;
              u8 unk_01C0_1:7;
@@ -543,7 +543,7 @@ const struct UnkStruct_8467FB8 gUnknown_082F24C8[] = {
     {1, 0, 0, 0, gWonderNewsGfx8, gWonderNewsTilemap8, gWonderNewsPal8}
 };
 
-bool32 InitWonderNewsResources(const struct MEventBuffer_3120_Sub * a0)
+bool32 InitWonderNewsResources(const struct WonderNews * a0)
 {
     if (a0 == NULL)
         return FALSE;

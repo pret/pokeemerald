@@ -8,7 +8,7 @@
 #include "bg.h"
 #include "constants/items.h"
 #include "constants/songs.h"
-#include "data2.h"
+#include "data.h"
 #include "decompress.h"
 #include "event_data.h"
 #include "event_object_movement.h"

@@ -21,7 +21,7 @@
 #include "apprentice.h"
 #include "pokedex.h"
 #include "recorded_battle.h"
-#include "data2.h"
+#include "data.h"
 #include "record_mixing.h"
 #include "strings.h"
 #include "alloc.h"

@@ -1,13 +1,14 @@
 #include "global.h"
-#include "battle.h" // to get rid of once gMonSpritesGfxPtr is put elsewhere
+#include "alloc.h"
+#include "battle.h"
 #include "bg.h"
-#include "data2.h"
+#include "data.h"
 #include "decompress.h"
 #include "event_data.h"
 #include "gpu_regs.h"
 #include "graphics.h"
+#include "item_menu.h"
 #include "main.h"
-#include "alloc.h"
 #include "menu.h"
 #include "menu_helpers.h"
 #include "m4a.h"
@@ -50,10 +51,8 @@ struct PokeblockFeedStruct
     u8 unused;
 };
 
-extern u16 gSpecialVar_ItemId;
 extern struct MusicPlayerInfo gMPlayInfo_BGM;
 
-extern const struct CompressedSpriteSheet gMonFrontPicTable[];
 extern const u16 gUnknown_0860F074[];
 
 // this file's functions

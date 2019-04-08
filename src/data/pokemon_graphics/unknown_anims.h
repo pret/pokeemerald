@@ -1,36 +1,5 @@
-const union AnimCmd gUnknown_082FF6EC[] =
-{
-    ANIMCMD_FRAME(0, 0),
-    ANIMCMD_END,
-};
-
-const union AnimCmd gUnknown_082FF6F4[] =
-{
-    ANIMCMD_FRAME(1, 0),
-    ANIMCMD_END,
-};
-
-const union AnimCmd gUnknown_082FF6FC[] =
-{
-    ANIMCMD_FRAME(2, 0),
-    ANIMCMD_END,
-};
-
-const union AnimCmd gUnknown_082FF704[] =
-{
-    ANIMCMD_FRAME(3, 0),
-    ANIMCMD_END,
-};
-
-const union AnimCmd *const gPlayerMonSpriteAnimsTable[] =
-{
-    gUnknown_082FF6EC,
-    gUnknown_082FF6F4,
-    gUnknown_082FF6FC,
-    gUnknown_082FF704,
-};
-
-const union AnimCmd gUnknown_082FF71C[] =
+// unused and unkown
+static const union AnimCmd gUnknown_082FF71C[] =
 {
     ANIMCMD_FRAME(0, 1),
     ANIMCMD_FRAME(1, 25),
@@ -40,7 +9,7 @@ const union AnimCmd gUnknown_082FF71C[] =
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_082FF734[] =
+static const union AnimCmd gUnknown_082FF734[] =
 {
     ANIMCMD_FRAME(0, 1),
     ANIMCMD_FRAME(2, 8),
@@ -48,20 +17,20 @@ const union AnimCmd gUnknown_082FF734[] =
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_082FF744[] =
+static const union AnimCmd gUnknown_082FF744[] =
 {
     ANIMCMD_FRAME(0, 10),
     ANIMCMD_FRAME(2, 10),
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_082FF750[] =
+static const union AnimCmd gUnknown_082FF750[] =
 {
     ANIMCMD_FRAME(0, 10),
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_082FF758[] =
+static const union AnimCmd gUnknown_082FF758[] =
 {
     ANIMCMD_FRAME(0, 1),
     ANIMCMD_FRAME(1, 5),
@@ -72,7 +41,7 @@ const union AnimCmd gUnknown_082FF758[] =
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_082FF774[] =
+static const union AnimCmd gUnknown_082FF774[] =
 {
     ANIMCMD_FRAME(0, 1),
     ANIMCMD_FRAME(2, 12),
@@ -83,14 +52,14 @@ const union AnimCmd gUnknown_082FF774[] =
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_082FF790[] =
+static const union AnimCmd gUnknown_082FF790[] =
 {
     ANIMCMD_FRAME(0, 14),
     ANIMCMD_FRAME(2, 12),
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_082FF79C[] =
+static const union AnimCmd gUnknown_082FF79C[] =
 {
     ANIMCMD_FRAME(0, 10),
     ANIMCMD_FRAME(1, 10),
@@ -99,7 +68,7 @@ const union AnimCmd gUnknown_082FF79C[] =
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_082FF7B0[] =
+static const union AnimCmd gUnknown_082FF7B0[] =
 {
     ANIMCMD_FRAME(0, 10),
     ANIMCMD_FRAME(2, 10),
@@ -108,193 +77,193 @@ const union AnimCmd gUnknown_082FF7B0[] =
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_082FF7C4[] =
+static const union AnimCmd gUnknown_082FF7C4[] =
 {
     ANIMCMD_FRAME(0, 1),
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_082FF7CC[] =
+static const union AnimCmd gUnknown_082FF7CC[] =
 {
     ANIMCMD_FRAME(0, 5),
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_082FF7D4[] =
+static const union AnimCmd gUnknown_082FF7D4[] =
 {
     ANIMCMD_FRAME(0, 5),
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_082FF7DC[] =
+static const union AnimCmd gUnknown_082FF7DC[] =
 {
     ANIMCMD_FRAME(0, 1),
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_082FF7E4[] =
+static const union AnimCmd gUnknown_082FF7E4[] =
 {
     ANIMCMD_FRAME(1, 1),
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_082FF7EC[] =
+static const union AnimCmd gUnknown_082FF7EC[] =
 {
     ANIMCMD_FRAME(0, 1),
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_082FF7F4[] =
+static const union AnimCmd gUnknown_082FF7F4[] =
 {
     ANIMCMD_FRAME(1, 1),
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_082FF7FC[] =
+static const union AnimCmd gUnknown_082FF7FC[] =
 {
     ANIMCMD_FRAME(0, 1),
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_082FF804[] =
+static const union AnimCmd gUnknown_082FF804[] =
 {
     ANIMCMD_FRAME(1, 1),
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_082FF80C[] =
+static const union AnimCmd gUnknown_082FF80C[] =
 {
     ANIMCMD_FRAME(0, 1),
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_082FF814[] =
+static const union AnimCmd gUnknown_082FF814[] =
 {
     ANIMCMD_FRAME(1, 1),
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_082FF81C[] =
+static const union AnimCmd gUnknown_082FF81C[] =
 {
     ANIMCMD_FRAME(0, 1),
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_082FF824[] =
+static const union AnimCmd gUnknown_082FF824[] =
 {
     ANIMCMD_FRAME(1, 1),
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_082FF82C[] =
+static const union AnimCmd gUnknown_082FF82C[] =
 {
     ANIMCMD_FRAME(0, 1),
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_082FF834[] =
+static const union AnimCmd gUnknown_082FF834[] =
 {
     ANIMCMD_FRAME(0, 1),
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_082FF83C[] =
+static const union AnimCmd gUnknown_082FF83C[] =
 {
     ANIMCMD_FRAME(1, 1),
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_082FF844[] =
+static const union AnimCmd gUnknown_082FF844[] =
 {
     ANIMCMD_FRAME(0, 1),
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_082FF84C[] =
+static const union AnimCmd gUnknown_082FF84C[] =
 {
     ANIMCMD_FRAME(0, 1),
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_082FF854[] =
+static const union AnimCmd gUnknown_082FF854[] =
 {
     ANIMCMD_FRAME(0, 1),
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_082FF85C[] =
+static const union AnimCmd gUnknown_082FF85C[] =
 {
     ANIMCMD_FRAME(1, 1),
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_082FF864[] =
+static const union AnimCmd gUnknown_082FF864[] =
 {
     ANIMCMD_FRAME(0, 5),
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_082FF86C[] =
+static const union AnimCmd gUnknown_082FF86C[] =
 {
     ANIMCMD_FRAME(0, 5),
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_082FF874[] =
+static const union AnimCmd gUnknown_082FF874[] =
 {
     ANIMCMD_FRAME(0, 5),
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_082FF87C[] =
+static const union AnimCmd gUnknown_082FF87C[] =
 {
     ANIMCMD_FRAME(0, 1),
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_082FF884[] =
+static const union AnimCmd gUnknown_082FF884[] =
 {
     ANIMCMD_FRAME(0, 1),
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_082FF88C[] =
+static const union AnimCmd gUnknown_082FF88C[] =
 {
     ANIMCMD_FRAME(0, 1),
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_082FF894[] =
+static const union AnimCmd gUnknown_082FF894[] =
 {
     ANIMCMD_FRAME(1, 1),
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_082FF89C[] =
+static const union AnimCmd gUnknown_082FF89C[] =
 {
     ANIMCMD_FRAME(0, 1),
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_082FF8A4[] =
+static const union AnimCmd gUnknown_082FF8A4[] =
 {
     ANIMCMD_FRAME(1, 1),
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_082FF8AC[] =
+static const union AnimCmd gUnknown_082FF8AC[] =
 {
     ANIMCMD_FRAME(0, 1),
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_082FF8B4[] =
+static const union AnimCmd gUnknown_082FF8B4[] =
 {
     ANIMCMD_FRAME(1, 1),
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_082FF8BC[] =
+static const union AnimCmd gUnknown_082FF8BC[] =
 {
     ANIMCMD_FRAME(0, 15),
     ANIMCMD_FRAME(8, 15),
@@ -314,7 +283,7 @@ const union AnimCmd gUnknown_082FF8BC[] =
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_082FF8FC[] =
+static const union AnimCmd gUnknown_082FF8FC[] =
 {
     ANIMCMD_FRAME(0, 10),
     ANIMCMD_FRAME(8, 15),
@@ -326,7 +295,7 @@ const union AnimCmd gUnknown_082FF8FC[] =
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_082FF91C[] =
+static const union AnimCmd gUnknown_082FF91C[] =
 {
     ANIMCMD_FRAME(0, 10),
     ANIMCMD_FRAME(9, 10),
@@ -335,26 +304,26 @@ const union AnimCmd gUnknown_082FF91C[] =
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_082FF930[] =
+static const union AnimCmd gUnknown_082FF930[] =
 {
     ANIMCMD_FRAME(0, 15),
     ANIMCMD_FRAME(11, 15),
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_082FF93C[] =
+static const union AnimCmd gUnknown_082FF93C[] =
 {
     ANIMCMD_FRAME(0, 1),
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_082FF944[] =
+static const union AnimCmd gUnknown_082FF944[] =
 {
     ANIMCMD_FRAME(0, 1),
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_082FF94C[] =
+static const union AnimCmd gUnknown_082FF94C[] =
 {
     ANIMCMD_FRAME(0, 10),
     ANIMCMD_FRAME(1, 7),
@@ -381,7 +350,7 @@ const union AnimCmd gUnknown_082FF94C[] =
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_082FF9A8[] =
+static const union AnimCmd gUnknown_082FF9A8[] =
 {
     ANIMCMD_FRAME(0, 12),
     ANIMCMD_FRAME(7, 12),
@@ -407,7 +376,7 @@ const union AnimCmd gUnknown_082FF9A8[] =
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_082FFA00[] =
+static const union AnimCmd gUnknown_082FFA00[] =
 {
     ANIMCMD_FRAME(0, 12),
     ANIMCMD_FRAME(7, 12),
@@ -433,182 +402,182 @@ const union AnimCmd gUnknown_082FFA00[] =
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_082FFA58[] =
+static const union AnimCmd gUnknown_082FFA58[] =
 {
     ANIMCMD_FRAME(0,18),
     ANIMCMD_FRAME(10, 18),
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_082FFA64[] =
+static const union AnimCmd gUnknown_082FFA64[] =
 {
     ANIMCMD_FRAME(0, 1),
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_082FFA6C[] =
+static const union AnimCmd gUnknown_082FFA6C[] =
 {
     ANIMCMD_FRAME(0, 1),
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_082FFA74[] =
+static const union AnimCmd gUnknown_082FFA74[] =
 {
     ANIMCMD_FRAME(0, 1),
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_082FFA7C[] =
+static const union AnimCmd gUnknown_082FFA7C[] =
 {
     ANIMCMD_FRAME(0, 1),
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_082FFA84[] =
+static const union AnimCmd gUnknown_082FFA84[] =
 {
     ANIMCMD_FRAME(1, 1),
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_082FFA8C[] =
+static const union AnimCmd gUnknown_082FFA8C[] =
 {
     ANIMCMD_FRAME(0, 1),
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_082FFA94[] =
+static const union AnimCmd gUnknown_082FFA94[] =
 {
     ANIMCMD_FRAME(1, 1),
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_082FFA9C[] =
+static const union AnimCmd gUnknown_082FFA9C[] =
 {
     ANIMCMD_FRAME(0, 1),
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_082FFAA4[] =
+static const union AnimCmd gUnknown_082FFAA4[] =
 {
     ANIMCMD_FRAME(1, 1),
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_082FFAAC[] =
+static const union AnimCmd gUnknown_082FFAAC[] =
 {
     ANIMCMD_FRAME(0, 1),
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_082FFAB4[] =
+static const union AnimCmd gUnknown_082FFAB4[] =
 {
     ANIMCMD_FRAME(1, 1),
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_082FFABC[] =
+static const union AnimCmd gUnknown_082FFABC[] =
 {
     ANIMCMD_FRAME(0, 1),
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_082FFAC4[] =
+static const union AnimCmd gUnknown_082FFAC4[] =
 {
     ANIMCMD_FRAME(1, 1),
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_082FFACC[] =
+static const union AnimCmd gUnknown_082FFACC[] =
 {
     ANIMCMD_FRAME(0, 1),
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_082FFAD4[] =
+static const union AnimCmd gUnknown_082FFAD4[] =
 {
     ANIMCMD_FRAME(1, 1),
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_082FFADC[] =
+static const union AnimCmd gUnknown_082FFADC[] =
 {
     ANIMCMD_FRAME(0, 1),
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_082FFAE4[] =
+static const union AnimCmd gUnknown_082FFAE4[] =
 {
     ANIMCMD_FRAME(0, 63),
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_082FFAEC[] =
+static const union AnimCmd gUnknown_082FFAEC[] =
 {
     ANIMCMD_FRAME(0, 63),
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_082FFAF4[] =
+static const union AnimCmd gUnknown_082FFAF4[] =
 {
     ANIMCMD_FRAME(0, 63),
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_082FFAFC[] =
+static const union AnimCmd gUnknown_082FFAFC[] =
 {
     ANIMCMD_FRAME(0, 63),
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_082FFB04[] =
+static const union AnimCmd gUnknown_082FFB04[] =
 {
     ANIMCMD_FRAME(0, 1),
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_082FFB0C[] =
+static const union AnimCmd gUnknown_082FFB0C[] =
 {
     ANIMCMD_FRAME(1, 1),
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_082FFB14[] =
+static const union AnimCmd gUnknown_082FFB14[] =
 {
     ANIMCMD_FRAME(0, 1),
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_082FFB1C[] =
+static const union AnimCmd gUnknown_082FFB1C[] =
 {
     ANIMCMD_FRAME(0, 1),
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_082FFB24[] =
+static const union AnimCmd gUnknown_082FFB24[] =
 {
     ANIMCMD_FRAME(1, 1),
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_082FFB2C[] =
+static const union AnimCmd gUnknown_082FFB2C[] =
 {
     ANIMCMD_FRAME(0, 1),
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_082FFB34[] =
+static const union AnimCmd gUnknown_082FFB34[] =
 {
     ANIMCMD_FRAME(0, 5),
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_082FFB3C[] =
+static const union AnimCmd gUnknown_082FFB3C[] =
 {
     ANIMCMD_FRAME(0, 5),
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_082FFB44[] =
+static const union AnimCmd gUnknown_082FFB44[] =
 {
     ANIMCMD_FRAME(0, 1),
     ANIMCMD_FRAME(1, 18),
@@ -619,7 +588,7 @@ const union AnimCmd gUnknown_082FFB44[] =
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_082FFB60[] =
+static const union AnimCmd gUnknown_082FFB60[] =
 {
     ANIMCMD_FRAME(0, 1),
     ANIMCMD_FRAME(2, 18),
@@ -630,7 +599,7 @@ const union AnimCmd gUnknown_082FFB60[] =
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_082FFB7C[] =
+static const union AnimCmd gUnknown_082FFB7C[] =
 {
     ANIMCMD_FRAME(0, 5),
     ANIMCMD_FRAME(2, 5),
@@ -650,7 +619,7 @@ const union AnimCmd gUnknown_082FFB7C[] =
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_082FFBBC[] =
+static const union AnimCmd gUnknown_082FFBBC[] =
 {
     ANIMCMD_FRAME(0, 6),
     ANIMCMD_FRAME(1, 6),
@@ -663,7 +632,7 @@ const union AnimCmd gUnknown_082FFBBC[] =
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_082FFBE0[] =
+static const union AnimCmd gUnknown_082FFBE0[] =
 {
     ANIMCMD_FRAME(0, 12),
     ANIMCMD_FRAME(5, 12),
@@ -672,61 +641,61 @@ const union AnimCmd gUnknown_082FFBE0[] =
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_082FFBF4[] =
+static const union AnimCmd gUnknown_082FFBF4[] =
 {
     ANIMCMD_FRAME(7, 1),
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_082FFBFC[] =
+static const union AnimCmd gUnknown_082FFBFC[] =
 {
     ANIMCMD_FRAME(0, 1),
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_082FFC04[] =
+static const union AnimCmd gUnknown_082FFC04[] =
 {
     ANIMCMD_FRAME(1, 1),
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_082FFC0C[] =
+static const union AnimCmd gUnknown_082FFC0C[] =
 {
     ANIMCMD_FRAME(0, 63),
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_082FFC14[] =
+static const union AnimCmd gUnknown_082FFC14[] =
 {
     ANIMCMD_FRAME(0, 63),
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_082FFC1C[] =
+static const union AnimCmd gUnknown_082FFC1C[] =
 {
     ANIMCMD_FRAME(0, 63),
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_082FFC24[] =
+static const union AnimCmd gUnknown_082FFC24[] =
 {
     ANIMCMD_FRAME(0, 1),
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_082FFC2C[] =
+static const union AnimCmd gUnknown_082FFC2C[] =
 {
     ANIMCMD_FRAME(0, 1),
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_082FFC34[] =
+static const union AnimCmd gUnknown_082FFC34[] =
 {
     ANIMCMD_FRAME(0, 1),
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_082FFC3C[] =
+static const union AnimCmd gUnknown_082FFC3C[] =
 {
     ANIMCMD_FRAME(0, 1),
     ANIMCMD_FRAME(1, 10),
@@ -737,7 +706,7 @@ const union AnimCmd gUnknown_082FFC3C[] =
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_082FFC58[] =
+static const union AnimCmd gUnknown_082FFC58[] =
 {
     ANIMCMD_FRAME(0, 1),
     ANIMCMD_FRAME(2, 8),
@@ -748,217 +717,217 @@ const union AnimCmd gUnknown_082FFC58[] =
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_082FFC74[] =
+static const union AnimCmd gUnknown_082FFC74[] =
 {
     ANIMCMD_FRAME(0, 1),
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_082FFC7C[] =
+static const union AnimCmd gUnknown_082FFC7C[] =
 {
     ANIMCMD_FRAME(0, 10),
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_082FFC84[] =
+static const union AnimCmd gUnknown_082FFC84[] =
 {
     ANIMCMD_FRAME(1, 9),
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_082FFC8C[] =
+static const union AnimCmd gUnknown_082FFC8C[] =
 {
     ANIMCMD_FRAME(0, 1),
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_082FFC94[] =
+static const union AnimCmd gUnknown_082FFC94[] =
 {
     ANIMCMD_FRAME(1, 1),
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_082FFC9C[] =
+static const union AnimCmd gUnknown_082FFC9C[] =
 {
     ANIMCMD_FRAME(0, 10),
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_082FFCA4[] =
+static const union AnimCmd gUnknown_082FFCA4[] =
 {
     ANIMCMD_FRAME(1, 10),
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_082FFCAC[] =
+static const union AnimCmd gUnknown_082FFCAC[] =
 {
     ANIMCMD_FRAME(0, 5),
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_082FFCB4[] =
+static const union AnimCmd gUnknown_082FFCB4[] =
 {
     ANIMCMD_FRAME(0, 5),
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_082FFCBC[] =
+static const union AnimCmd gUnknown_082FFCBC[] =
 {
     ANIMCMD_FRAME(0, 5),
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_082FFCC4[] =
+static const union AnimCmd gUnknown_082FFCC4[] =
 {
     ANIMCMD_FRAME(0, 5),
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_082FFCCC[] =
+static const union AnimCmd gUnknown_082FFCCC[] =
 {
     ANIMCMD_FRAME(0, 5),
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_082FFCD4[] =
+static const union AnimCmd gUnknown_082FFCD4[] =
 {
     ANIMCMD_FRAME(0, 5),
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_082FFCDC[] =
+static const union AnimCmd gUnknown_082FFCDC[] =
 {
     ANIMCMD_FRAME(0, 1),
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_082FFCE4[] =
+static const union AnimCmd gUnknown_082FFCE4[] =
 {
     ANIMCMD_FRAME(0, 1),
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_082FFCEC[] =
+static const union AnimCmd gUnknown_082FFCEC[] =
 {
     ANIMCMD_FRAME(0, 1),
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_082FFCF4[] =
+static const union AnimCmd gUnknown_082FFCF4[] =
 {
     ANIMCMD_FRAME(1, 1),
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_082FFCFC[] =
+static const union AnimCmd gUnknown_082FFCFC[] =
 {
     ANIMCMD_FRAME(0, 1),
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_082FFD04[] =
+static const union AnimCmd gUnknown_082FFD04[] =
 {
     ANIMCMD_FRAME(0, 5),
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_082FFD0C[] =
+static const union AnimCmd gUnknown_082FFD0C[] =
 {
     ANIMCMD_FRAME(0, 5),
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_082FFD14[] =
+static const union AnimCmd gUnknown_082FFD14[] =
 {
     ANIMCMD_FRAME(0, 5),
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_082FFD1C[] =
+static const union AnimCmd gUnknown_082FFD1C[] =
 {
     ANIMCMD_FRAME(0, 1),
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_082FFD24[] =
+static const union AnimCmd gUnknown_082FFD24[] =
 {
     ANIMCMD_FRAME(1, 1),
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_082FFD2C[] =
+static const union AnimCmd gUnknown_082FFD2C[] =
 {
     ANIMCMD_FRAME(2, 1),
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_082FFD34[] =
+static const union AnimCmd gUnknown_082FFD34[] =
 {
     ANIMCMD_FRAME(3, 1),
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_082FFD3C[] =
+static const union AnimCmd gUnknown_082FFD3C[] =
 {
     ANIMCMD_FRAME(0, 63),
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_082FFD44[] =
+static const union AnimCmd gUnknown_082FFD44[] =
 {
     ANIMCMD_FRAME(0, 63),
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_082FFD4C[] =
+static const union AnimCmd gUnknown_082FFD4C[] =
 {
     ANIMCMD_FRAME(0, 1),
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_082FFD54[] =
+static const union AnimCmd gUnknown_082FFD54[] =
 {
     ANIMCMD_FRAME(1, 1),
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_082FFD5C[] =
+static const union AnimCmd gUnknown_082FFD5C[] =
 {
     ANIMCMD_FRAME(0, 1),
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_082FFD64[] =
+static const union AnimCmd gUnknown_082FFD64[] =
 {
     ANIMCMD_FRAME(1, 1),
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_082FFD6C[] =
+static const union AnimCmd gUnknown_082FFD6C[] =
 {
     ANIMCMD_FRAME(0, 1),
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_082FFD74[] =
+static const union AnimCmd gUnknown_082FFD74[] =
 {
     ANIMCMD_FRAME(1, 1),
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_082FFD7C[] =
+static const union AnimCmd gUnknown_082FFD7C[] =
 {
     ANIMCMD_FRAME(0, 1),
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_082FFD84[] =
+static const union AnimCmd gUnknown_082FFD84[] =
 {
     ANIMCMD_FRAME(1, 1),
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_082FFD8C[] =
+static const union AnimCmd gUnknown_082FFD8C[] =
 {
     ANIMCMD_FRAME(0, 20),
     ANIMCMD_FRAME(1, 30),
@@ -967,7 +936,7 @@ const union AnimCmd gUnknown_082FFD8C[] =
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_082FFDA0[] =
+static const union AnimCmd gUnknown_082FFDA0[] =
 {
     ANIMCMD_FRAME(0, 20),
     ANIMCMD_FRAME(2, 20),
@@ -976,933 +945,933 @@ const union AnimCmd gUnknown_082FFDA0[] =
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_082FFDB4[] =
+static const union AnimCmd gUnknown_082FFDB4[] =
 {
     ANIMCMD_FRAME(0, 10),
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_082FFDBC[] =
+static const union AnimCmd gUnknown_082FFDBC[] =
 {
     ANIMCMD_FRAME(0, 10),
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_082FFDC4[] =
+static const union AnimCmd gUnknown_082FFDC4[] =
 {
     ANIMCMD_FRAME(0, 1),
     ANIMCMD_END,
 };
 
-const union AnimCmd *const gUnknown_082FFDCC[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_082FFDD0[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_082FFDD4[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_082FFDD8[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_082FFDDC[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_082FFDE0[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_082FFDE4[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_082FFDE8[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_082FFDEC[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_082FFDF0[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_082FFDF4[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_082FFDF8[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_082FFDFC[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_082FFE00[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_082FFE04[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_082FFE08[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_082FFE0C[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_082FFE10[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_082FFE14[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_082FFE18[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_082FFE1C[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_082FFE20[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_082FFE24[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_082FFE28[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_082FFE2C[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_082FFE30[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_082FFE34[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_082FFE38[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_082FFE3C[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_082FFE40[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_082FFE44[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_082FFE48[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_082FFE4C[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_082FFE50[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_082FFE54[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_082FFE58[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_082FFE5C[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_082FFE60[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_082FFE64[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_082FFE68[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_082FFE6C[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_082FFE70[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_082FFE74[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_082FFE78[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_082FFE7C[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_082FFE80[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_082FFE84[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_082FFE88[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_082FFE8C[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_082FFE90[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_082FFE94[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_082FFE98[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_082FFE9C[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_082FFEA0[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_082FFEA4[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_082FFEA8[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_082FFEAC[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_082FFEB0[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_082FFEB4[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_082FFEB8[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_082FFEBC[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_082FFEC0[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_082FFEC4[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_082FFEC8[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_082FFECC[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_082FFED0[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_082FFED4[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_082FFED8[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_082FFEDC[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_082FFEE0[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_082FFEE4[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_082FFEE8[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_082FFEEC[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_082FFEF0[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_082FFEF4[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_082FFEF8[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_082FFEFC[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_082FFF00[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_082FFF04[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_082FFF08[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_082FFF0C[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_082FFF10[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_082FFF14[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_082FFF18[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_082FFF1C[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_082FFF20[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_082FFF24[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_082FFF28[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_082FFF2C[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_082FFF30[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_082FFF34[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_082FFF38[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_082FFF3C[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_082FFF40[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_082FFF44[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_082FFF48[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_082FFF4C[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_082FFF50[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_082FFF54[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_082FFF58[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_082FFF5C[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_082FFF60[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_082FFF64[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_082FFF68[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_082FFF6C[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_082FFF70[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_082FFF74[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_082FFF78[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_082FFF7C[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_082FFF80[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_082FFF84[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_082FFF88[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_082FFF8C[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_082FFF90[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_082FFF94[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_082FFF98[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_082FFF9C[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_082FFFA0[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_082FFFA4[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_082FFFA8[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_082FFFAC[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_082FFFB0[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_082FFFB4[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_082FFFB8[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_082FFFBC[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_082FFFC0[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_082FFFC4[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_082FFFC8[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_082FFFCC[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_082FFFD0[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_082FFFD4[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_082FFFD8[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_082FFFDC[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_082FFFE0[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_082FFFE4[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_082FFFE8[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_082FFFEC[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_082FFFF0[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_082FFFF4[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_082FFFF8[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_082FFFFC[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_08300000[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_08300004[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_08300008[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_0830000C[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_08300010[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_08300014[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_08300018[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_0830001C[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_08300020[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_08300024[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_08300028[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_0830002C[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_08300030[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_08300034[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_08300038[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_0830003C[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_08300040[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_08300044[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_08300048[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_0830004C[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_08300050[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_08300054[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_08300058[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_0830005C[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_08300060[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_08300064[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_08300068[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_0830006C[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_08300070[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_08300074[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_08300078[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_0830007C[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_08300080[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_08300084[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_08300088[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_0830008C[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_08300090[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_08300094[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_08300098[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_0830009C[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_083000A0[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_083000A4[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_083000A8[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_083000AC[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_083000B0[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_083000B4[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_083000B8[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_083000BC[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_083000C0[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_083000C4[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_083000C8[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_083000CC[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_083000D0[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_083000D4[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_083000D8[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_083000DC[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_083000E0[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_083000E4[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_083000E8[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_083000EC[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_083000F0[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_083000F4[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_083000F8[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_083000FC[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_08300100[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_08300104[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_08300108[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_0830010C[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_08300110[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_08300114[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_08300118[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_0830011C[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_08300120[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_08300124[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_08300128[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_0830012C[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_08300130[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_08300134[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_08300138[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_0830013C[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_08300140[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_08300144[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_08300148[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_0830014C[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_08300150[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_08300154[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_08300158[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_0830015C[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_08300160[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_08300164[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_08300168[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_0830016C[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_08300170[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_08300174[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_08300178[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_0830017C[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_08300180[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_08300184[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_08300188[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_0830018C[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_08300190[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_08300194[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_08300198[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_0830019C[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_083001A0[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_083001A4[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_083001A8[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_083001AC[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_083001B0[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_083001B4[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_083001B8[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_083001BC[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_083001C0[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_083001C4[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_083001C8[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_083001CC[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_083001D0[] = {gAnimCmd_General_Frame0};
+static const union AnimCmd *const gUnknown_082FFDCC[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_082FFDD0[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_082FFDD4[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_082FFDD8[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_082FFDDC[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_082FFDE0[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_082FFDE4[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_082FFDE8[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_082FFDEC[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_082FFDF0[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_082FFDF4[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_082FFDF8[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_082FFDFC[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_082FFE00[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_082FFE04[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_082FFE08[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_082FFE0C[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_082FFE10[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_082FFE14[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_082FFE18[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_082FFE1C[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_082FFE20[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_082FFE24[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_082FFE28[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_082FFE2C[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_082FFE30[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_082FFE34[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_082FFE38[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_082FFE3C[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_082FFE40[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_082FFE44[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_082FFE48[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_082FFE4C[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_082FFE50[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_082FFE54[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_082FFE58[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_082FFE5C[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_082FFE60[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_082FFE64[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_082FFE68[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_082FFE6C[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_082FFE70[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_082FFE74[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_082FFE78[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_082FFE7C[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_082FFE80[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_082FFE84[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_082FFE88[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_082FFE8C[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_082FFE90[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_082FFE94[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_082FFE98[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_082FFE9C[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_082FFEA0[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_082FFEA4[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_082FFEA8[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_082FFEAC[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_082FFEB0[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_082FFEB4[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_082FFEB8[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_082FFEBC[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_082FFEC0[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_082FFEC4[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_082FFEC8[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_082FFECC[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_082FFED0[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_082FFED4[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_082FFED8[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_082FFEDC[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_082FFEE0[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_082FFEE4[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_082FFEE8[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_082FFEEC[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_082FFEF0[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_082FFEF4[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_082FFEF8[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_082FFEFC[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_082FFF00[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_082FFF04[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_082FFF08[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_082FFF0C[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_082FFF10[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_082FFF14[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_082FFF18[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_082FFF1C[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_082FFF20[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_082FFF24[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_082FFF28[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_082FFF2C[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_082FFF30[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_082FFF34[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_082FFF38[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_082FFF3C[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_082FFF40[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_082FFF44[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_082FFF48[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_082FFF4C[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_082FFF50[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_082FFF54[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_082FFF58[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_082FFF5C[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_082FFF60[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_082FFF64[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_082FFF68[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_082FFF6C[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_082FFF70[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_082FFF74[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_082FFF78[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_082FFF7C[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_082FFF80[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_082FFF84[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_082FFF88[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_082FFF8C[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_082FFF90[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_082FFF94[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_082FFF98[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_082FFF9C[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_082FFFA0[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_082FFFA4[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_082FFFA8[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_082FFFAC[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_082FFFB0[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_082FFFB4[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_082FFFB8[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_082FFFBC[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_082FFFC0[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_082FFFC4[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_082FFFC8[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_082FFFCC[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_082FFFD0[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_082FFFD4[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_082FFFD8[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_082FFFDC[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_082FFFE0[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_082FFFE4[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_082FFFE8[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_082FFFEC[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_082FFFF0[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_082FFFF4[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_082FFFF8[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_082FFFFC[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_08300000[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_08300004[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_08300008[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_0830000C[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_08300010[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_08300014[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_08300018[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_0830001C[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_08300020[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_08300024[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_08300028[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_0830002C[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_08300030[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_08300034[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_08300038[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_0830003C[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_08300040[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_08300044[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_08300048[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_0830004C[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_08300050[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_08300054[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_08300058[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_0830005C[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_08300060[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_08300064[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_08300068[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_0830006C[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_08300070[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_08300074[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_08300078[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_0830007C[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_08300080[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_08300084[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_08300088[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_0830008C[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_08300090[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_08300094[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_08300098[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_0830009C[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_083000A0[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_083000A4[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_083000A8[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_083000AC[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_083000B0[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_083000B4[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_083000B8[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_083000BC[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_083000C0[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_083000C4[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_083000C8[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_083000CC[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_083000D0[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_083000D4[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_083000D8[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_083000DC[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_083000E0[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_083000E4[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_083000E8[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_083000EC[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_083000F0[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_083000F4[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_083000F8[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_083000FC[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_08300100[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_08300104[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_08300108[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_0830010C[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_08300110[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_08300114[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_08300118[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_0830011C[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_08300120[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_08300124[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_08300128[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_0830012C[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_08300130[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_08300134[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_08300138[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_0830013C[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_08300140[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_08300144[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_08300148[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_0830014C[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_08300150[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_08300154[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_08300158[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_0830015C[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_08300160[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_08300164[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_08300168[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_0830016C[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_08300170[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_08300174[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_08300178[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_0830017C[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_08300180[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_08300184[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_08300188[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_0830018C[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_08300190[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_08300194[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_08300198[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_0830019C[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_083001A0[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_083001A4[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_083001A8[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_083001AC[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_083001B0[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_083001B4[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_083001B8[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_083001BC[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_083001C0[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_083001C4[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_083001C8[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_083001CC[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_083001D0[] = {sAnim_GeneralFrame0};
 
-const union AnimCmd *const gUnknown_083001D4[] =
+static const union AnimCmd *const gUnknown_083001D4[] =
 {
-    gAnimCmd_General_Frame0,
+    sAnim_GeneralFrame0,
     gUnknown_082FF71C,
     gUnknown_082FF734,
     gUnknown_082FF744,
     gUnknown_082FF750,
 };
 
-const union AnimCmd *const gUnknown_083001E8[] = {gAnimCmd_General_Frame0};
+static const union AnimCmd *const gUnknown_083001E8[] = {sAnim_GeneralFrame0};
 
-const union AnimCmd *const gUnknown_083001EC[] =
+static const union AnimCmd *const gUnknown_083001EC[] =
 {
-    gAnimCmd_General_Frame0,
+    sAnim_GeneralFrame0,
     gUnknown_082FF758,
     gUnknown_082FF774,
     gUnknown_082FF790,
 };
 
-const union AnimCmd *const gUnknown_083001FC[] = {gAnimCmd_General_Frame0};
+static const union AnimCmd *const gUnknown_083001FC[] = {sAnim_GeneralFrame0};
 
-const union AnimCmd *const gUnknown_08300200[] =
+static const union AnimCmd *const gUnknown_08300200[] =
 {
-    gAnimCmd_General_Frame0,
+    sAnim_GeneralFrame0,
     gUnknown_082FF79C,
     gUnknown_082FF7B0,
 };
 
-const union AnimCmd *const gUnknown_0830020C[] =
+static const union AnimCmd *const gUnknown_0830020C[] =
 {
-    gAnimCmd_General_Frame0,
+    sAnim_GeneralFrame0,
     gUnknown_082FF7C4,
 };
 
-const union AnimCmd *const gUnknown_08300214[] =
+static const union AnimCmd *const gUnknown_08300214[] =
 {
-    gAnimCmd_General_Frame0,
+    sAnim_GeneralFrame0,
     gUnknown_082FF7CC,
 };
 
-const union AnimCmd *const gUnknown_0830021C[] =
+static const union AnimCmd *const gUnknown_0830021C[] =
 {
-    gAnimCmd_General_Frame0,
+    sAnim_GeneralFrame0,
     gUnknown_082FF7D4,
 };
 
-const union AnimCmd *const gUnknown_08300224[] =
+static const union AnimCmd *const gUnknown_08300224[] =
 {
-    gAnimCmd_General_Frame0,
+    sAnim_GeneralFrame0,
     gUnknown_082FF7DC,
     gUnknown_082FF7E4,
 };
 
-const union AnimCmd *const gUnknown_08300230[] =
+static const union AnimCmd *const gUnknown_08300230[] =
 {
-    gAnimCmd_General_Frame0,
+    sAnim_GeneralFrame0,
     gUnknown_082FF7EC,
     gUnknown_082FF7F4,
 };
 
-const union AnimCmd *const gUnknown_0830023C[] =
+static const union AnimCmd *const gUnknown_0830023C[] =
 {
-    gAnimCmd_General_Frame0,
+    sAnim_GeneralFrame0,
     gUnknown_082FF7FC,
     gUnknown_082FF804,
 };
 
-const union AnimCmd *const gUnknown_08300248[] =
+static const union AnimCmd *const gUnknown_08300248[] =
 {
-    gAnimCmd_General_Frame0,
+    sAnim_GeneralFrame0,
     gUnknown_082FF80C,
     gUnknown_082FF814,
 };
 
-const union AnimCmd *const gUnknown_08300254[] =
+static const union AnimCmd *const gUnknown_08300254[] =
 {
-    gAnimCmd_General_Frame0,
+    sAnim_GeneralFrame0,
     gUnknown_082FF81C,
     gUnknown_082FF824,
 };
 
-const union AnimCmd *const gUnknown_08300260[] = {gAnimCmd_General_Frame0};
+static const union AnimCmd *const gUnknown_08300260[] = {sAnim_GeneralFrame0};
 
-const union AnimCmd *const gUnknown_08300264[] =
+static const union AnimCmd *const gUnknown_08300264[] =
 {
-    gAnimCmd_General_Frame0,
+    sAnim_GeneralFrame0,
     gUnknown_082FF82C,
 };
 
-const union AnimCmd *const gUnknown_0830026C[] =
+static const union AnimCmd *const gUnknown_0830026C[] =
 {
-    gAnimCmd_General_Frame0,
+    sAnim_GeneralFrame0,
     gUnknown_082FF834,
     gUnknown_082FF83C,
 };
 
-const union AnimCmd *const gUnknown_08300278[] =
+static const union AnimCmd *const gUnknown_08300278[] =
 {
-    gAnimCmd_General_Frame0,
+    sAnim_GeneralFrame0,
     gUnknown_082FF844,
 };
 
-const union AnimCmd *const gUnknown_08300280[] =
+static const union AnimCmd *const gUnknown_08300280[] =
 {
-    gAnimCmd_General_Frame0,
+    sAnim_GeneralFrame0,
     gUnknown_082FF84C,
 };
 
-const union AnimCmd *const gUnknown_08300288[] =
+static const union AnimCmd *const gUnknown_08300288[] =
 {
-    gAnimCmd_General_Frame0,
+    sAnim_GeneralFrame0,
     gUnknown_082FF854,
     gUnknown_082FF85C,
 };
 
-const union AnimCmd *const gUnknown_08300294[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_08300298[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_0830029C[] = {gAnimCmd_General_Frame0};
+static const union AnimCmd *const gUnknown_08300294[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_08300298[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_0830029C[] = {sAnim_GeneralFrame0};
 
-const union AnimCmd *const gUnknown_083002A0[] =
+static const union AnimCmd *const gUnknown_083002A0[] =
 {
-    gAnimCmd_General_Frame0,
+    sAnim_GeneralFrame0,
     gUnknown_082FF864,
 };
 
-const union AnimCmd *const gUnknown_083002A8[] =
+static const union AnimCmd *const gUnknown_083002A8[] =
 {
-    gAnimCmd_General_Frame0,
+    sAnim_GeneralFrame0,
     gUnknown_082FF86C,
 };
 
-const union AnimCmd *const gUnknown_083002B0[] =
+static const union AnimCmd *const gUnknown_083002B0[] =
 {
-    gAnimCmd_General_Frame0,
+    sAnim_GeneralFrame0,
     gUnknown_082FF874,
 };
 
-const union AnimCmd *const gUnknown_083002B8[] =
+static const union AnimCmd *const gUnknown_083002B8[] =
 {
-    gAnimCmd_General_Frame0,
+    sAnim_GeneralFrame0,
     gUnknown_082FF87C,
 };
 
-const union AnimCmd *const gUnknown_083002C0[] = {gAnimCmd_General_Frame0};
+static const union AnimCmd *const gUnknown_083002C0[] = {sAnim_GeneralFrame0};
 
-const union AnimCmd *const gUnknown_083002C4[] =
+static const union AnimCmd *const gUnknown_083002C4[] =
 {
-    gAnimCmd_General_Frame0,
+    sAnim_GeneralFrame0,
     gUnknown_082FF884,
 };
 
-const union AnimCmd *const gUnknown_083002CC[] =
+static const union AnimCmd *const gUnknown_083002CC[] =
 {
-    gAnimCmd_General_Frame0,
+    sAnim_GeneralFrame0,
     gUnknown_082FF88C,
     gUnknown_082FF894,
 };
 
-const union AnimCmd *const gUnknown_083002D8[] =
+static const union AnimCmd *const gUnknown_083002D8[] =
 {
-    gAnimCmd_General_Frame0,
+    sAnim_GeneralFrame0,
     gUnknown_082FF89C,
     gUnknown_082FF8A4,
 };
 
-const union AnimCmd *const gUnknown_083002E4[] =
+static const union AnimCmd *const gUnknown_083002E4[] =
 {
-    gAnimCmd_General_Frame0,
+    sAnim_GeneralFrame0,
     gUnknown_082FF8AC,
     gUnknown_082FF8B4,
 };
 
-const union AnimCmd *const gUnknown_083002F0[] =
+static const union AnimCmd *const gUnknown_083002F0[] =
 {
-    gAnimCmd_General_Frame0,
+    sAnim_GeneralFrame0,
     gUnknown_082FF8BC,
     gUnknown_082FF8FC,
     gUnknown_082FF91C,
     gUnknown_082FF930,
 };
 
-const union AnimCmd *const gUnknown_08300304[] = {gAnimCmd_General_Frame0};
+static const union AnimCmd *const gUnknown_08300304[] = {sAnim_GeneralFrame0};
 
-const union AnimCmd *const gUnknown_08300308[] =
+static const union AnimCmd *const gUnknown_08300308[] =
 {
-    gAnimCmd_General_Frame0,
+    sAnim_GeneralFrame0,
     gUnknown_082FF93C,
 };
 
-const union AnimCmd *const gUnknown_08300310[] =
+static const union AnimCmd *const gUnknown_08300310[] =
 {
-    gAnimCmd_General_Frame0,
+    sAnim_GeneralFrame0,
     gUnknown_082FF944,
 };
 
-const union AnimCmd *const gUnknown_08300318[] =
+static const union AnimCmd *const gUnknown_08300318[] =
 {
-    gAnimCmd_General_Frame0,
+    sAnim_GeneralFrame0,
     gUnknown_082FF94C,
     gUnknown_082FF9A8,
     gUnknown_082FFA00,
     gUnknown_082FFA58,
 };
 
-const union AnimCmd *const gUnknown_0830032C[] =
+static const union AnimCmd *const gUnknown_0830032C[] =
 {
-    gAnimCmd_General_Frame0,
+    sAnim_GeneralFrame0,
     gUnknown_082FFA64,
 };
 
-const union AnimCmd *const gUnknown_08300334[] =
+static const union AnimCmd *const gUnknown_08300334[] =
 {
-    gAnimCmd_General_Frame0,
+    sAnim_GeneralFrame0,
     gUnknown_082FFA6C,
 };
 
-const union AnimCmd *const gUnknown_0830033C[] =
+static const union AnimCmd *const gUnknown_0830033C[] =
 {
-    gAnimCmd_General_Frame0,
+    sAnim_GeneralFrame0,
     gUnknown_082FFA74,
 };
 
-const union AnimCmd *const gUnknown_08300344[] = {gAnimCmd_General_Frame0};
+static const union AnimCmd *const gUnknown_08300344[] = {sAnim_GeneralFrame0};
 
-const union AnimCmd *const gUnknown_08300348[] =
+static const union AnimCmd *const gUnknown_08300348[] =
 {
-    gAnimCmd_General_Frame0,
+    sAnim_GeneralFrame0,
     gUnknown_082FFA7C,
     gUnknown_082FFA84,
 };
 
-const union AnimCmd *const gUnknown_08300354[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_08300358[] = {gAnimCmd_General_Frame0};
+static const union AnimCmd *const gUnknown_08300354[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_08300358[] = {sAnim_GeneralFrame0};
 
-const union AnimCmd *const gUnknown_0830035C[] =
+static const union AnimCmd *const gUnknown_0830035C[] =
 {
-    gAnimCmd_General_Frame0,
+    sAnim_GeneralFrame0,
     gUnknown_082FFA8C,
     gUnknown_082FFA94,
 };
 
-const union AnimCmd *const gUnknown_08300368[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_0830036C[] = {gAnimCmd_General_Frame0};
+static const union AnimCmd *const gUnknown_08300368[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_0830036C[] = {sAnim_GeneralFrame0};
 
-const union AnimCmd *const gUnknown_08300370[] =
+static const union AnimCmd *const gUnknown_08300370[] =
 {
-    gAnimCmd_General_Frame0,
+    sAnim_GeneralFrame0,
     gUnknown_082FFA9C,
     gUnknown_082FFAA4,
 };
 
-const union AnimCmd *const gUnknown_0830037C[] =
+static const union AnimCmd *const gUnknown_0830037C[] =
 {
-    gAnimCmd_General_Frame0,
+    sAnim_GeneralFrame0,
     gUnknown_082FFAAC,
     gUnknown_082FFAB4,
 };
 
-const union AnimCmd *const gUnknown_08300388[] =
+static const union AnimCmd *const gUnknown_08300388[] =
 {
-    gAnimCmd_General_Frame0,
+    sAnim_GeneralFrame0,
     gUnknown_082FFABC,
     gUnknown_082FFAC4,
 };
 
-const union AnimCmd *const gUnknown_08300394[] =
+static const union AnimCmd *const gUnknown_08300394[] =
 {
-    gAnimCmd_General_Frame0,
+    sAnim_GeneralFrame0,
     gUnknown_082FFACC,
     gUnknown_082FFAD4,
 };
 
-const union AnimCmd *const gUnknown_083003A0[] =
+static const union AnimCmd *const gUnknown_083003A0[] =
 {
-    gAnimCmd_General_Frame0,
+    sAnim_GeneralFrame0,
     gUnknown_082FFADC,
 };
 
-const union AnimCmd *const gUnknown_083003A8[] =
+static const union AnimCmd *const gUnknown_083003A8[] =
 {
-    gAnimCmd_General_Frame0,
+    sAnim_GeneralFrame0,
     gUnknown_082FFAE4,
 };
 
-const union AnimCmd *const gUnknown_083003B0[] =
+static const union AnimCmd *const gUnknown_083003B0[] =
 {
-    gAnimCmd_General_Frame0,
+    sAnim_GeneralFrame0,
     gUnknown_082FFAEC,
 };
 
-const union AnimCmd *const gUnknown_083003B8[] =
+static const union AnimCmd *const gUnknown_083003B8[] =
 {
-    gAnimCmd_General_Frame0,
+    sAnim_GeneralFrame0,
     gUnknown_082FFAF4,
 };
 
-const union AnimCmd *const gUnknown_083003C0[] =
+static const union AnimCmd *const gUnknown_083003C0[] =
 {
-    gAnimCmd_General_Frame0,
+    sAnim_GeneralFrame0,
     gUnknown_082FFAFC,
 };
 
-const union AnimCmd *const gUnknown_083003C8[] =
+static const union AnimCmd *const gUnknown_083003C8[] =
 {
-    gAnimCmd_General_Frame0,
+    sAnim_GeneralFrame0,
     gUnknown_082FFB04,
     gUnknown_082FFB0C,
 };
 
-const union AnimCmd *const gUnknown_083003D4[] =
+static const union AnimCmd *const gUnknown_083003D4[] =
 {
-    gAnimCmd_General_Frame0,
+    sAnim_GeneralFrame0,
     gUnknown_082FFB14,
 };
 
-const union AnimCmd *const gUnknown_083003DC[] =
+static const union AnimCmd *const gUnknown_083003DC[] =
 {
-    gAnimCmd_General_Frame0,
+    sAnim_GeneralFrame0,
     gUnknown_082FFB1C,
     gUnknown_082FFB24,
 };
 
-const union AnimCmd *const gUnknown_083003E8[] =
+static const union AnimCmd *const gUnknown_083003E8[] =
 {
-    gAnimCmd_General_Frame0,
+    sAnim_GeneralFrame0,
     gUnknown_082FFB2C,
 };
 
-const union AnimCmd *const gUnknown_083003F0[] =
+static const union AnimCmd *const gUnknown_083003F0[] =
 {
-    gAnimCmd_General_Frame0,
+    sAnim_GeneralFrame0,
     gUnknown_082FFB34,
 };
 
-const union AnimCmd *const gUnknown_083003F8[] =
+static const union AnimCmd *const gUnknown_083003F8[] =
 {
-    gAnimCmd_General_Frame0,
+    sAnim_GeneralFrame0,
     gUnknown_082FFB3C,
 };
 
-const union AnimCmd *const gUnknown_08300400[] =
+static const union AnimCmd *const gUnknown_08300400[] =
 {
-    gAnimCmd_General_Frame0,
+    sAnim_GeneralFrame0,
     gUnknown_082FFB44,
     gUnknown_082FFB60,
 };
 
-const union AnimCmd *const gUnknown_0830040C[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_08300410[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_08300414[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_08300418[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_0830041C[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_08300420[] = {gAnimCmd_General_Frame0};
+static const union AnimCmd *const gUnknown_0830040C[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_08300410[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_08300414[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_08300418[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_0830041C[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_08300420[] = {sAnim_GeneralFrame0};
 
-const union AnimCmd *const gUnknown_08300424[] =
+static const union AnimCmd *const gUnknown_08300424[] =
 {
-    gAnimCmd_General_Frame0,
+    sAnim_GeneralFrame0,
     gUnknown_082FFB7C,
     gUnknown_082FFBBC,
     gUnknown_082FFBE0,
     gUnknown_082FFBF4,
 };
 
-const union AnimCmd *const gUnknown_08300438[] =
+static const union AnimCmd *const gUnknown_08300438[] =
 {
-    gAnimCmd_General_Frame0,
+    sAnim_GeneralFrame0,
     gUnknown_082FFBFC,
     gUnknown_082FFC04,
 };
 
-const union AnimCmd *const gUnknown_08300444[] =
+static const union AnimCmd *const gUnknown_08300444[] =
 {
-    gAnimCmd_General_Frame0,
+    sAnim_GeneralFrame0,
     gUnknown_082FFC0C,
 };
 
-const union AnimCmd *const gUnknown_0830044C[] = 
+static const union AnimCmd *const gUnknown_0830044C[] =
 {
-    gAnimCmd_General_Frame0,
+    sAnim_GeneralFrame0,
     gUnknown_082FFC14,
 };
 
-const union AnimCmd *const gUnknown_08300454[] =
+static const union AnimCmd *const gUnknown_08300454[] =
 {
-    gAnimCmd_General_Frame0,
+    sAnim_GeneralFrame0,
     gUnknown_082FFC1C,
 };
 
-const union AnimCmd *const gUnknown_0830045C[] =
+static const union AnimCmd *const gUnknown_0830045C[] =
 {
-    gAnimCmd_General_Frame0,
+    sAnim_GeneralFrame0,
     gUnknown_082FFC24,
 };
 
-const union AnimCmd *const gUnknown_08300464[] =
+static const union AnimCmd *const gUnknown_08300464[] =
 {
-    gAnimCmd_General_Frame0,
+    sAnim_GeneralFrame0,
     gUnknown_082FFC2C,
 };
 
-const union AnimCmd *const gUnknown_0830046C[] =
+static const union AnimCmd *const gUnknown_0830046C[] =
 {
-    gAnimCmd_General_Frame0,
+    sAnim_GeneralFrame0,
     gUnknown_082FFC34,
 };
 
-const union AnimCmd *const gUnknown_08300474[] =
+static const union AnimCmd *const gUnknown_08300474[] =
 {
-    gAnimCmd_General_Frame0,
+    sAnim_GeneralFrame0,
     gUnknown_082FFC3C,
     gUnknown_082FFC58,
 };
 
-const union AnimCmd *const gUnknown_08300480[] =
+static const union AnimCmd *const gUnknown_08300480[] =
 {
-    gAnimCmd_General_Frame0,
+    sAnim_GeneralFrame0,
     gUnknown_082FFC74,
 };
 
-const union AnimCmd *const gUnknown_08300488[] =
+static const union AnimCmd *const gUnknown_08300488[] =
 {
-    gAnimCmd_General_Frame0,
+    sAnim_GeneralFrame0,
     gUnknown_082FFC7C,
     gUnknown_082FFC84,
 };
 
-const union AnimCmd *const gUnknown_08300494[] =
+static const union AnimCmd *const gUnknown_08300494[] =
 {
-    gAnimCmd_General_Frame0,
+    sAnim_GeneralFrame0,
     gUnknown_082FFC8C,
     gUnknown_082FFC94,
 };
 
-const union AnimCmd *const gUnknown_083004A0[] =
+static const union AnimCmd *const gUnknown_083004A0[] =
 {
-    gAnimCmd_General_Frame0,
+    sAnim_GeneralFrame0,
     gUnknown_082FFC9C,
     gUnknown_082FFCA4,
 };
 
-const union AnimCmd *const gUnknown_083004AC[] = {gAnimCmd_General_Frame0};
+static const union AnimCmd *const gUnknown_083004AC[] = {sAnim_GeneralFrame0};
 
-const union AnimCmd *const gUnknown_083004B0[] = 
+static const union AnimCmd *const gUnknown_083004B0[] =
 {
-    gAnimCmd_General_Frame0,
+    sAnim_GeneralFrame0,
     gUnknown_082FFCAC,
 };
 
-const union AnimCmd *const gUnknown_083004B8[] =
+static const union AnimCmd *const gUnknown_083004B8[] =
 {
-    gAnimCmd_General_Frame0,
+    sAnim_GeneralFrame0,
     gUnknown_082FFCB4,
 };
 
-const union AnimCmd *const gUnknown_083004C0[] =
+static const union AnimCmd *const gUnknown_083004C0[] =
 {
-    gAnimCmd_General_Frame0,
+    sAnim_GeneralFrame0,
     gUnknown_082FFCBC,
 };
 
-const union AnimCmd *const gUnknown_083004C8[] =
+static const union AnimCmd *const gUnknown_083004C8[] =
 {
-    gAnimCmd_General_Frame0,
+    sAnim_GeneralFrame0,
     gUnknown_082FFCC4,
 };
 
-const union AnimCmd *const gUnknown_083004D0[] =
+static const union AnimCmd *const gUnknown_083004D0[] =
 {
-    gAnimCmd_General_Frame0,
+    sAnim_GeneralFrame0,
     gUnknown_082FFCCC,
 };
 
-const union AnimCmd *const gUnknown_083004D8[] =
+static const union AnimCmd *const gUnknown_083004D8[] =
 {
-    gAnimCmd_General_Frame0,
+    sAnim_GeneralFrame0,
     gUnknown_082FFCD4,
 };
 
-const union AnimCmd *const gUnknown_083004E0[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_083004E4[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_083004E8[] = {gAnimCmd_General_Frame0};
+static const union AnimCmd *const gUnknown_083004E0[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_083004E4[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_083004E8[] = {sAnim_GeneralFrame0};
 
-const union AnimCmd *const gUnknown_083004EC[] =
+static const union AnimCmd *const gUnknown_083004EC[] =
 {
-    gAnimCmd_General_Frame0,
+    sAnim_GeneralFrame0,
     gUnknown_082FFCDC,
 };
 
-const union AnimCmd *const gUnknown_083004F4[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_083004F8[] = {gAnimCmd_General_Frame0};
+static const union AnimCmd *const gUnknown_083004F4[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_083004F8[] = {sAnim_GeneralFrame0};
 
-const union AnimCmd *const gUnknown_083004FC[] =
+static const union AnimCmd *const gUnknown_083004FC[] =
 {
-    gAnimCmd_General_Frame0,
+    sAnim_GeneralFrame0,
     gUnknown_082FFCE4,
 };
 
-const union AnimCmd *const gUnknown_08300504[] =
+static const union AnimCmd *const gUnknown_08300504[] =
 {
-    gAnimCmd_General_Frame0,
+    sAnim_GeneralFrame0,
     gUnknown_082FFCEC,
     gUnknown_082FFCF4,
 };
 
-const union AnimCmd *const gUnknown_08300510[] =
+static const union AnimCmd *const gUnknown_08300510[] =
 {
-    gAnimCmd_General_Frame0,
+    sAnim_GeneralFrame0,
     gUnknown_082FFCFC,
 };
 
-const union AnimCmd *const gUnknown_08300518[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_0830051C[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_08300520[] = {gAnimCmd_General_Frame0};
+static const union AnimCmd *const gUnknown_08300518[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_0830051C[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_08300520[] = {sAnim_GeneralFrame0};
 
-const union AnimCmd *const gUnknown_08300524[] =
+static const union AnimCmd *const gUnknown_08300524[] =
 {
-    gAnimCmd_General_Frame0,
+    sAnim_GeneralFrame0,
     gUnknown_082FFD04,
 };
 
-const union AnimCmd *const gUnknown_0830052C[] =
+static const union AnimCmd *const gUnknown_0830052C[] =
 {
-    gAnimCmd_General_Frame0,
+    sAnim_GeneralFrame0,
     gUnknown_082FFD0C,
 };
 
-const union AnimCmd *const gUnknown_08300534[] =
+static const union AnimCmd *const gUnknown_08300534[] =
 {
-    gAnimCmd_General_Frame0,
+    sAnim_GeneralFrame0,
     gUnknown_082FFD14,
 };
 
-const union AnimCmd *const gUnknown_0830053C[] =
+static const union AnimCmd *const gUnknown_0830053C[] =
 {
-    gAnimCmd_General_Frame0,
+    sAnim_GeneralFrame0,
     gUnknown_082FFD1C,
     gUnknown_082FFD24,
     gUnknown_082FFD2C,
     gUnknown_082FFD34,
 };
 
-const union AnimCmd *const gUnknown_08300550[] =
+static const union AnimCmd *const gUnknown_08300550[] =
 {
-    gAnimCmd_General_Frame0,
+    sAnim_GeneralFrame0,
     gUnknown_082FFD3C,
 };
 
-const union AnimCmd *const gUnknown_08300558[] =
+static const union AnimCmd *const gUnknown_08300558[] =
 {
-    gAnimCmd_General_Frame0,
+    sAnim_GeneralFrame0,
     gUnknown_082FFD44,
 };
 
-const union AnimCmd *const gUnknown_08300560[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_08300564[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_08300568[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_0830056C[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_08300570[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_08300574[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_08300578[] = {gAnimCmd_General_Frame0};
+static const union AnimCmd *const gUnknown_08300560[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_08300564[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_08300568[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_0830056C[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_08300570[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_08300574[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_08300578[] = {sAnim_GeneralFrame0};
 
-const union AnimCmd *const gUnknown_0830057C[] =
+static const union AnimCmd *const gUnknown_0830057C[] =
 {
-    gAnimCmd_General_Frame0,
+    sAnim_GeneralFrame0,
     gUnknown_082FFD4C,
     gUnknown_082FFD54,
 };
 
-const union AnimCmd *const gUnknown_08300588[] = {gAnimCmd_General_Frame0};
+static const union AnimCmd *const gUnknown_08300588[] = {sAnim_GeneralFrame0};
 
-const union AnimCmd *const gUnknown_0830058C[] =
+static const union AnimCmd *const gUnknown_0830058C[] =
 {
-    gAnimCmd_General_Frame0,
+    sAnim_GeneralFrame0,
     gUnknown_082FFD5C,
     gUnknown_082FFD64,
 };
 
-const union AnimCmd *const gUnknown_08300598[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_0830059C[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_083005A0[] = {gAnimCmd_General_Frame0};
+static const union AnimCmd *const gUnknown_08300598[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_0830059C[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_083005A0[] = {sAnim_GeneralFrame0};
 
-const union AnimCmd *const gUnknown_083005A4[] =
+static const union AnimCmd *const gUnknown_083005A4[] =
 {
-    gAnimCmd_General_Frame0,
+    sAnim_GeneralFrame0,
     gUnknown_082FFD6C,
 };
 
-const union AnimCmd *const gUnknown_083005AC[] =
+static const union AnimCmd *const gUnknown_083005AC[] =
 {
-    gAnimCmd_General_Frame0,
+    sAnim_GeneralFrame0,
     gUnknown_082FFD74,
 };
 
-const union AnimCmd *const gUnknown_083005B4[] =
+static const union AnimCmd *const gUnknown_083005B4[] =
 {
-    gAnimCmd_General_Frame0,
+    sAnim_GeneralFrame0,
     gUnknown_082FFD7C,
     gUnknown_082FFD84,
 };
 
-const union AnimCmd *const gUnknown_083005C0[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_083005C4[] = {gAnimCmd_General_Frame0};
+static const union AnimCmd *const gUnknown_083005C0[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_083005C4[] = {sAnim_GeneralFrame0};
 
-const union AnimCmd *const gUnknown_083005C8[] =
+static const union AnimCmd *const gUnknown_083005C8[] =
 {
-    gAnimCmd_General_Frame0,
+    sAnim_GeneralFrame0,
     gUnknown_082FFD8C,
     gUnknown_082FFDA0,
 };
 
-const union AnimCmd *const gUnknown_083005D4[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_083005D8[] = {gAnimCmd_General_Frame0};
+static const union AnimCmd *const gUnknown_083005D4[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_083005D8[] = {sAnim_GeneralFrame0};
 
-const union AnimCmd *const gUnknown_083005DC[] =
+static const union AnimCmd *const gUnknown_083005DC[] =
 {
-    gAnimCmd_General_Frame0,
+    sAnim_GeneralFrame0,
     gUnknown_082FFDC4,
 };
 
-const union AnimCmd *const gUnknown_083005E4[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_083005E8[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_083005EC[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_083005F0[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_083005F4[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_083005F8[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_083005FC[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_08300600[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_08300604[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_08300608[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_0830060C[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_08300610[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_08300614[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_08300618[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_0830061C[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_08300620[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_08300624[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_08300628[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_0830062C[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_08300630[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_08300634[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_08300638[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_0830063C[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_08300640[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_08300644[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_08300648[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_0830064C[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_08300650[] = {gAnimCmd_General_Frame0};
-const union AnimCmd *const gUnknown_08300654[] = {gAnimCmd_General_Frame0};
+static const union AnimCmd *const gUnknown_083005E4[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_083005E8[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_083005EC[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_083005F0[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_083005F4[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_083005F8[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_083005FC[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_08300600[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_08300604[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_08300608[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_0830060C[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_08300610[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_08300614[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_08300618[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_0830061C[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_08300620[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_08300624[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_08300628[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_0830062C[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_08300630[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_08300634[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_08300638[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_0830063C[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_08300640[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_08300644[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_08300648[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_0830064C[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_08300650[] = {sAnim_GeneralFrame0};
+static const union AnimCmd *const gUnknown_08300654[] = {sAnim_GeneralFrame0};
 
-const union AnimCmd *const *const gUnusedTrainerFrontAnimsPtrTable[] =
+const union AnimCmd *const *const gUnknownAnimsTable[] =
 {
     gUnknown_082FFDCC,
     gUnknown_082FFDD0,

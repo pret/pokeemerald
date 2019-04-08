@@ -1,8 +1,8 @@
 DesertUnderpass_MapScripts:: @ 823AF37
-	map_script MAP_SCRIPT_ON_TRANSITION, DesertUnderpass_MapScript1_23AF3D
+	map_script MAP_SCRIPT_ON_TRANSITION, DesertUnderpass_OnTransition
 	.byte 0
 
-DesertUnderpass_MapScript1_23AF3D: @ 823AF3D
+DesertUnderpass_OnTransition: @ 823AF3D
 	setflag FLAG_LANDMARK_DESERT_UNDERPASS
 	end
 
