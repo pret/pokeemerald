@@ -6,18 +6,6 @@
 #include "field_weather.h"
 #include "palette.h"
 #include "pokemon_storage_system.h"
-#include "sound.h"
-#include "constants/songs.h"
-#include "window.h"
-#include "gpu_regs.h"
-#include "bg.h"
-#include "menu.h"
-#include "graphics.h"
-#include "dma3.h"
-#include "gba/macro.h"
-#include "decompress.h"
-#include "strings.h"
-#include "constants/rgb.h"
 #include "pokenav.h"
 
 enum
