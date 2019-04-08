@@ -109,6 +109,28 @@ const struct SpriteTemplate gEnergyBallSpriteTemplate =
     .callback = InitAnimShadowBall,
 };
 
+const struct SpriteTemplate gBattleAnimSpriteTemplate_LeafStorm =
+{
+    .tileTag = ANIM_TAG_RAZOR_LEAF,
+    .paletteTag = ANIM_TAG_RAZOR_LEAF,
+    .oam = &gUnknown_08524934,
+    .anims = gUnknown_085962D0,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_810E044,
+};
+
+const struct SpriteTemplate gBattleAnimSpriteTemplate_LeafStorm2 =
+{
+    .tileTag = ANIM_TAG_LEAF,
+    .paletteTag = ANIM_TAG_LEAF,
+    .oam = &gUnknown_085249CC,
+    .anims = gUnknown_08592388,
+    .images = NULL,
+    .affineAnims = gUnknown_085961A0,
+    .callback = sub_8100898,
+};
+
 const union AnimCmd gUnknown_08596D70[] =
 {
     ANIMCMD_FRAME(0, 2),
