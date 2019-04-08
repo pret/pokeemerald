@@ -1,6 +1,8 @@
 #ifndef GUARD_POKENAV_H
 #define GUARD_POKENAV_H
 
+#include "bg.h"
+
 typedef u32 (*LoopedTask)(s32 state);
 
 // Return values of LoopedTask functions.
@@ -11,8 +13,16 @@ typedef u32 (*LoopedTask)(s32 state);
 #define LT_FINISH 4
 #define LT_SET_STATE(newState) (newState + 5)
 
+void InitBgTemplates(const struct BgTemplate *templates, s32 count);
+void CopyPaletteIntoBufferUnfaded(const u16 *palette, u32 a1, u32 a2);
+void sub_81C7AC0(s32 a0);
+void LoadLeftHeaderGfxForIndex(u32 arg0);
+bool32 IsPaletteFadeActive(void);
+void sub_81C7FA0(u32 arg0, bool32 arg1, bool32 arg2);
+bool32 sub_81C8010(void);
+
 // pokenav.c
-extern u32 sub_81C99D4(void);
+extern void sub_81C99D4(void);
 
 void CB2_InitPokeNav(void);
 u32 CreateLoopedTask(LoopedTask loopedTask, u32 priority);

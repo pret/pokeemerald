@@ -4026,6 +4026,9 @@ extern const u32 gPokenavLeftHeaderBeauty_Gfx[];
 extern const u32 gPokenavLeftHeaderCute_Gfx[];
 extern const u32 gPokenavLeftHeaderSmart_Gfx[];
 extern const u32 gPokenavLeftHeaderTough_Gfx[];
+extern const u32 gPokenavMessageBox_Gfx[];
+extern const u32 gPokenavMessageBox_Tilemap[];
+extern const u32 gPokenavMessageBox_Pal[];
 
 extern const u32 gPageInfoTilemap[];
 extern const u32 gUnknown_08D98CC8[];
