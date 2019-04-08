@@ -3,62 +3,6 @@
 
 	.syntax unified
 
-@ File centered around AllocSubstruct(1)
-
-	thumb_func_start sub_81C9268
-sub_81C9268: @ 81C9268
-	push {r4,lr}
-	movs r4, 0
-	movs r0, 0x98
-	lsls r0, 1
-	bl FlagGet
-	lsls r0, 24
-	cmp r0, 0
-	beq _081C928A
-	movs r4, 0x1
-	ldr r0, =0x0000089b
-	bl FlagGet
-	lsls r0, 24
-	cmp r0, 0
-	beq _081C928A
-	movs r4, 0x2
-_081C928A:
-	adds r0, r4, 0
-	pop {r4}
-	pop {r1}
-	bx r1
-	.pool
-	thumb_func_end sub_81C9268
-
-	thumb_func_start sub_81C9298
-sub_81C9298: @ 81C9298
-	push {r4,lr}
-	movs r0, 0x1
-	movs r1, 0x10
-	bl AllocSubstruct
-	adds r4, r0, 0
-	cmp r4, 0
-	beq _081C92C4
-	bl sub_81C9268
-	lsls r0, 24
-	lsrs r0, 24
-	movs r1, 0
-	strh r0, [r4]
-	strh r1, [r4, 0x2]
-	strh r1, [r4, 0x4]
-	strh r1, [r4, 0x6]
-	adds r0, r4, 0
-	bl sub_81C939C
-	movs r0, 0x1
-	b _081C92C6
-_081C92C4:
-	movs r0, 0
-_081C92C6:
-	pop {r4}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_81C9298
-
 	thumb_func_start sub_81C92CC
 sub_81C92CC: @ 81C92CC
 	push {r4,lr}

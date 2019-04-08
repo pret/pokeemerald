@@ -47,7 +47,6 @@ struct PokenavResources
 };
 
 extern u32 sub_81C9430(void);
-extern u32 sub_81C9298(void);
 extern u32 sub_81C941C(void);
 extern u32 sub_81C9924(void);
 extern u32 sub_81C99C0(void);
