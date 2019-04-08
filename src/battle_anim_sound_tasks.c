@@ -116,10 +116,10 @@ static void sub_8158D08(u8 taskId)
 
     if (gTasks[taskId].data[10]++ == gTasks[taskId].data[5])
     {
-		u16 dPan, oldPan;
+        u16 dPan, oldPan;
         gTasks[taskId].data[10] = 0;
-		dPan = gTasks[taskId].data[3];
-		oldPan = gTasks[taskId].data[11] ;
+        dPan = gTasks[taskId].data[3];
+        oldPan = gTasks[taskId].data[11] ;
         gTasks[taskId].data[11] = dPan + oldPan;
         gTasks[taskId].data[11] = KeepPanInRange(gTasks[taskId].data[11], oldPan);
     }
@@ -377,9 +377,9 @@ void sub_8159308(u8 taskId)
 
     if (gTasks[taskId].data[10]++ == gTasks[taskId].data[5])
     {
-		u16 oldPan;
+        u16 oldPan;
         gTasks[taskId].data[10] = 0;
-		oldPan = gTasks[taskId].data[11];
+        oldPan = gTasks[taskId].data[11];
         gTasks[taskId].data[11] = panIncrement + oldPan; 
         gTasks[taskId].data[11] = KeepPanInRange(gTasks[taskId].data[11], oldPan);
     }
