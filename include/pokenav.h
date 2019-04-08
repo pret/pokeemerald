@@ -25,4 +25,7 @@ bool32 IsLoopedTaskActive(u32 taskId);
 
 // pokenav_match_call_ui.c
 
+// pokenav_unk_1.c
+u32 sub_81C9298(void);
+
 #endif //GUARD_POKENAV_H

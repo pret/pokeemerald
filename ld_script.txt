@@ -303,6 +303,7 @@ SECTIONS {
         src/pokenav.o(.text);
         src/pokenav_main_menu.o(.text);
         src/pokenav_match_call_ui.o(.text);
+        src/pokenav_unk_1.o(.text);
         asm/pokenav_unk_1.o(.text);
         asm/pokenav_unk_2.o(.text);
         asm/pokenav_unk_3.o(.text);
@@ -632,6 +633,7 @@ SECTIONS {
         src/pokenav.o(.rodata);
         src/pokenav_main_menu.o(.rodata);
         src/pokenav_match_call_ui.o(.rodata);
+        src/pokenav_unk_1.o(.rodata);
         data/pokenav.o(.rodata);
         src/pokenav_match_call_data.o(.rodata);
         src/menu_specialized.o(.rodata);
