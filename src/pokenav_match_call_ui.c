@@ -393,42 +393,33 @@ bool32 ShouldShowDownArrow(void)
     return subPtr->windowTopIndex + subPtr->visibleEntries < subPtr->listLength;
 }
 
-
-#ifdef NONMATCHING
-// This has some register renaming issues (r4, r5, and r6 are all switched around), and
-// for some reason it's creating two copies of subPtr->unk0.
-// TODO: Now I know why it's making two copies - one of them is UnknownInnerStruct_81C81D4.
-void MatchCall_MoveWindow(s32 a0, bool32 a1)
+void MatchCall_MoveWindow(s32 a0, bool32 a1_)
 {
+    register bool32 a1 asm("r4")= a1_;
     s32 v1;
-    struct MatchCallWindowState *subPtr;
-    struct UnknownSubStruct_81C81D4 *structPtr;
-    structPtr = GetSubstructPtr(0x11);
-    subPtr = &structPtr->unk888;
+    struct UnknownSubStruct_81C81D4 *structPtr = GetSubstructPtr(0x11);
+    register struct MatchCallWindowState *subPtr asm("r5") = &structPtr->unk888;
 
     if (a0 < 0)
     {
-        // This is where the issue is. subPtr->windowTopIndex is being stored in r1 and then copied to
-        // r2... and then r2 is read for the if statement, r1 is read for the function call,
-        // and then both are clobbered as expected. Between those two uses, no writes to r1/r2
-        // happen; it doesn't need to be duplicated/moved at all.
-        if (subPtr->windowTopIndex + a0 < 0)
-            v1 = -1 * subPtr->windowTopIndex;
+        u16 temp = subPtr->windowTopIndex;
+        if (temp + a0 < 0)
+            v1 = -1 * temp;
         else
             v1 = a0;
         if (a1)
-            sub_81C83AC(subPtr->unk10, subPtr->windowTopIndex + v1, v1 * -1, subPtr->unkC, v1, structPtr);
+            sub_81C83AC(subPtr->unk10, temp + v1, v1 * -1, subPtr->unkC, v1, &structPtr->unk0);
     }
     else if (a1)
     {
-        
-        gUnknown_0203CF44 = subPtr->windowTopIndex + subPtr->visibleEntries;
-        if ((s32)(gUnknown_0203CF44) + a0 >= (s32)subPtr->listLength)
-            v1 = subPtr->listLength - gUnknown_0203CF44;
+        s32 temp = gUnknown_0203CF44 = subPtr->windowTopIndex + subPtr->visibleEntries;
+        s32 listLength;
+        if (temp + a0 >= (listLength = subPtr->listLength))
+            v1 = listLength - temp;
         else
             v1 = a0;
         
-        sub_81C83AC(subPtr->unk10, gUnknown_0203CF44, v1, subPtr->unkC, subPtr->visibleEntries, structPtr);
+        sub_81C83AC(subPtr->unk10, gUnknown_0203CF44, v1, subPtr->unkC, subPtr->visibleEntries, &structPtr->unk0);
         // Needed to prevent GCC from combining the two sub_81C83AC calls.
         asm("");
     }
@@ -437,79 +428,9 @@ void MatchCall_MoveWindow(s32 a0, bool32 a1)
         v1 = a0;
     }
     
-    sub_81C8568(v1, structPtr);
-    subPtr->windowTopIndex++;
+    sub_81C8568(v1, &structPtr->unk0);
+    subPtr->windowTopIndex += v1;
 }
-#else
-NAKED
-void MatchCall_MoveWindow(s32 a0, bool32 a1)
-{
-    asm(".syntax unified\n\
-	push {r4-r7,lr}\n\
-	sub sp, 0x8\n\
-	adds r6, r0, 0\n\
-	adds r4, r1, 0\n\
-	movs r0, 0x11\n\
-	bl GetSubstructPtr\n\
-	adds r7, r0, 0\n\
-	ldr r0, =0x00000888\n\
-	adds r5, r7, r0\n\
-	cmp r6, 0\n\
-	bge _081C8524\n\
-	ldrh r1, [r5]\n\
-	adds r0, r1, r6\n\
-	cmp r0, 0\n\
-	bge _081C850A\n\
-	negs r6, r1\n\
-_081C850A:\n\
-	cmp r4, 0\n\
-	beq _081C854E\n\
-	ldr r0, [r5, 0x10]\n\
-	adds r1, r6\n\
-	negs r2, r6\n\
-	ldr r3, [r5, 0xC]\n\
-	str r6, [sp]\n\
-	str r7, [sp, 0x4]\n\
-	bl sub_81C83AC\n\
-	b _081C854E\n\
-	.pool\n\
-_081C8524:\n\
-	cmp r4, 0\n\
-	beq _081C854E\n\
-	ldr r2, =gUnknown_0203CF44\n\
-	ldrh r1, [r5]\n\
-	ldrh r0, [r5, 0x8]\n\
-	adds r4, r1, r0\n\
-	str r4, [r2]\n\
-	adds r0, r4, r6\n\
-	ldrh r1, [r5, 0x2]\n\
-	cmp r0, r1\n\
-	blt _081C853C\n\
-	subs r6, r1, r4\n\
-_081C853C:\n\
-	ldr r0, [r5, 0x10]\n\
-	ldr r3, [r5, 0xC]\n\
-	ldrh r1, [r5, 0x8]\n\
-	str r1, [sp]\n\
-	str r7, [sp, 0x4]\n\
-	adds r1, r4, 0\n\
-	adds r2, r6, 0\n\
-	bl sub_81C83AC\n\
-_081C854E:\n\
-	adds r0, r6, 0\n\
-	adds r1, r7, 0\n\
-	bl sub_81C8568\n\
-	ldrh r0, [r5]\n\
-	adds r0, r6\n\
-	strh r0, [r5]\n\
-	add sp, 0x8\n\
-	pop {r4-r7}\n\
-	pop {r0}\n\
-	bx r0\n\
-	.pool\n\
-    .syntax divided");
-}
-#endif
 
 void sub_81C8568(s32 a0, struct UnknownInnerStruct_81C81D4 *a1)
 {
