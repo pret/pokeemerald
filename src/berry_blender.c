@@ -36,6 +36,7 @@
 #include "new_game.h"
 #include "save.h"
 #include "link.h"
+#include "constants/rgb.h"
 
 #define BLENDER_SCORE_BEST      0
 #define BLENDER_SCORE_GOOD      1
@@ -996,7 +997,7 @@ static void sub_807FAC8(void)
             }
             if (gReceivedRemoteLinkPlayers != 0 && gWirelessCommType)
             {
-                sub_800E0E8();
+                LoadWirelessStatusIndicatorSpriteGfx();
                 CreateWirelessStatusIndicatorSprite(0, 0);
             }
             SetVBlankCallback(VBlankCB0_BerryBlender);
@@ -1004,7 +1005,7 @@ static void sub_807FAC8(void)
         }
         break;
     case 2:
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0x10, 0, 0);
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0x10, 0, RGB_BLACK);
         sub_8082D28();
         sBerryBlenderData->mainState++;
         break;
@@ -1018,7 +1019,7 @@ static void sub_807FAC8(void)
             sBerryBlenderData->mainState++;
         break;
     case 5:
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 0x10, 0);
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 0x10, RGB_BLACK);
         sBerryBlenderData->mainState++;
         break;
     case 6:
@@ -1202,13 +1203,13 @@ static void sub_8080018(void)
         }
         if (gReceivedRemoteLinkPlayers != 0 && gWirelessCommType)
         {
-            sub_800E0E8();
+            LoadWirelessStatusIndicatorSpriteGfx();
             CreateWirelessStatusIndicatorSprite(0, 0);
         }
         sBerryBlenderData->mainState++;
         break;
     case 3:
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0x10, 0, 0);
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0x10, 0, RGB_BLACK);
         sBerryBlenderData->mainState++;
         break;
     case 4:
@@ -1534,7 +1535,7 @@ static void sub_80808D4(void)
         sBerryBlenderData->mainState++;
         break;
     case 3:
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0x10, 0, 0);
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0x10, 0, RGB_BLACK);
         sBerryBlenderData->mainState++;
         sBerryBlenderData->framesToWait = 0;
         break;
@@ -2037,7 +2038,7 @@ static void sub_8081744(void)
             sBerryBlenderData->field_4C--;
         sBerryBlenderData->field_72 = 0;
     }
-    if (gUnknown_020322D5 && gMain.newKeys & L_BUTTON)
+    if (gEnableContestDebugging && gMain.newKeys & L_BUTTON)
         sBerryBlenderData->field_123 ^= 1;
 }
 
@@ -2700,7 +2701,7 @@ static void CB2_HandlePlayerLinkPlayAgainChoice(void)
     case 9:
         if (IsLinkTaskFinished())
         {
-            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 0x10, 0);
+            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 0x10, RGB_BLACK);
             sBerryBlenderData->gameEndState++;
         }
         break;

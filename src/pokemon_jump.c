@@ -557,7 +557,7 @@ static void sub_802ACA0(u8 taskId)
         if (!FuncIsActiveTask(sub_802BD84))
         {
             sub_802D074(&gUnknown_02022CFC->unkA4);
-            sub_800E0E8();
+            LoadWirelessStatusIndicatorSpriteGfx();
             CreateWirelessStatusIndicatorSprite(0, 0);
             gUnknown_02022CFC->unk8++;
         }

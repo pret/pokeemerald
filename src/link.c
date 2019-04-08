@@ -27,6 +27,7 @@
 #include "battle.h"
 #include "link.h"
 #include "link_rfu.h"
+#include "constants/rgb.h"
 
 extern u16 gHeldKeyCodeToSend;
 
@@ -444,7 +445,7 @@ static void LinkTestProcessKeyInput(void)
     }
     if (gMain.newKeys & L_BUTTON)
     {
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, 2);
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB(2, 0, 0));
     }
     if (gMain.newKeys & START_BUTTON)
     {

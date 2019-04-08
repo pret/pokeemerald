@@ -309,7 +309,7 @@ void sub_80F5B00(void)
     gBattle_WIN1V = 0x80A0;
     CreateTask(sub_80F68B4, 20);
     sub_80F7880();
-    if (gIsLinkContest & 0x2)
+    if (gLinkContestFlags & LINK_CONTEST_FLAG_IS_WIRELESS)
         gPaletteFade.bufferTransferDisabled = 1;
     else
         PlayBGM(MUS_CON_K);
@@ -351,12 +351,12 @@ static void sub_80F5CE4(u8 taskId)
 {
     u16 var;
 
-    if (gIsLinkContest & 1)
+    if (gLinkContestFlags & LINK_CONTEST_FLAG_IS_LINK)
     {
         switch (gTasks[taskId].data[0])
         {
         case 0:
-            sub_80DBED4();
+            SaveLinkContestResults();
             if (gContestFinalStandings[gContestPlayerMonIndex] == 0)
             {
                 IncrementGameStat(GAME_STAT_WON_LINK_CONTEST);
@@ -381,7 +381,7 @@ static void sub_80F5CE4(u8 taskId)
             break;
         case 1:
             gTasks[taskId].data[0]++;
-            if (!(gIsLinkContest & 0x2))
+            if (!(gLinkContestFlags & LINK_CONTEST_FLAG_IS_WIRELESS))
                 gTasks[taskId].data[0] = 100;
             break;
         case 2:
@@ -406,7 +406,7 @@ static void sub_80F5CE4(u8 taskId)
     if (!gPaletteFade.active)
     {
         gTasks[taskId].data[0] = 0;
-        if (gIsLinkContest & 0x1)
+        if (gLinkContestFlags & LINK_CONTEST_FLAG_IS_LINK)
         {
             sub_80F707C(gText_CommunicationStandby);
             gTasks[taskId].func = sub_80F5ED8;
@@ -742,7 +742,7 @@ static void sub_80F66B4(u8 taskId)
 
     if (gMain.newKeys & A_BUTTON)
     {
-        if (!(gIsLinkContest & 0x1))
+        if (!(gLinkContestFlags & LINK_CONTEST_FLAG_IS_LINK))
         {
             for (i = 0; i < 4; i++)
             {
@@ -758,7 +758,7 @@ static void sub_80F66B4(u8 taskId)
 
 static void sub_80F671C(u8 taskId)
 {
-    if (gIsLinkContest & 0x1)
+    if (gLinkContestFlags & LINK_CONTEST_FLAG_IS_LINK)
     {
         if (!gTasks[taskId].data[10])
         {
@@ -777,7 +777,7 @@ static void sub_80F677C(u8 taskId)
 {
     if (!gReceivedRemoteLinkPlayers)
     {
-        if (gIsLinkContest & 0x2)
+        if (gLinkContestFlags & LINK_CONTEST_FLAG_IS_WIRELESS)
             DestroyWirelessStatusIndicatorSprite();
 
         sub_80F7144();
@@ -787,7 +787,7 @@ static void sub_80F677C(u8 taskId)
 
 static void sub_80F67C4(u8 taskId)
 {
-    if (!(gIsLinkContest & 0x1))
+    if (!(gLinkContestFlags & LINK_CONTEST_FLAG_IS_LINK))
         BravoTrainerPokemonProfile_BeforeInterview2(gContestFinalStandings[gContestPlayerMonIndex]);
 
     BeginHardwarePaletteFade(0xFF, 0, 0, 16, 0);
@@ -907,9 +907,9 @@ static void sub_80F6AE8(void)
     u16 sheet;
     u8 spriteId;
 
-    if (gIsLinkContest & 0x2)
+    if (gLinkContestFlags & LINK_CONTEST_FLAG_IS_WIRELESS)
     {
-        sub_800E0E8();
+        LoadWirelessStatusIndicatorSpriteGfx();
         CreateWirelessStatusIndicatorSprite(8, 8);
         gSprites[gWirelessStatusIndicatorSpriteId].subpriority = 1;
         sheet = LoadSpriteSheet(&gUnknown_0858D8E0);
@@ -1392,7 +1392,7 @@ static void sub_80F71C8(void)
 
     x = 5;
     y = 1;
-    if (gIsLinkContest & 0x1)
+    if (gLinkContestFlags & LINK_CONTEST_FLAG_IS_LINK)
     {
         CopyToBgTilemapBufferRect(2, gUnknown_08DC6498, 5, 1, 5, 2);
         x = 10;
@@ -2830,7 +2830,7 @@ void sub_80F8390(void)
 
 void sub_80F83D0(void)
 {
-    SetMainCallback2(sub_80D7B24);
+    SetMainCallback2(CB2_StartContest);
 }
 
 static void sub_80F83E0(u8 taskId)
@@ -2886,7 +2886,7 @@ void sub_80F84C4(u8 taskId)
 
 static void sub_80F8508(u8 taskId)
 {
-    if (gIsLinkContest & 0x4)
+    if (gLinkContestFlags & LINK_CONTEST_FLAG_HAS_RS_PLAYER)
     {
         sub_80DA8C8(gContestMonPartyIndex);
         SetTaskFuncWithFollowupFunc(taskId, sub_80FC6BC, sub_80F8568);
@@ -3069,7 +3069,7 @@ _080F8678:\n\
 
 static void sub_80F86B8(u8 taskId)
 {
-    sub_80DCE58(0);
+    SortContestants(FALSE);
     SetTaskFuncWithFollowupFunc(taskId, sub_80FCFD0, sub_80F8714);
 }
 
