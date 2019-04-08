@@ -111,9 +111,6 @@ $start_str = "0x$Start"
 
 Write-Host "$start_str - $end_str"
 $objdump = Join-Path -Path $env:DEVKITARM -ChildPath "arm-none-eabi\bin\objdump.exe"
-Write-Host "Dumping [0/2]"
 &$objdump -D -bbinary -marmv4t -Mforce-thumb --start-address="$start_str" --stop-address="$end_str" .\baserom.gba > .\baserom.dump
-Write-Host "Dumping [1/2]"
 &$objdump -D -bbinary -marmv4t -Mforce-thumb --start-address="$start_str" --stop-address="$end_str" .\pokeemerald.gba > .\pokeemerald.dump
-Write-Host "Dumping [2/2]"
 Invoke-Expression "$DiffTool .\baserom.dump .\pokeemerald.dump"
