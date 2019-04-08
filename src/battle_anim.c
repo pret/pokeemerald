@@ -2269,6 +2269,18 @@ static void ScriptCmd_monbg(void)
     gAnimScriptCallback = WaitAnimFrameCount;
 }
 
+u8 GetAnimBattlerId(u8 wantedBattler)
+{
+    if (wantedBattler == ANIM_ATTACKER)
+        return gBattleAnimAttacker;
+    else if (wantedBattler == ANIM_TARGET)
+        return gBattleAnimTarget;
+    else if (wantedBattler == ANIM_ATK_PARTNER)
+        return BATTLE_PARTNER(gBattleAnimAttacker);
+    else
+        return BATTLE_PARTNER(gBattleAnimTarget);
+}
+
 bool8 IsBattlerSpriteVisible(u8 battlerId)
 {
     if (IsContest())

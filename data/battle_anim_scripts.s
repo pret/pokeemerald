@@ -2035,80 +2035,80 @@ Move_LEAF_STORM:
 	waitforvisualfinish
 	monbgprio_28 ANIM_TARGET
 	setalpha 12, 8
-	playsewithpan SE_W026, 192
+	playsewithpan SE_W026, SOUND_PAN_ATTACKER
 	createsprite gBattleAnimSpriteTemplate_LeafStorm, ANIM_ATTACKER, 2, 14, -12, 0, -12, 15, 0, 0
 	createsprite gBattleAnimSpriteTemplate_LeafStorm, ANIM_ATTACKER, 2, 26, 8, 12, 8, 15, 0, 0
 	delay 3
-	playsewithpan SE_W026, 192
+	playsewithpan SE_W026, SOUND_PAN_ATTACKER
 	createsprite gBattleAnimSpriteTemplate_LeafStorm, ANIM_ATTACKER, 2, 14, -12, 0, -16, 19, 0, 0
 	createsprite gBattleAnimSpriteTemplate_LeafStorm, ANIM_ATTACKER, 2, 26, 8, 12, 12, 19, 0, 0
 	delay 3
-	playsewithpan SE_W026, 192
+	playsewithpan SE_W026, SOUND_PAN_ATTACKER
 	createsprite gBattleAnimSpriteTemplate_LeafStorm, ANIM_ATTACKER, 2, 14, -12, 0, -20, 23, 0, 0
 	createsprite gBattleAnimSpriteTemplate_LeafStorm, ANIM_ATTACKER, 2, 26, 8, 12, 16, 23, 0, 0
 	delay 3
 	createvisualtask AnimTask_ShakeMon, 5, ANIM_TARGET, 5, 0, 50, 1
-	playsewithpan SE_W026, 192
+	playsewithpan SE_W026, SOUND_PAN_ATTACKER
 	createsprite gBattleAnimSpriteTemplate_LeafStorm, ANIM_ATTACKER, 2, 14, -12, 0, -24, 27, 0, 0
 	createsprite gBattleAnimSpriteTemplate_LeafStorm, ANIM_ATTACKER, 2, 26, 8, 12, 20, 27, 0, 0
 	delay 3
-	playsewithpan SE_W026, 192
+	playsewithpan SE_W026, SOUND_PAN_ATTACKER
 	createsprite gBattleAnimSpriteTemplate_LeafStorm, ANIM_ATTACKER, 2, 14, -12, 0, -24, 27, 0, 0
 	createsprite gBattleAnimSpriteTemplate_LeafStorm, ANIM_ATTACKER, 2, 26, 8, 12, 20, 27, 0, 0
 	delay 3
-	playsewithpan SE_W026, 192
+	playsewithpan SE_W026, SOUND_PAN_ATTACKER
 	createsprite gBattleAnimSpriteTemplate_LeafStorm, ANIM_ATTACKER, 2, 14, -12, 0, -20, 23, 0, 0
 	createsprite gBattleAnimSpriteTemplate_LeafStorm, ANIM_ATTACKER, 2, 26, 8, 12, 16, 23, 0, 0
 	delay 3
-	playsewithpan SE_W026, 192
+	playsewithpan SE_W026, SOUND_PAN_ATTACKER
 	createsprite gBattleAnimSpriteTemplate_LeafStorm, ANIM_ATTACKER, 2, 14, -12, 0, -16, 19, 0, 0
 	createsprite gBattleAnimSpriteTemplate_LeafStorm, ANIM_ATTACKER, 2, 26, 8, 12, 12, 19, 0, 0
 	delay 3
-	playsewithpan SE_W026, 192
+	playsewithpan SE_W026, SOUND_PAN_ATTACKER
 	createsprite gBattleAnimSpriteTemplate_LeafStorm, ANIM_ATTACKER, 2, 14, -12, 0, -12, 15, 0, 0
 	createsprite gBattleAnimSpriteTemplate_LeafStorm, ANIM_ATTACKER, 2, 26, 8, 12, 8, 15, 0, 0
 	delay 3
-	playsewithpan SE_W026, 192
+	playsewithpan SE_W026, SOUND_PAN_ATTACKER
 	createsprite gBattleAnimSpriteTemplate_LeafStorm, ANIM_ATTACKER, 2, 14, -12, 0, -8, 11, 0, 0
 	createsprite gBattleAnimSpriteTemplate_LeafStorm, ANIM_ATTACKER, 2, 26, 8, 12, 8, 15, 0, 0
 	delay 3
-	playsewithpan SE_W026, 192
+	playsewithpan SE_W026, SOUND_PAN_ATTACKER
 	createsprite gBattleAnimSpriteTemplate_LeafStorm, ANIM_ATTACKER, 2, 14, -12, 0, -16, 19, 0, 0
 	createsprite gBattleAnimSpriteTemplate_LeafStorm, ANIM_ATTACKER, 2, 26, 8, 12, 12, 19, 0, 0
 	delay 3
-	playsewithpan SE_W026, 192
+	playsewithpan SE_W026, SOUND_PAN_ATTACKER
 	createsprite gBattleAnimSpriteTemplate_LeafStorm, ANIM_ATTACKER, 2, 14, -12, 0, -20, 23, 0, 0
 	createsprite gBattleAnimSpriteTemplate_LeafStorm, ANIM_ATTACKER, 2, 26, 8, 12, 16, 23, 0, 0
 	delay 3
-	playsewithpan SE_W026, 192
+	playsewithpan SE_W026, SOUND_PAN_ATTACKER
 	createsprite gBattleAnimSpriteTemplate_LeafStorm, ANIM_ATTACKER, 2, 14, -12, 0, -24, 27, 0, 0
 	createsprite gBattleAnimSpriteTemplate_LeafStorm, ANIM_ATTACKER, 2, 26, 8, 12, 20, 27, 0, 0
 	delay 3
-	playsewithpan SE_W026, 192
+	playsewithpan SE_W026, SOUND_PAN_ATTACKER
 	createsprite gBattleAnimSpriteTemplate_LeafStorm, ANIM_ATTACKER, 2, 14, -12, 0, -24, 27, 0, 0
 	createsprite gBattleAnimSpriteTemplate_LeafStorm, ANIM_ATTACKER, 2, 26, 8, 12, 20, 27, 0, 0
 	delay 3
-	playsewithpan SE_W026, 192
+	playsewithpan SE_W026, SOUND_PAN_ATTACKER
 	createsprite gBattleAnimSpriteTemplate_LeafStorm, ANIM_ATTACKER, 2, 14, -12, 0, -20, 23, 0, 0
 	createsprite gBattleAnimSpriteTemplate_LeafStorm, ANIM_ATTACKER, 2, 26, 8, 12, 16, 23, 0, 0
 	delay 3
-	playsewithpan SE_W026, 192
+	playsewithpan SE_W026, SOUND_PAN_ATTACKER
 	createsprite gBattleAnimSpriteTemplate_LeafStorm, ANIM_ATTACKER, 2, 14, -12, 0, -16, 19, 0, 0
 	createsprite gBattleAnimSpriteTemplate_LeafStorm, ANIM_ATTACKER, 2, 26, 8, 12, 12, 19, 0, 0
 	delay 3
-	playsewithpan SE_W026, 192
+	playsewithpan SE_W026, SOUND_PAN_ATTACKER
 	createsprite gBattleAnimSpriteTemplate_LeafStorm, ANIM_ATTACKER, 2, 14, -12, 0, -12, 15, 0, 0
 	createsprite gBattleAnimSpriteTemplate_LeafStorm, ANIM_ATTACKER, 2, 26, 8, 12, 8, 15, 0, 0
 	delay 3
-	playsewithpan SE_W026, 192
+	playsewithpan SE_W026, SOUND_PAN_ATTACKER
 	createsprite gBattleAnimSpriteTemplate_LeafStorm, ANIM_ATTACKER, 2, 14, -12, 0, -16, 19, 0, 0
 	createsprite gBattleAnimSpriteTemplate_LeafStorm, ANIM_ATTACKER, 2, 26, 8, 12, 12, 19, 0, 0
 	delay 3
-	playsewithpan SE_W026, 192
+	playsewithpan SE_W026, SOUND_PAN_ATTACKER
 	createsprite gBattleAnimSpriteTemplate_LeafStorm, ANIM_ATTACKER, 2, 14, -12, 0, -20, 23, 0, 0
 	createsprite gBattleAnimSpriteTemplate_LeafStorm, ANIM_ATTACKER, 2, 26, 8, 12, 16, 23, 0, 0
 	delay 3
-	playsewithpan SE_W026, 192
+	playsewithpan SE_W026, SOUND_PAN_ATTACKER
 	createsprite gBattleAnimSpriteTemplate_LeafStorm, ANIM_ATTACKER, 2, 14, -12, 0, -24, 27, 0, 0
 	createsprite gBattleAnimSpriteTemplate_LeafStorm, ANIM_ATTACKER, 2, 26, 8, 12, 20, 27, 0, 0
 	delay 3
@@ -2120,7 +2120,7 @@ Move_LEAF_STORM:
 	createsprite gBattleAnimSpriteTemplate_LeafStorm2, ANIM_TARGET, 2, 1, 1, 0, 36, 10
 	createsprite gBattleAnimSpriteTemplate_LeafStorm2, ANIM_TARGET, 2, 1, 1, -24, 12, 10
 	createsprite gBattleAnimSpriteTemplate_LeafStorm2, ANIM_TARGET, 2, 1, 1, -24, -12, 10
-	playsewithpan SE_W013, 63
+	playsewithpan SE_W013, SOUND_PAN_TARGET
 	delay 2
 	createsprite gBattleAnimSpriteTemplate_LeafStorm2, ANIM_TARGET, 2, 1, 1, 36, 0, 10
 	createsprite gBattleAnimSpriteTemplate_LeafStorm2, ANIM_TARGET, 2, 1, 1, 12, -24, 10
@@ -2129,7 +2129,6 @@ Move_LEAF_STORM:
 	createsprite gBattleAnimSpriteTemplate_LeafStorm2, ANIM_TARGET, 2, 1, 1, -12, 24, 10
 	createsprite gBattleAnimSpriteTemplate_LeafStorm2, ANIM_TARGET, 2, 1, 1, -12, -24, 10
 	waitforvisualfinish
-	clearmonbg ANIM_DEF_PARTNER
 	blendoff
 	delay 0
 	createsprite gSimplePaletteBlendSpriteTemplate, ANIM_ATTACKER, 2, 1, 1, 12, 0, RGB(13, 31, 12)
@@ -2643,7 +2642,59 @@ Move_ION_DELUGE:
 	end
 	
 Move_PARABOLIC_CHARGE:
+	loadspritegfx ANIM_TAG_ELECTRIC_ORBS
+	loadspritegfx ANIM_TAG_CIRCLE_OF_LIGHT
+	loadspritegfx ANIM_TAG_SPARK
+	loadspritegfx ANIM_TAG_LIGHTNING
+	loadspritegfx ANIM_TAG_ORBS
+	loadspritegfx ANIM_TAG_BLUE_STAR
+	monbg ANIM_ATTACKER
+	setalpha 12, 8
+	createsprite gSimplePaletteBlendSpriteTemplate, ANIM_ATTACKER, 2, 1, 1, 0, 6, RGB(18, 16, 3)
+	waitforvisualfinish
+	createvisualtask sub_810AAFC, 2, ANIM_ATTACKER, 3, 20, 20
+	playsewithpan SE_W129, SOUND_PAN_ATTACKER
+	delay 12
+	createsprite gUnknown_08595A18, ANIM_ATTACKER, 2
+	delay 30
+	jumpifdoublebattle ParabolicChargeDouble
+	createvisualtask sub_810B29C, 5, ANIM_TARGET
+	delay 12
+	waitforvisualfinish
+	createvisualtask sub_810B55C, 5, ANIM_TARGET
+	playsewithpan SE_W070, SOUND_PAN_TARGET
+	waitforvisualfinish
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 0, 6, 18, 1
+	createvisualtask sub_8116620, 5, 4, 0, 16, 16, RGB_BLACK
+	delay 4
+	createvisualtask sub_8116620, 5, 4, 0, 0, 0, RGB_BLACK
+ParabolicChargeHeal:
+	waitforvisualfinish
+	clearmonbg ANIM_ATTACKER
+	waitforvisualfinish
+	call HealingEffect
+	createsprite gSimplePaletteBlendSpriteTemplate, ANIM_ATTACKER, 2, 1, 1, 6, 0, RGB(18, 16, 3)
+	waitforvisualfinish
+	blendoff
 	end
+ParabolicChargeDouble:
+	createvisualtask sub_810B29C, 5, ANIM_TARGET
+	createvisualtask sub_810B29C, 5, ANIM_DEF_PARTNER
+	createvisualtask sub_810B29C, 5, ANIM_ATK_PARTNER
+	delay 12
+	waitforvisualfinish
+	createvisualtask sub_810B55C, 5, ANIM_TARGET
+	createvisualtask sub_810B55C, 5, ANIM_DEF_PARTNER
+	createvisualtask sub_810B55C, 5, ANIM_ATK_PARTNER
+	playsewithpan SE_W070, SOUND_PAN_TARGET
+	waitforvisualfinish
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 0, 6, 18, 1
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_DEF_PARTNER, 0, 6, 18, 1
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_ATK_PARTNER, 0, 6, 18, 1
+	createvisualtask sub_8116620, 5, 4 | 8 | 0x10, 0, 16, 16, RGB_BLACK
+	delay 4
+	createvisualtask sub_8116620, 5, 4 | 8 | 0x10, 0, 0, 0, RGB_BLACK
+	goto ParabolicChargeHeal;
 	
 Move_FORESTS_CURSE:
 	end
@@ -6956,10 +7007,10 @@ Move_SHOCK_WAVE:
 	delay 12
 	createsprite gUnknown_08595A18, ANIM_ATTACKER, 2
 	delay 30
-	createvisualtask sub_810B29C, 5
+	createvisualtask sub_810B29C, 5, ANIM_TARGET
 	delay 12
 	waitforvisualfinish
-	createvisualtask sub_810B55C, 5
+	createvisualtask sub_810B55C, 5, ANIM_TARGET
 	playsewithpan SE_W161B, SOUND_PAN_TARGET
 	waitforvisualfinish
 	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 0, 6, 18, 1
