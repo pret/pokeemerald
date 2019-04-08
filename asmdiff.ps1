@@ -107,8 +107,10 @@ if ($start_num -gt 0x1000000)
 $end_str = [System.Convert]::ToString($start_num + $offset_num, 16)
 $end_str = "0x$end_str"
 
-Write-Host "$Start - $end_str"
+$start_str = "0x$Start"
+
+Write-Host "$start_str - $end_str"
 $objdump = Join-Path -Path $env:DEVKITARM -ChildPath "arm-none-eabi\bin\objdump.exe"
-&$objdump -D -bbinary -marmv4t -Mforce-thumb --start-address="$Start" --stop-address="$end_str" .\baserom.gba > .\baserom.dump
-&$objdump -D -bbinary -marmv4t -Mforce-thumb --start-address="$Start" --stop-address="$end_str" .\pokeemerald.gba > .\pokeemerald.dump
+&$objdump -D -bbinary -marmv4t -Mforce-thumb --start-address="$start_str" --stop-address="$end_str" .\baserom.gba > .\baserom.dump
+&$objdump -D -bbinary -marmv4t -Mforce-thumb --start-address="$start_str" --stop-address="$end_str" .\pokeemerald.gba > .\pokeemerald.dump
 Invoke-Expression "$DiffTool .\baserom.dump .\pokeemerald.dump"
