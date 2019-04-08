@@ -1,8 +1,12 @@
 #include "global.h"
 #include "alloc.h"
+#include "item.h"
 #include "link.h"
 #include "main.h"
+#include "menu.h"
 #include "palette.h"
+#include "random.h"
+#include "save.h"
 #include "sound.h"
 #include "sprite.h"
 #include "task.h"
@@ -35,7 +39,7 @@ struct PokemonJump1_82E4
 
 struct PokemonJump1
 {
-    MainCallback unk0;
+    MainCallback returnCallback;
     u8 unk4;
     u8 unk5;
     u8 unk6;
@@ -53,12 +57,16 @@ struct PokemonJump1
     u8 filler28[0x4];
     int unk2C;
     u32 unk30;
-    u8 filler34[0x6];
+    u8 filler34[0x2];
+    u16 unk36;
+    u8 filler38[0x2];
     u16 unk3A;
-    u8 filler3C[0x6];
+    u16 unk3C;
+    u16 unk3E;
+    u16 unk40;
     u16 unk42;
     u8 unk44;
-    u8 filler45[0x1];
+    u8 unk45;
     u8 unk46;
     u8 isLeader;
     u8 unk48;
@@ -119,43 +127,77 @@ static void sub_802AF80(u8 taskId);
 static void sub_802B008(void);
 static void sub_802B194(u8 taskId);
 static void sub_802B1FC(void);
-bool32 sub_802B248(void);
-bool32 sub_802B2D4(void);
-bool32 sub_802B368(void);
-bool32 sub_802B3D4(void);
-bool32 sub_802B4CC(void);
-bool32 sub_802B5C8(void);
-bool32 sub_802B664(void);
-bool32 sub_802B6B8(void);
-bool32 sub_802B720(void);
-bool32 sub_802B29C(void);
-bool32 sub_802B31C(void);
-bool32 sub_802B3B4(void);
-bool32 sub_802B470(void);
-bool32 sub_802B568(void);
-bool32 sub_802B628(void);
-bool32 sub_802B664(void);
-bool32 sub_802B704(void);
-bool32 sub_802B720(void);
-bool32 sub_802B7E0(void);
-bool32 sub_802B8CC(void);
+static bool32 sub_802B248(void);
+static bool32 sub_802B2D4(void);
+static bool32 sub_802B368(void);
+static bool32 sub_802B3D4(void);
+static bool32 sub_802B470(void);
+static bool32 sub_802B4CC(void);
+static bool32 sub_802B568(void);
+static bool32 sub_802B5C8(void);
+static bool32 sub_802B628(void);
+static bool32 sub_802B664(void);
+static bool32 sub_802B6B8(void);
+static bool32 sub_802B704(void);
+static bool32 sub_802B720(void);
+static bool32 sub_802B7E0(void);
+static bool32 sub_802B8CC(void);
+static bool32 sub_802B964(void);
+static bool32 sub_802B29C(void);
+static bool32 sub_802B31C(void);
+static bool32 sub_802B3B4(void);
+static bool32 sub_802BA58(void);
+static bool32 sub_802BB84(void);
+static bool32 sub_802BC60(void);
+static bool32 sub_802BD30(void);
 void sub_802BD84(u8 taskId);
 void sub_802BE60(TaskFunc func, u8 taskPriority);
 void sub_802BE80(void);
+void sub_802BEA0(void);
+void sub_802BEE4(void);
 void sub_802C0B8(void);
 void sub_802C0E8(void);
+void sub_802C114(void);
+void sub_802C164(void);
 void sub_802C1DC(void);
+bool32 sub_802C130(u16);
+void sub_802C260(void);
+void sub_802C270(void);
 void sub_802C43C(void);
+void sub_802C808(u16, u16 *, u16 *);
 bool32 sub_802C538(void);
+bool32 sub_802C650(void);
+bool32 sub_802C5DC(void);
 bool32 sub_802C70C(void);
+bool32 sub_802C7BC(void);
+u16 sub_802C7E0(void);
+u16 sub_802C880(u16, u16);
 void sub_802D074(void *);
 void sub_802D0AC(void);
+void sub_802D0C8(int);
 int sub_802D0F0(void);
+void sub_802D764(void);
+bool32 sub_802D788(void);
+void sub_802D7E8(u16, u16);
+void sub_802D884(u16);
+void sub_802D8FC(u16);
+bool32 sub_802D974(void);
+void sub_802DA14(void);
+bool32 sub_802DA44(void);
+void sub_802DD64(int);
+s8 sub_802DA8C(void);
+void sub_802DDA0(u8);
+int sub_802DDB8(int);
+void sub_802DDCC(void);
+void sub_802DDE0(void);
+void sub_802DDF4(int);
+int sub_802DE08(void);
 void sub_802E138(struct PokemonJump1_82E4 *, u8 *);
 bool32 sub_802E1BC(struct PokemonJump1_82E4 *, struct Unk802B078 *);
 void sub_802E234(struct PokemonJump1_82E4 *, u8 , u16);
 bool32 sub_802E264(struct PokemonJump1_82E4 *, int, u8 *, u16 *);
 bool32 sub_802E2D0(struct PokemonJump1_82E4 *, int);
+int sub_802E354(int, u16, u16);
 void sub_802E3A8(void);
 
 extern struct PokemonJump1 *gUnknown_02022CFC;
@@ -302,7 +344,7 @@ void sub_802A9A8(u16 partyIndex, MainCallback callback)
             ResetTasks();
             taskId = CreateTask(sub_802ACA0, 1);
             gUnknown_02022CFC->unk8 = 0;
-            gUnknown_02022CFC->unk0 = callback;
+            gUnknown_02022CFC->returnCallback = callback;
             gUnknown_02022CFC->unk4 = taskId;
             gUnknown_02022CFC->unk6 = GetMultiplayerId();
             sub_802AC2C(&gUnknown_02022CFC->unk82A8[gUnknown_02022CFC->unk6], &gPlayerParty[partyIndex]);
@@ -316,7 +358,7 @@ void sub_802A9A8(u16 partyIndex, MainCallback callback)
     SetMainCallback2(callback);
 }
 
-void sub_802AA48(void)
+static void sub_802AA48(void)
 {
     sub_802D0AC();
     Free(gUnknown_02022CFC);
@@ -728,7 +770,7 @@ static void sub_802B1FC(void)
     }
 }
 
-bool32 sub_802B248(void)
+static bool32 sub_802B248(void)
 {
     switch (gUnknown_02022CFC->unk8)
     {
@@ -749,7 +791,7 @@ bool32 sub_802B248(void)
     return TRUE;
 }
 
-bool32 sub_802B29C(void)
+static bool32 sub_802B29C(void)
 {
     switch (gUnknown_02022CFC->unk8)
     {
@@ -765,7 +807,7 @@ bool32 sub_802B29C(void)
     return TRUE;
 }
 
-bool32 sub_802B2D4(void)
+static bool32 sub_802B2D4(void)
 {
     switch (gUnknown_02022CFC->unk8)
     {
@@ -786,7 +828,7 @@ bool32 sub_802B2D4(void)
     return TRUE;
 }
 
-bool32 sub_802B31C(void)
+static bool32 sub_802B31C(void)
 {
     switch (gUnknown_02022CFC->unk8)
     {
@@ -805,7 +847,7 @@ bool32 sub_802B31C(void)
     return TRUE;
 }
 
-bool32 sub_802B368(void)
+static bool32 sub_802B368(void)
 {
     if (!sub_802B8CC())
     {
@@ -825,7 +867,7 @@ bool32 sub_802B368(void)
     return FALSE;
 }
 
-bool32 sub_802B3B4(void)
+static bool32 sub_802B3B4(void)
 {
     if (!sub_802B8CC())
         ;
@@ -835,4 +877,590 @@ bool32 sub_802B3B4(void)
         sub_802C0B8();
 
     return FALSE;
+}
+
+static bool32 sub_802B3D4(void)
+{
+    switch (gUnknown_02022CFC->unk8)
+    {
+    case 0:
+        sub_802C538();
+        if (sub_802C5DC())
+            gUnknown_02022CFC->unk8++;
+        break;
+    case 1:
+        if (!sub_802B964())
+        {
+            if (sub_802C7BC())
+            {
+                gUnknown_02022CFC->unk72 = sub_802C7E0();
+                gUnknown_02022CFC->unk4C = 7;
+            }
+            else if (gUnknown_02022CFC->unk74 >= 200)
+            {
+                gUnknown_02022CFC->unk72 = gUnknown_02022CFC->unkE;
+                gUnknown_02022CFC->unk4C = 8;
+            }
+            else
+            {
+                gUnknown_02022CFC->unk72 = gUnknown_02022CFC->unkE;
+                gUnknown_02022CFC->unk4C = 4;
+            }
+
+            gUnknown_02022CFC->unk8++;
+            return FALSE;
+        }
+        break;
+    case 2:
+        return FALSE;
+    }
+
+    return TRUE;
+}
+
+static bool32 sub_802B470(void)
+{
+    switch (gUnknown_02022CFC->unk8)
+    {
+    case 0:
+        if (!sub_802C538())
+            sub_802C0B8();
+        if (sub_802C5DC())
+            gUnknown_02022CFC->unk8++;
+        break;
+    case 1:
+        if (!sub_802B964())
+        {
+            gUnknown_02022CFC->unk8++;
+            return FALSE;
+        }
+        break;
+    case 2:
+        return FALSE;
+    }
+
+    return TRUE;
+}
+
+static bool32 sub_802B4CC(void)
+{
+    switch (gUnknown_02022CFC->unk8)
+    {
+    case 0:
+        sub_802AE14(4);
+        gUnknown_02022CFC->unk8++;
+        // fall through
+    case 1:
+        if (!sub_802BB84())
+        {
+            sub_802E354(gUnknown_02022CFC->unk78, gUnknown_02022CFC->unk74, gUnknown_02022CFC->unk72);
+            gUnknown_02022CFC->unk8++;
+        }
+        break;
+    case 2:
+        if (gUnknown_02022CFC->unk49)
+        {
+            if (sub_802C650())
+                gUnknown_02022CFC->unk4C = 5;
+            else
+                gUnknown_02022CFC->unk4C = 6;
+
+            gUnknown_02022CFC->unk8++;
+            return FALSE;
+        }
+        break;
+    case 3:
+        return FALSE;
+    }
+
+    return TRUE;
+}
+
+static bool32 sub_802B568(void)
+{
+    switch (gUnknown_02022CFC->unk8)
+    {
+    case 0:
+        sub_802AE14(0);
+        gUnknown_02022CFC->unk8++;
+        // fall through
+    case 1:
+        if (!sub_802BB84())
+        {
+            sub_802E354(gUnknown_02022CFC->unk78, gUnknown_02022CFC->unk74, gUnknown_02022CFC->unk72);
+            gUnknown_02022CFC->unk42 = gUnknown_02022CFC->unk45;
+            return FALSE;
+        }
+        break;
+    }
+
+    return TRUE;
+}
+
+static bool32 sub_802B5C8(void)
+{
+    switch (gUnknown_02022CFC->unk8)
+    {
+    case 0:
+        if (!sub_802BD30())
+            gUnknown_02022CFC->unk8++;
+        break;
+    case 1:
+        if (gUnknown_02022CFC->unk49)
+        {
+            sub_802AA94(gUnknown_02022CFC);
+            gUnknown_02022CFC->unk24 = Random();
+            gUnknown_02022CFC->unk72 = gUnknown_02022CFC->unk24;
+            gUnknown_02022CFC->unk4C = 0;
+            return FALSE;
+        }
+        break;
+    }
+
+    return TRUE;
+}
+
+static bool32 sub_802B628(void)
+{
+    switch (gUnknown_02022CFC->unk8)
+    {
+    case 0:
+        if (!sub_802BD30())
+        {
+            sub_802AA94(gUnknown_02022CFC);
+            gUnknown_02022CFC->unk8++;
+            return FALSE;
+        }
+        break;
+    case 1:
+        return FALSE;
+    }
+
+    return TRUE;
+}
+
+static bool32 sub_802B664(void)
+{
+    switch (gUnknown_02022CFC->unk8)
+    {
+    case 0:
+        gUnknown_02022CFC->unk8 = 1;
+        break;
+    case 1:
+        sub_802AE14(0);
+        gUnknown_02022CFC->unk8++;
+        break;
+    case 2:
+        if (!sub_802BC60())
+        {
+            SetMainCallback2(gUnknown_02022CFC->returnCallback);
+            sub_802AA48();
+        }
+        break;
+    }
+
+    return TRUE;
+}
+
+static bool32 sub_802B6B8(void)
+{
+    switch (gUnknown_02022CFC->unk8)
+    {
+    case 0:
+        sub_802AE14(4);
+        gUnknown_02022CFC->unk8++;
+        break;
+    case 1:
+        if (!sub_802BA58())
+        {
+            gUnknown_02022CFC->unk72 = gUnknown_02022CFC->unkE;
+            gUnknown_02022CFC->unk4C = 8;
+            return FALSE;
+        }
+        break;
+    }
+
+    return TRUE;
+}
+
+static bool32 sub_802B704(void)
+{
+    sub_802AE14(0);
+    if (!sub_802BA58())
+        return FALSE;
+    else
+        return TRUE;
+}
+
+static bool32 sub_802B720(void)
+{
+    switch (gUnknown_02022CFC->unk8)
+    {
+    case 0:
+        sub_802E354(gUnknown_02022CFC->unk78, gUnknown_02022CFC->unk74, gUnknown_02022CFC->unk72);
+        sub_802D0C8(5);
+        gUnknown_02022CFC->unk8++;
+        break;
+    case 1:
+        if (!sub_802D0F0())
+        {
+            sub_802AE14(0);
+            gUnknown_02022CFC->unk8++;
+        }
+        break;
+    case 2:
+        if (sub_802C70C())
+        {
+            CreateTask(sub_8153688, 6);
+            gUnknown_02022CFC->unk8++;
+        }
+        break;
+    case 3:
+        if (!FuncIsActiveTask(sub_8153688))
+        {
+            sub_802DA14();
+            gUnknown_02022CFC->unk8++;
+        }
+        break;
+    case 4:
+        if (!sub_802DA44())
+        {
+            gUnknown_02022CFC->unk4C = 4;
+            return FALSE;
+        }
+        break;
+    }
+
+    return TRUE;
+}
+
+static bool32 sub_802B7E0(void)
+{
+    int var0;
+
+    switch (gUnknown_02022CFC->unkA)
+    {
+    case 0:
+        sub_802D0C8(2);
+        sub_802DDE0();
+        gUnknown_02022CFC->unkA++;
+        break;
+    case 1:
+        var0 = sub_802D0F0();
+        if (!var0)
+        {
+            sub_802DDF4(gUnknown_02022CFC->unk6);
+            gUnknown_02022CFC->unk3C = 0;
+            gUnknown_02022CFC->unkA++;
+        }
+        break;
+    case 2:
+        if (++gUnknown_02022CFC->unk3C > 120)
+        {
+            sub_802D0C8(3);
+            gUnknown_02022CFC->unkA++;
+        }
+        break;
+    case 3:
+        if (sub_802D0F0() != 1 && sub_802DE08() != 1)
+            gUnknown_02022CFC->unkA++;
+        break;
+    case 4:
+        sub_802D0C8(9);
+        gUnknown_02022CFC->unkA++;
+        break;
+    case 5:
+        if (!sub_802D0F0())
+        {
+            sub_802C260();
+            sub_802D764();
+            gUnknown_02022CFC->unkA++;
+        }
+        break;
+    case 6:
+        if (!sub_802D788())
+        {
+            sub_802C270();
+            sub_802BEA0();
+            gUnknown_02022CFC->unkA++;
+            return FALSE;
+        }
+        break;
+    case 7:
+        return FALSE;
+    }
+
+    return TRUE;
+}
+
+static bool32 sub_802B8CC(void)
+{
+    sub_802BEE4();
+    if (gUnknown_02022CFC->unk36)
+    {
+        gUnknown_02022CFC->unk36 = 0;
+        return FALSE;
+    }
+
+    switch (gUnknown_02022CFC->unkA)
+    {
+    case 0:
+        if (sub_802C130(0))
+            gUnknown_02022CFC->unkA++;
+        else
+            break;
+        // fall through
+    case 1:
+        if (gMain.newKeys & A_BUTTON)
+        {
+            sub_802C164();
+            sub_802AE14(3);
+            gUnknown_02022CFC->unkA++;
+        }
+        break;
+    case 2:
+        if (sub_802C130(1) == TRUE)
+            gUnknown_02022CFC->unkA++;
+        break;
+    case 3:
+        if (sub_802C130(0) == TRUE)
+            gUnknown_02022CFC->unkA = 0;
+        break;
+    }
+
+    return TRUE;
+}
+
+static bool32 sub_802B964(void)
+{
+    int i;
+
+    switch (gUnknown_02022CFC->unkA)
+    {
+    case 0:
+        for (i = 0; i < gUnknown_02022CFC->unk5; i++)
+        {
+            if (sub_802DDB8(i) == 1)
+                return TRUE;
+        }
+
+        gUnknown_02022CFC->unkA++;
+        break;
+    case 1:
+        for (i = 0; i < gUnknown_02022CFC->unk5; i++)
+        {
+            if (gUnknown_02022CFC->unk82E4[i].unk10 == 2)
+                sub_802DDA0(i);
+        }
+
+        sub_802D0C8(1);
+        gUnknown_02022CFC->unk3C = 0;
+        gUnknown_02022CFC->unkA++;
+        break;
+    case 2:
+        if (++gUnknown_02022CFC->unk3C > 100)
+        {
+            sub_802D0C8(3);
+            gUnknown_02022CFC->unk3C = 0;
+            gUnknown_02022CFC->unkA++;
+        }
+        break;
+    case 3:
+        if (!sub_802D0F0())
+        {
+            sub_802DDCC();
+            gUnknown_02022CFC->unk71 = 0;
+            sub_802C114();
+            gUnknown_02022CFC->unkA++;
+            return FALSE;
+        }
+        break;
+    case 4:
+        return FALSE;
+    }
+
+    return TRUE;
+}
+
+static bool32 sub_802BA58(void)
+{
+    switch (gUnknown_02022CFC->unkA)
+    {
+    case 0:
+        sub_802C808(gUnknown_02022CFC->unk72, &gUnknown_02022CFC->unk3E, &gUnknown_02022CFC->unk40);
+        sub_802D7E8(gUnknown_02022CFC->unk3E, gUnknown_02022CFC->unk40);
+        gUnknown_02022CFC->unkA++;
+        break;
+    case 1:
+    case 4:
+        if (!sub_802D974())
+        {
+            gUnknown_02022CFC->unk3C = 0;
+            gUnknown_02022CFC->unkA++;
+        }
+        break;
+    case 2:
+    case 5:
+        gUnknown_02022CFC->unk3C++;
+        if (gMain.newKeys & (A_BUTTON | B_BUTTON) || gUnknown_02022CFC->unk3C > 180)
+        {
+            sub_802DA14();
+            gUnknown_02022CFC->unkA++;
+        }
+        break;
+    case 3:
+        if (!sub_802DA44())
+        {
+            gUnknown_02022CFC->unk40 = sub_802C880(gUnknown_02022CFC->unk3E, gUnknown_02022CFC->unk40);
+            if (gUnknown_02022CFC->unk40 && AddBagItem(gUnknown_02022CFC->unk3E, gUnknown_02022CFC->unk40))
+            {
+                if (!CheckBagHasSpace(gUnknown_02022CFC->unk3E, 1))
+                {
+                    sub_802D884(gUnknown_02022CFC->unk3E);
+                    gUnknown_02022CFC->unkA = 4;
+                }
+                else
+                {
+                    gUnknown_02022CFC->unkA = 6;
+                    break;
+                }
+            }
+            else
+            {
+                sub_802D8FC(gUnknown_02022CFC->unk3E);
+                gUnknown_02022CFC->unkA = 4;
+            }
+        }
+        break;
+    case 6:
+        if (!sub_802DA44())
+            return FALSE;
+        break;
+    }
+
+    return TRUE;
+}
+
+static bool32 sub_802BB84(void)
+{
+    s8 input;
+
+    switch (gUnknown_02022CFC->unkA)
+    {
+    case 0:
+        sub_802D0C8(4);
+        gUnknown_02022CFC->unkA++;
+        break;
+    case 1:
+        if (!sub_802D0F0())
+            gUnknown_02022CFC->unkA++;
+        break;
+    case 2:
+        input = sub_802DA8C();
+        switch (input)
+        {
+        case MENU_B_PRESSED:
+        case 1:
+            gUnknown_02022CFC->unk45 = 1;
+            sub_802D0C8(6);
+            gUnknown_02022CFC->unkA++;
+            break;
+        case 0:
+            gUnknown_02022CFC->unk45 = 2;
+            sub_802D0C8(6);
+            gUnknown_02022CFC->unkA++;
+            break;
+        }
+        break;
+    case 3:
+        if (!sub_802D0F0())
+            gUnknown_02022CFC->unkA++;
+        break;
+    case 4:
+        sub_802D0C8(8);
+        gUnknown_02022CFC->unkA++;
+        break;
+    case 5:
+        if (!sub_802D0F0())
+        {
+            gUnknown_02022CFC->unkA++;
+            return FALSE;
+        }
+        break;
+    case 6:
+        return FALSE;
+    }
+
+    return TRUE;
+}
+
+static bool32 sub_802BC60(void)
+{
+    int var0;
+
+    switch (gUnknown_02022CFC->unkA)
+    {
+    case 0:
+        sub_802DA14();
+        gUnknown_02022CFC->unkA++;
+        break;
+    case 1:
+        if (!sub_802DA44())
+        {
+            sub_802D0C8(7);
+            gUnknown_02022CFC->unkA++;
+        }
+        break;
+    case 2:
+        var0 = sub_802D0F0();
+        if (!var0)
+        {
+            gUnknown_02022CFC->unk3C = var0;
+            gUnknown_02022CFC->unkA++;
+        }
+        break;
+    case 3:
+        if (++gUnknown_02022CFC->unk3C > 120)
+        {
+            BeginNormalPaletteFade(0xFFFFFFFF, -1, 0, 16, RGB_BLACK);
+            gUnknown_02022CFC->unkA++;
+        }
+        break;
+    case 4:
+        if (!gPaletteFade.active)
+        {
+            sub_800AC34();
+            gUnknown_02022CFC->unkA++;
+        }
+        break;
+    case 5:
+        if (!gReceivedRemoteLinkPlayers)
+            return FALSE;
+        break;
+    }
+
+    return TRUE;
+}
+
+static bool32 sub_802BD30(void)
+{
+    switch (gUnknown_02022CFC->unkA)
+    {
+    case 0:
+        sub_802DA14();
+        sub_802DD64(0);
+        gUnknown_02022CFC->unkA++;
+        break;
+    case 1:
+        if (!sub_802DA44())
+        {
+            gUnknown_02022CFC->unkA++;
+            return FALSE;
+        }
+        break;
+    case 2:
+        return FALSE;
+    }
+
+    return TRUE;
 }
