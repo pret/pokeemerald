@@ -5,127 +5,6 @@
 
 @ File centered around AllocSubstruct(2)
 
-	thumb_func_start sub_81C98D4
-sub_81C98D4: @ 81C98D4
-	push {r4,lr}
-	movs r4, 0
-_081C98D8:
-	adds r0, r4, 0
-	bl sub_81CB0C8
-	ldr r1, =gMapHeader
-	lsls r0, 24
-	lsrs r0, 24
-	ldrb r1, [r1, 0x14]
-	cmp r0, r1
-	bne _081C9914
-	adds r0, r4, 0
-	bl sub_81CAE08
-	cmp r0, 0
-	beq _081C9914
-	ldr r0, =gSaveBlock1Ptr
-	ldr r0, [r0]
-	ldr r1, =0x000009ca
-	adds r0, r1
-	adds r0, r4
-	ldrb r0, [r0]
-	cmp r0, 0
-	beq _081C9914
-	movs r0, 0x1
-	b _081C991C
-	.pool
-_081C9914:
-	adds r4, 0x1
-	cmp r4, 0x4D
-	ble _081C98D8
-	movs r0, 0
-_081C991C:
-	pop {r4}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_81C98D4
-
-	thumb_func_start sub_81C9924
-sub_81C9924: @ 81C9924
-	push {lr}
-	bl sub_81C9958
-	adds r1, r0, 0
-	cmp r1, 0
-	beq _081C9938
-	movs r0, 0
-	strb r0, [r1, 0xD]
-	movs r0, 0x1
-	b _081C993A
-_081C9938:
-	movs r0, 0
-_081C993A:
-	pop {r1}
-	bx r1
-	thumb_func_end sub_81C9924
-
-	thumb_func_start sub_81C9940
-sub_81C9940: @ 81C9940
-	push {lr}
-	bl sub_81C9958
-	adds r1, r0, 0
-	cmp r1, 0
-	beq _081C9952
-	movs r0, 0x1
-	strb r0, [r1, 0xD]
-	b _081C9954
-_081C9952:
-	movs r0, 0
-_081C9954:
-	pop {r1}
-	bx r1
-	thumb_func_end sub_81C9940
-
-	thumb_func_start sub_81C9958
-sub_81C9958: @ 81C9958
-	push {r4,lr}
-	ldr r1, =0x0000088c
-	movs r0, 0x2
-	bl AllocSubstruct
-	adds r4, r0, 0
-	cmp r4, 0
-	beq _081C997A
-	movs r0, 0
-	strb r0, [r4, 0xC]
-	ldr r0, =sub_81C9A10
-	movs r1, 0x1
-	bl CreateLoopedTask
-	str r0, [r4, 0x4]
-	ldr r0, =sub_81C99FC
-	str r0, [r4]
-_081C997A:
-	adds r0, r4, 0
-	pop {r4}
-	pop {r1}
-	bx r1
-	.pool
-	thumb_func_end sub_81C9958
-
-	thumb_func_start sub_81C9990
-sub_81C9990: @ 81C9990
-	push {r4,r5,lr}
-	adds r4, r0, 0
-	movs r0, 0x2
-	bl GetSubstructPtr
-	adds r5, r0, 0
-	ldr r0, =gUnknown_086201A0
-	lsls r4, 2
-	adds r4, r0
-	ldr r0, [r4]
-	movs r1, 0x1
-	bl CreateLoopedTask
-	str r0, [r5, 0x4]
-	ldr r0, =sub_81C99FC
-	str r0, [r5]
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_81C9990
-
 	thumb_func_start sub_81C99C0
 sub_81C99C0: @ 81C99C0
 	push {lr}
@@ -166,8 +45,8 @@ sub_81C99FC: @ 81C99FC
 	bx r1
 	thumb_func_end sub_81C99FC
 
-	thumb_func_start sub_81C9A10
-sub_81C9A10: @ 81C9A10
+	thumb_func_start LoopedTask_sub_81C9A10
+LoopedTask_sub_81C9A10: @ 81C9A10
 	push {r4,r5,lr}
 	sub sp, 0x4
 	adds r4, r0, 0
@@ -415,7 +294,7 @@ _081C9C62:
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_81C9A10
+	thumb_func_end LoopedTask_sub_81C9A10
 
 	thumb_func_start sub_81C9C6C
 sub_81C9C6C: @ 81C9C6C
