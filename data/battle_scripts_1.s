@@ -2851,7 +2851,7 @@ BattleScript_EffectDoNothing::
 	goto BattleScript_MoveEnd
 BattleScript_EffectHoldHands:
 	jumpifsideaffecting BS_TARGET, SIDE_STATUS_CRAFTY_SHIELD, BattleScript_ButItFailed
-	jumpifnotbattletype BATTLE_TYPE_TWO_OPPONENTS | BATTLE_TYPE_DOUBLE, BattleScript_ButItFailed
+	jumpifbyteequal gBattlerTarget, gBattlerAttacker, BattleScript_ButItFailed
 	attackanimation
 	waitanimation
 	goto BattleScript_MoveEnd
