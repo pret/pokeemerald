@@ -49,13 +49,13 @@
         {
             "elevation": 0,
             "flag": "FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_RIVAL_BEDROOM",
-            "graphics_id": "EVENT_OBJ_GFX_AQUA_MEMBER_F",
+            "graphics_id": "EVENT_OBJ_GFX_LITTLE_GIRL",
             "movement_range_x": 1,
             "movement_range_y": 0,
             "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
             "script": "LittlerootTown_MaysHouse_2F_EventScript_1F94C1",
-            "trainer_sight_or_berry_tree_id": "",
-            "trainer_type": "",
+            "trainer_sight_or_berry_tree_id": "0",
+            "trainer_type": "0",
             "x": 1,
             "y": 1
         },
@@ -67,8 +67,8 @@
             "movement_range_y": 0,
             "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
             "script": "0x0",
-            "trainer_sight_or_berry_tree_id": "",
-            "trainer_type": "",
+            "trainer_sight_or_berry_tree_id": "0",
+            "trainer_type": "0",
             "x": 0,
             "y": 6
         },
@@ -80,8 +80,8 @@
             "movement_range_y": 0,
             "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
             "script": "0x0",
-            "trainer_sight_or_berry_tree_id": "",
-            "trainer_type": "",
+            "trainer_sight_or_berry_tree_id": "0",
+            "trainer_type": "0",
             "x": 1,
             "y": 6
         },
@@ -93,8 +93,8 @@
             "movement_range_y": 0,
             "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
             "script": "0x0",
-            "trainer_sight_or_berry_tree_id": "",
-            "trainer_type": "",
+            "trainer_sight_or_berry_tree_id": "0",
+            "trainer_type": "0",
             "x": 2,
             "y": 6
         },
@@ -106,8 +106,8 @@
             "movement_range_y": 0,
             "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
             "script": "0x0",
-            "trainer_sight_or_berry_tree_id": "",
-            "trainer_type": "",
+            "trainer_sight_or_berry_tree_id": "0",
+            "trainer_type": "0",
             "x": 3,
             "y": 6
         },
@@ -119,8 +119,8 @@
             "movement_range_y": 0,
             "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
             "script": "0x0",
-            "trainer_sight_or_berry_tree_id": "",
-            "trainer_type": "",
+            "trainer_sight_or_berry_tree_id": "0",
+            "trainer_type": "0",
             "x": 4,
             "y": 6
         },
@@ -132,8 +132,8 @@
             "movement_range_y": 0,
             "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
             "script": "0x0",
-            "trainer_sight_or_berry_tree_id": "",
-            "trainer_type": "",
+            "trainer_sight_or_berry_tree_id": "0",
+            "trainer_type": "0",
             "x": 5,
             "y": 6
         },
@@ -145,8 +145,8 @@
             "movement_range_y": 0,
             "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
             "script": "0x0",
-            "trainer_sight_or_berry_tree_id": "",
-            "trainer_type": "",
+            "trainer_sight_or_berry_tree_id": "0",
+            "trainer_type": "0",
             "x": 0,
             "y": 7
         },
@@ -158,8 +158,8 @@
             "movement_range_y": 0,
             "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
             "script": "0x0",
-            "trainer_sight_or_berry_tree_id": "",
-            "trainer_type": "",
+            "trainer_sight_or_berry_tree_id": "0",
+            "trainer_type": "0",
             "x": 1,
             "y": 7
         },
@@ -171,8 +171,8 @@
             "movement_range_y": 0,
             "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
             "script": "0x0",
-            "trainer_sight_or_berry_tree_id": "",
-            "trainer_type": "",
+            "trainer_sight_or_berry_tree_id": "0",
+            "trainer_type": "0",
             "x": 2,
             "y": 7
         },
@@ -184,8 +184,8 @@
             "movement_range_y": 0,
             "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
             "script": "0x0",
-            "trainer_sight_or_berry_tree_id": "",
-            "trainer_type": "",
+            "trainer_sight_or_berry_tree_id": "0",
+            "trainer_type": "0",
             "x": 3,
             "y": 7
         },
@@ -197,8 +197,8 @@
             "movement_range_y": 0,
             "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
             "script": "0x0",
-            "trainer_sight_or_berry_tree_id": "",
-            "trainer_type": "",
+            "trainer_sight_or_berry_tree_id": "0",
+            "trainer_type": "0",
             "x": 4,
             "y": 7
         },
@@ -210,8 +210,8 @@
             "movement_range_y": 0,
             "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
             "script": "0x0",
-            "trainer_sight_or_berry_tree_id": "",
-            "trainer_type": "",
+            "trainer_sight_or_berry_tree_id": "0",
+            "trainer_type": "0",
             "x": 5,
             "y": 7
         },
@@ -223,8 +223,8 @@
             "movement_range_y": 0,
             "movement_type": "MOVEMENT_TYPE_NONE",
             "script": "0x0",
-            "trainer_sight_or_berry_tree_id": "",
-            "trainer_type": "",
+            "trainer_sight_or_berry_tree_id": "0",
+            "trainer_type": "0",
             "x": 3,
             "y": 5
         },
@@ -236,8 +236,8 @@
             "movement_range_y": 1,
             "movement_type": "MOVEMENT_TYPE_NONE",
             "script": "0x0",
-            "trainer_sight_or_berry_tree_id": "",
-            "trainer_type": "",
+            "trainer_sight_or_berry_tree_id": "0",
+            "trainer_type": "0",
             "x": 4,
             "y": 5
         },
@@ -249,8 +249,8 @@
             "movement_range_y": 1,
             "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
             "script": "LittlerootTown_MaysHouse_2F_EventScript_1F9334",
-            "trainer_sight_or_berry_tree_id": "",
-            "trainer_type": "",
+            "trainer_sight_or_berry_tree_id": "0",
+            "trainer_type": "0",
             "x": 5,
             "y": 4
         },
@@ -276,8 +276,8 @@
             "dest_map": "MAP_LITTLEROOT_TOWN_MAYS_HOUSE_1F",
             "dest_warp_id": 2,
             "elevation": 0,
-            "x": 1,
-            "y": 1
+            "x": 6,
+            "y": 2
         }
     ],
     "weather": "WEATHER_NONE"

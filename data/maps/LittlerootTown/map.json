@@ -78,7 +78,7 @@
         {
             "elevation": 3,
             "flag": "FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_TRUCK",
-            "graphics_id": "EVENT_OBJ_GFX_AQUA_MEMBER_F",
+            "graphics_id": "EVENT_OBJ_GFX_LITTLE_GIRL",
             "movement_range_x": 0,
             "movement_range_y": 0,
             "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",

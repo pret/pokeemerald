@@ -52,13 +52,15 @@ YamakiTown_PlayerHouse_EggsHatched::
 	
 YamakiTown_PlayerHouse_MomIntro::
 	lock
+	applymovement 1, YamakiTown_PlayerHouse_Movement_MomNoticePlayer
+	waitmovement 0
 	applymovement EVENT_OBJ_ID_PLAYER, YamakiTown_PlayerHouse_Movement_WalkToTable
 	waitmovement 0
-	applymovement 1, YamakiTown_PlayerHouse_Movement_FaceDown
+	applymovement 1, YamakiTown_PlayerHouse_Movement_FaceRight
 	waitmovement 0
 	msgbox YamakiTown_PlayerHouse_MomIntro_Text1, MSGBOX_DEFAULT
 	closemessage
-	applymovement 1, YamakiTown_PlayerHouse_Movement_FaceRight
+	applymovement 1, YamakiTown_PlayerHouse_Movement_FaceLeft
 	waitmovement 0
 	clearflag FLAG_HIDE_LITTLEROOT_TOWN_FAT_MAN
 	showobjectat 3, MAP_LITTLEROOT_TOWN
@@ -253,16 +255,21 @@ YamakiTown_PlayerHouse_Movement_PlayerGoingUpstairs:
 	walk_up
 	walk_up
 	step_end
+
+YamakiTown_PlayerHouse_Movement_MomNoticePlayer:
+	delay_16
+	delay_16
+	face_right
+	delay_16
+	emote_exclamation_mark
+	delay_16
+	step_end
 	
 YamakiTown_PlayerHouse_Movement_WalkToTable:
+	walk_left
+	walk_left
 	walk_down
-	walk_down
-	walk_down
-	walk_down
-	walk_right
-	walk_right
-	walk_right
-	face_up
+	walk_left
 	step_end
 	
 YamakiTown_PlayerHouse_Movement_FaceDown:
@@ -347,17 +354,15 @@ YamakiTown_PlayerHouse_Movement_SisterGoesUpstairs:
 	step_end
 	
 YamakiTown_PlayerHouse_MomIntro_Text1:
-	.string "Mom: Morning, honey.\n"
-	.string "Did {COLOR POKEMON_COLOR}Farfetch'd{COLOR NO_COLOR} come by today?\p"
-	.string "No? Oh, I'm sorry.\n"
+	.string "{COLOR CHARACTER_COLOR}Mom:{COLOR NO_COLOR} Morning, {PLAYER}!\n"
+	.string "Still no reply on your letter, huh?\n"
 	.string "I'm sure they'll respond to you soon!\p"
-	.string "By the way, Fan Zheng came by,\n"
+	.string "By the way, {COLOR CHARACTER_COLOR}Fan Zheng{COLOR NO_COLOR} came by,\n"
 	.string "asking for you. He says he found\l"
 	.string "something he wants to show you.\p"
-	.string "Before you go out, can you wake\n"
-	.string "up your sister for me?\p"
-	.string "She's still asleep, and I need her\n"
-	.string "help feeding the Ponyta today.$"
+	.string "Why don't you take your {COLOR CHARACTER_COLOR}sister{COLOR NO_COLOR} out\n"
+	.string "with you? I don't even know the last\l"
+	.string "time she went outside...$"
 	
 YamakiTown_PlayerHouse_Roadblock_Text:
 	.string "Did you wake up your sister yet?$"
