@@ -20,6 +20,7 @@ void LoadLeftHeaderGfxForIndex(u32 arg0);
 bool32 IsPaletteFadeActive(void);
 void sub_81C7FA0(u32 arg0, bool32 arg1, bool32 arg2);
 bool32 sub_81C8010(void);
+bool32 IsDma3ManagerBusyWithBgCopy_(void);
 
 // pokenav.c
 extern void sub_81C99D4(void);

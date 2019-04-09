@@ -6,6 +6,7 @@
 #include "graphics.h"
 #include "sound.h"
 #include "constants/songs.h"
+#include "decompress.h"
 
 extern u8 sub_81CB0C8(u32 a);
 extern bool32 sub_81CAE08(u32 a);
@@ -28,6 +29,21 @@ bool32 sub_81CA7C4(void);
 void sub_81CA20C(void);
 void titlescreen_0(void);
 bool32 sub_81CA324(void);
+void sub_81CAA3C(void);
+void sub_81CA278(void);
+void sub_81CA9C8(void);
+void sub_81CA2DC(void);
+void sub_81C7FC4(u8, u8);
+void sub_81CA818(void);
+bool32 sub_81CA89C(void);
+void sub_81CA9D8(void);
+void sub_81CA864(void);
+void sub_81CA770(void);
+void sub_81C7BA4(u16 a0);
+u32 sub_81C98C4(void);
+void sub_81C7880(void);
+void sub_81CA094(void);
+void sub_81CA698(void);
 
 extern void *gUnknown_086201A0[];
 extern const u32 gUnknown_0861FD6C[];
@@ -38,6 +54,9 @@ extern const u32 gUnknown_0861FCAC[];
 extern const u16 gUnknown_0861FC78[];
 
 extern const struct BgTemplate gUnknown_08620194[];
+extern const struct CompressedSpriteSheet gUnknown_086201C4;
+extern const struct SpritePalette gUnknown_086201D4;
+extern const struct SpriteTemplate gUnknown_0862034C;
 
 struct UnknownPokenavSubstruct2
 {
@@ -47,7 +66,9 @@ struct UnknownPokenavSubstruct2
 	u8 filler_9[3];
 	u8 field_C;
 	u8 field_D;
-	u8 filler_E[0x7E];
+	u8 filler_E[0x1E];
+	struct Sprite *field_2C;
+	u8 filler_30[0x5C];
 	u32 field_8C;
 };
 
@@ -269,24 +290,418 @@ u32 LoopedTask_sub_81C9A10(s32 a0)
 	}
 }
 
+u32 sub_81C9C6C(u32 a0)
+{
+	switch(a0)	
+	{
+		case 0:
+			sub_81CAA3C();
+			sub_81CA278();
+			sub_81CA714();
+			PlaySE(SE_SELECT);
+			return 0;	
+		case 1:
+			if (sub_81CA324())
+			{
+				return 2;
+			}
+			else if (sub_81CA7C4())
+			{
+				return 2;
+			}
+			else
+			{
+				return 4;
+			}
+		default:
+			return 4;
+	}
+}
 
+u32 sub_81C9CA8(s32 a0)
+{
+	switch (a0)
+	{
+		case 0:
+			sub_81CA9C8();
+			sub_81CA2DC();
+			sub_81C7FC4(0, 0);
+			PlaySE(SE_SELECT);
+			return 0;
+		case 1:
+			if (!sub_81CA324())
+			{
+				if (!sub_81C8010())
+				{
+					sub_81CA0C8();
+					LoadLeftHeaderGfxForIndex(1);
+					return 0;
+				}
+			}
+			return 2;
+		case 2:
+			sub_81CA20C();
+			sub_81C7FA0(1, 0, 0);
+			sub_81CA818();
+			sub_81CA714();
+			return 0;
+		case 3:
+			if (!sub_81CA324() && !sub_81C8010() && !sub_81CA89C())
+			{
+				if (sub_81CA7C4())
+				{
+					return 2;
+				}
+				else 
+				{
+					sub_81CA9D8();
+					return 4;
+				}
+			}
+			return 2;
+		default:
+			return 4;
+	}
+}
 
+u32 sub_81C9D44(s32 a0)
+{
+	switch (a0)
+	{
+		case 0:
+			sub_81CA9C8();
+			sub_81CA2DC();
+			sub_81C7FC4(1, 0);
+			return 0;
+		case 1:
+			if (!sub_81CA324())
+			{
+				if (!sub_81C8010())
+				{
+					sub_81CA0C8();
+					LoadLeftHeaderGfxForIndex(0);
+					return 0;
+				}
+			}
+			return 2;
+		case 2:
+			sub_81CA20C();
+			sub_81C7FA0(0, 0, 0);
+			sub_81CA864();
+			sub_81CA714();
+			return 0;
+		case 3:
+			if (!sub_81CA324() && !sub_81C8010() && !sub_81CA89C())
+			{
+				if (sub_81CA7C4())
+				{
+					return 2;
+				}
+				else 
+				{
+					sub_81CA9D8();
+					return 4;
+				}
+			}
+			return 2;
+		default:
+			return 4;
+	}
+}
 
+u32 sub_81C9DD8(s32 a0)
+{
+	switch (a0)
+	{
+		case 0:
+			sub_81CA9C8();
+			sub_81CA2DC();
+			PlaySE(SE_SELECT);
+			return 0;
+		case 1:
+			if (!sub_81CA324())
+			{
+				LoadLeftHeaderGfxForIndex(7);
+				sub_81CA0C8();
+				return 0;
+			}
+			return 2;
+		case 2:
+			sub_81CA20C();
+			sub_81C7FA0(7, 0, 0);
+			sub_81CA714();
+			return 0;
+		case 3:
+			if (!sub_81CA324() && !sub_81C8010())
+			{
+				if(sub_81CA89C())
+				{
+					return 2;	
+				}
+				else
+				{
+					sub_81CA9D8();
+					return 4;
+				}
+			}
+			return 2;	
+		default:
+			return 4;
+	}
+}
 
+u32 sub_81C9E58(s32 a0)
+{
+	switch (a0)
+	{
+		case 0:
+			sub_81CA9C8();
+			sub_81CA2DC();
+			sub_81C7FC4(7, 0);
+			return 0;
+		case 1:
+			if (!sub_81CA324())
+			{
+				if (!sub_81C8010())
+				{
+					sub_81CA0C8();
+					return 0;
+				}
+			}
+			return 2;
+		case 2:
+			sub_81CA20C();
+			sub_81CA714();
+			return 0;
+		case 3:
+			if (!sub_81CA324())
+			{
+				if(sub_81CA89C())
+				{
+					return 2;	
+				}
+				else
+				{
+					sub_81CA9D8();
+					return 4;
+				}
+			}
+			return 2;	
+		default:
+			return 4;
+	}
+}
 
+u32 sub_81C9EC8(s32 a0)
+{
+	switch(a0)
+	{
+		case 0:
+			PlaySE(SE_HAZURE);
+			sub_81CA770();
+			return 0;	
+		case 1:
+			if (IsDma3ManagerBusyWithBgCopy())
+			{
+				return 2;
+			}
+			else
+			{
+				return 4;
+			}
+		default:
+			return 4;
+	}
+}
 
+u32 sub_81C9EF8(s32 a0)
+{
+	switch(a0)
+	{
+		case 0:
+			PlaySE(SE_SELECT);
+			sub_81CA714();
+			return 0;	
+		case 1:
+			if (IsDma3ManagerBusyWithBgCopy())
+			{
+				return 2;
+			}
+			else
+			{
+				return 4;
+			}
+		default:
+			return 4;
+	}
+}
 
+u32 sub_81C9F28(s32 a0)
+{
+	switch (a0)
+	{
+		case 0:
+			sub_81C7BA4(sub_81C98C4());
+			return 0;
+		case 1:
+			if (!IsDma3ManagerBusyWithBgCopy_())
+			{
+				sub_81C7880();
+				sub_81CA9C8();
+				sub_81CA2DC();
+				switch (sub_81C9894())
+				{
+					case 4:
+						sub_81C7FC4(7, 0);
+					case 3:
+						sub_81C7FC4(1, 0);
+						break;
+					default:
+						sub_81C7FC4(0, 0);
+						break;
+				}
+				PlaySE(SE_SELECT);
+				return 0;
+			}
+			return 2;
+		case 2:
+			if (!sub_81CA324())
+			{
+				if (!sub_81C8010())
+				{
+					sub_81C7AC0(0);
+					return 0;
+				}
+			}
+			return 2;
+		case 3:
+			if (!IsPaletteFadeActive())
+			{
+				return 4;
+			}
+			return 2;	
+		default:
+			return 4;
+	}
+}
 
+void sub_81C9FC4(void)
+{
+	u32 i;
+	const struct CompressedSpriteSheet *ptr;
+	for(i = 0, ptr = &gUnknown_086201C4; i < 2; i++)
+	{
+		LoadCompressedSpriteSheet(ptr);
+		ptr++;
+	}
+	Pokenav_AllocAndLoadPalettes(&gUnknown_086201D4);
+}
 
+void sub_81C9FEC(void)
+{
+	FreeSpriteTilesByTag(3);
+	FreeSpriteTilesByTag(1);
+	FreeSpritePaletteByTag(4);
+	FreeSpritePaletteByTag(5);
+	FreeSpritePaletteByTag(6);
+	FreeSpritePaletteByTag(7);
+	FreeSpritePaletteByTag(8);
+	FreeSpritePaletteByTag(3);
+	sub_81CA094();
+	sub_81CA698();
+}
 
-
-
-
-
-
-
-
-
+#ifdef NONMATCHING
+void sub_81CA02C(void)
+{
+	struct UnknownPokenavSubstruct2 *ptr;
+	u32 i;
+	u32 j;
+	u32 var;
+	struct Sprite **var2;
+	struct Sprite *var3;
+	struct Sprite *var4;
+	u32 k;
+	
+	ptr = GetSubstructPtr(2);
+	i = 0;
+	var4 = ptr->field_2C;
+	
+	for(i = 0; i < 6; i++)
+	{
+		j = 0;
+		var = (4 * i);
+		var += j;
+		
+		var <<= 18;
+		var += 0x280000;
+		var2 = (struct Sprite **) (i * 16 + var4);
+		
+		while(j < 4)
+		{
+			var3 = &gSprites[CreateSprite(&gUnknown_0862034C, 140, var >> 16, 3)];
+			*var2 = var3;
+			var2++;
+			var3->pos2.x = 32 * j++;
+		}
+	}
+}
+#else
+NAKED
+void sub_81CA02C(void)
+{
+    asm_unified("\n\
+    push {r4-r7,lr}\n\
+	mov r7, r8\n\
+	push {r7}\n\
+	movs r0, 0x2\n\
+	bl GetSubstructPtr\n\
+	movs r2, 0\n\
+	adds r0, 0x2C\n\
+	mov r8, r0\n\
+_081CA03E:\n\
+	movs r4, 0\n\
+	lsls r0, r2, 2\n\
+	lsls r1, r2, 4\n\
+	adds r7, r2, 0x1\n\
+	adds r0, r2\n\
+	lsls r0, 18\n\
+	movs r2, 0xA0\n\
+	lsls r2, 14\n\
+	adds r5, r0, r2\n\
+	mov r0, r8\n\
+	adds r6, r1, r0\n\
+_081CA054:\n\
+	ldr r0, =gUnknown_0862034C\n\
+	movs r1, 0x8C\n\
+	asrs r2, r5, 16\n\
+	movs r3, 0x3\n\
+	bl CreateSprite\n\
+	lsls r0, 24\n\
+	lsrs r0, 24\n\
+	lsls r1, r0, 4\n\
+	adds r1, r0\n\
+	lsls r1, 2\n\
+	ldr r0, =gSprites\n\
+	adds r1, r0\n\
+	stm r6!, {r1}\n\
+	lsls r0, r4, 5\n\
+	strh r0, [r1, 0x24]\n\
+	adds r4, 0x1\n\
+	cmp r4, 0x3\n\
+	ble _081CA054\n\
+	adds r2, r7, 0\n\
+	cmp r2, 0x5\n\
+	ble _081CA03E\n\
+	pop {r3}\n\
+	mov r8, r3\n\
+	pop {r4-r7}\n\
+	pop {r0}\n\
+	bx r0\n\
+	.pool\n\
+");
+}
+#endif // NONMATCHING
 
 
 
