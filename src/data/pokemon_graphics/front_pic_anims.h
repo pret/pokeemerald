@@ -6827,6 +6827,10 @@ static const union AnimCmd sAnim_GENESECT_1[] =
 
 static const union AnimCmd sAnim_CHESPIN_1[] =
 {
+    ANIMCMD_FRAME(0, 8),
+    ANIMCMD_FRAME(1, 24),
+    ANIMCMD_FRAME(0, 8),
+    ANIMCMD_FRAME(1, 24),
     ANIMCMD_FRAME(0, 1),
     ANIMCMD_END,
 };
