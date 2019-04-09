@@ -1132,6 +1132,27 @@ Move_TRUMP_CARD:
 	end
 	
 Move_HEAL_BLOCK:
+	loadspritegfx ANIM_TAG_BLUE_STAR
+	monbg ANIM_TARGET
+	createsoundtask AnimTask_PlaySeChangingVolume, SE_W071B, SOUND_PAN_TARGET, 256, -16, 0, 2
+	createsprite gUnknown_08592F2C, ANIM_TARGET, 2, 0, -5, 1, 0
+	delay 7
+	createsprite gUnknown_08592F2C, ANIM_TARGET, 2, -15, 10, 1, 0
+	delay 7
+	createvisualtask sub_8116620, 10, 1 | 4, 4, 2, 12, 0, RGB_BLACK
+	createsprite gUnknown_08592F2C, ANIM_TARGET, 2, 0, -5, 1, 0
+	delay 7
+	createsprite gUnknown_08592F2C, ANIM_TARGET, 2, -15, 10, 1, 0
+	delay 7
+	createsprite gUnknown_08592F2C, ANIM_TARGET, 2, -15, -15, 1, 0
+	delay 7
+	createsprite gUnknown_08592F2C, ANIM_TARGET, 2, 10, -5, 1, 0
+	delay 7
+	waitforvisualfinish
+	delay 11
+	createvisualtask sub_8116620, 10, 1 | 4, 4, 2, 0, 12, RGB_BLACK
+	waitforvisualfinish
+	clearmonbg ANIM_TARGET
 	end
 	
 Move_WRING_OUT:
