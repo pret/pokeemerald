@@ -7642,11 +7642,19 @@ static const union AnimCmd sAnim_KOMMO_O_1[] =
 static const union AnimCmd sAnim_TAPU_KOKO_1[] =
 {
     ANIMCMD_FRAME(0, 1),
+    ANIMCMD_FRAME(1, 40),
+    ANIMCMD_FRAME(0, 10),
+    ANIMCMD_FRAME(1, 10),
+    ANIMCMD_FRAME(0, 10),
+    ANIMCMD_FRAME(1, 10),
+    ANIMCMD_FRAME(0, 1),
     ANIMCMD_END,
 };
 
 static const union AnimCmd sAnim_TAPU_LELE_1[] =
 {
+    ANIMCMD_FRAME(1, 50),
+    ANIMCMD_FRAME(1, 50),
     ANIMCMD_FRAME(0, 1),
     ANIMCMD_END,
 };
@@ -7654,11 +7662,17 @@ static const union AnimCmd sAnim_TAPU_LELE_1[] =
 static const union AnimCmd sAnim_TAPU_BULU_1[] =
 {
     ANIMCMD_FRAME(0, 1),
+    ANIMCMD_FRAME(1, 40),
+    ANIMCMD_FRAME(0, 10),
+    ANIMCMD_FRAME(1, 40),
+    ANIMCMD_FRAME(0, 1),
     ANIMCMD_END,
 };
 
 static const union AnimCmd sAnim_TAPU_FINI_1[] =
 {
+    ANIMCMD_FRAME(1, 60),
+    ANIMCMD_FRAME(1, 60),
     ANIMCMD_FRAME(0, 1),
     ANIMCMD_END,
 };
@@ -7744,6 +7758,8 @@ static const union AnimCmd sAnim_MAGEARNA_1[] =
 static const union AnimCmd sAnim_MARSHADOW_1[] =
 {
     ANIMCMD_FRAME(0, 1),
+    ANIMCMD_FRAME(1, 54),
+    ANIMCMD_FRAME(0, 10),
     ANIMCMD_END,
 };
 

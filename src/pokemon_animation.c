@@ -171,6 +171,9 @@ static void pokemonanimfunc_93(struct Sprite *sprite);
 static void pokemonanimfunc_94(struct Sprite *sprite);
 static void pokemonanimfunc_95(struct Sprite *sprite);
 static void pokemonanimfunc_96(struct Sprite *sprite);
+static void pokemonanimfunc_97(struct Sprite *sprite);
+static void pokemonanimfunc_98(struct Sprite *sprite);
+static void pokemonanimfunc_99(struct Sprite *sprite);
 
 static void SpriteCB_SetDummyOnAnimEnd(struct Sprite *sprite);
 
@@ -750,7 +753,10 @@ static void (* const sMonAnimFunctions[])(struct Sprite *sprite) =
     pokemonanimfunc_93,
     pokemonanimfunc_94,
     pokemonanimfunc_95,
-    pokemonanimfunc_96
+    pokemonanimfunc_96,
+    pokemonanimfunc_97,
+    pokemonanimfunc_98,
+    pokemonanimfunc_99
 };
 
 // counting from Id 1, because 0 in sSpeciesToBackAnimSet is used for mons with no back animation
@@ -2102,13 +2108,13 @@ static void pokemonanimfunc_24(struct Sprite *sprite)
 
     if (sprite->data[2] > 128)
     {
-        BlendPalette(sprite->data[7], 0x10, 0, RGB(24, 0, 24));
+        BlendPalette(sprite->data[7], 0x10, 0, RGB_PURPLE);
         sprite->callback = SpriteCB_SetDummyOnAnimEnd;
     }
     else
     {
         sprite->data[6] = Sin(sprite->data[2], 12);
-        BlendPalette(sprite->data[7], 0x10, sprite->data[6], RGB(24, 0, 24));
+        BlendPalette(sprite->data[7], 0x10, sprite->data[6], RGB_PURPLE);
     }
 
     sprite->data[2] += 2;
@@ -5399,7 +5405,7 @@ static void BackAnimBlend(struct Sprite *sprite)
 {
     static const u16 sColors[] =
     {
-        RGB_RED, RGB_GREEN, RGB_BLUE, RGB_BLACK
+        RGB_RED, RGB_GREEN, RGB_BLUE, RGB_BLACK, RGB_WHITE, RGB_PURPLE
     };
 
     if (sprite->data[2] > 127)
@@ -5615,6 +5621,69 @@ static void pokemonanimfunc_96(struct Sprite *sprite)
         sprite->data[4] = 1;
         sprite->data[3] = 0;
         sprite->data[1] = 2;
+    }
+
+    if (sprite->data[2] % 2 == 0)
+        BackAnimBlend(sprite);
+
+    if (sprite->data[2] >= (128 - sprite->data[0] * sprite->data[4]) / 2)
+        sub_8184934(sprite);
+
+    sprite->data[2]++;
+}
+
+static void pokemonanimfunc_97(struct Sprite *sprite)
+{
+    if (sprite->data[2] == 0)
+    {
+        sprite->data[7] = (sprite->oam.paletteNum * 16) + 256;
+        sprite->data[0] = 80;
+        sprite->data[5] = 0;
+        sprite->data[4] = 1;
+        sprite->data[3] = 0;
+        sprite->data[1] = 3;
+    }
+
+    if (sprite->data[2] % 2 == 0)
+        BackAnimBlend(sprite);
+
+    if (sprite->data[2] >= (128 - sprite->data[0] * sprite->data[4]) / 2)
+        sub_8184934(sprite);
+
+    sprite->data[2]++;
+}
+
+static void pokemonanimfunc_98(struct Sprite *sprite)
+{
+    if (sprite->data[2] == 0)
+    {
+        sprite->data[7] = (sprite->oam.paletteNum * 16) + 256;
+        sprite->data[0] = 80;
+        sprite->data[5] = 0;
+        sprite->data[4] = 1;
+        sprite->data[3] = 0;
+        sprite->data[1] = 4;
+    }
+
+    if (sprite->data[2] % 2 == 0)
+        BackAnimBlend(sprite);
+
+    if (sprite->data[2] >= (128 - sprite->data[0] * sprite->data[4]) / 2)
+        sub_8184934(sprite);
+
+    sprite->data[2]++;
+}
+
+static void pokemonanimfunc_99(struct Sprite *sprite)
+{
+    if (sprite->data[2] == 0)
+    {
+        sprite->data[7] = (sprite->oam.paletteNum * 16) + 256;
+        sprite->data[0] = 80;
+        sprite->data[5] = 0;
+        sprite->data[4] = 1;
+        sprite->data[3] = 0;
+        sprite->data[1] = 5;
     }
 
     if (sprite->data[2] % 2 == 0)
