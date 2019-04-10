@@ -1734,90 +1734,25 @@ void sub_8103FE8(struct Sprite *sprite)
     sprite->callback = sub_8104018;
 }
 
-#ifdef NONMATCHING
 static void sub_8104018(struct Sprite *sprite)
 {
-    u16 r7;
-    u16 r5;
+    u16 id, val;
     int i;
+
     if (++sprite->data[1] == 2)
     {
         sprite->data[1] = 0;
-        r5 = sprite->data[0];
-        r7 = gPlttBufferFaded[8 + r5];
-        for (i = 0; i < 8; i++)
-        {
-            gPlttBufferFaded[i + r5 + 8] = gPlttBufferFaded[i + r5 + 9];
-        }
-        gPlttBufferFaded[r5 + 15] = r7;
+        id = sprite->data[0];
+        val = gPlttBufferFaded[8 + id];
+        for (i = 8; i < 16; i++)
+            gPlttBufferFaded[i + id] = gPlttBufferFaded[i + id + 1];
+
+        gPlttBufferFaded[id + 15] = val;
 
         if (++sprite->data[2] == 24)
             DestroyAnimSprite(sprite);
     }
 }
-#else
-NAKED
-static void sub_8104018(struct Sprite *sprite)
-{
-    asm(".syntax unified\n\
-    push {r4-r7,lr}\n\
-    adds r4, r0, 0\n\
-    ldrh r0, [r4, 0x30]\n\
-    adds r0, 0x1\n\
-    strh r0, [r4, 0x30]\n\
-    lsls r0, 16\n\
-    asrs r0, 16\n\
-    cmp r0, 0x2\n\
-    bne _0810407C\n\
-    movs r0, 0\n\
-    strh r0, [r4, 0x30]\n\
-    ldrh r5, [r4, 0x2E]\n\
-    ldr r1, =gPlttBufferFaded\n\
-    adds r0, r5, 0\n\
-    adds r0, 0x8\n\
-    lsls r0, 1\n\
-    adds r0, r1     \n\
-    ldrh r7, [r0]\n\
-    adds r6, r1, 0\n\
-    adds r1, r5, 0\n\
-    adds r1, 0x9\n\
-    lsls r0, r5, 1\n\
-    adds r0, r6\n\
-    adds r2, r0, 0\n\
-    adds r2, 0x10\n\
-    movs r3, 0x7\n\
-    lsls r1, 1\n\
-    adds r1, r6\n\
-_08104050:\n\
-    ldrh r0, [r1]\n\
-    strh r0, [r2]\n\
-    adds r1, 0x2\n\
-    adds r2, 0x2\n\
-    subs r3, 0x1\n\
-    cmp r3, 0\n\
-    bge _08104050\n\
-    adds r0, r5, 0\n\
-    adds r0, 0xF\n\
-    lsls r0, 1\n\
-    adds r0, r6\n\
-    strh r7, [r0]\n\
-    ldrh r0, [r4, 0x32]\n\
-    adds r0, 0x1\n\
-    strh r0, [r4, 0x32]\n\
-    lsls r0, 16\n\
-    asrs r0, 16\n\
-    cmp r0, 0x18\n\
-    bne _0810407C\n\
-    adds r0, r4, 0\n\
-    bl DestroyAnimSprite\n\
-_0810407C:\n\
-    pop {r4-r7}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .pool\n\
-.syntax divided\n");
-}
-#endif
 
 void sub_8104088(struct Sprite *sprite)
 {
