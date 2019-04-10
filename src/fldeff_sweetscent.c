@@ -93,7 +93,7 @@ static void FailSweetScentEncounter(u8 taskId)
     {
         CpuFastSet(gPaletteDecompressionBuffer, gPlttBufferUnfaded, 0x100);
         sub_80AC3E4();
-        ScriptContext1_SetupScript(EventScript_290CAE);
+        ScriptContext1_SetupScript(EventScript_FailSweetScent);
         DestroyTask(taskId);
     }
 }

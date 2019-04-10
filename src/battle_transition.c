@@ -23,6 +23,7 @@
 #include "constants/field_effects.h"
 #include "constants/songs.h"
 #include "constants/trainers.h"
+#include "constants/rgb.h"
 
 struct TransitionData
 {
@@ -1076,7 +1077,7 @@ static bool8 Phase2_Blur_Func2(struct Task *task)
     {
         task->tData1 = 4;
         if (++task->tData2 == 10)
-            BeginNormalPaletteFade(0xFFFFFFFF, -1, 0, 0x10, 0);
+            BeginNormalPaletteFade(0xFFFFFFFF, -1, 0, 0x10, RGB_BLACK);
         SetGpuReg(REG_OFFSET_MOSAIC, (task->tData2 & 15) * 17);
         if (task->tData2 > 14)
             task->tState++;
@@ -1103,7 +1104,7 @@ static bool8 Phase2_Swirl_Func1(struct Task *task)
 {
     sub_8149F08();
     ScanlineEffect_Clear();
-    BeginNormalPaletteFade(0xFFFFFFFF, 4, 0, 0x10, 0);
+    BeginNormalPaletteFade(0xFFFFFFFF, 4, 0, 0x10, RGB_BLACK);
     sub_8149F98(gScanlineEffectRegBuffers[1], sTransitionStructPtr->field_14, 0, 2, 0, 160);
 
     SetVBlankCallback(VBlankCB_Phase2_Swirl);
@@ -1158,7 +1159,7 @@ static bool8 Phase2_Shuffle_Func1(struct Task *task)
     sub_8149F08();
     ScanlineEffect_Clear();
 
-    BeginNormalPaletteFade(0xFFFFFFFF, 4, 0, 0x10, 0);
+    BeginNormalPaletteFade(0xFFFFFFFF, 4, 0, 0x10, RGB_BLACK);
     memset(gScanlineEffectRegBuffers[1], sTransitionStructPtr->field_16, 0x140);
 
     SetVBlankCallback(VBlankCB_Phase2_Shuffle);
@@ -1461,7 +1462,7 @@ static bool8 Phase2_Kyogre_Func5(struct Task *task)
 
 static bool8 Phase2_WeatherDuo_Func6(struct Task *task)
 {
-    BeginNormalPaletteFade(0xFFFF8000, 1, 0, 0x10, 0);
+    BeginNormalPaletteFade(0xFFFF8000, 1, 0, 0x10, RGB_BLACK);
     task->tState++;
     return FALSE;
 }
@@ -1546,7 +1547,7 @@ static bool8 Phase2_FramesCountdown(struct Task *task)
 
 static bool8 Phase2_WeatherTrio_Func1(struct Task *task)
 {
-    BeginNormalPaletteFade(0x0000FFFF, 1, 0, 0x10, 0);
+    BeginNormalPaletteFade(0x0000FFFF, 1, 0, 0x10, RGB_BLACK);
     task->tState++;
     return FALSE;
 }
@@ -1969,7 +1970,7 @@ static bool8 Phase2_Ripple_Func2(struct Task *task)
     if (++task->tData3 == 81)
     {
         task->tData4++;
-        BeginNormalPaletteFade(0xFFFFFFFF, -2, 0, 0x10, 0);
+        BeginNormalPaletteFade(0xFFFFFFFF, -2, 0, 0x10, RGB_BLACK);
     }
 
     if (task->tData4 != 0 && !gPaletteFade.active)
@@ -3159,7 +3160,7 @@ static bool8 Phase2_Rayquaza_Func6(struct Task *task)
     {
         task->tState++;
         task->tData1 = 0;
-        BeginNormalPaletteFade(0xFFFF8000, 2, 0, 0x10, 0);
+        BeginNormalPaletteFade(0xFFFF8000, 2, 0, 0x10, RGB_BLACK);
     }
 
     return FALSE;
@@ -3978,7 +3979,7 @@ static bool8 Phase2_30_Func4(struct Task *task)
     if (++task->tData3 == 101)
     {
         task->tData4++;
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 0x10, 0);
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 0x10, RGB_BLACK);
     }
 
     if (task->tData4 != 0 && !gPaletteFade.active)

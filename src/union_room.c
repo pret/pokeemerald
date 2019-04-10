@@ -47,6 +47,7 @@
 #include "berry_crush.h"
 #include "mystery_gift.h"
 #include "union_room_player_avatar.h"
+#include "pokemon_jump.h"
 
 EWRAM_DATA u8 gUnknown_02022C20[12] = {};
 EWRAM_DATA u8 gUnknown_02022C2C = 0;
@@ -97,7 +98,6 @@ bool32 sub_8017678(struct UnkStruct_Shared *arg0, struct UnkStruct_Shared *arg1)
 u32 sub_8018120(struct TradeUnkStruct *arg0, u8 multiplayerId);
 void sub_801807C(struct TradeUnkStruct *arg0);
 void sub_801AC54(void);
-void sub_802A9A8(u8 monId, MainCallback callback);
 void sub_802493C(u8 monId, MainCallback callback);
 void sub_80149D8(void);
 void MG_DrawTextBorder(u8 windowId);
@@ -1404,7 +1404,7 @@ void sub_8012780(u8 taskId)
         switch (sub_80170B8(&data->textState, sub_801064C(ReadAsU16(data->field_0->arr[data->field_13].unk.field_0.unk_00.playerTrainerId), data->field_0->arr[data->field_13].unk.playerName)))
         {
         case 0:
-            sub_800E0E8();
+            LoadWirelessStatusIndicatorSpriteGfx();
             CreateWirelessStatusIndicatorSprite(0, 0);
             data->field_19 = 5;
             sub_8010688(5, ReadAsU16(data->field_0->arr[data->field_13].unk.field_0.unk_00.playerTrainerId), data->field_0->arr[data->field_13].unk.playerName);
@@ -2130,7 +2130,7 @@ u32 sub_8013B8C(struct UnkStruct_Group *arg0, s32 id)
 void sub_8013BD8(struct UnkStruct_Group *data, s32 id)
 {
     data->field_F = id;
-    sub_800E0E8();
+    LoadWirelessStatusIndicatorSpriteGfx();
     CreateWirelessStatusIndicatorSprite(0, 0);
     RedrawListMenu(data->listTaskId);
     sub_8018404(gStringVar1, &data->field_0->arr[data->field_F]);
@@ -2782,7 +2782,7 @@ void sub_8014A40(u8 taskId)
         switch (mevent_message_print_and_prompt_yes_no(&data->textState, &data->field_14, 0, gStringVar4))
         {
         case 0:
-            sub_800E0E8();
+            LoadWirelessStatusIndicatorSpriteGfx();
             CreateWirelessStatusIndicatorSprite(0, 0);
             data->field_0->arr[data->field_13].field_1B = 0;
             RedrawListMenu(data->listTaskId);
@@ -2985,7 +2985,7 @@ void sub_8014F48(u8 taskId)
                 if (data->field_0->arr[id].field_1A_0 == 1 && !data->field_0->arr[id].unk.field_0.unk_0a_7)
                 {
                     data->field_F = id;
-                    sub_800E0E8();
+                    LoadWirelessStatusIndicatorSpriteGfx();
                     CreateWirelessStatusIndicatorSprite(0, 0);
                     RedrawListMenu(data->listTaskId);
                     sub_8018404(gStringVar1, &data->field_0->arr[data->field_F]);
@@ -3148,7 +3148,7 @@ void sub_80152F4(u8 taskId)
                     {
                         data->field_F = 0;
                         data->field_14 = 0;
-                        sub_800E0E8();
+                        LoadWirelessStatusIndicatorSpriteGfx();
                         CreateWirelessStatusIndicatorSprite(0, 0);
                         sub_8011FC8(data->field_0->arr[0].unk.playerName, ReadAsU16(data->field_0->arr[0].unk.field_0.unk_00.playerTrainerId));
                         PlaySE(SE_PN_ON);
@@ -3905,7 +3905,7 @@ void sub_80156E0(u8 taskId)
         }
         break;
     case 53:
-        BeginNormalPaletteFade(-1, 0, 0, 0x10, 0);
+        BeginNormalPaletteFade(-1, 0, 0, 0x10, RGB_BLACK);
         data->state = 54;
         break;
     case 54:

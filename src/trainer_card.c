@@ -30,6 +30,7 @@
 #include "constants/flags.h"
 #include "constants/game_stat.h"
 #include "constants/battle_frontier.h"
+#include "constants/rgb.h"
 
 enum
 {
@@ -381,7 +382,7 @@ static void sub_80C2760(u8 taskId)
     case 7:
         if (gWirelessCommType == 1 && gReceivedRemoteLinkPlayers == TRUE)
         {
-            sub_800E0E8();
+            LoadWirelessStatusIndicatorSpriteGfx();
             CreateWirelessStatusIndicatorSprite(230, 150);
         }
         BlendPalettes(0xFFFFFFFF, 16, sData->var_52C);
