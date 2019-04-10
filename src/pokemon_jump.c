@@ -9,6 +9,7 @@
 #include "save.h"
 #include "sound.h"
 #include "sprite.h"
+#include "string_util.h"
 #include "task.h"
 #include "pokemon.h"
 #include "pokemon_jump.h"
@@ -34,7 +35,7 @@ struct PokemonJump1_82E4
     u16 unk12;
     int unk14;
     int unk18;
-    u8 filler1C[0xC];
+    u8 unk1C[11];
 };
 
 struct PokemonJump1
@@ -48,16 +49,16 @@ struct PokemonJump1
     u16 unkA;
     u16 unkC;
     u16 unkE;
-    u8 filler10[0x4];
-    int unk14;
-    int unk18;
+    int unk10;
+    u32 unk14;
+    u32 unk18;
     int unk1C;
-    u8 filler20[0x4];
-    int unk24;
-    u8 filler28[0x4];
+    u32 unk20;
+    u32 unk24;
+    u32 unk28;
     int unk2C;
     u32 unk30;
-    u8 filler34[0x2];
+    u16 unk34;
     u16 unk36;
     u8 filler38[0x2];
     u16 unk3A;
@@ -74,7 +75,10 @@ struct PokemonJump1
     u16 unk4A;
     u8 unk4C;
     u8 unk4D;
-    u8 filler4E[0x6];
+    u16 unk4E;
+    u8 unk50;
+    u8 unk51;
+    u8 filler52[0x2];
     int unk54;
     int unk58;
     int unk5C;
@@ -87,15 +91,15 @@ struct PokemonJump1
     u16 unk72;
     u16 unk74;
     int unk78;
-    u8 unk7C[5];
+    u8 unk7C[MAX_RFU_PLAYERS];
     u8 filler81[0xA];
-    u8 unk8B[5];
-    u16 unk90[5];
-    u16 unk9A[5];
+    u8 unk8B[MAX_RFU_PLAYERS];
+    u16 unk90[MAX_RFU_PLAYERS];
+    u16 unk9A[MAX_RFU_PLAYERS];
     void **unkA4;
     u8 fillerA8[0x8200];
-    struct PokemonJump1_MonInfo unk82A8[5];
-    struct PokemonJump1_82E4 unk82E4[5];
+    struct PokemonJump1_MonInfo unk82A8[MAX_RFU_PLAYERS];
+    struct PokemonJump1_82E4 unk82E4[MAX_RFU_PLAYERS];
     struct PokemonJump1_82E4 *unk83AC;
 };
 
@@ -150,17 +154,20 @@ static bool32 sub_802BA58(void);
 static bool32 sub_802BB84(void);
 static bool32 sub_802BC60(void);
 static bool32 sub_802BD30(void);
-void sub_802BD84(u8 taskId);
-void sub_802BE60(TaskFunc func, u8 taskPriority);
-void sub_802BE80(void);
-void sub_802BEA0(void);
-void sub_802BEE4(void);
-void sub_802C0B8(void);
-void sub_802C0E8(void);
-void sub_802C114(void);
-void sub_802C164(void);
+static void sub_802BD84(u8 taskId);
+static void sub_802BE60(TaskFunc func, u8 taskPriority);
+static void sub_802BE80(void);
+static void sub_802BEA0(void);
+static void sub_802BEE4(void);
+static int sub_802BF48(void);
+static void sub_802BF7C(void);
+static int sub_802C098(void);
+static void sub_802C0B8(void);
+static void sub_802C0E8(void);
+static void sub_802C114(void);
+static bool32 sub_802C130(u16);
+static void sub_802C164(void);
 void sub_802C1DC(void);
-bool32 sub_802C130(u16);
 void sub_802C260(void);
 void sub_802C270(void);
 void sub_802C43C(void);
@@ -192,6 +199,8 @@ void sub_802DDCC(void);
 void sub_802DDE0(void);
 void sub_802DDF4(int);
 int sub_802DE08(void);
+void sub_802E0AC(struct PokemonJump1_MonInfo *);
+bool32 sub_802E0D0(int, struct PokemonJump1_MonInfo *);
 void sub_802E138(struct PokemonJump1_82E4 *, u8 *);
 bool32 sub_802E1BC(struct PokemonJump1_82E4 *, struct Unk802B078 *);
 void sub_802E234(struct PokemonJump1_82E4 *, u8 , u16);
@@ -332,6 +341,9 @@ bool32 (* const gUnknown_082FB618[])(void) =
     sub_802B720,
 };
 
+extern const u16 gUnknown_082FB63C[];
+extern const u16 gUnknown_082FB64C[4];
+
 void sub_802A9A8(u16 partyIndex, MainCallback callback)
 {
     u8 taskId;
@@ -408,7 +420,7 @@ void sub_802AA94(struct PokemonJump1 *arg0)
     sub_802AB98();
     sub_802C0E8();
 
-    for (i = 0; i < 5; i++)
+    for (i = 0; i < MAX_RFU_PLAYERS; i++)
     {
         arg0->unk7C[i] = 0;
         arg0->unk9A[i] = 0;
@@ -421,7 +433,7 @@ void sub_802AB20(void)
     int i;
     s16 index;
 
-    for (i = 0; i < 5; i++)
+    for (i = 0; i < MAX_RFU_PLAYERS; i++)
     {
         index = sub_802AC00(gUnknown_02022CFC->unk82A8[i].species);
         gUnknown_02022CFC->unk82E4[i].unkC = gPkmnJumpSpecies[index].unk2;
@@ -489,7 +501,7 @@ static void sub_802AB98(void)
 {
     int i;
 
-    for (i = 0; i < 5; i++)
+    for (i = 0; i < MAX_RFU_PLAYERS; i++)
     {
         gUnknown_02022CFC->unk82E4[i].unkE = 0;
         gUnknown_02022CFC->unk82E4[i].unk10 = 0;
@@ -1463,4 +1475,224 @@ static bool32 sub_802BD30(void)
     }
 
     return TRUE;
+}
+
+static void sub_802BD84(u8 taskId)
+{
+    int i;
+    s16 *taskData = gTasks[taskId].data;
+    struct PokemonJump1 *ptr = (struct PokemonJump1 *)GetWordTaskArg(taskId, 14);
+
+    switch (taskData[0])
+    {
+    case 0:
+        for (i = 0; i < MAX_RFU_PLAYERS; i++)
+            taskData[i + 2] = 0;
+
+        taskData[0]++;
+        // fall through
+    case 1:
+        sub_802E0AC(&ptr->unk82A8[ptr->unk6]);
+        for (i = 0; i < MAX_RFU_PLAYERS; i++)
+        {
+            if (!taskData[i + 2] && sub_802E0D0(i, &ptr->unk82A8[i]))
+            {
+                StringCopy(ptr->unk82E4[i].unk1C, gLinkPlayers[i].name);
+                taskData[i + 2] = 1;
+                taskData[1]++;
+                if (taskData[1] == ptr->unk5)
+                {
+                    sub_802AB20();
+                    DestroyTask(taskId);
+                    break;
+                }
+            }
+        }
+        break;
+    }
+}
+
+static void sub_802BE60(TaskFunc func, u8 taskPriority)
+{
+    u8 taskId = CreateTask(func, taskPriority);
+    SetWordTaskArg(taskId, 14, (u32)gUnknown_02022CFC);
+}
+
+static void sub_802BE80(void)
+{
+    gUnknown_02022CFC->unk4A = 0;
+    gUnknown_02022CFC->unk14 = 6;
+    gUnknown_02022CFC->unk34 = 0;
+    gUnknown_02022CFC->unk1C = 0;
+    gUnknown_02022CFC->unk36 = 0;
+    gUnknown_02022CFC->unk10 = 0;
+}
+
+static void sub_802BEA0(void)
+{
+    gUnknown_02022CFC->unk4A = 0;
+    gUnknown_02022CFC->unk34 = 0x6FF;
+    gUnknown_02022CFC->unk14 = 7;
+    gUnknown_02022CFC->unk36 = 0;
+    gUnknown_02022CFC->unk10 = 0;
+    gUnknown_02022CFC->unk51 = 0;
+    gUnknown_02022CFC->unk50 = 0;
+    gUnknown_02022CFC->unk20 = 0;
+    gUnknown_02022CFC->unk4E = 0;
+    gUnknown_02022CFC->unk6C = 0;
+    sub_802BF7C();
+}
+
+static void sub_802BEE4(void)
+{
+    if (gUnknown_02022CFC->unk46)
+    {
+        gUnknown_02022CFC->unk4A++;
+        gUnknown_02022CFC->unk34 += sub_802BF48();
+        if (gUnknown_02022CFC->unk34 >= 0x9FF)
+            gUnknown_02022CFC->unk34 -= 0x9FF;
+
+        gUnknown_02022CFC->unk18 = gUnknown_02022CFC->unk14;
+        gUnknown_02022CFC->unk14 = gUnknown_02022CFC->unk34 >> 8;
+        if (gUnknown_02022CFC->unk14 > 6 && gUnknown_02022CFC->unk18 < 7)
+        {
+            gUnknown_02022CFC->unk36++;
+            sub_802BF7C();
+        }
+    }
+}
+
+static int sub_802BF48(void)
+{
+    int result;
+
+    if (gUnknown_02022CFC->unk10)
+        return 0;
+
+    result = gUnknown_02022CFC->unk1C;
+    if (gUnknown_02022CFC->unk34 <= 0x5FF)
+    {
+        gUnknown_02022CFC->unk20 += 80;
+        result += gUnknown_02022CFC->unk20 >> 8;
+    }
+
+    return result;
+}
+
+static void sub_802BF7C(void)
+{
+    int var0;
+
+    gUnknown_02022CFC->unk20 = 0;
+    if (gUnknown_02022CFC->unk4E)
+    {
+        gUnknown_02022CFC->unk4E--;
+        if (gUnknown_02022CFC->unk6C)
+        {
+            if (sub_802C098() % 4 != 0)
+            {
+                gUnknown_02022CFC->unk1C = gUnknown_02022CFC->unk28;
+            }
+            else
+            {
+                if (gUnknown_02022CFC->unk28 > 54)
+                    gUnknown_02022CFC->unk1C = 30;
+                else
+                    gUnknown_02022CFC->unk1C = 82;
+            }
+        }
+    }
+    else
+    {
+        if (!(gUnknown_02022CFC->unk50 & 8))
+        {
+            gUnknown_02022CFC->unk28 = gUnknown_082FB63C[gUnknown_02022CFC->unk50] + (gUnknown_02022CFC->unk51 * 7);
+            gUnknown_02022CFC->unk4E = gUnknown_082FB64C[sub_802C098() % ARRAY_COUNT(gUnknown_082FB64C)] + 2;
+            gUnknown_02022CFC->unk50++;
+        }
+        else
+        {
+            if (gUnknown_02022CFC->unk50 == 8)
+            {
+                if (gUnknown_02022CFC->unk51 < 3)
+                    gUnknown_02022CFC->unk51++;
+                else
+                    gUnknown_02022CFC->unk6C = 1;
+            }
+
+            var0 = gUnknown_082FB63C[15 - gUnknown_02022CFC->unk50];
+            gUnknown_02022CFC->unk28 = var0 + (gUnknown_02022CFC->unk51 * 7);
+            if (++gUnknown_02022CFC->unk50 > 15)
+            {
+                if (sub_802C098() % 4 == 0)
+                    gUnknown_02022CFC->unk28 -= 5;
+
+                gUnknown_02022CFC->unk50 = 0;
+            }
+        }
+
+        gUnknown_02022CFC->unk1C = gUnknown_02022CFC->unk28;
+    }
+}
+
+static int sub_802C098(void)
+{
+    // The number 1103515245 comes from the example implementation of rand and srand
+    gUnknown_02022CFC->unk24 = gUnknown_02022CFC->unk24 * 1103515245 + 24691;
+    return gUnknown_02022CFC->unk24 >> 16;
+}
+
+static void sub_802C0B8(void)
+{
+    gUnknown_02022CFC->unk10 = 1;
+    gUnknown_02022CFC->unk14 = 6;
+    gUnknown_02022CFC->unk34 = 0x5FF;
+    sub_802C270();
+}
+
+int sub_802C0DC(void)
+{
+    return gUnknown_02022CFC->unk10;
+}
+
+static void sub_802C0E8(void)
+{
+    int i;
+    for (i = 0; i < MAX_RFU_PLAYERS; i++)
+        gUnknown_02022CFC->unk82E4[i].unk14 = 0;
+}
+
+static void sub_802C114(void)
+{
+    gUnknown_02022CFC->unk83AC->unk10 = 0;
+    gUnknown_02022CFC->unk83AC->unk12 = 0;
+}
+
+static bool32 sub_802C130(u16 arg0)
+{
+    if (gUnknown_02022CFC->unk82E4[gUnknown_02022CFC->unk6].unk10 == arg0)
+        return TRUE;
+    else
+        return FALSE;
+}
+
+static void sub_802C164(void)
+{
+    gUnknown_02022CFC->unk83AC->unkE = gUnknown_02022CFC->unk4A;
+    gUnknown_02022CFC->unk83AC->unk12 = gUnknown_02022CFC->unk83AC->unk10;
+    gUnknown_02022CFC->unk83AC->unk10 = 1;
+}
+
+void sub_802C18C(void)
+{
+    gUnknown_02022CFC->unk83AC->unk12 = gUnknown_02022CFC->unk83AC->unk10;
+    gUnknown_02022CFC->unk83AC->unk10 = 2;
+    gUnknown_02022CFC->unk83AC->unkE = gUnknown_02022CFC->unk4A;
+    gUnknown_02022CFC->unk83AC->unk14 = 2;
+}
+
+void sub_802C1BC(void)
+{
+    gUnknown_02022CFC->unk83AC->unk12 = gUnknown_02022CFC->unk83AC->unk10;
+    gUnknown_02022CFC->unk83AC->unk10 = 0;
 }
