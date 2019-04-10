@@ -17,11 +17,17 @@ struct Pokenav1Struct
 
 
 extern u32 sub_81C76AC(void);
-extern u32 sub_81C963C(struct Pokenav1Struct *a0);
-extern u32 sub_81C96FC(struct Pokenav1Struct *a0);
-extern u32 sub_81C9814(void);
-extern void sub_81C97B0(struct Pokenav1Struct *a0, u32 a1);
+extern void sub_81C7694(u32 a0);
 
+u32 sub_81C9814(void);
+void sub_81C97F8(struct Pokenav1Struct *a0);
+void sub_81C97C0(struct Pokenav1Struct *a0);
+u32 sub_81C97BC(struct Pokenav1Struct *a0);
+void sub_81C97B0(struct Pokenav1Struct *a0, u32 a1);
+u32 sub_81C97A4(struct Pokenav1Struct *a0);
+u32 sub_81C9798(struct Pokenav1Struct *a0);
+u32 sub_81C96FC(struct Pokenav1Struct *a0);
+u32 sub_81C963C(struct Pokenav1Struct *a0);
 u32 sub_81C9600(struct Pokenav1Struct *a0);
 u32 sub_81C9588(struct Pokenav1Struct *a0);
 u32 sub_81C9520(struct Pokenav1Struct *a0);
@@ -29,6 +35,7 @@ u32 sub_81C943C(struct Pokenav1Struct *a0);
 u32 (*sub_81C93EC(void))(struct Pokenav1Struct*);
 void sub_81C939C(struct Pokenav1Struct *state);
 
+extern u8 gUnknown_0861FC54[];
 extern u8 gUnknown_0861FC59[];
 
 u8 sub_81C9268(void)
@@ -293,4 +300,128 @@ u32 sub_81C9600(struct Pokenav1Struct *a0)
     }
 
     return 0;
+}
+
+u32 sub_81C963C(struct Pokenav1Struct *a0)
+{
+    u32 v0 = sub_81C9814();
+    if (v0)
+        return 1;
+    
+    if (gMain.newKeys & A_BUTTON)
+    {
+        switch (gUnknown_0861FC59[a0->unk2 + a0->unk0 * 6])
+        {
+        case 6:
+            a0->unk0 = 4;
+            a0->unk2 = v0;
+            a0->unk4 = gUnknown_0861FC59[24];
+            a0->unkC = sub_81C96FC;
+            return 4;
+        case 5:
+            a0->unk6 = v0;
+            sub_81C97B0(a0, UNKNOWN_POKENAV_OFFSET + 7);
+            return 8;
+        case 7:
+            PlaySE(SE_SELECT);
+            sub_81C97C0(a0);
+            return 3;
+        }
+    }
+    if (gMain.newKeys & B_BUTTON)
+    {
+        if (a0->unk2 != gUnknown_0861FC54[a0->unk0])
+        {
+            a0->unk2 = gUnknown_0861FC54[a0->unk0];
+            a0->unkC = sub_81C9798;
+            return 1;
+        }
+        else
+        {
+            PlaySE(SE_SELECT);
+            sub_81C97C0(a0);
+            return 3;
+        }
+    }
+
+    return 0;
+}
+
+u32 sub_81C96FC(struct Pokenav1Struct *a0)
+{
+    if (sub_81C9814())
+        return 1;
+    
+    if (gMain.newKeys & A_BUTTON)
+    {
+        u8 v0 = gUnknown_0861FC59[a0->unk2 + a0->unk0 * 6];
+        if (v0 != 13)
+        {
+            sub_81C7694(v0 - 8);
+            sub_81C97B0(a0, UNKNOWN_POKENAV_OFFSET + 8);
+            a0->unk6 = 3;
+            return 8;
+        }
+        else
+        {
+            PlaySE(SE_SELECT);
+            sub_81C97F8(a0);
+            return 5;
+        }
+    }
+    if (gMain.newKeys & B_BUTTON)
+    {
+        if (a0->unk2 != gUnknown_0861FC54[a0->unk0])
+        {
+            a0->unk2 = gUnknown_0861FC54[a0->unk0];
+            a0->unkC = sub_81C97A4;
+            return 1;
+        }
+        else
+        {
+            PlaySE(SE_SELECT);
+            sub_81C97F8(a0);
+            return 5;
+        }
+    }
+    return 0;
+}
+
+u32 sub_81C9798(struct Pokenav1Struct *a0)
+{
+    sub_81C97C0(a0);
+    return 3;
+}
+
+u32 sub_81C97A4(struct Pokenav1Struct *a0)
+{
+    sub_81C97F8(a0);
+    return 5;
+}
+
+void sub_81C97B0(struct Pokenav1Struct *a0, u32 a1)
+{
+    a0->unk8 = a1;
+    a0->unkC = sub_81C97BC;
+}
+
+u32 sub_81C97BC(struct Pokenav1Struct *a0)
+{
+    return a0->unk8;
+}
+
+void sub_81C97C0(struct Pokenav1Struct *a0)
+{
+    a0->unk0 = sub_81C9268();
+    a0->unk2 = 1;
+    a0->unk4 = gUnknown_0861FC59[a0->unk2 + a0->unk0 * 6];
+    a0->unkC = sub_81C943C;
+}
+
+void sub_81C97F8(struct Pokenav1Struct *a0)
+{
+    a0->unk0 = 3;
+    a0->unk2 = 1;
+    a0->unk4 = gUnknown_0861FC59[19];
+    a0->unkC = sub_81C963C;
 }
