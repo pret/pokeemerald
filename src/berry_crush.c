@@ -337,7 +337,7 @@ void sub_8020FC4(struct BerryCrushGame *arg0)
 
     for (i = 0; i < arg0->unk9; i++)
         StringCopy(arg0->unk84.players[i].unk14, gLinkPlayers[i].name);
-    
+
     for (; i < 5; i++)
     {
         memset(arg0->unk84.players[i].unk14, 1, PLAYER_NAME_LENGTH);
