@@ -2,7 +2,9 @@
 #define GUARD_NEW_GAME_H
 
 extern bool8 gDifferentSaveFile;
-extern bool8 gUnknown_020322D5; // The purpose of this variable is unknown as it's read only 3 times(2 times in contest.c and 1 time in berry_blender.c), never written to.
+// Shortcuts some randomness in berry_blender.c, and enables debug printing
+// in contest.c.
+extern bool8 gEnableContestDebugging;
 
 void SetTrainerId(u32 trainerId, u8 *dst);
 u32 GetTrainerId(u8 *trainerId);

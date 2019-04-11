@@ -2969,7 +2969,7 @@ void sub_80BEA24(u8 taskId)
                     r3 = 0x14;
                 if (gTasks[taskId].data[1] != 0)
                     r3 |= (1 << (gSprites[gTasks[taskId].data[4]].oam.paletteNum + 16));
-                BeginNormalPaletteFade(~r3, 0, 16, 0, 0);
+                BeginNormalPaletteFade(~r3, 0, 16, 0, RGB_BLACK);
                 SetVBlankCallback(gUnknown_030060B4);
                 gMain.state++;
             }

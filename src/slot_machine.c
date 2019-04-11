@@ -658,7 +658,7 @@ static void Task_FadeToSlotMachine(u8 taskId)
     switch (gTasks[taskId].tState)
     {
     case 0:
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 0x10, 0);
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 0x10, RGB_BLACK);
         gTasks[taskId].tState++;
         break;
     case 1:
@@ -718,7 +718,7 @@ static void CB2_SlotMachineSetup(void)
             gMain.state++;
             break;
         case 7:
-            BeginNormalPaletteFade(-1, 0, 0x10, 0, 0);
+            BeginNormalPaletteFade(-1, 0, 0x10, 0, RGB_BLACK);
             ShowBg(0);
             ShowBg(1);
             ShowBg(2);

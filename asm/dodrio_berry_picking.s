@@ -377,7 +377,7 @@ _08024C5A:
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _08024D20
-	bl sub_800E0E8
+	bl LoadWirelessStatusIndicatorSpriteGfx
 	movs r0, 0
 	movs r1, 0
 	bl CreateWirelessStatusIndicatorSprite

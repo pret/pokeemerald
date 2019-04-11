@@ -3460,7 +3460,7 @@ EventScript_GotoTrainerScript:: @ 82742F6
 gUnknown_0827E8CE:: @ 827E8CE
 	.string "Missed turn$"
 
-gUnknown_0827E8DA:: @ 827E8DA
+gText_LinkStandby4:: @ 827E8DA
 	.string "Link standby!$"
 
 gUnknown_0827E8E8:: @ 827E8E8

@@ -11,39 +11,40 @@
 	enum MON_4
 
 	.align 2
-gContestAIs:: @ 82DE350
-	.4byte AI_CheckForBadMove
-	.4byte AI_CheckForCombo
-	.4byte AI_CheckBoring
-	.4byte AI_CheckExcitement
-	.4byte AI_CheckOrder
-	.4byte AI_CheckForGoodMove
-	.4byte AI_Erratic
-	.4byte AI_Nothing
-	.4byte AI_Nothing
-	.4byte AI_Nothing
-	.4byte AI_Nothing
-	.4byte AI_Nothing
-	.4byte AI_Nothing
-	.4byte AI_Nothing
-	.4byte AI_Nothing
-	.4byte AI_Nothing
-	.4byte AI_Nothing
-	.4byte AI_Nothing
-	.4byte AI_Nothing
-	.4byte AI_Nothing
-	.4byte AI_Nothing
-	.4byte AI_Nothing
-	.4byte AI_Nothing
-	.4byte AI_Nothing
-	.4byte AI_Nothing
-	.4byte AI_Nothing
-	.4byte AI_Nothing
-	.4byte AI_Nothing
-	.4byte AI_Nothing
-	.4byte AI_Nothing
-	.4byte AI_Nothing
-	.4byte AI_Nothing
+gContestAIChecks:: @ 82DE350
+	.4byte AI_CheckForBadMove   // 0x00000001
+	.4byte AI_CheckForCombo     // 0x00000002
+	.4byte AI_CheckBoring       // 0x00000004
+	.4byte AI_CheckExcitement   // 0x00000008
+	.4byte AI_CheckOrder        // 0x00000010
+	.4byte AI_CheckForGoodMove  // 0x00000020
+	.4byte AI_Erratic           // 0x00000040
+	.4byte AI_Nothing           // 0x00000080
+	.4byte AI_Nothing           // 0x00000100
+	.4byte AI_Nothing           // 0x00000200
+	.4byte AI_Nothing           // 0x00000400
+	.4byte AI_Nothing           // 0x00000800
+	.4byte AI_Nothing           // 0x00001000
+	.4byte AI_Nothing           // 0x00002000
+	.4byte AI_Nothing           // 0x00004000
+	.4byte AI_Nothing           // 0x00008000
+	.4byte AI_Nothing           // 0x00010000
+	.4byte AI_Nothing           // 0x00020000
+	.4byte AI_Nothing           // 0x00040000
+	.4byte AI_Nothing           // 0x00080000
+	.4byte AI_Nothing           // 0x00100000
+	.4byte AI_Nothing           // 0x00200000
+	.4byte AI_Nothing           // 0x00400000
+	.4byte AI_Nothing           // 0x00800000
+	.4byte AI_Nothing           // 0x01000000
+	.4byte AI_Nothing           // 0x02000000
+	.4byte AI_Nothing           // 0x04000000
+	.4byte AI_Nothing           // 0x08000000
+	.4byte AI_Nothing           // 0x10000000
+	.4byte AI_Nothing           // 0x20000000
+	.4byte AI_Nothing           // 0x40000000
+	.4byte AI_Nothing           // 0x80000000
+
 
 @ Unreferenced AI routine to encourage moves that improve condition on the first
 @ turn. Additionally, it checks the appeal order of the user and the effect

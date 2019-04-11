@@ -610,7 +610,7 @@ static void c2_081284E0(void)
             SetMainCallback2(sub_801DF38);
             gUnknown_02022C84->unkE = CreateTask(sub_801DF54, 8);
             gUnknown_02022C84->unkF = CreateTask(sub_801F2B4, 7);
-            sub_800E0E8();
+            LoadWirelessStatusIndicatorSpriteGfx();
             CreateWirelessStatusIndicatorSprite(232, 150);
         }
         break;
