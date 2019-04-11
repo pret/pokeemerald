@@ -1557,9 +1557,12 @@ const u32 gUnknown_08DDE12C[] = INCBIN_U32("graphics/pokenav/ribbons.bin.lz");
 
 const u16 gMonIconPalettes[][16] =
 {
-    INCBIN_U16("graphics/pokemon/icon_palettes/icon_palette_0.gbapal"),
-    INCBIN_U16("graphics/pokemon/icon_palettes/icon_palette_1.gbapal"),
-    INCBIN_U16("graphics/pokemon/icon_palettes/icon_palette_2.gbapal"),
+    INCBIN_U16("graphics/pokemon/icon_palettes/pal0.gbapal"),
+    INCBIN_U16("graphics/pokemon/icon_palettes/pal1.gbapal"),
+    INCBIN_U16("graphics/pokemon/icon_palettes/pal2.gbapal"),
+    INCBIN_U16("graphics/pokemon/icon_palettes/pal3.gbapal"),
+    INCBIN_U16("graphics/pokemon/icon_palettes/pal4.gbapal"),
+    INCBIN_U16("graphics/pokemon/icon_palettes/pal5.gbapal"),
 };
 
 const u16 gTitleScreenBgPalettes[] = INCBIN_U16("graphics/title_screen/pokemon_logo.gbapal");
