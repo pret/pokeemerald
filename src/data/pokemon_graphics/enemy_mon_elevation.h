@@ -94,5 +94,14 @@ const u8 gEnemyMonElevation[NUM_SPECIES] =
     [SPECIES_TORNADUS] = 7,
     [SPECIES_THUNDURUS] = 7,
     [SPECIES_LANDORUS] = 7,
+    // Gens 6 & 7
+    [SPECIES_FLETCHINDER] = 9,
+    [SPECIES_TALONFLAME] = 7,
+    [SPECIES_VIVILLON] = 9,
+    [SPECIES_NOIBAT] = 8,
+    [SPECIES_HOOPA] = 13,
+    [SPECIES_VIKAVOLT] = 8,
+    [SPECIES_CUTIEFLY] = 10,
+    [SPECIES_MINIOR] = 17,
 };
 
