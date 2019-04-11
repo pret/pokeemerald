@@ -415,11 +415,9 @@ void sub_802AA94(struct PokemonJump1 *arg0)
     }
 }
 
-#ifdef NONMATCHING
 void sub_802AB20(void)
 {
-    int i;
-    s16 index;
+    int i, index;
 
     for (i = 0; i < 5; i++)
     {
@@ -429,61 +427,6 @@ void sub_802AB20(void)
 
     gUnknown_02022CFC->unk83AC = &gUnknown_02022CFC->unk82E4[gUnknown_02022CFC->unk6];
 }
-#else
-NAKED
-void sub_802AB20(void)
-{
-    asm_unified("\n\
-    push {r4-r7,lr}\n\
-    mov r7, r8\n\
-    push {r7}\n\
-    ldr r7, =gUnknown_02022CFC\n\
-    movs r6, 0\n\
-    movs r5, 0\n\
-    ldr r0, =gPkmnJumpSpecies\n\
-    mov r8, r0\n\
-    movs r4, 0x4\n\
-_0802AB32:\n\
-    ldr r0, [r7]\n\
-    adds r0, r5\n\
-    ldr r1, =0x000082a8\n\
-    adds r0, r1\n\
-    ldrh r0, [r0]\n\
-    bl sub_802AC00\n\
-    lsls r0, 16\n\
-    ldr r1, [r7]\n\
-    adds r1, r6\n\
-    asrs r0, 14\n\
-    add r0, r8\n\
-    ldrh r0, [r0, 0x2]\n\
-    ldr r2, =0x000082f0\n\
-    adds r1, r2\n\
-    strh r0, [r1]\n\
-    adds r6, 0x28\n\
-    adds r5, 0xC\n\
-    subs r4, 0x1\n\
-    cmp r4, 0\n\
-    bge _0802AB32\n\
-    ldr r0, =gUnknown_02022CFC\n\
-    ldr r1, [r0]\n\
-    ldr r0, =0x000083ac\n\
-    adds r3, r1, r0\n\
-    ldrb r2, [r1, 0x6]\n\
-    lsls r0, r2, 2\n\
-    adds r0, r2\n\
-    lsls r0, 3\n\
-    ldr r2, =0x000082e4\n\
-    adds r0, r2\n\
-    adds r1, r0\n\
-    str r1, [r3]\n\
-    pop {r3}\n\
-    mov r8, r3\n\
-    pop {r4-r7}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .pool");
-}
-#endif // NONMATCHING
 
 static void sub_802AB98(void)
 {
