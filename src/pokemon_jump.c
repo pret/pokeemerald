@@ -2,6 +2,7 @@
 #include "alloc.h"
 #include "item.h"
 #include "link.h"
+#include "link_rfu.h"
 #include "main.h"
 #include "menu.h"
 #include "palette.h"
@@ -90,9 +91,10 @@ struct PokemonJump1
     u8 unk71;
     u16 unk72;
     u16 unk74;
-    int unk78;
+    u32 unk78;
     u8 unk7C[MAX_RFU_PLAYERS];
-    u8 filler81[0xA];
+    u8 unk81[MAX_RFU_PLAYERS];
+    u8 unk86[MAX_RFU_PLAYERS];
     u8 unk8B[MAX_RFU_PLAYERS];
     u16 unk90[MAX_RFU_PLAYERS];
     u16 unk9A[MAX_RFU_PLAYERS];
@@ -167,18 +169,31 @@ static void sub_802C0E8(void);
 static void sub_802C114(void);
 static bool32 sub_802C130(u16);
 static void sub_802C164(void);
-void sub_802C1DC(void);
-void sub_802C260(void);
-void sub_802C270(void);
-void sub_802C43C(void);
-void sub_802C808(u16, u16 *, u16 *);
-bool32 sub_802C538(void);
-bool32 sub_802C650(void);
-bool32 sub_802C5DC(void);
-bool32 sub_802C70C(void);
-bool32 sub_802C7BC(void);
-u16 sub_802C7E0(void);
+static void sub_802C1DC(void);
+static void sub_802C240(void);
+static void sub_802C260(void);
+static void sub_802C270(void);
+static void sub_802C280(void);
+static void sub_802C398(int);
+static void sub_802C43C(void);
+static bool32 sub_802C538(void);
+static bool32 sub_802C5DC(void);
+static bool32 sub_802C618(void);
+static bool32 sub_802C650(void);
+static void sub_802C688(int);
+static int sub_802C6B0(void);
+static bool32 sub_802C70C(void);
+static int sub_802C73C(u8 *);
+static void sub_802C780(void);
+static int sub_802C790(int);
+static void sub_802C7A0(u16);
+static bool32 sub_802C7BC(void);
+static u16 sub_802C7E0(void);
+static void sub_802C808(u16, u16 *, u16 *);
+static u16 sub_802C818(void);
+u16 sub_802C838(void);
 u16 sub_802C880(u16, u16);
+void sub_802DC9C(u32);
 void sub_802D074(void *);
 void sub_802D0AC(void);
 void sub_802D0C8(int);
@@ -190,9 +205,13 @@ void sub_802D884(u16);
 void sub_802D8FC(u16);
 bool32 sub_802D974(void);
 void sub_802DA14(void);
+void sub_802DC80(int, s8);
+void sub_802DD88(u8);
 bool32 sub_802DA44(void);
 void sub_802DD64(int);
 s8 sub_802DA8C(void);
+int sub_802DCCC(u8);
+void sub_802DD74(u16);
 void sub_802DDA0(u8);
 int sub_802DDB8(int);
 void sub_802DDCC(void);
@@ -343,6 +362,11 @@ bool32 (* const gUnknown_082FB618[])(void) =
 
 extern const u16 gUnknown_082FB63C[];
 extern const u16 gUnknown_082FB64C[4];
+extern const u16 gUnknown_082FB654[];
+extern s8 gUnknown_082FB65C[][48];
+extern int gUnknown_082FB6EC[];
+extern int gUnknown_082FB714[];
+extern u16 gUnknown_082FB704[8];
 
 void sub_802A9A8(u16 partyIndex, MainCallback callback)
 {
@@ -383,7 +407,7 @@ static void sub_802AA60(struct PokemonJump1 *arg0)
     arg0->unk72 = 0;
     sub_802AB20();
     sub_802AA94(arg0);
-    if (arg0->unk5 == 5)
+    if (arg0->unk5 == MAX_RFU_PLAYERS)
         sub_802E3A8();
 }
 
@@ -614,7 +638,7 @@ static void sub_802ACA0(u8 taskId)
     }
 }
 
-void sub_802AE14(int arg0)
+static void sub_802AE14(int arg0)
 {
     if (arg0 == 0)
     {
@@ -1650,7 +1674,7 @@ static void sub_802C0B8(void)
     sub_802C270();
 }
 
-int sub_802C0DC(void)
+static int sub_802C0DC(void)
 {
     return gUnknown_02022CFC->unk10;
 }
@@ -1683,7 +1707,7 @@ static void sub_802C164(void)
     gUnknown_02022CFC->unk83AC->unk10 = 1;
 }
 
-void sub_802C18C(void)
+static void sub_802C18C(void)
 {
     gUnknown_02022CFC->unk83AC->unk12 = gUnknown_02022CFC->unk83AC->unk10;
     gUnknown_02022CFC->unk83AC->unk10 = 2;
@@ -1691,8 +1715,367 @@ void sub_802C18C(void)
     gUnknown_02022CFC->unk83AC->unk14 = 2;
 }
 
-void sub_802C1BC(void)
+static void sub_802C1BC(void)
 {
     gUnknown_02022CFC->unk83AC->unk12 = gUnknown_02022CFC->unk83AC->unk10;
     gUnknown_02022CFC->unk83AC->unk10 = 0;
+}
+
+static void sub_802C1DC(void)
+{
+    if (gUnknown_02022CFC->unk5C)
+    {
+        sub_802DD64(gUnknown_02022CFC->unk78);
+        gUnknown_02022CFC->unk5C = 0;
+        if (gUnknown_02022CFC->unk4D)
+        {
+            int index = sub_802DCCC(gUnknown_02022CFC->unk71);
+            PlaySE(gUnknown_082FB654[index - 2]);
+            gUnknown_02022CFC->unk4D = 0;
+        }
+    }
+
+    sub_802DD74(gUnknown_02022CFC->unk74);
+    sub_802C280();
+    sub_802C240();
+}
+
+static void sub_802C240(void)
+{
+    if (gUnknown_02022CFC->unk46)
+        sub_802DC9C(gUnknown_02022CFC->unk14);
+}
+
+static void sub_802C260(void)
+{
+    gUnknown_02022CFC->unk46 = 0;
+}
+
+static void sub_802C270(void)
+{
+    gUnknown_02022CFC->unk46 = 1;
+}
+
+static void sub_802C280(void)
+{
+    int i;
+    int whichSound = 0;
+    int numLinkPlayers = gUnknown_02022CFC->unk5;
+
+    for (i = 0; i < numLinkPlayers; i++)
+    {
+        switch (gUnknown_02022CFC->unk82E4[i].unk10)
+        {
+        case 0:
+            sub_802DC80(i, 0);
+            break;
+        case 1:
+            if (gUnknown_02022CFC->unk82E4[i].unk12 != 1 || gUnknown_02022CFC->unk82E4[i].unkE != gUnknown_02022CFC->unk9A[i])
+            {
+                if (i == gUnknown_02022CFC->unk6)
+                    gUnknown_02022CFC->unk82E4[i].unk12 = 1;
+
+                whichSound |= 0x1;
+                gUnknown_02022CFC->unk82E4[i].unk4 = 0x7FFFFFFF;
+                gUnknown_02022CFC->unk9A[i] = gUnknown_02022CFC->unk82E4[i].unkE;
+            }
+
+            sub_802C398(i);
+            break;
+        case 2:
+            if (gUnknown_02022CFC->unk82E4[i].unk12 != 2)
+            {
+                if (i == gUnknown_02022CFC->unk6)
+                    gUnknown_02022CFC->unk82E4[i].unk12 = 2;
+
+                whichSound |= 0x2;
+                sub_802DD88(i);
+            }
+            break;
+        }
+    }
+
+    if (whichSound & 0x2)
+        PlaySE(SE_RG_NAWAMISS);
+    else if (whichSound & 0x1)
+        PlaySE(SE_DANSA);
+}
+
+static void sub_802C398(int multiplayerId)
+{
+    int var0;
+    int var1;
+    struct PokemonJump1_82E4 *player;
+
+    if (gUnknown_02022CFC->unk68)
+        return;
+
+    player = &gUnknown_02022CFC->unk82E4[multiplayerId];
+    if (player->unk4 != 0x7FFFFFFF)
+    {
+        player->unk4++;
+        var0 = player->unk4;
+    }
+    else
+    {
+        var0 = gUnknown_02022CFC->unk4A - player->unkE;
+        if (var0 >= 65000)
+        {
+            var0 -= 65000;
+            var0 += gUnknown_02022CFC->unk4A;
+        }
+
+        player->unk4 = var0;
+    }
+
+    if (var0 < 4)
+        return;
+
+    var0 -= 4;
+    if (var0 < 48)
+        var1 = gUnknown_082FB65C[player->unkC][var0];
+    else
+        var1 = 0;
+
+    sub_802DC80(multiplayerId, var1);
+    if (!var1 && multiplayerId == gUnknown_02022CFC->unk6)
+        sub_802C1BC();
+    
+    player->unk0 = var1;
+}
+
+static void sub_802C43C(void)
+{
+    if (gUnknown_02022CFC->unk14 == 8 && gUnknown_02022CFC->unk18 == 7)
+    {
+        if (gUnknown_02022CFC->unk58 == 0)
+        {
+            sub_802C780();
+            gUnknown_02022CFC->unk54 = 0;
+            gUnknown_02022CFC->unk58 = 1;
+            gUnknown_02022CFC->unk71 = 0;
+        }
+        else
+        {
+            if (gUnknown_02022CFC->unk54 == 5)
+            {
+                gUnknown_02022CFC->unkC++;
+                sub_802C7A0(gUnknown_02022CFC->unkC);
+            }
+            else
+            {
+                gUnknown_02022CFC->unkC = 0;
+            }
+
+            if (gUnknown_02022CFC->unk54 > 1)
+            {
+                gUnknown_02022CFC->unk64 = 1;
+                memcpy(gUnknown_02022CFC->unk86, gUnknown_02022CFC->unk81, sizeof(u8) * MAX_RFU_PLAYERS);
+            }
+
+            sub_802C780();
+            gUnknown_02022CFC->unk54 = 0;
+            gUnknown_02022CFC->unk58 = 1;
+            gUnknown_02022CFC->unk71 = 0;
+            if (gUnknown_02022CFC->unk74 < 9999)
+                gUnknown_02022CFC->unk74++;
+
+            sub_802C688(10);
+            sub_802AE14(3);
+        }
+    }
+
+    if (gUnknown_02022CFC->unk64 && (sub_802C618() == TRUE || !gUnknown_02022CFC->unk14))
+    {
+        int var0 = sub_802C73C(gUnknown_02022CFC->unk86);
+        sub_802C688(sub_802C790(var0));
+        sub_802AE14(3);
+        gUnknown_02022CFC->unk64 = 0;
+    }
+
+    if (gUnknown_02022CFC->unk58)
+    {
+        int var1 = sub_802C6B0();
+        if (var1 > gUnknown_02022CFC->unk54)
+        {
+            gUnknown_02022CFC->unk54 = var1;
+            memcpy(gUnknown_02022CFC->unk81, gUnknown_02022CFC->unk7C, sizeof(u8) * MAX_RFU_PLAYERS);
+        }
+    }
+}
+
+static bool32 sub_802C538(void)
+{
+    int i;
+
+    if (gUnknown_02022CFC->unk14 == 6 && !gUnknown_02022CFC->unk83AC->unk0)
+    {
+        if (gUnknown_02022CFC->unk83AC->unk12 == 1 && sub_802C0DC() == 1)
+        {
+            gUnknown_02022CFC->unk83AC->unk14 = 1;
+        }
+        else
+        {
+            sub_802C18C();
+            sub_802AE14(3);
+        }
+    }
+
+    if (gUnknown_02022CFC->unk14 == 7
+     && gUnknown_02022CFC->unk18 == 6
+     && gUnknown_02022CFC->unk83AC->unk10 != 2)
+    {
+        gUnknown_02022CFC->unk83AC->unk14 = 1;
+        sub_802AE14(3);
+    }
+
+    for (i = 0; i < gUnknown_02022CFC->unk5; i++)
+    {
+        if (gUnknown_02022CFC->unk82E4[i].unk10 == 2)
+            return FALSE;
+    }
+
+    return TRUE;
+}
+
+static bool32 sub_802C5DC(void)
+{
+    int i;
+    int numPlayers = gUnknown_02022CFC->unk5;
+    int count = 0;
+    for (i = 0; i < numPlayers; i++)
+    {
+        if (gUnknown_02022CFC->unk82E4[i].unk14)
+            count++;
+    }
+
+    return count == numPlayers;
+}
+
+static bool32 sub_802C618(void)
+{
+    int i;
+    for (i = 0; i < gUnknown_02022CFC->unk5; i++)
+    {
+        if (gUnknown_02022CFC->unk82E4[i].unk14 != 1)
+            return FALSE;
+    }
+
+    return TRUE;
+}
+
+static bool32 sub_802C650(void)
+{
+    int i;
+
+    if (gUnknown_02022CFC->unk45 == 1)
+        return FALSE;
+
+    for (i = 1; i < gUnknown_02022CFC->unk5; i++)
+    {
+        if (gUnknown_02022CFC->unk90[i] == 1)
+            return FALSE;
+    }
+
+    return TRUE;
+}
+
+static void sub_802C688(int arg0)
+{
+    gUnknown_02022CFC->unk78 += arg0;
+    gUnknown_02022CFC->unk5C = 1;
+    if (gUnknown_02022CFC->unk78 >= 99990)
+        gUnknown_02022CFC->unk78 = 99990;
+}
+
+static int sub_802C6B0(void)
+{
+    int i;
+    int count = 0;
+    int numPlayers = gUnknown_02022CFC->unk5;
+
+    for (i = 0; i < numPlayers; i++)
+    {
+        if (gUnknown_02022CFC->unk82E4[i].unk0 == -30)
+        {
+            gUnknown_02022CFC->unk7C[i] = 1;
+            count++;
+        }
+        else
+        {
+            gUnknown_02022CFC->unk7C[i] = 0;
+        }
+    }
+
+    return count;
+}
+
+static bool32 sub_802C70C(void)
+{
+    return !gUnknown_03005000.unk_124.unk_8c2 && !gUnknown_03005000.unk_9e8.unk_232;
+}
+
+static int sub_802C73C(u8 *arg0)
+{
+    int i;
+    int flags;
+    int count;
+
+    for (i = 0, flags = 0, count = 0; i < MAX_RFU_PLAYERS; i++)
+    {
+        if (arg0[i])
+        {
+            flags |= 1 << i;
+            count++;
+        }
+    }
+
+    gUnknown_02022CFC->unk71 = flags;
+    if (flags)
+        gUnknown_02022CFC->unk4D = 1;
+
+    return count;
+}
+
+static void sub_802C780(void)
+{
+    gUnknown_02022CFC->unk44 = 0;
+}
+
+static int sub_802C790(int arg0)
+{
+    return gUnknown_082FB6EC[arg0];
+}
+
+static void sub_802C7A0(u16 arg0)
+{
+    if (arg0 > gUnknown_02022CFC->unkE)
+        gUnknown_02022CFC->unkE = arg0;
+}
+
+static bool32 sub_802C7BC(void)
+{
+    if (gUnknown_02022CFC->unk78 >= gUnknown_082FB714[0])
+        return TRUE;
+    else
+        return FALSE;
+}
+
+static u16 sub_802C7E0(void)
+{
+    u16 lo = sub_802C818();
+    u16 hi = sub_802C838();
+    return (hi << 12) | (lo & 0xFFF);
+}
+
+static void sub_802C808(u16 arg0, u16 *arg1, u16 *arg2)
+{
+    *arg2 = arg0 >> 12;
+    *arg1 = arg0 & 0xFFF;
+}
+
+static u16 sub_802C818(void)
+{
+    u16 index = Random() % ARRAY_COUNT(gUnknown_082FB704);
+    return gUnknown_082FB704[index];
 }
