@@ -376,7 +376,6 @@ void PlayCryInternal(u16 species, s8 pan, s8 volume, u8 priority, u8 mode)
     u32 pitch;
     u32 chorus;
 
-    species--;
     length = 140;
     v0 = FALSE;
     release = 0;
@@ -460,6 +459,7 @@ void PlayCryInternal(u16 species, s8 pan, s8 volume, u8 priority, u8 mode)
     SetPokemonCryChorus(chorus);
     SetPokemonCryPriority(priority);
 
+    species--;
     gMPlay_PokemonCry = SetPokemonCryTone(v0 ? &gCryTable2[species] : &gCryTable[species]);
 }
 
