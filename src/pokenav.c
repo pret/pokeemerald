@@ -596,7 +596,8 @@ void SetPokenavVBlankCallback(void)
 
 void *AllocSubstruct(u32 index, u32 size)
 {
-    return gPokenavResources->field10[index] = Alloc(size);
+    gPokenavResources->field10[index] = Alloc(size);
+    return gPokenavResources->field10[index];
 }
 
 void *GetSubstructPtr(u32 index)
