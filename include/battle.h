@@ -513,6 +513,7 @@ struct BattleStruct
     u8 introState;
     u8 ateBerry[2]; // array id determined by side, each party pokemon as bit
     u8 stolenStats[NUM_BATTLE_STATS]; // hp byte is used for which stats to raise, other inform about by how many stages
+    u8 lastMoveFailed; // as bits for each battler, for the sake of Stomping Tantrum
 };
 
 #define GET_MOVE_TYPE(move, typeArg)                        \
