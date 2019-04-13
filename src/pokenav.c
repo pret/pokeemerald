@@ -8,13 +8,6 @@
 #include "pokemon_storage_system.h"
 #include "pokenav.h"
 
-enum
-{
-    MODE_NORMAL, // Chosen from Start menu.
-    MODE_FORCE_CALL_1, // Used for the script's special. Has to choose Match Call and make a call.
-    MODE_FORCE_CALL_2, // Set after making a call, has to exit Pokenav.
-};
-
 #define LOOPED_TASK_DECODE_STATE(action) (action - 5)
 
 #define LOOPED_TASK_ID(primary, secondary) (((secondary) << 16) |(primary))
@@ -96,17 +89,14 @@ extern u32 sub_81D09F4(void);
 extern u32 sub_81CFA04(void);
 extern u32 sub_81CFE08(void);
 
-bool32 SetActivePokenavMenu(u32 a0);
-bool32 InitPokenavMainMenu(void);
+static bool32 SetActivePokenavMenu(u32 menuId);
 static bool32 AnyMonHasRibbon(void);
 u32 sub_81C75E0(void);
 u32 sub_81C75D4(void);
 u32 PokenavMainMenuLoopedTaskIsActive(void);
-u32 sub_81C786C(void);
 bool32 WaitForPokenavShutdownFade(void);
 void sub_81C7834(void *func1, void *func2);
 static void InitPokenavResources(struct PokenavResources *a0);
-void sub_81C7850(u32 a0);
 void Task_RunLoopedTask_LinkMode(u8 a0);
 void Task_RunLoopedTask(u8 taskId);
 void sub_81C742C(u8 taskId);
@@ -117,7 +107,6 @@ static void VBlankCB_Pokenav(void);
 static void CB2_Pokenav(void);
 void sub_81C72BC(void);
 
-// Const rom data.
 const struct UnknownPokenavCallbackStruct PokenavMenuCallbacks[15] =
 {
     {
@@ -291,7 +280,7 @@ bool32 IsLoopedTaskActive(u32 taskId)
 
 bool32 FuncIsActiveLoopedTask(LoopedTask func)
 {
-    s32 i;
+    int i;
     for (i = 0; i < NUM_TASKS; i++)
     {
         if (gTasks[i].isActive
@@ -404,7 +393,7 @@ void sub_81C72BC(void)
     else
     {
         InitPokenavResources(gPokenavResources);
-        gPokenavResources->mode = MODE_FORCE_CALL_1;
+        gPokenavResources->mode = POKENAV_MODE_FORCE_CALL_1;
         ResetTasks();
         ResetSpriteData();
         FreeAllSpritePalettes();
@@ -417,7 +406,7 @@ void sub_81C72BC(void)
 
 static void FreePokenavResources(void)
 {
-    s32 i;
+    int i;
 
     for (i = 0; i < SUBSTRUCT_COUNT; i++)
         FreePokenavSubstruct(i);
@@ -428,12 +417,12 @@ static void FreePokenavResources(void)
 
 static void InitPokenavResources(struct PokenavResources *a0)
 {
-    s32 i;
+    int i;
 
     for (i = 0; i < SUBSTRUCT_COUNT; i++)
         a0->field10[i] = NULL;
 
-    a0->mode = MODE_NORMAL;
+    a0->mode = POKENAV_MODE_NORMAL;
     a0->currentMenuIndex = 0;
     a0->hasAnyRibbons = AnyMonHasRibbon();
     a0->currentMenuCb1 = NULL;
@@ -441,7 +430,7 @@ static void InitPokenavResources(struct PokenavResources *a0)
 
 static bool32 AnyMonHasRibbon(void)
 {
-    s32 i, j;
+    int i, j;
 
     for (i = 0; i < PARTY_SIZE; i++)
     {
@@ -498,7 +487,7 @@ void sub_81C742C(u8 taskId)
         // Wait for LoopedTask_InitPokenavMenu to finish
         if (PokenavMainMenuLoopedTaskIsActive())
             break;
-        SetActivePokenavMenu(0 + UNKNOWN_POKENAV_OFFSET);
+        SetActivePokenavMenu(POKENAV_MENU_0);
         data[0] = 4;
         break;
     case 2:
@@ -512,7 +501,7 @@ void sub_81C742C(u8 taskId)
             ShutdownPokenav();
             data[0] = 5;
         }
-        else if (v1 >= UNKNOWN_POKENAV_OFFSET)
+        else if (v1 >= POKENAV_MENU_IDS_START)
         {
             PokenavMenuCallbacks[gPokenavResources->currentMenuIndex].unk18();
             PokenavMenuCallbacks[gPokenavResources->currentMenuIndex].unk14();
@@ -540,7 +529,7 @@ void sub_81C742C(u8 taskId)
     case 5:
         if (!WaitForPokenavShutdownFade())
         {
-            bool32 calledFromScript = (gPokenavResources->mode != MODE_NORMAL);
+            bool32 calledFromScript = (gPokenavResources->mode != POKENAV_MODE_NORMAL);
 
             sub_81C9430();
             FreePokenavResources();
@@ -553,9 +542,9 @@ void sub_81C742C(u8 taskId)
     }
 }
 
-bool32 SetActivePokenavMenu(u32 indexWithOffset)
+static bool32 SetActivePokenavMenu(u32 menuId)
 {
-    u32 index = indexWithOffset - UNKNOWN_POKENAV_OFFSET;
+    u32 index = menuId - POKENAV_MENU_IDS_START;
 
     InitKeys_();
     if (!PokenavMenuCallbacks[index].unk0())
