@@ -7,12 +7,12 @@
 
 struct Pokenav1Struct
 {
-    u16 unk0;
-    s16 unk2;
-    u16 unk4;
-    u16 unk6;
+    u16 menuType;
+    s16 cursorPos;
+    u16 descriptionId;
+    u16 helpBarIndex;
     u32 unk8;
-    u32 (*unkC)(struct Pokenav1Struct*);
+    u32 (*callback)(struct Pokenav1Struct*);
 };
 
 static bool32 sub_81C9814(struct Pokenav1Struct *a0);
@@ -31,9 +31,9 @@ static u32 sub_81C943C(struct Pokenav1Struct *a0);
 static u32 (*sub_81C93EC(void))(struct Pokenav1Struct*);
 static void sub_81C939C(struct Pokenav1Struct *state);
 
-static const u8 sUnknown_0861FC54[] = {2, 3, 4, 2, 5};
+static const u8 sLastCursorPositions[] = {2, 3, 4, 2, 5};
 
-static const u8 sUnknown_0861FC59[][6] =
+static const u8 sDescriptionIds[][6] =
 {
     { 0, 1,  4,  4,  4,  4 },
     { 0, 1,  2,  4,  4,  4 },
@@ -42,7 +42,7 @@ static const u8 sUnknown_0861FC59[][6] =
     { 8, 9, 10, 11, 12, 13 },
 };
 
-static u8 sub_81C9268(void)
+static u8 GetPokenavMainMenuType(void)
 {
     u8 retVal = 0;
     if (FlagGet(FLAG_ADDED_MATCH_CALL_TO_POKENAV))
@@ -61,10 +61,10 @@ bool32 sub_81C9298(void)
     if (!state)
         return FALSE;
     
-    state->unk0 = sub_81C9268();
-    state->unk2 = 0;
-    state->unk4 = 0;
-    state->unk6 = 0;
+    state->menuType = GetPokenavMainMenuType();
+    state->cursorPos = 0;
+    state->descriptionId = 0;
+    state->helpBarIndex = 0;
     sub_81C939C(state);
     return TRUE;
 }
@@ -75,10 +75,10 @@ bool32 sub_81C92CC(void)
     if (!state)
         return FALSE;
     
-    state->unk0 = sub_81C9268();
-    state->unk2 = 2;
-    state->unk4 = 2;
-    state->unk6 = 0;
+    state->menuType = GetPokenavMainMenuType();
+    state->cursorPos = 2;
+    state->descriptionId = 2;
+    state->helpBarIndex = 0;
     sub_81C939C(state);
     return TRUE;
 }
@@ -89,9 +89,9 @@ bool32 sub_81C9304(void)
     if (!state)
         return FALSE;
     
-    state->unk0 = sub_81C9268();
-    state->unk2 = 3;
-    state->unk4 = 3;
+    state->menuType = GetPokenavMainMenuType();
+    state->cursorPos = 3;
+    state->descriptionId = 3;
     sub_81C939C(state);
     return TRUE;
 }
@@ -102,10 +102,10 @@ bool32 sub_81C9338(void)
     if (!state)
         return FALSE;
     
-    state->unk0 = 3;
-    state->unk2 = 0;
-    state->unk4 = 5;
-    state->unk6 = 0;
+    state->menuType = 3;
+    state->cursorPos = 0;
+    state->descriptionId = 5;
+    state->helpBarIndex = 0;
     sub_81C939C(state);
     return TRUE;
 }
@@ -116,30 +116,30 @@ bool32 sub_81C9368(void)
     if (!state)
         return FALSE;
     
-    state->unk0 = 4;
-    state->unk2 = sub_81C76AC();
-    state->unk4 = state->unk2 + 8;
-    state->unk6 = 0;
+    state->menuType = 4;
+    state->cursorPos = sub_81C76AC();
+    state->descriptionId = state->cursorPos + 8;
+    state->helpBarIndex = 0;
     sub_81C939C(state);
     return TRUE;
 }
 
 static void sub_81C939C(struct Pokenav1Struct *state)
 {
-    switch (state->unk0)
+    switch (state->menuType)
     {
     case 0:
-        SetPokenavMode(0);
+        SetPokenavMode(POKENAV_MODE_NORMAL);
         // fallthrough
     case 1:
     case 2:
-        state->unkC = sub_81C93EC();
+        state->callback = sub_81C93EC();
         break;
     case 3:
-        state->unkC = sub_81C963C;
+        state->callback = sub_81C963C;
         break;
     case 4:
-        state->unkC = sub_81C96FC;
+        state->callback = sub_81C96FC;
         break;
     }
 }
@@ -149,11 +149,11 @@ static u32 (*sub_81C93EC(void))(struct Pokenav1Struct*)
     switch (GetPokenavMode())
     {
     default:
-    case 0:
+    case POKENAV_MODE_NORMAL:
         return sub_81C943C;
-    case 1:
+    case POKENAV_MODE_FORCE_CALL_1:
         return sub_81C9520;
-    case 2:
+    case POKENAV_MODE_FORCE_CALL_2:
         return sub_81C9588;
     }
 }
@@ -161,7 +161,7 @@ static u32 (*sub_81C93EC(void))(struct Pokenav1Struct*)
 u32 sub_81C941C(void)
 {
     struct Pokenav1Struct *state = GetSubstructPtr(1);
-    return state->unkC(state);
+    return state->callback(state);
 }
 
 void sub_81C9430(void)
@@ -176,32 +176,32 @@ static u32 sub_81C943C(struct Pokenav1Struct *a0)
 
     if (gMain.newKeys & A_BUTTON)
     {
-        switch (sUnknown_0861FC59[a0->unk0][a0->unk2])
+        switch (sDescriptionIds[a0->menuType][a0->cursorPos])
         {
         case 0:
-            a0->unk6 = gSaveBlock2Ptr->regionMapZoom ? 2 : 1;
-            sub_81C97B0(a0, UNKNOWN_POKENAV_OFFSET + 6);
+            a0->helpBarIndex = gSaveBlock2Ptr->regionMapZoom ? 2 : 1;
+            sub_81C97B0(a0, POKENAV_MENU_6);
             return 8;
         case 1:
-            a0->unk0 = 3;
-            a0->unk2 = 0;
-            a0->unk4 = sUnknown_0861FC59[3][0];
-            a0->unkC = sub_81C963C;
+            a0->menuType = 3;
+            a0->cursorPos = 0;
+            a0->descriptionId = sDescriptionIds[3][0];
+            a0->callback = sub_81C963C;
             return 2;
         case 2:
-            a0->unk6 = 6;
-            sub_81C97B0(a0, UNKNOWN_POKENAV_OFFSET + 11);
+            a0->helpBarIndex = 6;
+            sub_81C97B0(a0, POKENAV_MENU_B);
             return 8;
         case 3:
             if (CanViewRibbonsMenu())
             {
-                a0->unk6 = 9;
-                sub_81C97B0(a0, UNKNOWN_POKENAV_OFFSET + 12);
+                a0->helpBarIndex = 9;
+                sub_81C97B0(a0, POKENAV_MENU_C);
                 return 8;
             }
             else
             {
-                a0->unkC = sub_81C9600;
+                a0->callback = sub_81C9600;
                 return 6;
             }
         case 4:
@@ -222,10 +222,10 @@ static u32 sub_81C9520(struct Pokenav1Struct *a0)
     
     if (gMain.newKeys & A_BUTTON)
     {
-        if (sUnknown_0861FC59[a0->unk0][a0->unk2] == 2)
+        if (sDescriptionIds[a0->menuType][a0->cursorPos] == 2)
         {
-            a0->unk6 = 6;
-            sub_81C97B0(a0, UNKNOWN_POKENAV_OFFSET + 11);
+            a0->helpBarIndex = 6;
+            sub_81C97B0(a0, POKENAV_MENU_B);
             return 8;
         }
         else
@@ -251,7 +251,7 @@ static u32 sub_81C9588(struct Pokenav1Struct *a0)
     
     if (gMain.newKeys & A_BUTTON)
     {
-        u32 v0 = sUnknown_0861FC59[a0->unk0][a0->unk2];
+        u32 v0 = sDescriptionIds[a0->menuType][a0->cursorPos];
         if (v0 != 2 && v0 != 4)
         {
             PlaySE(SE_HAZURE);
@@ -259,8 +259,8 @@ static u32 sub_81C9588(struct Pokenav1Struct *a0)
         }
         else if (v0 == 2)
         {
-            a0->unk6 = 6;
-            sub_81C97B0(a0, UNKNOWN_POKENAV_OFFSET + 11);
+            a0->helpBarIndex = 6;
+            sub_81C97B0(a0, POKENAV_MENU_B);
             return 8;
         }
         else
@@ -279,13 +279,13 @@ static u32 sub_81C9600(struct Pokenav1Struct *a0)
 {
     if (sub_81C9814(a0))
     {
-        a0->unkC = sub_81C93EC();
+        a0->callback = sub_81C93EC();
         return 1;
     }
 
     if (gMain.newKeys & (A_BUTTON | B_BUTTON))
     {
-        a0->unkC = sub_81C93EC();
+        a0->callback = sub_81C93EC();
         return 7;
     }
 
@@ -300,17 +300,17 @@ static u32 sub_81C963C(struct Pokenav1Struct *a0)
     
     if (gMain.newKeys & A_BUTTON)
     {
-        switch (sUnknown_0861FC59[a0->unk0][a0->unk2])
+        switch (sDescriptionIds[a0->menuType][a0->cursorPos])
         {
         case 6:
-            a0->unk0 = 4;
-            a0->unk2 = v0;
-            a0->unk4 = sUnknown_0861FC59[4][0];
-            a0->unkC = sub_81C96FC;
+            a0->menuType = 4;
+            a0->cursorPos = v0;
+            a0->descriptionId = sDescriptionIds[4][0];
+            a0->callback = sub_81C96FC;
             return 4;
         case 5:
-            a0->unk6 = v0;
-            sub_81C97B0(a0, UNKNOWN_POKENAV_OFFSET + 7);
+            a0->helpBarIndex = v0;
+            sub_81C97B0(a0, POKENAV_MENU_7);
             return 8;
         case 7:
             PlaySE(SE_SELECT);
@@ -320,10 +320,10 @@ static u32 sub_81C963C(struct Pokenav1Struct *a0)
     }
     if (gMain.newKeys & B_BUTTON)
     {
-        if (a0->unk2 != sUnknown_0861FC54[a0->unk0])
+        if (a0->cursorPos != sLastCursorPositions[a0->menuType])
         {
-            a0->unk2 = sUnknown_0861FC54[a0->unk0];
-            a0->unkC = sub_81C9798;
+            a0->cursorPos = sLastCursorPositions[a0->menuType];
+            a0->callback = sub_81C9798;
             return 1;
         }
         else
@@ -344,12 +344,12 @@ static u32 sub_81C96FC(struct Pokenav1Struct *a0)
     
     if (gMain.newKeys & A_BUTTON)
     {
-        u8 v0 = sUnknown_0861FC59[a0->unk0][a0->unk2];
+        u8 v0 = sDescriptionIds[a0->menuType][a0->cursorPos];
         if (v0 != 13)
         {
             sub_81C7694(v0 - 8);
-            sub_81C97B0(a0, UNKNOWN_POKENAV_OFFSET + 8);
-            a0->unk6 = 3;
+            sub_81C97B0(a0, POKENAV_MENU_8);
+            a0->helpBarIndex = 3;
             return 8;
         }
         else
@@ -361,10 +361,10 @@ static u32 sub_81C96FC(struct Pokenav1Struct *a0)
     }
     if (gMain.newKeys & B_BUTTON)
     {
-        if (a0->unk2 != sUnknown_0861FC54[a0->unk0])
+        if (a0->cursorPos != sLastCursorPositions[a0->menuType])
         {
-            a0->unk2 = sUnknown_0861FC54[a0->unk0];
-            a0->unkC = sub_81C97A4;
+            a0->cursorPos = sLastCursorPositions[a0->menuType];
+            a0->callback = sub_81C97A4;
             return 1;
         }
         else
@@ -392,7 +392,7 @@ static u32 sub_81C97A4(struct Pokenav1Struct *a0)
 static void sub_81C97B0(struct Pokenav1Struct *a0, u32 a1)
 {
     a0->unk8 = a1;
-    a0->unkC = sub_81C97BC;
+    a0->callback = sub_81C97BC;
 }
 
 static u32 sub_81C97BC(struct Pokenav1Struct *a0)
@@ -402,37 +402,37 @@ static u32 sub_81C97BC(struct Pokenav1Struct *a0)
 
 static void sub_81C97C0(struct Pokenav1Struct *a0)
 {
-    a0->unk0 = sub_81C9268();
-    a0->unk2 = 1;
-    a0->unk4 = sUnknown_0861FC59[a0->unk0][a0->unk2];
-    a0->unkC = sub_81C943C;
+    a0->menuType = GetPokenavMainMenuType();
+    a0->cursorPos = 1;
+    a0->descriptionId = sDescriptionIds[a0->menuType][a0->cursorPos];
+    a0->callback = sub_81C943C;
 }
 
 static void sub_81C97F8(struct Pokenav1Struct *a0)
 {
-    a0->unk0 = 3;
-    a0->unk2 = 1;
-    a0->unk4 = sUnknown_0861FC59[3][1];
-    a0->unkC = sub_81C963C;
+    a0->menuType = 3;
+    a0->cursorPos = 1;
+    a0->descriptionId = sDescriptionIds[3][1];
+    a0->callback = sub_81C963C;
 }
 
 static bool32 sub_81C9814(struct Pokenav1Struct *a0)
 {
     if (gMain.newKeys & DPAD_UP)
     {
-        if (--a0->unk2 < 0)
-            a0->unk2 = sUnknown_0861FC54[a0->unk0];
+        if (--a0->cursorPos < 0)
+            a0->cursorPos = sLastCursorPositions[a0->menuType];
 
-        a0->unk4 = sUnknown_0861FC59[a0->unk0][a0->unk2];
+        a0->descriptionId = sDescriptionIds[a0->menuType][a0->cursorPos];
         return TRUE;
     }
     else if (gMain.newKeys & DPAD_DOWN)
     {
-        a0->unk2++;
-        if (a0->unk2 > sUnknown_0861FC54[a0->unk0])
-            a0->unk2 = 0;
+        a0->cursorPos++;
+        if (a0->cursorPos > sLastCursorPositions[a0->menuType])
+            a0->cursorPos = 0;
 
-        a0->unk4 = sUnknown_0861FC59[a0->unk0][a0->unk2];
+        a0->descriptionId = sDescriptionIds[a0->menuType][a0->cursorPos];
         return TRUE;
     }
     else
@@ -444,23 +444,23 @@ static bool32 sub_81C9814(struct Pokenav1Struct *a0)
 int sub_81C9894(void)
 {
     struct Pokenav1Struct *state = GetSubstructPtr(1);
-    return state->unk0;
+    return state->menuType;
 }
 
 int sub_81C98A4(void)
 {
     struct Pokenav1Struct *state = GetSubstructPtr(1);
-    return state->unk2;
+    return state->cursorPos;
 }
 
 int sub_81C98B4(void)
 {
     struct Pokenav1Struct *state = GetSubstructPtr(1);
-    return state->unk4;
+    return state->descriptionId;
 }
 
 int sub_81C98C4(void)
 {
     struct Pokenav1Struct *state = GetSubstructPtr(1);
-    return state->unk6;
+    return state->helpBarIndex;
 }
