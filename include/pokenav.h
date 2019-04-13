@@ -14,7 +14,8 @@ typedef u32 (*LoopedTask)(s32 state);
 #define UNKNOWN_POKENAV_OFFSET 100000
 
 // pokenav.c
-extern u32 sub_81C99D4(void);
+void sub_81C7694(u32);
+u16 sub_81C76AC(void);
 
 void CB2_InitPokeNav(void);
 u32 CreateLoopedTask(LoopedTask loopedTask, u32 priority);
@@ -31,13 +32,17 @@ bool32 CanViewRibbonsMenu(void);
 // pokenav_match_call_ui.c
 
 // pokenav_unk_1.c
-u32 sub_81C9298(void);
-u32 sub_81C92CC(void);
-u32 sub_81C9304(void);
-u32 sub_81C9338(void);
-u32 sub_81C9368(void);
+bool32 sub_81C9298(void);
+bool32 sub_81C92CC(void);
+bool32 sub_81C9304(void);
+bool32 sub_81C9338(void);
+bool32 sub_81C9368(void);
 u32 sub_81C941C(void);
 void sub_81C9430(void);
+int sub_81C9894(void);
+
+// pokenav_unk_2.c
+u32 sub_81C99D4(void);
 
 
 #endif //GUARD_POKENAV_H
