@@ -162,7 +162,6 @@ extern u8 gUnknown_02022C3E;
 // Exported ROM declarations
 
 u8 sub_8013F78(void);
-bool32 sub_802C908(u16);
 void nullsub_89(u8 taskId);
 void var_800D_set_xB(void);
 void MEvent_CreateTask_CardOrNewsWithFriend(u32 arg0);
