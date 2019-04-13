@@ -121,7 +121,7 @@ static void sub_80F5F30(u8);
 static void sub_80F5F74(u8);
 static void sub_80F7144(void);
 static void sub_80F68F0(u8);
-s16 sub_80F6B78(const u8 *, u8);
+s32 sub_80F6B78(const u8 *, u8);
 static void sub_80F6E9C(s16, u16, u16, u16);
 static void sub_80F6058(u8);
 static void sub_80F7A80(u8, u8);
@@ -309,7 +309,7 @@ void sub_80F5B00(void)
     gBattle_WIN1V = 0x80A0;
     CreateTask(sub_80F68B4, 20);
     sub_80F7880();
-    if (gIsLinkContest & 0x2)
+    if (gLinkContestFlags & LINK_CONTEST_FLAG_IS_WIRELESS)
         gPaletteFade.bufferTransferDisabled = 1;
     else
         PlayBGM(MUS_CON_K);
@@ -351,12 +351,12 @@ static void sub_80F5CE4(u8 taskId)
 {
     u16 var;
 
-    if (gIsLinkContest & 1)
+    if (gLinkContestFlags & LINK_CONTEST_FLAG_IS_LINK)
     {
         switch (gTasks[taskId].data[0])
         {
         case 0:
-            sub_80DBED4();
+            SaveLinkContestResults();
             if (gContestFinalStandings[gContestPlayerMonIndex] == 0)
             {
                 IncrementGameStat(GAME_STAT_WON_LINK_CONTEST);
@@ -381,7 +381,7 @@ static void sub_80F5CE4(u8 taskId)
             break;
         case 1:
             gTasks[taskId].data[0]++;
-            if (!(gIsLinkContest & 0x2))
+            if (!(gLinkContestFlags & LINK_CONTEST_FLAG_IS_WIRELESS))
                 gTasks[taskId].data[0] = 100;
             break;
         case 2:
@@ -406,7 +406,7 @@ static void sub_80F5CE4(u8 taskId)
     if (!gPaletteFade.active)
     {
         gTasks[taskId].data[0] = 0;
-        if (gIsLinkContest & 0x1)
+        if (gLinkContestFlags & LINK_CONTEST_FLAG_IS_LINK)
         {
             sub_80F707C(gText_CommunicationStandby);
             gTasks[taskId].func = sub_80F5ED8;
@@ -742,7 +742,7 @@ static void sub_80F66B4(u8 taskId)
 
     if (gMain.newKeys & A_BUTTON)
     {
-        if (!(gIsLinkContest & 0x1))
+        if (!(gLinkContestFlags & LINK_CONTEST_FLAG_IS_LINK))
         {
             for (i = 0; i < 4; i++)
             {
@@ -758,7 +758,7 @@ static void sub_80F66B4(u8 taskId)
 
 static void sub_80F671C(u8 taskId)
 {
-    if (gIsLinkContest & 0x1)
+    if (gLinkContestFlags & LINK_CONTEST_FLAG_IS_LINK)
     {
         if (!gTasks[taskId].data[10])
         {
@@ -777,7 +777,7 @@ static void sub_80F677C(u8 taskId)
 {
     if (!gReceivedRemoteLinkPlayers)
     {
-        if (gIsLinkContest & 0x2)
+        if (gLinkContestFlags & LINK_CONTEST_FLAG_IS_WIRELESS)
             DestroyWirelessStatusIndicatorSprite();
 
         sub_80F7144();
@@ -787,7 +787,7 @@ static void sub_80F677C(u8 taskId)
 
 static void sub_80F67C4(u8 taskId)
 {
-    if (!(gIsLinkContest & 0x1))
+    if (!(gLinkContestFlags & LINK_CONTEST_FLAG_IS_LINK))
         BravoTrainerPokemonProfile_BeforeInterview2(gContestFinalStandings[gContestPlayerMonIndex]);
 
     BeginHardwarePaletteFade(0xFF, 0, 0, 16, 0);
@@ -907,9 +907,9 @@ static void sub_80F6AE8(void)
     u16 sheet;
     u8 spriteId;
 
-    if (gIsLinkContest & 0x2)
+    if (gLinkContestFlags & LINK_CONTEST_FLAG_IS_WIRELESS)
     {
-        sub_800E0E8();
+        LoadWirelessStatusIndicatorSpriteGfx();
         CreateWirelessStatusIndicatorSprite(8, 8);
         gSprites[gWirelessStatusIndicatorSpriteId].subpriority = 1;
         sheet = LoadSpriteSheet(&gUnknown_0858D8E0);
@@ -919,39 +919,76 @@ static void sub_80F6AE8(void)
     }
 }
 
-// s16 sub_80F6B78(const u8 *text, u8 spriteId)
-// {
-//     int i;
-//     int origWidth, strWidth;
-//     const u8 *r8;
-//     u8 sp10[0x10];
-//     struct WindowTemplate windowTemplate;
-//     int spC;
-//     u8 *windowTileData;
-//     u8 windowId;
+// Functionally equivalent, the same except compiler generated variables from
+// src are placed on different stack positions.
 
-//     memset(windowTemplate, 0, sizeof(*windowTemplate));
-//     windowTemplate.width = 30;
-//     windowTemplate.height = 2;
-//     windowId = AddWindow(&windowTemplate);
-//     FillWindowPixelBuffer(windowId, PIXEL_FILL(1));
-//     origWidth = GetStringWidth(1, text, 0) + 9;
-//     strWidth = origWidth;
-//     if (strWidth < 0)
-//         strWidth += 7;
+#ifdef NONMATCHING
+s32 sub_80F6B78(const u8 *text, u8 spriteId)
+{
+    u8 *windowTilesPtr;
+    u16 windowId;
+    int origWidth;
+    struct WindowTemplate windowTemplate;
+    int strWidth;
+    u8 *spriteTilePtrs[4];
+    u8 *dst;
+    int i;
+    struct Sprite *sprite;
+    const u8 *src; // The culprit.
 
-//     strWidth >>= 3;
-//     if (strWidth > 30)
-//         strWidth = 30;
+    memset(&windowTemplate, 0, sizeof(windowTemplate));
+    windowTemplate.width = 30;
+    windowTemplate.height = 2;
+    windowId = AddWindow(&windowTemplate);
+    FillWindowPixelBuffer(windowId, PIXEL_FILL(1));
 
-//     AddTextPrinterParameterized3(windowId, 1, (strWidth * 8 - origWidth) / 2, 1, gUnknown_0858D8E8, -1, text);
-//     windowTileData = (u8 *)GetWindowAttribute(windowId, WINDOW_TILE_DATA);
-//     r8 = gUnknown_0858D6D0;
-//     // ....
-// }
+    origWidth = GetStringWidth(1, text, 0);
+    strWidth = (origWidth + 9) / 8;
+    if (strWidth > 30)
+     strWidth = 30;
 
+    AddTextPrinterParameterized3(windowId, 1, (strWidth * 8 - origWidth) / 2, 1, gUnknown_0858D8E8, -1, text);
+    windowTilesPtr = (u8 *)(GetWindowAttribute(windowId, WINDOW_TILE_DATA));
+    src = (u8 *)(gUnknown_0858D6D0);
+
+    sprite = &gSprites[spriteId];
+    spriteTilePtrs[0] = (u8 *)(sprite->oam.tileNum * 32 + VRAM + 0x10000);
+
+    for (i = 1; i < 4; i++)
+        spriteTilePtrs[i] = (void*)(gSprites[sprite->data[i - 1]].oam.tileNum * 32 + VRAM + 0x10000);
+
+    for (i = 0; i < 4; i++)
+        CpuFill32(0, spriteTilePtrs[i], 0x400);
+
+    dst = spriteTilePtrs[0];
+    CpuCopy32(src, dst, 0x20);
+    CpuCopy32(src + 128, dst + 0x100, 0x20);
+    CpuCopy32(src + 128, dst + 0x200, 0x20);
+    CpuCopy32(src + 64,  dst + 0x300, 0x20);
+
+    for (i = 0; i < strWidth; i++)
+    {
+        dst = &spriteTilePtrs[(i + 1) / 8][((i + 1) % 8) * 32];
+        CpuCopy32(src + 192, dst, 0x20);
+        CpuCopy32(windowTilesPtr, dst + 0x100, 0x20);
+        CpuCopy32(windowTilesPtr + 960, dst + 0x200, 0x20);
+        CpuCopy32(src + 224, dst + 0x300, 0x20);
+        windowTilesPtr += 0x20;
+    }
+
+    dst = &spriteTilePtrs[(i + 1) / 8][((i + 1) % 8) * 32];
+    CpuCopy32(src + 32,  dst, 0x20);
+    CpuCopy32(src + 160, dst + 0x100, 0x20);
+    CpuCopy32(src + 160, dst + 0x200, 0x20);
+    CpuCopy32(src + 96,  dst + 0x300, 0x20);
+    RemoveWindow(windowId);
+
+    return (240 - (strWidth + 2) * 8) / 2;
+}
+
+#else
 NAKED
-s16 sub_80F6B78(const u8 *text, u8 spriteId)
+s32 sub_80F6B78(const u8 *text, u8 spriteId)
 {
     asm_unified("\n\
     push {r4-r7,lr}\n\
@@ -1224,6 +1261,7 @@ _080F6D3E:\n\
     bx r1\n\
     .pool");
 }
+#endif // NONMATCHING
 
 static void sub_80F6DC0(void)
 {
@@ -1392,7 +1430,7 @@ static void sub_80F71C8(void)
 
     x = 5;
     y = 1;
-    if (gIsLinkContest & 0x1)
+    if (gLinkContestFlags & LINK_CONTEST_FLAG_IS_LINK)
     {
         CopyToBgTilemapBufferRect(2, gUnknown_08DC6498, 5, 1, 5, 2);
         x = 10;
@@ -1630,7 +1668,7 @@ void sub_80F7768(struct Sprite *sprite)
     sprite->pos1.y++;
     if (gUnknown_0203A034->unk0->unk9)
         sprite->invisible = 1;
-    
+
     if (sprite->pos1.x > 248 || sprite->pos1.y > 116)
     {
         DestroySprite(sprite);
@@ -2091,7 +2129,7 @@ _080F7A70:\n\
 
 //     if (spC)
 //         PlaySE(SE_PIN);
-    
+
 //     if (sp8)
 //         PlaySE(SE_BAN);
 // }
@@ -2358,38 +2396,32 @@ _080F7C96:\n\
     bx r0");
 }
 
-#ifdef NONMATCHING
 void sub_80F7CA8(u8 taskId)
 {
-    register int r4 asm("r4");
-    int r9;
-    u8 r6;
-    s16 r7;
-    s16 r12;
     int i;
     u8 var0;
     u16 tileNum;
+    bool32 r4 = FALSE;
+    bool32 endTask = FALSE;
+    u8 r6 = gTasks[taskId].data[0];
+    s16 r7 = gTasks[taskId].data[1];
+    s16 r12 = gTasks[taskId].data[2];
 
-    r4 = 0;
-    r9 = 0;
-    r6 = gTasks[taskId].data[0]; 
-    r7 = gTasks[taskId].data[1];
-    r12 = gTasks[taskId].data[2];
     if (r12)
     {
         if (gUnknown_0203A034->unk0->unkC[r6] <= 0)
-            r4 = 1;
+            r4 = TRUE;
     }
     else
     {
         if (gUnknown_0203A034->unk0->unkC[r6] > 87)
-            r4 = 1;
+            r4 = TRUE;
     }
 
     if (gUnknown_0203A034->unk0->unkC[r6] == r7)
-        r9 = 1;
+        endTask = TRUE;
 
-    if (!r9)
+    if (!endTask)
     {
         if (r4)
             gUnknown_0203A034->unk0->unkC[r6] = r7;
@@ -2399,220 +2431,32 @@ void sub_80F7CA8(u8 taskId)
             gUnknown_0203A034->unk0->unkC[r6] = gUnknown_0203A034->unk0->unkC[r6] + 1;
     }
 
-    if (!r4 && !r9)
+    if (!r4 && !endTask)
     {
         for (i = 0; i < 11; i++)
         {
             if (gUnknown_0203A034->unk0->unkC[r6] >= (i + 1) * 8)
-            {
                 var0 = 8;
-            }
             else if (gUnknown_0203A034->unk0->unkC[r6] >= i * 8)
-            {
-                int var2 = gUnknown_0203A034->unk0->unkC[r6];
-                int var1 = var2;
-                if (var1 < 0)
-                    var1 += 7;
-
-                var0 = var2 - ((var1 >> 3) << 3);
-            }
+                var0 = gUnknown_0203A034->unk0->unkC[r6] % 8;
             else
-            {
                 var0 = 0;
-            }
 
             if (var0 < 4)
-                tileNum = 0x504C;
+                tileNum = 0x504C + var0;
             else
-                tileNum = 0x5057;
+                tileNum = 0x5057 + var0;
 
-            FillBgTilemapBufferRect_Palette0(2, tileNum + var0, i + 7, r6 * 3 + 6, 1, 1);
+            FillBgTilemapBufferRect_Palette0(2, tileNum, i + 7, r6 * 3 + 6, 1, 1);
         }
     }
-    
-    if (r9)
+
+    if (endTask)
     {
         gUnknown_0203A034->unk0->unk14--;
         DestroyTask(taskId);
     }
 }
-#else
-NAKED
-void sub_80F7CA8(u8 taskId)
-{
-    asm_unified("\n\
-    push {r4-r7,lr}\n\
-    mov r7, r9\n\
-    mov r6, r8\n\
-    push {r6,r7}\n\
-    sub sp, 0x8\n\
-    lsls r0, 24\n\
-    lsrs r0, 24\n\
-    mov r8, r0\n\
-    movs r4, 0\n\
-    mov r9, r4\n\
-    ldr r1, =gTasks\n\
-    lsls r0, 2\n\
-    add r0, r8\n\
-    lsls r0, 3\n\
-    adds r0, r1\n\
-    ldrb r6, [r0, 0x8]\n\
-    ldrh r7, [r0, 0xA]\n\
-    ldrh r1, [r0, 0xC]\n\
-    mov r12, r1\n\
-    movs r2, 0xC\n\
-    ldrsh r0, [r0, r2]\n\
-    cmp r0, 0\n\
-    beq _080F7CF8\n\
-    ldr r2, =gUnknown_0203A034\n\
-    ldr r0, [r2]\n\
-    ldr r0, [r0]\n\
-    lsls r1, r6, 1\n\
-    adds r0, 0xC\n\
-    adds r0, r1\n\
-    movs r3, 0\n\
-    ldrsh r0, [r0, r3]\n\
-    adds r5, r1, 0\n\
-    cmp r0, 0\n\
-    bgt _080F7D10\n\
-    b _080F7D0E\n\
-    .pool\n\
-_080F7CF8:\n\
-    ldr r2, =gUnknown_0203A034\n\
-    ldr r0, [r2]\n\
-    ldr r0, [r0]\n\
-    lsls r1, r6, 1\n\
-    adds r0, 0xC\n\
-    adds r0, r1\n\
-    movs r3, 0\n\
-    ldrsh r0, [r0, r3]\n\
-    adds r5, r1, 0\n\
-    cmp r0, 0x57\n\
-    ble _080F7D10\n\
-_080F7D0E:\n\
-    movs r4, 0x1\n\
-_080F7D10:\n\
-    ldr r0, [r2]\n\
-    ldr r0, [r0]\n\
-    adds r0, 0xC\n\
-    adds r2, r0, r5\n\
-    ldrh r3, [r2]\n\
-    movs r0, 0\n\
-    ldrsh r1, [r2, r0]\n\
-    lsls r0, r7, 16\n\
-    asrs r0, 16\n\
-    cmp r1, r0\n\
-    bne _080F7D2A\n\
-    movs r1, 0x1\n\
-    mov r9, r1\n\
-_080F7D2A:\n\
-    mov r0, r9\n\
-    cmp r0, 0\n\
-    bne _080F7D4A\n\
-    cmp r4, 0\n\
-    beq _080F7D3C\n\
-    strh r7, [r2]\n\
-    b _080F7D4A\n\
-    .pool\n\
-_080F7D3C:\n\
-    mov r1, r12\n\
-    cmp r1, 0\n\
-    beq _080F7D46\n\
-    subs r0, r3, 0x1\n\
-    b _080F7D48\n\
-_080F7D46:\n\
-    adds r0, r3, 0x1\n\
-_080F7D48:\n\
-    strh r0, [r2]\n\
-_080F7D4A:\n\
-    cmp r4, 0\n\
-    bne _080F7DC4\n\
-    mov r2, r9\n\
-    cmp r2, 0\n\
-    bne _080F7DCA\n\
-    movs r2, 0\n\
-_080F7D56:\n\
-    ldr r0, =gUnknown_0203A034\n\
-    ldr r0, [r0]\n\
-    ldr r0, [r0]\n\
-    adds r0, 0xC\n\
-    adds r0, r5\n\
-    movs r1, 0\n\
-    ldrsh r3, [r0, r1]\n\
-    adds r0, r2, 0x1\n\
-    lsls r1, r0, 3\n\
-    adds r4, r0, 0\n\
-    cmp r3, r1\n\
-    blt _080F7D78\n\
-    movs r0, 0x8\n\
-    b _080F7D94\n\
-    .pool\n\
-_080F7D78:\n\
-    lsls r0, r2, 3\n\
-    cmp r3, r0\n\
-    blt _080F7D92\n\
-    adds r0, r3, 0\n\
-    cmp r3, 0\n\
-    bge _080F7D86\n\
-    adds r0, r3, 0x7\n\
-_080F7D86:\n\
-    asrs r0, 3\n\
-    lsls r0, 3\n\
-    subs r0, r3, r0\n\
-    lsls r0, 24\n\
-    lsrs r0, 24\n\
-    b _080F7D94\n\
-_080F7D92:\n\
-    movs r0, 0\n\
-_080F7D94:\n\
-    cmp r0, 0x3\n\
-    bhi _080F7DA0\n\
-    ldr r3, =0x0000504c\n\
-    b _080F7DA2\n\
-    .pool\n\
-_080F7DA0:\n\
-    ldr r3, =0x00005057\n\
-_080F7DA2:\n\
-    adds r1, r0, r3\n\
-    adds r2, 0x7\n\
-    lsls r2, 24\n\
-    lsrs r2, 24\n\
-    adds r3, r5, r6\n\
-    adds r3, 0x6\n\
-    lsls r3, 24\n\
-    movs r0, 0x1\n\
-    str r0, [sp]\n\
-    str r0, [sp, 0x4]\n\
-    movs r0, 0x2\n\
-    lsrs r3, 24\n\
-    bl FillBgTilemapBufferRect_Palette0\n\
-    adds r2, r4, 0\n\
-    cmp r2, 0xA\n\
-    ble _080F7D56\n\
-_080F7DC4:\n\
-    mov r0, r9\n\
-    cmp r0, 0\n\
-    beq _080F7DDC\n\
-_080F7DCA:\n\
-    ldr r0, =gUnknown_0203A034\n\
-    ldr r0, [r0]\n\
-    ldr r1, [r0]\n\
-    ldrb r0, [r1, 0x14]\n\
-    subs r0, 0x1\n\
-    strb r0, [r1, 0x14]\n\
-    mov r0, r8\n\
-    bl DestroyTask\n\
-_080F7DDC:\n\
-    add sp, 0x8\n\
-    pop {r3,r4}\n\
-    mov r8, r3\n\
-    mov r9, r4\n\
-    pop {r4-r7}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .pool");
-}
-#endif // NONMATCHING
 
 static void sub_80F7DF4(void)
 {
@@ -2830,7 +2674,7 @@ void sub_80F8390(void)
 
 void sub_80F83D0(void)
 {
-    SetMainCallback2(sub_80D7B24);
+    SetMainCallback2(CB2_StartContest);
 }
 
 static void sub_80F83E0(u8 taskId)
@@ -2886,7 +2730,7 @@ void sub_80F84C4(u8 taskId)
 
 static void sub_80F8508(u8 taskId)
 {
-    if (gIsLinkContest & 0x4)
+    if (gLinkContestFlags & LINK_CONTEST_FLAG_HAS_RS_PLAYER)
     {
         sub_80DA8C8(gContestMonPartyIndex);
         SetTaskFuncWithFollowupFunc(taskId, sub_80FC6BC, sub_80F8568);
@@ -2913,10 +2757,9 @@ static void sub_80F85A0(u8 taskId)
     SetTaskFuncWithFollowupFunc(taskId, sub_80FC894, sub_80F85BC);
 }
 
-#ifdef NONMATCHING
 static void sub_80F85BC(u8 taskId)
 {
-    u32 i;
+    u8 i;
     u8 sp0[4];
     u8 sp4[4];
 
@@ -2926,9 +2769,10 @@ static void sub_80F85BC(u8 taskId)
     for (i = 0; i < gNumLinkContestPlayers; i++)
         sp0[i] = gTasks[taskId].data[i + 1];
 
-    for (i = 0; i < gNumLinkContestPlayers; i++)
+    for (i = 0; i < gNumLinkContestPlayers;)
     {
-        if (sp0[0] != sp0[i + 1])
+        i++;
+        if (i >= gNumLinkContestPlayers || sp0[0] != sp0[i])
             break;
     }
 
@@ -2939,137 +2783,15 @@ static void sub_80F85BC(u8 taskId)
 
     for (i = 0; i < gNumLinkContestPlayers; i++)
         sp4[i] = gTasks[taskId].data[i + 5];
-    
+
     gUnknown_02039F2B = sub_80F86E0(sp4);
     sub_80DB09C(gSpecialVar_ContestCategory);
     SetTaskFuncWithFollowupFunc(taskId, sub_80FCF40, sub_80F86B8);
 }
-#else
-NAKED
-static void sub_80F85BC(u8 taskId)
-{
-    asm_unified("\n\
-    push {r4-r7,lr}\n\
-    mov r7, r9\n\
-    mov r6, r8\n\
-    push {r6,r7}\n\
-    sub sp, 0x8\n\
-    lsls r0, 24\n\
-    lsrs r6, r0, 24\n\
-    movs r0, 0\n\
-    str r0, [sp]\n\
-    str r0, [sp, 0x4]\n\
-    movs r3, 0\n\
-    ldr r5, =gNumLinkContestPlayers\n\
-    mov r12, r5\n\
-    ldr r0, =gSpecialVar_0x8004\n\
-    mov r9, r0\n\
-    add r1, sp, 0x4\n\
-    mov r8, r1\n\
-    ldrb r0, [r5]\n\
-    cmp r3, r0\n\
-    bcs _080F8606\n\
-    lsls r0, r6, 2\n\
-    adds r0, r6\n\
-    lsls r4, r0, 3\n\
-    ldr r7, =gTasks + 0x8\n\
-_080F85EC:\n\
-    mov r1, sp\n\
-    adds r2, r1, r3\n\
-    adds r1, r3, 0x1\n\
-    lsls r0, r1, 1\n\
-    adds r0, r4\n\
-    adds r0, r7\n\
-    ldrh r0, [r0]\n\
-    strb r0, [r2]\n\
-    lsls r1, 24\n\
-    lsrs r3, r1, 24\n\
-    ldrb r0, [r5]\n\
-    cmp r3, r0\n\
-    bcc _080F85EC\n\
-_080F8606:\n\
-    movs r3, 0\n\
-    mov r1, r12\n\
-    ldrb r0, [r1]\n\
-    cmp r3, r0\n\
-    bcs _080F862A\n\
-    adds r4, r0, 0\n\
-    mov r2, sp\n\
-_080F8614:\n\
-    adds r0, r3, 0x1\n\
-    lsls r0, 24\n\
-    lsrs r3, r0, 24\n\
-    cmp r3, r4\n\
-    bcs _080F862A\n\
-    mov r0, sp\n\
-    adds r1, r0, r3\n\
-    ldrb r0, [r2]\n\
-    ldrb r1, [r1]\n\
-    cmp r0, r1\n\
-    beq _080F8614\n\
-_080F862A:\n\
-    mov r1, r12\n\
-    ldrb r1, [r1]\n\
-    cmp r3, r1\n\
-    bne _080F8644\n\
-    movs r0, 0\n\
-    b _080F8646\n\
-    .pool\n\
-_080F8644:\n\
-    movs r0, 0x1\n\
-_080F8646:\n\
-    mov r1, r9\n\
-    strh r0, [r1]\n\
-    movs r3, 0\n\
-    mov r4, r12\n\
-    ldrb r0, [r4]\n\
-    cmp r3, r0\n\
-    bcs _080F8678\n\
-    mov r5, r8\n\
-    lsls r0, r6, 2\n\
-    adds r0, r6\n\
-    lsls r2, r0, 3\n\
-    ldr r7, =gTasks + 0x8\n\
-_080F865E:\n\
-    adds r1, r5, r3\n\
-    adds r0, r3, 0x5\n\
-    lsls r0, 1\n\
-    adds r0, r2\n\
-    adds r0, r7\n\
-    ldrh r0, [r0]\n\
-    strb r0, [r1]\n\
-    adds r0, r3, 0x1\n\
-    lsls r0, 24\n\
-    lsrs r3, r0, 24\n\
-    ldrb r1, [r4]\n\
-    cmp r3, r1\n\
-    bcc _080F865E\n\
-_080F8678:\n\
-    mov r0, r8\n\
-    bl sub_80F86E0\n\
-    ldr r1, =gUnknown_02039F2B\n\
-    strb r0, [r1]\n\
-    ldr r0, =gSpecialVar_ContestCategory\n\
-    ldrb r0, [r0]\n\
-    bl sub_80DB09C\n\
-    ldr r1, =sub_80FCF40\n\
-    ldr r2, =sub_80F86B8\n\
-    adds r0, r6, 0\n\
-    bl SetTaskFuncWithFollowupFunc\n\
-    add sp, 0x8\n\
-    pop {r3,r4}\n\
-    mov r8, r3\n\
-    mov r9, r4\n\
-    pop {r4-r7}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .pool");
-}
-#endif // NONMATCHING
 
 static void sub_80F86B8(u8 taskId)
 {
-    sub_80DCE58(0);
+    SortContestants(FALSE);
     SetTaskFuncWithFollowupFunc(taskId, sub_80FCFD0, sub_80F8714);
 }
 

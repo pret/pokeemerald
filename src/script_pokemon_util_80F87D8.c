@@ -227,7 +227,7 @@ void sub_80F8AFC(void)
 {
     int i;
 
-    if (gIsLinkContest & 1)
+    if (gLinkContestFlags & LINK_CONTEST_FLAG_IS_LINK)
     {
         for (i = 0; i < gNumLinkContestPlayers; i++)
         {
@@ -256,7 +256,7 @@ void sub_80F8B94(void)
     struct Sprite *sprite;
 
     gReservedSpritePaletteCount = 12;
-    if (gIsLinkContest & 1)
+    if (gLinkContestFlags & LINK_CONTEST_FLAG_IS_LINK)
     {
         for (i = 0; i < gNumLinkContestPlayers; i++)
         {
@@ -339,9 +339,9 @@ void ShowContestEntryMonPic(void)
         gMultiuseSpriteTemplate.paletteTag = palette->tag;
         spriteId = CreateSprite(&gMultiuseSpriteTemplate, (left + 1) * 8 + 32, (top * 8) + 40, 0);
 
-        if (gIsLinkContest & 1)
+        if (gLinkContestFlags & LINK_CONTEST_FLAG_IS_LINK)
         {
-            if (!(gIsLinkContest & 4))
+            if (!(gLinkContestFlags & LINK_CONTEST_FLAG_HAS_RS_PLAYER))
                 DoMonFrontSpriteAnimation(&gSprites[spriteId], species, FALSE, 0);
         }
         else
@@ -403,7 +403,7 @@ static void sub_80F8EE8(u8 taskId)
 
 void ScriptGetMultiplayerId(void)
 {
-    if ((gIsLinkContest & 1) && gNumLinkContestPlayers == 4 && !(gIsLinkContest & 2))
+    if ((gLinkContestFlags & LINK_CONTEST_FLAG_IS_LINK) && gNumLinkContestPlayers == 4 && !(gLinkContestFlags & LINK_CONTEST_FLAG_IS_WIRELESS))
         gSpecialVar_Result = GetMultiplayerId();
     else
         gSpecialVar_Result = 4;
@@ -414,7 +414,7 @@ void ScriptRandom(void)
     u16 random;
     u16 *scriptPtr;
 
-    if (gIsLinkContest & 1)
+    if (gLinkContestFlags & LINK_CONTEST_FLAG_IS_LINK)
     {
         gContestRngValue = 1103515245 * gContestRngValue + 24691;
         random = gContestRngValue >> 16;
@@ -436,7 +436,7 @@ u16 sub_80F903C(void)
 
 u8 sub_80F905C(void)
 {
-    if (gIsLinkContest & 2)
+    if (gLinkContestFlags & LINK_CONTEST_FLAG_IS_WIRELESS)
     {
         CreateTask(sub_80F9088, 5);
         return 1;
@@ -473,11 +473,11 @@ static void sub_80F9088(u8 taskId)
 
 void sub_80F90DC(void)
 {
-    if (gIsLinkContest & 2)
+    if (gLinkContestFlags & LINK_CONTEST_FLAG_IS_WIRELESS)
     {
         if (gReceivedRemoteLinkPlayers)
         {
-            sub_800E0E8();
+            LoadWirelessStatusIndicatorSpriteGfx();
             CreateWirelessStatusIndicatorSprite(8, 8);
         }
     }
@@ -485,7 +485,7 @@ void sub_80F90DC(void)
 
 void sub_80F910C(void)
 {
-    if (gIsLinkContest & 2)
+    if (gLinkContestFlags & LINK_CONTEST_FLAG_IS_WIRELESS)
     {
         if (gReceivedRemoteLinkPlayers)
             DestroyWirelessStatusIndicatorSprite();
@@ -494,7 +494,7 @@ void sub_80F910C(void)
 
 u8 sub_80F9134(void)
 {
-    if (gIsLinkContest & 4)
+    if (gLinkContestFlags & LINK_CONTEST_FLAG_HAS_RS_PLAYER)
         return 1;
     else
         return 0;
@@ -502,12 +502,12 @@ u8 sub_80F9134(void)
 
 void sub_80F9154(void)
 {
-    gIsLinkContest = 0;
+    gLinkContestFlags = 0;
 }
 
 u8 sub_80F9160(void)
 {
-    if (gIsLinkContest & 2)
+    if (gLinkContestFlags & LINK_CONTEST_FLAG_IS_WIRELESS)
         return 1;
     else
         return 0;

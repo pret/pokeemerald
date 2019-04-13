@@ -17,6 +17,7 @@
 #include "battle_setup.h"
 #include "frontier_util.h"
 #include "constants/trainers.h"
+#include "constants/rgb.h"
 
 #define BATTLER_RECORD_SIZE 664
 #define ILLEGAL_BATTLE_TYPES ((BATTLE_TYPE_LINK | BATTLE_TYPE_SAFARI | BATTLE_TYPE_FIRST_BATTLE                  \
@@ -220,7 +221,7 @@ u8 RecordedBattle_GetBattlerAction(u8 battlerId)
     {
         gSpecialVar_Result = gBattleOutcome = B_OUTCOME_PLAYER_TELEPORTED; // hah
         ResetPaletteFadeControl();
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 0x10, 0);
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 0x10, RGB_BLACK);
         SetMainCallback2(CB2_QuitRecordedBattle);
         return 0xFF;
     }

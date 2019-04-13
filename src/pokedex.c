@@ -205,7 +205,7 @@ void blockset_load_palette_to_gpu(u8);
 void sub_80C01CC(struct Sprite *sprite);
 void sub_80C020C(u32, u32, u32, u32);
 void sub_80C0354(u16, u8, u8);
-void sub_80C0460(u16, u8, u8);
+void sub_80C0460(u16 weight, u8 left, u8 top);
 void sub_80C09B0(u16);
 u8 sub_80C0B44(u8, u16, u8, u8);
 void sub_80C0D30(u8, u16);
@@ -2969,7 +2969,7 @@ void sub_80BEA24(u8 taskId)
                     r3 = 0x14;
                 if (gTasks[taskId].data[1] != 0)
                     r3 |= (1 << (gSprites[gTasks[taskId].data[4]].oam.paletteNum + 16));
-                BeginNormalPaletteFade(~r3, 0, 16, 0, 0);
+                BeginNormalPaletteFade(~r3, 0, 16, 0, RGB_BLACK);
                 SetVBlankCallback(gUnknown_030060B4);
                 gMain.state++;
             }
@@ -3926,9 +3926,6 @@ void sub_80C020C(u32 num, u32 value, u32 c, u32 d)
     sub_80BE8DC(text3, GetStringCenterAlignXOffset(1, text3, 0xF0), 0x5F);
 }
 
-#define CHAR_PRIME (0xB4)
-#define CHAR_DOUBLE_PRIME (0xB2)
-
 void sub_80C0354(u16 height, u8 left, u8 top)
 {
     u8 buffer[16];
@@ -3954,10 +3951,10 @@ void sub_80C0354(u16 height, u8 left, u8 top)
         buffer[i++] = feet / 10 + CHAR_0;
         buffer[i++] = (feet % 10) + CHAR_0;
     }
-    buffer[i++] = CHAR_PRIME;
+    buffer[i++] = CHAR_SGL_QUOT_RIGHT;
     buffer[i++] = (inches / 10) + CHAR_0;
     buffer[i++] = (inches % 10) + CHAR_0;
-    buffer[i++] = CHAR_DOUBLE_PRIME;
+    buffer[i++] = CHAR_DBL_QUOT_RIGHT;
     buffer[i++] = EOS;
     sub_80BE8DC(buffer, left, top);
 }
@@ -3968,12 +3965,11 @@ void sub_80C0354(u16 height, u8 left, u8 top)
 void sub_80C0460(u16 weight, u8 left, u8 top)
 {
     u8 buffer[16];
-    u32 lbs;
-    u8 i = 0;
     bool8 output;
+    u8 i = 0;
+    u32 lbs = (weight * 100000) / 4536;
 
-    lbs = (weight * 100000) / 4536;
-    if (lbs % 10 >= 5)
+    if (lbs % 10u >= 5)
         lbs += 10;
     output = FALSE;
 
@@ -3988,9 +3984,9 @@ void sub_80C0460(u16 weight, u8 left, u8 top)
         i++;
     }
 
-    lbs = (lbs % 100000);
+    lbs %= 100000;
     buffer[i] = (lbs / 10000) + CHAR_0;
-    if (buffer[i] == CHAR_0 && output == FALSE)
+    if (buffer[i] == CHAR_0 && !output)
     {
         buffer[i++] = 0x77;
     }
@@ -4000,9 +3996,9 @@ void sub_80C0460(u16 weight, u8 left, u8 top)
         i++;
     }
 
-    lbs = (lbs % 10000);
+    lbs %= 10000;
     buffer[i] = (lbs / 1000) + CHAR_0;
-    if (buffer[i] == CHAR_0 && output == FALSE)
+    if (buffer[i] == CHAR_0 && !output)
     {
         buffer[i++] = 0x77;
     }
@@ -4010,9 +4006,10 @@ void sub_80C0460(u16 weight, u8 left, u8 top)
     {
         i++;
     }
-    lbs = (lbs % 1000);
+
+    lbs %= 1000;
     buffer[i++] = (lbs / 100) + CHAR_0;
-    lbs = (lbs % 100);
+    lbs %= 100;
     buffer[i++] = CHAR_PERIOD;
     buffer[i++] = (lbs / 10) + CHAR_0;
     buffer[i++] = CHAR_SPACE;

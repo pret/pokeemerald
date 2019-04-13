@@ -152,7 +152,7 @@ static void CB2_ReshowBattleScreenAfterMenu(void)
 
             if (gWirelessCommType != 0 && gReceivedRemoteLinkPlayers != 0)
             {
-                sub_800E0E8();
+                LoadWirelessStatusIndicatorSpriteGfx();
                 CreateWirelessStatusIndicatorSprite(0, 0);
             }
         }

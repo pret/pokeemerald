@@ -8,6 +8,7 @@
 #include "sound.h"
 #include "constants/songs.h"
 #include "palette.h"
+#include "constants/rgb.h"
 
 // this file's functions
 static void EvoSparkle_DummySpriteCb(struct Sprite* sprite);
@@ -268,7 +269,7 @@ static void EvoTask_BeginPreSet1_FadeAndPlaySE(u8 taskID)
 {
     SetEvoSparklesMatrices();
     gTasks[taskID].tFrameCounter = 0;
-    BeginNormalPaletteFade(3 << gTasks[taskID].data[1], 0xA, 0, 0x10, 0x7FFF);
+    BeginNormalPaletteFade(3 << gTasks[taskID].data[1], 0xA, 0, 0x10, RGB_WHITE);
     gTasks[taskID].func = EvoTask_CreatePreEvoSparkleSet1;
     PlaySE(SE_W025);
 }
@@ -386,7 +387,7 @@ static void EvoTask_BeginPostSparklesSet2_AndFlash(u8 taskID)
     SetEvoSparklesMatrices();
     gTasks[taskID].tFrameCounter = 0;
     CpuSet(&gPlttBufferFaded[0x20], &gPlttBufferUnfaded[0x20], 0x30);
-    BeginNormalPaletteFade(0xFFF9041C, 0, 0, 0x10, 0x7FFF); // was 0xFFF9001C in R/S
+    BeginNormalPaletteFade(0xFFF9041C, 0, 0, 0x10, RGB_WHITE); // was 0xFFF9001C in R/S
     gTasks[taskID].func = EvoTask_CreatePostEvoSparklesSet2_AndFlash;
     PlaySE(SE_W080);
 }
@@ -407,7 +408,7 @@ static void EvoTask_CreatePostEvoSparklesSet2_AndFlash(u8 taskID)
                 CreatePostEvoSparkleSet2(i);
             break;
         case 32:
-            BeginNormalPaletteFade(0xFFFF041C, 0x10, 0x10, 0, 0x7FFF); // was 0xFFF9001C in R/S
+            BeginNormalPaletteFade(0xFFFF041C, 0x10, 0x10, 0, RGB_WHITE); // was 0xFFF9001C in R/S
             break;
         }
         gTasks[taskID].tFrameCounter++;
@@ -434,7 +435,7 @@ static void EvoTask_BeginPostSparklesSet2_AndFlash_Trade(u8 taskID)
     SetEvoSparklesMatrices();
     gTasks[taskID].tFrameCounter = 0;
     CpuSet(&gPlttBufferFaded[0x20], &gPlttBufferUnfaded[0x20], 0x30);
-    BeginNormalPaletteFade(0xFFF90400, 0, 0, 0x10, 0x7FFF); // was 0xFFFF0001 in R/S
+    BeginNormalPaletteFade(0xFFF90400, 0, 0, 0x10, RGB_WHITE); // was 0xFFFF0001 in R/S
     gTasks[taskID].func = EvoTask_CreatePostEvoSparklesSet2_AndFlash_Trade;
     PlaySE(SE_W080);
 }
@@ -455,7 +456,7 @@ static void EvoTask_CreatePostEvoSparklesSet2_AndFlash_Trade(u8 taskID)
                 CreatePostEvoSparkleSet2(i);
             break;
         case 32:
-            BeginNormalPaletteFade(0xFFFF0400, 0x10, 0x10, 0, 0x7FFF); // was 0xFFFF0001 in R/S
+            BeginNormalPaletteFade(0xFFFF0400, 0x10, 0x10, 0, RGB_WHITE); // was 0xFFFF0001 in R/S
             break;
         }
         gTasks[taskID].tFrameCounter++;
