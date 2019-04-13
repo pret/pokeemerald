@@ -4214,13 +4214,6 @@ static void atk49_moveend(void)
     {
         switch (gBattleScripting.atk49_state)
         {
-        case ATK49_FAILED_MOVE_COUNTER:
-            if (gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
-                gBattleStruct->lastMoveFailed |= gBitTable[gBattlerAttacker];
-            else
-                gBattleStruct->lastMoveFailed &= ~(gBitTable[gBattlerAttacker]);
-            gBattleScripting.atk49_state++;
-            break;
         case ATK49_SPIKY_SHIELD:
             if (gProtectStructs[gBattlerTarget].spikyShielded
                 && gBattleMoves[gCurrentMove].flags & FLAG_MAKES_CONTACT
@@ -4386,6 +4379,11 @@ static void atk49_moveend(void)
             break;
         case ATK49_UPDATE_LAST_MOVES:
             gDisableStructs[gBattlerAttacker].usedMoves |= gBitTable[gCurrMovePos];
+            if (gMoveResultFlags & (MOVE_RESULT_FAILED | MOVE_RESULT_DOESNT_AFFECT_FOE))
+                gBattleStruct->lastMoveFailed |= gBitTable[gBattlerAttacker];
+            else
+                gBattleStruct->lastMoveFailed &= ~(gBitTable[gBattlerAttacker]);
+
             if (gHitMarker & HITMARKER_SWAP_ATTACKER_TARGET)
             {
                 gActiveBattler = gBattlerAttacker;
