@@ -1,6 +1,8 @@
 #ifndef GUARD_BERRY_H
 #define GUARD_BERRY_H
 
+#include "constants/items.h"
+
 #define BERRY_NONE 0
 
 enum
@@ -34,7 +36,7 @@ enum
     BERRY_STAGE_SPARKLING = 0xFF,
 };
 
-#define NUM_BERRIES 44
+#define NUM_BERRIES (LAST_BERRY_INDEX - FIRST_BERRY_INDEX)
 
 extern const u8 *const gBerryTreeEventObjectGraphicsIdTablePointers[];
 extern const struct SpriteFrameImage *const gBerryTreePicTablePointers[];
