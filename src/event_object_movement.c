@@ -25,6 +25,7 @@
 #include "constants/event_object_movement_constants.h"
 #include "constants/event_objects.h"
 #include "constants/field_effects.h"
+#include "constants/items.h"
 
 // this file was known as evobjmv.c in Game Freak's original source
 
@@ -2005,10 +2006,9 @@ static void get_berry_tree_graphics(struct EventObject *eventObject, struct Spri
         sprite->invisible = FALSE;
         berryId = GetBerryTypeByBerryTreeId(eventObject->trainerRange_berryTreeId) - 1;
         berryStage--;
-        if (berryId >= NUM_BERRIES)
-        {
+        if (berryId > ITEM_TO_BERRY(LAST_BERRY_INDEX))
             berryId = 0;
-        }
+
         EventObjectSetGraphicsId(eventObject, gBerryTreeEventObjectGraphicsIdTablePointers[berryId][berryStage]);
         sprite->images = gBerryTreePicTablePointers[berryId];
         sprite->oam.paletteNum = gBerryTreePaletteSlotTablePointers[berryId][berryStage];
