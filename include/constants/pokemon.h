@@ -105,6 +105,7 @@
 #define FLAG_PROTECTION_MOVE        0x40000
 #define FLAG_POWDER                 0x80000
 #define FLAG_TARGET_ABILITY_IGNORED 0x100000
+#define FLAG_DANCE                  0x200000
 
 // Split defines.
 #define SPLIT_PHYSICAL  0x0
