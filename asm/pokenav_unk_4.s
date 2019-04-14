@@ -1506,7 +1506,7 @@ sub_81CBE50: @ 81CBE50
 	movs r0, 0x9
 	bl GetGameStat
 	adds r1, r0, 0
-	ldr r0, =0x0001869f @ Note to decompiler: See UNKNOWN_OFFSET
+	ldr r0, =0x0001869f
 	cmp r1, r0
 	ble _081CBE68
 	adds r1, r0, 0
