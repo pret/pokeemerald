@@ -104,39 +104,52 @@ static const struct BallCaptureSuccessStarData sBallCaptureSuccessStarData[] =
     },
 };
 
-const struct CompressedSpriteSheet gBallOpenParticleSpritesheets[] =
+#define TAG_PARTICLES_POKEBALL    55020
+#define TAG_PARTICLES_GREATBALL   55021
+#define TAG_PARTICLES_SAFARIBALL  55022
+#define TAG_PARTICLES_ULTRABALL   55023
+#define TAG_PARTICLES_MASTERBALL  55024
+#define TAG_PARTICLES_NETBALL     55025
+#define TAG_PARTICLES_DIVEBALL    55026
+#define TAG_PARTICLES_NESTBALL    55027
+#define TAG_PARTICLES_REPEATBALL  55028
+#define TAG_PARTICLES_TIMERBALL   55029
+#define TAG_PARTICLES_LUXURYBALL  55030
+#define TAG_PARTICLES_PREMIERBALL 55031
+
+const struct CompressedSpriteSheet gBallParticleSpritesheets[] =
 {
-    {gBattleAnimSpriteGfx_Particles, 0x100, 0xD6EC},
-    {gBattleAnimSpriteGfx_Particles, 0x100, 0xD6ED},
-    {gBattleAnimSpriteGfx_Particles, 0x100, 0xD6EE},
-    {gBattleAnimSpriteGfx_Particles, 0x100, 0xD6EF},
-    {gBattleAnimSpriteGfx_Particles, 0x100, 0xD6F0},
-    {gBattleAnimSpriteGfx_Particles, 0x100, 0xD6F1},
-    {gBattleAnimSpriteGfx_Particles, 0x100, 0xD6F2},
-    {gBattleAnimSpriteGfx_Particles, 0x100, 0xD6F3},
-    {gBattleAnimSpriteGfx_Particles, 0x100, 0xD6F4},
-    {gBattleAnimSpriteGfx_Particles, 0x100, 0xD6F5},
-    {gBattleAnimSpriteGfx_Particles, 0x100, 0xD6F6},
-    {gBattleAnimSpriteGfx_Particles, 0x100, 0xD6F7},
+    {gBattleAnimSpriteGfx_Particles, 0x100, TAG_PARTICLES_POKEBALL},
+    {gBattleAnimSpriteGfx_Particles, 0x100, TAG_PARTICLES_GREATBALL},
+    {gBattleAnimSpriteGfx_Particles, 0x100, TAG_PARTICLES_SAFARIBALL},
+    {gBattleAnimSpriteGfx_Particles, 0x100, TAG_PARTICLES_ULTRABALL},
+    {gBattleAnimSpriteGfx_Particles, 0x100, TAG_PARTICLES_MASTERBALL},
+    {gBattleAnimSpriteGfx_Particles, 0x100, TAG_PARTICLES_NETBALL},
+    {gBattleAnimSpriteGfx_Particles, 0x100, TAG_PARTICLES_DIVEBALL},
+    {gBattleAnimSpriteGfx_Particles, 0x100, TAG_PARTICLES_NESTBALL},
+    {gBattleAnimSpriteGfx_Particles, 0x100, TAG_PARTICLES_REPEATBALL},
+    {gBattleAnimSpriteGfx_Particles, 0x100, TAG_PARTICLES_TIMERBALL},
+    {gBattleAnimSpriteGfx_Particles, 0x100, TAG_PARTICLES_LUXURYBALL},
+    {gBattleAnimSpriteGfx_Particles, 0x100, TAG_PARTICLES_PREMIERBALL},
 };
 
-const struct CompressedSpritePalette gBallOpenParticlePalettes[] =
+const struct CompressedSpritePalette gBallParticlePalettes[] =
 {
-    {gBattleAnimSpritePal_CircleImpact, 0xD6EC},
-    {gBattleAnimSpritePal_CircleImpact, 0xD6ED},
-    {gBattleAnimSpritePal_CircleImpact, 0xD6EE},
-    {gBattleAnimSpritePal_CircleImpact, 0xD6EF},
-    {gBattleAnimSpritePal_CircleImpact, 0xD6F0},
-    {gBattleAnimSpritePal_CircleImpact, 0xD6F1},
-    {gBattleAnimSpritePal_CircleImpact, 0xD6F2},
-    {gBattleAnimSpritePal_CircleImpact, 0xD6F3},
-    {gBattleAnimSpritePal_CircleImpact, 0xD6F4},
-    {gBattleAnimSpritePal_CircleImpact, 0xD6F5},
-    {gBattleAnimSpritePal_CircleImpact, 0xD6F6},
-    {gBattleAnimSpritePal_CircleImpact, 0xD6F7},
+    {gBattleAnimSpritePal_CircleImpact, TAG_PARTICLES_POKEBALL},
+    {gBattleAnimSpritePal_CircleImpact, TAG_PARTICLES_GREATBALL},
+    {gBattleAnimSpritePal_CircleImpact, TAG_PARTICLES_SAFARIBALL},
+    {gBattleAnimSpritePal_CircleImpact, TAG_PARTICLES_ULTRABALL},
+    {gBattleAnimSpritePal_CircleImpact, TAG_PARTICLES_MASTERBALL},
+    {gBattleAnimSpritePal_CircleImpact, TAG_PARTICLES_NETBALL},
+    {gBattleAnimSpritePal_CircleImpact, TAG_PARTICLES_DIVEBALL},
+    {gBattleAnimSpritePal_CircleImpact, TAG_PARTICLES_NESTBALL},
+    {gBattleAnimSpritePal_CircleImpact, TAG_PARTICLES_REPEATBALL},
+    {gBattleAnimSpritePal_CircleImpact, TAG_PARTICLES_TIMERBALL},
+    {gBattleAnimSpritePal_CircleImpact, TAG_PARTICLES_LUXURYBALL},
+    {gBattleAnimSpritePal_CircleImpact, TAG_PARTICLES_PREMIERBALL},
 };
 
-const union AnimCmd gUnknown_085E5154[] =
+const union AnimCmd gAnim_RegularBall[] =
 {
     ANIMCMD_FRAME(0, 1),
     ANIMCMD_FRAME(1, 1),
@@ -147,64 +160,64 @@ const union AnimCmd gUnknown_085E5154[] =
     ANIMCMD_JUMP(0),
 };
 
-const union AnimCmd gUnknown_085E5170[] =
+const union AnimCmd gAnim_MasterBall[] =
 {
     ANIMCMD_FRAME(3, 1),
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_085E5178[] =
+const union AnimCmd gAnim_NetDiveBall[] =
 {
     ANIMCMD_FRAME(4, 1),
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_085E5180[] =
+const union AnimCmd gAnim_NestBall[] =
 {
     ANIMCMD_FRAME(5, 1),
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_085E5188[] =
+const union AnimCmd gAnim_LuxuryPremierBall[] =
 {
     ANIMCMD_FRAME(6, 4),
     ANIMCMD_FRAME(7, 4),
     ANIMCMD_JUMP(0),
 };
 
-const union AnimCmd gUnknown_085E5194[] =
+const union AnimCmd gAnim_UltraRepeatTimerBall[] =
 {
     ANIMCMD_FRAME(7, 4),
     ANIMCMD_END,
 };
 
-const union AnimCmd *const gUnknown_085E519C[] =
+const union AnimCmd *const gAnims_BallParticles[] =
 {
-    gUnknown_085E5154,
-    gUnknown_085E5170,
-    gUnknown_085E5178,
-    gUnknown_085E5180,
-    gUnknown_085E5188,
-    gUnknown_085E5194,
+    gAnim_RegularBall,
+    gAnim_MasterBall,
+    gAnim_NetDiveBall,
+    gAnim_NestBall,
+    gAnim_LuxuryPremierBall,
+    gAnim_UltraRepeatTimerBall,
 };
 
-const u8 gBallOpenParticleAnimNums[] =
+const u8 gBallParticleAnimNums[] =
 {
-    0,
-    0,
-    0,
-    5,
-    1,
-    2,
-    2,
-    3,
-    5,
-    5,
-    4,
-    4,
+    [BALL_POKE] = 0,
+    [BALL_GREAT] = 0,
+    [BALL_SAFARI] = 0,
+    [BALL_ULTRA] = 5,
+    [BALL_MASTER] = 1,
+    [BALL_NET] = 2,
+    [BALL_DIVE] = 2,
+    [BALL_NEST] = 3,
+    [BALL_REPEAT] = 5,
+    [BALL_TIMER] = 5,
+    [BALL_LUXURY] = 4,
+    [BALL_PREMIER] = 4,
 };
 
-const TaskFunc gBallOpenParticleAnimationFuncs[] =
+const TaskFunc gBallParticleAnimationFuncs[] =
 {
     PokeBallOpenParticleAnimation,
     GreatBallOpenParticleAnimation,
@@ -220,132 +233,134 @@ const TaskFunc gBallOpenParticleAnimationFuncs[] =
     PremierBallOpenParticleAnimation,
 };
 
-const struct SpriteTemplate gUnknown_085E51F0[] =
+const struct SpriteTemplate gBallParticlesSpriteTemplates[] =
 {
     {
-        .tileTag = 55020,
-        .paletteTag = 55020,
+        .tileTag = TAG_PARTICLES_POKEBALL,
+        .paletteTag = TAG_PARTICLES_POKEBALL,
         .oam = &gUnknown_08524904,
-        .anims = gUnknown_085E519C,
+        .anims = gAnims_BallParticles,
         .images = NULL,
         .affineAnims = gDummySpriteAffineAnimTable,
         .callback = SpriteCallbackDummy,
     },
     {
-        .tileTag = 55021,
-        .paletteTag = 55021,
+        .tileTag = TAG_PARTICLES_GREATBALL,
+        .paletteTag = TAG_PARTICLES_GREATBALL,
         .oam = &gUnknown_08524904,
-        .anims = gUnknown_085E519C,
+        .anims = gAnims_BallParticles,
         .images = NULL,
         .affineAnims = gDummySpriteAffineAnimTable,
         .callback = SpriteCallbackDummy,
     },
     {
-        .tileTag = 55022,
-        .paletteTag = 55022,
+        .tileTag = TAG_PARTICLES_SAFARIBALL,
+        .paletteTag = TAG_PARTICLES_SAFARIBALL,
         .oam = &gUnknown_08524904,
-        .anims = gUnknown_085E519C,
+        .anims = gAnims_BallParticles,
         .images = NULL,
         .affineAnims = gDummySpriteAffineAnimTable,
         .callback = SpriteCallbackDummy,
     },
     {
-        .tileTag = 55023,
-        .paletteTag = 55023,
+        .tileTag = TAG_PARTICLES_ULTRABALL,
+        .paletteTag = TAG_PARTICLES_ULTRABALL,
         .oam = &gUnknown_08524904,
-        .anims = gUnknown_085E519C,
+        .anims = gAnims_BallParticles,
         .images = NULL,
         .affineAnims = gDummySpriteAffineAnimTable,
         .callback = SpriteCallbackDummy,
     },
     {
-        .tileTag = 55024,
-        .paletteTag = 55024,
+        .tileTag = TAG_PARTICLES_MASTERBALL,
+        .paletteTag = TAG_PARTICLES_MASTERBALL,
         .oam = &gUnknown_08524904,
-        .anims = gUnknown_085E519C,
+        .anims = gAnims_BallParticles,
         .images = NULL,
         .affineAnims = gDummySpriteAffineAnimTable,
         .callback = SpriteCallbackDummy,
     },
     {
-        .tileTag = 55025,
-        .paletteTag = 55025,
+        .tileTag = TAG_PARTICLES_NETBALL,
+        .paletteTag = TAG_PARTICLES_NETBALL,
         .oam = &gUnknown_08524904,
-        .anims = gUnknown_085E519C,
+        .anims = gAnims_BallParticles,
         .images = NULL,
         .affineAnims = gDummySpriteAffineAnimTable,
         .callback = SpriteCallbackDummy,
     },
     {
-        .tileTag = 55026,
-        .paletteTag = 55026,
+        .tileTag = TAG_PARTICLES_DIVEBALL,
+        .paletteTag = TAG_PARTICLES_DIVEBALL,
         .oam = &gUnknown_08524904,
-        .anims = gUnknown_085E519C,
+        .anims = gAnims_BallParticles,
         .images = NULL,
         .affineAnims = gDummySpriteAffineAnimTable,
         .callback = SpriteCallbackDummy,
     },
     {
-        .tileTag = 55027,
-        .paletteTag = 55027,
+        .tileTag = TAG_PARTICLES_NESTBALL,
+        .paletteTag = TAG_PARTICLES_NESTBALL,
         .oam = &gUnknown_08524904,
-        .anims = gUnknown_085E519C,
+        .anims = gAnims_BallParticles,
         .images = NULL,
         .affineAnims = gDummySpriteAffineAnimTable,
         .callback = SpriteCallbackDummy,
     },
     {
-        .tileTag = 55028,
-        .paletteTag = 55028,
+        .tileTag = TAG_PARTICLES_REPEATBALL,
+        .paletteTag = TAG_PARTICLES_REPEATBALL,
         .oam = &gUnknown_08524904,
-        .anims = gUnknown_085E519C,
+        .anims = gAnims_BallParticles,
         .images = NULL,
         .affineAnims = gDummySpriteAffineAnimTable,
         .callback = SpriteCallbackDummy,
     },
     {
-        .tileTag = 55029,
-        .paletteTag = 55029,
+        .tileTag = TAG_PARTICLES_TIMERBALL,
+        .paletteTag = TAG_PARTICLES_TIMERBALL,
         .oam = &gUnknown_08524904,
-        .anims = gUnknown_085E519C,
+        .anims = gAnims_BallParticles,
         .images = NULL,
         .affineAnims = gDummySpriteAffineAnimTable,
         .callback = SpriteCallbackDummy,
     },
     {
-        .tileTag = 55030,
-        .paletteTag = 55030,
+        .tileTag = TAG_PARTICLES_LUXURYBALL,
+        .paletteTag = TAG_PARTICLES_LUXURYBALL,
         .oam = &gUnknown_08524904,
-        .anims = gUnknown_085E519C,
+        .anims = gAnims_BallParticles,
         .images = NULL,
         .affineAnims = gDummySpriteAffineAnimTable,
         .callback = SpriteCallbackDummy,
     },
     {
-        .tileTag = 55031,
-        .paletteTag = 55031,
+        .tileTag = TAG_PARTICLES_PREMIERBALL,
+        .paletteTag = TAG_PARTICLES_PREMIERBALL,
         .oam = &gUnknown_08524904,
-        .anims = gUnknown_085E519C,
+        .anims = gAnims_BallParticles,
         .images = NULL,
         .affineAnims = gDummySpriteAffineAnimTable,
         .callback = SpriteCallbackDummy,
     },
 };
 
-const u16 gUnknown_085E5310[] =
+const u16 gBallOpenFadeColors[] =
 {
-    RGB(31, 22, 30),
-    RGB(16, 23, 30),
-    RGB(23, 30, 20),
-    RGB(31, 31, 15),
-    RGB(23, 20, 28),
-    RGB(21, 31, 25),
-    RGB(12, 25, 30),
-    RGB(30, 27, 10),
-    RGB(31, 24, 16),
-    RGB(29, 30, 30),
-    RGB(31, 17, 10),
-    RGB(31, 9, 10),
+    [BALL_POKE] = RGB(31, 22, 30),
+    [BALL_GREAT] = RGB(16, 23, 30),
+    [BALL_SAFARI] = RGB(23, 30, 20),
+    [BALL_ULTRA] = RGB(31, 31, 15),
+    [BALL_MASTER] = RGB(23, 20, 28),
+    [BALL_NET] = RGB(21, 31, 25),
+    [BALL_DIVE] = RGB(12, 25, 30),
+    [BALL_NEST] = RGB(30, 27, 10),
+    [BALL_REPEAT] = RGB(31, 24, 16),
+    [BALL_TIMER] = RGB(29, 30, 30),
+    [BALL_LUXURY] = RGB(31, 17, 10),
+    [BALL_PREMIER] = RGB(31, 9, 10),
+
+    // Garbage data
     RGB(0, 0, 0),
     RGB(1, 16, 0),
     RGB(3, 0, 1),
@@ -1259,7 +1274,7 @@ static void sub_81719EC(struct Sprite *sprite)
     sub_8171D60(4);
     for (i = 0; i < 3; i++)
     {
-        u8 spriteId = CreateSprite(&gUnknown_085E51F0[4], sprite->pos1.x, sprite->pos1.y, subpriority);
+        u8 spriteId = CreateSprite(&gBallParticlesSpriteTemplates[4], sprite->pos1.x, sprite->pos1.y, subpriority);
         if (spriteId != MAX_SPRITES)
         {
             gSprites[spriteId].data[0] = 24;
@@ -1268,7 +1283,7 @@ static void sub_81719EC(struct Sprite *sprite)
             gSprites[spriteId].data[5] = sBallCaptureSuccessStarData[i].unk2;
             InitAnimArcTranslation(&gSprites[spriteId]);
             gSprites[spriteId].callback = sub_8171AAC;
-            StartSpriteAnim(&gSprites[spriteId], gBallOpenParticleAnimNums[4]);
+            StartSpriteAnim(&gSprites[spriteId], gBallParticleAnimNums[4]);
         }
     }
 }
@@ -1369,10 +1384,10 @@ static void sub_8171D60(u8 ballId)
 {
     u8 taskId;
 
-    if (GetSpriteTileStartByTag(gBallOpenParticleSpritesheets[ballId].tag) == 0xFFFF)
+    if (GetSpriteTileStartByTag(gBallParticleSpritesheets[ballId].tag) == 0xFFFF)
     {
-        LoadCompressedSpriteSheetUsingHeap(&gBallOpenParticleSpritesheets[ballId]);
-        LoadCompressedSpritePaletteUsingHeap(&gBallOpenParticlePalettes[ballId]);
+        LoadCompressedSpriteSheetUsingHeap(&gBallParticleSpritesheets[ballId]);
+        LoadCompressedSpritePaletteUsingHeap(&gBallParticlePalettes[ballId]);
     }
 }
 
@@ -1381,7 +1396,7 @@ u8 AnimateBallOpenParticles(u8 x, u8 y, u8 priority, u8 subpriority, u8 ballId)
     u8 taskId;
 
     sub_8171D60(ballId);
-    taskId = CreateTask(gBallOpenParticleAnimationFuncs[ballId], 5);
+    taskId = CreateTask(gBallParticleAnimationFuncs[ballId], 5);
     gTasks[taskId].data[1] = x;
     gTasks[taskId].data[2] = y;
     gTasks[taskId].data[3] = priority;
@@ -1414,11 +1429,11 @@ static void PokeBallOpenParticleAnimation(u8 taskId)
         priority = gTasks[taskId].data[3];
         subpriority = gTasks[taskId].data[4];
 
-        spriteId = CreateSprite(&gUnknown_085E51F0[ballId], x, y, subpriority);
+        spriteId = CreateSprite(&gBallParticlesSpriteTemplates[ballId], x, y, subpriority);
         if (spriteId != MAX_SPRITES)
         {
             sub_8171E20();
-            StartSpriteAnim(&gSprites[spriteId], gBallOpenParticleAnimNums[ballId]);
+            StartSpriteAnim(&gSprites[spriteId], gBallParticleAnimNums[ballId]);
             gSprites[spriteId].callback = PokeBallOpenParticleAnimation_Step1;
             gSprites[spriteId].oam.priority = priority;
 
@@ -1473,11 +1488,11 @@ static void TimerBallOpenParticleAnimation(u8 taskId)
 
     for (i = 0; i < 8; i++)
     {
-        spriteId = CreateSprite(&gUnknown_085E51F0[ballId], x, y, subpriority);
+        spriteId = CreateSprite(&gBallParticlesSpriteTemplates[ballId], x, y, subpriority);
         if (spriteId != MAX_SPRITES)
         {
             sub_8171E20();
-            StartSpriteAnim(&gSprites[spriteId], gBallOpenParticleAnimNums[ballId]);
+            StartSpriteAnim(&gSprites[spriteId], gBallParticleAnimNums[ballId]);
             gSprites[spriteId].callback = FanOutBallOpenParticles_Step1;
             gSprites[spriteId].oam.priority = priority;
             gSprites[spriteId].data[0] = i * 32;
@@ -1507,11 +1522,11 @@ static void DiveBallOpenParticleAnimation(u8 taskId)
 
     for (i = 0; i < 8; i++)
     {
-        spriteId = CreateSprite(&gUnknown_085E51F0[ballId], x, y, subpriority);
+        spriteId = CreateSprite(&gBallParticlesSpriteTemplates[ballId], x, y, subpriority);
         if (spriteId != MAX_SPRITES)
         {
             sub_8171E20();
-            StartSpriteAnim(&gSprites[spriteId], gBallOpenParticleAnimNums[ballId]);
+            StartSpriteAnim(&gSprites[spriteId], gBallParticleAnimNums[ballId]);
             gSprites[spriteId].callback = FanOutBallOpenParticles_Step1;
             gSprites[spriteId].oam.priority = priority;
             gSprites[spriteId].data[0] = i * 32;
@@ -1542,11 +1557,11 @@ static void SafariBallOpenParticleAnimation(u8 taskId)
 
     for (i = 0; i < 8; i++)
     {
-        spriteId = CreateSprite(&gUnknown_085E51F0[ballId], x, y, subpriority);
+        spriteId = CreateSprite(&gBallParticlesSpriteTemplates[ballId], x, y, subpriority);
         if (spriteId != MAX_SPRITES)
         {
             sub_8171E20();
-            StartSpriteAnim(&gSprites[spriteId], gBallOpenParticleAnimNums[ballId]);
+            StartSpriteAnim(&gSprites[spriteId], gBallParticleAnimNums[ballId]);
             gSprites[spriteId].callback = FanOutBallOpenParticles_Step1;
             gSprites[spriteId].oam.priority = priority;
             gSprites[spriteId].data[0] = i * 32;
@@ -1577,11 +1592,11 @@ static void UltraBallOpenParticleAnimation(u8 taskId)
 
     for (i = 0; i < 10; i++)
     {
-        spriteId = CreateSprite(&gUnknown_085E51F0[ballId], x, y, subpriority);
+        spriteId = CreateSprite(&gBallParticlesSpriteTemplates[ballId], x, y, subpriority);
         if (spriteId != MAX_SPRITES)
         {
             sub_8171E20();
-            StartSpriteAnim(&gSprites[spriteId], gBallOpenParticleAnimNums[ballId]);
+            StartSpriteAnim(&gSprites[spriteId], gBallParticleAnimNums[ballId]);
             gSprites[spriteId].callback = FanOutBallOpenParticles_Step1;
             gSprites[spriteId].oam.priority = priority;
             gSprites[spriteId].data[0] = i * 25;
@@ -1618,11 +1633,11 @@ static void GreatBallOpenParticleAnimation(u8 taskId)
 
         for (i = 0; i < 8; i++)
         {
-            spriteId = CreateSprite(&gUnknown_085E51F0[ballId], x, y, subpriority);
+            spriteId = CreateSprite(&gBallParticlesSpriteTemplates[ballId], x, y, subpriority);
             if (spriteId != MAX_SPRITES)
             {
                 sub_8171E20();
-                StartSpriteAnim(&gSprites[spriteId], gBallOpenParticleAnimNums[ballId]);
+                StartSpriteAnim(&gSprites[spriteId], gBallParticleAnimNums[ballId]);
                 gSprites[spriteId].callback = FanOutBallOpenParticles_Step1;
                 gSprites[spriteId].oam.priority = priority;
                 gSprites[spriteId].data[0] = i * 32;
@@ -1666,13 +1681,13 @@ static void RepeatBallOpenParticleAnimation(u8 taskId)
     priority = gTasks[taskId].data[3];
     subpriority = gTasks[taskId].data[4];
 
-    for (i = 0; i < 12; i++)
+    for (i = 0; i < POKEBALL_COUNT; i++)
     {
-        spriteId = CreateSprite(&gUnknown_085E51F0[ballId], x, y, subpriority);
+        spriteId = CreateSprite(&gBallParticlesSpriteTemplates[ballId], x, y, subpriority);
         if (spriteId != MAX_SPRITES)
         {
             sub_8171E20();
-            StartSpriteAnim(&gSprites[spriteId], gBallOpenParticleAnimNums[ballId]);
+            StartSpriteAnim(&gSprites[spriteId], gBallParticleAnimNums[ballId]);
             gSprites[spriteId].callback = RepeatBallOpenParticleAnimation_Step1;
             gSprites[spriteId].oam.priority = priority;
             gSprites[spriteId].data[0] = i * 21;
@@ -1712,11 +1727,11 @@ static void MasterBallOpenParticleAnimation(u8 taskId)
     {
         for (i = 0; i < 8; i++)
         {
-            spriteId = CreateSprite(&gUnknown_085E51F0[ballId], x, y, subpriority);
+            spriteId = CreateSprite(&gBallParticlesSpriteTemplates[ballId], x, y, subpriority);
             if (spriteId != MAX_SPRITES)
             {
                 sub_8171E20();
-                StartSpriteAnim(&gSprites[spriteId], gBallOpenParticleAnimNums[ballId]);
+                StartSpriteAnim(&gSprites[spriteId], gBallParticleAnimNums[ballId]);
                 gSprites[spriteId].callback = FanOutBallOpenParticles_Step1;
                 gSprites[spriteId].oam.priority = priority;
                 gSprites[spriteId].data[0] = i * 32;
@@ -1756,11 +1771,11 @@ static void PremierBallOpenParticleAnimation(u8 taskId)
 
     for (i = 0; i < 8; i++)
     {
-        spriteId = CreateSprite(&gUnknown_085E51F0[ballId], x, y, subpriority);
+        spriteId = CreateSprite(&gBallParticlesSpriteTemplates[ballId], x, y, subpriority);
         if (spriteId != MAX_SPRITES)
         {
             sub_8171E20();
-            StartSpriteAnim(&gSprites[spriteId], gBallOpenParticleAnimNums[ballId]);
+            StartSpriteAnim(&gSprites[spriteId], gBallParticleAnimNums[ballId]);
             gSprites[spriteId].callback = PremierBallOpenParticleAnimation_Step1;
             gSprites[spriteId].oam.priority = priority;
             gSprites[spriteId].data[0] = i * 32;
@@ -1787,12 +1802,10 @@ static void PremierBallOpenParticleAnimation_Step1(struct Sprite *sprite)
 static void DestroyBallOpenAnimationParticle(struct Sprite *sprite)
 {
     int i, j;
-    int temp;
 
     if (!gMain.inBattle)
     {
-        temp = sprite->data[7]; // temp var needed to match
-        if (temp == 1)
+        if (sprite->data[7] == 1)
             DestroySpriteAndFreeResources(sprite);
         else
             DestroySprite(sprite);
@@ -1802,18 +1815,18 @@ static void DestroyBallOpenAnimationParticle(struct Sprite *sprite)
         gBattleSpritesDataPtr->animationData->field_A--;
         if (gBattleSpritesDataPtr->animationData->field_A == 0)
         {
-            for (i = 0; i < 12; i++)
+            for (i = 0; i < POKEBALL_COUNT; i++)
             {
-                if (FuncIsActiveTask(gBallOpenParticleAnimationFuncs[i]) == TRUE)
+                if (FuncIsActiveTask(gBallParticleAnimationFuncs[i]) == TRUE)
                     break;
             }
 
-            if (i == 12)
+            if (i == POKEBALL_COUNT)
             {
-                for (j = 0; j < 12; j++)
+                for (j = 0; j < POKEBALL_COUNT; j++)
                 {
-                    FreeSpriteTilesByTag(gBallOpenParticleSpritesheets[j].tag);
-                    FreeSpritePaletteByTag(gBallOpenParticlePalettes[j].tag);
+                    FreeSpriteTilesByTag(gBallParticleSpritesheets[j].tag);
+                    FreeSpritePaletteByTag(gBallParticlePalettes[j].tag);
                 }
             }
 
@@ -1838,12 +1851,12 @@ u8 LaunchBallFadeMonTask(u8 unfadeLater, u8 battler, u32 selectedPalettes, u8 ba
 
     if (!unfadeLater)
     {
-        BlendPalette(battler * 16 + 0x100, 16, 0, gUnknown_085E5310[ballId]);
+        BlendPalette(battler * 16 + 0x100, 16, 0, gBallOpenFadeColors[ballId]);
         gTasks[taskId].data[1] = 1;
     }
     else
     {
-        BlendPalette(battler * 16 + 0x100, 16, 16, gUnknown_085E5310[ballId]);
+        BlendPalette(battler * 16 + 0x100, 16, 16, gBallOpenFadeColors[ballId]);
         gTasks[taskId].data[0] = 16;
         gTasks[taskId].data[1] = -1;
         gTasks[taskId].func = sub_8172B40;
@@ -1859,7 +1872,7 @@ static void sub_8172AB0(u8 taskId)
 
     if (gTasks[taskId].data[2] <= 16)
     {
-        BlendPalette(gTasks[taskId].data[3] * 16 + 0x100, 16, gTasks[taskId].data[0], gUnknown_085E5310[ballId]);
+        BlendPalette(gTasks[taskId].data[3] * 16 + 0x100, 16, gTasks[taskId].data[0], gBallOpenFadeColors[ballId]);
         gTasks[taskId].data[0] += gTasks[taskId].data[1];
         gTasks[taskId].data[2]++;
     }
@@ -1887,7 +1900,7 @@ static void sub_8172B90(u8 taskId)
 
     if (gTasks[taskId].data[2] <= 16)
     {
-        BlendPalette(gTasks[taskId].data[3] * 16 + 0x100, 16, gTasks[taskId].data[0], gUnknown_085E5310[ballId]);
+        BlendPalette(gTasks[taskId].data[3] * 16 + 0x100, 16, gTasks[taskId].data[0], gBallOpenFadeColors[ballId]);
         gTasks[taskId].data[0] += gTasks[taskId].data[1];
         gTasks[taskId].data[2]++;
     }
