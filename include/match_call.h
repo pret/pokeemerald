@@ -14,7 +14,8 @@ s32 GetRematchIdxByTrainerIdx(s32 trainerIdx);
 void InitMatchCallCounters(void);
 bool32 TryStartMatchCall(void);
 bool32 IsMatchCallTaskActive(void);
-void StartMatchCallFromScript(u8* script);
+void StartMatchCallFromScript(u8 *message);
 void sub_8197080(u8 *destStr);
+bool32 SelectMatchCallMessage(int, u8 *);
 
 #endif //GUARD_MATCH_CALL_H
