@@ -1042,8 +1042,8 @@ const u32 gBattleAnimSpritePal_Splash[] = INCBIN_U32("graphics/battle_anims/spri
 
 const u32 gBattleAnimSpriteGfx_SweatBead[] = INCBIN_U32("graphics/battle_anims/sprites/sweat_bead.4bpp.lz");
 
-const u32 gBattleAnimSpriteGfx_RedBrick[] = INCBIN_U32("graphics/battle_anims/sprites/red_brick.4bpp.lz");
-const u32 gBattleAnimSpritePal_RedBrick[] = INCBIN_U32("graphics/battle_anims/sprites/red_brick.gbapal.lz");
+const u32 gBattleAnimSpriteGfx_Pokeblock[] = INCBIN_U32("graphics/battle_anims/sprites/pokeblock.4bpp.lz");
+const u32 gBattleAnimSpritePal_Pokeblock[] = INCBIN_U32("graphics/battle_anims/sprites/pokeblock.gbapal.lz");
 
 const u32 gBattleAnimSpriteGfx_Gem1[] = INCBIN_U32("graphics/battle_anims/sprites/gem_1.4bpp.lz");
 const u32 gBattleAnimSpriteGfx_Gem2[] = INCBIN_U32("graphics/battle_anims/sprites/gem_2.4bpp.lz");

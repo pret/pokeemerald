@@ -36,12 +36,6 @@ enum
     BERRY_STAGE_SPARKLING = 0xFF,
 };
 
-#define NUM_BERRIES (LAST_BERRY_INDEX - FIRST_BERRY_INDEX)
-
-extern const u8 *const gBerryTreeEventObjectGraphicsIdTablePointers[];
-extern const struct SpriteFrameImage *const gBerryTreePicTablePointers[];
-extern const u8 *const gBerryTreePaletteSlotTablePointers[];
-
 void ClearEnigmaBerries(void);
 void SetEnigmaBerry(u8 *src);
 bool32 IsEnigmaBerryValid(void);

@@ -12,6 +12,62 @@ const u8 gRepeatBallItemDescription[] = _("A BALL that works\nbetter on POKéMON
 const u8 gTimerBallItemDescription[] = _("A BALL that gains\npower in battles\ntaking many turns.");
 const u8 gLuxuryBallItemDescription[] = _("A cozy BALL that\nmakes POKéMON\nmore friendly.");
 const u8 gPremierBallItemDescription[] = _("A rare BALL made\nin commemoration\nof some event.");
+
+static const u8 gItemDescription_LevelBall[] = _(
+    "A Ball that works\n"
+    "well on lower\n"
+    "level POKéMON.");
+
+static const u8 gItemDescription_LureBall[] = _(
+    "A Ball that works\n"
+    "well on fished\n"
+    "up POKéMON.");
+
+static const u8 gItemDescription_MoonBall[] = _(
+    "A Ball that works\n"
+    "well on Moon\n"
+    "Stone users.");
+
+static const u8 gItemDescription_FriendBall[] = _(
+    "A Ball that makes\n"
+    "a POKéMON friendly\n"
+    "when caught.");
+
+static const u8 gItemDescription_LoveBall[] = _(
+    "Works well on\n"
+    "POKéMON of the\n"
+    "opposite gender.");
+
+static const u8 gItemDescription_HeavyBall[] = _(
+    "Works well on\n"
+    "very heavy\n"
+    "POKéMON.");
+
+static const u8 gItemDescription_FastBall[] = _(
+    "Works well on\n"
+    "very fast\n"
+    "POKéMON.");
+
+static const u8 gItemDescription_HealBall[] = _(
+    "A remedial Ball\n"
+    "that restores\n"
+    "caught POKéMON.");
+
+static const u8 gItemDescription_QuickBall[] = _(
+    "Works well if\n"
+    "used on the\n"
+    "first turn.");
+
+static const u8 gItemDescription_DuskBall[] = _(
+    "Works well if\n"
+    "used in a\n"
+    "dark place.");
+
+static const u8 gItemDescription_CherishBall[] = _(
+    "A rare Ball made\n"
+    "in commemoration\n"
+    "of some event.");
+
 // Medicine
 const u8 gPotionItemDescription[] = _("Restores the HP of\na POKéMON by\n20 points.");
 const u8 gAntidoteItemDescription[] = _("Heals a poisoned\nPOKéMON.");
