@@ -1428,11 +1428,13 @@ void LoadBallGfx(u8 ballId)
         LoadCompressedSpriteSheetUsingHeap(&gBallSpriteSheets[ballId]);
         LoadCompressedSpritePaletteUsingHeap(&gBallSpritePalettes[ballId]);
     }
+
     switch (ballId)
     {
     case BALL_DIVE:
     case BALL_LUXURY:
     case BALL_PREMIER:
+    case BALL_LEVEL ... POKEBALL_COUNT:
         break;
     default:
         var = GetSpriteTileStartByTag(gBallSpriteSheets[ballId].tag);
