@@ -76,5 +76,9 @@ int sub_81C9894(void);
 u32 sub_81C99D4(void);
 void sub_81CAADC(void);
 
+// pokenav_unk_3.c
+bool32 sub_81CAAE8(void);
+u32 sub_81CAB24(void);
+void sub_81CAB38(void);
 
 #endif //GUARD_POKENAV_H

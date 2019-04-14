@@ -5,56 +5,6 @@
 
 @ File centered around AllocSubstruct(5)
 
-	thumb_func_start sub_81CAAE8
-sub_81CAAE8: @ 81CAAE8
-	push {r4,lr}
-	movs r1, 0xD4
-	lsls r1, 1
-	movs r0, 0x5
-	bl AllocSubstruct
-	adds r4, r0, 0
-	cmp r4, 0
-	beq _081CAB1C
-	ldr r0, =sub_81CAB44
-	str r0, [r4, 0x18]
-	movs r0, 0
-	strh r0, [r4, 0x8]
-	str r0, [r4, 0x10]
-	ldr r0, =sub_81CAD20
-	movs r1, 0x1
-	bl CreateLoopedTask
-	str r0, [r4, 0x14]
-	movs r0, 0x1
-	b _081CAB1E
-	.pool
-_081CAB1C:
-	movs r0, 0
-_081CAB1E:
-	pop {r4}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_81CAAE8
-
-	thumb_func_start sub_81CAB24
-sub_81CAB24: @ 81CAB24
-	push {lr}
-	movs r0, 0x5
-	bl GetSubstructPtr
-	ldr r1, [r0, 0x18]
-	bl _call_via_r1
-	pop {r1}
-	bx r1
-	thumb_func_end sub_81CAB24
-
-	thumb_func_start sub_81CAB38
-sub_81CAB38: @ 81CAB38
-	push {lr}
-	movs r0, 0x5
-	bl FreePokenavSubstruct
-	pop {r0}
-	bx r0
-	thumb_func_end sub_81CAB38
-
 	thumb_func_start sub_81CAB44
 sub_81CAB44: @ 81CAB44
 	push {r4,r5,lr}

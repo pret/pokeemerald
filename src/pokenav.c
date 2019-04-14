@@ -28,7 +28,7 @@ struct PokenavResources
 
 struct UnknownPokenavCallbackStruct
 {
-    u32 (*unk0)(void);
+    bool32 (*unk0)(void);
     u32 (*unk4)(void);
     u32 (*unk8)(void);
     u32 (*unkC)(void);
@@ -65,12 +65,9 @@ extern u32 sub_81CF3F8(void);
 extern u32 sub_81CD024(void);
 extern u32 sub_81CEF98(void);
 extern u32 sub_81CF368(void);
-extern u32 sub_81CAAE8(void);
-extern u32 sub_81CAB24(void);
 extern u32 sub_81CB260(void);
 extern u32 sub_81CB29C(void);
 extern u32 sub_81CB2CC(void);
-extern void sub_81CAB38(void);
 extern u32 sub_81CB2E0(void);
 extern u32 sub_81CF9BC(void);
 extern u32 sub_81CFA34(void);
