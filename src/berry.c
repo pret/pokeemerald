@@ -1,6 +1,8 @@
 #include "global.h"
 #include "berry.h"
 #include "event_data.h"
+#include "event_object_movement.h"
+#include "event_scripts.h"
 #include "field_control_avatar.h"
 #include "fieldmap.h"
 #include "item.h"
@@ -11,11 +13,6 @@
 #include "text.h"
 #include "constants/event_object_movement_constants.h"
 #include "constants/items.h"
-#include "event_object_movement.h"
-
-
-
-extern const u8 BerryTreeScript[];
 
 static u32 GetEnigmaBerryChecksum(struct EnigmaBerry *enigmaBerry);
 static bool32 BerryTreeGrow(struct BerryTree *tree);
@@ -117,6 +114,7 @@ static const u8 sBerryDescriptionPart2_Enigma[] = _("Appears to have the power o
 
 const struct Berry gBerries[] =
 {
+    [ITEM_CHERI_BERRY - FIRST_BERRY_INDEX] =
     {
         .name = _("CHERI"),
         .firmness = BERRY_FIRMNESS_SOFT,
@@ -133,6 +131,8 @@ const struct Berry gBerries[] =
         .sour = 0,
         .smoothness = 25,
     },
+
+    [ITEM_CHESTO_BERRY - FIRST_BERRY_INDEX] =
     {
         .name = _("CHESTO"),
         .firmness = BERRY_FIRMNESS_SUPER_HARD,
@@ -149,6 +149,8 @@ const struct Berry gBerries[] =
         .sour = 0,
         .smoothness = 25,
     },
+
+    [ITEM_PECHA_BERRY - FIRST_BERRY_INDEX] =
     {
         .name = _("PECHA"),
         .firmness = BERRY_FIRMNESS_VERY_SOFT,
@@ -165,6 +167,8 @@ const struct Berry gBerries[] =
         .sour = 0,
         .smoothness = 25,
     },
+
+    [ITEM_RAWST_BERRY - FIRST_BERRY_INDEX] =
     {
         .name = _("RAWST"),
         .firmness = BERRY_FIRMNESS_HARD,
@@ -181,6 +185,8 @@ const struct Berry gBerries[] =
         .sour = 0,
         .smoothness = 25,
     },
+
+    [ITEM_ASPEAR_BERRY - FIRST_BERRY_INDEX] =
     {
         .name = _("ASPEAR"),
         .firmness = BERRY_FIRMNESS_SUPER_HARD,
@@ -197,6 +203,8 @@ const struct Berry gBerries[] =
         .sour = 10,
         .smoothness = 25,
     },
+
+    [ITEM_LEPPA_BERRY - FIRST_BERRY_INDEX] =
     {
         .name = _("LEPPA"),
         .firmness = BERRY_FIRMNESS_VERY_HARD,
@@ -213,6 +221,8 @@ const struct Berry gBerries[] =
         .sour = 10,
         .smoothness = 20,
     },
+
+    [ITEM_ORAN_BERRY - FIRST_BERRY_INDEX] =
     {
         .name = _("ORAN"),
         .firmness = BERRY_FIRMNESS_SUPER_HARD,
@@ -229,6 +239,8 @@ const struct Berry gBerries[] =
         .sour = 10,
         .smoothness = 20,
     },
+
+    [ITEM_PERSIM_BERRY - FIRST_BERRY_INDEX] =
     {
         .name = _("PERSIM"),
         .firmness = BERRY_FIRMNESS_HARD,
@@ -245,6 +257,8 @@ const struct Berry gBerries[] =
         .sour = 10,
         .smoothness = 20,
     },
+
+    [ITEM_LUM_BERRY - FIRST_BERRY_INDEX] =
     {
         .name = _("LUM"),
         .firmness = BERRY_FIRMNESS_SUPER_HARD,
@@ -261,6 +275,8 @@ const struct Berry gBerries[] =
         .sour = 10,
         .smoothness = 20,
     },
+
+    [ITEM_SITRUS_BERRY - FIRST_BERRY_INDEX] =
     {
         .name = _("SITRUS"),
         .firmness = BERRY_FIRMNESS_VERY_HARD,
@@ -277,6 +293,8 @@ const struct Berry gBerries[] =
         .sour = 10,
         .smoothness = 20,
     },
+
+    [ITEM_FIGY_BERRY - FIRST_BERRY_INDEX] =
     {
         .name = _("FIGY"),
         .firmness = BERRY_FIRMNESS_SOFT,
@@ -293,6 +311,8 @@ const struct Berry gBerries[] =
         .sour = 0,
         .smoothness = 25,
     },
+
+    [ITEM_WIKI_BERRY - FIRST_BERRY_INDEX] =
     {
         .name = _("WIKI"),
         .firmness = BERRY_FIRMNESS_HARD,
@@ -309,6 +329,8 @@ const struct Berry gBerries[] =
         .sour = 0,
         .smoothness = 25,
     },
+
+    [ITEM_MAGO_BERRY - FIRST_BERRY_INDEX] =
     {
         .name = _("MAGO"),
         .firmness = BERRY_FIRMNESS_HARD,
@@ -325,6 +347,8 @@ const struct Berry gBerries[] =
         .sour = 0,
         .smoothness = 25,
     },
+
+    [ITEM_AGUAV_BERRY - FIRST_BERRY_INDEX] =
     {
         .name = _("AGUAV"),
         .firmness = BERRY_FIRMNESS_SUPER_HARD,
@@ -341,6 +365,8 @@ const struct Berry gBerries[] =
         .sour = 0,
         .smoothness = 25,
     },
+
+    [ITEM_IAPAPA_BERRY - FIRST_BERRY_INDEX] =
     {
         .name = _("IAPAPA"),
         .firmness = BERRY_FIRMNESS_SOFT,
@@ -357,6 +383,8 @@ const struct Berry gBerries[] =
         .sour = 10,
         .smoothness = 25,
     },
+
+    [ITEM_RAZZ_BERRY - FIRST_BERRY_INDEX] =
     {
         .name = _("RAZZ"),
         .firmness = BERRY_FIRMNESS_VERY_HARD,
@@ -373,6 +401,8 @@ const struct Berry gBerries[] =
         .sour = 0,
         .smoothness = 20,
     },
+
+    [ITEM_BLUK_BERRY - FIRST_BERRY_INDEX] =
     {
         .name = _("BLUK"),
         .firmness = BERRY_FIRMNESS_SOFT,
@@ -389,6 +419,8 @@ const struct Berry gBerries[] =
         .sour = 0,
         .smoothness = 20,
     },
+
+    [ITEM_NANAB_BERRY - FIRST_BERRY_INDEX] =
     {
         .name = _("NANAB"),
         .firmness = BERRY_FIRMNESS_VERY_HARD,
@@ -405,6 +437,8 @@ const struct Berry gBerries[] =
         .sour = 0,
         .smoothness = 20,
     },
+
+    [ITEM_WEPEAR_BERRY - FIRST_BERRY_INDEX] =
     {
         .name = _("WEPEAR"),
         .firmness = BERRY_FIRMNESS_SUPER_HARD,
@@ -421,6 +455,8 @@ const struct Berry gBerries[] =
         .sour = 10,
         .smoothness = 20,
     },
+
+    [ITEM_PINAP_BERRY - FIRST_BERRY_INDEX] =
     {
         .name = _("PINAP"),
         .firmness = BERRY_FIRMNESS_HARD,
@@ -437,6 +473,8 @@ const struct Berry gBerries[] =
         .sour = 10,
         .smoothness = 20,
     },
+
+    [ITEM_POMEG_BERRY - FIRST_BERRY_INDEX] =
     {
         .name = _("POMEG"),
         .firmness = BERRY_FIRMNESS_VERY_HARD,
@@ -453,6 +491,8 @@ const struct Berry gBerries[] =
         .sour = 0,
         .smoothness = 20,
     },
+
+    [ITEM_KELPSY_BERRY - FIRST_BERRY_INDEX] =
     {
         .name = _("KELPSY"),
         .firmness = BERRY_FIRMNESS_HARD,
@@ -469,6 +509,8 @@ const struct Berry gBerries[] =
         .sour = 10,
         .smoothness = 20,
     },
+
+    [ITEM_QUALOT_BERRY - FIRST_BERRY_INDEX] =
     {
         .name = _("QUALOT"),
         .firmness = BERRY_FIRMNESS_HARD,
@@ -485,6 +527,8 @@ const struct Berry gBerries[] =
         .sour = 10,
         .smoothness = 20,
     },
+
+    [ITEM_HONDEW_BERRY - FIRST_BERRY_INDEX] =
     {
         .name = _("HONDEW"),
         .firmness = BERRY_FIRMNESS_HARD,
@@ -501,6 +545,8 @@ const struct Berry gBerries[] =
         .sour = 0,
         .smoothness = 20,
     },
+
+    [ITEM_GREPA_BERRY - FIRST_BERRY_INDEX] =
     {
         .name = _("GREPA"),
         .firmness = BERRY_FIRMNESS_SOFT,
@@ -517,6 +563,8 @@ const struct Berry gBerries[] =
         .sour = 10,
         .smoothness = 20,
     },
+
+    [ITEM_TAMATO_BERRY - FIRST_BERRY_INDEX] =
     {
         .name = _("TAMATO"),
         .firmness = BERRY_FIRMNESS_SOFT,
@@ -533,6 +581,8 @@ const struct Berry gBerries[] =
         .sour = 0,
         .smoothness = 30,
     },
+
+    [ITEM_CORNN_BERRY - FIRST_BERRY_INDEX] =
     {
         .name = _("CORNN"),
         .firmness = BERRY_FIRMNESS_HARD,
@@ -549,6 +599,8 @@ const struct Berry gBerries[] =
         .sour = 0,
         .smoothness = 30,
     },
+
+    [ITEM_MAGOST_BERRY - FIRST_BERRY_INDEX] =
     {
         .name = _("MAGOST"),
         .firmness = BERRY_FIRMNESS_HARD,
@@ -565,6 +617,8 @@ const struct Berry gBerries[] =
         .sour = 0,
         .smoothness = 30,
     },
+
+    [ITEM_RABUTA_BERRY - FIRST_BERRY_INDEX] =
     {
         .name = _("RABUTA"),
         .firmness = BERRY_FIRMNESS_SOFT,
@@ -581,6 +635,8 @@ const struct Berry gBerries[] =
         .sour = 10,
         .smoothness = 30,
     },
+
+    [ITEM_NOMEL_BERRY - FIRST_BERRY_INDEX] =
     {
         .name = _("NOMEL"),
         .firmness = BERRY_FIRMNESS_SUPER_HARD,
@@ -597,6 +653,8 @@ const struct Berry gBerries[] =
         .sour = 20,
         .smoothness = 30,
     },
+
+    [ITEM_SPELON_BERRY - FIRST_BERRY_INDEX] =
     {
         .name = _("SPELON"),
         .firmness = BERRY_FIRMNESS_SOFT,
@@ -613,6 +671,8 @@ const struct Berry gBerries[] =
         .sour = 0,
         .smoothness = 70,
     },
+
+    [ITEM_PAMTRE_BERRY - FIRST_BERRY_INDEX] =
     {
         .name = _("PAMTRE"),
         .firmness = BERRY_FIRMNESS_VERY_SOFT,
@@ -629,6 +689,8 @@ const struct Berry gBerries[] =
         .sour = 0,
         .smoothness = 70,
     },
+
+    [ITEM_WATMEL_BERRY - FIRST_BERRY_INDEX] =
     {
         .name = _("WATMEL"),
         .firmness = BERRY_FIRMNESS_SOFT,
@@ -645,6 +707,8 @@ const struct Berry gBerries[] =
         .sour = 0,
         .smoothness = 70,
     },
+
+    [ITEM_DURIN_BERRY - FIRST_BERRY_INDEX] =
     {
         .name = _("DURIN"),
         .firmness = BERRY_FIRMNESS_HARD,
@@ -661,6 +725,8 @@ const struct Berry gBerries[] =
         .sour = 10,
         .smoothness = 70,
     },
+
+    [ITEM_BELUE_BERRY - FIRST_BERRY_INDEX] =
     {
         .name = _("BELUE"),
         .firmness = BERRY_FIRMNESS_VERY_SOFT,
@@ -677,6 +743,8 @@ const struct Berry gBerries[] =
         .sour = 40,
         .smoothness = 70,
     },
+
+    [ITEM_LIECHI_BERRY - FIRST_BERRY_INDEX] =
     {
         .name = _("LIECHI"),
         .firmness = BERRY_FIRMNESS_VERY_HARD,
@@ -693,6 +761,8 @@ const struct Berry gBerries[] =
         .sour = 10,
         .smoothness = 80,
     },
+
+    [ITEM_GANLON_BERRY - FIRST_BERRY_INDEX] =
     {
         .name = _("GANLON"),
         .firmness = BERRY_FIRMNESS_VERY_HARD,
@@ -709,6 +779,8 @@ const struct Berry gBerries[] =
         .sour = 0,
         .smoothness = 80,
     },
+
+    [ITEM_SALAC_BERRY - FIRST_BERRY_INDEX] =
     {
         .name = _("SALAC"),
         .firmness = BERRY_FIRMNESS_VERY_HARD,
@@ -725,6 +797,8 @@ const struct Berry gBerries[] =
         .sour = 40,
         .smoothness = 80,
     },
+
+    [ITEM_PETAYA_BERRY - FIRST_BERRY_INDEX] =
     {
         .name = _("PETAYA"),
         .firmness = BERRY_FIRMNESS_VERY_HARD,
@@ -741,6 +815,8 @@ const struct Berry gBerries[] =
         .sour = 0,
         .smoothness = 80,
     },
+
+    [ITEM_APICOT_BERRY - FIRST_BERRY_INDEX] =
     {
         .name = _("APICOT"),
         .firmness = BERRY_FIRMNESS_HARD,
@@ -757,6 +833,8 @@ const struct Berry gBerries[] =
         .sour = 40,
         .smoothness = 80,
     },
+
+    [ITEM_LANSAT_BERRY - FIRST_BERRY_INDEX] =
     {
         .name = _("LANSAT"),
         .firmness = BERRY_FIRMNESS_SOFT,
@@ -773,6 +851,8 @@ const struct Berry gBerries[] =
         .sour = 10,
         .smoothness = 30,
     },
+
+    [ITEM_STARF_BERRY - FIRST_BERRY_INDEX] =
     {
         .name = _("STARF"),
         .firmness = BERRY_FIRMNESS_SUPER_HARD,
@@ -789,6 +869,8 @@ const struct Berry gBerries[] =
         .sour = 10,
         .smoothness = 30,
     },
+
+    [ITEM_ENIGMA_BERRY - FIRST_BERRY_INDEX] =
     {
         .name = _("ENIGMA"),
         .firmness = BERRY_FIRMNESS_UNKNOWN,
