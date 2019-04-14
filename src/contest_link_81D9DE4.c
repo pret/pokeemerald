@@ -134,7 +134,7 @@ static void sub_81DA10C(u8 taskId)
 
 static void sub_81DA138(u8 taskId)
 {
-    sub_80DCE58(0);
+    SortContestants(FALSE);
     SetTaskFuncWithFollowupFunc(taskId, sub_80FCFD0, sub_80F8714);
 }
 

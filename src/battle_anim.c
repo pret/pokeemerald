@@ -2936,7 +2936,7 @@ s8 BattleAnimAdjustPanning2(s8 pan)
     return pan;
 }
 
-s16 KeepPanInRange(s16 panArg)
+s16 KeepPanInRange(s16 panArg, int oldPan)
 {
     s16 pan = panArg;
 

@@ -163,7 +163,7 @@ static bool8 SetupClearSaveDataScreen(void)
         ShowBg(3);
         SetGpuReg(REG_OFFSET_BLDCNT, 0);
         InitClearSaveDataScreenWindows();
-        BeginNormalPaletteFade(0x0000FFFF, 0, 0x10, 0, 0xFFFF);
+        BeginNormalPaletteFade(0x0000FFFF, 0, 0x10, 0, RGB_WHITEALPHA);
         EnableInterrupts(INTR_FLAG_VBLANK);
         SetVBlankCallback(VBlankCB);
         gMain.state = 1;

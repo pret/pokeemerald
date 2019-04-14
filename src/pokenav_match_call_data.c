@@ -422,7 +422,7 @@ static const match_call_text_data_t sMayTextScripts[] = {
     { NULL,                     0xFFFF,              0xFFFF }
 };
 
-static const struct MatchCallStruct4 sMayMatchCallHeader =
+static const struct MatchCallStruct4 sBrendanMatchCallHeader =
 {
     .type = 4,
     .gender = MALE,
@@ -451,7 +451,7 @@ static const match_call_text_data_t sBrendanTextScripts[] = {
     { NULL,                         0xFFFF,              0xFFFF }
 };
 
-static const struct MatchCallStruct4 sBrendanMatchCallHeader =
+static const struct MatchCallStruct4 sMayMatchCallHeader =
 {
     .type = 4,
     .gender = FEMALE,
@@ -728,8 +728,8 @@ static const struct MatchCallStruct5 sWallaceMatchCallHeader =
 static const match_call_t sMatchCallHeaders[] = {
     {.type0 = &sMrStoneMatchCallHeader},
     {.type3 = &sProfBirchMatchCallHeader},
-    {.type4 = &sBrendanMatchCallHeader},
     {.type4 = &sMayMatchCallHeader},
+    {.type4 = &sBrendanMatchCallHeader},
     {.type2 = &sWallyMatchCallHeader},
     {.type5 = &sNormanMatchCallHeader},
     {.type0 = &sMomMatchCallHeader},
