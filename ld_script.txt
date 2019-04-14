@@ -306,7 +306,6 @@ SECTIONS {
         src/pokenav_unk_1.o(.text);
         asm/pokenav_unk_2.o(.text);
         src/pokenav_unk_3.o(.text);
-        asm/pokenav_unk_3.o(.text);
         asm/pokenav_unk_4.o(.text);
         asm/pokenav_unk_5.o(.text);
         asm/pokenav_unk_6.o(.text);

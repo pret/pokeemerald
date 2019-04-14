@@ -93,7 +93,7 @@ void CopyMonCategoryText(int dexNum, u8 *dest)
     StringCopy(str + 1, gText_Pokemon);
 }
 
-u8 *sub_81DB494(u8 *str, int fontId, u8 *str2, int totalStringWidth)
+u8 *sub_81DB494(u8 *str, int fontId, const u8 *str2, int totalStringWidth)
 {
     u8 *buffer;
     int width;
