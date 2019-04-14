@@ -16,9 +16,10 @@
 #include "task.h"
 #include "trig.h"
 #include "util.h"
-#include "constants/rgb.h"
 #include "constants/items.h"
+#include "constants/moves.h"
 #include "constants/songs.h"
+#include "constants/rgb.h"
 
 // iwram
 int gUnknown_030062DC;
@@ -355,10 +356,10 @@ const u16 gUnknown_085E5310[] =
     RGB(4, 0, 0),
 };
 
-const struct SpriteTemplate gBattleAnimSpriteTemplate_85E5338 =
+const struct SpriteTemplate gPokeblockSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_RED_BRICK,
-    .paletteTag = ANIM_TAG_RED_BRICK,
+    .tileTag = ANIM_TAG_POKEBLOCK,
+    .paletteTag = ANIM_TAG_POKEBLOCK,
     .oam = &gUnknown_0852490C,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -675,9 +676,9 @@ void sub_8170D24(u8 taskId)
 void AnimTask_IsBallBlockedByTrainer(u8 taskId)
 {
     if (gBattleSpritesDataPtr->animationData->ballThrowCaseId == BALL_TRAINER_BLOCK)
-        gBattleAnimArgs[7] = -1;
+        gBattleAnimArgs[ARG_RET_ID] = -1;
     else
-        gBattleAnimArgs[7] = 0;
+        gBattleAnimArgs[ARG_RET_ID] = 0;
 
     DestroyAnimVisualTask(taskId);
 }
@@ -687,30 +688,30 @@ u8 ItemIdToBallId(u16 ballItem)
     switch (ballItem)
     {
     case ITEM_MASTER_BALL:
-        return 4;
+        return BALL_MASTER;
     case ITEM_ULTRA_BALL:
-        return 3;
+        return BALL_ULTRA;
     case ITEM_GREAT_BALL:
-        return 1;
+        return BALL_GREAT;
     case ITEM_SAFARI_BALL:
-        return 2;
+        return BALL_SAFARI;
     case ITEM_NET_BALL:
-        return 5;
+        return BALL_NET;
     case ITEM_DIVE_BALL:
-        return 6;
+        return BALL_DIVE;
     case ITEM_NEST_BALL:
-        return 7;
+        return BALL_NEST;
     case ITEM_REPEAT_BALL:
-        return 8;
+        return BALL_REPEAT;
     case ITEM_TIMER_BALL:
-        return 9;
+        return BALL_TIMER;
     case ITEM_LUXURY_BALL:
-        return 10;
+        return BALL_LUXURY;
     case ITEM_PREMIER_BALL:
-        return 11;
+        return BALL_PREMIER;
     case ITEM_POKE_BALL:
     default:
-        return 0;
+        return BALL_POKE;
     }
 }
 
@@ -804,7 +805,6 @@ static void sub_8171134(struct Sprite *sprite)
 {
     int i;
     u8 ballId;
-    int ballId2; // extra var needed to match
 
     if (TranslateAnimHorizontalArc(sprite))
     {
@@ -825,15 +825,15 @@ static void sub_8171134(struct Sprite *sprite)
 
             sprite->data[5] = 0;
             sprite->callback = sub_81711E8;
-            ballId = ItemIdToBallId(gLastUsedItem);
-            ballId2 = ballId;
-            if (ballId2 > 11)
-                return;
-            if (ballId2 < 0)
-                return;
 
-            AnimateBallOpenParticles(sprite->pos1.x, sprite->pos1.y - 5, 1, 28, ballId);
-            LaunchBallFadeMonTask(0, gBattleAnimTarget, 14, ballId);
+            ballId = ItemIdToBallId(gLastUsedItem);
+            switch (ballId)
+            {
+            case 0 ... POKEBALL_COUNT - 1:
+                AnimateBallOpenParticles(sprite->pos1.x, sprite->pos1.y - 5, 1, 28, ballId);
+                LaunchBallFadeMonTask(0, gBattleAnimTarget, 14, ballId);
+                break;
+            }
         }
     }
 }
@@ -1280,28 +1280,23 @@ static void sub_8171AAC(struct Sprite *sprite)
         DestroySprite(sprite);
 }
 
-// fakematching. I think the return type of ItemIdToBallId()
-// is wrong because of the weird required casting.
 static void sub_8171AE4(struct Sprite *sprite)
 {
     u8 ballId;
-    int ballId2; // extra var needed to match
 
     StartSpriteAnim(sprite, 1);
     StartSpriteAffineAnim(sprite, 0);
     sprite->callback = sub_8171BAC;
 
     ballId = ItemIdToBallId(gLastUsedItem);
-    ballId2 = ballId;
-    if (ballId2 > 11)
-        goto LABEL;
-    if (ballId2 < 0)
-        goto LABEL;
+    switch (ballId)
+    {
+    case 0 ... POKEBALL_COUNT - 1:
+        AnimateBallOpenParticles(sprite->pos1.x, sprite->pos1.y - 5, 1, 28, ballId);
+        LaunchBallFadeMonTask(1, gBattleAnimTarget, 14, ballId);
+        break;
+    }
 
-    AnimateBallOpenParticles(sprite->pos1.x, sprite->pos1.y - 5, 1, 28, ballId);
-    LaunchBallFadeMonTask(1, gBattleAnimTarget, 14, ballId);
-
-    LABEL:
     gSprites[gBattlerSpriteIds[gBattleAnimTarget]].invisible = 0;
     StartSpriteAffineAnim(&gSprites[gBattlerSpriteIds[gBattleAnimTarget]], 1);
     AnimateSprite(&gSprites[gBattlerSpriteIds[gBattleAnimTarget]]);
@@ -1906,9 +1901,8 @@ void sub_8172BF0(u8 taskId)
 {
     u8 spriteId;
     u32 x;
-    u32 done;
+    u32 done = FALSE;
 
-    done = FALSE;
     spriteId = gBattlerSpriteIds[gBattleAnimAttacker];
     switch (gTasks[taskId].data[10])
     {
@@ -1942,8 +1936,7 @@ void sub_8172BF0(u8 taskId)
             if (gSprites[spriteId].pos2.x <= 0)
             {
                 gSprites[spriteId].pos2.x = 0;
-                // done = FALSE; // fakematching--can't get the tail merge correct
-                goto DONE;
+                done = TRUE;
             }
         }
         else
@@ -1956,10 +1949,8 @@ void sub_8172BF0(u8 taskId)
         }
 
         if (done)
-        {
-            DONE:
             DestroyAnimVisualTask(taskId);
-        }
+
         break;
     }
 }
@@ -1998,13 +1989,13 @@ void sub_8172D98(u8 taskId)
     }
 }
 
-void sub_8172E9C(u8 taskId)
+void AnimTask_IsAttackerBehindSubstitute(u8 taskId)
 {
-    gBattleAnimArgs[7] = gBattleSpritesDataPtr->battlerData[gBattleAnimAttacker].behindSubstitute;
+    gBattleAnimArgs[ARG_RET_ID] = gBattleSpritesDataPtr->battlerData[gBattleAnimAttacker].behindSubstitute;
     DestroyAnimVisualTask(taskId);
 }
 
-void sub_8172ED0(u8 taskId)
+void AnimTask_TargetToEffectBattler(u8 taskId)
 {
     gBattleAnimTarget = gEffectBattler;
     DestroyAnimVisualTask(taskId);
@@ -2030,10 +2021,10 @@ void sub_8172EF0(u8 battler, struct Pokemon *mon)
 
         if (isShiny)
         {
-            if (GetSpriteTileStartByTag(0x27F9) == 0xFFFF)
+            if (GetSpriteTileStartByTag(ANIM_TAG_GOLD_STARS) == 0xFFFF)
             {
-                LoadCompressedSpriteSheetUsingHeap(&gBattleAnimPicTable[233]);
-                LoadCompressedSpritePaletteUsingHeap(&gBattleAnimPaletteTable[233]);
+                LoadCompressedSpriteSheetUsingHeap(&gBattleAnimPicTable[ANIM_TAG_GOLD_STARS - ANIM_SPRITES_START]);
+                LoadCompressedSpritePaletteUsingHeap(&gBattleAnimPaletteTable[ANIM_TAG_GOLD_STARS - ANIM_SPRITES_START]);
             }
 
             taskId1 = CreateTask(sub_8172FEC, 10);
@@ -2103,7 +2094,7 @@ static void sub_8172FEC(u8 taskId)
         if (gTasks[taskId].data[11] == 0)
         {
             if (GetBattlerSide(battler) == B_SIDE_PLAYER)
-                pan = 192;
+                pan = -64;
             else
                 pan = 63;
 
@@ -2169,20 +2160,20 @@ static void sub_8173250(struct Sprite *sprite)
     }
 }
 
-void sub_81732B0(u8 taskId)
+void AnimTask_LoadPokeblockGfx(u8 taskId)
 {
     u8 paletteIndex;
 
-    LoadCompressedSpriteSheetUsingHeap(&gBattleAnimPicTable[269]);
-    LoadCompressedSpritePaletteUsingHeap(&gBattleAnimPaletteTable[269]);
-    paletteIndex = IndexOfSpritePaletteTag(0x281D); // unused
+    LoadCompressedSpriteSheetUsingHeap(&gBattleAnimPicTable[ANIM_TAG_POKEBLOCK - ANIM_SPRITES_START]);
+    LoadCompressedSpritePaletteUsingHeap(&gBattleAnimPaletteTable[ANIM_TAG_POKEBLOCK - ANIM_SPRITES_START]);
+    paletteIndex = IndexOfSpritePaletteTag(ANIM_TAG_POKEBLOCK); // unused
     DestroyAnimVisualTask(taskId);
 }
 
-void sub_81732E4(u8 taskId)
+void AnimTask_FreePokeblockGfx(u8 taskId)
 {
-    FreeSpriteTilesByTag(0x281D);
-    FreeSpritePaletteByTag(0x281D);
+    FreeSpriteTilesByTag(ANIM_TAG_POKEBLOCK);
+    FreeSpritePaletteByTag(ANIM_TAG_POKEBLOCK);
     DestroyAnimVisualTask(taskId);
 }
 
@@ -2245,21 +2236,21 @@ void sub_817345C(u8 taskId)
 
 void AnimTask_GetTrappedMoveAnimId(u8 taskId)
 {
-    if (gBattleSpritesDataPtr->animationData->animArg == 83)
-        gBattleAnimArgs[0] = 1;
-    else if (gBattleSpritesDataPtr->animationData->animArg == 250)
-        gBattleAnimArgs[0] = 2;
-    else if (gBattleSpritesDataPtr->animationData->animArg == 128)
-        gBattleAnimArgs[0] = 3;
-    else if (gBattleSpritesDataPtr->animationData->animArg == 328)
-        gBattleAnimArgs[0] = 4;
+    if (gBattleSpritesDataPtr->animationData->animArg == MOVE_FIRE_SPIN)
+        gBattleAnimArgs[0] = TRAP_ANIM_FIRE_SPIN;
+    else if (gBattleSpritesDataPtr->animationData->animArg == MOVE_WHIRLPOOL)
+        gBattleAnimArgs[0] = TRAP_ANIM_WHIRLPOOL;
+    else if (gBattleSpritesDataPtr->animationData->animArg == MOVE_CLAMP)
+        gBattleAnimArgs[0] = TRAP_ANIM_CLAMP;
+    else if (gBattleSpritesDataPtr->animationData->animArg == MOVE_SAND_TOMB)
+        gBattleAnimArgs[0] = TRAP_ANIM_SAND_TOMB;
     else
-        gBattleAnimArgs[0] = 0;
+        gBattleAnimArgs[0] = TRAP_ANIM_BIND;
 
     DestroyAnimVisualTask(taskId);
 }
 
-void sub_817351C(u8 taskId)
+void AnimTask_GetBattlersFromArg(u8 taskId)
 {
     gBattleAnimAttacker = gBattleSpritesDataPtr->animationData->animArg;
     gBattleAnimTarget = gBattleSpritesDataPtr->animationData->animArg >> 8;
