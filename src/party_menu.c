@@ -3084,7 +3084,7 @@ static u16 GetTutorMove(u8 tutor)
 
 static bool8 CanLearnTutorMove(u16 species, u8 tutor)
 {
-    if (sTutorLearnsets[species] & (1 << tutor))
+    if (gTutorLearnsets[species] & (1 << tutor))
         return TRUE;
     else
         return FALSE;

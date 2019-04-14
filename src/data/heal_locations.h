@@ -1,4 +1,4 @@
-static const struct HealLocation sHealLocations[] =
+const struct HealLocation gHealLocations[] =
 {
     {MAP_GROUP(LITTLEROOT_TOWN_BRENDANS_HOUSE_2F), MAP_NUM(LITTLEROOT_TOWN_BRENDANS_HOUSE_2F), 4, 2},
     {MAP_GROUP(LITTLEROOT_TOWN_MAYS_HOUSE_2F), MAP_NUM(LITTLEROOT_TOWN_MAYS_HOUSE_2F), 4, 2},
