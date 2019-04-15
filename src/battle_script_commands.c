@@ -4214,19 +4214,37 @@ static void atk49_moveend(void)
     {
         switch (gBattleScripting.atk49_state)
         {
-        case ATK49_SPIKY_SHIELD:
-            if (gProtectStructs[gBattlerTarget].spikyShielded
-                && gBattleMoves[gCurrentMove].flags & FLAG_MAKES_CONTACT
-                && GetBattlerAbility(gBattlerAttacker) != ABILITY_MAGIC_GUARD)
+        case ATK49_PROTECT_LIKE_EFFECT:
+            if (gBattleMoves[gCurrentMove].flags & FLAG_MAKES_CONTACT)
             {
-                gMoveResultFlags &= ~(MOVE_RESULT_NO_EFFECT);
-                gBattleMoveDamage = gBattleMons[gBattlerAttacker].maxHP / 8;
-                if (gBattleMoveDamage == 0)
-                    gBattleMoveDamage = 1;
-                PREPARE_MOVE_BUFFER(gBattleTextBuff1, MOVE_SPIKY_SHIELD);
-                BattleScriptPushCursor();
-                gBattlescriptCurrInstr = BattleScript_SpikyShieldEffect;
-                effect = 1;
+                if (gProtectStructs[gBattlerTarget].spikyShielded && GetBattlerAbility(gBattlerAttacker) != ABILITY_MAGIC_GUARD)
+                {
+                    gBattleMoveDamage = gBattleMons[gBattlerAttacker].maxHP / 8;
+                    if (gBattleMoveDamage == 0)
+                        gBattleMoveDamage = 1;
+                    PREPARE_MOVE_BUFFER(gBattleTextBuff1, MOVE_SPIKY_SHIELD);
+                    BattleScriptPushCursor();
+                    gBattlescriptCurrInstr = BattleScript_SpikyShieldEffect;
+                    effect = 1;
+                }
+                else if (gProtectStructs[gBattlerTarget].kingsShielded)
+                {
+                    i = gBattlerAttacker;
+                    gBattlerAttacker = gBattlerTarget;
+                    gBattlerTarget = i; // gBattlerTarget and gBattlerAttacker are swapped in order to activate Defiant, if applicable
+                    gBattleScripting.moveEffect = MOVE_EFFECT_ATK_MINUS_2;
+                    BattleScriptPushCursor();
+                    gBattlescriptCurrInstr = BattleScript_KingsShieldEffect;
+                    effect = 1;
+                }
+                else if (gProtectStructs[gBattlerTarget].banefulBunkered)
+                {
+                    gBattleScripting.moveEffect = MOVE_EFFECT_POISON | MOVE_EFFECT_AFFECTS_USER;
+                    PREPARE_MOVE_BUFFER(gBattleTextBuff1, MOVE_BANEFUL_BUNKER);
+                    BattleScriptPushCursor();
+                    gBattlescriptCurrInstr = BattleScript_BanefulBunkerEffect;
+                    effect = 1;
+                }
             }
             gBattleScripting.atk49_state++;
             break;

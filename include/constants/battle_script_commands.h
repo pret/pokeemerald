@@ -162,7 +162,7 @@
 #define ATK48_DONT_CHECK_LOWER      0x8
 
 // atk49, moveend cases
-#define ATK49_SPIKY_SHIELD 0
+#define ATK49_PROTECT_LIKE_EFFECT 0
 #define ATK49_RAGE 1
 #define ATK49_DEFROST 2
 #define ATK49_SYNCHRONIZE_TARGET 3

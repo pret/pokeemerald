@@ -6416,11 +6416,29 @@ BattleScript_RoughSkinActivates::
 
 BattleScript_SpikyShieldEffect::
 	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE | HITMARKER_x100000
+	bichalfword gMoveResultFlags, MOVE_RESULT_NO_EFFECT
 	healthbarupdate BS_ATTACKER
 	datahpupdate BS_ATTACKER
 	printstring STRINGID_PKMNHURTSWITH
 	waitmessage 0x40
 	tryfaintmon BS_ATTACKER, FALSE, NULL
+	return
+
+BattleScript_KingsShieldEffect::
+	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE | HITMARKER_x100000
+	bichalfword gMoveResultFlags, MOVE_RESULT_NO_EFFECT
+	seteffectsecondary
+	setmoveeffect 0
+	copybyte sBATTLER, gBattlerTarget
+	copybyte gBattlerTarget, gBattlerAttacker
+	copybyte gBattlerAttacker, sBATTLER
+	return
+
+BattleScript_BanefulBunkerEffect::
+	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE | HITMARKER_IGNORE_SAFEGUARD | HITMARKER_x100000
+	bichalfword gMoveResultFlags, MOVE_RESULT_NO_EFFECT
+	seteffectsecondary
+	setmoveeffect 0
 	return
 
 BattleScript_CuteCharmActivates::
