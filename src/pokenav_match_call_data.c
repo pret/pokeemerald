@@ -1101,7 +1101,7 @@ static void MatchCall_GetMessage_Type4(match_call_t matchCall, u8 *dest)
     sub_8197080(dest);
 }
 
-void sub_81D1920(const match_call_text_data_t *sub0, u8 *dest)
+static void sub_81D1920(const match_call_text_data_t *sub0, u8 *dest)
 {
     u32 i;
     for (i = 0; sub0[i].text != NULL; i++)
@@ -1415,7 +1415,7 @@ NAKED const u8 *sub_81D1B40(u32 idx, u32 offset)
 }
 #endif
 
-s32 sub_81D1BD0(u32 idx)
+int sub_81D1BD0(u32 idx)
 {
     u32 i;
 
@@ -1429,9 +1429,9 @@ s32 sub_81D1BD0(u32 idx)
 
 bool32 sub_81D1BF8(u32 idx)
 {
-    s32 i;
+    int i;
 
-    for (i = 0; i < (s32)ARRAY_COUNT(sMatchCallHeaders); i++)
+    for (i = 0; i < (int)ARRAY_COUNT(sMatchCallHeaders); i++)
     {
         u32 r0 = MatchCall_GetRematchTableIdx(i);
         if (r0 != REMATCH_TABLE_ENTRIES && r0 == idx)
@@ -1442,7 +1442,7 @@ bool32 sub_81D1BF8(u32 idx)
 
 void SetMatchCallRegisteredFlag(void)
 {
-    s32 r0 = GetRematchIdxByTrainerIdx(gSpecialVar_0x8004);
+    int r0 = GetRematchIdxByTrainerIdx(gSpecialVar_0x8004);
     if (r0 >= 0)
         FlagSet(FLAG_MATCH_CALL_REGISTERED + r0);
 }
