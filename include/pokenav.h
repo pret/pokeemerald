@@ -87,7 +87,7 @@ int sub_81C9894(void);
 const u8 *sub_81CAF78(int index, u8 *arg1);
 
 // pokenav_unk_2.c
-u32 sub_81C99D4(void);
+void sub_81C99D4(void);
 void sub_81CAADC(void);
 
 // pokenav_unk_3.c
@@ -114,5 +114,10 @@ void sub_81CB050(struct Pokenav3Struct_Unk1C *arg0, u8 *str);
 int sub_81CB0C8(int rematchIndex);
 int sub_81CB0E4(int index);
 bool32 sub_81CAE08(int);
+
+// pokenav_unk_4.c
+u32 sub_81CB260(void);
+u32 sub_81CB2CC(void);
+void sub_81CB2E0(void);
 
 #endif //GUARD_POKENAV_H
