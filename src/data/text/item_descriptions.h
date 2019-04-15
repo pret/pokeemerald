@@ -207,6 +207,97 @@ const u8 gApicotBerryItemDescription[] = _("A hold item that\nraises SP. DEF in\
 const u8 gLansatBerryItemDescription[] = _("A hold item that\nups the critical-\nhit rate in a pinch.");
 const u8 gStarfBerryItemDescription[] = _("A hold item that\nsharply boosts a\nstat in a pinch.");
 const u8 gEnigmaBerryItemDescription[] = _("{POKEBLOCK} ingredient.\nPlant in loamy soil\nto grow a mystery.");
+
+static const u8 gItemDescription_OccaBerry[] = _(
+    "A hold item that\n"
+    "weakens a Fire\n"
+    "move if weak to it.");
+
+static const u8 gItemDescription_PasshoBerry[] = _(
+    "A hold item that\n"
+    "weakens a Water\n"
+    "move if weak to it.");
+
+static const u8 gItemDescription_WacanBerry[] = _(
+    "A hold item that\n"
+    "weakens a Electric\n"
+    "move if weak to it.");
+
+static const u8 gItemDescription_RindoBerry[] = _(
+    "A hold item that\n"
+    "weakens a Grass\n"
+    "move if weak to it.");
+
+static const u8 gItemDescription_YacheBerry[] = _(
+    "A hold item that\n"
+    "weakens a Ice\n"
+    "move if weak to it.");
+
+static const u8 gItemDescription_ChopleBerry[] = _(
+    "A hold item that\n"
+    "weakens a Fighting\n"
+    "move if weak to it.");
+
+static const u8 gItemDescription_KebiaBerry[] = _(
+    "A hold item that\n"
+    "weakens a Poison\n"
+    "move if weak to it.");
+
+static const u8 gItemDescription_ShucaBerry[] = _(
+    "A hold item that\n"
+    "weakens a Ground\n"
+    "move if weak to it.");
+
+static const u8 gItemDescription_CobaBerry[] = _(
+    "A hold item that\n"
+    "weakens a Flying\n"
+    "move if weak to it.");
+
+static const u8 gItemDescription_PayapaBerry[] = _(
+    "A hold item that\n"
+    "weakens a Psychic\n"
+    "move if weak to it.");
+
+static const u8 gItemDescription_TangaBerry[] = _(
+    "A hold item that\n"
+    "weakens a Bug\n"
+    "move if weak to it.");
+
+static const u8 gItemDescription_ChartiBerry[] = _(
+    "A hold item that\n"
+    "weakens a Rock\n"
+    "move if weak to it.");
+
+static const u8 gItemDescription_KasibBerry[] = _(
+    "A hold item that\n"
+    "weakens a Ghost\n"
+    "move if weak to it.");
+
+static const u8 gItemDescription_HabanBerry[] = _(
+    "A hold item that\n"
+    "weakens a Dragon\n"
+    "move if weak to it.");
+
+static const u8 gItemDescription_ColburBerry[] = _(
+    "A hold item that\n"
+    "weakens a Dark\n"
+    "move if weak to it.");
+
+static const u8 gItemDescription_BabiriBerry[] = _(
+    "A hold item that\n"
+    "weakens a Steel\n"
+    "move if weak to it.");
+
+static const u8 gItemDescription_ChilanBerry[] = _(
+    "A hold item that\n"
+    "weakens a Normal\n"
+    "move.");
+
+static const u8 gItemDescription_RoseliBerry[] = _(
+    "A hold item that\n"
+    "weakens a Fairy\n"
+    "move if weak to it.");
+
 // Hold items
 const u8 gBrightPowderItemDescription[] = _("A hold item that\ncasts a glare to\nreduce accuracy.");
 const u8 gWhiteHerbItemDescription[] = _("A hold item that\nrestores any\nlowered stat.");

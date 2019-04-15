@@ -2070,6 +2070,258 @@ const struct Item gItems[] =
         .secondaryId = 0,
     },
 
+    [ITEM_OCCA_BERRY] =
+    {
+        .name = _("Occa Berry"),
+        .itemId = ITEM_OCCA_BERRY,
+        .price = 20,
+        .holdEffect = HOLD_EFFECT_RESIST_BERRY,
+        .holdEffectParam = 0,
+        .description = gItemDescription_OccaBerry,
+        .pocket = POCKET_BERRIES,
+        .type = 4,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .secondaryId = 0,
+    },
+
+    [ITEM_PASSHO_BERRY] =
+    {
+        .name = _("Passho Berry"),
+        .itemId = ITEM_PASSHO_BERRY,
+        .price = 20,
+        .holdEffect = HOLD_EFFECT_RESIST_BERRY,
+        .holdEffectParam = 0,
+        .description = gItemDescription_PasshoBerry,
+        .pocket = POCKET_BERRIES,
+        .type = 4,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .secondaryId = 0,
+    },
+
+    [ITEM_WACAN_BERRY] =
+    {
+        .name = _("Wacan Berry"),
+        .itemId = ITEM_WACAN_BERRY,
+        .price = 20,
+        .holdEffect = HOLD_EFFECT_RESIST_BERRY,
+        .holdEffectParam = 0,
+        .description = gItemDescription_WacanBerry,
+        .pocket = POCKET_BERRIES,
+        .type = 4,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .secondaryId = 0,
+    },
+
+    [ITEM_RINDO_BERRY] =
+    {
+        .name = _("Rindo Berry"),
+        .itemId = ITEM_RINDO_BERRY,
+        .price = 20,
+        .holdEffect = HOLD_EFFECT_RESIST_BERRY,
+        .holdEffectParam = 0,
+        .description = gItemDescription_RindoBerry,
+        .pocket = POCKET_BERRIES,
+        .type = 4,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .secondaryId = 0,
+    },
+
+    [ITEM_YACHE_BERRY] =
+    {
+        .name = _("Yache Berry"),
+        .itemId = ITEM_YACHE_BERRY,
+        .price = 20,
+        .holdEffect = HOLD_EFFECT_RESIST_BERRY,
+        .holdEffectParam = 0,
+        .description = gItemDescription_YacheBerry,
+        .pocket = POCKET_BERRIES,
+        .type = 4,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .secondaryId = 0,
+    },
+
+    [ITEM_CHOPLE_BERRY] =
+    {
+        .name = _("Chople Berry"),
+        .itemId = ITEM_CHOPLE_BERRY,
+        .price = 20,
+        .holdEffect = HOLD_EFFECT_RESIST_BERRY,
+        .holdEffectParam = 0,
+        .description = gItemDescription_ChopleBerry,
+        .pocket = POCKET_BERRIES,
+        .type = 4,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .secondaryId = 0,
+    },
+
+    [ITEM_KEBIA_BERRY] =
+    {
+        .name = _("Kebia Berry"),
+        .itemId = ITEM_KEBIA_BERRY,
+        .price = 20,
+        .holdEffect = HOLD_EFFECT_RESIST_BERRY,
+        .holdEffectParam = 0,
+        .description = gItemDescription_KebiaBerry,
+        .pocket = POCKET_BERRIES,
+        .type = 4,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .secondaryId = 0,
+    },
+
+    [ITEM_SHUCA_BERRY] =
+    {
+        .name = _("Shuca Berry"),
+        .itemId = ITEM_SHUCA_BERRY,
+        .price = 20,
+        .holdEffect = HOLD_EFFECT_RESIST_BERRY,
+        .holdEffectParam = 0,
+        .description = gItemDescription_ShucaBerry,
+        .pocket = POCKET_BERRIES,
+        .type = 4,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .secondaryId = 0,
+    },
+
+    [ITEM_COBA_BERRY] =
+    {
+        .name = _("Coba Berry"),
+        .itemId = ITEM_COBA_BERRY,
+        .price = 20,
+        .holdEffect = HOLD_EFFECT_RESIST_BERRY,
+        .holdEffectParam = 0,
+        .description = gItemDescription_CobaBerry,
+        .pocket = POCKET_BERRIES,
+        .type = 4,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .secondaryId = 0,
+    },
+
+    [ITEM_PAYAPA_BERRY] =
+    {
+        .name = _("Payapa Berry"),
+        .itemId = ITEM_PAYAPA_BERRY,
+        .price = 20,
+        .holdEffect = HOLD_EFFECT_RESIST_BERRY,
+        .holdEffectParam = 0,
+        .description = gItemDescription_PayapaBerry,
+        .pocket = POCKET_BERRIES,
+        .type = 4,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .secondaryId = 0,
+    },
+
+    [ITEM_TANGA_BERRY] =
+    {
+        .name = _("Tanga Berry"),
+        .itemId = ITEM_TANGA_BERRY,
+        .price = 20,
+        .holdEffect = HOLD_EFFECT_RESIST_BERRY,
+        .holdEffectParam = 0,
+        .description = gItemDescription_TangaBerry,
+        .pocket = POCKET_BERRIES,
+        .type = 4,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .secondaryId = 0,
+    },
+
+    [ITEM_CHARTI_BERRY] =
+    {
+        .name = _("Charti Berry"),
+        .itemId = ITEM_CHARTI_BERRY,
+        .price = 20,
+        .holdEffect = HOLD_EFFECT_RESIST_BERRY,
+        .holdEffectParam = 0,
+        .description = gItemDescription_ChartiBerry,
+        .pocket = POCKET_BERRIES,
+        .type = 4,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .secondaryId = 0,
+    },
+
+    [ITEM_KASIB_BERRY] =
+    {
+        .name = _("Kasib Berry"),
+        .itemId = ITEM_KASIB_BERRY,
+        .price = 20,
+        .holdEffect = HOLD_EFFECT_RESIST_BERRY,
+        .holdEffectParam = 0,
+        .description = gItemDescription_KasibBerry,
+        .pocket = POCKET_BERRIES,
+        .type = 4,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .secondaryId = 0,
+    },
+
+    [ITEM_HABAN_BERRY] =
+    {
+        .name = _("Haban Berry"),
+        .itemId = ITEM_HABAN_BERRY,
+        .price = 20,
+        .holdEffect = HOLD_EFFECT_RESIST_BERRY,
+        .holdEffectParam = 0,
+        .description = gItemDescription_HabanBerry,
+        .pocket = POCKET_BERRIES,
+        .type = 4,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .secondaryId = 0,
+    },
+
+    [ITEM_COLBUR_BERRY] =
+    {
+        .name = _("Colbur Berry"),
+        .itemId = ITEM_COLBUR_BERRY,
+        .price = 20,
+        .holdEffect = HOLD_EFFECT_RESIST_BERRY,
+        .holdEffectParam = 0,
+        .description = gItemDescription_ColburBerry,
+        .pocket = POCKET_BERRIES,
+        .type = 4,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .secondaryId = 0,
+    },
+
+    [ITEM_BABIRI_BERRY] =
+    {
+        .name = _("Babiri Berry"),
+        .itemId = ITEM_BABIRI_BERRY,
+        .price = 20,
+        .holdEffect = HOLD_EFFECT_RESIST_BERRY,
+        .holdEffectParam = 0,
+        .description = gItemDescription_BabiriBerry,
+        .pocket = POCKET_BERRIES,
+        .type = 4,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .secondaryId = 0,
+    },
+
+    [ITEM_CHILAN_BERRY] =
+    {
+        .name = _("Chilan Berry"),
+        .itemId = ITEM_CHILAN_BERRY,
+        .price = 20,
+        .holdEffect = HOLD_EFFECT_RESIST_BERRY,
+        .holdEffectParam = 0,
+        .description = gItemDescription_ChilanBerry,
+        .pocket = POCKET_BERRIES,
+        .type = 4,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .secondaryId = 0,
+    },
+
+    [ITEM_ROSELI_BERRY] =
+    {
+        .name = _("Roseli Berry"),
+        .itemId = ITEM_ROSELI_BERRY,
+        .price = 20,
+        .holdEffect = HOLD_EFFECT_RESIST_BERRY,
+        .holdEffectParam = 0,
+        .description = gItemDescription_RoseliBerry,
+        .pocket = POCKET_BERRIES,
+        .type = 4,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .secondaryId = 0,
+    },
+
 // Hold items
 
     [ITEM_BRIGHT_POWDER] =
@@ -2949,7 +3201,7 @@ const struct Item gItems[] =
 
     [ITEM_POKEBLOCK_CASE] =
     {
-        .name = _("{Pokeblock} Case"),
+        .name = _("{POKEBLOCK} CASE"),
         .itemId = ITEM_POKEBLOCK_CASE,
         .price = 0,
         .description = gPokeblockCaseItemDescription,
