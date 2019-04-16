@@ -1,6 +1,8 @@
 #ifndef GUARD_POKENAV_H
 #define GUARD_POKENAV_H
 
+#include "bg.h"
+
 typedef u32 (*LoopedTask)(int state);
 
 // Return values of LoopedTask functions.
@@ -56,6 +58,12 @@ bool32 CanViewRibbonsMenu(void);
 
 // pokenav_match_call_ui.c
 u32 GetSelectedMatchCall(void);
+bool32 sub_81C8224(void);
+int MatchCall_MoveCursorUp(void);
+int MatchCall_MoveCursorDown(void);
+int MatchCall_PageDown(void);
+int MatchCall_PageUp(void);
+bool32 sub_81C8630(void);
 
 // pokenav_match_call_data.c
 bool32 sub_81D17E8(u32 idx);
@@ -74,6 +82,12 @@ bool32 InitPokenavMainMenu(void);
 void CopyPaletteIntoBufferUnfaded(const u16 *palette, u32 bufferOffset, u32 size);
 void sub_81C7850(u32 a0);
 u32 sub_81C786C(void);
+void LoadLeftHeaderGfxForIndex(u32 arg0);
+void sub_81C7FA0(u32 arg0, bool32 arg1, bool32 arg2);
+void sub_81C7AC0(int a0);
+bool32 sub_81C8010(void);
+void InitBgTemplates(const struct BgTemplate *templates, int count);
+bool32 IsPaletteFadeActive(void);
 
 // pokenav_unk_1.c
 bool32 sub_81C9298(void);
