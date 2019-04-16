@@ -505,7 +505,7 @@ struct MatchCallWindowState *GetMatchCallWindowStruct(void)
     return &structPtr->unk888;
 }
 
-u32 MatchCall_MoveCursorUp(void)
+int MatchCall_MoveCursorUp(void)
 {
     struct MatchCallWindowState *structPtr;
     structPtr = GetMatchCallWindowStruct();
@@ -529,7 +529,7 @@ u32 MatchCall_MoveCursorUp(void)
     }
 }
 
-u32 MatchCall_MoveCursorDown(void)
+int MatchCall_MoveCursorDown(void)
 {
     struct MatchCallWindowState *structPtr;
     structPtr = GetMatchCallWindowStruct();
@@ -554,7 +554,7 @@ u32 MatchCall_MoveCursorDown(void)
     return 2;
 }
 
-u32 MatchCall_PageUp(void)
+int MatchCall_PageUp(void)
 {
     struct MatchCallWindowState *structPtr;
     s32 scroll;
@@ -580,7 +580,7 @@ u32 MatchCall_PageUp(void)
     }
 }
 
-u32 MatchCall_PageDown(void)
+int MatchCall_PageDown(void)
 {
     struct MatchCallWindowState *structPtr;
     structPtr = GetMatchCallWindowStruct();
