@@ -468,7 +468,8 @@ bool8 WasUnableToUseMove(u8 battler)
         || gProtectStructs[battler].flag2Unknown
         || gProtectStructs[battler].flinchImmobility
         || gProtectStructs[battler].confusionSelfDmg
-        || gProtectStructs[battler].powderSelfDmg)
+        || gProtectStructs[battler].powderSelfDmg
+        || gProtectStructs[battler].usedThroatChopPreventedMove)
         return TRUE;
     else
         return FALSE;
@@ -679,6 +680,21 @@ u8 TrySetCantSelectMoveBattleScript(void)
         }
     }
 
+    if (gDisableStructs[gActiveBattler].throatChopTimer != 0 && gBattleMoves[move].flags & FLAG_SOUND)
+    {
+        gCurrentMove = move;
+        if (gBattleTypeFlags & BATTLE_TYPE_PALACE)
+        {
+            gPalaceSelectionBattleScripts[gActiveBattler] = BattleScript_SelectingNotAllowedMoveThroatChopInPalace;
+            gProtectStructs[gActiveBattler].palaceUnableToUseMove = 1;
+        }
+        else
+        {
+            gSelectionBattleScripts[gActiveBattler] = BattleScript_SelectingNotAllowedMoveThroatChop;
+            limitations++;
+        }
+    }
+
     if (GetImprisonedMovesCount(gActiveBattler, move))
     {
         gCurrentMove = move;
@@ -818,6 +834,8 @@ u8 CheckMoveLimitations(u8 battlerId, u8 unusableMoves, u8 check)
         else if (IsHealBlockPreventingMove(battlerId, gBattleMons[battlerId].moves[i]))
             unusableMoves |= gBitTable[i];
         else if (IsBelchPreventingMove(battlerId, gBattleMons[battlerId].moves[i]))
+            unusableMoves |= gBitTable[i];
+        else if (gDisableStructs[battlerId].throatChopTimer && gBattleMoves[gBattleMons[battlerId].moves[i]].flags & FLAG_SOUND)
             unusableMoves |= gBitTable[i];
     }
     return unusableMoves;
@@ -1346,6 +1364,7 @@ enum
 	ENDTURN_ROOST,
 	ENDTURN_ELECTRIFY,
 	ENDTURN_POWDER,
+	ENDTURN_THROAT_CHOP,
 	ENDTURN_BATTLER_COUNT
 };
 
@@ -1786,6 +1805,14 @@ u8 DoBattlerEndTurnEffects(void)
             case ENDTURN_POWDER:
                 gBattleMons[gActiveBattler].status2 &= ~(STATUS2_POWDER);
                 gBattleStruct->turnEffectsTracker++;
+            case ENDTURN_THROAT_CHOP:
+                if (gDisableStructs[gActiveBattler].throatChopTimer && --gDisableStructs[gActiveBattler].throatChopTimer == 0)
+                {
+                    BattleScriptExecute(BattleScript_ThroatChopEndTurn);
+                    effect++;
+                }
+                gBattleStruct->turnEffectsTracker++;
+                break;
             case ENDTURN_BATTLER_COUNT:  // done
                 gBattleStruct->turnEffectsTracker = 0;
                 gBattleStruct->turnEffectsBattlerId++;
@@ -1995,27 +2022,28 @@ void TryClearRageAndFuryCutter(void)
 
 enum
 {
-	CANCELLER_FLAGS,
-	CANCELLER_ASLEEP,
-	CANCELLER_FROZEN,
-	CANCELLER_TRUANT,
-	CANCELLER_RECHARGE,
-	CANCELLER_FLINCH,
-	CANCELLER_DISABLED,
-	CANCELLER_GRAVITY,
-	CANCELLER_HEAL_BLOCKED,
-	CANCELLER_TAUNTED,
-	CANCELLER_IMPRISONED,
-	CANCELLER_CONFUSED,
-	CANCELLER_PARALYSED,
-	CANCELLER_IN_LOVE,
-	CANCELLER_BIDE,
-	CANCELLER_THAW,
-	CANCELLER_POWDER_MOVE,
-	CANCELLER_POWDER_STATUS,
-	CANCELLER_END,
-	CANCELLER_PSYCHIC_TERRAIN,
-	CANCELLER_END2,
+    CANCELLER_FLAGS,
+    CANCELLER_ASLEEP,
+    CANCELLER_FROZEN,
+    CANCELLER_TRUANT,
+    CANCELLER_RECHARGE,
+    CANCELLER_FLINCH,
+    CANCELLER_DISABLED,
+    CANCELLER_GRAVITY,
+    CANCELLER_HEAL_BLOCKED,
+    CANCELLER_TAUNTED,
+    CANCELLER_IMPRISONED,
+    CANCELLER_CONFUSED,
+    CANCELLER_PARALYSED,
+    CANCELLER_IN_LOVE,
+    CANCELLER_BIDE,
+    CANCELLER_THAW,
+    CANCELLER_POWDER_MOVE,
+    CANCELLER_POWDER_STATUS,
+    CANCELLER_THROAT_CHOP,
+    CANCELLER_END,
+    CANCELLER_PSYCHIC_TERRAIN,
+    CANCELLER_END2,
 };
 
 u8 AtkCanceller_UnableToUseMove(void)
@@ -2334,6 +2362,17 @@ u8 AtkCanceller_UnableToUseMove(void)
                     gBattleMoveDamage = gBattleMons[gBattlerAttacker].maxHP / 4;
                     gBattlescriptCurrInstr = BattleScript_MoveUsedPowder;
                 }
+            }
+            gBattleStruct->atkCancellerTracker++;
+            break;
+        case CANCELLER_THROAT_CHOP: 
+            if (gDisableStructs[gBattlerAttacker].throatChopTimer && gBattleMoves[gCurrentMove].flags & FLAG_SOUND)
+            {
+                gProtectStructs[gBattlerAttacker].usedThroatChopPreventedMove = 1;
+                CancelMultiTurnMoves(gBattlerAttacker);
+                gBattlescriptCurrInstr = BattleScript_MoveUsedIsThroatChopPrevented;
+                gHitMarker |= HITMARKER_UNABLE_TO_USE_MOVE;
+                effect = 1;
             }
             gBattleStruct->atkCancellerTracker++;
             break;
