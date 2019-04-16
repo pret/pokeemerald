@@ -82,7 +82,6 @@ struct MatchCallListTemplate
 
 extern void sub_81CBD48(u16 windowId, u32 a1);
 extern void sub_81DB620(u32 windowId, u32 a1, u32 a2, u32 a3, u32 a4);
-extern u8 *sub_81CAFD8(u16 a0, u32 a1);
 
 void sub_81C82E4(struct UnknownSubStruct_81C81D4 *a0);
 u32 sub_81C91AC(struct UnknownInnerStruct_81C81D4 *a0, const struct BgTemplate *a1, struct MatchCallListTemplate *a2, s32 a3);

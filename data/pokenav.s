@@ -3,17 +3,6 @@
 
 	.section .rodata
 
-// pokenav_unk_1.s
-gUnknown_0861FC54:: @ 861FC54
-	.byte 2
-	.byte 3
-	.byte 4
-	.byte 2
-	.byte 5
-
-gUnknown_0861FC59:: @ 861FC59
-	.byte 0, 1, 4, 4, 4, 4, 0, 1, 2, 4, 4, 4, 0, 1, 2, 3, 4, 4, 5, 6, 7, 4, 4, 4, 8, 9, 10, 11, 12, 13, 0
-
 // pokenav_unk_2.s
 gUnknown_0861FC78:: @ 861FC78
 	.incbin "graphics/pokenav/bg.gbapal"

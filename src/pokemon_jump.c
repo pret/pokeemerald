@@ -1,5 +1,8 @@
 #include "global.h"
 #include "alloc.h"
+#include "data.h"
+#include "decompress.h"
+#include "event_data.h"
 #include "item.h"
 #include "link.h"
 #include "link_rfu.h"
@@ -12,6 +15,7 @@
 #include "sprite.h"
 #include "string_util.h"
 #include "task.h"
+#include "trig.h"
 #include "pokemon.h"
 #include "pokemon_jump.h"
 #include "constants/rgb.h"
@@ -121,11 +125,25 @@ struct Unk802B078
     int unk8;
 };
 
+
+struct PokemonJump2
+{
+    u8 filler0[0xE];
+    u8 unkE;
+    u8 unkF;
+    u8 filler10[0x8198];
+    struct Sprite *unk81A8[MAX_RFU_PLAYERS];
+    struct Sprite *unk81BC[MAX_RFU_PLAYERS];
+    struct Sprite *unk81D0[8];
+    u8 filler81F0[0xC];
+    u8 unk81FC[MAX_RFU_PLAYERS];
+};
+
 static void sub_802AA60(struct PokemonJump1 *);
 void sub_802AA94(struct PokemonJump1 *);
 void sub_802AB20(void);
 static void sub_802AB98(void);
-s16 sub_802AC00(u16);
+static s16 sub_802AC00(u16 species);
 static void sub_802AC2C(struct PokemonJump1_MonInfo *monInfo, struct Pokemon *mon);
 static void sub_802AC6C(void);
 static void sub_802ACA0(u8 taskId);
@@ -191,8 +209,12 @@ static bool32 sub_802C7BC(void);
 static u16 sub_802C7E0(void);
 static void sub_802C808(u16, u16 *, u16 *);
 static u16 sub_802C818(void);
-u16 sub_802C838(void);
-u16 sub_802C880(u16, u16);
+static u16 sub_802C838(void);
+static u16 sub_802C880(u16 item, u16 quantity);
+static void sub_802CB7C(struct Sprite *sprite);
+static void sub_802CC40(struct Sprite *sprite);
+static void sub_802CD08(struct Sprite *sprite);
+static void sub_802CDD4(struct Sprite *sprite);
 void sub_802DC9C(u32);
 void sub_802D074(void *);
 void sub_802D0AC(void);
@@ -229,6 +251,7 @@ int sub_802E354(int, u16, u16);
 void sub_802E3A8(void);
 
 extern struct PokemonJump1 *gUnknown_02022CFC;
+extern struct PokemonJump2 *gUnknown_02022D00;
 
 const struct PokemonJumpMons gPkmnJumpSpecies[] =
 {
@@ -363,10 +386,17 @@ bool32 (* const gUnknown_082FB618[])(void) =
 extern const u16 gUnknown_082FB63C[];
 extern const u16 gUnknown_082FB64C[4];
 extern const u16 gUnknown_082FB654[];
-extern s8 gUnknown_082FB65C[][48];
-extern int gUnknown_082FB6EC[];
-extern int gUnknown_082FB714[];
-extern u16 gUnknown_082FB704[8];
+extern const s8 gUnknown_082FB65C[][48];
+extern const int gUnknown_082FB6EC[];
+extern const int gUnknown_082FB714[];
+extern const u16 gUnknown_082FB704[8];
+extern const struct CompressedSpriteSheet gUnknown_082FBE08[5];
+extern const struct SpritePalette gUnknown_082FBE30[2];
+extern const struct SpriteTemplate gUnknown_082FBE40;
+extern const struct SpriteTemplate gUnknown_082FC00C;
+extern const s16 gUnknown_082FBE58[];
+extern const s16 gUnknown_082FBEA8[8];
+extern const struct SpriteTemplate gUnknown_082FBEB8[4];
 
 void sub_802A9A8(u16 partyIndex, MainCallback callback)
 {
@@ -451,11 +481,9 @@ void sub_802AA94(struct PokemonJump1 *arg0)
     }
 }
 
-#ifdef NONMATCHING
 void sub_802AB20(void)
 {
-    int i;
-    s16 index;
+    int i, index;
 
     for (i = 0; i < MAX_RFU_PLAYERS; i++)
     {
@@ -465,61 +493,6 @@ void sub_802AB20(void)
 
     gUnknown_02022CFC->unk83AC = &gUnknown_02022CFC->unk82E4[gUnknown_02022CFC->unk6];
 }
-#else
-NAKED
-void sub_802AB20(void)
-{
-    asm_unified("\n\
-    push {r4-r7,lr}\n\
-    mov r7, r8\n\
-    push {r7}\n\
-    ldr r7, =gUnknown_02022CFC\n\
-    movs r6, 0\n\
-    movs r5, 0\n\
-    ldr r0, =gPkmnJumpSpecies\n\
-    mov r8, r0\n\
-    movs r4, 0x4\n\
-_0802AB32:\n\
-    ldr r0, [r7]\n\
-    adds r0, r5\n\
-    ldr r1, =0x000082a8\n\
-    adds r0, r1\n\
-    ldrh r0, [r0]\n\
-    bl sub_802AC00\n\
-    lsls r0, 16\n\
-    ldr r1, [r7]\n\
-    adds r1, r6\n\
-    asrs r0, 14\n\
-    add r0, r8\n\
-    ldrh r0, [r0, 0x2]\n\
-    ldr r2, =0x000082f0\n\
-    adds r1, r2\n\
-    strh r0, [r1]\n\
-    adds r6, 0x28\n\
-    adds r5, 0xC\n\
-    subs r4, 0x1\n\
-    cmp r4, 0\n\
-    bge _0802AB32\n\
-    ldr r0, =gUnknown_02022CFC\n\
-    ldr r1, [r0]\n\
-    ldr r0, =0x000083ac\n\
-    adds r3, r1, r0\n\
-    ldrb r2, [r1, 0x6]\n\
-    lsls r0, r2, 2\n\
-    adds r0, r2\n\
-    lsls r0, 3\n\
-    ldr r2, =0x000082e4\n\
-    adds r0, r2\n\
-    adds r1, r0\n\
-    str r1, [r3]\n\
-    pop {r3}\n\
-    mov r8, r3\n\
-    pop {r4-r7}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .pool");
-}
-#endif // NONMATCHING
 
 static void sub_802AB98(void)
 {
@@ -537,7 +510,7 @@ static void sub_802AB98(void)
     }
 }
 
-s16 sub_802AC00(u16 species)
+static s16 sub_802AC00(u16 species)
 {
     u32 i;
     for (i = 0; i < ARRAY_COUNT(gPkmnJumpSpecies); i++)
@@ -1840,7 +1813,7 @@ static void sub_802C398(int multiplayerId)
     sub_802DC80(multiplayerId, var1);
     if (!var1 && multiplayerId == gUnknown_02022CFC->unk6)
         sub_802C1BC();
-    
+
     player->unk0 = var1;
 }
 
@@ -2079,3 +2052,355 @@ static u16 sub_802C818(void)
     u16 index = Random() % ARRAY_COUNT(gUnknown_082FB704);
     return gUnknown_082FB704[index];
 }
+
+NAKED
+static u16 sub_802C838(void)
+{
+    asm_unified("\n\
+    push {r4-r6,lr}\n\
+    movs r5, 0\n\
+    movs r4, 0\n\
+    ldr r3, =gUnknown_02022CFC\n\
+    ldr r0, [r3]\n\
+    ldr r2, =gUnknown_082FB714\n\
+    ldr r1, [r0, 0x78]\n\
+    ldr r0, [r2]\n\
+    cmp r1, r0\n\
+    bcc _0802C874\n\
+    ldr r5, [r2, 0x4]\n\
+    adds r6, r3, 0\n\
+    adds r3, r2, 0x4\n\
+_0802C852:\n\
+    adds r3, 0x8\n\
+    adds r2, 0x8\n\
+    adds r4, 0x1\n\
+    cmp r4, 0x4\n\
+    bhi _0802C874\n\
+    ldr r0, [r6]\n\
+    ldr r1, [r0, 0x78]\n\
+    ldr r0, [r2]\n\
+    cmp r1, r0\n\
+    bcc _0802C874\n\
+    ldr r5, [r3]\n\
+    b _0802C852\n\
+    .pool\n\
+_0802C874:\n\
+    lsls r0, r5, 16\n\
+    lsrs r0, 16\n\
+    pop {r4-r6}\n\
+    pop {r1}\n\
+    bx r1");
+}
+
+static u16 sub_802C880(u16 item, u16 quantity)
+{
+    while (quantity && !CheckBagHasSpace(item, quantity))
+        quantity--;
+
+    return quantity;
+}
+
+u16 sub_802C8AC(void)
+{
+    return GetLinkPlayerCount();
+}
+
+u16 sub_802C8BC(void)
+{
+    return gUnknown_02022CFC->unk6;
+}
+
+struct PokemonJump1_MonInfo *sub_802C8C8(u8 multiplayerId)
+{
+    return &gUnknown_02022CFC->unk82A8[multiplayerId];
+}
+
+u8 *sub_802C8E8(u8 multiplayerId)
+{
+    return gUnknown_02022CFC->unk82E4[multiplayerId].unk1C;
+}
+
+bool32 sub_802C908(u16 species)
+{
+    return sub_802AC00(species) > -1;
+}
+
+void sub_802C920(void)
+{
+    int i;
+
+    for (i = 0; i < PARTY_SIZE; i++)
+    {
+        if (GetMonData(&gPlayerParty[i], MON_DATA_SANITY_HAS_SPECIES))
+        {
+            u16 species = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2);
+            if (sub_802C908(species))
+            {
+                gSpecialVar_Result = 1;
+                return;
+            }
+        }
+    }
+
+    gSpecialVar_Result = 0;
+}
+
+void sub_802C974(struct PokemonJump2 *arg0)
+{
+    int i;
+
+    for (i = 0; i < ARRAY_COUNT(gUnknown_082FBE08); i++)
+        LoadCompressedSpriteSheet(&gUnknown_082FBE08[i]);
+
+    for (i = 0; i < ARRAY_COUNT(gUnknown_082FBE30); i++)
+        LoadSpritePalette(&gUnknown_082FBE30[i]);
+
+    arg0->unkE = IndexOfSpritePaletteTag(5);
+    arg0->unkF = IndexOfSpritePaletteTag(6);
+}
+
+static void sub_802C9BC(struct Sprite *sprite)
+{
+    int i;
+    for (i = 0; i < 8; i++)
+        sprite->data[i] = 0;
+}
+
+void sub_802C9D4(struct PokemonJump2 *arg0, struct PokemonJump1_MonInfo *jumpMon, u16 x, u16 y, u8 multiplayerId)
+{
+    struct SpriteTemplate spriteTemplate;
+    struct SpriteSheet spriteSheet;
+    struct CompressedSpritePalette spritePalette;
+    u8 *buffer;
+    u8 *unusedBuffer;
+    u8 subpriority;
+    u8 spriteId;
+
+    spriteTemplate = gUnknown_082FBE40;
+    buffer = Alloc(0x2000);
+    unusedBuffer = Alloc(0x800);
+    if (multiplayerId == sub_802C8BC())
+        subpriority = 3;
+    else
+        subpriority = multiplayerId + 4;
+
+    if (buffer && unusedBuffer)
+    {
+        HandleLoadSpecialPokePic(
+            &gMonFrontPicTable[jumpMon->species],
+            buffer,
+            jumpMon->species,
+            jumpMon->personality);
+
+        spriteSheet.data = buffer;
+        spriteSheet.tag = multiplayerId;
+        spriteSheet.size = 0x800;
+        LoadSpriteSheet(&spriteSheet);
+
+        spritePalette.data = GetFrontSpritePalFromSpeciesAndPersonality(jumpMon->species, jumpMon->otId, jumpMon->personality);
+        spritePalette.tag = multiplayerId;
+        LoadCompressedSpritePalette(&spritePalette);
+
+        Free(buffer);
+        Free(unusedBuffer);
+
+        spriteTemplate.tileTag += multiplayerId;
+        spriteTemplate.paletteTag += multiplayerId;
+        spriteId = CreateSprite(&spriteTemplate, x, y, subpriority);
+        if (spriteId != MAX_SPRITES)
+        {
+            arg0->unk81A8[multiplayerId] = &gSprites[spriteId];
+            arg0->unk81FC[multiplayerId] = subpriority;
+            return;
+        }
+    }
+
+    arg0->unk81A8[multiplayerId] = NULL;
+}
+
+void sub_802CB14(struct PokemonJump2 *arg0, int multiplayerId)
+{
+    sub_802C9BC(arg0->unk81BC[multiplayerId]);
+    arg0->unk81BC[multiplayerId]->data[7] = arg0->unk81A8[multiplayerId] - gSprites;
+    arg0->unk81BC[multiplayerId]->invisible = 0;
+    arg0->unk81BC[multiplayerId]->pos1.y = 96;
+    arg0->unk81BC[multiplayerId]->callback = sub_802CB7C;
+    StartSpriteAnim(arg0->unk81BC[multiplayerId], 1);
+}
+
+static void sub_802CB7C(struct Sprite *sprite)
+{
+    switch (sprite->data[0])
+    {
+    case 0:
+        if (sprite->animEnded)
+        {
+            sprite->invisible = 1;
+            sprite->callback = SpriteCallbackDummy;
+        }
+        break;
+    case 1:
+        sprite->pos1.y--;
+        sprite->data[1]++;
+        if (sprite->pos1.y <= 72)
+        {
+            sprite->pos1.y = 72;
+            sprite->data[0]++;
+        }
+        break;
+    case 2:
+        if (++sprite->data[1] >= 48)
+        {
+            sprite->invisible = 1;
+            sprite->callback = SpriteCallbackDummy;
+        }
+        break;
+    }
+}
+
+void sub_802CBF0(struct PokemonJump2 *arg0, int multiplayerId)
+{
+    arg0->unk81A8[multiplayerId]->callback = sub_802CC40;
+    arg0->unk81A8[multiplayerId]->pos2.y = 0;
+    sub_802C9BC(arg0->unk81A8[multiplayerId]);
+}
+
+bool32 sub_802CC18(struct PokemonJump2 *arg0, int multiplayerId)
+{
+    return arg0->unk81A8[multiplayerId]->callback == sub_802CC40;
+}
+
+static void sub_802CC40(struct Sprite *sprite)
+{
+    if (++sprite->data[1] > 1)
+    {
+        if (++sprite->data[2] & 1)
+            sprite->pos2.y = 2;
+        else
+            sprite->pos2.y = -2;
+
+        sprite->data[1] = 0;
+    }
+
+    if (sprite->data[2] > 12)
+    {
+        sprite->pos2.y = 0;
+        sprite->callback = SpriteCallbackDummy;
+    }
+}
+
+void sub_802CC88(struct PokemonJump2 *arg0, int multiplayerId)
+{
+    sub_802C9BC(arg0->unk81A8[multiplayerId]);
+    arg0->unk81A8[multiplayerId]->callback = sub_802CD08;
+}
+
+void sub_802CCB0(struct PokemonJump2 *arg0)
+{
+    int i;
+    u16 numPlayers = sub_802C8AC();
+    for (i = 0; i < numPlayers; i++)
+    {
+        if (arg0->unk81A8[i]->callback == sub_802CD08)
+        {
+            arg0->unk81A8[i]->invisible = 0;
+            arg0->unk81A8[i]->callback = SpriteCallbackDummy;
+            arg0->unk81A8[i]->subpriority = 10;
+        }
+    }
+}
+
+static void sub_802CD08(struct Sprite *sprite)
+{
+    if (++sprite->data[0] > 3)
+    {
+        sprite->data[0] = 0;
+        sprite->invisible ^= 1;
+    }
+}
+
+void sub_802CD3C(struct PokemonJump2 *arg0)
+{
+    int i;
+    u16 numPlayers = sub_802C8AC();
+    for (i = 0; i < numPlayers; i++)
+        arg0->unk81A8[i]->subpriority = arg0->unk81FC[i];
+}
+
+void sub_802CD70(struct PokemonJump2 *arg0, int multiplayerId)
+{
+    sub_802C9BC(arg0->unk81A8[multiplayerId]);
+    arg0->unk81A8[multiplayerId]->callback = sub_802CDD4;
+}
+
+bool32 sub_802CD98(struct PokemonJump2 *arg0)
+{
+    int i;
+    u16 numPlayers = sub_802C8AC();
+    for (i = 0; i < numPlayers; i++)
+    {
+        if (arg0->unk81A8[i]->callback == sub_802CDD4)
+            return TRUE;
+    }
+
+    return FALSE;
+}
+
+static void sub_802CDD4(struct Sprite *sprite)
+{
+    switch (sprite->data[0])
+    {
+    case 0:
+        PlaySE(SE_JITE_PYOKO);
+        sprite->data[1] = 0;
+        sprite->data[0]++;
+        // fall through
+    case 1:
+        sprite->data[1] += 4;
+        if (sprite->data[1] > 0x7F)
+            sprite->data[1] = 0;
+
+        sprite->pos2.y = -(gSineTable[sprite->data[1]] >> 3);
+        if (sprite->data[1] == 0)
+        {
+            if (++sprite->data[2] < 2)
+                sprite->data[0] = 0;
+            else
+                sprite->callback = SpriteCallbackDummy;
+        }
+        break;
+    }
+}
+
+void sub_802CE48(struct PokemonJump2 *arg0, s16 x, s16 y, u8 multiplayerId)
+{
+    u8 spriteId = CreateSprite(&gUnknown_082FC00C, x, y, 1);
+    if (spriteId != MAX_SPRITES)
+    {
+        gSprites[spriteId].invisible = 1;
+        arg0->unk81BC[multiplayerId] = &gSprites[spriteId];
+    }
+}
+
+// void sub_802CE9C(struct PokemonJump2 *arg0)
+// {
+//     int i;
+//     int count;
+//     u8 spriteId;
+
+//     count = 0;
+//     for (i = 0; i < 4; i++)
+//     {
+//         spriteId = CreateSprite(&gUnknown_082FBEB8[i], gUnknown_082FBEA8[count], gUnknown_082FBE58[i * 10], 2);
+//         arg0->unk81D0[count] = &gSprites[spriteId];
+//         count++;
+//     }
+
+//     for (i = 0; i < 4; i++)
+//     {
+//         spriteId = CreateSprite(&gUnknown_082FBEB8[i], gUnknown_082FBEA8[count], gUnknown_082FBE58[i * 10], 2);
+//         arg0->unk81D0[count] = &gSprites[spriteId];
+//         arg0->unk81D0[count]->hFlip = 1;
+//         count++;
+//     }
+// }
