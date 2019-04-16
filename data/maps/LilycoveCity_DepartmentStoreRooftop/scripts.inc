@@ -1,8 +1,8 @@
 LilycoveCity_DepartmentStoreRooftop_MapScripts:: @ 8220207
-	map_script MAP_SCRIPT_ON_TRANSITION, LilycoveCity_DepartmentStoreRooftop_MapScript1_22020D
+	map_script MAP_SCRIPT_ON_TRANSITION, LilycoveCity_DepartmentStoreRooftop_MapScript1_OnTransition
 	.byte 0
 
-LilycoveCity_DepartmentStoreRooftop_MapScript1_22020D: @ 822020D
+LilycoveCity_DepartmentStoreRooftop_MapScript1_OnTransition: @ 822020D
 	getpricereduction 3
 	compare VAR_RESULT, 1
 	call_if_eq LilycoveCity_DepartmentStoreRooftop_EventScript_220227

@@ -1193,7 +1193,7 @@ EventScript_MoveMrBrineyToRoute108:: @ 82718B3
 	end
 
 EverGrandeCity_HallOfFame_EventScript_ResetEliteFour:: @ 82718CC
-	clearflag FLAG_DEFEATED_ELITE_4_SYDNEY
+	clearflag FLAG_DEFEATED_ELITE_4_SIDNEY
 	clearflag FLAG_DEFEATED_ELITE_4_PHOEBE
 	clearflag FLAG_DEFEATED_ELITE_4_GLACIA
 	clearflag FLAG_DEFEATED_ELITE_4_DRAKE
