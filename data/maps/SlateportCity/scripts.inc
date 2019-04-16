@@ -1,9 +1,9 @@
 SlateportCity_MapScripts:: @ 81DCC61
-	map_script MAP_SCRIPT_ON_TRANSITION, SlateportCity_MapScript1_1DCC6C
+	map_script MAP_SCRIPT_ON_TRANSITION, SlateportCity_MapScript1_OnTransition
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, SlateportCity_MapScript2_1DCD12
 	.byte 0
 
-SlateportCity_MapScript1_1DCC6C: @ 81DCC6C
+SlateportCity_MapScript1_OnTransition: @ 81DCC6C
 	setvar VAR_SLATEPORT_MUSEUM_1F_STATE, 0
 	call SlateportCity_EventScript_1DCC8D
 	compare VAR_SLATEPORT_STATE, 1
