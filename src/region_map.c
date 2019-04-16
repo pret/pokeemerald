@@ -493,7 +493,7 @@ void InitRegionMap(struct RegionMap *regionMap, bool8 zoomed)
     while (sub_8122DB0());
 }
 
-void sub_8122CF8(struct RegionMap *regionMap, struct BgTemplate *template, bool8 zoomed)
+void sub_8122CF8(struct RegionMap *regionMap, const struct BgTemplate *template, bool8 zoomed)
 {
     gRegionMap = regionMap;
     gRegionMap->initStep = 0;

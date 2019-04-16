@@ -27,7 +27,7 @@
 
 struct Pokenav4Struct
 {
-    u32 (*unk0)(void);
+    bool32 (*unk0)(void);
     u32 unk4;
     u8 filler8[0x6];
     u8 unkE;
