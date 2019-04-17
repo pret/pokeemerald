@@ -55,7 +55,6 @@ extern const struct CompressedSpriteSheet gUnknown_086201C4;
 extern const struct SpritePalette gUnknown_086201D4;
 extern const struct SpriteTemplate gUnknown_0862034C;
 extern const u32 gUnknown_08620244[];
-extern const u32 gUnknown_08620240[];
 
 struct UnknownPokenavSubstruct2
 {
@@ -759,39 +758,15 @@ _081CA0AA:\n\
 }
 #endif // NONMATCHING
 
-#ifdef NONMATCHING
+
 void sub_81CA0C8(void)
 {
-    u32 something;
-    u16 *ptr;
-    something = sub_81C9894() * 7;
-    ptr = (u16 *) (gUnknown_08620240 + something);
-    sub_81CA0EC(&gUnknown_08620244[something], *ptr, *(ptr + 1));
-    
+    u32 var = sub_81C9894() * 7;
+    sub_81CA0EC(gUnknown_08620244 + var,
+				*(gUnknown_08620244 + var - 1) & 0xFFFF,
+				*(gUnknown_08620244 + var - 1) >> 16);
 }
-#else
-NAKED
-void sub_81CA0C8(void)
-{
-    asm_unified("\n\
-    push {lr}\n\
-    bl sub_81C9894\n\
-    lsls r2, r0, 3\n\
-    subs r2, r0\n\
-    lsls r2, 2\n\
-    ldr r1, =gUnknown_08620244\n\
-    adds r0, r2, r1\n\
-    subs r1, 0x4\n\
-    adds r2, r1\n\
-    ldrh r1, [r2]\n\
-    ldrh r2, [r2, 0x2]\n\
-    bl sub_81CA0EC\n\
-    pop {r0}\n\
-    bx r0\n\
-    .pool\n\
-");
-}
-#endif // NONMATCHING
+
 
 
 
