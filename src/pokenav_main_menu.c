@@ -502,7 +502,7 @@ void sub_81C7990(u32 a0, u16 a1)
 }
 
 NAKED
-void sub_81C79BC(u16 *a0, u16 *a1, u32 a2, u32 a3, u32 a4, u32 a5)
+void sub_81C79BC(const u16 *a0, const u16 *a1, u32 a2, u32 a3, u32 a4, u16 *a5)
 {
     asm(".syntax unified\n\
     push {r4-r7,lr}\n\

@@ -8,6 +8,7 @@
 #include "event_object_movement.h"
 #include "field_player_avatar.h"
 #include "main.h"
+#include "match_call.h"
 #include "menu.h"
 #include "new_game.h"
 #include "overworld.h"
@@ -74,7 +75,6 @@ struct BattleFrontierStreakInfo
 EWRAM_DATA struct MatchCallState gMatchCallState = {0};
 EWRAM_DATA struct BattleFrontierStreakInfo gBattleFrontierStreakInfo = {0};
 
-bool32 SelectMatchCallMessage(int, u8 *);
 static u32 GetCurrentTotalMinutes(struct Time *);
 static u32 GetNumRegisteredNPCs(void);
 static u32 GetActiveMatchCallTrainerId(u32);
@@ -1098,13 +1098,13 @@ bool32 TryStartMatchCall(void)
     return FALSE;
 }
 
-void StartMatchCallFromScript(void)
+void StartMatchCallFromScript(u8 *message)
 {
     gMatchCallState.triggeredFromScript = 1;
     StartMatchCall();
 }
 
-bool8 IsMatchCallTaskActive(void)
+bool32 IsMatchCallTaskActive(void)
 {
     return FuncIsActiveTask(ExecuteMatchCall);
 }
@@ -2002,7 +2002,7 @@ void sub_8197080(u8 *destStr)
     Free(buffer);
 }
 
-void sub_8197184(u8 windowId, u32 destOffset, u32 paletteId)
+void sub_8197184(u32 windowId, u32 destOffset, u32 paletteId)
 {
     u8 bg = GetWindowAttribute(windowId, WINDOW_BG);
     LoadBgTiles(bg, sUnknown_0860EA6C, 0x100, destOffset);

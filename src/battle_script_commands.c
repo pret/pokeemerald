@@ -10192,7 +10192,7 @@ static void atkEF_handleballthrow(void)
                     ballMultiplier = 40;
                 break;
             case ITEM_FAST_BALL:
-                if (gBaseStats[gBattleMons[gBattlerTarget].species].baseSpeed >= 10)
+                if (gBaseStats[gBattleMons[gBattlerTarget].species].baseSpeed >= 100)
                     ballMultiplier = 40;
                 break;
             case ITEM_QUICK_BALL:

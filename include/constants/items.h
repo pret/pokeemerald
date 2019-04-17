@@ -703,6 +703,6 @@
 #define NUM_HIDDEN_MACHINES     8
 
 // Check if the item is one that can be used on a Pokemon.
-#define IS_POKEMON_ITEM(item) ((item) >= ITEM_POTION && (item) <= LAST_BERRY_INDEX)
+#define ITEM_HAS_EFFECT(item) ((item) >= ITEM_POTION && (item) <= LAST_BERRY_INDEX)
 
 #endif  // GUARD_CONSTANTS_ITEMS_H
