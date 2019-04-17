@@ -1874,7 +1874,7 @@ static bool32 map_loading_iteration_3(u8 *state)
     case 11:
         if (gWirelessCommType != 0)
         {
-            sub_800E0E8();
+            LoadWirelessStatusIndicatorSpriteGfx();
             CreateWirelessStatusIndicatorSprite(0, 0);
         }
         (*state)++;
@@ -2046,7 +2046,7 @@ static bool32 map_loading_iteration_2_link(u8 *state)
     case 11:
         if (gWirelessCommType != 0)
         {
-            sub_800E0E8();
+            LoadWirelessStatusIndicatorSpriteGfx();
             CreateWirelessStatusIndicatorSprite(0, 0);
         }
         (*state)++;

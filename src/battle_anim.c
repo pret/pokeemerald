@@ -1394,7 +1394,7 @@ const struct CompressedSpriteSheet gBattleAnimPicTable[] =
     {gBattleAnimSpriteGfx_GreenSpike, 0x0080, ANIM_TAG_GREEN_SPIKE},
     {gBattleAnimSpriteGfx_CircleOfLight, 0x0800, ANIM_TAG_WHITE_CIRCLE_OF_LIGHT},
     {gBattleAnimSpriteGfx_GlowyRedOrb, 0x0020, ANIM_TAG_GLOWY_BLUE_ORB},
-    {gBattleAnimSpriteGfx_RedBrick, 0x0080, ANIM_TAG_RED_BRICK},
+    {gBattleAnimSpriteGfx_Pokeblock, 0x0080, ANIM_TAG_POKEBLOCK},
     {gBattleAnimSpriteGfx_WhiteFeather, 0x0400, ANIM_TAG_WHITE_FEATHER},
     {gBattleAnimSpriteGfx_Sparkle6, 0x0080, ANIM_TAG_SPARKLE_6},
     {gBattleAnimSpriteGfx_Splash, 0x0800, ANIM_TAG_SPLASH},
@@ -1687,7 +1687,7 @@ const struct CompressedSpritePalette gBattleAnimPaletteTable[] =
     {gBattleAnimSpritePal_GreenSpike, ANIM_TAG_GREEN_SPIKE},
     {gBattleAnimSpritePal_WhiteCircleOfLight, ANIM_TAG_WHITE_CIRCLE_OF_LIGHT},
     {gBattleAnimSpritePal_GlowyBlueOrb, ANIM_TAG_GLOWY_BLUE_ORB},
-    {gBattleAnimSpritePal_RedBrick, ANIM_TAG_RED_BRICK},
+    {gBattleAnimSpritePal_Pokeblock, ANIM_TAG_POKEBLOCK},
     {gBattleAnimSpritePal_WhiteFeather, ANIM_TAG_WHITE_FEATHER},
     {gBattleAnimSpritePal_Sparkle6, ANIM_TAG_SPARKLE_6},
     {gBattleAnimSpritePal_Splash, ANIM_TAG_SPLASH},
@@ -2936,7 +2936,7 @@ s8 BattleAnimAdjustPanning2(s8 pan)
     return pan;
 }
 
-s16 KeepPanInRange(s16 panArg)
+s16 KeepPanInRange(s16 panArg, int oldPan)
 {
     s16 pan = panArg;
 

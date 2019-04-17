@@ -18,6 +18,7 @@
 #include "trig.h"
 #include "wallclock.h"
 #include "window.h"
+#include "constants/rgb.h"
 #include "constants/songs.h"
 
 // static declarations
@@ -671,7 +672,7 @@ static void LoadWallClockGraphics(void)
 
 static void WallClockInit(void)
 {
-    BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, 0);
+    BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB_BLACK);
     EnableInterrupts(INTR_FLAG_VBLANK);
     SetVBlankCallback(WallClockVblankCallback);
     SetMainCallback2(WallClockMainCallback);
@@ -864,7 +865,7 @@ static void Task_SetClock4(u8 taskId)
 static void Task_SetClock5(u8 taskId)
 {
     RtcInitLocalTimeOffset(gTasks[taskId].tHours, gTasks[taskId].tMinutes);
-    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
+    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
     gTasks[taskId].func = Task_SetClock6;
 }
 
@@ -896,7 +897,7 @@ static void Task_ViewClock2(u8 taskId)
 
 static void Task_ViewClock3(u8 taskId)
 {
-    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
+    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
     gTasks[taskId].func = Task_ViewClock4;
 }
 

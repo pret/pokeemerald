@@ -27,6 +27,7 @@
 #include "text_window.h"
 #include "overworld.h"
 #include "constants/event_objects.h"
+#include "constants/rgb.h"
 
 EWRAM_DATA static struct NamingScreenData *gNamingScreenData = NULL;
 extern u16 gKeyRepeatStartDelay;
@@ -463,7 +464,7 @@ static bool8 MainState_BeginFadeIn(void)
     CopyBgTilemapBufferToVram(2);
     CopyBgTilemapBufferToVram(3);
     BlendPalettes(-1, 16, 0);
-    BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, 0);
+    BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB_BLACK);
     gNamingScreenData->state++;
     return FALSE;
 }
@@ -517,7 +518,7 @@ static bool8 MainState_6(void)
 
 static bool8 MainState_BeginFadeInOut(void)
 {
-    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
+    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
     gNamingScreenData->state++;
     return FALSE;
 }

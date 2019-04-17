@@ -633,7 +633,7 @@ gText_0827E6C4:: @ 827E6C4
 	.string "{STR_VAR_1} was\n"
 	.string "unaffected.{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}$"
 
-gText_0827E6E3:: @ 827E6E3
+gText_RepeatedAppeal:: @ 827E6E3
 	.string "{STR_VAR_1} disappointed\n"
 	.string "by repeating an appeal.{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}$"
 

@@ -19,6 +19,7 @@
 #include "constants/species.h"
 #include "alloc.h"
 #include "easy_chat.h"
+#include "constants/rgb.h"
 
 extern const u16 gMailPalette_Orange[];
 extern const u16 gMailPalette_Harbor[];
@@ -417,7 +418,7 @@ static bool8 MailReadBuildGraphics(void)
             ShowBg(0);
             ShowBg(1);
             ShowBg(2);
-            BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, 0);
+            BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB_BLACK);
             gPaletteFade.bufferTransferDisabled = FALSE;
             sMailRead->callback2 = CB2_WaitForPaletteExitOnKeyPress;
             return TRUE;
@@ -526,7 +527,7 @@ static void CB2_ExitOnKeyPress(void)
 {
     if (gMain.newKeys & (A_BUTTON | B_BUTTON))
     {
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
         sMailRead->callback2 = CB2_ExitMailReadFreeVars;
     }
 }
