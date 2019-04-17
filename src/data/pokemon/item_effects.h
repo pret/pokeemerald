@@ -284,27 +284,7 @@ const u8 gItemEffect_XSpecial[8] = {
     [7] = 1,
 };
 
-const u8 gItemEffect_SunStone[6] = {
-    [4] = ITEM4_EVO_STONE,
-};
-
-const u8 gItemEffect_MoonStone[6] = {
-    [4] = ITEM4_EVO_STONE,
-};
-
-const u8 gItemEffect_FireStone[6] = {
-    [4] = ITEM4_EVO_STONE,
-};
-
-const u8 gItemEffect_ThunderStone[6] = {
-    [4] = ITEM4_EVO_STONE,
-};
-
-const u8 gItemEffect_WaterStone[6] = {
-    [4] = ITEM4_EVO_STONE,
-};
-
-const u8 gItemEffect_LeafStone[6] = {
+const u8 gItemEffect_EvoStone[6] = {
     [4] = ITEM4_EVO_STONE,
 };
 
@@ -450,12 +430,16 @@ const u8 *const gItemEffectTable[] =
     [ITEM_X_SPEED - ITEM_POTION] = gItemEffect_XSpeed,
     [ITEM_X_ACCURACY - ITEM_POTION] = gItemEffect_XAccuracy,
     [ITEM_X_SP_ATK - ITEM_POTION] = gItemEffect_XSpecial,
-    [ITEM_SUN_STONE - ITEM_POTION] = gItemEffect_SunStone,
-    [ITEM_MOON_STONE - ITEM_POTION] = gItemEffect_MoonStone,
-    [ITEM_FIRE_STONE - ITEM_POTION] = gItemEffect_FireStone,
-    [ITEM_THUNDER_STONE - ITEM_POTION] = gItemEffect_ThunderStone,
-    [ITEM_WATER_STONE - ITEM_POTION] = gItemEffect_WaterStone,
-    [ITEM_LEAF_STONE - ITEM_POTION] = gItemEffect_LeafStone,
+    [ITEM_SUN_STONE - ITEM_POTION] = gItemEffect_EvoStone,
+    [ITEM_MOON_STONE - ITEM_POTION] = gItemEffect_EvoStone,
+    [ITEM_FIRE_STONE - ITEM_POTION] = gItemEffect_EvoStone,
+    [ITEM_THUNDER_STONE - ITEM_POTION] = gItemEffect_EvoStone,
+    [ITEM_WATER_STONE - ITEM_POTION] = gItemEffect_EvoStone,
+    [ITEM_LEAF_STONE - ITEM_POTION] = gItemEffect_EvoStone,
+    [ITEM_DAWN_STONE - ITEM_POTION] = gItemEffect_EvoStone,
+    [ITEM_DUSK_STONE - ITEM_POTION] = gItemEffect_EvoStone,
+    [ITEM_SHINY_STONE - ITEM_POTION] = gItemEffect_EvoStone,
+    [ITEM_ICE_STONE - ITEM_POTION] = gItemEffect_EvoStone,
     [ITEM_CHERI_BERRY - ITEM_POTION] = gItemEffect_CheriBerry,
     [ITEM_CHESTO_BERRY - ITEM_POTION] = gItemEffect_ChestoBerry,
     [ITEM_PECHA_BERRY - ITEM_POTION] = gItemEffect_PechaBerry,
