@@ -44,6 +44,7 @@ u32 sub_81C98C4(void);
 void sub_81C7880(void);
 void sub_81CA094(void);
 void sub_81CA698(void);
+void sub_81CA0EC(const u32*, u16, u16);
 
 extern void *gUnknown_086201A0[];
 extern const u32 gUnknown_0861FD6C[];
@@ -57,6 +58,8 @@ extern const struct BgTemplate gUnknown_08620194[];
 extern const struct CompressedSpriteSheet gUnknown_086201C4;
 extern const struct SpritePalette gUnknown_086201D4;
 extern const struct SpriteTemplate gUnknown_0862034C;
+extern const u32 gUnknown_08620244[];
+extern const u32 gUnknown_08620240[];
 
 struct UnknownPokenavSubstruct2
 {
@@ -702,6 +705,111 @@ _081CA054:\n\
 ");
 }
 #endif // NONMATCHING
+
+#ifdef NONMATCHING
+void sub_81CA094(void)
+{
+	struct UnknownPokenavSubstruct2 *ptr;
+	s32 i;
+	s32 j;
+	struct Sprite *var;
+	struct Sprite **var3;
+	
+	ptr = GetSubstructPtr(2);
+	
+	for(i = 0, var = ptr->field_2C; i < 6; i++)
+	{
+		var3 = (struct Sprite **) var + i * 4;
+		
+	
+		for(j = 0; j < 4; j++)
+		{
+			FreeSpriteOamMatrix(*var3);
+			DestroySprite(*var3++);
+		}
+	}
+}
+#else
+NAKED
+void sub_81CA094(void)
+{
+    asm_unified("\n\
+  	push {r4-r7,lr}\n\
+	movs r0, 0x2\n\
+	bl GetSubstructPtr\n\
+	movs r1, 0\n\
+	adds r7, r0, 0\n\
+	adds r7, 0x2C\n\
+_081CA0A2:\n\
+	lsls r0, r1, 4\n\
+	adds r6, r1, 0x1\n\
+	adds r4, r0, r7\n\
+	movs r5, 0x3\n\
+_081CA0AA:\n\
+	ldr r0, [r4]\n\
+	bl FreeSpriteOamMatrix\n\
+	ldm r4!, {r0}\n\
+	bl DestroySprite\n\
+	subs r5, 0x1\n\
+	cmp r5, 0\n\
+	bge _081CA0AA\n\
+	adds r1, r6, 0\n\
+	cmp r1, 0x5\n\
+	ble _081CA0A2\n\
+	pop {r4-r7}\n\
+	pop {r0}\n\
+	bx r0\n\
+");
+}
+#endif // NONMATCHING
+
+#ifdef NONMATCHING
+void sub_81CA0C8(void)
+{
+	u32 something;
+	u16 *ptr;
+	something = sub_81C9894() * 7;
+	ptr = (u16 *) (gUnknown_08620240 + something);
+	sub_81CA0EC(&gUnknown_08620244[something], *ptr, *(ptr + 1));
+	
+}
+#else
+NAKED
+void sub_81CA0C8(void)
+{
+    asm_unified("\n\
+	push {lr}\n\
+	bl sub_81C9894\n\
+	lsls r2, r0, 3\n\
+	subs r2, r0\n\
+	lsls r2, 2\n\
+	ldr r1, =gUnknown_08620244\n\
+	adds r0, r2, r1\n\
+	subs r1, 0x4\n\
+	adds r2, r1\n\
+	ldrh r1, [r2]\n\
+	ldrh r2, [r2, 0x2]\n\
+	bl sub_81CA0EC\n\
+	pop {r0}\n\
+	bx r0\n\
+	.pool\n\
+");
+}
+#endif // NONMATCHING
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

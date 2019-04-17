@@ -3,56 +3,7 @@
 
 	.syntax unified
 
-@ File centered around AllocSubstruct(2)
-
-
-	thumb_func_start sub_81CA094
-sub_81CA094: @ 81CA094
-	push {r4-r7,lr}
-	movs r0, 0x2
-	bl GetSubstructPtr
-	movs r1, 0
-	adds r7, r0, 0
-	adds r7, 0x2C
-_081CA0A2:
-	lsls r0, r1, 4
-	adds r6, r1, 0x1
-	adds r4, r0, r7
-	movs r5, 0x3
-_081CA0AA:
-	ldr r0, [r4]
-	bl FreeSpriteOamMatrix
-	ldm r4!, {r0}
-	bl DestroySprite
-	subs r5, 0x1
-	cmp r5, 0
-	bge _081CA0AA
-	adds r1, r6, 0
-	cmp r1, 0x5
-	ble _081CA0A2
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_81CA094
-
-	thumb_func_start sub_81CA0C8
-sub_81CA0C8: @ 81CA0C8
-	push {lr}
-	bl sub_81C9894
-	lsls r2, r0, 3
-	subs r2, r0
-	lsls r2, 2
-	ldr r1, =gUnknown_08620244
-	adds r0, r2, r1
-	subs r1, 0x4
-	adds r2, r1
-	ldrh r1, [r2]
-	ldrh r2, [r2, 0x2]
-	bl sub_81CA0EC
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_81CA0C8
+@ File centered around AllocSubstruct(2)	
 
 	thumb_func_start sub_81CA0EC
 sub_81CA0EC: @ 81CA0EC
