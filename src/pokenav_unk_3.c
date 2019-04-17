@@ -382,13 +382,14 @@ u16 sub_81CB02C(int arg0)
     return state->unk4[arg0];
 }
 
-void sub_81CB050(struct Pokenav3Struct_Unk1C *arg0, u8 *str)
+void sub_81CB050(u32 arg0, u8 *str)
 {
+    struct Pokenav3Struct_Unk1C *var0 = (struct Pokenav3Struct_Unk1C *)arg0;
     const u8 *trainerName;
     const u8 *className;
-    if (!arg0->unk0)
+    if (!var0->unk0)
     {
-        int index = GetTrainerIdxByRematchIdx(arg0->unk2);
+        int index = GetTrainerIdxByRematchIdx(var0->unk2);
         const struct Trainer *trainer = &gTrainers[index];
         int class = trainer->trainerClass;
         className = gTrainerClassNames[class];
@@ -396,7 +397,7 @@ void sub_81CB050(struct Pokenav3Struct_Unk1C *arg0, u8 *str)
     }
     else
     {
-        sub_81D1A78(arg0->unk2, &className, &trainerName);
+        sub_81D1A78(var0->unk2, &className, &trainerName);
     }
 
     if (className && trainerName)

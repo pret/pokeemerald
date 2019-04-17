@@ -2002,7 +2002,7 @@ void sub_8197080(u8 *destStr)
     Free(buffer);
 }
 
-void sub_8197184(u8 windowId, u32 destOffset, u32 paletteId)
+void sub_8197184(u32 windowId, u32 destOffset, u32 paletteId)
 {
     u8 bg = GetWindowAttribute(windowId, WINDOW_BG);
     LoadBgTiles(bg, sUnknown_0860EA6C, 0x100, destOffset);
