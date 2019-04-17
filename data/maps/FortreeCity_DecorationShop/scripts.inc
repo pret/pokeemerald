@@ -14,22 +14,22 @@ FortreeCity_DecorationShop_EventScript_218020:: @ 8218020
 	faceplayer
 	message gUnknown_08272A21
 	waitmessage
-	pokemartdecoration FortreeCity_DecorationShop_PokemartDecor_218038
+	pokemartdecoration FortreeCity_DecorationShop_PokemartDecor_Desks
 	msgbox gUnknown_08272A3F, MSGBOX_DEFAULT
 	release
 	end
 
     .align 2
-FortreeCity_DecorationShop_PokemartDecor_218038: @ 8218038
-	.2byte 1
-	.2byte 2
-	.2byte 3
-	.2byte 4
-	.2byte 5
-	.2byte 7
-	.2byte 8
-	.2byte 9
-	.2byte 0
+FortreeCity_DecorationShop_PokemartDecor_Desks: @ 8218038
+	.2byte DECOR_SMALL_DESK
+	.2byte DECOR_POKEMON_DESK
+	.2byte DECOR_HEAVY_DESK
+	.2byte DECOR_RAGGED_DESK
+	.2byte DECOR_COMFORT_DESK
+	.2byte DECOR_BRICK_DESK
+	.2byte DECOR_CAMP_DESK
+	.2byte DECOR_HARD_DESK
+	.2byte DECOR_NONE
 	release
 	end
 
@@ -38,22 +38,22 @@ FortreeCity_DecorationShop_EventScript_21804C:: @ 821804C
 	faceplayer
 	message gUnknown_08272A21
 	waitmessage
-	pokemartdecoration FortreeCity_DecorationShop_PokemartDecor_218064
+	pokemartdecoration FortreeCity_DecorationShop_PokemartDecor_Chairs
 	msgbox gUnknown_08272A3F, MSGBOX_DEFAULT
 	release
 	end
 
 	.align 2
-FortreeCity_DecorationShop_PokemartDecor_218064: @ 8218064
-	.2byte 10
-	.2byte 11
-	.2byte 12
-	.2byte 15
-	.2byte 14
-	.2byte 16
-	.2byte 17
-	.2byte 18
-	.2byte 0
+FortreeCity_DecorationShop_PokemartDecor_Chairs: @ 8218064
+	.2byte DECOR_SMALL_CHAIR
+	.2byte DECOR_POKEMON_CHAIR
+	.2byte DECOR_HEAVY_CHAIR
+	.2byte DECOR_RAGGED_CHAIR
+	.2byte DECOR_COMFORT_CHAIR
+	.2byte DECOR_BRICK_CHAIR
+	.2byte DECOR_CAMP_CHAIR
+	.2byte DECOR_HARD_CHAIR
+	.2byte DECOR_NONE
 	release
 	end
 
