@@ -347,6 +347,18 @@ gBattleScriptsForMoveEffects:: @ 82D86A8
 	.4byte BattleScript_EffectVCreate
 	.4byte BattleScript_EffectMatBlock
 	.4byte BattleScript_EffectStompingTantrum
+	.4byte BattleScript_EffectCoreEnforcer
+
+BattleScript_EffectCoreEnforcer:
+	setmoveeffect MOVE_EFFECT_CORE_ENFORCER | MOVE_EFFECT_CERTAIN
+	goto BattleScript_EffectHit
+
+BattleScript_MoveEffectCoreEnforcer::
+	setgastroacid BattleScript_CoreEnforcerRet
+	printstring STRINGID_PKMNSABILITYSUPPRESSED
+	waitmessage 0x40
+BattleScript_CoreEnforcerRet:
+	return
 
 BattleScript_EffectVCreate:
 	setmoveeffect MOVE_EFFECT_V_CREATE | MOVE_EFFECT_AFFECTS_USER
