@@ -9124,7 +9124,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_CORE_ENFORCER] =
     {
-        .effect = EFFECT_PLACEHOLDER,
+        .effect = EFFECT_CORE_ENFORCER,
         .power = 100,
         .type = TYPE_DRAGON,
         .accuracy = 100,

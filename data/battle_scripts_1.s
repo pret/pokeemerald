@@ -347,9 +347,19 @@ gBattleScriptsForMoveEffects:: @ 82D86A8
 	.4byte BattleScript_EffectVCreate
 	.4byte BattleScript_EffectMatBlock
 	.4byte BattleScript_EffectStompingTantrum
-	.4byte BattleScript_EffectPlaceholder
-	.4byte BattleScript_EffectPlaceholder
+	.4byte BattleScript_EffectCoreEnforcer
 	.4byte BattleScript_EffectThroatChop
+
+BattleScript_EffectCoreEnforcer:
+	setmoveeffect MOVE_EFFECT_CORE_ENFORCER | MOVE_EFFECT_CERTAIN
+	goto BattleScript_EffectHit
+
+BattleScript_MoveEffectCoreEnforcer::
+	setgastroacid BattleScript_CoreEnforcerRet
+	printstring STRINGID_PKMNSABILITYSUPPRESSED
+	waitmessage 0x40
+BattleScript_CoreEnforcerRet:
+	return
 
 BattleScript_EffectVCreate:
 	setmoveeffect MOVE_EFFECT_V_CREATE | MOVE_EFFECT_AFFECTS_USER
@@ -6442,11 +6452,29 @@ BattleScript_RoughSkinActivates::
 
 BattleScript_SpikyShieldEffect::
 	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE | HITMARKER_x100000
+	bichalfword gMoveResultFlags, MOVE_RESULT_NO_EFFECT
 	healthbarupdate BS_ATTACKER
 	datahpupdate BS_ATTACKER
 	printstring STRINGID_PKMNHURTSWITH
 	waitmessage 0x40
 	tryfaintmon BS_ATTACKER, FALSE, NULL
+	return
+
+BattleScript_KingsShieldEffect::
+	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE | HITMARKER_x100000
+	bichalfword gMoveResultFlags, MOVE_RESULT_NO_EFFECT
+	seteffectsecondary
+	setmoveeffect 0
+	copybyte sBATTLER, gBattlerTarget
+	copybyte gBattlerTarget, gBattlerAttacker
+	copybyte gBattlerAttacker, sBATTLER
+	return
+
+BattleScript_BanefulBunkerEffect::
+	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE | HITMARKER_IGNORE_SAFEGUARD | HITMARKER_x100000
+	bichalfword gMoveResultFlags, MOVE_RESULT_NO_EFFECT
+	seteffectsecondary
+	setmoveeffect 0
 	return
 
 BattleScript_CuteCharmActivates::
