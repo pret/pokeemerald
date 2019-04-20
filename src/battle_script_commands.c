@@ -738,6 +738,7 @@ static const u16 sProtectSuccessRates[] = {USHRT_MAX, USHRT_MAX / 2, USHRT_MAX /
 #define METRONOME_FORBIDDEN_END         0xFFFF
 #define ASSIST_FORBIDDEN_END            0xFFFF
 #define COPYCAT_FORBIDDEN_END           0xFFFF
+#define INSTRUCT_FORBIDDEN_END          0xFFFF
 
 static const u16 sMovesForbiddenToCopy[] =
 {
@@ -771,6 +772,33 @@ static const u16 sMovesForbiddenToCopy[] =
     MOVE_FEINT,
     MOVE_KING_S_SHIELD,
     METRONOME_FORBIDDEN_END
+};
+
+
+static const u16 sMoveEffectsForbiddenToInstruct[] =
+{    
+    EFFECT_ASSIST,
+    //EFFECT_BEAK_BLAST,
+    EFFECT_BIDE,
+    EFFECT_FOCUS_PUNCH,
+    //EFFECT_GEOMANCY,
+    EFFECT_INSTRUCT,
+    EFFECT_ME_FIRST,
+    EFFECT_METRONOME,
+    EFFECT_MIRROR_MOVE,
+    EFFECT_NATURE_POWER,
+    EFFECT_PLACEHOLDER,
+    EFFECT_RECHARGE,
+    EFFECT_SEMI_INVULNERABLE,
+    //EFFECT_SHELL_TRAP,
+    EFFECT_SKETCH,
+    //EFFECT_SKY_DROP,
+    EFFECT_SKULL_BASH,
+    EFFECT_SLEEP_TALK,
+    EFFECT_SOLARBEAM,
+    EFFECT_TRANSFORM,
+    EFFECT_TWO_TURNS_ATTACK,
+    INSTRUCT_FORBIDDEN_END
 };
 
 static const u16 sNaturePowerMoves[] =
@@ -4408,6 +4436,7 @@ static void atk49_moveend(void)
             break;
         case ATK49_UPDATE_LAST_MOVES:
             gDisableStructs[gBattlerAttacker].usedMoves |= gBitTable[gCurrMovePos];
+            gBattleStruct->lastMoveTarget[gBattlerAttacker] = gBattlerTarget;
             if (gMoveResultFlags & (MOVE_RESULT_FAILED | MOVE_RESULT_DOESNT_AFFECT_FOE))
                 gBattleStruct->lastMoveFailed |= gBitTable[gBattlerAttacker];
             else
@@ -4517,6 +4546,8 @@ static void atk49_moveend(void)
             gBattleScripting.atk49_state++;
             break;
         case ATK49_CLEAR_BITS: // Clear bits active just while using a move.
+            if (gSpecialStatuses[gBattlerAttacker].instructedChosenTarget)
+                *(gBattleStruct->moveTarget + gBattlerAttacker) = gSpecialStatuses[gBattlerAttacker].instructedChosenTarget & 0x3;
             gProtectStructs[gBattlerAttacker].usesBouncedMove = 0;
             gBattleStruct->ateBoost[gBattlerAttacker] = 0;
             gStatuses3[gBattlerAttacker] &= ~(STATUS3_ME_FIRST);
@@ -7116,6 +7147,42 @@ static void atk76_various(void)
             gHitMarker &= ~(HITMARKER_ATTACKSTRING_PRINTED);
             gBattlerTarget = GetMoveTarget(gCalledMove, 0);
             gBattlescriptCurrInstr += 7;
+        }
+        return;
+    case VARIOUS_TRY_INSTRUCT:
+        for (i = 0; sMoveEffectsForbiddenToInstruct[i] != INSTRUCT_FORBIDDEN_END; i++)
+        {
+            if (sMoveEffectsForbiddenToInstruct[i] == gBattleMoves[gLastMoves[gBattlerTarget]].effect)
+                break;
+        }
+        if (gLastMoves[gBattlerTarget] == 0 || gLastMoves[gBattlerTarget] == 0xFFFF || sMoveEffectsForbiddenToInstruct[i] != INSTRUCT_FORBIDDEN_END
+            || gLastMoves[gBattlerTarget] == MOVE_STRUGGLE || gLastMoves[gBattlerTarget] == MOVE_KING_S_SHIELD)
+        {
+            gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 3);
+        }
+        else
+        {
+            gSpecialStatuses[gBattlerTarget].instructedChosenTarget = *(gBattleStruct->moveTarget + gBattlerTarget) | 0x4;
+            gBattlerAttacker = gBattlerTarget;
+            gCalledMove = gLastMoves[gBattlerAttacker];
+            for (i = 0; i < MAX_MON_MOVES; i++)
+            {
+                if (gBattleMons[gBattlerAttacker].moves[i] == gCalledMove)
+                {
+                    gCurrMovePos = i;
+                    i = 4;
+                    break;
+                }
+            }
+            if (i != 4 || gBattleMons[gBattlerAttacker].pp[gCurrMovePos] == 0)
+                gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 3);
+            else
+            {
+                gBattlerTarget = gBattleStruct->lastMoveTarget[gBattlerAttacker];
+                gHitMarker &= ~(HITMARKER_ATTACKSTRING_PRINTED);
+                PREPARE_MON_NICK_WITH_PREFIX_BUFFER(gBattleTextBuff1, gActiveBattler, gBattlerPartyIndexes[gActiveBattler]);
+                gBattlescriptCurrInstr += 7;   
+            }
         }
         return;
     case VARIOUS_ABILITY_POPUP:

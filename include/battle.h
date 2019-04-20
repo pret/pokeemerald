@@ -165,6 +165,7 @@ struct SpecialStatus
     u8 sturdied:1;
     u8 stormDrainRedirected:1;
     u8 switchInAbilityDone:1;
+    u8 instructedChosenTarget:3;
     s32 dmg;
     s32 physicalDmg;
     s32 specialDmg;
@@ -516,6 +517,7 @@ struct BattleStruct
     u8 ateBerry[2]; // array id determined by side, each party pokemon as bit
     u8 stolenStats[NUM_BATTLE_STATS]; // hp byte is used for which stats to raise, other inform about by how many stages
     u8 lastMoveFailed; // as bits for each battler, for the sake of Stomping Tantrum
+    u8 lastMoveTarget[MAX_BATTLERS_COUNT]; // The last target on which each mon used a move, for the sake of Instruct
     u8 debugHoldEffects[MAX_BATTLERS_COUNT]; // These override actual items' hold effects.
 };
 
