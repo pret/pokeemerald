@@ -111,6 +111,7 @@ struct DisableStruct
     u8 telekinesisTimer;
     u8 healBlockTimer;
     u8 laserFocusTimer;
+    u8 throatChopTimer;
     u8 usedMoves:4;
     u8 wrapTurns;
 };
@@ -143,6 +144,7 @@ struct ProtectStruct
     u32 usedHealBlockedMove:1;
     u32 usedGravityPreventedMove:1;
     u32 powderSelfDmg:1;
+    u32 usedThroatChopPreventedMove:1;
     u32 physicalDmg;
     u32 specialDmg;
     u8 physicalBattlerId;

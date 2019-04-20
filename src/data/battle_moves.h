@@ -8956,7 +8956,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_THROAT_CHOP] =
     {
-        .effect = EFFECT_PLACEHOLDER,
+        .effect = EFFECT_THROAT_CHOP,
         .power = 80,
         .type = TYPE_DARK,
         .accuracy = 100,
