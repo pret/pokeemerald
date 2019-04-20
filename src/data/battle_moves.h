@@ -8928,7 +8928,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_LASER_FOCUS] =
     {
-        .effect = EFFECT_PLACEHOLDER,
+        .effect = EFFECT_LASER_FOCUS,
         .power = 0,
         .type = TYPE_NORMAL,
         .accuracy = 0,

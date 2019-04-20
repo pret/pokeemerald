@@ -349,6 +349,7 @@ gBattleScriptsForMoveEffects:: @ 82D86A8
 	.4byte BattleScript_EffectStompingTantrum
 	.4byte BattleScript_EffectCoreEnforcer
 	.4byte BattleScript_EffectThroatChop
+	.4byte BattleScript_EffectLaserFocus
 
 BattleScript_EffectCoreEnforcer:
 	setmoveeffect MOVE_EFFECT_CORE_ENFORCER | MOVE_EFFECT_CERTAIN
@@ -361,6 +362,17 @@ BattleScript_MoveEffectCoreEnforcer::
 BattleScript_CoreEnforcerRet:
 	return
 
+BattleScript_EffectLaserFocus:
+	attackcanceler
+	attackstring
+	ppreduce
+	setuserstatus3 STATUS3_LASER_FOCUS BattleScript_ButItFailed
+	attackanimation
+	waitanimation
+	printstring STRINGID_LASERFOCUS
+	waitmessage 0x40
+	goto BattleScript_MoveEnd
+	
 BattleScript_EffectVCreate:
 	setmoveeffect MOVE_EFFECT_V_CREATE | MOVE_EFFECT_AFFECTS_USER
 	goto BattleScript_EffectHit
