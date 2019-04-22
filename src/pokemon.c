@@ -1764,7 +1764,7 @@ static const u8 sMonFrontAnimIdsTable[NUM_SPECIES - 1] =
     [SPECIES_DEOXYS - 1] = 0x1b,
     [SPECIES_CHIMECHO - 1] = 0x1d,
     [SPECIES_MOTHIM - 1] = 0x1d,
-    
+
     //Gen 6 animations
     [SPECIES_CHESPIN - 1] = 0x31,
     [SPECIES_QUILLADIN - 1] = 0x00,
@@ -1838,7 +1838,7 @@ static const u8 sMonFrontAnimIdsTable[NUM_SPECIES - 1] =
     [SPECIES_DIANCIE - 1] = 0x0d,
     [SPECIES_HOOPA - 1] = 0x4b,
     [SPECIES_VOLCANION - 1] = 0x10,
-    
+
     // Gen 7 animations
     [SPECIES_ROWLET - 1] = 0x00,
     [SPECIES_DARTRIX - 1] = 0x16,
