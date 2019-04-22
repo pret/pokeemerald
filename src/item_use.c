@@ -37,6 +37,7 @@
 #include "constants/bg_event_constants.h"
 #include "constants/event_objects.h"
 #include "constants/flags.h"
+#include "constants/item_effects.h"
 #include "constants/items.h"
 #include "constants/songs.h"
 #include "constants/vars.h"
@@ -389,7 +390,7 @@ bool8 sub_80FD6D4(const struct MapEvents *events, s16 x, s16 y)
 
 bool8 sub_80FD730(struct MapConnection *connection, int x, int y)
 {
-    
+
     u16 localX, localY;
     u32 localOffset;
     s32 localLength;
@@ -1026,44 +1027,45 @@ void ItemUseInBattle_Escape(u8 taskId)
 
 void ItemUseOutOfBattle_EnigmaBerry(u8 taskId)
 {
-    switch (GetItemEffectType(gSpecialVar_ItemId) - 1)
+    switch (GetItemEffectType(gSpecialVar_ItemId))
     {
-    case 1:
-    case 2:
-    case 3:
-    case 4:
-    case 5:
-    case 6:
-    case 10:
-    case 11:
-    case 12:
-    case 13:
-    case 14:
-    case 15:
-    case 16:
+    case ITEM_EFFECT_HEAL_HP:
+    case ITEM_EFFECT_CURE_POISON:
+    case ITEM_EFFECT_CURE_SLEEP:
+    case ITEM_EFFECT_CURE_BURN:
+    case ITEM_EFFECT_CURE_FREEZE:
+    case ITEM_EFFECT_CURE_PARALYSIS:
+    case ITEM_EFFECT_CURE_ALL_STATUS:
+    case ITEM_EFFECT_ATK_EV:
+    case ITEM_EFFECT_HP_EV:
+    case ITEM_EFFECT_SPATK_EV:
+    case ITEM_EFFECT_SPDEF_EV:
+    case ITEM_EFFECT_SPEED_EV:
+    case ITEM_EFFECT_DEF_EV:
         gTasks[taskId].data[4] = 1;
         ItemUseOutOfBattle_Medicine(taskId);
         break;
-    case 9:
+    case ITEM_EFFECT_SACRED_ASH:
         gTasks[taskId].data[4] = 1;
         ItemUseOutOfBattle_SacredAsh(taskId);
         break;
-    case 0:
+    case ITEM_EFFECT_RAISE_LEVEL:
         gTasks[taskId].data[4] = 1;
         ItemUseOutOfBattle_RareCandy(taskId);
         break;
-    case 18:
-    case 19:
+    case ITEM_EFFECT_PP_UP:
+    case ITEM_EFFECT_PP_MAX:
         gTasks[taskId].data[4] = 1;
         ItemUseOutOfBattle_PPUp(taskId);
         break;
-    case 20:
+    case ITEM_EFFECT_HEAL_PP:
         gTasks[taskId].data[4] = 1;
         ItemUseOutOfBattle_PPRecovery(taskId);
         break;
     default:
         gTasks[taskId].data[4] = 4;
         ItemUseOutOfBattle_CannotUse(taskId);
+        break;
     }
 }
 
@@ -1071,25 +1073,26 @@ void ItemUseInBattle_EnigmaBerry(u8 taskId)
 {
     switch (GetItemEffectType(gSpecialVar_ItemId))
     {
-    case 0:
+    case ITEM_EFFECT_X_ITEM:
         ItemUseInBattle_StatIncrease(taskId);
         break;
-    case 2:
-    case 3:
-    case 4:
-    case 5:
-    case 6:
-    case 7:
-    case 8:
-    case 9:
-    case 11:
+    case ITEM_EFFECT_HEAL_HP:
+    case ITEM_EFFECT_CURE_POISON:
+    case ITEM_EFFECT_CURE_SLEEP:
+    case ITEM_EFFECT_CURE_BURN:
+    case ITEM_EFFECT_CURE_FREEZE:
+    case ITEM_EFFECT_CURE_PARALYSIS:
+    case ITEM_EFFECT_CURE_ALL_STATUS:
+    case ITEM_EFFECT_CURE_CONFUSION:
+    case ITEM_EFFECT_CURE_INFATUATION:
         ItemUseInBattle_Medicine(taskId);
         break;
-    case 21:
+    case ITEM_EFFECT_HEAL_PP:
         ItemUseInBattle_PPRecovery(taskId);
         break;
     default:
         ItemUseOutOfBattle_CannotUse(taskId);
+        break;
     }
 }
 
