@@ -1,8 +1,8 @@
 SkyPillar_1F_MapScripts:: @ 8239615
-	map_script MAP_SCRIPT_ON_TRANSITION, SkyPillar_1F_MapScript1_OnTransition
+	map_script MAP_SCRIPT_ON_TRANSITION, SkyPillar_1F_OnTransition
 	.byte 0
 
-SkyPillar_1F_MapScript1_OnTransition: @ 823961B
+SkyPillar_1F_OnTransition: @ 823961B
 	compare VAR_SKY_PILLAR_STATE, 2
 	call_if_lt SkyPillar_1F_EventScript_CleanFloor
 	end

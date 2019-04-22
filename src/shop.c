@@ -33,6 +33,7 @@
 #include "strings.h"
 #include "text_window.h"
 #include "tv.h"
+#include "constants/decorations.h"
 #include "constants/items.h"
 #include "constants/metatile_behaviors.h"
 #include "constants/rgb.h"
