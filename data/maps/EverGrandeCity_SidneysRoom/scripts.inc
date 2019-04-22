@@ -1,11 +1,11 @@
 EverGrandeCity_SidneysRoom_MapScripts:: @ 8227F01
 	map_script MAP_SCRIPT_ON_LOAD, EverGrandeCity_SidneysRoom_MapScript1_227F1D
 	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, EverGrandeCity_SidneysRoom_MapScript2_227F3E
-	map_script MAP_SCRIPT_ON_TRANSITION, EverGrandeCity_SidneysRoom_MapScript1_OnTransition
+	map_script MAP_SCRIPT_ON_TRANSITION, EverGrandeCity_SidneysRoom_OnTransition
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, EverGrandeCity_SidneysRoom_MapScript2_227F4D
 	.byte 0
 
-EverGrandeCity_SidneysRoom_MapScript1_OnTransition: @ 8227F16
+EverGrandeCity_SidneysRoom_OnTransition: @ 8227F16
 	setflag FLAG_MET_SCOTT_IN_EVERGRANDE
 	setflag FLAG_HIDE_EVER_GRANDE_POKEMON_CENTER_1F_SCOTT
 	end

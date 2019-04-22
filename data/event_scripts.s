@@ -6,6 +6,7 @@
 #include "constants/event_object_movement_constants.h"
 #include "constants/field_effects.h"
 #include "constants/flags.h"
+#include "constants/decorations.h"
 #include "constants/items.h"
 #include "constants/heal_locations.h"
 #include "constants/layouts.h"
