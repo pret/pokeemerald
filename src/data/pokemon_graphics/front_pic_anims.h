@@ -5559,6 +5559,70 @@ static const union AnimCmd sAnim_ROTOM_1[] =
     ANIMCMD_END,
 };
 
+static const union AnimCmd sAnim_RotomHeat_1[] =
+{
+    ANIMCMD_FRAME(0, 30),
+    ANIMCMD_FRAME(1, 30),
+    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sAnim_RotomFrost_1[] =
+{
+    ANIMCMD_FRAME(0, 30),
+    ANIMCMD_FRAME(1, 30),
+    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sAnim_RotomFan_1[] =
+{
+    ANIMCMD_FRAME(0, 2),
+    ANIMCMD_FRAME(1, 2),
+    ANIMCMD_FRAME(0, 2),
+    ANIMCMD_FRAME(1, 2),
+    ANIMCMD_FRAME(0, 2),
+    ANIMCMD_FRAME(1, 2),
+    ANIMCMD_FRAME(0, 2),
+    ANIMCMD_FRAME(1, 6),
+    ANIMCMD_FRAME(0, 2),
+    ANIMCMD_FRAME(1, 5),
+    ANIMCMD_FRAME(0, 2),
+    ANIMCMD_FRAME(1, 4),
+    ANIMCMD_FRAME(0, 2),
+    ANIMCMD_FRAME(1, 3),
+    ANIMCMD_FRAME(0, 2),
+    ANIMCMD_FRAME(1, 10),
+    ANIMCMD_FRAME(0, 2),
+    ANIMCMD_FRAME(1, 2),
+    ANIMCMD_FRAME(0, 2),
+    ANIMCMD_FRAME(1, 2),
+    ANIMCMD_FRAME(0, 2),
+    ANIMCMD_FRAME(1, 2),
+    ANIMCMD_FRAME(0, 2),
+    ANIMCMD_FRAME(1, 2),
+    ANIMCMD_FRAME(0, 2),
+    ANIMCMD_FRAME(1, 10),
+    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sAnim_RotomMow_1[] =
+{
+    ANIMCMD_FRAME(0, 30),
+    ANIMCMD_FRAME(1, 30),
+    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sAnim_RotomWash_1[] =
+{
+    ANIMCMD_FRAME(0, 30),
+    ANIMCMD_FRAME(1, 30),
+    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_END,
+};
+
 static const union AnimCmd sAnim_UXIE_1[] =
 {
     ANIMCMD_FRAME(0, 30),
@@ -10398,6 +10462,31 @@ static const union AnimCmd *const sAnims_ROTOM[] ={
     sAnim_ROTOM_1,
 };
 
+static const union AnimCmd *const sAnims_ROTOM_HEAT[] ={
+    sAnim_GeneralFrame0,
+    sAnim_RotomHeat_1,
+};
+
+static const union AnimCmd *const sAnims_ROTOM_FROST[] ={
+    sAnim_GeneralFrame0,
+    sAnim_RotomFrost_1,
+};
+
+static const union AnimCmd *const sAnims_ROTOM_FAN[] ={
+    sAnim_GeneralFrame0,
+    sAnim_RotomFan_1,
+};
+
+static const union AnimCmd *const sAnims_ROTOM_MOW[] ={
+    sAnim_GeneralFrame0,
+    sAnim_RotomMow_1,
+};
+
+static const union AnimCmd *const sAnims_ROTOM_WASH[] ={
+    sAnim_GeneralFrame0,
+    sAnim_RotomWash_1,
+};
+
 static const union AnimCmd *const sAnims_UXIE[] ={
     sAnim_GeneralFrame0,
     sAnim_UXIE_1,
@@ -12527,6 +12616,11 @@ const union AnimCmd *const *const gMonFrontAnimsPtrTable[] =
     ANIM_CMD(DUSKNOIR),
     ANIM_CMD(FROSLASS),
     ANIM_CMD(ROTOM),
+    ANIM_CMD(ROTOM_WASH),
+    ANIM_CMD(ROTOM_MOW),
+    ANIM_CMD(ROTOM_FAN),
+    ANIM_CMD(ROTOM_FROST),
+    ANIM_CMD(ROTOM_HEAT),
     ANIM_CMD(UXIE),
     ANIM_CMD(MESPRIT),
     ANIM_CMD(AZELF),
