@@ -12820,6 +12820,7 @@ const union AnimCmd *const *const gMonFrontAnimsPtrTable[] =
     ANIM_CMD(FURFROU),
     ANIM_CMD(ESPURR),
     ANIM_CMD(MEOWSTIC),
+    ANIM_CMD_FULL(MEOWSTIC_F, sAnims_MEOWSTIC),
     ANIM_CMD(HONEDGE),
     ANIM_CMD(DOUBLADE),
     ANIM_CMD(AEGISLASH),
