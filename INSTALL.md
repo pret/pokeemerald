@@ -1,103 +1,52 @@
-Follow the OS-specific instructions below.
+## Prerequisites
 
-# Linux
+**Linux:** none
 
-Install [**devkitARM**](http://devkitpro.org/wiki/Getting_Started/devkitARM).
+**macOS:** [Xcode Command Line Tools package](https://developer.apple.com/library/archive/technotes/tn2339/_index.html#//apple_ref/doc/uid/DTS40014588-CH1-DOWNLOADING_COMMAND_LINE_TOOLS_IS_NOT_AVAILABLE_IN_XCODE_FOR_MACOS_10_9__HOW_CAN_I_INSTALL_THEM_ON_MY_MACHINE_)
 
-Make sure that there is an environment variable called DEVKITARM with the path of the directory before the "bin" directory containing "arm-none-eabi-as", "arm-none-eabi-cpp", "arm-none-eabi-ld" and "arm-none-eabi-objcopy".
+**Windows 10 (1709+):** [Windows Subsystem for Linux](https://docs.microsoft.com/windows/wsl/install-win10)
 
-Then get the compiler from https://github.com/pret/agbcc and run the following commands.
+**Windows Vista, 7, 8, 8.1, and 10 (1507, 1511, 1607, 1703):** Choose one of the following two options.
 
-```
-./build.sh
-./install.sh PATH_OF_POKEEMERALD_DIRECTORY
-```
+* Get [Cygwin](https://cygwin.com/install.html) and [include](https://cygwin.com/cygwin-ug-net/setup-net.html#setup-packages) the `make`, `git`, `gcc-core`, `gcc-g++`, and `libpng-devel` packages.
+* Get [MSYS2](https://www.msys2.org/) and the [pokeruby-tools](https://github.com/pret/pokeruby-tools).
 
-Then in the pokeemerald directory, build the tools.
+If you are on Windows 10 1607 or 1703 and use [the prerelease version of the Linux subsystem](https://docs.microsoft.com/windows/wsl/install-legacy), consider uninstalling it.
 
-```
-./build_tools.sh
-```
+----
 
-Finally, build the rom.
+Install the **devkitARM** toolchain of [devkitPro](https://devkitpro.org/wiki/Getting_Started) and, except for MSYS2, add its environment variables. To set up devkitPro in MSYS2, use the [graphical installer](https://github.com/devkitPro/installer/releases).
 
-```
-make
-```
-
-# Windows
-
-Install [**devkitARM**](http://devkitpro.org/wiki/Getting_Started/devkitARM).
-
-Then get the compiled tools from https://github.com/pret/pokeruby-tools. Copy the `tools/` folder over the `tools/` folder in your pokeemerald directory.
-
-You can then build pokeemerald using `make` in the MSYS environment provided with devkitARM.
-
-# Mac
-
-Installing pokeemerald on a Mac requires macOS >= 10.12 (Sierra or higher).
-
-Download a [devkitPRO pacman](https://github.com/devkitPro/pacman/releases/tag/v1.0.0)
-
-Run the following commands in Terminal:
+	export DEVKITPRO=/opt/devkitpro
+	echo "export DEVKITPRO=$DEVKITPRO" >> ~/.bashrc
+	export DEVKITARM=$DEVKITPRO/devkitARM
+	echo "export DEVKITARM=$DEVKITARM" >> ~/.bashrc
 
 
-```
-xcode-select --install
+## Installation
 
-sudo dkp-pacman -S devkitARM 
+To set up the repository:
 
-export DEVKITPRO=/opt/devkitpro
-echo "export DEVKITPRO=$DEVKITPRO" >> ~/.bashrc
-export DEVKITARM=$DEVKITPRO/devkitARM
-echo "export DEVKITARM=$DEVKITARM" >> ~/.bashrc
-echo "if [ -f ~/.bashrc ]; then . ~/.bashrc; fi" >> ~/.bash_profile
+	git clone https://github.com/pret/pokeemerald
+	git clone https://github.com/pret/agbcc
 
-git clone https://github.com/pret/pokeemerald
-git clone https://github.com/pret/agbcc
+	cd ./agbcc
+	./build.sh
+	./install.sh ../pokeemerald
 
-cd agbcc/
-./build.sh
-./install.sh ../pokeemerald 
+	cd ../pokeemerald
+	./build_tools.sh
 
-cd ../pokeemerald
-./build_tools.sh
-```
+To build **pokeemerald.gba**:
 
-And build the ROM with `make`.
+	make -j$(nproc)
 
-If the step `./build.sh` in the above list of commands fails with the error `Makefile:1: /opt/devkitpro/devkitARM/base_tools: No such file or directory`, then try installing the pacman package `devkitarm-rules` by executing the command
+To confirm it matches the official ROM image while building, do this instead:
 
-```
-sudo dkp-pacman -S devkitarm-rules
-```
+	make compare -j$(nproc)
 
-Executing `./build.sh` again should now succeed.
+**Note:** If only `.c` or `.s` files were changed, turn off the dependency scanning temporarily. Changes to any other files will be ignored and the build will either fail or not reflect those changes.
 
-# Faster builds
+	make -j$(nproc) NODEP=1
 
-After the first build, subsequent builds are faster. You can further speed up the build:
-
-## Parallel build
-
-This significantly speeds up the build on modern machines.
-
-By default `make` only runs a single thread. You can tell `make` to run on multiple threads with `make -j`. See the manfile for usage (`man make`).
-
-The optimal value for `-j` is the number of logical cores on your machine. You can run `nproc` to see the exact number.
-
-```
-$ nproc
-8
-```
-
-If you have 8 cores, run: `make -j8`
-
-`-j` on its own will spawn a new thread for each job. A clean build will have thousands of jobs, which will be slower than not using -j at all.
-
-## Disable the dependency scanning
-
-If you've only changed `.c` or `.s` files, you can turn off the dependency scanning temporarily. Changes to any other files will be ignored, and the build will either fail or not reflect those changes.
-
-`make NODEP=1`
-
+**Note 2:** If the build command is not recognized on Linux, including the Linux environment used within Windows, run `nproc` and replace `$(nproc)` with the returned value (e.g.: `make -j4`). Because `nproc` is not available on macOS, the alternative is `sysctl -n hw.ncpu`.
