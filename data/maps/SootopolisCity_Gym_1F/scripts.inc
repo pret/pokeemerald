@@ -2,10 +2,10 @@ SootopolisCity_Gym_1F_MapScripts:: @ 8224E4C
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, SootopolisCity_Gym_1F_MapScript2_224ECB
 	map_script MAP_SCRIPT_ON_RESUME, SootopolisCity_Gym_1F_MapScript1_224E67
 	map_script MAP_SCRIPT_ON_LOAD, SootopolisCity_Gym_1F_MapScript1_224E6A
-	map_script MAP_SCRIPT_ON_TRANSITION, SootopolisCity_Gym_1F_MapScript1_224E61
+	map_script MAP_SCRIPT_ON_TRANSITION, SootopolisCity_Gym_1F_OnTransition
 	.byte 0
 
-SootopolisCity_Gym_1F_MapScript1_224E61: @ 8224E61
+SootopolisCity_Gym_1F_OnTransition: @ 8224E61
 	setvar VAR_ICE_STEP_COUNT, 1
 	end
 

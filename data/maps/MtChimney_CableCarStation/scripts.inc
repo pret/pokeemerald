@@ -1,9 +1,9 @@
 MtChimney_CableCarStation_MapScripts:: @ 822ABFA
-	map_script MAP_SCRIPT_ON_TRANSITION, MtChimney_CableCarStation_MapScript1_22AC05
+	map_script MAP_SCRIPT_ON_TRANSITION, MtChimney_CableCarStation_OnTransition
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, MtChimney_CableCarStation_MapScript2_22AC1D
 	.byte 0
 
-MtChimney_CableCarStation_MapScript1_22AC05: @ 822AC05
+MtChimney_CableCarStation_OnTransition: @ 822AC05
 	compare VAR_CABLE_CAR_STATION_STATE, 1
 	call_if_eq MtChimney_CableCarStation_EventScript_22AC11
 	end

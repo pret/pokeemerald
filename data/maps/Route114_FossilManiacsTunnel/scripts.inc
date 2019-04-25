@@ -1,9 +1,9 @@
 Route114_FossilManiacsTunnel_MapScripts:: @ 822AF28
-	map_script MAP_SCRIPT_ON_TRANSITION, Route114_FossilManiacsTunnel_MapScript1_22AF33
+	map_script MAP_SCRIPT_ON_TRANSITION, Route114_FossilManiacsTunnel_OnTransition
 	map_script MAP_SCRIPT_ON_LOAD, Route114_FossilManiacsTunnel_MapScript1_22AF49
 	.byte 0
 
-Route114_FossilManiacsTunnel_MapScript1_22AF33: @ 822AF33
+Route114_FossilManiacsTunnel_OnTransition: @ 822AF33
 	call_if_set FLAG_SYS_GAME_CLEAR, Route114_FossilManiacsTunnel_EventScript_22AF3D
 	end
 

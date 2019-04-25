@@ -1,8 +1,8 @@
 Route110_SeasideCyclingRoadSouthEntrance_MapScripts:: @ 826EBA1
-	map_script MAP_SCRIPT_ON_TRANSITION, Route110_SeasideCyclingRoadSouthEntrance_MapScript1_26EBA7
+	map_script MAP_SCRIPT_ON_TRANSITION, Route110_SeasideCyclingRoadSouthEntrance_OnTransition
 	.byte 0
 
-Route110_SeasideCyclingRoadSouthEntrance_MapScript1_26EBA7: @ 826EBA7
+Route110_SeasideCyclingRoadSouthEntrance_OnTransition: @ 826EBA7
 	compare VAR_CYCLING_CHALLENGE_STATE, 3
 	call_if_eq Route110_SeasideCyclingRoadSouthEntrance_EventScript_26EBBE
 	compare VAR_CYCLING_CHALLENGE_STATE, 2

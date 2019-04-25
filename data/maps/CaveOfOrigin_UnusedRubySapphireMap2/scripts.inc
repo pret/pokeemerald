@@ -1,8 +1,8 @@
 CaveOfOrigin_UnusedRubySapphireMap2_MapScripts:: @ 8235788
-	map_script MAP_SCRIPT_ON_TRANSITION, CaveOfOrigin_UnusedRubySapphireMap2_MapScript1_23578E
+	map_script MAP_SCRIPT_ON_TRANSITION, CaveOfOrigin_UnusedRubySapphireMap2_OnTransition
 	.byte 0
 
-CaveOfOrigin_UnusedRubySapphireMap2_MapScript1_23578E: @ 823578E
+CaveOfOrigin_UnusedRubySapphireMap2_OnTransition: @ 823578E
 	call_if_set FLAG_UNUSED_RS_LEGENDARY_BATTLE_DONE, CaveOfOrigin_UnusedRubySapphireMap2_EventScript_2722C1
 	end
 

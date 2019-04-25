@@ -1,8 +1,8 @@
 LilycoveCity_DepartmentStoreRooftop_MapScripts:: @ 8220207
-	map_script MAP_SCRIPT_ON_TRANSITION, LilycoveCity_DepartmentStoreRooftop_MapScript1_22020D
+	map_script MAP_SCRIPT_ON_TRANSITION, LilycoveCity_DepartmentStoreRooftop_OnTransition
 	.byte 0
 
-LilycoveCity_DepartmentStoreRooftop_MapScript1_22020D: @ 822020D
+LilycoveCity_DepartmentStoreRooftop_OnTransition: @ 822020D
 	getpricereduction 3
 	compare VAR_RESULT, 1
 	call_if_eq LilycoveCity_DepartmentStoreRooftop_EventScript_220227
@@ -30,20 +30,20 @@ LilycoveCity_DepartmentStoreRooftop_EventScript_22022F:: @ 822022F
 
 	.align 2
 LilycoveCity_DepartmentStoreRooftop_PokemartDecor_220248: @ 8220248
-	.2byte 39
-	.2byte 35
-	.2byte 36
-	.2byte 37
-	.2byte 40
-	.2byte 33
-	.2byte 41
-	.2byte 38
-	.2byte 34
-	.2byte 45
-	.2byte 46
-	.2byte 47
-	.2byte 117
-	.2byte 112
+	.2byte DECOR_MUD_BALL
+	.2byte DECOR_FENCE_LENGTH
+	.2byte DECOR_FENCE_WIDTH
+	.2byte DECOR_TIRE
+	.2byte DECOR_BREAKABLE_DOOR
+	.2byte DECOR_SOLID_BOARD
+	.2byte DECOR_SAND_ORNAMENT
+	.2byte DECOR_STAND
+	.2byte DECOR_SLIDE
+	.2byte DECOR_TV
+	.2byte DECOR_ROUND_TV
+	.2byte DECOR_CUTE_TV
+	.2byte DECOR_WAILMER_DOLL
+	.2byte DECOR_RHYDON_DOLL
 	.2byte 0
 	release
 	end
@@ -235,4 +235,3 @@ LilycoveCity_DepartmentStoreRooftop_Text_2205F1: @ 82205F1
 
 LilycoveCity_DepartmentStoreRooftop_Text_220603: @ 8220603
 	.string "Decided against buying a drink.$"
-

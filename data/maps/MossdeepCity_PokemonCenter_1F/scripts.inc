@@ -1,9 +1,9 @@
 MossdeepCity_PokemonCenter_1F_MapScripts:: @ 822223F
-	map_script MAP_SCRIPT_ON_TRANSITION, MossdeepCity_PokemonCenter_1F_MapScript1_22224A
+	map_script MAP_SCRIPT_ON_TRANSITION, MossdeepCity_PokemonCenter_1F_OnTransition
 	map_script MAP_SCRIPT_ON_RESUME, MossdeepCity_PokemonCenter_1F_MapScript1_277C30
 	.byte 0
 
-MossdeepCity_PokemonCenter_1F_MapScript1_22224A: @ 822224A
+MossdeepCity_PokemonCenter_1F_OnTransition: @ 822224A
 	setrespawn HEAL_LOCATION_MOSSDEEP_CITY
 	end
 

@@ -1,6 +1,6 @@
 JaggedPass_MapScripts:: @ 8230656
 	map_script MAP_SCRIPT_ON_RESUME, JaggedPass_MapScript1_230666
-	map_script MAP_SCRIPT_ON_TRANSITION, JaggedPass_MapScript1_23068B
+	map_script MAP_SCRIPT_ON_TRANSITION, JaggedPass_OnTransition
 	map_script MAP_SCRIPT_ON_LOAD, JaggedPass_MapScript1_23069C
 	.byte 0
 
@@ -20,7 +20,7 @@ JaggedPass_EventScript_230685:: @ 8230685
 	setvar VAR_JAGGED_PASS_STATE, 1
 	return
 
-JaggedPass_MapScript1_23068B: @ 823068B
+JaggedPass_OnTransition: @ 823068B
 	compare VAR_JAGGED_PASS_ASH_WEATHER, 1
 	call_if_eq JaggedPass_EventScript_230697
 	end

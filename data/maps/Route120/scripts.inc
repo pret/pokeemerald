@@ -1,6 +1,6 @@
 Route120_MapScripts:: @ 81F53EC
 	map_script MAP_SCRIPT_ON_RESUME, Route120_MapScript1_1F53FC
-	map_script MAP_SCRIPT_ON_TRANSITION, Route120_MapScript1_1F54CD
+	map_script MAP_SCRIPT_ON_TRANSITION, Route120_OnTransition
 	map_script MAP_SCRIPT_ON_LOAD, Route120_MapScript1_1F5474
 	.byte 0
 
@@ -60,7 +60,7 @@ Route120_EventScript_1F54C8:: @ 81F54C8
 	setobjectmovementtype 36, MOVEMENT_TYPE_FACE_RIGHT
 	return
 
-Route120_MapScript1_1F54CD: @ 81F54CD
+Route120_OnTransition: @ 81F54CD
 	call Route120_EventScript_28CCC7
 	call Route120_EventScript_1F54D8
 	end

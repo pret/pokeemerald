@@ -1,6 +1,6 @@
 Route119_MapScripts:: @ 81F4424
 	map_script MAP_SCRIPT_ON_RESUME, Route119_MapScript1_1F442F
-	map_script MAP_SCRIPT_ON_TRANSITION, Route119_MapScript1_1F444D
+	map_script MAP_SCRIPT_ON_TRANSITION, Route119_OnTransition
 	.byte 0
 
 Route119_MapScript1_1F442F: @ 81F442F
@@ -14,7 +14,7 @@ Route119_EventScript_1F4439:: @ 81F4439
 	removeobject VAR_LAST_TALKED
 	return
 
-Route119_MapScript1_1F444D: @ 81F444D
+Route119_OnTransition: @ 81F444D
 	call Common_EventScript_SetupRivalGender
 	call Common_EventScript_SetupRivalOnBikeGender
 	compare VAR_WEATHER_INSTITUTE_STATE, 1

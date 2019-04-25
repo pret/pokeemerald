@@ -1,9 +1,9 @@
 PacifidlogTown_MapScripts:: @ 81EBAB1
-	map_script MAP_SCRIPT_ON_TRANSITION, PacifidlogTown_MapScript1_1EBABC
+	map_script MAP_SCRIPT_ON_TRANSITION, PacifidlogTown_OnTransition
 	map_script MAP_SCRIPT_ON_RESUME, PacifidlogTown_MapScript1_1EBAC0
 	.byte 0
 
-PacifidlogTown_MapScript1_1EBABC: @ 81EBABC
+PacifidlogTown_OnTransition: @ 81EBABC
 	setflag FLAG_VISITED_PACIFIDLOG_TOWN
 	end
 

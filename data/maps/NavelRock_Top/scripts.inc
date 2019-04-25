@@ -1,9 +1,9 @@
 NavelRock_Top_MapScripts:: @ 8269113
-	map_script MAP_SCRIPT_ON_TRANSITION, NavelRock_Top_MapScript1_26911E
+	map_script MAP_SCRIPT_ON_TRANSITION, NavelRock_Top_OnTransition
 	map_script MAP_SCRIPT_ON_RESUME, NavelRock_Top_MapScript1_269151
 	.byte 0
 
-NavelRock_Top_MapScript1_26911E: @ 826911E
+NavelRock_Top_OnTransition: @ 826911E
 	call_if_set FLAG_CAUGHT_HO_OH, NavelRock_Top_EventScript_269131
 	call_if_unset FLAG_CAUGHT_HO_OH, NavelRock_Top_EventScript_26913A
 	end

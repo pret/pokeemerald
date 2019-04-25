@@ -1,9 +1,9 @@
 Route103_MapScripts:: @ 81EC38E
-	map_script MAP_SCRIPT_ON_TRANSITION, Route103_MapScript1_1EC399
+	map_script MAP_SCRIPT_ON_TRANSITION, Route103_OnTransition
 	map_script MAP_SCRIPT_ON_LOAD, Route103_MapScript1_1EC3A4
 	.byte 0
 
-Route103_MapScript1_1EC399: @ 81EC399
+Route103_OnTransition: @ 81EC399
 	call Common_EventScript_SetupRivalGender
 	call Route103_EventScript_2720AD
 	end

@@ -1,9 +1,9 @@
 SlateportCity_MapScripts:: @ 81DCC61
-	map_script MAP_SCRIPT_ON_TRANSITION, SlateportCity_MapScript1_1DCC6C
+	map_script MAP_SCRIPT_ON_TRANSITION, SlateportCity_OnTransition
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, SlateportCity_MapScript2_1DCD12
 	.byte 0
 
-SlateportCity_MapScript1_1DCC6C: @ 81DCC6C
+SlateportCity_OnTransition: @ 81DCC6C
 	setvar VAR_SLATEPORT_MUSEUM_1F_STATE, 0
 	call SlateportCity_EventScript_1DCC8D
 	compare VAR_SLATEPORT_STATE, 1
@@ -491,17 +491,17 @@ SlateportCity_EventScript_1DD16A:: @ 81DD16A
 	faceplayer
 	message gUnknown_08272A21
 	waitmessage
-	pokemartdecoration SlateportCity_PokemartDecor_1DD184
+	pokemartdecoration SlateportCity_PokemartDecor_Dolls
 	msgbox gUnknown_08272A3F, MSGBOX_DEFAULT
 	release
 	end
 
 	.align 2
-SlateportCity_PokemartDecor_1DD184: @ 81DD184
-	.2byte 95
-	.2byte 78
-	.2byte 96
-	.2byte 0
+SlateportCity_PokemartDecor_Dolls: @ 81DD184
+	.2byte DECOR_AZURILL_DOLL
+	.2byte DECOR_MARILL_DOLL
+	.2byte DECOR_SKITTY_DOLL
+	.2byte DECOR_NONE
 	release
 	end
 
@@ -522,21 +522,21 @@ SlateportCity_EventScript_1DD198:: @ 81DD198
 	end
 
 SlateportCity_PokemartDecor_1DD1B8: @ 81DD1B8
-	.2byte 25
-	.2byte 27
-	.2byte 26
-	.2byte 28
-	.2byte 29
-	.2byte 30
-	.2byte 51
-	.2byte 52
-	.2byte 53
-	.2byte 54
-	.2byte 55
-	.2byte 56
-	.2byte 57
-	.2byte 58
-	.2byte 0
+	.2byte DECOR_RED_BRICK
+	.2byte DECOR_BLUE_BRICK
+	.2byte DECOR_YELLOW_BRICK
+	.2byte DECOR_RED_BALLOON
+	.2byte DECOR_BLUE_BALLOON
+	.2byte DECOR_YELLOW_BALLOON
+	.2byte DECOR_C_LOW_NOTE_MAT
+	.2byte DECOR_D_NOTE_MAT
+	.2byte DECOR_E_NOTE_MAT
+	.2byte DECOR_F_NOTE_MAT
+	.2byte DECOR_G_NOTE_MAT
+	.2byte DECOR_A_NOTE_MAT
+	.2byte DECOR_B_NOTE_MAT
+	.2byte DECOR_C_HIGH_NOTE_MAT
+	.2byte DECOR_NONE
 	release
 	end
 

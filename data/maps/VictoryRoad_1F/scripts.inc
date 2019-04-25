@@ -1,8 +1,8 @@
 VictoryRoad_1F_MapScripts:: @ 8235D7A
-	map_script MAP_SCRIPT_ON_TRANSITION, VictoryRoad_1F_MapScript1_235D80
+	map_script MAP_SCRIPT_ON_TRANSITION, VictoryRoad_1F_OnTransition
 	.byte 0
 
-VictoryRoad_1F_MapScript1_235D80: @ 8235D80
+VictoryRoad_1F_OnTransition: @ 8235D80
 	compare VAR_VICTORY_ROAD_1F_STATE, 1
 	call_if_eq VictoryRoad_1F_EventScript_235D97
 	compare VAR_VICTORY_ROAD_1F_STATE, 2
