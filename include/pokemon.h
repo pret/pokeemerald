@@ -14,7 +14,7 @@
 #define MON_DATA_OT_NAME            7
 #define MON_DATA_MARKINGS           8
 #define MON_DATA_CHECKSUM           9
-#define MON_DATA_10                10
+#define MON_DATA_ENCRYPT_SEPARATOR 10
 #define MON_DATA_SPECIES           11
 #define MON_DATA_HELD_ITEM         12
 #define MON_DATA_MOVE1             13
