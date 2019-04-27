@@ -22,9 +22,15 @@ install:
 matrix:
   include:
     - os: linux
+      addons:
+        apt:
+          sources:
+              - ubuntu-toolchain-r-test
+          packages:
+            - g++-7
       env: _="Build"
       script:
-        - ./build_tools.sh
+        - ./build_tools.sh g++-7
         - make -j2 compare
 after_success:
   - .travis/calcrom/webhook.sh pokeemerald
