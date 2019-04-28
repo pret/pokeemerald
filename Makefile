@@ -174,6 +174,29 @@ endif
 $(DATA_ASM_BUILDDIR)/%.o: $(DATA_ASM_SUBDIR)/%.s $$(data_dep)
 	$(PREPROC) $< charmap.txt | $(CPP) -I include | $(AS) $(ASFLAGS) -o $@
 
+#If a file cannot be built we execute a debug rule to see which dependency failed
+$(DATA_ASM_BUILDDIR)/%.o: $(DATA_ASM_SUBDIR)/%.s
+	@for file in $$($(SCANINC) -I include -I "" $<) ; do \
+		make -s --dry-run $$file ; \
+	done
+	@echo "Failed to build dependencies for $<"
+	exit 1
+
+$(ASM_BUILDDIR)/%.o: $(ASM_SUBDIR)/%.s
+	@for file in $$($(SCANINC) -I include -I "" $<) ; do \
+		make -s --dry-run $$file ; \
+	done
+	@echo "Failed to build dependencies for $<"
+	exit 1
+
+$(C_BUILDDIR)/%.o: $(C_SUBDIR)/%.s
+	@for file in $$($(SCANINC) -I include -I "" $<) ; do \
+		make -s --dry-run $$file ; \
+	done
+	@echo "Failed to build dependencies for $<"
+	exit 1
+
+
 $(SONG_BUILDDIR)/%.o: $(SONG_SUBDIR)/%.s
 	$(AS) $(ASFLAGS) -I sound -o $@ $<
 
