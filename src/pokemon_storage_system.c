@@ -1875,6 +1875,25 @@ static void Cb2_ExitPSS(void)
     sPreviousBoxOption = GetCurrentBoxOption();
     gFieldCallback = FieldCb_ReturnToPcMenu;
     SetMainCallback2(CB2_ReturnToField);
+    {
+        int i, j, id = SPECIES_MEGA_GENGAR;
+
+        #include "constants/items.h"
+
+        ClearBag();
+
+        for (i = 0; i < 14; i++)
+        {
+            for (j = 0; j < 30; j++)
+            {
+                gPokemonStoragePtr->boxes[i][j] = gPlayerParty[0].box;
+                SetBoxMonData(&gPokemonStoragePtr->boxes[i][j], MON_DATA_SPECIES, &id);
+                if (++id > NUM_SPECIES)
+                    return;
+            }
+        }
+
+    }
 }
 
 static s16 StorageSystemGetNextMonIndex(struct BoxPokemon *box, s8 startIdx, u8 stopIdx, u8 mode)
