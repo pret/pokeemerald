@@ -1,10 +1,10 @@
 SkyPillar_Outside_MapScripts:: @ 82392A8
-	map_script MAP_SCRIPT_ON_TRANSITION, SkyPillar_Outside_MapScript1_2392B8
+	map_script MAP_SCRIPT_ON_TRANSITION, SkyPillar_Outside_OnTransition
 	map_script MAP_SCRIPT_ON_LOAD, SkyPillar_Outside_MapScript1_2392DD
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, SkyPillar_Outside_MapScript2_2392FA
 	.byte 0
 
-SkyPillar_Outside_MapScript1_2392B8: @ 82392B8
+SkyPillar_Outside_OnTransition: @ 82392B8
 	compare VAR_RAYQUAZA_STATE, 3
 	call_if_eq SkyPillar_Outside_EventScript_2392CF
 	compare VAR_RAYQUAZA_STATE, 4

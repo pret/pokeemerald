@@ -2,7 +2,7 @@ MossdeepCity_PokemonCenter_2F_MapScripts:: @ 8222334
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, MossdeepCity_PokemonCenter_2F_MapScript2_276C3B
 	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, MossdeepCity_PokemonCenter_2F_MapScript2_276B6C
 	map_script MAP_SCRIPT_ON_LOAD, MossdeepCity_PokemonCenter_2F_MapScript1_276BBE
-	map_script MAP_SCRIPT_ON_TRANSITION, MossdeepCity_PokemonCenter_2F_MapScript1_276ACF
+	map_script MAP_SCRIPT_ON_TRANSITION, PokemonCenter_2F_OnTransition
 	.byte 0
 
 MossdeepCity_PokemonCenter_2F_EventScript_222349:: @ 8222349

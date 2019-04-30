@@ -1,6 +1,6 @@
 MarineCave_End_MapScripts:: @ 823AFDF
 	map_script MAP_SCRIPT_ON_RESUME, MarineCave_End_MapScript1_23AFEA
-	map_script MAP_SCRIPT_ON_TRANSITION, MarineCave_End_MapScript1_23B008
+	map_script MAP_SCRIPT_ON_TRANSITION, MarineCave_End_OnTransition
 	.byte 0
 
 MarineCave_End_MapScript1_23AFEA: @ 823AFEA
@@ -14,7 +14,7 @@ MarineCave_End_EventScript_23AFF4:: @ 823AFF4
 	removeobject 1
 	return
 
-MarineCave_End_MapScript1_23B008: @ 823B008
+MarineCave_End_OnTransition: @ 823B008
 	call_if_unset FLAG_DEFEATED_KYOGRE, MarineCave_End_EventScript_23B012
 	end
 

@@ -1,9 +1,9 @@
 NavelRock_Bottom_MapScripts:: @ 8269255
-	map_script MAP_SCRIPT_ON_TRANSITION, NavelRock_Bottom_MapScript1_269260
+	map_script MAP_SCRIPT_ON_TRANSITION, NavelRock_Bottom_OnTransition
 	map_script MAP_SCRIPT_ON_RESUME, NavelRock_Bottom_MapScript1_269284
 	.byte 0
 
-NavelRock_Bottom_MapScript1_269260: @ 8269260
+NavelRock_Bottom_OnTransition: @ 8269260
 	call_if_set FLAG_CAUGHT_LUGIA, NavelRock_Bottom_EventScript_269273
 	call_if_unset FLAG_CAUGHT_LUGIA, NavelRock_Bottom_EventScript_269277
 	end

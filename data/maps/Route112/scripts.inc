@@ -1,8 +1,8 @@
 Route112_MapScripts:: @ 81F1DA8
-	map_script MAP_SCRIPT_ON_TRANSITION, Route112_MapScript1_1F1DAE
+	map_script MAP_SCRIPT_ON_TRANSITION, Route112_OnTransition
 	.byte 0
 
-Route112_MapScript1_1F1DAE: @ 81F1DAE
+Route112_OnTransition: @ 81F1DAE
 	clearflag FLAG_FORCE_MIRAGE_TOWER_VISIBLE
 	setvar VAR_JAGGED_PASS_ASH_WEATHER, 0
 	end

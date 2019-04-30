@@ -1,10 +1,10 @@
 Route116_MapScripts:: @ 81F2C0C
-	map_script MAP_SCRIPT_ON_TRANSITION, Route116_MapScript1_1F2C1C
+	map_script MAP_SCRIPT_ON_TRANSITION, Route116_OnTransition
 	map_script MAP_SCRIPT_ON_LOAD, Route116_MapScript1_1F2C4F
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, Route116_MapScript2_1F2C66
 	.byte 0
 
-Route116_MapScript1_1F2C1C: @ 81F2C1C
+Route116_OnTransition: @ 81F2C1C
 	call_if_set FLAG_RECOVERED_DEVON_GOODS, Route116_EventScript_1F2C47
 	compare VAR_SHOULD_END_UNUSUAL_WEATHER, 1
 	call_if_eq Route116_EventScript_273D13

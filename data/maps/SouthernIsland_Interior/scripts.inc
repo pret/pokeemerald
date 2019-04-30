@@ -1,6 +1,6 @@
 SouthernIsland_Interior_MapScripts:: @ 8242A45
 	map_script MAP_SCRIPT_ON_RESUME, SouthernIsland_Interior_MapScript1_242A50
-	map_script MAP_SCRIPT_ON_TRANSITION, SouthernIsland_Interior_MapScript1_242A6E
+	map_script MAP_SCRIPT_ON_TRANSITION, SouthernIsland_Interior_OnTransition
 	.byte 0
 
 SouthernIsland_Interior_MapScript1_242A50: @ 8242A50
@@ -14,7 +14,7 @@ SouthernIsland_Interior_EventScript_242A5A:: @ 8242A5A
 	removeobject 2
 	return
 
-SouthernIsland_Interior_MapScript1_242A6E: @ 8242A6E
+SouthernIsland_Interior_OnTransition: @ 8242A6E
 	compare VAR_ROAMER_POKEMON, 0
 	call_if_eq SouthernIsland_Interior_EventScript_242A8A
 	compare VAR_ROAMER_POKEMON, 0

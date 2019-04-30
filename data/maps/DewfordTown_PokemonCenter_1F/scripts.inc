@@ -1,9 +1,9 @@
 DewfordTown_PokemonCenter_1F_MapScripts:: @ 81FC523
-	map_script MAP_SCRIPT_ON_TRANSITION, DewfordTown_PokemonCenter_1F_MapScript1_1FC52E
+	map_script MAP_SCRIPT_ON_TRANSITION, DewfordTown_PokemonCenter_1F_OnTransition
 	map_script MAP_SCRIPT_ON_RESUME, DewfordTown_PokemonCenter_1F_MapScript1_277C30
 	.byte 0
 
-DewfordTown_PokemonCenter_1F_MapScript1_1FC52E: @ 81FC52E
+DewfordTown_PokemonCenter_1F_OnTransition: @ 81FC52E
 	setrespawn HEAL_LOCATION_DEWFORD_TOWN
 	call DewfordTown_PokemonCenter_1F_EventScript_2718DE
 	end

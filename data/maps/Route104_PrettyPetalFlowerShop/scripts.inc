@@ -48,20 +48,20 @@ Route104_PrettyPetalFlowerShop_EventScript_22A3DB:: @ 822A3DB
 Route104_PrettyPetalFlowerShop_EventScript_22A3E4:: @ 822A3E4
 	message gUnknown_08272A52
 	waitmessage
-	pokemartdecoration2 Route104_PrettyPetalFlowerShop_Pokemart_22A3FC
+	pokemartdecoration2 Route104_PrettyPetalFlowerShop_Pokemart_Plants
 	msgbox gUnknown_08272A3F, MSGBOX_DEFAULT
 	release
 	end
 
 	.align 2
-Route104_PrettyPetalFlowerShop_Pokemart_22A3FC: @ 822A3FC
-	.2byte ITEM_FULL_RESTORE
-	.2byte ITEM_MAX_POTION
-	.2byte ITEM_HYPER_POTION
-	.2byte ITEM_SUPER_POTION
-	.2byte ITEM_FULL_HEAL
-	.2byte ITEM_REVIVE
-	.2byte ITEM_NONE
+Route104_PrettyPetalFlowerShop_Pokemart_Plants: @ 822A3FC
+	.2byte DECOR_RED_PLANT
+	.2byte DECOR_TROPICAL_PLANT
+	.2byte DECOR_PRETTY_FLOWERS
+	.2byte DECOR_COLORFUL_PLANT
+	.2byte DECOR_BIG_PLANT
+	.2byte DECOR_GORGEOUS_PLANT
+	.2byte DECOR_NONE
 	release
 	end
 
@@ -101,4 +101,3 @@ Route104_PrettyPetalFlowerShop_EventScript_22A482:: @ 822A482
 	msgbox Route104_PrettyPetalFlowerShop_Text_2A7AF3, MSGBOX_DEFAULT
 	release
 	end
-

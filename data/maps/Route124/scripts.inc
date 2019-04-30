@@ -1,8 +1,8 @@
 Route124_MapScripts:: @ 81F656C
-	map_script MAP_SCRIPT_ON_TRANSITION, Route124_MapScript1_1F6572
+	map_script MAP_SCRIPT_ON_TRANSITION, Route124_OnTransition
 	.byte 0
 
-Route124_MapScript1_1F6572: @ 81F6572
+Route124_OnTransition: @ 81F6572
 	call_if_set FLAG_SYS_WEATHER_CTRL, Common_EventScript_SetWeather15
 	end
 

@@ -1,8 +1,8 @@
 VerdanturfTown_MapScripts:: @ 81EB566
-	map_script MAP_SCRIPT_ON_TRANSITION, VerdanturfTown_MapScript1_1EB56C
+	map_script MAP_SCRIPT_ON_TRANSITION, VerdanturfTown_OnTransition
 	.byte 0
 
-VerdanturfTown_MapScript1_1EB56C: @ 81EB56C
+VerdanturfTown_OnTransition: @ 81EB56C
 	setflag FLAG_VISITED_VERDANTURF_TOWN
 	setvar VAR_LINK_CONTEST_ROOM_STATE, 0
 	end

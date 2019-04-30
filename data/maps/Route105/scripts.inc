@@ -1,6 +1,6 @@
 Route105_MapScripts:: @ 81EE1DB
 	map_script MAP_SCRIPT_ON_LOAD, Route105_MapScript1_1EE1EB
-	map_script MAP_SCRIPT_ON_TRANSITION, Route105_MapScript1_1EE21E
+	map_script MAP_SCRIPT_ON_TRANSITION, Route105_OnTransition
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, Route105_MapScript2_1EE240
 	.byte 0
 
@@ -17,7 +17,7 @@ Route105_EventScript_1EE20B:: @ 81EE20B
 	setmetatile 9, 20, 145, 1
 	return
 
-Route105_MapScript1_1EE21E: @ 81EE21E
+Route105_OnTransition: @ 81EE21E
 	compare VAR_SHOULD_END_UNUSUAL_WEATHER, 1
 	call_if_eq Route105_EventScript_273D13
 	compare VAR_UNUSUAL_WEATHER_LOCATION, UNUSUAL_WEATHER_ROUTE_105_NORTH
