@@ -3283,6 +3283,84 @@ const struct Item gItems[] =
         .secondaryId = 0,
     },
 
+    [ITEM_POWER_BRACER] =
+    {
+        .name = _("Power Bracer"),
+        .itemId = ITEM_POWER_BRACER,
+        .price = 3000,
+        .holdEffect = HOLD_EFFECT_NONE, // Placeholder?
+        .description = sPowerBracerDesc,
+        .pocket = POCKET_ITEMS,
+        .type = 4,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .secondaryId = 0,
+    },
+
+    [ITEM_POWER_BELT] =
+    {
+        .name = _("Power Belt"),
+        .itemId = ITEM_POWER_BELT,
+        .price = 3000,
+        .holdEffect = HOLD_EFFECT_NONE, // Placeholder?
+        .description = sPowerBeltDesc,
+        .pocket = POCKET_ITEMS,
+        .type = 4,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .secondaryId = 0,
+    },
+
+    [ITEM_POWER_LENS] =
+    {
+        .name = _("Power Lens"),
+        .itemId = ITEM_POWER_LENS,
+        .price = 3000,
+        .holdEffect = HOLD_EFFECT_NONE, // Placeholder?
+        .description = sPowerLensDesc,
+        .pocket = POCKET_ITEMS,
+        .type = 4,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .secondaryId = 0,
+    },
+
+    [ITEM_POWER_BAND] =
+    {
+        .name = _("Power Band"),
+        .itemId = ITEM_POWER_BAND,
+        .price = 3000,
+        .holdEffect = HOLD_EFFECT_NONE, // Placeholder?
+        .description = sPowerBandDesc,
+        .pocket = POCKET_ITEMS,
+        .type = 4,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .secondaryId = 0,
+    },
+
+    [ITEM_POWER_ANKLET] =
+    {
+        .name = _("Power Anklet"),
+        .itemId = ITEM_POWER_ANKLET,
+        .price = 3000,
+        .holdEffect = HOLD_EFFECT_NONE, // Placeholder?
+        .description = sPowerAnkletDesc,
+        .pocket = POCKET_ITEMS,
+        .type = 4,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .secondaryId = 0,
+    },
+
+    [ITEM_POWER_WEIGHT] =
+    {
+        .name = _("Power Weight"),
+        .itemId = ITEM_POWER_WEIGHT,
+        .price = 3000,
+        .holdEffect = HOLD_EFFECT_NONE, // Placeholder?
+        .description = sPowerWeightDesc,
+        .pocket = POCKET_ITEMS,
+        .type = 4,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .secondaryId = 0,
+    },
+
     [ITEM_SEA_INCENSE] =
     {
         .name = _("Sea Incense"),

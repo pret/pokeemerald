@@ -1104,8 +1104,8 @@ static const u8 sDubiousDiscDesc[] = _(
     "flowing with data.");
 
 static const u8 sReaperClothDesc[] = _(
-    "A certain POKéMON\n"
-    "loves it. It's imbued\n"
+    "Loved by a certain\n"
+    "POKéMON. Imbued\n"
     "with strong energy.");
 
 static const u8 sRazorClawDesc[] = _(
@@ -1221,6 +1221,36 @@ static const u8 sShellBellDesc[] = _(
     "A hold item that\n"
     "restores HP upon\n"
     "striking the foe.");
+
+static const u8 sPowerBracerDesc[] = _(
+    "A hold item that\n"
+    "promotes ATK gain,\n"
+    "but reduces SPEED.");
+
+static const u8 sPowerBeltDesc[] = _(
+    "A hold item that\n"
+    "promotes DEF gain,\n"
+    "but reduces SPEED.");
+
+static const u8 sPowerLensDesc[] = _(
+    "Hold item that pro-\n"
+    "motes SP. ATK gain,\n"
+    "but reduces SPEED.");
+
+static const u8 sPowerBandDesc[] = _(
+    "Hold item that pro-\n"
+    "motes SP. DEF gain,\n"
+    "but reduces SPEED.");
+
+static const u8 sPowerAnkletDesc[] = _(
+    "A hold item that\n"
+    "promotes SPD gain,\n"
+    "but reduces SPEED.");
+
+static const u8 sPowerWeightDesc[] = _(
+    "A hold item that\n"
+    "promotes HP gain,\n"
+    "but reduces SPEED.");
 
 static const u8 sSeaIncenseDesc[] = _(
     "A hold item that\n"
