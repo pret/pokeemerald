@@ -270,6 +270,16 @@ static const u8 sBerryJuiceDesc[] = _(
     "that restores HP\n"
     "by 20 points.");
 
+static const u8 sSweetHeartDesc[] = _(
+    "A sweet chocolate\n"
+    "that restores HP\n"
+    "by 20 points.");
+
+static const u8 sBigMalasadaDesc[] = _(
+    "Heals all the\n"
+    "status problems of\n"
+    "one POKéMON.");
+
 static const u8 sSacredAshDesc[] = _(
     "Fully revives and\n"
     "restores all\n"

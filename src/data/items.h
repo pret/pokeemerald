@@ -799,6 +799,35 @@ const struct Item gItems[] =
         .secondaryId = 0,
     },
 
+    [ITEM_SWEET_HEART] =
+    {
+        .name = _("Sweet Heart"),
+        .itemId = ITEM_SWEET_HEART,
+        .price = 3000,
+        .holdEffectParam = 20,
+        .description = sSweetHeartDesc,
+        .pocket = POCKET_ITEMS,
+        .type = 1,
+        .fieldUseFunc = ItemUseOutOfBattle_Medicine,
+        .battleUsage = 1,
+        .battleUseFunc = ItemUseInBattle_Medicine,
+        .secondaryId = 0,
+    },
+
+    [ITEM_BIG_MALASADA] =
+    {
+        .name = _("Big Malasada"),
+        .itemId = ITEM_BIG_MALASADA,
+        .price = 350,
+        .description = sBigMalasadaDesc,
+        .pocket = POCKET_ITEMS,
+        .type = 1,
+        .fieldUseFunc = ItemUseOutOfBattle_Medicine,
+        .battleUsage = 1,
+        .battleUseFunc = ItemUseInBattle_Medicine,
+        .secondaryId = 0,
+    },
+
     [ITEM_SACRED_ASH] =
     {
         .name = _("Sacred Ash"),
