@@ -3009,6 +3009,30 @@ const struct Item gItems[] =
         .secondaryId = 0,
     },
 
+    [ITEM_WHIPPED_DREAM] =
+    {
+        .name = _("WhippedDream"),
+        .itemId = ITEM_WHIPPED_DREAM,
+        .price = 2000,
+        .description = sWhippedDreamDesc,
+        .pocket = POCKET_ITEMS,
+        .type = 4,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .secondaryId = 0,
+    },
+
+    [ITEM_SACHET] =
+    {
+        .name = _("Sachet"),
+        .itemId = ITEM_SACHET,
+        .price = 2000,
+        .description = sSachetDesc,
+        .pocket = POCKET_ITEMS,
+        .type = 4,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .secondaryId = 0,
+    },
+
     [ITEM_LIGHT_BALL] =
     {
         .name = _("Light Ball"),

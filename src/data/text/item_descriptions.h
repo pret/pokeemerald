@@ -1123,6 +1123,16 @@ static const u8 sPrismScaleDesc[] = _(
     "It helps a certain\n"
     "POKéMON to evolve.");
 
+static const u8 sWhippedDreamDesc[] = _(
+    "A soft and sweet\n"
+    "treat loved by some\n"
+    "POKéMON.");
+
+static const u8 sSachetDesc[] = _(
+    "A sachet filled with\n"
+    "perfumes loved by\n"
+    "some POKéMON.");
+
 static const u8 sLightBallDesc[] = _(
     "A hold item that\n"
     "raises the SP. ATK\n"
