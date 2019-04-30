@@ -2126,10 +2126,60 @@ static const u8 sFloatStoneDesc[] = _(
     "reduces the weight\n"
     "of Pokémon when held.");
 
+static const u8 sRockyHelmetDesc[] = _(
+    "Hurts the foe if\n"
+    "they touch its\n"
+    "holder.");
+
+static const u8 sAirBalloonDesc[] = _(
+    "Elevates the holder\n"
+    "in the air. If hit,\n"
+    "this item will burst.");
+
+static const u8 sRedCardDesc[] = _(
+    "Switches out the\n"
+    "foe if they hit the\n"
+    "holder.");
+
+static const u8 sRingTargetDesc[] = _(
+    "Moves that wouldn't\n"
+    "have effect will\n"
+    "land on its holder.");
+
 static const u8 sBindingBandDesc[] = _(
-    "This band increases\n"
-    "the power of binding\n"
+    "Increases the\n"
+    "power of binding\n"
     "moves when held.");
+
+static const u8 sEjectButtonDesc[] = _(
+    "Switches out the\n"
+    "user if they're hit\n"
+    "by the foe.");
+
+static const u8 sAbsorbBulbDesc[] = _(
+    "Raises SP. ATK if\n"
+    "the holder is hit by\n"
+    "a Water-type move.");
+
+static const u8 sCellBatteryDesc[] = _(
+    "Raises ATK if the\n"
+    "holder is hit by an\n"
+    "Electric-type move.");
+
+static const u8 sLuminousMossDesc[] = _(
+    "Raises SP. DEF if\n"
+    "the holder is hit by\n"
+    "a Water-type move.");
+
+static const u8 sSnowballDesc[] = _(
+    "Raises ATK if its\n"
+    "holder is hit by an\n"
+    "Ice-type move.");
+
+static const u8 sWeaknessPolicyDesc[] = _(
+    "If hit by a Super\n"
+    "Effective move, ups\n"
+    "ATK and SP. ATK.");
 
 static const u8 sDouseDriveDesc[] = _(
     "Changes Genesect's\n"
@@ -2243,8 +2293,8 @@ static const u8 sFairyGemDesc[] = _(
 
 static const u8 sAssaultVestDesc[] = _(
     "Raises Sp. Def but\n"
-    "prevents the use of\n"
-    "status moves.");
+    "prevents the use\n"
+    "of status moves.");
 
 static const u8 sPixiePlateDesc[] = _(
     "A stone tablet that\n"

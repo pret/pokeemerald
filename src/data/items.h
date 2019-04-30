@@ -5628,13 +5628,153 @@ const struct Item gItems[] =
         .secondaryId = 0,
     },
 
+    [ITEM_ROCKY_HELMET] =
+    {
+        .name = _("Rocky Helmet"),
+        .itemId = ITEM_ROCKY_HELMET,
+        .price = 2000,
+        .holdEffect = HOLD_EFFECT_ROCKY_HELMET,
+        .holdEffectParam = 0,
+        .description = sRockyHelmetDesc,
+        .pocket = POCKET_ITEMS,
+        .type = 4,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .secondaryId = 0,
+    },
+
+    [ITEM_AIR_BALLOON] =
+    {
+        .name = _("Air Balloon"),
+        .itemId = ITEM_AIR_BALLOON,
+        .price = 2000,
+        .holdEffect = HOLD_EFFECT_AIR_BALLOON,
+        .holdEffectParam = 0,
+        .description = sAirBalloonDesc,
+        .pocket = POCKET_ITEMS,
+        .type = 4,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .secondaryId = 0,
+    },
+
+    [ITEM_RED_CARD] =
+    {
+        .name = _("Red Card"),
+        .itemId = ITEM_RED_CARD,
+        .price = 2000,
+        .holdEffect = HOLD_EFFECT_RED_CARD,
+        .holdEffectParam = 0,
+        .description = sRedCardDesc,
+        .pocket = POCKET_ITEMS,
+        .type = 4,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .secondaryId = 0,
+    },
+
+    [ITEM_RING_TARGET] =
+    {
+        .name = _("Ring Target"),
+        .itemId = ITEM_RING_TARGET,
+        .price = 2000,
+        .holdEffect = HOLD_EFFECT_RING_TARGET,
+        .holdEffectParam = 0,
+        .description = sRingTargetDesc,
+        .pocket = POCKET_ITEMS,
+        .type = 4,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .secondaryId = 0,
+    },
+
     [ITEM_BINDING_BAND] =
     {
         .name = _("Binding Band"),
         .itemId = ITEM_BINDING_BAND,
-        .price = 200,
+        .price = 2000,
         .holdEffect = HOLD_EFFECT_BINDING_BAND,
         .description = sBindingBandDesc,
+        .pocket = POCKET_ITEMS,
+        .type = 4,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .secondaryId = 0,
+    },
+
+    [ITEM_EJECT_BUTTON] =
+    {
+        .name = _("Eject Button"),
+        .itemId = ITEM_EJECT_BUTTON,
+        .price = 2000,
+        .holdEffect = HOLD_EFFECT_EJECT_BUTTON,
+        .holdEffectParam = 0,
+        .description = sEjectButtonDesc,
+        .pocket = POCKET_ITEMS,
+        .type = 4,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .secondaryId = 0,
+    },
+
+    [ITEM_ABSORB_BULB] =
+    {
+        .name = _("Absorb Bulb"),
+        .itemId = ITEM_ABSORB_BULB,
+        .price = 2000,
+        .holdEffect = HOLD_EFFECT_ABSORB_BULB,
+        .holdEffectParam = 0,
+        .description = sAbsorbBulbDesc,
+        .pocket = POCKET_ITEMS,
+        .type = 4,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .secondaryId = 0,
+    },
+
+    [ITEM_CELL_BATTERY] =
+    {
+        .name = _("Cell Battery"),
+        .itemId = ITEM_CELL_BATTERY,
+        .price = 2000,
+        .holdEffect = HOLD_EFFECT_CELL_BATTERY,
+        .holdEffectParam = 0,
+        .description = sCellBatteryDesc,
+        .pocket = POCKET_ITEMS,
+        .type = 4,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .secondaryId = 0,
+    },
+
+    [ITEM_LUMINOUS_MOSS] =
+    {
+        .name = _("LuminousMoss"),
+        .itemId = ITEM_LUMINOUS_MOSS,
+        .price = 2000,
+        .holdEffect = HOLD_EFFECT_LUMINOUS_MOSS,
+        .holdEffectParam = 0,
+        .description = sLuminousMossDesc,
+        .pocket = POCKET_ITEMS,
+        .type = 4,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .secondaryId = 0,
+    },
+
+    [ITEM_SNOWBALL] =
+    {
+        .name = _("Snowball"),
+        .itemId = ITEM_SNOWBALL,
+        .price = 2000,
+        .holdEffect = HOLD_EFFECT_SNOWBALL,
+        .holdEffectParam = 0,
+        .description = sSnowballDesc,
+        .pocket = POCKET_ITEMS,
+        .type = 4,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .secondaryId = 0,
+    },
+
+    [ITEM_WEAKNESS_POLICY] =
+    {
+        .name = _("Weak. Policy"),
+        .itemId = ITEM_WEAKNESS_POLICY,
+        .price = 1000,
+        .holdEffect = HOLD_EFFECT_WEAKNESS_POLICY,
+        .holdEffectParam = 0,
+        .description = sWeaknessPolicyDesc,
         .pocket = POCKET_ITEMS,
         .type = 4,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
