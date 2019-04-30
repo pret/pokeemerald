@@ -1550,6 +1550,58 @@ const struct Item gItems[] =
         .secondaryId = 0,
     },
 
+    [ITEM_RED_NECTAR] =
+    {
+        .name = _("Red Nectar"),
+        .itemId = ITEM_RED_NECTAR,
+        .price = 300,
+        .holdEffectParam = 0,
+        .description = sRedNectarDesc,
+        .pocket = POCKET_ITEMS,
+        .type = 4,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse, // Placeholder
+        .secondaryId = 0,
+    },
+
+    [ITEM_YELLOW_NECTAR] =
+    {
+        .name = _("Yellow Nectar"),
+        .itemId = ITEM_YELLOW_NECTAR,
+        .price = 300,
+        .holdEffectParam = 0,
+        .description = sYellowNectarDesc,
+        .pocket = POCKET_ITEMS,
+        .type = 4,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse, // Placeholder
+        .secondaryId = 0,
+    },
+
+    [ITEM_PINK_NECTAR] =
+    {
+        .name = _("Pink Nectar"),
+        .itemId = ITEM_PINK_NECTAR,
+        .price = 300,
+        .holdEffectParam = 0,
+        .description = sPinkNectarDesc,
+        .pocket = POCKET_ITEMS,
+        .type = 4,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse, // Placeholder
+        .secondaryId = 0,
+    },
+
+    [ITEM_PURPLE_NECTAR] =
+    {
+        .name = _("Purple Nectar"),
+        .itemId = ITEM_PURPLE_NECTAR,
+        .price = 300,
+        .holdEffectParam = 0,
+        .description = sPurpleNectarDesc,
+        .pocket = POCKET_ITEMS,
+        .type = 4,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse, // Placeholder
+        .secondaryId = 0,
+    },
+
 // Mail
     [ITEM_ORANGE_MAIL] =
     {

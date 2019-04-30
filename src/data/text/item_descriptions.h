@@ -570,6 +570,26 @@ static const u8 sHeartScaleDesc[] = _(
     "It is coveted by\n"
     "collectors.");
 
+static const u8 sRedNectarDesc[] = _(
+    "Flower nectar that\n"
+    "changes the form\n"
+    "of certain POKéMON.");
+
+static const u8 sYellowNectarDesc[] = _(
+    "Flower nectar that\n"
+    "changes the form\n"
+    "of certain POKéMON.");
+
+static const u8 sPinkNectarDesc[] = _(
+    "Flower nectar that\n"
+    "changes the form\n"
+    "of certain POKéMON.");
+
+static const u8 sPurpleNectarDesc[] = _(
+    "Flower nectar that\n"
+    "changes the form\n"
+    "of certain POKéMON.");
+
 // Mail
 static const u8 sOrangeMailDesc[] = _(
     "A ZIGZAGOON-print\n"
