@@ -3365,9 +3365,9 @@ const struct Item gItems[] =
     {
         .name = _("Sea Incense"),
         .itemId = ITEM_SEA_INCENSE,
-        .price = 9600,
+        .price = 2000,
         .holdEffect = HOLD_EFFECT_WATER_POWER,
-        .holdEffectParam = 5,
+        .holdEffectParam = 20,
         .description = sSeaIncenseDesc,
         .pocket = POCKET_ITEMS,
         .type = 4,
@@ -3379,10 +3379,107 @@ const struct Item gItems[] =
     {
         .name = _("Lax Incense"),
         .itemId = ITEM_LAX_INCENSE,
-        .price = 9600,
+        .price = 5000,
         .holdEffect = HOLD_EFFECT_EVASION_UP,
-        .holdEffectParam = 5,
+        .holdEffectParam = 10,
         .description = sLaxIncenseDesc,
+        .pocket = POCKET_ITEMS,
+        .type = 4,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .secondaryId = 0,
+    },
+
+    [ITEM_ODD_INCENSE] =
+    {
+        .name = _("Odd Incense"),
+        .itemId = ITEM_ODD_INCENSE,
+        .price = 2000,
+        .holdEffect = HOLD_EFFECT_PSYCHIC_POWER,
+        .holdEffectParam = 20,
+        .description = sOddIncenseDesc,
+        .pocket = POCKET_ITEMS,
+        .type = 4,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .secondaryId = 0,
+    },
+
+    [ITEM_ROCK_INCENSE] =
+    {
+        .name = _("Rock Incense"),
+        .itemId = ITEM_ROCK_INCENSE,
+        .price = 2000,
+        .holdEffect = HOLD_EFFECT_ROCK_POWER,
+        .holdEffectParam = 20,
+        .description = sRockIncenseDesc,
+        .pocket = POCKET_ITEMS,
+        .type = 4,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .secondaryId = 0,
+    },
+
+    [ITEM_FULL_INCENSE] =
+    {
+        .name = _("Full Incense"),
+        .itemId = ITEM_FULL_INCENSE,
+        .price = 5000,
+        .holdEffect = HOLD_EFFECT_LAGGING_TAIL,
+        .holdEffectParam = 5,
+        .description = sFullIncenseDesc,
+        .pocket = POCKET_ITEMS,
+        .type = 4,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .secondaryId = 0,
+    },
+
+    [ITEM_WAVE_INCENSE] =
+    {
+        .name = _("Wave Incense"),
+        .itemId = ITEM_WAVE_INCENSE,
+        .price = 2000,
+        .holdEffect = HOLD_EFFECT_WATER_POWER,
+        .holdEffectParam = 20,
+        .description = sWaveIncenseDesc,
+        .pocket = POCKET_ITEMS,
+        .type = 4,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .secondaryId = 0,
+    },
+
+    [ITEM_ROSE_INCENSE] =
+    {
+        .name = _("Rose Incense"),
+        .itemId = ITEM_ROSE_INCENSE,
+        .price = 2000,
+        .holdEffect = HOLD_EFFECT_GRASS_POWER,
+        .holdEffectParam = 20,
+        .description = sRoseIncenseDesc,
+        .pocket = POCKET_ITEMS,
+        .type = 4,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .secondaryId = 0,
+    },
+
+    [ITEM_LUCK_INCENSE] =
+    {
+        .name = _("Luck Incense"),
+        .itemId = ITEM_LUCK_INCENSE,
+        .price = 11000,
+        .holdEffect = HOLD_EFFECT_DOUBLE_PRIZE,
+        .holdEffectParam = 10,
+        .description = sLuckIncenseDesc,
+        .pocket = POCKET_ITEMS,
+        .type = 4,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .secondaryId = 0,
+    },
+
+    [ITEM_PURE_INCENSE] =
+    {
+        .name = _("Pure Incense"),
+        .itemId = ITEM_PURE_INCENSE,
+        .price = 6000,
+        .holdEffect = HOLD_EFFECT_REPEL,
+        .description = sPureIncenseDesc,
         .pocket = POCKET_ITEMS,
         .type = 4,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,

@@ -1262,6 +1262,41 @@ static const u8 sLaxIncenseDesc[] = _(
     "slightly lowers the\n"
     "foe's accuracy.");
 
+static const u8 sOddIncenseDesc[] = _(
+    "A hold item that\n"
+    "boosts PSYCHIC-\n"
+    "type moves.");
+
+static const u8 sRockIncenseDesc[] = _(
+    "A hold item that\n"
+    "raises the power of\n"
+    "ROCK-type moves.");
+
+static const u8 sFullIncenseDesc[] = _(
+    "A held item that\n"
+    "makes the holder\n"
+    "move slower.");
+
+static const u8 sWaveIncenseDesc[] = _(
+    "A hold item that\n"
+    "slightly boosts\n"
+    "WATER-type moves.");
+
+static const u8 sRoseIncenseDesc[] = _(
+    "A hold item that\n"
+    "raises the power of\n"
+    "GRASS-type moves.");
+
+static const u8 sLuckIncenseDesc[] = _(
+    "Doubles money in\n"
+    "battle if the\n"
+    "holder takes part.");
+
+static const u8 sPureIncenseDesc[] = _(
+    "A hold item that\n"
+    "helps repel wild\n"
+    "POKéMON.");
+
 static const u8 sLuckyPunchDesc[] = _(
     "A hold item that\n"
     "raises CHANSEY's\n"
