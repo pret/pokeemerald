@@ -1098,6 +1098,31 @@ static const u8 sMagmarizerDesc[] = _(
     "loves it. It's full\n"
     "of magma energy.");
 
+static const u8 sDubiousDiscDesc[] = _(
+    "A certain POKéMON\n"
+    "loves it. It's over-\n"
+    "flowing with data.");
+
+static const u8 sReaperClothDesc[] = _(
+    "A certain POKéMON\n"
+    "loves it. It's imbued\n"
+    "with strong energy.");
+
+static const u8 sRazorClawDesc[] = _(
+    "Helps a certain\n"
+    "POKéMON to evolve.\n"
+    "It's a sharp claw.");
+
+static const u8 sRazorFangDesc[] = _(
+    "Helps a certain\n"
+    "POKéMON to evolve.\n"
+    "It's a sharp fang.");
+
+static const u8 sPrismScaleDesc[] = _(
+    "A mysterious scale.\n"
+    "It helps a certain\n"
+    "POKéMON to evolve.");
+
 static const u8 sLightBallDesc[] = _(
     "A hold item that\n"
     "raises the SP. ATK\n"

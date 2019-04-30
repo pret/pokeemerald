@@ -2946,6 +2946,69 @@ const struct Item gItems[] =
         .secondaryId = 0,
     },
 
+    [ITEM_DUBIOUS_DISC] =
+    {
+        .name = _("Dubious Disc"),
+        .itemId = ITEM_DUBIOUS_DISC,
+        .price = 2000,
+        .description = sDubiousDiscDesc,
+        .pocket = POCKET_ITEMS,
+        .type = 4,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .secondaryId = 0,
+    },
+
+    [ITEM_REAPER_CLOTH] =
+    {
+        .name = _("Reaper Cloth"),
+        .itemId = ITEM_REAPER_CLOTH,
+        .price = 2000,
+        .description = sReaperClothDesc,
+        .pocket = POCKET_ITEMS,
+        .type = 4,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .secondaryId = 0,
+    },
+
+    [ITEM_RAZOR_CLAW] =
+    {
+        .name = _("Razor Claw"),
+        .itemId = ITEM_RAZOR_CLAW,
+        .price = 2000,
+        .holdEffect = HOLD_EFFECT_NONE, // Placeholder.
+        .description = sRazorClawDesc,
+        .pocket = POCKET_ITEMS,
+        .type = 4,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .secondaryId = 0,
+    },
+
+    [ITEM_RAZOR_FANG] =
+    {
+        .name = _("Razor Fang"),
+        .itemId = ITEM_RAZOR_FANG,
+        .price = 2000,
+        .holdEffect = HOLD_EFFECT_FLINCH,
+        .holdEffectParam = 10,
+        .description = sRazorFangDesc,
+        .pocket = POCKET_ITEMS,
+        .type = 4,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .secondaryId = 0,
+    },
+
+    [ITEM_PRISM_SCALE] =
+    {
+        .name = _("Prism Scale"),
+        .itemId = ITEM_PRISM_SCALE,
+        .price = 2000,
+        .description = sPrismScaleDesc,
+        .pocket = POCKET_ITEMS,
+        .type = 4,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .secondaryId = 0,
+    },
+
     [ITEM_LIGHT_BALL] =
     {
         .name = _("Light Ball"),
