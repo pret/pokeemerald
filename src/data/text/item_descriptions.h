@@ -494,6 +494,42 @@ static const u8 sIceStoneDesc[] = _(
     "evolve.");
 
 // Valuable items
+
+static const u8 sRedApricornDesc[] = _(
+    "A red apricorn.\n"
+    "It assails your\n"
+    "nostrils.");
+
+static const u8 sBlueApricornDesc[] = _(
+    "A blue apricorn.\n"
+    "It smells a bit\n"
+    "like grass.");
+
+static const u8 sYellowApricornDesc[] = _(
+    "A yellow apricorn.\n"
+    "It has an invigor-\n"
+    "ating scent.");
+
+static const u8 sGreenApricornDesc[] = _(
+    "A green apricorn.\n"
+    "It has a strange,\n"
+    "aromatic scent.");
+
+static const u8 sPinkApricornDesc[] = _(
+    "A pink apricorn.\n"
+    "It has a nice,\n"
+    "sweet scent.");
+
+static const u8 sWhiteApricornDesc[] = _(
+    "A white apricorn.\n"
+    "It doesn't smell\n"
+    "like anything.");
+
+static const u8 sBlackApricornDesc[] = _(
+    "A black apricorn.\n"
+    "It has an inde-\n"
+    "scribable scent.");
+
 static const u8 sTinyMushroomDesc[] = _(
     "A plain mushroom\n"
     "that would sell\n"

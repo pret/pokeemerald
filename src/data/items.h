@@ -1370,6 +1370,90 @@ const struct Item gItems[] =
 
 // Valuable items
 
+    [ITEM_RED_APRICORN] =
+    {
+        .name = _("Red Apricorn"),
+        .itemId = ITEM_RED_APRICORN,
+        .price = 200,
+        .description = sRedApricornDesc,
+        .pocket = POCKET_ITEMS,
+        .type = 4,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .secondaryId = 0,
+    },
+
+    [ITEM_BLUE_APRICORN] =
+    {
+        .name = _("Blu Apricorn"),
+        .itemId = ITEM_BLUE_APRICORN,
+        .price = 200,
+        .description = sBlueApricornDesc,
+        .pocket = POCKET_ITEMS,
+        .type = 4,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .secondaryId = 0,
+    },
+
+    [ITEM_YELLOW_APRICORN] =
+    {
+        .name = _("Ylw Apricorn"),
+        .itemId = ITEM_YELLOW_APRICORN,
+        .price = 200,
+        .description = sYellowApricornDesc,
+        .pocket = POCKET_ITEMS,
+        .type = 4,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .secondaryId = 0,
+    },
+
+    [ITEM_GREEN_APRICORN] =
+    {
+        .name = _("Grn Apricorn"),
+        .itemId = ITEM_GREEN_APRICORN,
+        .price = 200,
+        .description = sGreenApricornDesc,
+        .pocket = POCKET_ITEMS,
+        .type = 4,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .secondaryId = 0,
+    },
+
+    [ITEM_PINK_APRICORN] =
+    {
+        .name = _("Pnk Apricorn"),
+        .itemId = ITEM_PINK_APRICORN,
+        .price = 200,
+        .description = sPinkApricornDesc,
+        .pocket = POCKET_ITEMS,
+        .type = 4,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .secondaryId = 0,
+    },
+
+    [ITEM_WHITE_APRICORN] =
+    {
+        .name = _("Wht Apricorn"),
+        .itemId = ITEM_WHITE_APRICORN,
+        .price = 200,
+        .description = sWhiteApricornDesc,
+        .pocket = POCKET_ITEMS,
+        .type = 4,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .secondaryId = 0,
+    },
+
+    [ITEM_BLACK_APRICORN] =
+    {
+        .name = _("Blk Apricorn"),
+        .itemId = ITEM_BLACK_APRICORN,
+        .price = 200,
+        .description = sBlackApricornDesc,
+        .pocket = POCKET_ITEMS,
+        .type = 4,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .secondaryId = 0,
+    },
+
     [ITEM_TINY_MUSHROOM] =
     {
         .name = _("TinyMushroom"),
