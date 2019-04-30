@@ -1078,6 +1078,26 @@ static const u8 sDragonScaleDesc[] = _(
     "held by DRAGON-\n"
     "type POKéMON.");
 
+static const u8 sOvalStoneDesc[] = _(
+    "Helps a certain\n"
+    "POKéMON to evolve.\n"
+    "Looks like an egg.");
+
+static const u8 sProtectorDesc[] = _(
+    "A certain POKéMON\n"
+    "loves it. It's quite\n"
+    "heavy.");
+
+static const u8 sElectirizerDesc[] = _(
+    "A certain POKéMON\n"
+    "loves it. It's full\n"
+    "of electricity.");
+
+static const u8 sMagmarizerDesc[] = _(
+    "A certain POKéMON\n"
+    "loves it. It's full\n"
+    "of magma energy.");
+
 static const u8 sLightBallDesc[] = _(
     "A hold item that\n"
     "raises the SP. ATK\n"

@@ -2898,6 +2898,54 @@ const struct Item gItems[] =
         .secondaryId = 0,
     },
 
+    [ITEM_OVAL_STONE] =
+    {
+        .name = _("Oval Stone"),
+        .itemId = ITEM_OVAL_STONE,
+        .price = 2000,
+        .description = sOvalStoneDesc,
+        .pocket = POCKET_ITEMS,
+        .type = 4,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .secondaryId = 0,
+    },
+
+    [ITEM_PROTECTOR] =
+    {
+        .name = _("Protector"),
+        .itemId = ITEM_PROTECTOR,
+        .price = 2000,
+        .description = sProtectorDesc,
+        .pocket = POCKET_ITEMS,
+        .type = 4,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .secondaryId = 0,
+    },
+
+    [ITEM_ELECTIRIZER] =
+    {
+        .name = _("Electirizer"),
+        .itemId = ITEM_ELECTIRIZER,
+        .price = 2000,
+        .description = sElectirizerDesc,
+        .pocket = POCKET_ITEMS,
+        .type = 4,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .secondaryId = 0,
+    },
+
+    [ITEM_MAGMARIZER] =
+    {
+        .name = _("Magmarizer"),
+        .itemId = ITEM_MAGMARIZER,
+        .price = 2000,
+        .description = sMagmarizerDesc,
+        .pocket = POCKET_ITEMS,
+        .type = 4,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .secondaryId = 0,
+    },
+
     [ITEM_LIGHT_BALL] =
     {
         .name = _("Light Ball"),
