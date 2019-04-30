@@ -590,6 +590,11 @@ static const u8 sPurpleNectarDesc[] = _(
     "changes the form\n"
     "of certain POKéMON.");
 
+static const u8 sRareBoneDesc[] = _(
+    "A very rare bone.\n"
+    "It can be sold at\n"
+    "a high price.");
+
 // Mail
 static const u8 sOrangeMailDesc[] = _(
     "A ZIGZAGOON-print\n"

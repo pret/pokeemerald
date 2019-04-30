@@ -1602,6 +1602,18 @@ const struct Item gItems[] =
         .secondaryId = 0,
     },
 
+    [ITEM_RARE_BONE] =
+    {
+        .name = _("Rare Bone"),
+        .itemId = ITEM_RARE_BONE,
+        .price = 5000,
+        .description = sRareBoneDesc,
+        .pocket = POCKET_ITEMS,
+        .type = 4,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .secondaryId = 0,
+    },
+
 // Mail
     [ITEM_ORANGE_MAIL] =
     {
