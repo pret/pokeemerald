@@ -1208,6 +1208,19 @@ const struct Item gItems[] =
         .secondaryId = 0,
     },
 
+    [ITEM_ABILITY_CAPSULE] =
+    {
+        .name = _("Ab. Capsule"),
+        .itemId = ITEM_ABILITY_CAPSULE,
+        .price = 10000,
+        .holdEffectParam = 0,
+        .description = sAbilityCapsuleDesc,
+        .pocket = POCKET_ITEMS,
+        .type = 4,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse, // Placeholder
+        .secondaryId = 0,
+    },
+
     [ITEM_ESCAPE_ROPE] =
     {
         .name = _("Escape Rope"),
@@ -1301,6 +1314,54 @@ const struct Item gItems[] =
         .itemId = ITEM_LEAF_STONE,
         .price = 2100,
         .description = sLeafStoneDesc,
+        .pocket = POCKET_ITEMS,
+        .type = 1,
+        .fieldUseFunc = ItemUseOutOfBattle_EvolutionStone,
+        .secondaryId = 0,
+    },
+
+    [ITEM_DAWN_STONE] =
+    {
+        .name = _("Dawn Stone"),
+        .itemId = ITEM_DAWN_STONE,
+        .price = 2100,
+        .description = sDawnStoneDesc,
+        .pocket = POCKET_ITEMS,
+        .type = 1,
+        .fieldUseFunc = ItemUseOutOfBattle_EvolutionStone,
+        .secondaryId = 0,
+    },
+
+    [ITEM_DUSK_STONE] =
+    {
+        .name = _("Dusk Stone"),
+        .itemId = ITEM_DUSK_STONE,
+        .price = 2100,
+        .description = sDuskStoneDesc,
+        .pocket = POCKET_ITEMS,
+        .type = 1,
+        .fieldUseFunc = ItemUseOutOfBattle_EvolutionStone,
+        .secondaryId = 0,
+    },
+
+    [ITEM_SHINY_STONE] =
+    {
+        .name = _("Shiny Stone"),
+        .itemId = ITEM_SHINY_STONE,
+        .price = 2100,
+        .description = sShinyStoneDesc,
+        .pocket = POCKET_ITEMS,
+        .type = 1,
+        .fieldUseFunc = ItemUseOutOfBattle_EvolutionStone,
+        .secondaryId = 0,
+    },
+
+    [ITEM_ICE_STONE] =
+    {
+        .name = _("Ice Stone"),
+        .itemId = ITEM_ICE_STONE,
+        .price = 2100,
+        .description = sIceStoneDesc,
         .pocket = POCKET_ITEMS,
         .type = 1,
         .fieldUseFunc = ItemUseOutOfBattle_EvolutionStone,
