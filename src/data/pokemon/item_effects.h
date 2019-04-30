@@ -163,6 +163,10 @@ const u8 gItemEffect_BigMalasada[6] = {
     [3] = ITEM3_STATUS_ALL,
 };
 
+const u8 gItemEffect_OldGateau[6] = {
+    [3] = ITEM3_STATUS_ALL,
+};
+
 const u8 gItemEffect_SacredAsh[7] = {
     [0] = ITEM0_SACRED_ASH,
     [4] = ITEM4_REVIVE | ITEM4_HEAL_HP,
@@ -286,7 +290,14 @@ const u8 gItemEffect_XAccuracy[8] = {
     [7] = 1,
 };
 
-const u8 gItemEffect_XSpecial[8] = {
+const u8 gItemEffect_XSpecialAttack[8] = {
+    [2] = 1,
+    [5] = ITEM5_FRIENDSHIP_LOW | ITEM5_FRIENDSHIP_MID,
+    [6] = 1,
+    [7] = 1,
+};
+
+const u8 gItemEffect_XSpecialDefense[8] = {
     [2] = 1,
     [5] = ITEM5_FRIENDSHIP_LOW | ITEM5_FRIENDSHIP_MID,
     [6] = 1,
@@ -424,6 +435,7 @@ const u8 *const gItemEffectTable[] =
     [ITEM_BERRY_JUICE - ITEM_POTION] = gItemEffect_BerryJuice,
     [ITEM_SWEET_HEART - ITEM_POTION] = gItemEffect_SweetHeart,
     [ITEM_BIG_MALASADA - ITEM_POTION] = gItemEffect_BigMalasada,
+    [ITEM_OLD_GATEAU - ITEM_POTION] = gItemEffect_OldGateau,
     [ITEM_SACRED_ASH - ITEM_POTION] = gItemEffect_SacredAsh,
     [ITEM_HP_UP - ITEM_POTION] = gItemEffect_HPUp,
     [ITEM_PROTEIN - ITEM_POTION] = gItemEffect_Protein,
@@ -440,7 +452,8 @@ const u8 *const gItemEffectTable[] =
     [ITEM_X_DEFENSE - ITEM_POTION] = gItemEffect_XDefend,
     [ITEM_X_SPEED - ITEM_POTION] = gItemEffect_XSpeed,
     [ITEM_X_ACCURACY - ITEM_POTION] = gItemEffect_XAccuracy,
-    [ITEM_X_SP_ATK - ITEM_POTION] = gItemEffect_XSpecial,
+    [ITEM_X_SP_ATK - ITEM_POTION] = gItemEffect_XSpecialAttack,
+    [ITEM_X_SP_DEF - ITEM_POTION] = gItemEffect_XSpecialDefense,
     [ITEM_SUN_STONE - ITEM_POTION] = gItemEffect_EvoStone,
     [ITEM_MOON_STONE - ITEM_POTION] = gItemEffect_EvoStone,
     [ITEM_FIRE_STONE - ITEM_POTION] = gItemEffect_EvoStone,

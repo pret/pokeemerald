@@ -280,6 +280,11 @@ static const u8 sBigMalasadaDesc[] = _(
     "status problems of\n"
     "one POKéMON.");
 
+static const u8 sOldGateauDesc[] = _(
+    "Heals all the\n"
+    "status problems of\n"
+    "one POKéMON.");
+
 static const u8 sSacredAshDesc[] = _(
     "Fully revives and\n"
     "restores all\n"
@@ -392,9 +397,14 @@ static const u8 sXAccuracyDesc[] = _(
     "of attack moves\n"
     "during one battle.");
 
-static const u8 sXSpecialDesc[] = _(
+static const u8 sXSpecialAttackDesc[] = _(
     "Raises the stat\n"
     "SP. ATK during one\n"
+    "battle.");
+
+static const u8 sXSpecialDefenseDesc[] = _(
+    "Raises the stat\n"
+    "SP. DEF during one\n"
     "battle.");
 
 static const u8 sPokeDollDesc[] = _(

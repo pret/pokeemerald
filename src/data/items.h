@@ -828,6 +828,20 @@ const struct Item gItems[] =
         .secondaryId = 0,
     },
 
+    [ITEM_OLD_GATEAU] =
+    {
+        .name = _("Old Gateau"),
+        .itemId = ITEM_OLD_GATEAU,
+        .price = 350,
+        .description = sOldGateauDesc,
+        .pocket = POCKET_ITEMS,
+        .type = 1,
+        .fieldUseFunc = ItemUseOutOfBattle_Medicine,
+        .battleUsage = 1,
+        .battleUseFunc = ItemUseInBattle_Medicine,
+        .secondaryId = 0,
+    },
+
     [ITEM_SACRED_ASH] =
     {
         .name = _("Sacred Ash"),
@@ -1112,10 +1126,24 @@ const struct Item gItems[] =
 
     [ITEM_X_SP_ATK] =
     {
-        .name = _("X Special"),
+        .name = _("X Sp. Atk."),
         .itemId = ITEM_X_SP_ATK,
         .price = 350,
-        .description = sXSpecialDesc,
+        .description = sXSpecialAttackDesc,
+        .pocket = POCKET_ITEMS,
+        .type = 4,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .battleUsage = 2,
+        .battleUseFunc = ItemUseInBattle_StatIncrease,
+        .secondaryId = 0,
+    },
+
+    [ITEM_X_SP_DEF] =
+    {
+        .name = _("X Sp. Def."),
+        .itemId = ITEM_X_SP_DEF,
+        .price = 2000,
+        .description = sXSpecialDefenseDesc,
         .pocket = POCKET_ITEMS,
         .type = 4,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
