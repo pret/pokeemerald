@@ -1,5 +1,5 @@
 SafariZone_South_MapScripts:: @ 823D279
-	map_script MAP_SCRIPT_ON_TRANSITION, SafariZone_South_MapScript1_23D2B1
+	map_script MAP_SCRIPT_ON_TRANSITION, SafariZone_South_OnTransition
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, SafariZone_South_MapScript2_23D284
 	.byte 0
 
@@ -18,7 +18,7 @@ SafariZone_South_EventScript_23D28E:: @ 823D28E
 	releaseall
 	end
 
-SafariZone_South_MapScript1_23D2B1: @ 823D2B1
+SafariZone_South_OnTransition: @ 823D2B1
 	compare VAR_SAFARI_ZONE_STATE, 2
 	call_if_eq SafariZone_South_EventScript_23D2BD
 	end

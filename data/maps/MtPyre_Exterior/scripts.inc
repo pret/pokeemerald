@@ -1,8 +1,8 @@
 MtPyre_Exterior_MapScripts:: @ 8231FCC
-	map_script MAP_SCRIPT_ON_TRANSITION, MtPyre_Exterior_MapScript1_231FD2
+	map_script MAP_SCRIPT_ON_TRANSITION, MtPyre_Exterior_OnTransition
 	.byte 0
 
-MtPyre_Exterior_MapScript1_231FD2: @ 8231FD2
+MtPyre_Exterior_OnTransition: @ 8231FD2
 	call MtPyre_Exterior_EventScript_231FD8
 	end
 

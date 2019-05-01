@@ -1,8 +1,8 @@
 Route131_MapScripts:: @ 81F7404
-	map_script MAP_SCRIPT_ON_TRANSITION, Route131_MapScript1_1F740A
+	map_script MAP_SCRIPT_ON_TRANSITION, Route131_OnTransition
 	.byte 0
 
-Route131_MapScript1_1F740A: @ 81F740A
+Route131_OnTransition: @ 81F740A
 	compare VAR_RAYQUAZA_STATE, 4
 	call_if_ge Route131_EventScript_1F741F
 	call Route131_EventScript_1F741B

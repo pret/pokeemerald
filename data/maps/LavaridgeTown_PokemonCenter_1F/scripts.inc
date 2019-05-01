@@ -1,9 +1,9 @@
 LavaridgeTown_PokemonCenter_1F_MapScripts:: @ 81FFAFA
-	map_script MAP_SCRIPT_ON_TRANSITION, LavaridgeTown_PokemonCenter_1F_MapScript1_1FFB05
+	map_script MAP_SCRIPT_ON_TRANSITION, LavaridgeTown_PokemonCenter_1F_OnTransition
 	map_script MAP_SCRIPT_ON_RESUME, LavaridgeTown_PokemonCenter_1F_MapScript1_277C30
 	.byte 0
 
-LavaridgeTown_PokemonCenter_1F_MapScript1_1FFB05: @ 81FFB05
+LavaridgeTown_PokemonCenter_1F_OnTransition: @ 81FFB05
 	setrespawn HEAL_LOCATION_LAVARIDGE_TOWN
 	call LavaridgeTown_PokemonCenter_1F_EventScript_2718DE
 	end

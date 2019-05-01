@@ -1,8 +1,8 @@
 Route119_WeatherInstitute_2F_MapScripts:: @ 826FF1E
-	map_script MAP_SCRIPT_ON_TRANSITION, Route119_WeatherInstitute_2F_MapScript1_26FF24
+	map_script MAP_SCRIPT_ON_TRANSITION, Route119_WeatherInstitute_2F_OnTransition
 	.byte 0
 
-Route119_WeatherInstitute_2F_MapScript1_26FF24: @ 826FF24
+Route119_WeatherInstitute_2F_OnTransition: @ 826FF24
 	compare VAR_WEATHER_INSTITUTE_STATE, 0
 	call_if_eq Route119_WeatherInstitute_2F_EventScript_26FF44
 	compare VAR_WEATHER_INSTITUTE_STATE, 1

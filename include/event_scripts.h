@@ -18,6 +18,7 @@ extern const u8 EventScript_TryDoRematchBattle[];
 extern const u8 SecretBase_EventScript_DollInteract[];
 extern const u8 SecretBase_EventScript_CushionInteract[];
 
+extern const u8 BerryTreeScript[];
 
 extern const u8 gTVBravoTrainerText00[];
 extern const u8 gTVBravoTrainerText01[];

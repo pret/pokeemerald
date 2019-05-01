@@ -8,31 +8,11 @@
 #include "pokemon_storage_system.h"
 #include "pokenav.h"
 
-enum
-{
-    MODE_NORMAL, // Chosen from Start menu.
-    MODE_FORCE_CALL_1, // Used for the script's special. Has to choose Match Call and make a call.
-    MODE_FORCE_CALL_2, // Set after making a call, has to exit Pokenav.
-};
-
-enum
-{
-    NAVMENU_CB_UNK_0,
-    NAVMENU_CB_UNK_1,
-    NAVMENU_CB_UNK_2,
-    NAVMENU_CB_UNK_3,
-    NAVMENU_CB_UNK_4,
-    NAVMENU_CB_UNK_5,
-    NAVMENU_CB_UNK_6
-};
-
 #define LOOPED_TASK_DECODE_STATE(action) (action - 5)
 
 #define LOOPED_TASK_ID(primary, secondary) (((secondary) << 16) |(primary))
 #define LOOPED_TASK_PRIMARY_ID(taskId) (taskId & 0xFFFF)
 #define LOOPED_TASK_SECONDARY_ID(taskId) (taskId >> 16)
-
-#define UNKNOWN_OFFSET 100000
 
 #define SUBSTRUCT_COUNT 19
 
@@ -46,76 +26,63 @@ struct PokenavResources
     void *field10[SUBSTRUCT_COUNT];
 };
 
-extern u32 sub_81C9430(void);
-extern u32 sub_81C9298(void);
-extern u32 sub_81C941C(void);
-extern u32 sub_81C9924(void);
+struct UnknownPokenavCallbackStruct
+{
+    bool32 (*unk0)(void);
+    u32 (*unk4)(void);
+    bool32 (*unk8)(void);
+    void (*unkC)(int);
+    u32 (*unk10)(void);
+    void (*unk14)(void);
+    void (*unk18)(void);
+};
+
+extern bool32 sub_81C9924(void);
 extern u32 sub_81C99C0(void);
-extern u32 sub_81C9990(void);
-extern u32 sub_81C9940(void);
-extern u32 sub_81C9338(void);
-extern u32 sub_81C9368(void);
-extern u32 sub_81C92CC(void);
-extern u32 sub_81C9304(void);
-extern u32 sub_81CC4D4(void);
-extern u32 sub_81CC554(void);
-extern u32 sub_81CC5F4(void);
-extern u32 sub_81CC62C(void);
-extern u32 sub_81CC65C(void);
-extern u32 sub_81CC524(void);
-extern u32 sub_81CC670(void);
+extern void sub_81C9990(int);
+extern bool32 sub_81C9940(void);
 extern u32 sub_81CCFD8(void);
 extern u32 sub_81CD070(void);
-extern u32 sub_81CDDD4(void);
-extern u32 sub_81CDE2C(void);
+extern bool32 sub_81CDDD4(void);
+extern void sub_81CDE2C(int);
 extern u32 sub_81CDE64(void);
-extern u32 sub_81CD1C0(void);
-extern u32 sub_81CECA0(void);
+extern void sub_81CD1C0(void);
+extern void sub_81CECA0(void);
 extern u32 sub_81CEF3C(void);
 extern u32 sub_81CEFDC(void);
-extern u32 sub_81CF330(void);
-extern u32 sub_81CF3A0(void);
+extern bool32 sub_81CF330(void);
+extern void sub_81CF3A0(int);
 extern u32 sub_81CF3D0(void);
-extern u32 sub_81CEFF0(void);
-extern u32 sub_81CF3F8(void);
+extern void sub_81CEFF0(void);
+extern void sub_81CF3F8(void);
 extern u32 sub_81CD024(void);
 extern u32 sub_81CEF98(void);
-extern u32 sub_81CF368(void);
-extern u32 sub_81CAAE8(void);
-extern u32 sub_81CAB24(void);
-extern u32 sub_81CB260(void);
-extern u32 sub_81CB29C(void);
-extern u32 sub_81CB2CC(void);
-extern u32 sub_81CAB38(void);
-extern u32 sub_81CB2E0(void);
+extern bool32 sub_81CF368(void);
 extern u32 sub_81CF9BC(void);
 extern u32 sub_81CFA34(void);
-extern u32 sub_81CFDD0(void);
-extern u32 sub_81CFE40(void);
+extern bool32 sub_81CFDD0(void);
+extern void sub_81CFE40(int);
 extern u32 sub_81CFE70(void);
-extern u32 sub_81CFA48(void);
-extern u32 sub_81CFE98(void);
+extern void sub_81CFA48(void);
+extern void sub_81CFE98(void);
 extern u32 sub_81D0450(void);
 extern u32 sub_81D04A0(void);
-extern u32 sub_81D0978(void);
-extern u32 sub_81D09B0(void);
+extern bool32 sub_81D0978(void);
+extern void sub_81D09B0(int);
 extern u32 sub_81D09E0(void);
-extern u32 sub_81D04B8(void);
-extern u32 sub_81D09F4(void);
+extern void sub_81D04B8(void);
+extern void sub_81D09F4(void);
 extern u32 sub_81CFA04(void);
-extern u32 sub_81CFE08(void);
+extern bool32 sub_81CFE08(void);
 
-bool32 SetActivePokenavMenu(u32 a0);
-bool32 InitPokenavMainMenu(void);
+static bool32 SetActivePokenavMenu(u32 menuId);
 static bool32 AnyMonHasRibbon(void);
 u32 sub_81C75E0(void);
 u32 sub_81C75D4(void);
 u32 PokenavMainMenuLoopedTaskIsActive(void);
-u32 sub_81C786C(void);
 bool32 WaitForPokenavShutdownFade(void);
 void sub_81C7834(void *func1, void *func2);
 static void InitPokenavResources(struct PokenavResources *a0);
-void sub_81C7850(u32 a0);
 void Task_RunLoopedTask_LinkMode(u8 a0);
 void Task_RunLoopedTask(u8 taskId);
 void sub_81C742C(u8 taskId);
@@ -126,143 +93,142 @@ static void VBlankCB_Pokenav(void);
 static void CB2_Pokenav(void);
 void sub_81C72BC(void);
 
-// Const rom data.
-u32 (*const PokenavMenuCallbacks[15][7])(void) =
+const struct UnknownPokenavCallbackStruct PokenavMenuCallbacks[15] =
 {
     {
-        sub_81C9298,
-        sub_81C941C,
-        sub_81C9924,
-        sub_81C9990,
-        sub_81C99C0,
-        sub_81C9430,
-        sub_81C99D4,
+        .unk0 = sub_81C9298,
+        .unk4 = sub_81C941C,
+        .unk8 = sub_81C9924,
+        .unkC = sub_81C9990,
+        .unk10 = sub_81C99C0,
+        .unk14 = sub_81C9430,
+        .unk18 = sub_81C99D4,
     },
     {
-        sub_81C9298,
-        sub_81C941C,
-        sub_81C9940,
-        sub_81C9990,
-        sub_81C99C0,
-        sub_81C9430,
-        sub_81C99D4,
+        .unk0 = sub_81C9298,
+        .unk4 = sub_81C941C,
+        .unk8 = sub_81C9940,
+        .unkC = sub_81C9990,
+        .unk10 = sub_81C99C0,
+        .unk14 = sub_81C9430,
+        .unk18 = sub_81C99D4,
     },
     {
-        sub_81C9338,
-        sub_81C941C,
-        sub_81C9940,
-        sub_81C9990,
-        sub_81C99C0,
-        sub_81C9430,
-        sub_81C99D4,
+        .unk0 = sub_81C9338,
+        .unk4 = sub_81C941C,
+        .unk8 = sub_81C9940,
+        .unkC = sub_81C9990,
+        .unk10 = sub_81C99C0,
+        .unk14 = sub_81C9430,
+        .unk18 = sub_81C99D4,
     },
     {
-        sub_81C9368,
-        sub_81C941C,
-        sub_81C9940,
-        sub_81C9990,
-        sub_81C99C0,
-        sub_81C9430,
-        sub_81C99D4,
+        .unk0 = sub_81C9368,
+        .unk4 = sub_81C941C,
+        .unk8 = sub_81C9940,
+        .unkC = sub_81C9990,
+        .unk10 = sub_81C99C0,
+        .unk14 = sub_81C9430,
+        .unk18 = sub_81C99D4,
     },
     {
-        sub_81C92CC,
-        sub_81C941C,
-        sub_81C9940,
-        sub_81C9990,
-        sub_81C99C0,
-        sub_81C9430,
-        sub_81C99D4,
+        .unk0 = sub_81C92CC,
+        .unk4 = sub_81C941C,
+        .unk8 = sub_81C9940,
+        .unkC = sub_81C9990,
+        .unk10 =sub_81C99C0,
+        .unk14 = sub_81C9430,
+        .unk18 = sub_81C99D4,
     },
     {
-        sub_81C9304,
-        sub_81C941C,
-        sub_81C9940,
-        sub_81C9990,
-        sub_81C99C0,
-        sub_81C9430,
-        sub_81C99D4,
+        .unk0 = sub_81C9304,
+        .unk4 = sub_81C941C,
+        .unk8 = sub_81C9940,
+        .unkC = sub_81C9990,
+        .unk10 = sub_81C99C0,
+        .unk14 = sub_81C9430,
+        .unk18 = sub_81C99D4,
     },
     {
-        sub_81CC4D4,
-        sub_81CC554,
-        sub_81CC5F4,
-        sub_81CC62C,
-        sub_81CC65C,
-        sub_81CC524,
-        sub_81CC670,
+        .unk0 = sub_81CC4D4,
+        .unk4 = sub_81CC554,
+        .unk8 = sub_81CC5F4,
+        .unkC = sub_81CC62C,
+        .unk10 = sub_81CC65C,
+        .unk14 = sub_81CC524,
+        .unk18 = sub_81CC670,
     },
     {
-        sub_81CCFD8,
-        sub_81CD070,
-        sub_81CDDD4,
-        sub_81CDE2C,
-        sub_81CDE64,
-        sub_81CD1C0,
-        sub_81CECA0,
+        .unk0 = sub_81CCFD8,
+        .unk4 = sub_81CD070,
+        .unk8 = sub_81CDDD4,
+        .unkC = sub_81CDE2C,
+        .unk10 = sub_81CDE64,
+        .unk14 = sub_81CD1C0,
+        .unk18 = sub_81CECA0,
     },
     {
-        sub_81CEF3C,
-        sub_81CEFDC,
-        sub_81CF330,
-        sub_81CF3A0,
-        sub_81CF3D0,
-        sub_81CEFF0,
-        sub_81CF3F8,
+        .unk0 = sub_81CEF3C,
+        .unk4 = sub_81CEFDC,
+        .unk8 = sub_81CF330,
+        .unkC = sub_81CF3A0,
+        .unk10 = sub_81CF3D0,
+        .unk14 = sub_81CEFF0,
+        .unk18 = sub_81CF3F8,
     },
     {
-        sub_81CD024,
-        sub_81CD070,
-        sub_81CDDD4,
-        sub_81CDE2C,
-        sub_81CDE64,
-        sub_81CD1C0,
-        sub_81CECA0,
+        .unk0 = sub_81CD024,
+        .unk4 = sub_81CD070,
+        .unk8 = sub_81CDDD4,
+        .unkC = sub_81CDE2C,
+        .unk10 = sub_81CDE64,
+        .unk14 = sub_81CD1C0,
+        .unk18 = sub_81CECA0,
     },
     {
-        sub_81CEF98,
-        sub_81CEFDC,
-        sub_81CF368,
-        sub_81CF3A0,
-        sub_81CF3D0,
-        sub_81CEFF0,
-        sub_81CF3F8,
+        .unk0 = sub_81CEF98,
+        .unk4 = sub_81CEFDC,
+        .unk8 = sub_81CF368,
+        .unkC = sub_81CF3A0,
+        .unk10 = sub_81CF3D0,
+        .unk14 = sub_81CEFF0,
+        .unk18 = sub_81CF3F8,
     },
     {
-        sub_81CAAE8,
-        sub_81CAB24,
-        sub_81CB260,
-        sub_81CB29C,
-        sub_81CB2CC,
-        sub_81CAB38,
-        sub_81CB2E0,
+        .unk0 = sub_81CAAE8,
+        .unk4 = sub_81CAB24,
+        .unk8 = sub_81CB260,
+        .unkC = sub_81CB29C,
+        .unk10 = sub_81CB2CC,
+        .unk14 = sub_81CAB38,
+        .unk18 = sub_81CB2E0,
     },
     {
-        sub_81CF9BC,
-        sub_81CFA34,
-        sub_81CFDD0,
-        sub_81CFE40,
-        sub_81CFE70,
-        sub_81CFA48,
-        sub_81CFE98,
+        .unk0 = sub_81CF9BC,
+        .unk4 = sub_81CFA34,
+        .unk8 = sub_81CFDD0,
+        .unkC = sub_81CFE40,
+        .unk10 = sub_81CFE70,
+        .unk14 = sub_81CFA48,
+        .unk18 = sub_81CFE98,
     },
     {
-        sub_81D0450,
-        sub_81D04A0,
-        sub_81D0978,
-        sub_81D09B0,
-        sub_81D09E0,
-        sub_81D04B8,
-        sub_81D09F4,
+        .unk0 = sub_81D0450,
+        .unk4 = sub_81D04A0,
+        .unk8 = sub_81D0978,
+        .unkC = sub_81D09B0,
+        .unk10 = sub_81D09E0,
+        .unk14 = sub_81D04B8,
+        .unk18 = sub_81D09F4,
     },
     {
-        sub_81CFA04,
-        sub_81CFA34,
-        sub_81CFE08,
-        sub_81CFE40,
-        sub_81CFE70,
-        sub_81CFA48,
-        sub_81CFE98,
+        .unk0 = sub_81CFA04,
+        .unk4 = sub_81CFA34,
+        .unk8 = sub_81CFE08,
+        .unkC = sub_81CFE40,
+        .unk10 = sub_81CFE70,
+        .unk14 = sub_81CFA48,
+        .unk18 = sub_81CFE98,
     },
 };
 
@@ -300,7 +266,7 @@ bool32 IsLoopedTaskActive(u32 taskId)
 
 bool32 FuncIsActiveLoopedTask(LoopedTask func)
 {
-    s32 i;
+    int i;
     for (i = 0; i < NUM_TASKS; i++)
     {
         if (gTasks[i].isActive
@@ -413,7 +379,7 @@ void sub_81C72BC(void)
     else
     {
         InitPokenavResources(gPokenavResources);
-        gPokenavResources->mode = MODE_FORCE_CALL_1;
+        gPokenavResources->mode = POKENAV_MODE_FORCE_CALL_1;
         ResetTasks();
         ResetSpriteData();
         FreeAllSpritePalettes();
@@ -426,7 +392,7 @@ void sub_81C72BC(void)
 
 static void FreePokenavResources(void)
 {
-    s32 i;
+    int i;
 
     for (i = 0; i < SUBSTRUCT_COUNT; i++)
         FreePokenavSubstruct(i);
@@ -437,12 +403,12 @@ static void FreePokenavResources(void)
 
 static void InitPokenavResources(struct PokenavResources *a0)
 {
-    s32 i;
+    int i;
 
     for (i = 0; i < SUBSTRUCT_COUNT; i++)
         a0->field10[i] = NULL;
 
-    a0->mode = MODE_NORMAL;
+    a0->mode = POKENAV_MODE_NORMAL;
     a0->currentMenuIndex = 0;
     a0->hasAnyRibbons = AnyMonHasRibbon();
     a0->currentMenuCb1 = NULL;
@@ -450,7 +416,7 @@ static void InitPokenavResources(struct PokenavResources *a0)
 
 static bool32 AnyMonHasRibbon(void)
 {
-    s32 i, j;
+    int i, j;
 
     for (i = 0; i < PARTY_SIZE; i++)
     {
@@ -507,7 +473,7 @@ void sub_81C742C(u8 taskId)
         // Wait for LoopedTask_InitPokenavMenu to finish
         if (PokenavMainMenuLoopedTaskIsActive())
             break;
-        SetActivePokenavMenu(0 + UNKNOWN_OFFSET);
+        SetActivePokenavMenu(POKENAV_MENU_0);
         data[0] = 4;
         break;
     case 2:
@@ -521,10 +487,10 @@ void sub_81C742C(u8 taskId)
             ShutdownPokenav();
             data[0] = 5;
         }
-        else if (v1 >= UNKNOWN_OFFSET)
+        else if (v1 >= POKENAV_MENU_IDS_START)
         {
-            PokenavMenuCallbacks[gPokenavResources->currentMenuIndex][NAVMENU_CB_UNK_6]();
-            PokenavMenuCallbacks[gPokenavResources->currentMenuIndex][NAVMENU_CB_UNK_5]();
+            PokenavMenuCallbacks[gPokenavResources->currentMenuIndex].unk18();
+            PokenavMenuCallbacks[gPokenavResources->currentMenuIndex].unk14();
             if (SetActivePokenavMenu(v1))
             {
                 data[0] = 4;
@@ -549,7 +515,7 @@ void sub_81C742C(u8 taskId)
     case 5:
         if (!WaitForPokenavShutdownFade())
         {
-            bool32 calledFromScript = (gPokenavResources->mode != MODE_NORMAL);
+            bool32 calledFromScript = (gPokenavResources->mode != POKENAV_MODE_NORMAL);
 
             sub_81C9430();
             FreePokenavResources();
@@ -562,18 +528,18 @@ void sub_81C742C(u8 taskId)
     }
 }
 
-bool32 SetActivePokenavMenu(u32 indexWithOffset)
+static bool32 SetActivePokenavMenu(u32 menuId)
 {
-    u32 index = indexWithOffset - UNKNOWN_OFFSET;
+    u32 index = menuId - POKENAV_MENU_IDS_START;
 
     InitKeys_();
-    if (!PokenavMenuCallbacks[index][NAVMENU_CB_UNK_0]())
+    if (!PokenavMenuCallbacks[index].unk0())
         return FALSE;
-    if (!PokenavMenuCallbacks[index][NAVMENU_CB_UNK_2]())
+    if (!PokenavMenuCallbacks[index].unk8())
         return FALSE;
 
-    sub_81C7834(PokenavMenuCallbacks[index][NAVMENU_CB_UNK_3], PokenavMenuCallbacks[index][NAVMENU_CB_UNK_4]);
-    gPokenavResources->currentMenuCb1 = PokenavMenuCallbacks[index][NAVMENU_CB_UNK_1];
+    sub_81C7834(PokenavMenuCallbacks[index].unkC, PokenavMenuCallbacks[index].unk10);
+    gPokenavResources->currentMenuCb1 = PokenavMenuCallbacks[index].unk4;
     gPokenavResources->currentMenuIndex = index;
     return TRUE;
 }
@@ -605,7 +571,8 @@ void SetPokenavVBlankCallback(void)
 
 void *AllocSubstruct(u32 index, u32 size)
 {
-    return gPokenavResources->field10[index] = Alloc(size);
+    gPokenavResources->field10[index] = Alloc(size);
+    return gPokenavResources->field10[index];
 }
 
 void *GetSubstructPtr(u32 index)
@@ -619,7 +586,7 @@ void FreePokenavSubstruct(u32 index)
         FREE_AND_SET_NULL(gPokenavResources->field10[index]);
 }
 
-u16 GetPokenavMode(void)
+u32 GetPokenavMode(void)
 {
     return gPokenavResources->mode;
 }

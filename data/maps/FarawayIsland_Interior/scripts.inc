@@ -1,6 +1,6 @@
 FarawayIsland_Interior_MapScripts:: @ 8267CFA
 	map_script MAP_SCRIPT_ON_RESUME, FarawayIsland_Interior_MapScript1_267D54
-	map_script MAP_SCRIPT_ON_TRANSITION, FarawayIsland_Interior_MapScript1_267D72
+	map_script MAP_SCRIPT_ON_TRANSITION, FarawayIsland_Interior_OnTransition
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, FarawayIsland_Interior_MapScript2_267D98
 	map_script MAP_SCRIPT_ON_RETURN_TO_FIELD, FarawayIsland_Interior_MapScript1_267D0F
 	.byte 0
@@ -37,7 +37,7 @@ FarawayIsland_Interior_EventScript_267D5E:: @ 8267D5E
 	removeobject VAR_LAST_TALKED
 	return
 
-FarawayIsland_Interior_MapScript1_267D72: @ 8267D72
+FarawayIsland_Interior_OnTransition: @ 8267D72
 	setvar VAR_FARAWAY_ISLAND_STEP_COUNTER, 0
 	setvar VAR_TEMP_1, 1
 	call_if_unset FLAG_CAUGHT_MEW, FarawayIsland_Interior_EventScript_267D86

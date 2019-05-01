@@ -14,7 +14,7 @@ int GetMaxWidthInMenuTable(const struct MenuAction *str, int arg1);
 int sub_81DB3D8(const struct MenuAction *str, const u8* arg1, int arg2);
 int Intl_GetListMenuWidth(const struct ListMenuTemplate *listMenu);
 void CopyMonCategoryText(int dexNum, u8 *dest);
-u8 *sub_81DB494(u8 *str, int fontId, u8 *str2, int totalStringWidth);
+u8 *sub_81DB494(u8 *str, int fontId, const u8 *str2, int totalStringWidth);
 void PadNameString(u8 *dest, u8 padChar);
 void sub_81DB554(u8 *, u8);
 void sub_81DB5AC(u8 *);

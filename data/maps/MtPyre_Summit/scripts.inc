@@ -1,8 +1,8 @@
 MtPyre_Summit_MapScripts:: @ 8231FF7
-	map_script MAP_SCRIPT_ON_TRANSITION, MtPyre_Summit_MapScript1_231FFD
+	map_script MAP_SCRIPT_ON_TRANSITION, MtPyre_Summit_OnTransition
 	.byte 0
 
-MtPyre_Summit_MapScript1_231FFD: @ 8231FFD
+MtPyre_Summit_OnTransition: @ 8231FFD
 	compare VAR_MT_PYRE_STATE, 2
 	call_if_eq MtPyre_Summit_EventScript_232009
 	end

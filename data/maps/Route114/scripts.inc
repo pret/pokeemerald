@@ -1,10 +1,10 @@
 Route114_MapScripts:: @ 81F252F
-	map_script MAP_SCRIPT_ON_TRANSITION, Route114_MapScript1_1F253F
+	map_script MAP_SCRIPT_ON_TRANSITION, Route114_OnTransition
 	map_script MAP_SCRIPT_ON_LOAD, Route114_MapScript1_1F2561
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, Route114_MapScript2_1F2578
 	.byte 0
 
-Route114_MapScript1_1F253F: @ 81F253F
+Route114_OnTransition: @ 81F253F
 	compare VAR_SHOULD_END_UNUSUAL_WEATHER, 1
 	call_if_eq Route114_EventScript_273D13
 	compare VAR_UNUSUAL_WEATHER_LOCATION, UNUSUAL_WEATHER_ROUTE_114_NORTH

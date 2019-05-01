@@ -1,8 +1,8 @@
 LilycoveCity_Harbor_MapScripts:: @ 821E000
-	map_script MAP_SCRIPT_ON_TRANSITION, LilycoveCity_Harbor_MapScript1_21E006
+	map_script MAP_SCRIPT_ON_TRANSITION, LilycoveCity_Harbor_OnTransition
 	.byte 0
 
-LilycoveCity_Harbor_MapScript1_21E006: @ 821E006
+LilycoveCity_Harbor_OnTransition: @ 821E006
 	setescapewarp MAP_LILYCOVE_CITY, 255, 12, 33
 	end
 

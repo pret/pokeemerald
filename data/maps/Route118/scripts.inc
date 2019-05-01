@@ -1,10 +1,10 @@
 Route118_MapScripts:: @ 81F3DBC
-	map_script MAP_SCRIPT_ON_TRANSITION, Route118_MapScript1_1F3DCC
+	map_script MAP_SCRIPT_ON_TRANSITION, Route118_OnTransition
 	map_script MAP_SCRIPT_ON_LOAD, Route118_MapScript1_1F3DF3
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, Route118_MapScript2_1F3E0A
 	.byte 0
 
-Route118_MapScript1_1F3DCC: @ 81F3DCC
+Route118_OnTransition: @ 81F3DCC
 	call Route118_EventScript_28CCC7
 	compare VAR_SHOULD_END_UNUSUAL_WEATHER, 1
 	call_if_eq Route118_EventScript_273D13

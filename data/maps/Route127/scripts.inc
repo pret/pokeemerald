@@ -1,10 +1,10 @@
 Route127_MapScripts:: @ 81F69D9
-	map_script MAP_SCRIPT_ON_TRANSITION, Route127_MapScript1_1F69E9
+	map_script MAP_SCRIPT_ON_TRANSITION, Route127_OnTransition
 	map_script MAP_SCRIPT_ON_LOAD, Route127_MapScript1_1F6A14
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, Route127_MapScript2_1F6A2B
 	.byte 0
 
-Route127_MapScript1_1F69E9: @ 81F69E9
+Route127_OnTransition: @ 81F69E9
 	call_if_set FLAG_SYS_WEATHER_CTRL, Common_EventScript_SetWeather15
 	compare VAR_SHOULD_END_UNUSUAL_WEATHER, 1
 	call_if_eq Route127_EventScript_273D13

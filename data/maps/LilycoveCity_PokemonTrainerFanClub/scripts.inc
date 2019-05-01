@@ -1,6 +1,6 @@
 LilycoveCity_PokemonTrainerFanClub_MapScripts:: @ 821C785
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, LilycoveCity_PokemonTrainerFanClub_MapScript2_21C790
-	map_script MAP_SCRIPT_ON_TRANSITION, LilycoveCity_PokemonTrainerFanClub_MapScript1_21C80D
+	map_script MAP_SCRIPT_ON_TRANSITION, LilycoveCity_PokemonTrainerFanClub_OnTransition
 	.byte 0
 
 LilycoveCity_PokemonTrainerFanClub_MapScript2_21C790: @ 821C790
@@ -60,7 +60,7 @@ LilycoveCity_PokemonTrainerFanClub_Movement_21C807: @ 821C807
 	walk_in_place_fastest_down
 	step_end
 
-LilycoveCity_PokemonTrainerFanClub_MapScript1_21C80D: @ 821C80D
+LilycoveCity_PokemonTrainerFanClub_OnTransition: @ 821C80D
 	call LilycoveCity_PokemonTrainerFanClub_EventScript_21C8DA
 	compare VAR_LILYCOVE_FAN_CLUB_STATE, 1
 	goto_if_eq LilycoveCity_PokemonTrainerFanClub_EventScript_21C9F8

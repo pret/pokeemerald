@@ -64,25 +64,7 @@ struct UnknownSubStruct_81C81D4
     u32 unk8A0;
 };
 
-struct MatchCallListTemplate
-{
-    u32 unk0;
-    u16 unk4;
-    u16 unk6;
-    u8 unk8;
-    u8 unk9;
-    u8 unkA;
-    u8 unkB;
-    u8 unkC;
-    u8 unkD;
-    u8 unkE;
-    void (*unk10)(u32, u8 *a1);
-    void (*unk14)(u16 a0, u32 a1, u32 a2);
-};
-
-extern void sub_81CBD48(u16 windowId, u32 a1);
 extern void sub_81DB620(u32 windowId, u32 a1, u32 a2, u32 a3, u32 a4);
-extern u8 *sub_81CAFD8(u16 a0, u32 a1);
 
 void sub_81C82E4(struct UnknownSubStruct_81C81D4 *a0);
 u32 sub_81C91AC(struct UnknownInnerStruct_81C81D4 *a0, const struct BgTemplate *a1, struct MatchCallListTemplate *a2, s32 a3);
@@ -506,7 +488,7 @@ struct MatchCallWindowState *GetMatchCallWindowStruct(void)
     return &structPtr->unk888;
 }
 
-u32 MatchCall_MoveCursorUp(void)
+int MatchCall_MoveCursorUp(void)
 {
     struct MatchCallWindowState *structPtr;
     structPtr = GetMatchCallWindowStruct();
@@ -530,7 +512,7 @@ u32 MatchCall_MoveCursorUp(void)
     }
 }
 
-u32 MatchCall_MoveCursorDown(void)
+int MatchCall_MoveCursorDown(void)
 {
     struct MatchCallWindowState *structPtr;
     structPtr = GetMatchCallWindowStruct();
@@ -555,7 +537,7 @@ u32 MatchCall_MoveCursorDown(void)
     return 2;
 }
 
-u32 MatchCall_PageUp(void)
+int MatchCall_PageUp(void)
 {
     struct MatchCallWindowState *structPtr;
     s32 scroll;
@@ -581,7 +563,7 @@ u32 MatchCall_PageUp(void)
     }
 }
 
-u32 MatchCall_PageDown(void)
+int MatchCall_PageDown(void)
 {
     struct MatchCallWindowState *structPtr;
     structPtr = GetMatchCallWindowStruct();
@@ -649,7 +631,7 @@ void sub_81C877C(void)
     structPtr->unk8A0 = CreateLoopedTask(LoopedTask_sub_81C8870, 6);
 }
 
-void sub_81C87AC(u16 a0)
+void sub_81C87AC(s16 a0)
 {
     u16 temp;
     struct UnknownSubStruct_81C81D4 *structPtr;
