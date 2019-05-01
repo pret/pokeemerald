@@ -2825,9 +2825,6 @@ Move_POWDER:
 Move_GEOMANCY:
 	end
 	
-Move_MAGNETIC_FLUX:
-	end
-	
 Move_HAPPY_HOUR:
 	end
 	
@@ -6035,6 +6032,7 @@ Move_FOLLOW_ME:
 	loopsewithpan SE_W039, SOUND_PAN_ATTACKER, 22, 3
 	end
 
+Move_MAGNETIC_FLUX:
 Move_CHARGE:
 	loadspritegfx ANIM_TAG_ELECTRIC_ORBS
 	loadspritegfx ANIM_TAG_CIRCLE_OF_LIGHT

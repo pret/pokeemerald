@@ -1749,3 +1749,12 @@
 	1:
 	.endm
 
+	.macro setallytonexttarget jumpptr:req
+	jumpifbyte CMP_GREATER_THAN, gBattlerTarget, 0x1, 1f
+	addbyte gBattlerTarget, 0x2
+	goto \jumpptr
+	1:
+	subbyte gBattlerTarget, 0x2
+	goto \jumpptr
+	.endm
+

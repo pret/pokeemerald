@@ -8450,7 +8450,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_MAGNETIC_FLUX] =
     {
-        .effect = EFFECT_PLACEHOLDER, // Needs a custom move effect
+        .effect = EFFECT_MAGNETIC_FLUX,
         .power = 0,
         .type = TYPE_ELECTRIC,
         .accuracy = 0,
@@ -8942,13 +8942,13 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_GEAR_UP] =
     {
-        .effect = EFFECT_PLACEHOLDER,
+        .effect = EFFECT_GEAR_UP,
         .power = 0,
         .type = TYPE_STEEL,
         .accuracy = 0,
         .pp = 20,
         .secondaryEffectChance = 0,
-        .target = MOVE_TARGET_SELECTED,
+        .target = MOVE_TARGET_USER,
         .priority = 0,
         .flags = FLAG_SNATCH_AFFECTED,
         .split = SPLIT_STATUS,

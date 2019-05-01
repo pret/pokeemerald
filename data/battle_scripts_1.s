@@ -351,6 +351,8 @@ gBattleScriptsForMoveEffects:: @ 82D86A8
 	.4byte BattleScript_EffectInstruct
 	.4byte BattleScript_EffectThroatChop
 	.4byte BattleScript_EffectLaserFocus
+	.4byte BattleScript_EffectMagneticFlux
+	.4byte BattleScript_EffectGearUp
 
 BattleScript_EffectCoreEnforcer:
 	setmoveeffect MOVE_EFFECT_CORE_ENFORCER | MOVE_EFFECT_CERTAIN
@@ -500,6 +502,84 @@ BattleScript_AromaticMistAnim:
 BattleScript_EffectAromaticMistEnd:
 	goto BattleScript_MoveEnd
 	
+BattleScript_EffectMagneticFlux::
+	attackcanceler
+	attackstring
+	ppreduce
+	setbyte gBattleCommunication, 0x0
+BattleScript_EffectMagneticFluxStart:
+	jumpifability BS_TARGET, ABILITY_MINUS, BattleScript_EffectMagneticFluxCheckStats
+	jumpifability BS_TARGET, ABILITY_PLUS, BattleScript_EffectMagneticFluxCheckStats
+	goto BattleScript_EffectMagneticFluxLoop
+BattleScript_EffectMagneticFluxCheckStats:
+	jumpifstat BS_TARGET, CMP_LESS_THAN, STAT_DEF, 0xC, BattleScript_EffectMagneticFluxTryDef
+	jumpifstat BS_TARGET, CMP_EQUAL, STAT_SPDEF, 0xC, BattleScript_EffectMagneticFluxLoop
+BattleScript_EffectMagneticFluxTryDef:
+	jumpifbyte CMP_NOT_EQUAL, gBattleCommunication, 0x0, BattleScript_EffectMagneticFluxSkipAnim
+	attackanimation
+	waitanimation
+BattleScript_EffectMagneticFluxSkipAnim:
+	setbyte sSTAT_ANIM_PLAYED, FALSE
+	playstatchangeanimation BS_TARGET, BIT_DEF | BIT_SPDEF, 0x0
+	setstatchanger STAT_DEF, 1, FALSE
+	statbuffchange STAT_CHANGE_BS_PTR, BattleScript_EffectMagneticFluxTrySpDef
+	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, 0x2, BattleScript_EffectMagneticFluxTrySpDef
+	addbyte gBattleCommunication, 0x1
+	printfromtable gStatUpStringIds
+	waitmessage 0x40
+BattleScript_EffectMagneticFluxTrySpDef:
+	setstatchanger STAT_SPDEF, 1, FALSE
+	statbuffchange STAT_CHANGE_BS_PTR, BattleScript_EffectMagneticFluxLoop
+	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, 0x2, BattleScript_EffectMagneticFluxLoop
+	addbyte gBattleCommunication, 0x1
+	printfromtable gStatUpStringIds
+	waitmessage 0x40
+BattleScript_EffectMagneticFluxLoop:
+	jumpifbytenotequal gBattlerTarget, gBattlerAttacker, BattleScript_EffectMagneticFluxEnd
+	setallytonexttarget BattleScript_EffectMagneticFluxStart
+BattleScript_EffectMagneticFluxEnd:
+	jumpifbyte CMP_NOT_EQUAL, gBattleCommunication, 0x0, BattleScript_MoveEnd
+	goto BattleScript_ButItFailed
+
+BattleScript_EffectGearUp::
+	attackcanceler
+	attackstring
+	ppreduce
+	setbyte gBattleCommunication, 0x0
+BattleScript_EffectGearUpStart:
+	jumpifability BS_TARGET, ABILITY_MINUS, BattleScript_EffectGearUpCheckStats
+	jumpifability BS_TARGET, ABILITY_PLUS, BattleScript_EffectGearUpCheckStats
+	goto BattleScript_EffectGearUpLoop
+BattleScript_EffectGearUpCheckStats:
+	jumpifstat BS_TARGET, CMP_LESS_THAN, STAT_ATK, 0xC, BattleScript_EffectGearUpTryAtk
+	jumpifstat BS_TARGET, CMP_EQUAL, STAT_SPATK, 0xC, BattleScript_EffectGearUpLoop
+BattleScript_EffectGearUpTryAtk:
+	jumpifbyte CMP_NOT_EQUAL, gBattleCommunication, 0x0, BattleScript_EffectGearUpSkipAnim
+	attackanimation
+	waitanimation
+BattleScript_EffectGearUpSkipAnim:
+	setbyte sSTAT_ANIM_PLAYED, FALSE
+	playstatchangeanimation BS_TARGET, BIT_ATK | BIT_SPATK, 0x0
+	setstatchanger STAT_ATK, 1, FALSE
+	statbuffchange STAT_CHANGE_BS_PTR, BattleScript_EffectGearUpTrySpAtk
+	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, 0x2, BattleScript_EffectGearUpTrySpAtk
+	addbyte gBattleCommunication, 0x1
+	printfromtable gStatUpStringIds
+	waitmessage 0x40
+BattleScript_EffectGearUpTrySpAtk:
+	setstatchanger STAT_SPATK, 1, FALSE
+	statbuffchange STAT_CHANGE_BS_PTR, BattleScript_EffectGearUpLoop
+	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, 0x2, BattleScript_EffectGearUpLoop
+	addbyte gBattleCommunication, 0x1
+	printfromtable gStatUpStringIds
+	waitmessage 0x40
+BattleScript_EffectGearUpLoop:
+	jumpifbytenotequal gBattlerTarget, gBattlerAttacker, BattleScript_EffectGearUpEnd
+	setallytonexttarget BattleScript_EffectGearUpStart
+BattleScript_EffectGearUpEnd:
+	jumpifbyte CMP_NOT_EQUAL, gBattleCommunication, 0x0, BattleScript_MoveEnd
+	goto BattleScript_ButItFailed
+
 BattleScript_EffectAcupressure:
 	attackcanceler
 	jumpifbyteequal gBattlerTarget, gBattlerAttacker, BattleScript_EffectAcupressureTry
