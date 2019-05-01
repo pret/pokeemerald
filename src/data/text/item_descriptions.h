@@ -1819,6 +1819,16 @@ static const u8 sLiftKeyDesc[] = _(
     "used in TEAM\n"
     "ROCKET's HIDEOUT.");
 
+static const u8 sArmorFossilDesc[] = _(
+    "A piece of a\n"
+    "prehistoric POKé-\n"
+    "MON's head.");
+
+static const u8 sSkullFossilDesc[] = _(
+    "A piece of a\n"
+    "prehistoric POKé-\n"
+    "MON's head.");
+
 static const u8 sHelixFossilDesc[] = _(
     "A piece of an\n"
     "ancient marine\n"
@@ -1828,6 +1838,26 @@ static const u8 sDomeFossilDesc[] = _(
     "A piece of an\n"
     "ancient marine\n"
     "POKéMON's shell.");
+
+static const u8 sCoverFossilDesc[] = _(
+    "A piece of a\n"
+    "prehistoric POKé-\n"
+    "MON's back.");
+
+static const u8 sPlumeFossilDesc[] = _(
+    "A piece of a\n"
+    "prehistoric POKé-\n"
+    "MON's wing.");
+
+static const u8 sJawFossilDesc[] = _(
+    "A piece of a prehis-\n"
+    "toric POKéMON's\n"
+    "large jaw.");
+
+static const u8 sSailFossilDesc[] = _(
+    "A piece of a prehis-\n"
+    "toric POKéMON's\n"
+    "skin sail.");
 
 static const u8 sSilphScopeDesc[] = _(
     "SILPH CO's scope\n"
@@ -2070,6 +2100,96 @@ static const u8 sGriseousOrbDesc[] = _(
     "Boosts the power of\n"
     "Giratina's Dragon\n"
     "and Ghost-type moves.");
+
+static const u8 sGracideaDesc[] = _(
+    "Bouquets made with\n"
+    "it are offered as a\n"
+    "token of gratitude.");
+
+static const u8 sBugMemoryDesc[] = _(
+    "A disc with Bug\n"
+    "type data. It swaps\n"
+    "Silvally's type.");
+
+static const u8 sDarkMemoryDesc[] = _(
+    "A disc with Dark\n"
+    "type data. It swaps\n"
+    "Silvally's type.");
+
+static const u8 sDragonMemoryDesc[] = _(
+    "A disc with Dragon\n"
+    "type data. It swaps\n"
+    "Silvally's type.");
+
+static const u8 sElectricMemoryDesc[] = _(
+    "A disc with Electric\n"
+    "type data. It swaps\n"
+    "Silvally's type.");
+
+static const u8 sFairyMemoryDesc[] = _(
+    "A disc with Fairy\n"
+    "type data. It swaps\n"
+    "Silvally's type.");
+
+static const u8 sFightingMemoryDesc[] = _(
+    "A disc with Fighting\n"
+    "type data. It swaps\n"
+    "Silvally's type.");
+
+static const u8 sFireMemoryDesc[] = _(
+    "A disc with Fire\n"
+    "type data. It swaps\n"
+    "Silvally's type.");
+
+static const u8 sFlyingMemoryDesc[] = _(
+    "A disc with Flying\n"
+    "type data. It swaps\n"
+    "Silvally's type.");
+
+static const u8 sGhostMemoryDesc[] = _(
+    "A disc with Ghost\n"
+    "type data. It swaps\n"
+    "Silvally's type.");
+
+static const u8 sGrassMemoryDesc[] = _(
+    "A disc with Grass\n"
+    "type data. It swaps\n"
+    "Silvally's type.");
+
+static const u8 sGroundMemoryDesc[] = _(
+    "A disc with Ground\n"
+    "type data. It swaps\n"
+    "Silvally's type.");
+
+static const u8 sIceMemoryDesc[] = _(
+    "A disc with Ice\n"
+    "type data. It swaps\n"
+    "Silvally's type.");
+
+static const u8 sPoisonMemoryDesc[] = _(
+    "A disc with Poison\n"
+    "type data. It swaps\n"
+    "Silvally's type.");
+
+static const u8 sPsychicMemoryDesc[] = _(
+    "A disc with Psychic\n"
+    "type data. It swaps\n"
+    "Silvally's type.");
+
+static const u8 sRockMemoryDesc[] = _(
+    "A disc with Rock\n"
+    "type data. It swaps\n"
+    "Silvally's type.");
+
+static const u8 sSteelMemoryDesc[] = _(
+    "A disc with Steel\n"
+    "type data. It swaps\n"
+    "Silvally's type.");
+
+static const u8 sWaterMemoryDesc[] = _(
+    "A disc with Water\n"
+    "type data. It swaps\n"
+    "Silvally's type.");
 
 static const u8 sFlamePlateDesc[] = _(
     "A stone tablet that\n"
