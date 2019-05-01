@@ -52,7 +52,7 @@ ShoalCave_LowTideLowerRoom_Text_2371EB: @ 82371EB
 	.string "The penetrating cold around these\n"
 	.string "parts is an impediment to training.\p"
 	.string "But with focus, one can overcome!\p"
-	.string "With this FOCUS BAND, buckle down and\n"
+	.string "With this Focus Band, buckle down and\n"
 	.string "withstand the cold!$"
 
 ShoalCave_LowTideLowerRoom_Text_23728D: @ 823728D

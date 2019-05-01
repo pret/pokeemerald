@@ -369,13 +369,13 @@ MossdeepCity_SpaceCenter_2F_EventScript_22419A:: @ 822419A
 	return
 
 MossdeepCity_SpaceCenter_2F_Text_2241A1: @ 82241A1
-	.string "MOSSDEEP has mainly sunny weather,\n"
+	.string "Mossdeep has mainly sunny weather,\n"
 	.string "and its winds are stable.\p"
 	.string "It's an ideal location for launching\n"
 	.string "rockets.$"
 
 MossdeepCity_SpaceCenter_2F_Text_22420C: @ 822420C
-	.string "Why would TEAM MAGMA want to steal\n"
+	.string "Why would Team Magma want to steal\n"
 	.string "our rocket fuel in the first place?$"
 
 MossdeepCity_SpaceCenter_2F_Text_224253: @ 8224253
@@ -385,7 +385,7 @@ MossdeepCity_SpaceCenter_2F_Text_224253: @ 8224253
 	.string "I can and will try!$"
 
 MossdeepCity_SpaceCenter_2F_Text_2242C5: @ 82242C5
-	.string "If TEAM MAGMA takes the rocket fuel,\n"
+	.string "If Team Magma takes the rocket fuel,\n"
 	.string "I won't be able to go to space!\p"
 	.string "They can't be allowed to get away\n"
 	.string "with such an outrage!$"
@@ -395,7 +395,7 @@ MossdeepCity_SpaceCenter_2F_Text_224342: @ 8224342
 	.string "space one day…$"
 
 MossdeepCity_SpaceCenter_2F_Text_224376: @ 8224376
-	.string "TEAM MAGMA…\n"
+	.string "Team Magma…\n"
 	.string "Do they want to go to space, too?$"
 
 MossdeepCity_SpaceCenter_2F_Text_2243A4: @ 82243A4
@@ -451,33 +451,33 @@ MossdeepCity_SpaceCenter_2F_Text_2245D9: @ 82245D9
 	.string "we'll take care of you at the same time!$"
 
 MossdeepCity_SpaceCenter_2F_Text_22467B: @ 822467B
-	.string "MAXIE: Clear out of the way!\n"
+	.string "Maxie: Clear out of the way!\n"
 	.string "Don't you dare interfere!$"
 
 MossdeepCity_SpaceCenter_2F_Text_2246B2: @ 82246B2
-	.string "STEVEN: TEAM MAGMA…\p"
+	.string "Steven: Team Magma…\p"
 	.string "What's the point of stealing rocket\n"
 	.string "fuel?$"
 
 MossdeepCity_SpaceCenter_2F_Text_2246F0: @ 82246F0
-	.string "MAXIE: Fufufu… Since you're so\n"
+	.string "Maxie: Fufufu… Since you're so\n"
 	.string "curious, you deserve an explanation.\p"
 	.string "We're going to jettison the entire\n"
-	.string "load into MT. CHIMNEY!\p"
-	.string "With GROUDON gone, we have no need\n"
+	.string "load into Mt. Chimney!\p"
+	.string "With Groudon gone, we have no need\n"
 	.string "for that slag heap of a mountain!\p"
 	.string "So we'll use the fuel's power to make\n"
 	.string "the volcano erupt!\p"
 	.string "It will be savage!$"
 
 MossdeepCity_SpaceCenter_2F_Text_2247FF: @ 82247FF
-	.string "STEVEN: {PLAYER}{KUN}!\n"
+	.string "Steven: {PLAYER}{KUN}!\n"
 	.string "You're going to help me?\p"
 	.string "Let's go into battle together!\n"
 	.string "Are you ready?$"
 
 MossdeepCity_SpaceCenter_2F_Text_224854: @ 8224854
-	.string "STEVEN: Then, hurry!\n"
+	.string "Steven: Then, hurry!\n"
 	.string "Get ready quickly!$"
 
 MossdeepCity_SpaceCenter_2F_Text_22487C: @ 822487C
@@ -488,32 +488,32 @@ MossdeepCity_SpaceCenter_Text_2248AD: @ 82248AD
 	.string "I'm with our leader…$"
 
 MossdeepCity_SpaceCenter_2F_Text_2248C2: @ 82248C2
-	.string "MAXIE: We failed to make the volcano\n"
+	.string "Maxie: We failed to make the volcano\n"
 	.string "erupt…\p"
-	.string "We failed to control GROUDON after\n"
+	.string "We failed to control Groudon after\n"
 	.string "we had awoken it…\p"
 	.string "Is our goal to expand the land\n"
 	.string "misguided?\p"
 	.string "… … … … … …\n"
 	.string "… … … … … …\p"
 	.string "If…\n"
-	.string "If we, TEAM MAGMA, are wrong…\l"
+	.string "If we, Team Magma, are wrong…\l"
 	.string "… … … … … …\p"
-	.string "Then might TEAM AQUA's goal to expand\n"
+	.string "Then might Team Aqua's goal to expand\n"
 	.string "the sea also be equally misguided?$"
 
 MossdeepCity_SpaceCenter_2F_Text_2249DC: @ 82249DC
-	.string "MAXIE: All right…\n"
+	.string "Maxie: All right…\n"
 	.string "We will give up on the fuel…\p"
 	.string "There appear to be more important\n"
 	.string "matters that I must examine…$"
 
 MossdeepCity_SpaceCenter_2F_Text_224A4A: @ 8224A4A
-	.string "STEVEN: Whew, that was too tense.\n"
+	.string "Steven: Whew, that was too tense.\n"
 	.string "{PLAYER}{KUN}, thank you.\p"
 	.string "I have something to give you as\n"
 	.string "thanks for your support.\p"
 	.string "Please come see me at home\n"
 	.string "after this.\p"
-	.string "Oh, yes, I don't live in RUSTBORO CITY.\n"
+	.string "Oh, yes, I don't live in Rustboro City.\n"
 	.string "I live right here on this island.$"

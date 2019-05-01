@@ -292,7 +292,7 @@ BattleFrontier_BattleTowerMultiBattleRoom_EventScript_244049:: @ 8244049
 
 BattleFrontier_BattleTowerMultiBattleRoom_Text_244056: @ 8244056
 	.string "Please find a partner from out of\n"
-	.string "the TRAINERS gathered here.$"
+	.string "the Trainers gathered here.$"
 
 BattleFrontier_BattleTowerMultiBattleRoom_Text_244094: @ 8244094
 	.string "{PLAYER}, you have not found a partner\n"
@@ -302,12 +302,12 @@ BattleFrontier_BattleTowerMultiBattleRoom_Text_244094: @ 8244094
 
 BattleFrontier_BattleTowerMultiBattleRoom_Text_24410C: @ 824410C
 	.string "Then, please find a partner from\n"
-	.string "the TRAINERS gathered here.$"
+	.string "the Trainers gathered here.$"
 
 BattleFrontier_BattleTowerMultiBattleRoom_Text_244149:: @ 8244149
 	.string "Thank you for choosing a partner.\p"
 	.string "I will now show you to your\n"
-	.string "MULTI BATTLE ROOM.$"
+	.string "Multi Battle Room.$"
 
 BattleFrontier_BattleTowerMultiBattleRoom_Text_24419A:: @ 824419A
 	.string "I'm {STR_VAR_1}'s no. {STR_VAR_2} apprentice.\n"
@@ -475,7 +475,7 @@ BattleFrontier_BattleTowerMultiBattleRoom_Text_2449E6:: @ 82449E6
 	.string "You're no judge of character!$"
 
 BattleFrontier_BattleTowerMultiBattleRoom_Text_244A23:: @ 8244A23
-	.string "I'm {STR_VAR_3} and I'm a TRIATHLETE.\n"
+	.string "I'm {STR_VAR_3} and I'm a Triathlete.\n"
 	.string "I'm busy every day what with jogging,\l"
 	.string "training, and rapping.\p"
 	.string "I also happen to be {STR_VAR_1}'s\n"
@@ -509,7 +509,7 @@ BattleFrontier_BattleTowerMultiBattleRoom_Text_244BD2:: @ 8244BD2
 
 BattleFrontier_BattleTowerMultiBattleRoom_Text_244C18:: @ 8244C18
 	.string "Listen, listen! You have to hear about\n"
-	.string "the POKéMON {STR_VAR_3} recommended.\l"
+	.string "the Pokémon {STR_VAR_3} recommended.\l"
 	.string "One {STR_VAR_2} with {STR_VAR_1} and$"
 
 BattleFrontier_BattleTowerMultiBattleRoom_Text_244C6E:: @ 8244C6E
@@ -601,7 +601,7 @@ BattleFrontier_BattleTowerMultiBattleRoom_Text_2450C0:: @ 82450C0
 
 BattleFrontier_BattleTowerMultiBattleRoom_Text_2450E6:: @ 82450E6
 	.string "Hey! There's big trouble! This is\n"
-	.string "the BATTLE TOWER's last day!\p"
+	.string "the Battle Tower's last day!\p"
 	.string "… … … … … …\n"
 	.string "I'm only joking!\p"
 	.string "People call me {STR_VAR_3} and I do, too!\n"
@@ -621,19 +621,19 @@ BattleFrontier_BattleTowerMultiBattleRoom_Text_2451BD:: @ 82451BD
 
 BattleFrontier_BattleTowerMultiBattleRoom_Text_24522F:: @ 824522F
 	.string "Yippee!\n"
-	.string "I'll give you a POKéMON as my thanks!\p"
+	.string "I'll give you a Pokémon as my thanks!\p"
 	.string "Just joking! But I will really go do\n"
 	.string "the registration, okay?$"
 
 BattleFrontier_BattleTowerMultiBattleRoom_Text_24529A:: @ 824529A
 	.string "Oh, that's so cold! I'll have to wreck\n"
-	.string "the BATTLE TOWER for that!\p"
+	.string "the Battle Tower for that!\p"
 	.string "Of course I won't!$"
 
 BattleFrontier_BattleTowerMultiBattleRoom_Text_2452EF:: @ 82452EF
 	.string "Hey, there, I'm rockin' and a-rollin'!\n"
-	.string "POKéMON, I be controllin'!\p"
-	.string "I'm {STR_VAR_3} the rappin' SAILOR.\n"
+	.string "Pokémon, I be controllin'!\p"
+	.string "I'm {STR_VAR_3} the rappin' Sailor.\n"
 	.string "Don't be mistakin' me for no wailer!\p"
 	.string "I'm {STR_VAR_1}'s no. {STR_VAR_2} apprentice.\n"
 	.string "Me, you shouldn't be quick to dismiss!$"
@@ -688,7 +688,7 @@ BattleFrontier_BattleTowerMultiBattleRoom_Text_245656:: @ 8245656
 BattleFrontier_BattleTowerMultiBattleRoom_Text_24568A:: @ 824568A
 	.string "Cough!\p"
 	.string "Oh, sorry, I have a cold.\n"
-	.string "My POKéMON are fine, though.\p"
+	.string "My Pokémon are fine, though.\p"
 	.string "My name's {STR_VAR_3}, {STR_VAR_1}'s\n"
 	.string "no. {STR_VAR_2} apprentice. Cough!$"
 
@@ -765,7 +765,7 @@ BattleFrontier_BattleTowerMultiBattleRoom_Text_245B3E:: @ 8245B3E
 	.string "Is this your idea of a joke?$"
 
 BattleFrontier_BattleTowerMultiBattleRoom_Text_245B79:: @ 8245B79
-	.string "I'm {STR_VAR_1}, and I'm a LASS!$"
+	.string "I'm {STR_VAR_1}, and I'm a Lass!$"
 
 BattleFrontier_BattleTowerMultiBattleRoom_Text_245B91:: @ 8245B91
 	.string "What I have are one {STR_VAR_2}\n"
@@ -786,7 +786,7 @@ BattleFrontier_BattleTowerMultiBattleRoom_Text_245C2D:: @ 8245C2D
 
 BattleFrontier_BattleTowerMultiBattleRoom_Text_245C66:: @ 8245C66
 	.string "Hello!\p"
-	.string "I'm YOUNGSTER {STR_VAR_1}!$"
+	.string "I'm Youngster {STR_VAR_1}!$"
 
 BattleFrontier_BattleTowerMultiBattleRoom_Text_245C7F:: @ 8245C7F
 	.string "Want to know what I have?\n"
@@ -803,11 +803,11 @@ BattleFrontier_BattleTowerMultiBattleRoom_Text_245CE6:: @ 8245CE6
 
 BattleFrontier_BattleTowerMultiBattleRoom_Text_245D07:: @ 8245D07
 	.string "Aww! If you'd form a tag team with\n"
-	.string "my POKéMON, we'd be unstoppable!$"
+	.string "my Pokémon, we'd be unstoppable!$"
 
 BattleFrontier_BattleTowerMultiBattleRoom_Text_245D4B:: @ 8245D4B
 	.string "Yahoo!\n"
-	.string "I'm HIKER {STR_VAR_1}!$"
+	.string "I'm Hiker {STR_VAR_1}!$"
 
 BattleFrontier_BattleTowerMultiBattleRoom_Text_245D60:: @ 8245D60
 	.string "Know what I have with me?\n"
@@ -828,7 +828,7 @@ BattleFrontier_BattleTowerMultiBattleRoom_Text_245DF0:: @ 8245DF0
 
 BattleFrontier_BattleTowerMultiBattleRoom_Text_245E20:: @ 8245E20
 	.string "Hello!\n"
-	.string "I'm {STR_VAR_1}, and I'm a BEAUTY!$"
+	.string "I'm {STR_VAR_1}, and I'm a Beauty!$"
 
 BattleFrontier_BattleTowerMultiBattleRoom_Text_245E41:: @ 8245E41
 	.string "Do you know what I've been raising?\n"
@@ -851,7 +851,7 @@ BattleFrontier_BattleTowerMultiBattleRoom_Text_245EEC:: @ 8245EEC
 BattleFrontier_BattleTowerMultiBattleRoom_Text_245F2B:: @ 8245F2B
 	.string "Yo!\p"
 	.string "You know who I am?\n"
-	.string "I'm {STR_VAR_1} the FISHERMAN!$"
+	.string "I'm {STR_VAR_1} the Fisherman!$"
 
 BattleFrontier_BattleTowerMultiBattleRoom_Text_245F58:: @ 8245F58
 	.string "I've got with me a team of one\n"
@@ -872,7 +872,7 @@ BattleFrontier_BattleTowerMultiBattleRoom_Text_246002:: @ 8246002
 
 BattleFrontier_BattleTowerMultiBattleRoom_Text_246020:: @ 8246020
 	.string "Glad to make your acquaintance.\n"
-	.string "I am {STR_VAR_1}, a LADY.$"
+	.string "I am {STR_VAR_1}, a Lady.$"
 
 BattleFrontier_BattleTowerMultiBattleRoom_Text_246051:: @ 8246051
 	.string "I am accompanied by a team of\n"
@@ -892,7 +892,7 @@ BattleFrontier_BattleTowerMultiBattleRoom_Text_24610D:: @ 824610D
 	.string "having me as your partner.$"
 
 BattleFrontier_BattleTowerMultiBattleRoom_Text_24614A:: @ 824614A
-	.string "I'm TRIATHLETE {STR_VAR_1}!$"
+	.string "I'm Triathlete {STR_VAR_1}!$"
 
 BattleFrontier_BattleTowerMultiBattleRoom_Text_24615D:: @ 824615D
 	.string "What I have…\n"
@@ -914,7 +914,7 @@ BattleFrontier_BattleTowerMultiBattleRoom_Text_2461F5:: @ 82461F5
 
 BattleFrontier_BattleTowerMultiBattleRoom_Text_24622A:: @ 824622A
 	.string "Hiya!\n"
-	.string "I'm BUG CATCHER {STR_VAR_1}!$"
+	.string "I'm Bug Catcher {STR_VAR_1}!$"
 
 BattleFrontier_BattleTowerMultiBattleRoom_Text_246244:: @ 8246244
 	.string "Check out what I have!\n"
@@ -931,12 +931,12 @@ BattleFrontier_BattleTowerMultiBattleRoom_Text_2462AA:: @ 82462AA
 	.string "at the counter.$"
 
 BattleFrontier_BattleTowerMultiBattleRoom_Text_2462E4:: @ 82462E4
-	.string "Aww, my POKéMON are awesome.\n"
+	.string "Aww, my Pokémon are awesome.\n"
 	.string "I hope you won't regret this!$"
 
 BattleFrontier_BattleTowerMultiBattleRoom_Text_24631F:: @ 824631F
 	.string "Good day!\n"
-	.string "I'm SCHOOL KID {STR_VAR_1}!$"
+	.string "I'm School Kid {STR_VAR_1}!$"
 
 BattleFrontier_BattleTowerMultiBattleRoom_Text_24633C:: @ 824633C
 	.string "What I've been raising are one\n"
@@ -959,7 +959,7 @@ BattleFrontier_BattleTowerMultiBattleRoom_Text_2463FF:: @ 82463FF
 
 BattleFrontier_BattleTowerMultiBattleRoom_Text_246449:: @ 8246449
 	.string "Yo! Let me tell you who I am!\n"
-	.string "I'm RICH BOY {STR_VAR_1}!$"
+	.string "I'm Rich Boy {STR_VAR_1}!$"
 
 BattleFrontier_BattleTowerMultiBattleRoom_Text_246478:: @ 8246478
 	.string "Guess what I got!\n"
@@ -981,7 +981,7 @@ BattleFrontier_BattleTowerMultiBattleRoom_Text_246529:: @ 8246529
 
 BattleFrontier_BattleTowerMultiBattleRoom_Text_246571:: @ 8246571
 	.string "Hiyah!\n"
-	.string "I am BLACK BELT {STR_VAR_1}.$"
+	.string "I am Black Belt {STR_VAR_1}.$"
 
 BattleFrontier_BattleTowerMultiBattleRoom_Text_24658C:: @ 824658C
 	.string "As my companions, I have\n"
@@ -1003,7 +1003,7 @@ BattleFrontier_BattleTowerMultiBattleRoom_Text_24662A:: @ 824662A
 
 BattleFrontier_BattleTowerMultiBattleRoom_Text_246662:: @ 8246662
 	.string "Hi, there!\n"
-	.string "I'm {STR_VAR_1}, and I'm a TUBER!$"
+	.string "I'm {STR_VAR_1}, and I'm a Tuber!$"
 
 BattleFrontier_BattleTowerMultiBattleRoom_Text_246686:: @ 8246686
 	.string "I'll tell you what I have.\n"
@@ -1023,7 +1023,7 @@ BattleFrontier_BattleTowerMultiBattleRoom_Text_24670A:: @ 824670A
 
 BattleFrontier_BattleTowerMultiBattleRoom_Text_246741:: @ 8246741
 	.string "Greetings…\n"
-	.string "I am HEX MANIAC {STR_VAR_1}…$"
+	.string "I am Hex Maniac {STR_VAR_1}…$"
 
 BattleFrontier_BattleTowerMultiBattleRoom_Text_246760:: @ 8246760
 	.string "I bear with me one {STR_VAR_1}-using\n"
@@ -1043,7 +1043,7 @@ BattleFrontier_BattleTowerMultiBattleRoom_Text_2467E6:: @ 82467E6
 
 BattleFrontier_BattleTowerMultiBattleRoom_Text_2467FF:: @ 82467FF
 	.string "How do you do? I'm {STR_VAR_1},\n"
-	.string "and I'm a POKéMON BREEDER!$"
+	.string "and I'm a Pokémon Breeder!$"
 
 BattleFrontier_BattleTowerMultiBattleRoom_Text_246831:: @ 8246831
 	.string "I'm raising a couple good ones!\n"
@@ -1065,7 +1065,7 @@ BattleFrontier_BattleTowerMultiBattleRoom_Text_2468FE:: @ 82468FE
 
 BattleFrontier_BattleTowerMultiBattleRoom_Text_24692B:: @ 824692B
 	.string "Well, hello!\n"
-	.string "I'm TRIATHLETE {STR_VAR_1}!$"
+	.string "I'm Triathlete {STR_VAR_1}!$"
 
 BattleFrontier_BattleTowerMultiBattleRoom_Text_24694B:: @ 824694B
 	.string "Want to know what I run with?\n"
@@ -1087,7 +1087,7 @@ BattleFrontier_BattleTowerMultiBattleRoom_Text_2469F1:: @ 82469F1
 
 BattleFrontier_BattleTowerMultiBattleRoom_Text_246A22:: @ 8246A22
 	.string "Hey, there! My name's {STR_VAR_1}!\n"
-	.string "I'm a TRIATHLETE!$"
+	.string "I'm a Triathlete!$"
 
 BattleFrontier_BattleTowerMultiBattleRoom_Text_246A4E:: @ 8246A4E
 	.string "I go on runs with my durable team--\n"
@@ -1107,7 +1107,7 @@ BattleFrontier_BattleTowerMultiBattleRoom_Text_246AF7:: @ 8246AF7
 	.string "tag-team partner…$"
 
 BattleFrontier_BattleTowerMultiBattleRoom_Text_246B2B:: @ 8246B2B
-	.string "I'm BATTLE GIRL {STR_VAR_1}!$"
+	.string "I'm Battle Girl {STR_VAR_1}!$"
 
 BattleFrontier_BattleTowerMultiBattleRoom_Text_246B3F:: @ 8246B3F
 	.string "I've been toughening up one\n"
@@ -1128,7 +1128,7 @@ BattleFrontier_BattleTowerMultiBattleRoom_Text_246BE9:: @ 8246BE9
 	.string "the ultimate tag team…$"
 
 BattleFrontier_BattleTowerMultiBattleRoom_Text_246C22:: @ 8246C22
-	.string "I'm TRIATHLETE {STR_VAR_1}!$"
+	.string "I'm Triathlete {STR_VAR_1}!$"
 
 BattleFrontier_BattleTowerMultiBattleRoom_Text_246C35:: @ 8246C35
 	.string "I've been running with one {STR_VAR_2}\n"
@@ -1150,7 +1150,7 @@ BattleFrontier_BattleTowerMultiBattleRoom_Text_246CE9:: @ 8246CE9
 
 BattleFrontier_BattleTowerMultiBattleRoom_Text_246D2D:: @ 8246D2D
 	.string "Me?\n"
-	.string "I'm TUBER {STR_VAR_1}!$"
+	.string "I'm Tuber {STR_VAR_1}!$"
 
 BattleFrontier_BattleTowerMultiBattleRoom_Text_246D3F:: @ 8246D3F
 	.string "What do I have with me?\n"
@@ -1167,12 +1167,12 @@ BattleFrontier_BattleTowerMultiBattleRoom_Text_246D9E:: @ 8246D9E
 	.string "Let's be excellent together!$"
 
 BattleFrontier_BattleTowerMultiBattleRoom_Text_246DD3:: @ 8246DD3
-	.string "My POKéMON are tough for sure…\n"
+	.string "My Pokémon are tough for sure…\n"
 	.string "It's too bad you don't want to team up.$"
 
 BattleFrontier_BattleTowerMultiBattleRoom_Text_246E1A:: @ 8246E1A
 	.string "Yay-hey!\n"
-	.string "Call me GUITARIST {STR_VAR_1}!$"
+	.string "Call me Guitarist {STR_VAR_1}!$"
 
 BattleFrontier_BattleTowerMultiBattleRoom_Text_246E39:: @ 8246E39
 	.string "Check out my entourage!\n"
@@ -1188,12 +1188,12 @@ BattleFrontier_BattleTowerMultiBattleRoom_Text_246EB6:: @ 8246EB6
 	.string "I'll do that registration stuff now!$"
 
 BattleFrontier_BattleTowerMultiBattleRoom_Text_246EEE:: @ 8246EEE
-	.string "My POKéMON rock hard!\n"
+	.string "My Pokémon rock hard!\n"
 	.string "You'll be sorry, I tell you!$"
 
 BattleFrontier_BattleTowerMultiBattleRoom_Text_246F21:: @ 8246F21
 	.string "Pleased to meet you.\n"
-	.string "I am {STR_VAR_1}, a GENTLEMAN.$"
+	.string "I am {STR_VAR_1}, a Gentleman.$"
 
 BattleFrontier_BattleTowerMultiBattleRoom_Text_246F4C:: @ 8246F4C
 	.string "I am accompanied by my trusted\n"
@@ -1215,7 +1215,7 @@ BattleFrontier_BattleTowerMultiBattleRoom_Text_247013:: @ 8247013
 
 BattleFrontier_BattleTowerMultiBattleRoom_Text_24705B:: @ 824705B
 	.string "Hello, I'm {STR_VAR_1},\n"
-	.string "and I'm a POKéFAN.$"
+	.string "and I'm a Pokéfan.$"
 
 BattleFrontier_BattleTowerMultiBattleRoom_Text_24707D:: @ 824707D
 	.string "I have with me now one {STR_VAR_2}\n"
@@ -1231,15 +1231,15 @@ BattleFrontier_BattleTowerMultiBattleRoom_Text_2470FD:: @ 82470FD
 	.string "I'll look after the registration!$"
 
 BattleFrontier_BattleTowerMultiBattleRoom_Text_24712A:: @ 824712A
-	.string "My POKéMON are top grade…\n"
+	.string "My Pokémon are top grade…\n"
 	.string "It's too bad you can't appreciate that.$"
 
 BattleFrontier_BattleTowerMultiBattleRoom_Text_24716C:: @ 824716C
 	.string "Hm!\n"
-	.string "I am {STR_VAR_1}, and an EXPERT am I!$"
+	.string "I am {STR_VAR_1}, and an Expert am I!$"
 
 BattleFrontier_BattleTowerMultiBattleRoom_Text_24718D:: @ 824718D
-	.string "The POKéMON that I've toughened up are\n"
+	.string "The Pokémon that I've toughened up are\n"
 	.string "one {STR_VAR_2} with {STR_VAR_1} and$"
 
 BattleFrontier_BattleTowerMultiBattleRoom_Text_2471C7:: @ 82471C7
@@ -1257,10 +1257,10 @@ BattleFrontier_BattleTowerMultiBattleRoom_Text_247238:: @ 8247238
 
 BattleFrontier_BattleTowerMultiBattleRoom_Text_247268:: @ 8247268
 	.string "Hello, hello.\n"
-	.string "I'm {STR_VAR_1}, and I'm an EXPERT.$"
+	.string "I'm {STR_VAR_1}, and I'm an Expert.$"
 
 BattleFrontier_BattleTowerMultiBattleRoom_Text_247291:: @ 8247291
-	.string "I've raised my POKéMON thoroughly.\n"
+	.string "I've raised my Pokémon thoroughly.\n"
 	.string "One {STR_VAR_2} with {STR_VAR_1} and$"
 
 BattleFrontier_BattleTowerMultiBattleRoom_Text_2472C7:: @ 82472C7
@@ -1277,7 +1277,7 @@ BattleFrontier_BattleTowerMultiBattleRoom_Text_247348:: @ 8247348
 	.string "time we meet.$"
 
 BattleFrontier_BattleTowerMultiBattleRoom_Text_24737A:: @ 824737A
-	.string "I'm DRAGON TAMER {STR_VAR_1}!$"
+	.string "I'm Dragon Tamer {STR_VAR_1}!$"
 
 BattleFrontier_BattleTowerMultiBattleRoom_Text_24738F:: @ 824738F
 	.string "The team I've been toughening up is\n"
@@ -1297,10 +1297,10 @@ BattleFrontier_BattleTowerMultiBattleRoom_Text_247438:: @ 8247438
 	.string "partners than me!$"
 
 BattleFrontier_BattleTowerMultiBattleRoom_Text_247470:: @ 8247470
-	.string "I'm BIRD KEEPER {STR_VAR_1}!$"
+	.string "I'm Bird Keeper {STR_VAR_1}!$"
 
 BattleFrontier_BattleTowerMultiBattleRoom_Text_247484:: @ 8247484
-	.string "What POKéMON do I have?\n"
+	.string "What Pokémon do I have?\n"
 	.string "One {STR_VAR_2} with {STR_VAR_1} and$"
 
 BattleFrontier_BattleTowerMultiBattleRoom_Text_2474AF:: @ 82474AF
@@ -1313,14 +1313,14 @@ BattleFrontier_BattleTowerMultiBattleRoom_Text_2474EC:: @ 82474EC
 	.string "I'll look after the registration!$"
 
 BattleFrontier_BattleTowerMultiBattleRoom_Text_24751D:: @ 824751D
-	.string "My POKéMON and I are strong.\n"
+	.string "My Pokémon and I are strong.\n"
 	.string "What a letdown.$"
 
 BattleFrontier_BattleTowerMultiBattleRoom_Text_24754A:: @ 824754A
-	.string "I'm NINJA BOY {STR_VAR_1}!$"
+	.string "I'm Ninja Boy {STR_VAR_1}!$"
 
 BattleFrontier_BattleTowerMultiBattleRoom_Text_24755C:: @ 824755C
-	.string "My POKéMON team consists of one\n"
+	.string "My Pokémon team consists of one\n"
 	.string "{STR_VAR_2} with {STR_VAR_1} and$"
 
 BattleFrontier_BattleTowerMultiBattleRoom_Text_24758B:: @ 824758B
@@ -1333,11 +1333,11 @@ BattleFrontier_BattleTowerMultiBattleRoom_Text_2475BC:: @ 82475BC
 
 BattleFrontier_BattleTowerMultiBattleRoom_Text_2475D5:: @ 82475D5
 	.string "You'll regret not having my tough\n"
-	.string "POKéMON on your side!$"
+	.string "Pokémon on your side!$"
 
 BattleFrontier_BattleTowerMultiBattleRoom_Text_24760D:: @ 824760D
 	.string "Hello!\n"
-	.string "I'm PARASOL LADY {STR_VAR_1}!$"
+	.string "I'm Parasol Lady {STR_VAR_1}!$"
 
 BattleFrontier_BattleTowerMultiBattleRoom_Text_247629:: @ 8247629
 	.string "Escorting me now are my {STR_VAR_2}\n"
@@ -1355,15 +1355,15 @@ BattleFrontier_BattleTowerMultiBattleRoom_Text_24769B:: @ 824769B
 	.string "Let's not disappoint each other!$"
 
 BattleFrontier_BattleTowerMultiBattleRoom_Text_2476ED:: @ 82476ED
-	.string "My POKéMON are tremendously strong.\n"
+	.string "My Pokémon are tremendously strong.\n"
 	.string "How disappointing…$"
 
 BattleFrontier_BattleTowerMultiBattleRoom_Text_247724:: @ 8247724
 	.string "Hello.\n"
-	.string "I'm {STR_VAR_1}, and I'm a BUG MANIAC!$"
+	.string "I'm {STR_VAR_1}, and I'm a Bug Maniac!$"
 
 BattleFrontier_BattleTowerMultiBattleRoom_Text_247749:: @ 8247749
-	.string "I have found my POKéMON, yes.\n"
+	.string "I have found my Pokémon, yes.\n"
 	.string "One {STR_VAR_2} with {STR_VAR_1} and$"
 
 BattleFrontier_BattleTowerMultiBattleRoom_Text_24777A:: @ 824777A
@@ -1378,12 +1378,12 @@ BattleFrontier_BattleTowerMultiBattleRoom_Text_2477CE:: @ 82477CE
 	.string "I won't be long with the registration!$"
 
 BattleFrontier_BattleTowerMultiBattleRoom_Text_247807:: @ 8247807
-	.string "With the POKéMON I found, we wouldn't\n"
+	.string "With the Pokémon I found, we wouldn't\n"
 	.string "have lost…$"
 
 BattleFrontier_BattleTowerMultiBattleRoom_Text_247838:: @ 8247838
 	.string "Ahoy, there!\n"
-	.string "I'm SAILOR {STR_VAR_1}!$"
+	.string "I'm Sailor {STR_VAR_1}!$"
 
 BattleFrontier_BattleTowerMultiBattleRoom_Text_247854:: @ 8247854
 	.string "Let me show you my pride and joy!\n"
@@ -1404,7 +1404,7 @@ BattleFrontier_BattleTowerMultiBattleRoom_Text_24790D:: @ 824790D
 
 BattleFrontier_BattleTowerMultiBattleRoom_Text_247942:: @ 8247942
 	.string "Hi, I'm {STR_VAR_1}.\n"
-	.string "I'm a COLLECTOR.$"
+	.string "I'm a Collector.$"
 
 BattleFrontier_BattleTowerMultiBattleRoom_Text_24795F:: @ 824795F
 	.string "The jewels in my collection are\n"
@@ -1422,11 +1422,11 @@ BattleFrontier_BattleTowerMultiBattleRoom_Text_2479CE:: @ 82479CE
 
 BattleFrontier_BattleTowerMultiBattleRoom_Text_247A18:: @ 8247A18
 	.string "Well, that's upsetting.\n"
-	.string "You don't appreciate my POKéMON.$"
+	.string "You don't appreciate my Pokémon.$"
 
 BattleFrontier_BattleTowerMultiBattleRoom_Text_247A51:: @ 8247A51
 	.string "Howdy, I'm {STR_VAR_1}.\n"
-	.string "I'm a POKéMON RANGER.$"
+	.string "I'm a Pokémon Ranger.$"
 
 BattleFrontier_BattleTowerMultiBattleRoom_Text_247A76:: @ 8247A76
 	.string "Keeping me company are one\n"
@@ -1442,12 +1442,12 @@ BattleFrontier_BattleTowerMultiBattleRoom_Text_247AE3:: @ 8247AE3
 	.string "I'll deal with the registration now.$"
 
 BattleFrontier_BattleTowerMultiBattleRoom_Text_247B16:: @ 8247B16
-	.string "Next time, choose my POKéMON,\n"
+	.string "Next time, choose my Pokémon,\n"
 	.string "will you?$"
 
 BattleFrontier_BattleTowerMultiBattleRoom_Text_247B3E:: @ 8247B3E
 	.string "My name's {STR_VAR_1}.\n"
-	.string "I'm a POKéMON RANGER!$"
+	.string "I'm a Pokémon Ranger!$"
 
 BattleFrontier_BattleTowerMultiBattleRoom_Text_247B62:: @ 8247B62
 	.string "Let me tell you about my team. I have\n"
@@ -1463,12 +1463,12 @@ BattleFrontier_BattleTowerMultiBattleRoom_Text_247BE7:: @ 8247BE7
 	.string "I'll get the registration done quick!$"
 
 BattleFrontier_BattleTowerMultiBattleRoom_Text_247C23:: @ 8247C23
-	.string "I hope you'll choose my POKéMON\n"
+	.string "I hope you'll choose my Pokémon\n"
 	.string "next time.$"
 
 BattleFrontier_BattleTowerMultiBattleRoom_Text_247C4E:: @ 8247C4E
 	.string "Pleased to meet you. I'm {STR_VAR_1}.\n"
-	.string "I consider myself an AROMA LADY.$"
+	.string "I consider myself an Aroma Lady.$"
 
 BattleFrontier_BattleTowerMultiBattleRoom_Text_247C8C:: @ 8247C8C
 	.string "I travel with one {STR_VAR_2}\n"
@@ -1490,10 +1490,10 @@ BattleFrontier_BattleTowerMultiBattleRoom_Text_247D4E:: @ 8247D4E
 
 BattleFrontier_BattleTowerMultiBattleRoom_Text_247D97:: @ 8247D97
 	.string "Want to know who I am?\n"
-	.string "I'm {STR_VAR_1}, the RUIN MANIAC!$"
+	.string "I'm {STR_VAR_1}, the Ruin Maniac!$"
 
 BattleFrontier_BattleTowerMultiBattleRoom_Text_247DC7:: @ 8247DC7
-	.string "The POKéMON that I have with me are\n"
+	.string "The Pokémon that I have with me are\n"
 	.string "one {STR_VAR_2} with {STR_VAR_1} and$"
 
 BattleFrontier_BattleTowerMultiBattleRoom_Text_247DFE:: @ 8247DFE
@@ -1507,13 +1507,13 @@ BattleFrontier_BattleTowerMultiBattleRoom_Text_247E3E:: @ 8247E3E
 
 BattleFrontier_BattleTowerMultiBattleRoom_Text_247E7E:: @ 8247E7E
 	.string "Hmm…\n"
-	.string "I think my POKéMON are tough…$"
+	.string "I think my Pokémon are tough…$"
 
 BattleFrontier_BattleTowerMultiBattleRoom_Text_247EA1:: @ 8247EA1
-	.string "I'm COOLTRAINER {STR_VAR_1}!$"
+	.string "I'm Cooltrainer {STR_VAR_1}!$"
 
 BattleFrontier_BattleTowerMultiBattleRoom_Text_247EB5:: @ 8247EB5
-	.string "The POKéMON I have right now are one\n"
+	.string "The Pokémon I have right now are one\n"
 	.string "{STR_VAR_2} with {STR_VAR_1} and$"
 
 BattleFrontier_BattleTowerMultiBattleRoom_Text_247EE9:: @ 8247EE9
@@ -1531,7 +1531,7 @@ BattleFrontier_BattleTowerMultiBattleRoom_Text_247F6D:: @ 8247F6D
 	.string "the greatest team ever.$"
 
 BattleFrontier_BattleTowerMultiBattleRoom_Text_247FA3:: @ 8247FA3
-	.string "I'm COOLTRAINER {STR_VAR_1}!$"
+	.string "I'm Cooltrainer {STR_VAR_1}!$"
 
 BattleFrontier_BattleTowerMultiBattleRoom_Text_247FB7:: @ 8247FB7
 	.string "The team I've been raising has one\n"
@@ -1552,7 +1552,7 @@ BattleFrontier_BattleTowerMultiBattleRoom_Text_24805E:: @ 824805E
 
 BattleFrontier_BattleTowerMultiBattleRoom_Text_24808D:: @ 824808D
 	.string "Heyo!\n"
-	.string "I'm {STR_VAR_1}, the POKéMANIAC!$"
+	.string "I'm {STR_VAR_1}, the Pokémaniac!$"
 
 BattleFrontier_BattleTowerMultiBattleRoom_Text_2480AB:: @ 82480AB
 	.string "What does a guy like me have?\n"
@@ -1569,12 +1569,12 @@ BattleFrontier_BattleTowerMultiBattleRoom_Text_248128:: @ 8248128
 	.string "I'll register the both of us!$"
 
 BattleFrontier_BattleTowerMultiBattleRoom_Text_248151:: @ 8248151
-	.string "My POKéMON are brutal!\n"
+	.string "My Pokémon are brutal!\n"
 	.string "It's not my fault if you regret this!$"
 
 BattleFrontier_BattleTowerMultiBattleRoom_Text_24818E:: @ 824818E
 	.string "Yo, there!\n"
-	.string "I'm KINDLER {STR_VAR_1}!$"
+	.string "I'm Kindler {STR_VAR_1}!$"
 
 BattleFrontier_BattleTowerMultiBattleRoom_Text_2481A9:: @ 82481A9
 	.string "You know what my training cooked up?\n"
@@ -1594,7 +1594,7 @@ BattleFrontier_BattleTowerMultiBattleRoom_Text_24824F:: @ 824824F
 	.string "the next time we run into each other.$"
 
 BattleFrontier_BattleTowerMultiBattleRoom_Text_248297:: @ 8248297
-	.string "I'm {STR_VAR_1}, and I'm a CAMPER!$"
+	.string "I'm {STR_VAR_1}, and I'm a Camper!$"
 
 BattleFrontier_BattleTowerMultiBattleRoom_Text_2482B1:: @ 82482B1
 	.string "I've been raising one {STR_VAR_1}-\n"
@@ -1615,10 +1615,10 @@ BattleFrontier_BattleTowerMultiBattleRoom_Text_24833D:: @ 824833D
 
 BattleFrontier_BattleTowerMultiBattleRoom_Text_248369:: @ 8248369
 	.string "Hello!\n"
-	.string "I'm {STR_VAR_1}, and I'm a PICNICKER!$"
+	.string "I'm {STR_VAR_1}, and I'm a Picnicker!$"
 
 BattleFrontier_BattleTowerMultiBattleRoom_Text_24838D:: @ 824838D
-	.string "The POKéMON I've been taking are\n"
+	.string "The Pokémon I've been taking are\n"
 	.string "one {STR_VAR_2} with {STR_VAR_1} and$"
 
 BattleFrontier_BattleTowerMultiBattleRoom_Text_2483C1:: @ 82483C1
@@ -1635,7 +1635,7 @@ BattleFrontier_BattleTowerMultiBattleRoom_Text_248431:: @ 8248431
 	.string "some other time.$"
 
 BattleFrontier_BattleTowerMultiBattleRoom_Text_248467:: @ 8248467
-	.string "I'm PSYCHIC {STR_VAR_1}!$"
+	.string "I'm Psychic {STR_VAR_1}!$"
 
 BattleFrontier_BattleTowerMultiBattleRoom_Text_248477:: @ 8248477
 	.string "The twosome I've been raising are\n"
@@ -1656,7 +1656,7 @@ BattleFrontier_BattleTowerMultiBattleRoom_Text_248517:: @ 8248517
 
 BattleFrontier_BattleTowerMultiBattleRoom_Text_248553:: @ 8248553
 	.string "I'm {STR_VAR_1}.\n"
-	.string "I'm a PSYCHIC.$"
+	.string "I'm a Psychic.$"
 
 BattleFrontier_BattleTowerMultiBattleRoom_Text_24856A:: @ 824856A
 	.string "One {STR_VAR_2} with {STR_VAR_1} and$"
@@ -1676,14 +1676,14 @@ BattleFrontier_BattleTowerMultiBattleRoom_Text_248614:: @ 8248614
 	.string "to forge an alliance.$"
 
 BattleFrontier_BattleTowerMultiBattleRoom_Text_24864E:: @ 824864E
-	.string "I'm SCHOOL KID {STR_VAR_1}!$"
+	.string "I'm School Kid {STR_VAR_1}!$"
 
 BattleFrontier_BattleTowerMultiBattleRoom_Text_248661:: @ 8248661
 	.string "One {STR_VAR_1}-using {STR_VAR_2}$"
 
 BattleFrontier_BattleTowerMultiBattleRoom_Text_248671:: @ 8248671
 	.string "and one {STR_VAR_1}-using\n"
-	.string "{STR_VAR_2} are my POKéMON pair.\p"
+	.string "{STR_VAR_2} are my Pokémon pair.\p"
 	.string "May I please be your partner on\n"
 	.string "a tag team?$"
 
@@ -1697,10 +1697,10 @@ BattleFrontier_BattleTowerMultiBattleRoom_Text_2486FF:: @ 82486FF
 
 BattleFrontier_BattleTowerMultiBattleRoom_Text_248725:: @ 8248725
 	.string "Hiya! The name's {STR_VAR_1}!\n"
-	.string "I'm a POKéMON BREEDER!$"
+	.string "I'm a Pokémon Breeder!$"
 
 BattleFrontier_BattleTowerMultiBattleRoom_Text_248751:: @ 8248751
-	.string "The POKéMON I've raised are one\n"
+	.string "The Pokémon I've raised are one\n"
 	.string "{STR_VAR_1}-using {STR_VAR_2} and$"
 
 BattleFrontier_BattleTowerMultiBattleRoom_Text_248781:: @ 8248781
@@ -1718,10 +1718,10 @@ BattleFrontier_BattleTowerMultiBattleRoom_Text_2487F7:: @ 82487F7
 
 BattleFrontier_BattleTowerMultiBattleRoom_Text_248829:: @ 8248829
 	.string "I'm {STR_VAR_1}, and I'm proud to say\n"
-	.string "that I am a POKéFAN.$"
+	.string "that I am a Pokéfan.$"
 
 BattleFrontier_BattleTowerMultiBattleRoom_Text_24885B:: @ 824885B
-	.string "The darling POKéMON I've raised are\n"
+	.string "The darling Pokémon I've raised are\n"
 	.string "one {STR_VAR_2} with {STR_VAR_1} and$"
 
 BattleFrontier_BattleTowerMultiBattleRoom_Text_248892:: @ 8248892
@@ -1734,11 +1734,11 @@ BattleFrontier_BattleTowerMultiBattleRoom_Text_2488D8:: @ 82488D8
 	.string "I'll be on my way to register!$"
 
 BattleFrontier_BattleTowerMultiBattleRoom_Text_248908:: @ 8248908
-	.string "My darling POKéMON are the best,\n"
+	.string "My darling Pokémon are the best,\n"
 	.string "I'll have you know. How annoying!$"
 
 BattleFrontier_BattleTowerMultiBattleRoom_Text_24894B:: @ 824894B
-	.string "Hi, I'm SWIMMER {STR_VAR_1}.$"
+	.string "Hi, I'm Swimmer {STR_VAR_1}.$"
 
 BattleFrontier_BattleTowerMultiBattleRoom_Text_24895F:: @ 824895F
 	.string "One {STR_VAR_1}-using {STR_VAR_2}$"
@@ -1758,10 +1758,10 @@ BattleFrontier_BattleTowerMultiBattleRoom_Text_2489E7:: @ 82489E7
 
 BattleFrontier_BattleTowerMultiBattleRoom_Text_248A10:: @ 8248A10
 	.string "What's happening?\n"
-	.string "I'm {STR_VAR_1}, and I'm a TRIATHLETE.$"
+	.string "I'm {STR_VAR_1}, and I'm a Triathlete.$"
 
 BattleFrontier_BattleTowerMultiBattleRoom_Text_248A40:: @ 8248A40
-	.string "I got a couple decent POKéMON.\n"
+	.string "I got a couple decent Pokémon.\n"
 	.string "One {STR_VAR_2} with {STR_VAR_1} and$"
 
 BattleFrontier_BattleTowerMultiBattleRoom_Text_248A72:: @ 8248A72
@@ -1778,7 +1778,7 @@ BattleFrontier_BattleTowerMultiBattleRoom_Text_248AEB:: @ 8248AEB
 	.string "next time, how's that?$"
 
 BattleFrontier_BattleTowerMultiBattleRoom_Text_248B22:: @ 8248B22
-	.string "I'm the TRIATHLETE {STR_VAR_1}!$"
+	.string "I'm the Triathlete {STR_VAR_1}!$"
 
 BattleFrontier_BattleTowerMultiBattleRoom_Text_248B39:: @ 8248B39
 	.string "One {STR_VAR_2} with {STR_VAR_1} and$"
@@ -1799,7 +1799,7 @@ BattleFrontier_BattleTowerMultiBattleRoom_Text_248BEE:: @ 8248BEE
 
 BattleFrontier_BattleTowerMultiBattleRoom_Text_248C2E:: @ 8248C2E
 	.string "Hi, there! Hello!\n"
-	.string "I'm {STR_VAR_1}, and I'm a SWIMMER!$"
+	.string "I'm {STR_VAR_1}, and I'm a Swimmer!$"
 
 BattleFrontier_BattleTowerMultiBattleRoom_Text_248C5B:: @ 8248C5B
 	.string "Check out what I've been raising!\n"

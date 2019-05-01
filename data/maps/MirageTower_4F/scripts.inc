@@ -60,20 +60,20 @@ MirageTower_4F_EventScript_23ADCA:: @ 823ADCA
 	end
 
 MirageTower_4F_Text_23ADF9: @ 823ADF9
-	.string "You found the ROOT FOSSIL.\p"
-	.string "If this FOSSIL is taken, the ground\n"
+	.string "You found the Root Fossil.\p"
+	.string "If this Fossil is taken, the ground\n"
 	.string "around it will likely crumble away…\p"
-	.string "Take the ROOT FOSSIL anyway?$"
+	.string "Take the Root Fossil anyway?$"
 
 MirageTower_4F_Text_23AE79: @ 823AE79
-	.string "{PLAYER} left the ROOT FOSSIL alone.$"
+	.string "{PLAYER} left the Root Fossil alone.$"
 
 MirageTower_4F_Text_23AE98: @ 823AE98
-	.string "You found the CLAW FOSSIL.\p"
-	.string "If this FOSSIL is taken, the ground\n"
+	.string "You found the Claw Fossil.\p"
+	.string "If this Fossil is taken, the ground\n"
 	.string "around it will likely crumble away…\p"
-	.string "Take the CLAW FOSSIL anyway?$"
+	.string "Take the Claw Fossil anyway?$"
 
 MirageTower_4F_Text_23AF18: @ 823AF18
-	.string "{PLAYER} left the CLAW FOSSIL alone.$"
+	.string "{PLAYER} left the Claw Fossil alone.$"
 

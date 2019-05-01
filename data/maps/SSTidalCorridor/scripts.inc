@@ -265,24 +265,24 @@ SSTidalCorridor_Movement_23C28B: @ 823C28B
 	step_end
 
 SSTidalCorridor_Text_23C28F: @ 823C28F
-	.string "SCOTT: Well, hi, hi!\n"
+	.string "Scott: Well, hi, hi!\n"
 	.string "{PLAYER}{KUN}, {PLAYER}{KUN}!\p"
 	.string "Something's come up, so I have to\n"
 	.string "disembark, but am I glad to see you!\p"
-	.string "Congratulations, LEAGUE CHAMPION!\p"
+	.string "Congratulations, League Champion!\p"
 	.string "There's a place I'd like to invite\n"
 	.string "someone like you.\p"
 	.string "It's the…\n"
-	.string "BATTLE FRONTIER!\p"
+	.string "Battle Frontier!\p"
 	.string "What's the place like?\n"
 	.string "You'll understand when you see it!\p"
-	.string "I've spoken with the ship's CAPTAIN\n"
+	.string "I've spoken with the ship's Captain\n"
 	.string "about this.\p"
 	.string "The next time you take a ferry,\n"
 	.string "you should be able to sail to\l"
-	.string "the BATTLE FRONTIER.\p"
+	.string "the Battle Frontier.\p"
 	.string "Okay, {PLAYER}{KUN}, I'll be waiting for you\n"
-	.string "at the BATTLE FRONTIER!$"
+	.string "at the Battle Frontier!$"
 
 SSTidalCorridor_Text_23C462: @ 823C462
 SSTidalRooms_Text_23C462: @ 823C462
@@ -297,11 +297,11 @@ SSTidalCorridor_Text_23C4E3: @ 823C4E3
 
 SSTidalCorridor_Text_23C50F: @ 823C50F
 SSTidalRooms_Text_23C50F: @ 823C50F
-	.string "We have made land in SLATEPORT CITY.\n"
+	.string "We have made land in Slateport City.\n"
 	.string "Thank you for sailing with us.$"
 
 SSTidalRooms_Text_23C553: @ 823C553
-	.string "We have made land in LILYCOVE CITY.\n"
+	.string "We have made land in Lilycove City.\n"
 	.string "Thank you for sailing with us.$"
 
 SSTidalCorridor_Text_23C596: @ 823C596
@@ -317,7 +317,7 @@ SSTidalCorridor_Text_23C64F: @ 823C64F
 
 SSTidalCorridor_Text_23C65E: @ 823C65E
 	.string "Go visit other cabins.\n"
-	.string "TRAINERS bored of the boat trip will\l"
+	.string "Trainers bored of the boat trip will\l"
 	.string "be itching to battle.$"
 
 SSTidalCorridor_Text_23C6B0: @ 823C6B0
@@ -328,17 +328,17 @@ SSTidalCorridor_Text_23C6C3: @ 823C6C3
 	.string "the porthole.$"
 
 SSTidalCorridor_Text_23C6EC: @ 823C6EC
-	.string "MR. BRINEY: Welcome aboard, {PLAYER}{KUN}!\p"
+	.string "Mr. Briney: Welcome aboard, {PLAYER}{KUN}!\p"
 	.string "They made me honorary captain of\n"
-	.string "the S.S. TIDAL!\p"
-	.string "You can call me CAPTAIN BRINEY now!\p"
+	.string "the S.S. Tidal!\p"
+	.string "You can call me Captain Briney now!\p"
 	.string "You know, I retired once before,\n"
 	.string "but when I saw this majestic ship…\p"
 	.string "Let me just say, it stirred my sleeping\n"
 	.string "soul as a sailor!$"
 
 SSTidalCorridor_Text_23C7E1: @ 823C7E1
-	.string "PEEKO: Pihyo pihyohyo…$"
+	.string "Peeko: Pihyo pihyohyo…$"
 
 SSTidalCorridor_Text_23C7F8: @ 823C7F8
 	.string "Cabin 1$"

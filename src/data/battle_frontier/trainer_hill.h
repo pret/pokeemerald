@@ -19,7 +19,7 @@ static const struct TrHillTag sDataTagNormal =
             {
                 [0] =
                 {
-                    .name = _("ALAINA"),
+                    .name = _("Alaina"),
                     .facilityClass = FACILITY_CLASS_HEX_MANIAC,
                     .unused = 0,
                     .speechBefore = {EC_WORD_YOU, EC_WORD_CAN, EC_WORD_CHOOSE, EC_WORD_NOT, EC_WORD_TO, EC_WORD_BELIEVE},
@@ -47,7 +47,7 @@ static const struct TrHillTag sDataTagNormal =
                             .spDefenseIV = 24,
                             .altAbility = 0,
                             .personality = 0x0,
-                            .nickname = _("MISDREAVUS"),
+                            .nickname = _("Misdreavus"),
                             .friendship = 255,
                         },
                         [1] =
@@ -70,7 +70,7 @@ static const struct TrHillTag sDataTagNormal =
                             .spDefenseIV = 24,
                             .altAbility = 0,
                             .personality = 0xF,
-                            .nickname = _("SOLROCK"),
+                            .nickname = _("Solrock"),
                             .friendship = 255,
                         },
                         [2] =
@@ -92,7 +92,7 @@ static const struct TrHillTag sDataTagNormal =
                             .spDefenseIV = 24,
                             .altAbility = 0,
                             .personality = 0xC,
-                            .nickname = _("CLAYDOL"),
+                            .nickname = _("Claydol"),
                             .friendship = 255,
                         },
                         [3] =
@@ -114,7 +114,7 @@ static const struct TrHillTag sDataTagNormal =
                             .spDefenseIV = 24,
                             .altAbility = 0,
                             .personality = 0x80,
-                            .nickname = _("WEEZING"),
+                            .nickname = _("Weezing"),
                             .friendship = 0,
                         },
                         [4] =
@@ -137,7 +137,7 @@ static const struct TrHillTag sDataTagNormal =
                             .spDefenseIV = 24,
                             .altAbility = 0,
                             .personality = 0xF,
-                            .nickname = _("LUNATONE"),
+                            .nickname = _("Lunatone"),
                             .friendship = 255,
                         },
                         [5] =
@@ -159,14 +159,14 @@ static const struct TrHillTag sDataTagNormal =
                             .spDefenseIV = 24,
                             .altAbility = 0,
                             .personality = 0x83,
-                            .nickname = _("FLYGON"),
+                            .nickname = _("Flygon"),
                             .friendship = 255,
                         },
                     },
                 },
                 [1] =
                 {
-                    .name = _("ALFONSO"),
+                    .name = _("Alfonso"),
                     .facilityClass = FACILITY_CLASS_CYCLING_TRIATHLETE_M,
                     .unused = 0,
                     .speechBefore = {EC_WORD_I, EC_WORD_NEVER, EC_WORD_TAKE, EC_WORD_A, EC_WORD_TRAIN, 0xFFFF},
@@ -193,7 +193,7 @@ static const struct TrHillTag sDataTagNormal =
                             .spDefenseIV = 15,
                             .altAbility = 0,
                             .personality = 0xF,
-                            .nickname = _("SEALEO"),
+                            .nickname = _("Sealeo"),
                             .friendship = 255,
                         },
                         [1] =
@@ -214,7 +214,7 @@ static const struct TrHillTag sDataTagNormal =
                             .spDefenseIV = 15,
                             .altAbility = 0,
                             .personality = 0xF,
-                            .nickname = _("AMPHAROS"),
+                            .nickname = _("Ampharos"),
                             .friendship = 255,
                         },
                         [2] =
@@ -235,7 +235,7 @@ static const struct TrHillTag sDataTagNormal =
                             .spDefenseIV = 15,
                             .altAbility = 0,
                             .personality = 0x4E,
-                            .nickname = _("MACHOKE"),
+                            .nickname = _("Machoke"),
                             .friendship = 255,
                         },
                         [3] =
@@ -256,7 +256,7 @@ static const struct TrHillTag sDataTagNormal =
                             .spDefenseIV = 15,
                             .altAbility = 0,
                             .personality = 0x28,
-                            .nickname = _("FLAREON"),
+                            .nickname = _("Flareon"),
                             .friendship = 255,
                         },
                         [4] =
@@ -277,7 +277,7 @@ static const struct TrHillTag sDataTagNormal =
                             .spDefenseIV = 15,
                             .altAbility = 0,
                             .personality = 0x0,
-                            .nickname = _("MAGNETON"),
+                            .nickname = _("Magneton"),
                             .friendship = 255,
                         },
                         [5] =
@@ -299,7 +299,7 @@ static const struct TrHillTag sDataTagNormal =
                             .spDefenseIV = 15,
                             .altAbility = 0,
                             .personality = 0x85,
-                            .nickname = _("PINSIR"),
+                            .nickname = _("Pinsir"),
                             .friendship = 255,
                         },
                     },
@@ -319,7 +319,7 @@ static const struct TrHillTag sDataTagNormal =
             {
                 [0] =
                 {
-                    .name = _("THEODORE"),
+                    .name = _("Theodore"),
                     .facilityClass = FACILITY_CLASS_BLACK_BELT,
                     .unused = 0,
                     .speechBefore = {EC_WORD_MY, EC_WORD_POWER, EC_WORD_WILL, EC_MOVE2(STOMP), EC_WORD_YOU, EC_WORD_EXCL},
@@ -347,7 +347,7 @@ static const struct TrHillTag sDataTagNormal =
                             .spDefenseIV = 20,
                             .altAbility = 0,
                             .personality = 0x80,
-                            .nickname = _("MEDITITE"),
+                            .nickname = _("Meditite"),
                             .friendship = 255,
                         },
                         [1] =
@@ -369,7 +369,7 @@ static const struct TrHillTag sDataTagNormal =
                             .spDefenseIV = 20,
                             .altAbility = 1,
                             .personality = 0x80,
-                            .nickname = _("HERACROSS"),
+                            .nickname = _("Heracross"),
                             .friendship = 255,
                         },
                         [2] =
@@ -391,7 +391,7 @@ static const struct TrHillTag sDataTagNormal =
                             .spDefenseIV = 20,
                             .altAbility = 0,
                             .personality = 0x3,
-                            .nickname = _("HITMONTOP"),
+                            .nickname = _("Hitmontop"),
                             .friendship = 255,
                         },
                         [3] =
@@ -413,7 +413,7 @@ static const struct TrHillTag sDataTagNormal =
                             .spDefenseIV = 20,
                             .altAbility = 0,
                             .personality = 0x4E,
-                            .nickname = _("MACHOP"),
+                            .nickname = _("Machop"),
                             .friendship = 255,
                         },
                         [4] =
@@ -435,7 +435,7 @@ static const struct TrHillTag sDataTagNormal =
                             .spDefenseIV = 20,
                             .altAbility = 0,
                             .personality = 0x80,
-                            .nickname = _("PINSIR"),
+                            .nickname = _("Pinsir"),
                             .friendship = 255,
                         },
                         [5] =
@@ -457,14 +457,14 @@ static const struct TrHillTag sDataTagNormal =
                             .spDefenseIV = 20,
                             .altAbility = 0,
                             .personality = 0x3,
-                            .nickname = _("HITMONCHAN"),
+                            .nickname = _("Hitmonchan"),
                             .friendship = 255,
                         },
                     },
                 },
                 [1] =
                 {
-                    .name = _("JAYDEN"),
+                    .name = _("Jayden"),
                     .facilityClass = FACILITY_CLASS_POKEMON_BREEDER_F,
                     .unused = 0,
                     .speechBefore = {EC_WORD_SOME, EC_WORD_THINGS, EC_WORD_YOU, EC_WORD_CAN_T, EC_WORD_DO, EC_WORD_ALONE},
@@ -492,7 +492,7 @@ static const struct TrHillTag sDataTagNormal =
                             .spDefenseIV = 15,
                             .altAbility = 0,
                             .personality = 0xF,
-                            .nickname = _("VULPIX"),
+                            .nickname = _("Vulpix"),
                             .friendship = 255,
                         },
                         [1] =
@@ -514,7 +514,7 @@ static const struct TrHillTag sDataTagNormal =
                             .spDefenseIV = 15,
                             .altAbility = 0,
                             .personality = 0x8C,
-                            .nickname = _("MINUN"),
+                            .nickname = _("Minun"),
                             .friendship = 255,
                         },
                         [2] =
@@ -536,7 +536,7 @@ static const struct TrHillTag sDataTagNormal =
                             .spDefenseIV = 15,
                             .altAbility = 1,
                             .personality = 0xF,
-                            .nickname = _("ROSELIA"),
+                            .nickname = _("Roselia"),
                             .friendship = 255,
                         },
                         [3] =
@@ -558,7 +558,7 @@ static const struct TrHillTag sDataTagNormal =
                             .spDefenseIV = 15,
                             .altAbility = 0,
                             .personality = 0x82,
-                            .nickname = _("MR. MIME"),
+                            .nickname = _("Mr. Mime"),
                             .friendship = 255,
                         },
                         [4] =
@@ -580,7 +580,7 @@ static const struct TrHillTag sDataTagNormal =
                             .spDefenseIV = 15,
                             .altAbility = 0,
                             .personality = 0x5,
-                            .nickname = _("PLUSLE"),
+                            .nickname = _("Plusle"),
                             .friendship = 255,
                         },
                         [5] =
@@ -602,7 +602,7 @@ static const struct TrHillTag sDataTagNormal =
                             .spDefenseIV = 15,
                             .altAbility = 1,
                             .personality = 0x37,
-                            .nickname = _("TOGEPI"),
+                            .nickname = _("Togepi"),
                             .friendship = 255,
                         },
                     },
@@ -622,7 +622,7 @@ static const struct TrHillTag sDataTagNormal =
             {
                 [0] =
                 {
-                    .name = _("SALVADORE"),
+                    .name = _("Salvadore"),
                     .facilityClass = FACILITY_CLASS_PKMN_BREEDER_M,
                     .unused = 0,
                     .speechBefore = {EC_WORD_LET_S, EC_MOVE2(WRAP), EC_WORD_THINGS, EC_WORD_UP, EC_WORD_HERE, EC_WORD_HEY_QUES},
@@ -650,7 +650,7 @@ static const struct TrHillTag sDataTagNormal =
                             .spDefenseIV = 15,
                             .altAbility = 0,
                             .personality = 0x37,
-                            .nickname = _("VAPOREON"),
+                            .nickname = _("Vaporeon"),
                             .friendship = 0,
                         },
                         [1] =
@@ -672,7 +672,7 @@ static const struct TrHillTag sDataTagNormal =
                             .spDefenseIV = 15,
                             .altAbility = 1,
                             .personality = 0x8A,
-                            .nickname = _("DODRIO"),
+                            .nickname = _("Dodrio"),
                             .friendship = 0,
                         },
                         [2] =
@@ -694,7 +694,7 @@ static const struct TrHillTag sDataTagNormal =
                             .spDefenseIV = 15,
                             .altAbility = 0,
                             .personality = 0x14,
-                            .nickname = _("OMASTAR"),
+                            .nickname = _("Omastar"),
                             .friendship = 255,
                         },
                         [3] =
@@ -716,7 +716,7 @@ static const struct TrHillTag sDataTagNormal =
                             .spDefenseIV = 15,
                             .altAbility = 0,
                             .personality = 0x8,
-                            .nickname = _("LICKITUNG"),
+                            .nickname = _("Lickitung"),
                             .friendship = 255,
                         },
                         [4] =
@@ -738,7 +738,7 @@ static const struct TrHillTag sDataTagNormal =
                             .spDefenseIV = 15,
                             .altAbility = 1,
                             .personality = 0x94,
-                            .nickname = _("SLOWBRO"),
+                            .nickname = _("Slowbro"),
                             .friendship = 0,
                         },
                         [5] =
@@ -760,14 +760,14 @@ static const struct TrHillTag sDataTagNormal =
                             .spDefenseIV = 15,
                             .altAbility = 0,
                             .personality = 0x8,
-                            .nickname = _("LINOONE"),
+                            .nickname = _("Linoone"),
                             .friendship = 255,
                         },
                     },
                 },
                 [1] =
                 {
-                    .name = _("VERONICA"),
+                    .name = _("Veronica"),
                     .facilityClass = FACILITY_CLASS_POKEMON_BREEDER_F,
                     .unused = 0,
                     .speechBefore = {EC_WORD_I_AM, EC_WORD_THE, EC_WORD_STRONG, EC_WORD_BEAUTY, EC_WORD_AROUND, EC_WORD_HERE},
@@ -794,7 +794,7 @@ static const struct TrHillTag sDataTagNormal =
                             .spDefenseIV = 31,
                             .altAbility = 0,
                             .personality = 0xCB,
-                            .nickname = _("SKITTY"),
+                            .nickname = _("Skitty"),
                             .friendship = 255,
                         },
                         [1] =
@@ -816,7 +816,7 @@ static const struct TrHillTag sDataTagNormal =
                             .spDefenseIV = 15,
                             .altAbility = 0,
                             .personality = 0xD,
-                            .nickname = _("MEDICHAM"),
+                            .nickname = _("Medicham"),
                             .friendship = 0,
                         },
                         [2] =
@@ -838,7 +838,7 @@ static const struct TrHillTag sDataTagNormal =
                             .spDefenseIV = 15,
                             .altAbility = 0,
                             .personality = 0x3,
-                            .nickname = _("STANTLER"),
+                            .nickname = _("Stantler"),
                             .friendship = 0,
                         },
                         [3] =
@@ -860,7 +860,7 @@ static const struct TrHillTag sDataTagNormal =
                             .spDefenseIV = 15,
                             .altAbility = 0,
                             .personality = 0x3,
-                            .nickname = _("NIDOQUEEN"),
+                            .nickname = _("Nidoqueen"),
                             .friendship = 0,
                         },
                         [4] =
@@ -882,7 +882,7 @@ static const struct TrHillTag sDataTagNormal =
                             .spDefenseIV = 15,
                             .altAbility = 0,
                             .personality = 0xD7,
-                            .nickname = _("NINETALES"),
+                            .nickname = _("Ninetales"),
                             .friendship = 255,
                         },
                         [5] =
@@ -904,7 +904,7 @@ static const struct TrHillTag sDataTagNormal =
                             .spDefenseIV = 15,
                             .altAbility = 0,
                             .personality = 0x28,
-                            .nickname = _("CHARIZARD"),
+                            .nickname = _("Charizard"),
                             .friendship = 255,
                         },
                     },
@@ -924,7 +924,7 @@ static const struct TrHillTag sDataTagNormal =
             {
                 [0] =
                 {
-                    .name = _("KEENAN"),
+                    .name = _("Keenan"),
                     .facilityClass = FACILITY_CLASS_PSYCHIC_M,
                     .unused = 0,
                     .speechBefore = {EC_WORD_YOU, EC_WORD_LOOK, EC_WORD_SO, EC_WORD_HURRIED, 0xFFFF, 0xFFFF},
@@ -951,7 +951,7 @@ static const struct TrHillTag sDataTagNormal =
                             .spDefenseIV = 5,
                             .altAbility = 0,
                             .personality = 0x41,
-                            .nickname = _("ALAKAZAM"),
+                            .nickname = _("Alakazam"),
                             .friendship = 255,
                         },
                         [1] =
@@ -973,7 +973,7 @@ static const struct TrHillTag sDataTagNormal =
                             .spDefenseIV = 5,
                             .altAbility = 1,
                             .personality = 0xF,
-                            .nickname = _("BLISSEY"),
+                            .nickname = _("Blissey"),
                             .friendship = 255,
                         },
                         [2] =
@@ -995,7 +995,7 @@ static const struct TrHillTag sDataTagNormal =
                             .spDefenseIV = 5,
                             .altAbility = 0,
                             .personality = 0x8C,
-                            .nickname = _("GRUMPIG"),
+                            .nickname = _("Grumpig"),
                             .friendship = 255,
                         },
                         [3] =
@@ -1016,7 +1016,7 @@ static const struct TrHillTag sDataTagNormal =
                             .spDefenseIV = 5,
                             .altAbility = 1,
                             .personality = 0xF,
-                            .nickname = _("GARDEVOIR"),
+                            .nickname = _("Gardevoir"),
                             .friendship = 255,
                         },
                         [4] =
@@ -1037,7 +1037,7 @@ static const struct TrHillTag sDataTagNormal =
                             .spDefenseIV = 5,
                             .altAbility = 0,
                             .personality = 0x80,
-                            .nickname = _("VENOMOTH"),
+                            .nickname = _("Venomoth"),
                             .friendship = 255,
                         },
                         [5] =
@@ -1058,14 +1058,14 @@ static const struct TrHillTag sDataTagNormal =
                             .spDefenseIV = 5,
                             .altAbility = 0,
                             .personality = 0xF,
-                            .nickname = _("ESPEON"),
+                            .nickname = _("Espeon"),
                             .friendship = 255,
                         },
                     },
                 },
                 [1] =
                 {
-                    .name = _("KRISTINA"),
+                    .name = _("Kristina"),
                     .facilityClass = FACILITY_CLASS_AROMA_LADY,
                     .unused = 0,
                     .speechBefore = {EC_WORD_IT_S, EC_WORD_HOT, EC_WORD_ELLIPSIS, EC_WORD_WHAT, EC_WORD_A, EC_WORD_STENCH},
@@ -1092,7 +1092,7 @@ static const struct TrHillTag sDataTagNormal =
                             .spDefenseIV = 15,
                             .altAbility = 0,
                             .personality = 0x3,
-                            .nickname = _("WEEZING"),
+                            .nickname = _("Weezing"),
                             .friendship = 255,
                         },
                         [1] =
@@ -1113,7 +1113,7 @@ static const struct TrHillTag sDataTagNormal =
                             .spDefenseIV = 15,
                             .altAbility = 0,
                             .personality = 0x8C,
-                            .nickname = _("GLOOM"),
+                            .nickname = _("Gloom"),
                             .friendship = 255,
                         },
                         [2] =
@@ -1134,7 +1134,7 @@ static const struct TrHillTag sDataTagNormal =
                             .spDefenseIV = 15,
                             .altAbility = 0,
                             .personality = 0x3,
-                            .nickname = _("MUK"),
+                            .nickname = _("Muk"),
                             .friendship = 255,
                         },
                         [3] =
@@ -1156,7 +1156,7 @@ static const struct TrHillTag sDataTagNormal =
                             .spDefenseIV = 15,
                             .altAbility = 0,
                             .personality = 0x83,
-                            .nickname = _("TROPIUS"),
+                            .nickname = _("Tropius"),
                             .friendship = 255,
                         },
                         [4] =
@@ -1177,7 +1177,7 @@ static const struct TrHillTag sDataTagNormal =
                             .spDefenseIV = 15,
                             .altAbility = 0,
                             .personality = 0x6,
-                            .nickname = _("BELLOSSOM"),
+                            .nickname = _("Bellossom"),
                             .friendship = 255,
                         },
                         [5] =
@@ -1199,7 +1199,7 @@ static const struct TrHillTag sDataTagNormal =
                             .spDefenseIV = 15,
                             .altAbility = 0,
                             .personality = 0x1F,
-                            .nickname = _("MEGANIUM"),
+                            .nickname = _("Meganium"),
                             .friendship = 255,
                         },
                     },
@@ -1232,7 +1232,7 @@ static const struct TrHillTag sDataTagVariety =
             {
                 [0] =
                 {
-                    .name = _("TERRANCE"),
+                    .name = _("Terrance"),
                     .facilityClass = FACILITY_CLASS_GENTLEMAN,
                     .unused = 0,
                     .speechBefore = {EC_WORD_GOOD, EC_WORD_CHILDREN, EC_WORD_WILL, EC_WORD_GET, EC_WORD_A, EC_MOVE2(PRESENT)},
@@ -1259,7 +1259,7 @@ static const struct TrHillTag sDataTagVariety =
                             .spDefenseIV = 15,
                             .altAbility = 1,
                             .personality = 0x8A,
-                            .nickname = _("DELIBIRD"),
+                            .nickname = _("Delibird"),
                             .friendship = 255,
                         },
                         [1] =
@@ -1280,7 +1280,7 @@ static const struct TrHillTag sDataTagVariety =
                             .spDefenseIV = 15,
                             .altAbility = 0,
                             .personality = 0xD,
-                            .nickname = _("CLEFAIRY"),
+                            .nickname = _("Clefairy"),
                             .friendship = 255,
                         },
                         [2] =
@@ -1301,7 +1301,7 @@ static const struct TrHillTag sDataTagVariety =
                             .spDefenseIV = 15,
                             .altAbility = 0,
                             .personality = 0xD,
-                            .nickname = _("PIKACHU"),
+                            .nickname = _("Pikachu"),
                             .friendship = 255,
                         },
                         [3] =
@@ -1322,7 +1322,7 @@ static const struct TrHillTag sDataTagVariety =
                             .spDefenseIV = 15,
                             .altAbility = 1,
                             .personality = 0x8A,
-                            .nickname = _("MARILL"),
+                            .nickname = _("Marill"),
                             .friendship = 255,
                         },
                         [4] =
@@ -1343,7 +1343,7 @@ static const struct TrHillTag sDataTagVariety =
                             .spDefenseIV = 15,
                             .altAbility = 0,
                             .personality = 0xD,
-                            .nickname = _("JIGGLYPUFF"),
+                            .nickname = _("Jigglypuff"),
                             .friendship = 255,
                         },
                         [5] =
@@ -1364,14 +1364,14 @@ static const struct TrHillTag sDataTagVariety =
                             .spDefenseIV = 15,
                             .altAbility = 1,
                             .personality = 0x26,
-                            .nickname = _("TOGETIC"),
+                            .nickname = _("Togetic"),
                             .friendship = 255,
                         },
                     },
                 },
                 [1] =
                 {
-                    .name = _("ELIZABETH"),
+                    .name = _("Elizabeth"),
                     .facilityClass = FACILITY_CLASS_LADY,
                     .unused = 0,
                     .speechBefore = {EC_WORD_CAN, EC_WORD_YOU, EC_WORD_SENSE, EC_WORD_ME, EC_MOVE(FOCUS_ENERGY), EC_WORD_QUES},
@@ -1398,7 +1398,7 @@ static const struct TrHillTag sDataTagVariety =
                             .spDefenseIV = 5,
                             .altAbility = 0,
                             .personality = 0xC1,
-                            .nickname = _("WIGGLYTUFF"),
+                            .nickname = _("Wigglytuff"),
                             .friendship = 255,
                         },
                         [1] =
@@ -1419,7 +1419,7 @@ static const struct TrHillTag sDataTagVariety =
                             .spDefenseIV = 5,
                             .altAbility = 0,
                             .personality = 0x87,
-                            .nickname = _("SABLEYE"),
+                            .nickname = _("Sableye"),
                             .friendship = 255,
                         },
                         [2] =
@@ -1440,7 +1440,7 @@ static const struct TrHillTag sDataTagVariety =
                             .spDefenseIV = 5,
                             .altAbility = 0,
                             .personality = 0xA,
-                            .nickname = _("GRUMPIG"),
+                            .nickname = _("Grumpig"),
                             .friendship = 255,
                         },
                         [3] =
@@ -1461,7 +1461,7 @@ static const struct TrHillTag sDataTagVariety =
                             .spDefenseIV = 5,
                             .altAbility = 0,
                             .personality = 0x12,
-                            .nickname = _("CORSOLA"),
+                            .nickname = _("Corsola"),
                             .friendship = 255,
                         },
                         [4] =
@@ -1482,7 +1482,7 @@ static const struct TrHillTag sDataTagVariety =
                             .spDefenseIV = 5,
                             .altAbility = 0,
                             .personality = 0xA,
-                            .nickname = _("CLAMPERL"),
+                            .nickname = _("Clamperl"),
                             .friendship = 255,
                         },
                         [5] =
@@ -1503,7 +1503,7 @@ static const struct TrHillTag sDataTagVariety =
                             .spDefenseIV = 5,
                             .altAbility = 0,
                             .personality = 0xA,
-                            .nickname = _("STARMIE"),
+                            .nickname = _("Starmie"),
                             .friendship = 255,
                         },
                     },
@@ -1523,7 +1523,7 @@ static const struct TrHillTag sDataTagVariety =
             {
                 [0] =
                 {
-                    .name = _("ANNABELL"),
+                    .name = _("Annabell"),
                     .facilityClass = FACILITY_CLASS_PARASOL_LADY,
                     .unused = 0,
                     .speechBefore = {EC_WORD_HI, EC_WORD_ARE, EC_WORD_YOU, EC_WORD_FEELING, EC_WORD_UPBEAT, EC_WORD_QUES},
@@ -1554,7 +1554,7 @@ static const struct TrHillTag sDataTagVariety =
                             .spDefenseIV = 5,
                             .altAbility = 0,
                             .personality = 0x0,
-                            .nickname = _("JIGGLYPUFF"),
+                            .nickname = _("Jigglypuff"),
                             .friendship = 255,
                         },
                         [1] =
@@ -1579,7 +1579,7 @@ static const struct TrHillTag sDataTagVariety =
                             .spDefenseIV = 5,
                             .altAbility = 0,
                             .personality = 0x0,
-                            .nickname = _("JYNX"),
+                            .nickname = _("Jynx"),
                             .friendship = 255,
                         },
                         [2] =
@@ -1604,7 +1604,7 @@ static const struct TrHillTag sDataTagVariety =
                             .spDefenseIV = 5,
                             .altAbility = 0,
                             .personality = 0x96,
-                            .nickname = _("EXPLOUD"),
+                            .nickname = _("Exploud"),
                             .friendship = 255,
                         },
                         [3] =
@@ -1629,7 +1629,7 @@ static const struct TrHillTag sDataTagVariety =
                             .spDefenseIV = 5,
                             .altAbility = 0,
                             .personality = 0x96,
-                            .nickname = _("ABSOL"),
+                            .nickname = _("Absol"),
                             .friendship = 255,
                         },
                         [4] =
@@ -1654,7 +1654,7 @@ static const struct TrHillTag sDataTagVariety =
                             .spDefenseIV = 5,
                             .altAbility = 0,
                             .personality = 0x96,
-                            .nickname = _("PIDGEOTTO"),
+                            .nickname = _("Pidgeotto"),
                             .friendship = 255,
                         },
                         [5] =
@@ -1679,14 +1679,14 @@ static const struct TrHillTag sDataTagVariety =
                             .spDefenseIV = 5,
                             .altAbility = 0,
                             .personality = 0x0,
-                            .nickname = _("ALTARIA"),
+                            .nickname = _("Altaria"),
                             .friendship = 255,
                         },
                     },
                 },
                 [1] =
                 {
-                    .name = _("COLEMAN"),
+                    .name = _("Coleman"),
                     .facilityClass = FACILITY_CLASS_COLLECTOR,
                     .unused = 0,
                     .speechBefore = {EC_WORD_I, EC_WORD_SEEK, EC_WORD_SOMEONE, EC_WORD_AS, EC_WORD_MY, EC_WORD_IDOL},
@@ -1714,7 +1714,7 @@ static const struct TrHillTag sDataTagVariety =
                             .spDefenseIV = 5,
                             .altAbility = 0,
                             .personality = 0xD,
-                            .nickname = _("CHIMECHO"),
+                            .nickname = _("Chimecho"),
                             .friendship = 255,
                         },
                         [1] =
@@ -1736,7 +1736,7 @@ static const struct TrHillTag sDataTagVariety =
                             .spDefenseIV = 5,
                             .altAbility = 0,
                             .personality = 0xD,
-                            .nickname = _("WHISMUR"),
+                            .nickname = _("Whismur"),
                             .friendship = 255,
                         },
                         [2] =
@@ -1758,7 +1758,7 @@ static const struct TrHillTag sDataTagVariety =
                             .spDefenseIV = 5,
                             .altAbility = 0,
                             .personality = 0x8A,
-                            .nickname = _("YANMA"),
+                            .nickname = _("Yanma"),
                             .friendship = 255,
                         },
                         [3] =
@@ -1780,7 +1780,7 @@ static const struct TrHillTag sDataTagVariety =
                             .spDefenseIV = 5,
                             .altAbility = 0,
                             .personality = 0xA,
-                            .nickname = _("ILLUMISE"),
+                            .nickname = _("Illumise"),
                             .friendship = 255,
                         },
                         [4] =
@@ -1802,7 +1802,7 @@ static const struct TrHillTag sDataTagVariety =
                             .spDefenseIV = 5,
                             .altAbility = 0,
                             .personality = 0xA,
-                            .nickname = _("SPHEAL"),
+                            .nickname = _("Spheal"),
                             .friendship = 255,
                         },
                         [5] =
@@ -1824,7 +1824,7 @@ static const struct TrHillTag sDataTagVariety =
                             .spDefenseIV = 5,
                             .altAbility = 0,
                             .personality = 0x87,
-                            .nickname = _("VIGOROTH"),
+                            .nickname = _("Vigoroth"),
                             .friendship = 255,
                         },
                     },
@@ -1844,7 +1844,7 @@ static const struct TrHillTag sDataTagVariety =
             {
                 [0] =
                 {
-                    .name = _("ENRIQUE"),
+                    .name = _("Enrique"),
                     .facilityClass = FACILITY_CLASS_RICH_BOY,
                     .unused = 0,
                     .speechBefore = {EC_WORD_GET, EC_WORD_READY, EC_WORD_FOR, EC_WORD_AN, EC_WORD_AWESOME, EC_WORD_TIME},
@@ -1872,7 +1872,7 @@ static const struct TrHillTag sDataTagVariety =
                             .spDefenseIV = 15,
                             .altAbility = 0,
                             .personality = 0x8C,
-                            .nickname = _("WOOPER"),
+                            .nickname = _("Wooper"),
                             .friendship = 255,
                         },
                         [1] =
@@ -1894,7 +1894,7 @@ static const struct TrHillTag sDataTagVariety =
                             .spDefenseIV = 15,
                             .altAbility = 1,
                             .personality = 0x3,
-                            .nickname = _("POLIWAG"),
+                            .nickname = _("Poliwag"),
                             .friendship = 255,
                         },
                         [2] =
@@ -1916,7 +1916,7 @@ static const struct TrHillTag sDataTagVariety =
                             .spDefenseIV = 15,
                             .altAbility = 0,
                             .personality = 0x3,
-                            .nickname = _("PSYDUCK"),
+                            .nickname = _("Psyduck"),
                             .friendship = 255,
                         },
                         [3] =
@@ -1938,7 +1938,7 @@ static const struct TrHillTag sDataTagVariety =
                             .spDefenseIV = 15,
                             .altAbility = 0,
                             .personality = 0x96,
-                            .nickname = _("RHYDON"),
+                            .nickname = _("Rhydon"),
                             .friendship = 0,
                         },
                         [4] =
@@ -1960,7 +1960,7 @@ static const struct TrHillTag sDataTagVariety =
                             .spDefenseIV = 15,
                             .altAbility = 0,
                             .personality = 0x3,
-                            .nickname = _("RHYHORN"),
+                            .nickname = _("Rhyhorn"),
                             .friendship = 0,
                         },
                         [5] =
@@ -1982,14 +1982,14 @@ static const struct TrHillTag sDataTagVariety =
                             .spDefenseIV = 15,
                             .altAbility = 1,
                             .personality = 0x80,
-                            .nickname = _("CUBONE"),
+                            .nickname = _("Cubone"),
                             .friendship = 0,
                         },
                     },
                 },
                 [1] =
                 {
-                    .name = _("COLLEEN"),
+                    .name = _("Colleen"),
                     .facilityClass = FACILITY_CLASS_LADY,
                     .unused = 0,
                     .speechBefore = {EC_WORD_I, EC_WORD_WOULD, EC_WORD_LIKE, EC_WORD_TO, EC_WORD_ROCK, EC_WORD_OUT},
@@ -2017,7 +2017,7 @@ static const struct TrHillTag sDataTagVariety =
                             .spDefenseIV = 15,
                             .altAbility = 0,
                             .personality = 0x8C,
-                            .nickname = _("MAGNEMITE"),
+                            .nickname = _("Magnemite"),
                             .friendship = 255,
                         },
                         [1] =
@@ -2039,7 +2039,7 @@ static const struct TrHillTag sDataTagVariety =
                             .spDefenseIV = 15,
                             .altAbility = 0,
                             .personality = 0x41,
-                            .nickname = _("ELECTABUZZ"),
+                            .nickname = _("Electabuzz"),
                             .friendship = 255,
                         },
                         [2] =
@@ -2060,7 +2060,7 @@ static const struct TrHillTag sDataTagVariety =
                             .spDefenseIV = 15,
                             .altAbility = 0,
                             .personality = 0x0,
-                            .nickname = _("FLAAFFY"),
+                            .nickname = _("Flaaffy"),
                             .friendship = 255,
                         },
                         [3] =
@@ -2082,7 +2082,7 @@ static const struct TrHillTag sDataTagVariety =
                             .spDefenseIV = 15,
                             .altAbility = 0,
                             .personality = 0x3,
-                            .nickname = _("BALTOY"),
+                            .nickname = _("Baltoy"),
                             .friendship = 0,
                         },
                         [4] =
@@ -2104,7 +2104,7 @@ static const struct TrHillTag sDataTagVariety =
                             .spDefenseIV = 15,
                             .altAbility = 0,
                             .personality = 0x3,
-                            .nickname = _("PINECO"),
+                            .nickname = _("Pineco"),
                             .friendship = 0,
                         },
                         [5] =
@@ -2126,7 +2126,7 @@ static const struct TrHillTag sDataTagVariety =
                             .spDefenseIV = 15,
                             .altAbility = 0,
                             .personality = 0x80,
-                            .nickname = _("VOLTORB"),
+                            .nickname = _("Voltorb"),
                             .friendship = 0,
                         },
                     },
@@ -2146,7 +2146,7 @@ static const struct TrHillTag sDataTagVariety =
             {
                 [0] =
                 {
-                    .name = _("KIMBERLY"),
+                    .name = _("Kimberly"),
                     .facilityClass = FACILITY_CLASS_POKEFAN_F,
                     .unused = 0,
                     .speechBefore = {EC_WORD_I, EC_WORD_LIKE, EC_WORD_WORKING, EC_WORD_AT, EC_WORD_MY, EC_WORD_OWN_TEMPO},
@@ -2173,7 +2173,7 @@ static const struct TrHillTag sDataTagVariety =
                             .spDefenseIV = 31,
                             .altAbility = 0,
                             .personality = 0x202,
-                            .nickname = _("UNOWN"),
+                            .nickname = _("Unown"),
                             .friendship = 255,
                         },
                         [1] =
@@ -2194,7 +2194,7 @@ static const struct TrHillTag sDataTagVariety =
                             .spDefenseIV = 31,
                             .altAbility = 0,
                             .personality = 0x10001,
-                            .nickname = _("UNOWN"),
+                            .nickname = _("Unown"),
                             .friendship = 255,
                         },
                         [2] =
@@ -2215,7 +2215,7 @@ static const struct TrHillTag sDataTagVariety =
                             .spDefenseIV = 30,
                             .altAbility = 0,
                             .personality = 0x102,
-                            .nickname = _("UNOWN"),
+                            .nickname = _("Unown"),
                             .friendship = 255,
                         },
                         [3] =
@@ -2237,7 +2237,7 @@ static const struct TrHillTag sDataTagVariety =
                             .spDefenseIV = 15,
                             .altAbility = 0,
                             .personality = 0x88FE980F,
-                            .nickname = _("SPINDA"),
+                            .nickname = _("Spinda"),
                             .friendship = 255,
                         },
                         [4] =
@@ -2258,7 +2258,7 @@ static const struct TrHillTag sDataTagVariety =
                             .spDefenseIV = 15,
                             .altAbility = 0,
                             .personality = 0xF,
-                            .nickname = _("PLUSLE"),
+                            .nickname = _("Plusle"),
                             .friendship = 255,
                         },
                         [5] =
@@ -2279,14 +2279,14 @@ static const struct TrHillTag sDataTagVariety =
                             .spDefenseIV = 15,
                             .altAbility = 1,
                             .personality = 0xF,
-                            .nickname = _("VOLBEAT"),
+                            .nickname = _("Volbeat"),
                             .friendship = 255,
                         },
                     },
                 },
                 [1] =
                 {
-                    .name = _("FRANCISCO"),
+                    .name = _("Francisco"),
                     .facilityClass = FACILITY_CLASS_POKEFAN_M,
                     .unused = 0,
                     .speechBefore = {EC_WORD_I, EC_WORD_STUDY, EC_WORD_EVERY, EC_WORD_DAY, EC_WORD_TOO, 0xFFFF},
@@ -2314,7 +2314,7 @@ static const struct TrHillTag sDataTagVariety =
                             .spDefenseIV = 15,
                             .altAbility = 0,
                             .personality = 0xE2880098,
-                            .nickname = _("SPINDA"),
+                            .nickname = _("Spinda"),
                             .friendship = 255,
                         },
                         [1] =
@@ -2335,7 +2335,7 @@ static const struct TrHillTag sDataTagVariety =
                             .spDefenseIV = 15,
                             .altAbility = 0,
                             .personality = 0x8C,
-                            .nickname = _("MINUN"),
+                            .nickname = _("Minun"),
                             .friendship = 255,
                         },
                         [2] =
@@ -2356,7 +2356,7 @@ static const struct TrHillTag sDataTagVariety =
                             .spDefenseIV = 15,
                             .altAbility = 0,
                             .personality = 0xF,
-                            .nickname = _("ILLUMISE"),
+                            .nickname = _("Illumise"),
                             .friendship = 255,
                         },
                         [3] =
@@ -2377,7 +2377,7 @@ static const struct TrHillTag sDataTagVariety =
                             .spDefenseIV = 31,
                             .altAbility = 0,
                             .personality = 0x302,
-                            .nickname = _("UNOWN"),
+                            .nickname = _("Unown"),
                             .friendship = 255,
                         },
                         [4] =
@@ -2398,7 +2398,7 @@ static const struct TrHillTag sDataTagVariety =
                             .spDefenseIV = 30,
                             .altAbility = 0,
                             .personality = 0x203,
-                            .nickname = _("UNOWN"),
+                            .nickname = _("Unown"),
                             .friendship = 255,
                         },
                         [5] =
@@ -2419,7 +2419,7 @@ static const struct TrHillTag sDataTagVariety =
                             .spDefenseIV = 31,
                             .altAbility = 0,
                             .personality = 0x301,
-                            .nickname = _("UNOWN"),
+                            .nickname = _("Unown"),
                             .friendship = 255,
                         },
                     },
@@ -2452,7 +2452,7 @@ static const struct TrHillTag sDataTagUnique =
             {
                 [0] =
                 {
-                    .name = _("MEREDITH"),
+                    .name = _("Meredith"),
                     .facilityClass = FACILITY_CLASS_PKMN_RANGER_F,
                     .unused = 0,
                     .speechBefore = {EC_WORD_UM, EC_WORD_ELLIPSIS, 0xFFFF, EC_WORD_I, EC_WORD_ELLIPSIS, 0xFFFF},
@@ -2480,7 +2480,7 @@ static const struct TrHillTag sDataTagUnique =
                             .spDefenseIV = 15,
                             .altAbility = 0,
                             .personality = 0x0,
-                            .nickname = _("SUNFLORA"),
+                            .nickname = _("Sunflora"),
                             .friendship = 255,
                         },
                         [1] =
@@ -2501,7 +2501,7 @@ static const struct TrHillTag sDataTagUnique =
                             .spDefenseIV = 15,
                             .altAbility = 0,
                             .personality = 0x91,
-                            .nickname = _("TANGELA"),
+                            .nickname = _("Tangela"),
                             .friendship = 255,
                         },
                         [2] =
@@ -2525,7 +2525,7 @@ static const struct TrHillTag sDataTagUnique =
                             .spDefenseIV = 15,
                             .altAbility = 0,
                             .personality = 0x1F,
-                            .nickname = _("VENUSAUR"),
+                            .nickname = _("Venusaur"),
                             .friendship = 255,
                         },
                         [3] =
@@ -2546,7 +2546,7 @@ static const struct TrHillTag sDataTagUnique =
                             .spDefenseIV = 15,
                             .altAbility = 0,
                             .personality = 0xF,
-                            .nickname = _("LANTURN"),
+                            .nickname = _("Lanturn"),
                             .friendship = 255,
                         },
                         [4] =
@@ -2567,7 +2567,7 @@ static const struct TrHillTag sDataTagUnique =
                             .spDefenseIV = 15,
                             .altAbility = 1,
                             .personality = 0xF,
-                            .nickname = _("MANECTRIC"),
+                            .nickname = _("Manectric"),
                             .friendship = 255,
                         },
                         [5] =
@@ -2588,14 +2588,14 @@ static const struct TrHillTag sDataTagUnique =
                             .spDefenseIV = 15,
                             .altAbility = 0,
                             .personality = 0xF,
-                            .nickname = _("RAIKOU"),
+                            .nickname = _("Raikou"),
                             .friendship = 255,
                         },
                     },
                 },
                 [1] =
                 {
-                    .name = _("BERNARD"),
+                    .name = _("Bernard"),
                     .facilityClass = FACILITY_CLASS_KINDLER,
                     .unused = 0,
                     .speechBefore = {EC_WORD_I, EC_WORD_CAN_T, EC_WORD_LOSE, EC_WORD_THIS, EC_WORD_HOT, EC_WORD_BATTLE},
@@ -2623,7 +2623,7 @@ static const struct TrHillTag sDataTagUnique =
                             .spDefenseIV = 15,
                             .altAbility = 0,
                             .personality = 0x2F,
-                            .nickname = _("RELICANTH"),
+                            .nickname = _("Relicanth"),
                             .friendship = 255,
                         },
                         [1] =
@@ -2644,7 +2644,7 @@ static const struct TrHillTag sDataTagUnique =
                             .spDefenseIV = 15,
                             .altAbility = 0,
                             .personality = 0xF,
-                            .nickname = _("GOLDUCK"),
+                            .nickname = _("Golduck"),
                             .friendship = 255,
                         },
                         [2] =
@@ -2665,7 +2665,7 @@ static const struct TrHillTag sDataTagUnique =
                             .spDefenseIV = 15,
                             .altAbility = 0,
                             .personality = 0x28,
-                            .nickname = _("BLASTOISE"),
+                            .nickname = _("Blastoise"),
                             .friendship = 255,
                         },
                         [3] =
@@ -2686,7 +2686,7 @@ static const struct TrHillTag sDataTagUnique =
                             .spDefenseIV = 15,
                             .altAbility = 1,
                             .personality = 0x93,
-                            .nickname = _("MAGCARGO"),
+                            .nickname = _("Magcargo"),
                             .friendship = 255,
                         },
                         [4] =
@@ -2707,7 +2707,7 @@ static const struct TrHillTag sDataTagUnique =
                             .spDefenseIV = 15,
                             .altAbility = 1,
                             .personality = 0xF,
-                            .nickname = _("RAPIDASH"),
+                            .nickname = _("Rapidash"),
                             .friendship = 255,
                         },
                         [5] =
@@ -2728,7 +2728,7 @@ static const struct TrHillTag sDataTagUnique =
                             .spDefenseIV = 15,
                             .altAbility = 0,
                             .personality = 0xF,
-                            .nickname = _("MOLTRES"),
+                            .nickname = _("Moltres"),
                             .friendship = 255,
                         },
                     },
@@ -2748,7 +2748,7 @@ static const struct TrHillTag sDataTagUnique =
             {
                 [0] =
                 {
-                    .name = _("ABRAHAM"),
+                    .name = _("Abraham"),
                     .facilityClass = FACILITY_CLASS_RUIN_MANIAC,
                     .unused = 0,
                     .speechBefore = {EC_WORD_I, EC_WORD_LIKE, EC_WORD_THIS, EC_WORD_POKEMON, EC_WORD_THE, EC_WORD_BEST},
@@ -2776,7 +2776,7 @@ static const struct TrHillTag sDataTagUnique =
                             .spDefenseIV = 15,
                             .altAbility = 0,
                             .personality = 0x8A,
-                            .nickname = _("SMEARGLE"),
+                            .nickname = _("Smeargle"),
                             .friendship = 255,
                         },
                         [1] =
@@ -2798,7 +2798,7 @@ static const struct TrHillTag sDataTagUnique =
                             .spDefenseIV = 15,
                             .altAbility = 0,
                             .personality = 0x87,
-                            .nickname = _("SMEARGLE"),
+                            .nickname = _("Smeargle"),
                             .friendship = 255,
                         },
                         [2] =
@@ -2820,7 +2820,7 @@ static const struct TrHillTag sDataTagUnique =
                             .spDefenseIV = 15,
                             .altAbility = 0,
                             .personality = 0xD,
-                            .nickname = _("SMEARGLE"),
+                            .nickname = _("Smeargle"),
                             .friendship = 255,
                         },
                         [3] =
@@ -2842,7 +2842,7 @@ static const struct TrHillTag sDataTagUnique =
                             .spDefenseIV = 15,
                             .altAbility = 0,
                             .personality = 0xA,
-                            .nickname = _("SMEARGLE"),
+                            .nickname = _("Smeargle"),
                             .friendship = 255,
                         },
                         [4] =
@@ -2864,7 +2864,7 @@ static const struct TrHillTag sDataTagUnique =
                             .spDefenseIV = 15,
                             .altAbility = 0,
                             .personality = 0xA,
-                            .nickname = _("SMEARGLE"),
+                            .nickname = _("Smeargle"),
                             .friendship = 255,
                         },
                         [5] =
@@ -2886,14 +2886,14 @@ static const struct TrHillTag sDataTagUnique =
                             .spDefenseIV = 15,
                             .altAbility = 0,
                             .personality = 0x8A,
-                            .nickname = _("SMEARGLE"),
+                            .nickname = _("Smeargle"),
                             .friendship = 255,
                         },
                     },
                 },
                 [1] =
                 {
-                    .name = _("LUC"),
+                    .name = _("Luc"),
                     .facilityClass = FACILITY_CLASS_TUBER_M,
                     .unused = 0,
                     .speechBefore = {EC_WORD_I, EC_WORD_HAVE, EC_WORD_A, EC_WORD_COOL, EC_WORD_RARE, EC_WORD_MOVE},
@@ -2921,7 +2921,7 @@ static const struct TrHillTag sDataTagUnique =
                             .spDefenseIV = 5,
                             .altAbility = 1,
                             .personality = 0xA,
-                            .nickname = _("STARYU"),
+                            .nickname = _("Staryu"),
                             .friendship = 255,
                         },
                         [1] =
@@ -2943,7 +2943,7 @@ static const struct TrHillTag sDataTagUnique =
                             .spDefenseIV = 5,
                             .altAbility = 0,
                             .personality = 0xD,
-                            .nickname = _("MEOWTH"),
+                            .nickname = _("Meowth"),
                             .friendship = 255,
                         },
                         [2] =
@@ -2965,7 +2965,7 @@ static const struct TrHillTag sDataTagUnique =
                             .spDefenseIV = 5,
                             .altAbility = 0,
                             .personality = 0x28,
-                            .nickname = _("BLAZIKEN"),
+                            .nickname = _("Blaziken"),
                             .friendship = 255,
                         },
                         [3] =
@@ -2987,7 +2987,7 @@ static const struct TrHillTag sDataTagUnique =
                             .spDefenseIV = 5,
                             .altAbility = 1,
                             .personality = 0x16,
-                            .nickname = _("CUBONE"),
+                            .nickname = _("Cubone"),
                             .friendship = 255,
                         },
                         [4] =
@@ -3008,7 +3008,7 @@ static const struct TrHillTag sDataTagUnique =
                             .spDefenseIV = 5,
                             .altAbility = 0,
                             .personality = 0x8A,
-                            .nickname = _("BEEDRILL"),
+                            .nickname = _("Beedrill"),
                             .friendship = 255,
                         },
                         [5] =
@@ -3030,7 +3030,7 @@ static const struct TrHillTag sDataTagUnique =
                             .spDefenseIV = 5,
                             .altAbility = 1,
                             .personality = 0xD,
-                            .nickname = _("RATICATE"),
+                            .nickname = _("Raticate"),
                             .friendship = 255,
                         },
                     },
@@ -3050,7 +3050,7 @@ static const struct TrHillTag sDataTagUnique =
             {
                 [0] =
                 {
-                    .name = _("BREYDEN"),
+                    .name = _("Breyden"),
                     .facilityClass = FACILITY_CLASS_YOUNGSTER,
                     .unused = 0,
                     .speechBefore = {EC_WORD_I, EC_WORD_CARE, EC_WORD_FOR, EC_WORD_MY, EC_WORD_POKEMON, EC_WORD_A_LOT},
@@ -3078,7 +3078,7 @@ static const struct TrHillTag sDataTagUnique =
                             .spDefenseIV = 25,
                             .altAbility = 0,
                             .personality = 0x32,
-                            .nickname = _("CHARMELEON"),
+                            .nickname = _("Charmeleon"),
                             .friendship = 100,
                         },
                         [1] =
@@ -3099,7 +3099,7 @@ static const struct TrHillTag sDataTagUnique =
                             .spDefenseIV = 25,
                             .altAbility = 0,
                             .personality = 0x0,
-                            .nickname = _("WARTORTLE"),
+                            .nickname = _("Wartortle"),
                             .friendship = 100,
                         },
                         [2] =
@@ -3121,7 +3121,7 @@ static const struct TrHillTag sDataTagUnique =
                             .spDefenseIV = 25,
                             .altAbility = 0,
                             .personality = 0x0,
-                            .nickname = _("IVYSAUR"),
+                            .nickname = _("Ivysaur"),
                             .friendship = 100,
                         },
                         [3] =
@@ -3143,7 +3143,7 @@ static const struct TrHillTag sDataTagUnique =
                             .spDefenseIV = 25,
                             .altAbility = 0,
                             .personality = 0x32,
-                            .nickname = _("BAYLEEF"),
+                            .nickname = _("Bayleef"),
                             .friendship = 100,
                         },
                         [4] =
@@ -3165,7 +3165,7 @@ static const struct TrHillTag sDataTagUnique =
                             .spDefenseIV = 25,
                             .altAbility = 0,
                             .personality = 0x3,
-                            .nickname = _("CROCONAW"),
+                            .nickname = _("Croconaw"),
                             .friendship = 100,
                         },
                         [5] =
@@ -3187,14 +3187,14 @@ static const struct TrHillTag sDataTagUnique =
                             .spDefenseIV = 15,
                             .altAbility = 0,
                             .personality = 0x28,
-                            .nickname = _("QUILAVA"),
+                            .nickname = _("Quilava"),
                             .friendship = 100,
                         },
                     },
                 },
                 [1] =
                 {
-                    .name = _("ANIYA"),
+                    .name = _("Aniya"),
                     .facilityClass = FACILITY_CLASS_TUBER_F,
                     .unused = 0,
                     .speechBefore = {EC_WORD_SOMEONE, EC_WORD_GOT, EC_WORD_ME, EC_WORD_A_LITTLE, EC_WORD_POKEMON, EC_WORD_EGG},
@@ -3222,7 +3222,7 @@ static const struct TrHillTag sDataTagUnique =
                             .spDefenseIV = 31,
                             .altAbility = 0,
                             .personality = 0x32,
-                            .nickname = _("SMOOCHUM"),
+                            .nickname = _("Smoochum"),
                             .friendship = 50,
                         },
                         [1] =
@@ -3244,7 +3244,7 @@ static const struct TrHillTag sDataTagUnique =
                             .spDefenseIV = 31,
                             .altAbility = 0,
                             .personality = 0xC8,
-                            .nickname = _("AZURILL"),
+                            .nickname = _("Azurill"),
                             .friendship = 50,
                         },
                         [2] =
@@ -3266,7 +3266,7 @@ static const struct TrHillTag sDataTagUnique =
                             .spDefenseIV = 31,
                             .altAbility = 0,
                             .personality = 0x0,
-                            .nickname = _("ELEKID"),
+                            .nickname = _("Elekid"),
                             .friendship = 50,
                         },
                         [3] =
@@ -3288,7 +3288,7 @@ static const struct TrHillTag sDataTagUnique =
                             .spDefenseIV = 31,
                             .altAbility = 0,
                             .personality = 0x0,
-                            .nickname = _("CLEFFA"),
+                            .nickname = _("Cleffa"),
                             .friendship = 50,
                         },
                         [4] =
@@ -3310,7 +3310,7 @@ static const struct TrHillTag sDataTagUnique =
                             .spDefenseIV = 31,
                             .altAbility = 0,
                             .personality = 0x84,
-                            .nickname = _("WYNAUT"),
+                            .nickname = _("Wynaut"),
                             .friendship = 50,
                         },
                         [5] =
@@ -3332,7 +3332,7 @@ static const struct TrHillTag sDataTagUnique =
                             .spDefenseIV = 31,
                             .altAbility = 0,
                             .personality = 0xF,
-                            .nickname = _("MAGBY"),
+                            .nickname = _("Magby"),
                             .friendship = 50,
                         },
                     },
@@ -3352,7 +3352,7 @@ static const struct TrHillTag sDataTagUnique =
             {
                 [0] =
                 {
-                    .name = _("DANE"),
+                    .name = _("Dane"),
                     .facilityClass = FACILITY_CLASS_BIRD_KEEPER,
                     .unused = 0,
                     .speechBefore = {EC_WORD_I, EC_WORD_GOT, EC_WORD_MY, EC_WORD_POKEMON, EC_WORD_ON, EC_WORD_VACATION},
@@ -3380,7 +3380,7 @@ static const struct TrHillTag sDataTagUnique =
                             .spDefenseIV = 15,
                             .altAbility = 0,
                             .personality = 0x80,
-                            .nickname = _("SUDOWOODO"),
+                            .nickname = _("Sudowoodo"),
                             .friendship = 255,
                         },
                         [1] =
@@ -3401,7 +3401,7 @@ static const struct TrHillTag sDataTagUnique =
                             .spDefenseIV = 15,
                             .altAbility = 1,
                             .personality = 0x8C,
-                            .nickname = _("SLOWKING"),
+                            .nickname = _("Slowking"),
                             .friendship = 255,
                         },
                         [2] =
@@ -3422,7 +3422,7 @@ static const struct TrHillTag sDataTagUnique =
                             .spDefenseIV = 15,
                             .altAbility = 0,
                             .personality = 0xF,
-                            .nickname = _("ENTEI"),
+                            .nickname = _("Entei"),
                             .friendship = 255,
                         },
                         [3] =
@@ -3443,7 +3443,7 @@ static const struct TrHillTag sDataTagUnique =
                             .spDefenseIV = 15,
                             .altAbility = 0,
                             .personality = 0x3,
-                            .nickname = _("HITMONCHAN"),
+                            .nickname = _("Hitmonchan"),
                             .friendship = 255,
                         },
                         [4] =
@@ -3464,7 +3464,7 @@ static const struct TrHillTag sDataTagUnique =
                             .spDefenseIV = 15,
                             .altAbility = 1,
                             .personality = 0x6,
-                            .nickname = _("MANTINE"),
+                            .nickname = _("Mantine"),
                             .friendship = 255,
                         },
                         [5] =
@@ -3485,14 +3485,14 @@ static const struct TrHillTag sDataTagUnique =
                             .spDefenseIV = 15,
                             .altAbility = 0,
                             .personality = 0x18,
-                            .nickname = _("ZAPDOS"),
+                            .nickname = _("Zapdos"),
                             .friendship = 255,
                         },
                     },
                 },
                 [1] =
                 {
-                    .name = _("STEPHANIE"),
+                    .name = _("Stephanie"),
                     .facilityClass = FACILITY_CLASS_SWIMMING_TRIATHLETE_F,
                     .unused = 0,
                     .speechBefore = {EC_WORD_THIS, EC_WORD_IS, EC_WORD_HOW, EC_WORD_YOU, EC_WORD_WIN, EC_WORD_EXCL},
@@ -3519,7 +3519,7 @@ static const struct TrHillTag sDataTagUnique =
                             .spDefenseIV = 15,
                             .altAbility = 0,
                             .personality = 0x3,
-                            .nickname = _("HITMONLEE"),
+                            .nickname = _("Hitmonlee"),
                             .friendship = 255,
                         },
                         [1] =
@@ -3540,7 +3540,7 @@ static const struct TrHillTag sDataTagUnique =
                             .spDefenseIV = 15,
                             .altAbility = 0,
                             .personality = 0xF,
-                            .nickname = _("PORYGON2"),
+                            .nickname = _("Porygon2"),
                             .friendship = 255,
                         },
                         [2] =
@@ -3561,7 +3561,7 @@ static const struct TrHillTag sDataTagUnique =
                             .spDefenseIV = 15,
                             .altAbility = 0,
                             .personality = 0xF,
-                            .nickname = _("SUICUNE"),
+                            .nickname = _("Suicune"),
                             .friendship = 255,
                         },
                         [3] =
@@ -3582,7 +3582,7 @@ static const struct TrHillTag sDataTagUnique =
                             .spDefenseIV = 15,
                             .altAbility = 1,
                             .personality = 0xF,
-                            .nickname = _("HOUNDOOM"),
+                            .nickname = _("Houndoom"),
                             .friendship = 255,
                         },
                         [4] =
@@ -3603,7 +3603,7 @@ static const struct TrHillTag sDataTagUnique =
                             .spDefenseIV = 15,
                             .altAbility = 0,
                             .personality = 0x3,
-                            .nickname = _("STANTLER"),
+                            .nickname = _("Stantler"),
                             .friendship = 255,
                         },
                         [5] =
@@ -3624,7 +3624,7 @@ static const struct TrHillTag sDataTagUnique =
                             .spDefenseIV = 15,
                             .altAbility = 0,
                             .personality = 0xF,
-                            .nickname = _("ARTICUNO"),
+                            .nickname = _("Articuno"),
                             .friendship = 255,
                         },
                     },
@@ -3657,7 +3657,7 @@ static const struct TrHillTag sDataTagExpert =
             {
                 [0] =
                 {
-                    .name = _("ALFRED"),
+                    .name = _("Alfred"),
                     .facilityClass = FACILITY_CLASS_COOLTRAINER_M,
                     .unused = 0,
                     .speechBefore = {EC_WORD_WE, EC_WORD_CAN, EC_WORD_TAKE, EC_WORD_ON, EC_WORD_ANY, EC_WORD_TYPE},
@@ -3685,7 +3685,7 @@ static const struct TrHillTag sDataTagExpert =
                             .spDefenseIV = 31,
                             .altAbility = 0,
                             .personality = 0x35,
-                            .nickname = _("SNORLAX"),
+                            .nickname = _("Snorlax"),
                             .friendship = 255,
                         },
                         [1] =
@@ -3707,7 +3707,7 @@ static const struct TrHillTag sDataTagExpert =
                             .spDefenseIV = 31,
                             .altAbility = 0,
                             .personality = 0x3,
-                            .nickname = _("MILTANK"),
+                            .nickname = _("Miltank"),
                             .friendship = 255,
                         },
                         [2] =
@@ -3729,7 +3729,7 @@ static const struct TrHillTag sDataTagExpert =
                             .spDefenseIV = 31,
                             .altAbility = 0,
                             .personality = 0x7F,
-                            .nickname = _("URSARING"),
+                            .nickname = _("Ursaring"),
                             .friendship = 255,
                         },
                         [3] =
@@ -3751,7 +3751,7 @@ static const struct TrHillTag sDataTagExpert =
                             .spDefenseIV = 31,
                             .altAbility = 0,
                             .personality = 0x80,
-                            .nickname = _("SLAKING"),
+                            .nickname = _("Slaking"),
                             .friendship = 255,
                         },
                         [4] =
@@ -3773,7 +3773,7 @@ static const struct TrHillTag sDataTagExpert =
                             .spDefenseIV = 31,
                             .altAbility = 0,
                             .personality = 0x3,
-                            .nickname = _("KANGASKHAN"),
+                            .nickname = _("Kangaskhan"),
                             .friendship = 255,
                         },
                         [5] =
@@ -3795,14 +3795,14 @@ static const struct TrHillTag sDataTagExpert =
                             .spDefenseIV = 31,
                             .altAbility = 0,
                             .personality = 0x80,
-                            .nickname = _("ZANGOOSE"),
+                            .nickname = _("Zangoose"),
                             .friendship = 255,
                         },
                     },
                 },
                 [1] =
                 {
-                    .name = _("EDIE"),
+                    .name = _("Edie"),
                     .facilityClass = FACILITY_CLASS_PSYCHIC_F,
                     .unused = 0,
                     .speechBefore = {EC_WORD_WE, EC_WORD_WILL_BE_HERE, EC_WORD_FOR, EC_WORD_ANY, EC_WORD_TRAINER, EC_WORD_CHALLENGE},
@@ -3830,7 +3830,7 @@ static const struct TrHillTag sDataTagExpert =
                             .spDefenseIV = 31,
                             .altAbility = 1,
                             .personality = 0xF,
-                            .nickname = _("SLOWKING"),
+                            .nickname = _("Slowking"),
                             .friendship = 255,
                         },
                         [1] =
@@ -3852,7 +3852,7 @@ static const struct TrHillTag sDataTagExpert =
                             .spDefenseIV = 31,
                             .altAbility = 0,
                             .personality = 0x28,
-                            .nickname = _("ESPEON"),
+                            .nickname = _("Espeon"),
                             .friendship = 255,
                         },
                         [2] =
@@ -3874,7 +3874,7 @@ static const struct TrHillTag sDataTagExpert =
                             .spDefenseIV = 31,
                             .altAbility = 1,
                             .personality = 0xF,
-                            .nickname = _("STARMIE"),
+                            .nickname = _("Starmie"),
                             .friendship = 255,
                         },
                         [3] =
@@ -3896,7 +3896,7 @@ static const struct TrHillTag sDataTagExpert =
                             .spDefenseIV = 31,
                             .altAbility = 0,
                             .personality = 0xF,
-                            .nickname = _("GENGAR"),
+                            .nickname = _("Gengar"),
                             .friendship = 255,
                         },
                         [4] =
@@ -3918,7 +3918,7 @@ static const struct TrHillTag sDataTagExpert =
                             .spDefenseIV = 31,
                             .altAbility = 0,
                             .personality = 0xF,
-                            .nickname = _("GARDEVOIR"),
+                            .nickname = _("Gardevoir"),
                             .friendship = 255,
                         },
                         [5] =
@@ -3940,7 +3940,7 @@ static const struct TrHillTag sDataTagExpert =
                             .spDefenseIV = 31,
                             .altAbility = 0,
                             .personality = 0xF,
-                            .nickname = _("ALAKAZAM"),
+                            .nickname = _("Alakazam"),
                             .friendship = 255,
                         },
                     },
@@ -3960,7 +3960,7 @@ static const struct TrHillTag sDataTagExpert =
             {
                 [0] =
                 {
-                    .name = _("RODERICK"),
+                    .name = _("Roderick"),
                     .facilityClass = FACILITY_CLASS_COOLTRAINER_M,
                     .unused = 0,
                     .speechBefore = {EC_WORD_I, EC_WORD_CAN, EC_WORD_WIN, EC_WORD_WITHOUT, EC_WORD_A, EC_MOVE2(HELPING_HAND)},
@@ -3988,7 +3988,7 @@ static const struct TrHillTag sDataTagExpert =
                             .spDefenseIV = 31,
                             .altAbility = 0,
                             .personality = 0x3,
-                            .nickname = _("SWELLOW"),
+                            .nickname = _("Swellow"),
                             .friendship = 255,
                         },
                         [1] =
@@ -4010,7 +4010,7 @@ static const struct TrHillTag sDataTagExpert =
                             .spDefenseIV = 31,
                             .altAbility = 0,
                             .personality = 0x3,
-                            .nickname = _("MACHAMP"),
+                            .nickname = _("Machamp"),
                             .friendship = 255,
                         },
                         [2] =
@@ -4032,7 +4032,7 @@ static const struct TrHillTag sDataTagExpert =
                             .spDefenseIV = 31,
                             .altAbility = 0,
                             .personality = 0x3,
-                            .nickname = _("URSARING"),
+                            .nickname = _("Ursaring"),
                             .friendship = 255,
                         },
                         [3] =
@@ -4054,7 +4054,7 @@ static const struct TrHillTag sDataTagExpert =
                             .spDefenseIV = 31,
                             .altAbility = 0,
                             .personality = 0x80,
-                            .nickname = _("KINGLER"),
+                            .nickname = _("Kingler"),
                             .friendship = 255,
                         },
                         [4] =
@@ -4076,7 +4076,7 @@ static const struct TrHillTag sDataTagExpert =
                             .spDefenseIV = 31,
                             .altAbility = 0,
                             .personality = 0x80,
-                            .nickname = _("TYRANITAR"),
+                            .nickname = _("Tyranitar"),
                             .friendship = 255,
                         },
                         [5] =
@@ -4098,14 +4098,14 @@ static const struct TrHillTag sDataTagExpert =
                             .spDefenseIV = 31,
                             .altAbility = 0,
                             .personality = 0x80,
-                            .nickname = _("DRAGONITE"),
+                            .nickname = _("Dragonite"),
                             .friendship = 255,
                         },
                     },
                 },
                 [1] =
                 {
-                    .name = _("ALICIA"),
+                    .name = _("Alicia"),
                     .facilityClass = FACILITY_CLASS_COOLTRAINER_F,
                     .unused = 0,
                     .speechBefore = {EC_WORD_I, EC_WORD_DON_T, EC_WORD_NEED, EC_WORD_A, EC_MOVE2(HELPING_HAND), EC_WORD_EXCL},
@@ -4133,7 +4133,7 @@ static const struct TrHillTag sDataTagExpert =
                             .spDefenseIV = 31,
                             .altAbility = 0,
                             .personality = 0xA,
-                            .nickname = _("JOLTEON"),
+                            .nickname = _("Jolteon"),
                             .friendship = 255,
                         },
                         [1] =
@@ -4155,7 +4155,7 @@ static const struct TrHillTag sDataTagExpert =
                             .spDefenseIV = 31,
                             .altAbility = 0,
                             .personality = 0xA,
-                            .nickname = _("ALAKAZAM"),
+                            .nickname = _("Alakazam"),
                             .friendship = 255,
                         },
                         [2] =
@@ -4177,7 +4177,7 @@ static const struct TrHillTag sDataTagExpert =
                             .spDefenseIV = 31,
                             .altAbility = 1,
                             .personality = 0xA,
-                            .nickname = _("STARMIE"),
+                            .nickname = _("Starmie"),
                             .friendship = 255,
                         },
                         [3] =
@@ -4199,7 +4199,7 @@ static const struct TrHillTag sDataTagExpert =
                             .spDefenseIV = 31,
                             .altAbility = 0,
                             .personality = 0x82,
-                            .nickname = _("DUSCLOPS"),
+                            .nickname = _("Dusclops"),
                             .friendship = 255,
                         },
                         [4] =
@@ -4221,7 +4221,7 @@ static const struct TrHillTag sDataTagExpert =
                             .spDefenseIV = 31,
                             .altAbility = 0,
                             .personality = 0xD2,
-                            .nickname = _("NINETALES"),
+                            .nickname = _("Ninetales"),
                             .friendship = 255,
                         },
                         [5] =
@@ -4243,7 +4243,7 @@ static const struct TrHillTag sDataTagExpert =
                             .spDefenseIV = 31,
                             .altAbility = 0,
                             .personality = 0x85,
-                            .nickname = _("BANETTE"),
+                            .nickname = _("Banette"),
                             .friendship = 255,
                         },
                     },
@@ -4263,7 +4263,7 @@ static const struct TrHillTag sDataTagExpert =
             {
                 [0] =
                 {
-                    .name = _("TERRENCE"),
+                    .name = _("Terrence"),
                     .facilityClass = FACILITY_CLASS_EXPERT_M,
                     .unused = 0,
                     .speechBefore = {EC_WORD_OH_DEAR, EC_WORD_THIS, EC_WORD_MATCH, EC_WORD_IS, EC_WORD_FOR, EC_WORD_YOU},
@@ -4291,7 +4291,7 @@ static const struct TrHillTag sDataTagExpert =
                             .spDefenseIV = 31,
                             .altAbility = 0,
                             .personality = 0x94,
-                            .nickname = _("WOBBUFFET"),
+                            .nickname = _("Wobbuffet"),
                             .friendship = 255,
                         },
                         [1] =
@@ -4313,7 +4313,7 @@ static const struct TrHillTag sDataTagExpert =
                             .spDefenseIV = 31,
                             .altAbility = 0,
                             .personality = 0x85,
-                            .nickname = _("EXPLOUD"),
+                            .nickname = _("Exploud"),
                             .friendship = 0,
                         },
                         [2] =
@@ -4335,7 +4335,7 @@ static const struct TrHillTag sDataTagExpert =
                             .spDefenseIV = 31,
                             .altAbility = 0,
                             .personality = 0x0,
-                            .nickname = _("CROBAT"),
+                            .nickname = _("Crobat"),
                             .friendship = 255,
                         },
                         [3] =
@@ -4357,7 +4357,7 @@ static const struct TrHillTag sDataTagExpert =
                             .spDefenseIV = 31,
                             .altAbility = 1,
                             .personality = 0xD,
-                            .nickname = _("DUGTRIO"),
+                            .nickname = _("Dugtrio"),
                             .friendship = 255,
                         },
                         [4] =
@@ -4379,7 +4379,7 @@ static const struct TrHillTag sDataTagExpert =
                             .spDefenseIV = 31,
                             .altAbility = 0,
                             .personality = 0x5,
-                            .nickname = _("ELECTRODE"),
+                            .nickname = _("Electrode"),
                             .friendship = 0,
                         },
                         [5] =
@@ -4401,14 +4401,14 @@ static const struct TrHillTag sDataTagExpert =
                             .spDefenseIV = 31,
                             .altAbility = 0,
                             .personality = 0x14,
-                            .nickname = _("GENGAR"),
+                            .nickname = _("Gengar"),
                             .friendship = 255,
                         },
                     },
                 },
                 [1] =
                 {
-                    .name = _("CARLOTTA"),
+                    .name = _("Carlotta"),
                     .facilityClass = FACILITY_CLASS_EXPERT_F,
                     .unused = 0,
                     .speechBefore = {EC_WORD_OH_DEAR, EC_WORD_I, EC_WORD_WILL, EC_WORD_WIN, EC_WORD_FOR, EC_WORD_YOU},
@@ -4436,7 +4436,7 @@ static const struct TrHillTag sDataTagExpert =
                             .spDefenseIV = 31,
                             .altAbility = 0,
                             .personality = 0x82,
-                            .nickname = _("LAPRAS"),
+                            .nickname = _("Lapras"),
                             .friendship = 0,
                         },
                         [1] =
@@ -4458,7 +4458,7 @@ static const struct TrHillTag sDataTagExpert =
                             .spDefenseIV = 31,
                             .altAbility = 0,
                             .personality = 0x8A,
-                            .nickname = _("ABSOL"),
+                            .nickname = _("Absol"),
                             .friendship = 0,
                         },
                         [2] =
@@ -4480,7 +4480,7 @@ static const struct TrHillTag sDataTagExpert =
                             .spDefenseIV = 31,
                             .altAbility = 0,
                             .personality = 0x0,
-                            .nickname = _("ALTARIA"),
+                            .nickname = _("Altaria"),
                             .friendship = 0,
                         },
                         [3] =
@@ -4502,7 +4502,7 @@ static const struct TrHillTag sDataTagExpert =
                             .spDefenseIV = 31,
                             .altAbility = 0,
                             .personality = 0x14,
-                            .nickname = _("DEWGONG"),
+                            .nickname = _("Dewgong"),
                             .friendship = 0,
                         },
                         [4] =
@@ -4524,7 +4524,7 @@ static const struct TrHillTag sDataTagExpert =
                             .spDefenseIV = 31,
                             .altAbility = 1,
                             .personality = 0x14,
-                            .nickname = _("POLITOED"),
+                            .nickname = _("Politoed"),
                             .friendship = 0,
                         },
                         [5] =
@@ -4546,7 +4546,7 @@ static const struct TrHillTag sDataTagExpert =
                             .spDefenseIV = 31,
                             .altAbility = 1,
                             .personality = 0x17,
-                            .nickname = _("MAROWAK"),
+                            .nickname = _("Marowak"),
                             .friendship = 0,
                         },
                     },
@@ -4566,7 +4566,7 @@ static const struct TrHillTag sDataTagExpert =
             {
                 [0] =
                 {
-                    .name = _("NORA"),
+                    .name = _("Nora"),
                     .facilityClass = FACILITY_CLASS_PKMN_RANGER_F,
                     .unused = 0,
                     .speechBefore = {EC_WORD_WAAAH, EC_WORD_THIS, EC_WORD_IS, EC_WORD_SO, EC_WORD_EXCITING, EC_WORD_EXCL},
@@ -4594,7 +4594,7 @@ static const struct TrHillTag sDataTagExpert =
                             .spDefenseIV = 31,
                             .altAbility = 0,
                             .personality = 0x3,
-                            .nickname = _("FORRETRESS"),
+                            .nickname = _("Forretress"),
                             .friendship = 255,
                         },
                         [1] =
@@ -4615,7 +4615,7 @@ static const struct TrHillTag sDataTagExpert =
                             .spDefenseIV = 31,
                             .altAbility = 1,
                             .personality = 0xC,
-                            .nickname = _("ELECTRODE"),
+                            .nickname = _("Electrode"),
                             .friendship = 255,
                         },
                         [2] =
@@ -4636,7 +4636,7 @@ static const struct TrHillTag sDataTagExpert =
                             .spDefenseIV = 31,
                             .altAbility = 0,
                             .personality = 0x7F,
-                            .nickname = _("EXEGGUTOR"),
+                            .nickname = _("Exeggutor"),
                             .friendship = 255,
                         },
                         [3] =
@@ -4658,7 +4658,7 @@ static const struct TrHillTag sDataTagExpert =
                             .spDefenseIV = 31,
                             .altAbility = 0,
                             .personality = 0x93,
-                            .nickname = _("DUSCLOPS"),
+                            .nickname = _("Dusclops"),
                             .friendship = 255,
                         },
                         [4] =
@@ -4679,7 +4679,7 @@ static const struct TrHillTag sDataTagExpert =
                             .spDefenseIV = 31,
                             .altAbility = 0,
                             .personality = 0xF,
-                            .nickname = _("NINETALES"),
+                            .nickname = _("Ninetales"),
                             .friendship = 255,
                         },
                         [5] =
@@ -4700,14 +4700,14 @@ static const struct TrHillTag sDataTagExpert =
                             .spDefenseIV = 31,
                             .altAbility = 0,
                             .personality = 0x96,
-                            .nickname = _("BANETTE"),
+                            .nickname = _("Banette"),
                             .friendship = 255,
                         },
                     },
                 },
                 [1] =
                 {
-                    .name = _("GAV"),
+                    .name = _("Gav"),
                     .facilityClass = FACILITY_CLASS_PKMN_RANGER_M,
                     .unused = 0,
                     .speechBefore = {EC_WORD_WAHAHAHA, EC_WORD_YOU, EC_WORD_CAN_T, EC_WORD_STOP, EC_WORD_ME, EC_WORD_EXCL},
@@ -4734,7 +4734,7 @@ static const struct TrHillTag sDataTagExpert =
                             .spDefenseIV = 31,
                             .altAbility = 0,
                             .personality = 0x95,
-                            .nickname = _("SALAMENCE"),
+                            .nickname = _("Salamence"),
                             .friendship = 255,
                         },
                         [1] =
@@ -4755,7 +4755,7 @@ static const struct TrHillTag sDataTagExpert =
                             .spDefenseIV = 31,
                             .altAbility = 0,
                             .personality = 0x8C,
-                            .nickname = _("GENGAR"),
+                            .nickname = _("Gengar"),
                             .friendship = 255,
                         },
                         [2] =
@@ -4776,7 +4776,7 @@ static const struct TrHillTag sDataTagExpert =
                             .spDefenseIV = 31,
                             .altAbility = 0,
                             .personality = 0x3,
-                            .nickname = _("GYARADOS"),
+                            .nickname = _("Gyarados"),
                             .friendship = 255,
                         },
                         [3] =
@@ -4797,7 +4797,7 @@ static const struct TrHillTag sDataTagExpert =
                             .spDefenseIV = 31,
                             .altAbility = 0,
                             .personality = 0x3,
-                            .nickname = _("GENGAR"),
+                            .nickname = _("Gengar"),
                             .friendship = 255,
                         },
                         [4] =
@@ -4819,7 +4819,7 @@ static const struct TrHillTag sDataTagExpert =
                             .spDefenseIV = 31,
                             .altAbility = 0,
                             .personality = 0x14,
-                            .nickname = _("DUSCLOPS"),
+                            .nickname = _("Dusclops"),
                             .friendship = 255,
                         },
                         [5] =
@@ -4841,7 +4841,7 @@ static const struct TrHillTag sDataTagExpert =
                             .spDefenseIV = 31,
                             .altAbility = 0,
                             .personality = 0x85,
-                            .nickname = _("MISDREAVUS"),
+                            .nickname = _("Misdreavus"),
                             .friendship = 255,
                         },
                     },

@@ -386,7 +386,7 @@ static void sub_81A1370(void);
 const struct ApprenticeTrainer gApprentices[] =
 {
     {
-        .name = {_("サダヒロ"), _("ALANN"), _("ALAIN"), _("ADELFO"), _("CLAUS"), _("TEO")},
+        .name = {_("サダヒロ"), _("Alann"), _("Alain"), _("Adelfo"), _("Claus"), _("Teo")},
         .otId = 0xBDC9,
         .facilityClass = 0x43,
         .species = {SPECIES_BEAUTIFLY, SPECIES_DUSTOX, SPECIES_ILLUMISE, SPECIES_SHIFTRY, SPECIES_BRELOOM, SPECIES_NINJASK, SPECIES_SHEDINJA, SPECIES_PINSIR, SPECIES_HERACROSS, SPECIES_VOLBEAT},
@@ -394,7 +394,7 @@ const struct ApprenticeTrainer gApprentices[] =
         .easyChatWords = {0x81D, 0x143E, 0xC00, 0xA01, 0x630, 0x1444},
     },
     {
-        .name = {_("ヒロオ"), _("LIONEL"), _("LIONEL"), _("CAIO"), _("LUDWIG"), _("LEO")},
+        .name = {_("ヒロオ"), _("Lionel"), _("Lionel"), _("Caio"), _("Ludwig"), _("Leo")},
         .otId = 0xCF09,
         .facilityClass = 0x2B,
         .species = {SPECIES_SWELLOW, SPECIES_SWALOT, SPECIES_SHUCKLE, SPECIES_MANECTRIC, SPECIES_TORKOAL, SPECIES_HARIYAMA, SPECIES_MIGHTYENA, SPECIES_LUDICOLO, SPECIES_CRAWDAUNT, SPECIES_WHISCASH},
@@ -402,7 +402,7 @@ const struct ApprenticeTrainer gApprentices[] =
         .easyChatWords = {0xC38, 0xA01, 0x630, 0xA06, 0x1020, 0x2213},
     },
     {
-        .name = {_("ケイジ"), _("SONNY"), _("HERVE"), _("FEDRO"), _("WENZEL"), _("SANTI")},
+        .name = {_("ケイジ"), _("Sonny"), _("Herve"), _("Fedro"), _("Wenzel"), _("Santi")},
         .otId = 0x2E34,
         .facilityClass = 0x26,
         .species = {SPECIES_LINOONE, SPECIES_MIGHTYENA, SPECIES_WHISCASH, SPECIES_ZANGOOSE, SPECIES_SEVIPER, SPECIES_NINETALES, SPECIES_KECLEON, SPECIES_SHUCKLE, SPECIES_MANECTRIC, SPECIES_MACHAMP},
@@ -410,7 +410,7 @@ const struct ApprenticeTrainer gApprentices[] =
         .easyChatWords = {0xA01, 0x160A, 0xE15, 0x630, 0xC3B, 0xC04},
     },
     {
-        .name = {_("ユラ"), _("LAYLA"), _("LAYLA"), _("ASTRID"), _("SONJA"), _("LOLA")},
+        .name = {_("ユラ"), _("Layla"), _("Layla"), _("Astrid"), _("Sonja"), _("Lola")},
         .otId = 0x84EF,
         .facilityClass = 0x47,
         .species = {SPECIES_SWALOT, SPECIES_XATU, SPECIES_ALTARIA, SPECIES_GOLDUCK, SPECIES_FLYGON, SPECIES_ALAKAZAM, SPECIES_GARDEVOIR, SPECIES_WAILORD, SPECIES_GRUMPIG, SPECIES_MIGHTYENA},
@@ -418,7 +418,7 @@ const struct ApprenticeTrainer gApprentices[] =
         .easyChatWords = {0x100B, 0x1E0F, 0x1039, 0x1421, 0xC03, 0xFFFF},
     },
     {
-        .name = {_("ヨウカ"), _("MACY"), _("AMELIE"), _("CLEO"), _("MARIA"), _("ELISA")},
+        .name = {_("ヨウカ"), _("Macy"), _("Amelie"), _("Cleo"), _("Maria"), _("Elisa")},
         .otId = 0x1E43,
         .facilityClass = 0x27,
         .species = {SPECIES_WIGGLYTUFF, SPECIES_LINOONE, SPECIES_KINGDRA, SPECIES_DELCATTY, SPECIES_RAICHU, SPECIES_FEAROW, SPECIES_STARMIE, SPECIES_MEDICHAM, SPECIES_SHIFTRY, SPECIES_BEAUTIFLY},
@@ -426,7 +426,7 @@ const struct ApprenticeTrainer gApprentices[] =
         .easyChatWords = {0x1E0F, 0x1014, 0x1006, 0x280F, 0x1C1C, 0x1C13},
     },
     {
-        .name = {_("ヤスシ"), _("DONTE"), _("BRAHIM"), _("GLAUCO"), _("JOSEF"), _("ROQUE")},
+        .name = {_("ヤスシ"), _("Donte"), _("Brahim"), _("Glauco"), _("Josef"), _("Roque")},
         .otId = 0x379F,
         .facilityClass = 0x30,
         .species = {SPECIES_STARMIE, SPECIES_DODRIO, SPECIES_AGGRON, SPECIES_MAGNETON, SPECIES_MACHAMP, SPECIES_ARMALDO, SPECIES_HERACROSS, SPECIES_NOSEPASS, SPECIES_EXPLOUD, SPECIES_MIGHTYENA},
@@ -434,7 +434,7 @@ const struct ApprenticeTrainer gApprentices[] =
         .easyChatWords = {0xA29, 0x1408, 0x102F, 0x1638, 0x820, 0xC00},
     },
     {
-        .name = {_("ミサオ"), _("AMIRA"), _("LAURE"), _("DAFNE"), _("AMELIE"), _("LARA")},
+        .name = {_("ミサオ"), _("Amira"), _("Laure"), _("Dafne"), _("Amelie"), _("Lara")},
         .otId = 0xF555,
         .facilityClass = 0x31,
         .species = {SPECIES_STARMIE, SPECIES_DODRIO, SPECIES_MAGNETON, SPECIES_MEDICHAM, SPECIES_MIGHTYENA, SPECIES_GLALIE, SPECIES_GOLEM, SPECIES_ELECTRODE, SPECIES_PELIPPER, SPECIES_SHARPEDO},
@@ -442,7 +442,7 @@ const struct ApprenticeTrainer gApprentices[] =
         .easyChatWords = {0xC0B, 0x123E, 0xC00, 0xA31, 0x1430, 0xC00},
     },
     {
-        .name = {_("カズサ"), _("KALI"), _("JODIE"), _("ILENIA"), _("KARO"), _("ELSA")},
+        .name = {_("カズサ"), _("Kali"), _("Jodie"), _("Ilenia"), _("Karo"), _("Elsa")},
         .otId = 0x8D26,
         .facilityClass = 0x14,
         .species = {SPECIES_NINETALES, SPECIES_ALAKAZAM, SPECIES_SCEPTILE, SPECIES_SALAMENCE, SPECIES_GOLDUCK, SPECIES_MAWILE, SPECIES_WEEZING, SPECIES_LANTURN, SPECIES_GARDEVOIR, SPECIES_MILOTIC},
@@ -450,7 +450,7 @@ const struct ApprenticeTrainer gApprentices[] =
         .easyChatWords = {0xA06, 0x620, 0xA1F, 0xA02, 0xC03, 0xFFFF},
     },
     {
-        .name = {_("スミレ"), _("ANNIE"), _("ANNIE"), _("IMELDA"), _("INES"), _("ROSA")},
+        .name = {_("スミレ"), _("Annie"), _("Annie"), _("Imelda"), _("Ines"), _("Rosa")},
         .otId = 0x800C,
         .facilityClass = 0xD,
         .species = {SPECIES_SCEPTILE, SPECIES_VILEPLUME, SPECIES_BELLOSSOM, SPECIES_ROSELIA, SPECIES_CORSOLA, SPECIES_FLYGON, SPECIES_BRELOOM, SPECIES_MILOTIC, SPECIES_ALTARIA, SPECIES_CRADILY},
@@ -458,7 +458,7 @@ const struct ApprenticeTrainer gApprentices[] =
         .easyChatWords = {0x1E22, 0x433, 0x20E, 0xA02, 0x101E, 0xC00},
     },
     {
-        .name = {_("アキノリ"), _("DILLEN"), _("RENE"), _("INDRO"), _("DETLEF"), _("PEDRO")},
+        .name = {_("アキノリ"), _("Dillen"), _("Rene"), _("Indro"), _("Detlef"), _("Pedro")},
         .otId = 0x469f,
         .facilityClass = 0,
         .species = {SPECIES_SKARMORY, SPECIES_GOLEM, SPECIES_BLAZIKEN, SPECIES_CAMERUPT, SPECIES_DONPHAN, SPECIES_MUK, SPECIES_SALAMENCE, SPECIES_TROPIUS, SPECIES_SOLROCK, SPECIES_RHYDON},
@@ -466,7 +466,7 @@ const struct ApprenticeTrainer gApprentices[] =
         .easyChatWords = {0xA3D, 0x1011, 0xE1E, 0x201C, 0xC04, 0xFFFF},
     },
     {
-        .name = {_("トウゾウ"), _("DALLAS"), _("BRUNO"), _("LEARCO"), _("ANSGAR"), _("MANOLO")},
+        .name = {_("トウゾウ"), _("Dallas"), _("Bruno"), _("Learco"), _("Ansgar"), _("Manolo")},
         .otId = 0x71FC,
         .facilityClass = 0x2D,
         .species = {SPECIES_SEAKING, SPECIES_STARMIE, SPECIES_GOLDUCK, SPECIES_TENTACRUEL, SPECIES_OCTILLERY, SPECIES_GOREBYSS, SPECIES_GLALIE, SPECIES_WAILORD, SPECIES_SHARPEDO, SPECIES_KINGDRA},
@@ -474,7 +474,7 @@ const struct ApprenticeTrainer gApprentices[] =
         .easyChatWords = {0xA05, 0x606, 0x160E, 0xA14, 0xC00, 0xFFFF},
     },
     {
-        .name = {_("セイヤ"), _("FRANK"), _("FRANK"), _("OLINDO"), _("FRANK"), _("MAURO")},
+        .name = {_("セイヤ"), _("Frank"), _("Frank"), _("Olindo"), _("Frank"), _("Mauro")},
         .otId = 0xA39E,
         .facilityClass = 0x3A,
         .species = {SPECIES_QUAGSIRE, SPECIES_STARMIE, SPECIES_PELIPPER, SPECIES_CRAWDAUNT, SPECIES_WAILORD, SPECIES_GYARADOS, SPECIES_SWAMPERT, SPECIES_LANTURN, SPECIES_WHISCASH, SPECIES_SHUCKLE},
@@ -482,7 +482,7 @@ const struct ApprenticeTrainer gApprentices[] =
         .easyChatWords = {0x280E, 0x103D, 0x240F, 0xA14, 0x1E23, 0x1024},
     },
     {
-        .name = {_("リュウジ"), _("LAMONT"), _("XAV"), _("ORFEO"), _("JÜRGEN"), _("JORGE")},
+        .name = {_("リュウジ"), _("Lamont"), _("Xav"), _("Orfeo"), _("Jürgen"), _("Jorge")},
         .otId = 0xE590,
         .facilityClass = 0x19,
         .species = {SPECIES_ABSOL, SPECIES_CROBAT, SPECIES_EXPLOUD, SPECIES_MAGNETON, SPECIES_SHARPEDO, SPECIES_MANECTRIC, SPECIES_METAGROSS, SPECIES_ELECTRODE, SPECIES_NOSEPASS, SPECIES_WEEZING},
@@ -490,7 +490,7 @@ const struct ApprenticeTrainer gApprentices[] =
         .easyChatWords = {0x1020, 0x62E, 0x100B, 0x1E22, 0x1E0F, 0x100B},
     },
     {
-        .name = {_("カツアキ"), _("TYRESE"), _("ANDY"), _("PARIDE"), _("DAVID"), _("CHICHO")},
+        .name = {_("カツアキ"), _("Tyrese"), _("Andy"), _("Paride"), _("David"), _("Chicho")},
         .otId = 0xD018,
         .facilityClass = 10,
         .species = {SPECIES_BLAZIKEN, SPECIES_GOLEM, SPECIES_MACHAMP, SPECIES_RHYDON, SPECIES_HARIYAMA, SPECIES_AGGRON, SPECIES_MEDICHAM, SPECIES_ZANGOOSE, SPECIES_VIGOROTH, SPECIES_SLAKING},
@@ -498,7 +498,7 @@ const struct ApprenticeTrainer gApprentices[] =
         .easyChatWords = {0xA29, 0x63A, 0xE15, 0x1435, 0x1034, 0x61E},
     },
     {
-        .name = {_("トシミツ"), _("DANTE"), _("DANTE"), _("RAOUL"), _("LOTHAR"), _("PABLO")},
+        .name = {_("トシミツ"), _("Dante"), _("Dante"), _("Raoul"), _("Lothar"), _("Pablo")},
         .otId = 0xBC75,
         .facilityClass = 14,
         .species = {SPECIES_SCEPTILE, SPECIES_SANDSLASH, SPECIES_FLYGON, SPECIES_CLAYDOL, SPECIES_ARMALDO, SPECIES_CROBAT, SPECIES_CRADILY, SPECIES_SOLROCK, SPECIES_LUNATONE, SPECIES_GOLEM},
@@ -506,7 +506,7 @@ const struct ApprenticeTrainer gApprentices[] =
         .easyChatWords = {0xA01, 0x1017, 0x1243, 0x1E22, 0x100B, 0x280F},
     },
     {
-        .name = {_("ローウェン"), _("ARTURO"), _("ARTURO"), _("ROMOLO"), _("BRIAN"), _("ARTURO")},
+        .name = {_("ローウェン"), _("ARTURO"), _("Arturo"), _("Romolo"), _("Brian"), _("Arturo")},
         .otId = 0xFA02,
         .facilityClass = 0x20,
         .species = {SPECIES_ABSOL, SPECIES_MIGHTYENA, SPECIES_ALAKAZAM, SPECIES_BANETTE, SPECIES_NINETALES, SPECIES_CLAYDOL, SPECIES_MUK, SPECIES_SALAMENCE, SPECIES_WALREIN, SPECIES_DUSCLOPS},

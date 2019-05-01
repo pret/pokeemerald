@@ -5,7 +5,7 @@ Text_274746: @ 8274746
 Text_274779: @ 8274779
 	.string "If some vines drop down, this tree can\n"
 	.string "be climbed.\p"
-	.string "Use the SECRET POWER?$"
+	.string "Use the Secret Power?$"
 
 Text_2747C2: @ 82747C2
 	.string "A thick vine dropped down!$"
@@ -17,13 +17,13 @@ Text_2747DD: @ 82747DD
 Text_274825: @ 8274825
 	.string "If this clump of grass can be moved,\n"
 	.string "it might be possible to go inside.\p"
-	.string "Use the SECRET POWER?$"
+	.string "Use the Secret Power?$"
 
 Text_274883: @ 8274883
 	.string "Discovered a small entrance!$"
 
 SecretBase_RedCave1_Text_2748A0: @ 82748A0
-	.string "Have you made a SECRET BASE already?\p"
+	.string "Have you made a Secret Base already?\p"
 	.string "I went here, there, everywhere before\n"
 	.string "choosing this place.\p"
 	.string "Since you're already here, how would\n"
@@ -42,18 +42,18 @@ SecretBase_RedCave1_Text_274966:: @ 8274966
 	.string "About me losing… Please keep it secret!$"
 
 SecretBase_RedCave1_Text_2749AA: @ 82749AA
-	.string "What do you think of my SECRET BASE?\n"
+	.string "What do you think of my Secret Base?\n"
 	.string "Come visit me again tomorrow.$"
 
 SecretBase_RedCave1_Text_2749ED: @ 82749ED
-	.string "Have you made a SECRET BASE already?\p"
+	.string "Have you made a Secret Base already?\p"
 	.string "I went here, there, everywhere before\n"
 	.string "choosing this place.\p"
 	.string "Feel free to hang out!$"
 
 SecretBase_RedCave1_Text_274A64: @ 8274A64
 	.string "There're a lot of places where\n"
-	.string "you can make a SECRET BASE.\p"
+	.string "you can make a Secret Base.\p"
 	.string "But I like this spot best.\n"
 	.string "Don't you think it's nice?\p"
 	.string "Oh, would you like to have a battle?$"
@@ -76,7 +76,7 @@ SecretBase_RedCave1_Text_274B6C: @ 8274B6C
 
 SecretBase_RedCave1_Text_274BA2: @ 8274BA2
 	.string "There're a lot of places where you can\n"
-	.string "make a SECRET BASE.\p"
+	.string "make a Secret Base.\p"
 	.string "But I like this spot best.\n"
 	.string "Don't you think it's nice?$"
 
@@ -90,7 +90,7 @@ SecretBase_RedCave1_Text_274C13: @ 8274C13
 
 SecretBase_RedCave1_Text_274CB0: @ 8274CB0
 	.string "Okay!\n"
-	.string "I'm going to defend my SECRET BASE!$"
+	.string "I'm going to defend my Secret Base!$"
 
 SecretBase_RedCave1_Text_274CDA: @ 8274CDA
 	.string "Hunh? Is that right?\n"
@@ -111,7 +111,7 @@ SecretBase_RedCave1_Text_274D69: @ 8274D69
 	.string "I finally got to use it!$"
 
 SecretBase_RedCave1_Text_274DD2: @ 8274DD2
-	.string "Welcome to my POKéMON LAB.\p"
+	.string "Welcome to my Pokémon Lab.\p"
 	.string "I carry out research on battling in\n"
 	.string "secrecy.\p"
 	.string "Would you like to see how strong I am?$"
@@ -132,7 +132,7 @@ SecretBase_RedCave1_Text_274EB3: @ 8274EB3
 	.string "Please come back again tomorrow.$"
 
 SecretBase_RedCave1_Text_274EF1: @ 8274EF1
-	.string "Welcome to my POKéMON LAB.\p"
+	.string "Welcome to my Pokémon Lab.\p"
 	.string "I carry out research on battling in\n"
 	.string "secrecy.$"
 
@@ -156,7 +156,7 @@ SecretBase_RedCave1_Text_274FFE:: @ 8274FFE
 SecretBase_RedCave1_Text_27502A: @ 827502A
 	.string "Well, anyway, I should go buy some\n"
 	.string "decorations and furniture.\p"
-	.string "I want my SECRET BASE to be a place\n"
+	.string "I want my Secret Base to be a place\n"
 	.string "other people can enjoy.$"
 
 SecretBase_RedCave1_Text_2750A4: @ 82750A4
@@ -168,10 +168,10 @@ SecretBase_RedCave1_Text_2750A4: @ 82750A4
 SecretBase_RedCave1_Text_275114: @ 8275114
 	.string "I simply adore shopping for decorations\n"
 	.string "and furniture.\p"
-	.string "I also love raising POKéMON just\n"
+	.string "I also love raising Pokémon just\n"
 	.string "as much.\p"
 	.string "If you would be so kind, will you battle\n"
-	.string "with my POKéMON?$"
+	.string "with my Pokémon?$"
 
 SecretBase_RedCave1_Text_2751AF: @ 82751AF
 	.string "Thank you.\n"
@@ -191,11 +191,11 @@ SecretBase_RedCave1_Text_2751EC: @ 82751EC
 SecretBase_RedCave1_Text_275226: @ 8275226
 	.string "I simply adore shopping for decorations\n"
 	.string "and furniture.\p"
-	.string "I also love raising POKéMON just\n"
+	.string "I also love raising Pokémon just\n"
 	.string "as much.$"
 
 SecretBase_RedCave1_Text_275287: @ 8275287
-	.string "Some people make their SECRET BASES in\n"
+	.string "Some people make their Secret Bases in\n"
 	.string "hard-to-find places.\l"
 	.string "Do they want to just lie low?\p"
 	.string "But since you found me, how about we\n"
@@ -212,11 +212,11 @@ SecretBase_RedCave1_Text_275367:: @ 8275367
 	.string "I went down…$"
 
 SecretBase_RedCave1_Text_275374: @ 8275374
-	.string "Where's your SECRET BASE?\n"
+	.string "Where's your Secret Base?\n"
 	.string "I should go visit you there.$"
 
 SecretBase_RedCave1_Text_2753AB: @ 82753AB
-	.string "Some people make their SECRET BASES in\n"
+	.string "Some people make their Secret Bases in\n"
 	.string "hard-to-find places.\l"
 	.string "Do they want to just lie low?$"
 
@@ -228,7 +228,7 @@ SecretBase_RedCave1_Text_275405: @ 8275405
 	.string "In the meantime, want to battle?$"
 
 SecretBase_RedCave1_Text_2754B2: @ 82754B2
-	.string "This is my SECRET BASE.\n"
+	.string "This is my Secret Base.\n"
 	.string "I can't lose!$"
 
 SecretBase_RedCave1_Text_2754D8: @ 82754D8
@@ -251,7 +251,7 @@ SecretBase_RedCave1_Text_275546: @ 8275546
 SecretBase_RedCave1_Text_2755D2: @ 82755D2
 	.string "I found a spot I liked, and I did it up\n"
 	.string "with my favorite decorations.\p"
-	.string "I raise my favorite POKéMON and grow\n"
+	.string "I raise my favorite Pokémon and grow\n"
 	.string "stronger with it.\p"
 	.string "That's what I do.\n"
 	.string "Want to battle with me?$"
@@ -273,7 +273,7 @@ SecretBase_RedCave1_Text_2756EF: @ 82756EF
 SecretBase_RedCave1_Text_27571E: @ 827571E
 	.string "I found a spot I liked, and I did it up\n"
 	.string "with my favorite decorations.\p"
-	.string "I raise my favorite POKéMON and grow\n"
+	.string "I raise my favorite Pokémon and grow\n"
 	.string "stronger with it.\p"
 	.string "Every day is a great day.$"
 
@@ -1049,12 +1049,12 @@ SecretBase_EventScript_CushionInteract:: @ 82766A6
 
 Text_2766AA: @ 82766AA
 	.string "All decorations and furniture in your\n"
-	.string "SECRET BASE will be returned to your PC.\p"
+	.string "Secret Base will be returned to your PC.\p"
 	.string "Is that okay?$"
 
 Text_WantToRegisterSecretBase: @ 8276707
 	.string "Do you want to register\n"
-	.string "{STR_VAR_1}'s SECRET BASE?$"
+	.string "{STR_VAR_1}'s Secret Base?$"
 
 Text_276731: @ 8276731
 	.string "This data is already registered.\n"
@@ -1078,36 +1078,36 @@ Text_SecretBasePCStartMenu: @ 827681A
 	.string "What would you like to do?$"
 
 Text_276835: @ 8276835
-	.string "Once registered, a SECRET BASE will not\n"
-	.string "disappear unless the other TRAINER\l"
+	.string "Once registered, a Secret Base will not\n"
+	.string "disappear unless the other Trainer\l"
 	.string "moves it to a different location.\p"
-	.string "If a SECRET BASE is deleted from the\n"
+	.string "If a Secret Base is deleted from the\n"
 	.string "registered list, another one may take\l"
 	.string "its place.\p"
-	.string "Up to ten SECRET BASE locations\n"
+	.string "Up to ten Secret Base locations\n"
 	.string "may be registered.$"
 
 Text_27692B: @ 827692B
 	.string "A shield of {STR_VAR_2} that marks winning\n"
-	.string "{STR_VAR_1} times in a row at the BATTLE TOWER.$"
+	.string "{STR_VAR_1} times in a row at the Battle Tower.$"
 
 Text_276974: @ 8276974
 	.string "A realistic toy TV. It could be easily\n"
 	.string "mistaken for the real thing.$"
 
 Text_2769B8: @ 82769B8
-	.string "A toy TV shaped like a SEEDOT.\n"
+	.string "A toy TV shaped like a Seedot.\n"
 	.string "It looks ready to roll away on its own…$"
 
 Text_2769FF: @ 82769FF
-	.string "A toy TV shaped like a SKITTY.\n"
+	.string "A toy TV shaped like a Skitty.\n"
 	.string "It looks ready to stroll away…$"
 
 Text_276A3D: @ 8276A3D
-	.string "You may only make one SECRET BASE.\p"
-	.string "Would you like to move from the SECRET\n"
-	.string "BASE near {STR_VAR_1}?$"
+	.string "You may only make one Secret Base.\p"
+	.string "Would you like to move from the Secret\n"
+	.string "Base near {STR_VAR_1}?$"
 
 Text_276A95: @ 8276A95
 	.string "Moving completed.\p"
-	.string "Would you like to use the SECRET POWER?$"
+	.string "Would you like to use the Secret Power?$"

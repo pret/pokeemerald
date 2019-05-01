@@ -181,16 +181,16 @@ SootopolisCity_MysteryEventsHouse_1F_Movement_227B43: @ 8227B43
 
 SootopolisCity_MysteryEventsHouse_1F_Text_227B46: @ 8227B46
 	.string "When I was young, I traveled the world\n"
-	.string "as a POKéMON TRAINER.\p"
+	.string "as a Pokémon Trainer.\p"
 	.string "Now that I've become an old buzzard,\n"
 	.string "my only amusement is watching young\l"
-	.string "TRAINERS battle.$"
+	.string "Trainers battle.$"
 
 SootopolisCity_MysteryEventsHouse_1F_Text_227BDD: @ 8227BDD
 	.string "The door appears to be locked.$"
 
 SootopolisCity_MysteryEventsHouse_1F_Text_227BFC: @ 8227BFC
-	.string "A TRAINER named {STR_VAR_1}\n"
+	.string "A Trainer named {STR_VAR_1}\n"
 	.string "is visiting my home.\p"
 	.string "Would you like to challenge\n"
 	.string "{STR_VAR_1}?$"

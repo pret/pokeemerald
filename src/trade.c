@@ -237,7 +237,7 @@ static const u8 gText_ClrWhtHltTrspntShdwDrkGry[] = _("{COLOR WHITE}{HIGHLIGHT T
 const u8 gText_MaleSymbol4[] = _("♂");
 const u8 gText_FemaleSymbol4[] = _("♀");
 const u8 gText_GenderlessSymbol[] = _("");
-static const u8 gText_SpaceMove[] = _(" MOVE");
+static const u8 gText_SpaceMove[] = _(" Move");
 static const u8 gText_NewLine3[] = _("\n");
 static const u8 gText_Slash2[] = _("/");
 static const u8 gText_Lv2[] = _("Lv. ");
@@ -245,19 +245,19 @@ static const u8 gText_ThreeDashes2[] = _("---");
 static const u8 gText_FourQuestionMarks[] = _("????");
 static const u8 gText_832DAE4[] = _("");
 static const u8 gText_IsThisTradeOkay[] = _("Is this trade okay?");
-static const u8 gText_Cancel6[] = _("CANCEL");
-static const u8 gText_ChooseAPkmn[] = _("Choose a POKéMON.");
-static const u8 gText_Summary3[] = _("SUMMARY");
-static const u8 gText_Trade2[] = _("TRADE");
+static const u8 gText_Cancel6[] = _("Cancel");
+static const u8 gText_ChooseAPkmn[] = _("Choose a Pokémon.");
+static const u8 gText_Summary3[] = _("Summary");
+static const u8 gText_Trade2[] = _("Trade");
 static const u8 gText_CancelTrade[] = _("Cancel trade?");
 static const u8 gJPText_832DB2E[] = _("Bボタン　で　もどります");
-static const u8 gText_Summary4[] = _("SUMMARY");
-static const u8 gText_Trade3[] = _("TRADE");
+static const u8 gText_Summary4[] = _("Summary");
+static const u8 gText_Trade3[] = _("Trade");
 static const u8 gText_CommunicationStandby6[] = _("{COLOR DARK_GREY}{HIGHLIGHT WHITE}{SHADOW LIGHT_GREY}Communication standby…\nPlease wait.");
 static const u8 gText_TheTradeHasBeenCanceled[] = _("{COLOR DARK_GREY}{HIGHLIGHT WHITE}{SHADOW LIGHT_GREY}The trade has\nbeen canceled.");
-static const u8 gText_YourOnlyPkmnForBattle[] = _("That's your only\nPOKéMON for battle.");
+static const u8 gText_YourOnlyPkmnForBattle[] = _("That's your only\nPokémon for battle.");
 static const u8 gText_WaitingForYourFriend[] = _("{COLOR DARK_GREY}{HIGHLIGHT WHITE}{SHADOW LIGHT_GREY}Waiting for your friend\nto finish…");
-static const u8 gText_YourFriendWantsToTrade[] = _("Your friend wants\nto trade POKéMON.");
+static const u8 gText_YourFriendWantsToTrade[] = _("Your friend wants\nto trade Pokémon.");
 
 static const struct OamData gOamData_832DC14 =
 {
@@ -1172,42 +1172,42 @@ static const union AffineAnimCmd *const gSpriteAffineAnimTable_8338ECC[] =
 static const struct InGameTrade gIngameTrades[] =
 {
     {
-        _("DOTS"), SPECIES_SEEDOT,
+        _("Dots"), SPECIES_SEEDOT,
         5, 4, 5, 4, 4, 4,
         TRUE, 38726,
         30, 5, 5, 5, 5,
         0x84,
         ITEM_CHESTO_BERRY, -1,
-        _("KOBE"), MALE, 10,
+        _("Kobe"), MALE, 10,
         SPECIES_RALTS
     }, {
-        _("PLUSES"), SPECIES_PLUSLE,
+        _("Pluses"), SPECIES_PLUSLE,
         4, 4, 4, 5, 5, 4,
         FALSE, 73996,
         5, 5, 30, 5, 5,
         0x6F,
         ITEM_WOOD_MAIL, 0,
-        _("ROMAN"), MALE, 10,
+        _("Roman"), MALE, 10,
         SPECIES_VOLBEAT
     }, {
-        _("SEASOR"),
+        _("Seasor"),
         SPECIES_HORSEA,
         5, 4, 4, 4, 5, 4,
         FALSE, 46285,
         5, 5, 5, 5, 30,
         0x7F,
         ITEM_WAVE_MAIL, 1,
-        _("SKYLAR"), MALE, 10,
+        _("Skylar"), MALE, 10,
         SPECIES_BAGON
     }, {
-        _("MEOWOW"),
+        _("Meowow"),
         SPECIES_MEOWTH,
         4, 5, 4, 5, 4, 4,
         FALSE, 91481,
         5, 5, 5, 30, 5,
         0x8B,
         ITEM_RETRO_MAIL, 2,
-        _("ISIS"), FEMALE, 10,
+        _("Isis"), FEMALE, 10,
         SPECIES_SKITTY
     }
 };

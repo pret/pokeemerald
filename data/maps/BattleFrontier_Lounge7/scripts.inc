@@ -290,16 +290,16 @@ BattleFrontier_Lounge7_EventScript_2656E4:: @ 82656E4
 BattleFrontier_Lounge7_Text_2656ED: @ 82656ED
 	.string "Buhahaha!\p"
 	.string "You couldn't tell it from looking now,\n"
-	.string "but I used to be one tough TRAINER.\p"
+	.string "but I used to be one tough Trainer.\p"
 	.string "I had a reputation as the toughest\n"
-	.string "BEAUTY around, I tell you!\p"
+	.string "Beauty around, I tell you!\p"
 	.string "… … … … … …\p"
 	.string "What is it now?\n"
 	.string "You don't believe me.\p"
 	.string "I'm not like that blowhard woman over\n"
 	.string "there. I'm actually talented!\p"
 	.string "Let me prove it to you.\n"
-	.string "I can teach your POKéMON special and\l"
+	.string "I can teach your Pokémon special and\l"
 	.string "yet cute moves.\p"
 	.string "But my lessons don't come free.\n"
 	.string "How about paying for the moves I teach\l"
@@ -308,7 +308,7 @@ BattleFrontier_Lounge7_Text_2656ED: @ 82656ED
 BattleFrontier_Lounge7_Text_2658AB: @ 82658AB
 	.string "Buhahaha!\p"
 	.string "Are you back to learn special and\n"
-	.string "yet cute POKéMON moves?$"
+	.string "yet cute Pokémon moves?$"
 
 BattleFrontier_Lounge7_Text_2658EF: @ 82658EF
 	.string "Fine, fine, look here!\n"
@@ -319,7 +319,7 @@ BattleFrontier_Lounge7_Text_265921: @ 8265921
 	.string "That will be {STR_VAR_2} Battle Points, okay?$"
 
 BattleFrontier_Lounge7_Text_26595A: @ 826595A
-	.string "Fine, fine, now pick the POKéMON\n"
+	.string "Fine, fine, now pick the Pokémon\n"
 	.string "I should teach the move to.$"
 
 BattleFrontier_Lounge7_Text_265997: @ 8265997
@@ -339,16 +339,16 @@ BattleFrontier_Lounge7_Text_265A0E: @ 8265A0E
 BattleFrontier_Lounge7_Text_265A6C: @ 8265A6C
 	.string "Ihihihi!\p"
 	.string "I know it's hard to see now, but I used\n"
-	.string "to be one fantastic TRAINER.\p"
+	.string "to be one fantastic Trainer.\p"
 	.string "I had a reputation as the most\n"
-	.string "invincible SWIMMER around, I tell you!\p"
+	.string "invincible Swimmer around, I tell you!\p"
 	.string "… … … … … …\p"
 	.string "What's wrong?\n"
 	.string "You don't believe me.\p"
 	.string "I'm not like that buffoonish woman over\n"
 	.string "there. I'm actually experienced!\p"
 	.string "I can prove it to you.\n"
-	.string "I can teach your POKéMON hard and\l"
+	.string "I can teach your Pokémon hard and\l"
 	.string "yet pretty moves.\p"
 	.string "But my lessons don't come free.\n"
 	.string "How about paying for the moves I teach\l"
@@ -357,7 +357,7 @@ BattleFrontier_Lounge7_Text_265A6C: @ 8265A6C
 BattleFrontier_Lounge7_Text_265C2C: @ 8265C2C
 	.string "Ihihihi!\p"
 	.string "Have you come to learn hard and\n"
-	.string "yet pretty POKéMON moves?$"
+	.string "yet pretty Pokémon moves?$"
 
 BattleFrontier_Lounge7_Text_265C6F: @ 8265C6F
 	.string "Those ladies, the way they bad-mouth\n"
@@ -367,12 +367,12 @@ BattleFrontier_Lounge7_Text_265C6F: @ 8265C6F
 	.string "stay out here together, would they?$"
 
 BattleFrontier_Lounge7_Text_265D17: @ 8265D17
-	.string "When I was just a wee YOUNGSTER,\n"
+	.string "When I was just a wee Youngster,\n"
 	.string "those ladies were strong and beautiful.\p"
-	.string "They were idols among us TRAINERS.\p"
+	.string "They were idols among us Trainers.\p"
 	.string "Even now, age hasn't dulled their\n"
 	.string "abilities.\p"
-	.string "In fact, their POKéMON moves have\n"
+	.string "In fact, their Pokémon moves have\n"
 	.string "grown even more polished.\p"
 	.string "But… For some reason, I can't help\n"
 	.string "but feel this…\p"
@@ -426,12 +426,12 @@ BattleFrontier_Lounge7_Text_265FAA:: @ 8265FAA
 BattleFrontier_Lounge7_Text_265FDD:: @ 8265FDD
 	.string "A fighting dance\n"
 	.string "that sharply\n"
-	.string "raises ATTACK.$"
+	.string "raises Attack.$"
 
 BattleFrontier_Lounge7_Text_26600A:: @ 826600A
 	.string "Curls up to con-\n"
 	.string "ceal weak spots\n"
-	.string "and raise DEFENSE.$"
+	.string "and raise Defense.$"
 
 BattleFrontier_Lounge7_Text_26603E:: @ 826603E
 	.string "A loud attack\n"
@@ -451,7 +451,7 @@ BattleFrontier_Lounge7_Text_2660A6:: @ 82660A6
 BattleFrontier_Lounge7_Text_2660D0:: @ 82660D0
 	.string "A chilling attack\n"
 	.string "that lowers the\n"
-	.string "foe's SPEED.$"
+	.string "foe's Speed.$"
 
 BattleFrontier_Lounge7_Text_2660FF:: @ 82660FF
 	.string "Endures any at-\n"

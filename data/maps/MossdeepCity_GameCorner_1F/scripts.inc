@@ -32,16 +32,16 @@ MossdeepCity_GameCorner_1F_EventScript_224B5D:: @ 8224B5D
 
 MossdeepCity_GameCorner_1F_Text_224B66: @ 8224B66
 	.string "When I was young, I traveled the world\n"
-	.string "as a POKéMON TRAINER.\p"
+	.string "as a Pokémon Trainer.\p"
 	.string "Now that I've become an old buzzard,\n"
 	.string "my only amusement is watching young\l"
-	.string "TRAINERS battle.$"
+	.string "Trainers battle.$"
 
 MossdeepCity_GameCorner_1F_Text_224BFD: @ 8224BFD
 	.string "The door appears to be locked.$"
 
 MossdeepCity_GameCorner_1F_Text_224C1C: @ 8224C1C
-	.string "A TRAINER named {STR_VAR_1} is\n"
+	.string "A Trainer named {STR_VAR_1} is\n"
 	.string "visiting my home.\p"
 	.string "Would you like to challenge\n"
 	.string "{STR_VAR_1}?$"

@@ -1,18 +1,18 @@
 LilycoveCity_Harbor_Text_2A6848: @ 82A6848
-	.string "The ferry to SLATEPORT is…\p"
+	.string "The ferry to Slateport is…\p"
 	.string "I beg your pardon?\n"
 	.string "Can we sail to this place on the map?\p"
 	.string "I know someone who will help you better.\n"
 	.string "Please wait.$"
 
 LilycoveCity_Harbor_Text_2A68D2: @ 82A68D2
-	.string "The ferry to SLATEPORT is…\p"
+	.string "The ferry to Slateport is…\p"
 	.string "Oh?\n"
-	.string "That PASS…$"
+	.string "That Pass…$"
 
 LilycoveCity_Harbor_Text_2A68FC: @ 82A68FC
 	.string "Aye, mate, are you the one who brought\n"
-	.string "that mighty odd PASS?\p"
+	.string "that mighty odd Pass?\p"
 	.string "I'll tell you, you're trying to reach a\n"
 	.string "tiny spit of an island far in the south.\p"
 	.string "There's no telling what we'll encounter\n"
@@ -23,7 +23,7 @@ LilycoveCity_Harbor_Text_2A68FC: @ 82A68FC
 SouthernIsland_Exterior_Text_2A69F1: @ 82A69F1
 	.string "Aye, mate, there's nothing here to\n"
 	.string "see or do on this forgettable island.\p"
-	.string "What say we sail back to LILYCOVE?$"
+	.string "What say we sail back to Lilycove?$"
 
 BirthIsland_Harbor_Text_2A6A5D: @ 82A6A5D
 FarawayIsland_Entrance_Text_2A6A5D: @ 82A6A5D

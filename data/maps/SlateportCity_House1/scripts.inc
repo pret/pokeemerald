@@ -72,13 +72,13 @@ SlateportCity_House1_EventScript_209B84:: @ 8209B84
 	end
 
 SlateportCity_House1_Text_209B8E: @ 8209B8E
-	.string "Hi, hi! I'm the NAME RATER!\n"
+	.string "Hi, hi! I'm the Name Rater!\n"
 	.string "I'm the fortune-teller of names!\p"
 	.string "I shall be pleased to rate your\n"
-	.string "POKéMON's nickname.$"
+	.string "Pokémon's nickname.$"
 
 SlateportCity_House1_Text_209BFF: @ 8209BFF
-	.string "Which POKéMON's nickname should\n"
+	.string "Which Pokémon's nickname should\n"
 	.string "I critique?$"
 
 SlateportCity_House1_Text_209C2B: @ 8209C2B
@@ -92,7 +92,7 @@ SlateportCity_House1_Text_209CA4: @ 8209CA4
 	.string "nickname be?$"
 
 SlateportCity_House1_Text_209CD4: @ 8209CD4
-	.string "Done! From now on, this POKéMON\n"
+	.string "Done! From now on, this Pokémon\n"
 	.string "shall be known as {STR_VAR_1}!\p"
 	.string "It is a better name than before!\n"
 	.string "How fortunate for you!$"
@@ -102,7 +102,7 @@ SlateportCity_House1_Text_209D42: @ 8209D42
 	.string "Do come visit again.$"
 
 SlateportCity_House1_Text_209D5E: @ 8209D5E
-	.string "Done! From now on, this POKéMON\n"
+	.string "Done! From now on, this Pokémon\n"
 	.string "shall be known as {STR_VAR_1}!\p"
 	.string "It looks no different from before,\n"
 	.string "and yet, this is vastly superior!\p"
@@ -117,5 +117,5 @@ SlateportCity_House1_Text_209DF0: @ 8209DF0
 
 SlateportCity_House1_Text_209E74: @ 8209E74
 	.string "Now, now.\n"
-	.string "That is merely an EGG!$"
+	.string "That is merely an Egg!$"
 

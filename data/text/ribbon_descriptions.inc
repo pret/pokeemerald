@@ -1,23 +1,23 @@
 gRibbonDescriptionPart1_Champion:: @ 862383C
-	.string "CHAMPION-beating, HALL$"
+	.string "Champion-beating, Hall$"
 
 gRibbonDescriptionPart2_Champion:: @ 8623853
-	.string "OF FAME Member RIBBON$"
+	.string "of Fame Member Ribbon$"
 
 gRibbonDescriptionPart1_CoolContest:: @ 8623869
-	.string "COOL CONTEST$"
+	.string "Cool Contest$"
 
 gRibbonDescriptionPart1_BeautyContest:: @ 8623876
-	.string "BEAUTY CONTEST$"
+	.string "Beauty Contest$"
 
 gRibbonDescriptionPart1_CuteContest:: @ 8623885
-	.string "CUTE CONTEST$"
+	.string "Cute Contest$"
 
 gRibbonDescriptionPart1_SmartContest:: @ 8623892
-	.string "SMART CONTEST$"
+	.string "Smart Contest$"
 
 gRibbonDescriptionPart1_ToughContest:: @ 86238A0
-	.string "TOUGH CONTEST$"
+	.string "Tough Contest$"
 
 gRibbonDescriptionPart2_NormalRank:: @ 86238AE
 	.string "Normal Rank winner!$"
@@ -35,22 +35,22 @@ gRibbonDescriptionPart1_Winning:: @ 86238FC
 	.string "For clearing LV50$"
 
 gRibbonDescriptionPart2_Winning:: @ 862390E
-	.string "at the BATTLE TOWER.$"
+	.string "at the Battle Tower.$"
 
 gRibbonDescriptionPart1_Victory:: @ 8623923
 	.string "For clearing Open Level$"
 
 gRibbonDescriptionPart2_Victory:: @ 862393B
-	.string "at the BATTLE TOWER.$"
+	.string "at the Battle Tower.$"
 
 gRibbonDescriptionPart1_Artist:: @ 8623950
-	.string "RIBBON for being chosen$"
+	.string "Ribbon for being chosen$"
 
 gRibbonDescriptionPart2_Artist:: @ 8623968
 	.string "as a super sketch model.$"
 
 gRibbonDescriptionPart1_Effort:: @ 8623981
-	.string "RIBBON awarded for$"
+	.string "Ribbon awarded for$"
 
 gRibbonDescriptionPart2_Effort:: @ 8623994
 	.string "being a hard worker.$"

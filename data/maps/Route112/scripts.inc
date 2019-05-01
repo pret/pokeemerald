@@ -113,31 +113,31 @@ Route112_Text_1F1F3F: @ 81F1F3F
 
 Route112_Text_1F1F7A: @ 81F1F7A
 	.string "Sounds like it, yeah. But I heard\n"
-	.string "we need a METEORITE to do it.$"
+	.string "we need a Meteorite to do it.$"
 
 Route112_Text_1F1FBA: @ 81F1FBA
 	.string "Oh, I get it now. That's why the rest\n"
-	.string "of the crew went out to FALLARBOR.$"
+	.string "of the crew went out to Fallarbor.$"
 
 Route112_Text_1F2003: @ 81F2003
 	.string "You got it. And until they come back,\n"
 	.string "we're not to let anyone pass, right.$"
 
 Route112_Text_1F204E: @ 81F204E
-	.string "Eh, I'd like to get to MAUVILLE, but if\n"
+	.string "Eh, I'd like to get to Mauville, but if\n"
 	.string "I went down these ledges, it'd be no\l"
-	.string "easy matter to get back to LAVARIDGE.$"
+	.string "easy matter to get back to Lavaridge.$"
 
 Route112_Text_1F20C1: @ 81F20C1
-	.string "MT. CHIMNEY CABLE CAR\n"
+	.string "Mt. Chimney Cable Car\n"
 	.string "“A short walk {UP_ARROW} way!”$"
 
 Route112_Text_1F20ED: @ 81F20ED
-	.string "MT. CHIMNEY\p"
-	.string "“For LAVARIDGE TOWN or the summit,\n"
-	.string "please take the CABLE CAR.”$"
+	.string "Mt. Chimney\p"
+	.string "“For Lavaridge Town or the summit,\n"
+	.string "please take the Cable Car.”$"
 
 Route112_Text_1F2138: @ 81F2138
-	.string "ROUTE 112\n"
-	.string "{LEFT_ARROW} LAVARIDGE TOWN$"
+	.string "Route 112\n"
+	.string "{LEFT_ARROW} Lavaridge Town$"
 

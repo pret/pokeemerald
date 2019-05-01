@@ -54,7 +54,7 @@ InsideOfTruck_EventScript_23BF6C:: @ 823BF6C
 	end
 
 InsideOfTruck_Text_23BF75: @ 823BF75
-	.string "The box is printed with a POKéMON logo.\p"
-	.string "It's a POKéMON brand moving and\n"
+	.string "The box is printed with a Pokémon logo.\p"
+	.string "It's a Pokémon brand moving and\n"
 	.string "delivery service.$"
 

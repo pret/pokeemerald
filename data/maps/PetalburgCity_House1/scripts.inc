@@ -17,7 +17,7 @@ PetalburgCity_House1_Text_2077AC: @ 82077AC
 PetalburgCity_House1_Text_2077FB: @ 82077FB
 	.string "Sigh…\p"
 	.string "I wish I could go on an adventure\n"
-	.string "with some POKéMON…\p"
+	.string "with some Pokémon…\p"
 	.string "Crawl through some damp grass…\n"
 	.string "Climb rocky, rugged mountains…\p"
 	.string "Cross the raging seas…\n"
