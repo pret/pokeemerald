@@ -1,8 +1,12 @@
 #include "global.h"
 #include "alloc.h"
 #include "bg.h"
+#include "menu.h"
 #include "window.h"
 #include "pokenav.h"
+#include "graphics.h"
+#include "sound.h"
+#include "constants/songs.h"
 
 // Match Call
 
@@ -16,7 +20,8 @@ struct Pokenav2Struct
     u8 field_00b;
     u8 field_00c;
     u8 field_00d;
-    u8 filler_00e[0x87E];
+    u8 filler_00e[0x7E];
+    u8 field_08c[0x800];
 };
 
 struct Pokenav2Struct * sub_81C9958(void);
@@ -30,8 +35,20 @@ u32 sub_81C9E58(int state);
 u32 sub_81C9EC8(int state);
 u32 sub_81C9EF8(int state);
 u32 sub_81C9F28(int state);
-void sub_81CA7F4(void);
+void sub_81C9FC4(void);
 void sub_81C9FEC(void);
+void sub_81CA02C(void);
+void sub_81CA0C8(void);
+void sub_81CA20C(void);
+bool32 sub_81CA324(void);
+void sub_81CA640(void);
+void sub_81CA6E0(void);
+void sub_81CA714(void);
+bool32 sub_81CA7C4(void);
+void sub_81CA7D4(void);
+void sub_81CA7F4(void);
+void sub_81CA850(void);
+void titlescreen_0(void);
 void sub_81CA994(void);
 
 const u16 gUnknown_0861FC78[] = INCBIN_U16("graphics/pokenav/bg.gbapal");
@@ -166,4 +183,111 @@ bool32 sub_81C99FC(void)
     struct Pokenav2Struct * unk = GetSubstructPtr(2);
 
     return IsLoopedTaskActive(unk->loopedTaskId);
+}
+
+u32 sub_81C9A10(int state)
+{
+    struct Pokenav2Struct * unk = GetSubstructPtr(2);
+
+    switch (state)
+    {
+    case 0:
+        InitBgTemplates(gUnknown_08620194, ARRAY_COUNT(gUnknown_08620194));
+        decompress_and_copy_tile_data_to_vram(1, gPokenavMessageBox_Gfx, 0, 0, 0);
+        SetBgTilemapBuffer(1, unk->field_08c);
+        CopyToBgTilemapBuffer(1, gPokenavMessageBox_Tilemap, 0, 0);
+        CopyBgTilemapBufferToVram(1);
+        CopyPaletteIntoBufferUnfaded(gPokenavMessageBox_Pal, 0x10, 0x20);
+        ChangeBgX(1, 0, 0);
+        ChangeBgY(1, 0, 0);
+        ChangeBgX(2, 0, 0);
+        ChangeBgY(2, 0, 0);
+        ChangeBgX(3, 0, 0);
+        ChangeBgY(3, 0, 0);
+        return 0;
+    case 1:
+        if (free_temp_tile_data_buffers_if_possible())
+            return 2;
+        decompress_and_copy_tile_data_to_vram(2, gUnknown_0861FD6C, 0, 0, 0);
+        decompress_and_copy_tile_data_to_vram(2, gUnknown_0861FFF4, 0, 0, 1);
+        CopyPaletteIntoBufferUnfaded(gUnknown_0861FD4C, 0x20, 0x20);
+        return 0;
+    case 2:
+        if (free_temp_tile_data_buffers_if_possible())
+            return 2;
+        decompress_and_copy_tile_data_to_vram(3, gUnknown_0861FC98, 0, 0, 0);
+        decompress_and_copy_tile_data_to_vram(3, gUnknown_0861FCAC, 0, 0, 1);
+        CopyPaletteIntoBufferUnfaded(gUnknown_0861FC78, 0x30, 0x20);
+        if (sub_81C9894() == 3 || sub_81C9894() == 4)
+            sub_81CA850();
+        return 0;
+    case 3:
+        if (free_temp_tile_data_buffers_if_possible())
+            return 2;
+        sub_81CA6E0();
+        sub_81CA7D4();
+        return 1;
+    case 4:
+        sub_81C9FC4();
+        return 1;
+    case 5:
+        sub_81CA714();
+        sub_81CA02C();
+        sub_81CA640();
+        sub_81CA0C8();
+        return 0;
+    case 6:
+        if (sub_81CA7C4())
+            return 2;
+        return 1;
+    case 7:
+        ShowBg(1);
+        ShowBg(2);
+        ShowBg(3);
+        if (unk->field_00d)
+            sub_81C7AC0(1);
+        else
+        {
+            PlaySE(SE_PN_ON);
+            sub_81C7AC0(3);
+        }
+        switch (sub_81C9894())
+        {
+        case 4:
+            LoadLeftHeaderGfxForIndex(7);
+            // fallthrough
+        case 3:
+            LoadLeftHeaderGfxForIndex(1);
+            break;
+        default:
+            LoadLeftHeaderGfxForIndex(0);
+            break;
+        }
+        return 0;
+    case 8:
+        if (IsPaletteFadeActive())
+            return 2;
+        switch (sub_81C9894())
+        {
+        case 4:
+            sub_81C7FA0(7, FALSE, FALSE);
+            // fallthrough
+        case 3:
+            sub_81C7FA0(1, FALSE, FALSE);
+            break;
+        default:
+            sub_81C7FA0(0, FALSE, FALSE);
+            break;
+        }
+        sub_81CA20C();
+        titlescreen_0();
+        return 1;
+    case 9:
+        if (sub_81CA324())
+            return 2;
+        if (sub_81C8010())
+            return 2;
+        break;
+    }
+    return 4;
 }
