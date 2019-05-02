@@ -186,6 +186,7 @@ static void SpriteCB_StatusSummaryBallsOnBattleStart(struct Sprite *sprite);
 static void SpriteCB_StatusSummaryBallsOnSwitchout(struct Sprite *sprite);
 
 static void SpriteCb_MegaTrigger(struct Sprite *sprite);
+static void SpriteCb_MegaIndicator(struct Sprite *sprite);
 
 static u8 GetStatusIconForBattlerId(u8 statusElementId, u8 battlerId);
 static s32 CalcNewBarValue(s32 maxValue, s32 currValue, s32 receivedValue, s32 *arg3, u8 arg4, u16 arg5);
@@ -548,6 +549,47 @@ static const struct SpriteTemplate sSpriteTemplate_MegaTrigger =
     .callback = SpriteCb_MegaTrigger
 };
 
+static const u8 sMegaIndicatorGfx[] = INCBIN_U8("graphics/battle_interface/mega_indicator.4bpp");
+static const u16 sMegaIndicatorPal[] = INCBIN_U16("graphics/battle_interface/mega_indicator.gbapal");
+
+static const struct SpriteSheet sSpriteSheet_MegaIndicator =
+{
+    sMegaIndicatorGfx, sizeof(sMegaIndicatorGfx), TAG_MEGA_INDICATOR_TILE
+};
+static const struct SpritePalette sSpritePalette_MegaIndicator =
+{
+    sMegaIndicatorPal, TAG_MEGA_INDICATOR_PAL
+};
+
+static const struct OamData sOamData_MegaIndicator =
+{
+    .y = 0,
+    .affineMode = 0,
+    .objMode = 0,
+    .mosaic = 0,
+    .bpp = 0,
+    .shape = SPRITE_SHAPE(16x16),
+    .x = 0,
+    .matrixNum = 0,
+    .size = SPRITE_SIZE(16x16),
+    .tileNum = 0,
+    .priority = 0,
+    .paletteNum = 0,
+    .affineParam = 0,
+};
+
+static const struct SpriteTemplate sSpriteTemplate_MegaIndicator =
+{
+    .tileTag = TAG_MEGA_INDICATOR_TILE,
+    .paletteTag = TAG_MEGA_INDICATOR_PAL,
+    .oam = &sOamData_MegaIndicator,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCb_MegaIndicator,
+};
+
+
 // code
 
 // Because the healthbox is too large to fit into one sprite, it is divided into two sprites.
@@ -649,6 +691,10 @@ u8 CreateBattlerHealthboxSprites(u8 battlerId)
     healthBarSpritePtr->hBar_Data6 = data6;
     healthBarSpritePtr->invisible = TRUE;
 
+    // Create mega indicator sprite if is a mega evolved mon.
+    if (gBattleStruct->mega.alreadyEvolved[GetBattlerPosition(battlerId)])
+        CreateMegaIndicatorSprite(battlerId, 0);
+
     return healthboxLeftSpriteId;
 }
 
@@ -706,12 +752,19 @@ static void SpriteCB_HealthBar(struct Sprite *sprite)
 static void SpriteCB_HealthBoxOther(struct Sprite *sprite)
 {
     u8 healthboxMainSpriteId = sprite->hOther_HealthBoxSpriteId;
+    u8 megaSpriteId = gBattleStruct->mega.indicatorSpriteIds[gSprites[healthboxMainSpriteId].hMain_Battler];
 
     sprite->pos1.x = gSprites[healthboxMainSpriteId].pos1.x + 64;
     sprite->pos1.y = gSprites[healthboxMainSpriteId].pos1.y;
 
     sprite->pos2.x = gSprites[healthboxMainSpriteId].pos2.x;
     sprite->pos2.y = gSprites[healthboxMainSpriteId].pos2.y;
+
+    if (megaSpriteId != 0xFF)
+    {
+        gSprites[megaSpriteId].pos2.x = sprite->pos2.x;
+        gSprites[megaSpriteId].pos2.y = sprite->pos2.y;
+    }
 }
 
 void SetBattleBarStruct(u8 battlerId, u8 healthboxSpriteId, s32 maxVal, s32 oldVal, s32 receivedValue)
@@ -725,6 +778,7 @@ void SetBattleBarStruct(u8 battlerId, u8 healthboxSpriteId, s32 maxVal, s32 oldV
 
 void SetHealthboxSpriteInvisible(u8 healthboxSpriteId)
 {
+    DestroyMegaIndicatorSprite(gSprites[healthboxSpriteId].hMain_Battler);
     gSprites[healthboxSpriteId].invisible = TRUE;
     gSprites[gSprites[healthboxSpriteId].hMain_HealthBarSpriteId].invisible = TRUE;
     gSprites[gSprites[healthboxSpriteId].oam.affineParam].invisible = TRUE;
@@ -745,6 +799,7 @@ static void UpdateSpritePos(u8 spriteId, s16 x, s16 y)
 
 void DestoryHealthboxSprite(u8 healthboxSpriteId)
 {
+    DestroyMegaIndicatorSprite(gSprites[healthboxSpriteId].hMain_Battler);
     DestroySprite(&gSprites[gSprites[healthboxSpriteId].oam.affineParam]);
     DestroySprite(&gSprites[gSprites[healthboxSpriteId].hMain_HealthBarSpriteId]);
     DestroySprite(&gSprites[healthboxSpriteId]);
@@ -771,36 +826,42 @@ void UpdateOamPriorityInAllHealthboxes(u8 priority)
     }
 }
 
-void InitBattlerHealthboxCoords(u8 battler)
+void GetBattlerHealthboxCoords(u8 battler, s16 *x, s16 *y)
 {
-    s16 x = 0, y = 0;
+    *x = 0, *y = 0;
 
     if (!IsDoubleBattle())
     {
         if (GetBattlerSide(battler) != B_SIDE_PLAYER)
-            x = 44, y = 30;
+            *x = 44, *y = 30;
         else
-            x = 158, y = 88;
+            *x = 158, *y = 88;
     }
     else
     {
         switch (GetBattlerPosition(battler))
         {
         case B_POSITION_PLAYER_LEFT:
-            x = 159, y = 76;
+            *x = 159, *y = 76;
             break;
         case B_POSITION_PLAYER_RIGHT:
-            x = 171, y = 101;
+            *x = 171, *y = 101;
             break;
         case B_POSITION_OPPONENT_LEFT:
-            x = 44, y = 19;
+            *x = 44, *y = 19;
             break;
         case B_POSITION_OPPONENT_RIGHT:
-            x = 32, y = 44;
+            *x = 32, *y = 44;
             break;
         }
     }
+}
 
+void InitBattlerHealthboxCoords(u8 battler)
+{
+    s16 x, y;
+
+    GetBattlerHealthboxCoords(battler, &x, &y);
     UpdateSpritePos(gHealthboxSpriteIds[battler], x, y);
 }
 
@@ -811,11 +872,21 @@ static void UpdateLvlInHealthbox(u8 healthboxSpriteId, u8 lvl)
     u8 text[16];
     u32 xPos, var1;
     void *objVram;
+    u8 battler = gSprites[healthboxSpriteId].hMain_Battler;
 
-    text[0] = 0xF9;
-    text[1] = 5;
+    // Don't print Lv char if mon is mega evolved.
+    if (gBattleStruct->mega.alreadyEvolved[GetBattlerPosition(battler)])
+    {
+        xPos = (u32) ConvertIntToDecimalStringN(text, lvl, STR_CONV_MODE_LEFT_ALIGN, 3);
+    }
+    else
+    {
+        text[0] = 0xF9;
+        text[1] = 5;
 
-    xPos = (u32) ConvertIntToDecimalStringN(text + 2, lvl, STR_CONV_MODE_LEFT_ALIGN, 3);
+        xPos = (u32) ConvertIntToDecimalStringN(text + 2, lvl, STR_CONV_MODE_LEFT_ALIGN, 3);
+    }
+
     // Alright, that part was unmatchable. It's basically doing:
     // xPos = 5 * (3 - (u32)(&text[2]));
     xPos--;
@@ -828,7 +899,7 @@ static void UpdateLvlInHealthbox(u8 healthboxSpriteId, u8 lvl)
     windowTileData = AddTextPrinterAndCreateWindowOnHealthbox(text, xPos, 3, 2, &windowId);
     spriteTileNum = gSprites[healthboxSpriteId].oam.tileNum * TILE_SIZE_4BPP;
 
-    if (GetBattlerSide(gSprites[healthboxSpriteId].hMain_Battler) == B_SIDE_PLAYER)
+    if (GetBattlerSide(battler) == B_SIDE_PLAYER)
     {
         objVram = (void*)(OBJ_VRAM0);
         if (!IsDoubleBattle())
@@ -1264,6 +1335,76 @@ void DestroyMegaTriggerSprite(void)
     if (gBattleStruct->mega.triggerSpriteId != 0xFF)
         DestroySprite(&gSprites[gBattleStruct->mega.triggerSpriteId]);
     gBattleStruct->mega.triggerSpriteId = 0xFF;
+}
+
+static const s8 sIndicatorPosSingles[][2] =
+{
+    [B_POSITION_PLAYER_LEFT] = {42, -7},
+    [B_POSITION_OPPONENT_LEFT] = {10, 10},
+};
+
+static const s8 sIndicatorPosDoubles[][2] =
+{
+    [B_POSITION_PLAYER_LEFT] = {53, -8},
+    [B_POSITION_OPPONENT_LEFT] = {10, 10},
+    [B_POSITION_PLAYER_RIGHT] = {10, 10},
+    [B_POSITION_OPPONENT_RIGHT] = {10, 10},
+};
+
+void CreateMegaIndicatorSprite(u32 battlerId, u32 which)
+{
+    u8 spriteId, position;
+    s16 x, y;
+
+    LoadSpritePalette(&sSpritePalette_MegaIndicator);
+    LoadSpriteSheet(&sSpriteSheet_MegaIndicator);
+
+    position = GetBattlerPosition(battlerId);
+    GetBattlerHealthboxCoords(battlerId, &x, &y);
+    if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
+    {
+        x += sIndicatorPosDoubles[position][0];
+        y += sIndicatorPosDoubles[position][1];
+    }
+    else
+    {
+        x += sIndicatorPosSingles[position][0];
+        y += sIndicatorPosSingles[position][1];
+    }
+    spriteId = CreateSpriteAtEnd(&sSpriteTemplate_MegaIndicator, x, y, 0);
+    gBattleStruct->mega.indicatorSpriteIds[battlerId] = spriteId;
+
+    gSprites[spriteId].tBattler = battlerId;
+}
+
+void DestroyMegaIndicatorSprite(u8 battlerId)
+{
+    u32 i;
+
+    if (gBattleStruct->mega.indicatorSpriteIds[battlerId] != 0xFF)
+    {
+        if (gBattleStruct->mega.indicatorSpriteIds[battlerId] != 0) // If called before initialized to 0xFF.
+            DestroySprite(&gSprites[gBattleStruct->mega.indicatorSpriteIds[battlerId]]);
+        gBattleStruct->mega.indicatorSpriteIds[battlerId] = 0xFF;
+    }
+
+    for (i = 0; i < MAX_BATTLERS_COUNT; i++)
+    {
+        if (gBattleStruct->mega.indicatorSpriteIds[i] != 0xFF)
+            break;
+    }
+    // Free Sprite pal/tiles only if no indicator sprite is active for all battlers.
+    if (i == MAX_BATTLERS_COUNT)
+    {
+        FreeSpritePaletteByTag(TAG_MEGA_INDICATOR_PAL);
+        FreeSpriteTilesByTag(TAG_MEGA_INDICATOR_TILE);
+    }
+}
+
+static void SpriteCb_MegaIndicator(struct Sprite *sprite)
+{
+    if (gBattleStruct->mega.indicatorSpriteIds[sprite->tBattler] == 0xFF)
+        DestroySprite(sprite);
 }
 
 #undef tBattler

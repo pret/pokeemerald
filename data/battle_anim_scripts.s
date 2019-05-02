@@ -10734,7 +10734,7 @@ Move_TRANSFORM:
 	monbg ANIM_ATTACKER
 	playsewithpan SE_W100, SOUND_PAN_ATTACKER
 	waitplaysewithpan SE_W107, SOUND_PAN_ATTACKER, 48
-	createvisualtask sub_815B7D0, 2, 0
+	createvisualtask sub_815B7D0, 2, 0, 0
 	waitforvisualfinish
 	clearmonbg ANIM_ATTACKER
 	end
@@ -12772,7 +12772,7 @@ AnimScript_82D7EB2:
 	monbg ANIM_ATTACKER
 	playsewithpan SE_W100, SOUND_PAN_ATTACKER
 	waitplaysewithpan SE_W107, SOUND_PAN_ATTACKER, 48
-	createvisualtask sub_815B7D0, 2, 1
+	createvisualtask sub_815B7D0, 2, 1, 0
 	waitforvisualfinish
 	clearmonbg ANIM_ATTACKER
 	end
@@ -13153,7 +13153,7 @@ General_MegaEvolution:
     createsprite gBattleAnimSpriteTemplate_85972D8, ANIM_ATTACKER, 2, 4, 1, 180, 1
     createvisualtask sub_8159244, 5, 234, 0
     delay 20
-    createvisualtask sub_815B7D0, 2, 0
+    createvisualtask sub_815B7D0, 2, 0, 1
     delay 4
     createvisualtask sub_8117494, 50
     waitforvisualfinish

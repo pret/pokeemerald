@@ -1525,8 +1525,9 @@
 	.4byte \ptr
 	.endm
 	
-	.macro handlemegaevo battler:req
+	.macro handlemegaevo battler:req, case:req
 	various \battler, VARIOUS_HANDLE_MEGA_EVO
+	.byte \case
 	.endm
 	
 	.macro jumpifcantuselastresort battler:req, ptr:req

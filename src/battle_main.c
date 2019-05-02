@@ -2723,11 +2723,11 @@ void sub_8039C00(struct Sprite *sprite)
     }
 }
 
-#define sSinIndex           data[0]
-#define sDelta              data[1]
-#define sAmplitude          data[2]
-#define sBouncerSpriteId    data[3]
-#define sWhich              data[4]
+#define sSinIndex           data[3]
+#define sDelta              data[4]
+#define sAmplitude          data[5]
+#define sBouncerSpriteId    data[6]
+#define sWhich              data[7]
 
 void DoBounceEffect(u8 battler, u8 which, s8 delta, s8 amplitude)
 {
@@ -2766,6 +2766,7 @@ void DoBounceEffect(u8 battler, u8 which, s8 delta, s8 amplitude)
     gSprites[invisibleSpriteId].sAmplitude = amplitude;
     gSprites[invisibleSpriteId].sBouncerSpriteId = bouncerSpriteId;
     gSprites[invisibleSpriteId].sWhich = which;
+    gSprites[invisibleSpriteId].sBattler = battler;
     gSprites[bouncerSpriteId].pos2.x = 0;
     gSprites[bouncerSpriteId].pos2.y = 0;
 }
@@ -2800,15 +2801,15 @@ void EndBounceEffect(u8 battler, u8 which)
 static void SpriteCB_BounceEffect(struct Sprite *sprite)
 {
     u8 bouncerSpriteId = sprite->sBouncerSpriteId;
-    s32 index;
+    s32 index = sprite->sSinIndex;
+    s32 y = Sin(index, sprite->sAmplitude) + sprite->sAmplitude;
 
-    if (sprite->sWhich == BOUNCE_HEALTHBOX)
-        index = sprite->sSinIndex;
-    else
-        index = sprite->sSinIndex;
-
-    gSprites[bouncerSpriteId].pos2.y = Sin(index, sprite->sAmplitude) + sprite->sAmplitude;
+    gSprites[bouncerSpriteId].pos2.y = y;
     sprite->sSinIndex = (sprite->sSinIndex + sprite->sDelta) & 0xFF;
+
+    bouncerSpriteId = gBattleStruct->mega.indicatorSpriteIds[sprite->sBattler];
+    if (sprite->sWhich == BOUNCE_HEALTHBOX && bouncerSpriteId != 0xFF)
+        gSprites[bouncerSpriteId].pos2.y = y;
 }
 
 #undef sSinIndex

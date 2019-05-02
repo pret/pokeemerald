@@ -5726,9 +5726,12 @@ BattleScript_FocusPunchSetUp::
 BattleScript_MegaEvolution::
 	printstring STRINGID_MEGAEVOREACTING
 	waitmessage 0x40
-	handlemegaevo BS_ATTACKER
+	setbyte gIsCriticalHit, 0
+	handlemegaevo BS_ATTACKER, 0
+	handlemegaevo BS_ATTACKER, 1
 	playanimation BS_ATTACKER, B_ANIM_MEGA_EVOLUTION, NULL
 	waitanimation
+	handlemegaevo BS_ATTACKER, 2
 	printstring STRINGID_MEGAEVOEVOLVED
 	waitmessage 0x40
 	end2

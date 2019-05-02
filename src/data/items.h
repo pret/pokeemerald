@@ -177,6 +177,7 @@ const struct Item gItems[] =
         .name = _("POTION"),
         .itemId = ITEM_POTION,
         .price = 300,
+        .holdEffect = HOLD_EFFECT_MEGA_STONE,
         .holdEffectParam = 20,
         .description = sPotionDesc,
         .pocket = POCKET_ITEMS,

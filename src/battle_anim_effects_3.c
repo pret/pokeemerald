@@ -2293,7 +2293,7 @@ void sub_815B7D0(u8 taskId)
         }
         break;
     case 2:
-        HandleSpeciesGfxDataChange(gBattleAnimAttacker, gBattleAnimTarget, gTasks[taskId].data[10]);
+        HandleSpeciesGfxDataChange(gBattleAnimAttacker, gBattleAnimTarget, gTasks[taskId].data[10], gBattleAnimArgs[1]);
         sub_80A6BFC(&animBg, gBattleAnimAttacker);
 
         if (IsContest())
@@ -2380,7 +2380,7 @@ void sub_815BB18(u8 taskId)
 
 void sub_815BB58(u8 taskId)
 {
-    HandleSpeciesGfxDataChange(gBattleAnimAttacker, gBattleAnimTarget, TRUE);
+    HandleSpeciesGfxDataChange(gBattleAnimAttacker, gBattleAnimTarget, TRUE, FALSE);
     DestroyAnimVisualTask(taskId);
 }
 
@@ -4333,7 +4333,7 @@ static void AnimSmellingSaltExclamationStep(struct Sprite *sprite)
 
 // Claps a hand several times.
 // arg 0: which hand
-// arg 1: 
+// arg 1:
 void AnimHelpingHandClap(struct Sprite *sprite)
 {
     if (gBattleAnimArgs[0] == 0)

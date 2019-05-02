@@ -847,7 +847,7 @@ void CopyBattleSpriteInvisibility(u8 battlerId)
     gBattleSpritesDataPtr->battlerData[battlerId].invisible = gSprites[gBattlerSpriteIds[battlerId]].invisible;
 }
 
-void HandleSpeciesGfxDataChange(u8 battlerAtk, u8 battlerDef, bool8 notTransform)
+void HandleSpeciesGfxDataChange(u8 battlerAtk, u8 battlerDef, bool8 notTransform, bool32 megaEvo)
 {
     u16 paletteOffset;
     u32 personalityValue;
@@ -932,10 +932,13 @@ void HandleSpeciesGfxDataChange(u8 battlerAtk, u8 battlerDef, bool8 notTransform
             LoadPalette(gBattleStruct->castformPalette[0] + gBattleMonForms[battlerDef] * 16, paletteOffset, 32);
         }
 
-        BlendPalette(paletteOffset, 16, 6, RGB_WHITE);
-        CpuCopy32(gPlttBufferFaded + paletteOffset, gPlttBufferUnfaded + paletteOffset, 32);
+        if (!megaEvo)
+        {
+            BlendPalette(paletteOffset, 16, 6, RGB_WHITE);
+            CpuCopy32(gPlttBufferFaded + paletteOffset, gPlttBufferUnfaded + paletteOffset, 32);
+        }
 
-        if (!IsContest())
+        if (!IsContest() && !megaEvo)
         {
             gBattleSpritesDataPtr->battlerData[battlerAtk].transformSpecies = targetSpecies;
             gBattleMonForms[battlerAtk] = gBattleMonForms[battlerDef];

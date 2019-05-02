@@ -776,7 +776,7 @@ static const u16 sMovesForbiddenToCopy[] =
 
 
 static const u16 sMoveEffectsForbiddenToInstruct[] =
-{    
+{
     EFFECT_ASSIST,
     //EFFECT_BEAK_BLAST,
     EFFECT_BIDE,
@@ -4010,6 +4010,7 @@ static void atk45_playanimation(void)
 
     if (gBattlescriptCurrInstr[2] == B_ANIM_STATS_CHANGE
         || gBattlescriptCurrInstr[2] == B_ANIM_SNATCH_MOVE
+        || gBattlescriptCurrInstr[2] == B_ANIM_MEGA_EVOLUTION
         || gBattlescriptCurrInstr[2] == B_ANIM_SUBSTITUTE_FADE)
     {
         BtlController_EmitBattleAnimation(0, gBattlescriptCurrInstr[2], *argumentPtr);
@@ -4053,6 +4054,7 @@ static void atk46_playanimation2(void) // animation Id is stored in the first po
 
     if (*animationIdPtr == B_ANIM_STATS_CHANGE
         || *animationIdPtr == B_ANIM_SNATCH_MOVE
+        || *animationIdPtr == B_ANIM_MEGA_EVOLUTION
         || *animationIdPtr == B_ANIM_SUBSTITUTE_FADE)
     {
         BtlController_EmitBattleAnimation(0, *animationIdPtr, *argumentPtr);
@@ -7041,37 +7043,49 @@ static void atk76_various(void)
         else
             mon = &gPlayerParty[gBattlerPartyIndexes[gActiveBattler]];
 
-        gBattleStruct->mega.evolvedSpecies[gActiveBattler] = gBattleMons[gActiveBattler].species;
-        if (GetBattlerPosition(gActiveBattler) == B_POSITION_PLAYER_LEFT
-            || (GetBattlerPosition(gActiveBattler) == B_POSITION_PLAYER_RIGHT && !(gBattleTypeFlags & (BATTLE_TYPE_MULTI | BATTLE_TYPE_INGAME_PARTNER))))
+        // Change species.
+        if (gBattlescriptCurrInstr[3] == 0)
         {
-            gBattleStruct->mega.playerEvolvedSpecies = gBattleStruct->mega.evolvedSpecies[gActiveBattler];
+            gBattleStruct->mega.evolvedSpecies[gActiveBattler] = gBattleMons[gActiveBattler].species;
+            if (GetBattlerPosition(gActiveBattler) == B_POSITION_PLAYER_LEFT
+                || (GetBattlerPosition(gActiveBattler) == B_POSITION_PLAYER_RIGHT && !(gBattleTypeFlags & (BATTLE_TYPE_MULTI | BATTLE_TYPE_INGAME_PARTNER))))
+            {
+                gBattleStruct->mega.playerEvolvedSpecies = gBattleStruct->mega.evolvedSpecies[gActiveBattler];
+            }
+
+            gBattleMons[gActiveBattler].species = GetMegaEvolutionSpecies(gBattleStruct->mega.evolvedSpecies[gActiveBattler], gBattleMons[gActiveBattler].item);
+            PREPARE_SPECIES_BUFFER(gBattleTextBuff1, gBattleMons[gActiveBattler].species);
+
+            BtlController_EmitSetMonData(0, REQUEST_SPECIES_BATTLE, gBitTable[gBattlerPartyIndexes[gActiveBattler]], 2, &gBattleMons[gActiveBattler].species);
+            MarkBattlerForControllerExec(gActiveBattler);
         }
+        // Change stats.
+        else if (gBattlescriptCurrInstr[3] == 1)
+        {
+            CalculateMonStats(mon);
+            gBattleMons[gActiveBattler].level = GetMonData(mon, MON_DATA_LEVEL);
+            gBattleMons[gActiveBattler].hp = GetMonData(mon, MON_DATA_HP);
+            gBattleMons[gActiveBattler].maxHP = GetMonData(mon, MON_DATA_MAX_HP);
+            gBattleMons[gActiveBattler].attack = GetMonData(mon, MON_DATA_ATK);
+            gBattleMons[gActiveBattler].defense = GetMonData(mon, MON_DATA_DEF);
+            gBattleMons[gActiveBattler].speed = GetMonData(mon, MON_DATA_SPEED);
+            gBattleMons[gActiveBattler].spAttack = GetMonData(mon, MON_DATA_SPATK);
+            gBattleMons[gActiveBattler].spDefense = GetMonData(mon, MON_DATA_SPDEF);
+            gBattleMons[gActiveBattler].ability = GetMonAbility(mon);
+            gBattleMons[gActiveBattler].type1 = gBaseStats[gBattleMons[gActiveBattler].species].type1;
+            gBattleMons[gActiveBattler].type2 = gBaseStats[gBattleMons[gActiveBattler].species].type2;
 
-        gBattleMons[gActiveBattler].species = GetMegaEvolutionSpecies(gBattleStruct->mega.evolvedSpecies[gActiveBattler], gBattleMons[gActiveBattler].item);
-        SetMonData(mon, MON_DATA_SPECIES, &gBattleMons[gActiveBattler].species);
-        PREPARE_SPECIES_BUFFER(gBattleTextBuff1, gBattleMons[gActiveBattler].species);
-
-        CalculateMonStats(mon);
-        gBattleMons[gActiveBattler].level = GetMonData(mon, MON_DATA_LEVEL);
-        gBattleMons[gActiveBattler].hp = GetMonData(mon, MON_DATA_HP);
-        gBattleMons[gActiveBattler].maxHP = GetMonData(mon, MON_DATA_MAX_HP);
-        gBattleMons[gActiveBattler].attack = GetMonData(mon, MON_DATA_ATK);
-        gBattleMons[gActiveBattler].defense = GetMonData(mon, MON_DATA_DEF);
-        gBattleMons[gActiveBattler].speed = GetMonData(mon, MON_DATA_SPEED);
-        gBattleMons[gActiveBattler].spAttack = GetMonData(mon, MON_DATA_SPATK);
-        gBattleMons[gActiveBattler].spDefense = GetMonData(mon, MON_DATA_SPDEF);
-        gBattleMons[gActiveBattler].ability = GetMonAbility(mon);
-        gBattleMons[gActiveBattler].type1 = gBaseStats[gBattleMons[gActiveBattler].species].type1;
-        gBattleMons[gActiveBattler].type2 = gBaseStats[gBattleMons[gActiveBattler].species].type2;
-
-        UpdateHealthboxAttribute(gHealthboxSpriteIds[gActiveBattler], mon, HEALTHBOX_ALL);
-        gBattleStruct->mega.alreadyEvolved[GetBattlerPosition(gActiveBattler)] = TRUE;
-        gBattleStruct->mega.evolvedPartyIds[GetBattlerSide(gActiveBattler)] |= gBitTable[gBattlerPartyIndexes[gActiveBattler]];
-
-        BtlController_EmitSetMonData(0, REQUEST_ALL_BATTLE, gBitTable[gBattlerPartyIndexes[gActiveBattler]], sizeof(struct BattlePokemon), &gBattleMons[gActiveBattler]);
-        MarkBattlerForControllerExec(gActiveBattler);
-        break;
+            gBattleStruct->mega.alreadyEvolved[GetBattlerPosition(gActiveBattler)] = TRUE;
+            gBattleStruct->mega.evolvedPartyIds[GetBattlerSide(gActiveBattler)] |= gBitTable[gBattlerPartyIndexes[gActiveBattler]];
+        }
+        // Update healthbox.
+        else
+        {
+            UpdateHealthboxAttribute(gHealthboxSpriteIds[gActiveBattler], mon, HEALTHBOX_ALL);
+            CreateMegaIndicatorSprite(gActiveBattler, 0);
+        }
+        gBattlescriptCurrInstr += 4;
+        return;
     case VARIOUS_TRY_LAST_RESORT:
         if (CanUseLastResort(gActiveBattler))
             gBattlescriptCurrInstr += 7;
@@ -7181,7 +7195,7 @@ static void atk76_various(void)
                 gBattlerTarget = gBattleStruct->lastMoveTarget[gBattlerAttacker];
                 gHitMarker &= ~(HITMARKER_ATTACKSTRING_PRINTED);
                 PREPARE_MON_NICK_WITH_PREFIX_BUFFER(gBattleTextBuff1, gActiveBattler, gBattlerPartyIndexes[gActiveBattler]);
-                gBattlescriptCurrInstr += 7;   
+                gBattlescriptCurrInstr += 7;
             }
         }
         return;
