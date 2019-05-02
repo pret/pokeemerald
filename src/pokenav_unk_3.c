@@ -411,7 +411,7 @@ void sub_81CB050(u32 arg0, u8 *str)
     }
 }
 
-int sub_81CB0C8(int rematchIndex)
+u8 sub_81CB0C8(int rematchIndex)
 {
     int mapGroup = gRematchTable[rematchIndex].mapGroup;
     int mapNum = gRematchTable[rematchIndex].mapNum;

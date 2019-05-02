@@ -4,49 +4,10 @@
 	.section .rodata
 
 // pokenav_unk_2.s
-gUnknown_0861FC78:: @ 861FC78
-	.incbin "graphics/pokenav/bg.gbapal"
-
-gUnknown_0861FC98:: @ 861FC98
-	.incbin "graphics/pokenav/bg.4bpp.lz"
-
-gUnknown_0861FCAC:: @ 861FCAC
-	.incbin "graphics/pokenav/bg.bin.lz"
-
-gUnknown_0861FD4C:: @ 861FD4C
-	.incbin "graphics/pokenav/outline.gbapal"
-
-gUnknown_0861FD6C:: @ 861FD6C
-	.incbin "graphics/pokenav/outline.4bpp.lz"
-
-gUnknown_0861FFF4:: @ 861FFF4
-	.incbin "graphics/pokenav/outline_map.bin.lz"
-
-gUnknown_08620104:: @ 8620104
-	.incbin "graphics/pokenav/blue_light.gbapal"
-	
-gUnknown_08620124:: @ 8620124
-	.incbin "graphics/pokenav/blue_light.4bpp.lz"
-
-gUnknown_08620194:: @ 8620194
-	.byte 0xF5, 0x10, 0, 0, 0x7A, 0x21, 0, 0, 0xFF, 0x31, 0, 0
-
-gUnknown_086201A0:: @ 86201A0
-	.4byte NULL
-	.4byte sub_81C9C6C
-	.4byte sub_81C9CA8
-	.4byte sub_81C9D44
-	.4byte sub_81C9DD8
-	.4byte sub_81C9E58
-	.4byte sub_81C9EC8
-	.4byte sub_81C9EF8
-	.4byte sub_81C9F28
 
 gUnknown_086201C4:: @ 86201C4
-	.4byte gPokenavOptions_Gfx
-	.byte 0, 0x34, 3, 0
-	.4byte gUnknown_08620124
-	.byte 0, 1, 1, 0
+	obj_tiles gPokenavOptions_Gfx, 0x3400, 0x0003
+	obj_tiles gUnknown_08620124,   0x0100, 0x0001
 
 gUnknown_086201D4:: @ 86201D4
 	.4byte gPokenavOptions_Pal + 0x0, 4

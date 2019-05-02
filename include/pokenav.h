@@ -162,7 +162,7 @@ const u8 *sub_81CAFD8(int index, int textType);
 u16 sub_81CB01C(void);
 u16 sub_81CB02C(int arg0);
 void sub_81CB050(u32 arg0, u8 *str);
-int sub_81CB0C8(int rematchIndex);
+u8 sub_81CB0C8(int rematchIndex);
 int sub_81CB0E4(int index);
 bool32 sub_81CAE08(int);
 int sub_81CB128(int index);
