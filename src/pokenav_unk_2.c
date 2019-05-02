@@ -40,16 +40,25 @@ void sub_81C9FEC(void);
 void sub_81CA02C(void);
 void sub_81CA0C8(void);
 void sub_81CA20C(void);
+void sub_81CA278(void);
+void sub_81CA2DC(void);
 bool32 sub_81CA324(void);
 void sub_81CA640(void);
 void sub_81CA6E0(void);
 void sub_81CA714(void);
+void sub_81CA770(void);
 bool32 sub_81CA7C4(void);
 void sub_81CA7D4(void);
 void sub_81CA7F4(void);
+void sub_81CA818(void);
 void sub_81CA850(void);
+void sub_81CA864(void);
+bool32 sub_81CA89C(void);
 void titlescreen_0(void);
 void sub_81CA994(void);
+void sub_81CA9C8(void);
+void sub_81CA9D8(void);
+void sub_81CAA3C(void);
 
 const u16 gUnknown_0861FC78[] = INCBIN_U16("graphics/pokenav/bg.gbapal");
 const u32 gUnknown_0861FC98[] = INCBIN_U32("graphics/pokenav/bg.4bpp.lz");
@@ -286,6 +295,241 @@ u32 sub_81C9A10(int state)
         if (sub_81CA324())
             return 2;
         if (sub_81C8010())
+            return 2;
+        break;
+    }
+    return 4;
+}
+
+u32 sub_81C9C6C(int state)
+{
+    switch (state)
+    {
+    case 0:
+        sub_81CAA3C();
+        sub_81CA278();
+        sub_81CA714();
+        PlaySE(SE_SELECT);
+        return 0;
+    case 1:
+        if (sub_81CA324())
+            return 2;
+        if (sub_81CA7C4())
+            return 2;
+        break;
+    }
+    return 4;
+}
+
+u32 sub_81C9CA8(int state)
+{
+    switch (state)
+    {
+    case 0:
+        sub_81CA9C8();
+        sub_81CA2DC();
+        sub_81C7FC4(0, 0);
+        PlaySE(SE_SELECT);
+        return 0;
+    case 1:
+        if (sub_81CA324())
+            return 2;
+        if (sub_81C8010())
+            return 2;
+        sub_81CA0C8();
+        LoadLeftHeaderGfxForIndex(1);
+        return 0;
+    case 2:
+        sub_81CA20C();
+        sub_81C7FA0(1, FALSE, FALSE);
+        sub_81CA818();
+        sub_81CA714();
+        return 0;
+    case 3:
+        if (sub_81CA324())
+            return 2;
+        if (sub_81C8010())
+            return 2;
+        if (sub_81CA89C())
+            return 2;
+        if (sub_81CA7C4())
+            return 2;
+        sub_81CA9D8();
+        break;
+    }
+    return 4;
+}
+
+u32 sub_81C9D44(int state)
+{
+    switch (state)
+    {
+    case 0:
+        sub_81CA9C8();
+        sub_81CA2DC();
+        sub_81C7FC4(1, 0);
+        return 0;
+    case 1:
+        if (sub_81CA324())
+            return 2;
+        if (sub_81C8010())
+            return 2;
+        sub_81CA0C8();
+        LoadLeftHeaderGfxForIndex(0);
+        return 0;
+    case 2:
+        sub_81CA20C();
+        sub_81C7FA0(0, FALSE, FALSE);
+        sub_81CA864();
+        sub_81CA714();
+        return 0;
+    case 3:
+        if (sub_81CA324())
+            return 2;
+        if (sub_81C8010())
+            return 2;
+        if (sub_81CA89C())
+            return 2;
+        if (sub_81CA7C4())
+            return 2;
+        sub_81CA9D8();
+        break;
+    }
+    return 4;
+}
+
+u32 sub_81C9DD8(int state)
+{
+    switch (state)
+    {
+    case 0:
+        sub_81CA9C8();
+        sub_81CA2DC();
+        PlaySE(SE_SELECT);
+        return 0;
+    case 1:
+        if (sub_81CA324())
+            return 2;
+        LoadLeftHeaderGfxForIndex(7);
+        sub_81CA0C8();
+        return 0;
+    case 2:
+        sub_81CA20C();
+        sub_81C7FA0(7, FALSE, FALSE);
+        sub_81CA714();
+        return 0;
+    case 3:
+        if (sub_81CA324())
+            return 2;
+        if (sub_81C8010())
+            return 2;
+        if (sub_81CA89C())
+            return 2;
+        sub_81CA9D8();
+        break;
+    }
+    return 4;
+}
+
+u32 sub_81C9E58(int state)
+{
+    switch (state)
+    {
+    case 0:
+        sub_81CA9C8();
+        sub_81CA2DC();
+        sub_81C7FC4(7, 0);
+        return 0;
+    case 1:
+        if (sub_81CA324())
+            return 2;
+        if (sub_81C8010())
+            return 2;
+        sub_81CA0C8();
+        return 0;
+    case 2:
+        sub_81CA20C();
+        sub_81CA714();
+        return 0;
+    case 3:
+        if (sub_81CA324())
+            return 2;
+        if (sub_81CA89C())
+            return 2;
+        sub_81CA9D8();
+        break;
+    }
+    return 4;
+}
+
+u32 sub_81C9EC8(int state)
+{
+    switch (state)
+    {
+    case 0:
+        PlaySE(SE_HAZURE);
+        sub_81CA770();
+        return 0;
+    case 1:
+        if (IsDma3ManagerBusyWithBgCopy())
+            return 2;
+        break;
+    }
+    return 4;
+}
+
+u32 sub_81C9EF8(int state)
+{
+    switch (state)
+    {
+    case 0:
+        PlaySE(SE_SELECT);
+        sub_81CA714();
+        return 0;
+    case 1:
+        if (IsDma3ManagerBusyWithBgCopy())
+            return 2;
+        break;
+    }
+    return 4;
+}
+
+u32 sub_81C9F28(int state)
+{
+    switch (state)
+    {
+    case 0:
+        sub_81C7BA4(sub_81C98C4());
+        return 0;
+    case 1:
+        if (IsDma3ManagerBusyWithBgCopy_())
+            return 2;
+        sub_81C7880();
+        sub_81CA9C8();
+        sub_81CA2DC();
+        switch (sub_81C9894())
+        {
+        case 4:
+            sub_81C7FC4(7, FALSE);
+            // fallthrough
+        case 3:
+            sub_81C7FC4(1, FALSE);
+            break;
+        default:
+            sub_81C7FC4(0, FALSE);
+            break;
+        }
+        PlaySE(SE_SELECT);
+        return 0;
+    case 2:
+        if (sub_81CA324())
+            return 2;
+        if (sub_81C8010())
+            return 2;
+        sub_81C7AC0(0);
+        return 0;
+    case 3:
+        if (IsPaletteFadeActive())
             return 2;
         break;
     }
