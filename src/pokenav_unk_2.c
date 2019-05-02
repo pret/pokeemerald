@@ -1,5 +1,6 @@
 #include "global.h"
 #include "alloc.h"
+#include "decompress.h"
 #include "bg.h"
 #include "menu.h"
 #include "window.h"
@@ -20,7 +21,9 @@ struct Pokenav2Struct
     u8 field_00b;
     u8 field_00c;
     u8 field_00d;
-    u8 filler_00e[0x7E];
+    bool32 field_010[6];
+    u8 filler_028[4];
+    struct Sprite * field_02c[6][4];
     u8 field_08c[0x800];
 };
 
@@ -38,12 +41,15 @@ u32 sub_81C9F28(int state);
 void sub_81C9FC4(void);
 void sub_81C9FEC(void);
 void sub_81CA02C(void);
+void sub_81CA094(void);
 void sub_81CA0C8(void);
+void sub_81CA0EC(const u16 *const * a0, s32 a1, s32 a2);
 void sub_81CA20C(void);
 void sub_81CA278(void);
 void sub_81CA2DC(void);
 bool32 sub_81CA324(void);
 void sub_81CA640(void);
+void sub_81CA698(void);
 void sub_81CA6E0(void);
 void sub_81CA714(void);
 void sub_81CA770(void);
@@ -108,6 +114,32 @@ const LoopedTask gUnknown_086201A0[] = {
     sub_81C9EF8,
     sub_81C9F28
 };
+
+const struct CompressedSpriteSheet gUnknown_086201C4[] = {
+    {gPokenavOptions_Gfx, 0x3400, 0x0003},
+    {gUnknown_08620124,   0x0100, 0x0001}
+};
+
+const struct SpritePalette gUnknown_086201D4[] = {
+    {gPokenavOptions_Pal + 0x00, 4},
+    {gPokenavOptions_Pal + 0x10, 5},
+    {gPokenavOptions_Pal + 0x20, 6},
+    {gPokenavOptions_Pal + 0x30, 7},
+    {gPokenavOptions_Pal + 0x40, 8},
+    {gUnknown_08620104, 3},
+    {NULL, 0}
+};
+
+struct UnkStruct_08620240
+{
+    u16 field_0;
+    u16 field_2;
+    const u16 *field_4[6];
+};
+
+extern const struct UnkStruct_08620240 gUnknown_08620240[];
+
+extern const struct SpriteTemplate gUnknown_0862034C;
 
 bool32 sub_81C98D4(void)
 {
@@ -534,4 +566,98 @@ u32 sub_81C9F28(int state)
         break;
     }
     return 4;
+}
+
+void sub_81C9FC4(void)
+{
+    u32 i;
+
+    for (i = 0; i < 2; i++)
+        LoadCompressedSpriteSheet(&gUnknown_086201C4[i]);
+    Pokenav_AllocAndLoadPalettes(gUnknown_086201D4);
+}
+
+void sub_81C9FEC(void)
+{
+    FreeSpriteTilesByTag(3);
+    FreeSpriteTilesByTag(1);
+    FreeSpritePaletteByTag(4);
+    FreeSpritePaletteByTag(5);
+    FreeSpritePaletteByTag(6);
+    FreeSpritePaletteByTag(7);
+    FreeSpritePaletteByTag(8);
+    FreeSpritePaletteByTag(3);
+    sub_81CA094();
+    sub_81CA698();
+}
+
+void sub_81CA02C(void)
+{
+    s32 i, j;
+    struct Pokenav2Struct * unk = GetSubstructPtr(2);
+
+    for (i = 0; i < 6; i++)
+    {
+        for (j = 0; j < 4; j++)
+        {
+            u8 spriteId = CreateSprite(&gUnknown_0862034C, 0x8c, 20 * i + 40, 3);
+            unk->field_02c[i][j] = &gSprites[spriteId];
+            gSprites[spriteId].pos2.x = 32 * j;
+        }
+    }
+}
+
+void sub_81CA094(void)
+{
+    s32 i, j;
+    struct Pokenav2Struct * unk = GetSubstructPtr(2);
+
+    for (i = 0; i < 6; i++)
+    {
+        for (j = 0; j < 4; j++)
+        {
+            FreeSpriteOamMatrix(unk->field_02c[i][j]);
+            DestroySprite(unk->field_02c[i][j]);
+        }
+    }
+}
+
+void sub_81CA0C8(void)
+{
+    s32 r0 = sub_81C9894();
+    sub_81CA0EC(gUnknown_08620240[r0].field_4, gUnknown_08620240[r0].field_0, gUnknown_08620240[r0].field_2);
+}
+
+void sub_81CA0EC(const u16 *const *a0, s32 a1, s32 a2)
+{
+    s32 i, j;
+    struct Pokenav2Struct * unk = GetSubstructPtr(2);
+    s32 sp04 = GetSpriteTileStartByTag(3);
+
+    for (i = 0; i < 6; i++)
+    {
+        if (*a0 != NULL)
+        {
+            for (j = 0; j < 4; j++)
+            {
+                unk->field_02c[i][j]->oam.tileNum = (*a0)[0] + sp04 + 8 * j;
+                unk->field_02c[i][j]->oam.paletteNum = IndexOfSpritePaletteTag((*a0)[1] + 4);
+                unk->field_02c[i][j]->invisible = TRUE;
+                unk->field_02c[i][j]->pos1.y = a1;
+                unk->field_02c[i][j]->pos1.x = 0x8c;
+                unk->field_02c[i][j]->pos2.x = 32 * j;
+            }
+            unk->field_010[i] = TRUE;
+        }
+        else
+        {
+            for (j = 0; j < 4; j++)
+            {
+                unk->field_02c[i][j]->invisible = TRUE;
+            }
+            unk->field_010[i] = FALSE;
+        }
+        a0++;
+        a1 += a2;
+    }
 }

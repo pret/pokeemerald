@@ -5,19 +5,6 @@
 
 // pokenav_unk_2.s
 
-gUnknown_086201C4:: @ 86201C4
-	obj_tiles gPokenavOptions_Gfx, 0x3400, 0x0003
-	obj_tiles gUnknown_08620124,   0x0100, 0x0001
-
-gUnknown_086201D4:: @ 86201D4
-	.4byte gPokenavOptions_Pal + 0x0, 4
-	.4byte gPokenavOptions_Pal + 0x20, 5
-	.4byte gPokenavOptions_Pal + 0x40, 6
-	.4byte gPokenavOptions_Pal + 0x60, 7
-	.4byte gPokenavOptions_Pal + 0x80, 8
-	.4byte gUnknown_08620104, 3
-	.4byte 0, 0
-	
 gUnknown_0862020C:: @ 862020C
 	.2byte 0, 0
 
@@ -59,8 +46,6 @@ gUnknown_0862023C:: @ 862023C
 
 gUnknown_08620240:: @ 8620240
 	.2byte 0x2A, 0x14
-
-gUnknown_08620244:: @ 8620244
 	.4byte gUnknown_0862020C
 	.4byte gUnknown_08620210
 	.4byte gUnknown_0862021C

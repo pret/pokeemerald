@@ -4945,5 +4945,7 @@ extern const u16 gUnknown_08DE3398[];
 extern const u32 gPokenavMessageBox_Gfx[];
 extern const u32 gPokenavMessageBox_Tilemap[];
 extern const u16 gPokenavMessageBox_Pal[];
+extern const u32 gPokenavOptions_Gfx[];
+extern const u16 gPokenavOptions_Pal[];
 
 #endif //GUARD_GRAPHICS_H
