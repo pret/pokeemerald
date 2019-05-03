@@ -1190,6 +1190,39 @@ const union AffineAnimCmd gSlackOffSquishAffineAnimCmds[] =
     AFFINEANIMCMD_END,
 };
 
+const struct SpriteTemplate gMegaStoneSpriteTemplate =
+{
+    .tileTag = ANIM_TAG_MEGA_STONE,
+    .paletteTag = ANIM_TAG_MEGA_STONE,
+    .oam = &gUnknown_08524AFC,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gUnknown_08596894,
+    .callback = sub_80A77C8,
+};
+
+const struct SpriteTemplate gMegaParticlesSpriteTemplate =
+{
+    .tileTag = ANIM_TAG_MEGA_PARTICLES,
+    .paletteTag = ANIM_TAG_MEGA_PARTICLES,
+    .oam = &gUnknown_08524A8C,
+    .anims = gUnknown_085921C8,
+    .images = NULL,
+    .affineAnims = gUnknown_085921DC,
+    .callback = AnimPowerAbsorptionOrb,
+};
+
+const struct SpriteTemplate gMegaSymbolSpriteTemplate =
+{
+    .tileTag = ANIM_TAG_MEGA_SYMBOL,
+    .paletteTag = ANIM_TAG_MEGA_SYMBOL,
+    .oam = &gUnknown_08524A34,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_8112B78,
+};
+
 void sub_815A0D4(struct Sprite *sprite)
 {
     sprite->pos1.x += gBattleAnimArgs[0];

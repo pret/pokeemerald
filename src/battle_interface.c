@@ -1339,16 +1339,16 @@ void DestroyMegaTriggerSprite(void)
 
 static const s8 sIndicatorPosSingles[][2] =
 {
-    [B_POSITION_PLAYER_LEFT] = {42, -7},
-    [B_POSITION_OPPONENT_LEFT] = {10, 10},
+    [B_POSITION_PLAYER_LEFT] = {53, -8},
+    [B_POSITION_OPPONENT_LEFT] = {53, -8},
 };
 
 static const s8 sIndicatorPosDoubles[][2] =
 {
     [B_POSITION_PLAYER_LEFT] = {53, -8},
-    [B_POSITION_OPPONENT_LEFT] = {10, 10},
-    [B_POSITION_PLAYER_RIGHT] = {10, 10},
-    [B_POSITION_OPPONENT_RIGHT] = {10, 10},
+    [B_POSITION_OPPONENT_LEFT] = {53, -8},
+    [B_POSITION_PLAYER_RIGHT] = {53, -8},
+    [B_POSITION_OPPONENT_RIGHT] = {53, -8},
 };
 
 void CreateMegaIndicatorSprite(u32 battlerId, u32 which)

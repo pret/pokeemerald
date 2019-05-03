@@ -13137,31 +13137,48 @@ General_WishHeal:
 	end
 
 General_MegaEvolution:
-    loadspritegfx ANIM_TAG_ORBS
-    loadspritegfx ANIM_TAG_CIRCLE_OF_LIGHT
-    loadspritegfx ANIM_TAG_METEOR
-    loadspritegfx ANIM_TAG_FLAT_ROCK
-    monbg ANIM_ATK_PARTNER
-    setalpha 12, 8
-    createvisualtask sub_8115A04, 2, 2, 1, 4, 0, 11, RGB(31, 31, 11)
-    playsewithpan SE_W025, -64
-    call SolarBeamSetUp1
-    waitforvisualfinish
-    createsprite gUnknown_08595FEC, ANIM_TARGET, 2, 0
-    playsewithpan SE_W025, -64
-    delay 15
-    createsprite gBattleAnimSpriteTemplate_85972D8, ANIM_ATTACKER, 2, 4, 1, 180, 1
-    createvisualtask sub_8159244, 5, 234, 0
-    delay 20
-    createvisualtask sub_815B7D0, 2, 0, 1
-    delay 4
-    createvisualtask sub_8117494, 50
-    waitforvisualfinish
-    createvisualtask sub_8117494, 2
-    playsewithpan SE_W043, -64
-    blendoff
-    clearmonbg ANIM_ATTACKER
+    loadspritegfx ANIM_TAG_MEGA_STONE
+    loadspritegfx ANIM_TAG_MEGA_PARTICLES
+    loadspritegfx ANIM_TAG_MEGA_SYMBOL
+    monbg ANIM_ATTACKER
+	setalpha 12, 8
+	loopsewithpan SE_W025, SOUND_PAN_ATTACKER, 13, 3
+	createvisualtask sub_8115A04, 2, 2, 0, 6, 0, 11, RGB(31, 31, 11)
+	call MegaEvolutionParticles
+	call MegaEvolutionParticles
+	call MegaEvolutionParticles
+	waitforvisualfinish
+	playsewithpan SE_W076, SOUND_PAN_ATTACKER
+	createsprite gMegaStoneSpriteTemplate, ANIM_ATTACKER, 41, 0, 0, 0, 0
+	delay 20
+	createvisualtask sub_8116664, 5, 5, 2, 0, 16, RGB_WHITEALPHA
+	waitforvisualfinish
+	createvisualtask sub_815B7D0, 2, 0, 1
+	createvisualtask sub_8116664, 5, 5, 2, 16, 0, RGB_WHITEALPHA
+	createvisualtask sub_81152DC, 5, 1, 5, 14
+	waitforvisualfinish
+	createsprite gMegaSymbolSpriteTemplate ANIM_ATTACKER, 2
+	waitforvisualfinish
+	clearmonbg ANIM_ATK_PARTNER
+	blendoff
     end
+	
+MegaEvolutionParticles:
+	createsprite gMegaParticlesSpriteTemplate, ANIM_ATTACKER, 2, 40, -10, 13
+	delay 3
+	createsprite gMegaParticlesSpriteTemplate, ANIM_ATTACKER, 2, -35, -10, 13
+	delay 3
+	createsprite gMegaParticlesSpriteTemplate, ANIM_ATTACKER, 2, 15, -40, 13
+	delay 3
+	createsprite gMegaParticlesSpriteTemplate, ANIM_ATTACKER, 2, -10, -32, 13
+	delay 3
+	createsprite gMegaParticlesSpriteTemplate, ANIM_ATTACKER, 2, 25, -20, 13
+	delay 3
+	createsprite gMegaParticlesSpriteTemplate, ANIM_ATTACKER, 2, -40, -20, 13
+	delay 3
+	createsprite gMegaParticlesSpriteTemplate, ANIM_ATTACKER, 2, 5, -40, 13
+	delay 3
+	return
 	
 General_TerrainMisty:
 	end

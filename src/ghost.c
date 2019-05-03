@@ -35,7 +35,6 @@ static void sub_81129F0(struct Sprite *);
 static void sub_8112A4C(struct Sprite *);
 static void sub_8112ACC(struct Sprite *);
 static void sub_8112B44(struct Sprite *);
-static void sub_8112B78(struct Sprite *);
 static void sub_8112C4C(struct Sprite *);
 static void sub_8112D10(u8 taskId);
 static void sub_8112E9C(struct Sprite *);
@@ -1153,7 +1152,7 @@ static void sub_8112B44(struct Sprite *sprite)
     DestroyAnimSprite(sprite);
 }
 
-static void sub_8112B78(struct Sprite *sprite)
+void sub_8112B78(struct Sprite *sprite)
 {
     u16 coeffB;
     u16 coeffA;

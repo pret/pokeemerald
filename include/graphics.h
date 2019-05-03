@@ -4949,5 +4949,11 @@ extern const u32 gBattleAnimSpritePal_PurpleJab[];
 extern const u32 gBattleAnimSpritePal_ToxicSpikes[];
 extern const u32 gBattleAnimSpriteGfx_EnergyBall[];
 extern const u32 gBattleAnimSpritePal_EnergyBall[];
+extern const u32 gBattleAnimSpriteGfx_MegaStone[];
+extern const u32 gBattleAnimSpritePal_MegaStone[];
+extern const u32 gBattleAnimSpriteGfx_MegaParticles[];
+extern const u32 gBattleAnimSpritePal_MegaParticles[];
+extern const u32 gBattleAnimSpriteGfx_MegaSymbol[];
+extern const u32 gBattleAnimSpritePal_MegaSymbol[];
 
 #endif //GUARD_GRAPHICS_H

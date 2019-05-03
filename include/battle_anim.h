@@ -224,7 +224,10 @@ void sub_8117854(u8 taskId, int unused, u16 arg2, u8 battler1, u8 arg4, u8 arg5,
 // battle_anim_effects_1.c
 void sub_810310C(u8 battler, struct Sprite* sprite);
 void AnimMoveTwisterParticle(struct Sprite* sprite);
+void AnimPowerAbsorptionOrb(struct Sprite* sprite);
 extern const union AnimCmd *const gUnknown_08592388[];
+extern const union AnimCmd *const gUnknown_085921C8[];
+extern const union AffineAnimCmd *const gUnknown_085921DC[];
 void sub_8100898(struct Sprite *);
 
 // water.c
@@ -237,6 +240,12 @@ void sub_810E044(struct Sprite *sprite);
 
 //poison.c
 extern const union AffineAnimCmd *const gUnknown_085961A0[];
+
+// ghost.c
+void sub_8112B78(struct Sprite *sprite);
+
+// psychic.c
+extern const union AffineAnimCmd *const gUnknown_08596894[];
 
 // smokescreen.c
 u8 sub_807521C(s16 x, s16 y, u8 a3);
