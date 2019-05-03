@@ -1,8 +1,8 @@
 ShoalCave_LowTideEntranceRoom_MapScripts:: @ 8236DBA
-	map_script MAP_SCRIPT_ON_TRANSITION, ShoalCave_LowTideEntranceRoom_MapScript1_236DC0
+	map_script MAP_SCRIPT_ON_TRANSITION, ShoalCave_LowTideEntranceRoom_OnTransition
 	.byte 0
 
-ShoalCave_LowTideEntranceRoom_MapScript1_236DC0: @ 8236DC0
+ShoalCave_LowTideEntranceRoom_OnTransition: @ 8236DC0
 	special UpdateShoalTideFlag
 	goto_if_set FLAG_SYS_SHOAL_TIDE, ShoalCave_LowTideEntranceRoom_EventScript_236DD1
 	goto ShoalCave_LowTideEntranceRoom_EventScript_236DD5

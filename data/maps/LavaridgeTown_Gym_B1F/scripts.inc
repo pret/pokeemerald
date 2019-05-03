@@ -1,8 +1,8 @@
 LavaridgeTown_Gym_B1F_MapScripts:: @ 81FF87E
-	map_script MAP_SCRIPT_ON_TRANSITION, LavaridgeTown_Gym_B1F_MapScript1_1FF884
+	map_script MAP_SCRIPT_ON_TRANSITION, LavaridgeTown_Gym_B1F_OnTransition
 	.byte 0
 
-LavaridgeTown_Gym_B1F_MapScript1_1FF884: @ 81FF884
+LavaridgeTown_Gym_B1F_OnTransition: @ 81FF884
 	call LavaridgeTown_Gym_B1F_EventScript_1FF88F
 	call LavaridgeTown_Gym_B1F_EventScript_1FF8DC
 	end

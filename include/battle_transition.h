@@ -13,7 +13,7 @@ extern const struct SpritePalette gFieldEffectObjectPaletteInfo10;
 
 enum // TRANSITION_MUGSHOT
 {
-    MUGSHOT_SYDNEY,
+    MUGSHOT_SIDNEY,
     MUGSHOT_PHOEBE,
     MUGSHOT_GLACIA,
     MUGSHOT_DRAKE,
@@ -36,7 +36,7 @@ enum // TRANSITION_MUGSHOT
 #define B_TRANSITION_WHITEFADE              9
 #define B_TRANSITION_GRID_SQUARES           10
 #define B_TRANSITION_SHARDS                 11
-#define B_TRANSITION_SYDNEY                 12
+#define B_TRANSITION_SIDNEY                 12
 #define B_TRANSITION_PHOEBE                 13
 #define B_TRANSITION_GLACIA                 14
 #define B_TRANSITION_DRAKE                  15

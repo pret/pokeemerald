@@ -1101,7 +1101,7 @@ static void MatchCall_GetMessage_Type4(match_call_t matchCall, u8 *dest)
     sub_8197080(dest);
 }
 
-void sub_81D1920(const match_call_text_data_t *sub0, u8 *dest)
+static void sub_81D1920(const match_call_text_data_t *sub0, u8 *dest)
 {
     u32 i;
     for (i = 0; sub0[i].text != NULL; i++)
@@ -1119,8 +1119,6 @@ void sub_81D1920(const match_call_text_data_t *sub0, u8 *dest)
     StringExpandPlaceholders(dest, sub0[i].text);
 }
 
-#ifdef NONMATCHING
-// There's some weird upmerge going on that I cannot replicate at this time.
 static void sub_81D199C(const match_call_text_data_t *sub0, u16 idx, u8 *dest)
 {
     u32 i;
@@ -1128,7 +1126,7 @@ static void sub_81D199C(const match_call_text_data_t *sub0, u16 idx, u8 *dest)
     {
         if (sub0[i].flag == 0xfffe)
             break;
-        if (sub0[i].flag == 0xffff && !FlagGet(sub0[i].flag))
+        if (sub0[i].flag != 0xffff && !FlagGet(sub0[i].flag))
             break;
     }
     if (sub0[i].flag != 0xfffe)
@@ -1141,127 +1139,22 @@ static void sub_81D199C(const match_call_text_data_t *sub0, u16 idx, u8 *dest)
     }
     else
     {
-        if (!FlagGet(FLAG_SYS_GAME_CLEAR))
-            ;
-        else if (gSaveBlock1Ptr->trainerRematches[idx])
-            i += 2;
-        else if (CountBattledRematchTeams(idx) >= 2)
-            i += 3;
-        else
-            i++;
+        if (FlagGet(FLAG_SYS_GAME_CLEAR))
+        {
+            do
+            {
+                if (gSaveBlock1Ptr->trainerRematches[idx])
+                    i += 2;
+                else if (CountBattledRematchTeams(idx) >= 2)
+                    i += 3;
+                else
+                    i++;
+            } while (0);
+        }
+
         StringExpandPlaceholders(dest, sub0[i].text);
     }
 }
-#else
-static NAKED void sub_81D199C(const match_call_text_data_t *sub0, u16 idx, u8 *dest)
-{
-    asm_unified("\tpush {r4-r7,lr}\n"
-                    "\tmov r7, r10\n"
-                    "\tmov r6, r9\n"
-                    "\tmov r5, r8\n"
-                    "\tpush {r5-r7}\n"
-                    "\tadds r6, r0, 0\n"
-                    "\tmov r10, r2\n"
-                    "\tlsls r1, 16\n"
-                    "\tlsrs r7, r1, 16\n"
-                    "\tmovs r5, 0\n"
-                    "\tldr r0, [r6]\n"
-                    "\tcmp r0, 0\n"
-                    "\tbeq _081D19E6\n"
-                    "\tldrh r0, [r6, 0x4]\n"
-                    "\tldr r1, =0x0000fffe\n"
-                    "\tcmp r0, r1\n"
-                    "\tbeq _081D1A24\n"
-                    "\tldr r0, =0x0000ffff\n"
-                    "\tmov r9, r0\n"
-                    "\tmov r8, r1\n"
-                    "\tadds r4, r6, 0\n"
-                    "_081D19C6:\n"
-                    "\tldrh r0, [r4, 0x4]\n"
-                    "\tcmp r0, r9\n"
-                    "\tbeq _081D19D6\n"
-                    "\tbl FlagGet\n"
-                    "\tlsls r0, 24\n"
-                    "\tcmp r0, 0\n"
-                    "\tbeq _081D19E6\n"
-                    "_081D19D6:\n"
-                    "\tadds r4, 0x8\n"
-                    "\tadds r5, 0x1\n"
-                    "\tldr r0, [r4]\n"
-                    "\tcmp r0, 0\n"
-                    "\tbeq _081D19E6\n"
-                    "\tldrh r0, [r4, 0x4]\n"
-                    "\tcmp r0, r8\n"
-                    "\tbne _081D19C6\n"
-                    "_081D19E6:\n"
-                    "\tlsls r0, r5, 3\n"
-                    "\tadds r0, r6\n"
-                    "\tldrh r1, [r0, 0x4]\n"
-                    "\tldr r0, =0x0000fffe\n"
-                    "\tcmp r1, r0\n"
-                    "\tbeq _081D1A24\n"
-                    "\tcmp r5, 0\n"
-                    "\tbeq _081D19F8\n"
-                    "\tsubs r5, 0x1\n"
-                    "_081D19F8:\n"
-                    "\tlsls r0, r5, 3\n"
-                    "\tadds r4, r0, r6\n"
-                    "\tldrh r1, [r4, 0x6]\n"
-                    "\tldr r0, =0x0000ffff\n"
-                    "\tcmp r1, r0\n"
-                    "\tbeq _081D1A0A\n"
-                    "\tadds r0, r1, 0\n"
-                    "\tbl FlagSet\n"
-                    "_081D1A0A:\n"
-                    "\tldr r1, [r4]\n"
-                    "\tmov r0, r10\n"
-                    "\tbl StringExpandPlaceholders\n"
-                    "\tb _081D1A5C\n"
-                    "\t.pool\n"
-                    "_081D1A1C:\n"
-                    "\tadds r5, 0x2\n"
-                    "\tb _081D1A50\n"
-                    "_081D1A20:\n"
-                    "\tadds r5, 0x3\n"
-                    "\tb _081D1A50\n"
-                    "_081D1A24:\n"
-                    "\tldr r0, =0x00000864\n"
-                    "\tbl FlagGet\n"
-                    "\tlsls r0, 24\n"
-                    "\tcmp r0, 0\n"
-                    "\tbeq _081D1A50\n"
-                    "\tldr r0, =gSaveBlock1Ptr\n"
-                    "\tldr r0, [r0]\n"
-                    "\tldr r1, =0x000009ca\n"
-                    "\tadds r0, r1\n"
-                    "\tadds r0, r7\n"
-                    "\tldrb r0, [r0]\n"
-                    "\tcmp r0, 0\n"
-                    "\tbne _081D1A1C\n"
-                    "\tadds r0, r7, 0\n"
-                    "\tbl CountBattledRematchTeams\n"
-                    "\tlsls r0, 16\n"
-                    "\tlsrs r0, 16\n"
-                    "\tcmp r0, 0x1\n"
-                    "\tbhi _081D1A20\n"
-                    "\tadds r5, 0x1\n"
-                    "_081D1A50:\n"
-                    "\tlsls r0, r5, 3\n"
-                    "\tadds r0, r6\n"
-                    "\tldr r1, [r0]\n"
-                    "\tmov r0, r10\n"
-                    "\tbl StringExpandPlaceholders\n"
-                    "_081D1A5C:\n"
-                    "\tpop {r3-r5}\n"
-                    "\tmov r8, r3\n"
-                    "\tmov r9, r4\n"
-                    "\tmov r10, r5\n"
-                    "\tpop {r4-r7}\n"
-                    "\tpop {r0}\n"
-                    "\tbx r0\n"
-                    "\t.pool");
-}
-#endif
 
 void sub_81D1A78(u32 idx, const u8 **desc, const u8 **name)
 {
@@ -1415,7 +1308,7 @@ NAKED const u8 *sub_81D1B40(u32 idx, u32 offset)
 }
 #endif
 
-s32 sub_81D1BD0(u32 idx)
+int sub_81D1BD0(u32 idx)
 {
     u32 i;
 
@@ -1429,9 +1322,9 @@ s32 sub_81D1BD0(u32 idx)
 
 bool32 sub_81D1BF8(u32 idx)
 {
-    s32 i;
+    int i;
 
-    for (i = 0; i < (s32)ARRAY_COUNT(sMatchCallHeaders); i++)
+    for (i = 0; i < (int)ARRAY_COUNT(sMatchCallHeaders); i++)
     {
         u32 r0 = MatchCall_GetRematchTableIdx(i);
         if (r0 != REMATCH_TABLE_ENTRIES && r0 == idx)
@@ -1442,7 +1335,7 @@ bool32 sub_81D1BF8(u32 idx)
 
 void SetMatchCallRegisteredFlag(void)
 {
-    s32 r0 = GetRematchIdxByTrainerIdx(gSpecialVar_0x8004);
+    int r0 = GetRematchIdxByTrainerIdx(gSpecialVar_0x8004);
     if (r0 >= 0)
         FlagSet(FLAG_MATCH_CALL_REGISTERED + r0);
 }

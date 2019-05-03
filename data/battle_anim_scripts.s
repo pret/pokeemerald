@@ -10331,15 +10331,15 @@ General_SubstituteAppear:
 
 General_PokeblockThrow:
 	createvisualtask sub_817345C, 2, 0
-	createvisualtask sub_81732B0, 2
+	createvisualtask AnimTask_LoadPokeblockGfx, 2
 	delay 0
 	waitplaysewithpan SE_W026, SOUND_PAN_ATTACKER, 22
-	createsprite gBattleAnimSpriteTemplate_85E5338, ANIM_TARGET, 3, -18, 12, 0, 32
+	createsprite gPokeblockSpriteTemplate, ANIM_TARGET, 3, -18, 12, 0, 32
 	delay 50
 	loopsewithpan SE_W039, SOUND_PAN_TARGET, 19, 2
 	createvisualtask AnimTask_SwayMon, 5, 1, 8, 1536, 2, ANIM_TARGET
 	waitforvisualfinish
-	createvisualtask sub_81732E4, 2
+	createvisualtask AnimTask_FreePokeblockGfx, 2
 	end
 
 General_ItemKnockoff:
@@ -10516,7 +10516,7 @@ General_Hail:
 	goto Move_HAIL
 
 General_LeechSeedDrain:
-	createvisualtask sub_817351C, 5
+	createvisualtask AnimTask_GetBattlersFromArg, 5
 	delay 0
 	goto Move_ABSORB
 
@@ -10535,7 +10535,7 @@ General_MonHit:
 General_ItemSteal:
 	loadspritegfx ANIM_TAG_ITEM_BAG
 	createvisualtask sub_8117F30, 2
-	createvisualtask sub_8172ED0, 2
+	createvisualtask AnimTask_TargetToEffectBattler, 2
 	delay 1
 	createsprite gItemStealSpriteTemplate, ANIM_ATTACKER, 2, 0, -5, 10, 2, -1
 	end
@@ -10664,8 +10664,8 @@ General_WishHeal:
 	end
 
 AnimScript_82D85A3:
-	createvisualtask sub_8172E9C, 2
-	jumpreteq 1, AnimScript_82D85B4
+	createvisualtask AnimTask_IsAttackerBehindSubstitute, 2
+	jumprettrue AnimScript_82D85B4
 AnimScript_82D85B2:
 	waitforvisualfinish
 	return
@@ -10675,8 +10675,8 @@ AnimScript_82D85B4:
 	goto AnimScript_82D85B2
 
 AnimScript_82D85C3:
-	createvisualtask sub_8172E9C, 2
-	jumpreteq 1, AnimScript_82D85D4
+	createvisualtask AnimTask_IsAttackerBehindSubstitute, 2
+	jumprettrue AnimScript_82D85D4
 AnimScript_82D85D2:
 	waitforvisualfinish
 	return

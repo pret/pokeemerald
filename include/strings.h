@@ -2708,4 +2708,11 @@ extern const u8 gText_Symbols[];
 extern const u8 gText_Register2[];
 extern const u8 gText_Exit2[];
 
+// Pokenav Match Call
+extern const u8 gText_CallCantBeMadeHere[];
+extern const u8 gText_NumberRegistered[];
+extern const u8 gText_NumberOfBattles[];
+extern const u8 gText_Unknown[];
+extern const u8 gText_TrainerCloseBy[];
+
 #endif // GUARD_STRINGS_H

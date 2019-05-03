@@ -2,7 +2,7 @@ SootopolisCity_PokemonCenter_2F_MapScripts:: @ 822676D
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, SootopolisCity_PokemonCenter_2F_MapScript2_276C3B
 	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, SootopolisCity_PokemonCenter_2F_MapScript2_276B6C
 	map_script MAP_SCRIPT_ON_LOAD, SootopolisCity_PokemonCenter_2F_MapScript1_276BBE
-	map_script MAP_SCRIPT_ON_TRANSITION, SootopolisCity_PokemonCenter_2F_MapScript1_276ACF
+	map_script MAP_SCRIPT_ON_TRANSITION, PokemonCenter_2F_OnTransition
 	.byte 0
 
 SootopolisCity_PokemonCenter_2F_EventScript_226782:: @ 8226782

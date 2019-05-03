@@ -1,6 +1,6 @@
 Route110_TrickHousePuzzle7_MapScripts:: @ 826E091
 	map_script MAP_SCRIPT_ON_RESUME, Route110_TrickHousePuzzle7_MapScript1_26E0A6
-	map_script MAP_SCRIPT_ON_TRANSITION, Route110_TrickHousePuzzle7_MapScript1_26E198
+	map_script MAP_SCRIPT_ON_TRANSITION, Route110_TrickHousePuzzle7_OnTransition
 	map_script MAP_SCRIPT_ON_LOAD, Route110_TrickHousePuzzle7_MapScript1_26E1B4
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, Route110_TrickHousePuzzle7_MapScript2_26E1C0
 	.byte 0
@@ -67,7 +67,7 @@ Route110_TrickHousePuzzle7_EventScript_26E185:: @ 826E185
 	setmetatile 7, 5, 574, 1
 	return
 
-Route110_TrickHousePuzzle7_MapScript1_26E198: @ 826E198
+Route110_TrickHousePuzzle7_OnTransition: @ 826E198
 	compare VAR_TRICK_HOUSE_PUZZLE_7_STATE_2, 1
 	goto_if_eq Route110_TrickHousePuzzle7_EventScript_26E1B3
 	clearflag FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_1

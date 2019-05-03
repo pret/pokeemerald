@@ -1,8 +1,8 @@
 MauvilleCity_MapScripts:: @ 81DF385
-	map_script MAP_SCRIPT_ON_TRANSITION, MauvilleCity_MapScript1_1DF38B
+	map_script MAP_SCRIPT_ON_TRANSITION, MauvilleCity_OnTransition
 	.byte 0
 
-MauvilleCity_MapScript1_1DF38B: @ 81DF38B
+MauvilleCity_OnTransition: @ 81DF38B
 	setflag FLAG_VISITED_MAUVILLE_CITY
 	clearflag FLAG_FORCE_MIRAGE_TOWER_VISIBLE
 	clearflag FLAG_HIDE_SLATEPORT_MUSEUM_POPULATION

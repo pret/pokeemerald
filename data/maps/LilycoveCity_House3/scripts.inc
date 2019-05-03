@@ -1,8 +1,8 @@
 LilycoveCity_House3_MapScripts:: @ 821EE3C
-	map_script MAP_SCRIPT_ON_TRANSITION, LilycoveCity_House3_MapScript1_21EE42
+	map_script MAP_SCRIPT_ON_TRANSITION, LilycoveCity_House3_OnTransition
 	.byte 0
 
-LilycoveCity_House3_MapScript1_21EE42: @ 821EE42
+LilycoveCity_House3_OnTransition: @ 821EE42
 	random 4
 	copyvar VAR_TEMP_1, VAR_RESULT
 	end
