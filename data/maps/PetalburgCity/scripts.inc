@@ -1,9 +1,9 @@
 PetalburgCity_MapScripts::
-	map_script MAP_SCRIPT_ON_TRANSITION, PetalburgCity_MapScript1_1DC2D7
+	map_script MAP_SCRIPT_ON_TRANSITION, PetalburgCity_OnTransition
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, PetalburgCity_MapScript2_1DC31C
 	.byte 0
 
-PetalburgCity_MapScript1_1DC2D7: @ 81DC2D7
+PetalburgCity_OnTransition: @ 81DC2D7
 	setflag FLAG_VISITED_PETALBURG_CITY
 	compare VAR_PETALBURG_STATE, 0
 	call_if_eq PetalburgCity_EventScript_1DC307

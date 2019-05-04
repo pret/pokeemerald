@@ -1,8 +1,8 @@
 Route110_TrickHousePuzzle5_MapScripts:: @ 826CAF0
-	map_script MAP_SCRIPT_ON_TRANSITION, Route110_TrickHousePuzzle5_MapScript1_26CAF6
+	map_script MAP_SCRIPT_ON_TRANSITION, Route110_TrickHousePuzzle5_OnTransition
 	.byte 0
 
-Route110_TrickHousePuzzle5_MapScript1_26CAF6: @ 826CAF6
+Route110_TrickHousePuzzle5_OnTransition: @ 826CAF6
 	setvar VAR_TEMP_1, 0
 	setvar VAR_TEMP_2, 0
 	setvar VAR_TEMP_3, 0

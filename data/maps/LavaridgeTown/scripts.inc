@@ -1,9 +1,9 @@
 LavaridgeTown_MapScripts:: @ 81EA4D3
-	map_script MAP_SCRIPT_ON_TRANSITION, LavaridgeTown_MapScript1_1EA4DE
+	map_script MAP_SCRIPT_ON_TRANSITION, LavaridgeTown_OnTransition
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, LavaridgeTown_MapScript2_1EA547
 	.byte 0
 
-LavaridgeTown_MapScript1_1EA4DE: @ 81EA4DE
+LavaridgeTown_OnTransition: @ 81EA4DE
 	setflag FLAG_VISITED_LAVARIDGE_TOWN
 	call_if_set FLAG_FLANNERY_GIVES_BADGE_INFO, LavaridgeTown_EventScript_1EA514
 	call_if_set FLAG_DEFEATED_EVIL_TEAM_MT_CHIMNEY, LavaridgeTown_EventScript_1EA53F

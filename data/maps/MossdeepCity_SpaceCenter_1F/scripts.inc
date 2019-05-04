@@ -1,9 +1,9 @@
 MossdeepCity_SpaceCenter_1F_MapScripts:: @ 8222F41
 	map_script MAP_SCRIPT_ON_LOAD, MossdeepCity_SpaceCenter_1F_MapScript1_222FC2
-	map_script MAP_SCRIPT_ON_TRANSITION, MossdeepCity_SpaceCenter_1F_MapScript1_222F4C
+	map_script MAP_SCRIPT_ON_TRANSITION, MossdeepCity_SpaceCenter_1F_OnTransition
 	.byte 0
 
-MossdeepCity_SpaceCenter_1F_MapScript1_222F4C: @ 8222F4C
+MossdeepCity_SpaceCenter_1F_OnTransition: @ 8222F4C
 	compare VAR_MOSSDEEP_STATE, 2
 	goto_if_eq MossdeepCity_SpaceCenter_1F_EventScript_222F58
 	end

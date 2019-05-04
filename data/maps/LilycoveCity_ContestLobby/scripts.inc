@@ -1,9 +1,9 @@
 LilycoveCity_ContestLobby_MapScripts:: @ 821A211
-	map_script MAP_SCRIPT_ON_TRANSITION, LilycoveCity_ContestLobby_MapScript1_21A21C
+	map_script MAP_SCRIPT_ON_TRANSITION, LilycoveCity_ContestLobby_OnTransition
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, LilycoveCity_ContestLobby_MapScript2_21A243
 	.byte 0
 
-LilycoveCity_ContestLobby_MapScript1_21A21C: @ 821A21C
+LilycoveCity_ContestLobby_OnTransition: @ 821A21C
 	call LilycoveCity_ContestLobby_EventScript_28CB2B
 	call LilycoveCity_ContestLobby_EventScript_21A227
 	end

@@ -1,5 +1,5 @@
 RusturfTunnel_MapScripts:: @ 822CE27
-	map_script MAP_SCRIPT_ON_TRANSITION, RusturfTunnel_MapScript1_22CE44
+	map_script MAP_SCRIPT_ON_TRANSITION, RusturfTunnel_OnTransition
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, RusturfTunnel_MapScript2_22CE32
 	.byte 0
 
@@ -8,7 +8,7 @@ RusturfTunnel_MapScript2_22CE32: @ 822CE32
 	map_script_2 VAR_RUSTURF_TUNNEL_STATE, 5, RusturfTunnel_EventScript_22CEAE
 	.2byte 0
 
-RusturfTunnel_MapScript1_22CE44: @ 822CE44
+RusturfTunnel_OnTransition: @ 822CE44
 	compare VAR_RUSTURF_TUNNEL_STATE, 2
 	call_if_eq RusturfTunnel_EventScript_22CE50
 	end

@@ -1,6 +1,6 @@
 Route111_MapScripts:: @ 81F0CA7
 	map_script MAP_SCRIPT_ON_LOAD, Route111_MapScript1_1F0CBC
-	map_script MAP_SCRIPT_ON_TRANSITION, Route111_MapScript1_1F0D87
+	map_script MAP_SCRIPT_ON_TRANSITION, Route111_OnTransition
 	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, Route111_MapScript2_1F0E46
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, Route111_MapScript2_1F0E56
 	.byte 0
@@ -37,7 +37,7 @@ Route111_EventScript_1F0CE4:: @ 81F0CE4
 	setmetatile 20, 58, 997, 0
 	return
 
-Route111_MapScript1_1F0D87: @ 81F0D87
+Route111_OnTransition: @ 81F0D87
 	setvar VAR_TRAINER_HILL_IS_ACTIVE, 0
 	special SetMirageTowerVisibility
 	call_if_unset FLAG_MIRAGE_TOWER_VISIBLE, Route111_EventScript_1F0E3C

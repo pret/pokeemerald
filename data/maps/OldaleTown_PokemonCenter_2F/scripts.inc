@@ -2,7 +2,7 @@ OldaleTown_PokemonCenter_2F_MapScripts:: @ 81FC218
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, OldaleTown_PokemonCenter_2F_MapScript2_276C3B
 	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, OldaleTown_PokemonCenter_2F_MapScript2_276B6C
 	map_script MAP_SCRIPT_ON_LOAD, OldaleTown_PokemonCenter_2F_MapScript1_276BBE
-	map_script MAP_SCRIPT_ON_TRANSITION, OldaleTown_PokemonCenter_2F_MapScript1_276ACF
+	map_script MAP_SCRIPT_ON_TRANSITION, PokemonCenter_2F_OnTransition
 	.byte 0
 
 OldaleTown_PokemonCenter_2F_EventScript_1FC22D:: @ 81FC22D

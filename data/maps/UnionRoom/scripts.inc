@@ -1,6 +1,6 @@
 UnionRoom_MapScripts:: @ 823D1A6
 	map_script MAP_SCRIPT_ON_RESUME, UnionRoom_MapScript1_23D1B1
-	map_script MAP_SCRIPT_ON_TRANSITION, UnionRoom_MapScript1_23D1E5
+	map_script MAP_SCRIPT_ON_TRANSITION, UnionRoom_OnTransition
 	.byte 0
 
 UnionRoom_MapScript1_23D1B1: @ 823D1B1
@@ -23,7 +23,7 @@ UnionRoom_MapScript1_23D1B1: @ 823D1B1
 	special UnionRoomSpecial
 	end
 
-UnionRoom_MapScript1_23D1E5: @ 823D1E5
+UnionRoom_OnTransition: @ 823D1E5
 	end
 
 UnionRoom_EventScript_23D1E6:: @ 823D1E6

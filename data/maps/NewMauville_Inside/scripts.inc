@@ -1,6 +1,6 @@
 NewMauville_Inside_MapScripts:: @ 82373D7
 	map_script MAP_SCRIPT_ON_RESUME, NewMauville_Inside_MapScript1_2373E7
-	map_script MAP_SCRIPT_ON_TRANSITION, NewMauville_Inside_MapScript1_23741B
+	map_script MAP_SCRIPT_ON_TRANSITION, NewMauville_Inside_OnTransition
 	map_script MAP_SCRIPT_ON_LOAD, NewMauville_Inside_MapScript1_23744D
 	.byte 0
 
@@ -19,7 +19,7 @@ NewMauville_Inside_EventScript_237407:: @ 8237407
 	removeobject VAR_LAST_TALKED
 	return
 
-NewMauville_Inside_MapScript1_23741B: @ 823741B
+NewMauville_Inside_OnTransition: @ 823741B
 	setvar VAR_TEMP_1, 0
 	setvar VAR_TEMP_2, 0
 	call_if_unset FLAG_DEFEATED_VOLTORB_1_NEW_MAUVILLE, NewMauville_Inside_EventScript_237441

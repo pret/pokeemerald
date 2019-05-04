@@ -1,9 +1,9 @@
 FallarborTown_PokemonCenter_1F_MapScripts:: @ 8200BCD
-	map_script MAP_SCRIPT_ON_TRANSITION, FallarborTown_PokemonCenter_1F_MapScript1_200BD8
+	map_script MAP_SCRIPT_ON_TRANSITION, FallarborTown_PokemonCenter_1F_OnTransition
 	map_script MAP_SCRIPT_ON_RESUME, FallarborTown_PokemonCenter_1F_MapScript1_277C30
 	.byte 0
 
-FallarborTown_PokemonCenter_1F_MapScript1_200BD8: @ 8200BD8
+FallarborTown_PokemonCenter_1F_OnTransition: @ 8200BD8
 	setrespawn HEAL_LOCATION_FALLARBOR_TOWN
 	call FallarborTown_PokemonCenter_1F_EventScript_2718DE
 	end

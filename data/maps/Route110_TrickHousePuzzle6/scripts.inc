@@ -1,9 +1,9 @@
 Route110_TrickHousePuzzle6_MapScripts:: @ 826DDA7
-	map_script MAP_SCRIPT_ON_TRANSITION, Route110_TrickHousePuzzle6_MapScript1_26DDB2
+	map_script MAP_SCRIPT_ON_TRANSITION, Route110_TrickHousePuzzle6_OnTransition
 	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, Route110_TrickHousePuzzle6_MapScript2_26DDB6
 	.byte 0
 
-Route110_TrickHousePuzzle6_MapScript1_26DDB2: @ 826DDB2
+Route110_TrickHousePuzzle6_OnTransition: @ 826DDB2
 	special RotatingGate_InitPuzzle
 	end
 

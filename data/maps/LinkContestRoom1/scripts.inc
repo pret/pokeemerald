@@ -1,7 +1,7 @@
 LinkContestRoom1_MapScripts:: @ 823B781
 	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, LinkContestRoom1_MapScript2_23B81F
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, LinkContestRoom1_MapScript2_23B815
-	map_script MAP_SCRIPT_ON_TRANSITION, LinkContestRoom1_MapScript1_23B79F
+	map_script MAP_SCRIPT_ON_TRANSITION, LinkContestRoom1_OnTransition
 	map_script MAP_SCRIPT_ON_RESUME, LinkContestRoom1_MapScript1_23B803
 	map_script MAP_SCRIPT_ON_RETURN_TO_FIELD, LinkContestRoom1_MapScript1_23B79B
 	.byte 0
@@ -10,7 +10,7 @@ LinkContestRoom1_MapScript1_23B79B: @ 823B79B
 	special sub_80F8B94
 	end
 
-LinkContestRoom1_MapScript1_23B79F: @ 823B79F
+LinkContestRoom1_OnTransition: @ 823B79F
 	call LinkContestRoom1_EventScript_23B7AF
 	setvar VAR_TEMP_0, 1
 	call LinkContestRoom1_EventScript_23B842

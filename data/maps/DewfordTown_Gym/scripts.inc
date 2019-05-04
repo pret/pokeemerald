@@ -1,8 +1,8 @@
 DewfordTown_Gym_MapScripts:: @ 81FC63C
-	map_script MAP_SCRIPT_ON_TRANSITION, DewfordTown_Gym_MapScript1_1FC642
+	map_script MAP_SCRIPT_ON_TRANSITION, DewfordTown_Gym_OnTransition
 	.byte 0
 
-DewfordTown_Gym_MapScript1_1FC642: @ 81FC642
+DewfordTown_Gym_OnTransition: @ 81FC642
 	call DewfordTown_Gym_EventScript_1FC648
 	end
 

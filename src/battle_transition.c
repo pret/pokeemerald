@@ -76,7 +76,7 @@ static void Phase2Task_Slice(u8 taskId);
 static void Phase2Task_WhiteFade(u8 taskId);
 static void Phase2Task_GridSquares(u8 taskId);
 static void Phase2Task_Shards(u8 taskId);
-static void Phase2Task_Sydney(u8 taskId);
+static void Phase2Task_Sidney(u8 taskId);
 static void Phase2Task_Phoebe(u8 taskId);
 static void Phase2Task_Glacia(u8 taskId);
 static void Phase2Task_Drake(u8 taskId);
@@ -331,7 +331,7 @@ static const TaskFunc sPhase2_Tasks[B_TRANSITION_COUNT] =
     Phase2Task_WhiteFade,                   // 9
     Phase2Task_GridSquares,                 // 10
     Phase2Task_Shards,                      // 11
-    Phase2Task_Sydney,                      // 12
+    Phase2Task_Sidney,                      // 12
     Phase2Task_Phoebe,                      // 13
     Phase2Task_Glacia,                      // 14
     Phase2Task_Drake,                       // 15
@@ -824,7 +824,7 @@ const struct SpritePalette gFieldEffectObjectPaletteInfo10 =
     gFieldEffectObjectPalette10, 0x1009
 };
 
-static const u16 sMugshotPal_Sydney[] = INCBIN_U16("graphics/battle_transitions/sidney_bg.gbapal");
+static const u16 sMugshotPal_Sidney[] = INCBIN_U16("graphics/battle_transitions/sidney_bg.gbapal");
 static const u16 sMugshotPal_Phoebe[] = INCBIN_U16("graphics/battle_transitions/phoebe_bg.gbapal");
 static const u16 sMugshotPal_Glacia[] = INCBIN_U16("graphics/battle_transitions/glacia_bg.gbapal");
 static const u16 sMugshotPal_Drake[] = INCBIN_U16("graphics/battle_transitions/drake_bg.gbapal");
@@ -834,7 +834,7 @@ static const u16 sMugshotPal_May[] = INCBIN_U16("graphics/battle_transitions/may
 
 static const u16 *const sOpponentMugshotsPals[MUGSHOTS_COUNT] =
 {
-    sMugshotPal_Sydney,
+    sMugshotPal_Sidney,
     sMugshotPal_Phoebe,
     sMugshotPal_Glacia,
     sMugshotPal_Drake,
@@ -2073,9 +2073,9 @@ static void VBlankCB_Phase2_Wave(void)
     DmaSet(0, gScanlineEffectRegBuffers[1], &REG_WIN0H, 0xA2400001);
 }
 
-static void Phase2Task_Sydney(u8 taskId)
+static void Phase2Task_Sidney(u8 taskId)
 {
-    gTasks[taskId].tMugshotId = MUGSHOT_SYDNEY;
+    gTasks[taskId].tMugshotId = MUGSHOT_SIDNEY;
     Phase2Task_MugShotTransition(taskId);
 }
 

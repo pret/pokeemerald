@@ -1,9 +1,9 @@
 SlateportCity_PokemonCenter_1F_MapScripts:: @ 820DABF
-	map_script MAP_SCRIPT_ON_TRANSITION, SlateportCity_PokemonCenter_1F_MapScript1_20DACA
+	map_script MAP_SCRIPT_ON_TRANSITION, SlateportCity_PokemonCenter_1F_OnTransition
 	map_script MAP_SCRIPT_ON_RESUME, SlateportCity_PokemonCenter_1F_MapScript1_277C30
 	.byte 0
 
-SlateportCity_PokemonCenter_1F_MapScript1_20DACA: @ 820DACA
+SlateportCity_PokemonCenter_1F_OnTransition: @ 820DACA
 	setrespawn HEAL_LOCATION_SLATEPORT_CITY
 	call SlateportCity_PokemonCenter_1F_EventScript_2718DE
 	end

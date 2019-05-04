@@ -1,9 +1,9 @@
 ShoalCave_LowTideInnerRoom_MapScripts:: @ 8236EF5
 	map_script MAP_SCRIPT_ON_LOAD, ShoalCave_LowTideInnerRoom_MapScript1_236F16
-	map_script MAP_SCRIPT_ON_TRANSITION, ShoalCave_LowTideInnerRoom_MapScript1_236F00
+	map_script MAP_SCRIPT_ON_TRANSITION, ShoalCave_LowTideInnerRoom_OnTransition
 	.byte 0
 
-ShoalCave_LowTideInnerRoom_MapScript1_236F00: @ 8236F00
+ShoalCave_LowTideInnerRoom_OnTransition: @ 8236F00
 	goto_if_set FLAG_SYS_SHOAL_TIDE, ShoalCave_LowTideInnerRoom_EventScript_236F0E
 	goto ShoalCave_LowTideInnerRoom_EventScript_236F12
 

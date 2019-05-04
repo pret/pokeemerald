@@ -1,9 +1,9 @@
 SootopolisCity_MysteryEventsHouse_B1F_MapScripts:: @ 8227E4F
-	map_script MAP_SCRIPT_ON_TRANSITION, SootopolisCity_MysteryEventsHouse_B1F_MapScript1_227E5A
+	map_script MAP_SCRIPT_ON_TRANSITION, SootopolisCity_MysteryEventsHouse_B1F_OnTransition
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, SootopolisCity_MysteryEventsHouse_B1F_MapScript2_227E5E
 	.byte 0
 
-SootopolisCity_MysteryEventsHouse_B1F_MapScript1_227E5A: @ 8227E5A
+SootopolisCity_MysteryEventsHouse_B1F_OnTransition: @ 8227E5A
 	special SetEReaderTrainerGfxId
 	end
 

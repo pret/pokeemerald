@@ -1,8 +1,8 @@
 MossdeepCity_MapScripts:: @ 81E4A96
-	map_script MAP_SCRIPT_ON_TRANSITION, MossdeepCity_MapScript1_1E4A9C
+	map_script MAP_SCRIPT_ON_TRANSITION, MossdeepCity_OnTransition
 	.byte 0
 
-MossdeepCity_MapScript1_1E4A9C: @ 81E4A9C
+MossdeepCity_OnTransition: @ 81E4A9C
 	clearflag FLAG_MOSSDEEP_GYM_SWITCH_1
 	clearflag FLAG_MOSSDEEP_GYM_SWITCH_2
 	clearflag FLAG_MOSSDEEP_GYM_SWITCH_3
