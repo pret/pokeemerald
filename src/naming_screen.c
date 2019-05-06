@@ -2258,7 +2258,7 @@ static void sub_80E4DE4(u8 window, u8 a1)
 
     for (i = 0; i < 4; i++)
     {
-        AddTextPrinterParameterized3(window, 1, 0, i * 16 + 1, sUnkColors[a1], 0, gUnknown_0858C198[a1][i]);
+        AddTextPrinterParameterized3(window, 7, 0, i * 16 + 1, sUnkColors[a1], 0, gUnknown_0858C198[a1][i]);
     }
 
     PutWindowTilemap(window);
