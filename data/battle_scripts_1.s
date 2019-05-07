@@ -6722,6 +6722,27 @@ BattleScript_BerryCureSlpRet::
 	updatestatusicon BS_SCRIPTING
 	removeitem BS_SCRIPTING
 	return
+	
+BattleScript_GemActivates::
+	playanimation BS_ATTACKER, B_ANIM_ITEM_EFFECT, NULL
+	waitanimation
+	printstring STRINGID_GEMACTIVATES
+	waitmessage 0x40
+	removeitem BS_ATTACKER
+	return
+	
+BattleScript_BerryReduceDmg::
+	playanimation BS_TARGET, B_ANIM_ITEM_EFFECT, NULL
+	waitanimation
+	printstring STRINGID_TARGETATEITEM
+	waitmessage 0x40
+	removeitem BS_TARGET
+	return
+	
+BattleScript_PrintBerryReduceString::
+	waitmessage 0x40
+	printstring STRINGID_BERRYDMGREDUCES
+	return
 
 BattleScript_BerryCureConfusionEnd2::
 	call BattleScript_BerryCureConfusionRet
