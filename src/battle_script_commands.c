@@ -1406,8 +1406,8 @@ s32 CalcCritChanceStage(u8 battlerAtk, u8 battlerDef, u32 move, bool32 recordAbi
                     + (abilityAtk == ABILITY_SUPER_LUCK);
     }
 
-    if (critChance > 4)
-        critChance = 4;
+    if (critChance >= ARRAY_COUNT(sCriticalHitChance))
+        critChance = ARRAY_COUNT(sCriticalHitChance) - 1;
 
     return critChance;
 }
