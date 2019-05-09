@@ -3721,7 +3721,7 @@ static bool32 HasEnoughHpToEatBerry(u8 battlerId, u32 hpFraction)
 
 u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
 {
-    int i = 0;
+    int i = 0, moveType;
     u8 effect = ITEM_NO_EFFECT;
     u8 changedPP = 0;
     u8 battlerHoldEffect, atkHoldEffect;
@@ -3761,6 +3761,12 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
                 gActiveBattler = gBattlerAttacker = battlerId;
                 BattleScriptExecute(BattleScript_WhiteHerbEnd2);
             }
+            break;
+        case HOLD_EFFECT_AIR_BALLOON:
+            effect = ITEM_EFFECT_OTHER;
+            gBattleScripting.battler = battlerId;
+            BattleScriptExecute(BattleScript_AirBaloonMsgIn);
+            RecordItemEffectBattle(battlerId, HOLD_EFFECT_AIR_BALLOON);
             break;
         }
         break;
@@ -3833,14 +3839,28 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
                     BattleScriptExecute(BattleScript_WhiteHerbEnd2);
                 }
                 break;
+            case HOLD_EFFECT_BLACK_SLUDGE:
+                if (IS_BATTLER_OF_TYPE(battlerId, TYPE_POISON))
+                    goto LEFTOVERS;
+            case HOLD_EFFECT_STICKY_BARB:
+                if (!moveTurn)
+                {
+                    gBattleMoveDamage = gBattleMons[battlerId].maxHP / 8;
+                    if (gBattleMoveDamage == 0)
+                        gBattleMoveDamage = 1;
+                    BattleScriptExecute(BattleScript_ItemHurtEnd2);
+                    effect = ITEM_HP_CHANGE;
+                    RecordItemEffectBattle(battlerId, battlerHoldEffect);
+                    PREPARE_ITEM_BUFFER(gBattleTextBuff1, gLastUsedItem);
+                }
+                break;
             case HOLD_EFFECT_LEFTOVERS:
+            LEFTOVERS:
                 if (gBattleMons[battlerId].hp < gBattleMons[battlerId].maxHP && !moveTurn)
                 {
                     gBattleMoveDamage = gBattleMons[battlerId].maxHP / 16;
                     if (gBattleMoveDamage == 0)
                         gBattleMoveDamage = 1;
-                    if (gBattleMons[battlerId].hp + gBattleMoveDamage > gBattleMons[battlerId].maxHP)
-                        gBattleMoveDamage = gBattleMons[battlerId].maxHP - gBattleMons[battlerId].hp;
                     gBattleMoveDamage *= -1;
                     BattleScriptExecute(BattleScript_ItemHealHP_End2);
                     effect = ITEM_HP_CHANGE;
@@ -4303,7 +4323,8 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
                 }
                 break;
             }
-            if (effect)
+
+            if (effect == ITEM_STATUS_CHANGE)
             {
                 gBattleScripting.battler = battlerId;
                 gPotentialItemEffectBattler = battlerId;
@@ -4350,6 +4371,92 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
                     BattleScriptPushCursor();
                     gBattlescriptCurrInstr = BattleScript_ItemHealHP_Ret;
                     effect++;
+                }
+                break;
+            }
+        }
+        break;
+    case ITEMEFFECT_TARGET:
+        if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT))
+        {
+            GET_MOVE_TYPE(gCurrentMove, moveType);
+            switch (battlerHoldEffect)
+            {
+            case HOLD_EFFECT_AIR_BALLOON:
+                if (TARGET_TURN_DAMAGED)
+                {
+                    effect = ITEM_EFFECT_OTHER;
+                    BattleScriptPushCursor();
+                    gBattlescriptCurrInstr = BattleScript_AirBaloonMsgPop;
+                }
+                break;
+            case HOLD_EFFECT_ROCKY_HELMET:
+                if (TARGET_TURN_DAMAGED
+                    && IsMoveMakingContact(gCurrentMove, gBattlerAttacker)
+                    && GetBattlerAbility(gBattlerAttacker) != ABILITY_MAGIC_GUARD)
+                {
+                    gBattleMoveDamage = gBattleMons[gBattlerAttacker].hp / 6;
+                    if (gBattleMoveDamage == 0)
+                        gBattleMoveDamage = 1;
+                    effect = ITEM_HP_CHANGE;
+                    BattleScriptPushCursor();
+                    gBattlescriptCurrInstr = BattleScript_RockyHelmetActivates;
+                    PREPARE_ITEM_BUFFER(gBattleTextBuff1, gLastUsedItem);
+                    RecordItemEffectBattle(battlerId, HOLD_EFFECT_ROCKY_HELMET);
+                }
+                break;
+            case HOLD_EFFECT_WEAKNESS_POLICY:
+                if (IsBattlerAlive(battlerId)
+                    && TARGET_TURN_DAMAGED
+                    && gMoveResultFlags & MOVE_RESULT_SUPER_EFFECTIVE)
+                {
+                    effect = ITEM_STATS_CHANGE;
+                    BattleScriptPushCursor();
+                    gBattlescriptCurrInstr = BattleScript_WeaknessPolicy;
+                }
+                break;
+            case HOLD_EFFECT_SNOWBALL:
+                if (IsBattlerAlive(battlerId)
+                    && TARGET_TURN_DAMAGED
+                    && moveType == TYPE_ICE)
+                {
+                    effect = ITEM_STATS_CHANGE;
+                    BattleScriptPushCursor();
+                    gBattlescriptCurrInstr = BattleScript_TargetItemStatRaise;
+                    gBattleScripting.statChanger = SET_STATCHANGER(STAT_ATK, 1, FALSE);
+                }
+                break;
+            case HOLD_EFFECT_LUMINOUS_MOSS:
+                if (IsBattlerAlive(battlerId)
+                    && TARGET_TURN_DAMAGED
+                    && moveType == TYPE_WATER)
+                {
+                    effect = ITEM_STATS_CHANGE;
+                    BattleScriptPushCursor();
+                    gBattlescriptCurrInstr = BattleScript_TargetItemStatRaise;
+                    gBattleScripting.statChanger = SET_STATCHANGER(STAT_SPDEF, 1, FALSE);
+                }
+                break;
+            case HOLD_EFFECT_CELL_BATTERY:
+                if (IsBattlerAlive(battlerId)
+                    && TARGET_TURN_DAMAGED
+                    && moveType == TYPE_ELECTRIC)
+                {
+                    effect = ITEM_STATS_CHANGE;
+                    BattleScriptPushCursor();
+                    gBattlescriptCurrInstr = BattleScript_TargetItemStatRaise;
+                    gBattleScripting.statChanger = SET_STATCHANGER(STAT_ATK, 1, FALSE);
+                }
+                break;
+            case HOLD_EFFECT_ABSORB_BULB:
+                if (IsBattlerAlive(battlerId)
+                    && TARGET_TURN_DAMAGED
+                    && moveType == TYPE_WATER)
+                {
+                    effect = ITEM_STATS_CHANGE;
+                    BattleScriptPushCursor();
+                    gBattlescriptCurrInstr = BattleScript_TargetItemStatRaise;
+                    gBattleScripting.statChanger = SET_STATCHANGER(STAT_SPATK, 1, FALSE);
                 }
                 break;
             }
@@ -4608,7 +4715,7 @@ u32 GetBattlerHoldEffect(u8 battlerId, bool32 checkNegating)
 
     gPotentialItemEffectBattler = battlerId;
 
-    if (USE_BATTLE_DEBUG && gBattleStruct->debugHoldEffects[battlerId] != 0)
+    if (USE_BATTLE_DEBUG && gBattleStruct->debugHoldEffects[battlerId] != 0 && gBattleMons[battlerId].item)
         return gBattleStruct->debugHoldEffects[battlerId];
     else if (gBattleMons[battlerId].item == ITEM_ENIGMA_BERRY)
         return gEnigmaBerries[battlerId].holdEffect;
@@ -4650,6 +4757,8 @@ bool32 IsBattlerGrounded(u8 battlerId)
     else if (gStatuses3[battlerId] & STATUS3_TELEKINESIS)
         return FALSE;
     else if (gStatuses3[battlerId] & STATUS3_MAGNET_RISE)
+        return FALSE;
+    else if (GetBattlerHoldEffect(battlerId, TRUE) == HOLD_EFFECT_AIR_BALLOON)
         return FALSE;
     else if (GetBattlerAbility(battlerId) == ABILITY_LEVITATE)
         return FALSE;

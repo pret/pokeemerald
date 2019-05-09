@@ -25,6 +25,7 @@
 #define ITEMEFFECT_ON_SWITCH_IN                 0x0
 #define ITEMEFFECT_MOVE_END                     0x3
 #define ITEMEFFECT_KINGSROCK_SHELLBELL          0x4
+#define ITEMEFFECT_TARGET                       0x5
 
 #define WEATHER_HAS_EFFECT ((!IsAbilityOnField(ABILITY_CLOUD_NINE) && !IsAbilityOnField(ABILITY_AIR_LOCK)))
 

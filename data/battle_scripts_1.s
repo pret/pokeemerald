@@ -5206,6 +5206,46 @@ BattleScript_RoarSuccessRet:
 	returntoball BS_TARGET
 	waitstate
 	return
+	
+BattleScript_WeaknessPolicy::
+	copybyte sBATTLER, gBattlerTarget
+	jumpifstat BS_TARGET, CMP_LESS_THAN, STAT_ATK, 0xC, BattleScript_WeaknessPolicyAtk
+	jumpifstat BS_TARGET, CMP_EQUAL, STAT_SPATK, 0xC, BattleScript_WeaknessPolicyEnd
+BattleScript_WeaknessPolicyAtk:
+	playanimation BS_TARGET, B_ANIM_ITEM_EFFECT, NULL
+	waitanimation
+	setbyte sSTAT_ANIM_PLAYED, FALSE
+	playstatchangeanimation BS_TARGET, BIT_ATK | BIT_SPATK, ATK48_STAT_BY_TWO
+	setstatchanger STAT_ATK, 2, FALSE
+	statbuffchange STAT_CHANGE_BS_PTR, BattleScript_WeaknessPolicySpAtk
+	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, 0x2, BattleScript_WeaknessPolicySpAtk
+	printstring STRINGID_USINGXTHEYOFZN
+	waitmessage 0x40
+BattleScript_WeaknessPolicySpAtk:
+	setstatchanger STAT_SPATK, 2, FALSE
+	statbuffchange STAT_CHANGE_BS_PTR, BattleScript_WeaknessPolicyRemoveItem
+	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, 0x2, BattleScript_WeaknessPolicyRemoveItem
+	printstring STRINGID_USINGXTHEYOFZN
+	waitmessage 0x40
+BattleScript_WeaknessPolicyRemoveItem:
+	removeitem BS_TARGET
+BattleScript_WeaknessPolicyEnd:
+	return
+	
+BattleScript_TargetItemStatRaise::
+	copybyte sBATTLER, gBattlerTarget
+	statbuffchange 0, BattleScript_TargetItemStatRaiseRemoveItemRet
+	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, 0x2, BattleScript_TargetItemStatRaiseRemoveItemRet
+	playanimation BS_TARGET, B_ANIM_ITEM_EFFECT, NULL
+	waitanimation
+	setgraphicalstatchangevalues
+	playanimation BS_TARGET, B_ANIM_STATS_CHANGE, sB_ANIM_ARG1
+	waitanimation
+	printstring STRINGID_USINGXTHEYOFZN
+	waitmessage 0x40
+	removeitem BS_TARGET
+BattleScript_TargetItemStatRaiseRemoveItemRet:
+	return
 
 BattleScript_MistProtected::
 	pause 0x20
@@ -5317,7 +5357,7 @@ BattleScript_ToxicSpikesPoisoned::
 	
 BattleScript_StickyWebOnSwitchIn::
 	savetarget
-	copybyte gBattlerTarget sBATTLER
+	copybyte gBattlerTarget, sBATTLER
 	printstring STRINGID_STICKYWEBSWITCHIN
 	waitmessage 0x40
 	statbuffchange STAT_CHANGE_BS_PTR, BattleScript_StickyWebOnSwitchInEnd
@@ -6549,15 +6589,25 @@ BattleScript_ImposterActivates::
 	printstring STRINGID_IMPOSTERTRANSFORM
 	waitmessage 0x40
 	end3
-
-BattleScript_RoughSkinActivates::
+	
+BattleScript_HurtAttacker:
 	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE | HITMARKER_x100000
-	call BattleScript_AbilityPopUp
 	healthbarupdate BS_ATTACKER
 	datahpupdate BS_ATTACKER
 	printstring STRINGID_PKMNHURTSWITH
 	waitmessage 0x40
 	tryfaintmon BS_ATTACKER, FALSE, NULL
+	return
+
+BattleScript_RoughSkinActivates::
+	call BattleScript_AbilityPopUp
+	call BattleScript_HurtAttacker
+	return
+	
+BattleScript_RockyHelmetActivates::
+	playanimation BS_TARGET, B_ANIM_ITEM_EFFECT, NULL
+	waitanimation
+	call BattleScript_HurtAttacker
 	return
 
 BattleScript_SpikyShieldEffect::
@@ -6797,6 +6847,28 @@ BattleScript_BerryPPHealEnd2::
 
 BattleScript_ItemHealHP_End2::
 	call BattleScript_ItemHealHP_Ret
+	end2
+	
+BattleScript_AirBaloonMsgIn::
+	printstring STRINGID_AIRBALLOONFLOAT
+	waitmessage 0x40
+	end2
+	
+BattleScript_AirBaloonMsgPop::
+	printstring STRINGID_AIRBALLOONPOP
+	waitmessage 0x40
+	removeitem BS_TARGET
+	return
+	
+BattleScript_ItemHurtEnd2::
+	playanimation BS_ATTACKER, B_ANIM_MON_HIT, NULL
+	waitanimation
+	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE | HITMARKER_x100000
+	healthbarupdate BS_ATTACKER
+	datahpupdate BS_ATTACKER
+	printstring STRINGID_HURTBYITEM
+	waitmessage 0x40
+	tryfaintmon BS_ATTACKER, FALSE, NULL
 	end2
 
 BattleScript_ItemHealHP_Ret::

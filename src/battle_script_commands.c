@@ -4402,6 +4402,11 @@ static void atk49_moveend(void)
             }
             gBattleScripting.atk49_state++;
             break;
+        case ATK49_ITEM_EFFECTS_TARGET:
+            if (ItemBattleEffects(ITEMEFFECT_TARGET, gBattlerTarget, FALSE))
+                effect = TRUE;
+            gBattleScripting.atk49_state++;
+            break;
         case ATK49_ITEM_EFFECTS_ALL: // item effects for all battlers
             if (ItemBattleEffects(ITEMEFFECT_MOVE_END, 0, FALSE))
                 effect = TRUE;
@@ -5969,18 +5974,24 @@ static void atk69_setgravity(void)
 static void atk6A_removeitem(void)
 {
     gActiveBattler = GetBattlerForBattleScript(gBattlescriptCurrInstr[1]);
-    gBattleStruct->usedHeldItems[gActiveBattler] = gBattleMons[gActiveBattler].item;
+
+    // Popped Air Balloon cannot be restored by no means.
+    if (GetBattlerHoldEffect(gActiveBattler, TRUE) != HOLD_EFFECT_AIR_BALLOON)
+        gBattleStruct->usedHeldItems[gActiveBattler] = gBattleMons[gActiveBattler].item;
+
     gBattleMons[gActiveBattler].item = 0;
 
     BtlController_EmitSetMonData(0, REQUEST_HELDITEM_BATTLE, 0, 2, &gBattleMons[gActiveBattler].item);
     MarkBattlerForControllerExec(gActiveBattler);
+
+    ClearBattlerItemEffectHistory(gActiveBattler);
 
     gBattlescriptCurrInstr += 2;
 }
 
 static void atk6B_atknameinbuff1(void)
 {
-    PREPARE_MON_NICK_BUFFER(gBattleTextBuff1, gBattlerAttacker, gBattlerPartyIndexes[gBattlerAttacker])
+    PREPARE_MON_NICK_BUFFER(gBattleTextBuff1, gBattlerAttacker, gBattlerPartyIndexes[gBattlerAttacker]);
 
     gBattlescriptCurrInstr++;
 }

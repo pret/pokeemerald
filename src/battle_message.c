@@ -660,9 +660,13 @@ static const u8 sText_LaserFocusMessage[] = _("{B_ATK_NAME_WITH_PREFIX}\nconcent
 static const u8 sText_GemActivates[] = _("{B_LAST_ITEM} strengthened\n{B_ATK_NAME_WITH_PREFIX}'s power!");
 static const u8 sText_BerryDmgReducing[] = _("{B_LAST_ITEM} weakened the damage\nto {B_DEF_NAME_WITH_PREFIX}!");
 static const u8 sText_TargetAteItem[] = _("{B_DEF_NAME_WITH_PREFIX} ate its {B_LAST_ITEM}!");
+static const u8 sText_AirBalloonFloat[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX} floats in the air\nwith its {B_LAST_ITEM}!");
+static const u8 sText_AirBalloonPop[] = _("{B_DEF_NAME_WITH_PREFIX}'s {B_LAST_ITEM} popped!");
 
 const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT] =
 {
+    [STRINGID_AIRBALLOONPOP - 12] = sText_AirBalloonPop,
+    [STRINGID_AIRBALLOONFLOAT - 12] = sText_AirBalloonFloat,
     [STRINGID_TARGETATEITEM - 12] = sText_TargetAteItem,
     [STRINGID_BERRYDMGREDUCES - 12] = sText_BerryDmgReducing,
     [STRINGID_GEMACTIVATES - 12] = sText_GemActivates,
