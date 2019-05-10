@@ -2432,8 +2432,7 @@ BattleScript_EffectToxic::
 	jumpifability BS_TARGET, ABILITY_IMMUNITY, BattleScript_ImmunityProtected
 	jumpifflowerveil BattleScript_FlowerVeilProtects
 	jumpifsubstituteblocks BattleScript_ButItFailed
-	jumpifstatus BS_TARGET, STATUS1_POISON, BattleScript_AlreadyPoisoned
-	jumpifstatus BS_TARGET, STATUS1_TOXIC_POISON, BattleScript_AlreadyPoisoned
+	jumpifstatus BS_TARGET, STATUS1_POISON | STATUS1_TOXIC_POISON, BattleScript_AlreadyPoisoned
 	jumpifstatus BS_TARGET, STATUS1_ANY, BattleScript_ButItFailed
 	jumpiftype BS_TARGET, TYPE_POISON, BattleScript_NotAffected
 	jumpiftype BS_TARGET, TYPE_STEEL, BattleScript_NotAffected
@@ -6020,6 +6019,18 @@ BattleScript_BufferEndTurn::
 	printstring STRINGID_BUFFERENDS
 	waitmessage 0x40
 	end2
+	
+BattleScript_ToxicOrb::
+	setbyte cMULTISTRING_CHOOSER, 0
+	copybyte gEffectBattler, gBattlerAttacker
+	call BattleScript_MoveEffectToxic
+	end2
+	
+BattleScript_FlameOrb::
+	setbyte cMULTISTRING_CHOOSER, 0
+	copybyte gEffectBattler, gBattlerAttacker
+	call BattleScript_MoveEffectBurn
+	end2
 
 BattleScript_MoveEffectPoison::
 	statusanimation BS_EFFECT_BATTLER
@@ -6860,15 +6871,19 @@ BattleScript_AirBaloonMsgPop::
 	removeitem BS_TARGET
 	return
 	
-BattleScript_ItemHurtEnd2::
-	playanimation BS_ATTACKER, B_ANIM_MON_HIT, NULL
-	waitanimation
+BattleScript_ItemHurtRet::
 	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE | HITMARKER_x100000
 	healthbarupdate BS_ATTACKER
 	datahpupdate BS_ATTACKER
 	printstring STRINGID_HURTBYITEM
 	waitmessage 0x40
 	tryfaintmon BS_ATTACKER, FALSE, NULL
+	return
+	
+BattleScript_ItemHurtEnd2::
+	playanimation BS_ATTACKER, B_ANIM_MON_HIT, NULL
+	waitanimation
+	call BattleScript_ItemHurtRet
 	end2
 
 BattleScript_ItemHealHP_Ret::

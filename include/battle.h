@@ -169,6 +169,7 @@ struct SpecialStatus
     u8 berryReduced:1;
     u8 gemBoost:1;
     u8 gemParam;
+    u8 damagedMons:4; // Mons that have been damaged directly by using a move, includes substitute.
     s32 dmg;
     s32 physicalDmg;
     s32 specialDmg;

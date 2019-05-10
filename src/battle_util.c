@@ -1361,6 +1361,7 @@ enum
 	ENDTURN_TAUNT,
 	ENDTURN_YAWN,
 	ENDTURN_ITEMS2,
+	ENDTURN_ORBS,
 	ENDTURN_ROOST,
 	ENDTURN_ELECTRIFY,
 	ENDTURN_POWDER,
@@ -1427,6 +1428,11 @@ u8 DoBattlerEndTurnEffects(void)
                 break;
             case ENDTURN_ITEMS2:  // item effects again
                 if (ItemBattleEffects(1, gActiveBattler, TRUE))
+                    effect++;
+                gBattleStruct->turnEffectsTracker++;
+                break;
+            case ENDTURN_ORBS:
+                if (ItemBattleEffects(ITEMEFFECT_ORBS, gActiveBattler, FALSE))
                     effect++;
                 gBattleStruct->turnEffectsTracker++;
                 break;
@@ -4173,6 +4179,7 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
                 }
                 break;
             }
+
             if (effect)
             {
                 gBattleScripting.battler = battlerId;
@@ -4395,7 +4402,7 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
                     && IsMoveMakingContact(gCurrentMove, gBattlerAttacker)
                     && GetBattlerAbility(gBattlerAttacker) != ABILITY_MAGIC_GUARD)
                 {
-                    gBattleMoveDamage = gBattleMons[gBattlerAttacker].hp / 6;
+                    gBattleMoveDamage = gBattleMons[gBattlerAttacker].maxHP / 6;
                     if (gBattleMoveDamage == 0)
                         gBattleMoveDamage = 1;
                     effect = ITEM_HP_CHANGE;
@@ -4460,6 +4467,40 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
                 }
                 break;
             }
+        }
+        break;
+    case ITEMEFFECT_ORBS:
+        switch (battlerHoldEffect)
+        {
+        case HOLD_EFFECT_TOXIC_ORB:
+            if (!gBattleMons[battlerId].status1
+                && !IS_BATTLER_OF_TYPE(battlerId, TYPE_POISON) && !IS_BATTLER_OF_TYPE(battlerId, TYPE_STEEL)
+                && GetBattlerAbility(battlerId) != ABILITY_IMMUNITY)
+            {
+                effect = ITEM_STATUS_CHANGE;
+                gBattleMons[battlerId].status1 = STATUS1_TOXIC_POISON;
+                BattleScriptExecute(BattleScript_ToxicOrb);
+                RecordItemEffectBattle(battlerId, battlerHoldEffect);
+            }
+            break;
+        case HOLD_EFFECT_FLAME_ORB:
+            if (!gBattleMons[battlerId].status1
+                && !IS_BATTLER_OF_TYPE(battlerId, TYPE_FIRE)
+                && GetBattlerAbility(battlerId) != ABILITY_WATER_VEIL)
+            {
+                effect = ITEM_STATUS_CHANGE;
+                gBattleMons[battlerId].status1 = STATUS1_BURN;
+                BattleScriptExecute(BattleScript_FlameOrb);
+                RecordItemEffectBattle(battlerId, battlerHoldEffect);
+            }
+            break;
+        }
+
+        if (effect == ITEM_STATUS_CHANGE)
+        {
+            gActiveBattler = battlerId;
+            BtlController_EmitSetMonData(0, REQUEST_STATUS_BATTLE, 0, 4, &gBattleMons[battlerId].status1);
+            MarkBattlerForControllerExec(gActiveBattler);
         }
         break;
     }
