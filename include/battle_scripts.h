@@ -321,5 +321,6 @@ extern const u8 BattleScript_AirBaloonMsgPop[];
 extern const u8 BattleScript_ItemHurtRet[];
 extern const u8 BattleScript_ToxicOrb[];
 extern const u8 BattleScript_FlameOrb[];
+extern const u8 BattleScript_MoveEffectIncinerate[];
 
 #endif // GUARD_BATTLE_SCRIPTS_H

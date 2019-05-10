@@ -662,9 +662,11 @@ static const u8 sText_BerryDmgReducing[] = _("{B_LAST_ITEM} weakened the damage\
 static const u8 sText_TargetAteItem[] = _("{B_DEF_NAME_WITH_PREFIX} ate its {B_LAST_ITEM}!");
 static const u8 sText_AirBalloonFloat[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX} floats in the air\nwith its {B_LAST_ITEM}!");
 static const u8 sText_AirBalloonPop[] = _("{B_DEF_NAME_WITH_PREFIX}'s {B_LAST_ITEM} popped!");
+static const u8 sText_IncinerateBurn[] = _("{B_EFF_NAME_WITH_PREFIX}'s {B_LAST_ITEM}\nwas burnt up!");
 
 const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT] =
 {
+    [STRINGID_INCINERATEBURN - 12] = sText_IncinerateBurn,
     [STRINGID_AIRBALLOONPOP - 12] = sText_AirBalloonPop,
     [STRINGID_AIRBALLOONFLOAT - 12] = sText_AirBalloonFloat,
     [STRINGID_TARGETATEITEM - 12] = sText_TargetAteItem,

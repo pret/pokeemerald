@@ -7153,7 +7153,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_INCINERATE] =
     {
-        .effect = EFFECT_PLACEHOLDER, // Needs a custom move effect
+        .effect = EFFECT_INCINERATE,
         .power = 60,
         .type = TYPE_FIRE,
         .accuracy = 100,

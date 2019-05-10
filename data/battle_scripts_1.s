@@ -353,6 +353,16 @@ gBattleScriptsForMoveEffects:: @ 82D86A8
 	.4byte BattleScript_EffectLaserFocus
 	.4byte BattleScript_EffectMagneticFlux
 	.4byte BattleScript_EffectGearUp
+	.4byte BattleScript_EffectIncinerate
+	
+BattleScript_EffectIncinerate:
+	setmoveeffect MOVE_EFFECT_INCINERATE | MOVE_EFFECT_CERTAIN
+	goto BattleScript_EffectHit
+	
+BattleScript_MoveEffectIncinerate::
+	printstring STRINGID_INCINERATEBURN
+	waitmessage 0x40
+	return
 
 BattleScript_EffectCoreEnforcer:
 	setmoveeffect MOVE_EFFECT_CORE_ENFORCER | MOVE_EFFECT_CERTAIN
