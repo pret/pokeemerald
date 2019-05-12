@@ -360,7 +360,7 @@ void sub_8024BC8(u8 taskId)
         {
             if (gReceivedRemoteLinkPlayers != 0)
             {
-                sub_800E0E8();
+                LoadWirelessStatusIndicatorSpriteGfx();
                 CreateWirelessStatusIndicatorSprite(0, 0);
             }
             gUnknown_02022C98->unk_000C++;

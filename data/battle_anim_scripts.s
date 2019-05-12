@@ -2960,7 +2960,7 @@ SkyAttackSetUpAgainstPartner:
 SkyAttackUnleash:
 	loadspritegfx ANIM_TAG_IMPACT
 	loadspritegfx ANIM_TAG_BIRD
-	call SetFlyingBg
+	call SetSkyBg
 	monbg ANIM_ATTACKER
 	createvisualtask sub_8116620, 10, 2, 0, 0, 16, RGB_WHITE
 	delay 4
@@ -2977,7 +2977,7 @@ SkyAttackUnleash:
 	createvisualtask sub_8116620, 10, 2, 0, 15, 0, RGB_WHITE
 	waitforvisualfinish
 	clearmonbg ANIM_ATTACKER
-	call UnsetFlyingBg
+	call UnsetSkyBg
 	goto SkyAttackEnd
 
 Move_FLASH:
@@ -5392,7 +5392,7 @@ Move_WITHDRAW:
 
 Move_AURORA_BEAM:
 	loadspritegfx ANIM_TAG_RAINBOW_RINGS
-	fadetobg BG_AURORABEAM
+	fadetobg BG_AURORA
 	waitbgfadein
 	playsewithpan SE_W062, SOUND_PAN_ATTACKER
 	setarg 7, 0
@@ -6195,7 +6195,7 @@ Move_AEROBLAST:
 	loadspritegfx ANIM_TAG_AIR_WAVE_2
 	loadspritegfx ANIM_TAG_IMPACT
 	monbg ANIM_DEF_PARTNER
-	call SetFlyingBg
+	call SetSkyBg
 	monbgprio_28 ANIM_TARGET
 	setalpha 12, 8
 	call Aeroblast1
@@ -6211,7 +6211,7 @@ Move_AEROBLAST:
 	clearmonbg ANIM_DEF_PARTNER
 	blendoff
 	delay 0
-	call UnsetFlyingBg
+	call UnsetSkyBg
 	end
 Aeroblast1:
 	playsewithpan SE_W026, SOUND_PAN_ATTACKER
@@ -6568,7 +6568,7 @@ Move_DYNAMIC_PUNCH:
 	loadspritegfx ANIM_TAG_HANDS_AND_FEET
 	loadspritegfx ANIM_TAG_IMPACT
 	loadspritegfx ANIM_TAG_EXPLOSION
-	loadspritegfx ANIM_TAG_UNUSED_EXPLOSION
+	loadspritegfx ANIM_TAG_EXPLOSION_6
 	delay 1
 	monbg ANIM_DEF_PARTNER
 	setalpha 12, 8
@@ -9419,7 +9419,7 @@ Move_SEISMIC_TOSS:
 	waitforvisualfinish
 	createvisualtask AnimTask_GetSeismicTossDamageLevel, 3
 	delay 1
-	fadetobg BG_SEISMICTOSS_SKUUPPERCUT
+	fadetobg BG_IN_AIR
 	waitbgfadeout
 	createvisualtask sub_811152C, 3
 	playsewithpan SE_W327, 0
@@ -9589,7 +9589,7 @@ Move_SKY_UPPERCUT:
 	loadspritegfx ANIM_TAG_IMPACT
 	monbg ANIM_DEF_PARTNER
 	monbgprio_28 ANIM_TARGET
-	fadetobg BG_SEISMICTOSS_SKUUPPERCUT
+	fadetobg BG_IN_AIR
 	waitbgfadeout
 	playsewithpan SE_W327, SOUND_PAN_ATTACKER
 	createvisualtask sub_810DABC, 5, 55
@@ -10165,21 +10165,21 @@ UnsetPsychicBackground:
 	waitbgfadein
 	return
 
-SetFlyingBg:
-	jumpifcontest SetBgFlyingContest
-	fadetobg BG_FLYING
+SetSkyBg:
+	jumpifcontest SetSkyBgContest
+	fadetobg BG_SKY
 	waitbgfadeout
 	createvisualtask sub_8117660, 5, -2304, 768, 1, -1
-SetBgFlyingContinue:
+SetSkyBgContinue:
 	waitbgfadein
 	return
-SetBgFlyingContest:
-	fadetobg BG_FLYING_CONTESTS
+SetSkyBgContest:
+	fadetobg BG_SKY_CONTESTS
 	waitbgfadeout
 	createvisualtask sub_8117660, 5, 2304, 768, 0, -1
-	goto SetBgFlyingContinue
+	goto SetSkyBgContinue
 
-UnsetFlyingBg:
+UnsetSkyBg:
 	restorebg
 	waitbgfadeout
 	setarg 7, -1
@@ -10331,15 +10331,15 @@ General_SubstituteAppear:
 
 General_PokeblockThrow:
 	createvisualtask sub_817345C, 2, 0
-	createvisualtask sub_81732B0, 2
+	createvisualtask AnimTask_LoadPokeblockGfx, 2
 	delay 0
 	waitplaysewithpan SE_W026, SOUND_PAN_ATTACKER, 22
-	createsprite gBattleAnimSpriteTemplate_85E5338, ANIM_TARGET, 3, -18, 12, 0, 32
+	createsprite gPokeblockSpriteTemplate, ANIM_TARGET, 3, -18, 12, 0, 32
 	delay 50
 	loopsewithpan SE_W039, SOUND_PAN_TARGET, 19, 2
 	createvisualtask AnimTask_SwayMon, 5, 1, 8, 1536, 2, ANIM_TARGET
 	waitforvisualfinish
-	createvisualtask sub_81732E4, 2
+	createvisualtask AnimTask_FreePokeblockGfx, 2
 	end
 
 General_ItemKnockoff:
@@ -10516,7 +10516,7 @@ General_Hail:
 	goto Move_HAIL
 
 General_LeechSeedDrain:
-	createvisualtask sub_817351C, 5
+	createvisualtask AnimTask_GetBattlersFromArg, 5
 	delay 0
 	goto Move_ABSORB
 
@@ -10535,7 +10535,7 @@ General_MonHit:
 General_ItemSteal:
 	loadspritegfx ANIM_TAG_ITEM_BAG
 	createvisualtask sub_8117F30, 2
-	createvisualtask sub_8172ED0, 2
+	createvisualtask AnimTask_TargetToEffectBattler, 2
 	delay 1
 	createsprite gItemStealSpriteTemplate, ANIM_ATTACKER, 2, 0, -5, 10, 2, -1
 	end
@@ -10664,8 +10664,8 @@ General_WishHeal:
 	end
 
 AnimScript_82D85A3:
-	createvisualtask sub_8172E9C, 2
-	jumpreteq 1, AnimScript_82D85B4
+	createvisualtask AnimTask_IsAttackerBehindSubstitute, 2
+	jumprettrue AnimScript_82D85B4
 AnimScript_82D85B2:
 	waitforvisualfinish
 	return
@@ -10675,8 +10675,8 @@ AnimScript_82D85B4:
 	goto AnimScript_82D85B2
 
 AnimScript_82D85C3:
-	createvisualtask sub_8172E9C, 2
-	jumpreteq 1, AnimScript_82D85D4
+	createvisualtask AnimTask_IsAttackerBehindSubstitute, 2
+	jumprettrue AnimScript_82D85D4
 AnimScript_82D85D2:
 	waitforvisualfinish
 	return

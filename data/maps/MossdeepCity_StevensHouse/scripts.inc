@@ -1,6 +1,6 @@
 MossdeepCity_StevensHouse_MapScripts:: @ 8222784
 	map_script MAP_SCRIPT_ON_LOAD, MossdeepCity_StevensHouse_MapScript1_222794
-	map_script MAP_SCRIPT_ON_TRANSITION, MossdeepCity_StevensHouse_MapScript1_2227A8
+	map_script MAP_SCRIPT_ON_TRANSITION, MossdeepCity_StevensHouse_OnTransition
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, MossdeepCity_StevensHouse_MapScript2_2227C0
 	.byte 0
 
@@ -12,7 +12,7 @@ MossdeepCity_StevensHouse_EventScript_22279E:: @ 822279E
 	setmetatile 6, 4, 753, 1
 	return
 
-MossdeepCity_StevensHouse_MapScript1_2227A8: @ 82227A8
+MossdeepCity_StevensHouse_OnTransition: @ 82227A8
 	compare VAR_STEVENS_HOUSE_STATE, 2
 	call_if_eq MossdeepCity_StevensHouse_EventScript_2227B4
 	end

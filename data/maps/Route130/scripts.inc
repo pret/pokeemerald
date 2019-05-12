@@ -1,8 +1,8 @@
 Route130_MapScripts:: @ 81F735F
-	map_script MAP_SCRIPT_ON_TRANSITION, Route130_MapScript1_1F7365
+	map_script MAP_SCRIPT_ON_TRANSITION, Route130_OnTransition
 	.byte 0
 
-Route130_MapScript1_1F7365: @ 81F7365
+Route130_OnTransition: @ 81F7365
 	compare VAR_RAYQUAZA_STATE, 4
 	call_if_ge Route130_EventScript_1F73B5
 	specialvar VAR_RESULT, IsMirageIslandPresent

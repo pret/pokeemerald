@@ -1,9 +1,9 @@
 MtChimney_MapScripts:: @ 822EDC1
 	map_script MAP_SCRIPT_ON_RESUME, MtChimney_MapScript1_22EDD2
-	map_script MAP_SCRIPT_ON_TRANSITION, MtChimney_MapScript1_22EDCC
+	map_script MAP_SCRIPT_ON_TRANSITION, MtChimney_OnTransition
 	.byte 0
 
-MtChimney_MapScript1_22EDCC: @ 822EDCC
+MtChimney_OnTransition: @ 822EDCC
 	setvar VAR_JAGGED_PASS_ASH_WEATHER, 1
 	end
 

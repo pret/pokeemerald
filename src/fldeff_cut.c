@@ -23,7 +23,7 @@
 
 extern struct MapPosition gPlayerFacingPosition;
 
-extern const u8 Route103_EventScript_290705[];
+extern const u8 EventScript_FldEffCut[];
 extern const u8 FarawayIsland_Interior_EventScript_267EDB[];
 
 extern const u8 gFieldEffectPic_CutGrass[];
@@ -327,7 +327,7 @@ bool8 FldEff_UseCutOnGrass(void)
 static void FieldCallback_CutTree(void)
 {
     gFieldEffectArguments[0] = GetCursorSelectionMonId();
-    ScriptContext1_SetupScript(Route103_EventScript_290705);
+    ScriptContext1_SetupScript(EventScript_FldEffCut);
 }
 
 bool8 FldEff_UseCutOnTree(void)

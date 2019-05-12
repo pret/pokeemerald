@@ -1,6 +1,6 @@
 Route104_MapScripts:: @ 81ECC32
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, Route104_MapScript2_1ECC3D
-	map_script MAP_SCRIPT_ON_TRANSITION, Route104_MapScript1_1ECC4E
+	map_script MAP_SCRIPT_ON_TRANSITION, Route104_OnTransition
 	.byte 0
 
 Route104_MapScript2_1ECC3D: @ 81ECC3D
@@ -12,7 +12,7 @@ Route104_EventScript_1ECC47:: @ 81ECC47
 	goto Route104_EventScript_1ED099
 	end
 
-Route104_MapScript1_1ECC4E: @ 81ECC4E
+Route104_OnTransition: @ 81ECC4E
 	call Common_EventScript_SetupRivalGender
 	call Route104_EventScript_1ECC78
 	call Route104_EventScript_1ECC5E

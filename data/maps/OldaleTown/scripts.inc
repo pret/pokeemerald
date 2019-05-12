@@ -1,8 +1,8 @@
 OldaleTown_MapScripts:: @ 81E8EA2
-	map_script MAP_SCRIPT_ON_TRANSITION, OldaleTown_MapScript1_1E8EA8
+	map_script MAP_SCRIPT_ON_TRANSITION, OldaleTown_OnTransition
 	.byte 0
 
-OldaleTown_MapScript1_1E8EA8: @ 81E8EA8
+OldaleTown_OnTransition: @ 81E8EA8
 	call Common_EventScript_SetupRivalGender
 	setflag FLAG_VISITED_OLDALE_TOWN
 	call_if_unset FLAG_ADVENTURE_STARTED, OldaleTown_EventScript_1E8ED2

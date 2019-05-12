@@ -1,6 +1,6 @@
 Route110_MapScripts:: @ 81EF269
 	map_script MAP_SCRIPT_ON_RESUME, Route110_MapScript1_1EF279
-	map_script MAP_SCRIPT_ON_TRANSITION, Route110_MapScript1_1EF27D
+	map_script MAP_SCRIPT_ON_TRANSITION, Route110_OnTransition
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, Route110_MapScript2_1EF297
 	.byte 0
 
@@ -8,7 +8,7 @@ Route110_MapScript1_1EF279: @ 81EF279
 	special UpdateCyclingRoadState
 	end
 
-Route110_MapScript1_1EF27D: @ 81EF27D
+Route110_OnTransition: @ 81EF27D
 	call Common_EventScript_SetupRivalGender
 	call Common_EventScript_SetupRivalOnBikeGender
 	compare VAR_CYCLING_CHALLENGE_STATE, 1

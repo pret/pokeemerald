@@ -56,7 +56,7 @@ static void ResetMiniGamesResults(void);
 
 // EWRAM vars
 EWRAM_DATA bool8 gDifferentSaveFile = FALSE;
-EWRAM_DATA bool8 gUnknown_020322D5 = FALSE;
+EWRAM_DATA bool8 gEnableContestDebugging = FALSE;
 
 // const rom data
 static const struct ContestWinner sContestWinnerPicDummy =
@@ -170,7 +170,7 @@ void NewGameInitData(void)
     InitEventData();
     ClearTVShowData();
     ResetGabbyAndTy();
-    ResetSecretBases();
+    ClearSecretBases();
     ClearBerryTrees();
     SetMoney(&gSaveBlock1Ptr->money, 3000);
     SetCoins(0);

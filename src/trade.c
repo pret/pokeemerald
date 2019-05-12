@@ -4,7 +4,7 @@
 #include "battle_interface.h"
 #include "bg.h"
 #include "cable_club.h"
-#include "data2.h"
+#include "data.h"
 #include "daycare.h"
 #include "decompress.h"
 #include "event_data.h"
@@ -1384,10 +1384,6 @@ static const u8 gUnknown_08339090[][2] =
     {0,  0}
 };
 
-// external to this file
-extern const struct CompressedSpriteSheet gMonFrontPicTable[];
-extern const struct MonCoords gMonFrontPicCoords[];
-
 static bool8 sub_8077170(const void *a0, u32 a1)
 {
     if (gUnknown_02022C2C == 29)
@@ -1626,7 +1622,7 @@ static void sub_80773D0(void)
             if (sub_8010500())
             {
                 gMain.state++;
-                sub_800E0E8();
+                LoadWirelessStatusIndicatorSpriteGfx();
                 CreateWirelessStatusIndicatorSprite(0, 0);
             }
         }
@@ -1820,7 +1816,7 @@ static void sub_8077B74(void)
     case 5:
         if (gWirelessCommType)
         {
-            sub_800E0E8();
+            LoadWirelessStatusIndicatorSpriteGfx();
             CreateWirelessStatusIndicatorSprite(0, 0);
         }
         gMain.state++;
@@ -4246,7 +4242,7 @@ void sub_807AE50(void)
             {
                 if (gWirelessCommType)
                 {
-                    sub_800E0E8();
+                    LoadWirelessStatusIndicatorSpriteGfx();
                     CreateWirelessStatusIndicatorSprite(0, 0);
                 }
                 SetMainCallback2(sub_807EA2C);

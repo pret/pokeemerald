@@ -1,9 +1,9 @@
 Route101_MapScripts:: @ 81EBCBA
-	map_script MAP_SCRIPT_ON_TRANSITION, Route101_MapScript1_1EBCC5
+	map_script MAP_SCRIPT_ON_TRANSITION, Route101_OnTransition
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, Route101_MapScript2_1EBCCB
 	.byte 0
 
-Route101_MapScript1_1EBCC5: @ 81EBCC5
+Route101_OnTransition: @ 81EBCC5
 	call Route101_EventScript_2720AD
 	end
 

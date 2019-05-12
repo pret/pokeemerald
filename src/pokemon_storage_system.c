@@ -1,7 +1,7 @@
 #include "global.h"
 #include "alloc.h"
 #include "bg.h"
-#include "data2.h"
+#include "data.h"
 #include "decompress.h"
 #include "dma3.h"
 #include "dynamic_placeholder_text_util.h"
@@ -462,8 +462,6 @@ EWRAM_DATA static bool8 sIsMonBeingMoved = 0;
 EWRAM_DATA static u8 sMovingMonOrigBoxId = 0;
 EWRAM_DATA static u8 sMovingMonOrigBoxPos = 0;
 EWRAM_DATA static bool8 sCanOnlyMove = 0;
-
-extern const struct CompressedSpriteSheet gMonFrontPicTable[];
 
 // This file's functions.
 static void CreatePCMenu(u8 whichMenu, s16 *windowIdPtr);

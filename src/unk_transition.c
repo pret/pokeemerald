@@ -8,6 +8,7 @@
 #include "trig.h"
 #include "bg.h"
 #include "gpu_regs.h"
+#include "constants/rgb.h"
 
 typedef bool8 (*TransitionStateFunc)(struct Task *task);
 
@@ -361,7 +362,7 @@ static bool8 sub_81DAB4C(struct Task *task)
     {
         if (task->data[3] == 31)
         {
-            BeginNormalPaletteFade(0xFFFFFFFF, -1, 0, 0x10, 0);
+            BeginNormalPaletteFade(0xFFFFFFFF, -1, 0, 0x10, RGB_BLACK);
             task->tState++;
         }
         else

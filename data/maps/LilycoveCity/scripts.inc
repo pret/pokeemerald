@@ -1,9 +1,9 @@
 LilycoveCity_MapScripts:: @ 81E2B3C
-	map_script MAP_SCRIPT_ON_TRANSITION, LilycoveCity_MapScript1_1E2B47
+	map_script MAP_SCRIPT_ON_TRANSITION, LilycoveCity_OnTransition
 	map_script MAP_SCRIPT_ON_LOAD, LilycoveCity_MapScript1_1E2B61
 	.byte 0
 
-LilycoveCity_MapScript1_1E2B47: @ 81E2B47
+LilycoveCity_OnTransition: @ 81E2B47
 	setflag FLAG_VISITED_LILYCOVE_CITY
 	setvar VAR_LINK_CONTEST_ROOM_STATE, 0
 	setflag FLAG_HIDE_LILYCOVE_CONTEST_HALL_REPORTER
@@ -391,10 +391,10 @@ LilycoveCity_EventScript_1E3006:: @ 81E3006
 	waitmovement 0
 	delay 50
 	setfieldeffectargument 0, 1
-	dofieldeffect 30
+	dofieldeffect FLDEFF_NPCFLY_OUT
 	delay 15
 	removeobject VAR_LAST_TALKED
-	waitfieldeffect 30
+	waitfieldeffect FLDEFF_NPCFLY_OUT
 	savebgm MUS_DUMMY
 	fadedefaultbgm
 	setflag FLAG_MET_RIVAL_LILYCOVE

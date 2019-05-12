@@ -1,9 +1,9 @@
 Route128_MapScripts:: @ 81F6B38
-	map_script MAP_SCRIPT_ON_TRANSITION, Route128_MapScript1_1F6B43
+	map_script MAP_SCRIPT_ON_TRANSITION, Route128_OnTransition
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, Route128_MapScript2_1F6B4D
 	.byte 0
 
-Route128_MapScript1_1F6B43: @ 81F6B43
+Route128_OnTransition: @ 81F6B43
 	call_if_set FLAG_SYS_WEATHER_CTRL, Common_EventScript_SetWeather15
 	end
 
@@ -48,8 +48,8 @@ Route128_EventScript_1F6B57:: @ 81F6B57
 	removeobject 4
 	delay 100
 	setfieldeffectargument 0, 1
-	dofieldeffect 30
-	waitfieldeffect 30
+	dofieldeffect FLDEFF_NPCFLY_OUT
+	waitfieldeffect FLDEFF_NPCFLY_OUT
 	addobject 3
 	applymovement 3, Route128_Movement_1F6C87
 	waitmovement 0
@@ -69,10 +69,10 @@ Route128_EventScript_1F6B57:: @ 81F6B57
 	waitmovement 0
 	delay 50
 	setfieldeffectargument 0, 1
-	dofieldeffect 30
+	dofieldeffect FLDEFF_NPCFLY_OUT
 	delay 15
 	removeobject 3
-	waitfieldeffect 30
+	waitfieldeffect FLDEFF_NPCFLY_OUT
 	clearflag FLAG_HIDE_MAP_NAME_POPUP
 	setvar VAR_ROUTE128_STATE, 2
 	releaseall

@@ -10,7 +10,7 @@
 #include "battle_pyramid_bag.h"
 #include "bg.h"
 #include "contest.h"
-#include "data2.h"
+#include "data.h"
 #include "decompress.h"
 #include "easy_chat.h"
 #include "event_data.h"
@@ -45,11 +45,11 @@
 #include "player_pc.h"
 #include "pokemon.h"
 #include "pokemon_icon.h"
+#include "pokemon_jump.h"
 #include "pokemon_storage_system.h"
 #include "pokemon_summary_screen.h"
 #include "region_map.h"
 #include "reshow_battle_screen.h"
-#include "union_room.h"
 #include "scanline_effect.h"
 #include "script.h"
 #include "sound.h"
@@ -61,12 +61,14 @@
 #include "text.h"
 #include "text_window.h"
 #include "trade.h"
+#include "union_room.h"
 #include "window.h"
 #include "constants/battle.h"
 #include "constants/battle_frontier.h"
 #include "constants/easy_chat.h"
 #include "constants/field_effects.h"
 #include "constants/flags.h"
+#include "constants/item_effects.h"
 #include "constants/items.h"
 #include "constants/maps.h"
 #include "constants/moves.h"
@@ -297,8 +299,8 @@ static u8 sub_81B8984(void);
 static void sub_81B6280(u8);
 static void c2_815ABFC(void);
 static void sub_81B672C(u8);
-static u16 sub_81B691C(struct Pokemon*, u8);
-static void option_menu_get_string(u8, u8*);
+static u16 ItemEffectToMonEv(struct Pokemon*, u8);
+static void ItemEffectToStatString(u8, u8*);
 static void sub_81B6BB4(u8);
 static void ether_effect_related_2(u8);
 static void ether_effect_related(u8);
@@ -5229,7 +5231,7 @@ void sub_81B617C(void)
         doubleBattleStatus = 0;
     }
 
-    if (GetItemEffectType(gSpecialVar_ItemId) == 10)
+    if (GetItemEffectType(gSpecialVar_ItemId) == ITEM_EFFECT_SACRED_ASH)
     {
         gUnknown_0203CEC8.unk9 = 0;
         for (i = 0; i < PARTY_SIZE; i++)
@@ -5283,7 +5285,7 @@ static bool8 IsHPRecoveryItem(u16 item)
     else
         effect = gItemEffectTable[item - ITEM_POTION];
 
-    if ((effect[4] & 4) != 0)
+    if (effect[4] & ITEM4_HEAL_HP)
         return TRUE;
     else
         return FALSE;
@@ -5293,59 +5295,59 @@ static void GetMedicineItemEffectMessage(u16 item)
 {
     switch (GetItemEffectType(item))
     {
-    case 3:
+    case ITEM_EFFECT_CURE_POISON:
         StringExpandPlaceholders(gStringVar4, gText_PkmnCuredOfPoison);
         break;
-    case 4:
+    case ITEM_EFFECT_CURE_SLEEP:
         StringExpandPlaceholders(gStringVar4, gText_PkmnWokeUp2);
         break;
-    case 5:
+    case ITEM_EFFECT_CURE_BURN:
         StringExpandPlaceholders(gStringVar4, gText_PkmnBurnHealed);
         break;
-    case 6:
+    case ITEM_EFFECT_CURE_FREEZE:
         StringExpandPlaceholders(gStringVar4, gText_PkmnThawedOut);
         break;
-    case 7:
+    case ITEM_EFFECT_CURE_PARALYSIS:
         StringExpandPlaceholders(gStringVar4, gText_PkmnCuredOfParalysis);
         break;
-    case 8:
+    case ITEM_EFFECT_CURE_CONFUSION:
         StringExpandPlaceholders(gStringVar4, gText_PkmnSnappedOutOfConfusion);
         break;
-    case 9:
+    case ITEM_EFFECT_CURE_INFATUATION:
         StringExpandPlaceholders(gStringVar4, gText_PkmnGotOverInfatuation);
         break;
-    case 11:
+    case ITEM_EFFECT_CURE_ALL_STATUS:
         StringExpandPlaceholders(gStringVar4, gText_PkmnBecameHealthy);
         break;
-    case 13:
+    case ITEM_EFFECT_HP_EV:
         StringCopy(gStringVar2, gText_HP3);
         StringExpandPlaceholders(gStringVar4, gText_PkmnBaseVar2StatIncreased);
         break;
-    case 12:
+    case ITEM_EFFECT_ATK_EV:
         StringCopy(gStringVar2, gText_Attack3);
         StringExpandPlaceholders(gStringVar4, gText_PkmnBaseVar2StatIncreased);
         break;
-    case 17:
+    case ITEM_EFFECT_DEF_EV:
         StringCopy(gStringVar2, gText_Defense3);
         StringExpandPlaceholders(gStringVar4, gText_PkmnBaseVar2StatIncreased);
         break;
-    case 16:
+    case ITEM_EFFECT_SPEED_EV:
         StringCopy(gStringVar2, gText_Speed2);
         StringExpandPlaceholders(gStringVar4, gText_PkmnBaseVar2StatIncreased);
         break;
-    case 14:
+    case ITEM_EFFECT_SPATK_EV:
         StringCopy(gStringVar2, gText_SpAtk3);
         StringExpandPlaceholders(gStringVar4, gText_PkmnBaseVar2StatIncreased);
         break;
-    case 15:
+    case ITEM_EFFECT_SPDEF_EV:
         StringCopy(gStringVar2, gText_SpDef3);
         StringExpandPlaceholders(gStringVar4, gText_PkmnBaseVar2StatIncreased);
         break;
-    case 19:
-    case 20:
+    case ITEM_EFFECT_PP_UP:
+    case ITEM_EFFECT_PP_MAX:
         StringExpandPlaceholders(gStringVar4, gText_MovesPPIncreased);
         break;
-    case 21:
+    case ITEM_EFFECT_HEAL_PP:
         StringExpandPlaceholders(gStringVar4, gText_PPWasRestored);
         break;
     default:
@@ -5356,12 +5358,12 @@ static void GetMedicineItemEffectMessage(u16 item)
 
 static bool8 UsingHPEVItemOnShedinja(struct Pokemon *mon, u16 item)
 {
-    if (GetItemEffectType(item) == 13 && GetMonData(mon, MON_DATA_SPECIES) == SPECIES_SHEDINJA)
+    if (GetItemEffectType(item) == ITEM_EFFECT_HP_EV && GetMonData(mon, MON_DATA_SPECIES) == SPECIES_SHEDINJA)
         return FALSE;
     return TRUE;
 }
 
-static bool8 IsBlueYellowRedFlute(u16 item)
+static bool8 IsItemFlute(u16 item)
 {
     if (item == ITEM_BLUE_FLUTE || item == ITEM_RED_FLUTE || item == ITEM_YELLOW_FLUTE)
         return TRUE;
@@ -5408,7 +5410,7 @@ void ItemUseCB_Medicine(u8 taskId, TaskFunc task)
         goto iTriedHonestlyIDid;
     }
     gUnknown_0203CEE8 = 1;
-    if (IsBlueYellowRedFlute(item) == FALSE)
+    if (IsItemFlute(item) == FALSE)
     {
         PlaySE(SE_KAIFUKU);
         if (gUnknown_0203CEC8.unkB != 14)
@@ -5465,10 +5467,10 @@ void sub_81B67C8(u8 taskId, TaskFunc task)
     u16 item = gSpecialVar_ItemId;
     u8 effectType = GetItemEffectType(item);
     u16 friendship = GetMonData(mon, MON_DATA_FRIENDSHIP);
-    u16 relevantEV = sub_81B691C(mon, effectType);
+    u16 relevantEV = ItemEffectToMonEv(mon, effectType);
     bool8 cannotUseEffect = ExecuteTableBasedItemEffect__(gUnknown_0203CEC8.unk9, item, 0);
     u16 newFriendship = GetMonData(mon, MON_DATA_FRIENDSHIP);
-    u16 newRelevantEV = sub_81B691C(mon, effectType);
+    u16 newRelevantEV = ItemEffectToMonEv(mon, effectType);
 
     if (cannotUseEffect || (friendship == newFriendship && relevantEV == newRelevantEV))
     {
@@ -5484,7 +5486,7 @@ void sub_81B67C8(u8 taskId, TaskFunc task)
         PlaySE(SE_KAIFUKU);
         RemoveBagItem(item, 1);
         GetMonNickname(mon, gStringVar1);
-        option_menu_get_string(effectType, gStringVar2);
+        ItemEffectToStatString(effectType, gStringVar2);
         if (friendship != newFriendship)
         {
             if (relevantEV != newRelevantEV)
@@ -5502,48 +5504,48 @@ void sub_81B67C8(u8 taskId, TaskFunc task)
     }
 }
 
-static u16 sub_81B691C(struct Pokemon *mon, u8 effectType)
+static u16 ItemEffectToMonEv(struct Pokemon *mon, u8 effectType)
 {
     switch (effectType)
     {
-    case 13:
+    case ITEM_EFFECT_HP_EV:
         if (GetMonData(mon, MON_DATA_SPECIES) != SPECIES_SHEDINJA)
             return GetMonData(mon, MON_DATA_HP_EV);
         break;
-    case 12:
+    case ITEM_EFFECT_ATK_EV:
         return GetMonData(mon, MON_DATA_ATK_EV);
-    case 17:
+    case ITEM_EFFECT_DEF_EV:
         return GetMonData(mon, MON_DATA_DEF_EV);
-    case 16:
+    case ITEM_EFFECT_SPEED_EV:
         return GetMonData(mon, MON_DATA_SPEED_EV);
-    case 14:
+    case ITEM_EFFECT_SPATK_EV:
         return GetMonData(mon, MON_DATA_SPATK_EV);
-    case 15:
+    case ITEM_EFFECT_SPDEF_EV:
         return GetMonData(mon, MON_DATA_SPDEF_EV);
     }
     return 0;
 }
 
-static void option_menu_get_string(u8 effectType, u8 *dest)
+static void ItemEffectToStatString(u8 effectType, u8 *dest)
 {
     switch (effectType)
     {
-    case 13:
+    case ITEM_EFFECT_HP_EV:
         StringCopy(dest, gText_HP3);
         break;
-    case 12:
+    case ITEM_EFFECT_ATK_EV:
         StringCopy(dest, gText_Attack3);
         break;
-    case 17:
+    case ITEM_EFFECT_DEF_EV:
         StringCopy(dest, gText_Defense3);
         break;
-    case 16:
+    case ITEM_EFFECT_SPEED_EV:
         StringCopy(dest, gText_Speed2);
         break;
-    case 14:
+    case ITEM_EFFECT_SPATK_EV:
         StringCopy(dest, gText_SpAtk3);
         break;
-    case 15:
+    case ITEM_EFFECT_SPDEF_EV:
         StringCopy(dest, gText_SpDef3);
         break;
     }
@@ -5597,7 +5599,7 @@ void dp05_ether(u8 taskId, TaskFunc task)
     else
         effect = gItemEffectTable[item - ITEM_POTION];
 
-    if ((effect[4] & 0x10) == 0)
+    if (!(effect[4] & ITEM4_HEAL_PP_ONE))
     {
         gUnknown_0203CEC8.unkE = 0;
         ether_effect_related(taskId);
@@ -6220,8 +6222,8 @@ u8 GetItemEffectType(u16 item)
     const u8 *itemEffect;
     u32 statusCure;
 
-    if (!IS_POKEMON_ITEM(item))
-        return 22;
+    if (!ITEM_HAS_EFFECT(item))
+        return ITEM_EFFECT_NONE;
 
     // Read the item's effect properties.
     if (item == ITEM_ENIGMA_BERRY)
@@ -6229,58 +6231,58 @@ u8 GetItemEffectType(u16 item)
     else
         itemEffect = gItemEffectTable[item - ITEM_POTION];
 
-    if ((itemEffect[0] & 0x3F) || itemEffect[1] || itemEffect[2] || (itemEffect[3] & 0x80))
-        return 0;
-    else if (itemEffect[0] & 0x40)
-        return 10;
-    else if (itemEffect[3] & 0x40)
-        return 1;
+    if ((itemEffect[0] & (ITEM0_HIGH_CRIT | ITEM0_X_ATTACK)) || itemEffect[1] || itemEffect[2] || (itemEffect[3] & ITEM3_MIST))
+        return ITEM_EFFECT_X_ITEM;
+    else if (itemEffect[0] & ITEM0_SACRED_ASH)
+        return ITEM_EFFECT_SACRED_ASH;
+    else if (itemEffect[3] & ITEM3_LEVEL_UP)
+        return ITEM_EFFECT_RAISE_LEVEL;
 
-    statusCure = itemEffect[3] & 0x3F;
+    statusCure = itemEffect[3] & ITEM3_STATUS_ALL;
     if (statusCure || (itemEffect[0] >> 7))
     {
-        if (statusCure == 0x20)
-            return 4;
-        else if (statusCure == 0x10)
-            return 3;
-        else if (statusCure == 0x8)
-            return 5;
-        else if (statusCure == 0x4)
-            return 6;
-        else if (statusCure == 0x2)
-            return 7;
-        else if (statusCure == 0x1)
-            return 8;
+        if (statusCure == ITEM3_SLEEP)
+            return ITEM_EFFECT_CURE_SLEEP;
+        else if (statusCure == ITEM3_POISON)
+            return ITEM_EFFECT_CURE_POISON;
+        else if (statusCure == ITEM3_BURN)
+            return ITEM_EFFECT_CURE_BURN;
+        else if (statusCure == ITEM3_FREEZE)
+            return ITEM_EFFECT_CURE_FREEZE;
+        else if (statusCure == ITEM3_PARALYSIS)
+            return ITEM_EFFECT_CURE_PARALYSIS;
+        else if (statusCure == ITEM3_CONFUSION)
+            return ITEM_EFFECT_CURE_CONFUSION;
         else if (itemEffect[0] >> 7 && !statusCure)
-            return 9;
+            return ITEM_EFFECT_CURE_INFATUATION;
         else
-            return 11;
+            return ITEM_EFFECT_CURE_ALL_STATUS;
     }
 
-    if (itemEffect[4] & 0x44)
-        return 2;
-    else if (itemEffect[4] & 0x2)
-        return 12;
-    else if (itemEffect[4] & 0x1)
-        return 13;
-    else if (itemEffect[5] & 0x8)
-        return 14;
-    else if (itemEffect[5] & 0x4)
-        return 15;
-    else if (itemEffect[5] & 0x2)
-        return 16;
-    else if (itemEffect[5] & 0x1)
-        return 17;
-    else if (itemEffect[4] & 0x80)
-        return 18;
-    else if (itemEffect[4] & 0x20)
-        return 19;
-    else if (itemEffect[5] & 0x10)
-        return 20;
-    else if (itemEffect[4] & 0x18)
-        return 21;
+    if (itemEffect[4] & (ITEM4_REVIVE | ITEM4_HEAL_HP))
+        return ITEM_EFFECT_HEAL_HP;
+    else if (itemEffect[4] & ITEM4_EV_ATK)
+        return ITEM_EFFECT_ATK_EV;
+    else if (itemEffect[4] & ITEM4_EV_HP)
+        return ITEM_EFFECT_HP_EV;
+    else if (itemEffect[5] & ITEM5_EV_SPATK)
+        return ITEM_EFFECT_SPATK_EV;
+    else if (itemEffect[5] & ITEM5_EV_SPDEF)
+        return ITEM_EFFECT_SPDEF_EV;
+    else if (itemEffect[5] & ITEM5_EV_SPEED)
+        return ITEM_EFFECT_SPEED_EV;
+    else if (itemEffect[5] & ITEM5_EV_DEF)
+        return ITEM_EFFECT_DEF_EV;
+    else if (itemEffect[4] & ITEM4_EVO_STONE)
+        return ITEM_EFFECT_EVO_STONE;
+    else if (itemEffect[4] & ITEM4_PP_UP)
+        return ITEM_EFFECT_PP_UP;
+    else if (itemEffect[5] & ITEM5_PP_MAX)
+        return ITEM_EFFECT_PP_MAX;
+    else if (itemEffect[4] & (ITEM4_HEAL_PP_ALL | ITEM4_HEAL_PP_ONE))
+        return ITEM_EFFECT_HEAL_PP;
     else
-        return 22;
+        return ITEM_EFFECT_NONE;
 }
 
 static void sub_81B7E4C(u8 taskId)

@@ -1,9 +1,9 @@
 Route112_CableCarStation_MapScripts:: @ 822AABE
-	map_script MAP_SCRIPT_ON_TRANSITION, Route112_CableCarStation_MapScript1_22AAC9
+	map_script MAP_SCRIPT_ON_TRANSITION, Route112_CableCarStation_OnTransition
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, Route112_CableCarStation_MapScript2_22AAE9
 	.byte 0
 
-Route112_CableCarStation_MapScript1_22AAC9: @ 822AAC9
+Route112_CableCarStation_OnTransition: @ 822AAC9
 	setescapewarp MAP_ROUTE112, 255, 28, 28
 	compare VAR_CABLE_CAR_STATION_STATE, 2
 	call_if_eq Route112_CableCarStation_EventScript_22AADD

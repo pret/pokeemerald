@@ -1,8 +1,8 @@
 DewfordTown_MapScripts:: @ 81E9507
-	map_script MAP_SCRIPT_ON_TRANSITION, DewfordTown_MapScript1_1E950D
+	map_script MAP_SCRIPT_ON_TRANSITION, DewfordTown_OnTransition
 	.byte 0
 
-DewfordTown_MapScript1_1E950D: @ 81E950D
+DewfordTown_OnTransition: @ 81E950D
 	setflag FLAG_VISITED_DEWFORD_TOWN
 	end
 

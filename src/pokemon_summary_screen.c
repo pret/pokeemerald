@@ -9,7 +9,7 @@
 #include "bg.h"
 #include "contest.h"
 #include "contest_effect.h"
-#include "data2.h"
+#include "data.h"
 #include "daycare.h"
 #include "decompress.h"
 #include "dynamic_placeholder_text_util.h"
@@ -164,7 +164,6 @@ static EWRAM_DATA struct PokemonSummaryScreenData
 EWRAM_DATA u8 gLastViewedMonIndex = 0;
 static EWRAM_DATA u8 sUnknown_0203CF21 = 0;
 ALIGNED(4) static EWRAM_DATA u8 sUnknownTaskId = 0;
-extern const struct CompressedSpriteSheet gMonFrontPicTable[];
 
 struct UnkStruct_61CC04
 {

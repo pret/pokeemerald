@@ -23,7 +23,8 @@
 #include "battle_anim.h"
 #include "constants/battle_anim.h"
 #include "constants/rgb.h"
-#include "data2.h"
+#include "data.h"
+#include "pokemon_summary_screen.h"
 
 struct TestingBar
 {
@@ -156,8 +157,6 @@ enum
     HEALTHBOX_GFX_116, //unknown_D12FEC
     HEALTHBOX_GFX_117, //unknown_D1300C
 };
-
-extern const u8 *const gNatureNamePointers[];
 
 // strings
 extern const u8 gText_Slash[];

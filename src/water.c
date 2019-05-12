@@ -483,7 +483,7 @@ extern const struct SpriteTemplate gUnknown_08597388;
 void AnimTask_CreateRaindrops(u8 taskId)
 {
     u8 x, y;
-    
+
     if (gTasks[taskId].data[0] == 0)
     {
         gTasks[taskId].data[1] = gBattleAnimArgs[0];
@@ -520,7 +520,7 @@ void sub_8107228(struct Sprite *sprite)
 void sub_8107260(struct Sprite *sprite)
 {
     u8 spriteId;
-    
+
     if (GetBattlerSide(gBattleAnimAttacker) != B_SIDE_PLAYER)
     {
         sprite->pos1.x = GetBattlerSpriteCoord(gBattleAnimAttacker, 2) - gBattleAnimArgs[0];
@@ -559,7 +559,7 @@ void sub_8107380(struct Sprite *sprite)
     u8 otherSpriteId = sprite->data[5];
     u8 timer = gSprites[otherSpriteId].data[4];
     u16 trigIndex = gSprites[otherSpriteId].data[3];
-    
+
     sprite->data[0] = 1;
     AnimTranslateLinear(sprite);
     sprite->pos2.x += Sin(trigIndex >> 8, gSprites[otherSpriteId].data[0]);
@@ -593,7 +593,7 @@ void sub_8107430(struct Sprite *sprite)
 void sub_810744C(struct Sprite *sprite)
 {
     s16 unkArg;
-    
+
     InitSpritePosToAnimAttacker(sprite, TRUE);
     if (GetBattlerSide(gBattleAnimAttacker) != B_SIDE_PLAYER)
         unkArg = -gBattleAnimArgs[2];
@@ -636,7 +636,7 @@ void sub_810756C(u8 taskId)
     u16 *palPtr1;
     u16 *palPtr2;
     u16 rgbBuffer;
-    
+
     if (++gTasks[taskId].data[10] == 3)
     {
         gTasks[taskId].data[10] = 0;
@@ -724,7 +724,7 @@ _081075DE:\n\
 void sub_81075EC(struct Sprite *sprite)
 {
     u16 retArg;
-    
+
     InitSpritePosToAnimAttacker(sprite, TRUE);
     sprite->data[0] = 30;
     sprite->data[1] = sprite->pos1.x;
@@ -781,7 +781,7 @@ void sub_81076F4(u8 taskId)
 void sub_8107730(struct Sprite *sprite)
 {
     u8 priority;
-    
+
     sprite->pos1.x = GetBattlerSpriteCoord(gBattleAnimAttacker, 0);
     sprite->pos1.y = GetBattlerSpriteCoord(gBattleAnimAttacker, 1);
     sprite->pos2.y = -10;
@@ -797,7 +797,7 @@ void sub_8107730(struct Sprite *sprite)
         {
             sprite->pos2.x = -10;
             sprite->subpriority = priority - 2;
-        }   
+        }
     }
     else
     {
@@ -876,7 +876,7 @@ void AnimTask_CreateSurfWave(u8 taskId)
 {
     struct BattleAnimBgData animBg;
     u8 taskId2;
-    
+
     SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT1_BG1 | BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_ALL);
     SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(0, 16));
     SetAnimBgAttribute(1, BG_ANIM_PRIORITY, 1);
@@ -894,9 +894,9 @@ void AnimTask_CreateSurfWave(u8 taskId)
     {
         sub_80A6D60(&animBg, gUnknown_08D963A4, 1);
     }
-    AnimLoadCompressedBgGfx(animBg.bgId, gBattleAnimBackgroundImage_Surf, animBg.tilesOffset);
+    AnimLoadCompressedBgGfx(animBg.bgId, gBattleAnimBgImage_Surf, animBg.tilesOffset);
     if (gBattleAnimArgs[0] == 0)
-        LoadCompressedPalette(gBattleAnimBackgroundPalette_Surf, animBg.paletteId * 16, 32);
+        LoadCompressedPalette(gBattleAnimBgPalette_Surf, animBg.paletteId * 16, 32);
     else
         LoadCompressedPalette(gBattleAnimBackgroundImageMuddyWater_Pal, animBg.paletteId * 16, 32);
     taskId2 = CreateTask(sub_8107D58, gTasks[taskId].priority + 1);
@@ -1009,7 +1009,7 @@ _081079E0:\n\
 _081079EA:\n\
 	mov r0, sp\n\
 	ldrb r0, [r0, 0x9]\n\
-	ldr r1, =gBattleAnimBackgroundImage_Surf\n\
+	ldr r1, =gBattleAnimBgImage_Surf\n\
 	mov r2, sp\n\
 	ldrh r2, [r2, 0xA]\n\
 	bl AnimLoadCompressedBgGfx\n\
@@ -1018,7 +1018,7 @@ _081079EA:\n\
 	ldrsh r0, [r0, r1]\n\
 	cmp r0, 0\n\
 	bne _08107A24\n\
-	ldr r0, =gBattleAnimBackgroundPalette_Surf\n\
+	ldr r0, =gBattleAnimBgPalette_Surf\n\
 	mov r1, sp\n\
 	ldrb r1, [r1, 0x8]\n\
 	lsls r1, 4\n\
@@ -1182,7 +1182,7 @@ void sub_8107B84(u8 taskId)
     s16 unkUse;
     u32 palOffset;
     u16 palNum;
-    
+
     *BGptrX += gTasks[taskId].data[0];
     *BGptrY += gTasks[taskId].data[1];
     sub_80A6B30(&animBg);
@@ -1405,485 +1405,77 @@ void sub_8107CC4(u8 taskId)
     }
 }
 
-#ifdef NONMATCHING
 void sub_8107D58(u8 taskId)
 {
     s16 i;
     struct ScanlineEffectParams params;
     struct Task *task = &gTasks[taskId];
-    // u16 *scanlineBuffer;
-    
+
     switch (task->data[0])
     {
-        case 0:
-            for (i = 0; i < task->data[4]; i++)
+    case 0:
+        for (i = 0; i < task->data[4]; i++)
+            gScanlineEffectRegBuffers[0][i] = gScanlineEffectRegBuffers[1][i] = task->data[2];
+        for (i = task->data[4]; i < task->data[5]; i++)
+            gScanlineEffectRegBuffers[0][i] = gScanlineEffectRegBuffers[1][i] = task->data[1];
+        for (i = task->data[5]; i < 160; i++)
+            gScanlineEffectRegBuffers[0][i] = gScanlineEffectRegBuffers[1][i] = task->data[2];
+
+        if (task->data[4] == 0)
+            gScanlineEffectRegBuffers[0][i] = gScanlineEffectRegBuffers[1][i] = task->data[1];
+        else
+            gScanlineEffectRegBuffers[0][i] = gScanlineEffectRegBuffers[1][i] = task->data[2];
+
+        params.dmaDest = (vu16 *)REG_ADDR_BLDALPHA;
+        params.dmaControl = SCANLINE_EFFECT_DMACNT_16BIT;
+        params.initState = 1;
+        params.unused9 = 0;
+        ScanlineEffect_SetParams(params);
+        task->data[0]++;
+        break;
+    case 1:
+        if (task->data[3] == 0)
+        {
+            if (--task->data[4] <= 0)
             {
-                /* scanlineBuffer = &gScanlineEffectRegBuffers[0][i];
-                *(u16 *)(&gScanlineEffect) = task->data[2];
-                *scanlineBuffer = task->data[2] & -1; */
-                gScanlineEffectRegBuffers[1][i] = task->data[2];
-                gScanlineEffectRegBuffers[0][i] = (u16)((int)(task->data[2] & 0xFFFF));
-            }
-            for (i = task->data[4]; i < task->data[5]; i++)
-            {
-                gScanlineEffectRegBuffers[1][i] = task->data[1];
-                gScanlineEffectRegBuffers[0][i] = (u16)((int)(task->data[1] & 0xFFFF));
-            }
-            for (i = task->data[5]; i < 160; i++)
-            {
-                gScanlineEffectRegBuffers[1][i] = task->data[2];
-                gScanlineEffectRegBuffers[0][i] = (u16)((int)(task->data[2] & 0xFFFF));
-            }
-            if (task->data[4] == 0)
-            {
-                gScanlineEffectRegBuffers[1][i] = task->data[1];
-                gScanlineEffectRegBuffers[0][i] = task->data[1];
-            }
-            else
-            {
-                gScanlineEffectRegBuffers[1][i] = task->data[2];
-                gScanlineEffectRegBuffers[0][i] = task->data[2];
-            }
-            params.dmaDest = (vu16 *)REG_ADDR_BLDALPHA;
-            params.dmaControl = SCANLINE_EFFECT_DMACNT_16BIT;
-            params.initState = 1;
-            params.unused9 = 0;
-            ScanlineEffect_SetParams(params);
-            task->data[0]++;
-            break;
-        case 1:
-            if (task->data[3] == 0)
-            {
-                if (--task->data[4] <= 0)
-                {
-                    task->data[4] = 0;
-                    task->data[0]++;
-                }
-            }
-            else if (++task->data[5] > 111)
-            {
+                task->data[4] = 0;
                 task->data[0]++;
             }
-            for (i = 0; i < task->data[4]; i++)
-            {
-                gScanlineEffectRegBuffers[gScanlineEffect.srcBuffer][i] = task->data[2];
-            }
-            for (i = task->data[4]; i < task->data[5]; i++)
-            {
-                gScanlineEffectRegBuffers[gScanlineEffect.srcBuffer][i] = task->data[1];
-            }
-            for (i = task->data[5]; i < 160; i++)
-            {
-                gScanlineEffectRegBuffers[gScanlineEffect.srcBuffer][i] = task->data[2];
-            }
-            break;
-        case 2:
-            for (i = 0; i < task->data[4]; i++)
-            {
-                gScanlineEffectRegBuffers[gScanlineEffect.srcBuffer][i] = task->data[2];
-            }
-            for (i = task->data[4]; i < task->data[5]; i++)
-            {
-                gScanlineEffectRegBuffers[gScanlineEffect.srcBuffer][i] = task->data[1];
-            }
-            for (i = task->data[5]; i < 160; i++)
-            {
-                gScanlineEffectRegBuffers[gScanlineEffect.srcBuffer][i] = task->data[2];
-            }
-            if (task->data[15] == -1)
-            {
-                ScanlineEffect_Stop();
-                DestroyTask(taskId);
-            }
-            break;
+        }
+        else if (++task->data[5] > 111)
+        {
+            task->data[0]++;
+        }
+
+        for (i = 0; i < task->data[4]; i++)
+            gScanlineEffectRegBuffers[gScanlineEffect.srcBuffer][i] = task->data[2];
+        for (i = task->data[4]; i < task->data[5]; i++)
+            gScanlineEffectRegBuffers[gScanlineEffect.srcBuffer][i] = task->data[1];
+        for (i = task->data[5]; i < 160; i++)
+            gScanlineEffectRegBuffers[gScanlineEffect.srcBuffer][i] = task->data[2];
+        break;
+    case 2:
+        for (i = 0; i < task->data[4]; i++)
+            gScanlineEffectRegBuffers[gScanlineEffect.srcBuffer][i] = task->data[2];
+        for (i = task->data[4]; i < task->data[5]; i++)
+            gScanlineEffectRegBuffers[gScanlineEffect.srcBuffer][i] = task->data[1];
+        for (i = task->data[5]; i < 160; i++)
+            gScanlineEffectRegBuffers[gScanlineEffect.srcBuffer][i] = task->data[2];
+
+        if (task->data[15] == -1)
+        {
+            ScanlineEffect_Stop();
+            DestroyTask(taskId);
+        }
+        break;
     }
 }
-#else
-NAKED
-void sub_8107D58(u8 taskId)
-{
-    asm_unified("push {r4-r7,lr}\n\
-	sub sp, 0xC\n\
-	lsls r0, 24\n\
-	lsrs r7, r0, 24\n\
-	lsls r0, r7, 2\n\
-	adds r0, r7\n\
-	lsls r0, 3\n\
-	ldr r1, =gTasks\n\
-	adds r4, r0, r1\n\
-	movs r1, 0x8\n\
-	ldrsh r0, [r4, r1]\n\
-	cmp r0, 0x1\n\
-	bne _08107D74\n\
-	b _08107EAC\n\
-_08107D74:\n\
-	cmp r0, 0x1\n\
-	bgt _08107D84\n\
-	cmp r0, 0\n\
-	beq _08107D8C\n\
-	b _08108022\n\
-	.pool\n\
-_08107D84:\n\
-	cmp r0, 0x2\n\
-	bne _08107D8A\n\
-	b _08107F78\n\
-_08107D8A:\n\
-	b _08108022\n\
-_08107D8C:\n\
-	movs r3, 0\n\
-	movs r2, 0x10\n\
-	ldrsh r0, [r4, r2]\n\
-	ldr r1, =gScanlineEffectRegBuffers\n\
-	mov r12, r1\n\
-	cmp r3, r0\n\
-	bge _08107DCA\n\
-	mov r7, r12\n\
-	movs r5, 0xF0\n\
-	lsls r5, 3\n\
-	add r5, r12\n\
-	ldr r6, =0x0000ffff\n\
-_08107DA4:\n\
-	lsls r2, r3, 16\n\
-	asrs r2, 16\n\
-	lsls r1, r2, 1\n\
-	adds r3, r1, r7\n\
-	adds r1, r5\n\
-	ldrh r0, [r4, 0xC]\n\
-	strh r0, [r1]\n\
-	ldrh r1, [r4, 0xC]\n\
-	adds r0, r6, 0\n\
-	ands r0, r1\n\
-	strh r0, [r3]\n\
-	adds r2, 0x1\n\
-	lsls r2, 16\n\
-	lsrs r3, r2, 16\n\
-	asrs r2, 16\n\
-	movs r1, 0x10\n\
-	ldrsh r0, [r4, r1]\n\
-	cmp r2, r0\n\
-	blt _08107DA4\n\
-_08107DCA:\n\
-	ldrh r3, [r4, 0x10]\n\
-	lsls r2, r3, 16\n\
-	asrs r1, r2, 16\n\
-	movs r3, 0x12\n\
-	ldrsh r0, [r4, r3]\n\
-	cmp r1, r0\n\
-	bge _08107E04\n\
-	ldr r5, =gScanlineEffectRegBuffers\n\
-	movs r0, 0xF0\n\
-	lsls r0, 3\n\
-	adds r6, r5, r0\n\
-	ldr r7, =0x0000ffff\n\
-_08107DE2:\n\
-	asrs r2, 16\n\
-	lsls r1, r2, 1\n\
-	adds r3, r1, r5\n\
-	adds r1, r6\n\
-	ldrh r0, [r4, 0xA]\n\
-	strh r0, [r1]\n\
-	ldrh r1, [r4, 0xA]\n\
-	adds r0, r7, 0\n\
-	ands r0, r1\n\
-	strh r0, [r3]\n\
-	adds r2, 0x1\n\
-	lsls r2, 16\n\
-	asrs r1, r2, 16\n\
-	movs r3, 0x12\n\
-	ldrsh r0, [r4, r3]\n\
-	cmp r1, r0\n\
-	blt _08107DE2\n\
-_08107E04:\n\
-	ldrh r3, [r4, 0x12]\n\
-	lsls r2, r3, 16\n\
-	asrs r0, r2, 16\n\
-	cmp r0, 0x9F\n\
-	bgt _08107E3A\n\
-	ldr r5, =gScanlineEffectRegBuffers\n\
-	movs r0, 0xF0\n\
-	lsls r0, 3\n\
-	adds r6, r5, r0\n\
-	ldr r7, =0x0000ffff\n\
-_08107E18:\n\
-	asrs r2, 16\n\
-	lsls r1, r2, 1\n\
-	adds r3, r1, r5\n\
-	adds r1, r6\n\
-	ldrh r0, [r4, 0xC]\n\
-	strh r0, [r1]\n\
-	ldrh r1, [r4, 0xC]\n\
-	adds r0, r7, 0\n\
-	ands r0, r1\n\
-	strh r0, [r3]\n\
-	adds r2, 0x1\n\
-	lsls r2, 16\n\
-	lsrs r3, r2, 16\n\
-	lsls r2, r3, 16\n\
-	asrs r0, r2, 16\n\
-	cmp r0, 0x9F\n\
-	ble _08107E18\n\
-_08107E3A:\n\
-	movs r1, 0x10\n\
-	ldrsh r0, [r4, r1]\n\
-	cmp r0, 0\n\
-	bne _08107E64\n\
-	lsls r0, r3, 16\n\
-	asrs r0, 15\n\
-	mov r3, r12\n\
-	adds r2, r0, r3\n\
-	movs r1, 0xF0\n\
-	lsls r1, 3\n\
-	add r1, r12\n\
-	adds r0, r1\n\
-	ldrh r1, [r4, 0xA]\n\
-	strh r1, [r0]\n\
-	ldrh r0, [r4, 0xA]\n\
-	b _08107E7A\n\
-	.pool\n\
-_08107E64:\n\
-	lsls r0, r3, 16\n\
-	asrs r0, 15\n\
-	mov r1, r12\n\
-	adds r2, r0, r1\n\
-	movs r1, 0xF0\n\
-	lsls r1, 3\n\
-	add r1, r12\n\
-	adds r0, r1\n\
-	ldrh r1, [r4, 0xC]\n\
-	strh r1, [r0]\n\
-	ldrh r0, [r4, 0xC]\n\
-_08107E7A:\n\
-	strh r0, [r2]\n\
-	ldr r0, =0x04000052\n\
-	str r0, [sp]\n\
-	ldr r0, =0xa2600001\n\
-	str r0, [sp, 0x4]\n\
-	mov r1, sp\n\
-	movs r2, 0\n\
-	movs r0, 0x1\n\
-	strb r0, [r1, 0x8]\n\
-	mov r0, sp\n\
-	strb r2, [r0, 0x9]\n\
-	ldr r0, [sp]\n\
-	ldr r1, [sp, 0x4]\n\
-	ldr r2, [sp, 0x8]\n\
-	bl ScanlineEffect_SetParams\n\
-	ldrh r0, [r4, 0x8]\n\
-	adds r0, 0x1\n\
-	strh r0, [r4, 0x8]\n\
-	b _08108022\n\
-	.pool\n\
-_08107EAC:\n\
-	movs r2, 0xE\n\
-	ldrsh r1, [r4, r2]\n\
-	cmp r1, 0\n\
-	bne _08107EC4\n\
-	ldrh r0, [r4, 0x10]\n\
-	subs r0, 0x1\n\
-	strh r0, [r4, 0x10]\n\
-	lsls r0, 16\n\
-	cmp r0, 0\n\
-	bgt _08107ED8\n\
-	strh r1, [r4, 0x10]\n\
-	b _08107ED2\n\
-_08107EC4:\n\
-	ldrh r0, [r4, 0x12]\n\
-	adds r0, 0x1\n\
-	strh r0, [r4, 0x12]\n\
-	lsls r0, 16\n\
-	asrs r0, 16\n\
-	cmp r0, 0x6F\n\
-	ble _08107ED8\n\
-_08107ED2:\n\
-	ldrh r0, [r4, 0x8]\n\
-	adds r0, 0x1\n\
-	strh r0, [r4, 0x8]\n\
-_08107ED8:\n\
-	movs r3, 0\n\
-	movs r1, 0x10\n\
-	ldrsh r0, [r4, r1]\n\
-	cmp r3, r0\n\
-	bge _08107F0C\n\
-	ldr r6, =gScanlineEffectRegBuffers\n\
-	ldr r5, =gScanlineEffect\n\
-_08107EE6:\n\
-	lsls r1, r3, 16\n\
-	asrs r1, 16\n\
-	lsls r3, r1, 1\n\
-	ldrb r2, [r5, 0x14]\n\
-	lsls r0, r2, 4\n\
-	subs r0, r2\n\
-	lsls r0, 7\n\
-	adds r3, r0\n\
-	adds r3, r6\n\
-	ldrh r0, [r4, 0xC]\n\
-	strh r0, [r3]\n\
-	adds r1, 0x1\n\
-	lsls r1, 16\n\
-	lsrs r3, r1, 16\n\
-	asrs r1, 16\n\
-	movs r2, 0x10\n\
-	ldrsh r0, [r4, r2]\n\
-	cmp r1, r0\n\
-	blt _08107EE6\n\
-_08107F0C:\n\
-	ldrh r3, [r4, 0x10]\n\
-	lsls r2, r3, 16\n\
-	asrs r1, r2, 16\n\
-	movs r3, 0x12\n\
-	ldrsh r0, [r4, r3]\n\
-	cmp r1, r0\n\
-	bge _08107F40\n\
-	ldr r6, =gScanlineEffectRegBuffers\n\
-	ldr r5, =gScanlineEffect\n\
-_08107F1E:\n\
-	asrs r3, r2, 16\n\
-	lsls r2, r3, 1\n\
-	ldrb r1, [r5, 0x14]\n\
-	lsls r0, r1, 4\n\
-	subs r0, r1\n\
-	lsls r0, 7\n\
-	adds r2, r0\n\
-	adds r2, r6\n\
-	ldrh r0, [r4, 0xA]\n\
-	strh r0, [r2]\n\
-	adds r3, 0x1\n\
-	lsls r2, r3, 16\n\
-	asrs r1, r2, 16\n\
-	movs r3, 0x12\n\
-	ldrsh r0, [r4, r3]\n\
-	cmp r1, r0\n\
-	blt _08107F1E\n\
-_08107F40:\n\
-	ldrh r3, [r4, 0x12]\n\
-	lsls r1, r3, 16\n\
-	asrs r0, r1, 16\n\
-	cmp r0, 0x9F\n\
-	bgt _08108022\n\
-	ldr r6, =gScanlineEffectRegBuffers\n\
-	ldr r5, =gScanlineEffect\n\
-_08107F4E:\n\
-	asrs r3, r1, 16\n\
-	lsls r2, r3, 1\n\
-	ldrb r1, [r5, 0x14]\n\
-	lsls r0, r1, 4\n\
-	subs r0, r1\n\
-	lsls r0, 7\n\
-	adds r2, r0\n\
-	adds r2, r6\n\
-	ldrh r0, [r4, 0xC]\n\
-	strh r0, [r2]\n\
-	adds r3, 0x1\n\
-	lsls r1, r3, 16\n\
-	asrs r0, r1, 16\n\
-	cmp r0, 0x9F\n\
-	ble _08107F4E\n\
-	b _08108022\n\
-	.pool\n\
-_08107F78:\n\
-	movs r3, 0\n\
-	movs r1, 0x10\n\
-	ldrsh r0, [r4, r1]\n\
-	cmp r3, r0\n\
-	bge _08107FAC\n\
-	ldr r6, =gScanlineEffectRegBuffers\n\
-	ldr r5, =gScanlineEffect\n\
-_08107F86:\n\
-	lsls r1, r3, 16\n\
-	asrs r1, 16\n\
-	lsls r3, r1, 1\n\
-	ldrb r2, [r5, 0x14]\n\
-	lsls r0, r2, 4\n\
-	subs r0, r2\n\
-	lsls r0, 7\n\
-	adds r3, r0\n\
-	adds r3, r6\n\
-	ldrh r0, [r4, 0xC]\n\
-	strh r0, [r3]\n\
-	adds r1, 0x1\n\
-	lsls r1, 16\n\
-	lsrs r3, r1, 16\n\
-	asrs r1, 16\n\
-	movs r2, 0x10\n\
-	ldrsh r0, [r4, r2]\n\
-	cmp r1, r0\n\
-	blt _08107F86\n\
-_08107FAC:\n\
-	ldrh r3, [r4, 0x10]\n\
-	lsls r2, r3, 16\n\
-	asrs r1, r2, 16\n\
-	movs r3, 0x12\n\
-	ldrsh r0, [r4, r3]\n\
-	cmp r1, r0\n\
-	bge _08107FE0\n\
-	ldr r6, =gScanlineEffectRegBuffers\n\
-	ldr r5, =gScanlineEffect\n\
-_08107FBE:\n\
-	asrs r3, r2, 16\n\
-	lsls r2, r3, 1\n\
-	ldrb r1, [r5, 0x14]\n\
-	lsls r0, r1, 4\n\
-	subs r0, r1\n\
-	lsls r0, 7\n\
-	adds r2, r0\n\
-	adds r2, r6\n\
-	ldrh r0, [r4, 0xA]\n\
-	strh r0, [r2]\n\
-	adds r3, 0x1\n\
-	lsls r2, r3, 16\n\
-	asrs r1, r2, 16\n\
-	movs r3, 0x12\n\
-	ldrsh r0, [r4, r3]\n\
-	cmp r1, r0\n\
-	blt _08107FBE\n\
-_08107FE0:\n\
-	ldrh r3, [r4, 0x12]\n\
-	lsls r1, r3, 16\n\
-	asrs r0, r1, 16\n\
-	cmp r0, 0x9F\n\
-	bgt _0810800C\n\
-	ldr r6, =gScanlineEffectRegBuffers\n\
-	ldr r5, =gScanlineEffect\n\
-_08107FEE:\n\
-	asrs r3, r1, 16\n\
-	lsls r2, r3, 1\n\
-	ldrb r1, [r5, 0x14]\n\
-	lsls r0, r1, 4\n\
-	subs r0, r1\n\
-	lsls r0, 7\n\
-	adds r2, r0\n\
-	adds r2, r6\n\
-	ldrh r0, [r4, 0xC]\n\
-	strh r0, [r2]\n\
-	adds r3, 0x1\n\
-	lsls r1, r3, 16\n\
-	asrs r0, r1, 16\n\
-	cmp r0, 0x9F\n\
-	ble _08107FEE\n\
-_0810800C:\n\
-	movs r0, 0x26\n\
-	ldrsh r1, [r4, r0]\n\
-	movs r0, 0x1\n\
-	negs r0, r0\n\
-	cmp r1, r0\n\
-	bne _08108022\n\
-	bl ScanlineEffect_Stop\n\
-	adds r0, r7, 0\n\
-	bl DestroyTask\n\
-_08108022:\n\
-	add sp, 0xC\n\
-	pop {r4-r7}\n\
-	pop {r0}\n\
-	bx r0\n\
-	.pool\n");
-}
-#endif
 
 void sub_8108034(struct Sprite *sprite)
 {
     s16 randData;
     s16 randData2;
-    
+
     sprite->oam.tileNum += 8;
     InitSpritePosToAnimTarget(sprite, TRUE);
     randData = (Random2() & 0xFF) | 256;
@@ -1911,7 +1503,7 @@ void sub_8108098(struct Sprite *sprite)
 void sub_81080E4(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
-    
+
     task->data[15] = GetAnimBattlerSpriteId(ANIM_ATTACKER);
     task->data[5] = gSprites[task->data[15]].pos1.y;
     task->data[1] = sub_8108384();
@@ -1922,85 +1514,85 @@ void sub_81080E4(u8 taskId)
 void sub_8108140(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
-    
+
     switch (task->data[0])
     {
-        case 0:
-            sub_80A805C(task, task->data[15], 0x100, 0x100, 224, 0x200, 32);
+    case 0:
+        sub_80A805C(task, task->data[15], 0x100, 0x100, 224, 0x200, 32);
+        task->data[0]++;
+    case 1:
+        if (++task->data[3] > 1)
+        {
+            task->data[3] = 0;
+            if (++task->data[4] & 1)
+            {
+                gSprites[task->data[15]].pos2.x = 3;
+                gSprites[task->data[15]].pos1.y++;
+            }
+            else
+            {
+                gSprites[task->data[15]].pos2.x = -3;
+            }
+        }
+        if (sub_80A80C8(task) == 0)
+        {
+            SetBattlerSpriteYOffsetFromYScale(task->data[15]);
+            gSprites[task->data[15]].pos2.x = 0;
+            task->data[3] = 0;
+            task->data[4] = 0;
             task->data[0]++;
-        case 1:
-            if (++task->data[3] > 1)
-            {
-                task->data[3] = 0;
-                if (++task->data[4] & 1)
-                {
-                    gSprites[task->data[15]].pos2.x = 3;
-                    gSprites[task->data[15]].pos1.y++;
-                }
-                else
-                {
-                    gSprites[task->data[15]].pos2.x = -3;
-                }
-            }
-            if (sub_80A80C8(task) == 0)
-            {
-                SetBattlerSpriteYOffsetFromYScale(task->data[15]);
-                gSprites[task->data[15]].pos2.x = 0;
-                task->data[3] = 0;
-                task->data[4] = 0;
-                task->data[0]++;
-            }
-            break;
-        case 2:
-            if (++task->data[3] > 4)
-            {
-                sub_80A805C(task, task->data[15], 224, 0x200, 384, 224, 8);
-                task->data[3] = 0;
-                task->data[0]++;
-            }
-            break;
-        case 3:
-            if (sub_80A80C8(task) == 0)
-            {
-                task->data[3] = 0;
-                task->data[4] = 0;
-                task->data[0]++;
-            }
-            break;
-        case 4:
-            sub_8108408(task, taskId);
+        }
+        break;
+    case 2:
+        if (++task->data[3] > 4)
+        {
+            sub_80A805C(task, task->data[15], 224, 0x200, 384, 224, 8);
+            task->data[3] = 0;
             task->data[0]++;
-        case 5:
-            if (++task->data[3] > 1)
+        }
+        break;
+    case 3:
+        if (sub_80A80C8(task) == 0)
+        {
+            task->data[3] = 0;
+            task->data[4] = 0;
+            task->data[0]++;
+        }
+        break;
+    case 4:
+        sub_8108408(task, taskId);
+        task->data[0]++;
+    case 5:
+        if (++task->data[3] > 1)
+        {
+            task->data[3] = 0;
+            if (++task->data[4] & 1)
+                gSprites[task->data[15]].pos2.y += 2;
+            else
+                gSprites[task->data[15]].pos2.y -= 2;
+            if (task->data[4] == 10)
             {
+                sub_80A805C(task, task->data[15], 384, 224, 0x100, 0x100, 8);
                 task->data[3] = 0;
-                if (++task->data[4] & 1)
-                    gSprites[task->data[15]].pos2.y += 2;
-                else
-                    gSprites[task->data[15]].pos2.y -= 2;
-                if (task->data[4] == 10)
-                {
-                    sub_80A805C(task, task->data[15], 384, 224, 0x100, 0x100, 8);
-                    task->data[3] = 0;
-                    task->data[4] = 0;
-                    task->data[0]++;
-                }
-            }
-            break;
-        case 6:
-            gSprites[task->data[15]].pos1.y--;
-            if (sub_80A80C8(task) == 0)
-            {
-                ResetSpriteRotScale(task->data[15]);
-                gSprites[task->data[15]].pos1.y = task->data[5];
                 task->data[4] = 0;
                 task->data[0]++;
             }
-            break;
-        case 7:
-            if (task->data[2] == 0)
-                DestroyAnimVisualTask(taskId);
-            break;
+        }
+        break;
+    case 6:
+        gSprites[task->data[15]].pos1.y--;
+        if (sub_80A80C8(task) == 0)
+        {
+            ResetSpriteRotScale(task->data[15]);
+            gSprites[task->data[15]].pos1.y = task->data[5];
+            task->data[4] = 0;
+            task->data[0]++;
+        }
+        break;
+    case 7:
+        if (task->data[2] == 0)
+            DestroyAnimVisualTask(taskId);
+        break;
     }
 }
 
@@ -2011,7 +1603,7 @@ u8 sub_8108384(void)
     u16 maxhp;
     u16 partyIndex;
     struct Pokemon *slot;
-    
+
     if (GetBattlerSide(gBattleAnimAttacker) == B_SIDE_PLAYER)
     {
         partyIndex = gBattlerPartyIndexes[gBattleAnimAttacker];
@@ -2045,7 +1637,7 @@ void sub_8108408(struct Task *task, u8 taskId)
     u8 subpriority = GetBattlerSpriteSubpriority(gBattleAnimAttacker) - 1;
     s16 increment = 4 - task->data[1];
     u8 spriteId;
-    
+
     if (increment <= 0)
         increment = 1;
     for (i = 0; i < 20; i += increment)
@@ -2073,28 +1665,28 @@ void sub_810851C(struct Sprite *sprite)
 {
     switch (sprite->data[0])
     {
-        case 0:
-            sprite->data[4] += (sprite->data[1] % 6) * 3;
-            sprite->data[5] += (sprite->data[1] % 3) * 3;
-            sprite->data[0]++;
-        case 1:
-            sprite->data[2] += sprite->data[4];
-            sprite->data[3] += sprite->data[5];
-            sprite->pos1.x = sprite->data[2] >> 4;
-            sprite->pos1.y = sprite->data[3] >> 4;
-            if (sprite->pos1.x < -8 || sprite->pos1.x > 248 || sprite->pos1.y < -8 || sprite->pos1.y > 120)
-            {
-                gTasks[sprite->data[6]].data[sprite->data[7]]--;
-                DestroySprite(sprite);
-            }
-            break;
+    case 0:
+        sprite->data[4] += (sprite->data[1] % 6) * 3;
+        sprite->data[5] += (sprite->data[1] % 3) * 3;
+        sprite->data[0]++;
+    case 1:
+        sprite->data[2] += sprite->data[4];
+        sprite->data[3] += sprite->data[5];
+        sprite->pos1.x = sprite->data[2] >> 4;
+        sprite->pos1.y = sprite->data[3] >> 4;
+        if (sprite->pos1.x < -8 || sprite->pos1.x > 248 || sprite->pos1.y < -8 || sprite->pos1.y > 120)
+        {
+            gTasks[sprite->data[6]].data[sprite->data[7]]--;
+            DestroySprite(sprite);
+        }
+        break;
     }
 }
 
 void sub_81085C8(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
-    
+
     task->data[1] = sub_8108384();
     if (GetBattlerSide(gBattleAnimAttacker) == B_SIDE_PLAYER)
     {
@@ -2116,42 +1708,42 @@ void sub_810862C(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
     u8 taskId2;
-    
+
     switch (task->data[0])
     {
-        case 0:
-            if (++task->data[2] > 2)
+    case 0:
+        if (++task->data[2] > 2)
+        {
+            task->data[2] = 0;
+            sub_810871C(task, taskId);
+        }
+        if (task->data[10] != 0 && task->data[13] == 0)
+        {
+            gBattleAnimArgs[0] = 1;
+            gBattleAnimArgs[1] = 0;
+            gBattleAnimArgs[2] = 12;
+            taskId2 = CreateTask(sub_81152DC, 80);
+            if (taskId2 != 0xFF)
             {
-                task->data[2] = 0;
-                sub_810871C(task, taskId);
+                gTasks[taskId2].func(taskId2);
+                gAnimVisualTaskCount++;
             }
-            if (task->data[10] != 0 && task->data[13] == 0)
+            gBattleAnimArgs[0] = 3;
+            taskId2 = CreateTask(sub_81152DC, 80);
+            if (taskId2 != 0xFF)
             {
-                gBattleAnimArgs[0] = 1;
-                gBattleAnimArgs[1] = 0;
-                gBattleAnimArgs[2] = 12;
-                taskId2 = CreateTask(sub_81152DC, 80);
-                if (taskId2 != 0xFF)
-                {
-                    gTasks[taskId2].func(taskId2);
-                    gAnimVisualTaskCount++;
-                }
-                gBattleAnimArgs[0] = 3;
-                taskId2 = CreateTask(sub_81152DC, 80);
-                if (taskId2 != 0xFF)
-                {
-                    gTasks[taskId2].func(taskId2);
-                    gAnimVisualTaskCount++;
-                }
-                task->data[13] = 1;
+                gTasks[taskId2].func(taskId2);
+                gAnimVisualTaskCount++;
             }
-            if (task->data[11] >= task->data[12])
-                task->data[0]++;
-            break;
-        case 1:
-            if (task->data[9] == 0)
-                DestroyAnimVisualTask(taskId);
-            break;
+            task->data[13] = 1;
+        }
+        if (task->data[11] >= task->data[12])
+            task->data[0]++;
+        break;
+    case 1:
+        if (task->data[9] == 0)
+            DestroyAnimVisualTask(taskId);
+        break;
     }
 }
 
@@ -2159,7 +1751,7 @@ void sub_810871C(struct Task *task, u8 taskId)
 {
     u16 yPosArg = ((gSineTable[task->data[8]] + 3) >> 4) + task->data[6];
     u8 spriteId = CreateSprite(&gUnknown_08595268, task->data[7], 0, 0);
-    
+
     if (spriteId != MAX_SPRITES)
     {
         gSprites[spriteId].callback = sub_81087C0;
@@ -2212,7 +1804,7 @@ void sub_810886C(struct Sprite *sprite)
 void sub_81088E4(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
-    
+
     task->data[3] = GetBattlerSpriteCoord(gBattleAnimAttacker, 2);
     task->data[4] = GetBattlerSpriteCoord(gBattleAnimAttacker, 3);
     task->data[7] = (GetBattlerSide(gBattleAnimAttacker) == B_SIDE_PLAYER) ? 1 : -1;
@@ -2229,76 +1821,76 @@ void sub_81088E4(u8 taskId)
 void sub_8108978(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
-    
+
     switch (task->data[0])
     {
-        case 0:
-            sub_8108AC0(task);
-            if (task->data[10] != 0)
-                task->data[0]++;
-            break;
-        case 1:
-            sub_8108AC0(task);
-            if (++task->data[1] > 16)
+    case 0:
+        sub_8108AC0(task);
+        if (task->data[10] != 0)
+            task->data[0]++;
+        break;
+    case 1:
+        sub_8108AC0(task);
+        if (++task->data[1] > 16)
+        {
+            task->data[1] = 0;
+            task->data[0]++;
+        }
+        break;
+    case 2:
+        sub_8108AC0(task);
+        task->data[5] += task->data[7] * 6;
+        if (!(task->data[5] >= -16 && task->data[5] <= 256))
+        {
+            if (++task->data[12] > 2)
+            {
+                task->data[13] = 1;
+                task->data[0] = 6;
+                task->data[1] = 0;
+            }
+            else
             {
                 task->data[1] = 0;
                 task->data[0]++;
             }
-            break;
-        case 2:
-            sub_8108AC0(task);
-            task->data[5] += task->data[7] * 6;
-            if (!(task->data[5] >= -16 && task->data[5] <= 256))
-            {
-                if (++task->data[12] > 2)
-                {
-                    task->data[13] = 1;
-                    task->data[0] = 6;
-                    task->data[1] = 0;
-                }
-                else
-                {
-                    task->data[1] = 0;
-                    task->data[0]++;
-                }
-            }
-            break;
-        case 3:
-            sub_8108AC0(task);
-            task->data[6] -= task->data[7] * 2;
-            if (++task->data[1] > 7)
-                task->data[0]++;
-            break;
-        case 4:
-            sub_8108AC0(task);
-            task->data[5] -= task->data[7] * 6;
-            if (!(task->data[5] >= -16 && task->data[5] <= 256))
-            {
-                task->data[12]++;
-                task->data[1] = 0;
-                task->data[0]++;
-            }
-            break;
-        case 5:
-            sub_8108AC0(task);
-            task->data[6] -= task->data[7] * 2;
-            if (++task->data[1] > 7)
-                task->data[0] = 2;
-            break;
-        case 6:
-            if (task->data[8] == 0)
-                task->data[0]++;
-            break;
-        default:
-            DestroyAnimVisualTask(taskId);
-            break;
+        }
+        break;
+    case 3:
+        sub_8108AC0(task);
+        task->data[6] -= task->data[7] * 2;
+        if (++task->data[1] > 7)
+            task->data[0]++;
+        break;
+    case 4:
+        sub_8108AC0(task);
+        task->data[5] -= task->data[7] * 6;
+        if (!(task->data[5] >= -16 && task->data[5] <= 256))
+        {
+            task->data[12]++;
+            task->data[1] = 0;
+            task->data[0]++;
+        }
+        break;
+    case 5:
+        sub_8108AC0(task);
+        task->data[6] -= task->data[7] * 2;
+        if (++task->data[1] > 7)
+            task->data[0] = 2;
+        break;
+    case 6:
+        if (task->data[8] == 0)
+            task->data[0]++;
+        break;
+    default:
+        DestroyAnimVisualTask(taskId);
+        break;
     }
 }
 
 void sub_8108AC0(struct Task *task)
 {
     u8 spriteId;
-    
+
     if (++task->data[2] > 1)
     {
         task->data[2] = 0;
@@ -2334,7 +1926,7 @@ void sub_8108B2C(struct Sprite *sprite)
 void sub_8108B94(struct Sprite *sprite)
 {
     u16 i;
-    
+
     if (TranslateAnimHorizontalArc(sprite))
     {
         for (i = 0; i < NUM_TASKS; i++)
@@ -2397,7 +1989,7 @@ void sub_8108CDC(struct Sprite *sprite)
 {
     int xDiff = sprite->data[1] - sprite->pos1.x;
     int yDiff = sprite->data[2] - sprite->pos1.y;
-    
+
     sprite->pos2.x = (sprite->data[0] * xDiff) / sprite->data[3];
     sprite->pos2.y = (sprite->data[0] * yDiff) / sprite->data[3];
     if (++sprite->data[5] == sprite->data[4])
@@ -2420,7 +2012,7 @@ void sub_8108D54(struct Sprite *sprite, int xDiff, int yDiff)
     s16 randomSomethingX = -xDiff + (Random2() % 10) - 5;
     s16 i;
     u8 spriteId;
-    
+
     for (i = 0; i <= 0; i++)
     {
         spriteId = CreateSprite(&gUnknown_08595310, combinedX, combinedY + something, 130);

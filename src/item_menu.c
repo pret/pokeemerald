@@ -8,7 +8,7 @@
 #include "bg.h"
 #include "constants/items.h"
 #include "constants/songs.h"
-#include "data2.h"
+#include "data.h"
 #include "decompress.h"
 #include "event_data.h"
 #include "event_object_movement.h"
@@ -49,6 +49,7 @@
 #include "window.h"
 #include "apprentice.h"
 #include "battle_pike.h"
+#include "constants/rgb.h"
 
 void GoToBagMenu(u8 bagMenuType, u8 pocketId, void ( *postExitMenuMainCallback2)());
 void CB2_Bag(void);
@@ -659,7 +660,7 @@ bool8 setup_bag_menu(void)
         gMain.state++;
         break;
     case 20:
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, 0);
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB_BLACK);
         gPaletteFade.bufferTransferDisabled = FALSE;
         gMain.state++;
         break;
@@ -942,7 +943,7 @@ void free_bag_item_list_buffers(void)
 
 void unknown_ItemMenu_Confirm(u8 taskId)
 {
-    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
+    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
     gTasks[taskId].func = task_close_bag_menu_2;
 }
 

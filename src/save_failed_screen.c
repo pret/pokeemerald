@@ -321,7 +321,7 @@ static void CB2_FadeAndReturnToTitleScreen(void)
 
     if (gMain.newKeys & A_BUTTON)
     {
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
         SetVBlankCallback(VBlankCB);
         SetMainCallback2(CB2_ReturnToTitleScreen);
     }

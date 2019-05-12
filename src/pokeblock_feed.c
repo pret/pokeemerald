@@ -1,13 +1,14 @@
 #include "global.h"
-#include "battle.h" // to get rid of once gMonSpritesGfxPtr is put elsewhere
+#include "alloc.h"
+#include "battle.h"
 #include "bg.h"
-#include "data2.h"
+#include "data.h"
 #include "decompress.h"
 #include "event_data.h"
 #include "gpu_regs.h"
 #include "graphics.h"
+#include "item_menu.h"
 #include "main.h"
-#include "alloc.h"
 #include "menu.h"
 #include "menu_helpers.h"
 #include "m4a.h"
@@ -23,6 +24,7 @@
 #include "text_window.h"
 #include "trig.h"
 #include "util.h"
+#include "constants/rgb.h"
 
 struct PokeblockFeedStruct
 {
@@ -49,10 +51,8 @@ struct PokeblockFeedStruct
     u8 unused;
 };
 
-extern u16 gSpecialVar_ItemId;
 extern struct MusicPlayerInfo gMPlayInfo_BGM;
 
-extern const struct CompressedSpriteSheet gMonFrontPicTable[];
 extern const u16 gUnknown_0860F074[];
 
 // this file's functions
@@ -591,7 +591,7 @@ static bool8 TransitionToPokeblockFeedScene(void)
         gMain.state++;
         break;
     case 13:
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0x10, 0, 0);
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0x10, 0, RGB_BLACK);
         gPaletteFade.bufferTransferDisabled = 0;
         gMain.state++;
         break;
@@ -805,7 +805,7 @@ static void Task_ReturnAfterPaletteFade(u8 taskId)
 
 static void Task_PaletteFadeToReturn(u8 taskId)
 {
-    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 0x10, 0);
+    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 0x10, RGB_BLACK);
     gTasks[taskId].func = Task_ReturnAfterPaletteFade;
 }
 

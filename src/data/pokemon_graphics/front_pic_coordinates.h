@@ -1,5 +1,3 @@
-#include "constants/species.h"
-
 const struct MonCoords gMonFrontPicCoords[] =
 {
     [SPECIES_NONE] =

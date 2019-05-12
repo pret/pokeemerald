@@ -132,7 +132,7 @@ extern const u8 gText_ApostropheSBase[];
 extern const u8 gText_NoRegistry[];
 extern const u8 gText_OkayToDeleteFromRegistry[];
 extern const u8 gText_RegisteredDataDeleted[];
-extern const u8 gUnknown_085EA79D[];
+extern const u8 gText_DelRegist[];
 extern const u8 gText_CommErrorEllipsis[];
 extern const u8 gText_MoveCloserToLinkPartner[];
 extern const u8 gText_CommErrorCheckConnections[];
@@ -471,6 +471,12 @@ extern const u8 gText_EggCantBattle[];
 extern const u8 gText_PkmnAlreadySelected[];
 extern const u8 gText_PkmnAlreadyInBattle[];
 extern const u8 gText_PkmnCantSwitchOut[];
+extern const u8 gUnknown_085EEA46[];
+extern const u8 gUnknown_085EEA4E[];
+extern const u8 gUnknown_085EEA55[];
+extern const u8 gUnknown_085EEA63[];
+extern const u8 gUnknown_085EEA6B[];
+extern const u8 gUnknown_085EEA5D[];
 extern const u8 gText_Dash[];
 extern const u8 gText_UnkCtrlF904[];
 
@@ -1002,18 +1008,21 @@ extern const u8 gText_SomeonesPC[];
 extern const u8 gText_PlayersPC[];
 extern const u8 gText_WhichPCShouldBeAccessed[];
 
-extern const u8 gText_Navgear_ClearButtonList[];
-extern const u8 gText_NavgearMap_ZoomedOutButtons[];
-extern const u8 gText_NavgearMap_ZoomedInButtons[];
-extern const u8 gText_NavgearCondition_MonListButtons[];
-extern const u8 gText_NavgearCondition_MonStatusButtons[];
-extern const u8 gText_NavgearCondition_MarkingButtons[];
-extern const u8 gText_NavgearMatchCall_TrainerListButtons[];
-extern const u8 gText_NavgearMatchCall_CallMenuButtons[];
-extern const u8 gText_NavgearMatchCall_CheckTrainerButtons[];
-extern const u8 gText_NavgearRibbons_MonListButtons[];
-extern const u8 gText_NavgearRibbons_RibbonListButtons[];
-extern const u8 gText_NavgearRibbons_RibbonCheckButtons[];
+extern const u8 gText_PokenavMatchCall_Strategy[];
+extern const u8 gText_PokenavMatchCall_TrainerPokemon[];
+extern const u8 gText_PokenavMatchCall_SelfIntroduction[];
+extern const u8 gText_Pokenav_ClearButtonList[];
+extern const u8 gText_PokenavMap_ZoomedOutButtons[];
+extern const u8 gText_PokenavMap_ZoomedInButtons[];
+extern const u8 gText_PokenavCondition_MonListButtons[];
+extern const u8 gText_PokenavCondition_MonStatusButtons[];
+extern const u8 gText_PokenavCondition_MarkingButtons[];
+extern const u8 gText_PokenavMatchCall_TrainerListButtons[];
+extern const u8 gText_PokenavMatchCall_CallMenuButtons[];
+extern const u8 gText_PokenavMatchCall_CheckTrainerButtons[];
+extern const u8 gText_PokenavRibbons_MonListButtons[];
+extern const u8 gText_PokenavRibbons_RibbonListButtons[];
+extern const u8 gText_PokenavRibbons_RibbonCheckButtons[];
 
 extern const u8 gUnknown_085EAD37[];
 extern const u8 gUnknown_085EAD41[];
@@ -2698,5 +2707,12 @@ extern const u8 gText_Lower[];
 extern const u8 gText_Symbols[];
 extern const u8 gText_Register2[];
 extern const u8 gText_Exit2[];
+
+// Pokenav Match Call
+extern const u8 gText_CallCantBeMadeHere[];
+extern const u8 gText_NumberRegistered[];
+extern const u8 gText_NumberOfBattles[];
+extern const u8 gText_Unknown[];
+extern const u8 gText_TrainerCloseBy[];
 
 #endif // GUARD_STRINGS_H

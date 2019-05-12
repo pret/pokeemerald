@@ -1,9 +1,9 @@
 MauvilleCity_PokemonCenter_1F_MapScripts:: @ 8210E5B
-	map_script MAP_SCRIPT_ON_TRANSITION, MauvilleCity_PokemonCenter_1F_MapScript1_210E66
+	map_script MAP_SCRIPT_ON_TRANSITION, MauvilleCity_PokemonCenter_1F_OnTransition
 	map_script MAP_SCRIPT_ON_RESUME, MauvilleCity_PokemonCenter_1F_MapScript1_277C30
 	.byte 0
 
-MauvilleCity_PokemonCenter_1F_MapScript1_210E66: @ 8210E66
+MauvilleCity_PokemonCenter_1F_OnTransition: @ 8210E66
 	setrespawn HEAL_LOCATION_MAUVILLE_CITY
 	call MauvilleCity_PokemonCenter_1F_EventScript_2718DE
 	goto MauvilleCity_PokemonCenter_1F_EventScript_210E74

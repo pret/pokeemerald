@@ -47,7 +47,7 @@ struct RecordMixingHallRecords
 
 struct PlayerRecordsRS
 {
-    struct SecretBaseRecord secretBases[SECRET_BASES_COUNT];
+    struct SecretBase secretBases[SECRET_BASES_COUNT];
     TVShow tvShows[TV_SHOWS_COUNT];
     PokeNews pokeNews[POKE_NEWS_COUNT];
     OldMan oldMan;
@@ -60,7 +60,7 @@ struct PlayerRecordsRS
 
 struct PlayerRecordsEmerald
 {
-    /* 0x0000 */ struct SecretBaseRecord secretBases[SECRET_BASES_COUNT];
+    /* 0x0000 */ struct SecretBase secretBases[SECRET_BASES_COUNT];
     /* 0x0c80 */ TVShow tvShows[TV_SHOWS_COUNT];
     /* 0x1004 */ PokeNews pokeNews[POKE_NEWS_COUNT];
     /* 0x1044 */ OldMan oldMan;
@@ -83,7 +83,7 @@ union PlayerRecords
 // Static RAM declarations
 
 static IWRAM_DATA bool8 gUnknown_03001130;
-static IWRAM_DATA struct SecretBaseRecord *sSecretBasesSave;
+static IWRAM_DATA struct SecretBase *sSecretBasesSave;
 static IWRAM_DATA TVShow *sTvShowsSave;
 static IWRAM_DATA PokeNews *sPokeNewsSave;
 static IWRAM_DATA OldMan *sOldManSave;
@@ -208,7 +208,7 @@ static void PrepareUnknownExchangePacket(struct PlayerRecordsRS *dest)
 static void PrepareExchangePacketForRubySapphire(struct PlayerRecordsRS *dest)
 {
     memcpy(dest->secretBases, sSecretBasesSave, sizeof(dest->secretBases));
-    sub_80EB18C(dest->secretBases);
+    ClearJapaneseSecretBases(dest->secretBases);
     memcpy(dest->tvShows, sTvShowsSave, sizeof(dest->tvShows));
     sub_80F1208(dest->tvShows);
     memcpy(dest->pokeNews, sPokeNewsSave, sizeof(dest->pokeNews));
@@ -226,7 +226,7 @@ static void PrepareExchangePacketForRubySapphire(struct PlayerRecordsRS *dest)
 
 static void PrepareExchangePacket(void)
 {
-    sub_80E9914();
+    SetPlayerSecretBaseParty();
     sub_80F0BB8();
     SetSrcLookupPointers();
 

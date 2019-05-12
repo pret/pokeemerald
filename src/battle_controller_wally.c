@@ -7,7 +7,7 @@
 #include "battle_setup.h"
 #include "battle_tv.h"
 #include "bg.h"
-#include "data2.h"
+#include "data.h"
 #include "item.h"
 #include "item_menu.h"
 #include "link.h"
@@ -30,8 +30,7 @@
 #include "constants/moves.h"
 #include "constants/songs.h"
 #include "constants/trainers.h"
-
-extern const struct CompressedSpritePalette gTrainerBackPicPaletteTable[];
+#include "constants/rgb.h"
 
 // this file's functions
 static void WallyHandleGetMonData(void);
@@ -1244,7 +1243,7 @@ static void WallyHandleChooseMove(void)
 
 static void WallyHandleChooseItem(void)
 {
-    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 0x10, 0);
+    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 0x10, RGB_BLACK);
     gBattlerControllerFuncs[gActiveBattler] = OpenBagAfterPaletteFade;
     gBattlerInMenuId = gActiveBattler;
 }

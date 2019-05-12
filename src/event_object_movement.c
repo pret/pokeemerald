@@ -25,6 +25,7 @@
 #include "constants/event_object_movement_constants.h"
 #include "constants/event_objects.h"
 #include "constants/field_effects.h"
+#include "constants/items.h"
 
 // this file was known as evobjmv.c in Game Freak's original source
 
@@ -1534,10 +1535,10 @@ static u8 TrySetupEventObjectSprite(struct EventObjectTemplate *eventObjectTempl
         paletteSlot -= 16;
         sub_808EAB0(graphicsInfo->paletteTag1, paletteSlot);
     }
+
     if (eventObject->movementType == MOVEMENT_TYPE_INVISIBLE)
-    {
         eventObject->invisible = TRUE;
-    }
+
     *(u16 *)&spriteTemplate->paletteTag = 0xFFFF;
     spriteId = CreateSprite(spriteTemplate, 0, 0, 0);
     if (spriteId == MAX_SPRITES)
@@ -1545,6 +1546,7 @@ static u8 TrySetupEventObjectSprite(struct EventObjectTemplate *eventObjectTempl
         gEventObjects[eventObjectId].active = FALSE;
         return EVENT_OBJECTS_COUNT;
     }
+
     sprite = &gSprites[spriteId];
     sub_8092FF0(eventObject->currentCoords.x + cameraX, eventObject->currentCoords.y + cameraY, &sprite->pos1.x, &sprite->pos1.y);
     sprite->centerToCornerVecX = -(graphicsInfo->width >> 1);
@@ -1557,15 +1559,14 @@ static u8 TrySetupEventObjectSprite(struct EventObjectTemplate *eventObjectTempl
     eventObject->spriteId = spriteId;
     eventObject->inanimate = graphicsInfo->inanimate;
     if (!eventObject->inanimate)
-    {
         StartSpriteAnim(sprite, GetFaceDirectionAnimNum(eventObject->facingDirection));
-    }
+
     SetObjectSubpriorityByZCoord(eventObject->previousElevation, sprite, 1);
     UpdateEventObjectVisibility(eventObject, sprite);
     return eventObjectId;
 }
 
-static u8 TrySpawnEventObject(struct EventObjectTemplate *eventObjectTemplate, u8 mapNum, u8 mapGroup, s16 cameraX, s16 cameraY)
+static u8 TrySpawnEventObjectTemplate(struct EventObjectTemplate *eventObjectTemplate, u8 mapNum, u8 mapGroup, s16 cameraX, s16 cameraY)
 {
     u8 eventObjectId;
     struct SpriteTemplate spriteTemplate;
@@ -1579,14 +1580,12 @@ static u8 TrySpawnEventObject(struct EventObjectTemplate *eventObjectTemplate, u
     spriteTemplate.images = &spriteFrameImage;
     eventObjectId = TrySetupEventObjectSprite(eventObjectTemplate, &spriteTemplate, mapNum, mapGroup, cameraX, cameraY);
     if (eventObjectId == EVENT_OBJECTS_COUNT)
-    {
         return EVENT_OBJECTS_COUNT;
-    }
+
     gSprites[gEventObjects[eventObjectId].spriteId].images = graphicsInfo->images;
-    if (subspriteTables != NULL)
-    {
+    if (subspriteTables)
         SetSubspriteTables(&gSprites[gEventObjects[eventObjectId].spriteId], subspriteTables);
-    }
+
     return eventObjectId;
 }
 
@@ -1596,7 +1595,7 @@ u8 SpawnSpecialEventObject(struct EventObjectTemplate *eventObjectTemplate)
     s16 cameraY;
 
     GetEventObjectMovingCameraOffset(&cameraX, &cameraY);
-    return TrySpawnEventObject(eventObjectTemplate, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, cameraX, cameraY);
+    return TrySpawnEventObjectTemplate(eventObjectTemplate, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, cameraX, cameraY);
 }
 
 u8 SpawnSpecialEventObjectParameterized(u8 graphicsId, u8 movementBehavior, u8 localId, s16 x, s16 y, u8 z)
@@ -1619,19 +1618,17 @@ u8 SpawnSpecialEventObjectParameterized(u8 graphicsId, u8 movementBehavior, u8 l
     return SpawnSpecialEventObject(&eventObjectTemplate);
 }
 
-u8 show_sprite(u8 localId, u8 mapNum, u8 mapGroup)
+u8 TrySpawnEventObject(u8 localId, u8 mapNum, u8 mapGroup)
 {
     struct EventObjectTemplate *eventObjectTemplate;
-    s16 cameraX;
-    s16 cameraY;
+    s16 cameraX, cameraY;
 
     eventObjectTemplate = GetEventObjectTemplateByLocalIdAndMap(localId, mapNum, mapGroup);
-    if (eventObjectTemplate == NULL)
-    {
+    if (!eventObjectTemplate)
         return EVENT_OBJECTS_COUNT;
-    }
+
     GetEventObjectMovingCameraOffset(&cameraX, &cameraY);
-    return TrySpawnEventObject(eventObjectTemplate, mapNum, mapGroup, cameraX, cameraY);
+    return TrySpawnEventObjectTemplate(eventObjectTemplate, mapNum, mapGroup, cameraX, cameraY);
 }
 
 static void MakeObjectTemplateFromEventObjectGraphicsInfo(u16 graphicsId, void (*callback)(struct Sprite *), struct SpriteTemplate *spriteTemplate, const struct SubspriteTable **subspriteTables)
@@ -1765,7 +1762,7 @@ void TrySpawnEventObjects(s16 cameraX, s16 cameraY)
 
             if (top <= npcY && bottom >= npcY && left <= npcX && right >= npcX
                 && !FlagGet(template->flagId))
-                TrySpawnEventObject(template, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, cameraX, cameraY);
+                TrySpawnEventObjectTemplate(template, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, cameraX, cameraY);
         }
     }
 }
@@ -2009,10 +2006,9 @@ static void get_berry_tree_graphics(struct EventObject *eventObject, struct Spri
         sprite->invisible = FALSE;
         berryId = GetBerryTypeByBerryTreeId(eventObject->trainerRange_berryTreeId) - 1;
         berryStage--;
-        if (berryId >= NUM_BERRIES)
-        {
+        if (berryId > ITEM_TO_BERRY(LAST_BERRY_INDEX))
             berryId = 0;
-        }
+
         EventObjectSetGraphicsId(eventObject, gBerryTreeEventObjectGraphicsIdTablePointers[berryId][berryStage]);
         sprite->images = gBerryTreePicTablePointers[berryId];
         sprite->oam.paletteNum = gBerryTreePaletteSlotTablePointers[berryId][berryStage];
@@ -2245,7 +2241,7 @@ static void SetEventObjectCoords(struct EventObject *eventObject, s16 x, s16 y)
     eventObject->currentCoords.y = y;
 }
 
-void sub_808EB08(struct EventObject *eventObject, s16 x, s16 y)
+void MoveEventObjectToMapCoords(struct EventObject *eventObject, s16 x, s16 y)
 {
     struct Sprite *sprite;
     const struct EventObjectGraphicsInfo *graphicsInfo;
@@ -2260,20 +2256,17 @@ void sub_808EB08(struct EventObject *eventObject, s16 x, s16 y)
     sprite->pos1.y += 16 + sprite->centerToCornerVecY;
     sub_808E38C(eventObject);
     if (eventObject->trackedByCamera)
-    {
         CameraObjectReset1();
-    }
 }
 
-void sub_808EBA8(u8 localId, u8 mapNum, u8 mapGroup, s16 x, s16 y)
+void TryMoveEventObjectToMapCoords(u8 localId, u8 mapNum, u8 mapGroup, s16 x, s16 y)
 {
     u8 eventObjectId;
-
     if (!TryGetEventObjectIdByLocalIdAndMap(localId, mapNum, mapGroup, &eventObjectId))
     {
         x += 7;
         y += 7;
-        sub_808EB08(&gEventObjects[eventObjectId], x, y);
+        MoveEventObjectToMapCoords(&gEventObjects[eventObjectId], x, y);
     }
 }
 
@@ -2604,15 +2597,13 @@ void OverrideTemplateCoordsForEventObject(const struct EventObject *eventObject)
     }
 }
 
-void OverrideMovementTypeForEventObject(const struct EventObject *eventObject, const u8 *script)
+static void OverrideEventObjectTemplateScript(const struct EventObject *eventObject, const u8 *script)
 {
     struct EventObjectTemplate *eventObjectTemplate;
 
     eventObjectTemplate = GetBaseTemplateForEventObject(eventObject);
-    if (eventObjectTemplate != NULL)
-    {
+    if (eventObjectTemplate)
         eventObjectTemplate->script = script;
-    }
 }
 
 void TryOverrideTemplateCoordsForEventObject(const struct EventObject *eventObject, u8 movementType)
@@ -2626,30 +2617,26 @@ void TryOverrideTemplateCoordsForEventObject(const struct EventObject *eventObje
     }
 }
 
-void sub_808F254(u8 localId, u8 mapNum, u8 mapGroup)
+void TryOverrideEventObjectTemplateCoords(u8 localId, u8 mapNum, u8 mapGroup)
 {
     u8 eventObjectId;
-
     if (!TryGetEventObjectIdByLocalIdAndMap(localId, mapNum, mapGroup, &eventObjectId))
-    {
         OverrideTemplateCoordsForEventObject(&gEventObjects[eventObjectId]);
-    }
 }
 
-void sub_808F28C(u8 localId, u8 mapNum, u8 mapGroup, u8 decorCat)
+void OverrideSecretBaseDecorationSpriteScript(u8 localId, u8 mapNum, u8 mapGroup, u8 decorationCategory)
 {
     u8 eventObjectId;
-
     if (!TryGetEventObjectIdByLocalIdAndMap(localId, mapNum, mapGroup, &eventObjectId))
     {
-        switch (decorCat)
+        switch (decorationCategory)
         {
-            case DECORCAT_DOLL:
-                OverrideMovementTypeForEventObject(&gEventObjects[eventObjectId], EventScript_SecretPower1);
-                break;
-            case DECORCAT_CUSHION:
-                OverrideMovementTypeForEventObject(&gEventObjects[eventObjectId], EventScript_SecretPower2);
-                break;
+        case DECORCAT_DOLL:
+            OverrideEventObjectTemplateScript(&gEventObjects[eventObjectId], SecretBase_EventScript_DollInteract);
+            break;
+        case DECORCAT_CUSHION:
+            OverrideEventObjectTemplateScript(&gEventObjects[eventObjectId], SecretBase_EventScript_CushionInteract);
+            break;
         }
     }
 }

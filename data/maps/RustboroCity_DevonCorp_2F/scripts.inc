@@ -1,8 +1,8 @@
 RustboroCity_DevonCorp_2F_MapScripts:: @ 8211857
-	map_script MAP_SCRIPT_ON_TRANSITION, RustboroCity_DevonCorp_2F_MapScript1_21185D
+	map_script MAP_SCRIPT_ON_TRANSITION, RustboroCity_DevonCorp_2F_OnTransition
 	.byte 0
 
-RustboroCity_DevonCorp_2F_MapScript1_21185D: @ 821185D
+RustboroCity_DevonCorp_2F_OnTransition: @ 821185D
 	compare VAR_FOSSIL_RESURRECTION_STATE, 1
 	call_if_eq RustboroCity_DevonCorp_2F_EventScript_211869
 	end

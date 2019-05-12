@@ -1,6 +1,6 @@
 Route110_TrickHousePuzzle2_MapScripts:: @ 826BB73
 	map_script MAP_SCRIPT_ON_RESUME, Route110_TrickHousePuzzle2_MapScript1_26BB7E
-	map_script MAP_SCRIPT_ON_TRANSITION, Route110_TrickHousePuzzle2_MapScript1_26BBAB
+	map_script MAP_SCRIPT_ON_TRANSITION, Route110_TrickHousePuzzle2_OnTransition
 	.byte 0
 
 Route110_TrickHousePuzzle2_MapScript1_26BB7E: @ 826BB7E
@@ -14,7 +14,7 @@ Route110_TrickHousePuzzle2_MapScript1_26BB7E: @ 826BB7E
 	call_if_eq Route110_TrickHousePuzzle2_EventScript_26BC62
 	end
 
-Route110_TrickHousePuzzle2_MapScript1_26BBAB: @ 826BBAB
+Route110_TrickHousePuzzle2_OnTransition: @ 826BBAB
 	setvar VAR_TEMP_1, 0
 	setvar VAR_TEMP_2, 0
 	setvar VAR_TEMP_3, 0

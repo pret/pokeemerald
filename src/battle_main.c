@@ -13,7 +13,7 @@
 #include "battle_tower.h"
 #include "berry.h"
 #include "bg.h"
-#include "data2.h"
+#include "data.h"
 #include "decompress.h"
 #include "dma3.h"
 #include "event_data.h"
@@ -977,7 +977,7 @@ static void CB2_HandleStartBattle(void)
             gBattleCommunication[MULTIUSE_STATE] = 1;
         }
         if (gWirelessCommType)
-            sub_800E0E8();
+            LoadWirelessStatusIndicatorSpriteGfx();
         break;
     case 1:
         if (gBattleTypeFlags & BATTLE_TYPE_LINK)
@@ -1172,7 +1172,7 @@ static void CB2_HandleStartMultiPartnerBattle(void)
             gBattleCommunication[MULTIUSE_STATE] = 1;
         }
         if (gWirelessCommType)
-            sub_800E0E8();
+            LoadWirelessStatusIndicatorSpriteGfx();
         // fall through
     case 1:
         if (gBattleTypeFlags & BATTLE_TYPE_LINK)
@@ -1572,7 +1572,7 @@ static void CB2_HandleStartMultiBattle(void)
             gBattleCommunication[MULTIUSE_STATE] = 1;
         }
         if (gWirelessCommType)
-            sub_800E0E8();
+            LoadWirelessStatusIndicatorSpriteGfx();
         break;
     case 1:
         if (gBattleTypeFlags & BATTLE_TYPE_LINK)

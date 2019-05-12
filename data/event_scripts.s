@@ -6,6 +6,7 @@
 #include "constants/event_object_movement_constants.h"
 #include "constants/field_effects.h"
 #include "constants/flags.h"
+#include "constants/decorations.h"
 #include "constants/items.h"
 #include "constants/heal_locations.h"
 #include "constants/layouts.h"
@@ -454,7 +455,7 @@ EventScript_SecretBasePC:: @ 823B4BB
 EventScript_SecretBasePCShowMainMenu:: @ 823B4D3
 	message Text_SecretBasePCStartMenu
 	waitmessage
-	goto_if_set FLAG_DECORATION_16, EventScript_SecretBasePCMainMenuChoice
+	goto_if_set FLAG_SECRET_BASE_REGISTRY_ENABLED, EventScript_SecretBasePCMainMenuChoice
 	goto EventScript_23B531
 	end
 
@@ -487,16 +488,16 @@ EventScript_23B568:: @ 823B568
 	compare VAR_RESULT, 0
 	goto_if_eq EventScript_SecretBasePCShowMainMenu
 	closemessage
-	special sub_80E9AC0
+	special MoveOutOfSecretBase
 	releaseall
 	end
 
 EventScript_23B581:: @ 823B581
-	special sub_80E9C74
+	special ShowSecretBaseDecorationMenu
 	end
 
 EventScript_23B585:: @ 823B585
-	special sub_80E9C88
+	special ShowSecretBaseRegistryMenu
 	end
 
 EventScript_RecordMixingSecretBasePC:: @ 823B589
@@ -529,17 +530,17 @@ gUnknown_0823B5E9:: @ 823B5E9
 	end
 
 EventScript_23B5F0:: @ 823B5F0
-	special sub_80E9BDC
+	special GetCurSecretBaseRegistrationValidity
 	compare VAR_RESULT, 1
 	goto_if_eq EventScript_23B62F
 	compare VAR_RESULT, 2
 	goto_if_eq EventScript_CantRegisterTooManyBases
-	special sub_80E980C
-	msgbox Text_276707, MSGBOX_YESNO
+	special CopyCurSecretBaseOwnerName_StrVar1
+	msgbox Text_WantToRegisterSecretBase, MSGBOX_YESNO
 	compare VAR_RESULT, 0
 	goto_if_eq EventScript_23B5A1
 	msgbox Text_2767D1, MSGBOX_SIGN
-	special sub_80E9C2C
+	special ToggleCurSecretBaseRegistry
 	special DoSecretBasePCTurnOffEffect
 	releaseall
 	end
@@ -549,7 +550,7 @@ EventScript_23B62F:: @ 823B62F
 	compare VAR_RESULT, 0
 	goto_if_eq EventScript_23B5A1
 	msgbox Text_2767E9, MSGBOX_SIGN
-	special sub_80E9C2C
+	special ToggleCurSecretBaseRegistry
 	special DoSecretBasePCTurnOffEffect
 	releaseall
 	end
@@ -573,23 +574,23 @@ EventScript_23B66E:: @ 823B66E
 	end
 
 EventScript_23B674:: @ 823B674
-	special sub_80EB498
+	special SetSecretBaseSecretsTvFlags_Poster
 	end
 
 EventScript_23B678:: @ 823B678
-	special sub_80EB56C
+	special SetSecretBaseSecretsTvFlags_MiscFurnature
 	end
 
 EventScript_23B67C:: @ 823B67C
-	special sub_80EB9E0
+	special SetSecretBaseSecretsTvFlags_LargeDecorationSpot
 	end
 
 EventScript_23B680:: @ 823B680
-	special sub_80EBB28
+	special SetSecretBaseSecretsTvFlags_SmallDecorationSpot
 	end
 
 EventScript_SecretBaseSandOrnament:: @ 823B684
-	special sub_80EBE7C
+	special SetSecretBaseSecretsTvFlags_SandOrnament
 	dofieldeffect FLDEFF_SAND_PILLAR
 	waitstate
 	end
@@ -825,7 +826,7 @@ Std_10: @ 8271347
 	waitmessage
 	return
 
-EventScript_27134E: @ 827134E
+EventScript_UnusedReturn: @ 827134E
 	return
 
 Common_EventScript_SaveGame:: @ 827134F
@@ -846,7 +847,7 @@ Std_MsgboxAutoclose:: @ 8271494
 	release
 	return
 
-EventScript_27149D:: @ 827149D
+EventScript_ResetAllBerries:: @ 827149D
 	setberrytree 2, 7, 5
 	setberrytree 1, 3, 5
 	setberrytree 11, 7, 5
@@ -1089,13 +1090,13 @@ EventScript_ResetAllMapFlags:: @ 82715DE
 	setflag FLAG_HIDE_EVER_GRANDE_POKEMON_CENTER_1F_SCOTT
 	setflag FLAG_HIDE_SKY_PILLAR_WALLACE
 	setflag FLAG_RAYQUAZA_ON_SKY_TOWER_SUMMIT
-	call EventScript_27149D
+	call EventScript_ResetAllBerries
 	end
 
 EverGrandeCity_HallOfFame_EventScript_2717C1:: @ 82717C1
 	special sub_81AFDD0
 	setflag FLAG_IS_CHAMPION
-	call EverGrandeCity_HallOfFame_EventScript_271829
+	call EverGrandeCity_HallOfFame_EventScript_ResetDefeatedEventLegendaries
 	compare VAR_FOSSIL_MANIAC_STATE, 0
 	call_if_eq EverGrandeCity_HallOfFame_EventScript_271839
 	clearflag FLAG_HIDE_LILCOVE_MOTEL_GAME_DESIGNERS
@@ -1120,7 +1121,7 @@ EverGrandeCity_HallOfFame_EventScript_2717C1:: @ 82717C1
 	call_if_eq EverGrandeCity_HallOfFame_EventScript_271851
 	return
 
-EverGrandeCity_HallOfFame_EventScript_271829:: @ 8271829
+EverGrandeCity_HallOfFame_EventScript_ResetDefeatedEventLegendaries:: @ 8271829
 	clearflag FLAG_DEFEATED_MEW
 	clearflag FLAG_DEFEATED_LATIAS_OR_LATIOS
 	clearflag FLAG_DEFEATED_DEOXYS
@@ -1193,7 +1194,7 @@ EventScript_MoveMrBrineyToRoute108:: @ 82718B3
 	end
 
 EverGrandeCity_HallOfFame_EventScript_ResetEliteFour:: @ 82718CC
-	clearflag FLAG_DEFEATED_ELITE_4_SYDNEY
+	clearflag FLAG_DEFEATED_ELITE_4_SIDNEY
 	clearflag FLAG_DEFEATED_ELITE_4_PHOEBE
 	clearflag FLAG_DEFEATED_ELITE_4_GLACIA
 	clearflag FLAG_DEFEATED_ELITE_4_DRAKE
@@ -2766,7 +2767,7 @@ EventScript_2736F8:: @ 82736F8
 Common_EventScript_NopReturn:: @ 827374E
 	return
 
-EventScript_27374F:: @ 827374F
+EventScript_UnusedSetVarResult1:: @ 827374F
 	setvar VAR_RESULT, 1
 	return
 
@@ -3460,7 +3461,7 @@ EventScript_GotoTrainerScript:: @ 82742F6
 gUnknown_0827E8CE:: @ 827E8CE
 	.string "Missed turn$"
 
-gUnknown_0827E8DA:: @ 827E8DA
+gText_LinkStandby4:: @ 827E8DA
 	.string "Link standby!$"
 
 gUnknown_0827E8E8:: @ 827E8E8

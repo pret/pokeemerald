@@ -5,9 +5,9 @@ extern EWRAM_DATA struct ItemSlot gMartPurchaseHistory[3];
 
 enum
 {
-    MART_TYPE_0, // normal mart
-    MART_TYPE_1,
-    MART_TYPE_2,
+    MART_TYPE_NORMAL, // normal mart
+    MART_TYPE_DECOR,
+    MART_TYPE_DECOR2,
 };
 
 // shop view window NPC info enum

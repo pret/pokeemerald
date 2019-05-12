@@ -38,8 +38,8 @@ EverGrandeCity_HallOfFame_EventScript_229850:: @ 8229850
 	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceUp
 	waitmovement 0
 	delay 20
-	dofieldeffect 62
-	waitfieldeffect 62
+	dofieldeffect FLDEFF_HALL_OF_FAME_RECORD
+	waitfieldeffect FLDEFF_HALL_OF_FAME_RECORD
 	delay 40
 	setvar VAR_TEMP_1, 1
 	call EverGrandeCity_HallOfFame_EventScript_2717C1

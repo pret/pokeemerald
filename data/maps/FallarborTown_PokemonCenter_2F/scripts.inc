@@ -2,7 +2,7 @@ FallarborTown_PokemonCenter_2F_MapScripts:: @ 8200EEB
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, FallarborTown_PokemonCenter_2F_MapScript2_276C3B
 	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, FallarborTown_PokemonCenter_2F_MapScript2_276B6C
 	map_script MAP_SCRIPT_ON_LOAD, FallarborTown_PokemonCenter_2F_MapScript1_276BBE
-	map_script MAP_SCRIPT_ON_TRANSITION, FallarborTown_PokemonCenter_2F_MapScript1_276ACF
+	map_script MAP_SCRIPT_ON_TRANSITION, PokemonCenter_2F_OnTransition
 	.byte 0
 
 FallarborTown_PokemonCenter_2F_EventScript_200F00:: @ 8200F00
