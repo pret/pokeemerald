@@ -105,8 +105,8 @@ struct Struct203CEC4
     u32 unk9_0:7;
     u32 unkA_0:14;
     u8 unkC[3];
-    u8 unkF[8];
-    u8 unk17;
+    u8 actions[8];
+    u8 listSize;
     u16 palBuffer[0xB0];
     u8 filler[0xA0];
     s16 data[16];
@@ -244,7 +244,7 @@ static void sub_81B227C(u8);
 static bool8 CanLearnTutorMove(u16, u8);
 static u16 GetTutorMove(u8);
 static bool8 sub_81B314C(void);
-static void sub_81B3414(struct Pokemon*, u8);
+static void CreateActionList(struct Pokemon*, u8);
 static u8 sub_81B8A2C(struct Pokemon*);
 static u8 sub_81B856C(s8);
 static void sub_81B469C(u8);
@@ -3587,7 +3587,7 @@ static u8 sub_81B31B0(u8 a)
     switch (a)
     {
     case 0:
-        SetWindowTemplateFields(&window, 2, 19, 19 - (gUnknown_0203CEC4->unk17 * 2), 10, gUnknown_0203CEC4->unk17 * 2, 14, 0x2E9);
+        SetWindowTemplateFields(&window, 2, 19, 19 - (gUnknown_0203CEC4->listSize * 2), 10, gUnknown_0203CEC4->listSize * 2, 14, 0x2E9);
         break;
     case 1:
         window = gUnknown_08615950;
@@ -3607,13 +3607,13 @@ static u8 sub_81B31B0(u8 a)
     cursorDimension = GetMenuCursorDimensionByFont(1, 0);
     fontAttribute = GetFontAttribute(1, 2);
 
-    for (i = 0; i < gUnknown_0203CEC4->unk17; i++)
+    for (i = 0; i < gUnknown_0203CEC4->listSize; i++)
     {
-        u8 unk = (gUnknown_0203CEC4->unkF[i] > 18) ? 4 : 3;
-        AddTextPrinterParameterized4(gUnknown_0203CEC4->unkC[0], 1, cursorDimension, (i * 16) + 1, fontAttribute, 0, gUnknown_086157FC[unk], 0, sCursorOptions[gUnknown_0203CEC4->unkF[i]].text);
+        u8 unk = (gUnknown_0203CEC4->actions[i] > 18) ? 4 : 3;
+        AddTextPrinterParameterized4(gUnknown_0203CEC4->unkC[0], 1, cursorDimension, (i * 16) + 1, fontAttribute, 0, gUnknown_086157FC[unk], 0, sCursorOptions[gUnknown_0203CEC4->actions[i]].text);
     }
 
-    InitMenuInUpperLeftCorner(gUnknown_0203CEC4->unkC[0], gUnknown_0203CEC4->unk17, 0, 1);
+    InitMenuInUpperLeftCorner(gUnknown_0203CEC4->unkC[0], gUnknown_0203CEC4->listSize, 0, 1);
     schedule_bg_copy_tilemap_to_vram(2);
 
     return gUnknown_0203CEC4->unkC[0];
@@ -3650,29 +3650,29 @@ static void sub_81B33B4(struct Pokemon *mons, u8 a, u8 b)
 
     if (b == 0)
     {
-        sub_81B3414(mons, a);
+        CreateActionList(mons, a);
     }
     else
     {
-        gUnknown_0203CEC4->unk17 = gUnknown_08615D70[b];
-        for (i = 0; i < gUnknown_0203CEC4->unk17; i++)
-            gUnknown_0203CEC4->unkF[i] = gUnknown_08615D38[b][i];
+        gUnknown_0203CEC4->listSize = gUnknown_08615D70[b];
+        for (i = 0; i < gUnknown_0203CEC4->listSize; i++)
+            gUnknown_0203CEC4->actions[i] = gUnknown_08615D38[b][i];
     }
 }
 
-static void sub_81B3414(struct Pokemon *mons, u8 a)
+static void CreateActionList(struct Pokemon *mons, u8 a)
 {
     u8 i, j;
 
-    gUnknown_0203CEC4->unk17 = 0;
-    AppendToList(gUnknown_0203CEC4->unkF, &gUnknown_0203CEC4->unk17, 0);
+    gUnknown_0203CEC4->listSize = 0;
+    AppendToList(gUnknown_0203CEC4->actions, &gUnknown_0203CEC4->listSize, MENU_SUMMARY);
     for (i = 0; i < MAX_MON_MOVES; i++)
     {
         for (j = 0; sFieldMoves[j] != FIELD_MOVE_TERMINATOR; j++)
         {
             if (GetMonData(&mons[a], i + MON_DATA_MOVE1) == sFieldMoves[j])
             {
-                AppendToList(gUnknown_0203CEC4->unkF, &gUnknown_0203CEC4->unk17, j + 19);
+                AppendToList(gUnknown_0203CEC4->actions, &gUnknown_0203CEC4->listSize, j + MENU_FIELD_MOVES);
                 break;
             }
         }
@@ -3681,13 +3681,13 @@ static void sub_81B3414(struct Pokemon *mons, u8 a)
     if (!InBattlePike())
     {
         if (GetMonData(&mons[1], MON_DATA_SPECIES) != SPECIES_NONE)
-            AppendToList(gUnknown_0203CEC4->unkF, &gUnknown_0203CEC4->unk17, 1);
+            AppendToList(gUnknown_0203CEC4->actions, &gUnknown_0203CEC4->listSize, MENU_SWITCH);
         if (ItemIsMail(GetMonData(&mons[a], MON_DATA_HELD_ITEM)))
-            AppendToList(gUnknown_0203CEC4->unkF, &gUnknown_0203CEC4->unk17, 6);
+            AppendToList(gUnknown_0203CEC4->actions, &gUnknown_0203CEC4->listSize, MENU_MAIL);
         else
-            AppendToList(gUnknown_0203CEC4->unkF, &gUnknown_0203CEC4->unk17, 3);
+            AppendToList(gUnknown_0203CEC4->actions, &gUnknown_0203CEC4->listSize, MENU_ITEM);
     }
-    AppendToList(gUnknown_0203CEC4->unkF, &gUnknown_0203CEC4->unk17, 2);
+    AppendToList(gUnknown_0203CEC4->actions, &gUnknown_0203CEC4->listSize, MENU_CANCEL1);
 }
 
 static u8 sub_81B353C(struct Pokemon *mon)
@@ -3792,7 +3792,7 @@ static void HandleMenuInput(u8 taskId)
         s8 input;
         s16 *data = gTasks[taskId].data;
 
-        if (gUnknown_0203CEC4->unk17 <= 3)
+        if (gUnknown_0203CEC4->listSize <= 3)
             input = Menu_ProcessInputNoWrapAround_other();
         else
             input = ProcessMenuInput_other();
@@ -3805,11 +3805,11 @@ static void HandleMenuInput(u8 taskId)
         case MENU_B_PRESSED:
             PlaySE(SE_SELECT);
             sub_81B302C(&gUnknown_0203CEC4->unkC[2]);
-            sCursorOptions[gUnknown_0203CEC4->unkF[gUnknown_0203CEC4->unk17 - 1]].func(taskId);
+            sCursorOptions[gUnknown_0203CEC4->actions[gUnknown_0203CEC4->listSize - 1]].func(taskId);
             break;
         default:
             sub_81B302C(&gUnknown_0203CEC4->unkC[2]);
-            sCursorOptions[gUnknown_0203CEC4->unkF[input]].func(taskId);
+            sCursorOptions[gUnknown_0203CEC4->actions[input]].func(taskId);
             break;
         }
     }
@@ -4694,7 +4694,7 @@ static void sub_81B5430(u8 taskId)
 
 static void CursorCb_FieldMove(u8 taskId)
 {
-    u8 fieldMove = gUnknown_0203CEC4->unkF[Menu_GetCursorPos()] - MENU_FIELD_MOVES;
+    u8 fieldMove = gUnknown_0203CEC4->actions[Menu_GetCursorPos()] - MENU_FIELD_MOVES;
     const struct MapHeader *mapHeader;
 
     PlaySE(SE_SELECT);
