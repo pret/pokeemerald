@@ -1879,7 +1879,7 @@ static const u16 sDeoxysBaseStats[] =
     90, // Sp.Defense
 };
 
-const u16 gUnknown_08329D54[] =
+const u16 gFacilityClassPicsByIndex[] =
 {
     FACILITY_CLASS_COOLTRAINER_M, FACILITY_CLASS_BLACK_BELT, FACILITY_CLASS_CAMPER,
     FACILITY_CLASS_YOUNGSTER, FACILITY_CLASS_PSYCHIC_M, FACILITY_CLASS_BUG_CATCHER,
@@ -2711,7 +2711,7 @@ u16 sub_8068B48(void)
 
     arrId = gLinkPlayers[linkId].trainerId & 7;
     arrId |= gLinkPlayers[linkId].gender << 3;
-    return FacilityClassToPicIndex(gUnknown_08329D54[arrId]);
+    return FacilityClassToPicIndex(gFacilityClassPicsByIndex[arrId]);
 }
 
 u16 sub_8068BB0(void)
@@ -2726,7 +2726,7 @@ u16 sub_8068BB0(void)
 
     arrId = gLinkPlayers[linkId].trainerId & 7;
     arrId |= gLinkPlayers[linkId].gender << 3;
-    return gFacilityClassToTrainerClass[gUnknown_08329D54[arrId]];
+    return gFacilityClassToTrainerClass[gFacilityClassPicsByIndex[arrId]];
 }
 
 void CreateObedientEnemyMon(void)
