@@ -1214,20 +1214,6 @@ SECTIONS {
         data/multiboot_pokemon_colosseum.o(.rodata);
     } =0
 
-    gap1 :
-    {
-        gap1_start = ABSOLUTE(.);
-        BYTE(0x00)
-        . = 0x8B00000 - gap1_start;
-    } =0
-
-    gap2 :
-    {
-        gap2_start = ABSOLUTE(.);
-        BYTE(0x00)
-        . = 0x8C00000 - gap2_start;
-    } =0
-
     gfx_data :
     ALIGN(4)
     {
