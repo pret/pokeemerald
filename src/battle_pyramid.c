@@ -1409,7 +1409,7 @@ void GenerateBattlePyramidWildMon(void)
         break;
     case 2:
     default:
-        if (gBaseStats[wildMons[id].species].ability2)
+        if (gBaseStats[wildMons[id].species].abilities[1])
         {
             i = GetMonData(&gEnemyParty[0], MON_DATA_PERSONALITY, NULL) % 2;
             SetMonData(&gEnemyParty[0], MON_DATA_ABILITY_NUM, &i);
