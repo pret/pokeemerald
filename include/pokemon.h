@@ -295,7 +295,7 @@ struct BattlePokemon
     /*0x2E*/ u16 item;
     /*0x30*/ u8 nickname[POKEMON_NAME_LENGTH + 1];
     /*0x3B*/ u8 ppBonuses;
-    /*0x3C*/ u8 otName[8];
+    /*0x3C*/ u8 otName[PLAYER_NAME_LENGTH + 1];
     /*0x44*/ u32 experience;
     /*0x48*/ u32 personality;
     /*0x4C*/ u32 status1;
