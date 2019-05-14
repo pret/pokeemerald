@@ -1405,19 +1405,19 @@ void GenerateBattlePyramidWildMon(void)
     {
     case 0:
     case 1:
-        SetMonData(&gEnemyParty[0], MON_DATA_ALT_ABILITY, &wildMons[id].abilityBit);
+        SetMonData(&gEnemyParty[0], MON_DATA_ABILITY_NUM, &wildMons[id].abilityBit);
         break;
     case 2:
     default:
         if (gBaseStats[wildMons[id].species].ability2)
         {
             i = GetMonData(&gEnemyParty[0], MON_DATA_PERSONALITY, NULL) % 2;
-            SetMonData(&gEnemyParty[0], MON_DATA_ALT_ABILITY, &i);
+            SetMonData(&gEnemyParty[0], MON_DATA_ABILITY_NUM, &i);
         }
         else
         {
             i = 0;
-            SetMonData(&gEnemyParty[0], MON_DATA_ALT_ABILITY, &i);
+            SetMonData(&gEnemyParty[0], MON_DATA_ABILITY_NUM, &i);
         }
         break;
     }

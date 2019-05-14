@@ -1156,7 +1156,7 @@ bool32 TryGenerateBattlePikeWildMon(bool8 checkKeenEyeIntimidate)
         abilityBit = Random() % 2;
     else
         abilityBit = 0;
-    SetMonData(&gEnemyParty[0], MON_DATA_ALT_ABILITY, &abilityBit);
+    SetMonData(&gEnemyParty[0], MON_DATA_ABILITY_NUM, &abilityBit);
     for (i = 0; i < MAX_MON_MOVES; i++)
         SetMonMoveSlot(&gEnemyParty[0], wildMons[headerId][pikeMonId].moves[i], i);
 
