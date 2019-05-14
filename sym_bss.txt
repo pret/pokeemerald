@@ -9,6 +9,7 @@
 	.include "src/link_rfu.o"
 	.include "src/union_room.o"
 	.include "src/union_room_battle.o"
+	.include "src/dodrio_berry_picking.o"
 	.include "src/rtc.o"
 	.include "src/main_menu.o"
 	.include "src/rom_8034C54.o"

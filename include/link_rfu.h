@@ -284,6 +284,8 @@ bool8 sub_800DE7C(struct UnkLinkRfuStruct_02022B14 *buff1, u8 *buff2, u8 idx);
 bool8 sub_800DF34(struct UnkLinkRfuStruct_02022B14 *buff1, u8 *buff2, u8 idx);
 s32 sub_800E87C(u8 idx);
 void sub_8011BA4(void);
+void sub_8010198(void);
+void sub_8011AC8(void);
 void LinkRfu_FatalError(void);
 bool32 sub_8011A9C(void);
 void sub_80104B0(void);

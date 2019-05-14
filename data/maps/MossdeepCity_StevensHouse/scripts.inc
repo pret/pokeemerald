@@ -84,7 +84,7 @@ MossdeepCity_StevensHouse_EventScript_22285B:: @ 822285B
 	end
 
 MossdeepCity_StevensHouse_EventScript_222865:: @ 8222865
-	setvar VAR_TEMP_1, 398
+	setvar VAR_TEMP_1, SPECIES_BELDUM
 	givemon SPECIES_BELDUM, 5, ITEM_NONE, 0x0, 0x0, 0
 	compare VAR_RESULT, 0
 	goto_if_eq MossdeepCity_StevensHouse_EventScript_222895
