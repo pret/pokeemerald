@@ -76,7 +76,7 @@ struct PyramidWildMon
 {
     u16 species;
     u8 lvl;
-    u8 abilityBit;
+    u8 abilityNum;
     u16 moves[4];
 };
 
@@ -1401,23 +1401,23 @@ void GenerateBattlePyramidWildMon(void)
                MON_DATA_EXP,
                &gExperienceTables[gBaseStats[wildMons[id].species].growthRate][lvl]);
 
-    switch (wildMons[id].abilityBit)
+    switch (wildMons[id].abilityNum)
     {
     case 0:
     case 1:
-        SetMonData(&gEnemyParty[0], MON_DATA_ALT_ABILITY, &wildMons[id].abilityBit);
+        SetMonData(&gEnemyParty[0], MON_DATA_ABILITY_NUM, &wildMons[id].abilityNum);
         break;
     case 2:
     default:
         if (gBaseStats[wildMons[id].species].ability2)
         {
             i = GetMonData(&gEnemyParty[0], MON_DATA_PERSONALITY, NULL) % 2;
-            SetMonData(&gEnemyParty[0], MON_DATA_ALT_ABILITY, &i);
+            SetMonData(&gEnemyParty[0], MON_DATA_ABILITY_NUM, &i);
         }
         else
         {
             i = 0;
-            SetMonData(&gEnemyParty[0], MON_DATA_ALT_ABILITY, &i);
+            SetMonData(&gEnemyParty[0], MON_DATA_ABILITY_NUM, &i);
         }
         break;
     }
