@@ -1879,14 +1879,14 @@ static const u16 sDeoxysBaseStats[] =
     90, // Sp.Defense
 };
 
-const u16 gFacilityClassPicsByIndex[] =
+const u16 gLinkPlayerFacilityClasses[] =
 {
     FACILITY_CLASS_COOLTRAINER_M, FACILITY_CLASS_BLACK_BELT, FACILITY_CLASS_CAMPER,
     FACILITY_CLASS_YOUNGSTER, FACILITY_CLASS_PSYCHIC_M, FACILITY_CLASS_BUG_CATCHER,
-    FACILITY_CLASS_PKMN_BREEDER_M, FACILITY_CLASS_GUITARIST, FACILITY_CLASS_COOLTRAINER_F,
-    FACILITY_CLASS_HEX_MANIAC, FACILITY_CLASS_PICNICKER, FACILITY_CLASS_LASS,
-    FACILITY_CLASS_PSYCHIC_F, FACILITY_CLASS_BATTLE_GIRL, FACILITY_CLASS_POKEMON_BREEDER_F,
-    FACILITY_CLASS_BEAUTY
+    FACILITY_CLASS_PKMN_BREEDER_M, FACILITY_CLASS_GUITARIST,
+    FACILITY_CLASS_COOLTRAINER_F, FACILITY_CLASS_HEX_MANIAC, FACILITY_CLASS_PICNICKER,
+    FACILITY_CLASS_LASS, FACILITY_CLASS_PSYCHIC_F, FACILITY_CLASS_BATTLE_GIRL,
+    FACILITY_CLASS_POKEMON_BREEDER_F, FACILITY_CLASS_BEAUTY
 };
 
 static const u8 sHoldEffectToType[][2] =
@@ -2711,7 +2711,7 @@ u16 sub_8068B48(void)
 
     arrId = gLinkPlayers[linkId].trainerId & 7;
     arrId |= gLinkPlayers[linkId].gender << 3;
-    return FacilityClassToPicIndex(gFacilityClassPicsByIndex[arrId]);
+    return FacilityClassToPicIndex(gLinkPlayerFacilityClasses[arrId]);
 }
 
 u16 sub_8068BB0(void)
@@ -2726,7 +2726,7 @@ u16 sub_8068BB0(void)
 
     arrId = gLinkPlayers[linkId].trainerId & 7;
     arrId |= gLinkPlayers[linkId].gender << 3;
-    return gFacilityClassToTrainerClass[gFacilityClassPicsByIndex[arrId]];
+    return gFacilityClassToTrainerClass[gLinkPlayerFacilityClasses[arrId]];
 }
 
 void CreateObedientEnemyMon(void)

@@ -435,7 +435,7 @@ extern const u8 gPPUpGetMask[];
 extern const u8 gPPUpSetMask[];
 extern const u8 gPPUpAddMask[];
 extern const u8 gStatStageRatios[][2];
-extern const u16 gFacilityClassPicsByIndex[];
+extern const u16 gLinkPlayerFacilityClasses[];
 extern const struct SpriteTemplate gUnknown_08329D98[];
 extern const s8 gNatureStatTable[][5];
 

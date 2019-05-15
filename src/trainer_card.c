@@ -733,9 +733,9 @@ static void TrainerCard_GenerateCardForLinkPlayer(struct TrainerCard *trainerCar
         trainerCard->stars++;
 
     if (trainerCard->gender == FEMALE)
-        trainerCard->var_4F = gFacilityClassPicsByIndex[(trainerCard->trainerId % 8) + 8];
+        trainerCard->var_4F = gLinkPlayerFacilityClasses[(trainerCard->trainerId % 8) + 8];
     else
-        trainerCard->var_4F = gFacilityClassPicsByIndex[trainerCard->trainerId % 8];
+        trainerCard->var_4F = gLinkPlayerFacilityClasses[trainerCard->trainerId % 8];
 }
 
 void TrainerCard_GenerateCardForPlayer(struct TrainerCard *trainerCard)
@@ -749,9 +749,9 @@ void TrainerCard_GenerateCardForPlayer(struct TrainerCard *trainerCard)
         trainerCard->stars++;
 
     if (trainerCard->gender == FEMALE)
-        trainerCard->var_4F = gFacilityClassPicsByIndex[(trainerCard->trainerId % 8) + 8];
+        trainerCard->var_4F = gLinkPlayerFacilityClasses[(trainerCard->trainerId % 8) + 8];
     else
-        trainerCard->var_4F = gFacilityClassPicsByIndex[trainerCard->trainerId % 8];
+        trainerCard->var_4F = gLinkPlayerFacilityClasses[trainerCard->trainerId % 8];
 }
 
 void CopyTrainerCardData(struct TrainerCard *dst, u16 *src, u8 gameVersion)
