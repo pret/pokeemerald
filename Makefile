@@ -23,6 +23,7 @@ MAP = $(ROM:.gba=.map)
 
 C_SUBDIR = src
 ASM_SUBDIR = asm
+DATA_SRC_SUBDIR = src/data
 DATA_ASM_SUBDIR = data
 SONG_SUBDIR = sound/songs
 MID_SUBDIR = sound/songs/midi
@@ -53,6 +54,7 @@ PREPROC := tools/preproc/preproc$(EXE)
 RAMSCRGEN := tools/ramscrgen/ramscrgen$(EXE)
 FIX := tools/gbafix/gbafix$(EXE)
 MAPJSON := tools/mapjson/mapjson$(EXE)
+JSONPROC := tools/jsonproc/jsonproc$(EXE)
 
 # Clear the default suffixes
 .SUFFIXES:
@@ -86,6 +88,8 @@ OBJS_REL := $(patsubst $(OBJ_DIR)/%,%,$(OBJS))
 
 SUBDIRS  := $(sort $(dir $(OBJS)))
 
+AUTO_GEN_TARGETS :=
+
 $(shell mkdir -p $(SUBDIRS))
 
 rom: $(ROM)
@@ -101,6 +105,7 @@ clean: tidy
 	rm -f $(DATA_ASM_SUBDIR)/layouts/layouts.inc $(DATA_ASM_SUBDIR)/layouts/layouts_table.inc
 	rm -f $(DATA_ASM_SUBDIR)/maps/connections.inc $(DATA_ASM_SUBDIR)/maps/events.inc $(DATA_ASM_SUBDIR)/maps/groups.inc $(DATA_ASM_SUBDIR)/maps/headers.inc
 	find $(DATA_ASM_SUBDIR)/maps \( -iname 'connections.inc' -o -iname 'events.inc' -o -iname 'header.inc' \) -exec rm {} +
+	rm -f $(AUTO_GEN_TARGETS)
 
 tidy:
 	rm -f $(ROM) $(ELF) $(MAP)
@@ -109,6 +114,7 @@ tidy:
 include graphics_file_rules.mk
 include map_data_rules.mk
 include spritesheet_rules.mk
+include json_data_rules.mk
 include songs.mk
 
 %.s: ;
