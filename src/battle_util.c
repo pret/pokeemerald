@@ -5820,14 +5820,27 @@ s32 CalculateMoveDamage(u16 move, u8 battlerAtk, u8 battlerDef, u8 moveType, s32
     return dmg;
 }
 
-static inline void MulByTypeEffectiveness(u16 *modifier, u16 move, u8 moveType, u8 battlerDef, u8 defType, u8 atkAblity)
+static void MulByTypeEffectiveness(u16 *modifier, u16 move, u8 moveType, u8 battlerDef, u8 defType, u8 battlerAtk, bool32 recordAbilities)
 {
     u16 mod = sTypeEffectivenessTable[moveType][defType];
 
-    if ((moveType == TYPE_FIGHTING || moveType == TYPE_NORMAL) && defType == TYPE_GHOST && gBattleMons[battlerDef].status2 & STATUS2_FORESIGHT)
+    if (mod == UQ_4_12(0.0) && GetBattlerHoldEffect(battlerDef, TRUE) == HOLD_EFFECT_RING_TARGET)
+    {
         mod = UQ_4_12(1.0);
-    if ((moveType == TYPE_FIGHTING || moveType == TYPE_NORMAL) && defType == TYPE_GHOST && atkAblity == ABILITY_SCRAPPY)
+        if (recordAbilities)
+            RecordItemEffectBattle(battlerDef, HOLD_EFFECT_RING_TARGET);
+    }
+    else if ((moveType == TYPE_FIGHTING || moveType == TYPE_NORMAL) && defType == TYPE_GHOST && gBattleMons[battlerDef].status2 & STATUS2_FORESIGHT)
+    {
         mod = UQ_4_12(1.0);
+    }
+    else if ((moveType == TYPE_FIGHTING || moveType == TYPE_NORMAL) && defType == TYPE_GHOST && GetBattlerAbility(battlerAtk) == ABILITY_SCRAPPY)
+    {
+        mod = UQ_4_12(1.0);
+        if (recordAbilities)
+            RecordAbilityBattle(battlerAtk, ABILITY_SCRAPPY);
+    }
+
     if (moveType == TYPE_PSYCHIC && defType == TYPE_DARK && gStatuses3[battlerDef] & STATUS3_MIRACLE_EYED)
         mod = UQ_4_12(1.0);
     if (gBattleMoves[move].effect == EFFECT_FREEZE_DRY && defType == TYPE_WATER)
@@ -5866,13 +5879,12 @@ static void UpdateMoveResultFlags(u16 modifier)
 
 static u16 CalcTypeEffectivenessMultiplierInternal(u16 move, u8 moveType, u8 battlerAtk, u8 battlerDef, bool32 recordAbilities, u16 modifier)
 {
-    u32 atkAbility = GetBattlerAbility(battlerAtk);
-    MulByTypeEffectiveness(&modifier, move, moveType, battlerDef, gBattleMons[battlerDef].type1, atkAbility);
+    MulByTypeEffectiveness(&modifier, move, moveType, battlerDef, gBattleMons[battlerDef].type1, battlerAtk, recordAbilities);
     if (gBattleMons[battlerDef].type2 != gBattleMons[battlerDef].type1)
-        MulByTypeEffectiveness(&modifier, move, moveType, battlerDef, gBattleMons[battlerDef].type2, atkAbility);
+        MulByTypeEffectiveness(&modifier, move, moveType, battlerDef, gBattleMons[battlerDef].type2, battlerAtk, recordAbilities);
     if (gBattleMons[battlerDef].type3 != TYPE_MYSTERY && gBattleMons[battlerDef].type3 != gBattleMons[battlerDef].type2
         && gBattleMons[battlerDef].type3 != gBattleMons[battlerDef].type1)
-        MulByTypeEffectiveness(&modifier, move, moveType, battlerDef, gBattleMons[battlerDef].type3, atkAbility);
+        MulByTypeEffectiveness(&modifier, move, moveType, battlerDef, gBattleMons[battlerDef].type3, battlerAtk, recordAbilities);
 
     if (moveType == TYPE_GROUND && !IsBattlerGrounded(battlerDef))
     {
@@ -5925,9 +5937,9 @@ u16 CalcPartyMonTypeEffectivenessMultiplier(u16 move, u16 speciesDef, u8 ability
 
     if (move != MOVE_STRUGGLE && moveType != TYPE_MYSTERY)
     {
-        MulByTypeEffectiveness(&modifier, move, moveType, 0, gBaseStats[speciesDef].type1, ABILITY_NONE);
+        MulByTypeEffectiveness(&modifier, move, moveType, 0, gBaseStats[speciesDef].type1, 0, FALSE);
         if (gBaseStats[speciesDef].type2 != gBaseStats[speciesDef].type1)
-            MulByTypeEffectiveness(&modifier, move, moveType, 0, gBaseStats[speciesDef].type2, ABILITY_NONE);
+            MulByTypeEffectiveness(&modifier, move, moveType, 0, gBaseStats[speciesDef].type2, 0, FALSE);
 
         if (moveType == TYPE_GROUND && abilityDef == ABILITY_LEVITATE && !(gFieldStatuses & STATUS_FIELD_GRAVITY))
             modifier = UQ_4_12(0.0);
