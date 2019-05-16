@@ -387,7 +387,7 @@ enum
     BODY_COLOR_PINK
 };
 
-#define EVO_MEGA_EVOLUTION 0xffff // Not an actual evolution, used to temporarily mega evolve in battle.
+#define EVO_MEGA_EVOLUTION   0xffff // Not an actual evolution, used to temporarily mega evolve in battle.
 #define EVO_FRIENDSHIP       0x0001 // Pokémon levels up with friendship ≥ 220
 #define EVO_FRIENDSHIP_DAY   0x0002 // Pokémon levels up during the day with friendship ≥ 220
 #define EVO_FRIENDSHIP_NIGHT 0x0003 // Pokémon levels up at night with friendship ≥ 220
