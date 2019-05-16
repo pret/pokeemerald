@@ -5622,7 +5622,17 @@ static const u16 sBurmyLevelUpLearnset[] = {
     LEVEL_UP_END
 };
 
-static const u16 sWormadamLevelUpLearnset[] = {
+static const u16 sWormadamPlantLevelUpLearnset[] = {
+    LEVEL_UP_MOVE( 1, MOVE_TACKLE),
+    LEVEL_UP_END
+};
+
+static const u16 sWormadamSandyLevelUpLearnset[] = {
+    LEVEL_UP_MOVE( 1, MOVE_TACKLE),
+    LEVEL_UP_END
+};
+
+static const u16 sWormadamTrashLevelUpLearnset[] = {
     LEVEL_UP_MOVE( 1, MOVE_TACKLE),
     LEVEL_UP_END
 };
@@ -6792,6 +6802,16 @@ static const u16 sKyuremLevelUpLearnset[] = {
     LEVEL_UP_END
 };
 
+static const u16 sKyuremBlackLevelUpLearnset[] = {
+    LEVEL_UP_MOVE( 1, MOVE_TACKLE),
+    LEVEL_UP_END
+};
+
+static const u16 sKyuremWhiteLevelUpLearnset[] = {
+    LEVEL_UP_MOVE( 1, MOVE_TACKLE),
+    LEVEL_UP_END
+};
+
 static const u16 sKeldeoLevelUpLearnset[] = {
     LEVEL_UP_MOVE( 1, MOVE_TACKLE),
     LEVEL_UP_END
@@ -6947,7 +6967,12 @@ static const u16 sEspurrLevelUpLearnset[] = {
     LEVEL_UP_END
 };
 
-static const u16 sMeowsticLevelUpLearnset[] = {
+static const u16 sMeowsticMaleLevelUpLearnset[] = {
+    LEVEL_UP_MOVE( 1, MOVE_TACKLE),
+    LEVEL_UP_END
+};
+
+static const u16 sMeowsticFemaleLevelUpLearnset[] = {
     LEVEL_UP_MOVE( 1, MOVE_TACKLE),
     LEVEL_UP_END
 };
