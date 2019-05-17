@@ -1223,7 +1223,7 @@ u8 GetValidMonIconPalIndex(u16 species)
     return gMonIconPaletteIndices[species];
 }
 
-u8 sub_80D30A0(u16 species)
+u8 GetMonIconPaletteIndexFromSpecies(u16 species)
 {
     return gMonIconPaletteIndices[species];
 }

@@ -192,10 +192,10 @@ static bool8 FindMonThatAbsorbsOpponentsMove(void)
             continue;
 
         species = GetMonData(&party[i], MON_DATA_SPECIES);
-        if (GetMonData(&party[i], MON_DATA_ALT_ABILITY) != 0)
-            monAbility = gBaseStats[species].ability2;
+        if (GetMonData(&party[i], MON_DATA_ABILITY_NUM) != 0)
+            monAbility = gBaseStats[species].abilities[1];
         else
-            monAbility = gBaseStats[species].ability1;
+            monAbility = gBaseStats[species].abilities[0];
 
         if (absorbingTypeAbility == monAbility && Random() & 1)
         {
@@ -373,10 +373,10 @@ static bool8 FindMonWithFlagsAndSuperEffective(u16 flags, u8 moduloPercent)
             continue;
 
         species = GetMonData(&party[i], MON_DATA_SPECIES);
-        if (GetMonData(&party[i], MON_DATA_ALT_ABILITY) != 0)
-            monAbility = gBaseStats[species].ability2;
+        if (GetMonData(&party[i], MON_DATA_ABILITY_NUM) != 0)
+            monAbility = gBaseStats[species].abilities[1];
         else
-            monAbility = gBaseStats[species].ability1;
+            monAbility = gBaseStats[species].abilities[0];
 
         CalcPartyMonTypeEffectivenessMultiplier(gLastLandedMoves[gActiveBattler], species, monAbility);
         if (gMoveResultFlags & flags)
