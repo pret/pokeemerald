@@ -2144,14 +2144,14 @@ static const u16 sDeoxysBaseStats[] =
     90, // Sp.Defense
 };
 
-const u16 gUnknown_08329D54[] =
+const u16 gLinkPlayerFacilityClasses[] =
 {
     FACILITY_CLASS_COOLTRAINER_M, FACILITY_CLASS_BLACK_BELT, FACILITY_CLASS_CAMPER,
     FACILITY_CLASS_YOUNGSTER, FACILITY_CLASS_PSYCHIC_M, FACILITY_CLASS_BUG_CATCHER,
-    FACILITY_CLASS_PKMN_BREEDER_M, FACILITY_CLASS_GUITARIST, FACILITY_CLASS_COOLTRAINER_F,
-    FACILITY_CLASS_HEX_MANIAC, FACILITY_CLASS_PICNICKER, FACILITY_CLASS_LASS,
-    FACILITY_CLASS_PSYCHIC_F, FACILITY_CLASS_BATTLE_GIRL, FACILITY_CLASS_POKEMON_BREEDER_F,
-    FACILITY_CLASS_BEAUTY
+    FACILITY_CLASS_PKMN_BREEDER_M, FACILITY_CLASS_GUITARIST,
+    FACILITY_CLASS_COOLTRAINER_F, FACILITY_CLASS_HEX_MANIAC, FACILITY_CLASS_PICNICKER,
+    FACILITY_CLASS_LASS, FACILITY_CLASS_PSYCHIC_F, FACILITY_CLASS_BATTLE_GIRL,
+    FACILITY_CLASS_POKEMON_BREEDER_F, FACILITY_CLASS_BEAUTY
 };
 
 static const u8 sHoldEffectToType[][2] =
@@ -2513,7 +2513,7 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
         SetBoxMonData(boxMon, MON_DATA_SPDEF_IV, &iv);
     }
 
-    if (gBaseStats[species].ability2)
+    if (gBaseStats[species].abilities[1])
     {
         value = personality & 1;
         SetBoxMonData(boxMon, MON_DATA_ABILITY_NUM, &value);
@@ -2976,7 +2976,7 @@ u16 sub_8068B48(void)
 
     arrId = gLinkPlayers[linkId].trainerId & 7;
     arrId |= gLinkPlayers[linkId].gender << 3;
-    return FacilityClassToPicIndex(gUnknown_08329D54[arrId]);
+    return FacilityClassToPicIndex(gLinkPlayerFacilityClasses[arrId]);
 }
 
 u16 sub_8068BB0(void)
@@ -2991,7 +2991,7 @@ u16 sub_8068BB0(void)
 
     arrId = gLinkPlayers[linkId].trainerId & 7;
     arrId |= gLinkPlayers[linkId].gender << 3;
-    return gFacilityClassToTrainerClass[gUnknown_08329D54[arrId]];
+    return gFacilityClassToTrainerClass[gLinkPlayerFacilityClasses[arrId]];
 }
 
 void CreateObedientEnemyMon(void)
@@ -4704,9 +4704,9 @@ u8 GetAbilityBySpecies(u16 species, u8 abilityNum)
     if (abilityNum == 2)
         gLastUsedAbility = gBaseStats[species].abilityHidden;
     else if (abilityNum == 1)
-        gLastUsedAbility = gBaseStats[species].ability2;
+        gLastUsedAbility = gBaseStats[species].abilities[1];
     else
-        gLastUsedAbility = gBaseStats[species].ability1;
+        gLastUsedAbility = gBaseStats[species].abilities[0];
 
     return gLastUsedAbility;
 }

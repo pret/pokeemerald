@@ -8622,7 +8622,7 @@ static void atkAE_healpartystatus(void)
         for (i = 0; i < PARTY_SIZE; i++)
         {
             u16 species = GetMonData(&party[i], MON_DATA_SPECIES2);
-            u8 abilityBit = GetMonData(&party[i], MON_DATA_ABILITY_NUM);
+            u8 abilityNum = GetMonData(&party[i], MON_DATA_ABILITY_NUM);
 
             if (species != SPECIES_NONE && species != SPECIES_EGG)
             {
@@ -8635,7 +8635,7 @@ static void atkAE_healpartystatus(void)
                          && !(gAbsentBattlerFlags & gBitTable[gActiveBattler]))
                     ability = gBattleMons[gActiveBattler].ability;
                 else
-                    ability = GetAbilityBySpecies(species, abilityBit);
+                    ability = GetAbilityBySpecies(species, abilityNum);
 
                 if (ability != ABILITY_SOUNDPROOF)
                     toHeal |= (1 << i);
@@ -9845,9 +9845,9 @@ static void atkE5_pickup(void)
             heldItem = GetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM);
 
             if (GetMonData(&gPlayerParty[i], MON_DATA_ABILITY_NUM))
-                ability = gBaseStats[species].ability2;
+                ability = gBaseStats[species].abilities[1];
             else
-                ability = gBaseStats[species].ability1;
+                ability = gBaseStats[species].abilities[0];
 
             if (ability == ABILITY_PICKUP
                 && species != 0
@@ -9868,9 +9868,9 @@ static void atkE5_pickup(void)
             heldItem = GetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM);
 
             if (GetMonData(&gPlayerParty[i], MON_DATA_ABILITY_NUM))
-                ability = gBaseStats[species].ability2;
+                ability = gBaseStats[species].abilities[1];
             else
-                ability = gBaseStats[species].ability1;
+                ability = gBaseStats[species].abilities[0];
 
             if (ability == ABILITY_PICKUP
                 && species != 0

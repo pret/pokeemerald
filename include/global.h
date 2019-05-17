@@ -286,7 +286,7 @@ struct RentalMon
     u16 monId;
     u32 personality;
     u8 ivs;
-    u8 abilityBit;
+    u8 abilityNum;
 };
 
 struct BattleDomeTrainer
