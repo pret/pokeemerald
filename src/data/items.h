@@ -7282,5 +7282,102 @@ const struct Item gItems[] =
         .type = 4,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .secondaryId = 0,
+    },
+
+    [ITEM_HEALTH_WING] =
+    {
+        .name = _("Health Wing"),
+        .itemId = ITEM_HEALTH_WING,
+        .price = 300,
+        .holdEffect = HOLD_EFFECT_RAISE_EV,
+        .holdEffectParam = 4,
+        .description = sHealthWingDesc,
+        .pocket = POCKET_ITEMS,
+        .type = 4,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .secondaryId = STAT_HP,
+    },
+
+    [ITEM_MUSCLE_WING] =
+    {
+        .name = _("Muscle Wing"),
+        .itemId = ITEM_MUSCLE_WING,
+        .price = 300,
+        .holdEffect = HOLD_EFFECT_RAISE_EV,
+        .holdEffectParam = 4,
+        .description = sMuscleWingDesc,
+        .pocket = POCKET_ITEMS,
+        .type = 4,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .secondaryId = 0,
+        .secondaryId = STAT_ATK,
+    },
+
+    [ITEM_RESIST_WING] =
+    {
+        .name = _("Resist Wing"),
+        .itemId = ITEM_RESIST_WING,
+        .price = 300,
+        .holdEffect = HOLD_EFFECT_RAISE_EV,
+        .holdEffectParam = 4,
+        .description = sResistWingDesc,
+        .pocket = POCKET_ITEMS,
+        .type = 4,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .secondaryId = STAT_DEF,
+    },
+
+    [ITEM_GENIUS_WING] =
+    {
+        .name = _("Genius Wing"),
+        .itemId = ITEM_GENIUS_WING,
+        .price = 300,
+        .holdEffect = HOLD_EFFECT_RAISE_EV,
+        .holdEffectParam = 4,
+        .description = sGeniusWingDesc,
+        .pocket = POCKET_ITEMS,
+        .type = 4,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .secondaryId = STAT_SPATK,
+    },
+
+    [ITEM_CLEVER_WING] =
+    {
+        .name = _("Clever Wing"),
+        .itemId = ITEM_CLEVER_WING,
+        .price = 300,
+        .holdEffect = HOLD_EFFECT_RAISE_EV,
+        .holdEffectParam = 4,
+        .description = sCleverWingDesc,
+        .pocket = POCKET_ITEMS,
+        .type = 4,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .secondaryId = STAT_SPDEF,
+    },
+
+    [ITEM_SWIFT_WING] =
+    {
+        .name = _("Swift Wing"),
+        .itemId = ITEM_SWIFT_WING,
+        .price = 300,
+        .holdEffect = HOLD_EFFECT_RAISE_EV,
+        .holdEffectParam = 4,
+        .description = sSwiftWingDesc,
+        .pocket = POCKET_ITEMS,
+        .type = 4,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .secondaryId = STAT_SPEED,
+    },
+
+    [ITEM_PRETTY_WING] =
+    {
+        .name = _("Pretty Wing"),
+        .itemId = ITEM_PRETTY_WING,
+        .price = 1000,
+        .description = sPrettyWingDesc,
+        .pocket = POCKET_ITEMS,
+        .type = 4,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .secondaryId = 0,
     }
 };

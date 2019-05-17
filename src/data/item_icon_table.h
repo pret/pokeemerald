@@ -582,4 +582,11 @@ const u32 *const gItemIconTable[][2] =
     [ITEM_PLUME_FOSSIL] = {gItemIcon_PlumeFossil, gItemIconPalette_PlumeFossil},
     [ITEM_JAW_FOSSIL] = {gItemIcon_JawFossil, gItemIconPalette_JawFossil},
     [ITEM_SAIL_FOSSIL] = {gItemIcon_SailFossil, gItemIconPalette_SailFossil},
+    [ITEM_HEALTH_WING] = {gItemIcon_HealthWing, gItemIconPalette_HealthWing},
+    [ITEM_MUSCLE_WING] = {gItemIcon_MuscleWing, gItemIconPalette_MuscleWing},
+    [ITEM_RESIST_WING] = {gItemIcon_ResistWing, gItemIconPalette_ResistWing},
+    [ITEM_GENIUS_WING] = {gItemIcon_GeniusWing, gItemIconPalette_GeniusWing},
+    [ITEM_CLEVER_WING] = {gItemIcon_CleverWing, gItemIconPalette_CleverWing},
+    [ITEM_SWIFT_WING] = {gItemIcon_SwiftWing, gItemIconPalette_SwiftWing},
+    [ITEM_PRETTY_WING] = {gItemIcon_PrettyWing, gItemIconPalette_PrettyWing},
 };

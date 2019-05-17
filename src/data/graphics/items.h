@@ -1493,3 +1493,24 @@ const u32 gItemIconPalette_JawFossil[] = INCBIN_U32("graphics/items/icon_palette
 
 const u32 gItemIcon_SailFossil[] = INCBIN_U32("graphics/items/icons/sail_fossil.4bpp.lz");
 const u32 gItemIconPalette_SailFossil[] = INCBIN_U32("graphics/items/icon_palettes/sail_fossil.gbapal.lz");
+
+const u32 gItemIcon_HealthWing[] = INCBIN_U32("graphics/items/icons/health_wing.4bpp.lz");
+const u32 gItemIconPalette_HealthWing[] = INCBIN_U32("graphics/items/icon_palettes/health_wing.gbapal.lz");
+
+const u32 gItemIcon_MuscleWing[] = INCBIN_U32("graphics/items/icons/muscle_wing.4bpp.lz");
+const u32 gItemIconPalette_MuscleWing[] = INCBIN_U32("graphics/items/icon_palettes/muscle_wing.gbapal.lz");
+
+const u32 gItemIcon_ResistWing[] = INCBIN_U32("graphics/items/icons/resist_wing.4bpp.lz");
+const u32 gItemIconPalette_ResistWing[] = INCBIN_U32("graphics/items/icon_palettes/resist_wing.gbapal.lz");
+
+const u32 gItemIcon_GeniusWing[] = INCBIN_U32("graphics/items/icons/genius_wing.4bpp.lz");
+const u32 gItemIconPalette_GeniusWing[] = INCBIN_U32("graphics/items/icon_palettes/genius_wing.gbapal.lz");
+
+const u32 gItemIcon_CleverWing[] = INCBIN_U32("graphics/items/icons/clever_wing.4bpp.lz");
+const u32 gItemIconPalette_CleverWing[] = INCBIN_U32("graphics/items/icon_palettes/clever_wing.gbapal.lz");
+
+const u32 gItemIcon_SwiftWing[] = INCBIN_U32("graphics/items/icons/swift_wing.4bpp.lz");
+const u32 gItemIconPalette_SwiftWing[] = INCBIN_U32("graphics/items/icon_palettes/swift_wing.gbapal.lz");
+
+const u32 gItemIcon_PrettyWing[] = INCBIN_U32("graphics/items/icons/pretty_wing.4bpp.lz");
+const u32 gItemIconPalette_PrettyWing[] = INCBIN_U32("graphics/items/icon_palettes/pretty_wing.gbapal.lz");
