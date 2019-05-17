@@ -22,7 +22,7 @@
 #define TYPE_DRAGON   0x10
 #define TYPE_DARK     0x11
 #define TYPE_FAIRY    0x12
-#define NUMBER_OF_MON_TYPES 0x13
+#define NUMBER_OF_MON_TYPES     0x13
 
 
 // Pokemon egg groups
