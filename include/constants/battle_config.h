@@ -1,6 +1,18 @@
 #ifndef GUARD_CONSTANTS_BATTLE_CONFIG_H
 #define GUARD_CONSTANTS_BATTLE_CONFIG_H
 
+// Species with peculiar battle effects. Remove them if they're properly placed in constant/species.h
+#define SPECIES_DIALGA 0
+#define SPECIES_PALKIA 0
+#define SPECIES_GIRATINA 0
+#define SPECIES_CHERRIM 0
+#define SPECIES_ARCEUS 0
+#define SPECIES_SILVALLY 0
+#define SPECIES_GENESECT 0
+
+// Items with peculiar battle effects. Remove them if they're properly placed in constant/items.h
+#define ITEM_GRISEOUS_ORB 0
+
 #define GEN_3 0
 #define GEN_4 1
 #define GEN_5 2
