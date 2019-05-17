@@ -33,7 +33,7 @@ struct Struct203CEC8
     u8 unk8_0:4;
     u8 mode:2;
     u8 unk8_2:2;
-    s8 unk9;
+    s8 slotId;
     s8 unkA;
     u8 unkB;
     u16 unkC;

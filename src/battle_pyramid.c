@@ -76,7 +76,7 @@ struct PyramidWildMon
 {
     u16 species;
     u8 lvl;
-    u8 abilityBit;
+    u8 abilityNum;
     u16 moves[4];
 };
 
@@ -129,6 +129,8 @@ static bool8 TrySetPyramidEventObjectPositionInSquare(u8 arg0, u8 *floorLayoutOf
 static bool8 TrySetPyramidEventObjectPositionAtCoords(bool8 objType, u8 x, u8 y, u8 *floorLayoutOffsets, u8 squareId, u8 eventObjectId);
 
 // Const rom data.
+#define ABILITY_RANDOM 2 // For wild mons data.
+
 #include "data/battle_frontier/battle_pyramid_level_50_wild_mons.h"
 #include "data/battle_frontier/battle_pyramid_open_level_wild_mons.h"
 
@@ -1401,23 +1403,23 @@ void GenerateBattlePyramidWildMon(void)
                MON_DATA_EXP,
                &gExperienceTables[gBaseStats[wildMons[id].species].growthRate][lvl]);
 
-    switch (wildMons[id].abilityBit)
+    switch (wildMons[id].abilityNum)
     {
     case 0:
     case 1:
-        SetMonData(&gEnemyParty[0], MON_DATA_ALT_ABILITY, &wildMons[id].abilityBit);
+        SetMonData(&gEnemyParty[0], MON_DATA_ABILITY_NUM, &wildMons[id].abilityNum);
         break;
-    case 2:
+    case ABILITY_RANDOM:
     default:
-        if (gBaseStats[wildMons[id].species].ability2)
+        if (gBaseStats[wildMons[id].species].abilities[1])
         {
             i = GetMonData(&gEnemyParty[0], MON_DATA_PERSONALITY, NULL) % 2;
-            SetMonData(&gEnemyParty[0], MON_DATA_ALT_ABILITY, &i);
+            SetMonData(&gEnemyParty[0], MON_DATA_ABILITY_NUM, &i);
         }
         else
         {
             i = 0;
-            SetMonData(&gEnemyParty[0], MON_DATA_ALT_ABILITY, &i);
+            SetMonData(&gEnemyParty[0], MON_DATA_ABILITY_NUM, &i);
         }
         break;
     }
