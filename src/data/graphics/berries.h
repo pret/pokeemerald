@@ -1,8 +1,8 @@
-const u32 gUnknown_08D9BB44[] = INCBIN_U32("graphics/interface/check_berry.4bpp.lz");
-const u32 gUnknown_08D9BEF0[] = INCBIN_U32("graphics/interface/check_berry.gbapal.lz");
+const u32 gBerryCheck_Gfx[] = INCBIN_U32("graphics/interface/check_berry.4bpp.lz");
+const u32 gBerryCheck_Pal[] = INCBIN_U32("graphics/interface/check_berry.gbapal.lz");
 
-const u32 gUnknown_08D9BF98[] = INCBIN_U32("graphics/interface/berry_tag.bin.lz");
-const u32 gUnknown_08D9C13C[] = INCBIN_U32("graphics/interface/berry_tag_title.bin.lz");
+const u32 gBerryTag_Gfx[] = INCBIN_U32("graphics/interface/berry_tag.bin.lz");
+const u32 gBerryTag_Pal[] = INCBIN_U32("graphics/interface/berry_tag_title.bin.lz");
 
 const u32 gBerryCheckCircle_Gfx[] = INCBIN_U32("graphics/interface/check_berry_circle.4bpp.lz");
 
