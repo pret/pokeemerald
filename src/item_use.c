@@ -51,7 +51,7 @@ void SetUpItemUseCallback(u8 taskId);
 void MapPostLoadHook_UseItem(void);
 void sub_80AF6D4(void);
 void Task_CallItemUseOnFieldCallback(u8 taskId);
-void bag_menu_inits_lists_menu(u8 taskId);
+void BagMenu_InitListsMenu(u8 taskId);
 void ItemUseOnFieldCB_Bike(u8 taskId);
 void ItemUseOnFieldCB_Rod(u8 taskId);
 void ItemUseOnFieldCB_Itemfinder(u8 taskId);
@@ -101,7 +101,7 @@ static const u8 gUnknown_085920E4[] = {DIR_NORTH, DIR_EAST, DIR_SOUTH, DIR_WEST}
 static const struct YesNoFuncTable gUnknown_085920E8 =
 {
     .yesFunc = sub_80FE03C,
-    .noFunc = bag_menu_inits_lists_menu,
+    .noFunc = BagMenu_InitListsMenu,
 };
 
 // .text
@@ -115,7 +115,7 @@ void SetUpItemUseCallback(u8 taskId)
         type = ItemId_GetType(gSpecialVar_ItemId) - 1;
     if (!InBattlePyramid())
     {
-        gUnknown_0203CE54->mainCallback2 = gUnknown_085920D8[type];
+        gBagMenu->mainCallback2 = gUnknown_085920D8[type];
         unknown_ItemMenu_Confirm(taskId);
     }
     else
@@ -154,7 +154,7 @@ void DisplayCannotUseItemMessage(u8 taskId, bool8 isUsingRegisteredKeyItemOnFiel
     if (!isUsingRegisteredKeyItemOnField)
     {
         if (!InBattlePyramid())
-            DisplayItemMessage(taskId, 1, gStringVar4, bag_menu_inits_lists_menu);
+            DisplayItemMessage(taskId, 1, gStringVar4, BagMenu_InitListsMenu);
         else
             DisplayItemMessageInBattlePyramid(taskId, gText_DadsAdvice, sub_81C6714);
     }
@@ -199,7 +199,7 @@ void sub_80FD254(void)
 
 void ItemUseOutOfBattle_Mail(u8 taskId)
 {
-    gUnknown_0203CE54->mainCallback2 = sub_80FD254;
+    gBagMenu->mainCallback2 = sub_80FD254;
     unknown_ItemMenu_Confirm(taskId);
 }
 
@@ -595,7 +595,7 @@ void ItemUseOutOfBattle_PokeblockCase(u8 taskId)
     }
     else if (gTasks[taskId].data[3] != TRUE)
     {
-        gUnknown_0203CE54->mainCallback2 = sub_80FDBEC;
+        gBagMenu->mainCallback2 = sub_80FDBEC;
         unknown_ItemMenu_Confirm(taskId);
     }
     else
@@ -628,7 +628,7 @@ void ItemUseOutOfBattle_CoinCase(u8 taskId)
 
     if (!gTasks[taskId].data[3])
     {
-        DisplayItemMessage(taskId, 1, gStringVar4, bag_menu_inits_lists_menu);
+        DisplayItemMessage(taskId, 1, gStringVar4, BagMenu_InitListsMenu);
     }
     else
     {
@@ -643,7 +643,7 @@ void ItemUseOutOfBattle_PowderJar(u8 taskId)
 
     if (!gTasks[taskId].data[3])
     {
-        DisplayItemMessage(taskId, 1, gStringVar4, bag_menu_inits_lists_menu);
+        DisplayItemMessage(taskId, 1, gStringVar4, BagMenu_InitListsMenu);
     }
     else
     {
@@ -657,7 +657,7 @@ void sub_80FDD10(u8 taskId)
     {
         gUnknown_0203A0F4 = sub_80FDD74;
         gFieldCallback = MapPostLoadHook_UseItem;
-        gUnknown_0203CE54->mainCallback2 = CB2_ReturnToField;
+        gBagMenu->mainCallback2 = CB2_ReturnToField;
         unknown_ItemMenu_Confirm(taskId);
     }
     else
@@ -782,7 +782,7 @@ void task08_0809AD8C(u8 taskId)
 
 void sub_80FE024(u8 taskId)
 {
-    bag_menu_yes_no(taskId, 6, &gUnknown_085920E8);
+    BagMenu_YesNo(taskId, 6, &gUnknown_085920E8);
 }
 
 void sub_80FE03C(u8 taskId)
@@ -813,7 +813,7 @@ void ItemUseOutOfBattle_Repel(u8 taskId)
     if (VarGet(VAR_REPEL_STEP_COUNT) == 0)
         gTasks[taskId].func = sub_80FE124;
     else if (!InBattlePyramid())
-        DisplayItemMessage(taskId, 1, gText_RepelEffectsLingered, bag_menu_inits_lists_menu);
+        DisplayItemMessage(taskId, 1, gText_RepelEffectsLingered, BagMenu_InitListsMenu);
     else
         DisplayItemMessageInBattlePyramid(taskId, gText_RepelEffectsLingered, sub_81C6714);
 }
@@ -837,7 +837,7 @@ void sub_80FE164(u8 taskId)
         VarSet(VAR_REPEL_STEP_COUNT, ItemId_GetHoldEffectParam(gSpecialVar_ItemId));
         sub_80FE058();
         if (!InBattlePyramid())
-            DisplayItemMessage(taskId, 1, gStringVar4, bag_menu_inits_lists_menu);
+            DisplayItemMessage(taskId, 1, gStringVar4, BagMenu_InitListsMenu);
         else
             DisplayItemMessageInBattlePyramid(taskId, gStringVar4, sub_81C6714);
     }
@@ -849,7 +849,7 @@ void sub_80FE1D0(u8 taskId)
     {
         PlaySE(SE_BIDORO);
         if (!InBattlePyramid())
-            DisplayItemMessage(taskId, 1, gStringVar4, bag_menu_inits_lists_menu);
+            DisplayItemMessage(taskId, 1, gStringVar4, BagMenu_InitListsMenu);
         else
             DisplayItemMessageInBattlePyramid(taskId, gStringVar4, sub_81C6714);
     }
@@ -928,7 +928,7 @@ void ItemUseInBattle_PokeBall(u8 taskId)
     }
     else if (!InBattlePyramid())
     {
-        DisplayItemMessage(taskId, 1, gText_BoxFull, bag_menu_inits_lists_menu);
+        DisplayItemMessage(taskId, 1, gText_BoxFull, BagMenu_InitListsMenu);
     }
     else
         DisplayItemMessageInBattlePyramid(taskId, gText_BoxFull, sub_81C6714);
@@ -965,7 +965,7 @@ void ItemUseInBattle_StatIncrease(u8 taskId)
     if (ExecuteTableBasedItemEffect(&gPlayerParty[partyId], gSpecialVar_ItemId, partyId, 0) != FALSE)
     {
         if (!InBattlePyramid())
-            DisplayItemMessage(taskId, 1, gText_WontHaveEffect, bag_menu_inits_lists_menu);
+            DisplayItemMessage(taskId, 1, gText_WontHaveEffect, BagMenu_InitListsMenu);
         else
             DisplayItemMessageInBattlePyramid(taskId, gText_WontHaveEffect, sub_81C6714);
     }
@@ -980,7 +980,7 @@ void sub_80FE54C(u8 taskId)
 {
     if (!InBattlePyramid())
     {
-        gUnknown_0203CE54->mainCallback2 = sub_81B89F0;
+        gBagMenu->mainCallback2 = sub_81B89F0;
         unknown_ItemMenu_Confirm(taskId);
     }
     else
