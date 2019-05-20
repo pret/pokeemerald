@@ -76,17 +76,17 @@ CheckIfSoundproofCancelsMove:
 
 CheckIfVoltAbsorbCancelsElectric: @ 82DBFBD
 	get_curr_move_type
-	if_equal_ TYPE_ELECTRIC, AI_CheckBadMove_CheckEffect
+	if_equal TYPE_ELECTRIC, AI_CheckBadMove_CheckEffect
 	goto AI_CheckBadMove_CheckEffect
 
 CheckIfWaterAbsorbCancelsWater: @ 82DBFCA
 	get_curr_move_type
-	if_equal_ TYPE_WATER, Score_Minus12
+	if_equal TYPE_WATER, Score_Minus12
 	goto AI_CheckBadMove_CheckEffect
 
 CheckIfFlashFireCancelsFire: @ 82DBFD7
 	get_curr_move_type
-	if_equal_ TYPE_FIRE, Score_Minus12
+	if_equal TYPE_FIRE, Score_Minus12
 	goto AI_CheckBadMove_CheckEffect
 
 CheckIfWonderGuardCancelsMove: @ 82DBFE4
@@ -95,7 +95,7 @@ CheckIfWonderGuardCancelsMove: @ 82DBFE4
 
 CheckIfLevitateCancelsGroundMove: @ 82DBFEF
 	get_curr_move_type
-	if_equal_ TYPE_GROUND, Score_Minus10
+	if_equal TYPE_GROUND, Score_Minus10
 
 AI_CheckBadMove_CheckEffect: @ 82DC045
 	if_effect EFFECT_SLEEP, AI_CBM_Sleep
@@ -250,6 +250,13 @@ AI_CheckBadMove_CheckEffect: @ 82DC045
 	if_effect EFFECT_LAST_RESORT, AI_CBM_LastResort
 	if_effect EFFECT_BELCH, AI_CBM_Belch
 	if_effect EFFECT_DO_NOTHING, Score_Minus8
+	if_effect EFFECT_POWDER, AI_CBM_Powder
+	end
+	
+AI_CBM_Powder:
+	if_type AI_TARGET, TYPE_FIRE, AI_Ret
+	if_has_move_with_type AI_TARGET, TYPE_FIRE, AI_Ret
+	score -5
 	end
 	
 AI_CBM_Belch:
@@ -1029,6 +1036,35 @@ AI_CheckViability:
 	if_effect EFFECT_WATER_SPORT, AI_CV_WaterSport
 	if_effect EFFECT_CALM_MIND, AI_CV_SpDefUp
 	if_effect EFFECT_DRAGON_DANCE, AI_CV_DragonDance
+	if_effect EFFECT_POWDER, AI_CV_Powder
+	end
+	
+AI_CV_Powder:
+	if_type AI_TARGET, TYPE_FIRE, AI_CV_Powder2
+	if_has_move_with_type AI_TARGET, TYPE_FIRE, AI_CV_Powder2
+	score -2
+	end
+AI_CV_Powder2:
+	is_first_turn_for AI_TARGET
+	if_equal 0, AI_CV_Powder3
+	if_random_less_than 100, AI_CV_Powder3
+	score +1
+AI_CV_Powder3:
+	if_type AI_USER, TYPE_BUG, AI_CV_Powder4
+	if_type AI_USER, TYPE_GRASS, AI_CV_Powder4
+	if_no_type AI_USER, TYPE_STEEL, AI_CV_Powder5
+AI_CV_Powder4:
+	score +1
+AI_CV_Powder5:
+	get_last_used_bank_move AI_USER
+	if_equal_u32 MOVE_POWDER, AI_CV_Powder6
+	if_random_less_than 150, Score_Minus1
+	if_random_less_than 200, AI_Ret
+	score +2
+	end
+AI_CV_Powder6:
+	if_random_less_than 136, Score_Minus2
+	score +1
 	end
 
 AI_CV_Hit:

@@ -2367,6 +2367,7 @@ u8 AtkCanceller_UnableToUseMove(void)
                     gProtectStructs[gBattlerAttacker].powderSelfDmg = 1;
                     gBattleMoveDamage = gBattleMons[gBattlerAttacker].maxHP / 4;
                     gBattlescriptCurrInstr = BattleScript_MoveUsedPowder;
+                    effect = 1;
                 }
             }
             gBattleStruct->atkCancellerTracker++;

@@ -93,8 +93,8 @@ static void BattleAICmd_get_type(void);
 static void BattleAICmd_get_considered_move_power(void);
 static void BattleAICmd_get_how_powerful_move_is(void);
 static void BattleAICmd_get_last_used_battler_move(void);
-static void BattleAICmd_if_equal_(void);
-static void BattleAICmd_if_not_equal_(void);
+static void BattleAICmd_if_equal_u32(void);
+static void BattleAICmd_if_not_equal_u32(void);
 static void BattleAICmd_if_user_goes(void);
 static void BattleAICmd_if_cant_use_belch(void);
 static void BattleAICmd_nullsub_2A(void);
@@ -164,6 +164,7 @@ static void BattleAICmd_if_has_move_with_split(void);
 static void BattleAICmd_if_has_no_move_with_split(void);
 static void BattleAICmd_if_physical_moves_unusable(void);
 static void BattleAICmd_if_ai_can_go_down(void);
+static void BattleAICmd_if_has_move_with_type(void);
 
 // ewram
 EWRAM_DATA const u8 *gAIScriptPtr = NULL;
@@ -212,8 +213,8 @@ static const BattleAICmdFunc sBattleAICmdTable[] =
     BattleAICmd_get_considered_move_power,                  // 0x23
     BattleAICmd_get_how_powerful_move_is,                   // 0x24
     BattleAICmd_get_last_used_battler_move,                 // 0x25
-    BattleAICmd_if_equal_,                                  // 0x26
-    BattleAICmd_if_not_equal_,                              // 0x27
+    BattleAICmd_if_equal_u32,                               // 0x26
+    BattleAICmd_if_not_equal_u32,                           // 0x27
     BattleAICmd_if_user_goes,                               // 0x28
     BattleAICmd_if_cant_use_belch,                          // 0x29
     BattleAICmd_nullsub_2A,                                 // 0x2A
@@ -283,6 +284,7 @@ static const BattleAICmdFunc sBattleAICmdTable[] =
     BattleAICmd_if_has_no_move_with_split,                  // 0x6A
     BattleAICmd_if_physical_moves_unusable,                 // 0x6B
     BattleAICmd_if_ai_can_go_down,                          // 0x6C
+    BattleAICmd_if_has_move_with_type,                      // 0x6D
 };
 
 static const u16 sDiscouragedPowerfulMoveEffects[] =
@@ -1422,20 +1424,20 @@ static void BattleAICmd_get_last_used_battler_move(void)
     gAIScriptPtr += 2;
 }
 
-static void BattleAICmd_if_equal_(void) // Same as if_equal.
+static void BattleAICmd_if_equal_u32(void)
 {
-    if (gAIScriptPtr[1] == AI_THINKING_STRUCT->funcResult)
-        gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 2);
+    if (T1_READ_32(&gAIScriptPtr[1]) == AI_THINKING_STRUCT->funcResult)
+        gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 5);
     else
-        gAIScriptPtr += 6;
+        gAIScriptPtr += 9;
 }
 
-static void BattleAICmd_if_not_equal_(void) // Same as if_not_equal.
+static void BattleAICmd_if_not_equal_u32(void)
 {
-    if (gAIScriptPtr[1] != AI_THINKING_STRUCT->funcResult)
-        gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 2);
+    if (T1_READ_32(&gAIScriptPtr[1]) != AI_THINKING_STRUCT->funcResult)
+        gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 5);
     else
-        gAIScriptPtr += 6;
+        gAIScriptPtr += 9;
 }
 
 static void BattleAICmd_if_user_goes(void)
@@ -2685,4 +2687,31 @@ static void BattleAICmd_if_cant_use_belch(void)
         gAIScriptPtr += 6;
     else
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 2);
+}
+
+static void BattleAICmd_if_has_move_with_type(void)
+{
+    u32 i, moveType, battler = BattleAI_GetWantedBattler(gAIScriptPtr[1]);
+    u16 *moves;
+
+    if (IsBattlerAIControlled(battler))
+        moves = gBattleMons[battler].moves;
+    else
+        moves = BATTLE_HISTORY->usedMoves[battler].moves;
+
+    for (i = 0; i < 4; i++)
+    {
+        if (moves[i] == MOVE_NONE)
+            continue;
+
+        SetTypeBeforeUsingMove(moves[i], battler);
+        GET_MOVE_TYPE(moves[i], moveType);
+        if (moveType == gAIScriptPtr[2])
+            break;
+    }
+
+    if (i == 4)
+        gAIScriptPtr += 7;
+    else
+        gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 3);
 }

@@ -227,15 +227,15 @@
 	.byte \battler
 	.endm
 
-	.macro if_equal_ param0:req, param1:req
+	.macro if_equal_u32 param0:req, param1:req
 	.byte 0x26
-	.byte \param0
+	.4byte \param0
 	.4byte \param1
 	.endm
 
-	.macro if_not_equal_ param0:req, param1:req
+	.macro if_not_equal_u32 param0:req, param1:req
 	.byte 0x27
-	.byte \param0
+	.4byte \param0
 	.4byte \param1
 	.endm
 
@@ -617,6 +617,13 @@
 	
 	.macro if_ai_can_go_down ptr:req
 	.byte 0x6C
+	.4byte \ptr
+	.endm
+	
+	.macro if_has_move_with_type battler:req, type:req, ptr:req
+	.byte 0x6D
+	.byte \battler
+	.byte \type
 	.4byte \ptr
 	.endm
 	
