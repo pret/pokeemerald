@@ -1875,7 +1875,6 @@ BattleScript_EffectFrustration:
 BattleScript_EffectEruption:
 BattleScript_EffectPledge:
 BattleScript_EffectFling:
-BattleScript_EffectNaturalGift:
 BattleScript_EffectWringOut:
 BattleScript_EffectHex:
 BattleScript_EffectAssurance:
@@ -1933,6 +1932,36 @@ BattleScript_HitFromAtkAnimation::
 BattleScript_MoveEnd::
 	moveendall
 	end
+	
+BattleScript_EffectNaturalGift:
+	attackcanceler
+	attackstring
+	ppreduce
+	jumpifnotberry BS_ATTACKER, BattleScript_ButItFailed
+	jumpifword CMP_COMMON_BITS, gFieldStatuses, STATUS_FIELD_MAGIC_ROOM, BattleScript_ButItFailed
+	jumpifability BS_ATTACKER, ABILITY_KLUTZ, BattleScript_ButItFailed
+	jumpifstatus3 BS_ATTACKER, STATUS3_EMBARGO, BattleScript_ButItFailed
+	accuracycheck BattleScript_MoveMissedPause, ACC_CURR_MOVE
+	critcalc
+	damagecalc
+	adjustdamage
+	attackanimation
+	waitanimation
+	effectivenesssound
+	hitanimation BS_TARGET
+	waitstate
+	healthbarupdate BS_TARGET
+	datahpupdate BS_TARGET
+	critmessage
+	waitmessage 0x40
+	resultmessage
+	waitmessage 0x40
+	seteffectwithchance
+	jumpifmovehadnoeffect BattleScript_EffectNaturalGiftEnd
+	removeitem BS_ATTACKER
+BattleScript_EffectNaturalGiftEnd:
+	tryfaintmon BS_TARGET, FALSE, NULL
+	goto BattleScript_MoveEnd
 
 BattleScript_MakeMoveMissed::
 	orhalfword gMoveResultFlags, MOVE_RESULT_MISSED

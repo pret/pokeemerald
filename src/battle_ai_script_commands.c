@@ -165,6 +165,7 @@ static void BattleAICmd_if_has_no_move_with_split(void);
 static void BattleAICmd_if_physical_moves_unusable(void);
 static void BattleAICmd_if_ai_can_go_down(void);
 static void BattleAICmd_if_has_move_with_type(void);
+static void BattleAICmd_if_no_move_used(void);
 
 // ewram
 EWRAM_DATA const u8 *gAIScriptPtr = NULL;
@@ -285,6 +286,7 @@ static const BattleAICmdFunc sBattleAICmdTable[] =
     BattleAICmd_if_physical_moves_unusable,                 // 0x6B
     BattleAICmd_if_ai_can_go_down,                          // 0x6C
     BattleAICmd_if_has_move_with_type,                      // 0x6D
+    BattleAICmd_if_no_move_used,                            // 0x6E
 };
 
 static const u16 sDiscouragedPowerfulMoveEffects[] =
@@ -1554,14 +1556,9 @@ static void BattleAICmd_get_considered_move_effect(void)
 
 static void BattleAICmd_get_ability(void)
 {
-    u8 battlerId;
+    u8 battlerId = BattleAI_GetWantedBattler(gAIScriptPtr[1]);
 
-    if (gAIScriptPtr[1] == AI_USER)
-        battlerId = sBattler_AI;
-    else
-        battlerId = gBattlerTarget;
-
-    if (gActiveBattler != battlerId)
+    if (!IsBattlerAIControlled(battlerId))
     {
         if (BATTLE_HISTORY->abilities[battlerId] != 0)
         {
@@ -1614,7 +1611,7 @@ static void BattleAICmd_check_ability(void)
     u32 battlerId = BattleAI_GetWantedBattler(gAIScriptPtr[1]);
     u32 ability = gAIScriptPtr[2];
 
-    if (gAIScriptPtr[1] == AI_TARGET || gAIScriptPtr[1] == AI_TARGET_PARTNER)
+    if (!IsBattlerAIControlled(battlerId))
     {
         if (BATTLE_HISTORY->abilities[battlerId] != ABILITY_NONE)
         {
@@ -1841,12 +1838,14 @@ static void BattleAICmd_get_weather(void)
 {
     if (gBattleWeather & WEATHER_RAIN_ANY)
         AI_THINKING_STRUCT->funcResult = AI_WEATHER_RAIN;
-    if (gBattleWeather & WEATHER_SANDSTORM_ANY)
+    else if (gBattleWeather & WEATHER_SANDSTORM_ANY)
         AI_THINKING_STRUCT->funcResult = AI_WEATHER_SANDSTORM;
-    if (gBattleWeather & WEATHER_SUN_ANY)
+    else if (gBattleWeather & WEATHER_SUN_ANY)
         AI_THINKING_STRUCT->funcResult = AI_WEATHER_SUN;
-    if (gBattleWeather & WEATHER_HAIL_ANY)
+    else if (gBattleWeather & WEATHER_HAIL_ANY)
         AI_THINKING_STRUCT->funcResult = AI_WEATHER_HAIL;
+    else
+        AI_THINKING_STRUCT->funcResult = AI_WEATHER_NONE;
 
     gAIScriptPtr += 1;
 }
@@ -2202,17 +2201,12 @@ static void BattleAICmd_watch(void)
 
 static void BattleAICmd_get_hold_effect(void)
 {
-    u8 battlerId;
+    u32 battlerId = BattleAI_GetWantedBattler(gAIScriptPtr[1]);
 
-    if (gAIScriptPtr[1] == AI_USER)
-        battlerId = sBattler_AI;
+    if (!IsBattlerAIControlled(battlerId))
+        AI_THINKING_STRUCT->funcResult = BATTLE_HISTORY->itemEffects[battlerId];
     else
-        battlerId = gBattlerTarget;
-
-    if (gActiveBattler != battlerId)
-        AI_THINKING_STRUCT->funcResult = ItemId_GetHoldEffect(BATTLE_HISTORY->itemEffects[battlerId]);
-    else
-        AI_THINKING_STRUCT->funcResult = ItemId_GetHoldEffect(gBattleMons[battlerId].item);
+        AI_THINKING_STRUCT->funcResult = GetBattlerHoldEffect(battlerId, FALSE);
 
     gAIScriptPtr += 2;
 }
@@ -2714,4 +2708,26 @@ static void BattleAICmd_if_has_move_with_type(void)
         gAIScriptPtr += 7;
     else
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 3);
+}
+
+static void BattleAICmd_if_no_move_used(void)
+{
+    u32 i, battler = BattleAI_GetWantedBattler(gAIScriptPtr[1]);
+
+    if (!IsBattlerAIControlled(battler))
+    {
+        for (i = 0; i < 4; i++)
+        {
+            if (BATTLE_HISTORY->usedMoves[battler].moves[i] != 0 && BATTLE_HISTORY->usedMoves[battler].moves[i] != 0xFFFF)
+            {
+                gAIScriptPtr += 6;
+                return;
+            }
+        }
+        gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 2);
+    }
+    else
+    {
+        gAIScriptPtr += 6;
+    }
 }

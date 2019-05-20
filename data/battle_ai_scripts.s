@@ -251,6 +251,18 @@ AI_CheckBadMove_CheckEffect: @ 82DC045
 	if_effect EFFECT_BELCH, AI_CBM_Belch
 	if_effect EFFECT_DO_NOTHING, Score_Minus8
 	if_effect EFFECT_POWDER, AI_CBM_Powder
+	if_effect EFFECT_PROTECT, AI_CBM_Protect
+	if_effect EFFECT_TAUNT, AI_CBM_Taunt
+	end
+	
+AI_CBM_Taunt:
+	if_target_taunted Score_Minus10
+	end
+	
+AI_CBM_Protect:
+	get_protect_count AI_USER
+	if_more_than 2, Score_Minus10
+	if_status AI_TARGET, STATUS1_SLEEP | STATUS1_FREEZE, Score_Minus8
 	end
 	
 AI_CBM_Powder:
@@ -664,10 +676,12 @@ AI_CBM_LeechSeed: @ 82DC57A
 
 AI_CBM_Disable: @ 82DC595
 	if_any_move_disabled AI_TARGET, Score_Minus8
+	if_no_move_used AI_TARGET, Score_Minus8
 	end
 
 AI_CBM_Encore: @ 82DC59D
 	if_any_move_encored AI_TARGET, Score_Minus8
+	if_no_move_used AI_TARGET, Score_Minus8
 	end
 
 AI_CBM_DamageDuringSleep: @ 82DC5A5
@@ -1008,7 +1022,8 @@ AI_CheckViability:
 	if_effect EFFECT_FAKE_OUT, AI_CV_FakeOut
 	if_effect EFFECT_SPIT_UP, AI_CV_SpitUp
 	if_effect EFFECT_SWALLOW, AI_CV_Heal
-	if_effect EFFECT_HAIL, AI_CV_Hail
+	if_effect EFFECT_HAIL, AI_CV_Sandstorm
+	if_effect EFFECT_SANDSTORM, AI_CV_Sandstorm
 	if_effect EFFECT_FLATTER, AI_CV_Flatter
 	if_effect EFFECT_MEMENTO, AI_CV_SelfKO
 	if_effect EFFECT_FACADE, AI_CV_Facade
@@ -1037,6 +1052,31 @@ AI_CheckViability:
 	if_effect EFFECT_CALM_MIND, AI_CV_SpDefUp
 	if_effect EFFECT_DRAGON_DANCE, AI_CV_DragonDance
 	if_effect EFFECT_POWDER, AI_CV_Powder
+	if_effect EFFECT_MISTY_TERRAIN, AI_CV_MistyTerrain
+	if_effect EFFECT_GRASSY_TERRAIN, AI_CV_GrassyTerrain
+	if_effect EFFECT_ELECTRIC_TERRAIN, AI_CV_ElectricTerrain
+	if_effect EFFECT_PSYCHIC_TERRAIN, AI_CV_PsychicTerrain
+	end
+	
+AI_CV_MistyTerrain:
+	call AI_CV_TerrainExpander
+	end
+	
+AI_CV_GrassyTerrain:
+	call AI_CV_TerrainExpander
+	end
+	
+AI_CV_ElectricTerrain:
+	call AI_CV_TerrainExpander
+	end
+	
+AI_CV_PsychicTerrain:
+	call AI_CV_TerrainExpander
+	end
+	
+AI_CV_TerrainExpander:
+	get_hold_effect AI_USER
+	if_equal HOLD_EFFECT_TERRAIN_EXTENDER, Score_Plus2
 	end
 	
 AI_CV_Powder:
@@ -2349,36 +2389,42 @@ AI_CV_Protect_End:
 	end
 
 AI_CV_Foresight:
-	get_user_type1
-	if_equal TYPE_GHOST, AI_CV_Foresight2
-	get_user_type2
-	if_equal TYPE_GHOST, AI_CV_Foresight2
+	if_has_move_with_type AI_USER, TYPE_NORMAL, AI_CV_ForesightGhost
+	if_has_move_with_type AI_USER, TYPE_FIGHTING, AI_CV_ForesightGhost
+	goto AI_CV_ForesightEvs
+AI_CV_ForesightGhost:
+	if_type AI_USER, TYPE_GHOST, AI_CV_Foresight2
+AI_CV_ForesightEvs:
 	if_stat_level_more_than AI_USER, STAT_EVASION, 8, AI_CV_Foresight3
-	score -2
+	score -3
 	goto AI_CV_Foresight_End
-
 AI_CV_Foresight2:
 	if_random_less_than 80, AI_CV_Foresight_End
-
 AI_CV_Foresight3:
 	if_random_less_than 80, AI_CV_Foresight_End
 	score +2
-
 AI_CV_Foresight_End:
 	end
 
 AI_CV_Endure:
-	if_hp_less_than AI_USER, 4, AI_CV_Endure2
+	get_protect_count AI_USER
+	if_more_than 1, AI_CV_Endure2
+	if_hp_less_than AI_USER, 8, AI_CV_Endure2
+	if_hp_less_than AI_USER, 14, AI_CV_Endure4
 	if_hp_less_than AI_USER, 35, AI_CV_Endure3
-
+	if_doesnt_have_move_with_effect AI_USER, EFFECT_FLAIL, AI_CV_Endure2
+	score +1
+	goto AI_CV_Endure_End
 AI_CV_Endure2:
+	score -3
+	goto AI_CV_Endure_End
+AI_CV_Endure4:
 	score -1
 	goto AI_CV_Endure_End
-
 AI_CV_Endure3:
+	if_has_move_with_effect AI_USER, EFFECT_FLAIL, Score_Plus2
 	if_random_less_than 70, AI_CV_Endure_End
 	score +1
-
 AI_CV_Endure_End:
 	end
 
@@ -2449,24 +2495,31 @@ AI_CV_RainDance:
 	if_user_faster AI_CV_RainDance2
 	get_ability AI_USER
 	if_equal ABILITY_SWIFT_SWIM, AI_CV_RainDance3
-
+	get_ability AI_USER_PARTNER
+	if_equal ABILITY_SWIFT_SWIM, AI_CV_RainDance3
 AI_CV_RainDance2:
 	if_hp_less_than AI_USER, 40, AI_CV_RainDance_ScoreDown1
 	get_weather
 	if_equal AI_WEATHER_HAIL, AI_CV_RainDance3
 	if_equal AI_WEATHER_SUN, AI_CV_RainDance3
 	if_equal AI_WEATHER_SANDSTORM, AI_CV_RainDance3
-	get_ability AI_USER
-	if_equal ABILITY_RAIN_DISH, AI_CV_RainDance3
-	goto AI_CV_RainDance_End
-
+	if_ability AI_USER, ABILITY_RAIN_DISH, AI_CV_RainDance3
+	if_ability AI_USER_PARTNER, ABILITY_RAIN_DISH, AI_CV_RainDance3
+	if_ability AI_USER, ABILITY_HYDRATION, AI_CV_Hydration
+	if_no_ability AI_USER_PARTNER, ABILITY_HYDRATION, AI_CV_RainDance_Rock
+AI_CV_Hydration:
+	if_status AI_USER, STATUS1_ANY, AI_CV_RainDance3
+	if_status AI_USER_PARTNER, STATUS1_ANY, AI_CV_RainDance3
+	goto AI_CV_RainDance_Rock
 AI_CV_RainDance3:
 	score +1
-	goto AI_CV_RainDance_End
-
+	goto AI_CV_RainDance_Rock
 AI_CV_RainDance_ScoreDown1:
 	score -1
-
+AI_CV_RainDance_Rock:
+	get_hold_effect AI_USER
+	if_not_equal HOLD_EFFECT_DAMP_ROCK, AI_CV_RainDance_End
+	score +2
 AI_CV_RainDance_End:
 	end
 
@@ -2477,15 +2530,15 @@ AI_CV_SunnyDay:
 	if_equal AI_WEATHER_RAIN, AI_CV_SunnyDay2
 	if_equal AI_WEATHER_SANDSTORM, AI_CV_SunnyDay2
 	goto AI_CV_SunnyDay_End
-
 AI_CV_SunnyDay2:
 	score +1
 	goto AI_CV_SunnyDay_End
-
 AI_CV_SunnyDay_ScoreDown1:
 	score -1
-
 AI_CV_SunnyDay_End:
+	get_hold_effect AI_USER
+	if_not_equal HOLD_EFFECT_HEAT_ROCK, AI_Ret
+	score +2
 	end
 
 AI_CV_BellyDrum:
@@ -2674,16 +2727,51 @@ AI_CV_Hail:
 	if_equal AI_WEATHER_SUN, AI_CV_Hail2
 	if_equal AI_WEATHER_RAIN, AI_CV_Hail2
 	if_equal AI_WEATHER_SANDSTORM, AI_CV_Hail2
-	goto AI_CV_Hail_End
-
+	goto AI_CV_Hail_Rock
 AI_CV_Hail2:
 	score +1
-	goto AI_CV_Hail_End
-
+	goto AI_CV_Hail_Rock
 AI_CV_Hail_ScoreDown1:
 	score -1
-
+AI_CV_Hail_Rock:
+	get_hold_effect AI_USER
+	if_not_equal HOLD_EFFECT_ICY_ROCK, AI_Ret
+	score +2
+AI_CV_Hail_Ability:
+	get_ability AI_USER
+	if_equal ABILITY_ICE_BODY, AI_CV_Hail_AbilityPlus
+	if_equal ABILITY_SNOW_CLOAK, AI_CV_Hail_AbilityPlus
+	if_equal ABILITY_SLUSH_RUSH, AI_CV_Hail_AbilityPlus
+	if_not_equal ABILITY_FORECAST, AI_CV_Hail_End
+AI_CV_Hail_AbilityPlus:
+	score +1,
 AI_CV_Hail_End:
+	end
+	
+AI_CV_Sandstorm:
+	if_hp_less_than AI_USER, 40, AI_CV_Sandstorm_ScoreDown1
+	get_weather
+	if_equal AI_WEATHER_SUN, AI_CV_Sandstorm2
+	if_equal AI_WEATHER_RAIN, AI_CV_Sandstorm2
+	if_equal AI_WEATHER_HAIL, AI_CV_Sandstorm2
+	goto AI_CV_Sandstorm_End
+AI_CV_Sandstorm2:
+	score +1
+	goto AI_CV_Sandstorm_End
+AI_CV_Sandstorm_ScoreDown1:
+	score -1
+AI_CV_Sandstorm_Rock:
+	get_hold_effect AI_USER
+	if_not_equal HOLD_EFFECT_SMOOTH_ROCK, AI_CV_Sandstorm_Ability
+	score +2
+AI_CV_Sandstorm_Ability:
+	get_ability AI_USER
+	if_equal ABILITY_SAND_VEIL, AI_CV_Sandstorm_AbilityPlus
+	if_equal ABILITY_SAND_RUSH, AI_CV_Sandstorm_AbilityPlus
+	if_not_equal ABILITY_SAND_VEIL, AI_CV_Sandstorm_End
+AI_CV_Sandstorm_AbilityPlus:
+	score +1,
+AI_CV_Sandstorm_End:
 	end
 
 AI_CV_Facade:

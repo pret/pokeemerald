@@ -627,6 +627,12 @@
 	.4byte \ptr
 	.endm
 	
+	.macro if_no_move_used battler:req, ptr:req
+	.byte 0x6E
+	.byte \battler
+	.4byte \ptr
+	.endm
+	
 @ useful script macros
 	.macro if_has_physical_move battler:req, ptr:req
 	if_has_move_with_split \battler, SPLIT_PHYSICAL, \ptr

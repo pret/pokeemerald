@@ -32,6 +32,16 @@
 
 #define IS_WHOLE_SIDE_ALIVE(battler)((IsBattlerAlive(battler) && IsBattlerAlive(BATTLE_PARTNER(battler))))
 
+// for Natural Gift and Fling
+struct TypePower
+{
+    u8 type;
+    u8 power;
+    u16 effect;
+};
+
+extern const struct TypePower gNaturalGiftTable[];
+
 u8 GetBattlerForBattleScript(u8 caseId);
 void PressurePPLose(u8 target, u8 attacker, u16 move);
 void PressurePPLoseOnUsingPerishSong(u8 attacker);

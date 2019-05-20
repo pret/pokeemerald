@@ -140,6 +140,7 @@
 #define VARIOUS_CHECK_IF_GRASSY_TERRAIN_HEALS   77
 #define VARIOUS_JUMP_IF_ROAR_FAILS              78
 #define VARIOUS_TRY_INSTRUCT                    79
+#define VARIOUS_JUMP_IF_NOT_BERRY               80
 
 // atk80, dmg manipulation
 #define ATK80_DMG_CHANGE_SIGN                               0
