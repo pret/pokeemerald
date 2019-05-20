@@ -3746,35 +3746,40 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
     switch (caseID)
     {
     case ITEMEFFECT_ON_SWITCH_IN:
-        switch (battlerHoldEffect)
+        if (!gSpecialStatuses[battlerId].switchInItemDone)
         {
-        case HOLD_EFFECT_DOUBLE_PRIZE:
-            if (GetBattlerSide(battlerId) == B_SIDE_PLAYER)
-                gBattleStruct->moneyMultiplier *= 2;
-            break;
-        case HOLD_EFFECT_RESTORE_STATS:
-            for (i = 0; i < NUM_BATTLE_STATS; i++)
+            switch (battlerHoldEffect)
             {
-                if (gBattleMons[battlerId].statStages[i] < 6)
+            case HOLD_EFFECT_DOUBLE_PRIZE:
+                if (GetBattlerSide(battlerId) == B_SIDE_PLAYER)
+                    gBattleStruct->moneyMultiplier *= 2;
+                break;
+            case HOLD_EFFECT_RESTORE_STATS:
+                for (i = 0; i < NUM_BATTLE_STATS; i++)
                 {
-                    gBattleMons[battlerId].statStages[i] = 6;
-                    effect = ITEM_STATS_CHANGE;
+                    if (gBattleMons[battlerId].statStages[i] < 6)
+                    {
+                        gBattleMons[battlerId].statStages[i] = 6;
+                        effect = ITEM_STATS_CHANGE;
+                    }
                 }
+                if (effect)
+                {
+                    gBattleScripting.battler = battlerId;
+                    gPotentialItemEffectBattler = battlerId;
+                    gActiveBattler = gBattlerAttacker = battlerId;
+                    BattleScriptExecute(BattleScript_WhiteHerbEnd2);
+                }
+                break;
+            case HOLD_EFFECT_AIR_BALLOON:
+                effect = ITEM_EFFECT_OTHER;
+                gBattleScripting.battler = battlerId;
+                BattleScriptPushCursorAndCallback(BattleScript_AirBaloonMsgIn);
+                RecordItemEffectBattle(battlerId, HOLD_EFFECT_AIR_BALLOON);
+                break;
             }
             if (effect)
-            {
-                gBattleScripting.battler = battlerId;
-                gPotentialItemEffectBattler = battlerId;
-                gActiveBattler = gBattlerAttacker = battlerId;
-                BattleScriptExecute(BattleScript_WhiteHerbEnd2);
-            }
-            break;
-        case HOLD_EFFECT_AIR_BALLOON:
-            effect = ITEM_EFFECT_OTHER;
-            gBattleScripting.battler = battlerId;
-            BattleScriptExecute(BattleScript_AirBaloonMsgIn);
-            RecordItemEffectBattle(battlerId, HOLD_EFFECT_AIR_BALLOON);
-            break;
+                gSpecialStatuses[battlerId].switchInItemDone = 1;
         }
         break;
     case 1:

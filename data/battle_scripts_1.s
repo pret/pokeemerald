@@ -6902,7 +6902,7 @@ BattleScript_ItemHealHP_End2::
 BattleScript_AirBaloonMsgIn::
 	printstring STRINGID_AIRBALLOONFLOAT
 	waitmessage 0x40
-	end2
+	end3
 	
 BattleScript_AirBaloonMsgPop::
 	printstring STRINGID_AIRBALLOONPOP
