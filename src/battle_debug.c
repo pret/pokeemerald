@@ -1342,7 +1342,7 @@ static void SetUpModifyArrows(struct BattleDebugMenu *data)
         data->modifyArrows.minValue = 0;
         data->modifyArrows.maxValue = 255;
         data->modifyArrows.maxDigits = 3;
-        data->modifyArrows.modifiedValPtr = &gBattleResources->ai->score;
+        data->modifyArrows.modifiedValPtr = gBattleResources->ai->score;
         data->modifyArrows.typeOfVal = VAL_S8;
         data->modifyArrows.currValue = gBattleResources->ai->score[data->currentSecondaryListItemId];
         break;

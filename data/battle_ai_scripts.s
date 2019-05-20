@@ -3372,7 +3372,7 @@ AI_ConsiderAllyChosenMoveRet:
 AI_PartnerChoseHelpingHand:
 	@ Do not use a status move if you know your move's power will be boosted
 	get_considered_move_power
-	if_equal 0, Score_Minus3
+	if_equal 0, Score_Minus5
 	end
 	
 AI_ConsiderAllyKnownMoves:
@@ -3383,7 +3383,7 @@ AI_ConsiderAllyKnownMoves:
 	end
 	
 AI_HelpingHandInDoubles:
-	if_has_no_attacking_moves AI_USER_PARTNER, Score_Minus3
+	if_has_no_attacking_moves AI_USER_PARTNER, Score_Minus5
 	end
 	
 AI_DoubleBattle:
