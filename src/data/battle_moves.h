@@ -5069,7 +5069,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
         .secondaryEffectChance = 0,
         .target = MOVE_TARGET_USER,
         .priority = 0,
-        .flags = 0,
+        .flags = FLAG_SNATCH_AFFECTED,
         .split = SPLIT_STATUS,
     },
 
@@ -6473,7 +6473,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
         .secondaryEffectChance = 0,
         .target = MOVE_TARGET_USER,
         .priority = 0,
-        .flags = FLAG_DANCE,
+        .flags = FLAG_DANCE | FLAG_SNATCH_AFFECTED,
         .split = SPLIT_STATUS,
     },
 
