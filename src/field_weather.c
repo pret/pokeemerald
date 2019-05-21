@@ -161,11 +161,10 @@ void StartWeather(void)
 {
     if (!FuncIsActiveTask(Task_WeatherMain))
     {
-        u8 index = AllocSpritePalette(0x1200);
+        u8 index = 15;
         CpuCopy32(gUnknown_083970E8, &gPlttBufferUnfaded[0x100 + index * 16], 32);
         BuildGammaShiftTables();
         gWeatherPtr->altGammaSpritePalIndex = index;
-        gWeatherPtr->weatherPicSpritePalIndex = AllocSpritePalette(0x1201);
         gWeatherPtr->rainSpriteCount = 0;
         gWeatherPtr->curRainSpriteIndex = 0;
         gWeatherPtr->cloudSpritesCreated = 0;
@@ -857,10 +856,10 @@ u8 sub_80ABF20(void)
         return 0;
 }
 
-void LoadCustomWeatherSpritePalette(const u16 *palette)
+void LoadCustomWeatherSpritePalette(const struct SpritePalette *palette)
 {
-    LoadPalette(palette, 0x100 + gWeatherPtr->weatherPicSpritePalIndex * 16, 32);
-    UpdateSpritePaletteWithWeather(gWeatherPtr->weatherPicSpritePalIndex);
+    LoadSpritePalette(palette);
+    UpdateSpritePaletteWithWeather(IndexOfSpritePaletteTag(palette->tag));
 }
 
 static void LoadDroughtWeatherPalette(u8 *gammaIndexPtr, u8 *a1)
