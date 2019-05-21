@@ -354,13 +354,13 @@ YamakiTown_PlayerHouse_Movement_SisterGoesUpstairs:
 	step_end
 	
 YamakiTown_PlayerHouse_MomIntro_Text1:
-	.string "{COLOR CHARACTER_COLOR}Mom:{COLOR NO_COLOR} Morning, {PLAYER}!\n"
+	.string "{COLOR CHARACTER_COLOR}Mom:{COLOR NO_COLOR} Morning, {COLOR CHARACTER_COLOR}{PLAYER}{COLOR NO_COLOR}!\n"
 	.string "Still no reply on your letter, huh?\n"
 	.string "I'm sure they'll respond to you soon!\p"
 	.string "By the way, {COLOR CHARACTER_COLOR}Fan Zheng{COLOR NO_COLOR} came by,\n"
 	.string "asking for you. He says he found\l"
 	.string "something he wants to show you.\p"
-	.string "Why don't you take your {COLOR CHARACTER_COLOR}sister{COLOR NO_COLOR} out\n"
+	.string "Why don't you take your {COLOR CHARACTER_COLOR}Rui{COLOR NO_COLOR} out\n"
 	.string "with you? I don't even know the last\l"
 	.string "time she went outside...$"
 	
@@ -368,7 +368,7 @@ YamakiTown_PlayerHouse_Roadblock_Text:
 	.string "Did you wake up your sister yet?$"
 	
 YamakiTown_PlayerHouse_SisterIntro_Text1:
-	.string "Sister: Uuuugghhh...\n"
+	.string "{COLOR CHARACTER_COLOR}Rui:{COLOR NO_COLOR} Uuuugghhh...\n"
 	.string "Alright, I'm coming.$"
 
 YamakiTown_PlayerHouse_SisterIntro_Text2:
@@ -379,22 +379,22 @@ YamakiTown_PlayerHouse_SisterIntro_Text3:
 	.string "when you're done. Be careful!$"
 	
 YamakiTown_PlayerHouse_SisterIntro_Text4:
-	.string "Sister: What, {PLAYER} is going\n"
+	.string "{COLOR CHARACTER_COLOR}Rui:{COLOR NO_COLOR} What, {COLOR CHARACTER_COLOR}{PLAYER}{COLOR NO_COLOR} is going\n"
 	.string "out? I want to go too!$"
 	
 YamakiTown_PlayerHouse_SisterIntro_Text5:
-	.string "Mom: Well, alright.$"
+	.string "{COLOR CHARACTER_COLOR}Mom:{COLOR NO_COLOR} Well, alright.$"
 
 YamakiTown_PlayerHouse_SisterIntro_Text6:
-	.string "{PLAYER}, do you mind taking\n"
+	.string "{COLOR CHARACTER_COLOR}{PLAYER}{COLOR NO_COLOR}, do you mind taking\n"
 	.string "her with you?\p"
-	.string "I'm sure Fan Zheng wouldn't\n"
+	.string "I'm sure {COLOR CHARACTER_COLOR}Fan Zheng{COLOR NO_COLOR} wouldn't\n"
 	.string "mind having her along.$"
 	
 YamakiTown_PlayerHouse_EndOfDay_Text1:
-	.string "Mom: {PLAYER}! It's so late! I\n"
+	.string "Mom: {PLAYER}{COLOR NO_COLOR}! It's so late! I\n"
 	.string "hope it was at least worthwhile.\p"
-	.string "Sister has been complaining\n"
+	.string "{COLOR CHARACTER_COLOR}Rui{COLOR NO_COLOR} has been complaining\n"
 	.string "all day!$"
 
 YamakiTown_PlayerHouse_EndOfDay_Text2:

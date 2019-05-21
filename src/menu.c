@@ -55,71 +55,68 @@ static EWRAM_DATA u16 sTileNum = 0;
 static EWRAM_DATA u8 sPaletteNum = 0;
 static EWRAM_DATA u8 sYesNoWindowId = 0;
 static EWRAM_DATA u8 sWindowId = 0;
-static EWRAM_DATA u16 sFiller = 0;  // needed to align
+static EWRAM_DATA u16 sFiller = 0; // needed to align
 static EWRAM_DATA bool8 gUnknown_0203CDA4[4] = {FALSE};
 static EWRAM_DATA u16 gUnknown_0203CDA8 = 0;
 static EWRAM_DATA void *gUnknown_0203CDAC[0x20] = {NULL};
 
 const u16 gUnknown_0860F074[] = INCBIN_U16("graphics/interface/860F074.gbapal");
-static const u8 gUnknown_0860F094[] = { 8, 4, 1 };
+static const u8 gUnknown_0860F094[] = {8, 4, 1};
 
 static const struct WindowTemplate sStandardTextBox_WindowTemplates[] =
-{
     {
-        .bg = 0,
-        .tilemapLeft = 2,
-        .tilemapTop = 15,
-        .width = 27,
-        .height = 4,
-        .paletteNum = 15,
-        .baseBlock = 0x194
-    },
-    DUMMY_WIN_TEMPLATE
-};
+        {.bg = 0,
+         .tilemapLeft = 2,
+         .tilemapTop = 15,
+         .width = 27,
+         .height = 4,
+         .paletteNum = 15,
+         .baseBlock = 0x194},
+        DUMMY_WIN_TEMPLATE};
 
 static const struct WindowTemplate sYesNo_WindowTemplates =
-{
-    .bg = 0,
-    .tilemapLeft = 21,
-    .tilemapTop = 9,
-    .width = 5,
-    .height = 4,
-    .paletteNum = 15,
-    .baseBlock = 0x125
-};
+    {
+        .bg = 0,
+        .tilemapLeft = 21,
+        .tilemapTop = 9,
+        .width = 5,
+        .height = 4,
+        .paletteNum = 15,
+        .baseBlock = 0x125};
 
 const u16 gUnknown_0860F0B0[] = INCBIN_U16("graphics/interface/860F0B0.gbapal");
-const u8 gUnknown_0860F0D0[] = { 15, 1, 2 };
+const u8 gUnknown_0860F0D0[] = {15, 1, 2};
 
 // Table of move info icon offsets in graphics/interface_fr/menu.png
 const struct MoveMenuInfoIcon gMoveMenuInfoIcons[] =
-{   // { width, height, offset }
-    { 12, 12, 0x00 },       // Unused
-    { 32, 12, 0x20 },       // Normal icon
-    { 32, 12, 0x64 },       // Fight icon
-    { 32, 12, 0x60 },       // Flying icon
-    { 32, 12, 0x80 },       // Poison icon
-    { 32, 12, 0x48 },       // Ground icon
-    { 32, 12, 0x44 },       // Rock icon
-    { 32, 12, 0x6C },       // Bug icon
-    { 32, 12, 0x68 },       // Ghost icon
-    { 32, 12, 0x88 },       // Steel icon
-    { 32, 12, 0xA4 },       // ??? (Mystery) icon
-    { 32, 12, 0x24 },       // Fire icon
-    { 32, 12, 0x28 },       // Water icon
-    { 32, 12, 0x2C },       // Grass icon
-    { 32, 12, 0x40 },       // Electric icon
-    { 32, 12, 0x84 },       // Psychic icon
-    { 32, 12, 0x4C },       // Ice icon
-    { 32, 12, 0xA0 },       // Dragon icon
-    { 32, 12, 0x8C },       // Dark icon
-    { 42, 12, 0xA8 },       // -Type- icon
-    { 42, 12, 0xC0 },       // -Power- icon
-    { 42, 12, 0xC8 },       // -Accuracy- icon
-    { 42, 12, 0xE0 },       // -PP- icon
-    { 42, 12, 0xE8 },       // -Effect- icon
-    {  8,  8, 0xAE },       // Unused (Small white pokeball)
-    {  8,  8, 0xAF },       // Unused (Small dark pokeball)
+    {
+        // { width, height, offset }
+        {12, 12, 0x00}, // Unused
+        {32, 12, 0x20}, // Normal icon
+        {32, 12, 0x64}, // Fight icon
+        {32, 12, 0x60}, // Flying icon
+        {32, 12, 0x80}, // Poison icon
+        {32, 12, 0x48}, // Ground icon
+        {32, 12, 0x44}, // Rock icon
+        {32, 12, 0x6C}, // Bug icon
+        {32, 12, 0x68}, // Ghost icon
+        {32, 12, 0x88}, // Steel icon
+        {32, 12, 0xA4}, // ??? (Mystery) icon
+        {32, 12, 0x24}, // Fire icon
+        {32, 12, 0x28}, // Water icon
+        {32, 12, 0x2C}, // Grass icon
+        {32, 12, 0x40}, // Electric icon
+        {32, 12, 0x84}, // Psychic icon
+        {32, 12, 0x4C}, // Ice icon
+        {32, 12, 0xA0}, // Dragon icon
+        {32, 12, 0x8C}, // Dark icon
+        {42, 12, 0xA8}, // -Type- icon
+        {42, 12, 0xC0}, // -Power- icon
+        {42, 12, 0xC8}, // -Accuracy- icon
+        {42, 12, 0xE0}, // -PP- icon
+        {42, 12, 0xE8}, // -Effect- icon
+        {8, 8, 0xAE},   // Unused (Small white pokeball)
+        {8, 8, 0xAF},   // Unused (Small dark pokeball)
 };
 
 // Forward declarations
@@ -250,83 +247,67 @@ void DrawStandardFrame(u8 bg, u8 tilemapLeft, u8 tilemapTop, u8 width, u8 height
 {
     int i;
 
-    // top left corner
     FillBgTilemapBufferRect(bg,
-                            DLG_WINDOW_BASE_TILE_NUM + 0,
-                            tilemapLeft - 2,
-                            tilemapTop - 1,
-                            1,
-                            1,
-                            DLG_WINDOW_PALETTE_NUM);
-    // top edge
-    FillBgTilemapBufferRect(bg,
-                            DLG_WINDOW_BASE_TILE_NUM + 1,
+                            STD_WINDOW_BASE_TILE_NUM + 0,
                             tilemapLeft - 1,
                             tilemapTop - 1,
-                            width + 1,
                             1,
-                            DLG_WINDOW_PALETTE_NUM);
-    // top right corner
+                            1,
+                            STD_WINDOW_PALETTE_NUM);
     FillBgTilemapBufferRect(bg,
-                            DLG_WINDOW_BASE_TILE_NUM + 2,
+                            STD_WINDOW_BASE_TILE_NUM + 1,
+                            tilemapLeft,
+                            tilemapTop - 1,
+                            width,
+                            1,
+                            STD_WINDOW_PALETTE_NUM);
+    FillBgTilemapBufferRect(bg,
+                            STD_WINDOW_BASE_TILE_NUM + 2,
                             tilemapLeft + width,
                             tilemapTop - 1,
                             1,
                             1,
-                            DLG_WINDOW_PALETTE_NUM);
+                            STD_WINDOW_PALETTE_NUM);
 
     for (i = tilemapTop; i < tilemapTop + height; i++)
     {
-        // left edge
         FillBgTilemapBufferRect(bg,
-                                DLG_WINDOW_BASE_TILE_NUM + 3,
-                                tilemapLeft - 2,
+                                STD_WINDOW_BASE_TILE_NUM + 3,
+                                tilemapLeft - 1,
                                 i,
                                 1,
                                 1,
-                                DLG_WINDOW_PALETTE_NUM);
-        // center fill
+                                STD_WINDOW_PALETTE_NUM);
         FillBgTilemapBufferRect(bg,
-                                DLG_WINDOW_BASE_TILE_NUM + 4,
-                                tilemapLeft - 1,
-                                tilemapTop,
-                                width + 1,
-                                5,
-                                DLG_WINDOW_PALETTE_NUM);
-        // right edge
-        FillBgTilemapBufferRect(bg,
-                                DLG_WINDOW_BASE_TILE_NUM + 5,
+                                STD_WINDOW_BASE_TILE_NUM + 5,
                                 tilemapLeft + width,
                                 i,
                                 1,
                                 1,
-                                DLG_WINDOW_PALETTE_NUM);
+                                STD_WINDOW_PALETTE_NUM);
     }
 
-    // bottom left corner
     FillBgTilemapBufferRect(bg,
-                            DLG_WINDOW_BASE_TILE_NUM + 6,
-                            tilemapLeft - 2,
-                            tilemapTop + height,
-                            1,
-                            1,
-                            DLG_WINDOW_PALETTE_NUM);
-    // bottom edge
-    FillBgTilemapBufferRect(bg,
-                            DLG_WINDOW_BASE_TILE_NUM + 7,
+                            STD_WINDOW_BASE_TILE_NUM + 6,
                             tilemapLeft - 1,
                             tilemapTop + height,
-                            width + 1,
                             1,
-                            DLG_WINDOW_PALETTE_NUM);
-    // bottom right corner
+                            1,
+                            STD_WINDOW_PALETTE_NUM);
     FillBgTilemapBufferRect(bg,
-                            DLG_WINDOW_BASE_TILE_NUM + 8,
+                            STD_WINDOW_BASE_TILE_NUM + 7,
+                            tilemapLeft,
+                            tilemapTop + height,
+                            width,
+                            1,
+                            STD_WINDOW_PALETTE_NUM);
+    FillBgTilemapBufferRect(bg,
+                            STD_WINDOW_BASE_TILE_NUM + 8,
                             tilemapLeft + width,
                             tilemapTop + height,
                             1,
                             1,
-                            DLG_WINDOW_PALETTE_NUM);
+                            STD_WINDOW_PALETTE_NUM);
 }
 
 void DrawDialogueFrame(u8 bg, u8 tilemapLeft, u8 tilemapTop, u8 width, u8 height, u8 paletteNum)
@@ -830,12 +811,12 @@ void sub_8198180(const u8 *string, u8 a2, bool8 copyToVram)
         FillWindowPixelBuffer(sWindowId, 0xFF);
         width = GetStringWidth(0, string, 0);
         AddTextPrinterParameterized3(sWindowId,
-                  0,
-                  0xEC - (GetWindowAttribute(sWindowId, WINDOW_TILEMAP_LEFT) * 8) - a2 - width,
-                  1,
-                  gUnknown_0860F0D0,
-                  0,
-                  string);
+                                     0,
+                                     0xEC - (GetWindowAttribute(sWindowId, WINDOW_TILEMAP_LEFT) * 8) - a2 - width,
+                                     1,
+                                     gUnknown_0860F0D0,
+                                     0,
+                                     string);
         if (copyToVram)
             CopyWindowToVram(sWindowId, 3);
     }
@@ -866,12 +847,12 @@ void sub_8198204(const u8 *string, const u8 *string2, u8 a3, u8 a4, bool8 copyTo
         {
             width = GetStringWidth(0, string2, 0);
             AddTextPrinterParameterized3(sWindowId,
-                      0,
-                      0xEC - (GetWindowAttribute(sWindowId, WINDOW_TILEMAP_LEFT) * 8) - a4 - width,
-                      1,
-                      color,
-                      0,
-                      string2);
+                                         0,
+                                         0xEC - (GetWindowAttribute(sWindowId, WINDOW_TILEMAP_LEFT) * 8) - a4 - width,
+                                         1,
+                                         color,
+                                         0,
+                                         string2);
         }
         AddTextPrinterParameterized4(sWindowId, 1, 4, 1, 0, 0, color, 0, string);
         if (copyToVram)
@@ -1334,12 +1315,12 @@ void sub_8199060(u8 oldCursorPos, u8 newCursorPos)
     xPos = (newCursorPos % sMenu.horizontalCount) * sMenu.optionWidth + sMenu.left;
     yPos = (newCursorPos / sMenu.horizontalCount) * sMenu.optionHeight + sMenu.top;
     AddTextPrinterParameterized(sMenu.windowId,
-                      sMenu.fontId,
-                      gText_SelectorArrow3,
-                      xPos,
-                      yPos,
-                      0,
-                      0);
+                                sMenu.fontId,
+                                gText_SelectorArrow3,
+                                xPos,
+                                yPos,
+                                0,
+                                0);
 }
 
 u8 sub_8199134(s8 deltaX, s8 deltaY)
@@ -1397,7 +1378,7 @@ u8 sub_81991F8(s8 deltaX, s8 deltaY)
     if (deltaX != 0)
     {
         if (((sMenu.cursorPos % sMenu.horizontalCount) + deltaX >= 0) &&
-        ((sMenu.cursorPos % sMenu.horizontalCount) + deltaX < sMenu.horizontalCount))
+            ((sMenu.cursorPos % sMenu.horizontalCount) + deltaX < sMenu.horizontalCount))
         {
             sMenu.cursorPos += deltaX;
         }
@@ -1406,7 +1387,7 @@ u8 sub_81991F8(s8 deltaX, s8 deltaY)
     if (deltaY != 0)
     {
         if (((sMenu.cursorPos / sMenu.horizontalCount) + deltaY >= 0) &&
-        ((sMenu.cursorPos / sMenu.horizontalCount) + deltaY < sMenu.verticalCount))
+            ((sMenu.cursorPos / sMenu.horizontalCount) + deltaY < sMenu.verticalCount))
         {
             sMenu.cursorPos += (sMenu.horizontalCount * deltaY);
         }
@@ -1875,12 +1856,12 @@ u16 copy_decompressed_tile_data_to_vram(u8 bgId, const void *src, u16 size, u16 
 {
     switch (mode)
     {
-        case 0:
-            return LoadBgTiles(bgId, src, size, offset);
-        case 1:
-            return LoadBgTilemap(bgId, src, size, offset);
-        default:
-            return -1;
+    case 0:
+        return LoadBgTiles(bgId, src, size, offset);
+    case 1:
+        return LoadBgTilemap(bgId, src, size, offset);
+    default:
+        return -1;
     }
 }
 
@@ -2032,7 +2013,8 @@ void PrintPlayerNameOnWindow(u8 windowId, const u8 *src, u16 x, u16 y)
 
 //Screw this function, it's long and unreferenced and ugh
 
-struct UnkStruct_819A080 {
+struct UnkStruct_819A080
+{
     u8 *unk00;
     u16 unk04;
     u16 unk06;
@@ -2378,16 +2360,16 @@ void sub_819A2BC(u8 palOffset, u8 palId)
 
     switch (palId)
     {
-        case 0:
-        default:
-            palette = gFireRedMenuElements1_Pal;
-            break;
-        case 1:
-            palette = gFireRedMenuElements2_Pal;
-            break;
-        case 2:
-            palette = gFireRedMenuElements3_Pal;
-            break;
+    case 0:
+    default:
+        palette = gFireRedMenuElements1_Pal;
+        break;
+    case 1:
+        palette = gFireRedMenuElements2_Pal;
+        break;
+    case 2:
+        palette = gFireRedMenuElements3_Pal;
+        break;
     }
 
     LoadPalette(palette, palOffset, 0x20);
@@ -2414,32 +2396,32 @@ void sub_819A344(u8 a0, u8 *dest, u8 color)
 
     switch (a0)
     {
-        case 0:
-            StringCopy(string, gSaveBlock2Ptr->playerName);
-            break;
-        case 1:
-            if (IsNationalPokedexEnabled())
-                string = ConvertIntToDecimalStringN(string, GetNationalPokedexCount(1), 0, 3);
-            else
-                string = ConvertIntToDecimalStringN(string, GetHoennPokedexCount(1), 0, 3);
-            *string = EOS;
-            break;
-        case 2:
-            string = ConvertIntToDecimalStringN(string, gSaveBlock2Ptr->playTimeHours, 0, 3);
-            *(string++) = CHAR_COLON;
-            ConvertIntToDecimalStringN(string, gSaveBlock2Ptr->playTimeMinutes, 2, 2);
-            break;
-        case 3:
-            sub_81245DC(string, gMapHeader.regionMapSectionId);
-            break;
-        case 4:
-            for (curFlag = FLAG_BADGE01_GET, flagCount = 0, endOfString = string + 1; curFlag <= FLAG_BADGE08_GET; curFlag++)
-            {
-                if (FlagGet(curFlag))
-                    flagCount++;
-            }
-            *string = flagCount + CHAR_0;
-            *endOfString = EOS;
-            break;
+    case 0:
+        StringCopy(string, gSaveBlock2Ptr->playerName);
+        break;
+    case 1:
+        if (IsNationalPokedexEnabled())
+            string = ConvertIntToDecimalStringN(string, GetNationalPokedexCount(1), 0, 3);
+        else
+            string = ConvertIntToDecimalStringN(string, GetHoennPokedexCount(1), 0, 3);
+        *string = EOS;
+        break;
+    case 2:
+        string = ConvertIntToDecimalStringN(string, gSaveBlock2Ptr->playTimeHours, 0, 3);
+        *(string++) = CHAR_COLON;
+        ConvertIntToDecimalStringN(string, gSaveBlock2Ptr->playTimeMinutes, 2, 2);
+        break;
+    case 3:
+        sub_81245DC(string, gMapHeader.regionMapSectionId);
+        break;
+    case 4:
+        for (curFlag = FLAG_BADGE01_GET, flagCount = 0, endOfString = string + 1; curFlag <= FLAG_BADGE08_GET; curFlag++)
+        {
+            if (FlagGet(curFlag))
+                flagCount++;
+        }
+        *string = flagCount + CHAR_0;
+        *endOfString = EOS;
+        break;
     }
 }
