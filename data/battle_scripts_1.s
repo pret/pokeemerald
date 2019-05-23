@@ -737,12 +737,16 @@ BattleScript_EffectFlameBurst:
 	goto BattleScript_EffectHit
 	
 BattleScript_MoveEffectFlameBurst::
+	tryfaintmon BS_TARGET, FALSE, NULL
 	printstring STRINGID_BURSTINGFLAMESHIT
 	waitmessage 0x40
-	healthbarupdate BS_SCRIPTING
-	datahpupdate BS_SCRIPTING
-	tryfaintmon BS_SCRIPTING, FALSE, NULL
-	return
+	savetarget
+	copybyte gBattlerTarget, sBATTLER
+	healthbarupdate BS_TARGET
+	datahpupdate BS_TARGET
+	tryfaintmon BS_TARGET, FALSE, NULL
+	restoretarget
+	goto BattleScript_MoveEnd
 	
 BattleScript_EffectPowerTrick:
 	attackcanceler
