@@ -4607,6 +4607,7 @@ static void atk49_moveend(void)
                 effect = TRUE;
                 BattleScriptPushCursor();
                 gBattlescriptCurrInstr = BattleScript_ItemHurtRet;
+                gLastUsedItem = gBattleMons[gBattlerAttacker].item;
             }
             gBattleScripting.atk49_state++;
             break;
