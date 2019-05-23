@@ -354,6 +354,11 @@ gBattleScriptsForMoveEffects:: @ 82D86A8
 	.4byte BattleScript_EffectMagneticFlux
 	.4byte BattleScript_EffectGearUp
 	.4byte BattleScript_EffectIncinerate
+	.4byte BattleScript_EffectBugBite
+	
+BattleScript_EffectBugBite:
+	setmoveeffect MOVE_EFFECT_BUG_BITE | MOVE_EFFECT_CERTAIN
+	goto BattleScript_EffectHit
 	
 BattleScript_EffectIncinerate:
 	setmoveeffect MOVE_EFFECT_INCINERATE | MOVE_EFFECT_CERTAIN
@@ -361,6 +366,11 @@ BattleScript_EffectIncinerate:
 	
 BattleScript_MoveEffectIncinerate::
 	printstring STRINGID_INCINERATEBURN
+	waitmessage 0x40
+	return
+	
+BattleScript_MoveEffectBugBite::
+	printstring STRINGID_BUGBITE
 	waitmessage 0x40
 	return
 

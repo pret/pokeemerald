@@ -1074,7 +1074,7 @@ AI_CheckViability:
 	end
 	
 AI_CV_Hazards:
-	if_ability AI_TARGET, ABILITY_MAGIC_BOUNCE,
+	if_ability AI_TARGET, ABILITY_MAGIC_BOUNCE, AI_CV_StealthRockEnd
 	is_first_turn_for AI_USER
 	if_equal 0, AI_CV_StealthRockEnd
 	score +2
@@ -3248,7 +3248,7 @@ AI_TryToFaint_End:
 	end
 AI_TryToFaint_IsInDanger:
 	get_how_powerful_move_is
-	if not_equal MOVE_MOST_POWERFUL Score_Minus1
+	if_not_equal MOVE_MOST_POWERFUL, Score_Minus1
 	score +1
 	goto AI_TryToFaint_End
 

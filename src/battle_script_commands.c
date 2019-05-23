@@ -2890,6 +2890,19 @@ void SetMoveEffect(bool32 primary, u32 certain)
                     gBattlescriptCurrInstr = BattleScript_MoveEffectIncinerate;
                 }
                 break;
+            case MOVE_EFFECT_BUG_BITE:
+                if ((gBattleMons[gEffectBattler].item >= FIRST_BERRY_INDEX && gBattleMons[gEffectBattler].item <= LAST_BERRY_INDEX)
+                    && GetBattlerAbility(gEffectBattler) != ABILITY_STICKY_HOLD)
+                {
+                    gLastUsedItem = gBattleMons[gEffectBattler].item;
+                    gBattleMons[gEffectBattler].item = 0;
+                    gActiveBattler = gEffectBattler;
+                    BtlController_EmitSetMonData(0, REQUEST_HELDITEM_BATTLE, 0, 2, &gBattleMons[gEffectBattler].item);
+                    MarkBattlerForControllerExec(gActiveBattler);
+                    BattleScriptPush(gBattlescriptCurrInstr + 1);
+                    gBattlescriptCurrInstr = BattleScript_MoveEffectBugBite;
+                }
+                break;
             }
         }
     }
