@@ -76,6 +76,7 @@ void LoadObjectReflectionPalette(struct EventObject *eventObject, struct Sprite 
         sprite->data[2] = bridgeReflectionVerticalOffsets[bridgeType - 1];
         LoadEventObjectPalette(EVENT_OBJ_PAL_TAG_10);
         sprite->oam.paletteNum = IndexOfSpritePaletteTag(EVENT_OBJ_PAL_TAG_10);
+        UpdatePaletteGammaType(sprite->oam.paletteNum, GAMMA_NORMAL);
         UpdateSpritePaletteWithWeather(sprite->oam.paletteNum);
     }
     else
@@ -103,6 +104,7 @@ void LoadSpecialReflectionPalette(struct Sprite *sprite)
     reflectionPalette.tag = GetSpritePaletteTagByPaletteNum(sprite->oam.paletteNum) + 0x1000;
     LoadSpritePalette(&reflectionPalette);
     sprite->oam.paletteNum = IndexOfSpritePaletteTag(reflectionPalette.tag);
+    UpdatePaletteGammaType(sprite->oam.paletteNum, GAMMA_ALT);
     UpdateSpritePaletteWithWeather(sprite->oam.paletteNum);
 }
 
@@ -1580,6 +1582,7 @@ void LoadFieldEffectPalette(u8 fieldEffect)
     if (spriteTemplate->paletteTag != 0xffff)
     {
         LoadEventObjectPalette(spriteTemplate->paletteTag);
+        UpdatePaletteGammaType(IndexOfSpritePaletteTag(spriteTemplate->paletteTag), GAMMA_NORMAL);
     }
 }
 
