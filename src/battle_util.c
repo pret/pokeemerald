@@ -3301,53 +3301,68 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
             }
             break;
         case ABILITY_EFFECT_SPORE:
-            if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
-             && gBattleMons[gBattlerAttacker].hp != 0
-             && !gProtectStructs[gBattlerAttacker].confusionSelfDmg
-             && TARGET_TURN_DAMAGED
-             && (gBattleMoves[move].flags & FLAG_MAKES_CONTACT)
-             && !IS_BATTLER_OF_TYPE(gBattlerAttacker, TYPE_GRASS)
+            if (!IS_BATTLER_OF_TYPE(gBattlerAttacker, TYPE_GRASS)
              && GetBattlerAbility(gBattlerAttacker) != ABILITY_OVERCOAT
-             && GetBattlerHoldEffect(gBattlerAttacker, TRUE) != HOLD_EFFECT_SAFETY_GOOGLES
-             && (Random() % 10) == 0)
+             && GetBattlerHoldEffect(gBattlerAttacker, TRUE) != HOLD_EFFECT_SAFETY_GOOGLES)
             {
-                do
+                i = Random() % 3;
+                if (i == 0)
+                    goto POISON_POINT;
+                if (i == 1)
+                    goto STATIC;
+                // Sleep
+                if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
+                 && gBattleMons[gBattlerAttacker].hp != 0
+                 && !gProtectStructs[gBattlerAttacker].confusionSelfDmg
+                 && TARGET_TURN_DAMAGED
+                 && GetBattlerAbility(gBattlerAttacker) != ABILITY_INSOMNIA
+                 && GetBattlerAbility(gBattlerAttacker) != ABILITY_VITAL_SPIRIT
+                 && !(gBattleMons[gBattlerAttacker].status1 & STATUS1_ANY)
+                 && !IsFlowerVeilProtected(gBattlerAttacker)
+                 && (gBattleMoves[move].flags & FLAG_MAKES_CONTACT)
+                 && (Random() % 3) == 0)
                 {
-                    gBattleScripting.moveEffect = Random() & 3;
-                } while (gBattleScripting.moveEffect == 0);
-
-                if (gBattleScripting.moveEffect == MOVE_EFFECT_BURN)
-                    gBattleScripting.moveEffect += 2; // 5 MOVE_EFFECT_PARALYSIS
-
-                gBattleScripting.moveEffect += MOVE_EFFECT_AFFECTS_USER;
-                BattleScriptPushCursor();
-                gBattlescriptCurrInstr = BattleScript_AbilityStatusEffect;
-                PREPARE_ABILITY_BUFFER(gBattleTextBuff1, ABILITY_EFFECT_SPORE);
-                gHitMarker |= HITMARKER_IGNORE_SAFEGUARD;
-                effect++;
+                    gBattleScripting.moveEffect = MOVE_EFFECT_AFFECTS_USER | MOVE_EFFECT_SLEEP;
+                    PREPARE_ABILITY_BUFFER(gBattleTextBuff1, gLastUsedAbility);
+                    BattleScriptPushCursor();
+                    gBattlescriptCurrInstr = BattleScript_AbilityStatusEffect;
+                    gHitMarker |= HITMARKER_IGNORE_SAFEGUARD;
+                    effect++;
+                }
             }
             break;
+        POISON_POINT:
         case ABILITY_POISON_POINT:
             if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
              && gBattleMons[gBattlerAttacker].hp != 0
              && !gProtectStructs[gBattlerAttacker].confusionSelfDmg
              && TARGET_TURN_DAMAGED
+             && !IS_BATTLER_OF_TYPE(gBattlerAttacker, TYPE_POISON)
+             && !IS_BATTLER_OF_TYPE(gBattlerAttacker, TYPE_STEEL)
+             && GetBattlerAbility(gBattlerAttacker) != ABILITY_IMMUNITY
+             && !(gBattleMons[gBattlerAttacker].status1 & STATUS1_ANY)
+             && !IsFlowerVeilProtected(gBattlerAttacker)
              && (gBattleMoves[move].flags & FLAG_MAKES_CONTACT)
              && (Random() % 3) == 0)
             {
                 gBattleScripting.moveEffect = MOVE_EFFECT_AFFECTS_USER | MOVE_EFFECT_POISON;
-                PREPARE_ABILITY_BUFFER(gBattleTextBuff1, ABILITY_POISON_POINT);
+                PREPARE_ABILITY_BUFFER(gBattleTextBuff1, gLastUsedAbility);
                 BattleScriptPushCursor();
                 gBattlescriptCurrInstr = BattleScript_AbilityStatusEffect;
                 gHitMarker |= HITMARKER_IGNORE_SAFEGUARD;
                 effect++;
             }
             break;
+        STATIC:
         case ABILITY_STATIC:
             if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
              && gBattleMons[gBattlerAttacker].hp != 0
              && !gProtectStructs[gBattlerAttacker].confusionSelfDmg
              && TARGET_TURN_DAMAGED
+             && !IS_BATTLER_OF_TYPE(gBattlerAttacker, TYPE_ELECTRIC)
+             && GetBattlerAbility(gBattlerAttacker) != ABILITY_LIMBER
+             && !(gBattleMons[gBattlerAttacker].status1 & STATUS1_ANY)
+             && !IsFlowerVeilProtected(gBattlerAttacker)
              && (gBattleMoves[move].flags & FLAG_MAKES_CONTACT)
              && (Random() % 3) == 0)
             {
@@ -3364,6 +3379,10 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
              && !gProtectStructs[gBattlerAttacker].confusionSelfDmg
              && (gBattleMoves[move].flags & FLAG_MAKES_CONTACT)
              && TARGET_TURN_DAMAGED
+             && !IS_BATTLER_OF_TYPE(gBattlerAttacker, TYPE_FIRE)
+             && GetBattlerAbility(gBattlerAttacker) != ABILITY_WATER_VEIL
+             && !(gBattleMons[gBattlerAttacker].status1 & STATUS1_ANY)
+             && !IsFlowerVeilProtected(gBattlerAttacker)
              && (Random() % 3) == 0)
             {
                 gBattleScripting.moveEffect = MOVE_EFFECT_AFFECTS_USER | MOVE_EFFECT_BURN;
