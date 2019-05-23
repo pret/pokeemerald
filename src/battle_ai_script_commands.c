@@ -166,6 +166,7 @@ static void BattleAICmd_if_physical_moves_unusable(void);
 static void BattleAICmd_if_ai_can_go_down(void);
 static void BattleAICmd_if_has_move_with_type(void);
 static void BattleAICmd_if_no_move_used(void);
+static void BattleAICmd_if_has_move_with_flag(void);
 
 // ewram
 EWRAM_DATA const u8 *gAIScriptPtr = NULL;
@@ -287,6 +288,7 @@ static const BattleAICmdFunc sBattleAICmdTable[] =
     BattleAICmd_if_ai_can_go_down,                          // 0x6C
     BattleAICmd_if_has_move_with_type,                      // 0x6D
     BattleAICmd_if_no_move_used,                            // 0x6E
+    BattleAICmd_if_has_move_with_flag,                      // 0x6F
 };
 
 static const u16 sDiscouragedPowerfulMoveEffects[] =
@@ -895,14 +897,25 @@ static void BattleAICmd_score(void)
     gAIScriptPtr += 2; // AI return.
 }
 
+static u8 BattleAI_GetWantedBattler(u8 wantedBattler)
+{
+    switch (wantedBattler)
+    {
+    case AI_USER:
+        return sBattler_AI;
+    case AI_TARGET:
+    default:
+        return gBattlerTarget;
+    case AI_USER_PARTNER:
+        return sBattler_AI ^ BIT_FLANK;
+    case AI_TARGET_PARTNER:
+        return gBattlerTarget ^ BIT_FLANK;
+    }
+}
+
 static void BattleAICmd_if_hp_less_than(void)
 {
-    u16 battlerId;
-
-    if (gAIScriptPtr[1] == AI_USER)
-        battlerId = sBattler_AI;
-    else
-        battlerId = gBattlerTarget;
+    u16 battlerId = BattleAI_GetWantedBattler(gAIScriptPtr[1]);
 
     if ((u32)(100 * gBattleMons[battlerId].hp / gBattleMons[battlerId].maxHP) < gAIScriptPtr[2])
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 3);
@@ -912,12 +925,7 @@ static void BattleAICmd_if_hp_less_than(void)
 
 static void BattleAICmd_if_hp_more_than(void)
 {
-    u16 battlerId;
-
-    if (gAIScriptPtr[1] == AI_USER)
-        battlerId = sBattler_AI;
-    else
-        battlerId = gBattlerTarget;
+    u16 battlerId = BattleAI_GetWantedBattler(gAIScriptPtr[1]);
 
     if ((u32)(100 * gBattleMons[battlerId].hp / gBattleMons[battlerId].maxHP) > gAIScriptPtr[2])
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 3);
@@ -927,12 +935,7 @@ static void BattleAICmd_if_hp_more_than(void)
 
 static void BattleAICmd_if_hp_equal(void)
 {
-    u16 battlerId;
-
-    if (gAIScriptPtr[1] == AI_USER)
-        battlerId = sBattler_AI;
-    else
-        battlerId = gBattlerTarget;
+    u16 battlerId = BattleAI_GetWantedBattler(gAIScriptPtr[1]);
 
     if ((u32)(100 * gBattleMons[battlerId].hp / gBattleMons[battlerId].maxHP) == gAIScriptPtr[2])
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 3);
@@ -942,12 +945,7 @@ static void BattleAICmd_if_hp_equal(void)
 
 static void BattleAICmd_if_hp_not_equal(void)
 {
-    u16 battlerId;
-
-    if (gAIScriptPtr[1] == AI_USER)
-        battlerId = sBattler_AI;
-    else
-        battlerId = gBattlerTarget;
+    u16 battlerId = BattleAI_GetWantedBattler(gAIScriptPtr[1]);
 
     if ((u32)(100 * gBattleMons[battlerId].hp / gBattleMons[battlerId].maxHP) != gAIScriptPtr[2])
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 3);
@@ -957,15 +955,8 @@ static void BattleAICmd_if_hp_not_equal(void)
 
 static void BattleAICmd_if_status(void)
 {
-    u16 battlerId;
-    u32 status;
-
-    if (gAIScriptPtr[1] == AI_USER)
-        battlerId = sBattler_AI;
-    else
-        battlerId = gBattlerTarget;
-
-    status = T1_READ_32(gAIScriptPtr + 2);
+    u16 battlerId = BattleAI_GetWantedBattler(gAIScriptPtr[1]);
+    u32 status = T1_READ_32(gAIScriptPtr + 2);
 
     if (gBattleMons[battlerId].status1 & status)
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 6);
@@ -975,15 +966,8 @@ static void BattleAICmd_if_status(void)
 
 static void BattleAICmd_if_not_status(void)
 {
-    u16 battlerId;
-    u32 status;
-
-    if (gAIScriptPtr[1] == AI_USER)
-        battlerId = sBattler_AI;
-    else
-        battlerId = gBattlerTarget;
-
-    status = T1_READ_32(gAIScriptPtr + 2);
+    u16 battlerId = BattleAI_GetWantedBattler(gAIScriptPtr[1]);
+    u32 status = T1_READ_32(gAIScriptPtr + 2);
 
     if (!(gBattleMons[battlerId].status1 & status))
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 6);
@@ -993,15 +977,8 @@ static void BattleAICmd_if_not_status(void)
 
 static void BattleAICmd_if_status2(void)
 {
-    u16 battlerId;
-    u32 status;
-
-    if (gAIScriptPtr[1] == AI_USER)
-        battlerId = sBattler_AI;
-    else
-        battlerId = gBattlerTarget;
-
-    status = T1_READ_32(gAIScriptPtr + 2);
+    u16 battlerId = BattleAI_GetWantedBattler(gAIScriptPtr[1]);
+    u32 status = T1_READ_32(gAIScriptPtr + 2);
 
     if ((gBattleMons[battlerId].status2 & status))
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 6);
@@ -1011,15 +988,8 @@ static void BattleAICmd_if_status2(void)
 
 static void BattleAICmd_if_not_status2(void)
 {
-    u16 battlerId;
-    u32 status;
-
-    if (gAIScriptPtr[1] == AI_USER)
-        battlerId = sBattler_AI;
-    else
-        battlerId = gBattlerTarget;
-
-    status = T1_READ_32(gAIScriptPtr + 2);
+    u16 battlerId = BattleAI_GetWantedBattler(gAIScriptPtr[1]);
+    u32 status = T1_READ_32(gAIScriptPtr + 2);
 
     if (!(gBattleMons[battlerId].status2 & status))
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 6);
@@ -1029,15 +999,8 @@ static void BattleAICmd_if_not_status2(void)
 
 static void BattleAICmd_if_status3(void)
 {
-    u16 battlerId;
-    u32 status;
-
-    if (gAIScriptPtr[1] == AI_USER)
-        battlerId = sBattler_AI;
-    else
-        battlerId = gBattlerTarget;
-
-    status = T1_READ_32(gAIScriptPtr + 2);
+    u16 battlerId = BattleAI_GetWantedBattler(gAIScriptPtr[1]);
+    u32 status = T1_READ_32(gAIScriptPtr + 2);
 
     if (gStatuses3[battlerId] & status)
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 6);
@@ -1047,15 +1010,8 @@ static void BattleAICmd_if_status3(void)
 
 static void BattleAICmd_if_not_status3(void)
 {
-    u16 battlerId;
-    u32 status;
-
-    if (gAIScriptPtr[1] == AI_USER)
-        battlerId = sBattler_AI;
-    else
-        battlerId = gBattlerTarget;
-
-    status = T1_READ_32(gAIScriptPtr + 2);
+    u16 battlerId = BattleAI_GetWantedBattler(gAIScriptPtr[1]);
+    u32 status = T1_READ_32(gAIScriptPtr + 2);
 
     if (!(gStatuses3[battlerId] & status))
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 6);
@@ -1065,16 +1021,9 @@ static void BattleAICmd_if_not_status3(void)
 
 static void BattleAICmd_if_side_affecting(void)
 {
-    u16 battlerId;
-    u32 side, status;
-
-    if (gAIScriptPtr[1] == AI_USER)
-        battlerId = sBattler_AI;
-    else
-        battlerId = gBattlerTarget;
-
-    side = GET_BATTLER_SIDE(battlerId);
-    status = T1_READ_32(gAIScriptPtr + 2);
+    u16 battlerId = BattleAI_GetWantedBattler(gAIScriptPtr[1]);
+    u32 status = T1_READ_32(gAIScriptPtr + 2);
+    u32 side = GET_BATTLER_SIDE(battlerId);
 
     if (gSideStatuses[side] & status)
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 6);
@@ -1084,16 +1033,9 @@ static void BattleAICmd_if_side_affecting(void)
 
 static void BattleAICmd_if_not_side_affecting(void)
 {
-    u16 battlerId;
-    u32 side, status;
-
-    if (gAIScriptPtr[1] == AI_USER)
-        battlerId = sBattler_AI;
-    else
-        battlerId = gBattlerTarget;
-
-    side = GET_BATTLER_SIDE(battlerId);
-    status = T1_READ_32(gAIScriptPtr + 2);
+    u16 battlerId = BattleAI_GetWantedBattler(gAIScriptPtr[1]);
+    u32 status = T1_READ_32(gAIScriptPtr + 2);
+    u32 side = GET_BATTLER_SIDE(battlerId);
 
     if (!(gSideStatuses[side] & status))
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 6);
@@ -1320,22 +1262,6 @@ static void BattleAICmd_get_type(void)
         break;
     }
     gAIScriptPtr += 2;
-}
-
-static u8 BattleAI_GetWantedBattler(u8 wantedBattler)
-{
-    switch (wantedBattler)
-    {
-    case AI_USER:
-        return sBattler_AI;
-    case AI_TARGET:
-    default:
-        return gBattlerTarget;
-    case AI_USER_PARTNER:
-        return sBattler_AI ^ BIT_FLANK;
-    case AI_TARGET_PARTNER:
-        return gBattlerTarget ^ BIT_FLANK;
-    }
 }
 
 static void BattleAICmd_is_of_type(void)
@@ -1765,17 +1691,7 @@ static void BattleAICmd_if_status_in_party(void)
     struct Pokemon *party;
     s32 i;
     u32 statusToCompareTo;
-    u8 battlerId;
-
-    switch (gAIScriptPtr[1])
-    {
-    case AI_USER:
-        battlerId = sBattler_AI;
-        break;
-    default:
-        battlerId = gBattlerTarget;
-        break;
-    }
+    u8 battlerId = BattleAI_GetWantedBattler(gAIScriptPtr[1]);
 
     party = (GetBattlerSide(battlerId) == B_SIDE_PLAYER) ? gPlayerParty : gEnemyParty;
 
@@ -1802,17 +1718,7 @@ static void BattleAICmd_if_status_not_in_party(void)
     struct Pokemon *party;
     s32 i;
     u32 statusToCompareTo;
-    u8 battlerId;
-
-    switch (gAIScriptPtr[1])
-    {
-    case 1:
-        battlerId = sBattler_AI;
-        break;
-    default:
-        battlerId = gBattlerTarget;
-        break;
-    }
+    u8 battlerId = BattleAI_GetWantedBattler(gAIScriptPtr[1]);
 
     party = (GetBattlerSide(battlerId) == B_SIDE_PLAYER) ? gPlayerParty : gEnemyParty;
 
@@ -1930,7 +1836,7 @@ static void BattleAICmd_if_can_faint(void)
 {
     s32 dmg;
 
-    if (gBattleMoves[AI_THINKING_STRUCT->moveConsidered].power < 2)
+    if (gBattleMoves[AI_THINKING_STRUCT->moveConsidered].power == 0)
     {
         gAIScriptPtr += 5;
         return;
@@ -2708,6 +2614,29 @@ static void BattleAICmd_if_has_move_with_type(void)
         gAIScriptPtr += 7;
     else
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 3);
+}
+
+static void BattleAICmd_if_has_move_with_flag(void)
+{
+    u32 i, flag, battler = BattleAI_GetWantedBattler(gAIScriptPtr[1]);
+    u16 *moves;
+
+    if (IsBattlerAIControlled(battler))
+        moves = gBattleMons[battler].moves;
+    else
+        moves = BATTLE_HISTORY->usedMoves[battler].moves;
+
+    flag = T1_READ_32(gAIScriptPtr + 2);
+    for (i = 0; i < 4; i++)
+    {
+        if (moves[i] != MOVE_NONE && gBattleMoves[moves[i]].flags & flag)
+        {
+            gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 6);
+            return;
+        }
+    }
+
+    gAIScriptPtr += 10;
 }
 
 static void BattleAICmd_if_no_move_used(void)

@@ -253,6 +253,14 @@ AI_CheckBadMove_CheckEffect: @ 82DC045
 	if_effect EFFECT_POWDER, AI_CBM_Powder
 	if_effect EFFECT_PROTECT, AI_CBM_Protect
 	if_effect EFFECT_TAUNT, AI_CBM_Taunt
+	if_effect EFFECT_HEAL_BELL, AI_CBM_HealBell
+	end
+	
+AI_CBM_HealBell:
+	if_status AI_TARGET, STATUS1_ANY, AI_CBM_HealBell_End
+	if_status_in_party AI_TARGET, STATUS1_ANY, AI_CBM_HealBell_End
+	score -5
+AI_CBM_HealBell_End:
 	end
 	
 AI_CBM_Taunt:
@@ -964,6 +972,7 @@ AI_CheckViability:
 	if_effect EFFECT_SUPER_FANG, AI_CV_SuperFang
 	if_effect EFFECT_TRAP, AI_CV_Trap
 	if_effect EFFECT_CONFUSE, AI_CV_Confuse
+	if_effect EFFECT_FOCUS_ENERGY, AI_CV_FocusEnergy
 	if_effect EFFECT_ATTACK_UP_2, AI_CV_AttackUp
 	if_effect EFFECT_DEFENSE_UP_2, AI_CV_DefenseUp
 	if_effect EFFECT_SPEED_UP_2, AI_CV_SpeedUp
@@ -979,7 +988,9 @@ AI_CheckViability:
 	if_effect EFFECT_ACCURACY_DOWN_2, AI_CV_AccuracyDown
 	if_effect EFFECT_EVASION_DOWN_2, AI_CV_EvasionDown
 	if_effect EFFECT_REFLECT, AI_CV_Reflect
+	if_effect EFFECT_AURORA_VEIL, AI_CV_AuroraVeil
 	if_effect EFFECT_POISON, AI_CV_Poison
+	if_effect EFFECT_TOXIC_THREAD, AI_CV_ToxicThread
 	if_effect EFFECT_PARALYZE, AI_CV_Paralyze
 	if_effect EFFECT_SWAGGER, AI_CV_Swagger
 	if_effect EFFECT_SPEED_DOWN_HIT, AI_CV_SpeedDownFromChance
@@ -987,7 +998,7 @@ AI_CheckViability:
 	if_effect EFFECT_VITAL_THROW, AI_CV_VitalThrow
 	if_effect EFFECT_SUBSTITUTE, AI_CV_Substitute
 	if_effect EFFECT_RECHARGE, AI_CV_Recharge
-	if_effect EFFECT_LEECH_SEED, AI_CV_Toxic
+	if_effect EFFECT_LEECH_SEED, AI_CV_LeechSeed
 	if_effect EFFECT_DISABLE, AI_CV_Disable
 	if_effect EFFECT_COUNTER, AI_CV_Counter
 	if_effect EFFECT_ENCORE, AI_CV_Encore
@@ -1056,7 +1067,22 @@ AI_CheckViability:
 	if_effect EFFECT_GRASSY_TERRAIN, AI_CV_GrassyTerrain
 	if_effect EFFECT_ELECTRIC_TERRAIN, AI_CV_ElectricTerrain
 	if_effect EFFECT_PSYCHIC_TERRAIN, AI_CV_PsychicTerrain
+	if_effect EFFECT_STEALTH_ROCK, AI_CV_Hazards
+	if_effect EFFECT_SPIKES, AI_CV_Hazards
+	if_effect EFFECT_STICKY_WEB, AI_CV_Hazards
+	if_effect EFFECT_TOXIC_SPIKES, AI_CV_Hazards
 	end
+	
+AI_CV_Hazards:
+	if_ability AI_TARGET, ABILITY_MAGIC_BOUNCE,
+	is_first_turn_for AI_USER
+	if_equal 0, AI_CV_StealthRockEnd
+	score +2
+AI_CV_StealthRockEnd:
+	end
+AI_CV_StealthRock2:
+	score -2
+	goto AI_CV_StealthRockEnd
 	
 AI_CV_MistyTerrain:
 	call AI_CV_TerrainExpander
@@ -1520,11 +1546,9 @@ AI_CV_SpeedDown: @ 82DCE81
 	if_target_faster AI_CV_SpeedDown2
 	score -3
 	goto AI_CV_SpeedDown_End
-
 AI_CV_SpeedDown2: @ 82DCE8E
 	if_random_less_than 70, AI_CV_SpeedDown_End
 	score +2
-
 AI_CV_SpeedDown_End: @ 82DCE96
 	end
 
@@ -1629,17 +1653,24 @@ AI_CV_AccuracyDown_End:
 AI_CV_EvasionDown:
 	if_hp_less_than AI_USER, 70, AI_CV_EvasionDown2
 	if_stat_level_more_than AI_TARGET, STAT_EVASION, 3, AI_CV_EvasionDown3
-
 AI_CV_EvasionDown2:
 	if_random_less_than 50, AI_CV_EvasionDown3
 	score -2
-
 AI_CV_EvasionDown3:
-	if_hp_more_than AI_TARGET, 70, AI_CV_EvasionDown_End
+	if_hp_more_than AI_TARGET, 70, AI_CV_EvasionDown_4
 	score -2
-
+AI_CV_EvasionDown_4:
+	if_stat_level_less_than AI_USER, STAT_ACC, 6, AI_CV_EvasionDown_5
+	if_stat_level_less_than AI_TARGET, STAT_EVASION, 7, AI_CV_EvasionDown_6
+	if_ability AI_USER, ABILITY_NO_GUARD, AI_CV_EvasionDown_6
 AI_CV_EvasionDown_End:
 	end
+AI_CV_EvasionDown_5:
+	score +1
+	goto AI_CV_EvasionDown_End
+AI_CV_EvasionDown_6:
+	score -2
+	goto AI_CV_EvasionDown_End
 
 AI_CV_Haze:
 	if_stat_level_more_than AI_USER, STAT_ATK, 8, AI_CV_Haze2
@@ -1756,41 +1787,46 @@ AI_CV_Heal6:
 
 AI_CV_Heal_End:
 	end
+	
+EncouragePsnVenoshock:
+	if_doesnt_have_move_with_effect AI_USER, EFFECT_VENOSHOCK, EncouragePsnVenoshockEnd
+	score +1
+	if_random_less_than 128, EncouragePsnVenoshockEnd
+	score +1
+EncouragePsnVenoshockEnd:
+	end
 
 AI_CV_Toxic:
+	call EncouragePsnVenoshock
+AI_CV_LeechSeed:
 	if_user_has_no_attacking_moves AI_CV_Toxic3
 	if_hp_more_than AI_USER, 50, AI_CV_Toxic2
 	if_random_less_than 50, AI_CV_Toxic2
 	score -3
-
 AI_CV_Toxic2:
 	if_hp_more_than AI_TARGET, 50, AI_CV_Toxic3
 	if_random_less_than 50, AI_CV_Toxic3
 	score -3
-
 AI_CV_Toxic3:
 	if_has_move_with_effect AI_USER, EFFECT_SPECIAL_DEFENSE_UP, AI_CV_Toxic4
 	if_has_move_with_effect AI_USER, EFFECT_PROTECT, AI_CV_Toxic4
 	goto AI_CV_Toxic_End
-
 AI_CV_Toxic4:
 	if_random_less_than 60, AI_CV_Toxic_End
 	score +2
-
 AI_CV_Toxic_End:
 	end
 
 AI_CV_LightScreen:
+	call EncourageLightClay
 	if_hp_less_than AI_USER, 50, AI_CV_LightScreen_ScoreDown2
 	get_target_type1
 	if_in_bytes AI_CV_LightScreen_SpecialTypeList, AI_CV_LightScreen_End
 	get_target_type2
 	if_in_bytes AI_CV_LightScreen_SpecialTypeList, AI_CV_LightScreen_End
 	if_random_less_than 50, AI_CV_LightScreen_End
-
 AI_CV_LightScreen_ScoreDown2:
 	score -2
-
 AI_CV_LightScreen_End:
 	end
 
@@ -1852,16 +1888,26 @@ AI_CV_SuperFang_End:
 
 AI_CV_Trap:
 	if_status AI_TARGET, STATUS1_TOXIC_POISON, AI_CV_Trap2
-	if_status2 AI_TARGET, STATUS2_CURSED, AI_CV_Trap2
-	if_status3 AI_TARGET, STATUS3_PERISH_SONG, AI_CV_Trap2
-	if_status2 AI_TARGET, STATUS2_INFATUATION, AI_CV_Trap2
-	goto AI_CV_Trap_End
-
+	if_status2 AI_TARGET, STATUS2_CURSED | STATUS2_INFATUATION, AI_CV_Trap2
+	if_status3 AI_TARGET, STATUS3_PERISH_SONG, AI_CV_Trap5
+	goto AI_CV_TrapItem
+AI_CV_Trap5:
+	score +2
+	goto AI_CV_TrapItem
 AI_CV_Trap2:
-	if_random_less_than 128, AI_CV_Trap_End
+	if_random_less_than 128, AI_CV_TrapItem
 	score +1
-
-AI_CV_Trap_End:
+AI_CV_TrapItem:
+	get_considered_move_power
+	if_equal 0, AI_CV_TrapEnd
+	if_status2 AI_TARGET, STATUS2_WRAPPED, AI_CV_TrapEnd
+	get_hold_effect AI_USER
+	if_equal HOLD_EFFECT_GRIP_CLAW AI_CV_Trap4
+	if_equal HOLD_EFFECT_BINDING_BAND AI_CV_Trap4
+	goto AI_CV_TrapEnd
+AI_CV_Trap4:
+	score +2
+AI_CV_TrapEnd:
 	end
 
 AI_CV_HighCrit:
@@ -1877,6 +1923,18 @@ AI_CV_HighCrit2:
 
 AI_CV_HighCrit_End:
 	end
+	
+AI_CV_FocusEnergy:
+	if_has_move_with_flag AI_USER, FLAG_HIGH_CRIT, AI_CV_FocusEnergy2
+AI_CV_FocusEnergy3:
+	get_hold_effect AI_USER
+	if_not_equal HOLD_EFFECT_SCOPE_LENS, AI_CV_FocusEnergyEnd
+	score +1
+AI_CV_FocusEnergyEnd:
+	end
+AI_CV_FocusEnergy2:
+	score +1
+	goto AI_CV_FocusEnergy3
 
 AI_CV_Swagger:
 	if_has_move AI_USER, MOVE_PSYCH_UP, AI_CV_SwaggerHasPsychUp
@@ -1912,18 +1970,30 @@ AI_CV_SwaggerHasPsychUp_Minus5:
 
 AI_CV_SwaggerHasPsychUp_End:
 	end
+	
+EncourageLightClay:
+	get_hold_effect AI_USER
+	if_not_equal HOLD_EFFECT_LIGHT_CLAY, EncourageLightClayEnd
+	score +1
+	if_random_less_than 111, EncourageLightClayEnd
+	score +1
+EncourageLightClayEnd:
+	end
+	
+AI_CV_AuroraVeil:
+	call EncourageLightClay
+	end
 
 AI_CV_Reflect:
+	call EncourageLightClay
 	if_hp_less_than AI_USER, 50, AI_CV_Reflect_ScoreDown2
 	get_target_type1
 	if_in_bytes AI_CV_Reflect_PhysicalTypeList, AI_CV_Reflect_End
 	get_target_type2
 	if_in_bytes AI_CV_Reflect_PhysicalTypeList, AI_CV_Reflect_End
 	if_random_less_than 50, AI_CV_Reflect_End
-
 AI_CV_Reflect_ScoreDown2:
 	score -2
-
 AI_CV_Reflect_End:
 	end
 
@@ -1939,13 +2009,26 @@ AI_CV_Reflect_PhysicalTypeList:
     .byte TYPE_STEEL
     .byte -1
 
+AI_CV_ToxicThread:
+	if_status AI_TARGET, STATUS1_ANY, AI_CV_ToxicThreadSpd
+	call EncouragePsnVenoshock
+AI_CV_ToxicThreadSpd:
+	if_target_faster AI_CV_ToxicThread2
+	if_not_status AI_TARGET, STATUS1_ANY, AI_CV_ToxicThread3
+	score -1
+	goto AI_CV_ToxicThread3
+AI_CV_ToxicThread2:
+	score +1
+AI_CV_ToxicThread3:
+	goto AI_CV_Poison2
+
 AI_CV_Poison:
+	call EncouragePsnVenoshock
+AI_CV_Poison2:
 	if_hp_less_than AI_USER, 50, AI_CV_Poison_ScoreDown1
 	if_hp_more_than AI_TARGET, 50, AI_CV_Poison_End
-
 AI_CV_Poison_ScoreDown1:
 	score -1
-
 AI_CV_Poison_End:
 	end
 
@@ -2281,14 +2364,17 @@ AI_CV_Flail_ScoreDown1:
 
 AI_CV_Flail_End:
 	end
-
+	
 AI_CV_HealBell:
-	if_status AI_TARGET, STATUS1_ANY, AI_CV_HealBell_End
-	if_status_in_party AI_TARGET, STATUS1_ANY, AI_CV_HealBell_End
-	score -5
-
-AI_CV_HealBell_End:
+	if_move MOVE_HEAL_BELL AI_CV_HealBell2
+AI_CV_HealBellEnd:
 	end
+@ Don't use Heal Bell to heal a partner that has Soundproof
+AI_CV_HealBell2:
+	if_status AI_USER, STATUS1_ANY, AI_CV_HealBellEnd
+	if_not_status AI_USER_PARTNER, STATUS1_ANY, AI_CV_HealBellEnd
+	if_ability AI_USER_PARTNER, ABILITY_SOUNDPROOF, Score_Minus3
+	goto AI_CV_HealBellEnd
 
 AI_CV_Thief:
 	get_hold_effect AI_TARGET
@@ -2314,29 +2400,30 @@ AI_CV_Thief_EncourageItemsToSteal:
     .byte -1
 
 AI_CV_Curse:
-	get_user_type1
-	if_equal TYPE_GHOST, AI_CV_Curse4
-	get_user_type2
-	if_equal TYPE_GHOST, AI_CV_Curse4
-	if_stat_level_more_than AI_USER, STAT_DEF, 9, AI_CV_Curse_End
+	if_type AI_USER, TYPE_GHOST, AI_CV_CurseGhost
+	if_stat_level_more_than AI_USER, STAT_DEF, 9, AI_CV_Curse2
 	if_random_less_than 128, AI_CV_Curse2
 	score +1
-
 AI_CV_Curse2:
-	if_stat_level_more_than AI_USER, STAT_DEF, 7, AI_CV_Curse_End
+	if_stat_level_more_than AI_USER, STAT_ATK, 9, AI_CV_Curse3
 	if_random_less_than 128, AI_CV_Curse3
 	score +1
-
 AI_CV_Curse3:
-	if_stat_level_more_than AI_USER, STAT_DEF, 6, AI_CV_Curse_End
-	if_random_less_than 128, AI_CV_Curse_End
+	if_stat_level_more_than AI_USER, STAT_DEF, 6, AI_CV_Curse4
+	if_random_less_than 98, AI_CV_Curse4
 	score +1
-	goto AI_CV_Curse_End
-
 AI_CV_Curse4:
+	if_stat_level_more_than AI_USER, STAT_ATK, 6, AI_CV_Curse5
+	if_random_less_than 99, AI_CV_Curse5
+	score +1
+AI_CV_Curse5:
+	get_hold_effect AI_USER
+	if_not_equal HOLD_EFFECT_RESTORE_STATS, AI_CV_Curse_End
+	score +2
+	goto AI_CV_Curse_End
+AI_CV_CurseGhost:
 	if_hp_more_than AI_USER, 80, AI_CV_Curse_End
 	score -1
-
 AI_CV_Curse_End:
 	end
 
@@ -3141,25 +3228,29 @@ AI_TryToFaint:
 	get_how_powerful_move_is
 	if_equal MOVE_NOT_MOST_POWERFUL, Score_Minus1
 	if_type_effectiveness AI_EFFECTIVENESS_x4, AI_TryToFaint_DoubleSuperEffective
-	end
-
+	goto AI_TryToFaint_InDanger
 AI_TryToFaint_DoubleSuperEffective:
-	if_random_less_than 80, AI_TryToFaint_End
+	if_random_less_than 80, AI_TryToFaint_InDanger
 	score +2
-	end
-
+	goto AI_TryToFaint_InDanger
 AI_TryToFaint_TryToEncourageQuickAttack:
-	if_effect EFFECT_EXPLOSION, AI_TryToFaint_End
+	if_effect EFFECT_EXPLOSION, AI_TryToFaint_InDanger
 	if_user_faster AI_TryToFaint_ScoreUp4
 	if_move_flag FLAG_HIGH_CRIT AI_TryToFaint_ScoreUp4
 	score +2
-	end
-
+	goto AI_TryToFaint_InDanger
 AI_TryToFaint_ScoreUp4:
 	score +4
-
+AI_TryToFaint_InDanger:
+	if_target_faster AI_TryToFaint_End
+	if_ai_can_go_down AI_TryToFaint_IsInDanger
 AI_TryToFaint_End:
 	end
+AI_TryToFaint_IsInDanger:
+	get_how_powerful_move_is
+	if not_equal MOVE_MOST_POWERFUL Score_Minus1
+	score +1
+	goto AI_TryToFaint_End
 
 AI_SetupFirstTurn:
 	if_target_is_ally AI_Ret
