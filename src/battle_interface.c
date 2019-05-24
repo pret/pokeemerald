@@ -692,7 +692,7 @@ u8 CreateBattlerHealthboxSprites(u8 battlerId)
     healthBarSpritePtr->invisible = TRUE;
 
     // Create mega indicator sprite if is a mega evolved mon.
-    if (gBattleStruct->mega.alreadyEvolved[GetBattlerPosition(battlerId)])
+    if (gBattleStruct->mega.evolvedPartyIds[GetBattlerSide(battlerId)] & gBitTable[gBattlerPartyIndexes[battlerId]])
         CreateMegaIndicatorSprite(battlerId, 0);
 
     return healthboxLeftSpriteId;
@@ -875,7 +875,7 @@ static void UpdateLvlInHealthbox(u8 healthboxSpriteId, u8 lvl)
     u8 battler = gSprites[healthboxSpriteId].hMain_Battler;
 
     // Don't print Lv char if mon is mega evolved.
-    if (gBattleStruct->mega.alreadyEvolved[GetBattlerPosition(battler)])
+    if (gBattleStruct->mega.evolvedPartyIds[GetBattlerSide(battler)] & gBitTable[gBattlerPartyIndexes[battler]])
     {
         xPos = (u32) ConvertIntToDecimalStringN(text, lvl, STR_CONV_MODE_LEFT_ALIGN, 3);
     }
@@ -1340,15 +1340,15 @@ void DestroyMegaTriggerSprite(void)
 static const s8 sIndicatorPosSingles[][2] =
 {
     [B_POSITION_PLAYER_LEFT] = {53, -8},
-    [B_POSITION_OPPONENT_LEFT] = {53, -8},
+    [B_POSITION_OPPONENT_LEFT] = {45, -8},
 };
 
 static const s8 sIndicatorPosDoubles[][2] =
 {
     [B_POSITION_PLAYER_LEFT] = {53, -8},
-    [B_POSITION_OPPONENT_LEFT] = {53, -8},
+    [B_POSITION_OPPONENT_LEFT] = {45, -8},
     [B_POSITION_PLAYER_RIGHT] = {53, -8},
-    [B_POSITION_OPPONENT_RIGHT] = {53, -8},
+    [B_POSITION_OPPONENT_RIGHT] = {45, -8},
 };
 
 void CreateMegaIndicatorSprite(u32 battlerId, u32 which)
