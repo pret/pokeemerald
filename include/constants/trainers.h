@@ -250,7 +250,7 @@
 #define TRAINER_CLASS_SWIMMER_F      0x2d
 #define TRAINER_CLASS_TWINS          0x2e
 #define TRAINER_CLASS_SAILOR         0x2f
-#define TRAINER_CLASS_COOLTRAINER_2  0x30 // Unused
+#define TRAINER_CLASS_COOLTRAINER_2  0x30 // Used for only one trainer.
 #define TRAINER_CLASS_MAGMA_ADMIN    0x31
 #define TRAINER_CLASS_PKMN_TRAINER_3 0x32
 #define TRAINER_CLASS_BUG_CATCHER    0x33

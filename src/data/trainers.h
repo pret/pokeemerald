@@ -7044,7 +7044,7 @@ const struct Trainer gTrainers[] = {
     [TRAINER_JAZMYN] =
     {
         .partyFlags = 0,
-        .trainerClass = TRAINER_CLASS_COOLTRAINER_UNUSED,
+        .trainerClass = TRAINER_CLASS_COOLTRAINER_2,
         .encounterMusic_gender = F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_COOL,
         .trainerPic = TRAINER_PIC_COOLTRAINER_F,
         .trainerName = _("JAZMYN"),
