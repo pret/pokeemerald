@@ -267,7 +267,7 @@
 #define TRAINER_CLASS_FACTORY_HEAD   0x3e
 #define TRAINER_CLASS_PIKE_QUEEN     0x3f
 #define TRAINER_CLASS_PYRAMID_KING   0x40
-#define TRAINER_CLASS_RS_PLAYER      0x41
+#define TRAINER_CLASS_RS_PROTAG      0x41
 
 #define TRAINER_ENCOUNTER_MUSIC_MALE         0 // standard male encounter music
 #define TRAINER_ENCOUNTER_MUSIC_FEMALE       1 // standard female encounter music
