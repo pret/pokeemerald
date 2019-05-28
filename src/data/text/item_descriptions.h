@@ -2730,3 +2730,38 @@ static const u8 sHoneyDesc[] = _(
     "A sweet honey that\n"
     "attracts wild Pokémon\n"
     "in grass or on trees.");
+
+static const u8 sHealthWingDesc[] = _(
+    "An item that raises\n"
+    "the base HP of\n"
+    "a POKéMON.");
+
+static const u8 sMuscleWingDesc[] = _(
+    "An item that raises\n"
+    "the base ATTACK of\n"
+    "a POKéMON.");
+
+static const u8 sResistWingDesc[] = _(
+    "An item that raises\n"
+    "the base DEFENSE\n"
+    "of a POKéMON.");
+
+static const u8 sGeniusWingDesc[] = _(
+    "An item that raises\n"
+    "the base SP. ATK.\n"
+    "of a POKéMON.");
+
+static const u8 sCleverWingDesc[] = _(
+    "An item that raises\n"
+    "the base SP. DEF.\n"
+    "of a POKéMON.");
+
+static const u8 sSwiftWingDesc[] = _(
+    "An item that raises\n"
+    "the base SPEED of\n"
+    "a POKéMON.");
+
+static const u8 sPrettyWingDesc[] = _(
+    "A beautiful yet\n"
+    "plain feather that\n"
+    "does nothing.");
