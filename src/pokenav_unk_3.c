@@ -282,7 +282,7 @@ int unref_sub_81CAE6C(int arg0)
     arg0 += state->unkC;
     if (arg0 >= state->unkA)
         return REMATCH_TABLE_ENTRIES;
-    
+
     return state->unk1C[arg0].unk2;
 }
 
@@ -321,7 +321,7 @@ int sub_81CAF04(int index)
         index = GetTrainerIdxByRematchIdx(state->unk1C[index].unk2);
         return gTrainers[index].trainerPic;
     }
-    
+
     var0 = state->unk1C[index].unk2;
     index = MatchCall_GetRematchTableIdx(var0);
     if (index != REMATCH_TABLE_ENTRIES)
@@ -411,7 +411,7 @@ void sub_81CB050(u32 arg0, u8 *str)
     }
 }
 
-int sub_81CB0C8(int rematchIndex)
+u8 sub_81CB0C8(int rematchIndex)
 {
     int mapGroup = gRematchTable[rematchIndex].mapGroup;
     int mapNum = gRematchTable[rematchIndex].mapNum;
