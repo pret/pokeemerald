@@ -173,46 +173,116 @@ const u8 gItemEffect_SacredAsh[7] = {
     [6] = -1,
 };
 
-const u8 gItemEffect_HPUp[10] = {
+const u8 gItemEffect_HPUp[11] = {
     [4] = ITEM4_EV_HP,
     [5] = ITEM5_FRIENDSHIP_ALL,
     [6] = 10,
     [7] = 5,
     [8] = 3,
     [9] = 2,
+    [10] = 1,
 };
 
-const u8 gItemEffect_Protein[10] = {
+const u8 gItemEffect_Protein[11] = {
     [4] = ITEM4_EV_ATK,
     [5] = ITEM5_FRIENDSHIP_ALL,
     [6] = 10,
     [7] = 5,
     [8] = 3,
     [9] = 2,
+    [10] = 1,
 };
 
-const u8 gItemEffect_Iron[10] = {
+const u8 gItemEffect_Iron[11] = {
     [5] = ITEM5_EV_DEF | ITEM5_FRIENDSHIP_ALL,
     [6] = 10,
     [7] = 5,
     [8] = 3,
     [9] = 2,
+    [10] = 1,
 };
 
-const u8 gItemEffect_Carbos[10] = {
+const u8 gItemEffect_Carbos[11] = {
     [5] = ITEM5_EV_SPEED | ITEM5_FRIENDSHIP_ALL,
     [6] = 10,
     [7] = 5,
     [8] = 3,
     [9] = 2,
+    [10] = 1,
 };
 
-const u8 gItemEffect_Calcium[10] = {
+const u8 gItemEffect_Calcium[11] = {
     [5] = ITEM5_EV_SPATK | ITEM5_FRIENDSHIP_ALL,
     [6] = 10,
     [7] = 5,
     [8] = 3,
     [9] = 2,
+    [10] = 1,
+};
+
+const u8 gItemEffect_Zinc[11] = {
+    [5] = ITEM5_EV_SPDEF | ITEM5_FRIENDSHIP_ALL,
+    [6] = 10,
+    [7] = 5,
+    [8] = 3,
+    [9] = 2,
+    [10] = 1,
+};
+
+const u8 gItemEffect_HpWing[11] = {
+    [4] = ITEM4_EV_HP,
+    [5] = ITEM5_FRIENDSHIP_ALL,
+    [6] = 1,
+    [7] = 3,
+    [8] = 2,
+    [9] = 1,
+    [10] = 0,
+};
+
+const u8 gItemEffect_AtkWing[11] = {
+    [4] = ITEM4_EV_ATK,
+    [5] = ITEM5_FRIENDSHIP_ALL,
+    [6] = 1,
+    [7] = 3,
+    [8] = 2,
+    [9] = 1,
+    [10] = 0,
+};
+
+const u8 gItemEffect_DefWing[11] = {
+    [5] = ITEM5_EV_DEF | ITEM5_FRIENDSHIP_ALL,
+    [6] = 1,
+    [7] = 3,
+    [8] = 2,
+    [9] = 1,
+    [10] = 0,
+};
+
+const u8 gItemEffect_SpeedWing[11] = {
+    [5] = ITEM5_EV_SPEED | ITEM5_FRIENDSHIP_ALL,
+    [6] = 1,
+    [7] = 3,
+    [8] = 2,
+    [9] = 1,
+    [10] = 0,
+};
+
+const u8 gItemEffect_SpatkWing[11] = {
+    [5] = ITEM5_EV_SPATK | ITEM5_FRIENDSHIP_ALL,
+    [6] = 1,
+    [7] = 3,
+    [8] = 2,
+    [9] = 1,
+    [10] = 0,
+};
+
+const u8 gItemEffect_SpdefWing[11] = {
+    [5] = ITEM5_EV_SPDEF | ITEM5_FRIENDSHIP_ALL,
+    [6] = 1,
+    [7] = 3,
+    [8] = 2,
+    [9] = 1,
+    [10] = 0,
 };
 
 const u8 gItemEffect_RareCandy[10] = {
@@ -231,14 +301,6 @@ const u8 gItemEffect_PPUp[9] = {
     [6] = 5,
     [7] = 3,
     [8] = 2,
-};
-
-const u8 gItemEffect_Zinc[10] = {
-    [5] = ITEM5_EV_SPDEF | ITEM5_FRIENDSHIP_ALL,
-    [6] = 10,
-    [7] = 5,
-    [8] = 3,
-    [9] = 2,
 };
 
 const u8 gItemEffect_PPMax[9] = {
@@ -445,6 +507,12 @@ const u8 *const gItemEffectTable[] =
     [ITEM_RARE_CANDY - ITEM_POTION] = gItemEffect_RareCandy,
     [ITEM_PP_UP - ITEM_POTION] = gItemEffect_PPUp,
     [ITEM_ZINC - ITEM_POTION] = gItemEffect_Zinc,
+    [ITEM_HEALTH_WING - ITEM_POTION] = gItemEffect_HpWing,
+    [ITEM_MUSCLE_WING - ITEM_POTION] = gItemEffect_AtkWing,
+    [ITEM_RESIST_WING - ITEM_POTION] = gItemEffect_DefWing,
+    [ITEM_GENIUS_WING - ITEM_POTION] = gItemEffect_SpatkWing,
+    [ITEM_CLEVER_WING - ITEM_POTION] = gItemEffect_SpdefWing,
+    [ITEM_SWIFT_WING - ITEM_POTION] = gItemEffect_SpeedWing,
     [ITEM_PP_MAX - ITEM_POTION] = gItemEffect_PPMax,
     [ITEM_GUARD_SPEC - ITEM_POTION] = gItemEffect_GuardSpec,
     [ITEM_DIRE_HIT - ITEM_POTION] = gItemEffect_DireHit,

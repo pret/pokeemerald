@@ -4614,7 +4614,7 @@ bool8 ExecuteTableBasedItemEffect(struct Pokemon *mon, u16 item, u8 partyIndex, 
 bool8 PokemonUseItemEffects(struct Pokemon *mon, u16 item, u8 partyIndex, u8 moveIndex, u8 e)
 {
     u32 dataUnsigned;
-    s32 dataSigned;
+    s32 dataSigned, evCap;
     s32 friendship;
     s32 cmdIndex;
     bool8 retVal = TRUE;
@@ -4822,11 +4822,17 @@ bool8 PokemonUseItemEffects(struct Pokemon *mon, u16 item, u8 partyIndex, u8 mov
                         {
                             if (evCount >= MAX_TOTAL_EVS)
                                 return TRUE;
-                            if (dataSigned >= 100)
+
+                            if (itemEffect[10])
+                                evCap = 100;
+                            else
+                                evCap = 252;
+
+                            if (dataSigned >= evCap)
                                 break;
 
-                            if (dataSigned + r2 > 100)
-                                r5 = 100 - (dataSigned + r2) + r2;
+                            if (dataSigned + r2 > evCap)
+                                r5 = evCap - (dataSigned + r2) + r2;
                             else
                                 r5 = r2;
 
@@ -5026,11 +5032,17 @@ bool8 PokemonUseItemEffects(struct Pokemon *mon, u16 item, u8 partyIndex, u8 mov
                         {
                             if (evCount >= MAX_TOTAL_EVS)
                                 return TRUE;
-                            if (dataSigned >= 100)
+
+                            if (itemEffect[10])
+                                evCap = 100;
+                            else
+                                evCap = 252;
+
+                            if (dataSigned >= evCap)
                                 break;
 
-                            if (dataSigned + r2 > 100)
-                                r5 = 100 - (dataSigned + r2) + r2;
+                            if (dataSigned + r2 > evCap)
+                                r5 = evCap - (dataSigned + r2) + r2;
                             else
                                 r5 = r2;
 
