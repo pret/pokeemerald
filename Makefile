@@ -8,6 +8,8 @@ else
 EXE :=
 endif
 
+include comwrap.mk
+
 TITLE       := POKEMON EMER
 GAME_CODE   := BPEE
 MAKER_CODE  := 01
@@ -99,17 +101,10 @@ compare: $(ROM)
 	@$(SHA1) rom.sha1
 
 clean: tidy
-	rm -f sound/direct_sound_samples/*.bin
-	rm -f $(SONG_OBJS) $(MID_OBJS) $(MID_SUBDIR)/*.s
-	find . \( -iname '*.1bpp' -o -iname '*.4bpp' -o -iname '*.8bpp' -o -iname '*.gbapal' -o -iname '*.lz' -o -iname '*.latfont' -o -iname '*.hwjpnfont' -o -iname '*.fwjpnfont' \) -exec rm {} +
-	rm -f $(DATA_ASM_SUBDIR)/layouts/layouts.inc $(DATA_ASM_SUBDIR)/layouts/layouts_table.inc
-	rm -f $(DATA_ASM_SUBDIR)/maps/connections.inc $(DATA_ASM_SUBDIR)/maps/events.inc $(DATA_ASM_SUBDIR)/maps/groups.inc $(DATA_ASM_SUBDIR)/maps/headers.inc
-	find $(DATA_ASM_SUBDIR)/maps \( -iname 'connections.inc' -o -iname 'events.inc' -o -iname 'header.inc' \) -exec rm {} +
-	rm -f $(AUTO_GEN_TARGETS)
+	$(call COMWRAP,rm -f sound/direct_sound_samples/*.bin ; rm -f $(SONG_OBJS) $(MID_OBJS) $(MID_SUBDIR)/*.s ; find . \( -iname '*.1bpp' -o -iname '*.4bpp' -o -iname '*.8bpp' -o -iname '*.gbapal' -o -iname '*.lz' -o -iname '*.latfont' -o -iname '*.hwjpnfont' -o -iname '*.fwjpnfont' \) -exec rm {} + ; rm -f $(DATA_ASM_SUBDIR)/layouts/layouts.inc $(DATA_ASM_SUBDIR)/layouts/layouts_table.inc ; rm -f $(DATA_ASM_SUBDIR)/maps/connections.inc $(DATA_ASM_SUBDIR)/maps/events.inc $(DATA_ASM_SUBDIR)/maps/groups.inc $(DATA_ASM_SUBDIR)/maps/headers.inc ; find $(DATA_ASM_SUBDIR)/maps \( -iname 'connections.inc' -o -iname 'events.inc' -o -iname 'header.inc' \) -exec rm {} + ; rm -f $(AUTO_GEN_TARGETS),$(COMWRAP_CLEAN))
 
 tidy:
-	rm -f $(ROM) $(ELF) $(MAP)
-	rm -r build/*
+	$(call COMWRAP,rm -f $(ROM) $(ELF) $(MAP) ; rm -r build/*,$(COMWRAP_TIDY))
 
 include graphics_file_rules.mk
 include map_data_rules.mk
@@ -122,16 +117,15 @@ include songs.mk
 %.pal: ;
 %.aif: ;
 
-%.1bpp: %.png  ; $(GFX) $< $@
-%.4bpp: %.png  ; $(GFX) $< $@
-%.8bpp: %.png  ; $(GFX) $< $@
-%.gbapal: %.pal ; $(GFX) $< $@
-%.gbapal: %.png ; $(GFX) $< $@
-%.lz: % ; $(GFX) $< $@
-%.rl: % ; $(GFX) $< $@
-sound/direct_sound_samples/cry_%.bin: sound/direct_sound_samples/cry_%.aif ; $(AIF) $< $@ --compress
-sound/%.bin: sound/%.aif ; $(AIF) $< $@
-
+%.1bpp: %.png ; $(call COMWRAP,$(GFX) $< $@,$(COMWRAP_GFX))
+%.4bpp: %.png ; $(call COMWRAP,$(GFX) $< $@,$(COMWRAP_GFX))
+%.8bpp: %.png ; $(call COMWRAP,$(GFX) $< $@,$(COMWRAP_GFX))
+%.gbapal: %.pal ; $(call COMWRAP,$(GFX) $< $@,$(COMWRAP_GFX))
+%.gbapal: %.png ; $(call COMWRAP,$(GFX) $< $@,$(COMWRAP_GFX))
+%.lz: % ; $(call COMWRAP,$(GFX) $< $@,$(COMWRAP_GFX))
+%.rl: % ; $(call COMWRAP,$(GFX) $< $@,$(COMWRAP_GFX))
+sound/direct_sound_samples/cry_%.bin: sound/direct_sound_samples/cry_%.aif ; $(call COMWRAP,$(AIF) $< $@ --compress,$(COMWRAP_MUSIC))
+sound/%.bin: sound/%.aif ; $(call COMWRAP,$(AIF) $< $@,$(COMWRAP_SND_AS))
 
 $(C_BUILDDIR)/libc.o: CC1 := tools/agbcc/bin/old_agbcc
 $(C_BUILDDIR)/libc.o: CFLAGS := -O2
@@ -157,47 +151,44 @@ override CFLAGS += -g
 endif
 
 $(C_BUILDDIR)/%.o : $(C_SUBDIR)/%.c $$(c_dep)
-	@$(CPP) $(CPPFLAGS) $< -o $(C_BUILDDIR)/$*.i
-	@$(PREPROC) $(C_BUILDDIR)/$*.i charmap.txt | $(CC1) $(CFLAGS) -o $(C_BUILDDIR)/$*.s
-	@echo -e ".text\n\t.align\t2, 0\n" >> $(C_BUILDDIR)/$*.s
-	$(AS) $(ASFLAGS) -o $@ $(C_BUILDDIR)/$*.s
+	$(call COMWRAP,$(CPP) $(CPPFLAGS) $< -o $(C_BUILDDIR)/$*.i ; $(PREPROC) $(C_BUILDDIR)/$*.i charmap.txt | $(CC1) $(CFLAGS) -o $(C_BUILDDIR)/$*.s ; echo -e '.text\n\t.align\t2$(COMMA) 0\n' >> $(C_BUILDDIR)/$*.s ; $(AS) $(ASFLAGS) -o $@ $(C_BUILDDIR)/$*.s,$(COMWRAP_CC))
 
 ifeq ($(NODEP),1)
 $(ASM_BUILDDIR)/%.o: asm_dep :=
 else
 $(ASM_BUILDDIR)/%.o: asm_dep = $(shell $(SCANINC) -I "" $(ASM_SUBDIR)/$*.s)
 endif
-
-$(ASM_BUILDDIR)/%.o: $(ASM_SUBDIR)/%.s $$(asm_dep)
-	$(AS) $(ASFLAGS) -o $@ $<
-
 ifeq ($(NODEP),1)
+
 $(DATA_ASM_BUILDDIR)/%.o: data_dep :=
 else
 $(DATA_ASM_BUILDDIR)/%.o: data_dep = $(shell $(SCANINC) -I include -I "" $(DATA_ASM_SUBDIR)/$*.s)
 endif
 
+$(ASM_BUILDDIR)/%.o: $(ASM_SUBDIR)/%.s $$(asm_dep)
+	$(call COMWRAP,$(AS) $(ASFLAGS) -o $@ $<,$(COMWRAP_ASM))
+
 $(DATA_ASM_BUILDDIR)/%.o: $(DATA_ASM_SUBDIR)/%.s $$(data_dep)
-	$(PREPROC) $< charmap.txt | $(CPP) -I include | $(AS) $(ASFLAGS) -o $@
+	$(call COMWRAP,$(PREPROC) $< charmap.txt | $(CPP) -I include | $(AS) $(ASFLAGS) -o $@,$(COMWRAP_DAT_AS))
 
 $(SONG_BUILDDIR)/%.o: $(SONG_SUBDIR)/%.s
-	$(AS) $(ASFLAGS) -I sound -o $@ $<
+	$(call COMWRAP,$(AS) $(ASFLAGS) -I sound -o $@ $<,$(COMWRAP_SND_AS))
 
 $(OBJ_DIR)/sym_bss.ld: sym_bss.txt
-	$(RAMSCRGEN) .bss $< ENGLISH > $@
+	$(call COMWRAP,$(RAMSCRGEN) .bss $< ENGLISH > $@,$(COMWRAP_ADJ))
 
 $(OBJ_DIR)/sym_common.ld: sym_common.txt $(C_OBJS) $(wildcard common_syms/*.txt)
-	$(RAMSCRGEN) COMMON $< ENGLISH -c $(C_BUILDDIR),common_syms > $@
+	$(call COMWRAP,$(RAMSCRGEN) COMMON $< ENGLISH -c $(C_BUILDDIR)$(COMMA)common_syms > $@,$(COMWRAP_ADJ))
 
 $(OBJ_DIR)/sym_ewram.ld: sym_ewram.txt
-	$(RAMSCRGEN) ewram_data $< ENGLISH > $@
+	$(call COMWRAP,$(RAMSCRGEN) ewram_data $< ENGLISH > $@,$(COMWRAP_ADJ))
 
 $(OBJ_DIR)/ld_script.ld: ld_script.txt $(OBJ_DIR)/sym_bss.ld $(OBJ_DIR)/sym_common.ld $(OBJ_DIR)/sym_ewram.ld
-	cd $(OBJ_DIR) && sed "s#tools/#../../tools/#g" ../../ld_script.txt > ld_script.ld
+	@cd $(OBJ_DIR) && sed 's#tools/#../../tools/#g' ../../ld_script.txt > ld_script.ld
 
 $(ELF): $(OBJ_DIR)/ld_script.ld $(OBJS)
-	cd $(OBJ_DIR) && $(LD) $(LDFLAGS) -T ld_script.ld -o ../../$@ $(OBJS_REL) $(LIB)
+	$(call COMWRAP,cd $(OBJ_DIR) && $(LD) $(LDFLAGS) -T ld_script.ld -o ../../$@ $(OBJS_REL) $(LIB),$(COMWRAP_LINK))
 
 $(ROM): $(ELF)
-	$(OBJCOPY) -O binary $< $@
-	$(FIX) $@ -p -t"$(TITLE)" -c$(GAME_CODE) -m$(MAKER_CODE) -r$(REVISION) --silent
+	$(call COMWRAP,$(OBJCOPY) -O binary $< $@,$(COMWRAP_OCPY))
+	$(call COMWRAP,$(FIX) $@ -p -t'$(TITLE)' -c$(GAME_CODE) -m$(MAKER_CODE) -r$(REVISION) --silent,$(COMWRAP_FIX))
