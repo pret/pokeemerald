@@ -29,9 +29,9 @@ struct BagStruct
     u16 scrollPosition[POCKETS_COUNT];
 };
 
-extern struct BagStruct gUnknown_0203CE58;
+extern struct BagStruct gBagPositionStruct;
 
-struct UnkBagStruct
+struct BagMenuStruct
 {
     void (*mainCallback2)(void);
     u8 tilemapBuffer[0x800];
@@ -61,7 +61,7 @@ struct UnkBagStruct
     u8 filler2[4];
 };
 
-extern struct UnkBagStruct *gUnknown_0203CE54;
+extern struct BagMenuStruct *gBagMenu;
 
 // Exported RAM declarations
 
@@ -85,7 +85,7 @@ void ResetBagScrollPositions(void);
 void sub_81AABF0(void (*callback)(void));
 void CB2_ChooseBerry(void);
 void unknown_ItemMenu_Confirm(u8 taskId);
-void bag_menu_yes_no(u8, u8, const struct YesNoFuncTable*);
+void BagMenu_YesNo(u8, u8, const struct YesNoFuncTable*);
 void sub_81AB9A8(u8 pocketId);
 
 
