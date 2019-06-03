@@ -5290,10 +5290,10 @@ extern const u32 gPokedexSearch1_Tilemap[];
 extern const u16 gPokedexSearchMenu_Pal[];
 
 // berry tag screen
-extern const u32 gUnknown_08D9BB44[];
-extern const u32 gUnknown_08D9BF98[];
-extern const u32 gUnknown_08D9C13C[];
-extern const u32 gUnknown_08D9BEF0[];
+extern const u32 gBerryCheck_Gfx[];
+extern const u32 gBerryCheck_Pal[];
+extern const u32 gBerryTag_Gfx[];
+extern const u32 gBerryTag_Pal[];
 
 // rayquaza scene gfx
 extern const u32 gRaySceneGroudon_Gfx[];
@@ -5848,6 +5848,7 @@ extern const u8 gFireRedMenuElements_Gfx[];
 
 // item menu graphics
 extern const u32 gBagScreen_Gfx[];
+extern const u32 gBagScreen_GfxTileMap[];
 extern const u32 gBagScreenFemale_Pal[];
 extern const u32 gBagScreenMale_Pal[];
 extern const u8 gBagMenuHMIcon_Gfx[];
@@ -6081,11 +6082,11 @@ extern const u16 gBattleInterface_BallDisplayPal[];
 extern const u32 gBagSwapLineGfx[];
 extern const u32 gBagSwapLinePal[];
 
-extern const u32 gUnknown_08D9ADD0[];
-extern const u32 gUnknown_08D9AE04[];
+extern const u32 gBattleFrontierGfx_PyramidBag[];
+extern const u32 gBattleFrontierGfx_PyramidBag_Pal[];
+extern const u32 gBattleFrontierGfx_PyramidBagTileMap[];
 extern const u32 gUnknown_08D9AF44[];
 extern const u16 gUnknown_0860F074[];
-extern const u32 gBattleFrontierGfx_PyramidBag[];
 
 extern const u32 gTitleScreenEmeraldVersionGfx[];
 extern const u32 gTitleScreenPressStartGfx[];
@@ -6751,7 +6752,6 @@ extern const u32 gBattleStatMask6_Pal[];
 extern const u32 gBattleStatMask7_Pal[];
 extern const u32 gBattleStatMask8_Pal[];
 
-extern const u32 gUnknown_08D9A88C[];
 extern const u32 gContestMiscGfx[];
 extern const u32 gContestAudienceGfx[];
 extern const u8 gContestApplauseMeterGfx[];
