@@ -455,6 +455,13 @@ DYNAMIC_COLOR4 = 0D @ aquamarine
 DYNAMIC_COLOR5 = 0E @ blue-green
 DYNAMIC_COLOR6 = 0F @ cerulean
 
+@ gnosis context colors
+
+NO_COLOR = 02
+POKEMON_COLOR = 04
+CHARACTER_COLOR = 06
+LOCATION_COLOR = 08
+
 @ sound and music
 
 MUS_DUMMY = 00 00
