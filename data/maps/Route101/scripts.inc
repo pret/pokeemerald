@@ -299,3 +299,34 @@ Route101_Text_1EC0C8: @ 81EC0C8
 	.string "ROUTE 101\n"
 	.string "{UP_ARROW} OLDALE TOWN$"
 
+Script_GenericDuckNest::
+	lock
+	checkitem ITEM_POTION, 1
+	compare VAR_RESULT, 1
+	goto_if_ge Script_GenericDuckNest_HasBread
+	msgbox Text_GenericDuckNest_NoBread, MSGBOX_DEFAULT
+	release
+	end
+
+Script_GenericDuckNest_HasBread::
+	msgbox Text_GenericDuckNest_ShouldUseBread, MSGBOX_YESNO
+	compare VAR_RESULT, 0
+	goto_if_eq Script_GenericDuckNest_SaidNo
+	takeitem ITEM_POTION, 1
+	msgbox Text_GenericDuckNest_UsingBread, MSGBOX_DEFAULT
+	release
+	end
+
+Script_GenericDuckNest_SaidNo::
+	release
+	end
+
+Text_GenericDuckNest_UsingBread:
+	.string "You sprinkle {COLOR ITEM_COLOR}Dragonsbread Crumbs{COLOR NO_COLOR}…\p"
+	.string "…$" 
+
+Text_GenericDuckNest_ShouldUseBread:
+	.string "Drop {COLOR ITEM_COLOR}Dragonsbread Crumbs{COLOR NO_COLOR} by the nest?$"
+
+Text_GenericDuckNest_NoBread:
+	.string "It's a {COLOR POKEMON_COLOR}Psyduck{COLOR NO_COLOR} nest…$"
