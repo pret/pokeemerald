@@ -32,7 +32,7 @@ bool8 SetUpFieldMove_SoftBoiled(void)
 void sub_8161560(u8 taskId)
 {
     gUnknown_0203CEC8.unkB = 0xA;
-    gUnknown_0203CEC8.unkA =  gUnknown_0203CEC8.unk9;
+    gUnknown_0203CEC8.unkA =  gUnknown_0203CEC8.slotId;
     sub_81B0FCC(GetCursorSelectionMonId(), 0x1);
     display_pokemon_menu_message(0x5);
     gTasks[taskId].func = sub_81B1370;
@@ -42,7 +42,7 @@ void sub_81615A8(u8 taskId)
 {
     u16 hp;
 
-    u8 unk9 = gUnknown_0203CEC8.unk9;
+    u8 slotId = gUnknown_0203CEC8.slotId;
     u8 pokemonIndex = gUnknown_0203CEC8.unkA;
     if(pokemonIndex > 6)
     {
@@ -53,20 +53,20 @@ void sub_81615A8(u8 taskId)
     }
 
     hp = GetMonData(&gPlayerParty[pokemonIndex], MON_DATA_HP);
-    if(hp == 0 || unk9 == pokemonIndex || GetMonData(&gPlayerParty[pokemonIndex], MON_DATA_MAX_HP) == hp)
+    if(hp == 0 || slotId == pokemonIndex || GetMonData(&gPlayerParty[pokemonIndex], MON_DATA_MAX_HP) == hp)
     {
         sub_81617B8(taskId);
         return;
     }
 
     PlaySE(SE_KAIFUKU);
-    sub_81B1F18(taskId, unk9, -1, GetMonData(&gPlayerParty[unk9], MON_DATA_MAX_HP)/5, sub_816166C);
+    sub_81B1F18(taskId, slotId, -1, GetMonData(&gPlayerParty[slotId], MON_DATA_MAX_HP)/5, sub_816166C);
 }
 
 static void sub_816166C(u8 taskId)
 {
     PlaySE(SE_KAIFUKU);
-    sub_81B1F18(taskId, gUnknown_0203CEC8.unkA, 1, GetMonData(&gPlayerParty[gUnknown_0203CEC8.unk9], MON_DATA_MAX_HP)/5, sub_81616C0);
+    sub_81B1F18(taskId, gUnknown_0203CEC8.unkA, 1, GetMonData(&gPlayerParty[gUnknown_0203CEC8.slotId], MON_DATA_MAX_HP)/5, sub_81616C0);
 }
 
 static void sub_81616C0(u8 taskId)
@@ -83,8 +83,8 @@ static void sub_8161724(u8 taskId)
     if(sub_81B1BD4() == 1)
         return;
     gUnknown_0203CEC8.unkB = 0x0;
-    sub_81B0FCC(gUnknown_0203CEC8.unk9, 0);
-    gUnknown_0203CEC8.unk9 = gUnknown_0203CEC8.unkA;
+    sub_81B0FCC(gUnknown_0203CEC8.slotId, 0);
+    gUnknown_0203CEC8.slotId = gUnknown_0203CEC8.unkA;
     sub_81B0FCC(gUnknown_0203CEC8.unkA, 1);
     ClearStdWindowAndFrameToTransparent(0x6, FALSE);
     ClearWindowTilemap(0x6);

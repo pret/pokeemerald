@@ -1122,7 +1122,7 @@ bool32 TryGenerateBattlePikeWildMon(bool8 checkKeenEyeIntimidate)
     u8 headerId = GetBattlePikeWildMonHeaderId();
     u32 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
     const struct PikeWildMon *const *const wildMons = sWildMons[lvlMode];
-    u32 abilityBit;
+    u32 abilityNum;
     s32 pikeMonId = GetMonData(&gEnemyParty[0], MON_DATA_SPECIES, NULL);
     pikeMonId = SpeciesToPikeMonId(pikeMonId);
 
@@ -1152,11 +1152,11 @@ bool32 TryGenerateBattlePikeWildMon(bool8 checkKeenEyeIntimidate)
                MON_DATA_EXP,
                &gExperienceTables[gBaseStats[wildMons[headerId][pikeMonId].species].growthRate][monLevel]);
 
-    if (gBaseStats[wildMons[headerId][pikeMonId].species].ability2)
-        abilityBit = Random() % 2;
+    if (gBaseStats[wildMons[headerId][pikeMonId].species].abilities[1])
+        abilityNum = Random() % 2;
     else
-        abilityBit = 0;
-    SetMonData(&gEnemyParty[0], MON_DATA_ALT_ABILITY, &abilityBit);
+        abilityNum = 0;
+    SetMonData(&gEnemyParty[0], MON_DATA_ABILITY_NUM, &abilityNum);
     for (i = 0; i < MAX_MON_MOVES; i++)
         SetMonMoveSlot(&gEnemyParty[0], wildMons[headerId][pikeMonId].moves[i], i);
 
