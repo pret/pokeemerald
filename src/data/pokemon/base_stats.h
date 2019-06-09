@@ -1,5 +1,5 @@
-// Maximum value for a female Pokémon is 254 (MON_FEMALE) which is 100% female.
-// 255 (MON_GENDERLESS) is reserved for genderless Pokémon.
+// Maximum value for a female PokÃ©mon is 254 (MON_FEMALE) which is 100% female.
+// 255 (MON_GENDERLESS) is reserved for genderless PokÃ©mon.
 #define PERCENT_FEMALE(percent) min(254, ((percent * 255) / 100))
 
 const struct BaseStats gBaseStats[] =
@@ -19981,7 +19981,7 @@ const struct BaseStats gBaseStats[] =
         .expYield = 60,
         .evYield_Defense   = 1,
         .evYield_SpAttack  = 0,
-        .item2 = ITEM_NONE, // ITEMRAZOR_CLAW
+        .item2 = ITEM_NONE, // ITEMRAZOR_CLAW,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 40,
         .friendship = 70,
@@ -20007,7 +20007,7 @@ const struct BaseStats gBaseStats[] =
         .expYield = 147,
         .evYield_Defense   = 2,
         .evYield_SpAttack  = 0,
-        .item2 = ITEM_NONE, // ITEMRAZOR_CLAW
+        .item2 = ITEM_NONE, // ITEMRAZOR_CLAW,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 40,
         .friendship = 70,
@@ -20033,7 +20033,7 @@ const struct BaseStats gBaseStats[] =
         .expYield = 270,
         .evYield_Defense   = 3,
         .evYield_SpAttack  = 0,
-        .item1 = ITEM_NONE, // ITEMRAZOR_CLAW
+        .item1 = ITEM_NONE, // ITEMRAZOR_CLAW,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 40,
         .friendship = 70,
