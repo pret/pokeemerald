@@ -425,7 +425,7 @@ const struct CompressedSpritePalette gMonShinyPaletteTable[] =
     SPECIES_SHINY_PAL(BUIZEL, gMonShinyPalette_Buizel),
     SPECIES_SHINY_PAL(FLOATZEL, gMonShinyPalette_Floatzel),
     SPECIES_SHINY_PAL(CHERUBI, gMonShinyPalette_Cherubi),
-    SPECIES_SHINY_PAL(CHERRIM, gMonShinyPalette_Cherrim),
+    SPECIES_SHINY_PAL(CHERRIM, gMonShinyPalette_CherrimNormal),
     SPECIES_SHINY_PAL(SHELLOS, gMonShinyPalette_ShellosE),
     SPECIES_SHINY_PAL(GASTRODON, gMonShinyPalette_GastrodonE),
     SPECIES_SHINY_PAL(AMBIPOM, gMonShinyPalette_Ambipom),
@@ -899,4 +899,6 @@ const struct CompressedSpritePalette gMonShinyPaletteTable[] =
     SPECIES_SHINY_PAL(UNOWN_Z, gMonShinyPalette_Unown),
     SPECIES_SHINY_PAL(UNOWN_EMARK, gMonShinyPalette_Unown),
     SPECIES_SHINY_PAL(UNOWN_QMARK, gMonShinyPalette_Unown),
+
+    SPECIES_SHINY_PAL(CHERRIM_SUN, gMonShinyPalette_CherrimSun),
 };
