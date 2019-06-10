@@ -5,44 +5,6 @@
 
 @ File centered around AllocSubstruct(2)
 
-	thumb_func_start sub_81C98D4
-sub_81C98D4: @ 81C98D4
-	push {r4,lr}
-	movs r4, 0
-_081C98D8:
-	adds r0, r4, 0
-	bl sub_81CB0C8
-	ldr r1, =gMapHeader
-	lsls r0, 24
-	lsrs r0, 24
-	ldrb r1, [r1, 0x14]
-	cmp r0, r1
-	bne _081C9914
-	adds r0, r4, 0
-	bl sub_81CAE08
-	cmp r0, 0
-	beq _081C9914
-	ldr r0, =gSaveBlock1Ptr
-	ldr r0, [r0]
-	ldr r1, =0x000009ca
-	adds r0, r1
-	adds r0, r4
-	ldrb r0, [r0]
-	cmp r0, 0
-	beq _081C9914
-	movs r0, 0x1
-	b _081C991C
-	.pool
-_081C9914:
-	adds r4, 0x1
-	cmp r4, 0x4D
-	ble _081C98D8
-	movs r0, 0
-_081C991C:
-	pop {r4}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_81C98D4
 
 	thumb_func_start sub_81C9924
 sub_81C9924: @ 81C9924
