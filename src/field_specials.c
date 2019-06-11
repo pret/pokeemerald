@@ -62,7 +62,7 @@ EWRAM_DATA bool8 gBikeCyclingChallenge = FALSE;
 EWRAM_DATA u8 gBikeCollisions = 0;
 static EWRAM_DATA u32 gBikeCyclingTimer = 0;
 static EWRAM_DATA u8 gUnknown_0203AB5C = 0;
-static EWRAM_DATA u8 gUnknown_0203AB5D = 0;
+static EWRAM_DATA u8 sPetalburgGymSlidingDoorFrameCounter = 0;
 static EWRAM_DATA u8 gUnknown_0203AB5E = 0;
 static EWRAM_DATA u16 gUnknown_0203AB60 = 0;
 static EWRAM_DATA u16 gUnknown_0203AB62 = 0;
@@ -803,23 +803,30 @@ void MauvilleGymSpecial3(void)
 }
 
 static const u8 gUnknown_085B2B78[] = {0, 1, 1, 1, 1};
-static const u16 gUnknown_085B2B7E[] = {0x218, 0x219, 0x21a, 0x21b, 0x21c};
+
+static const u16 sPetalburgGymSlidingDoorMetatiles[] = {
+    METATILE_ID(PetalburgGym, SlidingDoor_Frame0),
+    METATILE_ID(PetalburgGym, SlidingDoor_Frame1),
+    METATILE_ID(PetalburgGym, SlidingDoor_Frame2),
+    METATILE_ID(PetalburgGym, SlidingDoor_Frame3),
+    METATILE_ID(PetalburgGym, SlidingDoor_Frame4),
+};
 
 void PetalburgGymSpecial1(void)
 {
     gUnknown_0203AB5C = 0;
-    gUnknown_0203AB5D = 0;
+    sPetalburgGymSlidingDoorFrameCounter = 0;
     PlaySE(SE_KI_GASYAN);
     CreateTask(Task_PetalburgGym, 8);
 }
 
 static void Task_PetalburgGym(u8 taskId)
 {
-    if (gUnknown_085B2B78[gUnknown_0203AB5D] == gUnknown_0203AB5C)
+    if (gUnknown_085B2B78[sPetalburgGymSlidingDoorFrameCounter] == gUnknown_0203AB5C)
     {
-        PetalburgGymFunc(gSpecialVar_0x8004, gUnknown_085B2B7E[gUnknown_0203AB5D]);
+        PetalburgGymFunc(gSpecialVar_0x8004, sPetalburgGymSlidingDoorMetatiles[sPetalburgGymSlidingDoorFrameCounter]);
         gUnknown_0203AB5C = 0;
-        if ((++gUnknown_0203AB5D) == 5)
+        if ((++sPetalburgGymSlidingDoorFrameCounter) == ARRAY_COUNT(sPetalburgGymSlidingDoorMetatiles))
         {
             DestroyTask(taskId);
             EnableBothScriptContexts();
@@ -831,74 +838,74 @@ static void Task_PetalburgGym(u8 taskId)
     }
 }
 
-static void PetalburgGymFunc(u8 a0, u16 a1)
+static void PetalburgGymFunc(u8 roomNumber, u16 metatileId)
 {
-    u16 x[4];
-    u16 y[4];
+    u16 doorCoordsX[4];
+    u16 doorCoordsY[4];
     u8 i;
     u8 nDoors = 0;
-    switch (a0)
+    switch (roomNumber)
     {
         case 1:
             nDoors = 2;
-            x[0] = 1;
-            x[1] = 7;
-            y[0] = 0x68;
-            y[1] = 0x68;
+            doorCoordsX[0] = 1;
+            doorCoordsX[1] = 7;
+            doorCoordsY[0] = 104;
+            doorCoordsY[1] = 104;
             break;
         case 2:
             nDoors = 2;
-            x[0] = 1;
-            x[1] = 7;
-            y[0] = 0x4e;
-            y[1] = 0x4e;
+            doorCoordsX[0] = 1;
+            doorCoordsX[1] = 7;
+            doorCoordsY[0] = 78;
+            doorCoordsY[1] = 78;
             break;
         case 3:
             nDoors = 2;
-            x[0] = 1;
-            x[1] = 7;
-            y[0] = 0x5b;
-            y[1] = 0x5b;
+            doorCoordsX[0] = 1;
+            doorCoordsX[1] = 7;
+            doorCoordsY[0] = 91;
+            doorCoordsY[1] = 91;
             break;
         case 4:
             nDoors = 1;
-            x[0] = 7;
-            y[0] = 0x27;
+            doorCoordsX[0] = 7;
+            doorCoordsY[0] = 39;
             break;
         case 5:
             nDoors = 2;
-            x[0] = 1;
-            x[1] = 7;
-            y[0] = 0x34;
-            y[1] = 0x34;
+            doorCoordsX[0] = 1;
+            doorCoordsX[1] = 7;
+            doorCoordsY[0] = 52;
+            doorCoordsY[1] = 52;
             break;
         case 6:
             nDoors = 1;
-            x[0] = 1;
-            y[0] = 0x41;
+            doorCoordsX[0] = 1;
+            doorCoordsY[0] = 65;
             break;
         case 7:
             nDoors = 1;
-            x[0] = 7;
-            y[0] = 0xd;
+            doorCoordsX[0] = 7;
+            doorCoordsY[0] = 13;
             break;
         case 8:
             nDoors = 1;
-            x[0] = 1;
-            y[0] = 0x1a;
+            doorCoordsX[0] = 1;
+            doorCoordsY[0] = 26;
             break;
     }
     for (i = 0; i < nDoors; i++)
     {
-        MapGridSetMetatileIdAt(x[i] + 7, y[i] + 7, a1 | METATILE_COLLISION_MASK);
-        MapGridSetMetatileIdAt(x[i] + 7, y[i] + 8, (a1 + 8) | METATILE_COLLISION_MASK);
+        MapGridSetMetatileIdAt(doorCoordsX[i] + 7, doorCoordsY[i] + 7, metatileId | METATILE_COLLISION_MASK);
+        MapGridSetMetatileIdAt(doorCoordsX[i] + 7, doorCoordsY[i] + 8, (metatileId + 8) | METATILE_COLLISION_MASK);
     }
     DrawWholeMapView();
 }
 
 void PetalburgGymSpecial2(void)
 {
-    PetalburgGymFunc(gSpecialVar_0x8004, gUnknown_085B2B7E[4]);
+    PetalburgGymFunc(gSpecialVar_0x8004, sPetalburgGymSlidingDoorMetatiles[4]);
 }
 
 void ShowFieldMessageStringVar4(void)
@@ -1070,6 +1077,7 @@ static void PCTurnOnEffect_0(struct Task *task)
     task->data[3]++;
 }
 
+// enum pc location, 
 static void PCTurnOnEffect_1(s16 flag, s8 dx, s8 dy)
 {
     u16 tileId = 0;
@@ -1077,30 +1085,30 @@ static void PCTurnOnEffect_1(s16 flag, s8 dx, s8 dy)
     {
         if (gSpecialVar_0x8004 == 0)
         {
-            tileId = 0x4;
+            tileId = METATILE_ID(Building, PC_Off);
         }
         else if (gSpecialVar_0x8004 == 1)
         {
-            tileId = 0x25a;
+            tileId = METATILE_ID(BrendansMaysHouse, BrendanPC_Off);
         }
         else if (gSpecialVar_0x8004 == 2)
         {
-            tileId = 0x259;
+            tileId = METATILE_ID(BrendansMaysHouse, MayPC_Off);
         }
     }
     else
     {
         if (gSpecialVar_0x8004 == 0)
         {
-            tileId = 0x5;
+            tileId = METATILE_ID(Building, PC_On);
         }
         else if (gSpecialVar_0x8004 == 1)
         {
-            tileId = 0x27f;
+            tileId = METATILE_ID(BrendansMaysHouse, BrendanPC_On);
         }
         else if (gSpecialVar_0x8004 == 2)
         {
-            tileId = 0x27e;
+            tileId = METATILE_ID(BrendansMaysHouse, MayPC_On);
         }
     }
     MapGridSetMetatileIdAt(gSaveBlock1Ptr->pos.x + dx + 7, gSaveBlock1Ptr->pos.y + dy + 7, tileId | METATILE_COLLISION_MASK);
@@ -1134,15 +1142,15 @@ static void PCTurnOffEffect(void)
     }
     if (gSpecialVar_0x8004 == 0)
     {
-        tileId = 0x4;
+        tileId = METATILE_ID(Building, PC_Off);
     }
     else if (gSpecialVar_0x8004 == 1)
     {
-        tileId = 0x25a;
+        tileId = METATILE_ID(BrendansMaysHouse, BrendanPC_Off);
     }
     else if (gSpecialVar_0x8004 == 2)
     {
-        tileId = 0x259;
+        tileId = METATILE_ID(BrendansMaysHouse, MayPC_Off);
     }
     MapGridSetMetatileIdAt(gSaveBlock1Ptr->pos.x + dx + 7, gSaveBlock1Ptr->pos.y + dy + 7, tileId | METATILE_COLLISION_MASK);
     DrawWholeMapView();
