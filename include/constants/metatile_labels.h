@@ -47,6 +47,34 @@
 #define METATILE_BrendansMaysHouse_MayPC_Off     0x259
 #define METATILE_BrendansMaysHouse_MayPC_On      0x27E
 
+// gTileset_Shop
+#define METATILE_Shop_Laptop1_Normal 0x29D
+#define METATILE_Shop_Laptop2_Normal 0x2A5
+#define METATILE_Shop_Laptop1_Flash 0x258
+#define METATILE_Shop_Laptop2_Flash 0x260
+
+// gTileset_BattleFrontier
+#define METATILE_BattleFrontier_Elevator_Top0 0x329
+#define METATILE_BattleFrontier_Elevator_Top1 0x32A
+#define METATILE_BattleFrontier_Elevator_Top2 0x32B
+
+#define METATILE_BattleFrontier_Elevator_Mid0 0x331
+#define METATILE_BattleFrontier_Elevator_Mid1 0x332
+#define METATILE_BattleFrontier_Elevator_Mid2 0x333
+
+#define METATILE_BattleFrontier_Elevator_Bottom0 0x339
+#define METATILE_BattleFrontier_Elevator_Bottom1 0x33A
+#define METATILE_BattleFrontier_Elevator_Bottom2 0x33B
+
+
+
+
+
+
+
+
+
+
 
 
 
