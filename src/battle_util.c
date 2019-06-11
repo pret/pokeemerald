@@ -3109,7 +3109,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                             gBattlescriptCurrInstr = BattleScript_FlashFireBoost_PPLoss;
 
                         gBattleResources->flags->flags[battler] |= RESOURCE_FLAG_FLASH_FIRE;
-                        effect = 2;
+                        effect = 3;
                     }
                     else
                     {
@@ -3119,7 +3119,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                         else
                             gBattlescriptCurrInstr = BattleScript_FlashFireBoost_PPLoss;
 
-                        effect = 2;
+                        effect = 3;
                     }
                 }
                 break;
