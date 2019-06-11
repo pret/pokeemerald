@@ -101,7 +101,7 @@ static void sub_81395BC(u8 taskId);
 static void sub_8139620(u8 taskId);
 static void sub_8139AF4(u8 taskId);
 static void sub_8139C2C(u16 a1, u8 a2);
-static void sub_8139C80(u8 taskId);
+static void MoveElevatorWindowLights(u8 taskId);
 static void sub_813A2DC(u8 taskId);
 static void sub_813AA60(u16 a0, u16 a1);
 static void sub_813ACE8(u8 a0, u16 a1);
@@ -1185,13 +1185,13 @@ static void LotteryCornerComputerEffect(struct Task *task)
         task->data[3] = 0;
         if (task->data[4] != 0)
         {
-            MapGridSetMetatileIdAt(18, 8, 0xe9d);
-            MapGridSetMetatileIdAt(18, 9, 0xea5);
+            MapGridSetMetatileIdAt(18, 8, METATILE_ID(Shop, Laptop1_Normal) | METATILE_COLLISION_MASK);
+            MapGridSetMetatileIdAt(18, 9, METATILE_ID(Shop, Laptop2_Normal) | METATILE_COLLISION_MASK);
         }
         else
         {
-            MapGridSetMetatileIdAt(18, 8, 0xe58);
-            MapGridSetMetatileIdAt(18, 9, 0xe60);
+            MapGridSetMetatileIdAt(18, 8, METATILE_ID(Shop, Laptop1_Flash) | METATILE_COLLISION_MASK);
+            MapGridSetMetatileIdAt(18, 9, METATILE_ID(Shop, Laptop2_Flash) | METATILE_COLLISION_MASK);
         }
         DrawWholeMapView();
         task->data[4] ^= 1;
@@ -1205,8 +1205,8 @@ static void LotteryCornerComputerEffect(struct Task *task)
 
 void EndLotteryCornerComputerEffect(void)
 {
-    MapGridSetMetatileIdAt(18, 8, 0xe9d);
-    MapGridSetMetatileIdAt(18, 9, 0xea5);
+    MapGridSetMetatileIdAt(18, 8, METATILE_ID(Shop, Laptop1_Normal) | METATILE_COLLISION_MASK);
+    MapGridSetMetatileIdAt(18, 9, METATILE_ID(Shop, Laptop2_Normal) | METATILE_COLLISION_MASK);
     DrawWholeMapView();
 }
 
@@ -1722,17 +1722,42 @@ const u8 *const gElevatorFloorsTable[] = {
     gText_Rooftop
 };
 
-const u16 gUnknown_085B2BF4[][3] =
+static const u16 sElevatorWindowTiles_Ascending[][3] =
 {
-    {0x0329, 0x032a, 0x032b},
-    {0x0331, 0x0332, 0x0333},
-    {0x0339, 0x033a, 0x033b},
+    {
+        METATILE_ID(BattleFrontier, Elevator_Top0),
+        METATILE_ID(BattleFrontier, Elevator_Top1),
+        METATILE_ID(BattleFrontier, Elevator_Top2)
+    },
+    {
+        METATILE_ID(BattleFrontier, Elevator_Mid0),
+        METATILE_ID(BattleFrontier, Elevator_Mid1),
+        METATILE_ID(BattleFrontier, Elevator_Mid2)
+    },
+    {
+        METATILE_ID(BattleFrontier, Elevator_Bottom0),
+        METATILE_ID(BattleFrontier, Elevator_Bottom1),
+        METATILE_ID(BattleFrontier, Elevator_Bottom2)
+    },
 };
-const u16 gUnknown_085B2C06[][3] =
+
+static const u16 sElevatorWindowTiles_Descending[][3] =
 {
-    {0x0329, 0x032b, 0x032a},
-    {0x0331, 0x0333, 0x0332},
-    {0x0339, 0x033b, 0x033a},
+    {
+        METATILE_ID(BattleFrontier, Elevator_Top0),
+        METATILE_ID(BattleFrontier, Elevator_Top2),
+        METATILE_ID(BattleFrontier, Elevator_Top1)
+    },
+    {
+        METATILE_ID(BattleFrontier, Elevator_Mid0),
+        METATILE_ID(BattleFrontier, Elevator_Mid2),
+        METATILE_ID(BattleFrontier, Elevator_Mid1)
+    },
+    {
+        METATILE_ID(BattleFrontier, Elevator_Bottom0),
+        METATILE_ID(BattleFrontier, Elevator_Bottom2),
+        METATILE_ID(BattleFrontier, Elevator_Bottom1)
+    },
 };
 
 void SetDepartmentStoreFloorVar(void)
@@ -1875,21 +1900,21 @@ void sub_8139C10(void)
     RemoveWindow(gUnknown_0203AB5E);
 }
 
-static void sub_8139C2C(u16 a1, u8 a2)
+static void sub_8139C2C(u16 a1, bool8 descending)
 {
     static const u8 gUnknown_085B2C21[] = { 0x03, 0x06, 0x09, 0x0c, 0x0f, 0x12, 0x15, 0x18, 0x1b };
 
-    if (FuncIsActiveTask(sub_8139C80) != TRUE)
+    if (FuncIsActiveTask(MoveElevatorWindowLights) != TRUE)
     {
-        u8 taskId = CreateTask(sub_8139C80, 8);
+        u8 taskId = CreateTask(MoveElevatorWindowLights, 8);
         gTasks[taskId].data[0] = 0;
         gTasks[taskId].data[1] = 0;
-        gTasks[taskId].data[2] = a2;
+        gTasks[taskId].data[2] = descending;
         gTasks[taskId].data[3] = gUnknown_085B2C21[a1];
     }
 }
 
-static void sub_8139C80(u8 taskId)
+static void MoveElevatorWindowLights(u8 taskId)
 {
     u8 x, y;
     s16 *data = gTasks[taskId].data;
@@ -1897,13 +1922,13 @@ static void sub_8139C80(u8 taskId)
     if (data[1] == 6)
     {
         data[0]++;
-        if (data[2] == 0)
+        if (data[2] == FALSE)
         {
             for (y = 0; y < 3; y++)
             {
                 for (x = 0; x < 3; x++)
                 {
-                    MapGridSetMetatileIdAt(x + 8, y + 7, gUnknown_085B2BF4[y][data[0] % 3] | METATILE_COLLISION_MASK);
+                    MapGridSetMetatileIdAt(x + 8, y + 7, sElevatorWindowTiles_Ascending[y][data[0] % 3] | METATILE_COLLISION_MASK);
                 }
             }
         }
@@ -1913,7 +1938,7 @@ static void sub_8139C80(u8 taskId)
             {
                 for (x = 0; x < 3; x++)
                 {
-                    MapGridSetMetatileIdAt(x + 8, y + 7, gUnknown_085B2C06[y][data[0] % 3] | METATILE_COLLISION_MASK);
+                    MapGridSetMetatileIdAt(x + 8, y + 7, sElevatorWindowTiles_Descending[y][data[0] % 3] | METATILE_COLLISION_MASK);
                 }
             }
         }
