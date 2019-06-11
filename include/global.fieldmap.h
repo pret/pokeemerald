@@ -8,6 +8,8 @@
 #define METATILE_COLLISION_SHIFT 10
 #define METATILE_ELEVATION_MASK 0xF000
 
+#define METATILE_ID(tileset, name) (METATILE_##tileset##_##name)
+
 enum
 {
     CONNECTION_SOUTH = 1,
