@@ -50,23 +50,27 @@
 // gTileset_Shop
 #define METATILE_Shop_Laptop1_Normal 0x29D
 #define METATILE_Shop_Laptop2_Normal 0x2A5
-#define METATILE_Shop_Laptop1_Flash 0x258
-#define METATILE_Shop_Laptop2_Flash 0x260
+#define METATILE_Shop_Laptop1_Flash  0x258
+#define METATILE_Shop_Laptop2_Flash  0x260
 
 // gTileset_BattleFrontier
-#define METATILE_BattleFrontier_Elevator_Top0 0x329
-#define METATILE_BattleFrontier_Elevator_Top1 0x32A
-#define METATILE_BattleFrontier_Elevator_Top2 0x32B
-
-#define METATILE_BattleFrontier_Elevator_Mid0 0x331
-#define METATILE_BattleFrontier_Elevator_Mid1 0x332
-#define METATILE_BattleFrontier_Elevator_Mid2 0x333
-
+#define METATILE_BattleFrontier_Elevator_Top0    0x329
+#define METATILE_BattleFrontier_Elevator_Top1    0x32A
+#define METATILE_BattleFrontier_Elevator_Top2    0x32B
+#define METATILE_BattleFrontier_Elevator_Mid0    0x331
+#define METATILE_BattleFrontier_Elevator_Mid1    0x332
+#define METATILE_BattleFrontier_Elevator_Mid2    0x333
 #define METATILE_BattleFrontier_Elevator_Bottom0 0x339
 #define METATILE_BattleFrontier_Elevator_Bottom1 0x33A
 #define METATILE_BattleFrontier_Elevator_Bottom2 0x33B
 
-
+// gTileset_Cave
+#define METATILE_Cave_SealedChamberEntrance_TopLeft     0x22A
+#define METATILE_Cave_SealedChamberEntrance_TopMid      0x22B
+#define METATILE_Cave_SealedChamberEntrance_TopRight    0x22C
+#define METATILE_Cave_SealedChamberEntrance_BottomLeft  0x232
+#define METATILE_Cave_SealedChamberEntrance_BottomMid   0x233
+#define METATILE_Cave_SealedChamberEntrance_BottomRight 0x234
 
 
 
