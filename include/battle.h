@@ -249,6 +249,7 @@ struct AI_ThinkingStruct
     u8 aiLogicId;
     u8 simulatedRNG[4];
     struct AI_SavedBattleMon saved[4];
+    bool8 switchMon; // Because all available moves have no/little effect.
 };
 
 struct UsedMoves

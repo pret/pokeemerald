@@ -54,6 +54,7 @@ static void RecordLastUsedMoveByTarget(void);
 static void BattleAI_DoAIProcessing(void);
 static void AIStackPushVar(const u8 *);
 static bool8 AIStackPop(void);
+static s32 CountUsablePartyMons(u8 battlerId);
 
 static void BattleAICmd_if_random_less_than(void);
 static void BattleAICmd_if_random_greater_than(void);
@@ -447,6 +448,28 @@ static u8 ChooseMoveOrAction_Singles(void)
         return AI_CHOICE_FLEE;
     if (AI_THINKING_STRUCT->aiAction & AI_ACTION_WATCH)
         return AI_CHOICE_WATCH;
+
+    // Consider switching if all moves are worthless to use.
+    if (AI_THINKING_STRUCT->aiFlags & (AI_SCRIPT_CHECK_VIABILITY | AI_SCRIPT_CHECK_BAD_MOVE | AI_SCRIPT_TRY_TO_FAINT | AI_SCRIPT_PREFER_BATON_PASS)
+        && CountUsablePartyMons(sBattler_AI) >= 1
+        && gBattleMons[sBattler_AI].hp >= gBattleMons[sBattler_AI].maxHP / 2
+        && !(gBattleTypeFlags & BATTLE_TYPE_PALACE))
+    {
+        s32 cap = AI_THINKING_STRUCT->aiFlags & (AI_SCRIPT_CHECK_VIABILITY) ? 95 : 93;
+
+        for (i = 0; i < MAX_MON_MOVES; i++)
+        {
+            if (AI_THINKING_STRUCT->score[i] > cap)
+                break;
+        }
+
+        gActiveBattler = sBattler_AI;
+        if (i == MAX_MON_MOVES && GetMostSuitableMonToSwitchInto() != PARTY_SIZE)
+        {
+            AI_THINKING_STRUCT->switchMon = TRUE;
+            return AI_CHOICE_SWITCH;
+        }
+    }
 
     numOfBestMoves = 1;
     currentMoveArray[0] = AI_THINKING_STRUCT->score[0];
@@ -1422,19 +1445,10 @@ static void BattleAICmd_nullsub_2B(void)
 {
 }
 
-static void BattleAICmd_count_usable_party_mons(void)
+static s32 CountUsablePartyMons(u8 battlerId)
 {
-    u8 battlerId;
-    u8 battlerOnField1, battlerOnField2;
+    s32 battlerOnField1, battlerOnField2, i, ret;
     struct Pokemon *party;
-    s32 i;
-
-    AI_THINKING_STRUCT->funcResult = 0;
-
-    if (gAIScriptPtr[1] == AI_USER)
-        battlerId = sBattler_AI;
-    else
-        battlerId = gBattlerTarget;
 
     if (GetBattlerSide(battlerId) == B_SIDE_PLAYER)
         party = gPlayerParty;
@@ -1443,10 +1457,8 @@ static void BattleAICmd_count_usable_party_mons(void)
 
     if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
     {
-        u32 position;
         battlerOnField1 = gBattlerPartyIndexes[battlerId];
-        position = GetBattlerPosition(battlerId) ^ BIT_FLANK;
-        battlerOnField2 = gBattlerPartyIndexes[GetBattlerAtPosition(position)];
+        battlerOnField2 = gBattlerPartyIndexes[GetBattlerAtPosition(GetBattlerPosition(battlerId) ^ BIT_FLANK)];
     }
     else // In singles there's only one battlerId by side.
     {
@@ -1454,6 +1466,7 @@ static void BattleAICmd_count_usable_party_mons(void)
         battlerOnField2 = gBattlerPartyIndexes[battlerId];
     }
 
+    ret = 0;
     for (i = 0; i < PARTY_SIZE; i++)
     {
         if (i != battlerOnField1 && i != battlerOnField2
@@ -1461,10 +1474,16 @@ static void BattleAICmd_count_usable_party_mons(void)
          && GetMonData(&party[i], MON_DATA_SPECIES2) != SPECIES_NONE
          && GetMonData(&party[i], MON_DATA_SPECIES2) != SPECIES_EGG)
         {
-            AI_THINKING_STRUCT->funcResult++;
+            ret++;
         }
     }
 
+    return ret;
+}
+
+static void BattleAICmd_count_usable_party_mons(void)
+{
+    AI_THINKING_STRUCT->funcResult = CountUsablePartyMons(BattleAI_GetWantedBattler(gAIScriptPtr[1]));
     gAIScriptPtr += 2;
 }
 

@@ -37,6 +37,21 @@ void GetAIPartyIndexes(u32 battlerId, s32 *firstId, s32 *lastId)
     }
 }
 
+static bool8 ShouldSwitchIfAllBadMoves(void)
+{
+    if (gBattleResources->ai->switchMon)
+    {
+        gBattleResources->ai->switchMon = 0;
+        *(gBattleStruct->AI_monToSwitchIntoId + gActiveBattler) = PARTY_SIZE;
+        BtlController_EmitTwoReturnValues(1, B_ACTION_SWITCH, 0);
+        return TRUE;
+    }
+    else
+    {
+        return FALSE;
+    }
+}
+
 static bool8 ShouldSwitchIfPerishSong(void)
 {
     if (gStatuses3[gActiveBattler] & STATUS3_PERISH_SONG
@@ -474,6 +489,8 @@ static bool8 ShouldSwitch(void)
 
     if (availableToSwitch == 0)
         return FALSE;
+    if (ShouldSwitchIfAllBadMoves())
+        return TRUE;
     if (ShouldSwitchIfPerishSong())
         return TRUE;
     if (ShouldSwitchIfWonderGuard())

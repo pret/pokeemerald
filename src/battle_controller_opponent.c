@@ -1551,6 +1551,9 @@ static void OpponentHandleChooseMove(void)
             case AI_CHOICE_FLEE:
                 BtlController_EmitTwoReturnValues(1, B_ACTION_RUN, 0);
                 break;
+            case AI_CHOICE_SWITCH:
+                BtlController_EmitTwoReturnValues(1, 10, 0xFFFF);
+                break;
             case 6:
                 BtlController_EmitTwoReturnValues(1, 15, gBattlerTarget);
                 break;
