@@ -4,9 +4,9 @@ InsideOfTruck_MapScripts:: @ 823BEDA
 	.byte 0
 
 InsideOfTruck_MapScript1_23BEE5: @ 823BEE5
-	setmetatile 4, 1, 520, 0
-	setmetatile 4, 2, 528, 0
-	setmetatile 4, 3, 536, 0
+	setmetatile 4, 1, METATILE_InsideOfTruck_ExitLight_Top, 0
+	setmetatile 4, 2, METATILE_InsideOfTruck_ExitLight_Mid, 0
+	setmetatile 4, 3, METATILE_InsideOfTruck_ExitLight_Bottom, 0
 	end
 
 InsideOfTruck_MapScript1_23BF01: @ 823BF01

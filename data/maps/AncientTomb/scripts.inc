@@ -29,12 +29,12 @@ AncientTomb_MapScript1_238FF2: @ 8238FF2
 	end
 
 AncientTomb_EventScript_238FFC:: @ 8238FFC
-	setmetatile 7, 19, 553, 1
-	setmetatile 8, 19, 553, 1
-	setmetatile 9, 19, 553, 1
-	setmetatile 7, 20, 565, 1
-	setmetatile 8, 20, 565, 1
-	setmetatile 9, 20, 565, 1
+	setmetatile 7, 19, METATILE_Cave_EntranceCover, 1
+	setmetatile 8, 19, METATILE_Cave_EntranceCover, 1
+	setmetatile 9, 19, METATILE_Cave_EntranceCover, 1
+	setmetatile 7, 20, METATILE_Cave_SealedChamberBraille_Mid, 1
+	setmetatile 8, 20, METATILE_Cave_SealedChamberBraille_Mid, 1
+	setmetatile 9, 20, METATILE_Cave_SealedChamberBraille_Mid, 1
 	return
 
 AncientTomb_EventScript_239033:: @ 8239033
