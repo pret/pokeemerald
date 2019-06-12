@@ -11,8 +11,8 @@ LittlerootTown_BrendansHouse_1F_MapScript1_1F7765: @ 81F7765
 	end
 
 LittlerootTown_BrendansHouse_1F_EventScript_1F777A:: @ 81F777A
-	setmetatile 5, 4, 624, 1
-	setmetatile 5, 2, 616, 1
+	setmetatile 5, 4, METATILE_BrendansMaysHouse_MovingBox_Open, 1
+	setmetatile 5, 2, METATILE_BrendansMaysHouse_MovingBox_Closed, 1
 	return
 
 LittlerootTown_BrendansHouse_1F_EventScript_1F778D:: @ 81F778D
@@ -22,7 +22,7 @@ LittlerootTown_BrendansHouse_1F_EventScript_1F778D:: @ 81F778D
 	return
 
 LittlerootTown_BrendansHouse_1F_EventScript_1F779A:: @ 81F779A
-	setmetatile 3, 7, 659, 1
+	setmetatile 3, 7, METATILE_BrendansMaysHouse_BookOnTable, 1
 	return
 
 LittlerootTown_BrendansHouse_1F_MapScript1_1F77A4: @ 81F77A4

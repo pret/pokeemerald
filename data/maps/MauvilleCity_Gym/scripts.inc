@@ -17,32 +17,32 @@ MauvilleCity_Gym_EventScript_20DDBA:: @ 820DDBA
 	end
 
 MauvilleCity_Gym_EventScript_20DDC4:: @ 820DDC4
-	setmetatile 3, 11, 577, 1
-	setmetatile 3, 12, 585, 1
-	setmetatile 3, 13, 592, 1
-	setmetatile 4, 10, 546, 0
-	setmetatile 5, 10, 547, 0
-	setmetatile 4, 11, 554, 1
-	setmetatile 5, 11, 555, 1
-	setmetatile 7, 10, 546, 0
-	setmetatile 8, 10, 547, 0
-	setmetatile 7, 11, 554, 1
-	setmetatile 8, 11, 555, 1
-	setmetatile 4, 13, 560, 0
-	setmetatile 5, 13, 561, 0
-	setmetatile 4, 14, 568, 0
-	setmetatile 5, 14, 569, 0
-	setmetatile 1, 10, 560, 0
-	setmetatile 2, 10, 561, 0
-	setmetatile 1, 11, 568, 0
-	setmetatile 2, 11, 569, 0
-	setmetatile 6, 8, 578, 1
-	setmetatile 6, 9, 538, 0
-	setmetatile 6, 10, 593, 0
-	setmetatile 4, 6, 560, 0
-	setmetatile 5, 6, 561, 0
-	setmetatile 4, 7, 568, 0
-	setmetatile 5, 7, 569, 0
+	setmetatile 3, 11, METATILE_MauvilleGym_RedBeamV1_On, 1
+	setmetatile 3, 12, METATILE_MauvilleGym_RedBeamV2_On, 1
+	setmetatile 3, 13, METATILE_MauvilleGym_PoleTop_On, 1
+	setmetatile 4, 10, METATILE_MauvilleGym_RedBeamH1_On, 0
+	setmetatile 5, 10, METATILE_MauvilleGym_RedBeamH2_On, 0
+	setmetatile 4, 11, METATILE_MauvilleGym_RedBeamH3_On, 1
+	setmetatile 5, 11, METATILE_MauvilleGym_RedBeamH4_On, 1
+	setmetatile 7, 10, METATILE_MauvilleGym_RedBeamH1_On, 0
+	setmetatile 8, 10, METATILE_MauvilleGym_RedBeamH2_On, 0
+	setmetatile 7, 11, METATILE_MauvilleGym_RedBeamH3_On, 1
+	setmetatile 8, 11, METATILE_MauvilleGym_RedBeamH4_On, 1
+	setmetatile 4, 13, METATILE_MauvilleGym_GreenBeamH1_Off, 0
+	setmetatile 5, 13, METATILE_MauvilleGym_GreenBeamH2_Off, 0
+	setmetatile 4, 14, METATILE_MauvilleGym_GreenBeamH3_Off, 0
+	setmetatile 5, 14, METATILE_MauvilleGym_GreenBeamH4_Off, 0
+	setmetatile 1, 10, METATILE_MauvilleGym_GreenBeamH1_Off, 0
+	setmetatile 2, 10, METATILE_MauvilleGym_GreenBeamH2_Off, 0
+	setmetatile 1, 11, METATILE_MauvilleGym_GreenBeamH3_Off, 0
+	setmetatile 2, 11, METATILE_MauvilleGym_GreenBeamH4_Off, 0
+	setmetatile 6, 8, METATILE_MauvilleGym_PoleBottom_On, 1
+	setmetatile 6, 9, METATILE_MauvilleGym_FloorTile, 0
+	setmetatile 6, 10, METATILE_MauvilleGym_PoleTop_Off, 0
+	setmetatile 4, 6, METATILE_MauvilleGym_GreenBeamH1_Off, 0
+	setmetatile 5, 6, METATILE_MauvilleGym_GreenBeamH2_Off, 0
+	setmetatile 4, 7, METATILE_MauvilleGym_GreenBeamH3_Off, 0
+	setmetatile 5, 7, METATILE_MauvilleGym_GreenBeamH4_Off, 0
 	end
 
 MauvilleCity_Gym_EventScript_20DEAF:: @ 820DEAF

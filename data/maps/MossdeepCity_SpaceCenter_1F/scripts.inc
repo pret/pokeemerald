@@ -44,7 +44,7 @@ MossdeepCity_SpaceCenter_1F_MapScript1_222FC2: @ 8222FC2
 	end
 
 MossdeepCity_SpaceCenter_1F_EventScript_222FCE:: @ 8222FCE
-	setmetatile 2, 5, 996, 1
+	setmetatile 2, 5, METATILE_Facility_DataPad, 1
 	return
 
 MossdeepCity_SpaceCenter_1F_EventScript_222FD8:: @ 8222FD8
