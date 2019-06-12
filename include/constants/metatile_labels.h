@@ -2,10 +2,19 @@
 #define GUARD_METATILE_LABELS_H
 
 // gTileset_General
-#define METATILE_General_MuddySlope_Frame0 0x0E8
-#define METATILE_General_MuddySlope_Frame1 0x0E9
-#define METATILE_General_MuddySlope_Frame2 0x0EA
-#define METATILE_General_MuddySlope_Frame3 0x0EB
+#define METATILE_General_MuddySlope_Frame0   0x0E8
+#define METATILE_General_MuddySlope_Frame1   0x0E9
+#define METATILE_General_MuddySlope_Frame2   0x0EA
+#define METATILE_General_MuddySlope_Frame3   0x0EB
+#define METATILE_General_Grass               0x001
+#define METATILE_General_TallGrass           0x00D
+#define METATILE_General_LongGrass           0x015
+#define METATILE_General_TallGrass_TreeUp    0x025
+#define METATILE_General_Grass_TreeUp        0x00E
+#define METATILE_General_TallGrass_TreeLeft  0x1C6
+#define METATILE_General_TallGrass_TreeRight 0x1C7
+#define METATILE_General_Grass_TreeLeft      0x1CE
+#define METATILE_General_Grass_TreeRight     0x1CF
 
 // gTileset_Building
 #define METATILE_Building_PC_Off 0x004
@@ -101,10 +110,17 @@
 #define METATILE_Pacifidlog_SubmergedLogs_Vertical1       0x262
 
 // gTileset_Fortree
-#define METATILE_Fortree_BridgeOverGrass_Raised  0x24E
-#define METATILE_Fortree_BridgeOverGrass_Lowered 0x24F
-#define METATILE_Fortree_BridgeOverTrees_Raised  0x256
-#define METATILE_Fortree_BridgeOverTrees_Lowered 0x257
+#define METATILE_Fortree_LongGrass_Root                   0x208
+#define METATILE_Fortree_BridgeOverGrass_Raised           0x24E
+#define METATILE_Fortree_BridgeOverGrass_Lowered          0x24F
+#define METATILE_Fortree_BridgeOverTrees_Raised           0x256
+#define METATILE_Fortree_BridgeOverTrees_Lowered          0x257
+#define METATILE_Fortree_SecretBase_LongGrass_TopLeft     0x279
+#define METATILE_Fortree_SecretBase_LongGrass_TopMid      0x27A
+#define METATILE_Fortree_SecretBase_LongGrass_TopRight    0x27B
+#define METATILE_Fortree_SecretBase_LongGrass_BottomLeft  0x281
+#define METATILE_Fortree_SecretBase_LongGrass_BottomMid   0x282
+#define METATILE_Fortree_SecretBase_LongGrass_BottomRight 0x283
 
 // gTileset_SootopolisGym
 #define METATILE_SootopolisGym_Ice_Cracked 0x20E
@@ -113,10 +129,11 @@
 // gTileset_Fallarbor
 #define METATILE_Fallarbor_AshGrass    0x20A
 #define METATILE_Fallarbor_NormalGrass 0x212
+#define METATILE_Fallarbor_AshField    0x218
 
-
-
-
-
+// gTileset_Lavaridge
+#define METATILE_Lavaridge_NormalGrass 0x206
+#define METATILE_Lavaridge_AshGrass    0x207
+#define METATILE_Lavaridge_LavaField   0x271
 
 #endif // GUARD_METATILE_LABELS_H

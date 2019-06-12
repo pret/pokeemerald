@@ -623,7 +623,7 @@ static void AshGrassPerStepCallback(u8 taskId)
             if (MapGridGetMetatileIdAt(x, y) == METATILE_ID(Fallarbor, AshGrass))
                 StartAshFieldEffect(x, y, METATILE_ID(Fallarbor, NormalGrass), 4);
             else
-                StartAshFieldEffect(x, y, 0x206, 4);// unsure what metatile this refers to
+                StartAshFieldEffect(x, y, METATILE_ID(Lavaridge, NormalGrass), 4);
 
             if (CheckBagHasItem(ITEM_SOOT_SACK, 1))
             {
@@ -637,7 +637,7 @@ static void AshGrassPerStepCallback(u8 taskId)
 
 static void SetCrackedFloorHoleMetatile(s16 x, s16 y)
 {
-    MapGridSetMetatileIdAt(x, y, MapGridGetMetatileIdAt(x, y) == 0x22f ? 0x206 : 0x237);// again unsure what these are referring to
+    MapGridSetMetatileIdAt(x, y, MapGridGetMetatileIdAt(x, y) == 0x22f ? 0x206 : 0x237);// unsure what these are referring to
     CurrentMapDrawMetatileAt(x, y);
 }
 
