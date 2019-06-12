@@ -25,16 +25,16 @@ SootopolisCity_Gym_1F_EventScript_224E73:: @ 8224E73
 	goto_if_lt SootopolisCity_Gym_1F_EventScript_224EB8
 	compare VAR_ICE_STEP_COUNT, 67
 	goto_if_lt SootopolisCity_Gym_1F_EventScript_224EA6
-	setmetatile 8, 4, 519, 0
-	setmetatile 8, 5, 519, 0
+	setmetatile 8, 4, METATILE_SootopolisGym_Stairs, 0
+	setmetatile 8, 5, METATILE_SootopolisGym_Stairs, 0
 
 SootopolisCity_Gym_1F_EventScript_224EA6:: @ 8224EA6
-	setmetatile 8, 10, 519, 0
-	setmetatile 8, 11, 519, 0
+	setmetatile 8, 10, METATILE_SootopolisGym_Stairs, 0
+	setmetatile 8, 11, METATILE_SootopolisGym_Stairs, 0
 
 SootopolisCity_Gym_1F_EventScript_224EB8:: @ 8224EB8
-	setmetatile 8, 15, 519, 0
-	setmetatile 8, 16, 519, 0
+	setmetatile 8, 15, METATILE_SootopolisGym_Stairs, 0
+	setmetatile 8, 16, METATILE_SootopolisGym_Stairs, 0
 
 SootopolisCity_Gym_1F_EventScript_224ECA:: @ 8224ECA
 	return
