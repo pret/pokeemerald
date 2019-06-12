@@ -72,9 +72,33 @@
 #define METATILE_Cave_SealedChamberEntrance_BottomMid   0x233
 #define METATILE_Cave_SealedChamberEntrance_BottomRight 0x234
 
+// gTileset_InsideOfTruck
+#define METATILE_InsideOfTruck_ExitLight_Top          0x208
+#define METATILE_InsideOfTruck_ExitLight_Mid          0x210
+#define METATILE_InsideOfTruck_ExitLight_Bottom       0x218
+#define METATILE_InsideOfTruck_DoorClosedFloor_Top    0x20D
+#define METATILE_InsideOfTruck_DoorClosedFloor_Mid    0x215
+#define METATILE_InsideOfTruck_DoorClosedFloor_Bottom 0x21D
 
+// gTileset_Pacifidlog
+#define METATILE_Pacifidlog_FloatingLogs_Horizontal0      0x250
+#define METATILE_Pacifidlog_FloatingLogs_Horizontal1      0x251
+#define METATILE_Pacifidlog_HalfSubmergedLogs_Horizontal0 0x252
+#define METATILE_Pacifidlog_HalfSubmergedLogs_Horizontal1 0x253
+#define METATILE_Pacifidlog_SubmergedLogs_Horizontal0     0x254
+#define METATILE_Pacifidlog_SubmergedLogs_Horizontal1     0x255
+#define METATILE_Pacifidlog_FloatingLogs_Vertical0        0x258
+#define METATILE_Pacifidlog_FloatingLogs_Vertical1        0x260
+#define METATILE_Pacifidlog_HalfSubmergedLogs_Vertical0   0x259
+#define METATILE_Pacifidlog_HalfSubmergedLogs_Vertical1   0x261
+#define METATILE_Pacifidlog_SubmergedLogs_Vertical0       0x25A
+#define METATILE_Pacifidlog_SubmergedLogs_Vertical1       0x262
 
-
+// gTileset_Fortree
+#define METATILE_Fortree_BridgeOverGrass_Raised  0x24E
+#define METATILE_Fortree_BridgeOverGrass_Lowered 0x24F
+#define METATILE_Fortree_BridgeOverTrees_Raised  0x256
+#define METATILE_Fortree_BridgeOverTrees_Lowered 0x257
 
 
 

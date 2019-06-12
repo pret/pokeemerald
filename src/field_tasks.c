@@ -19,6 +19,7 @@
 #include "constants/items.h"
 #include "constants/songs.h"
 #include "constants/vars.h"
+#include "constants/metatile_labels.h"
 
 struct PacifidlogMetatileOffsets
 {
@@ -50,26 +51,26 @@ static const TaskFunc sPerStepCallbacks[] =
 // they are in pairs but declared as 1D array
 static const struct PacifidlogMetatileOffsets sHalfSubmergedBridgeMetatileOffsets[] =
 {
-    {  0,  0, 0x259}, {  0,  1, 0x261},
-    {  0, -1, 0x259}, {  0,  0, 0x261},
-    {  0,  0, 0x252}, {  1,  0, 0x253},
-    { -1,  0, 0x252}, {  0,  0, 0x253}
+    { 0,  0, METATILE_ID(Pacifidlog, HalfSubmergedLogs_Vertical0)}, {0, 1, METATILE_ID(Pacifidlog, HalfSubmergedLogs_Vertical1)},
+    { 0, -1, METATILE_ID(Pacifidlog, HalfSubmergedLogs_Vertical0)}, {0, 0, METATILE_ID(Pacifidlog, HalfSubmergedLogs_Vertical1)},
+    { 0,  0, METATILE_ID(Pacifidlog, HalfSubmergedLogs_Horizontal0)}, {1, 0, METATILE_ID(Pacifidlog, HalfSubmergedLogs_Horizontal1)},
+    {-1,  0, METATILE_ID(Pacifidlog, HalfSubmergedLogs_Horizontal0)}, {0, 0, METATILE_ID(Pacifidlog, HalfSubmergedLogs_Horizontal1)}
 };
 
 static const struct PacifidlogMetatileOffsets sFullySubmergedBridgeMetatileOffsets[] =
 {
-    {  0,  0, 0x25A}, {  0,  1, 0x262},
-    {  0, -1, 0x25A}, {  0,  0, 0x262},
-    {  0,  0, 0x254}, {  1,  0, 0x255},
-    { -1,  0, 0x254}, {  0,  0, 0x255}
+    { 0,  0, METATILE_ID(Pacifidlog, SubmergedLogs_Vertical0)}, {0, 1, METATILE_ID(Pacifidlog, SubmergedLogs_Vertical1)},
+    { 0, -1, METATILE_ID(Pacifidlog, SubmergedLogs_Vertical0)}, {0, 0, METATILE_ID(Pacifidlog, SubmergedLogs_Vertical1)},
+    { 0,  0, METATILE_ID(Pacifidlog, SubmergedLogs_Horizontal0)}, {1, 0, METATILE_ID(Pacifidlog, SubmergedLogs_Horizontal1)},
+    {-1,  0, METATILE_ID(Pacifidlog, SubmergedLogs_Horizontal0)}, {0, 0, METATILE_ID(Pacifidlog, SubmergedLogs_Horizontal1)}
 };
 
 static const struct PacifidlogMetatileOffsets sFloatingBridgeMetatileOffsets[] =
 {
-    {  0,  0, 0x258}, {  0,  1, 0x260},
-    {  0, -1, 0x258}, {  0,  0, 0x260},
-    {  0,  0, 0x250}, {  1,  0, 0x251},
-    { -1,  0, 0x250}, {  0,  0, 0x251}
+    { 0,  0, METATILE_ID(Pacifidlog, FloatingLogs_Vertical0)}, {0, 1, METATILE_ID(Pacifidlog, FloatingLogs_Vertical1)},
+    { 0, -1, METATILE_ID(Pacifidlog, FloatingLogs_Vertical0)}, {0, 0, METATILE_ID(Pacifidlog, FloatingLogs_Vertical1)},
+    { 0,  0, METATILE_ID(Pacifidlog, FloatingLogs_Horizontal0)}, {1, 0, METATILE_ID(Pacifidlog, FloatingLogs_Horizontal1)},
+    {-1,  0, METATILE_ID(Pacifidlog, FloatingLogs_Horizontal0)}, {0, 0, METATILE_ID(Pacifidlog, FloatingLogs_Horizontal1)}
 };
 
 // Each element corresponds to a y coordinate row in the sootopolis gym 1F map.
@@ -374,11 +375,11 @@ static void SetLoweredForetreeBridgeMetatile(s16 x, s16 y)
     {
         switch (MapGridGetMetatileIdAt(x, y))
         {
-            case 0x24e:
-                MapGridSetMetatileIdAt(x, y, 0x24f);
+            case METATILE_ID(Fortree, BridgeOverGrass_Raised):
+                MapGridSetMetatileIdAt(x, y, METATILE_ID(Fortree, BridgeOverGrass_Lowered));
                 break;
-            case 0x256:
-                MapGridSetMetatileIdAt(x, y, 0x257);
+            case METATILE_ID(Fortree, BridgeOverTrees_Raised):
+                MapGridSetMetatileIdAt(x, y, METATILE_ID(Fortree, BridgeOverTrees_Lowered));
                 break;
         }
     }
@@ -391,11 +392,11 @@ static void SetNormalFortreeBridgeMetatile(s16 x, s16 y)
     {
         switch (MapGridGetMetatileIdAt(x, y))
         {
-            case 0x24f:
-                MapGridSetMetatileIdAt(x, y, 0x24e);
+            case METATILE_ID(Fortree, BridgeOverGrass_Lowered):
+                MapGridSetMetatileIdAt(x, y, METATILE_ID(Fortree, BridgeOverGrass_Raised));
                 break;
-            case 0x257:
-                MapGridSetMetatileIdAt(x, y, 0x256);
+            case METATILE_ID(Fortree, BridgeOverTrees_Lowered):
+                MapGridSetMetatileIdAt(x, y, METATILE_ID(Fortree, BridgeOverTrees_Raised));
                 break;
         }
     }
