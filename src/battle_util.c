@@ -5128,7 +5128,7 @@ static u16 CalcMoveBasePower(u16 move, u8 battlerAtk, u8 battlerDef)
             basePower *= 2;
         break;
     case EFFECT_ASSURANCE:
-        if (gSpecialStatuses[battlerDef].physicalDmg != 0 || gSpecialStatuses[battlerDef].specialDmg != 0)
+        if (gProtectStructs[battlerAtk].physicalDmg != 0 || gProtectStructs[battlerAtk].specialDmg != 0)
             basePower *= 2;
         break;
     case EFFECT_TRUMP_CARD:
