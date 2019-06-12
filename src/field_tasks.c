@@ -104,7 +104,12 @@ static const u16 sSootopolisGymIceRowVars[] =
     0
 };
 
-static const u16 sMuddySlopeMetatiles[] = {0xe8, 0xeb, 0xea, 0xe9};
+static const u16 sMuddySlopeMetatiles[] = {
+    METATILE_ID(General, MuddySlope_Frame0),
+    METATILE_ID(General, MuddySlope_Frame3),
+    METATILE_ID(General, MuddySlope_Frame2),
+    METATILE_ID(General, MuddySlope_Frame1)
+};
 
 static void Task_RunPerStepCallback(u8 taskId)
 {
@@ -524,7 +529,7 @@ void SetSootopolisGymCrackedIceMetatiles(void)
         for (y = 0; y < height; y++)
         {
             if (IsIcePuzzleCoordVisited(x, y) == TRUE)
-                MapGridSetMetatileIdAt(x + 7, y + 7, 0x20e);
+                MapGridSetMetatileIdAt(x + 7, y + 7, METATILE_ID(SootopolisGym, Ice_Cracked));
         }
     }
 }
@@ -579,7 +584,7 @@ static void SootopolisGymIcePerStepCallback(u8 taskId)
                 x = data[4];
                 y = data[5];
                 PlaySE(SE_RU_BARI);
-                MapGridSetMetatileIdAt(x, y, 0x20e);
+                MapGridSetMetatileIdAt(x, y, METATILE_ID(SootopolisGym, Ice_Cracked));
                 CurrentMapDrawMetatileAt(x, y);
                 MarkIcePuzzleCoordVisited(x - 7, y - 7);
                 data[1] = 1;
@@ -595,7 +600,7 @@ static void SootopolisGymIcePerStepCallback(u8 taskId)
                 x = data[4];
                 y = data[5];
                 PlaySE(SE_RU_GASYAN);
-                MapGridSetMetatileIdAt(x, y, 0x206);
+                MapGridSetMetatileIdAt(x, y, METATILE_ID(SootopolisGym, Ice_Broken));
                 CurrentMapDrawMetatileAt(x, y);
                 data[1] = 1;
             }
@@ -615,10 +620,10 @@ static void AshGrassPerStepCallback(u8 taskId)
         data[2] = y;
         if (MetatileBehavior_IsAshGrass(MapGridGetMetatileBehaviorAt(x, y)))
         {
-            if (MapGridGetMetatileIdAt(x, y) == 0x20a)
-                StartAshFieldEffect(x, y, 0x212, 4);
+            if (MapGridGetMetatileIdAt(x, y) == METATILE_ID(Fallarbor, AshGrass))
+                StartAshFieldEffect(x, y, METATILE_ID(Fallarbor, NormalGrass), 4);
             else
-                StartAshFieldEffect(x, y, 0x206, 4);
+                StartAshFieldEffect(x, y, 0x206, 4);// unsure what metatile this refers to
 
             if (CheckBagHasItem(ITEM_SOOT_SACK, 1))
             {
@@ -632,7 +637,7 @@ static void AshGrassPerStepCallback(u8 taskId)
 
 static void SetCrackedFloorHoleMetatile(s16 x, s16 y)
 {
-    MapGridSetMetatileIdAt(x, y, MapGridGetMetatileIdAt(x, y) == 0x22f ? 0x206 : 0x237);
+    MapGridSetMetatileIdAt(x, y, MapGridGetMetatileIdAt(x, y) == 0x22f ? 0x206 : 0x237);// again unsure what these are referring to
     CurrentMapDrawMetatileAt(x, y);
 }
 
@@ -687,7 +692,7 @@ static void SetMuddySlopeMetatile(s16 *data, s16 x, s16 y)
 
     MapGridSetMetatileIdAt(x, y, tile);
     CurrentMapDrawMetatileAt(x, y);
-    MapGridSetMetatileIdAt(x, y, 0xe8);
+    MapGridSetMetatileIdAt(x, y, METATILE_ID(General, MuddySlope_Frame0));
 }
 
 static void Task_MuddySlope(u8 taskId)
