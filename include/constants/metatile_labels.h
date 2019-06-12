@@ -1,6 +1,12 @@
 #ifndef GUARD_METATILE_LABELS_H
 #define GUARD_METATILE_LABELS_H
 
+// gTileset_General
+#define METATILE_General_MuddySlope_Frame0 0x0E8
+#define METATILE_General_MuddySlope_Frame1 0x0E9
+#define METATILE_General_MuddySlope_Frame2 0x0EA
+#define METATILE_General_MuddySlope_Frame3 0x0EB
+
 // gTileset_Building
 #define METATILE_Building_PC_Off 0x004
 #define METATILE_Building_PC_On  0x005
@@ -100,6 +106,13 @@
 #define METATILE_Fortree_BridgeOverTrees_Raised  0x256
 #define METATILE_Fortree_BridgeOverTrees_Lowered 0x257
 
+// gTileset_SootopolisGym
+#define METATILE_SootopolisGym_Ice_Cracked 0x20E
+#define METATILE_SootopolisGym_Ice_Broken  0x206
+
+// gTileset_Fallarbor
+#define METATILE_Fallarbor_AshGrass    0x20A
+#define METATILE_Fallarbor_NormalGrass 0x212
 
 
 
