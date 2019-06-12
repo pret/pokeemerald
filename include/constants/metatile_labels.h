@@ -15,6 +15,7 @@
 #define METATILE_General_TallGrass_TreeRight 0x1C7
 #define METATILE_General_Grass_TreeLeft      0x1CE
 #define METATILE_General_Grass_TreeRight     0x1CF
+#define METATILE_General_SandPit_Center      0x121
 
 // gTileset_Building
 #define METATILE_Building_PC_Off 0x004
@@ -135,5 +136,58 @@
 #define METATILE_Lavaridge_NormalGrass 0x206
 #define METATILE_Lavaridge_AshGrass    0x207
 #define METATILE_Lavaridge_LavaField   0x271
+
+// gTileset_PokemonCenter
+#define METATILE_PokemonCenter_Elevator1F_Tile0_Frame0 0x280
+#define METATILE_PokemonCenter_Elevator1F_Tile0_Frame1 0x282
+#define METATILE_PokemonCenter_Elevator1F_Tile0_Frame2 0x284
+#define METATILE_PokemonCenter_Elevator1F_Tile1_Frame0 0x281
+#define METATILE_PokemonCenter_Elevator1F_Tile1_Frame1 0x283
+#define METATILE_PokemonCenter_Elevator1F_Tile1_Frame2 0x285
+#define METATILE_PokemonCenter_Elevator1F_Tile2_Frame0 0x288
+#define METATILE_PokemonCenter_Elevator1F_Tile2_Frame1 0x28A
+#define METATILE_PokemonCenter_Elevator1F_Tile2_Frame2 0x28C
+#define METATILE_PokemonCenter_Elevator1F_Tile3_Frame0 0x289
+#define METATILE_PokemonCenter_Elevator1F_Tile3_Frame1 0x28B
+#define METATILE_PokemonCenter_Elevator1F_Tile3_Frame2 0x28D
+#define METATILE_PokemonCenter_Elevator2F_Tile0_Frame0 0x2A0
+#define METATILE_PokemonCenter_Elevator2F_Tile0_Frame1 0x2A2
+#define METATILE_PokemonCenter_Elevator2F_Tile0_Frame2 0x2A4
+#define METATILE_PokemonCenter_Elevator2F_Tile1_Frame0 0x2A1
+#define METATILE_PokemonCenter_Elevator2F_Tile1_Frame1 0x2A3
+#define METATILE_PokemonCenter_Elevator2F_Tile1_Frame2 0x2A5
+#define METATILE_PokemonCenter_Elevator2F_Tile2_Frame0 0x2A8
+#define METATILE_PokemonCenter_Elevator2F_Tile2_Frame1 0x2AA
+#define METATILE_PokemonCenter_Elevator2F_Tile2_Frame2 0x2AC
+
+// gTileset_Mauville
+#define METATILE_Mauville_DeepSand_Center 0x251
+#define METATILE_Mauville_DeepSand_BottomMid 0x259
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 #endif // GUARD_METATILE_LABELS_H
