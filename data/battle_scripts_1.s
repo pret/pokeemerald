@@ -6257,6 +6257,7 @@ BattleScript_CastformChange::
 	end3
 
 BattleScript_82DB4AF::
+	copybyte gBattlerAbility, sBATTLER
 	call BattleScript_AbilityPopUp
 	docastformchangeanimation
 	waitstate
