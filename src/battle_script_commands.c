@@ -10864,7 +10864,7 @@ static void atkE7_trycastformdatachange(void)
     u8 form;
 
     gBattlescriptCurrInstr++;
-    form = CastformDataTypeChange(gBattleScripting.battler);
+    form = TryWeatherFormChange(gBattleScripting.battler);
     if (form)
     {
         BattleScriptPushCursorAndCallback(BattleScript_CastformChange);

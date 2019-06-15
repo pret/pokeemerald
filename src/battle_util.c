@@ -2578,50 +2578,59 @@ bool8 HasNoMonsToSwitch(u8 battler, u8 partyIdBattlerOn1, u8 partyIdBattlerOn2)
     }
 }
 
-enum
+u8 TryWeatherFormChange(u8 battler)
 {
-    CASTFORM_NO_CHANGE, //0
-    CASTFORM_TO_NORMAL, //1
-    CASTFORM_TO_FIRE,   //2
-    CASTFORM_TO_WATER,  //3
-    CASTFORM_TO_ICE,    //4
-};
+    u8 ret = 0;
+    bool32 weatherEffect = WEATHER_HAS_EFFECT;
 
-u8 CastformDataTypeChange(u8 battler)
-{
-    u8 formChange = 0;
-    if (gBattleMons[battler].species != SPECIES_CASTFORM || gBattleMons[battler].ability != ABILITY_FORECAST || gBattleMons[battler].hp == 0)
-        return CASTFORM_NO_CHANGE;
-    if (!WEATHER_HAS_EFFECT && !IS_BATTLER_OF_TYPE(battler, TYPE_NORMAL))
+    if (gBattleMons[battler].species == SPECIES_CASTFORM)
     {
-        SET_BATTLER_TYPE(battler, TYPE_NORMAL);
-        return CASTFORM_TO_NORMAL;
+        if (gBattleMons[battler].ability != ABILITY_FORECAST || gBattleMons[battler].hp == 0)
+        {
+            ret = 0;
+        }
+        else if (!weatherEffect && !IS_BATTLER_OF_TYPE(battler, TYPE_NORMAL))
+        {
+            SET_BATTLER_TYPE(battler, TYPE_NORMAL);
+            ret = 1;
+        }
+        else if (!weatherEffect)
+        {
+            ret = 0;
+        }
+        else if (!(gBattleWeather & (WEATHER_RAIN_ANY | WEATHER_SUN_ANY | WEATHER_HAIL_ANY)) && !IS_BATTLER_OF_TYPE(battler, TYPE_NORMAL))
+        {
+            SET_BATTLER_TYPE(battler, TYPE_NORMAL);
+            ret = 1;
+        }
+        else if (gBattleWeather & WEATHER_SUN_ANY && !IS_BATTLER_OF_TYPE(battler, TYPE_FIRE))
+        {
+            SET_BATTLER_TYPE(battler, TYPE_FIRE);
+            ret = 2;
+        }
+        else if (gBattleWeather & WEATHER_RAIN_ANY && !IS_BATTLER_OF_TYPE(battler, TYPE_WATER))
+        {
+            SET_BATTLER_TYPE(battler, TYPE_WATER);
+            ret = 3;
+        }
+        else if (gBattleWeather & WEATHER_HAIL_ANY && !IS_BATTLER_OF_TYPE(battler, TYPE_ICE))
+        {
+            SET_BATTLER_TYPE(battler, TYPE_ICE);
+            ret = 4;
+        }
     }
-    if (!WEATHER_HAS_EFFECT)
-        return CASTFORM_NO_CHANGE;
-    if (!(gBattleWeather & (WEATHER_RAIN_ANY | WEATHER_SUN_ANY | WEATHER_HAIL_ANY)) && !IS_BATTLER_OF_TYPE(battler, TYPE_NORMAL))
+    else if (gBattleMons[battler].species == SPECIES_CHERRIM)
     {
-        SET_BATTLER_TYPE(battler, TYPE_NORMAL);
-        formChange = CASTFORM_TO_NORMAL;
+        if (gBattleMons[battler].ability != ABILITY_FLOWER_GIFT || gBattleMons[battler].hp == 0)
+            ret = 0;
+        else if (gBattleMonForms[battler] == 0 && weatherEffect && gBattleWeather & WEATHER_SUN_ANY)
+            ret = 3;
+        else if (gBattleMonForms[battler] != 0 && (!weatherEffect || !(gBattleWeather & WEATHER_SUN_ANY)))
+            ret = 1;
     }
-    if (gBattleWeather & WEATHER_SUN_ANY && !IS_BATTLER_OF_TYPE(battler, TYPE_FIRE))
-    {
-        SET_BATTLER_TYPE(battler, TYPE_FIRE);
-        formChange = CASTFORM_TO_FIRE;
-    }
-    if (gBattleWeather & WEATHER_RAIN_ANY && !IS_BATTLER_OF_TYPE(battler, TYPE_WATER))
-    {
-        SET_BATTLER_TYPE(battler, TYPE_WATER);
-        formChange = CASTFORM_TO_WATER;
-    }
-    if (gBattleWeather & WEATHER_HAIL_ANY && !IS_BATTLER_OF_TYPE(battler, TYPE_ICE))
-    {
-        SET_BATTLER_TYPE(battler, TYPE_ICE);
-        formChange = CASTFORM_TO_ICE;
-    }
-    return formChange;
+
+    return ret;
 }
-
 static const u16 sWeatherFlagsInfo[][3] =
 {
     [ENUM_WEATHER_RAIN] = {WEATHER_RAIN_TEMPORARY, WEATHER_RAIN_PERMANENT, HOLD_EFFECT_DAMP_ROCK},
@@ -2915,7 +2924,8 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
             }
             break;
         case ABILITY_FORECAST:
-            effect = CastformDataTypeChange(battler);
+        case ABILITY_FLOWER_GIFT:
+            effect = TryWeatherFormChange(battler);
             if (effect != 0)
             {
                 BattleScriptPushCursorAndCallback(BattleScript_CastformChange);
@@ -2935,7 +2945,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
             // that's a weird choice for a variable, why not use i or battler?
             for (target1 = 0; target1 < gBattlersCount; target1++)
             {
-                effect = CastformDataTypeChange(target1);
+                effect = TryWeatherFormChange(target1);
                 if (effect != 0)
                 {
                     BattleScriptPushCursorAndCallback(BattleScript_CastformChange);
@@ -3500,9 +3510,9 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
     case ABILITYEFFECT_FORECAST: // 6
         for (battler = 0; battler < gBattlersCount; battler++)
         {
-            if (gBattleMons[battler].ability == ABILITY_FORECAST)
+            if (gBattleMons[battler].ability == ABILITY_FORECAST || gBattleMons[battler].ability == ABILITY_FLOWER_GIFT)
             {
-                effect = CastformDataTypeChange(battler);
+                effect = TryWeatherFormChange(battler);
                 if (effect)
                 {
                     BattleScriptPushCursorAndCallback(BattleScript_CastformChange);
