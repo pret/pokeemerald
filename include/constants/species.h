@@ -911,9 +911,6 @@
 #define SPECIES_UNOWN_EMARK NUM_SPECIES + 27
 #define SPECIES_UNOWN_QMARK NUM_SPECIES + 28
 
-// Cherrim's sun form, not an actual species, just a different sprite.
-#define SPECIES_CHERRIM_SUN NUM_SPECIES + 29
-
 // National Dex Index Defines
 
 #define NATIONAL_DEX_NONE 0

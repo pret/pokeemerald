@@ -425,7 +425,7 @@ const struct CompressedSpriteSheet gMonBackPicTable[] =
     SPECIES_SPRITE(BUIZEL, gMonBackPic_Buizel),
     SPECIES_SPRITE(FLOATZEL, gMonBackPic_Floatzel),
     SPECIES_SPRITE(CHERUBI, gMonBackPic_Cherubi),
-    SPECIES_SPRITE(CHERRIM, gMonBackPic_CherrimNormal),
+    SPECIES_SPRITE(CHERRIM, gMonBackPic_Cherrim),
     SPECIES_SPRITE(SHELLOS, gMonBackPic_ShellosE),
     SPECIES_SPRITE(GASTRODON, gMonBackPic_GastrodonE),
     SPECIES_SPRITE(AMBIPOM, gMonBackPic_Ambipom),
@@ -899,6 +899,4 @@ const struct CompressedSpriteSheet gMonBackPicTable[] =
     SPECIES_SPRITE(UNOWN_Z, gMonBackPic_UnownZ),
     SPECIES_SPRITE(UNOWN_EMARK, gMonBackPic_UnownExclamationMark),
     SPECIES_SPRITE(UNOWN_QMARK, gMonBackPic_UnownQuestionMark),
-
-    SPECIES_SPRITE(CHERRIM_SUN, gMonBackPic_CherrimSun),
 };

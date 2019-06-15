@@ -5109,12 +5109,6 @@ static const union AnimCmd sAnim_CHERRIM_1[] =
     ANIMCMD_END,
 };
 
-static const union AnimCmd sAnim_CHERRIM_SUN[] =
-{
-    ANIMCMD_FRAME(0, 1),
-    ANIMCMD_END,
-};
-
 static const union AnimCmd sAnim_SHELLOS_1[] =
 {
     ANIMCMD_FRAME(0, 30),
@@ -10503,7 +10497,6 @@ static const union AnimCmd *const sAnims_CHERUBI[] ={
 static const union AnimCmd *const sAnims_CHERRIM[] ={
     sAnim_GeneralFrame0,
     sAnim_CHERRIM_1,
-    sAnim_CHERRIM_SUN,
 };
 
 static const union AnimCmd *const sAnims_SHELLOS[] ={
