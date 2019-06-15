@@ -1,4 +1,5 @@
 CASTFORMGFXDIR := graphics/pokemon/castform
+CHERRIMGFXDIR := graphics/pokemon/cherrim
 TILESETGFXDIR := data/tilesets
 FONTGFXDIR := data/graphics/fonts
 INTERFACEGFXDIR := graphics/interface
@@ -56,6 +57,27 @@ $(CASTFORMGFXDIR)/shiny.gbapal: $(CASTFORMGFXDIR)/shiny_normal_form.gbapal \
 	@cat $^ >$@
 
 
+### Cherrim ###
+
+$(CHERRIMGFXDIR)/front.4bpp: $(CHERRIMGFXDIR)/front_normal.4bpp \
+							  $(CHERRIMGFXDIR)/front_sun.4bpp
+	@cat $^ >$@
+	
+$(CHERRIMGFXDIR)/anim_front.4bpp: $(CHERRIMGFXDIR)/anim_front_normal.4bpp \
+							  $(CHERRIMGFXDIR)/front_sun.4bpp
+	@cat $^ >$@
+
+$(CHERRIMGFXDIR)/back.4bpp: $(CHERRIMGFXDIR)/back_normal.4bpp \
+							 $(CHERRIMGFXDIR)/back_sun.4bpp
+	@cat $^ >$@
+	
+$(CHERRIMGFXDIR)/normal.gbapal: $(CHERRIMGFXDIR)/normal_normal.gbapal \
+								 $(CHERRIMGFXDIR)/normal_sun.gbapal
+	@cat $^ >$@
+
+$(CHERRIMGFXDIR)/shiny.gbapal: $(CHERRIMGFXDIR)/shiny_normal.gbapal \
+								$(CHERRIMGFXDIR)/shiny_sun.gbapal
+	@cat $^ >$@
 
 ### Tilesets ###
 
