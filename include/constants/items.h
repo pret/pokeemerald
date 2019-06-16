@@ -707,8 +707,8 @@
 #define LAST_BERRY_INDEX ITEM_MARANGA_BERRY
 #define ITEM_TO_BERRY(itemId)(((itemId - FIRST_BERRY_INDEX) + 1))
 
-#define NUM_TECHNICAL_MACHINES 617
-#define NUM_HIDDEN_MACHINES 618
+#define NUM_TECHNICAL_MACHINES 50
+#define NUM_HIDDEN_MACHINES 8
 
 // Check if the item is one that can be used on a Pokemon.
 #define ITEM_HAS_EFFECT(item) ((item) >= ITEM_POTION && (item) <= LAST_BERRY_INDEX)
