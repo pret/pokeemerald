@@ -7123,7 +7123,8 @@ bool8 HasTwoFramesAnimation(u16 species)
     return (species != SPECIES_CASTFORM
             && species != SPECIES_DEOXYS
             && species != SPECIES_SPINDA
-            && species != SPECIES_UNOWN);
+            && species != SPECIES_UNOWN
+            && species != SPECIES_CHERRIM);
 }
 
 bool8 sub_806F104(void)

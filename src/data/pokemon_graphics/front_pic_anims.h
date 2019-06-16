@@ -5101,17 +5101,15 @@ static const union AnimCmd sAnim_CHERUBI_1[] =
     ANIMCMD_END,
 };
 
-static const union AnimCmd sAnim_CHERRIM_1[] =
+static const union AnimCmd sAnim_CHERRIM_NORMAL[] =
 {
-    ANIMCMD_FRAME(0, 30),
-    ANIMCMD_FRAME(1, 30),
     ANIMCMD_FRAME(0, 1),
     ANIMCMD_END,
 };
 
 static const union AnimCmd sAnim_CHERRIM_SUN[] =
 {
-    ANIMCMD_FRAME(2, 1),
+    ANIMCMD_FRAME(1, 1),
     ANIMCMD_END,
 };
 
@@ -10501,8 +10499,7 @@ static const union AnimCmd *const sAnims_CHERUBI[] ={
 };
 
 static const union AnimCmd *const sAnims_CHERRIM[] ={
-    sAnim_GeneralFrame0,
-    sAnim_CHERRIM_1,
+    sAnim_CHERRIM_NORMAL,
     sAnim_CHERRIM_SUN,
 };
 
