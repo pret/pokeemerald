@@ -3352,7 +3352,7 @@ u8 IsMonDisobedient(void)
     if (GetBattlerSide(gBattlerAttacker) == B_SIDE_OPPONENT)
         return 0;
 
-    if (HasObedientBitSet(gBattlerAttacker)) // only if species is Mew or Deoxys
+    if (HasObedientBitSet(gBattlerAttacker))
     {
         if (gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER && GetBattlerPosition(gBattlerAttacker) == 2)
             return 0;
