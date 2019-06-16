@@ -11,7 +11,7 @@
 
 The [prerelease version of the Linux subsystem](https://docs.microsoft.com/windows/wsl/install-legacy) available in the 1607 and 1703 releases of Windows 10 is obsolete so consider uninstalling it.
 
-Make sure that the `make`, `git`, `gcc-core`, `gcc-g++`, and `libpng-devel` packages are installed.
+Make sure that the `build-essential`, `git`, and `libpng-dev` packages are installed. The `build-essential` package includes the `make`, `gcc-core`, and `g++` packages so they do not have to be obtained separately. MSYS2 does not include `libpng-dev` so it must be built from source.
 
 If you are *not* using MSYS2, install the **devkitARM** toolchain of [devkitPro](https://devkitpro.org/wiki/Getting_Started) and add its environment variables.
 
@@ -34,6 +34,8 @@ To set up the repository:
 
 	cd ../pokeemerald
 	./build_tools.sh
+
+If the repository was previously set up using Cygwin, delete the `.exe` files in the subfolders of the `tools` folder except for `agbcc` and run the `build_tools.sh` script again.
 
 To build **pokeemerald.gba**:
 
