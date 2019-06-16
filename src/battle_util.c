@@ -2624,7 +2624,7 @@ u8 TryWeatherFormChange(u8 battler)
         if (gBattleMons[battler].ability != ABILITY_FLOWER_GIFT || gBattleMons[battler].hp == 0)
             ret = 0;
         else if (gBattleMonForms[battler] == 0 && weatherEffect && gBattleWeather & WEATHER_SUN_ANY)
-            ret = 3;
+            ret = 2;
         else if (gBattleMonForms[battler] != 0 && (!weatherEffect || !(gBattleWeather & WEATHER_SUN_ANY)))
             ret = 1;
     }
