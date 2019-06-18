@@ -1,3 +1,6 @@
+ifdef DEVKITARM
+include $(DEVKITARM)/base_tools
+else
 PREFIX		:=	arm-none-eabi-
 
 export CC	:=	$(PREFIX)gcc
@@ -8,6 +11,7 @@ export OBJCOPY	:=	$(PREFIX)objcopy
 export STRIP	:=	$(PREFIX)strip
 export NM	:=	$(PREFIX)gcc-nm
 export RANLIB	:=	$(PREFIX)gcc-ranlib
+endif
 export CPP := $(PREFIX)cpp
 export LD := $(PREFIX)ld
 
