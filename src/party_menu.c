@@ -107,8 +107,7 @@ struct Struct203CEC4
     u8 windowId[3];
     u8 actions[8];
     u8 listSize;
-    u16 palBuffer[0xB0];
-    u8 filler[0xA0];
+    u16 palBuffer[0x100];
     s16 data[16];
 };
 
