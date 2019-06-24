@@ -868,13 +868,13 @@ u32 FldEff_Unknown22(void)
     return 0;
 }
 
-void StartAshFieldEffect(s16 x, s16 y, u16 c, s16 d)
+void StartAshFieldEffect(s16 x, s16 y, u16 metatileId, s16 d)
 {
     gFieldEffectArguments[0] = x;
     gFieldEffectArguments[1] = y;
     gFieldEffectArguments[2] = 0x52;
     gFieldEffectArguments[3] = 1;
-    gFieldEffectArguments[4] = c;
+    gFieldEffectArguments[4] = metatileId;
     gFieldEffectArguments[5] = d;
     FieldEffectStart(FLDEFF_ASH);
 }

@@ -107,8 +107,11 @@ struct Struct203CEC4
     u8 windowId[3];
     u8 actions[8];
     u8 listSize;
-    u16 palBuffer[0xB0];
-    u8 filler[0xA0];
+    // In vanilla Emerald, only the first 0xB0 hwords (0x160 bytes) are actually used.
+    // However, a full 0x100 hwords (0x200 bytes) are allocated.
+    // It is likely that the 0x160 value used below is a constant defined by
+    // bin2c, the utility used to encode the compressed palette data.
+    u16 palBuffer[BG_PLTT_SIZE / sizeof(u16)];
     s16 data[16];
 };
 

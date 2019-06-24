@@ -7,10 +7,10 @@ MeteorFalls_1F_1R_MapScript1_22BD30: @ 822BD30
 	end
 
 MeteorFalls_1F_1R_EventScript_22BD3A:: @ 822BD3A
-	setmetatile 4, 1, 582, 1
-	setmetatile 3, 2, 589, 1
-	setmetatile 4, 2, 590, 0
-	setmetatile 5, 2, 591, 1
+	setmetatile 4, 1, METATILE_MeteorFalls_CaveEntrance_Top, 1
+	setmetatile 3, 2, METATILE_MeteorFalls_CaveEntrance_Left, 1
+	setmetatile 4, 2, METATILE_MeteorFalls_CaveEntrance_Bottom, 0
+	setmetatile 5, 2, METATILE_MeteorFalls_CaveEntrance_Right, 1
 	return
 
 MeteorFalls_1F_1R_EventScript_22BD5F:: @ 822BD5F
