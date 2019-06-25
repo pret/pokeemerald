@@ -634,7 +634,7 @@
 	.endm
 	
 	.macro if_has_move_with_flag battler:req, flag:req, ptr:req
-	.byte 0x6E
+	.byte 0x6F
 	.byte \battler
 	.4byte \flag
 	.4byte \ptr

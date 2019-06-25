@@ -1923,7 +1923,7 @@ AI_CV_HighCrit2:
 
 AI_CV_HighCrit_End:
 	end
-	
+
 AI_CV_FocusEnergy:
 	if_has_move_with_flag AI_USER, FLAG_HIGH_CRIT, AI_CV_FocusEnergy2
 AI_CV_FocusEnergy3:
