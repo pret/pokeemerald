@@ -41,7 +41,7 @@ ROM := pokeemerald.gba
 OBJ_DIR := build/emerald
 else
 CC1             := $(shell $(PREFIX)gcc --print-prog-name=cc1)
-override CFLAGS += -mthumb -mthumb-interwork -O2 -mabi=apcs-gnu -mtune=arm7tdmi -march=armv4t -quiet -fno-toplevel-reorder -Wno-aggressive-loop-optimizations
+override CFLAGS += -mthumb -mthumb-interwork -O2 -mabi=apcs-gnu -mtune=arm7tdmi -march=armv4t -quiet -fno-toplevel-reorder -Wno-aggressive-loop-optimizations -Wno-pointer-to-int-cast
 ROM := pokeemerald_modern.gba
 OBJ_DIR := build/modern
 endif

@@ -443,7 +443,7 @@ enum
 #define TAG_TILE_1          0x1
 
 // IWRAM bss
-IWRAM_DATA static u32 gUnknown_03000F78[98];
+static u32 gUnknown_03000F78[98];
 
 // EWRAM DATA
 EWRAM_DATA static u8 sPreviousBoxOption = 0;

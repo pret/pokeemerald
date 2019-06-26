@@ -43,9 +43,9 @@ static bool32 SharesPalWithAnyActive(u32 id);
 static void sub_8035648(void);
 
 // iwram
-static IWRAM_DATA s32 gUnknown_03000DD4;
-static IWRAM_DATA s32 gUnknown_03000DD8;
-static IWRAM_DATA s32 gUnknown_03000DDC;
+static s32 gUnknown_03000DD4;
+static s32 gUnknown_03000DD8;
+static s32 gUnknown_03000DDC;
 
 // ewram
 static EWRAM_DATA struct UnkStruct1 *gUnknown_02022E10 = {0};

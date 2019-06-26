@@ -7,11 +7,7 @@
 #define FALSE 0
 
 #define BSS_DATA   __attribute__((section(".bss")))
-#if MODERN
-#define IWRAM_DATA
-#else
 #define IWRAM_DATA __attribute__((section("iwram_data")))
-#endif
 #define EWRAM_DATA __attribute__((section("ewram_data")))
 
 #if MODERN

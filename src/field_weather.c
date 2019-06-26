@@ -68,7 +68,7 @@ static u8 None_Finish(void);
 EWRAM_DATA struct Weather gWeather = {0};
 EWRAM_DATA static u8 sFieldEffectPaletteGammaTypes[32] = {0};
 
-IWRAM_DATA static const u8 *sPaletteGammaTypes;
+static const u8 *sPaletteGammaTypes;
 
 // The drought weather effect uses a precalculated color lookup table. Presumably this
 // is because the underlying color shift calculation is slow.

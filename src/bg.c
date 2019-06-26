@@ -37,9 +37,9 @@ struct BgConfig2
     s32 bg_y;
 };
 
-static IWRAM_DATA struct BgControl sGpuBgConfigs;
-static IWRAM_DATA struct BgConfig2 sGpuBgConfigs2[4];
-static IWRAM_DATA u32 sDmaBusyBitfield[4];
+static struct BgControl sGpuBgConfigs;
+static struct BgConfig2 sGpuBgConfigs2[4];
+static u32 sDmaBusyBitfield[4];
 
 u32 gUnneededFireRedVariable;
 

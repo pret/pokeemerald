@@ -16,7 +16,7 @@
 #include "constants/moves.h"
 
 // IWRAM bss
-static IWRAM_DATA bool8 sPerformedRentalSwap;
+static bool8 sPerformedRentalSwap;
 
 // This file's functions.
 static void InitFactoryChallenge(void);
