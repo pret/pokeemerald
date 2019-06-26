@@ -12,11 +12,9 @@ TITLE       := POKEMON EMER
 GAME_CODE   := BPEE
 MAKER_CODE  := 01
 REVISION    := 0
+MODERN      ?= 0
 
 SHELL := /bin/bash -o pipefail
-
-ROM := pokeemerald.gba
-OBJ_DIR := build/emerald
 
 ELF = $(ROM:.gba=.elf)
 MAP = $(ROM:.gba=.map)
@@ -34,12 +32,21 @@ DATA_ASM_BUILDDIR = $(OBJ_DIR)/$(DATA_ASM_SUBDIR)
 SONG_BUILDDIR = $(OBJ_DIR)/$(SONG_SUBDIR)
 MID_BUILDDIR = $(OBJ_DIR)/$(MID_SUBDIR)
 
-ASFLAGS := -mcpu=arm7tdmi
+ASFLAGS := -mcpu=arm7tdmi --defsym MODERN=$(MODERN)
 
+ifeq ($(MODERN),0)
 CC1             := tools/agbcc/bin/agbcc$(EXE)
 override CFLAGS += -mthumb-interwork -Wimplicit -Wparentheses -Werror -O2 -fhex-asm
+ROM := pokeemerald.gba
+OBJ_DIR := build/emerald
+else
+CC1             := $(shell $(PREFIX)gcc --print-prog-name=cc1)
+override CFLAGS += -mthumb -mthumb-interwork -O2 -mabi=apcs-gnu -mtune=arm7tdmi -march=armv4t -quiet -fno-toplevel-reorder -Wno-aggressive-loop-optimizations
+ROM := pokeemerald_modern.gba
+OBJ_DIR := build/modern
+endif
 
-CPPFLAGS := -I tools/agbcc/include -I tools/agbcc -iquote include -Wno-trigraphs
+CPPFLAGS := -I tools/agbcc/include -I tools/agbcc -iquote include -Wno-trigraphs -DMODERN=$(MODERN)
 
 LDFLAGS = -Map ../../$(MAP)
 
@@ -109,7 +116,10 @@ clean: tidy
 
 tidy:
 	rm -f $(ROM) $(ELF) $(MAP)
+ifeq ($(MODERN),0)
+	@$(MAKE) tidy MODERN=1
 	rm -r build/*
+endif
 
 include graphics_file_rules.mk
 include map_data_rules.mk
@@ -133,6 +143,7 @@ sound/direct_sound_samples/cry_%.bin: sound/direct_sound_samples/cry_%.aif ; $(A
 sound/%.bin: sound/%.aif ; $(AIF) $< $@
 
 
+ifeq ($(MODERN),0)
 $(C_BUILDDIR)/libc.o: CC1 := tools/agbcc/bin/old_agbcc
 $(C_BUILDDIR)/libc.o: CFLAGS := -O2
 
@@ -145,6 +156,7 @@ $(C_BUILDDIR)/agb_flash_mx.o: CFLAGS := -O -mthumb-interwork
 $(C_BUILDDIR)/m4a.o: CC1 := tools/agbcc/bin/old_agbcc
 
 $(C_BUILDDIR)/record_mixing.o: CFLAGS += -ffreestanding
+endif
 
 ifeq ($(NODEP),1)
 $(C_BUILDDIR)/%.o: c_dep :=
@@ -197,7 +209,9 @@ $(OBJ_DIR)/ld_script.ld: ld_script.txt $(OBJ_DIR)/sym_bss.ld $(OBJ_DIR)/sym_comm
 
 $(ELF): $(OBJ_DIR)/ld_script.ld $(OBJS)
 	cd $(OBJ_DIR) && $(LD) $(LDFLAGS) -T ld_script.ld -o ../../$@ $(OBJS_REL) $(LIB)
+	$(FIX) $@ -p -t"$(TITLE)" -c$(GAME_CODE) -m$(MAKER_CODE) -r$(REVISION) --silent
 
 $(ROM): $(ELF)
-	$(OBJCOPY) -O binary $< $@
-	$(FIX) $@ -p -t"$(TITLE)" -c$(GAME_CODE) -m$(MAKER_CODE) -r$(REVISION) --silent
+	$(OBJCOPY) -O binary --gap-fill 0xFF --pad-to 0x9000000 $< $@
+
+modern: ; @$(MAKE) MODERN=1

@@ -85,7 +85,7 @@ void EnableVCountIntrAtLine150(void);
 
 void AgbMain()
 {
-    RegisterRamReset(RESET_ALL);
+    RegisterRamReset(MODERN ? RESET_ALL & ~RESET_IWRAM : RESET_ALL);
     *(vu16 *)BG_PLTT = 0x7FFF;
     InitGpuRegManager();
     REG_WAITCNT = WAITCNT_PREFETCH_ENABLE | WAITCNT_WS0_S_1 | WAITCNT_WS0_N_3;

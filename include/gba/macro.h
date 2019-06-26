@@ -192,4 +192,29 @@
     REG_IME = imeTemp;                                          \
 }                                                               \
 
+#if MODERN
+#define FLOAT_UNS(x, bit) ({                   \
+    s##bit sx = x;                             \
+    float fx = (float)sx;                      \
+    if (sx < 0) fx += (1 << (bit - 1)) * 2.0f; \
+    fx;                                        \
+})
+#define DOUBLE_UNS(x, bit) ({                   \
+    s##bit sx = x;                              \
+    double dx = (double)sx;                     \
+    if (sx < 0) dx += (1 << (bit - 1)) * 2.0;   \
+    dx;                                         \
+})
+#else
+#define FLOAT_UNS(x, bit) ((float)(x))
+#define DOUBLE_UNS(x, bit) ((double)(x))
+#endif //MODERN
+
+#define FLOAT_U8(x) FLOAT_UNS(x, 8)
+#define FLOAT_U16(x) FLOAT_UNS(x, 16)
+#define FLOAT_U32(x) FLOAT_UNS(x, 32)
+#define DOUBLE_U8(x) DOUBLE_UNS(x, 8)
+#define DOUBLE_U16(x) DOUBLE_UNS(x, 16)
+#define DOUBLE_U32(x) DOUBLE_UNS(x, 32)
+
 #endif // GUARD_GBA_MACRO_H

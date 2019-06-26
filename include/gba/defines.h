@@ -6,8 +6,19 @@
 #define TRUE  1
 #define FALSE 0
 
+#define BSS_DATA   __attribute__((section(".bss")))
+#if MODERN
+#define IWRAM_DATA
+#else
 #define IWRAM_DATA __attribute__((section("iwram_data")))
+#endif
 #define EWRAM_DATA __attribute__((section("ewram_data")))
+
+#if MODERN
+#define NOINLINE __attribute__((noinline))
+#else
+#define NOINLINE
+#endif
 
 #define ALIGNED(n) __attribute__((aligned(n)))
 

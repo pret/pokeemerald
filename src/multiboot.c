@@ -435,7 +435,7 @@ static int MultiBootHandShake(struct MultiBootParam *mp)
 #undef must_data
 }
 
-static void MultiBootWaitCycles(u32 cycles)
+static NOINLINE void MultiBootWaitCycles(u32 cycles)
 {
     asm("mov r2, pc");
     asm("lsr r2, #24");
