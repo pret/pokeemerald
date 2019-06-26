@@ -32,5 +32,6 @@ matrix:
       script:
         - ./build_tools.sh g++-7
         - make -j2 compare
+        - make -j2 modern
 after_success:
   - .travis/calcrom/webhook.sh pokeemerald
