@@ -43,7 +43,7 @@ SECTIONS {
     {
         asm/crt0.o(.text);
         src/*.o(.text);
-		asm/*.o(.text);
+        asm/*.o(.text);
     } =0
 
     script_data :
@@ -84,19 +84,19 @@ SECTIONS {
     ALIGN(4)
     {
         src/*.o(.rodata*);
-		data/*.o(.rodata*);
+        data/*.o(.rodata*);
     } =0
 
     song_data :
     ALIGN(4)
     {
-		sound/songs/*.o(.rodata);
+        sound/songs/*.o(.rodata);
     } =0
 
     lib_rodata :
     SUBALIGN(4)
     {
-		src/m4a.o(.rodata);
+        src/m4a.o(.rodata);
         src/agb_flash.o(.rodata);
         src/agb_flash_1m.o(.rodata);
         src/agb_flash_mx.o(.rodata);

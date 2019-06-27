@@ -523,7 +523,7 @@ SECTIONS {
         src/record_mixing.o(.rodata);
         src/secret_base.o(.rodata);
         src/tv.o(.rodata);
-		src/contest_link_80F57C4.o(.rodata);
+        src/contest_link_80F57C4.o(.rodata);
         data/contest_link_80F57C4.o(.rodata);
         src/script_pokemon_util_80F87D8.o(.rodata);
         src/pokemon_size_record.o(.rodata)
@@ -1214,7 +1214,7 @@ SECTIONS {
     lib_rodata :
     SUBALIGN(4)
     {
-		src/m4a.o(.rodata);
+        src/m4a.o(.rodata);
         src/agb_flash.o(.rodata);
         src/agb_flash_1m.o(.rodata);
         src/agb_flash_mx.o(.rodata);
