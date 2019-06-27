@@ -39,18 +39,20 @@ CC1             := tools/agbcc/bin/agbcc$(EXE)
 override CFLAGS += -mthumb-interwork -Wimplicit -Wparentheses -Werror -O2 -fhex-asm
 ROM := pokeemerald.gba
 OBJ_DIR := build/emerald
+LIBPATH := -L ../../tools/agbcc/lib
 else
 CC1             := $(shell $(PREFIX)gcc --print-prog-name=cc1)
 override CFLAGS += -mthumb -mthumb-interwork -O2 -mabi=apcs-gnu -mtune=arm7tdmi -march=armv4t -quiet -fno-toplevel-reorder -Wno-aggressive-loop-optimizations -Wno-pointer-to-int-cast
 ROM := pokeemerald_modern.gba
 OBJ_DIR := build/modern
+LIBPATH := -L $(DEVKITARM)/lib/gcc/arm-none-eabi/*/thumb -L $(DEVKITARM)/arm-none-eabi/lib/thumb
 endif
 
 CPPFLAGS := -I tools/agbcc/include -I tools/agbcc -iquote include -Wno-trigraphs -DMODERN=$(MODERN)
 
 LDFLAGS = -Map ../../$(MAP)
 
-LIB := -L ../../tools/agbcc/lib -lgcc -lc
+LIB := $(LIBPATH) -lgcc -lc
 
 SHA1 := $(shell { command -v sha1sum || command -v shasum; } 2>/dev/null) -c
 GFX := tools/gbagfx/gbagfx$(EXE)
@@ -204,8 +206,14 @@ $(OBJ_DIR)/sym_common.ld: sym_common.txt $(C_OBJS) $(wildcard common_syms/*.txt)
 $(OBJ_DIR)/sym_ewram.ld: sym_ewram.txt
 	$(RAMSCRGEN) ewram_data $< ENGLISH > $@
 
-$(OBJ_DIR)/ld_script.ld: ld_script.txt $(OBJ_DIR)/sym_bss.ld $(OBJ_DIR)/sym_common.ld $(OBJ_DIR)/sym_ewram.ld
-	cd $(OBJ_DIR) && sed "s#tools/#../../tools/#g" ../../ld_script.txt > ld_script.ld
+ifeq ($(MODERN),0)
+LD_SCRIPT := ld_script.txt
+else
+LD_SCRIPT := ld_script_modern.txt
+endif
+
+$(OBJ_DIR)/ld_script.ld: $(LD_SCRIPT) $(OBJ_DIR)/sym_bss.ld $(OBJ_DIR)/sym_common.ld $(OBJ_DIR)/sym_ewram.ld
+	cd $(OBJ_DIR) && sed "s#tools/#../../tools/#g" ../../$(LD_SCRIPT) > ld_script.ld
 
 $(ELF): $(OBJ_DIR)/ld_script.ld $(OBJS)
 	cd $(OBJ_DIR) && $(LD) $(LDFLAGS) -T ld_script.ld -o ../../$@ $(OBJS_REL) $(LIB)
