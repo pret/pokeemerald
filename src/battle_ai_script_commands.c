@@ -421,6 +421,16 @@ u8 BattleAI_ChooseMoveOrAction(void)
     return ret;
 }
 
+static u32 GetTotalBaseStat(u32 species)
+{
+    return gBaseStats[species].baseHP
+        + gBaseStats[species].baseAttack
+        + gBaseStats[species].baseDefense
+        + gBaseStats[species].baseSpeed
+        + gBaseStats[species].baseSpAttack
+        + gBaseStats[species].baseSpDefense;
+}
+
 static u8 ChooseMoveOrAction_Singles(void)
 {
     u8 currentMoveArray[4];
@@ -452,6 +462,7 @@ static u8 ChooseMoveOrAction_Singles(void)
     // Consider switching if all moves are worthless to use.
     if (AI_THINKING_STRUCT->aiFlags & (AI_SCRIPT_CHECK_VIABILITY | AI_SCRIPT_CHECK_BAD_MOVE | AI_SCRIPT_TRY_TO_FAINT | AI_SCRIPT_PREFER_BATON_PASS)
         && CountUsablePartyMons(sBattler_AI) >= 1
+        && GetTotalBaseStat(gBattleMons[sBattler_AI].species) >= 310 // Mon is not weak.
         && gBattleMons[sBattler_AI].hp >= gBattleMons[sBattler_AI].maxHP / 2
         && !(gBattleTypeFlags & BATTLE_TYPE_PALACE))
     {
