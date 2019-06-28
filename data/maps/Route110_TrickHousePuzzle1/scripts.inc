@@ -8,7 +8,7 @@ Route110_TrickHousePuzzle1_MapScript1_26B915: @ 826B915
 	end
 
 Route110_TrickHousePuzzle1_EventScript_26B921:: @ 826B921
-	setmetatile 13, 1, 523, 0
+	setmetatile 13, 1, METATILE_TrickHousePuzzle_Stairs_Down, 0
 	end
 
 Route110_TrickHousePuzzle1_EventScript_26B92B:: @ 826B92B

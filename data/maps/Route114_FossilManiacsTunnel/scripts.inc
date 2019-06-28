@@ -17,8 +17,8 @@ Route114_FossilManiacsTunnel_MapScript1_22AF49: @ 822AF49
 	end
 
 Route114_FossilManiacsTunnel_EventScript_22AF53:: @ 822AF53
-	setmetatile 6, 1, 617, 1
-	setmetatile 6, 2, 617, 1
+	setmetatile 6, 1, METATILE_Fallarbor_RedRockWall, 1
+	setmetatile 6, 2, METATILE_Fallarbor_RedRockWall, 1
 	return
 
 Route114_FossilManiacsTunnel_EventScript_22AF66:: @ 822AF66

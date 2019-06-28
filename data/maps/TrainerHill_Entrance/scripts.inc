@@ -50,7 +50,7 @@ TrainerHill_Entrance_MapScript1_268128: @ 8268128
 	end
 
 TrainerHill_Entrance_EventScript_268134:: @ 8268134
-	setmetatile 17, 10, 775, 0
+	setmetatile 17, 10, METATILE_TrainerHill_GreenFloorTile, 0
 	return
 
 TrainerHill_Entrance_MapScript2_26813E: @ 826813E
@@ -64,7 +64,7 @@ TrainerHill_Entrance_EventScript_268160:: @ 8268160
 	lockall
 	applymovement EVENT_OBJ_ID_PLAYER, TrainerHill_Entrance_Movement_268385
 	waitmovement 0
-	setmetatile 17, 10, 820, 1
+	setmetatile 17, 10, METATILE_TrainerHill_CounterDoor, 1
 	special DrawWholeMapView
 	playse SE_TK_KASYA
 	waitse

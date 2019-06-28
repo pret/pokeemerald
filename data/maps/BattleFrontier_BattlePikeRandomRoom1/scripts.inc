@@ -645,46 +645,46 @@ BattleFrontier_BattlePikeRandomRoom1_EventScript_25D88D:: @ 825D88D
 	end
 
 BattleFrontier_BattlePikeRandomRoom1_EventScript_25D8A4:: @ 825D8A4
-	setmetatile 4, 1, 554, 1
-	setmetatile 3, 2, 561, 1
-	setmetatile 4, 2, 562, 1
-	setmetatile 5, 2, 563, 1
-	setmetatile 3, 3, 569, 1
-	setmetatile 4, 3, 570, 0
-	setmetatile 5, 3, 571, 1
+	setmetatile 4, 1, METATILE_BattlePike_Curtain_Stage1_Tile0, 1
+	setmetatile 3, 2, METATILE_BattlePike_Curtain_Stage1_Tile1, 1
+	setmetatile 4, 2, METATILE_BattlePike_Curtain_Stage1_Tile2, 1
+	setmetatile 5, 2, METATILE_BattlePike_Curtain_Stage1_Tile3, 1
+	setmetatile 3, 3, METATILE_BattlePike_Curtain_Stage1_Tile4, 1
+	setmetatile 4, 3, METATILE_BattlePike_Curtain_Stage1_Tile5, 0
+	setmetatile 5, 3, METATILE_BattlePike_Curtain_Stage1_Tile6, 1
 	special DrawWholeMapView
 	return
 
 BattleFrontier_BattlePikeRandomRoom1_EventScript_25D8E7:: @ 825D8E7
-	setmetatile 4, 1, 522, 1
-	setmetatile 3, 2, 529, 1
-	setmetatile 4, 2, 530, 1
-	setmetatile 5, 2, 531, 1
-	setmetatile 3, 3, 537, 1
-	setmetatile 4, 3, 538, 0
-	setmetatile 5, 3, 539, 1
+	setmetatile 4, 1, METATILE_BattlePike_Curtain_Stage2_Tile0, 1
+	setmetatile 3, 2, METATILE_BattlePike_Curtain_Stage2_Tile1, 1
+	setmetatile 4, 2, METATILE_BattlePike_Curtain_Stage2_Tile2, 1
+	setmetatile 5, 2, METATILE_BattlePike_Curtain_Stage2_Tile3, 1
+	setmetatile 3, 3, METATILE_BattlePike_Curtain_Stage2_Tile4, 1
+	setmetatile 4, 3, METATILE_BattlePike_Curtain_Stage2_Tile5, 0
+	setmetatile 5, 3, METATILE_BattlePike_Curtain_Stage2_Tile6, 1
 	special DrawWholeMapView
 	return
 
 BattleFrontier_BattlePikeRandomRoom1_EventScript_25D92A:: @ 825D92A
-	setmetatile 4, 1, 683, 1
-	setmetatile 3, 2, 690, 1
-	setmetatile 4, 2, 691, 1
-	setmetatile 5, 2, 692, 1
-	setmetatile 3, 3, 698, 1
-	setmetatile 4, 3, 699, 0
-	setmetatile 5, 3, 700, 1
+	setmetatile 4, 1, METATILE_BattlePike_Curtain_Stage3_Tile0, 1
+	setmetatile 3, 2, METATILE_BattlePike_Curtain_Stage3_Tile1, 1
+	setmetatile 4, 2, METATILE_BattlePike_Curtain_Stage3_Tile2, 1
+	setmetatile 5, 2, METATILE_BattlePike_Curtain_Stage3_Tile3, 1
+	setmetatile 3, 3, METATILE_BattlePike_Curtain_Stage3_Tile4, 1
+	setmetatile 4, 3, METATILE_BattlePike_Curtain_Stage3_Tile5, 0
+	setmetatile 5, 3, METATILE_BattlePike_Curtain_Stage3_Tile6, 1
 	special DrawWholeMapView
 	return
 
 BattleFrontier_BattlePikeRandomRoom1_EventScript_25D96D:: @ 825D96D
-	setmetatile 4, 1, 586, 1
-	setmetatile 3, 2, 593, 1
-	setmetatile 4, 2, 594, 1
-	setmetatile 5, 2, 595, 1
-	setmetatile 3, 3, 601, 1
-	setmetatile 4, 3, 602, 0
-	setmetatile 5, 3, 603, 1
+	setmetatile 4, 1, METATILE_BattlePike_Curtain_Stage0_Tile0, 1
+	setmetatile 3, 2, METATILE_BattlePike_Curtain_Stage0_Tile1, 1
+	setmetatile 4, 2, METATILE_BattlePike_Curtain_Stage0_Tile2, 1
+	setmetatile 5, 2, METATILE_BattlePike_Curtain_Stage0_Tile3, 1
+	setmetatile 3, 3, METATILE_BattlePike_Curtain_Stage0_Tile4, 1
+	setmetatile 4, 3, METATILE_BattlePike_Curtain_Stage0_Tile5, 0
+	setmetatile 5, 3, METATILE_BattlePike_Curtain_Stage0_Tile6, 1
 	special DrawWholeMapView
 	return
 
