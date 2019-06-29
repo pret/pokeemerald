@@ -250,8 +250,8 @@ bool32 sub_802E2D0(struct PokemonJump1_82E4 *, int);
 int sub_802E354(int, u16, u16);
 void sub_802E3A8(void);
 
-extern struct PokemonJump1 *gUnknown_02022CFC;
-extern struct PokemonJump2 *gUnknown_02022D00;
+EWRAM_DATA struct PokemonJump1 *gUnknown_02022CFC = NULL;
+EWRAM_DATA struct PokemonJump2 *gUnknown_02022D00 = NULL;
 
 const struct PokemonJumpMons gPkmnJumpSpecies[] =
 {
