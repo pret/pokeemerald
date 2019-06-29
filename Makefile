@@ -1,4 +1,11 @@
+ifneq (,$(wildcard $(DEVKITARM)/base_tools))
 include $(DEVKITARM)/base_tools
+else
+PREFIX := $(DEVKITARM)/bin/arm-none-eabi-
+OBJCOPY := $(PREFIX)objcopy
+CC := $(PREFIX)gcc
+AS := $(PREFIX)as
+endif
 export CPP := $(PREFIX)cpp
 export LD := $(PREFIX)ld
 
@@ -48,7 +55,14 @@ OBJ_DIR := build/modern
 LIBPATH := -L $(DEVKITARM)/lib/gcc/arm-none-eabi/*/thumb -L $(DEVKITARM)/arm-none-eabi/lib/thumb
 endif
 
-CPPFLAGS := -I tools/agbcc/include -I tools/agbcc -iquote include -Wno-trigraphs -DMODERN=$(MODERN)
+ifeq ($(DEBUG),1)
+CFLAGS += -g
+endif
+
+CPPFLAGS := -iquote include -Wno-trigraphs -DMODERN=$(MODERN)
+ifeq ($(MODERN),0)
+CPPFLAGS += -I tools/agbcc/include -I tools/agbcc
+endif
 
 LDFLAGS = -Map ../../$(MAP)
 
