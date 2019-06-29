@@ -17,7 +17,7 @@ BSS_DATA struct
     u32 value;
 } gDma3Requests[MAX_DMA_REQUESTS];
 
-static bool8 gDma3ManagerLocked;
+static volatile bool8 gDma3ManagerLocked;
 static u8 gDma3RequestCursor;
 
 void ClearDma3Requests(void)
