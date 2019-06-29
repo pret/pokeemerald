@@ -1,7 +1,8 @@
-ifneq (,$(wildcard $(DEVKITARM)/base_tools))
-include $(DEVKITARM)/base_tools
+TOOLCHAIN := $(DEVKITARM)
+ifneq (,$(wildcard $(TOOLCHAIN)/base_tools))
+include $(TOOLCHAIN)/base_tools
 else
-PREFIX := $(DEVKITARM)/bin/arm-none-eabi-
+PREFIX := $(TOOLCHAIN)/bin/arm-none-eabi-
 OBJCOPY := $(PREFIX)objcopy
 CC := $(PREFIX)gcc
 AS := $(PREFIX)as
@@ -52,11 +53,7 @@ CC1             := $(shell $(PREFIX)gcc --print-prog-name=cc1)
 override CFLAGS += -mthumb -mthumb-interwork -O2 -mabi=apcs-gnu -mtune=arm7tdmi -march=armv4t -quiet -fno-toplevel-reorder -fno-aggressive-loop-optimizations -Wno-pointer-to-int-cast
 ROM := pokeemerald_modern.gba
 OBJ_DIR := build/modern
-LIBPATH := -L $(DEVKITARM)/lib/gcc/arm-none-eabi/*/thumb -L $(DEVKITARM)/arm-none-eabi/lib/thumb
-endif
-
-ifeq ($(DEBUG),1)
-CFLAGS += -g
+LIBPATH := -L $(TOOLCHAIN)/lib/gcc/arm-none-eabi/*/thumb -L $(TOOLCHAIN)/arm-none-eabi/lib/thumb
 endif
 
 CPPFLAGS := -iquote include -Wno-trigraphs -DMODERN=$(MODERN)
@@ -123,7 +120,7 @@ compare: $(ROM)
 
 clean: tidy
 	rm -f sound/direct_sound_samples/*.bin
-	rm -f $(SONG_OBJS) $(MID_OBJS) $(MID_SUBDIR)/*.s
+	rm -f $(MID_SUBDIR)/*.s
 	find . \( -iname '*.1bpp' -o -iname '*.4bpp' -o -iname '*.8bpp' -o -iname '*.gbapal' -o -iname '*.lz' -o -iname '*.latfont' -o -iname '*.hwjpnfont' -o -iname '*.fwjpnfont' \) -exec rm {} +
 	rm -f $(DATA_ASM_SUBDIR)/layouts/layouts.inc $(DATA_ASM_SUBDIR)/layouts/layouts_table.inc
 	rm -f $(DATA_ASM_SUBDIR)/maps/connections.inc $(DATA_ASM_SUBDIR)/maps/events.inc $(DATA_ASM_SUBDIR)/maps/groups.inc $(DATA_ASM_SUBDIR)/maps/headers.inc
@@ -132,9 +129,9 @@ clean: tidy
 
 tidy:
 	rm -f $(ROM) $(ELF) $(MAP)
+	rm -r $(OBJ_DIR)
 ifeq ($(MODERN),0)
 	@$(MAKE) tidy MODERN=1
-	rm -r build/*
 endif
 
 include graphics_file_rules.mk

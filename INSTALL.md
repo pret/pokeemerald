@@ -109,8 +109,14 @@ This project supports the `arm-none-eabi-gcc` compiler which ships with devkitAR
 
 # Building with your own toolchain
 
-To build Pokemon Emerald with a toolchain other than devkitARM, override the `DEVKITARM` environment variable with the path to your toolchain.  Example:
+To build Pokemon Emerald with a toolchain other than devkitARM, override the `TOOLCHAIN` environment variable with the path to your toolchain.  Example:
 
-    make compare DEVKITARM=/usr/local/arm-none-eabi
+    make compare TOOLCHAIN=/usr/local/arm-none-eabi
 
-The path you pass to the `DEVKITARM` variable must contain the subdirectory `bin`.  If you compile the `modern` target with this toolchain, the subdirectories `lib`, `include`, and `arm-none-eabi` must also be present.
+The path you pass to the `TOOLCHAIN` variable must contain the subdirectory `bin`.  If you compile the `modern` target with this toolchain, the subdirectories `lib`, `include`, and `arm-none-eabi` must also be present.
+
+# Building with debug info
+
+To build the ELF file with enhanced debug info, use the `DINFO` variable:
+
+    make compare DINFO=1

@@ -33,6 +33,7 @@
 
     History
     -------
+    v1.07 - added support for ELF input, (PikalaxALT)
     v1.06 - added output silencing, (Diegoisawesome)
     v1.05 - added debug offset argument, (Diegoisawesome)
     v1.04 - converted to plain C, (WinterMute)
@@ -50,7 +51,7 @@
 #include <stdint.h>
 #include "elf.h"
 
-#define VER        "1.06"
+#define VER        "1.07"
 #define ARGV    argv[arg]
 #define VALUE    (ARGV+2)
 #define NUMBER    strtoul(VALUE, NULL, 0)
