@@ -861,16 +861,22 @@ u8 GetSpeciesBackAnimSet(u16 species)
 }
 
 #define tState  data[0]
-#define tPtrLO  data[1]
-#define tPtrHI  data[2]
+#define tPtrHi  data[1]
+#define tPtrLo  data[2]
 #define tAnimId data[3]
 #define tSaved0 data[4]
 #define tSaved2 data[5]
 
+#if MODERN
+#define ANIM_SPRITE(taskId)   ((struct Sprite *)((gTasks[taskId].tPtrHi << 16) | ((u16)gTasks[taskId].tPtrLo)))
+#else
+#define ANIM_SPRITE(taskId)   ((struct Sprite *)((gTasks[taskId].tPtrHi << 16) | (gTasks[taskId].tPtrLo)))
+#endif //MODERN
+
 static void Task_HandleMonAnimation(u8 taskId)
 {
     u32 i;
-    struct Sprite *sprite = (struct Sprite*)(u32)((gTasks[taskId].tPtrLO << 0x10) | (gTasks[taskId].tPtrHI));
+    struct Sprite *sprite = ANIM_SPRITE(taskId);
 
     if (gTasks[taskId].tState == 0)
     {
@@ -900,8 +906,8 @@ static void Task_HandleMonAnimation(u8 taskId)
 void LaunchAnimationTaskForFrontSprite(struct Sprite *sprite, u8 frontAnimId)
 {
     u8 taskId = CreateTask(Task_HandleMonAnimation, 128);
-    gTasks[taskId].tPtrLO = (u32)(sprite) >> 0x10;
-    gTasks[taskId].tPtrHI = (u32)(sprite);
+    gTasks[taskId].tPtrHi = (u32)(sprite) >> 0x10;
+    gTasks[taskId].tPtrLo = (u32)(sprite);
     gTasks[taskId].tAnimId = frontAnimId;
 }
 
@@ -916,8 +922,8 @@ void LaunchAnimationTaskForBackSprite(struct Sprite *sprite, u8 backAnimSet)
     u8 nature, taskId, animId, battlerId;
 
     taskId = CreateTask(Task_HandleMonAnimation, 128);
-    gTasks[taskId].tPtrLO = (u32)(sprite) >> 0x10;
-    gTasks[taskId].tPtrHI = (u32)(sprite);
+    gTasks[taskId].tPtrHi = (u32)(sprite) >> 0x10;
+    gTasks[taskId].tPtrLo = (u32)(sprite);
 
     battlerId = sprite->data[0];
     nature = GetNature(&gPlayerParty[gBattlerPartyIndexes[battlerId]]);
@@ -927,8 +933,8 @@ void LaunchAnimationTaskForBackSprite(struct Sprite *sprite, u8 backAnimSet)
 }
 
 #undef tState
-#undef tPtrLO
-#undef tPtrHI
+#undef tPtrHi
+#undef tPtrLo
 #undef tAnimId
 #undef tSaved0
 #undef tSaved2
