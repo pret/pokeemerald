@@ -867,6 +867,11 @@ u8 GetSpeciesBackAnimSet(u16 species)
 #define tSaved0 data[4]
 #define tSaved2 data[5]
 
+// BUG: In vanilla, tPtrLo is read as an s16, so if bit 15 of the
+// address were to be set it would cause the pointer to be read
+// as 0xFFFFXXXX instead of the desired 0x02YYXXXX.
+// By dumb luck, this is not an issue in vanilla. However,
+// changing the link order revealed this bug.
 #if MODERN
 #define ANIM_SPRITE(taskId)   ((struct Sprite *)((gTasks[taskId].tPtrHi << 16) | ((u16)gTasks[taskId].tPtrLo)))
 #else
