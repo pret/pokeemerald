@@ -105,7 +105,7 @@ static bool8 CheckFeebas(void)
         if (y >= gRoute119WaterTileData[3 * 2 + 0] && y <= gRoute119WaterTileData[3 * 2 + 1])
             route119Section = 2;
 
-        if (Random() % 100 > 49)
+        if (Random() % 100 > 49) // 50% chance of encountering Feebas
             return FALSE;
 
         FeebasSeedRng(gSaveBlock1Ptr->easyChatPairs[0].unk2);
@@ -143,7 +143,7 @@ static void FeebasSeedRng(u16 seed)
 
 static u8 ChooseWildMonIndex_Land(void)
 {
-    u8 rand = Random() % 100;
+    u8 rand = Random() % ENCOUNTER_CHANCE_LAND_MONS_TOTAL;
 
     if (rand < ENCOUNTER_CHANCE_LAND_MONS_INDEX_0)
         return 0;
@@ -173,7 +173,7 @@ static u8 ChooseWildMonIndex_Land(void)
 
 static u8 ChooseWildMonIndex_WaterRock(void)
 {
-    u8 rand = Random() % 100;
+    u8 rand = Random() % ENCOUNTER_CHANCE_WATER_MONS_TOTAL;
 
     if (rand < ENCOUNTER_CHANCE_WATER_MONS_INDEX_0)
         return 0;
@@ -197,7 +197,7 @@ enum
 static u8 ChooseWildMonIndex_Fishing(u8 rod)
 {
     u8 wildMonIndex = 0;
-    u8 rand = Random() % 100;
+    u8 rand = Random() % ENCOUNTER_CHANCE_FISHING_MONS_TOTAL;
 
     switch (rod)
     {

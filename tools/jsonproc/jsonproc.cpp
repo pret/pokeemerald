@@ -5,7 +5,7 @@
 #include <map>
 
 #include <string>
-using std::string;
+using std::string; using std::to_string;
 
 #include <inja.hpp>
 using namespace inja;
@@ -49,6 +49,13 @@ int main(int argc, char *argv[])
     env.add_callback("setVar", 2, [=](Arguments& args) {
         string key = args.at(0)->get<string>();
         string value = args.at(1)->get<string>();
+        set_custom_var(key, value);
+        return "";
+    });
+
+    env.add_callback("setVarInt", 2, [=](Arguments& args) {
+        string key = args.at(0)->get<string>();
+        string value = to_string(args.at(1)->get<int>());
         set_custom_var(key, value);
         return "";
     });
