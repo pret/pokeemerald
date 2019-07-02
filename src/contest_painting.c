@@ -250,8 +250,7 @@ static void HoldContestPainting(void)
     case 1:
         if ((gMain.newKeys & A_BUTTON) || (gMain.newKeys & B_BUTTON))
         {
-            u8 two = 2;  //needed to make the asm match
-            gContestPaintingState = two;
+            gContestPaintingState++;
             BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
         }
 
