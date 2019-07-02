@@ -42,6 +42,8 @@ MID_BUILDDIR = $(OBJ_DIR)/$(MID_SUBDIR)
 
 ASFLAGS := -mcpu=arm7tdmi --defsym MODERN=$(MODERN)
 
+GCC_VER   := $(shell $(CC) -dumpversion)
+
 ifeq ($(MODERN),0)
 CC1             := tools/agbcc/bin/agbcc$(EXE)
 override CFLAGS += -mthumb-interwork -Wimplicit -Wparentheses -Werror -O2 -fhex-asm
@@ -49,11 +51,11 @@ ROM := pokeemerald.gba
 OBJ_DIR := build/emerald
 LIBPATH := -L ../../tools/agbcc/lib
 else
-CC1             := $(shell $(PREFIX)gcc --print-prog-name=cc1)
-override CFLAGS += -mthumb -mthumb-interwork -O2 -mabi=apcs-gnu -mtune=arm7tdmi -march=armv4t -quiet -fno-toplevel-reorder -fno-aggressive-loop-optimizations -Wno-pointer-to-int-cast
+CC1             := $(shell $(PREFIX)gcc --print-prog-name=cc1) -quiet
+override CFLAGS += -mthumb -mthumb-interwork -O2 -mabi=apcs-gnu -mtune=arm7tdmi -march=armv4t -fno-toplevel-reorder -fno-aggressive-loop-optimizations -Wno-pointer-to-int-cast
 ROM := pokeemerald_modern.gba
 OBJ_DIR := build/modern
-LIBPATH := -L $(TOOLCHAIN)/lib/gcc/arm-none-eabi/*/thumb -L $(TOOLCHAIN)/arm-none-eabi/lib/thumb
+LIBPATH := -L $(TOOLCHAIN)/lib/gcc/arm-none-eabi/$(GCC_VER)/thumb -L $(TOOLCHAIN)/arm-none-eabi/lib/thumb
 endif
 
 CPPFLAGS := -iquote include -Wno-trigraphs -DMODERN=$(MODERN)
