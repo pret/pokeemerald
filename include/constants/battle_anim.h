@@ -300,9 +300,11 @@
 #define ANIM_TAG_PURPLE_JAB                 (ANIM_SPRITES_START + 290)
 #define ANIM_TAG_TOXIC_SPIKES               (ANIM_SPRITES_START + 291)
 #define ANIM_TAG_ENERGY_BALL                (ANIM_SPRITES_START + 292)
-#define ANIM_TAG_MEGA_STONE                 (ANIM_SPRITES_START + 293)
-#define ANIM_TAG_MEGA_SYMBOL                (ANIM_SPRITES_START + 294)
-#define ANIM_TAG_MEGA_PARTICLES             (ANIM_SPRITES_START + 295)
+#define ANIM_TAG_SEED_BROWN                 (ANIM_SPRITES_START + 293)
+#define ANIM_TAG_FEINT                      (ANIM_SPRITES_START + 294)
+#define ANIM_TAG_MEGA_STONE                 (ANIM_SPRITES_START + 295)
+#define ANIM_TAG_MEGA_SYMBOL                (ANIM_SPRITES_START + 296)
+#define ANIM_TAG_MEGA_PARTICLES             (ANIM_SPRITES_START + 297)
 
 // battlers
 #define ANIM_ATTACKER    0

@@ -29,6 +29,7 @@ void AnimPetalDanceBigFlower(struct Sprite *);
 void AnimPetalDanceSmallFlower(struct Sprite *);
 void AnimRazorLeafParticle(struct Sprite *);
 void AnimLeechSeed(struct Sprite *);
+static void AnimPluck(struct Sprite *);
 void AnimTranslateLinearSingleSineWave(struct Sprite *);
 void AnimMoveTwisterParticle(struct Sprite *);
 void AnimConstrictBinding(struct Sprite *);
@@ -153,6 +154,8 @@ static void sub_8103300(struct Sprite *);
 static void sub_8103320(struct Sprite *);
 static void sub_81033F0(struct Sprite *);
 static void sub_810342C(struct Sprite *);
+static void AnimMoveFeintSwipe(struct Sprite *);
+static void AnimMoveFeintZoom(struct Sprite *);
 
 const union AnimCmd gUnknown_085920F0[] =
 {
@@ -170,6 +173,40 @@ const union AnimCmd gUnknown_085920F0[] =
 const union AnimCmd *const gUnknown_08592114[] =
 {
     gUnknown_085920F0,
+};
+
+static const union AffineAnimCmd sFeintAffineSwipe[] = { AFFINEANIMCMD_END };
+static const union AffineAnimCmd sFeintAffineZoom[] = 
+{ 
+    AFFINEANIMCMD_FRAME(0x200, 0x200, 0, 0),
+    AFFINEANIMCMD_FRAME(-30, -30, 0, 10),
+    AFFINEANIMCMD_END,
+};
+
+static const union AffineAnimCmd * const sFeintAffineAnims[] = { 
+    sFeintAffineZoom,
+};
+
+const struct SpriteTemplate gFeintSwipeSpriteTemplate = 
+{
+    .tileTag = ANIM_TAG_FEINT,
+    .paletteTag = ANIM_TAG_FEINT,
+    .oam = &gUnknown_0852497C,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = AnimMoveFeintSwipe,
+};
+
+const struct SpriteTemplate gFeintZoomSpriteTemplate =
+{
+    .tileTag = ANIM_TAG_FEINT,
+    .paletteTag = ANIM_TAG_FEINT,
+    .oam = &gUnknown_0852497C,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = sFeintAffineAnims,
+    .callback = AnimMoveFeintZoom,
 };
 
 const struct SpriteTemplate gSleepPowderParticleSpriteTemplate =
@@ -402,6 +439,17 @@ const struct SpriteTemplate gLeechSeedSpriteTemplate =
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = AnimLeechSeed,
+};
+
+const struct SpriteTemplate gPluckParticleSpriteTemplate =
+{
+    .tileTag = ANIM_TAG_SEED_BROWN,
+    .paletteTag = ANIM_TAG_SEED_BROWN,
+    .oam = &gUnknown_0852490C,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = AnimPluck,
 };
 
 const union AnimCmd gUnknown_085922D4[] =
@@ -2634,6 +2682,99 @@ static void AnimHyperBeamOrbStep(struct Sprite* sprite)
         sprite->data[5] += 24;
         sprite->data[5] &= 0xFF;
     }
+}
+
+static void AnimPluckParticle(struct Sprite* sprite)
+{
+    if(sprite->data[0] > 0)
+    {
+        s16 yVelocity = sprite->data[5];
+        s16 xVelocity = sprite->data[2];
+        sprite->pos1.y -= yVelocity;
+        sprite->pos1.x += xVelocity;
+        if((sprite->data[0] % 7) == 0)
+        {
+            sprite->data[5] = yVelocity-1;
+        }
+        sprite->data[0]--;
+    }
+    else
+    {
+        sprite->callback = DestroyAnimSprite;
+    }
+}
+
+// brown seed particle (jumps up, falls down.)
+// used by Pluck.
+// arg 0: initial x offset from target
+// arg 1: initial y offset from target
+// arg 2: lifetime of the particle
+// arg 3: upward velocity initial (decreases over time)
+// arg 4: horizontal velocity (stays the same)
+static void AnimPluck(struct Sprite* sprite)
+{
+    InitSpritePosToAnimTarget(sprite, TRUE);
+
+    sprite->data[0] = gBattleAnimArgs[2]; //lifetime of the particle
+    sprite->data[5] = gBattleAnimArgs[3]; //upward velocity
+    sprite->data[2] = gBattleAnimArgs[4]; //horizontal velocity
+    sprite->pos1.x += gBattleAnimArgs[0];
+    sprite->pos1.y += gBattleAnimArgs[1];
+    sprite->callback = AnimPluckParticle;
+}
+
+static void AnimMoveFeintSwipeStep(struct Sprite* sprite)
+{
+    switch(sprite->data[5])
+    {
+        case 0:
+            if(AnimTranslateLinear(sprite))
+            {
+                //Not the most elegant solution here, but it works without messing up the sprites coordinates
+                sprite->pos2.x = 0;
+                sprite->pos1.x += 64;
+                sprite->data[5]++;
+                sprite->data[0] = sprite->data[6];
+                sprite->data[1] = sprite->pos1.x;
+                sprite->data[2] = sprite->pos1.x - 64;
+                sprite->data[3] = sprite->pos1.y;
+                sprite->data[4] = sprite->pos1.y;
+                InitAnimLinearTranslation(sprite);
+            }
+        break;
+        case 1:
+            if(AnimTranslateLinear(sprite))
+            {
+                sprite->callback = DestroyAnimSprite;
+            }
+        break;
+    }
+
+}
+
+static void AnimMoveFeintSwipe(struct Sprite* sprite)
+{
+    if (GetBattlerSide(gBattleAnimAttacker) != B_SIDE_PLAYER)
+    {
+        gBattleAnimArgs[0] = -gBattleAnimArgs[0];
+    }
+    InitSpritePosToAnimTarget(sprite, TRUE);
+    sprite->data[0] = gBattleAnimArgs[2];
+    sprite->data[6] = gBattleAnimArgs[2];
+    sprite->data[1] = sprite->pos1.x;
+    sprite->data[2] = sprite->pos1.x + 64;
+    sprite->data[3] = sprite->pos1.y;
+    sprite->data[4] = sprite->pos1.y;
+    sprite->data[5] = 0;
+    InitAnimLinearTranslation(sprite);
+    sprite->callback = AnimMoveFeintSwipeStep;
+}
+
+static void AnimMoveFeintZoom(struct Sprite* sprite)
+{
+    InitSpritePosToAnimTarget(sprite, TRUE);
+    StoreSpriteCallbackInData6(sprite, DestroySpriteAndMatrix);
+    sprite->callback = RunStoredCallbackWhenAffineAnimEnds;
 }
 
 // seed (sprouts a sapling from a seed.)

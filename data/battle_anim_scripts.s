@@ -134,7 +134,7 @@ gBattleAnims_Moves::
 	.4byte Move_FOCUS_ENERGY
 	.4byte Move_BIDE
 	.4byte Move_METRONOME
-	.4byte Move_MIRROR_MOVE @ doesn´t have an actual animation
+	.4byte Move_MIRROR_MOVE @ doesnï¿½t have an actual animation
 	.4byte Move_SELF_DESTRUCT
 	.4byte Move_EGG_BOMB
 	.4byte Move_LICK
@@ -894,9 +894,43 @@ Move_NATURAL_GIFT:
 	end
 	
 Move_FEINT:
+	loadspritegfx ANIM_TAG_FEINT
+	createsprite gFeintSwipeSpriteTemplate, ANIM_ATTACKER, 10, -32, 0, 15
+	playsewithpan SE_W013B, SOUND_PAN_ATTACKER
+	delay 15
+	playsewithpan SE_W013B, SOUND_PAN_ATTACKER
+	delay 15
+	waitforvisualfinish
+	delay 5
+	createsprite gFeintZoomSpriteTemplate, ANIM_ATTACKER, 10, 0, 0
+	playsewithpan SE_W025B, SOUND_PAN_TARGET
+	waitforvisualfinish
 	end
 	
 Move_PLUCK:
+	loadspritegfx ANIM_TAG_SEED_BROWN
+	loadspritegfx ANIM_TAG_IMPACT
+	playsewithpan SE_W077, SOUND_PAN_ATTACKER
+	createsprite gBasicHitSplatSpriteTemplate, ANIM_ATTACKER, 2, -10, -5, 1, 2
+	createsprite gPluckParticleSpriteTemplate, ANIM_ATTACKER, 2, 3, 0, 30, 2, 1
+	createsprite gPluckParticleSpriteTemplate, ANIM_ATTACKER, 2, 7, 1, 20, 1, 1
+	createsprite gPluckParticleSpriteTemplate, ANIM_ATTACKER, 2, -3, 5, 40, 2, -1
+	createsprite gPluckParticleSpriteTemplate, ANIM_ATTACKER, 2, 4, -4, 50, 3, -1
+	delay 30
+	playsewithpan SE_W077, SOUND_PAN_ATTACKER
+	createsprite gBasicHitSplatSpriteTemplate, ANIM_ATTACKER, 2, 5, 10, 1, 2
+	createsprite gPluckParticleSpriteTemplate, ANIM_ATTACKER, 2, 3, -4, 30, 1, 1
+	createsprite gPluckParticleSpriteTemplate, ANIM_ATTACKER, 2, 7, -6, 20, 0, 1
+	createsprite gPluckParticleSpriteTemplate, ANIM_ATTACKER, 2, -3, -9, 40, 1, -1
+	createsprite gPluckParticleSpriteTemplate, ANIM_ATTACKER, 2, 4, -4, 50, 2, -1
+	delay 30
+	playsewithpan SE_W077, SOUND_PAN_ATTACKER
+	createsprite gBasicHitSplatSpriteTemplate, ANIM_ATTACKER, 2, 0, 0, 1, 2
+	createsprite gPluckParticleSpriteTemplate, ANIM_ATTACKER, 2, -3, -4, 30, 1, 1
+	createsprite gPluckParticleSpriteTemplate, ANIM_ATTACKER, 2, 7, -6, 50, 0, 1
+	createsprite gPluckParticleSpriteTemplate, ANIM_ATTACKER, 2, -4, -10, 40, 1, 1
+	createsprite gPluckParticleSpriteTemplate, ANIM_ATTACKER, 2, 4, -4, 40, 1, 2
+	waitforvisualfinish
 	end
 	
 Move_TAILWIND:
