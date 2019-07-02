@@ -119,6 +119,12 @@ const u32 gBattleAnimSpriteGfx_WavingHand[] = INCBIN_U32("graphics/battle_anims/
 const u32 gBattleAnimSpriteGfx_Feint[] = INCBIN_U32("graphics/battle_anims/sprites/feint-punch.4bpp.lz");
 const u32 gBattleAnimSpritePal_Feint[] = INCBIN_U32("graphics/battle_anims/sprites/feint-punch.gbapal.lz");
 
+const u32 gBattleAnimSpriteGfx_TrumpCard[] = INCBIN_U32("graphics/battle_anims/sprites/trump-cards.4bpp.lz");
+const u32 gBattleAnimSpritePal_TrumpCard[] = INCBIN_U32("graphics/battle_anims/sprites/trump-cards.gbapal.lz");
+
+const u32 gBattleAnimSpriteGfx_TrumpCardParticles[] = INCBIN_U32("graphics/battle_anims/sprites/trump-card-particles.4bpp.lz");
+const u32 gBattleAnimSpritePal_TrumpCardParticles[] = INCBIN_U32("graphics/battle_anims/sprites/trump-card-particles.gbapal.lz");
+
 const u32 gBattleAnimSpriteGfx_ClosingEye[] = INCBIN_U32("graphics/battle_anims/sprites/closing_eye.4bpp.lz");
 const u32 gBattleAnimSpritePal_ClosingEye[] = INCBIN_U32("graphics/battle_anims/sprites/closing_eye.gbapal.lz");
 

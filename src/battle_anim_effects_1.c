@@ -156,6 +156,8 @@ static void sub_81033F0(struct Sprite *);
 static void sub_810342C(struct Sprite *);
 static void AnimMoveFeintSwipe(struct Sprite *);
 static void AnimMoveFeintZoom(struct Sprite *);
+static void AnimMoveTrumpCard(struct Sprite *);
+static void AnimMoveTrumpCardParticle(struct Sprite* sprite);
 
 const union AnimCmd gUnknown_085920F0[] =
 {
@@ -183,8 +185,120 @@ static const union AffineAnimCmd sFeintAffineZoom[] =
     AFFINEANIMCMD_END,
 };
 
-static const union AffineAnimCmd * const sFeintAffineAnims[] = { 
+static const union AffineAnimCmd sTrumpCardAffine0[] =
+{
+    AFFINEANIMCMD_FRAME(0xC0, 0xC0, 30, 0),
+    AFFINEANIMCMD_END,
+};
+
+static const union AffineAnimCmd sTrumpCardAffine1[] =
+{
+    AFFINEANIMCMD_FRAME(0xA0, 0xA0, 40, 0),
+    AFFINEANIMCMD_END,
+};
+
+static const union AffineAnimCmd sTrumpCardAffine2[] =
+{
+    AFFINEANIMCMD_FRAME(0xD0, 0xD0, -20, 0),
+    AFFINEANIMCMD_END,
+};
+
+static const union AffineAnimCmd sTrumpCardAffine3[] =
+{
+    AFFINEANIMCMD_FRAME(0xE0, 0xE0, 40, 0),
+    AFFINEANIMCMD_END,
+};
+
+static const union AffineAnimCmd sTrumpCardAffine4[] =
+{
+    AFFINEANIMCMD_FRAME(0xF0, 0xF0, 60, 0),
+    AFFINEANIMCMD_END,
+};
+
+static const union AffineAnimCmd * const sTrumpCardAffineAnims[] =
+{
+    sTrumpCardAffine0,
+    sTrumpCardAffine1,
+    sTrumpCardAffine2,
+    sTrumpCardAffine3,
+    sTrumpCardAffine4
+};
+
+static const union AffineAnimCmd * const sFeintAffineAnims[] = 
+{ 
     sFeintAffineZoom,
+};
+
+static const union AnimCmd sTrumpCardFrame0[] =
+{
+    ANIMCMD_FRAME(0, 0),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sTrumpCardFrame1[] =
+{
+    ANIMCMD_FRAME(4, 0),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sTrumpCardFrame2[] =
+{
+    ANIMCMD_FRAME(8, 0),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sTrumpCardParticleFrame0[] =
+{
+    ANIMCMD_FRAME(0, 0),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sTrumpCardParticleFrame1[] =
+{
+    ANIMCMD_FRAME(1, 0),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sTrumpCardParticleFrame2[] =
+{
+    ANIMCMD_FRAME(2, 0),
+    ANIMCMD_END
+};
+
+static const union AnimCmd * const sTrumpCardAnims[] = 
+{
+    sTrumpCardFrame0,
+    sTrumpCardFrame1,
+    sTrumpCardFrame2
+};
+
+static const union AnimCmd * const sTrumpCardParticleAnims[] = 
+{
+    sTrumpCardParticleFrame0,
+    sTrumpCardParticleFrame1,
+    sTrumpCardParticleFrame2,
+};
+
+const struct SpriteTemplate gTrumpCardParticleSpriteTempalte = 
+{
+    .tileTag = ANIM_TAG_TRUMP_CARD_PARTICLES,
+    .paletteTag = ANIM_TAG_TRUMP_CARD_PARTICLES,
+    .oam = &gUnknown_085249C4,
+    .anims = sTrumpCardParticleAnims,
+    .images = NULL,
+    .affineAnims = sTrumpCardAffineAnims,
+    .callback = AnimMoveTrumpCardParticle
+};
+
+const struct SpriteTemplate gTrumpCardSpriteTemplate =
+{
+    .tileTag = ANIM_TAG_TRUMP_CARD,
+    .paletteTag = ANIM_TAG_TRUMP_CARD,
+    .oam = &gUnknown_085249CC,
+    .anims = sTrumpCardAnims,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = AnimMoveTrumpCard
 };
 
 const struct SpriteTemplate gFeintSwipeSpriteTemplate = 
@@ -2775,6 +2889,84 @@ static void AnimMoveFeintZoom(struct Sprite* sprite)
     InitSpritePosToAnimTarget(sprite, TRUE);
     StoreSpriteCallbackInData6(sprite, DestroySpriteAndMatrix);
     sprite->callback = RunStoredCallbackWhenAffineAnimEnds;
+}
+
+static void AnimMoveTrumpCardArc(struct Sprite* sprite)
+{
+    if(AnimTranslateLinear(sprite))
+    {
+        DestroyAnimSprite(sprite);
+    }
+    else
+    {
+        sprite->pos2.y = Sin(sprite->data[5], -20);
+        sprite->data[5] -= sprite->data[6];
+    }
+    
+}
+
+static void AnimMoveTrumpCard(struct Sprite* sprite)
+{
+    if (GetBattlerSide(gBattleAnimAttacker) != B_SIDE_PLAYER)
+    {
+        gBattleAnimArgs[0] = -gBattleAnimArgs[0];
+    }
+    InitSpritePosToAnimTarget(sprite, TRUE);
+    StartSpriteAnim(sprite, gBattleAnimArgs[2]);
+    sprite->data[0] = gBattleAnimArgs[3];
+    sprite->data[1] = sprite->pos1.x;
+    sprite->data[2] = sprite->pos1.x - 80;
+    sprite->data[3] = sprite->pos1.y;
+    sprite->data[4] = sprite->pos1.y;
+    sprite->data[5] = 128;
+    sprite->data[6] = 128 / sprite->data[0];
+    InitAnimLinearTranslation(sprite);
+    sprite->callback = AnimMoveTrumpCardArc;
+}
+
+static void AnimMoveTrumpCardParticleAlive(struct Sprite* sprite)
+{
+    if(sprite->data[0] > 0)
+    {
+        s16 yVelocity = sprite->data[2];
+        s16 xVelocity = sprite->data[1];
+        sprite->pos1.y -= yVelocity;
+        sprite->pos1.x += xVelocity;
+        if((sprite->data[0] % 2) == 0)
+        {
+            if(xVelocity > 0)
+                xVelocity--;
+            else if(xVelocity < 0)
+                xVelocity++;
+
+            if(yVelocity > 0)
+                yVelocity--;
+            else if(yVelocity < 0)
+                yVelocity++;
+            sprite->data[1] = xVelocity;
+            sprite->data[2] = yVelocity;
+        }
+        sprite->data[0]--;
+    }
+    else
+    {
+        sprite->callback = DestroyAnimSprite;
+    }
+}
+
+static void AnimMoveTrumpCardParticle(struct Sprite* sprite)
+{
+    if (GetBattlerSide(gBattleAnimAttacker) != B_SIDE_PLAYER)
+    {
+        gBattleAnimArgs[0] = -gBattleAnimArgs[0];
+    }
+    InitSpritePosToAnimTarget(sprite, TRUE);
+    StartSpriteAnim(sprite, gBattleAnimArgs[2]);
+    StartSpriteAffineAnim(sprite, gBattleAnimArgs[6]);
+    sprite->data[0] = gBattleAnimArgs[3]; //lifespan
+    sprite->data[1] = gBattleAnimArgs[4]; //horizontal velocity, decaying
+    sprite->data[2] = gBattleAnimArgs[5]; //vertical velocity, decaying
+    sprite->callback = AnimMoveTrumpCardParticleAlive;
 }
 
 // seed (sprouts a sapling from a seed.)

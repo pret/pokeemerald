@@ -911,25 +911,25 @@ Move_PLUCK:
 	loadspritegfx ANIM_TAG_SEED_BROWN
 	loadspritegfx ANIM_TAG_IMPACT
 	playsewithpan SE_W077, SOUND_PAN_ATTACKER
-	createsprite gBasicHitSplatSpriteTemplate, ANIM_ATTACKER, 2, -10, -5, 1, 2
-	createsprite gPluckParticleSpriteTemplate, ANIM_ATTACKER, 2, 3, 0, 30, 2, 1
-	createsprite gPluckParticleSpriteTemplate, ANIM_ATTACKER, 2, 7, 1, 20, 1, 1
-	createsprite gPluckParticleSpriteTemplate, ANIM_ATTACKER, 2, -3, 5, 40, 2, -1
-	createsprite gPluckParticleSpriteTemplate, ANIM_ATTACKER, 2, 4, -4, 50, 3, -1
+	createsprite gBasicHitSplatSpriteTemplate, ANIM_ATTACKER, 40, -10, -5, 1, 2
+	createsprite gPluckParticleSpriteTemplate, ANIM_ATTACKER, 40, 3, 0, 20, 2, 1
+	createsprite gPluckParticleSpriteTemplate, ANIM_ATTACKER, 40, 7, 1, 20, 1, 1
+	createsprite gPluckParticleSpriteTemplate, ANIM_ATTACKER, 40, -3, 5, 25, 2, -1
+	createsprite gPluckParticleSpriteTemplate, ANIM_ATTACKER, 40, 4, -4, 30, 3, -1
 	delay 30
 	playsewithpan SE_W077, SOUND_PAN_ATTACKER
-	createsprite gBasicHitSplatSpriteTemplate, ANIM_ATTACKER, 2, 5, 10, 1, 2
-	createsprite gPluckParticleSpriteTemplate, ANIM_ATTACKER, 2, 3, -4, 30, 1, 1
-	createsprite gPluckParticleSpriteTemplate, ANIM_ATTACKER, 2, 7, -6, 20, 0, 1
-	createsprite gPluckParticleSpriteTemplate, ANIM_ATTACKER, 2, -3, -9, 40, 1, -1
-	createsprite gPluckParticleSpriteTemplate, ANIM_ATTACKER, 2, 4, -4, 50, 2, -1
+	createsprite gBasicHitSplatSpriteTemplate, ANIM_ATTACKER, 40, 5, 10, 1, 2
+	createsprite gPluckParticleSpriteTemplate, ANIM_ATTACKER, 40, 3, -4, 20, 1, 1
+	createsprite gPluckParticleSpriteTemplate, ANIM_ATTACKER, 40, 7, -6, 20, 0, 1
+	createsprite gPluckParticleSpriteTemplate, ANIM_ATTACKER, 40, -3, -9, 25, 1, -1
+	createsprite gPluckParticleSpriteTemplate, ANIM_ATTACKER, 40, 4, -4, 30, 2, -1
 	delay 30
 	playsewithpan SE_W077, SOUND_PAN_ATTACKER
-	createsprite gBasicHitSplatSpriteTemplate, ANIM_ATTACKER, 2, 0, 0, 1, 2
-	createsprite gPluckParticleSpriteTemplate, ANIM_ATTACKER, 2, -3, -4, 30, 1, 1
-	createsprite gPluckParticleSpriteTemplate, ANIM_ATTACKER, 2, 7, -6, 50, 0, 1
-	createsprite gPluckParticleSpriteTemplate, ANIM_ATTACKER, 2, -4, -10, 40, 1, 1
-	createsprite gPluckParticleSpriteTemplate, ANIM_ATTACKER, 2, 4, -4, 40, 1, 2
+	createsprite gBasicHitSplatSpriteTemplate, ANIM_ATTACKER, 40, 0, 0, 1, 2
+	createsprite gPluckParticleSpriteTemplate, ANIM_ATTACKER, 40, -3, -4, 20, 1, 1
+	createsprite gPluckParticleSpriteTemplate, ANIM_ATTACKER, 40, 7, -6, 25, 0, 1
+	createsprite gPluckParticleSpriteTemplate, ANIM_ATTACKER, 40, -4, -10, 25, 1, 1
+	createsprite gPluckParticleSpriteTemplate, ANIM_ATTACKER, 40, 4, -4, 25, 1, 2
 	waitforvisualfinish
 	end
 	
@@ -1163,6 +1163,47 @@ Move_PSYCHO_SHIFT:
 	end
 	
 Move_TRUMP_CARD:
+	loadspritegfx ANIM_TAG_TRUMP_CARD
+	loadspritegfx ANIM_TAG_CUT
+	loadspritegfx ANIM_TAG_TRUMP_CARD_PARTICLES
+	monbg ANIM_TARGET
+	setalpha 12, 8
+	playsewithpan SE_W013B, SOUND_PAN_TARGET
+	createsprite gTrumpCardSpriteTemplate, ANIM_ATTACKER, 40, 40, 0, 0, 32
+	delay 2
+	createsprite gTrumpCardSpriteTemplate, ANIM_ATTACKER, 40, 40, 0, 1, 32
+	delay 2
+	playsewithpan SE_W013B, SOUND_PAN_TARGET
+	createsprite gTrumpCardSpriteTemplate, ANIM_ATTACKER, 40, 40, 0, 0, 32
+	delay 2
+	createsprite gTrumpCardSpriteTemplate, ANIM_ATTACKER, 40, 40, 0, 2, 32
+	delay 2
+	playsewithpan SE_W013B, SOUND_PAN_TARGET
+	createsprite gTrumpCardSpriteTemplate, ANIM_ATTACKER, 40, 40, 0, 2, 32
+	delay 2
+	createsprite gTrumpCardSpriteTemplate, ANIM_ATTACKER, 40, 40, 0, 2, 32
+	delay 2
+	playsewithpan SE_W013B, SOUND_PAN_TARGET
+	playsewithpan SE_W015, SOUND_PAN_TARGET
+	createsprite gCuttingSliceSpriteTemplate, ANIM_ATTACKER, 2, 40, -32, 0
+	createsprite gTrumpCardSpriteTemplate, ANIM_ATTACKER, 40, 40, 0, 1, 32
+	delay 2
+	createsprite gTrumpCardSpriteTemplate, ANIM_ATTACKER, 40, 40, 0, 1, 32
+	delay 3
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 0, 3, 10, 1
+	createsprite gTrumpCardParticleSpriteTempalte, ANIM_ATTACKER, 40, 0, 0, 1, 12, -5, -4, 0
+	createsprite gTrumpCardParticleSpriteTempalte, ANIM_ATTACKER, 40, 0, 0, 0, 13, 5, 4, 1
+	createsprite gTrumpCardParticleSpriteTempalte, ANIM_ATTACKER, 40, 0, 0, 1, 8, -3, 0, 2
+	createsprite gTrumpCardParticleSpriteTempalte, ANIM_ATTACKER, 40, 0, 0, 2, 12, -5, 4, 3
+	delay 2
+	createsprite gTrumpCardParticleSpriteTempalte, ANIM_ATTACKER, 40, 0, 0, 1, 10, 1, -4, 4
+	createsprite gTrumpCardParticleSpriteTempalte, ANIM_ATTACKER, 40, 0, 0, 0, 13, 5, 6, 1
+	createsprite gTrumpCardParticleSpriteTempalte, ANIM_ATTACKER, 40, 0, 0, 1, 12, -2, 1, 3
+	createsprite gTrumpCardParticleSpriteTempalte, ANIM_ATTACKER, 40, 0, 0, 2, 13, -2, 1, 2
+	waitforvisualfinish
+	clearmonbg ANIM_TARGET
+	blendoff
+	waitforvisualfinish
 	end
 	
 Move_HEAL_BLOCK:
