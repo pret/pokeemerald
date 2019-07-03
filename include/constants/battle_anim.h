@@ -307,6 +307,8 @@
 #define ANIM_TAG_MEGA_PARTICLES             (ANIM_SPRITES_START + 297)
 #define ANIM_TAG_TRUMP_CARD                 (ANIM_SPRITES_START + 298)
 #define ANIM_TAG_TRUMP_CARD_PARTICLES       (ANIM_SPRITES_START + 299)
+#define ANIM_TAG_ACCUPRESSURE               (ANIM_SPRITES_START + 300)
+#define ANIM_TAG_WRING_OUT                  (ANIM_SPRITES_START + 301)
 
 // battlers
 #define ANIM_ATTACKER    0

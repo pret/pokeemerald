@@ -158,6 +158,8 @@ static void AnimMoveFeintSwipe(struct Sprite *);
 static void AnimMoveFeintZoom(struct Sprite *);
 static void AnimMoveTrumpCard(struct Sprite *);
 static void AnimMoveTrumpCardParticle(struct Sprite* sprite);
+static void AnimMoveAccupressure(struct Sprite* sprite);
+static void AnimMoveWringOut(struct Sprite* sprite);
 
 const union AnimCmd gUnknown_085920F0[] =
 {
@@ -277,6 +279,47 @@ static const union AnimCmd * const sTrumpCardParticleAnims[] =
     sTrumpCardParticleFrame0,
     sTrumpCardParticleFrame1,
     sTrumpCardParticleFrame2,
+};
+
+static const union AffineAnimCmd sAccupressureTurn[] = 
+{
+    AFFINEANIMCMD_FRAME(0, 0, 1, 20),
+    AFFINEANIMCMD_FRAME(0, 0, -1, 40),
+    AFFINEANIMCMD_END,
+};
+
+static const union AffineAnimCmd sAccupressureStill[] = 
+{
+    AFFINEANIMCMD_FRAME(256, 256, 0, 0),
+    AFFINEANIMCMD_END
+};
+
+static const union AffineAnimCmd * const sAccupressureAffineAnims[] = 
+{
+    sAccupressureStill,
+    sAccupressureTurn
+};
+
+const struct SpriteTemplate gAccupressureSpriteTemplate = 
+{
+    .tileTag = ANIM_TAG_ACCUPRESSURE,
+    .paletteTag = ANIM_TAG_ACCUPRESSURE,
+    .oam = &gUnknown_085249D4,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = sAccupressureAffineAnims,
+    .callback = AnimMoveAccupressure,
+};
+
+const struct SpriteTemplate gWringOutHandSpriteTemplate = 
+{
+    .tileTag = ANIM_TAG_WRING_OUT,
+    .paletteTag = ANIM_TAG_WRING_OUT,
+    .oam = &gUnknown_085249D4,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = AnimMoveWringOut,
 };
 
 const struct SpriteTemplate gTrumpCardParticleSpriteTempalte = 
@@ -2967,6 +3010,80 @@ static void AnimMoveTrumpCardParticle(struct Sprite* sprite)
     sprite->data[1] = gBattleAnimArgs[4]; //horizontal velocity, decaying
     sprite->data[2] = gBattleAnimArgs[5]; //vertical velocity, decaying
     sprite->callback = AnimMoveTrumpCardParticleAlive;
+}
+
+static void AnimMoveAccupressureTransition(struct Sprite* sprite)
+{
+    switch(sprite->data[5])
+    {
+        case 0:
+        if(AnimTranslateLinear(sprite))
+        {
+            StartSpriteAffineAnim(sprite, 1);
+            sprite->data[5]++;
+        }
+        break;
+        case 1:
+        if(sprite->affineAnimEnded)
+        {
+            DestroyAnimSprite(sprite);
+        }
+        break;
+    }
+}
+
+static void AnimMoveAccupressure(struct Sprite* sprite)
+{
+    InitSpritePosToAnimTarget(sprite, TRUE);
+    sprite->data[0] = gBattleAnimArgs[2];
+    sprite->data[1] = sprite->pos1.x;
+    sprite->data[2] = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_X);
+    sprite->data[3] = sprite->pos1.y;
+    sprite->data[4] = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_Y);
+    sprite->data[5] = 0;
+    InitAnimLinearTranslation(sprite);
+    sprite->callback = AnimMoveAccupressureTransition;
+}
+
+static void AnimMoveWringOutCircle(struct Sprite* sprite)
+{
+    sprite->pos2.x = Cos(sprite->data[3], sprite->data[2]);
+    sprite->pos2.y = Sin(sprite->data[3], sprite->data[2]);
+    if(sprite->data[1] > 0)
+    {
+        if(sprite->data[3] + sprite->data[0] >= 256)
+        {
+            AGBPrintf("Hit the crit section: step: %d, angle: %d", sprite->data[0], sprite->data[3]);
+            sprite->data[3] = (sprite->data[0] + sprite->data[3]) % 256;
+            sprite->data[1]--;
+            AGBPrintf("Crit New angle: %d", sprite->data[3]);
+        }
+        else
+        {
+            AGBPrintf("New angle: %d", sprite->data[3]);
+            sprite->data[3] += sprite->data[0];
+        }
+        
+    }
+    else if(sprite->data[3] < 64)
+    {
+        //We need to go for an extra 90°
+        sprite->data[3] += sprite->data[0];
+    }
+    else
+    {
+        DestroyAnimSprite(sprite);
+    }
+}
+
+static void AnimMoveWringOut(struct Sprite* sprite)
+{
+    InitSpritePosToAnimTarget(sprite, TRUE);
+    sprite->data[0] = 256 / gBattleAnimArgs[2]; //step size
+    sprite->data[1] = gBattleAnimArgs[3]; //Number of circle spins
+    sprite->data[2] = gBattleAnimArgs[4]; //radius
+    sprite->data[3] = 64; //current angle 90°
+    sprite->callback = AnimMoveWringOutCircle;
 }
 
 // seed (sprouts a sapling from a seed.)

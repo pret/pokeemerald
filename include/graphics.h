@@ -4413,6 +4413,8 @@ extern const u32 gBattleAnimSpriteGfx_Bird[];
 extern const u32 gBattleAnimSpriteGfx_CrossImpact[];
 extern const u32 gBattleAnimSpriteGfx_TrumpCard[];
 extern const u32 gBattleAnimSpriteGfx_TrumpCardParticles[];
+extern const u32 gBattleAnimSpriteGfx_Accupressure[];
+extern const u32 gBattleAnimSpriteGfx_WringOut[];
 
 extern const u32 gBattleAnimSpritePal_Bone[];
 extern const u32 gBattleAnimSpritePal_Spark[];
@@ -4700,6 +4702,8 @@ extern const u32 gBattleAnimSpritePal_WhipHit[];
 extern const u32 gBattleAnimSpritePal_BlueRing2[];
 extern const u32 gBattleAnimSpritePal_TrumpCard[];
 extern const u32 gBattleAnimSpritePal_TrumpCardParticles[];
+extern const u32 gBattleAnimSpritePal_Accupressure[];
+extern const u32 gBattleAnimSpritePal_WringOut[];
 
 extern const u32 gBattleAnimBgImage_Dark[];
 extern const u32 gBattleAnimBgImage_Ghost[];
@@ -4752,6 +4756,7 @@ extern const u32 gBattleAnimBgTilemap_Cosmic[];
 extern const u32 gBattleAnimBgTilemap_InAir[];
 extern const u32 gBattleAnimBgTilemap_Aurora[];
 extern const u32 gBattleAnimBgTilemap_Fissure[];
+
 
 extern const u32 gMetalShineGfx[];
 extern const u32 gMetalShinePalette[];

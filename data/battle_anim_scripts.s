@@ -968,6 +968,11 @@ Move_TAILWIND:
 	end
 	
 Move_ACUPRESSURE:
+	loadspritegfx ANIM_TAG_ACCUPRESSURE
+	loadspritegfx ANIM_TAG_SPARK_2
+	createsprite gAccupressureSpriteTemplate, ANIM_ATTACKER, 40, 0, -40, 40
+	waitforvisualfinish
+	call ElectricityEffect
 	end
 	
 Move_METAL_BURST:
@@ -1231,6 +1236,9 @@ Move_HEAL_BLOCK:
 	end
 	
 Move_WRING_OUT:
+	loadspritegfx ANIM_TAG_WRING_OUT
+	createsprite gWringOutHandSpriteTemplate, ANIM_TARGET, 40, 0, 0, 48, 3, 32
+	waitforvisualfinish
 	end
 	
 Move_POWER_TRICK:
