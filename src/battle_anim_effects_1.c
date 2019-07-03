@@ -3053,14 +3053,11 @@ static void AnimMoveWringOutCircle(struct Sprite* sprite)
     {
         if(sprite->data[3] + sprite->data[0] >= 256)
         {
-            AGBPrintf("Hit the crit section: step: %d, angle: %d", sprite->data[0], sprite->data[3]);
             sprite->data[3] = (sprite->data[0] + sprite->data[3]) % 256;
             sprite->data[1]--;
-            AGBPrintf("Crit New angle: %d", sprite->data[3]);
         }
         else
         {
-            AGBPrintf("New angle: %d", sprite->data[3]);
             sprite->data[3] += sprite->data[0];
         }
         
@@ -3079,6 +3076,10 @@ static void AnimMoveWringOutCircle(struct Sprite* sprite)
 static void AnimMoveWringOut(struct Sprite* sprite)
 {
     InitSpritePosToAnimTarget(sprite, TRUE);
+    if(gBattleAnimArgs[5] == TRUE)
+    {
+        sprite->oam.objMode = ST_OAM_OBJ_BLEND;
+    }
     sprite->data[0] = 256 / gBattleAnimArgs[2]; //step size
     sprite->data[1] = gBattleAnimArgs[3]; //Number of circle spins
     sprite->data[2] = gBattleAnimArgs[4]; //radius
