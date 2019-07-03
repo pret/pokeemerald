@@ -2708,6 +2708,14 @@ extern const u8 gText_Symbols[];
 extern const u8 gText_Register2[];
 extern const u8 gText_Exit2[];
 
+// Pokemon jump
+extern const u8 gText_WantToPlayAgain2[];
+extern const u8 gText_SomeoneDroppedOut2[];
+extern const u8 gText_CommunicationStandby4[];
+extern const u8 gText_AwesomeWonF701F700[];
+extern const u8 gText_FilledStorageSpace2[];
+extern const u8 gText_CantHoldMore[];
+
 // Pokenav Match Call
 extern const u8 gText_CallCantBeMadeHere[];
 extern const u8 gText_NumberRegistered[];
