@@ -2914,70 +2914,21 @@ void sub_800EF88(u8 a0)
     }
 }
 
-#ifdef NONMATCHING
-// FIXME: gUnknown_03005000.unk_c87 should be in r5
-// FIXME: gRecvCmds should be in r6 and r7
 void sub_800EFB0(void)
 {
     s32 i, j;
+
     for (i = 0; i < 5; i++)
     {
+        struct UnkRfuStruct_2 *ptr = &gUnknown_03005000;
         for (j = 0; j < 7; j++)
         {
-            gUnknown_03005000.unk_c87[i][j][1] = gRecvCmds[i][j] >> 8;
-            gUnknown_03005000.unk_c87[i][j][0] = gRecvCmds[i][j];
+            ptr->unk_c87[i][j][1] = gRecvCmds[i][j] >> 8;
+            ptr->unk_c87[i][j][0] = gRecvCmds[i][j];
         }
     }
     CpuFill16(0, gRecvCmds, sizeof gRecvCmds);
 }
-#else
-NAKED void sub_800EFB0(void)
-{
-    asm_unified("\tpush {r4-r7,lr}\n"
-                    "\tsub sp, 0x4\n"
-                    "\tmovs r2, 0\n"
-                    "\tldr r7, =gRecvCmds\n"
-                    "\tldr r0, =gUnknown_03005000\n"
-                    "\tadds r6, r7, 0\n"
-                    "\tldr r1, =0x00000c87\n"
-                    "\tadds r5, r0, r1\n"
-                    "_0800EFC0:\n"
-                    "\tmovs r3, 0\n"
-                    "\tlsls r0, r2, 3\n"
-                    "\tlsls r1, r2, 4\n"
-                    "\tadds r4, r2, 0x1\n"
-                    "\tsubs r0, r2\n"
-                    "\tlsls r0, 1\n"
-                    "\tadds r2, r0, r5\n"
-                    "\tadds r1, r6\n"
-                    "_0800EFD0:\n"
-                    "\tldrh r0, [r1]\n"
-                    "\tlsrs r0, 8\n"
-                    "\tstrb r0, [r2, 0x1]\n"
-                    "\tldrh r0, [r1]\n"
-                    "\tstrb r0, [r2]\n"
-                    "\tadds r2, 0x2\n"
-                    "\tadds r1, 0x2\n"
-                    "\tadds r3, 0x1\n"
-                    "\tcmp r3, 0x6\n"
-                    "\tble _0800EFD0\n"
-                    "\tadds r2, r4, 0\n"
-                    "\tcmp r2, 0x4\n"
-                    "\tble _0800EFC0\n"
-                    "\tmovs r0, 0\n"
-                    "\tmov r1, sp\n"
-                    "\tstrh r0, [r1]\n"
-                    "\tldr r2, =0x01000028\n"
-                    "\tmov r0, sp\n"
-                    "\tadds r1, r7, 0\n"
-                    "\tbl CpuSet\n"
-                    "\tadd sp, 0x4\n"
-                    "\tpop {r4-r7}\n"
-                    "\tpop {r0}\n"
-                    "\tbx r0\n"
-                    "\t.pool");
-}
-#endif
 
 void sub_800F014(void)
 {
