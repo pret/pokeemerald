@@ -2994,26 +2994,26 @@ static void AnimMoveFeintSwipeStep(struct Sprite* sprite)
 {
     switch(sprite->data[5])
     {
-        case 0:
-            if(AnimTranslateLinear(sprite))
-            {
-                //Not the most elegant solution here, but it works without messing up the sprites coordinates
-                sprite->pos2.x = 0;
-                sprite->pos1.x += 64;
-                sprite->data[5]++;
-                sprite->data[0] = sprite->data[6];
-                sprite->data[1] = sprite->pos1.x;
-                sprite->data[2] = sprite->pos1.x - 64;
-                sprite->data[3] = sprite->pos1.y;
-                sprite->data[4] = sprite->pos1.y;
-                InitAnimLinearTranslation(sprite);
-            }
+    case 0:
+        if(AnimTranslateLinear(sprite))
+        {
+            //Not the most elegant solution here, but it works without messing up the sprites coordinates
+            sprite->pos2.x = 0;
+            sprite->pos1.x += 64;
+            sprite->data[5]++;
+            sprite->data[0] = sprite->data[6];
+            sprite->data[1] = sprite->pos1.x;
+            sprite->data[2] = sprite->pos1.x - 64;
+            sprite->data[3] = sprite->pos1.y;
+            sprite->data[4] = sprite->pos1.y;
+            InitAnimLinearTranslation(sprite);
+        }
         break;
-        case 1:
-            if(AnimTranslateLinear(sprite))
-            {
-                sprite->callback = DestroyAnimSprite;
-            }
+    case 1:
+        if(AnimTranslateLinear(sprite))
+        {
+            sprite->callback = DestroyAnimSprite;
+        }
         break;
     }
 
@@ -3126,14 +3126,14 @@ static void AnimMoveAccupressureTransition(struct Sprite* sprite)
 {
     switch(sprite->data[5])
     {
-        case 0:
+    case 0:
         if(AnimTranslateLinear(sprite))
         {
             StartSpriteAffineAnim(sprite, 1);
             sprite->data[5]++;
         }
         break;
-        case 1:
+    case 1:
         if(sprite->affineAnimEnded)
         {
             DestroyAnimSprite(sprite);
