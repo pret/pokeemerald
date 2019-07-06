@@ -160,6 +160,8 @@ static void AnimMoveTrumpCard(struct Sprite *);
 static void AnimMoveTrumpCardParticle(struct Sprite* sprite);
 static void AnimMoveAccupressure(struct Sprite* sprite);
 static void AnimMoveWringOut(struct Sprite* sprite);
+static void AnimMoveWorrySeed(struct Sprite* sprite);
+static void AnimMoveSmallCloud(struct Sprite* sprite);
 
 const union AnimCmd gUnknown_085920F0[] =
 {
@@ -298,6 +300,64 @@ static const union AffineAnimCmd * const sAccupressureAffineAnims[] =
 {
     sAccupressureStill,
     sAccupressureTurn
+};
+
+static const union AffineAnimCmd sSmallCloundsInit[] =
+{
+    AFFINEANIMCMD_FRAME(0x100,0x100, 0, 0),
+    AFFINEANIMCMD_END,
+};
+
+static const union AffineAnimCmd sSmallCloudsVariant0[] = 
+{
+    AFFINEANIMCMD_FRAME(0x100,0x100, 0, 0),
+    AFFINEANIMCMD_FRAME(-10, -10, 0, 15),
+    AFFINEANIMCMD_END
+};
+
+static const union AffineAnimCmd sSmallCloudsVariant1[] = 
+{
+    AFFINEANIMCMD_FRAME(0x180,0x180, 0, 0),
+    AFFINEANIMCMD_FRAME(-18, -18, 0, 21),
+    AFFINEANIMCMD_END
+};
+
+
+static const union AffineAnimCmd sSmallCloudsVariant2[] = 
+{
+    AFFINEANIMCMD_FRAME(0xC0, 0xC0, 0, 0),
+    AFFINEANIMCMD_FRAME(-6, -6, 0, 15),
+    AFFINEANIMCMD_END
+};
+
+static const union AffineAnimCmd * const sSmallCloudSpriteAffineAnimTable[] = 
+{
+    sSmallCloundsInit,
+    sSmallCloudsVariant0,
+    sSmallCloudsVariant1,
+    sSmallCloudsVariant2,
+};
+
+const struct SpriteTemplate gWorrySeedSpriteTemplate = 
+{
+    .tileTag = ANIM_TAG_WORRY_SEED,
+    .paletteTag = ANIM_TAG_WORRY_SEED,
+    .oam = &gUnknown_0852490C,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = AnimMoveWorrySeed
+};
+
+const struct SpriteTemplate gSmallCloudTemplate = 
+{
+    .tileTag = ANIM_TAG_SMALL_CLOUD,
+    .paletteTag = ANIM_TAG_SMALL_CLOUD,
+    .oam = &gUnknown_0852496C,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = sSmallCloudSpriteAffineAnimTable,
+    .callback = AnimMoveSmallCloud
 };
 
 const struct SpriteTemplate gAccupressureSpriteTemplate = 
@@ -2839,6 +2899,56 @@ static void AnimHyperBeamOrbStep(struct Sprite* sprite)
         sprite->data[5] += 24;
         sprite->data[5] &= 0xFF;
     }
+}
+
+static void AnimMoveWorrySeedWait(struct Sprite* sprite)
+{
+    if (TranslateAnimHorizontalArc(sprite))
+        DestroyAnimSprite(sprite);
+}
+
+// arg 0: initial x pixel offset
+// arg 1: initial y pixel offset
+// arg 2: wave period
+// arg 3: wave amplitude
+static void AnimMoveWorrySeed(struct Sprite* sprite)
+{
+    InitSpritePosToAnimAttacker(sprite, TRUE);
+    sprite->data[2] = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_X);
+    sprite->data[4] = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_Y);
+
+    sprite->data[0] = gBattleAnimArgs[2];
+    sprite->data[5] = gBattleAnimArgs[3];
+    InitAnimArcTranslation(sprite);
+    sprite->callback = AnimMoveWorrySeedWait;
+}
+
+static void AnimMoveSmallCloudAnimate(struct Sprite* sprite)
+{
+    sprite->pos2.x += sprite->data[0];
+    sprite->pos2.y += sprite->data[1];
+
+    if(sprite->affineAnimEnded)
+    {
+        DestroyAnimSprite(sprite);
+    }
+
+}
+#define ONE_IF_ZERO(x) ((x) > 0 ? (x) : 1)
+
+// arg 0: initial x pixel offset
+// arg 1: initial y pixel offset
+// arg 2: cloud type animation [0..2]
+// arg 3: horizontal velocity
+// arg 4: vertical velocity
+// arg 5: duration
+static void AnimMoveSmallCloud(struct Sprite* sprite)
+{
+    InitSpritePosToAnimTarget(sprite, TRUE);
+    sprite->data[0] = gBattleAnimArgs[3];
+    sprite->data[1] = gBattleAnimArgs[4];
+    sprite->callback = AnimMoveSmallCloudAnimate;
+    StartSpriteAffineAnim(sprite, gBattleAnimArgs[2]+1);
 }
 
 static void AnimPluckParticle(struct Sprite* sprite)

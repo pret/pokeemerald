@@ -4415,6 +4415,9 @@ extern const u32 gBattleAnimSpriteGfx_TrumpCard[];
 extern const u32 gBattleAnimSpriteGfx_TrumpCardParticles[];
 extern const u32 gBattleAnimSpriteGfx_Accupressure[];
 extern const u32 gBattleAnimSpriteGfx_WringOut[];
+extern const u32 gBattleAnimSpriteGfx_ColoredOrbs[];
+extern const u32 gBattleAnimSpriteGfx_WorrySeed[];
+extern const u32 gBattleAnimSpriteGfx_SmallCloud[];
 
 extern const u32 gBattleAnimSpritePal_Bone[];
 extern const u32 gBattleAnimSpritePal_Spark[];
@@ -4704,6 +4707,9 @@ extern const u32 gBattleAnimSpritePal_TrumpCard[];
 extern const u32 gBattleAnimSpritePal_TrumpCardParticles[];
 extern const u32 gBattleAnimSpritePal_Accupressure[];
 extern const u32 gBattleAnimSpritePal_WringOut[];
+extern const u32 gBattleAnimSpritePal_ColoredOrbs[];
+extern const u32 gBattleAnimSpritePal_WorrySeed[];
+extern const u32 gBattleAnimSpritePal_SmallCloud[];
 
 extern const u32 gBattleAnimBgImage_Dark[];
 extern const u32 gBattleAnimBgImage_Ghost[];
