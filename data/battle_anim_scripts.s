@@ -134,7 +134,7 @@ gBattleAnims_Moves::
 	.4byte Move_FOCUS_ENERGY
 	.4byte Move_BIDE
 	.4byte Move_METRONOME
-	.4byte Move_MIRROR_MOVE @ doesn´t have an actual animation
+	.4byte Move_MIRROR_MOVE @ doesn't have an actual animation
 	.4byte Move_SELF_DESTRUCT
 	.4byte Move_EGG_BOMB
 	.4byte Move_LICK
@@ -894,9 +894,43 @@ Move_NATURAL_GIFT:
 	end
 	
 Move_FEINT:
+	loadspritegfx ANIM_TAG_FEINT
+	createsprite gFeintSwipeSpriteTemplate, ANIM_ATTACKER, 10, -32, 0, 15
+	playsewithpan SE_W013B, SOUND_PAN_ATTACKER
+	delay 15
+	playsewithpan SE_W013B, SOUND_PAN_ATTACKER
+	delay 15
+	waitforvisualfinish
+	delay 5
+	createsprite gFeintZoomSpriteTemplate, ANIM_ATTACKER, 10, 0, 0
+	playsewithpan SE_W025B, SOUND_PAN_TARGET
+	waitforvisualfinish
 	end
 	
 Move_PLUCK:
+	loadspritegfx ANIM_TAG_SEED_BROWN
+	loadspritegfx ANIM_TAG_IMPACT
+	playsewithpan SE_W077, SOUND_PAN_ATTACKER
+	createsprite gBasicHitSplatSpriteTemplate, ANIM_ATTACKER, 40, -10, -5, 1, 2
+	createsprite gPluckParticleSpriteTemplate, ANIM_ATTACKER, 40, 3, 0, 20, 2, 1
+	createsprite gPluckParticleSpriteTemplate, ANIM_ATTACKER, 40, 7, 1, 20, 1, 1
+	createsprite gPluckParticleSpriteTemplate, ANIM_ATTACKER, 40, -3, 5, 25, 2, -1
+	createsprite gPluckParticleSpriteTemplate, ANIM_ATTACKER, 40, 4, -4, 30, 3, -1
+	delay 30
+	playsewithpan SE_W077, SOUND_PAN_ATTACKER
+	createsprite gBasicHitSplatSpriteTemplate, ANIM_ATTACKER, 40, 5, 10, 1, 2
+	createsprite gPluckParticleSpriteTemplate, ANIM_ATTACKER, 40, 3, -4, 20, 1, 1
+	createsprite gPluckParticleSpriteTemplate, ANIM_ATTACKER, 40, 7, -6, 20, 0, 1
+	createsprite gPluckParticleSpriteTemplate, ANIM_ATTACKER, 40, -3, -9, 25, 1, -1
+	createsprite gPluckParticleSpriteTemplate, ANIM_ATTACKER, 40, 4, -4, 30, 2, -1
+	delay 30
+	playsewithpan SE_W077, SOUND_PAN_ATTACKER
+	createsprite gBasicHitSplatSpriteTemplate, ANIM_ATTACKER, 40, 0, 0, 1, 2
+	createsprite gPluckParticleSpriteTemplate, ANIM_ATTACKER, 40, -3, -4, 20, 1, 1
+	createsprite gPluckParticleSpriteTemplate, ANIM_ATTACKER, 40, 7, -6, 25, 0, 1
+	createsprite gPluckParticleSpriteTemplate, ANIM_ATTACKER, 40, -4, -10, 25, 1, 1
+	createsprite gPluckParticleSpriteTemplate, ANIM_ATTACKER, 40, 4, -4, 25, 1, 2
+	waitforvisualfinish
 	end
 	
 Move_TAILWIND:
@@ -934,6 +968,11 @@ Move_TAILWIND:
 	end
 	
 Move_ACUPRESSURE:
+	loadspritegfx ANIM_TAG_ACCUPRESSURE
+	loadspritegfx ANIM_TAG_SPARK_2
+	createsprite gAccupressureSpriteTemplate, ANIM_ATTACKER, 40, 0, -40, 40
+	waitforvisualfinish
+	call ElectricityEffect
 	end
 	
 Move_METAL_BURST:
@@ -1129,6 +1168,47 @@ Move_PSYCHO_SHIFT:
 	end
 	
 Move_TRUMP_CARD:
+	loadspritegfx ANIM_TAG_TRUMP_CARD
+	loadspritegfx ANIM_TAG_CUT
+	loadspritegfx ANIM_TAG_TRUMP_CARD_PARTICLES
+	monbg ANIM_TARGET
+	setalpha 12, 8
+	playsewithpan SE_W013B, SOUND_PAN_TARGET
+	createsprite gTrumpCardSpriteTemplate, ANIM_ATTACKER, 40, 40, 0, 0, 32
+	delay 2
+	createsprite gTrumpCardSpriteTemplate, ANIM_ATTACKER, 40, 40, 0, 1, 32
+	delay 2
+	playsewithpan SE_W013B, SOUND_PAN_TARGET
+	createsprite gTrumpCardSpriteTemplate, ANIM_ATTACKER, 40, 40, 0, 0, 32
+	delay 2
+	createsprite gTrumpCardSpriteTemplate, ANIM_ATTACKER, 40, 40, 0, 2, 32
+	delay 2
+	playsewithpan SE_W013B, SOUND_PAN_TARGET
+	createsprite gTrumpCardSpriteTemplate, ANIM_ATTACKER, 40, 40, 0, 2, 32
+	delay 2
+	createsprite gTrumpCardSpriteTemplate, ANIM_ATTACKER, 40, 40, 0, 2, 32
+	delay 2
+	playsewithpan SE_W013B, SOUND_PAN_TARGET
+	playsewithpan SE_W015, SOUND_PAN_TARGET
+	createsprite gCuttingSliceSpriteTemplate, ANIM_ATTACKER, 2, 40, -32, 0
+	createsprite gTrumpCardSpriteTemplate, ANIM_ATTACKER, 40, 40, 0, 1, 32
+	delay 2
+	createsprite gTrumpCardSpriteTemplate, ANIM_ATTACKER, 40, 40, 0, 1, 32
+	delay 3
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 0, 3, 10, 1
+	createsprite gTrumpCardParticleSpriteTempalte, ANIM_ATTACKER, 40, 0, 0, 1, 12, -5, -4, 0
+	createsprite gTrumpCardParticleSpriteTempalte, ANIM_ATTACKER, 40, 0, 0, 0, 13, 5, 4, 1
+	createsprite gTrumpCardParticleSpriteTempalte, ANIM_ATTACKER, 40, 0, 0, 1, 8, -3, 0, 2
+	createsprite gTrumpCardParticleSpriteTempalte, ANIM_ATTACKER, 40, 0, 0, 2, 12, -5, 4, 3
+	delay 2
+	createsprite gTrumpCardParticleSpriteTempalte, ANIM_ATTACKER, 40, 0, 0, 1, 10, 1, -4, 4
+	createsprite gTrumpCardParticleSpriteTempalte, ANIM_ATTACKER, 40, 0, 0, 0, 13, 5, 6, 1
+	createsprite gTrumpCardParticleSpriteTempalte, ANIM_ATTACKER, 40, 0, 0, 1, 12, -2, 1, 3
+	createsprite gTrumpCardParticleSpriteTempalte, ANIM_ATTACKER, 40, 0, 0, 2, 13, -2, 1, 2
+	waitforvisualfinish
+	clearmonbg ANIM_TARGET
+	blendoff
+	waitforvisualfinish
 	end
 	
 Move_HEAL_BLOCK:
@@ -1156,6 +1236,24 @@ Move_HEAL_BLOCK:
 	end
 	
 Move_WRING_OUT:
+	loadspritegfx ANIM_TAG_WRING_OUT
+	monbg ANIM_TARGET
+	setalpha 12, 8
+	createsprite gWringOutHandSpriteTemplate, ANIM_TARGET, 40, 0, 0, 48, 3, 32, FALSE
+	delay 3
+	createsprite gWringOutHandSpriteTemplate, ANIM_TARGET, 40, 0, 0, 48, 3, 32, TRUE
+	delay 3
+	createsprite gWringOutHandSpriteTemplate, ANIM_TARGET, 40, 0, 0, 48, 3, 32, TRUE
+	delay 3
+	createsprite gWringOutHandSpriteTemplate, ANIM_TARGET, 40, 0, 0, 48, 3, 32, TRUE
+	delay 3
+	createsprite gWringOutHandSpriteTemplate, ANIM_TARGET, 40, 0, 0, 48, 3, 32, TRUE
+	delay 3
+	createsprite gWringOutHandSpriteTemplate, ANIM_TARGET, 40, 0, 0, 48, 3, 32, TRUE
+	waitforvisualfinish
+	clearmonbg ANIM_TARGET
+	blendoff
+	waitforvisualfinish
 	end
 	
 Move_POWER_TRICK:
@@ -1238,9 +1336,87 @@ Move_COPYCAT:
 	end
 	
 Move_POWER_SWAP:
+	loadspritegfx ANIM_TAG_COLORED_ORBS
+	playsewithpan SE_W104, 0
+	createsprite gPowerSwapGuardSwapSpriteTemplate, ANIM_TARGET, 3, 0, 0, 0, 0, 42, -32
+	delay 2
+	createsprite gPowerSwapGuardSwapSpriteTemplate, ANIM_TARGET, 3, 0, 0, 1, 0, 42, -32
+	delay 2
+	createsprite gPowerSwapGuardSwapSpriteTemplate, ANIM_TARGET, 3, 0, 0, 1, 0, 42, -32
+	delay 2
+	createsprite gPowerSwapGuardSwapSpriteTemplate, ANIM_TARGET, 3, 0, 0, 1, 0, 42, -32
+	delay 2
+	playsewithpan SE_W104, 0
+	createsprite gPowerSwapGuardSwapSpriteTemplate, ANIM_TARGET, 3, 0, 0, 0, 1, 42, 32
+	delay 2
+	createsprite gPowerSwapGuardSwapSpriteTemplate, ANIM_TARGET, 3, 0, 0, 1, 1, 42, 32
+	delay 2
+	createsprite gPowerSwapGuardSwapSpriteTemplate, ANIM_TARGET, 3, 0, 0, 1, 1, 42, 32
+	delay 2
+	createsprite gPowerSwapGuardSwapSpriteTemplate, ANIM_TARGET, 3, 0, 0, 1, 1, 42, 32
+
+	waitforvisualfinish
+	playsewithpan SE_W104, 0
+	createsprite gPowerSwapGuardSwapSpriteTemplate, ANIM_TARGET, 3, 0, 0, 0, 0, 42, -32
+	delay 2
+	createsprite gPowerSwapGuardSwapSpriteTemplate, ANIM_TARGET, 3, 0, 0, 1, 0, 42, -32
+	delay 2
+	createsprite gPowerSwapGuardSwapSpriteTemplate, ANIM_TARGET, 3, 0, 0, 1, 0, 42, -32
+	delay 2
+	createsprite gPowerSwapGuardSwapSpriteTemplate, ANIM_TARGET, 3, 0, 0, 1, 0, 42, -32
+	delay 2
+	playsewithpan SE_W104, 0
+	createsprite gPowerSwapGuardSwapSpriteTemplate, ANIM_TARGET, 3, 0, 0, 0, 1, 42, 32
+	delay 2
+	createsprite gPowerSwapGuardSwapSpriteTemplate, ANIM_TARGET, 3, 0, 0, 1, 1, 42, 32
+	delay 2
+	createsprite gPowerSwapGuardSwapSpriteTemplate, ANIM_TARGET, 3, 0, 0, 1, 1, 42, 32
+	delay 2
+	createsprite gPowerSwapGuardSwapSpriteTemplate, ANIM_TARGET, 3, 0, 0, 1, 1, 42, 32
+	delay 2
+	waitforvisualfinish
 	end
 	
 Move_GUARD_SWAP:
+	loadspritegfx ANIM_TAG_COLORED_ORBS
+	playsewithpan SE_W104, 0
+	createsprite gPowerSwapGuardSwapSpriteTemplate, ANIM_TARGET, 3, 0, 0, 2, 0, 42, -32
+	delay 2
+	createsprite gPowerSwapGuardSwapSpriteTemplate, ANIM_TARGET, 3, 0, 0, 3, 0, 42, -32
+	delay 2
+	createsprite gPowerSwapGuardSwapSpriteTemplate, ANIM_TARGET, 3, 0, 0, 3, 0, 42, -32
+	delay 2
+	createsprite gPowerSwapGuardSwapSpriteTemplate, ANIM_TARGET, 3, 0, 0, 3, 0, 42, -32
+	delay 2
+	playsewithpan SE_W104, 0
+	createsprite gPowerSwapGuardSwapSpriteTemplate, ANIM_TARGET, 3, 0, 0, 2, 1, 42, 32
+	delay 2
+	createsprite gPowerSwapGuardSwapSpriteTemplate, ANIM_TARGET, 3, 0, 0, 3, 1, 42, 32
+	delay 2
+	createsprite gPowerSwapGuardSwapSpriteTemplate, ANIM_TARGET, 3, 0, 0, 3, 1, 42, 32
+	delay 2
+	createsprite gPowerSwapGuardSwapSpriteTemplate, ANIM_TARGET, 3, 0, 0, 3, 1, 42, 32
+
+	waitforvisualfinish
+	playsewithpan SE_W104, 0
+	createsprite gPowerSwapGuardSwapSpriteTemplate, ANIM_TARGET, 3, 0, 0, 2, 0, 42, -32
+	delay 2
+	createsprite gPowerSwapGuardSwapSpriteTemplate, ANIM_TARGET, 3, 0, 0, 3, 0, 42, -32
+	delay 2
+	createsprite gPowerSwapGuardSwapSpriteTemplate, ANIM_TARGET, 3, 0, 0, 3, 0, 42, -32
+	delay 2
+	createsprite gPowerSwapGuardSwapSpriteTemplate, ANIM_TARGET, 3, 0, 0, 3, 0, 42, -32
+	delay 2
+	playsewithpan SE_W104, 0
+	createsprite gPowerSwapGuardSwapSpriteTemplate, ANIM_TARGET, 3, 0, 0, 2, 1, 42, 32
+	delay 2
+	createsprite gPowerSwapGuardSwapSpriteTemplate, ANIM_TARGET, 3, 0, 0, 3, 1, 42, 32
+	delay 2
+	createsprite gPowerSwapGuardSwapSpriteTemplate, ANIM_TARGET, 3, 0, 0, 3, 1, 42, 32
+	delay 2
+	createsprite gPowerSwapGuardSwapSpriteTemplate, ANIM_TARGET, 3, 0, 0, 3, 1, 42, 32
+	delay 2
+	waitforvisualfinish
 	end
 	
 Move_PUNISHMENT:
@@ -1250,6 +1426,17 @@ Move_LAST_RESORT:
 	end
 	
 Move_WORRY_SEED:
+	loadspritegfx ANIM_TAG_WORRY_SEED
+	loadspritegfx ANIM_TAG_SMALL_CLOUD
+	playsewithpan SE_W077, SOUND_PAN_ATTACKER
+	createsprite gWorrySeedSpriteTemplate, ANIM_ATTACKER, 3, 0, 0, 32, -32
+	waitforvisualfinish
+	playsewithpan SE_W028, SOUND_PAN_TARGET
+	createsprite gSmallCloudTemplate, ANIM_ATTACKER, 3, -2, -1, 0, -1, -1
+	createsprite gSmallCloudTemplate, ANIM_ATTACKER, 3,  3,  1, 1, 2, -1
+	createsprite gSmallCloudTemplate, ANIM_ATTACKER, 3, -2,  1, 2, 1, -2
+	createsprite gSmallCloudTemplate, ANIM_ATTACKER, 3,  3, -2, 1, -1, -2
+	waitforvisualfinish
 	end
 	
 Move_SUCKER_PUNCH:

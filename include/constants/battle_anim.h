@@ -300,9 +300,18 @@
 #define ANIM_TAG_PURPLE_JAB                 (ANIM_SPRITES_START + 290)
 #define ANIM_TAG_TOXIC_SPIKES               (ANIM_SPRITES_START + 291)
 #define ANIM_TAG_ENERGY_BALL                (ANIM_SPRITES_START + 292)
-#define ANIM_TAG_MEGA_STONE                 (ANIM_SPRITES_START + 293)
-#define ANIM_TAG_MEGA_SYMBOL                (ANIM_SPRITES_START + 294)
-#define ANIM_TAG_MEGA_PARTICLES             (ANIM_SPRITES_START + 295)
+#define ANIM_TAG_SEED_BROWN                 (ANIM_SPRITES_START + 293)
+#define ANIM_TAG_FEINT                      (ANIM_SPRITES_START + 294)
+#define ANIM_TAG_MEGA_STONE                 (ANIM_SPRITES_START + 295)
+#define ANIM_TAG_MEGA_SYMBOL                (ANIM_SPRITES_START + 296)
+#define ANIM_TAG_MEGA_PARTICLES             (ANIM_SPRITES_START + 297)
+#define ANIM_TAG_TRUMP_CARD                 (ANIM_SPRITES_START + 298)
+#define ANIM_TAG_TRUMP_CARD_PARTICLES       (ANIM_SPRITES_START + 299)
+#define ANIM_TAG_ACCUPRESSURE               (ANIM_SPRITES_START + 300)
+#define ANIM_TAG_WRING_OUT                  (ANIM_SPRITES_START + 301)
+#define ANIM_TAG_COLORED_ORBS               (ANIM_SPRITES_START + 302)
+#define ANIM_TAG_WORRY_SEED                 (ANIM_SPRITES_START + 303)
+#define ANIM_TAG_SMALL_CLOUD                (ANIM_SPRITES_START + 304)
 
 // battlers
 #define ANIM_ATTACKER    0

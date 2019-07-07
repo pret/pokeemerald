@@ -1418,9 +1418,18 @@ const struct CompressedSpriteSheet gBattleAnimPicTable[] =
     {gBattleAnimSpriteGfx_PurpleJab, 0x0100, ANIM_TAG_PURPLE_JAB},
     {gBattleAnimSpriteGfx_Spikes, 0x0080, ANIM_TAG_TOXIC_SPIKES},
     {gBattleAnimSpriteGfx_EnergyBall, 0x0200, ANIM_TAG_ENERGY_BALL},
+    {gBattleAnimSpriteGfx_SeedBrown, 0x0080, ANIM_TAG_SEED_BROWN},
+    {gBattleAnimSpriteGfx_Feint, 0x0800, ANIM_TAG_FEINT},
     {gBattleAnimSpriteGfx_MegaStone, 0x800, ANIM_TAG_MEGA_STONE},
     {gBattleAnimSpriteGfx_MegaSymbol, 0x0200, ANIM_TAG_MEGA_SYMBOL},
     {gBattleAnimSpriteGfx_MegaParticles, 0x0180, ANIM_TAG_MEGA_PARTICLES},
+    {gBattleAnimSpriteGfx_TrumpCard, 0x0180, ANIM_TAG_TRUMP_CARD},
+    {gBattleAnimSpriteGfx_TrumpCardParticles, 0x0060, ANIM_TAG_TRUMP_CARD_PARTICLES},
+    {gBattleAnimSpriteGfx_Accupressure, 0x0200, ANIM_TAG_ACCUPRESSURE},
+    {gBattleAnimSpriteGfx_WringOut, 0x0200, ANIM_TAG_WRING_OUT},
+    {gBattleAnimSpriteGfx_ColoredOrbs, 0x0300, ANIM_TAG_COLORED_ORBS},
+    {gBattleAnimSpriteGfx_WorrySeed, 0x0080, ANIM_TAG_WORRY_SEED},
+    {gBattleAnimSpriteGfx_SmallCloud, 0x0080, ANIM_TAG_SMALL_CLOUD},
 };
 
 const struct CompressedSpritePalette gBattleAnimPaletteTable[] =
@@ -1718,9 +1727,18 @@ const struct CompressedSpritePalette gBattleAnimPaletteTable[] =
     {gBattleAnimSpritePal_PurpleJab, ANIM_TAG_PURPLE_JAB},
     {gBattleAnimSpritePal_ToxicSpikes, ANIM_TAG_TOXIC_SPIKES},
     {gBattleAnimSpritePal_EnergyBall, ANIM_TAG_ENERGY_BALL},
+    {gBattleAnimSpritePal_SeedBrown, ANIM_TAG_SEED_BROWN},
+    {gBattleAnimSpritePal_Feint, ANIM_TAG_FEINT},
     {gBattleAnimSpritePal_MegaStone, ANIM_TAG_MEGA_STONE},
     {gBattleAnimSpritePal_MegaSymbol, ANIM_TAG_MEGA_SYMBOL},
     {gBattleAnimSpritePal_MegaParticles, ANIM_TAG_MEGA_PARTICLES},
+    {gBattleAnimSpritePal_TrumpCard, ANIM_TAG_TRUMP_CARD},
+    {gBattleAnimSpritePal_TrumpCardParticles, ANIM_TAG_TRUMP_CARD_PARTICLES},
+    {gBattleAnimSpritePal_Accupressure, ANIM_TAG_ACCUPRESSURE},
+    {gBattleAnimSpritePal_WringOut, ANIM_TAG_WRING_OUT},
+    {gBattleAnimSpritePal_ColoredOrbs, ANIM_TAG_COLORED_ORBS},
+    {gBattleAnimSpritePal_WorrySeed, ANIM_TAG_WORRY_SEED},
+    {gBattleAnimSpritePal_SmallCloud, ANIM_TAG_SMALL_CLOUD},
 };
 
 const struct BattleAnimBackground gBattleAnimBackgroundTable[] =
