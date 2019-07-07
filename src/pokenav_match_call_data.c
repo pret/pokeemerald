@@ -96,7 +96,7 @@ typedef union {
 struct UnkStruct_08625388 {
     u16 idx;
     u16 v2;
-    u16 v4;
+    u32 v4;
     const u8 *v8[4];
 };
 
@@ -1209,7 +1209,6 @@ static void MatchCall_GetNameAndDescByRematchIdx(u32 idx, const u8 **desc, const
     *name = trainer->trainerName;
 }
 
-#ifdef NONMATCHING
 const u8 *sub_81D1B40(u32 idx, u32 offset)
 {
     u32 i;
@@ -1218,95 +1217,21 @@ const u8 *sub_81D1B40(u32 idx, u32 offset)
     {
         if (sMatchCallCheckPageOverrides[i].idx == idx)
         {
-            for (; i + 1 < ARRAY_COUNT(sMatchCallCheckPageOverrides) && sMatchCallCheckPageOverrides[i + 1].idx == idx; i++)
+            while (1)
             {
+                if (i + 1 >= ARRAY_COUNT(sMatchCallCheckPageOverrides))
+                    break;
+                if (sMatchCallCheckPageOverrides[i + 1].idx != idx)
+                    break;
                 if (!FlagGet(sMatchCallCheckPageOverrides[i + 1].v4))
                     break;
+                i++;
             }
             return sMatchCallCheckPageOverrides[i].v8[offset];
         }
     }
     return NULL;
 }
-#else
-NAKED const u8 *sub_81D1B40(u32 idx, u32 offset)
-{
-    asm_unified("\tpush {r4-r7,lr}\n"
-                    "\tmov r7, r9\n"
-                    "\tmov r6, r8\n"
-                    "\tpush {r6,r7}\n"
-                    "\tadds r6, r0, 0\n"
-                    "\tmovs r5, 0\n"
-                    "\tldr r2, =sMatchCallCheckPageOverrides\n"
-                    "\tmovs r0, 0x8\n"
-                    "\tadds r0, r2\n"
-                    "\tmov r9, r0\n"
-                    "_081D1B54:\n"
-                    "\tlsls r0, r5, 1\n"
-                    "\tadds r0, r5\n"
-                    "\tlsls r0, 3\n"
-                    "\tadds r0, r2\n"
-                    "\tldrh r0, [r0]\n"
-                    "\tcmp r0, r6\n"
-                    "\tbne _081D1BBC\n"
-                    "\tadds r4, r5, 0x1\n"
-                    "\tlsls r1, 2\n"
-                    "\tmov r8, r1\n"
-                    "\tcmp r4, 0x3\n"
-                    "\tbhi _081D1BA8\n"
-                    "\tlsls r0, r4, 1\n"
-                    "\tadds r0, r4\n"
-                    "\tlsls r0, 3\n"
-                    "\tadds r0, r2\n"
-                    "\tldrh r0, [r0]\n"
-                    "\tcmp r0, r6\n"
-                    "\tbne _081D1BA8\n"
-                    "\tldr r7, =sMatchCallCheckPageOverrides\n"
-                    "_081D1B7C:\n"
-                    "\tlsls r0, r4, 1\n"
-                    "\tadds r0, r4\n"
-                    "\tlsls r0, 3\n"
-                    "\tadds r1, r7, 0x4\n"
-                    "\tadds r0, r1\n"
-                    "\tldrh r0, [r0]\n"
-                    "\tbl FlagGet\n"
-                    "\tlsls r0, 24\n"
-                    "\tcmp r0, 0\n"
-                    "\tbeq _081D1BA8\n"
-                    "\tadds r5, r4, 0\n"
-                    "\tadds r4, r5, 0x1\n"
-                    "\tcmp r4, 0x3\n"
-                    "\tbhi _081D1BA8\n"
-                    "\tlsls r0, r4, 1\n"
-                    "\tadds r0, r4\n"
-                    "\tlsls r0, 3\n"
-                    "\tadds r0, r7\n"
-                    "\tldrh r0, [r0]\n"
-                    "\tcmp r0, r6\n"
-                    "\tbeq _081D1B7C\n"
-                    "_081D1BA8:\n"
-                    "\tlsls r0, r5, 1\n"
-                    "\tadds r0, r5\n"
-                    "\tlsls r0, 3\n"
-                    "\tadd r0, r8\n"
-                    "\tadd r0, r9\n"
-                    "\tldr r0, [r0]\n"
-                    "\tb _081D1BC4\n"
-                    "\t.pool\n"
-                    "_081D1BBC:\n"
-                    "\tadds r5, 0x1\n"
-                    "\tcmp r5, 0x3\n"
-                    "\tbls _081D1B54\n"
-                    "\tmovs r0, 0\n"
-                    "_081D1BC4:\n"
-                    "\tpop {r3,r4}\n"
-                    "\tmov r8, r3\n"
-                    "\tmov r9, r4\n"
-                    "\tpop {r4-r7}\n"
-                    "\tpop {r1}\n"
-                    "\tbx r1");
-}
-#endif
 
 int sub_81D1BD0(u32 idx)
 {
