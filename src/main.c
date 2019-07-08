@@ -89,7 +89,20 @@ void AgbMain()
     // Modern compilers are liberal with the stack on entry to this function,
     // so RegisterRamReset may crash if it resets IWRAM.
     RegisterRamReset(RESET_ALL & ~RESET_IWRAM);
-    DmaFill32(3, 0, IWRAM_START, 0x7E00);
+    asm("mov\tr1, #0xC0\n"
+        "\tlsl\tr1, r1, #0x12\n"
+        "\tmov r2, #0xFC\n"
+        "\tlsl r2, r2, #0x7\n"
+        "\tadd\tr2, r1, r2\n"
+        "\tmov\tr0, #0\n"
+        "\tmov\tr3, r0\n"
+        "\tmov\tr4, r0\n"
+        "\tmov\tr5, r0\n"
+        ".LCU0:\n"
+        "\tstmia r1!, {r0, r3, r4, r5}\n"
+        "\tcmp\tr1, r2\n"
+        "\tbcc\t.LCU0\n"
+    );
 #else
     RegisterRamReset(RESET_ALL);
 #endif //MODERN
