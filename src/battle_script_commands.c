@@ -7962,18 +7962,33 @@ static void atk84_jumpifcantmakeasleep(void)
 
 static void atk85_stockpile(void)
 {
-    if (gDisableStructs[gBattlerAttacker].stockpileCounter >= 3)
+    switch (gBattlescriptCurrInstr[1])
     {
-        gMoveResultFlags |= MOVE_RESULT_MISSED;
-        gBattleCommunication[MULTISTRING_CHOOSER] = 1;
+    case 0:
+        if (gDisableStructs[gBattlerAttacker].stockpileCounter >= 3)
+        {
+            gMoveResultFlags |= MOVE_RESULT_MISSED;
+            gBattleCommunication[MULTISTRING_CHOOSER] = 1;
+        }
+        else
+        {
+            gDisableStructs[gBattlerAttacker].stockpileCounter++;
+            gDisableStructs[gBattlerAttacker].stockpileBeforeDef = gBattleMons[gBattlerAttacker].statStages[STAT_DEF];
+            gDisableStructs[gBattlerAttacker].stockpileBeforeSpDef = gBattleMons[gBattlerAttacker].statStages[STAT_SPDEF];
+            PREPARE_BYTE_NUMBER_BUFFER(gBattleTextBuff1, 1, gDisableStructs[gBattlerAttacker].stockpileCounter);
+            gBattleCommunication[MULTISTRING_CHOOSER] = 0;
+        }
+        break;
+    case 1: // Save def/sp def stats.
+        if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT))
+        {
+            gDisableStructs[gBattlerAttacker].stockpileDef += gBattleMons[gBattlerAttacker].statStages[STAT_DEF] - gDisableStructs[gBattlerAttacker].stockpileBeforeDef;
+            gDisableStructs[gBattlerAttacker].stockpileSpDef += gBattleMons[gBattlerAttacker].statStages[STAT_SPDEF] - gDisableStructs[gBattlerAttacker].stockpileBeforeSpDef;
+        }
+        break;
     }
-    else
-    {
-        gDisableStructs[gBattlerAttacker].stockpileCounter++;
-        PREPARE_BYTE_NUMBER_BUFFER(gBattleTextBuff1, 1, gDisableStructs[gBattlerAttacker].stockpileCounter);
-        gBattleCommunication[MULTISTRING_CHOOSER] = 0;
-    }
-    gBattlescriptCurrInstr++;
+
+    gBattlescriptCurrInstr += 2;
 }
 
 static void atk86_stockpiletobasedamage(void)
@@ -7986,11 +8001,12 @@ static void atk86_stockpiletobasedamage(void)
     else
     {
         if (gBattleCommunication[6] != 1)
-        {
             gBattleScripting.animTurn = gDisableStructs[gBattlerAttacker].stockpileCounter;
-        }
 
         gDisableStructs[gBattlerAttacker].stockpileCounter = 0;
+        // Restore stat changes from stockpile.
+        gBattleMons[gBattlerAttacker].statStages[STAT_DEF] -= gDisableStructs[gBattlerAttacker].stockpileDef;
+        gBattleMons[gBattlerAttacker].statStages[STAT_SPDEF] -= gDisableStructs[gBattlerAttacker].stockpileSpDef;
         gBattlescriptCurrInstr += 5;
     }
 }
@@ -8004,25 +8020,32 @@ static void atk87_stockpiletohpheal(void)
         gBattlescriptCurrInstr = jumpPtr;
         gBattleCommunication[MULTISTRING_CHOOSER] = 0;
     }
-    else if (gBattleMons[gBattlerAttacker].maxHP == gBattleMons[gBattlerAttacker].hp)
-    {
-        gDisableStructs[gBattlerAttacker].stockpileCounter = 0;
-        gBattlescriptCurrInstr = jumpPtr;
-        gBattlerTarget = gBattlerAttacker;
-        gBattleCommunication[MULTISTRING_CHOOSER] = 1;
-    }
     else
     {
-        gBattleMoveDamage = gBattleMons[gBattlerAttacker].maxHP / (1 << (3 - gDisableStructs[gBattlerAttacker].stockpileCounter));
+        if (gBattleMons[gBattlerAttacker].maxHP == gBattleMons[gBattlerAttacker].hp)
+        {
+            gDisableStructs[gBattlerAttacker].stockpileCounter = 0;
+            gBattlescriptCurrInstr = jumpPtr;
+            gBattlerTarget = gBattlerAttacker;
+            gBattleCommunication[MULTISTRING_CHOOSER] = 1;
+        }
+        else
+        {
+            gBattleMoveDamage = gBattleMons[gBattlerAttacker].maxHP / (1 << (3 - gDisableStructs[gBattlerAttacker].stockpileCounter));
 
-        if (gBattleMoveDamage == 0)
-            gBattleMoveDamage = 1;
-        gBattleMoveDamage *= -1;
+            if (gBattleMoveDamage == 0)
+                gBattleMoveDamage = 1;
+            gBattleMoveDamage *= -1;
 
-        gBattleScripting.animTurn = gDisableStructs[gBattlerAttacker].stockpileCounter;
-        gDisableStructs[gBattlerAttacker].stockpileCounter = 0;
-        gBattlescriptCurrInstr += 5;
-        gBattlerTarget = gBattlerAttacker;
+            gBattleScripting.animTurn = gDisableStructs[gBattlerAttacker].stockpileCounter;
+            gDisableStructs[gBattlerAttacker].stockpileCounter = 0;
+            gBattlescriptCurrInstr += 5;
+            gBattlerTarget = gBattlerAttacker;
+        }
+
+        // Restore stat changes from stockpile.
+        gBattleMons[gBattlerAttacker].statStages[STAT_DEF] -= gDisableStructs[gBattlerAttacker].stockpileDef;
+        gBattleMons[gBattlerAttacker].statStages[STAT_SPDEF] -= gDisableStructs[gBattlerAttacker].stockpileSpDef;
     }
 }
 
@@ -8276,6 +8299,8 @@ static void atk8A_normalisebuffs(void) // haze
 
     for (i = 0; i < gBattlersCount; i++)
     {
+        gDisableStructs[i].stockpileDef = 0;
+        gDisableStructs[i].stockpileSpDef = 0;
         for (j = 0; j < NUM_BATTLE_STATS; j++)
             gBattleMons[i].statStages[j] = 6;
     }
