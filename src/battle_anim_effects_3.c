@@ -4708,6 +4708,17 @@ static void AnimForesightMagnifyingGlassStep(struct Sprite *sprite)
     }
 }
 
+const struct SpriteTemplate gDracoMeteorSmashSpriteTemplate =
+{
+    .tileTag = ANIM_TAG_WARM_ROCK,
+    .paletteTag = ANIM_TAG_WARM_ROCK,
+    .oam = &gUnknown_08524914,//&gUnknown_0852490C,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = AnimMeteorMashStar,
+};
+
 static void AnimMeteorMashStarStep(struct Sprite *sprite)
 {
     sprite->pos2.x = ((sprite->data[2] - sprite->data[0]) * sprite->data[5]) / sprite->data[4];

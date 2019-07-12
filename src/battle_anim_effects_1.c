@@ -162,6 +162,10 @@ static void AnimMoveAccupressure(struct Sprite* sprite);
 static void AnimMoveWringOut(struct Sprite* sprite);
 static void AnimMoveWorrySeed(struct Sprite* sprite);
 static void AnimMoveSmallCloud(struct Sprite* sprite);
+static void AnimGrassKnotStep(struct Sprite *sprite);
+void AnimGrassKnot(struct Sprite *sprite);
+void AnimWoodHammerSmall(struct Sprite *sprite);
+void AnimWoodHammerBig(struct Sprite *sprite);
 
 const union AnimCmd gUnknown_085920F0[] =
 {
@@ -786,6 +790,17 @@ const struct SpriteTemplate gTwisterLeafParticleSpriteTemplate =
 {
     .tileTag = ANIM_TAG_LEAF,
     .paletteTag = ANIM_TAG_LEAF,
+    .oam = &gUnknown_0852490C,
+    .anims = gUnknown_08592388,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = AnimMoveTwisterParticle,
+};
+
+const struct SpriteTemplate gAttackOrderParticleSpriteTemplate =
+{
+    .tileTag = ANIM_TAG_ATTACK_ORDER,
+    .paletteTag = ANIM_TAG_ATTACK_ORDER,
     .oam = &gUnknown_0852490C,
     .anims = gUnknown_08592388,
     .images = NULL,
@@ -2698,6 +2713,194 @@ const struct SpriteTemplate gNightSlashRightSpriteTemplate =
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = AnimNightSlash,
 };
+
+const struct SpriteTemplate gLuckyChantBigStarsSpriteTemplate =
+{
+    .tileTag = ANIM_TAG_GOLD_STARS,
+    .paletteTag = ANIM_TAG_GOLD_STARS,
+    .oam = &gUnknown_0852490C,
+    .anims = gUnknown_08592314,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = AnimPetalDanceBigFlower,
+};
+
+const struct SpriteTemplate gLuckyChantSmallStarsSpriteTemplate =
+{
+    .tileTag = ANIM_TAG_GOLD_STARS,
+    .paletteTag = ANIM_TAG_GOLD_STARS,
+    .oam = &gUnknown_08524904,
+    .anims = gUnknown_08592318,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = AnimPetalDanceSmallFlower,
+};
+
+const union AnimCmd gWoodHammerBigAnimCmd_1[] =
+{
+    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_END,
+};
+
+const union AnimCmd gWoodHammerBigAnimCmd_2[] =
+{
+    ANIMCMD_FRAME(16, 1),
+    ANIMCMD_END,
+};
+
+const union AnimCmd *const gWoodHammerBigAnims[] =
+{
+    gWoodHammerBigAnimCmd_1,
+    gWoodHammerBigAnimCmd_2,
+};
+
+const union AffineAnimCmd gWoodHammerBigAffineAnimCmd_1[] =
+{
+    AFFINEANIMCMD_FRAME(0x0, 0x0, -5, 5),
+    AFFINEANIMCMD_JUMP(0),
+};
+
+const union AffineAnimCmd gWoodHammerBigAffineAnimCmd_2[] =
+{
+    AFFINEANIMCMD_FRAME(0x0, 0x0, 5, 5),
+    AFFINEANIMCMD_JUMP(0),
+};
+
+const union AffineAnimCmd *const gWoodHammerBigAffineAnims[] =
+{
+    gWoodHammerBigAffineAnimCmd_1,
+    gWoodHammerBigAffineAnimCmd_2,
+};
+
+const union AnimCmd gWoodHammerSmallAnimCmd_1[] =
+{
+    ANIMCMD_FRAME(32, 1),
+    ANIMCMD_END,
+};
+
+const union AnimCmd gWoodHammerSmallAnimCmd_2[] =
+{
+    ANIMCMD_FRAME(48, 1),
+    ANIMCMD_END,
+};
+
+const union AnimCmd gWoodHammerSmallAnimCmd_3[] =
+{
+    ANIMCMD_FRAME(64, 1),
+    ANIMCMD_END,
+};
+
+const union AnimCmd *const gWoodHammerSmallAnims[] =
+{
+    gWoodHammerSmallAnimCmd_1,
+    gWoodHammerSmallAnimCmd_2,
+    gWoodHammerSmallAnimCmd_3,
+};
+
+const struct SpriteTemplate gGrassKnotSpriteTemplate =
+{
+    .tileTag = ANIM_TAG_RAZOR_LEAF,
+    .paletteTag = ANIM_TAG_RAZOR_LEAF,
+    .oam = &gUnknown_08524934,
+    .anims = gUnknown_085923D4,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = AnimGrassKnot,
+};
+
+const struct SpriteTemplate gWoodHammerBigSpriteTemplate =
+{
+    .tileTag = ANIM_TAG_WOOD_HAMMER,
+    .paletteTag = ANIM_TAG_WOOD_HAMMER,
+    .oam = &gUnknown_08524974,
+    .anims = gWoodHammerBigAnims,
+    .images = NULL,
+    .affineAnims = gWoodHammerBigAffineAnims,
+    .callback = AnimWoodHammerBig,
+};
+
+const struct SpriteTemplate gWoodHammerSmallSpriteTemplate =
+{
+    .tileTag = ANIM_TAG_WOOD_HAMMER,
+    .paletteTag = ANIM_TAG_WOOD_HAMMER,
+    .oam = &gUnknown_08524914,
+    .anims = gWoodHammerSmallAnims,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = AnimWoodHammerSmall,
+};
+
+void AnimGrassKnot(struct Sprite *sprite)
+{
+    if (BATTLE_PARTNER(gBattleAnimAttacker) == gBattleAnimTarget && GetBattlerPosition(gBattleAnimTarget) < B_POSITION_PLAYER_RIGHT)
+        gBattleAnimArgs[0] *= -1;
+
+    InitSpritePosToAnimTarget(sprite, TRUE);
+
+    if (GetBattlerSide(gBattleAnimAttacker) != B_SIDE_PLAYER)
+        gBattleAnimArgs[2] = -gBattleAnimArgs[2];
+
+    sprite->data[0] = gBattleAnimArgs[3];
+    sprite->data[1] = sprite->pos1.x;
+    sprite->data[2] = sprite->pos1.x + gBattleAnimArgs[2];
+    sprite->data[3] = sprite->pos1.y;
+    sprite->data[4] = sprite->pos1.y;
+
+    InitAnimLinearTranslation(sprite);
+
+    sprite->data[5] = gBattleAnimArgs[5];
+    sprite->data[6] = gBattleAnimArgs[4];
+    sprite->data[7] = 0;
+
+    sprite->callback = AnimGrassKnotStep;
+}
+
+static void AnimGrassKnotStep(struct Sprite *sprite)
+{
+    if (!AnimTranslateLinear(sprite))
+    {
+        sprite->pos2.y += Sin(sprite->data[7] >> 8, sprite->data[5]);
+        sprite->data[7] += sprite->data[6];
+    }
+    else
+    {
+        DestroyAnimSprite(sprite);
+    }
+}
+
+void AnimWoodHammerBig(struct Sprite *sprite)
+{
+    if (GetBattlerSide(gBattleAnimAttacker) == B_SIDE_OPPONENT)
+        StartSpriteAffineAnim(sprite, 1);
+
+    TranslateAnimSpriteToTargetMonLocation(sprite);
+}
+
+void AnimWoodHammerSmall(struct Sprite *sprite)
+{
+    StartSpriteAnim(sprite, gBattleAnimArgs[5]);
+    AnimateSprite(sprite);
+
+    if (GetBattlerSide(gBattleAnimAttacker) != B_SIDE_PLAYER)
+        sprite->pos1.x -= gBattleAnimArgs[0];
+    else
+        sprite->pos1.x += gBattleAnimArgs[0];
+
+    sprite->pos1.y += gBattleAnimArgs[1];
+
+    sprite->data[0] = gBattleAnimArgs[4];
+    sprite->data[1] = sprite->pos1.x;
+    sprite->data[2] = sprite->pos1.x + gBattleAnimArgs[2];
+    sprite->data[3] = sprite->pos1.y;
+    sprite->data[4] = sprite->pos1.y + gBattleAnimArgs[3];
+
+    InitSpriteDataForLinearTranslation(sprite);
+    sprite->data[3] = 0;
+    sprite->data[4] = 0;
+
+    sprite->callback = TranslateSpriteLinearFixedPoint;
+    StoreSpriteCallbackInData6(sprite, DestroySpriteAndMatrix);
+}
 
 // Animates the falling particles that horizontally wave back and forth.
 // Used by Sleep Powder, Stun Spore, and Poison Powder.
