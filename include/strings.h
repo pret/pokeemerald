@@ -2723,4 +2723,20 @@ extern const u8 gText_NumberOfBattles[];
 extern const u8 gText_Unknown[];
 extern const u8 gText_TrainerCloseBy[];
 
+// pokenav_unk_2
+extern const u8 gUnknown_085EBCC5[];
+extern const u8 gUnknown_085EBCE8[];
+extern const u8 gUnknown_085EBD01[];
+extern const u8 gUnknown_085EBD1C[];
+extern const u8 gUnknown_085EBD34[];
+extern const u8 gUnknown_085EBD83[];
+extern const u8 gUnknown_085EBDA2[];
+extern const u8 gUnknown_085EBDBF[];
+extern const u8 gUnknown_085EBDDB[];
+extern const u8 gUnknown_085EBDEE[];
+extern const u8 gUnknown_085EBE06[];
+extern const u8 gUnknown_085EBE19[];
+extern const u8 gUnknown_085EBE2D[];
+extern const u8 gUnknown_085EBE41[];
+
 #endif // GUARD_STRINGS_H
