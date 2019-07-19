@@ -1820,7 +1820,7 @@ static bool8 AllocPartyMenuBg(void)
 
 static bool8 AllocPartyMiscGfx(void)
 {
-    int sizeout;
+    u32 sizeout;
 
     switch (gUnknown_0203CEC4->data[0])
     {
