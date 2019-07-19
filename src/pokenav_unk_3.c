@@ -37,9 +37,10 @@ static u32 sub_81CACF8(struct Pokenav3Struct *);
 static u32 sub_81CAD20(int);
 static bool32 sub_81CB1D0(void);
 
-extern const u8 gUnknown_08622508[];
-extern const u8 gUnknown_0862250A[];
-extern const u8 *const gUnknown_08622028[][4];
+#include "data/text/trainers_eye_messages.h"
+
+const u8 gUnknown_08622508[] = {0, 2};
+const u8 gUnknown_0862250A[] = {0, 1, 2, 0, 0, 0};
 
 bool32 sub_81CAAE8(void)
 {
