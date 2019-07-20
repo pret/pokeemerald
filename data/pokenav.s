@@ -4,138 +4,13 @@
 	.section .rodata
 
 // pokenav_unk_5.s
-gUnknown_08622868:: @ 8622868
-	.incbin "graphics/pokenav/8622868.gbapal"
 
-gUnknown_08622888:: @ 8622888
-	.incbin "graphics/pokenav/zoom_tiles.4bpp.lz"
 
-gUnknown_08622A7C:: @ 8622A7C
-	 .incbin "graphics/pokenav/city_maps/lavaridge_0.bin.lz"
 
-gUnknown_08622AC0:: @ 8622AC0
-	 .incbin "graphics/pokenav/city_maps/fallarbor_0.bin.lz"
 
-gUnknown_08622B08:: @ 8622B08
-	 .incbin "graphics/pokenav/city_maps/fortree_0.bin.lz"
 
-gUnknown_08622B58:: @ 8622B58
-	 .incbin "graphics/pokenav/city_maps/slateport_0.bin.lz"
 
-gUnknown_08622BB8:: @ 8622BB8
-	 .incbin "graphics/pokenav/city_maps/slateport_1.bin.lz"
 
-gUnknown_08622C04:: @ 8622C04
-	 .incbin "graphics/pokenav/city_maps/rustboro_0.bin.lz"
-
-gUnknown_08622C58:: @ 8622C58
-	 .incbin "graphics/pokenav/city_maps/rustboro_1.bin.lz"
-
-gUnknown_08622CAC:: @ 8622CAC
-	 .incbin "graphics/pokenav/city_maps/pacifidlog_0.bin.lz"
-
-gUnknown_08622CEC:: @ 8622CEC
-	 .incbin "graphics/pokenav/city_maps/mauville_0.bin.lz"
-
-gUnknown_08622D44:: @ 8622D44
-	 .incbin "graphics/pokenav/city_maps/mauville_1.bin.lz"
-
-gUnknown_08622D98:: @ 8622D98
-	 .incbin "graphics/pokenav/city_maps/oldale_0.bin.lz"
-
-gUnknown_08622DC8:: @ 8622DC8
-	 .incbin "graphics/pokenav/city_maps/lilycove_0.bin.lz"
-
-gUnknown_08622E14:: @ 8622E14
-	 .incbin "graphics/pokenav/city_maps/lilycove_1.bin.lz"
-
-gUnknown_08622E6C:: @ 8622E6C
-	 .incbin "graphics/pokenav/city_maps/littleroot_0.bin.lz"
-
-gUnknown_08622E9C:: @ 8622E9C
-	 .incbin "graphics/pokenav/city_maps/dewford_0.bin.lz"
-
-gUnknown_08622ED4:: @ 8622ED4
-	 .incbin "graphics/pokenav/city_maps/sootopolis_0.bin.lz"
-
-gUnknown_08622F14:: @ 8622F14
-	 .incbin "graphics/pokenav/city_maps/ever_grande_0.bin.lz"
-
-gUnknown_08622F5C:: @ 8622F5C
-	 .incbin "graphics/pokenav/city_maps/ever_grande_1.bin.lz"
-
-gUnknown_08622FA0:: @ 8622FA0
-	 .incbin "graphics/pokenav/city_maps/verdanturf_0.bin.lz"
-
-gUnknown_08622FD8:: @ 8622FD8
-	 .incbin "graphics/pokenav/city_maps/mossdeep_0.bin.lz"
-
-gUnknown_08623020:: @ 8623020
-	 .incbin "graphics/pokenav/city_maps/mossdeep_1.bin.lz"
-
-gUnknown_0862307C:: @ 862307C
-	 .incbin "graphics/pokenav/city_maps/petalburg_0.bin.lz"
-
-gUnknown_086230D8:: @ 86230D8
-	.4byte 0x11F5
-	.4byte 0x206A
-	.4byte 0x3402
-
-gUnknown_086230E4:: @ 86230E4
-	.4byte NULL
-	.4byte sub_81CC848
-	.4byte sub_81CC878
-	.4byte sub_81CC8D8
-	.4byte sub_81CC95C
-
-gUnknown_086230F8:: @ 86230F8
-	obj_tiles gHoennMapZoomIcons_Gfx, 0x800, 6
-
-gUnknown_08623100:: @ 8623100
-	obj_pal gHoennMapZoomIcons_Pal, 11
-	null_obj_pal
-
-gUnknown_08623110:: @ 8623110
-	.byte 1
-	.byte 17
-	.byte 4
-	.byte 12
-	.byte 13
-	.byte 1
-	.2byte 0x4C
-
-gUnknown_08623118:: @ 8623118
-	.4byte 0, gUnknown_08622E6C 
-	.4byte 1, gUnknown_08622D98
-	.4byte 2, gUnknown_08622E9C
-	.4byte 3, gUnknown_08622A7C
-	.4byte 4, gUnknown_08622AC0
-	.4byte 5, gUnknown_08622FA0
-	.4byte 6, gUnknown_08622CAC
-	.4byte 7, gUnknown_0862307C
-	.4byte 8, gUnknown_08622B58
-	.4byte 0x10008, gUnknown_08622BB8
-	.4byte 9, gUnknown_08622D44
-	.4byte 0x10009, gUnknown_08622CEC
-	.4byte 0xA, gUnknown_08622C04
-	.4byte 0x1000A, gUnknown_08622C58
-	.4byte 0xB, gUnknown_08622B08
-	.4byte 0xC, gUnknown_08622E14
-	.4byte 0x1000C, gUnknown_08622DC8
-	.4byte 0xD, gUnknown_08623020
-	.4byte 0x1000D, gUnknown_08622FD8
-	.4byte 0xE, gUnknown_08622ED4
-	.4byte 0xF, gUnknown_08622F14
-	.4byte 0x1000F, gUnknown_08622F5C
-
-gUnknown_086231C8:: @ 86231C8
-	.2byte 0x4000
-	.2byte 0x4000
-	.2byte 0x400
-	.2byte 0x0
-
-gUnknown_086231D0:: @ 86231D0
-	spr_template 6, 11, gUnknown_086231C8, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, sub_81CCEF4
 
 // pokenav_unk_6.s
 // <none>
