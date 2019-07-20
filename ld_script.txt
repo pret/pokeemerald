@@ -647,6 +647,8 @@ SECTIONS {
         src/pokenav_unk_3.o(.rodata);
         src/pokenav_unk_4.o(.rodata);
         src/pokenav_unk_5.o(.rodata);
+        src/pokenav_unk_7.o(.rodata);
+        src/pokenav_unk_8.o(.rodata);
         data/pokenav.o(.rodata);
         src/pokenav_unk_10.o(.rodata);
         src/pokenav_match_call_data.o(.rodata);

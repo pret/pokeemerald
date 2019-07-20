@@ -131,12 +131,12 @@ const struct SpritePalette gUnknown_08623100[] =
 const struct WindowTemplate gUnknown_08623110 = 
 {
     .bg = 1,
-    .tilemapLeft 17,
-    .tilemapTop 4,
-    .width 12,
-    .height 13,
-    .paletteNum 1,
-    .baseBlock 0x4C
+    .tilemapLeft = 17,
+    .tilemapTop = 4,
+    .width = 12,
+    .height = 13,
+    .paletteNum = 1,
+    .baseBlock = 0x4C
 };
 
 #include "data/region_map/city_map_entries.h"
