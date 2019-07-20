@@ -42,8 +42,8 @@ struct CityZoomPic
 static u32 sub_81CC568(struct Pokenav5Struct *);
 static u32 sub_81CC5B4(struct Pokenav5Struct *);
 static u32 sub_81CC5DC(struct Pokenav5Struct *);
-static u32 sub_81CC6F4(int);
-static u32 sub_81CCD34(int);
+static u32 sub_81CC6F4(s32);
+static u32 sub_81CCD34(s32);
 static bool32 sub_81CC6BC(void);
 static void sub_81CC9EC(void);
 static void sub_81CC9C0(void);
@@ -202,7 +202,7 @@ static bool8 sub_81CC6D0(void)
     return gSaveBlock2Ptr->regionMapZoom == 1;
 }
 
-static u32 sub_81CC6F4(int taskState)
+static u32 sub_81CC6F4(s32 taskState)
 {
     int var0;
     struct RegionMap *regionMap;
@@ -518,7 +518,7 @@ static bool32 sub_81CCD24(void)
     return FuncIsActiveLoopedTask(sub_81CCD34);
 }
 
-static u32 sub_81CCD34(int taskState)
+static u32 sub_81CCD34(s32 taskState)
 {
     struct Pokenav5Struct_2 *state = GetSubstructPtr(4);
     if (taskState < (int)ARRAY_COUNT(gUnknown_08623118))

@@ -262,10 +262,10 @@ static bool8 sub_814842C(struct Sprite *sprite);
 static bool8 sub_8148458(struct Sprite *sprite);
 
 // iwram bss vars
-IWRAM_DATA static s16 sUnusedRectangularSpiralVar;
-IWRAM_DATA static u8 sTestingTransitionId;
-IWRAM_DATA static u8 sTestingTransitionState;
-IWRAM_DATA static struct StructRectangularSpiral sRectangularSpiralTransition[4];
+static s16 sUnusedRectangularSpiralVar;
+static u8 sTestingTransitionId;
+static u8 sTestingTransitionState;
+static struct StructRectangularSpiral sRectangularSpiralTransition[4];
 
 // ewram vars
 EWRAM_DATA static struct TransitionData *sTransitionStructPtr = NULL;

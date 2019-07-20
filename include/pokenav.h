@@ -4,7 +4,7 @@
 #include "bg.h"
 #include "main.h"
 
-typedef u32 (*LoopedTask)(int state);
+typedef u32 (*LoopedTask)(s32 state);
 
 // Return values of LoopedTask functions.
 #define LT_INC_AND_PAUSE 0
@@ -111,7 +111,7 @@ void sub_81C7850(u32 a0);
 u32 sub_81C786C(void);
 void LoadLeftHeaderGfxForIndex(u32 arg0);
 void sub_81C7FA0(u32 arg0, bool32 arg1, bool32 arg2);
-void sub_81C7AC0(int a0);
+void sub_81C7AC0(s32 a0);
 bool32 sub_81C8010(void);
 void InitBgTemplates(const struct BgTemplate *templates, int count);
 bool32 IsPaletteFadeActive(void);

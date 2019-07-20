@@ -245,7 +245,7 @@ static void CableCarMainCallback_Setup(void)
 {
     u16 imebak;
     u8 i = 0;
-    int sizeOut = 0;
+    u32 sizeOut = 0;
 
     switch (gMain.state)
     {

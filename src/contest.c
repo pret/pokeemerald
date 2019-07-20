@@ -269,8 +269,6 @@ extern const u8 gText_Contest_Fear[];
 extern const u8 gText_BDot[];
 extern const u8 gText_CDot[];
 extern const u8 *const gUnknown_08587E10[];
-extern const struct SpriteTemplate gSpriteTemplate_8587AD0;
-extern const struct SpriteTemplate gSpriteTemplate_8587B18[];
 extern void (*const gContestEffectFuncs[])(void);
 
 static const u8 gUnknown_08587A6C[] =
@@ -1268,7 +1266,7 @@ static void sub_80D8108(u8 taskId)
         gTasks[taskId].data[0]++;
         break;
     case 1:
-        (s16)gBattle_BG1_Y += 7;
+        *(s16*)&gBattle_BG1_Y += 7;
         if ((s16)gBattle_BG1_Y <= 160)
             break;
         gTasks[taskId].data[0]++;

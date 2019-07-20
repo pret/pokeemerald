@@ -3994,8 +3994,8 @@ static void sub_8144514(struct Sprite *sprite)
     if (gUnknown_0203AB88->var94 > 40.f)
         return;
 
-    gUnknown_0203AB88->var98 = -(4.0f / (float)gUnknown_0203AB88->var86);
-    gUnknown_0203AB88->var90 = -(gUnknown_0203AB88->var8C / (float)gUnknown_0203AB88->var86);
+    gUnknown_0203AB88->var98 = -(4.0f / (float)(gUnknown_0203AB88->var86));
+    gUnknown_0203AB88->var90 = -(gUnknown_0203AB88->var8C / (float)(gUnknown_0203AB88->var86));
     sprite->animNum = 2;
     sprite->animBeginning = TRUE;
     sprite->animEnded = FALSE;
@@ -4010,8 +4010,8 @@ static void sub_81445D8(struct Sprite *sprite)
         return;
 
     m4aSongNumStartOrChange(SE_TAMAKORO_E);
-    gUnknown_0203AB88->var98 = -(20.0f / (float)gUnknown_0203AB88->var84);
-    gUnknown_0203AB88->var90 = ((1.0f - gUnknown_0203AB88->var8C) / (float)gUnknown_0203AB88->var84);
+    gUnknown_0203AB88->var98 = -(20.0f / (float)(gUnknown_0203AB88->var84));
+    gUnknown_0203AB88->var90 = ((1.0f - gUnknown_0203AB88->var8C) / (float)(gUnknown_0203AB88->var84));
     sprite->animNum = 1;
     sprite->animBeginning = TRUE;
     sprite->animEnded = FALSE;

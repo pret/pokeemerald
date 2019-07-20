@@ -47,17 +47,8 @@
 	.include "src/multiboot.o"
 	.include "src/mirage_tower.o"
 	.include "src/berry_fix_program.o"
-
-    @ pokenav
-gUnknown_030012BC: @ 30012BC
-	.space 0x4
-
-gUnknown_030012C0: @ 30012C0
-	.space 0x4
-
-gUnknown_030012C4: @ 30012C4
-	.space 0x4
-
+	.include "src/pokenav_unk_7.o"
+	.include "src/pokenav_unk_10.o"
     .include "src/ereader_helpers.o"
 	.include "src/faraway_island.o"
 	.include "asm/m4a_1.o"

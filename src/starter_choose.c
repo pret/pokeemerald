@@ -51,7 +51,7 @@ void sub_81346DC(struct Sprite *sprite);
 void sub_813473C(struct Sprite *sprite);
 void StarterPokemonSpriteCallback(struct Sprite *sprite);
 
-static IWRAM_DATA u16 sStarterChooseWindowId;
+static u16 sStarterChooseWindowId;
 
 // .rodata
 const u16 gBirchBagGrassPal[][16] =
