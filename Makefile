@@ -88,7 +88,7 @@ JSONPROC := tools/jsonproc/jsonproc$(EXE)
 # Secondary expansion is required for dependency variables in object rules.
 .SECONDEXPANSION:
 
-.PHONY: rom clean compare tidy
+.PHONY: rom clean compare tidy tools mostlyclean clean-tools
 
 C_SRCS := $(wildcard $(C_SUBDIR)/*.c $(C_SUBDIR)/*/*.c $(C_SUBDIR)/*/*/*.c)
 C_OBJS := $(patsubst $(C_SUBDIR)/%.c,$(C_BUILDDIR)/%.o,$(C_SRCS))
@@ -112,15 +112,31 @@ SUBDIRS  := $(sort $(dir $(OBJS)))
 
 AUTO_GEN_TARGETS :=
 
+TOOLDIRS := $(filter-out tools/agbcc tools/binutils,$(wildcard tools/*))
+TOOLBASE = $(TOOLDIRS:tools/%=%)
+TOOLS = $(foreach tool,$(TOOLBASE),tools/%(tool)/$(tool)$(EXE))
+
 $(shell mkdir -p $(SUBDIRS))
+
+all: tools rom
+
+tools: $(TOOLS)
+
+$(TOOLS):
+	@$(foreach tooldir,$(TOOLDIRS),$(MAKE) -C $(tooldir);)
 
 rom: $(ROM)
 
 # For contributors to make sure a change didn't affect the contents of the ROM.
-compare: $(ROM)
+compare: all
 	@$(SHA1) rom.sha1
 
-clean: tidy
+clean: mostlyclean clean-tools
+
+clean-tools:
+	@$(foreach tooldir,$(TOOLDIRS),$(MAKE) clean -C $(tooldir);)
+
+mostlyclean: tidy
 	rm -f sound/direct_sound_samples/*.bin
 	rm -f $(MID_SUBDIR)/*.s
 	find . \( -iname '*.1bpp' -o -iname '*.4bpp' -o -iname '*.8bpp' -o -iname '*.gbapal' -o -iname '*.lz' -o -iname '*.latfont' -o -iname '*.hwjpnfont' -o -iname '*.fwjpnfont' \) -exec rm {} +

@@ -13,12 +13,6 @@ Then get the compiler from https://github.com/pret/agbcc and run the following c
 ./install.sh PATH_OF_POKEEMERALD_DIRECTORY
 ```
 
-Then in the pokeemerald directory, build the tools.
-
-```
-./build_tools.sh
-```
-
 Finally, build the rom.
 
 ```
