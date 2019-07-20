@@ -6,12 +6,12 @@
 u32 sub_81CFB8C(void);
 u32 sub_81CFC2C(void);
 u32 sub_81CFC40(void);
-u32 sub_81CFFFC(int);
-u32 sub_81D0074(int);
-u32 sub_81D00EC(int);
-u32 sub_81D0164(int);
-u32 sub_81D01DC(int);
-u32 sub_81D021C(int);
+u32 sub_81CFFFC(s32);
+u32 sub_81D0074(s32);
+u32 sub_81D00EC(s32);
+u32 sub_81D0164(s32);
+u32 sub_81D01DC(s32);
+u32 sub_81D021C(s32);
 
 u32 (*const gUnknown_086235D8[])(void) = 
 {

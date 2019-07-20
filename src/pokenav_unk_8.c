@@ -7,12 +7,12 @@ u32 sub_81CF134(void);
 u32 sub_81CF1C4(void);
 u32 sub_81CF1D8(void);
 u32 sub_81CF278(void);
-u32 sub_81CF578(int);
-u32 sub_81CF5F0(int);
-u32 sub_81CF668(int);
-u32 sub_81CF6E0(int);
-u32 sub_81CF758(int);
-u32 sub_81CF798(int);
+u32 sub_81CF578(s32);
+u32 sub_81CF5F0(s32);
+u32 sub_81CF668(s32);
+u32 sub_81CF6E0(s32);
+u32 sub_81CF758(s32);
+u32 sub_81CF798(s32);
 
 const u32 gUnknown_086233A0[] = {0x16, 0x17, 0x18, 0x21, 0x2F};
 

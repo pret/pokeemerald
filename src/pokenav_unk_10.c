@@ -60,11 +60,11 @@ u32 sub_81D0954(void);
 void sub_81D1500(struct Pokenav10Struct *structPtr);
 bool32 sub_81D1524(struct Pokenav10Struct *structPtr);
 void sub_81D1538(struct Sprite *sprite);
-u32 sub_81D0C84(int);
-u32 sub_81D0D2C(int);
-u32 sub_81D0D8C(int);
-u32 sub_81D0E00(int);
-u32 sub_81D0C54(int);
+u32 sub_81D0C84(s32);
+u32 sub_81D0D2C(s32);
+u32 sub_81D0D8C(s32);
+u32 sub_81D0E00(s32);
+u32 sub_81D0C54(s32);
 
 const u8 gUnknown_086237F8[][4] = 
 {

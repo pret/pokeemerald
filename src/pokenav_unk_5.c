@@ -62,10 +62,10 @@ static void sub_81CCFA4(int);
 static void sub_81CCC9C(u8 taskId);
 static void sub_81CCF78(void);
 void sub_81CCEF4(struct Sprite *sprite);
-u32 sub_81CC848(int);
-u32 sub_81CC878(int);
-u32 sub_81CC8D8(int);
-u32 sub_81CC95C(int);
+u32 sub_81CC848(s32);
+u32 sub_81CC878(s32);
+u32 sub_81CC8D8(s32);
+u32 sub_81CC95C(s32);
 
 extern const u16 gHoennMapZoomIcons_Pal[];
 extern const struct SpriteTemplate gUnknown_086231D0;
@@ -371,7 +371,7 @@ static u32 sub_81CC6F4(s32 taskState)
     }
 }
 
-u32 sub_81CC848(int taskState)
+u32 sub_81CC848(s32 taskState)
 {
     struct Pokenav5Struct_2 *state = GetSubstructPtr(4);
     switch (taskState)
@@ -388,7 +388,7 @@ u32 sub_81CC848(int taskState)
     return 4;
 }
 
-u32 sub_81CC878(int taskState)
+u32 sub_81CC878(s32 taskState)
 {
     switch (taskState)
     {
@@ -414,7 +414,7 @@ u32 sub_81CC878(int taskState)
     return 4;
 }
 
-u32 sub_81CC8D8(int taskState)
+u32 sub_81CC8D8(s32 taskState)
 {
     struct Pokenav5Struct_2 *state = GetSubstructPtr(4);
     switch (taskState)
@@ -447,7 +447,7 @@ u32 sub_81CC8D8(int taskState)
     return 4;
 }
 
-u32 sub_81CC95C(int taskState)
+u32 sub_81CC95C(s32 taskState)
 {
     switch (taskState)
     {

@@ -3,12 +3,12 @@
 #include "window.h"
 #include "pokenav.h"
 
-u32 sub_81CE37C(int);
-u32 sub_81CE2D0(int);
-u32 sub_81CE4D8(int);
-u32 sub_81CE5E4(int);
-u32 sub_81CE6BC(int);
-u32 sub_81CE700(int);
+u32 sub_81CE37C(s32);
+u32 sub_81CE2D0(s32);
+u32 sub_81CE4D8(s32);
+u32 sub_81CE5E4(s32);
+u32 sub_81CE6BC(s32);
+u32 sub_81CE700(s32);
 
 BSS_DATA u8 gUnknown_030012BC;
 
