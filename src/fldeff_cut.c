@@ -59,11 +59,11 @@ static void CutGrassSpriteCallbackEnd(struct Sprite *);
 static void HandleLongGrassOnHyper(u8, s16, s16);
 
 // IWRAM variables
-static IWRAM_DATA u8 sCutSquareSide;
-static IWRAM_DATA u8 sTileCountFromPlayer_X;
-static IWRAM_DATA u8 sTileCountFromPlayer_Y;
-static IWRAM_DATA u32 sUnused;
-static IWRAM_DATA bool8 sHyperCutTiles[CUT_HYPER_AREA];
+static u8 sCutSquareSide;
+static u8 sTileCountFromPlayer_X;
+static u8 sTileCountFromPlayer_Y;
+static u32 sUnused;
+static bool8 sHyperCutTiles[CUT_HYPER_AREA];
 
 // EWRAM variables
 static EWRAM_DATA u8 *sCutGrassSpriteArrayPtr = NULL;

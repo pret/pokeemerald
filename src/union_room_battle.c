@@ -40,7 +40,7 @@ struct UnkStruct_2022C6C
     s16 a0;
 };
 
-IWRAM_DATA struct UnkStruct_3000DAC * gUnknown_03000DAC;
+static struct UnkStruct_3000DAC * gUnknown_03000DAC;
 
 EWRAM_DATA struct UnkStruct_2022C6C * gUnknown_02022C6C = NULL;
 

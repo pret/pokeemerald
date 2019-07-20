@@ -28,11 +28,11 @@ struct ContestWinner *gUnknown_030061C0;
 u16 *gContestPaintingMonPalette;
 
 // IWRAM bss
-IWRAM_DATA u8 gContestPaintingState;
-IWRAM_DATA u16 gContestPaintingMosaicVal;
-IWRAM_DATA u16 gContestPaintingFadeCounter;
-IWRAM_DATA bool8 gUnknown_030011F6;
-IWRAM_DATA u8 gContestPaintingWindowId;
+static u8 gContestPaintingState;
+static u16 gContestPaintingMosaicVal;
+static u16 gContestPaintingFadeCounter;
+static bool8 gUnknown_030011F6;
+static u8 gContestPaintingWindowId;
 
 static void ShowContestPainting(void);
 static void HoldContestPainting(void);

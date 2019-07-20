@@ -50,7 +50,7 @@ struct Pokenav4Struct
 };
 
 static bool32 sub_81CB310(void);
-static u32 sub_81CB324(int);
+static u32 sub_81CB324(s32);
 static void sub_81CBBB8(void);
 static void sub_81CBC1C(void);
 static void sub_81CC2B4(void);
@@ -320,7 +320,7 @@ static bool32 sub_81CB310(void)
     return IsLoopedTaskActive(state->unk4);
 }
 
-static u32 sub_81CB324(int taskState)
+static u32 sub_81CB324(s32 taskState)
 {
     struct Pokenav4Struct *state = GetSubstructPtr(6);
     switch (taskState)
@@ -393,7 +393,7 @@ static u32 sub_81CB324(int taskState)
     }
 }
 
-u32 sub_81CB510(int taskState)
+u32 sub_81CB510(s32 taskState)
 {
     struct Pokenav4Struct *state = GetSubstructPtr(6);
     switch (taskState)
@@ -430,7 +430,7 @@ u32 sub_81CB510(int taskState)
     return 4;
 }
 
-u32 sub_81CB588(int taskState)
+u32 sub_81CB588(s32 taskState)
 {
     struct Pokenav4Struct *state = GetSubstructPtr(6);
     switch (taskState)
@@ -467,7 +467,7 @@ u32 sub_81CB588(int taskState)
     return 4;
 }
 
-u32 sub_81CB600(int taskState)
+u32 sub_81CB600(s32 taskState)
 {
     struct Pokenav4Struct *state = GetSubstructPtr(6);
     switch (taskState)
@@ -504,7 +504,7 @@ u32 sub_81CB600(int taskState)
     return 4;
 }
 
-u32 sub_81CB678(int taskState)
+u32 sub_81CB678(s32 taskState)
 {
     struct Pokenav4Struct *state = GetSubstructPtr(6);
     switch (taskState)
@@ -541,7 +541,7 @@ u32 sub_81CB678(int taskState)
     return 4;
 }
 
-u32 sub_81CB6F0(int taskState)
+u32 sub_81CB6F0(s32 taskState)
 {
     struct Pokenav4Struct *state = GetSubstructPtr(6);
     switch (taskState)
@@ -560,7 +560,7 @@ u32 sub_81CB6F0(int taskState)
     return 4;
 }
 
-u32 sub_81CB734(int taskState)
+u32 sub_81CB734(s32 taskState)
 {
     struct Pokenav4Struct *state;
     u16 var0;
@@ -572,7 +572,7 @@ u32 sub_81CB734(int taskState)
     return 4;
 }
 
-u32 sub_81CB75C(int taskState)
+u32 sub_81CB75C(s32 taskState)
 {
     struct Pokenav4Struct *state = GetSubstructPtr(6);
     switch (taskState)
@@ -591,7 +591,7 @@ u32 sub_81CB75C(int taskState)
     return 4;
 }
 
-u32 sub_81CB7A0(int taskState)
+u32 sub_81CB7A0(s32 taskState)
 {
     struct Pokenav4Struct *state = GetSubstructPtr(6);
     switch (taskState)
@@ -623,7 +623,7 @@ u32 sub_81CB7A0(int taskState)
     return 4;
 }
 
-u32 sub_81CB824(int taskState)
+u32 sub_81CB824(s32 taskState)
 {
     struct Pokenav4Struct *state = GetSubstructPtr(6);
     switch (taskState)
@@ -649,7 +649,7 @@ u32 sub_81CB824(int taskState)
     return 4;
 }
 
-u32 sub_81CB888(int taskState)
+u32 sub_81CB888(s32 taskState)
 {
     struct Pokenav4Struct *state = GetSubstructPtr(6);
     u32 result = 0;
@@ -713,7 +713,7 @@ u32 sub_81CB888(int taskState)
     return result;
 }
 
-u32 sub_81CB93C(int taskState)
+u32 sub_81CB93C(s32 taskState)
 {
     struct Pokenav4Struct *state = GetSubstructPtr(6);
     switch (taskState)
@@ -742,7 +742,7 @@ u32 sub_81CB93C(int taskState)
     return 4;
 }
 
-u32 sub_81CB9C8(int taskState)
+u32 sub_81CB9C8(s32 taskState)
 {
     int index;
     int var0;
@@ -781,7 +781,7 @@ u32 sub_81CB9C8(int taskState)
     return 4;
 }
 
-u32 sub_81CBA68(int taskState)
+u32 sub_81CBA68(s32 taskState)
 {
     struct Pokenav4Struct *state = GetSubstructPtr(6);
     switch (taskState)
@@ -807,7 +807,7 @@ u32 sub_81CBA68(int taskState)
     return 4;
 }
 
-u32 sub_81CBAD4(int taskState)
+u32 sub_81CBAD4(s32 taskState)
 {
     int index;
     int var0;
@@ -846,7 +846,7 @@ u32 sub_81CBAD4(int taskState)
     return 4;
 }
 
-u32 sub_81CBB74(int taskState)
+u32 sub_81CBB74(s32 taskState)
 {
     switch (taskState)
     {

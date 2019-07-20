@@ -34,7 +34,7 @@ static u32 sub_81CABFC(struct Pokenav3Struct *);
 static u32 sub_81CAC04(struct Pokenav3Struct *);
 static u32 sub_81CACB8(struct Pokenav3Struct *);
 static u32 sub_81CACF8(struct Pokenav3Struct *);
-static u32 sub_81CAD20(int);
+static u32 sub_81CAD20(s32);
 static bool32 sub_81CB1D0(void);
 
 #include "data/text/trainers_eye_messages.h"
@@ -191,7 +191,7 @@ static u32 sub_81CACF8(struct Pokenav3Struct *state)
     return 0;
 }
 
-static u32 sub_81CAD20(int taskState)
+static u32 sub_81CAD20(s32 taskState)
 {
     int i, j;
     struct Pokenav3Struct *state = GetSubstructPtr(5);

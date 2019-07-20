@@ -194,10 +194,10 @@ EWRAM_DATA static s32 sUnknown_020322BC[5] = {0};
 EWRAM_DATA static u32 sUnknown_020322D0 = 0;
 
 // IWRAM bss
-IWRAM_DATA static s16 sUnknown_03000DE8[8];
-IWRAM_DATA static s16 sUnknown_03000DF8[6];
-IWRAM_DATA static s16 sUnknown_03000E04;
-IWRAM_DATA static s16 sUnknown_03000E06;
+static s16 sUnknown_03000DE8[8];
+static s16 sUnknown_03000DF8[6];
+static s16 sUnknown_03000E04;
+static s16 sUnknown_03000E06;
 
 // IWRAM common
 u8 gInGameOpponentsNo;

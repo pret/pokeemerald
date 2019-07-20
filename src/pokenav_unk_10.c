@@ -36,8 +36,8 @@ extern const u8 gText_RibbonsF700[];
 extern const u8 *const gRibbonDescriptionPointers[][2];
 extern const u8 *const gGiftRibbonDescriptionPointers[][2];
 
-extern u32 gUnknown_030012C0;
-extern u32 gUnknown_030012C4;
+static u32 gUnknown_030012C0;
+static u32 gUnknown_030012C4;
 
 void sub_81D0E84(struct Pokenav10Struct2 *structPtr);
 void sub_81D0FF0(struct Pokenav10Struct2 *structPtr);

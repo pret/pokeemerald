@@ -13,12 +13,6 @@ Then get the compiler from https://github.com/pret/agbcc and run the following c
 ./install.sh PATH_OF_POKEEMERALD_DIRECTORY
 ```
 
-Then in the pokeemerald directory, build the tools.
-
-```
-./build_tools.sh
-```
-
 Finally, build the rom.
 
 ```
@@ -101,3 +95,22 @@ If you've only changed `.c` or `.s` files, you can turn off the dependency scann
 
 `make NODEP=1`
 
+# Building with devkitARM's C compiler
+
+This project supports the `arm-none-eabi-gcc` compiler which ships with devkitARM r52.  To build this target, simply run:
+
+    make modern
+
+# Building with your own toolchain
+
+To build Pokemon Emerald with a toolchain other than devkitARM, override the `TOOLCHAIN` environment variable with the path to your toolchain.  Example:
+
+    make compare TOOLCHAIN=/usr/local/arm-none-eabi
+
+The path you pass to the `TOOLCHAIN` variable must contain the subdirectory `bin`.  If you compile the `modern` target with this toolchain, the subdirectories `lib`, `include`, and `arm-none-eabi` must also be present.
+
+# Building with debug info
+
+To build the ELF file with enhanced debug info, use the `DINFO` variable:
+
+    make compare DINFO=1

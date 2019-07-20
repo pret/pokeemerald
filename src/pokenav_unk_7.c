@@ -10,6 +10,8 @@ u32 sub_81CE5E4(int);
 u32 sub_81CE6BC(int);
 u32 sub_81CE700(int);
 
+BSS_DATA u8 gUnknown_030012BC;
+
 const u16 gUnknown_086231E8[] = INCBIN_U16("graphics/pokenav/86231E8.gbapal");
 const u16 gUnknown_08623208[] = INCBIN_U16("graphics/pokenav/8623208.gbapal");
 const u32 gUnknown_08623228[] = INCBIN_U32("graphics/pokenav/8623228.4bpp.lz");
