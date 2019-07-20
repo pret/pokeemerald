@@ -82,4 +82,7 @@
 #define NUM_STATS 6
 #define NUM_BATTLE_STATS 8
 
+// Shiny odds
+#define SHINY_ODDS 8 // Actual probability is SHINY_ODDS/65536
+
 #endif // GUARD_CONSTANTS_POKEMON_H
