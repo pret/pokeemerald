@@ -6,13 +6,13 @@ BattleFrontier_BattleTowerCorridor_MapScripts:: @ 8241AAA
 BattleFrontier_BattleTowerCorridor_MapScript1_241AB5: @ 8241AB5
 	compare VAR_0x8006, 1
 	goto_if_eq BattleFrontier_BattleTowerCorridor_EventScript_241AD3
-	setmetatile 12, 0, 519, 0
-	setmetatile 12, 1, 527, 0
+	setmetatile 12, 0, METATILE_BattleFrontier_CorridorOpenDoor_Top, 0
+	setmetatile 12, 1, METATILE_BattleFrontier_CorridorOpenDoor_Bottom, 0
 	end
 
 BattleFrontier_BattleTowerCorridor_EventScript_241AD3:: @ 8241AD3
-	setmetatile 15, 0, 519, 0
-	setmetatile 15, 1, 527, 0
+	setmetatile 15, 0, METATILE_BattleFrontier_CorridorOpenDoor_Top, 0
+	setmetatile 15, 1, METATILE_BattleFrontier_CorridorOpenDoor_Bottom, 0
 	end
 
 BattleFrontier_BattleTowerCorridor_MapScript2_241AE6: @ 8241AE6

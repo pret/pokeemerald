@@ -37,9 +37,9 @@ struct BgConfig2
     s32 bg_y;
 };
 
-static IWRAM_DATA struct BgControl sGpuBgConfigs;
-static IWRAM_DATA struct BgConfig2 sGpuBgConfigs2[4];
-static IWRAM_DATA u32 sDmaBusyBitfield[4];
+static struct BgControl sGpuBgConfigs;
+static struct BgConfig2 sGpuBgConfigs2[4];
+static u32 sDmaBusyBitfield[4];
 
 u32 gUnneededFireRedVariable;
 
@@ -914,7 +914,6 @@ void CopyBgTilemapBufferToVram(u8 bg)
 
 void CopyToBgTilemapBufferRect(u8 bg, const void* src, u8 destX, u8 destY, u8 width, u8 height)
 {
-    const void *srcCopy;
     u16 destX16;
     u16 destY16;
     u16 mode;
@@ -924,26 +923,30 @@ void CopyToBgTilemapBufferRect(u8 bg, const void* src, u8 destX, u8 destY, u8 wi
         switch (GetBgType(bg))
         {
         case 0:
-            srcCopy = src;
+        {
+            const u16 * srcCopy = src;
             for (destY16 = destY; destY16 < (destY + height); destY16++)
             {
                 for (destX16 = destX; destX16 < (destX + width); destX16++)
                 {
-                    ((u16*)sGpuBgConfigs2[bg].tilemap)[((destY16 * 0x20) + destX16)] = *((u16*)srcCopy)++;
+                    ((u16*)sGpuBgConfigs2[bg].tilemap)[((destY16 * 0x20) + destX16)] = *srcCopy++;
                 }
             }
             break;
+        }
         case 1:
-            srcCopy = src;
+        {
+            const u8 * srcCopy = src;
             mode = GetBgMetricAffineMode(bg, 0x1);
             for (destY16 = destY; destY16 < (destY + height); destY16++)
             {
                 for (destX16 = destX; destX16 < (destX + width); destX16++)
                 {
-                    ((u8*)sGpuBgConfigs2[bg].tilemap)[((destY16 * mode) + destX16)] = *((u8*)srcCopy)++;
+                    ((u8*)sGpuBgConfigs2[bg].tilemap)[((destY16 * mode) + destX16)] = *srcCopy++;
                 }
             }
             break;
+        }
         }
     }
 }

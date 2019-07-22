@@ -278,7 +278,7 @@ bool32 sub_8011B90(void);
 void sub_800FE50(u16 *a0);
 bool32 sub_800E540(u16 id, u8 *name);
 void sub_8011DE0(u32 arg0);
-u8 sub_801100C(int a0);
+u8 sub_801100C(s32 a0);
 void sub_800EF7C(void);
 bool8 sub_800DE7C(struct UnkLinkRfuStruct_02022B14 *buff1, u8 *buff2, u8 idx);
 bool8 sub_800DF34(struct UnkLinkRfuStruct_02022B14 *buff1, u8 *buff2, u8 idx);

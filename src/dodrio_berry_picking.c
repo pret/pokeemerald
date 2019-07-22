@@ -145,7 +145,7 @@ EWRAM_DATA u16 * gUnknown_02022CE4[4] = {NULL};
 EWRAM_DATA struct DodrioBerryPickingStruct_2022CF4 * gUnknown_02022CF4 = NULL;
 EWRAM_DATA struct DodrioBerryPickingSubstruct_0160 * gUnknown_02022CF8 = NULL;
 
-IWRAM_DATA bool32 gUnknown_03000DB0;
+static bool32 gUnknown_03000DB0;
 
 void sub_8024A1C(void);
 void sub_8024A30(struct DodrioBerryPickingStruct *);
@@ -1422,109 +1422,109 @@ void sub_8026324(void)
     u8 sp8 = gUnknown_02022C98->unk_0024;
     u8 r6;
     u8 r10;
-    u8 r2;
+    s32 r2;
     u8 r5;
     u8 r3;
     s32 r2_2;
     u8 r4;
     u8 r7, r7_2;
 
-    if (gUnknown_02022C98->unk_0040 < 10)
+    if (gUnknown_02022C98->unk_0040 >= 10)
+        return;
+
+    for (r6 = 0; r6 < sp8; r6++)
     {
-        for (r6 = 0; r6 < sp8; r6++)
+        if (gUnknown_02022C98->unk_31A0[r6].unk_2C != 0 && gUnknown_02022C98->unk_00A8[r6] == 1)
         {
-            if (   gUnknown_02022C98->unk_31A0[r6].unk_2C != 0
-                && gUnknown_02022C98->unk_00A8[r6] == 1)
+            for (r10 = sp0; r10 < sp4; r10++)
             {
-                for (r10 = sp0; r10 < sp4; r10++)
+                r5 = gUnknown_082F449C[r10];
+                if (gUnknown_02022C98->unk_00F4[r5][0] == r6)
                 {
-                    r5 = gUnknown_082F449C[r10];
-                    if (gUnknown_02022C98->unk_00F4[r5][0] == r6)
+                    break;
+                }
+                if (gUnknown_02022C98->unk_00F4[r5][1] == r6)
+                {
+                    break;
+                }
+                if (sub_8026634(gUnknown_02022C98->unk_31A0[r6].unk_2C, r6, gUnknown_082F449C[r10]) == 1)
+                {
+                    for (r2 = 0; r2 < 2; r2++)
                     {
-                        break;
-                    }
-                    if (gUnknown_02022C98->unk_00F4[r5][1] == r6)
-                    {
-                        break;
-                    }
-                    if (sub_8026634(gUnknown_02022C98->unk_31A0[r6].unk_2C, r6, gUnknown_082F449C[r10]) == 1)
-                    {
-                        for (r2 = 0; r2 < 2; r2++)
+                        if (gUnknown_02022C98->unk_00F4[r5][r2] == 0xFF)
                         {
-                            if (gUnknown_02022C98->unk_00F4[r5][r2] == 0xFF)
-                            {
-                                gUnknown_02022C98->unk_00F4[r5][r2] = r6;
-                                gUnknown_02022C98->unk_00A8[r6] = 2;
-                                gUnknown_02022C98->unk_00C4[r5] = 1;
-                                break;
-                            }
+                            gUnknown_02022C98->unk_00F4[r5][r2] = r6;
+                            gUnknown_02022C98->unk_00A8[r6] = 2;
+                            gUnknown_02022C98->unk_00C4[r5] = 1;
+                            break;
                         }
-                        break;
                     }
-                    if (gUnknown_02022C98->unk_31A0[r6].unk_34 == 1)
-                    {
-                        break;
-                    }
+                    break;
+                }
+                if (gUnknown_02022C98->unk_31A0[r6].unk_34 == 1)
+                {
+                    break;
                 }
             }
         }
-        for (r10 = sp0; r10 < sp4; r10++)
+    }
+
+    for (r10 = sp0; r10 < sp4; r10++)
+    {
+        r6 = 0xFF;
+        r5 = gUnknown_082F449C[r10];
+        if (gUnknown_02022C98->unk_00C4[r5] == 1)
         {
-            r6 = 0xFF;
-            r5 = gUnknown_082F449C[r10];
-            if (gUnknown_02022C98->unk_00C4[r5] == 1)
+            r3 = gUnknown_02022C98->unk_0090[sub_8026D8C(r5)] / 7;
+            if (r3 < 2)
             {
-                r3 = gUnknown_02022C98->unk_0090[sub_8026D8C(r5)] / 7;
-                if (r3 < 2)
+                r3 = 2;
+            }
+            r2 = gUnknown_082F7A88[r3][gUnknown_02022C98->unk_31A0[0].unk_14.unk_0[r5]] - gUnknown_02022C98->unk_00D0[r5];
+            if (r2 < 6)
+            {
+                gUnknown_02022C98->unk_009C[r5] += r2;
+            }
+            if (++gUnknown_02022C98->unk_009C[r5] >= 6)
+            {
+                gUnknown_02022C98->unk_009C[r5] = 0;
+                if (gUnknown_02022C98->unk_00F4[r5][0] != 0xFF && gUnknown_02022C98->unk_00F4[r5][1] == 0xFF)
                 {
-                    r3 = 2;
+                    r4 = gUnknown_02022C98->unk_00F4[r5][0];
                 }
-                r2 = gUnknown_082F7A88[r3][gUnknown_02022C98->unk_31A0[0].unk_14.unk_0[r5]] - gUnknown_02022C98->unk_00D0[r5];
-                if (r2 < 6)
+                else if (gUnknown_02022C98->unk_00F4[r5][0] == 0xFF && gUnknown_02022C98->unk_00F4[r5][1] == 0xFF)
                 {
-                    gUnknown_02022C98->unk_009C[r5] += r2;
+                    continue;
                 }
-                if (++gUnknown_02022C98->unk_009C[r5] < 6)
+                else
                 {
-                    gUnknown_02022C98->unk_009C[r5] = 0;
-                    if (gUnknown_02022C98->unk_00F4[r5][0] != 0xFF && gUnknown_02022C98->unk_00F4[r5][1] == 0xFF)
+                    r7 = gUnknown_02022C98->unk_00F4[r5][0];
+                    r7_2 = gUnknown_02022C98->unk_00F4[r5][1];
+                    if ((Random() & 1))
                     {
-                        r4 = gUnknown_02022C98->unk_00F4[r5][0];
-                    }
-                    else if (gUnknown_02022C98->unk_00F4[r5][0] == 0xFF && gUnknown_02022C98->unk_00F4[r5][1] == 0xFF)
-                    {
-                        continue;
+                        r4 = r7_2;
+                        r6 = r7;
                     }
                     else
                     {
-                        r7 = gUnknown_02022C98->unk_00F4[r5][0];
-                        r7_2 = gUnknown_02022C98->unk_00F4[r5][1];
-                        if ((Random() & 1))
-                        {
-                            r4 = r7_2;
-                            r6 = r7;
-                        }
-                        else
-                        {
-                            r4 = r7;
-                            r6 = r7_2;
-                        }
+                        r4 = r7;
+                        r6 = r7_2;
                     }
-                    gUnknown_02022C98->unk_32CC.unk_1F[r5] = 7;
-                    gUnknown_02022C98->unk_00C4[r5] = 2;
-                    gUnknown_02022C98->unk_00A8[r4] = 3;
-                    gUnknown_02022C98->unk_00B8[r5] = r4;
-                    gUnknown_02022C98->unk_31A0[r4].unk_30 = 1;
-                    gUnknown_02022C98->unk_31A0[r6].unk_34 = 1;
-                    gUnknown_02022C98->unk_0086[r4]++;
-                    sub_8026F1C(0, r5, r4);
-                    sub_8027234(1);
-                    sub_8026D1C(r4);
-                    gUnknown_02022C98->unk_00E8[r5] = gUnknown_02022C98->unk_32CC.unk_14.unk_0[r5];
-                    gUnknown_02022C98->unk_32CC.unk_14.unk_0[r5] = 3;
-                    gUnknown_02022C98->unk_00F4[r5][0] = 0xFF;
-                    gUnknown_02022C98->unk_00F4[r5][1] = 0xFF;
                 }
+                gUnknown_02022C98->unk_32CC.unk_14.unk_B[r5] = 7;
+                gUnknown_02022C98->unk_00C4[r5] = 2;
+                gUnknown_02022C98->unk_00A8[r4] = 3;
+                gUnknown_02022C98->unk_00B8[r5] = r4;
+                gUnknown_02022C98->unk_31A0[r4].unk_30 = 1;
+                gUnknown_02022C98->unk_31A0[r6].unk_34 = 1;
+                gUnknown_02022C98->unk_0086[r4]++;
+                sub_8026F1C(0, r5, r4);
+                sub_8027234(1);
+                sub_8026D1C(r4);
+                gUnknown_02022C98->unk_00E8[r5] = gUnknown_02022C98->unk_32CC.unk_14.unk_0[r5];
+                gUnknown_02022C98->unk_32CC.unk_14.unk_0[r5] = 3;
+                gUnknown_02022C98->unk_00F4[r5][0] = 0xFF;
+                gUnknown_02022C98->unk_00F4[r5][1] = 0xFF;
             }
         }
     }
@@ -1964,34 +1964,33 @@ u32 sub_8026634(u8 a0, u8 a1, u8 a2)
     return FALSE;
 }
 
-#ifdef NONMATCHING
 void sub_802671C(void)
 {
     u8 r1 = gUnknown_02022C98->unk_0044;
     u8 r9 = gUnknown_02022C98->unk_0048;
+    u8 r3 = 0;
     u8 r10 = 0;
     u8 i;
-    u8 r3;
     u8 r2;
-    struct DodrioBerryPickingSubstruct_31A0_14 * ptr;
+    struct DodrioBerryPickingStruct *ptr;
 
     gUnknown_02022C98->unk_0120 = 0;
 
     for (i = r1; i < r9 - 1; i++)
     {
-        ptr = &gUnknown_02022C98->unk_32CC.unk_14;
+        ptr = gUnknown_02022C98;
 
         if (gUnknown_02022C98->unk_00C4[i] == 0 || gUnknown_02022C98->unk_00C4[i] == 1)
         {
             gUnknown_02022C98->unk_0120 = 1;
-            if (ptr->unk_B[i] >= 10)
+            if (ptr->unk_32CC.unk_14.unk_B[i] >= 10)
             {
-                ptr->unk_B[i] = 10;
+                ptr->unk_32CC.unk_14.unk_B[i] = 10;
                 gUnknown_02022C98->unk_00C4[i] = 3;
                 if (gUnknown_02022C98->unk_0148[i] == 0)
                 {
                     gUnknown_02022C98->unk_0148[i] = 1;
-                    PlaySE(SE_FUUSEN1 + ptr->unk_0[i]);
+                    PlaySE(SE_FUUSEN1 + ptr->unk_32CC.unk_14.unk_0[i]);
                 }
                 if (gUnknown_02022C98->unk_0040 < 10 || r10 == 1)
                 {
@@ -2008,14 +2007,14 @@ void sub_802671C(void)
             else
             {
                 r3 = gUnknown_02022C98->unk_0090[sub_8026D8C(i)] / 7;
-                if (r3 < 2)
+                if (r3 >= 2)
                 {
                     r3 = 2;
                 }
-                r2 = gUnknown_082F7A88[r3][ptr->unk_0[i]];
+                r2 = gUnknown_082F7A88[r3][ptr->unk_32CC.unk_14.unk_0[i]];
                 if (++gUnknown_02022C98->unk_00D0[i] >= r2)
                 {
-                    ptr->unk_B[i]++;
+                    ptr->unk_32CC.unk_14.unk_B[i]++;
                     gUnknown_02022C98->unk_00D0[i] = 0;
                 }
                 sub_8026324();
@@ -2030,8 +2029,8 @@ void sub_802671C(void)
                 gUnknown_02022C98->unk_00DC[i] = 0;
                 gUnknown_02022C98->unk_00D0[i] = 0;
                 gUnknown_02022C98->unk_00C4[i] = 0;
-                ptr->unk_B[i] = 1;
-                ptr->unk_0[i] = sub_8026DB0(sub_8026D8C(i), i);
+                ptr->unk_32CC.unk_14.unk_B[i] = 1;
+                ptr->unk_32CC.unk_14.unk_0[i] = sub_8026DB0(sub_8026D8C(i), i);
             }
         }
         else if (gUnknown_02022C98->unk_00C4[i] == 3)
@@ -2043,313 +2042,11 @@ void sub_802671C(void)
                     gUnknown_02022C98->unk_00DC[i] = 0;
                     gUnknown_02022C98->unk_00D0[i] = 0;
                     gUnknown_02022C98->unk_00C4[i] = 0;
-                    ptr->unk_B[i] = 1;
-                    gUnknown_02022C98->unk_00E8[i] = ptr->unk_0[i];
-                    ptr->unk_0[i] = sub_8026DB0(sub_8026D8C(i), i);
+                    ptr->unk_32CC.unk_14.unk_B[i] = 1;
+                    gUnknown_02022C98->unk_00E8[i] = ptr->unk_32CC.unk_14.unk_0[i];
+                    ptr->unk_32CC.unk_14.unk_0[i] = sub_8026DB0(sub_8026D8C(i), i);
                 }
             }
         }
     }
 }
-#else
-NAKED
-void sub_802671C(void)
-{
-    asm_unified("\tpush {r4-r7,lr}\n"
-                "\tmov r7, r10\n"
-                "\tmov r6, r9\n"
-                "\tmov r5, r8\n"
-                "\tpush {r5-r7}\n"
-                "\tldr r2, =gUnknown_02022C98\n"
-                "\tldr r4, [r2]\n"
-                "\tadds r0, r4, 0\n"
-                "\tadds r0, 0x44\n"
-                "\tldrb r1, [r0]\n"
-                "\tadds r0, 0x4\n"
-                "\tldrb r0, [r0]\n"
-                "\tmov r9, r0\n"
-                "\tmovs r3, 0\n"
-                "\tmov r10, r3\n"
-                "\tmovs r5, 0x90\n"
-                "\tlsls r5, 1\n"
-                "\tadds r0, r4, r5\n"
-                "\tstr r3, [r0]\n"
-                "\tadds r5, r1, 0\n"
-                "\tmov r0, r9\n"
-                "\tsubs r0, 0x1\n"
-                "\tcmp r5, r0\n"
-                "\tblt _0802674E\n"
-                "\tb _08026974\n"
-                "_0802674E:\n"
-                "\tmov r8, r2\n"
-                "_08026750:\n"
-                "\tmov r0, r8\n"
-                "\tldr r4, [r0]\n"
-                "\tadds r0, r4, 0\n"
-                "\tadds r0, 0xC4\n"
-                "\tadds r0, r5\n"
-                "\tldrb r0, [r0]\n"
-                "\tcmp r0, 0x1\n"
-                "\tbls _08026762\n"
-                "\tb _0802686C\n"
-                "_08026762:\n"
-                "\tmovs r1, 0x90\n"
-                "\tlsls r1, 1\n"
-                "\tadds r0, r4, r1\n"
-                "\tmovs r2, 0x1\n"
-                "\tstr r2, [r0]\n"
-                "\tldr r1, =0x000032eb\n"
-                "\tadds r0, r4, r1\n"
-                "\tadds r6, r0, r5\n"
-                "\tldrb r0, [r6]\n"
-                "\tcmp r0, 0x9\n"
-                "\tbls _080267FC\n"
-                "\tmovs r7, 0\n"
-                "\tmovs r0, 0xA\n"
-                "\tstrb r0, [r6]\n"
-                "\tmov r1, r8\n"
-                "\tldr r0, [r1]\n"
-                "\tadds r0, 0xC4\n"
-                "\tadds r0, r5\n"
-                "\tmovs r1, 0x3\n"
-                "\tstrb r1, [r0]\n"
-                "\tmov r1, r8\n"
-                "\tldr r0, [r1]\n"
-                "\tmovs r6, 0xA4\n"
-                "\tlsls r6, 1\n"
-                "\tadds r0, r6\n"
-                "\tadds r1, r0, r5\n"
-                "\tldrb r0, [r1]\n"
-                "\tcmp r0, 0\n"
-                "\tbne _080267AC\n"
-                "\tstrb r2, [r1]\n"
-                "\tldr r2, =0x000032e0\n"
-                "\tadds r0, r4, r2\n"
-                "\tadds r0, r5\n"
-                "\tldrb r0, [r0]\n"
-                "\tadds r0, 0x4A\n"
-                "\tbl PlaySE\n"
-                "_080267AC:\n"
-                "\tmov r0, r8\n"
-                "\tldr r1, [r0]\n"
-                "\tadds r0, r1, 0\n"
-                "\tadds r0, 0x40\n"
-                "\tldrb r0, [r0]\n"
-                "\tcmp r0, 0x9\n"
-                "\tbls _080267C2\n"
-                "\tmov r2, r10\n"
-                "\tcmp r2, 0x1\n"
-                "\tbeq _080267C2\n"
-                "\tb _08026964\n"
-                "_080267C2:\n"
-                "\tmovs r0, 0x1\n"
-                "\tmov r10, r0\n"
-                "\tadds r0, r1, r6\n"
-                "\tadds r0, r5\n"
-                "\tstrb r7, [r0]\n"
-                "\tmov r1, r8\n"
-                "\tldr r0, [r1]\n"
-                "\tadds r1, r0, 0\n"
-                "\tadds r1, 0x40\n"
-                "\tldrb r0, [r1]\n"
-                "\tcmp r0, 0x9\n"
-                "\tbhi _080267DE\n"
-                "\tadds r0, 0x1\n"
-                "\tstrb r0, [r1]\n"
-                "_080267DE:\n"
-                "\tmovs r0, 0x3\n"
-                "\tadds r1, r5, 0\n"
-                "\tmovs r2, 0\n"
-                "\tbl sub_8026F1C\n"
-                "\tmovs r0, 0\n"
-                "\tbl sub_8027234\n"
-                "\tb _08026964\n"
-                "\t.pool\n"
-                "_080267FC:\n"
-                "\tadds r0, r5, 0\n"
-                "\tbl sub_8026D8C\n"
-                "\tmov r2, r8\n"
-                "\tldr r7, [r2]\n"
-                "\tlsls r0, 24\n"
-                "\tlsrs r0, 24\n"
-                "\tadds r1, r7, 0\n"
-                "\tadds r1, 0x90\n"
-                "\tadds r1, r0\n"
-                "\tldrb r0, [r1]\n"
-                "\tmovs r1, 0x7\n"
-                "\tbl __udivsi3\n"
-                "\tlsls r0, 24\n"
-                "\tlsrs r3, r0, 24\n"
-                "\tcmp r3, 0x1\n"
-                "\tbls _08026822\n"
-                "\tmovs r3, 0x2\n"
-                "_08026822:\n"
-                "\tldr r2, =gUnknown_082F7A88\n"
-                "\tldr r0, =0x000032e0\n"
-                "\tadds r1, r4, r0\n"
-                "\tadds r1, r5\n"
-                "\tlsls r0, r3, 1\n"
-                "\tadds r0, r3\n"
-                "\tldrb r1, [r1]\n"
-                "\tadds r0, r1\n"
-                "\tadds r0, r2\n"
-                "\tldrb r2, [r0]\n"
-                "\tadds r1, r7, 0\n"
-                "\tadds r1, 0xD0\n"
-                "\tadds r1, r5\n"
-                "\tldrb r0, [r1]\n"
-                "\tadds r0, 0x1\n"
-                "\tmovs r3, 0\n"
-                "\tstrb r0, [r1]\n"
-                "\tlsls r0, 24\n"
-                "\tlsrs r0, 24\n"
-                "\tcmp r0, r2\n"
-                "\tbcc _0802685C\n"
-                "\tldrb r0, [r6]\n"
-                "\tadds r0, 0x1\n"
-                "\tstrb r0, [r6]\n"
-                "\tmov r1, r8\n"
-                "\tldr r0, [r1]\n"
-                "\tadds r0, 0xD0\n"
-                "\tadds r0, r5\n"
-                "\tstrb r3, [r0]\n"
-                "_0802685C:\n"
-                "\tbl sub_8026324\n"
-                "\tb _08026964\n"
-                "\t.pool\n"
-                "_0802686C:\n"
-                "\tcmp r0, 0x2\n"
-                "\tbne _080268F4\n"
-                "\tmovs r2, 0x90\n"
-                "\tlsls r2, 1\n"
-                "\tadds r0, r4, r2\n"
-                "\tmovs r6, 0x1\n"
-                "\tstr r6, [r0]\n"
-                "\tadds r1, r4, 0\n"
-                "\tadds r1, 0xDC\n"
-                "\tadds r1, r5\n"
-                "\tldrb r0, [r1]\n"
-                "\tadds r0, 0x1\n"
-                "\tmovs r3, 0\n"
-                "\tstrb r0, [r1]\n"
-                "\tlsls r0, 24\n"
-                "\tlsrs r0, 24\n"
-                "\tcmp r0, 0x13\n"
-                "\tbls _08026964\n"
-                "\tmov r0, r8\n"
-                "\tldr r2, [r0]\n"
-                "\tadds r0, r2, 0\n"
-                "\tadds r0, 0xB8\n"
-                "\tadds r0, r5\n"
-                "\tldrb r1, [r0]\n"
-                "\tlsls r0, r1, 4\n"
-                "\tsubs r0, r1\n"
-                "\tlsls r0, 2\n"
-                "\tadds r2, r0\n"
-                "\tldr r1, =0x000031d0\n"
-                "\tadds r2, r1\n"
-                "\tstrb r3, [r2]\n"
-                "\tmov r2, r8\n"
-                "\tldr r0, [r2]\n"
-                "\tadds r0, 0xDC\n"
-                "\tadds r0, r5\n"
-                "\tstrb r3, [r0]\n"
-                "\tldr r0, [r2]\n"
-                "\tadds r0, 0xD0\n"
-                "\tadds r0, r5\n"
-                "\tstrb r3, [r0]\n"
-                "\tldr r0, [r2]\n"
-                "\tadds r0, 0xC4\n"
-                "\tadds r0, r5\n"
-                "\tstrb r3, [r0]\n"
-                "\tldr r1, =0x000032eb\n"
-                "\tadds r0, r4, r1\n"
-                "\tadds r0, r5\n"
-                "\tstrb r6, [r0]\n"
-                "\tadds r0, r5, 0\n"
-                "\tbl sub_8026D8C\n"
-                "\tlsls r0, 24\n"
-                "\tlsrs r0, 24\n"
-                "\tadds r1, r5, 0\n"
-                "\tbl sub_8026DB0\n"
-                "\tldr r2, =0x000032e0\n"
-                "\tadds r1, r4, r2\n"
-                "\tadds r1, r5\n"
-                "\tstrb r0, [r1]\n"
-                "\tb _08026964\n"
-                "\t.pool\n"
-                "_080268F4:\n"
-                "\tcmp r0, 0x3\n"
-                "\tbne _08026964\n"
-                "\tadds r1, r4, 0\n"
-                "\tadds r1, 0xDC\n"
-                "\tadds r1, r5\n"
-                "\tldrb r0, [r1]\n"
-                "\tadds r0, 0x1\n"
-                "\tmovs r2, 0\n"
-                "\tstrb r0, [r1]\n"
-                "\tlsls r0, 24\n"
-                "\tlsrs r0, 24\n"
-                "\tcmp r0, 0x13\n"
-                "\tbls _08026964\n"
-                "\tmov r0, r8\n"
-                "\tldr r1, [r0]\n"
-                "\tadds r0, r1, 0\n"
-                "\tadds r0, 0x40\n"
-                "\tldrb r0, [r0]\n"
-                "\tcmp r0, 0x9\n"
-                "\tbhi _08026964\n"
-                "\tadds r0, r1, 0\n"
-                "\tadds r0, 0xDC\n"
-                "\tadds r0, r5\n"
-                "\tstrb r2, [r0]\n"
-                "\tmov r1, r8\n"
-                "\tldr r0, [r1]\n"
-                "\tadds r0, 0xD0\n"
-                "\tadds r0, r5\n"
-                "\tstrb r2, [r0]\n"
-                "\tldr r0, [r1]\n"
-                "\tadds r0, 0xC4\n"
-                "\tadds r0, r5\n"
-                "\tstrb r2, [r0]\n"
-                "\tldr r2, =0x000032eb\n"
-                "\tadds r0, r4, r2\n"
-                "\tadds r0, r5\n"
-                "\tmovs r1, 0x1\n"
-                "\tstrb r1, [r0]\n"
-                "\tmov r0, r8\n"
-                "\tldr r1, [r0]\n"
-                "\tadds r1, 0xE8\n"
-                "\tadds r1, r5\n"
-                "\tsubs r2, 0xB\n"
-                "\tadds r4, r2\n"
-                "\tadds r4, r5\n"
-                "\tldrb r0, [r4]\n"
-                "\tstrb r0, [r1]\n"
-                "\tadds r0, r5, 0\n"
-                "\tbl sub_8026D8C\n"
-                "\tlsls r0, 24\n"
-                "\tlsrs r0, 24\n"
-                "\tadds r1, r5, 0\n"
-                "\tbl sub_8026DB0\n"
-                "\tstrb r0, [r4]\n"
-                "_08026964:\n"
-                "\tadds r0, r5, 0x1\n"
-                "\tlsls r0, 24\n"
-                "\tlsrs r5, r0, 24\n"
-                "\tmov r0, r9\n"
-                "\tsubs r0, 0x1\n"
-                "\tcmp r5, r0\n"
-                "\tbge _08026974\n"
-                "\tb _08026750\n"
-                "_08026974:\n"
-                "\tpop {r3-r5}\n"
-                "\tmov r8, r3\n"
-                "\tmov r9, r4\n"
-                "\tmov r10, r5\n"
-                "\tpop {r4-r7}\n"
-                "\tpop {r0}\n"
-                "\tbx r0\n"
-                "\t.pool");
-}
-#endif // NONMATCHING

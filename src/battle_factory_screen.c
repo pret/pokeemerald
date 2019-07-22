@@ -227,9 +227,9 @@ static EWRAM_DATA u8 *sSwapMenuTilemapBuffer = NULL;
 static EWRAM_DATA u8 *sSwapMonCardBgTilemapBuffer = NULL;
 
 // IWRAM bss
-static IWRAM_DATA struct FactorySelectMonsStruct *sFactorySelectScreen;
-static IWRAM_DATA void (*sSwap_CurrentTableFunc)(u8 taskId);
-static IWRAM_DATA struct FactorySwapMonsStruct *sFactorySwapScreen;
+static struct FactorySelectMonsStruct *sFactorySelectScreen;
+static void (*sSwap_CurrentTableFunc)(u8 taskId);
+static struct FactorySwapMonsStruct *sFactorySwapScreen;
 
 // IWRAM common
 u8 (*gUnknown_030062E8)(void);

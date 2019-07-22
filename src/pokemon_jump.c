@@ -1,7 +1,9 @@
 #include "global.h"
 #include "alloc.h"
+#include "bg.h"
 #include "data.h"
 #include "decompress.h"
+#include "dynamic_placeholder_text_util.h"
 #include "event_data.h"
 #include "item.h"
 #include "link.h"
@@ -10,11 +12,14 @@
 #include "menu.h"
 #include "palette.h"
 #include "random.h"
+#include "rom_8034C54.h"
 #include "save.h"
 #include "sound.h"
 #include "sprite.h"
 #include "string_util.h"
+#include "strings.h"
 #include "task.h"
+#include "text_window.h"
 #include "trig.h"
 #include "pokemon.h"
 #include "pokemon_jump.h"
@@ -41,6 +46,33 @@ struct PokemonJump1_82E4
     int unk14;
     int unk18;
     u8 unk1C[11];
+};
+
+struct PokemonJump2
+{
+    int unk0;
+    u16 unk4;
+    u8 unk6;
+    u8 filler7[0xa - 0x7];
+    u8 unkA;
+    u8 unkB;
+    u8 unkC;
+    u8 unkD;
+    u8 unkE;
+    u8 unkF;
+    u16 filler10;
+    u16 unk12;
+    u16 unk14;
+    u8 filler16[0x1c - 0x16];
+    u16 unk1C[5];
+    u8 txtBuff[2][0x40];
+    u8 strBuff[0x100];
+    u16 tilemapBuffer[(0x81a8 - 0x1a6) / 2]; // 0x1A6
+    struct Sprite *unk81A8[MAX_RFU_PLAYERS];
+    struct Sprite *unk81BC[MAX_RFU_PLAYERS];
+    struct Sprite *unk81D0[8];
+    u8 filler81F0[0xC];
+    u8 unk81FC[MAX_RFU_PLAYERS];
 };
 
 struct PokemonJump1
@@ -102,8 +134,7 @@ struct PokemonJump1
     u8 unk8B[MAX_RFU_PLAYERS];
     u16 unk90[MAX_RFU_PLAYERS];
     u16 unk9A[MAX_RFU_PLAYERS];
-    void **unkA4;
-    u8 fillerA8[0x8200];
+    struct PokemonJump2 unkA4;
     struct PokemonJump1_MonInfo unk82A8[MAX_RFU_PLAYERS];
     struct PokemonJump1_82E4 unk82E4[MAX_RFU_PLAYERS];
     struct PokemonJump1_82E4 *unk83AC;
@@ -123,20 +154,6 @@ struct Unk802B078
     u16 unk4;
     u16 unk6;
     int unk8;
-};
-
-
-struct PokemonJump2
-{
-    u8 filler0[0xE];
-    u8 unkE;
-    u8 unkF;
-    u8 filler10[0x8198];
-    struct Sprite *unk81A8[MAX_RFU_PLAYERS];
-    struct Sprite *unk81BC[MAX_RFU_PLAYERS];
-    struct Sprite *unk81D0[8];
-    u8 filler81F0[0xC];
-    u8 unk81FC[MAX_RFU_PLAYERS];
 };
 
 static void sub_802AA60(struct PokemonJump1 *);
@@ -216,15 +233,16 @@ static void sub_802CC40(struct Sprite *sprite);
 static void sub_802CD08(struct Sprite *sprite);
 static void sub_802CDD4(struct Sprite *sprite);
 void sub_802DC9C(u32);
-void sub_802D074(void *);
+void sub_802D074(struct PokemonJump2 *);
+void sub_802D0BC(struct PokemonJump2 *);
 void sub_802D0AC(void);
 void sub_802D0C8(int);
-int sub_802D0F0(void);
+bool32 sub_802D0F0(void);
 void sub_802D764(void);
 bool32 sub_802D788(void);
-void sub_802D7E8(u16, u16);
-void sub_802D884(u16);
-void sub_802D8FC(u16);
+void sub_802D7E8(u16 itemId, u16 quantity);
+void sub_802D884(u16 itemId);
+void sub_802D8FC(u16 itemId);
 bool32 sub_802D974(void);
 void sub_802DA14(void);
 void sub_802DC80(int, s8);
@@ -249,9 +267,10 @@ bool32 sub_802E264(struct PokemonJump1_82E4 *, int, u8 *, u16 *);
 bool32 sub_802E2D0(struct PokemonJump1_82E4 *, int);
 int sub_802E354(int, u16, u16);
 void sub_802E3A8(void);
+void sub_802D12C(u8 taskId);
 
-extern struct PokemonJump1 *gUnknown_02022CFC;
-extern struct PokemonJump2 *gUnknown_02022D00;
+EWRAM_DATA struct PokemonJump1 *gUnknown_02022CFC = NULL;
+EWRAM_DATA struct PokemonJump2 *gUnknown_02022D00 = NULL;
 
 const struct PokemonJumpMons gPkmnJumpSpecies[] =
 {
@@ -388,15 +407,33 @@ extern const u16 gUnknown_082FB64C[4];
 extern const u16 gUnknown_082FB654[];
 extern const s8 gUnknown_082FB65C[][48];
 extern const int gUnknown_082FB6EC[];
-extern const int gUnknown_082FB714[];
+extern const u32 gUnknown_082FB714[][2];
 extern const u16 gUnknown_082FB704[8];
 extern const struct CompressedSpriteSheet gUnknown_082FBE08[5];
 extern const struct SpritePalette gUnknown_082FBE30[2];
 extern const struct SpriteTemplate gUnknown_082FBE40;
 extern const struct SpriteTemplate gUnknown_082FC00C;
-extern const s16 gUnknown_082FBE58[];
+extern const s16 gUnknown_082FBE58[][10];
 extern const s16 gUnknown_082FBEA8[8];
-extern const struct SpriteTemplate gUnknown_082FBEB8[4];
+extern const struct SpriteTemplate *gUnknown_082FBEB8[4];
+extern const struct BgTemplate gUnknown_082FE164[4];
+extern const struct WindowTemplate gUnknown_082FE174[];
+extern const u16 gPkmnJumpBgPal[];
+extern const u16 gPkmnJumpVenusaurPal[];
+extern const u16 gPkmnJumpResultsPal[];
+extern const u16 gPkmnJumpPal3[];
+extern const u32 gPkmnJumpVenusaurGfx[];
+extern const u32 gPkmnJumpBgTilemap[];
+extern const u32 gPkmnJumpBgGfx[];
+extern const u32 gPkmnJumpVenusaurTilemap[];
+extern const u32 gPkmnJumpResultsGfx[];
+extern const u32 gPkmnJumpResultsTilemap[];
+
+struct
+{
+    int id;
+    void (*func)(void);
+} extern const gUnknown_082FE18C[10];
 
 void sub_802A9A8(u16 partyIndex, MainCallback callback)
 {
@@ -1145,8 +1182,6 @@ static bool32 sub_802B720(void)
 
 static bool32 sub_802B7E0(void)
 {
-    int var0;
-
     switch (gUnknown_02022CFC->unkA)
     {
     case 0:
@@ -1155,8 +1190,7 @@ static bool32 sub_802B7E0(void)
         gUnknown_02022CFC->unkA++;
         break;
     case 1:
-        var0 = sub_802D0F0();
-        if (!var0)
+        if (!sub_802D0F0())
         {
             sub_802DDF4(gUnknown_02022CFC->unk6);
             gUnknown_02022CFC->unk3C = 0;
@@ -1813,7 +1847,7 @@ static void sub_802C398(int multiplayerId)
     sub_802DC80(multiplayerId, var1);
     if (!var1 && multiplayerId == gUnknown_02022CFC->unk6)
         sub_802C1BC();
-    
+
     player->unk0 = var1;
 }
 
@@ -2028,7 +2062,7 @@ static void sub_802C7A0(u16 arg0)
 
 static bool32 sub_802C7BC(void)
 {
-    if (gUnknown_02022CFC->unk78 >= gUnknown_082FB714[0])
+    if (gUnknown_02022CFC->unk78 >= gUnknown_082FB714[0][0])
         return TRUE;
     else
         return FALSE;
@@ -2053,6 +2087,22 @@ static u16 sub_802C818(void)
     return gUnknown_082FB704[index];
 }
 
+#ifdef NONMATCHING
+// Impossible to match.
+static u16 sub_802C838(void)
+{
+    u32 val, i;
+
+    val = 0;
+    for (i = 0; i < 5; val = gUnknown_082FB714[i][1], i++)
+    {
+        if (gUnknown_02022CFC->unk78 < gUnknown_082FB714[i][0])
+            break;
+    }
+
+    return val;
+}
+#else
 NAKED
 static u16 sub_802C838(void)
 {
@@ -2091,12 +2141,13 @@ _0802C874:\n\
     pop {r1}\n\
     bx r1");
 }
+#endif
 
 static u16 sub_802C880(u16 item, u16 quantity)
 {
     while (quantity && !CheckBagHasSpace(item, quantity))
         quantity--;
-    
+
     return quantity;
 }
 
@@ -2151,7 +2202,7 @@ void sub_802C974(struct PokemonJump2 *arg0)
 
     for (i = 0; i < ARRAY_COUNT(gUnknown_082FBE08); i++)
         LoadCompressedSpriteSheet(&gUnknown_082FBE08[i]);
-    
+
     for (i = 0; i < ARRAY_COUNT(gUnknown_082FBE30); i++)
         LoadSpritePalette(&gUnknown_082FBE30[i]);
 
@@ -2382,25 +2433,557 @@ void sub_802CE48(struct PokemonJump2 *arg0, s16 x, s16 y, u8 multiplayerId)
     }
 }
 
-// void sub_802CE9C(struct PokemonJump2 *arg0)
-// {
-//     int i;
-//     int count;
-//     u8 spriteId;
+void sub_802CE9C(struct PokemonJump2 *arg0)
+{
+    int i;
+    int count;
+    u8 spriteId;
 
-//     count = 0;
-//     for (i = 0; i < 4; i++)
-//     {
-//         spriteId = CreateSprite(&gUnknown_082FBEB8[i], gUnknown_082FBEA8[count], gUnknown_082FBE58[i * 10], 2);
-//         arg0->unk81D0[count] = &gSprites[spriteId];
-//         count++;
-//     }
+    count = 0;
+    for (i = 0; i < 4; i++)
+    {
+        spriteId = CreateSprite(gUnknown_082FBEB8[i], gUnknown_082FBEA8[count], gUnknown_082FBE58[i][0], 2);
+        arg0->unk81D0[count] = &gSprites[spriteId];
+        count++;
+    }
 
-//     for (i = 0; i < 4; i++)
-//     {
-//         spriteId = CreateSprite(&gUnknown_082FBEB8[i], gUnknown_082FBEA8[count], gUnknown_082FBE58[i * 10], 2);
-//         arg0->unk81D0[count] = &gSprites[spriteId];
-//         arg0->unk81D0[count]->hFlip = 1;
-//         count++;
-//     }
-// }
+    for (i = 3; i >= 0; i--)
+    {
+        spriteId = CreateSprite(gUnknown_082FBEB8[i], gUnknown_082FBEA8[count], gUnknown_082FBE58[i][0], 2);
+        arg0->unk81D0[count] = &gSprites[spriteId];
+        arg0->unk81D0[count]->hFlip = 1;
+        count++;
+    }
+}
+
+void sub_802CF50(struct PokemonJump2 *arg0, int arg1)
+{
+    int i, count, palNum;
+    int priority;
+
+    if (arg1 > 5)
+    {
+        arg1 = 10 - arg1;
+        priority = 3;
+        palNum = arg0->unkF;
+    }
+    else
+    {
+        priority = 2;
+        palNum = arg0->unkE;
+    }
+
+    count = 0;
+    for (i = 0; i < 4; i++)
+    {
+        arg0->unk81D0[count]->pos1.y = gUnknown_082FBE58[i][arg1];
+        arg0->unk81D0[count]->oam.priority = priority;
+        arg0->unk81D0[count]->oam.paletteNum = palNum;
+        StartSpriteAnim(arg0->unk81D0[count], arg1);
+        count++;
+    }
+
+    for (i = 3; i >= 0; i--)
+    {
+        arg0->unk81D0[count]->pos1.y = gUnknown_082FBE58[i][arg1];
+        arg0->unk81D0[count]->oam.priority = priority;
+        arg0->unk81D0[count]->oam.paletteNum = palNum;
+        StartSpriteAnim(arg0->unk81D0[count], arg1);
+        count++;
+    }
+}
+
+void sub_802D044(struct PokemonJump2 *arg0)
+{
+    sub_802EB24(9, 7, 120, 80, 0);
+    sub_802CD3C(arg0);
+}
+
+bool32 sub_802D068(void)
+{
+    return sub_802EB84();
+}
+
+void sub_802D150(void);
+void sub_802DD08(void);
+void sub_802DB8C(void);
+void sub_802DBF8(void);
+void sub_802DE1C(void);
+void sub_802DFD4(void);
+void sub_802D108(void (*func)(void));
+void sub_802DF70(int arg0);
+u32 sub_802DA9C(u8 arg0, u8 arg1, u8 arg2, u8 arg3);
+void sub_802DB18(u8 arg0, u8 arg1, u8 arg2);
+
+void sub_802D074(struct PokemonJump2 *arg0)
+{
+    u8 taskId;
+
+    gUnknown_02022D00 = arg0;
+    sub_802D0BC(gUnknown_02022D00);
+    taskId = CreateTask(sub_802D12C, 3);
+    gUnknown_02022D00->unk6 = taskId;
+    SetWordTaskArg(gUnknown_02022D00->unk6, 2, (u32) gUnknown_02022D00);
+    sub_802D108(sub_802D150);
+}
+
+void sub_802D0AC(void)
+{
+    FreeAllWindowBuffers();
+    sub_8034CC8();
+}
+
+void sub_802D0BC(struct PokemonJump2 *arg0)
+{
+    arg0->unk4 = 0;
+    arg0->unk0 = 0;
+    arg0->unk12 = 0xFF;
+}
+
+void sub_802D0C8(int arg0)
+{
+    int i;
+
+    for (i = 0; i < ARRAY_COUNT(gUnknown_082FE18C); i++)
+    {
+        if (gUnknown_082FE18C[i].id == arg0)
+            sub_802D108(gUnknown_082FE18C[i].func);
+    }
+}
+
+bool32 sub_802D0F0(void)
+{
+    return (gUnknown_02022D00->unk0 != 1);
+}
+
+void sub_802D108(void (*func)(void))
+{
+    SetWordTaskArg(gUnknown_02022D00->unk6, 0, (u32) func);
+    gUnknown_02022D00->unk4 = 0;
+    gUnknown_02022D00->unk0 = 0;
+}
+
+void sub_802D12C(u8 taskId)
+{
+    if (!gUnknown_02022D00->unk0)
+    {
+        void (*func)(void) = (void *)(GetWordTaskArg(taskId, 0));
+
+        func();
+    }
+}
+
+void sub_802D150(void)
+{
+    switch (gUnknown_02022D00->unk4)
+    {
+    case 0:
+        ResetBgsAndClearDma3BusyFlags(0);
+        InitBgsFromTemplates(0, gUnknown_082FE164, ARRAY_COUNT(gUnknown_082FE164));
+        InitWindows(gUnknown_082FE174);
+        reset_temp_tile_data_buffers();
+        sub_802C974(gUnknown_02022D00);
+        sub_802DD08();
+        LoadPalette(gPkmnJumpBgPal, 0, 0x20);
+        decompress_and_copy_tile_data_to_vram(3, gPkmnJumpBgGfx, 0, 0, 0);
+        decompress_and_copy_tile_data_to_vram(3, gPkmnJumpBgTilemap, 0, 0, 1);
+        LoadPalette(gPkmnJumpVenusaurPal, 0x30, 0x20);
+        decompress_and_copy_tile_data_to_vram(2, gPkmnJumpVenusaurGfx, 0, 0, 0);
+        decompress_and_copy_tile_data_to_vram(2, gPkmnJumpVenusaurTilemap, 0, 0, 1);
+        LoadPalette(gPkmnJumpResultsPal, 0x10, 0x20);
+        decompress_and_copy_tile_data_to_vram(1, gPkmnJumpResultsGfx, 0, 0, 0);
+        decompress_and_copy_tile_data_to_vram(1, gPkmnJumpResultsTilemap, 0, 0, 1);
+        LoadPalette(gPkmnJumpPal3, 0x20, 0x20);
+        SetBgTilemapBuffer(0, gUnknown_02022D00->tilemapBuffer);
+        FillBgTilemapBufferRect_Palette0(0, 0, 0, 0, 0x20, 0x20);
+        sub_802DB8C();
+        sub_802DD64(0);
+        sub_8098C6C(0, 1, 0xE0);
+        CopyBgTilemapBufferToVram(0);
+        CopyBgTilemapBufferToVram(2);
+        CopyBgTilemapBufferToVram(1);
+        ResetBgPositions();
+        gUnknown_02022D00->unk4++;
+        break;
+    case 1:
+        if (!free_temp_tile_data_buffers_if_possible())
+        {
+            sub_802DBF8();
+            sub_802CE9C(gUnknown_02022D00);
+            sub_802CF50(gUnknown_02022D00, 6);
+            ShowBg(3);
+            ShowBg(0);
+            ShowBg(2);
+            HideBg(1);
+            gUnknown_02022D00->unk4++;
+        }
+        break;
+    case 2:
+        gUnknown_02022D00->unk0 = 1;
+        break;
+    }
+}
+
+void sub_802D2E4(void)
+{
+    switch (gUnknown_02022D00->unk4)
+    {
+    case 0:
+        sub_802DE1C();
+        gUnknown_02022D00->unk4++;
+        break;
+    case 1:
+        if (!IsDma3ManagerBusyWithBgCopy())
+        {
+            sub_802DF70(0);
+            gUnknown_02022D00->unk4++;
+        }
+        break;
+    case 2:
+        if (!IsDma3ManagerBusyWithBgCopy())
+        {
+            sub_802DFD4();
+            gUnknown_02022D00->unk4++;
+        }
+        break;
+    case 3:
+        if (!IsDma3ManagerBusyWithBgCopy())
+            gUnknown_02022D00->unk0 = 1;
+        break;
+    }
+}
+
+void sub_802D350(void)
+{
+    switch (gUnknown_02022D00->unk4)
+    {
+    case 0:
+        sub_802DE1C();
+        gUnknown_02022D00->unk4++;
+        break;
+    case 1:
+        if (!IsDma3ManagerBusyWithBgCopy())
+        {
+            sub_802DF70(1);
+            gUnknown_02022D00->unk4++;
+        }
+        break;
+    case 2:
+        if (!IsDma3ManagerBusyWithBgCopy())
+        {
+            sub_802DFD4();
+            gUnknown_02022D00->unk4++;
+        }
+        break;
+    case 3:
+        if (!IsDma3ManagerBusyWithBgCopy())
+            gUnknown_02022D00->unk0 = 1;
+        break;
+    }
+}
+
+void sub_802D3BC(void)
+{
+    int i, numPlayers;
+
+    numPlayers = sub_802C8AC();
+    switch (gUnknown_02022D00->unk4)
+    {
+    case 0:
+        for (i = 0; i < numPlayers; i++)
+            ClearWindowTilemap(gUnknown_02022D00->unk1C[i]);
+
+        CopyBgTilemapBufferToVram(0);
+        gUnknown_02022D00->unk4++;
+        break;
+    case 1:
+        if (!IsDma3ManagerBusyWithBgCopy())
+        {
+            for (i = 0; i < numPlayers; i++)
+                RemoveWindow(gUnknown_02022D00->unk1C[i]);
+
+            gUnknown_02022D00->unk0 = 1;
+        }
+        break;
+    }
+}
+
+void sub_802D448(void)
+{
+    switch (gUnknown_02022D00->unk4)
+    {
+    case 0:
+        gUnknown_02022D00->unk12 = sub_802DA9C(1, 8, 20, 2);
+        AddTextPrinterParameterized(gUnknown_02022D00->unk12, 1, gText_WantToPlayAgain2, 0, 1, TEXT_SPEED_FF, NULL);
+        CopyWindowToVram(gUnknown_02022D00->unk12, 2);
+        gUnknown_02022D00->unk4++;
+        break;
+    case 1:
+        if (!IsDma3ManagerBusyWithBgCopy())
+        {
+            PutWindowTilemap(gUnknown_02022D00->unk12);
+            DrawTextBorderOuter(gUnknown_02022D00->unk12, 1, 14);
+            sub_802DB18(23, 7, 0);
+            CopyBgTilemapBufferToVram(0);
+            gUnknown_02022D00->unk4++;
+        }
+        break;
+    case 2:
+        if (!IsDma3ManagerBusyWithBgCopy())
+            gUnknown_02022D00->unk0 = 1;
+        break;
+    }
+}
+
+void sub_802D4F4(void)
+{
+    switch (gUnknown_02022D00->unk4)
+    {
+    case 0:
+        gUnknown_02022D00->unk12 = sub_802DA9C(2, 7, 26, 4);
+        AddTextPrinterParameterized(gUnknown_02022D00->unk12, 1, gText_SavingDontTurnOffPower, 0, 1, TEXT_SPEED_FF, NULL);
+        CopyWindowToVram(gUnknown_02022D00->unk12, 2);
+        gUnknown_02022D00->unk4++;
+        break;
+    case 1:
+        if (!IsDma3ManagerBusyWithBgCopy())
+        {
+            PutWindowTilemap(gUnknown_02022D00->unk12);
+            DrawTextBorderOuter(gUnknown_02022D00->unk12, 1, 14);
+            CopyBgTilemapBufferToVram(0);
+            gUnknown_02022D00->unk4++;
+        }
+        break;
+    case 2:
+        if (!IsDma3ManagerBusyWithBgCopy())
+            gUnknown_02022D00->unk0 = 1;
+        break;
+    }
+}
+
+void sub_802D598(void)
+{
+    switch (gUnknown_02022D00->unk4)
+    {
+    case 0:
+        sub_802DA14();
+        sub_8198C78();
+        CopyBgTilemapBufferToVram(0);
+        gUnknown_02022D00->unk4++;
+        break;
+    case 1:
+        if (!sub_802DA44() && !IsDma3ManagerBusyWithBgCopy())
+            gUnknown_02022D00->unk0 = 1;
+        break;
+    }
+}
+
+void sub_802D5E4(void)
+{
+    switch (gUnknown_02022D00->unk4)
+    {
+    case 0:
+        gUnknown_02022D00->unk12 = sub_802DA9C(2, 8, 22, 4);
+        AddTextPrinterParameterized(gUnknown_02022D00->unk12, 1, gText_SomeoneDroppedOut2, 0, 1, TEXT_SPEED_FF, NULL);
+        CopyWindowToVram(gUnknown_02022D00->unk12, 2);
+        gUnknown_02022D00->unk4++;
+        break;
+    case 1:
+        if (!IsDma3ManagerBusyWithBgCopy())
+        {
+            PutWindowTilemap(gUnknown_02022D00->unk12);
+            DrawTextBorderOuter(gUnknown_02022D00->unk12, 1, 14);
+            CopyBgTilemapBufferToVram(0);
+            gUnknown_02022D00->unk4++;
+        }
+        break;
+    case 2:
+        if (!IsDma3ManagerBusyWithBgCopy())
+            gUnknown_02022D00->unk0 = 1;
+        break;
+    }
+}
+
+void sub_802D688(void)
+{
+    switch (gUnknown_02022D00->unk4)
+    {
+    case 0:
+        gUnknown_02022D00->unk12 = sub_802DA9C(7, 10, 16, 2);
+        AddTextPrinterParameterized(gUnknown_02022D00->unk12, 1, gText_CommunicationStandby4, 0, 1, TEXT_SPEED_FF, NULL);
+        CopyWindowToVram(gUnknown_02022D00->unk12, 2);
+        gUnknown_02022D00->unk4++;
+        break;
+    case 1:
+        if (!IsDma3ManagerBusyWithBgCopy())
+        {
+            PutWindowTilemap(gUnknown_02022D00->unk12);
+            DrawTextBorderOuter(gUnknown_02022D00->unk12, 1, 14);
+            CopyBgTilemapBufferToVram(0);
+            gUnknown_02022D00->unk4++;
+        }
+        break;
+    case 2:
+        if (!IsDma3ManagerBusyWithBgCopy())
+            gUnknown_02022D00->unk0 = 1;
+        break;
+    }
+}
+
+void sub_802D72C(void)
+{
+    switch (gUnknown_02022D00->unk4)
+    {
+    case 0:
+        sub_802D044(gUnknown_02022D00);
+        gUnknown_02022D00->unk4++;
+        break;
+    case 1:
+        if (!sub_802D068())
+            gUnknown_02022D00->unk0 = 1;
+        break;
+    }
+}
+
+void sub_802D764(void)
+{
+    gUnknown_02022D00->unkA = 0;
+    gUnknown_02022D00->unkB = 0;
+    gUnknown_02022D00->unkC = 6;
+    sub_802DC9C(gUnknown_02022D00->unkC);
+}
+
+bool32 sub_802D788(void)
+{
+    switch (gUnknown_02022D00->unkA)
+    {
+    case 0:
+        gUnknown_02022D00->unkB++;
+        if (gUnknown_02022D00->unkB > 10)
+        {
+            gUnknown_02022D00->unkB = 0;
+            gUnknown_02022D00->unkC++;
+            if (gUnknown_02022D00->unkC >= 10)
+            {
+                gUnknown_02022D00->unkC = 0;
+                gUnknown_02022D00->unkA++;
+            }
+        }
+        sub_802DC9C(gUnknown_02022D00->unkC);
+        if (gUnknown_02022D00->unkC != 7)
+            break;
+    case 1:
+        return FALSE;
+    }
+
+    return TRUE;
+}
+
+void sub_802D7E8(u16 itemId, u16 quantity)
+{
+    CopyItemNameHandlePlural(itemId, gUnknown_02022D00->txtBuff[0], quantity);
+    ConvertIntToDecimalStringN(gUnknown_02022D00->txtBuff[1], quantity, STR_CONV_MODE_LEFT_ALIGN, 1);
+    DynamicPlaceholderTextUtil_Reset();
+    DynamicPlaceholderTextUtil_SetPlaceholderPtr(0, gUnknown_02022D00->txtBuff[0]);
+    DynamicPlaceholderTextUtil_SetPlaceholderPtr(1, gUnknown_02022D00->txtBuff[1]);
+    DynamicPlaceholderTextUtil_ExpandPlaceholders(gUnknown_02022D00->strBuff, gText_AwesomeWonF701F700);
+    gUnknown_02022D00->unk12 = sub_802DA9C(4, 8, 22, 4);
+    AddTextPrinterParameterized(gUnknown_02022D00->unk12, 1, gUnknown_02022D00->strBuff, 0, 1, TEXT_SPEED_FF, NULL);
+    CopyWindowToVram(gUnknown_02022D00->unk12, 2);
+    gUnknown_02022D00->unk14 = MUS_FANFA1;
+    gUnknown_02022D00->unkD = 0;
+}
+
+void sub_802D884(u16 itemId)
+{
+    CopyItemName(itemId, gUnknown_02022D00->txtBuff[0]);
+    DynamicPlaceholderTextUtil_Reset();
+    DynamicPlaceholderTextUtil_SetPlaceholderPtr(0, gUnknown_02022D00->txtBuff[0]);
+    DynamicPlaceholderTextUtil_ExpandPlaceholders(gUnknown_02022D00->strBuff, gText_FilledStorageSpace2);
+    gUnknown_02022D00->unk12 = sub_802DA9C(4, 8, 22, 4);
+    AddTextPrinterParameterized(gUnknown_02022D00->unk12, 1, gUnknown_02022D00->strBuff, 0, 1, TEXT_SPEED_FF, NULL);
+    CopyWindowToVram(gUnknown_02022D00->unk12, 2);
+    gUnknown_02022D00->unk14 = 0;
+    gUnknown_02022D00->unkD = 0;
+}
+
+void sub_802D8FC(u16 itemId)
+{
+    CopyItemName(itemId, gUnknown_02022D00->txtBuff[0]);
+    DynamicPlaceholderTextUtil_Reset();
+    DynamicPlaceholderTextUtil_SetPlaceholderPtr(0, gUnknown_02022D00->txtBuff[0]);
+    DynamicPlaceholderTextUtil_ExpandPlaceholders(gUnknown_02022D00->strBuff, gText_CantHoldMore);
+    gUnknown_02022D00->unk12 = sub_802DA9C(4, 9, 22, 2);
+    AddTextPrinterParameterized(gUnknown_02022D00->unk12, 1, gUnknown_02022D00->strBuff, 0, 1, TEXT_SPEED_FF, NULL);
+    CopyWindowToVram(gUnknown_02022D00->unk12, 2);
+    gUnknown_02022D00->unk14 = 0;
+    gUnknown_02022D00->unkD = 0;
+}
+
+bool32 sub_802D974(void)
+{
+    switch (gUnknown_02022D00->unkD)
+    {
+    case 0:
+        if (!IsDma3ManagerBusyWithBgCopy())
+        {
+            PutWindowTilemap(gUnknown_02022D00->unk12);
+            DrawTextBorderOuter(gUnknown_02022D00->unk12, 1, 14);
+            CopyBgTilemapBufferToVram(0);
+            gUnknown_02022D00->unkD++;
+        }
+        break;
+    case 1:
+        if (IsDma3ManagerBusyWithBgCopy())
+            break;
+        if (gUnknown_02022D00->unk14 == 0)
+        {
+            gUnknown_02022D00->unkD += 2;
+            return FALSE;
+        }
+        PlayFanfare(gUnknown_02022D00->unk14);
+        gUnknown_02022D00->unkD++;
+    case 2:
+        if (!IsFanfareTaskInactive())
+            break;
+        gUnknown_02022D00->unkD++;
+    case 3:
+        return FALSE;
+    }
+
+    return TRUE;
+}
+
+void sub_802DA14(void)
+{
+    if (gUnknown_02022D00->unk12 != 0xFF)
+    {
+        rbox_fill_rectangle(gUnknown_02022D00->unk12);
+        CopyWindowToVram(gUnknown_02022D00->unk12, 1);
+        gUnknown_02022D00->unkD = 0;
+    }
+}
+
+// Can't match this
+/*
+bool32 sub_802DA44(void)
+{
+    if (gUnknown_02022D00->unk12 == 0xFF)
+        return FALSE;
+
+    if (gUnknown_02022D00->unkD == 0)
+    {
+        if (!IsDma3ManagerBusyWithBgCopy())
+        {
+            RemoveWindow(gUnknown_02022D00->unk12);
+            gUnknown_02022D00->unk12 = 0xFF;
+            gUnknown_02022D00->unkD++;
+            return FALSE;
+        }
+    }
+    else if (gUnknown_02022D00->unkD == 1)
+        return FALSE;
+
+    return TRUE;
+}
+*/

@@ -82,21 +82,21 @@ union PlayerRecords
 
 // Static RAM declarations
 
-static IWRAM_DATA bool8 gUnknown_03001130;
-static IWRAM_DATA struct SecretBase *sSecretBasesSave;
-static IWRAM_DATA TVShow *sTvShowsSave;
-static IWRAM_DATA PokeNews *sPokeNewsSave;
-static IWRAM_DATA OldMan *sOldManSave;
-static IWRAM_DATA struct EasyChatPair *sEasyChatPairsSave;
-static IWRAM_DATA struct RecordMixingDayCareMail *gUnknown_03001148;
-static IWRAM_DATA void *sBattleTowerSave;
-static IWRAM_DATA LilycoveLady *sLilycoveLadySave;
-static IWRAM_DATA void *sApprenticesSave;
-static IWRAM_DATA void *sBattleTowerSave_Duplicate;
-static IWRAM_DATA u32 sRecordStructSize;
-static IWRAM_DATA u8 gUnknown_03001160;
-static IWRAM_DATA u32 filler_03001164;
-static IWRAM_DATA struct PlayerHallRecords *gUnknown_03001168[3];
+static bool8 gUnknown_03001130;
+static struct SecretBase *sSecretBasesSave;
+static TVShow *sTvShowsSave;
+static PokeNews *sPokeNewsSave;
+static OldMan *sOldManSave;
+static struct EasyChatPair *sEasyChatPairsSave;
+static struct RecordMixingDayCareMail *gUnknown_03001148;
+static void *sBattleTowerSave;
+static LilycoveLady *sLilycoveLadySave;
+static void *sApprenticesSave;
+static void *sBattleTowerSave_Duplicate;
+static u32 sRecordStructSize;
+static u8 gUnknown_03001160;
+static u32 filler_03001164;
+static struct PlayerHallRecords *gUnknown_03001168[3];
 
 static EWRAM_DATA struct RecordMixingDayCareMail gUnknown_02039F9C = {0};
 static EWRAM_DATA union PlayerRecords *sReceivedRecords = NULL;

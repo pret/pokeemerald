@@ -232,7 +232,7 @@ static void Fldeff_MoveDeoxysRock_Step(u8 taskId);
 
 // Static RAM declarations
 
-static IWRAM_DATA u8 sActiveList[32];
+static u8 sActiveList[32];
 
 // External declarations
 extern struct CompressedSpritePalette gMonPaletteTable[]; // GF made a mistake and did not extern it as const.

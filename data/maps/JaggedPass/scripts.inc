@@ -36,8 +36,8 @@ JaggedPass_MapScript1_23069C: @ 823069C
 	end
 
 JaggedPass_EventScript_2306A8:: @ 82306A8
-	setmetatile 16, 17, 628, 1
-	setmetatile 16, 18, 628, 1
+	setmetatile 16, 17, METATILE_Lavaridge_RockWall, 1
+	setmetatile 16, 18, METATILE_Lavaridge_RockWall, 1
 	end
 
 JaggedPass_EventScript_2306BB:: @ 82306BB
@@ -57,8 +57,8 @@ JaggedPass_EventScript_2306BB:: @ 82306BB
 	special sub_8139560
 	waitstate
 	playse SE_KOUKA_M
-	setmetatile 16, 17, 598, 1
-	setmetatile 16, 18, 606, 0
+	setmetatile 16, 17, METATILE_Lavaridge_CaveEntrance_Top, 1
+	setmetatile 16, 18, METATILE_Lavaridge_CaveEntrance_Bottom, 0
 	special DrawWholeMapView
 	delay 30
 	setvar VAR_JAGGED_PASS_STATE, 2

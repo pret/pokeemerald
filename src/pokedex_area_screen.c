@@ -763,11 +763,11 @@ static void sub_813D6B4(void)
 static void CreateAreaMarkerSprites(void)
 {
     u8 spriteId;
-    static IWRAM_DATA s16 x;
-    static IWRAM_DATA s16 y;
-    static IWRAM_DATA s16 i;
-    static IWRAM_DATA s16 mapSecId;
-    static IWRAM_DATA s16 numSprites;
+    static s16 x;
+    static s16 y;
+    static s16 i;
+    static s16 mapSecId;
+    static s16 numSprites;
 
     LoadSpriteSheet(&sAreaMarkerSpriteSheet);
     LoadSpritePalette(&sAreaMarkerSpritePalette);

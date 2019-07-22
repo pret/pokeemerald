@@ -205,7 +205,7 @@ static void BattleIntroSlide1(u8 taskId)
 
         if (gBattle_WIN0V & 0xFF00)
             gBattle_WIN0V -= 0x3FC;
-        
+
         if (gTasks[taskId].data[2])
             gTasks[taskId].data[2] -= 2;
 
@@ -314,7 +314,7 @@ static void BattleIntroSlide2(u8 taskId)
 
         if (gBattle_WIN0V & 0xFF00)
             gBattle_WIN0V -= 0x3FC;
-        
+
         if (gTasks[taskId].data[2])
             gTasks[taskId].data[2] -= 2;
 
@@ -402,7 +402,7 @@ static void BattleIntroSlide3(u8 taskId)
 
         if (gBattle_WIN0V & 0xFF00)
             gBattle_WIN0V -= 0x3FC;
-        
+
         if (gTasks[taskId].data[2])
             gTasks[taskId].data[2] -= 2;
 
@@ -484,7 +484,7 @@ static void BattleIntroSlideLink(u8 taskId)
     case 3:
         if (gBattle_WIN0V & 0xFF00)
             gBattle_WIN0V -= 0x3FC;
-        
+
         if (gTasks[taskId].data[2])
             gTasks[taskId].data[2] -= 2;
 
@@ -537,7 +537,7 @@ static void BattleIntroSlidePartner(u8 taskId)
         gBattle_WIN0V += 0x100;
         if ((gBattle_WIN0V & 0xFF00) != 0x100)
             gBattle_WIN0V--;
-        
+
         if ((gBattle_WIN0V & 0xFF00) == 0x2000)
         {
             gTasks[taskId].data[0]++;
@@ -600,129 +600,18 @@ void sub_8118FBC(int bgId, u8 arg1, u8 arg2, u8 battlerPosition, u8 arg4, u8 *ar
     LoadBgTilemap(bgId, arg6, BG_SCREEN_SIZE, 0);
 }
 
-#ifdef NONMATCHING
 void unref_sub_8119094(u8 arg0, u8 arg1, u8 battlerPosition, u8 arg3, u8 arg4, u16 arg5, u8 arg6, u8 arg7)
 {
-    int i, j;
-    int offset;
+    int i, j, offset;
+
     DmaCopy16(3, gMonSpritesGfxPtr->sprites[battlerPosition] + BG_SCREEN_SIZE * arg3, (void *)BG_SCREEN_ADDR(0) + arg5, BG_SCREEN_SIZE);
     offset = (arg5 >> 5) - (arg7 << 9);
     for (i = arg1; i < arg1 + 8; i++)
     {
         for (j = arg0; j < arg0 + 8; j++)
         {
-            ((u16 *)BG_VRAM)[i * 32 + j + (arg6 * 0x400) + arg0] = offset | (arg4 << 12);
+            *((u16 *)(BG_VRAM) + (i * 32) + (j + (arg6 << 10))) = offset | (arg4 << 12);
             offset++;
         }
     }
 }
-#else
-NAKED
-void unref_sub_8119094(u8 arg0, u8 arg1, u8 battlerPosition, u8 arg3, u8 arg4, u16 arg5, u8 arg6, u8 arg7)
-{
-    asm_unified("\n\
-    push {r4-r7,lr}\n\
-    mov r7, r10\n\
-    mov r6, r9\n\
-    mov r5, r8\n\
-    push {r5-r7}\n\
-    sub sp, 0x4\n\
-    ldr r4, [sp, 0x24]\n\
-    ldr r5, [sp, 0x28]\n\
-    mov r8, r5\n\
-    ldr r5, [sp, 0x2C]\n\
-    ldr r6, [sp, 0x30]\n\
-    mov r9, r6\n\
-    lsls r0, 24\n\
-    lsrs r0, 24\n\
-    mov r12, r0\n\
-    lsls r1, 24\n\
-    lsls r2, 24\n\
-    lsls r3, 24\n\
-    lsls r4, 24\n\
-    lsrs r4, 24\n\
-    mov r10, r4\n\
-    mov r7, r8\n\
-    lsls r7, 16\n\
-    lsrs r6, r7, 16\n\
-    lsls r5, 24\n\
-    lsrs r5, 24\n\
-    mov r0, r9\n\
-    lsls r0, 24\n\
-    mov r9, r0\n\
-    ldr r4, =0x040000d4\n\
-    ldr r0, =gMonSpritesGfxPtr\n\
-    ldr r0, [r0]\n\
-    lsrs r2, 22\n\
-    adds r0, 0x4\n\
-    adds r0, r2\n\
-    lsrs r3, 13\n\
-    ldr r0, [r0]\n\
-    adds r0, r3\n\
-    str r0, [r4]\n\
-    movs r0, 0xC0\n\
-    lsls r0, 19\n\
-    adds r6, r0\n\
-    str r6, [r4, 0x4]\n\
-    ldr r0, =0x80000400\n\
-    str r0, [r4, 0x8]\n\
-    ldr r0, [r4, 0x8]\n\
-    adds r2, r7, 0\n\
-    lsrs r2, 21\n\
-    mov r6, r9\n\
-    lsrs r6, 15\n\
-    subs r4, r2, r6\n\
-    lsrs r0, r1, 24\n\
-    adds r1, r0, 0\n\
-    adds r1, 0x8\n\
-    cmp r0, r1\n\
-    bge _08119148\n\
-    mov r9, r1\n\
-    mov r7, r12\n\
-    lsls r7, 1\n\
-    mov r8, r7\n\
-    lsls r5, 11\n\
-    str r5, [sp]\n\
-_08119110:\n\
-    mov r2, r12\n\
-    adds r3, r2, 0\n\
-    adds r3, 0x8\n\
-    adds r5, r0, 0x1\n\
-    cmp r2, r3\n\
-    bge _08119142\n\
-    mov r1, r10\n\
-    lsls r6, r1, 12\n\
-    lsls r0, 6\n\
-    movs r7, 0xC0\n\
-    lsls r7, 19\n\
-    adds r0, r7\n\
-    ldr r1, [sp]\n\
-    adds r0, r1, r0\n\
-    mov r7, r8\n\
-    adds r1, r7, r0\n\
-    subs r2, r3, r2\n\
-_08119132:\n\
-    adds r0, r4, 0\n\
-    orrs r0, r6\n\
-    strh r0, [r1]\n\
-    adds r4, 0x1\n\
-    adds r1, 0x2\n\
-    subs r2, 0x1\n\
-    cmp r2, 0\n\
-    bne _08119132\n\
-_08119142:\n\
-    adds r0, r5, 0\n\
-    cmp r0, r9\n\
-    blt _08119110\n\
-_08119148:\n\
-    add sp, 0x4\n\
-    pop {r3-r5}\n\
-    mov r8, r3\n\
-    mov r9, r4\n\
-    mov r10, r5\n\
-    pop {r4-r7}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .pool");
-}
-#endif

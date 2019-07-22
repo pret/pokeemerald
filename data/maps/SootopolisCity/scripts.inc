@@ -16,19 +16,19 @@ SootopolisCity_EventScript_1E5692:: @ 81E5692
 	end
 
 SootopolisCity_EventScript_1E5693:: @ 81E5693
-	setmetatile 9, 6, 584, 1
-	setmetatile 9, 17, 584, 1
-	setmetatile 9, 26, 584, 1
-	setmetatile 44, 17, 584, 1
-	setmetatile 8, 35, 584, 1
-	setmetatile 53, 28, 584, 1
-	setmetatile 45, 6, 584, 1
-	setmetatile 48, 25, 584, 1
-	setmetatile 51, 36, 584, 1
+	setmetatile 9, 6, METATILE_Sootopolis_Door_Closed, 1
+	setmetatile 9, 17, METATILE_Sootopolis_Door_Closed, 1
+	setmetatile 9, 26, METATILE_Sootopolis_Door_Closed, 1
+	setmetatile 44, 17, METATILE_Sootopolis_Door_Closed, 1
+	setmetatile 8, 35, METATILE_Sootopolis_Door_Closed, 1
+	setmetatile 53, 28, METATILE_Sootopolis_Door_Closed, 1
+	setmetatile 45, 6, METATILE_Sootopolis_Door_Closed, 1
+	setmetatile 48, 25, METATILE_Sootopolis_Door_Closed, 1
+	setmetatile 51, 36, METATILE_Sootopolis_Door_Closed, 1
 	return
 
 SootopolisCity_EventScript_1E56E5:: @ 81E56E5
-	setmetatile 31, 32, 592, 1
+	setmetatile 31, 32, METATILE_Sootopolis_GymDoor_Closed, 1
 	return
 
 SootopolisCity_OnTransition: @ 81E56EF
@@ -603,30 +603,30 @@ SootopolisCity_EventScript_1E5CCE:: @ 81E5CCE
 	end
 
 SootopolisCity_EventScript_1E5D82:: @ 81E5D82
-	setmetatile 27, 43, 656, 0
-	setmetatile 28, 43, 656, 0
-	setmetatile 29, 43, 656, 0
-	setmetatile 30, 43, 656, 0
-	setmetatile 27, 44, 656, 0
-	setmetatile 28, 44, 656, 0
-	setmetatile 29, 44, 656, 0
-	setmetatile 30, 44, 656, 0
-	setmetatile 27, 45, 656, 0
-	setmetatile 28, 45, 656, 0
-	setmetatile 29, 45, 656, 0
-	setmetatile 30, 45, 656, 0
-	setmetatile 32, 43, 656, 0
-	setmetatile 33, 43, 656, 0
-	setmetatile 34, 43, 656, 0
-	setmetatile 35, 43, 656, 0
-	setmetatile 32, 44, 656, 0
-	setmetatile 33, 44, 656, 0
-	setmetatile 34, 44, 656, 0
-	setmetatile 35, 44, 656, 0
-	setmetatile 32, 45, 656, 0
-	setmetatile 33, 45, 656, 0
-	setmetatile 34, 45, 656, 0
-	setmetatile 35, 45, 656, 0
+	setmetatile 27, 43, METATILE_Sootopolis_RoughWater, 0
+	setmetatile 28, 43, METATILE_Sootopolis_RoughWater, 0
+	setmetatile 29, 43, METATILE_Sootopolis_RoughWater, 0
+	setmetatile 30, 43, METATILE_Sootopolis_RoughWater, 0
+	setmetatile 27, 44, METATILE_Sootopolis_RoughWater, 0
+	setmetatile 28, 44, METATILE_Sootopolis_RoughWater, 0
+	setmetatile 29, 44, METATILE_Sootopolis_RoughWater, 0
+	setmetatile 30, 44, METATILE_Sootopolis_RoughWater, 0
+	setmetatile 27, 45, METATILE_Sootopolis_RoughWater, 0
+	setmetatile 28, 45, METATILE_Sootopolis_RoughWater, 0
+	setmetatile 29, 45, METATILE_Sootopolis_RoughWater, 0
+	setmetatile 30, 45, METATILE_Sootopolis_RoughWater, 0
+	setmetatile 32, 43, METATILE_Sootopolis_RoughWater, 0
+	setmetatile 33, 43, METATILE_Sootopolis_RoughWater, 0
+	setmetatile 34, 43, METATILE_Sootopolis_RoughWater, 0
+	setmetatile 35, 43, METATILE_Sootopolis_RoughWater, 0
+	setmetatile 32, 44, METATILE_Sootopolis_RoughWater, 0
+	setmetatile 33, 44, METATILE_Sootopolis_RoughWater, 0
+	setmetatile 34, 44, METATILE_Sootopolis_RoughWater, 0
+	setmetatile 35, 44, METATILE_Sootopolis_RoughWater, 0
+	setmetatile 32, 45, METATILE_Sootopolis_RoughWater, 0
+	setmetatile 33, 45, METATILE_Sootopolis_RoughWater, 0
+	setmetatile 34, 45, METATILE_Sootopolis_RoughWater, 0
+	setmetatile 35, 45, METATILE_Sootopolis_RoughWater, 0
 	return
 
 SootopolisCity_Movement_1E5E5B: @ 81E5E5B
