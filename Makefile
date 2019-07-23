@@ -51,7 +51,7 @@ ROM := pokeemerald.gba
 OBJ_DIR := build/emerald
 LIBPATH := -L ../../tools/agbcc/lib
 else
-CC1             := $(shell $(PREFIX)gcc --print-prog-name=cc1) -quiet
+CC1             := $(shell $(CC) --print-prog-name=cc1) -quiet
 override CFLAGS += -mthumb -mthumb-interwork -O2 -mabi=apcs-gnu -mtune=arm7tdmi -march=armv4t -fno-toplevel-reorder -fno-aggressive-loop-optimizations -Wno-pointer-to-int-cast
 ROM := pokeemerald_modern.gba
 OBJ_DIR := build/modern
@@ -78,6 +78,12 @@ FIX := tools/gbafix/gbafix$(EXE)
 MAPJSON := tools/mapjson/mapjson$(EXE)
 JSONPROC := tools/jsonproc/jsonproc$(EXE)
 
+TOOLDIRS := $(filter-out tools/agbcc tools/binutils,$(wildcard tools/*))
+TOOLBASE = $(TOOLDIRS:tools/%=%)
+TOOLS = $(foreach tool,$(TOOLBASE),tools/$(tool)/$(tool)$(EXE))
+
+MAKEFLAGS += --no-print-directory
+
 # Clear the default suffixes
 .SUFFIXES:
 # Don't delete intermediate files
@@ -88,7 +94,17 @@ JSONPROC := tools/jsonproc/jsonproc$(EXE)
 # Secondary expansion is required for dependency variables in object rules.
 .SECONDEXPANSION:
 
-.PHONY: rom clean compare tidy tools mostlyclean clean-tools
+.PHONY: all rom clean compare tidy tools mostlyclean clean-tools $(TOOLDIRS)
+
+infoshell = $(foreach line, $(shell $1 | sed "s/ /__SPACE__/g"), $(info $(subst __SPACE__, ,$(line))))
+
+# Build tools when building the rom
+# Disable dependency scanning for clean/tidy/tools
+ifeq (,$(filter-out all compare,$(MAKECMDGOALS)))
+$(call infoshell, $(MAKE) tools)
+else
+NODEP := 1
+endif
 
 C_SRCS := $(wildcard $(C_SUBDIR)/*.c $(C_SUBDIR)/*/*.c $(C_SUBDIR)/*/*/*.c)
 C_OBJS := $(patsubst $(C_SUBDIR)/%.c,$(C_BUILDDIR)/%.o,$(C_SRCS))
@@ -112,18 +128,14 @@ SUBDIRS  := $(sort $(dir $(OBJS)))
 
 AUTO_GEN_TARGETS :=
 
-TOOLDIRS := $(filter-out tools/agbcc tools/binutils,$(wildcard tools/*))
-TOOLBASE = $(TOOLDIRS:tools/%=%)
-TOOLS = $(foreach tool,$(TOOLBASE),tools/%(tool)/$(tool)$(EXE))
-
 $(shell mkdir -p $(SUBDIRS))
 
-all: tools rom
+all: rom
 
-tools: $(TOOLS)
+tools: $(TOOLDIRS)
 
-$(TOOLS):
-	@$(foreach tooldir,$(TOOLDIRS),$(MAKE) -C $(tooldir);)
+$(TOOLDIRS):
+	@$(MAKE) -C $@
 
 rom: $(ROM)
 
