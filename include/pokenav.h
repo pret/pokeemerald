@@ -184,4 +184,23 @@ void sub_81CC62C(int);
 u32 sub_81CC65C(void);
 void sub_81CC670(void);
 
-#endif //GUARD_POKENAV_H
+// pokenav_unk_6.c
+bool32 sub_81CD3C4(void);
+bool32 sub_81CDD5C(void);
+s8 sub_81CDC84(void);
+struct UnknownStruct_81D1ED4 *sub_81CDC70(void);
+u16 sub_81CDC60(void);
+u16 sub_81CDC50(void);
+u8 sub_81CDDB0(void);
+bool32 sub_81CD548(u8 arg0);
+u8 sub_81CDD7C(void);
+const u8 *sub_81CDD04(u8 id);
+const u8 *sub_81CDD24(u8 id);
+u16 sub_81CDD48(void);
+const void *sub_81CDCB4(u8 id);
+const u16 *sub_81CDCD4(u8 id);
+
+// pokenav_unk_7.c
+u8 sub_81CEF14(void);
+
+#endif // GUARD_POKENAV_H
