@@ -8,7 +8,6 @@ OBJCOPY := $(PREFIX)objcopy
 export CC := $(PREFIX)gcc
 export AS := $(PREFIX)as
 endif
-$(shell export PATH="$$PATH")
 export CPP := $(PREFIX)cpp
 export LD := $(PREFIX)ld
 
@@ -44,7 +43,7 @@ MID_BUILDDIR = $(OBJ_DIR)/$(MID_SUBDIR)
 
 ASFLAGS := -mcpu=arm7tdmi --defsym MODERN=$(MODERN)
 
-GCC_VER   := $(shell $(CC) -dumpversion)
+GCC_VER = $(shell $(CC) -dumpversion)
 
 ifeq ($(MODERN),0)
 CC1             := tools/agbcc/bin/agbcc$(EXE)
@@ -53,7 +52,7 @@ ROM := pokeemerald.gba
 OBJ_DIR := build/emerald
 LIBPATH := -L ../../tools/agbcc/lib
 else
-CC1             := $(shell $(CC) --print-prog-name=cc1) -quiet
+CC1              = $(shell $(CC) --print-prog-name=cc1) -quiet
 override CFLAGS += -mthumb -mthumb-interwork -O2 -mabi=apcs-gnu -mtune=arm7tdmi -march=armv4t -fno-toplevel-reorder -fno-aggressive-loop-optimizations -Wno-pointer-to-int-cast
 ROM := pokeemerald_modern.gba
 OBJ_DIR := build/modern
