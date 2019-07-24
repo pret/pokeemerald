@@ -25,8 +25,6 @@ MODERN      ?= 0
 
 SHELL := /bin/bash -o pipefail
 
-$(shell echo $(CC))
-
 ELF = $(ROM:.gba=.elf)
 MAP = $(ROM:.gba=.map)
 
@@ -132,6 +130,7 @@ SUBDIRS  := $(sort $(dir $(OBJS)))
 AUTO_GEN_TARGETS :=
 
 $(shell mkdir -p $(SUBDIRS))
+$(call shell, echo ${PATH})
 
 all: rom
 
