@@ -8,6 +8,7 @@ OBJCOPY := $(PREFIX)objcopy
 export CC := $(PREFIX)gcc
 export AS := $(PREFIX)as
 endif
+$(shell export PATH="$$PATH")
 export CPP := $(PREFIX)cpp
 export LD := $(PREFIX)ld
 
@@ -130,7 +131,6 @@ SUBDIRS  := $(sort $(dir $(OBJS)))
 AUTO_GEN_TARGETS :=
 
 $(shell mkdir -p $(SUBDIRS))
-$(call shell, echo $(PATH))
 
 all: rom
 
