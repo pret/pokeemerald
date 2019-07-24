@@ -130,7 +130,7 @@ SUBDIRS  := $(sort $(dir $(OBJS)))
 AUTO_GEN_TARGETS :=
 
 $(shell mkdir -p $(SUBDIRS))
-$(call shell, echo ${PATH})
+$(call shell, echo $(PATH))
 
 all: rom
 
