@@ -3,9 +3,13 @@ ENTRY(Start)
 gNumMusicPlayers = 4;
 gMaxLines = 0;
 
-SECTIONS {
-    . = 0x2000000;
+MEMORY {
+	ewram_region    (w!x) : ORIGIN = 0x02000000, LENGTH =   0x40000
+	iwram_region    (w!x) : ORIGIN = 0x03000000, LENGTH =    0x8000
+	rom_region      (rx)  : ORIGIN = 0x08000000, LENGTH = 0x1000000
+}
 
+SECTIONS {
     ewram (NOLOAD) :
     ALIGN(4)
     {
@@ -14,11 +18,7 @@ SECTIONS {
         . = 0x1C000;
 
         src/*.o(ewram_data);
-
-        . = 0x40000;
-}
-
-    . = 0x3000000;
+	} >ewram_region
 
     iwram (NOLOAD) :
     ALIGN(4)
@@ -34,10 +34,7 @@ SECTIONS {
         src/*.o(COMMON);
         *libc.a:sbrkr.o(COMMON);
         end = .;
-        . = 0x8000;
-    }
-
-    . = 0x8000000;
+    } >iwram_region
 
     .text :
     ALIGN(4)
@@ -45,13 +42,13 @@ SECTIONS {
         asm/crt0.o(.text);
         src/*.o(.text);
         asm/*.o(.text);
-    } =0
+    } >rom_region =0
 
     script_data :
     ALIGN(4)
     {
 		data/*.o(script_data);
-    } =0
+    } >rom_region =0
 
     lib_text :
     ALIGN(4)
@@ -72,20 +69,20 @@ SECTIONS {
         *libgcc.a:*.o(.text*);
         *libc.a:*.o(.text*);
         src/libisagbprn.o(.text);
-    } =0
+    } >rom_region =0
 
     .rodata :
     ALIGN(4)
     {
         src/*.o(.rodata*);
         data/*.o(.rodata*);
-    } =0
+    } >rom_region =0
 
     song_data :
     ALIGN(4)
     {
         sound/songs/*.o(.rodata);
-    } =0
+    } >rom_region =0
 
     lib_rodata :
     SUBALIGN(4)
@@ -101,7 +98,7 @@ SECTIONS {
         *libc.a:*.o(.rodata*);
         *libc.a:*.o(.data*);
         src/libisagbprn.o(.rodata);
-    } =0
+    } >rom_region =0
 
     other_data :
     ALIGN(4)
@@ -109,19 +106,19 @@ SECTIONS {
         data/unknown_serial_data.o(.rodata);
         data/multiboot_berry_glitch_fix.o(.rodata);
         data/multiboot_pokemon_colosseum.o(.rodata);
-    } =0
+    } >rom_region =0
 
     anim_mon_front_pic_data :
     ALIGN(4)
     {
         src/anim_mon_front_pics.o(.rodata);
-    } =0
+    } >rom_region =0
 
     gfx_data :
     ALIGN(4)
     {
         src/graphics.o(.rodata);
-    } =0
+    } >rom_region =0
 
     /* DWARF debug sections.
        Symbols in the DWARF debugging sections are relative to the beginning

@@ -6,12 +6,15 @@ gMaxLines = 0;
 /* Modify the following load addresses as needed to make more room. Alternately, delete both the
    declarations below and their references further down to get rid of the gaps.                  */
 
-__anim_mon_load_address = 0x8b00000;
-__gfx_load_address = 0x8c00000;
+MEMORY {
+	ewram_region    (w!x) : ORIGIN = 0x02000000, LENGTH =  0x40000
+	iwram_region    (w!x) : ORIGIN = 0x03000000, LENGTH =   0x8000
+	rom_region      (rx)  : ORIGIN = 0x08000000, LENGTH = 0xB00000
+	rom_anim_region (r)   : ORIGIN = 0x08B00000, LENGTH = 0x100000
+	rom_gfx_region  (r)   : ORIGIN = 0x08C00000, LENGTH = 0x400000
+}
 
 SECTIONS {
-    . = 0x2000000;
-
     ewram (NOLOAD) :
     ALIGN(4)
     {
@@ -21,10 +24,7 @@ SECTIONS {
 
         INCLUDE "sym_ewram.ld"
 
-        . = 0x40000;
-}
-
-    . = 0x3000000;
+	} >ewram_region
 
     iwram (NOLOAD) :
     ALIGN(4)
@@ -39,10 +39,7 @@ SECTIONS {
         INCLUDE "sym_common.ld"
         *libc.a:sbrkr.o(COMMON);
         end = .;
-        . = 0x8000;
-    }
-
-    . = 0x8000000;
+    } >iwram_region
 
     .text :
     ALIGN(4)
@@ -334,7 +331,7 @@ SECTIONS {
         src/gym_leader_rematch.o(.text*);
         src/unk_transition.o(.text*);
         src/international_string_util.o(.text*);
-    } =0
+    } >rom_region =0
 
     script_data :
     ALIGN(4)
@@ -347,7 +344,7 @@ SECTIONS {
         data/battle_ai_scripts.o(script_data);
         data/contest_ai_scripts.o(script_data);
         data/mystery_event_script_cmd_table.o(script_data);
-    } =0
+    } >rom_region =0
 
     lib_text :
     ALIGN(4)
@@ -416,7 +413,7 @@ SECTIONS {
         *libc.a:syscalls.o(.text*);
         *libc.a:errno.o(.text*);
         src/libisagbprn.o(.text*);
-    } =0
+    } >rom_region =0
 
     .rodata :
     ALIGN(4)
@@ -680,7 +677,7 @@ SECTIONS {
         data/mystery_event_msg.o(.rodata);
         src/m4a_tables.o(.rodata);
         data/sound_data.o(.rodata);
-    } =0
+    } >rom_region =0
 
     song_data :
     ALIGN(4)
@@ -1215,7 +1212,7 @@ SECTIONS {
         sound/songs/midi/ph_nurse_blend.o(.rodata);
         sound/songs/midi/ph_nurse_held.o(.rodata);
         sound/songs/midi/ph_nurse_solo.o(.rodata);
-    } =0
+    } >rom_region =0
 
     lib_rodata :
     SUBALIGN(4)
@@ -1233,7 +1230,7 @@ SECTIONS {
         *libc.a(.data);
         *libc.a:syscalls.o(.rodata);
         src/libisagbprn.o(.rodata);
-    } =0
+    } >rom_region =0
 
     other_data :
     ALIGN(4)
@@ -1241,19 +1238,19 @@ SECTIONS {
         data/unknown_serial_data.o(.rodata);
         data/multiboot_berry_glitch_fix.o(.rodata);
         data/multiboot_pokemon_colosseum.o(.rodata);
-    } =0
+    } >rom_region =0
 
-    anim_mon_front_pic_data __anim_mon_load_address :
+    anim_mon_front_pic_data :
     ALIGN(4)
     {
         src/anim_mon_front_pics.o(.rodata);
-    } =0
+    } >rom_anim_region =0
 
-    gfx_data __gfx_load_address :
+    gfx_data :
     ALIGN(4)
     {
         src/graphics.o(.rodata);
-    } =0
+    } >rom_gfx_region =0
 
     /* DWARF debug sections.
        Symbols in the DWARF debugging sections are relative to the beginning
