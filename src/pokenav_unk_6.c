@@ -35,18 +35,6 @@ struct PokenavSub11
     u8 unk678A;
 };
 
-struct PokenavSub18
-{
-    u16 unk0;
-    u16 unk2;
-    struct
-    {
-        u8 boxId;
-        u8 monId;
-        u16 unk6;
-    } unk4[TOTAL_BOXES_COUNT * IN_BOX_COUNT + PARTY_SIZE];
-};
-
 void sub_81CD970(void);
 void sub_81CD9F8(void);
 u32 sub_81CD08C(struct PokenavSub11 *structPtr);
