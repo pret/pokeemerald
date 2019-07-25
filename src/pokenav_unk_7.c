@@ -38,6 +38,8 @@ struct Pokenav7Struct
     u8 filler2[0x38ac - 0x2909];
 };
 
+extern s8 sub_81CDC84(void); // This function's declaration here is different than its definition in pokenav_unk_6. u8/s8
+
 u32 sub_81CDE94(s32 state);
 u32 sub_81CDE80(void);
 void sub_81CED30(u8 var);
