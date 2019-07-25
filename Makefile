@@ -2,10 +2,11 @@ TOOLCHAIN := $(DEVKITARM)
 ifneq (,$(wildcard $(TOOLCHAIN)/base_tools))
 include $(TOOLCHAIN)/base_tools
 else
-PREFIX := $(TOOLCHAIN)/bin/arm-none-eabi-
+export PATH := $(TOOLCHAIN)/bin:$(PATH)
+PREFIX := arm-none-eabi-
 OBJCOPY := $(PREFIX)objcopy
-CC := $(PREFIX)gcc
-AS := $(PREFIX)as
+export CC := $(PREFIX)gcc
+export AS := $(PREFIX)as
 endif
 export CPP := $(PREFIX)cpp
 export LD := $(PREFIX)ld
@@ -42,7 +43,7 @@ MID_BUILDDIR = $(OBJ_DIR)/$(MID_SUBDIR)
 
 ASFLAGS := -mcpu=arm7tdmi --defsym MODERN=$(MODERN)
 
-GCC_VER   := $(shell $(CC) -dumpversion)
+GCC_VER = $(shell $(CC) -dumpversion)
 
 ifeq ($(MODERN),0)
 CC1             := tools/agbcc/bin/agbcc$(EXE)
@@ -51,7 +52,7 @@ ROM := pokeemerald.gba
 OBJ_DIR := build/emerald
 LIBPATH := -L ../../tools/agbcc/lib
 else
-CC1             := $(shell $(CC) --print-prog-name=cc1) -quiet
+CC1              = $(shell $(CC) --print-prog-name=cc1) -quiet
 override CFLAGS += -mthumb -mthumb-interwork -O2 -mabi=apcs-gnu -mtune=arm7tdmi -march=armv4t -fno-toplevel-reorder -fno-aggressive-loop-optimizations -Wno-pointer-to-int-cast
 ROM := pokeemerald_modern.gba
 OBJ_DIR := build/modern
