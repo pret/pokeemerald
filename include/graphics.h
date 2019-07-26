@@ -4005,9 +4005,6 @@ extern const u32 gBerryPalette_Starf[];
 extern const u32 gBerryPic_Enigma[];
 extern const u32 gBerryPalette_Enigma[];
 
-//credits
-extern const u32 gCreditsCopyrightEnd_Gfx[];
-
 //pokenav
 extern const u8 gPokenavConditionMarker_Gfx[];
 extern const u16 gPokenavConditionMarker_Pal[];

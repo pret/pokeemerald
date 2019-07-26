@@ -142,7 +142,7 @@ static const union AnimCmd sSpriteAnim_85104CC[] =
 
 static const union AnimCmd sSpriteAnim_85104D4[] =
 {
-    ANIMCMD_FRAME(0, 158, .vFlip = TRUE),
+    ANIMCMD_FRAME(0, 30, .vFlip = TRUE),
     ANIMCMD_JUMP(0),
 };
 

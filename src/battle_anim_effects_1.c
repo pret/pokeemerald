@@ -5354,7 +5354,7 @@ void sub_8102EB0(struct Sprite* sprite)
     if (GetBattlerSide(gBattleAnimAttacker) == B_SIDE_OPPONENT)
     {
         a = gBattleAnimArgs[1];
-        (u16)gBattleAnimArgs[1] = -a;
+        *(u16 *)&gBattleAnimArgs[1] = -a;
     }
 
     sprite->pos1.x = GetBattlerSpriteCoord(gBattleAnimAttacker, 2) + gBattleAnimArgs[1];

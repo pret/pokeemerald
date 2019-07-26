@@ -145,7 +145,7 @@ EWRAM_DATA u16 * gUnknown_02022CE4[4] = {NULL};
 EWRAM_DATA struct DodrioBerryPickingStruct_2022CF4 * gUnknown_02022CF4 = NULL;
 EWRAM_DATA struct DodrioBerryPickingSubstruct_0160 * gUnknown_02022CF8 = NULL;
 
-IWRAM_DATA bool32 gUnknown_03000DB0;
+static bool32 gUnknown_03000DB0;
 
 void sub_8024A1C(void);
 void sub_8024A30(struct DodrioBerryPickingStruct *);

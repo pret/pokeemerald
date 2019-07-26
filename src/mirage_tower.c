@@ -258,7 +258,7 @@ EWRAM_DATA static struct Struct203CF10 *sUnknown_0203CF10 = NULL;
 EWRAM_DATA static struct BgRegOffsets *sBgShakeOffsets = NULL;
 EWRAM_DATA struct MirageTowerPulseBlend *sMirageTowerPulseBlend = NULL;
 
-IWRAM_DATA static u16 gUnknown_030012A8[8];
+static u16 gUnknown_030012A8[8];
 
 bool8 IsMirageTowerVisible(void)
 {
