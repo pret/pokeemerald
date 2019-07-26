@@ -13,7 +13,7 @@
 #include "strings.h"
 #include "text.h"
 
-BSS_DATA u8 gUnknown_030012BC;
+static u8 gUnknown_030012BC;
 
 struct Pokenav7Struct
 {
