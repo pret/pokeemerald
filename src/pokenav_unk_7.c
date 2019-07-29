@@ -116,8 +116,6 @@ const LoopedTask gUnknown_08623384[] =
     sub_81CE700
 };
 
-static u8 gUnknown_030012BC;
-
 struct Pokenav7Struct
 {
     u32 loopedTaskId;
