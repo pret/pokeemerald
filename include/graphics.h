@@ -4083,7 +4083,7 @@ extern const u32 gContestConfetti_Pal[];
 extern const u32 gUnknown_08C093F0[];
 extern const u32 gSubstituteDollTilemap[];
 extern const u32 gSubstituteDollGfx[];
-extern const u16 gSubstituteDollPal[];
+extern const u32 gSubstituteDollPal[];
 extern const u32 gHealthboxSinglesPlayerGfx[];
 extern const u32 gHealthboxSinglesOpponentGfx[];
 extern const u32 gHealthboxDoublesPlayerGfx[];
