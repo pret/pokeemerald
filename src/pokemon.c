@@ -2649,25 +2649,20 @@ bool8 sub_80688F8(u8 caseId, u8 battlerId)
     return TRUE;
 }
 
-static s32 GetDeoxysStat(struct Pokemon *mon, s32 statId)
+static u16 GetDeoxysStat(struct Pokemon *mon, s32 statId)
 {
     s32 ivVal, evVal;
-    s32 statValue;
-    u8 nature, statId_;
+    u16 statValue = 0;
+    u8 nature;
 
-    if (gBattleTypeFlags & BATTLE_TYPE_20)
-        return 0;
-    if (GetMonData(mon, MON_DATA_SPECIES, NULL) != SPECIES_DEOXYS)
+    if (gBattleTypeFlags & BATTLE_TYPE_20 || GetMonData(mon, MON_DATA_SPECIES, NULL) != SPECIES_DEOXYS)
         return 0;
 
     ivVal = GetMonData(mon, MON_DATA_HP_IV + statId, NULL);
     evVal = GetMonData(mon, MON_DATA_HP_EV + statId, NULL);
-    statValue = (u16)(((sDeoxysBaseStats[statId] * 2 + ivVal + evVal / 4) * mon->level) / 100 + 5);
-
+    statValue = ((sDeoxysBaseStats[statId] * 2 + ivVal + evVal / 4) * mon->level) / 100 + 5;
     nature = GetNature(mon);
-    statId_ = statId; // needed to match
-    statValue = ModifyStatByNature(nature, statValue, statId_);
-
+    statValue = ModifyStatByNature(nature, statValue, (u8)statId);
     return statValue;
 }
 
