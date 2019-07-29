@@ -50,16 +50,16 @@ const struct BgTemplate gUnknown_08620194[3] =
     }
 };
 
-u32 sub_81C9C6C(int);
-u32 sub_81C9CA8(int);
-u32 sub_81C9D44(int);
-u32 sub_81C9DD8(int);
-u32 sub_81C9E58(int);
-u32 sub_81C9EC8(int);
-u32 sub_81C9EF8(int);
-u32 sub_81C9F28(int);
+u32 sub_81C9C6C(s32);
+u32 sub_81C9CA8(s32);
+u32 sub_81C9D44(s32);
+u32 sub_81C9DD8(s32);
+u32 sub_81C9E58(s32);
+u32 sub_81C9EC8(s32);
+u32 sub_81C9EF8(s32);
+u32 sub_81C9F28(s32);
 
-u32 (*const gUnknown_086201A0[])(int) = 
+u32 (*const gUnknown_086201A0[])(s32) = 
 {
     NULL,
     sub_81C9C6C,

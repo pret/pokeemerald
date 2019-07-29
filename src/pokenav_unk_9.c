@@ -69,7 +69,6 @@ const struct WindowTemplate gUnknown_086237D4 =
     .baseBlock = 20
 };
 
-// TODO: these are probably not strings?
 const u8 gUnknown_086237DC[] = _("{COLOR_HIGHLIGHT_SHADOW}{LIGHT_RED}{WHITE}{GREEN}♂{COLOR_HIGHLIGHT_SHADOW}{DARK_GREY}{WHITE}{LIGHT_GREY}");
 const u8 gUnknown_086237E8[] = _("{COLOR_HIGHLIGHT_SHADOW}{LIGHT_GREEN}{WHITE}{BLUE}♀{COLOR_HIGHLIGHT_SHADOW}{DARK_GREY}{WHITE}{LIGHT_GREY}");
 const u8 gUnknown_086237F4[] = _("{UNK_SPACER}");
