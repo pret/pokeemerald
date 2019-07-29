@@ -5,9 +5,9 @@
 ## for wild_encounter_field in wild_encounter_group.fields
 ## for encounter_rate in wild_encounter_field.encounter_rates
 {% if trackVar(encounter_rate, 100) %}
-#define ENCOUNTER_CHANCE_{{ upper(wild_encounter_field.type) }}_INDEX_{{ loop.index }} {{ encounter_rate }} {% else %}#define ENCOUNTER_CHANCE_{{ upper(wild_encounter_field.type) }}_INDEX_{{ loop.index }} ENCOUNTER_CHANCE_{{ upper(wild_encounter_field.type) }}_INDEX_{{ subtract(loop.index, 1) }} + {{ encounter_rate }}{% endif %} {{ setVarInt(wild_encounter_field.type, loop.index) }}
+#define ENCOUNTER_CHANCE_{{ upper(wild_encounter_field.type) }}_SLOT_{{ loop.index }} {{ encounter_rate }} {% else %}#define ENCOUNTER_CHANCE_{{ upper(wild_encounter_field.type) }}_SLOT_{{ loop.index }} ENCOUNTER_CHANCE_{{ upper(wild_encounter_field.type) }}_SLOT_{{ subtract(loop.index, 1) }} + {{ encounter_rate }}{% endif %} {{ setVarInt(wild_encounter_field.type, loop.index) }}
 ## endfor
-#define ENCOUNTER_CHANCE_{{ upper(wild_encounter_field.type) }}_TOTAL (ENCOUNTER_CHANCE_{{ upper(wild_encounter_field.type) }}_INDEX_{{ getVar(wild_encounter_field.type) }})
+#define ENCOUNTER_CHANCE_{{ upper(wild_encounter_field.type) }}_TOTAL (ENCOUNTER_CHANCE_{{ upper(wild_encounter_field.type) }}_SLOT_{{ getVar(wild_encounter_field.type) }})
 ## endfor
 {% endif %}
 
