@@ -3,8 +3,21 @@
 
 #include "bg.h"
 #include "main.h"
+#include "pokemon_storage_system.h"
 
 typedef u32 (*LoopedTask)(s32 state);
+
+struct PokenavSub18
+{
+    u16 unk0;
+    u16 unk2;
+    struct
+    {
+        u8 boxId;
+        u8 monId;
+        u16 unk6;
+    } unk4[TOTAL_BOXES_COUNT * IN_BOX_COUNT + PARTY_SIZE];
+};
 
 // Return values of LoopedTask functions.
 #define LT_INC_AND_PAUSE 0
@@ -43,7 +56,7 @@ enum
 
 // pokenav.c
 void sub_81C7694(u32);
-u16 sub_81C76AC(void);
+u32 sub_81C76AC(void);
 
 void CB2_InitPokeNav(void);
 u32 CreateLoopedTask(LoopedTask loopedTask, u32 priority);
@@ -184,4 +197,22 @@ void sub_81CC62C(int);
 u32 sub_81CC65C(void);
 void sub_81CC670(void);
 
-#endif //GUARD_POKENAV_H
+// pokenav_unk_6.c
+bool32 sub_81CD3C4(void);
+bool32 sub_81CDD5C(void);
+struct UnknownStruct_81D1ED4 *sub_81CDC70(void);
+u16 sub_81CDC60(void);
+u16 sub_81CDC50(void);
+u8 sub_81CDDB0(void);
+bool32 sub_81CD548(u8 arg0);
+u8 sub_81CDD7C(void);
+u8 *sub_81CDD04(u8 id);
+u8 *sub_81CDD24(u8 id);
+u16 sub_81CDD48(void);
+void *sub_81CDCB4(u8 id);
+void *sub_81CDCD4(u8 id);
+
+// pokenav_unk_7.c
+u8 sub_81CEF14(void);
+
+#endif // GUARD_POKENAV_H

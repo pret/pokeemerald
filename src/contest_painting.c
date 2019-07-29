@@ -362,7 +362,7 @@ static void VBlankCB_ContestPainting(void)
 
 void sub_81302E8(u16 species, u8 arg1)
 {
-    const void *pal = GetFrontSpritePalFromSpeciesAndPersonality(species, gUnknown_030061C0->trainerId, gUnknown_030061C0->personality);
+    const void *pal = GetMonSpritePalFromSpeciesAndPersonality(species, gUnknown_030061C0->trainerId, gUnknown_030061C0->personality);
     LZDecompressVram(pal, gContestPaintingMonPalette);
     if (!arg1)
     {

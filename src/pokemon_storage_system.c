@@ -6827,7 +6827,7 @@ static void SetCursorMonData(void *pokemon, u8 mode)
             sPSSData->cursorMonLevel = GetLevelFromBoxMonExp(boxMon);
             sPSSData->cursorMonMarkings = GetBoxMonData(boxMon, MON_DATA_MARKINGS);
             sPSSData->cursorMonPersonality = GetBoxMonData(boxMon, MON_DATA_PERSONALITY);
-            sPSSData->cursorMonPalette = GetFrontSpritePalFromSpeciesAndPersonality(sPSSData->cursorMonSpecies, otId, sPSSData->cursorMonPersonality);
+            sPSSData->cursorMonPalette = GetMonSpritePalFromSpeciesAndPersonality(sPSSData->cursorMonSpecies, otId, sPSSData->cursorMonPersonality);
             gender = GetGenderFromSpeciesAndPersonality(sPSSData->cursorMonSpecies, sPSSData->cursorMonPersonality);
             sPSSData->cursorMonItem = GetBoxMonData(boxMon, MON_DATA_HELD_ITEM);
         }
