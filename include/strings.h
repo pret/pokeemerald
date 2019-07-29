@@ -1022,6 +1022,7 @@ extern const u8 gText_PokenavMatchCall_CheckTrainerButtons[];
 extern const u8 gText_PokenavRibbons_MonListButtons[];
 extern const u8 gText_PokenavRibbons_RibbonListButtons[];
 extern const u8 gText_PokenavRibbons_RibbonCheckButtons[];
+extern const u8 gText_Number2[];
 
 extern const u8 gUnknown_085EAD37[];
 extern const u8 gUnknown_085EAD41[];

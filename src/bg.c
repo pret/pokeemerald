@@ -220,7 +220,7 @@ static void ShowBgInternal(u8 bg)
                 (sGpuBgConfigs.configs[bg].wraparound << 13) |
                 (sGpuBgConfigs.configs[bg].screenSize << 14);
 
-        SetGpuReg((bg << 1) + 0x8, value);
+        SetGpuReg((bg << 1) + REG_OFFSET_BG0CNT, value);
 
         sGpuBgConfigs.bgVisibilityAndMode |= 1 << (bg + 8);
         sGpuBgConfigs.bgVisibilityAndMode &= DISPCNT_ALL_BG_AND_MODE_BITS;
