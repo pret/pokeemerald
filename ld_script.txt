@@ -363,6 +363,7 @@ SECTIONS {
         src/librfu_intr.o(.text*);
         asm/librfu_intr.o(.text*);
         src/librfu_rfu.o(.text*);
+        src/librfu.o(.text*);
         asm/librfu.o(.text*);
         asm/libagbsyscall.o(.text*);
         *libgcc.a:_call_via_rX.o(.text*);
