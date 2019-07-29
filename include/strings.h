@@ -2715,6 +2715,12 @@ extern const u8 gText_CommunicationStandby4[];
 extern const u8 gText_AwesomeWonF701F700[];
 extern const u8 gText_FilledStorageSpace2[];
 extern const u8 gText_CantHoldMore[];
+extern const u8 gText_SpacePoints2[];
+extern const u8 gText_SpaceTimes3[];
+extern const u8 gText_PkmnJumpRecords[];
+extern const u8 gText_JumpsInARow[];
+extern const u8 gText_BestScore2[];
+extern const u8 gText_ExcellentsInARow[];
 
 // Pokenav Match Call
 extern const u8 gText_CallCantBeMadeHere[];

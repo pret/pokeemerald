@@ -163,18 +163,17 @@ struct Pokedex
     /*0x44*/ u8 seen[DEX_FLAGS_NO];
 };
 
-struct PokemonJumpResults // possibly used in the game itself?
+struct PokemonJumpResults
 {
     u16 jumpsInRow;
     u16 field2;
     u16 excellentsInRow;
     u16 field6;
-    u16 field8;
-    u16 fieldA;
+    u32 field8;
     u32 bestJumpScore;
 };
 
-struct BerryPickingResults // possibly used in the game itself? Size may be wrong as well
+struct BerryPickingResults
 {
     u32 bestScore;
     u16 berriesPicked;

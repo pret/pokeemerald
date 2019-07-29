@@ -77,7 +77,6 @@ SECTIONS {
         src/dodrio_berry_picking.o(.text*);
         asm/dodrio_berry_picking.o(.text*);
         src/pokemon_jump.o(.text*);
-        asm/pokemon_jump.o(.text*);
         src/rtc.o(.text*);
         src/main_menu.o(.text*);
         src/battle_controllers.o(.text*);
@@ -449,7 +448,6 @@ SECTIONS {
         src/dodrio_berry_picking.o(.rodata);
         data/dodrio_berry_picking.o(.rodata);
         src/pokemon_jump.o(.rodata);
-        data/pokemon_jump.o(.rodata);
         src/rtc.o(.rodata);
         src/main_menu.o(.rodata);
         src/battle_controllers.o(.rodata);
