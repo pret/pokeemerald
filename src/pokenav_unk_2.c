@@ -46,6 +46,10 @@ void sub_81CA0C8(void);
 void sub_81CA0EC(const u16 *const * a0, s32 a1, s32 a2);
 void sub_81CA20C(void);
 void sub_81CA278(void);
+void sub_81CA35C(struct Sprite ** sprites, s32 a1, s32 a2, s32 a3);
+void sub_81CA3B4(struct Sprite ** sprites);
+void sub_81CA448(struct Sprite ** sprites, s32 a1);
+void sub_81CA474(struct Sprite * sprite);
 void sub_81CA2DC(void);
 bool32 sub_81CA324(void);
 void sub_81CA640(void);
@@ -659,5 +663,106 @@ void sub_81CA0EC(const u16 *const *a0, s32 a1, s32 a2)
         }
         a0++;
         a1 += a2;
+    }
+}
+
+void sub_81CA20C(void)
+{
+    s32 i;
+    struct Pokenav2Struct * unk = GetSubstructPtr(2);
+    s32 r8 = sub_81C98A4();
+    s32 r7 = 0;
+    s32 r2;
+
+    for (i = 0; i < 6; i++)
+    {
+        if (unk->field_010[i])
+        {
+            if (r7++ == r8)
+            {
+                r2 = 0x82;
+                unk->field_00b = i;
+            }
+            else
+                r2 = 0x8c;
+            sub_81CA35C(unk->field_02c[i], 0x100, r2, 0xC);
+            sub_81CA448(unk->field_02c[i], 0);
+        }
+        else
+            sub_81CA448(unk->field_02c[i], 1);
+    }
+}
+
+void sub_81CA278(void)
+{
+    s32 i;
+    struct Pokenav2Struct * unk = GetSubstructPtr(2);
+    s32 r3 = sub_81C98A4();
+    s32 r5;
+
+    for (i = 0, r5 = 0; i < 6; i++)
+    {
+        if (unk->field_010[i])
+        {
+            if (r5 == r3)
+            {
+                r5 = i;
+                break;
+            }
+            r5++;
+        }
+    }
+
+    sub_81CA35C(unk->field_02c[unk->field_00b], 0x82, 0x8c, 0x4);
+    sub_81CA35C(unk->field_02c[r5], 0x8c, 0x82, 0x4);
+    unk->field_00b = r5;
+}
+
+void sub_81CA2DC(void)
+{
+    s32 i;
+    struct Pokenav2Struct * unk = GetSubstructPtr(2);
+
+    for (i = 0; i < 6; i++)
+    {
+        if (unk->field_010[i])
+        {
+            if (unk->field_00b != i)
+                sub_81CA35C(unk->field_02c[i], 0x8C, 0x100, 0x8);
+            else
+                sub_81CA3B4(unk->field_02c[i]);
+        }
+    }
+}
+
+bool32 sub_81CA324(void)
+{
+    s32 i;
+    struct Pokenav2Struct * unk = GetSubstructPtr(2);
+
+    for (i = 0; i < 6; i++)
+    {
+        if (unk->field_02c[i][0]->callback != SpriteCallbackDummy)
+            return TRUE;
+    }
+
+    if (unk->field_00c)
+        return TRUE;
+
+    return FALSE;
+}
+
+void sub_81CA35C(struct Sprite ** sprites, s32 a1, s32 a2, s32 a3)
+{
+    s32 i;
+
+    for (i = 0; i < 4; i++)
+    {
+        sprites[i]->pos1.x = a1;
+        sprites[i]->data[0] = a3;
+        sprites[i]->data[1] = 16 * (a2 - a1) / a3;
+        sprites[i]->data[2] = 16 * a1;
+        sprites[i]->data[7] = a2;
+        sprites[i]->callback = sub_81CA474;
     }
 }
