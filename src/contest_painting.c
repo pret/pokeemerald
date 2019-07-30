@@ -684,7 +684,7 @@ static void sub_8130760(u8 contestResult)
 
     gUnknown_030061A0.var_16 = 2;
     gUnknown_030061A0.var_0 = contestResult;
-    gUnknown_030061A0.var_10 = 0x6010000;
+    gUnknown_030061A0.var_10 = OBJ_VRAM0;
 
     sub_8124F2C(&gUnknown_030061A0);
     sub_81261A4(&gUnknown_030061A0);
