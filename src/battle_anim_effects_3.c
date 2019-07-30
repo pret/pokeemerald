@@ -4322,7 +4322,7 @@ static void AnimSmellingSaltExclamationStep(struct Sprite *sprite)
 
 // Claps a hand several times.
 // arg 0: which hand
-// arg 1: 
+// arg 1:
 void AnimHelpingHandClap(struct Sprite *sprite)
 {
     if (gBattleAnimArgs[0] == 0)
