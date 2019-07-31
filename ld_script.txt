@@ -600,7 +600,6 @@ SECTIONS {
         src/roamer.o(.rodata);
         src/battle_tower.o(.rodata);
         src/use_pokeblock.o(.rodata);
-        data/use_pokeblock.o(.rodata);
         src/battle_controller_wally.o(.rodata);
         src/player_pc.o(.rodata);
         src/intro.o(.rodata);

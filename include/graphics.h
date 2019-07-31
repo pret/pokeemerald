@@ -4939,6 +4939,9 @@ extern const u32 gLinkMiscMenu_Tilemap[];
 // Use Pokeblock
 extern const u8 gPokenavConditionCancel_Gfx[];
 extern const u16 gPokenavConditionCancel_Pal[];
+extern const u8 gUsePokeblockUpDown_Gfx[];
+extern const u16 gUsePokeblockUpDown_Pal[];
+extern const u16 gUsePokeblockCondition_Pal[];
 
 // Berry Crush
 extern const u32 gUnknown_08DE34B8[];
