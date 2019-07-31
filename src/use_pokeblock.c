@@ -162,119 +162,119 @@ const u32 gUnknown_085DFC0C[] = INCBIN_U32("graphics/interface/85DFC0C.bin");
 
 const u32 gUnknown_085DFCB0[] =
 {
-	MON_DATA_COOL,
-	MON_DATA_TOUGH,
-	MON_DATA_SMART,
-	MON_DATA_CUTE,
-	MON_DATA_BEAUTY
+    MON_DATA_COOL,
+    MON_DATA_TOUGH,
+    MON_DATA_SMART,
+    MON_DATA_CUTE,
+    MON_DATA_BEAUTY
 };
 
 const u8 gUnknown_085DFCC4[] =
 {
-	0, // Spicy/Cool
-	4, // Dry/Beauty
-	3, // Sweet/Cute
-	2, // Bitter/Smart
-	1  // Sour/Tough 
+    0, // Spicy/Cool
+    4, // Dry/Beauty
+    3, // Sweet/Cute
+    2, // Bitter/Smart
+    1  // Sour/Tough 
 };
 
 const u8 gUnknown_085DFCC9[] =
 {
-	0,
-	8,
-	1
+    0,
+    8,
+    1
 };
 
 const struct BgTemplate gUnknown_085DFCCC[4] =
 {
-	{
-		.bg = 0,
-		.charBaseIndex = 2,
-		.mapBaseIndex = 0x1F,
-		.screenSize = 0,
-		.paletteMode = 0,
-		.priority = 0,
-		.baseTile = 0
-	},
-	{
-		.bg = 1,
-		.charBaseIndex = 0,
-		.mapBaseIndex = 0x1E,
-		.screenSize = 0,
-		.paletteMode = 0,
-		.priority = 3,
-		.baseTile = 0
-	},
-	{
-		.bg = 3,
-		.charBaseIndex = 3,
-		.mapBaseIndex = 0x1D,
-		.screenSize = 0,
-		.paletteMode = 0,
-		.priority = 2,
-		.baseTile = 0x100
-	},
-	{
-		.bg = 2,
-		.charBaseIndex = 0,
-		.mapBaseIndex = 0x17,
-		.screenSize = 0,
-		.paletteMode = 0,
-		.priority = 1,
-		.baseTile = 0
-	}
+    {
+        .bg = 0,
+        .charBaseIndex = 2,
+        .mapBaseIndex = 0x1F,
+        .screenSize = 0,
+        .paletteMode = 0,
+        .priority = 0,
+        .baseTile = 0
+    },
+    {
+        .bg = 1,
+        .charBaseIndex = 0,
+        .mapBaseIndex = 0x1E,
+        .screenSize = 0,
+        .paletteMode = 0,
+        .priority = 3,
+        .baseTile = 0
+    },
+    {
+        .bg = 3,
+        .charBaseIndex = 3,
+        .mapBaseIndex = 0x1D,
+        .screenSize = 0,
+        .paletteMode = 0,
+        .priority = 2,
+        .baseTile = 0x100
+    },
+    {
+        .bg = 2,
+        .charBaseIndex = 0,
+        .mapBaseIndex = 0x17,
+        .screenSize = 0,
+        .paletteMode = 0,
+        .priority = 1,
+        .baseTile = 0
+    }
 };
 
 const struct WindowTemplate gUnknown_085DFCDC[] = 
 {
-	{
-		.bg = 0,
-		.tilemapLeft = 0xD,
-		.tilemapTop = 1,
-		.width = 0xD,
-		.height = 4,
-		.paletteNum = 0xF,
-		.baseBlock = 1
-	},
-	{
-		.bg = 0,
-		.tilemapLeft = 0,
-		.tilemapTop = 0xE,
-		.width = 0xB,
-		.height = 2,
-		.paletteNum = 0xF,
-		.baseBlock = 0x35
-	},
-	{
-		.bg = 0,
-		.tilemapLeft = 1,
-		.tilemapTop = 0x11,
-		.width = 0x1C,
-		.height = 2,
-		.paletteNum = 0xF,
-		.baseBlock = 0x4B
-	},
-	DUMMY_WIN_TEMPLATE
+    {
+        .bg = 0,
+        .tilemapLeft = 0xD,
+        .tilemapTop = 1,
+        .width = 0xD,
+        .height = 4,
+        .paletteNum = 0xF,
+        .baseBlock = 1
+    },
+    {
+        .bg = 0,
+        .tilemapLeft = 0,
+        .tilemapTop = 0xE,
+        .width = 0xB,
+        .height = 2,
+        .paletteNum = 0xF,
+        .baseBlock = 0x35
+    },
+    {
+        .bg = 0,
+        .tilemapLeft = 1,
+        .tilemapTop = 0x11,
+        .width = 0x1C,
+        .height = 2,
+        .paletteNum = 0xF,
+        .baseBlock = 0x4B
+    },
+    DUMMY_WIN_TEMPLATE
 };
 
 const struct WindowTemplate sUsePokeblockYesNoWinTemplate = 
 {
-	.bg = 0,
-	.tilemapLeft = 0x18,
-	.tilemapTop = 0xB,
-	.width = 5,
-	.height = 4,
-	.paletteNum = 0xF,
-	.baseBlock = 0x83
+    .bg = 0,
+    .tilemapLeft = 0x18,
+    .tilemapTop = 0xB,
+    .width = 5,
+    .height = 4,
+    .paletteNum = 0xF,
+    .baseBlock = 0x83
 };
 
 const u8 *const sContestStatNames[] =
 {
-	gText_Coolness,
-	gText_Toughness,
-	gText_Smartness,
-	gText_Cuteness,
-	gText_Beauty3
+    gText_Coolness,
+    gText_Toughness,
+    gText_Smartness,
+    gText_Cuteness,
+    gText_Beauty3
 };
 
 const struct SpriteSheet gSpriteSheet_ConditionUpDown = 
@@ -284,16 +284,16 @@ const struct SpriteSheet gSpriteSheet_ConditionUpDown =
 
 const struct SpritePalette gSpritePalette_ConditionUpDown =
 {
-	gUsePokeblockUpDown_Pal, TAG_PAL_CONDITION_UP_DOWN
+    gUsePokeblockUpDown_Pal, TAG_PAL_CONDITION_UP_DOWN
 };
 
 const s16 gUnknown_085DFD28[][2] =
 {
-	{0x9C, 0x24},
-	{0x75, 0x3B},
-	{0x75, 0x76},
-	{0xC5, 0x76},
-	{0xC5, 0x3B}
+    {0x9C, 0x24},
+    {0x75, 0x3B},
+    {0x75, 0x76},
+    {0xC5, 0x76},
+    {0xC5, 0x3B}
 };
 
 const struct OamData gOamData_085DFD3C = 
@@ -330,7 +330,7 @@ const union AnimCmd *const gSpriteAnimTable_085DFD54[] =
 
 const struct SpriteTemplate gSpriteTemplate_085DFD5C =
 {
-	.tileTag = 0,
+    .tileTag = 0,
     .paletteTag = 0,
     .oam = &gOamData_085DFD3C,
     .anims = gSpriteAnimTable_085DFD54,
@@ -380,7 +380,7 @@ const union AnimCmd *const gSpriteAnimTable_085DFD94[] =
 
 const struct SpriteTemplate gSpriteTemplate_085DFDA0 =
 {
-	.tileTag = 1,
+    .tileTag = 1,
     .paletteTag = 1,
     .oam = &gOamData_085DFD74,
     .anims = gSpriteAnimTable_085DFD94,
@@ -391,7 +391,7 @@ const struct SpriteTemplate gSpriteTemplate_085DFDA0 =
 
 const struct SpritePalette gSpritePalette_085DFDB8 =
 {
-	gUsePokeblockCondition_Pal, TAG_PAL_POKEBLOCK_CONDITION
+    gUsePokeblockCondition_Pal, TAG_PAL_POKEBLOCK_CONDITION
 };
 
 // code
