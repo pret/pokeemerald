@@ -32,11 +32,11 @@ struct Pokenav5Struct_2
     u8 cityZoomPics[22][0xC8];
 };
 
-struct CityZoomPic
+struct CityMapEntry
 {
     u16 mapSecId;
-    u16 unk2;
-    const u32 *data;
+    u16 index;
+    const u32 *tilemap;
 };
 
 static u32 sub_81CC568(struct Pokenav5Struct *);
@@ -61,17 +61,110 @@ static void sub_81CCDE8(struct Pokenav5Struct_2 *, int, int);
 static void sub_81CCFA4(int);
 static void sub_81CCC9C(u8 taskId);
 static void sub_81CCF78(void);
+void sub_81CCEF4(struct Sprite *sprite);
+u32 sub_81CC848(s32);
+u32 sub_81CC878(s32);
+u32 sub_81CC8D8(s32);
+u32 sub_81CC95C(s32);
 
-extern const LoopedTask gUnknown_086230E4[];
-extern const struct BgTemplate gUnknown_086230D8[2];
-extern const struct CompressedSpriteSheet gUnknown_086230F8[1];
-extern const struct SpritePalette gUnknown_08623100[];
-extern const struct WindowTemplate gUnknown_08623110;
-extern const u32 gUnknown_08622888[];
-extern const u16 gUnknown_08622868[];
 extern const u16 gHoennMapZoomIcons_Pal[];
-extern const struct CityZoomPic gUnknown_08623118[22];
 extern const struct SpriteTemplate gUnknown_086231D0;
+extern const u32 gHoennMapZoomIcons_Gfx[];
+
+const u16 gUnknown_08622868[] = INCBIN_U16("graphics/pokenav/8622868.gbapal");
+const u32 gUnknown_08622888[] = INCBIN_U32("graphics/pokenav/zoom_tiles.4bpp.lz");
+
+#include "data/region_map/city_map_tilemaps.h"
+
+
+const struct BgTemplate gUnknown_086230D8[3] = 
+{
+    {
+        .bg = 1,
+        .charBaseIndex = 1,
+        .mapBaseIndex = 0x1F,
+        .screenSize = 0,
+        .paletteMode = 0,
+        .priority = 1,
+        .baseTile = 0
+    },
+    {
+        .bg = 2,
+        .charBaseIndex = 2,
+        .mapBaseIndex = 0x06,
+        .screenSize = 0,
+        .paletteMode = 0,
+        .priority = 2,
+        .baseTile = 0
+    },
+    {
+        .bg = 2,
+        .charBaseIndex = 0,
+        .mapBaseIndex = 0x00,
+        .screenSize = 2,
+        .paletteMode = 0,
+        .priority = 3,
+        .baseTile = 0
+    },
+};
+
+const LoopedTask gUnknown_086230E4[] = 
+{
+    NULL,
+    sub_81CC848,
+    sub_81CC878,
+    sub_81CC8D8,
+    sub_81CC95C
+};
+
+const struct CompressedSpriteSheet gUnknown_086230F8[1] = 
+{
+    {gHoennMapZoomIcons_Gfx, 0x800, 6}
+};
+
+const struct SpritePalette gUnknown_08623100[] = 
+{
+    {gHoennMapZoomIcons_Pal, 11},
+    {}
+};
+
+const struct WindowTemplate gUnknown_08623110 = 
+{
+    .bg = 1,
+    .tilemapLeft = 17,
+    .tilemapTop = 4,
+    .width = 12,
+    .height = 13,
+    .paletteNum = 1,
+    .baseBlock = 0x4C
+};
+
+#include "data/region_map/city_map_entries.h"
+
+const struct OamData gUnknown_086231C8 = 
+{
+    .y = 0,
+    .affineMode = 0,
+    .objMode = 0,
+    .bpp = 0,
+    .shape = SPRITE_SHAPE(32x8),
+    .x = 0,
+    .size = SPRITE_SIZE(32x8),
+    .tileNum = 0,
+    .priority = 1,
+    .paletteNum = 0,
+};
+
+const struct SpriteTemplate gUnknown_086231D0 =
+{
+    .tileTag = 6,
+    .paletteTag = 11,
+    .oam = &gUnknown_086231C8,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_81CCEF4,
+};
 
 u32 sub_81CC4D4(void)
 {
@@ -215,7 +308,7 @@ static u32 sub_81CC6F4(s32 taskState)
         HideBg(2);
         HideBg(3);
         SetBgMode(1);
-        InitBgTemplates(gUnknown_086230D8, ARRAY_COUNT(gUnknown_086230D8));
+        InitBgTemplates(gUnknown_086230D8, ARRAY_COUNT(gUnknown_086230D8) - 1);
         regionMap = GetSubstructPtr(16);
         sub_8122CF8(regionMap, &gUnknown_086230D8[1], sub_81CC6D0());
         sub_81CC9C0();
@@ -278,7 +371,7 @@ static u32 sub_81CC6F4(s32 taskState)
     }
 }
 
-u32 sub_81CC848(int taskState)
+u32 sub_81CC848(s32 taskState)
 {
     struct Pokenav5Struct_2 *state = GetSubstructPtr(4);
     switch (taskState)
@@ -295,7 +388,7 @@ u32 sub_81CC848(int taskState)
     return 4;
 }
 
-u32 sub_81CC878(int taskState)
+u32 sub_81CC878(s32 taskState)
 {
     switch (taskState)
     {
@@ -321,7 +414,7 @@ u32 sub_81CC878(int taskState)
     return 4;
 }
 
-u32 sub_81CC8D8(int taskState)
+u32 sub_81CC8D8(s32 taskState)
 {
     struct Pokenav5Struct_2 *state = GetSubstructPtr(4);
     switch (taskState)
@@ -354,7 +447,7 @@ u32 sub_81CC8D8(int taskState)
     return 4;
 }
 
-u32 sub_81CC95C(int taskState)
+u32 sub_81CC95C(s32 taskState)
 {
     switch (taskState)
     {
@@ -521,9 +614,9 @@ static bool32 sub_81CCD24(void)
 static u32 sub_81CCD34(s32 taskState)
 {
     struct Pokenav5Struct_2 *state = GetSubstructPtr(4);
-    if (taskState < (int)ARRAY_COUNT(gUnknown_08623118))
+    if (taskState < (int)ARRAY_COUNT(gPokenavCityMaps))
     {
-        LZ77UnCompWram(gUnknown_08623118[taskState].data, state->cityZoomPics[taskState]);
+        LZ77UnCompWram(gPokenavCityMaps[taskState].tilemap, state->cityZoomPics[taskState]);
         return 1;
     }
 
@@ -533,10 +626,10 @@ static u32 sub_81CCD34(s32 taskState)
 static void sub_81CCD70(struct Pokenav5Struct_2 *state, int mapSecId, int pos)
 {
     int i;
-    for (i = 0; i < (int)ARRAY_COUNT(gUnknown_08623118) && (gUnknown_08623118[i].mapSecId != mapSecId || gUnknown_08623118[i].unk2 != pos); i++)
+    for (i = 0; i < (int)ARRAY_COUNT(gPokenavCityMaps) && (gPokenavCityMaps[i].mapSecId != mapSecId || gPokenavCityMaps[i].index != pos); i++)
         ;
 
-    if (i == ARRAY_COUNT(gUnknown_08623118))
+    if (i == ARRAY_COUNT(gPokenavCityMaps))
         return;
 
     FillBgTilemapBufferRect_Palette0(1, 0x1041, 17, 6, 12, 11);
