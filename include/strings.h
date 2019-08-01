@@ -2728,5 +2728,21 @@ extern const u8 gText_BerryPickingRecords[];
 extern const u8 gText_BerriesPicked[];
 extern const u8 gText_BerriesInRowFivePlayers[];
 extern const u8 gText_BestScore[];
+extern const u8 gText_1Colon[];
+extern const u8 gText_2Colon[];
+extern const u8 gText_3Colon[];
+extern const u8 gText_4Colon[];
+extern const u8 gText_5Colon[];
+extern const u8 gText_SpacePoints[];
+extern const u8 gText_10P30P50P50P[];
+extern const u8 gText_AnnouncingPrizes[];
+extern const u8 gText_AnnouncingRankings[];
+extern const u8 gText_FirstPlacePrize[];
+extern const u8 gText_CantHoldAnyMore[];
+extern const u8 gText_FilledStorageSpace[];
+extern const u8 gText_BerryPickingResults[];
+extern const u8 gText_WantToPlayAgain[];
+extern const u8 gText_CommunicationStandby3[];
+extern const u8 gText_SomeoneDroppedOut[];
 
 #endif // GUARD_STRINGS_H
