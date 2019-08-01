@@ -2723,4 +2723,10 @@ extern const u8 gText_NumberOfBattles[];
 extern const u8 gText_Unknown[];
 extern const u8 gText_TrainerCloseBy[];
 
+// Dodrio Berry Picking
+extern const u8 gText_BerryPickingRecords[];
+extern const u8 gText_BerriesPicked[];
+extern const u8 gText_BerriesInRowFivePlayers[];
+extern const u8 gText_BestScore[];
+
 #endif // GUARD_STRINGS_H
