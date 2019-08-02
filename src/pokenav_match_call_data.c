@@ -111,11 +111,11 @@ static bool32 MatchCallGetFlag_Type2(match_call_t);
 static bool32 MatchCallGetFlag_Type3(match_call_t);
 static bool32 MatchCallGetFlag_Type4(match_call_t);
 
-static u8 sub_81D1714(match_call_t);
-static u8 sub_81D1718(match_call_t);
-static u8 sub_81D171C(match_call_t);
-static u8 sub_81D1750(match_call_t);
-static u8 sub_81D1754(match_call_t);
+static u8 MatchCallGetMapSec_Type0(match_call_t);
+static u8 MatchCallGetMapSec_Type1(match_call_t);
+static u8 MatchCallGetMapSec_Type2(match_call_t);
+static u8 MatchCallGetMapSec_Type3(match_call_t);
+static u8 MatchCallGetMapSec_Type4(match_call_t);
 
 static bool32 MatchCall_IsRematchable_Type0(match_call_t);
 static bool32 MatchCall_IsRematchable_Type1(match_call_t);
@@ -758,12 +758,12 @@ static bool32 (*const sMatchCallGetFlagFuncs[])(match_call_t) = {
     MatchCallGetFlag_Type4
 };
 
-static u8 (*const gUnknown_08625310[])(match_call_t) = {
-    sub_81D1714,
-    sub_81D1718,
-    sub_81D171C,
-    sub_81D1750,
-    sub_81D1754
+static u8 (*const sMatchCallGetMapsecFuncs[])(match_call_t) = {
+    MatchCallGetMapSec_Type0,
+    MatchCallGetMapSec_Type1,
+    MatchCallGetMapSec_Type2,
+    MatchCallGetMapSec_Type3,
+    MatchCallGetMapSec_Type4
 };
 
 static bool32 (*const sMatchCall_IsRematchableFunctions[])(match_call_t) = {
@@ -907,20 +907,20 @@ u8 sub_81D16DC(u32 idx)
         return 0;
     matchCall = sMatchCallHeaders[idx];
     i = MatchCallGetFunctionIndex(matchCall);
-    return gUnknown_08625310[i](matchCall);
+    return sMatchCallGetMapsecFuncs[i](matchCall);
 }
 
-static u8 sub_81D1714(match_call_t matchCall)
+static u8 MatchCallGetMapSec_Type0(match_call_t matchCall)
 {
     return matchCall.type0->mapSec;
 }
 
-static u8 sub_81D1718(match_call_t matchCall)
+static u8 MatchCallGetMapSec_Type1(match_call_t matchCall)
 {
     return matchCall.type1->mapSec;
 }
 
-static u8 sub_81D171C(match_call_t matchCall)
+static u8 MatchCallGetMapSec_Type2(match_call_t matchCall)
 {
     s32 i;
 
@@ -932,12 +932,12 @@ static u8 sub_81D171C(match_call_t matchCall)
     return matchCall.type2->v10[i].mapSec;
 }
 
-static u8 sub_81D1750(match_call_t matchCall)
+static u8 MatchCallGetMapSec_Type3(match_call_t matchCall)
 {
     return MAPSEC_NONE;
 }
 
-static u8 sub_81D1754(match_call_t matchCall)
+static u8 MatchCallGetMapSec_Type4(match_call_t matchCall)
 {
     return MAPSEC_NONE;
 }
