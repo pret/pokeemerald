@@ -1621,19 +1621,12 @@ static void sub_80262C0(void)
     }
 }
 
-#ifdef NONMATCHING
 static void sub_8026324(void)
 {
     u8 sp0 = gUnknown_02022C98->unk44;
     u8 sp4 = gUnknown_02022C98->unk48;
     u8 sp8 = gUnknown_02022C98->unk24;
-    u8 i, j, k;
-    s32 r2;
-    u8 r5;
-    u8 r3;
-    s32 r2_2;
-    u8 r4;
-    u8 r7, r7_2;
+    u8 i, j, k, r5;
 
     if (gUnknown_02022C98->unk40 >= 10)
         return;
@@ -1646,9 +1639,7 @@ static void sub_8026324(void)
             for (j = sp0; j < sp4; j++)
             {
                 r5 = gUnknown_082F449C[0][0][j];
-                if (gUnknown_02022C98->unkF4[r5][0] == i)
-                    break;
-                if (gUnknown_02022C98->unkF4[r5][1] == i)
+                if (gUnknown_02022C98->unkF4[r5][0] == i || gUnknown_02022C98->unkF4[r5][1] == i)
                     break;
                 if (sub_8026634(i, *ptr, r5) == TRUE)
                 {
@@ -1672,13 +1663,14 @@ static void sub_8026324(void)
 
     for (j = sp0; j < sp4; j++)
     {
-        i = 0xFF;
+        u8 id = 0xFF;
         r5 = gUnknown_082F449C[0][0][j];
         if (gUnknown_02022C98->unkC4[r5] == 1)
         {
-            r3 = gUnknown_02022C98->unk90[sub_8026D8C(r5)] / 7;
-            if (r3 < 2)
-                r3 = 2;
+            s32 r2;
+            u8 r4, r3 = gUnknown_02022C98->unk90[sub_8026D8C(r5)] / 7;
+            if (r3 >= ARRAY_COUNT(gUnknown_082F7A88) - 1)
+                r3 = ARRAY_COUNT(gUnknown_082F7A88) - 1;
 
             r2 = gUnknown_082F7A88[r3][gUnknown_02022C98->unk31A0[0].unk14.unk0[r5]] - gUnknown_02022C98->unkD0[r5];
             if (r2 < 6)
@@ -1687,35 +1679,35 @@ static void sub_8026324(void)
             if (++gUnknown_02022C98->unk9C[r5] >= 6)
             {
                 gUnknown_02022C98->unk9C[r5] = 0;
-                if (gUnknown_02022C98->unkF4[r5][0] != 0xFF && gUnknown_02022C98->unkF4[r5][1] == 0xFF)
-                {
-                    r4 = gUnknown_02022C98->unkF4[r5][0];
-                }
-                else if (gUnknown_02022C98->unkF4[r5][0] == 0xFF && gUnknown_02022C98->unkF4[r5][1] == 0xFF)
+                if (gUnknown_02022C98->unkF4[r5][0] == 0xFF && gUnknown_02022C98->unkF4[r5][1] == 0xFF)
                 {
                     continue;
                 }
+                else if (gUnknown_02022C98->unkF4[r5][0] != 0xFF && gUnknown_02022C98->unkF4[r5][1] == 0xFF)
+                {
+                    r4 = gUnknown_02022C98->unkF4[r5][0];
+                }
                 else
                 {
-                    r7 = gUnknown_02022C98->unkF4[r5][0];
-                    r7_2 = gUnknown_02022C98->unkF4[r5][1];
-                    if ((Random() & 1))
+                    u8 unk0 = gUnknown_02022C98->unkF4[r5][0];
+                    i = gUnknown_02022C98->unkF4[r5][1]; // Have to re-use the variable to match.
+                    if (!(Random() & 1))
                     {
-                        r4 = r7_2;
-                        i = r7;
+                        r4 = unk0;
+                        id = i;
                     }
                     else
                     {
-                        r4 = r7;
-                        i = r7_2;
+                        r4 = i;
+                        id = unk0;
                     }
                 }
                 gUnknown_02022C98->unk32CC.unk14.unkB[r5] = 7;
                 gUnknown_02022C98->unkC4[r5] = 2;
                 gUnknown_02022C98->unkA8[r4] = 3;
                 gUnknown_02022C98->unkB8[r5] = r4;
-                gUnknown_02022C98->unk31A0[r4].unk30 = 1;
-                gUnknown_02022C98->unk31A0[i].unk2C.unk8 = 1;
+                gUnknown_02022C98->unk31A0[r4].unk2C.unk4 = 1;
+                gUnknown_02022C98->unk31A0[id].unk2C.unk8 = 1;
                 gUnknown_02022C98->unk86[r4]++;
                 sub_8026F1C(0, r5, r4);
                 sub_8027234(TRUE);
@@ -1728,395 +1720,6 @@ static void sub_8026324(void)
         }
     }
 }
-#else
-NAKED
-static void sub_8026324(void)
-{
-    asm_unified("\tpush {r4-r7,lr}\n"
-                "\tmov r7, r10\n"
-                "\tmov r6, r9\n"
-                "\tmov r5, r8\n"
-                "\tpush {r5-r7}\n"
-                "\tsub sp, 0x10\n"
-                "\tldr r0, =gUnknown_02022C98\n"
-                "\tldr r1, [r0]\n"
-                "\tadds r0, r1, 0\n"
-                "\tadds r0, 0x44\n"
-                "\tldrb r0, [r0]\n"
-                "\tstr r0, [sp]\n"
-                "\tadds r0, r1, 0\n"
-                "\tadds r0, 0x48\n"
-                "\tldrb r0, [r0]\n"
-                "\tstr r0, [sp, 0x4]\n"
-                "\tadds r0, r1, 0\n"
-                "\tadds r0, 0x24\n"
-                "\tldrb r0, [r0]\n"
-                "\tstr r0, [sp, 0x8]\n"
-                "\tadds r0, r1, 0\n"
-                "\tadds r0, 0x40\n"
-                "\tldrb r0, [r0]\n"
-                "\tcmp r0, 0x9\n"
-                "\tbls _08026358\n"
-                "\tb _08026614\n"
-                "_08026358:\n"
-                "\tmovs r6, 0\n"
-                "\tldr r0, [sp, 0x8]\n"
-                "\tcmp r6, r0\n"
-                "\tbcs _08026440\n"
-                "_08026360:\n"
-                "\tldr r3, =gUnknown_02022C98\n"
-                "\tlsls r0, r6, 4\n"
-                "\tsubs r1, r0, r6\n"
-                "\tlsls r1, 2\n"
-                "\tldr r2, [r3]\n"
-                "\tadds r1, r2\n"
-                "\tldr r4, =0x000031cc\n"
-                "\tadds r4, r1\n"
-                "\tmov r8, r4\n"
-                "\tldrb r1, [r4]\n"
-                "\tmov r9, r0\n"
-                "\tadds r0, r6, 0x1\n"
-                "\tstr r0, [sp, 0xC]\n"
-                "\tcmp r1, 0\n"
-                "\tbeq _08026434\n"
-                "\tadds r0, r2, 0\n"
-                "\tadds r0, 0xA8\n"
-                "\tadds r0, r6\n"
-                "\tldrb r0, [r0]\n"
-                "\tcmp r0, 0x1\n"
-                "\tbne _08026434\n"
-                "\tldr r1, [sp]\n"
-                "\tmov r10, r1\n"
-                "\tldr r2, [sp, 0x4]\n"
-                "\tcmp r10, r2\n"
-                "\tbcs _08026434\n"
-                "\tadds r7, r3, 0\n"
-                "_08026396:\n"
-                "\tldr r0, =gUnknown_082F449C\n"
-                "\tadd r0, r10\n"
-                "\tldrb r5, [r0]\n"
-                "\tldr r1, [r7]\n"
-                "\tlsls r4, r5, 1\n"
-                "\tadds r0, r1, 0\n"
-                "\tadds r0, 0xF4\n"
-                "\tadds r0, r4\n"
-                "\tldrb r0, [r0]\n"
-                "\tcmp r0, r6\n"
-                "\tbeq _08026434\n"
-                "\tadds r0, r1, 0\n"
-                "\tadds r0, 0xF5\n"
-                "\tadds r0, r4\n"
-                "\tldrb r0, [r0]\n"
-                "\tcmp r0, r6\n"
-                "\tbeq _08026434\n"
-                "\tmov r0, r8\n"
-                "\tldrb r1, [r0]\n"
-                "\tadds r0, r6, 0\n"
-                "\tadds r2, r5, 0\n"
-                "\tbl sub_8026634\n"
-                "\tcmp r0, 0x1\n"
-                "\tbne _08026410\n"
-                "\tmovs r2, 0\n"
-                "\tldr r3, =gUnknown_02022C98\n"
-                "\tmov r8, r4\n"
-                "_080263CE:\n"
-                "\tldr r0, [r3]\n"
-                "\tmov r4, r8\n"
-                "\tadds r1, r2, r4\n"
-                "\tadds r0, 0xF4\n"
-                "\tadds r1, r0, r1\n"
-                "\tldrb r0, [r1]\n"
-                "\tcmp r0, 0xFF\n"
-                "\tbne _08026404\n"
-                "\tstrb r6, [r1]\n"
-                "\tldr r0, [r3]\n"
-                "\tadds r0, 0xA8\n"
-                "\tadds r0, r6\n"
-                "\tmovs r1, 0x2\n"
-                "\tstrb r1, [r0]\n"
-                "\tldr r0, [r3]\n"
-                "\tadds r0, 0xC4\n"
-                "\tadds r0, r5\n"
-                "\tmovs r1, 0x1\n"
-                "\tstrb r1, [r0]\n"
-                "\tb _08026434\n"
-                "\t.pool\n"
-                "_08026404:\n"
-                "\tadds r0, r2, 0x1\n"
-                "\tlsls r0, 24\n"
-                "\tlsrs r2, r0, 24\n"
-                "\tcmp r2, 0x1\n"
-                "\tbls _080263CE\n"
-                "\tb _08026434\n"
-                "_08026410:\n"
-                "\tldr r0, [r7]\n"
-                "\tmov r2, r9\n"
-                "\tsubs r1, r2, r6\n"
-                "\tlsls r1, 2\n"
-                "\tadds r0, r1\n"
-                "\tldr r4, =0x000031d4\n"
-                "\tadds r0, r4\n"
-                "\tldrb r0, [r0]\n"
-                "\tcmp r0, 0x1\n"
-                "\tbeq _08026434\n"
-                "\tmov r0, r10\n"
-                "\tadds r0, 0x1\n"
-                "\tlsls r0, 24\n"
-                "\tlsrs r0, 24\n"
-                "\tmov r10, r0\n"
-                "\tldr r0, [sp, 0x4]\n"
-                "\tcmp r10, r0\n"
-                "\tbcc _08026396\n"
-                "_08026434:\n"
-                "\tldr r1, [sp, 0xC]\n"
-                "\tlsls r0, r1, 24\n"
-                "\tlsrs r6, r0, 24\n"
-                "\tldr r2, [sp, 0x8]\n"
-                "\tcmp r6, r2\n"
-                "\tbcc _08026360\n"
-                "_08026440:\n"
-                "\tldr r4, [sp]\n"
-                "\tmov r10, r4\n"
-                "\tldr r0, [sp, 0x4]\n"
-                "\tcmp r10, r0\n"
-                "\tbcc _0802644C\n"
-                "\tb _08026614\n"
-                "_0802644C:\n"
-                "\tldr r1, =gUnknown_02022C98\n"
-                "\tmov r9, r1\n"
-                "_08026450:\n"
-                "\tmovs r6, 0xFF\n"
-                "\tldr r0, =gUnknown_082F449C\n"
-                "\tadd r0, r10\n"
-                "\tldrb r5, [r0]\n"
-                "\tmov r2, r9\n"
-                "\tldr r0, [r2]\n"
-                "\tadds r0, 0xC4\n"
-                "\tadds r0, r5\n"
-                "\tldrb r0, [r0]\n"
-                "\tcmp r0, 0x1\n"
-                "\tbeq _08026468\n"
-                "\tb _08026602\n"
-                "_08026468:\n"
-                "\tadds r0, r5, 0\n"
-                "\tbl sub_8026D8C\n"
-                "\tmov r1, r9\n"
-                "\tldr r4, [r1]\n"
-                "\tlsls r0, 24\n"
-                "\tlsrs r0, 24\n"
-                "\tadds r1, r4, 0\n"
-                "\tadds r1, 0x90\n"
-                "\tadds r1, r0\n"
-                "\tldrb r0, [r1]\n"
-                "\tmovs r1, 0x7\n"
-                "\tbl __udivsi3\n"
-                "\tlsls r0, 24\n"
-                "\tlsrs r3, r0, 24\n"
-                "\tcmp r3, 0x1\n"
-                "\tbls _0802648E\n"
-                "\tmovs r3, 0x2\n"
-                "_0802648E:\n"
-                "\tldr r2, =gUnknown_082F7A88\n"
-                "\tldr r0, =0x000031b4\n"
-                "\tadds r1, r4, r0\n"
-                "\tadds r1, r5\n"
-                "\tlsls r0, r3, 1\n"
-                "\tadds r0, r3\n"
-                "\tldrb r1, [r1]\n"
-                "\tadds r0, r1\n"
-                "\tadds r0, r2\n"
-                "\tldrb r1, [r0]\n"
-                "\tadds r0, r4, 0\n"
-                "\tadds r0, 0xD0\n"
-                "\tadds r0, r5\n"
-                "\tldrb r0, [r0]\n"
-                "\tsubs r2, r1, r0\n"
-                "\tcmp r2, 0x5\n"
-                "\tbgt _080264BC\n"
-                "\tadds r1, r4, 0\n"
-                "\tadds r1, 0x9C\n"
-                "\tadds r1, r5\n"
-                "\tldrb r0, [r1]\n"
-                "\tadds r0, r2\n"
-                "\tstrb r0, [r1]\n"
-                "_080264BC:\n"
-                "\tmov r2, r9\n"
-                "\tldr r1, [r2]\n"
-                "\tadds r1, 0x9C\n"
-                "\tadds r1, r5\n"
-                "\tldrb r0, [r1]\n"
-                "\tadds r0, 0x1\n"
-                "\tmovs r2, 0\n"
-                "\tstrb r0, [r1]\n"
-                "\tmovs r4, 0xFF\n"
-                "\tands r0, r4\n"
-                "\tcmp r0, 0x5\n"
-                "\tbhi _080264D6\n"
-                "\tb _08026602\n"
-                "_080264D6:\n"
-                "\tmov r1, r9\n"
-                "\tldr r0, [r1]\n"
-                "\tadds r0, 0x9C\n"
-                "\tadds r0, r5\n"
-                "\tstrb r2, [r0]\n"
-                "\tldr r3, [r1]\n"
-                "\tlsls r1, r5, 1\n"
-                "\tadds r0, r3, 0\n"
-                "\tadds r0, 0xF4\n"
-                "\tadds r2, r0, r1\n"
-                "\tldrb r0, [r2]\n"
-                "\tmov r8, r1\n"
-                "\tcmp r0, 0xFF\n"
-                "\tbne _08026518\n"
-                "\tadds r0, r3, 0\n"
-                "\tadds r0, 0xF5\n"
-                "\tadd r0, r8\n"
-                "\tldrb r0, [r0]\n"
-                "\tcmp r0, 0xFF\n"
-                "\tbne _08026500\n"
-                "\tb _08026602\n"
-                "_08026500:\n"
-                "\tb _08026528\n"
-                "\t.pool\n"
-                "_08026518:\n"
-                "\tadds r0, r3, 0\n"
-                "\tadds r0, 0xF5\n"
-                "\tadd r0, r8\n"
-                "\tldrb r0, [r0]\n"
-                "\tcmp r0, 0xFF\n"
-                "\tbne _08026528\n"
-                "\tldrb r4, [r2]\n"
-                "\tb _0802654E\n"
-                "_08026528:\n"
-                "\tmov r2, r9\n"
-                "\tldr r1, [r2]\n"
-                "\tadds r0, r1, 0\n"
-                "\tadds r0, 0xF4\n"
-                "\tadd r0, r8\n"
-                "\tldrb r7, [r0]\n"
-                "\tadds r1, 0xF5\n"
-                "\tadd r1, r8\n"
-                "\tldrb r6, [r1]\n"
-                "\tbl Random\n"
-                "\tmovs r1, 0x1\n"
-                "\tands r1, r0\n"
-                "\tcmp r1, 0\n"
-                "\tbne _0802654A\n"
-                "\tadds r4, r7, 0\n"
-                "\tb _0802654E\n"
-                "_0802654A:\n"
-                "\tadds r4, r6, 0\n"
-                "\tadds r6, r7, 0\n"
-                "_0802654E:\n"
-                "\tmov r1, r9\n"
-                "\tldr r0, [r1]\n"
-                "\tldr r2, =0x000032eb\n"
-                "\tadds r0, r2\n"
-                "\tadds r0, r5\n"
-                "\tmovs r1, 0x7\n"
-                "\tstrb r1, [r0]\n"
-                "\tmov r1, r9\n"
-                "\tldr r0, [r1]\n"
-                "\tadds r0, 0xC4\n"
-                "\tadds r0, r5\n"
-                "\tmovs r1, 0x2\n"
-                "\tstrb r1, [r0]\n"
-                "\tmov r2, r9\n"
-                "\tldr r0, [r2]\n"
-                "\tadds r0, 0xA8\n"
-                "\tadds r0, r4\n"
-                "\tmovs r1, 0x3\n"
-                "\tstrb r1, [r0]\n"
-                "\tldr r0, [r2]\n"
-                "\tadds r0, 0xB8\n"
-                "\tadds r0, r5\n"
-                "\tstrb r4, [r0]\n"
-                "\tldr r1, [r2]\n"
-                "\tlsls r0, r4, 4\n"
-                "\tsubs r0, r4\n"
-                "\tlsls r0, 2\n"
-                "\tadds r1, r0\n"
-                "\tldr r2, =0x000031d0\n"
-                "\tadds r1, r2\n"
-                "\tmovs r0, 0x1\n"
-                "\tstrb r0, [r1]\n"
-                "\tmov r2, r9\n"
-                "\tldr r1, [r2]\n"
-                "\tlsls r0, r6, 4\n"
-                "\tsubs r0, r6\n"
-                "\tlsls r0, 2\n"
-                "\tadds r1, r0\n"
-                "\tldr r0, =0x000031d4\n"
-                "\tadds r1, r0\n"
-                "\tmovs r2, 0x1\n"
-                "\tstrb r2, [r1]\n"
-                "\tmov r0, r9\n"
-                "\tldr r1, [r0]\n"
-                "\tlsls r0, r4, 1\n"
-                "\tadds r1, 0x86\n"
-                "\tadds r1, r0\n"
-                "\tldrh r0, [r1]\n"
-                "\tadds r0, 0x1\n"
-                "\tstrh r0, [r1]\n"
-                "\tmovs r0, 0\n"
-                "\tadds r1, r5, 0\n"
-                "\tadds r2, r4, 0\n"
-                "\tbl sub_8026F1C\n"
-                "\tmovs r0, 0x1\n"
-                "\tbl sub_8027234\n"
-                "\tadds r0, r4, 0\n"
-                "\tbl sub_8026D1C\n"
-                "\tmov r1, r9\n"
-                "\tldr r0, [r1]\n"
-                "\tadds r1, r0, 0\n"
-                "\tadds r1, 0xE8\n"
-                "\tadds r1, r5\n"
-                "\tldr r2, =0x000032e0\n"
-                "\tadds r0, r2\n"
-                "\tadds r0, r5\n"
-                "\tldrb r0, [r0]\n"
-                "\tstrb r0, [r1]\n"
-                "\tmov r4, r9\n"
-                "\tldr r0, [r4]\n"
-                "\tadds r0, r2\n"
-                "\tadds r0, r5\n"
-                "\tmovs r1, 0x3\n"
-                "\tstrb r1, [r0]\n"
-                "\tldr r1, [r4]\n"
-                "\tadds r1, 0xF4\n"
-                "\tadd r1, r8\n"
-                "\tldrb r0, [r1]\n"
-                "\tmovs r2, 0xFF\n"
-                "\torrs r0, r2\n"
-                "\tstrb r0, [r1]\n"
-                "\tldr r1, [r4]\n"
-                "\tadds r1, 0xF5\n"
-                "\tadd r1, r8\n"
-                "\tldrb r0, [r1]\n"
-                "\torrs r0, r2\n"
-                "\tstrb r0, [r1]\n"
-                "_08026602:\n"
-                "\tmov r0, r10\n"
-                "\tadds r0, 0x1\n"
-                "\tlsls r0, 24\n"
-                "\tlsrs r0, 24\n"
-                "\tmov r10, r0\n"
-                "\tldr r4, [sp, 0x4]\n"
-                "\tcmp r10, r4\n"
-                "\tbcs _08026614\n"
-                "\tb _08026450\n"
-                "_08026614:\n"
-                "\tadd sp, 0x10\n"
-                "\tpop {r3-r5}\n"
-                "\tmov r8, r3\n"
-                "\tmov r9, r4\n"
-                "\tmov r10, r5\n"
-                "\tpop {r4-r7}\n"
-                "\tpop {r0}\n"
-                "\tbx r0\n"
-                "\t.pool");
-}
-#endif // NONMATCHING
 
 static bool32 sub_8026634(u8 a0, u8 a1, u8 a2)
 {
