@@ -474,10 +474,10 @@ static const match_call_text_data_t sWallyTextScripts[] = {
 };
 
 const struct MatchCallSubstruct2 sWallyAdditionalData[] = {
-    { FLAG_HIDE_MAUVILLE_CITY_WALLY, 0x05 },
-    { FLAG_GROUDON_AWAKENED_MAGMA_HIDEOUT, 0xD5 },
-    { FLAG_HIDE_VICTORY_ROAD_ENTRANCE_WALLY, 0x46 },
-    { 0xFFFF,     0xD5 }
+    { FLAG_HIDE_MAUVILLE_CITY_WALLY,          MAPSEC_VERDANTURF_TOWN },
+    { FLAG_GROUDON_AWAKENED_MAGMA_HIDEOUT,    MAPSEC_NONE },
+    { FLAG_HIDE_VICTORY_ROAD_ENTRANCE_WALLY,  MAPSEC_VICTORY_ROAD },
+    { 0xFFFF,                                 MAPSEC_NONE }
 };
 
 static const struct MatchCallStruct2 sWallyMatchCallHeader =
