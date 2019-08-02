@@ -754,24 +754,24 @@ static bool32 (*const sMatchCallGetFlagFuncs[])(match_call_t) = {
     MatchCallGetFlag_Type0,
     MatchCallGetFlag_Type1,
     MatchCallGetFlag_Type2,
-    MatchCallGetFlag_Type3,
-    MatchCallGetFlag_Type4
+    MatchCallGetFlag_Type4,
+    MatchCallGetFlag_Type3
 };
 
 static u8 (*const sMatchCallGetMapsecFuncs[])(match_call_t) = {
     MatchCallGetMapSec_Type0,
     MatchCallGetMapSec_Type1,
     MatchCallGetMapSec_Type2,
-    MatchCallGetMapSec_Type3,
-    MatchCallGetMapSec_Type4
+    MatchCallGetMapSec_Type4,
+    MatchCallGetMapSec_Type3
 };
 
 static bool32 (*const sMatchCall_IsRematchableFunctions[])(match_call_t) = {
     MatchCall_IsRematchable_Type0,
     MatchCall_IsRematchable_Type1,
     MatchCall_IsRematchable_Type2,
-    MatchCall_IsRematchable_Type3,
-    MatchCall_IsRematchable_Type4
+    MatchCall_IsRematchable_Type4,
+    MatchCall_IsRematchable_Type3
 };
 
 static bool32 (*const gUnknown_08625338[])(match_call_t) = {
@@ -786,24 +786,24 @@ static u32 (*const sMatchCall_GetRematchTableIdxFunctions[])(match_call_t) = {
     MatchCall_GetRematchTableIdx_Type0,
     MatchCall_GetRematchTableIdx_Type1,
     MatchCall_GetRematchTableIdx_Type2,
-    MatchCall_GetRematchTableIdx_Type3,
-    MatchCall_GetRematchTableIdx_Type4
+    MatchCall_GetRematchTableIdx_Type4,
+    MatchCall_GetRematchTableIdx_Type3
 };
 
 static void (*const sMatchCall_GetMessageFunctions[])(match_call_t, u8 *) = {
     MatchCall_GetMessage_Type0,
     MatchCall_GetMessage_Type1,
     MatchCall_GetMessage_Type2,
-    MatchCall_GetMessage_Type3,
-    MatchCall_GetMessage_Type4
+    MatchCall_GetMessage_Type4,
+    MatchCall_GetMessage_Type3
 };
 
 static void (*const sMatchCall_GetNameAndDescFunctions[])(match_call_t, const u8 **, const u8 **) = {
     MatchCall_GetNameAndDesc_Type0,
     MatchCall_GetNameAndDesc_Type1,
     MatchCall_GetNameAndDesc_Type2,
-    MatchCall_GetNameAndDesc_Type3,
-    MatchCall_GetNameAndDesc_Type4
+    MatchCall_GetNameAndDesc_Type4,
+    MatchCall_GetNameAndDesc_Type3
 };
 
 static const struct UnkStruct_08625388 sMatchCallCheckPageOverrides[] = {
@@ -884,7 +884,7 @@ static bool32 MatchCallGetFlag_Type2(match_call_t matchCall)
     return FlagGet(matchCall.type2->flag);
 }
 
-static bool32 MatchCallGetFlag_Type3(match_call_t matchCall)
+static bool32 MatchCallGetFlag_Type4(match_call_t matchCall)
 {
     if (matchCall.type4->gender != gSaveBlock2Ptr->playerGender)
         return FALSE;
@@ -893,7 +893,7 @@ static bool32 MatchCallGetFlag_Type3(match_call_t matchCall)
     return FlagGet(matchCall.type4->flag);
 }
 
-static bool32 MatchCallGetFlag_Type4(match_call_t matchCall)
+static bool32 MatchCallGetFlag_Type3(match_call_t matchCall)
 {
     return FlagGet(matchCall.type3->flag);
 }
@@ -932,12 +932,12 @@ static u8 MatchCallGetMapSec_Type2(match_call_t matchCall)
     return matchCall.type2->v10[i].mapSec;
 }
 
-static u8 MatchCallGetMapSec_Type3(match_call_t matchCall)
+static u8 MatchCallGetMapSec_Type4(match_call_t matchCall)
 {
     return MAPSEC_NONE;
 }
 
-static u8 MatchCallGetMapSec_Type4(match_call_t matchCall)
+static u8 MatchCallGetMapSec_Type3(match_call_t matchCall)
 {
     return MAPSEC_NONE;
 }
@@ -971,12 +971,12 @@ static bool32 MatchCall_IsRematchable_Type2(match_call_t matchCall)
     return gSaveBlock1Ptr->trainerRematches[matchCall.type2->rematchTableIdx] ? TRUE : FALSE;
 }
 
-static bool32 MatchCall_IsRematchable_Type3(match_call_t matchCall)
+static bool32 MatchCall_IsRematchable_Type4(match_call_t matchCall)
 {
     return FALSE;
 }
 
-static bool32 MatchCall_IsRematchable_Type4(match_call_t matchCall)
+static bool32 MatchCall_IsRematchable_Type3(match_call_t matchCall)
 {
     return FALSE;
 }
@@ -1052,12 +1052,12 @@ static u32 MatchCall_GetRematchTableIdx_Type2(match_call_t matchCall)
     return matchCall.type2->rematchTableIdx;
 }
 
-static u32 MatchCall_GetRematchTableIdx_Type3(match_call_t matchCall)
+static u32 MatchCall_GetRematchTableIdx_Type4(match_call_t matchCall)
 {
     return REMATCH_TABLE_ENTRIES;
 }
 
-static u32 MatchCall_GetRematchTableIdx_Type4(match_call_t matchCall)
+static u32 MatchCall_GetRematchTableIdx_Type3(match_call_t matchCall)
 {
     return REMATCH_TABLE_ENTRIES;
 }
@@ -1092,12 +1092,12 @@ static void MatchCall_GetMessage_Type2(match_call_t matchCall, u8 *dest)
     sub_81D1920(matchCall.type2->textData, dest);
 }
 
-static void MatchCall_GetMessage_Type3(match_call_t matchCall, u8 *dest)
+static void MatchCall_GetMessage_Type4(match_call_t matchCall, u8 *dest)
 {
     sub_81D1920(matchCall.type4->textData, dest);
 }
 
-static void MatchCall_GetMessage_Type4(match_call_t matchCall, u8 *dest)
+static void MatchCall_GetMessage_Type3(match_call_t matchCall, u8 *dest)
 {
     sub_8197080(dest);
 }
@@ -1191,13 +1191,13 @@ static void MatchCall_GetNameAndDesc_Type2(match_call_t matchCall, const u8 **de
     *desc = matchCall.type2->desc;
 }
 
-static void MatchCall_GetNameAndDesc_Type3(match_call_t matchCall, const u8 **desc, const u8 **name)
+static void MatchCall_GetNameAndDesc_Type4(match_call_t matchCall, const u8 **desc, const u8 **name)
 {
     *desc = matchCall.type4->desc;
     *name = matchCall.type4->name;
 }
 
-static void MatchCall_GetNameAndDesc_Type4(match_call_t matchCall, const u8 **desc, const u8 **name)
+static void MatchCall_GetNameAndDesc_Type3(match_call_t matchCall, const u8 **desc, const u8 **name)
 {
     *desc = matchCall.type3->desc;
     *name = matchCall.type3->name;
