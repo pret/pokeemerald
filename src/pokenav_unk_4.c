@@ -93,26 +93,190 @@ static void sub_81CC330(struct Pokenav4Struct *);
 static struct Sprite *sub_81CC370(void);
 static void sub_81CC440(struct Sprite *sprite);
 static void sub_81CC4A4(struct Sprite *sprite);
+void sub_81CC34C(struct Sprite *sprite);
+u32 sub_81CB510(s32);
+u32 sub_81CB588(s32);
+u32 sub_81CB600(s32);
+u32 sub_81CB678(s32);
+u32 sub_81CB6F0(s32);
+u32 sub_81CB734(s32);
+u32 sub_81CB75C(s32);
+u32 sub_81CB7A0(s32);
+u32 sub_81CB824(s32);
+u32 sub_81CB888(s32);
+u32 sub_81CB93C(s32);
+u32 sub_81CBAD4(s32);
+u32 sub_81CB9C8(s32);
+u32 sub_81CBA68(s32);
+u32 sub_81CBB74(s32);
 
-extern const LoopedTask gUnknown_08622798[];
-extern const struct BgTemplate gUnknown_0862278C[3];
-extern const u16 gUnknown_08622510[];
-extern const u32 gUnknown_08622530[];
-extern const u32 gUnknown_08622760[];
-extern const u16 gUnknown_08622700[];
-extern const u16 gUnknown_08622720[];
-extern const u8 gUnknown_086225D4[];
-extern const u16 gUnknown_086226E0[];
-extern const struct BgTemplate gUnknown_08622794;
-extern const struct WindowTemplate gUnknown_086227D8;
-extern const struct WindowTemplate gUnknown_086227E0;
-extern const u8 *const gUnknown_086227E8[];
 extern const struct WindowTemplate gUnknown_08622808;
-extern const u8 gUnknown_086227F4[];
-extern const struct CompressedSpriteSheet gUnknown_08622810[1];
-extern const struct SpritePalette gUnknown_08622818[];
 extern const struct SpriteTemplate gUnknown_08622830;
 extern const struct SpriteTemplate gUnknown_08622850;
+
+const u16 gUnknown_08622510[] = INCBIN_U16("graphics/pokenav/ui_matchcall.gbapal");
+const u32 gUnknown_08622530[] = INCBIN_U32("graphics/pokenav/ui_matchcall.4bpp.lz");
+const u32 gUnknown_086225D4[] = INCBIN_U32("graphics/pokenav/ui_matchcall.bin.lz");
+const u16 gUnknown_08622698[] = INCBIN_U16("graphics/pokenav/arrow2.gbapal");
+const u32 gUnknown_086226B8[] = INCBIN_U32("graphics/pokenav/arrow2.4bpp.lz");
+const u16 gUnknown_086226E0[] = INCBIN_U16("graphics/pokenav/86226E0.gbapal");
+const u16 gUnknown_08622700[] = INCBIN_U16("graphics/pokenav/8622700.gbapal");
+const u16 gUnknown_08622720[] = INCBIN_U16("graphics/pokenav/pokeball_matchcall.gbapal");
+const u32 gUnknown_08622760[] = INCBIN_U32("graphics/pokenav/pokeball_matchcall.4bpp.lz");
+
+const struct BgTemplate gUnknown_0862278C[3] = 
+{
+    {
+        .bg = 1,
+        .charBaseIndex = 3,
+        .mapBaseIndex = 0x1F,
+        .screenSize = 0,
+        .paletteMode = 0,
+        .priority = 1,
+        .baseTile = 0
+    },
+    {
+        .bg = 2,
+        .charBaseIndex = 2,
+        .mapBaseIndex = 0x06,
+        .screenSize = 0,
+        .paletteMode = 0,
+        .priority = 2,
+        .baseTile = 0x80
+    },
+    {
+        .bg = 3,
+        .charBaseIndex = 1,
+        .mapBaseIndex = 0x07,
+        .screenSize = 0,
+        .paletteMode = 0,
+        .priority = 3,
+        .baseTile = 0
+    }
+};
+
+const LoopedTask gUnknown_08622798[] = 
+{
+    NULL,
+    sub_81CB510,
+    sub_81CB588,
+    sub_81CB600,
+    sub_81CB678,
+    sub_81CB6F0,
+    sub_81CB734,
+    sub_81CB75C,
+    sub_81CB7A0,
+    sub_81CB824,
+    sub_81CB888,
+    sub_81CB93C,
+    sub_81CBAD4,
+    sub_81CB9C8,
+    sub_81CBA68,
+    sub_81CBB74
+};
+
+const struct WindowTemplate gUnknown_086227D8 = 
+{
+    .bg = 2,
+    .tilemapLeft = 0,
+    .tilemapTop = 5,
+    .width = 11,
+    .height = 2,
+    .paletteNum = 2,
+    .baseBlock = 16
+};
+
+const struct WindowTemplate gUnknown_086227E0 = 
+{
+    .bg = 2,
+    .tilemapLeft = 0,
+    .tilemapTop = 9,
+    .width = 11,
+    .height = 8,
+    .paletteNum = 2,
+    .baseBlock = 38
+};
+
+const u8 *const gUnknown_086227E8[] = 
+{
+    gUnknown_085EC017,
+    gUnknown_085EC01C,
+    gUnknown_085EC022
+};
+
+const u8 gUnknown_086227F4[] = _("·{PAUSE 0x04}·{PAUSE 0x04}·{PAUSE 0x04}·{PAUSE 0x04}·\p");
+
+const struct WindowTemplate gUnknown_08622808 = 
+{
+    .bg = 1,
+    .tilemapLeft = 1,
+    .tilemapTop = 12,
+    .width = 0x1C,
+    .height = 0x04,
+    .paletteNum = 1,
+    .baseBlock = 10
+};
+
+const struct CompressedSpriteSheet gUnknown_08622810[1] = 
+{
+    {gUnknown_086226B8, 0x40, 7}
+};
+
+const struct SpritePalette gUnknown_08622818[] = 
+{
+    {gUnknown_08622698, 12},
+    {}
+};
+
+const struct OamData gUnknown_08622828 = 
+{
+    .y = 0,
+    .affineMode = 0,
+    .objMode = 0,
+    .bpp = 0,
+    .shape = SPRITE_SHAPE(8x16),
+    .x = 0,
+    .size = SPRITE_SIZE(8x16),
+    .tileNum = 0,
+    .priority = 1,
+    .paletteNum = 0,
+}; 
+
+const struct SpriteTemplate gUnknown_08622830 =
+{
+    .tileTag = 7,
+    .paletteTag = 12,
+    .oam = &gUnknown_08622828,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_81CC34C,
+};
+
+const struct OamData gUnknown_08622848 = 
+{
+    .y = 0,
+    .affineMode = 0,
+    .objMode = 0,
+    .bpp = 0,
+    .shape = SPRITE_SHAPE(64x64),
+    .x = 0,
+    .size = SPRITE_SIZE(64x64),
+    .tileNum = 0,
+    .priority = 1,
+    .paletteNum = 0,
+};
+
+const struct SpriteTemplate gUnknown_08622850 =
+{
+    .tileTag = 8,
+    .paletteTag = 13,
+    .oam = &gUnknown_08622848,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCallbackDummy,
+};
 
 bool32 sub_81CB260(void)
 {
@@ -718,7 +882,7 @@ static void sub_81CBBB8(void)
     template.unkE = 7;
     template.unk10 = sub_81CB050;
     template.unk14 = sub_81CBCEC;
-    sub_81C81D4(&gUnknown_08622794, &template, 2);
+    sub_81C81D4(&gUnknown_0862278C[2], &template, 2);
     CreateTask(sub_81CBC64, 7);
 }
 

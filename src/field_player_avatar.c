@@ -336,14 +336,9 @@ void player_step(u8 direction, u16 newKeys, u16 heldKeys)
 
 static bool8 TryInterruptEventObjectSpecialAnim(struct EventObject *playerEventObj, u8 direction)
 {
-    #ifdef NONMATCHING
-        u8 r5 = direction;
-        u8 r6 = direction;
-    #else
-        u8 r5 = direction;
-        register u8 r6 asm("r6") = direction;
-    #endif
-    //a very bad HACK
+    u8 r5 = direction;
+    u8 r6 = direction;
+    r6++; r6--;
 
     if (EventObjectIsMovementOverridden(playerEventObj)
      && !EventObjectClearHeldMovementIfFinished(playerEventObj))

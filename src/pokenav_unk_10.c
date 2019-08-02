@@ -60,8 +60,77 @@ u32 sub_81D0954(void);
 void sub_81D1500(struct Pokenav10Struct *structPtr);
 bool32 sub_81D1524(struct Pokenav10Struct *structPtr);
 void sub_81D1538(struct Sprite *sprite);
+u32 sub_81D0C84(s32);
+u32 sub_81D0D2C(s32);
+u32 sub_81D0D8C(s32);
+u32 sub_81D0E00(s32);
+u32 sub_81D0C54(s32);
 
-// code
+const u8 gUnknown_086237F8[][4] = 
+{
+    {1, 1, 0, 0},
+    {3, 4, 1, 0},
+    {3, 4, 5, 0},
+    {3, 4, 9, 0},
+    {3, 4, 13, 0},
+    {3, 4, 17, 0},
+    {1, 1, 21, 0},
+    {1, 1, 22, 0},
+    {1, 1, 23, 0},
+    {1, 1, 24, 0},
+    {1, 1, 25, 1},
+    {1, 1, 26, 1},
+    {1, 1, 27, 1},
+    {1, 1, 28, 1},
+    {1, 1, 29, 1},
+    {1, 1, 30, 1},
+    {1, 1, 31, 1}
+};
+
+#include "data/text/ribbon_descriptions.h"
+#include "data/text/gift_ribbon_descriptions.h"
+
+const u16 gUnknown_08623FF8[] = INCBIN_U16("graphics/pokenav/ribbons_icon1.gbapal");
+const u16 gUnknown_08624018[] = INCBIN_U16("graphics/pokenav/ribbons_icon2.gbapal");
+const u16 gUnknown_08624038[] = INCBIN_U16("graphics/pokenav/ribbons_icon3.gbapal");
+const u16 gUnknown_08624058[] = INCBIN_U16("graphics/pokenav/ribbons_icon4.gbapal");
+const u16 gUnknown_08624078[] = INCBIN_U16("graphics/pokenav/ribbons_icon5.gbapal");
+const u16 gUnknown_08624098[] = INCBIN_U16("graphics/pokenav/8624098.gbapal");
+const u32 gUnknown_086240B8[] = INCBIN_U32("graphics/pokenav/ribbons_icon.4bpp.lz");
+const u32 gUnknown_08624280[] = INCBIN_U32("graphics/pokenav/ribbons_icon_big.4bpp.lz");
+
+const struct BgTemplate gUnknown_08624B98[2] = 
+{
+    {
+        .bg = 1,
+        .charBaseIndex = 3,
+        .mapBaseIndex = 0x07,
+        .screenSize = 0,
+        .paletteMode = 0,
+        .priority = 1,
+        .baseTile = 0
+    },
+    {
+        .bg = 2,
+        .charBaseIndex = 1,
+        .mapBaseIndex = 0x06,
+        .screenSize = 0,
+        .paletteMode = 0,
+        .priority = 2,
+        .baseTile = 0
+    }
+};
+
+const LoopedTask gUnknown_08624BA0[] = 
+{
+    NULL,
+    sub_81D0C84,
+    sub_81D0D2C,
+    sub_81D0D8C,
+    sub_81D0E00,
+    sub_81D0C54
+};
+
 static const struct WindowTemplate gUnknown_08624BB8 =
 {
     .bg = 2,
