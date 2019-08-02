@@ -208,7 +208,7 @@ static u32 sub_81CAD20(s32 taskState)
             {
                 state->unk1C[state->unkA].unk2 = j;
                 state->unk1C[state->unkA].unk0 = 1;
-                state->unk1C[state->unkA].unk1 = sub_81D16DC(j);
+                state->unk1C[state->unkA].unk1 = MatchCallMapSecGetByIndex(j);
                 state->unkA++;
             }
 
