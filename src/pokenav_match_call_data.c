@@ -43,7 +43,7 @@ struct MatchCallStruct1 {
 
 struct MatchCallSubstruct2 {
     u16 flag;
-    u8 v2;
+    u8 mapSec;
 };
 
 struct MatchCallStruct2 {
@@ -929,17 +929,17 @@ static u8 sub_81D171C(match_call_t matchCall)
         if (!FlagGet(matchCall.type2->v10[i].flag))
             break;
     }
-    return matchCall.type2->v10[i].v2;
+    return matchCall.type2->v10[i].mapSec;
 }
 
 static u8 sub_81D1750(match_call_t matchCall)
 {
-    return 0xd5;
+    return MAPSEC_NONE;
 }
 
 static u8 sub_81D1754(match_call_t matchCall)
 {
-    return 0xd5;
+    return MAPSEC_NONE;
 }
 
 bool32 MatchCall_IsRematchable(u32 idx)
