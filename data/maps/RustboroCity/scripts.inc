@@ -33,7 +33,7 @@ RustboroCity_MapScript2_1E070B: @ 81E070B
 
 RustboroCity_EventScript_1E0715:: @ 81E0715
 	lockall
-	setvar VAR_0x4063, 1
+	setvar VAR_ROUTE104_STATE, 1
 	applymovement EVENT_OBJ_ID_PLAYER, RustboroCity_Movement_1E0850
 	waitmovement 0
 	playse SE_KAIDAN
@@ -841,7 +841,7 @@ RustboroCity_EventScript_1E100B:: @ 81E100B
 	delay 30
 	setflag FLAG_ENABLE_RIVAL_MATCH_CALL
 	setvar VAR_RUSTBORO_STATE, 8
-	setvar VAR_0x4063, 2
+	setvar VAR_ROUTE104_STATE, 2
 	setvar VAR_0x8008, 0
 	msgbox RustboroCity_Text_1E1AFA, MSGBOX_YESNO
 	compare VAR_RESULT, 1
@@ -912,7 +912,7 @@ RustboroCity_EventScript_1E1114:: @ 81E1114
 	delay 30
 	setflag FLAG_ENABLE_RIVAL_MATCH_CALL
 	setvar VAR_RUSTBORO_STATE, 8
-	setvar VAR_0x4063, 2
+	setvar VAR_ROUTE104_STATE, 2
 	msgbox RustboroCity_Text_1E1E34, MSGBOX_YESNO
 	compare VAR_RESULT, 1
 	goto_if_eq RustboroCity_EventScript_1E1191

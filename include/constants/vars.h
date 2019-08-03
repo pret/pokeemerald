@@ -94,7 +94,7 @@
 #define VAR_POKELOT_PRIZE_PLACE              0x404D
 #define VAR_UNUSED_0x404E                    0x404E // Unused Var
 #define VAR_LOTAD_SIZE_RECORD                0x404F
-#define VAR_0x4050                           0x4050
+#define VAR_LITTLEROOT_STATE                 0x4050
 #define VAR_ROUTE102_ACCESSIBLE              0x4051
 #define VAR_UNUSED_0x4052                    0x4052 // Unused Var
 #define VAR_LAVARIDGE_RIVAL_STATE            0x4053
@@ -113,7 +113,7 @@
 #define VAR_ROUTE101_STATE                   0x4060
 #define VAR_UNUSED_0x4061                    0x4061 // Unused Var
 #define VAR_UNUSED_0x4062                    0x4062 // Unused Var
-#define VAR_0x4063                           0x4063
+#define VAR_ROUTE104_STATE                   0x4063
 #define VAR_UNUSED_0x4064                    0x4064 // Unused Var
 #define VAR_UNUSED_0x4065                    0x4065 // Unused Var
 #define VAR_UNUSED_0x4066                    0x4066 // Unused Var
@@ -156,7 +156,7 @@
 #define VAR_UNUSED_0x408B                    0x408B // Unused Var
 #define VAR_LITTLEROOT_HOUSES_STATE_2        0x408C
 #define VAR_LITTLEROOT_RIVAL_STATE           0x408D
-#define VAR_BOARD_BRINEY_BOAT_ROUTE104_STATE 0x408E
+#define VAR_BOARD_BRINEY_BOAT_STATE          0x408E
 #define VAR_DEVON_CORP_3F_STATE              0x408F
 #define VAR_BRINEY_HOUSE_STATE               0x4090
 #define VAR_UNUSED_0x4091                    0x4091 // Unused Var
@@ -165,7 +165,7 @@
 #define VAR_LILYCOVE_MUSEUM_2F_STATE         0x4094
 #define VAR_LILYCOVE_FAN_CLUB_STATE          0x4095
 #define VAR_BRINEY_LOCATION                  0x4096
-#define VAR_INIT_SECRET_BASE       0x4097
+#define VAR_INIT_SECRET_BASE                 0x4097
 #define VAR_PETALBURG_WOODS_STATE            0x4098
 #define VAR_LILYCOVE_CONTEST_LOBBY_STATE     0x4099
 #define VAR_RUSTURF_TUNNEL_STATE             0x409A
@@ -225,14 +225,14 @@
 #define VAR_HAS_ENTERED_BATTLE_FRONTIER      0x40D0 // Var is used like a flag.
 #define VAR_SCOTT_STATE                      0x40D1
 #define VAR_SLATEPORT_OUTSIDE_MUSEUM_STATE   0x40D2
-#define VAR_0x40D3                           0x40D3
+#define VAR_DEX_UPGRADE_JOHTO_STARTER_STATE  0x40D3
 #define VAR_SS_TIDAL_SCOTT_STATE             0x40D4 // Always equal to FLAG_MET_SCOTT_ON_SS_TIDAL
 #define VAR_ROAMER_POKEMON                   0x40D5 // 0 = Latias, 1 = Latios
 #define VAR_TRAINER_HILL_IS_ACTIVE           0x40D6
 #define VAR_SKY_PILLAR_RAQUAZA_CRY_DONE      0x40D7
 #define VAR_SOOTOPOLIS_STATE                 0x40D8
 #define VAR_HAS_TALKED_TO_SEAFLOOR_CAVERN_ENTRANCE_GRUNT 0x40D9
-#define VAR_0x40DA                           0x40DA
+#define VAR_REGISTER_BIRCH_STATE             0x40DA
 #define VAR_UNUSED_0x40DB                    0x40DB // Unused Var
 #define VAR_UNUSED_0x40DC                    0x40DC // Unused Var
 #define VAR_EVENT_PICHU_SLOT                 0x40DD
