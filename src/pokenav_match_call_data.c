@@ -758,7 +758,7 @@ static bool32 (*const sMatchCallGetFlagFuncs[])(match_call_t) = {
     MatchCallGetFlag_Type3
 };
 
-static u8 (*const sMatchCallGetMapsecFuncs[])(match_call_t) = {
+static u8 (*const sMatchCallGetMapSecFuncs[])(match_call_t) = {
     MatchCallGetMapSec_Type0,
     MatchCallGetMapSec_Type1,
     MatchCallGetMapSec_Type2,
@@ -907,7 +907,7 @@ u8 MatchCallMapSecGetByIndex(u32 idx)
         return 0;
     matchCall = sMatchCallHeaders[idx];
     i = MatchCallGetFunctionIndex(matchCall);
-    return sMatchCallGetMapsecFuncs[i](matchCall);
+    return sMatchCallGetMapSecFuncs[i](matchCall);
 }
 
 static u8 MatchCallGetMapSec_Type0(match_call_t matchCall)
