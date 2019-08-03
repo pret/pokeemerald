@@ -291,8 +291,8 @@ static void sub_802D688(void);
 static void sub_802E3E4(u8 taskId);
 static void sub_802E6D0(u8 taskId);
 static void sub_802EB98(u8 taskId);
-static void sub_802E500(u16 windowId, s32 width);
-static void sub_802E620(u8 *str);
+static void sub_802E500(u16 windowId, int width);
+static void TruncateToFirstWordOnly(u8 *str);
 static void sub_802EF50(u16 tileTag, u16 palTag);
 static u8 sub_802EFA8(u16 tileTag, u16 palTag, s16 x, s16 y, u8 subpriority);
 static void sub_802EFFC(u16 tileTag, u16 palTag, s16 x, s16 y, u8 subpriority, s16 *spriteId1, s16 *spriteId2);
@@ -1819,16 +1819,14 @@ static void sub_802C280(void)
 static const s8 gUnknown_082FB65C[][48] =
 {
     {-3, -6, -8, -10, -13, -15, -17, -19, -21, -23, -25, -27, -28, -29, -30, -30, -30, -28, -27,
-    -26, -25, -23, -22, -20, -18, -17, -15, -13, -11, -8, -6, -4,
-    -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    -26, -25, -23, -22, -20, -18, -17, -15, -13, -11, -8, -6, -4, -1},
 
     {-3, -6, -9, -11, -14, -16, -18, -20, -22, -24, -26, -28, -29, -30, -30, -28, -26, -24, -22,
-    -20, -18, -16, -14, -11, -9, -6, -4, -1, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    -20, -18, -16, -14, -11, -9, -6, -4, -1},
 
     {-3, -6, -9, -11, -13, -15, -17, -19, -21, -23, -25, -27, -28, -29, -30, -30, -30, -30, -29,
     -29, -28, -28, -27, -27, -26, -25, -24, -22, -20, -18, -16, -14,
-    -12, -11, -9, -6, -4, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    -12, -11, -9, -6, -4, -1},
 };
 
 static void sub_802C398(int multiplayerId)
@@ -3511,7 +3509,7 @@ static const s16 *const gUnknown_082FE260[] =
 
 static void sub_802DBF8(void)
 {
-    s32 i, y, playersCount = sub_802C8AC();
+    int i, y, playersCount = sub_802C8AC();
     const s16 *xCoords = gUnknown_082FE260[playersCount - 2];
 
     for (i = 0; i < playersCount; i++)
@@ -3538,7 +3536,7 @@ static void sub_802DC9C(int id)
 
 static int sub_802DCCC(u8 flags)
 {
-    s32 i, count;
+    int i, count;
 
     for (i = 0, count = 0; i < 5; i++)
     {
@@ -3946,7 +3944,7 @@ static const u8 *const gUnknown_082FE278[] = {gText_JumpsInARow, gText_BestScore
 static void sub_802E3E4(u8 taskId)
 {
     struct WindowTemplate window;
-    s32 i, width, widthCurr;
+    int i, width, widthCurr;
     s16 *data = gTasks[taskId].data;
 
     switch (data[0])
@@ -3993,10 +3991,10 @@ static void sub_802E3E4(u8 taskId)
     }
 }
 
-static void sub_802E500(u16 windowId, s32 width)
+static void sub_802E500(u16 windowId, int width)
 {
-    s32 i, x;
-    s32 results[3];
+    int i, x;
+    int results[3];
     struct PokemonJumpResults *pokeJump = sub_802E32C();
     results[0] = pokeJump->jumpsInRow;
     results[1] = pokeJump->bestJumpScore;
@@ -4010,14 +4008,14 @@ static void sub_802E500(u16 windowId, s32 width)
     {
         AddTextPrinterParameterized(windowId, 1, gUnknown_082FE278[i], 0, 25 + (i * 16), TEXT_SPEED_FF, NULL);
         ConvertIntToDecimalStringN(gStringVar1, results[i], STR_CONV_MODE_LEFT_ALIGN, 5);
-        sub_802E620(gStringVar1);
+        TruncateToFirstWordOnly(gStringVar1);
         x = (width * 8) - GetStringWidth(1, gStringVar1, 0);
         AddTextPrinterParameterized(windowId, 1, gStringVar1, x, 25 + (i * 16), TEXT_SPEED_FF, NULL);
     }
     PutWindowTilemap(windowId);
 }
 
-static void sub_802E620(u8 *str)
+static void TruncateToFirstWordOnly(u8 *str)
 {
     for (;*str != EOS; str++)
     {
@@ -4419,7 +4417,7 @@ static bool32 sub_802EE30(u8 spriteId)
 
 static void sub_802EE5C(struct Sprite *sprite)
 {
-    s32 y;
+    int y;
     s16 *data = sprite->data;
 
     switch (data[0])
