@@ -2766,4 +2766,11 @@ extern const u8 gUnknown_085EC017[];
 extern const u8 gUnknown_085EC01C[];
 extern const u8 gUnknown_085EC022[];
 
+// use_pokeblock
+extern const u8 gText_Coolness[];
+extern const u8 gText_Toughness[];
+extern const u8 gText_Smartness[];
+extern const u8 gText_Cuteness[];
+extern const u8 gText_Beauty3[];
+
 #endif // GUARD_STRINGS_H
