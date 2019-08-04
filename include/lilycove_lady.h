@@ -8,9 +8,9 @@ void sub_818DEF4(void);
 void sub_818E564(void);
 void sub_818E570(const LilycoveLady *lilycoveLady);
 bool8 GivePokeblockToContestLady(struct Pokeblock *pokeblock);
-void sub_818E7E0(u8 *dest1, u8 *dest2);
-void sub_818E81C(u8 *dest);
-void sub_818E848(u8 *dest);
+void BufferContestLadyMonName(u8 *dest1, u8 *dest2);
+void BufferContestLadyPlayerName(u8 *dest);
+void BufferContestLadyLanguage(u8 *dest);
 void BufferContestName(u8 *dest, u8 category);
 u8 sub_818E880(void);
 
