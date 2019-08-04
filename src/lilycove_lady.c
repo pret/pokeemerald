@@ -39,7 +39,7 @@ enum
 //TODO name phases
 
 static void InitLilycoveQuizLady(void);
-static void InitLilycoveFavourLady(void);
+static void InitLilycoveFavorLady(void);
 static void InitLilycoveContestLady(void);
 static void sub_818E004(void);
 static void sub_818DBC4(void);
@@ -556,8 +556,8 @@ void SetLilycoveLady(void)
         case LILYCOVE_LADY_QUIZ:
             InitLilycoveQuizLady();
             break;
-        case LILYCOVE_LADY_FAVOUR:
-            InitLilycoveFavourLady();
+        case LILYCOVE_LADY_FAVOR:
+            InitLilycoveFavorLady();
             break;
         case LILYCOVE_LADY_CONTEST:
             InitLilycoveContestLady();
@@ -572,7 +572,7 @@ void sub_818DA78(void)
         case LILYCOVE_LADY_QUIZ:
             sub_818E004();
             break;
-        case LILYCOVE_LADY_FAVOUR:
+        case LILYCOVE_LADY_FAVOR:
             sub_818DBC4();
             break;
         case LILYCOVE_LADY_CONTEST:
@@ -591,8 +591,8 @@ void SetLilycoveLadyRandomly(void)
         case LILYCOVE_LADY_QUIZ:
             InitLilycoveQuizLady();
             break;
-        case LILYCOVE_LADY_FAVOUR:
-            InitLilycoveFavourLady();
+        case LILYCOVE_LADY_FAVOR:
+            InitLilycoveFavorLady();
             break;
         case LILYCOVE_LADY_CONTEST:
             InitLilycoveContestLady();
@@ -624,10 +624,10 @@ static void sub_818DB20(void)
     sFavorLadyPtr->unk_010 = sFavorLadyAcceptedItemLists[sFavorLadyPtr->favorId][idx];
 }
 
-static void InitLilycoveFavourLady(void)
+static void InitLilycoveFavorLady(void)
 {
-    sFavorLadyPtr = &gSaveBlock1Ptr->lilycoveLady.favour;
-    sFavorLadyPtr->id = LILYCOVE_LADY_FAVOUR;
+    sFavorLadyPtr = &gSaveBlock1Ptr->lilycoveLady.favor;
+    sFavorLadyPtr->id = LILYCOVE_LADY_FAVOR;
     sFavorLadyPtr->phase = 0;
     sFavorLadyPtr->playerName[0] = EOS;
     sFavorLadyPtr->unk_002 = 0;
@@ -639,14 +639,14 @@ static void InitLilycoveFavourLady(void)
 
 static void sub_818DBC4(void)
 {
-    sFavorLadyPtr = &gSaveBlock1Ptr->lilycoveLady.favour;
-    sFavorLadyPtr->id = LILYCOVE_LADY_FAVOUR;
+    sFavorLadyPtr = &gSaveBlock1Ptr->lilycoveLady.favor;
+    sFavorLadyPtr->id = LILYCOVE_LADY_FAVOR;
     sFavorLadyPtr->phase = 0;
 }
 
 u8 sub_818DBE8(void)
 {
-    sFavorLadyPtr = &gSaveBlock1Ptr->lilycoveLady.favour;
+    sFavorLadyPtr = &gSaveBlock1Ptr->lilycoveLady.favor;
     if (sFavorLadyPtr->phase == 2)
     {
         return 2;
@@ -668,13 +668,13 @@ static const u8 *GetFavorLadyDescription(u8 idx)
 
 void BufferFavorLadyDescription(void)
 {
-    sFavorLadyPtr = &gSaveBlock1Ptr->lilycoveLady.favour;
+    sFavorLadyPtr = &gSaveBlock1Ptr->lilycoveLady.favor;
     StringCopy(gStringVar1, GetFavorLadyDescription(sFavorLadyPtr->favorId));
 }
 
 bool8 sub_818DC60(void)
 {
-    sFavorLadyPtr = &gSaveBlock1Ptr->lilycoveLady.favour;
+    sFavorLadyPtr = &gSaveBlock1Ptr->lilycoveLady.favor;
     if (sFavorLadyPtr->playerName[0] != EOS)
     {
         StringCopy7(gStringVar3, sFavorLadyPtr->playerName);
@@ -691,7 +691,7 @@ static void BufferItemName(u8 *dest, u16 itemId)
 
 void sub_818DCC8(void)
 {
-    sFavorLadyPtr = &gSaveBlock1Ptr->lilycoveLady.favour;
+    sFavorLadyPtr = &gSaveBlock1Ptr->lilycoveLady.favor;
     BufferItemName(gStringVar2, sFavorLadyPtr->itemId);
 }
 
@@ -703,14 +703,14 @@ static void sub_818DCF4(const u8 *src, u8 *dest)
 
 void sub_818DD14(void)
 {
-    sFavorLadyPtr = &gSaveBlock1Ptr->lilycoveLady.favour;
+    sFavorLadyPtr = &gSaveBlock1Ptr->lilycoveLady.favor;
     sub_818DCF4(sFavorLadyPtr->playerName, gStringVar3);
     ConvertInternationalString(gStringVar3, sFavorLadyPtr->language);
 }
 
 bool8 sub_818DD54(void)
 {
-    sFavorLadyPtr = &gSaveBlock1Ptr->lilycoveLady.favour;
+    sFavorLadyPtr = &gSaveBlock1Ptr->lilycoveLady.favor;
     return sFavorLadyPtr->unk_002 ? TRUE : FALSE;
 }
 
@@ -725,7 +725,7 @@ static bool8 sub_818DD84(u16 itemId)
     u8 i;
     bool8 response;
 
-    sFavorLadyPtr = &gSaveBlock1Ptr->lilycoveLady.favour;
+    sFavorLadyPtr = &gSaveBlock1Ptr->lilycoveLady.favor;
     numItems = GetNumAcceptedItems(sFavorLadyAcceptedItemLists[sFavorLadyPtr->favorId]);
     sFavorLadyPtr->phase = 1;
     BufferItemName(gStringVar2, itemId);
@@ -760,7 +760,7 @@ bool8 sub_818DE5C(void)
 {
     u8 checkval;
 
-    sFavorLadyPtr = &gSaveBlock1Ptr->lilycoveLady.favour;
+    sFavorLadyPtr = &gSaveBlock1Ptr->lilycoveLady.favor;
     checkval = sFavorLadyPtr->unk_003;
     return checkval < 5 ? FALSE : TRUE;
 }
@@ -774,7 +774,7 @@ u16 sub_818DEA0(void)
 {
     u16 itemId;
 
-    sFavorLadyPtr = &gSaveBlock1Ptr->lilycoveLady.favour;
+    sFavorLadyPtr = &gSaveBlock1Ptr->lilycoveLady.favor;
     itemId = sFavorLadyPrizes[sFavorLadyPtr->favorId];
     BufferPrizeName(itemId);
     sFavorLadyPtr->phase = 2;
@@ -783,7 +783,7 @@ u16 sub_818DEA0(void)
 
 void sub_818DEDC(void)
 {
-    InitLilycoveFavourLady();
+    InitLilycoveFavorLady();
     sFavorLadyPtr->phase = 1;
 }
 
