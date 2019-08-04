@@ -1630,7 +1630,7 @@ bool8 ScrCmd_buffercontesttype(struct ScriptContext *ctx)
     u8 stringVarIndex = ScriptReadByte(ctx);
     u16 index = VarGet(ScriptReadHalfword(ctx));
 
-    sub_818E868(sScriptStringVars[stringVarIndex], index);
+    BufferContestName(sScriptStringVars[stringVarIndex], index);
     return FALSE;
 }
 
