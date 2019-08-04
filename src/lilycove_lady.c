@@ -335,8 +335,8 @@ static const u16 sQuizLadyPrizes[] =
     ITEM_PREMIER_BALL
 };
 
-#define QUIZ_QUESTION_LEN ARRAY_COUNT(sQuizLadyQuestion1) //
-#define QUIZ_QUESTION_NUM ARRAY_COUNT(sQuizLadyQuizQuestions)
+#define QUIZ_QUESTION_LEN 9
+#define QUIZ_QUESTION_NUM 16
 
 // Favor Lady data
 static const u8 *const sFavorLadyDescriptions[] =
@@ -1136,7 +1136,7 @@ static void InitLilycoveContestLady(void)
 {
     sContestLadyPtr = &gSaveBlock1Ptr->lilycoveLady.contest;
     sContestLadyPtr->id = LILYCOVE_LADY_CONTEST;
-    sContestLadyPtr->phase = 0;
+    sContestLadyPtr->givenPokeblock = FALSE;
     ResetContestLadyContestData();
     sContestLadyPtr->language = gGameLanguage;
 }
@@ -1145,7 +1145,7 @@ static void sub_818E674(void)
 {
     sContestLadyPtr = &gSaveBlock1Ptr->lilycoveLady.contest;
     sContestLadyPtr->id = LILYCOVE_LADY_CONTEST;
-    sContestLadyPtr->phase = 0;
+    sContestLadyPtr->givenPokeblock = FALSE;
     if (sContestLadyPtr->fave_pkblk == FLAVOR_COUNT 
      || sContestLadyPtr->other_pkblk == FLAVOR_COUNT)
     {
@@ -1274,7 +1274,7 @@ u8 sub_818E880(void)
 bool8 sub_818E8B4(void)
 {
     sContestLadyPtr = &gSaveBlock1Ptr->lilycoveLady.contest;
-    if (sContestLadyPtr->phase == 1)
+    if (sContestLadyPtr->givenPokeblock == TRUE)
     {
         return TRUE;
     }
@@ -1295,29 +1295,30 @@ bool8 sub_818E8E0(void)
     return response;
 }
 
+// called when mon enjoys pokeblock
 void sub_818E914(void)
 {
     sub_818E794(gStringVar2, gStringVar1);
 }
 
-void sub_818E92C(void)
+void OpenPokeblockCaseForContestLady(void)
 {
     OpenPokeblockCase(3, CB2_ReturnToField);
 }
 
-void sub_818E940(void)
+void ContestLadyGivenPokeblock(void)
 {
     sContestLadyPtr = &gSaveBlock1Ptr->lilycoveLady.contest;
-    sContestLadyPtr->phase = 1;
+    sContestLadyPtr->givenPokeblock = TRUE;
 }
 
-void sub_818E960(void)
+void GetContestLadyMonSpecies(void)
 {
     sContestLadyPtr = &gSaveBlock1Ptr->lilycoveLady.contest;
     gSpecialVar_0x8005 = sContestLadyMonSpecies[sContestLadyPtr->category];
 }
 
-u8 sub_818E990(void)
+u8 GetContestLadyCategory(void)
 {
     sContestLadyPtr = &gSaveBlock1Ptr->lilycoveLady.contest;
     return sContestLadyPtr->category;

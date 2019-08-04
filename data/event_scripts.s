@@ -4701,7 +4701,7 @@ LilycoveCity_PokemonCenter_1F_EventScript_2A88B0:: @ 82A88B0
 
 LilycoveCity_PokemonCenter_1F_EventScript_2A88BA:: @ 82A88BA
 	fadescreen 1
-	special sub_818E92C
+	special OpenPokeblockCaseForContestLady
 	waitstate
 	compare VAR_RESULT, 65535
 	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A88D7
@@ -4719,8 +4719,8 @@ LilycoveCity_PokemonCenter_1F_EventScript_2A88D7:: @ 82A88D7
 
 LilycoveCity_PokemonCenter_1F_EventScript_2A88F6:: @ 82A88F6
 	msgbox LilycoveCity_PokemonCenter_1F_Text_2A9571, MSGBOX_DEFAULT
-	special sub_818E940
-	special sub_818E960
+	special ContestLadyGivenPokeblock
+	special GetContestLadyMonSpecies
 	goto LilycoveCity_PokemonCenter_1F_EventScript_2A890A
 	end
 
@@ -4810,9 +4810,9 @@ LilycoveCity_PokemonCenter_1F_Movement_2A89C2: @ 82A89C2
 	step_end
 
 LilycoveCity_PokemonCenter_1F_EventScript_2A89C7:: @ 82A89C7
-	specialvar VAR_RESULT, sub_818E990
+	specialvar VAR_RESULT, GetContestLadyCategory
 	special sub_818E914
-	special sub_818E960
+	special GetContestLadyMonSpecies
 	compare VAR_RESULT, 0
 	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A8A0A
 	compare VAR_RESULT, 1

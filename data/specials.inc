@@ -409,10 +409,10 @@ gSpecials:: @ 81DBA64
 	def_special sub_818E8E0
 	def_special sub_818E8B4
 	def_special sub_818E914
-	def_special sub_818E92C
-	def_special sub_818E940
-	def_special sub_818E960
-	def_special sub_818E990
+	def_special OpenPokeblockCaseForContestLady
+	def_special ContestLadyGivenPokeblock
+	def_special GetContestLadyMonSpecies
+	def_special GetContestLadyCategory
 	def_special PutLilycoveContestLadyShowOnTheAir
 	def_special sub_813B880
 	def_special CallApprenticeFunction
