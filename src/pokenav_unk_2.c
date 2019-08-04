@@ -2,6 +2,7 @@
 #include "alloc.h"
 #include "decompress.h"
 #include "bg.h"
+#include "gpu_regs.h"
 #include "menu.h"
 #include "window.h"
 #include "pokenav.h"
@@ -52,10 +53,12 @@ void sub_81CA20C(void);
 void sub_81CA278(void);
 void sub_81CA35C(struct Sprite ** sprites, s32 a1, s32 a2, s32 a3);
 void sub_81CA3B4(struct Sprite ** sprites);
-void sub_81CA448(struct Sprite ** sprites, s32 a1);
-void sub_81CA474(struct Sprite * sprite);
 void sub_81CA2DC(void);
 bool32 sub_81CA324(void);
+void sub_81CA448(struct Sprite ** sprites, bool32 a1);
+void sub_81CA474(struct Sprite * sprite);
+void sub_81CA4AC(struct Sprite * sprite);
+void sub_81CA580(u8 taskId);
 void sub_81CA640(void);
 void sub_81CA698(void);
 void sub_81CA6E0(void);
@@ -852,10 +855,10 @@ void sub_81CA20C(void)
             else
                 r2 = 0x8c;
             sub_81CA35C(unk->field_02c[i], 0x100, r2, 0xC);
-            sub_81CA448(unk->field_02c[i], 0);
+            sub_81CA448(unk->field_02c[i], FALSE);
         }
         else
-            sub_81CA448(unk->field_02c[i], 1);
+            sub_81CA448(unk->field_02c[i], TRUE);
     }
 }
 
@@ -918,66 +921,69 @@ bool32 sub_81CA324(void)
     return FALSE;
 }
 
-#ifdef NONMATCHING
 void sub_81CA35C(struct Sprite ** sprites, s32 a1, s32 a2, s32 a3)
 {
     s32 i;
 
     for (i = 0; i < 4; i++)
     {
-        sprites[i]->pos1.x = a1;
-        sprites[i]->data[0] = a3;
-        sprites[i]->data[1] = 16 * (a2 - a1) / a3;
-        sprites[i]->data[2] = 16 * a1;
-        sprites[i]->data[7] = a2;
-        sprites[i]->callback = sub_81CA474;
+        (*sprites)->pos1.x = a1;
+        (*sprites)->data[0] = a3;
+        (*sprites)->data[1] = 16 * (a2 - a1) / a3;
+        (*sprites)->data[2] = 16 * a1;
+        (*sprites)->data[7] = a2;
+        (*sprites)->callback = sub_81CA474;
+        sprites++;
     }
 }
-#else
-NAKED
-void sub_81CA35C(struct Sprite ** sprites, s32 a1, s32 a2, s32 a3)
+
+void sub_81CA3B4(struct Sprite ** sprites)
 {
-    asm_unified("\tpush {r4-r7,lr}\n"
-                "\tmov r7, r9\n"
-                "\tmov r6, r8\n"
-                "\tpush {r6,r7}\n"
-                "\tadds r4, r0, 0\n"
-                "\tadds r5, r1, 0\n"
-                "\tmov r9, r2\n"
-                "\tadds r6, r3, 0\n"
-                "\tldr r0, =sub_81CA474\n"
-                "\tmov r8, r0\n"
-                "\tsubs r0, r2, r5\n"
-                "\tlsls r0, 4\n"
-                "\tadds r1, r6, 0\n"
-                "\tbl __divsi3\n"
-                "\tadds r3, r0, 0\n"
-                "\tmovs r1, 0x3\n"
-                "\tlsls r2, r5, 4\n"
-                "_081CA380:\n"
-                "\tldr r0, [r4]\n"
-                "\tstrh r5, [r0, 0x20]\n"
-                "\tldr r0, [r4]\n"
-                "\tstrh r6, [r0, 0x2E]\n"
-                "\tldr r0, [r4]\n"
-                "\tstrh r3, [r0, 0x30]\n"
-                "\tldr r0, [r4]\n"
-                "\tstrh r2, [r0, 0x32]\n"
-                "\tldr r0, [r4]\n"
-                "\tmov r7, r9\n"
-                "\tstrh r7, [r0, 0x3C]\n"
-                "\tldm r4!, {r0}\n"
-                "\tmov r7, r8\n"
-                "\tstr r7, [r0, 0x1C]\n"
-                "\tsubs r1, 0x1\n"
-                "\tcmp r1, 0\n"
-                "\tbge _081CA380\n"
-                "\tpop {r3,r4}\n"
-                "\tmov r8, r3\n"
-                "\tmov r9, r4\n"
-                "\tpop {r4-r7}\n"
-                "\tpop {r0}\n"
-                "\tbx r0\n"
-                "\t.pool");
+    s32 i;
+    struct Pokenav2Struct * unk = GetSubstructPtr(2);
+    u8 taskId;
+
+    for (i = 0; i < 4; i++)
+    {
+        (*sprites)->oam.objMode = ST_OAM_OBJ_BLEND;
+        (*sprites)->oam.affineMode = ST_OAM_AFFINE_DOUBLE;
+        (*sprites)->callback = sub_81CA4AC;
+        (*sprites)->data[0] = 8;
+        (*sprites)->data[1] = 0;
+        (*sprites)->data[7] = i;
+        InitSpriteAffineAnim(sprites[0]);
+        StartSpriteAffineAnim(sprites[0], 0);
+        sprites++;
+    }
+
+    SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(0x10, 0x00));
+    taskId = CreateTask(sub_81CA580, 3);
+    gTasks[taskId].data[0] = 8;
+    unk->field_00c++;
 }
-#endif //NONMATCHING
+
+void sub_81CA448(struct Sprite ** sprites, bool32 a1)
+{
+    s32 i;
+
+    for (i = 0; i < 4; i++)
+    {
+        (*sprites)->invisible = a1;
+        sprites++;
+    }
+}
+
+void sub_81CA474(struct Sprite * sprite)
+{
+    sprite->data[0]--;
+    if (sprite->data[0] != -1)
+    {
+        sprite->data[2] += sprite->data[1];
+        sprite->pos1.x = sprite->data[2] >> 4;
+    }
+    else
+    {
+        sprite->pos1.x = sprite->data[7];
+        sprite->callback = SpriteCallbackDummy;
+    }
+}
