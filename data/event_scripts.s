@@ -4281,7 +4281,7 @@ GraniteCave_B1F_Movement_2A8369: @ 82A8369
 	step_end
 
 LilycoveCity_PokemonCenter_1F_EventScript_2A836B:: @ 82A836B
-	special sub_818DAEC
+	special Script_GetLilycoveLadyId
 	switch VAR_RESULT
 	case 0, LilycoveCity_PokemonCenter_1F_EventScript_2A8554
 	case 1, LilycoveCity_PokemonCenter_1F_EventScript_2A8395
@@ -4307,7 +4307,7 @@ LilycoveCity_PokemonCenter_1F_EventScript_2A83C6:: @ 82A83C6
 	end
 
 LilycoveCity_PokemonCenter_1F_EventScript_2A83D0:: @ 82A83D0
-	special sub_818DC2C
+	special BufferFavorLadyDescription
 	msgbox LilycoveCity_PokemonCenter_1F_Text_2A8A7D, MSGBOX_DEFAULT
 	specialvar VAR_RESULT, sub_818DC60
 	compare VAR_RESULT, 0
@@ -4357,7 +4357,7 @@ LilycoveCity_PokemonCenter_1F_EventScript_2A845E:: @ 82A845E
 LilycoveCity_PokemonCenter_1F_EventScript_2A846C:: @ 82A846C
 	fadescreen 1
 	setvar VAR_RESULT, 0
-	special sub_818DD78
+	special OpenBagMenuForFavorLady
 	waitstate
 	compare VAR_RESULT, 0
 	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A848E
@@ -4382,7 +4382,7 @@ LilycoveCity_PokemonCenter_1F_EventScript_2A84AD:: @ 82A84AD
 	end
 
 LilycoveCity_PokemonCenter_1F_EventScript_2A84C9:: @ 82A84C9
-	special sub_818DC2C
+	special BufferFavorLadyDescription
 	msgbox LilycoveCity_PokemonCenter_1F_Text_2A8C0F, MSGBOX_DEFAULT
 	release
 	end
@@ -4396,13 +4396,13 @@ LilycoveCity_PokemonCenter_1F_EventScript_2A84D6:: @ 82A84D6
 	end
 
 LilycoveCity_PokemonCenter_1F_EventScript_2A84F2:: @ 82A84F2
-	special sub_818DC2C
+	special BufferFavorLadyDescription
 	msgbox LilycoveCity_PokemonCenter_1F_Text_2A8C6F, MSGBOX_DEFAULT
 	release
 	end
 
 LilycoveCity_PokemonCenter_1F_EventScript_2A84FF:: @ 82A84FF
-	special sub_818DC2C
+	special BufferFavorLadyDescription
 	msgbox LilycoveCity_PokemonCenter_1F_Text_2A8CC8, MSGBOX_DEFAULT
 	goto LilycoveCity_PokemonCenter_1F_EventScript_2A8510
 	end
@@ -4432,7 +4432,7 @@ LilycoveCity_PokemonCenter_1F_EventScript_2A8554:: @ 82A8554
 	lock
 	faceplayer
 	msgbox LilycoveCity_PokemonCenter_1F_Text_2A8E2B, MSGBOX_DEFAULT
-	specialvar VAR_RESULT, sub_818E038
+	specialvar VAR_RESULT, GetQuizLadyPhase
 	compare VAR_RESULT, 0
 	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A8585
 	compare VAR_RESULT, 1
@@ -4452,7 +4452,7 @@ LilycoveCity_PokemonCenter_1F_EventScript_2A8585:: @ 82A8585
 	end
 
 LilycoveCity_PokemonCenter_1F_EventScript_2A85AC:: @ 82A85AC
-	specialvar VAR_RESULT, sub_818E2D8
+	specialvar VAR_RESULT, IsQuizLadyWaitingForChallenger
 	compare VAR_RESULT, 0
 	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A8759
 	compare VAR_RESULT, 1
@@ -4489,7 +4489,7 @@ LilycoveCity_PokemonCenter_1F_EventScript_2A8612:: @ 82A8612
 	end
 
 LilycoveCity_PokemonCenter_1F_EventScript_2A861C:: @ 82A861C
-	special sub_818E3BC
+	special ClearQuizLadyResponse
 	compare VAR_0x8004, 0
 	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A864C
 	compare VAR_0x8004, EASY_CHAT_TYPE_QUIZ_ANSWER
@@ -4528,7 +4528,7 @@ LilycoveCity_PokemonCenter_1F_EventScript_2A867F:: @ 82A867F
 	end
 
 LilycoveCity_PokemonCenter_1F_EventScript_2A8689:: @ 82A8689
-	special sub_818E37C
+	special SetQuizLadyPhase_MakeYourOwn
 	msgbox LilycoveCity_PokemonCenter_1F_Text_2A8F4D, MSGBOX_DEFAULT
 	specialvar VAR_RESULT, sub_818E308
 	compare VAR_RESULT, 0
@@ -4576,8 +4576,8 @@ LilycoveCity_PokemonCenter_1F_EventScript_2A8716:: @ 82A8716
 
 LilycoveCity_PokemonCenter_1F_EventScript_2A8724:: @ 82A8724
 	setvar VAR_0x8005, 0
-	special sub_818E358
-	special sub_818E37C
+	special BufferQuizPrizeItem
+	special SetQuizLadyPhase_MakeYourOwn
 	giveitem_std VAR_0x8005
 	compare VAR_RESULT, 0
 	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A874C
@@ -4586,7 +4586,7 @@ LilycoveCity_PokemonCenter_1F_EventScript_2A8724:: @ 82A8724
 
 LilycoveCity_PokemonCenter_1F_EventScript_2A874C:: @ 82A874C
 	msgbox LilycoveCity_PokemonCenter_1F_Text_2A906A, MSGBOX_DEFAULT
-	special sub_818E39C
+	special SetQuizLadyPhase_GivePrize
 	release
 	end
 
@@ -4629,7 +4629,7 @@ LilycoveCity_PokemonCenter_1F_EventScript_2A87AF:: @ 82A87AF
 LilycoveCity_PokemonCenter_1F_EventScript_2A87CE:: @ 82A87CE
 	msgbox LilycoveCity_PokemonCenter_1F_Text_2A9270, MSGBOX_DEFAULT
 	special sub_818E430
-	special sub_818E3BC
+	special ClearQuizLadyResponse
 	setvar VAR_0x8004, 16
 
 LilycoveCity_PokemonCenter_1F_EventScript_2A87E1:: @ 82A87E1

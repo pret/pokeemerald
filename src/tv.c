@@ -5600,7 +5600,7 @@ static void DoTVShowPokemonContestLiveUpdates(void)
     switch (state)
     {
         case  0:
-            sub_818E868(gStringVar1, show->contestLiveUpdates.category);
+            BufferContestName(gStringVar1, show->contestLiveUpdates.category);
             StringCopy(gStringVar2, gSpeciesNames[show->contestLiveUpdates.species]);
             TVShowConvertInternationalString(gStringVar3, show->contestLiveUpdates.playerName, show->contestLiveUpdates.language);
             if (show->contestLiveUpdates.round1Rank == show->contestLiveUpdates.round2Rank)
@@ -7720,7 +7720,7 @@ static void DoTVShowPokemonContestLiveUpdates2(void)
     switch (state)
     {
         case 0:
-            sub_818E868(gStringVar1, show->contestLiveUpdates2.contestCategory);
+            BufferContestName(gStringVar1, show->contestLiveUpdates2.contestCategory);
             if (show->contestLiveUpdates2.pokeblockState == 1)
             {
                 sTVShowState = 1;

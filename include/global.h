@@ -748,26 +748,26 @@ struct LilycoveLadyQuiz
 {
     /*0x000*/ u8 id;
     /*0x001*/ u8 phase;
-    /*0x002*/ u16 unk_002[9];
-    /*0x014*/ u16 unk_014;
-    /*0x016*/ u16 unk_016;
+    /*0x002*/ u16 question[9];
+    /*0x014*/ u16 answer;
+    /*0x016*/ u16 response;
     /*0x018*/ u8 playerName[PLAYER_NAME_LENGTH + 1];
     /*0x020*/ u16 playerTrainerId[4];
     /*0x028*/ u16 itemId;
-    /*0x02a*/ u8 unk_02a;
-    /*0x02b*/ u8 unk_02b;
-    /*0x02c*/ u8 unk_02c;
+    /*0x02a*/ bool8 waitingForChallenger;
+    /*0x02b*/ u8 questionId;
+    /*0x02c*/ u8 prevQuestionId;
     /*0x02d*/ u8 language;
 };
 
-struct LilycoveLadyFavour
+struct LilycoveLadyFavor
 {
     /*0x000*/ u8 id;
     /*0x001*/ u8 phase;
     /*0x002*/ u8 unk_002;
     /*0x003*/ u8 unk_003;
     /*0x004*/ u8 playerName[PLAYER_NAME_LENGTH + 1];
-    /*0x00c*/ u8 unk_00c;
+    /*0x00c*/ u8 favorId;
     /*0x00e*/ u16 itemId;
     /*0x010*/ u16 unk_010;
     /*0x012*/ u8 language;
