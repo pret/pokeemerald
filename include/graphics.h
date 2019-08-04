@@ -4030,6 +4030,9 @@ extern const u32 gPokenavLeftHeaderBeauty_Gfx[];
 extern const u32 gPokenavLeftHeaderCute_Gfx[];
 extern const u32 gPokenavLeftHeaderSmart_Gfx[];
 extern const u32 gPokenavLeftHeaderTough_Gfx[];
+extern const u16 gUnknown_08DDE010[];
+extern const u32 gUnknown_08DDE030[];
+extern const u32 gUnknown_08DDE12C[];
 
 extern const u32 gPageInfoTilemap[];
 extern const u32 gUnknown_08D98CC8[];
