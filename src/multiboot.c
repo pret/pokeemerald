@@ -1,7 +1,7 @@
 #include "gba/gba.h"
 #include "multiboot.h"
 
-IWRAM_DATA static u16 MultiBoot_required_data[MULTIBOOT_NCHILD];
+static u16 MultiBoot_required_data[MULTIBOOT_NCHILD];
 
 static int MultiBootSend(struct MultiBootParam *mp, u16 data);
 static int MultiBootHandShake(struct MultiBootParam *mp);
@@ -435,7 +435,7 @@ static int MultiBootHandShake(struct MultiBootParam *mp)
 #undef must_data
 }
 
-static void MultiBootWaitCycles(u32 cycles)
+static NOINLINE void MultiBootWaitCycles(u32 cycles)
 {
     asm("mov r2, pc");
     asm("lsr r2, #24");

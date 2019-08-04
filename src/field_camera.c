@@ -36,11 +36,11 @@ static void DrawMetatile(s32 a, u16 *b, u16 c);
 static void CameraPanningCB_PanAhead(void);
 
 // IWRAM bss vars
-static IWRAM_DATA struct FieldCameraOffset sFieldCameraOffset;
-static IWRAM_DATA s16 sHorizontalCameraPan;
-static IWRAM_DATA s16 sVerticalCameraPan;
-static IWRAM_DATA u8 gUnknown_03000E2C;
-static IWRAM_DATA void (*sFieldCameraPanningCallback)(void);
+static struct FieldCameraOffset sFieldCameraOffset;
+static s16 sHorizontalCameraPan;
+static s16 sVerticalCameraPan;
+static u8 gUnknown_03000E2C;
+static void (*sFieldCameraPanningCallback)(void);
 
 struct CameraObject gFieldCamera;
 u16 gTotalCameraPixelOffsetY;

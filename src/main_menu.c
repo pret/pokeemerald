@@ -176,7 +176,7 @@
 static EWRAM_DATA u8 gUnknown_02022D04 = 0;
 static EWRAM_DATA u16 sCurrItemAndOptionMenuCheck = 0;
 
-static IWRAM_DATA u8 sBirchSpeechMainTaskId;
+static u8 sBirchSpeechMainTaskId;
 
 // Static ROM declarations
 

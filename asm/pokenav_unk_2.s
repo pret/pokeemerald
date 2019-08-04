@@ -943,7 +943,7 @@ sub_81CA0C8: @ 81CA0C8
 	lsls r2, r0, 3
 	subs r2, r0
 	lsls r2, 2
-	ldr r1, =gUnknown_08620244
+	ldr r1, =gUnknown_08620240+4
 	adds r0, r2, r1
 	subs r1, 0x4
 	adds r2, r1

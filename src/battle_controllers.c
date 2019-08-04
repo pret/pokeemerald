@@ -830,15 +830,11 @@ static void Task_HandleSendLinkBuffersData(u8 taskId)
     }
 }
 
-// fix me
 void sub_8033648(void)
 {
     u8 i;
     s32 j;
-    u16 r6;
     u8 *recvBuffer;
-    u8 *dest;
-    u8 *src;
 
     if (gReceivedRemoteLinkPlayers != 0 && (gBattleTypeFlags & BATTLE_TYPE_20))
     {
@@ -849,25 +845,24 @@ void sub_8033648(void)
             {
                 ResetBlockReceivedFlag(i);
                 recvBuffer = (u8 *)gBlockRecvBuffer[i];
-                #ifndef NONMATCHING
-                    asm("");
-                    recvBuffer = (u8 *)&gBlockRecvBuffer[i];
-                #endif
-                r6 = gBlockRecvBuffer[i][2];
-
-                if (gTasks[sLinkReceiveTaskId].data[14] + 9 + r6 > 0x1000)
                 {
-                    gTasks[sLinkReceiveTaskId].data[12] = gTasks[sLinkReceiveTaskId].data[14];
-                    gTasks[sLinkReceiveTaskId].data[14] = 0;
+                    u8 *dest, *src;
+                    u16 r6 = gBlockRecvBuffer[i][2];
+
+                    if (gTasks[sLinkReceiveTaskId].data[14] + 9 + r6 > 0x1000)
+                    {
+                        gTasks[sLinkReceiveTaskId].data[12] = gTasks[sLinkReceiveTaskId].data[14];
+                        gTasks[sLinkReceiveTaskId].data[14] = 0;
+                    }
+
+                    dest = &gLinkBattleRecvBuffer[gTasks[sLinkReceiveTaskId].data[14]];
+                    src = recvBuffer;
+
+                    for (j = 0; j < r6 + 8; j++)
+                        dest[j] = src[j];
+
+                    gTasks[sLinkReceiveTaskId].data[14] = gTasks[sLinkReceiveTaskId].data[14] + r6 + 8;
                 }
-
-                dest = &gLinkBattleRecvBuffer[gTasks[sLinkReceiveTaskId].data[14]];
-                src = recvBuffer;
-
-                for (j = 0; j < r6 + 8; j++)
-                    dest[j] = src[j];
-
-                gTasks[sLinkReceiveTaskId].data[14] = gTasks[sLinkReceiveTaskId].data[14] + r6 + 8;
             }
         }
     }

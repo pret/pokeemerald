@@ -1024,13 +1024,13 @@ static const union AnimCmd gUnknown_0860D020[] =
 
 static const union AnimCmd gUnknown_0860D028[] =
 {
-    ANIMCMD_FRAME(18, 129, .vFlip = TRUE),
+    ANIMCMD_FRAME(18, 1, .vFlip = TRUE),
     ANIMCMD_END,
  };
 
 static const union AnimCmd gUnknown_0860D030[] =
 {
-    ANIMCMD_FRAME(16, 65, .hFlip = TRUE),
+    ANIMCMD_FRAME(16, 1, .hFlip = TRUE),
     ANIMCMD_END,
 };
 

@@ -1180,7 +1180,8 @@ void sub_8112B78(struct Sprite *sprite)
 
         if (++coeffB > 16)
             coeffB = 16;
-        if (--(s16)coeffA < 0)
+        --coeffA;
+        if ((s16)coeffA < 0)
             coeffA = 0;
 
         SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(coeffA, coeffB));
