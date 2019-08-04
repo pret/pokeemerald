@@ -77,7 +77,6 @@ SECTIONS {
         asm/berry_crush.o(.text*);
         src/berry_powder.o(.text*);
         src/dodrio_berry_picking.o(.text*);
-        asm/dodrio_berry_picking.o(.text*);
         src/pokemon_jump.o(.text*);
         asm/pokemon_jump.o(.text*);
         src/rtc.o(.text*);
@@ -451,7 +450,6 @@ SECTIONS {
         data/berry_crush.o(.rodata);
         data/berry_powder.o(.rodata);
         src/dodrio_berry_picking.o(.rodata);
-        data/dodrio_berry_picking.o(.rodata);
         src/pokemon_jump.o(.rodata);
         data/pokemon_jump.o(.rodata);
         src/rtc.o(.rodata);
@@ -604,7 +602,6 @@ SECTIONS {
         src/roamer.o(.rodata);
         src/battle_tower.o(.rodata);
         src/use_pokeblock.o(.rodata);
-        data/use_pokeblock.o(.rodata);
         src/battle_controller_wally.o(.rodata);
         src/player_pc.o(.rodata);
         src/intro.o(.rodata);
