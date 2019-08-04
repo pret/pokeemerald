@@ -25,7 +25,7 @@
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "PetalburgCity_Gym_EventScript_2049F1",
-      "flag": "FLAG_HIDE_PETALYBURG_GYM_NORMAN"
+      "flag": "FLAG_HIDE_PETALBURG_GYM_NORMAN"
     },
     {
       "graphics_id": "EVENT_OBJ_GFX_WOMAN_5",

@@ -1,6 +1,6 @@
-## Prerequisites
+# Prerequisites
 
-| Linux | macOS | Windows 10 (build 18917+) | Windows 10 (1709+) | Windows Vista, 7, 8, 8.1, and 10 (1507, 1511, 1607, 1703)
+| Linux | macOS | Windows 10 (build 18917+) | Windows 10 (1709+) | Windows Vista, 7, 8, 8.1, and 10 (1507, 1511, 1607, and 1703)
 | ----- | ----- | ------------------------- | ------------------ | ---------------------------------------------------------
 | none | [Xcode Command Line Tools package][xcode] | [Windows Subsystem for Linux 2][wsl2] | [Windows Subsystem for Linux][wsl] | MSYS2 (see below)
 
@@ -20,7 +20,7 @@ Install the **devkitARM** toolchain of [devkitPro](https://devkitpro.org/wiki/Ge
 	echo "export DEVKITARM=$DEVKITARM" >> ~/.bashrc
 
 
-## Installation
+# Installation
 
 To set up the repository:
 
@@ -32,22 +32,59 @@ To set up the repository:
 	./install.sh ../pokeemerald
 
 	cd ../pokeemerald
-	./build_tools.sh
 
-If the repository was previously set up using Cygwin, delete the `.exe` files in the subfolders of the `tools` folder except for `agbcc` and run the `build_tools.sh` script again.
+To build **pokeemerald.gba** and confirm it matches the official ROM image:
 
-To build **pokeemerald.gba**:
+	make compare
+
+## Notes
+
+* If the base tools are not found on macOS in new Terminal sessions after the first successful build, run `echo "if [ -f ~/.bashrc ]; then . ~/.bashrc; fi" >> ~/.bash_profile` once to prevent the issue from occurring again. Verify that the `devkitarm-rules` package is installed as well; if not, install it by running `sudo dkp-pacman -S devkitarm-rules`.
+
+* If the repository was previously set up using Cygwin, delete the `.exe` files in the subfolders of the `tools` folder except for `agbcc` and try building again. [Learn the differences between MSYS2 and Cygwin.](https://github.com/msys2/msys2/wiki/How-does-MSYS2-differ-from-Cygwin)
+
+# Guidance
+
+To build **pokeemerald.gba** with your changes:
+
+	make
+
+## Parallel builds
+
+See [the GNU docs](https://www.gnu.org/software/make/manual/html_node/Parallel.html) and [this Stack Exchange thread](https://unix.stackexchange.com/questions/208568) for more information.
+
+To speed up building, run:
 
 	make -j$(nproc)
 
-To confirm it matches the official ROM image while building, do this instead:
+`nproc` is not available on macOS. The alternative is `sysctl -n hw.ncpu` ([relevant Stack Overflow thread](https://stackoverflow.com/questions/1715580)).
 
-	make compare -j$(nproc)
+## Building without dependency scanning
 
 If only `.c` or `.s` files were changed, turn off the dependency scanning temporarily. Changes to any other files will be ignored and the build will either fail or not reflect those changes.
 
-	make -j$(nproc) NODEP=1
+	make NODEP=1
 
-**Note:** If the build command is not recognized on Linux, including the Linux environment used within Windows, run `nproc` and replace `$(nproc)` with the returned value (e.g.: `make -j4`). Because `nproc` is not available on macOS, the alternative is `sysctl -n hw.ncpu`.
+## Building with devkitARM's C compiler
 
-**Note 2:** If the base tools are not found on macOS in new Terminal sessions after the first successful build, run `echo "if [ -f ~/.bashrc ]; then . ~/.bashrc; fi" >> ~/.bash_profile` once to prevent the issue from occurring again.
+This project supports the `arm-none-eabi-gcc` compiler included with devkitARM r52. To build this target, simply run:
+
+	make modern
+
+## Building with other toolchains
+
+To build using a toolchain other than devkitARM, override the `TOOLCHAIN` environment variable with the path to your toolchain, which must contain the subdirectory `bin`.
+
+	make TOOLCHAIN="/path/to/toolchain/here"
+
+The following is an example:
+
+	make TOOLCHAIN="/usr/local/arm-none-eabi"
+
+To compile the `modern` target with this toolchain, the subdirectories `lib`, `include`, and `arm-none-eabi` must also be present.
+
+## Building with debug info
+
+To build **pokeemerald.elf** with enhanced debug info, use the `DINFO` variable.
+
+	make DINFO=1

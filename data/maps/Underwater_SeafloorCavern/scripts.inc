@@ -18,18 +18,18 @@ Underwater_SeafloorCavern_MapScript1_23435C: @ 823435C
 	end
 
 Underwater_SeafloorCavern_EventScript_234366:: @ 8234366
-	setmetatile 5, 3, 542, 1
-	setmetatile 6, 3, 542, 1
-	setmetatile 7, 3, 542, 1
-	setmetatile 8, 3, 542, 1
-	setmetatile 5, 4, 552, 0
-	setmetatile 6, 4, 552, 0
-	setmetatile 7, 4, 552, 0
-	setmetatile 8, 4, 552, 0
-	setmetatile 5, 5, 552, 0
-	setmetatile 6, 5, 552, 0
-	setmetatile 7, 5, 552, 0
-	setmetatile 8, 5, 552, 0
+	setmetatile 5, 3, METATILE_Underwater_RockWall, 1
+	setmetatile 6, 3, METATILE_Underwater_RockWall, 1
+	setmetatile 7, 3, METATILE_Underwater_RockWall, 1
+	setmetatile 8, 3, METATILE_Underwater_RockWall, 1
+	setmetatile 5, 4, METATILE_Underwater_FloorShadow, 0
+	setmetatile 6, 4, METATILE_Underwater_FloorShadow, 0
+	setmetatile 7, 4, METATILE_Underwater_FloorShadow, 0
+	setmetatile 8, 4, METATILE_Underwater_FloorShadow, 0
+	setmetatile 5, 5, METATILE_Underwater_FloorShadow, 0
+	setmetatile 6, 5, METATILE_Underwater_FloorShadow, 0
+	setmetatile 7, 5, METATILE_Underwater_FloorShadow, 0
+	setmetatile 8, 5, METATILE_Underwater_FloorShadow, 0
 	return
 
 Underwater_SeafloorCavern_MapScript1_2343D3: @ 82343D3

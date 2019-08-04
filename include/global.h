@@ -2,6 +2,7 @@
 #define GUARD_GLOBAL_H
 
 #include <string.h>
+#include <limits.h>
 #include "config.h" // we need to define config before gba headers as print stuff needs the functions nulled before defines.
 #include "gba/gba.h"
 #include "constants/global.h"
@@ -62,6 +63,10 @@
 #define min(a, b) ((a) < (b) ? (a) : (b))
 #define max(a, b) ((a) >= (b) ? (a) : (b))
 
+#if MODERN
+#define abs(x) (((x) < 0) ? -(x) : (x))
+#endif
+
 // Extracts the upper 16 bits of a 32-bit number
 #define HIHALF(n) (((n) & 0xFFFF0000) >> 16)
 
@@ -85,6 +90,11 @@
 #define T2_READ_16(ptr) ((ptr)[0] + ((ptr)[1] << 8))
 #define T2_READ_32(ptr) ((ptr)[0] + ((ptr)[1] << 8) + ((ptr)[2] << 16) + ((ptr)[3] << 24))
 #define T2_READ_PTR(ptr) (void*) T2_READ_32(ptr)
+
+// Macros for checking the joypad
+#define TEST_BUTTON(field, button) ({(field) & (button);})
+#define JOY_NEW(button) TEST_BUTTON(gMain.newKeys,  button)
+#define JOY_HELD(button)  TEST_BUTTON(gMain.heldKeys, button)
 
 #define S16TOPOSFLOAT(val)   \
 ({                           \
@@ -235,7 +245,7 @@ struct BattleTowerPokemon
     u32 spAttackIV:5;
     u32 spDefenseIV:5;
     u32 gap:1;
-    u32 altAbility:1;
+    u32 abilityNum:1;
     u32 personality;
     u8 nickname[POKEMON_NAME_LENGTH + 1];
     u8 friendship;
@@ -282,7 +292,7 @@ struct RentalMon
     u16 monId;
     u32 personality;
     u8 ivs;
-    u8 abilityBit;
+    u8 abilityNum;
 };
 
 struct BattleDomeTrainer

@@ -56,9 +56,9 @@ struct {
     u16 move;
 } sTV_SecretBaseVisitMonsTemp[10];
 
-IWRAM_DATA u8 sTVShowMixingNumPlayers;
-IWRAM_DATA u8 sTVShowNewsMixingNumPlayers;
-IWRAM_DATA s8 sTVShowMixingCurSlot;
+static u8 sTVShowMixingNumPlayers;
+static u8 sTVShowNewsMixingNumPlayers;
+static s8 sTVShowMixingCurSlot;
 
 EWRAM_DATA u16 sPokemonAnglerSpecies = 0;
 EWRAM_DATA u16 sPokemonAnglerAttemptCounters = 0;
@@ -69,10 +69,9 @@ EWRAM_DATA ALIGNED(4) u8 sTVShowState = 0;
 EWRAM_DATA u8 sTVSecretBaseSecretsRandomValues[3] = {};
 
 // Static ROM declarations
-
-extern const u8 *const sTVBravoTrainerTextGroup[];
-extern const u8 *const sTVBravoTrainerBattleTowerTextGroup[];
-
+#if !defined(NONMATCHING) && MODERN
+#define static
+#endif
 void ClearPokemonNews(void);
 u8 GetTVChannelByShowType(u8 kind);
 u8 FindFirstActiveTVShowThatIsNotAMassOutbreak(void);
@@ -3434,7 +3433,7 @@ bool8 TV_IsScriptShowKindAlreadyInQueue(void)
     return FALSE;
 }
 
-bool8 TV_PutNameRaterShowOnTheAirIfNicnkameChanged(void)
+bool8 TV_PutNameRaterShowOnTheAirIfNicknameChanged(void)
 {
     GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_NICKNAME, gStringVar1);
     if (!StringCompare(gStringVar3, gStringVar1))

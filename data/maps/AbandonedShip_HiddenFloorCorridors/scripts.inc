@@ -19,35 +19,35 @@ AbandonedShip_HiddenFloorCorridors_MapScript1_238980: @ 8238980
 	end
 
 AbandonedShip_HiddenFloorCorridors_EventScript_2389C9:: @ 82389C9
-	setmetatile 3, 8, 555, 1
+	setmetatile 3, 8, METATILE_InsideShip_InTactDoor1_Bottom, 1
 	return
 
 AbandonedShip_HiddenFloorCorridors_EventScript_2389D3:: @ 82389D3
-	setmetatile 6, 8, 555, 1
+	setmetatile 6, 8, METATILE_InsideShip_InTactDoor1_Bottom, 1
 	return
 
 AbandonedShip_HiddenFloorCorridors_EventScript_2389DD:: @ 82389DD
-	setmetatile 3, 3, 538, 0
+	setmetatile 3, 3, METATILE_InsideShip_DoorIndent1, 0
 	return
 
 AbandonedShip_HiddenFloorCorridors_EventScript_2389E7:: @ 82389E7
-	setmetatile 9, 3, 538, 0
+	setmetatile 9, 3, METATILE_InsideShip_DoorIndent1, 0
 	return
 
 AbandonedShip_HiddenFloorCorridors_EventScript_2389F1:: @ 82389F1
-	setmetatile 3, 8, 563, 1
+	setmetatile 3, 8, METATILE_InsideShip_InTactDoor0_Bottom, 1
 	return
 
 AbandonedShip_HiddenFloorCorridors_EventScript_2389FB:: @ 82389FB
-	setmetatile 6, 8, 563, 1
+	setmetatile 6, 8, METATILE_InsideShip_InTactDoor0_Bottom, 1
 	return
 
 AbandonedShip_HiddenFloorCorridors_EventScript_238A05:: @ 8238A05
-	setmetatile 3, 3, 564, 0
+	setmetatile 3, 3, METATILE_InsideShip_DoorIndent0, 0
 	return
 
 AbandonedShip_HiddenFloorCorridors_EventScript_238A0F:: @ 8238A0F
-	setmetatile 9, 3, 564, 0
+	setmetatile 9, 3, METATILE_InsideShip_DoorIndent0, 0
 	return
 
 AbandonedShip_HiddenFloorCorridors_EventScript_238A19:: @ 8238A19

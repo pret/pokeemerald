@@ -17,37 +17,8 @@
 	.include "src/union_room_chat.o"
 	.include "src/berry_crush.o"
 	.include "src/berry_powder.o"
-
-	.align 2
-	@ dodrio_berry_picking
-gUnknown_02022C98: @ 2022C98
-	.space 0x4
-
-gUnknown_02022C9C: @ 2022C9C
-	.space 0x14
-
-gUnknown_02022CB0: @ 2022CB0
-	.space 0x8
-
-gUnknown_02022CB8: @ 2022CB8
-	.space 0x2C
-
-gUnknown_02022CE4: @ 2022CE4
-	.space 0x10
-
-gUnknown_02022CF4: @ 2022CF4
-	.space 0x4
-
-gUnknown_02022CF8: @ 2022CF8
-	.space 0x4
-
-    @ pokemon_jump
-gUnknown_02022CFC: @ 2022CFC
-	.space 0x4
-
-gUnknown_02022D00: @ 2022D00
-	.space 0x4
-
+	.include "src/dodrio_berry_picking.o"
+	.include "src/pokemon_jump.o"
 	.include "src/main_menu.o"
 	.include "src/battle_controllers.o"
 	.include "src/rom_8034C54.o"

@@ -28,11 +28,11 @@ struct ContestWinner *gUnknown_030061C0;
 u16 *gContestPaintingMonPalette;
 
 // IWRAM bss
-IWRAM_DATA u8 gContestPaintingState;
-IWRAM_DATA u16 gContestPaintingMosaicVal;
-IWRAM_DATA u16 gContestPaintingFadeCounter;
-IWRAM_DATA bool8 gUnknown_030011F6;
-IWRAM_DATA u8 gContestPaintingWindowId;
+static u8 gContestPaintingState;
+static u16 gContestPaintingMosaicVal;
+static u16 gContestPaintingFadeCounter;
+static bool8 gUnknown_030011F6;
+static u8 gContestPaintingWindowId;
 
 static void ShowContestPainting(void);
 static void HoldContestPainting(void);
@@ -250,8 +250,7 @@ static void HoldContestPainting(void)
     case 1:
         if ((gMain.newKeys & A_BUTTON) || (gMain.newKeys & B_BUTTON))
         {
-            u8 two = 2;  //needed to make the asm match
-            gContestPaintingState = two;
+            gContestPaintingState++;
             BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
         }
 
@@ -363,7 +362,7 @@ static void VBlankCB_ContestPainting(void)
 
 void sub_81302E8(u16 species, u8 arg1)
 {
-    const void *pal = GetFrontSpritePalFromSpeciesAndPersonality(species, gUnknown_030061C0->trainerId, gUnknown_030061C0->personality);
+    const void *pal = GetMonSpritePalFromSpeciesAndPersonality(species, gUnknown_030061C0->trainerId, gUnknown_030061C0->personality);
     LZDecompressVram(pal, gContestPaintingMonPalette);
     if (!arg1)
     {
@@ -685,7 +684,7 @@ static void sub_8130760(u8 contestResult)
 
     gUnknown_030061A0.var_16 = 2;
     gUnknown_030061A0.var_0 = contestResult;
-    gUnknown_030061A0.var_10 = 0x6010000;
+    gUnknown_030061A0.var_10 = OBJ_VRAM0;
 
     sub_8124F2C(&gUnknown_030061A0);
     sub_81261A4(&gUnknown_030061A0);

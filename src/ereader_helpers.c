@@ -26,17 +26,17 @@ static void sub_81D414C(void);
 static void sub_81D3F1C(u32, u32*, u32*);
 static void sub_81D3F68(void);
 
-IWRAM_DATA struct Unknown030012C8 gUnknown_030012C8;
-IWRAM_DATA u16 gUnknown_030012E0;
-IWRAM_DATA u16 gUnknown_030012E2;
-IWRAM_DATA u16 gUnknown_030012E4;
-IWRAM_DATA u16 gUnknown_030012E6;
-IWRAM_DATA u32 gUnknown_030012E8;
-IWRAM_DATA u16 gUnknown_030012EC;
-IWRAM_DATA u16 gUnknown_030012EE;
-IWRAM_DATA u16 gUnknown_030012F0;
-IWRAM_DATA u16 gUnknown_030012F2;
-IWRAM_DATA u16 gUnknown_030012F4;
+static struct Unknown030012C8 gUnknown_030012C8;
+static u16 gUnknown_030012E0;
+static u16 gUnknown_030012E2;
+static u16 gUnknown_030012E4;
+static u16 gUnknown_030012E6;
+static u32 gUnknown_030012E8;
+static u16 gUnknown_030012EC;
+static u16 gUnknown_030012EE;
+static u16 gUnknown_030012F0;
+static u16 gUnknown_030012F2;
+static u16 gUnknown_030012F4;
 
 extern const u8 gUnknown_08625B6C[][0x148];
 

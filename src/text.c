@@ -197,7 +197,7 @@ bool16 AddTextPrinter(struct TextPrinterTemplate *printerTemplate, u8 speed, voi
         gTempTextPrinter.textSpeed = 0;
         for (j = 0; j < 0x400; ++j)
         {
-            if ((u32)RenderFont(&gTempTextPrinter) == 1)
+            if (RenderFont(&gTempTextPrinter) == 1)
                 break;
         }
 
@@ -462,6 +462,108 @@ u8 GetLastTextColor(u8 colorType)
     }
 }
 
+#ifdef NONMATCHING
+
+#define GLYPH_COPY(fromY_, toY_, fromX_, toX_, unk)                                                                 \
+{                                                                                                                   \
+    u32 i, j, *ptr, toY, fromX, toX, r5, toOrr, bits;                                                               \
+    u8 *dst;                                                                                                        \
+                                                                                                                    \
+    j = fromX_;                                                                                                     \
+    i = fromY_;                                                                                                     \
+    ptr = unk;                                                                                                      \
+    toX = toX_;                                                                                                     \
+    toY = toY_;                                                                                                     \
+    fromX = fromX_;                                                                                                 \
+                                                                                                                    \
+    for (; i < toY; i++)                                                                                            \
+    {                                                                                                               \
+        r5 = *(ptr++);                                                                                              \
+        for (j = fromX; j < toX; j++)                                                                               \
+        {                                                                                                           \
+            toOrr = r5 & 0xF;                                                                                       \
+            if (toOrr)                                                                                              \
+            {                                                                                                       \
+                dst = windowTiles + ((j / 8) * 32) + ((j & 7) / 2) + ((i / 8) * widthOffset) + ((i & 7) * 4);       \
+                bits = ((j & 1) << 2);                                                                              \
+                *dst = ((toOrr << bits) | (*dst & (0xF0 >> bits)));                                                 \
+            }                                                                                                       \
+            r5 >>= 4;                                                                                               \
+        }                                                                                                           \
+    }                                                                                                               \
+}
+
+void CopyGlyphToWindow(struct TextPrinter *textPrinter)
+{
+    struct Window *win;
+    struct WindowTemplate *winTempl;
+    struct Struct_03002F90 *unkStruct;
+    u32 currX, widthOffset, currY;
+    s32 r4, r0;
+    u8 *windowTiles;
+
+    win = &gWindows[textPrinter->printerTemplate.windowId];
+    winTempl = &win->window;
+
+    r4 = (winTempl->width * 8) - textPrinter->printerTemplate.currentX;
+    if (r4 > gUnknown_03002F90.unk80)
+        r4 = gUnknown_03002F90.unk80;
+
+    r0 = (winTempl->height * 8) - textPrinter->printerTemplate.currentY;
+    if (r0 > gUnknown_03002F90.unk81)
+        r0 = gUnknown_03002F90.unk81;
+
+    currX = textPrinter->printerTemplate.currentX;
+    currY = textPrinter->printerTemplate.currentY;
+    unkStruct = &gUnknown_03002F90;
+    windowTiles = win->tileData;
+    widthOffset = winTempl->width * 32;
+
+    if (r4 <= 8)
+    {
+        if (r0 <= 8)
+        {
+            GLYPH_COPY(currY, currY + r0, currX, currX + r4, unkStruct->unk0);
+        }
+        else
+        {
+            u32 temp;
+            GLYPH_COPY(currY, currY + 8, currX, currX + r4, unkStruct->unk0);
+
+            temp = currY + 8;
+            GLYPH_COPY(temp, (temp - 8) + r0, currX, currX + r4, unkStruct->unk40);
+        }
+    }
+    else
+    {
+        if (r0 <= 8)
+        {
+            u32 temp;
+            GLYPH_COPY(currY, currY + r0, currX, currX + 8, unkStruct->unk0);
+
+            temp = currX + 8;
+            GLYPH_COPY(currY, currY + r0, temp, (temp - 8) + r4, unkStruct->unk20);
+        }
+        else
+        {
+            u32 temp;
+            GLYPH_COPY(currY, currY + 8, currX, currX + 8, unkStruct->unk0);
+
+            temp = currX + 8;
+            GLYPH_COPY(currY, currY + 8, temp, temp - 8 + r4, unkStruct->unk20);
+
+            temp = currY + 8;
+            GLYPH_COPY(temp, temp - 8 + r0, currX, currX + 8, unkStruct->unk40);
+            {
+                u32 tempX, tempY;
+                tempX = currX + 8;
+                tempY = currY + 8;
+                GLYPH_COPY(tempY, tempY - 8 + r0, tempX, tempX - 8 + r4, unkStruct->unk60);
+            }
+        }
+    }
+}
+#else
 NAKED
 void CopyGlyphToWindow(struct TextPrinter *x)
 {
@@ -1164,6 +1266,7 @@ _080052AA:\n\
     bx r0\n\
     .pool");
 }
+#endif // NONMATCHING
 
 void ClearTextSpan(struct TextPrinter *textPrinter, u32 width)
 {
