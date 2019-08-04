@@ -20,6 +20,8 @@
 #include "constants/easy_chat.h"
 #include "constants/event_objects.h"
 #include "constants/items.h"
+#include "constants/species.h"
+#include "constants/moves.h"
 
 enum
 {
@@ -339,12 +341,12 @@ static const u16 sQuizLadyPrizes[] =
 // Favor Lady data
 static const u8 *const sFavorLadyDescriptions[] =
 {
-    gText_Slippery,
-    gText_Roundish,
-    gText_Whamish,
-    gText_Shiny,
-    gText_Sticky,
-    gText_Pointy
+    gText_FavorLady_Slippery,
+    gText_FavorLady_Roundish,
+    gText_FavorLady_Whamish,
+    gText_FavorLady_Shiny,
+    gText_FavorLady_Sticky,
+    gText_FavorLady_Pointy
 };
 
 static const u16 sFavorLadyAcceptedItems_Slippery[] =
@@ -356,8 +358,8 @@ static const u16 sFavorLadyAcceptedItems_Slippery[] =
     ITEM_PARALYZE_HEAL,
     ITEM_BURN_HEAL,
     ITEM_BELUE_BERRY,
-    ITEM_LUXURY_BALL,
-    ITEM_TIMER_BALL,
+    ITEM_AWAKENING,
+    ITEM_ICE_HEAL,
     ITEM_REVIVE,
     ITEM_MAX_REVIVE,
     ITEM_ENERGY_POWDER,
@@ -482,20 +484,20 @@ static const u16 sFavorLadyPrizes[] =
 
 static const u8 *const sContestLadyMonNames[] =
 {
-    gText_Handsome,
-    gText_Vinny,
-    gText_Moreme,
-    gText_Ironhard,
-    gText_Muscle
+    gText_ContestLady_Handsome,
+    gText_ContestLady_Vinny,
+    gText_ContestLady_Moreme,
+    gText_ContestLady_Ironhard,
+    gText_ContestLady_Muscle
 };
 
 static const u8 *const sContestLadyCategoryNames[] =
 {
-    gText_Coolness,
-    gText_Beauty,
-    gText_Cuteness,
-    gText_Smartness,
-    gText_Toughness
+    gText_ContestLady_Coolness,
+    gText_ContestLady_Beauty,
+    gText_ContestLady_Cuteness,
+    gText_ContestLady_Smartness,
+    gText_ContestLady_Toughness
 };
 
 static const u8 *const sContestNames[] =
@@ -913,7 +915,7 @@ static u8 BufferAuthorName(void)
     sQuizLadyPtr = &gSaveBlock1Ptr->lilycoveLady.quiz;
     if (sQuizLadyPtr->playerName[0] == EOS)
     {
-        StringCopy7(gStringVar1, gText_Lady2);
+        StringCopy7(gStringVar1, gText_QuizLady_Lady);
         author = QUIZ_AUTHOR_LADY;
     }
     else
