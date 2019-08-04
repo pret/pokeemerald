@@ -2283,7 +2283,7 @@ void sub_8172EF0(u8 battler, struct Pokemon *mon)
     if (IsBattlerSpriteVisible(battler))
     {
         shinyValue = HIHALF(otId) ^ LOHALF(otId) ^ HIHALF(personality) ^ LOHALF(personality);
-        if (shinyValue < 8)
+        if (shinyValue < SHINY_ODDS)
             isShiny = TRUE;
 
         if (isShiny)

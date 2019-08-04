@@ -18,14 +18,7 @@
 	.include "src/berry_crush.o"
 	.include "src/berry_powder.o"
 	.include "src/dodrio_berry_picking.o"
-
-    @ pokemon_jump
-gUnknown_02022CFC: @ 2022CFC
-	.space 0x4
-
-gUnknown_02022D00: @ 2022D00
-	.space 0x4
-
+	.include "src/pokemon_jump.o"
 	.include "src/main_menu.o"
 	.include "src/battle_controllers.o"
 	.include "src/rom_8034C54.o"

@@ -81,7 +81,7 @@ void TaskCloseBagMenu_2(u8);
 u8 AddItemMessageWindow(u8);
 void bag_menu_RemoveBagItem_message_window(u8);
 void set_callback3_to_bag(u8);
-void sub_81ABC54(u8, s16);
+void PrintItemDepositAmount(u8, s16);
 u8 BagMenu_AddWindow(u8);
 u8 GetSwitchBagPocketDirection(void);
 void SwitchBagPocket(u8, s16, u16);
@@ -127,7 +127,7 @@ void sub_81ABAE0(void);
 u8 sub_81AB1F0(u8);
 void sub_81AC23C(u8);
 void BagMenu_MoveCursorCallback(s32 a, bool8 b, struct ListMenu*);
-void PrintItemQuantityPlusGFX(u8 rboxId, int item_index_in_pocket, u8 a);
+void PrintItemQuantityPlusGFX(u8 rboxId, s32 item_index_in_pocket, u8 a);
 void ItemMenu_UseOutOfBattle(u8 taskId);
 void ItemMenu_Toss(u8 taskId);
 void ItemMenu_Register(u8 taskId);
@@ -830,7 +830,7 @@ void BagMenu_MoveCursorCallback(s32 a, bool8 b, struct ListMenu *unused)
     }
 }
 
-void PrintItemQuantityPlusGFX(u8 rboxId, int item_index_in_pocket, u8 a)
+void PrintItemQuantityPlusGFX(u8 rboxId, s32 item_index_in_pocket, u8 a)
 {
     u16 itemId;
     u16 itemQuantity;
@@ -1050,10 +1050,10 @@ void BagMenu_InitListsMenu(u8 taskId)
 
 void sub_81ABC3C(u8 a)
 {
-    sub_81ABC54(BagMenu_AddWindow(a), 1);
+    PrintItemDepositAmount(BagMenu_AddWindow(a), 1);
 }
 
-void sub_81ABC54(u8 a, s16 b)
+void PrintItemDepositAmount(u8 a, s16 b)
 {
     u8 r3 = (gBagPositionStruct.pocket == BERRIES_POCKET) ? 3 : 2;
     ConvertIntToDecimalStringN(gStringVar1, b, 2, r3);
@@ -1704,7 +1704,7 @@ void Task_ChooseHowManyToToss(u8 taskId)
 
     if (AdjustQuantityAccordingToDPadInput(&data[8], data[2]) == TRUE)
     {
-        sub_81ABC54(gBagMenu->unk817, data[8]);
+        PrintItemDepositAmount(gBagMenu->unk817, data[8]);
     }
     else if (gMain.newKeys & A_BUTTON)
     {
@@ -2056,7 +2056,7 @@ void sub_81ADA7C(u8 taskId)
 
     if (AdjustQuantityAccordingToDPadInput(&data[8], data[2]) == TRUE)
     {
-        sub_81ABC54(gBagMenu->unk817, data[8]);
+        PrintItemDepositAmount(gBagMenu->unk817, data[8]);
     }
     else if (gMain.newKeys & A_BUTTON)
     {

@@ -73,7 +73,7 @@ static void CreateRandomEggShardSprite(void);
 static void CreateEggShardSprite(u8 x, u8 y, s16 data1, s16 data2, s16 data3, u8 spriteAnimIndex);
 
 // IWRAM bss
-static IWRAM_DATA struct EggHatchData *sEggHatchData;
+static struct EggHatchData *sEggHatchData;
 
 // rom data
 static const u16 sEggPalette[] = INCBIN_U16("graphics/pokemon/egg/normal.gbapal");

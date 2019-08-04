@@ -186,15 +186,15 @@ static u8 GetAdjustedInitialDirection(struct InitialPlayerAvatarState *playerStr
 static u16 GetCenterScreenMetatileBehavior(void);
 
 // IWRAM bss vars
-IWRAM_DATA static void *sUnusedOverworldCallback;
-IWRAM_DATA static u8 sPlayerTradingStates[4];
+static void *sUnusedOverworldCallback;
+static u8 sPlayerTradingStates[4];
 // This callback is called with a player's key code. It then returns an
 // adjusted key code, effectively intercepting the input before anything
 // can process it.
-IWRAM_DATA static u16 (*sPlayerKeyInterceptCallback)(u32);
-IWRAM_DATA static bool8 sUnknown_03000E18;
-IWRAM_DATA static u8 sRfuKeepAliveTimer;
-IWRAM_DATA static u32 sUnusedVar;
+static u16 (*sPlayerKeyInterceptCallback)(u32);
+static bool8 sUnknown_03000E18;
+static u8 sRfuKeepAliveTimer;
+static u32 sUnusedVar;
 
 // IWRAM common
 u16 *gBGTilemapBuffers1;

@@ -24,10 +24,10 @@ extern u16 gHeldKeyCodeToSend;
 struct UnkRfuStruct_1 gUnknown_03004140;
 struct UnkRfuStruct_2 gUnknown_03005000;
 
-IWRAM_DATA u8 gUnknown_03000D74;
-ALIGNED(4) IWRAM_DATA u8 gUnknown_03000D78[8];
-IWRAM_DATA u8 gUnknown_03000D80[16];
-IWRAM_DATA u16 gUnknown_03000D90[8];
+BSS_DATA u8 gUnknown_03000D74;
+ALIGNED(4) BSS_DATA u8 gUnknown_03000D78[8];
+BSS_DATA u8 gUnknown_03000D80[16];
+BSS_DATA u16 gUnknown_03000D90[8];
 
 EWRAM_DATA u8 gWirelessStatusIndicatorSpriteId = 0;
 EWRAM_DATA ALIGNED(4) struct UnkLinkRfuStruct_02022B14 gUnknown_02022B14 = {};
@@ -2021,6 +2021,8 @@ void sub_800DBF8(u8 *q1, u8 mode)
     }
 }
 
+// File boundary here maybe?
+
 void PkmnStrToASCII(u8 *q1, const u8 *q2)
 {
     s32 i;
@@ -2413,7 +2415,7 @@ void RecordMixTrainerNames(void)
                 }
             }
         }
-        
+
         // Save the connected trainers first, at the top of the list.
         nextSpace = 0;
         for (i = 0; i < GetLinkPlayerCount(); i++)
@@ -2444,7 +2446,7 @@ void RecordMixTrainerNames(void)
                 }
             }
         }
-        
+
         // Finalize the new list, and clean up.
         memcpy(gSaveBlock1Ptr->trainerNameRecords, newRecords, 20 * sizeof(struct TrainerNameRecord));
         free(newRecords);
@@ -3493,7 +3495,7 @@ void sub_800FD14(u16 command)
     }
 }
 
-void sub_800FE50(u16 *a0)
+void sub_800FE50(void *a0)
 {
     if (gSendCmd[0] == 0 && !sub_8011A80())
     {
@@ -5142,4 +5144,3 @@ u32 GetRfuRecvQueueLength(void)
 {
     return gUnknown_03005000.unk_124.unk_8c2;
 }
-
