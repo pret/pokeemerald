@@ -8,7 +8,10 @@ SRCS := jsonproc.cpp
 
 HEADERS := jsonproc.h inja.hpp nlohmann/json.hpp
 
-.PHONY: clean
+.PHONY: all clean
+
+all: jsonproc
+	@:
 
 jsonproc: $(SRCS) $(HEADERS)
 	$(CXX) $(CXXFLAGS) $(INCLUDES) $(SRCS) -o $@ $(LDFLAGS)

@@ -9,7 +9,7 @@ MossdeepCity_StevensHouse_MapScript1_222794: @ 8222794
 	end
 
 MossdeepCity_StevensHouse_EventScript_22279E:: @ 822279E
-	setmetatile 6, 4, 753, 1
+	setmetatile 6, 4, METATILE_GenericBuilding_TableEdge, 1
 	return
 
 MossdeepCity_StevensHouse_OnTransition: @ 82227A8

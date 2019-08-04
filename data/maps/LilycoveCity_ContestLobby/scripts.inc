@@ -408,14 +408,14 @@ LilycoveCity_ContestLobby_EventScript_21A670:: @ 821A670
 	applymovement 1, LilycoveCity_ContestLobby_Movement_21A6F5
 	waitmovement 0
 	playse SE_HASHI
-	setmetatile 12, 2, 545, 1
-	setmetatile 12, 3, 609, 1
+	setmetatile 12, 2, METATILE_Contest_WallShadow, 1
+	setmetatile 12, 3, METATILE_Contest_FloorShadow, 1
 	special DrawWholeMapView
 	applymovement 1, LilycoveCity_ContestLobby_Movement_21A6F9
 	waitmovement 0
 	playse SE_HASHI
-	setmetatile 12, 2, 721, 1
-	setmetatile 12, 3, 729, 1
+	setmetatile 12, 2, METATILE_Contest_CounterFlap_Top, 1
+	setmetatile 12, 3, METATILE_Contest_CounterFlap_Bottom, 1
 	special DrawWholeMapView
 	delay 20
 	applymovement 1, LilycoveCity_ContestLobby_Movement_21A706
@@ -931,14 +931,14 @@ LilycoveCity_ContestLobby_EventScript_21AC49:: @ 821AC49
 	applymovement 2, LilycoveCity_ContestLobby_Movement_21ACDD
 	waitmovement 0
 	playse SE_HASHI
-	setmetatile 17, 2, 545, 1
-	setmetatile 17, 3, 609, 1
+	setmetatile 17, 2, METATILE_Contest_WallShadow, 1
+	setmetatile 17, 3, METATILE_Contest_FloorShadow, 1
 	special DrawWholeMapView
 	applymovement 2, LilycoveCity_ContestLobby_Movement_21ACE1
 	waitmovement 0
 	playse SE_HASHI
-	setmetatile 17, 2, 721, 1
-	setmetatile 17, 3, 729, 1
+	setmetatile 17, 2, METATILE_Contest_CounterFlap_Top, 1
+	setmetatile 17, 3, METATILE_Contest_CounterFlap_Bottom, 1
 	special DrawWholeMapView
 	delay 20
 	applymovement 2, LilycoveCity_ContestLobby_Movement_21ACEF

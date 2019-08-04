@@ -107,8 +107,11 @@ struct Struct203CEC4
     u8 windowId[3];
     u8 actions[8];
     u8 listSize;
-    u16 palBuffer[0xB0];
-    u8 filler[0xA0];
+    // In vanilla Emerald, only the first 0xB0 hwords (0x160 bytes) are actually used.
+    // However, a full 0x100 hwords (0x200 bytes) are allocated.
+    // It is likely that the 0x160 value used below is a constant defined by
+    // bin2c, the utility used to encode the compressed palette data.
+    u16 palBuffer[BG_PLTT_SIZE / sizeof(u16)];
     s16 data[16];
 };
 
@@ -1593,8 +1596,8 @@ static void InitPartyMenu(u8 a, u8 b, u8 c, u8 d, u8 messageId, TaskFunc task, M
         gUnknown_0203CEC4->task = task;
         gUnknown_0203CEC4->exitCallback = NULL;
         gUnknown_0203CEC4->unk8_1 = 0;
-        gUnknown_0203CEC4->unk8_2 = 0xFF;
-        gUnknown_0203CEC4->unk9_0 = 0xFF;
+        gUnknown_0203CEC4->unk8_2 = 0x7F;
+        gUnknown_0203CEC4->unk9_0 = 0x7F;
 
         if (a == 4)
             gUnknown_0203CEC4->unk8_0 = TRUE;
@@ -1817,7 +1820,7 @@ static bool8 AllocPartyMenuBg(void)
 
 static bool8 AllocPartyMiscGfx(void)
 {
-    int sizeout;
+    u32 sizeout;
 
     switch (gUnknown_0203CEC4->data[0])
     {

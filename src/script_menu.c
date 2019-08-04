@@ -1017,8 +1017,8 @@ const u8 *const gUnknown_0858BBEC[] =
 
 EWRAM_DATA u8 gUnknown_02039F90 = 0;
 
-IWRAM_DATA u8 gUnknown_03001124[7];
-IWRAM_DATA u32 filler_0300112c;
+static u8 gUnknown_03001124[7];
+static u32 filler_0300112c;
 
 static void Task_HandleMultichoiceInput(u8);
 static void Task_HandleYesNoInput(u8);

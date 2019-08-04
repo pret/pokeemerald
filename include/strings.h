@@ -485,7 +485,6 @@ extern const u8 gText_CryOf[];
 extern const u8 gText_SizeComparedTo[];
 extern const u8 gText_PokedexRegistration[];
 extern const u8 gText_UnkCtrlF908Clear01[];
-extern const u8 sText_TenDashes2[];
 extern const u8 gText_5MarksPokemon[];
 extern const u8 gText_UnkHeight[];
 extern const u8 gText_UnkWeight[];
@@ -1023,6 +1022,7 @@ extern const u8 gText_PokenavMatchCall_CheckTrainerButtons[];
 extern const u8 gText_PokenavRibbons_MonListButtons[];
 extern const u8 gText_PokenavRibbons_RibbonListButtons[];
 extern const u8 gText_PokenavRibbons_RibbonCheckButtons[];
+extern const u8 gText_Number2[];
 
 extern const u8 gUnknown_085EAD37[];
 extern const u8 gUnknown_085EAD41[];
@@ -2708,11 +2708,78 @@ extern const u8 gText_Symbols[];
 extern const u8 gText_Register2[];
 extern const u8 gText_Exit2[];
 
+// Dodrio Berry Picking
+extern const u8 gText_BerryPickingRecords[];
+extern const u8 gText_BerriesPicked[];
+extern const u8 gText_BerriesInRowFivePlayers[];
+extern const u8 gText_BestScore[];
+extern const u8 gText_1Colon[];
+extern const u8 gText_2Colon[];
+extern const u8 gText_3Colon[];
+extern const u8 gText_4Colon[];
+extern const u8 gText_5Colon[];
+extern const u8 gText_SpacePoints[];
+extern const u8 gText_10P30P50P50P[];
+extern const u8 gText_AnnouncingPrizes[];
+extern const u8 gText_AnnouncingRankings[];
+extern const u8 gText_FirstPlacePrize[];
+extern const u8 gText_CantHoldAnyMore[];
+extern const u8 gText_FilledStorageSpace[];
+extern const u8 gText_BerryPickingResults[];
+extern const u8 gText_WantToPlayAgain[];
+extern const u8 gText_CommunicationStandby3[];
+extern const u8 gText_SomeoneDroppedOut[];
+
+// Pokemon jump
+extern const u8 gText_WantToPlayAgain2[];
+extern const u8 gText_SomeoneDroppedOut2[];
+extern const u8 gText_CommunicationStandby4[];
+extern const u8 gText_AwesomeWonF701F700[];
+extern const u8 gText_FilledStorageSpace2[];
+extern const u8 gText_CantHoldMore[];
+extern const u8 gText_SpacePoints2[];
+extern const u8 gText_SpaceTimes3[];
+extern const u8 gText_PkmnJumpRecords[];
+extern const u8 gText_JumpsInARow[];
+extern const u8 gText_BestScore2[];
+extern const u8 gText_ExcellentsInARow[];
+
 // Pokenav Match Call
 extern const u8 gText_CallCantBeMadeHere[];
 extern const u8 gText_NumberRegistered[];
 extern const u8 gText_NumberOfBattles[];
 extern const u8 gText_Unknown[];
 extern const u8 gText_TrainerCloseBy[];
+
+// pokenav_unk_2
+extern const u8 gUnknown_085EBCC5[];
+extern const u8 gUnknown_085EBCE8[];
+extern const u8 gUnknown_085EBD01[];
+extern const u8 gUnknown_085EBD1C[];
+extern const u8 gUnknown_085EBD34[];
+extern const u8 gUnknown_085EBD83[];
+extern const u8 gUnknown_085EBDA2[];
+extern const u8 gUnknown_085EBDBF[];
+extern const u8 gUnknown_085EBDDB[];
+extern const u8 gUnknown_085EBDEE[];
+extern const u8 gUnknown_085EBE06[];
+extern const u8 gUnknown_085EBE19[];
+extern const u8 gUnknown_085EBE2D[];
+extern const u8 gUnknown_085EBE41[];
+
+// pokenav_unk_4
+extern const u8 gUnknown_085EC017[];
+extern const u8 gUnknown_085EC01C[];
+extern const u8 gUnknown_085EC022[];
+
+// pokenav_unk_10
+extern const u8 gText_RibbonsF700[];
+
+// use_pokeblock
+extern const u8 gText_Coolness[];
+extern const u8 gText_Toughness[];
+extern const u8 gText_Smartness[];
+extern const u8 gText_Cuteness[];
+extern const u8 gText_Beauty3[];
 
 #endif // GUARD_STRINGS_H

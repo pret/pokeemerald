@@ -22,38 +22,38 @@ ShoalCave_LowTideInnerRoom_MapScript1_236F16: @ 8236F16
 ShoalCave_LowTideInnerRoom_EventScript_236F1C:: @ 8236F1C
 	goto_if_set FLAG_RECEIVED_SHOAL_SALT_1, ShoalCave_LowTideInnerRoom_EventScript_236F3D
 	goto_if_set FLAG_SYS_SHOAL_TIDE, ShoalCave_LowTideInnerRoom_EventScript_236F3D
-	setmetatile 31, 8, 856, 1
+	setmetatile 31, 8, METATILE_Cave_ShoalCave_DirtPile_Large, 1
 	goto ShoalCave_LowTideInnerRoom_EventScript_236F3D
 	end
 
 ShoalCave_LowTideInnerRoom_EventScript_236F3D:: @ 8236F3D
 	goto_if_set FLAG_RECEIVED_SHOAL_SALT_2, ShoalCave_LowTideInnerRoom_EventScript_236F5E
 	goto_if_set FLAG_SYS_SHOAL_TIDE, ShoalCave_LowTideInnerRoom_EventScript_236F5E
-	setmetatile 14, 26, 856, 1
+	setmetatile 14, 26, METATILE_Cave_ShoalCave_DirtPile_Large, 1
 	goto ShoalCave_LowTideInnerRoom_EventScript_236F5E
 	end
 
 ShoalCave_LowTideInnerRoom_EventScript_236F5E:: @ 8236F5E
 	goto_if_set FLAG_RECEIVED_SHOAL_SHELL_1, ShoalCave_LowTideInnerRoom_EventScript_236F76
-	setmetatile 41, 20, 857, 1
+	setmetatile 41, 20, METATILE_Cave_ShoalCave_BlueStone_Large, 1
 	goto ShoalCave_LowTideInnerRoom_EventScript_236F76
 	end
 
 ShoalCave_LowTideInnerRoom_EventScript_236F76:: @ 8236F76
 	goto_if_set FLAG_RECEIVED_SHOAL_SHELL_2, ShoalCave_LowTideInnerRoom_EventScript_236F8E
-	setmetatile 41, 10, 857, 1
+	setmetatile 41, 10, METATILE_Cave_ShoalCave_BlueStone_Large, 1
 	goto ShoalCave_LowTideInnerRoom_EventScript_236F8E
 	end
 
 ShoalCave_LowTideInnerRoom_EventScript_236F8E:: @ 8236F8E
 	goto_if_set FLAG_RECEIVED_SHOAL_SHELL_3, ShoalCave_LowTideInnerRoom_EventScript_236FA6
-	setmetatile 6, 9, 857, 1
+	setmetatile 6, 9, METATILE_Cave_ShoalCave_BlueStone_Large, 1
 	goto ShoalCave_LowTideInnerRoom_EventScript_236FA6
 	end
 
 ShoalCave_LowTideInnerRoom_EventScript_236FA6:: @ 8236FA6
 	goto_if_set FLAG_RECEIVED_SHOAL_SHELL_4, ShoalCave_LowTideInnerRoom_EventScript_236FB9
-	setmetatile 16, 13, 857, 1
+	setmetatile 16, 13, METATILE_Cave_ShoalCave_BlueStone_Large, 1
 	return
 
 ShoalCave_LowTideInnerRoom_EventScript_236FB9:: @ 8236FB9
@@ -65,7 +65,7 @@ ShoalCave_LowTideInnerRoom_EventScript_236FBA:: @ 8236FBA
 	giveitem_std ITEM_SHOAL_SHELL
 	compare VAR_RESULT, 0
 	goto_if_eq Common_EventScript_ShowBagIsFull
-	setmetatile 41, 20, 859, 0
+	setmetatile 41, 20, METATILE_Cave_ShoalCave_BlueStone_Small, 0
 	special DrawWholeMapView
 	setflag FLAG_RECEIVED_SHOAL_SHELL_1
 	releaseall
@@ -82,7 +82,7 @@ ShoalCave_LowTideInnerRoom_EventScript_236FF6:: @ 8236FF6
 	giveitem_std ITEM_SHOAL_SHELL
 	compare VAR_RESULT, 0
 	goto_if_eq Common_EventScript_ShowBagIsFull
-	setmetatile 41, 10, 859, 0
+	setmetatile 41, 10, METATILE_Cave_ShoalCave_BlueStone_Small, 0
 	special DrawWholeMapView
 	setflag FLAG_RECEIVED_SHOAL_SHELL_2
 	releaseall
@@ -94,7 +94,7 @@ ShoalCave_LowTideInnerRoom_EventScript_237028:: @ 8237028
 	giveitem_std ITEM_SHOAL_SHELL
 	compare VAR_RESULT, 0
 	goto_if_eq Common_EventScript_ShowBagIsFull
-	setmetatile 6, 9, 859, 0
+	setmetatile 6, 9, METATILE_Cave_ShoalCave_BlueStone_Small, 0
 	special DrawWholeMapView
 	setflag FLAG_RECEIVED_SHOAL_SHELL_3
 	releaseall
@@ -106,7 +106,7 @@ ShoalCave_LowTideInnerRoom_EventScript_23705A:: @ 823705A
 	giveitem_std ITEM_SHOAL_SHELL
 	compare VAR_RESULT, 0
 	goto_if_eq Common_EventScript_ShowBagIsFull
-	setmetatile 16, 13, 859, 0
+	setmetatile 16, 13, METATILE_Cave_ShoalCave_BlueStone_Small, 0
 	special DrawWholeMapView
 	setflag FLAG_RECEIVED_SHOAL_SHELL_4
 	releaseall
@@ -118,7 +118,7 @@ ShoalCave_LowTideInnerRoom_EventScript_23708C:: @ 823708C
 	giveitem_std ITEM_SHOAL_SALT
 	compare VAR_RESULT, 0
 	goto_if_eq Common_EventScript_ShowBagIsFull
-	setmetatile 31, 8, 858, 0
+	setmetatile 31, 8, METATILE_Cave_ShoalCave_DirtPile_Small, 0
 	special DrawWholeMapView
 	setflag FLAG_RECEIVED_SHOAL_SALT_1
 	releaseall
@@ -135,7 +135,7 @@ ShoalCave_LowTideInnerRoom_EventScript_2370C8:: @ 82370C8
 	giveitem_std ITEM_SHOAL_SALT
 	compare VAR_RESULT, 0
 	goto_if_eq Common_EventScript_ShowBagIsFull
-	setmetatile 14, 26, 858, 0
+	setmetatile 14, 26, METATILE_Cave_ShoalCave_DirtPile_Small, 0
 	special DrawWholeMapView
 	setflag FLAG_RECEIVED_SHOAL_SALT_2
 	releaseall

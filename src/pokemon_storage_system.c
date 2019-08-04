@@ -443,7 +443,7 @@ enum
 #define TAG_TILE_1          0x1
 
 // IWRAM bss
-IWRAM_DATA static u32 gUnknown_03000F78[98];
+static u32 gUnknown_03000F78[98];
 
 // EWRAM DATA
 EWRAM_DATA static u8 sPreviousBoxOption = 0;
@@ -464,6 +464,9 @@ EWRAM_DATA static u8 sMovingMonOrigBoxPos = 0;
 EWRAM_DATA static bool8 sCanOnlyMove = 0;
 
 // This file's functions.
+#if !defined(NONMATCHING) && MODERN
+#define static
+#endif
 static void CreatePCMenu(u8 whichMenu, s16 *windowIdPtr);
 static void Cb2_EnterPSS(u8 boxOption);
 static u8 GetCurrentBoxOption(void);
@@ -6824,7 +6827,7 @@ static void SetCursorMonData(void *pokemon, u8 mode)
             sPSSData->cursorMonLevel = GetLevelFromBoxMonExp(boxMon);
             sPSSData->cursorMonMarkings = GetBoxMonData(boxMon, MON_DATA_MARKINGS);
             sPSSData->cursorMonPersonality = GetBoxMonData(boxMon, MON_DATA_PERSONALITY);
-            sPSSData->cursorMonPalette = GetFrontSpritePalFromSpeciesAndPersonality(sPSSData->cursorMonSpecies, otId, sPSSData->cursorMonPersonality);
+            sPSSData->cursorMonPalette = GetMonSpritePalFromSpeciesAndPersonality(sPSSData->cursorMonSpecies, otId, sPSSData->cursorMonPersonality);
             gender = GetGenderFromSpeciesAndPersonality(sPSSData->cursorMonSpecies, sPSSData->cursorMonPersonality);
             sPSSData->cursorMonItem = GetBoxMonData(boxMon, MON_DATA_HELD_ITEM);
         }
