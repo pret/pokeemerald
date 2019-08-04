@@ -734,7 +734,7 @@ struct RecordMixingDayCareMail
 enum
 {
     LILYCOVE_LADY_QUIZ,
-    LILYCOVE_LADY_FAVOUR,
+    LILYCOVE_LADY_FAVOR,
     LILYCOVE_LADY_CONTEST
 };
 
@@ -782,7 +782,7 @@ struct LilycoveLadyContest
 typedef union // 3b58
 {
     struct LilycoveLadyQuiz quiz;
-    struct LilycoveLadyFavour favour;
+    struct LilycoveLadyFavor favor;
     struct LilycoveLadyContest contest;
     u8 id;
     u8 pad[0x40];
