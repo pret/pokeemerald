@@ -275,6 +275,7 @@ void FreeSpriteOamMatrix(struct Sprite *sprite);
 void DestroySpriteAndFreeResources(struct Sprite *sprite);
 void sub_800142C(u32 a1, u32 a2, u16 *a3, u16 a4, u32 a5);
 void AnimateSprite(struct Sprite *sprite);
+void sub_8007E18(struct Sprite* sprite, s16 a2, s16 a3);
 void StartSpriteAnim(struct Sprite *sprite, u8 animNum);
 void StartSpriteAnimIfDifferent(struct Sprite *sprite, u8 animNum);
 void SeekSpriteAnim(struct Sprite *sprite, u8 animCmdIndex);

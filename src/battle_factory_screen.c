@@ -227,9 +227,9 @@ static EWRAM_DATA u8 *sSwapMenuTilemapBuffer = NULL;
 static EWRAM_DATA u8 *sSwapMonCardBgTilemapBuffer = NULL;
 
 // IWRAM bss
-static IWRAM_DATA struct FactorySelectMonsStruct *sFactorySelectScreen;
-static IWRAM_DATA void (*sSwap_CurrentTableFunc)(u8 taskId);
-static IWRAM_DATA struct FactorySwapMonsStruct *sFactorySwapScreen;
+static struct FactorySelectMonsStruct *sFactorySelectScreen;
+static void (*sSwap_CurrentTableFunc)(u8 taskId);
+static struct FactorySwapMonsStruct *sFactorySwapScreen;
 
 // IWRAM common
 u8 (*gUnknown_030062E8)(void);
@@ -1742,7 +1742,7 @@ static void Select_CopyMonsToPlayerParty(void)
                 gPlayerParty[i] = sFactorySelectScreen->mons[j].monData;
                 gSaveBlock2Ptr->frontier.rentalMons[i].monId = sFactorySelectScreen->mons[j].monSetId;
                 gSaveBlock2Ptr->frontier.rentalMons[i].personality = GetMonData(&gPlayerParty[i], MON_DATA_PERSONALITY, NULL);
-                gSaveBlock2Ptr->frontier.rentalMons[i].abilityBit = GetBoxMonData(&gPlayerParty[i].box, MON_DATA_ALT_ABILITY, NULL);
+                gSaveBlock2Ptr->frontier.rentalMons[i].abilityNum = GetBoxMonData(&gPlayerParty[i].box, MON_DATA_ABILITY_NUM, NULL);
                 gSaveBlock2Ptr->frontier.rentalMons[i].ivs = GetBoxMonData(&gPlayerParty[i].box, MON_DATA_ATK_IV, NULL);
                 break;
             }
@@ -2266,7 +2266,7 @@ static void CopySwappedMonData(void)
     gSaveBlock2Ptr->frontier.rentalMons[sFactorySwapScreen->playerMonId].monId = gSaveBlock2Ptr->frontier.rentalMons[sFactorySwapScreen->enemyMonId + 3].monId;
     gSaveBlock2Ptr->frontier.rentalMons[sFactorySwapScreen->playerMonId].ivs = gSaveBlock2Ptr->frontier.rentalMons[sFactorySwapScreen->enemyMonId + 3].ivs;
     gSaveBlock2Ptr->frontier.rentalMons[sFactorySwapScreen->playerMonId].personality = GetMonData(&gEnemyParty[sFactorySwapScreen->enemyMonId], MON_DATA_PERSONALITY, NULL);
-    gSaveBlock2Ptr->frontier.rentalMons[sFactorySwapScreen->playerMonId].abilityBit = GetBoxMonData(&gEnemyParty[sFactorySwapScreen->enemyMonId].box, MON_DATA_ALT_ABILITY, NULL);
+    gSaveBlock2Ptr->frontier.rentalMons[sFactorySwapScreen->playerMonId].abilityNum = GetBoxMonData(&gEnemyParty[sFactorySwapScreen->enemyMonId].box, MON_DATA_ABILITY_NUM, NULL);
 }
 
 static void Task_FromSwapScreenToSummaryScreen(u8 taskId)

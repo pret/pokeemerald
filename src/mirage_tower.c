@@ -18,6 +18,7 @@
 #include "constants/maps.h"
 #include "constants/rgb.h"
 #include "constants/songs.h"
+#include "constants/metatile_labels.h"
 
 struct MirageTowerPulseBlend {
     u8 taskId;
@@ -109,24 +110,24 @@ const struct SpriteSheet gMirageTowerCeilingCrumbleSpriteSheets[] =
 
 static const struct MetatileCoords sInvisibleMirageTowerMetatiles[] =
 {
-    {18, 53, 0x251},
-    {19, 53, 0x251},
-    {20, 53, 0x251},
-    {18, 54, 0x251},
-    {19, 54, 0x251},
-    {20, 54, 0x251},
-    {18, 55, 0x251},
-    {19, 55, 0x251},
-    {20, 55, 0x251},
-    {18, 56, 0x251},
-    {19, 56, 0x251},
-    {20, 56, 0x251},
-    {18, 57, 0x259},
-    {19, 57, 0x259},
-    {20, 57, 0x259},
-    {18, 58, 0x121},
-    {19, 58, 0x121},
-    {20, 58, 0x121},
+    {18, 53, METATILE_ID(Mauville, DeepSand_Center)},
+    {19, 53, METATILE_ID(Mauville, DeepSand_Center)},
+    {20, 53, METATILE_ID(Mauville, DeepSand_Center)},
+    {18, 54, METATILE_ID(Mauville, DeepSand_Center)},
+    {19, 54, METATILE_ID(Mauville, DeepSand_Center)},
+    {20, 54, METATILE_ID(Mauville, DeepSand_Center)},
+    {18, 55, METATILE_ID(Mauville, DeepSand_Center)},
+    {19, 55, METATILE_ID(Mauville, DeepSand_Center)},
+    {20, 55, METATILE_ID(Mauville, DeepSand_Center)},
+    {18, 56, METATILE_ID(Mauville, DeepSand_Center)},
+    {19, 56, METATILE_ID(Mauville, DeepSand_Center)},
+    {20, 56, METATILE_ID(Mauville, DeepSand_Center)},
+    {18, 57, METATILE_ID(Mauville, DeepSand_BottomMid)},
+    {19, 57, METATILE_ID(Mauville, DeepSand_BottomMid)},
+    {20, 57, METATILE_ID(Mauville, DeepSand_BottomMid)},
+    {18, 58, METATILE_ID(General, SandPit_Center)},
+    {19, 58, METATILE_ID(General, SandPit_Center)},
+    {20, 58, METATILE_ID(General, SandPit_Center)},
 };
 
 static const union AnimCmd gSpriteAnim_8617DEC[] =
@@ -257,7 +258,7 @@ EWRAM_DATA static struct Struct203CF10 *sUnknown_0203CF10 = NULL;
 EWRAM_DATA static struct BgRegOffsets *sBgShakeOffsets = NULL;
 EWRAM_DATA struct MirageTowerPulseBlend *sMirageTowerPulseBlend = NULL;
 
-IWRAM_DATA static u16 gUnknown_030012A8[8];
+static u16 gUnknown_030012A8[8];
 
 bool8 IsMirageTowerVisible(void)
 {

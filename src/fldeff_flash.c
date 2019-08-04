@@ -219,8 +219,8 @@ static void sub_8137404(u8 taskId)
 static void sub_8137420(u8 taskId)
 {
     SetGpuReg(REG_OFFSET_DISPCNT, 0);
-    LZ77UnCompVram(gCaveTransitionTiles, (void *)0x600C000);
-    LZ77UnCompVram(gCaveTransitionTilemap, (void *)0x600F800);
+    LZ77UnCompVram(gCaveTransitionTiles, (void *)(VRAM + 0xC000));
+    LZ77UnCompVram(gCaveTransitionTilemap, (void *)(VRAM + 0xF800));
     LoadPalette(gCaveTransitionPalette_White, 0xE0, 0x20);
     LoadPalette(gUnknown_085B28A0, 0xE0, 0x10);
     SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT1_BG0
@@ -304,8 +304,8 @@ static void sub_81375BC(u8 taskId)
 static void sub_81375D8(u8 taskId)
 {
     SetGpuReg(REG_OFFSET_DISPCNT, 0);
-    LZ77UnCompVram(gCaveTransitionTiles, (void *)0x600C000);
-    LZ77UnCompVram(gCaveTransitionTilemap, (void *)0x600F800);
+    LZ77UnCompVram(gCaveTransitionTiles, (void *)(VRAM + 0xC000));
+    LZ77UnCompVram(gCaveTransitionTilemap, (void *)(VRAM + 0xF800));
     SetGpuReg(REG_OFFSET_BLDCNT, 0);
     SetGpuReg(REG_OFFSET_BLDALPHA, 0);
     SetGpuReg(REG_OFFSET_BLDY, 0);

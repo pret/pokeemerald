@@ -55,7 +55,10 @@ struct BerryCrushGame_138_C
 
 struct BerryCrushGame_138
 {
-    u8 filler0[0xC];
+    u8 filler0[0x4];
+    u16 unk4;
+    u16 unk6;
+    u16 unk8;
     struct BerryCrushGame_138_C *unkC[5];
     u8 filler1C[0x4];
     struct Sprite *unk24[5];
@@ -105,7 +108,7 @@ struct BerryCrushGame
     u8 filler26[0x2];
     u16 unk28;
     u16 unk2A;
-    u16 unk2C;
+    s16 unk2C;
     u8 filler2E[0x8];
     u8 unk36[0xA];
     struct BerryCrushGame_40 unk40;
@@ -149,6 +152,8 @@ extern const struct SpriteTemplate gUnknown_082F436C;
 extern const u16 gUnknown_082F41E8[];
 extern const s8 gUnknown_082F41CC[][2];
 extern const s8 gUnknown_082F41D2[][2];
+extern const u32 gUnknown_082F334C[];
+extern const u8 gUnknown_082F32D8[][3];
 
 struct BerryCrushGame *sub_8020C00(void)
 {
@@ -700,76 +705,121 @@ void sub_80216A8(struct BerryCrushGame *arg0)
     }
 }
 
-// void sub_80216E0(struct BerryCrushGame *arg0, struct BerryCrushGame_138 *arg1)
-// {
-//     u8 sp4;
-//     struct BerryCrushGame_4E *var4E;
-//     u8 i;
-//     u16 var0;
+void sub_80216E0(struct BerryCrushGame *arg0, struct BerryCrushGame_138 *arg1)
+{
+    u8 sp4;
+    struct BerryCrushGame_4E *var4E;
+    u8 i;
+    u16 var, var2;
 
-//     sp4 = 0;
-//     var4E = &arg0->unk40.unkE;
-//     for (i = 0; i < arg0->unk9; i++)
-//     {
-//         var0 = var4E->unkA >> (i * 3);
-//         var0 &= 7;
-//         if (var0)
-//         {
-//             int offset;
-//             sp4++;
-//             if (var0 & 0x4)
-//                 StartSpriteAnim(arg1->unk24[i], 1);
-//             else
-//                 StartSpriteAnim(arg1->unk24[i], 0);
+    sp4 = 0;
+    var4E = &arg0->unk40.unkE;
+    for (i = 0; i < arg0->unk9; i++)
+    {
+        var = var4E->unkA >> (i * 3);
+        var &= 7;
+        if (var)
+        {
+            sp4++;
+            if (var & 0x4)
+                StartSpriteAnim(arg1->unk24[i], 1);
+            else
+                StartSpriteAnim(arg1->unk24[i], 0);
 
-//             arg1->unk24[i]->invisible = 0;
-//             arg1->unk24[i]->animPaused = 0;
-//             offset = (var0 % 4) - 1;
-//             arg1->unk24[i]->pos2.x = gUnknown_082F41CC[offset][0];
-//             arg1->unk24[i]->pos2.y = gUnknown_082F41CC[offset][1];
-//         }
-//     }
+            arg1->unk24[i]->invisible = 0;
+            arg1->unk24[i]->animPaused = 0;
+            arg1->unk24[i]->pos2.x = gUnknown_082F41CC[(var % 4) - 1][0];
+            arg1->unk24[i]->pos2.y = gUnknown_082F41CC[(var % 4) - 1][1];
+        }
+    }
 
-//     if (sp4 == 0)
-//     {
-//         arg0->unk25_2 = 0;
-//     }
-//     else
-//     {
-//         u8 var3 = arg0->unk28 % 3;
-//         u16 var2 = var3;
-//         for (i = 0; i < var4E->unkC * 2 + 3; i++)
-//         {
-//             if (arg1->unk4C[i]->invisible)
-//             {
-//                 arg1->unk4C[i]->callback = sub_8022B28;
-//                 arg1->unk4C[i]->pos1.x = gUnknown_082F41D2[i][0] + 120;
-//                 arg1->unk4C[i]->pos1.y = gUnknown_082F41D2[i][1] + (136 - var2 * 4);
-//                 arg1->unk4C[i]->pos2.x = gUnknown_082F41D2[i][0] / (var3 * 4);
-//                 arg1->unk4C[i]->pos2.y = gUnknown_082F41D2[i][1];
-//                 if (var4E->unk4 & 0x2)
-//                     StartSpriteAnim(arg1->unk4C[i], 1);
-//                 else
-//                     StartSpriteAnim(arg1->unk4C[i], 0);
+    if (sp4 == 0)
+    {
+        arg0->unk25_2 = 0;
+    }
+    else
+    {
+        var = (u8)(arg0->unk28 % 3);
+        var2 = var;
+        for (i = 0; i < var4E->unkC * 2 + 3; i++)
+        {
+            if (arg1->unk4C[i]->invisible)
+            {
+                arg1->unk4C[i]->callback = sub_8022B28;
+                arg1->unk4C[i]->pos1.x = gUnknown_082F41D2[i][0] + 120;
+                arg1->unk4C[i]->pos1.y = gUnknown_082F41D2[i][1] + 136 - (var * 4);
+                arg1->unk4C[i]->pos2.x = gUnknown_082F41D2[i][0] + (gUnknown_082F41D2[i][0] / (var2 * 4));
+                arg1->unk4C[i]->pos2.y = gUnknown_082F41D2[i][1];
+                if (var4E->unk4 & 0x2)
+                    StartSpriteAnim(arg1->unk4C[i], 1);
+                else
+                    StartSpriteAnim(arg1->unk4C[i], 0);
 
-//                 var2++;
-//                 if (var2 > 3)
-//                     var2 = 0;
-//             }
-//         }
+                var++;
+                if (var > 3)
+                    var = 0;
+            }
+        }
 
-//         if (arg0->unk25_2)
-//         {
-//             arg0->unk25_2 = 0;
-//         }
-//         else
-//         {
-//             if (sp4 == 1)
-//                 PlaySE(SE_TOY_DANGO);
-//             else
-//                 PlaySE(SE_TOY_KABE);
+        if (arg0->unk25_2)
+        {
+            arg0->unk25_2 = 0;
+        }
+        else
+        {
+            if (sp4 == 1)
+                PlaySE(SE_TOY_DANGO);
+            else
+                PlaySE(SE_TOY_KABE);
 
-//             arg0->unk25_2 = 1;
-//         }
-//     }
-// }
+            arg0->unk25_2 = 1;
+        }
+    }
+}
+
+bool32 sub_80218D4(struct BerryCrushGame *arg0, struct BerryCrushGame_138 *arg1)
+{
+    u8 i;
+
+    for (i = 0; i < arg0->unk9; i++)
+    {
+        if (!arg1->unk24[i]->invisible)
+            return FALSE;
+    }
+
+    for (i = 0; i < 11; i++)
+    {
+        if (!arg1->unk4C[i]->invisible)
+            return FALSE;
+    }
+
+    if (arg0->unk2C != 0)
+        arg0->unk2C = 0;
+
+    return TRUE;
+}
+
+void sub_8021944(struct BerryCrushGame_138 *arg0, u16 arg1)
+{
+    u8 i = 0;
+    u32 r7 = 0;
+    s16 r3 = 0;
+
+    arg0->unk4 = arg1 / 3600;
+    arg0->unk6 = (arg1 % 3600) / 60;
+    r3 = sub_8151534((arg1 % 60) << 8, 4);
+
+    for (i = 0; i < 8; i++)
+    {
+        if ((r3 >> (7 - i)) & 1)
+            r7 += gUnknown_082F334C[i];
+    }
+
+    arg0->unk8 = r7 / 1000000;
+}
+
+void sub_80219C8(u8 windowId, u8 left, u8 colorId, const u8 *string)
+{
+    left = (left * 4) - (GetStringWidth(2, string, -1) / 2u);
+    AddTextPrinterParameterized3(windowId, 2, left, 0, gUnknown_082F32D8[colorId], 0, string);
+}

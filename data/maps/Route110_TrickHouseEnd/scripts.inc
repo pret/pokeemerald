@@ -37,7 +37,7 @@ Route110_TrickHouseEnd_EventScript_26ACFF:: @ 826ACFF
 	end
 
 Route110_TrickHouseEnd_EventScript_26AD0D:: @ 826AD0D
-	setmetatile 10, 1, 539, 1
+	setmetatile 10, 1, METATILE_GenericBuilding_TrickHouse_Door_Closed, 1
 	return
 
 Route110_TrickHouseEnd_EventScript_26AD17:: @ 826AD17

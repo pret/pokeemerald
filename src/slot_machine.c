@@ -350,7 +350,7 @@ static EWRAM_DATA struct SpriteSheet *sUnknown_0203AB30 = NULL;
 static EWRAM_DATA struct SlotMachineEwramStruct *sSlotMachine = NULL;
 
 // IWRAM bss
-static IWRAM_DATA struct SpriteFrameImage *gUnknown_03001188[26];
+static struct SpriteFrameImage *gUnknown_03001188[26];
 
 // Const rom data.
 extern const struct UnkStruct1 *const gUnknown_083ED048[];

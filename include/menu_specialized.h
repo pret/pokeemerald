@@ -34,6 +34,7 @@ void sub_81D1EC0(void);
 void sub_81D1D04(u8 a0);
 void sub_81D1ED4(struct UnknownStruct_81D1ED4 *a0);
 void sub_81D2108(struct UnknownStruct_81D1ED4 *arg0);
+void sub_81D21DC(u8 bg);
 void sub_81D20AC(struct UnknownStruct_81D1ED4 *arg0);
 void sub_81D2230(struct UnknownStruct_81D1ED4 *arg0);
 bool8 sub_81D20BC(struct UnknownStruct_81D1ED4 *arg0);

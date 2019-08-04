@@ -106,7 +106,7 @@ static void sub_80C438C(u8);
 static void sub_80C4FF0(void);
 static void sub_80C4550(u16*);
 static void sub_80C45C0(u16*);
-static void sub_80C4630(void);
+static void TrainerCard_PrintStarsAndBadgesOnCard(void);
 static void PrintTimeOnCard(void);
 static void sub_80C4918(void);
 static bool8 sub_80C4940(void);
@@ -117,7 +117,7 @@ static bool8 HasAllFrontierSymbols(void);
 static u8 GetRubyTrainerStars(struct TrainerCard*);
 static u16 GetCaughtMonsCount(void);
 static void SetPlayerCardData(struct TrainerCard*, u8);
-static void sub_80C3020(struct TrainerCard*);
+static void TrainerCard_GenerateCardForLinkPlayer(struct TrainerCard*);
 static u8 VersionToCardType(u8);
 static void SetDataFromTrainerCard(void);
 static void HandleGpuRegs(void);
@@ -141,7 +141,7 @@ static void PrintBerryCrushStringOnCard(void);
 static void PrintPokeblockStringOnCard(void);
 static void PrintUnionStringOnCard(void);
 static void PrintContestStringOnCard(void);
-static void sub_80C4140(void);
+static void TrainerCard_PrintPokemonIconsOnCard(void);
 static void PrintBattleFacilityStringOnCard(void);
 static void sub_80C42A4(void);
 static void PrintAllVariableNumsOnCardPage2(void);
@@ -179,17 +179,17 @@ static const u16 gEmeraldTrainerCard3Star_Pal[] = INCBIN_U16("graphics/trainer_c
 static const u16 gFireRedTrainerCard3Star_Pal[] = INCBIN_U16("graphics/trainer_card/three_stars_fr.gbapal");
 static const u16 gEmeraldTrainerCard4Star_Pal[] = INCBIN_U16("graphics/trainer_card/four_stars.gbapal");
 static const u16 gFireRedTrainerCard4Star_Pal[] = INCBIN_U16("graphics/trainer_card/four_stars_fr.gbapal");
-static const u16 gUnknown_0856F4AC[] = INCBIN_U16("graphics/trainer_card/female_bg.gbapal");
-static const u16 gUnknown_0856F4CC[] = INCBIN_U16("graphics/trainer_card/female_bg_fr.gbapal");
-static const u16 gUnknown_0856F4EC[] = INCBIN_U16("graphics/trainer_card/badges.gbapal");
-static const u16 gUnknown_0856F50C[] = INCBIN_U16("graphics/trainer_card/badges_fr.gbapal");
+static const u16 sEmeraldTrainerCardFemaleBackground_Pal[] = INCBIN_U16("graphics/trainer_card/female_bg.gbapal");
+static const u16 sFireRedTrainerCardFemaleBackground_Pal[] = INCBIN_U16("graphics/trainer_card/female_bg_fr.gbapal");
+static const u16 sEmeraldTrainerCardBadges_Pal[] = INCBIN_U16("graphics/trainer_card/badges.gbapal");
+static const u16 sFireRedTrainerCardBadges_Pal[] = INCBIN_U16("graphics/trainer_card/badges_fr.gbapal");
 static const u16 gUnknown_0856F52C[] = INCBIN_U16("graphics/trainer_card/gold.gbapal");
 static const u16 gUnknown_0856F54C[] = INCBIN_U16("graphics/trainer_card/stickers_fr1.gbapal");
 static const u16 gUnknown_0856F56C[] = INCBIN_U16("graphics/trainer_card/stickers_fr2.gbapal");
 static const u16 gUnknown_0856F58C[] = INCBIN_U16("graphics/trainer_card/stickers_fr3.gbapal");
 static const u16 gUnknown_0856F5AC[] = INCBIN_U16("graphics/trainer_card/stickers_fr4.gbapal");
-static const u32 gUnknown_0856F5CC[] = INCBIN_U32("graphics/trainer_card/badges.4bpp.lz");
-static const u32 gUnknown_0856F814[] = INCBIN_U32("graphics/trainer_card/badges_fr.4bpp.lz");
+static const u32 sEmeraldTrainerCardBadges_Tile[] = INCBIN_U32("graphics/trainer_card/badges.4bpp.lz");
+static const u32 sFireRedTrainerCardBadges_Tile[] = INCBIN_U32("graphics/trainer_card/badges_fr.4bpp.lz");
 
 static const struct BgTemplate gUnknown_0856FAB4[4] =
 {
@@ -376,7 +376,7 @@ static void sub_80C2760(u8 taskId)
         sData->var_0++;
         break;
     case 6:
-        sub_80C4630();
+        TrainerCard_PrintStarsAndBadgesOnCard();
         sData->var_0++;
         break;
     case 7:
@@ -528,9 +528,9 @@ static bool8 LoadCardGfx(void)
         break;
     case 3:
         if (sData->cardType != CARD_TYPE_FRLG)
-            LZ77UnCompWram(gUnknown_0856F5CC, sData->var_13A8);
+            LZ77UnCompWram(sEmeraldTrainerCardBadges_Tile, sData->var_13A8);
         else
-            LZ77UnCompWram(gUnknown_0856F814, sData->var_13A8);
+            LZ77UnCompWram(sFireRedTrainerCardBadges_Tile, sData->var_13A8);
         break;
     case 4:
         if (sData->cardType != CARD_TYPE_FRLG)
@@ -722,7 +722,7 @@ static void SetPlayerCardData(struct TrainerCard *trainerCard, u8 cardType)
     }
 }
 
-static void sub_80C3020(struct TrainerCard *trainerCard)
+static void TrainerCard_GenerateCardForLinkPlayer(struct TrainerCard *trainerCard)
 {
     memset(trainerCard, 0, sizeof(struct TrainerCard));
     trainerCard->version = GAME_VERSION;
@@ -733,9 +733,9 @@ static void sub_80C3020(struct TrainerCard *trainerCard)
         trainerCard->stars++;
 
     if (trainerCard->gender == FEMALE)
-        trainerCard->var_4F = gUnknown_08329D54[(trainerCard->trainerId % 8) + 8];
+        trainerCard->var_4F = gLinkPlayerFacilityClasses[(trainerCard->trainerId % 8) + 8];
     else
-        trainerCard->var_4F = gUnknown_08329D54[trainerCard->trainerId % 8];
+        trainerCard->var_4F = gLinkPlayerFacilityClasses[trainerCard->trainerId % 8];
 }
 
 void TrainerCard_GenerateCardForPlayer(struct TrainerCard *trainerCard)
@@ -749,9 +749,9 @@ void TrainerCard_GenerateCardForPlayer(struct TrainerCard *trainerCard)
         trainerCard->stars++;
 
     if (trainerCard->gender == FEMALE)
-        trainerCard->var_4F = gUnknown_08329D54[(trainerCard->trainerId % 8) + 8];
+        trainerCard->var_4F = gLinkPlayerFacilityClasses[(trainerCard->trainerId % 8) + 8];
     else
-        trainerCard->var_4F = gUnknown_08329D54[trainerCard->trainerId % 8];
+        trainerCard->var_4F = gLinkPlayerFacilityClasses[trainerCard->trainerId % 8];
 }
 
 void CopyTrainerCardData(struct TrainerCard *dst, u16 *src, u8 gameVersion)
@@ -938,7 +938,7 @@ static bool8 PrintStringsOnCardPage2(void)
         PrintContestStringOnCard();
         break;
     case 6:
-        sub_80C4140();
+        TrainerCard_PrintPokemonIconsOnCard();
         PrintBattleFacilityStringOnCard();
         break;
     case 7:
@@ -1300,7 +1300,7 @@ static void PrintBattleFacilityStringOnCard(void)
     }
 }
 
-static void sub_80C4140(void)
+static void TrainerCard_PrintPokemonIconsOnCard(void)
 {
     u8 i;
     u8 buffer[] = {0x05, 0x06, 0x07, 0x08, 0x09, 0x0a};
@@ -1312,7 +1312,7 @@ static void sub_80C4140(void)
         {
             if (sData->trainerCard.monSpecies[i])
             {
-                u8 monSpecies = sub_80D30A0(sData->trainerCard.monSpecies[i]);
+                u8 monSpecies = GetMonIconPaletteIndexFromSpecies(sData->trainerCard.monSpecies[i]);
                 WriteSequenceToBgTilemapBuffer(3, 16 * i + 224, buffer2[i] + 3, 15, 4, 4, buffer[monSpecies], 1);
             }
         }
@@ -1392,16 +1392,16 @@ static u8 SetCardBgsAndPals(void)
         if (sData->cardType != CARD_TYPE_FRLG)
         {
             LoadPalette(gEmeraldTrainerCardStarPals[sData->trainerCard.stars], 0, 96);
-            LoadPalette(gUnknown_0856F4EC, 48, 32);
+            LoadPalette(sEmeraldTrainerCardBadges_Pal, 48, 32);
             if (sData->trainerCard.gender)
-                LoadPalette(gUnknown_0856F4AC, 16, 32);
+                LoadPalette(sEmeraldTrainerCardFemaleBackground_Pal, 16, 32);
         }
         else
         {
             LoadPalette(gFireRedTrainerCardStarPals[sData->trainerCard.stars], 0, 96);
-            LoadPalette(gUnknown_0856F50C, 48, 32);
+            LoadPalette(sFireRedTrainerCardBadges_Pal, 48, 32);
             if (sData->trainerCard.gender)
-                LoadPalette(gUnknown_0856F4CC, 16, 32);
+                LoadPalette(sFireRedTrainerCardFemaleBackground_Pal, 16, 32);
         }
         LoadPalette(gUnknown_0856F52C, 64, 32);
         break;
@@ -1458,7 +1458,7 @@ static void sub_80C45C0(u16* ptr)
 
 static const u8 gUnknown_0856FB78[] = {7, 7};
 
-static void sub_80C4630(void)
+static void TrainerCard_PrintStarsAndBadgesOnCard(void)
 {
     s16 i, x;
     u16 tileNum = 192;
@@ -1684,7 +1684,7 @@ static bool8 sub_80C4C1C(struct Task* task)
         sub_80C438C(2);
         sub_80C4550(sData->var_EF8);
         sub_80C45C0(sData->var_598);
-        sub_80C4630();
+        TrainerCard_PrintStarsAndBadgesOnCard();
     }
     sub_80C438C(1);
     sData->var_8 ^= 1;
@@ -1764,7 +1764,7 @@ void ShowPlayerTrainerCard(void (*callback)(void))
         sData->isLink = FALSE;
 
     sData->language = GAME_LANGUAGE;
-    sub_80C3020(&sData->trainerCard);
+    TrainerCard_GenerateCardForLinkPlayer(&sData->trainerCard);
     SetMainCallback2(CB2_InitTrainerCard);
 }
 

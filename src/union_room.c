@@ -1,53 +1,54 @@
 #include "global.h"
-#include "window.h"
+#include "alloc.h"
+#include "battle.h"
+#include "berry_crush.h"
 #include "bg.h"
-#include "random.h"
-#include "string_util.h"
-#include "task.h"
+#include "cable_club.h"
+#include "data.h"
+#include "decompress.h"
+#include "dodrio_berry_picking.h"
+#include "dynamic_placeholder_text_util.h"
+#include "easy_chat.h"
 #include "event_data.h"
+#include "event_obj_lock.h"
+#include "field_control_avatar.h"
+#include "field_player_avatar.h"
+#include "field_screen_effect.h"
+#include "field_weather.h"
+#include "international_string_util.h"
+#include "librfu.h"
 #include "link.h"
 #include "link_rfu.h"
-#include "librfu.h"
-#include "alloc.h"
-#include "menu.h"
 #include "list_menu.h"
+#include "load_save.h"
+#include "menu.h"
 #include "menu_helpers.h"
+#include "mevent.h"
+#include "mystery_gift.h"
+#include "overworld.h"
+#include "palette.h"
+#include "party_menu.h"
+#include "pokemon_jump.h"
+#include "random.h"
 #include "script.h"
+#include "script_pokemon_util_80F87D8.h"
 #include "sound.h"
-#include "constants/songs.h"
-#include "constants/game_stat.h"
-#include "constants/maps.h"
-#include "constants/species.h"
-#include "constants/rgb.h"
-#include "constants/battle_frontier.h"
+#include "start_menu.h"
+#include "string_util.h"
+#include "strings.h"
+#include "task.h"
 #include "trade.h"
 #include "trainer_card.h"
-#include "overworld.h"
-#include "battle.h"
-#include "load_save.h"
-#include "cable_club.h"
-#include "field_control_avatar.h"
-#include "party_menu.h"
-#include "field_weather.h"
-#include "palette.h"
-#include "decompress.h"
-#include "start_menu.h"
-#include "data.h"
-#include "field_screen_effect.h"
-#include "script_pokemon_util_80F87D8.h"
-#include "international_string_util.h"
-#include "field_player_avatar.h"
-#include "strings.h"
-#include "mevent.h"
-#include "dynamic_placeholder_text_util.h"
 #include "union_room.h"
-#include "easy_chat.h"
-#include "event_obj_lock.h"
 #include "union_room_chat.h"
-#include "berry_crush.h"
-#include "mystery_gift.h"
 #include "union_room_player_avatar.h"
-#include "pokemon_jump.h"
+#include "window.h"
+#include "constants/battle_frontier.h"
+#include "constants/game_stat.h"
+#include "constants/maps.h"
+#include "constants/rgb.h"
+#include "constants/songs.h"
+#include "constants/species.h"
 
 EWRAM_DATA u8 gUnknown_02022C20[12] = {};
 EWRAM_DATA u8 gUnknown_02022C2C = 0;
@@ -60,9 +61,9 @@ EWRAM_DATA u8 gUnknown_02022C3E = 0;
 EWRAM_DATA struct TradeUnkStruct gUnknown_02022C40 = {};
 
 // IWRAM vars
-IWRAM_DATA struct UnkStruct_Leader *gUnknown_03000DA0;
-IWRAM_DATA struct UnkStruct_Group *gUnknown_03000DA4;
-IWRAM_DATA struct UnkStruct_URoom *gUnknown_03000DA8;
+static struct UnkStruct_Leader *gUnknown_03000DA0;
+static struct UnkStruct_Group *gUnknown_03000DA4;
+static struct UnkStruct_URoom *gUnknown_03000DA8;
 
 // this file's functions
 void sub_80173E0(u8 windowId, u8 arg1, const u8 *str, u8 arg3, u8 arg4, u8 arg5);
@@ -98,7 +99,6 @@ bool32 sub_8017678(struct UnkStruct_Shared *arg0, struct UnkStruct_Shared *arg1)
 u32 sub_8018120(struct TradeUnkStruct *arg0, u8 multiplayerId);
 void sub_801807C(struct TradeUnkStruct *arg0);
 void sub_801AC54(void);
-void sub_802493C(u8 monId, MainCallback callback);
 void sub_80149D8(void);
 void MG_DrawTextBorder(u8 windowId);
 s8 mevent_message_print_and_prompt_yes_no(u8 *textState, u8 *arg1, u8 arg2, const u8 *str);

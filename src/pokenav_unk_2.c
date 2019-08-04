@@ -7,6 +7,10 @@
 #include "pokenav.h"
 #include "graphics.h"
 #include "sound.h"
+#include "gym_leader_rematch.h"
+#include "window.h"
+#include "strings.h"
+#include "scanline_effect.h"
 #include "constants/songs.h"
 
 // Match Call
@@ -29,15 +33,15 @@ struct Pokenav2Struct
 
 struct Pokenav2Struct * sub_81C9958(void);
 bool32 sub_81C99FC(void);
-u32 sub_81C9A10(int state);
-u32 sub_81C9C6C(int state);
-u32 sub_81C9CA8(int state);
-u32 sub_81C9D44(int state);
-u32 sub_81C9DD8(int state);
-u32 sub_81C9E58(int state);
-u32 sub_81C9EC8(int state);
-u32 sub_81C9EF8(int state);
-u32 sub_81C9F28(int state);
+u32 sub_81C9A10(s32 state);
+u32 sub_81C9C6C(s32 state);
+u32 sub_81C9CA8(s32 state);
+u32 sub_81C9D44(s32 state);
+u32 sub_81C9DD8(s32 state);
+u32 sub_81C9E58(s32 state);
+u32 sub_81C9EC8(s32 state);
+u32 sub_81C9EF8(s32 state);
+u32 sub_81C9F28(s32 state);
 void sub_81C9FC4(void);
 void sub_81C9FEC(void);
 void sub_81CA02C(void);
@@ -69,6 +73,9 @@ void sub_81CA994(void);
 void sub_81CA9C8(void);
 void sub_81CA9D8(void);
 void sub_81CAA3C(void);
+
+extern const u32 gPokenavOptions_Gfx[];
+extern const u16 gPokenavOptions_Pal[];
 
 const u16 gUnknown_0861FC78[] = INCBIN_U16("graphics/pokenav/bg.gbapal");
 const u32 gUnknown_0861FC98[] = INCBIN_U32("graphics/pokenav/bg.4bpp.lz");
@@ -119,41 +126,200 @@ const LoopedTask gUnknown_086201A0[] = {
     sub_81C9F28
 };
 
-const struct CompressedSpriteSheet gUnknown_086201C4[] = {
-    {gPokenavOptions_Gfx, 0x3400, 0x0003},
-    {gUnknown_08620124,   0x0100, 0x0001}
+const struct CompressedSpriteSheet gUnknown_086201C4[] =
+{
+    {
+        .data = gPokenavOptions_Gfx,
+        .size = 0x3400,
+        .tag = 0x0003
+    },
+    {
+        .data = gUnknown_08620124,
+        .size = 0x0100,
+        .tag = 0x0001
+    }
 };
 
-const struct SpritePalette gUnknown_086201D4[] = {
+const struct SpritePalette gUnknown_086201D4[] =
+{
     {gPokenavOptions_Pal + 0x00, 4},
     {gPokenavOptions_Pal + 0x10, 5},
     {gPokenavOptions_Pal + 0x20, 6},
     {gPokenavOptions_Pal + 0x30, 7},
     {gPokenavOptions_Pal + 0x40, 8},
     {gUnknown_08620104, 3},
-    {NULL, 0}
+    {}
 };
+
+const u16 gUnknown_0862020C[] = {0, 0};
+const u16 gUnknown_08620210[] = {0x20, 1};
+const u16 gUnknown_08620214[] = {0x40, 4};
+const u16 gUnknown_08620218[] = {0x60, 2};
+const u16 gUnknown_0862021C[] = {0x80, 3};
+const u16 gUnknown_08620220[] = {0xA0, 1};
+const u16 gUnknown_08620224[] = {0xC0, 1};
+const u16 gUnknown_08620228[] = {0xE0, 4};
+const u16 gUnknown_0862022C[] = {0x100, 1};
+const u16 gUnknown_08620230[] = {0x120, 2};
+const u16 gUnknown_08620234[] = {0x140, 0};
+const u16 gUnknown_08620238[] = {0x160, 0};
+const u16 gUnknown_0862023C[] = {0x180, 3};
 
 struct UnkStruct_08620240
 {
-    u16 field_0;
-    u16 field_2;
-    const u16 *field_4[6];
+    u16 unk0;
+    u16 unk2;
+    const u16 *unk4[6];
 };
 
-extern const struct UnkStruct_08620240 gUnknown_08620240[];
+const struct UnkStruct_08620240 gUnknown_08620240[5] =
+{
+    {
+        0x2A,
+            0x14,
+            {gUnknown_0862020C, gUnknown_08620210, gUnknown_0862021C, NULL, NULL, NULL}
+    },
+    {
+        0x2A,
+            0x14,
+            {gUnknown_0862020C, gUnknown_08620210, gUnknown_08620214, gUnknown_0862021C, NULL, NULL}
+    },
+    {
+        0x2A,
+            0x14,
+            {gUnknown_0862020C, gUnknown_08620210, gUnknown_08620214, gUnknown_08620218, gUnknown_0862021C, NULL}
+    },
+    {
+        0x38,
+            0x14,
+            {gUnknown_08620220, gUnknown_08620224, gUnknown_0862023C, NULL, NULL, NULL}
+    },
+    {
+        0x28,
+            0x10,
+            {gUnknown_08620228, gUnknown_0862022C, gUnknown_08620230, gUnknown_08620234, gUnknown_08620238, gUnknown_0862023C}
+    },
+};
 
-extern const struct SpriteTemplate gUnknown_0862034C;
+const struct WindowTemplate gUnknown_086202CC =
+{
+    .bg = 1,
+    .tilemapLeft = 3,
+    .tilemapTop = 17,
+    .width = 0x18,
+    .height = 0x2,
+    .paletteNum = 1,
+    .baseBlock = 8
+};
+
+const u8 *const gUnknown_086202D4[] =
+{
+    gUnknown_085EBCC5,
+        gUnknown_085EBCE8,
+        gUnknown_085EBD01,
+        gUnknown_085EBD1C,
+        gUnknown_085EBD34,
+        gUnknown_085EBD83,
+        gUnknown_085EBDA2,
+        gUnknown_085EBDBF,
+        gUnknown_085EBDDB,
+        gUnknown_085EBDEE,
+        gUnknown_085EBE06,
+        gUnknown_085EBE19,
+        gUnknown_085EBE2D,
+        gUnknown_085EBE41
+};
+
+const u8 gUnknown_0862030C[] = {6, 8, 7};
+
+const u8 gUnknown_0862030F[] = {6, 8, 7, 0, 0};
+
+const struct OamData gUnknown_08620314 =
+{
+    .y = 0,
+    .affineMode = 0,
+    .objMode = 0,
+    .bpp = 0,
+    .shape = SPRITE_SHAPE(32x16),
+    .x = 0,
+    .size = SPRITE_SIZE(32x16),
+    .tileNum = 0,
+    .priority = 2,
+    .paletteNum = 0,
+};
+
+const union AffineAnimCmd gUnknown_0862031C[] =
+{
+    AFFINEANIMCMD_FRAME(0x100, 0x100, 0, 0),
+    AFFINEANIMCMD_END,
+};
+
+const union AffineAnimCmd gUnknown_0862032C[] =
+{
+    AFFINEANIMCMD_FRAME(0x100, 0x100, 0, 0),
+    AFFINEANIMCMD_FRAME(0x10, 0x10, 0, 0x12),
+    AFFINEANIMCMD_END,
+};
+
+const union AffineAnimCmd *const gUnknown_08620344[] =
+{
+    gUnknown_0862031C,
+        gUnknown_0862032C
+};
+
+const struct SpriteTemplate gUnknown_0862034C =
+{
+    .tileTag = 3,
+    .paletteTag = 4,
+    .oam = &gUnknown_08620314,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gUnknown_08620344,
+    .callback = SpriteCallbackDummy,
+};
+
+const struct OamData gUnknown_08620364 =
+{
+    .y = 0,
+    .affineMode = 0,
+    .objMode = 0,
+    .bpp = 0,
+    .shape = SPRITE_SHAPE(32x16),
+    .x = 0,
+    .size = SPRITE_SIZE(32x16),
+    .tileNum = 0,
+    .priority = 2,
+    .paletteNum = 0,
+};
+
+const struct SpriteTemplate gUnknown_0862036C =
+{
+    .tileTag = 1,
+    .paletteTag = 3,
+    .oam = &gUnknown_08620364,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCallbackDummy,
+};
+
+const struct ScanlineEffectParams gUnknown_08620384 =
+{
+    (void *)REG_ADDR_WIN0H,
+        ((DMA_ENABLE | DMA_START_HBLANK | DMA_REPEAT | DMA_DEST_RELOAD) << 16) | 1,
+        1,
+        0
+};
 
 bool32 sub_81C98D4(void)
 {
     s32 i;
 
-    for (i = 0; i < 78; i++)
+    for (i = 0; i < REMATCH_TABLE_ENTRIES; i++)
     {
         if (sub_81CB0C8(i) == gMapHeader.regionMapSectionId
-         && sub_81CAE08(i)
-         && gSaveBlock1Ptr->trainerRematches[i])
+            && sub_81CAE08(i)
+            && gSaveBlock1Ptr->trainerRematches[i])
             return TRUE;
     }
 
@@ -230,7 +396,7 @@ bool32 sub_81C99FC(void)
     return IsLoopedTaskActive(unk->loopedTaskId);
 }
 
-u32 sub_81C9A10(int state)
+u32 sub_81C9A10(s32 state)
 {
     struct Pokenav2Struct * unk = GetSubstructPtr(2);
 
@@ -337,7 +503,7 @@ u32 sub_81C9A10(int state)
     return 4;
 }
 
-u32 sub_81C9C6C(int state)
+u32 sub_81C9C6C(s32 state)
 {
     switch (state)
     {
@@ -357,7 +523,7 @@ u32 sub_81C9C6C(int state)
     return 4;
 }
 
-u32 sub_81C9CA8(int state)
+u32 sub_81C9CA8(s32 state)
 {
     switch (state)
     {
@@ -396,7 +562,7 @@ u32 sub_81C9CA8(int state)
     return 4;
 }
 
-u32 sub_81C9D44(int state)
+u32 sub_81C9D44(s32 state)
 {
     switch (state)
     {
@@ -434,7 +600,7 @@ u32 sub_81C9D44(int state)
     return 4;
 }
 
-u32 sub_81C9DD8(int state)
+u32 sub_81C9DD8(s32 state)
 {
     switch (state)
     {
@@ -467,7 +633,7 @@ u32 sub_81C9DD8(int state)
     return 4;
 }
 
-u32 sub_81C9E58(int state)
+u32 sub_81C9E58(s32 state)
 {
     switch (state)
     {
@@ -498,7 +664,7 @@ u32 sub_81C9E58(int state)
     return 4;
 }
 
-u32 sub_81C9EC8(int state)
+u32 sub_81C9EC8(s32 state)
 {
     switch (state)
     {
@@ -514,7 +680,7 @@ u32 sub_81C9EC8(int state)
     return 4;
 }
 
-u32 sub_81C9EF8(int state)
+u32 sub_81C9EF8(s32 state)
 {
     switch (state)
     {
@@ -530,7 +696,7 @@ u32 sub_81C9EF8(int state)
     return 4;
 }
 
-u32 sub_81C9F28(int state)
+u32 sub_81C9F28(s32 state)
 {
     switch (state)
     {
@@ -629,7 +795,7 @@ void sub_81CA094(void)
 void sub_81CA0C8(void)
 {
     s32 r0 = sub_81C9894();
-    sub_81CA0EC(gUnknown_08620240[r0].field_4, gUnknown_08620240[r0].field_0, gUnknown_08620240[r0].field_2);
+    sub_81CA0EC(gUnknown_08620240[r0].unk4, gUnknown_08620240[r0].unk0, gUnknown_08620240[r0].unk2);
 }
 
 void sub_81CA0EC(const u16 *const *a0, s32 a1, s32 a2)
@@ -752,6 +918,7 @@ bool32 sub_81CA324(void)
     return FALSE;
 }
 
+#ifdef NONMATCHING
 void sub_81CA35C(struct Sprite ** sprites, s32 a1, s32 a2, s32 a3)
 {
     s32 i;
@@ -766,3 +933,51 @@ void sub_81CA35C(struct Sprite ** sprites, s32 a1, s32 a2, s32 a3)
         sprites[i]->callback = sub_81CA474;
     }
 }
+#else
+NAKED
+void sub_81CA35C(struct Sprite ** sprites, s32 a1, s32 a2, s32 a3)
+{
+    asm_unified("\tpush {r4-r7,lr}\n"
+                "\tmov r7, r9\n"
+                "\tmov r6, r8\n"
+                "\tpush {r6,r7}\n"
+                "\tadds r4, r0, 0\n"
+                "\tadds r5, r1, 0\n"
+                "\tmov r9, r2\n"
+                "\tadds r6, r3, 0\n"
+                "\tldr r0, =sub_81CA474\n"
+                "\tmov r8, r0\n"
+                "\tsubs r0, r2, r5\n"
+                "\tlsls r0, 4\n"
+                "\tadds r1, r6, 0\n"
+                "\tbl __divsi3\n"
+                "\tadds r3, r0, 0\n"
+                "\tmovs r1, 0x3\n"
+                "\tlsls r2, r5, 4\n"
+                "_081CA380:\n"
+                "\tldr r0, [r4]\n"
+                "\tstrh r5, [r0, 0x20]\n"
+                "\tldr r0, [r4]\n"
+                "\tstrh r6, [r0, 0x2E]\n"
+                "\tldr r0, [r4]\n"
+                "\tstrh r3, [r0, 0x30]\n"
+                "\tldr r0, [r4]\n"
+                "\tstrh r2, [r0, 0x32]\n"
+                "\tldr r0, [r4]\n"
+                "\tmov r7, r9\n"
+                "\tstrh r7, [r0, 0x3C]\n"
+                "\tldm r4!, {r0}\n"
+                "\tmov r7, r8\n"
+                "\tstr r7, [r0, 0x1C]\n"
+                "\tsubs r1, 0x1\n"
+                "\tcmp r1, 0\n"
+                "\tbge _081CA380\n"
+                "\tpop {r3,r4}\n"
+                "\tmov r8, r3\n"
+                "\tmov r9, r4\n"
+                "\tpop {r4-r7}\n"
+                "\tpop {r0}\n"
+                "\tbx r0\n"
+                "\t.pool");
+}
+#endif //NONMATCHING

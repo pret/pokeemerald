@@ -24,8 +24,8 @@ SkyPillar_Outside_MapScript1_2392DD: @ 82392DD
 	end
 
 SkyPillar_Outside_EventScript_2392E7:: @ 82392E7
-	setmetatile 14, 4, 682, 0
-	setmetatile 14, 5, 690, 0
+	setmetatile 14, 4, METATILE_Pacifidlog_SkyPillar_DoorOpen_Top, 0
+	setmetatile 14, 5, METATILE_Pacifidlog_SkyPillar_DoorOpen_Bottom, 0
 	return
 
 SkyPillar_Outside_MapScript2_2392FA: @ 82392FA

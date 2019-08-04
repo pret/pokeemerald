@@ -20,6 +20,7 @@
 #include "constants/weather.h"
 #include "constants/trainer_hill.h"
 #include "constants/battle.h"
+#include "constants/metatile_labels.h"
 	.include "asm/macros.inc"
 	.include "asm/macros/event.inc"
 	.include "constants/constants.inc"
@@ -848,86 +849,86 @@ Std_MsgboxAutoclose:: @ 8271494
 	return
 
 EventScript_ResetAllBerries:: @ 827149D
-	setberrytree 2, 7, 5
-	setberrytree 1, 3, 5
-	setberrytree 11, 7, 5
-	setberrytree 13, 3, 5
-	setberrytree 4, 7, 5
-	setberrytree 76, 1, 5
-	setberrytree 8, 1, 5
-	setberrytree 10, 6, 5
-	setberrytree 25, 20, 5
-	setberrytree 26, 2, 5
-	setberrytree 66, 2, 5
-	setberrytree 67, 20, 5
-	setberrytree 69, 22, 5
-	setberrytree 70, 22, 5
-	setberrytree 71, 22, 5
-	setberrytree 55, 17, 5
-	setberrytree 56, 17, 5
-	setberrytree 5, 1, 5
-	setberrytree 6, 6, 5
-	setberrytree 7, 1, 5
-	setberrytree 16, 18, 5
-	setberrytree 17, 18, 5
-	setberrytree 18, 18, 5
-	setberrytree 29, 19, 5
-	setberrytree 28, 19, 5
-	setberrytree 27, 19, 5
-	setberrytree 24, 4, 5
-	setberrytree 23, 3, 5
-	setberrytree 22, 3, 5
-	setberrytree 21, 4, 5
-	setberrytree 19, 16, 5
-	setberrytree 20, 16, 5
-	setberrytree 80, 7, 5
-	setberrytree 81, 7, 5
-	setberrytree 77, 8, 5
-	setberrytree 78, 8, 5
-	setberrytree 68, 8, 5
-	setberrytree 31, 10, 5
-	setberrytree 33, 10, 5
-	setberrytree 34, 21, 5
-	setberrytree 35, 21, 5
-	setberrytree 36, 21, 5
-	setberrytree 83, 24, 5
-	setberrytree 84, 24, 5
-	setberrytree 85, 10, 5
-	setberrytree 86, 6, 5
-	setberrytree 37, 5, 5
-	setberrytree 38, 5, 5
-	setberrytree 39, 5, 5
-	setberrytree 40, 3, 5
-	setberrytree 41, 3, 5
-	setberrytree 42, 3, 5
-	setberrytree 46, 19, 5
-	setberrytree 45, 20, 5
-	setberrytree 44, 18, 5
-	setberrytree 43, 16, 5
-	setberrytree 47, 8, 5
-	setberrytree 48, 5, 5
-	setberrytree 49, 4, 5
-	setberrytree 50, 2, 5
-	setberrytree 52, 18, 5
-	setberrytree 53, 18, 5
-	setberrytree 62, 6, 5
-	setberrytree 64, 6, 5
-	setberrytree 58, 21, 5
-	setberrytree 59, 21, 5
-	setberrytree 60, 25, 5
-	setberrytree 61, 25, 5
-	setberrytree 79, 23, 5
-	setberrytree 14, 23, 5
-	setberrytree 15, 21, 5
-	setberrytree 30, 21, 5
-	setberrytree 65, 25, 5
-	setberrytree 72, 25, 5
-	setberrytree 73, 23, 5
-	setberrytree 74, 23, 5
-	setberrytree 87, 3, 5
-	setberrytree 88, 10, 5
-	setberrytree 89, 4, 5
-	setberrytree 82, 36, 5
+	setberrytree 2, ITEM_TO_BERRY(ITEM_ORAN_BERRY), 5
+	setberrytree 1, ITEM_TO_BERRY(ITEM_PECHA_BERRY), 5
+	setberrytree 11, ITEM_TO_BERRY(ITEM_ORAN_BERRY), 5
+	setberrytree 13, ITEM_TO_BERRY(ITEM_PECHA_BERRY), 5
+	setberrytree 4, ITEM_TO_BERRY(ITEM_ORAN_BERRY), 5
+	setberrytree 76, ITEM_TO_BERRY(ITEM_CHERI_BERRY), 5
+	setberrytree 8, ITEM_TO_BERRY(ITEM_CHERI_BERRY), 5
+	setberrytree 10, ITEM_TO_BERRY(ITEM_LEPPA_BERRY), 5
+	setberrytree 25, ITEM_TO_BERRY(ITEM_PINAP_BERRY), 5
+	setberrytree 26, ITEM_TO_BERRY(ITEM_CHESTO_BERRY), 5
+	setberrytree 66, ITEM_TO_BERRY(ITEM_CHESTO_BERRY), 5
+	setberrytree 67, ITEM_TO_BERRY(ITEM_PINAP_BERRY), 5
+	setberrytree 69, ITEM_TO_BERRY(ITEM_KELPSY_BERRY), 5
+	setberrytree 70, ITEM_TO_BERRY(ITEM_KELPSY_BERRY), 5
+	setberrytree 71, ITEM_TO_BERRY(ITEM_KELPSY_BERRY), 5
+	setberrytree 55, ITEM_TO_BERRY(ITEM_BLUK_BERRY), 5
+	setberrytree 56, ITEM_TO_BERRY(ITEM_BLUK_BERRY), 5
+	setberrytree 5, ITEM_TO_BERRY(ITEM_CHERI_BERRY), 5
+	setberrytree 6, ITEM_TO_BERRY(ITEM_LEPPA_BERRY), 5
+	setberrytree 7, ITEM_TO_BERRY(ITEM_CHERI_BERRY), 5
+	setberrytree 16, ITEM_TO_BERRY(ITEM_NANAB_BERRY), 5
+	setberrytree 17, ITEM_TO_BERRY(ITEM_NANAB_BERRY), 5
+	setberrytree 18, ITEM_TO_BERRY(ITEM_NANAB_BERRY), 5
+	setberrytree 29, ITEM_TO_BERRY(ITEM_WEPEAR_BERRY), 5
+	setberrytree 28, ITEM_TO_BERRY(ITEM_WEPEAR_BERRY), 5
+	setberrytree 27, ITEM_TO_BERRY(ITEM_WEPEAR_BERRY), 5
+	setberrytree 24, ITEM_TO_BERRY(ITEM_RAWST_BERRY), 5
+	setberrytree 23, ITEM_TO_BERRY(ITEM_PECHA_BERRY), 5
+	setberrytree 22, ITEM_TO_BERRY(ITEM_PECHA_BERRY), 5
+	setberrytree 21, ITEM_TO_BERRY(ITEM_RAWST_BERRY), 5
+	setberrytree 19, ITEM_TO_BERRY(ITEM_RAZZ_BERRY), 5
+	setberrytree 20, ITEM_TO_BERRY(ITEM_RAZZ_BERRY), 5
+	setberrytree 80, ITEM_TO_BERRY(ITEM_ORAN_BERRY), 5
+	setberrytree 81, ITEM_TO_BERRY(ITEM_ORAN_BERRY), 5
+	setberrytree 77, ITEM_TO_BERRY(ITEM_PERSIM_BERRY), 5
+	setberrytree 78, ITEM_TO_BERRY(ITEM_PERSIM_BERRY), 5
+	setberrytree 68, ITEM_TO_BERRY(ITEM_PERSIM_BERRY), 5
+	setberrytree 31, ITEM_TO_BERRY(ITEM_SITRUS_BERRY), 5
+	setberrytree 33, ITEM_TO_BERRY(ITEM_SITRUS_BERRY), 5
+	setberrytree 34, ITEM_TO_BERRY(ITEM_POMEG_BERRY), 5
+	setberrytree 35, ITEM_TO_BERRY(ITEM_POMEG_BERRY), 5
+	setberrytree 36, ITEM_TO_BERRY(ITEM_POMEG_BERRY), 5
+	setberrytree 83, ITEM_TO_BERRY(ITEM_HONDEW_BERRY), 5
+	setberrytree 84, ITEM_TO_BERRY(ITEM_HONDEW_BERRY), 5
+	setberrytree 85, ITEM_TO_BERRY(ITEM_SITRUS_BERRY), 5
+	setberrytree 86, ITEM_TO_BERRY(ITEM_LEPPA_BERRY), 5
+	setberrytree 37, ITEM_TO_BERRY(ITEM_ASPEAR_BERRY), 5
+	setberrytree 38, ITEM_TO_BERRY(ITEM_ASPEAR_BERRY), 5
+	setberrytree 39, ITEM_TO_BERRY(ITEM_ASPEAR_BERRY), 5
+	setberrytree 40, ITEM_TO_BERRY(ITEM_PECHA_BERRY), 5
+	setberrytree 41, ITEM_TO_BERRY(ITEM_PECHA_BERRY), 5
+	setberrytree 42, ITEM_TO_BERRY(ITEM_PECHA_BERRY), 5
+	setberrytree 46, ITEM_TO_BERRY(ITEM_WEPEAR_BERRY), 5
+	setberrytree 45, ITEM_TO_BERRY(ITEM_PINAP_BERRY), 5
+	setberrytree 44, ITEM_TO_BERRY(ITEM_NANAB_BERRY), 5
+	setberrytree 43, ITEM_TO_BERRY(ITEM_RAZZ_BERRY), 5
+	setberrytree 47, ITEM_TO_BERRY(ITEM_PERSIM_BERRY), 5
+	setberrytree 48, ITEM_TO_BERRY(ITEM_ASPEAR_BERRY), 5
+	setberrytree 49, ITEM_TO_BERRY(ITEM_RAWST_BERRY), 5
+	setberrytree 50, ITEM_TO_BERRY(ITEM_CHESTO_BERRY), 5
+	setberrytree 52, ITEM_TO_BERRY(ITEM_NANAB_BERRY), 5
+	setberrytree 53, ITEM_TO_BERRY(ITEM_NANAB_BERRY), 5
+	setberrytree 62, ITEM_TO_BERRY(ITEM_LEPPA_BERRY), 5
+	setberrytree 64, ITEM_TO_BERRY(ITEM_LEPPA_BERRY), 5
+	setberrytree 58, ITEM_TO_BERRY(ITEM_POMEG_BERRY), 5
+	setberrytree 59, ITEM_TO_BERRY(ITEM_POMEG_BERRY), 5
+	setberrytree 60, ITEM_TO_BERRY(ITEM_GREPA_BERRY), 5
+	setberrytree 61, ITEM_TO_BERRY(ITEM_GREPA_BERRY), 5
+	setberrytree 79, ITEM_TO_BERRY(ITEM_QUALOT_BERRY), 5
+	setberrytree 14, ITEM_TO_BERRY(ITEM_QUALOT_BERRY), 5
+	setberrytree 15, ITEM_TO_BERRY(ITEM_POMEG_BERRY), 5
+	setberrytree 30, ITEM_TO_BERRY(ITEM_POMEG_BERRY), 5
+	setberrytree 65, ITEM_TO_BERRY(ITEM_GREPA_BERRY), 5
+	setberrytree 72, ITEM_TO_BERRY(ITEM_GREPA_BERRY), 5
+	setberrytree 73, ITEM_TO_BERRY(ITEM_QUALOT_BERRY), 5
+	setberrytree 74, ITEM_TO_BERRY(ITEM_QUALOT_BERRY), 5
+	setberrytree 87, ITEM_TO_BERRY(ITEM_PECHA_BERRY), 5
+	setberrytree 88, ITEM_TO_BERRY(ITEM_SITRUS_BERRY), 5
+	setberrytree 89, ITEM_TO_BERRY(ITEM_RAWST_BERRY), 5
+	setberrytree 82, ITEM_TO_BERRY(ITEM_LIECHI_BERRY), 5
 	return
 
 EventScript_ResetAllMapFlags:: @ 82715DE
@@ -2292,21 +2293,22 @@ EverGrandeCity_DrakesRoom_EventScript_2723F8:: @ 82723F8
 EverGrandeCity_GlaciasRoom_EventScript_2723F8:: @ 82723F8
 EverGrandeCity_PhoebesRoom_EventScript_2723F8:: @ 82723F8
 EverGrandeCity_SidneysRoom_EventScript_2723F8:: @ 82723F8
+PokemonLeague_EliteFour_SetAdvanceToNextRoomMetatiles:: @ 82723F8
 	applymovement EVENT_OBJ_ID_PLAYER, EverGrandeCity_SidneysRoom_Movement_2725C6
 	waitmovement 0
 	playse SE_DOOR
-	setmetatile 6, 1, 836, 0
-	setmetatile 6, 2, 837, 0
-	setmetatile 0, 2, 734, 1
-	setmetatile 1, 2, 733, 1
-	setmetatile 2, 2, 734, 1
-	setmetatile 3, 2, 733, 1
-	setmetatile 4, 2, 734, 1
-	setmetatile 8, 2, 733, 1
-	setmetatile 9, 2, 734, 1
-	setmetatile 10, 2, 733, 1
-	setmetatile 11, 2, 734, 1
-	setmetatile 12, 2, 733, 1
+	setmetatile 6, 1, METATILE_EliteFour_OpenDoor_Frame, 0
+	setmetatile 6, 2, METATILE_EliteFour_OpenDoor_Opening, 0
+	setmetatile 0, 2, METATILE_EliteFour_RightSpotlightOff, 1
+	setmetatile 1, 2, METATILE_EliteFour_LeftSpotlightOff, 1
+	setmetatile 2, 2, METATILE_EliteFour_RightSpotlightOff, 1
+	setmetatile 3, 2, METATILE_EliteFour_LeftSpotlightOff, 1
+	setmetatile 4, 2, METATILE_EliteFour_RightSpotlightOff, 1
+	setmetatile 8, 2, METATILE_EliteFour_LeftSpotlightOff, 1
+	setmetatile 9, 2, METATILE_EliteFour_RightSpotlightOff, 1
+	setmetatile 10, 2, METATILE_EliteFour_LeftSpotlightOff, 1
+	setmetatile 11, 2, METATILE_EliteFour_RightSpotlightOff, 1
+	setmetatile 12, 2, METATILE_EliteFour_LeftSpotlightOff, 1
 	special DrawWholeMapView
 	return
 
@@ -2317,12 +2319,12 @@ EverGrandeCity_SidneysRoom_EventScript_272475:: @ 8272475
 	applymovement EVENT_OBJ_ID_PLAYER, EverGrandeCity_SidneysRoom_Movement_2725BA
 	waitmovement 0
 	playse SE_TRACK_DOOR
-	setmetatile 5, 12, 518, 1
-	setmetatile 6, 12, 518, 1
-	setmetatile 7, 12, 518, 1
-	setmetatile 5, 13, 526, 1
-	setmetatile 6, 13, 526, 1
-	setmetatile 7, 13, 526, 1
+	setmetatile 5, 12, METATILE_EliteFour_EntryDoor_ClosedTop, 1
+	setmetatile 6, 12, METATILE_EliteFour_EntryDoor_ClosedTop, 1
+	setmetatile 7, 12, METATILE_EliteFour_EntryDoor_ClosedTop, 1
+	setmetatile 5, 13, METATILE_EliteFour_EntryDoor_ClosedBottom, 1
+	setmetatile 6, 13, METATILE_EliteFour_EntryDoor_ClosedBottom, 1
+	setmetatile 7, 13, METATILE_EliteFour_EntryDoor_ClosedBottom, 1
 	special DrawWholeMapView
 	return
 
@@ -2330,36 +2332,36 @@ EverGrandeCity_DrakesRoom_EventScript_2724BC:: @ 82724BC
 EverGrandeCity_GlaciasRoom_EventScript_2724BC:: @ 82724BC
 EverGrandeCity_PhoebesRoom_EventScript_2724BC:: @ 82724BC
 EverGrandeCity_SidneysRoom_EventScript_2724BC:: @ 82724BC
-	setmetatile 6, 1, 836, 0
-	setmetatile 6, 2, 837, 0
-	setmetatile 5, 12, 518, 1
-	setmetatile 6, 12, 518, 1
-	setmetatile 7, 12, 518, 1
-	setmetatile 5, 13, 526, 1
-	setmetatile 6, 13, 526, 1
-	setmetatile 7, 13, 526, 1
-	setmetatile 0, 2, 734, 1
-	setmetatile 1, 2, 733, 1
-	setmetatile 2, 2, 734, 1
-	setmetatile 3, 2, 733, 1
-	setmetatile 4, 2, 734, 1
-	setmetatile 8, 2, 733, 1
-	setmetatile 9, 2, 734, 1
-	setmetatile 10, 2, 733, 1
-	setmetatile 11, 2, 734, 1
-	setmetatile 12, 2, 733, 1
+	setmetatile 6, 1, METATILE_EliteFour_OpenDoor_Frame, 0
+	setmetatile 6, 2, METATILE_EliteFour_OpenDoor_Opening, 0
+	setmetatile 5, 12, METATILE_EliteFour_EntryDoor_ClosedTop, 1
+	setmetatile 6, 12, METATILE_EliteFour_EntryDoor_ClosedTop, 1
+	setmetatile 7, 12, METATILE_EliteFour_EntryDoor_ClosedTop, 1
+	setmetatile 5, 13, METATILE_EliteFour_EntryDoor_ClosedBottom, 1
+	setmetatile 6, 13, METATILE_EliteFour_EntryDoor_ClosedBottom, 1
+	setmetatile 7, 13, METATILE_EliteFour_EntryDoor_ClosedBottom, 1
+	setmetatile 0, 2, METATILE_EliteFour_RightSpotlightOff, 1
+	setmetatile 1, 2, METATILE_EliteFour_LeftSpotlightOff, 1
+	setmetatile 2, 2, METATILE_EliteFour_RightSpotlightOff, 1
+	setmetatile 3, 2, METATILE_EliteFour_LeftSpotlightOff, 1
+	setmetatile 4, 2, METATILE_EliteFour_RightSpotlightOff, 1
+	setmetatile 8, 2, METATILE_EliteFour_LeftSpotlightOff, 1
+	setmetatile 9, 2, METATILE_EliteFour_RightSpotlightOff, 1
+	setmetatile 10, 2, METATILE_EliteFour_LeftSpotlightOff, 1
+	setmetatile 11, 2, METATILE_EliteFour_RightSpotlightOff, 1
+	setmetatile 12, 2, METATILE_EliteFour_LeftSpotlightOff, 1
 	return
 
 EverGrandeCity_DrakesRoom_EventScript_27255F:: @ 827255F
 EverGrandeCity_GlaciasRoom_EventScript_27255F:: @ 827255F
 EverGrandeCity_PhoebesRoom_EventScript_27255F:: @ 827255F
 EverGrandeCity_SidneysRoom_EventScript_27255F:: @ 827255F
-	setmetatile 5, 12, 518, 1
-	setmetatile 6, 12, 518, 1
-	setmetatile 7, 12, 518, 1
-	setmetatile 5, 13, 526, 1
-	setmetatile 6, 13, 526, 1
-	setmetatile 7, 13, 526, 1
+	setmetatile 5, 12, METATILE_EliteFour_EntryDoor_ClosedTop, 1
+	setmetatile 6, 12, METATILE_EliteFour_EntryDoor_ClosedTop, 1
+	setmetatile 7, 12, METATILE_EliteFour_EntryDoor_ClosedTop, 1
+	setmetatile 5, 13, METATILE_EliteFour_EntryDoor_ClosedBottom, 1
+	setmetatile 6, 13, METATILE_EliteFour_EntryDoor_ClosedBottom, 1
+	setmetatile 7, 13, METATILE_EliteFour_EntryDoor_ClosedBottom, 1
 	return
 
 SlateportCity_Movement_272596: @ 8272596
@@ -2995,163 +2997,163 @@ EventScript_2738FF:: @ 82738FF
 	end
 
 UnusualWeather_EventScript_PlaceTilesRoute114North:: @ 8273913
-	setmetatile 7, 3, 839, 1
-	setmetatile 7, 4, 847, 0
+	setmetatile 7, 3, METATILE_Fallarbor_RedCaveEntrance_Top, 1
+	setmetatile 7, 4, METATILE_Fallarbor_RedCaveEntrance_Bottom, 0
 	return
 
 UnusualWeather_EventScript_PlaceTilesRoute114South:: @ 8273926
-	setmetatile 6, 45, 601, 1
-	setmetatile 6, 46, 609, 0
+	setmetatile 6, 45, METATILE_Fallarbor_BrownCaveEntrance_Top, 1
+	setmetatile 6, 46, METATILE_Fallarbor_BrownCaveEntrance_Bottom, 0
 	return
 
 UnusualWeather_EventScript_PlaceTilesRoute115West:: @ 8273939
-	setmetatile 21, 5, 601, 1
-	setmetatile 21, 6, 609, 0
+	setmetatile 21, 5, METATILE_Fallarbor_BrownCaveEntrance_Top, 1
+	setmetatile 21, 6, METATILE_Fallarbor_BrownCaveEntrance_Bottom, 0
 	return
 
 UnusualWeather_EventScript_PlaceTilesRoute115East:: @ 827394C
-	setmetatile 36, 9, 601, 1
-	setmetatile 36, 10, 609, 0
+	setmetatile 36, 9, METATILE_Fallarbor_BrownCaveEntrance_Top, 1
+	setmetatile 36, 10, METATILE_Fallarbor_BrownCaveEntrance_Bottom, 0
 	return
 
 UnusualWeather_EventScript_PlaceTilesRoute116North:: @ 827395F
-	setmetatile 59, 12, 159, 1
-	setmetatile 59, 13, 167, 0
+	setmetatile 59, 12, METATILE_General_CaveEntrance_Top, 1
+	setmetatile 59, 13, METATILE_General_CaveEntrance_Bottom, 0
 	return
 
 UnusualWeather_EventScript_PlaceTilesRoute116South:: @ 8273972
-	setmetatile 79, 5, 159, 1
-	setmetatile 79, 6, 167, 0
+	setmetatile 79, 5, METATILE_General_CaveEntrance_Top, 1
+	setmetatile 79, 6, METATILE_General_CaveEntrance_Bottom, 0
 	return
 
 UnusualWeather_EventScript_PlaceTilesRoute118East:: @ 8273985
-	setmetatile 42, 5, 159, 1
-	setmetatile 42, 6, 167, 0
+	setmetatile 42, 5, METATILE_General_CaveEntrance_Top, 1
+	setmetatile 42, 6, METATILE_General_CaveEntrance_Bottom, 0
 	return
 
 UnusualWeather_EventScript_PlaceTilesRoute118West:: @ 8273998
-	setmetatile 9, 5, 159, 1
-	setmetatile 9, 6, 167, 0
+	setmetatile 9, 5, METATILE_General_CaveEntrance_Top, 1
+	setmetatile 9, 6, METATILE_General_CaveEntrance_Bottom, 0
 	return
 
 UnusualWeather_EventScript_PlaceTilesRoute105North:: @ 82739AB
-	setmetatile 10, 28, 334, 0
-	setmetatile 11, 28, 334, 0
-	setmetatile 9, 29, 334, 0
-	setmetatile 10, 29, 335, 0
-	setmetatile 11, 29, 335, 0
-	setmetatile 12, 29, 334, 0
-	setmetatile 9, 30, 334, 0
-	setmetatile 10, 30, 335, 0
-	setmetatile 11, 30, 335, 0
-	setmetatile 12, 30, 334, 0
-	setmetatile 10, 31, 334, 0
-	setmetatile 11, 31, 334, 0
+	setmetatile 10, 28, METATILE_General_RoughWater, 0
+	setmetatile 11, 28, METATILE_General_RoughWater, 0
+	setmetatile 9, 29, METATILE_General_RoughWater, 0
+	setmetatile 10, 29, METATILE_General_RoughDeepWater, 0
+	setmetatile 11, 29, METATILE_General_RoughDeepWater, 0
+	setmetatile 12, 29, METATILE_General_RoughWater, 0
+	setmetatile 9, 30, METATILE_General_RoughWater, 0
+	setmetatile 10, 30, METATILE_General_RoughDeepWater, 0
+	setmetatile 11, 30, METATILE_General_RoughDeepWater, 0
+	setmetatile 12, 30, METATILE_General_RoughWater, 0
+	setmetatile 10, 31, METATILE_General_RoughWater, 0
+	setmetatile 11, 31, METATILE_General_RoughWater, 0
 	return
 
 UnusualWeather_EventScript_PlaceTilesRoute105South:: @ 8273A18
-	setmetatile 20, 53, 334, 0
-	setmetatile 21, 53, 334, 0
-	setmetatile 19, 54, 334, 0
-	setmetatile 20, 54, 335, 0
-	setmetatile 21, 54, 335, 0
-	setmetatile 22, 54, 334, 0
-	setmetatile 19, 55, 334, 0
-	setmetatile 20, 55, 335, 0
-	setmetatile 21, 55, 335, 0
-	setmetatile 22, 55, 334, 0
-	setmetatile 20, 56, 334, 0
-	setmetatile 21, 56, 334, 0
+	setmetatile 20, 53, METATILE_General_RoughWater, 0
+	setmetatile 21, 53, METATILE_General_RoughWater, 0
+	setmetatile 19, 54, METATILE_General_RoughWater, 0
+	setmetatile 20, 54, METATILE_General_RoughDeepWater, 0
+	setmetatile 21, 54, METATILE_General_RoughDeepWater, 0
+	setmetatile 22, 54, METATILE_General_RoughWater, 0
+	setmetatile 19, 55, METATILE_General_RoughWater, 0
+	setmetatile 20, 55, METATILE_General_RoughDeepWater, 0
+	setmetatile 21, 55, METATILE_General_RoughDeepWater, 0
+	setmetatile 22, 55, METATILE_General_RoughWater, 0
+	setmetatile 20, 56, METATILE_General_RoughWater, 0
+	setmetatile 21, 56, METATILE_General_RoughWater, 0
 	return
 
 UnusualWeather_EventScript_PlaceTilesRoute125West:: @ 8273A85
-	setmetatile 8, 16, 334, 0
-	setmetatile 9, 16, 334, 0
-	setmetatile 7, 17, 334, 0
-	setmetatile 8, 17, 335, 0
-	setmetatile 9, 17, 335, 0
-	setmetatile 10, 17, 334, 0
-	setmetatile 7, 18, 334, 0
-	setmetatile 8, 18, 335, 0
-	setmetatile 9, 18, 335, 0
-	setmetatile 10, 18, 334, 0
-	setmetatile 8, 19, 334, 0
-	setmetatile 9, 19, 334, 0
+	setmetatile 8, 16, METATILE_General_RoughWater, 0
+	setmetatile 9, 16, METATILE_General_RoughWater, 0
+	setmetatile 7, 17, METATILE_General_RoughWater, 0
+	setmetatile 8, 17, METATILE_General_RoughDeepWater, 0
+	setmetatile 9, 17, METATILE_General_RoughDeepWater, 0
+	setmetatile 10, 17, METATILE_General_RoughWater, 0
+	setmetatile 7, 18, METATILE_General_RoughWater, 0
+	setmetatile 8, 18, METATILE_General_RoughDeepWater, 0
+	setmetatile 9, 18, METATILE_General_RoughDeepWater, 0
+	setmetatile 10, 18, METATILE_General_RoughWater, 0
+	setmetatile 8, 19, METATILE_General_RoughWater, 0
+	setmetatile 9, 19, METATILE_General_RoughWater, 0
 	return
 
 UnusualWeather_EventScript_PlaceTilesRoute125East:: @ 8273AF2
-	setmetatile 53, 18, 334, 0
-	setmetatile 54, 18, 334, 0
-	setmetatile 52, 19, 334, 0
-	setmetatile 53, 19, 335, 0
-	setmetatile 54, 19, 335, 0
-	setmetatile 55, 19, 334, 0
-	setmetatile 52, 20, 334, 0
-	setmetatile 53, 20, 335, 0
-	setmetatile 54, 20, 335, 0
-	setmetatile 55, 20, 334, 0
-	setmetatile 53, 21, 334, 0
-	setmetatile 54, 21, 334, 0
+	setmetatile 53, 18, METATILE_General_RoughWater, 0
+	setmetatile 54, 18, METATILE_General_RoughWater, 0
+	setmetatile 52, 19, METATILE_General_RoughWater, 0
+	setmetatile 53, 19, METATILE_General_RoughDeepWater, 0
+	setmetatile 54, 19, METATILE_General_RoughDeepWater, 0
+	setmetatile 55, 19, METATILE_General_RoughWater, 0
+	setmetatile 52, 20, METATILE_General_RoughWater, 0
+	setmetatile 53, 20, METATILE_General_RoughDeepWater, 0
+	setmetatile 54, 20, METATILE_General_RoughDeepWater, 0
+	setmetatile 55, 20, METATILE_General_RoughWater, 0
+	setmetatile 53, 21, METATILE_General_RoughWater, 0
+	setmetatile 54, 21, METATILE_General_RoughWater, 0
 	return
 
 UnusualWeather_EventScript_PlaceTilesRoute127North:: @ 8273B5F
-	setmetatile 57, 9, 334, 0
-	setmetatile 58, 9, 334, 0
-	setmetatile 56, 10, 334, 0
-	setmetatile 57, 10, 335, 0
-	setmetatile 58, 10, 335, 0
-	setmetatile 59, 10, 334, 0
-	setmetatile 56, 11, 334, 0
-	setmetatile 57, 11, 335, 0
-	setmetatile 58, 11, 335, 0
-	setmetatile 59, 11, 334, 0
-	setmetatile 57, 12, 334, 0
-	setmetatile 58, 12, 334, 0
+	setmetatile 57, 9, METATILE_General_RoughWater, 0
+	setmetatile 58, 9, METATILE_General_RoughWater, 0
+	setmetatile 56, 10, METATILE_General_RoughWater, 0
+	setmetatile 57, 10, METATILE_General_RoughDeepWater, 0
+	setmetatile 58, 10, METATILE_General_RoughDeepWater, 0
+	setmetatile 59, 10, METATILE_General_RoughWater, 0
+	setmetatile 56, 11, METATILE_General_RoughWater, 0
+	setmetatile 57, 11, METATILE_General_RoughDeepWater, 0
+	setmetatile 58, 11, METATILE_General_RoughDeepWater, 0
+	setmetatile 59, 11, METATILE_General_RoughWater, 0
+	setmetatile 57, 12, METATILE_General_RoughWater, 0
+	setmetatile 58, 12, METATILE_General_RoughWater, 0
 	return
 
 UnusualWeather_EventScript_PlaceTilesRoute127South:: @ 8273BCC
-	setmetatile 61, 30, 334, 0
-	setmetatile 62, 30, 334, 0
-	setmetatile 60, 31, 334, 0
-	setmetatile 61, 31, 335, 0
-	setmetatile 62, 31, 335, 0
-	setmetatile 63, 31, 334, 0
-	setmetatile 60, 32, 334, 0
-	setmetatile 61, 32, 335, 0
-	setmetatile 62, 32, 335, 0
-	setmetatile 63, 32, 334, 0
-	setmetatile 61, 33, 334, 0
-	setmetatile 62, 33, 334, 0
+	setmetatile 61, 30, METATILE_General_RoughWater, 0
+	setmetatile 62, 30, METATILE_General_RoughWater, 0
+	setmetatile 60, 31, METATILE_General_RoughWater, 0
+	setmetatile 61, 31, METATILE_General_RoughDeepWater, 0
+	setmetatile 62, 31, METATILE_General_RoughDeepWater, 0
+	setmetatile 63, 31, METATILE_General_RoughWater, 0
+	setmetatile 60, 32, METATILE_General_RoughWater, 0
+	setmetatile 61, 32, METATILE_General_RoughDeepWater, 0
+	setmetatile 62, 32, METATILE_General_RoughDeepWater, 0
+	setmetatile 63, 32, METATILE_General_RoughWater, 0
+	setmetatile 61, 33, METATILE_General_RoughWater, 0
+	setmetatile 62, 33, METATILE_General_RoughWater, 0
 	return
 
 UnusualWeather_EventScript_PlaceTilesRoute129West:: @ 8273C39
-	setmetatile 16, 14, 334, 0
-	setmetatile 17, 14, 334, 0
-	setmetatile 15, 15, 334, 0
-	setmetatile 16, 15, 335, 0
-	setmetatile 17, 15, 335, 0
-	setmetatile 18, 15, 334, 0
-	setmetatile 15, 16, 334, 0
-	setmetatile 16, 16, 335, 0
-	setmetatile 17, 16, 335, 0
-	setmetatile 18, 16, 334, 0
-	setmetatile 16, 17, 334, 0
-	setmetatile 17, 17, 334, 0
+	setmetatile 16, 14, METATILE_General_RoughWater, 0
+	setmetatile 17, 14, METATILE_General_RoughWater, 0
+	setmetatile 15, 15, METATILE_General_RoughWater, 0
+	setmetatile 16, 15, METATILE_General_RoughDeepWater, 0
+	setmetatile 17, 15, METATILE_General_RoughDeepWater, 0
+	setmetatile 18, 15, METATILE_General_RoughWater, 0
+	setmetatile 15, 16, METATILE_General_RoughWater, 0
+	setmetatile 16, 16, METATILE_General_RoughDeepWater, 0
+	setmetatile 17, 16, METATILE_General_RoughDeepWater, 0
+	setmetatile 18, 16, METATILE_General_RoughWater, 0
+	setmetatile 16, 17, METATILE_General_RoughWater, 0
+	setmetatile 17, 17, METATILE_General_RoughWater, 0
 	return
 
 UnusualWeather_EventScript_PlaceTilesRoute129East:: @ 8273CA6
-	setmetatile 42, 19, 334, 0
-	setmetatile 43, 19, 334, 0
-	setmetatile 41, 20, 334, 0
-	setmetatile 42, 20, 335, 0
-	setmetatile 43, 20, 335, 0
-	setmetatile 44, 20, 334, 0
-	setmetatile 41, 21, 334, 0
-	setmetatile 42, 21, 335, 0
-	setmetatile 43, 21, 335, 0
-	setmetatile 44, 21, 334, 0
-	setmetatile 42, 22, 334, 0
-	setmetatile 43, 22, 334, 0
+	setmetatile 42, 19, METATILE_General_RoughWater, 0
+	setmetatile 43, 19, METATILE_General_RoughWater, 0
+	setmetatile 41, 20, METATILE_General_RoughWater, 0
+	setmetatile 42, 20, METATILE_General_RoughDeepWater, 0
+	setmetatile 43, 20, METATILE_General_RoughDeepWater, 0
+	setmetatile 44, 20, METATILE_General_RoughWater, 0
+	setmetatile 41, 21, METATILE_General_RoughWater, 0
+	setmetatile 42, 21, METATILE_General_RoughDeepWater, 0
+	setmetatile 43, 21, METATILE_General_RoughDeepWater, 0
+	setmetatile 44, 21, METATILE_General_RoughWater, 0
+	setmetatile 42, 22, METATILE_General_RoughWater, 0
+	setmetatile 43, 22, METATILE_General_RoughWater, 0
 	return
 
 Route105_EventScript_273D13:: @ 8273D13
@@ -3225,163 +3227,163 @@ UnusualWeather_EventScript_CleanupMapTiles:: @ 8273D6D
 	return
 
 UnusualWeather_EventScript_CleanupRoute114North:: @ 8273E23
-	setmetatile 7, 3, 617, 1
-	setmetatile 7, 4, 617, 1
+	setmetatile 7, 3, METATILE_Fallarbor_RedRockWall, 1
+	setmetatile 7, 4, METATILE_Fallarbor_RedRockWall, 1
 	return
 
 UnusualWeather_EventScript_CleanupRoute114South:: @ 8273E36
-	setmetatile 6, 45, 613, 1
-	setmetatile 6, 46, 613, 1
+	setmetatile 6, 45, METATILE_Fallarbor_BrownRockWall, 1
+	setmetatile 6, 46, METATILE_Fallarbor_BrownRockWall, 1
 	return
 
 UnusualWeather_EventScript_CleanupRoute115West:: @ 8273E49
-	setmetatile 21, 5, 613, 1
-	setmetatile 21, 6, 613, 1
+	setmetatile 21, 5, METATILE_Fallarbor_BrownRockWall, 1
+	setmetatile 21, 6, METATILE_Fallarbor_BrownRockWall, 1
 	return
 
 UnusualWeather_EventScript_CleanupRoute115East:: @ 8273E5C
-	setmetatile 36, 9, 613, 1
-	setmetatile 36, 10, 613, 1
+	setmetatile 36, 9, METATILE_Fallarbor_BrownRockWall, 1
+	setmetatile 36, 10, METATILE_Fallarbor_BrownRockWall, 1
 	return
 
 UnusualWeather_EventScript_CleanupRoute116North:: @ 8273E6F
-	setmetatile 59, 12, 124, 1
-	setmetatile 59, 13, 124, 1
+	setmetatile 59, 12, METATILE_General_RockWall_RockBase, 1
+	setmetatile 59, 13, METATILE_General_RockWall_RockBase, 1
 	return
 
 UnusualWeather_EventScript_CleanupRoute116South:: @ 8273E82
-	setmetatile 79, 5, 124, 1
-	setmetatile 79, 6, 124, 1
+	setmetatile 79, 5, METATILE_General_RockWall_RockBase, 1
+	setmetatile 79, 6, METATILE_General_RockWall_RockBase, 1
 	return
 
 UnusualWeather_EventScript_CleanupRoute118East:: @ 8273E95
-	setmetatile 42, 5, 124, 1
-	setmetatile 42, 6, 121, 1
+	setmetatile 42, 5, METATILE_General_RockWall_RockBase, 1
+	setmetatile 42, 6, METATILE_General_RockWall_GrassBase, 1
 	return
 
 UnusualWeather_EventScript_CleanupRoute118West:: @ 8273EA8
-	setmetatile 9, 5, 124, 1
-	setmetatile 9, 6, 121, 1
+	setmetatile 9, 5, METATILE_General_RockWall_RockBase, 1
+	setmetatile 9, 6, METATILE_General_RockWall_GrassBase, 1
 	return
 
 UnusualWeather_EventScript_CleanupRoute105North:: @ 8273EBB
-	setmetatile 10, 28, 368, 0
-	setmetatile 11, 28, 368, 0
-	setmetatile 9, 29, 368, 0
-	setmetatile 10, 29, 368, 0
-	setmetatile 11, 29, 368, 0
-	setmetatile 12, 29, 368, 0
-	setmetatile 9, 30, 368, 0
-	setmetatile 10, 30, 368, 0
-	setmetatile 11, 30, 368, 0
-	setmetatile 12, 30, 368, 0
-	setmetatile 10, 31, 368, 0
-	setmetatile 11, 31, 368, 0
+	setmetatile 10, 28, METATILE_General_CalmWater, 0
+	setmetatile 11, 28, METATILE_General_CalmWater, 0
+	setmetatile 9, 29, METATILE_General_CalmWater, 0
+	setmetatile 10, 29, METATILE_General_CalmWater, 0
+	setmetatile 11, 29, METATILE_General_CalmWater, 0
+	setmetatile 12, 29, METATILE_General_CalmWater, 0
+	setmetatile 9, 30, METATILE_General_CalmWater, 0
+	setmetatile 10, 30, METATILE_General_CalmWater, 0
+	setmetatile 11, 30, METATILE_General_CalmWater, 0
+	setmetatile 12, 30, METATILE_General_CalmWater, 0
+	setmetatile 10, 31, METATILE_General_CalmWater, 0
+	setmetatile 11, 31, METATILE_General_CalmWater, 0
 	return
 
 UnusualWeather_EventScript_CleanupRoute105South:: @ 8273F28
-	setmetatile 20, 53, 368, 0
-	setmetatile 21, 53, 368, 0
-	setmetatile 19, 54, 368, 0
-	setmetatile 20, 54, 368, 0
-	setmetatile 21, 54, 368, 0
-	setmetatile 22, 54, 368, 0
-	setmetatile 19, 55, 368, 0
-	setmetatile 20, 55, 368, 0
-	setmetatile 21, 55, 368, 0
-	setmetatile 22, 55, 368, 0
-	setmetatile 20, 56, 368, 0
-	setmetatile 21, 56, 368, 0
+	setmetatile 20, 53, METATILE_General_CalmWater, 0
+	setmetatile 21, 53, METATILE_General_CalmWater, 0
+	setmetatile 19, 54, METATILE_General_CalmWater, 0
+	setmetatile 20, 54, METATILE_General_CalmWater, 0
+	setmetatile 21, 54, METATILE_General_CalmWater, 0
+	setmetatile 22, 54, METATILE_General_CalmWater, 0
+	setmetatile 19, 55, METATILE_General_CalmWater, 0
+	setmetatile 20, 55, METATILE_General_CalmWater, 0
+	setmetatile 21, 55, METATILE_General_CalmWater, 0
+	setmetatile 22, 55, METATILE_General_CalmWater, 0
+	setmetatile 20, 56, METATILE_General_CalmWater, 0
+	setmetatile 21, 56, METATILE_General_CalmWater, 0
 	return
 
 UnusualWeather_EventScript_CleanupRoute125West:: @ 8273F95
-	setmetatile 8, 16, 368, 0
-	setmetatile 9, 16, 368, 0
-	setmetatile 7, 17, 368, 0
-	setmetatile 8, 17, 368, 0
-	setmetatile 9, 17, 368, 0
-	setmetatile 10, 17, 368, 0
-	setmetatile 7, 18, 368, 0
-	setmetatile 8, 18, 368, 0
-	setmetatile 9, 18, 368, 0
-	setmetatile 10, 18, 368, 0
-	setmetatile 8, 19, 368, 0
-	setmetatile 9, 19, 368, 0
+	setmetatile 8, 16, METATILE_General_CalmWater, 0
+	setmetatile 9, 16, METATILE_General_CalmWater, 0
+	setmetatile 7, 17, METATILE_General_CalmWater, 0
+	setmetatile 8, 17, METATILE_General_CalmWater, 0
+	setmetatile 9, 17, METATILE_General_CalmWater, 0
+	setmetatile 10, 17, METATILE_General_CalmWater, 0
+	setmetatile 7, 18, METATILE_General_CalmWater, 0
+	setmetatile 8, 18, METATILE_General_CalmWater, 0
+	setmetatile 9, 18, METATILE_General_CalmWater, 0
+	setmetatile 10, 18, METATILE_General_CalmWater, 0
+	setmetatile 8, 19, METATILE_General_CalmWater, 0
+	setmetatile 9, 19, METATILE_General_CalmWater, 0
 	return
 
 UnusualWeather_EventScript_CleanupRoute125East:: @ 8274002
-	setmetatile 53, 18, 368, 0
-	setmetatile 54, 18, 368, 0
-	setmetatile 52, 19, 368, 0
-	setmetatile 53, 19, 368, 0
-	setmetatile 54, 19, 368, 0
-	setmetatile 55, 19, 368, 0
-	setmetatile 52, 20, 368, 0
-	setmetatile 53, 20, 368, 0
-	setmetatile 54, 20, 368, 0
-	setmetatile 55, 20, 368, 0
-	setmetatile 53, 21, 368, 0
-	setmetatile 54, 21, 368, 0
+	setmetatile 53, 18, METATILE_General_CalmWater, 0
+	setmetatile 54, 18, METATILE_General_CalmWater, 0
+	setmetatile 52, 19, METATILE_General_CalmWater, 0
+	setmetatile 53, 19, METATILE_General_CalmWater, 0
+	setmetatile 54, 19, METATILE_General_CalmWater, 0
+	setmetatile 55, 19, METATILE_General_CalmWater, 0
+	setmetatile 52, 20, METATILE_General_CalmWater, 0
+	setmetatile 53, 20, METATILE_General_CalmWater, 0
+	setmetatile 54, 20, METATILE_General_CalmWater, 0
+	setmetatile 55, 20, METATILE_General_CalmWater, 0
+	setmetatile 53, 21, METATILE_General_CalmWater, 0
+	setmetatile 54, 21, METATILE_General_CalmWater, 0
 	return
 
 UnusualWeather_EventScript_CleanupRoute127North:: @ 827406F
-	setmetatile 57, 9, 368, 0
-	setmetatile 58, 9, 368, 0
-	setmetatile 56, 10, 368, 0
-	setmetatile 57, 10, 368, 0
-	setmetatile 58, 10, 368, 0
-	setmetatile 59, 10, 368, 0
-	setmetatile 56, 11, 368, 0
-	setmetatile 57, 11, 368, 0
-	setmetatile 58, 11, 368, 0
-	setmetatile 59, 11, 368, 0
-	setmetatile 57, 12, 368, 0
-	setmetatile 58, 12, 368, 0
+	setmetatile 57, 9, METATILE_General_CalmWater, 0
+	setmetatile 58, 9, METATILE_General_CalmWater, 0
+	setmetatile 56, 10, METATILE_General_CalmWater, 0
+	setmetatile 57, 10, METATILE_General_CalmWater, 0
+	setmetatile 58, 10, METATILE_General_CalmWater, 0
+	setmetatile 59, 10, METATILE_General_CalmWater, 0
+	setmetatile 56, 11, METATILE_General_CalmWater, 0
+	setmetatile 57, 11, METATILE_General_CalmWater, 0
+	setmetatile 58, 11, METATILE_General_CalmWater, 0
+	setmetatile 59, 11, METATILE_General_CalmWater, 0
+	setmetatile 57, 12, METATILE_General_CalmWater, 0
+	setmetatile 58, 12, METATILE_General_CalmWater, 0
 	return
 
 UnusualWeather_EventScript_CleanupRoute127South:: @ 82740DC
-	setmetatile 61, 30, 368, 0
-	setmetatile 62, 30, 368, 0
-	setmetatile 60, 31, 368, 0
-	setmetatile 61, 31, 368, 0
-	setmetatile 62, 31, 368, 0
-	setmetatile 63, 31, 368, 0
-	setmetatile 60, 32, 368, 0
-	setmetatile 61, 32, 368, 0
-	setmetatile 62, 32, 368, 0
-	setmetatile 63, 32, 368, 0
-	setmetatile 61, 33, 368, 0
-	setmetatile 62, 33, 368, 0
+	setmetatile 61, 30, METATILE_General_CalmWater, 0
+	setmetatile 62, 30, METATILE_General_CalmWater, 0
+	setmetatile 60, 31, METATILE_General_CalmWater, 0
+	setmetatile 61, 31, METATILE_General_CalmWater, 0
+	setmetatile 62, 31, METATILE_General_CalmWater, 0
+	setmetatile 63, 31, METATILE_General_CalmWater, 0
+	setmetatile 60, 32, METATILE_General_CalmWater, 0
+	setmetatile 61, 32, METATILE_General_CalmWater, 0
+	setmetatile 62, 32, METATILE_General_CalmWater, 0
+	setmetatile 63, 32, METATILE_General_CalmWater, 0
+	setmetatile 61, 33, METATILE_General_CalmWater, 0
+	setmetatile 62, 33, METATILE_General_CalmWater, 0
 	return
 
 UnusualWeather_EventScript_CleanupRoute129West:: @ 8274149
-	setmetatile 16, 14, 368, 0
-	setmetatile 17, 14, 368, 0
-	setmetatile 15, 15, 368, 0
-	setmetatile 16, 15, 368, 0
-	setmetatile 17, 15, 368, 0
-	setmetatile 18, 15, 368, 0
-	setmetatile 15, 16, 368, 0
-	setmetatile 16, 16, 368, 0
-	setmetatile 17, 16, 368, 0
-	setmetatile 18, 16, 368, 0
-	setmetatile 16, 17, 368, 0
-	setmetatile 17, 17, 368, 0
+	setmetatile 16, 14, METATILE_General_CalmWater, 0
+	setmetatile 17, 14, METATILE_General_CalmWater, 0
+	setmetatile 15, 15, METATILE_General_CalmWater, 0
+	setmetatile 16, 15, METATILE_General_CalmWater, 0
+	setmetatile 17, 15, METATILE_General_CalmWater, 0
+	setmetatile 18, 15, METATILE_General_CalmWater, 0
+	setmetatile 15, 16, METATILE_General_CalmWater, 0
+	setmetatile 16, 16, METATILE_General_CalmWater, 0
+	setmetatile 17, 16, METATILE_General_CalmWater, 0
+	setmetatile 18, 16, METATILE_General_CalmWater, 0
+	setmetatile 16, 17, METATILE_General_CalmWater, 0
+	setmetatile 17, 17, METATILE_General_CalmWater, 0
 	return
 
 UnusualWeather_EventScript_CleanupRoute129East:: @ 82741B6
-	setmetatile 42, 19, 368, 0
-	setmetatile 43, 19, 368, 0
-	setmetatile 41, 20, 368, 0
-	setmetatile 42, 20, 368, 0
-	setmetatile 43, 20, 368, 0
-	setmetatile 44, 20, 368, 0
-	setmetatile 41, 21, 368, 0
-	setmetatile 42, 21, 368, 0
-	setmetatile 43, 21, 368, 0
-	setmetatile 44, 21, 368, 0
-	setmetatile 42, 22, 368, 0
-	setmetatile 43, 22, 368, 0
+	setmetatile 42, 19, METATILE_General_CalmWater, 0
+	setmetatile 43, 19, METATILE_General_CalmWater, 0
+	setmetatile 41, 20, METATILE_General_CalmWater, 0
+	setmetatile 42, 20, METATILE_General_CalmWater, 0
+	setmetatile 43, 20, METATILE_General_CalmWater, 0
+	setmetatile 44, 20, METATILE_General_CalmWater, 0
+	setmetatile 41, 21, METATILE_General_CalmWater, 0
+	setmetatile 42, 21, METATILE_General_CalmWater, 0
+	setmetatile 43, 21, METATILE_General_CalmWater, 0
+	setmetatile 44, 21, METATILE_General_CalmWater, 0
+	setmetatile 42, 22, METATILE_General_CalmWater, 0
+	setmetatile 43, 22, METATILE_General_CalmWater, 0
 	return
 
 UnusualWeather_Underwater_SetupEscapeWarp:: @ 8274223

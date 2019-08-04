@@ -158,6 +158,9 @@ static EWRAM_DATA struct {
     /*0xFE*/ u8 unk_FE;
 } *gUnknown_020322A0 = {NULL};
 
+#if !defined(NONMATCHING) && MODERN
+#define static
+#endif
 static bool32 sub_8077260(void);
 static void sub_80773D0(void);
 static void sub_807811C(void);
@@ -2779,7 +2782,7 @@ static void sub_8079398(void)
     }
 }
 
-static void DisplayMessageAndContinueTask(void)
+static void Wait2SecondsAndCreateYesNoMenu(void)
 {
     gUnknown_0203229C->unk_A8++;
 
@@ -2918,7 +2921,7 @@ static void sub_80795AC(void)
             sub_80781C8();
             break;
         case 14:
-            DisplayMessageAndContinueTask();
+            Wait2SecondsAndCreateYesNoMenu();
             break;
         case 15:
             sub_8079034();
@@ -5840,7 +5843,7 @@ static void _CreateInGameTradePokemon(u8 whichPlayerMon, u8 whichInGameTrade)
     SetMonData(pokemon, MON_DATA_NICKNAME, inGameTrade->name);
     SetMonData(pokemon, MON_DATA_OT_NAME, inGameTrade->otName);
     SetMonData(pokemon, MON_DATA_OT_GENDER, &inGameTrade->otGender);
-    SetMonData(pokemon, MON_DATA_ALT_ABILITY, &inGameTrade->secondAbility);
+    SetMonData(pokemon, MON_DATA_ABILITY_NUM, &inGameTrade->secondAbility);
     SetMonData(pokemon, MON_DATA_BEAUTY, &inGameTrade->stats[1]);
     SetMonData(pokemon, MON_DATA_CUTE, &inGameTrade->stats[2]);
     SetMonData(pokemon, MON_DATA_COOL, &inGameTrade->stats[0]);

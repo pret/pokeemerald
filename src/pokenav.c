@@ -318,7 +318,7 @@ void Task_RunLoopedTask_LinkMode(u8 taskId)
 
     if (sub_8087598())
         return;
-    
+
     task = (LoopedTask)GetWordTaskArg(taskId, 1);
     state = &gTasks[taskId].data[0];
     action = task(*state);
@@ -605,7 +605,7 @@ void sub_81C7694(u32 a0)
     gPokenavResources->fieldA = value;
 }
 
-u16 sub_81C76AC(void)
+u32 sub_81C76AC(void)
 {
     return gPokenavResources->fieldA;
 }

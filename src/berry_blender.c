@@ -194,10 +194,10 @@ EWRAM_DATA static s32 sUnknown_020322BC[5] = {0};
 EWRAM_DATA static u32 sUnknown_020322D0 = 0;
 
 // IWRAM bss
-IWRAM_DATA static s16 sUnknown_03000DE8[8];
-IWRAM_DATA static s16 sUnknown_03000DF8[6];
-IWRAM_DATA static s16 sUnknown_03000E04;
-IWRAM_DATA static s16 sUnknown_03000E06;
+static s16 sUnknown_03000DE8[8];
+static s16 sUnknown_03000DF8[6];
+static s16 sUnknown_03000E04;
+static s16 sUnknown_03000E06;
 
 // IWRAM common
 u8 gInGameOpponentsNo;
@@ -1078,7 +1078,7 @@ static void sub_807FD64(struct Sprite* sprite, s16 a2, s16 a3, s16 a4, s16 a5, s
 
 static void sub_807FD90(u16 a0, u8 a1)
 {
-    u8 spriteId = sub_80D511C(a0 + 123, 0, 80, a1 & 1);
+    u8 spriteId = LoadSpinningBerryPicGfx(a0 + 123, 0, 80, a1 & 1);
     sub_807FD64(&gSprites[spriteId], sUnknown_08339C78[a1][0], sUnknown_08339C78[a1][1], sUnknown_08339C78[a1][2], sUnknown_08339C78[a1][3], sUnknown_08339C78[a1][4]);
 }
 

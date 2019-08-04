@@ -38,7 +38,7 @@ struct Unk03006370
 
 static void sub_81D5084(u8);
 
-extern struct Unk03006370 gUnknown_03006370;
+struct Unk03006370 gUnknown_03006370;
 
 extern const u8 gUnknown_089A3470[];
 extern const u8 gMultiBootProgram_BerryGlitchFix_Start[];

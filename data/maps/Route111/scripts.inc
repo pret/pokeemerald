@@ -12,29 +12,29 @@ Route111_MapScript1_1F0CBC: @ 81F0CBC
 	end
 
 Route111_EventScript_1F0CD1:: @ 81F0CD1
-	setmetatile 29, 86, 124, 1
-	setmetatile 29, 87, 145, 1
+	setmetatile 29, 86, METATILE_General_RockWall_RockBase, 1
+	setmetatile 29, 87, METATILE_General_RockWall_SandBase, 1
 	return
 
 Route111_EventScript_1F0CE4:: @ 81F0CE4
-	setmetatile 18, 53, 984, 0
-	setmetatile 19, 53, 985, 0
-	setmetatile 20, 53, 986, 0
-	setmetatile 18, 54, 992, 0
-	setmetatile 19, 54, 993, 0
-	setmetatile 20, 54, 994, 0
-	setmetatile 18, 55, 1000, 0
-	setmetatile 19, 55, 1001, 0
-	setmetatile 20, 55, 1002, 0
-	setmetatile 18, 56, 1008, 0
-	setmetatile 19, 56, 1009, 0
-	setmetatile 20, 56, 1010, 0
-	setmetatile 18, 57, 987, 0
-	setmetatile 19, 57, 988, 0
-	setmetatile 20, 57, 989, 0
-	setmetatile 18, 58, 995, 0
-	setmetatile 19, 58, 996, 0
-	setmetatile 20, 58, 997, 0
+	setmetatile 18, 53, METATILE_Mauville_MirageTower_Tile0, 0
+	setmetatile 19, 53, METATILE_Mauville_MirageTower_Tile1, 0
+	setmetatile 20, 53, METATILE_Mauville_MirageTower_Tile2, 0
+	setmetatile 18, 54, METATILE_Mauville_MirageTower_Tile3, 0
+	setmetatile 19, 54, METATILE_Mauville_MirageTower_Tile4, 0
+	setmetatile 20, 54, METATILE_Mauville_MirageTower_Tile5, 0
+	setmetatile 18, 55, METATILE_Mauville_MirageTower_Tile6, 0
+	setmetatile 19, 55, METATILE_Mauville_MirageTower_Tile7, 0
+	setmetatile 20, 55, METATILE_Mauville_MirageTower_Tile8, 0
+	setmetatile 18, 56, METATILE_Mauville_MirageTower_Tile9, 0
+	setmetatile 19, 56, METATILE_Mauville_MirageTower_TileA, 0
+	setmetatile 20, 56, METATILE_Mauville_MirageTower_TileB, 0
+	setmetatile 18, 57, METATILE_Mauville_MirageTower_TileC, 0
+	setmetatile 19, 57, METATILE_Mauville_MirageTower_TileD, 0
+	setmetatile 20, 57, METATILE_Mauville_MirageTower_TileE, 0
+	setmetatile 18, 58, METATILE_Mauville_MirageTower_TileF, 0
+	setmetatile 19, 58, METATILE_Mauville_MirageTower_Tile10, 0
+	setmetatile 20, 58, METATILE_Mauville_MirageTower_Tile11, 0
 	return
 
 Route111_OnTransition: @ 81F0D87
