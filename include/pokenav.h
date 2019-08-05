@@ -11,7 +11,7 @@ struct PokenavSub18
 {
     u16 unk0;
     u16 unk2;
-    struct
+    struct PokenavMonList
     {
         u8 boxId;
         u8 monId;

@@ -78,7 +78,6 @@ SECTIONS {
         src/berry_powder.o(.text*);
         src/dodrio_berry_picking.o(.text*);
         src/pokemon_jump.o(.text*);
-        asm/pokemon_jump.o(.text*);
         src/rtc.o(.text*);
         src/main_menu.o(.text*);
         src/battle_controllers.o(.text*);
@@ -322,7 +321,6 @@ SECTIONS {
         src/pokenav_unk_8.o(.text*);
         asm/pokenav_unk_8.o(.text*);
         asm/pokenav_unk_9.o(.text*);
-        asm/pokenav_unk_10.o(.text*);
         src/pokenav_unk_10.o(.text*);
         src/pokenav_match_call_data.o(.text*);
         src/menu_specialized.o(.text*);
@@ -365,6 +363,7 @@ SECTIONS {
         src/librfu_intr.o(.text*);
         asm/librfu_intr.o(.text*);
         src/librfu_rfu.o(.text*);
+        src/librfu.o(.text*);
         asm/librfu.o(.text*);
         asm/libagbsyscall.o(.text*);
         *libgcc.a:_call_via_rX.o(.text*);
@@ -451,7 +450,6 @@ SECTIONS {
         data/berry_powder.o(.rodata);
         src/dodrio_berry_picking.o(.rodata);
         src/pokemon_jump.o(.rodata);
-        data/pokemon_jump.o(.rodata);
         src/rtc.o(.rodata);
         src/main_menu.o(.rodata);
         src/battle_controllers.o(.rodata);
