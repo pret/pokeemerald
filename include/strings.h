@@ -2773,6 +2773,9 @@ extern const u8 gUnknown_085EC017[];
 extern const u8 gUnknown_085EC01C[];
 extern const u8 gUnknown_085EC022[];
 
+// pokenav_unk_8
+extern const u8 gText_NumberF700[];
+
 // pokenav_unk_10
 extern const u8 gText_RibbonsF700[];
 

@@ -31,7 +31,7 @@ struct MatchCallWindowState {
     u16 visibleEntries;
     u16 unkA;
     u32 unkC;
-    u32 unk10;
+    void * unk10;
 };
 
 struct PokenavSub17Substruct
@@ -40,13 +40,13 @@ struct PokenavSub17Substruct
     u32 unk10;
     u32 unk14;
     u32 unk18;
-    u32 unk1C;
+    void * unk1C;
     s32 unk20;
     s32 unk24;
     u32 unk28;
     s32 unk2C;
     u32 unk30;
-    void (*unk34)(u32, u8*);
+    void (*unk34)(struct PokenavMonList *, u8*);
     void (*unk38)(u16, u32, u32);
     struct Sprite *rightArrow;
     struct Sprite *upArrow;
@@ -82,7 +82,7 @@ void sub_81C8D4C(struct MatchCallWindowState *a0, struct PokenavSub17Substruct *
 void sub_81C8CB4(struct MatchCallWindowState *a0, struct PokenavSub17Substruct *a1);
 void sub_81C8B70(struct UnknownSubSubStruct_0203CF40 *a0, s32 a1, s32 a2);
 void sub_81C8568(s32 a0, struct PokenavSub17Substruct *a1);
-void sub_81C83AC(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, struct PokenavSub17Substruct *a5);
+void sub_81C83AC(void * a0, u32 a1, u32 a2, u32 a3, u32 a4, struct PokenavSub17Substruct *a5);
 void sub_81C837C(struct MatchCallWindowState *a0, struct PokenavSub17Substruct *a1);
 void sub_81C835C(struct UnknownSubSubStruct_0203CF40 *a0);
 u32 LoopedTask_sub_81C8254(s32 state);
@@ -194,7 +194,7 @@ void sub_81C837C(struct MatchCallWindowState *a0, struct PokenavSub17Substruct *
     sub_81C83AC(a0->unk10, a0->windowTopIndex, arg2, a0->unkC, 0, a1);
 }
 
-void sub_81C83AC(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, struct PokenavSub17Substruct *a5)
+void sub_81C83AC(void * a0, u32 a1, u32 a2, u32 a3, u32 a4, struct PokenavSub17Substruct *a5)
 {
     if (a2 == 0)
         return;
