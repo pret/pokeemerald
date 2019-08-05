@@ -4006,6 +4006,12 @@ extern const u32 gBerryPic_Enigma[];
 extern const u32 gBerryPalette_Enigma[];
 
 //pokenav
+extern const u16 gPokenavCondition_Pal[];
+extern const u32 gPokenavCondition_Gfx[];
+extern const u32 gPokenavCondition_Tilemap[];
+extern const u16 gPokenavOptions_Tilemap[];
+extern const u32 gPokenavOptions_Gfx[];
+extern const u16 gPokenavOptions_Pal[];
 extern const u8 gPokenavConditionMarker_Gfx[];
 extern const u16 gPokenavConditionMarker_Pal[];
 extern const u16 gPokenavLeftHeader_Pal[];
@@ -4024,6 +4030,9 @@ extern const u32 gPokenavLeftHeaderBeauty_Gfx[];
 extern const u32 gPokenavLeftHeaderCute_Gfx[];
 extern const u32 gPokenavLeftHeaderSmart_Gfx[];
 extern const u32 gPokenavLeftHeaderTough_Gfx[];
+extern const u16 gUnknown_08DDE010[];
+extern const u32 gUnknown_08DDE030[];
+extern const u32 gUnknown_08DDE12C[];
 
 extern const u32 gPageInfoTilemap[];
 extern const u32 gUnknown_08D98CC8[];
@@ -4077,7 +4086,7 @@ extern const u32 gContestConfetti_Pal[];
 extern const u32 gUnknown_08C093F0[];
 extern const u32 gSubstituteDollTilemap[];
 extern const u32 gSubstituteDollGfx[];
-extern const u16 gSubstituteDollPal[];
+extern const u32 gSubstituteDollPal[];
 extern const u32 gHealthboxSinglesPlayerGfx[];
 extern const u32 gHealthboxSinglesOpponentGfx[];
 extern const u32 gHealthboxDoublesPlayerGfx[];
@@ -4933,6 +4942,9 @@ extern const u32 gLinkMiscMenu_Tilemap[];
 // Use Pokeblock
 extern const u8 gPokenavConditionCancel_Gfx[];
 extern const u16 gPokenavConditionCancel_Pal[];
+extern const u8 gUsePokeblockUpDown_Gfx[];
+extern const u16 gUsePokeblockUpDown_Pal[];
+extern const u16 gUsePokeblockCondition_Pal[];
 
 // Berry Crush
 extern const u32 gUnknown_08DE34B8[];

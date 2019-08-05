@@ -275,7 +275,7 @@ void sub_8010FCC(u32 a0, u32 a1, u32 a2);
 void sub_8011C84(void);
 void sub_8012188(const u8 *name, struct UnkLinkRfuStruct_02022B14 *structPtr, u8 a2);
 bool32 sub_8011B90(void);
-void sub_800FE50(u16 *a0);
+void sub_800FE50(void *a0);
 bool32 sub_800E540(u16 id, u8 *name);
 void sub_8011DE0(u32 arg0);
 u8 sub_801100C(s32 a0);

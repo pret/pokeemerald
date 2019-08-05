@@ -37,9 +37,10 @@ static u32 sub_81CACF8(struct Pokenav3Struct *);
 static u32 sub_81CAD20(s32);
 static bool32 sub_81CB1D0(void);
 
-extern const u8 gUnknown_08622508[];
-extern const u8 gUnknown_0862250A[];
-extern const u8 *const gUnknown_08622028[][4];
+#include "data/text/match_call_messages.h"
+
+const u8 gUnknown_08622508[] = {0, 2};
+const u8 gUnknown_0862250A[] = {0, 1, 2};
 
 bool32 sub_81CAAE8(void)
 {
@@ -207,7 +208,7 @@ static u32 sub_81CAD20(s32 taskState)
             {
                 state->unk1C[state->unkA].unk2 = j;
                 state->unk1C[state->unkA].unk0 = 1;
-                state->unk1C[state->unkA].unk1 = sub_81D16DC(j);
+                state->unk1C[state->unkA].unk1 = MatchCallMapSecGetByIndex(j);
                 state->unkA++;
             }
 
@@ -364,7 +365,7 @@ const u8 *sub_81CAFD8(int index, int textType)
         var0 = state->unk1C[index].unk2;
     }
 
-    return gUnknown_08622028[var0][textType];
+    return gMatchCallMessages[var0][textType];
 }
 
 u16 sub_81CB01C(void)
