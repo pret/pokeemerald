@@ -6582,6 +6582,9 @@ static void atk76_various(void)
         else
             gBattlescriptCurrInstr += 7;
         return;
+    case VARIOUS_TRACE_ABILITY:
+        gBattleMons[gActiveBattler].ability = gBattleStruct->tracedAbility[gActiveBattler];
+        break;
     case VARIOUS_JUMP_IF_NOT_BERRY:
         if (ItemId_GetPocket(gBattleMons[gActiveBattler].item) == POCKET_BERRIES)
             gBattlescriptCurrInstr += 7;

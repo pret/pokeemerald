@@ -3594,22 +3594,19 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                      && gBattleMons[target2].ability != 0 && gBattleMons[target2].hp != 0)
                     {
                         gActiveBattler = GetBattlerAtPosition(((Random() & 1) * 2) | side);
-                        gBattleMons[i].ability = gBattleMons[gActiveBattler].ability;
-                        gLastUsedAbility = gBattleMons[gActiveBattler].ability;
+                        gBattleStruct->tracedAbility[i] = gLastUsedAbility = gBattleMons[gActiveBattler].ability;
                         effect++;
                     }
                     else if (gBattleMons[target1].ability != 0 && gBattleMons[target1].hp != 0)
                     {
                         gActiveBattler = target1;
-                        gBattleMons[i].ability = gBattleMons[gActiveBattler].ability;
-                        gLastUsedAbility = gBattleMons[gActiveBattler].ability;
+                        gBattleStruct->tracedAbility[i] = gLastUsedAbility = gBattleMons[gActiveBattler].ability;
                         effect++;
                     }
                     else if (gBattleMons[target2].ability != 0 && gBattleMons[target2].hp != 0)
                     {
                         gActiveBattler = target2;
-                        gBattleMons[i].ability = gBattleMons[gActiveBattler].ability;
-                        gLastUsedAbility = gBattleMons[gActiveBattler].ability;
+                        gBattleStruct->tracedAbility[i] = gLastUsedAbility = gBattleMons[gActiveBattler].ability;
                         effect++;
                     }
                 }
@@ -3618,8 +3615,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                     gActiveBattler = target1;
                     if (gBattleMons[target1].ability && gBattleMons[target1].hp)
                     {
-                        gBattleMons[i].ability = gBattleMons[target1].ability;
-                        gLastUsedAbility = gBattleMons[target1].ability;
+                        gBattleStruct->tracedAbility[i] = gLastUsedAbility = gBattleMons[target1].ability;
                         effect++;
                     }
                 }

@@ -141,6 +141,7 @@
 #define VARIOUS_JUMP_IF_ROAR_FAILS              78
 #define VARIOUS_TRY_INSTRUCT                    79
 #define VARIOUS_JUMP_IF_NOT_BERRY               80
+#define VARIOUS_TRACE_ABILITY                   81
 
 // atk80, dmg manipulation
 #define ATK80_DMG_CHANGE_SIGN                               0

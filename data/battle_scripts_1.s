@@ -6221,6 +6221,7 @@ BattleScript_TraceActivates::
 	call BattleScript_AbilityPopUp
 	printstring STRINGID_PKMNTRACED
 	waitmessage 0x40
+	settracedability BS_ATTACKER
 	switchinabilities BS_ATTACKER
 	end3
 
@@ -6664,6 +6665,7 @@ BattleScript_AttackerAbilityStatRaiseEnd3::
 	end3
 	
 BattleScript_SwitchInAbilityMsg::
+	call BattleScript_AbilityPopUp
 	printfromtable gSwitchInAbilityStringIds
 	waitmessage 0x40
 	end3
