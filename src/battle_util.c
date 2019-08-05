@@ -5749,6 +5749,10 @@ static u32 CalcDefenseStat(u16 move, u8 battlerAtk, u8 battlerDef, u8 moveType, 
         break;
     }
 
+    // sandstorm sp.def boost for rock types
+    if (WEATHER_HAS_EFFECT && gBattleWeather & WEATHER_SANDSTORM_ANY && IS_BATTLER_OF_TYPE(battlerDef, TYPE_ROCK) && !usesDefStat)
+        MulModifier(&modifier, UQ_4_12(1.5));
+
     return ApplyModifier(modifier, defStat);
 }
 
