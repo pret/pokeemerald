@@ -870,7 +870,7 @@ u32 sub_81CBB74(s32 taskState)
 static void sub_81CBBB8(void)
 {
     struct MatchCallListTemplate template;
-    template.unk0 = (u32)sub_81CAE94();
+    template.unk0 = sub_81CAE94();
     template.unk4 = sub_81CAE38();
     template.unk8 = 4;
     template.unk6 = 0;

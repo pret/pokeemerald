@@ -77,7 +77,7 @@ void SetVBlankCallback_(IntrCallback callback);
 // pokenav_match_call_ui.c
 struct MatchCallListTemplate
 {
-    u32 unk0;
+    struct PokenavMonList * unk0;
     u16 unk4;
     u16 unk6;
     u8 unk8;
@@ -87,9 +87,10 @@ struct MatchCallListTemplate
     u8 unkC;
     u8 unkD;
     u8 unkE;
-    void (*unk10)(u32, u8 *a1);
+    void (*unk10)(struct PokenavMonList *, u8 *a1);
     void (*unk14)(u16 a0, u32 a1, u32 a2);
 };
+
 u32 GetSelectedMatchCall(void);
 bool32 sub_81C8224(void);
 int MatchCall_MoveCursorUp(void);
@@ -167,26 +168,20 @@ void sub_81C99D4(void);
 void sub_81CAADC(void);
 
 // pokenav_unk_3.c
-struct Pokenav3Struct_Unk1C
-{
-    u8 unk0;
-    u8 unk1;
-    u16 unk2;
-};
 bool32 sub_81CAAE8(void);
 u32 sub_81CAB24(void);
 void sub_81CAB38(void);
 int sub_81CAE28(void);
 int sub_81CAE38(void);
 int sub_81CAE48(void);
-struct Pokenav3Struct_Unk1C *sub_81CAE94(void);
+struct PokenavMonList *sub_81CAE94(void);
 u16 sub_81CAEA4(int);
 bool32 sub_81CAEBC(int index);
 int sub_81CAF04(int index);
 const u8 *sub_81CAFD8(int index, int textType);
 u16 sub_81CB01C(void);
 u16 sub_81CB02C(int arg0);
-void sub_81CB050(u32 arg0, u8 *str);
+void sub_81CB050(struct PokenavMonList * arg0, u8 *str);
 u8 sub_81CB0C8(int rematchIndex);
 int sub_81CB0E4(int index);
 bool32 sub_81CAE08(int);
