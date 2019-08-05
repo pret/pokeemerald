@@ -7,16 +7,18 @@
 
 typedef u32 (*LoopedTask)(s32 state);
 
+struct PokenavMonList
+{
+    u8 boxId;
+    u8 monId;
+    u16 unk6;
+};
+
 struct PokenavSub18
 {
     u16 unk0;
     u16 unk2;
-    struct PokenavMonList
-    {
-        u8 boxId;
-        u8 monId;
-        u16 unk6;
-    } unk4[TOTAL_BOXES_COUNT * IN_BOX_COUNT + PARTY_SIZE];
+    struct PokenavMonList unk4[TOTAL_BOXES_COUNT * IN_BOX_COUNT + PARTY_SIZE];
 };
 
 // Return values of LoopedTask functions.

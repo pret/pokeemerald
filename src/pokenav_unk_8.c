@@ -3,20 +3,39 @@
 #include "bg.h"
 #include "window.h"
 
-u32 sub_81CF134(void);
-u32 sub_81CF1C4(void);
-u32 sub_81CF1D8(void);
-u32 sub_81CF278(void);
-u32 sub_81CF578(s32);
-u32 sub_81CF5F0(s32);
-u32 sub_81CF668(s32);
-u32 sub_81CF6E0(s32);
-u32 sub_81CF758(s32);
-u32 sub_81CF798(s32);
+struct PokenavSub7
+{
+    u32 (*unk0)(struct PokenavSub7 *);
+    u32 loopedTaskId;
+    u8 fill1[4];
+    s32 unkC;
+    s32 unk10;
+    u32 unk14;
+    u32 unk18;
+    u32 unk1C;
+    struct PokenavSub18 *unkPtr;
+};
+
+u32 sub_81CF010(struct PokenavSub7 *structPtr);
+u32 sub_81CF030(struct PokenavSub7 *structPtr);
+u32 sub_81CF0B8(struct PokenavSub7 *structPtr);
+u32 sub_81CF0B0(struct PokenavSub7 *structPtr);
+u32 sub_81CF11C(s32 state);
+u32 sub_81CF134(s32 state);
+u32 sub_81CF1C4(s32 state);
+u32 sub_81CF1D8(s32 state);
+u32 sub_81CF278(s32 state);
+u32 sub_81CF578(s32 state);
+u32 sub_81CF5F0(s32 state);
+u32 sub_81CF668(s32 state);
+u32 sub_81CF6E0(s32 state);
+u32 sub_81CF758(s32 state);
+u32 sub_81CF798(s32 state);
+void sub_81CF2C4(struct PokenavSub7 *structPtr, struct PokenavMonList *item);
 
 const u32 gUnknown_086233A0[] = {0x16, 0x17, 0x18, 0x21, 0x2F};
 
-u32 (*const gUnknown_086233B4[])(void) = 
+const LoopedTask gUnknown_086233B4[] =
 {
     sub_81CF134,
     sub_81CF1C4,
@@ -76,23 +95,6 @@ const struct WindowTemplate gUnknown_086235B4 =
 const u8 gUnknown_086235BC[] = _("{COLOR_HIGHLIGHT_SHADOW}{LIGHT_RED}{WHITE}{GREEN}♂{COLOR_HIGHLIGHT_SHADOW}{DARK_GREY}{WHITE}{LIGHT_GREY}");
 const u8 gUnknown_086235C8[] = _("{COLOR_HIGHLIGHT_SHADOW}{LIGHT_GREEN}{WHITE}{BLUE}♀{COLOR_HIGHLIGHT_SHADOW}{DARK_GREY}{WHITE}{LIGHT_GREY}");
 const u8 gUnknown_086235D4[] = _("{UNK_SPACER}");
-
-struct PokenavSub7
-{
-    u32 (*unk0)(struct PokenavSub7 *);
-    u32 loopedTaskId;
-    u8 fill1[12];
-    u32 unk14;
-    u32 unk18;
-    u32 unk1C;
-    struct PokenavSub18 *unkPtr;
-};
-
-u32 sub_81CF010(struct PokenavSub7 *structPtr);
-u32 sub_81CF030(struct PokenavSub7 *structPtr);
-u32 sub_81CF0B8(struct PokenavSub7 *structPtr);
-u32 sub_81CF0B0(struct PokenavSub7 *structPtr);
-u32 sub_81CF11C(s32 state);
 
 bool32 sub_81CEF3C(void)
 {
@@ -186,4 +188,125 @@ u32 sub_81CF0C0(void)
 {
     struct PokenavSub7 *structPtr = GetSubstructPtr(7);
     return structPtr->unk18;
+}
+
+struct PokenavMonList * sub_81CF0D0(void)
+{
+    struct PokenavSub7 * ptr = (struct PokenavSub7 *)GetSubstructPtr(7);
+    return ptr->unkPtr->unk4;
+}
+
+u16 sub_81CF0E0(void)
+{
+    struct PokenavSub7 * ptr = (struct PokenavSub7 *)GetSubstructPtr(7);
+    return ptr->unkPtr->unk0;
+}
+
+u16 sub_81CF0F0(void)
+{
+    struct PokenavSub7 * ptr = (struct PokenavSub7 *)GetSubstructPtr(7);
+    s32 i = GetSelectedMatchCall();
+    return ptr->unkPtr->unk4[i].unk6;
+}
+
+u16 sub_81CF10C(void)
+{
+    struct PokenavSub7 * ptr = (struct PokenavSub7 *)GetSubstructPtr(7);
+    return ptr->unkPtr->unk2;
+}
+
+u32 sub_81CF11C(s32 state)
+{
+    return gUnknown_086233B4[state](state);
+}
+
+u32 sub_81CF134(s32 state)
+{
+    s32 i;
+    struct PokenavMonList item;
+    struct PokenavSub7 * ptr = (struct PokenavSub7 *)GetSubstructPtr(7);
+
+    ptr->unkPtr->unk0 = 0;
+    ptr->unkPtr->unk2 = 0;
+    item.boxId = 14;
+    for (i = 0; i < PARTY_SIZE; i++)
+    {
+        struct Pokemon * pokemon = &gPlayerParty[i];
+        if (!GetMonData(pokemon, MON_DATA_SANITY_HAS_SPECIES))
+            return LT_INC_AND_CONTINUE;
+        if (!GetMonData(pokemon, MON_DATA_SANITY_IS_EGG))
+        {
+            item.monId = i;
+            item.unk6 = GetMonData(pokemon, ptr->unk14);
+            sub_81CF2C4(ptr, &item);
+        }
+    }
+
+    return LT_INC_AND_CONTINUE;
+}
+
+u32 sub_81CF1C4(s32 state)
+{
+    struct PokenavSub7 * ptr = (struct PokenavSub7 *)GetSubstructPtr(7);
+    ptr->unk10 = 0;
+    ptr->unkC = 0;
+    return LT_INC_AND_CONTINUE;
+}
+
+u32 sub_81CF1D8(s32 state)
+{
+    struct PokenavSub7 * ptr = (struct PokenavSub7 *)GetSubstructPtr(7);
+    s32 boxId = ptr->unkC;
+    s32 monId = ptr->unk10;
+    s32 boxCount = 0;
+    struct PokenavMonList item;
+
+    while (boxId < TOTAL_BOXES_COUNT)
+    {
+        while (monId < IN_BOX_COUNT)
+        {
+            if (CheckBoxMonSanityAt(boxId, monId))
+            {
+                item.boxId = boxId;
+                item.monId = monId;
+                item.unk6 = GetBoxMonDataAt(boxId, monId, ptr->unk14);
+                sub_81CF2C4(ptr, &item);
+            }
+            boxCount++;
+            monId++;
+            if (boxCount > 14)
+            {
+                ptr->unkC = boxId;
+                ptr->unk10 = monId;
+                return LT_CONTINUE;
+            }
+        }
+        monId = 0;
+        boxId++;
+    }
+
+    return LT_INC_AND_CONTINUE;
+}
+
+u32 sub_81CF278(s32 state)
+{
+    struct PokenavSub7 * ptr = (struct PokenavSub7 *)GetSubstructPtr(7);
+    s32 r6 = ptr->unkPtr->unk0;
+    s32 r4 = ptr->unkPtr->unk4[0].unk6;
+    s32 i;
+    ptr->unkPtr->unk4[0].unk6 = 1;
+    for (i = 1; i < r6; i++)
+    {
+        if (ptr->unkPtr->unk4[i].unk6 == r4)
+        {
+            ptr->unkPtr->unk4[i].unk6 = ptr->unkPtr->unk4[i - 1].unk6;
+        }
+        else
+        {
+            r4 = ptr->unkPtr->unk4[i].unk6;
+            ptr->unkPtr->unk4[i].unk6 = i + 1;
+        }
+    }
+    ptr->unk18 = 1;
+    return LT_FINISH;
 }
