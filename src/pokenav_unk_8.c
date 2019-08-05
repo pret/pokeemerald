@@ -213,26 +213,26 @@ static u32 sub_81CF0C0(void)
 
 static struct PokenavMonList * sub_81CF0D0(void)
 {
-    struct PokenavSub7 * ptr = (struct PokenavSub7 *)GetSubstructPtr(7);
+    struct PokenavSub7 * ptr = GetSubstructPtr(7);
     return ptr->unkPtr->unk4;
 }
 
 static u16 sub_81CF0E0(void)
 {
-    struct PokenavSub7 * ptr = (struct PokenavSub7 *)GetSubstructPtr(7);
+    struct PokenavSub7 * ptr = GetSubstructPtr(7);
     return ptr->unkPtr->unk0;
 }
 
 static s32 sub_81CF0F0(void)
 {
-    struct PokenavSub7 * ptr = (struct PokenavSub7 *)GetSubstructPtr(7);
+    struct PokenavSub7 * ptr = GetSubstructPtr(7);
     s32 i = GetSelectedMatchCall();
     return ptr->unkPtr->unk4[i].unk6;
 }
 
 static u16 sub_81CF10C(void)
 {
-    struct PokenavSub7 * ptr = (struct PokenavSub7 *)GetSubstructPtr(7);
+    struct PokenavSub7 * ptr = GetSubstructPtr(7);
     return ptr->unkPtr->unk2;
 }
 
@@ -245,7 +245,7 @@ static u32 sub_81CF134(s32 state)
 {
     s32 i;
     struct PokenavMonList item;
-    struct PokenavSub7 * ptr = (struct PokenavSub7 *)GetSubstructPtr(7);
+    struct PokenavSub7 * ptr = GetSubstructPtr(7);
 
     ptr->unkPtr->unk0 = 0;
     ptr->unkPtr->unk2 = 0;
@@ -268,7 +268,7 @@ static u32 sub_81CF134(s32 state)
 
 static u32 sub_81CF1C4(s32 state)
 {
-    struct PokenavSub7 * ptr = (struct PokenavSub7 *)GetSubstructPtr(7);
+    struct PokenavSub7 * ptr = GetSubstructPtr(7);
     ptr->unk10 = 0;
     ptr->unkC = 0;
     return LT_INC_AND_CONTINUE;
@@ -276,7 +276,7 @@ static u32 sub_81CF1C4(s32 state)
 
 static u32 sub_81CF1D8(s32 state)
 {
-    struct PokenavSub7 * ptr = (struct PokenavSub7 *)GetSubstructPtr(7);
+    struct PokenavSub7 * ptr = GetSubstructPtr(7);
     s32 boxId = ptr->unkC;
     s32 monId = ptr->unk10;
     s32 boxCount = 0;
@@ -311,7 +311,7 @@ static u32 sub_81CF1D8(s32 state)
 
 static u32 sub_81CF278(s32 state)
 {
-    struct PokenavSub7 * ptr = (struct PokenavSub7 *)GetSubstructPtr(7);
+    struct PokenavSub7 * ptr = GetSubstructPtr(7);
     s32 r6 = ptr->unkPtr->unk0;
     s32 r4 = ptr->unkPtr->unk4[0].unk6;
     s32 i;
@@ -376,26 +376,26 @@ bool32 sub_81CF368(void)
 
 void sub_81CF3A0(s32 idx)
 {
-    struct PokenavSub8 * unk = (struct PokenavSub8 *)GetSubstructPtr(8);
+    struct PokenavSub8 * unk = GetSubstructPtr(8);
     unk->ltid = CreateLoopedTask(gUnknown_08623598[idx], 1);
     unk->callback = sub_81CF3E4;
 }
 
 bool32 sub_81CF3D0(void)
 {
-    struct PokenavSub8 * unk = (struct PokenavSub8 *)GetSubstructPtr(8);
+    struct PokenavSub8 * unk = GetSubstructPtr(8);
     return unk->callback();
 }
 
 static bool32 sub_81CF3E4(void)
 {
-    struct PokenavSub8 * unk = (struct PokenavSub8 *)GetSubstructPtr(8);
+    struct PokenavSub8 * unk = GetSubstructPtr(8);
     return IsLoopedTaskActive(unk->ltid);
 }
 
 void sub_81CF3F8(void)
 {
-    struct PokenavSub8 * unk = (struct PokenavSub8 *)GetSubstructPtr(8);
+    struct PokenavSub8 * unk = GetSubstructPtr(8);
     sub_81C8234();
     RemoveWindow(unk->winid);
     FreePokenavSubstruct(8);
@@ -403,7 +403,7 @@ void sub_81CF3F8(void)
 
 static u32 sub_81CF418(s32 state)
 {
-    struct PokenavSub8 * unk = (struct PokenavSub8 *)GetSubstructPtr(8);
+    struct PokenavSub8 * unk = GetSubstructPtr(8);
     switch (state)
     {
     case 0:
@@ -462,7 +462,7 @@ static u32 sub_81CF418(s32 state)
 
 static u32 sub_81CF578(s32 state)
 {
-    struct PokenavSub8 * unk = (struct PokenavSub8 *)GetSubstructPtr(8);
+    struct PokenavSub8 * unk = GetSubstructPtr(8);
     switch (state)
     {
     case 0:
@@ -495,7 +495,7 @@ static u32 sub_81CF578(s32 state)
 
 static u32 sub_81CF5F0(s32 state)
 {
-    struct PokenavSub8 * unk = (struct PokenavSub8 *)GetSubstructPtr(8);
+    struct PokenavSub8 * unk = GetSubstructPtr(8);
     switch (state)
     {
     case 0:
@@ -528,7 +528,7 @@ static u32 sub_81CF5F0(s32 state)
 
 static u32 sub_81CF668(s32 state)
 {
-    struct PokenavSub8 * unk = (struct PokenavSub8 *)GetSubstructPtr(8);
+    struct PokenavSub8 * unk = GetSubstructPtr(8);
     switch (state)
     {
     case 0:
@@ -561,7 +561,7 @@ static u32 sub_81CF668(s32 state)
 
 static u32 sub_81CF6E0(s32 state)
 {
-    struct PokenavSub8 * unk = (struct PokenavSub8 *)GetSubstructPtr(8);
+    struct PokenavSub8 * unk = GetSubstructPtr(8);
     switch (state)
     {
     case 0:
