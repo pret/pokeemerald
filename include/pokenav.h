@@ -157,6 +157,10 @@ int sub_81C98B4(void);
 u16 sub_81C98C4(void);
 
 // pokenav_unk_2.c
+bool32 sub_81C9924(void);
+bool32 sub_81C9940(void);
+void sub_81C9990(s32 ltIdx);
+bool32 sub_81C99C0(void);
 void sub_81C99D4(void);
 void sub_81CAADC(void);
 

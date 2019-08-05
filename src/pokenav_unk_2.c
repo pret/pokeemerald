@@ -15,6 +15,7 @@
 #include "strings.h"
 #include "scanline_effect.h"
 #include "constants/songs.h"
+#include "constants/rgb.h"
 
 // Match Call
 
@@ -33,68 +34,65 @@ struct Pokenav2Struct
     u8 field_08c[0x800];
 };
 
-struct Pokenav2Struct * sub_81C9958(void);
-bool32 sub_81C99FC(void);
-u32 sub_81C9A10(s32 state);
-u32 sub_81C9C6C(s32 state);
-u32 sub_81C9CA8(s32 state);
-u32 sub_81C9D44(s32 state);
-u32 sub_81C9DD8(s32 state);
-u32 sub_81C9E58(s32 state);
-u32 sub_81C9EC8(s32 state);
-u32 sub_81C9EF8(s32 state);
-u32 sub_81C9F28(s32 state);
-void sub_81C9FC4(void);
-void sub_81C9FEC(void);
-void sub_81CA02C(void);
-void sub_81CA094(void);
-void sub_81CA0C8(void);
-void sub_81CA0EC(const u16 *const * a0, s32 a1, s32 a2);
-void sub_81CA20C(void);
-void sub_81CA278(void);
-void sub_81CA35C(struct Sprite ** sprites, s32 a1, s32 a2, s32 a3);
-void sub_81CA3B4(struct Sprite ** sprites);
-void sub_81CA2DC(void);
-bool32 sub_81CA324(void);
-void sub_81CA448(struct Sprite ** sprites, bool32 a1);
-void sub_81CA474(struct Sprite * sprite);
-void sub_81CA4AC(struct Sprite * sprite);
-void sub_81CA580(u8 taskId);
-void sub_81CA640(void);
-void sub_81CA6AC(struct Sprite * sprite);
-void sub_81CA698(void);
-void sub_81CA6E0(void);
-void sub_81CA714(void);
-void sub_81CA770(void);
-bool32 sub_81CA7C4(void);
-void sub_81CA7D4(void);
-void sub_81CA7F4(void);
-void sub_81CA808(u8 taskId);
-void sub_81CA818(void);
-void sub_81CA850(void);
-void sub_81CA864(void);
-bool32 sub_81CA89C(void);
-void sub_81CA8B0(u8 taskId);
-void titlescreen_0(void);
-void sub_81CA994(void);
-void sub_81CA9C8(void);
-void sub_81CA9D8(void);
-void sub_81CA9EC(u8 taskId);
-void sub_81CAA3C(void);
+static struct Pokenav2Struct * sub_81C9958(void);
+static bool32 sub_81C99FC(void);
+static u32 sub_81C9A10(s32 state);
+static u32 sub_81C9C6C(s32 state);
+static u32 sub_81C9CA8(s32 state);
+static u32 sub_81C9D44(s32 state);
+static u32 sub_81C9DD8(s32 state);
+static u32 sub_81C9E58(s32 state);
+static u32 sub_81C9EC8(s32 state);
+static u32 sub_81C9EF8(s32 state);
+static u32 sub_81C9F28(s32 state);
+static void sub_81C9FC4(void);
+static void sub_81C9FEC(void);
+static void sub_81CA02C(void);
+static void sub_81CA094(void);
+static void sub_81CA0C8(void);
+static void sub_81CA0EC(const u16 *const * a0, s32 a1, s32 a2);
+static void sub_81CA20C(void);
+static void sub_81CA278(void);
+static void sub_81CA35C(struct Sprite ** sprites, s32 a1, s32 a2, s32 a3);
+static void sub_81CA3B4(struct Sprite ** sprites);
+static void sub_81CA2DC(void);
+static bool32 sub_81CA324(void);
+static void sub_81CA448(struct Sprite ** sprites, bool32 a1);
+static void sub_81CA474(struct Sprite * sprite);
+static void sub_81CA4AC(struct Sprite * sprite);
+static void sub_81CA580(u8 taskId);
+static void sub_81CA640(void);
+static void sub_81CA6AC(struct Sprite * sprite);
+static void sub_81CA698(void);
+static void sub_81CA6E0(void);
+static void sub_81CA714(void);
+static void sub_81CA770(void);
+static bool32 sub_81CA7C4(void);
+static void sub_81CA7D4(void);
+static void sub_81CA7F4(void);
+static void sub_81CA808(u8 taskId);
+static void sub_81CA818(void);
+static void sub_81CA850(void);
+static void sub_81CA864(void);
+static bool32 sub_81CA89C(void);
+static void sub_81CA8B0(u8 taskId);
+static void titlescreen_0(void);
+static void sub_81CA994(void);
+static void sub_81CA9C8(void);
+static void sub_81CA9D8(void);
+static void sub_81CA9EC(u8 taskId);
+static void sub_81CAA3C(void);
 
-extern const u32 gPokenavOptions_Gfx[];
-extern const u16 gPokenavOptions_Pal[];
+static const u16 gUnknown_0861FC78[] = INCBIN_U16("graphics/pokenav/bg.gbapal");
+static const u32 gUnknown_0861FC98[] = INCBIN_U32("graphics/pokenav/bg.4bpp.lz");
+static const u32 gUnknown_0861FCAC[] = INCBIN_U32("graphics/pokenav/bg.bin.lz");
+static const u16 gUnknown_0861FD4C[] = INCBIN_U16("graphics/pokenav/outline.gbapal");
+static const u32 gUnknown_0861FD6C[] = INCBIN_U32("graphics/pokenav/outline.4bpp.lz");
+static const u32 gUnknown_0861FFF4[] = INCBIN_U32("graphics/pokenav/outline_map.bin.lz");
+static const u16 gUnknown_08620104[] = INCBIN_U16("graphics/pokenav/blue_light.gbapal");
+static const u32 gUnknown_08620124[] = INCBIN_U32("graphics/pokenav/blue_light.4bpp.lz");
 
-const u16 gUnknown_0861FC78[] = INCBIN_U16("graphics/pokenav/bg.gbapal");
-const u32 gUnknown_0861FC98[] = INCBIN_U32("graphics/pokenav/bg.4bpp.lz");
-const u32 gUnknown_0861FCAC[] = INCBIN_U32("graphics/pokenav/bg.bin.lz");
-const u16 gUnknown_0861FD4C[] = INCBIN_U16("graphics/pokenav/outline.gbapal");
-const u32 gUnknown_0861FD6C[] = INCBIN_U32("graphics/pokenav/outline.4bpp.lz");
-const u32 gUnknown_0861FFF4[] = INCBIN_U32("graphics/pokenav/outline_map.bin.lz");
-const u16 gUnknown_08620104[] = INCBIN_U16("graphics/pokenav/blue_light.gbapal");
-const u32 gUnknown_08620124[] = INCBIN_U32("graphics/pokenav/blue_light.4bpp.lz");
-
-const struct BgTemplate gUnknown_08620194[] = {
+static const struct BgTemplate gUnknown_08620194[] = {
     {
         .bg = 1,
         .charBaseIndex = 1,
@@ -122,7 +120,7 @@ const struct BgTemplate gUnknown_08620194[] = {
     }
 };
 
-const LoopedTask gUnknown_086201A0[] = {
+static const LoopedTask gUnknown_086201A0[] = {
     NULL,
     sub_81C9C6C,
     sub_81C9CA8,
@@ -134,7 +132,7 @@ const LoopedTask gUnknown_086201A0[] = {
     sub_81C9F28
 };
 
-const struct CompressedSpriteSheet gUnknown_086201C4[] =
+static const struct CompressedSpriteSheet gUnknown_086201C4[] =
 {
     {
         .data = gPokenavOptions_Gfx,
@@ -148,7 +146,7 @@ const struct CompressedSpriteSheet gUnknown_086201C4[] =
     }
 };
 
-const struct SpritePalette gUnknown_086201D4[] =
+static const struct SpritePalette gUnknown_086201D4[] =
 {
     {gPokenavOptions_Pal + 0x00, 4},
     {gPokenavOptions_Pal + 0x10, 5},
@@ -159,19 +157,19 @@ const struct SpritePalette gUnknown_086201D4[] =
     {}
 };
 
-const u16 gUnknown_0862020C[] = {0, 0};
-const u16 gUnknown_08620210[] = {0x20, 1};
-const u16 gUnknown_08620214[] = {0x40, 4};
-const u16 gUnknown_08620218[] = {0x60, 2};
-const u16 gUnknown_0862021C[] = {0x80, 3};
-const u16 gUnknown_08620220[] = {0xA0, 1};
-const u16 gUnknown_08620224[] = {0xC0, 1};
-const u16 gUnknown_08620228[] = {0xE0, 4};
-const u16 gUnknown_0862022C[] = {0x100, 1};
-const u16 gUnknown_08620230[] = {0x120, 2};
-const u16 gUnknown_08620234[] = {0x140, 0};
-const u16 gUnknown_08620238[] = {0x160, 0};
-const u16 gUnknown_0862023C[] = {0x180, 3};
+static const u16 gUnknown_0862020C[] = {0, 0};
+static const u16 gUnknown_08620210[] = {0x20, 1};
+static const u16 gUnknown_08620214[] = {0x40, 4};
+static const u16 gUnknown_08620218[] = {0x60, 2};
+static const u16 gUnknown_0862021C[] = {0x80, 3};
+static const u16 gUnknown_08620220[] = {0xA0, 1};
+static const u16 gUnknown_08620224[] = {0xC0, 1};
+static const u16 gUnknown_08620228[] = {0xE0, 4};
+static const u16 gUnknown_0862022C[] = {0x100, 1};
+static const u16 gUnknown_08620230[] = {0x120, 2};
+static const u16 gUnknown_08620234[] = {0x140, 0};
+static const u16 gUnknown_08620238[] = {0x160, 0};
+static const u16 gUnknown_0862023C[] = {0x180, 3};
 
 struct UnkStruct_08620240
 {
@@ -180,27 +178,27 @@ struct UnkStruct_08620240
     const u16 *unk4[6];
 };
 
-const struct UnkStruct_08620240 gUnknown_08620240[5] =
+static const struct UnkStruct_08620240 gUnknown_08620240[5] =
 {
     {
         0x2A,
             0x14,
-            {gUnknown_0862020C, gUnknown_08620210, gUnknown_0862021C, NULL, NULL, NULL}
+            {gUnknown_0862020C, gUnknown_08620210, gUnknown_0862021C}
     },
     {
         0x2A,
             0x14,
-            {gUnknown_0862020C, gUnknown_08620210, gUnknown_08620214, gUnknown_0862021C, NULL, NULL}
+            {gUnknown_0862020C, gUnknown_08620210, gUnknown_08620214, gUnknown_0862021C}
     },
     {
         0x2A,
             0x14,
-            {gUnknown_0862020C, gUnknown_08620210, gUnknown_08620214, gUnknown_08620218, gUnknown_0862021C, NULL}
+            {gUnknown_0862020C, gUnknown_08620210, gUnknown_08620214, gUnknown_08620218, gUnknown_0862021C}
     },
     {
         0x38,
             0x14,
-            {gUnknown_08620220, gUnknown_08620224, gUnknown_0862023C, NULL, NULL, NULL}
+            {gUnknown_08620220, gUnknown_08620224, gUnknown_0862023C}
     },
     {
         0x28,
@@ -209,7 +207,7 @@ const struct UnkStruct_08620240 gUnknown_08620240[5] =
     },
 };
 
-const struct WindowTemplate gUnknown_086202CC =
+static const struct WindowTemplate gUnknown_086202CC =
 {
     .bg = 1,
     .tilemapLeft = 3,
@@ -220,7 +218,7 @@ const struct WindowTemplate gUnknown_086202CC =
     .baseBlock = 8
 };
 
-const u8 *const gUnknown_086202D4[] =
+static const u8 *const gUnknown_086202D4[] =
 {
     gUnknown_085EBCC5,
         gUnknown_085EBCE8,
@@ -238,11 +236,11 @@ const u8 *const gUnknown_086202D4[] =
         gUnknown_085EBE41
 };
 
-const u8 gUnknown_0862030C[] = {6, 8, 7};
+static const u8 gUnknown_0862030C[] = {6, 8, 7};
 
-const u8 gUnknown_0862030F[] = {6, 8, 7, 0, 0};
+static const u8 gUnknown_0862030F[] = {6, 8, 7, 0, 0};
 
-const struct OamData gUnknown_08620314 =
+static const struct OamData gUnknown_08620314 =
 {
     .y = 0,
     .affineMode = 0,
@@ -256,26 +254,26 @@ const struct OamData gUnknown_08620314 =
     .paletteNum = 0,
 };
 
-const union AffineAnimCmd gUnknown_0862031C[] =
+static const union AffineAnimCmd gUnknown_0862031C[] =
 {
     AFFINEANIMCMD_FRAME(0x100, 0x100, 0, 0),
     AFFINEANIMCMD_END,
 };
 
-const union AffineAnimCmd gUnknown_0862032C[] =
+static const union AffineAnimCmd gUnknown_0862032C[] =
 {
     AFFINEANIMCMD_FRAME(0x100, 0x100, 0, 0),
     AFFINEANIMCMD_FRAME(0x10, 0x10, 0, 0x12),
     AFFINEANIMCMD_END,
 };
 
-const union AffineAnimCmd *const gUnknown_08620344[] =
+static const union AffineAnimCmd *const gUnknown_08620344[] =
 {
     gUnknown_0862031C,
         gUnknown_0862032C
 };
 
-const struct SpriteTemplate gUnknown_0862034C =
+static const struct SpriteTemplate gUnknown_0862034C =
 {
     .tileTag = 3,
     .paletteTag = 4,
@@ -286,7 +284,7 @@ const struct SpriteTemplate gUnknown_0862034C =
     .callback = SpriteCallbackDummy,
 };
 
-const struct OamData gUnknown_08620364 =
+static const struct OamData gUnknown_08620364 =
 {
     .y = 0,
     .affineMode = 0,
@@ -300,7 +298,7 @@ const struct OamData gUnknown_08620364 =
     .paletteNum = 0,
 };
 
-const struct SpriteTemplate gUnknown_0862036C =
+static const struct SpriteTemplate gUnknown_0862036C =
 {
     .tileTag = 1,
     .paletteTag = 3,
@@ -311,7 +309,7 @@ const struct SpriteTemplate gUnknown_0862036C =
     .callback = SpriteCallbackDummy,
 };
 
-const struct ScanlineEffectParams gUnknown_08620384 =
+static const struct ScanlineEffectParams gUnknown_08620384 =
 {
     (void *)REG_ADDR_WIN0H,
         ((DMA_ENABLE | DMA_START_HBLANK | DMA_REPEAT | DMA_DEST_RELOAD) << 16) | 1,
@@ -319,7 +317,7 @@ const struct ScanlineEffectParams gUnknown_08620384 =
         0
 };
 
-bool32 sub_81C98D4(void)
+static bool32 sub_81C98D4(void)
 {
     s32 i;
 
@@ -356,7 +354,7 @@ bool32 sub_81C9940(void)
     return TRUE;
 }
 
-struct Pokenav2Struct * sub_81C9958(void)
+static struct Pokenav2Struct * sub_81C9958(void)
 {
     struct Pokenav2Struct * unk = AllocSubstruct(2, sizeof(struct Pokenav2Struct));
 
@@ -397,14 +395,14 @@ void sub_81C99D4(void)
     FreePokenavSubstruct(2);
 }
 
-bool32 sub_81C99FC(void)
+static bool32 sub_81C99FC(void)
 {
     struct Pokenav2Struct * unk = GetSubstructPtr(2);
 
     return IsLoopedTaskActive(unk->loopedTaskId);
 }
 
-u32 sub_81C9A10(s32 state)
+static u32 sub_81C9A10(s32 state)
 {
     struct Pokenav2Struct * unk = GetSubstructPtr(2);
 
@@ -511,7 +509,7 @@ u32 sub_81C9A10(s32 state)
     return 4;
 }
 
-u32 sub_81C9C6C(s32 state)
+static u32 sub_81C9C6C(s32 state)
 {
     switch (state)
     {
@@ -531,7 +529,7 @@ u32 sub_81C9C6C(s32 state)
     return 4;
 }
 
-u32 sub_81C9CA8(s32 state)
+static u32 sub_81C9CA8(s32 state)
 {
     switch (state)
     {
@@ -570,7 +568,7 @@ u32 sub_81C9CA8(s32 state)
     return 4;
 }
 
-u32 sub_81C9D44(s32 state)
+static u32 sub_81C9D44(s32 state)
 {
     switch (state)
     {
@@ -608,7 +606,7 @@ u32 sub_81C9D44(s32 state)
     return 4;
 }
 
-u32 sub_81C9DD8(s32 state)
+static u32 sub_81C9DD8(s32 state)
 {
     switch (state)
     {
@@ -641,7 +639,7 @@ u32 sub_81C9DD8(s32 state)
     return 4;
 }
 
-u32 sub_81C9E58(s32 state)
+static u32 sub_81C9E58(s32 state)
 {
     switch (state)
     {
@@ -672,7 +670,7 @@ u32 sub_81C9E58(s32 state)
     return 4;
 }
 
-u32 sub_81C9EC8(s32 state)
+static u32 sub_81C9EC8(s32 state)
 {
     switch (state)
     {
@@ -688,7 +686,7 @@ u32 sub_81C9EC8(s32 state)
     return 4;
 }
 
-u32 sub_81C9EF8(s32 state)
+static u32 sub_81C9EF8(s32 state)
 {
     switch (state)
     {
@@ -704,7 +702,7 @@ u32 sub_81C9EF8(s32 state)
     return 4;
 }
 
-u32 sub_81C9F28(s32 state)
+static u32 sub_81C9F28(s32 state)
 {
     switch (state)
     {
@@ -746,7 +744,7 @@ u32 sub_81C9F28(s32 state)
     return 4;
 }
 
-void sub_81C9FC4(void)
+static void sub_81C9FC4(void)
 {
     u32 i;
 
@@ -755,7 +753,7 @@ void sub_81C9FC4(void)
     Pokenav_AllocAndLoadPalettes(gUnknown_086201D4);
 }
 
-void sub_81C9FEC(void)
+static void sub_81C9FEC(void)
 {
     FreeSpriteTilesByTag(3);
     FreeSpriteTilesByTag(1);
@@ -769,7 +767,7 @@ void sub_81C9FEC(void)
     sub_81CA698();
 }
 
-void sub_81CA02C(void)
+static void sub_81CA02C(void)
 {
     s32 i, j;
     struct Pokenav2Struct * unk = GetSubstructPtr(2);
@@ -785,7 +783,7 @@ void sub_81CA02C(void)
     }
 }
 
-void sub_81CA094(void)
+static void sub_81CA094(void)
 {
     s32 i, j;
     struct Pokenav2Struct * unk = GetSubstructPtr(2);
@@ -800,13 +798,13 @@ void sub_81CA094(void)
     }
 }
 
-void sub_81CA0C8(void)
+static void sub_81CA0C8(void)
 {
     s32 r0 = sub_81C9894();
     sub_81CA0EC(gUnknown_08620240[r0].unk4, gUnknown_08620240[r0].unk0, gUnknown_08620240[r0].unk2);
 }
 
-void sub_81CA0EC(const u16 *const *a0, s32 a1, s32 a2)
+static void sub_81CA0EC(const u16 *const *a0, s32 a1, s32 a2)
 {
     s32 i, j;
     struct Pokenav2Struct * unk = GetSubstructPtr(2);
@@ -840,7 +838,7 @@ void sub_81CA0EC(const u16 *const *a0, s32 a1, s32 a2)
     }
 }
 
-void sub_81CA20C(void)
+static void sub_81CA20C(void)
 {
     s32 i;
     struct Pokenav2Struct * unk = GetSubstructPtr(2);
@@ -867,7 +865,7 @@ void sub_81CA20C(void)
     }
 }
 
-void sub_81CA278(void)
+static void sub_81CA278(void)
 {
     s32 i;
     struct Pokenav2Struct * unk = GetSubstructPtr(2);
@@ -892,7 +890,7 @@ void sub_81CA278(void)
     unk->field_00b = r5;
 }
 
-void sub_81CA2DC(void)
+static void sub_81CA2DC(void)
 {
     s32 i;
     struct Pokenav2Struct * unk = GetSubstructPtr(2);
@@ -909,7 +907,7 @@ void sub_81CA2DC(void)
     }
 }
 
-bool32 sub_81CA324(void)
+static bool32 sub_81CA324(void)
 {
     s32 i;
     struct Pokenav2Struct * unk = GetSubstructPtr(2);
@@ -926,7 +924,7 @@ bool32 sub_81CA324(void)
     return FALSE;
 }
 
-void sub_81CA35C(struct Sprite ** sprites, s32 a1, s32 a2, s32 a3)
+static void sub_81CA35C(struct Sprite ** sprites, s32 a1, s32 a2, s32 a3)
 {
     s32 i;
 
@@ -942,7 +940,7 @@ void sub_81CA35C(struct Sprite ** sprites, s32 a1, s32 a2, s32 a3)
     }
 }
 
-void sub_81CA3B4(struct Sprite ** sprites)
+static void sub_81CA3B4(struct Sprite ** sprites)
 {
     s32 i;
     struct Pokenav2Struct * unk = GetSubstructPtr(2);
@@ -967,7 +965,7 @@ void sub_81CA3B4(struct Sprite ** sprites)
     unk->field_00c++;
 }
 
-void sub_81CA448(struct Sprite ** sprites, bool32 a1)
+static void sub_81CA448(struct Sprite ** sprites, bool32 a1)
 {
     s32 i;
 
@@ -978,7 +976,7 @@ void sub_81CA448(struct Sprite ** sprites, bool32 a1)
     }
 }
 
-void sub_81CA474(struct Sprite * sprite)
+static void sub_81CA474(struct Sprite * sprite)
 {
     sprite->data[0]--;
     if (sprite->data[0] != -1)
@@ -993,7 +991,7 @@ void sub_81CA474(struct Sprite * sprite)
     }
 }
 
-void sub_81CA4AC(struct Sprite * sprite)
+static void sub_81CA4AC(struct Sprite * sprite)
 {
     s32 r0;
     s32 r1;
@@ -1045,7 +1043,7 @@ void sub_81CA4AC(struct Sprite * sprite)
     }
 }
 
-void sub_81CA580(u8 taskId)
+static void sub_81CA580(u8 taskId)
 {
     s16 * data = gTasks[taskId].data;
 
@@ -1088,7 +1086,7 @@ void sub_81CA580(u8 taskId)
         data[0]--;
 }
 
-void sub_81CA640(void)
+static void sub_81CA640(void)
 {
     struct Pokenav2Struct * ptr = GetSubstructPtr(2);
     u8 spriteId = CreateSprite(&gUnknown_0862036C, 0x10, 0x60, 4);
@@ -1099,13 +1097,13 @@ void sub_81CA640(void)
         ptr->field_028->invisible = TRUE;
 }
 
-void sub_81CA698(void)
+static void sub_81CA698(void)
 {
     struct Pokenav2Struct * ptr = GetSubstructPtr(2);
     DestroySprite(ptr->field_028);
 }
 
-void sub_81CA6AC(struct Sprite * sprite)
+static void sub_81CA6AC(struct Sprite * sprite)
 {
     sprite->data[0]++;
     if (sprite->data[0] > 8)
@@ -1115,7 +1113,7 @@ void sub_81CA6AC(struct Sprite * sprite)
     }
 }
 
-void sub_81CA6E0(void)
+static void sub_81CA6E0(void)
 {
     struct Pokenav2Struct * ptr = GetSubstructPtr(2);
 
@@ -1125,7 +1123,7 @@ void sub_81CA6E0(void)
     CopyWindowToVram(ptr->field_008, 3);
 }
 
-void sub_81CA714(void)
+static void sub_81CA714(void)
 {
     struct Pokenav2Struct * ptr = GetSubstructPtr(2);
     int i = sub_81C98B4();
@@ -1136,7 +1134,7 @@ void sub_81CA714(void)
 }
 
 
-void sub_81CA770(void)
+static void sub_81CA770(void)
 {
     struct Pokenav2Struct * ptr = GetSubstructPtr(2);
     const u8 * s = gText_NoRibbonWinners;
@@ -1145,53 +1143,53 @@ void sub_81CA770(void)
     AddTextPrinterParameterized3(ptr->field_008, 1, (192 - width) / 2, 1, gUnknown_0862030F, 0, s);
 }
 
-bool32 sub_81CA7C4(void)
+static bool32 sub_81CA7C4(void)
 {
     return IsDma3ManagerBusyWithBgCopy();
 }
 
-void sub_81CA7D4(void)
+static void sub_81CA7D4(void)
 {
     struct Pokenav2Struct * ptr = GetSubstructPtr(2);
     ptr->field_00a = CreateTask(sub_81CA808, 2);
 }
 
-void sub_81CA7F4(void)
+static void sub_81CA7F4(void)
 {
     struct Pokenav2Struct * ptr = GetSubstructPtr(2);
     DestroyTask(ptr->field_00a);
 }
 
-void sub_81CA808(u8 taskId)
+static void sub_81CA808(u8 taskId)
 {
     ChangeBgX(3, 0x80, 1);
 }
 
-void sub_81CA818(void)
+static void sub_81CA818(void)
 {
     u8 taskId = CreateTask(sub_81CA8B0, 3);
     SetWordTaskArg(taskId, 1, (uintptr_t)(gUnknown_0861FC78 + 1));
     SetWordTaskArg(taskId, 3, (uintptr_t)(gUnknown_0861FC78 + 7));
 }
 
-void sub_81CA850(void)
+static void sub_81CA850(void)
 {
     CopyPaletteIntoBufferUnfaded(gUnknown_0861FC78 + 7, 0x31, 4);
 }
 
-void sub_81CA864(void)
+static void sub_81CA864(void)
 {
     u8 taskId = CreateTask(sub_81CA8B0, 3);
     SetWordTaskArg(taskId, 1, (uintptr_t)(gUnknown_0861FC78 + 7));
     SetWordTaskArg(taskId, 3, (uintptr_t)(gUnknown_0861FC78 + 1));
 }
 
-bool32 sub_81CA89C(void)
+static bool32 sub_81CA89C(void)
 {
     return FuncIsActiveTask(sub_81CA8B0);
 }
 
-void sub_81CA8B0(u8 taskId)
+static void sub_81CA8B0(u8 taskId)
 {
     u16 sp8[2];
     s16 * data = gTasks[taskId].data;
@@ -1204,7 +1202,7 @@ void sub_81CA8B0(u8 taskId)
         DestroyTask(taskId);
 }
 
-void sub_81CA914(void)
+static void sub_81CA914(void)
 {
     TransferPlttBuffer();
     LoadOam();
@@ -1212,7 +1210,7 @@ void sub_81CA914(void)
     ScanlineEffect_InitHBlankDmaTransfer();
 }
 
-void titlescreen_0(void) // almost definitely the wrong name
+static void titlescreen_0(void) // almost definitely the wrong name
 {
     SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT1_OBJ | BLDCNT_EFFECT_LIGHTEN);
     SetGpuReg(REG_OFFSET_BLDY, 0);
@@ -1227,7 +1225,7 @@ void titlescreen_0(void) // almost definitely the wrong name
     CreateTask(sub_81CA9EC, 3);
 }
 
-void sub_81CA994(void)
+static void sub_81CA994(void)
 {
     SetGpuReg(REG_OFFSET_BLDCNT, 0);
     ClearGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_WIN0_ON);
@@ -1236,18 +1234,18 @@ void sub_81CA994(void)
     SetPokenavVBlankCallback();
 }
 
-void sub_81CA9C8(void)
+static void sub_81CA9C8(void)
 {
     SetGpuReg(REG_OFFSET_BLDCNT, 0);
 }
 
-void sub_81CA9D8(void)
+static void sub_81CA9D8(void)
 {
     sub_81CAA3C();
     SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT1_OBJ | BLDCNT_EFFECT_LIGHTEN);
 }
 
-void sub_81CA9EC(u8 taskId)
+static void sub_81CA9EC(u8 taskId)
 {
     s16 * data = gTasks[taskId].data;
     data[0]++;
@@ -1260,15 +1258,15 @@ void sub_81CA9EC(u8 taskId)
     }
 }
 
-void sub_81CAA3C(void)
+static void sub_81CAA3C(void)
 {
     int i = sub_81C9894();
     int j = sub_81C98A4();
     int r4 = gUnknown_08620240[i].unk2 * j + gUnknown_08620240[i].unk0 - 8;
     CpuFill16(0, gScanlineEffectRegBuffers[0], 0x140);
     CpuFill16(0, gScanlineEffectRegBuffers[1], 0x140);
-    CpuFill16(0x72F0, &gScanlineEffectRegBuffers[0][r4], 0x20);
-    CpuFill16(0x72F0, &gScanlineEffectRegBuffers[1][r4], 0x20);
+    CpuFill16(RGB(16, 23, 28), &gScanlineEffectRegBuffers[0][r4], 0x20);
+    CpuFill16(RGB(16, 23, 28), &gScanlineEffectRegBuffers[1][r4], 0x20);
 }
 
 void sub_81CAADC(void)
