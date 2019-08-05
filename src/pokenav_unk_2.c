@@ -17,21 +17,21 @@
 #include "constants/songs.h"
 #include "constants/rgb.h"
 
-// Match Call
+// Top Menu
 
 struct Pokenav2Struct
 {
     bool32 (*callback)(void);
     u32 loopedTaskId;
-    u16 field_008;
-    u8 field_00a;
-    u8 field_00b;
-    u8 field_00c;
+    u16 optionDescriptionWindowId;
+    u8 bg3ScrollTaskId;
+    u8 cursorPos;
+    bool8 otherIconsInMotion;
     u8 field_00d;
-    bool32 field_010[6];
+    bool32 iconVisible[6];
     struct Sprite * field_028;
-    struct Sprite * field_02c[6][4];
-    u8 field_08c[0x800];
+    struct Sprite * iconSprites[6][4];
+    u16 bg1TilemapBuffer[0x400];
 };
 
 static struct Pokenav2Struct * sub_81C9958(void);
@@ -221,19 +221,19 @@ static const struct WindowTemplate gUnknown_086202CC =
 static const u8 *const gUnknown_086202D4[] =
 {
     gUnknown_085EBCC5,
-        gUnknown_085EBCE8,
-        gUnknown_085EBD01,
-        gUnknown_085EBD1C,
-        gUnknown_085EBD34,
-        gUnknown_085EBD83,
-        gUnknown_085EBDA2,
-        gUnknown_085EBDBF,
-        gUnknown_085EBDDB,
-        gUnknown_085EBDEE,
-        gUnknown_085EBE06,
-        gUnknown_085EBE19,
-        gUnknown_085EBE2D,
-        gUnknown_085EBE41
+    gUnknown_085EBCE8,
+    gUnknown_085EBD01,
+    gUnknown_085EBD1C,
+    gUnknown_085EBD34,
+    gUnknown_085EBD83,
+    gUnknown_085EBDA2,
+    gUnknown_085EBDBF,
+    gUnknown_085EBDDB,
+    gUnknown_085EBDEE,
+    gUnknown_085EBE06,
+    gUnknown_085EBE19,
+    gUnknown_085EBE2D,
+    gUnknown_085EBE41
 };
 
 static const u8 gUnknown_0862030C[] = {6, 8, 7};
@@ -360,7 +360,7 @@ static struct Pokenav2Struct * sub_81C9958(void)
 
     if (unk != NULL)
     {
-        unk->field_00c = 0;
+        unk->otherIconsInMotion = FALSE;
         unk->loopedTaskId = CreateLoopedTask(sub_81C9A10, 1);
         unk->callback = sub_81C99FC;
     }
@@ -389,7 +389,7 @@ void sub_81C99D4(void)
     struct Pokenav2Struct * unk = GetSubstructPtr(2);
 
     sub_81CA7F4();
-    RemoveWindow(unk->field_008);
+    RemoveWindow(unk->optionDescriptionWindowId);
     sub_81C9FEC();
     sub_81CA994();
     FreePokenavSubstruct(2);
@@ -411,7 +411,7 @@ static u32 sub_81C9A10(s32 state)
     case 0:
         InitBgTemplates(gUnknown_08620194, ARRAY_COUNT(gUnknown_08620194));
         decompress_and_copy_tile_data_to_vram(1, gPokenavMessageBox_Gfx, 0, 0, 0);
-        SetBgTilemapBuffer(1, unk->field_08c);
+        SetBgTilemapBuffer(1, unk->bg1TilemapBuffer);
         CopyToBgTilemapBuffer(1, gPokenavMessageBox_Tilemap, 0, 0);
         CopyBgTilemapBufferToVram(1);
         CopyPaletteIntoBufferUnfaded(gPokenavMessageBox_Pal, 0x10, 0x20);
@@ -777,7 +777,7 @@ static void sub_81CA02C(void)
         for (j = 0; j < 4; j++)
         {
             u8 spriteId = CreateSprite(&gUnknown_0862034C, 0x8c, 20 * i + 40, 3);
-            unk->field_02c[i][j] = &gSprites[spriteId];
+            unk->iconSprites[i][j] = &gSprites[spriteId];
             gSprites[spriteId].pos2.x = 32 * j;
         }
     }
@@ -792,8 +792,8 @@ static void sub_81CA094(void)
     {
         for (j = 0; j < 4; j++)
         {
-            FreeSpriteOamMatrix(unk->field_02c[i][j]);
-            DestroySprite(unk->field_02c[i][j]);
+            FreeSpriteOamMatrix(unk->iconSprites[i][j]);
+            DestroySprite(unk->iconSprites[i][j]);
         }
     }
 }
@@ -816,22 +816,22 @@ static void sub_81CA0EC(const u16 *const *a0, s32 a1, s32 a2)
         {
             for (j = 0; j < 4; j++)
             {
-                unk->field_02c[i][j]->oam.tileNum = (*a0)[0] + sp04 + 8 * j;
-                unk->field_02c[i][j]->oam.paletteNum = IndexOfSpritePaletteTag((*a0)[1] + 4);
-                unk->field_02c[i][j]->invisible = TRUE;
-                unk->field_02c[i][j]->pos1.y = a1;
-                unk->field_02c[i][j]->pos1.x = 0x8c;
-                unk->field_02c[i][j]->pos2.x = 32 * j;
+                unk->iconSprites[i][j]->oam.tileNum = (*a0)[0] + sp04 + 8 * j;
+                unk->iconSprites[i][j]->oam.paletteNum = IndexOfSpritePaletteTag((*a0)[1] + 4);
+                unk->iconSprites[i][j]->invisible = TRUE;
+                unk->iconSprites[i][j]->pos1.y = a1;
+                unk->iconSprites[i][j]->pos1.x = 0x8c;
+                unk->iconSprites[i][j]->pos2.x = 32 * j;
             }
-            unk->field_010[i] = TRUE;
+            unk->iconVisible[i] = TRUE;
         }
         else
         {
             for (j = 0; j < 4; j++)
             {
-                unk->field_02c[i][j]->invisible = TRUE;
+                unk->iconSprites[i][j]->invisible = TRUE;
             }
-            unk->field_010[i] = FALSE;
+            unk->iconVisible[i] = FALSE;
         }
         a0++;
         a1 += a2;
@@ -848,20 +848,20 @@ static void sub_81CA20C(void)
 
     for (i = 0; i < 6; i++)
     {
-        if (unk->field_010[i])
+        if (unk->iconVisible[i])
         {
             if (r7++ == r8)
             {
                 r2 = 0x82;
-                unk->field_00b = i;
+                unk->cursorPos = i;
             }
             else
                 r2 = 0x8c;
-            sub_81CA35C(unk->field_02c[i], 0x100, r2, 0xC);
-            sub_81CA448(unk->field_02c[i], FALSE);
+            sub_81CA35C(unk->iconSprites[i], 0x100, r2, 0xC);
+            sub_81CA448(unk->iconSprites[i], FALSE);
         }
         else
-            sub_81CA448(unk->field_02c[i], TRUE);
+            sub_81CA448(unk->iconSprites[i], TRUE);
     }
 }
 
@@ -874,7 +874,7 @@ static void sub_81CA278(void)
 
     for (i = 0, r5 = 0; i < 6; i++)
     {
-        if (unk->field_010[i])
+        if (unk->iconVisible[i])
         {
             if (r5 == r3)
             {
@@ -885,9 +885,9 @@ static void sub_81CA278(void)
         }
     }
 
-    sub_81CA35C(unk->field_02c[unk->field_00b], 0x82, 0x8c, 0x4);
-    sub_81CA35C(unk->field_02c[r5], 0x8c, 0x82, 0x4);
-    unk->field_00b = r5;
+    sub_81CA35C(unk->iconSprites[unk->cursorPos], 0x82, 0x8c, 0x4);
+    sub_81CA35C(unk->iconSprites[r5], 0x8c, 0x82, 0x4);
+    unk->cursorPos = r5;
 }
 
 static void sub_81CA2DC(void)
@@ -897,12 +897,12 @@ static void sub_81CA2DC(void)
 
     for (i = 0; i < 6; i++)
     {
-        if (unk->field_010[i])
+        if (unk->iconVisible[i])
         {
-            if (unk->field_00b != i)
-                sub_81CA35C(unk->field_02c[i], 0x8C, 0x100, 0x8);
+            if (unk->cursorPos != i)
+                sub_81CA35C(unk->iconSprites[i], 0x8C, 0x100, 0x8);
             else
-                sub_81CA3B4(unk->field_02c[i]);
+                sub_81CA3B4(unk->iconSprites[i]);
         }
     }
 }
@@ -914,11 +914,11 @@ static bool32 sub_81CA324(void)
 
     for (i = 0; i < 6; i++)
     {
-        if (unk->field_02c[i][0]->callback != SpriteCallbackDummy)
+        if (unk->iconSprites[i][0]->callback != SpriteCallbackDummy)
             return TRUE;
     }
 
-    if (unk->field_00c)
+    if (unk->otherIconsInMotion)
         return TRUE;
 
     return FALSE;
@@ -962,7 +962,7 @@ static void sub_81CA3B4(struct Sprite ** sprites)
     SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(0x10, 0x00));
     taskId = CreateTask(sub_81CA580, 3);
     gTasks[taskId].data[0] = 8;
-    unk->field_00c++;
+    unk->otherIconsInMotion++;
 }
 
 static void sub_81CA448(struct Sprite ** sprites, bool32 a1)
@@ -1075,7 +1075,7 @@ static void sub_81CA580(u8 taskId)
             data[4]++;
             if (data[4] == 12)
             {
-                ((struct Pokenav2Struct *)GetSubstructPtr(2))->field_00c--;
+                ((struct Pokenav2Struct *)GetSubstructPtr(2))->otherIconsInMotion--;
                 SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(0x00, 0x10));
                 DestroyTask(taskId);
             }
@@ -1117,10 +1117,10 @@ static void sub_81CA6E0(void)
 {
     struct Pokenav2Struct * ptr = GetSubstructPtr(2);
 
-    ptr->field_008 = AddWindow(&gUnknown_086202CC);
-    PutWindowTilemap(ptr->field_008);
-    FillWindowPixelBuffer(ptr->field_008, PIXEL_FILL(6));
-    CopyWindowToVram(ptr->field_008, 3);
+    ptr->optionDescriptionWindowId = AddWindow(&gUnknown_086202CC);
+    PutWindowTilemap(ptr->optionDescriptionWindowId);
+    FillWindowPixelBuffer(ptr->optionDescriptionWindowId, PIXEL_FILL(6));
+    CopyWindowToVram(ptr->optionDescriptionWindowId, 3);
 }
 
 static void sub_81CA714(void)
@@ -1129,8 +1129,8 @@ static void sub_81CA714(void)
     int i = sub_81C98B4();
     const u8 * s = gUnknown_086202D4[i];
     u32 width = GetStringWidth(1, s, -1);
-    FillWindowPixelBuffer(ptr->field_008, PIXEL_FILL(6));
-    AddTextPrinterParameterized3(ptr->field_008, 1, (192 - width) / 2, 1, gUnknown_0862030C, 0, s);
+    FillWindowPixelBuffer(ptr->optionDescriptionWindowId, PIXEL_FILL(6));
+    AddTextPrinterParameterized3(ptr->optionDescriptionWindowId, 1, (192 - width) / 2, 1, gUnknown_0862030C, 0, s);
 }
 
 
@@ -1139,8 +1139,8 @@ static void sub_81CA770(void)
     struct Pokenav2Struct * ptr = GetSubstructPtr(2);
     const u8 * s = gText_NoRibbonWinners;
     u32 width = GetStringWidth(1, s, -1);
-    FillWindowPixelBuffer(ptr->field_008, PIXEL_FILL(6));
-    AddTextPrinterParameterized3(ptr->field_008, 1, (192 - width) / 2, 1, gUnknown_0862030F, 0, s);
+    FillWindowPixelBuffer(ptr->optionDescriptionWindowId, PIXEL_FILL(6));
+    AddTextPrinterParameterized3(ptr->optionDescriptionWindowId, 1, (192 - width) / 2, 1, gUnknown_0862030F, 0, s);
 }
 
 static bool32 sub_81CA7C4(void)
@@ -1151,13 +1151,13 @@ static bool32 sub_81CA7C4(void)
 static void sub_81CA7D4(void)
 {
     struct Pokenav2Struct * ptr = GetSubstructPtr(2);
-    ptr->field_00a = CreateTask(sub_81CA808, 2);
+    ptr->bg3ScrollTaskId = CreateTask(sub_81CA808, 2);
 }
 
 static void sub_81CA7F4(void)
 {
     struct Pokenav2Struct * ptr = GetSubstructPtr(2);
-    DestroyTask(ptr->field_00a);
+    DestroyTask(ptr->bg3ScrollTaskId);
 }
 
 static void sub_81CA808(u8 taskId)
