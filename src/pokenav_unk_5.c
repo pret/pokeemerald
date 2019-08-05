@@ -248,7 +248,7 @@ bool32 sub_81CC5F4(void)
     return TRUE;
 }
 
-void sub_81CC62C(int index)
+void sub_81CC62C(s32 index)
 {
     struct Pokenav5Struct_2 *state = GetSubstructPtr(4);
     state->unk4 = CreateLoopedTask(gUnknown_086230E4[index], 1);

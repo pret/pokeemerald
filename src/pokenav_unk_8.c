@@ -23,26 +23,41 @@ struct PokenavSub7
     struct PokenavSub18 *unkPtr;
 };
 
-u32 sub_81CF010(struct PokenavSub7 *structPtr);
-u32 sub_81CF030(struct PokenavSub7 *structPtr);
-u32 sub_81CF0B8(struct PokenavSub7 *structPtr);
-u32 sub_81CF0B0(struct PokenavSub7 *structPtr);
-u32 sub_81CF11C(s32 state);
-u32 sub_81CF134(s32 state);
-u32 sub_81CF1C4(s32 state);
-u32 sub_81CF1D8(s32 state);
-u32 sub_81CF278(s32 state);
-u32 sub_81CF578(s32 state);
-u32 sub_81CF5F0(s32 state);
-u32 sub_81CF668(s32 state);
-u32 sub_81CF6E0(s32 state);
-u32 sub_81CF758(s32 state);
-u32 sub_81CF798(s32 state);
-void sub_81CF2C4(struct PokenavSub7 *structPtr, struct PokenavMonList *item);
+struct PokenavSub8
+{
+    bool32 (*callback)(void);
+    u32 ltid;
+    u16 winid;
+    bool32 unkC;
+    u16 buff[0x400];
+}; // size: 0x810
 
-const u32 gUnknown_086233A0[] = {0x16, 0x17, 0x18, 0x21, 0x2F};
+static u32 sub_81CF010(struct PokenavSub7 *structPtr);
+static u32 sub_81CF030(struct PokenavSub7 *structPtr);
+static u32 sub_81CF0B8(struct PokenavSub7 *structPtr);
+static u32 sub_81CF0B0(struct PokenavSub7 *structPtr);
+static u32 sub_81CF11C(s32 state);
+static u32 sub_81CF134(s32 state);
+static u32 sub_81CF1C4(s32 state);
+static u32 sub_81CF1D8(s32 state);
+static u32 sub_81CF278(s32 state);
+static u32 sub_81CF578(s32 state);
+static u32 sub_81CF5F0(s32 state);
+static u32 sub_81CF668(s32 state);
+static u32 sub_81CF6E0(s32 state);
+static u32 sub_81CF758(s32 state);
+static u32 sub_81CF798(s32 state);
+static void sub_81CF2C4(struct PokenavSub7 *structPtr, struct PokenavMonList *item);
+static bool32 sub_81CF3E4(void);
+static u32 sub_81CF418(s32 state);
+static void sub_81CF7C8(struct PokenavSub8 *);
+static void sub_81CF7F4(struct PokenavSub8 *);
+static void sub_81CF88C(void);
+static void sub_81CF8E4(struct PokenavMonList *, u8 *);
 
-const LoopedTask gUnknown_086233B4[] =
+static const u32 gUnknown_086233A0[] = {0x16, 0x17, 0x18, 0x21, 0x2F};
+
+static const LoopedTask gUnknown_086233B4[] =
 {
     sub_81CF134,
     sub_81CF1C4,
@@ -50,12 +65,12 @@ const LoopedTask gUnknown_086233B4[] =
     sub_81CF278
 };
 
-const u16 gUnknown_086233C4[] = INCBIN_U16("graphics/pokenav/condition_search2.gbapal");
-const u32 gUnknown_086233E4[] = INCBIN_U32("graphics/pokenav/condition_search2.4bpp.lz");
-const u32 gUnknown_086234AC[] = INCBIN_U32("graphics/pokenav/condition_search2.bin.lz");
-const u16 gUnknown_08623570[] = INCBIN_U16("graphics/pokenav/8623570.gbapal");
+static const u16 gUnknown_086233C4[] = INCBIN_U16("graphics/pokenav/condition_search2.gbapal");
+static const u32 gUnknown_086233E4[] = INCBIN_U32("graphics/pokenav/condition_search2.4bpp.lz");
+static const u32 gUnknown_086234AC[] = INCBIN_U32("graphics/pokenav/condition_search2.bin.lz");
+static const u16 gUnknown_08623570[] = INCBIN_U16("graphics/pokenav/8623570.gbapal");
 
-const struct BgTemplate gUnknown_08623590[] =
+static const struct BgTemplate gUnknown_08623590[] =
 {
     {
         .bg = 1,
@@ -76,7 +91,7 @@ const struct BgTemplate gUnknown_08623590[] =
     }
 };
 
-const LoopedTask gUnknown_08623598[] = 
+static const LoopedTask gUnknown_08623598[] = 
 {
     NULL,
     sub_81CF578,
@@ -87,7 +102,7 @@ const LoopedTask gUnknown_08623598[] =
     sub_81CF798
 };
 
-const struct WindowTemplate gUnknown_086235B4 = 
+static const struct WindowTemplate gUnknown_086235B4 = 
 {
     .bg = 1,
     .tilemapLeft = 1,
@@ -98,9 +113,9 @@ const struct WindowTemplate gUnknown_086235B4 =
     .baseBlock = 20
 };
 
-const u8 gUnknown_086235BC[] = _("{COLOR_HIGHLIGHT_SHADOW}{LIGHT_RED}{WHITE}{GREEN}♂{COLOR_HIGHLIGHT_SHADOW}{DARK_GREY}{WHITE}{LIGHT_GREY}");
-const u8 gUnknown_086235C8[] = _("{COLOR_HIGHLIGHT_SHADOW}{LIGHT_GREEN}{WHITE}{BLUE}♀{COLOR_HIGHLIGHT_SHADOW}{DARK_GREY}{WHITE}{LIGHT_GREY}");
-const u8 gUnknown_086235D4[] = _("{UNK_SPACER}");
+static const u8 gUnknown_086235BC[] = _("{COLOR_HIGHLIGHT_SHADOW}{LIGHT_RED}{WHITE}{GREEN}♂{COLOR_HIGHLIGHT_SHADOW}{DARK_GREY}{WHITE}{LIGHT_GREY}");
+static const u8 gUnknown_086235C8[] = _("{COLOR_HIGHLIGHT_SHADOW}{LIGHT_GREEN}{WHITE}{BLUE}♀{COLOR_HIGHLIGHT_SHADOW}{DARK_GREY}{WHITE}{LIGHT_GREY}");
+static const u8 gUnknown_086235D4[] = _("{UNK_SPACER}");
 
 bool32 sub_81CEF3C(void)
 {
@@ -146,14 +161,14 @@ void sub_81CEFF0(void)
     FreePokenavSubstruct(7);
 }
 
-bool32 sub_81CF010(struct PokenavSub7 *structPtr)
+static bool32 sub_81CF010(struct PokenavSub7 *structPtr)
 {
     if (!IsLoopedTaskActive(structPtr->loopedTaskId))
         structPtr->unk0 = sub_81CF030;
     return FALSE;
 }
 
-u32 sub_81CF030(struct PokenavSub7 *structPtr)
+static u32 sub_81CF030(struct PokenavSub7 *structPtr)
 {
     if (gMain.newAndRepeatedKeys & DPAD_UP)
         return 1;
@@ -180,53 +195,53 @@ u32 sub_81CF030(struct PokenavSub7 *structPtr)
         return 0;
 }
 
-u32 sub_81CF0B0(struct PokenavSub7 *structPtr)
+static u32 sub_81CF0B0(struct PokenavSub7 *structPtr)
 {
     return 0x186A3;
 }
 
-u32 sub_81CF0B8(struct PokenavSub7 *structPtr)
+static u32 sub_81CF0B8(struct PokenavSub7 *structPtr)
 {
     return 0x186A9;
 }
 
-u32 sub_81CF0C0(void)
+static u32 sub_81CF0C0(void)
 {
     struct PokenavSub7 *structPtr = GetSubstructPtr(7);
     return structPtr->unk18;
 }
 
-struct PokenavMonList * sub_81CF0D0(void)
+static struct PokenavMonList * sub_81CF0D0(void)
 {
     struct PokenavSub7 * ptr = (struct PokenavSub7 *)GetSubstructPtr(7);
     return ptr->unkPtr->unk4;
 }
 
-u16 sub_81CF0E0(void)
+static u16 sub_81CF0E0(void)
 {
     struct PokenavSub7 * ptr = (struct PokenavSub7 *)GetSubstructPtr(7);
     return ptr->unkPtr->unk0;
 }
 
-s32 sub_81CF0F0(void)
+static s32 sub_81CF0F0(void)
 {
     struct PokenavSub7 * ptr = (struct PokenavSub7 *)GetSubstructPtr(7);
     s32 i = GetSelectedMatchCall();
     return ptr->unkPtr->unk4[i].unk6;
 }
 
-u16 sub_81CF10C(void)
+static u16 sub_81CF10C(void)
 {
     struct PokenavSub7 * ptr = (struct PokenavSub7 *)GetSubstructPtr(7);
     return ptr->unkPtr->unk2;
 }
 
-u32 sub_81CF11C(s32 state)
+static u32 sub_81CF11C(s32 state)
 {
     return gUnknown_086233B4[state](state);
 }
 
-u32 sub_81CF134(s32 state)
+static u32 sub_81CF134(s32 state)
 {
     s32 i;
     struct PokenavMonList item;
@@ -251,7 +266,7 @@ u32 sub_81CF134(s32 state)
     return LT_INC_AND_CONTINUE;
 }
 
-u32 sub_81CF1C4(s32 state)
+static u32 sub_81CF1C4(s32 state)
 {
     struct PokenavSub7 * ptr = (struct PokenavSub7 *)GetSubstructPtr(7);
     ptr->unk10 = 0;
@@ -259,7 +274,7 @@ u32 sub_81CF1C4(s32 state)
     return LT_INC_AND_CONTINUE;
 }
 
-u32 sub_81CF1D8(s32 state)
+static u32 sub_81CF1D8(s32 state)
 {
     struct PokenavSub7 * ptr = (struct PokenavSub7 *)GetSubstructPtr(7);
     s32 boxId = ptr->unkC;
@@ -294,7 +309,7 @@ u32 sub_81CF1D8(s32 state)
     return LT_INC_AND_CONTINUE;
 }
 
-u32 sub_81CF278(s32 state)
+static u32 sub_81CF278(s32 state)
 {
     struct PokenavSub7 * ptr = (struct PokenavSub7 *)GetSubstructPtr(7);
     s32 r6 = ptr->unkPtr->unk0;
@@ -317,7 +332,7 @@ u32 sub_81CF278(s32 state)
     return LT_FINISH;
 }
 
-void sub_81CF2C4(struct PokenavSub7 *structPtr, struct PokenavMonList *item)
+static void sub_81CF2C4(struct PokenavSub7 *structPtr, struct PokenavMonList *item)
 {
     u32 left = 0;
     u32 right = structPtr->unkPtr->unk0;
@@ -336,24 +351,6 @@ void sub_81CF2C4(struct PokenavSub7 *structPtr, struct PokenavMonList *item)
     structPtr->unkPtr->unk4[insertionIdx] = *item;
     structPtr->unkPtr->unk0++;
 }
-
-// PokenavSub8
-
-struct PokenavSub8
-{
-    bool32 (*callback)(void);
-    u32 ltid;
-    u16 winid;
-    bool32 unkC;
-    u16 buff[0x400];
-}; // size: 0x810
-
-bool32 sub_81CF3E4(void);
-u32 sub_81CF418(s32 state);
-void sub_81CF7C8(struct PokenavSub8 *);
-void sub_81CF7F4(struct PokenavSub8 *);
-void sub_81CF88C(void);
-void sub_81CF8E4(struct PokenavMonList *, u8 *);
 
 bool32 sub_81CF330(void)
 {
@@ -390,7 +387,7 @@ bool32 sub_81CF3D0(void)
     return unk->callback();
 }
 
-bool32 sub_81CF3E4(void)
+static bool32 sub_81CF3E4(void)
 {
     struct PokenavSub8 * unk = (struct PokenavSub8 *)GetSubstructPtr(8);
     return IsLoopedTaskActive(unk->ltid);
@@ -404,7 +401,7 @@ void sub_81CF3F8(void)
     FreePokenavSubstruct(8);
 }
 
-u32 sub_81CF418(s32 state)
+static u32 sub_81CF418(s32 state)
 {
     struct PokenavSub8 * unk = (struct PokenavSub8 *)GetSubstructPtr(8);
     switch (state)
@@ -463,7 +460,7 @@ u32 sub_81CF418(s32 state)
     return LT_FINISH;
 }
 
-u32 sub_81CF578(s32 state)
+static u32 sub_81CF578(s32 state)
 {
     struct PokenavSub8 * unk = (struct PokenavSub8 *)GetSubstructPtr(8);
     switch (state)
@@ -496,7 +493,7 @@ u32 sub_81CF578(s32 state)
     return LT_FINISH;
 }
 
-u32 sub_81CF5F0(s32 state)
+static u32 sub_81CF5F0(s32 state)
 {
     struct PokenavSub8 * unk = (struct PokenavSub8 *)GetSubstructPtr(8);
     switch (state)
@@ -529,7 +526,7 @@ u32 sub_81CF5F0(s32 state)
     return LT_FINISH;
 }
 
-u32 sub_81CF668(s32 state)
+static u32 sub_81CF668(s32 state)
 {
     struct PokenavSub8 * unk = (struct PokenavSub8 *)GetSubstructPtr(8);
     switch (state)
@@ -562,7 +559,7 @@ u32 sub_81CF668(s32 state)
     return LT_FINISH;
 }
 
-u32 sub_81CF6E0(s32 state)
+static u32 sub_81CF6E0(s32 state)
 {
     struct PokenavSub8 * unk = (struct PokenavSub8 *)GetSubstructPtr(8);
     switch (state)
@@ -595,7 +592,7 @@ u32 sub_81CF6E0(s32 state)
     return LT_FINISH;
 }
 
-u32 sub_81CF758(s32 state)
+static u32 sub_81CF758(s32 state)
 {
     switch (state)
     {
@@ -615,7 +612,7 @@ u32 sub_81CF758(s32 state)
     return LT_FINISH;
 }
 
-u32 sub_81CF798(s32 state)
+static u32 sub_81CF798(s32 state)
 {
     switch (state)
     {
@@ -631,7 +628,7 @@ u32 sub_81CF798(s32 state)
     return LT_FINISH;
 }
 
-void sub_81CF7C8(struct PokenavSub8 * ptr)
+static void sub_81CF7C8(struct PokenavSub8 * ptr)
 {
     ptr->winid = AddWindow(&gUnknown_086235B4);
     PutWindowTilemap(ptr->winid);
@@ -639,7 +636,7 @@ void sub_81CF7C8(struct PokenavSub8 * ptr)
     sub_81CF7F4(ptr);
 }
 
-void sub_81CF7F4(struct PokenavSub8 * ptr)
+static void sub_81CF7F4(struct PokenavSub8 * ptr)
 {
     s32 r7 = sub_81CF0F0();
     DynamicPlaceholderTextUtil_Reset();
@@ -652,7 +649,7 @@ void sub_81CF7F4(struct PokenavSub8 * ptr)
     CopyWindowToVram(ptr->winid, 2);
 }
 
-void sub_81CF88C(void)
+static void sub_81CF88C(void)
 {
     struct MatchCallListTemplate template;
     template.unk0 = sub_81CF0D0();
@@ -670,7 +667,7 @@ void sub_81CF88C(void)
     sub_81C81D4(&gUnknown_08623590[1], &template, 0);
 }
 
-void sub_81CF8E4(struct PokenavMonList * item, u8 * dest)
+static void sub_81CF8E4(struct PokenavMonList * item, u8 * dest)
 {
     u8 gender;
     u8 level;

@@ -189,7 +189,7 @@ int sub_81CB128(int index);
 
 // pokenav_unk_4.c
 bool32 sub_81CB260(void);
-void sub_81CB29C(int index);
+void sub_81CB29C(s32 index);
 u32 sub_81CB2CC(void);
 void sub_81CB2E0(void);
 void sub_81CBD48(u16 windowId, u32 a1);
@@ -199,7 +199,7 @@ u32 sub_81CC4D4(void);
 void sub_81CC524(void);
 u32 sub_81CC554(void);
 bool32 sub_81CC5F4(void);
-void sub_81CC62C(int);
+void sub_81CC62C(s32);
 u32 sub_81CC65C(void);
 void sub_81CC670(void);
 

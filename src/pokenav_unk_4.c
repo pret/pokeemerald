@@ -290,7 +290,7 @@ bool32 sub_81CB260(void)
     return TRUE;
 }
 
-void sub_81CB29C(int index)
+void sub_81CB29C(s32 index)
 {
     struct Pokenav4Struct *state = GetSubstructPtr(6);
     state->unk4 = CreateLoopedTask(gUnknown_08622798[index], 1);
