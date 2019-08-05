@@ -2,6 +2,8 @@
 #include "alloc.h"
 #include "decompress.h"
 #include "bg.h"
+#include "palette.h"
+#include "trig.h"
 #include "gpu_regs.h"
 #include "menu.h"
 #include "window.h"
@@ -20,14 +22,13 @@ struct Pokenav2Struct
 {
     bool32 (*callback)(void);
     u32 loopedTaskId;
-    u8 field_008;
-    u8 field_009;
+    u16 field_008;
     u8 field_00a;
     u8 field_00b;
     u8 field_00c;
     u8 field_00d;
     bool32 field_010[6];
-    u8 filler_028[4];
+    struct Sprite * field_028;
     struct Sprite * field_02c[6][4];
     u8 field_08c[0x800];
 };
@@ -60,6 +61,7 @@ void sub_81CA474(struct Sprite * sprite);
 void sub_81CA4AC(struct Sprite * sprite);
 void sub_81CA580(u8 taskId);
 void sub_81CA640(void);
+void sub_81CA6AC(struct Sprite * sprite);
 void sub_81CA698(void);
 void sub_81CA6E0(void);
 void sub_81CA714(void);
@@ -67,14 +69,17 @@ void sub_81CA770(void);
 bool32 sub_81CA7C4(void);
 void sub_81CA7D4(void);
 void sub_81CA7F4(void);
+void sub_81CA808(u8 taskId);
 void sub_81CA818(void);
 void sub_81CA850(void);
 void sub_81CA864(void);
 bool32 sub_81CA89C(void);
+void sub_81CA8B0(u8 taskId);
 void titlescreen_0(void);
 void sub_81CA994(void);
 void sub_81CA9C8(void);
 void sub_81CA9D8(void);
+void sub_81CA9EC(u8 taskId);
 void sub_81CAA3C(void);
 
 extern const u32 gPokenavOptions_Gfx[];
@@ -986,4 +991,287 @@ void sub_81CA474(struct Sprite * sprite)
         sprite->pos1.x = sprite->data[7];
         sprite->callback = SpriteCallbackDummy;
     }
+}
+
+void sub_81CA4AC(struct Sprite * sprite)
+{
+    s32 r0;
+    s32 r1;
+    if (sprite->data[0] == 0)
+    {
+        if (sprite->data[1] == 0)
+        {
+            StartSpriteAffineAnim(sprite, 1);
+            sprite->data[1]++;
+            sprite->data[2] = 0x100;
+            sprite->pos1.x += sprite->pos2.x;
+            sprite->pos2.x = 0;
+        }
+        else
+        {
+            sprite->data[2] += 16;
+            r0 = sprite->data[2];
+            r1 = r0 >> 3;
+            r1 = (r1 - 32) / 2;
+            switch (sprite->data[7])
+            {
+            case 0:
+                sprite->pos2.x = -r1 * 3;
+                break;
+            case 1:
+                sprite->pos2.x = -r1;
+                break;
+            case 2:
+                sprite->pos2.x = r1;
+                break;
+            case 3:
+                sprite->pos2.x = r1 * 3;
+                break;
+            }
+            if (sprite->affineAnimEnded)
+            {
+                sprite->invisible = TRUE;
+                FreeOamMatrix(sprite->oam.matrixNum);
+                CalcCenterToCornerVec(sprite, sprite->oam.shape, sprite->oam.size, 0);
+                sprite->oam.affineMode = ST_OAM_AFFINE_OFF;
+                sprite->oam.objMode = ST_OAM_OBJ_NORMAL;
+                sprite->callback = SpriteCallbackDummy;
+            }
+        }
+    }
+    else
+    {
+        sprite->data[0]--;
+    }
+}
+
+void sub_81CA580(u8 taskId)
+{
+    s16 * data = gTasks[taskId].data;
+
+    if (data[0] == 0)
+    {
+        switch (data[1])
+        {
+        case 0:
+            data[2] = 16;
+            data[3] = 0;
+            SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_EFFECT_NONE | BLDCNT_TGT2_ALL);
+            SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(0x10, 0x00));
+            data[1]++;
+            break;
+        case 1:
+            if (data[4] & 1)
+            {
+                data[2] -= 3;
+                if (data[2] < 0)
+                    data[2] = 0;
+            }
+            else
+            {
+                data[3] += 3;
+                if (data[3] > 16)
+                    data[3] = 16;
+            }
+            SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(data[2], data[3]));
+            data[4]++;
+            if (data[4] == 12)
+            {
+                ((struct Pokenav2Struct *)GetSubstructPtr(2))->field_00c--;
+                SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(0x00, 0x10));
+                DestroyTask(taskId);
+            }
+            break;
+        }
+    }
+    else
+        data[0]--;
+}
+
+void sub_81CA640(void)
+{
+    struct Pokenav2Struct * ptr = GetSubstructPtr(2);
+    u8 spriteId = CreateSprite(&gUnknown_0862036C, 0x10, 0x60, 4);
+    ptr->field_028 = &gSprites[spriteId];
+    if (sub_81C98D4())
+        ptr->field_028->callback = sub_81CA6AC;
+    else
+        ptr->field_028->invisible = TRUE;
+}
+
+void sub_81CA698(void)
+{
+    struct Pokenav2Struct * ptr = GetSubstructPtr(2);
+    DestroySprite(ptr->field_028);
+}
+
+void sub_81CA6AC(struct Sprite * sprite)
+{
+    sprite->data[0]++;
+    if (sprite->data[0] > 8)
+    {
+        sprite->data[0] = 0;
+        sprite->invisible ^= 1;
+    }
+}
+
+void sub_81CA6E0(void)
+{
+    struct Pokenav2Struct * ptr = GetSubstructPtr(2);
+
+    ptr->field_008 = AddWindow(&gUnknown_086202CC);
+    PutWindowTilemap(ptr->field_008);
+    FillWindowPixelBuffer(ptr->field_008, PIXEL_FILL(6));
+    CopyWindowToVram(ptr->field_008, 3);
+}
+
+void sub_81CA714(void)
+{
+    struct Pokenav2Struct * ptr = GetSubstructPtr(2);
+    int i = sub_81C98B4();
+    const u8 * s = gUnknown_086202D4[i];
+    u32 width = GetStringWidth(1, s, -1);
+    FillWindowPixelBuffer(ptr->field_008, PIXEL_FILL(6));
+    AddTextPrinterParameterized3(ptr->field_008, 1, (192 - width) / 2, 1, gUnknown_0862030C, 0, s);
+}
+
+
+void sub_81CA770(void)
+{
+    struct Pokenav2Struct * ptr = GetSubstructPtr(2);
+    const u8 * s = gText_NoRibbonWinners;
+    u32 width = GetStringWidth(1, s, -1);
+    FillWindowPixelBuffer(ptr->field_008, PIXEL_FILL(6));
+    AddTextPrinterParameterized3(ptr->field_008, 1, (192 - width) / 2, 1, gUnknown_0862030F, 0, s);
+}
+
+bool32 sub_81CA7C4(void)
+{
+    return IsDma3ManagerBusyWithBgCopy();
+}
+
+void sub_81CA7D4(void)
+{
+    struct Pokenav2Struct * ptr = GetSubstructPtr(2);
+    ptr->field_00a = CreateTask(sub_81CA808, 2);
+}
+
+void sub_81CA7F4(void)
+{
+    struct Pokenav2Struct * ptr = GetSubstructPtr(2);
+    DestroyTask(ptr->field_00a);
+}
+
+void sub_81CA808(u8 taskId)
+{
+    ChangeBgX(3, 0x80, 1);
+}
+
+void sub_81CA818(void)
+{
+    u8 taskId = CreateTask(sub_81CA8B0, 3);
+    SetWordTaskArg(taskId, 1, (uintptr_t)(gUnknown_0861FC78 + 1));
+    SetWordTaskArg(taskId, 3, (uintptr_t)(gUnknown_0861FC78 + 7));
+}
+
+void sub_81CA850(void)
+{
+    CopyPaletteIntoBufferUnfaded(gUnknown_0861FC78 + 7, 0x31, 4);
+}
+
+void sub_81CA864(void)
+{
+    u8 taskId = CreateTask(sub_81CA8B0, 3);
+    SetWordTaskArg(taskId, 1, (uintptr_t)(gUnknown_0861FC78 + 7));
+    SetWordTaskArg(taskId, 3, (uintptr_t)(gUnknown_0861FC78 + 1));
+}
+
+bool32 sub_81CA89C(void)
+{
+    return FuncIsActiveTask(sub_81CA8B0);
+}
+
+void sub_81CA8B0(u8 taskId)
+{
+    u16 sp8[2];
+    s16 * data = gTasks[taskId].data;
+    const u16 * pal1 = (const u16 *)GetWordTaskArg(taskId, 1);
+    const u16 * pal2 = (const u16 *)GetWordTaskArg(taskId, 3);
+
+    sub_81C79BC(pal1, pal2, 2, 12, ++data[0], sp8);
+    LoadPalette(sp8, 0x31, 4);
+    if (data[0] == 12)
+        DestroyTask(taskId);
+}
+
+void sub_81CA914(void)
+{
+    TransferPlttBuffer();
+    LoadOam();
+    ProcessSpriteCopyRequests();
+    ScanlineEffect_InitHBlankDmaTransfer();
+}
+
+void titlescreen_0(void) // almost definitely the wrong name
+{
+    SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT1_OBJ | BLDCNT_EFFECT_LIGHTEN);
+    SetGpuReg(REG_OFFSET_BLDY, 0);
+    SetGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_WIN0_ON);
+    SetGpuRegBits(REG_OFFSET_WININ, 0x3F);
+    SetGpuRegBits(REG_OFFSET_WINOUT, 0x1F);
+    SetGpuRegBits(REG_OFFSET_WIN0V, 0xA0);
+    ScanlineEffect_Stop();
+    sub_81CAA3C();
+    ScanlineEffect_SetParams(gUnknown_08620384);
+    SetVBlankCallback_(sub_81CA914);
+    CreateTask(sub_81CA9EC, 3);
+}
+
+void sub_81CA994(void)
+{
+    SetGpuReg(REG_OFFSET_BLDCNT, 0);
+    ClearGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_WIN0_ON);
+    ScanlineEffect_Stop();
+    DestroyTask(FindTaskIdByFunc(sub_81CA9EC));
+    SetPokenavVBlankCallback();
+}
+
+void sub_81CA9C8(void)
+{
+    SetGpuReg(REG_OFFSET_BLDCNT, 0);
+}
+
+void sub_81CA9D8(void)
+{
+    sub_81CAA3C();
+    SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT1_OBJ | BLDCNT_EFFECT_LIGHTEN);
+}
+
+void sub_81CA9EC(u8 taskId)
+{
+    s16 * data = gTasks[taskId].data;
+    data[0]++;
+    if (data[0] > 0)
+    {
+        data[0] = 0;
+        data[1] += 3;
+        data[1] &= 0x7F;
+        SetGpuReg(REG_OFFSET_BLDY, gSineTable[data[1]] >> 5);
+    }
+}
+
+void sub_81CAA3C(void)
+{
+    int i = sub_81C9894();
+    int j = sub_81C98A4();
+    int r4 = gUnknown_08620240[i].unk2 * j + gUnknown_08620240[i].unk0 - 8;
+    CpuFill16(0, gScanlineEffectRegBuffers[0], 0x140);
+    CpuFill16(0, gScanlineEffectRegBuffers[1], 0x140);
+    CpuFill16(0x72F0, &gScanlineEffectRegBuffers[0][r4], 0x20);
+    CpuFill16(0x72F0, &gScanlineEffectRegBuffers[1][r4], 0x20);
+}
+
+void sub_81CAADC(void)
+{
+    sub_81CA9C8();
 }

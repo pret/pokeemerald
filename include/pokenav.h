@@ -152,8 +152,9 @@ u32 sub_81C941C(void);
 void sub_81C9430(void);
 int sub_81C9894(void);
 const u8 *sub_81CAF78(int index, u8 *arg1);
-u16 sub_81C98C4(void);
 int sub_81C98A4(void);
+int sub_81C98B4(void);
+u16 sub_81C98C4(void);
 
 // pokenav_unk_2.c
 void sub_81C99D4(void);
