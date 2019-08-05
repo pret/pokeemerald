@@ -741,13 +741,14 @@ enum
 {
     LILYCOVE_LADY_QUIZ,
     LILYCOVE_LADY_FAVOR,
-    LILYCOVE_LADY_CONTEST
+    LILYCOVE_LADY_CONTEST,
+    LILYCOVE_LADY_COUNT
 };
 
 struct LilycoveLadyQuiz
 {
     /*0x000*/ u8 id;
-    /*0x001*/ u8 phase;
+    /*0x001*/ u8 state;
     /*0x002*/ u16 question[9];
     /*0x014*/ u16 answer;
     /*0x016*/ u16 response;
@@ -763,13 +764,13 @@ struct LilycoveLadyQuiz
 struct LilycoveLadyFavor
 {
     /*0x000*/ u8 id;
-    /*0x001*/ u8 phase;
-    /*0x002*/ u8 unk_002;
-    /*0x003*/ u8 unk_003;
+    /*0x001*/ u8 state;
+    /*0x002*/ bool8 likedItem;
+    /*0x003*/ u8 numItemsGiven;
     /*0x004*/ u8 playerName[PLAYER_NAME_LENGTH + 1];
     /*0x00c*/ u8 favorId;
     /*0x00e*/ u16 itemId;
-    /*0x010*/ u16 unk_010;
+    /*0x010*/ u16 bestItem;
     /*0x012*/ u8 language;
 };
 

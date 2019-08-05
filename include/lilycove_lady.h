@@ -2,8 +2,8 @@
 #define GUARD_LILYCOVE_LADY_H
 
 u8 GetLilycoveLadyId(void);
-void SetLilycoveLady(void);
-void sub_818DA78(void);
+void InitLilycoveLady(void);
+void ReadyLilycoveLady(void);
 void sub_818DEF4(void);
 void sub_818E564(void);
 void sub_818E570(const LilycoveLady *lilycoveLady);
