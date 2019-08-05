@@ -37,21 +37,22 @@ struct UnknownPokenavCallbackStruct
     void (*unk18)(void);
 };
 
+// TODO: Move these to pokenav.h
 extern bool32 sub_81C9924(void);
 extern u32 sub_81C99C0(void);
-extern void sub_81C9990(int);
+extern void sub_81C9990(s32);
 extern bool32 sub_81C9940(void);
 extern u32 sub_81CCFD8(void);
 extern u32 sub_81CD070(void);
 extern bool32 sub_81CDDD4(void);
-extern void sub_81CDE2C(int);
+extern void sub_81CDE2C(s32);
 extern u32 sub_81CDE64(void);
 extern void sub_81CD1C0(void);
 extern void sub_81CECA0(void);
 extern u32 sub_81CEF3C(void);
 extern u32 sub_81CEFDC(void);
 extern bool32 sub_81CF330(void);
-extern void sub_81CF3A0(int);
+extern void sub_81CF3A0(s32);
 extern u32 sub_81CF3D0(void);
 extern void sub_81CEFF0(void);
 extern void sub_81CF3F8(void);

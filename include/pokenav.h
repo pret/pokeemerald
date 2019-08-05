@@ -138,6 +138,8 @@ void sub_81C7B40(void);
 struct Sprite *PauseSpinningPokenavSprite(void);
 void ResumeSpinningPokenavSprite(void);
 void sub_81C7E14(u32 arg0);
+void sub_81C7FC4(u32 arg0, bool32 arg1);
+void sub_81C7880(void);
 void sub_81C7990(u32 a0, u16 a1);
 
 // pokenav_unk_1.c
@@ -150,8 +152,15 @@ u32 sub_81C941C(void);
 void sub_81C9430(void);
 int sub_81C9894(void);
 const u8 *sub_81CAF78(int index, u8 *arg1);
+int sub_81C98A4(void);
+int sub_81C98B4(void);
+u16 sub_81C98C4(void);
 
 // pokenav_unk_2.c
+bool32 sub_81C9924(void);
+bool32 sub_81C9940(void);
+void sub_81C9990(s32 ltIdx);
+bool32 sub_81C99C0(void);
 void sub_81C99D4(void);
 void sub_81CAADC(void);
 
