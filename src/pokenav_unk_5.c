@@ -194,7 +194,7 @@ void sub_81CC524(void)
 u32 sub_81CC554(void)
 {
     struct Pokenav5Struct *state = GetSubstructPtr(3);
-    state->unk10(state);
+    return state->unk10(state);
 }
 
 static u32 sub_81CC568(struct Pokenav5Struct *state)

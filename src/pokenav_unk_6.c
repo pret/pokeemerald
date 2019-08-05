@@ -365,7 +365,7 @@ u8 *sub_81CD624(u8 *str, u16 id, bool8 arg3)
 
     str_ = str; // For some reason, a variable is needed to match.
     while (*str_ != EOS)
-        *(str_++);
+        (str_++);
 
     *(str_++) = EXT_CTRL_CODE_BEGIN;
     *(str_++) = 0x12;
