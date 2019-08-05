@@ -76,7 +76,7 @@ static void sub_81CA850(void);
 static void sub_81CA864(void);
 static bool32 sub_81CA89C(void);
 static void sub_81CA8B0(u8 taskId);
-static void titlescreen_0(void);
+static void sub_81CA92C(void);
 static void sub_81CA994(void);
 static void sub_81CA9C8(void);
 static void sub_81CA9D8(void);
@@ -497,7 +497,7 @@ static u32 sub_81C9A10(s32 state)
             break;
         }
         sub_81CA20C();
-        titlescreen_0();
+        sub_81CA92C();
         return LT_INC_AND_CONTINUE;
     case 9:
         if (sub_81CA324())
@@ -746,9 +746,9 @@ static u32 sub_81C9F28(s32 state)
 
 static void sub_81C9FC4(void)
 {
-    u32 i;
+    s32 i;
 
-    for (i = 0; i < 2; i++)
+    for (i = 0; i < NELEMS(gUnknown_086201C4); i++)
         LoadCompressedSpriteSheet(&gUnknown_086201C4[i]);
     Pokenav_AllocAndLoadPalettes(gUnknown_086201D4);
 }
@@ -1210,7 +1210,7 @@ static void sub_81CA914(void)
     ScanlineEffect_InitHBlankDmaTransfer();
 }
 
-static void titlescreen_0(void) // almost definitely the wrong name
+static void sub_81CA92C(void)
 {
     SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT1_OBJ | BLDCNT_EFFECT_LIGHTEN);
     SetGpuReg(REG_OFFSET_BLDY, 0);
