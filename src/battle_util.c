@@ -5750,7 +5750,7 @@ static u32 CalcDefenseStat(u16 move, u8 battlerAtk, u8 battlerDef, u8 moveType, 
     }
 
     // sandstorm sp.def boost for rock types
-    if (WEATHER_HAS_EFFECT && gBattleWeather & WEATHER_SANDSTORM_ANY && IS_BATTLER_OF_TYPE(battlerDef, TYPE_ROCK) && !usesDefStat)
+    if (IS_BATTLER_OF_TYPE(battlerDef, TYPE_ROCK) && WEATHER_HAS_EFFECT && gBattleWeather & WEATHER_SANDSTORM_ANY && !usesDefStat)
         MulModifier(&modifier, UQ_4_12(1.5));
 
     return ApplyModifier(modifier, defStat);
@@ -6170,10 +6170,12 @@ bool32 CanMegaEvolve(u8 battlerId)
         mon = &gPlayerParty[gBattlerPartyIndexes[battlerId]];
 
     itemId = GetMonData(mon, MON_DATA_HELD_ITEM);
-    if (itemId != ITEM_ENIGMA_BERRY)
-        holdEffect = ItemId_GetHoldEffect(itemId);
-    else
+    if (USE_BATTLE_DEBUG && gBattleStruct->debugHoldEffects[battlerId])
+        holdEffect = gBattleStruct->debugHoldEffects[battlerId];
+    else if (itemId == ITEM_ENIGMA_BERRY)
         holdEffect = gEnigmaBerries[battlerId].holdEffect;
+    else
+        holdEffect = ItemId_GetHoldEffect(itemId);
 
     if (holdEffect != HOLD_EFFECT_MEGA_STONE)
         return FALSE;
