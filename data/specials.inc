@@ -374,27 +374,27 @@ gSpecials:: @ 81DBA64
 	def_special SetSecretBaseSecretsTvFlags_Poster
 	def_special SetLilycoveLadyGfx
 	def_special Script_GetLilycoveLadyId
-	def_special sub_818DBE8
+	def_special GetFavorLadyState
 	def_special BufferFavorLadyDescription
 	def_special sub_818DC60
-	def_special sub_818DCC8
-	def_special sub_818DD14
-	def_special sub_818DD54
-	def_special OpenBagMenuForFavorLady
-	def_special sub_818DE44
-	def_special sub_818DE5C
-	def_special sub_818DEA0
-	def_special sub_818DEDC
-	def_special GetQuizLadyPhase
-	def_special sub_818E06C
+	def_special BufferFavorLadyItemName
+	def_special BufferFavorLadyPlayerName
+	def_special DidFavorLadyLikeItem
+	def_special FavorLadyOpenBagMenu
+	def_special Script_ShowFavorLadyItem
+	def_special DidFavorLadyLoveItem
+	def_special FavorLadyGetPrize
+	def_special SetFavorLadyState_Complete
+	def_special GetQuizLadyState
+	def_special GetQuizAuthor
 	def_special IsQuizLadyWaitingForChallenger
 	def_special sub_811A858
-	def_special sub_818E2FC
+	def_special QuizLadyShowEasyChatScreen
 	def_special sub_818E308
 	def_special BufferQuizPrizeItem
-	def_special SetQuizLadyPhase_MakeYourOwn
+	def_special SetQuizLadyState_Complete
 	def_special sub_818E298
-	def_special SetQuizLadyPhase_GivePrize
+	def_special SetQuizLadyState_GivePrize
 	def_special ClearQuizLadyResponse
 	def_special sub_818E3E0
 	def_special sub_818E430
