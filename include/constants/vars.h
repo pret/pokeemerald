@@ -94,21 +94,21 @@
 #define VAR_POKELOT_PRIZE_PLACE              0x404D
 #define VAR_UNUSED_0x404E                    0x404E // Unused Var
 #define VAR_LOTAD_SIZE_RECORD                0x404F
-#define VAR_LITTLEROOT_STATE                 0x4050
-#define VAR_ROUTE102_ACCESSIBLE              0x4051
+#define VAR_LITTLEROOT_TOWN_STATE            0x4050
+#define VAR_OLDALE_TOWN_STATE                0x4051
 #define VAR_UNUSED_0x4052                    0x4052 // Unused Var
-#define VAR_LAVARIDGE_RIVAL_STATE            0x4053
+#define VAR_LAVARIDGE_TOWN_STATE             0x4053
 #define VAR_CURRENT_SECRET_BASE              0x4054
 #define VAR_UNUSED_0x4055                    0x4055 // Unused Var
 #define VAR_UNUSED_0x4056                    0x4056 // Unused Var
-#define VAR_PETALBURG_STATE                  0x4057
-#define VAR_SLATEPORT_STATE                  0x4058
+#define VAR_PETALBURG_CITY_STATE             0x4057
+#define VAR_SLATEPORT_CITY_STATE             0x4058
 #define VAR_UNUSED_0x4059                    0x4059 // Unused Var
-#define VAR_RUSTBORO_STATE                   0x405A
+#define VAR_RUSTBORO_CITY_STATE              0x405A
 #define VAR_UNUSED_0x405B                    0x405B // Unused Var
 #define VAR_UNUSED_0x405C                    0x405C // Unused Var
-#define VAR_MOSSDEEP_STATE                   0x405D
-#define VAR_RAYQUAZA_STATE                   0x405E
+#define VAR_MOSSDEEP_CITY_STATE              0x405D
+#define VAR_SOOTOPOLIS_CITY_STATE            0x405E
 #define VAR_UNUSED_0x405F                    0x405F // Unused Var
 #define VAR_ROUTE101_STATE                   0x4060
 #define VAR_UNUSED_0x4061                    0x4061 // Unused Var
@@ -213,7 +213,7 @@
 #define VAR_FOSSIL_RESURRECTION_STATE        0x40C4
 #define VAR_WHICH_FOSSIL_REVIVED             0x40C5
 #define VAR_STEVENS_HOUSE_STATE              0x40C6
-#define VAR_OLDALE_STATE                     0x40C7
+#define VAR_OLDALE_RIVAL_STATE               0x40C7
 #define VAR_JAGGED_PASS_STATE                0x40C8
 #define VAR_SCOTT_PETALBURG_ENCOUNTER        0x40C9
 #define VAR_SKY_PILLAR_STATE                 0x40CA
@@ -230,7 +230,7 @@
 #define VAR_ROAMER_POKEMON                   0x40D5 // 0 = Latias, 1 = Latios
 #define VAR_TRAINER_HILL_IS_ACTIVE           0x40D6
 #define VAR_SKY_PILLAR_RAQUAZA_CRY_DONE      0x40D7
-#define VAR_SOOTOPOLIS_STATE                 0x40D8
+#define VAR_SOOTOPOLIS_WALLACE_STATE         0x40D8
 #define VAR_HAS_TALKED_TO_SEAFLOOR_CAVERN_ENTRANCE_GRUNT 0x40D9
 #define VAR_REGISTER_BIRCH_STATE             0x40DA
 #define VAR_UNUSED_0x40DB                    0x40DB // Unused Var

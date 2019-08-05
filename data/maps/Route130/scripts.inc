@@ -3,7 +3,7 @@ Route130_MapScripts:: @ 81F735F
 	.byte 0
 
 Route130_OnTransition: @ 81F7365
-	compare VAR_RAYQUAZA_STATE, 4
+	compare VAR_SOOTOPOLIS_CITY_STATE, 4
 	call_if_ge Route130_EventScript_1F73B5
 	specialvar VAR_RESULT, IsMirageIslandPresent
 	compare VAR_RESULT, 1
