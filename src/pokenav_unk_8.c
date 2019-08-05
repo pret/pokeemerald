@@ -387,7 +387,7 @@ bool32 sub_81CF3D0(void)
     return unk->callback();
 }
 
-static bool32 sub_81CF3E4(void)
+bool32 sub_81CF3E4(void)
 {
     struct PokenavSub8 * unk = GetSubstructPtr(8);
     return IsLoopedTaskActive(unk->ltid);
