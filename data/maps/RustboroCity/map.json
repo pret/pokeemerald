@@ -331,7 +331,7 @@
       "x": 23,
       "y": 20,
       "elevation": 3,
-      "var": "VAR_RUSTBORO_STATE",
+      "var": "VAR_RUSTBORO_CITY_STATE",
       "var_value": "1",
       "script": "RustboroCity_EventScript_1E095A"
     },
@@ -340,7 +340,7 @@
       "x": 23,
       "y": 21,
       "elevation": 3,
-      "var": "VAR_RUSTBORO_STATE",
+      "var": "VAR_RUSTBORO_CITY_STATE",
       "var_value": "1",
       "script": "RustboroCity_EventScript_1E0971"
     },
@@ -349,7 +349,7 @@
       "x": 23,
       "y": 22,
       "elevation": 3,
-      "var": "VAR_RUSTBORO_STATE",
+      "var": "VAR_RUSTBORO_CITY_STATE",
       "var_value": "1",
       "script": "RustboroCity_EventScript_1E0988"
     },
@@ -358,7 +358,7 @@
       "x": 23,
       "y": 23,
       "elevation": 3,
-      "var": "VAR_RUSTBORO_STATE",
+      "var": "VAR_RUSTBORO_CITY_STATE",
       "var_value": "1",
       "script": "RustboroCity_EventScript_1E099F"
     },
@@ -367,7 +367,7 @@
       "x": 23,
       "y": 24,
       "elevation": 3,
-      "var": "VAR_RUSTBORO_STATE",
+      "var": "VAR_RUSTBORO_CITY_STATE",
       "var_value": "1",
       "script": "RustboroCity_EventScript_1E09B6"
     },
@@ -376,7 +376,7 @@
       "x": 30,
       "y": 9,
       "elevation": 3,
-      "var": "VAR_RUSTBORO_STATE",
+      "var": "VAR_RUSTBORO_CITY_STATE",
       "var_value": "2",
       "script": "RustboroCity_EventScript_1E0AFE"
     },
@@ -385,7 +385,7 @@
       "x": 29,
       "y": 10,
       "elevation": 3,
-      "var": "VAR_RUSTBORO_STATE",
+      "var": "VAR_RUSTBORO_CITY_STATE",
       "var_value": "2",
       "script": "RustboroCity_EventScript_1E0B0A"
     },
@@ -394,7 +394,7 @@
       "x": 30,
       "y": 11,
       "elevation": 3,
-      "var": "VAR_RUSTBORO_STATE",
+      "var": "VAR_RUSTBORO_CITY_STATE",
       "var_value": "2",
       "script": "RustboroCity_EventScript_1E0B16"
     },
@@ -403,7 +403,7 @@
       "x": 30,
       "y": 12,
       "elevation": 3,
-      "var": "VAR_RUSTBORO_STATE",
+      "var": "VAR_RUSTBORO_CITY_STATE",
       "var_value": "2",
       "script": "RustboroCity_EventScript_1E0B22"
     },
@@ -412,7 +412,7 @@
       "x": 30,
       "y": 9,
       "elevation": 3,
-      "var": "VAR_RUSTBORO_STATE",
+      "var": "VAR_RUSTBORO_CITY_STATE",
       "var_value": "4",
       "script": "RustboroCity_EventScript_1E0C2B"
     },
@@ -421,7 +421,7 @@
       "x": 31,
       "y": 10,
       "elevation": 3,
-      "var": "VAR_RUSTBORO_STATE",
+      "var": "VAR_RUSTBORO_CITY_STATE",
       "var_value": "4",
       "script": "RustboroCity_EventScript_1E0C37"
     },
@@ -430,7 +430,7 @@
       "x": 30,
       "y": 11,
       "elevation": 3,
-      "var": "VAR_RUSTBORO_STATE",
+      "var": "VAR_RUSTBORO_CITY_STATE",
       "var_value": "4",
       "script": "RustboroCity_EventScript_1E0C43"
     },
@@ -439,7 +439,7 @@
       "x": 30,
       "y": 12,
       "elevation": 3,
-      "var": "VAR_RUSTBORO_STATE",
+      "var": "VAR_RUSTBORO_CITY_STATE",
       "var_value": "4",
       "script": "RustboroCity_EventScript_1E0C4F"
     },
@@ -448,7 +448,7 @@
       "x": 12,
       "y": 53,
       "elevation": 3,
-      "var": "VAR_RUSTBORO_STATE",
+      "var": "VAR_RUSTBORO_CITY_STATE",
       "var_value": "7",
       "script": "RustboroCity_EventScript_1E0DF3"
     },
@@ -457,7 +457,7 @@
       "x": 13,
       "y": 53,
       "elevation": 3,
-      "var": "VAR_RUSTBORO_STATE",
+      "var": "VAR_RUSTBORO_CITY_STATE",
       "var_value": "7",
       "script": "RustboroCity_EventScript_1E0E33"
     },
@@ -466,7 +466,7 @@
       "x": 14,
       "y": 53,
       "elevation": 3,
-      "var": "VAR_RUSTBORO_STATE",
+      "var": "VAR_RUSTBORO_CITY_STATE",
       "var_value": "7",
       "script": "RustboroCity_EventScript_1E0E73"
     },
@@ -475,7 +475,7 @@
       "x": 15,
       "y": 53,
       "elevation": 3,
-      "var": "VAR_RUSTBORO_STATE",
+      "var": "VAR_RUSTBORO_CITY_STATE",
       "var_value": "7",
       "script": "RustboroCity_EventScript_1E0EB3"
     },
@@ -484,7 +484,7 @@
       "x": 16,
       "y": 53,
       "elevation": 3,
-      "var": "VAR_RUSTBORO_STATE",
+      "var": "VAR_RUSTBORO_CITY_STATE",
       "var_value": "7",
       "script": "RustboroCity_EventScript_1E0EF3"
     },
@@ -493,7 +493,7 @@
       "x": 17,
       "y": 53,
       "elevation": 3,
-      "var": "VAR_RUSTBORO_STATE",
+      "var": "VAR_RUSTBORO_CITY_STATE",
       "var_value": "7",
       "script": "RustboroCity_EventScript_1E0F33"
     },
@@ -502,7 +502,7 @@
       "x": 18,
       "y": 53,
       "elevation": 3,
-      "var": "VAR_RUSTBORO_STATE",
+      "var": "VAR_RUSTBORO_CITY_STATE",
       "var_value": "7",
       "script": "RustboroCity_EventScript_1E0F73"
     },
@@ -511,7 +511,7 @@
       "x": 19,
       "y": 53,
       "elevation": 3,
-      "var": "VAR_RUSTBORO_STATE",
+      "var": "VAR_RUSTBORO_CITY_STATE",
       "var_value": "7",
       "script": "RustboroCity_EventScript_1E0FB3"
     }
