@@ -421,42 +421,42 @@ static u32 sub_81C9A10(s32 state)
         ChangeBgY(2, 0, 0);
         ChangeBgX(3, 0, 0);
         ChangeBgY(3, 0, 0);
-        return 0;
+        return LT_INC_AND_PAUSE;
     case 1:
         if (free_temp_tile_data_buffers_if_possible())
-            return 2;
+            return LT_PAUSE;
         decompress_and_copy_tile_data_to_vram(2, gUnknown_0861FD6C, 0, 0, 0);
         decompress_and_copy_tile_data_to_vram(2, gUnknown_0861FFF4, 0, 0, 1);
         CopyPaletteIntoBufferUnfaded(gUnknown_0861FD4C, 0x20, 0x20);
-        return 0;
+        return LT_INC_AND_PAUSE;
     case 2:
         if (free_temp_tile_data_buffers_if_possible())
-            return 2;
+            return LT_PAUSE;
         decompress_and_copy_tile_data_to_vram(3, gUnknown_0861FC98, 0, 0, 0);
         decompress_and_copy_tile_data_to_vram(3, gUnknown_0861FCAC, 0, 0, 1);
         CopyPaletteIntoBufferUnfaded(gUnknown_0861FC78, 0x30, 0x20);
         if (sub_81C9894() == 3 || sub_81C9894() == 4)
             sub_81CA850();
-        return 0;
+        return LT_INC_AND_PAUSE;
     case 3:
         if (free_temp_tile_data_buffers_if_possible())
-            return 2;
+            return LT_PAUSE;
         sub_81CA6E0();
         sub_81CA7D4();
-        return 1;
+        return LT_INC_AND_CONTINUE;
     case 4:
         sub_81C9FC4();
-        return 1;
+        return LT_INC_AND_CONTINUE;
     case 5:
         sub_81CA714();
         sub_81CA02C();
         sub_81CA640();
         sub_81CA0C8();
-        return 0;
+        return LT_INC_AND_PAUSE;
     case 6:
         if (sub_81CA7C4())
-            return 2;
-        return 1;
+            return LT_PAUSE;
+        return LT_INC_AND_CONTINUE;
     case 7:
         ShowBg(1);
         ShowBg(2);
@@ -480,10 +480,10 @@ static u32 sub_81C9A10(s32 state)
             LoadLeftHeaderGfxForIndex(0);
             break;
         }
-        return 0;
+        return LT_INC_AND_PAUSE;
     case 8:
         if (IsPaletteFadeActive())
-            return 2;
+            return LT_PAUSE;
         switch (sub_81C9894())
         {
         case 4:
@@ -498,15 +498,15 @@ static u32 sub_81C9A10(s32 state)
         }
         sub_81CA20C();
         titlescreen_0();
-        return 1;
+        return LT_INC_AND_CONTINUE;
     case 9:
         if (sub_81CA324())
-            return 2;
+            return LT_PAUSE;
         if (sub_81C8010())
-            return 2;
+            return LT_PAUSE;
         break;
     }
-    return 4;
+    return LT_FINISH;
 }
 
 static u32 sub_81C9C6C(s32 state)
@@ -518,15 +518,15 @@ static u32 sub_81C9C6C(s32 state)
         sub_81CA278();
         sub_81CA714();
         PlaySE(SE_SELECT);
-        return 0;
+        return LT_INC_AND_PAUSE;
     case 1:
         if (sub_81CA324())
-            return 2;
+            return LT_PAUSE;
         if (sub_81CA7C4())
-            return 2;
+            return LT_PAUSE;
         break;
     }
-    return 4;
+    return LT_FINISH;
 }
 
 static u32 sub_81C9CA8(s32 state)
@@ -538,34 +538,34 @@ static u32 sub_81C9CA8(s32 state)
         sub_81CA2DC();
         sub_81C7FC4(0, 0);
         PlaySE(SE_SELECT);
-        return 0;
+        return LT_INC_AND_PAUSE;
     case 1:
         if (sub_81CA324())
-            return 2;
+            return LT_PAUSE;
         if (sub_81C8010())
-            return 2;
+            return LT_PAUSE;
         sub_81CA0C8();
         LoadLeftHeaderGfxForIndex(1);
-        return 0;
+        return LT_INC_AND_PAUSE;
     case 2:
         sub_81CA20C();
         sub_81C7FA0(1, FALSE, FALSE);
         sub_81CA818();
         sub_81CA714();
-        return 0;
+        return LT_INC_AND_PAUSE;
     case 3:
         if (sub_81CA324())
-            return 2;
+            return LT_PAUSE;
         if (sub_81C8010())
-            return 2;
+            return LT_PAUSE;
         if (sub_81CA89C())
-            return 2;
+            return LT_PAUSE;
         if (sub_81CA7C4())
-            return 2;
+            return LT_PAUSE;
         sub_81CA9D8();
         break;
     }
-    return 4;
+    return LT_FINISH;
 }
 
 static u32 sub_81C9D44(s32 state)
@@ -576,34 +576,34 @@ static u32 sub_81C9D44(s32 state)
         sub_81CA9C8();
         sub_81CA2DC();
         sub_81C7FC4(1, 0);
-        return 0;
+        return LT_INC_AND_PAUSE;
     case 1:
         if (sub_81CA324())
-            return 2;
+            return LT_PAUSE;
         if (sub_81C8010())
-            return 2;
+            return LT_PAUSE;
         sub_81CA0C8();
         LoadLeftHeaderGfxForIndex(0);
-        return 0;
+        return LT_INC_AND_PAUSE;
     case 2:
         sub_81CA20C();
         sub_81C7FA0(0, FALSE, FALSE);
         sub_81CA864();
         sub_81CA714();
-        return 0;
+        return LT_INC_AND_PAUSE;
     case 3:
         if (sub_81CA324())
-            return 2;
+            return LT_PAUSE;
         if (sub_81C8010())
-            return 2;
+            return LT_PAUSE;
         if (sub_81CA89C())
-            return 2;
+            return LT_PAUSE;
         if (sub_81CA7C4())
-            return 2;
+            return LT_PAUSE;
         sub_81CA9D8();
         break;
     }
-    return 4;
+    return LT_FINISH;
 }
 
 static u32 sub_81C9DD8(s32 state)
@@ -614,29 +614,29 @@ static u32 sub_81C9DD8(s32 state)
         sub_81CA9C8();
         sub_81CA2DC();
         PlaySE(SE_SELECT);
-        return 0;
+        return LT_INC_AND_PAUSE;
     case 1:
         if (sub_81CA324())
-            return 2;
+            return LT_PAUSE;
         LoadLeftHeaderGfxForIndex(7);
         sub_81CA0C8();
-        return 0;
+        return LT_INC_AND_PAUSE;
     case 2:
         sub_81CA20C();
         sub_81C7FA0(7, FALSE, FALSE);
         sub_81CA714();
-        return 0;
+        return LT_INC_AND_PAUSE;
     case 3:
         if (sub_81CA324())
-            return 2;
+            return LT_PAUSE;
         if (sub_81C8010())
-            return 2;
+            return LT_PAUSE;
         if (sub_81CA89C())
-            return 2;
+            return LT_PAUSE;
         sub_81CA9D8();
         break;
     }
-    return 4;
+    return LT_FINISH;
 }
 
 static u32 sub_81C9E58(s32 state)
@@ -647,27 +647,27 @@ static u32 sub_81C9E58(s32 state)
         sub_81CA9C8();
         sub_81CA2DC();
         sub_81C7FC4(7, 0);
-        return 0;
+        return LT_INC_AND_PAUSE;
     case 1:
         if (sub_81CA324())
-            return 2;
+            return LT_PAUSE;
         if (sub_81C8010())
-            return 2;
+            return LT_PAUSE;
         sub_81CA0C8();
-        return 0;
+        return LT_INC_AND_PAUSE;
     case 2:
         sub_81CA20C();
         sub_81CA714();
-        return 0;
+        return LT_INC_AND_PAUSE;
     case 3:
         if (sub_81CA324())
-            return 2;
+            return LT_PAUSE;
         if (sub_81CA89C())
-            return 2;
+            return LT_PAUSE;
         sub_81CA9D8();
         break;
     }
-    return 4;
+    return LT_FINISH;
 }
 
 static u32 sub_81C9EC8(s32 state)
@@ -677,13 +677,13 @@ static u32 sub_81C9EC8(s32 state)
     case 0:
         PlaySE(SE_HAZURE);
         sub_81CA770();
-        return 0;
+        return LT_INC_AND_PAUSE;
     case 1:
         if (IsDma3ManagerBusyWithBgCopy())
-            return 2;
+            return LT_PAUSE;
         break;
     }
-    return 4;
+    return LT_FINISH;
 }
 
 static u32 sub_81C9EF8(s32 state)
@@ -693,13 +693,13 @@ static u32 sub_81C9EF8(s32 state)
     case 0:
         PlaySE(SE_SELECT);
         sub_81CA714();
-        return 0;
+        return LT_INC_AND_PAUSE;
     case 1:
         if (IsDma3ManagerBusyWithBgCopy())
-            return 2;
+            return LT_PAUSE;
         break;
     }
-    return 4;
+    return LT_FINISH;
 }
 
 static u32 sub_81C9F28(s32 state)
@@ -708,10 +708,10 @@ static u32 sub_81C9F28(s32 state)
     {
     case 0:
         sub_81C7BA4(sub_81C98C4());
-        return 0;
+        return LT_INC_AND_PAUSE;
     case 1:
         if (IsDma3ManagerBusyWithBgCopy_())
-            return 2;
+            return LT_PAUSE;
         sub_81C7880();
         sub_81CA9C8();
         sub_81CA2DC();
@@ -728,20 +728,20 @@ static u32 sub_81C9F28(s32 state)
             break;
         }
         PlaySE(SE_SELECT);
-        return 0;
+        return LT_INC_AND_PAUSE;
     case 2:
         if (sub_81CA324())
-            return 2;
+            return LT_PAUSE;
         if (sub_81C8010())
-            return 2;
+            return LT_PAUSE;
         sub_81C7AC0(0);
-        return 0;
+        return LT_INC_AND_PAUSE;
     case 3:
         if (IsPaletteFadeActive())
-            return 2;
+            return LT_PAUSE;
         break;
     }
-    return 4;
+    return LT_FINISH;
 }
 
 static void sub_81C9FC4(void)
