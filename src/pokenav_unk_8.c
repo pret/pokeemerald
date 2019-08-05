@@ -310,3 +310,86 @@ u32 sub_81CF278(s32 state)
     ptr->unk18 = 1;
     return LT_FINISH;
 }
+
+void sub_81CF2C4(struct PokenavSub7 *structPtr, struct PokenavMonList *item)
+{
+    u32 left = 0;
+    u32 right = structPtr->unkPtr->unk0;
+    u32 insertionIdx = left + (right - left) / 2;
+
+    while (right != insertionIdx)
+    {
+        if (item->unk6 > structPtr->unkPtr->unk4[insertionIdx].unk6)
+            right = insertionIdx;
+        else
+            left = insertionIdx + 1;
+        insertionIdx = left + (right - left) / 2;
+    }
+    for (right = structPtr->unkPtr->unk0; right > insertionIdx; right--)
+        structPtr->unkPtr->unk4[right] = structPtr->unkPtr->unk4[right - 1];
+    structPtr->unkPtr->unk4[insertionIdx] = *item;
+    structPtr->unkPtr->unk0++;
+}
+
+// PokenavSub8
+
+struct PokenavSub8
+{
+    bool32 (*callback)(void);
+    u32 ltid;
+    u8 winid;
+    bool32 unkC;
+    u16 buff[0x400];
+}; // size: 0x810
+
+bool32 sub_81CF3E4(void);
+u32 sub_81CF418(s32 state);
+
+bool32 sub_81CF330(void)
+{
+    struct PokenavSub8 * unk = AllocSubstruct(8, sizeof(struct PokenavSub8));
+    if (unk == NULL)
+        return FALSE;
+    unk->ltid = CreateLoopedTask(sub_81CF418, 1);
+    unk->callback = sub_81CF3E4;
+    unk->unkC = FALSE;
+    return TRUE;
+}
+
+bool32 sub_81CF368(void)
+{
+    struct PokenavSub8 * unk = AllocSubstruct(8, sizeof(struct PokenavSub8));
+    if (unk == NULL)
+        return FALSE;
+    unk->ltid = CreateLoopedTask(sub_81CF418, 1);
+    unk->callback = sub_81CF3E4;
+    unk->unkC = TRUE;
+    return TRUE;
+}
+
+void sub_81CF3A0(s32 idx)
+{
+    struct PokenavSub8 * unk = (struct PokenavSub8 *)GetSubstructPtr(8);
+    unk->ltid = CreateLoopedTask(gUnknown_08623598[idx], 1);
+    unk->callback = sub_81CF3E4;
+}
+
+bool32 sub_81CF3D0(void)
+{
+    struct PokenavSub8 * unk = (struct PokenavSub8 *)GetSubstructPtr(8);
+    return unk->callback();
+}
+
+bool32 sub_81CF3E4(void)
+{
+    struct PokenavSub8 * unk = (struct PokenavSub8 *)GetSubstructPtr(8);
+    return IsLoopedTaskActive(unk->ltid);
+}
+
+void sub_81CF3F8(void)
+{
+    struct PokenavSub8 * unk = (struct PokenavSub8 *)GetSubstructPtr(8);
+    sub_81C8234();
+    RemoveWindow(unk->winid);
+    FreePokenavSubstruct(8);
+}
