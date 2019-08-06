@@ -29,7 +29,7 @@ struct PokenavSub8
     u32 ltid;
     u16 winid;
     bool32 unkC;
-    u16 buff[0x400];
+    u8 buff[BG_SCREEN_SIZE];
 }; // size: 0x810
 
 static u32 sub_81CF010(struct PokenavSub7 *structPtr);

@@ -26,7 +26,7 @@ struct PokenavSub10
     u32 ltid;
     u16 winid;
     bool32 unkC;
-    u16 buff[0x400];
+    u8 buff[BG_SCREEN_SIZE];
 };
 
 static u32 sub_81CFA68(struct PokenavSub9 *structPtr);
@@ -52,7 +52,7 @@ static void sub_81D0288(struct PokenavSub10 *ptr);
 static void sub_81D0304(void);
 static void sub_81D035C(struct PokenavMonList *, u8 *);
 
-static u32 (*const gUnknown_086235D8[])(s32 state) =
+static const LoopedTask gUnknown_086235D8[] =
 {
     sub_81CFB8C,
     sub_81CFC2C,
