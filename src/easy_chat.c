@@ -30,6 +30,7 @@
 #include "constants/easy_chat.h"
 #include "constants/event_objects.h"
 #include "constants/flags.h"
+#include "constants/lilycove_lady.h"
 #include "constants/songs.h"
 #include "constants/species.h"
 #include "constants/rgb.h"
@@ -1305,7 +1306,7 @@ void ShowEasyChatScreen(void)
         displayedPersonType = EASY_CHAT_PERSON_BOY;
         break;
     case EASY_CHAT_TYPE_QUIZ_ANSWER:
-        words = &gSaveBlock1Ptr->lilycoveLady.quiz.response;
+        words = &gSaveBlock1Ptr->lilycoveLady.quiz.playerAnswer;
         break;
     case EASY_CHAT_TYPE_QUIZ_QUESTION:
         return;
@@ -1313,7 +1314,7 @@ void ShowEasyChatScreen(void)
         words = gSaveBlock1Ptr->lilycoveLady.quiz.question;
         break;
     case EASY_CHAT_TYPE_QUIZ_SET_ANSWER:
-        words = &gSaveBlock1Ptr->lilycoveLady.quiz.answer;
+        words = &gSaveBlock1Ptr->lilycoveLady.quiz.correctAnswer;
         break;
     case EASY_CHAT_TYPE_APPRENTICE:
         words = gSaveBlock2Ptr->apprentices[0].easyChatWords;
@@ -1343,7 +1344,7 @@ static void sub_811A7E4(void)
         if (!gPaletteFade.active)
         {
             lilycoveLady = &gSaveBlock1Ptr->lilycoveLady;
-            lilycoveLady->quiz.response = -1;
+            lilycoveLady->quiz.playerAnswer = -1;
             CleanupOverworldWindowsAndTilemaps();
             DoQuizQuestionEasyChatScreen();
         }
@@ -1387,7 +1388,7 @@ static void DoQuizAnswerEasyChatScreen(void)
 {
     DoEasyChatScreen(
         EASY_CHAT_TYPE_QUIZ_ANSWER,
-        &gSaveBlock1Ptr->lilycoveLady.quiz.response,
+        &gSaveBlock1Ptr->lilycoveLady.quiz.playerAnswer,
         CB2_ReturnToFieldContinueScript,
         EASY_CHAT_PERSON_DISPLAY_NONE);
 }
@@ -1403,7 +1404,7 @@ static void DoQuizQuestionEasyChatScreen(void)
 static void DoQuizSetAnswerEasyChatScreen(void)
 {
     DoEasyChatScreen(EASY_CHAT_TYPE_QUIZ_SET_ANSWER,
-        &gSaveBlock1Ptr->lilycoveLady.quiz.answer,
+        &gSaveBlock1Ptr->lilycoveLady.quiz.correctAnswer,
         CB2_ReturnToFieldContinueScript,
         EASY_CHAT_PERSON_DISPLAY_NONE);
 }
@@ -2660,7 +2661,7 @@ static int sub_811BD64(void)
         return sub_811BCF4();
 
     saveBlock1 = gSaveBlock1Ptr;
-    for (i = 0; i < 9; i++)
+    for (i = 0; i < QUIZ_QUESTION_LEN; i++)
     {
         if (saveBlock1->lilycoveLady.quiz.question[i] != 0xFFFF)
             return 0;
@@ -2676,7 +2677,7 @@ static int sub_811BDB0(void)
         return sub_811BCF4();
 
     quiz = &gSaveBlock1Ptr->lilycoveLady.quiz;
-    return quiz->answer == 0xFFFF ? 1 : 0;
+    return quiz->correctAnswer == 0xFFFF ? 1 : 0;
 }
 
 static void sub_811BDF0(u8 *arg0)
