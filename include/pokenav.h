@@ -7,16 +7,18 @@
 
 typedef u32 (*LoopedTask)(s32 state);
 
+struct PokenavMonList
+{
+    u8 boxId;
+    u8 monId;
+    u16 unk6;
+};
+
 struct PokenavSub18
 {
     u16 unk0;
     u16 unk2;
-    struct PokenavMonList
-    {
-        u8 boxId;
-        u8 monId;
-        u16 unk6;
-    } unk4[TOTAL_BOXES_COUNT * IN_BOX_COUNT + PARTY_SIZE];
+    struct PokenavMonList unk4[TOTAL_BOXES_COUNT * IN_BOX_COUNT + PARTY_SIZE];
 };
 
 // Return values of LoopedTask functions.
@@ -75,7 +77,7 @@ void SetVBlankCallback_(IntrCallback callback);
 // pokenav_match_call_ui.c
 struct MatchCallListTemplate
 {
-    u32 unk0;
+    struct PokenavMonList * unk0;
     u16 unk4;
     u16 unk6;
     u8 unk8;
@@ -85,9 +87,10 @@ struct MatchCallListTemplate
     u8 unkC;
     u8 unkD;
     u8 unkE;
-    void (*unk10)(u32, u8 *a1);
+    void (*unk10)(struct PokenavMonList *, u8 *a1);
     void (*unk14)(u16 a0, u32 a1, u32 a2);
 };
+
 u32 GetSelectedMatchCall(void);
 bool32 sub_81C8224(void);
 int MatchCall_MoveCursorUp(void);
@@ -138,6 +141,8 @@ void sub_81C7B40(void);
 struct Sprite *PauseSpinningPokenavSprite(void);
 void ResumeSpinningPokenavSprite(void);
 void sub_81C7E14(u32 arg0);
+void sub_81C7FC4(u32 arg0, bool32 arg1);
+void sub_81C7880(void);
 void sub_81C7990(u32 a0, u16 a1);
 
 // pokenav_unk_1.c
@@ -150,32 +155,33 @@ u32 sub_81C941C(void);
 void sub_81C9430(void);
 int sub_81C9894(void);
 const u8 *sub_81CAF78(int index, u8 *arg1);
+int sub_81C98A4(void);
+int sub_81C98B4(void);
+u16 sub_81C98C4(void);
 
 // pokenav_unk_2.c
+bool32 sub_81C9924(void);
+bool32 sub_81C9940(void);
+void sub_81C9990(s32 ltIdx);
+bool32 sub_81C99C0(void);
 void sub_81C99D4(void);
 void sub_81CAADC(void);
 
 // pokenav_unk_3.c
-struct Pokenav3Struct_Unk1C
-{
-    u8 unk0;
-    u8 unk1;
-    u16 unk2;
-};
 bool32 sub_81CAAE8(void);
 u32 sub_81CAB24(void);
 void sub_81CAB38(void);
 int sub_81CAE28(void);
 int sub_81CAE38(void);
 int sub_81CAE48(void);
-struct Pokenav3Struct_Unk1C *sub_81CAE94(void);
+struct PokenavMonList *sub_81CAE94(void);
 u16 sub_81CAEA4(int);
 bool32 sub_81CAEBC(int index);
 int sub_81CAF04(int index);
 const u8 *sub_81CAFD8(int index, int textType);
 u16 sub_81CB01C(void);
 u16 sub_81CB02C(int arg0);
-void sub_81CB050(u32 arg0, u8 *str);
+void sub_81CB050(struct PokenavMonList * arg0, u8 *str);
 u8 sub_81CB0C8(int rematchIndex);
 int sub_81CB0E4(int index);
 bool32 sub_81CAE08(int);
@@ -183,7 +189,7 @@ int sub_81CB128(int index);
 
 // pokenav_unk_4.c
 bool32 sub_81CB260(void);
-void sub_81CB29C(int index);
+void sub_81CB29C(s32 index);
 u32 sub_81CB2CC(void);
 void sub_81CB2E0(void);
 void sub_81CBD48(u16 windowId, u32 a1);
@@ -193,7 +199,7 @@ u32 sub_81CC4D4(void);
 void sub_81CC524(void);
 u32 sub_81CC554(void);
 bool32 sub_81CC5F4(void);
-void sub_81CC62C(int);
+void sub_81CC62C(s32);
 u32 sub_81CC65C(void);
 void sub_81CC670(void);
 

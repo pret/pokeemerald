@@ -459,7 +459,7 @@ int sub_81C98B4(void)
     return state->descriptionId;
 }
 
-int sub_81C98C4(void)
+u16 sub_81C98C4(void)
 {
     struct Pokenav1Struct *state = GetSubstructPtr(1);
     return state->helpBarIndex;

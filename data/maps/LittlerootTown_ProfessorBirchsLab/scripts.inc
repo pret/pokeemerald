@@ -7,11 +7,11 @@ LittlerootTown_ProfessorBirchsLab_MapScripts:: @ 81F9C91
 LittlerootTown_ProfessorBirchsLab_MapScript1_1F9CA1: @ 81F9CA1
 	call Common_EventScript_SetupRivalGender
 	call LittlerootTown_ProfessorBirchsLab_EventScript_2720AD
-	compare VAR_0x40D3, 6
+	compare VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 6
 	goto_if_ge LittlerootTown_ProfessorBirchsLab_EventScript_1F9CF7
-	compare VAR_0x40D3, 4
+	compare VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 4
 	goto_if_ge LittlerootTown_ProfessorBirchsLab_EventScript_1F9CF3
-	compare VAR_0x40D3, 3
+	compare VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 3
 	goto_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_1F9CCD
 	end
 
@@ -24,7 +24,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_1F9CCD:: @ 81F9CCD
 	end
 
 LittlerootTown_ProfessorBirchsLab_EventScript_1F9CE9:: @ 81F9CE9
-	setvar VAR_0x40D3, 4
+	setvar VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 4
 	goto LittlerootTown_ProfessorBirchsLab_EventScript_1F9CF3
 
 LittlerootTown_ProfessorBirchsLab_EventScript_1F9CF3:: @ 81F9CF3
@@ -39,12 +39,12 @@ LittlerootTown_ProfessorBirchsLab_EventScript_1F9CF7:: @ 81F9CF7
 
 LittlerootTown_ProfessorBirchsLab_MapScript2_1F9D06: @ 81F9D06
 	map_script_2 VAR_BIRCH_LAB_STATE, 2, LittlerootTown_ProfessorBirchsLab_EventScript_1F9D40
-	map_script_2 VAR_0x40D3, 1, LittlerootTown_ProfessorBirchsLab_EventScript_1F9D45
-	map_script_2 VAR_0x40D3, 2, LittlerootTown_ProfessorBirchsLab_EventScript_1F9D45
-	map_script_2 VAR_0x40D3, 3, LittlerootTown_ProfessorBirchsLab_EventScript_1F9D71
-	map_script_2 VAR_0x40D3, 6, LittlerootTown_ProfessorBirchsLab_EventScript_1F9D71
-	map_script_2 VAR_0x40D3, 4, LittlerootTown_ProfessorBirchsLab_EventScript_1F9D75
-	map_script_2 VAR_0x40D3, 5, LittlerootTown_ProfessorBirchsLab_EventScript_1F9D75
+	map_script_2 VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 1, LittlerootTown_ProfessorBirchsLab_EventScript_1F9D45
+	map_script_2 VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 2, LittlerootTown_ProfessorBirchsLab_EventScript_1F9D45
+	map_script_2 VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 3, LittlerootTown_ProfessorBirchsLab_EventScript_1F9D71
+	map_script_2 VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 6, LittlerootTown_ProfessorBirchsLab_EventScript_1F9D71
+	map_script_2 VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 4, LittlerootTown_ProfessorBirchsLab_EventScript_1F9D75
+	map_script_2 VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 5, LittlerootTown_ProfessorBirchsLab_EventScript_1F9D75
 	.2byte 0
 
 LittlerootTown_ProfessorBirchsLab_EventScript_1F9D40:: @ 81F9D40
@@ -87,8 +87,8 @@ LittlerootTown_ProfessorBirchsLab_EventScript_1F9D75:: @ 81F9D75
 LittlerootTown_ProfessorBirchsLab_MapScript2_1F9DB9: @ 81F9DB9
 	map_script_2 VAR_BIRCH_LAB_STATE, 2, LittlerootTown_ProfessorBirchsLab_EventScript_1F9DDB
 	map_script_2 VAR_BIRCH_LAB_STATE, 4, LittlerootTown_ProfessorBirchsLab_EventScript_1F9E67
-	map_script_2 VAR_0x40D3, 1, LittlerootTown_ProfessorBirchsLab_EventScript_1F9E80
-	map_script_2 VAR_0x40D3, 4, LittlerootTown_ProfessorBirchsLab_EventScript_1F9F62
+	map_script_2 VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 1, LittlerootTown_ProfessorBirchsLab_EventScript_1F9E80
+	map_script_2 VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 4, LittlerootTown_ProfessorBirchsLab_EventScript_1F9F62
 	.2byte 0
 
 LittlerootTown_ProfessorBirchsLab_EventScript_1F9DDB:: @ 81F9DDB
@@ -194,7 +194,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_1F9E80:: @ 81F9E80
 	closemessage
 	setflag FLAG_HIDE_LITTLEROOT_TOWN_BIRCH
 	setflag FLAG_HIDE_LITTLEROOT_TOWN_RIVAL
-	setvar VAR_0x40D3, 2
+	setvar VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 2
 	setvar VAR_SCOTT_CALL_STEP_COUNTER, 0
 	setflag FLAG_SCOTT_CALL_NATIONAL_DEX
 	releaseall
@@ -247,7 +247,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_1F9F62:: @ 81F9F62
 	applymovement EVENT_OBJ_ID_PLAYER, LittlerootTown_ProfessorBirchsLab_Movement_1F9F7C
 	waitmovement 0
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_1FB5F9, MSGBOX_DEFAULT
-	setvar VAR_0x40D3, 5
+	setvar VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 5
 	releaseall
 	end
 
@@ -284,7 +284,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_1F9FB1:: @ 81F9FB1
 
 LittlerootTown_ProfessorBirchsLab_EventScript_1F9FBB:: @ 81F9FBB
 	release
-	compare VAR_0x40D3, 6
+	compare VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 6
 	goto_if_ge LittlerootTown_ProfessorBirchsLab_EventScript_1FA057
 	applymovement 2, Common_Movement_WalkInPlaceRight
 	waitmovement 0
@@ -297,7 +297,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_1F9FBB:: @ 81F9FBB
 
 LittlerootTown_ProfessorBirchsLab_EventScript_1F9FEF:: @ 81F9FEF
 	release
-	compare VAR_0x40D3, 6
+	compare VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 6
 	goto_if_ge LittlerootTown_ProfessorBirchsLab_EventScript_1FA057
 	applymovement 2, Common_Movement_WalkInPlaceRight
 	waitmovement 0
@@ -310,7 +310,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_1F9FEF:: @ 81F9FEF
 
 LittlerootTown_ProfessorBirchsLab_EventScript_1FA023:: @ 81FA023
 	release
-	compare VAR_0x40D3, 6
+	compare VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 6
 	goto_if_ge LittlerootTown_ProfessorBirchsLab_EventScript_1FA057
 	applymovement 2, Common_Movement_WalkInPlaceRight
 	waitmovement 0
@@ -373,7 +373,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_1FA0F2:: @ 81FA0F2
 LittlerootTown_ProfessorBirchsLab_EventScript_1FA0FD:: @ 81FA0FD
 	erasemonpic
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_1FBA2C, MSGBOX_DEFAULT
-	setvar VAR_0x40D3, 6
+	setvar VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 6
 	releaseall
 	end
 
@@ -418,7 +418,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_1FA193:: @ 81FA193
 LittlerootTown_ProfessorBirchsLab_EventScript_1FA19E:: @ 81FA19E
 	erasemonpic
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_1FBA2C, MSGBOX_DEFAULT
-	setvar VAR_0x40D3, 6
+	setvar VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 6
 	releaseall
 	end
 
@@ -463,7 +463,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_1FA234:: @ 81FA234
 LittlerootTown_ProfessorBirchsLab_EventScript_1FA23F:: @ 81FA23F
 	erasemonpic
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_1FBA2C, MSGBOX_DEFAULT
-	setvar VAR_0x40D3, 6
+	setvar VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 6
 	releaseall
 	end
 
@@ -477,9 +477,9 @@ LittlerootTown_ProfessorBirchsLab_EventScript_1FA24F:: @ 81FA24F
 LittlerootTown_ProfessorBirchsLab_EventScript_1FA25A:: @ 81FA25A
 	lock
 	faceplayer
-	compare VAR_0x40D3, 5
+	compare VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 5
 	goto_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_1FA28A
-	compare VAR_0x40D3, 2
+	compare VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 2
 	goto_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_1FA294
 	goto_if_unset FLAG_HAS_MATCH_CALL, LittlerootTown_ProfessorBirchsLab_EventScript_1FA29E
 	goto_if_unset FLAG_ENABLE_PROF_BIRCH_MATCH_CALL, LittlerootTown_ProfessorBirchsLab_EventScript_1FA2D2
@@ -498,9 +498,9 @@ LittlerootTown_ProfessorBirchsLab_EventScript_1FA294:: @ 81FA294
 
 LittlerootTown_ProfessorBirchsLab_EventScript_1FA29E:: @ 81FA29E
 	goto_if_unset FLAG_HIDE_LITTLEROOT_TOWN_BIRCHS_LAB_UNKNOWN_0x380, LittlerootTown_ProfessorBirchsLab_EventScript_272141
-	compare VAR_0x40D3, 3
+	compare VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 3
 	goto_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_272141
-	compare VAR_0x40D3, 6
+	compare VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 6
 	goto_if_ge LittlerootTown_ProfessorBirchsLab_EventScript_272141
 	compare VAR_BIRCH_LAB_STATE, 5
 	goto_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_1FA3C4
@@ -519,7 +519,7 @@ Route101_EventScript_1FA2D2:: @ 81FA2D2
 	closemessage
 	delay 30
 	setflag FLAG_ENABLE_PROF_BIRCH_MATCH_CALL
-	setvar VAR_0x40DA, 2
+	setvar VAR_REGISTER_BIRCH_STATE, 2
 	release
 	end
 
@@ -539,9 +539,9 @@ LittlerootTown_ProfessorBirchsLab_EventScript_1FA2F8:: @ 81FA2F8
 	call_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_1FA37F
 	setvar VAR_BIRCH_LAB_STATE, 5
 	setflag FLAG_ADVENTURE_STARTED
-	setvar VAR_ROUTE102_ACCESSIBLE, 1
+	setvar VAR_OLDALE_TOWN_STATE, 1
 	setvar VAR_LITTLEROOT_RIVAL_STATE, 4
-	setvar VAR_0x4050, 3
+	setvar VAR_LITTLEROOT_TOWN_STATE, 3
 	releaseall
 	end
 
@@ -598,11 +598,11 @@ LittlerootTown_ProfessorBirchsLab_EventScript_1FA3E3:: @ 81FA3E3
 LittlerootTown_ProfessorBirchsLab_EventScript_1FA3EC:: @ 81FA3EC
 	lock
 	faceplayer
-	compare VAR_0x40D3, 5
+	compare VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 5
 	goto_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_1FA43A
-	compare VAR_0x40D3, 6
+	compare VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 6
 	goto_if_ge LittlerootTown_ProfessorBirchsLab_EventScript_1FA465
-	compare VAR_0x40D3, 2
+	compare VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 2
 	goto_if_ge LittlerootTown_ProfessorBirchsLab_EventScript_1FA490
 	checkplayergender
 	compare VAR_RESULT, MALE
