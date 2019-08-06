@@ -266,7 +266,7 @@ static const u16 sQuizLadyQuizAnswers[] =
     EC_WORD_PLUSH_DOLL,
     EC_WORD_ICE,
     EC_WORD_FIGHTING,
-    EC_WORD_DARK            // DARK is accepted as the correct answer despite the fact that it's wrong
+    EC_WORD_DARK
 };
 
 static const u16 sQuizLadyPrizes[] =
@@ -290,7 +290,7 @@ static const u16 sQuizLadyPrizes[] =
 };
 
 // Favor Lady data
-static const u8 *const sFavorLadyDescriptions[] =
+static const u8 *const sFavorLadyRequests[] =
 {
     gText_FavorLady_Slippery,
     gText_FavorLady_Roundish,

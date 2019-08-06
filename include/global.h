@@ -731,24 +731,16 @@ struct RecordMixingDayCareMail
     bool16 holdsItem[DAYCARE_MON_COUNT];
 };
 
-enum
-{
-    LILYCOVE_LADY_QUIZ,
-    LILYCOVE_LADY_FAVOR,
-    LILYCOVE_LADY_CONTEST,
-    LILYCOVE_LADY_COUNT
-};
-
 struct LilycoveLadyQuiz
 {
     /*0x000*/ u8 id;
     /*0x001*/ u8 state;
     /*0x002*/ u16 question[9];
-    /*0x014*/ u16 answer;
-    /*0x016*/ u16 response;
+    /*0x014*/ u16 correctAnswer;
+    /*0x016*/ u16 playerAnswer;
     /*0x018*/ u8 playerName[PLAYER_NAME_LENGTH + 1];
     /*0x020*/ u16 playerTrainerId[4];
-    /*0x028*/ u16 itemId;
+    /*0x028*/ u16 prize;
     /*0x02a*/ bool8 waitingForChallenger;
     /*0x02b*/ u8 questionId;
     /*0x02c*/ u8 prevQuestionId;
@@ -772,10 +764,10 @@ struct LilycoveLadyContest
 {
     /*0x000*/ u8 id;
     /*0x001*/ bool8 givenPokeblock;
-    /*0x002*/ u8 fave_pkblk;
-    /*0x003*/ u8 other_pkblk;
+    /*0x002*/ u8 numGoodPokeblocksGiven;
+    /*0x003*/ u8 numOtherPokeblocksGiven;
     /*0x004*/ u8 playerName[PLAYER_NAME_LENGTH + 1];
-    /*0x00c*/ u8 max_sheen;
+    /*0x00c*/ u8 maxSheen;
     /*0x00d*/ u8 category;
     /*0x00e*/ u8 language;
 };
