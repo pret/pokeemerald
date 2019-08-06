@@ -168,7 +168,7 @@ bool32 sub_81CDDD4(void)
     return TRUE;
 }
 
-void sub_81CDE2C(int id)
+void sub_81CDE2C(s32 id)
 {
     struct Pokenav7Struct *structPtr = GetSubstructPtr(0xC);
     structPtr->loopedTaskId = CreateLoopedTask(gUnknown_08623384[id], 1);
