@@ -50,6 +50,8 @@
 #define PYRAMID_BAG_ITEMS_COUNT 10
 #define HALL_FACILITIES_COUNT 9 // 7 facilities for single mode + tower double mode + tower multi mode.
 
+#define TRAINER_ID_LENGTH 4
+
 // string lengths
 #define ITEM_NAME_LENGTH 14
 #define POKEMON_NAME_LENGTH 10
