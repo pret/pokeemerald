@@ -166,7 +166,7 @@ const struct SpriteTemplate gUnknown_086231D0 =
     .callback = sub_81CCEF4,
 };
 
-u32 sub_81CC4D4(void)
+u32 PokenavCallback_Init_6(void)
 {
     struct Pokenav5Struct *state = AllocSubstruct(3, sizeof(struct Pokenav5Struct));
     if (!state)

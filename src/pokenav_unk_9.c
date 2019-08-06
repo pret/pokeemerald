@@ -111,7 +111,7 @@ static const u8 gUnknown_086237DC[] = _("{COLOR_HIGHLIGHT_SHADOW}{LIGHT_RED}{WHI
 static const u8 gUnknown_086237E8[] = _("{COLOR_HIGHLIGHT_SHADOW}{LIGHT_GREEN}{WHITE}{BLUE}♀{COLOR_HIGHLIGHT_SHADOW}{DARK_GREY}{WHITE}{LIGHT_GREY}");
 static const u8 gUnknown_086237F4[] = _("{UNK_SPACER}");
 
-bool32 sub_81CF9BC(void)
+bool32 PokenavCallback_Init_12(void)
 {
     struct PokenavSub9 *structPtr = AllocSubstruct(9, sizeof(struct PokenavSub9));
     if (structPtr == NULL)
@@ -127,7 +127,7 @@ bool32 sub_81CF9BC(void)
     return TRUE;
 }
 
-bool32 sub_81CFA04(void)
+bool32 PokenavCallback_Init_14(void)
 {
     struct PokenavSub9 *structPtr = AllocSubstruct(9, sizeof(struct PokenavSub9));
     if (structPtr == NULL)
@@ -188,12 +188,12 @@ static u32 sub_81CFA88(struct PokenavSub9 *structPtr)
 
 static u32 sub_81CFB08(struct PokenavSub9 *structPtr)
 {
-    return 0x186a5;
+    return 100005;
 }
 
 static u32 sub_81CFB10(struct PokenavSub9 *structPtr)
 {
-    return 0x186ad;
+    return 100013;
 }
 
 static u32 sub_81CFB18(void)

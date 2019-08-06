@@ -42,7 +42,7 @@ static bool32 sub_81CB1D0(void);
 const u8 gUnknown_08622508[] = {0, 2};
 const u8 gUnknown_0862250A[] = {0, 1, 2};
 
-bool32 sub_81CAAE8(void)
+bool32 PokenavCallback_Init_11(void)
 {
     struct Pokenav3Struct *state = AllocSubstruct(5, sizeof(struct Pokenav3Struct));
     if (!state)
