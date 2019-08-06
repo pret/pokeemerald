@@ -126,13 +126,13 @@ static u8 GetNumAcceptedItems(const u16 *itemsArray)
 
 static void FavorLadyPickFavorAndBestItem(void)
 {
-    u8 size;
-    u8 idx;
+    u8 numItems;
+    u8 bestItem;
 
-    sFavorLadyPtr->favorId = Random() % FAVOR_DESCRIPTION_NUM;
-    size = GetNumAcceptedItems(sFavorLadyAcceptedItemLists[sFavorLadyPtr->favorId]);
-    idx = Random() % size;
-    sFavorLadyPtr->bestItem = sFavorLadyAcceptedItemLists[sFavorLadyPtr->favorId][idx];
+    sFavorLadyPtr->favorId = Random() % ARRAY_COUNT(sFavorLadyRequests);
+    numItems = GetNumAcceptedItems(sFavorLadyAcceptedItemLists[sFavorLadyPtr->favorId]);
+    bestItem = Random() % numItems;
+    sFavorLadyPtr->bestItem = sFavorLadyAcceptedItemLists[sFavorLadyPtr->favorId][bestItem];
 }
 
 static void InitLilycoveFavorLady(void)
@@ -309,7 +309,7 @@ static void QuizLadyPickQuestion(void)
     u8 questionId;
     u8 i;
 
-    questionId = Random() % NUM_QUIZ_QUESTIONS;
+    questionId = Random() % ARRAY_COUNT(sQuizLadyQuizQuestions);
     for (i = 0; i < QUIZ_QUESTION_LEN; i ++)
     {
         sQuizLadyPtr->question[i] = sQuizLadyQuizQuestions[questionId][i];
@@ -333,13 +333,13 @@ static void InitLilycoveQuizLady(void)
     }
     sQuizLadyPtr->correctAnswer = -1;
     sQuizLadyPtr->playerAnswer = -1;
-    for (i = 0; i < 4; i ++)
+    for (i = 0; i < TRAINER_ID_LENGTH; i ++)
     {
         sQuizLadyPtr->playerTrainerId[i] = 0;
     }
     sQuizLadyPtr->prize = ITEM_NONE;
     sQuizLadyPtr->waitingForChallenger = FALSE;
-    sQuizLadyPtr->prevQuestionId = NUM_QUIZ_QUESTIONS;
+    sQuizLadyPtr->prevQuestionId = ARRAY_COUNT(sQuizLadyQuizQuestions);
     sQuizLadyPtr->language = gGameLanguage;
     QuizLadyPickQuestion();
 }
@@ -383,7 +383,7 @@ u8 GetQuizAuthor(void)
         i = quiz->questionId;
         do
         {
-            if (++ i >= NUM_QUIZ_QUESTIONS)
+            if (++ i >= (int)(ARRAY_COUNT(sQuizLadyQuizQuestions)))
             {
                 i = 0;
             }
@@ -455,7 +455,7 @@ static bool8 IsQuizTrainerIdNotPlayer(void)
 
     sQuizLadyPtr = &gSaveBlock1Ptr->lilycoveLady.quiz;
     notPlayer = FALSE;
-    for (i = 0; i < 4; i ++)
+    for (i = 0; i < TRAINER_ID_LENGTH; i ++)
     {
         if (sQuizLadyPtr->playerTrainerId[i] != gSaveBlock2Ptr->playerTrainerId[i])
         {
@@ -548,7 +548,7 @@ void QuizLadyPickNewQuestion(void)
     }
     else
     {
-        sQuizLadyPtr->prevQuestionId = NUM_QUIZ_QUESTIONS;
+        sQuizLadyPtr->prevQuestionId = ARRAY_COUNT(sQuizLadyQuizQuestions);
     }
     QuizLadyPickQuestion();
 }
@@ -582,7 +582,7 @@ void QuizLadyRecordCustomQuizData(void)
 
     sQuizLadyPtr = &gSaveBlock1Ptr->lilycoveLady.quiz;
     sQuizLadyPtr->prize = gSpecialVar_ItemId;
-    for (i = 0; i < 4; i ++)
+    for (i = 0; i < TRAINER_ID_LENGTH; i ++)
     {
         sQuizLadyPtr->playerTrainerId[i] = gSaveBlock2Ptr->playerTrainerId[i];
     }
@@ -613,7 +613,8 @@ void QuizLadyClearQuestionForRecordMix(const LilycoveLady *lilycoveLady)
     u8 i;
 
     sQuizLadyPtr = &gSaveBlock1Ptr->lilycoveLady.quiz;
-    if (lilycoveLady->quiz.prevQuestionId < NUM_QUIZ_QUESTIONS && sQuizLadyPtr->id == LILYCOVE_LADY_QUIZ)
+    if (lilycoveLady->quiz.prevQuestionId < ARRAY_COUNT(sQuizLadyQuizQuestions) 
+        && sQuizLadyPtr->id == LILYCOVE_LADY_QUIZ)
     {
         for (i = 0; i < 4; i ++)
         {
@@ -621,11 +622,11 @@ void QuizLadyClearQuestionForRecordMix(const LilycoveLady *lilycoveLady)
             {
                 break;
             }
-            sQuizLadyPtr->questionId = Random() % NUM_QUIZ_QUESTIONS;
+            sQuizLadyPtr->questionId = Random() % ARRAY_COUNT(sQuizLadyQuizQuestions);
         }
         if (lilycoveLady->quiz.prevQuestionId == sQuizLadyPtr->questionId)
         {
-            sQuizLadyPtr->questionId = (sQuizLadyPtr->questionId + 1) % NUM_QUIZ_QUESTIONS;
+            sQuizLadyPtr->questionId = (sQuizLadyPtr->questionId + 1) % (int)(ARRAY_COUNT(sQuizLadyQuizQuestions));
         }
         sQuizLadyPtr->prevQuestionId = lilycoveLady->quiz.prevQuestionId;
     }

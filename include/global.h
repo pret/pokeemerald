@@ -218,7 +218,7 @@ struct Apprentice
     u8 number;
     struct ApprenticeMon party[3];
     u16 easyChatWords[6];
-    u8 playerId[4];
+    u8 playerId[TRAINER_ID_LENGTH];
     u8 playerName[PLAYER_NAME_LENGTH];
     u8 language;
     u32 checksum;
@@ -257,7 +257,7 @@ struct EmeraldBattleTowerRecord
     /*0x01*/ u8 facilityClass;
     /*0x02*/ u16 winStreak;
     /*0x04*/ u8 name[PLAYER_NAME_LENGTH + 1];
-    /*0x0C*/ u8 trainerId[4];
+    /*0x0C*/ u8 trainerId[TRAINER_ID_LENGTH];
     /*0x10*/ u16 greeting[6];
     /*0x1C*/ u16 speechWon[6];
     /*0x28*/ u16 speechLost[6];
@@ -272,7 +272,7 @@ struct BattleTowerEReaderTrainer
     /*0x01*/ u8 facilityClass;
     /*0x02*/ u16 winStreak;
     /*0x04*/ u8 name[PLAYER_NAME_LENGTH + 1];
-    /*0x0C*/ u8 trainerId[4];
+    /*0x0C*/ u8 trainerId[TRAINER_ID_LENGTH];
     /*0x10*/ u16 greeting[6];
     /*0x1C*/ u16 farewellPlayerLost[6];
     /*0x28*/ u16 farewellPlayerWon[6];
@@ -419,7 +419,7 @@ struct PlayersApprentice
 
 struct RankingHall1P
 {
-    u8 id[4];
+    u8 id[TRAINER_ID_LENGTH];
     u16 winStreak;
     u8 name[PLAYER_NAME_LENGTH + 1];
     u8 language;
@@ -427,8 +427,8 @@ struct RankingHall1P
 
 struct RankingHall2P
 {
-    u8 id1[4];
-    u8 id2[4];
+    u8 id1[TRAINER_ID_LENGTH];
+    u8 id2[TRAINER_ID_LENGTH];
     u16 winStreak;
     u8 name1[PLAYER_NAME_LENGTH + 1];
     u8 name2[PLAYER_NAME_LENGTH + 1];
@@ -440,7 +440,7 @@ struct SaveBlock2
     /*0x00*/ u8 playerName[PLAYER_NAME_LENGTH + 1];
     /*0x08*/ u8 playerGender; // MALE, FEMALE
     /*0x09*/ u8 specialSaveWarpFlags;
-    /*0x0A*/ u8 playerTrainerId[4];
+    /*0x0A*/ u8 playerTrainerId[TRAINER_ID_LENGTH];
     /*0x0E*/ u16 playTimeHours;
     /*0x10*/ u8 playTimeMinutes;
     /*0x11*/ u8 playTimeSeconds;
@@ -489,7 +489,7 @@ struct SecretBase
     /*0x1A9D*/ u8 battledOwnerToday:1;
     /*0x1A9D*/ u8 registryStatus:2;
     /*0x1A9E*/ u8 trainerName[PLAYER_NAME_LENGTH];
-    /*0x1AA5*/ u8 trainerId[4]; // byte 0 is used for determining trainer class
+    /*0x1AA5*/ u8 trainerId[TRAINER_ID_LENGTH]; // byte 0 is used for determining trainer class
     /*0x1AA9*/ u8 language;
     /*0x1AAA*/ u16 numSecretBasesReceived;
     /*0x1AAC*/ u8 numTimesEntered;
@@ -575,7 +575,7 @@ struct MailStruct
 {
     /*0x00*/ u16 words[MAIL_WORDS_COUNT];
     /*0x12*/ u8 playerName[PLAYER_NAME_LENGTH + 1];
-    /*0x1A*/ u8 trainerId[4];
+    /*0x1A*/ u8 trainerId[TRAINER_ID_LENGTH];
     /*0x1E*/ u16 species;
     /*0x20*/ u16 itemId;
 };
@@ -592,7 +592,7 @@ struct MauvilleManBard
     /*0x0E*/ u16 temporaryLyrics[6];
     /*0x1A*/ u8 playerName[8];
     /*0x22*/ u8 filler_2DB6[0x3];
-    /*0x25*/ u8 playerTrainerId[4];
+    /*0x25*/ u8 playerTrainerId[TRAINER_ID_LENGTH];
     /*0x29*/ bool8 hasChangedSong;
     /*0x2A*/ u8 language;
 }; /*size = 0x2C*/
@@ -739,7 +739,7 @@ struct LilycoveLadyQuiz
     /*0x014*/ u16 correctAnswer;
     /*0x016*/ u16 playerAnswer;
     /*0x018*/ u8 playerName[PLAYER_NAME_LENGTH + 1];
-    /*0x020*/ u16 playerTrainerId[4];
+    /*0x020*/ u16 playerTrainerId[TRAINER_ID_LENGTH];
     /*0x028*/ u16 prize;
     /*0x02a*/ bool8 waitingForChallenger;
     /*0x02b*/ u8 questionId;

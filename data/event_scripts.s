@@ -4504,7 +4504,7 @@ LilycoveCity_PokemonCenter_1F_EventScript_2A8635:: @ 82A8635
 	end
 
 LilycoveCity_PokemonCenter_1F_EventScript_2A864C:: @ 82A864C
-	special sub_811A858
+	special QuizLadyShowQuizQuestion
 	waitstate
 	goto LilycoveCity_PokemonCenter_1F_EventScript_2A8635
 	end
@@ -4557,7 +4557,7 @@ LilycoveCity_PokemonCenter_1F_EventScript_2A86C7:: @ 82A86C7
 	goto LilycoveCity_PokemonCenter_1F_EventScript_2A8759
 	end
 
-@VAR_RESULT is essentially ignored, both scripts are identical
+@ VAR_RESULT is essentially ignored, both jumps are identical
 LilycoveCity_PokemonCenter_1F_EventScript_2A86EC:: @ 82A86EC
 	specialvar VAR_RESULT, BufferQuizAuthorNameAndCheckIfLady
 	compare VAR_RESULT, 1
@@ -4727,7 +4727,7 @@ LilycoveCity_PokemonCenter_1F_EventScript_2A88F6:: @ 82A88F6
 	goto LilycoveCity_PokemonCenter_1F_EventScript_2A890A
 	end
 
-@VAR_0x8004 here is the return value from GivePokeblockToContestLady
+@ VAR_0x8004 here is the return value from GivePokeblockToContestLady
 LilycoveCity_PokemonCenter_1F_EventScript_2A890A:: @ 82A890A
 	applymovement 4, LilycoveCity_PokemonCenter_1F_Movement_2A89B8
 	waitmovement 0
@@ -4749,7 +4749,7 @@ LilycoveCity_PokemonCenter_1F_EventScript_2A893F:: @ 82A893F
 	waitmovement 0
 	delay 60
 
-@VAR_0x8004 here is the return value from GivePokeblockToContestLady
+@ VAR_0x8004 here is the return value from GivePokeblockToContestLady
 LilycoveCity_PokemonCenter_1F_EventScript_2A894C:: @ 82A894C
 	applymovement 4, LilycoveCity_PokemonCenter_1F_Movement_2A89C0
 	waitmovement 0
@@ -4814,20 +4814,19 @@ LilycoveCity_PokemonCenter_1F_Movement_2A89C2: @ 82A89C2
 	jump_in_place_left
 	step_end
 
-@TODO, these are CONTEST_CATEGORY_ constants, move into a new constants/contest.h?
 LilycoveCity_PokemonCenter_1F_EventScript_2A89C7:: @ 82A89C7
 	specialvar VAR_RESULT, GetContestLadyCategory
 	special Script_BufferContestLadyCategoryAndMonName
 	special GetContestLadyMonSpecies
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, 0 @CONTEST_CATEGORY_COOL
 	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A8A0A
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, 1 @CONTEST_CATEGORY_BEAUTY
 	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A8A1D
-	compare VAR_RESULT, 2
+	compare VAR_RESULT, 2 @CONTEST_CATEGORY_CUTE
 	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A8A30
-	compare VAR_RESULT, 3
+	compare VAR_RESULT, 3 @CONTEST_CATEGORY_SMART
 	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A8A43
-	compare VAR_RESULT, 4
+	compare VAR_RESULT, 4 @CONTEST_CATEGORY_TOUGH
 	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A8A56
 	end
 

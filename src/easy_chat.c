@@ -241,6 +241,7 @@ struct Unk8597530
     MainCallback callback;
 };
 
+// Lilycove Quiz Lady
 static const struct Unk8597530 sUnknown_08597530[] = {
     {
         .word = 26,
@@ -1330,7 +1331,7 @@ void ShowEasyChatScreen(void)
     DoEasyChatScreen(gSpecialVar_0x8004, words, CB2_ReturnToFieldContinueScript, displayedPersonType);
 }
 
-static void sub_811A7E4(void)
+static void CB2_QuizLadyQuestion(void)
 {
     LilycoveLady *lilycoveLady;
 
@@ -1353,9 +1354,9 @@ static void sub_811A7E4(void)
     gMain.state ++;
 }
 
-void sub_811A858(void)
+void QuizLadyShowQuizQuestion(void)
 {
-    SetMainCallback2(sub_811A7E4);
+    SetMainCallback2(CB2_QuizLadyQuestion);
 }
 
 static int sub_811A868(u16 word)

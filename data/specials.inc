@@ -388,7 +388,7 @@ gSpecials:: @ 81DBA64
 	def_special GetQuizLadyState
 	def_special GetQuizAuthor
 	def_special IsQuizLadyWaitingForChallenger
-	def_special sub_811A858
+	def_special QuizLadyShowQuizQuestion
 	def_special QuizLadyGetPlayerAnswer
 	def_special IsQuizAnswerCorrect
 	def_special BufferQuizPrizeItem
