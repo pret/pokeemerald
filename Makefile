@@ -1,4 +1,17 @@
 TOOLCHAIN := $(DEVKITARM)
+
+ifeq ($(CC),)
+HOSTCC := gcc
+else
+HOSTCC := $(CC)
+endif
+
+ifeq ($(CXX),)
+HOSTCXX := g++
+else
+HOSTCXX := $(CXX)
+endif
+
 ifneq (,$(wildcard $(TOOLCHAIN)/base_tools))
 include $(TOOLCHAIN)/base_tools
 else
@@ -136,7 +149,7 @@ all: rom
 tools: $(TOOLDIRS)
 
 $(TOOLDIRS):
-	@$(MAKE) -C $@
+	@$(MAKE) -C $@ CC=$(HOSTCC) CXX=$(HOSTCXX)
 
 rom: $(ROM)
 
