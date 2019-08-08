@@ -682,6 +682,7 @@ gBattleAnims_General::
 	.4byte General_TerrainGrassy
 	.4byte General_TerrainElectric
 	.4byte General_TerrainPsychic
+	.4byte General_IllusionOff
 
 	.align 2
 gBattleAnims_Special::
@@ -14754,6 +14755,13 @@ General_WishHeal:
 	call HealingEffect
 	waitforvisualfinish
 	createsprite gSimplePaletteBlendSpriteTemplate, ANIM_ATTACKER, 2, 1, 3, 10, 0, RGB_BLACK
+	end
+	
+General_IllusionOff:
+	monbg ANIM_TARGET
+	createvisualtask sub_815B7D0, 2, 0, 1
+	waitforvisualfinish
+	clearmonbg ANIM_TARGET
 	end
 
 General_MegaEvolution:

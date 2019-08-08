@@ -9,6 +9,7 @@
 #include "constants/moves.h"
 #include "constants/hold_effects.h"
 #include "constants/battle_anim.h"
+#include "party_menu.h"
 #include "pokemon.h"
 #include "constants/species.h"
 #include "item.h"
@@ -3423,6 +3424,14 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                 effect++;
             }
             break;
+        case ABILITY_ILLUSION:
+            if (gBattleStruct->illusion[battler].on && !gBattleStruct->illusion[battler].broken && IsBattlerAlive(battler) && TARGET_TURN_DAMAGED)
+            {
+                BattleScriptPushCursor();
+                gBattlescriptCurrInstr = BattleScript_IllusionOff;
+                effect++;
+            }
+            break;
         }
         break;
     case ABILITYEFFECT_IMMUNITY: // 5
@@ -6240,4 +6249,57 @@ bool32 CanBattlerGetOrLoseItem(u8 battlerId, u16 itemId)
         return FALSE;
     else
         return TRUE;
+}
+
+struct Pokemon *GetIllusionMonPtr(u32 battlerId)
+{
+    if (!gBattleStruct->illusion[battlerId].on || gBattleStruct->illusion[battlerId].broken)
+        return NULL;
+
+    return gBattleStruct->illusion[battlerId].mon;
+}
+
+void ClearIllusionMon(u32 battlerId)
+{
+    gBattleStruct->illusion[battlerId].on = 0;
+    gBattleStruct->illusion[battlerId].mon = NULL;
+    gBattleStruct->illusion[battlerId].broken = 1;
+}
+
+bool32 SetIllusionMon(struct Pokemon *mon, u32 battlerId)
+{
+    struct Pokemon *party, *partnerMon;
+    s32 i, id;
+
+    if (GetMonAbility(mon) != ABILITY_ILLUSION)
+        return FALSE;
+
+    if (GetBattlerSide(battlerId) == B_SIDE_PLAYER)
+        party = gPlayerParty;
+    else
+        party = gEnemyParty;
+
+    if (IsBattlerAlive(BATTLE_PARTNER(battlerId)))
+        partnerMon = &party[gBattlerPartyIndexes[BATTLE_PARTNER(battlerId)]];
+    else
+        partnerMon = mon;
+
+    // Find last alive non-egg pokemon.
+    for (i = PARTY_SIZE - 1; i >= 0; i--)
+    {
+        id = pokemon_order_func(i);
+        if (GetMonData(&party[id], MON_DATA_SANITY_HAS_SPECIES)
+            && GetMonData(&party[id], MON_DATA_HP)
+            && &party[id] != mon
+            && &party[id] != partnerMon)
+        {
+            gBattleStruct->illusion[battlerId].on = 1;
+            gBattleStruct->illusion[battlerId].broken = 0;
+            gBattleStruct->illusion[battlerId].partyId = id;
+            gBattleStruct->illusion[battlerId].mon = &party[id];
+            return TRUE;
+        }
+    }
+
+    return FALSE;
 }

@@ -750,13 +750,15 @@ static void SetBattlerData(u8 battlerId)
 {
     if (!IsBattlerAIControlled(battlerId))
     {
+        struct Pokemon *illusionMon;
         u32 i;
 
         // Use the known battler's ability.
         if (BATTLE_HISTORY->abilities[battlerId] != ABILITY_NONE)
             gBattleMons[battlerId].ability = BATTLE_HISTORY->abilities[battlerId];
         // Check if mon can only have one ability.
-        else if (gBaseStats[gBattleMons[battlerId].species].abilities[1] == ABILITY_NONE)
+        else if (gBaseStats[gBattleMons[battlerId].species].abilities[1] == ABILITY_NONE
+                 || gBaseStats[gBattleMons[battlerId].species].abilities[1] == gBaseStats[gBattleMons[battlerId].species].abilities[0])
             gBattleMons[battlerId].ability = gBaseStats[gBattleMons[battlerId].species].abilities[0];
         // The ability is unknown.
         else
@@ -770,6 +772,10 @@ static void SetBattlerData(u8 battlerId)
             if (BATTLE_HISTORY->usedMoves[battlerId].moves[i] == 0)
                 gBattleMons[battlerId].moves[i] = 0;
         }
+
+        // Simulate Illusion
+        if ((illusionMon = GetIllusionMonPtr(battlerId)) != NULL)
+            gBattleMons[battlerId].species = GetMonData(illusionMon, MON_DATA_SPECIES2);
     }
 }
 

@@ -4068,6 +4068,7 @@ static void atk45_playanimation(void)
     if (gBattlescriptCurrInstr[2] == B_ANIM_STATS_CHANGE
         || gBattlescriptCurrInstr[2] == B_ANIM_SNATCH_MOVE
         || gBattlescriptCurrInstr[2] == B_ANIM_MEGA_EVOLUTION
+        || gBattlescriptCurrInstr[2] == B_ANIM_ILLUSION_OFF
         || gBattlescriptCurrInstr[2] == B_ANIM_SUBSTITUTE_FADE)
     {
         BtlController_EmitBattleAnimation(0, gBattlescriptCurrInstr[2], *argumentPtr);
@@ -4112,6 +4113,7 @@ static void atk46_playanimation2(void) // animation Id is stored in the first po
     if (*animationIdPtr == B_ANIM_STATS_CHANGE
         || *animationIdPtr == B_ANIM_SNATCH_MOVE
         || *animationIdPtr == B_ANIM_MEGA_EVOLUTION
+        || *animationIdPtr == B_ANIM_ILLUSION_OFF
         || *animationIdPtr == B_ANIM_SUBSTITUTE_FADE)
     {
         BtlController_EmitBattleAnimation(0, *animationIdPtr, *argumentPtr);
@@ -6570,10 +6572,9 @@ u32 IsFlowerVeilProtected(u32 battler)
 static void atk76_various(void)
 {
     struct Pokemon *mon;
-    u8 side;
     s32 i, j;
     u8 data[10];
-    u32 bits;
+    u32 side, bits;
 
     if (gBattleControllerExecFlags)
         return;
@@ -6599,6 +6600,26 @@ static void atk76_various(void)
         return;
     case VARIOUS_TRACE_ABILITY:
         gBattleMons[gActiveBattler].ability = gBattleStruct->tracedAbility[gActiveBattler];
+        break;
+    case VARIOUS_TRY_ILLUSION_OFF:
+        if (GetIllusionMonPtr(gActiveBattler) != NULL)
+        {
+            gBattlescriptCurrInstr += 3;
+            BattleScriptPushCursor();
+            gBattlescriptCurrInstr = BattleScript_IllusionOff;
+            return;
+        }
+        break;
+    case VARIOUS_SET_SPRITEIGNORE0HP:
+        gBattleStruct->spriteIgnore0Hp = gBattlescriptCurrInstr[3];
+        gBattlescriptCurrInstr += 4;
+        return;
+    case VARIOUS_UPDATE_NICK:
+        if (GetBattlerSide(gActiveBattler) == B_SIDE_PLAYER)
+            mon = &gPlayerParty[gBattlerPartyIndexes[gActiveBattler]];
+        else
+            mon = &gEnemyParty[gBattlerPartyIndexes[gActiveBattler]];
+        UpdateHealthboxAttribute(gHealthboxSpriteIds[gActiveBattler], mon, HEALTHBOX_NICK);
         break;
     case VARIOUS_JUMP_IF_NOT_BERRY:
         if (ItemId_GetPocket(gBattleMons[gActiveBattler].item) == POCKET_BERRIES)

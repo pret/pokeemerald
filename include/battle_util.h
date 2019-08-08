@@ -103,5 +103,8 @@ bool32 CanMegaEvolve(u8 battlerId);
 void UndoMegaEvolution(u8 monId);
 bool32 DoBattlersShareType(u32 battler1, u32 battler2);
 bool32 CanBattlerGetOrLoseItem(u8 battlerId, u16 itemId);
+struct Pokemon *GetIllusionMonPtr(u32 battlerId);
+void ClearIllusionMon(u32 battlerId);
+bool32 SetIllusionMon(struct Pokemon *mon, u32 battlerId);
 
 #endif // GUARD_BATTLE_UTIL_H

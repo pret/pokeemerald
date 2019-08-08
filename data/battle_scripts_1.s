@@ -4675,20 +4675,22 @@ BattleScript_EffectCamouflage::
 	goto BattleScript_MoveEnd
 
 BattleScript_FaintAttacker::
+	tryillusionoff BS_ATTACKER
 	playfaintcry BS_ATTACKER
 	pause 0x40
 	dofaintanimation BS_ATTACKER
-	cleareffectsonfaint BS_ATTACKER
 	printstring STRINGID_ATTACKERFAINTED
+	cleareffectsonfaint BS_ATTACKER
 	trytrainerslidefirstdownmsg BS_ATTACKER
 	return
 
 BattleScript_FaintTarget::
+	tryillusionoff BS_TARGET
 	playfaintcry BS_TARGET
 	pause 0x40
 	dofaintanimation BS_TARGET
-	cleareffectsonfaint BS_TARGET
 	printstring STRINGID_TARGETFAINTED
+	cleareffectsonfaint BS_TARGET
 	tryactivatemoxie BS_ATTACKER
 	tryactivatefellstinger BS_ATTACKER
 	trytrainerslidefirstdownmsg BS_TARGET
@@ -5849,6 +5851,17 @@ BattleScript_MegaEvolution::
 	printstring STRINGID_MEGAEVOEVOLVED
 	waitmessage 0x40
 	end2
+
+BattleScript_IllusionOff::
+	spriteignore0hp TRUE
+	playanimation BS_TARGET, B_ANIM_ILLUSION_OFF, NULL
+	waitanimation
+	updatenick BS_TARGET
+	waitstate
+	spriteignore0hp FALSE
+	printstring STRINGID_ILLUSIONWOREOFF
+	waitmessage 0x40
+	return
 
 BattleScript_MoveUsedIsAsleep::
 	printstring STRINGID_PKMNFASTASLEEP

@@ -1660,6 +1660,19 @@
 	various \battler, VARIOUS_TRACE_ABILITY
 	.endm
 	
+	.macro updatenick battler:req
+	various \battler, VARIOUS_UPDATE_NICK
+	.endm
+	
+	.macro tryillusionoff battler:req
+	various \battler, VARIOUS_TRY_ILLUSION_OFF
+	.endm
+	
+	.macro spriteignore0hp val:req
+	various BS_ATTACKER, VARIOUS_SET_SPRITEIGNORE0HP
+	.byte \val
+	.endm
+	
 @ helpful macros
 	.macro setstatchanger stat:req, stages:req, down:req
 	setbyte sSTATCHANGER \stat | \stages << 3 | \down << 7

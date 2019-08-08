@@ -142,6 +142,9 @@
 #define VARIOUS_TRY_INSTRUCT                    79
 #define VARIOUS_JUMP_IF_NOT_BERRY               80
 #define VARIOUS_TRACE_ABILITY                   81
+#define VARIOUS_UPDATE_NICK                     82
+#define VARIOUS_TRY_ILLUSION_OFF                83
+#define VARIOUS_SET_SPRITEIGNORE0HP             84
 
 // atk80, dmg manipulation
 #define ATK80_DMG_CHANGE_SIGN                               0

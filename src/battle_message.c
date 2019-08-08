@@ -664,9 +664,11 @@ static const u8 sText_AirBalloonFloat[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX} flo
 static const u8 sText_AirBalloonPop[] = _("{B_DEF_NAME_WITH_PREFIX}'s {B_LAST_ITEM} popped!");
 static const u8 sText_IncinerateBurn[] = _("{B_EFF_NAME_WITH_PREFIX}'s {B_LAST_ITEM}\nwas burnt up!");
 static const u8 sText_BugBite[] = _("{B_ATK_NAME_WITH_PREFIX} stole and ate\n{B_EFF_NAME_WITH_PREFIX}'s {B_LAST_ITEM}!");
+static const u8 sText_IllusionWoreOff[] = _("{B_DEF_NAME_WITH_PREFIX}'s Illusion wore off!");
 
 const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT] =
 {
+    [STRINGID_ILLUSIONWOREOFF - 12] = sText_IllusionWoreOff,
     [STRINGID_BUGBITE - 12] = sText_BugBite,
     [STRINGID_INCINERATEBURN - 12] = sText_IncinerateBurn,
     [STRINGID_AIRBALLOONPOP - 12] = sText_AirBalloonPop,
@@ -2307,10 +2309,10 @@ void BufferStringBattle(u16 stringID)
     gLastUsedItem = gBattleMsgDataPtr->lastItem;
     gLastUsedAbility = gBattleMsgDataPtr->lastAbility;
     gBattleScripting.battler = gBattleMsgDataPtr->scrActive;
-    *(&gBattleStruct->field_52) = gBattleMsgDataPtr->unk1605E;
-    *(&gBattleStruct->hpScale) = gBattleMsgDataPtr->hpScale;
+    gBattleStruct->field_52 = gBattleMsgDataPtr->unk1605E;
+    gBattleStruct->hpScale = gBattleMsgDataPtr->hpScale;
     gPotentialItemEffectBattler = gBattleMsgDataPtr->itemEffectBattler;
-    *(&gBattleStruct->stringMoveType) = gBattleMsgDataPtr->moveType;
+    gBattleStruct->stringMoveType = gBattleMsgDataPtr->moveType;
 
     for (i = 0; i < MAX_BATTLERS_COUNT; i++)
     {
@@ -2630,7 +2632,23 @@ static const u8* TryGetStatusString(u8 *src)
     return NULL;
 }
 
-#define HANDLE_NICKNAME_STRING_CASE(battlerId, monIndex)                \
+static void GetBattlerNick(u32 battlerId, u8 *dst)
+{
+    struct Pokemon *mon, *illusionMon;
+
+    if (GET_BATTLER_SIDE(battlerId) == B_SIDE_PLAYER)
+        mon = &gPlayerParty[gBattlerPartyIndexes[battlerId]];
+    else
+        mon = &gEnemyParty[gBattlerPartyIndexes[battlerId]];
+
+    illusionMon = GetIllusionMonPtr(battlerId);
+    if (illusionMon != NULL)
+        mon = illusionMon;
+    GetMonData(mon, MON_DATA_NICKNAME, dst);
+    StringGetEnd10(dst);
+}
+
+#define HANDLE_NICKNAME_STRING_CASE(battlerId)                          \
     if (GetBattlerSide(battlerId) != B_SIDE_PLAYER)                     \
     {                                                                   \
         if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)                     \
@@ -2643,13 +2661,8 @@ static const u8* TryGetStatusString(u8 *src)
             dstID++;                                                    \
             toCpy++;                                                    \
         }                                                               \
-        GetMonData(&gEnemyParty[monIndex], MON_DATA_NICKNAME, text);    \
     }                                                                   \
-    else                                                                \
-    {                                                                   \
-        GetMonData(&gPlayerParty[monIndex], MON_DATA_NICKNAME, text);   \
-    }                                                                   \
-    StringGetEnd10(text);                                               \
+    GetBattlerNick(battlerId, text);                                    \
     toCpy = text;
 
 static const u8 *BattleStringGetOpponentNameByTrainerId(u16 trainerId, u8 *text, u8 multiplayerId, u8 battlerId)
@@ -2848,89 +2861,61 @@ u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst)
                 toCpy = gStringVar3;
                 break;
             case B_TXT_PLAYER_MON1_NAME: // first player poke name
-                GetMonData(&gPlayerParty[gBattlerPartyIndexes[GetBattlerAtPosition(B_POSITION_PLAYER_LEFT)]],
-                           MON_DATA_NICKNAME, text);
-                StringGetEnd10(text);
+                GetBattlerNick(GetBattlerAtPosition(B_POSITION_PLAYER_LEFT), text);
                 toCpy = text;
                 break;
             case B_TXT_OPPONENT_MON1_NAME: // first enemy poke name
-                GetMonData(&gEnemyParty[gBattlerPartyIndexes[GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT)]],
-                           MON_DATA_NICKNAME, text);
-                StringGetEnd10(text);
+                GetBattlerNick(GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT), text);
                 toCpy = text;
                 break;
             case B_TXT_PLAYER_MON2_NAME: // second player poke name
-                GetMonData(&gPlayerParty[gBattlerPartyIndexes[GetBattlerAtPosition(B_POSITION_PLAYER_RIGHT)]],
-                           MON_DATA_NICKNAME, text);
-                StringGetEnd10(text);
+                GetBattlerNick(GetBattlerAtPosition(B_POSITION_PLAYER_RIGHT), text);
                 toCpy = text;
                 break;
             case B_TXT_OPPONENT_MON2_NAME: // second enemy poke name
-                GetMonData(&gEnemyParty[gBattlerPartyIndexes[GetBattlerAtPosition(B_POSITION_OPPONENT_RIGHT)]],
-                           MON_DATA_NICKNAME, text);
-                StringGetEnd10(text);
+                GetBattlerNick(GetBattlerAtPosition(B_POSITION_OPPONENT_RIGHT), text);
                 toCpy = text;
                 break;
             case B_TXT_LINK_PLAYER_MON1_NAME: // link first player poke name
-                GetMonData(&gPlayerParty[gBattlerPartyIndexes[gLinkPlayers[multiplayerId].id]],
-                           MON_DATA_NICKNAME, text);
-                StringGetEnd10(text);
+                GetBattlerNick(gLinkPlayers[multiplayerId].id, text);
                 toCpy = text;
                 break;
             case B_TXT_LINK_OPPONENT_MON1_NAME: // link first opponent poke name
-                GetMonData(&gEnemyParty[gBattlerPartyIndexes[gLinkPlayers[multiplayerId].id ^ 1]],
-                           MON_DATA_NICKNAME, text);
-                StringGetEnd10(text);
+                GetBattlerNick(gLinkPlayers[multiplayerId].id ^ 1, text);
                 toCpy = text;
                 break;
             case B_TXT_LINK_PLAYER_MON2_NAME: // link second player poke name
-                GetMonData(&gPlayerParty[gBattlerPartyIndexes[gLinkPlayers[multiplayerId].id ^ 2]],
-                           MON_DATA_NICKNAME, text);
-                StringGetEnd10(text);
+                GetBattlerNick(gLinkPlayers[multiplayerId].id ^ 2, text);
                 toCpy = text;
                 break;
             case B_TXT_LINK_OPPONENT_MON2_NAME: // link second opponent poke name
-                GetMonData(&gEnemyParty[gBattlerPartyIndexes[gLinkPlayers[multiplayerId].id ^ 3]],
-                           MON_DATA_NICKNAME, text);
-                StringGetEnd10(text);
+                GetBattlerNick(gLinkPlayers[multiplayerId].id ^ 3, text);
                 toCpy = text;
                 break;
-            case B_TXT_ATK_NAME_WITH_PREFIX_MON1: // attacker name with prefix, only battlerId 0/1
-                HANDLE_NICKNAME_STRING_CASE(gBattlerAttacker,
-                                            gBattlerPartyIndexes[GetBattlerAtPosition(GET_BATTLER_SIDE(gBattlerAttacker))])
+            case B_TXT_ATK_NAME_WITH_PREFIX_MON1: // Unused, to change into sth else.
                 break;
             case B_TXT_ATK_PARTNER_NAME: // attacker partner name
-                if (GetBattlerSide(gBattlerAttacker) == B_SIDE_PLAYER)
-                    GetMonData(&gPlayerParty[gBattlerPartyIndexes[GetBattlerAtPosition(GET_BATTLER_SIDE(gBattlerAttacker)) + 2]], MON_DATA_NICKNAME, text);
-                else
-                    GetMonData(&gEnemyParty[gBattlerPartyIndexes[GetBattlerAtPosition(GET_BATTLER_SIDE(gBattlerAttacker)) + 2]], MON_DATA_NICKNAME, text);
-
-                StringGetEnd10(text);
+                GetBattlerNick(BATTLE_PARTNER(gBattlerAttacker), text);
                 toCpy = text;
                 break;
             case B_TXT_ATK_NAME_WITH_PREFIX: // attacker name with prefix
-                HANDLE_NICKNAME_STRING_CASE(gBattlerAttacker, gBattlerPartyIndexes[gBattlerAttacker])
+                HANDLE_NICKNAME_STRING_CASE(gBattlerAttacker)
                 break;
             case B_TXT_DEF_NAME_WITH_PREFIX: // target name with prefix
-                HANDLE_NICKNAME_STRING_CASE(gBattlerTarget, gBattlerPartyIndexes[gBattlerTarget])
+                HANDLE_NICKNAME_STRING_CASE(gBattlerTarget)
                 break;
             case B_TXT_DEF_NAME: // target name
-                if (GetBattlerSide(gBattlerTarget) == B_SIDE_PLAYER)
-                    GetMonData(&gPlayerParty[gBattlerPartyIndexes[gBattlerTarget]], MON_DATA_NICKNAME, text);
-                else
-                    GetMonData(&gEnemyParty[gBattlerPartyIndexes[gBattlerTarget]], MON_DATA_NICKNAME, text);
-
-                StringGetEnd10(text);
+                GetBattlerNick(gBattlerTarget, text);
                 toCpy = text;
                 break;
             case B_TXT_EFF_NAME_WITH_PREFIX: // effect battlerId name with prefix
-                HANDLE_NICKNAME_STRING_CASE(gEffectBattler, gBattlerPartyIndexes[gEffectBattler])
+                HANDLE_NICKNAME_STRING_CASE(gEffectBattler)
                 break;
             case B_TXT_ACTIVE_NAME_WITH_PREFIX: // active battlerId name with prefix
-                HANDLE_NICKNAME_STRING_CASE(gActiveBattler, gBattlerPartyIndexes[gActiveBattler])
+                HANDLE_NICKNAME_STRING_CASE(gActiveBattler)
                 break;
             case B_TXT_SCR_ACTIVE_NAME_WITH_PREFIX: // scripting active battlerId name with prefix
-                HANDLE_NICKNAME_STRING_CASE(gBattleScripting.battler, gBattlerPartyIndexes[gBattleScripting.battler])
+                HANDLE_NICKNAME_STRING_CASE(gBattleScripting.battler)
                 break;
             case B_TXT_CURRENT_MOVE: // current move name
                 if (gBattleMsgDataPtr->currentMove >= MOVES_COUNT)
@@ -3055,7 +3040,26 @@ u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst)
                 }
                 break;
             case B_TXT_26: // ?
-                HANDLE_NICKNAME_STRING_CASE(gBattleScripting.battler, *(&gBattleStruct->field_52));
+                if (GetBattlerSide(gBattleScripting.battler) != B_SIDE_PLAYER)
+                {
+                    if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)
+                        toCpy = sText_FoePkmnPrefix;
+                    else
+                        toCpy = sText_WildPkmnPrefix;
+                    while (*toCpy != EOS)
+                    {
+                        dst[dstID] = *toCpy;
+                        dstID++;
+                        toCpy++;
+                    }
+                    GetMonData(&gEnemyParty[gBattleStruct->field_52], MON_DATA_NICKNAME, text);
+                }
+                else
+                {
+                    GetMonData(&gPlayerParty[gBattleStruct->field_52], MON_DATA_NICKNAME, text);
+                }
+                StringGetEnd10(text);
+                toCpy = text;
                 break;
             case B_TXT_PC_CREATOR_NAME: // lanette pc
                 if (FlagGet(FLAG_SYS_PC_LANETTE))
@@ -3287,11 +3291,18 @@ static void ExpandBattleTextBuffPlaceholders(const u8 *src, u8 *dst)
             srcID += 3;
             break;
         case B_BUFF_MON_NICK: // poke nick without prefix
-            if (GetBattlerSide(src[srcID + 1]) == B_SIDE_PLAYER)
-                GetMonData(&gPlayerParty[src[srcID + 2]], MON_DATA_NICKNAME, dst);
+            if (src[srcID + 2] == gBattlerPartyIndexes[src[srcID + 1]])
+            {
+                GetBattlerNick(src[srcID + 1], dst);
+            }
             else
-                GetMonData(&gEnemyParty[src[srcID + 2]], MON_DATA_NICKNAME, dst);
-            StringGetEnd10(dst);
+            {
+                if (GetBattlerSide(src[srcID + 1]) == B_SIDE_PLAYER)
+                    GetMonData(&gPlayerParty[src[srcID + 2]], MON_DATA_NICKNAME, dst);
+                else
+                    GetMonData(&gEnemyParty[src[srcID + 2]], MON_DATA_NICKNAME, dst);
+                StringGetEnd10(dst);
+            }
             srcID += 3;
             break;
         case B_BUFF_NEGATIVE_FLAVOR: // flavor table

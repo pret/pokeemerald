@@ -426,6 +426,14 @@ struct MegaEvolutionData
     u8 indicatorSpriteIds[MAX_BATTLERS_COUNT];
 };
 
+struct Illusion
+{
+    u8 on:1;
+    u8 broken:1;
+    u8 partyId:3;
+    struct Pokemon *mon;
+};
+
 struct BattleStruct
 {
     u8 turnEffectsTracker;
@@ -530,6 +538,8 @@ struct BattleStruct
     u8 lastMoveTarget[MAX_BATTLERS_COUNT]; // The last target on which each mon used a move, for the sake of Instruct
     u8 debugHoldEffects[MAX_BATTLERS_COUNT]; // These override actual items' hold effects.
     u8 tracedAbility[MAX_BATTLERS_COUNT];
+    bool8 spriteIgnore0Hp;
+    struct Illusion illusion[MAX_BATTLERS_COUNT];
 };
 
 #define GET_MOVE_TYPE(move, typeArg)                        \
