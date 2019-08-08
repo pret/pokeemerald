@@ -193,7 +193,7 @@
       "x": 8,
       "y": 10,
       "elevation": 3,
-      "var": "VAR_PETALBURG_STATE",
+      "var": "VAR_PETALBURG_CITY_STATE",
       "var_value": "0",
       "script": "PetalburgCity_EventScript_1DC49A"
     },
@@ -202,7 +202,7 @@
       "x": 8,
       "y": 11,
       "elevation": 3,
-      "var": "VAR_PETALBURG_STATE",
+      "var": "VAR_PETALBURG_CITY_STATE",
       "var_value": "0",
       "script": "PetalburgCity_EventScript_1DC4A6"
     },
@@ -211,7 +211,7 @@
       "x": 8,
       "y": 12,
       "elevation": 3,
-      "var": "VAR_PETALBURG_STATE",
+      "var": "VAR_PETALBURG_CITY_STATE",
       "var_value": "0",
       "script": "PetalburgCity_EventScript_1DC4B2"
     },
@@ -220,7 +220,7 @@
       "x": 8,
       "y": 13,
       "elevation": 3,
-      "var": "VAR_PETALBURG_STATE",
+      "var": "VAR_PETALBURG_CITY_STATE",
       "var_value": "0",
       "script": "PetalburgCity_EventScript_1DC4BE"
     },

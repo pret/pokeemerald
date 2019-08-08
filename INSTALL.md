@@ -1,116 +1,90 @@
-Follow the OS-specific instructions below.
+# Prerequisites
 
-# Linux
+| Linux | macOS | Windows 10 (build 18917+) | Windows 10 (1709+) | Windows Vista, 7, 8, 8.1, and 10 (1507, 1511, 1607, and 1703)
+| ----- | ----- | ------------------------- | ------------------ | ---------------------------------------------------------
+| none | [Xcode Command Line Tools package][xcode] | [Windows Subsystem for Linux 2][wsl2] | [Windows Subsystem for Linux][wsl] | MSYS2 (see below)
 
-Install [**devkitARM**](http://devkitpro.org/wiki/Getting_Started/devkitARM).
+[xcode]: https://developer.apple.com/library/archive/technotes/tn2339/_index.html#//apple_ref/doc/uid/DTS40014588-CH1-DOWNLOADING_COMMAND_LINE_TOOLS_IS_NOT_AVAILABLE_IN_XCODE_FOR_MACOS_10_9__HOW_CAN_I_INSTALL_THEM_ON_MY_MACHINE_
+[wsl2]: https://docs.microsoft.com/windows/wsl/wsl2-install
+[wsl]: https://docs.microsoft.com/windows/wsl/install-win10
 
-Make sure that there is an environment variable called DEVKITARM with the path of the directory before the "bin" directory containing "arm-none-eabi-as", "arm-none-eabi-cpp", "arm-none-eabi-ld" and "arm-none-eabi-objcopy".
+The [prerelease version of the Linux subsystem](https://docs.microsoft.com/windows/wsl/install-legacy) available in the 1607 and 1703 releases of Windows 10 is obsolete so consider uninstalling it.
 
-Then get the compiler from https://github.com/pret/agbcc and run the following commands.
+Make sure that the `build-essential`, `git`, and `libpng-dev` packages are installed. The `build-essential` package includes the `make`, `gcc-core`, and `g++` packages so they do not have to be obtained separately. MSYS2 does not include `libpng-dev` so it must be built from source.
 
-```
-./build.sh
-./install.sh PATH_OF_POKEEMERALD_DIRECTORY
-```
+Install the **devkitARM** toolchain of [devkitPro](https://devkitpro.org/wiki/Getting_Started) and add its environment variables. For Windows versions without the Linux subsystem, the devkitPro [graphical installer](https://github.com/devkitPro/installer/releases) includes a preconfigured MSYS2 environment, thus the steps below are not required.
 
-Finally, build the rom.
-
-```
-make
-```
-
-# Windows
-
-Install [**devkitARM**](http://devkitpro.org/wiki/Getting_Started/devkitARM).
-
-Then get the compiled tools from https://github.com/pret/pokeruby-tools. Copy the `tools/` folder over the `tools/` folder in your pokeemerald directory.
-
-You can then build pokeemerald using `make` in the MSYS environment provided with devkitARM.
-
-# Mac
-
-Installing pokeemerald on a Mac requires macOS >= 10.12 (Sierra or higher).
-
-Download a [devkitPRO pacman](https://github.com/devkitPro/pacman/releases/tag/v1.0.0)
-
-Run the following commands in Terminal:
+	export DEVKITPRO=/opt/devkitpro
+	echo "export DEVKITPRO=$DEVKITPRO" >> ~/.bashrc
+	export DEVKITARM=$DEVKITPRO/devkitARM
+	echo "export DEVKITARM=$DEVKITARM" >> ~/.bashrc
 
 
-```
-xcode-select --install
+# Installation
 
-sudo dkp-pacman -S devkitARM 
+To set up the repository:
 
-export DEVKITPRO=/opt/devkitpro
-echo "export DEVKITPRO=$DEVKITPRO" >> ~/.bashrc
-export DEVKITARM=$DEVKITPRO/devkitARM
-echo "export DEVKITARM=$DEVKITARM" >> ~/.bashrc
-echo "if [ -f ~/.bashrc ]; then . ~/.bashrc; fi" >> ~/.bash_profile
+	git clone https://github.com/pret/pokeemerald
+	git clone https://github.com/pret/agbcc
 
-git clone https://github.com/pret/pokeemerald
-git clone https://github.com/pret/agbcc
+	cd ./agbcc
+	./build.sh
+	./install.sh ../pokeemerald
 
-cd agbcc/
-./build.sh
-./install.sh ../pokeemerald 
+	cd ../pokeemerald
 
-cd ../pokeemerald
-./build_tools.sh
-```
+To build **pokeemerald.gba** and confirm it matches the official ROM image:
 
-And build the ROM with `make`.
+	make compare
 
-If the step `./build.sh` in the above list of commands fails with the error `Makefile:1: /opt/devkitpro/devkitARM/base_tools: No such file or directory`, then try installing the pacman package `devkitarm-rules` by executing the command
+## Notes
 
-```
-sudo dkp-pacman -S devkitarm-rules
-```
+* If the base tools are not found on macOS in new Terminal sessions after the first successful build, run `echo "if [ -f ~/.bashrc ]; then . ~/.bashrc; fi" >> ~/.bash_profile` once to prevent the issue from occurring again. Verify that the `devkitarm-rules` package is installed as well; if not, install it by running `sudo dkp-pacman -S devkitarm-rules`.
 
-Executing `./build.sh` again should now succeed.
+* If the repository was previously set up using Cygwin, delete the `.exe` files in the subfolders of the `tools` folder except for `agbcc` and try building again. [Learn the differences between MSYS2 and Cygwin.](https://github.com/msys2/msys2/wiki/How-does-MSYS2-differ-from-Cygwin)
 
-# Faster builds
+# Guidance
 
-After the first build, subsequent builds are faster. You can further speed up the build:
+To build **pokeemerald.gba** with your changes:
 
-## Parallel build
+	make
 
-This significantly speeds up the build on modern machines.
+## Parallel builds
 
-By default `make` only runs a single thread. You can tell `make` to run on multiple threads with `make -j`. See the manfile for usage (`man make`).
+See [the GNU docs](https://www.gnu.org/software/make/manual/html_node/Parallel.html) and [this Stack Exchange thread](https://unix.stackexchange.com/questions/208568) for more information.
 
-The optimal value for `-j` is the number of logical cores on your machine. You can run `nproc` to see the exact number.
+To speed up building, run:
 
-```
-$ nproc
-8
-```
+	make -j$(nproc)
 
-If you have 8 cores, run: `make -j8`
+`nproc` is not available on macOS. The alternative is `sysctl -n hw.ncpu` ([relevant Stack Overflow thread](https://stackoverflow.com/questions/1715580)).
 
-`-j` on its own will spawn a new thread for each job. A clean build will have thousands of jobs, which will be slower than not using -j at all.
+## Building without dependency scanning
 
-## Disable the dependency scanning
+If only `.c` or `.s` files were changed, turn off the dependency scanning temporarily. Changes to any other files will be ignored and the build will either fail or not reflect those changes.
 
-If you've only changed `.c` or `.s` files, you can turn off the dependency scanning temporarily. Changes to any other files will be ignored, and the build will either fail or not reflect those changes.
+	make NODEP=1
 
-`make NODEP=1`
+## Building with devkitARM's C compiler
 
-# Building with devkitARM's C compiler
+This project supports the `arm-none-eabi-gcc` compiler included with devkitARM r52. To build this target, simply run:
 
-This project supports the `arm-none-eabi-gcc` compiler which ships with devkitARM r52.  To build this target, simply run:
+	make modern
 
-    make modern
+## Building with other toolchains
 
-# Building with your own toolchain
+To build using a toolchain other than devkitARM, override the `TOOLCHAIN` environment variable with the path to your toolchain, which must contain the subdirectory `bin`.
 
-To build Pokemon Emerald with a toolchain other than devkitARM, override the `TOOLCHAIN` environment variable with the path to your toolchain.  Example:
+	make TOOLCHAIN="/path/to/toolchain/here"
 
-    make compare TOOLCHAIN=/usr/local/arm-none-eabi
+The following is an example:
 
-The path you pass to the `TOOLCHAIN` variable must contain the subdirectory `bin`.  If you compile the `modern` target with this toolchain, the subdirectories `lib`, `include`, and `arm-none-eabi` must also be present.
+	make TOOLCHAIN="/usr/local/arm-none-eabi"
 
-# Building with debug info
+To compile the `modern` target with this toolchain, the subdirectories `lib`, `include`, and `arm-none-eabi` must also be present.
 
-To build the ELF file with enhanced debug info, use the `DINFO` variable:
+## Building with debug info
 
-    make compare DINFO=1
+To build **pokeemerald.elf** with enhanced debug info, use the `DINFO` variable.
+
+	make DINFO=1

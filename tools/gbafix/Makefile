@@ -1,4 +1,4 @@
-CC = gcc
+CC ?= gcc
 .PHONY: all clean
 
 SRCS = gbafix.c

@@ -3,9 +3,9 @@ LilycoveCity_DepartmentStore_5F_MapScripts:: @ 821FF7A
 	.byte 0
 
 LilycoveCity_DepartmentStore_5F_MapScript2_21FF80: @ 821FF80
-	map_script_2 VAR_RAYQUAZA_STATE, 1, LilycoveCity_DepartmentStore_5F_EventScript_21FF9A
-	map_script_2 VAR_RAYQUAZA_STATE, 2, LilycoveCity_DepartmentStore_5F_EventScript_21FF9A
-	map_script_2 VAR_RAYQUAZA_STATE, 3, LilycoveCity_DepartmentStore_5F_EventScript_21FF9A
+	map_script_2 VAR_SOOTOPOLIS_CITY_STATE, 1, LilycoveCity_DepartmentStore_5F_EventScript_21FF9A
+	map_script_2 VAR_SOOTOPOLIS_CITY_STATE, 2, LilycoveCity_DepartmentStore_5F_EventScript_21FF9A
+	map_script_2 VAR_SOOTOPOLIS_CITY_STATE, 3, LilycoveCity_DepartmentStore_5F_EventScript_21FF9A
 	.2byte 0
 
 LilycoveCity_DepartmentStore_5F_EventScript_21FF9A:: @ 821FF9A
@@ -125,9 +125,9 @@ LilycoveCity_DepartmentStore_5F_EventScript_220075:: @ 8220075
 	lockall
 	applymovement 7, Common_Movement_FacePlayer
 	waitmovement 0
-	compare VAR_RAYQUAZA_STATE, 0
+	compare VAR_SOOTOPOLIS_CITY_STATE, 0
 	goto_if_eq LilycoveCity_DepartmentStore_5F_EventScript_22009C
-	compare VAR_RAYQUAZA_STATE, 4
+	compare VAR_SOOTOPOLIS_CITY_STATE, 4
 	goto_if_ge LilycoveCity_DepartmentStore_5F_EventScript_22009C
 	goto LilycoveCity_DepartmentStore_5F_EventScript_2200A7
 	end

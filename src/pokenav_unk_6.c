@@ -47,7 +47,7 @@ void sub_81CDA1C(s16 arg0, u8 arg1);
 void sub_81CDB98(s16 arg0, u8 arg1);
 
 // code
-bool32 sub_81CCFD8(void)
+bool32 PokenavCallback_Init_7(void)
 {
     struct PokenavSub11 *structPtr = AllocSubstruct(11, sizeof(struct PokenavSub11));
 
@@ -61,7 +61,7 @@ bool32 sub_81CCFD8(void)
     return TRUE;
 }
 
-bool32 sub_81CD024(void)
+bool32 PokenavCallback_Init_9(void)
 {
     struct PokenavSub11 *structPtr = AllocSubstruct(11, sizeof(struct PokenavSub11));
 
@@ -147,9 +147,9 @@ u32 sub_81CD110(struct PokenavSub11 *structPtr)
 u32 sub_81CD19C(struct PokenavSub11 *structPtr)
 {
     if (structPtr->unk6300 == 0)
-        return 0x186A2;
+        return 100002;
     else
-        return 0x186AA;
+        return 100010;
 }
 
 void sub_81CD1C0(void)
@@ -365,7 +365,7 @@ u8 *sub_81CD624(u8 *str, u16 id, bool8 arg3)
 
     str_ = str; // For some reason, a variable is needed to match.
     while (*str_ != EOS)
-        *(str_++);
+        (str_++);
 
     *(str_++) = EXT_CTRL_CODE_BEGIN;
     *(str_++) = 0x12;
