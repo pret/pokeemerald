@@ -224,10 +224,10 @@ static void DrawExperienceProgressBar(struct Pokemon* mon);
 static void DrawContestMoveHearts(u16 move);
 static void LimitEggSummaryPageDisplay(void);
 static void ResetWindows(void);
-static void sub_81C25E8(void);
-static void sub_81C2628(void);
-static void sub_81C2794(void);
-static void sub_81C27DC(struct Pokemon *mon, u16 a);
+static void Summary_PrintMonInfo(void);
+static void Summary_PrintNotEggInfo(void);
+static void Summary_PrintEggInfo(void);
+static void Summar_PrintGenderSymbol(struct Pokemon *mon, u16 a);
 static void PrintPageNamesAndStatsPageToWindows(void);
 static void CreatePageWindowTilemaps(u8 a);
 static void ClearPageWindowTilemaps(u8 a);
@@ -1173,7 +1173,7 @@ static bool8 SummaryScreen_LoadGraphics(void)
             gMain.state++;
         break;
     case 11:
-        sub_81C25E8();
+        Summary_PrintMonInfo();
         gMain.state++;
         break;
     case 12:
@@ -1449,7 +1449,7 @@ static void sub_81C0348(void)
     DrawPokerusCuredSymbol(&sMonSummaryScreen->currentMon);
 }
 
-static void sub_81C0434(void)
+static void FreeSummaryScreen(void)
 {
     FreeAllWindowBuffers();
     Free(sMonSummaryScreen);
@@ -1474,7 +1474,7 @@ static void CloseSummaryScreen(u8 taskId)
         m4aMPlayVolumeControl(&gMPlayInfo_BGM, 0xFFFF, 0x100);
         if (gMonSpritesGfxPtr == 0)
             sub_806F47C(0);
-        sub_81C0434();
+        FreeSummaryScreen();
         DestroyTask(taskId);
     }
 }
@@ -1625,7 +1625,7 @@ static void sub_81C0704(u8 taskId)
         SetTypeIcons();
         break;
     case 10:
-        sub_81C25E8();
+        Summary_PrintMonInfo();
         break;
     case 11:
         PrintPageSpecificText(sMonSummaryScreen->currPageIndex);
@@ -2571,7 +2571,7 @@ static void DrawPokerusCuredSymbol(struct Pokemon *mon) // This checks if the mo
     schedule_bg_copy_tilemap_to_vram(3);
 }
 
-static void sub_81C228C(bool8 isMonShiny)
+static void Summary_SetDexNumberColor(bool8 isMonShiny)
 {
     if (!isMonShiny)
         sub_8199C30(3, 1, 4, 8, 8, 0);
@@ -2695,19 +2695,19 @@ static void SummaryScreen_PrintTextOnWindow(u8 windowId, const u8 *string, u8 x,
     AddTextPrinterParameterized4(windowId, 1, x, y, 0, lineSpacing, sTextColors_861CD2C[colorId], 0, string);
 }
 
-static void sub_81C25E8(void)
+static void Summary_PrintMonInfo(void)
 {
     FillWindowPixelBuffer(PSS_LABEL_WINDOW_PORTRAIT_DEX_NUMBER, PIXEL_FILL(0));
     FillWindowPixelBuffer(PSS_LABEL_WINDOW_PORTRAIT_NICKNAME, PIXEL_FILL(0));
     FillWindowPixelBuffer(PSS_LABEL_WINDOW_PORTRAIT_SPECIES, PIXEL_FILL(0));
     if (!sMonSummaryScreen->summary.isEgg)
-        sub_81C2628();
+        Summary_PrintNotEggInfo();
     else
-        sub_81C2794();
+        Summary_PrintEggInfo();
     schedule_bg_copy_tilemap_to_vram(0);
 }
 
-static void sub_81C2628(void)
+static void Summary_PrintNotEggInfo(void)
 {
     u8 strArray[16];
     struct Pokemon *mon = &sMonSummaryScreen->currentMon;
@@ -2721,12 +2721,12 @@ static void sub_81C2628(void)
         if (!IsMonShiny(mon))
         {
             SummaryScreen_PrintTextOnWindow(PSS_LABEL_WINDOW_PORTRAIT_DEX_NUMBER, gStringVar1, 0, 1, 0, 1);
-            sub_81C228C(FALSE);
+            Summary_SetDexNumberColor(FALSE);
         }
         else
         {
             SummaryScreen_PrintTextOnWindow(PSS_LABEL_WINDOW_PORTRAIT_DEX_NUMBER, gStringVar1, 0, 1, 0, 7);
-            sub_81C228C(TRUE);
+            Summary_SetDexNumberColor(TRUE);
         }
         PutWindowTilemap(PSS_LABEL_WINDOW_PORTRAIT_DEX_NUMBER);
     }
@@ -2734,9 +2734,9 @@ static void sub_81C2628(void)
     {
         ClearWindowTilemap(PSS_LABEL_WINDOW_PORTRAIT_DEX_NUMBER);
         if (!IsMonShiny(mon))
-            sub_81C228C(FALSE);
+            Summary_SetDexNumberColor(FALSE);
         else
-            sub_81C228C(TRUE);
+            Summary_SetDexNumberColor(TRUE);
     }
     StringCopy(gStringVar1, &gText_LevelSymbol[0]);
     ConvertIntToDecimalStringN(gStringVar2, summary->level, 0, 3);
@@ -2747,12 +2747,12 @@ static void sub_81C2628(void)
     strArray[0] = CHAR_SLASH;
     StringCopy(&strArray[1], &gSpeciesNames[summary->species2][0]);
     SummaryScreen_PrintTextOnWindow(PSS_LABEL_WINDOW_PORTRAIT_SPECIES, &strArray[0], 0, 1, 0, 1);
-    sub_81C27DC(mon, summary->species2);
+    Summar_PrintGenderSymbol(mon, summary->species2);
     PutWindowTilemap(PSS_LABEL_WINDOW_PORTRAIT_NICKNAME);
     PutWindowTilemap(PSS_LABEL_WINDOW_PORTRAIT_SPECIES);
 }
 
-static void sub_81C2794(void)
+static void Summary_PrintEggInfo(void)
 {
     GetMonNickname(&sMonSummaryScreen->currentMon, gStringVar1);
     SummaryScreen_PrintTextOnWindow(PSS_LABEL_WINDOW_PORTRAIT_NICKNAME, gStringVar1, 0, 1, 0, 1);
@@ -2761,7 +2761,7 @@ static void sub_81C2794(void)
     ClearWindowTilemap(PSS_LABEL_WINDOW_PORTRAIT_SPECIES);
 }
 
-static void sub_81C27DC(struct Pokemon *mon, u16 species)
+static void Summar_PrintGenderSymbol(struct Pokemon *mon, u16 species)
 {
     if (species != SPECIES_NIDORAN_M && species != SPECIES_NIDORAN_F)
     {
