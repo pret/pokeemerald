@@ -29,7 +29,7 @@ struct PokenavSub8
     u32 ltid;
     u16 winid;
     bool32 unkC;
-    u16 buff[0x400];
+    u8 buff[BG_SCREEN_SIZE];
 }; // size: 0x810
 
 static u32 sub_81CF010(struct PokenavSub7 *structPtr);
@@ -117,7 +117,7 @@ static const u8 gUnknown_086235BC[] = _("{COLOR_HIGHLIGHT_SHADOW}{LIGHT_RED}{WHI
 static const u8 gUnknown_086235C8[] = _("{COLOR_HIGHLIGHT_SHADOW}{LIGHT_GREEN}{WHITE}{BLUE}♀{COLOR_HIGHLIGHT_SHADOW}{DARK_GREY}{WHITE}{LIGHT_GREY}");
 static const u8 gUnknown_086235D4[] = _("{UNK_SPACER}");
 
-bool32 sub_81CEF3C(void)
+bool32 PokenavCallback_Init_8(void)
 {
     struct PokenavSub7 *structPtr = AllocSubstruct(7, sizeof(struct PokenavSub7));
     if (structPtr == NULL)
@@ -134,7 +134,7 @@ bool32 sub_81CEF3C(void)
     return TRUE;
 }
 
-bool32 sub_81CEF98(void)
+bool32 PokenavCallback_Init_10(void)
 {
     struct PokenavSub7 *structPtr = AllocSubstruct(7, sizeof(struct PokenavSub7));
     if (structPtr == NULL)
@@ -197,12 +197,12 @@ static u32 sub_81CF030(struct PokenavSub7 *structPtr)
 
 static u32 sub_81CF0B0(struct PokenavSub7 *structPtr)
 {
-    return 0x186A3;
+    return 100003;
 }
 
 static u32 sub_81CF0B8(struct PokenavSub7 *structPtr)
 {
-    return 0x186A9;
+    return 100009;
 }
 
 static u32 sub_81CF0C0(void)
@@ -387,7 +387,7 @@ bool32 sub_81CF3D0(void)
     return unk->callback();
 }
 
-static bool32 sub_81CF3E4(void)
+bool32 sub_81CF3E4(void)
 {
     struct PokenavSub8 * unk = GetSubstructPtr(8);
     return IsLoopedTaskActive(unk->ltid);

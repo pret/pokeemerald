@@ -144,13 +144,17 @@ void sub_81C7E14(u32 arg0);
 void sub_81C7FC4(u32 arg0, bool32 arg1);
 void sub_81C7880(void);
 void sub_81C7990(u32 a0, u16 a1);
+u32 PokenavMainMenuLoopedTaskIsActive(void);
+bool32 WaitForPokenavShutdownFade(void);
+void sub_81C7834(void *func1, void *func2);
+void ShutdownPokenav(void);
 
 // pokenav_unk_1.c
-bool32 sub_81C9298(void);
-bool32 sub_81C92CC(void);
-bool32 sub_81C9304(void);
-bool32 sub_81C9338(void);
-bool32 sub_81C9368(void);
+bool32 PokenavCallback_Init_0(void);
+bool32 PokenavCallback_Init_4(void);
+bool32 PokenavCallback_Init_5(void);
+bool32 PokenavCallback_Init_2(void);
+bool32 PokenavCallback_Init_3(void);
 u32 sub_81C941C(void);
 void sub_81C9430(void);
 int sub_81C9894(void);
@@ -168,7 +172,7 @@ void sub_81C99D4(void);
 void sub_81CAADC(void);
 
 // pokenav_unk_3.c
-bool32 sub_81CAAE8(void);
+bool32 PokenavCallback_Init_11(void);
 u32 sub_81CAB24(void);
 void sub_81CAB38(void);
 int sub_81CAE28(void);
@@ -195,7 +199,7 @@ void sub_81CB2E0(void);
 void sub_81CBD48(u16 windowId, u32 a1);
 
 // pokenav_unk_5.c
-u32 sub_81CC4D4(void);
+u32 PokenavCallback_Init_6(void);
 void sub_81CC524(void);
 u32 sub_81CC554(void);
 bool32 sub_81CC5F4(void);
@@ -204,6 +208,10 @@ u32 sub_81CC65C(void);
 void sub_81CC670(void);
 
 // pokenav_unk_6.c
+u32 PokenavCallback_Init_7(void);
+u32 PokenavCallback_Init_9(void);
+u32 sub_81CD070(void);
+void sub_81CD1C0(void);
 bool32 sub_81CD3C4(void);
 bool32 sub_81CDD5C(void);
 struct UnknownStruct_81D1ED4 *sub_81CDC70(void);
@@ -219,6 +227,41 @@ void *sub_81CDCB4(u8 id);
 void *sub_81CDCD4(u8 id);
 
 // pokenav_unk_7.c
+bool32 sub_81CDDD4(void);
+void sub_81CDE2C(s32);
+u32 sub_81CDE64(void);
+void sub_81CECA0(void);
 u8 sub_81CEF14(void);
+
+// pokenav_unk_8.c
+u32 PokenavCallback_Init_8(void);
+u32 PokenavCallback_Init_10(void);
+u32 sub_81CEFDC(void);
+void sub_81CEFF0(void);
+bool32 sub_81CF330(void);
+bool32 sub_81CF368(void);
+void sub_81CF3A0(s32);
+u32 sub_81CF3D0(void);
+void sub_81CF3F8(void);
+
+// pokenav_unk_9.c
+u32 PokenavCallback_Init_12(void);
+u32 PokenavCallback_Init_14(void);
+u32 sub_81CFA34(void);
+void sub_81CFA48(void);
+bool32 sub_81CFDD0(void);
+bool32 sub_81CFE08(void);
+void sub_81CFE40(s32);
+u32 sub_81CFE70(void);
+void sub_81CFE98(void);
+
+// pokenav_unk_10.c
+u32 PokenavCallback_Init_13(void);
+u32 sub_81D04A0(void);
+void sub_81D04B8(void);
+bool32 sub_81D0978(void);
+void sub_81D09B0(s32);
+u32 sub_81D09E0(void);
+void sub_81D09F4(void);
 
 #endif // GUARD_POKENAV_H
