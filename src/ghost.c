@@ -1039,7 +1039,7 @@ static void sub_81129F0(struct Sprite *sprite)
     {
         xDelta = 24;
         xDelta2 = -2;
-        sprite->oam.matrixNum = ST_OAM_MNUM_HFLIP;
+        sprite->oam.matrixNum = ST_OAM_HFLIP;
     }
     else
     {
