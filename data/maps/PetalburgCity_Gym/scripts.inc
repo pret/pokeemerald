@@ -217,7 +217,7 @@ PetalburgCity_Gym_EventScript_204AAC:: @ 8204AAC
 	removeobject 10
 	setflag FLAG_HIDE_PETALBURG_CITY_WALLYS_AUNT
 	setvar VAR_PETALBURG_GYM_STATE, 1
-	setvar VAR_PETALBURG_STATE, 2
+	setvar VAR_PETALBURG_CITY_STATE, 2
 	clearflag FLAG_HIDE_PETALBURG_CITY_WALLY
 	clearflag FLAG_HIDE_PETALBURG_GYM_WALLY
 	setflag FLAG_HIDE_LITTLEROOT_TOWN_BIRCHS_LAB_RIVAL
@@ -496,7 +496,7 @@ PetalburgCity_Gym_EventScript_204F13:: @ 8204F13
 	compare VAR_0x8008, 3
 	call_if_eq PetalburgCity_Gym_EventScript_20506C
 	removeobject 11
-	setvar VAR_PETALBURG_STATE, 4
+	setvar VAR_PETALBURG_CITY_STATE, 4
 	clearflag FLAG_HIDE_PETALBURG_CITY_WALLYS_UNCLE
 	warp MAP_PETALBURG_CITY, 255, 15, 8
 	waitstate

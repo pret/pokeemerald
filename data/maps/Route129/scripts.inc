@@ -14,7 +14,7 @@ Route129_MapScript1_1F7294: @ 81F7294
 Route129_OnTransition: @ 81F72AB
 	compare VAR_SHOULD_END_UNUSUAL_WEATHER, 1
 	call_if_eq Route129_EventScript_273D13
-	compare VAR_RAYQUAZA_STATE, 4
+	compare VAR_SOOTOPOLIS_CITY_STATE, 4
 	call_if_ge Route129_EventScript_1F72D8
 	compare VAR_UNUSUAL_WEATHER_LOCATION, UNUSUAL_WEATHER_ROUTE_129_WEST
 	call_if_eq UnusualWeather_StartKyogreWeather

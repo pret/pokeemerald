@@ -24,7 +24,7 @@ LittlerootTown_BrendansHouse_2F_EventScript_1F8433:: @ 81F8433
 	checkplayergender
 	compare VAR_RESULT, 0
 	goto_if_eq LittlerootTown_BrendansHouse_2F_EventScript_1F8456
-	compare VAR_0x40D3, 2
+	compare VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 2
 	goto_if_ge LittlerootTown_BrendansHouse_2F_EventScript_1F9309
 	setobjectxyperm 1, 0, 2
 	setobjectmovementtype 1, MOVEMENT_TYPE_FACE_UP
@@ -84,7 +84,7 @@ LittlerootTown_BrendansHouse_2F_EventScript_1F8497:: @ 81F8497
 	setvar VAR_LITTLEROOT_RIVAL_STATE, 3
 	setflag FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F_POKE_BALL
 	clearflag FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_RIVAL_BEDROOM
-	setvar VAR_0x4050, 1
+	setvar VAR_LITTLEROOT_TOWN_STATE, 1
 	savebgm MUS_DUMMY
 	fadedefaultbgm
 	releaseall

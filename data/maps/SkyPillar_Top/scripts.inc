@@ -130,7 +130,7 @@ SkyPillar_Top_EventScript_23979A:: @ 823979A
 	applymovement EVENT_OBJ_ID_CAMERA, SkyPillar_Top_Movement_23985C
 	waitmovement 0
 	special RemoveCameraObject
-	setvar VAR_RAYQUAZA_STATE, 5
+	setvar VAR_SOOTOPOLIS_CITY_STATE, 5
 	setvar VAR_SKY_PILLAR_STATE, 1
 	setvar VAR_SKY_PILLAR_RAQUAZA_CRY_DONE, 1
 	releaseall

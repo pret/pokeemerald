@@ -1,4 +1,4 @@
-CXX := g++
+CXX ?= g++
 
 CXXFLAGS := -std=c++11 -O2 -Wall -Wno-switch -Werror
 

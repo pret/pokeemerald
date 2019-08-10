@@ -2415,7 +2415,7 @@ void RecordMixTrainerNames(void)
                 }
             }
         }
-        
+
         // Save the connected trainers first, at the top of the list.
         nextSpace = 0;
         for (i = 0; i < GetLinkPlayerCount(); i++)
@@ -2446,7 +2446,7 @@ void RecordMixTrainerNames(void)
                 }
             }
         }
-        
+
         // Finalize the new list, and clean up.
         memcpy(gSaveBlock1Ptr->trainerNameRecords, newRecords, 20 * sizeof(struct TrainerNameRecord));
         free(newRecords);
@@ -2482,7 +2482,7 @@ void WipeTrainerNameRecords(void)
     }
 }
 
-void nullsub_5(const char *unused_0, u8 unused_1, u8 unused_2)
+void nullsub_5(const void *unused_0, u8 unused_1, u8 unused_2)
 {
     // debug?
 }
@@ -2512,7 +2512,7 @@ void sub_800E604(void)
     sub_800D724(&gUnknown_03005000.unk_9e8);
     CpuFill16(0, gSendCmd, sizeof gSendCmd);
     CpuFill16(0, gRecvCmds, sizeof gRecvCmds);
-    CpuFill16(0, gLinkPlayers, sizeof gLinkPlayers)
+    CpuFill16(0, gLinkPlayers, sizeof gLinkPlayers);
 }
 
 void sub_800E6D0(void)
@@ -3495,7 +3495,7 @@ void sub_800FD14(u16 command)
     }
 }
 
-void sub_800FE50(u16 *a0)
+void sub_800FE50(void *a0)
 {
     if (gSendCmd[0] == 0 && !sub_8011A80())
     {

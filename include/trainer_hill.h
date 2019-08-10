@@ -24,7 +24,7 @@ const struct WarpEvent* sub_81D6134(u8 warpEventId);
 u16 LocalIdToHillTrainerId(u8 localId);
 bool8 GetHillTrainerFlag(u8 eventObjectId);
 void SetHillTrainerFlag(void);
-const u8 *sub_81D62AC(void);
+const u8 *GetTrainerHillTrainerScript(void);
 void FillHillTrainerParty(void);
 void FillHillTrainersParties(void);
 u32 sub_81D63C4(void);

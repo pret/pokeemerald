@@ -10,24 +10,24 @@ LittlerootTown_MapScript1_1E7DDB: @ 81E7DDB
 	compare VAR_LITTLEROOT_INTRO_STATE, 2
 	call_if_eq LittlerootTown_EventScript_1E7E67
 	call_if_unset FLAG_RESCUED_BIRCH, LittlerootTown_EventScript_1E7E6F
-	compare VAR_0x4050, 3
+	compare VAR_LITTLEROOT_TOWN_STATE, 3
 	call_if_eq LittlerootTown_EventScript_1E7E92
 	compare VAR_LITTLEROOT_HOUSES_STATE, 4
 	call_if_eq LittlerootTown_EventScript_1E7E5C
 	compare VAR_LITTLEROOT_HOUSES_STATE_2, 4
 	call_if_eq LittlerootTown_EventScript_1E7E5C
-	compare VAR_OLDALE_STATE, 1
+	compare VAR_OLDALE_RIVAL_STATE, 1
 	call_if_eq LittlerootTown_EventScript_1E7E53
 	compare VAR_LITTLEROOT_RIVAL_STATE, 3
 	call_if_eq LittlerootTown_EventScript_1E7E4F
-	compare VAR_0x40D3, 1
+	compare VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 1
 	call_if_eq LittlerootTown_EventScript_1E7E4B
-	compare VAR_0x40D3, 2
+	compare VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 2
 	call_if_eq LittlerootTown_EventScript_1E7E45
 	end
 
 LittlerootTown_EventScript_1E7E45:: @ 81E7E45
-	setvar VAR_0x40D3, 3
+	setvar VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 3
 	return
 
 LittlerootTown_EventScript_1E7E4B:: @ 81E7E4B
@@ -39,7 +39,7 @@ LittlerootTown_EventScript_1E7E4F:: @ 81E7E4F
 	return
 
 LittlerootTown_EventScript_1E7E53:: @ 81E7E53
-	setvar VAR_OLDALE_STATE, 2
+	setvar VAR_OLDALE_RIVAL_STATE, 2
 	setflag FLAG_HIDE_OLDALE_TOWN_RIVAL
 	return
 
@@ -53,7 +53,7 @@ LittlerootTown_EventScript_1E7E67:: @ 81E7E67
 	return
 
 LittlerootTown_EventScript_1E7E6F:: @ 81E7E6F
-	compare VAR_0x4050, 0
+	compare VAR_LITTLEROOT_TOWN_STATE, 0
 	goto_if_eq LittlerootTown_EventScript_1E7E86
 	setobjectxyperm 1, 10, 1
 	setobjectmovementtype 1, MOVEMENT_TYPE_FACE_UP
@@ -85,7 +85,7 @@ LittlerootTown_EventScript_1E7EB9:: @ 81E7EB9
 LittlerootTown_MapScript2_1E7EC1: @ 81E7EC1
 	map_script_2 VAR_LITTLEROOT_INTRO_STATE, 1, LittlerootTown_EventScript_1E7EDB
 	map_script_2 VAR_LITTLEROOT_INTRO_STATE, 2, LittlerootTown_EventScript_1E7EF9
-	map_script_2 VAR_0x40D3, 1, LittlerootTown_EventScript_1E7FB1
+	map_script_2 VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 1, LittlerootTown_EventScript_1E7FB1
 	.2byte 0
 
 LittlerootTown_EventScript_1E7EDB:: @ 81E7EDB
@@ -201,7 +201,7 @@ LittlerootTown_EventScript_1E7FB1:: @ 81E7FB1
 	end
 
 LittlerootTown_MapScript2_1E7FE2: @ 81E7FE2
-	map_script_2 VAR_0x40D3, 1, LittlerootTown_EventScript_1E7FEC
+	map_script_2 VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 1, LittlerootTown_EventScript_1E7FEC
 	.2byte 0
 
 LittlerootTown_EventScript_1E7FEC:: @ 81E7FEC
@@ -236,7 +236,7 @@ LittlerootTown_EventScript_1E8034:: @ 81E8034
 	faceplayer
 	goto_if_set FLAG_ADVENTURE_STARTED, LittlerootTown_EventScript_1E8087
 	goto_if_set FLAG_RESCUED_BIRCH, LittlerootTown_EventScript_1E807A
-	compare VAR_0x4050, 0
+	compare VAR_LITTLEROOT_TOWN_STATE, 0
 	goto_if_ne LittlerootTown_EventScript_1E805D
 	msgbox LittlerootTown_Text_1E8BB8, MSGBOX_DEFAULT
 	release
@@ -248,7 +248,7 @@ LittlerootTown_EventScript_1E805D:: @ 81E805D
 	closemessage
 	applymovement 1, Common_Movement_FaceOriginalDirection
 	waitmovement 0
-	setvar VAR_0x4050, 2
+	setvar VAR_LITTLEROOT_TOWN_STATE, 2
 	release
 	end
 
@@ -366,7 +366,7 @@ LittlerootTown_EventScript_1E811F:: @ 81E811F
 	closemessage
 	applymovement 1, Common_Movement_FaceOriginalDirection
 	waitmovement 0
-	setvar VAR_0x4050, 2
+	setvar VAR_LITTLEROOT_TOWN_STATE, 2
 	releaseall
 	end
 
@@ -909,7 +909,7 @@ LittlerootTown_EventScript_1E863D:: @ 81E863D
 LittlerootTown_EventScript_1E8686:: @ 81E8686
 	removeobject 4
 	setflag FLAG_SYS_B_DASH
-	setvar VAR_0x4050, 4
+	setvar VAR_LITTLEROOT_TOWN_STATE, 4
 	release
 	end
 

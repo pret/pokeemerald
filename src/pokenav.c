@@ -31,72 +31,30 @@ struct UnknownPokenavCallbackStruct
     bool32 (*unk0)(void);
     u32 (*unk4)(void);
     bool32 (*unk8)(void);
-    void (*unkC)(int);
+    void (*unkC)(s32);
     u32 (*unk10)(void);
     void (*unk14)(void);
     void (*unk18)(void);
 };
 
-extern bool32 sub_81C9924(void);
-extern u32 sub_81C99C0(void);
-extern void sub_81C9990(int);
-extern bool32 sub_81C9940(void);
-extern u32 sub_81CCFD8(void);
-extern u32 sub_81CD070(void);
-extern bool32 sub_81CDDD4(void);
-extern void sub_81CDE2C(int);
-extern u32 sub_81CDE64(void);
-extern void sub_81CD1C0(void);
-extern void sub_81CECA0(void);
-extern u32 sub_81CEF3C(void);
-extern u32 sub_81CEFDC(void);
-extern bool32 sub_81CF330(void);
-extern void sub_81CF3A0(int);
-extern u32 sub_81CF3D0(void);
-extern void sub_81CEFF0(void);
-extern void sub_81CF3F8(void);
-extern u32 sub_81CD024(void);
-extern u32 sub_81CEF98(void);
-extern bool32 sub_81CF368(void);
-extern u32 sub_81CF9BC(void);
-extern u32 sub_81CFA34(void);
-extern bool32 sub_81CFDD0(void);
-extern void sub_81CFE40(int);
-extern u32 sub_81CFE70(void);
-extern void sub_81CFA48(void);
-extern void sub_81CFE98(void);
-extern u32 sub_81D0450(void);
-extern u32 sub_81D04A0(void);
-extern bool32 sub_81D0978(void);
-extern void sub_81D09B0(int);
-extern u32 sub_81D09E0(void);
-extern void sub_81D04B8(void);
-extern void sub_81D09F4(void);
-extern u32 sub_81CFA04(void);
-extern bool32 sub_81CFE08(void);
-
+static u32 sub_81C75E0(void);
+static u32 sub_81C75D4(void);
 static bool32 SetActivePokenavMenu(u32 menuId);
 static bool32 AnyMonHasRibbon(void);
-u32 sub_81C75E0(void);
-u32 sub_81C75D4(void);
-u32 PokenavMainMenuLoopedTaskIsActive(void);
-bool32 WaitForPokenavShutdownFade(void);
-void sub_81C7834(void *func1, void *func2);
 static void InitPokenavResources(struct PokenavResources *a0);
-void Task_RunLoopedTask_LinkMode(u8 a0);
-void Task_RunLoopedTask(u8 taskId);
-void sub_81C742C(u8 taskId);
-void ShutdownPokenav(void);
 static void InitKeys_(void);
 static void FreePokenavResources(void);
 static void VBlankCB_Pokenav(void);
 static void CB2_Pokenav(void);
-void sub_81C72BC(void);
+static void Task_RunLoopedTask_LinkMode(u8 a0);
+static void Task_RunLoopedTask(u8 taskId);
+static void sub_81C742C(u8 taskId);
+static void sub_81C72BC(void);
 
 const struct UnknownPokenavCallbackStruct PokenavMenuCallbacks[15] =
 {
     {
-        .unk0 = sub_81C9298,
+        .unk0 = PokenavCallback_Init_0,
         .unk4 = sub_81C941C,
         .unk8 = sub_81C9924,
         .unkC = sub_81C9990,
@@ -105,7 +63,7 @@ const struct UnknownPokenavCallbackStruct PokenavMenuCallbacks[15] =
         .unk18 = sub_81C99D4,
     },
     {
-        .unk0 = sub_81C9298,
+        .unk0 = PokenavCallback_Init_0,
         .unk4 = sub_81C941C,
         .unk8 = sub_81C9940,
         .unkC = sub_81C9990,
@@ -114,7 +72,7 @@ const struct UnknownPokenavCallbackStruct PokenavMenuCallbacks[15] =
         .unk18 = sub_81C99D4,
     },
     {
-        .unk0 = sub_81C9338,
+        .unk0 = PokenavCallback_Init_2,
         .unk4 = sub_81C941C,
         .unk8 = sub_81C9940,
         .unkC = sub_81C9990,
@@ -123,7 +81,7 @@ const struct UnknownPokenavCallbackStruct PokenavMenuCallbacks[15] =
         .unk18 = sub_81C99D4,
     },
     {
-        .unk0 = sub_81C9368,
+        .unk0 = PokenavCallback_Init_3,
         .unk4 = sub_81C941C,
         .unk8 = sub_81C9940,
         .unkC = sub_81C9990,
@@ -132,16 +90,7 @@ const struct UnknownPokenavCallbackStruct PokenavMenuCallbacks[15] =
         .unk18 = sub_81C99D4,
     },
     {
-        .unk0 = sub_81C92CC,
-        .unk4 = sub_81C941C,
-        .unk8 = sub_81C9940,
-        .unkC = sub_81C9990,
-        .unk10 =sub_81C99C0,
-        .unk14 = sub_81C9430,
-        .unk18 = sub_81C99D4,
-    },
-    {
-        .unk0 = sub_81C9304,
+        .unk0 = PokenavCallback_Init_4,
         .unk4 = sub_81C941C,
         .unk8 = sub_81C9940,
         .unkC = sub_81C9990,
@@ -150,7 +99,16 @@ const struct UnknownPokenavCallbackStruct PokenavMenuCallbacks[15] =
         .unk18 = sub_81C99D4,
     },
     {
-        .unk0 = sub_81CC4D4,
+        .unk0 = PokenavCallback_Init_5,
+        .unk4 = sub_81C941C,
+        .unk8 = sub_81C9940,
+        .unkC = sub_81C9990,
+        .unk10 = sub_81C99C0,
+        .unk14 = sub_81C9430,
+        .unk18 = sub_81C99D4,
+    },
+    {
+        .unk0 = PokenavCallback_Init_6,
         .unk4 = sub_81CC554,
         .unk8 = sub_81CC5F4,
         .unkC = sub_81CC62C,
@@ -159,7 +117,7 @@ const struct UnknownPokenavCallbackStruct PokenavMenuCallbacks[15] =
         .unk18 = sub_81CC670,
     },
     {
-        .unk0 = sub_81CCFD8,
+        .unk0 = PokenavCallback_Init_7,
         .unk4 = sub_81CD070,
         .unk8 = sub_81CDDD4,
         .unkC = sub_81CDE2C,
@@ -168,7 +126,7 @@ const struct UnknownPokenavCallbackStruct PokenavMenuCallbacks[15] =
         .unk18 = sub_81CECA0,
     },
     {
-        .unk0 = sub_81CEF3C,
+        .unk0 = PokenavCallback_Init_8,
         .unk4 = sub_81CEFDC,
         .unk8 = sub_81CF330,
         .unkC = sub_81CF3A0,
@@ -177,7 +135,7 @@ const struct UnknownPokenavCallbackStruct PokenavMenuCallbacks[15] =
         .unk18 = sub_81CF3F8,
     },
     {
-        .unk0 = sub_81CD024,
+        .unk0 = PokenavCallback_Init_9,
         .unk4 = sub_81CD070,
         .unk8 = sub_81CDDD4,
         .unkC = sub_81CDE2C,
@@ -186,7 +144,7 @@ const struct UnknownPokenavCallbackStruct PokenavMenuCallbacks[15] =
         .unk18 = sub_81CECA0,
     },
     {
-        .unk0 = sub_81CEF98,
+        .unk0 = PokenavCallback_Init_10,
         .unk4 = sub_81CEFDC,
         .unk8 = sub_81CF368,
         .unkC = sub_81CF3A0,
@@ -195,7 +153,7 @@ const struct UnknownPokenavCallbackStruct PokenavMenuCallbacks[15] =
         .unk18 = sub_81CF3F8,
     },
     {
-        .unk0 = sub_81CAAE8,
+        .unk0 = PokenavCallback_Init_11,
         .unk4 = sub_81CAB24,
         .unk8 = sub_81CB260,
         .unkC = sub_81CB29C,
@@ -204,7 +162,7 @@ const struct UnknownPokenavCallbackStruct PokenavMenuCallbacks[15] =
         .unk18 = sub_81CB2E0,
     },
     {
-        .unk0 = sub_81CF9BC,
+        .unk0 = PokenavCallback_Init_12,
         .unk4 = sub_81CFA34,
         .unk8 = sub_81CFDD0,
         .unkC = sub_81CFE40,
@@ -213,7 +171,7 @@ const struct UnknownPokenavCallbackStruct PokenavMenuCallbacks[15] =
         .unk18 = sub_81CFE98,
     },
     {
-        .unk0 = sub_81D0450,
+        .unk0 = PokenavCallback_Init_13,
         .unk4 = sub_81D04A0,
         .unk8 = sub_81D0978,
         .unkC = sub_81D09B0,
@@ -222,7 +180,7 @@ const struct UnknownPokenavCallbackStruct PokenavMenuCallbacks[15] =
         .unk18 = sub_81D09F4,
     },
     {
-        .unk0 = sub_81CFA04,
+        .unk0 = PokenavCallback_Init_14,
         .unk4 = sub_81CFA34,
         .unk8 = sub_81CFE08,
         .unkC = sub_81CFE40,
@@ -277,7 +235,7 @@ bool32 FuncIsActiveLoopedTask(LoopedTask func)
     return FALSE;
 }
 
-void Task_RunLoopedTask(u8 taskId)
+static void Task_RunLoopedTask(u8 taskId)
 {
     LoopedTask loopedTask = (LoopedTask)GetWordTaskArg(taskId, 1);
     s16 *state = &gTasks[taskId].data[0];
@@ -310,7 +268,7 @@ void Task_RunLoopedTask(u8 taskId)
 }
 
 // Every "Continue" action pauses instead.
-void Task_RunLoopedTask_LinkMode(u8 taskId)
+static void Task_RunLoopedTask_LinkMode(u8 taskId)
 {
     LoopedTask task;
     s16 *state;
@@ -318,7 +276,7 @@ void Task_RunLoopedTask_LinkMode(u8 taskId)
 
     if (sub_8087598())
         return;
-    
+
     task = (LoopedTask)GetWordTaskArg(taskId, 1);
     state = &gTasks[taskId].data[0];
     action = task(*state);
@@ -365,7 +323,7 @@ void sub_81C72A4(void)
     FadeScreen(1, 0);
 }
 
-void sub_81C72BC(void)
+static void sub_81C72BC(void)
 {
     UpdatePaletteFade();
     if (gPaletteFade.active)
@@ -458,7 +416,7 @@ static void VBlankCB_Pokenav(void)
     ProcessSpriteCopyRequests();
 }
 
-void sub_81C742C(u8 taskId)
+static void sub_81C742C(u8 taskId)
 {
     u32 v1;
     s16 *data = gTasks[taskId].data;
@@ -544,12 +502,12 @@ static bool32 SetActivePokenavMenu(u32 menuId)
     return TRUE;
 }
 
-u32 sub_81C75D4(void)
+static u32 sub_81C75D4(void)
 {
     return sub_81C786C();
 }
 
-u32 sub_81C75E0(void)
+static u32 sub_81C75E0(void)
 {
     return gPokenavResources->currentMenuCb1();
 }
@@ -605,7 +563,7 @@ void sub_81C7694(u32 a0)
     gPokenavResources->fieldA = value;
 }
 
-u16 sub_81C76AC(void)
+u32 sub_81C76AC(void)
 {
     return gPokenavResources->fieldA;
 }

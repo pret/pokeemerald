@@ -18,7 +18,7 @@ RustboroCity_Gym_EventScript_212F66:: @ 8212F66
 	msgbox RustboroCity_Gym_Text_213816, MSGBOX_DEFAULT
 	setflag FLAG_DEFEATED_RUSTBORO_GYM
 	setflag FLAG_BADGE01_GET
-	setvar VAR_RUSTBORO_STATE, 1
+	setvar VAR_RUSTBORO_CITY_STATE, 1
 	addvar VAR_PETALBURG_GYM_STATE, 1
 	setvar VAR_0x8008, 1
 	call RustboroCity_Gym_EventScript_271F43
