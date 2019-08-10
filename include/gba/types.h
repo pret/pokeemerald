@@ -68,8 +68,8 @@ struct OamData
     /*0x06*/ u16 affineParam;
 };
 
-#define ST_OAM_MNUM_HFLIP     0x08
-#define ST_OAM_MNUM_VFLIP     0x10
+#define ST_OAM_HFLIP     0x08
+#define ST_OAM_VFLIP     0x10
 #define ST_OAM_MNUM_FLIP_MASK 0x18
 
 #define ST_OAM_OBJ_NORMAL 0
