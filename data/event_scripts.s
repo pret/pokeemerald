@@ -1783,32 +1783,25 @@ EventScript_271F3D:: @ 8271F3D
 	setvar VAR_OBJ_GFX_ID_0, EVENT_OBJ_GFX_RIVAL_MAY_NORMAL
 	return
 
-DewfordTown_Gym_EventScript_271F43:: @ 8271F43
-FortreeCity_Gym_EventScript_271F43:: @ 8271F43
-LavaridgeTown_Gym_1F_EventScript_271F43:: @ 8271F43
-MauvilleCity_Gym_EventScript_271F43:: @ 8271F43
-MossdeepCity_Gym_EventScript_271F43:: @ 8271F43
-PetalburgCity_Gym_EventScript_271F43:: @ 8271F43
-RustboroCity_Gym_EventScript_271F43:: @ 8271F43
-SootopolisCity_Gym_1F_EventScript_271F43:: @ 8271F43
+Common_EventScript_SetGymTrainers:: @ 8271F43
 	switch VAR_0x8008
-	case 1, DewfordTown_Gym_EventScript_271FA1
-	case 2, DewfordTown_Gym_EventScript_271FAB
-	case 3, DewfordTown_Gym_EventScript_271FBE
-	case 4, DewfordTown_Gym_EventScript_271FCE
-	case 5, DewfordTown_Gym_EventScript_271FE7
-	case 6, DewfordTown_Gym_EventScript_271FFD
-	case 7, DewfordTown_Gym_EventScript_272010
-	case 8, DewfordTown_Gym_EventScript_272035
+	case 1, RusboroCity_Gym_SetGymTrainers
+	case 2, DewfordTown_Gym_SetGymTrainers
+	case 3, MauvilleCity_Gym_SetGymTrainers
+	case 4, LavaridgeTown_Gym_SetGymTrainers
+	case 5, PetalburgCity_Gym_SetGymTrainers
+	case 6, FortreeCity_Gym_SetGymTrainers
+	case 7, MossdeepCity_Gym_SetGymTrainers
+	case 8, SootopolisCity_Gym_SetGymTrainers
 	end
 
-DewfordTown_Gym_EventScript_271FA1:: @ 8271FA1
+RusboroCity_Gym_SetGymTrainers:: @ 8271FA1
 	settrainerflag TRAINER_JOSH
 	settrainerflag TRAINER_TOMMY
 	settrainerflag TRAINER_MARC
 	return
 
-DewfordTown_Gym_EventScript_271FAB:: @ 8271FAB
+DewfordTown_Gym_SetGymTrainers:: @ 8271FAB
 	settrainerflag TRAINER_TAKAO
 	settrainerflag TRAINER_JOCELYN
 	settrainerflag TRAINER_LAURA
@@ -1817,7 +1810,7 @@ DewfordTown_Gym_EventScript_271FAB:: @ 8271FAB
 	settrainerflag TRAINER_LILITH
 	return
 
-DewfordTown_Gym_EventScript_271FBE:: @ 8271FBE
+MauvilleCity_Gym_SetGymTrainers:: @ 8271FBE
 	settrainerflag TRAINER_KIRK
 	settrainerflag TRAINER_SHAWN
 	settrainerflag TRAINER_BEN
@@ -1825,7 +1818,7 @@ DewfordTown_Gym_EventScript_271FBE:: @ 8271FBE
 	settrainerflag TRAINER_ANGELO
 	return
 
-DewfordTown_Gym_EventScript_271FCE:: @ 8271FCE
+LavaridgeTown_Gym_SetGymTrainers:: @ 8271FCE
 	settrainerflag TRAINER_COLE
 	settrainerflag TRAINER_AXLE
 	settrainerflag TRAINER_KEEGAN
@@ -1836,7 +1829,7 @@ DewfordTown_Gym_EventScript_271FCE:: @ 8271FCE
 	settrainerflag TRAINER_ELI
 	return
 
-DewfordTown_Gym_EventScript_271FE7:: @ 8271FE7
+PetalburgCity_Gym_SetGymTrainers:: @ 8271FE7
 	settrainerflag TRAINER_RANDALL
 	settrainerflag TRAINER_PARKER
 	settrainerflag TRAINER_GEORGE
@@ -1846,7 +1839,7 @@ DewfordTown_Gym_EventScript_271FE7:: @ 8271FE7
 	settrainerflag TRAINER_JODY
 	return
 
-DewfordTown_Gym_EventScript_271FFD:: @ 8271FFD
+FortreeCity_Gym_SetGymTrainers:: @ 8271FFD
 	settrainerflag TRAINER_JARED
 	settrainerflag TRAINER_FLINT
 	settrainerflag TRAINER_ASHLEY
@@ -1855,7 +1848,7 @@ DewfordTown_Gym_EventScript_271FFD:: @ 8271FFD
 	settrainerflag TRAINER_DARIUS
 	return
 
-DewfordTown_Gym_EventScript_272010:: @ 8272010
+MossdeepCity_Gym_SetGymTrainers:: @ 8272010
 	settrainerflag TRAINER_PRESTON
 	settrainerflag TRAINER_VIRGIL
 	settrainerflag TRAINER_BLAKE
@@ -1870,7 +1863,7 @@ DewfordTown_Gym_EventScript_272010:: @ 8272010
 	settrainerflag TRAINER_NICHOLAS
 	return
 
-DewfordTown_Gym_EventScript_272035:: @ 8272035
+SootopolisCity_Gym_SetGymTrainers:: @ 8272035
 	settrainerflag TRAINER_ANDREA
 	settrainerflag TRAINER_CRISSY
 	settrainerflag TRAINER_BRIANNA
