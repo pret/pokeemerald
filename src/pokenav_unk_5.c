@@ -166,7 +166,7 @@ const struct SpriteTemplate gUnknown_086231D0 =
     .callback = sub_81CCEF4,
 };
 
-u32 sub_81CC4D4(void)
+u32 PokenavCallback_Init_6(void)
 {
     struct Pokenav5Struct *state = AllocSubstruct(3, sizeof(struct Pokenav5Struct));
     if (!state)
@@ -194,7 +194,7 @@ void sub_81CC524(void)
 u32 sub_81CC554(void)
 {
     struct Pokenav5Struct *state = GetSubstructPtr(3);
-    state->unk10(state);
+    return state->unk10(state);
 }
 
 static u32 sub_81CC568(struct Pokenav5Struct *state)
@@ -248,7 +248,7 @@ bool32 sub_81CC5F4(void)
     return TRUE;
 }
 
-void sub_81CC62C(int index)
+void sub_81CC62C(s32 index)
 {
     struct Pokenav5Struct_2 *state = GetSubstructPtr(4);
     state->unk4 = CreateLoopedTask(gUnknown_086230E4[index], 1);

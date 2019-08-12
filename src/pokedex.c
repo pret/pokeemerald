@@ -1317,7 +1317,7 @@ void CB2_Pokedex(void)
         default:
             SetVBlankCallback(NULL);
             sub_80C09B0(0);
-            DmaFillLarge16(3, 0, (u8 *)VRAM, VRAM_SIZE, 0x1000)
+            DmaFillLarge16(3, 0, (u8 *)VRAM, VRAM_SIZE, 0x1000);
             DmaClear32(3, OAM, OAM_SIZE);
             DmaClear16(3, PLTT, PLTT_SIZE);
             gMain.state = 1;

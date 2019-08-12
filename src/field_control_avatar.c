@@ -304,7 +304,7 @@ static const u8 *GetInteractedEventObjectScript(struct MapPosition *position, u8
     gSpecialVar_Facing = direction;
 
     if (InTrainerHill() == TRUE)
-        script = sub_81D62AC();
+        script = GetTrainerHillTrainerScript();
     else
         script = GetEventObjectScriptPointerByEventObjectId(eventObjectId);
 

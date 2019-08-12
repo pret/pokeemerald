@@ -158,7 +158,7 @@ static const LoopedTask gUnknown_08624BA0[] =
 };
 
 // code
-bool32 sub_81D0450(void)
+bool32 PokenavCallback_Init_13(void)
 {
     struct PokenavSub13 *structPtr = AllocSubstruct(13, sizeof(struct PokenavSub13));
     if (structPtr == NULL)
@@ -235,7 +235,7 @@ u32 sub_81D0548(struct PokenavSub13 *structPtr)
 
 u32 sub_81D05D4(struct PokenavSub13 *structPtr)
 {
-    return 0x186ae;
+    return 100014;
 }
 
 bool32 sub_81D05DC(struct PokenavSub13 *structPtr)
@@ -472,7 +472,7 @@ bool32 sub_81D0978(void)
     return TRUE;
 }
 
-void sub_81D09B0(int id)
+void sub_81D09B0(s32 id)
 {
     struct PokenavSub14 *structPtr = GetSubstructPtr(14);
     structPtr->loopedTaskId = CreateLoopedTask(gUnknown_08624BA0[id], 1);

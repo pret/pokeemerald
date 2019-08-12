@@ -81,7 +81,7 @@ SlateportCity_OceanicMuseum_2F_EventScript_20BB00:: @ 820BB00
 	special HealPlayerParty
 	removeobject 1
 	setflag FLAG_HIDE_ROUTE_110_TEAM_AQUA
-	compare VAR_0x40DA, 0
+	compare VAR_REGISTER_BIRCH_STATE, 0
 	call_if_eq SlateportCity_OceanicMuseum_2F_EventScript_20BC8C
 	setflag FLAG_DELIVERED_DEVON_GOODS
 	clearflag FLAG_HIDE_ROUTE_116_DEVON_EMPLOYEE
@@ -92,7 +92,7 @@ SlateportCity_OceanicMuseum_2F_EventScript_20BB00:: @ 820BB00
 	end
 
 SlateportCity_OceanicMuseum_2F_EventScript_20BC8C:: @ 820BC8C
-	setvar VAR_0x40DA, 1
+	setvar VAR_REGISTER_BIRCH_STATE, 1
 	return
 
 SlateportCity_OceanicMuseum_2F_EventScript_20BC92:: @ 820BC92
