@@ -108,7 +108,7 @@ MAKEFLAGS += --no-print-directory
 # Secondary expansion is required for dependency variables in object rules.
 .SECONDEXPANSION:
 
-.PHONY: all rom clean compare tidy tools mostlyclean clean-tools $(TOOLDIRS)
+.PHONY: all rom clean compare tidy tools mostlyclean clean-tools $(TOOLDIRS) berry_fix
 
 infoshell = $(foreach line, $(shell $1 | sed "s/ /__SPACE__/g"), $(info $(subst __SPACE__, ,$(line))))
 
@@ -151,7 +151,7 @@ tools: $(TOOLDIRS)
 $(TOOLDIRS):
 	@$(MAKE) -C $@ CC=$(HOSTCC) CXX=$(HOSTCXX)
 
-rom: $(ROM)
+rom: berry_fix $(ROM)
 
 # For contributors to make sure a change didn't affect the contents of the ROM.
 compare: all
@@ -170,6 +170,7 @@ mostlyclean: tidy
 	rm -f $(DATA_ASM_SUBDIR)/maps/connections.inc $(DATA_ASM_SUBDIR)/maps/events.inc $(DATA_ASM_SUBDIR)/maps/groups.inc $(DATA_ASM_SUBDIR)/maps/headers.inc
 	find $(DATA_ASM_SUBDIR)/maps \( -iname 'connections.inc' -o -iname 'events.inc' -o -iname 'header.inc' \) -exec rm {} +
 	rm -f $(AUTO_GEN_TARGETS)
+	@$(MAKE) clean -C berry_fix
 
 tidy:
 	rm -f $(ROM) $(ELF) $(MAP)
@@ -285,3 +286,8 @@ $(ROM): $(ELF)
 	$(FIX) $@ -p --silent
 
 modern: ; @$(MAKE) MODERN=1
+
+berry_fix/berry_fix.gba: berry_fix
+
+berry_fix:
+	@$(MAKE) -C berry_fix

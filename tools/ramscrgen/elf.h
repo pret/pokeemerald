@@ -25,6 +25,6 @@
 #include <map>
 #include <string>
 
-std::map<std::string, std::uint32_t> GetCommonSymbols(std::string path);
+std::map<std::string, std::uint32_t> GetCommonSymbols(std::string sourcePath, std::string path);
 
 #endif // ELF_H

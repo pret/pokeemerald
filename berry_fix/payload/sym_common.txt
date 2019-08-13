@@ -1,0 +1,29 @@
+    .include "main.o"
+    .include "rtc.o"
+
+    .align 4
+gFirstSaveSector: @ 0x03001220
+	.space 0x4
+
+gPrevSaveCounter: @ 0x03001224
+	.space 0x4
+
+gLastKnownGoodSector: @ 0x03001228
+	.space 0x4
+
+gDamagedSaveSectors: @ 0x0300122C
+	.space 0x4
+
+gSaveCounter: @ 0x03001230
+	.space 0x4
+
+gFastSaveSection: @ 0x03001234
+	.space 0x4
+
+gCurSaveChunk:
+	.space 0x4
+
+gFlashIdentIsValid: @ 0x0300123C
+	.space 0x4
+
+	.include "agb_flash.o"
