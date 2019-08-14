@@ -594,7 +594,7 @@
       "x": 7,
       "y": 85,
       "elevation": 3,
-      "var": "VAR_0x40DA",
+      "var": "VAR_REGISTER_BIRCH_STATE",
       "var_value": "1",
       "script": "Route110_EventScript_1EF9CB"
     },
@@ -603,7 +603,7 @@
       "x": 8,
       "y": 85,
       "elevation": 3,
-      "var": "VAR_0x40DA",
+      "var": "VAR_REGISTER_BIRCH_STATE",
       "var_value": "1",
       "script": "Route110_EventScript_1EF9D6"
     },
@@ -612,7 +612,7 @@
       "x": 9,
       "y": 85,
       "elevation": 3,
-      "var": "VAR_0x40DA",
+      "var": "VAR_REGISTER_BIRCH_STATE",
       "var_value": "1",
       "script": "Route110_EventScript_1EF9E1"
     },
@@ -621,7 +621,7 @@
       "x": 10,
       "y": 85,
       "elevation": 3,
-      "var": "VAR_0x40DA",
+      "var": "VAR_REGISTER_BIRCH_STATE",
       "var_value": "1",
       "script": "Route110_EventScript_1EF9EC"
     }

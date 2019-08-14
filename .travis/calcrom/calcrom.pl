@@ -9,6 +9,8 @@ open(my $file, $ARGV[0])
 
 my $src = 0;
 my $asm = 0;
+my $srcdata = 0;
+my $data = 0;
 while (my $line = <$file>)
 {
     if ($line =~ /^ \.(\w+)\s+0x[0-9a-f]+\s+(0x[0-9a-f]+) (\w+)\/.+\.o/)
@@ -28,8 +30,21 @@ while (my $line = <$file>)
                 $asm += $size;
             }
         }
+        elsif ($section =~ /rodata/)
+        {
+            if ($dir eq 'src')
+            {
+                $srcdata += $size;
+            }
+            elsif ($dir eq 'data')
+            {
+                $data += $size;
+            }
+        }
     }
 }
+
+(my $elffname = $ARGV[0]) =~ s/\.map/.elf/;
 
 # Note that the grep filters out all branch labels. It also requires a minimum
 # line length of 5, to filter out a ton of generated symbols (like AcCn). No
@@ -40,7 +55,7 @@ while (my $line = <$file>)
 #
 # You'd expect this to take a while, because of uniq. It runs in under a second,
 # though. Uniq is pretty fast!
-my $base_cmd = "nm pokeemerald.elf | awk '{print \$3}' | grep '^[^_].\\{4\\}' | uniq";
+my $base_cmd = "nm $elffname | awk '{print \$3}' | grep '^[^_].\\{4\\}' | uniq";
 
 # This looks for Unknown_, Unknown_, or sub_, followed by just numbers. Note that
 # it matches even if stuff precedes the unknown, like sUnknown/gUnknown.
@@ -118,3 +133,11 @@ print "$total_syms total symbols\n";
 print "$documented symbols documented ($docPct%)\n";
 print "$partial_documented symbols partially documented ($partialPct%)\n";
 print "$undocumented symbols undocumented ($undocPct%)\n";
+
+print "\n";
+my $dataTotal = $srcdata + $data;
+my $srcDataPct = sprintf("%.4f", 100 * $srcdata / $dataTotal);
+my $dataPct = sprintf("%.4f", 100 * $data / $dataTotal);
+print "$dataTotal total bytes of data\n";
+print "$srcdata bytes of data in src ($srcDataPct%)\n";
+print "$data bytes of data in data ($dataPct%)\n";

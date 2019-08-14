@@ -660,7 +660,7 @@ Route110_EventScript_1EF9F7:: @ 81EF9F7
 	compare VAR_0x8008, 4
 	call_if_eq Route110_EventScript_1EFB25
 	removeobject 36
-	setvar VAR_0x40DA, 2
+	setvar VAR_REGISTER_BIRCH_STATE, 2
 	releaseall
 	end
 

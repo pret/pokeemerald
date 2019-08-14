@@ -1118,7 +1118,7 @@ EverGrandeCity_HallOfFame_EventScript_2717C1:: @ 82717C1
 	call_if_unset FLAG_RECEIVED_BELDUM, EverGrandeCity_HallOfFame_EventScript_27183F
 	setflag FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_RIVAL_BEDROOM
 	setflag FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_RIVAL_BEDROOM
-	compare VAR_0x40D3, 0
+	compare VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 0
 	call_if_eq EverGrandeCity_HallOfFame_EventScript_271851
 	return
 
@@ -1145,7 +1145,7 @@ EverGrandeCity_HallOfFame_EventScript_271843:: @ 8271843
 	return
 
 EverGrandeCity_HallOfFame_EventScript_271851:: @ 8271851
-	setvar VAR_0x40D3, 1
+	setvar VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 1
 	return
 
 EventScript_WhiteOut:: @ 8271857
