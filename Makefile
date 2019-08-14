@@ -1,4 +1,5 @@
 TOOLCHAIN := $(DEVKITARM)
+COMPARE ?= 0
 
 ifeq ($(CC),)
 HOSTCC := gcc
@@ -152,10 +153,12 @@ $(TOOLDIRS):
 	@$(MAKE) -C $@ CC=$(HOSTCC) CXX=$(HOSTCXX)
 
 rom: berry_fix $(ROM)
+ifeq ($(COMPARE),1)
+	@$(SHA1) rom.sha1
+endif
 
 # For contributors to make sure a change didn't affect the contents of the ROM.
-compare: all
-	@$(SHA1) rom.sha1
+compare: ; @$(MAKE) COMPARE=1
 
 clean: mostlyclean clean-tools
 
@@ -290,4 +293,4 @@ modern: ; @$(MAKE) MODERN=1
 berry_fix/berry_fix.gba: berry_fix
 
 berry_fix:
-	@$(MAKE) -C berry_fix
+	@$(MAKE) -C berry_fix COMPARE=$(COMPARE)

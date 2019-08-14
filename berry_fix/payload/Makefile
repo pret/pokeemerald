@@ -1,6 +1,7 @@
 include $(DEVKITARM)/base_tools
 export CPP := $(PREFIX)cpp
 export LD := $(PREFIX)ld
+COMPARE ?= 0
 
 ifeq ($(OS),Windows_NT)
 EXE := .exe
@@ -54,7 +55,7 @@ FIX := ../../tools/gbafix/gbafix$(EXE)
 # Secondary expansion is required for dependency variables in object rules.
 .SECONDEXPANSION:
 
-.PHONY: rom clean compare tidy
+.PHONY: all rom clean compare tidy
 
 C_SRCS := $(wildcard $(C_SUBDIR)/*.c $(C_SUBDIR)/*/*.c $(C_SUBDIR)/*/*/*.c)
 C_OBJS := $(patsubst $(C_SUBDIR)/%.c,$(C_BUILDDIR)/%.o,$(C_SRCS))
@@ -84,12 +85,16 @@ $(C_BUILDDIR)/agb_flash_1m.o: CC1FLAGS := -O1 -mthumb-interwork
 $(C_BUILDDIR)/agb_flash_mx.o: CC1FLAGS := -O1 -mthumb-interwork
 $(C_BUILDDIR)/agb_flash_le.o: CC1FLAGS := -O1 -mthumb-interwork
 
-rom: $(ROM)
+all: rom
 	@:
 
-# For contributors to make sure a change didn't affect the contents of the ROM.
-compare: $(ROM)
+rom: $(ROM)
+ifeq ($(COMPARE),1)
 	@$(SHA1) rom.sha1
+endif
+
+# For contributors to make sure a change didn't affect the contents of the ROM.
+compare: ; @$(MAKE) COMPARE=1
 
 clean: tidy
 	rm -f sound/direct_sound_samples/*.bin
