@@ -107,7 +107,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_1F9DDB:: @ 81F9DDB
 
 LittlerootTown_ProfessorBirchsLab_EventScript_1F9E07:: @ 81F9E07
 	setvar VAR_0x8004, 0
-	call Common_EventScript_NameReceivedPokemon
+	call Common_EventScript_NameReceivedPartyMon
 	goto LittlerootTown_ProfessorBirchsLab_EventScript_1F9E17
 	end
 
@@ -341,7 +341,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_1FA06C:: @ 81FA06C
 	compare VAR_RESULT, 1
 	goto_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_1FA0CC
 	erasemonpic
-	goto LittlerootTown_ProfessorBirchsLab_EventScript_273811
+	goto Common_EventScript_NoMoreRoomForPokemon
 	end
 
 LittlerootTown_ProfessorBirchsLab_EventScript_1FA0A1:: @ 81FA0A1
@@ -350,8 +350,8 @@ LittlerootTown_ProfessorBirchsLab_EventScript_1FA0A1:: @ 81FA0A1
 	msgbox gText_NicknameThisPokemon, MSGBOX_YESNO
 	compare VAR_RESULT, 0
 	goto_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_1FA0FD
-	call LittlerootTown_ProfessorBirchsLab_EventScript_27378B
-	call Common_EventScript_NameReceivedPokemon
+	call Common_EventScript_GetGiftMonPartySlot
+	call Common_EventScript_NameReceivedPartyMon
 	goto LittlerootTown_ProfessorBirchsLab_EventScript_1FA0FD
 	end
 
@@ -361,7 +361,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_1FA0CC:: @ 81FA0CC
 	msgbox gText_NicknameThisPokemon, MSGBOX_YESNO
 	compare VAR_RESULT, 0
 	goto_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_1FA0F2
-	call LittlerootTown_ProfessorBirchsLab_EventScript_273797
+	call Common_EventScript_NameReceivedBoxMon
 	goto LittlerootTown_ProfessorBirchsLab_EventScript_1FA0F2
 	end
 
@@ -386,7 +386,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_1FA10D:: @ 81FA10D
 	compare VAR_RESULT, 1
 	goto_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_1FA16D
 	erasemonpic
-	goto LittlerootTown_ProfessorBirchsLab_EventScript_273811
+	goto Common_EventScript_NoMoreRoomForPokemon
 	end
 
 LittlerootTown_ProfessorBirchsLab_EventScript_1FA142:: @ 81FA142
@@ -395,8 +395,8 @@ LittlerootTown_ProfessorBirchsLab_EventScript_1FA142:: @ 81FA142
 	msgbox gText_NicknameThisPokemon, MSGBOX_YESNO
 	compare VAR_RESULT, 0
 	goto_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_1FA19E
-	call LittlerootTown_ProfessorBirchsLab_EventScript_27378B
-	call Common_EventScript_NameReceivedPokemon
+	call Common_EventScript_GetGiftMonPartySlot
+	call Common_EventScript_NameReceivedPartyMon
 	goto LittlerootTown_ProfessorBirchsLab_EventScript_1FA19E
 	end
 
@@ -406,7 +406,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_1FA16D:: @ 81FA16D
 	msgbox gText_NicknameThisPokemon, MSGBOX_YESNO
 	compare VAR_RESULT, 0
 	goto_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_1FA193
-	call LittlerootTown_ProfessorBirchsLab_EventScript_273797
+	call Common_EventScript_NameReceivedBoxMon
 	goto LittlerootTown_ProfessorBirchsLab_EventScript_1FA193
 	end
 
@@ -431,7 +431,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_1FA1AE:: @ 81FA1AE
 	compare VAR_RESULT, 1
 	goto_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_1FA20E
 	erasemonpic
-	goto LittlerootTown_ProfessorBirchsLab_EventScript_273811
+	goto Common_EventScript_NoMoreRoomForPokemon
 	end
 
 LittlerootTown_ProfessorBirchsLab_EventScript_1FA1E3:: @ 81FA1E3
@@ -440,8 +440,8 @@ LittlerootTown_ProfessorBirchsLab_EventScript_1FA1E3:: @ 81FA1E3
 	msgbox gText_NicknameThisPokemon, MSGBOX_YESNO
 	compare VAR_RESULT, 0
 	goto_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_1FA23F
-	call LittlerootTown_ProfessorBirchsLab_EventScript_27378B
-	call Common_EventScript_NameReceivedPokemon
+	call Common_EventScript_GetGiftMonPartySlot
+	call Common_EventScript_NameReceivedPartyMon
 	goto LittlerootTown_ProfessorBirchsLab_EventScript_1FA23F
 	end
 
@@ -451,7 +451,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_1FA20E:: @ 81FA20E
 	msgbox gText_NicknameThisPokemon, MSGBOX_YESNO
 	compare VAR_RESULT, 0
 	goto_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_1FA234
-	call LittlerootTown_ProfessorBirchsLab_EventScript_273797
+	call Common_EventScript_NameReceivedBoxMon
 	goto LittlerootTown_ProfessorBirchsLab_EventScript_1FA234
 	end
 

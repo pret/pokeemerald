@@ -109,7 +109,7 @@ SootopolisCity_Gym_1F_EventScript_224F82:: @ 8224F82
 	setvar VAR_SOOTOPOLIS_CITY_STATE, 6
 	clearflag FLAG_HIDE_SOOTOPOLIS_CITY_MAN_1
 	setvar VAR_0x8008, 8
-	call SootopolisCity_Gym_1F_EventScript_271F43
+	call Common_EventScript_SetGymTrainers
 	call SootopolisCity_Gym_1F_EventScript_224FD4
 	closemessage
 	delay 30

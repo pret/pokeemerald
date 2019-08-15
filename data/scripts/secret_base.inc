@@ -336,7 +336,7 @@ EventScript_275A50:: @ 8275A50
 	compare VAR_RESULT, 6
 	goto_if_eq EventScript_275A91
 	bufferpartymonnick 0, VAR_RESULT
-	msgbox gText_23B704, MSGBOX_YESNO
+	msgbox gText_UseSecretPower, MSGBOX_YESNO
 	compare VAR_RESULT, 0
 	goto_if_eq EventScript_275CDE
 	msgbox Text_MonUsedHM, MSGBOX_DEFAULT
@@ -354,12 +354,12 @@ EventScript_275A86:: @ 8275A86
 	end
 
 EventScript_275A91:: @ 8275A91
-	msgbox gText_23B6E0, MSGBOX_DEFAULT
+	msgbox gText_SmallIndentInWall, MSGBOX_DEFAULT
 	releaseall
 	end
 
 EventScript_275A9B:: @ 8275A9B
-	msgbox gText_23B73E, MSGBOX_DEFAULT
+	msgbox gText_DiscoveredSmallCavern, MSGBOX_DEFAULT
 	goto EventScript_275B5B
 	end
 
@@ -1087,19 +1087,19 @@ Text_276835: @ 8276835
 	.string "Up to ten SECRET BASE locations\n"
 	.string "may be registered.$"
 
-Text_27692B: @ 827692B
+SecretBase_Text_BattleTowerShield: @ 827692B
 	.string "A shield of {STR_VAR_2} that marks winning\n"
 	.string "{STR_VAR_1} times in a row at the BATTLE TOWER.$"
 
-Text_276974: @ 8276974
+SecretBase_Text_ToyTV: @ 8276974
 	.string "A realistic toy TV. It could be easily\n"
 	.string "mistaken for the real thing.$"
 
-Text_2769B8: @ 82769B8
+SecretBase_Text_SeedotTV: @ 82769B8
 	.string "A toy TV shaped like a SEEDOT.\n"
 	.string "It looks ready to roll away on its own…$"
 
-Text_2769FF: @ 82769FF
+SecretBase_Text_SkittyTV: @ 82769FF
 	.string "A toy TV shaped like a SKITTY.\n"
 	.string "It looks ready to stroll away…$"
 

@@ -16,7 +16,7 @@ EverGrandeCity_PokemonLeague_1F_EventScript_2295ED:: @ 82295ED
 
 EverGrandeCity_PokemonLeague_1F_EventScript_2295FC:: @ 82295FC
 	setvar VAR_0x800B, 1
-	call EverGrandeCity_PokemonLeague_1F_EventScript_27191E
+	call Common_EventScript_PkmnCenterNurse
 	waitmessage
 	waitbuttonpress
 	release
@@ -25,10 +25,10 @@ EverGrandeCity_PokemonLeague_1F_EventScript_2295FC:: @ 82295FC
 EverGrandeCity_PokemonLeague_1F_EventScript_22960A:: @ 822960A
 	lock
 	faceplayer
-	message gUnknown_08272A21
+	message gText_HowMayIServeYou
 	waitmessage
 	pokemart EverGrandeCity_PokemonLeague_1F_Pokemart_229624
-	msgbox gUnknown_08272A3F, MSGBOX_DEFAULT
+	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
 	release
 	end
 

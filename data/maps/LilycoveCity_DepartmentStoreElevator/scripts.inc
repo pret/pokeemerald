@@ -8,7 +8,7 @@ LilycoveCity_DepartmentStoreElevator_EventScript_220624:: @ 8220624
 	call_if_unset FLAG_TEMP_2, LilycoveCity_DepartmentStoreElevator_EventScript_2207FC
 	copyvar VAR_0x8005, VAR_DEPT_STORE_FLOOR
 	special sub_8139B60
-	message gUnknown_08272C1D
+	message gText_WhichFloorWouldYouLike
 	waitmessage
 	setvar VAR_0x8004, 0
 	specialvar VAR_RESULT, sub_81399F4

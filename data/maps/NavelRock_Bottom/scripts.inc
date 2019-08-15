@@ -52,9 +52,9 @@ NavelRock_Bottom_EventScript_2692A2:: @ 82692A2
 	playmoncry SPECIES_LUGIA, 2
 	waitmoncry
 	delay 20
-	setvar VAR_0x8004, 249
-	setvar VAR_0x8005, 70
-	setvar VAR_0x8006, 0
+	setvar VAR_0x8004, SPECIES_LUGIA
+	setvar VAR_0x8005, 70  @level
+	setvar VAR_0x8006, ITEM_NONE
 	special CreateObedientEnemyMon
 	setflag FLAG_SYS_CTRL_OBJ_DELETE
 	special BattleSetup_StartLegendaryBattle
@@ -73,11 +73,11 @@ NavelRock_Bottom_EventScript_2692A2:: @ 82692A2
 
 NavelRock_Bottom_EventScript_269336:: @ 8269336
 	setflag FLAG_DEFEATED_LUGIA
-	setvar VAR_0x8004, 249
-	goto NavelRock_Bottom_EventScript_273776
+	setvar VAR_0x8004, SPECIES_LUGIA
+	goto Common_EventScript_LegendaryFlewAway
 	end
 
 NavelRock_Bottom_EventScript_269344:: @ 8269344
-	setvar VAR_0x8004, 249
-	goto NavelRock_Bottom_EventScript_273776
+	setvar VAR_0x8004, SPECIES_LUGIA
+	goto Common_EventScript_LegendaryFlewAway
 	end

@@ -47,7 +47,7 @@ DesertRuins_EventScript_22D9DB:: @ 822D9DB
 	end
 
 DesertRuins_EventScript_22D9EE:: @ 822D9EE
-	msgbox gUnknown_0827304E, MSGBOX_DEFAULT
+	msgbox gText_BigHoleInTheWall, MSGBOX_DEFAULT
 	releaseall
 	end
 
@@ -84,11 +84,11 @@ DesertRuins_EventScript_22DA02:: @ 822DA02
 
 DesertRuins_EventScript_22DA49:: @ 822DA49
 	setflag FLAG_DEFEATED_REGIROCK
-	goto DesertRuins_EventScript_27376D
+	goto Common_EventScript_RemoveStaticPokemon
 	end
 
 DesertRuins_EventScript_22DA52:: @ 822DA52
-	setvar VAR_0x8004, 401
-	goto DesertRuins_EventScript_273776
+	setvar VAR_0x8004, SPECIES_REGIROCK
+	goto Common_EventScript_LegendaryFlewAway
 	end
 

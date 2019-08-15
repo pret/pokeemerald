@@ -460,7 +460,7 @@ EventScript_SecretBasePCShowMainMenu:: @ 823B4D3
 	goto EventScript_23B531
 	end
 
-gUnknown_0823B4E8:: @ 823B4E8 ;EventScript_SecretBasePCCancel?
+EventScript_SecretBasePCCancel:: @ 823B4E8
 	lockall
 	goto EventScript_SecretBasePCShowMainMenu
 	end
@@ -510,10 +510,10 @@ EventScript_RecordMixingSecretBasePC:: @ 823B589
 	waitmessage
 	waitbuttonpress
 	playse SE_SELECT
-	goto EventScript_23B5A1
+	goto EventScript_SecretBasePCStartMenu
 	end
 
-EventScript_23B5A1:: @ 823B5A1
+EventScript_SecretBasePCStartMenu:: @ 823B5A1
 	message Text_SecretBasePCStartMenu
 	waitmessage
 	multichoice 0, 0, 7, 0
@@ -525,9 +525,9 @@ EventScript_23B5A1:: @ 823B5A1
 	case 127, EventScript_23B66E
 	end
 
-gUnknown_0823B5E9:: @ 823B5E9
+EventScript_SecretBasePCStart:: @ 823B5E9
 	lockall
-	goto EventScript_23B5A1
+	goto EventScript_SecretBasePCStartMenu
 	end
 
 EventScript_23B5F0:: @ 823B5F0
@@ -539,7 +539,7 @@ EventScript_23B5F0:: @ 823B5F0
 	special CopyCurSecretBaseOwnerName_StrVar1
 	msgbox Text_WantToRegisterSecretBase, MSGBOX_YESNO
 	compare VAR_RESULT, 0
-	goto_if_eq EventScript_23B5A1
+	goto_if_eq EventScript_SecretBasePCStartMenu
 	msgbox Text_2767D1, MSGBOX_SIGN
 	special ToggleCurSecretBaseRegistry
 	special DoSecretBasePCTurnOffEffect
@@ -549,7 +549,7 @@ EventScript_23B5F0:: @ 823B5F0
 EventScript_23B62F:: @ 823B62F
 	msgbox Text_276731, MSGBOX_YESNO
 	compare VAR_RESULT, 0
-	goto_if_eq EventScript_23B5A1
+	goto_if_eq EventScript_SecretBasePCStartMenu
 	msgbox Text_2767E9, MSGBOX_SIGN
 	special ToggleCurSecretBaseRegistry
 	special DoSecretBasePCTurnOffEffect
@@ -565,7 +565,7 @@ EventScript_CantRegisterTooManyBases:: @ 823B652
 
 EventScript_23B660:: @ 823B660
 	msgbox Text_276835, MSGBOX_DEFAULT
-	goto EventScript_23B5A1
+	goto EventScript_SecretBasePCStartMenu
 	end
 
 EventScript_23B66E:: @ 823B66E
@@ -609,29 +609,29 @@ EventScript_SecretBaseShieldOrToyTV:: @ 823B68C
 	end
 
 EventScript_23B6BC:: @ 823B6BC
-	msgbox Text_27692B, MSGBOX_SIGN
+	msgbox SecretBase_Text_BattleTowerShield, MSGBOX_SIGN
 	end
 
 EventScript_23B6C5:: @ 823B6C5
-	msgbox Text_276974, MSGBOX_SIGN
+	msgbox SecretBase_Text_ToyTV, MSGBOX_SIGN
 	end
 
 EventScript_23B6CE:: @ 823B6CE
-	msgbox Text_2769B8, MSGBOX_SIGN
+	msgbox SecretBase_Text_SeedotTV, MSGBOX_SIGN
 	end
 
 EventScript_23B6D7:: @ 823B6D7
-	msgbox Text_2769FF, MSGBOX_SIGN
+	msgbox SecretBase_Text_SkittyTV, MSGBOX_SIGN
 	end
 
-gText_23B6E0:: @ 823B6E0
+gText_SmallIndentInWall:: @ 823B6E0
 	.string "There's a small indent in the wall.$"
 
-gText_23B704:: @ 823B704
+gText_UseSecretPower:: @ 823B704
 	.string "There's a small indent in the wall.\p"
 	.string "Use the SECRET POWER?$"
 
-gText_23B73E:: @ 823B73E
+gText_DiscoveredSmallCavern:: @ 823B73E
 	.string "Discovered a small cavern!$"
 
 SecretBase_RedCave1_Text_23B759: @ 823B759
@@ -1202,90 +1202,66 @@ EverGrandeCity_HallOfFame_EventScript_ResetEliteFour:: @ 82718CC
 	setvar VAR_ELITE_4_STATE, 0
 	return
 
-DewfordTown_PokemonCenter_1F_EventScript_2718DE:: @ 82718DE
-FallarborTown_PokemonCenter_1F_EventScript_2718DE:: @ 82718DE
-LavaridgeTown_PokemonCenter_1F_EventScript_2718DE:: @ 82718DE
-MauvilleCity_PokemonCenter_1F_EventScript_2718DE:: @ 82718DE
-OldaleTown_PokemonCenter_1F_EventScript_2718DE:: @ 82718DE
-PetalburgCity_PokemonCenter_1F_EventScript_2718DE:: @ 82718DE
-RustboroCity_PokemonCenter_1F_EventScript_2718DE:: @ 82718DE
-SlateportCity_PokemonCenter_1F_EventScript_2718DE:: @ 82718DE
-VerdanturfTown_PokemonCenter_1F_EventScript_2718DE:: @ 82718DE
+Common_EventScript_UpdateBrineyLocation:: @ 82718DE
 	goto_if_unset FLAG_RECEIVED_POKENAV, Common_EventScript_NopReturn
 	goto_if_set FLAG_DEFEATED_PETALBURG_GYM, Common_EventScript_NopReturn
-	goto_if_unset FLAG_HIDE_ROUTE_104_MR_BRINEY_BOAT, OldaleTown_PokemonCenter_1F_EventScript_27190C
-	goto_if_unset FLAG_HIDE_MR_BRINEY_DEWFORD_TOWN, OldaleTown_PokemonCenter_1F_EventScript_271912
-	goto_if_unset FLAG_HIDE_ROUTE_108_MR_BRINEY, OldaleTown_PokemonCenter_1F_EventScript_271918
+	goto_if_unset FLAG_HIDE_ROUTE_104_MR_BRINEY_BOAT, EventScript_SetBrineyLocation_House
+	goto_if_unset FLAG_HIDE_MR_BRINEY_DEWFORD_TOWN, EventScript_SetBrineyLocation_Dewford
+	goto_if_unset FLAG_HIDE_ROUTE_108_MR_BRINEY, EventScript_SetBrineyLocation_Route108
 	return
 
-OldaleTown_PokemonCenter_1F_EventScript_27190C:: @ 827190C
+EventScript_SetBrineyLocation_House:: @ 827190C
 	setvar VAR_BRINEY_LOCATION, 1
 	return
 
-OldaleTown_PokemonCenter_1F_EventScript_271912:: @ 8271912
+EventScript_SetBrineyLocation_Dewford:: @ 8271912
 	setvar VAR_BRINEY_LOCATION, 2
 	return
 
-OldaleTown_PokemonCenter_1F_EventScript_271918:: @ 8271918
+EventScript_SetBrineyLocation_Route108:: @ 8271918
 	setvar VAR_BRINEY_LOCATION, 3
 	return
 
-BattleFrontier_PokemonCenter_1F_EventScript_27191E:: @ 827191E
-DewfordTown_PokemonCenter_1F_EventScript_27191E:: @ 827191E
-EverGrandeCity_PokemonCenter_1F_EventScript_27191E:: @ 827191E
-EverGrandeCity_PokemonLeague_1F_EventScript_27191E:: @ 827191E
-FallarborTown_PokemonCenter_1F_EventScript_27191E:: @ 827191E
-FortreeCity_PokemonCenter_1F_EventScript_27191E:: @ 827191E
-LavaridgeTown_PokemonCenter_1F_EventScript_27191E:: @ 827191E
-LilycoveCity_PokemonCenter_1F_EventScript_27191E:: @ 827191E
-MauvilleCity_PokemonCenter_1F_EventScript_27191E:: @ 827191E
-MossdeepCity_PokemonCenter_1F_EventScript_27191E:: @ 827191E
-OldaleTown_PokemonCenter_1F_EventScript_27191E:: @ 827191E
-PacifidlogTown_PokemonCenter_1F_EventScript_27191E:: @ 827191E
-PetalburgCity_PokemonCenter_1F_EventScript_27191E:: @ 827191E
-RustboroCity_PokemonCenter_1F_EventScript_27191E:: @ 827191E
-SlateportCity_PokemonCenter_1F_EventScript_27191E:: @ 827191E
-SootopolisCity_PokemonCenter_1F_EventScript_27191E:: @ 827191E
-TrainerHill_Entrance_EventScript_27191E:: @ 827191E
-VerdanturfTown_PokemonCenter_1F_EventScript_27191E:: @ 827191E
+Common_EventScript_PkmnCenterNurse:: @ 827191E
 	lock
 	faceplayer
 	setvar VAR_0x8004, 0
 	specialvar VAR_RESULT, CountPlayerTrainerStars
 	compare VAR_RESULT, 4
-	goto_if_eq OldaleTown_PokemonCenter_1F_EventScript_271A68
-	msgbox gUnknown_082726EB, MSGBOX_YESNO
+	goto_if_eq EventScript_PkmnCenterNurse_GoldCard
+	msgbox gText_WouldYouLikeToRestYourPkmn, MSGBOX_YESNO
 	compare VAR_RESULT, 1
-	goto_if_eq OldaleTown_PokemonCenter_1F_EventScript_27195A
+	goto_if_eq EventScript_PkmnCenterNurse_HealPkmn
 	compare VAR_RESULT, 0
-	goto_if_eq OldaleTown_PokemonCenter_1F_EventScript_271954
+	goto_if_eq EventScript_PkmnCenterNurse_Goodbye
 	end
 
-OldaleTown_PokemonCenter_1F_EventScript_271954:: @ 8271954
-	message gUnknown_082727DB
+EventScript_PkmnCenterNurse_Goodbye:: @ 8271954
+	message gText_WeHopeToSeeYouAgain
 	return
 
-OldaleTown_PokemonCenter_1F_EventScript_27195A:: @ 827195A
+@ VAR_0x8004 is 1 when player has Gold Card; jumps are identical
+EventScript_PkmnCenterNurse_HealPkmn:: @ 827195A
 	incrementgamestat 15
 	compare VAR_0x8004, 0
-	call_if_eq OldaleTown_PokemonCenter_1F_EventScript_271987
+	call_if_eq EventScript_PkmnCenterNurse_IllTakeYourPkmn
 	compare VAR_0x8004, 1
-	call_if_eq OldaleTown_PokemonCenter_1F_EventScript_27198D
+	call_if_eq EventScript_PkmnCenterNurse_IllTakeYourPkmn2
 	waitmessage
-	call OldaleTown_PokemonCenter_1F_EventScript_271993
-	goto_if_unset FLAG_POKERUS_EXPLAINED, OldaleTown_PokemonCenter_1F_EventScript_271A43
-	goto OldaleTown_PokemonCenter_1F_EventScript_2719B1
+	call EventScript_PkmnCenterNurse_TakeAndHealPkmn
+	goto_if_unset FLAG_POKERUS_EXPLAINED, EventScript_PkmnCenterNurse_CheckPokerus
+	goto EventScript_PkmnCenterNurse_CheckTrainerHillAndUnionRoom
 	end
 
-OldaleTown_PokemonCenter_1F_EventScript_271987:: @ 8271987
-	message gUnknown_08272768
+EventScript_PkmnCenterNurse_IllTakeYourPkmn:: @ 8271987
+	message gText_IllTakeYourPkmn
 	return
 
-OldaleTown_PokemonCenter_1F_EventScript_27198D:: @ 827198D
-	message gUnknown_082729C0
+EventScript_PkmnCenterNurse_IllTakeYourPkmn2:: @ 827198D
+	message gText_IllTakeYourPkmn2
 	return
 
-OldaleTown_PokemonCenter_1F_EventScript_271993:: @ 8271993
+EventScript_PkmnCenterNurse_TakeAndHealPkmn:: @ 8271993
 	applymovement VAR_0x800B, Common_Movement_WalkInPlaceLeft
 	waitmovement 0
 	dofieldeffect FLDEFF_POKECENTER_HEAL
@@ -1295,88 +1271,89 @@ OldaleTown_PokemonCenter_1F_EventScript_271993:: @ 8271993
 	special HealPlayerParty
 	return
 
-OldaleTown_PokemonCenter_1F_EventScript_2719B1:: @ 82719B1
-	specialvar VAR_RESULT, sub_8139ED0
+EventScript_PkmnCenterNurse_CheckTrainerHillAndUnionRoom:: @ 82719B1
+	specialvar VAR_RESULT, PlayerAtTrainerHillEntrance
 	compare VAR_RESULT, 0
-	goto_if_eq OldaleTown_PokemonCenter_1F_EventScript_2719E2
-	specialvar VAR_RESULT, sp182_move_string
+	goto_if_eq EventScript_PkmnCenterNurse_ReturnPkmn
+	specialvar VAR_RESULT, BufferUnionRoomPlayerName
 	copyvar VAR_0x8008, VAR_RESULT
 	compare VAR_0x8008, 0
-	goto_if_eq OldaleTown_PokemonCenter_1F_EventScript_2719E2
+	goto_if_eq EventScript_PkmnCenterNurse_ReturnPkmn
 	compare VAR_0x8008, 1
-	goto_if_eq OldaleTown_PokemonCenter_1F_EventScript_271A19
+	goto_if_eq EventScript_PkmnCenterNurse_PlayerWaitingInUnionRoom
 	end
 
-OldaleTown_PokemonCenter_1F_EventScript_2719E2:: @ 82719E2
+@ VAR_0x8004 is 1 when player has Gold Card
+EventScript_PkmnCenterNurse_ReturnPkmn:: @ 82719E2
 	compare VAR_0x8004, 1
-	goto_if_eq OldaleTown_PokemonCenter_1F_EventScript_271A03
-	message gUnknown_08272798
+	goto_if_eq EventScript_PkmnCenterNurse_ReturnPkmn2
+	message gText_RestoredPkmnToFullHealth
 	waitmessage
-	applymovement VAR_0x800B, OldaleTown_PokemonCenter_1F_Movement_271AD0
+	applymovement VAR_0x800B, EventScript_PkmnCenterNurse_Bow
 	waitmovement 0
-	message gUnknown_082727DB
+	message gText_WeHopeToSeeYouAgain
 	return
 
-OldaleTown_PokemonCenter_1F_EventScript_271A03:: @ 8271A03
-	message gUnknown_082729F0
+EventScript_PkmnCenterNurse_ReturnPkmn2:: @ 8271A03
+	message gText_ThankYouForWaiting
 	waitmessage
-	applymovement VAR_0x800B, OldaleTown_PokemonCenter_1F_Movement_271AD0
+	applymovement VAR_0x800B, EventScript_PkmnCenterNurse_Bow
 	waitmovement 0
-	message gUnknown_08272A07
+	message gText_WeHopeToSeeYouAgain2
 	return
 
-OldaleTown_PokemonCenter_1F_EventScript_271A19:: @ 8271A19
-	goto_if_set FLAG_NURSE_UNION_ROOM_REMINDER, OldaleTown_PokemonCenter_1F_EventScript_2719E2
-	msgbox gUnknown_08272798, MSGBOX_DEFAULT
+EventScript_PkmnCenterNurse_PlayerWaitingInUnionRoom:: @ 8271A19
+	goto_if_set FLAG_NURSE_UNION_ROOM_REMINDER, EventScript_PkmnCenterNurse_ReturnPkmn
+	msgbox gText_RestoredPkmnToFullHealth, MSGBOX_DEFAULT
 	setflag FLAG_NURSE_UNION_ROOM_REMINDER
-	message OldaleTown_PokemonCenter_1F_Text_278A48
+	message CableClub_Text_PlayerIsWaiting
 	waitmessage
-	applymovement VAR_0x800B, OldaleTown_PokemonCenter_1F_Movement_271AD0
+	applymovement VAR_0x800B, EventScript_PkmnCenterNurse_Bow
 	waitmovement 0
-	message gUnknown_082727DB
+	message gText_WeHopeToSeeYouAgain
 	return
 
-OldaleTown_PokemonCenter_1F_EventScript_271A43:: @ 8271A43
+EventScript_PkmnCenterNurse_CheckPokerus:: @ 8271A43
 	specialvar VAR_RESULT, IsPokerusInParty
 	compare VAR_RESULT, 1
-	goto_if_eq OldaleTown_PokemonCenter_1F_EventScript_Explain_Pokerus
+	goto_if_eq EventScript_PkmnCenterNurse_ExplainPokerus
 	compare VAR_RESULT, 0
-	goto_if_eq OldaleTown_PokemonCenter_1F_EventScript_2719B1
+	goto_if_eq EventScript_PkmnCenterNurse_CheckTrainerHillAndUnionRoom
 	end
 
-OldaleTown_PokemonCenter_1F_EventScript_Explain_Pokerus:: @ 8271A5F
+EventScript_PkmnCenterNurse_ExplainPokerus:: @ 8271A5F
 	message gText_PokerusExplanation
 	setflag FLAG_POKERUS_EXPLAINED
 	return
 
-OldaleTown_PokemonCenter_1F_EventScript_271A68:: @ 8271A68
-	goto_if_set FLAG_OLDALE_NURSE_MENTIONS_GOLD_CARD, OldaleTown_PokemonCenter_1F_EventScript_271AAC
-	setflag FLAG_OLDALE_NURSE_MENTIONS_GOLD_CARD
-	msgbox gUnknown_082727F5, MSGBOX_DEFAULT
+EventScript_PkmnCenterNurse_GoldCard:: @ 8271A68
+	goto_if_set FLAG_NURSE_MENTIONS_GOLD_CARD, EventScript_PkmnCenterNurse_AskForUsual
+	setflag FLAG_NURSE_MENTIONS_GOLD_CARD
+	msgbox gText_WelcomeCutShort, MSGBOX_DEFAULT
 	playse SE_PIN
 	applymovement VAR_0x800B, Common_Movement_ExclamationMark
 	waitmovement 0
 	applymovement VAR_0x800B, Common_Movement_Delay48
 	waitmovement 0
-	msgbox gUnknown_08272860, MSGBOX_YESNO
+	msgbox gText_NoticesGoldCard, MSGBOX_YESNO
 	compare VAR_RESULT, 1
-	goto_if_eq OldaleTown_PokemonCenter_1F_EventScript_271AC5
-	message gUnknown_08272A07
+	goto_if_eq EventScript_PkmnCenterNurse_GoldCardHealPkmn
+	message gText_WeHopeToSeeYouAgain2
 	return
 
-OldaleTown_PokemonCenter_1F_EventScript_271AAC:: @ 8271AAC
-	msgbox gUnknown_08272982, MSGBOX_YESNO
+EventScript_PkmnCenterNurse_AskForUsual:: @ 8271AAC
+	msgbox gText_YouWantTheUsual, MSGBOX_YESNO
 	compare VAR_RESULT, 1
-	goto_if_eq OldaleTown_PokemonCenter_1F_EventScript_271AC5
-	message gUnknown_08272A07
+	goto_if_eq EventScript_PkmnCenterNurse_GoldCardHealPkmn
+	message gText_WeHopeToSeeYouAgain2
 	return
 
-OldaleTown_PokemonCenter_1F_EventScript_271AC5:: @ 8271AC5
+EventScript_PkmnCenterNurse_GoldCardHealPkmn:: @ 8271AC5
 	setvar VAR_0x8004, 1
-	goto OldaleTown_PokemonCenter_1F_EventScript_27195A
+	goto EventScript_PkmnCenterNurse_HealPkmn
 	end
 
-OldaleTown_PokemonCenter_1F_Movement_271AD0: @ 8271AD0
+EventScript_PkmnCenterNurse_Bow: @ 8271AD0
 	nurse_joy_bow
 	delay_4
 	step_end
@@ -1437,7 +1414,7 @@ EventScript_271B85:: @ 8271B85
 	return
 
 EventScript_271B95:: @ 8271B95
-	message gUnknown_08272A78
+	message gText_ObtainedTheItem
 	waitfanfare
 	msgbox gText_PutItemInPocket, MSGBOX_DEFAULT
 	setvar VAR_RESULT, 1
@@ -1471,9 +1448,9 @@ EventScript_271BC5:: @ 8271BC5
 
 EventScript_271BE0:: @ 8271BE0
 	playfanfare MUS_FANFA4
-	message gUnknown_08272B09
+	message gText_ObtainedTheMon
 	waitfanfare
-	msgbox gUnknown_08272B48, MSGBOX_DEFAULT
+	msgbox gText_TheMonWasTransferredToThePC, MSGBOX_DEFAULT
 	setvar VAR_RESULT, 1
 	return
 
@@ -1532,7 +1509,7 @@ EventScript_271C9B:: @ 8271C9B
 	return
 
 EventScript_271CA1:: @ 8271CA1
-	msgbox gUnknown_08272A78, MSGBOX_DEFAULT
+	msgbox gText_ObtainedTheItem, MSGBOX_DEFAULT
 	msgbox gText_TooBadBagIsFull, MSGBOX_DEFAULT
 	setvar VAR_RESULT, 0
 	return
@@ -1738,77 +1715,71 @@ EventScript_CantSurf:: @ 8271ED6
 Common_EventScript_SetupRivalGender:: @ 8271ED7
 	checkplayergender
 	compare VAR_RESULT, MALE
-	goto_if_eq RustboroCity_EventScript_271EEF
+	goto_if_eq EventScript_SetupRivalFemale
 	compare VAR_RESULT, FEMALE
-	goto_if_eq RustboroCity_EventScript_271EF5
+	goto_if_eq EventScript_SetupRivalMale
 	end
 
-RustboroCity_EventScript_271EEF:: @ 8271EEF
+EventScript_SetupRivalFemale:: @ 8271EEF
 	setvar VAR_OBJ_GFX_ID_0, EVENT_OBJ_GFX_RIVAL_MAY_NORMAL
 	return
 
-RustboroCity_EventScript_271EF5:: @ 8271EF5
+EventScript_SetupRivalMale:: @ 8271EF5
 	setvar VAR_OBJ_GFX_ID_0, EVENT_OBJ_GFX_RIVAL_BRENDAN_NORMAL
 	return
 
 Common_EventScript_SetupRivalOnBikeGender:: @ 8271EFB
 	checkplayergender
 	compare VAR_RESULT, MALE
-	goto_if_eq LavaridgeTown_EventScript_271F13
+	goto_if_eq EventScript_SetupRivalOnBikeFemale
 	compare VAR_RESULT, FEMALE
-	goto_if_eq LavaridgeTown_EventScript_271F19
+	goto_if_eq EventScript_SetupRivalOnBikeMale
 	end
 
-LavaridgeTown_EventScript_271F13:: @ 8271F13
+EventScript_SetupRivalOnBikeFemale:: @ 8271F13
 	setvar VAR_OBJ_GFX_ID_3, EVENT_OBJ_GFX_RIVAL_MAY_MACH_BIKE
 	return
 
-LavaridgeTown_EventScript_271F19:: @ 8271F19
+EventScript_SetupRivalOnBikeMale:: @ 8271F19
 	setvar VAR_OBJ_GFX_ID_3, EVENT_OBJ_GFX_RIVAL_BRENDAN_MACH_BIKE
 	return
 
-EventScript_271F1F:: @ 8271F1F
+@ Unused
+Common_EventScript_SetupRivalSameGender:: @ 8271F1F
 	checkplayergender
 	compare VAR_RESULT, MALE
-	goto_if_eq EventScript_271F37
+	goto_if_eq EventScript_SetupRivalMale2
 	compare VAR_RESULT, FEMALE
-	goto_if_eq EventScript_271F3D
+	goto_if_eq EventScript_SetupRivalFemale2
 	end
 
-EventScript_271F37:: @ 8271F37
+EventScript_SetupRivalMale2:: @ 8271F37
 	setvar VAR_OBJ_GFX_ID_0, EVENT_OBJ_GFX_RIVAL_BRENDAN_NORMAL
 	return
 
-EventScript_271F3D:: @ 8271F3D
+EventScript_SetupRivalFemale2:: @ 8271F3D
 	setvar VAR_OBJ_GFX_ID_0, EVENT_OBJ_GFX_RIVAL_MAY_NORMAL
 	return
 
-DewfordTown_Gym_EventScript_271F43:: @ 8271F43
-FortreeCity_Gym_EventScript_271F43:: @ 8271F43
-LavaridgeTown_Gym_1F_EventScript_271F43:: @ 8271F43
-MauvilleCity_Gym_EventScript_271F43:: @ 8271F43
-MossdeepCity_Gym_EventScript_271F43:: @ 8271F43
-PetalburgCity_Gym_EventScript_271F43:: @ 8271F43
-RustboroCity_Gym_EventScript_271F43:: @ 8271F43
-SootopolisCity_Gym_1F_EventScript_271F43:: @ 8271F43
+Common_EventScript_SetGymTrainers:: @ 8271F43
 	switch VAR_0x8008
-	case 1, DewfordTown_Gym_EventScript_271FA1
-	case 2, DewfordTown_Gym_EventScript_271FAB
-	case 3, DewfordTown_Gym_EventScript_271FBE
-	case 4, DewfordTown_Gym_EventScript_271FCE
-	case 5, DewfordTown_Gym_EventScript_271FE7
-	case 6, DewfordTown_Gym_EventScript_271FFD
-	case 7, DewfordTown_Gym_EventScript_272010
-	case 8, DewfordTown_Gym_EventScript_272035
+	case 1, RusboroCity_Gym_SetGymTrainers
+	case 2, DewfordTown_Gym_SetGymTrainers
+	case 3, MauvilleCity_Gym_SetGymTrainers
+	case 4, LavaridgeTown_Gym_SetGymTrainers
+	case 5, PetalburgCity_Gym_SetGymTrainers
+	case 6, FortreeCity_Gym_SetGymTrainers
+	case 7, MossdeepCity_Gym_SetGymTrainers
+	case 8, SootopolisCity_Gym_SetGymTrainers
 	end
 
-DewfordTown_Gym_EventScript_271FA1:: @ 8271FA1
+RusboroCity_Gym_SetGymTrainers:: @ 8271FA1
 	settrainerflag TRAINER_JOSH
 	settrainerflag TRAINER_TOMMY
 	settrainerflag TRAINER_MARC
 	return
 
-DewfordTown_Gym_EventScript_271FAB:: @ 8271FAB
+DewfordTown_Gym_SetGymTrainers:: @ 8271FAB
 	settrainerflag TRAINER_TAKAO
 	settrainerflag TRAINER_JOCELYN
 	settrainerflag TRAINER_LAURA
@@ -1817,7 +1788,7 @@ DewfordTown_Gym_EventScript_271FAB:: @ 8271FAB
 	settrainerflag TRAINER_LILITH
 	return
 
-DewfordTown_Gym_EventScript_271FBE:: @ 8271FBE
+MauvilleCity_Gym_SetGymTrainers:: @ 8271FBE
 	settrainerflag TRAINER_KIRK
 	settrainerflag TRAINER_SHAWN
 	settrainerflag TRAINER_BEN
@@ -1825,7 +1796,7 @@ DewfordTown_Gym_EventScript_271FBE:: @ 8271FBE
 	settrainerflag TRAINER_ANGELO
 	return
 
-DewfordTown_Gym_EventScript_271FCE:: @ 8271FCE
+LavaridgeTown_Gym_SetGymTrainers:: @ 8271FCE
 	settrainerflag TRAINER_COLE
 	settrainerflag TRAINER_AXLE
 	settrainerflag TRAINER_KEEGAN
@@ -1836,7 +1807,7 @@ DewfordTown_Gym_EventScript_271FCE:: @ 8271FCE
 	settrainerflag TRAINER_ELI
 	return
 
-DewfordTown_Gym_EventScript_271FE7:: @ 8271FE7
+PetalburgCity_Gym_SetGymTrainers:: @ 8271FE7
 	settrainerflag TRAINER_RANDALL
 	settrainerflag TRAINER_PARKER
 	settrainerflag TRAINER_GEORGE
@@ -1846,7 +1817,7 @@ DewfordTown_Gym_EventScript_271FE7:: @ 8271FE7
 	settrainerflag TRAINER_JODY
 	return
 
-DewfordTown_Gym_EventScript_271FFD:: @ 8271FFD
+FortreeCity_Gym_SetGymTrainers:: @ 8271FFD
 	settrainerflag TRAINER_JARED
 	settrainerflag TRAINER_FLINT
 	settrainerflag TRAINER_ASHLEY
@@ -1855,7 +1826,7 @@ DewfordTown_Gym_EventScript_271FFD:: @ 8271FFD
 	settrainerflag TRAINER_DARIUS
 	return
 
-DewfordTown_Gym_EventScript_272010:: @ 8272010
+MossdeepCity_Gym_SetGymTrainers:: @ 8272010
 	settrainerflag TRAINER_PRESTON
 	settrainerflag TRAINER_VIRGIL
 	settrainerflag TRAINER_BLAKE
@@ -1870,7 +1841,7 @@ DewfordTown_Gym_EventScript_272010:: @ 8272010
 	settrainerflag TRAINER_NICHOLAS
 	return
 
-DewfordTown_Gym_EventScript_272035:: @ 8272035
+SootopolisCity_Gym_SetGymTrainers:: @ 8272035
 	settrainerflag TRAINER_ANDREA
 	settrainerflag TRAINER_CRISSY
 	settrainerflag TRAINER_BRIANNA
@@ -1927,16 +1898,12 @@ EventScript_RegionMap:: @ 827208F
 	releaseall
 	end
 
-DewfordTown_EventScript_2720A0:: @ 82720A0
-Route104_EventScript_2720A0:: @ 82720A0
-Route109_EventScript_2720A0:: @ 82720A0
+Common_EventScript_PlayBrineysBoatMusic:: @ 82720A0
 	setflag FLAG_SPECIAL_FLAG_0x4001
 	playbgm MUS_M_BOAT, 0
 	return
 
-DewfordTown_EventScript_2720A8:: @ 82720A8
-Route104_EventScript_2720A8:: @ 82720A8
-Route109_EventScript_2720A8:: @ 82720A8
+Common_EventScript_StopBrineysBoatMusic:: @ 82720A8
 	clearflag FLAG_SPECIAL_FLAG_0x4001
 	fadedefaultbgm
 	return
@@ -1995,7 +1962,7 @@ Route103_EventScript_272141:: @ 8272141
 	goto_if_unset FLAG_ENABLE_PROF_BIRCH_MATCH_CALL, Route101_EventScript_1FA2D2
 
 Route101_EventScript_272155:: @ 8272155
-	msgbox gUnknown_082A5C9C, MSGBOX_YESNO
+	msgbox gBirchDexRatingText_AreYouCurious, MSGBOX_YESNO
 	compare VAR_RESULT, 0
 	goto_if_eq Route101_EventScript_27216F
 	call Route101_EventScript_272184
@@ -2003,7 +1970,7 @@ Route101_EventScript_272155:: @ 8272155
 	end
 
 Route101_EventScript_27216F:: @ 827216F
-	msgbox Route101_Text_2A5CEB, MSGBOX_DEFAULT
+	msgbox gBirchDexRatingText_Cancel, MSGBOX_DEFAULT
 	release
 	end
 
@@ -2023,7 +1990,7 @@ Route101_EventScript_272184:: @ 8272184
 	copyvar VAR_0x800A, VAR_RESULT
 	buffernumberstring 0, VAR_0x8008
 	buffernumberstring 1, VAR_0x8009
-	msgbox gUnknown_082A5D2C, MSGBOX_DEFAULT
+	msgbox gBirchDexRatingText_SoYouveSeenAndCaught, MSGBOX_DEFAULT
 	call Route101_EventScript_272179
 	compare VAR_0x800A, 0
 	goto_if_eq Common_EventScript_NopReturn
@@ -2033,7 +2000,7 @@ Route101_EventScript_272184:: @ 8272184
 	copyvar VAR_0x8009, VAR_0x8006
 	buffernumberstring 0, VAR_0x8008
 	buffernumberstring 1, VAR_0x8009
-	msgbox gUnknown_082A633D, MSGBOX_DEFAULT
+	msgbox gBirchDexRatingText_OnANationwideBasis, MSGBOX_DEFAULT
 	return
 
 BattleFrontier_OutsideWest_EventScript_2721E2:: @ 82721E2
@@ -2234,16 +2201,16 @@ Route119_EventScript_272365:: @ 8272365
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
 	specialvar VAR_RESULT, GetBattleOutcome
 	compare VAR_RESULT, 1
-	goto_if_eq Route119_EventScript_2723C1
+	goto_if_eq EventScript_RemoveKecleon
 	compare VAR_RESULT, 4
-	goto_if_eq Route119_EventScript_2723C1
+	goto_if_eq EventScript_RemoveKecleon
 	compare VAR_RESULT, 5
-	goto_if_eq Route119_EventScript_2723C1
+	goto_if_eq EventScript_RemoveKecleon
 	release
 	end
 
-Route119_EventScript_2723C1:: @ 82723C1
-	goto Route119_EventScript_27376D
+EventScript_RemoveKecleon:: @ 82723C1
+	goto Common_EventScript_RemoveStaticPokemon
 	end
 
 FortreeCity_Movement_2723C7: @ 82723C7
@@ -2272,18 +2239,16 @@ Route120_Movement_2723C7: @ 82723C7
 	set_visible
 	step_end
 
-Common_EventScript_NameReceivedPokemon:: @ 82723DD
+Common_EventScript_NameReceivedPartyMon:: @ 82723DD
 	fadescreen 1
 	special ChangePokemonNickname
 	waitstate
 	return
 
-FallarborTown_House1_EventScript_2723E4:: @ 82723E4
-GraniteCave_StevensRoom_EventScript_2723E4:: @ 82723E4
-SlateportCity_OceanicMuseum_2F_EventScript_2723E4:: @ 82723E4
+Common_EventScript_PlayerHandedOverTheItem:: @ 82723E4
 	bufferitemname 0, VAR_0x8004
 	playfanfare MUS_ME_WAZA
-	message gUnknown_08273161
+	message gText_PlayerHandedOverTheItem
 	waitmessage
 	waitfanfare
 	takeitem VAR_0x8004, 1
@@ -2519,196 +2484,302 @@ gText_AccessedPlayersPC:: @ 82726C2
 gText_AccessedLanettesPC:: @ 82726D4
 	.string "Accessed LANETTE's PC.$"
 
-gUnknown_082726EB:: @ 82726EB
-	.string "Hello, and welcome to\nthe POKéMON CENTER.\pWe restore your tired POKéMON\nto full health.\pWould you like to rest your POKéMON?$"
+gText_WouldYouLikeToRestYourPkmn:: @ 82726EB
+	.string "Hello, and welcome to\n"
+	.string "the POKéMON CENTER.\p"
+	.string "We restore your tired POKéMON\n"
+	.string "to full health.\p"
+	.string "Would you like to rest your POKéMON?$"
 
-gUnknown_08272768:: @ 8272768
-	.string "Okay, I'll take your POKéMON\nfor a few seconds.$"
+gText_IllTakeYourPkmn:: @ 8272768
+	.string "Okay, I'll take your POKéMON\n"
+	.string "for a few seconds.$"
 
-gUnknown_08272798:: @ 8272798
-	.string "Thank you for waiting.\pWe've restored your POKéMON\nto full health.$"
+gText_RestoredPkmnToFullHealth:: @ 8272798
+	.string "Thank you for waiting.\p"
+	.string "We've restored your POKéMON\n"
+	.string "to full health.$"
 
-gUnknown_082727DB:: @ 82727DB
+gText_WeHopeToSeeYouAgain:: @ 82727DB
 	.string "We hope to see you again!$"
 
-gUnknown_082727F5:: @ 82727F5
-	.string "Hello, and welcome to\nthe POKéMON CENTER.\pWe restore your tired POKéMON\nto full health.\pWould you like to…$"
+gText_WelcomeCutShort:: @ 82727F5
+	.string "Hello, and welcome to\n"
+	.string "the POKéMON CENTER.\p"
+	.string "We restore your tired POKéMON\n"
+	.string "to full health.\p"
+	.string "Would you like to…$"
 
-gUnknown_08272860:: @ 8272860
-	.string "Th-that card…\nCould it be… The GOLD CARD?!\pOh, the gold color is brilliant!\nThe four stars seem to sparkle!\pI've seen several TRAINERS with\na SILVER CARD before, but, {PLAYER},\lyou're the first TRAINER I've ever\lseen with a GOLD CARD!\pOkay, {PLAYER}, please allow me\nthe honor of resting your POKéMON!$"
+gText_NoticesGoldCard:: @ 8272860
+	.string "Th-that card…\n"
+	.string "Could it be… The GOLD CARD?!\p"
+	.string "Oh, the gold color is brilliant!\n"
+	.string "The four stars seem to sparkle!\p"
+	.string "I've seen several TRAINERS with\n"
+	.string "a SILVER CARD before, but, {PLAYER},\l"
+	.string "you're the first TRAINER I've ever\l"
+	.string "seen with a GOLD CARD!\p"
+	.string "Okay, {PLAYER}, please allow me\n"
+	.string "the honor of resting your POKéMON!$"
 
-gUnknown_08272982:: @ 8272982
-	.string "I'm delighted to see you, {PLAYER}!\nYou want the usual, am I right?$"
+gText_YouWantTheUsual:: @ 8272982
+	.string "I'm delighted to see you, {PLAYER}!\n"
+	.string "You want the usual, am I right?$"
 
-gUnknown_082729C0:: @ 82729C0
-	.string "Okay, I'll take your POKéMON\nfor a few seconds.$"
+gText_IllTakeYourPkmn2:: @ 82729C0
+	.string "Okay, I'll take your POKéMON\n"
+	.string "for a few seconds.$"
 
-gUnknown_082729F0:: @ 82729F0
+gText_ThankYouForWaiting:: @ 82729F0
 	.string "Thank you for waiting.$"
 
-gUnknown_08272A07:: @ 8272A07
+gText_WeHopeToSeeYouAgain2:: @ 8272A07
 	.string "We hope to see you again!$"
 
-gUnknown_08272A21:: @ 8272A21
-	.string "Welcome!\pHow may I serve you?$"
+gText_HowMayIServeYou:: @ 8272A21
+	.string "Welcome!\p"
+	.string "How may I serve you?$"
 
-gUnknown_08272A3F:: @ 8272A3F
+gText_PleaseComeAgain:: @ 8272A3F
 	.string "Please come again!$"
 
-gUnknown_08272A52:: @ 8272A52
-	.string "{PLAYER}{STRING 5}, welcome!\pWhat can I do for you?$"
+gText_PlayerWhatCanIDoForYou:: @ 8272A52
+	.string "{PLAYER}{STRING 5}, welcome!\p"
+	.string "What can I do for you?$"
 
-gUnknown_08272A78:: @ 8272A78
+gText_ObtainedTheItem:: @ 8272A78
 	.string "Obtained the {STR_VAR_2}!$"
 
-gUnknown_08272A89:: @ 8272A89
+gText_TheBagIsFull:: @ 8272A89
 	.string "The BAG is full…$"
 
 gText_PutItemInPocket:: @ 8272A9A
-	.string "{PLAYER} put away the {STR_VAR_2}\nin the {STR_VAR_3} POCKET.$"
+	.string "{PLAYER} put away the {STR_VAR_2}\n"
+	.string "in the {STR_VAR_3} POCKET.$"
 
 gText_PlayerFoundOneItem:: @ 8272ABF
 	.string "{PLAYER} found one {STR_VAR_2}!$"
 
 gText_TooBadBagIsFull:: @ 8272AD0
-	.string "Too bad!\nThe BAG is full…$"
+	.string "Too bad!\n"
+	.string "The BAG is full…$"
 
 gText_PlayerPutItemInBag:: @ 8272AEA
-	.string "{PLAYER} put away the {STR_VAR_2}\nin the BAG.$"
+	.string "{PLAYER} put away the {STR_VAR_2}\n"
+	.string "in the BAG.$"
 
-gUnknown_08272B09:: @ 8272B09
+gText_ObtainedTheMon:: @ 8272B09
 	.string "Obtained the {STR_VAR_2}!$"
 
 gText_NoRoomLeftForAnother:: @ 8272B1A
-	.string "Too bad! There's no room left for\nanother {STR_VAR_2}…$"
+	.string "Too bad! There's no room left for\n"
+	.string "another {STR_VAR_2}…$"
 
-gUnknown_08272B48:: @ 8272B48
-	.string "The {STR_VAR_2} was transferred\nto the PC.$"
+gText_TheMonWasTransferredToThePC:: @ 8272B48
+	.string "The {STR_VAR_2} was transferred\n"
+	.string "to the PC.$"
 
 gText_PokemartSign:: @ 8272B6A
-	.string "“Selected items for your convenience!”\nPOKéMON MART$"
+	.string "“Selected items for your convenience!”\n"
+	.string "POKéMON MART$"
 
 gText_PokemonCenterSign:: @ 8272B9E
-	.string "“Rejuvenate your tired partners!”\nPOKéMON CENTER$"
+	.string "“Rejuvenate your tired partners!”\n"
+	.string "POKéMON CENTER$"
 
-gUnknown_08272BCF:: @ 8272BCF
-	.string "{STR_VAR_1} might like this program.\n… … … … … … … … … … … … … … … …\pBetter get going!$"
+gText_MomOrDadMightLikeThisProgram:: @ 8272BCF
+	.string "{STR_VAR_1} might like this program.\n"
+	.string "… … … … … … … … … … … … … … … …\p"
+	.string "Better get going!$"
 
-gUnknown_08272C1D:: @ 8272C1D
-	.string "Welcome to LILYCOVE DEPARTMENT STORE.\pWhich floor would you like?$"
+gText_WhichFloorWouldYouLike:: @ 8272C1D
+	.string "Welcome to LILYCOVE DEPARTMENT STORE.\p"
+	.string "Which floor would you like?$"
 
-gUnknown_08272C5F:: @ 8272C5F
-	.string "The sandstorm is vicious.\nIt's impossible to keep going.$"
+gText_SandstormIsVicious:: @ 8272C5F
+	.string "The sandstorm is vicious.\n"
+	.string "It's impossible to keep going.$"
 
 gText_SelectWithoutRegisteredItem:: @ 8272C98
-	.string "An item in the BAG can be\nregistered to SELECT for easy use.$"
+	.string "An item in the BAG can be\n"
+	.string "registered to SELECT for easy use.$"
 
-gUnknown_08272CD5:: @ 8272CD5
-	.string "There's an e-mail from POKéMON TRAINER\nSCHOOL.\p… … … … … …\pA POKéMON may learn up to four moves.\pA TRAINER's expertise is tested on the\nmove sets chosen for POKéMON.\p… … … … … …$"
+gText_PokemonTrainerSchoolEmail:: @ 8272CD5
+	.string "There's an e-mail from POKéMON TRAINER\n"
+	.string "SCHOOL.\p"
+	.string "… … … … … …\p"
+	.string "A POKéMON may learn up to four moves.\p"
+	.string "A TRAINER's expertise is tested on the\n"
+	.string "move sets chosen for POKéMON.\p"
+	.string "… … … … … …$"
 
 gText_PlayerHouseBootPC:: @ 8272D87
 	.string "{PLAYER} booted up the PC.$"
 
-gUnknown_08272D9C:: @ 8272D9C
+gText_PokeblockLinkCanceled:: @ 8272D9C
 	.string "The link was canceled.$"
 
-gUnknown_08272DB3:: @ 8272DB3
-	.string "Want to give a nickname to\nthe {STR_VAR_2} you received?$"
+gText_UnusedNicknameReceivedPokemon:: @ 8272DB3
+	.string "Want to give a nickname to\n"
+	.string "the {STR_VAR_2} you received?$"
 
-gUnknown_08272DE3:: @ 8272DE3
-	.string "{PLAYER} is out of usable\nPOKéMON!\p{PLAYER} whited out!$"
+gText_PlayerWhitedOut:: @ 8272DE3
+	.string "{PLAYER} is out of usable\n"
+	.string "POKéMON!\p{PLAYER} whited out!$"
 
 gText_RegisteredTrainerinPokeNav:: @ 8272E0F
-	.string "Registered {STR_VAR_1} {STR_VAR_2}\nin the POKéNAV.$"
+	.string "Registered {STR_VAR_1} {STR_VAR_2}\n"
+	.string "in the POKéNAV.$"
 
-gUnknown_08272E30:: @ 8272E30
-	.string "Do you know the TM SECRET POWER?\pOur group, we love the TM SECRET\nPOWER.\pOne of our members will give it to you.\nCome back and show me if you get it.\pWe'll accept you as a member and sell\nyou good stuff in secrecy.$"
+gText_ComeBackWithSecretPower:: @ 8272E30
+	.string "Do you know the TM SECRET POWER?\p"
+	.string "Our group, we love the TM SECRET\n"
+	.string "POWER.\p"
+	.string "One of our members will give it to you.\n"
+	.string "Come back and show me if you get it.\p"
+	.string "We'll accept you as a member and sell\n"
+	.string "you good stuff in secrecy.$"
 
 gText_PokerusExplanation:: @ 8272F07
-	.string "Your POKéMON may be infected with\nPOKéRUS.\pLittle is known about the POKéRUS\nexcept that they are microscopic life-\lforms that attach to POKéMON.\pWhile infected, POKéMON are said to\ngrow exceptionally well.$"
+	.string "Your POKéMON may be infected with\n"
+	.string "POKéRUS.\p"
+	.string "Little is known about the POKéRUS\n"
+	.string "except that they are microscopic life-\l"
+	.string "forms that attach to POKéMON.\p"
+	.string "While infected, POKéMON are said to\n"
+	.string "grow exceptionally well.$"
 
 	.include "data/text/surf.inc"
 
-gUnknown_0827301B:: @ 827301B
-	.string "It sounded as if a door opened\nsomewhere far away.$"
+gText_DoorOpenedFarAway:: @ 827301B
+	.string "It sounded as if a door opened\n"
+	.string "somewhere far away.$"
 
-gUnknown_0827304E:: @ 827304E
+gText_BigHoleInTheWall:: @ 827304E
 	.string "There is a big hole in the wall.$"
 
-gUnknown_0827306F:: @ 827306F
-	.string "I'm terribly sorry.\nThe POKéMON WIRELESS CLUB is\lundergoing adjustments now.$"
+gText_SorryWirelessClubAdjustments:: @ 827306F
+	.string "I'm terribly sorry.\n"
+	.string "The POKéMON WIRELESS CLUB is\l"
+	.string "undergoing adjustments now.$"
 
-gUnknown_082730BC:: @ 82730BC
-	.string "It appears to be undergoing\nadjustments…$"
+gText_UndergoingAdjustments:: @ 82730BC
+	.string "It appears to be undergoing\n"
+	.string "adjustments…$"
 
-gUnknown_082730E5:: @ 82730E5
-	.string "I'm terribly sorry. The TRADE CENTER\nis undergoing inspections.$"
+@ Unused
+gText_SorryTradeCenterInspections:: @ 82730E5
+	.string "I'm terribly sorry. The TRADE CENTER\n"
+	.string "is undergoing inspections.$"
 
-gUnknown_08273125:: @ 8273125
-	.string "I'm terribly sorry. The RECORD CORNER\nis under preparation.$"
+@ Unused
+gText_SorryRecordCornerPreparation:: @ 8273125
+	.string "I'm terribly sorry. The RECORD CORNER\n"
+	.string "is under preparation.$"
 
-gUnknown_08273161:: @ 8273161
-	.string "{PLAYER} handed over the\n{STR_VAR_1}.$"
+gText_PlayerHandedOverTheItem:: @ 8273161
+	.string "{PLAYER} handed over the\n"
+	.string "{STR_VAR_1}.$"
 
-gUnknown_08273178:: @ 8273178
-	.string "Thank you for accessing the\nMYSTERY GIFT System.$"
+gText_ThankYouForAccessingMysteryGift:: @ 8273178
+	.string "Thank you for accessing the\n"
+	.string "MYSTERY GIFT System.$"
 
 gText_PlayerFoundOneItemTwoLines:: @ 82731A9
-	.string "{PLAYER} found one {STR_VAR_1}\n{STR_VAR_2}!$"
+	.string "{PLAYER} found one {STR_VAR_1}\n"
+	.string "{STR_VAR_2}!$"
 
 gText_Sudowoodo_Attacked:: @ 82731BD
-	.string "The weird tree doesn't like the\nWAILMER PAIL!\pThe weird tree attacked!$"
+	.string "The weird tree doesn't like the\n"
+	.string "WAILMER PAIL!\p"
+	.string "The weird tree attacked!$"
 
 gText_LegendaryFlewAway:: @ 8273204
 	.string "The {STR_VAR_1} flew away!$"
 
 gText_PkmnTransferredSomeonesPC:: @ 8273216
-	.string "{STR_VAR_2} was transferred to\nSOMEONE'S PC.\pIt was placed in \nBOX “{STR_VAR_1}.”$"
+	.string "{STR_VAR_2} was transferred to\n"
+	.string "SOMEONE'S PC.\p"
+	.string "It was placed in \n"
+	.string "BOX “{STR_VAR_1}.”$"
 
 gText_PkmnTransferredLanettesPC:: @ 8273256
-	.string "{STR_VAR_2} was transferred to\nLANETTE'S PC.\pIt was placed in \nBOX “{STR_VAR_1}.”$"
+	.string "{STR_VAR_2} was transferred to\nLANETTE'S PC.\p"
+	.string "It was placed in \n"
+	.string "BOX “{STR_VAR_1}.”$"
 
 gText_PkmnBoxSomeonesPCFull:: @ 8273296
-	.string "BOX “{STR_VAR_3}” on\nSOMEONE'S PC was full.\p{STR_VAR_2} was transferred to\nBOX “{STR_VAR_1}.”$"
+	.string "BOX “{STR_VAR_3}” on\n"
+	.string "SOMEONE'S PC was full.\p"
+	.string "{STR_VAR_2} was transferred to\n"
+	.string "BOX “{STR_VAR_1}.”$"
 
 gText_PkmnBoxLanettesPCFull:: @ 82732D9
-	.string "BOX “{STR_VAR_3}” on\nLANETTE'S PC was full.\p{STR_VAR_2} was transferred to\nBOX “{STR_VAR_1}.”$"
+	.string "BOX “{STR_VAR_3}” on\n"
+	.string "LANETTE'S PC was full.\p"
+	.string "{STR_VAR_2} was transferred to\n"
+	.string "BOX “{STR_VAR_1}.”$"
 
-gUnknown_0827331C:: @ 827331C
-	.string "There's no more room for POKéMON!\pThe POKéMON BOXES are full and\ncan't accept any more!$"
+gText_NoMoreRoomForPokemon:: @ 827331C
+	.string "There's no more room for POKéMON!\p"
+	.string "The POKéMON BOXES are full and\n"
+	.string "can't accept any more!$"
 
 gText_NicknameThisPokemon:: @ 8273374
-	.string "Do you want to give a nickname to\nthis {STR_VAR_1}?$"
+	.string "Do you want to give a nickname to\n"
+	.string "this {STR_VAR_1}?$"
 
-gUnknown_0827339F:: @ 827339F
-	.string "There is a questionnaire.\nWould you like to fill it out?$"
+gText_FillOutQuestionnaire:: @ 827339F
+	.string "There is a questionnaire.\n"
+	.string "Would you like to fill it out?$"
 
-gUnknown_082733D8:: @ 82733D8
-	.string "Thank you for taking the time to\nfill out our questionnaire.\pYour feedback will be used for\nfuture reference.$"
+gText_ThankYouForTakingQuestionnaire:: @ 82733D8
+	.string "Thank you for taking the time to\n"
+	.string "fill out our questionnaire.\p"
+	.string "Your feedback will be used for\n"
+	.string "future reference.$"
 
 gUnknown_08273446:: @ 8273446
-	.string "Oh, hello!\nYou know those words?\pThat means you must know about\nthe MYSTERY GIFT.\pFrom now on, you should be\nreceiving MYSTERY GIFTS!$"
+	.string "Oh, hello!\n"
+	.string "You know those words?\p"
+	.string "That means you must know about\n"
+	.string "the MYSTERY GIFT.\p"
+	.string "From now on, you should be\n"
+	.string "receiving MYSTERY GIFTS!$"
 
 gUnknown_082734CC:: @ 82734CC
-	.string "Once you save your game, you can\naccess the MYSTERY GIFT.$"
+	.string "Once you save your game, you can\n"
+	.string "access the MYSTERY GIFT.$"
 
 gUnknown_08273506:: @ 8273506
-	.string "Oh, hello!\nYou know those words?\pThat means you must know about\nthe MYSTERY EVENT.$"
+	.string "Oh, hello!\n"
+	.string "You know those words?\p"
+	.string "That means you must know about\n"
+	.string "the MYSTERY EVENT.$"
 
 gUnknown_08273559:: @ 8273559
-	.string "Once you save your game, you can\naccess the MYSTERY EVENT.$"
+	.string "Once you save your game, you can\n"
+	.string "access the MYSTERY EVENT.$"
 
 gUnknown_08273594:: @ 8273594
-	.string "Thank you for using the MYSTERY\nEVENT System.\pYou must be {PLAYER}.\nThere is a ticket here for you.$"
+	.string "Thank you for using the MYSTERY\n"
+	.string "EVENT System.\p"
+	.string "You must be {PLAYER}.\n"
+	.string "There is a ticket here for you.$"
 
 gUnknown_082735F2:: @ 82735F2
-	.string "It appears to be for use at\nthe LILYCOVE CITY port.\pWhy not give it a try and see what\nit is about?$"
+	.string "It appears to be for use at\n"
+	.string "the LILYCOVE CITY port.\p"
+	.string "Why not give it a try and see what\n"
+	.string "it is about?$"
 
 gText_UnusualWeatherEnded_Rain:: @ 8273656
-	.string "The massive downpour appears to\nhave stopped…$"
+	.string "The massive downpour appears to\n"
+	.string "have stopped…$"
 
 gText_UnusualWeatherEnded_Sun:: @ 8273684
-	.string "The intense sunshine appears to\nhave subsided…$"
+	.string "The intense sunshine appears to\n"
+	.string "have subsided…$"
 
 EventScript_SelectWithoutRegisteredItem:: @ 82736B3
 	msgbox gText_SelectWithoutRegisteredItem, MSGBOX_SIGN
@@ -2726,7 +2797,7 @@ EventScript_Poison:: @ 82736BC
 	end
 
 EventScript_2736D9:: @ 82736D9
-	message gUnknown_08272DE3
+	message gText_PlayerWhitedOut
 	waitmessage
 	waitbuttonpress
 	special sub_80B05B4
@@ -2742,7 +2813,7 @@ EventScript_2736F4:: @ 82736F4
 	return
 
 EventScript_2736F8:: @ 82736F8
-	message gUnknown_08272DE3
+	message gText_PlayerWhitedOut
 	waitmessage
 	waitbuttonpress
 	setvar VAR_0x8004, 16
@@ -2769,11 +2840,12 @@ EventScript_2736F8:: @ 82736F8
 Common_EventScript_NopReturn:: @ 827374E
 	return
 
-EventScript_UnusedSetVarResult1:: @ 827374F
+@ Unused
+EventScript_CableClub_SetVarResult1:: @ 827374F
 	setvar VAR_RESULT, 1
 	return
 
-OldaleTown_PokemonCenter_2F_EventScript_273755:: @ 8273755
+EventScript_CableClub_SetVarResult0:: @ 8273755
 	setvar VAR_RESULT, 0
 	return
 
@@ -2837,30 +2909,14 @@ VerdanturfTown_PokemonCenter_2F_EventScript_273767:: @ 8273767
 	call OldaleTown_PokemonCenter_2F_EventScript_2776A4
 	end
 
-AncientTomb_EventScript_27376D:: @ 827376D
-AquaHideout_B1F_EventScript_27376D:: @ 827376D
-DesertRuins_EventScript_27376D:: @ 827376D
-IslandCave_EventScript_27376D:: @ 827376D
-MarineCave_End_EventScript_27376D:: @ 827376D
-NewMauville_Inside_EventScript_27376D:: @ 827376D
-Route119_EventScript_27376D:: @ 827376D
-TerraCave_End_EventScript_27376D:: @ 827376D
+Common_EventScript_RemoveStaticPokemon:: @ 827376D
 	fadescreenswapbuffers 1
 	removeobject VAR_LAST_TALKED
 	fadescreenswapbuffers 0
 	release
 	end
 
-AncientTomb_EventScript_273776:: @ 8273776
-BirthIsland_Exterior_EventScript_273776:: @ 8273776
-DesertRuins_EventScript_273776:: @ 8273776
-FarawayIsland_Interior_EventScript_273776:: @ 8273776
-IslandCave_EventScript_273776:: @ 8273776
-MarineCave_End_EventScript_273776:: @ 8273776
-NavelRock_Bottom_EventScript_273776:: @ 8273776
-NavelRock_Top_EventScript_273776:: @ 8273776
-SouthernIsland_Interior_EventScript_273776:: @ 8273776
-TerraCave_End_EventScript_273776:: @ 8273776
+Common_EventScript_LegendaryFlewAway:: @ 8273776
 	fadescreenswapbuffers 1
 	removeobject VAR_LAST_TALKED
 	fadescreenswapbuffers 0
@@ -2869,19 +2925,14 @@ TerraCave_End_EventScript_273776:: @ 8273776
 	release
 	end
 
-LittlerootTown_ProfessorBirchsLab_EventScript_27378B:: @ 827378B
-MossdeepCity_StevensHouse_EventScript_27378B:: @ 827378B
-Route119_WeatherInstitute_2F_EventScript_27378B:: @ 827378B
-RustboroCity_DevonCorp_2F_EventScript_27378B:: @ 827378B
+@ VAR_0x8004 here is used by ChangePokemonNickname
+Common_EventScript_GetGiftMonPartySlot:: @ 827378B
 	getpartysize
 	subvar VAR_RESULT, 1
 	copyvar VAR_0x8004, VAR_RESULT
 	return
 
-LittlerootTown_ProfessorBirchsLab_EventScript_273797:: @ 8273797
-MossdeepCity_StevensHouse_EventScript_273797:: @ 8273797
-Route119_WeatherInstitute_2F_EventScript_273797:: @ 8273797
-RustboroCity_DevonCorp_2F_EventScript_273797:: @ 8273797
+Common_EventScript_NameReceivedBoxMon:: @ 8273797
 	fadescreen 1
 	special ChangeBoxPokemonNickname
 	waitstate
@@ -2925,17 +2976,14 @@ LittlerootTown_ProfessorBirchsLab_EventScript_2737FF:: @ 82737FF
 	msgbox gText_PkmnBoxLanettesPCFull, MSGBOX_DEFAULT
 	return
 
-LittlerootTown_ProfessorBirchsLab_EventScript_273811:: @ 8273811
-MossdeepCity_StevensHouse_EventScript_273811:: @ 8273811
-Route119_WeatherInstitute_2F_EventScript_273811:: @ 8273811
-RustboroCity_DevonCorp_2F_EventScript_273811:: @ 8273811
-	msgbox gUnknown_0827331C, MSGBOX_DEFAULT
+Common_EventScript_NoMoreRoomForPokemon:: @ 8273811
+	msgbox gText_NoMoreRoomForPokemon, MSGBOX_DEFAULT
 	release
 	end
 
 EventScript_Questionnaire:: @ 827381B
 	lockall
-	msgbox gUnknown_0827339F, MSGBOX_YESNO
+	msgbox gText_FillOutQuestionnaire, MSGBOX_YESNO
 	compare VAR_RESULT, 0
 	goto_if_eq EventScript_2738FD
 	setvar VAR_0x8004, EASY_CHAT_TYPE_QUESTIONNAIRE
@@ -2992,7 +3040,7 @@ EventScript_2738FD:: @ 82738FD
 EventScript_2738FF:: @ 82738FF
 	applymovement VAR_0x8008, Common_Movement_FaceDown
 	waitmovement 0
-	msgbox gUnknown_082733D8, MSGBOX_DEFAULT
+	msgbox gText_ThankYouForTakingQuestionnaire, MSGBOX_DEFAULT
 	releaseall
 	end
 

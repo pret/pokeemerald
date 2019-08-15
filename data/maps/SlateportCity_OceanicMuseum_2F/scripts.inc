@@ -71,8 +71,8 @@ SlateportCity_OceanicMuseum_2F_EventScript_20BB00:: @ 820BB00
 	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceRight
 	waitmovement 0
 	msgbox SlateportCity_OceanicMuseum_2F_Text_20C2BE, MSGBOX_DEFAULT
-	setvar VAR_0x8004, 269
-	call SlateportCity_OceanicMuseum_2F_EventScript_2723E4
+	setvar VAR_0x8004, ITEM_DEVON_GOODS
+	call Common_EventScript_PlayerHandedOverTheItem
 	msgbox SlateportCity_OceanicMuseum_2F_Text_20C36C, MSGBOX_DEFAULT
 	closemessage
 	fadescreen 1

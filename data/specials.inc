@@ -429,7 +429,7 @@ gSpecials:: @ 81DBA64
 	def_special UnionRoomSpecial
 	def_special sub_801A42C
 	def_special sub_8016934
-	def_special sp182_move_string
+	def_special BufferUnionRoomPlayerName
 	def_special sub_801DC20
 	def_special sub_81B8958
 	def_special sub_8018090
@@ -523,7 +523,7 @@ gSpecials:: @ 81DBA64
 	def_special TryBufferWaldaPhrase
 	def_special DoWaldaNamingScreen
 	def_special TryGetWallpaperWithWaldaPhrase
-	def_special sub_8139ED0
+	def_special PlayerAtTrainerHillEntrance
 	def_special sub_813B968
 	def_special sub_80F8B94
 	def_special ShowTrainerHillRecords

@@ -105,7 +105,7 @@ TrainerHill_Entrance_EventScript_2681EE:: @ 82681EE
 
 TrainerHill_Entrance_EventScript_2681EF:: @ 82681EF
 	setvar VAR_0x800B, 2
-	call TrainerHill_Entrance_EventScript_27191E
+	call Common_EventScript_PkmnCenterNurse
 	waitmessage
 	waitbuttonpress
 	release
@@ -261,11 +261,11 @@ TrainerHill_Entrance_EventScript_2683BE:: @ 82683BE
 TrainerHill_Entrance_EventScript_2683C7:: @ 82683C7
 	lock
 	faceplayer
-	message gUnknown_08272A21
+	message gText_HowMayIServeYou
 	waitmessage
 	goto_if_set FLAG_SYS_GAME_CLEAR, TrainerHill_Entrance_EventScript_268402
 	pokemart TrainerHill_Entrance_Pokemart_2683E8
-	msgbox gUnknown_08272A3F, MSGBOX_DEFAULT
+	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
 	release
 	end
 
@@ -288,7 +288,7 @@ TrainerHill_Entrance_Pokemart_2683E8: @ 82683E8
 
 TrainerHill_Entrance_EventScript_268402:: @ 8268402
 	pokemart TrainerHill_Entrance_Pokemart_268414
-	msgbox gUnknown_08272A3F, MSGBOX_DEFAULT
+	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
 	release
 	end
 

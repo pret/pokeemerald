@@ -1077,9 +1077,9 @@ static void ReturnToMainRegistryMenu(u8 taskId)
 static void GoToSecretBasePCMainMenu(u8 taskId)
 {
     if (VarGet(VAR_CURRENT_SECRET_BASE) == 0)
-        ScriptContext1_SetupScript(gUnknown_0823B4E8);
+        ScriptContext1_SetupScript(EventScript_SecretBasePCCancel);
     else
-        ScriptContext1_SetupScript(gUnknown_0823B5E9);
+        ScriptContext1_SetupScript(EventScript_SecretBasePCStart);
 
     DestroyTask(taskId);
 }

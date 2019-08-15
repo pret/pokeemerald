@@ -271,7 +271,7 @@ LittlerootTown_BrendansHouse_2F_EventScript_1F863F:: @ 81F863F
 	end
 
 LittlerootTown_BrendansHouse_2F_EventScript_1F864C:: @ 81F864C
-	msgbox gUnknown_08272CD5, MSGBOX_DEFAULT
+	msgbox gText_PokemonTrainerSchoolEmail, MSGBOX_DEFAULT
 	releaseall
 	end
 

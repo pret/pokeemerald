@@ -1,13 +1,13 @@
-gUnknown_082A5C9C:: @ 82A5C9C
+gBirchDexRatingText_AreYouCurious:: @ 82A5C9C
 	.string "PROF. BIRCH: Ah, {PLAYER}{KUN}!\p"
 	.string "Are you curious about how your\n"
 	.string "POKéDEX is coming along?$"
 
-Route101_Text_2A5CEB: @ 82A5CEB
+gBirchDexRatingText_Cancel: @ 82A5CEB
 	.string "Hm? Oh, you haven't caught enough\n"
 	.string "POKéMON to make it worthwhile.$"
 
-gUnknown_082A5D2C:: @ 82A5D2C
+gBirchDexRatingText_SoYouveSeenAndCaught:: @ 82A5D2C
 	.string "Hmhm…\p"
 	.string "So, you've seen {STR_VAR_1} POKéMON,\n"
 	.string "and you've caught {STR_VAR_2} POKéMON…$"
@@ -108,7 +108,7 @@ gBirchDexRatingText_DexCompleted:: @ 82A6312
 	.string "Congratulations!\n"
 	.string "Your POKéDEX is complete!$"
 
-gUnknown_082A633D:: @ 82A633D
+gBirchDexRatingText_OnANationwideBasis:: @ 82A633D
 	.string "Hmhm…\n"
 	.string "On a nationwide basis…\p"
 	.string "You've seen {STR_VAR_1} POKéMON,\n"

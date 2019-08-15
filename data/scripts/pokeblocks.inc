@@ -679,7 +679,7 @@ EventScript_PblocLink_DifferentSelections: @ 8294183
 
 EventScript_PblocLink_CloseLink: @ 8294190
 	special CloseLink
-	msgbox gUnknown_08272D9C, MSGBOX_DEFAULT
+	msgbox gText_PokeblockLinkCanceled, MSGBOX_DEFAULT
 	releaseall
 	end
 

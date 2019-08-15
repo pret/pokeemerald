@@ -5,12 +5,12 @@ RustboroCity_PokemonCenter_1F_MapScripts:: @ 8214D62
 
 RustboroCity_PokemonCenter_1F_OnTransition: @ 8214D6D
 	setrespawn HEAL_LOCATION_RUSTBORO_CITY
-	call RustboroCity_PokemonCenter_1F_EventScript_2718DE
+	call Common_EventScript_UpdateBrineyLocation
 	end
 
 RustboroCity_PokemonCenter_1F_EventScript_214D76:: @ 8214D76
 	setvar VAR_0x800B, 1
-	call RustboroCity_PokemonCenter_1F_EventScript_27191E
+	call Common_EventScript_PkmnCenterNurse
 	waitmessage
 	waitbuttonpress
 	release
