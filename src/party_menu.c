@@ -5576,6 +5576,12 @@ void ItemUseCB_AbilityCapsule(u8 taskId, TaskFunc task)
     gTasks[taskId].func = Task_AbilityCapsule;
 }
 
+#undef tState
+#undef tSpecies
+#undef tAbilityNum
+#undef tMonId
+#undef tOldFunc
+
 static void sub_81B672C(u8 taskId)
 {
     GetMonNickname(&gPlayerParty[gUnknown_0203CEC8.slotId], gStringVar1);
