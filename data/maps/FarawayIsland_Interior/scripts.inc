@@ -62,7 +62,7 @@ FarawayIsland_Interior_EventScript_267DA2:: @ 8267DA2
 	waitmovement 0
 	applymovement 1, FarawayIsland_Interior_Movement_267DCE
 	waitmovement 0
-	moveobjectoffscreen 1
+	copyobjectxytoperm 1
 	setvar VAR_TEMP_1, 1
 	releaseall
 	end

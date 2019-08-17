@@ -236,7 +236,7 @@ MossdeepCity_SpaceCenter_1F_EventScript_22321F:: @ 822321F
 	msgbox MossdeepCity_SpaceCenter_1F_Text_223B90, MSGBOX_DEFAULT
 	trainerbattle_no_intro TRAINER_GRUNT_23, MossdeepCity_SpaceCenter_1F_Text_223BC2
 	setflag FLAG_DEFEATED_GRUNT_SPACE_CENTER_1F
-	moveobjectoffscreen 9
+	copyobjectxytoperm 9
 	switch VAR_FACING
 	case 3, MossdeepCity_SpaceCenter_1F_EventScript_223278
 	case 3, MossdeepCity_SpaceCenter_1F_EventScript_223289

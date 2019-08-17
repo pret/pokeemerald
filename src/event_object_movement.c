@@ -2626,7 +2626,7 @@ void TryOverrideTemplateCoordsForEventObject(const struct EventObject *eventObje
     }
 }
 
-void sub_808F254(u8 localId, u8 mapNum, u8 mapGroup)
+void OverrideTemplateCoordsForEventObjectByLocalId(u8 localId, u8 mapNum, u8 mapGroup)
 {
     u8 eventObjectId;
 

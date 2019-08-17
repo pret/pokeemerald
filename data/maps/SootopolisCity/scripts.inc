@@ -1366,14 +1366,14 @@ SootopolisCity_EventScript_1E646F:: @ 81E646F
 SootopolisCity_EventScript_1E64B2:: @ 81E64B2
 	applymovement 18, SootopolisCity_Movement_1E64EC
 	waitmovement 0
-	moveobjectoffscreen 18
+	copyobjectxytoperm 18
 	setvar VAR_SOOTOPOLIS_STATE, 1
 	return
 
 SootopolisCity_EventScript_1E64C5:: @ 81E64C5
 	applymovement 18, SootopolisCity_Movement_1E64EF
 	waitmovement 0
-	moveobjectoffscreen 18
+	copyobjectxytoperm 18
 	setvar VAR_SOOTOPOLIS_STATE, 2
 	return
 

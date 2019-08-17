@@ -77,7 +77,7 @@ Route119_WeatherInstitute_2F_EventScript_26FFC8:: @ 826FFC8
 	fadescreen 0
 	applymovement 5, Route119_WeatherInstitute_2F_Movement_270187
 	waitmovement 0
-	moveobjectoffscreen 5
+	copyobjectxytoperm 5
 	goto Route119_WeatherInstitute_2F_EventScript_27004D
 	end
 

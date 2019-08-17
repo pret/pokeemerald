@@ -44,7 +44,7 @@ VictoryRoad_1F_EventScript_235DE1:: @ 8235DE1
 	trainerbattle_no_intro TRAINER_WALLY_1, VictoryRoad_1F_Text_235FFC
 	msgbox VictoryRoad_1F_Text_236020, MSGBOX_DEFAULT
 	clearflag FLAG_HIDE_VICTORY_ROAD_ENTRANCE_WALLY
-	moveobjectoffscreen 4
+	copyobjectxytoperm 4
 	setflag FLAG_DEFEATED_WALLY_VICTORY_ROAD
 	copyvar VAR_VICTORY_ROAD_1F_STATE, VAR_0x8008
 	releaseall

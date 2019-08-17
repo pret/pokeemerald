@@ -1102,11 +1102,11 @@ bool8 ScrCmd_setobjectxyperm(struct ScriptContext *ctx)
     return FALSE;
 }
 
-bool8 ScrCmd_moveobjectoffscreen(struct ScriptContext *ctx)
+bool8 ScrCmd_copyobjectxytoperm(struct ScriptContext *ctx)
 {
     u16 localId = VarGet(ScriptReadHalfword(ctx));
 
-    sub_808F254(localId, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
+    OverrideTemplateCoordsForEventObjectByLocalId(localId, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
     return FALSE;
 }
 

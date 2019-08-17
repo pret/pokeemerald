@@ -114,7 +114,7 @@ Route104_EventScript_1ECD4B:: @ 81ECD4B
 	waitmovement 0
 	applymovement 34, Route104_Movement_1ECDCA
 	waitmovement 0
-	moveobjectoffscreen 34
+	copyobjectxytoperm 34
 	msgbox Route104_Text_1EDCED, MSGBOX_YESNO
 	compare VAR_RESULT, 1
 	goto_if_eq Route104_EventScript_1ECDED
@@ -203,7 +203,7 @@ Route104_EventScript_1ECE6F:: @ 81ECE6F
 	waitmovement 0
 	applymovement 34, Route104_Movement_1ECDCA
 	waitmovement 0
-	moveobjectoffscreen 34
+	copyobjectxytoperm 34
 	msgbox Route104_Text_1EE009, MSGBOX_YESNO
 	compare VAR_RESULT, 1
 	goto_if_eq Route104_EventScript_1ECF09
@@ -416,7 +416,7 @@ Route104_EventScript_1ED139:: @ 81ED139
 	copyvar VAR_BRINEY_LOCATION, VAR_0x8008
 	resetobjectpriority EVENT_OBJ_ID_PLAYER, MAP_ROUTE104
 	resetobjectpriority 2, MAP_DEWFORD_TOWN
-	moveobjectoffscreen 2
+	copyobjectxytoperm 2
 	setvar VAR_BOARD_BRINEY_BOAT_ROUTE104_STATE, 0
 	goto_if_unset FLAG_DELIVERED_STEVEN_LETTER, Route104_EventScript_1ED1B4
 	goto_if_set FLAG_DELIVERED_STEVEN_LETTER, Route104_EventScript_1ED1BE

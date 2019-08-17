@@ -765,7 +765,7 @@
 	.2byte \y
 	.endm
 
-	.macro moveobjectoffscreen index:req
+	.macro copyobjectxytoperm index:req
 	.byte 0x64
 	.2byte \index
 	.endm

@@ -104,7 +104,7 @@ void sub_808E75C(s16, s16);
 void EventObjectGetLocalIdAndMap(struct EventObject *eventObject, void *localId, void *mapNum, void *mapGroup);
 void ShiftEventObjectCoords(struct EventObject *, s16, s16);
 void sub_808EB08(struct EventObject *, s16, s16);
-void sub_808F254(u8, u8, u8);
+void OverrideTemplateCoordsForEventObjectByLocalId(u8, u8, u8);
 void InitEventObjectPalettes(u8 palSlot);
 void UpdateEventObjectCurrentMovement(struct EventObject *, struct Sprite *, bool8(struct EventObject *, struct Sprite *));
 u8 EventObjectFaceOppositeDirection(struct EventObject *, u8);
