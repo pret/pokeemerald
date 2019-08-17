@@ -143,7 +143,7 @@ struct Unk201C000
 struct CreditsEntry
 {
     u8 var_0;
-    u8 isTitle;
+    bool8 isTitle;
     const u8 *text;
 };
 
@@ -1177,14 +1177,14 @@ static void sub_81755A4(void)
         Free(ptr);
 }
 
-static void PrintCreditsText(const u8 *string, u8 y, u8 isTitle)
+static void PrintCreditsText(const u8 *string, u8 y, bool8 isTitle)
 {
     u8 x;
     u8 color[3];
 
     color[0] = 0;
 
-    if (isTitle == 1)
+    if (isTitle == TRUE)
     {
         color[1] = 3;
         color[2] = 4;
