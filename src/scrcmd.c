@@ -466,6 +466,9 @@ bool8 ScrCmd_addvar(struct ScriptContext *ctx)
 {
     u16 *ptr = GetVarPointer(ScriptReadHalfword(ctx));
     *ptr += ScriptReadHalfword(ctx);
+    // Note: addvar doesn't support adding from a variable in vanilla. If you were to 
+    // add a VarGet() to the above, make sure you change the `addvar VAR_0x8006, 65535`
+    // in the contest scripts to `subvar VAR_0x8006, 1`, else contests will break.
     return FALSE;
 }
 
