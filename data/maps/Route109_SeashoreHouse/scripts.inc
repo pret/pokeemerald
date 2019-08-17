@@ -43,8 +43,6 @@ Route109_SeashoreHouse_EventScript_269460:: @ 8269460
 	goto_if_eq Route109_SeashoreHouse_EventScript_269484
 	msgbox Route109_SeashoreHouse_Text_2697EF, MSGBOX_DEFAULT
 	hidemoneybox
-	nop
-	nop
 	release
 	end
 
@@ -57,28 +55,21 @@ Route109_SeashoreHouse_EventScript_269484:: @ 8269484
 	goto_if_eq Route109_SeashoreHouse_EventScript_2694D5
 	msgbox Route109_SeashoreHouse_Text_2697C8, MSGBOX_DEFAULT
 	takemoney 0x12c, 0
-	updatemoneybox 0, 0
-	nop
+	updatemoneybox 0,0
 	giveitem_std ITEM_SODA_POP
 	hidemoneybox
-	nop
-	nop
 	release
 	end
 
 Route109_SeashoreHouse_EventScript_2694C8:: @ 82694C8
 	msgbox Route109_SeashoreHouse_Text_2697D5, MSGBOX_DEFAULT
 	hidemoneybox
-	nop
-	nop
 	release
 	end
 
 Route109_SeashoreHouse_EventScript_2694D5:: @ 82694D5
 	msgbox gText_TooBadBagIsFull, MSGBOX_DEFAULT
 	hidemoneybox
-	nop
-	nop
 	release
 	end
 

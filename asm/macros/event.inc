@@ -1082,6 +1082,8 @@
 	@ Hides the secondary box spawned by showmoney.
 	.macro hidemoneybox
 	.byte 0x94
+	.byte 0
+	.byte 0
 	.endm
 
 	@ Updates the secondary box spawned by showmoney. Consumes but does not use arguments.
@@ -1089,6 +1091,7 @@
 	.byte 0x95
 	.byte \x
 	.byte \y
+	.byte 0
 	.endm
 
 	@ Gets the price reduction for the index given. In FireRed, this command is a nop.
