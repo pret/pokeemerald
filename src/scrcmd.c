@@ -62,7 +62,7 @@ static EWRAM_DATA u16 sMovingNpcMapBank = 0;
 static EWRAM_DATA u16 sMovingNpcMapId = 0;
 static EWRAM_DATA u16 sFieldEffectScriptId = 0;
 
-IWRAM_DATA u8 gUnknown_03000F30;
+IWRAM_DATA u8 gBrailleWindowId;
 
 extern const SpecialFunc gSpecials[];
 extern const u8 *gStdScripts[];
@@ -1515,13 +1515,13 @@ bool8 ScrCmd_braillemessage(struct ScriptContext *ctx)
     yText = (yText - yWindow - 1) * 8;
 
     winTemplate = CreateWindowTemplate(0, xWindow, yWindow + 1, width, height, 0xF, 0x1);
-    gUnknown_03000F30 = AddWindow(&winTemplate);
-    LoadUserWindowBorderGfx(gUnknown_03000F30, 0x214, 0xE0);
-    DrawStdWindowFrame(gUnknown_03000F30, 0);
-    PutWindowTilemap(gUnknown_03000F30);
-    FillWindowPixelBuffer(gUnknown_03000F30, PIXEL_FILL(1));
-    AddTextPrinterParameterized(gUnknown_03000F30, 6, gStringVar4, xText, yText, 0xFF, 0x0);
-    CopyWindowToVram(gUnknown_03000F30, 3);
+    gBrailleWindowId = AddWindow(&winTemplate);
+    LoadUserWindowBorderGfx(gBrailleWindowId, 0x214, 0xE0);
+    DrawStdWindowFrame(gBrailleWindowId, 0);
+    PutWindowTilemap(gBrailleWindowId);
+    FillWindowPixelBuffer(gBrailleWindowId, PIXEL_FILL(1));
+    AddTextPrinterParameterized(gBrailleWindowId, 6, gStringVar4, xText, yText, 0xFF, 0x0);
+    CopyWindowToVram(gBrailleWindowId, 3);
     return FALSE;
 }
 
@@ -2254,8 +2254,8 @@ bool8 ScrCmd_setmonmetlocation(struct ScriptContext *ctx)
 
 void sub_809BDB4(void)
 {
-    ClearStdWindowAndFrame(gUnknown_03000F30, 1);
-    RemoveWindow(gUnknown_03000F30);
+    ClearStdWindowAndFrame(gBrailleWindowId, 1);
+    RemoveWindow(gBrailleWindowId);
 }
 
 bool8 ScrCmd_buffertrainerclassname(struct ScriptContext *ctx)
