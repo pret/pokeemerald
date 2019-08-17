@@ -26,8 +26,6 @@ SlateportCity_OceanicMuseum_1F_EventScript_20ADC1:: @ 820ADC1
 	goto_if_eq SlateportCity_OceanicMuseum_1F_EventScript_20ADE8
 	closemessage
 	hidemoneybox
-	nop
-	nop
 	applymovement EVENT_OBJ_ID_PLAYER, SlateportCity_OceanicMuseum_1F_Movement_20AE4B
 	waitmovement 0
 	releaseall
@@ -39,13 +37,10 @@ SlateportCity_OceanicMuseum_1F_EventScript_20ADE8:: @ 820ADE8
 	goto_if_eq SlateportCity_OceanicMuseum_1F_EventScript_20AE18
 	playse SE_REGI
 	takemoney 0x32, 0
-	updatemoneybox 0, 0
-	nop
+	updatemoneybox 0,0
 	msgbox SlateportCity_OceanicMuseum_1F_Text_20B026, MSGBOX_DEFAULT
 	setvar VAR_SLATEPORT_MUSEUM_1F_STATE, 1
 	hidemoneybox
-	nop
-	nop
 	releaseall
 	end
 
@@ -54,8 +49,6 @@ SlateportCity_OceanicMuseum_1F_EventScript_20AE18:: @ 820AE18
 	msgbox SlateportCity_OceanicMuseum_1F_Text_20B03D, MSGBOX_DEFAULT
 	closemessage
 	hidemoneybox
-	nop
-	nop
 	applymovement EVENT_OBJ_ID_PLAYER, SlateportCity_OceanicMuseum_1F_Movement_20AE4B
 	waitmovement 0
 	releaseall
@@ -65,8 +58,6 @@ SlateportCity_OceanicMuseum_1F_EventScript_20AE39:: @ 820AE39
 	msgbox SlateportCity_OceanicMuseum_1F_Text_20B075, MSGBOX_DEFAULT
 	setvar VAR_SLATEPORT_MUSEUM_1F_STATE, 1
 	hidemoneybox
-	nop
-	nop
 	releaseall
 	end
 

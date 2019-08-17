@@ -1083,6 +1083,8 @@
 	@ Hides the secondary box spawned by showmoney.
 	.macro hidemoneybox
 	.byte 0x94
+	.byte 0 @ leftovers from ruby/sapphire. x, y params not used
+	.byte 0
 	.endm
 
 	@ Updates the secondary box spawned by showmoney. Consumes but does not use arguments.
@@ -1090,6 +1092,7 @@
 	.byte 0x95
 	.byte \x
 	.byte \y
+	.byte 0 @ 1 = don't perform this command. Always 0 in vanilla. Why this is a thing is beyond me.
 	.endm
 
 	@ Gets the price reduction for the index given. In FireRed, this command is a nop.
