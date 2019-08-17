@@ -4818,7 +4818,7 @@ bool8 PokemonUseItemEffects(struct Pokemon *mon, u16 item, u8 partyIndex, u8 mov
                             if (evCount >= MAX_TOTAL_EVS)
                                 return TRUE;
 
-                            if (itemEffect[10])
+                            if (itemEffect[10] & ITEM10_IS_VITAMIN)
                                 evCap = 100;
                             else
                                 evCap = 252;
@@ -5028,7 +5028,7 @@ bool8 PokemonUseItemEffects(struct Pokemon *mon, u16 item, u8 partyIndex, u8 mov
                             if (evCount >= MAX_TOTAL_EVS)
                                 return TRUE;
 
-                            if (itemEffect[10])
+                            if (itemEffect[10] & ITEM10_IS_VITAMIN)
                                 evCap = 100;
                             else
                                 evCap = 252;

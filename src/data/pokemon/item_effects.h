@@ -180,7 +180,7 @@ const u8 gItemEffect_HPUp[11] = {
     [7] = 5,
     [8] = 3,
     [9] = 2,
-    [10] = 1,
+    [10] = ITEM10_IS_VITAMIN,
 };
 
 const u8 gItemEffect_Protein[11] = {
@@ -190,7 +190,7 @@ const u8 gItemEffect_Protein[11] = {
     [7] = 5,
     [8] = 3,
     [9] = 2,
-    [10] = 1,
+    [10] = ITEM10_IS_VITAMIN,
 };
 
 const u8 gItemEffect_Iron[11] = {
@@ -199,7 +199,7 @@ const u8 gItemEffect_Iron[11] = {
     [7] = 5,
     [8] = 3,
     [9] = 2,
-    [10] = 1,
+    [10] = ITEM10_IS_VITAMIN,
 };
 
 const u8 gItemEffect_Carbos[11] = {
@@ -208,7 +208,7 @@ const u8 gItemEffect_Carbos[11] = {
     [7] = 5,
     [8] = 3,
     [9] = 2,
-    [10] = 1,
+    [10] = ITEM10_IS_VITAMIN,
 };
 
 const u8 gItemEffect_Calcium[11] = {
@@ -217,7 +217,7 @@ const u8 gItemEffect_Calcium[11] = {
     [7] = 5,
     [8] = 3,
     [9] = 2,
-    [10] = 1,
+    [10] = ITEM10_IS_VITAMIN,
 };
 
 const u8 gItemEffect_Zinc[11] = {
@@ -226,7 +226,7 @@ const u8 gItemEffect_Zinc[11] = {
     [7] = 5,
     [8] = 3,
     [9] = 2,
-    [10] = 1,
+    [10] = ITEM10_IS_VITAMIN,
 };
 
 const u8 gItemEffect_HpWing[11] = {

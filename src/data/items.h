@@ -1216,8 +1216,8 @@ const struct Item gItems[] =
         .holdEffectParam = 0,
         .description = sAbilityCapsuleDesc,
         .pocket = POCKET_ITEMS,
-        .type = 4,
-        .fieldUseFunc = ItemUseOutOfBattle_CannotUse, // Placeholder
+        .type = 1,
+        .fieldUseFunc = ItemUseOutOfBattle_AbilityCapsule,
         .secondaryId = 0,
     },
 
