@@ -70,9 +70,9 @@ MossdeepCity_SpaceCenter_2F_EventScript_223E09:: @ 8223E09
 	applymovement 7, MossdeepCity_SpaceCenter_2F_Movement_223E89
 	waitmovement 0
 	setvar VAR_MOSSDEEP_SPACE_CENTER_STATE_2, 2
-	moveobjectoffscreen 5
-	moveobjectoffscreen 7
-	moveobjectoffscreen 6
+	copyobjectxytoperm 5
+	copyobjectxytoperm 7
+	copyobjectxytoperm 6
 	releaseall
 	end
 
