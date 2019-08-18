@@ -1,7 +1,7 @@
-AbandonedShip_CaptainsOffice_MapScripts:: @ 82387E1
+AbandonedShip_CaptainsOffice_MapScripts::
 	.byte 0
 
-AbandonedShip_CaptainsOffice_EventScript_2387E2:: @ 82387E2
+AbandonedShip_CaptainsOffice_EventScript_2387E2::
 	lock
 	faceplayer
 	goto_if_set FLAG_EXCHANGED_SCANNER, AbandonedShip_CaptainsOffice_EventScript_23881A
@@ -13,30 +13,31 @@ AbandonedShip_CaptainsOffice_EventScript_2387E2:: @ 82387E2
 	release
 	end
 
-AbandonedShip_CaptainsOffice_EventScript_238810:: @ 8238810
+AbandonedShip_CaptainsOffice_EventScript_238810::
 	msgbox AbandonedShip_CaptainsOffice_Text_23889D, MSGBOX_DEFAULT
 	release
 	end
 
-AbandonedShip_CaptainsOffice_EventScript_23881A:: @ 823881A
+AbandonedShip_CaptainsOffice_EventScript_23881A::
 	msgbox AbandonedShip_CaptainsOffice_Text_238918, MSGBOX_DEFAULT
 	release
 	end
 
-AbandonedShip_CaptainsOffice_Text_238824: @ 8238824
-	.string "I'm investigating this ship on behalf\n"
-	.string "of CAPT. STERN.\p"
-	.string "He also asked me to find a SCANNER,\n"
-	.string "but I haven't had any success…$"
+AbandonedShip_CaptainsOffice_Text_238824:
+	.string "해양관장님의 부탁으로\n"
+	.string "이 배의 조사를 하고 있었어\p"
+	.string "조사하는 김에 탐지기를\n"
+	.string "찾아 달라고도 하셨는데\l"
+	.string "찾을 수가 없었어...$"
 
-AbandonedShip_CaptainsOffice_Text_23889D: @ 823889D
-	.string "Oh! That's a SCANNER!\p"
-	.string "Listen, can I get you to deliver that\n"
-	.string "to CAPT. STERN?\p"
-	.string "I want to investigate this ship a\n"
-	.string "little more.$"
+AbandonedShip_CaptainsOffice_Text_23889D:
+	.string "앗! 탐지기잖아!\p"
+	.string "...괜찮으면 그거\n"
+	.string "해양관장님에게\l"
+	.string "전해 주지 않을래?\p"
+	.string "난 좀 더 여기를 조사하고 싶거든$"
 
-AbandonedShip_CaptainsOffice_Text_238918: @ 8238918
-	.string "This ship is called S.S. CACTUS.\n"
-	.string "It seems to be from an earlier era.$"
+AbandonedShip_CaptainsOffice_Text_238918:
+	.string "이 배는 캑터스호라고 불리고 있어\n"
+	.string "조금 오래전 배인 것 같아$"
 

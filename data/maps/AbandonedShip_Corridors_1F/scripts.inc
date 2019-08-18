@@ -1,26 +1,27 @@
-AbandonedShip_Corridors_1F_MapScripts:: @ 82379A4
+AbandonedShip_Corridors_1F_MapScripts::
 	.byte 0
 
-AbandonedShip_Corridors_1F_EventScript_2379A5:: @ 82379A5
+AbandonedShip_Corridors_1F_EventScript_2379A5::
 	msgbox AbandonedShip_Corridors_1F_Text_237A60, MSGBOX_NPC
 	end
 
-AbandonedShip_Corridors_1F_EventScript_2379AE:: @ 82379AE
+AbandonedShip_Corridors_1F_EventScript_2379AE::
 	trainerbattle_single TRAINER_CHARLIE, AbandonedShip_Corridors_1F_Text_2379C5, AbandonedShip_Corridors_1F_Text_237A01
 	msgbox AbandonedShip_Corridors_1F_Text_237A1B, MSGBOX_AUTOCLOSE
 	end
 
-AbandonedShip_Corridors_1F_Text_2379C5: @ 82379C5
-	.string "What's so funny about having my inner\n"
-	.string "tube aboard the ship?$"
+AbandonedShip_Corridors_1F_Text_2379C5:
+	.string "배 안에서\n"
+	.string "튜브를 끼는 게 뭐가 그렇게 웃겨?$"
 
-AbandonedShip_Corridors_1F_Text_237A01: @ 8237A01
-	.string "Whoa, you overwhelmed me!$"
+AbandonedShip_Corridors_1F_Text_237A01:
+	.string "압도당했다...$"
 
-AbandonedShip_Corridors_1F_Text_237A1B: @ 8237A1B
-	.string "It's not easy throwing POKé BALLS\n"
-	.string "while hanging on to an inner tube!$"
+AbandonedShip_Corridors_1F_Text_237A1B:
+	.string "튜브를 끼고 있으면\n"
+	.string "몬스터볼을 던지기 어려워$"
 
-AbandonedShip_Corridors_1F_Text_237A60: @ 8237A60
-	.string "Isn't it fun here?\n"
-	.string "I get excited just being here!$"
+AbandonedShip_Corridors_1F_Text_237A60:
+	.string "여긴 참 재미있구나!\n"
+	.string "여기에 있는 것만으로도 두근거려!$"
+

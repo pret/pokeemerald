@@ -1,13 +1,12 @@
-AbandonedShip_Rooms2_B1F_MapScripts:: @ 8238024
+AbandonedShip_Rooms2_B1F_MapScripts::
 	.byte 0
 
-AbandonedShip_Rooms2_B1F_EventScript_238025:: @ 8238025
+AbandonedShip_Rooms2_B1F_EventScript_238025::
 	msgbox AbandonedShip_Rooms2_B1F_Text_23802E, MSGBOX_NPC
 	end
 
-AbandonedShip_Rooms2_B1F_Text_23802E: @ 823802E
-	.string "This is a perfect place to go exploring!\n"
-	.string "It's exciting here!\p"
-	.string "I bet there're amazing treasures on\n"
-	.string "board.$"
+AbandonedShip_Rooms2_B1F_Text_23802E:
+	.string "탐험하기에 딱 좋은 곳이라\n"
+	.string "두근거림이 멈추지 않아!\p"
+	.string "분명 엄청난 보물이 있을거야!$"
 
