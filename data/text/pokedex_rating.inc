@@ -1,115 +1,106 @@
-gUnknown_082A5C9C:: @ 82A5C9C
-	.string "PROF. BIRCH: Ah, {PLAYER}{KUN}!\p"
-	.string "Are you curious about how your\n"
-	.string "POKéDEX is coming along?$"
+gUnknown_082A5C9C::
+	.string "털보박사: 오오 {PLAYER}{KUN}!\p"
+	.string "포켓몬 도감의 상태를\n"
+	.string "보여 주겠니?$"
 
-Route101_Text_2A5CEB: @ 82A5CEB
-	.string "Hm? Oh, you haven't caught enough\n"
-	.string "POKéMON to make it worthwhile.$"
+Route101_Text_2A5CEB:
+.string "응? 보여 줄 정도로\n"
+	.string "포켓몬을 잡지 않았구나$"
 
-gUnknown_082A5D2C:: @ 82A5D2C
-	.string "Hmhm…\p"
-	.string "So, you've seen {STR_VAR_1} POKéMON,\n"
-	.string "and you've caught {STR_VAR_2} POKéMON…$"
+gUnknown_082A5D2C::
+	.string "흠흠...\p"
+	.string "발견한 포켓몬 {STR_VAR_1}마리,\n"
+	.string "잡은 포켓몬 {STR_VAR_2}마리군...$"
 
-gBirchDexRatingText_LessThan10:: @ 82A5D6C
-	.string "Go into grassy areas more and look\n"
-	.string "for POKéMON more carefully.$"
+gBirchDexRatingText_LessThan10::
+	.string "좀 더 풀숲에 들어가서\n"
+	.string "포켓몬을 찾아보도록 해!$"
 
-gBirchDexRatingText_LessThan20:: @ 82A5DAB
-	.string "I guess you're getting the hang\n"
-	.string "of it. But, it gets harder from here.$"
+gBirchDexRatingText_LessThan20::
+	.string "익숙해졌나 보구나\n"
+	.string "하지만 앞으로가 큰일이라고!$"
 
-gBirchDexRatingText_LessThan30:: @ 82A5DF1
-	.string "Some POKéMON only appear in\n"
-	.string "certain areas.\l"
-	.string "You must be persistent.$"
+gBirchDexRatingText_LessThan30::
+	.string "정해진 장소에서만 발견되는\n"
+	.string "포켓몬은 집요하게 찾는 수밖에 없어!$"
 
-gBirchDexRatingText_LessThan40:: @ 82A5E34
-	.string "Well, it could use more quantity,\n"
-	.string "but this is looking more like\l"
-	.string "a POKéDEX now.$"
+gBirchDexRatingText_LessThan40::
+	.string "아직 수는 많지 않지만\n"
+	.string "조금은 포켓몬 도감다워졌구나$"
 
-gBirchDexRatingText_LessThan50:: @ 82A5E83
-	.string "This is coming along pretty good.\n"
-	.string "Keep up the effort.$"
+gBirchDexRatingText_LessThan50::
+	.string "제법 괜찮은 느낌이네!\n"
+	.string "이 상태로 열심히 해봐$"
 
-gBirchDexRatingText_LessThan60:: @ 82A5EB9
-	.string "Are you using any RODS?\n"
-	.string "There are many POKéMON in the sea.$"
+gBirchDexRatingText_LessThan60::
+	.string "낚싯대는 사용하고 있니?\n"
+	.string "바다에도 포켓몬은 많이 있단다$"
 
-gBirchDexRatingText_LessThan70:: @ 82A5EF4
-	.string "Instead of just catching POKéMON,\n"
-	.string "how about making them evolve, too?$"
+gBirchDexRatingText_LessThan70::
+	.string "포켓몬을 잡지만 말고\n"
+	.string "한번 진화시켜보는 건 어때?$"
 
-gBirchDexRatingText_LessThan80:: @ 82A5F39
-	.string "This is going to be a fantastic\n"
-	.string "POKéDEX.\l"
-	.string "That's the feeling I'm getting.$"
+gBirchDexRatingText_LessThan80::
+	.string "멋진 포켓몬 도감이 될 것 같군\n"
+	.string "그런 예감이 많이 들어!$"
 
-gBirchDexRatingText_LessThan90:: @ 82A5F82
-	.string "You've collected this many…\n"
-	.string "Your talent is remarkable!$"
+gBirchDexRatingText_LessThan90::
+	.string "이만큼이나 모으다니...\n"
+	.string "너의 재능은 대단해!$"
 
-gBirchDexRatingText_LessThan100:: @ 82A5FB9
-	.string "Have you visited the SAFARI ZONE?\p"
-	.string "I hear there are some POKéMON that\n"
-	.string "can only be caught there.$"
+gBirchDexRatingText_LessThan100::
+	.string "사파리존에는 가봤니?\n"
+	.string "거기서만 잡을 수 있는\l"
+	.string "포켓몬도 있다고 하더라!$"
 
-gBirchDexRatingText_LessThan110:: @ 82A6018
-	.string "You've finally reached\n"
-	.string "the 100-kind mark.\p"
-	.string "This is an impressive POKéDEX!$"
+gBirchDexRatingText_LessThan110::
+	.string "드디어 100종류를 넘었군!\n"
+	.string "포켓몬 도감으로서 훌륭해!$"
 
-gBirchDexRatingText_LessThan120:: @ 82A6061
-	.string "There might be POKéMON that can be\n"
-	.string "found using ROCK SMASH.$"
+gBirchDexRatingText_LessThan120::
+	.string "...그러고 보니 바위깨기를 사용하면\n"
+	.string "발견되는 포켓몬도 있다지$"
 
-gBirchDexRatingText_LessThan130:: @ 82A609C
-	.string "You should get some more POKéMON\n"
-	.string "by trading with others.$"
+gBirchDexRatingText_LessThan130::
+	.string "포켓몬 교환을 하면\n"
+	.string "더 모을 수 있을지도 몰라$"
 
-gBirchDexRatingText_LessThan140:: @ 82A60D5
-	.string "I've heard of POKéMON that evolve\n"
-	.string "when they come to fully love their\l"
-	.string "TRAINERS.$"
+gBirchDexRatingText_LessThan140::
+	.string "친해지면 진화하는\n"
+	.string "포켓몬도 있다고 한다!$"
 
-gBirchDexRatingText_LessThan150:: @ 82A6124
-	.string "I had no idea that there were so\n"
-	.string "many POKéMON species in the HOENN\l"
-	.string "region.$"
+gBirchDexRatingText_LessThan150::
+	.string "호연지방에는 이렇게나\n"
+	.string "많은 포켓몬이 있었던 건가...$"
 
-gBirchDexRatingText_LessThan160:: @ 82A616F
-	.string "On occasion, some POKéMON appear\n"
-	.string "in large numbers like outbreaks.\p"
-	.string "Don't miss opportunities like\n"
-	.string "those.$"
+gBirchDexRatingText_LessThan160::
+	.string "가끔씩 대량발생하는\n"
+	.string "포켓몬이 있는 것 같더구나\l"
+	.string "그 기회를 놓치지 마라!$"
 
-gBirchDexRatingText_LessThan170:: @ 82A61D6
-	.string "One can get a very good idea about\n"
-	.string "the POKéMON of the HOENN region\l"
-	.string "by looking through your POKéDEX.$"
+gBirchDexRatingText_LessThan170::
+	.string "너의 도감을 보면\n"
+	.string "호연지방 포켓몬의\l"
+	.string "모든 것을 알 수 있을 것 같아$"
 
-gBirchDexRatingText_LessThan180:: @ 82A623A
-	.string "I would say you already qualify as\n"
-	.string "a POKéMON PROFESSOR, and a good\l"
-	.string "one, too!$"
+gBirchDexRatingText_LessThan180::
+	.string "너는 포켓몬 박사로서도\n"
+	.string "우수하구나$"
 
-gBirchDexRatingText_LessThan190:: @ 82A6287
-	.string "With a POKéDEX this complete,\n"
-	.string "you're a real professional at this!$"
+gBirchDexRatingText_LessThan190::
+	.string "이만큼이나 도감을 완성했다면\n"
+	.string "이미 프로페셔널이야!$"
 
-gBirchDexRatingText_LessThan200:: @ 82A62C9
-	.string "You're very close to completing\n"
-	.string "this POKéDEX.\l"
-	.string "I can feel it in my bones!$"
+gBirchDexRatingText_LessThan200::
+	.string "이제 거의 완성되어 가!\n"
+	.string "그런 예감이 든다!$"
 
-gBirchDexRatingText_DexCompleted:: @ 82A6312
-	.string "Congratulations!\n"
-	.string "Your POKéDEX is complete!$"
+gBirchDexRatingText_DexCompleted::
+	.string "축하한다!!\n"
+	.string "포켓몬 도감 완성이다!!$"
 
-gUnknown_082A633D:: @ 82A633D
-	.string "Hmhm…\n"
-	.string "On a nationwide basis…\p"
-	.string "You've seen {STR_VAR_1} POKéMON,\n"
-	.string "and you've caught {STR_VAR_2} POKéMON…$"
+gUnknown_082A633D::
+	.string "흠흠...\n"
+	.string "전국적으로는...\p"
+	.string "발견한 포켓몬 {STR_VAR_1}마리,\n"
+	.string "잡은 포켓몬 {STR_VAR_2}마리군...$"

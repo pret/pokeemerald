@@ -1,5 +1,7 @@
-gText_WantToUseSurf:: @ 8272FD6
-	.string "The water is dyed a deep blue…\nWould you like to SURF?$"
+gText_WantToUseSurf::
+	.string "물은 깊고 푸른 색이다...\n"
+	.string "파도타기를 쓰겠습니까?$"
 
-gText_PlayerUsedSurf:: @ 827300D
-	.string "{STR_VAR_1} used SURF!$"
+gText_PlayerUsedSurf::
+	.string "{STR_VAR_1}(은)는\n"
+	.string "파도타기를 썼다!$"

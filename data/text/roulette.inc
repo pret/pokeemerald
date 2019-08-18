@@ -1,41 +1,41 @@
-gUnknown_082A5B12:: @ 82A5B12
-	.string "The minimum wager at this table\n"
-	.string "is {STR_VAR_1}. Do you want to play?$"
+gUnknown_082A5B12::
+	.string "여기는 레이트 {STR_VAR_1}의 룰렛입니다\n"
+	.string "룰렛으로 즐기겠습니까?$"
 
-gUnknown_082A5B4E:: @ 82A5B4E
-	.string "You don't have enough COINS.$"
+gUnknown_082A5B4E::
+	.string "동전이 없습니다$"
 
-gUnknown_082A5B6B:: @ 82A5B6B
-	.string "Special rate table right now!$"
+gUnknown_082A5B6B::
+	.string "오늘 이 테이블은\n레이트 업!$"
 
-gUnknown_082A5B89:: @ 82A5B89
-	.string "Place your wager with the + Control\n"
-	.string "Pad, then press the A Button.$"
+gUnknown_082A5B89::
+	.string "배팅할 곳을 십자 버튼으로 선택하고\n"
+	.string "A 버튼으로 결정합니다$"
 
-gUnknown_082A5BCB:: @ 82A5BCB
-	.string "It's a hit!$"
+gUnknown_082A5BCB::
+	.string "당첨-!$"
 
-gUnknown_082A5BD7:: @ 82A5BD7
-	.string "Jackpot!$"
+gUnknown_082A5BD7::
+	.string "대당첨!!$"
 
-gUnknown_082A5BE0:: @ 82A5BE0
-	.string "Nothing doing!$"
+gUnknown_082A5BE0::
+	.string "꽝…$"
 
-gUnknown_082A5BEF:: @ 82A5BEF
-	.string "You've won {STR_VAR_1} COINS!$"
+gUnknown_082A5BEF::
+	.string "동전 {STR_VAR_1}개를 얻습니다!$"
 
-gUnknown_082A5C04:: @ 82A5C04
-	.string "No COINS left…$"
+gUnknown_082A5C04::
+	.string "동전이 다 떨어졌다…$"
 
-gUnknown_082A5C13:: @ 82A5C13
-	.string "Keep playing?$"
+gUnknown_082A5C13::
+	.string "계속해서 즐기겠습니까?$"
 
-gUnknown_082A5C21:: @ 82A5C21
-	.string "The ROULETTE board will be cleared.$"
+gUnknown_082A5C21::
+	.string "테이블 위의 구슬들을\n리셋합니다$"
 
-gUnknown_082A5C45:: @ 82A5C45
-	.string "You don't have a COIN CASE.$"
+gUnknown_082A5C45::
+	.string "동전케이스를 가지고 있지 않습니다$"
 
-gUnknown_082A5C61:: @ 82A5C61
-	.string "Your COIN CASE is full!\n"
-	.string "Coins can be exchanged for prizes.$"
+gUnknown_082A5C61::
+	.string "동전이 가득 찼습니다!\n"
+	.string "경품과 교환해 주십시오$"

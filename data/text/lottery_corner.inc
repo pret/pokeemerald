@@ -1,77 +1,81 @@
-LilycoveCity_DepartmentStore_1F_Text_2A6390: @ 82A6390
-	.string "This is the POKéMON LOTTERY CORNER.\p"
-	.string "All shoppers at our DEPARTMENT STORE\n"
-	.string "get to draw a POKéMON LOTO TICKET.\p"
-	.string "If the LOTO TICKET's number matches\n"
-	.string "the ID number of any of your POKéMON,\l"
-	.string "you will receive a fabulous gift.\p"
-	.string "Would you like to draw a POKéMON\n"
-	.string "LOTO TICKET?$"
+LilycoveCity_DepartmentStore_1F_Text_2A6390:
+	.string "이곳은 ID 추첨센터\n"
+	.string "추첨 코너입니다\p"
+	.string "본 백화점에 방문하신\n"
+	.string "모든 분께 ID 추첨센터\l"
+	.string "추첨을 하고 있습니다!\p"
+	.string "추첨한 번호와 손님의\n"
+	.string "포켓몬 ID를 뒤에서부터 비교하여\l"
+	.string "일치한 자릿수에 따라 멋진 상품을\l"
+	.string "선물로 드립니다!\p"
+	.string "ID 추첨센터\n"
+	.string "추첨에 도전하겠습니까?$"
 
-LilycoveCity_DepartmentStore_1F_Text_2A6496: @ 82A6496
-	.string "Please come back tomorrow.$"
+LilycoveCity_DepartmentStore_1F_Text_2A6496:
+	.string "내일 다시 생각이\n"
+	.string "나신다면 와 주십시오$"
 
-LilycoveCity_DepartmentStore_1F_Text_2A64B1: @ 82A64B1
-	.string "Please do visit again.$"
+LilycoveCity_DepartmentStore_1F_Text_2A64B1:
+	.string "그럼 다음에 또 이용해 주세요$"
 
-LilycoveCity_DepartmentStore_1F_Text_2A64C8: @ 82A64C8
-	.string "Please pick a LOTO TICKET.\n"
-	.string "…{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}…{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}…{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}$"
+LilycoveCity_DepartmentStore_1F_Text_2A64C8:
+	.string "그럼 추첨을 하겠습니다\n"
+	.string "...{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}...{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}...{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}$"
 
-LilycoveCity_DepartmentStore_1F_Text_2A650B: @ 82A650B
-	.string "The LOTO TICKET number is {STR_VAR_1}.\p"
-	.string "I need to run a check on this number\n"
-	.string "to see if it matches any of your\l"
-	.string "POKéMON's ID numbers. Please wait.$"
+LilycoveCity_DepartmentStore_1F_Text_2A650B:
+	.string "추첨 번호는 {STR_VAR_1}입니다!\p"
+	.string "번호가 당신의 포켓몬 ID와\n"
+	.string "일치하는지 알아볼 테니\l"
+	.string "잠시 기다려 주십시오$"
 
-LilycoveCity_DepartmentStore_1F_Text_2A6592: @ 82A6592
-	.string "Congratulations!\p"
-	.string "The ID number of your team's\n"
-	.string "{STR_VAR_1} matches your\l"
-	.string "LOTO TICKET's number!$"
+LilycoveCity_DepartmentStore_1F_Text_2A6592:
+	.string "축하합니다!\p"
+	.string "당신이 데리고 있는\n"
+	.string "{STR_VAR_1}의 ID가\l"
+	.string "추첨 번호와 일치합니다!$"
 
-LilycoveCity_DepartmentStore_1F_Text_2A65E6: @ 82A65E6
-	.string "Congratulations!\p"
-	.string "The ID number of your PC-boxed\n"
-	.string "{STR_VAR_1} matches your\l"
-	.string "LOTO TICKET's number!$"
+LilycoveCity_DepartmentStore_1F_Text_2A65E6:
+	.string "축하합니다!\p"
+	.string "PC에 맡긴\n"
+	.string "{STR_VAR_1}의 ID가\l"
+	.string "추첨 번호와 일치합니다!$"
 
-LilycoveCity_DepartmentStore_1F_Text_2A663C: @ 82A663C
-	.string "I'm sorry.\n"
-	.string "None of the numbers matched.$"
+LilycoveCity_DepartmentStore_1F_Text_2A663C:
+	.string "아쉽네요\n"
+	.string "꽝입니다...$"
 
-LilycoveCity_DepartmentStore_1F_Text_2A6664: @ 82A6664
-	.string "Two digits matched, so you win the\n"
-	.string "third prize!\l"
-	.string "You've won the {STR_VAR_1}!$"
+LilycoveCity_DepartmentStore_1F_Text_2A6664:
+	.string "2자리 일치하니\n"
+	.string "3등입니다!\l"
+	.string "{STR_VAR_1}(을)를 드리겠습니다!$"
 
-LilycoveCity_DepartmentStore_1F_Text_2A66A7: @ 82A66A7
-	.string "Three digits matched, so you win the\n"
-	.string "second prize!\l"
-	.string "You've won the {STR_VAR_1}!$"
+LilycoveCity_DepartmentStore_1F_Text_2A66A7:
+	.string "3자리 일치하니\n"
+	.string "2등입니다!\l"
+	.string "{STR_VAR_1}(을)를 드리겠습니다!$"
 
-LilycoveCity_DepartmentStore_1F_Text_2A66ED: @ 82A66ED
-	.string "Four digits matched, so you win the\n"
-	.string "first prize!\l"
-	.string "You've won the {STR_VAR_1}!$"
+LilycoveCity_DepartmentStore_1F_Text_2A66ED:
+	.string "4자리 일치하니\n"
+	.string "1등입니다!\l"
+	.string "{STR_VAR_1}(을)를 드리겠습니다!$"
 
-LilycoveCity_DepartmentStore_1F_Text_2A6731: @ 82A6731
-	.string "Oh, my goodness, all five digits\n"
-	.string "matched!\p"
-	.string "You've won the jackpot prize!\n"
-	.string "You've won the {STR_VAR_1}!$"
+LilycoveCity_DepartmentStore_1F_Text_2A6731:
+	.string "무려! 5자리 모두\n"
+	.string "일치합니다!\p"
+	.string "특등입니다!\n"
+	.string "{STR_VAR_1}(을)를 드리겠습니다!$"
 
-LilycoveCity_DepartmentStore_1F_Text_2A678C: @ 82A678C
-	.string "Oh?\n"
-	.string "You seem to have no room for this.\p"
-	.string "Please make room in your BAG and\n"
-	.string "let me know.$"
+LilycoveCity_DepartmentStore_1F_Text_2A678C:
+	.string "...어라?\n"
+	.string "도구가 가득한 모양입니다만\p"
+	.string "도구를 정리하고 나서 다시 한 번\n"
+	.string "와 주십시오$"
 
-LilycoveCity_DepartmentStore_1F_Text_2A67E1: @ 82A67E1
-	.string "{PLAYER}?\n"
-	.string "Yes, I've been expecting you.\p"
-	.string "This is the prize we've been holding\n"
-	.string "for you.$"
+LilycoveCity_DepartmentStore_1F_Text_2A67E1:
+	.string "{PLAYER}님이시군요\n"
+	.string "보관하고 있었습니다!\p"
+	.string "그럼 상품을\n"
+	.string "드리도록 하겠습니다$"
 
-LilycoveCity_DepartmentStore_1F_Text_2A6831: @ 82A6831
-	.string "Please do visit again.$"
+LilycoveCity_DepartmentStore_1F_Text_2A6831:
+	.string "그럼 다음에 또 이용해 주세요$"

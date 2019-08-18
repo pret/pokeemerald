@@ -1,32 +1,33 @@
-gText_ConfirmSave:: @ 82C87B4
-	.string "Would you like to save the game?$"
+gText_ConfirmSave::
+	.string "지금까지의 활약을\n"
+	.string "포켓몬 리포트로 작성할까요?$"
 
-gText_AlreadySavedFile:: @ 82C87D5
-	.string "There is already a saved file.\n"
-	.string "Is it okay to overwrite it?$"
+gText_AlreadySavedFile::
+	.string "전에 작성한 리포트에\n"
+	.string "덮어써도 괜찮습니까?$"
 
-gText_SavingDontTurnOff:: @ 82C8810
-	.string "SAVING…\n"
-	.string "DON'T TURN OFF THE POWER.$"
+gText_SavingDontTurnOff::
+	.string "포켓몬 리포트를 작성하고 있습니다\n"
+	.string "전원을 끄지 않도록 해주십시오$"
 
-gText_PlayerSavedGame:: @ 82C8832
-	.string "{PLAYER} saved the game.$"
+gText_PlayerSavedGame::
+	.string "{PLAYER}(은)는\n"
+    .string "리포트를 꼼꼼히 기록했다!$"
 
-gText_DifferentSaveFile:: @ 82C8845
-	.string "WARNING!\p"
-	.string "There is a different game file that\n"
-	.string "is already saved.\p"
-	.string "If you save now, the other file's\n"
-	.string "adventure, including items and\l"
-	.string "POKéMON, will be entirely lost.\p"
-	.string "Are you sure you want to save now\n"
-	.string "and overwrite the other save file?$"
+gText_DifferentSaveFile::
+	.string "경고!\p"
+	.string "다른 모험의\n"
+	.string "리포트가 작성되어 있습니다!\p"
+	.string "새 리포트를 작성하게 되면\n"
+	.string "전 리포트의 모험 진도, 아이템, 포켓몬 등이\l"
+	.string "완전히 사라지게 되니다\p"
+	.string "덮어써도 괜찮습니까?$"
 
-gText_SaveError:: @ 82C892A
-	.string "Save error.\p"
-	.string "Please exchange the\n"
-	.string "backup memory.$"
+gText_SaveError::
+	.string "리포트 오류\p"
+	.string "다른 백업 메모리로\n"
+	.string "교환해 주십시오$"
 
-gText_SavingDontTurnOffPower:: @ 82C8959
-	.string "SAVING…\n"
-	.string "DON'T TURN OFF THE POWER.$"
+gText_SavingDontTurnOffPower::
+	.string "포켓몬 리포트를 작성하고 있습니다\n"
+	.string "전원을 끄지 않도록 해주십시오$"
