@@ -39,11 +39,13 @@ MauvilleCity_GameCorner_EventScript_20FC33:: @ 820FC33
 	goto_if_eq MauvilleCity_GameCorner_EventScript_20FCC1
 	givecoins 50
 	takemoney 0x3e8, 0
-	updatemoneybox 0,0
+	updatemoneybox 0, 0
 	updatecoinsbox 1, 6
 	playse SE_REGI
 	msgbox MauvilleCity_GameCorner_Text_210529, MSGBOX_DEFAULT
 	hidemoneybox
+	nop
+	nop
 	hidecoinsbox 0, 5
 	release
 	end
@@ -57,11 +59,13 @@ MauvilleCity_GameCorner_EventScript_20FC75:: @ 820FC75
 	goto_if_eq MauvilleCity_GameCorner_EventScript_20FCC1
 	givecoins 500
 	takemoney 0x2710, 0
-	updatemoneybox 0,0
+	updatemoneybox 0, 0
 	updatecoinsbox 1, 6
 	playse SE_REGI
 	msgbox MauvilleCity_GameCorner_Text_210529, MSGBOX_DEFAULT
 	hidemoneybox
+	nop
+	nop
 	hidecoinsbox 0, 5
 	release
 	end
@@ -74,6 +78,8 @@ MauvilleCity_GameCorner_EventScript_20FCB7:: @ 820FCB7
 MauvilleCity_GameCorner_EventScript_20FCC1:: @ 820FCC1
 	msgbox MauvilleCity_GameCorner_Text_210553, MSGBOX_DEFAULT
 	hidemoneybox
+	nop
+	nop
 	hidecoinsbox 0, 5
 	release
 	end
@@ -81,6 +87,8 @@ MauvilleCity_GameCorner_EventScript_20FCC1:: @ 820FCC1
 MauvilleCity_GameCorner_EventScript_20FCD1:: @ 820FCD1
 	msgbox MauvilleCity_GameCorner_Text_21059A, MSGBOX_DEFAULT
 	hidemoneybox
+	nop
+	nop
 	hidecoinsbox 0, 5
 	release
 	end
@@ -88,6 +96,8 @@ MauvilleCity_GameCorner_EventScript_20FCD1:: @ 820FCD1
 MauvilleCity_GameCorner_EventScript_20FCE1:: @ 820FCE1
 	msgbox MauvilleCity_GameCorner_Text_21057E, MSGBOX_DEFAULT
 	hidemoneybox
+	nop
+	nop
 	hidecoinsbox 0, 5
 	release
 	end

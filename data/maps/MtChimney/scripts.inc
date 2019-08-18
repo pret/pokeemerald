@@ -115,29 +115,37 @@ MtChimney_EventScript_22EEF3:: @ 822EEF3
 	compare VAR_RESULT, 0
 	goto_if_eq MtChimney_EventScript_22EF51
 	hidemoneybox
+	nop
+	nop
 	release
 	end
 
 MtChimney_EventScript_22EF51:: @ 822EF51
 	msgbox gText_TooBadBagIsFull, MSGBOX_DEFAULT
 	hidemoneybox
+	nop
+	nop
 	release
 	end
 
 MtChimney_EventScript_22EF5E:: @ 822EF5E
 	takemoney 0xc8, 0
-	updatemoneybox 0,0
+	updatemoneybox 0, 0
 	return
 
 MtChimney_EventScript_22EF69:: @ 822EF69
 	msgbox MtChimney_Text_22FE9B, MSGBOX_DEFAULT
 	hidemoneybox
+	nop
+	nop
 	release
 	end
 
 MtChimney_EventScript_22EF76:: @ 822EF76
 	msgbox MtChimney_Text_22FE5E, MSGBOX_DEFAULT
 	hidemoneybox
+	nop
+	nop
 	release
 	end
 
