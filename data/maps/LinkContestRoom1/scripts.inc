@@ -172,131 +172,131 @@ LinkContestRoom1_EventScript_23B8F8:: @ 823B8F8
 	end
 
 LinkContestRoom1_EventScript_23BA6B:: @ 823BA6B
-	setvar VAR_TEMP_1, 5
+	setvar VAR_TEMP_1, EVENT_OBJ_GFX_NINJA_BOY
 	return
 
 LinkContestRoom1_EventScript_23BA71:: @ 823BA71
-	setvar VAR_TEMP_1, 6
+	setvar VAR_TEMP_1, EVENT_OBJ_GFX_TWIN
 	return
 
 LinkContestRoom1_EventScript_23BA77:: @ 823BA77
-	setvar VAR_TEMP_1, 7
+	setvar VAR_TEMP_1, EVENT_OBJ_GFX_BOY_1
 	return
 
 LinkContestRoom1_EventScript_23BA7D:: @ 823BA7D
-	setvar VAR_TEMP_1, 8
+	setvar VAR_TEMP_1, EVENT_OBJ_GFX_GIRL_1
 	return
 
 LinkContestRoom1_EventScript_23BA83:: @ 823BA83
-	setvar VAR_TEMP_1, 10
+	setvar VAR_TEMP_1, EVENT_OBJ_GFX_GIRL_2
 	return
 
 LinkContestRoom1_EventScript_23BA89:: @ 823BA89
-	setvar VAR_TEMP_1, 11
+	setvar VAR_TEMP_1, EVENT_OBJ_GFX_LITTLE_BOY
 	return
 
 LinkContestRoom1_EventScript_23BA8F:: @ 823BA8F
-	setvar VAR_TEMP_1, 12
+	setvar VAR_TEMP_1, EVENT_OBJ_GFX_LITTLE_GIRL
 	return
 
 LinkContestRoom1_EventScript_23BA95:: @ 823BA95
-	setvar VAR_TEMP_1, 13
+	setvar VAR_TEMP_1, EVENT_OBJ_GFX_BOY_3
 	return
 
 LinkContestRoom1_EventScript_23BA9B:: @ 823BA9B
-	setvar VAR_TEMP_1, 14
+	setvar VAR_TEMP_1, EVENT_OBJ_GFX_GIRL_3
 	return
 
 LinkContestRoom1_EventScript_23BAA1:: @ 823BAA1
-	setvar VAR_TEMP_1, 15
+	setvar VAR_TEMP_1, EVENT_OBJ_GFX_RICH_BOY
 	return
 
 LinkContestRoom1_EventScript_23BAA7:: @ 823BAA7
-	setvar VAR_TEMP_1, 17
+	setvar VAR_TEMP_1, EVENT_OBJ_GFX_FAT_MAN
 	return
 
 LinkContestRoom1_EventScript_23BAAD:: @ 823BAAD
-	setvar VAR_TEMP_1, 18
+	setvar VAR_TEMP_1, EVENT_OBJ_GFX_POKEFAN_F
 	return
 
 LinkContestRoom1_EventScript_23BAB3:: @ 823BAB3
-	setvar VAR_TEMP_1, 19
+	setvar VAR_TEMP_1, EVENT_OBJ_GFX_MAN_1
 	return
 
 LinkContestRoom1_EventScript_23BAB9:: @ 823BAB9
-	setvar VAR_TEMP_1, 20
+	setvar VAR_TEMP_1, EVENT_OBJ_GFX_WOMAN_2
 	return
 
 LinkContestRoom1_EventScript_23BABF:: @ 823BABF
-	setvar VAR_TEMP_1, 21
+	setvar VAR_TEMP_1, EVENT_OBJ_GFX_EXPERT_M
 	return
 
 LinkContestRoom1_EventScript_23BAC5:: @ 823BAC5
-	setvar VAR_TEMP_1, 22
+	setvar VAR_TEMP_1, EVENT_OBJ_GFX_EXPERT_F
 	return
 
 LinkContestRoom1_EventScript_23BACB:: @ 823BACB
-	setvar VAR_TEMP_1, 25
+	setvar VAR_TEMP_1, EVENT_OBJ_GFX_POKEFAN_M
 	return
 
 LinkContestRoom1_EventScript_23BAD1:: @ 823BAD1
-	setvar VAR_TEMP_1, 26
+	setvar VAR_TEMP_1, EVENT_OBJ_GFX_WOMAN_4
 	return
 
 LinkContestRoom1_EventScript_23BAD7:: @ 823BAD7
-	setvar VAR_TEMP_1, 27
+	setvar VAR_TEMP_1, EVENT_OBJ_GFX_COOK
 	return
 
 LinkContestRoom1_EventScript_23BADD:: @ 823BADD
-	setvar VAR_TEMP_1, 47
+	setvar VAR_TEMP_1, EVENT_OBJ_GFX_LASS
 	return
 
 LinkContestRoom1_EventScript_23BAE3:: @ 823BAE3
-	setvar VAR_TEMP_1, 30
+	setvar VAR_TEMP_1, EVENT_OBJ_GFX_OLD_WOMAN
 	return
 
 LinkContestRoom1_EventScript_23BAE9:: @ 823BAE9
-	setvar VAR_TEMP_1, 31
+	setvar VAR_TEMP_1, EVENT_OBJ_GFX_CAMPER
 	return
 
 LinkContestRoom1_EventScript_23BAEF:: @ 823BAEF
-	setvar VAR_TEMP_1, 32
+	setvar VAR_TEMP_1, EVENT_OBJ_GFX_PICNICKER
 	return
 
 LinkContestRoom1_EventScript_23BAF5:: @ 823BAF5
-	setvar VAR_TEMP_1, 33
+	setvar VAR_TEMP_1, EVENT_OBJ_GFX_MAN_3
 	return
 
 LinkContestRoom1_EventScript_23BAFB:: @ 823BAFB
-	setvar VAR_TEMP_1, 34
+	setvar VAR_TEMP_1, EVENT_OBJ_GFX_WOMAN_5
 	return
 
 LinkContestRoom1_EventScript_23BB01:: @ 823BB01
-	setvar VAR_TEMP_1, 35
+	setvar VAR_TEMP_1, EVENT_OBJ_GFX_YOUNGSTER
 	return
 
 LinkContestRoom1_EventScript_23BB07:: @ 823BB07
-	setvar VAR_TEMP_1, 36
+	setvar VAR_TEMP_1, EVENT_OBJ_GFX_BUG_CATCHER
 	return
 
 LinkContestRoom1_EventScript_23BB0D:: @ 823BB0D
-	setvar VAR_TEMP_1, 37
+	setvar VAR_TEMP_1, EVENT_OBJ_GFX_PSYCHIC_M
 	return
 
 LinkContestRoom1_EventScript_23BB13:: @ 823BB13
-	setvar VAR_TEMP_1, 38
+	setvar VAR_TEMP_1, EVENT_OBJ_GFX_SCHOOL_KID_M
 	return
 
 LinkContestRoom1_EventScript_23BB19:: @ 823BB19
-	setvar VAR_TEMP_1, 44
+	setvar VAR_TEMP_1, EVENT_OBJ_GFX_BLACK_BELT
 	return
 
 LinkContestRoom1_EventScript_23BB1F:: @ 823BB1F
-	setvar VAR_TEMP_1, 45
+	setvar VAR_TEMP_1, EVENT_OBJ_GFX_BEAUTY
 	return
 
 LinkContestRoom1_EventScript_23BB25:: @ 823BB25
-	setvar VAR_TEMP_1, 46
+	setvar VAR_TEMP_1, EVENT_OBJ_GFX_SCIENTIST_1
 	return
 
 LinkContestRoom1_EventScript_23BB2B:: @ 823BB2B
