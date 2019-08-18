@@ -17,6 +17,7 @@
 #include "contest.h"
 #include "strings.h"
 #include "constants/lilycove_lady.h"
+
 #include "data/lilycove_lady.h"
 
 static void InitLilycoveQuizLady(void);

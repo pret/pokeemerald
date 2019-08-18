@@ -1,6 +1,7 @@
 #include "constants/global.h"
 #include "constants/battle_frontier.h"
 #include "constants/battle_setup.h"
+#include "constants/contest.h"
 #include "constants/easy_chat.h"
 #include "constants/event_objects.h"
 #include "constants/event_object_movement_constants.h"
@@ -4818,15 +4819,15 @@ LilycoveCity_PokemonCenter_1F_EventScript_2A89C7:: @ 82A89C7
 	specialvar VAR_RESULT, GetContestLadyCategory
 	special Script_BufferContestLadyCategoryAndMonName
 	special GetContestLadyMonSpecies
-	compare VAR_RESULT, 0 @CONTEST_CATEGORY_COOL
+	compare VAR_RESULT, CONTEST_CATEGORY_COOL
 	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A8A0A
-	compare VAR_RESULT, 1 @CONTEST_CATEGORY_BEAUTY
+	compare VAR_RESULT, CONTEST_CATEGORY_BEAUTY
 	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A8A1D
-	compare VAR_RESULT, 2 @CONTEST_CATEGORY_CUTE
+	compare VAR_RESULT, CONTEST_CATEGORY_CUTE
 	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A8A30
-	compare VAR_RESULT, 3 @CONTEST_CATEGORY_SMART
+	compare VAR_RESULT, CONTEST_CATEGORY_SMART
 	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A8A43
-	compare VAR_RESULT, 4 @CONTEST_CATEGORY_TOUGH
+	compare VAR_RESULT, CONTEST_CATEGORY_TOUGH
 	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A8A56
 	end
 
