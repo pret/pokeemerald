@@ -40,7 +40,6 @@ SlateportCity_OceanicMuseum_1F_EventScript_20ADE8:: @ 820ADE8
 	playse SE_REGI
 	takemoney 0x32, 0
 	updatemoneybox 0, 0
-	nop
 	msgbox SlateportCity_OceanicMuseum_1F_Text_20B026, MSGBOX_DEFAULT
 	setvar VAR_SLATEPORT_MUSEUM_1F_STATE, 1
 	hidemoneybox

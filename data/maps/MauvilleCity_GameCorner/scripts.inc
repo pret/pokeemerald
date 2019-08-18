@@ -40,7 +40,6 @@ MauvilleCity_GameCorner_EventScript_20FC33:: @ 820FC33
 	givecoins 50
 	takemoney 0x3e8, 0
 	updatemoneybox 0, 0
-	nop
 	updatecoinsbox 1, 6
 	playse SE_REGI
 	msgbox MauvilleCity_GameCorner_Text_210529, MSGBOX_DEFAULT
@@ -61,7 +60,6 @@ MauvilleCity_GameCorner_EventScript_20FC75:: @ 820FC75
 	givecoins 500
 	takemoney 0x2710, 0
 	updatemoneybox 0, 0
-	nop
 	updatecoinsbox 1, 6
 	playse SE_REGI
 	msgbox MauvilleCity_GameCorner_Text_210529, MSGBOX_DEFAULT

@@ -26,7 +26,7 @@ SeafloorCavern_Entrance_EventScript_234485:: @ 8234485
 	call_if_eq SeafloorCavern_Entrance_EventScript_234539
 	delay 30
 	setvar VAR_HAS_TALKED_TO_SEAFLOOR_CAVERN_ENTRANCE_GRUNT, 1
-	moveobjectoffscreen 1
+	copyobjectxytoperm 1
 	msgbox SeafloorCavern_Entrance_Text_234544, MSGBOX_DEFAULT
 	closemessage
 	applymovement 1, Common_Movement_WalkInPlaceUp
