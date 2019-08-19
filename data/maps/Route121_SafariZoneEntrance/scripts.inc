@@ -68,7 +68,6 @@ Route121_SafariZoneEntrance_EventScript_22BC48:: @ 822BC48
 	msgbox Route121_SafariZoneEntrance_Text_2A501B, MSGBOX_DEFAULT
 	takemoney 0x1f4, 0
 	updatemoneybox 0, 0
-	nop
 	msgbox Route121_SafariZoneEntrance_Text_2A5036, MSGBOX_DEFAULT
 	playfanfare MUS_FANFA4
 	message Route121_SafariZoneEntrance_Text_2A5052
