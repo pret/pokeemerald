@@ -4293,7 +4293,6 @@ void PokemonToBattleMon(struct Pokemon *src, struct BattlePokemon *dst)
     dst->speed = GetMonData(src, MON_DATA_SPEED, NULL);
     dst->spAttack = GetMonData(src, MON_DATA_SPATK, NULL);
     dst->spDefense = GetMonData(src, MON_DATA_SPDEF, NULL);
-    dst->isEgg = GetMonData(src, MON_DATA_IS_EGG, NULL);
     dst->abilityNum = GetMonData(src, MON_DATA_ABILITY_NUM, NULL);
     dst->otId = GetMonData(src, MON_DATA_OT_ID, NULL);
     dst->type1 = gBaseStats[dst->species].type1;
