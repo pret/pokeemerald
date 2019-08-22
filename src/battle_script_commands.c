@@ -943,10 +943,35 @@ bool32 IsBattlerProtected(u8 battlerId, u16 move)
         return FALSE;
 }
 
+static bool32 NoTargetPresent(u32 move)
+{
+    if (!IsBattlerAlive(gBattlerTarget))
+        gBattlerTarget = GetMoveTarget(move, 0);
+
+    switch (gBattleMoves[move].target)
+    {
+    case MOVE_TARGET_SELECTED:
+    case MOVE_TARGET_DEPENDS:
+    case MOVE_TARGET_RANDOM:
+        if (!IsBattlerAlive(gBattlerTarget))
+            return TRUE;
+        break;
+    case MOVE_TARGET_BOTH:
+        if (!IsBattlerAlive(gBattlerTarget) && !IsBattlerAlive(BATTLE_PARTNER(gBattlerTarget)))
+            return TRUE;
+        break;
+    case MOVE_TARGET_FOES_AND_ALLY:
+        if (!IsBattlerAlive(gBattlerTarget) && !IsBattlerAlive(BATTLE_PARTNER(gBattlerTarget)) && !IsBattlerAlive(BATTLE_PARTNER(gBattlerAttacker)))
+            return TRUE;
+        break;
+    }
+
+    return FALSE;
+}
+
 static void atk00_attackcanceler(void)
 {
-    s32 i;
-    u32 moveType;
+    s32 i, moveType;
 
     if (gBattleOutcome != 0)
     {
@@ -990,11 +1015,9 @@ static void atk00_attackcanceler(void)
     }
 
     gHitMarker &= ~(HITMARKER_x800000);
-
     if (!(gHitMarker & HITMARKER_OBEYS) && !(gBattleMons[gBattlerAttacker].status2 & STATUS2_MULTIPLETURNS))
     {
-        i = IsMonDisobedient(); // why use the 'i' variable...?
-        switch (i)
+        switch (IsMonDisobedient())
         {
         case 0:
             break;
@@ -1008,6 +1031,12 @@ static void atk00_attackcanceler(void)
     }
 
     gHitMarker |= HITMARKER_OBEYS;
+
+    if (NoTargetPresent(gCurrentMove))
+    {
+        gBattlescriptCurrInstr = BattleScript_ButItFailedAtkStringPpReduce;
+        return;
+    }
 
     if (gProtectStructs[gBattlerTarget].bounceMove
         && gBattleMoves[gCurrentMove].flags & FLAG_MAGICCOAT_AFFECTED
@@ -3553,7 +3582,7 @@ static void atk23_getexp(void)
     }
 }
 
-static bool32 IsBattleLostForPlayer(void)
+static bool32 NoAliveMonsForPlayer(void)
 {
     u32 i;
     u32 HP_count = 0;
@@ -3581,7 +3610,7 @@ static bool32 IsBattleLostForPlayer(void)
     return (HP_count == 0);
 }
 
-static bool32 IsBattleWonForPlayer(void)
+static bool32 NoAliveMonsForOpponent(void)
 {
     u32 i;
     u32 HP_count = 0;
@@ -3598,14 +3627,19 @@ static bool32 IsBattleWonForPlayer(void)
     return (HP_count == 0);
 }
 
+bool32 NoAliveMonsForEitherParty(void)
+{
+    return (NoAliveMonsForPlayer() || NoAliveMonsForOpponent());
+}
+
 static void atk24(void)
 {
     if (gBattleControllerExecFlags)
         return;
 
-    if (IsBattleLostForPlayer())
+    if (NoAliveMonsForPlayer())
         gBattleOutcome |= B_OUTCOME_LOST;
-    if (IsBattleWonForPlayer())
+    if (NoAliveMonsForOpponent())
         gBattleOutcome |= B_OUTCOME_WON;
 
     if (gBattleOutcome == 0 && (gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_x2000000)))
@@ -6910,8 +6944,7 @@ static void atk76_various(void)
     case VARIOUS_TRY_ACTIVATE_MOXIE:
         if (GetBattlerAbility(gActiveBattler) == ABILITY_MOXIE
             && HasAttackerFaintedTarget()
-            && !IsBattleLostForPlayer()
-            && !IsBattleWonForPlayer()
+            && !NoAliveMonsForEitherParty()
             && gBattleMons[gBattlerAttacker].statStages[STAT_ATK] != 12)
         {
             gBattleMons[gBattlerAttacker].statStages[STAT_ATK]++;
@@ -6925,8 +6958,7 @@ static void atk76_various(void)
     case VARIOUS_TRY_ACTIVATE_FELL_STINGER:
         if (gBattleMoves[gCurrentMove].effect == EFFECT_FELL_STINGER
             && HasAttackerFaintedTarget()
-            && !IsBattleLostForPlayer()
-            && !IsBattleWonForPlayer()
+            && !NoAliveMonsForEitherParty()
             && gBattleMons[gBattlerAttacker].statStages[STAT_ATK] != 12)
         {
             if (gBattleMons[gBattlerAttacker].statStages[STAT_ATK] >= 11)
@@ -7112,7 +7144,7 @@ static void atk76_various(void)
         }
         return;
     case VARIOUS_JUMP_IF_BATTLE_END:
-        if (IsBattleLostForPlayer() || IsBattleWonForPlayer())
+        if (NoAliveMonsForEitherParty())
             gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 3);
         else
             gBattlescriptCurrInstr += 7;
@@ -7739,7 +7771,7 @@ static void atk7A_jumpifnexttargetvalid(void)
     {
         if (gBattlerTarget == gBattlerAttacker && !(gBattleMoves[gCurrentMove].target & MOVE_TARGET_USER))
             continue;
-        if (!(gAbsentBattlerFlags & gBitTable[gBattlerTarget]))
+        if (IsBattlerAlive(gBattlerTarget))
             break;
     }
 
@@ -8791,7 +8823,11 @@ static void atk95_setsandstorm(void)
 
 static void atk96_weatherdamage(void)
 {
-    if (WEATHER_HAS_EFFECT)
+    if (!IsBattlerAlive(gBattlerAttacker) || !WEATHER_HAS_EFFECT)
+    {
+        gBattleMoveDamage = 0;
+    }
+    else
     {
         u32 ability = GetBattlerAbility(gBattlerAttacker);
         if (gBattleWeather & WEATHER_SANDSTORM_ANY)
@@ -8847,13 +8883,6 @@ static void atk96_weatherdamage(void)
             }
         }
     }
-    else
-    {
-        gBattleMoveDamage = 0;
-    }
-
-    if (gAbsentBattlerFlags & gBitTable[gBattlerAttacker])
-        gBattleMoveDamage = 0;
 
     gBattlescriptCurrInstr++;
 }
@@ -10089,7 +10118,7 @@ static void atkC2_selectfirstvalidtarget(void)
     {
         if (gBattlerTarget == gBattlerAttacker && !(gBattleMoves[gCurrentMove].target & MOVE_TARGET_USER))
             continue;
-        if (!(gAbsentBattlerFlags & gBitTable[gBattlerTarget]))
+        if (IsBattlerAlive(gBattlerTarget))
             break;
     }
     gBattlescriptCurrInstr++;
