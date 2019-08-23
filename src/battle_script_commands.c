@@ -1706,7 +1706,7 @@ static void Cmd_adjustnormaldamage(void)
         gBattlescriptCurrInstr++;
 }
 
-static void Cmd_adjustnormaldamage2(void) // The same as 0x7 except it doesn't check for false swipe move effect.
+static void Cmd_adjustnormaldamage2(void) // The same as adjustnormaldamage except it doesn't check for false swipe move effect.
 {
     u8 holdEffect, param;
 
@@ -3246,7 +3246,7 @@ static void Cmd_getexp(void)
     gBattlerFainted = GetBattlerForBattleScript(gBattlescriptCurrInstr[1]);
     sentIn = gSentPokesToOpponent[(gBattlerFainted & 2) >> 1];
 
-    switch (gBattleScripting.atk23_state)
+    switch (gBattleScripting.getexpState)
     {
     case 0: // check if should receive exp at all
         if (GetBattlerSide(gBattlerFainted) != B_SIDE_OPPONENT || (gBattleTypeFlags &
@@ -3258,11 +3258,11 @@ static void Cmd_getexp(void)
               | BATTLE_TYPE_BATTLE_TOWER
               | BATTLE_TYPE_EREADER_TRAINER)))
         {
-            gBattleScripting.atk23_state = 6; // goto last case
+            gBattleScripting.getexpState = 6; // goto last case
         }
         else
         {
-            gBattleScripting.atk23_state++;
+            gBattleScripting.getexpState++;
             gBattleStruct->givenExpMons |= gBitTable[gBattlerPartyIndexes[gBattlerFainted]];
         }
         break;
@@ -3309,7 +3309,7 @@ static void Cmd_getexp(void)
                 gExpShareExp = 0;
             }
 
-            gBattleScripting.atk23_state++;
+            gBattleScripting.getexpState++;
             gBattleStruct->expGetterMonId = 0;
             gBattleStruct->sentInPokes = sentIn;
         }
@@ -3327,13 +3327,13 @@ static void Cmd_getexp(void)
             if (holdEffect != HOLD_EFFECT_EXP_SHARE && !(gBattleStruct->sentInPokes & 1))
             {
                 *(&gBattleStruct->sentInPokes) >>= 1;
-                gBattleScripting.atk23_state = 5;
+                gBattleScripting.getexpState = 5;
                 gBattleMoveDamage = 0; // used for exp
             }
             else if (GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_LEVEL) == MAX_LEVEL)
             {
                 *(&gBattleStruct->sentInPokes) >>= 1;
-                gBattleScripting.atk23_state = 5;
+                gBattleScripting.getexpState = 5;
                 gBattleMoveDamage = 0; // used for exp
             }
             else
@@ -3405,7 +3405,7 @@ static void Cmd_getexp(void)
                     MonGainEVs(&gPlayerParty[gBattleStruct->expGetterMonId], gBattleMons[gBattlerFainted].species);
                 }
                 gBattleStruct->sentInPokes >>= 1;
-                gBattleScripting.atk23_state++;
+                gBattleScripting.getexpState++;
             }
         }
         break;
@@ -3426,7 +3426,7 @@ static void Cmd_getexp(void)
                 BtlController_EmitExpUpdate(0, gBattleStruct->expGetterMonId, gBattleMoveDamage);
                 MarkBattlerForControllerExec(gActiveBattler);
             }
-            gBattleScripting.atk23_state++;
+            gBattleScripting.getexpState++;
         }
         break;
     case 4: // lvl up if necessary
@@ -3476,27 +3476,27 @@ static void Cmd_getexp(void)
 
                     gBattleMons[2].spAttack = GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_SPATK);
                 }
-                gBattleScripting.atk23_state = 5;
+                gBattleScripting.getexpState = 5;
             }
             else
             {
                 gBattleMoveDamage = 0;
-                gBattleScripting.atk23_state = 5;
+                gBattleScripting.getexpState = 5;
             }
         }
         break;
     case 5: // looper increment
         if (gBattleMoveDamage) // there is exp to give, goto case 3 that gives exp
         {
-            gBattleScripting.atk23_state = 3;
+            gBattleScripting.getexpState = 3;
         }
         else
         {
             gBattleStruct->expGetterMonId++;
             if (gBattleStruct->expGetterMonId <= 5)
-                gBattleScripting.atk23_state = 2; // loop again
+                gBattleScripting.getexpState = 2; // loop again
             else
-                gBattleScripting.atk23_state = 6; // we're done
+                gBattleScripting.getexpState = 6; // we're done
         }
         break;
     case 6: // increment instruction
@@ -4393,10 +4393,10 @@ static void Cmd_playstatchangeanimation(void)
     gActiveBattler = GetBattlerForBattleScript(gBattlescriptCurrInstr[1]);
     statsToCheck = gBattlescriptCurrInstr[2];
 
-    if (gBattlescriptCurrInstr[3] & ATK48_STAT_NEGATIVE) // goes down
+    if (gBattlescriptCurrInstr[3] & STAT_CHANGE_NEGATIVE) // goes down
     {
         s16 startingStatAnimId;
-        if (gBattlescriptCurrInstr[3] & ATK48_STAT_BY_TWO)
+        if (gBattlescriptCurrInstr[3] & STAT_CHANGE_BY_TWO)
             startingStatAnimId = STAT_ANIM_MINUS2 - 1;
         else
             startingStatAnimId = STAT_ANIM_MINUS1 - 1;
@@ -4405,7 +4405,7 @@ static void Cmd_playstatchangeanimation(void)
         {
             if (statsToCheck & 1)
             {
-                if (gBattlescriptCurrInstr[3] & ATK48_DONT_CHECK_LOWER)
+                if (gBattlescriptCurrInstr[3] & STAT_CHANGE_DONT_CHECK_LOWER)
                 {
                     if (gBattleMons[gActiveBattler].statStages[currStat] > 0)
                     {
@@ -4431,7 +4431,7 @@ static void Cmd_playstatchangeanimation(void)
 
         if (changeableStatsCount > 1) // more than one stat, so the color is gray
         {
-            if (gBattlescriptCurrInstr[3] & ATK48_STAT_BY_TWO)
+            if (gBattlescriptCurrInstr[3] & STAT_CHANGE_BY_TWO)
                 statAnimId = STAT_ANIM_MULTIPLE_MINUS2;
             else
                 statAnimId = STAT_ANIM_MULTIPLE_MINUS1;
@@ -4440,7 +4440,7 @@ static void Cmd_playstatchangeanimation(void)
     else // goes up
     {
         s16 startingStatAnimId;
-        if (gBattlescriptCurrInstr[3] & ATK48_STAT_BY_TWO)
+        if (gBattlescriptCurrInstr[3] & STAT_CHANGE_BY_TWO)
             startingStatAnimId = STAT_ANIM_PLUS2 - 1;
         else
             startingStatAnimId = STAT_ANIM_PLUS1 - 1;
@@ -4457,14 +4457,14 @@ static void Cmd_playstatchangeanimation(void)
 
         if (changeableStatsCount > 1) // more than one stat, so the color is gray
         {
-            if (gBattlescriptCurrInstr[3] & ATK48_STAT_BY_TWO)
+            if (gBattlescriptCurrInstr[3] & STAT_CHANGE_BY_TWO)
                 statAnimId = STAT_ANIM_MULTIPLE_PLUS2;
             else
                 statAnimId = STAT_ANIM_MULTIPLE_PLUS1;
         }
     }
 
-    if (gBattlescriptCurrInstr[3] & ATK48_ONLY_MULTIPLE && changeableStatsCount < 2)
+    if (gBattlescriptCurrInstr[3] & STAT_CHANGE_ONLY_MULTIPLE && changeableStatsCount < 2)
     {
         gBattlescriptCurrInstr += 4;
     }
@@ -4472,7 +4472,7 @@ static void Cmd_playstatchangeanimation(void)
     {
         BtlController_EmitBattleAnimation(0, B_ANIM_STATS_CHANGE, statAnimId);
         MarkBattlerForControllerExec(gActiveBattler);
-        if (gBattlescriptCurrInstr[3] & ATK48_ONLY_MULTIPLE && changeableStatsCount > 1)
+        if (gBattlescriptCurrInstr[3] & STAT_CHANGE_ONLY_MULTIPLE && changeableStatsCount > 1)
             gBattleScripting.statAnimPlayed = TRUE;
         gBattlescriptCurrInstr += 4;
     }
@@ -4510,9 +4510,9 @@ static void Cmd_moveend(void)
 
     do
     {
-        switch (gBattleScripting.atk49_state)
+        switch (gBattleScripting.moveendState)
         {
-        case ATK49_RAGE: // rage check
+        case MOVEEND_RAGE: // rage check
             if (gBattleMons[gBattlerTarget].status2 & STATUS2_RAGE
                 && gBattleMons[gBattlerTarget].hp != 0 && gBattlerAttacker != gBattlerTarget
                 && GetBattlerSide(gBattlerAttacker) != GetBattlerSide(gBattlerTarget)
@@ -4524,9 +4524,9 @@ static void Cmd_moveend(void)
                 gBattlescriptCurrInstr = BattleScript_RageIsBuilding;
                 effect = TRUE;
             }
-            gBattleScripting.atk49_state++;
+            gBattleScripting.moveendState++;
             break;
-        case ATK49_DEFROST: // defrosting check
+        case MOVEEND_DEFROST: // defrosting check
             if (gBattleMons[gBattlerTarget].status1 & STATUS1_FREEZE
                 && gBattleMons[gBattlerTarget].hp != 0 && gBattlerAttacker != gBattlerTarget
                 && gSpecialStatuses[gBattlerTarget].specialDmg
@@ -4540,36 +4540,36 @@ static void Cmd_moveend(void)
                 gBattlescriptCurrInstr = BattleScript_DefrostedViaFireMove;
                 effect = TRUE;
             }
-            gBattleScripting.atk49_state++;
+            gBattleScripting.moveendState++;
             break;
-        case ATK49_SYNCHRONIZE_TARGET: // target synchronize
+        case MOVEEND_SYNCHRONIZE_TARGET: // target synchronize
             if (AbilityBattleEffects(ABILITYEFFECT_SYNCHRONIZE, gBattlerTarget, 0, 0, 0))
                 effect = TRUE;
-            gBattleScripting.atk49_state++;
+            gBattleScripting.moveendState++;
             break;
-        case ATK49_MOVE_END_ABILITIES: // Such as abilities activating on contact(Poison Spore, Rough Skin, etc.).
+        case MOVEEND_MOVE_END_ABILITIES: // Such as abilities activating on contact(Poison Spore, Rough Skin, etc.).
             if (AbilityBattleEffects(ABILITYEFFECT_MOVE_END, gBattlerTarget, 0, 0, 0))
                 effect = TRUE;
-            gBattleScripting.atk49_state++;
+            gBattleScripting.moveendState++;
             break;
-        case ATK49_STATUS_IMMUNITY_ABILITIES: // status immunities
+        case MOVEEND_STATUS_IMMUNITY_ABILITIES: // status immunities
             if (AbilityBattleEffects(ABILITYEFFECT_IMMUNITY, 0, 0, 0, 0))
                 effect = TRUE; // it loops through all battlers, so we increment after its done with all battlers
             else
-                gBattleScripting.atk49_state++;
+                gBattleScripting.moveendState++;
             break;
-        case ATK49_SYNCHRONIZE_ATTACKER: // attacker synchronize
+        case MOVEEND_SYNCHRONIZE_ATTACKER: // attacker synchronize
             if (AbilityBattleEffects(ABILITYEFFECT_ATK_SYNCHRONIZE, gBattlerAttacker, 0, 0, 0))
                 effect = TRUE;
-            gBattleScripting.atk49_state++;
+            gBattleScripting.moveendState++;
             break;
-        case ATK49_CHOICE_MOVE: // update choice band move
+        case MOVEEND_CHOICE_MOVE: // update choice band move
             if (!(gHitMarker & HITMARKER_OBEYS) || holdEffectAtk != HOLD_EFFECT_CHOICE_BAND
                 || gChosenMove == MOVE_STRUGGLE || (*choicedMoveAtk != 0 && *choicedMoveAtk != 0xFFFF))
                     goto LOOP;
             if (gChosenMove == MOVE_BATON_PASS && !(gMoveResultFlags & MOVE_RESULT_FAILED))
             {
-                gBattleScripting.atk49_state++;
+                gBattleScripting.moveendState++;
                 break;
             }
             *choicedMoveAtk = gChosenMove;
@@ -4583,10 +4583,10 @@ static void Cmd_moveend(void)
                 if (i == MAX_MON_MOVES)
                     *choicedMoveAtk = 0;
 
-                gBattleScripting.atk49_state++;
+                gBattleScripting.moveendState++;
             }
             break;
-        case ATK49_CHANGED_ITEMS: // changed held items
+        case MOVEEND_CHANGED_ITEMS: // changed held items
             for (i = 0; i < gBattlersCount; i++)
             {
                 u16* changedItem = &gBattleStruct->changedItems[i];
@@ -4596,32 +4596,32 @@ static void Cmd_moveend(void)
                     *changedItem = 0;
                 }
             }
-            gBattleScripting.atk49_state++;
+            gBattleScripting.moveendState++;
             break;
-        case ATK49_ITEM_EFFECTS_ALL: // item effects for all battlers
+        case MOVEEND_ITEM_EFFECTS_ALL: // item effects for all battlers
             if (ItemBattleEffects(ITEMEFFECT_MOVE_END, 0, FALSE))
                 effect = TRUE;
             else
-                gBattleScripting.atk49_state++;
+                gBattleScripting.moveendState++;
             break;
-        case ATK49_KINGSROCK_SHELLBELL: // king's rock and shell bell
+        case MOVEEND_KINGSROCK_SHELLBELL: // king's rock and shell bell
             if (ItemBattleEffects(ITEMEFFECT_KINGSROCK_SHELLBELL, 0, FALSE))
                 effect = TRUE;
-            gBattleScripting.atk49_state++;
+            gBattleScripting.moveendState++;
             break;
-        case ATK49_ATTACKER_INVISIBLE: // make attacker sprite invisible
+        case MOVEEND_ATTACKER_INVISIBLE: // make attacker sprite invisible
             if (gStatuses3[gBattlerAttacker] & (STATUS3_SEMI_INVULNERABLE)
                 && gHitMarker & HITMARKER_NO_ANIMATIONS)
             {
                 gActiveBattler = gBattlerAttacker;
                 BtlController_EmitSpriteInvisibility(0, TRUE);
                 MarkBattlerForControllerExec(gActiveBattler);
-                gBattleScripting.atk49_state++;
+                gBattleScripting.moveendState++;
                 return;
             }
-            gBattleScripting.atk49_state++;
+            gBattleScripting.moveendState++;
             break;
-        case ATK49_ATTACKER_VISIBLE: // make attacker sprite visible
+        case MOVEEND_ATTACKER_VISIBLE: // make attacker sprite visible
             if (gMoveResultFlags & MOVE_RESULT_NO_EFFECT
                 || !(gStatuses3[gBattlerAttacker] & (STATUS3_SEMI_INVULNERABLE))
                 || WasUnableToUseMove(gBattlerAttacker))
@@ -4631,12 +4631,12 @@ static void Cmd_moveend(void)
                 MarkBattlerForControllerExec(gActiveBattler);
                 gStatuses3[gBattlerAttacker] &= ~(STATUS3_SEMI_INVULNERABLE);
                 gSpecialStatuses[gBattlerAttacker].restoredBattlerSprite = 1;
-                gBattleScripting.atk49_state++;
+                gBattleScripting.moveendState++;
                 return;
             }
-            gBattleScripting.atk49_state++;
+            gBattleScripting.moveendState++;
             break;
-        case ATK49_TARGET_VISIBLE: // make target sprite visible
+        case MOVEEND_TARGET_VISIBLE: // make target sprite visible
             if (!gSpecialStatuses[gBattlerTarget].restoredBattlerSprite && gBattlerTarget < gBattlersCount
                 && !(gStatuses3[gBattlerTarget] & STATUS3_SEMI_INVULNERABLE))
             {
@@ -4644,20 +4644,20 @@ static void Cmd_moveend(void)
                 BtlController_EmitSpriteInvisibility(0, FALSE);
                 MarkBattlerForControllerExec(gActiveBattler);
                 gStatuses3[gBattlerTarget] &= ~(STATUS3_SEMI_INVULNERABLE);
-                gBattleScripting.atk49_state++;
+                gBattleScripting.moveendState++;
                 return;
             }
-            gBattleScripting.atk49_state++;
+            gBattleScripting.moveendState++;
             break;
-        case ATK49_SUBSTITUTE: // update substitute
+        case MOVEEND_SUBSTITUTE: // update substitute
             for (i = 0; i < gBattlersCount; i++)
             {
                 if (gDisableStructs[i].substituteHP == 0)
                     gBattleMons[i].status2 &= ~(STATUS2_SUBSTITUTE);
             }
-            gBattleScripting.atk49_state++;
+            gBattleScripting.moveendState++;
             break;
-        case ATK49_UPDATE_LAST_MOVES:
+        case MOVEEND_UPDATE_LAST_MOVES:
             if (gHitMarker & HITMARKER_SWAP_ATTACKER_TARGET)
             {
                 gActiveBattler = gBattlerAttacker;
@@ -4704,9 +4704,9 @@ static void Cmd_moveend(void)
                     gLastLandedMoves[gBattlerTarget] = 0xFFFF;
                 }
             }
-            gBattleScripting.atk49_state++;
+            gBattleScripting.moveendState++;
             break;
-        case ATK49_MIRROR_MOVE: // mirror move
+        case MOVEEND_MIRROR_MOVE: // mirror move
             if (!(gAbsentBattlerFlags & gBitTable[gBattlerAttacker]) && !(gBattleStruct->field_91 & gBitTable[gBattlerAttacker])
                 && gBattleMoves[originallyUsedMove].flags & FLAG_MIRROR_MOVE_AFFECTED && gHitMarker & HITMARKER_OBEYS
                 && gBattlerAttacker != gBattlerTarget && !(gHitMarker & HITMARKER_FAINTED(gBattlerTarget))
@@ -4725,9 +4725,9 @@ static void Cmd_moveend(void)
                 attacker = gBattlerAttacker;
                 *(attacker * 2 + target * 8 + (u8*)(gBattleStruct->lastTakenMoveFrom) + 1) = gChosenMove >> 8;
             }
-            gBattleScripting.atk49_state++;
+            gBattleScripting.moveendState++;
             break;
-        case ATK49_NEXT_TARGET: // For moves hitting two opposing Pokemon.
+        case MOVEEND_NEXT_TARGET: // For moves hitting two opposing Pokemon.
             if (!(gHitMarker & HITMARKER_UNABLE_TO_USE_MOVE) && gBattleTypeFlags & BATTLE_TYPE_DOUBLE
                 && !gProtectStructs[gBattlerAttacker].chargingTurn && gBattleMoves[gCurrentMove].target == MOVE_TARGET_BOTH
                 && !(gHitMarker & HITMARKER_NO_ATTACKSTRING))
@@ -4737,7 +4737,7 @@ static void Cmd_moveend(void)
                 {
                     gBattlerTarget = battlerId;
                     gHitMarker |= HITMARKER_NO_ATTACKSTRING;
-                    gBattleScripting.atk49_state = 0;
+                    gBattleScripting.moveendState = 0;
                     MoveValuesCleanUp();
                     BattleScriptPush(gBattleScriptsForMoveEffects[gBattleMoves[gCurrentMove].effect]);
                     gBattlescriptCurrInstr = BattleScript_FlushMessageBox;
@@ -4748,20 +4748,20 @@ static void Cmd_moveend(void)
                     gHitMarker |= HITMARKER_NO_ATTACKSTRING;
                 }
             }
-            gBattleScripting.atk49_state++;
+            gBattleScripting.moveendState++;
             break;
-        case ATK49_COUNT:
+        case MOVEEND_COUNT:
             break;
         }
 
         if (arg1 == 1 && effect == FALSE)
-            gBattleScripting.atk49_state = ATK49_COUNT;
-        if (arg1 == 2 && arg2 == gBattleScripting.atk49_state)
-            gBattleScripting.atk49_state = ATK49_COUNT;
+            gBattleScripting.moveendState = MOVEEND_COUNT;
+        if (arg1 == 2 && arg2 == gBattleScripting.moveendState)
+            gBattleScripting.moveendState = MOVEEND_COUNT;
 
-    } while (gBattleScripting.atk49_state != ATK49_COUNT && effect == FALSE);
+    } while (gBattleScripting.moveendState != MOVEEND_COUNT && effect == FALSE);
 
-    if (gBattleScripting.atk49_state == ATK49_COUNT && effect == FALSE)
+    if (gBattleScripting.moveendState == MOVEEND_COUNT && effect == FALSE)
         gBattlescriptCurrInstr += 3;
 }
 
@@ -4971,9 +4971,9 @@ static void Cmd_jumpifcantswitch(void)
     s32 lastMonId;
     struct Pokemon *party;
 
-    gActiveBattler = GetBattlerForBattleScript(gBattlescriptCurrInstr[1] & ~(ATK4F_DONT_CHECK_STATUSES));
+    gActiveBattler = GetBattlerForBattleScript(gBattlescriptCurrInstr[1] & ~(DONT_CHECK_STATUSES));
 
-    if (!(gBattlescriptCurrInstr[1] & ATK4F_DONT_CHECK_STATUSES)
+    if (!(gBattlescriptCurrInstr[1] & DONT_CHECK_STATUSES)
         && ((gBattleMons[gActiveBattler].status2 & (STATUS2_WRAPPED | STATUS2_ESCAPE_PREVENTION))
             || (gStatuses3[gActiveBattler] & STATUS3_ROOTED)))
     {
@@ -6130,7 +6130,7 @@ static void Cmd_cancelallactions(void)
     gBattlescriptCurrInstr++;
 }
 
-static void Cmd_adjustsetdamage(void) // The same as 0x7, except there's no random damage multiplier.
+static void Cmd_adjustsetdamage(void) // The same as adjustnormaldamage, except there's no random damage multiplier.
 {
     u8 holdEffect, param;
 
@@ -6202,26 +6202,26 @@ static void Cmd_atknameinbuff1(void)
 
 static void Cmd_drawlvlupbox(void)
 {
-    if (gBattleScripting.atk6C_state == 0)
+    if (gBattleScripting.drawlvlupboxState == 0)
     {
         if (IsMonGettingExpSentOut())
-            gBattleScripting.atk6C_state = 3;
+            gBattleScripting.drawlvlupboxState = 3;
         else
-            gBattleScripting.atk6C_state = 1;
+            gBattleScripting.drawlvlupboxState = 1;
     }
 
-    switch (gBattleScripting.atk6C_state)
+    switch (gBattleScripting.drawlvlupboxState)
     {
     case 1:
         gBattle_BG2_Y = 0x60;
         SetBgAttribute(2, BG_ATTR_PRIORITY, 0);
         ShowBg(2);
         sub_804F17C();
-        gBattleScripting.atk6C_state = 2;
+        gBattleScripting.drawlvlupboxState = 2;
         break;
     case 2:
         if (!sub_804F1CC())
-            gBattleScripting.atk6C_state = 3;
+            gBattleScripting.drawlvlupboxState = 3;
         break;
     case 3:
         gBattle_BG1_X = 0;
@@ -6231,20 +6231,20 @@ static void Cmd_drawlvlupbox(void)
         ShowBg(0);
         ShowBg(1);
         HandleBattleWindow(0x12, 7, 0x1D, 0x13, WINDOW_x80);
-        gBattleScripting.atk6C_state = 4;
+        gBattleScripting.drawlvlupboxState = 4;
         break;
     case 4:
         DrawLevelUpWindow1();
         PutWindowTilemap(13);
         CopyWindowToVram(13, 3);
-        gBattleScripting.atk6C_state++;
+        gBattleScripting.drawlvlupboxState++;
         break;
     case 5:
     case 7:
         if (!IsDma3ManagerBusyWithBgCopy())
         {
             gBattle_BG1_Y = 0;
-            gBattleScripting.atk6C_state++;
+            gBattleScripting.drawlvlupboxState++;
         }
         break;
     case 6:
@@ -6253,7 +6253,7 @@ static void Cmd_drawlvlupbox(void)
             PlaySE(SE_SELECT);
             DrawLevelUpWindow2();
             CopyWindowToVram(13, 2);
-            gBattleScripting.atk6C_state++;
+            gBattleScripting.drawlvlupboxState++;
         }
         break;
     case 8:
@@ -6261,7 +6261,7 @@ static void Cmd_drawlvlupbox(void)
         {
             PlaySE(SE_SELECT);
             HandleBattleWindow(0x12, 7, 0x1D, 0x13, WINDOW_x80 | WINDOW_CLEAR);
-            gBattleScripting.atk6C_state++;
+            gBattleScripting.drawlvlupboxState++;
         }
         break;
     case 9:
@@ -6276,7 +6276,7 @@ static void Cmd_drawlvlupbox(void)
             SetBgAttribute(2, BG_ATTR_PRIORITY, 2);
             ShowBg(2);
 
-            gBattleScripting.atk6C_state = 10;
+            gBattleScripting.drawlvlupboxState = 10;
         }
         break;
     case 10:
@@ -6999,17 +6999,17 @@ static void Cmd_manipulatedamage(void)
 {
     switch (gBattlescriptCurrInstr[1])
     {
-    case ATK80_DMG_CHANGE_SIGN:
+    case DMG_CHANGE_SIGN:
         gBattleMoveDamage *= -1;
         break;
-    case ATK80_DMG_HALF_BY_TWO_NOT_MORE_THAN_HALF_MAX_HP:
+    case DMG_HALF_BY_TWO_NOT_MORE_THAN_HALF_MAX_HP:
         gBattleMoveDamage /= 2;
         if (gBattleMoveDamage == 0)
             gBattleMoveDamage = 1;
         if ((gBattleMons[gBattlerTarget].maxHP / 2) < gBattleMoveDamage)
             gBattleMoveDamage = gBattleMons[gBattlerTarget].maxHP / 2;
         break;
-    case ATK80_DMG_DOUBLED:
+    case DMG_DOUBLED:
         gBattleMoveDamage *= 2;
         break;
     }
