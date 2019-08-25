@@ -372,47 +372,47 @@ gSpecials:: @ 81DBA64
 	def_special SetSecretBaseSecretsTvFlags_LargeDecorationSpot
 	def_special SetSecretBaseSecretsTvFlags_SmallDecorationSpot
 	def_special SetSecretBaseSecretsTvFlags_Poster
-	def_special sub_818D9C0
-	def_special sub_818DAEC
-	def_special sub_818DBE8
-	def_special sub_818DC2C
-	def_special sub_818DC60
-	def_special sub_818DCC8
-	def_special sub_818DD14
-	def_special sub_818DD54
-	def_special sub_818DD78
-	def_special sub_818DE44
-	def_special sub_818DE5C
-	def_special sub_818DEA0
-	def_special sub_818DEDC
-	def_special sub_818E038
-	def_special sub_818E06C
-	def_special sub_818E2D8
-	def_special sub_811A858
-	def_special sub_818E2FC
-	def_special sub_818E308
-	def_special sub_818E358
-	def_special sub_818E37C
-	def_special sub_818E298
-	def_special sub_818E39C
-	def_special sub_818E3BC
-	def_special sub_818E3E0
-	def_special sub_818E430
-	def_special sub_818E47C
-	def_special sub_818E490
+	def_special SetLilycoveLadyGfx
+	def_special Script_GetLilycoveLadyId
+	def_special GetFavorLadyState
+	def_special BufferFavorLadyRequest
+	def_special HasAnotherPlayerGivenFavorLadyItem
+	def_special BufferFavorLadyItemName
+	def_special BufferFavorLadyPlayerName
+	def_special DidFavorLadyLikeItem
+	def_special Script_FavorLadyOpenBagMenu
+	def_special Script_DoesFavorLadyLikeItem
+	def_special IsFavorLadyThresholdMet
+	def_special FavorLadyGetPrize
+	def_special SetFavorLadyState_Complete
+	def_special GetQuizLadyState
+	def_special GetQuizAuthor
+	def_special IsQuizLadyWaitingForChallenger
+	def_special QuizLadyShowQuizQuestion
+	def_special QuizLadyGetPlayerAnswer
+	def_special IsQuizAnswerCorrect
+	def_special BufferQuizPrizeItem
+	def_special SetQuizLadyState_Complete
+	def_special BufferQuizAuthorNameAndCheckIfLady
+	def_special SetQuizLadyState_GivePrize
+	def_special ClearQuizLadyPlayerAnswer
+	def_special Script_QuizLadyOpenBagMenu
+	def_special ClearQuizLadyQuestionAndAnswer
+	def_special QuizLadySetCustomQuestion
+	def_special QuizLadyTakePrizeForCustomQuiz
 	def_special sub_813986C
-	def_special sub_818E4A4
-	def_special sub_818E510
-	def_special sub_818E538
-	def_special sub_818E274
-	def_special sub_818E3EC
-	def_special sub_818E8E0
-	def_special sub_818E8B4
-	def_special sub_818E914
-	def_special sub_818E92C
-	def_special sub_818E940
-	def_special sub_818E960
-	def_special sub_818E990
+	def_special QuizLadyRecordCustomQuizData
+	def_special QuizLadySetWaitingForChallenger
+	def_special BufferQuizCorrectAnswer
+	def_special BufferQuizPrizeName
+	def_special QuizLadyPickNewQuestion
+	def_special ShouldContestLadyShowGoOnAir
+	def_special HasPlayerGivenContestLadyPokeblock
+	def_special Script_BufferContestLadyCategoryAndMonName
+	def_special OpenPokeblockCaseForContestLady
+	def_special SetContestLadyGivenPokeblock
+	def_special GetContestLadyMonSpecies
+	def_special GetContestLadyCategory
 	def_special PutLilycoveContestLadyShowOnTheAir
 	def_special sub_813B880
 	def_special CallApprenticeFunction

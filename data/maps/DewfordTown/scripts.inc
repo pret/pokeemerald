@@ -180,7 +180,7 @@ DewfordTown_EventScript_1E96E7:: @ 81E96E7
 	copyvar VAR_BRINEY_LOCATION, VAR_0x8008
 	resetobjectpriority EVENT_OBJ_ID_PLAYER, MAP_DEWFORD_TOWN
 	resetobjectpriority 2, MAP_ROUTE109
-	moveobjectoffscreen 2
+	copyobjectxytoperm 2
 	release
 	end
 

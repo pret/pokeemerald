@@ -3650,7 +3650,7 @@ static u8 sub_81B31B0(u8 a)
 
     for (i = 0; i < gUnknown_0203CEC4->listSize; i++)
     {
-        u8 unk = (gUnknown_0203CEC4->actions[i] > 18) ? 4 : 3;
+        u8 unk = (gUnknown_0203CEC4->actions[i] >= MENU_FIELD_MOVES) ? 4 : 3;
         AddTextPrinterParameterized4(gUnknown_0203CEC4->windowId[0], 1, cursorDimension, (i * 16) + 1, fontAttribute, 0, sFontColorTable[unk], 0, sCursorOptions[gUnknown_0203CEC4->actions[i]].text);
     }
 

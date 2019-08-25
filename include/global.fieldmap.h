@@ -267,19 +267,6 @@ enum
 
 enum
 {
-    DIR_NONE,
-    DIR_SOUTH,
-    DIR_NORTH,
-    DIR_WEST,
-    DIR_EAST,
-    DIR_SOUTHWEST,
-    DIR_SOUTHEAST,
-    DIR_NORTHWEST,
-    DIR_NORTHEAST,
-};
-
-enum
-{
     COLLISION_LEDGE_JUMP = 6
 };
 
