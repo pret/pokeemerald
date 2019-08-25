@@ -25,7 +25,6 @@ SECTIONS {
     {
         /* .bss starts at 0x3000000 */
         src/*.o(.bss);
-		asm/m4a_1.o(.bss);
 
         /* .bss.code starts at 0x3001AA8 */
         src/m4a.o(.bss.code);
@@ -42,7 +41,7 @@ SECTIONS {
     .text :
     ALIGN(4)
     {
-        asm/crt0.o(.text);
+        src/crt0.o(.text);
         src/*.o(.text);
         asm/*.o(.text);
     } =0
@@ -56,8 +55,8 @@ SECTIONS {
     lib_text :
     ALIGN(4)
     {
-        asm/libgcnmultiboot.o(.text);
-        asm/m4a_1.o(.text);
+        src/libgcnmultiboot.o(.text);
+        src/m4a_1.o(.text);
         src/m4a.o(.text);
         src/agb_flash.o(.text);
         src/agb_flash_1m.o(.text);
@@ -68,7 +67,7 @@ SECTIONS {
         asm/librfu_intr.o(.text);
         src/librfu_rfu.o(.text);
         asm/librfu.o(.text);
-        asm/libagbsyscall.o(.text);
+        src/libagbsyscall.o(.text);
         *libgcc.a:*.o(.text*);
         *libc.a:*.o(.text*);
         src/libisagbprn.o(.text);

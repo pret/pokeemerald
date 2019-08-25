@@ -464,9 +464,6 @@ EWRAM_DATA static u8 sMovingMonOrigBoxPos = 0;
 EWRAM_DATA static bool8 sCanOnlyMove = 0;
 
 // This file's functions.
-#if !defined(NONMATCHING) && MODERN
-#define static
-#endif
 static void CreatePCMenu(u8 whichMenu, s16 *windowIdPtr);
 static void Cb2_EnterPSS(u8 boxOption);
 static u8 GetCurrentBoxOption(void);

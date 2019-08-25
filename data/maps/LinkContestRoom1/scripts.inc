@@ -172,131 +172,131 @@ LinkContestRoom1_EventScript_23B8F8:: @ 823B8F8
 	end
 
 LinkContestRoom1_EventScript_23BA6B:: @ 823BA6B
-	setvar VAR_TEMP_1, 5
+	setvar VAR_TEMP_1, EVENT_OBJ_GFX_NINJA_BOY
 	return
 
 LinkContestRoom1_EventScript_23BA71:: @ 823BA71
-	setvar VAR_TEMP_1, 6
+	setvar VAR_TEMP_1, EVENT_OBJ_GFX_TWIN
 	return
 
 LinkContestRoom1_EventScript_23BA77:: @ 823BA77
-	setvar VAR_TEMP_1, 7
+	setvar VAR_TEMP_1, EVENT_OBJ_GFX_BOY_1
 	return
 
 LinkContestRoom1_EventScript_23BA7D:: @ 823BA7D
-	setvar VAR_TEMP_1, 8
+	setvar VAR_TEMP_1, EVENT_OBJ_GFX_GIRL_1
 	return
 
 LinkContestRoom1_EventScript_23BA83:: @ 823BA83
-	setvar VAR_TEMP_1, 10
+	setvar VAR_TEMP_1, EVENT_OBJ_GFX_GIRL_2
 	return
 
 LinkContestRoom1_EventScript_23BA89:: @ 823BA89
-	setvar VAR_TEMP_1, 11
+	setvar VAR_TEMP_1, EVENT_OBJ_GFX_LITTLE_BOY
 	return
 
 LinkContestRoom1_EventScript_23BA8F:: @ 823BA8F
-	setvar VAR_TEMP_1, 12
+	setvar VAR_TEMP_1, EVENT_OBJ_GFX_LITTLE_GIRL
 	return
 
 LinkContestRoom1_EventScript_23BA95:: @ 823BA95
-	setvar VAR_TEMP_1, 13
+	setvar VAR_TEMP_1, EVENT_OBJ_GFX_BOY_3
 	return
 
 LinkContestRoom1_EventScript_23BA9B:: @ 823BA9B
-	setvar VAR_TEMP_1, 14
+	setvar VAR_TEMP_1, EVENT_OBJ_GFX_GIRL_3
 	return
 
 LinkContestRoom1_EventScript_23BAA1:: @ 823BAA1
-	setvar VAR_TEMP_1, 15
+	setvar VAR_TEMP_1, EVENT_OBJ_GFX_RICH_BOY
 	return
 
 LinkContestRoom1_EventScript_23BAA7:: @ 823BAA7
-	setvar VAR_TEMP_1, 17
+	setvar VAR_TEMP_1, EVENT_OBJ_GFX_FAT_MAN
 	return
 
 LinkContestRoom1_EventScript_23BAAD:: @ 823BAAD
-	setvar VAR_TEMP_1, 18
+	setvar VAR_TEMP_1, EVENT_OBJ_GFX_POKEFAN_F
 	return
 
 LinkContestRoom1_EventScript_23BAB3:: @ 823BAB3
-	setvar VAR_TEMP_1, 19
+	setvar VAR_TEMP_1, EVENT_OBJ_GFX_MAN_1
 	return
 
 LinkContestRoom1_EventScript_23BAB9:: @ 823BAB9
-	setvar VAR_TEMP_1, 20
+	setvar VAR_TEMP_1, EVENT_OBJ_GFX_WOMAN_2
 	return
 
 LinkContestRoom1_EventScript_23BABF:: @ 823BABF
-	setvar VAR_TEMP_1, 21
+	setvar VAR_TEMP_1, EVENT_OBJ_GFX_EXPERT_M
 	return
 
 LinkContestRoom1_EventScript_23BAC5:: @ 823BAC5
-	setvar VAR_TEMP_1, 22
+	setvar VAR_TEMP_1, EVENT_OBJ_GFX_EXPERT_F
 	return
 
 LinkContestRoom1_EventScript_23BACB:: @ 823BACB
-	setvar VAR_TEMP_1, 25
+	setvar VAR_TEMP_1, EVENT_OBJ_GFX_POKEFAN_M
 	return
 
 LinkContestRoom1_EventScript_23BAD1:: @ 823BAD1
-	setvar VAR_TEMP_1, 26
+	setvar VAR_TEMP_1, EVENT_OBJ_GFX_WOMAN_4
 	return
 
 LinkContestRoom1_EventScript_23BAD7:: @ 823BAD7
-	setvar VAR_TEMP_1, 27
+	setvar VAR_TEMP_1, EVENT_OBJ_GFX_COOK
 	return
 
 LinkContestRoom1_EventScript_23BADD:: @ 823BADD
-	setvar VAR_TEMP_1, 47
+	setvar VAR_TEMP_1, EVENT_OBJ_GFX_LASS
 	return
 
 LinkContestRoom1_EventScript_23BAE3:: @ 823BAE3
-	setvar VAR_TEMP_1, 30
+	setvar VAR_TEMP_1, EVENT_OBJ_GFX_OLD_WOMAN
 	return
 
 LinkContestRoom1_EventScript_23BAE9:: @ 823BAE9
-	setvar VAR_TEMP_1, 31
+	setvar VAR_TEMP_1, EVENT_OBJ_GFX_CAMPER
 	return
 
 LinkContestRoom1_EventScript_23BAEF:: @ 823BAEF
-	setvar VAR_TEMP_1, 32
+	setvar VAR_TEMP_1, EVENT_OBJ_GFX_PICNICKER
 	return
 
 LinkContestRoom1_EventScript_23BAF5:: @ 823BAF5
-	setvar VAR_TEMP_1, 33
+	setvar VAR_TEMP_1, EVENT_OBJ_GFX_MAN_3
 	return
 
 LinkContestRoom1_EventScript_23BAFB:: @ 823BAFB
-	setvar VAR_TEMP_1, 34
+	setvar VAR_TEMP_1, EVENT_OBJ_GFX_WOMAN_5
 	return
 
 LinkContestRoom1_EventScript_23BB01:: @ 823BB01
-	setvar VAR_TEMP_1, 35
+	setvar VAR_TEMP_1, EVENT_OBJ_GFX_YOUNGSTER
 	return
 
 LinkContestRoom1_EventScript_23BB07:: @ 823BB07
-	setvar VAR_TEMP_1, 36
+	setvar VAR_TEMP_1, EVENT_OBJ_GFX_BUG_CATCHER
 	return
 
 LinkContestRoom1_EventScript_23BB0D:: @ 823BB0D
-	setvar VAR_TEMP_1, 37
+	setvar VAR_TEMP_1, EVENT_OBJ_GFX_PSYCHIC_M
 	return
 
 LinkContestRoom1_EventScript_23BB13:: @ 823BB13
-	setvar VAR_TEMP_1, 38
+	setvar VAR_TEMP_1, EVENT_OBJ_GFX_SCHOOL_KID_M
 	return
 
 LinkContestRoom1_EventScript_23BB19:: @ 823BB19
-	setvar VAR_TEMP_1, 44
+	setvar VAR_TEMP_1, EVENT_OBJ_GFX_BLACK_BELT
 	return
 
 LinkContestRoom1_EventScript_23BB1F:: @ 823BB1F
-	setvar VAR_TEMP_1, 45
+	setvar VAR_TEMP_1, EVENT_OBJ_GFX_BEAUTY
 	return
 
 LinkContestRoom1_EventScript_23BB25:: @ 823BB25
-	setvar VAR_TEMP_1, 46
+	setvar VAR_TEMP_1, EVENT_OBJ_GFX_SCIENTIST_1
 	return
 
 LinkContestRoom1_EventScript_23BB2B:: @ 823BB2B
@@ -312,97 +312,97 @@ LinkContestRoom1_EventScript_23BB2B:: @ 823BB2B
 	return
 
 LinkContestRoom1_EventScript_23BB78:: @ 823BB78
-	createvobject EVENT_OBJ_GFX_NINJA_BOY, 20, 3, 2, 3, 1
-	createvobject EVENT_OBJ_GFX_SCIENTIST_1, 24, 11, 2, 3, 1
+	createvobject EVENT_OBJ_GFX_NINJA_BOY, 20, 3, 2, 3, DIR_SOUTH
+	createvobject EVENT_OBJ_GFX_SCIENTIST_1, 24, 11, 2, 3, DIR_SOUTH
 	return
 
 LinkContestRoom1_EventScript_23BB8B:: @ 823BB8B
-	createvobject EVENT_OBJ_GFX_BEAUTY, 0, 2, 3, 3, 4
-	createvobject EVENT_OBJ_GFX_MAN_5, 1, 2, 4, 3, 4
-	createvobject EVENT_OBJ_GFX_HIKER, 2, 2, 7, 3, 4
-	createvobject EVENT_OBJ_GFX_SCIENTIST_1, 3, 2, 8, 3, 4
-	createvobject EVENT_OBJ_GFX_NINJA_BOY, 10, 12, 3, 3, 3
-	createvobject EVENT_OBJ_GFX_WOMAN_2, 11, 12, 4, 3, 3
-	createvobject EVENT_OBJ_GFX_WOMAN_3, 12, 12, 7, 3, 3
-	createvobject EVENT_OBJ_GFX_LITTLE_GIRL, 13, 12, 8, 3, 3
-	createvobject EVENT_OBJ_GFX_LASS, 20, 3, 2, 3, 1
-	createvobject EVENT_OBJ_GFX_SCIENTIST_1, 24, 11, 2, 3, 1
+	createvobject EVENT_OBJ_GFX_BEAUTY, 0, 2, 3, 3, DIR_EAST
+	createvobject EVENT_OBJ_GFX_MAN_5, 1, 2, 4, 3, DIR_EAST
+	createvobject EVENT_OBJ_GFX_HIKER, 2, 2, 7, 3, DIR_EAST
+	createvobject EVENT_OBJ_GFX_SCIENTIST_1, 3, 2, 8, 3, DIR_EAST
+	createvobject EVENT_OBJ_GFX_NINJA_BOY, 10, 12, 3, 3, DIR_WEST
+	createvobject EVENT_OBJ_GFX_WOMAN_2, 11, 12, 4, 3, DIR_WEST
+	createvobject EVENT_OBJ_GFX_WOMAN_3, 12, 12, 7, 3, DIR_WEST
+	createvobject EVENT_OBJ_GFX_LITTLE_GIRL, 13, 12, 8, 3, DIR_WEST
+	createvobject EVENT_OBJ_GFX_LASS, 20, 3, 2, 3, DIR_SOUTH
+	createvobject EVENT_OBJ_GFX_SCIENTIST_1, 24, 11, 2, 3, DIR_SOUTH
 	return
 
 LinkContestRoom1_EventScript_23BBE6:: @ 823BBE6
-	createvobject EVENT_OBJ_GFX_BEAUTY, 0, 2, 3, 3, 4
-	createvobject EVENT_OBJ_GFX_MAN_5, 1, 2, 4, 3, 4
-	createvobject EVENT_OBJ_GFX_HIKER, 2, 2, 7, 3, 4
-	createvobject EVENT_OBJ_GFX_GENTLEMAN, 3, 2, 8, 3, 4
-	createvobject EVENT_OBJ_GFX_NINJA_BOY, 10, 12, 3, 3, 3
-	createvobject EVENT_OBJ_GFX_WOMAN_2, 11, 12, 4, 3, 3
-	createvobject EVENT_OBJ_GFX_WOMAN_3, 12, 12, 7, 3, 3
-	createvobject EVENT_OBJ_GFX_BEAUTY, 13, 12, 8, 3, 3
-	createvobject EVENT_OBJ_GFX_EXPERT_F, 20, 3, 2, 3, 1
-	createvobject EVENT_OBJ_GFX_MAN_2, 20, 6, 2, 3, 1
-	createvobject EVENT_OBJ_GFX_WOMAN_5, 20, 7, 2, 3, 1
-	createvobject EVENT_OBJ_GFX_SCIENTIST_1, 24, 8, 2, 3, 1
-	createvobject EVENT_OBJ_GFX_GENTLEMAN, 24, 11, 2, 3, 1
-	createvobject EVENT_OBJ_GFX_LITTLE_BOY, 25, 3, 9, 3, 2
-	createvobject EVENT_OBJ_GFX_YOUNGSTER, 26, 4, 9, 3, 2
-	createvobject EVENT_OBJ_GFX_FAT_MAN, 27, 5, 9, 3, 2
-	createvobject EVENT_OBJ_GFX_HEX_MANIAC, 28, 9, 9, 3, 2
-	createvobject EVENT_OBJ_GFX_SCHOOL_KID_M, 29, 10, 9, 3, 2
-	createvobject EVENT_OBJ_GFX_MART_EMPLOYEE, 30, 11, 9, 3, 2
+	createvobject EVENT_OBJ_GFX_BEAUTY, 0, 2, 3, 3, DIR_EAST
+	createvobject EVENT_OBJ_GFX_MAN_5, 1, 2, 4, 3, DIR_EAST
+	createvobject EVENT_OBJ_GFX_HIKER, 2, 2, 7, 3, DIR_EAST
+	createvobject EVENT_OBJ_GFX_GENTLEMAN, 3, 2, 8, 3, DIR_EAST
+	createvobject EVENT_OBJ_GFX_NINJA_BOY, 10, 12, 3, 3, DIR_WEST
+	createvobject EVENT_OBJ_GFX_WOMAN_2, 11, 12, 4, 3, DIR_WEST
+	createvobject EVENT_OBJ_GFX_WOMAN_3, 12, 12, 7, 3, DIR_WEST
+	createvobject EVENT_OBJ_GFX_BEAUTY, 13, 12, 8, 3, DIR_WEST
+	createvobject EVENT_OBJ_GFX_EXPERT_F, 20, 3, 2, 3, DIR_SOUTH
+	createvobject EVENT_OBJ_GFX_MAN_2, 20, 6, 2, 3, DIR_SOUTH
+	createvobject EVENT_OBJ_GFX_WOMAN_5, 20, 7, 2, 3, DIR_SOUTH
+	createvobject EVENT_OBJ_GFX_SCIENTIST_1, 24, 8, 2, 3, DIR_SOUTH
+	createvobject EVENT_OBJ_GFX_GENTLEMAN, 24, 11, 2, 3, DIR_SOUTH
+	createvobject EVENT_OBJ_GFX_LITTLE_BOY, 25, 3, 9, 3, DIR_NORTH
+	createvobject EVENT_OBJ_GFX_YOUNGSTER, 26, 4, 9, 3, DIR_NORTH
+	createvobject EVENT_OBJ_GFX_FAT_MAN, 27, 5, 9, 3, DIR_NORTH
+	createvobject EVENT_OBJ_GFX_HEX_MANIAC, 28, 9, 9, 3, DIR_NORTH
+	createvobject EVENT_OBJ_GFX_SCHOOL_KID_M, 29, 10, 9, 3, DIR_NORTH
+	createvobject EVENT_OBJ_GFX_MART_EMPLOYEE, 30, 11, 9, 3, DIR_NORTH
 	return
 
 LinkContestRoom1_EventScript_23BC92:: @ 823BC92
-	createvobject EVENT_OBJ_GFX_BEAUTY, 0, 2, 3, 3, 4
-	createvobject EVENT_OBJ_GFX_MAN_5, 1, 2, 4, 3, 4
-	createvobject EVENT_OBJ_GFX_HIKER, 2, 2, 7, 3, 4
-	createvobject EVENT_OBJ_GFX_LITTLE_GIRL, 3, 2, 8, 3, 4
-	createvobject EVENT_OBJ_GFX_MANIAC, 4, 1, 3, 3, 4
-	createvobject EVENT_OBJ_GFX_WOMAN_5, 6, 1, 5, 3, 4
-	createvobject EVENT_OBJ_GFX_WOMAN_4, 7, 1, 6, 3, 4
-	createvobject EVENT_OBJ_GFX_GENTLEMAN, 9, 1, 8, 3, 4
-	createvobject EVENT_OBJ_GFX_NINJA_BOY, 10, 12, 3, 3, 3
-	createvobject EVENT_OBJ_GFX_WOMAN_2, 11, 12, 4, 3, 3
-	createvobject EVENT_OBJ_GFX_WOMAN_3, 12, 12, 7, 3, 3
-	createvobject EVENT_OBJ_GFX_BEAUTY, 13, 12, 8, 3, 3
-	createvobject EVENT_OBJ_GFX_FISHERMAN, 14, 13, 3, 3, 3
-	createvobject EVENT_OBJ_GFX_RUNNING_TRIATHLETE_F, 15, 13, 4, 3, 3
-	createvobject EVENT_OBJ_GFX_MAN_4, 17, 13, 6, 3, 3
-	createvobject EVENT_OBJ_GFX_MART_EMPLOYEE, 18, 13, 7, 3, 3
-	createvobject EVENT_OBJ_GFX_DEVON_EMPLOYEE, 19, 13, 8, 3, 3
-	createvobject EVENT_OBJ_GFX_POKEFAN_M, 20, 3, 2, 3, 1
-	createvobject EVENT_OBJ_GFX_CAMPER, 21, 6, 2, 3, 1
-	createvobject EVENT_OBJ_GFX_MAN_3, 22, 7, 2, 3, 1
-	createvobject EVENT_OBJ_GFX_SCIENTIST_1, 24, 11, 2, 3, 1
-	createvobject EVENT_OBJ_GFX_SAILOR, 25, 3, 9, 3, 2
-	createvobject EVENT_OBJ_GFX_YOUNGSTER, 26, 4, 9, 3, 2
-	createvobject EVENT_OBJ_GFX_GENTLEMAN, 27, 5, 9, 3, 2
-	createvobject EVENT_OBJ_GFX_HEX_MANIAC, 28, 9, 9, 3, 2
-	createvobject EVENT_OBJ_GFX_SCHOOL_KID_M, 29, 10, 9, 3, 2
-	createvobject EVENT_OBJ_GFX_MART_EMPLOYEE, 30, 11, 9, 3, 2
+	createvobject EVENT_OBJ_GFX_BEAUTY, 0, 2, 3, 3, DIR_EAST
+	createvobject EVENT_OBJ_GFX_MAN_5, 1, 2, 4, 3, DIR_EAST
+	createvobject EVENT_OBJ_GFX_HIKER, 2, 2, 7, 3, DIR_EAST
+	createvobject EVENT_OBJ_GFX_LITTLE_GIRL, 3, 2, 8, 3, DIR_EAST
+	createvobject EVENT_OBJ_GFX_MANIAC, 4, 1, 3, 3, DIR_EAST
+	createvobject EVENT_OBJ_GFX_WOMAN_5, 6, 1, 5, 3, DIR_EAST
+	createvobject EVENT_OBJ_GFX_WOMAN_4, 7, 1, 6, 3, DIR_EAST
+	createvobject EVENT_OBJ_GFX_GENTLEMAN, 9, 1, 8, 3, DIR_EAST
+	createvobject EVENT_OBJ_GFX_NINJA_BOY, 10, 12, 3, 3, DIR_WEST
+	createvobject EVENT_OBJ_GFX_WOMAN_2, 11, 12, 4, 3, DIR_WEST
+	createvobject EVENT_OBJ_GFX_WOMAN_3, 12, 12, 7, 3, DIR_WEST
+	createvobject EVENT_OBJ_GFX_BEAUTY, 13, 12, 8, 3, DIR_WEST
+	createvobject EVENT_OBJ_GFX_FISHERMAN, 14, 13, 3, 3, DIR_WEST
+	createvobject EVENT_OBJ_GFX_RUNNING_TRIATHLETE_F, 15, 13, 4, 3, DIR_WEST
+	createvobject EVENT_OBJ_GFX_MAN_4, 17, 13, 6, 3, DIR_WEST
+	createvobject EVENT_OBJ_GFX_MART_EMPLOYEE, 18, 13, 7, 3, DIR_WEST
+	createvobject EVENT_OBJ_GFX_DEVON_EMPLOYEE, 19, 13, 8, 3, DIR_WEST
+	createvobject EVENT_OBJ_GFX_POKEFAN_M, 20, 3, 2, 3, DIR_SOUTH
+	createvobject EVENT_OBJ_GFX_CAMPER, 21, 6, 2, 3, DIR_SOUTH
+	createvobject EVENT_OBJ_GFX_MAN_3, 22, 7, 2, 3, DIR_SOUTH
+	createvobject EVENT_OBJ_GFX_SCIENTIST_1, 24, 11, 2, 3, DIR_SOUTH
+	createvobject EVENT_OBJ_GFX_SAILOR, 25, 3, 9, 3, DIR_NORTH
+	createvobject EVENT_OBJ_GFX_YOUNGSTER, 26, 4, 9, 3, DIR_NORTH
+	createvobject EVENT_OBJ_GFX_GENTLEMAN, 27, 5, 9, 3, DIR_NORTH
+	createvobject EVENT_OBJ_GFX_HEX_MANIAC, 28, 9, 9, 3, DIR_NORTH
+	createvobject EVENT_OBJ_GFX_SCHOOL_KID_M, 29, 10, 9, 3, DIR_NORTH
+	createvobject EVENT_OBJ_GFX_MART_EMPLOYEE, 30, 11, 9, 3, DIR_NORTH
 	return
 
 LinkContestRoom1_EventScript_23BD86:: @ 823BD86
-	createvobject EVENT_OBJ_GFX_BEAUTY, 0, 2, 3, 3, 4
-	createvobject EVENT_OBJ_GFX_MAN_5, 1, 2, 4, 3, 4
-	createvobject EVENT_OBJ_GFX_HIKER, 2, 2, 7, 3, 4
-	createvobject EVENT_OBJ_GFX_LITTLE_GIRL, 3, 2, 8, 3, 4
-	createvobject EVENT_OBJ_GFX_MANIAC, 4, 1, 3, 3, 4
-	createvobject EVENT_OBJ_GFX_WOMAN_5, 6, 1, 5, 3, 4
-	createvobject EVENT_OBJ_GFX_WOMAN_4, 7, 1, 6, 3, 4
-	createvobject EVENT_OBJ_GFX_GENTLEMAN, 9, 1, 8, 3, 4
-	createvobject EVENT_OBJ_GFX_NINJA_BOY, 10, 12, 3, 3, 3
-	createvobject EVENT_OBJ_GFX_WOMAN_2, 11, 12, 4, 3, 3
-	createvobject EVENT_OBJ_GFX_WOMAN_3, 12, 12, 7, 3, 3
-	createvobject EVENT_OBJ_GFX_BEAUTY, 13, 12, 8, 3, 3
-	createvobject EVENT_OBJ_GFX_FISHERMAN, 14, 13, 3, 3, 3
-	createvobject EVENT_OBJ_GFX_RUNNING_TRIATHLETE_F, 15, 13, 4, 3, 3
-	createvobject EVENT_OBJ_GFX_MAN_4, 17, 13, 6, 3, 3
-	createvobject EVENT_OBJ_GFX_MART_EMPLOYEE, 18, 13, 7, 3, 3
-	createvobject EVENT_OBJ_GFX_DEVON_EMPLOYEE, 19, 13, 8, 3, 3
-	createvobject EVENT_OBJ_GFX_POKEFAN_M, 20, 3, 2, 3, 1
-	createvobject EVENT_OBJ_GFX_CAMPER, 21, 6, 2, 3, 1
-	createvobject EVENT_OBJ_GFX_MAN_3, 22, 7, 2, 3, 1
-	createvobject EVENT_OBJ_GFX_SCIENTIST_1, 24, 11, 2, 3, 1
+	createvobject EVENT_OBJ_GFX_BEAUTY, 0, 2, 3, 3, DIR_EAST
+	createvobject EVENT_OBJ_GFX_MAN_5, 1, 2, 4, 3, DIR_EAST
+	createvobject EVENT_OBJ_GFX_HIKER, 2, 2, 7, 3, DIR_EAST
+	createvobject EVENT_OBJ_GFX_LITTLE_GIRL, 3, 2, 8, 3, DIR_EAST
+	createvobject EVENT_OBJ_GFX_MANIAC, 4, 1, 3, 3, DIR_EAST
+	createvobject EVENT_OBJ_GFX_WOMAN_5, 6, 1, 5, 3, DIR_EAST
+	createvobject EVENT_OBJ_GFX_WOMAN_4, 7, 1, 6, 3, DIR_EAST
+	createvobject EVENT_OBJ_GFX_GENTLEMAN, 9, 1, 8, 3, DIR_EAST
+	createvobject EVENT_OBJ_GFX_NINJA_BOY, 10, 12, 3, 3, DIR_WEST
+	createvobject EVENT_OBJ_GFX_WOMAN_2, 11, 12, 4, 3, DIR_WEST
+	createvobject EVENT_OBJ_GFX_WOMAN_3, 12, 12, 7, 3, DIR_WEST
+	createvobject EVENT_OBJ_GFX_BEAUTY, 13, 12, 8, 3, DIR_WEST
+	createvobject EVENT_OBJ_GFX_FISHERMAN, 14, 13, 3, 3, DIR_WEST
+	createvobject EVENT_OBJ_GFX_RUNNING_TRIATHLETE_F, 15, 13, 4, 3, DIR_WEST
+	createvobject EVENT_OBJ_GFX_MAN_4, 17, 13, 6, 3, DIR_WEST
+	createvobject EVENT_OBJ_GFX_MART_EMPLOYEE, 18, 13, 7, 3, DIR_WEST
+	createvobject EVENT_OBJ_GFX_DEVON_EMPLOYEE, 19, 13, 8, 3, DIR_WEST
+	createvobject EVENT_OBJ_GFX_POKEFAN_M, 20, 3, 2, 3, DIR_SOUTH
+	createvobject EVENT_OBJ_GFX_CAMPER, 21, 6, 2, 3, DIR_SOUTH
+	createvobject EVENT_OBJ_GFX_MAN_3, 22, 7, 2, 3, DIR_SOUTH
+	createvobject EVENT_OBJ_GFX_SCIENTIST_1, 24, 11, 2, 3, DIR_SOUTH
 	return
 
 LinkContestRoom1_EventScript_23BE44:: @ 823BE44

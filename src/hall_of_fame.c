@@ -755,7 +755,7 @@ static void Task_Hof_HandleExit(u8 taskId)
 
 static void SetCallback2AfterHallOfFameDisplay(void)
 {
-    SetMainCallback2(sub_8175620);
+    SetMainCallback2(CB2_StartCreditsSequence);
 }
 
 #undef tDontSaveData
