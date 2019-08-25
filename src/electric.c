@@ -667,9 +667,9 @@ static void sub_810A75C(struct Sprite *sprite)
     sprite->oam.tileNum += gBattleAnimArgs[3] * 4;
 
     if (gBattleAnimArgs[3] == 1)
-        sprite->oam.matrixNum = 8;
+        sprite->oam.matrixNum = ST_OAM_HFLIP;
     else if (gBattleAnimArgs[3] == 2)
-        sprite->oam.matrixNum = 16;
+        sprite->oam.matrixNum = ST_OAM_VFLIP;
 
     sprite->data[0] = gBattleAnimArgs[2];
     sprite->callback = WaitAnimForDuration;

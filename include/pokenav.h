@@ -56,6 +56,32 @@ enum
 	POKENAV_MENU_E,
 };
 
+enum
+{
+	MC_HEADER_MR_STONE,
+	MC_HEADER_PROF_BIRCH,
+	MC_HEADER_BRENDAN,
+	MC_HEADER_MAY,
+	MC_HEADER_WALLY,
+	MC_HEADER_NORMAN,
+	MC_HEADER_MOM,
+	MC_HEADER_STEVEN,
+	MC_HEADER_SCOTT,
+	MC_HEADER_ROXANNE,
+	MC_HEADER_BRAWLY,
+	MC_HEADER_WATTSON,
+	MC_HEADER_FLANNERY,
+	MC_HEADER_WINONA,
+	MC_HEADER_TATE_LIZA,
+	MC_HEADER_JUAN,
+	MC_HEADER_SIDNEY,
+	MC_HEADER_PHOEBE,
+	MC_HEADER_GLACIA,
+	MC_HEADER_DRAKE,
+	MC_HEADER_WALLACE,
+	MC_HEADER_COUNT
+};
+
 // pokenav.c
 void sub_81C7694(u32);
 u32 sub_81C76AC(void);
@@ -109,15 +135,15 @@ bool32 sub_81C81D4(const struct BgTemplate *arg0, struct MatchCallListTemplate *
 void sub_81C8234(void);
 
 // pokenav_match_call_data.c
-bool32 sub_81D17E8(u32 idx);
+bool32 MatchCall_HasCheckPage(u32 idx);
 u8 MatchCallMapSecGetByIndex(u32 idx);
 bool32 sub_81D1BF8(u32 idx);
 bool32 MatchCallFlagGetByIndex(u32 idx);
 u32 MatchCall_GetRematchTableIdx(u32 idx);
 u32 GetTrainerIdxByRematchIdx(u32 rematchIdx);
-int sub_81D1BD0(u32 idx);
+int MatchCall_GetOverrideFacilityClass(u32 idx);
 void MatchCall_GetMessage(u32 idx, u8 *dest);
-const u8 *sub_81D1B40(u32 idx, u32 offset);
+const u8 *MatchCall_GetOverrideFlavorText(u32 idx, u32 offset);
 void sub_81D1A78(u32 idx, const u8 **desc, const u8 **name);
 
 // pokenav_main_menu.c
