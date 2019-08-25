@@ -694,7 +694,7 @@ u8 CreateBattlerHealthboxSprites(u8 battlerId)
     // Create mega indicator sprite if is a mega evolved mon.
     if (gBattleStruct->mega.evolvedPartyIds[GetBattlerSide(battlerId)] & gBitTable[gBattlerPartyIndexes[battlerId]])
     {
-        CreateMegaIndicatorSprite(battlerId, 0);
+        megaIndicatorSpriteId = CreateMegaIndicatorSprite(battlerId, 0);
         gSprites[megaIndicatorSpriteId].invisible = TRUE;
     }
 
