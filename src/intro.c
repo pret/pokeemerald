@@ -30,11 +30,11 @@
 /*
  * Intro animation sequence state machine
  * --------------------------------------
- * 
+ *
  * Entry Point: CB2_InitCopyrightScreenAfterBootup
- * 
+ *
  * Note: States advance sequentially unless otherwise stated.
- * 
+ *
  * CB2_InitCopyrightScreenAfterBootup
  *  - Registers a serial interrupt handler that listens for a GameCube.
  *  - Waits for 140 frames, and then until palette fading completes.
@@ -42,12 +42,12 @@
  *  - Check the save file for corruption
  *  - Setup global pointers to save file
  *  - Initialize gHeap
- * 
+ *
  * MainCB2_Intro
  *  - Spawn Task_IntroLoadPart1Graphics
  *  - If any keys are pressed during the intro, advance to
  *    MainCB2_EndIntro (which will then kill all tasks).
- * 
+ *
  * Task_IntroLoadPart1Graphics
  * Task_IntroFadeIn (frame counter starts at 0 here)
  * Task_IntroWaterDrops
@@ -1580,7 +1580,7 @@ static void Task_IntroSpinAndZoomPokeball(u8 taskId)
         gTasks[taskId].func = Task_IntroWaitToSetupPart3LegendsFight;
     }
 
-    PanFadeAndZoomScreen(0x78, 0x50, 0x10000 / gTasks[taskId].data[1], gTasks[taskId].data[0]);
+    PanFadeAndZoomScreen(0x78, 0x50, SAFE_DIV(0x10000, gTasks[taskId].data[1]), gTasks[taskId].data[0]);
 
     if (gIntroFrameCounter == 28)
         BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 0x10, RGB_WHITEALPHA);
