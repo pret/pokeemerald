@@ -573,7 +573,7 @@ static const struct OamData sOamData_MegaIndicator =
     .matrixNum = 0,
     .size = SPRITE_SIZE(16x16),
     .tileNum = 0,
-    .priority = 0,
+    .priority = 1,
     .paletteNum = 0,
     .affineParam = 0,
 };
@@ -614,7 +614,7 @@ u8 CreateBattlerHealthboxSprites(u8 battlerId)
 {
     s16 data6 = 0;
     u8 healthboxLeftSpriteId, healthboxRightSpriteId;
-    u8 healthbarSpriteId;
+    u8 healthbarSpriteId, megaIndicatorSpriteId;
     struct Sprite *healthBarSpritePtr;
 
     if (!IsDoubleBattle())
@@ -693,7 +693,10 @@ u8 CreateBattlerHealthboxSprites(u8 battlerId)
 
     // Create mega indicator sprite if is a mega evolved mon.
     if (gBattleStruct->mega.evolvedPartyIds[GetBattlerSide(battlerId)] & gBitTable[gBattlerPartyIndexes[battlerId]])
+    {
         CreateMegaIndicatorSprite(battlerId, 0);
+        gSprites[megaIndicatorSpriteId].invisible = TRUE;
+    }
 
     return healthboxLeftSpriteId;
 }
@@ -786,9 +789,18 @@ void SetHealthboxSpriteInvisible(u8 healthboxSpriteId)
 
 void SetHealthboxSpriteVisible(u8 healthboxSpriteId)
 {
+    u8 battlerId = gSprites[healthboxSpriteId].hMain_Battler;
+
     gSprites[healthboxSpriteId].invisible = FALSE;
     gSprites[gSprites[healthboxSpriteId].hMain_HealthBarSpriteId].invisible = FALSE;
     gSprites[gSprites[healthboxSpriteId].oam.affineParam].invisible = FALSE;
+    if (gBattleStruct->mega.evolvedPartyIds[GetBattlerSide(battlerId)] & gBitTable[gBattlerPartyIndexes[battlerId]])
+    {
+        if (gBattleStruct->mega.indicatorSpriteIds[battlerId] != 0xFF)
+            gSprites[gBattleStruct->mega.indicatorSpriteIds[battlerId]].invisible = FALSE;
+        else
+            CreateMegaIndicatorSprite(battlerId, 0);
+    }
 }
 
 static void UpdateSpritePos(u8 spriteId, s16 x, s16 y)
@@ -823,6 +835,8 @@ void UpdateOamPriorityInAllHealthboxes(u8 priority)
         gSprites[healthboxLeftSpriteId].oam.priority = priority;
         gSprites[healthboxRightSpriteId].oam.priority = priority;
         gSprites[healthbarSpriteId].oam.priority = priority;
+        if (gBattleStruct->mega.indicatorSpriteIds[i] != 0xFF)
+            gSprites[gBattleStruct->mega.indicatorSpriteIds[i]].oam.priority = priority;
     }
 }
 
@@ -1351,9 +1365,9 @@ static const s8 sIndicatorPosDoubles[][2] =
     [B_POSITION_OPPONENT_RIGHT] = {45, -8},
 };
 
-void CreateMegaIndicatorSprite(u32 battlerId, u32 which)
+u32 CreateMegaIndicatorSprite(u32 battlerId, u32 which)
 {
-    u8 spriteId, position;
+    u32 spriteId, position;
     s16 x, y;
 
     LoadSpritePalette(&sSpritePalette_MegaIndicator);
@@ -1375,6 +1389,7 @@ void CreateMegaIndicatorSprite(u32 battlerId, u32 which)
     gBattleStruct->mega.indicatorSpriteIds[battlerId] = spriteId;
 
     gSprites[spriteId].tBattler = battlerId;
+    return spriteId;
 }
 
 void DestroyMegaIndicatorSprite(u8 battlerId)
