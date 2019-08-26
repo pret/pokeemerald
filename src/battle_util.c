@@ -1990,6 +1990,13 @@ bool8 HandleFaintedMonActions(void)
             }
             break;
         case 3:
+            // Don't switch mons until all pokemon performed their actions or the battle's over.
+            if (gBattleOutcome == 0
+                && !NoAliveMonsForEitherParty()
+                && gCurrentTurnActionNumber != gBattlersCount)
+            {
+                return FALSE;
+            }
             gBattleStruct->faintedActionsBattlerId = 0;
             gBattleStruct->faintedActionsState++;
             // fall through
@@ -4585,11 +4592,24 @@ void HandleAction_RunBattleScript(void) // identical to RunBattleScriptCommands
         gBattleScriptingCommandsTable[*gBattlescriptCurrInstr]();
 }
 
+u32 SetRandomTarget(u32 battlerId)
+{
+    static const u8 targets[2][2] =
+    {
+        [B_SIDE_PLAYER] = {B_POSITION_OPPONENT_LEFT, B_POSITION_OPPONENT_RIGHT},
+        [B_SIDE_OPPONENT] = {B_POSITION_PLAYER_LEFT, B_POSITION_PLAYER_RIGHT},
+    };
+    u32 target = GetBattlerAtPosition(targets[GetBattlerSide(battlerId)][Random() % 2]);
+    if (!IsBattlerAlive(target))
+        target ^= BIT_FLANK;
+
+    return target;
+}
+
 u8 GetMoveTarget(u16 move, u8 setTarget)
 {
     u8 targetBattler = 0;
-    u8 moveTarget;
-    u8 side;
+    u32 i, moveTarget, side;
 
     if (setTarget)
         moveTarget = setTarget - 1;
@@ -4606,11 +4626,7 @@ u8 GetMoveTarget(u16 move, u8 setTarget)
         }
         else
         {
-            side = GetBattlerSide(gBattlerAttacker);
-            do
-            {
-                targetBattler = Random() % gBattlersCount;
-            } while (targetBattler == gBattlerAttacker || side == GetBattlerSide(targetBattler) || !IsBattlerAlive(targetBattler));
+            targetBattler = SetRandomTarget(gBattlerAttacker);
             if (gBattleMoves[move].type == TYPE_ELECTRIC
                 && IsAbilityOnOpposingSide(gBattlerAttacker, ABILITY_LIGHTNING_ROD)
                 && gBattleMons[targetBattler].ability != ABILITY_LIGHTNING_ROD)
@@ -4642,24 +4658,7 @@ u8 GetMoveTarget(u16 move, u8 setTarget)
         if (gSideTimers[side].followmeTimer && gBattleMons[gSideTimers[side].followmeTarget].hp)
             targetBattler = gSideTimers[side].followmeTarget;
         else if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE && moveTarget & MOVE_TARGET_RANDOM)
-        {
-            if (GetBattlerSide(gBattlerAttacker) == B_SIDE_PLAYER)
-            {
-                if (Random() & 1)
-                    targetBattler = GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT);
-                else
-                    targetBattler = GetBattlerAtPosition(B_POSITION_OPPONENT_RIGHT);
-            }
-            else
-            {
-                if (Random() & 1)
-                    targetBattler = GetBattlerAtPosition(B_POSITION_PLAYER_LEFT);
-                else
-                    targetBattler = GetBattlerAtPosition(B_POSITION_PLAYER_RIGHT);
-            }
-            if (!IsBattlerAlive(targetBattler))
-                targetBattler ^= BIT_FLANK;
-        }
+            targetBattler = SetRandomTarget(gBattlerAttacker);
         else
             targetBattler = GetBattlerAtPosition((GetBattlerPosition(gBattlerAttacker) & BIT_SIDE) ^ BIT_SIDE);
         break;

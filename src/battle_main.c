@@ -5092,13 +5092,10 @@ void SetTypeBeforeUsingMove(u16 move, u8 battlerAtk)
 
 static void HandleAction_UseMove(void)
 {
-    u8 side;
-    u8 var = 4;
-    u32 moveType;
+    u32 side, moveType, var = 4;
 
     gBattlerAttacker = gBattlerByTurnOrder[gCurrentTurnActionNumber];
-
-    if (*(&gBattleStruct->field_91) & gBitTable[gBattlerAttacker])
+    if (gBattleStruct->field_91 & gBitTable[gBattlerAttacker] || !IsBattlerAlive(gBattlerAttacker))
     {
         gCurrentActionFuncId = B_ACTION_FINISHED;
         return;
