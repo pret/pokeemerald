@@ -1681,29 +1681,22 @@ static void atk07_adjustnormaldamage(void)
         RecordItemEffectBattle(gBattlerTarget, holdEffect);
         gSpecialStatuses[gBattlerTarget].focusBanded = 1;
     }
-    if (gBattleMons[gBattlerTarget].status2 & STATUS2_SUBSTITUTE)
-        goto END;
-    if (gBattleMoves[gCurrentMove].effect != EFFECT_FALSE_SWIPE && !gProtectStructs[gBattlerTarget].endured
-     && !gSpecialStatuses[gBattlerTarget].focusBanded)
-        goto END;
-
-    if (gBattleMons[gBattlerTarget].hp > gBattleMoveDamage)
-        goto END;
-
-    gBattleMoveDamage = gBattleMons[gBattlerTarget].hp - 1;
-
-    if (gProtectStructs[gBattlerTarget].endured)
+    if (!(gBattleMons[gBattlerTarget].status2 & STATUS2_SUBSTITUTE)
+     && (gBattleMoves[gCurrentMove].effect == EFFECT_FALSE_SWIPE || gProtectStructs[gBattlerTarget].endured || gSpecialStatuses[gBattlerTarget].focusBanded)
+     && gBattleMons[gBattlerTarget].hp <= gBattleMoveDamage)
     {
-        gMoveResultFlags |= MOVE_RESULT_FOE_ENDURED;
+        gBattleMoveDamage = gBattleMons[gBattlerTarget].hp - 1;
+        if (gProtectStructs[gBattlerTarget].endured)
+        {
+            gMoveResultFlags |= MOVE_RESULT_FOE_ENDURED;
+        }
+        else if (gSpecialStatuses[gBattlerTarget].focusBanded)
+        {
+            gMoveResultFlags |= MOVE_RESULT_FOE_HUNG_ON;
+            gLastUsedItem = gBattleMons[gBattlerTarget].item;
+        }
     }
-    else if (gSpecialStatuses[gBattlerTarget].focusBanded)
-    {
-        gMoveResultFlags |= MOVE_RESULT_FOE_HUNG_ON;
-        gLastUsedItem = gBattleMons[gBattlerTarget].item;
-    }
-
-    END:
-        gBattlescriptCurrInstr++;
+    gBattlescriptCurrInstr++;
 }
 
 static void atk08_adjustnormaldamage2(void) // The same as 0x7 except it doesn't check for false swipe move effect.
@@ -1730,27 +1723,22 @@ static void atk08_adjustnormaldamage2(void) // The same as 0x7 except it doesn't
         RecordItemEffectBattle(gBattlerTarget, holdEffect);
         gSpecialStatuses[gBattlerTarget].focusBanded = 1;
     }
-    if (gBattleMons[gBattlerTarget].status2 & STATUS2_SUBSTITUTE)
-        goto END;
-    if (!gProtectStructs[gBattlerTarget].endured && !gSpecialStatuses[gBattlerTarget].focusBanded)
-        goto END;
-    if (gBattleMons[gBattlerTarget].hp > gBattleMoveDamage)
-        goto END;
-
-    gBattleMoveDamage = gBattleMons[gBattlerTarget].hp - 1;
-
-    if (gProtectStructs[gBattlerTarget].endured)
+    if (!(gBattleMons[gBattlerTarget].status2 & STATUS2_SUBSTITUTE)
+     && (gProtectStructs[gBattlerTarget].endured || gSpecialStatuses[gBattlerTarget].focusBanded)
+     && gBattleMons[gBattlerTarget].hp <= gBattleMoveDamage)
     {
-        gMoveResultFlags |= MOVE_RESULT_FOE_ENDURED;
+        gBattleMoveDamage = gBattleMons[gBattlerTarget].hp - 1;
+        if (gProtectStructs[gBattlerTarget].endured)
+        {
+            gMoveResultFlags |= MOVE_RESULT_FOE_ENDURED;
+        }
+        else if (gSpecialStatuses[gBattlerTarget].focusBanded)
+        {
+            gMoveResultFlags |= MOVE_RESULT_FOE_HUNG_ON;
+            gLastUsedItem = gBattleMons[gBattlerTarget].item;
+        }
     }
-    else if (gSpecialStatuses[gBattlerTarget].focusBanded)
-    {
-        gMoveResultFlags |= MOVE_RESULT_FOE_HUNG_ON;
-        gLastUsedItem = gBattleMons[gBattlerTarget].item;
-    }
-
-    END:
-        gBattlescriptCurrInstr++;
+    gBattlescriptCurrInstr++;
 }
 
 static void atk09_attackanimation(void)
@@ -4564,27 +4552,26 @@ static void atk49_moveend(void)
             gBattleScripting.atk49_state++;
             break;
         case ATK49_CHOICE_MOVE: // update choice band move
-            if (!(gHitMarker & HITMARKER_OBEYS) || holdEffectAtk != HOLD_EFFECT_CHOICE_BAND
-                || gChosenMove == MOVE_STRUGGLE || (*choicedMoveAtk != 0 && *choicedMoveAtk != 0xFFFF))
-                    goto LOOP;
-            if (gChosenMove == MOVE_BATON_PASS && !(gMoveResultFlags & MOVE_RESULT_FAILED))
+            if (gHitMarker & HITMARKER_OBEYS
+             && holdEffectAtk == HOLD_EFFECT_CHOICE_BAND
+             && gChosenMove != MOVE_STRUGGLE 
+             && (*choicedMoveAtk == 0 || *choicedMoveAtk == 0xFFFF))
             {
-                gBattleScripting.atk49_state++;
-                break;
-            }
-            *choicedMoveAtk = gChosenMove;
-            LOOP:
-            {
-                for (i = 0; i < MAX_MON_MOVES; i++)
+                if (gChosenMove == MOVE_BATON_PASS && !(gMoveResultFlags & MOVE_RESULT_FAILED))
                 {
-                    if (gBattleMons[gBattlerAttacker].moves[i] == *choicedMoveAtk)
-                        break;
+                    ++gBattleScripting.atk49_state;
+                    break;
                 }
-                if (i == MAX_MON_MOVES)
-                    *choicedMoveAtk = 0;
-
-                gBattleScripting.atk49_state++;
+                *choicedMoveAtk = gChosenMove;
             }
+            for (i = 0; i < MAX_MON_MOVES; ++i)
+            {
+                if (gBattleMons[gBattlerAttacker].moves[i] == *choicedMoveAtk)
+                    break;
+            }
+            if (i == MAX_MON_MOVES)
+                *choicedMoveAtk = 0;
+            ++gBattleScripting.atk49_state;
             break;
         case ATK49_CHANGED_ITEMS: // changed held items
             for (i = 0; i < gBattlersCount; i++)
@@ -6152,29 +6139,22 @@ static void atk69_adjustsetdamage(void) // The same as 0x7, except there's no ra
         RecordItemEffectBattle(gBattlerTarget, holdEffect);
         gSpecialStatuses[gBattlerTarget].focusBanded = 1;
     }
-    if (gBattleMons[gBattlerTarget].status2 & STATUS2_SUBSTITUTE)
-        goto END;
-    if (gBattleMoves[gCurrentMove].effect != EFFECT_FALSE_SWIPE && !gProtectStructs[gBattlerTarget].endured
-     && !gSpecialStatuses[gBattlerTarget].focusBanded)
-        goto END;
-
-    if (gBattleMons[gBattlerTarget].hp > gBattleMoveDamage)
-        goto END;
-
-    gBattleMoveDamage = gBattleMons[gBattlerTarget].hp - 1;
-
-    if (gProtectStructs[gBattlerTarget].endured)
+    if (!(gBattleMons[gBattlerTarget].status2 & STATUS2_SUBSTITUTE)
+     && (gBattleMoves[gCurrentMove].effect == EFFECT_FALSE_SWIPE || gProtectStructs[gBattlerTarget].endured || gSpecialStatuses[gBattlerTarget].focusBanded)
+     && gBattleMons[gBattlerTarget].hp <= gBattleMoveDamage)
     {
-        gMoveResultFlags |= MOVE_RESULT_FOE_ENDURED;
+        gBattleMoveDamage = gBattleMons[gBattlerTarget].hp - 1;
+        if (gProtectStructs[gBattlerTarget].endured)
+        {
+            gMoveResultFlags |= MOVE_RESULT_FOE_ENDURED;
+        }
+        else if (gSpecialStatuses[gBattlerTarget].focusBanded)
+        {
+            gMoveResultFlags |= MOVE_RESULT_FOE_HUNG_ON;
+            gLastUsedItem = gBattleMons[gBattlerTarget].item;
+        }
     }
-    else if (gSpecialStatuses[gBattlerTarget].focusBanded)
-    {
-        gMoveResultFlags |= MOVE_RESULT_FOE_HUNG_ON;
-        gLastUsedItem = gBattleMons[gBattlerTarget].item;
-    }
-
-    END:
-        gBattlescriptCurrInstr++;
+    gBattlescriptCurrInstr++;
 }
 
 static void atk6A_removeitem(void)
