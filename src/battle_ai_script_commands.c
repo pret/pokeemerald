@@ -1347,7 +1347,15 @@ static bool32 CompareTwoMoves(u32 bestMove, u32 goodMove)
     // Check recoil
     if (GetBattlerAbility(sBattler_AI) != ABILITY_ROCK_HEAD)
     {
-        if (gBattleMoves[goodMove].effect == EFFECT_RECOIL && gBattleMoves[bestMove].effect != EFFECT_RECOIL)
+        if (((gBattleMoves[goodMove].effect == EFFECT_RECOIL
+                || gBattleMoves[goodMove].effect == EFFECT_RECOIL_IF_MISS
+                || gBattleMoves[goodMove].effect == EFFECT_RECOIL_50
+                || gBattleMoves[goodMove].effect == EFFECT_RECOIL_33_STATUS)
+            && (gBattleMoves[bestMove].effect != EFFECT_RECOIL
+                 && gBattleMoves[bestMove].effect != EFFECT_RECOIL_IF_MISS
+                 && gBattleMoves[bestMove].effect != EFFECT_RECOIL_50
+                 && gBattleMoves[bestMove].effect != EFFECT_RECOIL_33_STATUS
+                 && gBattleMoves[bestMove].effect != EFFECT_RECHARGE)))
             return FALSE;
     }
     // Check recharge
