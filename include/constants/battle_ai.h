@@ -31,8 +31,9 @@
 
 // get_how_powerful_move_is
 #define MOVE_POWER_DISCOURAGED  0
-#define MOVE_NOT_MOST_POWERFUL  1
-#define MOVE_MOST_POWERFUL      2
+#define MOVE_POWER_BEST         1
+#define MOVE_POWER_GOOD         2 // Similar dmg range with best.
+#define MOVE_POWER_WEAK         3 // Significantly lower than best and good.
 
 // script's table id to bit
 #define AI_SCRIPT_CHECK_BAD_MOVE (1 << 0)

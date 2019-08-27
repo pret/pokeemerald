@@ -50,7 +50,7 @@ AI_CheckBadMove:
 	if_move MOVE_FISSURE, AI_CBM_CheckIfNegatesType
 	if_move MOVE_HORN_DRILL, AI_CBM_CheckIfNegatesType
 	get_how_powerful_move_is
-	if_equal 0, AI_CheckBadMove_CheckEffect
+	if_equal MOVE_POWER_DISCOURAGED, AI_CheckBadMove_CheckEffect
 
 AI_CBM_CheckIfNegatesType: @ 82DBF92
 	if_type_effectiveness AI_EFFECTIVENESS_x0, Score_Minus10
@@ -934,12 +934,21 @@ AI_CheckIfAlreadyDeadPriorities:
 	if_random_less_than 126, AI_Ret
 	score +1
 	end
+	
+@ The purpose is to use a move effect that hits the hardest or similar
+AI_CV_DmgMove:
+	get_considered_move_power
+	if_equal 0, AI_Ret
+	get_how_powerful_move_is
+	if_equal MOVE_POWER_WEAK, Score_Minus1
+	end
 
 AI_CheckViability:
 	if_target_is_ally AI_Ret
 	call_if_always_hit AI_CV_AlwaysHit
 	call_if_move_flag FLAG_HIGH_CRIT, AI_CV_HighCrit
 	call AI_CheckIfAlreadyDead
+	call AI_CV_DmgMove
 	if_effect EFFECT_HIT, AI_CV_Hit
 	if_effect EFFECT_SLEEP, AI_CV_Sleep
 	if_effect EFFECT_ABSORB, AI_CV_Absorb
@@ -3218,31 +3227,32 @@ AI_CV_DragonDance_End:
 
 AI_TryToFaint:
 	if_target_is_ally AI_Ret
-	if_can_faint AI_TryToFaint_TryToEncourageQuickAttack
+	if_can_faint AI_TryToFaint_Can
 	get_how_powerful_move_is
-	if_equal MOVE_NOT_MOST_POWERFUL, Score_Minus1
+	if_equal MOVE_POWER_DISCOURAGED, Score_Minus1
+AI_TryToFaint2:
 	if_type_effectiveness AI_EFFECTIVENESS_x4, AI_TryToFaint_DoubleSuperEffective
-	goto AI_TryToFaint_InDanger
+	goto AI_TryToFaint_CheckIfDanger
 AI_TryToFaint_DoubleSuperEffective:
-	if_random_less_than 80, AI_TryToFaint_InDanger
+	if_random_less_than 80, AI_TryToFaint_CheckIfDanger
 	score +2
-	goto AI_TryToFaint_InDanger
-AI_TryToFaint_TryToEncourageQuickAttack:
-	if_effect EFFECT_EXPLOSION, AI_TryToFaint_InDanger
+	goto AI_TryToFaint_CheckIfDanger
+AI_TryToFaint_Can:
+	if_effect EFFECT_EXPLOSION, AI_TryToFaint_CheckIfDanger
 	if_user_faster AI_TryToFaint_ScoreUp4
 	if_move_flag FLAG_HIGH_CRIT AI_TryToFaint_ScoreUp4
 	score +2
-	goto AI_TryToFaint_InDanger
+	goto AI_TryToFaint_CheckIfDanger
 AI_TryToFaint_ScoreUp4:
 	score +4
-AI_TryToFaint_InDanger:
-	if_target_faster AI_TryToFaint_End
-	if_ai_can_go_down AI_TryToFaint_IsInDanger
+AI_TryToFaint_CheckIfDanger:
+	if_user_faster AI_TryToFaint_End
+	if_ai_can_go_down AI_TryToFaint_Danger
 AI_TryToFaint_End:
 	end
-AI_TryToFaint_IsInDanger:
+AI_TryToFaint_Danger:
 	get_how_powerful_move_is
-	if_not_equal MOVE_MOST_POWERFUL, Score_Minus1
+	if_not_equal MOVE_POWER_BEST, Score_Minus1
 	score +1
 	goto AI_TryToFaint_End
 
@@ -3339,10 +3349,9 @@ AI_SetupFirstTurn_SetupEffectsToEncourage:
 AI_PreferStrongestMove:
 	if_target_is_ally AI_Ret
 	get_how_powerful_move_is
-	if_not_equal 0, AI_PreferStrongestMove_End
+	if_not_equal MOVE_POWER_BEST, AI_PreferStrongestMove_End
 	if_random_less_than 100, AI_PreferStrongestMove_End
 	score +2
-
 AI_PreferStrongestMove_End:
 	end
 
@@ -3354,7 +3363,6 @@ AI_Risky:
 AI_Risky_RandChance:
 	if_random_less_than 128, AI_Risky_End
 	score +2
-
 AI_Risky_End:
 	end
 
@@ -3384,7 +3392,7 @@ AI_PreferBatonPass:
 	count_usable_party_mons AI_USER
 	if_equal 0, AI_PreferBatonPassEnd
 	get_how_powerful_move_is
-	if_not_equal 0, AI_PreferBatonPassEnd
+	if_not_equal MOVE_POWER_DISCOURAGED, AI_PreferBatonPassEnd
 	if_has_move_with_effect AI_USER, EFFECT_BATON_PASS, AI_PreferBatonPass_GoForBatonPass
 	if_random_less_than 80, AI_Risky_End
 
@@ -3488,7 +3496,7 @@ AI_DoubleBattle:
 
 AI_DoubleBattlePartnerHasHelpingHand:
 	get_how_powerful_move_is
-	if_not_equal 0, Score_Plus1
+	if_not_equal MOVE_POWER_DISCOURAGED, Score_Plus1
 	end
 
 AI_DoubleBattleCheckUserStatus:
@@ -3499,7 +3507,7 @@ AI_DoubleBattleCheckUserStatus2:
 	get_how_powerful_move_is
 	if_equal MOVE_POWER_DISCOURAGED, Score_Minus5
 	score +1
-	if_equal MOVE_MOST_POWERFUL, Score_Plus2
+	if_equal MOVE_POWER_BEST, Score_Plus2
 	end
 
 AI_DoubleBattleAllHittingGroundMove:
@@ -3537,7 +3545,7 @@ AI_DoubleBattleFireMove2:
 
 AI_TryOnAlly:
 	get_how_powerful_move_is
-	if_equal 0, AI_TryStatusMoveOnAlly
+	if_equal MOVE_POWER_DISCOURAGED, AI_TryStatusMoveOnAlly
 	get_curr_move_type
 	if_equal TYPE_FIRE, AI_TryFireMoveOnAlly
 

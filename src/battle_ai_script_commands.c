@@ -14,6 +14,7 @@
 #include "constants/abilities.h"
 #include "constants/battle_ai.h"
 #include "constants/battle_move_effects.h"
+#include "constants/hold_effects.h"
 #include "constants/moves.h"
 #include "constants/species.h"
 
@@ -55,6 +56,7 @@ static void BattleAI_DoAIProcessing(void);
 static void AIStackPushVar(const u8 *);
 static bool8 AIStackPop(void);
 static s32 CountUsablePartyMons(u8 battlerId);
+static s32 AI_GetAbility(u32 battlerId, bool32 guess);
 
 static void BattleAICmd_if_random_less_than(void);
 static void BattleAICmd_if_random_greater_than(void);
@@ -360,7 +362,7 @@ void BattleAI_SetupFlags(void)
 
 void BattleAI_SetupAIData(u8 defaultScoreMoves)
 {
-    s32 i;
+    s32 i, move, dmg;
     u8 moveLimitations;
 
     // Clear AI data but preserve the flags.
@@ -386,25 +388,32 @@ void BattleAI_SetupAIData(u8 defaultScoreMoves)
     {
         if (gBitTable[i] & moveLimitations)
             AI_THINKING_STRUCT->score[i] = 0;
-
-        AI_THINKING_STRUCT->simulatedRNG[i] = 100 - (Random() % 16);
     }
 
     gBattleResources->AI_ScriptsStack->size = 0;
     sBattler_AI = gActiveBattler;
 
-    // Decide a random target battlerId in doubles.
-    if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
+    // Simulate dmg for all AI moves against all opposing targets
+    for (gBattlerTarget = 0; gBattlerTarget < gBattlersCount; gBattlerTarget++)
     {
-        gBattlerTarget = (Random() & BIT_FLANK) + (GetBattlerSide(gActiveBattler) ^ BIT_SIDE);
-        if (gAbsentBattlerFlags & gBitTable[gBattlerTarget])
-            gBattlerTarget ^= BIT_FLANK;
+        if (GET_BATTLER_SIDE2(sBattler_AI) == GET_BATTLER_SIDE2(gBattlerTarget))
+            continue;
+        for (i = 0; i < MAX_MON_MOVES; i++)
+        {
+            dmg = 0;
+            move = gBattleMons[sBattler_AI].moves[i];
+            if (gBattleMoves[move].power != 0 && !(moveLimitations & gBitTable[i]))
+            {
+                dmg = AI_CalcDamage(move, sBattler_AI, gBattlerTarget) * (100 - (Random() % 16)) / 100;
+                if (dmg == 0)
+                    dmg = 1;
+            }
+
+            AI_THINKING_STRUCT->simulatedDmg[sBattler_AI][gBattlerTarget][i] = dmg;
+        }
     }
-    // There's only one choice in single battles.
-    else
-    {
-        gBattlerTarget = sBattler_AI ^ BIT_SIDE;
-    }
+
+    gBattlerTarget = SetRandomTarget(sBattler_AI);
 }
 
 u8 BattleAI_ChooseMoveOrAction(void)
@@ -1322,9 +1331,38 @@ static void BattleAICmd_get_considered_move_power(void)
     gAIScriptPtr += 1;
 }
 
+// Checks if the move dealing less damage does not have worse effects.
+static bool32 CompareTwoMoves(u32 bestMove, u32 goodMove)
+{
+    s32 defAbility = AI_GetAbility(gBattlerTarget, FALSE);
+
+    // Check if physical moves hurt.
+    if (GetBattlerHoldEffect(sBattler_AI, TRUE) != HOLD_EFFECT_PROTECTIVE_PADS
+        && (BATTLE_HISTORY->itemEffects[gBattlerTarget] == HOLD_EFFECT_ROCKY_HELMET
+        || defAbility == ABILITY_IRON_BARBS || defAbility == ABILITY_ROUGH_SKIN))
+    {
+        if (IS_MOVE_PHYSICAL(goodMove) && !IS_MOVE_PHYSICAL(bestMove))
+            return FALSE;
+    }
+    // Check recoil
+    if (GetBattlerAbility(sBattler_AI) != ABILITY_ROCK_HEAD)
+    {
+        if (gBattleMoves[goodMove].effect == EFFECT_RECOIL && gBattleMoves[bestMove].effect != EFFECT_RECOIL)
+            return FALSE;
+    }
+    // Check recharge
+    if (gBattleMoves[goodMove].effect == EFFECT_RECHARGE && gBattleMoves[bestMove].effect != EFFECT_RECHARGE)
+        return FALSE;
+    // Check additional effect.
+    if (gBattleMoves[bestMove].effect != 0 && gBattleMoves[goodMove].effect == 0)
+        return FALSE;
+
+    return TRUE;
+}
+
 static void BattleAICmd_get_how_powerful_move_is(void)
 {
-    s32 i, checkedMove;
+    s32 i, checkedMove, bestId, currId, hp;
     s32 moveDmgs[4];
 
     for (i = 0; sDiscouragedPowerfulMoveEffects[i] != 0xFFFF; i++)
@@ -1333,12 +1371,9 @@ static void BattleAICmd_get_how_powerful_move_is(void)
             break;
     }
 
-    if (gBattleMoves[AI_THINKING_STRUCT->moveConsidered].power > 1
+    if (gBattleMoves[AI_THINKING_STRUCT->moveConsidered].power != 0
         && sDiscouragedPowerfulMoveEffects[i] == 0xFFFF)
     {
-        *(&gBattleStruct->dynamicMoveType) = 0;
-        gMoveResultFlags = 0;
-
         for (checkedMove = 0; checkedMove < MAX_MON_MOVES; checkedMove++)
         {
             for (i = 0; sDiscouragedPowerfulMoveEffects[i] != 0xFFFF; i++)
@@ -1349,13 +1384,9 @@ static void BattleAICmd_get_how_powerful_move_is(void)
 
             if (gBattleMons[sBattler_AI].moves[checkedMove] != MOVE_NONE
                 && sDiscouragedPowerfulMoveEffects[i] == 0xFFFF
-                && gBattleMoves[gBattleMons[sBattler_AI].moves[checkedMove]].power > 1)
+                && gBattleMoves[gBattleMons[sBattler_AI].moves[checkedMove]].power != 0)
             {
-                gCurrentMove = gBattleMons[sBattler_AI].moves[checkedMove];
-                moveDmgs[checkedMove] = AI_CalcDamage(gCurrentMove, sBattler_AI, gBattlerTarget);
-                moveDmgs[checkedMove] = moveDmgs[checkedMove] * AI_THINKING_STRUCT->simulatedRNG[checkedMove] / 100;
-                if (moveDmgs[checkedMove] == 0)
-                    moveDmgs[checkedMove] = 1;
+                moveDmgs[checkedMove] = AI_THINKING_STRUCT->simulatedDmg[sBattler_AI][gBattlerTarget][checkedMove];
             }
             else
             {
@@ -1363,16 +1394,22 @@ static void BattleAICmd_get_how_powerful_move_is(void)
             }
         }
 
-        for (checkedMove = 0; checkedMove < MAX_MON_MOVES; checkedMove++)
+        for (bestId = 0, i = 0; i < MAX_MON_MOVES; i++)
         {
-            if (moveDmgs[checkedMove] > moveDmgs[AI_THINKING_STRUCT->movesetIndex])
-                break;
+            if (moveDmgs[i] > moveDmgs[bestId])
+                bestId = i;
         }
 
-        if (checkedMove == MAX_MON_MOVES)
-            AI_THINKING_STRUCT->funcResult = MOVE_MOST_POWERFUL; // Is the most powerful.
+        currId = AI_THINKING_STRUCT->movesetIndex;
+        hp = gBattleMons[gBattlerTarget].hp;
+        if (currId == bestId)
+            AI_THINKING_STRUCT->funcResult = MOVE_POWER_BEST;
+        // Compare percentage difference.
+        else if ((moveDmgs[bestId] * 100 / hp) - (moveDmgs[currId] * 100 / hp) <= 10
+                 && CompareTwoMoves(gBattleMons[sBattler_AI].moves[bestId], gBattleMons[sBattler_AI].moves[currId]))
+            AI_THINKING_STRUCT->funcResult = MOVE_POWER_GOOD;
         else
-            AI_THINKING_STRUCT->funcResult = MOVE_NOT_MOST_POWERFUL; // Not the most powerful.
+            AI_THINKING_STRUCT->funcResult = MOVE_POWER_WEAK;
     }
     else
     {
@@ -1516,109 +1553,49 @@ static void BattleAICmd_get_considered_move_effect(void)
     gAIScriptPtr += 1;
 }
 
-static void BattleAICmd_get_ability(void)
+static s32 AI_GetAbility(u32 battlerId, bool32 guess)
 {
-    u8 battlerId = BattleAI_GetWantedBattler(gAIScriptPtr[1]);
+    // The AI knows its own ability.
+    if (IsBattlerAIControlled)
+        return gBattleMons[battlerId].ability;
 
-    if (!IsBattlerAIControlled(battlerId))
+    if (BATTLE_HISTORY->abilities[battlerId] != 0)
+        return BATTLE_HISTORY->abilities[battlerId];
+
+    // Abilities that prevent fleeing.
+    if (gBattleMons[battlerId].ability == ABILITY_SHADOW_TAG
+    || gBattleMons[battlerId].ability == ABILITY_MAGNET_PULL
+    || gBattleMons[battlerId].ability == ABILITY_ARENA_TRAP)
+        return gBattleMons[battlerId].ability;
+
+    if (gBaseStats[gBattleMons[battlerId].species].abilities[0] != ABILITY_NONE)
     {
-        if (BATTLE_HISTORY->abilities[battlerId] != 0)
+        if (gBaseStats[gBattleMons[battlerId].species].abilities[1] != ABILITY_NONE)
         {
-            AI_THINKING_STRUCT->funcResult = BATTLE_HISTORY->abilities[battlerId];
-            gAIScriptPtr += 2;
-            return;
-        }
-
-        // abilities that prevent fleeing.
-        if (gBattleMons[battlerId].ability == ABILITY_SHADOW_TAG
-        || gBattleMons[battlerId].ability == ABILITY_MAGNET_PULL
-        || gBattleMons[battlerId].ability == ABILITY_ARENA_TRAP)
-        {
-            AI_THINKING_STRUCT->funcResult = gBattleMons[battlerId].ability;
-            gAIScriptPtr += 2;
-            return;
-        }
-
-        if (gBaseStats[gBattleMons[battlerId].species].abilities[0] != ABILITY_NONE)
-        {
-            if (gBaseStats[gBattleMons[battlerId].species].abilities[1] != ABILITY_NONE)
-            {
-                // AI has no knowledge of opponent, so it guesses which ability.
-                if (Random() & 1)
-                    AI_THINKING_STRUCT->funcResult = gBaseStats[gBattleMons[battlerId].species].abilities[0];
-                else
-                    AI_THINKING_STRUCT->funcResult = gBaseStats[gBattleMons[battlerId].species].abilities[1];
-            }
-            else
-            {
-                AI_THINKING_STRUCT->funcResult = gBaseStats[gBattleMons[battlerId].species].abilities[0]; // It's definitely ability 1.
-            }
+            // AI has no knowledge of opponent, so it guesses which ability.
+            if (guess)
+                return gBaseStats[gBattleMons[battlerId].species].abilities[Random() & 1];
         }
         else
         {
-            AI_THINKING_STRUCT->funcResult = gBaseStats[gBattleMons[battlerId].species].abilities[1]; // AI can't actually reach this part since no pokemon has ability 2 and no ability 1.
+            return gBaseStats[gBattleMons[battlerId].species].abilities[0]; // It's definitely ability 1.
         }
     }
-    else
-    {
-        // The AI knows its own ability.
-        AI_THINKING_STRUCT->funcResult = gBattleMons[battlerId].ability;
-    }
+    return -1; // Unknown.
+}
 
+static void BattleAICmd_get_ability(void)
+{
+    AI_THINKING_STRUCT->funcResult = AI_GetAbility(BattleAI_GetWantedBattler(gAIScriptPtr[1]), TRUE);
     gAIScriptPtr += 2;
 }
 
 static void BattleAICmd_check_ability(void)
 {
     u32 battlerId = BattleAI_GetWantedBattler(gAIScriptPtr[1]);
-    u32 ability = gAIScriptPtr[2];
+    u32 ability = AI_GetAbility(battlerId, FALSE);
 
-    if (!IsBattlerAIControlled(battlerId))
-    {
-        if (BATTLE_HISTORY->abilities[battlerId] != ABILITY_NONE)
-        {
-            ability = BATTLE_HISTORY->abilities[battlerId];
-            AI_THINKING_STRUCT->funcResult = ability;
-        }
-        // Abilities that prevent fleeing.
-        else if (gBattleMons[battlerId].ability == ABILITY_SHADOW_TAG
-        || gBattleMons[battlerId].ability == ABILITY_MAGNET_PULL
-        || gBattleMons[battlerId].ability == ABILITY_ARENA_TRAP)
-        {
-            ability = gBattleMons[battlerId].ability;
-        }
-        else if (gBaseStats[gBattleMons[battlerId].species].abilities[0] != ABILITY_NONE)
-        {
-            if (gBaseStats[gBattleMons[battlerId].species].abilities[1] != ABILITY_NONE)
-            {
-                u8 abilityDummyVariable = ability; // Needed to match.
-                if (gBaseStats[gBattleMons[battlerId].species].abilities[0] != abilityDummyVariable
-                && gBaseStats[gBattleMons[battlerId].species].abilities[1] != abilityDummyVariable)
-                {
-                    ability = gBaseStats[gBattleMons[battlerId].species].abilities[0];
-                }
-                else
-                {
-                    ability = ABILITY_NONE;
-                }
-            }
-            else
-            {
-                ability = gBaseStats[gBattleMons[battlerId].species].abilities[0];
-            }
-        }
-        else
-        {
-            ability = gBaseStats[gBattleMons[battlerId].species].abilities[1]; // AI can't actually reach this part since no pokemon has ability 2 and no ability 1.
-        }
-    }
-    else
-    {
-        // The AI knows its own or partner's ability.
-        ability = gBattleMons[battlerId].ability;
-    }
-
-    if (ability == 0)
+    if (ability == -1)
         AI_THINKING_STRUCT->funcResult = 2; // Unable to answer.
     else if (ability == gAIScriptPtr[2])
         AI_THINKING_STRUCT->funcResult = 1; // Pokemon has the ability we wanted to check.
@@ -1878,15 +1855,7 @@ static void BattleAICmd_if_can_faint(void)
         return;
     }
 
-    gBattleStruct->dynamicMoveType = 0;
-    gMoveResultFlags = 0;
-    dmg = AI_CalcDamage(AI_THINKING_STRUCT->moveConsidered, sBattler_AI, gBattlerTarget);
-    dmg = dmg * AI_THINKING_STRUCT->simulatedRNG[AI_THINKING_STRUCT->movesetIndex] / 100;
-
-    // Moves always do at least 1 damage.
-    if (dmg == 0)
-        dmg = 1;
-
+    dmg = AI_THINKING_STRUCT->simulatedDmg[sBattler_AI][gBattlerTarget][AI_THINKING_STRUCT->movesetIndex];
     if (gBattleMons[gBattlerTarget].hp <= dmg)
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 1);
     else
@@ -1903,15 +1872,7 @@ static void BattleAICmd_if_cant_faint(void)
         return;
     }
 
-    gBattleStruct->dynamicMoveType = 0;
-    gMoveResultFlags = 0;
-    dmg = AI_CalcDamage(AI_THINKING_STRUCT->moveConsidered, sBattler_AI, gBattlerTarget);
-    dmg = dmg * AI_THINKING_STRUCT->simulatedRNG[AI_THINKING_STRUCT->movesetIndex] / 100;
-
-    // Moves always do at least 1 damage.
-    if (dmg == 0)
-        dmg = 1;
-
+    dmg = AI_THINKING_STRUCT->simulatedDmg[sBattler_AI][gBattlerTarget][AI_THINKING_STRUCT->movesetIndex];
     if (gBattleMons[gBattlerTarget].hp > dmg)
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 1);
     else
