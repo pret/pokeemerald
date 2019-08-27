@@ -965,6 +965,9 @@ AI_CheckViability:
 	if_effect EFFECT_ROAR, AI_CV_Roar
 	if_effect EFFECT_CONVERSION, AI_CV_Conversion
 	if_effect EFFECT_RESTORE_HP, AI_CV_Heal
+	if_effect EFFECT_SOFTBOILED, AI_CV_Heal
+	if_effect EFFECT_SWALLOW, AI_CV_Heal
+	if_effect EFFECT_ROOST, AI_CV_Heal
 	if_effect EFFECT_TOXIC, AI_CV_Toxic
 	if_effect EFFECT_LIGHT_SCREEN, AI_CV_LightScreen
 	if_effect EFFECT_REST, AI_CV_Rest
@@ -1029,10 +1032,8 @@ AI_CheckViability:
 	if_effect EFFECT_SKULL_BASH, AI_CV_ChargeUpMove
 	if_effect EFFECT_SOLARBEAM, AI_CV_ChargeUpMove
 	if_effect EFFECT_SEMI_INVULNERABLE, AI_CV_Fly
-	if_effect EFFECT_SOFTBOILED, AI_CV_Heal
 	if_effect EFFECT_FAKE_OUT, AI_CV_FakeOut
 	if_effect EFFECT_SPIT_UP, AI_CV_SpitUp
-	if_effect EFFECT_SWALLOW, AI_CV_Heal
 	if_effect EFFECT_HAIL, AI_CV_Sandstorm
 	if_effect EFFECT_SANDSTORM, AI_CV_Sandstorm
 	if_effect EFFECT_FLATTER, AI_CV_Flatter
@@ -3669,6 +3670,7 @@ AI_HPAware_DiscouragedEffectsWhenHighHP: @ 82DE21F
     .byte EFFECT_SYNTHESIS
     .byte EFFECT_MOONLIGHT
     .byte EFFECT_SOFTBOILED
+    .byte EFFECT_ROOST
     .byte EFFECT_MEMENTO
     .byte EFFECT_GRUDGE
     .byte EFFECT_OVERHEAT
