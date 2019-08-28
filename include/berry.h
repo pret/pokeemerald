@@ -1,6 +1,8 @@
 #ifndef GUARD_BERRY_H
 #define GUARD_BERRY_H
 
+#include "constants/items.h"
+
 #define BERRY_NONE 0
 
 enum

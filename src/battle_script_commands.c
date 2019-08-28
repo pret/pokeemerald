@@ -42,6 +42,8 @@
 #include "constants/battle_string_ids.h"
 #include "battle_setup.h"
 #include "overworld.h"
+#include "wild_encounter.h"
+#include "rtc.h"
 #include "party_menu.h"
 #include "constants/battle_config.h"
 #include "battle_arena.h"
@@ -11109,7 +11111,7 @@ static u8 GetCatchingBattler(void)
 
 static void atkEF_handleballthrow(void)
 {
-    u8 ballMultiplier = 0;
+    u8 ballMultiplier = 10;
 
     if (gBattleControllerExecFlags)
         return;
@@ -11131,7 +11133,7 @@ static void atkEF_handleballthrow(void)
     }
     else
     {
-        u32 odds;
+        u32 odds, i;
         u8 catchRate;
 
         if (gLastUsedItem == ITEM_SAFARI_BALL)
@@ -11146,14 +11148,10 @@ static void atkEF_handleballthrow(void)
             case ITEM_NET_BALL:
                 if (IS_BATTLER_OF_TYPE(gBattlerTarget, TYPE_WATER) || IS_BATTLER_OF_TYPE(gBattlerTarget, TYPE_BUG))
                     ballMultiplier = 30;
-                else
-                    ballMultiplier = 10;
                 break;
             case ITEM_DIVE_BALL:
                 if (GetCurrentMapType() == MAP_TYPE_UNDERWATER)
                     ballMultiplier = 35;
-                else
-                    ballMultiplier = 10;
                 break;
             case ITEM_NEST_BALL:
                 if (gBattleMons[gBattlerTarget].level < 40)
@@ -11162,16 +11160,10 @@ static void atkEF_handleballthrow(void)
                     if (ballMultiplier <= 9)
                         ballMultiplier = 10;
                 }
-                else
-                {
-                    ballMultiplier = 10;
-                }
                 break;
             case ITEM_REPEAT_BALL:
                 if (GetSetPokedexFlag(SpeciesToNationalPokedexNum(gBattleMons[gBattlerTarget].species), FLAG_GET_CAUGHT))
                     ballMultiplier = 30;
-                else
-                    ballMultiplier = 10;
                 break;
             case ITEM_TIMER_BALL:
                 ballMultiplier = gBattleResults.battleTurnCounter + 10;
@@ -11180,7 +11172,69 @@ static void atkEF_handleballthrow(void)
                 break;
             case ITEM_LUXURY_BALL:
             case ITEM_PREMIER_BALL:
+            case ITEM_FRIEND_BALL:
+            case ITEM_HEAL_BALL:
+            case ITEM_CHERISH_BALL:
                 ballMultiplier = 10;
+                break;
+            case ITEM_SPORT_BALL:
+                ballMultiplier = 15;
+                break;
+            case ITEM_LEVEL_BALL:
+                if (gBattleMons[gBattlerAttacker].level >= 4 * gBattleMons[gBattlerTarget].level)
+                    ballMultiplier = 80;
+                else if (gBattleMons[gBattlerAttacker].level > 2 * gBattleMons[gBattlerTarget].level)
+                    ballMultiplier = 40;
+                else if (gBattleMons[gBattlerAttacker].level > gBattleMons[gBattlerTarget].level)
+                    ballMultiplier = 20;
+                break;
+            case ITEM_LURE_BALL:
+                if (gIsFishingEncounter)
+                    ballMultiplier = 30;
+                break;
+            case ITEM_MOON_BALL:
+                for (i = 0; i < EVOS_PER_MON; i++)
+                {
+                    if (gEvolutionTable[gBattleMons[gBattlerTarget].species][i].method == EVO_ITEM
+                        && gEvolutionTable[gBattleMons[gBattlerTarget].species][i].param == ITEM_MOON_STONE)
+                        ballMultiplier = 40;
+                }
+                break;
+            case ITEM_LOVE_BALL:
+                if (gBattleMons[gBattlerTarget].species == gBattleMons[gBattlerAttacker].species)
+                {
+                    u8 gender1 = GetMonGender(&gEnemyParty[gBattlerPartyIndexes[gBattlerTarget]]);
+                    u8 gender2 = GetMonGender(&gPlayerParty[gBattlerPartyIndexes[gBattlerAttacker]]);
+
+                    if (gender1 != gender2 && gender1 != MON_GENDERLESS && gender2 != MON_GENDERLESS)
+                        ballMultiplier = 80;
+                }
+                break;
+            case ITEM_HEAVY_BALL:
+                i = GetPokedexHeightWeight(SpeciesToNationalPokedexNum(gBattleMons[gBattlerTarget].species), 1);
+                if (i < 1024)
+                    ballMultiplier = 5;
+                else if (i < 2048)
+                    ballMultiplier = 10;
+                else if (i < 3072)
+                    ballMultiplier = 20;
+                else if (i < 4096)
+                    ballMultiplier = 30;
+                else
+                    ballMultiplier = 40;
+                break;
+            case ITEM_FAST_BALL:
+                if (gBaseStats[gBattleMons[gBattlerTarget].species].baseSpeed >= 100)
+                    ballMultiplier = 40;
+                break;
+            case ITEM_QUICK_BALL:
+                if (gBattleResults.battleTurnCounter == 0)
+                    ballMultiplier = 40;
+                break;
+            case ITEM_DUSK_BALL:
+                RtcCalcLocalTime();
+                if ((gLocalTime.hours >= 20 && gLocalTime.hours <= 3) || gMapHeader.cave || gMapHeader.mapType == MAP_TYPE_UNDERGROUND)
+                    ballMultiplier = 30;
                 break;
             }
         }
@@ -11245,6 +11299,14 @@ static void atkEF_handleballthrow(void)
                     gBattleCommunication[MULTISTRING_CHOOSER] = 0;
                 else
                     gBattleCommunication[MULTISTRING_CHOOSER] = 1;
+
+                if (gLastUsedItem == ITEM_HEAL_BALL)
+                {
+                    MonRestorePP(&gEnemyParty[gBattlerPartyIndexes[gBattlerTarget]]);
+                    HealStatusConditions(&gEnemyParty[gBattlerPartyIndexes[gBattlerTarget]], gBattlerPartyIndexes[gBattlerTarget], STATUS1_ANY, gBattlerTarget);
+                    gBattleMons[gBattlerTarget].hp = gBattleMons[gBattlerTarget].maxHP;
+                    SetMonData(&gEnemyParty[gBattlerPartyIndexes[gBattlerTarget]], MON_DATA_HP, &gBattleMons[gBattlerTarget].hp);
+                }
             }
             else // not caught
             {

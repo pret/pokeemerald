@@ -71,6 +71,7 @@ void LoadHeldItemIcons(void);
 void sub_81B5D4C(u8 *a, u8 *b, u8 c);
 void sub_81B617C(void);
 void ItemUseCB_Medicine(u8 taskId, TaskFunc task);
+void ItemUseCB_AbilityCapsule(u8 taskId, TaskFunc task);
 void sub_81B67C8(u8 taskId, TaskFunc task);
 void dp05_ether(u8 taskId, TaskFunc task);
 void dp05_pp_up(u8 taskId, TaskFunc task);
