@@ -29,6 +29,13 @@ static void sub_8111214(struct Task *task);
 static u8 sub_811135C(void);
 static void sub_81113C8(struct Sprite *sprite);
 static void sub_811149C(struct Sprite *sprite);
+static void AnimPowerGemOrbitFastStep(struct Sprite *sprite);
+void AnimPowerGemOrbitFast(struct Sprite *sprite);
+static void AnimPowerGemScatterStep(struct Sprite *sprite);
+void AnimPowerGemScatter(struct Sprite *sprite);
+static void AnimStealthRockStep2(struct Sprite *sprite);
+static void AnimStealthRockStep(struct Sprite *sprite);
+void AnimStealthRock(struct Sprite *sprite);
 
 const union AnimCmd gUnknown_08596AE0[] =
 {
@@ -304,6 +311,179 @@ const struct SpriteTemplate gUnknown_08596CE0 =
     .affineAnims = gUnknown_08596C90,
     .callback = sub_80A8EE4,
 };
+
+const union AffineAnimCmd gPowerGemScatterAffineAnimCmd[] =
+{
+    AFFINEANIMCMD_FRAME(0x80, 0x80, 0, 0),
+    AFFINEANIMCMD_FRAME(0x8, 0x8, 0, 1),
+    AFFINEANIMCMD_JUMP(1),
+};
+
+const union AffineAnimCmd *const gPowerGemScatterAffineAnims[] =
+{
+    gPowerGemScatterAffineAnimCmd,
+};
+
+const union AffineAnimCmd gPowerGemOrbAffineAnimCmd[] =
+{
+    AFFINEANIMCMD_FRAME(0x80, 0x80, 0, 0),
+    AFFINEANIMCMD_FRAME(0x8, 0x8, 0, 1),
+    AFFINEANIMCMD_JUMP(1),
+};
+
+const union AffineAnimCmd *const gPowerGemOrbAffineAnims[] =
+{
+    gPowerGemOrbAffineAnimCmd,
+};
+
+const struct SpriteTemplate gPowerGemScatterSpriteTemplate =
+{
+    .tileTag = ANIM_TAG_POWER_GEM,
+    .paletteTag = ANIM_TAG_POWER_GEM,
+    .oam = &gUnknown_085249CC,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gPowerGemScatterAffineAnims,
+    .callback = AnimPowerGemScatter,
+};
+
+const struct SpriteTemplate gPowerGemOrbSpriteTemplate =
+{
+    .tileTag = ANIM_TAG_POWER_GEM,
+    .paletteTag = ANIM_TAG_POWER_GEM,
+    .oam = &gUnknown_0852496C,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gPowerGemOrbAffineAnims,
+    .callback = AnimPowerGemOrbitFast,
+};
+
+const struct SpriteTemplate gStoneEdgeSpriteTemplate =
+{
+    .tileTag = ANIM_TAG_STONE_EDGE,
+    .paletteTag = ANIM_TAG_STONE_EDGE,
+    .oam = &gUnknown_08524914,
+    .anims = gUnknown_085954D0,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_8110B38,
+};
+
+const struct SpriteTemplate gStealthRockSpriteTemplate =
+{
+    .tileTag = ANIM_TAG_STEALTH_ROCK,
+    .paletteTag = ANIM_TAG_STEALTH_ROCK,
+    .oam = &gUnknown_0852490C,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = AnimStealthRock,
+};
+
+void AnimStealthRock(struct Sprite *sprite)
+{
+    u16 x;
+    u16 y;
+
+    InitSpritePosToAnimAttacker(sprite, TRUE);
+    SetAverageBattlerPositions(gBattleAnimTarget, FALSE, &x, &y);
+
+    if (GetBattlerSide(gBattleAnimAttacker) != B_SIDE_PLAYER)
+        gBattleAnimArgs[2] = -gBattleAnimArgs[2];
+
+    sprite->data[0] = gBattleAnimArgs[4];
+    sprite->data[2] = x + gBattleAnimArgs[2];
+    sprite->data[4] = y + gBattleAnimArgs[3];
+    sprite->data[5] = -50;
+
+    InitAnimArcTranslation(sprite);
+    sprite->callback = AnimStealthRockStep;
+}
+
+static void AnimStealthRockStep(struct Sprite *sprite)
+{
+    if (TranslateAnimHorizontalArc(sprite))
+    {
+        sprite->data[0] = 30;
+        sprite->data[1] = 0;
+        sprite->callback = WaitAnimForDuration;
+        StoreSpriteCallbackInData6(sprite, AnimStealthRockStep2);
+    }
+}
+
+static void AnimStealthRockStep2(struct Sprite *sprite)
+{
+    if (sprite->data[1] & 1)
+        sprite->invisible ^= 1;
+
+    if (++sprite->data[1] == 16)
+        DestroyAnimSprite(sprite);
+}
+
+void AnimPowerGemScatter(struct Sprite *sprite)
+{
+    sprite->pos1.x = GetBattlerSpriteCoord(gBattleAnimAttacker, 2);
+    sprite->pos1.y = GetBattlerSpriteCoord(gBattleAnimAttacker, 3);
+    sprite->data[0] = Sin(gBattleAnimArgs[0], 10);
+    sprite->data[1] = Cos(gBattleAnimArgs[0], 7);
+    sprite->callback = AnimPowerGemScatterStep;
+}
+
+static void AnimPowerGemScatterStep(struct Sprite *sprite)
+{
+    sprite->pos2.x += sprite->data[0];
+    sprite->pos2.y += sprite->data[1];
+    if (sprite->pos1.x + sprite->pos2.x + 16 > 272u || sprite->pos1.y + sprite->pos2.y > 160 || sprite->pos1.y + sprite->pos2.y < -16)
+        DestroyAnimSprite(sprite);
+}
+
+void AnimPowerGemOrbitFast(struct Sprite *sprite)
+{
+    sprite->pos1.x = GetBattlerSpriteCoord(gBattleAnimAttacker, 2);
+    sprite->pos1.y = GetBattlerSpriteCoord(gBattleAnimAttacker, 3);
+    sprite->affineAnimPaused = 1;
+    sprite->data[0] = gBattleAnimArgs[0];
+    sprite->data[1] = gBattleAnimArgs[1];
+    sprite->data[7] = GetBattlerSpriteSubpriority(gBattleAnimAttacker);
+    sprite->callback = AnimPowerGemOrbitFastStep;
+    sprite->callback(sprite);
+}
+
+static void AnimPowerGemOrbitFastStep(struct Sprite *sprite)
+{
+    if (sprite->data[1] >= 64 && sprite->data[1] <= 191)
+        sprite->subpriority = sprite->data[7] + 1;
+    else
+        sprite->subpriority = sprite->data[7] - 1;
+
+    sprite->pos2.x = Sin(sprite->data[1], sprite->data[2] >> 8);
+    sprite->pos2.y = Cos(sprite->data[1], sprite->data[3] >> 8);
+    sprite->data[1] = (sprite->data[1] + 9) & 0xFF;
+    switch (sprite->data[5])
+    {
+    case 1:
+        sprite->data[2] -= 0x400;
+        sprite->data[3] -= 0x100;
+        if (++sprite->data[4] == sprite->data[0])
+        {
+            sprite->data[5] = 2;
+            return;
+        }
+        break;
+    case 0:
+        sprite->data[2] += 0x400;
+        sprite->data[3] += 0x100;
+        if (++sprite->data[4] == sprite->data[0])
+        {
+            sprite->data[4] = 0;
+            sprite->data[5] = 1;
+        }
+        break;
+    }
+
+    if ((u16)gBattleAnimArgs[7] == 0xFFFF)
+        DestroyAnimSprite(sprite);
+}
 
 void sub_81109F0(struct Sprite *sprite)
 {

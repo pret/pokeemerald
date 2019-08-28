@@ -29,11 +29,11 @@
 	.byte 0x6
 	.endm
 
-	.macro adjustnormaldamage
+	.macro adjustdamage
 	.byte 0x7
 	.endm
 
-	.macro adjustnormaldamage2
+	.macro multihitresultmessage
 	.byte 0x8
 	.endm
 
@@ -150,7 +150,7 @@
 	.macro jumpifsideaffecting battler:req, sidestatus:req, ptr:req
 	.byte 0x1f
 	.byte \battler
-	.2byte \sidestatus
+	.4byte \sidestatus
 	.4byte \ptr
 	.endm
 
@@ -171,11 +171,20 @@
 	.4byte \ptr
 	.endm
 
-	.macro jumpiftype battler:req, type:req, ptr:req
+	.macro jumpbasedontype battler:req, type:req, case:req, ptr:req
 	.byte 0x22
 	.byte \battler
 	.byte \type
+	.byte \case
 	.4byte \ptr
+	.endm
+	
+	.macro jumpiftype battler:req, type:req, ptr:req
+	jumpbasedontype \battler, \type, 1, \ptr
+	.endm
+	
+	.macro jumpifnottype battler:req, type:req, ptr:req
+	jumpbasedontype \battler, \type, 0, \ptr
 	.endm
 
 	.macro getexp battler:req
@@ -356,11 +365,8 @@
 	.4byte \ptr
 	.endm
 
-	.macro jumpiftype2 battler:req, type:req, ptr:req
+	.macro setroost
 	.byte 0x42
-	.byte \battler
-	.byte \type
-	.4byte \ptr
 	.endm
 
 	.macro jumpifabilitypresent ability:req, ptr:req
@@ -436,8 +442,9 @@
 	moveend 2, \to
 	.endm
 
-	.macro typecalc2
+	.macro sethealblock ptr
 	.byte 0x4a
+	.4byte \ptr
 	.endm
 
 	.macro returnatktoball
@@ -593,8 +600,9 @@
 	.byte 0x68
 	.endm
 
-	.macro adjustsetdamage
+	.macro setgravity ptr
 	.byte 0x69
+	.4byte \ptr
 	.endm
 
 	.macro removeitem battler:req
@@ -623,7 +631,7 @@
 	.byte \battler
 	.endm
 
-	.macro recordlastability battler:req
+	.macro recordability battler:req
 	.byte 0x70
 	.byte \battler
 	.endm
@@ -711,8 +719,9 @@
 	.4byte \ptr
 	.endm
 
-	.macro nop
+	.macro setmiracleeye ptr
 	.byte 0x83
+	.4byte \ptr
 	.endm
 
 	.macro jumpifcantmakeasleep param0:req
@@ -720,8 +729,9 @@
 	.4byte \param0
 	.endm
 
-	.macro stockpile
+	.macro stockpile id:req
 	.byte 0x85
+	.byte \id
 	.endm
 
 	.macro stockpiletobasedamage param0:req
@@ -734,13 +744,13 @@
 	.4byte \param0
 	.endm
 
-	.macro negativedamage
+	.macro setdrainedhp
 	.byte 0x88
 	.endm
 
 	.macro statbuffchange param0:req, param1:req
 	.byte 0x89
-	.byte \param0
+	.2byte \param0
 	.4byte \param1
 	.endm
 
@@ -895,8 +905,9 @@
 	.byte 0xab
 	.endm
 
-	.macro remaininghptopower
+	.macro settailwind ptr:req
 	.byte 0xac
+	.4byte \ptr
 	.endm
 
 	.macro tryspiteppreduce param0:req
@@ -927,7 +938,7 @@
 	.4byte \param0
 	.endm
 
-	.macro rolloutdamagecalculation
+	.macro handlerollout
 	.byte 0xb3
 	.endm
 
@@ -937,12 +948,13 @@
 	.4byte \ptr
 	.endm
 
-	.macro furycuttercalc
+	.macro handlefurycutter
 	.byte 0xb5
 	.endm
 
-	.macro happinesstodamagecalculation
+	.macro setembargo ptr
 	.byte 0xb6
+	.4byte \ptr
 	.endm
 
 	.macro presentdamagecalculation
@@ -989,8 +1001,9 @@
 	.4byte \param0
 	.endm
 
-	.macro hiddenpowercalc
+	.macro setstickyweb ptr
 	.byte 0xc1
+	.4byte \ptr
 	.endm
 
 	.macro selectfirstvalidtarget
@@ -1082,13 +1095,14 @@
 	.4byte \param1
 	.endm
 
-	.macro trysetroots param0:req
+	.macro settoxicspikes ptr:req
 	.byte 0xd5
-	.4byte \param0
+	.4byte \ptr
 	.endm
 
-	.macro doubledamagedealtifdamaged
+	.macro setgastroacid ptr
 	.byte 0xd6
+	.4byte \ptr
 	.endm
 
 	.macro setyawn param0:req
@@ -1101,7 +1115,7 @@
 	.4byte \param0
 	.endm
 
-	.macro scaledamagebyhealthratio
+	.macro setroom
 	.byte 0xd9
 	.endm
 
@@ -1115,13 +1129,15 @@
 	.4byte \param0
 	.endm
 
-	.macro trysetgrudge param0:req
+	.macro setstealthrock ptr:req
 	.byte 0xdc
-	.4byte \param0
+	.4byte \ptr
 	.endm
 
-	.macro weightdamagecalculation
+	.macro setuserstatus3 flags ptr
 	.byte 0xdd
+	.4byte \flags
+	.4byte \ptr
 	.endm
 
 	.macro assistattackselect param0:req
@@ -1176,8 +1192,9 @@
 	.4byte \param0
 	.endm
 
-	.macro setweatherballtype
+	.macro jumpifsubstituteblocks ptr
 	.byte 0xe9
+	.4byte \ptr
 	.endm
 
 	.macro tryrecycleitem param0:req
@@ -1244,6 +1261,41 @@
 	.macro trainerslideout param0:req
 	.byte 0xf8
 	.byte \param0
+	.endm
+	
+	.macro settelekinesis ptr:req
+	.byte 0xf9
+	.4byte \ptr
+	.endm
+	
+	.macro swapstatstages stat:req
+	.byte 0xfa
+	.byte \stat
+	.endm
+	
+	.macro averagestats stat:req
+	.byte 0xfb
+	.byte \stat
+	.endm
+	
+	.macro jumpifoppositegenders ptr:req
+	.byte 0xfc
+	.4byte \ptr
+	.endm
+	
+	.macro trygetbaddreamstarget ptr:req
+	.byte 0xfd
+	.4byte \ptr
+	.endm
+	
+	.macro tryworryseed ptr:req
+	.byte 0xfe
+	.4byte \ptr
+	.endm
+	
+	.macro metalburstdamagecalculator ptr:req
+	.byte 0xff
+	.4byte \ptr
 	.endm
 	
 @ various command changed to more readable macros
@@ -1355,13 +1407,280 @@
 	various \battler, VARIOUS_PLAY_TRAINER_DEFEATED_MUSIC
 	.endm
 	
+	.macro stattextbuffer battler:req
+	various \battler, VARIOUS_STAT_TEXT_BUFFER
+	.endm
+	
+	.macro switchinabilities battler:req
+	various \battler, VARIOUS_SWITCHIN_ABILITIES
+	.endm
+	
+	.macro savetarget
+	various BS_TARGET, VARIOUS_SAVE_TARGET
+	.endm
+	
+	.macro restoretarget
+	various BS_TARGET, VARIOUS_RESTORE_TARGET
+	.endm
+	
+	.macro instanthpdrop battler:req
+	various \battler, VARIOUS_INSTANT_HP_DROP
+	.endm
+	
+	.macro clearstatus battler:req
+	various \battler, VARIOUS_CLEAR_STATUS
+	.endm
+	
+	.macro restorepp battler:req
+	various \battler, VARIOUS_RESTORE_PP
+	.endm
+	
+	.macro tryactivatemoxie battler:req
+	various \battler, VARIOUS_TRY_ACTIVATE_MOXIE
+	.endm
+	
+	.macro tryactivatefellstinger battler:req
+	various \battler, VARIOUS_TRY_ACTIVATE_FELL_STINGER
+	.endm
+	
+	.macro playmoveanimation battler:req, move:req
+	various \battler, VARIOUS_PLAY_MOVE_ANIMATION
+	.2byte \move
+	.endm
+	
+	.macro setluckychant battler:req, ptr:req
+	various \battler VARIOUS_SET_LUCKY_CHANT
+	.4byte \ptr
+	.endm
+	
+	.macro suckerpunchcheck ptr:req
+	various BS_ATTACKER, VARIOUS_SUCKER_PUNCH_CHECK
+	.4byte \ptr
+	.endm
+	
+	.macro setabilitysimple battler:req, ptr:req
+	various \battler VARIOUS_SET_SIMPLE_BEAM
+	.4byte \ptr
+	.endm
+	
+	.macro tryentrainment ptr:req
+	various BS_ATTACKER, VARIOUS_TRY_ENTRAINMENT
+	.4byte \ptr
+	.endm
+	
+	.macro setlastusedability battler:req
+	various \battler, VARIOUS_SET_LAST_USED_ABILITY
+	.endm
+	
+	.macro tryhealpulse battler:req, ptr:req
+	various \battler, VARIOUS_TRY_HEAL_PULSE
+	.4byte \ptr
+	.endm
+	
+	.macro tryquash ptr:req
+	various BS_ATTACKER, VARIOUS_TRY_QUASH
+	.4byte \ptr
+	.endm
+	
+	.macro tryafteryou ptr:req
+	various BS_ATTACKER, VARIOUS_AFTER_YOU
+	.4byte \ptr
+	.endm
+	
+	.macro trybestow ptr:req
+	various BS_ATTACKER, VARIOUS_BESTOW
+	.4byte \ptr
+	.endm
+	
+	.macro invertstatstages battler:req
+	various \battler, VARIOUS_INVERT_STAT_STAGES
+	.endm
+	
+	.macro setterrain ptr:req
+	various BS_ATTACKER, VARIOUS_SET_TERRAIN
+	.4byte \ptr
+	.endm
+	
+	.macro trymefirst ptr:req
+	various BS_ATTACKER, VARIOUS_TRY_ME_FIRST
+	.4byte \ptr
+	.endm
+	
+	.macro jumpifbattleend ptr:req
+	various BS_ATTACKER, VARIOUS_JUMP_IF_BATTLE_END
+	.4byte \ptr
+	.endm
+	
+	.macro tryelectrify ptr:req
+	various BS_ATTACKER, VARIOUS_TRY_ELECTRIFY
+	.4byte \ptr
+	.endm
+	
+	.macro tryreflecttype ptr:req
+	various BS_ATTACKER, VARIOUS_TRY_REFLECT_TYPE
+	.4byte \ptr
+	.endm
+	
+	.macro trysoak ptr:req
+	various BS_ATTACKER, VARIOUS_TRY_SOAK
+	.4byte \ptr
+	.endm
+	
+	.macro handlemegaevo battler:req, case:req
+	various \battler, VARIOUS_HANDLE_MEGA_EVO
+	.byte \case
+	.endm
+	
+	.macro jumpifcantuselastresort battler:req, ptr:req
+	various \battler, VARIOUS_TRY_LAST_RESORT
+	.4byte \ptr
+	.endm
+	
+	.macro argumentstatuseffect
+	various BS_ATTACKER, VARIOUS_ARGUMENT_STATUS_EFFECT
+	.endm
+	
+	.macro tryhitswitchtarget ptr:req
+	various BS_ATTACKER, VARIOUS_TRY_HIT_SWITCH_TARGET
+	.4byte \ptr
+	.endm
+	
+	.macro tryautonomize battler:req, ptr:req
+	various \battler, VARIOUS_TRY_AUTONOMIZE
+	.4byte \ptr
+	.endm
+	
+	.macro jumpifcantusesynchronoise ptr:req
+	various BS_ATTACKER, VARIOUS_TRY_SYNCHRONOISE
+	.4byte \ptr
+	.endm
+	
+	.macro trycopycat ptr:req
+	various BS_ATTACKER, VARIOUS_TRY_COPYCAT
+	.4byte \ptr
+	.endm
+	
+	.macro showabilitypopup battler:req
+	various \battler, VARIOUS_ABILITY_POPUP
+	.endm
+	
+	.macro defogclear battler:req, clear:req, ptr:req
+	various \battler, VARIOUS_DEFOG
+	.byte \clear
+	.4byte \ptr
+	.endm
+	
+	.macro jumpiftargetally ptr:req
+	various BS_ATTACKER, VARIOUS_JUMP_IF_TARGET_ALLY
+	.4byte \ptr
+	.endm
+	
+	.macro trypsychoshift ptr:req
+	various BS_ATTACKER, VARIOUS_PSYCHO_SHIFT
+	.4byte \ptr
+	.endm
+	
+	.macro curestatus battler:req
+	various \battler, VARIOUS_CURE_STATUS
+	.endm
+	
+	.macro powertrick battler:req
+	various \battler, VARIOUS_POWER_TRICK
+	.endm
+	
+	.macro argumenttomoveeffect
+	various BS_ATTACKER, VARIOUS_ARGUMENT_TO_MOVE_EFFECT
+	.endm
+	
+	.macro jumpifnotgrounded battler:req, ptr:req
+	various \battler, VARIOUS_JUMP_IF_NOT_GROUNDED
+	.4byte \ptr
+	.endm
+	
+	.macro handletrainerslidemsg battler:req, field:req
+	various \battler, VARIOUS_HANDLE_TRAINER_SLIDE_MSG
+	.byte \field
+	.endm
+	
+	.macro trytrainerslidefirstdownmsg battler:req
+	various \battler, VARIOUS_TRY_TRAINER_SLIDE_MSG_FIRST_OFF
+	.endm
+	
+	.macro trytrainerslidelastonmsg battler:req
+	various \battler, VARIOUS_TRY_TRAINER_SLIDE_MSG_LAST_ON
+	.endm
+	
+	.macro setauroraveil battler:req
+	various \battler, VARIOUS_SET_AURORA_VEIL
+	.endm
+	
+	.macro trysetthirdtype battler:req, ptr:req
+	various \battler, VARIOUS_TRY_THIRD_TYPE
+	.4byte \ptr
+	.endm
+	
+	.macro tryaccupressure battler:req, ptr:req
+	various \battler, VARIOUS_ACUPRESSURE
+	.4byte \ptr
+	.endm
+	
+	.macro setpowder battler:req
+	various \battler, VARIOUS_SET_POWDER
+	.endm
+	
+	.macro spectralthiefprintstats
+	various BS_ATTACKER, VARIOUS_SPECTRAL_THIEF
+	.endm
+	
+	.macro bringdownairbornebattler battler:req
+	various \battler, VARIOUS_GRAVITY_ON_AIRBORNE_MONS
+	.endm
+	
+	.macro checkgrassyterrainheal battler:req, ptr:req
+	various \battler, VARIOUS_CHECK_IF_GRASSY_TERRAIN_HEALS
+	.4byte \ptr
+	.endm
+	
+	.macro jumpifnotberry battler:req, ptr:req
+	various \battler, VARIOUS_JUMP_IF_NOT_BERRY
+	.4byte \ptr
+	.endm
+	
+	.macro jumpifroarfails ptr:req
+	various BS_ATTACKER, VARIOUS_JUMP_IF_ROAR_FAILS
+	.4byte \ptr
+	.endm
+
+	.macro tryinstruct ptr:req
+	various BS_ATTACKER, VARIOUS_TRY_INSTRUCT
+	.4byte \ptr
+	.endm
+	
+	.macro settracedability battler:req
+	various \battler, VARIOUS_TRACE_ABILITY
+	.endm
+	
+	.macro updatenick battler:req
+	various \battler, VARIOUS_UPDATE_NICK
+	.endm
+	
+	.macro tryillusionoff battler:req
+	various \battler, VARIOUS_TRY_ILLUSION_OFF
+	.endm
+	
+	.macro spriteignore0hp val:req
+	various BS_ATTACKER, VARIOUS_SET_SPRITEIGNORE0HP
+	.byte \val
+	.endm
+	
 @ helpful macros
 	.macro setstatchanger stat:req, stages:req, down:req
-	setbyte sSTATCHANGER \stat | \stages << 4 | \down << 7
+	setbyte sSTATCHANGER \stat | \stages << 3 | \down << 7
 	.endm
 	
 	.macro setmoveeffect effect:req
-	setbyte cEFFECT_CHOOSER \effect
+	sethword sMOVE_EFFECT \effect
+	sethword sSAVED_MOVE_EFFECT \effect
 	.endm
 	
 	.macro chosenstatus1animation battler:req, status:req
@@ -1411,8 +1730,12 @@
 	.macro jumpifnotmove move:req, jumpptr:req
 	jumpifhalfword CMP_NOT_EQUAL, gCurrentMove, \move, \jumpptr
 	.endm
-	
-	.macro jumpifstatus3 battler:req, status:req, jumpptr:req
+
+	.macro jumpifnotchosenmove move:req, jumpptr:req
+	jumpifhalfword CMP_NOT_EQUAL, gChosenMove, \move, \jumpptr
+	.endm
+
+	.macro jumpifstatus3 battler, status:req, jumpptr:req
 	jumpifstatus3condition \battler, \status, 0x0, \jumpptr
 	.endm
 	
@@ -1431,3 +1754,31 @@
 	.macro jumpifnotbattletype flags:req, jumpptr:req
 	jumpifword CMP_NO_COMMON_BITS, gBattleTypeFlags, \flags, \jumpptr
 	.endm
+	
+	.macro dmg_1_8_targethp
+	manipulatedamage ATK80_1_8_TARGET_HP
+	.endm
+	
+	.macro dmgtomaxattackerhp
+	manipulatedamage ATK80_FULL_ATTACKER_HP
+	.endm
+	
+	.macro dmgtocurrattackerhp
+	manipulatedamage ATK80_CURR_ATTACKER_HP
+	.endm
+	
+	.macro jumpifflowerveil jumpptr:req
+	jumpifnottype BS_TARGET, TYPE_GRASS, 1f
+	jumpifability BS_TARGET_SIDE, ABILITY_FLOWER_VEIL, \jumpptr
+	1:
+	.endm
+
+	.macro setallytonexttarget jumpptr:req
+	jumpifbyte CMP_GREATER_THAN, gBattlerTarget, 0x1, 1f
+	addbyte gBattlerTarget, 0x2
+	goto \jumpptr
+	1:
+	subbyte gBattlerTarget, 0x2
+	goto \jumpptr
+	.endm
+

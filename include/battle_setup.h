@@ -20,6 +20,7 @@ extern u16 gTrainerBattleOpponent_B;
 extern u16 gPartnerTrainerId;
 
 void BattleSetup_StartWildBattle(void);
+void BattleSetup_StartDoubleWildBattle(void);
 void BattleSetup_StartBattlePikeWildBattle(void);
 void BattleSetup_StartRoamerBattle(void);
 void StartWallyTutorialBattle(void);
@@ -29,6 +30,8 @@ void BattleSetup_StartLegendaryBattle(void);
 void StartGroudonKyogreBattle(void);
 void StartRegiBattle(void);
 u8 BattleSetup_GetTerrainId(void);
+u8 GetWildBattleTransition(void);
+u8 GetTrainerBattleTransition(void);
 u8 sub_80B100C(s32 arg0);
 void ChooseStarter(void);
 void ResetTrainerOpponentIds(void);

@@ -296,6 +296,31 @@
 #define ANIM_TAG_SLASH_2                    (ANIM_SPRITES_START + 286)
 #define ANIM_TAG_WHIP_HIT                   (ANIM_SPRITES_START + 287)
 #define ANIM_TAG_BLUE_RING_2                (ANIM_SPRITES_START + 288)
+#define ANIM_TAG_WHITE_STREAK               (ANIM_SPRITES_START + 289)
+#define ANIM_TAG_PURPLE_JAB                 (ANIM_SPRITES_START + 290)
+#define ANIM_TAG_TOXIC_SPIKES               (ANIM_SPRITES_START + 291)
+#define ANIM_TAG_ENERGY_BALL                (ANIM_SPRITES_START + 292)
+#define ANIM_TAG_SEED_BROWN                 (ANIM_SPRITES_START + 293)
+#define ANIM_TAG_FEINT                      (ANIM_SPRITES_START + 294)
+#define ANIM_TAG_MEGA_STONE                 (ANIM_SPRITES_START + 295)
+#define ANIM_TAG_MEGA_SYMBOL                (ANIM_SPRITES_START + 296)
+#define ANIM_TAG_MEGA_PARTICLES             (ANIM_SPRITES_START + 297)
+#define ANIM_TAG_TRUMP_CARD                 (ANIM_SPRITES_START + 298)
+#define ANIM_TAG_TRUMP_CARD_PARTICLES       (ANIM_SPRITES_START + 299)
+#define ANIM_TAG_ACCUPRESSURE               (ANIM_SPRITES_START + 300)
+#define ANIM_TAG_WRING_OUT                  (ANIM_SPRITES_START + 301)
+#define ANIM_TAG_COLORED_ORBS               (ANIM_SPRITES_START + 302)
+#define ANIM_TAG_WORRY_SEED                 (ANIM_SPRITES_START + 303)
+#define ANIM_TAG_SMALL_CLOUD                (ANIM_SPRITES_START + 304)
+#define ANIM_TAG_ATTACK_ORDER               (ANIM_SPRITES_START + 305)
+#define ANIM_TAG_DRAGON_PULSE               (ANIM_SPRITES_START + 306)
+#define ANIM_TAG_WOOD_HAMMER                (ANIM_SPRITES_START + 307)
+#define ANIM_TAG_PSYCHO_CUT                 (ANIM_SPRITES_START + 308)
+#define ANIM_TAG_POWER_GEM                  (ANIM_SPRITES_START + 309)
+#define ANIM_TAG_STONE_EDGE                 (ANIM_SPRITES_START + 310)
+#define ANIM_TAG_STEALTH_ROCK               (ANIM_SPRITES_START + 311)
+#define ANIM_TAG_POISON_JAB                 (ANIM_SPRITES_START + 312)
+#define ANIM_TAG_GREEN_POISON_BUBBLE        (ANIM_SPRITES_START + 313)
 
 // battlers
 #define ANIM_ATTACKER    0
@@ -345,6 +370,12 @@
 #define BG_SOLARBEAM_OPPONENT 24
 #define BG_SOLARBEAM_PLAYER 25
 #define BG_SOLARBEAM_CONTESTS 26
+#define BG_MAGMA_STORM 27
+#define BG_GIGA_IMPACT_OPPONENT 28
+#define BG_GIGA_IMPACT_PLAYER 29
+#define BG_GIGA_IMPACT_CONTEST 30
+#define BG_TRICK_ROOM 31
+#define BG_ROCK_WRECKER 32
 
 // table ids for general animations
 #define B_ANIM_CASTFORM_CHANGE          0x0
@@ -370,6 +401,12 @@
 #define B_ANIM_FOCUS_PUNCH_SETUP        0x14
 #define B_ANIM_INGRAIN_HEAL             0x15
 #define B_ANIM_WISH_HEAL                0x16
+#define B_ANIM_MEGA_EVOLUTION           0x17
+#define B_ANIM_TERRAIN_MISTY            0x18
+#define B_ANIM_TERRAIN_GRASSY           0x19
+#define B_ANIM_TERRAIN_ELECTRIC         0x1A
+#define B_ANIM_TERRAIN_PSYCHIC          0x1B
+#define B_ANIM_ILLUSION_OFF             0x1C
 
 // special animations table
 #define B_ANIM_LVL_UP                   0x0

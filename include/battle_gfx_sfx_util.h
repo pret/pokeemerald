@@ -27,7 +27,7 @@ bool8 BattleInitAllSprites(u8 *state1, u8 *battlerId);
 void ClearSpritesHealthboxAnimData(void);
 void CopyAllBattleSpritesInvisibilities(void);
 void CopyBattleSpriteInvisibility(u8 battlerId);
-void HandleSpeciesGfxDataChange(u8 attacker, u8 target, bool8 notTransform);
+void HandleSpeciesGfxDataChange(u8 attacker, u8 target, bool8 notTransform, bool32 megaEvo);
 void BattleLoadSubstituteOrMonSpriteGfx(u8 battlerId, bool8 loadMonSprite);
 void LoadBattleMonGfxAndAnimate(u8 battlerId, bool8 loadMonSprite, u8 spriteId);
 void TrySetBehindSubstituteSpriteBit(u8 battlerId, u16 move);

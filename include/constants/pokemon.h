@@ -21,7 +21,8 @@
 #define TYPE_ICE      0x0f
 #define TYPE_DRAGON   0x10
 #define TYPE_DARK     0x11
-#define NUMBER_OF_MON_TYPES     0x12
+#define TYPE_FAIRY    0x12
+#define NUMBER_OF_MON_TYPES     0x13
 
 
 // Pokemon egg groups
@@ -81,6 +82,35 @@
 
 #define NUM_STATS 6
 #define NUM_BATTLE_STATS 8
+
+// Move flags.
+#define FLAG_MAKES_CONTACT          0x1
+#define FLAG_PROTECT_AFFECTED       0x2
+#define FLAG_MAGICCOAT_AFFECTED     0x4
+#define FLAG_SNATCH_AFFECTED        0x8
+#define FLAG_MIRROR_MOVE_AFFECTED   0x10
+#define FLAG_KINGSROCK_AFFECTED     0x20
+#define FLAG_HIGH_CRIT              0x40
+#define FLAG_RECKLESS_BOOST         0x80
+#define FLAG_IRON_FIST_BOOST        0x100
+#define FLAG_SHEER_FORCE_BOOST      0x200
+#define FLAG_STRONG_JAW_BOOST       0x400
+#define FLAG_MEGA_LAUNCHER_BOOST    0x800
+#define FLAG_STAT_STAGES_IGNORED    0x1000
+#define FLAG_DMG_MINIMIZE           0x2000
+#define FLAG_DMG_UNDERGROUND        0x4000
+#define FLAG_DMG_UNDERWATER         0x8000
+#define FLAG_SOUND                  0x10000
+#define FLAG_BALLISTIC              0x20000
+#define FLAG_PROTECTION_MOVE        0x40000
+#define FLAG_POWDER                 0x80000
+#define FLAG_TARGET_ABILITY_IGNORED 0x100000
+#define FLAG_DANCE                  0x200000
+
+// Split defines.
+#define SPLIT_PHYSICAL  0x0
+#define SPLIT_SPECIAL   0x1
+#define SPLIT_STATUS    0x2
 
 // Shiny odds
 #define SHINY_ODDS 8 // Actual probability is SHINY_ODDS/65536

@@ -40,6 +40,7 @@
 #define SPECIAL_BATTLE_STEVEN 8
 #define SPECIAL_BATTLE_PIKE_DOUBLE 9
 #define SPECIAL_BATTLE_PYRAMID 10
+#define SPECIAL_BATTLE_MULTI 11
 
 // For 'ShowFacilityResultsWindow' function which is a part of the 'CallFrontierUtilFunc' special.
 #define RESULTS_LINK_CONTEST 7

@@ -129,7 +129,7 @@ static const struct SpriteFrameImage sSpriteImageTable_85104B4[] =
     obj_frame_tiles(sResetRtcScreen_RightArrowGfx)
 };
 
-static const struct SpritePalette sSpritePalette_Arrow =
+const struct SpritePalette gSpritePalette_RtcArrow =
 {
     sResetRtcScreen_ArrowPal, 0x1000
 };
@@ -159,7 +159,7 @@ static const union AnimCmd *const sSpriteAnimTable_85104E4[] =
     sSpriteAnim_85104DC,
 };
 
-static const struct SpriteTemplate sSpriteTemplate_85104F0 =
+const struct SpriteTemplate gSpriteTemplate_RtcArrow =
 {
     .tileTag = 0xFFFF,
     .paletteTag = 0x1000,
@@ -271,14 +271,14 @@ static void CreateCursor(u8 taskId)
 {
     u32 spriteId;
 
-    LoadSpritePalette(&sSpritePalette_Arrow);
+    LoadSpritePalette(&gSpritePalette_RtcArrow);
 
-    spriteId = CreateSpriteAtEnd(&sSpriteTemplate_85104F0, 53, 68, 0);
+    spriteId = CreateSpriteAtEnd(&gSpriteTemplate_RtcArrow, 53, 68, 0);
     gSprites[spriteId].callback = SpriteCB_ResetRtcCursor0;
     gSprites[spriteId].data[0] = taskId;
     gSprites[spriteId].data[1] = -1;
 
-    spriteId = CreateSpriteAtEnd(&sSpriteTemplate_85104F0, 53, 68, 0);
+    spriteId = CreateSpriteAtEnd(&gSpriteTemplate_RtcArrow, 53, 68, 0);
     gSprites[spriteId].callback = SpriteCB_ResetRtcCursor1;
     gSprites[spriteId].data[0] = taskId;
     gSprites[spriteId].data[1] = -1;
@@ -286,7 +286,7 @@ static void CreateCursor(u8 taskId)
 
 static void FreeCursorPalette(void)
 {
-    FreeSpritePaletteByTag(sSpritePalette_Arrow.tag);
+    FreeSpritePaletteByTag(gSpritePalette_RtcArrow.tag);
 }
 
 static void HideChooseTimeWindow(u8 windowId)

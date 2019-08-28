@@ -35,7 +35,6 @@ static void sub_81129F0(struct Sprite *);
 static void sub_8112A4C(struct Sprite *);
 static void sub_8112ACC(struct Sprite *);
 static void sub_8112B44(struct Sprite *);
-static void sub_8112B78(struct Sprite *);
 static void sub_8112C4C(struct Sprite *);
 static void sub_8112D10(u8 taskId);
 static void sub_8112E9C(struct Sprite *);
@@ -96,6 +95,39 @@ const struct SpriteTemplate gShadowBallSpriteTemplate =
     .images = NULL,
     .affineAnims = gUnknown_08596D54,
     .callback = InitAnimShadowBall,
+};
+
+const struct SpriteTemplate gEnergyBallSpriteTemplate =
+{
+    .tileTag = ANIM_TAG_ENERGY_BALL,
+    .paletteTag = ANIM_TAG_ENERGY_BALL,
+    .oam = &gUnknown_08524974,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gUnknown_08596D54,
+    .callback = InitAnimShadowBall,
+};
+
+const struct SpriteTemplate gBattleAnimSpriteTemplate_LeafStorm =
+{
+    .tileTag = ANIM_TAG_RAZOR_LEAF,
+    .paletteTag = ANIM_TAG_RAZOR_LEAF,
+    .oam = &gUnknown_08524934,
+    .anims = gUnknown_085962D0,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_810E044,
+};
+
+const struct SpriteTemplate gBattleAnimSpriteTemplate_LeafStorm2 =
+{
+    .tileTag = ANIM_TAG_LEAF,
+    .paletteTag = ANIM_TAG_LEAF,
+    .oam = &gUnknown_085249CC,
+    .anims = gUnknown_08592388,
+    .images = NULL,
+    .affineAnims = gUnknown_085961A0,
+    .callback = sub_8100898,
 };
 
 const union AnimCmd gUnknown_08596D70[] =
@@ -1120,7 +1152,7 @@ static void sub_8112B44(struct Sprite *sprite)
     DestroyAnimSprite(sprite);
 }
 
-static void sub_8112B78(struct Sprite *sprite)
+void sub_8112B78(struct Sprite *sprite)
 {
     u16 coeffB;
     u16 coeffA;

@@ -57,6 +57,7 @@ void LaunchBattleAnimation(const u8 *const animsTable[], u16 tableId, bool8 isMo
 void DestroyAnimSprite(struct Sprite *sprite);
 void DestroyAnimVisualTask(u8 taskId);
 void DestroyAnimSoundTask(u8 taskId);
+u8 GetAnimBattlerId(u8 wantedBattler);
 bool8 IsBattlerSpriteVisible(u8 battlerId);
 void MoveBattlerSpriteToBG(u8 battlerId, bool8 toBG_2, bool8 setSpriteInvisible);
 bool8 IsContest(void);
@@ -223,12 +224,28 @@ void sub_8117854(u8 taskId, int unused, u16 arg2, u8 battler1, u8 arg4, u8 arg5,
 // battle_anim_effects_1.c
 void sub_810310C(u8 battler, struct Sprite* sprite);
 void AnimMoveTwisterParticle(struct Sprite* sprite);
+void AnimPowerAbsorptionOrb(struct Sprite* sprite);
+extern const union AnimCmd *const gUnknown_08592388[];
+extern const union AnimCmd *const gUnknown_085921C8[];
+extern const union AffineAnimCmd *const gUnknown_085921DC[];
+void sub_8100898(struct Sprite *);
 
 // water.c
 void sub_8108C94(struct Sprite *sprite);
 
 // flying.c
 void sub_810E2C8(struct Sprite *sprite);
+extern const union AnimCmd *const gUnknown_085962D0[];
+void sub_810E044(struct Sprite *sprite);
+
+//poison.c
+extern const union AffineAnimCmd *const gUnknown_085961A0[];
+
+// ghost.c
+void sub_8112B78(struct Sprite *sprite);
+
+// psychic.c
+extern const union AffineAnimCmd *const gUnknown_08596894[];
 
 // smokescreen.c
 u8 sub_807521C(s16 x, s16 y, u8 a3);
@@ -237,50 +254,78 @@ u32 UnpackSelectedBattleAnimPalettes(s16);
 
 u8 GetBattlerSpriteFinal_Y(u8, u16, u8);
 
-extern const struct OamData gUnknown_08524944;
-extern const struct OamData gUnknown_08524A8C;
 extern const struct OamData gUnknown_08524904;
-extern const struct OamData gUnknown_085249C4;
 extern const struct OamData gUnknown_0852490C;
-extern const struct OamData gUnknown_08524934;
-extern const struct OamData gUnknown_08524974;
-extern const struct OamData gUnknown_0852499C;
-extern const struct OamData gUnknown_085249CC;
 extern const struct OamData gUnknown_08524914;
-extern const struct OamData gUnknown_0852496C;
-extern const struct OamData gUnknown_08524A34;
-extern const struct OamData gUnknown_08524A3C;
-extern const struct OamData gUnknown_08524A94;
+extern const struct OamData gUnknown_0852491C;
+extern const struct OamData gUnknown_08524924;
+extern const struct OamData gUnknown_0852492C;
+extern const struct OamData gUnknown_08524934;
+extern const struct OamData gUnknown_0852493C;
+extern const struct OamData gUnknown_08524944;
+extern const struct OamData gUnknown_0852494C;
 extern const struct OamData gUnknown_08524954;
-extern const struct OamData gUnknown_08524AE4;
+extern const struct OamData gUnknown_0852495C;
+extern const struct OamData gUnknown_08524964;
+extern const struct OamData gUnknown_0852496C;
+extern const struct OamData gUnknown_08524974;
+extern const struct OamData gUnknown_0852497C;
+extern const struct OamData gUnknown_08524984;
+extern const struct OamData gUnknown_0852498C;
+extern const struct OamData gUnknown_08524994;
+extern const struct OamData gUnknown_0852499C;
+extern const struct OamData gUnknown_085249A4;
+extern const struct OamData gUnknown_085249AC;
+extern const struct OamData gUnknown_085249B4;
+extern const struct OamData gUnknown_085249BC;
+extern const struct OamData gUnknown_085249C4;
+extern const struct OamData gUnknown_085249CC;
 extern const struct OamData gUnknown_085249D4;
-extern const struct OamData gUnknown_08524A9C;
-extern const struct OamData gUnknown_08524ADC;
-extern const struct OamData gUnknown_08524B14;
-extern const struct OamData gUnknown_08524A54;
+extern const struct OamData gUnknown_085249DC;
+extern const struct OamData gUnknown_085249E4;
+extern const struct OamData gUnknown_085249EC;
+extern const struct OamData gUnknown_085249F4;
+extern const struct OamData gUnknown_085249FC;
+extern const struct OamData gUnknown_08524A04;
+extern const struct OamData gUnknown_08524A0C;
 extern const struct OamData gUnknown_08524A14;
 extern const struct OamData gUnknown_08524A1C;
-extern const struct OamData gUnknown_085249BC;
-extern const struct OamData gUnknown_08524AF4;
-extern const struct OamData gUnknown_085249DC;
-extern const struct OamData gUnknown_08524AFC;
-extern const struct OamData gUnknown_08524B1C;
-extern const struct OamData gUnknown_08524A04;
-extern const struct OamData gUnknown_08524A2C;
-extern const struct OamData gUnknown_08524AEC;
-extern const struct OamData gUnknown_08524964;
-extern const struct OamData gUnknown_08524B24;
 extern const struct OamData gUnknown_08524A24;
-extern const struct OamData gUnknown_08524AC4;
-extern const struct OamData gUnknown_08524A84;
-extern const struct OamData gUnknown_08524A64;
-extern const struct OamData gUnknown_0852491C;
-extern const struct OamData gUnknown_0852495C;
-extern const struct OamData gUnknown_0852497C;
-extern const struct OamData gUnknown_085249F4;
-extern const struct OamData gUnknown_0852493C;
+extern const struct OamData gUnknown_08524A2C;
+extern const struct OamData gUnknown_08524A34;
+extern const struct OamData gUnknown_08524A3C;
+extern const struct OamData gUnknown_08524A44;
+extern const struct OamData gUnknown_08524A4C;
+extern const struct OamData gUnknown_08524A54;
 extern const struct OamData gUnknown_08524A5C;
+extern const struct OamData gUnknown_08524A64;
+extern const struct OamData gUnknown_08524A6C;
 extern const struct OamData gUnknown_08524A74;
+extern const struct OamData gUnknown_08524A7C;
+extern const struct OamData gUnknown_08524A84;
+extern const struct OamData gUnknown_08524A8C;
+extern const struct OamData gUnknown_08524A94;
+extern const struct OamData gUnknown_08524A9C;
+extern const struct OamData gUnknown_08524AA4;
+extern const struct OamData gUnknown_08524AAC;
+extern const struct OamData gUnknown_08524AB4;
+extern const struct OamData gUnknown_08524ABC;
+extern const struct OamData gUnknown_08524AC4;
+extern const struct OamData gUnknown_08524ACC;
+extern const struct OamData gUnknown_08524AD4;
+extern const struct OamData gUnknown_08524ADC;
+extern const struct OamData gUnknown_08524AE4;
+extern const struct OamData gUnknown_08524AEC;
+extern const struct OamData gUnknown_08524AF4;
+extern const struct OamData gUnknown_08524AFC;
+extern const struct OamData gUnknown_08524B04;
+extern const struct OamData gUnknown_08524B0C;
+extern const struct OamData gUnknown_08524B14;
+extern const struct OamData gUnknown_08524B1C;
+extern const struct OamData gUnknown_08524B24;
+extern const struct OamData gUnknown_08524B2C;
+extern const struct OamData gUnknown_08524B34;
+extern const struct OamData gUnknown_08524B3C;
 
 extern const struct CompressedSpriteSheet gBattleAnimPicTable[];
 extern const struct CompressedSpritePalette gBattleAnimPaletteTable[];
