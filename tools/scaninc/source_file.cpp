@@ -89,6 +89,11 @@ SourceFile::SourceFile(std::string path)
     }
 }
 
+SourceFileType SourceFile::FileType()
+{
+    return m_file_type;
+}
+
 SourceFile::~SourceFile()
 {
     if (m_file_type == SourceFileType::Cpp || m_file_type == SourceFileType::Header)
