@@ -2021,7 +2021,7 @@ bool8 HandleFaintedMonActions(void)
                 gBattleStruct->faintedActionsState = 4;
             break;
         case 6:
-            if (AbilityBattleEffects(ABILITYEFFECT_INTIMIDATE1, 0, 0, 0, 0) || AbilityBattleEffects(ABILITYEFFECT_TRACE, 0, 0, 0, 0) || ItemBattleEffects(1, 0, TRUE) || AbilityBattleEffects(ABILITYEFFECT_FORECAST, 0, 0, 0, 0))
+            if (ItemBattleEffects(1, 0, TRUE))
                 return TRUE;
             gBattleStruct->faintedActionsState++;
             break;
@@ -2704,11 +2704,8 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
     u8 effect = 0;
     u32 speciesAtk, speciesDef;
     u32 pidAtk, pidDef;
-    u32 moveType;
+    u32 moveType, move;
     u32 i;
-    u32 move;
-    u8 side;
-    u8 target1;
 
     if (gBattleTypeFlags & BATTLE_TYPE_SAFARI)
         return 0;
@@ -2960,15 +2957,14 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
             break;
         case ABILITY_CLOUD_NINE:
         case ABILITY_AIR_LOCK:
-            // that's a weird choice for a variable, why not use i or battler?
-            for (target1 = 0; target1 < gBattlersCount; target1++)
+            for (i = 0; i < gBattlersCount; i++)
             {
-                effect = TryWeatherFormChange(target1);
+                effect = TryWeatherFormChange(i);
                 if (effect != 0)
                 {
                     BattleScriptPushCursorAndCallback(BattleScript_CastformChange);
-                    gBattleScripting.battler = target1;
-                    *(&gBattleStruct->formToChangeInto) = effect - 1;
+                    gBattleScripting.battler = i;
+                    gBattleStruct->formToChangeInto = effect - 1;
                     break;
                 }
             }
@@ -3543,13 +3539,13 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                 {
                     BattleScriptPushCursorAndCallback(BattleScript_CastformChange);
                     gBattleScripting.battler = battler;
-                    *(&gBattleStruct->formToChangeInto) = effect - 1;
+                    gBattleStruct->formToChangeInto = effect - 1;
                     return effect;
                 }
             }
         }
         break;
-    case ABILITYEFFECT_SYNCHRONIZE: // 7
+    case ABILITYEFFECT_SYNCHRONIZE:
         if (gLastUsedAbility == ABILITY_SYNCHRONIZE && (gHitMarker & HITMARKER_SYNCHRONISE_EFFECT))
         {
             gHitMarker &= ~(HITMARKER_SYNCHRONISE_EFFECT);
@@ -3591,85 +3587,74 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
             }
         }
         break;
-    case ABILITYEFFECT_INTIMIDATE1: // 9
+    case ABILITYEFFECT_INTIMIDATE1:
+    case ABILITYEFFECT_INTIMIDATE2:
         for (i = 0; i < gBattlersCount; i++)
         {
             if (gBattleMons[i].ability == ABILITY_INTIMIDATE && gBattleResources->flags->flags[i] & RESOURCE_FLAG_INTIMIDATED)
             {
                 gLastUsedAbility = ABILITY_INTIMIDATE;
                 gBattleResources->flags->flags[i] &= ~(RESOURCE_FLAG_INTIMIDATED);
-                BattleScriptPushCursorAndCallback(BattleScript_IntimidateActivatesEnd3);
+                if (caseID == ABILITYEFFECT_INTIMIDATE1)
+                {
+                    BattleScriptPushCursorAndCallback(BattleScript_IntimidateActivatesEnd3);
+                }
+                else
+                {
+                    BattleScriptPushCursor();
+                    gBattlescriptCurrInstr = BattleScript_IntimidateActivates;
+                }
                 gBattlerAbility = gBattleStruct->intimidateBattler = i;
                 effect++;
                 break;
             }
         }
         break;
-    case ABILITYEFFECT_TRACE: // 11
+    case ABILITYEFFECT_TRACE1:
+    case ABILITYEFFECT_TRACE2:
         for (i = 0; i < gBattlersCount; i++)
         {
             if (gBattleMons[i].ability == ABILITY_TRACE && (gBattleResources->flags->flags[i] & RESOURCE_FLAG_TRACED))
             {
-                u8 target2;
-                side = (GetBattlerPosition(i) ^ BIT_SIDE) & BIT_SIDE; // side of the opposing pokemon
-                target1 = GetBattlerAtPosition(side);
-                target2 = GetBattlerAtPosition(side + BIT_FLANK);
+                u8 side = (GetBattlerPosition(i) ^ BIT_SIDE) & BIT_SIDE; // side of the opposing pokemon
+                u8 target1 = GetBattlerAtPosition(side);
+                u8 target2 = GetBattlerAtPosition(side + BIT_FLANK);
+
                 if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
                 {
                     if (gBattleMons[target1].ability != 0 && gBattleMons[target1].hp != 0
                      && gBattleMons[target2].ability != 0 && gBattleMons[target2].hp != 0)
-                    {
-                        gActiveBattler = GetBattlerAtPosition(((Random() & 1) * 2) | side);
-                        gBattleStruct->tracedAbility[i] = gLastUsedAbility = gBattleMons[gActiveBattler].ability;
-                        effect++;
-                    }
+                        gActiveBattler = GetBattlerAtPosition(((Random() & 1) * 2) | side), effect++;
                     else if (gBattleMons[target1].ability != 0 && gBattleMons[target1].hp != 0)
-                    {
-                        gActiveBattler = target1;
-                        gBattleStruct->tracedAbility[i] = gLastUsedAbility = gBattleMons[gActiveBattler].ability;
-                        effect++;
-                    }
+                        gActiveBattler = target1, effect++;
                     else if (gBattleMons[target2].ability != 0 && gBattleMons[target2].hp != 0)
-                    {
-                        gActiveBattler = target2;
-                        gBattleStruct->tracedAbility[i] = gLastUsedAbility = gBattleMons[gActiveBattler].ability;
-                        effect++;
-                    }
+                        gActiveBattler = target2, effect++;
                 }
                 else
                 {
-                    gActiveBattler = target1;
                     if (gBattleMons[target1].ability && gBattleMons[target1].hp)
-                    {
-                        gBattleStruct->tracedAbility[i] = gLastUsedAbility = gBattleMons[target1].ability;
-                        effect++;
-                    }
+                        gActiveBattler = target1, effect++;
                 }
+
                 if (effect)
                 {
-                    BattleScriptPushCursorAndCallback(BattleScript_TraceActivates);
+                    if (caseID == ABILITYEFFECT_TRACE1)
+                    {
+                        BattleScriptPushCursorAndCallback(BattleScript_TraceActivatesEnd3);
+                    }
+                    else
+                    {
+                        BattleScriptPushCursor();
+                        gBattlescriptCurrInstr = BattleScript_TraceActivates;
+                    }
                     gBattleResources->flags->flags[i] &= ~(RESOURCE_FLAG_TRACED);
+                    gBattleStruct->tracedAbility[i] = gLastUsedAbility = gBattleMons[gActiveBattler].ability;
                     gBattlerAbility = gBattleScripting.battler = i;
 
                     PREPARE_MON_NICK_WITH_PREFIX_BUFFER(gBattleTextBuff1, gActiveBattler, gBattlerPartyIndexes[gActiveBattler])
                     PREPARE_ABILITY_BUFFER(gBattleTextBuff2, gLastUsedAbility)
                     break;
                 }
-            }
-        }
-        break;
-    case ABILITYEFFECT_INTIMIDATE2: // 10
-        for (i = 0; i < gBattlersCount; i++)
-        {
-            if (gBattleMons[i].ability == ABILITY_INTIMIDATE && (gBattleResources->flags->flags[i] & RESOURCE_FLAG_INTIMIDATED))
-            {
-                gLastUsedAbility = ABILITY_INTIMIDATE;
-                gBattleResources->flags->flags[i] &= ~(RESOURCE_FLAG_INTIMIDATED);
-                BattleScriptPushCursor();
-                gBattlescriptCurrInstr = BattleScript_IntimidateActivates;
-                gBattlerAbility = gBattleStruct->intimidateBattler = i;
-                effect++;
-                break;
             }
         }
         break;

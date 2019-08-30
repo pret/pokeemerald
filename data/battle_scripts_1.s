@@ -6234,8 +6234,12 @@ BattleScript_TraceActivates::
 	call BattleScript_AbilityPopUp
 	printstring STRINGID_PKMNTRACED
 	waitmessage 0x40
-	settracedability BS_ATTACKER
-	switchinabilities BS_ATTACKER
+	settracedability BS_SCRIPTING
+	switchinabilities BS_SCRIPTING
+	return
+	
+BattleScript_TraceActivatesEnd3::
+	call BattleScript_TraceActivates
 	end3
 
 BattleScript_RainDishActivates::

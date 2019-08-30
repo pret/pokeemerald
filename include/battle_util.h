@@ -19,7 +19,8 @@
 #define ABILITYEFFECT_ATK_SYNCHRONIZE            0x8
 #define ABILITYEFFECT_INTIMIDATE1                0x9
 #define ABILITYEFFECT_INTIMIDATE2                0xA
-#define ABILITYEFFECT_TRACE                      0xB
+#define ABILITYEFFECT_TRACE1                     0xB
+#define ABILITYEFFECT_TRACE2                     0xC
 #define ABILITYEFFECT_SWITCH_IN_WEATHER          0xFF
 
 #define ITEMEFFECT_ON_SWITCH_IN                 0x0
