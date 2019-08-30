@@ -640,6 +640,30 @@
 	.4byte \ptr
 	.endm
 	
+	.macro if_battler_absent battler:req, ptr:req
+	.byte 0x70
+	.byte \battler
+	.4byte \ptr
+	.endm
+	
+	.macro if_grounded battler:req, ptr:req
+	.byte 0x71
+	.byte \battler
+	.4byte \ptr
+	.endm
+	
+	.macro get_best_dmg_hp_percent
+	.byte 0x72
+	.endm
+	
+	.macro get_curr_dmg_hp_percent
+	.byte 0x73
+	.endm
+	
+	.macro get_move_split_from_result
+	.byte 0x74
+	.endm
+	
 @ useful script macros
 	.macro if_has_physical_move battler:req, ptr:req
 	if_has_move_with_split \battler, SPLIT_PHYSICAL, \ptr

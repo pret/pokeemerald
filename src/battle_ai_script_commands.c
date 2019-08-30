@@ -170,6 +170,11 @@ static void BattleAICmd_if_ai_can_go_down(void);
 static void BattleAICmd_if_has_move_with_type(void);
 static void BattleAICmd_if_no_move_used(void);
 static void BattleAICmd_if_has_move_with_flag(void);
+static void BattleAICmd_if_battler_absent(void);
+static void BattleAICmd_is_grounded(void);
+static void BattleAICmd_get_best_dmg_hp_percent(void);
+static void BattleAICmd_get_curr_dmg_hp_percent(void);
+static void BattleAICmd_get_move_split_from_result(void);
 
 // ewram
 EWRAM_DATA const u8 *gAIScriptPtr = NULL;
@@ -292,6 +297,11 @@ static const BattleAICmdFunc sBattleAICmdTable[] =
     BattleAICmd_if_has_move_with_type,                      // 0x6D
     BattleAICmd_if_no_move_used,                            // 0x6E
     BattleAICmd_if_has_move_with_flag,                      // 0x6F
+    BattleAICmd_if_battler_absent,                          // 0x70
+    BattleAICmd_is_grounded,                                // 0x71
+    BattleAICmd_get_best_dmg_hp_percent,                    // 0x72
+    BattleAICmd_get_curr_dmg_hp_percent,                    // 0x73
+    BattleAICmd_get_move_split_from_result,                 // 0x74
 };
 
 static const u16 sDiscouragedPowerfulMoveEffects[] =
@@ -404,7 +414,7 @@ void BattleAI_SetupAIData(u8 defaultScoreMoves)
             move = gBattleMons[sBattler_AI].moves[i];
             if (gBattleMoves[move].power != 0 && !(moveLimitations & gBitTable[i]))
             {
-                dmg = AI_CalcDamage(move, sBattler_AI, gBattlerTarget) * (100 - (Random() % 16)) / 100;
+                dmg = AI_CalcDamage(move, sBattler_AI, gBattlerTarget) * (100 - (Random() % 10)) / 100;
                 if (dmg == 0)
                     dmg = 1;
             }
@@ -2664,4 +2674,54 @@ static void BattleAICmd_if_no_move_used(void)
     {
         gAIScriptPtr += 6;
     }
+}
+
+static void BattleAICmd_if_battler_absent(void)
+{
+    u32 battler = BattleAI_GetWantedBattler(gAIScriptPtr[1]);
+
+    if (!IsBattlerAlive(battler))
+        gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 2);
+    else
+        gAIScriptPtr += 6;
+}
+
+static void BattleAICmd_is_grounded(void)
+{
+    u32 battler = BattleAI_GetWantedBattler(gAIScriptPtr[1]);
+
+    if (IsBattlerGrounded(battler))
+        gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 2);
+    else
+        gAIScriptPtr += 6;
+}
+
+static void BattleAICmd_get_best_dmg_hp_percent(void)
+{
+    int i, bestDmg;
+
+    bestDmg = 0;
+    for (i = 0; i < MAX_MON_MOVES; i++)
+    {
+        if (gBattleResources->ai->simulatedDmg[sBattler_AI][gBattlerTarget][i] > bestDmg)
+            bestDmg = gBattleResources->ai->simulatedDmg[sBattler_AI][gBattlerTarget][i];
+    }
+
+    gBattleResources->ai->funcResult = (bestDmg * 100) / gBattleMons[gBattlerTarget].maxHP;
+    gAIScriptPtr++;
+}
+
+static void BattleAICmd_get_curr_dmg_hp_percent(void)
+{
+    int bestDmg = gBattleResources->ai->simulatedDmg[sBattler_AI][gBattlerTarget][AI_THINKING_STRUCT->movesetIndex];
+
+    gBattleResources->ai->funcResult = (bestDmg * 100) / gBattleMons[gBattlerTarget].maxHP;
+    gAIScriptPtr++;
+}
+
+static void BattleAICmd_get_move_split_from_result(void)
+{
+    AI_THINKING_STRUCT->funcResult = gBattleMoves[AI_THINKING_STRUCT->funcResult].type;
+
+    gAIScriptPtr += 1;
 }

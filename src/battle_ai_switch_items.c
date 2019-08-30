@@ -579,15 +579,15 @@ void AI_TrySwitchOrUseItem(void)
 
 u8 GetMostSuitableMonToSwitchInto(void)
 {
-    u8 opposingBattler;
-    u32 bestDmg;
-    u8 bestMonId;
-    u8 battlerIn1, battlerIn2;
-    s32 firstId;
-    s32 lastId; // + 1
+    u8 opposingBattler = 0;
+    u32 bestDmg = 0;
+    u8 bestMonId = 0;
+    u8 battlerIn1 = 0, battlerIn2 = 0;
+    s32 firstId = 0;
+    s32 lastId = 0; // + 1
     struct Pokemon *party;
-    s32 i, j;
-    u8 invalidMons;
+    s32 i, j, aliveCount = 0;
+    u8 invalidMons = 0, bits = 0;
     u16 move;
 
     if (*(gBattleStruct->monToSwitchIntoId + gActiveBattler) != PARTY_SIZE)
@@ -603,8 +603,7 @@ u8 GetMostSuitableMonToSwitchInto(void)
         else
             battlerIn2 = GetBattlerAtPosition(GetBattlerPosition(gActiveBattler) ^ BIT_FLANK);
 
-        // UB: It considers the opponent only player's side even though it can battle alongside player.
-        opposingBattler = Random() & BIT_FLANK;
+        opposingBattler = BATTLE_OPPOSITE(battlerIn1);
         if (gAbsentBattlerFlags & gBitTable[opposingBattler])
             opposingBattler ^= BIT_FLANK;
     }
@@ -622,24 +621,56 @@ u8 GetMostSuitableMonToSwitchInto(void)
     else
         party = gEnemyParty;
 
-    invalidMons = 0;
+    // Get invalid slots ids.
+    for (i = firstId; i < lastId; i++)
+    {
+        if (GetMonData(&party[i], MON_DATA_SPECIES) == SPECIES_NONE
+            || GetMonData(&party[i], MON_DATA_HP) == 0
+            || gBattlerPartyIndexes[battlerIn1] == i
+            || gBattlerPartyIndexes[battlerIn2] == i
+            || i == *(gBattleStruct->monToSwitchIntoId + battlerIn1)
+            || i == *(gBattleStruct->monToSwitchIntoId + battlerIn2))
+            invalidMons |= gBitTable[i];
+        else
+            aliveCount++;
+    }
 
-    while (invalidMons != 0x3F) // All mons are invalid.
+    // If there are two(or more) mons to choose from, always choose one that has baton pass
+    // as most often it can't do much on its own.
+    for (i = firstId; i < lastId; i++)
+    {
+        if (invalidMons & gBitTable[i])
+            continue;
+
+        for (j = 0; j < MAX_MON_MOVES; j++)
+        {
+            if (GetMonData(&party[i], MON_DATA_MOVE1 + j, NULL) == MOVE_BATON_PASS)
+            {
+                bits |= gBitTable[i];
+                break;
+            }
+        }
+    }
+    if ((aliveCount == 2 || (aliveCount > 2 && Random() % 3 == 0)) && bits)
+    {
+        do
+        {
+            bestMonId = (Random() % (lastId - firstId)) + firstId;
+        } while (!(bits & gBitTable[bestMonId]));
+        return bestMonId;
+    }
+
+    bits = 0;
+    while (bits != 0x3F) // All mons are invalid.
     {
         bestDmg = 0;
-        bestMonId = 6;
+        bestMonId = PARTY_SIZE;
         // Find the mon whose type is the most suitable offensively.
         for (i = firstId; i < lastId; i++)
         {
-            u16 species = GetMonData(&party[i], MON_DATA_SPECIES);
-            if (species != SPECIES_NONE
-                && GetMonData(&party[i], MON_DATA_HP) != 0
-                && !(gBitTable[i] & invalidMons)
-                && gBattlerPartyIndexes[battlerIn1] != i
-                && gBattlerPartyIndexes[battlerIn2] != i
-                && i != *(gBattleStruct->monToSwitchIntoId + battlerIn1)
-                && i != *(gBattleStruct->monToSwitchIntoId + battlerIn2))
+            if (!(gBitTable[i] & invalidMons) && !(gBitTable[i] & bits))
             {
+                u16 species = GetMonData(&party[i], MON_DATA_SPECIES);
                 u32 typeDmg = UQ_4_12(1.0);
 
                 u8 atkType1 = gBaseStats[species].type1;
@@ -662,10 +693,6 @@ u8 GetMostSuitableMonToSwitchInto(void)
                     bestMonId = i;
                 }
             }
-            else
-            {
-                invalidMons |= gBitTable[i];
-            }
         }
 
         // Ok, we know the mon has the right typing but does it have at least one super effective move?
@@ -681,11 +708,11 @@ u8 GetMostSuitableMonToSwitchInto(void)
             if (i != MAX_MON_MOVES)
                 return bestMonId; // Has both the typing and at least one super effective move.
 
-            invalidMons |= gBitTable[bestMonId]; // Sorry buddy, we want something better.
+            bits |= gBitTable[bestMonId]; // Sorry buddy, we want something better.
         }
         else
         {
-            invalidMons = 0x3F; // No viable mon to switch.
+            bits = 0x3F; // No viable mon to switch.
         }
     }
 
@@ -697,31 +724,20 @@ u8 GetMostSuitableMonToSwitchInto(void)
     // If we couldn't find the best mon in terms of typing, find the one that deals most damage.
     for (i = firstId; i < lastId; i++)
     {
-        if ((u16)(GetMonData(&party[i], MON_DATA_SPECIES)) == SPECIES_NONE)
-            continue;
-        if (GetMonData(&party[i], MON_DATA_HP) == 0)
-            continue;
-        if (gBattlerPartyIndexes[battlerIn1] == i)
-            continue;
-        if (gBattlerPartyIndexes[battlerIn2] == i)
-            continue;
-        if (i == *(gBattleStruct->monToSwitchIntoId + battlerIn1))
-            continue;
-        if (i == *(gBattleStruct->monToSwitchIntoId + battlerIn2))
+        if (gBitTable[i] & invalidMons)
             continue;
 
         for (j = 0; j < MAX_MON_MOVES; j++)
         {
-            s32 dmg = 0;
             move = GetMonData(&party[i], MON_DATA_MOVE1 + j);
-            if (move != MOVE_NONE && gBattleMoves[move].power != 1)
+            if (move != MOVE_NONE && gBattleMoves[move].power != 0)
             {
-                dmg = AI_CalcPartyMonDamage(move, gActiveBattler, opposingBattler, &party[i]);
-            }
-            if (bestDmg < dmg)
-            {
-                bestDmg = dmg;
-                bestMonId = i;
+                s32 dmg = AI_CalcPartyMonDamage(move, gActiveBattler, opposingBattler, &party[i]);
+                if (bestDmg < dmg)
+                {
+                    bestDmg = dmg;
+                    bestMonId = i;
+                }
             }
         }
     }
