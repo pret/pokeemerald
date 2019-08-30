@@ -2744,6 +2744,31 @@ extern const u8 gText_JumpsInARow[];
 extern const u8 gText_BestScore2[];
 extern const u8 gText_ExcellentsInARow[];
 
+// Lilycove Lady
+extern const u8 gText_ContestLady_Handsome[];
+extern const u8 gText_ContestLady_Vinny[];
+extern const u8 gText_ContestLady_Moreme[];
+extern const u8 gText_ContestLady_Ironhard[];
+extern const u8 gText_ContestLady_Muscle[];
+extern const u8 gText_ContestLady_Coolness[];
+extern const u8 gText_ContestLady_Beauty[];
+extern const u8 gText_ContestLady_Cuteness[];
+extern const u8 gText_ContestLady_Smartness[];
+extern const u8 gText_ContestLady_Toughness[];
+extern const u8 gText_QuizLady_Lady[];
+extern const u8 gText_FavorLady_Slippery[];
+extern const u8 gText_FavorLady_Roundish[];
+extern const u8 gText_FavorLady_Whamish[];
+extern const u8 gText_FavorLady_Shiny[];
+extern const u8 gText_FavorLady_Sticky[];
+extern const u8 gText_FavorLady_Pointy[];
+
+extern const u8 gText_CoolnessContest[];
+extern const u8 gText_BeautyContest[];
+extern const u8 gText_CutenessContest[];
+extern const u8 gText_SmartnessContest[];
+extern const u8 gText_ToughnessContest[];
+
 // Pokenav Match Call
 extern const u8 gText_CallCantBeMadeHere[];
 extern const u8 gText_NumberRegistered[];

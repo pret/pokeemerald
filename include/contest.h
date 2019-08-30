@@ -2,10 +2,7 @@
 #define GUARD_CONTEST_H
 
 #include "palette.h"
-
-#define CONTESTANT_COUNT 4
-#define APPLAUSE_METER_SIZE 5
-#define CONTEST_TURN_COUNT 5
+#include "constants/contest.h"
 
 enum
 {
@@ -16,20 +13,6 @@ enum
     CONTEST_DEBUG_MODE_PRINT_UNK_C,
     // Prints the ContestResourcesField1C::unk_D value as a bitstring for each contestant.
     CONTEST_DEBUG_MODE_PRINT_UNK_D
-};
-
-#define LINK_CONTEST_FLAG_IS_LINK       (1 << 0)
-#define LINK_CONTEST_FLAG_IS_WIRELESS   (1 << 1)
-#define LINK_CONTEST_FLAG_HAS_RS_PLAYER (1 << 2)
-
-enum
-{
-    CONTEST_CATEGORY_COOL,
-    CONTEST_CATEGORY_BEAUTY,
-    CONTEST_CATEGORY_CUTE,
-    CONTEST_CATEGORY_SMART,
-    CONTEST_CATEGORY_TOUGH,
-    CONTEST_CATEGORIES_COUNT,
 };
 
 enum
