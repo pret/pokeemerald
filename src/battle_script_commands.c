@@ -5438,7 +5438,9 @@ static void atk52_switchineffects(void)
     {
         // There is a hack here to ensure the truant counter will be 0 when the battler's next turn starts.
         // The truant counter is not updated in the case where a mon switches in after a lost judgement in the battle arena.
-        if (gBattleMons[gActiveBattler].ability == ABILITY_TRUANT && !gDisableStructs[gActiveBattler].truantSwitchInHack)
+        if (gBattleMons[gActiveBattler].ability == ABILITY_TRUANT
+            && gCurrentActionFuncId != B_ACTION_USE_MOVE
+            && !gDisableStructs[gActiveBattler].truantSwitchInHack)
             gDisableStructs[gActiveBattler].truantCounter = 1;
 
         gDisableStructs[gActiveBattler].truantSwitchInHack = 0;
