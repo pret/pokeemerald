@@ -424,7 +424,8 @@ void AddBagVisualSprite(u8 bagPocketId)
 {
     u8 *spriteId = &gBagMenu->spriteId[0];
     *spriteId = CreateSprite(&gBagSpriteTemplate, 68, 66, 0);
-    SetBagVisualPocketId(bagPocketId, FALSE);
+    //SetBagVisualPocketId(bagPocketId, FALSE);
+    SetBagVisualPocketId(-1, FALSE);
 }
 
 void SetBagVisualPocketId(u8 bagPocketId, bool8 isSwitchingPockets)

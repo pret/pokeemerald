@@ -950,6 +950,9 @@ const u8 *const gUnknown_0858BAF0[] =
     gText_BattleArena,
     gText_BattlePike,
     gText_BattlePyramid,
+    gText_Medicine,
+    gText_BattleItems,
+    gText_PowerUp,
 };
 
 const u8 gUnknown_0858BB68[] = { 74, 75, 76, 77, 78, 79 };

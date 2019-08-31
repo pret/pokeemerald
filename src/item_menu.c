@@ -628,6 +628,10 @@ bool8 SetupBagMenu(void)
     case 13:
         BagMenu_PrintPocketNames(gPocketNamesStringsTable[gBagPositionStruct.pocket], 0);
         BagMenu_CopyPocketNameToWindow(0);
+        BagMenu_DrawPocketIndicatorSquare(0, 0);
+        BagMenu_DrawPocketIndicatorSquare(5, 0);
+        BagMenu_DrawPocketIndicatorSquare(6, 0);
+        BagMenu_DrawPocketIndicatorSquare(7, 0);
         BagMenu_DrawPocketIndicatorSquare(gBagPositionStruct.pocket, 1);
         gMain.state++;
         break;
@@ -1205,7 +1209,8 @@ void SwitchBagPocket(u8 taskId, s16 deltaBagPocketId, u16 a3)
     BagMenu_DrawPocketIndicatorSquare(pocketId, 1);
     FillBgTilemapBufferRect_Palette0(2, 11, 14, 2, 15, 16);
     schedule_bg_copy_tilemap_to_vram(2);
-    SetBagVisualPocketId(pocketId, 1);
+    //SetBagVisualPocketId(pocketId, 1);
+    SetBagVisualPocketId(-1, 1);
     RemoveBagSprite(1);
     AddSwitchPocketRotatingBallSprite(deltaBagPocketId);
     SetTaskFuncWithFollowupFunc(taskId, sub_81AC10C, gTasks[taskId].func);
@@ -1267,9 +1272,9 @@ void sub_81AC23C(u8 a)
 void BagMenu_DrawPocketIndicatorSquare(u8 x, u8 is_current_bag)
 {
     if (is_current_bag == 0)
-        FillBgTilemapBufferRect_Palette0(2, 0x1017, x + 5, 3, 1, 1);
+        FillBgTilemapBufferRect_Palette0(2, 0x1017, x + 4, 3, 1, 1);
     else
-        FillBgTilemapBufferRect_Palette0(2, 0x102B, x + 5, 3, 1, 1);
+        FillBgTilemapBufferRect_Palette0(2, 0x102B, x + 4, 3, 1, 1);
     schedule_bg_copy_tilemap_to_vram(2);
 }
 
