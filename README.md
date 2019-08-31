@@ -14,7 +14,7 @@ The new order for the pockets is the following:
 * TMs & HMs
 * Key Items
 
-However, it disables the different bag sprites until I'm able to get new ones for the new pockets.
+However, it reuses the original pocket sprites until I'm able to get new ones for the new pockets.
 
 To-Do:
 * New bag sprites.

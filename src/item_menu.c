@@ -1209,8 +1209,8 @@ void SwitchBagPocket(u8 taskId, s16 deltaBagPocketId, u16 a3)
     BagMenu_DrawPocketIndicatorSquare(pocketId, 1);
     FillBgTilemapBufferRect_Palette0(2, 11, 14, 2, 15, 16);
     schedule_bg_copy_tilemap_to_vram(2);
-    //SetBagVisualPocketId(pocketId, 1);
-    SetBagVisualPocketId(-1, 1);
+    SetBagVisualPocketId(pocketId, 1);
+    //SetBagVisualPocketId(-1, 1);
     RemoveBagSprite(1);
     AddSwitchPocketRotatingBallSprite(deltaBagPocketId);
     SetTaskFuncWithFollowupFunc(taskId, sub_81AC10C, gTasks[taskId].func);
