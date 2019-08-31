@@ -1495,6 +1495,21 @@ void sub_81AC644(u8 unused)
                         gBagMenu->unk820 = gUnknown_0861403C;
                         gBagMenu->unk828 = 6;
                         break;
+                    case MEDICINE_POCKET:
+                        gBagMenu->unk820 = &gBagMenu->unk824;
+                        gBagMenu->unk828 = 4;
+                        memcpy(&gBagMenu->unk824, &gUnknown_0861402C, 4);
+                        break;
+                    case BATTLEITEMS_POCKET:
+                        gBagMenu->unk820 = &gBagMenu->unk824;
+                        gBagMenu->unk828 = 4;
+                        memcpy(&gBagMenu->unk824, &gUnknown_0861402C, 4);
+                        break;
+                    case POWERUP_POCKET:
+                        gBagMenu->unk820 = &gBagMenu->unk824;
+                        gBagMenu->unk828 = 4;
+                        memcpy(&gBagMenu->unk824, &gUnknown_0861402C, 4);
+                        break;
                 }
             }
     }
