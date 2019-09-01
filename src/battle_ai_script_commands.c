@@ -450,12 +450,27 @@ static u32 GetTotalBaseStat(u32 species)
         + gBaseStats[species].baseSpDefense;
 }
 
+bool32 IsTruantMonVulnerable(u32 battlerAI, u32 opposingBattler)
+{
+    int i;
+
+    for (i = 0; i < MAX_MON_MOVES; i++)
+    {
+        u32 move = gBattleResources->battleHistory->usedMoves[opposingBattler].moves[i];
+        if (gBattleMoves[move].effect == EFFECT_PROTECT && move != MOVE_ENDURE)
+            return TRUE;
+        if (gBattleMoves[move].effect == EFFECT_SEMI_INVULNERABLE && GetWhoStrikesFirst(battlerAI, opposingBattler, TRUE) == 1)
+            return TRUE;
+    }
+    return FALSE;
+}
+
 static u8 ChooseMoveOrAction_Singles(void)
 {
     u8 currentMoveArray[4];
     u8 consideredMoveArray[4];
     u8 numOfBestMoves;
-    s32 i;
+    s32 i, id;
     u32 flags = AI_THINKING_STRUCT->aiFlags;
 
     RecordLastUsedMoveByTarget();
@@ -478,6 +493,7 @@ static u8 ChooseMoveOrAction_Singles(void)
     if (AI_THINKING_STRUCT->aiAction & AI_ACTION_WATCH)
         return AI_CHOICE_WATCH;
 
+    gActiveBattler = sBattler_AI;
     // Consider switching if all moves are worthless to use.
     if (AI_THINKING_STRUCT->aiFlags & (AI_SCRIPT_CHECK_VIABILITY | AI_SCRIPT_CHECK_BAD_MOVE | AI_SCRIPT_TRY_TO_FAINT | AI_SCRIPT_PREFER_BATON_PASS)
         && CountUsablePartyMons(sBattler_AI) >= 1
@@ -493,8 +509,23 @@ static u8 ChooseMoveOrAction_Singles(void)
                 break;
         }
 
-        gActiveBattler = sBattler_AI;
         if (i == MAX_MON_MOVES && GetMostSuitableMonToSwitchInto() != PARTY_SIZE)
+        {
+            AI_THINKING_STRUCT->switchMon = TRUE;
+            return AI_CHOICE_SWITCH;
+        }
+    }
+
+    // Consider switching if your mon with truant is bodied by Protect spam.
+    // Or is using a double turn semi invulnerable move(such as Fly) and is faster.
+    if (GetBattlerAbility(sBattler_AI) == ABILITY_TRUANT
+        && IsTruantMonVulnerable(sBattler_AI, gBattlerTarget)
+        && gDisableStructs[sBattler_AI].truantCounter
+        && AI_THINKING_STRUCT->aiFlags & (AI_SCRIPT_CHECK_VIABILITY)
+        && gBattleMons[sBattler_AI].hp >= gBattleMons[sBattler_AI].maxHP / 2
+        && CountUsablePartyMons(sBattler_AI) >= 1)
+    {
+        if (GetMostSuitableMonToSwitchInto() != PARTY_SIZE)
         {
             AI_THINKING_STRUCT->switchMon = TRUE;
             return AI_CHOICE_SWITCH;
