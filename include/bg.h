@@ -27,13 +27,13 @@ enum
 
 struct BgTemplate
 {
-    u32 bg:2;                   // 0x1, 0x2 -> 0x3
-    u32 charBaseIndex:2;        // 0x4, 0x8 -> 0xC
-    u32 mapBaseIndex:5;         // 0x10, 0x20, 0x40, 0x80, 0x100 -> 0x1F0
-    u32 screenSize:2;           // 0x200, 0x400 -> 0x600
-    u32 paletteMode:1;          // 0x800
-    u32 priority:2;             // 0x1000, 0x2000 > 0x3000
-    u32 baseTile:10;
+    u16 bg:2;                   // 0x1, 0x2 -> 0x3
+    u16 charBaseIndex:2;        // 0x4, 0x8 -> 0xC
+    u16 mapBaseIndex:5;         // 0x10, 0x20, 0x40, 0x80, 0x100 -> 0x1F0
+    u16 screenSize:2;           // 0x200, 0x400 -> 0x600
+    u16 paletteMode:1;          // 0x800
+    u16 priority:2;             // 0x1000, 0x2000 > 0x3000
+    u16 baseTile:10;
 };
 
 void ResetBgs(void);

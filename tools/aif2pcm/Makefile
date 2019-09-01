@@ -1,4 +1,4 @@
-CC = gcc
+CC ?= gcc
 
 CFLAGS = -Wall -Wextra -Wno-switch -Werror -std=c11 -O2
 

@@ -2547,7 +2547,7 @@ static void AnimPetalDanceSmallFlowerStep(struct Sprite* sprite)
     {
         sprite->pos2.x += Sin(sprite->data[5], 8);
         if ((u16)(sprite->data[5] - 59) < 5 || (u16)(sprite->data[5] - 187) < 5)
-            sprite->oam.matrixNum ^= 0x8; // horizontal flip
+            sprite->oam.matrixNum ^= ST_OAM_HFLIP;
 
         sprite->data[5] += 5;
         sprite->data[5] &= 0xFF;
@@ -4380,19 +4380,19 @@ void sub_8101898(struct Sprite* sprite)
     {
         sprite->pos1.x -= 0x18;
         sprite->pos1.y += 0x18;
-        sprite->oam.matrixNum = 16;
+        sprite->oam.matrixNum = ST_OAM_VFLIP;
     }
     else if ((s16)sprite->oam.affineParam == 3)
     {
         sprite->pos1.x += 0x18;
         sprite->pos1.y -= 0x18;
-        sprite->oam.matrixNum = 8;
+        sprite->oam.matrixNum = ST_OAM_HFLIP;
     }
     else
     {
         sprite->pos1.x += 0x18;
         sprite->pos1.y += 0x18;
-        sprite->oam.matrixNum = 24;
+        sprite->oam.matrixNum = ST_OAM_HFLIP | ST_OAM_VFLIP;
     }
 
     sprite->oam.tileNum = (sprite->oam.tileNum + 16);
@@ -5105,7 +5105,7 @@ void sub_8102844(struct Sprite* sprite)
     sprite->data[7] = sprite->pos1.y;
     if (IsContest())
     {
-        sprite->oam.matrixNum = 8;
+        sprite->oam.matrixNum = ST_OAM_HFLIP;
         sprite->pos1.x += 40;
         sprite->pos1.y += 20;
         sprite->data[2] = sprite->pos1.x << 7;
@@ -5130,7 +5130,7 @@ void sub_8102844(struct Sprite* sprite)
         sprite->data[3] = -0x1400 / sprite->data[1];
         sprite->data[4] = sprite->pos1.y << 7;
         sprite->data[5] = 0xA00 / sprite->data[1];
-        sprite->oam.matrixNum = 24;
+        sprite->oam.matrixNum = (ST_OAM_HFLIP | ST_OAM_VFLIP);
     }
 
     sprite->callback = sub_810296C;
@@ -5387,7 +5387,7 @@ void sub_8102FB8(struct Sprite* sprite)
     s16 a;
     if (gBattleAnimArgs[0] == 1)
     {
-        sprite->oam.matrixNum = 8;
+        sprite->oam.matrixNum = ST_OAM_HFLIP;
         a = 16;
     }
     else

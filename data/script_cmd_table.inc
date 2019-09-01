@@ -100,7 +100,7 @@ gScriptCmdTable:: @ 81DB67C
 	.4byte ScrCmd_settrainerflag
 	.4byte ScrCmd_cleartrainerflag
 	.4byte ScrCmd_setobjectxyperm
-	.4byte ScrCmd_moveobjectoffscreen
+	.4byte ScrCmd_copyobjectxytoperm
 	.4byte ScrCmd_setobjectmovementtype
 	.4byte ScrCmd_waitmessage
 	.4byte ScrCmd_message

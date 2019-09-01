@@ -138,7 +138,7 @@ DewfordTown_EventScript_1E9660:: @ 81E9660
 	clearflag FLAG_HIDE_ROUTE_104_MR_BRINEY_BOAT
 	setflag FLAG_HIDE_MR_BRINEY_BOAT_DEWFORD_TOWN
 	hideobjectat 4, MAP_DEWFORD_TOWN
-	setvar VAR_BOARD_BRINEY_BOAT_ROUTE104_STATE, 2
+	setvar VAR_BOARD_BRINEY_BOAT_STATE, 2
 	resetobjectpriority EVENT_OBJ_ID_PLAYER, MAP_DEWFORD_TOWN
 	warp MAP_ROUTE104_MR_BRINEYS_HOUSE, 255, 5, 4
 	copyvar VAR_BRINEY_LOCATION, VAR_0x8008
@@ -180,7 +180,7 @@ DewfordTown_EventScript_1E96E7:: @ 81E96E7
 	copyvar VAR_BRINEY_LOCATION, VAR_0x8008
 	resetobjectpriority EVENT_OBJ_ID_PLAYER, MAP_DEWFORD_TOWN
 	resetobjectpriority 2, MAP_ROUTE109
-	moveobjectoffscreen 2
+	copyobjectxytoperm 2
 	release
 	end
 

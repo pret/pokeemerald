@@ -4,7 +4,7 @@ Route104_MapScripts:: @ 81ECC32
 	.byte 0
 
 Route104_MapScript2_1ECC3D: @ 81ECC3D
-	map_script_2 VAR_BOARD_BRINEY_BOAT_ROUTE104_STATE, 1, Route104_EventScript_1ECC47
+	map_script_2 VAR_BOARD_BRINEY_BOAT_STATE, 1, Route104_EventScript_1ECC47
 	.2byte 0
 
 Route104_EventScript_1ECC47:: @ 81ECC47
@@ -29,7 +29,7 @@ Route104_EventScript_1ECC74:: @ 81ECC74
 	return
 
 Route104_EventScript_1ECC78:: @ 81ECC78
-	compare VAR_BOARD_BRINEY_BOAT_ROUTE104_STATE, 1
+	compare VAR_BOARD_BRINEY_BOAT_STATE, 1
 	goto_if_ge Route104_EventScript_1ECC9D
 	goto_if_set FLAG_MET_RIVAL_RUSTBORO, Route104_EventScript_1ECC9D
 	goto_if_unset FLAG_REGISTER_RIVAL_POKENAV, Route104_EventScript_1ECC9D
@@ -49,8 +49,8 @@ Route104_EventScript_1ECC9E:: @ 81ECC9E
 Route104_EventScript_1ECCB3:: @ 81ECCB3
 	lockall
 	setflag FLAG_HIDE_RUSBORO_CITY_RIVAL
-	setvar VAR_RUSTBORO_STATE, 8
-	setvar VAR_0x4063, 2
+	setvar VAR_RUSTBORO_CITY_STATE, 8
+	setvar VAR_ROUTE104_STATE, 2
 	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceUp
 	waitmovement 0
 	delay 10
@@ -114,7 +114,7 @@ Route104_EventScript_1ECD4B:: @ 81ECD4B
 	waitmovement 0
 	applymovement 34, Route104_Movement_1ECDCA
 	waitmovement 0
-	moveobjectoffscreen 34
+	copyobjectxytoperm 34
 	msgbox Route104_Text_1EDCED, MSGBOX_YESNO
 	compare VAR_RESULT, 1
 	goto_if_eq Route104_EventScript_1ECDED
@@ -203,7 +203,7 @@ Route104_EventScript_1ECE6F:: @ 81ECE6F
 	waitmovement 0
 	applymovement 34, Route104_Movement_1ECDCA
 	waitmovement 0
-	moveobjectoffscreen 34
+	copyobjectxytoperm 34
 	msgbox Route104_Text_1EE009, MSGBOX_YESNO
 	compare VAR_RESULT, 1
 	goto_if_eq Route104_EventScript_1ECF09
@@ -416,8 +416,8 @@ Route104_EventScript_1ED139:: @ 81ED139
 	copyvar VAR_BRINEY_LOCATION, VAR_0x8008
 	resetobjectpriority EVENT_OBJ_ID_PLAYER, MAP_ROUTE104
 	resetobjectpriority 2, MAP_DEWFORD_TOWN
-	moveobjectoffscreen 2
-	setvar VAR_BOARD_BRINEY_BOAT_ROUTE104_STATE, 0
+	copyobjectxytoperm 2
+	setvar VAR_BOARD_BRINEY_BOAT_STATE, 0
 	goto_if_unset FLAG_DELIVERED_STEVEN_LETTER, Route104_EventScript_1ED1B4
 	goto_if_set FLAG_DELIVERED_STEVEN_LETTER, Route104_EventScript_1ED1BE
 	end

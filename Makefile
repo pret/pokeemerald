@@ -1,4 +1,17 @@
 TOOLCHAIN := $(DEVKITARM)
+
+ifeq ($(CC),)
+HOSTCC := gcc
+else
+HOSTCC := $(CC)
+endif
+
+ifeq ($(CXX),)
+HOSTCXX := g++
+else
+HOSTCXX := $(CXX)
+endif
+
 ifneq (,$(wildcard $(TOOLCHAIN)/base_tools))
 include $(TOOLCHAIN)/base_tools
 else
@@ -110,6 +123,9 @@ endif
 C_SRCS := $(wildcard $(C_SUBDIR)/*.c $(C_SUBDIR)/*/*.c $(C_SUBDIR)/*/*/*.c)
 C_OBJS := $(patsubst $(C_SUBDIR)/%.c,$(C_BUILDDIR)/%.o,$(C_SRCS))
 
+C_ASM_SRCS += $(wildcard $(C_SUBDIR)/*.s $(C_SUBDIR)/*/*.s $(C_SUBDIR)/*/*/*.s)
+C_ASM_OBJS := $(patsubst $(C_SUBDIR)/%.s,$(C_BUILDDIR)/%.o,$(C_ASM_SRCS))
+
 ASM_SRCS := $(wildcard $(ASM_SUBDIR)/*.s)
 ASM_OBJS := $(patsubst $(ASM_SUBDIR)/%.s,$(ASM_BUILDDIR)/%.o,$(ASM_SRCS))
 
@@ -122,7 +138,7 @@ SONG_OBJS := $(patsubst $(SONG_SUBDIR)/%.s,$(SONG_BUILDDIR)/%.o,$(SONG_SRCS))
 MID_SRCS := $(wildcard $(MID_SUBDIR)/*.mid)
 MID_OBJS := $(patsubst $(MID_SUBDIR)/%.mid,$(MID_BUILDDIR)/%.o,$(MID_SRCS))
 
-OBJS     := $(C_OBJS) $(ASM_OBJS) $(DATA_ASM_OBJS) $(SONG_OBJS) $(MID_OBJS)
+OBJS     := $(C_OBJS) $(C_ASM_OBJS) $(ASM_OBJS) $(DATA_ASM_OBJS) $(SONG_OBJS) $(MID_OBJS)
 OBJS_REL := $(patsubst $(OBJ_DIR)/%,%,$(OBJS))
 
 SUBDIRS  := $(sort $(dir $(OBJS)))
@@ -136,7 +152,7 @@ all: rom
 tools: $(TOOLDIRS)
 
 $(TOOLDIRS):
-	@$(MAKE) -C $@
+	@$(MAKE) -C $@ CC=$(HOSTCC) CXX=$(HOSTCXX)
 
 rom: $(ROM)
 
@@ -163,6 +179,10 @@ tidy:
 	rm -r $(OBJ_DIR)
 ifeq ($(MODERN),0)
 	@$(MAKE) tidy MODERN=1
+endif
+
+ifneq ($(MODERN),0)
+$(C_BUILDDIR)/berry_crush.o: override CFLAGS += -Wno-address-of-packed-member
 endif
 
 include graphics_file_rules.mk
@@ -205,7 +225,7 @@ endif
 ifeq ($(NODEP),1)
 $(C_BUILDDIR)/%.o: c_dep :=
 else
-$(C_BUILDDIR)/%.o: c_dep = $(shell $(SCANINC) -I include $(C_SUBDIR)/$*.c)
+$(C_BUILDDIR)/%.o: c_dep = $(shell $(SCANINC) -I include -I tools/agbcc/include $(C_SUBDIR)/$*.c)
 endif
 
 ifeq ($(DINFO),1)
@@ -217,6 +237,15 @@ $(C_BUILDDIR)/%.o : $(C_SUBDIR)/%.c $$(c_dep)
 	@$(PREPROC) $(C_BUILDDIR)/$*.i charmap.txt | $(CC1) $(CFLAGS) -o $(C_BUILDDIR)/$*.s
 	@echo -e ".text\n\t.align\t2, 0\n" >> $(C_BUILDDIR)/$*.s
 	$(AS) $(ASFLAGS) -o $@ $(C_BUILDDIR)/$*.s
+
+ifeq ($(NODEP),1)
+$(C_BUILDDIR)/%.o: c_asm_dep :=
+else
+$(C_BUILDDIR)/%.o: c_asm_dep = $(shell $(SCANINC) -I "" $(C_SUBDIR)/$*.s)
+endif
+
+$(C_BUILDDIR)/%.o: $(C_SUBDIR)/%.s $$(c_asm_dep)
+	$(AS) $(ASFLAGS) -o $@ $<
 
 ifeq ($(NODEP),1)
 $(ASM_BUILDDIR)/%.o: asm_dep :=

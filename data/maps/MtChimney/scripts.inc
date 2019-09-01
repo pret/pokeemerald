@@ -131,7 +131,6 @@ MtChimney_EventScript_22EF51:: @ 822EF51
 MtChimney_EventScript_22EF5E:: @ 822EF5E
 	takemoney 0xc8, 0
 	updatemoneybox 0, 0
-	nop
 	return
 
 MtChimney_EventScript_22EF69:: @ 822EF69

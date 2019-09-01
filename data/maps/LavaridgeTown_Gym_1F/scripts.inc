@@ -82,7 +82,7 @@ LavaridgeTown_Gym_1F_EventScript_1FE7C1:: @ 81FE7C1
 	setvar VAR_0x8008, 4
 	call LavaridgeTown_Gym_1F_EventScript_271F43
 	setflag FLAG_HIDE_VERDANTURF_TOWN_WANDAS_HOUSE_WALLY
-	setvar VAR_LAVARIDGE_RIVAL_STATE, 1
+	setvar VAR_LAVARIDGE_TOWN_STATE, 1
 	call LavaridgeTown_Gym_1F_EventScript_1FE841
 	closemessage
 	delay 30

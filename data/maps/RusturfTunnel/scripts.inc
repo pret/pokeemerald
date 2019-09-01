@@ -285,8 +285,8 @@ RusturfTunnel_EventScript_22D083:: @ 822D083
 	applymovement 6, RusturfTunnel_Movement_22D0AB
 	applymovement 7, RusturfTunnel_Movement_22D0AB
 	waitmovement 0
-	moveobjectoffscreen 6
-	moveobjectoffscreen 7
+	copyobjectxytoperm 6
+	copyobjectxytoperm 7
 	setvar VAR_RUSTURF_TUNNEL_STATE, 3
 	releaseall
 	end
@@ -345,7 +345,7 @@ RusturfTunnel_EventScript_22D0C2:: @ 822D0C2
 	removeobject 7
 	clearflag FLAG_DEVON_GOODS_STOLEN
 	setflag FLAG_RECOVERED_DEVON_GOODS
-	setvar VAR_RUSTBORO_STATE, 4
+	setvar VAR_RUSTBORO_CITY_STATE, 4
 	setvar VAR_BRINEY_HOUSE_STATE, 1
 	setflag FLAG_HIDE_ROUTE_116_MR_BRINEY
 	release
