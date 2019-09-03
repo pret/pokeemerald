@@ -663,7 +663,6 @@ SECTIONS {
         src/ereader_helpers.o(.rodata);
         src/faraway_island.o(.rodata);
         src/ereader_screen.o(.rodata);
-        data/ereader_screen.o(.rodata);
         src/trainer_hill.o(.rodata);
         src/rayquaza_scene.o(.rodata);
         src/walda_phrase.o(.rodata);
