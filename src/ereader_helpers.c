@@ -44,7 +44,7 @@ static u16 gUnknown_030012F0;
 static u16 gUnknown_030012F2;
 static u16 gUnknown_030012F4;
 
-const struct TrainerHillTrainer gUnknown_08625B6C[] = {
+static const struct TrainerHillTrainer sTrainerHillTrainerTemplates_JP[] = {
     {
         __("マキエ$$$$$"),
         FACILITY_CLASS_HEX_MANIAC,
@@ -770,8 +770,8 @@ static bool32 TryWriteTrainerHill_r(struct EReaderTrainerHillSet *ttdata, struct
     if (i & 1)
     {
         u8 * dest = buffer2->unk_008[i / 2].unk_14C;
-        const u8 (* src)[0x148] = (const u8 (*)[0x148])gUnknown_08625B6C;
-        memcpy(dest, src[i / 2], 0x148);
+        const struct TrainerHillTrainer * src = sTrainerHillTrainerTemplates_JP;
+        memcpy(dest, &src[i / 2], 0x148);
     }
 
     buffer2->checksum = CalcByteArraySum((u8 *)buffer2->unk_008, sizeof(struct Unk81D3998) - offsetof(struct Unk81D3998, unk_008));
