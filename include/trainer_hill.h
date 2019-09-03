@@ -42,6 +42,15 @@ struct TrHillTag
     struct TrHillFloor floors[4];
 };
 
+struct TrHillTag_Half
+{
+    u8 unkField_0;
+    u8 unused1;
+    u8 unkField_2;
+    u32 checksum;
+    struct TrHillFloor floors[2];
+};
+
 struct TrHillStruct2
 {
     u8 floorId;
