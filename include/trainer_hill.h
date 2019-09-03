@@ -15,6 +15,39 @@ struct TrainerHillTrainer
     struct BattleTowerPokemon mons[PARTY_SIZE];
 };
 
+struct TrHillRoomTrainers
+{
+    u8 name[2][HILL_TRAINER_NAME_LENGTH];
+    u8 facilityClass[2];
+};
+
+struct TrHillFloor
+{
+    u8 unk0;
+    u8 unk1;
+    struct TrainerHillTrainer trainers[2];
+    u8 data[0x100];
+    u16 unk3A0[16];
+    u8 coords[2]; // x first 4 bits, y last 4 bits
+    u8 direction; // array of 4 bits for each trainer
+    u8 range; // array of 4 bits for each trainer
+};
+
+struct TrHillTag
+{
+    u8 unkField_0;
+    u8 unused1;
+    u8 unkField_2;
+    u32 checksum;
+    struct TrHillFloor floors[4];
+};
+
+struct TrHillStruct2
+{
+    u8 floorId;
+    struct TrHillTag tag;
+};
+
 extern u32 *gTrainerHillVBlankCounter;
 
 void CallTrainerHillFunction(void);

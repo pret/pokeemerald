@@ -5,10 +5,7 @@ static const struct TrHillTag sDataTagNormal =
     .unkField_0 = 8,
     .unused1 = 2,
     .unkField_2 = 4,
-    .unused3 = 0,
-    .unused4 = 5,
-    .unused5 = 30,
-    .unused6 = 5,
+    .checksum = 0x00051E05,
     .floors =
     {
         [0] =
@@ -1218,10 +1215,7 @@ static const struct TrHillTag sDataTagVariety =
     .unkField_0 = 8,
     .unused1 = 1,
     .unkField_2 = 4,
-    .unused3 = 0,
-    .unused4 = 21,
-    .unused5 = 76,
-    .unused6 = 5,
+    .checksum = 0x00054C15,
     .floors =
     {
         [0] =
@@ -2438,10 +2432,7 @@ static const struct TrHillTag sDataTagUnique =
     .unkField_0 = 8,
     .unused1 = 3,
     .unkField_2 = 4,
-    .unused3 = 0,
-    .unused4 = 243,
-    .unused5 = 82,
-    .unused6 = 6,
+    .checksum = 0x000652F3,
     .floors =
     {
         [0] =
@@ -3643,10 +3634,7 @@ static const struct TrHillTag sDataTagExpert =
     .unkField_0 = 8,
     .unused1 = 1,
     .unkField_2 = 4,
-    .unused3 = 0,
-    .unused4 = 63,
-    .unused5 = 31,
-    .unused6 = 6,
+    .checksum = 0x00061F3F,
     .floors =
     {
         [0] =
