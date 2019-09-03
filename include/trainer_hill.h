@@ -1,6 +1,20 @@
 #ifndef GUARD_TRAINER_HILL_H
 #define GUARD_TRAINER_HILL_H
 
+#define HILL_TRAINER_NAME_LENGTH 11
+
+struct TrainerHillTrainer
+{
+    u8 name[HILL_TRAINER_NAME_LENGTH];
+    u8 facilityClass;
+    u32 unused;
+    u16 speechBefore[6];
+    u16 speechWin[6];
+    u16 speechLose[6];
+    u16 speechAfter[6];
+    struct BattleTowerPokemon mons[PARTY_SIZE];
+};
+
 extern u32 *gTrainerHillVBlankCounter;
 
 void CallTrainerHillFunction(void);

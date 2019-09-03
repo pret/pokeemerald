@@ -9,6 +9,7 @@
 #include "sprite.h"
 #include "task.h"
 #include "util.h"
+#include "trainer_hill.h"
 
 struct Unknown030012C8
 {
@@ -38,7 +39,7 @@ static u16 gUnknown_030012F0;
 static u16 gUnknown_030012F2;
 static u16 gUnknown_030012F4;
 
-extern const u8 gUnknown_08625B6C[][0x148];
+extern const struct TrainerHillTrainer gUnknown_08625B6C[];
 
 static u8 sub_81D38D4(void)
 {
@@ -58,7 +59,7 @@ bool8 EReader_IsReceivedDataValid(struct EReaderTrainerHillSet *buffer)
 {
     u32 i;
     u32 checksum;
-    int var0 = buffer->unk_0;
+    int var0 = buffer->count;
     if (var0 < 1 || var0 > 8)
         return FALSE;
 
@@ -78,7 +79,7 @@ bool8 EReader_IsReceivedDataValid(struct EReaderTrainerHillSet *buffer)
 static bool32 TrainerHill_VerifyChecksum(struct EReaderTrainerHillSet *buffer)
 {
     u32 checksum;
-    int var0 = buffer->unk_0;
+    int var0 = buffer->count;
     if (var0 < 1 || var0 > 8)
         return FALSE;
 
@@ -89,34 +90,37 @@ static bool32 TrainerHill_VerifyChecksum(struct EReaderTrainerHillSet *buffer)
     return TRUE;
 }
 
-static bool32 TryWriteTrainerHill_r(struct EReaderTrainerHillSet *arg0, struct Unk81D3998 *buffer2)
+static bool32 TryWriteTrainerHill_r(struct EReaderTrainerHillSet *ttdata, struct Unk81D3998 *buffer2)
 {
     int i;
 
-    memset(buffer2, 0, 0x1000);
-    buffer2->unk_000 = arg0->unk_0;
-    buffer2->unk_001 = sub_81D38D4();
-    buffer2->unk_002 = (arg0->unk_0 + 1) / 2;
+    AGB_ASSERT_EX(ttdata->dummy == 0, "cereader_tool.c", 450);
+    AGB_ASSERT_EX(ttdata->id == 0, "cereader_tool.c", 452);
 
-    for (i = 0; i < arg0->unk_0; i++)
+    memset(buffer2, 0, 0x1000);
+    buffer2->unk_000 = ttdata->count;
+    buffer2->unk_001 = sub_81D38D4();
+    buffer2->unk_002 = (ttdata->count + 1) / 2;
+
+    for (i = 0; i < ttdata->count; i++)
     {
         if (!(i & 1))
         {
-            buffer2->unk_008[i / 2].unk_000[0] = arg0->unk_8[i].unk0;
-            memcpy(buffer2->unk_008[i / 2].unk_294, arg0->unk_8[i].unk14C, 0x124);
-            memcpy(buffer2->unk_008[i / 2].unk_004, arg0->unk_8[i].unk4, 0x148);
+            buffer2->unk_008[i / 2].unk_000[0] = ttdata->unk_8[i].unk0;
+            memcpy(buffer2->unk_008[i / 2].unk_294, ttdata->unk_8[i].unk14C, 0x124);
+            memcpy(buffer2->unk_008[i / 2].unk_004, ttdata->unk_8[i].unk4, 0x148);
         }
         else
         {
-            buffer2->unk_008[i / 2].unk_000[1] = arg0->unk_8[i].unk0;
-            memcpy(buffer2->unk_008[i / 2].unk_14C, arg0->unk_8[i].unk4, 0x148);
+            buffer2->unk_008[i / 2].unk_000[1] = ttdata->unk_8[i].unk0;
+            memcpy(buffer2->unk_008[i / 2].unk_14C, ttdata->unk_8[i].unk4, 0x148);
         }
     }
 
     if (i & 1)
     {
         u8 * dest = buffer2->unk_008[i / 2].unk_14C;
-        const u8 (* src)[0x148] = gUnknown_08625B6C;
+        const u8 (* src)[0x148] = (const u8 (*)[0x148])gUnknown_08625B6C;
         memcpy(dest, src[i / 2], 0x148);
     }
 
@@ -163,20 +167,20 @@ bool32 ReadTrainerHillAndValidate(void)
     return result;
 }
 
-static int unref_sub_81D3B54(int arg0, u32 *arg1)
+int EReader_Send(int arg0, u32 *arg1)
 {
     int result;
     u16 var0;
     int var1;
 
-    sub_81D41A0();
+    EReaderHelper_SaveRegsState();
     while (1)
     {
         sub_81D4170();
         if (gUnknown_030012E2 & 2)
             gShouldAdvanceLinkState = 2;
 
-        var1 = sub_81D3D70(1, arg0, arg1, NULL);
+        var1 = EReaderHandleTransfer(1, arg0, arg1, NULL);
         gUnknown_030012E4 = var1;
         if ((gUnknown_030012E4 & 0x13) == 0x10)
         {
@@ -202,24 +206,24 @@ static int unref_sub_81D3B54(int arg0, u32 *arg1)
     }
 
     CpuFill32(0, &gUnknown_030012C8, sizeof(struct Unknown030012C8));
-    sub_81D41F4();
+    EReaderHelper_RestoreRegsState();
     return result;
 }
 
-static int unref_sub_81D3BE8(u32 *arg0)
+int EReader_Recv(u32 *arg0)
 {
     int result;
     u16 var0;
     int var1;
 
-    sub_81D41A0();
+    EReaderHelper_SaveRegsState();
     while (1)
     {
         sub_81D4170();
         if (gUnknown_030012E2 & 2)
             gShouldAdvanceLinkState = 2;
 
-        var1 = sub_81D3D70(0, 0, NULL, arg0);
+        var1 = EReaderHandleTransfer(0, 0, NULL, arg0);
         gUnknown_030012E4 = var1;
         if ((gUnknown_030012E4 & 0x13) == 0x10)
         {
@@ -245,7 +249,7 @@ static int unref_sub_81D3BE8(u32 *arg0)
     }
 
     CpuFill32(0, &gUnknown_030012C8, sizeof(struct Unknown030012C8));
-    sub_81D41F4();
+    EReaderHelper_RestoreRegsState();
     return result;
 }
 
@@ -285,7 +289,7 @@ static void sub_81D3D34(void)
     gUnknown_030012E8 = 0;
 }
 
-int sub_81D3D70(u8 arg0, u32 arg1, u32 *arg2, u32 *arg3)
+int EReaderHandleTransfer(u8 arg0, u32 arg1, u32 *arg2, u32 *arg3)
 {
     switch (gUnknown_030012C8.unk0[1])
     {
@@ -519,7 +523,7 @@ static void sub_81D4170(void)
     gUnknown_030012E0 = keysMask;
 }
 
-void sub_81D41A0(void)
+void EReaderHelper_SaveRegsState(void)
 {
     gUnknown_030012EC = REG_IME;
     gUnknown_030012EE = REG_IE;
@@ -528,7 +532,7 @@ void sub_81D41A0(void)
     gUnknown_030012F4 = REG_RCNT;
 }
 
-void sub_81D41F4(void)
+void EReaderHelper_RestoreRegsState(void)
 {
     REG_IME = gUnknown_030012EC;
     REG_IE = gUnknown_030012EE;
