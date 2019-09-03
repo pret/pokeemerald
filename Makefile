@@ -229,7 +229,7 @@ endif
 ifeq ($(NODEP),1)
 $(C_BUILDDIR)/%.o: c_dep :=
 else
-$(C_BUILDDIR)/%.o: c_dep = $(shell $(SCANINC) -I include -I tools/agbcc/include $(C_SUBDIR)/$*.c)
+$(C_BUILDDIR)/%.o: c_dep = $(shell [[ -f $(C_SUBDIR)/$*.c ]] && $(SCANINC) -I include -I tools/agbcc/include $(C_SUBDIR)/$*.c)
 endif
 
 ifeq ($(DINFO),1)
@@ -245,7 +245,7 @@ $(C_BUILDDIR)/%.o : $(C_SUBDIR)/%.c $$(c_dep)
 ifeq ($(NODEP),1)
 $(C_BUILDDIR)/%.o: c_asm_dep :=
 else
-$(C_BUILDDIR)/%.o: c_asm_dep = $(shell $(SCANINC) -I "" $(C_SUBDIR)/$*.s)
+$(C_BUILDDIR)/%.o: c_asm_dep = $(shell [[ -f $(C_SUBDIR)/$*.s ]] && $(SCANINC) -I "" $(C_SUBDIR)/$*.s)
 endif
 
 $(C_BUILDDIR)/%.o: $(C_SUBDIR)/%.s $$(c_asm_dep)
