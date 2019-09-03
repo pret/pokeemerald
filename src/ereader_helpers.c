@@ -696,7 +696,7 @@ static u8 sub_81D38D4(void)
     return (gSaveBlock1Ptr->trainerHill.unused + 1) % 256;
 }
 
-static bool32 Struct_Unk81D38FC_ValidateChecksum(struct Unk81D38FC *arg0)
+static bool32 Struct_EReaderTrainerHillTrainer_ValidateChecksum(struct EReaderTrainerHillTrainer *arg0)
 {
     int checksum = CalcByteArraySum((u8 *)arg0, 0x270);
     if (checksum != arg0->checksum)
@@ -715,11 +715,11 @@ bool8 EReader_IsReceivedDataValid(struct EReaderTrainerHillSet *buffer)
 
     for (i = 0; i < var0; i++)
     {
-        if (!Struct_Unk81D38FC_ValidateChecksum(&buffer->unk_8[i]))
+        if (!Struct_EReaderTrainerHillTrainer_ValidateChecksum(&buffer->unk_8[i]))
             return FALSE;
     }
 
-    checksum = CalcByteArraySum((u8 *)buffer->unk_8, var0 * sizeof(struct Unk81D38FC));
+    checksum = CalcByteArraySum((u8 *)buffer->unk_8, var0 * sizeof(struct EReaderTrainerHillTrainer));
     if (checksum != buffer->checksum)
         return FALSE;
 
@@ -740,7 +740,7 @@ static bool32 TrainerHill_VerifyChecksum(struct EReaderTrainerHillSet *buffer)
     return TRUE;
 }
 
-static bool32 TryWriteTrainerHill_r(struct EReaderTrainerHillSet *ttdata, struct Unk81D3998 *buffer2)
+static bool32 TryWriteTrainerHill_r(struct EReaderTrainerHillSet *ttdata, struct TrHillTag *buffer2)
 {
     int i;
 
@@ -748,33 +748,31 @@ static bool32 TryWriteTrainerHill_r(struct EReaderTrainerHillSet *ttdata, struct
     AGB_ASSERT_EX(ttdata->id == 0, "cereader_tool.c", 452);
 
     memset(buffer2, 0, 0x1000);
-    buffer2->unk_000 = ttdata->count;
-    buffer2->unk_001 = sub_81D38D4();
-    buffer2->unk_002 = (ttdata->count + 1) / 2;
+    buffer2->unkField_0 = ttdata->count;
+    buffer2->unused1 = sub_81D38D4();
+    buffer2->unkField_2 = (ttdata->count + 1) / 2;
 
     for (i = 0; i < ttdata->count; i++)
     {
         if (!(i & 1))
         {
-            buffer2->unk_008[i / 2].unk_000[0] = ttdata->unk_8[i].unk0;
-            memcpy(buffer2->unk_008[i / 2].unk_294, ttdata->unk_8[i].unk14C, 0x124);
-            memcpy(buffer2->unk_008[i / 2].unk_004, ttdata->unk_8[i].unk4, 0x148);
+            buffer2->floors[i / 2].unk0 = ttdata->unk_8[i].unk0;
+            memcpy(buffer2->floors[i / 2].data, ttdata->unk_8[i].unk14C, 0x124);
+            buffer2->floors[i / 2].trainers[0] = ttdata->unk_8[i].unk4;
         }
         else
         {
-            buffer2->unk_008[i / 2].unk_000[1] = ttdata->unk_8[i].unk0;
-            memcpy(buffer2->unk_008[i / 2].unk_14C, ttdata->unk_8[i].unk4, 0x148);
+            buffer2->floors[i / 2].unk1 = ttdata->unk_8[i].unk0;
+            buffer2->floors[i / 2].trainers[1] = ttdata->unk_8[i].unk4;
         }
     }
 
     if (i & 1)
     {
-        u8 * dest = buffer2->unk_008[i / 2].unk_14C;
-        const struct TrainerHillTrainer * src = sTrainerHillTrainerTemplates_JP;
-        memcpy(dest, &src[i / 2], 0x148);
+        buffer2->floors[i / 2].trainers[1] = sTrainerHillTrainerTemplates_JP[i / 2];
     }
 
-    buffer2->checksum = CalcByteArraySum((u8 *)buffer2->unk_008, sizeof(struct Unk81D3998) - offsetof(struct Unk81D3998, unk_008));
+    buffer2->checksum = CalcByteArraySum((u8 *)buffer2->floors, sizeof(buffer2->floors));
     if (TryWriteSpecialSaveSection(SECTOR_ID_TRAINER_HILL, (u8 *)buffer2) != 1)
         return FALSE;
 
@@ -783,7 +781,7 @@ static bool32 TryWriteTrainerHill_r(struct EReaderTrainerHillSet *ttdata, struct
 
 bool32 TryWriteTrainerHill(struct EReaderTrainerHillSet *arg0)
 {
-    struct Unk81D3998 *var0 = AllocZeroed(0x1000);
+    void *var0 = AllocZeroed(0x1000);
     bool32 result = TryWriteTrainerHill_r(arg0, var0);
     Free(var0);
     return result;

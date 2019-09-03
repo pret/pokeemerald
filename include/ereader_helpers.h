@@ -3,14 +3,17 @@
 
 #include "trainer_hill.h"
 
-struct Unk81D38FC
+struct EReaderTrainerHillTrainer
 {
     u8 unk0;
-    u8 filler_1[3];
-    u8 unk4[0x148];
-    u8 unk14C[0x124];
+    struct TrainerHillTrainer unk4;
+    u8 unk14C[0x100];
+    u16 unk24C[16];
+    u8 coords[2];
+    u8 direction;
+    u8 range;
     u32 checksum;
-};
+}; // size=0x274
 
 struct EReaderTrainerHillSet
 {
@@ -18,26 +21,9 @@ struct EReaderTrainerHillSet
     u8 id;
     u16 dummy;
     u32 checksum;
-    struct Unk81D38FC unk_8[6];
+    struct EReaderTrainerHillTrainer unk_8[6];
     u8 unk_ec0[40];
-};
-
-struct Unk81D3998Sub
-{
-    u8 unk_000[4];
-    u8 unk_004[0x148];
-    u8 unk_14C[0x148];
-    u8 unk_294[0x124];
-};
-
-struct Unk81D3998
-{
-    u8 unk_000;
-    u8 unk_001;
-    u8 unk_002;
-    int checksum;
-    struct Unk81D3998Sub unk_008[4];
-};
+}; // size = 0xf00
 
 bool8 EReader_IsReceivedDataValid(struct EReaderTrainerHillSet *buffer);
 bool32 TryWriteTrainerHill(struct EReaderTrainerHillSet *arg0);
