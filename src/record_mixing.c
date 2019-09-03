@@ -701,10 +701,10 @@ static void ReceiveLilycoveLadyData(LilycoveLady *lilycoveLady, size_t recordSiz
     }
 
     memcpy(sLilycoveLadySave, (void *)lilycoveLady + recordSize * mixIndices[which], sizeof(LilycoveLady));
-    sub_818DA78();
+    ResetLilycoveLadyForRecordMix();
     if (dest != NULL)
     {
-        sub_818E570(dest);
+        QuizLadyClearQuestionForRecordMix(dest);
         free(dest);
     }
 }

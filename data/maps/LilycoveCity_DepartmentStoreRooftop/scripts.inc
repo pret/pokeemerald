@@ -144,7 +144,6 @@ LilycoveCity_DepartmentStoreRooftop_EventScript_22032F:: @ 822032F
 	compare VAR_TEMP_1, 2
 	call_if_eq LilycoveCity_DepartmentStoreRooftop_EventScript_220328
 	updatemoneybox 0, 0
-	nop
 	bufferitemname 0, VAR_TEMP_0
 	playse SE_JIHANKI
 	msgbox LilycoveCity_DepartmentStoreRooftop_Text_2205A1, MSGBOX_DEFAULT

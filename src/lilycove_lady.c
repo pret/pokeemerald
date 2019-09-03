@@ -1,7 +1,3 @@
-//
-// Created by Scott Norton on 9/19/17.
-//
-
 #include "global.h"
 #include "main.h"
 #include "overworld.h"
@@ -18,215 +14,25 @@
 #include "text.h"
 #include "easy_chat.h"
 #include "lilycove_lady.h"
+#include "contest.h"
+#include "strings.h"
+#include "constants/lilycove_lady.h"
 
-static void SetLilycoveQuizLady(void);
-static void SetLilycoveFavourLady(void);
-static void SetLilycoveContestLady(void);
-static void sub_818E004(void);
-static void sub_818DBC4(void);
-static void sub_818E674(void);
-static u8 sub_818E13C(void);
-static bool8 sub_818E1F4(void);
-static u8 sub_818E258(const u8 *);
+#include "data/lilycove_lady.h"
 
-extern const u8 gText_Lady2[];
+static void InitLilycoveQuizLady(void);
+static void InitLilycoveFavorLady(void);
+static void InitLilycoveContestLady(void);
+static void ResetQuizLadyForRecordMix(void);
+static void ResetFavorLadyForRecordMix(void);
+static void ResetContestLadyForRecordMix(void);
+static u8 BufferQuizAuthorName(void);
+static bool8 IsQuizTrainerIdNotPlayer(void);
+static u8 GetPlayerNameLength(const u8 *);
 
-static const u16 sUnknown_0860B074[] = {
-        0x62, 0xcb, 0xdc, 0xcc, 0xd1
-};
-static const u16 sUnknown_0860B07E[] = {
-        0x1a, 0x14, 0x0a
-};
-
-static const u16 Unknown_0860B084[] = {
-        0x101b, 0x1623, 0x1812, 0x102c, 0x020e, 0x0c03, 0x1a0b, 0x0210, 0x020d
-};
-
-static const u16 Unknown_0860B096[] = {
-        0x101b, 0x1013, 0x1020, 0x1a0f, 0x020c, 0x0c03, 0x0211, 0x0203, 0x0400
-};
-
-static const u16 Unknown_0860B0A8[] = {
-        0x0e0f, 0x1018, 0x020e, 0x0204, 0x0c03, 0xffff, 0x0212, 0x0451, 0x0463
-};
-
-static const u16 Unknown_0860B0BA[] = {
-        0x101b, 0x100b, 0x0e0d, 0x141a, 0x181d, 0x0c03, 0x141e, 0x1a26, 0x1823
-};
-
-static const u16 Unknown_0860B0CC[] = {
-        0x101b, 0x181d, 0x1018, 0x0a02, 0x2014, 0x0c03, 0x0208, 0x1824, 0x181c
-};
-
-static const u16 Unknown_0860B0DE[] = {
-        0x101b, 0x1000, 0x1c19, 0x265d, 0x0c03, 0xffff, 0x0447, 0x045d, 0x042c
-};
-
-static const u16 Unknown_0860B0F0[] = {
-        0x101b, 0x1034, 0x1e11, 0x100b, 0x1a08, 0x0c03, 0x044b, 0x0446, 0x040a
-};
-
-static const u16 Unknown_0860B102[] = {
-        0x101b, 0x1000, 0x274f, 0x0626, 0x0c03, 0xffff, 0x0442, 0x0411, 0x0450
-};
-
-static const u16 Unknown_0860B114[] = {
-        0x101b, 0x1000, 0x1c19, 0x043c, 0x0c03, 0xffff, 0x0421, 0x0464, 0x0435
-};
-
-static const u16 Unknown_0860B126[] = {
-        0x101b, 0x1203, 0x1030, 0x0207, 0x0c03, 0xffff, 0x0210, 0x020e, 0x020d
-};
-
-static const u16 Unknown_0860B138[] = {
-        0x101b, 0x1623, 0x0a05, 0x020e, 0x0c03, 0xffff, 0x1a25, 0x181a, 0x181b
-};
-
-static const u16 Unknown_0860B14A[] = {
-        0x101b, 0x1823, 0x1603, 0x0a02, 0x1812, 0x0c03, 0x1a15, 0x1a23, 0x181b
-};
-
-static const u16 Unknown_0860B15C[] = {
-        0x1020, 0x020e, 0x1010, 0x1043, 0x1e0f, 0x0c03, 0x181c, 0x1a24, 0x1816
-};
-
-static const u16 Unknown_0860B16E[] = {
-        0x0446, 0x100b, 0x0620, 0x061c, 0x101b, 0x0c03, 0x0420, 0x0426, 0xffff
-};
-
-static const u16 Unknown_0860B180[] = {
-        0x0400, 0x100b, 0x0639, 0x061c, 0x101b, 0x0c03, 0x040e, 0x0410, 0xffff
-};
-
-static const u16 Unknown_0860B192[] = {
-        0x041f, 0x100b, 0x0639, 0x061c, 0x101b, 0x0c03, 0x0445, 0x0400, 0xffff
-};
-
-static const u16 *const gUnknown_0860B1A4[] = {
-        Unknown_0860B084,
-        Unknown_0860B096,
-        Unknown_0860B0A8,
-        Unknown_0860B0BA,
-        Unknown_0860B0CC,
-        Unknown_0860B0DE,
-        Unknown_0860B0F0,
-        Unknown_0860B102,
-        Unknown_0860B114,
-        Unknown_0860B126,
-        Unknown_0860B138,
-        Unknown_0860B14A,
-        Unknown_0860B15C,
-        Unknown_0860B16E,
-        Unknown_0860B180,
-        Unknown_0860B192
-};
-
-static const u16 sUnknown_0860B1E4[] = {
-        0x0210, 0x0400, 0x0212, 0x1a26, 0x0208, 0x045d, 0x040a, 0x0411, 0x0464, 0x020e, 0x1a25, 0x181b, 0x1a24, 0x0420, 0x0410, 0x0400
-};
-
-static const u16 sUnknown_0860B204[] = {
-        0x007b, 0x007f, 0x0081, 0x0023, 0x0023, 0x0023, 0x00a5, 0x00a7, 0x00a6, 0x000b, 0x012f, 0x006b, 0x006d, 0x0044, 0x0044, 0x000c
-};
-
-extern const u8 gUnknown_085EEB83[];
-extern const u8 gUnknown_085EEB8C[];
-extern const u8 gUnknown_085EEB95[];
-extern const u8 gUnknown_085EEB9E[];
-extern const u8 gUnknown_085EEBA4[];
-extern const u8 gUnknown_085EEBAB[];
-
-static const u8 *const gUnknown_0860B224[] = {
-        gUnknown_085EEB83,
-        gUnknown_085EEB8C,
-        gUnknown_085EEB95,
-        gUnknown_085EEB9E,
-        gUnknown_085EEBA4,
-        gUnknown_085EEBAB
-};
-
-static const u16 Unknown_0860B23C[] = {
-        0x0056, 0x0053, 0x0054, 0x000e, 0x0012, 0x000f, 0x00a7, 0x0011, 0x0010, 0x0018, 0x0019, 0x001e, 0x0000
-};
-
-static const u16 Unknown_0860B256[] = {
-        0x0051, 0x006a, 0x006b, 0x00cc, 0x00c2, 0x002f, 0x0067, 0x0068, 0x0087, 0x0089, 0x008b, 0x009d, 0x00a0, 0x00a5, 0x0004, 0x0002, 0x0000
-};
-
-static const u16 Unknown_0860B278[] = {
-        0x0021, 0x000d, 0x001a, 0x001b, 0x001c, 0x00cc, 0x00ca, 0x0026, 0x0086, 0x0096, 0x0097, 0x009a, 0x00a2, 0x00a6, 0x0000
-};
-
-static const u16 Unknown_0860B296[] = {
-        0x0020, 0x004d, 0x004b, 0x004c, 0x0027, 0x0028, 0x0029, 0x002a, 0x002b, 0x006e, 0x005d, 0x006c, 0x006d, 0x006a, 0x006b, 0x00d6, 0x00bc, 0x00b3, 0x000b, 0x000c, 0x0000
-};
-
-static const u16 Unknown_0860B2C0[] = {
-        0x001f, 0x0013, 0x0014, 0x004a, 0x004e, 0x0049, 0x00a5, 0x00c8, 0x0067, 0x006f, 0x0000
-};
-
-static const u16 Unknown_0860B2D6[] = {
-        0x00b7, 0x00d3, 0x00d2, 0x00d8, 0x009e, 0x00a6, 0x00ab, 0x00aa, 0x006c, 0x006d, 0x0000
-};
-
-static const u16 *const gUnknown_0860B2EC[] = {
-        Unknown_0860B23C,
-        Unknown_0860B256,
-        Unknown_0860B278,
-        Unknown_0860B296,
-        Unknown_0860B2C0,
-        Unknown_0860B2D6
-};
-
-static const u16 sUnknown_0860B304[] = {
-        0x0b, 0x6e, 0x40, 0x6f, 0x44, 0x47
-};
-
-extern const u8 gUnknown_085EEB2B[];
-extern const u8 gUnknown_085EEB34[];
-extern const u8 gUnknown_085EEB3A[];
-extern const u8 gUnknown_085EEB41[];
-extern const u8 gUnknown_085EEB4A[];
-extern const u8 gUnknown_085EEB51[];
-extern const u8 gUnknown_085EEB5A[];
-extern const u8 gUnknown_085EEB61[];
-extern const u8 gUnknown_085EEB6A[];
-extern const u8 gUnknown_085EEB74[];
-extern const u8 gUnknown_085EADA4[];
-extern const u8 gUnknown_085EADB5[];
-extern const u8 gUnknown_085EADC4[];
-extern const u8 gUnknown_085EADD5[];
-extern const u8 gUnknown_085EADE7[];
-
-static const u8 *const gUnknown_0860B310[] = {
-        gUnknown_085EEB2B,
-        gUnknown_085EEB34,
-        gUnknown_085EEB3A,
-        gUnknown_085EEB41,
-        gUnknown_085EEB4A
-};
-static const u8 *const gUnknown_0860B324[] = {
-        gUnknown_085EEB51,
-        gUnknown_085EEB5A,
-        gUnknown_085EEB61,
-        gUnknown_085EEB6A,
-        gUnknown_085EEB74
-};
-static const u8 *const gUnknown_0860B338[] = {
-        gUnknown_085EADA4,
-        gUnknown_085EADB5,
-        gUnknown_085EADC4,
-        gUnknown_085EADD5,
-        gUnknown_085EADE7
-};
-
-static const u16 sUnknown_0860B34C[] = {
-        0x0120, 0x013b, 0x011e, 0x013d, 0x0019
-};
-
-static EWRAM_DATA struct LilycoveLadyFavour *gUnknown_0203CD64 = NULL;
-static EWRAM_DATA struct LilycoveLadyQuiz *gUnknown_0203CD68 = NULL;
-static EWRAM_DATA struct LilycoveLadyContest *gUnknown_0203CD6C = NULL;
+static EWRAM_DATA struct LilycoveLadyFavor *sFavorLadyPtr = NULL;
+static EWRAM_DATA struct LilycoveLadyQuiz *sQuizLadyPtr = NULL;
+static EWRAM_DATA struct LilycoveLadyContest *sContestLadyPtr = NULL;
 
 extern EWRAM_DATA u16 gSpecialVar_ItemId;
 
@@ -235,15 +41,15 @@ u8 GetLilycoveLadyId(void)
     return gSaveBlock1Ptr->lilycoveLady.id;
 }
 
-void sub_818D9C0(void)
+void SetLilycoveLadyGfx(void)
 {
     LilycoveLady *lilycoveLady;
 
-    VarSet(VAR_OBJ_GFX_ID_0, sUnknown_0860B07E[GetLilycoveLadyId()]);
+    VarSet(VAR_OBJ_GFX_ID_0, sLilycoveLadyGfxId[GetLilycoveLadyId()]);
     if (GetLilycoveLadyId() == LILYCOVE_LADY_CONTEST)
     {
         lilycoveLady = &gSaveBlock1Ptr->lilycoveLady;
-        VarSet(VAR_OBJ_GFX_ID_1, sUnknown_0860B074[lilycoveLady->contest.category]);
+        VarSet(VAR_OBJ_GFX_ID_1, sContestLadyMonGfxId[lilycoveLady->contest.category]);
         gSpecialVar_Result = TRUE;
     }
     else
@@ -252,718 +58,722 @@ void sub_818D9C0(void)
     }
 }
 
-void SetLilycoveLady(void)
+void InitLilycoveLady(void)
 {
-    u16 id;
-
-    id = ((gSaveBlock2Ptr->playerTrainerId[1] << 8) | gSaveBlock2Ptr->playerTrainerId[0]);
+    u16 id = ((gSaveBlock2Ptr->playerTrainerId[1] << 8) | gSaveBlock2Ptr->playerTrainerId[0]);
     id %= 6;
     id >>= 1;
     switch (id)
     {
         case LILYCOVE_LADY_QUIZ:
-            SetLilycoveQuizLady();
+            InitLilycoveQuizLady();
             break;
-        case LILYCOVE_LADY_FAVOUR:
-            SetLilycoveFavourLady();
+        case LILYCOVE_LADY_FAVOR:
+            InitLilycoveFavorLady();
             break;
         case LILYCOVE_LADY_CONTEST:
-            SetLilycoveContestLady();
+            InitLilycoveContestLady();
             break;
     }
 }
 
-void sub_818DA78(void)
+void ResetLilycoveLadyForRecordMix(void)
 {
     switch (GetLilycoveLadyId())
     {
         case LILYCOVE_LADY_QUIZ:
-            sub_818E004();
+            ResetQuizLadyForRecordMix();
             break;
-        case LILYCOVE_LADY_FAVOUR:
-            sub_818DBC4();
+        case LILYCOVE_LADY_FAVOR:
+            ResetFavorLadyForRecordMix();
             break;
         case LILYCOVE_LADY_CONTEST:
-            sub_818E674();
+            ResetContestLadyForRecordMix();
             break;
     }
 }
 
-void SetLilycoveLadyRandomly(void)
+// Unused
+void InitLilycoveLadyRandomly(void)
 {
-    u8 id;
+    u8 lady = Random() % LILYCOVE_LADY_COUNT;
 
-    id = Random() % 3;
-    switch (id)
+    switch (lady)
     {
         case LILYCOVE_LADY_QUIZ:
-            SetLilycoveQuizLady();
+            InitLilycoveQuizLady();
             break;
-        case LILYCOVE_LADY_FAVOUR:
-            SetLilycoveFavourLady();
+        case LILYCOVE_LADY_FAVOR:
+            InitLilycoveFavorLady();
             break;
         case LILYCOVE_LADY_CONTEST:
-            SetLilycoveContestLady();
+            InitLilycoveContestLady();
             break;
     }
 }
 
-void sub_818DAEC(void)
+void Script_GetLilycoveLadyId(void)
 {
     gSpecialVar_Result = GetLilycoveLadyId();
 }
 
-static u8 sub_818DB04(const u16 *data)
+static u8 GetNumAcceptedItems(const u16 *itemsArray)
 {
-    u8 len;
+    u8 items;
 
-    for (len = 0; *data != 0; len ++, data ++);
-    return len;
+    for (items = 0; *itemsArray != ITEM_NONE; items ++, itemsArray ++);
+    return items;
 }
 
-static void sub_818DB20(void)
+static void FavorLadyPickFavorAndBestItem(void)
 {
-    u8 size;
-    u8 idx;
+    u8 numItems;
+    u8 bestItem;
 
-    gUnknown_0203CD64->unk_00c = Random() % 6;
-    size = sub_818DB04(gUnknown_0860B2EC[gUnknown_0203CD64->unk_00c]);
-    idx = Random() % size;
-    gUnknown_0203CD64->unk_010 = gUnknown_0860B2EC[gUnknown_0203CD64->unk_00c][idx];
+    sFavorLadyPtr->favorId = Random() % ARRAY_COUNT(sFavorLadyRequests);
+    numItems = GetNumAcceptedItems(sFavorLadyAcceptedItemLists[sFavorLadyPtr->favorId]);
+    bestItem = Random() % numItems;
+    sFavorLadyPtr->bestItem = sFavorLadyAcceptedItemLists[sFavorLadyPtr->favorId][bestItem];
 }
 
-static void SetLilycoveFavourLady(void)
+static void InitLilycoveFavorLady(void)
 {
-    gUnknown_0203CD64 = &gSaveBlock1Ptr->lilycoveLady.favour;
-    gUnknown_0203CD64->id = LILYCOVE_LADY_FAVOUR;
-    gUnknown_0203CD64->phase = 0;
-    gUnknown_0203CD64->playerName[0] = EOS;
-    gUnknown_0203CD64->unk_002 = 0;
-    gUnknown_0203CD64->unk_003= 0;
-    gUnknown_0203CD64->itemId = ITEM_NONE;
-    gUnknown_0203CD64->language = gGameLanguage;
-    sub_818DB20();
+    sFavorLadyPtr = &gSaveBlock1Ptr->lilycoveLady.favor;
+    sFavorLadyPtr->id = LILYCOVE_LADY_FAVOR;
+    sFavorLadyPtr->state = LILYCOVE_LADY_STATE_READY;
+    sFavorLadyPtr->playerName[0] = EOS;
+    sFavorLadyPtr->likedItem = FALSE;
+    sFavorLadyPtr->numItemsGiven = 0;
+    sFavorLadyPtr->itemId = ITEM_NONE;
+    sFavorLadyPtr->language = gGameLanguage;
+    FavorLadyPickFavorAndBestItem();
 }
 
-static void sub_818DBC4(void)
+static void ResetFavorLadyForRecordMix(void)
 {
-    gUnknown_0203CD64 = &gSaveBlock1Ptr->lilycoveLady.favour;
-    gUnknown_0203CD64->id = LILYCOVE_LADY_FAVOUR;
-    gUnknown_0203CD64->phase = 0;
+    sFavorLadyPtr = &gSaveBlock1Ptr->lilycoveLady.favor;
+    sFavorLadyPtr->id = LILYCOVE_LADY_FAVOR;
+    sFavorLadyPtr->state = LILYCOVE_LADY_STATE_READY;
 }
 
-u8 sub_818DBE8(void)
+u8 GetFavorLadyState(void)
 {
-    gUnknown_0203CD64 = &gSaveBlock1Ptr->lilycoveLady.favour;
-    if (gUnknown_0203CD64->phase == 2)
+    sFavorLadyPtr = &gSaveBlock1Ptr->lilycoveLady.favor;
+    if (sFavorLadyPtr->state == LILYCOVE_LADY_STATE_PRIZE)
     {
-        return 2;
+        return LILYCOVE_LADY_STATE_PRIZE;
     }
-    else if (gUnknown_0203CD64->phase == 1)
+    else if (sFavorLadyPtr->state == LILYCOVE_LADY_STATE_COMPLETED)
     {
-        return 1;
+        return LILYCOVE_LADY_STATE_COMPLETED;
     }
     else
     {
-        return 0;
+        return LILYCOVE_LADY_STATE_READY;
     }
 }
 
-static const u8 *sub_818DC1C(u8 idx)
+static const u8 *GetFavorLadyRequest(u8 idx)
 {
-    return gUnknown_0860B224[idx];
+    return sFavorLadyRequests[idx];
 }
 
-void sub_818DC2C(void)
+void BufferFavorLadyRequest(void)
 {
-    gUnknown_0203CD64 = &gSaveBlock1Ptr->lilycoveLady.favour;
-    StringCopy(gStringVar1, sub_818DC1C(gUnknown_0203CD64->unk_00c));
+    sFavorLadyPtr = &gSaveBlock1Ptr->lilycoveLady.favor;
+    StringCopy(gStringVar1, GetFavorLadyRequest(sFavorLadyPtr->favorId));
 }
 
-bool8 sub_818DC60(void)
+bool8 HasAnotherPlayerGivenFavorLadyItem(void)
 {
-    gUnknown_0203CD64 = &gSaveBlock1Ptr->lilycoveLady.favour;
-    if (gUnknown_0203CD64->playerName[0] != EOS)
+    sFavorLadyPtr = &gSaveBlock1Ptr->lilycoveLady.favor;
+    if (sFavorLadyPtr->playerName[0] != EOS)
     {
-        StringCopy7(gStringVar3, gUnknown_0203CD64->playerName);
-        ConvertInternationalString(gStringVar3, gUnknown_0203CD64->language);
+        StringCopy7(gStringVar3, sFavorLadyPtr->playerName);
+        ConvertInternationalString(gStringVar3, sFavorLadyPtr->language);
         return TRUE;
     }
     return FALSE;
 }
 
-static void sub_818DCAC(u8 *dest, u16 itemId)
+static void BufferItemName(u8 *dest, u16 itemId)
 {
     StringCopy(dest, ItemId_GetName(itemId));
 }
 
-void sub_818DCC8(void)
+void BufferFavorLadyItemName(void)
 {
-    gUnknown_0203CD64 = &gSaveBlock1Ptr->lilycoveLady.favour;
-    sub_818DCAC(gStringVar2, gUnknown_0203CD64->itemId);
+    sFavorLadyPtr = &gSaveBlock1Ptr->lilycoveLady.favor;
+    BufferItemName(gStringVar2, sFavorLadyPtr->itemId);
 }
 
-static void sub_818DCF4(const u8 *src, u8 *dest)
+static void SetFavorLadyPlayerName(const u8 *src, u8 *dest)
 {
     memset(dest, 0xFF, 8);
     StringCopy7(dest, src);
 }
 
-void sub_818DD14(void)
+void BufferFavorLadyPlayerName(void)
 {
-    gUnknown_0203CD64 = &gSaveBlock1Ptr->lilycoveLady.favour;
-    sub_818DCF4(gUnknown_0203CD64->playerName, gStringVar3);
-    ConvertInternationalString(gStringVar3, gUnknown_0203CD64->language);
+    sFavorLadyPtr = &gSaveBlock1Ptr->lilycoveLady.favor;
+    SetFavorLadyPlayerName(sFavorLadyPtr->playerName, gStringVar3);
+    ConvertInternationalString(gStringVar3, sFavorLadyPtr->language);
 }
 
-bool8 sub_818DD54(void)
+// Only used to determine if a record-mixed player had given her an item she liked
+bool8 DidFavorLadyLikeItem(void)
 {
-    gUnknown_0203CD64 = &gSaveBlock1Ptr->lilycoveLady.favour;
-    return gUnknown_0203CD64->unk_002 ? TRUE : FALSE;
+    sFavorLadyPtr = &gSaveBlock1Ptr->lilycoveLady.favor;
+    return sFavorLadyPtr->likedItem ? TRUE : FALSE;
 }
 
-void sub_818DD78(void)
+void Script_FavorLadyOpenBagMenu(void)
 {
-    sub_81AAC50();
+    FavorLadyOpenBagMenu();
 }
 
-static bool8 sub_818DD84(u16 itemId)
+static bool8 DoesFavorLadyLikeItem(u16 itemId)
 {
-    u8 len;
+    u8 numItems;
     u8 i;
-    bool8 response;
+    bool8 likedItem;
 
-    gUnknown_0203CD64 = &gSaveBlock1Ptr->lilycoveLady.favour;
-    len = sub_818DB04(gUnknown_0860B2EC[gUnknown_0203CD64->unk_00c]);
-    gUnknown_0203CD64->phase = 1;
-    sub_818DCAC(gStringVar2, itemId);
-    gUnknown_0203CD64->itemId = itemId;
-    sub_818DCF4(gSaveBlock2Ptr->playerName, gUnknown_0203CD64->playerName);
-    gUnknown_0203CD64->language = gGameLanguage;
-    response = FALSE;
-    for (i = 0; i < len; i ++)
+    sFavorLadyPtr = &gSaveBlock1Ptr->lilycoveLady.favor;
+    numItems = GetNumAcceptedItems(sFavorLadyAcceptedItemLists[sFavorLadyPtr->favorId]);
+    sFavorLadyPtr->state = LILYCOVE_LADY_STATE_COMPLETED;
+    BufferItemName(gStringVar2, itemId);
+    sFavorLadyPtr->itemId = itemId;
+    SetFavorLadyPlayerName(gSaveBlock2Ptr->playerName, sFavorLadyPtr->playerName);
+    sFavorLadyPtr->language = gGameLanguage;
+    likedItem = FALSE;
+    for (i = 0; i < numItems; i ++)
     {
-        if (gUnknown_0860B2EC[gUnknown_0203CD64->unk_00c][i] == itemId)
+        if (sFavorLadyAcceptedItemLists[sFavorLadyPtr->favorId][i] == itemId)
         {
-            response = TRUE;
-            gUnknown_0203CD64->unk_003 ++;
-            gUnknown_0203CD64->unk_002 = 1;
-            if (gUnknown_0203CD64->unk_010 == itemId)
+            likedItem = TRUE;
+            sFavorLadyPtr->numItemsGiven++;
+            sFavorLadyPtr->likedItem = TRUE;
+            if (sFavorLadyPtr->bestItem == itemId)
             {
-                gUnknown_0203CD64->unk_003 = 5;
+                sFavorLadyPtr->numItemsGiven = LILYCOVE_LADY_GIFT_THRESHOLD;
             }
             break;
         }
-        gUnknown_0203CD64->unk_002 = 0;
+        sFavorLadyPtr->likedItem = FALSE;
     }
-    return response;
+    return likedItem;
 }
 
-bool8 sub_818DE44(void)
+bool8 Script_DoesFavorLadyLikeItem(void)
 {
-    return sub_818DD84(gSpecialVar_ItemId);
+    return DoesFavorLadyLikeItem(gSpecialVar_ItemId);
 }
 
-bool8 sub_818DE5C(void)
+bool8 IsFavorLadyThresholdMet(void)
 {
-    u8 checkval;
+    u8 numItemsGiven;
 
-    gUnknown_0203CD64 = &gSaveBlock1Ptr->lilycoveLady.favour;
-    checkval = gUnknown_0203CD64->unk_003;
-    return checkval < 5 ? FALSE : TRUE;
+    sFavorLadyPtr = &gSaveBlock1Ptr->lilycoveLady.favor;
+    numItemsGiven = sFavorLadyPtr->numItemsGiven;
+    return numItemsGiven < LILYCOVE_LADY_GIFT_THRESHOLD ? FALSE : TRUE;
 }
 
-static void sub_818DE88(u16 itemId)
+static void FavorLadyBufferPrizeName(u16 prize)
 {
-    sub_818DCAC(gStringVar2, itemId);
+    BufferItemName(gStringVar2, prize);
 }
 
-u16 sub_818DEA0(void)
+u16 FavorLadyGetPrize(void)
 {
-    u16 itemId;
+    u16 prize;
 
-    gUnknown_0203CD64 = &gSaveBlock1Ptr->lilycoveLady.favour;
-    itemId = sUnknown_0860B304[gUnknown_0203CD64->unk_00c];
-    sub_818DE88(itemId);
-    gUnknown_0203CD64->phase = 2;
-    return itemId;
+    sFavorLadyPtr = &gSaveBlock1Ptr->lilycoveLady.favor;
+    prize = sFavorLadyPrizes[sFavorLadyPtr->favorId];
+    FavorLadyBufferPrizeName(prize);
+    sFavorLadyPtr->state = LILYCOVE_LADY_STATE_PRIZE;
+    return prize;
 }
 
-void sub_818DEDC(void)
+void SetFavorLadyState_Complete(void)
 {
-    SetLilycoveFavourLady();
-    gUnknown_0203CD64->phase = 1;
+    InitLilycoveFavorLady();
+    sFavorLadyPtr->state = LILYCOVE_LADY_STATE_COMPLETED;
 }
 
-void sub_818DEF4(void)
+void FieldCallback_FavorLadyEnableScriptContexts(void)
 {
     EnableBothScriptContexts();
 }
 
-static void sub_818DF00(void)
+static void QuizLadyPickQuestion(void)
 {
-    u8 v0;
+    u8 questionId;
     u8 i;
 
-    v0 = Random() % 16;
-    for (i = 0; i < 9; i ++)
+    questionId = Random() % ARRAY_COUNT(sQuizLadyQuizQuestions);
+    for (i = 0; i < QUIZ_QUESTION_LEN; i ++)
     {
-        gUnknown_0203CD68->unk_002[i] = gUnknown_0860B1A4[v0][i];
+        sQuizLadyPtr->question[i] = sQuizLadyQuizQuestions[questionId][i];
     }
-    gUnknown_0203CD68->unk_014 = sUnknown_0860B1E4[v0];
-    gUnknown_0203CD68->itemId = sUnknown_0860B204[v0];
-    gUnknown_0203CD68->unk_02b = v0;
-    gUnknown_0203CD68->playerName[0] = EOS;
+    sQuizLadyPtr->correctAnswer = sQuizLadyQuizAnswers[questionId];
+    sQuizLadyPtr->prize = sQuizLadyPrizes[questionId];
+    sQuizLadyPtr->questionId = questionId;
+    sQuizLadyPtr->playerName[0] = EOS;
 }
 
-static void SetLilycoveQuizLady(void)
+static void InitLilycoveQuizLady(void)
 {
     u8 i;
 
-    gUnknown_0203CD68 = &gSaveBlock1Ptr->lilycoveLady.quiz;
-    gUnknown_0203CD68->id = LILYCOVE_LADY_QUIZ;
-    gUnknown_0203CD68->phase = 0;
-    for (i = 0; i < 9; i ++)
+    sQuizLadyPtr = &gSaveBlock1Ptr->lilycoveLady.quiz;
+    sQuizLadyPtr->id = LILYCOVE_LADY_QUIZ;
+    sQuizLadyPtr->state = LILYCOVE_LADY_STATE_READY;
+    for (i = 0; i < QUIZ_QUESTION_LEN; i ++)
     {
-        gUnknown_0203CD68->unk_002[i] = -1;
+        sQuizLadyPtr->question[i] = -1;
     }
-    gUnknown_0203CD68->unk_014 = -1;
-    gUnknown_0203CD68->unk_016 = -1;
-    for (i = 0; i < 4; i ++)
+    sQuizLadyPtr->correctAnswer = -1;
+    sQuizLadyPtr->playerAnswer = -1;
+    for (i = 0; i < TRAINER_ID_LENGTH; i ++)
     {
-        gUnknown_0203CD68->playerTrainerId[i] = 0;
+        sQuizLadyPtr->playerTrainerId[i] = 0;
     }
-    gUnknown_0203CD68->itemId = ITEM_NONE;
-    gUnknown_0203CD68->unk_02a = 0;
-    gUnknown_0203CD68->unk_02c = 0x10;
-    gUnknown_0203CD68->language = gGameLanguage;
-    sub_818DF00();
+    sQuizLadyPtr->prize = ITEM_NONE;
+    sQuizLadyPtr->waitingForChallenger = FALSE;
+    sQuizLadyPtr->prevQuestionId = ARRAY_COUNT(sQuizLadyQuizQuestions);
+    sQuizLadyPtr->language = gGameLanguage;
+    QuizLadyPickQuestion();
 }
 
-static void sub_818E004(void)
+static void ResetQuizLadyForRecordMix(void)
 {
-    gUnknown_0203CD68 = &gSaveBlock1Ptr->lilycoveLady.quiz;
-    gUnknown_0203CD68->id = LILYCOVE_LADY_QUIZ;
-    gUnknown_0203CD68->phase = 0;
-    gUnknown_0203CD68->unk_02a = 0;
-    gUnknown_0203CD68->unk_016 = -1;
+    sQuizLadyPtr = &gSaveBlock1Ptr->lilycoveLady.quiz;
+    sQuizLadyPtr->id = LILYCOVE_LADY_QUIZ;
+    sQuizLadyPtr->state = LILYCOVE_LADY_STATE_READY;
+    sQuizLadyPtr->waitingForChallenger = FALSE;
+    sQuizLadyPtr->playerAnswer = -1;
 }
 
-u8 sub_818E038(void)
+u8 GetQuizLadyState(void)
 {
-    gUnknown_0203CD68 = &gSaveBlock1Ptr->lilycoveLady.quiz;
-    if (gUnknown_0203CD68->phase == 2)
+    sQuizLadyPtr = &gSaveBlock1Ptr->lilycoveLady.quiz;
+    if (sQuizLadyPtr->state == LILYCOVE_LADY_STATE_PRIZE)
     {
-        return 2;
+        return LILYCOVE_LADY_STATE_PRIZE;
     }
-    else if (gUnknown_0203CD68->phase == 1)
+    else if (sQuizLadyPtr->state == LILYCOVE_LADY_STATE_COMPLETED)
     {
-        return 1;
+        return LILYCOVE_LADY_STATE_COMPLETED;
     }
     else
     {
-        return 0;
+        return LILYCOVE_LADY_STATE_READY;
     }
 }
 
-u8 sub_818E06C(void)
+u8 GetQuizAuthor(void)
 {
     int i;
     int j;
-    u8 rv;
+    u8 authorNameId;
     struct LilycoveLadyQuiz *quiz;
 
     quiz = &gSaveBlock1Ptr->lilycoveLady.quiz;
-    if (sub_811F8D8(quiz->unk_014) == 0)
-   {
-        i = quiz->unk_02b;
+    if (sub_811F8D8(quiz->correctAnswer) == 0)
+    {
+        i = quiz->questionId;
         do
         {
-            if (++ i >= 16)
+            if (++ i >= (int)(ARRAY_COUNT(sQuizLadyQuizQuestions)))
             {
                 i = 0;
             }
-        } while (sub_811F8D8(sUnknown_0860B1E4[i]) == 0);
-        for (j = 0; j < 9; j ++)
+        } while (sub_811F8D8(sQuizLadyQuizAnswers[i]) == 0);
+        for (j = 0; j < QUIZ_QUESTION_LEN; j ++)
         {
-            quiz->unk_002[j] = gUnknown_0860B1A4[i][j];
+            quiz->question[j] = sQuizLadyQuizQuestions[i][j];
         }
-        quiz->unk_014 = sUnknown_0860B1E4[i];
-        quiz->itemId = sUnknown_0860B204[i];
-        quiz->unk_02b = i;
+        quiz->correctAnswer = sQuizLadyQuizAnswers[i];
+        quiz->prize = sQuizLadyPrizes[i];
+        quiz->questionId = i;
         quiz->playerName[0] = EOS;
     }
-    rv = sub_818E13C();
-    if (rv == 0)
+    authorNameId = BufferQuizAuthorName();
+    if (authorNameId == QUIZ_AUTHOR_NAME_LADY)
     {
-        return 2;
+        return QUIZ_AUTHOR_LADY;
     }
-    else if (rv == 2 || sub_818E1F4())
+    else if (authorNameId == QUIZ_AUTHOR_NAME_OTHER_PLAYER || IsQuizTrainerIdNotPlayer())
     {
-        return 1;
+        return QUIZ_AUTHOR_OTHER_PLAYER;
     }
     else
     {
-        return 0;
+        return QUIZ_AUTHOR_PLAYER;
     }
 }
 
-static u8 sub_818E13C(void)
+static u8 BufferQuizAuthorName(void)
 {
-    u8 retval;
-    u8 len;
+    u8 authorNameId;
+    u8 nameLen;
     u8 i;
 
-    retval = 1;
-    gUnknown_0203CD68 = &gSaveBlock1Ptr->lilycoveLady.quiz;
-    if (gUnknown_0203CD68->playerName[0] == EOS)
+    authorNameId = QUIZ_AUTHOR_NAME_PLAYER;
+    sQuizLadyPtr = &gSaveBlock1Ptr->lilycoveLady.quiz;
+    if (sQuizLadyPtr->playerName[0] == EOS)
     {
-        StringCopy7(gStringVar1, gText_Lady2);
-        retval = 0;
+        StringCopy7(gStringVar1, gText_QuizLady_Lady);
+        authorNameId = QUIZ_AUTHOR_NAME_LADY;
     }
     else
     {
-        StringCopy7(gStringVar1, gUnknown_0203CD68->playerName);
-        ConvertInternationalString(gStringVar1, gUnknown_0203CD68->language);
-        len = sub_818E258(gUnknown_0203CD68->playerName);
-        if (len == sub_818E258(gSaveBlock2Ptr->playerName))
+        StringCopy7(gStringVar1, sQuizLadyPtr->playerName);
+        ConvertInternationalString(gStringVar1, sQuizLadyPtr->language);
+        nameLen = GetPlayerNameLength(sQuizLadyPtr->playerName);
+        if (nameLen == GetPlayerNameLength(gSaveBlock2Ptr->playerName))
         {
-            u8 *name = gUnknown_0203CD68->playerName;
-            for (i = 0; i < len; i ++)
+            u8 *name = sQuizLadyPtr->playerName;
+            for (i = 0; i < nameLen; i ++)
             {
-                name = gUnknown_0203CD68->playerName;
+                name = sQuizLadyPtr->playerName;
                 if (name[i] != gSaveBlock2Ptr->playerName[i])
                 {
-                    retval = 2;
+                    authorNameId = QUIZ_AUTHOR_NAME_OTHER_PLAYER;
                     break;
                 }
             }
         }
 
     }
-    return retval;
+    return authorNameId;
 }
 
-static u8 sub_818E1F4(void)
+static bool8 IsQuizTrainerIdNotPlayer(void)
 {
-    bool8 response;
+    bool8 notPlayer;
     u8 i;
 
-    gUnknown_0203CD68 = &gSaveBlock1Ptr->lilycoveLady.quiz;
-    response = FALSE;
-    for (i = 0; i < 4; i ++)
+    sQuizLadyPtr = &gSaveBlock1Ptr->lilycoveLady.quiz;
+    notPlayer = FALSE;
+    for (i = 0; i < TRAINER_ID_LENGTH; i ++)
     {
-        if (gUnknown_0203CD68->playerTrainerId[i] != gSaveBlock2Ptr->playerTrainerId[i])
+        if (sQuizLadyPtr->playerTrainerId[i] != gSaveBlock2Ptr->playerTrainerId[i])
         {
-            response = TRUE;
+            notPlayer = TRUE;
             break;
         }
     }
-    return response;
+    return notPlayer;
 }
 
-static u8 sub_818E258(const u8 *str)
+static u8 GetPlayerNameLength(const u8 *playerName)
 {
     u8 len;
     const u8 *ptr;
 
-    for (len = 0, ptr = str; *ptr != EOS; len ++, ptr ++);
+    for (len = 0, ptr = playerName; *ptr != EOS; len ++, ptr ++);
     return len;
 }
 
-void sub_818E274(void)
+void BufferQuizPrizeName(void)
 {
-    StringCopy(gStringVar1, ItemId_GetName(gUnknown_0203CD68->itemId));
+    StringCopy(gStringVar1, ItemId_GetName(sQuizLadyPtr->prize));
 }
 
-bool8 sub_818E298(void)
+bool8 BufferQuizAuthorNameAndCheckIfLady(void)
 {
-    gUnknown_0203CD68 = &gSaveBlock1Ptr->lilycoveLady.quiz;
-    if (!sub_818E13C())
+    sQuizLadyPtr = &gSaveBlock1Ptr->lilycoveLady.quiz;
+    if (BufferQuizAuthorName() == QUIZ_AUTHOR_NAME_LADY)
     {
-        gUnknown_0203CD68->language = gGameLanguage;
+        sQuizLadyPtr->language = gGameLanguage;
         return TRUE;
     }
     return FALSE;
 }
 
-u8 sub_818E2D8(void)
+bool8 IsQuizLadyWaitingForChallenger(void)
 {
-    gUnknown_0203CD68 = &gSaveBlock1Ptr->lilycoveLady.quiz;
-    return gUnknown_0203CD68->unk_02a;
+    sQuizLadyPtr = &gSaveBlock1Ptr->lilycoveLady.quiz;
+    return sQuizLadyPtr->waitingForChallenger;
 }
 
-void sub_818E2FC(void)
+void QuizLadyGetPlayerAnswer(void)
 {
     ShowEasyChatScreen();
 }
 
-bool8 sub_818E308(void)
+bool8 IsQuizAnswerCorrect(void)
 {
-    gUnknown_0203CD68 = &gSaveBlock1Ptr->lilycoveLady.quiz;
-    CopyEasyChatWord(gStringVar1, gUnknown_0203CD68->unk_014);
-    CopyEasyChatWord(gStringVar2, gUnknown_0203CD68->unk_016);
+    sQuizLadyPtr = &gSaveBlock1Ptr->lilycoveLady.quiz;
+    CopyEasyChatWord(gStringVar1, sQuizLadyPtr->correctAnswer);
+    CopyEasyChatWord(gStringVar2, sQuizLadyPtr->playerAnswer);
     return StringCompare(gStringVar1, gStringVar2) ? FALSE : TRUE;
 }
 
-void sub_818E358(void)
+void BufferQuizPrizeItem(void)
 {
-    gUnknown_0203CD68 = &gSaveBlock1Ptr->lilycoveLady.quiz;
-    gSpecialVar_0x8005 = gUnknown_0203CD68->itemId;
+    sQuizLadyPtr = &gSaveBlock1Ptr->lilycoveLady.quiz;
+    gSpecialVar_0x8005 = sQuizLadyPtr->prize;
 }
 
-void sub_818E37C(void)
+void SetQuizLadyState_Complete(void) 
 {
-    gUnknown_0203CD68 = &gSaveBlock1Ptr->lilycoveLady.quiz;
-    gUnknown_0203CD68->phase = 1;
+    sQuizLadyPtr = &gSaveBlock1Ptr->lilycoveLady.quiz;
+    sQuizLadyPtr->state = LILYCOVE_LADY_STATE_COMPLETED;
 }
 
-void sub_818E39C(void)
+void SetQuizLadyState_GivePrize(void)
 {
-    gUnknown_0203CD68 = &gSaveBlock1Ptr->lilycoveLady.quiz;
-    gUnknown_0203CD68->phase = 2;
+    sQuizLadyPtr = &gSaveBlock1Ptr->lilycoveLady.quiz;
+    sQuizLadyPtr->state = LILYCOVE_LADY_STATE_PRIZE;
 }
 
-void sub_818E3BC(void)
+void ClearQuizLadyPlayerAnswer(void)
 {
-    gUnknown_0203CD68 = &gSaveBlock1Ptr->lilycoveLady.quiz;
-    gUnknown_0203CD68->unk_016 = -1;
+    sQuizLadyPtr = &gSaveBlock1Ptr->lilycoveLady.quiz;
+    sQuizLadyPtr->playerAnswer = -1;
 }
 
-void sub_818E3E0(void)
+void Script_QuizLadyOpenBagMenu(void)
 {
-    sub_81AAC70();
+    QuizLadyOpenBagMenu();
 }
 
-void sub_818E3EC(void)
+void QuizLadyPickNewQuestion(void)
 {
-    gUnknown_0203CD68 = &gSaveBlock1Ptr->lilycoveLady.quiz;
-    if (sub_818E298())
+    sQuizLadyPtr = &gSaveBlock1Ptr->lilycoveLady.quiz;
+    if (BufferQuizAuthorNameAndCheckIfLady())
     {
-        gUnknown_0203CD68->unk_02c = gUnknown_0203CD68->unk_02b;
+        sQuizLadyPtr->prevQuestionId = sQuizLadyPtr->questionId;
     }
     else
     {
-        gUnknown_0203CD68->unk_02c = 0x10;
+        sQuizLadyPtr->prevQuestionId = ARRAY_COUNT(sQuizLadyQuizQuestions);
     }
-    sub_818DF00();
+    QuizLadyPickQuestion();
 }
 
-void sub_818E430(void)
+void ClearQuizLadyQuestionAndAnswer(void)
 {
     u8 i;
 
-    gUnknown_0203CD68 = &gSaveBlock1Ptr->lilycoveLady.quiz;
-    for (i = 0; i < 9; i ++)
+    sQuizLadyPtr = &gSaveBlock1Ptr->lilycoveLady.quiz;
+    for (i = 0; i < QUIZ_QUESTION_LEN; i ++)
     {
-        gUnknown_0203CD68->unk_002[i] = -1;
+        sQuizLadyPtr->question[i] = -1;
     }
-    gUnknown_0203CD68->unk_014 = -1;
+    sQuizLadyPtr->correctAnswer = -1;
 }
 
-void sub_818E47C(void)
+void QuizLadySetCustomQuestion(void)
 {
     gSpecialVar_0x8004 = EASY_CHAT_TYPE_QUIZ_SET_QUESTION;
     ShowEasyChatScreen();
 }
 
-void sub_818E490(void)
+void QuizLadyTakePrizeForCustomQuiz(void)
 {
     RemoveBagItem(gSpecialVar_ItemId, 1);
 }
 
-void sub_818E4A4(void)
+void QuizLadyRecordCustomQuizData(void)
 {
     u8 i;
 
-    gUnknown_0203CD68 = &gSaveBlock1Ptr->lilycoveLady.quiz;
-    gUnknown_0203CD68->itemId = gSpecialVar_ItemId;
-    for (i = 0; i < 4; i ++)
+    sQuizLadyPtr = &gSaveBlock1Ptr->lilycoveLady.quiz;
+    sQuizLadyPtr->prize = gSpecialVar_ItemId;
+    for (i = 0; i < TRAINER_ID_LENGTH; i ++)
     {
-        gUnknown_0203CD68->playerTrainerId[i] = gSaveBlock2Ptr->playerTrainerId[i];
+        sQuizLadyPtr->playerTrainerId[i] = gSaveBlock2Ptr->playerTrainerId[i];
     }
-    StringCopy7(gUnknown_0203CD68->playerName, gSaveBlock2Ptr->playerName);
-    gUnknown_0203CD68->language = gGameLanguage;
+    StringCopy7(sQuizLadyPtr->playerName, gSaveBlock2Ptr->playerName);
+    sQuizLadyPtr->language = gGameLanguage;
 }
 
-void sub_818E510(void)
+void QuizLadySetWaitingForChallenger(void)
 {
-    gUnknown_0203CD68 = &gSaveBlock1Ptr->lilycoveLady.quiz;
-    gUnknown_0203CD68->unk_02a = 1;
+    sQuizLadyPtr = &gSaveBlock1Ptr->lilycoveLady.quiz;
+    sQuizLadyPtr->waitingForChallenger = TRUE;
 }
 
-void sub_818E538(void)
+void BufferQuizCorrectAnswer(void)
 {
-    gUnknown_0203CD68 = &gSaveBlock1Ptr->lilycoveLady.quiz;
-    CopyEasyChatWord(gStringVar3, gUnknown_0203CD68->unk_014);
+    sQuizLadyPtr = &gSaveBlock1Ptr->lilycoveLady.quiz;
+    CopyEasyChatWord(gStringVar3, sQuizLadyPtr->correctAnswer);
 }
 
-void sub_818E564(void)
+
+void FieldCallback_QuizLadyEnableScriptContexts(void)
 {
     EnableBothScriptContexts();
 }
 
-void sub_818E570(const LilycoveLady *lilycoveLady)
+void QuizLadyClearQuestionForRecordMix(const LilycoveLady *lilycoveLady)
 {
     u8 i;
 
-    gUnknown_0203CD68 = &gSaveBlock1Ptr->lilycoveLady.quiz;
-    if (lilycoveLady->quiz.unk_02c < 16 && gUnknown_0203CD68->id == LILYCOVE_LADY_QUIZ)
+    sQuizLadyPtr = &gSaveBlock1Ptr->lilycoveLady.quiz;
+    if (lilycoveLady->quiz.prevQuestionId < ARRAY_COUNT(sQuizLadyQuizQuestions) 
+        && sQuizLadyPtr->id == LILYCOVE_LADY_QUIZ)
     {
         for (i = 0; i < 4; i ++)
         {
-            if (lilycoveLady->quiz.unk_02c != gUnknown_0203CD68->unk_02b)
+            if (lilycoveLady->quiz.prevQuestionId != sQuizLadyPtr->questionId)
             {
                 break;
             }
-            gUnknown_0203CD68->unk_02b = Random() % 16;
+            sQuizLadyPtr->questionId = Random() % ARRAY_COUNT(sQuizLadyQuizQuestions);
         }
-        if (lilycoveLady->quiz.unk_02c == gUnknown_0203CD68->unk_02b)
+        if (lilycoveLady->quiz.prevQuestionId == sQuizLadyPtr->questionId)
         {
-            gUnknown_0203CD68->unk_02b = (gUnknown_0203CD68->unk_02b + 1) % 16;
+            sQuizLadyPtr->questionId = (sQuizLadyPtr->questionId + 1) % (int)(ARRAY_COUNT(sQuizLadyQuizQuestions));
         }
-        gUnknown_0203CD68->unk_02c = lilycoveLady->quiz.unk_02c;
+        sQuizLadyPtr->prevQuestionId = lilycoveLady->quiz.prevQuestionId;
     }
 }
 
-static void sub_818E604(void)
+static void ResetContestLadyContestData(void)
 {
-    gUnknown_0203CD6C->playerName[0] = EOS;
-    gUnknown_0203CD6C->fave_pkblk = 0;
-    gUnknown_0203CD6C->other_pkblk = 0;
-    gUnknown_0203CD6C->max_sheen = 0;
-    gUnknown_0203CD6C->category = Random() % 5;
+    sContestLadyPtr->playerName[0] = EOS;
+    sContestLadyPtr->numGoodPokeblocksGiven = 0;
+    sContestLadyPtr->numOtherPokeblocksGiven = 0;
+    sContestLadyPtr->maxSheen = 0;
+    sContestLadyPtr->category = Random() % CONTEST_CATEGORIES_COUNT;
 }
 
-static void SetLilycoveContestLady(void)
+static void InitLilycoveContestLady(void)
 {
-    gUnknown_0203CD6C = &gSaveBlock1Ptr->lilycoveLady.contest;
-    gUnknown_0203CD6C->id = LILYCOVE_LADY_CONTEST;
-    gUnknown_0203CD6C->phase = 0;
-    sub_818E604();
-    gUnknown_0203CD6C->language = gGameLanguage;
+    sContestLadyPtr = &gSaveBlock1Ptr->lilycoveLady.contest;
+    sContestLadyPtr->id = LILYCOVE_LADY_CONTEST;
+    sContestLadyPtr->givenPokeblock = FALSE;
+    ResetContestLadyContestData();
+    sContestLadyPtr->language = gGameLanguage;
 }
 
-static void sub_818E674(void)
+static void ResetContestLadyForRecordMix(void)
 {
-    gUnknown_0203CD6C = &gSaveBlock1Ptr->lilycoveLady.contest;
-    gUnknown_0203CD6C->id = LILYCOVE_LADY_CONTEST;
-    gUnknown_0203CD6C->phase = 0;
-    if (gUnknown_0203CD6C->fave_pkblk == 5 || gUnknown_0203CD6C->other_pkblk == 5)
+    sContestLadyPtr = &gSaveBlock1Ptr->lilycoveLady.contest;
+    sContestLadyPtr->id = LILYCOVE_LADY_CONTEST;
+    sContestLadyPtr->givenPokeblock = FALSE;
+    if (sContestLadyPtr->numGoodPokeblocksGiven == LILYCOVE_LADY_GIFT_THRESHOLD 
+     || sContestLadyPtr->numOtherPokeblocksGiven == LILYCOVE_LADY_GIFT_THRESHOLD)
     {
-        sub_818E604();
+        ResetContestLadyContestData();
     }
 }
 
-static void sub_818E6B0(u8 sheen)
+static void ContestLadySavePlayerNameIfHighSheen(u8 sheen)
 {
-    gUnknown_0203CD6C = &gSaveBlock1Ptr->lilycoveLady.contest;
-    if (gUnknown_0203CD6C->max_sheen <= sheen)
+    sContestLadyPtr = &gSaveBlock1Ptr->lilycoveLady.contest;
+    if (sContestLadyPtr->maxSheen <= sheen)
     {
-        gUnknown_0203CD6C->max_sheen = sheen;
-        memset(gUnknown_0203CD6C->playerName, EOS, sizeof(gUnknown_0203CD6C->playerName));
-        memcpy(gUnknown_0203CD6C->playerName, gSaveBlock2Ptr->playerName, sizeof(gUnknown_0203CD6C->playerName));
-        gUnknown_0203CD6C->language = gGameLanguage;
+        sContestLadyPtr->maxSheen = sheen;
+        memset(sContestLadyPtr->playerName, EOS, sizeof(sContestLadyPtr->playerName));
+        memcpy(sContestLadyPtr->playerName, gSaveBlock2Ptr->playerName, sizeof(sContestLadyPtr->playerName));
+        sContestLadyPtr->language = gGameLanguage;
     }
 }
 
 bool8 GivePokeblockToContestLady(struct Pokeblock *pokeblock)
 {
-    u8 sheen;
-    bool8 response;
+    u8 sheen = 0;
+    bool8 correctFlavor = FALSE;
 
-    sheen = 0;
-    response = FALSE;
-    gUnknown_0203CD6C = &gSaveBlock1Ptr->lilycoveLady.contest;
-    switch (gUnknown_0203CD6C->category)
+    sContestLadyPtr = &gSaveBlock1Ptr->lilycoveLady.contest;
+    switch (sContestLadyPtr->category)
     {
-        case 0:
+        case CONTEST_CATEGORY_COOL:
             if (pokeblock->spicy != 0)
             {
                 sheen = pokeblock->spicy;
-                response = TRUE;
+                correctFlavor = TRUE;
             }
             break;
-        case 1:
+        case CONTEST_CATEGORY_BEAUTY:
             if (pokeblock->dry != 0)
             {
                 sheen = pokeblock->dry;
-                response = TRUE;
+                correctFlavor = TRUE;
             }
             break;
-        case 2:
+        case CONTEST_CATEGORY_CUTE:
             if (pokeblock->sweet != 0)
             {
                 sheen = pokeblock->sweet;
-                response = TRUE;
+                correctFlavor = TRUE;
             }
             break;
-        case 3:
+        case CONTEST_CATEGORY_SMART:
             if (pokeblock->bitter != 0)
             {
                 sheen = pokeblock->bitter;
-                response = TRUE;
+                correctFlavor = TRUE;
             }
             break;
-        case 4:
+        case CONTEST_CATEGORY_TOUGH:
             if (pokeblock->sour != 0)
             {
                 sheen = pokeblock->sour;
-                response = TRUE;
+                correctFlavor = TRUE;
             }
             break;
     }
-    if (response == TRUE)
+    if (correctFlavor == TRUE)
     {
-        sub_818E6B0(sheen);
-        gUnknown_0203CD6C->fave_pkblk ++;
+        ContestLadySavePlayerNameIfHighSheen(sheen);
+        sContestLadyPtr->numGoodPokeblocksGiven++;
     }
     else
     {
-        gUnknown_0203CD6C->other_pkblk ++;
+        sContestLadyPtr->numOtherPokeblocksGiven++;
     }
-    return response;
+    return correctFlavor;
 }
 
-static void sub_818E794(u8 *dest1, u8 *dest2)
+static void BufferContestLadyCategoryAndMonName(u8 *dest1, u8 *dest2)
 {
-    gUnknown_0203CD6C = &gSaveBlock1Ptr->lilycoveLady.contest;
-    StringCopy(dest1, gUnknown_0860B324[gUnknown_0203CD6C->category]);
-    StringCopy10(dest2, gUnknown_0860B310[gUnknown_0203CD6C->category]);
+    sContestLadyPtr = &gSaveBlock1Ptr->lilycoveLady.contest;
+    StringCopy(dest1, sContestLadyCategoryNames[sContestLadyPtr->category]);
+    StringCopy10(dest2, sContestLadyMonNames[sContestLadyPtr->category]);
 }
 
-void sub_818E7E0(u8 *dest1, u8 *dest2)
+void BufferContestLadyMonName(u8 *dest1, u8 *dest2)
 {
-    gUnknown_0203CD6C = &gSaveBlock1Ptr->lilycoveLady.contest;
-    *dest1 = gUnknown_0203CD6C->category;
-    StringCopy(dest2, gUnknown_0860B310[gUnknown_0203CD6C->category]);
+    sContestLadyPtr = &gSaveBlock1Ptr->lilycoveLady.contest;
+    *dest1 = sContestLadyPtr->category;
+    StringCopy(dest2, sContestLadyMonNames[sContestLadyPtr->category]);
 }
 
-void sub_818E81C(u8 *dest)
+void BufferContestLadyPlayerName(u8 *dest)
 {
-    gUnknown_0203CD6C = &gSaveBlock1Ptr->lilycoveLady.contest;
-    StringCopy(dest, gUnknown_0203CD6C->playerName);
+    sContestLadyPtr = &gSaveBlock1Ptr->lilycoveLady.contest;
+    StringCopy(dest, sContestLadyPtr->playerName);
 }
 
-void sub_818E848(u8 *dest)
+void BufferContestLadyLanguage(u8 *dest)
 {
-    gUnknown_0203CD6C = &gSaveBlock1Ptr->lilycoveLady.contest;
-    *dest = gUnknown_0203CD6C->language;
+    sContestLadyPtr = &gSaveBlock1Ptr->lilycoveLady.contest;
+    *dest = sContestLadyPtr->language;
 }
 
-void sub_818E868(u8 *dest, u8 category)
+void BufferContestName(u8 *dest, u8 category)
 {
-    StringCopy(dest, gUnknown_0860B338[category]);
+    StringCopy(dest, sContestNames[category]);
 }
 
+// used in tv.c to determine sTVShowState for Contest Lady show
+// if return val is 1, sTVShowState is 1
+// if return val is 2, sTVShowState is 3
+// if return val is 0, sTVShowState is 2
 u8 sub_818E880(void)
 {
-    gUnknown_0203CD6C = &gSaveBlock1Ptr->lilycoveLady.contest;
-    if (gUnknown_0203CD6C->fave_pkblk >= 5)
+    sContestLadyPtr = &gSaveBlock1Ptr->lilycoveLady.contest;
+    if (sContestLadyPtr->numGoodPokeblocksGiven >= LILYCOVE_LADY_GIFT_THRESHOLD)
     {
         return 1;
     }
-    else if (gUnknown_0203CD6C->fave_pkblk == 0)
+    else if (sContestLadyPtr->numGoodPokeblocksGiven == 0)
     {
         return 2;
     }
@@ -973,53 +783,54 @@ u8 sub_818E880(void)
     }
 }
 
-bool8 sub_818E8B4(void)
+
+bool8 HasPlayerGivenContestLadyPokeblock(void)
 {
-    gUnknown_0203CD6C = &gSaveBlock1Ptr->lilycoveLady.contest;
-    if (gUnknown_0203CD6C->phase == 1)
+    sContestLadyPtr = &gSaveBlock1Ptr->lilycoveLady.contest;
+    if (sContestLadyPtr->givenPokeblock == TRUE)
     {
         return TRUE;
     }
     return FALSE;
 }
 
-bool8 sub_818E8E0(void)
+bool8 ShouldContestLadyShowGoOnAir(void)
 {
-    bool8 response;
+    bool8 putOnAir = FALSE;
 
-    response = FALSE;
-    gUnknown_0203CD6C = &gSaveBlock1Ptr->lilycoveLady.contest;
-    if (gUnknown_0203CD6C->fave_pkblk >= 5 || gUnknown_0203CD6C->other_pkblk >= 5)
+    sContestLadyPtr = &gSaveBlock1Ptr->lilycoveLady.contest;
+    if (sContestLadyPtr->numGoodPokeblocksGiven >= LILYCOVE_LADY_GIFT_THRESHOLD 
+     || sContestLadyPtr->numOtherPokeblocksGiven >= LILYCOVE_LADY_GIFT_THRESHOLD)
     {
-        response = TRUE;
+        putOnAir = TRUE;
     }
-    return response;
+    return putOnAir;
 }
 
-void sub_818E914(void)
+void Script_BufferContestLadyCategoryAndMonName(void)
 {
-    sub_818E794(gStringVar2, gStringVar1);
+    BufferContestLadyCategoryAndMonName(gStringVar2, gStringVar1);
 }
 
-void sub_818E92C(void)
+void OpenPokeblockCaseForContestLady(void)
 {
     OpenPokeblockCase(3, CB2_ReturnToField);
 }
 
-void sub_818E940(void)
+void SetContestLadyGivenPokeblock(void)
 {
-    gUnknown_0203CD6C = &gSaveBlock1Ptr->lilycoveLady.contest;
-    gUnknown_0203CD6C->phase = 1;
+    sContestLadyPtr = &gSaveBlock1Ptr->lilycoveLady.contest;
+    sContestLadyPtr->givenPokeblock = TRUE;
 }
 
-void sub_818E960(void)
+void GetContestLadyMonSpecies(void)
 {
-    gUnknown_0203CD6C = &gSaveBlock1Ptr->lilycoveLady.contest;
-    gSpecialVar_0x8005 = sUnknown_0860B34C[gUnknown_0203CD6C->category];
+    sContestLadyPtr = &gSaveBlock1Ptr->lilycoveLady.contest;
+    gSpecialVar_0x8005 = sContestLadyMonSpecies[sContestLadyPtr->category];
 }
 
-u8 sub_818E990(void)
+u8 GetContestLadyCategory(void)
 {
-    gUnknown_0203CD6C = &gSaveBlock1Ptr->lilycoveLady.contest;
-    return gUnknown_0203CD6C->category;
+    sContestLadyPtr = &gSaveBlock1Ptr->lilycoveLady.contest;
+    return sContestLadyPtr->category;
 }

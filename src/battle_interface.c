@@ -1536,7 +1536,7 @@ u8 CreatePartyStatusSummarySprites(u8 battlerId, struct HpAndStatus *partyInfo, 
     if (isOpponent)
     {
         gSprites[summaryBarSpriteId].pos1.x -= 96;
-        gSprites[summaryBarSpriteId].oam.matrixNum = 8;
+        gSprites[summaryBarSpriteId].oam.matrixNum = ST_OAM_HFLIP;
     }
     else
     {
