@@ -450,14 +450,14 @@ static bool32 TryWriteTrainerHill_r(struct EReaderTrainerHillSet *ttdata, struct
     memset(buffer2, 0, 0x1000);
     buffer2->unkField_0 = ttdata->count;
     buffer2->unused1 = sub_81D38D4();
-    buffer2->unkField_2 = (ttdata->count + 1) / 2;
+    buffer2->numFloors = (ttdata->count + 1) / 2;
 
     for (i = 0; i < ttdata->count; i++)
     {
         if (!(i & 1))
         {
             buffer2->floors[i / 2].unk0 = ttdata->unk_8[i].unk0;
-            memcpy(buffer2->floors[i / 2].data, ttdata->unk_8[i].unk14C, 0x124);
+            buffer2->floors[i / 2].display = ttdata->unk_8[i].unk14C;
             buffer2->floors[i / 2].trainers[0] = ttdata->unk_8[i].unk4;
         }
         else
@@ -472,7 +472,7 @@ static bool32 TryWriteTrainerHill_r(struct EReaderTrainerHillSet *ttdata, struct
         buffer2->floors[i / 2].trainers[1] = sTrainerHillTrainerTemplates_JP[i / 2];
     }
 
-    buffer2->checksum = CalcByteArraySum((u8 *)buffer2->floors, sizeof(buffer2->floors));
+    buffer2->checksum = CalcByteArraySum((u8 *)buffer2->floors, 4 * sizeof(struct TrHillFloor));
     if (TryWriteSpecialSaveSection(SECTOR_ID_TRAINER_HILL, (u8 *)buffer2) != 1)
         return FALSE;
 

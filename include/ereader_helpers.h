@@ -7,11 +7,7 @@ struct EReaderTrainerHillTrainer
 {
     u8 unk0;
     struct TrainerHillTrainer unk4;
-    u8 unk14C[0x100];
-    u16 unk24C[16];
-    u8 coords[2];
-    u8 direction;
-    u8 range;
+    struct TrHillDisplay unk14C;
     u32 checksum;
 }; // size=0x274
 
