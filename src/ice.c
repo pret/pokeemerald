@@ -735,7 +735,7 @@ void AnimSwirlingSnowball_Step2(struct Sprite *sprite)
 void AnimSwirlingSnowball_Step3(struct Sprite *sprite)
 {
     s16 tempVar;
-    tempVar = GetBattlerSide(gBattleAnimAttacker) != 0 ? 20 : -20;
+    tempVar = GetBattlerSide(gBattleAnimAttacker) != B_SIDE_PLAYER ? 20 : -20;
 
     if (sprite->data[5] <= 31)
     {

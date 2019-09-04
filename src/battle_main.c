@@ -5592,7 +5592,7 @@ static void HandleAction_UseItem(void)
             else
             {
                 PREPARE_STAT_BUFFER(gBattleTextBuff1, STAT_ATK)
-                PREPARE_STRING_BUFFER(gBattleTextBuff2, 0xD2)
+                PREPARE_STRING_BUFFER(gBattleTextBuff2, CHAR_X)
 
                 while (!((*(gBattleStruct->AI_itemFlags + (gBattlerAttacker >> 1))) & 1))
                 {
