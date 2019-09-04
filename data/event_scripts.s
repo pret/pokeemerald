@@ -3595,139 +3595,139 @@ gContestPaintingTough3::
 	.string "The mighty tough\n"
 	.string "hyper POKéMON {STR_VAR_1}$"
 
-gUnknown_0827ECBC:: @ 27ECBC
+gTrickHouse_Mechadoll1_Q1A1:: @ 27ECBC
 	.string "ODDISH$"
 
-gUnknown_0827ECC3:: @ 27ECC3
+gTrickHouse_Mechadoll1_Q1A2:: @ 27ECC3
 	.string "POOCHYENA$"
 
-gUnknown_0827ECCD:: @ 27ECCD
+gTrickHouse_Mechadoll1_Q1A3:: @ 27ECCD
 	.string "TAILLOW$"
 
-gUnknown_0827ECD5:: @ 27ECD5
+gTrickHouse_Mechadoll1_Q2A1:: @ 27ECD5
 	.string "AZURILL$"
 
-gUnknown_0827ECDD:: @ 27ECDD
+gTrickHouse_Mechadoll1_Q2A2:: @ 27ECDD
 	.string "LOTAD$"
 
-gUnknown_0827ECE3:: @ 27ECE3
+gTrickHouse_Mechadoll1_Q2A3:: @ 27ECE3
 	.string "WINGULL$"
 
-gUnknown_0827ECEB:: @ 27ECEB
+gTrickHouse_Mechadoll1_Q3A1:: @ 27ECEB
 	.string "DUSTOX$"
 
-gUnknown_0827ECF2:: @ 27ECF2
+gTrickHouse_Mechadoll1_Q3A2:: @ 27ECF2
 	.string "ZUBAT$"
 
-gUnknown_0827ECF8:: @ 27ECF8
+gTrickHouse_Mechadoll1_Q3A3:: @ 27ECF8
 	.string "NINCADA$"
 
-gUnknown_0827ED00:: @ 27ED00
+gTrickHouse_Mechadoll2_Q1A1:: @ 27ED00
 	.string "RALTS$"
 
-gUnknown_0827ED06:: @ 27ED06
+gTrickHouse_Mechadoll2_Q1A2:: @ 27ED06
 	.string "ZIGZAGOON$"
 
-gUnknown_0827ED10:: @ 27ED10
+gTrickHouse_Mechadoll2_Q1A3:: @ 27ED10
 	.string "SLAKOTH$"
 
-gUnknown_0827ED18:: @ 27ED18
+gTrickHouse_Mechadoll2_Q2A1:: @ 27ED18
 	.string "POOCHYENA$"
 
-gUnknown_0827ED22:: @ 27ED22
+gTrickHouse_Mechadoll2_Q2A2:: @ 27ED22
 	.string "SHROOMISH$"
 
-gUnknown_0827ED2C:: @ 27ED2C
+gTrickHouse_Mechadoll2_Q2A3:: @ 27ED2C
 	.string "ZIGZAGOON$"
 
-gUnknown_0827ED36:: @ 27ED36
+gTrickHouse_Mechadoll2_Q3A1:: @ 27ED36
 	.string "POOCHYENA$"
 
-gUnknown_0827ED40:: @ 27ED40
+gTrickHouse_Mechadoll2_Q3A2:: @ 27ED40
 	.string "ZUBAT$"
 
-gUnknown_0827ED46:: @ 27ED46
+gTrickHouse_Mechadoll2_Q3A3:: @ 27ED46
 	.string "CARVANHA$"
 
-gUnknown_0827ED4F:: @ 27ED4F
+gTrickHouse_Mechadoll3_Q1A1:: @ 27ED4F
 	.string "BURN HEAL$"
 
-gUnknown_0827ED59:: @ 27ED59
+gTrickHouse_Mechadoll3_Q1A2:: @ 27ED59
 	.string "HARBOR MAIL$"
 
-gUnknown_0827ED65:: @ 27ED65
+gTrickHouse_Mechadoll3_Q1A3:: @ 27ED65
 	.string "Same price$"
 
-gUnknown_0827ED70:: @ 27ED70
+gTrickHouse_Mechadoll3_Q2A1:: @ 27ED70
 	.string "¥60$"
 
-gUnknown_0827ED74:: @ 27ED74
+gTrickHouse_Mechadoll3_Q2A2:: @ 27ED74
 	.string "¥55$"
 
-gUnknown_0827ED78:: @ 27ED78
+gTrickHouse_Mechadoll3_Q2A3:: @ 27ED78
 	.string "Nothing$"
 
-gUnknown_0827ED80:: @ 27ED80
+gTrickHouse_Mechadoll3_Q3A1:: @ 27ED80
 	.string "They will cost more.$"
 
-gUnknown_0827ED95:: @ 27ED95
+gTrickHouse_Mechadoll3_Q3A2:: @ 27ED95
 	.string "They will cost less.$"
 
-gUnknown_0827EDAA:: @ 27EDAA
+gTrickHouse_Mechadoll3_Q3A3:: @ 27EDAA
 	.string "Same price$"
 
-gUnknown_0827EDB5:: @ 27EDB5
+gTrickHouse_Mechadoll4_Q1A1:: @ 27EDB5
 	.string "Male$"
 
-gUnknown_0827EDBA:: @ 27EDBA
+gTrickHouse_Mechadoll4_Q1A2:: @ 27EDBA
 	.string "Female$"
 
-gUnknown_0827EDC1:: @ 27EDC1
+gTrickHouse_Mechadoll4_Q1A3:: @ 27EDC1
 	.string "Neither$"
 
-gUnknown_0827EDC9:: @ 27EDC9
+gTrickHouse_Mechadoll4_Q2A1:: @ 27EDC9
 	.string "Elderly men$"
 
-gUnknown_0827EDD5:: @ 27EDD5
+gTrickHouse_Mechadoll4_Q2A2:: @ 27EDD5
 	.string "Elderly ladies$"
 
-gUnknown_0827EDE4:: @ 27EDE4
+gTrickHouse_Mechadoll4_Q2A3:: @ 27EDE4
 	.string "Same number$"
 
-gUnknown_0827EDF0:: @ 27EDF0
+gTrickHouse_Mechadoll4_Q3A1:: @ 27EDF0
 	.string "None$"
 
-gUnknown_0827EDF5:: @ 27EDF5
+gTrickHouse_Mechadoll4_Q3A2:: @ 27EDF5
 	.string "1$"
 
-gUnknown_0827EDF7:: @ 27EDF7
+gTrickHouse_Mechadoll4_Q3A3:: @ 27EDF7
 	.string "2$"
 
-gUnknown_0827EDF9:: @ 27EDF9
+gTrickHouse_Mechadoll5_Q1A1:: @ 27EDF9
 	.string "2$"
 
-gUnknown_0827EDFB:: @ 27EDFB
+gTrickHouse_Mechadoll5_Q1A2:: @ 27EDFB
 	.string "3$"
 
-gUnknown_0827EDFD:: @ 27EDFD
+gTrickHouse_Mechadoll5_Q1A3:: @ 27EDFD
 	.string "4$"
 
-gUnknown_0827EDFF:: @ 27EDFF
+gTrickHouse_Mechadoll5_Q2A1:: @ 27EDFF
 	.string "6$"
 
-gUnknown_0827EE01:: @ 27EE01
+gTrickHouse_Mechadoll5_Q2A2:: @ 27EE01
 	.string "7$"
 
-gUnknown_0827EE03:: @ 27EE03
+gTrickHouse_Mechadoll5_Q2A3:: @ 27EE03
 	.string "8$"
 
-gUnknown_0827EE05:: @ 27EE05
+gTrickHouse_Mechadoll5_Q3A1:: @ 27EE05
 	.string "6$"
 
-gUnknown_0827EE07:: @ 27EE07
+gTrickHouse_Mechadoll5_Q3A2:: @ 27EE07
 	.string "7$"
 
-gUnknown_0827EE09:: @ 27EE09
+gTrickHouse_Mechadoll5_Q3A3:: @ 27EE09
 	.string "8$"
 
 	.include "data/scripts/tv.inc"
