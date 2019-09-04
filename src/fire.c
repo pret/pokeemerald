@@ -1181,7 +1181,7 @@ void sub_8109DBC(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
 
-    task->data[12] = !GetBattlerSide(gBattleAnimAttacker) ? B_SIDE_OPPONENT : -1;
+    task->data[12] = !GetBattlerSide(gBattleAnimAttacker) ? 1 : -1;
     task->data[13] = IsBattlerSpriteVisible(gBattleAnimTarget ^ 2) + 1;
     task->data[14] = GetAnimBattlerSpriteId(1);
     task->data[15] = GetAnimBattlerSpriteId(3);

@@ -1646,7 +1646,7 @@ void sub_8103CF0(u8 taskId)
     }
     else
     {
-        if ((gBattlerPositions[gBattleAnimTarget] & 1) == 0)
+        if ((gBattlerPositions[gBattleAnimTarget] & BIT_SIDE) == B_SIDE_PLAYER)
         {
             gTasks[taskId].data[4] = 1;
             gBattleAnimArgs[0] = -gBattleAnimArgs[0];
