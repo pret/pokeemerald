@@ -41,6 +41,13 @@
 #define HILL_MAX_TIME 215999 // 60 * 60 * 60 - 1
 
 // EWRAM
+struct TrHillStruct2
+{
+    u8 floorId;
+    struct TrHillTag tag;
+    struct TrHillFloor floors[4];
+};
+
 static EWRAM_DATA struct TrHillStruct2 *sHillData = NULL;
 static EWRAM_DATA struct TrHillRoomTrainers *sRoomTrainers = NULL;
 EWRAM_DATA u32 *gTrainerHillVBlankCounter = NULL;
@@ -301,7 +308,7 @@ u8 GetTrainerHillTrainerFrontSpriteId(u16 trainerId)
 
     SetUpDataStruct();
     id = trainerId - 1;
-    facilityClass = sHillData->tag.floors[sHillData->floorId].trainers[id].facilityClass;
+    facilityClass = sHillData->floors[sHillData->floorId].trainers[id].facilityClass;
     FreeDataStruct();
 
     return gFacilityClassToPicIndex[facilityClass];
@@ -318,9 +325,9 @@ void InitTrainerHillBattleStruct(void)
     {
         for (j = 0; j < HILL_TRAINER_NAME_LENGTH; j++)
         {
-            sRoomTrainers->name[i][j] = sHillData->tag.floors[sHillData->floorId].trainers[i].name[j];
+            sRoomTrainers->name[i][j] = sHillData->floors[sHillData->floorId].trainers[i].name[j];
         }
-        sRoomTrainers->facilityClass[i] = sHillData->tag.floors[sHillData->floorId].trainers[i].facilityClass;
+        sRoomTrainers->facilityClass[i] = sHillData->floors[sHillData->floorId].trainers[i].facilityClass;
     }
     SetTrainerHillVBlankCounter(&gSaveBlock1Ptr->trainerHill.timer);
     FreeDataStruct();
@@ -338,7 +345,7 @@ static void SetUpDataStruct(void)
     {
         sHillData = AllocZeroed(sizeof(*sHillData));
         sHillData->floorId = gMapHeader.mapLayoutId - LAYOUT_TRAINER_HILL_1F;
-        CpuCopy32(sDataPerTag[gSaveBlock1Ptr->trainerHill.tag], &sHillData->tag, sizeof(sHillData->tag));
+        CpuCopy32(sDataPerTag[gSaveBlock1Ptr->trainerHill.tag], &sHillData->tag, sizeof(sHillData->tag) + 4 * sizeof(struct TrHillFloor));
         nullsub_2();
     }
 }
@@ -360,16 +367,16 @@ void CopyTrainerHillTrainerText(u8 which, u16 trainerId)
     switch (which)
     {
     case 2:
-        FrontierSpeechToString(sHillData->tag.floors[floorId].trainers[id].speechBefore);
+        FrontierSpeechToString(sHillData->floors[floorId].trainers[id].speechBefore);
         break;
     case 3:
-        FrontierSpeechToString(sHillData->tag.floors[floorId].trainers[id].speechWin);
+        FrontierSpeechToString(sHillData->floors[floorId].trainers[id].speechWin);
         break;
     case 4:
-        FrontierSpeechToString(sHillData->tag.floors[floorId].trainers[id].speechLose);
+        FrontierSpeechToString(sHillData->floors[floorId].trainers[id].speechLose);
         break;
     case 5:
-        FrontierSpeechToString(sHillData->tag.floors[floorId].trainers[id].speechAfter);
+        FrontierSpeechToString(sHillData->floors[floorId].trainers[id].speechAfter);
         break;
     }
 
@@ -411,7 +418,7 @@ static void sub_81D5924(void)
 {
     u16 itemId = sub_81D6640();
 
-    if (sHillData->tag.unkField_2 != 4 || gSaveBlock1Ptr->trainerHill.field_3D6E_0a)
+    if (sHillData->tag.numFloors != 4 || gSaveBlock1Ptr->trainerHill.field_3D6E_0a)
     {
         gSpecialVar_Result = 2;
     }
@@ -507,9 +514,9 @@ static void sub_81D5B2C(void)
 static void sub_81D5BBC(void)
 {
     SetUpDataStruct();
-    if (sHillData->tag.unkField_2 != 4)
+    if (sHillData->tag.numFloors != 4)
     {
-        ConvertIntToDecimalStringN(gStringVar1, sHillData->tag.unkField_2, STR_CONV_MODE_LEFT_ALIGN, 1);
+        ConvertIntToDecimalStringN(gStringVar1, sHillData->tag.numFloors, STR_CONV_MODE_LEFT_ALIGN, 1);
         gSpecialVar_Result = 0;
     }
     else
@@ -624,12 +631,12 @@ void sub_81D5DF8(void)
 
         eventTemplates[i] = gUnknown_0862A670;
         eventTemplates[i].localId = i + 1;
-        eventTemplates[i].graphicsId = FacilityClassToGraphicsId(sHillData->tag.floors[floorId].trainers[i].facilityClass);
-        eventTemplates[i].x = sHillData->tag.floors[floorId].coords[i] & 0xF;
-        eventTemplates[i].y = ((sHillData->tag.floors[floorId].coords[i] >> 4) & 0xF) + 5;
+        eventTemplates[i].graphicsId = FacilityClassToGraphicsId(sHillData->floors[floorId].trainers[i].facilityClass);
+        eventTemplates[i].x = sHillData->floors[floorId].display.coords[i] & 0xF;
+        eventTemplates[i].y = ((sHillData->floors[floorId].display.coords[i] >> 4) & 0xF) + 5;
         bits = i << 2;
-        eventTemplates[i].movementType = ((sHillData->tag.floors[floorId].direction >> bits) & 0xF) + MOVEMENT_TYPE_FACE_UP;
-        eventTemplates[i].trainerRange_berryTreeId = (sHillData->tag.floors[floorId].range >> bits) & 0xF;
+        eventTemplates[i].movementType = ((sHillData->floors[floorId].display.direction >> bits) & 0xF) + MOVEMENT_TYPE_FACE_UP;
+        eventTemplates[i].trainerRange_berryTreeId = (sHillData->floors[floorId].display.range >> bits) & 0xF;
         eventTemplates[i].script = EventScript_2C83F0;
         gSaveBlock2Ptr->frontier.trainerIds[i] = i + 1;
     }
@@ -650,8 +657,8 @@ static u32 sub_81D5F58(u8 floorId, u32 bit, u32 arg2, u32 arg3)
 {
     u32 var0, var1, var2, var3;
 
-    var0 = (sHillData->tag.floors[floorId].unk3A0[arg2] >> (15 - bit)) & 1;
-    var1 = sHillData->tag.floors[floorId].data[arg2 * arg3 + bit];
+    var0 = (sHillData->floors[floorId].unk3A0[arg2] >> (15 - bit)) & 1;
+    var1 = sHillData->floors[floorId].data[arg2 * arg3 + bit];
     var3 = 0x200;
     var2 = 0x3000;
 
@@ -894,7 +901,7 @@ static void sub_81D62CC(u16 trainerId, u8 firstMonId)
         u8 id = gUnknown_0862A698[trId][arrId];
         struct Pokemon *mon = &gEnemyParty[i];
 
-        CreateBattleTowerMon(mon, &sHillData->tag.floors[floorId].trainers[trId].mons[id]);
+        CreateBattleTowerMon(mon, &sHillData->floors[floorId].trainers[trId].mons[id]);
         sub_81D642C(mon, level);
     }
 
@@ -929,7 +936,7 @@ u8 GetTrainerEncounterMusicIdInTrainerHill(u16 trainerId)
 
     SetUpDataStruct();
     trId = trainerId - 1;
-    facilityClass = sHillData->tag.floors[sHillData->floorId].trainers[trId].facilityClass;
+    facilityClass = sHillData->floors[sHillData->floorId].trainers[trId].facilityClass;
     FreeDataStruct();
 
     for (i = 0; i < ARRAY_COUNT(gUnknown_0862A3B4); i++)
@@ -956,7 +963,7 @@ u8 sub_81D6490(void)
     u8 ret;
 
     SetUpDataStruct();
-    ret = sHillData->tag.unkField_2;
+    ret = sHillData->tag.numFloors;
     FreeDataStruct();
 
     return ret;
@@ -1021,8 +1028,8 @@ static u8 sub_81D65E8(u8 arg0)
     var = 0;
     for (i = 0; i < 4; i++)
     {
-        var ^= sHillData->tag.floors[i].unk0 & 0x1F;
-        var ^= sHillData->tag.floors[i].unk1 & 0x1F;
+        var ^= sHillData->floors[i].unk0 & 0x1F;
+        var ^= sHillData->floors[i].unk1 & 0x1F;
     }
 
     if (arg0)
@@ -1042,8 +1049,8 @@ static u16 sub_81D6640(void)
 
     for (i = 0; i < 4; i++)
     {
-        var += sHillData->tag.floors[i].unk0;
-        var += sHillData->tag.floors[i].unk1;
+        var += sHillData->floors[i].unk0;
+        var += sHillData->floors[i].unk1;
     }
 
     var2 = var / 256;

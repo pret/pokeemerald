@@ -21,11 +21,8 @@ struct TrHillRoomTrainers
     u8 facilityClass[2];
 };
 
-struct TrHillFloor
+struct TrHillDisplay
 {
-    u8 unk0;
-    u8 unk1;
-    struct TrainerHillTrainer trainers[2];
     u8 data[0x100];
     u16 unk3A0[16];
     u8 coords[2]; // x first 4 bits, y last 4 bits
@@ -33,13 +30,21 @@ struct TrHillFloor
     u8 range; // array of 4 bits for each trainer
 };
 
+struct TrHillFloor
+{
+    u8 unk0;
+    u8 unk1;
+    struct TrainerHillTrainer trainers[2];
+    struct TrHillDisplay display;
+};
+
 struct TrHillTag
 {
     u8 unkField_0;
     u8 unused1;
-    u8 unkField_2;
+    u8 numFloors;
     u32 checksum;
-    struct TrHillFloor floors[4];
+    struct TrHillFloor floors[0];
 };
 
 struct TrHillTag_Half
@@ -49,12 +54,6 @@ struct TrHillTag_Half
     u8 unkField_2;
     u32 checksum;
     struct TrHillFloor floors[2];
-};
-
-struct TrHillStruct2
-{
-    u8 floorId;
-    struct TrHillTag tag;
 };
 
 extern u32 *gTrainerHillVBlankCounter;
