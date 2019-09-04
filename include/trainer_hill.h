@@ -47,15 +47,6 @@ struct TrHillTag
     struct TrHillFloor floors[0];
 };
 
-struct TrHillTag_Half
-{
-    u8 unkField_0;
-    u8 unused1;
-    u8 unkField_2;
-    u32 checksum;
-    struct TrHillFloor floors[2];
-};
-
 extern u32 *gTrainerHillVBlankCounter;
 
 void CallTrainerHillFunction(void);
