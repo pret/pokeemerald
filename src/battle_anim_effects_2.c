@@ -1609,10 +1609,10 @@ static void sub_8103C0C(u8 taskId)
         switch (gTasks[taskId].data[4])
         {
         case 1:
-            sprite->oam.matrixNum |= 24;
+            sprite->oam.matrixNum |= (ST_OAM_HFLIP | ST_OAM_VFLIP);
             break;
         case 2:
-            sprite->oam.matrixNum = 8;
+            sprite->oam.matrixNum = ST_OAM_HFLIP;
             break;
         }
 

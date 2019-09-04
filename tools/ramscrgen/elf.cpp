@@ -10,6 +10,8 @@
 #define SHN_COMMON 0xFFF2
 
 static std::string s_elfPath;
+static std::string s_archiveFilePath;
+static std::string s_archiveObjectPath;
 
 static FILE *s_file;
 
@@ -22,6 +24,7 @@ static std::uint32_t s_symtabOffset;
 static std::uint32_t s_strtabOffset;
 
 static std::uint32_t s_symbolCount;
+static std::uint32_t s_elfFileOffset;
 
 struct Symbol
 {
@@ -31,7 +34,7 @@ struct Symbol
 
 static void Seek(long offset)
 {
-    if (std::fseek(s_file, offset, SEEK_SET) != 0)
+    if (std::fseek(s_file, s_elfFileOffset + offset, SEEK_SET) != 0)
         FATAL_ERROR("error: failed to seek to %ld in \"%s\"", offset, s_elfPath.c_str());
 }
 
@@ -98,6 +101,18 @@ static void VerifyElfIdent()
         FATAL_ERROR("error: \"%s\" not little-endian ELF\n", s_elfPath.c_str());
 }
 
+static void VerifyAr()
+{
+    char expectedMagic[8] = {'!', '<', 'a', 'r', 'c', 'h', '>', '\n'};
+    char magic[8];
+
+    if (std::fread(magic, 8, 1, s_file) != 1)
+        FATAL_ERROR("error: failed to read AR magic from \"%s\"\n", s_archiveFilePath.c_str());
+
+    if (std::memcmp(magic, expectedMagic, 8) != 0)
+        FATAL_ERROR("error: AR magic did not match in \"%s\"\n", s_archiveFilePath.c_str());
+}
+
 static void ReadElfHeader()
 {
     Seek(0x20);
@@ -106,6 +121,40 @@ static void ReadElfHeader()
     s_sectionHeaderEntrySize = ReadInt16();
     s_sectionCount = ReadInt16();
     s_shstrtabIndex = ReadInt16();
+}
+
+static void FindArObj()
+{
+    char file_ident[17] = {0};
+    char filesize_s[11] = {0};
+    char expectedEndMagic[2] = { 0x60, 0x0a };
+    char end_magic[2];
+    std::size_t filesize;
+
+    Seek(8);
+    while (!std::feof(s_file)) {
+        if (std::fread(file_ident, 16, 1, s_file) != 1)
+            FATAL_ERROR("error: failed to read file ident in \"%s\"\n", s_archiveFilePath.c_str());
+        Skip(32);
+        if (std::fread(filesize_s, 10, 1, s_file) != 1)
+            FATAL_ERROR("error: failed to read filesize in \"%s\"\n", s_archiveFilePath.c_str());
+        if (std::fread(end_magic, 2, 1, s_file) != 1)
+            FATAL_ERROR("error: failed to read end sentinel in \"%s\"\n", s_archiveFilePath.c_str());
+        if (std::memcmp(end_magic, expectedEndMagic, 2) != 0)
+            FATAL_ERROR("error: corrupted archive header in \"%s\" at \"%s\"\n", s_archiveFilePath.c_str(), file_ident);
+
+        char * ptr = std::strchr(file_ident, '/');
+        if (ptr != nullptr)
+            *ptr = 0;
+        filesize = std::strtoul(filesize_s, nullptr, 10);
+        if (std::strncmp(s_archiveObjectPath.c_str(), file_ident, 16) == 0) {
+            s_elfFileOffset = std::ftell(s_file);
+            return;
+        }
+        Skip(filesize);
+    }
+
+    FATAL_ERROR("error: could not find object \"%s\" in archive \"%s\"\n", s_archiveObjectPath.c_str(), s_archiveFilePath.c_str());
 }
 
 static std::string GetSectionName(std::uint32_t shstrtabOffset, int index)
@@ -153,21 +202,14 @@ static void FindTableOffsets()
         FATAL_ERROR("error: couldn't find .strtab section in \"%s\"\n", s_elfPath.c_str());
 }
 
-std::map<std::string, std::uint32_t> GetCommonSymbols(std::string path)
+static std::map<std::string, std::uint32_t> GetCommonSymbols_Shared()
 {
-    s_elfPath = path;
-
-    std::map<std::string, std::uint32_t> commonSymbols;
-
-    s_file = std::fopen(s_elfPath.c_str(), "rb");
-
-    if (s_file == NULL)
-        FATAL_ERROR("error: failed to open \"%s\" for reading\n", path.c_str());
-
     VerifyElfIdent();
     ReadElfHeader();
     FindTableOffsets();
-    
+
+    std::map<std::string, std::uint32_t> commonSymbols;
+
     std::vector<Symbol> commonSymbolVec;
 
     Seek(s_symtabOffset);
@@ -192,4 +234,39 @@ std::map<std::string, std::uint32_t> GetCommonSymbols(std::string path)
     }
 
     return commonSymbols;
+}
+
+std::map<std::string, std::uint32_t> GetCommonSymbolsFromLib(std::string sourcePath, std::string libpath)
+{
+    std::size_t colonPos = libpath.find(':');
+    if (colonPos == std::string::npos)
+        FATAL_ERROR("error: missing colon separator in libfile \"%s\"\n", s_elfPath.c_str());
+
+    s_archiveObjectPath = libpath.substr(colonPos + 1);
+    s_archiveFilePath = sourcePath + "/" + libpath.substr(1, colonPos - 1);
+    s_elfPath = sourcePath + "/" + libpath.substr(1);
+
+    s_file = std::fopen(s_archiveFilePath.c_str(), "rb");
+
+    if (s_file == NULL)
+        FATAL_ERROR("error: failed to open \"%s\" for reading\n", s_archiveFilePath.c_str());
+
+    VerifyAr();
+    FindArObj();
+    return GetCommonSymbols_Shared();
+}
+
+std::map<std::string, std::uint32_t> GetCommonSymbols(std::string sourcePath, std::string path)
+{
+    s_elfFileOffset = 0;
+    if (path[0] == '*')
+        return GetCommonSymbolsFromLib(sourcePath, path);
+
+    s_elfPath = sourcePath + "/" + path;
+    s_file = std::fopen(s_elfPath.c_str(), "rb");
+
+    if (s_file == NULL)
+        FATAL_ERROR("error: failed to open \"%s\" for reading\n", path.c_str());
+
+    return GetCommonSymbols_Shared();
 }

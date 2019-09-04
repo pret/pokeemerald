@@ -1,4 +1,5 @@
 TOOLCHAIN := $(DEVKITARM)
+COMPARE ?= 0
 
 ifeq ($(CC),)
 HOSTCC := gcc
@@ -108,7 +109,7 @@ MAKEFLAGS += --no-print-directory
 # Secondary expansion is required for dependency variables in object rules.
 .SECONDEXPANSION:
 
-.PHONY: all rom clean compare tidy tools mostlyclean clean-tools $(TOOLDIRS)
+.PHONY: all rom clean compare tidy tools mostlyclean clean-tools $(TOOLDIRS) berry_fix
 
 infoshell = $(foreach line, $(shell $1 | sed "s/ /__SPACE__/g"), $(info $(subst __SPACE__, ,$(line))))
 
@@ -123,6 +124,9 @@ endif
 C_SRCS := $(wildcard $(C_SUBDIR)/*.c $(C_SUBDIR)/*/*.c $(C_SUBDIR)/*/*/*.c)
 C_OBJS := $(patsubst $(C_SUBDIR)/%.c,$(C_BUILDDIR)/%.o,$(C_SRCS))
 
+C_ASM_SRCS += $(wildcard $(C_SUBDIR)/*.s $(C_SUBDIR)/*/*.s $(C_SUBDIR)/*/*/*.s)
+C_ASM_OBJS := $(patsubst $(C_SUBDIR)/%.s,$(C_BUILDDIR)/%.o,$(C_ASM_SRCS))
+
 ASM_SRCS := $(wildcard $(ASM_SUBDIR)/*.s)
 ASM_OBJS := $(patsubst $(ASM_SUBDIR)/%.s,$(ASM_BUILDDIR)/%.o,$(ASM_SRCS))
 
@@ -135,7 +139,7 @@ SONG_OBJS := $(patsubst $(SONG_SUBDIR)/%.s,$(SONG_BUILDDIR)/%.o,$(SONG_SRCS))
 MID_SRCS := $(wildcard $(MID_SUBDIR)/*.mid)
 MID_OBJS := $(patsubst $(MID_SUBDIR)/%.mid,$(MID_BUILDDIR)/%.o,$(MID_SRCS))
 
-OBJS     := $(C_OBJS) $(ASM_OBJS) $(DATA_ASM_OBJS) $(SONG_OBJS) $(MID_OBJS)
+OBJS     := $(C_OBJS) $(C_ASM_OBJS) $(ASM_OBJS) $(DATA_ASM_OBJS) $(SONG_OBJS) $(MID_OBJS)
 OBJS_REL := $(patsubst $(OBJ_DIR)/%,%,$(OBJS))
 
 SUBDIRS  := $(sort $(dir $(OBJS)))
@@ -151,11 +155,13 @@ tools: $(TOOLDIRS)
 $(TOOLDIRS):
 	@$(MAKE) -C $@ CC=$(HOSTCC) CXX=$(HOSTCXX)
 
-rom: $(ROM)
+rom: berry_fix $(ROM)
+ifeq ($(COMPARE),1)
+	@$(SHA1) rom.sha1
+endif
 
 # For contributors to make sure a change didn't affect the contents of the ROM.
-compare: all
-	@$(SHA1) rom.sha1
+compare: ; @$(MAKE) COMPARE=1
 
 clean: mostlyclean clean-tools
 
@@ -170,6 +176,7 @@ mostlyclean: tidy
 	rm -f $(DATA_ASM_SUBDIR)/maps/connections.inc $(DATA_ASM_SUBDIR)/maps/events.inc $(DATA_ASM_SUBDIR)/maps/groups.inc $(DATA_ASM_SUBDIR)/maps/headers.inc
 	find $(DATA_ASM_SUBDIR)/maps \( -iname 'connections.inc' -o -iname 'events.inc' -o -iname 'header.inc' \) -exec rm {} +
 	rm -f $(AUTO_GEN_TARGETS)
+	@$(MAKE) clean -C berry_fix
 
 tidy:
 	rm -f $(ROM) $(ELF) $(MAP)
@@ -222,7 +229,7 @@ endif
 ifeq ($(NODEP),1)
 $(C_BUILDDIR)/%.o: c_dep :=
 else
-$(C_BUILDDIR)/%.o: c_dep = $(shell $(SCANINC) -I include $(C_SUBDIR)/$*.c)
+$(C_BUILDDIR)/%.o: c_dep = $(shell $(SCANINC) -I include -I tools/agbcc/include $(C_SUBDIR)/$*.c)
 endif
 
 ifeq ($(DINFO),1)
@@ -234,6 +241,15 @@ $(C_BUILDDIR)/%.o : $(C_SUBDIR)/%.c $$(c_dep)
 	@$(PREPROC) $(C_BUILDDIR)/$*.i charmap.txt | $(CC1) $(CFLAGS) -o $(C_BUILDDIR)/$*.s
 	@echo -e ".text\n\t.align\t2, 0\n" >> $(C_BUILDDIR)/$*.s
 	$(AS) $(ASFLAGS) -o $@ $(C_BUILDDIR)/$*.s
+
+ifeq ($(NODEP),1)
+$(C_BUILDDIR)/%.o: c_asm_dep :=
+else
+$(C_BUILDDIR)/%.o: c_asm_dep = $(shell $(SCANINC) -I "" $(C_SUBDIR)/$*.s)
+endif
+
+$(C_BUILDDIR)/%.o: $(C_SUBDIR)/%.s $$(c_asm_dep)
+	$(AS) $(ASFLAGS) -o $@ $<
 
 ifeq ($(NODEP),1)
 $(ASM_BUILDDIR)/%.o: asm_dep :=
@@ -285,3 +301,8 @@ $(ROM): $(ELF)
 	$(FIX) $@ -p --silent
 
 modern: ; @$(MAKE) MODERN=1
+
+berry_fix/berry_fix.gba: berry_fix
+
+berry_fix:
+	@$(MAKE) -C berry_fix COMPARE=$(COMPARE)

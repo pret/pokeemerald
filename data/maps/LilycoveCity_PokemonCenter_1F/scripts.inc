@@ -9,7 +9,7 @@ LilycoveCity_PokemonCenter_1F_OnTransition: @ 821C5BD
 	end
 
 LilycoveCity_PokemonCenter_1F_EventScript_21C5C6:: @ 821C5C6
-	special sub_818D9C0
+	special SetLilycoveLadyGfx
 	compare VAR_RESULT, 0
 	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_21C5E0
 	compare VAR_RESULT, 1

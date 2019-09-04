@@ -58,7 +58,7 @@ Route109_EventScript_1EE7D5:: @ 81EE7D5
 	copyvar VAR_BRINEY_LOCATION, VAR_0x8008
 	resetobjectpriority EVENT_OBJ_ID_PLAYER, MAP_ROUTE109
 	resetobjectpriority 2, MAP_DEWFORD_TOWN
-	moveobjectoffscreen 2
+	copyobjectxytoperm 2
 	release
 	end
 

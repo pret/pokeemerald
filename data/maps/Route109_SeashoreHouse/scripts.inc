@@ -58,7 +58,6 @@ Route109_SeashoreHouse_EventScript_269484:: @ 8269484
 	msgbox Route109_SeashoreHouse_Text_2697C8, MSGBOX_DEFAULT
 	takemoney 0x12c, 0
 	updatemoneybox 0, 0
-	nop
 	giveitem_std ITEM_SODA_POP
 	hidemoneybox
 	nop
