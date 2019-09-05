@@ -336,7 +336,7 @@ EventScript_275A50:: @ 8275A50
 	compare VAR_RESULT, 6
 	goto_if_eq EventScript_275A91
 	bufferpartymonnick 0, VAR_RESULT
-	msgbox gText_UseSecretPower, MSGBOX_YESNO
+	msgbox SecretBase_Text_UseSecretPower, MSGBOX_YESNO
 	compare VAR_RESULT, 0
 	goto_if_eq EventScript_275CDE
 	msgbox Text_MonUsedHM, MSGBOX_DEFAULT
@@ -354,12 +354,12 @@ EventScript_275A86:: @ 8275A86
 	end
 
 EventScript_275A91:: @ 8275A91
-	msgbox gText_SmallIndentInWall, MSGBOX_DEFAULT
+	msgbox SecretBase_Text_SmallIndentInWall, MSGBOX_DEFAULT
 	releaseall
 	end
 
 EventScript_275A9B:: @ 8275A9B
-	msgbox gText_DiscoveredSmallCavern, MSGBOX_DEFAULT
+	msgbox SecretBase_Text_DiscoveredSmallCavern, MSGBOX_DEFAULT
 	goto EventScript_275B5B
 	end
 
@@ -445,7 +445,7 @@ SecretBase_RedCave1_EventScript_275B81:: @ 8275B81
 	applymovement EVENT_OBJ_ID_PLAYER, SecretBase_RedCave1_Movement_275BB4
 	waitmovement 0
 	setvar VAR_INIT_SECRET_BASE, 1
-	msgbox SecretBase_RedCave1_Text_23B759, MSGBOX_YESNO
+	msgbox SecretBase_Text_WantToMakeYourSecretBaseHere, MSGBOX_YESNO
 	compare VAR_RESULT, 1
 	goto_if_eq SecretBase_RedCave1_EventScript_275BAB
 	closemessage
@@ -493,17 +493,17 @@ EventScript_275BE8:: @ 8275BE8
 	setorcopyvar VAR_0x8004, VAR_RESULT
 	lockall
 	special GetSecretBaseNearbyMapName
-	msgbox Text_276A3D, MSGBOX_YESNO
+	msgbox SecretBase_Text_WouldYouLikeToMoveBases, MSGBOX_YESNO
 	compare VAR_RESULT, 0
 	goto_if_eq EventScript_275CDE
-	msgbox Text_2766AA, MSGBOX_YESNO
+	msgbox SecretBase_Text_AllDecorationsWillBeReturned, MSGBOX_YESNO
 	compare VAR_RESULT, 0
 	goto_if_eq EventScript_275CDE
 	fadescreenswapbuffers 1
 	special MoveOutOfSecretBaseFromOutside
 	closemessage
 	fadescreenswapbuffers 0
-	msgbox Text_276A95, MSGBOX_YESNO
+	msgbox SecretBase_Text_MovingCompletedUseSecretPower, MSGBOX_YESNO
 	compare VAR_RESULT, 0
 	goto_if_eq EventScript_275CDE
 	bufferpartymonnick 0, VAR_0x8004
@@ -1047,37 +1047,37 @@ SecretBase_EventScript_CushionInteract:: @ 82766A6
 	special sub_80EB2C8
 	end
 
-Text_2766AA: @ 82766AA
+SecretBase_Text_AllDecorationsWillBeReturned: @ 82766AA
 	.string "All decorations and furniture in your\n"
 	.string "SECRET BASE will be returned to your PC.\p"
 	.string "Is that okay?$"
 
-Text_WantToRegisterSecretBase: @ 8276707
+SecretBase_Text_WantToRegisterSecretBase: @ 8276707
 	.string "Do you want to register\n"
 	.string "{STR_VAR_1}'s SECRET BASE?$"
 
-Text_276731: @ 8276731
+SecretBase_Text_AlreadyRegisteredDelete: @ 8276731
 	.string "This data is already registered.\n"
 	.string "Would you like to delete it?$"
 
-Text_TooManyBasesDeleteSome: @ 827676F
+SecretBase_Text_TooManyBasesDeleteSome: @ 827676F
 	.string "Up to 10 locations can be registered.\p"
 	.string "Delete a location if you want to\n"
 	.string "register another location.$"
 
-Text_2767D1: @ 82767D1
+SecretBase_Text_RegistrationCompleted: @ 82767D1
 	.string "Registration completed.$"
 
-Text_2767E9: @ 82767E9
+SecretBase_Text_DataUnregistered: @ 82767E9
 	.string "Data has been unregistered.$"
 
-Text_SecretBaseBootUpPC: @ 8276805
+SecretBase_Text_BootUpPC: @ 8276805
 	.string "{PLAYER} booted up the PC.$"
 
-Text_SecretBasePCStartMenu: @ 827681A
+SecretBase_Text_WhatWouldYouLikeToDo: @ 827681A
 	.string "What would you like to do?$"
 
-Text_276835: @ 8276835
+SecretBase_Text_RegistryInfo: @ 8276835
 	.string "Once registered, a SECRET BASE will not\n"
 	.string "disappear unless the other TRAINER\l"
 	.string "moves it to a different location.\p"
@@ -1103,11 +1103,11 @@ SecretBase_Text_SkittyTV: @ 82769FF
 	.string "A toy TV shaped like a SKITTY.\n"
 	.string "It looks ready to stroll away…$"
 
-Text_276A3D: @ 8276A3D
+SecretBase_Text_WouldYouLikeToMoveBases: @ 8276A3D
 	.string "You may only make one SECRET BASE.\p"
 	.string "Would you like to move from the SECRET\n"
 	.string "BASE near {STR_VAR_1}?$"
 
-Text_276A95: @ 8276A95
+SecretBase_Text_MovingCompletedUseSecretPower: @ 8276A95
 	.string "Moving completed.\p"
 	.string "Would you like to use the SECRET POWER?$"

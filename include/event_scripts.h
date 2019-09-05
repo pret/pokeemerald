@@ -1,8 +1,6 @@
 #ifndef GUARD_EVENT_SCRIPTS_H
 #define GUARD_EVENT_SCRIPTS_H
 
-extern const u8 EventScript_SecretBasePCCancel[];
-extern const u8 EventScript_SecretBasePCStart[];
 extern const u8 EventScript_TestSignpostMsg[];
 extern const u8 EventScript_TryGetTrainerScript[];
 extern const u8 EventScript_275BB7[];
@@ -15,8 +13,6 @@ extern const u8 EventScript_TryDoDoubleTrainerBattle[];
 extern const u8 EventScript_TryDoNormalTrainerBattle[];
 extern const u8 EventScript_TryDoDoubleRematchBattle[];
 extern const u8 EventScript_TryDoRematchBattle[];
-extern const u8 SecretBase_EventScript_DollInteract[];
-extern const u8 SecretBase_EventScript_CushionInteract[];
 
 extern const u8 BerryTreeScript[];
 
@@ -527,8 +523,6 @@ extern const u8 MauvilleCity_PokemonCenter_1F_Text_2900CB[];
 
 extern const u8 EventScript_PlayerPCMale[];
 extern const u8 EventScript_PlayerPCFemale[];
-extern const u8 EventScript_SecretBasePC[];
-extern const u8 EventScript_RecordMixingSecretBasePC[];
 extern const u8 EventScript_PC[];
 extern const u8 EventScript_TestSignpostMsg[];
 extern const u8 EventScript_HiddenItemScript[];
@@ -552,8 +546,16 @@ extern const u8 EventScript_WirelessBoxResults[];
 extern const u8 EventScript_CableBoxResults[];
 extern const u8 EventScript_Questionnaire[];
 extern const u8 EventScript_TrainerHillTimer[];
-extern const u8 EventScript_SecretBaseSandOrnament[];
-extern const u8 EventScript_SecretBaseShieldOrToyTV[];
+
+extern const u8 SecretBase_EventScript_PC[];
+extern const u8 SecretBase_EventScript_RecordMixingPC[];
+extern const u8 SecretBase_EventScript_PCCancel[];
+extern const u8 SecretBase_EventScript_ShowRegisterMenu[];
+extern const u8 SecretBase_EventScript_SandOrnament[];
+extern const u8 SecretBase_EventScript_ShieldOrToyTV[];
+extern const u8 SecretBase_EventScript_DollInteract[];
+extern const u8 SecretBase_EventScript_CushionInteract[];
+
 extern const u8 EventScript_UseSurf[];
 extern const u8 EventScript_UseWaterfall[];
 extern const u8 EventScript_CannotUseWaterfall[];

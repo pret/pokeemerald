@@ -82,7 +82,7 @@ static void ShowRegistryMenuDeleteYesNo(u8 taskId);
 static void DeleteRegistry_Yes(u8 taskId);
 static void DeleteRegistry_No(u8 taskId);
 static void ReturnToMainRegistryMenu(u8 taskId);
-static void GoToSecretBasePCMainMenu(u8 taskId);
+static void GoToSecretBasePCRegisterMenu(u8 taskId);
 static u8 GetSecretBaseOwnerType(u8 secretBaseId);
 
 static const struct SecretBaseEntranceMetatiles sSecretBaseEntranceMetatiles[] =
@@ -894,7 +894,7 @@ static void Task_ShowSecretBaseRegistryMenu(u8 taskId)
     }
     else
     {
-        DisplayItemMessageOnField(taskId, gText_NoRegistry, GoToSecretBasePCMainMenu);
+        DisplayItemMessageOnField(taskId, gText_NoRegistry, GoToSecretBasePCRegisterMenu);
     }
 }
 
@@ -974,7 +974,7 @@ static void HandleRegistryMenuInput(u8 taskId)
         RemoveWindow(data[6]);
         schedule_bg_copy_tilemap_to_vram(0);
         free(sRegistryMenu);
-        GoToSecretBasePCMainMenu(taskId);
+        GoToSecretBasePCRegisterMenu(taskId);
         break;
     default:
         PlaySE(SE_SELECT);
@@ -1074,12 +1074,12 @@ static void ReturnToMainRegistryMenu(u8 taskId)
     gTasks[taskId].func = HandleRegistryMenuInput;
 }
 
-static void GoToSecretBasePCMainMenu(u8 taskId)
+static void GoToSecretBasePCRegisterMenu(u8 taskId)
 {
     if (VarGet(VAR_CURRENT_SECRET_BASE) == 0)
-        ScriptContext1_SetupScript(EventScript_SecretBasePCCancel);
+        ScriptContext1_SetupScript(SecretBase_EventScript_PCCancel);
     else
-        ScriptContext1_SetupScript(EventScript_SecretBasePCStart);
+        ScriptContext1_SetupScript(SecretBase_EventScript_ShowRegisterMenu);
 
     DestroyTask(taskId);
 }
