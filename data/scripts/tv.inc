@@ -1,6 +1,6 @@
 EventScript_TV:: @ 827EE0B
 	lockall
-	incrementgamestat 44
+	incrementgamestat GAME_STAT_WATCHED_TV
 	special ResetTVShowState
 	specialvar VAR_RESULT, CheckForBigMovieOrEmergencyNewsOnTV
 	compare VAR_RESULT, 2

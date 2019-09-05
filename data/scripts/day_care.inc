@@ -116,7 +116,7 @@ Route117_PokemonDayCare_EventScript_291D56:: @ 8291D56
 	msgbox Route117_PokemonDayCare_Text_292370, MSGBOX_DEFAULT
 	waitmoncry
 	special StoreSelectedPokemonInDaycare
-	incrementgamestat 47
+	incrementgamestat GAME_STAT_USED_DAYCARE
 	specialvar VAR_RESULT, GetDaycareState
 	compare VAR_RESULT, 2
 	goto_if_eq Route117_PokemonDayCare_EventScript_291DD4

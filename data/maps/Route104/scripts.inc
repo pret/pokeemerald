@@ -13,7 +13,7 @@ Route104_EventScript_1ECC47:: @ 81ECC47
 	end
 
 Route104_OnTransition: @ 81ECC4E
-	call Common_EventScript_SetupRivalGender
+	call Common_EventScript_SetupRivalGfxId
 	call Route104_EventScript_1ECC78
 	call Route104_EventScript_1ECC5E
 	end

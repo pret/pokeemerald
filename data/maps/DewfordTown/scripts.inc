@@ -619,7 +619,7 @@ DewfordTown_EventScript_1E9952:: @ 81E9952
 	end
 
 DewfordTown_EventScript_1E997D:: @ 81E997D
-	incrementgamestat 2
+	incrementgamestat GAME_STAT_STARTED_TRENDS
 	compare VAR_0x8004, 0
 	goto_if_eq DewfordTown_EventScript_1E999E
 	msgbox DewfordTown_Text_1EA2AA, MSGBOX_DEFAULT
