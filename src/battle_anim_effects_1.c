@@ -3560,7 +3560,7 @@ void sub_8100640(struct Sprite* sprite)
     else
         battler = gBattleAnimTarget;
 
-    if (GetBattlerSide(battler) != 0)
+    if (GetBattlerSide(battler) != B_SIDE_PLAYER)
     {
         sprite->data[4] = 0;
         sprite->data[2] = gBattleAnimArgs[3];
@@ -3731,7 +3731,7 @@ static void sub_81009DC(struct Sprite* sprite)
 
 void sub_81009F8(struct Sprite* sprite)
 {
-    if (GetBattlerSide(gBattleAnimAttacker) != 0)
+    if (GetBattlerSide(gBattleAnimAttacker) != B_SIDE_PLAYER)
     {
         sprite->pos1.x -= gBattleAnimArgs[0];
         sprite->pos1.y += gBattleAnimArgs[1];
@@ -3828,7 +3828,7 @@ void sub_8100B88(struct Sprite* sprite)
 
     sprite->pos1.x = a;
     sprite->pos1.y = b;
-    if (GetBattlerSide(gBattleAnimTarget) == 0)
+    if (GetBattlerSide(gBattleAnimTarget) == B_SIDE_PLAYER)
         sprite->pos1.y += 8;
 
     sprite->callback = AnimSliceStep;

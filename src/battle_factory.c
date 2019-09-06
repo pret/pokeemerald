@@ -415,7 +415,7 @@ static void SetPlayerAndOpponentParties(void)
                       monLevel,
                       ivs,
                       TRUE, gSaveBlock2Ptr->frontier.rentalMons[i].personality,
-                      0, 0);
+                      OT_ID_PLAYER_ID, 0);
 
             count = 0;
             bits = gFacilityTrainerMons[monSetId].evSpread;
@@ -456,7 +456,7 @@ static void SetPlayerAndOpponentParties(void)
                       monLevel,
                       ivs,
                       TRUE, gSaveBlock2Ptr->frontier.rentalMons[i + 3].personality,
-                      0, 0);
+                      OT_ID_PLAYER_ID, 0);
 
             count = 0;
             bits = gFacilityTrainerMons[monSetId].evSpread;

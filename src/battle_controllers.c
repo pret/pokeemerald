@@ -64,7 +64,7 @@ void SetUpBattleVarsAndBirchZigzagoon(void)
     if (gBattleTypeFlags & BATTLE_TYPE_FIRST_BATTLE)
     {
         ZeroEnemyPartyMons();
-        CreateMon(&gEnemyParty[0], SPECIES_ZIGZAGOON, 2, 32, 0, 0, 0, 0);
+        CreateMon(&gEnemyParty[0], SPECIES_ZIGZAGOON, 2, 32, 0, 0, OT_ID_PLAYER_ID, 0);
         i = 0;
         SetMonData(&gEnemyParty[0], MON_DATA_HELD_ITEM, &i);
     }
@@ -234,16 +234,16 @@ static void InitSinglePlayerBtlControllers(void)
                 gBattleMainFunc = BeginBattleIntro;
 
                 gBattlerControllerFuncs[0] = SetControllerToRecordedPlayer;
-                gBattlerPositions[0] = 0;
+                gBattlerPositions[0] = B_POSITION_PLAYER_LEFT;
 
                 gBattlerControllerFuncs[1] = SetControllerToOpponent;
-                gBattlerPositions[1] = 1;
+                gBattlerPositions[1] = B_POSITION_OPPONENT_LEFT;
 
                 gBattlerControllerFuncs[2] = SetControllerToRecordedPlayer;
-                gBattlerPositions[2] = 2;
+                gBattlerPositions[2] = B_POSITION_PLAYER_RIGHT;
 
                 gBattlerControllerFuncs[3] = SetControllerToOpponent;
-                gBattlerPositions[3] = 3;
+                gBattlerPositions[3] = B_POSITION_OPPONENT_RIGHT;
 
                 gBattlersCount = MAX_BATTLERS_COUNT;
 
@@ -524,12 +524,12 @@ static void InitLinkBtlControllers(void)
                 {
                 case 0:
                 case 3:
-                    gBattlerPositions[gLinkPlayers[i].id] = 0;
+                    gBattlerPositions[gLinkPlayers[i].id] = B_POSITION_PLAYER_LEFT;
                     gBattlerPartyIndexes[gLinkPlayers[i].id] = 0;
                     break;
                 case 1:
                 case 2:
-                    gBattlerPositions[gLinkPlayers[i].id] = 2;
+                    gBattlerPositions[gLinkPlayers[i].id] = B_POSITION_PLAYER_RIGHT;
                     gBattlerPartyIndexes[gLinkPlayers[i].id] = 3;
                     break;
                 }
@@ -544,12 +544,12 @@ static void InitLinkBtlControllers(void)
                     {
                     case 0:
                     case 3:
-                        gBattlerPositions[gLinkPlayers[i].id] = 0;
+                        gBattlerPositions[gLinkPlayers[i].id] = B_POSITION_PLAYER_LEFT;
                         gBattlerPartyIndexes[gLinkPlayers[i].id] = 0;
                         break;
                     case 1:
                     case 2:
-                        gBattlerPositions[gLinkPlayers[i].id] = 2;
+                        gBattlerPositions[gLinkPlayers[i].id] = B_POSITION_PLAYER_RIGHT;
                         gBattlerPartyIndexes[gLinkPlayers[i].id] = 3;
                         break;
                     }
@@ -561,12 +561,12 @@ static void InitLinkBtlControllers(void)
                     {
                     case 0:
                     case 3:
-                        gBattlerPositions[gLinkPlayers[i].id] = 1;
+                        gBattlerPositions[gLinkPlayers[i].id] = B_POSITION_OPPONENT_LEFT;
                         gBattlerPartyIndexes[gLinkPlayers[i].id] = 0;
                         break;
                     case 1:
                     case 2:
-                        gBattlerPositions[gLinkPlayers[i].id] = 3;
+                        gBattlerPositions[gLinkPlayers[i].id] = B_POSITION_OPPONENT_RIGHT;
                         gBattlerPartyIndexes[gLinkPlayers[i].id] = 3;
                         break;
                     }
