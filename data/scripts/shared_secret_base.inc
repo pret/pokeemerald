@@ -1,5 +1,27 @@
-@ Label is unused, but all the Secret Base MapScripts fall through to here
-SecretBase_MapScripts::
+SecretBase_RedCave1_MapScripts:: @ 823B483
+SecretBase_RedCave2_MapScripts:: @ 823B483
+SecretBase_RedCave3_MapScripts:: @ 823B483
+SecretBase_RedCave4_MapScripts:: @ 823B483
+SecretBase_BrownCave1_MapScripts:: @ 823B483
+SecretBase_BrownCave2_MapScripts:: @ 823B483
+SecretBase_BrownCave3_MapScripts:: @ 823B483
+SecretBase_BrownCave4_MapScripts:: @ 823B483
+SecretBase_BlueCave1_MapScripts:: @ 823B483
+SecretBase_BlueCave2_MapScripts:: @ 823B483
+SecretBase_BlueCave3_MapScripts:: @ 823B483
+SecretBase_BlueCave4_MapScripts:: @ 823B483
+SecretBase_YellowCave1_MapScripts:: @ 823B483
+SecretBase_YellowCave2_MapScripts:: @ 823B483
+SecretBase_YellowCave3_MapScripts:: @ 823B483
+SecretBase_YellowCave4_MapScripts:: @ 823B483
+SecretBase_Tree1_MapScripts:: @ 823B483
+SecretBase_Tree2_MapScripts:: @ 823B483
+SecretBase_Tree3_MapScripts:: @ 823B483
+SecretBase_Tree4_MapScripts:: @ 823B483
+SecretBase_Shrub1_MapScripts:: @ 823B483
+SecretBase_Shrub2_MapScripts:: @ 823B483
+SecretBase_Shrub3_MapScripts:: @ 823B483
+SecretBase_Shrub4_MapScripts:: @ 823B483
     map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, SecretBase_MapScript2_OnWarp
     map_script MAP_SCRIPT_ON_TRANSITION, SecretBase_MapScript1_OnTransition
     map_script MAP_SCRIPT_ON_FRAME_TABLE, SecretBase_MapScript2_OnFrame
