@@ -1,3 +1,29 @@
+@ Label is unused, but all the Secret Base MapScripts fall through to here
+SecretBase_MapScripts::
+    map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, SecretBase_MapScript2_OnWarp
+    map_script MAP_SCRIPT_ON_TRANSITION, SecretBase_MapScript1_OnTransition
+    map_script MAP_SCRIPT_ON_FRAME_TABLE, SecretBase_MapScript2_OnFrame
+    map_script MAP_SCRIPT_ON_RESUME, SecretBase_MapScript1_OnResume
+    .byte 0
+
+SecretBase_MapScript2_OnWarp: @ 823B498
+    map_script_2 VAR_SECRET_BASE_INITIALIZED, 0, SecretBase_EventScript_InitDecorations
+    .2byte 0
+
+SecretBase_MapScript1_OnTransition: @ 823B4A2
+    call SecretBase_EventScript_SetDecorationFlags
+    special SetSecretBaseOwnerGfxId
+    special InitSecretBaseVars
+    end
+
+SecretBase_MapScript2_OnFrame: @ 823B4AE
+    map_script_2 VAR_INIT_SECRET_BASE, 0, SecretBase_EventScript_FirstEntrance
+    .2byte 0
+
+SecretBase_MapScript1_OnResume: @ 823B4B8
+    setstepcallback 6
+    end
+
 SecretBase_EventScript_PC:: @ 823B4BB
     lockall
     playse SE_PC_LOGIN
@@ -188,7 +214,7 @@ SecretBase_EventScript_SkittyTV:: @ 823B6D7
 SecretBase_Text_SmallIndentInWall:: @ 823B6E0
     .string "There's a small indent in the wall.$"
 
-SecretBase_Text_UseSecretPower:: @ 823B704
+SecretBase_Text_IndentUseSecretPower:: @ 823B704
     .string "There's a small indent in the wall.\p"
     .string "Use the SECRET POWER?$"
 

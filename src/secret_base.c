@@ -650,7 +650,7 @@ void WarpIntoSecretBase(const struct MapPosition *position, const struct MapEven
 {
     SetCurSecretBaseIdFromPosition(position, events);
     TrySetCurSecretBaseIndex();
-    ScriptContext1_SetupScript(EventScript_275BB7);
+    ScriptContext1_SetupScript(SecretBase_EventScript_Enter);
 }
 
 bool8 TrySetCurSecretBase(void)
@@ -1094,25 +1094,25 @@ const u8 *GetSecretBaseTrainerLoseText(void)
 {
     u8 ownerType = GetSecretBaseOwnerType(VarGet(VAR_CURRENT_SECRET_BASE));
     if (ownerType == 0)
-        return SecretBase_RedCave1_Text_274966;
+        return SecretBase_Text_Trainer0Defeated;
     else if (ownerType == 1)
-        return SecretBase_RedCave1_Text_274D13;
+        return SecretBase_Text_Trainer1Defeated;
     else if (ownerType == 2)
-        return SecretBase_RedCave1_Text_274FFE;
+        return SecretBase_Text_Trainer2Defeated;
     else if (ownerType == 3)
-        return SecretBase_RedCave1_Text_275367;
+        return SecretBase_Text_Trainer3Defeated;
     else if (ownerType == 4)
-        return SecretBase_RedCave1_Text_2756C7;
+        return SecretBase_Text_Trainer4Defeated;
     else if (ownerType == 5)
-        return SecretBase_RedCave1_Text_274B24;
+        return SecretBase_Text_Trainer5Defeated;
     else if (ownerType == 6)
-        return SecretBase_RedCave1_Text_274E75;
+        return SecretBase_Text_Trainer6Defeated;
     else if (ownerType == 7)
-        return SecretBase_RedCave1_Text_2751E1;
+        return SecretBase_Text_Trainer7Defeated;
     else if (ownerType == 8)
-        return SecretBase_RedCave1_Text_2754F6;
+        return SecretBase_Text_Trainer8Defeated;
     else
-        return SecretBase_RedCave1_Text_2758CC;
+        return SecretBase_Text_Trainer9Defeated;
 }
 
 void PrepSecretBaseBattleFlags(void)
@@ -1122,12 +1122,12 @@ void PrepSecretBaseBattleFlags(void)
     gBattleTypeFlags = BATTLE_TYPE_TRAINER | BATTLE_TYPE_SECRET_BASE;
 }
 
-void sub_80EA30C(void)
+void SetBattledOwnerFromResult(void)
 {
     gSaveBlock1Ptr->secretBases[VarGet(VAR_CURRENT_SECRET_BASE)].battledOwnerToday = gSpecialVar_Result;
 }
 
-void GetSecretBaseOwnerInteractionState(void)
+void GetSecretBaseOwnerAndState(void)
 {
     u16 secretBaseId;
     u8 i;
@@ -1719,7 +1719,7 @@ void ClearJapaneseSecretBases(struct SecretBase *bases)
     }
 }
 
-void sub_80EB1AC(void)
+void InitSecretBaseVars(void)
 {
     VarSet(VAR_SECRET_BASE_STEP_COUNTER, 0);
     VarSet(VAR_SECRET_BASE_LAST_ITEM_USED, 0);

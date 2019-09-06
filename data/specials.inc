@@ -25,15 +25,15 @@ gSpecials:: @ 81DBA64
 	def_special ShowSecretBaseDecorationMenu
 	def_special ShowSecretBaseRegistryMenu
 	def_special PrepSecretBaseBattleFlags
-	def_special GetSecretBaseOwnerInteractionState
+	def_special GetSecretBaseOwnerAndState
 	def_special InitSecretBaseDecorationSprites
-	def_special sub_8127E18
+	def_special SetDecoration
 	def_special sub_81297AC
 	def_special GetSecretBaseTypeInFrontOfPlayer
 	def_special SetSecretBaseOwnerGfxId
 	def_special sub_8129708
 	def_special EnterNewlyCreatedSecretBase
-	def_special sub_80EA30C
+	def_special SetBattledOwnerFromResult
 	def_special DoSecretBasePCTurnOffEffect
 	def_special RecordMixingPlayerSpotTriggered
 	def_special sub_80B2DA4
@@ -360,7 +360,7 @@ gSpecials:: @ 81DBA64
 	def_special PutFanClubSpecialOnTheAir
 	def_special sub_80EED10
 	def_special sub_80EED34
-	def_special sub_80EB1AC
+	def_special InitSecretBaseVars
 	def_special SetSecretBaseSecretsTvFlags_SandOrnament
 	def_special sub_80EB300
 	def_special sub_80EB438
