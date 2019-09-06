@@ -1,6 +1,7 @@
 {
   "id": "MAP_SECRET_BASE_TREE2",
   "name": "SecretBase_Tree2",
+  "shared_scripts_map": "SecretBase",
   "layout": "LAYOUT_SECRET_BASE_TREE2",
   "music": "MUS_MACHI_S3",
   "region_map_section": "MAPSEC_SECRET_BASE",
