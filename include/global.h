@@ -257,6 +257,8 @@ struct BattleTowerPokemon
     u8 friendship;
 };
 
+#define NULL_BATTLE_TOWER_POKEMON { .nickname = __("$$$$$$$$$$$") }
+
 struct EmeraldBattleTowerRecord
 {
     /*0x00*/ u8 lvlMode; // 0 = level 50, 1 = level 100

@@ -1,4 +1,5 @@
 TOOLCHAIN := $(DEVKITARM)
+COMPARE ?= 0
 
 ifeq ($(CC),)
 HOSTCC := gcc
@@ -108,7 +109,7 @@ MAKEFLAGS += --no-print-directory
 # Secondary expansion is required for dependency variables in object rules.
 .SECONDEXPANSION:
 
-.PHONY: all rom clean compare tidy tools mostlyclean clean-tools $(TOOLDIRS)
+.PHONY: all rom clean compare tidy tools mostlyclean clean-tools $(TOOLDIRS) berry_fix
 
 infoshell = $(foreach line, $(shell $1 | sed "s/ /__SPACE__/g"), $(info $(subst __SPACE__, ,$(line))))
 
@@ -120,7 +121,8 @@ else
 NODEP := 1
 endif
 
-C_SRCS := $(wildcard $(C_SUBDIR)/*.c $(C_SUBDIR)/*/*.c $(C_SUBDIR)/*/*/*.c)
+C_SRCS_IN := $(wildcard $(C_SUBDIR)/*.c $(C_SUBDIR)/*/*.c $(C_SUBDIR)/*/*/*.c)
+C_SRCS := $(foreach src,$(C_SRCS_IN),$(if $(findstring .inc.c,$(src)),,$(src)))
 C_OBJS := $(patsubst $(C_SUBDIR)/%.c,$(C_BUILDDIR)/%.o,$(C_SRCS))
 
 C_ASM_SRCS += $(wildcard $(C_SUBDIR)/*.s $(C_SUBDIR)/*/*.s $(C_SUBDIR)/*/*/*.s)
@@ -154,11 +156,13 @@ tools: $(TOOLDIRS)
 $(TOOLDIRS):
 	@$(MAKE) -C $@ CC=$(HOSTCC) CXX=$(HOSTCXX)
 
-rom: $(ROM)
+rom: berry_fix $(ROM)
+ifeq ($(COMPARE),1)
+	@$(SHA1) rom.sha1
+endif
 
 # For contributors to make sure a change didn't affect the contents of the ROM.
-compare: all
-	@$(SHA1) rom.sha1
+compare: ; @$(MAKE) COMPARE=1
 
 clean: mostlyclean clean-tools
 
@@ -173,6 +177,7 @@ mostlyclean: tidy
 	rm -f $(DATA_ASM_SUBDIR)/maps/connections.inc $(DATA_ASM_SUBDIR)/maps/events.inc $(DATA_ASM_SUBDIR)/maps/groups.inc $(DATA_ASM_SUBDIR)/maps/headers.inc
 	find $(DATA_ASM_SUBDIR)/maps \( -iname 'connections.inc' -o -iname 'events.inc' -o -iname 'header.inc' \) -exec rm {} +
 	rm -f $(AUTO_GEN_TARGETS)
+	@$(MAKE) clean -C berry_fix
 
 tidy:
 	rm -f $(ROM) $(ELF) $(MAP)
@@ -225,7 +230,7 @@ endif
 ifeq ($(NODEP),1)
 $(C_BUILDDIR)/%.o: c_dep :=
 else
-$(C_BUILDDIR)/%.o: c_dep = $(shell $(SCANINC) -I include -I tools/agbcc/include $(C_SUBDIR)/$*.c)
+$(C_BUILDDIR)/%.o: c_dep = $(shell [[ -f $(C_SUBDIR)/$*.c ]] && $(SCANINC) -I include -I tools/agbcc/include $(C_SUBDIR)/$*.c)
 endif
 
 ifeq ($(DINFO),1)
@@ -241,7 +246,7 @@ $(C_BUILDDIR)/%.o : $(C_SUBDIR)/%.c $$(c_dep)
 ifeq ($(NODEP),1)
 $(C_BUILDDIR)/%.o: c_asm_dep :=
 else
-$(C_BUILDDIR)/%.o: c_asm_dep = $(shell $(SCANINC) -I "" $(C_SUBDIR)/$*.s)
+$(C_BUILDDIR)/%.o: c_asm_dep = $(shell [[ -f $(C_SUBDIR)/$*.s ]] && $(SCANINC) -I "" $(C_SUBDIR)/$*.s)
 endif
 
 $(C_BUILDDIR)/%.o: $(C_SUBDIR)/%.s $$(c_asm_dep)
@@ -297,3 +302,8 @@ $(ROM): $(ELF)
 	$(FIX) $@ -p --silent
 
 modern: ; @$(MAKE) MODERN=1
+
+berry_fix/berry_fix.gba: berry_fix
+
+berry_fix:
+	@$(MAKE) -C berry_fix COMPARE=$(COMPARE)

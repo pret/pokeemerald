@@ -1,5 +1,16 @@
 {{ doNotModifyHeader }}
+
 ## for wild_encounter_group in wild_encounter_groups
+{% if wild_encounter_group.for_maps %}
+## for wild_encounter_field in wild_encounter_group.fields
+## for encounter_rate in wild_encounter_field.encounter_rates
+{% if trackVar(encounter_rate, 100) %}
+#define ENCOUNTER_CHANCE_{{ upper(wild_encounter_field.type) }}_SLOT_{{ loop.index }} {{ encounter_rate }} {% else %}#define ENCOUNTER_CHANCE_{{ upper(wild_encounter_field.type) }}_SLOT_{{ loop.index }} ENCOUNTER_CHANCE_{{ upper(wild_encounter_field.type) }}_SLOT_{{ subtract(loop.index, 1) }} + {{ encounter_rate }}{% endif %} {{ setVarInt(wild_encounter_field.type, loop.index) }}
+## endfor
+#define ENCOUNTER_CHANCE_{{ upper(wild_encounter_field.type) }}_TOTAL (ENCOUNTER_CHANCE_{{ upper(wild_encounter_field.type) }}_SLOT_{{ getVar(wild_encounter_field.type) }})
+## endfor
+{% endif %}
+
 ## for encounter in wild_encounter_group.encounters
 {% if existsIn(encounter, "land_mons") %}
 const struct WildPokemon {{ encounter.base_label }}_LandMons[] =
