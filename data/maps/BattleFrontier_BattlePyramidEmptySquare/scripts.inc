@@ -181,13 +181,13 @@ BattleFacility_TrainerBattle_PlaceholderText: @ 8252C8D
 	.string "This is a sample message.$"
 
 gText_BattlePyramidConfirmRest:: @ 8252CA7
-	.string "Your BATTLE PYRAMID quest will be\n"
+	.string "Your Battle Pyramid quest will be\n"
 	.string "saved so that you may quit for now.\l"
 	.string "Is that okay?$"
 
 gText_BattlePyramidConfirmRetire:: @ 8252CFB
 	.string "Are you sure you want to quit your\n"
-	.string "PYRAMID quest?$"
+	.string "Pyramid quest?$"
 
 BattlePyramid_ExitHintUp_Text1:: @ 8252D2D
 	.string "This floor's exit is in\n"
@@ -485,39 +485,39 @@ BattlePyramid_ZeroItemsRemaining_Text4:: @ 8253D3E
 	.string "items on the ground.$"
 
 BattlePyramid_EightItemsRemaining_Text5:: @ 8253D96
-	.string "On this floor of the PYRAMID,\n"
+	.string "On this floor of the Pyramid,\n"
 	.string "I hear there are eight items…$"
 
 BattlePyramid_SevenItemsRemaining_Text5:: @ 8253DD2
-	.string "On this floor of the PYRAMID,\n"
+	.string "On this floor of the Pyramid,\n"
 	.string "I hear there are seven items…$"
 
 BattlePyramid_SixItemsRemaining_Text5:: @ 8253E0E
-	.string "On this floor of the PYRAMID,\n"
+	.string "On this floor of the Pyramid,\n"
 	.string "I hear there are six items…$"
 
 BattlePyramid_FiveItemsRemaining_Text5:: @ 8253E48
-	.string "On this floor of the PYRAMID,\n"
+	.string "On this floor of the Pyramid,\n"
 	.string "I hear there are five items…$"
 
 BattlePyramid_FourItemsRemaining_Text5:: @ 8253E83
-	.string "On this floor of the PYRAMID,\n"
+	.string "On this floor of the Pyramid,\n"
 	.string "I hear there are four items…$"
 
 BattlePyramid_ThreeItemsRemaining_Text5:: @ 8253EBE
-	.string "On this floor of the PYRAMID,\n"
+	.string "On this floor of the Pyramid,\n"
 	.string "I hear there are three items…$"
 
 BattlePyramid_TwoItemsRemaining_Text5:: @ 8253EFA
-	.string "On this floor of the PYRAMID,\n"
+	.string "On this floor of the Pyramid,\n"
 	.string "I hear there are two items…$"
 
 BattlePyramid_OneItemRemaining_Text5:: @ 8253F34
-	.string "On this floor of the PYRAMID,\n"
+	.string "On this floor of the Pyramid,\n"
 	.string "I hear there is one item…$"
 
 BattlePyramid_ZeroItemsRemaining_Text5:: @ 8253F6C
-	.string "On this floor of the PYRAMID,\n"
+	.string "On this floor of the Pyramid,\n"
 	.string "I hear there are no items…$"
 
 BattlePyramid_EightItemsRemaining_Text6:: @ 8253FA5
@@ -568,37 +568,37 @@ BattlePyramid_ZeroItemsRemaining_Text6:: @ 825422B
 BattlePyramid_SevenTrainersRemaining_Text1:: @ 825427A
 	.string "You were really awesome!\p"
 	.string "But there are still seven tough\n"
-	.string "TRAINERS other than me!$"
+	.string "Trainers other than me!$"
 
 BattlePyramid_SixTrainersRemaining_Text1:: @ 82542CB
 	.string "You were really awesome!\p"
 	.string "But there are still six tough\n"
-	.string "TRAINERS other than me!$"
+	.string "Trainers other than me!$"
 
 BattlePyramid_FiveTrainersRemaining_Text1:: @ 825431A
 	.string "You were really awesome!\p"
 	.string "But there are still five tough\n"
-	.string "TRAINERS other than me!$"
+	.string "Trainers other than me!$"
 
 BattlePyramid_FourTrainersRemaining_Text1:: @ 825436A
 	.string "You were really awesome!\p"
 	.string "But there are still four tough\n"
-	.string "TRAINERS other than me!$"
+	.string "Trainers other than me!$"
 
 BattlePyramid_ThreeTrainersRemaining_Text1:: @ 82543BA
 	.string "You were really awesome!\p"
 	.string "But there are still three tough\n"
-	.string "TRAINERS other than me!$"
+	.string "Trainers other than me!$"
 
 BattlePyramid_TwoTrainersRemaining_Text1:: @ 825440B
 	.string "You were really awesome!\p"
 	.string "But there are still two tough\n"
-	.string "TRAINERS other than me!$"
+	.string "Trainers other than me!$"
 
 BattlePyramid_OneTrainersRemaining_Text1:: @ 825445A
 	.string "You were really awesome!\p"
 	.string "But there's still one tough\n"
-	.string "TRAINER other than me!$"
+	.string "Trainer other than me!$"
 
 BattlePyramid_ZeroTrainersRemaining_Text1:: @ 82544A6
 	.string "You were really awesome!\p"
@@ -607,111 +607,111 @@ BattlePyramid_ZeroTrainersRemaining_Text1:: @ 82544A6
 
 BattlePyramid_SevenTrainersRemaining_Text2:: @ 82544E6
 	.string "This is so upsetting!\p"
-	.string "But there are seven TRAINERS left!\n"
+	.string "But there are seven Trainers left!\n"
 	.string "Someone will humble you!$"
 
 BattlePyramid_SixTrainersRemaining_Text2:: @ 8254538
 	.string "This is so upsetting!\p"
-	.string "But there are six TRAINERS left!\n"
+	.string "But there are six Trainers left!\n"
 	.string "Someone will humble you!$"
 
 BattlePyramid_FiveTrainersRemaining_Text2:: @ 8254588
 	.string "This is so upsetting!\p"
-	.string "But there are five TRAINERS left!\n"
+	.string "But there are five Trainers left!\n"
 	.string "Someone will humble you!$"
 
 BattlePyramid_FourTrainersRemaining_Text2:: @ 82545D9
 	.string "This is so upsetting!\p"
-	.string "But there are four TRAINERS left!\n"
+	.string "But there are four Trainers left!\n"
 	.string "Someone will humble you!$"
 
 BattlePyramid_ThreeTrainersRemaining_Text2:: @ 825462A
 	.string "This is so upsetting!\p"
-	.string "But there are three TRAINERS left!\n"
+	.string "But there are three Trainers left!\n"
 	.string "Someone will humble you!$"
 
 BattlePyramid_TwoTrainersRemaining_Text2:: @ 825467C
 	.string "This is so upsetting!\p"
-	.string "But there are two TRAINERS left!\n"
+	.string "But there are two Trainers left!\n"
 	.string "Someone will humble you!$"
 
 BattlePyramid_OneTrainersRemaining_Text2:: @ 82546CC
 	.string "This is so upsetting!\p"
-	.string "But there's one TRAINER left!\n"
+	.string "But there's one Trainer left!\n"
 	.string "I'm sure you will be humbled!$"
 
 BattlePyramid_ZeroTrainersRemaining_Text2:: @ 825471E
 	.string "This is so upsetting!\p"
-	.string "But there are no more TRAINERS\n"
+	.string "But there are no more Trainers\n"
 	.string "who can engage you!$"
 
 BattlePyramid_SevenTrainersRemaining_Text3:: @ 8254767
 	.string "That's pretty impressive!\p"
-	.string "But there are seven more TRAINERS\n"
+	.string "But there are seven more Trainers\n"
 	.string "on this floor. Can you beat them all?$"
 
 BattlePyramid_SixTrainersRemaining_Text3:: @ 82547C9
 	.string "That's pretty impressive!\p"
-	.string "But there are six more TRAINERS\n"
+	.string "But there are six more Trainers\n"
 	.string "on this floor. Can you beat them all?$"
 
 BattlePyramid_FiveTrainersRemaining_Text3:: @ 8254829
 	.string "That's pretty impressive!\p"
-	.string "But there are five more TRAINERS\n"
+	.string "But there are five more Trainers\n"
 	.string "on this floor. Can you beat them all?$"
 
 BattlePyramid_FourTrainersRemaining_Text3:: @ 825488A
 	.string "That's pretty impressive!\p"
-	.string "But there are four more TRAINERS\n"
+	.string "But there are four more Trainers\n"
 	.string "on this floor. Can you beat them all?$"
 
 BattlePyramid_ThreeTrainersRemaining_Text3:: @ 82548EB
 	.string "That's pretty impressive!\p"
-	.string "But there are three more TRAINERS\n"
+	.string "But there are three more Trainers\n"
 	.string "on this floor. Can you beat them all?$"
 
 BattlePyramid_TwoTrainersRemaining_Text3:: @ 825494D
 	.string "That's pretty impressive!\p"
-	.string "But there are two more TRAINERS\n"
+	.string "But there are two more Trainers\n"
 	.string "on this floor. Can you beat them both?$"
 
 BattlePyramid_OneTrainersRemaining_Text3:: @ 82549AE
 	.string "That's pretty impressive!\p"
-	.string "But there's still one more TRAINER\n"
+	.string "But there's still one more Trainer\n"
 	.string "on this floor. Can you prevail?$"
 
 BattlePyramid_ZeroTrainersRemaining_Text3:: @ 8254A0B
 	.string "That's pretty impressive!\p"
-	.string "You've gone through all the TRAINERS\n"
+	.string "You've gone through all the Trainers\n"
 	.string "on this floor.$"
 
 BattlePyramid_SevenTrainersRemaining_Text4:: @ 8254A59
 	.string "Maybe you could sweep through\n"
-	.string "the seven TRAINERS left on this floor.$"
+	.string "the seven Trainers left on this floor.$"
 
 BattlePyramid_SixTrainersRemaining_Text4:: @ 8254A9E
 	.string "Maybe you could sweep through\n"
-	.string "the six TRAINERS left on this floor.$"
+	.string "the six Trainers left on this floor.$"
 
 BattlePyramid_FiveTrainersRemaining_Text4:: @ 8254AE1
 	.string "Maybe you could sweep through\n"
-	.string "the five TRAINERS left on this floor.$"
+	.string "the five Trainers left on this floor.$"
 
 BattlePyramid_FourTrainersRemaining_Text4:: @ 8254B25
 	.string "Maybe you could sweep through\n"
-	.string "the four TRAINERS left on this floor.$"
+	.string "the four Trainers left on this floor.$"
 
 BattlePyramid_ThreeTrainersRemaining_Text4:: @ 8254B69
 	.string "Maybe you could sweep through\n"
-	.string "the three TRAINERS left on this floor.$"
+	.string "the three Trainers left on this floor.$"
 
 BattlePyramid_TwoTrainersRemaining_Text4:: @ 8254BAE
 	.string "Maybe you could sweep through\n"
-	.string "the two TRAINERS left on this floor.$"
+	.string "the two Trainers left on this floor.$"
 
 BattlePyramid_OneTrainersRemaining_Text4:: @ 8254BF1
 	.string "Maybe you could complete your sweep\n"
-	.string "with the one TRAINER left on this floor.$"
+	.string "with the one Trainer left on this floor.$"
 
 BattlePyramid_ZeroTrainersRemaining_Text4:: @ 8254C3E
 	.string "There isn't a single person left who\n"
@@ -719,65 +719,65 @@ BattlePyramid_ZeroTrainersRemaining_Text4:: @ 8254C3E
 
 BattlePyramid_SevenTrainersRemaining_Text5:: @ 8254C77
 	.string "You may have what it takes to beat\n"
-	.string "the seven expert TRAINERS who remain.$"
+	.string "the seven expert Trainers who remain.$"
 
 BattlePyramid_SixTrainersRemaining_Text5:: @ 8254CC0
 	.string "You may have what it takes to beat\n"
-	.string "the six expert TRAINERS who remain.$"
+	.string "the six expert Trainers who remain.$"
 
 BattlePyramid_FiveTrainersRemaining_Text5:: @ 8254D07
 	.string "You may have what it takes to beat\n"
-	.string "the five expert TRAINERS who remain.$"
+	.string "the five expert Trainers who remain.$"
 
 BattlePyramid_FourTrainersRemaining_Text5:: @ 8254D4F
 	.string "You may have what it takes to beat\n"
-	.string "the four expert TRAINERS who remain.$"
+	.string "the four expert Trainers who remain.$"
 
 BattlePyramid_ThreeTrainersRemaining_Text5:: @ 8254D97
 	.string "You may have what it takes to beat\n"
-	.string "the three expert TRAINERS who remain.$"
+	.string "the three expert Trainers who remain.$"
 
 BattlePyramid_TwoTrainersRemaining_Text5:: @ 8254DE0
 	.string "You may have what it takes to beat\n"
-	.string "the two expert TRAINERS who remain.$"
+	.string "the two expert Trainers who remain.$"
 
 BattlePyramid_OneTrainersRemaining_Text5:: @ 8254E27
 	.string "You may have what it takes to beat\n"
-	.string "the one expert TRAINER who remains.$"
+	.string "the one expert Trainer who remains.$"
 
 BattlePyramid_ZeroTrainersRemaining_Text5:: @ 8254E6E
 	.string "Your skills are beyond reproach.\p"
-	.string "There are no more TRAINERS here\n"
+	.string "There are no more Trainers here\n"
 	.string "who have any chance of beating you.$"
 
 BattlePyramid_SevenTrainersRemaining_Text6:: @ 8254ED3
 	.string "Can you keep winning against\n"
-	.string "the seven remaining TRAINERS?$"
+	.string "the seven remaining Trainers?$"
 
 BattlePyramid_SixTrainersRemaining_Text6:: @ 8254F0E
 	.string "Can you keep winning against\n"
-	.string "the six remaining TRAINERS?$"
+	.string "the six remaining Trainers?$"
 
 BattlePyramid_FiveTrainersRemaining_Text6:: @ 8254F47
 	.string "Can you keep winning against\n"
-	.string "the five remaining TRAINERS?$"
+	.string "the five remaining Trainers?$"
 
 BattlePyramid_FourTrainersRemaining_Text6:: @ 8254F81
 	.string "Can you keep winning against\n"
-	.string "the four remaining TRAINERS?$"
+	.string "the four remaining Trainers?$"
 
 BattlePyramid_ThreeTrainersRemaining_Text6:: @ 8254FBB
 	.string "Can you keep winning against\n"
-	.string "the three remaining TRAINERS?$"
+	.string "the three remaining Trainers?$"
 
 BattlePyramid_TwoTrainersRemaining_Text6:: @ 8254FF6
 	.string "Can you keep winning against\n"
-	.string "the two remaining TRAINERS?$"
+	.string "the two remaining Trainers?$"
 
 BattlePyramid_OneTrainersRemaining_Text6:: @ 825502F
 	.string "Can you keep winning against\n"
-	.string "the last remaining TRAINER?$"
+	.string "the last remaining Trainer?$"
 
 BattlePyramid_ZeroTrainersRemaining_Text6:: @ 8255068
-	.string "There aren't any TRAINERS left that\n"
+	.string "There aren't any Trainers left that\n"
 	.string "can take you on now…$"

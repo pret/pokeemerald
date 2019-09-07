@@ -519,7 +519,7 @@ BattleFrontier_BattleTowerBattleRoom_EventScript_24220E:: @ 824220E
 
 BattleFrontier_BattleTowerBattleRoom2_Text_242217: @ 8242217
 BattleFrontier_BattleTowerBattleRoom_Text_242217: @ 8242217
-	.string "We will restore your POKéMON to\n"
+	.string "We will restore your Pokémon to\n"
 	.string "full health.$"
 
 BattleFrontier_BattleTowerBattleRoom_Text_242244: @ 8242244
@@ -553,11 +553,11 @@ BattleFrontier_BattleTowerBattleRoom_Text_242371: @ 8242371
 BattleFrontier_BattleTowerBattleRoom2_Text_2423A3: @ 82423A3
 BattleFrontier_BattleTowerBattleRoom_Text_2423A3: @ 82423A3
 	.string "Record your battle on your\n"
-	.string "FRONTIER PASS?$"
+	.string "Frontier Pass?$"
 
 BattleFrontier_BattleTowerLobby_Text_2423CD: @ 82423CD
 	.string "{PLAYER}'s battle was recorded\n"
-	.string "on the FRONTIER PASS.$"
+	.string "on the Frontier Pass.$"
 
 BattleFrontier_BattleTowerBattleRoom2_Text_2423FC: @ 82423FC
 BattleFrontier_BattleTowerBattleRoom_Text_2423FC: @ 82423FC
@@ -571,8 +571,8 @@ BattleFrontier_BattleTowerBattleRoom_Text_242426: @ 8242426
 
 BattleFrontier_BattleTowerBattleRoom2_Text_24244C: @ 824244C
 BattleFrontier_BattleTowerBattleRoom_Text_24244C: @ 824244C
-	.string "Would you like to cancel your BATTLE\n"
-	.string "ROOM challenge?$"
+	.string "Would you like to cancel your Battle\n"
+	.string "Room challenge?$"
 
 gText_BattleRecordCouldntBeSaved:: @ 8242481
 	.string "There was an error of some sort.\n"
@@ -580,19 +580,19 @@ gText_BattleRecordCouldntBeSaved:: @ 8242481
 
 BattleFrontier_BattleTowerBattleRoom_Text_2424C2: @ 82424C2
 	.string "Excuse me, but…\p"
-	.string "Our leader, the SALON MAIDEN, is on\n"
+	.string "Our leader, the Salon Maiden, is on\n"
 	.string "her way here in hopes of battling you.\p"
 	.string "She should be arriving very shortly.$"
 
 BattleFrontier_BattleTowerBattleRoom_Text_242542: @ 8242542
-	.string "You will be facing the SALON MAIDEN.\n"
+	.string "You will be facing the Salon Maiden.\n"
 	.string "Are you prepared?$"
 
 BattleFrontier_BattleTowerBattleRoom_Text_242579: @ 8242579
 	.string "Greetings…\n"
-	.string "My name is ANABEL.\p"
-	.string "I am the SALON MAIDEN, and I am in\n"
-	.string "charge of running the BATTLE TOWER…\p"
+	.string "My name is Anabel.\p"
+	.string "I am the Salon Maiden, and I am in\n"
+	.string "charge of running the Battle Tower…\p"
 	.string "I have heard several rumors\n"
 	.string "about you…\p"
 	.string "In all honesty, what I have heard does\n"
@@ -605,17 +605,17 @@ BattleFrontier_BattleTowerBattleRoom_Text_24268C: @ 824268C
 	.string "its entirety…$"
 
 BattleFrontier_BattleTowerBattleRoom_Text_2426B4: @ 82426B4
-	.string "ANABEL: Fufufu, nicely done…\p"
-	.string "Your FRONTIER PASS, please…\n"
+	.string "Anabel: Fufufu, nicely done…\p"
+	.string "Your Frontier Pass, please…\n"
 	.string "Your talent shall be recognized.$"
 
 BattleFrontier_BattleTowerBattleRoom_Text_24270E: @ 824270E
 	.string "The Ability Symbol was embossed on\n"
-	.string "the FRONTIER PASS!$"
+	.string "the Frontier Pass!$"
 
 BattleFrontier_BattleTowerBattleRoom_Text_242744: @ 8242744
 	.string "… … … … … …\p"
-	.string "You have confidence in your POKéMON\n"
+	.string "You have confidence in your Pokémon\n"
 	.string "battling talent, don't you?\p"
 	.string "I urge you to keep battling and\n"
 	.string "keep on winning.\p"
@@ -623,7 +623,7 @@ BattleFrontier_BattleTowerBattleRoom_Text_242744: @ 8242744
 	.string "Until the next time we meet…$"
 
 BattleFrontier_BattleTowerBattleRoom_Text_2427F9: @ 82427F9
-	.string "ANABEL: You really did come back to\n"
+	.string "Anabel: You really did come back to\n"
 	.string "see me…\p"
 	.string "… … … … … …\p"
 	.string "You've won straight matches to see me…\n"
@@ -636,8 +636,8 @@ BattleFrontier_BattleTowerBattleRoom_Text_2428E0: @ 82428E0
 	.string "Let's begin, shall we?$"
 
 BattleFrontier_BattleTowerBattleRoom_Text_2428F7: @ 82428F7
-	.string "ANABEL: Fufu, congratulations…\n"
-	.string "Your FRONTIER PASS, please…$"
+	.string "Anabel: Fufu, congratulations…\n"
+	.string "Your Frontier Pass, please…$"
 
 BattleFrontier_BattleTowerBattleRoom_Text_242932: @ 8242932
 	.string "The Ability Symbol took on\n"
@@ -645,7 +645,7 @@ BattleFrontier_BattleTowerBattleRoom_Text_242932: @ 8242932
 
 BattleFrontier_BattleTowerBattleRoom_Text_24295D: @ 824295D
 	.string "That was fun…\p"
-	.string "I have never had a POKéMON battle\n"
+	.string "I have never had a Pokémon battle\n"
 	.string "so enjoyable before…\p"
 	.string "I wish I could battle with you again…$"
 

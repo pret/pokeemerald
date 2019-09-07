@@ -411,9 +411,9 @@ gText_082B7229:: @ 82B7229
 	.string "I'm {STR_VAR_1}, and I really look up\n"
 	.string "to you, {PLAYER}.\p"
 	.string "I… I had this dream of one day meeting\n"
-	.string "you and asking you about POKéMON.\p"
+	.string "you and asking you about Pokémon.\p"
 	.string "Please, please, {PLAYER}!\n"
-	.string "Please teach me about POKéMON!$"
+	.string "Please teach me about Pokémon!$"
 
 gText_082B731C:: @ 82B731C
 	.string "Oh… B-but…\n"
@@ -427,7 +427,7 @@ gText_082B735B:: @ 82B735B
 	.string "Oh… I'm sorry…\n"
 	.string "I'm so happy, I'm crying…\p"
 	.string "Um… Then please tell me!\n"
-	.string "It's about the BATTLE TOWER.\p"
+	.string "It's about the Battle Tower.\p"
 	.string "Which would be better for me: Level 50\n"
 	.string "or the Open Level?$"
 
@@ -445,10 +445,10 @@ gText_082B74C1:: @ 82B74C1
 	.string "Wowee! You're {PLAYER}, aren't you?\n"
 	.string "You're awesomely strong, aren't you?\p"
 	.string "I'm {STR_VAR_1}!\n"
-	.string "I just became a TRAINER!\p"
+	.string "I just became a Trainer!\p"
 	.string "Please, {PLAYER}!\n"
 	.string "Can you be my teacher and tell me\l"
-	.string "lots about being a TRAINER?$"
+	.string "lots about being a Trainer?$"
 
 gText_082B756F:: @ 82B756F
 	.string "Aww, why?\n"
@@ -458,7 +458,7 @@ gText_082B756F:: @ 82B756F
 gText_082B75B2:: @ 82B75B2
 	.string "Yay! Great!\p"
 	.string "The first thing I wanted to ask you is\n"
-	.string "about the BATTLE TOWER!\p"
+	.string "about the Battle Tower!\p"
 	.string "The Level 50 and Open Level Rooms…\n"
 	.string "Which would be perfect for me?$"
 
@@ -471,7 +471,7 @@ gText_082B763F:: @ 82B763F
 gText_082B76AC:: @ 82B76AC
 	.string "Um… Are you {PLAYER}?\n"
 	.string "My name is {STR_VAR_1}.\p"
-	.string "I want to become a POKéMON TRAINER,\n"
+	.string "I want to become a Pokémon Trainer,\n"
 	.string "but I don't know what to do…\p"
 	.string "So I thought maybe I could ask you for\n"
 	.string "advice because you're so famous.\p"
@@ -479,14 +479,14 @@ gText_082B76AC:: @ 82B76AC
 
 gText_082B7772:: @ 82B7772
 	.string "Oh, but…\p"
-	.string "I sincerely want to become a POKéMON\n"
-	.string "TRAINER!\p"
+	.string "I sincerely want to become a Pokémon\n"
+	.string "Trainer!\p"
 	.string "Please, can you answer my questions?$"
 
 gText_082B77CE:: @ 82B77CE
 	.string "Thank you!\n"
 	.string "Here's my first question right away!\p"
-	.string "The BATTLE TOWER has two levels,\n"
+	.string "The Battle Tower has two levels,\n"
 	.string "Level 50 and Open Level, right?\p"
 	.string "Which level do you think is more\n"
 	.string "suitable for me?$"
@@ -515,7 +515,7 @@ gText_082B78D4:: @ 82B78D4
 	.string "myself because you'll forget…\p"
 	.string "I had this dream that if I ever met\n"
 	.string "you, {PLAYER}, that maybe I could ask\l"
-	.string "you for advice as a TRAINER.\p"
+	.string "you for advice as a Trainer.\p"
 	.string "But I don't think you would agree\n"
 	.string "to that.\p"
 	.string "…Or will you be so kind as to give\n"
@@ -538,7 +538,7 @@ gText_082B7C13:: @ 82B7C13
 	.string "I… I'm so happy…\p"
 	.string "What I want to ask you is really\n"
 	.string "trivial, but I can't decide…\p"
-	.string "At the BATTLE TOWER, they let you\n"
+	.string "At the Battle Tower, they let you\n"
 	.string "choose Level 50 or Open Level.\p"
 	.string "Which course do you think even I may\n"
 	.string "have a chance at?$"
@@ -555,13 +555,13 @@ gText_082B7D18:: @ 82B7D18
 gText_082B7DD4:: @ 82B7DD4
 	.string "Oh! You're {PLAYER}{KUN}, aren't you?\p"
 	.string "I've heard that you're tough at\n"
-	.string "POKéMON!\p"
+	.string "Pokémon!\p"
 	.string "I'm {STR_VAR_1}!\n"
 	.string "I'll be your friend!\p"
 	.string "Did you know?\p"
-	.string "You can't win at the BATTLE FRONTIER\n"
+	.string "You can't win at the Battle Frontier\n"
 	.string "if all you know is what they teach at\l"
-	.string "the TRAINER'S SCHOOL.\p"
+	.string "the Trainer's School.\p"
 	.string "I'm willing to listen to your advice.\n"
 	.string "You'll agree, of course?$"
 
@@ -573,7 +573,7 @@ gText_082B7EE5:: @ 82B7EE5
 gText_082B7F35:: @ 82B7F35
 	.string "Okay, so there is this something.\n"
 	.string "I want you to decide it for me.\p"
-	.string "You know that the BATTLE TOWER has\n"
+	.string "You know that the Battle Tower has\n"
 	.string "Level 50 and Open Level Rooms?\p"
 	.string "Which do you think would be good\n"
 	.string "for me, {PLAYER}{KUN}?$"
@@ -591,12 +591,12 @@ gText_082B8087:: @ 82B8087
 	.string "Oh, hi, there! {PLAYER}{KUN}!\n"
 	.string "I know you because you're famous!\l"
 	.string "Call me {STR_VAR_1}! Glad to meet you!\p"
-	.string "I'm a TRIATHLETE, so I keep myself\n"
-	.string "fit even while I raise POKéMON.\p"
+	.string "I'm a Triathlete, so I keep myself\n"
+	.string "fit even while I raise Pokémon.\p"
 	.string "I'm also involved with other things\n"
 	.string "like work, napping, ballroom dancing…\p"
 	.string "Being this busy, it's not so easy for\n"
-	.string "me to become a decent TRAINER.\p"
+	.string "me to become a decent Trainer.\p"
 	.string "So, I have a proposition!\p"
 	.string "There must be a reason why we met.\n"
 	.string "So, {PLAYER}{KUN}, how about sharing your\l"
@@ -611,7 +611,7 @@ gText_082B822B:: @ 82B822B
 gText_082B8286:: @ 82B8286
 	.string "Thank you! That's more like it!\n"
 	.string "So, let's start with an easy one!\p"
-	.string "You know about the BATTLE TOWER's\n"
+	.string "You know about the Battle Tower's\n"
 	.string "two courses, right?\l"
 	.string "You know, Level 50 and Open Level.\p"
 	.string "Me being a busy guy, which one should\n"
@@ -649,7 +649,7 @@ gText_082B8559:: @ 82B8559
 	.string "…Oh, I thought of something!\p"
 	.string "Drum roll, please!\n"
 	.string "The question I have is…\p"
-	.string "If I were to take a BATTLE TOWER\n"
+	.string "If I were to take a Battle Tower\n"
 	.string "challenge, which way should I go?\p"
 	.string "Level 50 or Open Level?\n"
 	.string "Which suits me more?$"
@@ -689,7 +689,7 @@ gText_082B887C:: @ 82B887C
 	.string "Oh… I'm delighted!\p"
 	.string "I don't wish to waste your time,\n"
 	.string "so please advise me on this.\p"
-	.string "I plan to take a BATTLE TOWER\n"
+	.string "I plan to take a Battle Tower\n"
 	.string "challenge soon.\p"
 	.string "However, there are two levels…\p"
 	.string "Which would be most suitable for me?\n"
@@ -707,9 +707,9 @@ gText_082B89C6:: @ 82B89C6
 	.string "You spoke to me!\l"
 	.string "I… I'm overjoyed!\p"
 	.string "Me! My name is {STR_VAR_1}!\n"
-	.string "I just became a TRAINER!\p"
+	.string "I just became a Trainer!\p"
 	.string "I'm delighted I met you, {PLAYER},\n"
-	.string "the big name in POKéMON circles!\p"
+	.string "the big name in Pokémon circles!\p"
 	.string "Oh-oh-oh, I know!\n"
 	.string "May I ask a huge favor, {PLAYER}?\p"
 	.string "Please take me in as your apprentice!\n"
@@ -729,7 +729,7 @@ gText_082B8B66:: @ 82B8B66
 	.string "I won't be able to sleep tonight…\n"
 	.string "Thank you ever so much!\p"
 	.string "Then, here's my question!\p"
-	.string "At the BATTLE TOWER, what is right\n"
+	.string "At the Battle Tower, what is right\n"
 	.string "for me, Level 50 or Open Level?$"
 
 gText_082B8C20:: @ 82B8C20
@@ -742,11 +742,11 @@ gText_082B8C20:: @ 82B8C20
 gText_082B8CAA:: @ 82B8CAA
 	.string "Whoa! Could you be…\n"
 	.string "Might you be… {PLAYER}{KUN}?!\l"
-	.string "That strong and famous TRAINER?\l"
+	.string "That strong and famous Trainer?\l"
 	.string "Well, hello, aren't I just the luckiest!\p"
 	.string "Hello, the name's {STR_VAR_1}!\p"
 	.string "I've been on the lookout for\n"
-	.string "a POKéMON teacher.\p"
+	.string "a Pokémon teacher.\p"
 	.string "And with impeccably good timing,\n"
 	.string "along came you, {PLAYER}{KUN}!\p"
 	.string "So, there you have it, {PLAYER}{KUN}!\n"
@@ -762,7 +762,7 @@ gText_082B8E24:: @ 82B8E24
 	.string "Oh, yeah! That's a solid reply!\n"
 	.string "Excellent, I might add!\p"
 	.string "So how about a first piece of advice\n"
-	.string "on the BATTLE TOWER?\p"
+	.string "on the Battle Tower?\p"
 	.string "If I were to go, what would be better?\n"
 	.string "Level 50 or Open Level?$"
 
@@ -779,12 +779,12 @@ gText_082B8F45:: @ 82B8F45
 	.string "… … …\n"
 	.string "Of course I'm lying!\p"
 	.string "Me, I'm {STR_VAR_1}. Despite the way\n"
-	.string "I look, I'm the POKéMON CHAMPION!\l"
+	.string "I look, I'm the Pokémon Champion!\l"
 	.string "…That's a lie, too!\p"
 	.string "This is no lie, though.\n"
 	.string "I'm not very good at battling.\p"
 	.string "So, how about you becoming my master\n"
-	.string "about all things POKéMON?$"
+	.string "about all things Pokémon?$"
 
 gText_082B905F:: @ 82B905F
 	.string "If you're going to act cold like that,\n"
@@ -793,7 +793,7 @@ gText_082B905F:: @ 82B905F
 	.string "Hiccup!\p"
 	.string "Hahaha, that was my FAKE TEARS!\p"
 	.string "Come on, will you please be\n"
-	.string "my POKéMON master?$"
+	.string "my Pokémon master?$"
 
 gText_082B910E:: @ 82B910E
 	.string "Yippee!\n"
@@ -801,7 +801,7 @@ gText_082B910E:: @ 82B910E
 	.string "Of course I'm lying again!\n"
 	.string "But… Thank you, master!\p"
 	.string "You know how there's Level 50 and\n"
-	.string "Open Level at the BATTLE TOWER?\p"
+	.string "Open Level at the Battle Tower?\p"
 	.string "I'm having trouble deciding which\n"
 	.string "level I should challenge…\p"
 	.string "Can you decide for me, master?$"
@@ -817,17 +817,17 @@ gText_082B9204:: @ 82B9204
 gText_082B929C:: @ 82B929C
 	.string "A-H-O-Y!\n"
 	.string "And that spells ahoy, and it means hi!\p"
-	.string "I'm {STR_VAR_1}, the rappin' SAILOR\n"
+	.string "I'm {STR_VAR_1}, the rappin' Sailor\n"
 	.string "am I!\p"
 	.string "Your turn now, tell me a little about\n"
 	.string "yourself, give it a try!\p"
 	.string "Uh-huh, uh-huh!\n"
 	.string "{PLAYER}{KUN}'s your name,\l"
-	.string "and POKéMON's your game!\p"
+	.string "and Pokémon's your game!\p"
 	.string "And you're at a delicate age\n"
 	.string "when all the world's your stage!\p"
 	.string "Anyway, I just want to say,\n"
-	.string "that you're the tenth TRAINER\l"
+	.string "that you're the tenth Trainer\l"
 	.string "I've spoken to today.\p"
 	.string "Let's make that a celebration!\n"
 	.string "Become my mentor for commemoration!$"
@@ -843,7 +843,7 @@ gText_082B9488:: @ 82B9488
 	.string "{PLAYER}, you've got the spirit!\p"
 	.string "So here's my first question\n"
 	.string "that begs your suggestion!\p"
-	.string "It's about the BATTLE TOWER,\n"
+	.string "It's about the Battle Tower,\n"
 	.string "and it hinges on my power!\p"
 	.string "Level 50 and Open Level there be,\n"
 	.string "which is the one that's good for me?$"
@@ -879,7 +879,7 @@ gText_082B9763:: @ 82B9763
 gText_082B97E5:: @ 82B97E5
 	.string "Lucky, yeah, woohoo!\n"
 	.string "Should I pop a question to you?\p"
-	.string "Since we're near the BATTLE TOWER,\n"
+	.string "Since we're near the Battle Tower,\n"
 	.string "how about a question about its power?\p"
 	.string "Of the choices you see,\n"
 	.string "which is the right one for me?$"
@@ -899,10 +899,10 @@ gText_082B992D:: @ 82B992D
 	.string "My name's {STR_VAR_1}.\n"
 	.string "I take karate training, but my body's\l"
 	.string "not built to take the abuse…\p"
-	.string "I decided I'll battle POKéMON and\n"
+	.string "I decided I'll battle Pokémon and\n"
 	.string "toughen myself up.\p"
 	.string "You're {PLAYER}{KUN}, aren't you?\n"
-	.string "The POKéMON LEAGUE CHAMP?\p"
+	.string "The Pokémon League CHAMP?\p"
 	.string "Listen, can I get you to give me\n"
 	.string "advice?$"
 
@@ -915,7 +915,7 @@ gText_082B9AB9:: @ 82B9AB9
 	.string "Thank you. Mighty good of you!\n"
 	.string "…Cough! Cough!\p"
 	.string "Oogh, I have to toughen up quick…\p"
-	.string "I'll be heading off to the BATTLE TOWER\n"
+	.string "I'll be heading off to the Battle Tower\n"
 	.string "right away, but what would be better\l"
 	.string "for me? Level 50 or Open Level?$"
 
@@ -934,9 +934,9 @@ gText_082B9BF2:: @ 82B9BF2
 	.string "I'm really embarrassed to say this,\n"
 	.string "but I explore ancient ruins and such.\p"
 	.string "I'm even more embarrassed to admit\n"
-	.string "I'm interested in the BATTLE FRONTIER.\p"
+	.string "I'm interested in the Battle Frontier.\p"
 	.string "{PLAYER}{KUN}, you have a reputation as\n"
-	.string "a tough TRAINER…\p"
+	.string "a tough Trainer…\p"
 	.string "It's hard for me to say this,\n"
 	.string "but I want to ask something.\p"
 	.string "Could you become my teacher and\n"
@@ -954,7 +954,7 @@ gText_082B9DF9:: @ 82B9DF9
 	.string "It makes me all flustered.\p"
 	.string "Please, answer me without looking\n"
 	.string "at my eyes.\p"
-	.string "At the BATTLE TOWER…\n"
+	.string "At the Battle TOWER…\n"
 	.string "Which level should I attempt?$"
 
 gText_082B9EAA:: @ 82B9EAA
@@ -971,7 +971,7 @@ gText_082B9F55:: @ 82B9F55
 	.string "But are you really real?\p"
 	.string "You may call me {STR_VAR_1}.\p"
 	.string "I have been toying with the idea of\n"
-	.string "apprenticing under a strong TRAINER.\p"
+	.string "apprenticing under a strong Trainer.\p"
 	.string "So, I must say I'm lucky you came along!\n"
 	.string "…You really are {PLAYER}{KUN}, yes?\p"
 	.string "No, no, if you are real, it's fine.\n"
@@ -991,7 +991,7 @@ gText_082BA11D:: @ 82BA11D
 	.string "I don't wish to celebrate prematurely.\p"
 	.string "If it is true, I apologize.\n"
 	.string "But now, I need your advice.\p"
-	.string "If I were to enter the BATTLE TOWER,\n"
+	.string "If I were to enter the Battle Tower,\n"
 	.string "what would be worthy of me?\l"
 	.string "Level 50 or Open Level?$"
 
@@ -1040,7 +1040,7 @@ gText_082BA448:: @ 82BA448
 gText_082BA4D3:: @ 82BA4D3
 	.string "Yay! It's {PLAYER}!\n"
 	.string "Great! I wanted to ask you something!\p"
-	.string "Do you make your POKéMON hold items?\n"
+	.string "Do you make your Pokémon hold items?\n"
 	.string "I want to make mine hold items, but…\p"
 	.string "What item would be good for\n"
 	.string "{STR_VAR_1} to hold?\p"
@@ -1063,7 +1063,7 @@ gText_082BA635:: @ 82BA635
 	.string "Oh, uh, no, that's not what I meant.\n"
 	.string "I want to know about a different item\l"
 	.string "than the ones I already know.\p"
-	.string "Or do you mean that my POKéMON doesn't\n"
+	.string "Or do you mean that my Pokémon doesn't\n"
 	.string "have to hold anything this time?$"
 
 gText_082BA6E6:: @ 82BA6E6
@@ -1089,7 +1089,7 @@ gText_082BA78F:: @ 82BA78F
 gText_082BA7D8:: @ 82BA7D8
 	.string "Somebody taught me about\n"
 	.string "the {STR_VAR_1} already.\p"
-	.string "I want my POKéMON to hold a different\n"
+	.string "I want my Pokémon to hold a different\n"
 	.string "kind of item.\p"
 	.string "Or do you think {STR_VAR_2} doesn't\n"
 	.string "have to hold anything?$"
@@ -1106,7 +1106,7 @@ gText_082BA867:: @ 82BA867
 	.string "for me?$"
 
 gText_082BA96B:: @ 82BA96B
-	.string "A POKéMON belonging to someone like me\n"
+	.string "A Pokémon belonging to someone like me\n"
 	.string "would be better off without an item?$"
 
 gText_082BA9B7:: @ 82BA9B7
@@ -1133,7 +1133,7 @@ gText_082BAB22:: @ 82BAB22
 	.string "Oh, {PLAYER}{KUN}.\n"
 	.string "There's something I wanted to ask you.\p"
 	.string "You know how you decided which\n"
-	.string "POKéMON I should have for me?\p"
+	.string "Pokémon I should have for me?\p"
 	.string "But I never asked you what item\n"
 	.string "it should be holding.\p"
 	.string "Since you already gave me advice,\n"
@@ -1247,17 +1247,17 @@ gText_082BB370:: @ 82BB370
 	.string "keeping well.\p"
 	.string "May I approach you for advice?\p"
 	.string "In a recent battle, my opponent\n"
-	.string "seemed to have given his POKéMON\l"
+	.string "seemed to have given his Pokémon\l"
 	.string "an item to hold.\p"
 	.string "As a result, I was defeated…\p"
 	.string "I don't wish to be left behind.\n"
 	.string "I would like to make my {STR_VAR_1}\l"
 	.string "hold an item, too.\p"
 	.string "It would please me if you could decide\n"
-	.string "what would be right for my POKéMON…$"
+	.string "what would be right for my Pokémon…$"
 
 gText_082BB4C3:: @ 82BB4C3
-	.string "In other words… My POKéMON has\n"
+	.string "In other words… My Pokémon has\n"
 	.string "no need to hold an item?$"
 
 gText_082BB4FB:: @ 82BB4FB
@@ -1277,7 +1277,7 @@ gText_082BB575:: @ 82BB575
 gText_082BB5E1:: @ 82BB5E1
 	.string "You've already told me about that,\n"
 	.string "and I already have it.\p"
-	.string "Or are you saying… My POKéMON has\n"
+	.string "Or are you saying… My Pokémon has\n"
 	.string "no need to hold an item?$"
 
 gText_082BB656:: @ 82BB656
@@ -1301,7 +1301,7 @@ gText_082BB72C:: @ 82BB72C
 gText_082BB7A2:: @ 82BB7A2
 	.string "{STR_VAR_1}! I'll use that!\p"
 	.string "Um… Could it be, {PLAYER}, you also\n"
-	.string "make your POKéMON hold that item?\p"
+	.string "make your Pokémon hold that item?\p"
 	.string "I'll be sure to get it!\n"
 	.string "I hope you'll be willing to teach me\l"
 	.string "some more another time.$"
@@ -1317,7 +1317,7 @@ gText_082BB8CD:: @ 82BB8CD
 	.string "Hola!\n"
 	.string "My maestro, {PLAYER}{KUN}!\p"
 	.string "I want to hit you up for advice on\n"
-	.string "POKéMON tools.\p"
+	.string "Pokémon tools.\p"
 	.string "What do you think would be good for\n"
 	.string "my {STR_VAR_1} to hold?\p"
 	.string "Don't be shy now.\n"
@@ -1350,13 +1350,13 @@ gText_082BBA6C:: @ 82BBA6C
 gText_082BBB01:: @ 82BBB01
 	.string "{PLAYER}{KUN}, something unbelievable\n"
 	.string "has happened!\p"
-	.string "I woke up this morning, and my POKéMON\n"
+	.string "I woke up this morning, and my Pokémon\n"
 	.string "had 10 NUGGETS!\p"
 	.string "Of course I'm lying!\n"
 	.string "Wahahaha!\p"
 	.string "This is no lie, though.\n"
 	.string "I'm not very good at thinking about\l"
-	.string "what items POKéMON should hold.\p"
+	.string "what items Pokémon should hold.\p"
 	.string "So, how about deciding for me what\n"
 	.string "my {STR_VAR_1} should hold, master?$"
 
@@ -1390,7 +1390,7 @@ gText_082BBD90:: @ 82BBD90
 gText_082BBE0B:: @ 82BBE0B
 	.string "A-H-O-Y!\n"
 	.string "And that spells ahoy!\p"
-	.string "The rappin' SAILOR am I!\n"
+	.string "The rappin' Sailor am I!\n"
 	.string "I present to you a question\l"
 	.string "that's pretty fly!\p"
 	.string "It's an item question\n"
@@ -1405,7 +1405,7 @@ gText_082BBEE5:: @ 82BBEE5
 
 gText_082BBF25:: @ 82BBF25
 	.string "Okay, I hear you, sure I do!\n"
-	.string "My POKéMON will go empty-handed, too!\p"
+	.string "My Pokémon will go empty-handed, too!\p"
 	.string "If it's advice I ever need,\n"
 	.string "{PLAYER}, your word I'll always heed!$"
 
@@ -1421,7 +1421,7 @@ gText_082BC024:: @ 82BC024
 	.string "You told me that the other day.\l"
 	.string "I need a new idea, a brand new way.\p"
 	.string "Or, what, is that right?\n"
-	.string "My POKéMON doesn't need to hold\l"
+	.string "My Pokémon doesn't need to hold\l"
 	.string "anything tight?$"
 
 gText_082BC0C8:: @ 82BC0C8
@@ -1469,7 +1469,7 @@ gText_082BC40E:: @ 82BC40E
 	.string "Don't touch it, please!\p"
 	.string "I must've broken it while I was trying\n"
 	.string "out different hold items with my posse\l"
-	.string "of POKéMON.\p"
+	.string "of Pokémon.\p"
 	.string "So, things being this way,\n"
 	.string "I need you to decide for me.\p"
 	.string "{PLAYER}{KUN}, what do you think would be\n"
@@ -1488,7 +1488,7 @@ gText_082BC555:: @ 82BC555
 
 gText_082BC5CE:: @ 82BC5CE
 	.string "Hm, all right. That's one {STR_VAR_1}.\n"
-	.string "My POKéMON's arm is fine, so I'll make\l"
+	.string "My Pokémon's arm is fine, so I'll make\l"
 	.string "it hold that item right away.\p"
 	.string "I hope I can keep hitting you up\n"
 	.string "for help like this.$"
@@ -1506,7 +1506,7 @@ gText_082BC714:: @ 82BC714
 	.string "Er… Um…\n"
 	.string "{PLAYER}{KUN}…\p"
 	.string "Please, don't look at me that way.\n"
-	.string "My POKéMON don't have anything.\p"
+	.string "My Pokémon don't have anything.\p"
 	.string "I… I'm really embarrassed about this,\n"
 	.string "but I really need your advice.\p"
 	.string "I can't decide what hold item would\n"
@@ -1571,7 +1571,7 @@ gText_082BCBFC:: @ 82BCBFC
 	.string "Are you certain?\p"
 	.string "I see. If that's the case, that's fine.\n"
 	.string "I thank you for your time.\p"
-	.string "I do hope my POKéMON will be able to\n"
+	.string "I do hope my Pokémon will be able to\n"
 	.string "put it to good use.\p"
 	.string "Let us meet again!$"
 
@@ -1589,10 +1589,10 @@ gText_082BCD68:: @ 82BCD68
 	.string "I have a dilemma, sob…\p"
 	.string "I want to begin battling other people,\n"
 	.string "but I don't know what to do.\p"
-	.string "How should I line up my POKéMON\n"
+	.string "How should I line up my Pokémon\n"
 	.string "so they'll be at their strongest?\p"
 	.string "Please tell me, {PLAYER}.\n"
-	.string "If you were me, which of these POKéMON\l"
+	.string "If you were me, which of these Pokémon\l"
 	.string "would you send out first?$"
 
 gText_082BCE64:: @ 82BCE64
@@ -1600,13 +1600,13 @@ gText_082BCE64:: @ 82BCE64
 	.string "Waaaaah!\p"
 	.string "Oh! I'm so sorry!\n"
 	.string "You've made me happy by choosing\l"
-	.string "my first POKéMON, and it's made me cry…\p"
+	.string "my first Pokémon, and it's made me cry…\p"
 	.string "Thank you so much!$"
 
 gText_082BCEF2:: @ 82BCEF2
 	.string "Yay! It's {PLAYER}!\n"
 	.string "Great! I wanted to ask you something!\p"
-	.string "Um, of my POKéMON, which do you\n"
+	.string "Um, of my Pokémon, which do you\n"
 	.string "think should go out first?$"
 
 gText_082BCF61:: @ 82BCF61
@@ -1617,8 +1617,8 @@ gText_082BCF61:: @ 82BCF61
 gText_082BCFA1:: @ 82BCFA1
 	.string "{PLAYER}, hello!\p"
 	.string "I think, in a battle, it's very important\n"
-	.string "which POKéMON comes out first.\p"
-	.string "Out of the POKéMON that I have,\n"
+	.string "which Pokémon comes out first.\p"
+	.string "Out of the Pokémon that I have,\n"
 	.string "which would be good to send out first?$"
 
 gText_082BD03C:: @ 82BD03C
@@ -1635,7 +1635,7 @@ gText_082BD06D:: @ 82BD06D
 	.string "It may be a waste of time for me to\n"
 	.string "even worry about it, but I just can't\l"
 	.string "decide something…\p"
-	.string "Which of my POKéMON should I send\n"
+	.string "Which of my Pokémon should I send\n"
 	.string "out first in a battle?$"
 
 gText_082BD18A:: @ 82BD18A
@@ -1650,12 +1650,12 @@ gText_082BD222:: @ 82BD222
 	.string "Oh, {PLAYER}{KUN}! It's me!\n"
 	.string "I'm so glad to see you because I have\l"
 	.string "this little problem.\p"
-	.string "I can't decide how my POKéMON should\n"
+	.string "I can't decide how my Pokémon should\n"
 	.string "be lined up. Could you decide for me?\p"
 	.string "Oh, you don't need to decide the whole\n"
 	.string "party right now.\p"
 	.string "How about deciding just the first\n"
-	.string "POKéMON for me?$"
+	.string "Pokémon for me?$"
 
 gText_082BD325:: @ 82BD325
 	.string "My {STR_VAR_1}? That's great!\p"
@@ -1671,7 +1671,7 @@ gText_082BD3B1:: @ 82BD3B1
 	.string "I have to do some cycling, shopping,\n"
 	.string "and humming.\p"
 	.string "I haven't even had the time to decide\n"
-	.string "how to line up my POKéMON team.\p"
+	.string "how to line up my Pokémon team.\p"
 	.string "So, how about checking out my team?\n"
 	.string "Which one should go first?$"
 
@@ -1689,7 +1689,7 @@ gText_082BD51C:: @ 82BD51C
 	.string "again! It's the usual thing!\p"
 	.string "Drum roll, please!\n"
 	.string "The question I have is about my team.\p"
-	.string "Which POKéMON of mine should be first\n"
+	.string "Which Pokémon of mine should be first\n"
 	.string "to go out in a battle?$"
 
 gText_082BD609:: @ 82BD609
@@ -1707,9 +1707,9 @@ gText_082BD697:: @ 82BD697
 	.string "I know I'm taking advantage of your\n"
 	.string "kindness, but may I ask for advice?\p"
 	.string "I would like you to decide on the order\n"
-	.string "of my POKéMON team.\p"
+	.string "of my Pokémon team.\p"
 	.string "It would please me if you could decide\n"
-	.string "which POKéMON should come first.$"
+	.string "which Pokémon should come first.$"
 
 gText_082BD797:: @ 82BD797
 	.string "My {STR_VAR_1} it is!\n"
@@ -1721,12 +1721,12 @@ gText_082BD797:: @ 82BD797
 gText_082BD806:: @ 82BD806
 	.string "Eek! {PLAYER}!\n"
 	.string "I… I'm overjoyed to see you again!\p"
-	.string "My POKéMON have become much\n"
+	.string "My Pokémon have become much\n"
 	.string "stronger!\p"
 	.string "But I don't always win. It seems to\n"
-	.string "depend on which POKéMON goes first.\p"
+	.string "depend on which Pokémon goes first.\p"
 	.string "{PLAYER}, please, I need your help!\p"
-	.string "Please decide which of my POKéMON\n"
+	.string "Please decide which of my Pokémon\n"
 	.string "should go out first!$"
 
 gText_082BD8F5:: @ 82BD8F5
@@ -1743,11 +1743,11 @@ gText_082BD9BE:: @ 82BD9BE
 	.string "My mentor, {PLAYER}{KUN}!\l"
 	.string "Hit me with your sage advice today!\p"
 	.string "You see, I pulled together a team of\n"
-	.string "three POKéMON. So far so good.\p"
+	.string "three Pokémon. So far so good.\p"
 	.string "But the team's battling order's not\n"
 	.string "settled yet.\p"
 	.string "This is where you come in, {PLAYER}{KUN}!\n"
-	.string "You decide which POKéMON leads off!\p"
+	.string "You decide which Pokémon leads off!\p"
 	.string "Don't be shy now.\n"
 	.string "Let's blurt it out!$"
 
@@ -1761,15 +1761,15 @@ gText_082BDAE1:: @ 82BDAE1
 gText_082BDB4E:: @ 82BDB4E
 	.string "{PLAYER}{KUN}, listen!\n"
 	.string "It's a crisis!\p"
-	.string "My POKéMON, all three of them, go into\n"
+	.string "My Pokémon, all three of them, go into\n"
 	.string "battle at once!\p"
 	.string "Of course that's impossible!\n"
 	.string "Wahahaha!\p"
 	.string "This is no lie, though.\n"
 	.string "I'm not very good at thinking about\l"
-	.string "how I should line up my POKéMON.\p"
+	.string "how I should line up my Pokémon.\p"
 	.string "So, how about deciding for me which\n"
-	.string "POKéMON should go first, master?$"
+	.string "Pokémon should go first, master?$"
 
 gText_082BDC6B:: @ 82BDC6B
 	.string "Okay, so it's my {STR_VAR_1} you chose?\n"
@@ -1782,7 +1782,7 @@ gText_082BDC6B:: @ 82BDC6B
 gText_082BDD0D:: @ 82BDD0D
 	.string "A-H-O-Y!\n"
 	.string "And that spells ahoy!\p"
-	.string "The rappin' SAILOR am I!\n"
+	.string "The rappin' Sailor am I!\n"
 	.string "I present to you a question\l"
 	.string "that's pretty fly!\p"
 	.string "It's a team lineup question\n"
@@ -1804,7 +1804,7 @@ gText_082BDE68:: @ 82BDE68
 	.string "Are you receiving me?\l"
 	.string "You are receiving me!\p"
 	.string "You have to decide, which of my\n"
-	.string "POKéMON is the first to ride!\l"
+	.string "Pokémon is the first to ride!\l"
 	.string "Into battle, I mean to say.$"
 
 gText_082BDF4D:: @ 82BDF4D
@@ -1820,10 +1820,10 @@ gText_082BDFD8:: @ 82BDFD8
 	.string "…It's getting better now…\p"
 	.string "I must've worried myself sick racking\n"
 	.string "my brains on how I should line up\l"
-	.string "my posse of POKéMON.\p"
+	.string "my posse of Pokémon.\p"
 	.string "So, things being this way,\n"
 	.string "I need you to decide for me.\p"
-	.string "{PLAYER}{KUN}, which of my POKéMON should\n"
+	.string "{PLAYER}{KUN}, which of my Pokémon should\n"
 	.string "go first? So I'd win, I mean.$"
 
 gText_082BE0FD:: @ 82BE0FD
@@ -1842,9 +1842,9 @@ gText_082BE189:: @ 82BE189
 	.string "Um…\n"
 	.string "I really need your advice.\p"
 	.string "It makes me bashful to say this,\n"
-	.string "but I chose my 3-POKéMON team.\l"
+	.string "but I chose my 3-Pokémon team.\l"
 	.string "I can't decide on the order, though.\p"
-	.string "Which POKéMON should I send out first\n"
+	.string "Which Pokémon should I send out first\n"
 	.string "so I at least look capable?$"
 
 gText_082BE2A5:: @ 82BE2A5
@@ -1864,7 +1864,7 @@ gText_082BE33E:: @ 82BE33E
 	.string "If you really are {PLAYER}, please\l"
 	.string "forget about my rudeness.\p"
 	.string "What I would like is your fine advice.\p"
-	.string "I have here my POKéMON team.\n"
+	.string "I have here my Pokémon team.\n"
 	.string "I would like you to tell me which one\l"
 	.string "should go first in a battle.$"
 
@@ -1882,9 +1882,9 @@ gText_082BE50D:: @ 82BE50D
 	.string "Oh, {PLAYER}!\p"
 	.string "What perfect timing!\n"
 	.string "There's something I just can't decide…\p"
-	.string "I can't decide which POKéMON I should\n"
+	.string "I can't decide which Pokémon I should\n"
 	.string "be using.\p"
-	.string "I can't decide between the POKéMON\n"
+	.string "I can't decide between the Pokémon\n"
 	.string "{STR_VAR_1} and {STR_VAR_2}…\p"
 	.string "{PLAYER}, which do you think will give\n"
 	.string "even me a chance at winning?$"
@@ -1916,7 +1916,7 @@ gText_082BE762:: @ 82BE762
 	.string "I have a question I wanted to ask.\p"
 	.string "I'm in a dilemma over whether I should\n"
 	.string "raise one {STR_VAR_1} or {STR_VAR_2}.\p"
-	.string "Which POKéMON do you think will\n"
+	.string "Which Pokémon do you think will\n"
 	.string "be stronger?$"
 
 gText_082BE7F8:: @ 82BE7F8
@@ -1933,8 +1933,8 @@ gText_082BE850:: @ 82BE850
 	.string "…But that doesn't matter if you\n"
 	.string "could give me advice…\p"
 	.string "I can't decide on the one kind of\n"
-	.string "POKéMON I should raise…\p"
-	.string "I've narrowed the field to the POKéMON\n"
+	.string "Pokémon I should raise…\p"
+	.string "I've narrowed the field to the Pokémon\n"
 	.string "{STR_VAR_1} and {STR_VAR_2}, but that's\l"
 	.string "where I became stuck…\p"
 	.string "{PLAYER}, you probably don't want to\n"
@@ -1951,10 +1951,10 @@ gText_082BE99C:: @ 82BE99C
 gText_082BEA1B:: @ 82BEA1B
 	.string "Oh, {PLAYER}{KUN}! I'm so glad to see you!\n"
 	.string "I was about to go looking for you!\p"
-	.string "Can you decide what kind of POKéMON\n"
+	.string "Can you decide what kind of Pokémon\n"
 	.string "I should use?\p"
 	.string "For instance…\n"
-	.string "How about the POKéMON {STR_VAR_1}\l"
+	.string "How about the Pokémon {STR_VAR_1}\l"
 	.string "and {STR_VAR_2}?\p"
 	.string "Which one do you think would be\n"
 	.string "better?$"
@@ -1970,9 +1970,9 @@ gText_082BEAE9:: @ 82BEAE9
 gText_082BEB72:: @ 82BEB72
 	.string "If it isn't {PLAYER}{KUN}! How's it going?\n"
 	.string "I'm busy again as always!\p"
-	.string "I want to do good with POKéMON, too,\n"
+	.string "I want to do good with Pokémon, too,\n"
 	.string "but I haven't been able to decide\l"
-	.string "which POKéMON I should use.\p"
+	.string "which Pokémon I should use.\p"
 	.string "You know how {STR_VAR_1} look strong?\n"
 	.string "But {STR_VAR_2} are tough to ignore.\p"
 	.string "{PLAYER}{KUN}, give me some of your good\n"
@@ -1994,7 +1994,7 @@ gText_082BED16:: @ 82BED16
 	.string "It's an easy one for you!\p"
 	.string "Drum roll, please!\n"
 	.string "The question I have is…\p"
-	.string "If I were to raise a POKéMON,\n"
+	.string "If I were to raise a Pokémon,\n"
 	.string "and the choices were one {STR_VAR_1}\l"
 	.string "or {STR_VAR_2}, which should it be?$"
 
@@ -2012,13 +2012,13 @@ gText_082BEEB4:: @ 82BEEB4
 	.string "I'm delighted to see you again!\p"
 	.string "Ever since I became your apprentice,\n"
 	.string "my confidence has been blooming.\p"
-	.string "I think I'm ready to raise a POKéMON\n"
+	.string "I think I'm ready to raise a Pokémon\n"
 	.string "of my own!\p"
 	.string "{PLAYER}, may I impose on you to choose\n"
-	.string "which POKéMON I should raise?\p"
-	.string "The choices are the POKéMON\n"
+	.string "which Pokémon I should raise?\p"
+	.string "The choices are the Pokémon\n"
 	.string "{STR_VAR_1} or {STR_VAR_2}…\l"
-	.string "Which POKéMON is right for me?$"
+	.string "Which Pokémon is right for me?$"
 
 gText_082BEFE2:: @ 82BEFE2
 	.string "One {STR_VAR_1} it is!\n"
@@ -2033,7 +2033,7 @@ gText_082BF04E:: @ 82BF04E
 	.string "Oh-oh-oh, I know!\n"
 	.string "I shouldn't pass up this opportunity!\p"
 	.string "May I ask a huge favor, {PLAYER}?\n"
-	.string "Please choose a POKéMON for me!\p"
+	.string "Please choose a Pokémon for me!\p"
 	.string "Please decide which would be better,\n"
 	.string "{STR_VAR_1} or {STR_VAR_2}!$"
 
@@ -2049,7 +2049,7 @@ gText_082BF1A8:: @ 82BF1A8
 	.string "My mentor, {PLAYER}{KUN}!\p"
 	.string "Hello, I've been looking for you\n"
 	.string "for some more of your sage advice!\p"
-	.string "Which kind of POKéMON would be right\n"
+	.string "Which kind of Pokémon would be right\n"
 	.string "for me, one {STR_VAR_1} or {STR_VAR_2}?\p"
 	.string "Don't be shy now.\n"
 	.string "Let's blurt it out!$"
@@ -2057,20 +2057,20 @@ gText_082BF1A8:: @ 82BF1A8
 gText_082BF268:: @ 82BF268
 	.string "Uh-huh, one {STR_VAR_1} it is!\n"
 	.string "OK, A-OK!\l"
-	.string "I'll get one in a BALL, like, cram!\p"
+	.string "I'll get one in a Ball, like, cram!\p"
 	.string "All right, thanks, as always!\n"
 	.string "Adios!$"
 
 gText_082BF2D1:: @ 82BF2D1
 	.string "{PLAYER}{KUN}, listen! Big news!\n"
-	.string "I caught a mirage POKéMON!\p"
+	.string "I caught a mirage Pokémon!\p"
 	.string "Of course I'm lying!\n"
 	.string "Wahahaha!\p"
 	.string "This is no lie, though.\n"
 	.string "I'm not very good at catching\l"
-	.string "POKéMON.\p"
+	.string "Pokémon.\p"
 	.string "So, how about deciding for me which\n"
-	.string "kind of POKéMON I should catch,\l"
+	.string "kind of Pokémon I should catch,\l"
 	.string "master?\p"
 	.string "Which would be better?\n"
 	.string "{STR_VAR_1} or {STR_VAR_2}?$"
@@ -2086,9 +2086,9 @@ gText_082BF3CF:: @ 82BF3CF
 gText_082BF46A:: @ 82BF46A
 	.string "A-H-O-Y!\n"
 	.string "And that spells ahoy!\p"
-	.string "The rappin' SAILOR am I!\n"
+	.string "The rappin' Sailor am I!\n"
 	.string "Surely you remember who am I?\p"
-	.string "Today, I have a POKéMON question\n"
+	.string "Today, I have a Pokémon question\n"
 	.string "that begs your suggestion!\p"
 	.string "I have the choice between this\n"
 	.string "{STR_VAR_1} and {STR_VAR_2}, you see.\l"
@@ -2108,7 +2108,7 @@ gText_082BF5C3:: @ 82BF5C3
 	.string "the ice. I'm also looking for advice!\l"
 	.string "Are you receiving me?\l"
 	.string "You are receiving me!\p"
-	.string "My POKéMON--which should I use?\n"
+	.string "My Pokémon--which should I use?\n"
 	.string "It's either {STR_VAR_1} or {STR_VAR_2}.\l"
 	.string "Which do you choose?$"
 
@@ -2123,11 +2123,11 @@ gText_082BF773:: @ 82BF773
 	.string "Oh, hi, {PLAYER}{KUN}…\n"
 	.string "I have this horrible headache…\p"
 	.string "I must've worried too much about\n"
-	.string "the kind of POKéMON I should raise.\p"
+	.string "the kind of Pokémon I should raise.\p"
 	.string "So, things being this way,\n"
 	.string "I need you to decide for me.\p"
 	.string "{PLAYER}{KUN}, if I had to choose between\n"
-	.string "the POKéMON {STR_VAR_1} and\l"
+	.string "the Pokémon {STR_VAR_1} and\l"
 	.string "{STR_VAR_2}, which should it be?$"
 
 gText_082BF869:: @ 82BF869
@@ -2143,7 +2143,7 @@ gText_082BF8DD:: @ 82BF8DD
 	.string "I'm getting all flustered…\l"
 	.string "I… I need your advice.\p"
 	.string "I… I'm really embarrassed, but I can't\n"
-	.string "decide which POKéMON to use.\p"
+	.string "decide which Pokémon to use.\p"
 	.string "If the choices were {STR_VAR_1} or\n"
 	.string "{STR_VAR_2}, which would be better?$"
 
@@ -2162,8 +2162,8 @@ gText_082BFA5A:: @ 82BFA5A
 	.string "No, no, if you are real, it's fine.\n"
 	.string "Incidentally, I would like to obtain\l"
 	.string "your advice.\p"
-	.string "It's about the POKéMON I am to use.\p"
-	.string "If the choices are the POKéMON\n"
+	.string "It's about the Pokémon I am to use.\p"
+	.string "If the choices are the Pokémon\n"
 	.string "{STR_VAR_1} and {STR_VAR_2}, which is\l"
 	.string "more worthy of me?$"
 
@@ -2225,13 +2225,13 @@ gText_082BFEAD:: @ 82BFEAD
 	.string "{STR_VAR_1} is your choice?\n"
 	.string "Okay, I got it!\p"
 	.string "I'll go teach {STR_VAR_1} to\n"
-	.string "my POKéMON right away!\p"
+	.string "my Pokémon right away!\p"
 	.string "See you again!$"
 
 gText_082BFF0A:: @ 82BFF0A
 	.string "Ohhh, {PLAYER}…\n"
 	.string "I'm hopeless, no, really!\p"
-	.string "I've decided to raise a POKéMON,\n"
+	.string "I've decided to raise a Pokémon,\n"
 	.string "but now I can't even decide what\l"
 	.string "move I should let it learn…\p"
 	.string "I know that it doesn't mean anything\n"
@@ -2363,13 +2363,13 @@ gText_082C0809:: @ 82C0809
 
 gText_082C086E:: @ 82C086E
 	.string "{PLAYER}{KUN}, it's completely wild!\p"
-	.string "My POKéMON!\n"
+	.string "My Pokémon!\n"
 	.string "It learned six moves!\p"
 	.string "Of course I'm lying!\n"
 	.string "Wahahaha!\p"
 	.string "This is no lie, though.\n"
 	.string "I'm not very good at choosing moves\l"
-	.string "for my POKéMON.\p"
+	.string "for my Pokémon.\p"
 	.string "So, how about deciding for me which\n"
 	.string "kind of move I should teach?\p"
 	.string "{STR_VAR_2} or {STR_VAR_3}--which\n"
@@ -2386,7 +2386,7 @@ gText_082C0982:: @ 82C0982
 gText_082C0A1D:: @ 82C0A1D
 	.string "A-H-O-Y!\n"
 	.string "And that spells ahoy!\p"
-	.string "The rappin' SAILOR am I!\n"
+	.string "The rappin' Sailor am I!\n"
 	.string "I'm always with it, don't ask me why.\p"
 	.string "Today, I have a move question\n"
 	.string "that begs your suggestion!\p"
@@ -2422,7 +2422,7 @@ gText_082C0C7D:: @ 82C0C7D
 gText_082C0D0B:: @ 82C0D0B
 	.string "Gahack! Gaah! Oh, {PLAYER}{KUN}…\n"
 	.string "I have this lousy cold, I do…\p"
-	.string "I want to pick a move for my POKéMON,\n"
+	.string "I want to pick a move for my Pokémon,\n"
 	.string "but I'm not up to it…\p"
 	.string "So, things being this way,\n"
 	.string "I need you to decide for me.\p"
@@ -2444,7 +2444,7 @@ gText_082C0E71:: @ 82C0E71
 	.string "I… I need your advice.\p"
 	.string "I… I'm really embarrassed, but I can't\n"
 	.string "decide what move I should teach\l"
-	.string "my POKéMON.\p"
+	.string "my Pokémon.\p"
 	.string "It's for my {STR_VAR_1}.\n"
 	.string "If the choices were {STR_VAR_2} or\l"
 	.string "{STR_VAR_3}, which would be better?$"
@@ -2477,7 +2477,7 @@ gText_082C1122:: @ 82C1122
 	.string "I see. If that's the case, that's fine.\n"
 	.string "I thank you for your time.\p"
 	.string "I do hope it is something even\n"
-	.string "my POKéMON can learn.\p"
+	.string "my Pokémon can learn.\p"
 	.string "Let us meet again!$"
 
 gText_082C11D1:: @ 82C11D1
@@ -2525,7 +2525,7 @@ gText_082C1444:: @ 82C1444
 
 gText_082C1501:: @ 82C1501
 	.string "{PLAYER}, hello!\p"
-	.string "My POKéMON and I are ready for\n"
+	.string "My Pokémon and I are ready for\n"
 	.string "anything, except for one thing.\p"
 	.string "I think it would be good if I had\n"
 	.string "something to shout when I win.\p"
@@ -2635,7 +2635,7 @@ gText_082C1DC1:: @ 82C1DC1
 	.string "…Listen, I think I'm getting decent\n"
 	.string "at this, huh?\p"
 	.string "So, I'm thinking of challenging other\n"
-	.string "TRAINERS from now on.\p"
+	.string "Trainers from now on.\p"
 	.string "{PLAYER}, your advice really helped me.\p"
 	.string "Maybe one day, there'll be a time when\n"
 	.string "we battle!\p"
@@ -2645,9 +2645,9 @@ gText_082C1EDC:: @ 82C1EDC
 	.string "Oh, {PLAYER}.\n"
 	.string "I'm so glad I met you!\p"
 	.string "I no longer have any concerns with\n"
-	.string "regard to my POKéMON.\p"
+	.string "regard to my Pokémon.\p"
 	.string "It's myself that worries me…\p"
-	.string "Do you know how a TRAINER says\n"
+	.string "Do you know how a Trainer says\n"
 	.string "a few things upon winning a battle?\p"
 	.string "Definitely, I wish I could do that,\n"
 	.string "too!\p"
@@ -2701,7 +2701,7 @@ gText_082C231C:: @ 82C231C
 	.string "once again, please!\p"
 	.string "If I were to win a battle, what would\n"
 	.string "be a good boast I could say to my\l"
-	.string "fallen TRAINER opponent?$"
+	.string "fallen Trainer opponent?$"
 
 gText_082C2407:: @ 82C2407
 	.string "{STR_VAR_1}\p"
@@ -2734,9 +2734,9 @@ gText_082C25B1:: @ 82C25B1
 	.string "Thanks for teaching me all this time,\n"
 	.string "master!\p"
 	.string "I'm finally understanding what being\n"
-	.string "a TRAINER is about.\p"
+	.string "a Trainer is about.\p"
 	.string "I'm going to go out and win battles\n"
-	.string "against any TRAINER.\p"
+	.string "against any Trainer.\p"
 	.string "Maybe it'll be you one day, master!\p"
 	.string "That's all!\n"
 	.string "Farewell, my master!$"
@@ -2744,7 +2744,7 @@ gText_082C25B1:: @ 82C25B1
 gText_082C2707:: @ 82C2707
 	.string "A-H-O-Y!\n"
 	.string "And that spells ahoy!\p"
-	.string "The rappin' SAILOR am I!\n"
+	.string "The rappin' Sailor am I!\n"
 	.string "This will be my last question,\l"
 	.string "don't you cry!\p"
 	.string "It's a saying question\n"
@@ -2840,7 +2840,7 @@ gText_082C2E41:: @ 82C2E41
 gText_082C2EF5:: @ 82C2EF5
 	.string "Hm? You appear to be {PLAYER}{KUN}…\n"
 	.string "But are you really?\l"
-	.string "Perhaps a clever {PLAYER} DOLL?\p"
+	.string "Perhaps a clever {PLAYER} Doll?\p"
 	.string "Oh, no, no, no, don't worry!\n"
 	.string "If you really are real, please\l"
 	.string "forget about my rudeness.\p"

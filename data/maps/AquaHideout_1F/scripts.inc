@@ -51,8 +51,8 @@ AquaHideout_1F_EventScript_233513:: @ 8233513
 
 AquaHideout_1F_Text_23351D: @ 823351D
 	.string "What? What? What do you want with \n"
-	.string "TEAM AQUA?\p"
-	.string "Our BOSS isn't here! He's gone off to\n"
+	.string "Team Aqua?\p"
+	.string "Our Boss isn't here! He's gone off to\n"
 	.string "snatch something important!\p"
 	.string "… …\n"
 	.string "Where did he go?\p"
@@ -61,16 +61,16 @@ AquaHideout_1F_Text_23351D: @ 823351D
 
 AquaHideout_1F_Text_2335E3: @ 82335E3
 	.string "What? What?\n"
-	.string "Are you a TEAM MAGMA grunt?\p"
-	.string "I hear that TEAM MAGMA is trying to\n"
-	.string "awaken an awesome POKéMON at their\l"
-	.string "HIDEOUT.\p"
-	.string "But where might their HIDEOUT be?$"
+	.string "Are you a Team Magma grunt?\p"
+	.string "I hear that Team Magma is trying to\n"
+	.string "awaken an awesome Pokémon at their\l"
+	.string "Hideout.\p"
+	.string "But where might their Hideout be?$"
 
 AquaHideout_1F_Text_23367D: @ 823367D
 	.string "What? What? What do you want with \n"
-	.string "TEAM AQUA?\p"
-	.string "Our BOSS isn't here!\n"
+	.string "Team Aqua?\p"
+	.string "Our Boss isn't here!\n"
 	.string "He's gone off to jack a submarine!\p"
 	.string "… …\n"
 	.string "Where did he go?\p"
@@ -79,9 +79,9 @@ AquaHideout_1F_Text_23367D: @ 823367D
 
 AquaHideout_1F_Text_233739: @ 8233739
 	.string "What? What? What do you want with \n"
-	.string "TEAM AQUA?\p"
-	.string "Our BOSS isn't here! He's on his way to\n"
-	.string "MT. PYRE on ROUTE 122!\p"
+	.string "Team Aqua?\p"
+	.string "Our Boss isn't here! He's on his way to\n"
+	.string "Mt. Pyre on Route 122!\p"
 	.string "… …\n"
 	.string "Why did he go?\p"
 	.string "Wahaha! Do you really think I'd tell\n"
@@ -89,16 +89,16 @@ AquaHideout_1F_Text_233739: @ 8233739
 
 AquaHideout_1F_Text_2337FA: @ 82337FA
 	.string "What? What?\n"
-	.string "Are you a TEAM MAGMA grunt?\p"
-	.string "I hear that TEAM MAGMA is after\n"
-	.string "an awesome POKéMON at MT. CHIMNEY.\p"
-	.string "But what is that POKéMON like?$"
+	.string "Are you a Team Magma grunt?\p"
+	.string "I hear that Team Magma is after\n"
+	.string "an awesome Pokémon at Mt. Chimney.\p"
+	.string "But what is that Pokémon like?$"
 
 AquaHideout_1F_Text_233884: @ 8233884
 	.string "What? What? What do you want with\n"
-	.string "TEAM AQUA?\p"
-	.string "Our BOSS isn't here!\n"
-	.string "He's on his way to SLATEPORT CITY!\p"
+	.string "Team Aqua?\p"
+	.string "Our Boss isn't here!\n"
+	.string "He's on his way to Slateport City!\p"
 	.string "… …\n"
 	.string "Why did he go?\p"
 	.string "Wahaha! Do you really think I'd tell\n"
@@ -113,6 +113,6 @@ AquaHideout_1F_Text_233964: @ 8233964
 	.string "I lost it!$"
 
 AquaHideout_1F_Text_233977: @ 8233977
-	.string "I took the loss for the TEAM,\n"
+	.string "I took the loss for the Team,\n"
 	.string "but I did my job…$"
 

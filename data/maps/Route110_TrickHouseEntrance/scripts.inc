@@ -810,14 +810,14 @@ Route110_TrickHouseEntrance_Text_26A6B6: @ 826A6B6
 Route110_TrickHouseEntrance_Text_26A709: @ 826A709
 	.string "Behold!\p"
 	.string "For I am the greatest living mystery\n"
-	.string "of a man in all of HOENN!\l"
+	.string "of a man in all of Hoenn!\l"
 	.string "They call me…\p"
-	.string "The TRICK MASTER!\n"
+	.string "The Trick Master!\n"
 	.string "Wahahaha! Glad to meet you!$"
 
 Route110_TrickHouseEntrance_Text_26A78C: @ 826A78C
 	.string "You, you've come to challenge\n"
-	.string "my TRICK HOUSE, haven't you?\p"
+	.string "my Trick House, haven't you?\p"
 	.string "That's why you're here, isn't it?\n"
 	.string "Yes, it is!\p"
 	.string "Consider your challenge accepted!\p"
@@ -835,7 +835,7 @@ Route110_TrickHouseEntrance_Text_26A887: @ 826A887
 Route110_TrickHouseEntrance_Text_26A8BD: @ 826A8BD
 	.string "There is a note affixed to the scroll…\p"
 	.string "“I am leaving on a journey.\n"
-	.string "Don't look for me. TRICK MASTER”$"
+	.string "Don't look for me. Trick Master”$"
 
 Route110_TrickHouseEntrance_Text_26A921: @ 826A921
 	.string "For the next time, I'll use this trick,\n"
@@ -865,18 +865,18 @@ Route110_TrickHouseEntrance_Text_26AB00: @ 826AB00
 	.string "Did you not come to claim your reward?$"
 
 Route110_TrickHouseEntrance_Text_26AB2C: @ 826AB2C
-	.string "MECHADOLL 5 I AM!\n"
-	.string "IF REWARD IS NOT TAKEN BY YOU,\l"
-	.string "THEN TRICK MASTER YOU CANNOT FOLLOW.\p"
-	.string "RED TENT OR BLUE TENT,\n"
-	.string "WHICH DO YOU PREFER?$"
+	.string "Mechadoll 5 I am!\n"
+	.string "If reward is not taken by you,\l"
+	.string "then Trick Master you cannot follow.\p"
+	.string "Red Tent or Blue Tent,\n"
+	.string "which do you prefer?$"
 
 Route110_TrickHouseEntrance_Text_26ABAE: @ 826ABAE
-	.string "THEN FAREWELL.$"
+	.string "Then farewell.$"
 
 Route110_TrickHouseEntrance_Text_26ABBD: @ 826ABBD
-	.string "YOUR PC STATUS: FULL AGAIN.\n"
-	.string "MEAN, YOU ARE.$"
+	.string "Your PC status: full again.\n"
+	.string "Mean, you are.$"
 
 Route110_TrickHousePuzzle1_Text_26ABE8: @ 826ABE8
 	.string "{PLAYER} found a scroll.$"

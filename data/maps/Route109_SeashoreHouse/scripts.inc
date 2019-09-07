@@ -112,17 +112,17 @@ Route109_SeashoreHouse_EventScript_269553:: @ 8269553
 	end
 
 Route109_SeashoreHouse_Text_269555: @ 8269555
-	.string "I'm the owner of the SEASHORE HOUSE.\n"
-	.string "But you can call me MR. SEA!\p"
+	.string "I'm the owner of the Seashore House.\n"
+	.string "But you can call me Mr. Sea!\p"
 	.string "What I love above all is to see hot\n"
-	.string "POKéMON battles.\p"
+	.string "Pokémon battles.\p"
 	.string "Let me see that your heart burns hot!\p"
-	.string "If you can defeat all the TRAINERS\n"
+	.string "If you can defeat all the Trainers\n"
 	.string "here, I'll reward your efforts.$"
 
 Route109_SeashoreHouse_Text_269635: @ 8269635
 	.string "Show me some hot matches!\p"
-	.string "I run this SEASHORE HOUSE just for\n"
+	.string "I run this Seashore House just for\n"
 	.string "that reason alone!$"
 
 Route109_SeashoreHouse_Text_269685: @ 8269685
@@ -131,15 +131,15 @@ Route109_SeashoreHouse_Text_269685: @ 8269685
 	.string "I'm more than just satisfied!\p"
 	.string "As thanks for showing me your hot\n"
 	.string "streak, I want you to take these.\p"
-	.string "It's half a dozen bottles of SODA POP!$"
+	.string "It's half a dozen bottles of Soda Pop!$"
 
 Route109_SeashoreHouse_Text_26973A: @ 826973A
-	.string "Oh, but hey, your BAG's jammed full.\n"
+	.string "Oh, but hey, your Bag's jammed full.\n"
 	.string "I'll hang on to these for you.$"
 
 Route109_SeashoreHouse_Text_26977E: @ 826977E
-	.string "Want to buy some SODA POP?\n"
-	.string "POKéMON love it!\p"
+	.string "Want to buy some Soda Pop?\n"
+	.string "Pokémon love it!\p"
 	.string "Just ¥300 a bottle!\n"
 	.string "Buy some!$"
 
@@ -155,38 +155,38 @@ Route109_SeashoreHouse_Text_2697EF: @ 82697EF
 
 Route109_SeashoreHouse_Text_269803: @ 8269803
 	.string "If you're looking for a battle in the\n"
-	.string "SEASHORE HOUSE, you'll find no\l"
-	.string "hotter TRAINER than me, matey!$"
+	.string "Seashore House, you'll find no\l"
+	.string "hotter Trainer than me, matey!$"
 
 Route109_SeashoreHouse_Text_269867: @ 8269867
 	.string "That was a hot battle!\n"
 	.string "I can accept that loss, matey!$"
 
 Route109_SeashoreHouse_Text_26989D: @ 826989D
-	.string "Whenever I'm in SLATEPORT, I enjoy\n"
-	.string "hot battles and ice-cold SODA POP!$"
+	.string "Whenever I'm in Slateport, I enjoy\n"
+	.string "hot battles and ice-cold Soda Pop!$"
 
 Route109_SeashoreHouse_Text_2698E3: @ 82698E3
 	.string "Boring battles aren't worth the effort.\p"
 	.string "Fiery hot battles are what toughen up\n"
-	.string "TRAINERS and POKéMON!$"
+	.string "Trainers and Pokémon!$"
 
 Route109_SeashoreHouse_Text_269947: @ 8269947
 	.string "That's hot!$"
 
 Route109_SeashoreHouse_Text_269953: @ 8269953
 	.string "Whew, I'm all thirsty.\n"
-	.string "Maybe I'll have a SODA POP.$"
+	.string "Maybe I'll have a Soda Pop.$"
 
 Route109_SeashoreHouse_Text_269986: @ 8269986
 	.string "I'm going to show you how great\n"
-	.string "my POKéMON are, but don't cry!$"
+	.string "my Pokémon are, but don't cry!$"
 
 Route109_SeashoreHouse_Text_2699C5: @ 82699C5
 	.string "…I lost, but I won't cry…$"
 
 Route109_SeashoreHouse_Text_2699DF: @ 82699DF
-	.string "If one of my POKéMON knew the move\n"
+	.string "If one of my Pokémon knew the move\n"
 	.string "for carrying me across water on its\l"
 	.string "back, I could get rid of this inner tube.$"
 

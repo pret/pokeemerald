@@ -20,7 +20,7 @@ SeafloorCavern_Room1_Text_23484A: @ 823484A
 
 SeafloorCavern_Room1_Text_23485D: @ 823485D
 	.string "I want to get a promotion so I can\n"
-	.string "boss around the GRUNTS…$"
+	.string "boss around the Grunts…$"
 
 SeafloorCavern_Room1_Text_234898: @ 8234898
 	.string "That submarine… It's tiny inside.\n"

@@ -434,11 +434,11 @@ RusturfTunnel_Text_22D1C8: @ 822D1C8
 	.string "Come and get some, then!$"
 
 RusturfTunnel_Text_22D1F7: @ 822D1F7
-	.string "PEEKO: Pii pihyoh!$"
+	.string "Peeko: Pii pihyoh!$"
 
 RusturfTunnel_Text_22D20A: @ 822D20A
 	.string "Grah, keelhaul it all!\p"
-	.string "That hostage POKéMON turned out to\n"
+	.string "That hostage Pokémon turned out to\n"
 	.string "be worthless!\p"
 	.string "And to think I made a getaway…\n"
 	.string "In this tunnel to nowhere!\p"
@@ -451,20 +451,20 @@ RusturfTunnel_Text_22D2B0: @ 822D2B0
 
 RusturfTunnel_Text_22D2E1: @ 822D2E1
 	.string "This is plain not right…\p"
-	.string "The BOSS told me this would be a\n"
+	.string "The Boss told me this would be a\n"
 	.string "slick-and-easy job to pull.\p"
 	.string "All I had to do was steal some package\n"
-	.string "from DEVON.\p"
+	.string "from Devon.\p"
 	.string "Tch!\n"
 	.string "You want it back that badly, take it!$"
 
 RusturfTunnel_Text_22D395: @ 822D395
-	.string "PEEKO!\n"
+	.string "Peeko!\n"
 	.string "Am I glad to see you're safe!$"
 
 RusturfTunnel_Text_22D3BA: @ 822D3BA
-	.string "PEEKO owes her life to you!\p"
-	.string "They call me MR. BRINEY.\n"
+	.string "Peeko owes her life to you!\p"
+	.string "They call me Mr. Briney.\n"
 	.string "And, you are?\p"
 	.string "… … … … … … … …\n"
 	.string "… … … … … … … …\p"
@@ -473,27 +473,27 @@ RusturfTunnel_Text_22D3BA: @ 822D3BA
 	.string "Now, if there's anything that troubles\n"
 	.string "you, don't hesitate to tell me!\p"
 	.string "You can usually find me in my cottage\n"
-	.string "by the sea near PETALBURG WOODS.\p"
-	.string "Come, PEEKO, we should make our way\n"
+	.string "by the sea near Petalburg Woods.\p"
+	.string "Come, Peeko, we should make our way\n"
 	.string "home.\p"
-	.string "PEEKO: Pihyoh!$"
+	.string "Peeko: Pihyoh!$"
 
 RusturfTunnel_Text_22D510: @ 822D510
 	.string "… …\p"
 	.string "Why can't they keep digging?\n"
 	.string "Is the bedrock too hard?\p"
-	.string "My beloved awaits me in VERDANTURF\n"
-	.string "TOWN just beyond here…\p"
-	.string "If RUSTBORO and VERDANTURF were\n"
+	.string "My beloved awaits me in Verdanturf\n"
+	.string "Town just beyond here…\p"
+	.string "If Rustboro and Verdanturf were\n"
 	.string "joined by this tunnel, I could visit\l"
 	.string "her every day…\p"
 	.string "But this…\n"
 	.string "What am I to do?$"
 
 RusturfTunnel_Text_22D5F3: @ 822D5F3
-	.string "To get from RUSTBORO to VERDANTURF,\n"
-	.string "you need to go to DEWFORD, then pass\l"
-	.string "through SLATEPORT and MAUVILLE…$"
+	.string "To get from Rustboro to Verdanturf,\n"
+	.string "you need to go to Dewford, then pass\l"
+	.string "through Slateport and Mauville…$"
 
 RusturfTunnel_Text_22D65C: @ 822D65C
 	.string "Wow! You shattered that boulder\n"
@@ -502,15 +502,15 @@ RusturfTunnel_Text_22D65C: @ 822D65C
 	.string "I'd like you to have this HM.$"
 
 RusturfTunnel_Text_22D6D2: @ 822D6D2
-	.string "That HM contains STRENGTH.\p"
-	.string "If a muscular POKéMON were to learn\n"
+	.string "That HM contains Strength.\p"
+	.string "If a muscular Pokémon were to learn\n"
 	.string "that, it would be able to move even\l"
 	.string "large boulders.$"
 
 RusturfTunnel_Text_22D745: @ 822D745
-	.string "WANDA!\n"
+	.string "Wanda!\n"
 	.string "Now I can see you anytime!\p"
-	.string "WANDA: That's…wonderful.\p"
+	.string "Wanda: That's…wonderful.\p"
 	.string "Please, take some rest at my home.$"
 
 RusturfTunnel_Text_22D7A3: @ 822D7A3
@@ -524,15 +524,15 @@ RusturfTunnel_Text_22D7A3: @ 822D7A3
 RusturfTunnel_Text_22D84D: @ 822D84D
 	.string "What do you call a wild man up in the\n"
 	.string "mountains? A mountain man, right?\p"
-	.string "So why don't they call a POKéMON in\n"
-	.string "the mountains a mountain POKéMON?$"
+	.string "So why don't they call a Pokémon in\n"
+	.string "the mountains a mountain Pokémon?$"
 
 RusturfTunnel_Text_22D8DB: @ 822D8DB
-	.string "My POKéMON…\n"
+	.string "My Pokémon…\n"
 	.string "Ran out of power…$"
 
 RusturfTunnel_Text_22D8F9: @ 822D8F9
 	.string "They halted development here to\n"
-	.string "protect POKéMON, right?\l"
+	.string "protect Pokémon, right?\l"
 	.string "There's a feel-good story!$"
 

@@ -24,13 +24,13 @@ MossdeepCity_PokemonCenter_1F_EventScript_222265:: @ 8222265
 	end
 
 MossdeepCity_PokemonCenter_1F_Text_22226E: @ 822226E
-	.string "The GYM LEADERS in this town are\n"
+	.string "The Gym Leaders in this town are\n"
 	.string "a formidable duo.\p"
 	.string "Their combination attacks are, like,\n"
 	.string "excellent and wow!$"
 
 MossdeepCity_PokemonCenter_1F_Text_2222D9: @ 82222D9
 	.string "Depending on the special abilities of\n"
-	.string "POKéMON, some moves might change\l"
+	.string "Pokémon, some moves might change\l"
 	.string "or not work at all.$"
 

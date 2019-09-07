@@ -45,7 +45,7 @@ Route110_TrickHousePuzzle6_EventScript_26DE0F:: @ 826DE0F
 Route110_TrickHousePuzzle6_Text_26DE26: @ 826DE26
 	.string "{PLAYER} wrote down the secret code\n"
 	.string "on the door.\p"
-	.string "“TRICK MASTER is my life.”\n"
+	.string "“Trick Master is my life.”\n"
 	.string "… … … … … … … …\p"
 	.string "The lock clicked open!$"
 
@@ -54,7 +54,7 @@ Route110_TrickHousePuzzle6_Text_26DE93: @ 826DE93
 	.string "house, I had to check it out.$"
 
 Route110_TrickHousePuzzle6_Text_26DED2: @ 826DED2
-	.string "I've discovered a tough TRAINER!$"
+	.string "I've discovered a tough Trainer!$"
 
 Route110_TrickHousePuzzle6_Text_26DEF3: @ 826DEF3
 	.string "I'm sure having a good time checking\n"
@@ -63,7 +63,7 @@ Route110_TrickHousePuzzle6_Text_26DEF3: @ 826DEF3
 	.string "repeating!$"
 
 Route110_TrickHousePuzzle6_Text_26DF55: @ 826DF55
-	.string "Maybe I could get my BIRD POKéMON\n"
+	.string "Maybe I could get my Bird Pokémon\n"
 	.string "to fly over the wall…$"
 
 Route110_TrickHousePuzzle6_Text_26DF8D: @ 826DF8D

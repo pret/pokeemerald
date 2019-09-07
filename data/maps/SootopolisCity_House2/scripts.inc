@@ -21,7 +21,7 @@ SootopolisCity_House2_EventScript_226AA2:: @ 8226AA2
 	return
 
 SootopolisCity_House2_Text_226AAB: @ 8226AAB
-	.string "MT. PYRE…\p"
+	.string "Mt. Pyre…\p"
 	.string "At its peak are two orbs placed side\n"
 	.string "by side. Did you know?$"
 

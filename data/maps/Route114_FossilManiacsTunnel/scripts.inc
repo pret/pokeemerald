@@ -56,29 +56,29 @@ Route114_FossilManiacsTunnel_EventScript_22AFC6:: @ 822AFC6
 	end
 
 Route114_FossilManiacsTunnel_Text_22AFD0: @ 822AFD0
-	.string "I'm the FOSSIL MANIAC…\n"
-	.string "I'm a nice guy who loves FOSSILS…\p"
-	.string "Do you want a FOSSIL?\p"
-	.string "But the FOSSILS around these parts all\n"
+	.string "I'm the Fossil Maniac…\n"
+	.string "I'm a nice guy who loves Fossils…\p"
+	.string "Do you want a Fossil?\p"
+	.string "But the Fossils around these parts all\n"
 	.string "belong to me… None for you…\p"
 	.string "If you can't bear to go without\n"
-	.string "a FOSSIL, look in a desert where there\l"
+	.string "a Fossil, look in a desert where there\l"
 	.string "are boulders and sand that may hide\l"
-	.string "FOSSILS…$"
+	.string "Fossils…$"
 
 Route114_FossilManiacsTunnel_Text_22B0D6: @ 822B0D6
-	.string "You found a FOSSIL, didn't you?\n"
+	.string "You found a Fossil, didn't you?\n"
 	.string "That's so nice… It's so dreamy…\p"
 	.string "What are you going to do with that\n"
-	.string "FOSSIL?\p"
-	.string "From what I've heard, DEVON is doing\n"
-	.string "research on reviving POKéMON from\l"
-	.string "FOSSILS…\p"
-	.string "I love my FOSSILS, so I would never\n"
+	.string "Fossil?\p"
+	.string "From what I've heard, Devon is doing\n"
+	.string "research on reviving Pokémon from\l"
+	.string "Fossils…\p"
+	.string "I love my Fossils, so I would never\n"
 	.string "do anything like that…$"
 
 Route114_FossilManiacsTunnel_Text_22B1CC: @ 822B1CC
-	.string "FOSSILS are so… Wonderful…\n"
+	.string "Fossils are so… Wonderful…\n"
 	.string "It's so dreamy…$"
 
 Route114_FossilManiacsTunnel_Text_22B1F7: @ 822B1F7
@@ -89,5 +89,5 @@ Route114_FossilManiacsTunnel_Text_22B1F7: @ 822B1F7
 	.string "I think there's a giant cavern\n"
 	.string "underneath now…\p"
 	.string "But I've left it alone because I don't\n"
-	.string "think there are any FOSSILS there…$"
+	.string "think there are any Fossils there…$"
 

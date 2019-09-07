@@ -32,8 +32,8 @@ SootopolisCity_House4_Text_226DEA: @ 8226DEA
 	.string "It would be nice if they existed, but\n"
 	.string "even if they didn't, it would be so\l"
 	.string "beautiful to take an underwater\l"
-	.string "stroll with my POKéMON.$"
+	.string "stroll with my Pokémon.$"
 
 SootopolisCity_House4_Text_226E7F: @ 8226E7F
-	.string "AZUMARILL: Marurii.$"
+	.string "Azumarill: Marurii.$"
 

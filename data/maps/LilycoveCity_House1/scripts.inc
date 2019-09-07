@@ -16,11 +16,11 @@ LilycoveCity_House1_EventScript_21ECD7:: @ 821ECD7
 	end
 
 LilycoveCity_House1_Text_21ECEA: @ 821ECEA
-	.string "POKéMON are partners to people.\n"
+	.string "Pokémon are partners to people.\n"
 	.string "They aren't our tools.\p"
 	.string "Unfortunately, there are some people\n"
 	.string "who fail to understand that…$"
 
 LilycoveCity_House1_Text_21ED63: @ 821ED63
-	.string "KECLEON: Ruroro?$"
+	.string "Kecleon: Ruroro?$"
 

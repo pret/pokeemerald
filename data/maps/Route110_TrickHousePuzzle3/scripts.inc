@@ -319,7 +319,7 @@ Route110_TrickHousePuzzle3_EventScript_26C5F2:: @ 826C5F2
 Route110_TrickHousePuzzle3_Text_26C609: @ 826C609
 	.string "{PLAYER} wrote down the secret code\n"
 	.string "on the door.\p"
-	.string "“TRICK MASTER is coveted.”\n"
+	.string "“Trick Master is coveted.”\n"
 	.string "… … … … … … … …\p"
 	.string "The lock clicked open!$"
 

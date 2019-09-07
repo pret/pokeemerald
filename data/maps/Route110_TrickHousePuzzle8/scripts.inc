@@ -31,20 +31,20 @@ Route110_TrickHousePuzzle8_EventScript_26E84D:: @ 826E84D
 Route110_TrickHousePuzzle8_EventScript_26E864:: @ 826E864
 	.string "{PLAYER} wrote down the secret code\n"
 	.string "on the door.\p"
-	.string "“TRICK MASTER I love.”\n"
+	.string "“Trick Master I love.”\n"
 	.string "… … … … … … … …\p"
 	.string "The lock clicked open!$"
 
 Route110_TrickHousePuzzle8_Text_26E8CD: @ 826E8CD
-	.string "Not many TRAINERS have made it\n"
+	.string "Not many Trainers have made it\n"
 	.string "this far.$"
 
 Route110_TrickHousePuzzle8_Text_26E8F6: @ 826E8F6
 	.string "That must mean you're tough, too…$"
 
 Route110_TrickHousePuzzle8_Text_26E918: @ 826E918
-	.string "You've beaten the POKéMON LEAGUE\n"
-	.string "CHAMPION? That's too much!$"
+	.string "You've beaten the Pokémon League\n"
+	.string "Champion? That's too much!$"
 
 Route110_TrickHousePuzzle8_Text_26E954: @ 826E954
 	.string "Consider yourself lucky to be\n"
@@ -59,8 +59,8 @@ Route110_TrickHousePuzzle8_Text_26E99F: @ 826E99F
 	.string "You can brag about it.$"
 
 Route110_TrickHousePuzzle8_Text_26E9D7: @ 826E9D7
-	.string "You've been slugging through the TRICK\n"
-	.string "HOUSE challenge, too.$"
+	.string "You've been slugging through the Trick\n"
+	.string "House challenge, too.$"
 
 Route110_TrickHousePuzzle8_Text_26EA14: @ 826EA14
 	.string "I see…\n"
@@ -68,5 +68,5 @@ Route110_TrickHousePuzzle8_Text_26EA14: @ 826EA14
 
 Route110_TrickHousePuzzle8_Text_26EA3F: @ 826EA3F
 	.string "Seeing someone like you should please\n"
-	.string "the TRICK MASTER.$"
+	.string "the Trick Master.$"
 

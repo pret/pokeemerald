@@ -53,10 +53,10 @@ SootopolisCity_Gym_B1F_EventScript_225D5A:: @ 8225D5A
 
 SootopolisCity_Gym_B1F_Text_225D71: @ 8225D71
 	.string "I'll show you the sublime techniques\n"
-	.string "I learned from our LEADER JUAN!$"
+	.string "I learned from our Leader Juan!$"
 
 SootopolisCity_Gym_B1F_Text_225DB6: @ 8225DB6
-	.string "Please forgive me, JUAN…$"
+	.string "Please forgive me, Juan…$"
 
 SootopolisCity_Gym_B1F_Text_225DCF: @ 8225DCF
 	.string "Watch what happens if you crack all\n"
@@ -64,7 +64,7 @@ SootopolisCity_Gym_B1F_Text_225DCF: @ 8225DCF
 
 SootopolisCity_Gym_B1F_Text_225E04: @ 8225E04
 	.string "You came all the way here, but you won't\n"
-	.string "get to see JUAN.\p"
+	.string "get to see Juan.\p"
 	.string "Not if you lose to me, you won't!$"
 
 SootopolisCity_Gym_B1F_Text_225E60: @ 8225E60
@@ -73,13 +73,13 @@ SootopolisCity_Gym_B1F_Text_225E60: @ 8225E60
 
 SootopolisCity_Gym_B1F_Text_225E90: @ 8225E90
 	.string "You might be good enough to avoid\n"
-	.string "being wiped out in one hit by JUAN.$"
+	.string "being wiped out in one hit by Juan.$"
 
 SootopolisCity_Gym_B1F_Text_225ED6: @ 8225ED6
-	.string "The sight of JUAN conducting\n"
+	.string "The sight of Juan conducting\n"
 	.string "a battle…\p"
 	.string "The very beauty of it compelled me to\n"
-	.string "become a TRAINER.$"
+	.string "become a Trainer.$"
 
 SootopolisCity_Gym_B1F_Text_225F35: @ 8225F35
 	.string "You battled with more beauty than\n"
@@ -89,7 +89,7 @@ SootopolisCity_Gym_B1F_Text_225F67: @ 8225F67
 	.string "The grace you bring to battle is\n"
 	.string "fabulous.\p"
 	.string "Oh… I'm so fortunate to have found\n"
-	.string "POKéMON.$"
+	.string "Pokémon.$"
 
 SootopolisCity_Gym_B1F_Text_225FBE: @ 8225FBE
 	.string "I should teach you how harsh battles\n"
@@ -101,26 +101,26 @@ SootopolisCity_Gym_B1F_Text_225FEB: @ 8225FEB
 
 SootopolisCity_Gym_B1F_Text_225FFE: @ 8225FFE
 	.string "I'll tell you something good.\p"
-	.string "If you want to reach JUAN, you\n"
+	.string "If you want to reach Juan, you\n"
 	.string "need to walk on each floor tile once.$"
 
 SootopolisCity_Gym_B1F_Text_226061: @ 8226061
-	.string "The POKéMON GYM of the highest level\n"
-	.string "in the HOENN region…\p"
-	.string "That's the SOOTOPOLIS GYM.$"
+	.string "The Pokémon Gym of the highest level\n"
+	.string "in the Hoenn region…\p"
+	.string "That's the Sootopolis Gym.$"
 
 SootopolisCity_Gym_B1F_Text_2260B6: @ 82260B6
 	.string "What a high level you are!$"
 
 SootopolisCity_Gym_B1F_Text_2260D1: @ 82260D1
 	.string "Rather than being satisfied by being\n"
-	.string "in a strong GYM, I imagine training in\l"
+	.string "in a strong Gym, I imagine training in\l"
 	.string "other places will make you stronger.\l"
 	.string "But above all, it looks more fun.$"
 
 SootopolisCity_Gym_B1F_Text_226164: @ 8226164
-	.string "I train my POKéMON together with\n"
-	.string "JUAN.\p"
+	.string "I train my Pokémon together with\n"
+	.string "Juan.\p"
 	.string "Don't think I'm a pushover.$"
 
 SootopolisCity_Gym_B1F_Text_2261A7: @ 82261A7
@@ -133,7 +133,7 @@ SootopolisCity_Gym_B1F_Text_2261B5: @ 82261B5
 SootopolisCity_Gym_B1F_Text_2261F7: @ 82261F7
 	.string "A graceful glide across the ice while\n"
 	.string "crossing no lines…\p"
-	.string "A TRAINER putting on that performance\n"
+	.string "A Trainer putting on that performance\n"
 	.string "would be elegantly beautiful!$"
 
 SootopolisCity_Gym_B1F_Text_226274: @ 8226274
@@ -141,11 +141,11 @@ SootopolisCity_Gym_B1F_Text_226274: @ 8226274
 
 SootopolisCity_Gym_B1F_Text_226286: @ 8226286
 	.string "This is really obvious, but how strong\n"
-	.string "you are as a TRAINER has nothing to do\l"
+	.string "you are as a Trainer has nothing to do\l"
 	.string "with how young or old you are.$"
 
 SootopolisCity_Gym_B1F_Text_2262F3: @ 82262F3
-	.string "When I'm with my POKéMON, the time\n"
+	.string "When I'm with my Pokémon, the time\n"
 	.string "flies by before you can say, “Oops!”$"
 
 SootopolisCity_Gym_B1F_Text_22633B: @ 822633B
@@ -156,17 +156,17 @@ SootopolisCity_Gym_B1F_Text_226341: @ 8226341
 	.string "before I can manage an “Oops!”$"
 
 SootopolisCity_Gym_B1F_Text_226388: @ 8226388
-	.string "I can battle with really rare POKéMON\n"
+	.string "I can battle with really rare Pokémon\n"
 	.string "if you'd like.$"
 
 SootopolisCity_Gym_B1F_Text_2263BD: @ 82263BD
 	.string "Oh, there now! Did you have a good look\n"
-	.string "at my POKéMON?$"
+	.string "at my Pokémon?$"
 
 SootopolisCity_Gym_B1F_Text_2263F4: @ 82263F4
-	.string "I came to this GYM because JUAN\n"
-	.string "praised me for my darling POKéMON.\p"
-	.string "Oh, if only I'd met JUAN years ago\n"
+	.string "I came to this Gym because Juan\n"
+	.string "praised me for my darling Pokémon.\p"
+	.string "Oh, if only I'd met Juan years ago\n"
 	.string "when I was younger…$"
 
 SootopolisCity_Gym_B1F_Text_22646E: @ 822646E
@@ -178,6 +178,6 @@ SootopolisCity_Gym_B1F_Text_226495: @ 8226495
 	.string "I went much too easy on you.$"
 
 SootopolisCity_Gym_B1F_Text_2264BC: @ 82264BC
-	.string "You couldn't lay a finger on JUAN,\n"
+	.string "You couldn't lay a finger on Juan,\n"
 	.string "I'm sure. Giggle…$"
 

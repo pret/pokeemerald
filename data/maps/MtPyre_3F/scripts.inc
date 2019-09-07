@@ -66,34 +66,34 @@ MtPyre_3F_Text_231952: @ 8231952
 
 MtPyre_3F_Text_23196A: @ 823196A
 	.string "That was amazing!\n"
-	.string "You're a very special TRAINER.$"
+	.string "You're a very special Trainer.$"
 
 MtPyre_3F_Text_23199B: @ 823199B
-	.string "POKéMON no longer of this world.\n"
-	.string "POKéMON that are with you now.\p"
-	.string "And the POKéMON that you will meet\n"
+	.string "Pokémon no longer of this world.\n"
+	.string "Pokémon that are with you now.\p"
+	.string "And the Pokémon that you will meet\n"
 	.string "in the future…\p"
 	.string "They are all to be equally cherished.\n"
 	.string "Please remember that.$"
 
 MtPyre_3F_Text_231A49: @ 8231A49
-	.string "I would like to see your POKéMON\n"
+	.string "I would like to see your Pokémon\n"
 	.string "when they grow up some more…\p"
-	.string "Please, I need to see your POKéNAV.$"
+	.string "Please, I need to see your Pokénav.$"
 
 MtPyre_3F_Text_231AAB: @ 8231AAB
 	.string "Oh, it's you…\p"
 	.string "Have you come to show me your grown\n"
-	.string "POKéMON?$"
+	.string "Pokémon?$"
 
 MtPyre_3F_Text_231AE6: @ 8231AE6
 	.string "How amazing!\n"
 	.string "You are a special person.$"
 
 MtPyre_3F_Text_231B0D: @ 8231B0D
-	.string "POKéMON no longer of this world.\n"
-	.string "POKéMON that are with you now.\p"
-	.string "And the POKéMON that you will meet\n"
+	.string "Pokémon no longer of this world.\n"
+	.string "Pokémon that are with you now.\p"
+	.string "And the Pokémon that you will meet\n"
 	.string "in the future…\p"
 	.string "They are all to be equally cherished.\n"
 	.string "I see that you've remembered that.$"

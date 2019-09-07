@@ -20,20 +20,20 @@ SSTidalLowerDeck_Text_23C8A0: @ 823C8A0
 	.string "Little bro, I lost!$"
 
 SSTidalLowerDeck_Text_23C8B4: @ 823C8B4
-	.string "We're the CLEANUP BROTHERS!\p"
+	.string "We're the Cleanup Brothers!\p"
 	.string "The old one dumps the detergent,\n"
 	.string "and the young one does the scrubbing!$"
 
 SSTidalLowerDeck_Text_23C917: @ 823C917
 	.string "This is the bottom of the ship's hull.\n"
 	.string "There's plenty of room.\l"
-	.string "It'll be alright for a POKéMON battle.$"
+	.string "It'll be alright for a Pokémon battle.$"
 
 SSTidalLowerDeck_Text_23C97D: @ 823C97D
 	.string "Big bro, I lost!$"
 
 SSTidalLowerDeck_Text_23C98E: @ 823C98E
-	.string "We're the CLEANUP BROTHERS!\p"
+	.string "We're the Cleanup Brothers!\p"
 	.string "The old one dumps the detergent,\n"
 	.string "and the young one does the scrubbing!$"
 

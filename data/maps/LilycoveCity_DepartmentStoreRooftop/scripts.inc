@@ -217,7 +217,7 @@ LilycoveCity_DepartmentStoreRooftop_Text_220552: @ 8220552
 	.string "Ohh… I'm bone-dry thirsty!$"
 
 LilycoveCity_DepartmentStoreRooftop_Text_22056D: @ 822056D
-	.string "It's a VENDING MACHINE.\n"
+	.string "It's a Vending Machine.\n"
 	.string "Which drink would you like?$"
 
 LilycoveCity_DepartmentStoreRooftop_Text_2205A1: @ 82205A1

@@ -95,10 +95,10 @@ PetalburgCity_PokemonCenter_1F_EventScript_291686:: @ 8291686
 	return
 
 PetalburgCity_PokemonCenter_1F_Text_291687: @ 8291687
-	.string "Hello there, TRAINER!\n"
+	.string "Hello there, Trainer!\n"
 	.string "You've got a wonderful smile, there.\p"
 	.string "I have a hobby--collecting the profiles\n"
-	.string "of POKéMON TRAINERS.$"
+	.string "of Pokémon Trainers.$"
 
 PetalburgCity_PokemonCenter_1F_Text_2916FF: @ 82916FF
 	.string "So, how about it?\n"
@@ -115,7 +115,7 @@ PetalburgCity_PokemonCenter_1F_Text_291729: @ 8291729
 	.string "There are a lot of text pieces that\n"
 	.string "you can use.\p"
 	.string "They are arranged in groups like\n"
-	.string "POKéMON, lifestyles, and hobbies so\l"
+	.string "Pokémon, lifestyles, and hobbies so\l"
 	.string "it is easier to look them up.\p"
 	.string "So, first, choose the group of text\n"
 	.string "pieces to display a list of choices.\p"
@@ -137,7 +137,7 @@ PetalburgCity_PokemonCenter_1F_Text_2919DC: @ 82919DC
 	.string "Well, anytime is good by me!$"
 
 PetalburgCity_PokemonCenter_1F_Text_291A1B: @ 8291A1B
-	.string "Hello there, TRAINER!\n"
+	.string "Hello there, Trainer!\n"
 	.string "You've got a wonderful smile.$"
 
 PetalburgCity_PokemonCenter_1F_Text_291A4F: @ 8291A4F
@@ -165,4 +165,4 @@ PetalburgCity_PokemonCenter_1F_Text_291BB7: @ 8291BB7
 	.string "Oh?\n"
 	.string "You know the secret saying!\p"
 	.string "That means you're now a fellow member\n"
-	.string "of the MYSTERY EVENT CLUB!$"
+	.string "of the Mystery Event Club!$"

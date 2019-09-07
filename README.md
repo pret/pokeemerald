@@ -5,11 +5,13 @@
 [travis]: https://travis-ci.org/pret/pokeemerald
 [travis-badge]: https://travis-ci.org/pret/pokeemerald.svg?branch=master
 
+This is a decapitalized (all-caps text replaced with proper capitalization) disassembly of Pokémon Emerald.
+
 This is a decompilation of Pokémon Emerald.
 
 It builds the following ROM:
 
-* [**pokeemerald.gba**](https://datomatic.no-intro.org/index.php?page=show_record&s=23&n=1961) `sha1: f3ae088181bf583e55daf962a92bb46f4f1d07b7`
+* pokeemerald.gba `sha1: d90e55a563b7a65a88bc0a34fee22bfcff678cb0`
 
 To set up the repository, see [INSTALL.md](INSTALL.md).
 

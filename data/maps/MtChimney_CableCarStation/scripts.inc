@@ -87,7 +87,7 @@ MtChimney_CableCarStation_Movement_22ACB4: @ 822ACB4
 	step_end
 
 MtChimney_CableCarStation_Text_22ACB9: @ 822ACB9
-	.string "The CABLE CAR is ready to go down.\n"
+	.string "The Cable Car is ready to go down.\n"
 	.string "Would you like to be on it?$"
 
 MtChimney_CableCarStation_Text_22ACF8: @ 822ACF8

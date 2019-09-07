@@ -27,8 +27,8 @@ DesertUnderpass_EventScript_23AF68:: @ 823AF68
 	end
 
 DesertUnderpass_Text_23AF79:: @ 823AF79
-	.string "{PLAYER} found the ROOT FOSSIL.$"
+	.string "{PLAYER} found the Root Fossil.$"
 
 DesertUnderpass_Text_23AF93:: @ 823AF93
-	.string "{PLAYER} found the CLAW FOSSIL.$"
+	.string "{PLAYER} found the Claw Fossil.$"
 

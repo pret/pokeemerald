@@ -51,7 +51,7 @@ AbandonedShip_Rooms_1F_Text_237BDB: @ 8237BDB
 	.string "but I don't know about that.$"
 
 AbandonedShip_Rooms_1F_Text_237C2A: @ 8237C2A
-	.string "You're such a tough TRAINER!\n"
+	.string "You're such a tough Trainer!\n"
 	.string "Let me register you as a memento!$"
 
 AbandonedShip_Rooms_1F_Text_237C69: @ 8237C69

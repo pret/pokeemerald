@@ -214,20 +214,20 @@ Route119_WeatherInstitute_2F_EventScript_27018B:: @ 827018B
 	end
 
 Route119_WeatherInstitute_2F_Text_27019C: @ 827019C
-	.string "The INSTITUTE created a type of\n"
-	.string "POKéMON that has something to do with\l"
+	.string "The Institute created a type of\n"
+	.string "Pokémon that has something to do with\l"
 	.string "the weather. We're here to take them!$"
 
 Route119_WeatherInstitute_2F_Text_270208: @ 8270208
 	.string "Our plan's being spoiled by a kid?$"
 
 Route119_WeatherInstitute_2F_Text_27022B: @ 827022B
-	.string "If the POKéMON they made here can\n"
+	.string "If the Pokémon they made here can\n"
 	.string "control the weather freely, then we of\l"
-	.string "TEAM AQUA definitely need it!$"
+	.string "Team Aqua definitely need it!$"
 
 Route119_WeatherInstitute_2F_Text_270292: @ 8270292
-	.string "We're TEAM AQUA!\n"
+	.string "We're Team Aqua!\n"
 	.string "We appear wherever anything rare is\l"
 	.string "found!$"
 
@@ -236,17 +236,17 @@ Route119_WeatherInstitute_2F_Text_2702CE: @ 82702CE
 
 Route119_WeatherInstitute_2F_Text_2702DA: @ 82702DA
 	.string "You don't have any idea what we of\n"
-	.string "TEAM AQUA are working towards!\l"
+	.string "Team Aqua are working towards!\l"
 	.string "You stay out of our way!$"
 
 Route119_WeatherInstitute_2F_Text_270335: @ 8270335
 	.string "Don't tell me you're looking for that\n"
-	.string "weather POKéMON, too?\p"
+	.string "weather Pokémon, too?\p"
 	.string "That's a no-no!\n"
 	.string "We were here to get it first!$"
 
 Route119_WeatherInstitute_2F_Text_27039F: @ 827039F
-	.string "Oh, will you look at my POKéMON?$"
+	.string "Oh, will you look at my Pokémon?$"
 
 Route119_WeatherInstitute_2F_Text_2703C0: @ 82703C0
 	.string "Humph, so what?\n"
@@ -256,7 +256,7 @@ Route119_WeatherInstitute_2F_Text_2703C0: @ 82703C0
 
 Route119_WeatherInstitute_2F_Text_270409: @ 8270409
 	.string "Ahahahaha!\p"
-	.string "You're going to meddle in TEAM AQUA's\n"
+	.string "You're going to meddle in Team Aqua's\n"
 	.string "affairs?\p"
 	.string "You're either absolutely fearless,\n"
 	.string "simply ignorant, or both!\p"
@@ -268,43 +268,43 @@ Route119_WeatherInstitute_2F_Text_2704BD: @ 82704BD
 	.string "You're disgustingly strong!$"
 
 Route119_WeatherInstitute_2F_Text_2704E4: @ 82704E4
-	.string "It's bad enough to have TEAM MAGMA\n"
+	.string "It's bad enough to have Team Magma\n"
 	.string "blunder about, but now there's you!\p"
 	.string "What makes you want to sniff around\n"
 	.string "in our business, anyway?$"
 
 Route119_WeatherInstitute_2F_Text_270568: @ 8270568
 	.string "We have a situation here!\p"
-	.string "A TEAM MAGMA mob just passed\n"
-	.string "the WEATHER INSTITUTE.\p"
+	.string "A Team Magma mob just passed\n"
+	.string "the Weather Institute.\p"
 	.string "They appear to be headed for\n"
-	.string "MT. PYRE!$"
+	.string "Mt. Pyre!$"
 
 Route119_WeatherInstitute_2F_Text_2705DD: @ 82705DD
 	.string "What?!\p"
 	.string "We can't waste any more time here!\n"
-	.string "We have to hurry to MT. PYRE, too!\p"
+	.string "We have to hurry to Mt. Pyre, too!\p"
 	.string "Ahahahaha!\n"
-	.string "TEAM MAGMA, just you wait!$"
+	.string "Team Magma, just you wait!$"
 
 Route119_WeatherInstitute_2F_Text_270650: @ 8270650
 	.string "Thanks!\n"
 	.string "Thanks to you, we're safe!\p"
 	.string "It might be an odd way of thanking you,\n"
-	.string "but take this POKéMON.$"
+	.string "but take this Pokémon.$"
 
 Route119_WeatherInstitute_2F_Text_2706B2: @ 82706B2
 	.string "Hm? You don't seem to have any room\n"
-	.string "for this POKéMON.$"
+	.string "for this Pokémon.$"
 
 Route119_WeatherInstitute_2F_Text_2706E8: @ 82706E8
-	.string "{PLAYER} received CASTFORM!$"
+	.string "{PLAYER} received Castform!$"
 
 Route119_WeatherInstitute_2F_Text_2706FE: @ 82706FE
-	.string "That POKéMON changes shape according\n"
+	.string "That Pokémon changes shape according\n"
 	.string "to the weather conditions.\p"
 	.string "There're plenty of them in the\n"
-	.string "INSTITUTE--go ahead and take it.$"
+	.string "Institute--go ahead and take it.$"
 
 Route119_WeatherInstitute_2F_Text_27077E: @ 827077E
 	.string "I've been researching rain for many\n"
@@ -313,7 +313,7 @@ Route119_WeatherInstitute_2F_Text_27077E: @ 827077E
 
 WeatherInstitute_UnusualWeather_GroudonWeatherText: @ 82707F1
 	.string "I track weather patterns over\n"
-	.string "the HOENN region.\p"
+	.string "the Hoenn region.\p"
 	.string "Presently, a drought has been recorded\n"
 	.string "in {STR_VAR_1}.\p"
 	.string "Could that mean, somewhere near\n"
@@ -321,7 +321,7 @@ WeatherInstitute_UnusualWeather_GroudonWeatherText: @ 82707F1
 
 WeatherInstitute_UnusualWeather_KyogreWeatherText: @ 8270873
 	.string "I track weather patterns over\n"
-	.string "the HOENN region.\p"
+	.string "the Hoenn region.\p"
 	.string "Presently, heavy rainfall has been\n"
 	.string "recorded over {STR_VAR_1}.\p"
 	.string "Could that mean, somewhere near\n"

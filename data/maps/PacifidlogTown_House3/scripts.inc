@@ -81,12 +81,12 @@ PacifidlogTown_House3_Text_203E12: @ 8203E12
 PacifidlogTown_House3_Text_203E7F: @ 8203E7F
 	.string "I know I could go looking for one\n"
 	.string "on my own, but…\p"
-	.string "But I really wanted to get a BAGON\n"
-	.string "that another TRAINER caught…$"
+	.string "But I really wanted to get a Bagon\n"
+	.string "that another Trainer caught…$"
 
 PacifidlogTown_House3_Text_203EF1: @ 8203EF1
-	.string "Is that a POKéDEX?\p"
+	.string "Is that a Pokédex?\p"
 	.string "Did you get to meet a lot of different\n"
-	.string "POKéMON?\p"
+	.string "Pokémon?\p"
 	.string "I wish I was like you.$"
 
