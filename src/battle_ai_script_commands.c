@@ -298,7 +298,7 @@ void BattleAI_HandleItemUseBeforeAISetup(u8 defaultScoreMoves)
             )
        )
     {
-        for (i = 0; i < 4; i++)
+        for (i = 0; i < MAX_TRAINER_ITEMS; i++)
         {
             if (gTrainers[gTrainerBattleOpponent_A].items[i] != 0)
             {
