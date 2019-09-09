@@ -2,7 +2,7 @@
 #include "main.h"
 #include "text.h"
 #include "menu.h"
-#include "alloc.h"
+#include "malloc.h"
 #include "gpu_regs.h"
 #include "palette.h"
 #include "party_menu.h"

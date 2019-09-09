@@ -1,5 +1,5 @@
 #include "global.h"
-#include "alloc.h"
+#include "malloc.h"
 #include "decompress.h"
 #include "decoration.h"
 #include "decoration_inventory.h"

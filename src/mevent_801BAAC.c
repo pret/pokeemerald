@@ -4,7 +4,7 @@
 #include "gpu_regs.h"
 #include "palette.h"
 #include "decompress.h"
-#include "alloc.h"
+#include "malloc.h"
 #include "menu.h"
 #include "pokemon_icon.h"
 #include "union_room.h"

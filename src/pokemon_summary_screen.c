@@ -20,7 +20,7 @@
 #include "item.h"
 #include "link.h"
 #include "m4a.h"
-#include "alloc.h"
+#include "malloc.h"
 #include "menu.h"
 #include "menu_helpers.h"
 #include "mon_markings.h"

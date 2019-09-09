@@ -6,7 +6,7 @@
 #include "pokemon.h"
 #include "text.h"
 #include "text_window.h"
-#include "alloc.h"
+#include "malloc.h"
 #include "gpu_regs.h"
 #include "graphics.h"
 #include "main.h"

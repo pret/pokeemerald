@@ -31,7 +31,7 @@
 #include "text.h"
 #include "script_menu.h"
 #include "naming_screen.h"
-#include "alloc.h"
+#include "malloc.h"
 #include "region_map.h"
 #include "constants/region_map_sections.h"
 #include "decoration.h"

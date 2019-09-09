@@ -9,7 +9,7 @@
 #include "task.h"
 #include "battle_tower.h"
 #include "party_menu.h"
-#include "alloc.h"
+#include "malloc.h"
 #include "palette.h"
 #include "script.h"
 #include "battle_setup.h"
