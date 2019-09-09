@@ -121,109 +121,109 @@ const struct MenuAction MultichoiceList_024[] =
     {gText_Exit, NULL},
 };
 
-const struct MenuAction MultichoiceList_025[] =
+const struct MenuAction MultichoiceList_025[] = //Trick House Mechadoll 1, Question 1
 {
-    {gUnknown_0827ECBC, NULL},
-    {gUnknown_0827ECC3, NULL},
-    {gUnknown_0827ECCD, NULL},
+    {gTrickHouse_Mechadoll_Oddish, NULL},
+    {gTrickHouse_Mechadoll_Poochyena, NULL},
+    {gTrickHouse_Mechadoll_Taillow, NULL},
 };
 
-const struct MenuAction MultichoiceList_026[] =
+const struct MenuAction MultichoiceList_026[] = //Trick House Mechadoll 1, Question 2
 {
-    {gUnknown_0827ECD5, NULL},
-    {gUnknown_0827ECDD, NULL},
-    {gUnknown_0827ECE3, NULL},
+    {gTrickHouse_Mechadoll_Azurill, NULL},
+    {gTrickHouse_Mechadoll_Lotad, NULL},
+    {gTrickHouse_Mechadoll_Wingull, NULL},
 };
 
-const struct MenuAction MultichoiceList_027[] =
+const struct MenuAction MultichoiceList_027[] = //Trick House Mechadoll 1, Question 3
 {
-    {gUnknown_0827ECEB, NULL},
-    {gUnknown_0827ECF2, NULL},
-    {gUnknown_0827ECF8, NULL},
+    {gTrickHouse_Mechadoll_Dustox, NULL},
+    {gTrickHouse_Mechadoll_Zubat, NULL},
+    {gTrickHouse_Mechadoll_Nincada, NULL},
 };
 
-const struct MenuAction MultichoiceList_028[] =
+const struct MenuAction MultichoiceList_028[] = //Trick House Mechadoll 2, Question 1
 {
-    {gUnknown_0827ED00, NULL},
-    {gUnknown_0827ED06, NULL},
-    {gUnknown_0827ED10, NULL},
+    {gTrickHouse_Mechadoll_Ralts, NULL},
+    {gTrickHouse_Mechadoll_Zigzagoon, NULL},
+    {gTrickHouse_Mechadoll_Slakoth, NULL},
 };
 
-const struct MenuAction MultichoiceList_029[] =
+const struct MenuAction MultichoiceList_029[] = //Trick House Mechadoll 2, Question 2
 {
-    {gUnknown_0827ED18, NULL},
-    {gUnknown_0827ED22, NULL},
-    {gUnknown_0827ED2C, NULL},
+    {gTrickHouse_Mechadoll_Poochyena2, NULL},
+    {gTrickHouse_Mechadoll_Shroomish, NULL},
+    {gTrickHouse_Mechadoll_Zigzagoon2, NULL},
 };
 
-const struct MenuAction MultichoiceList_030[] =
+const struct MenuAction MultichoiceList_030[] = //Trick House Mechadoll 2, Question 3
 {
-    {gUnknown_0827ED36, NULL},
-    {gUnknown_0827ED40, NULL},
-    {gUnknown_0827ED46, NULL},
+    {gTrickHouse_Mechadoll_Poochyena3, NULL},
+    {gTrickHouse_Mechadoll_Zubat2, NULL},
+    {gTrickHouse_Mechadoll_Carvanha, NULL},
 };
 
-const struct MenuAction MultichoiceList_031[] =
+const struct MenuAction MultichoiceList_031[] = //Trick House Mechadoll 3, Question 1
 {
-    {gUnknown_0827ED4F, NULL},
-    {gUnknown_0827ED59, NULL},
-    {gUnknown_0827ED65, NULL},
+    {gTrickHouse_Mechadoll_BurnHeal, NULL},
+    {gTrickHouse_Mechadoll_HarborMail, NULL},
+    {gTrickHouse_Mechadoll_SamePrice, NULL},
 };
 
-const struct MenuAction MultichoiceList_032[] =
+const struct MenuAction MultichoiceList_032[] = //Trick House Mechadoll 3, Question 2
 {
-    {gUnknown_0827ED70, NULL},
-    {gUnknown_0827ED74, NULL},
-    {gUnknown_0827ED78, NULL},
+    {gTrickHouse_Mechadoll_60Yen, NULL},
+    {gTrickHouse_Mechadoll_55Yen, NULL},
+    {gTrickHouse_Mechadoll_Nothing, NULL},
 };
 
-const struct MenuAction MultichoiceList_033[] =
+const struct MenuAction MultichoiceList_033[] = //Trick House Mechadoll 3, Question 3
 {
-    {gUnknown_0827ED80, NULL},
-    {gUnknown_0827ED95, NULL},
-    {gUnknown_0827EDAA, NULL},
+    {gTrickHouse_Mechadoll_CostMore, NULL},
+    {gTrickHouse_Mechadoll_CostLess, NULL},
+    {gTrickHouse_Mechadoll_SamePrice2, NULL},
 };
 
-const struct MenuAction MultichoiceList_034[] =
+const struct MenuAction MultichoiceList_034[] = //Trick House Mechadoll 4, Question 1
 {
-    {gUnknown_0827EDB5, NULL},
-    {gUnknown_0827EDBA, NULL},
-    {gUnknown_0827EDC1, NULL},
+    {gTrickHouse_Mechadoll_Male, NULL},
+    {gTrickHouse_Mechadoll_Female, NULL},
+    {gTrickHouse_Mechadoll_Neither, NULL},
 };
 
-const struct MenuAction MultichoiceList_035[] =
+const struct MenuAction MultichoiceList_035[] = //Trick House Mechadoll 4, Question 2
 {
-    {gUnknown_0827EDC9, NULL},
-    {gUnknown_0827EDD5, NULL},
-    {gUnknown_0827EDE4, NULL},
+    {gTrickHouse_Mechadoll_ElderlyMen, NULL},
+    {gTrickHouse_Mechadoll_ElderlyLadies, NULL},
+    {gTrickHouse_Mechadoll_SameNumber, NULL},
 };
 
-const struct MenuAction MultichoiceList_036[] =
+const struct MenuAction MultichoiceList_036[] = //Trick House Mechadoll 4, Question 3
 {
-    {gUnknown_0827EDF0, NULL},
-    {gUnknown_0827EDF5, NULL},
-    {gUnknown_0827EDF7, NULL},
+    {gTrickHouse_Mechadoll_None, NULL},
+    {gTrickHouse_Mechadoll_One, NULL},
+    {gTrickHouse_Mechadoll_Two, NULL},
 };
 
-const struct MenuAction MultichoiceList_037[] =
+const struct MenuAction MultichoiceList_037[] = //Trick House Mechadoll 5, Question 1
 {
-    {gUnknown_0827EDF9, NULL},
-    {gUnknown_0827EDFB, NULL},
-    {gUnknown_0827EDFD, NULL},
+    {gTrickHouse_Mechadoll_Two2, NULL},
+    {gTrickHouse_Mechadoll_Three, NULL},
+    {gTrickHouse_Mechadoll_Four, NULL},
 };
 
-const struct MenuAction MultichoiceList_038[] =
+const struct MenuAction MultichoiceList_038[] = //Trick House Mechadoll 5, Question 2
 {
-    {gUnknown_0827EDFF, NULL},
-    {gUnknown_0827EE01, NULL},
-    {gUnknown_0827EE03, NULL},
+    {gTrickHouse_Mechadoll_Six, NULL},
+    {gTrickHouse_Mechadoll_Seven, NULL},
+    {gTrickHouse_Mechadoll_Eight, NULL},
 };
 
-const struct MenuAction MultichoiceList_039[] =
+const struct MenuAction MultichoiceList_039[] = //Trick House Mechadoll 5, Question 3
 {
-    {gUnknown_0827EE05, NULL},
-    {gUnknown_0827EE07, NULL},
-    {gUnknown_0827EE09, NULL},
+    {gTrickHouse_Mechadoll_Six2, NULL},
+    {gTrickHouse_Mechadoll_Seven2, NULL},
+    {gTrickHouse_Mechadoll_Eight2, NULL},
 };
 
 const struct MenuAction MultichoiceList_042[] =
