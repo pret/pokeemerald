@@ -5795,12 +5795,12 @@ static void sub_81B6EB4(u8 taskId)
     s16 *move = &gUnknown_0203CEC8.unkE;
     u16 item = gSpecialVar_ItemId;
 
-    if (move[1] == 0)
+/*     if (move[1] == 0)
     {
         AdjustFriendship(mon, 4);
         if (item < ITEM_HM01_CUT)
             RemoveBagItem(item, 1);
-    }
+    } */
     GetMonNickname(mon, gStringVar1);
     StringCopy(gStringVar2, gMoveNames[move[0]]);
     StringExpandPlaceholders(gStringVar4, gText_PkmnLearnedMove3);
