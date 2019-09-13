@@ -13,7 +13,7 @@ BattleFrontier_BattlePointExchangeServiceCorner_EventScript_25F07D:: @ 825F07D
 	end
 
 BattleFrontier_BattlePointExchangeServiceCorner_EventScript_25F08A:: @ 825F08A
-	specialvar VAR_TEMP_1, sub_813AA04
+	specialvar VAR_TEMP_1, GetFrontierBattlePoints
 	compare VAR_TEMP_1, VAR_0x8008
 	goto_if_ge BattleFrontier_BattlePointExchangeServiceCorner_EventScript_25F0C9
 	msgbox BattleFrontier_BattlePointExchangeServiceCorner_Text_25FE86, MSGBOX_DEFAULT
@@ -39,7 +39,7 @@ BattleFrontier_BattlePointExchangeServiceCorner_EventScript_25F0E5:: @ 825F0E5
 	compare VAR_RESULT, 0
 	goto_if_eq BattleFrontier_BattlePointExchangeServiceCorner_EventScript_25F11D
 	copyvar VAR_0x8004, VAR_0x8008
-	special sub_813A9A4
+	special TakeFrontierBattlePoints
 	givedecoration VAR_0x8009
 	special sub_813A8FC
 	playse SE_REGI
@@ -60,7 +60,7 @@ BattleFrontier_BattlePointExchangeServiceCorner_EventScript_25F12A:: @ 825F12A
 	compare VAR_RESULT, 0
 	goto_if_eq BattleFrontier_BattlePointExchangeServiceCorner_EventScript_25F166
 	copyvar VAR_0x8004, VAR_0x8008
-	special sub_813A9A4
+	special TakeFrontierBattlePoints
 	giveitem VAR_0x8009, 1
 	special sub_813A8FC
 	playse SE_REGI
@@ -85,9 +85,9 @@ BattleFrontier_BattlePointExchangeServiceCorner_EventScript_25F173:: @ 825F173
 	end
 
 BattleFrontier_BattlePointExchangeServiceCorner_EventScript_25F185:: @ 825F185
-	setvar VAR_0x8004, 3
+	setvar VAR_0x8004, SCROLL_MULTI_BF_EXCHANGE_CORNER_DECOR_VENDOR_1
 	special sub_813AA18
-	special sub_813A128
+	special ShowScrollableMultichoice
 	waitstate
 	special sub_813AA44
 	switch VAR_RESULT
@@ -204,9 +204,9 @@ BattleFrontier_BattlePointExchangeServiceCorner_EventScript_25F37C:: @ 825F37C
 	end
 
 BattleFrontier_BattlePointExchangeServiceCorner_EventScript_25F38E:: @ 825F38E
-	setvar VAR_0x8004, 4
+	setvar VAR_0x8004, SCROLL_MULTI_BF_EXCHANGE_CORNER_DECOR_VENDOR_2
 	special sub_813AA18
-	special sub_813A128
+	special ShowScrollableMultichoice
 	waitstate
 	special sub_813AA44
 	switch VAR_RESULT
@@ -273,9 +273,9 @@ BattleFrontier_BattlePointExchangeServiceCorner_EventScript_25F49F:: @ 825F49F
 	end
 
 BattleFrontier_BattlePointExchangeServiceCorner_EventScript_25F4B1:: @ 825F4B1
-	setvar VAR_0x8004, 5
+	setvar VAR_0x8004, SCROLL_MULTI_BF_EXCHANGE_CORNER_VITAMIN_VENDOR
 	special sub_813AA18
-	special sub_813A128
+	special ShowScrollableMultichoice
 	waitstate
 	special sub_813AA44
 	switch VAR_RESULT
@@ -352,9 +352,9 @@ BattleFrontier_BattlePointExchangeServiceCorner_EventScript_25F5F0:: @ 825F5F0
 	end
 
 BattleFrontier_BattlePointExchangeServiceCorner_EventScript_25F602:: @ 825F602
-	setvar VAR_0x8004, 6
+	setvar VAR_0x8004, SCROLL_MULTI_BF_EXCHANGE_CORNER_HOLD_ITEM_VENDOR
 	special sub_813AA18
-	special sub_813A128
+	special ShowScrollableMultichoice
 	waitstate
 	special sub_813AA44
 	switch VAR_RESULT

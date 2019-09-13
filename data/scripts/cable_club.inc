@@ -978,7 +978,7 @@ OldaleTown_PokemonCenter_2F_EventScript_27751B:: @ 827751B
 	faceplayer
 	setvar VAR_FRONTIER_FACILITY, 8
 	goto_if_unset FLAG_SYS_POKEDEX_GET, OldaleTown_PokemonCenter_2F_EventScript_277335
-	specialvar VAR_RESULT, sub_813990C
+	specialvar VAR_RESULT, IsBadEggInParty
 	compare VAR_RESULT, 1
 	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_27731B
 	copyvar VAR_0x8007, VAR_LAST_TALKED
@@ -1086,7 +1086,7 @@ OldaleTown_PokemonCenter_2F_EventScript_2776A4:: @ 82776A4
 	faceplayer
 	setvar VAR_FRONTIER_FACILITY, 9
 	goto_if_unset FLAG_SYS_POKEDEX_GET, OldaleTown_PokemonCenter_2F_EventScript_277335
-	specialvar VAR_RESULT, sub_813990C
+	specialvar VAR_RESULT, IsBadEggInParty
 	compare VAR_RESULT, 1
 	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_27731B
 	specialvar VAR_RESULT, IsWirelessAdapterConnected

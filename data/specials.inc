@@ -227,7 +227,7 @@ gSpecials:: @ 81DBA64
 	def_special ShowPokedexRatingMessage
 	def_special DoPCTurnOnEffect
 	def_special DoPCTurnOffEffect
-	def_special SetDepartmentStoreFloorVar
+	def_special SetDeptStoreFloor
 	def_special DoLotteryCornerComputerEffect
 	def_special EndLotteryCornerComputerEffect
 	def_special sub_81B951C
@@ -285,7 +285,7 @@ gSpecials:: @ 81DBA64
 	def_special DoSoftReset
 	def_special GameClear
 	def_special ShakeScreenInElevator
-	def_special nullsub_55
+	def_special ShowGlassWorkshopMenu
 	def_special SpawnCameraObject
 	def_special RemoveCameraObject
 	def_special GetPokeblockNameByMonNature
@@ -339,7 +339,7 @@ gSpecials:: @ 81DBA64
 	def_special ScriptGetMultiplayerId
 	def_special ScriptGetPartyMonSpecies
 	def_special sub_81B98DC
-	def_special nullsub_54
+	def_special TryInitBattleTowerAwardManEventObject
 	def_special MoveOutOfSecretBaseFromOutside
 	def_special LoadPlayerBag
 	def_special sub_80B05B4
@@ -356,7 +356,7 @@ gSpecials:: @ 81DBA64
 	def_special sub_80EE2CC
 	def_special sub_80EE72C
 	def_special sub_80EE7C0
-	def_special nullsub_55
+	def_special ShowGlassWorkshopMenu
 	def_special PutFanClubSpecialOnTheAir
 	def_special sub_80EED10
 	def_special sub_80EED34
@@ -422,7 +422,7 @@ gSpecials:: @ 81DBA64
 	def_special DoMirageTowerCeilingCrumble
 	def_special SetMirageTowerVisibility
 	def_special StartPlayerDescendMirageTower
-	def_special sub_81398C0
+	def_special BufferTMHMMoveName
 	def_special IsWirelessAdapterConnected
 	def_special BerryBlenderLinkBecomeLeader
 	def_special BerryBlenderLinkJoinGroup
@@ -433,7 +433,7 @@ gSpecials:: @ 81DBA64
 	def_special sub_801DC20
 	def_special sub_81B8958
 	def_special sub_8018090
-	def_special sub_813990C
+	def_special IsBadEggInParty
 	def_special ValidateReceivedWonderCard
 	def_special HasAtLeastOneBerry
 	def_special sub_802C920
@@ -441,7 +441,7 @@ gSpecials:: @ 81DBA64
 	def_special sub_8027A5C
 	def_special sub_8027AAC
 	def_special sub_8139980
-	def_special sub_81399F4
+	def_special GetDeptStoreDefaultFloorChoice
 	def_special sub_8139D98
 	def_special sub_80F905C
 	def_special sub_800B518
@@ -454,7 +454,7 @@ gSpecials:: @ 81DBA64
 	def_special sub_80F9134
 	def_special sub_80F9154
 	def_special sub_80B3028
-	def_special sub_813A128
+	def_special ShowScrollableMultichoice
 	def_special sub_813A630
 	def_special sub_813A080
 	def_special sub_81C6A94
@@ -466,9 +466,9 @@ gSpecials:: @ 81DBA64
 	def_special sub_813A958
 	def_special sub_813A8FC
 	def_special sub_813A988
-	def_special sub_813A9D0
-	def_special sub_813A9A4
-	def_special sub_813AA04
+	def_special GiveFrontierBattlePoints
+	def_special TakeFrontierBattlePoints
+	def_special GetFrontierBattlePoints
 	def_special sub_813AA18
 	def_special sub_813AA44
 	def_special DisplayBerryPowderVendorMenu
@@ -482,7 +482,7 @@ gSpecials:: @ 81DBA64
 	def_special sub_81C72A4
 	def_special sp106_CreateStartMenu
 	def_special CountPlayerTrainerStars
-	def_special sub_813AC7C
+	def_special BufferBattleFrontierTutorMoveName
 	def_special sub_813ADB8
 	def_special sub_813ADD4
 	def_special sub_81B892C
@@ -501,7 +501,7 @@ gSpecials:: @ 81DBA64
 	def_special sub_8175280
 	def_special CreateUnusualWeatherEvent
 	def_special GetUnusualWeatherMapNameAndType
-	def_special sub_813B490
+	def_special GetMartEmployeeObjectEventId
 	def_special sub_80A08CC
 	def_special Unused_SetWeatherSunny
 	def_special sub_81AFDA0

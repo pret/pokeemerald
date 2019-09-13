@@ -7,6 +7,7 @@
 #include "constants/event_objects.h"
 #include "constants/event_object_movement_constants.h"
 #include "constants/field_effects.h"
+#include "constants/field_specials.h"
 #include "constants/flags.h"
 #include "constants/decorations.h"
 #include "constants/items.h"
@@ -1505,7 +1506,7 @@ Std_FindItem:: @ 8271BFD
 EventScript_PickItemUp:: @ 8271C3A
 	removeobject VAR_LAST_TALKED
 	giveitem VAR_0x8004, VAR_0x8005
-	specialvar VAR_RESULT, sub_81398C0
+	specialvar VAR_RESULT, BufferTMHMMoveName
 	copyvar VAR_0x8008, VAR_RESULT
 	compare VAR_0x8008, 1
 	call_if_eq EventScript_271C8F
@@ -1557,7 +1558,7 @@ EventScript_HiddenItemScript:: @ 8271CB7
 EventScript_271CE8:: @ 8271CE8
 	copyvar VAR_0x8008, VAR_0x8004
 	copyvar VAR_0x8004, VAR_0x8005
-	specialvar VAR_RESULT, sub_81398C0
+	specialvar VAR_RESULT, BufferTMHMMoveName
 	compare VAR_RESULT, 1
 	goto_if_eq EventScript_271D0E
 	compare VAR_RESULT, 0
@@ -2945,7 +2946,7 @@ EventScript_Questionnaire:: @ 827381B
 	call Common_ShowEasyChatScreen
 	lock
 	faceplayer
-	specialvar VAR_0x8008, sub_813B490
+	specialvar VAR_0x8008, GetMartEmployeeObjectEventId
 	compare VAR_0x8004, 1
 	goto_if_eq EventScript_27386D
 	compare VAR_0x8004, 2
