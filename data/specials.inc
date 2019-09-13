@@ -450,7 +450,7 @@ gSpecials:: @ 81DBA64
 	def_special sub_80F9160
 	def_special ShowRankingHallRecordsWindow
 	def_special ScrollRankingHallRecordsWindow
-	def_special sub_8139F20
+	def_special ShowFrontierManiacMessage
 	def_special sub_80F9134
 	def_special sub_80F9154
 	def_special sub_80B3028
@@ -462,22 +462,22 @@ gSpecials:: @ 81DBA64
 	def_special sub_81B95E0
 	def_special sub_81B9620
 	def_special sub_813A76C
-	def_special sub_813A7B8
-	def_special sub_813A958
-	def_special sub_813A8FC
-	def_special sub_813A988
+	def_special ShowNatureGirlMessage
+	def_special ShowBattlePointsWindow
+	def_special UpdateBattlePointsWindow
+	def_special CloseBattlePointsWindow
 	def_special GiveFrontierBattlePoints
 	def_special TakeFrontierBattlePoints
 	def_special GetFrontierBattlePoints
-	def_special sub_813AA18
-	def_special sub_813AA44
+	def_special ShowFrontierExchangeCornerItemIconWindow
+	def_special CloseFrontierExchangeCornerItemIconWindow
 	def_special DisplayBerryPowderVendorMenu
 	def_special RemoveBerryPowderVendorMenu
 	def_special HasEnoughBerryPowder
 	def_special TakeBerryPowder
 	def_special PrintPlayerBerryPowderAmount
-	def_special sub_813A820
-	def_special sub_813A854
+	def_special ShowFrontierGamblerLookingMessage
+	def_special ShowFrontierGamblerGoMessage
 	def_special sub_813B7D8
 	def_special sub_81C72A4
 	def_special sp106_CreateStartMenu

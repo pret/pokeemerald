@@ -1,4 +1,4 @@
-static const u16 sBFExchangeCorner_Decor1[] =
+static const u16 sFrontierExchangeCorner_Decor1[] =
 { 
     DECOR_KISS_POSTER, 
     DECOR_KISS_CUSHION, 
@@ -13,7 +13,7 @@ static const u16 sBFExchangeCorner_Decor1[] =
     0xFFFF 
 };
 
-static const u16 sBFExchangeCorner_Decor2[] =
+static const u16 sFrontierExchangeCorner_Decor2[] =
 { 
     DECOR_LAPRAS_DOLL, 
     DECOR_SNORLAX_DOLL, 
@@ -23,7 +23,7 @@ static const u16 sBFExchangeCorner_Decor2[] =
     0xFFFF 
 };
 
-static const u16 sBFExchangeCorner_Vitamins[] =
+static const u16 sFrontierExchangeCorner_Vitamins[] =
 { 
     ITEM_PROTEIN, 
     ITEM_CALCIUM, 
@@ -34,7 +34,7 @@ static const u16 sBFExchangeCorner_Vitamins[] =
     0xFFFF 
 };
 
-static const u16 sBFExchangeCorner_HoldItems[] =
+static const u16 sFrontierExchangeCorner_HoldItems[] =
 { 
     ITEM_LEFTOVERS, 
     ITEM_WHITE_HERB, 
@@ -48,7 +48,7 @@ static const u16 sBFExchangeCorner_HoldItems[] =
     0xFFFF 
 };
 
-static const u8 *const sBFExchangeCorner_Decor1Descriptions[] =
+static const u8 *const sFrontierExchangeCorner_Decor1Descriptions[] =
 {
     BattleFrontier_BattlePointExchangeServiceCorner_Text_2601AA,
     BattleFrontier_BattlePointExchangeServiceCorner_Text_2601D0,
@@ -63,7 +63,7 @@ static const u8 *const sBFExchangeCorner_Decor1Descriptions[] =
     gText_Exit,
 };
 
-static const u8 *const sBFExchangeCorner_Decor2Descriptions[] = 
+static const u8 *const sFrontierExchangeCorner_Decor2Descriptions[] = 
 {
     BattleFrontier_BattlePointExchangeServiceCorner_Text_26036C,
     BattleFrontier_BattlePointExchangeServiceCorner_Text_26036C,
@@ -73,7 +73,7 @@ static const u8 *const sBFExchangeCorner_Decor2Descriptions[] =
     gText_Exit
 };
 
-static const u8 *const sBFExchangeCorner_VitaminsDescriptions[] = 
+static const u8 *const sFrontierExchangeCorner_VitaminsDescriptions[] = 
 {
     BattleFrontier_BattlePointExchangeServiceCorner_Text_260397,
     BattleFrontier_BattlePointExchangeServiceCorner_Text_2603BE,
@@ -84,7 +84,7 @@ static const u8 *const sBFExchangeCorner_VitaminsDescriptions[] =
     gText_Exit
 };
 
-static const u8 *const sBFExchangeCorner_HoldItemsDescriptions[] = 
+static const u8 *const sFrontierExchangeCorner_HoldItemsDescriptions[] = 
 {
     BattleFrontier_BattlePointExchangeServiceCorner_Text_26047A,
     BattleFrontier_BattlePointExchangeServiceCorner_Text_2604AC,

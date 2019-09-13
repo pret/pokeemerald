@@ -19,7 +19,7 @@ BattleFrontier_Lounge7_EventScript_265276:: @ 8265276
 BattleFrontier_Lounge7_EventScript_265284:: @ 8265284
 	message BattleFrontier_Lounge7_Text_2658EF
 	waitmessage
-	special sub_813A958
+	special ShowBattlePointsWindow
 	setvar VAR_TEMP_E, 0
 	setvar VAR_0x8004, SCROLL_MULTI_BF_MOVE_TUTOR_1
 	setvar VAR_0x8006, 0
@@ -133,7 +133,7 @@ BattleFrontier_Lounge7_EventScript_265466:: @ 8265466
 BattleFrontier_Lounge7_EventScript_265474:: @ 8265474
 	message BattleFrontier_Lounge7_Text_2658EF
 	waitmessage
-	special sub_813A958
+	special ShowBattlePointsWindow
 	setvar VAR_TEMP_E, 1
 	setvar VAR_0x8004, SCROLL_MULTI_BF_MOVE_TUTOR_2
 	setvar VAR_0x8006, 0
@@ -231,7 +231,7 @@ BattleFrontier_Lounge7_EventScript_26562A:: @ 826562A
 
 BattleFrontier_Lounge7_EventScript_265635:: @ 8265635
 	special sub_813ADB8
-	special sub_813A988
+	special CloseBattlePointsWindow
 	msgbox BattleFrontier_Lounge7_Text_265A0E, MSGBOX_DEFAULT
 	release
 	end
@@ -263,7 +263,7 @@ BattleFrontier_Lounge7_EventScript_265696:: @ 8265696
 	msgbox BattleFrontier_Lounge7_Text_26595A, MSGBOX_DEFAULT
 	special sub_813AEB4
 	fadescreen 1
-	special sub_813A988
+	special CloseBattlePointsWindow
 	special sub_813ADB8
 	special sub_81B892C
 	waitstate
