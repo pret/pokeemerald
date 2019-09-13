@@ -16,7 +16,7 @@ BattleFrontier_Lounge5_EventScript_2645C6:: @ 82645C6
 	specialvar VAR_RESULT, ScriptGetPartyMonSpecies
 	compare VAR_RESULT, SPECIES_EGG
 	goto_if_eq BattleFrontier_Lounge5_EventScript_264603
-	special sub_813A7B8
+	special ShowNatureGirlMessage
 	waitmessage
 	waitbuttonpress
 	release
