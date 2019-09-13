@@ -288,7 +288,7 @@ MauvilleCity_GameCorner_EventScript_20FF77:: @ 820FF77
 	goto MauvilleCity_GameCorner_EventScript_20FF8A
 
 MauvilleCity_GameCorner_EventScript_20FF8A:: @ 820FF8A
-	special sub_81398C0
+	special BufferTMHMMoveName
 	msgbox MauvilleCity_GameCorner_Text_210629, MSGBOX_YESNO
 	compare VAR_RESULT, 0
 	goto_if_eq MauvilleCity_GameCorner_EventScript_210118

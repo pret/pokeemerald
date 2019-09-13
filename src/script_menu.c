@@ -13,6 +13,7 @@
 #include "strings.h"
 #include "task.h"
 #include "text.h"
+#include "constants/field_specials.h"
 #include "constants/items.h"
 #include "constants/songs.h"
 
@@ -1493,8 +1494,8 @@ static void sub_80E2578(void)
     count = temp;
     if (count == 7)
     {
-        gSpecialVar_0x8004 = 11;
-        sub_813A128();
+        gSpecialVar_0x8004 = SCROLL_MULTI_SS_TIDAL_DESTINATION;
+        ShowScrollableMultichoice();
     }
     else
     {

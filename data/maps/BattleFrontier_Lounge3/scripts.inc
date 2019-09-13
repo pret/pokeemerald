@@ -56,7 +56,7 @@ BattleFrontier_Lounge3_EventScript_261E46:: @ 8261E46
 	end
 
 BattleFrontier_Lounge3_EventScript_261E51:: @ 8261E51
-	specialvar VAR_TEMP_1, sub_813AA04
+	specialvar VAR_TEMP_1, GetFrontierBattlePoints
 	compare VAR_TEMP_1, VAR_0x8008
 	goto_if_ge BattleFrontier_Lounge3_EventScript_261E75
 	msgbox BattleFrontier_Lounge3_Text_262B6E, MSGBOX_DEFAULT
@@ -67,7 +67,7 @@ BattleFrontier_Lounge3_EventScript_261E51:: @ 8261E51
 
 BattleFrontier_Lounge3_EventScript_261E75:: @ 8261E75
 	copyvar VAR_0x8004, VAR_0x8008
-	special sub_813A9A4
+	special TakeFrontierBattlePoints
 	setvar VAR_FRONTIER_GAMBLER_PLACED_BET_F, 1
 	special sub_813A8FC
 	playse SE_REGI
@@ -127,7 +127,7 @@ BattleFrontier_Lounge3_EventScript_261F2E:: @ 8261F2E
 	compare VAR_FRONTIER_GAMBLER_AMOUNT_BET, 2
 	call_if_eq BattleFrontier_Lounge3_EventScript_261F94
 	msgbox BattleFrontier_Lounge3_Text_2633D4, 9
-	special sub_813A9D0
+	special GiveFrontierBattlePoints
 	msgbox BattleFrontier_Lounge3_Text_2633F2, MSGBOX_DEFAULT
 	setvar VAR_FRONTIER_GAMBLER_PLACED_BET_F, 0
 	release

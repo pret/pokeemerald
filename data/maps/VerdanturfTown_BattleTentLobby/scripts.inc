@@ -332,8 +332,8 @@ VerdanturfTown_BattleTentLobby_EventScript_201B02:: @ 8201B02
 VerdanturfTown_BattleTentLobby_EventScript_201B11:: @ 8201B11
 	message VerdanturfTown_BattleTentLobby_Text_24EF88
 	waitmessage
-	setvar VAR_0x8004, 12
-	special sub_813A128
+	setvar VAR_0x8004, SCROLL_MULTI_BATTLE_TENT_RULES
+	special ShowScrollableMultichoice
 	waitstate
 	switch VAR_RESULT
 	case 0, VerdanturfTown_BattleTentLobby_EventScript_201B7E

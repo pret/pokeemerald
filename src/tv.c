@@ -2786,11 +2786,11 @@ bool8 GetPriceReduction(u8 newsKind)
 {
     u8 i;
 
-    if (newsKind == 0)
+    if (newsKind == POKENEWS_NONE)
     {
         return FALSE;
     }
-    for (i = 0; i < 16; i ++)
+    for (i = 0; i < POKE_NEWS_COUNT; i ++)
     {
         if (gSaveBlock1Ptr->pokeNews[i].kind == newsKind)
         {

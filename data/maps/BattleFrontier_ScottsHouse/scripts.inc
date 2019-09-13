@@ -218,7 +218,7 @@ BattleFrontier_ScottsHouse_EventScript_2639E9:: @ 82639E9
 	end
 
 BattleFrontier_ScottsHouse_EventScript_2639F8:: @ 82639F8
-	special sub_813A9D0
+	special GiveFrontierBattlePoints
 	msgbox BattleFrontier_ScottsHouse_Text_263CB0, 9
 	msgbox BattleFrontier_ScottsHouse_Text_263CD0, MSGBOX_DEFAULT
 	setflag FLAG_SCOTT_GIVES_BATTLE_POINTS

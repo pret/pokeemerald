@@ -1,6 +1,8 @@
 #ifndef GUARD_CONSTANTS_BATTLE_FRONTIER_H
 #define GUARD_CONSTANTS_BATTLE_FRONTIER_H
 
+#define FRONTIER_CHALLENGE(facility, mode) ((facility << 8) + mode)
+
 // Battle Frontier facility ids.
 #define FRONTIER_FACILITY_TOWER 0
 #define FRONTIER_FACILITY_DOME 1
@@ -40,6 +42,8 @@
 #define SPECIAL_BATTLE_STEVEN 8
 #define SPECIAL_BATTLE_PIKE_DOUBLE 9
 #define SPECIAL_BATTLE_PYRAMID 10
+
+#define MAX_BATTLE_FRONTIER_POINTS 9999
 
 // For 'ShowFacilityResultsWindow' function which is a part of the 'CallFrontierUtilFunc' special.
 #define RESULTS_LINK_CONTEST 7
