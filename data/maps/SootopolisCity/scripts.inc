@@ -217,7 +217,7 @@ SootopolisCity_EventScript_1E5946:: @ 81E5946
 	setweather WEATHER_ALTERNATING
 	doweather
 	setvar VAR_0x8004, 0
-	special sub_813B7D8
+	special Script_DoRayquazaScene
 	waitstate
 	applymovement 10, Common_Movement_WalkInPlaceLeft
 	applymovement 9, Common_Movement_WalkInPlaceRight
@@ -317,7 +317,7 @@ SootopolisCity_EventScript_1E5A82:: @ 81E5A82
 	setweather WEATHER_ALTERNATING
 	doweather
 	setvar VAR_0x8004, 0
-	special sub_813B7D8
+	special Script_DoRayquazaScene
 	waitstate
 	applymovement 10, Common_Movement_WalkInPlaceLeft
 	applymovement 9, Common_Movement_WalkInPlaceRight
@@ -509,7 +509,7 @@ SootopolisCity_EventScript_1E5C1E:: @ 81E5C1E
 	removeobject 10
 	addobject 11
 	setvar VAR_0x8004, 1
-	special sub_813B7D8
+	special Script_DoRayquazaScene
 	waitstate
 	playse SE_T_KAMI
 	special SpawnCameraObject
@@ -562,7 +562,7 @@ SootopolisCity_EventScript_1E5CCE:: @ 81E5CCE
 	removeobject 10
 	addobject 11
 	setvar VAR_0x8004, 1
-	special sub_813B7D8
+	special Script_DoRayquazaScene
 	waitstate
 	special SpawnCameraObject
 	applymovement EVENT_OBJ_ID_CAMERA, SootopolisCity_Movement_1E5E63

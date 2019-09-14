@@ -230,7 +230,7 @@ BattleFrontier_Lounge7_EventScript_26562A:: @ 826562A
 	end
 
 BattleFrontier_Lounge7_EventScript_265635:: @ 8265635
-	special sub_813ADB8
+	special CloseBattleFrontierTutorWindow
 	special CloseBattlePointsWindow
 	msgbox BattleFrontier_Lounge7_Text_265A0E, MSGBOX_DEFAULT
 	release
@@ -261,10 +261,10 @@ BattleFrontier_Lounge7_EventScript_26564F:: @ 826564F
 
 BattleFrontier_Lounge7_EventScript_265696:: @ 8265696
 	msgbox BattleFrontier_Lounge7_Text_26595A, MSGBOX_DEFAULT
-	special sub_813AEB4
+	special GetBattleFrontierTutorMoveIndex
 	fadescreen 1
 	special CloseBattlePointsWindow
-	special sub_813ADB8
+	special CloseBattleFrontierTutorWindow
 	special sub_81B892C
 	waitstate
 	compare VAR_RESULT, 0

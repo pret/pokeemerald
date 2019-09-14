@@ -318,7 +318,7 @@ BattleFrontier_BattlePyramidLobby_EventScript_250B91:: @ 8250B91
 
 BattleFrontier_BattlePyramidLobby_EventScript_250BA4:: @ 8250BA4
 	copyvar VAR_0x8004, VAR_RESULT
-	special sub_813B968
+	special GetBattlePyramidHint
 	switch VAR_RESULT
 	case 0, BattleFrontier_BattlePyramidLobby_EventScript_250C8E
 	case 1, BattleFrontier_BattlePyramidLobby_EventScript_250C97
