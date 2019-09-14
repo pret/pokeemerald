@@ -12,9 +12,9 @@ BattleFrontier_BattleTowerElevator_EventScript_2419F0:: @ 82419F0
 	applymovement 1, BattleFrontier_BattleTowerElevator_Movement_241A86
 	applymovement EVENT_OBJ_ID_PLAYER, BattleFrontier_BattleTowerElevator_Movement_241A8A
 	waitmovement 0
-	special sub_813A080
+	special BufferBattleTowerElevatorFloors
 	waitse
-	special ShakeScreenInElevator
+	special MoveElevator
 	waitstate
 	delay 48
 	applymovement 1, BattleFrontier_BattleTowerElevator_Movement_241A8E

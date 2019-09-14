@@ -284,7 +284,7 @@ gSpecials:: @ 81DBA64
 	def_special sub_80FB7A4
 	def_special DoSoftReset
 	def_special GameClear
-	def_special ShakeScreenInElevator
+	def_special MoveElevator
 	def_special ShowGlassWorkshopMenu
 	def_special SpawnCameraObject
 	def_special RemoveCameraObject
@@ -316,7 +316,7 @@ gSpecials:: @ 81DBA64
 	def_special CopyCurSecretBaseOwnerName_StrVar1
 	def_special ScriptCheckFreePokemonStorageSpace
 	def_special DoSealedChamberShakingEffect1
-	def_special sub_8139B60
+	def_special ShowDeptStoreElevatorFloorSelect
 	def_special GetShieldToyTVDecorationInfo
 	def_special IsPokerusInParty
 	def_special SetSootopolisGymCrackedIceMetatiles
@@ -442,7 +442,7 @@ gSpecials:: @ 81DBA64
 	def_special sub_8027AAC
 	def_special sub_8139980
 	def_special GetDeptStoreDefaultFloorChoice
-	def_special sub_8139D98
+	def_special BufferVarsForIVRater
 	def_special sub_80F905C
 	def_special sub_800B518
 	def_special sub_80F90DC
@@ -456,12 +456,12 @@ gSpecials:: @ 81DBA64
 	def_special sub_80B3028
 	def_special ShowScrollableMultichoice
 	def_special sub_813A630
-	def_special sub_813A080
+	def_special BufferBattleTowerElevatorFloors
 	def_special sub_81C6A94
 	def_special sub_81C4F24
 	def_special sub_81B95E0
 	def_special sub_81B9620
-	def_special sub_813A76C
+	def_special SetBattleTowerLinkPlayerGfx
 	def_special ShowNatureGirlMessage
 	def_special ShowBattlePointsWindow
 	def_special UpdateBattlePointsWindow
@@ -478,15 +478,15 @@ gSpecials:: @ 81DBA64
 	def_special PrintPlayerBerryPowderAmount
 	def_special ShowFrontierGamblerLookingMessage
 	def_special ShowFrontierGamblerGoMessage
-	def_special sub_813B7D8
+	def_special Script_DoRayquazaScene
 	def_special sub_81C72A4
 	def_special sp106_CreateStartMenu
 	def_special CountPlayerTrainerStars
 	def_special BufferBattleFrontierTutorMoveName
-	def_special sub_813ADB8
+	def_special CloseBattleFrontierTutorWindow
 	def_special sub_813ADD4
 	def_special sub_81B892C
-	def_special sub_813AEB4
+	def_special GetBattleFrontierTutorMoveIndex
 	def_special sub_813AF48
 	def_special DoDeoxysRockInteraction
 	def_special sub_813B1D0
@@ -516,7 +516,7 @@ gSpecials:: @ 81DBA64
 	def_special sub_813B568
 	def_special sub_813B534
 	def_special CallTrainerHillFunction
-	def_special sub_813B7D8
+	def_special Script_DoRayquazaScene @ Listed twice
 	def_special sub_813B80C
 	def_special sub_81D4BEC
 	def_special sub_80224D0
@@ -524,14 +524,14 @@ gSpecials:: @ 81DBA64
 	def_special DoWaldaNamingScreen
 	def_special TryGetWallpaperWithWaldaPhrase
 	def_special sub_8139ED0
-	def_special sub_813B968
+	def_special GetBattlePyramidHint
 	def_special sub_80F8B94
 	def_special ShowTrainerHillRecords
 	def_special sub_80B4808
-	def_special sub_813B9A0
+	def_special ResetHealLocationFromDewford
 	def_special sub_81B9918
 	def_special sub_80722E0
 	def_special TryPrepareSecondApproachingTrainer
 	def_special RemoveRecordsWindow
-	def_special sub_8139C10
+	def_special CloseDeptStoreElevatorWindow
 	def_special sub_80B3BC4

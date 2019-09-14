@@ -7,7 +7,7 @@ LilycoveCity_DepartmentStoreElevator_EventScript_220624:: @ 8220624
 	setvar VAR_0x8004, 0
 	call_if_unset FLAG_TEMP_2, LilycoveCity_DepartmentStoreElevator_EventScript_2207FC
 	copyvar VAR_0x8005, VAR_DEPT_STORE_FLOOR
-	special sub_8139B60
+	special ShowDeptStoreElevatorFloorSelect
 	message gUnknown_08272C1D
 	waitmessage
 	setvar VAR_0x8004, 0
@@ -107,17 +107,17 @@ LilycoveCity_DepartmentStoreElevator_EventScript_2207B8:: @ 82207B8
 	end
 
 LilycoveCity_DepartmentStoreElevator_EventScript_2207E0:: @ 82207E0
-	special sub_8139C10
+	special CloseDeptStoreElevatorWindow
 	release
 	end
 
 LilycoveCity_DepartmentStoreElevator_EventScript_2207E5:: @ 82207E5
-	special sub_8139C10
+	special CloseDeptStoreElevatorWindow
 	closemessage
 	applymovement VAR_LAST_TALKED, Common_Movement_WalkInPlaceDown
 	waitmovement 0
 	waitse
-	special ShakeScreenInElevator
+	special MoveElevator
 	waitstate
 	setflag FLAG_TEMP_2
 	return
