@@ -431,7 +431,7 @@ struct ListBuffer2 {
 };
 
 struct TempWallyStruct {
-    struct ItemSlot bagPocket_Items[30];
+    struct ItemSlot bagPocket_Medicine[30];
     struct ItemSlot bagPocket_PokeBalls[16];
     u16 cursorPosition[POCKETS_COUNT];
     u16 scrollPosition[POCKETS_COUNT];
@@ -2144,7 +2144,7 @@ void PrepareBagForWallyTutorial(void)
     u32 i;
 
     gUnknown_0203CE80 = AllocZeroed(sizeof(struct TempWallyStruct));
-    memcpy(gUnknown_0203CE80->bagPocket_Items, gSaveBlock1Ptr->bagPocket_Items, sizeof(gSaveBlock1Ptr->bagPocket_Items));
+    memcpy(gUnknown_0203CE80->bagPocket_Medicine, gSaveBlock1Ptr->bagPocket_Medicine, sizeof(gSaveBlock1Ptr->bagPocket_Medicine));
     memcpy(gUnknown_0203CE80->bagPocket_PokeBalls, gSaveBlock1Ptr->bagPocket_PokeBalls, sizeof(gSaveBlock1Ptr->bagPocket_PokeBalls));
     gUnknown_0203CE80->pocket = gBagPositionStruct.pocket;
     for (i = 0; i <= 4; i++)
@@ -2152,7 +2152,7 @@ void PrepareBagForWallyTutorial(void)
         gUnknown_0203CE80->cursorPosition[i] = gBagPositionStruct.cursorPosition[i];
         gUnknown_0203CE80->scrollPosition[i] = gBagPositionStruct.scrollPosition[i];
     }
-    ClearItemSlots(gSaveBlock1Ptr->bagPocket_Items, 30);
+    ClearItemSlots(gSaveBlock1Ptr->bagPocket_Medicine, 30);
     ClearItemSlots(gSaveBlock1Ptr->bagPocket_PokeBalls, 16);
     ResetBagScrollPositions();
 }
@@ -2161,7 +2161,7 @@ void RestoreBagAfterWallyTutorial(void)
 {
     u32 i;
 
-    memcpy(gSaveBlock1Ptr->bagPocket_Items, gUnknown_0203CE80->bagPocket_Items, sizeof(gUnknown_0203CE80->bagPocket_Items));
+    memcpy(gSaveBlock1Ptr->bagPocket_Medicine, gUnknown_0203CE80->bagPocket_Medicine, sizeof(gUnknown_0203CE80->bagPocket_Medicine));
     memcpy(gSaveBlock1Ptr->bagPocket_PokeBalls, gUnknown_0203CE80->bagPocket_PokeBalls, sizeof(gUnknown_0203CE80->bagPocket_PokeBalls));
     gBagPositionStruct.pocket = gUnknown_0203CE80->pocket;
     for (i = 0; i <= 4; i++)
@@ -2177,7 +2177,7 @@ void DoWallyTutorialBagMenu(void)
     PrepareBagForWallyTutorial();
     AddBagItem(ITEM_POTION, 1);
     AddBagItem(ITEM_POKE_BALL, 1);
-    GoToBagMenu(RETURN_LOCATION_BATTLE_2, ITEMS_POCKET, SetCB2ToReshowScreenAfterMenu2);
+    GoToBagMenu(RETURN_LOCATION_BATTLE_2, MEDICINE_POCKET, SetCB2ToReshowScreenAfterMenu2);
 }
 
 void Task_WallyTutorialBagMenu(u8 taskId)
