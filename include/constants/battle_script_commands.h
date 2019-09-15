@@ -39,16 +39,16 @@
 #define BS_EFFECT_BATTLER           2
 #define BS_FAINTED                  3
 #define BS_BATTLER_0                7
-#define BS_ATTACKER_WITH_PARTNER    4 // for atk98_status_icon_update
-#define BS_ATTACKER_SIDE            8 // for atk1E_jumpifability
-#define BS_NOT_ATTACKER_SIDE        9 // for atk1E_jumpifability
+#define BS_ATTACKER_WITH_PARTNER    4 // for Cmd_status_icon_update
+#define BS_ATTACKER_SIDE            8 // for Cmd_jumpifability
+#define BS_NOT_ATTACKER_SIDE        9 // for Cmd_jumpifability
 #define BS_SCRIPTING                10
 #define BS_PLAYER1                  11
 #define BS_OPPONENT1                12
 #define BS_PLAYER2                  13
 #define BS_OPPONENT2                14
 
-// atk 01, accuracy calc
+// accuracy calc
 #define NO_ACC_CALC 0xFFFE
 #define NO_ACC_CALC_CHECK_LOCK_ON 0xFFFF
 #define ACC_CURR_MOVE 0
@@ -85,12 +85,12 @@
 #define VARIOUS_PLAY_TRAINER_DEFEATED_MUSIC     26
 
 // manipulatedmg
-#define DMG_CHANGE_SIGN                               0
-#define DMG_HALF_BY_TWO_NOT_MORE_THAN_HALF_MAX_HP     1
-#define DMG_DOUBLED                                   2
+#define DMG_CHANGE_SIGN            0
+#define DMG_RECOIL_FROM_MISS       1
+#define DMG_DOUBLED                2
 
 // flag used for the jumpifcantswitch command
-#define DONT_CHECK_STATUSES   0x80
+#define SWITCH_IGNORE_ESCAPE_PREVENTION   0x80
 
 // statchange defines
 #define STAT_CHANGE_BS_PTR                  0x1
@@ -99,15 +99,15 @@
 // playstatchangeanimation
 #define STAT_CHANGE_NEGATIVE             0x1
 #define STAT_CHANGE_BY_TWO               0x2
-#define STAT_CHANGE_ONLY_MULTIPLE        0x4
-#define STAT_CHANGE_DONT_CHECK_LOWER     0x8
+#define STAT_CHANGE_SKIP_NEXT_ANIM       0x4
+#define STAT_CHANGE_IGNORE_ABILITY       0x8
 
 // moveend cases
 #define MOVEEND_RAGE                              0
 #define MOVEEND_DEFROST                           1
 #define MOVEEND_SYNCHRONIZE_TARGET                2
-#define MOVEEND_MOVE_END_ABILITIES                3
-#define MOVEEND_STATUS_IMMUNITY_ABILITIES         4
+#define MOVEEND_CONTACT_ABILITIES                 3
+#define MOVEEND_IMMUNITY_ABILITIES                4
 #define MOVEEND_SYNCHRONIZE_ATTACKER              5
 #define MOVEEND_CHOICE_MOVE                       6
 #define MOVEEND_CHANGED_ITEMS                     7

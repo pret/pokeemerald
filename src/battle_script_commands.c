@@ -4405,7 +4405,7 @@ static void Cmd_playstatchangeanimation(void)
         {
             if (statsToCheck & 1)
             {
-                if (gBattlescriptCurrInstr[3] & STAT_CHANGE_DONT_CHECK_LOWER)
+                if (gBattlescriptCurrInstr[3] & STAT_CHANGE_IGNORE_ABILITY)
                 {
                     if (gBattleMons[gActiveBattler].statStages[currStat] > 0)
                     {
@@ -4464,7 +4464,7 @@ static void Cmd_playstatchangeanimation(void)
         }
     }
 
-    if (gBattlescriptCurrInstr[3] & STAT_CHANGE_ONLY_MULTIPLE && changeableStatsCount < 2)
+    if (gBattlescriptCurrInstr[3] & STAT_CHANGE_SKIP_NEXT_ANIM && changeableStatsCount < 2)
     {
         gBattlescriptCurrInstr += 4;
     }
@@ -4472,7 +4472,7 @@ static void Cmd_playstatchangeanimation(void)
     {
         BtlController_EmitBattleAnimation(0, B_ANIM_STATS_CHANGE, statAnimId);
         MarkBattlerForControllerExec(gActiveBattler);
-        if (gBattlescriptCurrInstr[3] & STAT_CHANGE_ONLY_MULTIPLE && changeableStatsCount > 1)
+        if (gBattlescriptCurrInstr[3] & STAT_CHANGE_SKIP_NEXT_ANIM && changeableStatsCount > 1)
             gBattleScripting.statAnimPlayed = TRUE;
         gBattlescriptCurrInstr += 4;
     }
@@ -4547,12 +4547,12 @@ static void Cmd_moveend(void)
                 effect = TRUE;
             gBattleScripting.moveendState++;
             break;
-        case MOVEEND_MOVE_END_ABILITIES: // Such as abilities activating on contact(Poison Spore, Rough Skin, etc.).
-            if (AbilityBattleEffects(ABILITYEFFECT_MOVE_END, gBattlerTarget, 0, 0, 0))
+        case MOVEEND_CONTACT_ABILITIES: // Also includes Color Change
+            if (AbilityBattleEffects(ABILITYEFFECT_CONTACT, gBattlerTarget, 0, 0, 0))
                 effect = TRUE;
             gBattleScripting.moveendState++;
             break;
-        case MOVEEND_STATUS_IMMUNITY_ABILITIES: // status immunities
+        case MOVEEND_IMMUNITY_ABILITIES: // status immunities
             if (AbilityBattleEffects(ABILITYEFFECT_IMMUNITY, 0, 0, 0, 0))
                 effect = TRUE; // it loops through all battlers, so we increment after its done with all battlers
             else
@@ -4971,9 +4971,9 @@ static void Cmd_jumpifcantswitch(void)
     s32 lastMonId;
     struct Pokemon *party;
 
-    gActiveBattler = GetBattlerForBattleScript(gBattlescriptCurrInstr[1] & ~(DONT_CHECK_STATUSES));
+    gActiveBattler = GetBattlerForBattleScript(gBattlescriptCurrInstr[1] & ~(SWITCH_IGNORE_ESCAPE_PREVENTION));
 
-    if (!(gBattlescriptCurrInstr[1] & DONT_CHECK_STATUSES)
+    if (!(gBattlescriptCurrInstr[1] & SWITCH_IGNORE_ESCAPE_PREVENTION)
         && ((gBattleMons[gActiveBattler].status2 & (STATUS2_WRAPPED | STATUS2_ESCAPE_PREVENTION))
             || (gStatuses3[gActiveBattler] & STATUS3_ROOTED)))
     {
@@ -7002,7 +7002,7 @@ static void Cmd_manipulatedamage(void)
     case DMG_CHANGE_SIGN:
         gBattleMoveDamage *= -1;
         break;
-    case DMG_HALF_BY_TWO_NOT_MORE_THAN_HALF_MAX_HP:
+    case DMG_RECOIL_FROM_MISS:
         gBattleMoveDamage /= 2;
         if (gBattleMoveDamage == 0)
             gBattleMoveDamage = 1;

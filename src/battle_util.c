@@ -2084,7 +2084,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                 }
             }
             break;
-        case ABILITYEFFECT_MOVE_END: // Think contact abilities.
+        case ABILITYEFFECT_CONTACT: // Also includes Color Change
             switch (gLastUsedAbility)
             {
             case ABILITY_COLOR_CHANGE:
