@@ -5785,7 +5785,7 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 type, u16 evolutionItem)
                     targetSpecies = gEvolutionTable[species][i].targetSpecies;
                 break;
             case EVO_MAP:
-                if (gEvolutionTable[species][i].param <= level && gMapHeader.regionMapSectionId == gEvolutionTable[species][i].param)
+                if (gMapHeader.regionMapSectionId == gEvolutionTable[species][i].param)
                     targetSpecies = gEvolutionTable[species][i].targetSpecies;
                 break;
             }
