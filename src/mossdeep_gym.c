@@ -55,7 +55,7 @@ void FinishMossdeepGymTiles(void)
 
     id = GetEventObjectIdByLocalIdAndMap(EVENT_OBJ_ID_PLAYER, 0, 0);
     EventObjectClearHeldMovementIfFinished(&gEventObjects[id]);
-    ScriptMovement_StopAll();
+    ScriptMovement_UnfreezeEventObjects();
 }
 
 u16 MossdeepGym_MoveEvents(u8 arg0)
