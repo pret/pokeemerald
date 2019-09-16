@@ -48,7 +48,7 @@ EventScript_PkmnCenterNurse_TakeAndHealPkmn:: @ 8271993
     return
 
 EventScript_PkmnCenterNurse_CheckTrainerHillAndUnionRoom:: @ 82719B1
-    specialvar VAR_RESULT, PlayerAtTrainerHillEntrance
+    specialvar VAR_RESULT, PlayerNotAtTrainerHillEntrance
     compare VAR_RESULT, 0
     goto_if_eq EventScript_PkmnCenterNurse_ReturnPkmn
     specialvar VAR_RESULT, BufferUnionRoomPlayerName

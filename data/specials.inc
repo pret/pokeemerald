@@ -523,7 +523,7 @@ gSpecials:: @ 81DBA64
 	def_special TryBufferWaldaPhrase
 	def_special DoWaldaNamingScreen
 	def_special TryGetWallpaperWithWaldaPhrase
-	def_special PlayerAtTrainerHillEntrance
+	def_special PlayerNotAtTrainerHillEntrance
 	def_special sub_813B968
 	def_special sub_80F8B94
 	def_special ShowTrainerHillRecords

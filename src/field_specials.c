@@ -2009,7 +2009,7 @@ bool8 warp0_in_pokecenter(void)
     return FALSE;
 }
 
-bool32 PlayerAtTrainerHillEntrance(void)
+bool32 PlayerNotAtTrainerHillEntrance(void)
 {
     if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(TRAINER_HILL_ENTRANCE) && gSaveBlock1Ptr->location.mapNum == MAP_NUM(TRAINER_HILL_ENTRANCE))
     {
