@@ -119,7 +119,7 @@ const u16 gEggMoves[] = {
 		MOVE_ROTOTILLER,
 		MOVE_HONE_CLAWS),
 
-	egg_moves(NIDORAN_M,
+	egg_moves(NIDORAN_F,
 		MOVE_SUPERSONIC,
 		MOVE_DISABLE,
 		MOVE_TAKE_DOWN,
@@ -135,7 +135,7 @@ const u16 gEggMoves[] = {
 		MOVE_CHIP_AWAY,
 		MOVE_VENOM_DRENCH),
 
-	egg_moves(NIDORAN_F,
+	egg_moves(NIDORAN_M,
 		MOVE_COUNTER,
 		MOVE_DISABLE,
 		MOVE_SUPERSONIC,
