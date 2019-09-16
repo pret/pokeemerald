@@ -61,12 +61,12 @@ Route121_SafariZoneEntrance_EventScript_22BC48:: @ 822BC48
 	compare VAR_RESULT, 0
 	goto_if_eq Route121_SafariZoneEntrance_EventScript_22BCEA
 	call Route121_SafariZoneEntrance_EventScript_22BCBF
-	checkmoney 0x1f4, 0
+	checkmoney 500, 0
 	compare VAR_RESULT, 0
 	goto_if_eq Route121_SafariZoneEntrance_EventScript_22BCF8
 	playse SE_REGI
 	msgbox Route121_SafariZoneEntrance_Text_2A501B, MSGBOX_DEFAULT
-	takemoney 0x1f4, 0
+	takemoney 500, 0
 	updatemoneybox 0, 0
 	msgbox Route121_SafariZoneEntrance_Text_2A5036, MSGBOX_DEFAULT
 	playfanfare MUS_FANFA4

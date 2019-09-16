@@ -9,7 +9,7 @@ BattleFrontier_BattleFactoryLobby_MapScript2_2583F3: @ 82583F3
 
 BattleFrontier_BattleFactoryLobby_EventScript_2583FD:: @ 82583FD
 	setvar VAR_TEMP_1, 1
-	turnobject EVENT_OBJ_ID_PLAYER, 2
+	turnobject EVENT_OBJ_ID_PLAYER, DIR_NORTH
 	end
 
 BattleFrontier_BattleFactoryLobby_MapScript2_258407: @ 8258407

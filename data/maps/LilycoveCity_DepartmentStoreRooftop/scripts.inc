@@ -87,42 +87,42 @@ LilycoveCity_DepartmentStoreRooftop_EventScript_2202A6:: @ 82202A6
 	end
 
 LilycoveCity_DepartmentStoreRooftop_EventScript_2202E4:: @ 82202E4
-	setvar VAR_TEMP_0, 26
+	setvar VAR_TEMP_0, ITEM_FRESH_WATER
 	goto LilycoveCity_DepartmentStoreRooftop_EventScript_22032F
 	end
 
 LilycoveCity_DepartmentStoreRooftop_EventScript_2202EF:: @ 82202EF
-	setvar VAR_TEMP_0, 27
+	setvar VAR_TEMP_0, ITEM_SODA_POP
 	goto LilycoveCity_DepartmentStoreRooftop_EventScript_22032F
 	end
 
 LilycoveCity_DepartmentStoreRooftop_EventScript_2202FA:: @ 82202FA
-	setvar VAR_TEMP_0, 28
+	setvar VAR_TEMP_0, ITEM_LEMONADE
 	goto LilycoveCity_DepartmentStoreRooftop_EventScript_22032F
 	end
 
 LilycoveCity_DepartmentStoreRooftop_EventScript_220305:: @ 8220305
-	checkmoney 0xc8, 0
+	checkmoney 200, 0
 	return
 
 LilycoveCity_DepartmentStoreRooftop_EventScript_22030C:: @ 822030C
-	checkmoney 0x12c, 0
+	checkmoney 300, 0
 	return
 
 LilycoveCity_DepartmentStoreRooftop_EventScript_220313:: @ 8220313
-	checkmoney 0x15e, 0
+	checkmoney 350, 0
 	return
 
 LilycoveCity_DepartmentStoreRooftop_EventScript_22031A:: @ 822031A
-	takemoney 0xc8, 0
+	takemoney 200, 0
 	return
 
 LilycoveCity_DepartmentStoreRooftop_EventScript_220321:: @ 8220321
-	takemoney 0x12c, 0
+	takemoney 300, 0
 	return
 
 LilycoveCity_DepartmentStoreRooftop_EventScript_220328:: @ 8220328
-	takemoney 0x15e, 0
+	takemoney 350, 0
 	return
 
 LilycoveCity_DepartmentStoreRooftop_EventScript_22032F:: @ 822032F

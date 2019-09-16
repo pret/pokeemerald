@@ -15,7 +15,7 @@ BattleFrontier_BattleTowerCorridor2_EventScript_248D71:: @ 8248D71
 	setvar VAR_0x8004, 14
 	special sub_8161F74
 	checkplayergender
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, FEMALE
 	goto_if_eq BattleFrontier_BattleTowerCorridor2_EventScript_248D8B
 	setvar VAR_OBJ_GFX_ID_F, EVENT_OBJ_GFX_BRENDAN_NORMAL
 	return
