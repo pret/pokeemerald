@@ -43,7 +43,7 @@ BattleFrontier_BattleTowerMultiBattleRoom_MapScript2_243E14: @ 8243E14
 	.2byte 0
 
 BattleFrontier_BattleTowerMultiBattleRoom_EventScript_243E1E:: @ 8243E1E
-	turnobject EVENT_OBJ_ID_PLAYER, 2
+	turnobject EVENT_OBJ_ID_PLAYER, DIR_NORTH
 	end
 
 BattleFrontier_BattleTowerMultiBattleRoom_MapScript2_243E23: @ 8243E23

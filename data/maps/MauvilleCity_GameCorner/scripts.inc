@@ -34,11 +34,11 @@ MauvilleCity_GameCorner_EventScript_20FC33:: @ 820FC33
 	checkcoins VAR_TEMP_1
 	compare VAR_TEMP_1, 9950
 	goto_if_ge MauvilleCity_GameCorner_EventScript_20FCE1
-	checkmoney 0x3e8, 0
+	checkmoney 1000, 0
 	compare VAR_RESULT, 0
 	goto_if_eq MauvilleCity_GameCorner_EventScript_20FCC1
 	givecoins 50
-	takemoney 0x3e8, 0
+	takemoney 1000, 0
 	updatemoneybox 0, 0
 	updatecoinsbox 1, 6
 	playse SE_REGI
@@ -54,11 +54,11 @@ MauvilleCity_GameCorner_EventScript_20FC75:: @ 820FC75
 	checkcoins VAR_TEMP_1
 	compare VAR_TEMP_1, 9500
 	goto_if_ge MauvilleCity_GameCorner_EventScript_20FCE1
-	checkmoney 0x2710, 0
+	checkmoney 10000, 0
 	compare VAR_RESULT, 0
 	goto_if_eq MauvilleCity_GameCorner_EventScript_20FCC1
 	givecoins 500
-	takemoney 0x2710, 0
+	takemoney 10000, 0
 	updatemoneybox 0, 0
 	updatecoinsbox 1, 6
 	playse SE_REGI
@@ -136,17 +136,17 @@ MauvilleCity_GameCorner_EventScript_20FD2B:: @ 820FD2B
 
 MauvilleCity_GameCorner_EventScript_20FD67:: @ 820FD67
 	setvar VAR_TEMP_1, 1
-	bufferdecorationname 0, 88
+	bufferdecorationname 0, DECOR_TREECKO_DOLL
 	goto MauvilleCity_GameCorner_EventScript_20FD91
 
 MauvilleCity_GameCorner_EventScript_20FD75:: @ 820FD75
 	setvar VAR_TEMP_1, 2
-	bufferdecorationname 0, 89
+	bufferdecorationname 0, DECOR_TORCHIC_DOLL
 	goto MauvilleCity_GameCorner_EventScript_20FD91
 
 MauvilleCity_GameCorner_EventScript_20FD83:: @ 820FD83
 	setvar VAR_TEMP_1, 3
-	bufferdecorationname 0, 90
+	bufferdecorationname 0, DECOR_MUDKIP_DOLL
 	goto MauvilleCity_GameCorner_EventScript_20FD91
 
 MauvilleCity_GameCorner_EventScript_20FD91:: @ 820FD91
@@ -163,12 +163,12 @@ MauvilleCity_GameCorner_EventScript_20FDCB:: @ 820FDCB
 	checkcoins VAR_TEMP_2
 	compare VAR_TEMP_2, 1000
 	goto_if_lt MauvilleCity_GameCorner_EventScript_20FE79
-	bufferdecorationname 1, 88
-	checkdecorspace 88
+	bufferdecorationname 1, DECOR_TREECKO_DOLL
+	checkdecorspace DECOR_TREECKO_DOLL
 	compare VAR_RESULT, 0
 	goto_if_eq MauvilleCity_GameCorner_EventScript_20FE87
 	takecoins 1000
-	givedecoration 88
+	givedecoration DECOR_TREECKO_DOLL
 	updatecoinsbox 1, 1
 	playse SE_REGI
 	msgbox MauvilleCity_GameCorner_Text_210646, MSGBOX_DEFAULT
@@ -179,12 +179,12 @@ MauvilleCity_GameCorner_EventScript_20FE05:: @ 820FE05
 	checkcoins VAR_TEMP_2
 	compare VAR_TEMP_2, 1000
 	goto_if_lt MauvilleCity_GameCorner_EventScript_20FE79
-	bufferdecorationname 1, 89
-	checkdecorspace 89
+	bufferdecorationname 1, DECOR_TORCHIC_DOLL
+	checkdecorspace DECOR_TORCHIC_DOLL
 	compare VAR_RESULT, 0
 	goto_if_eq MauvilleCity_GameCorner_EventScript_20FE87
 	takecoins 1000
-	givedecoration 89
+	givedecoration DECOR_TORCHIC_DOLL
 	updatecoinsbox 1, 1
 	playse SE_REGI
 	msgbox MauvilleCity_GameCorner_Text_210646, MSGBOX_DEFAULT
@@ -195,12 +195,12 @@ MauvilleCity_GameCorner_EventScript_20FE3F:: @ 820FE3F
 	checkcoins VAR_TEMP_2
 	compare VAR_TEMP_2, 1000
 	goto_if_lt MauvilleCity_GameCorner_EventScript_20FE79
-	bufferdecorationname 1, 90
-	checkdecorspace 90
+	bufferdecorationname 1, DECOR_MUDKIP_DOLL
+	checkdecorspace DECOR_MUDKIP_DOLL
 	compare VAR_RESULT, 0
 	goto_if_eq MauvilleCity_GameCorner_EventScript_20FE87
 	takecoins 1000
-	givedecoration 90
+	givedecoration DECOR_MUDKIP_DOLL
 	updatecoinsbox 1, 1
 	playse SE_REGI
 	msgbox MauvilleCity_GameCorner_Text_210646, MSGBOX_DEFAULT
@@ -413,34 +413,34 @@ MauvilleCity_GameCorner_EventScript_210137:: @ 8210137
 	end
 
 MauvilleCity_GameCorner_EventScript_21017C:: @ 821017C
-	bufferdecorationname 1, 88
-	checkdecorspace 88
+	bufferdecorationname 1, DECOR_TREECKO_DOLL
+	checkdecorspace DECOR_TREECKO_DOLL
 	compare VAR_RESULT, 0
 	goto_if_eq MauvilleCity_GameCorner_EventScript_2101FA
 	msgbox MauvilleCity_GameCorner_Text_21079C, MSGBOX_DEFAULT
-	givedecoration_std 88
+	givedecoration_std DECOR_TREECKO_DOLL
 	setflag FLAG_RECEIVED_STARTER_DOLL
 	goto MauvilleCity_GameCorner_EventScript_210213
 	end
 
 MauvilleCity_GameCorner_EventScript_2101A6:: @ 82101A6
-	bufferdecorationname 1, 89
-	checkdecorspace 89
+	bufferdecorationname 1, DECOR_TORCHIC_DOLL
+	checkdecorspace DECOR_TORCHIC_DOLL
 	compare VAR_RESULT, 0
 	goto_if_eq MauvilleCity_GameCorner_EventScript_2101FA
 	msgbox MauvilleCity_GameCorner_Text_21079C, MSGBOX_DEFAULT
-	givedecoration_std 89
+	givedecoration_std DECOR_TORCHIC_DOLL
 	setflag FLAG_RECEIVED_STARTER_DOLL
 	goto MauvilleCity_GameCorner_EventScript_210213
 	end
 
 MauvilleCity_GameCorner_EventScript_2101D0:: @ 82101D0
-	bufferdecorationname 1, 90
-	checkdecorspace 90
+	bufferdecorationname 1, DECOR_MUDKIP_DOLL
+	checkdecorspace DECOR_MUDKIP_DOLL
 	compare VAR_RESULT, 0
 	goto_if_eq MauvilleCity_GameCorner_EventScript_2101FA
 	msgbox MauvilleCity_GameCorner_Text_21079C, MSGBOX_DEFAULT
-	givedecoration_std 90
+	givedecoration_std DECOR_MUDKIP_DOLL
 	setflag FLAG_RECEIVED_STARTER_DOLL
 	goto MauvilleCity_GameCorner_EventScript_210213
 	end
