@@ -292,7 +292,7 @@ static void Task_OptionMenuProcessInput(u8 taskId)
     }
     else if (gMain.newKeys & DPAD_DOWN)
     {
-        if (gTasks[taskId].data[TD_MENUSELECTION] <= MENUITEM_CANCEL - 1)
+        if (gTasks[taskId].data[TD_MENUSELECTION] < MENUITEM_CANCEL)
             gTasks[taskId].data[TD_MENUSELECTION]++;
         else
             gTasks[taskId].data[TD_MENUSELECTION] = 0;
