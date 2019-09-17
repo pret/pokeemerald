@@ -54,6 +54,7 @@
 
 #define TRAINER_ID_LENGTH 4
 #define PARTY_SIZE 6
+#define MAX_MON_MOVES 4
 
 // string lengths
 #define ITEM_NAME_LENGTH 14

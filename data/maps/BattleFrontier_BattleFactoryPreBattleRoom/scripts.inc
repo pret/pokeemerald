@@ -12,10 +12,10 @@ BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259ACF:: @ 8259ACF
 	compare VAR_0x8006, 1
 	goto_if_ne BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259AEA
 	setobjectxy 1, 8, 7
-	turnobject 1, 1
+	turnobject 1, DIR_SOUTH
 
 BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259AEA:: @ 8259AEA
-	turnobject EVENT_OBJ_ID_PLAYER, 2
+	turnobject EVENT_OBJ_ID_PLAYER, DIR_NORTH
 	end
 
 BattleFrontier_BattleFactoryPreBattleRoom_MapScript2_259AEF: @ 8259AEF

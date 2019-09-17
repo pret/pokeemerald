@@ -2044,7 +2044,7 @@ const u32 *GetDecorationIconPicOrPalette(u16 decor, u8 mode)
     if (decor > NUM_DECORATIONS)
         decor = DECOR_NONE;
 
-    return gUnknown_085A6BE8[decor][mode];
+    return gDecorIconTable[decor][mode];
 }
 
 u8 AddDecorationIconObjectFromEventObject(u16 tilesTag, u16 paletteTag, u8 decor)
@@ -2096,7 +2096,7 @@ u8 AddDecorationIconObject(u8 decor, s16 x, s16 y, u8 priority, u16 tilesTag, u1
         gSprites[spriteId].pos2.x = x + 4;
         gSprites[spriteId].pos2.y = y + 4;
     }
-    else if (gUnknown_085A6BE8[decor][0] == NULL)
+    else if (gDecorIconTable[decor][0] == NULL)
     {
         spriteId = AddDecorationIconObjectFromEventObject(tilesTag, paletteTag, decor);
         if (spriteId == MAX_SPRITES)

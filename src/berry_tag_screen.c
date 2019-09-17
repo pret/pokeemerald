@@ -4,7 +4,6 @@
 #include "decompress.h"
 #include "event_object_movement.h"
 #include "item_menu.h"
-#include "constants/items.h"
 #include "item.h"
 #include "item_use.h"
 #include "main.h"
@@ -15,7 +14,6 @@
 #include "menu_helpers.h"
 #include "palette.h"
 #include "overworld.h"
-#include "constants/songs.h"
 #include "sound.h"
 #include "sprite.h"
 #include "string_util.h"
@@ -28,7 +26,10 @@
 #include "item_menu_icons.h"
 #include "decompress.h"
 #include "international_string_util.h"
+#include "constants/berry.h"
+#include "constants/items.h"
 #include "constants/rgb.h"
+#include "constants/songs.h"
 
 // There are 4 windows used in berry tag screen.
 enum

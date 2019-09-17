@@ -13,7 +13,7 @@ EverGrandeCity_ChampionsRoom_MapScript2_228A05: @ 8228A05
 	.2byte 0
 
 EverGrandeCity_ChampionsRoom_EventScript_228A0F:: @ 8228A0F
-	turnobject EVENT_OBJ_ID_PLAYER, 2
+	turnobject EVENT_OBJ_ID_PLAYER, DIR_NORTH
 	end
 
 EverGrandeCity_ChampionsRoom_MapScript2_228A14: @ 8228A14

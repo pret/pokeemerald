@@ -48,18 +48,18 @@ LittlerootTown_ProfessorBirchsLab_MapScript2_1F9D06: @ 81F9D06
 	.2byte 0
 
 LittlerootTown_ProfessorBirchsLab_EventScript_1F9D40:: @ 81F9D40
-	turnobject EVENT_OBJ_ID_PLAYER, 2
+	turnobject EVENT_OBJ_ID_PLAYER, DIR_NORTH
 	end
 
 LittlerootTown_ProfessorBirchsLab_EventScript_1F9D45:: @ 81F9D45
-	turnobject EVENT_OBJ_ID_PLAYER, 2
+	turnobject EVENT_OBJ_ID_PLAYER, DIR_NORTH
 	addobject 2
 	addobject 3
-	turnobject 3, 2
+	turnobject 3, DIR_NORTH
 	setobjectxy 3, 5, 5
-	turnobject 2, 1
+	turnobject 2, DIR_SOUTH
 	setobjectxy 2, 6, 4
-	turnobject 1, 4
+	turnobject 1, DIR_EAST
 	setobjectxy 1, 10, 10
 	end
 
@@ -72,15 +72,15 @@ LittlerootTown_ProfessorBirchsLab_EventScript_1F9D75:: @ 81F9D75
 	addobject 5
 	addobject 6
 	addobject 3
-	turnobject 4, 1
+	turnobject 4, DIR_SOUTH
 	setobjectxy 4, 8, 4
-	turnobject 5, 1
+	turnobject 5, DIR_SOUTH
 	setobjectxy 5, 9, 4
-	turnobject 6, 1
+	turnobject 6, DIR_SOUTH
 	setobjectxy 6, 10, 4
-	turnobject 2, 1
+	turnobject 2, DIR_SOUTH
 	setobjectxy 2, 6, 4
-	turnobject 3, 4
+	turnobject 3, DIR_EAST
 	setobjectxy 3, 5, 5
 	end
 
@@ -335,7 +335,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_1FA061:: @ 81FA061
 LittlerootTown_ProfessorBirchsLab_EventScript_1FA06C:: @ 81FA06C
 	bufferspeciesname 0, SPECIES_CYNDAQUIL
 	setvar VAR_TEMP_1, SPECIES_CYNDAQUIL
-	givemon SPECIES_CYNDAQUIL, 5, ITEM_NONE, 0x0, 0x0, 0
+	givemon SPECIES_CYNDAQUIL, 5, ITEM_NONE
 	compare VAR_RESULT, 0
 	goto_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_1FA0A1
 	compare VAR_RESULT, 1
@@ -380,7 +380,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_1FA0FD:: @ 81FA0FD
 LittlerootTown_ProfessorBirchsLab_EventScript_1FA10D:: @ 81FA10D
 	bufferspeciesname 0, SPECIES_TOTODILE
 	setvar VAR_TEMP_1, SPECIES_TOTODILE
-	givemon SPECIES_TOTODILE, 5, ITEM_NONE, 0x0, 0x0, 0
+	givemon SPECIES_TOTODILE, 5, ITEM_NONE
 	compare VAR_RESULT, 0
 	goto_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_1FA142
 	compare VAR_RESULT, 1
@@ -425,7 +425,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_1FA19E:: @ 81FA19E
 LittlerootTown_ProfessorBirchsLab_EventScript_1FA1AE:: @ 81FA1AE
 	bufferspeciesname 0, SPECIES_CHIKORITA
 	setvar VAR_TEMP_1, SPECIES_CHIKORITA
-	givemon SPECIES_CHIKORITA, 5, ITEM_NONE, 0x0, 0x0, 0
+	givemon SPECIES_CHIKORITA, 5, ITEM_NONE
 	compare VAR_RESULT, 0
 	goto_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_1FA1E3
 	compare VAR_RESULT, 1

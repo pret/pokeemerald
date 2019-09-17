@@ -154,7 +154,7 @@ static EWRAM_DATA struct
 {
     u8 state;
     u8 heartSpriteIds[16];              /*0x001*/
-    u16 movesToLearn[4];                /*0x012*/
+    u16 movesToLearn[MAX_MON_MOVES];    /*0x012*/
     u8 filler1A[0x44 - 0x1A];           /*0x01A*/
     u8 partyMon;                        /*0x044*/
     u8 moveSlot;                        /*0x045*/

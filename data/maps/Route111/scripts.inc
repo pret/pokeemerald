@@ -128,7 +128,7 @@ Route111_EventScript_1F0E60:: @ 81F0E60
 	showobjectat EVENT_OBJ_ID_PLAYER, MAP_LITTLEROOT_TOWN
 	removeobject 45
 	delay 16
-	turnobject EVENT_OBJ_ID_PLAYER, 2
+	turnobject EVENT_OBJ_ID_PLAYER, DIR_NORTH
 	delay 16
 	special StartMirageTowerDisintegration
 	waitstate

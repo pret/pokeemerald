@@ -28,7 +28,7 @@ SlateportCity_House1_EventScript_209AE9:: @ 8209AE9
 
 SlateportCity_House1_EventScript_209AF3:: @ 8209AF3
 	specialvar VAR_RESULT, ScriptGetPartyMonSpecies
-	compare VAR_RESULT, 412
+	compare VAR_RESULT, SPECIES_EGG
 	goto_if_eq SlateportCity_House1_EventScript_209B46
 	special TV_CopyNicknameToStringVar1AndEnsureTerminated
 	special TV_CheckMonOTIDEqualsPlayerID

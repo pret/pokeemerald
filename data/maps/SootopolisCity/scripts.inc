@@ -179,11 +179,11 @@ SootopolisCity_EventScript_1E58E5:: @ 81E58E5
 	end
 
 SootopolisCity_EventScript_1E58FC:: @ 81E58FC
-	turnobject EVENT_OBJ_ID_PLAYER, 2
+	turnobject EVENT_OBJ_ID_PLAYER, DIR_NORTH
 	return
 
 SootopolisCity_EventScript_1E5901:: @ 81E5901
-	turnobject EVENT_OBJ_ID_PLAYER, 2
+	turnobject EVENT_OBJ_ID_PLAYER, DIR_NORTH
 	setvar VAR_SKY_PILLAR_STATE, 3
 	return
 
@@ -748,7 +748,7 @@ SootopolisCity_EventScript_1E5F1B:: @ 81E5F1B
 	msgbox SootopolisCity_Text_2A7BB0, MSGBOX_DEFAULT
 	random 10
 	addvar VAR_RESULT, 20
-	addvar VAR_RESULT, 133
+	addvar VAR_RESULT, FIRST_BERRY_INDEX
 	giveitem_std VAR_RESULT
 	compare VAR_RESULT, 0
 	goto_if_eq Common_EventScript_ShowBagIsFull

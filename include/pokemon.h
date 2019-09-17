@@ -145,8 +145,8 @@ struct PokemonSubstruct0
 
 struct PokemonSubstruct1
 {
-    u16 moves[4];
-    u8 pp[4];
+    u16 moves[MAX_MON_MOVES];
+    u8 pp[MAX_MON_MOVES];
 };
 
 struct PokemonSubstruct2
@@ -273,7 +273,7 @@ struct BattlePokemon
     /*0x06*/ u16 speed;
     /*0x08*/ u16 spAttack;
     /*0x0A*/ u16 spDefense;
-    /*0x0C*/ u16 moves[4];
+    /*0x0C*/ u16 moves[MAX_MON_MOVES];
     /*0x14*/ u32 hpIV:5;
     /*0x14*/ u32 attackIV:5;
     /*0x15*/ u32 defenseIV:5;
@@ -287,7 +287,7 @@ struct BattlePokemon
     /*0x21*/ u8 type1;
     /*0x22*/ u8 type2;
     /*0x23*/ u8 unknown;
-    /*0x24*/ u8 pp[4];
+    /*0x24*/ u8 pp[MAX_MON_MOVES];
     /*0x28*/ u16 hp;
     /*0x2A*/ u8 level;
     /*0x2B*/ u8 friendship;
