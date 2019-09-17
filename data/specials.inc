@@ -495,8 +495,8 @@ gSpecials:: @ 81DBA64
 	def_special StartMirageTowerShake
 	def_special StartMirageTowerFossilFallAndSink
 	def_special ChangeBoxPokemonNickname
-	def_special get_unknown_box_id
-	def_special sub_813B21C
+	def_special GetPCBoxToSendMon
+	def_special ShouldShowBoxWasFullMessage
 	def_special SetMatchCallRegisteredFlag
 	def_special sub_8175280
 	def_special CreateUnusualWeatherEvent

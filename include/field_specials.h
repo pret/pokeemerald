@@ -5,8 +5,8 @@ extern bool8 gBikeCyclingChallenge;
 extern u8 gBikeCollisions;
 
 u8 GetLeadMonIndex(void);
-u8 sub_813B260(void);
-u16 get_unknown_box_id(void);
+u8 IsDestinationBoxFull(void);
+u16 GetPCBoxToSendMon(void);
 bool8 InMultiBattleRoom(void);
 void sub_813BF10(void);
 void IncrementBirthIslandRockStepCount(void);
@@ -23,13 +23,13 @@ void ShowScrollableMultichoice(void);
 void FrontierGamblerSetWonOrLost(bool8 won);
 u8 sub_813BADC(u8 a0);
 bool8 InPokemonCenter(void);
-void SetShoalItemFlag(u16 v0);
-void UpdateFrontierManiac(u16 a0);
-void UpdateFrontierGambler(u16 a0);
+void SetShoalItemFlag(u16 unused);
+void UpdateFrontierManiac(u16 daysSince);
+void UpdateFrontierGambler(u16 daysSince);
 void ResetCyclingRoadChallengeData(void);
 bool8 UsedPokemonCenterWarp(void);
 void ResetFanClub(void);
-bool8 sub_813B21C(void);
-void set_unknown_box_id(u8 id);
+bool8 ShouldShowBoxWasFullMessage(void);
+void SetPCBoxToSendMon(u8 boxId);
 
 #endif // GUARD_FIELD_SPECIALS_H

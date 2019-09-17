@@ -68,7 +68,7 @@
 
 #define VAR_DEOXYS_ROCK_STEP_COUNT           0x4034
 #define VAR_DEOXYS_ROCK_LEVEL                0x4035
-#define VAR_STORAGE_UNKNOWN                  0x4036
+#define VAR_PC_BOX_TO_SEND_MON               0x4036
 #define VAR_UNUSUAL_WEATHER_LOCATION         0x4037
 #define VAR_UNUSUAL_WEATHER_STEP_COUNTER     0x4038
 #define VAR_SHOULD_END_UNUSUAL_WEATHER       0x4039

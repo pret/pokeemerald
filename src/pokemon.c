@@ -4329,7 +4329,7 @@ u8 SendMonToPC(struct Pokemon* mon)
 {
     s32 boxNo, boxPos;
 
-    set_unknown_box_id(VarGet(VAR_STORAGE_UNKNOWN));
+    SetPCBoxToSendMon(VarGet(VAR_PC_BOX_TO_SEND_MON));
 
     boxNo = StorageGetCurrentBox();
 
@@ -4344,9 +4344,9 @@ u8 SendMonToPC(struct Pokemon* mon)
                 CopyMon(checkingMon, &mon->box, sizeof(mon->box));
                 gSpecialVar_MonBoxId = boxNo;
                 gSpecialVar_MonBoxPos = boxPos;
-                if (get_unknown_box_id() != boxNo)
-                    FlagClear(FLAG_SYS_STORAGE_UNKNOWN_FLAG);
-                VarSet(VAR_STORAGE_UNKNOWN, boxNo);
+                if (GetPCBoxToSendMon() != boxNo)
+                    FlagClear(FLAG_SHOWN_BOX_WAS_FULL_MESSAGE);
+                VarSet(VAR_PC_BOX_TO_SEND_MON, boxNo);
                 return MON_GIVEN_TO_PC;
             }
         }
