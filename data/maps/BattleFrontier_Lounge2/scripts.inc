@@ -40,7 +40,7 @@ BattleFrontier_Lounge2_EventScript_26066D:: @ 826066D
 	call_if_le BattleFrontier_Lounge2_EventScript_2606F8
 	compare VAR_FRONTIER_MANIAC_FACILITY, 4
 	call_if_ge BattleFrontier_Lounge2_EventScript_260701
-	special sub_8139F20
+	special ShowFrontierManiacMessage
 	waitmessage
 	waitbuttonpress
 	release

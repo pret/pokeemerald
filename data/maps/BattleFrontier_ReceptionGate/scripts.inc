@@ -136,8 +136,8 @@ BattleFrontier_ReceptionGate_EventScript_266310:: @ 8266310
 BattleFrontier_ReceptionGate_EventScript_266320:: @ 8266320
 	message BattleFrontier_ReceptionGate_Text_26689D
 	waitmessage
-	setvar VAR_0x8004, 8
-	special sub_813A128
+	setvar VAR_0x8004, SCROLL_MULTI_BF_RECEPTIONIST
+	special ShowScrollableMultichoice
 	waitstate
 	switch VAR_RESULT
 	case 0, BattleFrontier_ReceptionGate_EventScript_2663AE

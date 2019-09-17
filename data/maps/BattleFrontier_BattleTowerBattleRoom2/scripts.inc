@@ -25,7 +25,7 @@ BattleFrontier_BattleTowerBattleRoom2_EventScript_248F29:: @ 8248F29
 	return
 
 BattleFrontier_BattleTowerBattleRoom2_EventScript_248F2F:: @ 8248F2F
-	special sub_813A76C
+	special SetBattleTowerLinkPlayerGfx
 	return
 
 BattleFrontier_BattleTowerBattleRoom2_MapScript2_248F33: @ 8248F33
