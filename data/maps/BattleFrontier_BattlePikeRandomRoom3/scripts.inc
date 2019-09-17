@@ -30,7 +30,7 @@ BattleFrontier_BattlePikeRandomRoom3_MapScript2_25E466: @ 825E466
 
 BattleFrontier_BattlePikeRandomRoom3_EventScript_25E470:: @ 825E470
 	setvar VAR_TEMP_4, 1
-	turnobject EVENT_OBJ_ID_PLAYER, 2
+	turnobject EVENT_OBJ_ID_PLAYER, DIR_NORTH
 	end
 
 BattleFrontier_BattlePikeRandomRoom3_MapScript1_25E47A: @ 825E47A

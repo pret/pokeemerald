@@ -350,7 +350,7 @@ void sub_811FAA4(u8 markings, s16 x, s16 y)
     u16 i;
     sMenu->cursorPos = 0;
     sMenu->markings = markings;
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < NUM_MON_MARKINGS; i++)
         sMenu->markingsArray[i] = (sMenu->markings >> i) & 1;
     sub_811FC80(x, y, sMenu->baseTileTag, sMenu->basePaletteTag);
 }
@@ -371,7 +371,7 @@ void sub_811FAF8(void)
         DestroySprite(sMenu->menuWindowSprites[i]);
         sMenu->menuWindowSprites[i] = NULL;
     }
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < NUM_MON_MARKINGS; i++)
     {
         if (!sMenu->menuMarkingSprites[i])
             return;
@@ -422,7 +422,7 @@ bool8 sub_811FBA4(void)
         {
         case 4:
             sMenu->markings = 0;
-            for (i = 0; i < 4; i++)
+            for (i = 0; i < NUM_MON_MARKINGS; i++)
                 sMenu->markings |= sMenu->markingsArray[i] << i;
             return FALSE;
         case 5:
@@ -498,7 +498,7 @@ static void sub_811FC80(s16 x, s16 y, u16 baseTileTag, u16 basePaletteTag)
     sprTemplate.callback = sub_811FF40;
     sprTemplate.oam = &gUnknown_0859EE84;
 
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < NUM_MON_MARKINGS; i++)
     {
         spriteId = CreateSprite(&sprTemplate, x + 32, y + 16 + 16 * i, 0);
         if (spriteId != MAX_SPRITES)

@@ -227,7 +227,7 @@ struct ContestPokemon
     u8 aiPool_Cute:1; // 0x10
     u8 aiPool_Smart:1; // 0x20
     u8 aiPool_Tough:1; // 0x40
-    /*0x1E*/ u16 moves[4]; // moves
+    /*0x1E*/ u16 moves[MAX_MON_MOVES]; // moves
     /*0x26*/ u8 cool; // cool
     /*0x27*/ u8 beauty; // beauty
     /*0x28*/ u8 cute; // cute

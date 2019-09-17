@@ -174,14 +174,14 @@ Route113_GlassWorkshop_EventScript_26EFCC:: @ 826EFCC
 
 Route113_GlassWorkshop_EventScript_26EFD6:: @ 826EFD6
 	setvar VAR_0x800A, 250
-	subvar VAR_0x800A, 16456
+	subvar VAR_0x800A, VAR_ASH_GATHER_COUNT
 	buffernumberstring 0, VAR_0x800A
 	msgbox Route113_GlassWorkshop_Text_26F34E, MSGBOX_DEFAULT
 	release
 	end
 
 Route113_GlassWorkshop_EventScript_26EFEE:: @ 826EFEE
-	subvar VAR_0x800A, 16456
+	subvar VAR_0x800A, VAR_ASH_GATHER_COUNT
 	buffernumberstring 1, VAR_0x800A
 	message Route113_GlassWorkshop_Text_26F543
 	waitmessage

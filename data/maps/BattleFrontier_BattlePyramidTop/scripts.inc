@@ -19,7 +19,7 @@ BattleFrontier_BattlePyramidTop_MapScript2_2550CE: @ 82550CE
 
 BattleFrontier_BattlePyramidTop_EventScript_2550D8:: @ 82550D8
 	setvar VAR_TEMP_1, 1
-	turnobject EVENT_OBJ_ID_PLAYER, 2
+	turnobject EVENT_OBJ_ID_PLAYER, DIR_NORTH
 	compare VAR_TEMP_C, 0
 	goto_if_ne BattleFrontier_BattlePyramidTop_EventScript_2550F3
 	setobjectxyperm 2, 0, 0

@@ -12,10 +12,10 @@ SlateportCity_BattleTentCorridor_EventScript_208E3B:: @ 8208E3B
 	compare VAR_0x8006, 1
 	goto_if_ne SlateportCity_BattleTentCorridor_EventScript_208E56
 	setobjectxy 1, 2, 2
-	turnobject 1, 1
+	turnobject 1, DIR_SOUTH
 
 SlateportCity_BattleTentCorridor_EventScript_208E56:: @ 8208E56
-	turnobject EVENT_OBJ_ID_PLAYER, 2
+	turnobject EVENT_OBJ_ID_PLAYER, DIR_NORTH
 	end
 
 SlateportCity_BattleTentCorridor_MapScript2_208E5B: @ 8208E5B

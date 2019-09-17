@@ -261,7 +261,7 @@ LinkContestRoom1_EventScript_27A091:: @ 827A091
 	return
 
 LinkContestRoom1_EventScript_27A097:: @ 827A097
-	buffercontesttypestring 1, 32776
+	buffercontesttypestring 1, VAR_0x8008
 	bufferstdstring 2, VAR_0x8009
 	call LinkContestRoom1_EventScript_27A0B1
 	lockall
@@ -1012,71 +1012,71 @@ LinkContestRoom1_EventScript_27AA1B:: @ 827AA1B
 	return
 
 LinkContestRoom1_EventScript_27AA6F:: @ 827AA6F
-	turnvobject 0, 1
-	turnvobject 2, 1
-	turnvobject 4, 4
-	turnvobject 6, 1
-	turnvobject 8, 1
-	turnvobject 10, 1
-	turnvobject 12, 1
-	turnvobject 14, 1
-	turnvobject 16, 1
-	turnvobject 18, 1
-	turnvobject 20, 4
-	turnvobject 22, 4
-	turnvobject 25, 4
-	turnvobject 27, 3
-	turnvobject 28, 4
+	turnvobject 0, DIR_SOUTH
+	turnvobject 2, DIR_SOUTH
+	turnvobject 4, DIR_EAST
+	turnvobject 6, DIR_SOUTH
+	turnvobject 8, DIR_SOUTH
+	turnvobject 10, DIR_SOUTH
+	turnvobject 12, DIR_SOUTH
+	turnvobject 14, DIR_SOUTH
+	turnvobject 16, DIR_SOUTH
+	turnvobject 18, DIR_SOUTH
+	turnvobject 20, DIR_EAST
+	turnvobject 22, DIR_EAST
+	turnvobject 25, DIR_EAST
+	turnvobject 27, DIR_WEST
+	turnvobject 28, DIR_EAST
 	delay 10
-	turnvobject 0, 4
-	turnvobject 2, 4
-	turnvobject 4, 4
-	turnvobject 6, 4
-	turnvobject 8, 4
-	turnvobject 10, 3
-	turnvobject 12, 3
-	turnvobject 14, 3
-	turnvobject 16, 3
-	turnvobject 18, 3
-	turnvobject 20, 1
-	turnvobject 22, 1
-	turnvobject 25, 2
-	turnvobject 27, 2
-	turnvobject 28, 2
+	turnvobject 0, DIR_EAST
+	turnvobject 2, DIR_EAST
+	turnvobject 4, DIR_EAST
+	turnvobject 6, DIR_EAST
+	turnvobject 8, DIR_EAST
+	turnvobject 10, DIR_WEST
+	turnvobject 12, DIR_WEST
+	turnvobject 14, DIR_WEST
+	turnvobject 16, DIR_WEST
+	turnvobject 18, DIR_WEST
+	turnvobject 20, DIR_SOUTH
+	turnvobject 22, DIR_SOUTH
+	turnvobject 25, DIR_NORTH
+	turnvobject 27, DIR_NORTH
+	turnvobject 28, DIR_NORTH
 	delay 10
-	turnvobject 1, 2
-	turnvobject 3, 2
-	turnvobject 5, 2
-	turnvobject 7, 2
-	turnvobject 9, 4
-	turnvobject 11, 2
-	turnvobject 15, 2
-	turnvobject 13, 2
-	turnvobject 17, 2
-	turnvobject 19, 2
-	turnvobject 21, 3
-	turnvobject 23, 3
-	turnvobject 24, 3
-	turnvobject 26, 4
-	turnvobject 29, 3
-	turnvobject 30, 3
+	turnvobject 1, DIR_NORTH
+	turnvobject 3, DIR_NORTH
+	turnvobject 5, DIR_NORTH
+	turnvobject 7, DIR_NORTH
+	turnvobject 9, DIR_EAST
+	turnvobject 11, DIR_NORTH
+	turnvobject 15, DIR_NORTH
+	turnvobject 13, DIR_NORTH
+	turnvobject 17, DIR_NORTH
+	turnvobject 19, DIR_NORTH
+	turnvobject 21, DIR_WEST
+	turnvobject 23, DIR_WEST
+	turnvobject 24, DIR_WEST
+	turnvobject 26, DIR_EAST
+	turnvobject 29, DIR_WEST
+	turnvobject 30, DIR_WEST
 	delay 10
-	turnvobject 1, 4
-	turnvobject 3, 4
-	turnvobject 5, 4
-	turnvobject 7, 4
-	turnvobject 9, 4
-	turnvobject 11, 3
-	turnvobject 15, 3
-	turnvobject 13, 3
-	turnvobject 17, 3
-	turnvobject 19, 3
-	turnvobject 21, 1
-	turnvobject 23, 1
-	turnvobject 24, 1
-	turnvobject 26, 2
-	turnvobject 29, 2
-	turnvobject 30, 2
+	turnvobject 1, DIR_EAST
+	turnvobject 3, DIR_EAST
+	turnvobject 5, DIR_EAST
+	turnvobject 7, DIR_EAST
+	turnvobject 9, DIR_EAST
+	turnvobject 11, DIR_WEST
+	turnvobject 15, DIR_WEST
+	turnvobject 13, DIR_WEST
+	turnvobject 17, DIR_WEST
+	turnvobject 19, DIR_WEST
+	turnvobject 21, DIR_SOUTH
+	turnvobject 23, DIR_SOUTH
+	turnvobject 24, DIR_SOUTH
+	turnvobject 26, DIR_NORTH
+	turnvobject 29, DIR_NORTH
+	turnvobject 30, DIR_NORTH
 	delay 10
 	return
 

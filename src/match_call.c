@@ -1290,7 +1290,7 @@ static bool32 sub_81963F0(u8 taskId)
             sub_81973A4();
             playerObjectId = GetEventObjectIdByLocalIdAndMap(EVENT_OBJ_ID_PLAYER, 0, 0);
             EventObjectClearHeldMovementIfFinished(&gEventObjects[playerObjectId]);
-            sub_80D338C();
+            ScriptMovement_UnfreezeEventObjects();
             UnfreezeEventObjects();
             ScriptContext2_Disable();
         }

@@ -99,7 +99,7 @@ MossdeepCity_GameCorner_1F_EventScript_276BAE:: @ 8276BAE
 OldaleTown_PokemonCenter_2F_EventScript_276BAE:: @ 8276BAE
 	compare VAR_0x8007, 0
 	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_276BBD
-	turnobject VAR_0x8007, 3
+	turnobject VAR_0x8007, DIR_WEST
 
 OldaleTown_PokemonCenter_2F_EventScript_276BBD:: @ 8276BBD
 	end

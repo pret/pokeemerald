@@ -78,7 +78,7 @@ PetalburgCity_Gym_MapScript2_20498B: @ 820498B
 	.2byte 0
 
 PetalburgCity_Gym_EventScript_204995:: @ 8204995
-	turnobject EVENT_OBJ_ID_PLAYER, 2
+	turnobject EVENT_OBJ_ID_PLAYER, DIR_NORTH
 	end
 
 PetalburgCity_Gym_MapScript2_20499A: @ 820499A
