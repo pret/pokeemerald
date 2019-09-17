@@ -392,7 +392,7 @@ OldaleTown_PokemonCenter_2F_EventScript_276F23:: @ 8276F23
 
 OldaleTown_PokemonCenter_2F_EventScript_276F2E:: @ 8276F2E
 	special HasEnoughMonsForDoubleBattle
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, PLAYER_HAS_TWO_USABLE_MONS
 	goto_if_ne OldaleTown_PokemonCenter_2F_EventScript_276F47
 	setvar VAR_0x8004, 2
 	goto OldaleTown_PokemonCenter_2F_EventScript_276F60
@@ -1174,7 +1174,7 @@ OldaleTown_PokemonCenter_2F_EventScript_27788E:: @ 827788E
 
 OldaleTown_PokemonCenter_2F_EventScript_277899:: @ 8277899
 	special HasEnoughMonsForDoubleBattle
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, PLAYER_HAS_TWO_USABLE_MONS
 	goto_if_ne OldaleTown_PokemonCenter_2F_EventScript_2778B2
 	setvar VAR_0x8004, 1
 	goto OldaleTown_PokemonCenter_2F_EventScript_277931

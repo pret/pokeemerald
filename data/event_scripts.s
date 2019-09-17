@@ -15,6 +15,7 @@
 #include "constants/map_scripts.h"
 #include "constants/maps.h"
 #include "constants/moves.h"
+#include "constants/pokemon.h"
 #include "constants/songs.h"
 #include "constants/species.h"
 #include "constants/trainers.h"
