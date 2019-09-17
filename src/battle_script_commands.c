@@ -10184,7 +10184,7 @@ static void atkEF_handleballthrow(void)
             gBattlescriptCurrInstr = BattleScript_SuccessBallThrow;
             SetMonData(&gEnemyParty[gBattlerPartyIndexes[gBattlerTarget]], MON_DATA_POKEBALL, &gLastUsedItem);
 
-            if (CalculatePlayerPartyCount() == 6)
+            if (CalculatePlayerPartyCount() == PARTY_SIZE)
                 gBattleCommunication[MULTISTRING_CHOOSER] = 0;
             else
                 gBattleCommunication[MULTISTRING_CHOOSER] = 1;
@@ -10196,7 +10196,7 @@ static void atkEF_handleballthrow(void)
             odds = Sqrt(Sqrt(16711680 / odds));
             odds = 1048560 / odds;
 
-            for (shakes = 0; shakes < 4 && Random() < odds; shakes++);
+            for (shakes = 0; shakes < BALL_3_SHAKES_SUCCESS && Random() < odds; shakes++);
 
             if (gLastUsedItem == ITEM_MASTER_BALL)
                 shakes = BALL_3_SHAKES_SUCCESS; // why calculate the shakes before that check?
@@ -10209,7 +10209,7 @@ static void atkEF_handleballthrow(void)
                 gBattlescriptCurrInstr = BattleScript_SuccessBallThrow;
                 SetMonData(&gEnemyParty[gBattlerPartyIndexes[gBattlerTarget]], MON_DATA_POKEBALL, &gLastUsedItem);
 
-                if (CalculatePlayerPartyCount() == 6)
+                if (CalculatePlayerPartyCount() == PARTY_SIZE)
                     gBattleCommunication[MULTISTRING_CHOOSER] = 0;
                 else
                     gBattleCommunication[MULTISTRING_CHOOSER] = 1;

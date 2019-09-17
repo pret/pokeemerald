@@ -51,6 +51,7 @@
 #define HALL_FACILITIES_COUNT 9 // 7 facilities for single mode + tower double mode + tower multi mode.
 
 #define TRAINER_ID_LENGTH 4
+#define MAX_MON_MOVES 4
 
 // string lengths
 #define ITEM_NAME_LENGTH 14
