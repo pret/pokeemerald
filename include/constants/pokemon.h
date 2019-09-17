@@ -23,7 +23,6 @@
 #define TYPE_DARK             17
 #define NUMBER_OF_MON_TYPES   18
 
-
 // Pokemon egg groups
 #define EGG_GROUP_NONE          0
 #define EGG_GROUP_MONSTER       1
@@ -85,7 +84,7 @@
 // Shiny odds
 #define SHINY_ODDS 8 // Actual probability is SHINY_ODDS/65536
 
-// Mon Data
+// Flags for Get(Box)MonData / Set(Box)MonData
 #define MON_DATA_PERSONALITY        0
 #define MON_DATA_OT_ID              1
 #define MON_DATA_NICKNAME           2
@@ -218,5 +217,54 @@
 #define EV_ITEM_RAISE_LIMIT 100
 
 #define UNOWN_FORM_COUNT 28
+
+// Battle move flags
+#define FLAG_MAKES_CONTACT          0x1
+#define FLAG_PROTECT_AFFECTED       0x2
+#define FLAG_MAGICCOAT_AFFECTED     0x4
+#define FLAG_SNATCH_AFFECTED        0x8
+#define FLAG_MIRROR_MOVE_AFFECTED   0x10
+#define FLAG_KINGSROCK_AFFECTED     0x20
+
+// Growth rates
+#define GROWTH_MEDIUM_FAST  0
+#define GROWTH_ERRATIC      1
+#define GROWTH_FLUCTUATING  2
+#define GROWTH_MEDIUM_SLOW  3
+#define GROWTH_FAST         4
+#define GROWTH_SLOW         5
+
+// Body colors for pokedex search
+#define BODY_COLOR_RED      0
+#define BODY_COLOR_BLUE     1
+#define BODY_COLOR_YELLOW   2
+#define BODY_COLOR_GREEN    3
+#define BODY_COLOR_BLACK    4
+#define BODY_COLOR_BROWN    5
+#define BODY_COLOR_PURPLE   6
+#define BODY_COLOR_GRAY     7
+#define BODY_COLOR_WHITE    8
+#define BODY_COLOR_PINK     9
+
+#define F_SUMMARY_SCREEN_FLIP_SPRITE 0x80
+
+// Evolution type flags
+#define EVO_FRIENDSHIP       0x0001 // Pokémon levels up with friendship ≥ 220
+#define EVO_FRIENDSHIP_DAY   0x0002 // Pokémon levels up during the day with friendship ≥ 220
+#define EVO_FRIENDSHIP_NIGHT 0x0003 // Pokémon levels up at night with friendship ≥ 220
+#define EVO_LEVEL            0x0004 // Pokémon reaches the specified level
+#define EVO_TRADE            0x0005 // Pokémon is traded
+#define EVO_TRADE_ITEM       0x0006 // Pokémon is traded while it's holding the specified item
+#define EVO_ITEM             0x0007 // specified item is used on Pokémon
+#define EVO_LEVEL_ATK_GT_DEF 0x0008 // Pokémon reaches the specified level with attack > defense
+#define EVO_LEVEL_ATK_EQ_DEF 0x0009 // Pokémon reaches the specified level with attack = defense
+#define EVO_LEVEL_ATK_LT_DEF 0x000a // Pokémon reaches the specified level with attack < defense
+#define EVO_LEVEL_SILCOON    0x000b // Pokémon reaches the specified level with a Silcoon personality value
+#define EVO_LEVEL_CASCOON    0x000c // Pokémon reaches the specified level with a Cascoon personality value
+#define EVO_LEVEL_NINJASK    0x000d // Pokémon reaches the specified level (special value for Ninjask)
+#define EVO_LEVEL_SHEDINJA   0x000e // Pokémon reaches the specified level (special value for Shedinja)
+#define EVO_BEAUTY           0x000f // Pokémon levels up with beauty ≥ specified value
+
+#define EVOS_PER_MON 5
 
 #endif // GUARD_CONSTANTS_POKEMON_H
