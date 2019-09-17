@@ -66,20 +66,20 @@
 
 EWRAM_DATA bool8 gBikeCyclingChallenge = FALSE;
 EWRAM_DATA u8 gBikeCollisions = 0;
-static EWRAM_DATA u32 gBikeCyclingTimer = 0;
-static EWRAM_DATA u8 gUnknown_0203AB5C = 0;
+static EWRAM_DATA u32 sBikeCyclingTimer = 0;
+static EWRAM_DATA u8 sUnknown_0203AB5C = 0;
 static EWRAM_DATA u8 sPetalburgGymSlidingDoorFrameCounter = 0;
-static EWRAM_DATA u8 gTutorMoveAndElevatorWindowId = 0;
-static EWRAM_DATA u16 gLilycoveDeptStore_NeverRead = 0;
-static EWRAM_DATA u16 gLilycoveDeptStore_DefaultFloorChoice = 0;
-static EWRAM_DATA struct ListMenuItem *gScrollableMultichoice_ListMenuItem = NULL;
-static EWRAM_DATA u16 gScrollableMultichoice_ScrollOffset = 0;
-static EWRAM_DATA u16 gFrontierExchangeCorner_NeverRead = 0;
-static EWRAM_DATA u8 gScrollableMultichoice_ItemSpriteId = 0;
-static EWRAM_DATA u8 gBattlePointsWindowId = 0;
-static EWRAM_DATA u8 gFrontierExchangeCorner_ItemIconWindowId = 0;
-static EWRAM_DATA u8 gUnknown_0203AB6F = 0;
-static EWRAM_DATA u32 gUnknown_0203AB70 = 0;
+static EWRAM_DATA u8 sTutorMoveAndElevatorWindowId = 0;
+static EWRAM_DATA u16 sLilycoveDeptStore_NeverRead = 0;
+static EWRAM_DATA u16 sLilycoveDeptStore_DefaultFloorChoice = 0;
+static EWRAM_DATA struct ListMenuItem *sScrollableMultichoice_ListMenuItem = NULL;
+static EWRAM_DATA u16 sScrollableMultichoice_ScrollOffset = 0;
+static EWRAM_DATA u16 sFrontierExchangeCorner_NeverRead = 0;
+static EWRAM_DATA u8 sScrollableMultichoice_ItemSpriteId = 0;
+static EWRAM_DATA u8 sBattlePointsWindowId = 0;
+static EWRAM_DATA u8 sFrontierExchangeCorner_ItemIconWindowId = 0;
+static EWRAM_DATA u8 sPCBoxToSendMon = 0;
+static EWRAM_DATA u32 sUnknown_0203AB70 = 0;
 
 struct ListMenuTemplate gScrollableMultichoice_ListMenuTemplate;
 
@@ -149,14 +149,14 @@ void ResetCyclingRoadChallengeData(void)
 {
     gBikeCyclingChallenge = FALSE;
     gBikeCollisions = 0;
-    gBikeCyclingTimer = 0;
+    sBikeCyclingTimer = 0;
 }
 
 void Special_BeginCyclingRoadChallenge(void)
 {
     gBikeCyclingChallenge = TRUE;
     gBikeCollisions = 0;
-    gBikeCyclingTimer = gMain.vblankCounter1;
+    sBikeCyclingTimer = gMain.vblankCounter1;
 }
 
 u16 GetPlayerAvatarBike(void)
@@ -242,7 +242,7 @@ static void DetermineCyclingRoadResults(u32 numFrames, u8 numBikeCollisions)
 }
 
 void FinishCyclingRoadChallenge(void) {
-    const u32 numFrames = gMain.vblankCounter1 - gBikeCyclingTimer;
+    const u32 numFrames = gMain.vblankCounter1 - sBikeCyclingTimer;
 
     DetermineCyclingRoadResults(numFrames, gBikeCollisions);
     RecordCyclingRoadResults(numFrames, gBikeCollisions);
@@ -587,8 +587,8 @@ void SpawnLinkPartnerEventObject(void)
                         linkSpriteId = EVENT_OBJ_GFX_RIVAL_MAY_NORMAL;
                     break;
             }
-            SpawnSpecialEventObjectParameterized(linkSpriteId, movementTypes[j], 0xf0 - i, coordOffsets[j][0] + x + 7, coordOffsets[j][1] + y + 7, 0);
-            LoadLinkPartnerEventObjectSpritePalette(linkSpriteId, 0xf0 - i, i);
+            SpawnSpecialEventObjectParameterized(linkSpriteId, movementTypes[j], 240 - i, coordOffsets[j][0] + x + 7, coordOffsets[j][1] + y + 7, 0);
+            LoadLinkPartnerEventObjectSpritePalette(linkSpriteId, 240 - i, i);
             j++;
             if (j == MAX_LINK_PLAYERS)
             {
@@ -825,7 +825,7 @@ static const u16 sPetalburgGymSlidingDoorMetatiles[] = {
 
 void PetalburgGymSpecial1(void)
 {
-    gUnknown_0203AB5C = 0;
+    sUnknown_0203AB5C = 0;
     sPetalburgGymSlidingDoorFrameCounter = 0;
     PlaySE(SE_KI_GASYAN);
     CreateTask(Task_PetalburgGym, 8);
@@ -833,10 +833,10 @@ void PetalburgGymSpecial1(void)
 
 static void Task_PetalburgGym(u8 taskId)
 {
-    if (gUnknown_085B2B78[sPetalburgGymSlidingDoorFrameCounter] == gUnknown_0203AB5C)
+    if (gUnknown_085B2B78[sPetalburgGymSlidingDoorFrameCounter] == sUnknown_0203AB5C)
     {
         PetalburgGymFunc(gSpecialVar_0x8004, sPetalburgGymSlidingDoorMetatiles[sPetalburgGymSlidingDoorFrameCounter]);
-        gUnknown_0203AB5C = 0;
+        sUnknown_0203AB5C = 0;
         if ((++sPetalburgGymSlidingDoorFrameCounter) == ARRAY_COUNT(sPetalburgGymSlidingDoorMetatiles))
         {
             DestroyTask(taskId);
@@ -845,7 +845,7 @@ static void Task_PetalburgGym(u8 taskId)
     }
     else
     {
-        gUnknown_0203AB5C++;
+        sUnknown_0203AB5C++;
     }
 }
 
@@ -1088,10 +1088,10 @@ static void PCTurnOnEffect_0(struct Task *task)
     task->data[3]++;
 }
 
-static void PCTurnOnEffect_1(s16 pcOff, s8 dx, s8 dy)
+static void PCTurnOnEffect_1(s16 isPcTurnedOn, s8 dx, s8 dy)
 {
     u16 tileId = 0;
-    if (pcOff != 0)
+    if (isPcTurnedOn)
     {
         if (gSpecialVar_0x8004 == PC_LOCATION_OTHER)
         {
@@ -1337,11 +1337,11 @@ void BufferEReaderTrainerName(void)
 
 u16 GetSlotMachineId(void)
 {
-    static const u8 sSlotMachineRandomSeed[] = {12, 2, 4, 5, 1, 8, 7, 11, 3, 10, 9, 6};
+    static const u8 sSlotMachineRandomSeeds[] = {12, 2, 4, 5, 1, 8, 7, 11, 3, 10, 9, 6};
     static const u8 sSlotMachineIds[] = {0, 1, 1, 2, 2, 2, 3, 3, 3, 4, 4, 5};
     static const u8 sSlotMachineServiceDayIds[] = {3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 5, 5};
 
-    u32 rnd = gSaveBlock1Ptr->easyChatPairs[0].unk0_0 + gSaveBlock1Ptr->easyChatPairs[0].unk2 + sSlotMachineRandomSeed[gSpecialVar_0x8004];
+    u32 rnd = gSaveBlock1Ptr->easyChatPairs[0].unk0_0 + gSaveBlock1Ptr->easyChatPairs[0].unk2 + sSlotMachineRandomSeeds[gSpecialVar_0x8004];
     if (GetPriceReduction(POKENEWS_GAME_CORNER))
     {
         return sSlotMachineServiceDayIds[rnd % SLOT_MACHINE_COUNT];
@@ -1444,7 +1444,7 @@ u8 TryUpdateRusturfTunnelState(void)
     return FALSE;
 }
 
-void SetShoalItemFlag(u16 v0)
+void SetShoalItemFlag(u16 unused)
 {
     FlagSet(FLAG_SYS_SHOAL_ITEM);
 }
@@ -1805,37 +1805,37 @@ void SetDeptStoreFloor(void)
 
 u16 GetDeptStoreDefaultFloorChoice(void)
 {
-    gLilycoveDeptStore_NeverRead = 0;
-    gLilycoveDeptStore_DefaultFloorChoice = 0;
+    sLilycoveDeptStore_NeverRead = 0;
+    sLilycoveDeptStore_DefaultFloorChoice = 0;
 
     if (gSaveBlock1Ptr->dynamicWarp.mapGroup == MAP_GROUP(LILYCOVE_CITY_DEPARTMENT_STORE_1F))
     {
         switch (gSaveBlock1Ptr->dynamicWarp.mapNum)
         {
             case MAP_NUM(LILYCOVE_CITY_DEPARTMENT_STORE_5F):
-                gLilycoveDeptStore_NeverRead = 0;
-                gLilycoveDeptStore_DefaultFloorChoice = 0;
+                sLilycoveDeptStore_NeverRead = 0;
+                sLilycoveDeptStore_DefaultFloorChoice = 0;
                 break;
             case MAP_NUM(LILYCOVE_CITY_DEPARTMENT_STORE_4F):
-                gLilycoveDeptStore_NeverRead = 0;
-                gLilycoveDeptStore_DefaultFloorChoice = 1;
+                sLilycoveDeptStore_NeverRead = 0;
+                sLilycoveDeptStore_DefaultFloorChoice = 1;
                 break;
             case MAP_NUM(LILYCOVE_CITY_DEPARTMENT_STORE_3F):
-                gLilycoveDeptStore_NeverRead = 0;
-                gLilycoveDeptStore_DefaultFloorChoice = 2;
+                sLilycoveDeptStore_NeverRead = 0;
+                sLilycoveDeptStore_DefaultFloorChoice = 2;
                 break;
             case MAP_NUM(LILYCOVE_CITY_DEPARTMENT_STORE_2F):
-                gLilycoveDeptStore_NeverRead = 0;
-                gLilycoveDeptStore_DefaultFloorChoice = 3;
+                sLilycoveDeptStore_NeverRead = 0;
+                sLilycoveDeptStore_DefaultFloorChoice = 3;
                 break;
             case MAP_NUM(LILYCOVE_CITY_DEPARTMENT_STORE_1F):
-                gLilycoveDeptStore_NeverRead = 0;
-                gLilycoveDeptStore_DefaultFloorChoice = 4;
+                sLilycoveDeptStore_NeverRead = 0;
+                sLilycoveDeptStore_DefaultFloorChoice = 4;
                 break;
         }
     }
 
-    return gLilycoveDeptStore_DefaultFloorChoice;
+    return sLilycoveDeptStore_DefaultFloorChoice;
 }
 
 void MoveElevator(void)
@@ -1897,23 +1897,23 @@ void ShowDeptStoreElevatorFloorSelect(void)
 {
     int xPos;
 
-    gTutorMoveAndElevatorWindowId = AddWindow(&gElevatorFloor_WindowTemplate);
-    SetStandardWindowBorderStyle(gTutorMoveAndElevatorWindowId, 0);
+    sTutorMoveAndElevatorWindowId = AddWindow(&gElevatorFloor_WindowTemplate);
+    SetStandardWindowBorderStyle(sTutorMoveAndElevatorWindowId, 0);
 
     xPos = GetStringCenterAlignXOffset(1, gText_ElevatorNowOn, 64);
-    AddTextPrinterParameterized(gTutorMoveAndElevatorWindowId, 1, gText_ElevatorNowOn, xPos, 1, TEXT_SPEED_FF, NULL);
+    AddTextPrinterParameterized(sTutorMoveAndElevatorWindowId, 1, gText_ElevatorNowOn, xPos, 1, TEXT_SPEED_FF, NULL);
 
     xPos = GetStringCenterAlignXOffset(1, gDeptStoreFloorNames[gSpecialVar_0x8005], 64);
-    AddTextPrinterParameterized(gTutorMoveAndElevatorWindowId, 1, gDeptStoreFloorNames[gSpecialVar_0x8005], xPos, 17, TEXT_SPEED_FF, NULL);
+    AddTextPrinterParameterized(sTutorMoveAndElevatorWindowId, 1, gDeptStoreFloorNames[gSpecialVar_0x8005], xPos, 17, TEXT_SPEED_FF, NULL);
 
-    PutWindowTilemap(gTutorMoveAndElevatorWindowId);
-    CopyWindowToVram(gTutorMoveAndElevatorWindowId, 3);
+    PutWindowTilemap(sTutorMoveAndElevatorWindowId);
+    CopyWindowToVram(sTutorMoveAndElevatorWindowId, 3);
 }
 
 void CloseDeptStoreElevatorWindow(void)
 {
-    ClearStdWindowAndFrameToTransparent(gTutorMoveAndElevatorWindowId, TRUE);
-    RemoveWindow(gTutorMoveAndElevatorWindowId);
+    ClearStdWindowAndFrameToTransparent(sTutorMoveAndElevatorWindowId, TRUE);
+    RemoveWindow(sTutorMoveAndElevatorWindowId);
 }
 
 static void MoveElevatorWindowLights(u16 floorDelta, bool8 descending)
@@ -2571,19 +2571,19 @@ static void Task_ShowScrollableMultichoice(u8 taskId)
     struct Task *task = &gTasks[taskId];
 
     ScriptContext2_Enable();
-    gScrollableMultichoice_ScrollOffset = 0;
-    gScrollableMultichoice_ItemSpriteId = MAX_SPRITES;
+    sScrollableMultichoice_ScrollOffset = 0;
+    sScrollableMultichoice_ItemSpriteId = MAX_SPRITES;
     FillFrontierExchangeCornerWindowAndItemIcon(task->data[11], 0);
     ShowBattleFrontierTutorWindow(task->data[11], 0);
-    gScrollableMultichoice_ListMenuItem = AllocZeroed(task->data[1] * 8);
-    gFrontierExchangeCorner_NeverRead = 0;
+    sScrollableMultichoice_ListMenuItem = AllocZeroed(task->data[1] * 8);
+    sFrontierExchangeCorner_NeverRead = 0;
     InitScrollableMultichoice();
 
     for (unk1 = 0, i = 0; i < task->data[1]; i++)
     {
         const u8 *text = sScrollableMenuOptions[gSpecialVar_0x8004][i];
-        gScrollableMultichoice_ListMenuItem[i].name = text;
-        gScrollableMultichoice_ListMenuItem[i].id = i;
+        sScrollableMultichoice_ListMenuItem[i].name = text;
+        sScrollableMultichoice_ListMenuItem[i].id = i;
         unk1 = display_text_and_get_width(text, unk1);
     }
 
@@ -2619,7 +2619,7 @@ static void Task_ShowScrollableMultichoice(u8 taskId)
 
 static void InitScrollableMultichoice(void)
 {
-    gScrollableMultichoice_ListMenuTemplate.items = gScrollableMultichoice_ListMenuItem;
+    gScrollableMultichoice_ListMenuTemplate.items = sScrollableMultichoice_ListMenuItem;
     gScrollableMultichoice_ListMenuTemplate.moveCursorFunc = ScrollableMultichoice_MoveCursor;
     gScrollableMultichoice_ListMenuTemplate.itemPrintFunc = NULL;
     gScrollableMultichoice_ListMenuTemplate.totalItems = 1;
@@ -2649,12 +2649,12 @@ static void ScrollableMultichoice_MoveCursor(s32 itemIndex, bool8 onInit, struct
         u16 selection;
         struct Task *task = &gTasks[taskId];
         ListMenuGetScrollAndRow(task->data[14], &selection, NULL);
-        gScrollableMultichoice_ScrollOffset = selection;
+        sScrollableMultichoice_ScrollOffset = selection;
         ListMenuGetCurrentItemArrayId(task->data[14], &selection);
-        HideFrontierExchangeCornerItemIcon(task->data[11], gFrontierExchangeCorner_NeverRead);
+        HideFrontierExchangeCornerItemIcon(task->data[11], sFrontierExchangeCorner_NeverRead);
         FillFrontierExchangeCornerWindowAndItemIcon(task->data[11], selection);
         ShowBattleFrontierTutorMoveDescription(task->data[11], selection);
-        gFrontierExchangeCorner_NeverRead = selection;
+        sFrontierExchangeCorner_NeverRead = selection;
     }
 }
 
@@ -2701,7 +2701,7 @@ static void CloseScrollableMultichoice(u8 taskId)
     HideFrontierExchangeCornerItemIcon(task->data[11], selection);
     ScrollableMultichoice_RemoveScrollArrows(taskId);
     DestroyListMenuTask(task->data[14], NULL, NULL);
-    Free(gScrollableMultichoice_ListMenuItem);
+    Free(sScrollableMultichoice_ListMenuItem);
     ClearStdWindowAndFrameToTransparent(task->data[13], 1);
     FillWindowPixelBuffer(task->data[13], PIXEL_FILL(0));
     CopyWindowToVram(task->data[13], 2);
@@ -2771,7 +2771,7 @@ static void ScrollableMultichoice_UpdateScrollArrows(u8 taskId)
         template.secondY = task->data[5] * 8 + 10;
         template.fullyUpThreshold = 0;
         template.fullyDownThreshold = task->data[1] - task->data[0];
-        task->data[12] = AddScrollIndicatorArrowPair(&template, &gScrollableMultichoice_ScrollOffset);
+        task->data[12] = AddScrollIndicatorArrowPair(&template, &sScrollableMultichoice_ScrollOffset);
     }
 }
 
@@ -2825,31 +2825,31 @@ void SetBattleTowerLinkPlayerGfx(void)
 void ShowNatureGirlMessage(void)
 {
     static const u8 *const sNatureGirlMessages[] = {
-        [NATURE_HARDY]   = BattleFrontier_Lounge5_Text_26468D,
-        [NATURE_LONELY]  = BattleFrontier_Lounge5_Text_2646E5,
-        [NATURE_BRAVE]   = BattleFrontier_Lounge5_Text_264741,
-        [NATURE_ADAMANT] = BattleFrontier_Lounge5_Text_2647A4,
-        [NATURE_NAUGHTY] = BattleFrontier_Lounge5_Text_2647FC,
-        [NATURE_BOLD]    = BattleFrontier_Lounge5_Text_264858,
-        [NATURE_DOCILE]  = BattleFrontier_Lounge5_Text_2648BE,
-        [NATURE_RELAXED] = BattleFrontier_Lounge5_Text_264916,
-        [NATURE_IMPISH]  = BattleFrontier_Lounge5_Text_264972,
-        [NATURE_LAX]     = BattleFrontier_Lounge5_Text_2649D5,
-        [NATURE_TIMID]   = BattleFrontier_Lounge5_Text_264A3F,
-        [NATURE_HASTY]   = BattleFrontier_Lounge5_Text_264A9B,
-        [NATURE_SERIOUS] = BattleFrontier_Lounge5_Text_264AF3,
-        [NATURE_JOLLY]   = BattleFrontier_Lounge5_Text_264B5D,
-        [NATURE_NAIVE]   = BattleFrontier_Lounge5_Text_2648BE,
-        [NATURE_MODEST]  = BattleFrontier_Lounge5_Text_264BC3,
-        [NATURE_MILD]    = BattleFrontier_Lounge5_Text_264C36,
-        [NATURE_QUIET]   = BattleFrontier_Lounge5_Text_2648BE,
-        [NATURE_BASHFUL] = BattleFrontier_Lounge5_Text_264C95,
-        [NATURE_RASH]    = BattleFrontier_Lounge5_Text_264D01,
-        [NATURE_CALM]    = BattleFrontier_Lounge5_Text_264D6B,
-        [NATURE_GENTLE]  = BattleFrontier_Lounge5_Text_264DD7,
-        [NATURE_SASSY]   = BattleFrontier_Lounge5_Text_264E33,
-        [NATURE_CAREFUL] = BattleFrontier_Lounge5_Text_264E8F,
-        [NATURE_QUIRKY]  = BattleFrontier_Lounge5_Text_2648BE,
+        [NATURE_HARDY]   = BattleFrontier_Lounge5_Text_NatureGirlHardy,
+        [NATURE_LONELY]  = BattleFrontier_Lounge5_Text_NatureGirlLonely,
+        [NATURE_BRAVE]   = BattleFrontier_Lounge5_Text_NatureGirlBrave,
+        [NATURE_ADAMANT] = BattleFrontier_Lounge5_Text_NatureGirlAdamant,
+        [NATURE_NAUGHTY] = BattleFrontier_Lounge5_Text_NatureGirlNaughty,
+        [NATURE_BOLD]    = BattleFrontier_Lounge5_Text_NatureGirlBold,
+        [NATURE_DOCILE]  = BattleFrontier_Lounge5_Text_NatureGirlDocileNaiveQuietQuirky,
+        [NATURE_RELAXED] = BattleFrontier_Lounge5_Text_NatureGirlRelaxed,
+        [NATURE_IMPISH]  = BattleFrontier_Lounge5_Text_NatureGirlImpish,
+        [NATURE_LAX]     = BattleFrontier_Lounge5_Text_NatureGirlLax,
+        [NATURE_TIMID]   = BattleFrontier_Lounge5_Text_NatureGirlTimid,
+        [NATURE_HASTY]   = BattleFrontier_Lounge5_Text_NatureGirlHasty,
+        [NATURE_SERIOUS] = BattleFrontier_Lounge5_Text_NatureGirlSerious,
+        [NATURE_JOLLY]   = BattleFrontier_Lounge5_Text_NatureGirlJolly,
+        [NATURE_NAIVE]   = BattleFrontier_Lounge5_Text_NatureGirlDocileNaiveQuietQuirky,
+        [NATURE_MODEST]  = BattleFrontier_Lounge5_Text_NatureGirlModest,
+        [NATURE_MILD]    = BattleFrontier_Lounge5_Text_NatureGirlMild,
+        [NATURE_QUIET]   = BattleFrontier_Lounge5_Text_NatureGirlDocileNaiveQuietQuirky,
+        [NATURE_BASHFUL] = BattleFrontier_Lounge5_Text_NatureGirlBashful,
+        [NATURE_RASH]    = BattleFrontier_Lounge5_Text_NatureGirlRash,
+        [NATURE_CALM]    = BattleFrontier_Lounge5_Text_NatureGirlCalm,
+        [NATURE_GENTLE]  = BattleFrontier_Lounge5_Text_NatureGirlGentle,
+        [NATURE_SASSY]   = BattleFrontier_Lounge5_Text_NatureGirlSassy,
+        [NATURE_CAREFUL] = BattleFrontier_Lounge5_Text_NatureGirlCareful,
+        [NATURE_QUIRKY]  = BattleFrontier_Lounge5_Text_NatureGirlDocileNaiveQuietQuirky,
     };
 
     u8 nature;
@@ -2940,7 +2940,7 @@ void FrontierGamblerSetWonOrLost(bool8 won)
     {
         if (sFrontierChallenges[challenge] ==  FRONTIER_CHALLENGE(frontierFacilityId, battleMode))
         {
-            if (won != FALSE)
+            if (won)
             {
                 VarSet(VAR_FRONTIER_GAMBLER_STATE, FRONTIER_GAMBLER_WON);
             }
@@ -2958,7 +2958,7 @@ void UpdateBattlePointsWindow(void)
     u32 x;
     StringCopy(ConvertIntToDecimalStringN(string, gSaveBlock2Ptr->frontier.battlePoints, STR_CONV_MODE_RIGHT_ALIGN, 4), gText_BP);
     x = GetStringRightAlignXOffset(1, string, 48);
-    AddTextPrinterParameterized(gBattlePointsWindowId, 1, string, x, 1, 0, NULL);
+    AddTextPrinterParameterized(sBattlePointsWindowId, 1, string, x, 1, 0, NULL);
 }
 
 void ShowBattlePointsWindow(void)
@@ -2973,16 +2973,16 @@ void ShowBattlePointsWindow(void)
         .baseBlock = 8,
     };
 
-    gBattlePointsWindowId = AddWindow(&sBattlePoints_WindowTemplate);
-    SetStandardWindowBorderStyle(gBattlePointsWindowId, 0);
+    sBattlePointsWindowId = AddWindow(&sBattlePoints_WindowTemplate);
+    SetStandardWindowBorderStyle(sBattlePointsWindowId, 0);
     UpdateBattlePointsWindow();
-    CopyWindowToVram(gBattlePointsWindowId, 2);
+    CopyWindowToVram(sBattlePointsWindowId, 2);
 }
 
 void CloseBattlePointsWindow(void)
 {
-    ClearStdWindowAndFrameToTransparent(gBattlePointsWindowId, TRUE);
-    RemoveWindow(gBattlePointsWindowId);
+    ClearStdWindowAndFrameToTransparent(sBattlePointsWindowId, TRUE);
+    RemoveWindow(sBattlePointsWindowId);
 }
 
 void TakeFrontierBattlePoints(void)
@@ -3026,15 +3026,15 @@ void ShowFrontierExchangeCornerItemIconWindow(void)
         .baseBlock = 20,
     };
 
-    gFrontierExchangeCorner_ItemIconWindowId = AddWindow(&sFrontierExchangeCorner_ItemIconWindowTemplate);
-    SetStandardWindowBorderStyle(gFrontierExchangeCorner_ItemIconWindowId, 0);
-    CopyWindowToVram(gFrontierExchangeCorner_ItemIconWindowId, 2);
+    sFrontierExchangeCorner_ItemIconWindowId = AddWindow(&sFrontierExchangeCorner_ItemIconWindowTemplate);
+    SetStandardWindowBorderStyle(sFrontierExchangeCorner_ItemIconWindowId, 0);
+    CopyWindowToVram(sFrontierExchangeCorner_ItemIconWindowId, 2);
 }
 
 void CloseFrontierExchangeCornerItemIconWindow(void)
 {
-    ClearStdWindowAndFrameToTransparent(gFrontierExchangeCorner_ItemIconWindowId, TRUE);
-    RemoveWindow(gFrontierExchangeCorner_ItemIconWindowId);
+    ClearStdWindowAndFrameToTransparent(sFrontierExchangeCorner_ItemIconWindowId, TRUE);
+    RemoveWindow(sFrontierExchangeCorner_ItemIconWindowId);
 }
 
 static void FillFrontierExchangeCornerWindowAndItemIcon(u16 menu, u16 selection)
@@ -3056,7 +3056,7 @@ static void FillFrontierExchangeCornerWindowAndItemIcon(u16 menu, u16 selection)
                 {
                     FreeSpriteTilesByTag(5500);
                     FreeSpritePaletteByTag(5500);
-                    gScrollableMultichoice_ItemSpriteId = AddDecorationIconObject(sFrontierExchangeCorner_Decor1[selection], 33, 88, 0, 5500, 5500);
+                    sScrollableMultichoice_ItemSpriteId = AddDecorationIconObject(sFrontierExchangeCorner_Decor1[selection], 33, 88, 0, 5500, 5500);
                 }
                 break;
             case SCROLL_MULTI_BF_EXCHANGE_CORNER_DECOR_VENDOR_2:
@@ -3069,7 +3069,7 @@ static void FillFrontierExchangeCornerWindowAndItemIcon(u16 menu, u16 selection)
                 {
                     FreeSpriteTilesByTag(5500);
                     FreeSpritePaletteByTag(5500);
-                    gScrollableMultichoice_ItemSpriteId = AddDecorationIconObject(sFrontierExchangeCorner_Decor2[selection], 33, 88, 0, 5500, 5500);
+                    sScrollableMultichoice_ItemSpriteId = AddDecorationIconObject(sFrontierExchangeCorner_Decor2[selection], 33, 88, 0, 5500, 5500);
                 }
                 break;
             case SCROLL_MULTI_BF_EXCHANGE_CORNER_VITAMIN_VENDOR:
@@ -3088,19 +3088,19 @@ static void ShowFrontierExchangeCornerItemIcon(u16 item)
 {
     FreeSpriteTilesByTag(5500);
     FreeSpritePaletteByTag(5500);
-    gScrollableMultichoice_ItemSpriteId = AddItemIconSprite(5500, 5500, item);
+    sScrollableMultichoice_ItemSpriteId = AddItemIconSprite(5500, 5500, item);
 
-    if (gScrollableMultichoice_ItemSpriteId != MAX_SPRITES)
+    if (sScrollableMultichoice_ItemSpriteId != MAX_SPRITES)
     {
-        gSprites[gScrollableMultichoice_ItemSpriteId].oam.priority = 0;
-        gSprites[gScrollableMultichoice_ItemSpriteId].pos1.x = 36;
-        gSprites[gScrollableMultichoice_ItemSpriteId].pos1.y = 92;
+        gSprites[sScrollableMultichoice_ItemSpriteId].oam.priority = 0;
+        gSprites[sScrollableMultichoice_ItemSpriteId].pos1.x = 36;
+        gSprites[sScrollableMultichoice_ItemSpriteId].pos1.y = 92;
     }
 }
 
 static void HideFrontierExchangeCornerItemIcon(u16 menu, u16 unused)
 {
-    if (gScrollableMultichoice_ItemSpriteId != MAX_SPRITES)
+    if (sScrollableMultichoice_ItemSpriteId != MAX_SPRITES)
     {
         switch (menu)
         {
@@ -3108,10 +3108,10 @@ static void HideFrontierExchangeCornerItemIcon(u16 menu, u16 unused)
             case SCROLL_MULTI_BF_EXCHANGE_CORNER_DECOR_VENDOR_2:
             case SCROLL_MULTI_BF_EXCHANGE_CORNER_VITAMIN_VENDOR:
             case SCROLL_MULTI_BF_EXCHANGE_CORNER_HOLD_ITEM_VENDOR:
-                DestroySpriteAndFreeResources(&gSprites[gScrollableMultichoice_ItemSpriteId]);
+                DestroySpriteAndFreeResources(&gSprites[sScrollableMultichoice_ItemSpriteId]);
                 break;
         }
-        gScrollableMultichoice_ItemSpriteId = MAX_SPRITES;
+        sScrollableMultichoice_ItemSpriteId = MAX_SPRITES;
     }
 }
 
@@ -3172,8 +3172,8 @@ static void ShowBattleFrontierTutorWindow(u8 menu, u16 selection)
     {
         if (gSpecialVar_0x8006 == 0)
         {
-            gTutorMoveAndElevatorWindowId = AddWindow(&sBattleFrontierTutor_WindowTemplate);
-            SetStandardWindowBorderStyle(gTutorMoveAndElevatorWindowId, 0);
+            sTutorMoveAndElevatorWindowId = AddWindow(&sBattleFrontierTutor_WindowTemplate);
+            SetStandardWindowBorderStyle(sTutorMoveAndElevatorWindowId, 0);
         }
         ShowBattleFrontierTutorMoveDescription(menu, selection);
     }
@@ -3213,22 +3213,22 @@ static void ShowBattleFrontierTutorMoveDescription(u8 menu, u16 selection)
 
     if (menu == SCROLL_MULTI_BF_MOVE_TUTOR_1 || menu == SCROLL_MULTI_BF_MOVE_TUTOR_2)
     {
-        FillWindowPixelRect(gTutorMoveAndElevatorWindowId, PIXEL_FILL(1), 0, 0, 96, 48);
+        FillWindowPixelRect(sTutorMoveAndElevatorWindowId, PIXEL_FILL(1), 0, 0, 96, 48);
         if (menu == SCROLL_MULTI_BF_MOVE_TUTOR_2)
         {
-            AddTextPrinterParameterized(gTutorMoveAndElevatorWindowId, 1, sBattleFrontier_TutorMoveDescriptions2[selection], 0, 1, 0, NULL);
+            AddTextPrinterParameterized(sTutorMoveAndElevatorWindowId, 1, sBattleFrontier_TutorMoveDescriptions2[selection], 0, 1, 0, NULL);
         }
         else
         {
-            AddTextPrinterParameterized(gTutorMoveAndElevatorWindowId, 1, sBattleFrontier_TutorMoveDescriptions1[selection], 0, 1, 0, NULL);
+            AddTextPrinterParameterized(sTutorMoveAndElevatorWindowId, 1, sBattleFrontier_TutorMoveDescriptions1[selection], 0, 1, 0, NULL);
         }
     }
 }
 
 void CloseBattleFrontierTutorWindow(void)
 {
-    ClearStdWindowAndFrameToTransparent(gTutorMoveAndElevatorWindowId, TRUE);
-    RemoveWindow(gTutorMoveAndElevatorWindowId);
+    ClearStdWindowAndFrameToTransparent(sTutorMoveAndElevatorWindowId, TRUE);
+    RemoveWindow(sTutorMoveAndElevatorWindowId);
 }
 
 // Never called
@@ -3300,7 +3300,7 @@ void sub_813AF48(void)
     {
         struct Task *task = &gTasks[taskId];
         DestroyListMenuTask(task->data[14], NULL, NULL);
-        Free(gScrollableMultichoice_ListMenuItem);
+        Free(sScrollableMultichoice_ListMenuItem);
         ClearStdWindowAndFrameToTransparent(task->data[13], TRUE);
         FillWindowPixelBuffer(task->data[13], PIXEL_FILL(0));
         ClearWindowTilemap(task->data[13]);
@@ -3444,47 +3444,47 @@ void sub_813B1D0(void)
     BlendPalettes(0x04000000, 16, 0);
 }
 
-void set_unknown_box_id(u8 id)
+void SetPCBoxToSendMon(u8 boxId)
 {
-    gUnknown_0203AB6F = id;
+    sPCBoxToSendMon = boxId;
 }
 
-u16 get_unknown_box_id(void)
+u16 GetPCBoxToSendMon(void)
 {
-    return gUnknown_0203AB6F;
+    return sPCBoxToSendMon;
 }
 
-bool8 sub_813B21C(void)
+bool8 ShouldShowBoxWasFullMessage(void)
 {
-    if (FlagGet(FLAG_SYS_STORAGE_UNKNOWN_FLAG) == FALSE)
+    if (!FlagGet(FLAG_SHOWN_BOX_WAS_FULL_MESSAGE))
     {
-        if (StorageGetCurrentBox() != VarGet(VAR_STORAGE_UNKNOWN))
+        if (StorageGetCurrentBox() != VarGet(VAR_PC_BOX_TO_SEND_MON))
         {
-            FlagSet(FLAG_SYS_STORAGE_UNKNOWN_FLAG);
+            FlagSet(FLAG_SHOWN_BOX_WAS_FULL_MESSAGE);
             return TRUE;
         }
     }
     return FALSE;
 }
 
-bool8 sub_813B260(void)
+bool8 IsDestinationBoxFull(void)
 {
     int box;
     int i;
-    set_unknown_box_id(VarGet(VAR_STORAGE_UNKNOWN));
+    SetPCBoxToSendMon(VarGet(VAR_PC_BOX_TO_SEND_MON));
     box = StorageGetCurrentBox();
     do
     {
         for (i = 0; i < IN_BOX_COUNT; i++)
         {
-            if (GetBoxMonData(GetBoxedMonPtr(box, i), MON_DATA_SPECIES, 0) == 0)
+            if (GetBoxMonData(GetBoxedMonPtr(box, i), MON_DATA_SPECIES, 0) == SPECIES_NONE)
             {
-                if (get_unknown_box_id() != box)
+                if (GetPCBoxToSendMon() != box)
                 {
-                    FlagClear(FLAG_SYS_STORAGE_UNKNOWN_FLAG);
+                    FlagClear(FLAG_SHOWN_BOX_WAS_FULL_MESSAGE);
                 }
-                VarSet(VAR_STORAGE_UNKNOWN, box);
-                return sub_813B21C();
+                VarSet(VAR_PC_BOX_TO_SEND_MON, box);
+                return ShouldShowBoxWasFullMessage();
             }
         }
 
@@ -3701,7 +3701,7 @@ bool32 sub_813B514(void)
 
 void sub_813B534(void)
 {
-    gUnknown_0203AB70 = gBattleTypeFlags;
+    sUnknown_0203AB70 = gBattleTypeFlags;
     gBattleTypeFlags = 0;
     if (!gReceivedRemoteLinkPlayers)
     {
@@ -3835,7 +3835,7 @@ static void sub_813B57C(u8 taskId)
             {
                 sub_800AC34();
             }
-            gBattleTypeFlags = gUnknown_0203AB70;
+            gBattleTypeFlags = sUnknown_0203AB70;
             EnableBothScriptContexts();
             DestroyTask(taskId);
             break;

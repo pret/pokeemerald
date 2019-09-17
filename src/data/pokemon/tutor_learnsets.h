@@ -1,4 +1,4 @@
-const u16 gTutorMoves[] =
+const u16 gTutorMoves[TUTOR_MOVE_COUNT] =
 {
     [TUTOR_MOVE_MEGA_PUNCH] = MOVE_MEGA_PUNCH,
     [TUTOR_MOVE_SWORDS_DANCE] = MOVE_SWORDS_DANCE,
