@@ -10,12 +10,14 @@
 #include "constants/field_specials.h"
 #include "constants/flags.h"
 #include "constants/decorations.h"
+#include "constants/item.h"
 #include "constants/items.h"
 #include "constants/heal_locations.h"
 #include "constants/layouts.h"
 #include "constants/map_scripts.h"
 #include "constants/maps.h"
 #include "constants/moves.h"
+#include "constants/script_menu.h"
 #include "constants/songs.h"
 #include "constants/species.h"
 #include "constants/trainers.h"
@@ -1394,50 +1396,50 @@ Std_ObtainItem:: @ 8271AD3
 EventScript_271AE3:: @ 8271AE3
 	bufferitemnameplural 1, VAR_0x8000, VAR_0x8001
 	checkitemtype VAR_0x8000
-	call EventScript_271B08
+	call EventScript_BufferStdString
 	compare VAR_0x8007, 1
 	call_if_eq EventScript_271B95
 	compare VAR_0x8007, 0
 	call_if_eq EventScript_271BA9
 	return
 
-EventScript_271B08:: @ 8271B08
+EventScript_BufferStdString:: @ 8271B08
 	switch VAR_RESULT
-	case 1, EventScript_271B45
-	case 5, EventScript_271B55
-	case 2, EventScript_271B65
-	case 3, EventScript_271B75
-	case 4, EventScript_271B85
+	case POCKET_ITEMS, EventScript_StdStringItem
+	case POCKET_KEY_ITEMS, EventScript_StdStringKeyItems
+	case POCKET_POKE_BALLS, EventScript_StdStringPokeballs
+	case POCKET_TM_HM, EventScript_StdStringTMHMS
+	case POCKET_BERRIES, EventScript_StdStringBerries
 	end
 
-EventScript_271B45:: @ 8271B45
-	bufferstdstring 2, 14
+EventScript_StdStringItem:: @ 8271B45
+	bufferstdstring 2, STDSTRING_ITEMS
 	compare VAR_0x8007, 1
-	call_if_eq EventScript_271BAF
+	call_if_eq EventScript_PlayFanfare4
 	return
 
-EventScript_271B55:: @ 8271B55
-	bufferstdstring 2, 15
+EventScript_StdStringKeyItems:: @ 8271B55
+	bufferstdstring 2, STDSTRING_KEYITEMS
 	compare VAR_0x8007, 1
-	call_if_eq EventScript_271BAF
+	call_if_eq EventScript_PlayFanfare4
 	return
 
-EventScript_271B65:: @ 8271B65
-	bufferstdstring 2, 16
+EventScript_StdStringPokeballs:: @ 8271B65
+	bufferstdstring 2, STDSTRING_POKEBALLS
 	compare VAR_0x8007, 1
-	call_if_eq EventScript_271BAF
+	call_if_eq EventScript_PlayFanfare4
 	return
 
-EventScript_271B75:: @ 8271B75
-	bufferstdstring 2, 17
+EventScript_StdStringTMHMS:: @ 8271B75
+	bufferstdstring 2, STDSTRING_TMHMS
 	compare VAR_0x8007, 1
 	call_if_eq EventScript_271BB3
 	return
 
-EventScript_271B85:: @ 8271B85
-	bufferstdstring 2, 18
+EventScript_StdStringBerries:: @ 8271B85
+	bufferstdstring 2, STDSTRING_BERRIES
 	compare VAR_0x8007, 1
-	call_if_eq EventScript_271BAF
+	call_if_eq EventScript_PlayFanfare4
 	return
 
 EventScript_271B95:: @ 8271B95
@@ -1451,7 +1453,7 @@ EventScript_271BA9:: @ 8271BA9
 	setvar VAR_RESULT, 0
 	return
 
-EventScript_271BAF:: @ 8271BAF
+EventScript_PlayFanfare4:: @ 8271BAF
 	playfanfare MUS_FANFA4
 	return
 
@@ -1495,7 +1497,7 @@ Std_FindItem:: @ 8271BFD
 	copyvar VAR_0x8007, VAR_RESULT
 	bufferitemnameplural 1, VAR_0x8000, VAR_0x8001
 	checkitemtype VAR_0x8000
-	call EventScript_271B08
+	call EventScript_BufferStdString
 	compare VAR_0x8007, 1
 	call_if_eq EventScript_PickItemUp
 	compare VAR_0x8007, 0
@@ -1548,7 +1550,7 @@ EventScript_HiddenItemScript:: @ 8271CB7
 	copyvar VAR_0x8007, VAR_RESULT
 	bufferitemnameplural 1, VAR_0x8005, 1
 	checkitemtype VAR_0x8005
-	call EventScript_271B08
+	call EventScript_BufferStdString
 	compare VAR_0x8007, 1
 	goto_if_eq EventScript_271CE8
 	compare VAR_0x8007, 0

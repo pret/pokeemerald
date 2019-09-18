@@ -149,7 +149,7 @@ LilycoveCity_DepartmentStoreRooftop_EventScript_22032F:: @ 822032F
 	msgbox LilycoveCity_DepartmentStoreRooftop_Text_2205A1, MSGBOX_DEFAULT
 	giveitem VAR_TEMP_0, 1
 	bufferitemname 1, VAR_TEMP_0
-	bufferstdstring 2, 14
+	bufferstdstring 2, STDSTRING_ITEMS
 	msgbox gText_PutItemInPocket, MSGBOX_DEFAULT
 	random 64
 	compare VAR_RESULT, 0
@@ -161,7 +161,7 @@ LilycoveCity_DepartmentStoreRooftop_EventScript_22032F:: @ 822032F
 	msgbox LilycoveCity_DepartmentStoreRooftop_Text_2205C2, MSGBOX_DEFAULT
 	giveitem VAR_TEMP_0, 1
 	bufferitemname 1, VAR_TEMP_0
-	bufferstdstring 2, 14
+	bufferstdstring 2, STDSTRING_ITEMS
 	msgbox gText_PutItemInPocket, MSGBOX_DEFAULT
 	random 64
 	compare VAR_RESULT, 0
@@ -173,7 +173,7 @@ LilycoveCity_DepartmentStoreRooftop_EventScript_22032F:: @ 822032F
 	msgbox LilycoveCity_DepartmentStoreRooftop_Text_2205C2, MSGBOX_DEFAULT
 	giveitem VAR_TEMP_0, 1
 	bufferitemname 1, VAR_TEMP_0
-	bufferstdstring 2, 14
+	bufferstdstring 2, STDSTRING_ITEMS
 	msgbox gText_PutItemInPocket, MSGBOX_DEFAULT
 	goto LilycoveCity_DepartmentStoreRooftop_EventScript_220436
 	end

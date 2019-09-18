@@ -216,19 +216,19 @@ LinkContestRoom1_EventScript_279FF2:: @ 8279FF2
 	return
 
 LinkContestRoom1_EventScript_27A024:: @ 827A024
-	setvar VAR_0x8009, 5
+	setvar VAR_0x8009, STDSTRING_NORMAL
 	return
 
 LinkContestRoom1_EventScript_27A02A:: @ 827A02A
-	setvar VAR_0x8009, 6
+	setvar VAR_0x8009, STDSTRING_SUPER
 	return
 
 LinkContestRoom1_EventScript_27A030:: @ 827A030
-	setvar VAR_0x8009, 7
+	setvar VAR_0x8009, STDSTRING_HYPER
 	return
 
 LinkContestRoom1_EventScript_27A036:: @ 827A036
-	setvar VAR_0x8009, 8
+	setvar VAR_0x8009, STDSTRING_MASTER
 	return
 
 LinkContestRoom1_EventScript_27A03C:: @ 827A03C
@@ -241,23 +241,23 @@ LinkContestRoom1_EventScript_27A03C:: @ 827A03C
 	return
 
 LinkContestRoom1_EventScript_27A079:: @ 827A079
-	setvar VAR_0x8008, 0
+	setvar VAR_0x8008, CONTEST_CATEGORY_COOL
 	return
 
 LinkContestRoom1_EventScript_27A07F:: @ 827A07F
-	setvar VAR_0x8008, 1
+	setvar VAR_0x8008, CONTEST_CATEGORY_BEAUTY
 	return
 
 LinkContestRoom1_EventScript_27A085:: @ 827A085
-	setvar VAR_0x8008, 2
+	setvar VAR_0x8008, CONTEST_CATEGORY_CUTE
 	return
 
 LinkContestRoom1_EventScript_27A08B:: @ 827A08B
-	setvar VAR_0x8008, 3
+	setvar VAR_0x8008, CONTEST_CATEGORY_SMART
 	return
 
 LinkContestRoom1_EventScript_27A091:: @ 827A091
-	setvar VAR_0x8008, 4
+	setvar VAR_0x8008, CONTEST_CATEGORY_TOUGH
 	return
 
 LinkContestRoom1_EventScript_27A097:: @ 827A097

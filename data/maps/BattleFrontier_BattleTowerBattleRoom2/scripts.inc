@@ -179,7 +179,7 @@ BattleFrontier_BattleTowerBattleRoom2_EventScript_249143:: @ 8249143
 	case 1, BattleFrontier_BattleTowerBattleRoom2_EventScript_2491E7
 	case 2, BattleFrontier_BattleTowerBattleRoom2_EventScript_249223
 	case 3, BattleFrontier_BattleTowerBattleRoom2_EventScript_249251
-	case 127, BattleFrontier_BattleTowerBattleRoom2_EventScript_249143
+	case MULTICHOICE_B, BattleFrontier_BattleTowerBattleRoom2_EventScript_249143
 
 BattleFrontier_BattleTowerBattleRoom2_EventScript_2491B1:: @ 82491B1
 	multichoice 20, 6, 104, 1
@@ -187,7 +187,7 @@ BattleFrontier_BattleTowerBattleRoom2_EventScript_2491B1:: @ 82491B1
 	case 0, BattleFrontier_BattleTowerBattleRoom2_EventScript_249283
 	case 1, BattleFrontier_BattleTowerBattleRoom2_EventScript_249223
 	case 2, BattleFrontier_BattleTowerBattleRoom2_EventScript_249251
-	case 127, BattleFrontier_BattleTowerBattleRoom2_EventScript_249143
+	case MULTICHOICE_B, BattleFrontier_BattleTowerBattleRoom2_EventScript_249143
 
 BattleFrontier_BattleTowerBattleRoom2_EventScript_2491E7:: @ 82491E7
 	message BattleFrontier_BattleTowerBattleRoom2_Text_2423A3
@@ -196,7 +196,7 @@ BattleFrontier_BattleTowerBattleRoom2_EventScript_2491E7:: @ 82491E7
 	switch VAR_RESULT
 	case 1, BattleFrontier_BattleTowerBattleRoom2_EventScript_249143
 	case 0, BattleFrontier_BattleTowerBattleRoom2_EventScript_249219
-	case 127, BattleFrontier_BattleTowerBattleRoom2_EventScript_249143
+	case MULTICHOICE_B, BattleFrontier_BattleTowerBattleRoom2_EventScript_249143
 
 BattleFrontier_BattleTowerBattleRoom2_EventScript_249219:: @ 8249219
 	call BattleFrontier_BattleTowerBattleRoom2_EventScript_23E8B4
@@ -207,7 +207,7 @@ BattleFrontier_BattleTowerBattleRoom2_EventScript_249223:: @ 8249223
 	switch VAR_RESULT
 	case 0, BattleFrontier_BattleTowerBattleRoom2_EventScript_249143
 	case 1, BattleFrontier_BattleTowerBattleRoom2_EventScript_2492DB
-	case 127, BattleFrontier_BattleTowerBattleRoom2_EventScript_249143
+	case MULTICHOICE_B, BattleFrontier_BattleTowerBattleRoom2_EventScript_249143
 
 BattleFrontier_BattleTowerBattleRoom2_EventScript_249251:: @ 8249251
 	message BattleFrontier_BattleTowerBattleRoom2_Text_24244C
@@ -216,7 +216,7 @@ BattleFrontier_BattleTowerBattleRoom2_EventScript_249251:: @ 8249251
 	switch VAR_RESULT
 	case 1, BattleFrontier_BattleTowerBattleRoom2_EventScript_249143
 	case 0, BattleFrontier_BattleTowerBattleRoom2_EventScript_24907E
-	case 127, BattleFrontier_BattleTowerBattleRoom2_EventScript_249143
+	case MULTICHOICE_B, BattleFrontier_BattleTowerBattleRoom2_EventScript_249143
 
 BattleFrontier_BattleTowerBattleRoom2_EventScript_249283:: @ 8249283
 	closemessage
@@ -355,7 +355,7 @@ BattleFrontier_BattleTowerBattleRoom2_EventScript_249417:: @ 8249417
 	case 0, BattleFrontier_BattleTowerBattleRoom2_EventScript_249483
 	case 1, BattleFrontier_BattleTowerBattleRoom2_EventScript_2494A8
 	case 2, BattleFrontier_BattleTowerBattleRoom2_EventScript_2494DD
-	case 127, BattleFrontier_BattleTowerBattleRoom2_EventScript_2494DD
+	case MULTICHOICE_B, BattleFrontier_BattleTowerBattleRoom2_EventScript_2494DD
 	end
 
 BattleFrontier_BattleTowerBattleRoom2_EventScript_249457:: @ 8249457
@@ -363,7 +363,7 @@ BattleFrontier_BattleTowerBattleRoom2_EventScript_249457:: @ 8249457
 	switch VAR_RESULT
 	case 0, BattleFrontier_BattleTowerBattleRoom2_EventScript_249483
 	case 1, BattleFrontier_BattleTowerBattleRoom2_EventScript_2494DD
-	case 127, BattleFrontier_BattleTowerBattleRoom2_EventScript_2494DD
+	case MULTICHOICE_B, BattleFrontier_BattleTowerBattleRoom2_EventScript_2494DD
 	end
 
 BattleFrontier_BattleTowerBattleRoom2_EventScript_249483:: @ 8249483
@@ -384,7 +384,7 @@ BattleFrontier_BattleTowerBattleRoom2_EventScript_2494A8:: @ 82494A8
 	multichoicedefault 20, 8, 94, 1, 0
 	switch VAR_RESULT
 	case 1, BattleFrontier_BattleTowerBattleRoom2_EventScript_249143
-	case 127, BattleFrontier_BattleTowerBattleRoom2_EventScript_249143
+	case MULTICHOICE_B, BattleFrontier_BattleTowerBattleRoom2_EventScript_249143
 	call BattleFrontier_BattleTowerBattleRoom2_EventScript_23E8B4
 	setflag FLAG_TEMP_2
 	goto BattleFrontier_BattleTowerBattleRoom2_EventScript_249143

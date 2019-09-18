@@ -816,19 +816,19 @@ BattleFrontier_BattleTowerLobby_EventScript_23F1A7:: @ 823F1A7
 	return
 
 BattleFrontier_BattleTowerLobby_EventScript_23F1D4:: @ 823F1D4
-	bufferstdstring 0, 19
+	bufferstdstring 0, STDSTRING_SINGLE
 	return
 
 BattleFrontier_BattleTowerLobby_EventScript_23F1D9:: @ 823F1D9
-	bufferstdstring 0, 20
+	bufferstdstring 0, STDSTRING_DOUBLE
 	return
 
 BattleFrontier_BattleTowerLobby_EventScript_23F1DE:: @ 823F1DE
-	bufferstdstring 0, 21
+	bufferstdstring 0, STDSTRING_MULTI
 	return
 
 BattleFrontier_BattleTowerLobby_EventScript_23F1E3:: @ 823F1E3
-	bufferstdstring 0, 22
+	bufferstdstring 0, STDSTRING_MULTI_LINK
 	return
 
 BattleFrontier_BattleTowerLobby_EventScript_23F1E8:: @ 823F1E8
