@@ -1559,8 +1559,8 @@ static void CreateMenuWithAnswers(u8 arg0)
             pixelWidth = width;
     }
 
-    width = convert_pixel_width_to_tile_width(pixelWidth);
-    left = sub_80E2D5C(left, width);
+    width = ConvertPixelWidthToTileWidth(pixelWidth);
+    left = ScriptMenu_AdjustLeftCoordFromWidth(left, width);
     windowId = CreateAndShowWindow(left, top, width, count * 2);
     SetStandardWindowBorderStyle(windowId, 0);
 

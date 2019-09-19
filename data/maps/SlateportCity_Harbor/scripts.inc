@@ -237,7 +237,7 @@ SlateportCity_Harbor_EventScript_20CBE9:: @ 820CBE9
 	delay 30
 	hideobjectat EVENT_OBJ_ID_PLAYER, MAP_PETALBURG_CITY
 	setvar VAR_0x8004, 5
-	call SlateportCity_Harbor_EventScript_2721E2
+	call Common_EventScript_FerryDepart
 	return
 
 SlateportCity_Harbor_EventScript_20CC2D:: @ 820CC2D

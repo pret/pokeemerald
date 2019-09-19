@@ -20,21 +20,21 @@
 
 #include "data/script_menu.h"
 
-EWRAM_DATA u8 gUnknown_02039F90 = 0;
+EWRAM_DATA u8 gProcessInputDelay = 0;
 
-static u8 gUnknown_03001124[ARRAY_COUNT(gSSTidalDestinations)];
-static u32 filler_0300112c;
+static u8 sLilycoveSSTidalSelections[ARRAY_COUNT(gLilycoveSSTidalDestinations)];
+//static u32 filler_0300112c;
 
 static void Task_HandleMultichoiceInput(u8);
 static void Task_HandleYesNoInput(u8);
 static void Task_HandleMultichoiceGridInput(u8);
 static void DrawMultichoiceMenu(u8, u8, u8, bool8, u8);
 static void sub_80E1FBC(u8, u8, u8, u8);
-static void sub_80E2A94(u8);
-static void CreatePCMenu(void);
-static void sub_80E2578(void);
+static void DrawLinkServicesMultichoiceMenu(u8);
+static void CreatePCMultichoice(void);
+static void CreateLilycoveSSTidalMultichoice(void);
 static bool8 IsPicboxClosed(void);
-static void CreateMultichoiceStartMenu(void);
+static void CreateStartMenuForPokenavTutorial(void);
 static void sub_80E2CC4(u8, u8, u8, u8);
 
 bool8 ScriptMenu_Multichoice(u8 left, u8 top, u8 multichoiceId, u8 ignoreBPress)
@@ -102,11 +102,11 @@ static void DrawMultichoiceMenu(u8 left, u8 top, u8 multichoiceId, u8 ignoreBPre
 
     for (i = 0; i < count; i++)
     {
-        width = display_text_and_get_width(actions[i].text, width);
+        width = DisplayTextAndGetWidth(actions[i].text, width);
     }
 
-    newWidth = convert_pixel_width_to_tile_width(width);
-    left = sub_80E2D5C(left, newWidth);
+    newWidth = ConvertPixelWidthToTileWidth(width);
+    left = ScriptMenu_AdjustLeftCoordFromWidth(left, newWidth);
     windowId = CreateWindowFromRect(left, top, newWidth, count * 2);
     SetStandardWindowBorderStyle(windowId, 0);
     PrintMenuTable(windowId, count, actions);
@@ -128,13 +128,13 @@ static void sub_80E1FBC(u8 ignoreBPress, u8 count, u8 windowId, u8 multichoiceId
 {
     u8 i;
     u8 taskId;
-    gUnknown_02039F90 = 2;
+    gProcessInputDelay = 2;
 
     for (i = 0; i < ARRAY_COUNT(gLinkServicesMultichoiceIds); i++)
     {
         if (gLinkServicesMultichoiceIds[i] == multichoiceId)
         {
-            gUnknown_02039F90 = 12;
+            gProcessInputDelay = 12;
         }
     }
 
@@ -150,7 +150,7 @@ static void sub_80E1FBC(u8 ignoreBPress, u8 count, u8 windowId, u8 multichoiceId
     gTasks[taskId].tWindowId = windowId;
     gTasks[taskId].tMultichoiceId = multichoiceId;
 
-    sub_80E2A94(multichoiceId);
+    DrawLinkServicesMultichoiceMenu(multichoiceId);
 }
 
 static void Task_HandleMultichoiceInput(u8 taskId)
@@ -160,9 +160,9 @@ static void Task_HandleMultichoiceInput(u8 taskId)
 
     if (!gPaletteFade.active)
     {
-        if (gUnknown_02039F90)
+        if (gProcessInputDelay)
         {
-            gUnknown_02039F90--;
+            gProcessInputDelay--;
         }
         else
         {
@@ -173,7 +173,7 @@ static void Task_HandleMultichoiceInput(u8 taskId)
 
             if (gMain.newKeys & (DPAD_UP | DPAD_DOWN))
             {
-                sub_80E2A94(tMultichoiceId);
+                DrawLinkServicesMultichoiceMenu(tMultichoiceId);
             }
 
             if (selection != MENU_NOTHING_CHOSEN)
@@ -266,12 +266,12 @@ bool8 ScriptMenu_MultichoiceGrid(u8 left, u8 top, u8 multichoiceId, u8 ignoreBPr
 
         for (i = 0; i < gMultichoiceLists[multichoiceId].count; i++)
         {
-            width = display_text_and_get_width(gMultichoiceLists[multichoiceId].list[i].text, width);
+            width = DisplayTextAndGetWidth(gMultichoiceLists[multichoiceId].list[i].text, width);
         }
 
-        newWidth = convert_pixel_width_to_tile_width(width);
+        newWidth = ConvertPixelWidthToTileWidth(width);
 
-        left = sub_80E2D5C(left, columnCount * newWidth);
+        left = ScriptMenu_AdjustLeftCoordFromWidth(left, columnCount * newWidth);
         rowCount = gMultichoiceLists[multichoiceId].count / columnCount;
 
         taskId = CreateTask(Task_HandleMultichoiceGridInput, 80);
@@ -313,7 +313,7 @@ static void Task_HandleMultichoiceGridInput(u8 taskId)
 
 #undef tWindowId
 
-bool16 ScrSpecial_CreatePCMenu(void)
+bool16 ScriptMenu_CreatePCMultichoice(void)
 {
     if (FuncIsActiveTask(Task_HandleMultichoiceInput) == TRUE)
     {
@@ -322,12 +322,12 @@ bool16 ScrSpecial_CreatePCMenu(void)
     else
     {
         gSpecialVar_Result = 0xFF;
-        CreatePCMenu();
+        CreatePCMultichoice();
         return TRUE;
     }
 }
 
-static void CreatePCMenu(void)
+static void CreatePCMultichoice(void)
 {
     u8 y = 8;
     u32 pixelWidth = 0;
@@ -338,15 +338,15 @@ static void CreatePCMenu(void)
 
     for (i = 0; i < ARRAY_COUNT(sPCNameStrings); i++)
     {
-        pixelWidth = display_text_and_get_width(sPCNameStrings[i], pixelWidth);
+        pixelWidth = DisplayTextAndGetWidth(sPCNameStrings[i], pixelWidth);
     }
 
     if (FlagGet(FLAG_SYS_GAME_CLEAR))
     {
-        pixelWidth = display_text_and_get_width(gText_HallOfFame, pixelWidth);
+        pixelWidth = DisplayTextAndGetWidth(gText_HallOfFame, pixelWidth);
     }
 
-    width = convert_pixel_width_to_tile_width(pixelWidth);
+    width = ConvertPixelWidthToTileWidth(pixelWidth);
 
     if (FlagGet(FLAG_SYS_GAME_CLEAR)) // player has cleared game?
     {
@@ -373,7 +373,7 @@ static void CreatePCMenu(void)
     PrintPlayerNameOnWindow(windowId, gStringVar4, y, 17);
     InitMenuInUpperLeftCornerPlaySoundWhenAPressed(windowId, numChoices, 0);
     CopyWindowToVram(windowId, 3);
-    sub_80E1FBC(FALSE, numChoices, windowId, 1);
+    sub_80E1FBC(FALSE, numChoices, windowId, MULTI_PC);
 }
 
 void ScriptMenu_DisplayPCStartupPrompt(void)
@@ -382,7 +382,7 @@ void ScriptMenu_DisplayPCStartupPrompt(void)
     AddTextPrinterParameterized2(0, 1, gText_WhichPCShouldBeAccessed, 0, NULL, 2, 1, 3);
 }
 
-bool8 sub_80E2548(void)
+bool8 ScriptMenu_CreateLilycoveSSTidalMultichoice(void)
 {
     if (FuncIsActiveTask(Task_HandleMultichoiceInput) == TRUE)
     {
@@ -391,14 +391,16 @@ bool8 sub_80E2548(void)
     else
     {
         gSpecialVar_Result = 0xFF;
-        sub_80E2578();
+        CreateLilycoveSSTidalMultichoice();
         return TRUE;
     }
 }
 
-static void sub_80E2578(void)
+// gSpecialVar_0x8004 is 1 if the Sailor was shown multiple event tickets at the same time
+// otherwise gSpecialVar_0x8004 is 0
+static void CreateLilycoveSSTidalMultichoice(void)
 {
-    u8 temp = 0;
+    u8 selectionCount = 0;
     u8 count;
     u32 pixelWidth;
     u8 width;
@@ -406,21 +408,22 @@ static void sub_80E2578(void)
     u8 i;
     u32 j;
 
-    for (i = 0; i < ARRAY_COUNT(gUnknown_03001124); i++)
+    for (i = 0; i < ARRAY_COUNT(sLilycoveSSTidalSelections); i++)
     {
-        gUnknown_03001124[i] = 0xFF;
+        sLilycoveSSTidalSelections[i] = 0xFF;
     }
 
     GetFontAttribute(1, FONTATTR_MAX_LETTER_WIDTH);
 
     if (gSpecialVar_0x8004 == 0)
     {
-        gUnknown_03001124[temp] = 0;
-        temp++;
+        sLilycoveSSTidalSelections[selectionCount] = SSTIDAL_SELECTION_SLATEPORT;
+        selectionCount++;
+
         if (FlagGet(FLAG_MET_SCOTT_ON_SS_TIDAL) == TRUE)
         {
-            gUnknown_03001124[temp] = 1;
-            temp++;
+            sLilycoveSSTidalSelections[selectionCount] = SSTIDAL_SELECTION_BATTLE_FRONTIER;
+            selectionCount++;
         }
     }
 
@@ -428,14 +431,14 @@ static void sub_80E2578(void)
     {
         if (gSpecialVar_0x8004 == 0)
         {
-            gUnknown_03001124[temp] = 2;
-            temp++;
+            sLilycoveSSTidalSelections[selectionCount] = SSTIDAL_SELECTION_SOUTHERN_ISLAND;
+            selectionCount++;
         }
 
         if (gSpecialVar_0x8004 == 1 && FlagGet(FLAG_HAS_EON_TICKET) == FALSE)
         {
-            gUnknown_03001124[temp] = 2;
-            temp++;
+            sLilycoveSSTidalSelections[selectionCount] = SSTIDAL_SELECTION_SOUTHERN_ISLAND;
+            selectionCount++;
             FlagSet(FLAG_HAS_EON_TICKET);
         }
     }
@@ -444,14 +447,14 @@ static void sub_80E2578(void)
     {
         if (gSpecialVar_0x8004 == 0)
         {
-            gUnknown_03001124[temp] = 3;
-            temp++;
+            sLilycoveSSTidalSelections[selectionCount] = SSTIDAL_SELECTION_NAVEL_ROCK;
+            selectionCount++;
         }
 
         if (gSpecialVar_0x8004 == 1 && FlagGet(FLAG_HAS_MYSTIC_TICKET) == FALSE)
         {
-            gUnknown_03001124[temp] = 3;
-            temp++;
+            sLilycoveSSTidalSelections[selectionCount] = SSTIDAL_SELECTION_NAVEL_ROCK;
+            selectionCount++;
             FlagSet(FLAG_HAS_MYSTIC_TICKET);
         }
     }
@@ -460,14 +463,14 @@ static void sub_80E2578(void)
     {
         if (gSpecialVar_0x8004 == 0)
         {
-            gUnknown_03001124[temp] = 4;
-            temp++;
+            sLilycoveSSTidalSelections[selectionCount] = SSTIDAL_SELECTION_BIRTH_ISLAND;
+            selectionCount++;
         }
 
         if (gSpecialVar_0x8004 == 1 && FlagGet(FLAG_HAS_AURORA_TICKET) == FALSE)
         {
-            gUnknown_03001124[temp] = 4;
-            temp++;
+            sLilycoveSSTidalSelections[selectionCount] = SSTIDAL_SELECTION_BIRTH_ISLAND;
+            selectionCount++;
             FlagSet(FLAG_HAS_AURORA_TICKET);
         }
     }
@@ -476,28 +479,28 @@ static void sub_80E2578(void)
     {
         if (gSpecialVar_0x8004 == 0)
         {
-            gUnknown_03001124[temp] = 5;
-            temp++;
+            sLilycoveSSTidalSelections[selectionCount] = SSTIDAL_SELECTION_FARAWAY_ISLAND;
+            selectionCount++;
         }
 
         if (gSpecialVar_0x8004 == 1 && FlagGet(FLAG_HAS_OLD_SEA_MAP) == FALSE)
         {
-            gUnknown_03001124[temp] = 5;
-            temp++;
+            sLilycoveSSTidalSelections[selectionCount] = SSTIDAL_SELECTION_FARAWAY_ISLAND;
+            selectionCount++;
             FlagSet(FLAG_HAS_OLD_SEA_MAP);
         }
     }
 
-    gUnknown_03001124[temp] = 6;
-    temp++;
+    sLilycoveSSTidalSelections[selectionCount] = SSTIDAL_SELECTION_EXIT;
+    selectionCount++;
 
     if (gSpecialVar_0x8004 == 0 && FlagGet(FLAG_MET_SCOTT_ON_SS_TIDAL) == TRUE)
     {
-        count = temp;
+        count = selectionCount;
     }
 
-    count = temp;
-    if (count == 7)
+    count = selectionCount;
+    if (count == SSTIDAL_SELECTION_COUNT)
     {
         gSpecialVar_0x8004 = SCROLL_MULTI_SS_TIDAL_DESTINATION;
         ShowScrollableMultichoice();
@@ -506,39 +509,39 @@ static void sub_80E2578(void)
     {
         pixelWidth = 0;
 
-        for (j = 0; j < ARRAY_COUNT(gSSTidalDestinations); j++)
+        for (j = 0; j < ARRAY_COUNT(gLilycoveSSTidalDestinations); j++)
         {
-            u8 test = gUnknown_03001124[j];
-            if (test != 0xFF)
+            u8 selection = sLilycoveSSTidalSelections[j];
+            if (selection != 0xFF)
             {
-                pixelWidth = display_text_and_get_width(gSSTidalDestinations[test], pixelWidth);
+                pixelWidth = DisplayTextAndGetWidth(gLilycoveSSTidalDestinations[selection], pixelWidth);
             }
         }
 
-        width = convert_pixel_width_to_tile_width(pixelWidth);
-        windowId = CreateWindowFromRect(28 - width, (6 - count) * 2, width, count * 2);
+        width = ConvertPixelWidthToTileWidth(pixelWidth);
+        windowId = CreateWindowFromRect(MAX_MULTICHOICE_WIDTH - width, (6 - count) * 2, width, count * 2);
         SetStandardWindowBorderStyle(windowId, 0);
 
-        for (temp = 0, i = 0; i < ARRAY_COUNT(gSSTidalDestinations); i++)
+        for (selectionCount = 0, i = 0; i < ARRAY_COUNT(gLilycoveSSTidalDestinations); i++)
         {
-            if (gUnknown_03001124[i] != 0xFF)
+            if (sLilycoveSSTidalSelections[i] != 0xFF)
             {
-                AddTextPrinterParameterized(windowId, 1, gSSTidalDestinations[gUnknown_03001124[i]], 8, temp * 16 + 1, TEXT_SPEED_FF, NULL);
-                temp++;
+                AddTextPrinterParameterized(windowId, 1, gLilycoveSSTidalDestinations[sLilycoveSSTidalSelections[i]], 8, selectionCount * 16 + 1, TEXT_SPEED_FF, NULL);
+                selectionCount++;
             }
         }
 
         InitMenuInUpperLeftCornerPlaySoundWhenAPressed(windowId, count, count - 1);
         CopyWindowToVram(windowId, 3);
-        sub_80E1FBC(FALSE, count, windowId, 8);
+        sub_80E1FBC(FALSE, count, windowId, MULTI_SSTIDAL_LILYCOVE);
     }
 }
 
-void sub_80E2878(void)
+void GetLilycoveSSTidalSelection(void)
 {
     if (gSpecialVar_Result != MULTI_B_PRESSED)
     {
-        gSpecialVar_Result = gUnknown_03001124[gSpecialVar_Result];
+        gSpecialVar_Result = sLilycoveSSTidalSelections[gSpecialVar_Result];
     }
 }
 
@@ -635,7 +638,7 @@ void ClearToTransparentAndRemoveWindow(u8 windowId)
     RemoveWindow(windowId);
 }
 
-static void sub_80E2A94(u8 multichoiceId)
+static void DrawLinkServicesMultichoiceMenu(u8 multichoiceId)
 {
     switch (multichoiceId)
     {
@@ -666,19 +669,21 @@ static void sub_80E2A94(u8 multichoiceId)
     }
 }
 
-bool16 CreateStartMenuForPokenavTutorial(void)
+bool16 ScriptMenu_CreateStartMenuForPokenavTutorial(void)
 {
     if (FuncIsActiveTask(Task_HandleMultichoiceInput) == TRUE)
     {
         return FALSE;
     }
-
-    gSpecialVar_Result = 0xFF;
-    CreateMultichoiceStartMenu();
-    return TRUE;
+    else
+    {
+        gSpecialVar_Result = 0xFF;
+        CreateStartMenuForPokenavTutorial();
+        return TRUE;
+    }
 }
 
-static void CreateMultichoiceStartMenu(void)
+static void CreateStartMenuForPokenavTutorial(void)
 {
     u8 windowId = CreateWindowFromRect(21, 0, 7, 18);
     SetStandardWindowBorderStyle(windowId, 0);
@@ -700,7 +705,7 @@ static void CreateMultichoiceStartMenu(void)
 static void sub_80E2CC4(bool8 ignoreBPress, u8 unused, u8 windowId, u8 multichoiceId)
 {
     u8 taskId;
-    gUnknown_02039F90 = 2;
+    gProcessInputDelay = 2;
     taskId = CreateTask(Task_HandleMultichoiceInput, 80);
     gTasks[taskId].tIgnoreBPress = ignoreBPress;
     gTasks[taskId].tDoWrap = 0;
@@ -717,16 +722,16 @@ static void sub_80E2CC4(bool8 ignoreBPress, u8 unused, u8 windowId, u8 multichoi
 #undef tWindowId
 #undef tMultichoiceId
 
-static int display_text_and_get_width_internal(const u8 *str)
+static int DisplayTextAndGetWidthInternal(const u8 *str)
 {
     u8 temp[64];
     StringExpandPlaceholders(temp, str);
     return GetStringWidth(1, temp, 0);
 }
 
-int display_text_and_get_width(const u8 *str, int prevMaxWidth)
+int DisplayTextAndGetWidth(const u8 *str, int prevMaxWidth)
 {
-    int len = display_text_and_get_width_internal(str);
+    int len = DisplayTextAndGetWidthInternal(str);
     if (len < prevMaxWidth)
     {
         len = prevMaxWidth;
@@ -734,30 +739,26 @@ int display_text_and_get_width(const u8 *str, int prevMaxWidth)
     return len;
 }
 
-int convert_pixel_width_to_tile_width(int width)
+int ConvertPixelWidthToTileWidth(int width)
 {
-    return (((width + 9) / 8) + 1) > 28 ? 28 : (((width + 9) / 8) + 1);
+    return (((width + 9) / 8) + 1) > MAX_MULTICHOICE_WIDTH ? MAX_MULTICHOICE_WIDTH : (((width + 9) / 8) + 1);
 }
 
-int sub_80E2D5C(int a0, int a1)
+int ScriptMenu_AdjustLeftCoordFromWidth(int left, int width)
 {
-    int ret = a0;
+    int adjustedLeft = left;
 
-    if (a0 + a1 > 28)
+    if (left + width > MAX_MULTICHOICE_WIDTH)
     {
-        if (28 - a1 < 0)
+        if (MAX_MULTICHOICE_WIDTH - width < 0)
         {
-            ret = 0;
+            adjustedLeft = 0;
         }
         else
         {
-            ret = 28 - a1;
+            adjustedLeft = MAX_MULTICHOICE_WIDTH - width;
         }
     }
-    else
-    {
-        ret = a0;
-    }
 
-    return ret;
+    return adjustedLeft;
 }

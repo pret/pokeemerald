@@ -273,7 +273,7 @@ gSpecials:: @ 81DBA64
 	def_special ShowBerryBlenderRecordWindow
 	def_special ResetTrickHouseEndRoomFlag
 	def_special SetTrickHouseEndRoomFlag
-	def_special ScrSpecial_CreatePCMenu
+	def_special ScriptMenu_CreatePCMultichoice
 	def_special AccessHallOfFamePC
 	def_special Special_ShowDiploma
 	def_special CheckLeadMonCool
@@ -480,7 +480,7 @@ gSpecials:: @ 81DBA64
 	def_special ShowFrontierGamblerGoMessage
 	def_special Script_DoRayquazaScene
 	def_special sub_81C72A4
-	def_special CreateStartMenuForPokenavTutorial
+	def_special ScriptMenu_CreateStartMenuForPokenavTutorial
 	def_special CountPlayerTrainerStars
 	def_special BufferBattleFrontierTutorMoveName
 	def_special CloseBattleFrontierTutorWindow
@@ -508,8 +508,8 @@ gSpecials:: @ 81DBA64
 	def_special sub_813B4E0
 	def_special ShouldDoBrailleRegicePuzzle
 	def_special EnableNationalPokedex
-	def_special sub_80E2548
-	def_special sub_80E2878
+	def_special ScriptMenu_CreateLilycoveSSTidalMultichoice
+	def_special GetLilycoveSSTidalSelection
 	def_special TurnOnTVScreen
 	def_special sub_81D4A90
 	def_special sub_813B514

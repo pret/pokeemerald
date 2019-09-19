@@ -150,7 +150,7 @@ BattleFrontier_ReceptionGate_EventScript_266320:: @ 8266320
 	case 7, BattleFrontier_ReceptionGate_EventScript_266410
 	case 8, BattleFrontier_ReceptionGate_EventScript_26641E
 	case 9, BattleFrontier_ReceptionGate_EventScript_26642C
-	case 127, BattleFrontier_ReceptionGate_EventScript_26642C
+	case MULTI_B_PRESSED, BattleFrontier_ReceptionGate_EventScript_26642C
 	end
 
 BattleFrontier_ReceptionGate_EventScript_2663AE:: @ 82663AE

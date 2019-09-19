@@ -882,7 +882,7 @@ LilycoveCity_ContestLobby_EventScript_21ABA6:: @ 821ABA6
 	case 0, LilycoveCity_ContestLobby_EventScript_21AC0B
 	case 1, LilycoveCity_ContestLobby_EventScript_21ABE3
 	case 2, LilycoveCity_ContestLobby_EventScript_21A97F
-	case 127, LilycoveCity_ContestLobby_EventScript_21A97F
+	case MULTI_B_PRESSED, LilycoveCity_ContestLobby_EventScript_21A97F
 	end
 
 LilycoveCity_ContestLobby_EventScript_21ABE3:: @ 821ABE3

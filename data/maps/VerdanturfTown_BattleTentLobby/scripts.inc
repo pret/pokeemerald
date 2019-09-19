@@ -343,7 +343,7 @@ VerdanturfTown_BattleTentLobby_EventScript_201B11:: @ 8201B11
 	case 4, VerdanturfTown_BattleTentLobby_EventScript_201BB6
 	case 5, VerdanturfTown_BattleTentLobby_EventScript_201BC4
 	case 6, VerdanturfTown_BattleTentLobby_EventScript_201BD2
-	case 127, VerdanturfTown_BattleTentLobby_EventScript_201BD2
+	case MULTI_B_PRESSED, VerdanturfTown_BattleTentLobby_EventScript_201BD2
 	end
 
 VerdanturfTown_BattleTentLobby_EventScript_201B7E:: @ 8201B7E

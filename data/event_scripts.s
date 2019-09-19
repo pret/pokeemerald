@@ -1042,7 +1042,7 @@ EventScript_ResetAllMapFlags:: @ 82715DE
 	setflag FLAG_HIDE_ROUTE_101_BIRCH
 	setflag FLAG_HIDE_ROUTE_103_BIRCH
 	setflag FLAG_HIDE_LILYCOVE_HARBOR_FERRY_SAILOR
-	setflag FLAG_HIDE_LILYCOVE_HARBOR_EON_TICKET_TAKER
+	setflag FLAG_HIDE_LILYCOVE_HARBOR_EVENT_TICKET_TAKER
 	setflag FLAG_HIDE_SOUTHERN_ISLAND_EON_STONE
 	setflag FLAG_HIDE_SOUTHERN_ISLAND_UNCHOSEN_EON_DUO_MON
 	setflag FLAG_UNKNOWN_0x393
@@ -1631,7 +1631,7 @@ EventScript_PC:: @ 8271D92
 EventScript_271DAC:: @ 8271DAC
 	message gText_WhichPCShouldBeAccessed
 	waitmessage
-	special ScrSpecial_CreatePCMenu
+	special ScriptMenu_CreatePCMultichoice
 	waitstate
 	goto EventScript_271DBC
 	end
@@ -1642,7 +1642,7 @@ EventScript_271DBC:: @ 8271DBC
 	case 1, EventScript_271DF9
 	case 2, EventScript_271E54
 	case 3, EventScript_271E47
-	case 127, EventScript_271E47
+	case MULTI_B_PRESSED, EventScript_271E47
 	end
 
 EventScript_271DF9:: @ 8271DF9
@@ -2042,15 +2042,13 @@ Route101_EventScript_272184:: @ 8272184
 	msgbox gUnknown_082A633D, MSGBOX_DEFAULT
 	return
 
-BattleFrontier_OutsideWest_EventScript_2721E2:: @ 82721E2
-LilycoveCity_Harbor_EventScript_2721E2:: @ 82721E2
-SlateportCity_Harbor_EventScript_2721E2:: @ 82721E2
+Common_EventScript_FerryDepart:: @ 82721E2
 	delay 60
-	applymovement VAR_0x8004, SlateportCity_Harbor_Movement_2721F0
+	applymovement VAR_0x8004, Movement_FerryDepart
 	waitmovement 0
 	return
 
-SlateportCity_Harbor_Movement_2721F0: @ 82721F0
+Movement_FerryDepart: @ 82721F0
 	walk_slow_right
 	walk_slow_right
 	walk_slow_right
@@ -2107,7 +2105,7 @@ SouthernIsland_Exterior_EventScript_272250:: @ 8272250
 	call_if_eq BattleFrontier_OutsideWest_EventScript_242A2C
 	delay 30
 	hideobjectat 255, MAP_PETALBURG_CITY
-	call BattleFrontier_OutsideWest_EventScript_2721E2
+	call Common_EventScript_FerryDepart
 	return
 
 EventScript_272274:: @ 8272274
@@ -4211,7 +4209,7 @@ MauvilleCity_GameCorner_EventScript_2A5B0D:: @ 82A5B0D
 	.include "data/text/roulette.inc"
 	.include "data/text/pokedex_rating.inc"
 	.include "data/text/lottery_corner.inc"
-	.include "data/text/eon_ticket.inc"
+	.include "data/text/event_ticket_1.inc"
 	.include "data/text/braille.inc"
 	.include "data/text/berries.inc"
 	.include "data/text/shoal_cave.inc"
@@ -6306,77 +6304,7 @@ VerdanturfTown_BattleTentLobby_Text_2C6878: @ 82C6878
 	.string "The VERDANTURF BATTLE TENT\n"
 	.string "rules are listed.$"
 
-LilycoveCity_Harbor_Text_2C68A5: @ 82C68A5
-	.string "What's up, youngster?\p"
-	.string "What, it's you who's supposed to have\n"
-	.string "a tattered old map?\p"
-	.string "Let's have a look.\n"
-	.string "… … … … … …\p"
-	.string "Boy, this is quite a ways away.\n"
-	.string "I'm afraid I can't help you…$"
-
-LilycoveCity_Harbor_Text_2C6951: @ 82C6951
-	.string "BRINEY: Hold on a second!\p"
-	.string "What's the idea of turning down\n"
-	.string "someone that I owe so much to?$"
-
-LilycoveCity_Harbor_Text_2C69AA: @ 82C69AA
-	.string "{PLAYER}{KUN}, I'm terribly sorry.\p"
-	.string "You came to me seeking my help,\n"
-	.string "and we almost turned you away.\p"
-	.string "Well, let me make things right.\p"
-	.string "We'll sail right away, of course!\p"
-	.string "Let's find this island on\n"
-	.string "this OLD SEA MAP!$"
-
-LilycoveCity_Harbor_Text_2C6A71: @ 82C6A71
-	.string "Is it you who brought that odd\n"
-	.string "ticket?\p"
-	.string "Where you're trying to go is an island\n"
-	.string "that's far, far away.\p"
-	.string "No one knows what awaits there…\p"
-	.string "The very thought excites my blood\n"
-	.string "as a sailing man!\p"
-	.string "Get on board, youngster!$"
-
-FarawayIsland_Entrance_Text_2C6B42: @ 82C6B42
-	.string "CAPT. BRINEY can be so maddeningly\n"
-	.string "fickle…\p"
-	.string "Do you want to return to LILYCOVE?$"
-
-BirthIsland_Harbor_Text_2C6B90: @ 82C6B90
-	.string "What an oddly shaped island, eh?\n"
-	.string "Do you want to return to LILYCOVE?$"
-
-LilycoveCity_Harbor_Text_2C6BD4: @ 82C6BD4
-	.string "Is it you who brought those\n"
-	.string "odd tickets?\p"
-	.string "… … …Hm.\p"
-	.string "These tickets will get you to islands\n"
-	.string "that are far, far away.\p"
-	.string "No one knows what awaits there,\n"
-	.string "or what may happen there.\p"
-	.string "The very thought excites my blood\n"
-	.string "as a sailing man!\p"
-	.string "Get on board, youngster!\n"
-	.string "Where shall we sail first?$"
-
-NavelRock_Harbor_Text_2C6CE6: @ 82C6CE6
-	.string "Did… Did you hear that?\n"
-	.string "That low growling from deep in there.\p"
-	.string "Are you sure it's safe?\n"
-	.string "Do you think we should leave?$"
-
-FarawayIsland_Entrance_Text_2C6D5A: @ 82C6D5A
-	.string "The writing is fading as if it was\n"
-	.string "written a long time ago…\p"
-	.string "“…ber, 6th day\n"
-	.string "If any human…sets foot here…\l"
-	.string "again…et it be a kindhearted pers…\l"
-	.string "…ith that hope, I depar…”$"
-
-FarawayIsland_Interior_Text_2C6DFF: @ 82C6DFF
-	.string "Myuu…$"
+	.include "data/text/event_ticket_2.inc"
 
 MauvilleCity_Text_2C6E05: @ 82C6E05
 	.string "This move can be learned only\n"

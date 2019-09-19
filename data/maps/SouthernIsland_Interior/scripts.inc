@@ -108,7 +108,7 @@ SouthernIsland_Interior_EventScript_242B8F:: @ 8242B8F
 	end
 
 SouthernIsland_Interior_EventScript_242B9A:: @ 8242B9A
-	msgbox SouthernIsland_Interior_Text_2A6AA1, MSGBOX_DEFAULT
+	msgbox SouthernIsland_Interior_Text_Sign, MSGBOX_DEFAULT
 	releaseall
 	end
 

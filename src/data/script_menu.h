@@ -785,14 +785,14 @@ struct MultichoiceListStruct
 const struct MultichoiceListStruct gMultichoiceLists[] =
 {
     [MULTI_BRINEY_ON_DEWFORD]        = MULTICHOICE(MultichoiceList_BrineyOnDewford),
-    [MULTI_UNUSED_1]                 = MULTICHOICE(MultichoiceList_Exit),
+    [MULTI_PC]                       = MULTICHOICE(MultichoiceList_Exit),
     [MULTI_ENTERINFO]                = MULTICHOICE(MultichoiceList_EnterInfo),
     [MULTI_CONTEST_INFO]             = MULTICHOICE(MultichoiceList_ContestInfo),
     [MULTI_CONTEST_TYPE]             = MULTICHOICE(MultichoiceList_ContestType),
     [MULTI_DECOR_NOREGISTRY]         = MULTICHOICE(MultichoiceList_DecorNoRegistry),
     [MULTI_DECOR_REGISTRY]           = MULTICHOICE(MultichoiceList_DecorRegistry),
     [MULTI_REGISTER_MENU]            = MULTICHOICE(MultichoiceList_RegisterMenu),
-    [MULTI_UNUSED_8]                 = MULTICHOICE(MultichoiceList_Exit),
+    [MULTI_SSTIDAL_LILYCOVE]         = MULTICHOICE(MultichoiceList_Exit),
     [MULTI_UNUSED_9]                 = MULTICHOICE(MultichoiceList_Exit),
     [MULTI_UNUSED_10]                = MULTICHOICE(MultichoiceList_Exit),
     [MULTI_FRONTIER_PASS_INFO]       = MULTICHOICE(MultichoiceList_FrontierPassInfo),
@@ -952,7 +952,7 @@ const u8 *const sPCNameStrings[] =
     gText_LogOff,
 };
 
-const u8 *const gSSTidalDestinations[] =
+const u8 *const gLilycoveSSTidalDestinations[] =
 {
     gText_SlateportCity,
     gText_BattleFrontier,

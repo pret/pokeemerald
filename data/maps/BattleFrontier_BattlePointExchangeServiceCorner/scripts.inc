@@ -102,7 +102,7 @@ BattleFrontier_BattlePointExchangeServiceCorner_EventScript_25F185:: @ 825F185
 	case 8, BattleFrontier_BattlePointExchangeServiceCorner_EventScript_25F336
 	case 9, BattleFrontier_BattlePointExchangeServiceCorner_EventScript_25F359
 	case 10, BattleFrontier_BattlePointExchangeServiceCorner_EventScript_25F07D
-	case 127, BattleFrontier_BattlePointExchangeServiceCorner_EventScript_25F07D
+	case MULTI_B_PRESSED, BattleFrontier_BattlePointExchangeServiceCorner_EventScript_25F07D
 	end
 
 BattleFrontier_BattlePointExchangeServiceCorner_EventScript_25F21E:: @ 825F21E
@@ -216,7 +216,7 @@ BattleFrontier_BattlePointExchangeServiceCorner_EventScript_25F38E:: @ 825F38E
 	case 3, BattleFrontier_BattlePointExchangeServiceCorner_EventScript_25F459
 	case 4, BattleFrontier_BattlePointExchangeServiceCorner_EventScript_25F47C
 	case 5, BattleFrontier_BattlePointExchangeServiceCorner_EventScript_25F07D
-	case 127, BattleFrontier_BattlePointExchangeServiceCorner_EventScript_25F07D
+	case MULTI_B_PRESSED, BattleFrontier_BattlePointExchangeServiceCorner_EventScript_25F07D
 	end
 
 BattleFrontier_BattlePointExchangeServiceCorner_EventScript_25F3F0:: @ 825F3F0
@@ -286,7 +286,7 @@ BattleFrontier_BattlePointExchangeServiceCorner_EventScript_25F4B1:: @ 825F4B1
 	case 4, BattleFrontier_BattlePointExchangeServiceCorner_EventScript_25F5AA
 	case 5, BattleFrontier_BattlePointExchangeServiceCorner_EventScript_25F5CD
 	case 6, BattleFrontier_BattlePointExchangeServiceCorner_EventScript_25F07D
-	case 127, BattleFrontier_BattlePointExchangeServiceCorner_EventScript_25F07D
+	case MULTI_B_PRESSED, BattleFrontier_BattlePointExchangeServiceCorner_EventScript_25F07D
 	end
 
 BattleFrontier_BattlePointExchangeServiceCorner_EventScript_25F51E:: @ 825F51E
@@ -368,7 +368,7 @@ BattleFrontier_BattlePointExchangeServiceCorner_EventScript_25F602:: @ 825F602
 	case 7, BattleFrontier_BattlePointExchangeServiceCorner_EventScript_25F785
 	case 8, BattleFrontier_BattlePointExchangeServiceCorner_EventScript_25F7A8
 	case 9, BattleFrontier_BattlePointExchangeServiceCorner_EventScript_25F07D
-	case 127, BattleFrontier_BattlePointExchangeServiceCorner_EventScript_25F07D
+	case MULTI_B_PRESSED, BattleFrontier_BattlePointExchangeServiceCorner_EventScript_25F07D
 	end
 
 BattleFrontier_BattlePointExchangeServiceCorner_EventScript_25F690:: @ 825F690

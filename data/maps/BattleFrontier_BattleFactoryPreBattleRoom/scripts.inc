@@ -428,7 +428,7 @@ BattleFrontier_BattleFactoryPreBattleRoom_EventScript_25A0B9:: @ 825A0B9
 	case 1, BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259CFC
 	case 2, BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259D38
 	case 3, BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259D66
-	case 127, BattleFrontier_BattleFactoryPreBattleRoom_EventScript_25A0B9
+	case MULTI_B_PRESSED, BattleFrontier_BattleFactoryPreBattleRoom_EventScript_25A0B9
 
 BattleFrontier_BattleFactoryPreBattleRoom_EventScript_25A110:: @ 825A110
 	multichoice 20, 6, MULTI_GO_ON_REST_RETIRE, 1
@@ -436,7 +436,7 @@ BattleFrontier_BattleFactoryPreBattleRoom_EventScript_25A110:: @ 825A110
 	case 0, BattleFrontier_BattleFactoryPreBattleRoom_EventScript_25A146
 	case 1, BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259D38
 	case 2, BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259D66
-	case 127, BattleFrontier_BattleFactoryPreBattleRoom_EventScript_25A0B9
+	case MULTI_B_PRESSED, BattleFrontier_BattleFactoryPreBattleRoom_EventScript_25A0B9
 
 BattleFrontier_BattleFactoryPreBattleRoom_EventScript_25A146:: @ 825A146
 	msgbox BattleFrontier_BattleFactoryPreBattleRoom_Text_25AD61, MSGBOX_DEFAULT

@@ -509,7 +509,7 @@ BattleFrontier_BattleDomeLobby_EventScript_249E43:: @ 8249E43
 	case 1, BattleFrontier_BattleDomeLobby_EventScript_249E99
 	case 2, BattleFrontier_BattleDomeLobby_EventScript_249EA7
 	case 3, BattleFrontier_BattleDomeLobby_EventScript_249EB5
-	case 127, BattleFrontier_BattleDomeLobby_EventScript_249EB5
+	case MULTI_B_PRESSED, BattleFrontier_BattleDomeLobby_EventScript_249EB5
 	end
 
 BattleFrontier_BattleDomeLobby_EventScript_249E8B:: @ 8249E8B

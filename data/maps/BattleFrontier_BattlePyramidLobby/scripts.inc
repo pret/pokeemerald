@@ -274,7 +274,7 @@ BattleFrontier_BattlePyramidLobby_EventScript_250AF0:: @ 8250AF0
 	case 0, BattleFrontier_BattlePyramidLobby_EventScript_250B28
 	case 1, BattleFrontier_BattlePyramidLobby_EventScript_250B66
 	case 2, BattleFrontier_BattlePyramidLobby_EventScript_250B27
-	case 127, BattleFrontier_BattlePyramidLobby_EventScript_250B27
+	case MULTI_B_PRESSED, BattleFrontier_BattlePyramidLobby_EventScript_250B27
 	return
 
 BattleFrontier_BattlePyramidLobby_EventScript_250B27:: @ 8250B27
@@ -513,7 +513,7 @@ BattleFrontier_BattlePyramidLobby_EventScript_250E09:: @ 8250E09
 	case 0, BattleFrontier_BattlePyramidLobby_EventScript_250E40
 	case 1, BattleFrontier_BattlePyramidLobby_EventScript_250E50
 	case 2, BattleFrontier_BattlePyramidLobby_EventScript_250E60
-	case 127, BattleFrontier_BattlePyramidLobby_EventScript_250E60
+	case MULTI_B_PRESSED, BattleFrontier_BattlePyramidLobby_EventScript_250E60
 	end
 
 BattleFrontier_BattlePyramidLobby_EventScript_250E40:: @ 8250E40
@@ -569,7 +569,7 @@ BattleFrontier_BattlePyramidLobby_EventScript_250EA4:: @ 8250EA4
 	case 2, BattleFrontier_BattlePyramidLobby_EventScript_250F13
 	case 3, BattleFrontier_BattlePyramidLobby_EventScript_250F21
 	case 4, BattleFrontier_BattlePyramidLobby_EventScript_250F2F
-	case 127, BattleFrontier_BattlePyramidLobby_EventScript_250F2F
+	case MULTI_B_PRESSED, BattleFrontier_BattlePyramidLobby_EventScript_250F2F
 	end
 
 BattleFrontier_BattlePyramidLobby_EventScript_250EF7:: @ 8250EF7
