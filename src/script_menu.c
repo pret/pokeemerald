@@ -74,7 +74,7 @@ static u16 GetLengthWithExpandedPlayerName(const u8 *str)
         if (*str == PLACEHOLDER_BEGIN)
         {
             str++;
-            if (*str == 1) // 01 is the second byte of the {PLAYER} placeholder
+            if (*str == PLACEHOLDER_ID_PLAYER)
             {
                 length += StringLength(gSaveBlock2Ptr->playerName);
                 str++;
@@ -94,8 +94,8 @@ static void DrawMultichoiceMenu(u8 left, u8 top, u8 multichoiceId, bool8 ignoreB
 {
     int i;
     u8 windowId;
-    u8 count = gMultichoiceLists[multichoiceId].count;
-    const struct MenuAction *actions = gMultichoiceLists[multichoiceId].list;
+    u8 count = sMultichoiceLists[multichoiceId].count;
+    const struct MenuAction *actions = sMultichoiceLists[multichoiceId].list;
     int width = 0;
     u8 newWidth;
 
@@ -129,9 +129,9 @@ static void InitMultichoiceCheckWrap(bool8 ignoreBPress, u8 count, u8 windowId, 
     u8 taskId;
     sProcessInputDelay = 2;
 
-    for (i = 0; i < ARRAY_COUNT(gLinkServicesMultichoiceIds); i++)
+    for (i = 0; i < ARRAY_COUNT(sLinkServicesMultichoiceIds); i++)
     {
-        if (gLinkServicesMultichoiceIds[i] == multichoiceId)
+        if (sLinkServicesMultichoiceIds[i] == multichoiceId)
         {
             sProcessInputDelay = 12;
         }
@@ -263,22 +263,22 @@ bool8 ScriptMenu_MultichoiceGrid(u8 left, u8 top, u8 multichoiceId, bool8 ignore
         gSpecialVar_Result = 0xFF;
         width = 0;
 
-        for (i = 0; i < gMultichoiceLists[multichoiceId].count; i++)
+        for (i = 0; i < sMultichoiceLists[multichoiceId].count; i++)
         {
-            width = DisplayTextAndGetWidth(gMultichoiceLists[multichoiceId].list[i].text, width);
+            width = DisplayTextAndGetWidth(sMultichoiceLists[multichoiceId].list[i].text, width);
         }
 
         newWidth = ConvertPixelWidthToTileWidth(width);
 
         left = ScriptMenu_AdjustLeftCoordFromWidth(left, columnCount * newWidth);
-        rowCount = gMultichoiceLists[multichoiceId].count / columnCount;
+        rowCount = sMultichoiceLists[multichoiceId].count / columnCount;
 
         taskId = CreateTask(Task_HandleMultichoiceGridInput, 80);
 
         gTasks[taskId].tIgnoreBPress = ignoreBPress;
         gTasks[taskId].tWindowId = CreateWindowFromRect(left, top, columnCount * newWidth, rowCount * 2);
         SetStandardWindowBorderStyle(gTasks[taskId].tWindowId, 0);
-        PrintMenuGridTable(gTasks[taskId].tWindowId, newWidth * 8, columnCount, rowCount, gMultichoiceLists[multichoiceId].list);
+        PrintMenuGridTable(gTasks[taskId].tWindowId, newWidth * 8, columnCount, rowCount, sMultichoiceLists[multichoiceId].list);
         sub_8199944(gTasks[taskId].tWindowId, newWidth * 8, columnCount, rowCount, 0);
         CopyWindowToVram(gTasks[taskId].tWindowId, 3);
         return TRUE;
@@ -515,7 +515,7 @@ static void CreateLilycoveSSTidalMultichoice(void)
             u8 selection = sLilycoveSSTidalSelections[j];
             if (selection != 0xFF)
             {
-                pixelWidth = DisplayTextAndGetWidth(gLilycoveSSTidalDestinations[selection], pixelWidth);
+                pixelWidth = DisplayTextAndGetWidth(sLilycoveSSTidalDestinations[selection], pixelWidth);
             }
         }
 
@@ -527,7 +527,7 @@ static void CreateLilycoveSSTidalMultichoice(void)
         {
             if (sLilycoveSSTidalSelections[i] != 0xFF)
             {
-                AddTextPrinterParameterized(windowId, 1, gLilycoveSSTidalDestinations[sLilycoveSSTidalSelections[i]], 8, selectionCount * 16 + 1, TEXT_SPEED_FF, NULL);
+                AddTextPrinterParameterized(windowId, 1, sLilycoveSSTidalDestinations[sLilycoveSSTidalSelections[i]], 8, selectionCount * 16 + 1, TEXT_SPEED_FF, NULL);
                 selectionCount++;
             }
         }
@@ -643,29 +643,29 @@ static void DrawLinkServicesMultichoiceMenu(u8 multichoiceId)
 {
     switch (multichoiceId)
     {
-    case MULTI_LINK_SERVICES_B2:
+    case MULTI_WIRELESS_NO_BERRY:
         FillWindowPixelBuffer(0, PIXEL_FILL(1));
-        AddTextPrinterParameterized2(0, 1, gUnknown_0858BBAC[Menu_GetCursorPos()], 0, NULL, 2, 1, 3);
+        AddTextPrinterParameterized2(0, 1, sWirelessOptionsNoBerryCrush[Menu_GetCursorPos()], 0, NULL, 2, 1, 3);
         break;
-    case MULTI_LINK_SERVICES_B1:
+    case MULTI_CABLE_CLUB_WITH_RECORD_MIX:
         FillWindowPixelBuffer(0, PIXEL_FILL(1));
-        AddTextPrinterParameterized2(0, 1, gUnknown_0858BB9C[Menu_GetCursorPos()], 0, NULL, 2, 1, 3);
+        AddTextPrinterParameterized2(0, 1, sCableClubOptions_WithRecordMix[Menu_GetCursorPos()], 0, NULL, 2, 1, 3);
         break;
-    case MULTI_LINK_SERVICES_C:
+    case MULTI_WIRELESS_NO_RECORD:
         FillWindowPixelBuffer(0, PIXEL_FILL(1));
-        AddTextPrinterParameterized2(0, 1, gUnknown_0858BBBC[Menu_GetCursorPos()], 0, NULL, 2, 1, 3);
+        AddTextPrinterParameterized2(0, 1, sWirelessOptions_NoRecordMix[Menu_GetCursorPos()], 0, NULL, 2, 1, 3);
         break;
-    case MULTI_LINK_SERVICES_D:
+    case MULTI_WIRELESS_ALL_SERVICES:
         FillWindowPixelBuffer(0, PIXEL_FILL(1));
-        AddTextPrinterParameterized2(0, 1, gUnknown_0858BBCC[Menu_GetCursorPos()], 0, NULL, 2, 1, 3);
+        AddTextPrinterParameterized2(0, 1, sWirelessOptions_AllServices[Menu_GetCursorPos()], 0, NULL, 2, 1, 3);
         break;
-    case MULTI_LINK_SERVICES_A2:
+    case MULTI_WIRELESS_NO_RECORD_BERRY:
         FillWindowPixelBuffer(0, PIXEL_FILL(1));
-        AddTextPrinterParameterized2(0, 1, gUnknown_0858BBEC[Menu_GetCursorPos()], 0, NULL, 2, 1, 3);
+        AddTextPrinterParameterized2(0, 1, sWirelessOptions_NoRecordMixBerryCrush[Menu_GetCursorPos()], 0, NULL, 2, 1, 3);
         break;
-    case MULTI_LINK_SERVICES_A1:
+    case MULTI_CABLE_CLUB_NO_RECORD_MIX:
         FillWindowPixelBuffer(0, PIXEL_FILL(1));
-        AddTextPrinterParameterized2(0, 1, gUnknown_0858BBE0[Menu_GetCursorPos()], 0, NULL, 2, 1, 3);
+        AddTextPrinterParameterized2(0, 1, sCableClubOptions_NoRecordMix[Menu_GetCursorPos()], 0, NULL, 2, 1, 3);
         break;
     }
 }

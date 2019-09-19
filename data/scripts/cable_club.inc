@@ -344,7 +344,7 @@ OldaleTown_PokemonCenter_2F_EventScript_276E22:: @ 8276E22
 OldaleTown_PokemonCenter_2F_EventScript_276E30:: @ 8276E30
 	setvar VAR_0x8004, 0
 	goto_if_set FLAG_VISITED_MAUVILLE_CITY, OldaleTown_PokemonCenter_2F_EventScript_276E75
-	multichoice 0, 0, MULTI_LINK_SERVICES_A1, 0
+	multichoice 0, 0, MULTI_CABLE_CLUB_NO_RECORD_MIX, 0
 	switch VAR_RESULT
 	case 0, OldaleTown_PokemonCenter_2F_EventScript_2770B2
 	case 1, OldaleTown_PokemonCenter_2F_EventScript_276EB7
@@ -353,7 +353,7 @@ OldaleTown_PokemonCenter_2F_EventScript_276E30:: @ 8276E30
 	end
 
 OldaleTown_PokemonCenter_2F_EventScript_276E75:: @ 8276E75
-	multichoice 0, 0, MULTI_LINK_SERVICES_B1, 0
+	multichoice 0, 0, MULTI_CABLE_CLUB_WITH_RECORD_MIX, 0
 	switch VAR_RESULT
 	case 0, OldaleTown_PokemonCenter_2F_EventScript_2770B2
 	case 1, OldaleTown_PokemonCenter_2F_EventScript_276EB7
@@ -1103,7 +1103,7 @@ OldaleTown_PokemonCenter_2F_EventScript_2776E3:: @ 82776E3
 	compare VAR_RESULT, 0
 	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_27778B
 	goto_if_set FLAG_VISITED_MAUVILLE_CITY, OldaleTown_PokemonCenter_2F_EventScript_27773E
-	multichoice 0, 0, MULTI_LINK_SERVICES_C, 0
+	multichoice 0, 0, MULTI_WIRELESS_NO_RECORD, 0
 	switch VAR_RESULT
 	case 0, OldaleTown_PokemonCenter_2F_EventScript_27780D
 	case 1, OldaleTown_PokemonCenter_2F_EventScript_27783B
@@ -1113,7 +1113,7 @@ OldaleTown_PokemonCenter_2F_EventScript_2776E3:: @ 82776E3
 	end
 
 OldaleTown_PokemonCenter_2F_EventScript_27773E:: @ 827773E
-	multichoice 0, 0, MULTI_LINK_SERVICES_D, 0
+	multichoice 0, 0, MULTI_WIRELESS_ALL_SERVICES, 0
 	switch VAR_RESULT
 	case 0, OldaleTown_PokemonCenter_2F_EventScript_27780D
 	case 1, OldaleTown_PokemonCenter_2F_EventScript_27783B
@@ -1125,7 +1125,7 @@ OldaleTown_PokemonCenter_2F_EventScript_27773E:: @ 827773E
 
 OldaleTown_PokemonCenter_2F_EventScript_27778B:: @ 827778B
 	goto_if_set FLAG_VISITED_MAUVILLE_CITY, OldaleTown_PokemonCenter_2F_EventScript_2777CB
-	multichoice 0, 0, MULTI_LINK_SERVICES_A2, 0
+	multichoice 0, 0, MULTI_WIRELESS_NO_RECORD_BERRY, 0
 	switch VAR_RESULT
 	case 0, OldaleTown_PokemonCenter_2F_EventScript_27780D
 	case 1, OldaleTown_PokemonCenter_2F_EventScript_27783B
@@ -1134,7 +1134,7 @@ OldaleTown_PokemonCenter_2F_EventScript_27778B:: @ 827778B
 	end
 
 OldaleTown_PokemonCenter_2F_EventScript_2777CB:: @ 82777CB
-	multichoice 0, 0, MULTI_LINK_SERVICES_B2, 0
+	multichoice 0, 0, MULTI_WIRELESS_NO_BERRY, 0
 	switch VAR_RESULT
 	case 0, OldaleTown_PokemonCenter_2F_EventScript_27780D
 	case 1, OldaleTown_PokemonCenter_2F_EventScript_27783B
