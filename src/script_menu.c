@@ -20,24 +20,23 @@
 
 #include "data/script_menu.h"
 
-EWRAM_DATA u8 gProcessInputDelay = 0;
+static EWRAM_DATA u8 sProcessInputDelay = 0;
 
-static u8 sLilycoveSSTidalSelections[ARRAY_COUNT(gLilycoveSSTidalDestinations)];
-//static u32 filler_0300112c;
+static u8 sLilycoveSSTidalSelections[SSTIDAL_SELECTION_COUNT];
 
-static void Task_HandleMultichoiceInput(u8);
-static void Task_HandleYesNoInput(u8);
-static void Task_HandleMultichoiceGridInput(u8);
-static void DrawMultichoiceMenu(u8, u8, u8, bool8, u8);
-static void sub_80E1FBC(u8, u8, u8, u8);
-static void DrawLinkServicesMultichoiceMenu(u8);
+static void Task_HandleMultichoiceInput(u8 taskId);
+static void Task_HandleYesNoInput(u8 taskId);
+static void Task_HandleMultichoiceGridInput(u8 taskId);
+static void DrawMultichoiceMenu(u8 left, u8 top, u8 multichoiceId, bool8 ignoreBPress, u8 cursorPos);
+static void InitMultichoiceCheckWrap(bool8 ignoreBPress, u8 count, u8 windowId, u8 multichoiceId);
+static void DrawLinkServicesMultichoiceMenu(u8 multichoiceId);
 static void CreatePCMultichoice(void);
 static void CreateLilycoveSSTidalMultichoice(void);
 static bool8 IsPicboxClosed(void);
 static void CreateStartMenuForPokenavTutorial(void);
-static void sub_80E2CC4(u8, u8, u8, u8);
+static void InitMultichoiceNoWrap(bool8 ignoreBPress, u8 unusedCount, u8 windowId, u8 multichoiceId);
 
-bool8 ScriptMenu_Multichoice(u8 left, u8 top, u8 multichoiceId, u8 ignoreBPress)
+bool8 ScriptMenu_Multichoice(u8 left, u8 top, u8 multichoiceId, bool8 ignoreBPress)
 {
     if (FuncIsActiveTask(Task_HandleMultichoiceInput) == TRUE)
     {
@@ -66,7 +65,7 @@ bool8 ScriptMenu_MultichoiceWithDefault(u8 left, u8 top, u8 multichoiceId, bool8
 }
 
 // Unused
-static u16 sub_80E1EB8(const u8 *str)
+static u16 GetLengthWithExpandedPlayerName(const u8 *str)
 {
     u16 length = 0;
 
@@ -75,7 +74,7 @@ static u16 sub_80E1EB8(const u8 *str)
         if (*str == PLACEHOLDER_BEGIN)
         {
             str++;
-            if (*str == 1)
+            if (*str == 1) // 01 is the second byte of the {PLAYER} placeholder
             {
                 length += StringLength(gSaveBlock2Ptr->playerName);
                 str++;
@@ -91,7 +90,7 @@ static u16 sub_80E1EB8(const u8 *str)
     return length;
 }
 
-static void DrawMultichoiceMenu(u8 left, u8 top, u8 multichoiceId, u8 ignoreBPress, u8 cursorPos)
+static void DrawMultichoiceMenu(u8 left, u8 top, u8 multichoiceId, bool8 ignoreBPress, u8 cursorPos)
 {
     int i;
     u8 windowId;
@@ -112,7 +111,7 @@ static void DrawMultichoiceMenu(u8 left, u8 top, u8 multichoiceId, u8 ignoreBPre
     PrintMenuTable(windowId, count, actions);
     InitMenuInUpperLeftCornerPlaySoundWhenAPressed(windowId, count, cursorPos);
     schedule_bg_copy_tilemap_to_vram(0);
-    sub_80E1FBC(ignoreBPress, count, windowId, multichoiceId);
+    InitMultichoiceCheckWrap(ignoreBPress, count, windowId, multichoiceId);
 }
 
 #define tLeft           data[0]
@@ -124,17 +123,17 @@ static void DrawMultichoiceMenu(u8 left, u8 top, u8 multichoiceId, u8 ignoreBPre
 #define tWindowId       data[6]
 #define tMultichoiceId  data[7]
 
-static void sub_80E1FBC(u8 ignoreBPress, u8 count, u8 windowId, u8 multichoiceId)
+static void InitMultichoiceCheckWrap(bool8 ignoreBPress, u8 count, u8 windowId, u8 multichoiceId)
 {
     u8 i;
     u8 taskId;
-    gProcessInputDelay = 2;
+    sProcessInputDelay = 2;
 
     for (i = 0; i < ARRAY_COUNT(gLinkServicesMultichoiceIds); i++)
     {
         if (gLinkServicesMultichoiceIds[i] == multichoiceId)
         {
-            gProcessInputDelay = 12;
+            sProcessInputDelay = 12;
         }
     }
 
@@ -160,9 +159,9 @@ static void Task_HandleMultichoiceInput(u8 taskId)
 
     if (!gPaletteFade.active)
     {
-        if (gProcessInputDelay)
+        if (sProcessInputDelay)
         {
-            gProcessInputDelay--;
+            sProcessInputDelay--;
         }
         else
         {
@@ -249,7 +248,7 @@ static void Task_HandleYesNoInput(u8 taskId)
     EnableBothScriptContexts();
 }
 
-bool8 ScriptMenu_MultichoiceGrid(u8 left, u8 top, u8 multichoiceId, u8 ignoreBPress, u8 columnCount)
+bool8 ScriptMenu_MultichoiceGrid(u8 left, u8 top, u8 multichoiceId, bool8 ignoreBPress, u8 columnCount)
 {
     if (FuncIsActiveTask(Task_HandleMultichoiceGridInput) == TRUE)
     {
@@ -348,7 +347,8 @@ static void CreatePCMultichoice(void)
 
     width = ConvertPixelWidthToTileWidth(pixelWidth);
 
-    if (FlagGet(FLAG_SYS_GAME_CLEAR)) // player has cleared game?
+    // Include Hall of Fame option if player is champion
+    if (FlagGet(FLAG_SYS_GAME_CLEAR))
     {
         numChoices = 4;
         windowId = CreateWindowFromRect(0, 0, width, 8);
@@ -364,7 +364,8 @@ static void CreatePCMultichoice(void)
         AddTextPrinterParameterized(windowId, 1, gText_LogOff, y, 33, TEXT_SPEED_FF, NULL);
     }
 
-    if (FlagGet(FLAG_SYS_PC_LANETTE)) // player met lanette?
+    // Change PC name if player has met Lanette
+    if (FlagGet(FLAG_SYS_PC_LANETTE))
         AddTextPrinterParameterized(windowId, 1, gText_LanettesPC, y, 1, TEXT_SPEED_FF, NULL);
     else
         AddTextPrinterParameterized(windowId, 1, gText_SomeonesPC, y, 1, TEXT_SPEED_FF, NULL);
@@ -373,7 +374,7 @@ static void CreatePCMultichoice(void)
     PrintPlayerNameOnWindow(windowId, gStringVar4, y, 17);
     InitMenuInUpperLeftCornerPlaySoundWhenAPressed(windowId, numChoices, 0);
     CopyWindowToVram(windowId, 3);
-    sub_80E1FBC(FALSE, numChoices, windowId, MULTI_PC);
+    InitMultichoiceCheckWrap(FALSE, numChoices, windowId, MULTI_PC);
 }
 
 void ScriptMenu_DisplayPCStartupPrompt(void)
@@ -408,7 +409,7 @@ static void CreateLilycoveSSTidalMultichoice(void)
     u8 i;
     u32 j;
 
-    for (i = 0; i < ARRAY_COUNT(sLilycoveSSTidalSelections); i++)
+    for (i = 0; i < SSTIDAL_SELECTION_COUNT; i++)
     {
         sLilycoveSSTidalSelections[i] = 0xFF;
     }
@@ -509,7 +510,7 @@ static void CreateLilycoveSSTidalMultichoice(void)
     {
         pixelWidth = 0;
 
-        for (j = 0; j < ARRAY_COUNT(gLilycoveSSTidalDestinations); j++)
+        for (j = 0; j < SSTIDAL_SELECTION_COUNT; j++)
         {
             u8 selection = sLilycoveSSTidalSelections[j];
             if (selection != 0xFF)
@@ -522,7 +523,7 @@ static void CreateLilycoveSSTidalMultichoice(void)
         windowId = CreateWindowFromRect(MAX_MULTICHOICE_WIDTH - width, (6 - count) * 2, width, count * 2);
         SetStandardWindowBorderStyle(windowId, 0);
 
-        for (selectionCount = 0, i = 0; i < ARRAY_COUNT(gLilycoveSSTidalDestinations); i++)
+        for (selectionCount = 0, i = 0; i < SSTIDAL_SELECTION_COUNT; i++)
         {
             if (sLilycoveSSTidalSelections[i] != 0xFF)
             {
@@ -533,7 +534,7 @@ static void CreateLilycoveSSTidalMultichoice(void)
 
         InitMenuInUpperLeftCornerPlaySoundWhenAPressed(windowId, count, count - 1);
         CopyWindowToVram(windowId, 3);
-        sub_80E1FBC(FALSE, count, windowId, MULTI_SSTIDAL_LILYCOVE);
+        InitMultichoiceCheckWrap(FALSE, count, windowId, MULTI_SSTIDAL_LILYCOVE);
     }
 }
 
@@ -695,17 +696,17 @@ static void CreateStartMenuForPokenavTutorial(void)
     AddTextPrinterParameterized(windowId, 1, gText_MenuOptionSave, 8, 89, TEXT_SPEED_FF, NULL);
     AddTextPrinterParameterized(windowId, 1, gText_MenuOptionOption, 8, 105, TEXT_SPEED_FF, NULL);
     AddTextPrinterParameterized(windowId, 1, gText_MenuOptionExit, 8, 121, TEXT_SPEED_FF, NULL);
-    sub_81983AC(windowId, 1, 0, 9, 16, 8, 0);
-    sub_80E2CC4(FALSE, 8, windowId, MULTI_FORCED_START_MENU);
+    sub_81983AC(windowId, 1, 0, 9, 16, ARRAY_COUNT(MultichoiceList_ForcedStartMenu), 0);
+    InitMultichoiceNoWrap(FALSE, ARRAY_COUNT(MultichoiceList_ForcedStartMenu), windowId, MULTI_FORCED_START_MENU);
     CopyWindowToVram(windowId, 3);
 }
 
 #define tWindowId       data[6]
 
-static void sub_80E2CC4(bool8 ignoreBPress, u8 unused, u8 windowId, u8 multichoiceId)
+static void InitMultichoiceNoWrap(bool8 ignoreBPress, u8 unusedCount, u8 windowId, u8 multichoiceId)
 {
     u8 taskId;
-    gProcessInputDelay = 2;
+    sProcessInputDelay = 2;
     taskId = CreateTask(Task_HandleMultichoiceInput, 80);
     gTasks[taskId].tIgnoreBPress = ignoreBPress;
     gTasks[taskId].tDoWrap = 0;
@@ -729,14 +730,14 @@ static int DisplayTextAndGetWidthInternal(const u8 *str)
     return GetStringWidth(1, temp, 0);
 }
 
-int DisplayTextAndGetWidth(const u8 *str, int prevMaxWidth)
+int DisplayTextAndGetWidth(const u8 *str, int prevWidth)
 {
-    int len = DisplayTextAndGetWidthInternal(str);
-    if (len < prevMaxWidth)
+    int width = DisplayTextAndGetWidthInternal(str);
+    if (width < prevWidth)
     {
-        len = prevMaxWidth;
+        width = prevWidth;
     }
-    return len;
+    return width;
 }
 
 int ConvertPixelWidthToTileWidth(int width)

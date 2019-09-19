@@ -83,7 +83,6 @@ static EWRAM_DATA u8 sPCBoxToSendMon = 0;
 static EWRAM_DATA u32 sUnknown_0203AB70 = 0;
 
 struct ListMenuTemplate gScrollableMultichoice_ListMenuTemplate;
-static const u8 *const sScrollableMultichoiceOptions[][MAX_SCROLL_MULTI_LENGTH];
 
 extern const u16 gEventObjectPalette8[];
 extern const u16 gEventObjectPalette17[];
