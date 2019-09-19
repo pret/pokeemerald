@@ -480,7 +480,7 @@ gSpecials:: @ 81DBA64
 	def_special ShowFrontierGamblerGoMessage
 	def_special Script_DoRayquazaScene
 	def_special sub_81C72A4
-	def_special sp106_CreateStartMenu
+	def_special CreateStartMenuForPokenavTutorial
 	def_special CountPlayerTrainerStars
 	def_special BufferBattleFrontierTutorMoveName
 	def_special CloseBattleFrontierTutorWindow

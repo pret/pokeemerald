@@ -176,7 +176,7 @@ Route110_TrickHouseEnd_EventScript_26AF28:: @ 826AF28
 	end
 
 Route110_TrickHouseEnd_EventScript_26AFA5:: @ 826AFA5
-	multichoice 0, 0, 88, 1
+	multichoice 0, 0, MULTI_TENT, 1
 	switch VAR_RESULT
 	case 0, Route110_TrickHouseEnd_EventScript_26AFBF
 	goto Route110_TrickHouseEnd_EventScript_26AFC7

@@ -344,22 +344,22 @@ OldaleTown_PokemonCenter_2F_EventScript_276E22:: @ 8276E22
 OldaleTown_PokemonCenter_2F_EventScript_276E30:: @ 8276E30
 	setvar VAR_0x8004, 0
 	goto_if_set FLAG_VISITED_MAUVILLE_CITY, OldaleTown_PokemonCenter_2F_EventScript_276E75
-	multichoice 0, 0, 74, 0
+	multichoice 0, 0, MULTI_LINK_SERVICES_A1, 0
 	switch VAR_RESULT
 	case 0, OldaleTown_PokemonCenter_2F_EventScript_2770B2
 	case 1, OldaleTown_PokemonCenter_2F_EventScript_276EB7
 	case 2, OldaleTown_PokemonCenter_2F_EventScript_2772EC
-	case 127, OldaleTown_PokemonCenter_2F_EventScript_2772EC
+	case MULTI_B_PRESSED, OldaleTown_PokemonCenter_2F_EventScript_2772EC
 	end
 
 OldaleTown_PokemonCenter_2F_EventScript_276E75:: @ 8276E75
-	multichoice 0, 0, 76, 0
+	multichoice 0, 0, MULTI_LINK_SERVICES_B1, 0
 	switch VAR_RESULT
 	case 0, OldaleTown_PokemonCenter_2F_EventScript_2770B2
 	case 1, OldaleTown_PokemonCenter_2F_EventScript_276EB7
 	case 2, OldaleTown_PokemonCenter_2F_EventScript_2771DB
 	case 3, OldaleTown_PokemonCenter_2F_EventScript_2772EC
-	case 127, OldaleTown_PokemonCenter_2F_EventScript_2772EC
+	case MULTI_B_PRESSED, OldaleTown_PokemonCenter_2F_EventScript_2772EC
 	end
 
 OldaleTown_PokemonCenter_2F_EventScript_276EB7:: @ 8276EB7
@@ -370,14 +370,14 @@ OldaleTown_PokemonCenter_2F_EventScript_276EB7:: @ 8276EB7
 OldaleTown_PokemonCenter_2F_EventScript_276EC2:: @ 8276EC2
 	message OldaleTown_PokemonCenter_2F_Text_2790BE
 	waitmessage
-	multichoice 0, 0, 18, 0
+	multichoice 0, 0, MULTI_BATTLE_MODE, 0
 	switch VAR_RESULT
 	case 0, OldaleTown_PokemonCenter_2F_EventScript_276F23
 	case 1, OldaleTown_PokemonCenter_2F_EventScript_276F2E
 	case 2, OldaleTown_PokemonCenter_2F_EventScript_276F55
 	case 3, OldaleTown_PokemonCenter_2F_EventScript_276F15
 	case 4, OldaleTown_PokemonCenter_2F_EventScript_2772EC
-	case 127, OldaleTown_PokemonCenter_2F_EventScript_2772EC
+	case MULTI_B_PRESSED, OldaleTown_PokemonCenter_2F_EventScript_2772EC
 	end
 
 OldaleTown_PokemonCenter_2F_EventScript_276F15:: @ 8276F15
@@ -991,12 +991,12 @@ OldaleTown_PokemonCenter_2F_EventScript_27751B:: @ 827751B
 	end
 
 OldaleTown_PokemonCenter_2F_EventScript_27755C:: @ 827755C
-	multichoice 17, 6, 17, 0
+	multichoice 17, 6, MULTI_YESNOINFO, 0
 	switch VAR_RESULT
 	case 0, OldaleTown_PokemonCenter_2F_EventScript_27759F
 	case 1, OldaleTown_PokemonCenter_2F_EventScript_2772EC
 	case 2, OldaleTown_PokemonCenter_2F_EventScript_277593
-	case 127, OldaleTown_PokemonCenter_2F_EventScript_2772EC
+	case MULTI_B_PRESSED, OldaleTown_PokemonCenter_2F_EventScript_2772EC
 	end
 
 OldaleTown_PokemonCenter_2F_EventScript_277593:: @ 8277593
@@ -1103,44 +1103,44 @@ OldaleTown_PokemonCenter_2F_EventScript_2776E3:: @ 82776E3
 	compare VAR_RESULT, 0
 	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_27778B
 	goto_if_set FLAG_VISITED_MAUVILLE_CITY, OldaleTown_PokemonCenter_2F_EventScript_27773E
-	multichoice 0, 0, 78, 0
+	multichoice 0, 0, MULTI_LINK_SERVICES_C, 0
 	switch VAR_RESULT
 	case 0, OldaleTown_PokemonCenter_2F_EventScript_27780D
 	case 1, OldaleTown_PokemonCenter_2F_EventScript_27783B
 	case 2, OldaleTown_PokemonCenter_2F_EventScript_2778F7
 	case 3, OldaleTown_PokemonCenter_2F_EventScript_2772EC
-	case 127, OldaleTown_PokemonCenter_2F_EventScript_2772EC
+	case MULTI_B_PRESSED, OldaleTown_PokemonCenter_2F_EventScript_2772EC
 	end
 
 OldaleTown_PokemonCenter_2F_EventScript_27773E:: @ 827773E
-	multichoice 0, 0, 79, 0
+	multichoice 0, 0, MULTI_LINK_SERVICES_D, 0
 	switch VAR_RESULT
 	case 0, OldaleTown_PokemonCenter_2F_EventScript_27780D
 	case 1, OldaleTown_PokemonCenter_2F_EventScript_27783B
 	case 2, OldaleTown_PokemonCenter_2F_EventScript_2778D9
 	case 3, OldaleTown_PokemonCenter_2F_EventScript_2778F7
 	case 4, OldaleTown_PokemonCenter_2F_EventScript_2772EC
-	case 127, OldaleTown_PokemonCenter_2F_EventScript_2772EC
+	case MULTI_B_PRESSED, OldaleTown_PokemonCenter_2F_EventScript_2772EC
 	end
 
 OldaleTown_PokemonCenter_2F_EventScript_27778B:: @ 827778B
 	goto_if_set FLAG_VISITED_MAUVILLE_CITY, OldaleTown_PokemonCenter_2F_EventScript_2777CB
-	multichoice 0, 0, 75, 0
+	multichoice 0, 0, MULTI_LINK_SERVICES_A2, 0
 	switch VAR_RESULT
 	case 0, OldaleTown_PokemonCenter_2F_EventScript_27780D
 	case 1, OldaleTown_PokemonCenter_2F_EventScript_27783B
 	case 2, OldaleTown_PokemonCenter_2F_EventScript_2772EC
-	case 127, OldaleTown_PokemonCenter_2F_EventScript_2772EC
+	case MULTI_B_PRESSED, OldaleTown_PokemonCenter_2F_EventScript_2772EC
 	end
 
 OldaleTown_PokemonCenter_2F_EventScript_2777CB:: @ 82777CB
-	multichoice 0, 0, 77, 0
+	multichoice 0, 0, MULTI_LINK_SERVICES_B2, 0
 	switch VAR_RESULT
 	case 0, OldaleTown_PokemonCenter_2F_EventScript_27780D
 	case 1, OldaleTown_PokemonCenter_2F_EventScript_27783B
 	case 2, OldaleTown_PokemonCenter_2F_EventScript_2778D9
 	case 3, OldaleTown_PokemonCenter_2F_EventScript_2772EC
-	case 127, OldaleTown_PokemonCenter_2F_EventScript_2772EC
+	case MULTI_B_PRESSED, OldaleTown_PokemonCenter_2F_EventScript_2772EC
 	end
 
 OldaleTown_PokemonCenter_2F_EventScript_27780D:: @ 827780D
@@ -1157,14 +1157,14 @@ OldaleTown_PokemonCenter_2F_EventScript_27780D:: @ 827780D
 OldaleTown_PokemonCenter_2F_EventScript_27783B:: @ 827783B
 	message OldaleTown_PokemonCenter_2F_Text_2790BE
 	waitmessage
-	multichoice 0, 0, 18, 0
+	multichoice 0, 0, MULTI_BATTLE_MODE, 0
 	switch VAR_RESULT
 	case 0, OldaleTown_PokemonCenter_2F_EventScript_27788E
 	case 1, OldaleTown_PokemonCenter_2F_EventScript_277899
 	case 2, OldaleTown_PokemonCenter_2F_EventScript_2778C0
 	case 3, OldaleTown_PokemonCenter_2F_EventScript_2778CB
 	case 4, OldaleTown_PokemonCenter_2F_EventScript_2772EC
-	case 127, OldaleTown_PokemonCenter_2F_EventScript_2772EC
+	case MULTI_B_PRESSED, OldaleTown_PokemonCenter_2F_EventScript_2772EC
 	end
 
 OldaleTown_PokemonCenter_2F_EventScript_27788E:: @ 827788E
@@ -1235,12 +1235,12 @@ OldaleTown_PokemonCenter_2F_EventScript_277931:: @ 8277931
 OldaleTown_PokemonCenter_2F_EventScript_277989:: @ 8277989
 	message OldaleTown_PokemonCenter_2F_Text_2792CD
 	waitmessage
-	multichoice 16, 6, 81, 0
+	multichoice 16, 6, MULTI_LINK_LEADER, 0
 	switch VAR_RESULT
 	case 0, OldaleTown_PokemonCenter_2F_EventScript_2779EE
 	case 1, OldaleTown_PokemonCenter_2F_EventScript_2779C6
 	case 2, OldaleTown_PokemonCenter_2F_EventScript_2772EC
-	case 127, OldaleTown_PokemonCenter_2F_EventScript_2772EC
+	case MULTI_B_PRESSED, OldaleTown_PokemonCenter_2F_EventScript_2772EC
 	end
 
 OldaleTown_PokemonCenter_2F_EventScript_2779C6:: @ 82779C6
@@ -1268,12 +1268,12 @@ OldaleTown_PokemonCenter_2F_EventScript_2779EE:: @ 82779EE
 OldaleTown_PokemonCenter_2F_EventScript_277A16:: @ 8277A16
 	message OldaleTown_PokemonCenter_2F_Text_279334
 	waitmessage
-	multichoice 16, 6, 81, 0
+	multichoice 16, 6, MULTI_LINK_LEADER, 0
 	switch VAR_RESULT
 	case 0, OldaleTown_PokemonCenter_2F_EventScript_277A7B
 	case 1, OldaleTown_PokemonCenter_2F_EventScript_277A53
 	case 2, OldaleTown_PokemonCenter_2F_EventScript_2772EC
-	case 127, OldaleTown_PokemonCenter_2F_EventScript_2772EC
+	case MULTI_B_PRESSED, OldaleTown_PokemonCenter_2F_EventScript_2772EC
 	end
 
 OldaleTown_PokemonCenter_2F_EventScript_277A53:: @ 8277A53
@@ -1301,12 +1301,12 @@ OldaleTown_PokemonCenter_2F_EventScript_277A7B:: @ 8277A7B
 OldaleTown_PokemonCenter_2F_EventScript_277AA3:: @ 8277AA3
 	message OldaleTown_PokemonCenter_2F_Text_2793A3
 	waitmessage
-	multichoice 16, 6, 81, 0
+	multichoice 16, 6, MULTI_LINK_LEADER, 0
 	switch VAR_RESULT
 	case 0, OldaleTown_PokemonCenter_2F_EventScript_277B08
 	case 1, OldaleTown_PokemonCenter_2F_EventScript_277AE0
 	case 2, OldaleTown_PokemonCenter_2F_EventScript_2772EC
-	case 127, OldaleTown_PokemonCenter_2F_EventScript_2772EC
+	case MULTI_B_PRESSED, OldaleTown_PokemonCenter_2F_EventScript_2772EC
 	end
 
 OldaleTown_PokemonCenter_2F_EventScript_277AE0:: @ 8277AE0
@@ -1445,12 +1445,12 @@ MossdeepCity_GameCorner_1F_EventScript_277C34:: @ 8277C34
 	faceplayer
 	message MossdeepCity_GameCorner_1F_Text_278A7D
 	waitmessage
-	multichoice 0, 0, 80, 0
+	multichoice 0, 0, MULTI_WIRELESS_MINIGAME, 0
 	switch VAR_RESULT
 	case 0, MossdeepCity_GameCorner_1F_EventScript_277C73
 	case 1, MossdeepCity_GameCorner_1F_EventScript_277C7D
 	case 2, MossdeepCity_GameCorner_1F_EventScript_277C87
-	case 127, MossdeepCity_GameCorner_1F_EventScript_277C87
+	case MULTI_B_PRESSED, MossdeepCity_GameCorner_1F_EventScript_277C87
 	end
 
 MossdeepCity_GameCorner_1F_EventScript_277C73:: @ 8277C73
@@ -1479,12 +1479,12 @@ MossdeepCity_GameCorner_1F_EventScript_277C91:: @ 8277C91
 	delay 60
 	message MossdeepCity_GameCorner_1F_Text_278DAD
 	waitmessage
-	multichoice 0, 0, 80, 0
+	multichoice 0, 0, MULTI_WIRELESS_MINIGAME, 0
 	switch VAR_RESULT
 	case 0, MossdeepCity_GameCorner_1F_EventScript_277CE9
 	case 1, MossdeepCity_GameCorner_1F_EventScript_277D35
 	case 2, MossdeepCity_GameCorner_1F_EventScript_2772F9
-	case 127, MossdeepCity_GameCorner_1F_EventScript_2772F9
+	case MULTI_B_PRESSED, MossdeepCity_GameCorner_1F_EventScript_2772F9
 	end
 
 MossdeepCity_GameCorner_1F_EventScript_277CE9:: @ 8277CE9
@@ -1528,12 +1528,12 @@ MossdeepCity_GameCorner_1F_EventScript_277D35:: @ 8277D35
 MossdeepCity_GameCorner_1F_EventScript_277D81:: @ 8277D81
 	message MossdeepCity_GameCorner_1F_Text_2793A3
 	waitmessage
-	multichoice 16, 6, 81, 0
+	multichoice 16, 6, MULTI_LINK_LEADER, 0
 	switch VAR_RESULT
 	case 0, MossdeepCity_GameCorner_1F_EventScript_277DE6
 	case 1, MossdeepCity_GameCorner_1F_EventScript_277DBE
 	case 2, MossdeepCity_GameCorner_1F_EventScript_2772F9
-	case 127, MossdeepCity_GameCorner_1F_EventScript_2772F9
+	case MULTI_B_PRESSED, MossdeepCity_GameCorner_1F_EventScript_2772F9
 	end
 
 MossdeepCity_GameCorner_1F_EventScript_277DBE:: @ 8277DBE

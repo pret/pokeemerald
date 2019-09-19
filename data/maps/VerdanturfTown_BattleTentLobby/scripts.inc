@@ -141,12 +141,12 @@ VerdanturfTown_BattleTentLobby_EventScript_201873:: @ 8201873
 VerdanturfTown_BattleTentLobby_EventScript_201893:: @ 8201893
 	message VerdanturfTown_BattleTentLobby_Text_2C5129
 	waitmessage
-	multichoice 17, 6, 23, 0
+	multichoice 17, 6, MULTI_CHALLENGEINFO, 0
 	switch VAR_RESULT
 	case 0, VerdanturfTown_BattleTentLobby_EventScript_2018CF
 	case 1, VerdanturfTown_BattleTentLobby_EventScript_2019DB
 	case 2, VerdanturfTown_BattleTentLobby_EventScript_201A37
-	case 127, VerdanturfTown_BattleTentLobby_EventScript_201A37
+	case MULTI_B_PRESSED, VerdanturfTown_BattleTentLobby_EventScript_201A37
 
 VerdanturfTown_BattleTentLobby_EventScript_2018CF:: @ 82018CF
 	setvar VAR_FRONTIER_FACILITY, 2

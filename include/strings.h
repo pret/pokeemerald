@@ -1212,7 +1212,7 @@ extern const u8 gText_AboutG_Mode[];
 extern const u8 gText_E_Mode[];
 extern const u8 gText_G_Mode[];
 extern const u8 gText_Blank[];
-extern const u8 gText_TwoSpaces[];
+extern const u8 gText_5BP[];
 extern const u8 gText_10BP[];
 extern const u8 gText_15BP[];
 extern const u8 gText_ClawFossil[];

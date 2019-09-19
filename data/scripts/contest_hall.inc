@@ -43,24 +43,24 @@ LilycoveCity_ContestLobby_EventScript_279D4B:: @ 8279D4B
 LilycoveCity_ContestLobby_EventScript_279D5A:: @ 8279D5A
 	message LilycoveCity_ContestLobby_Text_27AF28
 	waitmessage
-	multichoice 0, 0, 2, 0
+	multichoice 0, 0, MULTI_ENTERINFO, 0
 	switch VAR_RESULT
 	case 0, LilycoveCity_ContestLobby_EventScript_279E62
 	case 1, LilycoveCity_ContestLobby_EventScript_279D97
 	case 2, LilycoveCity_ContestLobby_EventScript_279E09
-	case 127, LilycoveCity_ContestLobby_EventScript_279E09
+	case MULTI_B_PRESSED, LilycoveCity_ContestLobby_EventScript_279E09
 	end
 
 LilycoveCity_ContestLobby_EventScript_279D97:: @ 8279D97
 	message LilycoveCity_ContestLobby_Text_27AF5E
 	waitmessage
-	multichoice 0, 0, 3, 0
+	multichoice 0, 0, MULTI_CONTEST_INFO, 0
 	switch VAR_RESULT
 	case 0, LilycoveCity_ContestLobby_EventScript_279DDF
 	case 1, LilycoveCity_ContestLobby_EventScript_279DED
 	case 2, LilycoveCity_ContestLobby_EventScript_279DFB
 	case 3, LilycoveCity_ContestLobby_EventScript_279D5A
-	case 127, LilycoveCity_ContestLobby_EventScript_279D5A
+	case MULTI_B_PRESSED, LilycoveCity_ContestLobby_EventScript_279D5A
 	end
 
 LilycoveCity_ContestLobby_EventScript_279DDF:: @ 8279DDF
@@ -104,14 +104,14 @@ LilycoveCity_ContestLobby_EventScript_279E13:: @ 8279E13
 LilycoveCity_ContestLobby_EventScript_279E62:: @ 8279E62
 	message LilycoveCity_ContestLobby_Text_27B3FF
 	waitmessage
-	multichoice 0, 0, 82, 0
+	multichoice 0, 0, MULTI_CONTEST_RANK, 0
 	switch VAR_RESULT
 	case 0, LilycoveCity_ContestLobby_EventScript_279EB5
 	case 1, LilycoveCity_ContestLobby_EventScript_279EC0
 	case 2, LilycoveCity_ContestLobby_EventScript_279ECB
 	case 3, LilycoveCity_ContestLobby_EventScript_279ED6
 	case 4, LilycoveCity_ContestLobby_EventScript_279E09
-	case 127, LilycoveCity_ContestLobby_EventScript_279E09
+	case MULTI_B_PRESSED, LilycoveCity_ContestLobby_EventScript_279E09
 	end
 
 LilycoveCity_ContestLobby_EventScript_279EB5:: @ 8279EB5
@@ -137,10 +137,10 @@ LilycoveCity_ContestLobby_EventScript_279ED6:: @ 8279ED6
 LilycoveCity_ContestLobby_EventScript_279EE1:: @ 8279EE1
 	message LilycoveCity_ContestLobby_Text_27B423
 	waitmessage
-	multichoice 0, 0, 4, 0
+	multichoice 0, 0, MULTI_CONTEST_TYPE, 0
 	switch VAR_RESULT
 	case 5, LilycoveCity_ContestLobby_EventScript_279E09
-	case 127, LilycoveCity_ContestLobby_EventScript_279E09
+	case MULTI_B_PRESSED, LilycoveCity_ContestLobby_EventScript_279E09
 	copyvar VAR_CONTEST_CATEGORY, VAR_RESULT
 	goto LilycoveCity_ContestLobby_EventScript_279E13
 	end

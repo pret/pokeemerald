@@ -175,20 +175,20 @@ SlateportCity_Harbor_EventScript_20CB06:: @ 820CB06
 
 SlateportCity_Harbor_EventScript_20CB1A:: @ 820CB1A
 	goto_if_set FLAG_MET_SCOTT_ON_SS_TIDAL, SlateportCity_Harbor_EventScript_20CB50
-	multichoicedefault 18, 8, 56, 2, 0
+	multichoicedefault 18, 8, MULTI_SSTIDAL_SLATEPORT_2, 2, 0
 	switch VAR_RESULT
 	case 0, SlateportCity_Harbor_EventScript_20CB92
 	case 1, SlateportCity_Harbor_EventScript_20CC2D
-	case 127, SlateportCity_Harbor_EventScript_20CC2D
+	case MULTI_B_PRESSED, SlateportCity_Harbor_EventScript_20CC2D
 	end
 
 SlateportCity_Harbor_EventScript_20CB50:: @ 820CB50
-	multichoicedefault 17, 6, 52, 2, 0
+	multichoicedefault 17, 6, MULTI_SSTIDAL_SLATEPORT_1, 2, 0
 	switch VAR_RESULT
 	case 0, SlateportCity_Harbor_EventScript_20CB92
 	case 1, SlateportCity_Harbor_EventScript_20CBBA
 	case 2, SlateportCity_Harbor_EventScript_20CC2D
-	case 127, SlateportCity_Harbor_EventScript_20CC2D
+	case MULTI_B_PRESSED, SlateportCity_Harbor_EventScript_20CC2D
 	end
 
 SlateportCity_Harbor_EventScript_20CB88:: @ 820CB88
@@ -344,12 +344,12 @@ SlateportCity_Harbor_EventScript_20CD38:: @ 820CD38
 	end
 
 SlateportCity_Harbor_EventScript_20CD44:: @ 820CD44
-	multichoice 0, 0, 46, 0
+	multichoice 0, 0, MULTI_STERN_DEEPSEA, 0
 	switch VAR_RESULT
 	case 0, SlateportCity_Harbor_EventScript_20CD7B
 	case 1, SlateportCity_Harbor_EventScript_20CDBB
 	case 2, SlateportCity_Harbor_EventScript_20CDFB
-	case 127, SlateportCity_Harbor_EventScript_20CDFB
+	case MULTI_B_PRESSED, SlateportCity_Harbor_EventScript_20CDFB
 	end
 
 SlateportCity_Harbor_EventScript_20CD7B:: @ 820CD7B

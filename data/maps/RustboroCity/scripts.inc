@@ -78,7 +78,7 @@ RustboroCity_EventScript_1E07AC:: @ 81E07AC
 
 RustboroCity_EventScript_1E07BD:: @ 81E07BD
 	setflag FLAG_ADDED_MATCH_CALL_TO_POKENAV
-	special sp106_CreateStartMenu
+	special CreateStartMenuForPokenavTutorial
 	waitstate
 	switch VAR_RESULT
 	case 0, RustboroCity_EventScript_1E07AC
@@ -88,7 +88,7 @@ RustboroCity_EventScript_1E07BD:: @ 81E07BD
 	case 5, RustboroCity_EventScript_1E07AC
 	case 6, RustboroCity_EventScript_1E07AC
 	case 7, RustboroCity_EventScript_1E07AC
-	case 127, RustboroCity_EventScript_1E07AC
+	case MULTI_B_PRESSED, RustboroCity_EventScript_1E07AC
 	special sub_81C72A4
 	waitstate
 	delay 20

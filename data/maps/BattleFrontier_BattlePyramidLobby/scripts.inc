@@ -137,20 +137,20 @@ BattleFrontier_BattlePyramidLobby_EventScript_2508B1:: @ 82508B1
 BattleFrontier_BattlePyramidLobby_EventScript_2508C8:: @ 82508C8
 	message BattleFrontier_BattlePyramidLobby_Text_250FA7
 	waitmessage
-	multichoice 17, 6, 23, 0
+	multichoice 17, 6, MULTI_CHALLENGEINFO, 0
 	switch VAR_RESULT
 	case 0, BattleFrontier_BattlePyramidLobby_EventScript_250904
 	case 1, BattleFrontier_BattlePyramidLobby_EventScript_250A68
 	case 2, BattleFrontier_BattlePyramidLobby_EventScript_250AC4
-	case 127, BattleFrontier_BattlePyramidLobby_EventScript_250AC4
+	case MULTI_B_PRESSED, BattleFrontier_BattlePyramidLobby_EventScript_250AC4
 
 BattleFrontier_BattlePyramidLobby_EventScript_250904:: @ 8250904
 	message BattleFrontier_BattlePyramidLobby_Text_251248
 	waitmessage
-	multichoice 17, 6, 24, 0
+	multichoice 17, 6, MULTI_LEVEL_MODE, 0
 	switch VAR_RESULT
 	case 2, BattleFrontier_BattlePyramidLobby_EventScript_250AC4
-	case 127, BattleFrontier_BattlePyramidLobby_EventScript_250AC4
+	case MULTI_B_PRESSED, BattleFrontier_BattlePyramidLobby_EventScript_250AC4
 	setvar VAR_0x8004, 15
 	special CallFrontierUtilFunc
 	compare VAR_0x8004, 1
@@ -269,7 +269,7 @@ BattleFrontier_BattlePyramidLobby_EventScript_250ACE:: @ 8250ACE
 	end
 
 BattleFrontier_BattlePyramidLobby_EventScript_250AF0:: @ 8250AF0
-	multichoice 17, 6, 24, 0
+	multichoice 17, 6, MULTI_LEVEL_MODE, 0
 	switch VAR_RESULT
 	case 0, BattleFrontier_BattlePyramidLobby_EventScript_250B28
 	case 1, BattleFrontier_BattlePyramidLobby_EventScript_250B66
@@ -508,7 +508,7 @@ BattleFrontier_BattlePyramidLobby_EventScript_250E00:: @ 8250E00
 	return
 
 BattleFrontier_BattlePyramidLobby_EventScript_250E09:: @ 8250E09
-	multichoice 17, 6, 83, 0
+	multichoice 17, 6, MULTI_FRONTIER_ITEM_CHOOSE, 0
 	switch VAR_RESULT
 	case 0, BattleFrontier_BattlePyramidLobby_EventScript_250E40
 	case 1, BattleFrontier_BattlePyramidLobby_EventScript_250E50
@@ -562,7 +562,7 @@ BattleFrontier_BattlePyramidLobby_EventScript_250E95:: @ 8250E95
 BattleFrontier_BattlePyramidLobby_EventScript_250EA4:: @ 8250EA4
 	message BattleFrontier_BattlePyramidLobby_Text_2526D9
 	waitmessage
-	multichoice 15, 2, 101, 0
+	multichoice 15, 2, MULTI_BATTLE_PYRAMID_RULES, 0
 	switch VAR_RESULT
 	case 0, BattleFrontier_BattlePyramidLobby_EventScript_250EF7
 	case 1, BattleFrontier_BattlePyramidLobby_EventScript_250F05

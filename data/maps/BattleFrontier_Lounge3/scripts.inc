@@ -30,14 +30,14 @@ BattleFrontier_Lounge3_EventScript_261DAF:: @ 8261DAF
 	end
 
 BattleFrontier_Lounge3_EventScript_261DE9:: @ 8261DE9
-	multichoice 20, 4, 87, 0
+	multichoice 20, 4, MULTI_FRONTIER_GAMBLER_BET, 0
 	copyvar VAR_FRONTIER_GAMBLER_AMOUNT_BET, VAR_RESULT
 	switch VAR_RESULT
 	case FRONTIER_GAMBLER_BET_5, BattleFrontier_Lounge3_EventScript_261E30
 	case FRONTIER_GAMBLER_BET_10, BattleFrontier_Lounge3_EventScript_261E3B
 	case FRONTIER_GAMBLER_BET_15, BattleFrontier_Lounge3_EventScript_261E46
 	case FRONTIER_GAMBLER_BET_CANCEL, BattleFrontier_Lounge3_EventScript_261FAF
-	case 127, BattleFrontier_Lounge3_EventScript_261FAF
+	case MULTI_B_PRESSED, BattleFrontier_Lounge3_EventScript_261FAF
 	end
 
 BattleFrontier_Lounge3_EventScript_261E30:: @ 8261E30

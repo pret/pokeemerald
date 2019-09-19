@@ -472,22 +472,22 @@ gUnknown_0823B4E8:: @ 823B4E8 ;EventScript_SecretBasePCCancel?
 	end
 
 EventScript_SecretBasePCMainMenuChoice:: @ 823B4EF
-	multichoice 0, 0, 6, 0
+	multichoice 0, 0, MULTI_DECOR_REGISTRY, 0
 	switch VAR_RESULT
 	case 0, EventScript_23B581
 	case 1, EventScript_23B568
 	case 2, EventScript_23B585
 	case 3, EventScript_23B66E
-	case 127, EventScript_23B66E
+	case MULTI_B_PRESSED, EventScript_23B66E
 	end
 
 EventScript_23B531:: @ 823B531
-	multichoice 0, 0, 5, 0
+	multichoice 0, 0, MULTI_DECOR_NOREGISTRY, 0
 	switch VAR_RESULT
 	case 0, EventScript_23B581
 	case 1, EventScript_23B568
 	case 2, EventScript_23B66E
-	case 127, EventScript_23B66E
+	case MULTI_B_PRESSED, EventScript_23B66E
 	end
 
 EventScript_23B568:: @ 823B568
@@ -522,13 +522,13 @@ EventScript_RecordMixingSecretBasePC:: @ 823B589
 EventScript_23B5A1:: @ 823B5A1
 	message Text_SecretBasePCStartMenu
 	waitmessage
-	multichoice 0, 0, 7, 0
+	multichoice 0, 0, MULTI_REGISTER_MENU, 0
 	switch VAR_RESULT
 	case 0, EventScript_23B5F0
 	case 1, EventScript_23B585
 	case 2, EventScript_23B660
 	case 3, EventScript_23B66E
-	case 127, EventScript_23B66E
+	case MULTI_B_PRESSED, EventScript_23B66E
 	end
 
 gUnknown_0823B5E9:: @ 823B5E9
@@ -4019,7 +4019,7 @@ BattleFrontier_BattleTowerLobby_EventScript_28CB96:: @ 828CB96
 BattleFrontier_BattleTowerLobby_EventScript_28CBD8:: @ 828CBD8
 	message BattleFrontier_BattleTowerLobby_Text_27F7BA
 	waitmessage
-	multichoice 20, 8, 45, 1
+	multichoice 20, 8, MULTI_SATISFACTION, 1
 	copyvar VAR_0x8008, VAR_RESULT
 	compare VAR_RESULT, 0
 	call_if_eq BattleFrontier_BattleTowerLobby_EventScript_28CC38

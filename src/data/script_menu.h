@@ -1,5 +1,5 @@
 // multichoice lists
-const struct MenuAction MultichoiceList_000[] =
+const struct MenuAction MultichoiceList_BrineyOnDewford[] =
 {
     {gText_Petalburg},
     {gText_Slateport},
@@ -46,7 +46,7 @@ const struct MenuAction MultichoiceList_DecorNoRegistry[] =
     {gText_Exit},
 };
 
-const struct MenuAction MultichoiceList_007[] =
+const struct MenuAction MultichoiceList_RegisterMenu[] =
 {
     {gMenuText_Register},
     {gText_Registry},
@@ -60,7 +60,7 @@ const struct MenuAction MultichoiceList_Bike[] =
     {gText_Acro},
 };
 
-const struct MenuAction MultichoiceList_Status[] =
+const struct MenuAction MultichoiceList_StatusInfo[] =
 {
     {gText_Psn},
     {gText_Par},
@@ -70,13 +70,13 @@ const struct MenuAction MultichoiceList_Status[] =
     {gText_Exit},
 };
 
-const struct MenuAction MultichoiceList_014[] =
+const struct MenuAction MultichoiceList_BrineyOffDewford[] =
 {
     {gText_Dewford},
     {gText_Exit},
 };
 
-const struct MenuAction MultichoiceList_016[] =
+const struct MenuAction MultichoiceList_ViewedPaintings[] =
 {
     {gText_SawIt},
     {gText_NotYet},
@@ -89,119 +89,119 @@ const struct MenuAction MultichoiceList_YesNoInfo2[] =
     {gText_Info2},
 };
 
-const struct MenuAction MultichoiceList_023[] =
+const struct MenuAction MultichoiceList_ChallengeInfo[] =
 {
     {gText_Challenge},
     {gText_Info3},
     {gText_Exit},
 };
 
-const struct MenuAction MultichoiceList_024[] =
+const struct MenuAction MultichoiceList_LevelMode[] =
 {
     {gText_Lv50},
     {gText_OpenLevel},
     {gText_Exit},
 };
 
-const struct MenuAction MultichoiceList_Mechadoll1Q1[] =
+const struct MenuAction MultichoiceList_Mechadoll1_Q1[] =
 {
     {gTrickHouse_Mechadoll_Oddish},
     {gTrickHouse_Mechadoll_Poochyena},
     {gTrickHouse_Mechadoll_Taillow},
 };
 
-const struct MenuAction MultichoiceList_Mechadoll1Q2[] = 
+const struct MenuAction MultichoiceList_Mechadoll1_Q2[] = 
 {
     {gTrickHouse_Mechadoll_Azurill},
     {gTrickHouse_Mechadoll_Lotad},
     {gTrickHouse_Mechadoll_Wingull},
 };
 
-const struct MenuAction MultichoiceList_Mechadoll1Q3[] = 
+const struct MenuAction MultichoiceList_Mechadoll1_Q3[] = 
 {
     {gTrickHouse_Mechadoll_Dustox},
     {gTrickHouse_Mechadoll_Zubat},
     {gTrickHouse_Mechadoll_Nincada},
 };
 
-const struct MenuAction MultichoiceList_Mechadoll2Q1[] = 
+const struct MenuAction MultichoiceList_Mechadoll2_Q1[] = 
 {
     {gTrickHouse_Mechadoll_Ralts},
     {gTrickHouse_Mechadoll_Zigzagoon},
     {gTrickHouse_Mechadoll_Slakoth},
 };
 
-const struct MenuAction MultichoiceList_Mechadoll2Q2[] = 
+const struct MenuAction MultichoiceList_Mechadoll2_Q2[] = 
 {
     {gTrickHouse_Mechadoll_Poochyena2},
     {gTrickHouse_Mechadoll_Shroomish},
     {gTrickHouse_Mechadoll_Zigzagoon2},
 };
 
-const struct MenuAction MultichoiceList_Mechadoll2Q3[] = 
+const struct MenuAction MultichoiceList_Mechadoll2_Q3[] = 
 {
     {gTrickHouse_Mechadoll_Poochyena3},
     {gTrickHouse_Mechadoll_Zubat2},
     {gTrickHouse_Mechadoll_Carvanha},
 };
 
-const struct MenuAction MultichoiceList_Mechadoll3Q1[] =
+const struct MenuAction MultichoiceList_Mechadoll3_Q1[] =
 {
     {gTrickHouse_Mechadoll_BurnHeal},
     {gTrickHouse_Mechadoll_HarborMail},
     {gTrickHouse_Mechadoll_SamePrice},
 };
 
-const struct MenuAction MultichoiceList_Mechadoll3Q2[] = 
+const struct MenuAction MultichoiceList_Mechadoll3_Q2[] = 
 {
     {gTrickHouse_Mechadoll_60Yen},
     {gTrickHouse_Mechadoll_55Yen},
     {gTrickHouse_Mechadoll_Nothing},
 };
 
-const struct MenuAction MultichoiceList_Mechadoll3Q3[] = 
+const struct MenuAction MultichoiceList_Mechadoll3_Q3[] = 
 {
     {gTrickHouse_Mechadoll_CostMore},
     {gTrickHouse_Mechadoll_CostLess},
     {gTrickHouse_Mechadoll_SamePrice2},
 };
 
-const struct MenuAction MultichoiceList_Mechadoll4Q1[] = 
+const struct MenuAction MultichoiceList_Mechadoll4_Q1[] = 
 {
     {gTrickHouse_Mechadoll_Male},
     {gTrickHouse_Mechadoll_Female},
     {gTrickHouse_Mechadoll_Neither},
 };
 
-const struct MenuAction MultichoiceList_Mechadoll4Q2[] = 
+const struct MenuAction MultichoiceList_Mechadoll4_Q2[] = 
 {
     {gTrickHouse_Mechadoll_ElderlyMen},
     {gTrickHouse_Mechadoll_ElderlyLadies},
     {gTrickHouse_Mechadoll_SameNumber},
 };
 
-const struct MenuAction MultichoiceList_Mechadoll4Q3[] = 
+const struct MenuAction MultichoiceList_Mechadoll4_Q3[] = 
 {
     {gTrickHouse_Mechadoll_None},
     {gTrickHouse_Mechadoll_One},
     {gTrickHouse_Mechadoll_Two},
 };
 
-const struct MenuAction MultichoiceList_Mechadoll5Q1[] = 
+const struct MenuAction MultichoiceList_Mechadoll5_Q1[] = 
 {
     {gTrickHouse_Mechadoll_Two2},
     {gTrickHouse_Mechadoll_Three},
     {gTrickHouse_Mechadoll_Four},
 };
 
-const struct MenuAction MultichoiceList_Mechadoll5Q2[] = 
+const struct MenuAction MultichoiceList_Mechadoll5_Q2[] = 
 {
     {gTrickHouse_Mechadoll_Six},
     {gTrickHouse_Mechadoll_Seven},
     {gTrickHouse_Mechadoll_Eight},
 };
 
-const struct MenuAction MultichoiceList_Mechadoll5Q3[] = 
+const struct MenuAction MultichoiceList_Mechadoll5_Q3[] = 
 {
     {gTrickHouse_Mechadoll_Six2},
     {gTrickHouse_Mechadoll_Seven2},
@@ -232,20 +232,20 @@ const struct MenuAction MultichoiceList_AcroBikeInfo[] =
     {gText_Exit},
 };
 
-const struct MenuAction MultichoiceList_045[] =
+const struct MenuAction MultichoiceList_Satisfaction[] =
 {
     {gText_Satisfied},
     {gText_Dissatisfied},
 };
 
-const struct MenuAction MultichoiceList_046[] =
+const struct MenuAction MultichoiceList_SternDeepSea[] =
 {
     {gText_DeepSeaTooth},
     {gText_DeepSeaScale},
     {gText_Exit},
 };
 
-const struct MenuAction MultichoiceList_047[] =
+const struct MenuAction MultichoiceList_UnusedAshVendor[] =
 {
     {gText_BlueFlute2},
     {gText_YellowFlute2},
@@ -282,20 +282,20 @@ const struct MenuAction MultichoiceList_GameCornerCoins[] =
     {gText_Exit},
 };
 
-const struct MenuAction MultichoiceList_050[] =
+const struct MenuAction MultichoiceList_HowsFishing[] =
 {
     {gText_Excellent2},
     {gText_NotSoGood},
 };
 
-const struct MenuAction MultichoiceList_052[] =
+const struct MenuAction MultichoiceList_SSTidalSlateport1[] =
 {
     {gText_LilycoveCity},
     {gText_BattleFrontier},
     {gText_Exit},
 };
 
-const struct MenuAction MultichoiceList_053[] =
+const struct MenuAction MultichoiceList_SSTidalBattleFrontier[] =
 {
     {gText_SlateportCity},
     {gText_LilycoveCity},
@@ -308,13 +308,13 @@ const struct MenuAction MultichoiceList_RightLeft[] =
     {gText_Left},
 };
 
-const struct MenuAction MultichoiceList_056[] =
+const struct MenuAction MultichoiceList_SSTidalSlateport2[] =
 {
     {gText_LilycoveCity},
     {gText_Exit},
 };
 
-const struct MenuAction MultichoiceList_Floor[] =
+const struct MenuAction MultichoiceList_Floors[] =
 {
     {gText_5F},
     {gText_4F},
@@ -431,7 +431,7 @@ const struct MenuAction MultichoiceList_ShardsRYBG[] =
     {gText_Exit},
 };
 
-const struct MenuAction MultichoiceList_073[] =
+const struct MenuAction MultichoiceList_TourneyWithRecord[] =
 {
     {gText_Opponent},
     {gText_Tourney_Tree},
@@ -441,7 +441,7 @@ const struct MenuAction MultichoiceList_073[] =
     {gText_Retire},
 };
 
-const struct MenuAction MultichoiceList_107[] =
+const struct MenuAction MultichoiceList_TourneyNoRecord[] =
 {
     {gText_Opponent},
     {gText_Tourney_Tree},
@@ -456,7 +456,7 @@ const struct MenuAction MultichoiceList_Tent[] =
     {gText_BlueTent},
 };
 
-const struct MenuAction MultichoiceList_076[] =
+const struct MenuAction MultichoiceList_LinkServicesB[] =
 {
     {gText_TradeCenter},
     {gText_Colosseum},
@@ -471,7 +471,7 @@ const struct MenuAction MultichoiceList_YesNoInfo[] =
     {gText_Info2},
 };
 
-const struct MenuAction MultichoiceList_018[] =
+const struct MenuAction MultichoiceList_BattleMode[] =
 {
     {gText_SingleBattle},
     {gText_DoubleBattle},
@@ -480,7 +480,7 @@ const struct MenuAction MultichoiceList_018[] =
     {gText_Exit},
 };
 
-const struct MenuAction MultichoiceList_078[] =
+const struct MenuAction MultichoiceList_LinkServicesC[] =
 {
     {gText_TradeCenter},
     {gText_Colosseum},
@@ -488,7 +488,7 @@ const struct MenuAction MultichoiceList_078[] =
     {gText_Exit},
 };
 
-const struct MenuAction MultichoiceList_079[] =
+const struct MenuAction MultichoiceList_LinkServicesD[] =
 {
     {gText_TradeCenter},
     {gText_Colosseum},
@@ -497,21 +497,21 @@ const struct MenuAction MultichoiceList_079[] =
     {gText_Exit},
 };
 
-const struct MenuAction MultichoiceList_074[] =
+const struct MenuAction MultichoiceList_LinkServicesA[] =
 {
     {gText_TradeCenter},
     {gText_Colosseum},
     {gText_Exit},
 };
 
-const struct MenuAction MultichoiceList_080[] =
+const struct MenuAction MultichoiceList_WirelessMinigame[] =
 {
     {gText_PokemonJump},
     {gText_DodrioBerryPicking},
     {gText_Exit},
 };
 
-const struct MenuAction MultichoiceList_081[] =
+const struct MenuAction MultichoiceList_LinkLeader[] =
 {
     {gText_JoinGroup},
     {gText_BecomeLeader},
@@ -527,14 +527,14 @@ const struct MenuAction MultichoiceList_ContestRank[] =
     {gText_Exit},
 };
 
-const struct MenuAction MultichoiceList_083[] =
+const struct MenuAction MultichoiceList_FrontierItemChoose[] =
 {
     {gText_BattleBag},
     {gText_HeldItem},
     {gText_Exit},
 };
 
-const struct MenuAction MultichoiceList_084[] =
+const struct MenuAction MultichoiceList_LinkContestInfo[] =
 {
     {gText_LinkContest},
     {gText_AboutE_Mode},
@@ -542,28 +542,28 @@ const struct MenuAction MultichoiceList_084[] =
     {gText_Cancel2},
 };
 
-const struct MenuAction MultichoiceList_085[] =
+const struct MenuAction MultichoiceList_LinkContestMode[] =
 {
     {gText_E_Mode},
     {gText_G_Mode},
     {gText_Exit},
 };
 
-const struct MenuAction MultichoiceList_UnusedStartMenu[] =
+const struct MenuAction MultichoiceList_ForcedStartMenu[] =
 {
     {gText_MenuOptionPokedex},
     {gText_MenuOptionPokemon},
     {gText_MenuOptionBag},
     {gText_MenuOptionPokenav},
-    {gText_Blank},
+    {gText_Blank}, // blank because it's filled by the player's name
     {gText_MenuOptionSave},
     {gText_MenuOptionOption},
     {gText_MenuOptionExit},
 };
 
-const struct MenuAction MultichoiceList_087[] =
+const struct MenuAction MultichoiceList_FrontierGamblerBet[] =
 {
-    {gText_TwoSpaces},
+    {gText_5BP},
     {gText_10BP},
     {gText_15BP},
     {gText_Exit},
@@ -611,7 +611,7 @@ const struct MenuAction MultichoiceList_YesNo[] =
     {gText_No4},
 };
 
-const struct MenuAction MultichoiceList_095[] =
+const struct MenuAction MultichoiceList_FrontierRules[] =
 {
     {gText_TwoStyles},
     {gText_Lv50_3},
@@ -621,7 +621,7 @@ const struct MenuAction MultichoiceList_095[] =
     {gText_Exit},
 };
 
-const struct MenuAction MultichoiceList_011[] =
+const struct MenuAction MultichoiceList_FrontierPassInfo[] =
 {
     {gText_Symbols2},
     {gText_Record3},
@@ -629,7 +629,7 @@ const struct MenuAction MultichoiceList_011[] =
     {gText_Exit},
 };
 
-const struct MenuAction MultichoiceList_096[] =
+const struct MenuAction MultichoiceList_BattleArenaRules[] =
 {
     {gText_BattleRules},
     {gText_JudgeMind},
@@ -638,7 +638,7 @@ const struct MenuAction MultichoiceList_096[] =
     {gText_Exit},
 };
 
-const struct MenuAction MultichoiceList_097[] =
+const struct MenuAction MultichoiceList_BattleTowerRules[] =
 {
     {gText_TowerInfo},
     {gText_BattleMon},
@@ -647,7 +647,7 @@ const struct MenuAction MultichoiceList_097[] =
     {gText_Exit},
 };
 
-const struct MenuAction MultichoiceList_098[] =
+const struct MenuAction MultichoiceList_BattleDomeRules[] =
 {
     {gText_Matchup},
     {gText_TourneyTree},
@@ -655,7 +655,7 @@ const struct MenuAction MultichoiceList_098[] =
     {gText_Exit},
 };
 
-const struct MenuAction MultichoiceList_099[] =
+const struct MenuAction MultichoiceList_BattleFactoryRules[] =
 {
     {gText_BasicRules},
     {gText_SwapPartners},
@@ -665,7 +665,7 @@ const struct MenuAction MultichoiceList_099[] =
     {gText_Exit},
 };
 
-const struct MenuAction MultichoiceList_100[] =
+const struct MenuAction MultichoiceList_BattlePalaceRules[] =
 {
     {gText_BattleBasics},
     {gText_PokemonNature},
@@ -675,7 +675,7 @@ const struct MenuAction MultichoiceList_100[] =
     {gText_Exit},
 };
 
-const struct MenuAction MultichoiceList_101[] =
+const struct MenuAction MultichoiceList_BattlePyramidRules[] =
 {
     {gText_PyramidPokemon},
     {gText_PyramidTrainers},
@@ -684,7 +684,7 @@ const struct MenuAction MultichoiceList_101[] =
     {gText_Exit},
 };
 
-const struct MenuAction MultichoiceList_102[] =
+const struct MenuAction MultichoiceList_BattlePikeRules[] =
 {
     {gText_PokenavAndBag},
     {gText_HeldItems},
@@ -692,7 +692,7 @@ const struct MenuAction MultichoiceList_102[] =
     {gText_Exit},
 };
 
-const struct MenuAction MultichoiceList_103[] =
+const struct MenuAction MultichoiceList_GoOnRecordRestRetire[] =
 {
     {gText_GoOn},
     {gText_Record2},
@@ -700,21 +700,21 @@ const struct MenuAction MultichoiceList_103[] =
     {gText_Retire},
 };
 
-const struct MenuAction MultichoiceList_104[] =
+const struct MenuAction MultichoiceList_GoOnRestRetire[] =
 {
     {gText_GoOn},
     {gText_Rest},
     {gText_Retire},
 };
 
-const struct MenuAction MultichoiceList_105[] =
+const struct MenuAction MultichoiceList_GoOnRecordRetire[] =
 {
     {gText_GoOn},
     {gText_Record2},
     {gText_Retire},
 };
 
-const struct MenuAction MultichoiceList_106[] =
+const struct MenuAction MultichoiceList_GoOnRetire[] =
 {
     {gText_GoOn},
     {gText_Retire},
@@ -726,7 +726,7 @@ const struct MenuAction MultichoiceList_TVLati[] =
     {gText_Blue},
 };
 
-const struct MenuAction MultichoiceList_109[] =
+const struct MenuAction MultichoiceList_BattleTowerFeelings[] =
 {
     {gText_IllBattleNow},
     {gText_IWon},
@@ -734,7 +734,7 @@ const struct MenuAction MultichoiceList_109[] =
     {gText_IWontTell},
 };
 
-const struct MenuAction MultichoiceList_110[] =
+const struct MenuAction MultichoiceList_WheresRayquaza[] =
 {
     {gText_CaveOfOrigin},
     {gText_MtPyre},
@@ -742,7 +742,7 @@ const struct MenuAction MultichoiceList_110[] =
     {gText_DontRemember},
 };
 
-const struct MenuAction MultichoiceList_111[] =
+const struct MenuAction MultichoiceList_SlateportTentRules[] =
 {
     {gText_BasicRules},
     {gText_SwapPartners},
@@ -752,7 +752,7 @@ const struct MenuAction MultichoiceList_111[] =
     {gText_Exit},
 };
 
-const struct MenuAction MultichoiceList_112[] =
+const struct MenuAction MultichoiceList_FallarborTentRules[] =
 {
     {gText_BattleTrainers},
     {gText_BattleRules},
@@ -784,120 +784,120 @@ struct MultichoiceListStruct
 
 const struct MultichoiceListStruct gMultichoiceLists[] =
 {
-    MULTICHOICE(MultichoiceList_000),
-    [MULTI_EXIT]         = MULTICHOICE(MultichoiceList_Exit),
-    [MULTI_ENTERINFO]    = MULTICHOICE(MultichoiceList_EnterInfo),
-    [MULTI_CONTEST_INFO] = MULTICHOICE(MultichoiceList_ContestInfo),
-    [MULTI_CONTEST_TYPE] = MULTICHOICE(MultichoiceList_ContestType),
-    [MULTI_DECOR_NO_REGISTRY] = MULTICHOICE(MultichoiceList_DecorNoRegistry),
-    [MULTI_DECOR_REGISTRY] = MULTICHOICE(MultichoiceList_DecorRegistry),
-    MULTICHOICE(MultichoiceList_007),
-    [MULTI_UNUSED_8]    = MULTICHOICE(MultichoiceList_Exit),
-    [MULTI_UNUSED_9]    = MULTICHOICE(MultichoiceList_Exit),
-    [MULTI_UNUSED_10]   = MULTICHOICE(MultichoiceList_Exit),
-    MULTICHOICE(MultichoiceList_011),
-    [MULTI_BIKE]        = MULTICHOICE(MultichoiceList_Bike),
-    [MULTI_STATUS]      = MULTICHOICE(MultichoiceList_Status),
-    MULTICHOICE(MultichoiceList_014),
-    [MULTI_UNUSED_15]   = MULTICHOICE(MultichoiceList_Exit),
-    MULTICHOICE(MultichoiceList_016),
-    [MULTI_YESNOINFO]   = MULTICHOICE(MultichoiceList_YesNoInfo),
-    MULTICHOICE(MultichoiceList_018),
-    [MULTI_UNUSED_19]   = MULTICHOICE(MultichoiceList_Exit),
-    [MULTI_YESNOINFO_2] = MULTICHOICE(MultichoiceList_YesNoInfo2),
-    [MULTI_UNUSED_21]   = MULTICHOICE(MultichoiceList_Exit),
-    [MULTI_UNUSED_22]   = MULTICHOICE(MultichoiceList_Exit),
-    MULTICHOICE(MultichoiceList_023),
-    MULTICHOICE(MultichoiceList_024),
-    [MULTI_MECHADOLL1_Q1]   = MULTICHOICE(MultichoiceList_Mechadoll1Q1),
-    [MULTI_MECHADOLL1_Q2]   = MULTICHOICE(MultichoiceList_Mechadoll1Q2),
-    [MULTI_MECHADOLL1_Q3]   = MULTICHOICE(MultichoiceList_Mechadoll1Q3),
-    [MULTI_MECHADOLL2_Q1]   = MULTICHOICE(MultichoiceList_Mechadoll2Q1),
-    [MULTI_MECHADOLL2_Q2]   = MULTICHOICE(MultichoiceList_Mechadoll2Q2),
-    [MULTI_MECHADOLL2_Q3]   = MULTICHOICE(MultichoiceList_Mechadoll2Q3),
-    [MULTI_MECHADOLL3_Q1]   = MULTICHOICE(MultichoiceList_Mechadoll3Q1),
-    [MULTI_MECHADOLL3_Q2]   = MULTICHOICE(MultichoiceList_Mechadoll3Q2),
-    [MULTI_MECHADOLL3_Q3]   = MULTICHOICE(MultichoiceList_Mechadoll3Q3),
-    [MULTI_MECHADOLL4_Q1]   = MULTICHOICE(MultichoiceList_Mechadoll4Q1),
-    [MULTI_MECHADOLL4_Q2]   = MULTICHOICE(MultichoiceList_Mechadoll4Q2),
-    [MULTI_MECHADOLL4_Q3]   = MULTICHOICE(MultichoiceList_Mechadoll4Q3),
-    [MULTI_MECHADOLL5_Q1]   = MULTICHOICE(MultichoiceList_Mechadoll5Q1),
-    [MULTI_MECHADOLL5_Q2]   = MULTICHOICE(MultichoiceList_Mechadoll5Q2),
-    [MULTI_MECHADOLL5_Q3]   = MULTICHOICE(MultichoiceList_Mechadoll5Q3),
-    [MULTI_UNUSED_40]       = MULTICHOICE(MultichoiceList_Exit),
-    [MULTI_UNUSED_41]       = MULTICHOICE(MultichoiceList_Exit),
-    [MULTI_VENDING_MACHINE] = MULTICHOICE(MultichoiceList_VendingMachine),
-    [MULTI_MACH_BIKE_INFO]  = MULTICHOICE(MultichoiceList_MachBikeInfo),
-    [MULTI_ACRO_BIKE_INFO]  = MULTICHOICE(MultichoiceList_AcroBikeInfo),
-    MULTICHOICE(MultichoiceList_045),
-    MULTICHOICE(MultichoiceList_046),
-    MULTICHOICE(MultichoiceList_047),
-    [MULTI_GAME_CORNER_DOLLS] = MULTICHOICE(MultichoiceList_GameCornerDolls),
-    [MULTI_GAME_CORNER_COINS] = MULTICHOICE(MultichoiceList_GameCornerCoins),
-    MULTICHOICE(MultichoiceList_050),
-    [MULTI_UNUSED_51]  = MULTICHOICE(MultichoiceList_Exit),
-    MULTICHOICE(MultichoiceList_052),
-    MULTICHOICE(MultichoiceList_053),
-    [MULTI_RIGHTLEFT] = MULTICHOICE(MultichoiceList_RightLeft),
-    [MULTI_GAME_CORNER_TMS] = MULTICHOICE(MultichoiceList_GameCornerTMs),
-    MULTICHOICE(MultichoiceList_056),
-    [MULTI_FLOOR]        = MULTICHOICE(MultichoiceList_Floor),
-    [MULTI_SHARDS_R]     = MULTICHOICE(MultichoiceList_ShardsR),
-    [MULTI_SHARDS_Y]     = MULTICHOICE(MultichoiceList_ShardsY),
-    [MULTI_SHARDS_RY]    = MULTICHOICE(MultichoiceList_ShardsRY),
-    [MULTI_SHARDS_B]     = MULTICHOICE(MultichoiceList_ShardsB),
-    [MULTI_SHARDS_RB]    = MULTICHOICE(MultichoiceList_ShardsRB),
-    [MULTI_SHARDS_YB]    = MULTICHOICE(MultichoiceList_ShardsYB),
-    [MULTI_SHARDS_RYB]   = MULTICHOICE(MultichoiceList_ShardsRYB),
-    [MULTI_SHARDS_G]     = MULTICHOICE(MultichoiceList_ShardsG),
-    [MULTI_SHARDS_RG]    = MULTICHOICE(MultichoiceList_ShardsRG),
-    [MULTI_SHARDS_YG]    = MULTICHOICE(MultichoiceList_ShardsYG),
-    [MULTI_SHARDS_RYG]   = MULTICHOICE(MultichoiceList_ShardsRYG),
-    [MULTI_SHARDS_BG]    = MULTICHOICE(MultichoiceList_ShardsBG),
-    [MULTI_SHARDS_RBG]   = MULTICHOICE(MultichoiceList_ShardsRBG),
-    [MULTI_SHARDS_YBG]   = MULTICHOICE(MultichoiceList_ShardsYBG),
-    [MULTI_SHARDS_RYBG]  = MULTICHOICE(MultichoiceList_ShardsRYBG),
-    MULTICHOICE(MultichoiceList_073),
-    MULTICHOICE(MultichoiceList_074),
-    MULTICHOICE(MultichoiceList_074),
-    MULTICHOICE(MultichoiceList_076),
-    MULTICHOICE(MultichoiceList_076),
-    MULTICHOICE(MultichoiceList_078),
-    MULTICHOICE(MultichoiceList_079),
-    MULTICHOICE(MultichoiceList_080),
-    MULTICHOICE(MultichoiceList_081),
-    [MULTI_CONTEST_RANK] = MULTICHOICE(MultichoiceList_ContestRank),
-    MULTICHOICE(MultichoiceList_083),
-    MULTICHOICE(MultichoiceList_084),
-    MULTICHOICE(MultichoiceList_085),
-    [MULTI_UNUSED_START_MENU] = MULTICHOICE(MultichoiceList_UnusedStartMenu),
-    MULTICHOICE(MultichoiceList_087),
-    [MULTI_TENT] = MULTICHOICE(MultichoiceList_Tent),
-    [MULTI_UNUSED_SSTIDAL_1] = MULTICHOICE(MultichoiceList_UnusedSSTidal1),
-    [MULTI_UNUSED_SSTIDAL_2] = MULTICHOICE(MultichoiceList_UnusedSSTidal2),
-    [MULTI_UNUSED_SSTIDAL_3] = MULTICHOICE(MultichoiceList_UnusedSSTidal3),
-    [MULTI_UNUSED_SSTIDAL_4] = MULTICHOICE(MultichoiceList_UnusedSSTidal4),
-    [MULTI_FOSSIL] = MULTICHOICE(MultichoiceList_Fossil),
-    [MULTI_YESNO] = MULTICHOICE(MultichoiceList_YesNo),
-    MULTICHOICE(MultichoiceList_095),
-    MULTICHOICE(MultichoiceList_096),
-    MULTICHOICE(MultichoiceList_097),
-    MULTICHOICE(MultichoiceList_098),
-    MULTICHOICE(MultichoiceList_099),
-    MULTICHOICE(MultichoiceList_100),
-    MULTICHOICE(MultichoiceList_101),
-    MULTICHOICE(MultichoiceList_102),
-    MULTICHOICE(MultichoiceList_103),
-    MULTICHOICE(MultichoiceList_104),
-    MULTICHOICE(MultichoiceList_105),
-    MULTICHOICE(MultichoiceList_106),
-    MULTICHOICE(MultichoiceList_107),
-    [MULTI_TV_LATI] = MULTICHOICE(MultichoiceList_TVLati),
-    MULTICHOICE(MultichoiceList_109),
-    MULTICHOICE(MultichoiceList_110),
-    MULTICHOICE(MultichoiceList_111),
-    MULTICHOICE(MultichoiceList_112),
-    [MULTI_TAG_MATCH_TYPE] = MULTICHOICE(MultichoiceList_TagMatchType),
+    [MULTI_BRINEY_ON_DEWFORD]        = MULTICHOICE(MultichoiceList_BrineyOnDewford),
+    [MULTI_UNUSED_1]                 = MULTICHOICE(MultichoiceList_Exit),
+    [MULTI_ENTERINFO]                = MULTICHOICE(MultichoiceList_EnterInfo),
+    [MULTI_CONTEST_INFO]             = MULTICHOICE(MultichoiceList_ContestInfo),
+    [MULTI_CONTEST_TYPE]             = MULTICHOICE(MultichoiceList_ContestType),
+    [MULTI_DECOR_NOREGISTRY]         = MULTICHOICE(MultichoiceList_DecorNoRegistry),
+    [MULTI_DECOR_REGISTRY]           = MULTICHOICE(MultichoiceList_DecorRegistry),
+    [MULTI_REGISTER_MENU]            = MULTICHOICE(MultichoiceList_RegisterMenu),
+    [MULTI_UNUSED_8]                 = MULTICHOICE(MultichoiceList_Exit),
+    [MULTI_UNUSED_9]                 = MULTICHOICE(MultichoiceList_Exit),
+    [MULTI_UNUSED_10]                = MULTICHOICE(MultichoiceList_Exit),
+    [MULTI_FRONTIER_PASS_INFO]       = MULTICHOICE(MultichoiceList_FrontierPassInfo),
+    [MULTI_BIKE]                     = MULTICHOICE(MultichoiceList_Bike),
+    [MULTI_STATUS_INFO]              = MULTICHOICE(MultichoiceList_StatusInfo),
+    [MULTI_BRINEY_OFF_DEWFORD]       = MULTICHOICE(MultichoiceList_BrineyOffDewford),
+    [MULTI_UNUSED_15]                = MULTICHOICE(MultichoiceList_Exit),
+    [MULTI_VIEWED_PAINTINGS]         = MULTICHOICE(MultichoiceList_ViewedPaintings),
+    [MULTI_YESNOINFO]                = MULTICHOICE(MultichoiceList_YesNoInfo),
+    [MULTI_BATTLE_MODE]              = MULTICHOICE(MultichoiceList_BattleMode),
+    [MULTI_UNUSED_19]                = MULTICHOICE(MultichoiceList_Exit),
+    [MULTI_YESNOINFO_2]              = MULTICHOICE(MultichoiceList_YesNoInfo2),
+    [MULTI_UNUSED_21]                = MULTICHOICE(MultichoiceList_Exit),
+    [MULTI_UNUSED_22]                = MULTICHOICE(MultichoiceList_Exit),
+    [MULTI_CHALLENGEINFO]            = MULTICHOICE(MultichoiceList_ChallengeInfo),
+    [MULTI_LEVEL_MODE]               = MULTICHOICE(MultichoiceList_LevelMode),
+    [MULTI_MECHADOLL1_Q1]            = MULTICHOICE(MultichoiceList_Mechadoll1_Q1),
+    [MULTI_MECHADOLL1_Q2]            = MULTICHOICE(MultichoiceList_Mechadoll1_Q2),
+    [MULTI_MECHADOLL1_Q3]            = MULTICHOICE(MultichoiceList_Mechadoll1_Q3),
+    [MULTI_MECHADOLL2_Q1]            = MULTICHOICE(MultichoiceList_Mechadoll2_Q1),
+    [MULTI_MECHADOLL2_Q2]            = MULTICHOICE(MultichoiceList_Mechadoll2_Q2),
+    [MULTI_MECHADOLL2_Q3]            = MULTICHOICE(MultichoiceList_Mechadoll2_Q3),
+    [MULTI_MECHADOLL3_Q1]            = MULTICHOICE(MultichoiceList_Mechadoll3_Q1),
+    [MULTI_MECHADOLL3_Q2]            = MULTICHOICE(MultichoiceList_Mechadoll3_Q2),
+    [MULTI_MECHADOLL3_Q3]            = MULTICHOICE(MultichoiceList_Mechadoll3_Q3),
+    [MULTI_MECHADOLL4_Q1]            = MULTICHOICE(MultichoiceList_Mechadoll4_Q1),
+    [MULTI_MECHADOLL4_Q2]            = MULTICHOICE(MultichoiceList_Mechadoll4_Q2),
+    [MULTI_MECHADOLL4_Q3]            = MULTICHOICE(MultichoiceList_Mechadoll4_Q3),
+    [MULTI_MECHADOLL5_Q1]            = MULTICHOICE(MultichoiceList_Mechadoll5_Q1),
+    [MULTI_MECHADOLL5_Q2]            = MULTICHOICE(MultichoiceList_Mechadoll5_Q2),
+    [MULTI_MECHADOLL5_Q3]            = MULTICHOICE(MultichoiceList_Mechadoll5_Q3),
+    [MULTI_UNUSED_40]                = MULTICHOICE(MultichoiceList_Exit),
+    [MULTI_UNUSED_41]                = MULTICHOICE(MultichoiceList_Exit),
+    [MULTI_VENDING_MACHINE]          = MULTICHOICE(MultichoiceList_VendingMachine),
+    [MULTI_MACH_BIKE_INFO]           = MULTICHOICE(MultichoiceList_MachBikeInfo),
+    [MULTI_ACRO_BIKE_INFO]           = MULTICHOICE(MultichoiceList_AcroBikeInfo),
+    [MULTI_SATISFACTION]             = MULTICHOICE(MultichoiceList_Satisfaction),
+    [MULTI_STERN_DEEPSEA]            = MULTICHOICE(MultichoiceList_SternDeepSea),
+    [MULTI_UNUSED_ASH_VENDOR]        = MULTICHOICE(MultichoiceList_UnusedAshVendor),
+    [MULTI_GAME_CORNER_DOLLS]        = MULTICHOICE(MultichoiceList_GameCornerDolls),
+    [MULTI_GAME_CORNER_COINS]        = MULTICHOICE(MultichoiceList_GameCornerCoins),
+    [MULTI_HOWS_FISHING]             = MULTICHOICE(MultichoiceList_HowsFishing),
+    [MULTI_UNUSED_51]                = MULTICHOICE(MultichoiceList_Exit),
+    [MULTI_SSTIDAL_SLATEPORT_1]      = MULTICHOICE(MultichoiceList_SSTidalSlateport1),
+    [MULTI_SSTIDAL_BATTLE_FRONTIER]  = MULTICHOICE(MultichoiceList_SSTidalBattleFrontier),
+    [MULTI_RIGHTLEFT]                = MULTICHOICE(MultichoiceList_RightLeft),
+    [MULTI_GAME_CORNER_TMS]          = MULTICHOICE(MultichoiceList_GameCornerTMs),
+    [MULTI_SSTIDAL_SLATEPORT_2]      = MULTICHOICE(MultichoiceList_SSTidalSlateport2),
+    [MULTI_FLOORS]                   = MULTICHOICE(MultichoiceList_Floors),
+    [MULTI_SHARDS_R]                 = MULTICHOICE(MultichoiceList_ShardsR),
+    [MULTI_SHARDS_Y]                 = MULTICHOICE(MultichoiceList_ShardsY),
+    [MULTI_SHARDS_RY]                = MULTICHOICE(MultichoiceList_ShardsRY),
+    [MULTI_SHARDS_B]                 = MULTICHOICE(MultichoiceList_ShardsB),
+    [MULTI_SHARDS_RB]                = MULTICHOICE(MultichoiceList_ShardsRB),
+    [MULTI_SHARDS_YB]                = MULTICHOICE(MultichoiceList_ShardsYB),
+    [MULTI_SHARDS_RYB]               = MULTICHOICE(MultichoiceList_ShardsRYB),
+    [MULTI_SHARDS_G]                 = MULTICHOICE(MultichoiceList_ShardsG),
+    [MULTI_SHARDS_RG]                = MULTICHOICE(MultichoiceList_ShardsRG),
+    [MULTI_SHARDS_YG]                = MULTICHOICE(MultichoiceList_ShardsYG),
+    [MULTI_SHARDS_RYG]               = MULTICHOICE(MultichoiceList_ShardsRYG),
+    [MULTI_SHARDS_BG]                = MULTICHOICE(MultichoiceList_ShardsBG),
+    [MULTI_SHARDS_RBG]               = MULTICHOICE(MultichoiceList_ShardsRBG),
+    [MULTI_SHARDS_YBG]               = MULTICHOICE(MultichoiceList_ShardsYBG),
+    [MULTI_SHARDS_RYBG]              = MULTICHOICE(MultichoiceList_ShardsRYBG),
+    [MULTI_TOURNEY_WITH_RECORD]      = MULTICHOICE(MultichoiceList_TourneyWithRecord),
+    [MULTI_LINK_SERVICES_A1]         = MULTICHOICE(MultichoiceList_LinkServicesA),
+    [MULTI_LINK_SERVICES_A2]         = MULTICHOICE(MultichoiceList_LinkServicesA),
+    [MULTI_LINK_SERVICES_B1]         = MULTICHOICE(MultichoiceList_LinkServicesB),
+    [MULTI_LINK_SERVICES_B2]         = MULTICHOICE(MultichoiceList_LinkServicesB),
+    [MULTI_LINK_SERVICES_C]          = MULTICHOICE(MultichoiceList_LinkServicesC),
+    [MULTI_LINK_SERVICES_D]          = MULTICHOICE(MultichoiceList_LinkServicesD),
+    [MULTI_WIRELESS_MINIGAME]        = MULTICHOICE(MultichoiceList_WirelessMinigame),
+    [MULTI_LINK_LEADER]              = MULTICHOICE(MultichoiceList_LinkLeader),
+    [MULTI_CONTEST_RANK]             = MULTICHOICE(MultichoiceList_ContestRank),
+    [MULTI_FRONTIER_ITEM_CHOOSE]     = MULTICHOICE(MultichoiceList_FrontierItemChoose),
+    [MULTI_LINK_CONTEST_INFO]        = MULTICHOICE(MultichoiceList_LinkContestInfo),
+    [MULTI_LINK_CONTEST_MODE]        = MULTICHOICE(MultichoiceList_LinkContestMode),
+    [MULTI_FORCED_START_MENU]        = MULTICHOICE(MultichoiceList_ForcedStartMenu),
+    [MULTI_FRONTIER_GAMBLER_BET]     = MULTICHOICE(MultichoiceList_FrontierGamblerBet),
+    [MULTI_TENT]                     = MULTICHOICE(MultichoiceList_Tent),
+    [MULTI_UNUSED_SSTIDAL_1]         = MULTICHOICE(MultichoiceList_UnusedSSTidal1),
+    [MULTI_UNUSED_SSTIDAL_2]         = MULTICHOICE(MultichoiceList_UnusedSSTidal2),
+    [MULTI_UNUSED_SSTIDAL_3]         = MULTICHOICE(MultichoiceList_UnusedSSTidal3),
+    [MULTI_UNUSED_SSTIDAL_4]         = MULTICHOICE(MultichoiceList_UnusedSSTidal4),
+    [MULTI_FOSSIL]                   = MULTICHOICE(MultichoiceList_Fossil),
+    [MULTI_YESNO]                    = MULTICHOICE(MultichoiceList_YesNo),
+    [MULTI_FRONTIER_RULES]           = MULTICHOICE(MultichoiceList_FrontierRules),
+    [MULTI_BATTLE_ARENA_RULES]       = MULTICHOICE(MultichoiceList_BattleArenaRules),
+    [MULTI_BATTLE_TOWER_RULES]       = MULTICHOICE(MultichoiceList_BattleTowerRules),
+    [MULTI_BATTLE_DOME_RULES]        = MULTICHOICE(MultichoiceList_BattleDomeRules),
+    [MULTI_BATTLE_FACTORY_RULES]     = MULTICHOICE(MultichoiceList_BattleFactoryRules),
+    [MULTI_BATTLE_PALACE_RULES]      = MULTICHOICE(MultichoiceList_BattlePalaceRules),
+    [MULTI_BATTLE_PYRAMID_RULES]     = MULTICHOICE(MultichoiceList_BattlePyramidRules),
+    [MULTI_BATTLE_PIKE_RULES]        = MULTICHOICE(MultichoiceList_BattlePikeRules),
+    [MULTI_GO_ON_RECORD_REST_RETIRE] = MULTICHOICE(MultichoiceList_GoOnRecordRestRetire),
+    [MULTI_GO_ON_REST_RETIRE]        = MULTICHOICE(MultichoiceList_GoOnRestRetire),
+    [MULTI_GO_ON_RECORD_RETIRE]      = MULTICHOICE(MultichoiceList_GoOnRecordRetire),
+    [MULTI_GO_ON_RETIRE]             = MULTICHOICE(MultichoiceList_GoOnRetire),
+    [MULTI_TOURNEY_NO_RECORD]        = MULTICHOICE(MultichoiceList_TourneyNoRecord),
+    [MULTI_TV_LATI]                  = MULTICHOICE(MultichoiceList_TVLati),
+    [MULTI_BATTLE_TOWER_FEELINGS]    = MULTICHOICE(MultichoiceList_BattleTowerFeelings),
+    [MULTI_WHERES_RAYQUAZA]          = MULTICHOICE(MultichoiceList_WheresRayquaza),
+    [MULTI_SLATEPORT_TENT_RULES]     = MULTICHOICE(MultichoiceList_SlateportTentRules),
+    [MULTI_FALLARBOR_TENT_RULES]     = MULTICHOICE(MultichoiceList_FallarborTentRules),
+    [MULTI_TAG_MATCH_TYPE]           = MULTICHOICE(MultichoiceList_TagMatchType),
 };
 
 const u8 *const gStdStrings[] =
@@ -934,7 +934,15 @@ const u8 *const gStdStrings[] =
     [STDSTRING_BATTLE_PYRAMID] = gText_BattlePyramid,
 };
 
-const u8 gUnknown_0858BB68[] = { 74, 75, 76, 77, 78, 79 };
+const u8 gLinkServicesMultichoiceIds[] = 
+{ 
+    MULTI_LINK_SERVICES_A1, 
+    MULTI_LINK_SERVICES_A2, 
+    MULTI_LINK_SERVICES_B1, 
+    MULTI_LINK_SERVICES_B2, 
+    MULTI_LINK_SERVICES_C, 
+    MULTI_LINK_SERVICES_D 
+};
 
 const u8 *const sPCNameStrings[] =
 {

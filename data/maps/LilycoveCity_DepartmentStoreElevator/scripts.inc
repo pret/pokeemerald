@@ -21,27 +21,27 @@ LilycoveCity_DepartmentStoreElevator_EventScript_220624:: @ 8220624
 	end
 
 LilycoveCity_DepartmentStoreElevator_EventScript_220689:: @ 8220689
-	multichoicedefault 0, 0, 57, 0, 0
+	multichoicedefault 0, 0, MULTI_FLOORS, 0, 0
 	goto LilycoveCity_DepartmentStoreElevator_EventScript_2206C5
 	end
 
 LilycoveCity_DepartmentStoreElevator_EventScript_220695:: @ 8220695
-	multichoicedefault 0, 0, 57, 1, 0
+	multichoicedefault 0, 0, MULTI_FLOORS, 1, 0
 	goto LilycoveCity_DepartmentStoreElevator_EventScript_2206C5
 	end
 
 LilycoveCity_DepartmentStoreElevator_EventScript_2206A1:: @ 82206A1
-	multichoicedefault 0, 0, 57, 2, 0
+	multichoicedefault 0, 0, MULTI_FLOORS, 2, 0
 	goto LilycoveCity_DepartmentStoreElevator_EventScript_2206C5
 	end
 
 LilycoveCity_DepartmentStoreElevator_EventScript_2206AD:: @ 82206AD
-	multichoicedefault 0, 0, 57, 3, 0
+	multichoicedefault 0, 0, MULTI_FLOORS, 3, 0
 	goto LilycoveCity_DepartmentStoreElevator_EventScript_2206C5
 	end
 
 LilycoveCity_DepartmentStoreElevator_EventScript_2206B9:: @ 82206B9
-	multichoicedefault 0, 0, 57, 4, 0
+	multichoicedefault 0, 0, MULTI_FLOORS, 4, 0
 	goto LilycoveCity_DepartmentStoreElevator_EventScript_2206C5
 	end
 
@@ -53,7 +53,7 @@ LilycoveCity_DepartmentStoreElevator_EventScript_2206C5:: @ 82206C5
 	case 3, LilycoveCity_DepartmentStoreElevator_EventScript_220740
 	case 4, LilycoveCity_DepartmentStoreElevator_EventScript_220718
 	case 5, LilycoveCity_DepartmentStoreElevator_EventScript_2207E0
-	case 127, LilycoveCity_DepartmentStoreElevator_EventScript_2207E0
+	case MULTI_B_PRESSED, LilycoveCity_DepartmentStoreElevator_EventScript_2207E0
 	end
 
 LilycoveCity_DepartmentStoreElevator_EventScript_220718:: @ 8220718

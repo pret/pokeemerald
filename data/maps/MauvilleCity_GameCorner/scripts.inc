@@ -15,7 +15,7 @@ MauvilleCity_GameCorner_EventScript_20FBB9:: @ 820FBB9
 	goto MauvilleCity_GameCorner_EventScript_20FBE5
 
 MauvilleCity_GameCorner_EventScript_20FBE5:: @ 820FBE5
-	multichoicedefault 15, 0, 49, 0, 0
+	multichoicedefault 15, 0, MULTI_GAME_CORNER_COINS, 0, 0
 	switch VAR_RESULT
 	case 0, MauvilleCity_GameCorner_EventScript_20FC33
 	case 1, MauvilleCity_GameCorner_EventScript_20FC75
@@ -23,7 +23,7 @@ MauvilleCity_GameCorner_EventScript_20FBE5:: @ 820FBE5
 	end
 
 MauvilleCity_GameCorner_EventScript_20FC0C:: @ 820FC0C
-	multichoicedefault 15, 0, 49, 1, 0
+	multichoicedefault 15, 0, MULTI_GAME_CORNER_COINS, 1, 0
 	switch VAR_RESULT
 	case 0, MauvilleCity_GameCorner_EventScript_20FC33
 	case 1, MauvilleCity_GameCorner_EventScript_20FC75
@@ -125,7 +125,7 @@ MauvilleCity_GameCorner_EventScript_20FD20:: @ 820FD20
 	goto MauvilleCity_GameCorner_EventScript_20FD2B
 
 MauvilleCity_GameCorner_EventScript_20FD2B:: @ 820FD2B
-	multichoice 12, 0, 48, 0
+	multichoice 12, 0, MULTI_GAME_CORNER_DOLLS, 0
 	switch VAR_RESULT
 	case 0, MauvilleCity_GameCorner_EventScript_20FD67
 	case 1, MauvilleCity_GameCorner_EventScript_20FD75
@@ -246,7 +246,7 @@ MauvilleCity_GameCorner_EventScript_20FECE:: @ 820FECE
 	goto MauvilleCity_GameCorner_EventScript_20FED9
 
 MauvilleCity_GameCorner_EventScript_20FED9:: @ 820FED9
-	multichoice 12, 0, 55, 0
+	multichoice 12, 0, MULTI_GAME_CORNER_TMS, 0
 	switch VAR_RESULT
 	case 0, MauvilleCity_GameCorner_EventScript_20FF2B
 	case 1, MauvilleCity_GameCorner_EventScript_20FF3E

@@ -507,7 +507,7 @@ LittlerootTown_MaysHouse_1F_EventScript_292AF2:: @ 8292AF2
 	compare VAR_0x8008, 1
 	call_if_eq LittlerootTown_BrendansHouse_1F_EventScript_292D9D
 	msgbox LittlerootTown_BrendansHouse_1F_Text_1F8351, MSGBOX_DEFAULT
-	multichoice 22, 8, 108, 1
+	multichoice 22, 8, MULTI_TV_LATI, 1
 	copyvar VAR_0x8004, VAR_RESULT
 	special InitRoamer
 	copyvar VAR_ROAMER_POKEMON, VAR_RESULT

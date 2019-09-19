@@ -34,7 +34,7 @@ static void sub_80E2A94(u8);
 static void CreatePCMenu(void);
 static void sub_80E2578(void);
 static bool8 IsPicboxClosed(void);
-static void CreateStartMenu(void);
+static void CreateMultichoiceStartMenu(void);
 static void sub_80E2CC4(u8, u8, u8, u8);
 
 bool8 ScriptMenu_Multichoice(u8 left, u8 top, u8 multichoiceId, u8 ignoreBPress)
@@ -130,9 +130,9 @@ static void sub_80E1FBC(u8 ignoreBPress, u8 count, u8 windowId, u8 multichoiceId
     u8 taskId;
     gUnknown_02039F90 = 2;
 
-    for (i = 0; i < ARRAY_COUNT(gUnknown_0858BB68); i++)
+    for (i = 0; i < ARRAY_COUNT(gLinkServicesMultichoiceIds); i++)
     {
-        if (gUnknown_0858BB68[i] == multichoiceId)
+        if (gLinkServicesMultichoiceIds[i] == multichoiceId)
         {
             gUnknown_02039F90 = 12;
         }
@@ -183,7 +183,7 @@ static void Task_HandleMultichoiceInput(u8 taskId)
                     if (tIgnoreBPress)
                         return;
                     PlaySE(SE_SELECT);
-                    gSpecialVar_Result = MULTICHOICE_B;
+                    gSpecialVar_Result = MULTI_B_PRESSED;
                 }
                 else
                 {
@@ -299,7 +299,7 @@ static void Task_HandleMultichoiceGridInput(u8 taskId)
         if (tIgnoreBPress)
             return;
         PlaySE(SE_SELECT);
-        gSpecialVar_Result = MULTICHOICE_B;
+        gSpecialVar_Result = MULTI_B_PRESSED;
         break;
     default:
         gSpecialVar_Result = selection;
@@ -536,7 +536,7 @@ static void sub_80E2578(void)
 
 void sub_80E2878(void)
 {
-    if (gSpecialVar_Result != MULTICHOICE_B)
+    if (gSpecialVar_Result != MULTI_B_PRESSED)
     {
         gSpecialVar_Result = gUnknown_03001124[gSpecialVar_Result];
     }
@@ -639,34 +639,34 @@ static void sub_80E2A94(u8 multichoiceId)
 {
     switch (multichoiceId)
     {
-    case 77:
+    case MULTI_LINK_SERVICES_B2:
         FillWindowPixelBuffer(0, PIXEL_FILL(1));
         AddTextPrinterParameterized2(0, 1, gUnknown_0858BBAC[Menu_GetCursorPos()], 0, NULL, 2, 1, 3);
         break;
-    case 76:
+    case MULTI_LINK_SERVICES_B1:
         FillWindowPixelBuffer(0, PIXEL_FILL(1));
         AddTextPrinterParameterized2(0, 1, gUnknown_0858BB9C[Menu_GetCursorPos()], 0, NULL, 2, 1, 3);
         break;
-    case 78:
+    case MULTI_LINK_SERVICES_C:
         FillWindowPixelBuffer(0, PIXEL_FILL(1));
         AddTextPrinterParameterized2(0, 1, gUnknown_0858BBBC[Menu_GetCursorPos()], 0, NULL, 2, 1, 3);
         break;
-    case 79:
+    case MULTI_LINK_SERVICES_D:
         FillWindowPixelBuffer(0, PIXEL_FILL(1));
         AddTextPrinterParameterized2(0, 1, gUnknown_0858BBCC[Menu_GetCursorPos()], 0, NULL, 2, 1, 3);
         break;
-    case 75:
+    case MULTI_LINK_SERVICES_A2:
         FillWindowPixelBuffer(0, PIXEL_FILL(1));
         AddTextPrinterParameterized2(0, 1, gUnknown_0858BBEC[Menu_GetCursorPos()], 0, NULL, 2, 1, 3);
         break;
-    case 74:
+    case MULTI_LINK_SERVICES_A1:
         FillWindowPixelBuffer(0, PIXEL_FILL(1));
         AddTextPrinterParameterized2(0, 1, gUnknown_0858BBE0[Menu_GetCursorPos()], 0, NULL, 2, 1, 3);
         break;
     }
 }
 
-bool16 sp106_CreateStartMenu(void)
+bool16 CreateStartMenuForPokenavTutorial(void)
 {
     if (FuncIsActiveTask(Task_HandleMultichoiceInput) == TRUE)
     {
@@ -674,11 +674,11 @@ bool16 sp106_CreateStartMenu(void)
     }
 
     gSpecialVar_Result = 0xFF;
-    CreateStartMenu();
+    CreateMultichoiceStartMenu();
     return TRUE;
 }
 
-static void CreateStartMenu(void)
+static void CreateMultichoiceStartMenu(void)
 {
     u8 windowId = CreateWindowFromRect(21, 0, 7, 18);
     SetStandardWindowBorderStyle(windowId, 0);
@@ -691,7 +691,7 @@ static void CreateStartMenu(void)
     AddTextPrinterParameterized(windowId, 1, gText_MenuOptionOption, 8, 105, TEXT_SPEED_FF, NULL);
     AddTextPrinterParameterized(windowId, 1, gText_MenuOptionExit, 8, 121, TEXT_SPEED_FF, NULL);
     sub_81983AC(windowId, 1, 0, 9, 16, 8, 0);
-    sub_80E2CC4(0, 8, windowId, 86);
+    sub_80E2CC4(FALSE, 8, windowId, MULTI_FORCED_START_MENU);
     CopyWindowToVram(windowId, 3);
 }
 

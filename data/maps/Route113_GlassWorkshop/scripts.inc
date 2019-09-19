@@ -64,7 +64,7 @@ Route113_GlassWorkshop_EventScript_26EDA7:: @ 826EDA7
 	case 5, Route113_GlassWorkshop_EventScript_26EF4A
 	case 6, Route113_GlassWorkshop_EventScript_26EF8B
 	case 7, Route113_GlassWorkshop_EventScript_26EFCC
-	case 127, Route113_GlassWorkshop_EventScript_26EFCC
+	case MULTI_B_PRESSED, Route113_GlassWorkshop_EventScript_26EFCC
 	end
 
 Route113_GlassWorkshop_EventScript_26EE1E:: @ 826EE1E
