@@ -10,28 +10,24 @@
 
 The [prerelease version of the Linux subsystem](https://docs.microsoft.com/windows/wsl/install-legacy) available in the 1607 and 1703 releases of Windows 10 is obsolete so consider uninstalling it.
 
-Make sure that the `build-essential`, `git`, and `libpng-dev` packages are installed. The `build-essential` package includes the `make`, `gcc-core`, and `g++` packages so they do not have to be obtained separately. MSYS2 does not include `libpng-dev` so it must be built from source.
+Make sure that the <code>build-essential</code><sup>Debian</sup>/<code>base-devel</code><sup>Arch</sup> package group and `git` are installed.
 
 Install the **devkitARM** toolchain of [devkitPro](https://devkitpro.org/wiki/Getting_Started) and add its environment variables. For Windows versions without the Linux subsystem, the devkitPro [graphical installer](https://github.com/devkitPro/installer/releases) includes a preconfigured MSYS2 environment, thus the steps below are not required.
 
 	export DEVKITPRO=/opt/devkitpro
-	echo "export DEVKITPRO=$DEVKITPRO" >> ~/.bashrc
 	export DEVKITARM=$DEVKITPRO/devkitARM
-	echo "export DEVKITARM=$DEVKITARM" >> ~/.bashrc
 
+Place the above code in your `~/.bash_profile` and restart your shell for changes to take effect.
+
+Install the pret tools using the `./install-tools.sh` script in the repository root. This automatically downloads & installs precompiled binaries for your current platform of all the tools used to compile pokeemerald, including `agbcc`. Alternatively, you can easily build, package and/or install them from source using the [`grups` tool](https://code.caveoforig.in/fhtk/grups).
 
 # Installation
 
 To set up the repository:
 
 	git clone https://github.com/pret/pokeemerald
-	git clone https://github.com/pret/agbcc
-
-	cd ./agbcc
-	./build.sh
-	./install.sh ../pokeemerald
-
-	cd ../pokeemerald
+	cd pokeemerald
+	make
 
 To build **pokeemerald.gba** and confirm it matches the official ROM image:
 
@@ -39,9 +35,8 @@ To build **pokeemerald.gba** and confirm it matches the official ROM image:
 
 ## Notes
 
-* If the base tools are not found on macOS in new Terminal sessions after the first successful build, run `echo "if [ -f ~/.bashrc ]; then . ~/.bashrc; fi" >> ~/.bash_profile` once to prevent the issue from occurring again. Verify that the `devkitarm-rules` package is installed as well; if not, install it by running `sudo dkp-pacman -S devkitarm-rules`.
-
-* If the repository was previously set up using Cygwin, delete the `.exe` files in the subfolders of the `tools` folder except for `agbcc` and try building again. [Learn the differences between MSYS2 and Cygwin.](https://github.com/msys2/msys2/wiki/How-does-MSYS2-differ-from-Cygwin)
+- Verify that the `devkitarm-rules` package is installed as well; if not, install it by running `sudo dkp-pacman -S devkitarm-rules`.
+- If the repository was previously set up using Cygwin, delete the `.exe` files in the subfolders of the `tools` folder except for `agbcc` and try building again. [Learn the differences between MSYS2 and Cygwin.](https://github.com/msys2/msys2/wiki/How-does-MSYS2-differ-from-Cygwin)
 
 # Guidance
 
@@ -57,7 +52,7 @@ To speed up building, run:
 
 	make -j$(nproc)
 
-`nproc` is not available on macOS. The alternative is `sysctl -n hw.ncpu` ([relevant Stack Overflow thread](https://stackoverflow.com/questions/1715580)).
+To use `nproc` on macOS, install GNU coreutils with homebrew by running `brew install coreutils`. Alternatively, use `sysctl -n hw.ncpu` instead. ([source](https://stackoverflow.com/questions/1715580)).
 
 ## Building without dependency scanning
 
