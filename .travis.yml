@@ -16,8 +16,8 @@ install:
   - pushd $HOME
   - travis_retry wget https://github.com/devkitPro/buildscripts/releases/download/devkitARM_r50/devkitARM_r50-linux.tar.xz
   - tar xJf devkitARM*.tar.xz
-  - ./install-tools.sh
   - popd
+  - ./install-tools.sh
 matrix:
   include:
     - os: linux
