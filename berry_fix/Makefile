@@ -15,11 +15,13 @@ REVISION   := 0
 
 SHELL := /bin/bash -o pipefail
 
-CPPFLAGS := -I ../tools/agbcc/include -I ../tools/agbcc -iquote include -nostdinc -undef
+PRET := /opt/pret
+
+CPPFLAGS := -I $(PRET)/include -I $(PRET)/bin/agbcc -iquote include -nostdinc -undef
 
 ROM := berry_fix.gba
 OBJ_DIR := build
-CC1             := ../tools/agbcc/bin/agbcc$(EXE)
+CC1             := $(PRET)/bin/agbcc$(EXE)
 override CFLAGS += -mthumb-interwork -Wimplicit -Wparentheses -Werror -O2 -fhex-asm
 
 
@@ -39,13 +41,13 @@ ASFLAGS := -mcpu=arm7tdmi
 LDFLAGS = -Map ../$(MAP)
 
 SHA1 := $(shell { command -v sha1sum || command -v shasum; } 2>/dev/null) -c
-GFX := ../tools/gbagfx/gbagfx$(EXE)
-AIF := ../tools/aif2pcm/aif2pcm$(EXE)
-MID := ../tools/mid2agb/mid2agb$(EXE)
-SCANINC := ../tools/scaninc/scaninc$(EXE)
-PREPROC := ../tools/preproc/preproc$(EXE)
-RAMSCRGEN := ../tools/ramscrgen/ramscrgen$(EXE)
-FIX := ../tools/gbafix/gbafix$(EXE)
+GFX := $(PRET)/bin/gbagfx$(EXE)
+AIF := $(PRET)/bin/aif2pcm$(EXE)
+MID := $(PRET)/bin/mid2agb$(EXE)
+SCANINC := $(PRET)/bin/scaninc$(EXE)
+PREPROC := $(PRET)/bin/preproc$(EXE)
+RAMSCRGEN := $(PRET)/bin/ramscrgen$(EXE)
+FIX := $(PRET)/bin/gbafix$(EXE)
 
 # Clear the default suffixes
 .SUFFIXES:
@@ -120,7 +122,7 @@ tidy:
 ifeq ($(NODEP),1)
 $(C_BUILDDIR)/%.o: c_dep :=
 else
-$(C_BUILDDIR)/%.o: c_dep = $(shell $(SCANINC) -I include $(C_SUBDIR)/$*.c)
+$(C_BUILDDIR)/%.o: c_dep = $(shell $(SCANINC) -I $(PRET)/include -I include $(C_SUBDIR)/$*.c)
 endif
 
 $(C_BUILDDIR)/%.o : $(C_SUBDIR)/%.c $$(c_dep)
@@ -163,4 +165,3 @@ $(ELF): ld_script.txt $(OBJS)
 $(ROM): $(ELF)
 	$(OBJCOPY) -O binary $< $@
 	$(FIX) $@ -c$(GAME_CODE) -m$(MAKER_CODE) -r$(REVISION) --silent
-

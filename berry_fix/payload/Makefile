@@ -11,11 +11,13 @@ endif
 
 SHELL := /bin/bash -o pipefail
 
-CPPFLAGS := -I ../../tools/agbcc/include -I ../../tools/agbcc -iquote include -nostdinc -undef
+PRET := /opt/pret
+
+CPPFLAGS := -I $(PRET)/include -I $(PRET) -iquote include -nostdinc -undef
 
 ROM := payload.gba
 OBJ_DIR := build
-CC1             := ../../tools/agbcc/bin/agbcc$(EXE)
+CC1             := $(PRET)/bin/agbcc$(EXE)
 override CC1FLAGS += -mthumb-interwork -Wimplicit -Wparentheses -Werror -O2 -fhex-asm
 
 
@@ -37,13 +39,16 @@ LDFLAGS = -Map ../$(MAP)
 LIB := -L ../../../tools/agbcc/lib -lgcc
 
 SHA1 := $(shell { command -v sha1sum || command -v shasum; } 2>/dev/null) -c
-GFX := ../../tools/gbagfx/gbagfx$(EXE)
-AIF := ../../tools/aif2pcm/aif2pcm$(EXE)
-MID := ../../tools/mid2agb/mid2agb$(EXE)
-SCANINC := ../../tools/scaninc/scaninc$(EXE)
-PREPROC := ../../tools/preproc/preproc$(EXE)
-RAMSCRGEN := ../../tools/ramscrgen/ramscrgen$(EXE)
-FIX := ../../tools/gbafix/gbafix$(EXE)
+
+export GFX       := $(PRET)/bin/gbagfx$(EXE)
+export AIF       := $(PRET)/bin/aif2pcm$(EXE)
+export MID       := $(PRET)/bin/mid2agb$(EXE)
+export SCANINC   := $(PRET)/bin/scaninc$(EXE)
+export PREPROC   := $(PRET)/bin/preproc$(EXE)
+export RAMSCRGEN := $(PRET)/bin/ramscrgen$(EXE)
+export FIX       := $(PRET)/bin/gbafix$(EXE)
+export MAPJSON   := $(PRET)/bin/mapjson$(EXE)
+export JSONPROC  := $(PRET)/bin/jsonproc$(EXE)
 
 # Clear the default suffixes
 .SUFFIXES:
@@ -169,4 +174,3 @@ $(ELF): $(OBJ_DIR)/ld_script.ld $(OBJS)
 
 $(ROM): $(ELF)
 	$(OBJCOPY) -O binary $< $@
-

@@ -3,12 +3,26 @@ COMPARE ?= 0
 
 ifeq ($(CC),)
 HOSTCC := gcc
+# use system clang on macOS; GCC is wonky w/ homebrew sometimes
+ifneq ($(OS),Windows_NT)
+UNAME := $(shell uname -s)
+ifeq ($(UNAME),Darwin)
+HOSTCC := /usr/bin/clang
+endif
+endif
 else
 HOSTCC := $(CC)
 endif
 
 ifeq ($(CXX),)
 HOSTCXX := g++
+# use system clang++ on macOS; see above
+ifneq ($(OS),Windows_NT)
+UNAME := $(shell uname -s)
+ifeq ($(UNAME),Darwin)
+HOSTCC := /usr/bin/clang++
+endif
+endif
 else
 HOSTCXX := $(CXX)
 endif
@@ -30,6 +44,19 @@ EXE := .exe
 else
 EXE :=
 endif
+
+# system-friendly install of tools
+export PRET := /opt/pret
+
+export GFX       := $(PRET)/bin/gbagfx$(EXE)
+export AIF       := $(PRET)/bin/aif2pcm$(EXE)
+export MID       := $(PRET)/bin/mid2agb$(EXE)
+export SCANINC   := $(PRET)/bin/scaninc$(EXE)
+export PREPROC   := $(PRET)/bin/preproc$(EXE)
+export RAMSCRGEN := $(PRET)/bin/ramscrgen$(EXE)
+export FIX       := $(PRET)/bin/gbafix$(EXE)
+export MAPJSON   := $(PRET)/bin/mapjson$(EXE)
+export JSONPROC  := $(PRET)/bin/jsonproc$(EXE)
 
 TITLE       := POKEMON EMER
 GAME_CODE   := BPEE
@@ -60,11 +87,11 @@ ASFLAGS := -mcpu=arm7tdmi --defsym MODERN=$(MODERN)
 GCC_VER = $(shell $(CC) -dumpversion)
 
 ifeq ($(MODERN),0)
-CC1             := tools/agbcc/bin/agbcc$(EXE)
+CC1             := $(PRET)/bin/agbcc$(EXE)
 override CFLAGS += -mthumb-interwork -Wimplicit -Wparentheses -Werror -O2 -fhex-asm
 ROM := pokeemerald.gba
 OBJ_DIR := build/emerald
-LIBPATH := -L ../../tools/agbcc/lib
+LIBPATH := -L $(PRET)/lib
 else
 CC1              = $(shell $(CC) --print-prog-name=cc1) -quiet
 override CFLAGS += -mthumb -mthumb-interwork -O2 -mabi=apcs-gnu -mtune=arm7tdmi -march=armv4t -fno-toplevel-reorder -fno-aggressive-loop-optimizations -Wno-pointer-to-int-cast
@@ -83,41 +110,25 @@ LDFLAGS = -Map ../../$(MAP)
 LIB := $(LIBPATH) -lgcc -lc
 
 SHA1 := $(shell { command -v sha1sum || command -v shasum; } 2>/dev/null) -c
-GFX := tools/gbagfx/gbagfx$(EXE)
-AIF := tools/aif2pcm/aif2pcm$(EXE)
-MID := tools/mid2agb/mid2agb$(EXE)
-SCANINC := tools/scaninc/scaninc$(EXE)
-PREPROC := tools/preproc/preproc$(EXE)
-RAMSCRGEN := tools/ramscrgen/ramscrgen$(EXE)
-FIX := tools/gbafix/gbafix$(EXE)
-MAPJSON := tools/mapjson/mapjson$(EXE)
-JSONPROC := tools/jsonproc/jsonproc$(EXE)
-
-TOOLDIRS := $(filter-out tools/agbcc tools/binutils,$(wildcard tools/*))
-TOOLBASE = $(TOOLDIRS:tools/%=%)
-TOOLS = $(foreach tool,$(TOOLBASE),tools/$(tool)/$(tool)$(EXE))
 
 MAKEFLAGS += --no-print-directory
 
 # Clear the default suffixes
 .SUFFIXES:
-# Don't delete intermediate files
+# Don’t delete intermediate files
 .SECONDARY:
-# Delete files that weren't built properly
+# Delete files that weren’t built properly
 .DELETE_ON_ERROR:
-
 # Secondary expansion is required for dependency variables in object rules.
 .SECONDEXPANSION:
 
-.PHONY: all rom clean compare tidy tools mostlyclean clean-tools $(TOOLDIRS) berry_fix
+.PHONY: all rom clean compare tidy berry_fix
 
 infoshell = $(foreach line, $(shell $1 | sed "s/ /__SPACE__/g"), $(info $(subst __SPACE__, ,$(line))))
 
 # Build tools when building the rom
-# Disable dependency scanning for clean/tidy/tools
-ifeq (,$(filter-out all compare,$(MAKECMDGOALS)))
-$(call infoshell, $(MAKE) tools)
-else
+# Disable dependency scanning for clean/tidy
+ifneq (,$(filter-out all compare,$(MAKECMDGOALS)))
 NODEP := 1
 endif
 
@@ -161,15 +172,10 @@ ifeq ($(COMPARE),1)
 	@$(SHA1) rom.sha1
 endif
 
-# For contributors to make sure a change didn't affect the contents of the ROM.
+# For contributors to make sure a change didn’t affect the contents of the ROM.
 compare: ; @$(MAKE) COMPARE=1
 
-clean: mostlyclean clean-tools
-
-clean-tools:
-	@$(foreach tooldir,$(TOOLDIRS),$(MAKE) clean -C $(tooldir);)
-
-mostlyclean: tidy
+clean: tidy
 	rm -f sound/direct_sound_samples/*.bin
 	rm -f $(MID_SUBDIR)/*.s
 	find . \( -iname '*.1bpp' -o -iname '*.4bpp' -o -iname '*.8bpp' -o -iname '*.gbapal' -o -iname '*.lz' -o -iname '*.latfont' -o -iname '*.hwjpnfont' -o -iname '*.fwjpnfont' \) -exec rm {} +
@@ -211,9 +217,8 @@ include songs.mk
 sound/direct_sound_samples/cry_%.bin: sound/direct_sound_samples/cry_%.aif ; $(AIF) $< $@ --compress
 sound/%.bin: sound/%.aif ; $(AIF) $< $@
 
-
 ifeq ($(MODERN),0)
-$(C_BUILDDIR)/libc.o: CC1 := tools/agbcc/bin/old_agbcc
+$(C_BUILDDIR)/libc.o: CC1 := $(PRET)/bin/old_agbcc
 $(C_BUILDDIR)/libc.o: CFLAGS := -O2
 
 $(C_BUILDDIR)/siirtc.o: CFLAGS := -mthumb-interwork
@@ -222,7 +227,7 @@ $(C_BUILDDIR)/agb_flash.o: CFLAGS := -O -mthumb-interwork
 $(C_BUILDDIR)/agb_flash_1m.o: CFLAGS := -O -mthumb-interwork
 $(C_BUILDDIR)/agb_flash_mx.o: CFLAGS := -O -mthumb-interwork
 
-$(C_BUILDDIR)/m4a.o: CC1 := tools/agbcc/bin/old_agbcc
+$(C_BUILDDIR)/m4a.o: CC1 := $(PRET)/bin/old_agbcc
 
 $(C_BUILDDIR)/record_mixing.o: CFLAGS += -ffreestanding
 endif
@@ -230,7 +235,7 @@ endif
 ifeq ($(NODEP),1)
 $(C_BUILDDIR)/%.o: c_dep :=
 else
-$(C_BUILDDIR)/%.o: c_dep = $(shell [[ -f $(C_SUBDIR)/$*.c ]] && $(SCANINC) -I include -I tools/agbcc/include $(C_SUBDIR)/$*.c)
+$(C_BUILDDIR)/%.o: c_dep = $(shell [[ -f $(C_SUBDIR)/$*.c ]] && $(SCANINC) -I include -I $(PRET)/include $(C_SUBDIR)/$*.c)
 endif
 
 ifeq ($(DINFO),1)
@@ -246,7 +251,7 @@ $(C_BUILDDIR)/%.o : $(C_SUBDIR)/%.c $$(c_dep)
 ifeq ($(NODEP),1)
 $(C_BUILDDIR)/%.o: c_asm_dep :=
 else
-$(C_BUILDDIR)/%.o: c_asm_dep = $(shell [[ -f $(C_SUBDIR)/$*.s ]] && $(SCANINC) -I "" $(C_SUBDIR)/$*.s)
+$(C_BUILDDIR)/%.o: c_asm_dep = $(shell [[ -f $(C_SUBDIR)/$*.s ]] && $(SCANINC) -I $(PRET)/include -I "" $(C_SUBDIR)/$*.s)
 endif
 
 $(C_BUILDDIR)/%.o: $(C_SUBDIR)/%.s $$(c_asm_dep)
@@ -255,7 +260,7 @@ $(C_BUILDDIR)/%.o: $(C_SUBDIR)/%.s $$(c_asm_dep)
 ifeq ($(NODEP),1)
 $(ASM_BUILDDIR)/%.o: asm_dep :=
 else
-$(ASM_BUILDDIR)/%.o: asm_dep = $(shell $(SCANINC) -I "" $(ASM_SUBDIR)/$*.s)
+$(ASM_BUILDDIR)/%.o: asm_dep = $(shell $(SCANINC) -I $(PRET)/include -I "" $(ASM_SUBDIR)/$*.s)
 endif
 
 $(ASM_BUILDDIR)/%.o: $(ASM_SUBDIR)/%.s $$(asm_dep)
@@ -264,7 +269,7 @@ $(ASM_BUILDDIR)/%.o: $(ASM_SUBDIR)/%.s $$(asm_dep)
 ifeq ($(NODEP),1)
 $(DATA_ASM_BUILDDIR)/%.o: data_dep :=
 else
-$(DATA_ASM_BUILDDIR)/%.o: data_dep = $(shell $(SCANINC) -I include -I "" $(DATA_ASM_SUBDIR)/$*.s)
+$(DATA_ASM_BUILDDIR)/%.o: data_dep = $(shell $(SCANINC) -I $(PRET)/include -I include -I "" $(DATA_ASM_SUBDIR)/$*.s)
 endif
 
 $(DATA_ASM_BUILDDIR)/%.o: $(DATA_ASM_SUBDIR)/%.s $$(data_dep)
@@ -287,7 +292,7 @@ LD_SCRIPT := ld_script.txt
 LD_SCRIPT_DEPS := $(OBJ_DIR)/sym_bss.ld $(OBJ_DIR)/sym_common.ld $(OBJ_DIR)/sym_ewram.ld
 else
 LD_SCRIPT := ld_script_modern.txt
-LD_SCRIPT_DEPS := 
+LD_SCRIPT_DEPS :=
 endif
 
 $(OBJ_DIR)/ld_script.ld: $(LD_SCRIPT) $(LD_SCRIPT_DEPS)
