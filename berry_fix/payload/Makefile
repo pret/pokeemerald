@@ -36,7 +36,7 @@ ASFLAGS := -mcpu=arm7tdmi
 
 LDFLAGS = -Map ../$(MAP)
 
-LIB := -L ../../../tools/agbcc/lib -lgcc
+LIB := -L $(PRET)/lib -lgcc
 
 SHA1 := $(shell { command -v sha1sum || command -v shasum; } 2>/dev/null) -c
 
