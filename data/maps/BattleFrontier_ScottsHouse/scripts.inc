@@ -112,7 +112,7 @@ BattleFrontier_ScottsHouse_EventScript_26381B:: @ 826381B
 
 BattleFrontier_ScottsHouse_EventScript_26387A:: @ 826387A
 	msgbox BattleFrontier_ScottsHouse_Text_264412, MSGBOX_DEFAULT
-	givedecoration_std 42
+	givedecoration_std DECOR_SILVER_SHIELD
 	compare VAR_RESULT, 0
 	goto_if_eq BattleFrontier_ScottsHouse_EventScript_2638A0
 	setflag FLAG_RECEIVED_SILVER_SHIELD
@@ -155,7 +155,7 @@ BattleFrontier_ScottsHouse_EventScript_2638B4:: @ 82638B4
 
 BattleFrontier_ScottsHouse_EventScript_263913:: @ 8263913
 	msgbox BattleFrontier_ScottsHouse_Text_26449F, MSGBOX_DEFAULT
-	givedecoration_std 43
+	givedecoration_std DECOR_GOLD_SHIELD
 	compare VAR_RESULT, 0
 	goto_if_eq BattleFrontier_ScottsHouse_EventScript_2638A0
 	setflag FLAG_RECEIVED_GOLD_SHIELD
@@ -218,7 +218,7 @@ BattleFrontier_ScottsHouse_EventScript_2639E9:: @ 82639E9
 	end
 
 BattleFrontier_ScottsHouse_EventScript_2639F8:: @ 82639F8
-	special sub_813A9D0
+	special GiveFrontierBattlePoints
 	msgbox BattleFrontier_ScottsHouse_Text_263CB0, 9
 	msgbox BattleFrontier_ScottsHouse_Text_263CD0, MSGBOX_DEFAULT
 	setflag FLAG_SCOTT_GIVES_BATTLE_POINTS

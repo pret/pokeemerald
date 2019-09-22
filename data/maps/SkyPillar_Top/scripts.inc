@@ -40,7 +40,7 @@ SkyPillar_Top_MapScript2_239713: @ 8239713
 	.2byte 0
 
 SkyPillar_Top_EventScript_23971D:: @ 823971D
-	turnobject 1, 1
+	turnobject 1, DIR_SOUTH
 	end
 
 SkyPillar_Top_EventScript_239722:: @ 8239722
@@ -71,7 +71,7 @@ SkyPillar_Top_EventScript_239768:: @ 8239768
 	end
 
 SkyPillar_Top_EventScript_239771:: @ 8239771
-	setvar VAR_0x8004, 406
+	setvar VAR_0x8004, SPECIES_RAYQUAZA
 	goto SkyPillar_Top_EventScript_239785
 	end
 

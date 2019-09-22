@@ -19,7 +19,7 @@ RustboroCity_DevonCorp_3F_MapScript2_212455: @ 8212455
 	.2byte 0
 
 RustboroCity_DevonCorp_3F_EventScript_21245F:: @ 821245F
-	turnobject EVENT_OBJ_ID_PLAYER, 4
+	turnobject EVENT_OBJ_ID_PLAYER, DIR_EAST
 	end
 
 RustboroCity_DevonCorp_3F_MapScript2_212464: @ 8212464

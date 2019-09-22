@@ -121,8 +121,8 @@ static EWRAM_DATA struct PokemonSummaryScreenData
         u8 metGame; // 0xB
         u32 pid; // 0xC
         u32 exp; // 0x10
-        u16 moves[4]; // 0x14
-        u8 pp[4]; // 0x1C
+        u16 moves[MAX_MON_MOVES]; // 0x14
+        u8 pp[MAX_MON_MOVES]; // 0x1C
         u16 currentHP; // 0x20
         u16 maxHP; // 0x22
         u16 atk; // 0x24

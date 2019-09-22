@@ -24,7 +24,7 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "LilycoveCity_Harbor_EventScript_21E00F",
+      "script": "LilycoveCity_Harbor_EventScript_FerryAttendant",
       "flag": "FLAG_HIDE_LILYCOVE_HARBOR_FERRY_ATTENDANT"
     },
     {
@@ -50,7 +50,7 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "LilycoveCity_Harbor_EventScript_21E637",
+      "script": "LilycoveCity_Harbor_EventScript_Sailor",
       "flag": "0"
     },
     {
@@ -77,7 +77,7 @@
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "0x0",
-      "flag": "FLAG_HIDE_LILYCOVE_HARBOR_EON_TICKET_TAKER"
+      "flag": "FLAG_HIDE_LILYCOVE_HARBOR_EVENT_TICKET_TAKER"
     }
   ],
   "warp_events": [
