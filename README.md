@@ -13,7 +13,6 @@ It builds the following ROM:
 
 To set up the repository, see [INSTALL.md](INSTALL.md).
 
-
 ## See also
 
 Other disassembly and/or decompilation projects:
