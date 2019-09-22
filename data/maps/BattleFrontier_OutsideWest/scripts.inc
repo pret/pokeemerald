@@ -20,12 +20,12 @@ BattleFrontier_OutsideWest_EventScript_23D3F0:: @ 823D3F0
 	end
 
 BattleFrontier_OutsideWest_EventScript_23D416:: @ 823D416
-	multichoicedefault 18, 6, 53, 2, 0
+	multichoicedefault 18, 6, MULTI_SSTIDAL_BATTLE_FRONTIER, 2, 0
 	switch VAR_RESULT
 	case 0, BattleFrontier_OutsideWest_EventScript_23D458
 	case 1, BattleFrontier_OutsideWest_EventScript_23D483
 	case 2, BattleFrontier_OutsideWest_EventScript_23D4D8
-	case 127, BattleFrontier_OutsideWest_EventScript_23D4D8
+	case MULTI_B_PRESSED, BattleFrontier_OutsideWest_EventScript_23D4D8
 	end
 
 BattleFrontier_OutsideWest_EventScript_23D44E:: @ 823D44E

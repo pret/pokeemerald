@@ -38,7 +38,7 @@ BattleFrontier_Lounge7_EventScript_265284:: @ 8265284
 	case 8, BattleFrontier_Lounge7_EventScript_26542F
 	case 9, BattleFrontier_Lounge7_EventScript_26543A
 	case 10, BattleFrontier_Lounge7_EventScript_265635
-	case 127, BattleFrontier_Lounge7_EventScript_265635
+	case MULTI_B_PRESSED, BattleFrontier_Lounge7_EventScript_265635
 	end
 
 BattleFrontier_Lounge7_EventScript_26532F:: @ 826532F
@@ -62,7 +62,7 @@ BattleFrontier_Lounge7_EventScript_26532F:: @ 826532F
 	case 8, BattleFrontier_Lounge7_EventScript_26542F
 	case 9, BattleFrontier_Lounge7_EventScript_26543A
 	case 10, BattleFrontier_Lounge7_EventScript_265635
-	case 127, BattleFrontier_Lounge7_EventScript_265635
+	case MULTI_B_PRESSED, BattleFrontier_Lounge7_EventScript_265635
 	end
 
 BattleFrontier_Lounge7_EventScript_2653D7:: @ 82653D7
@@ -152,7 +152,7 @@ BattleFrontier_Lounge7_EventScript_265474:: @ 8265474
 	case 8, BattleFrontier_Lounge7_EventScript_26561F
 	case 9, BattleFrontier_Lounge7_EventScript_26562A
 	case 10, BattleFrontier_Lounge7_EventScript_265635
-	case 127, BattleFrontier_Lounge7_EventScript_265635
+	case MULTI_B_PRESSED, BattleFrontier_Lounge7_EventScript_265635
 	end
 
 BattleFrontier_Lounge7_EventScript_26551F:: @ 826551F
@@ -176,7 +176,7 @@ BattleFrontier_Lounge7_EventScript_26551F:: @ 826551F
 	case 8, BattleFrontier_Lounge7_EventScript_26561F
 	case 9, BattleFrontier_Lounge7_EventScript_26562A
 	case 10, BattleFrontier_Lounge7_EventScript_265635
-	case 127, BattleFrontier_Lounge7_EventScript_265635
+	case MULTI_B_PRESSED, BattleFrontier_Lounge7_EventScript_265635
 	end
 
 BattleFrontier_Lounge7_EventScript_2655C7:: @ 82655C7

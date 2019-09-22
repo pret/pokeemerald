@@ -76,7 +76,7 @@ LilycoveCity_DepartmentStoreRooftop_EventScript_220295:: @ 8220295
 	end
 
 LilycoveCity_DepartmentStoreRooftop_EventScript_2202A6:: @ 82202A6
-	multichoice 16, 0, 42, 0
+	multichoice 16, 0, MULTI_VENDING_MACHINE, 0
 	copyvar VAR_TEMP_1, VAR_RESULT
 	switch VAR_TEMP_1
 	case 0, LilycoveCity_DepartmentStoreRooftop_EventScript_2202E4
@@ -149,7 +149,7 @@ LilycoveCity_DepartmentStoreRooftop_EventScript_22032F:: @ 822032F
 	msgbox LilycoveCity_DepartmentStoreRooftop_Text_2205A1, MSGBOX_DEFAULT
 	giveitem VAR_TEMP_0, 1
 	bufferitemname 1, VAR_TEMP_0
-	bufferstdstring 2, 14
+	bufferstdstring 2, STDSTRING_ITEMS
 	msgbox gText_PutItemInPocket, MSGBOX_DEFAULT
 	random 64
 	compare VAR_RESULT, 0
@@ -161,7 +161,7 @@ LilycoveCity_DepartmentStoreRooftop_EventScript_22032F:: @ 822032F
 	msgbox LilycoveCity_DepartmentStoreRooftop_Text_2205C2, MSGBOX_DEFAULT
 	giveitem VAR_TEMP_0, 1
 	bufferitemname 1, VAR_TEMP_0
-	bufferstdstring 2, 14
+	bufferstdstring 2, STDSTRING_ITEMS
 	msgbox gText_PutItemInPocket, MSGBOX_DEFAULT
 	random 64
 	compare VAR_RESULT, 0
@@ -173,7 +173,7 @@ LilycoveCity_DepartmentStoreRooftop_EventScript_22032F:: @ 822032F
 	msgbox LilycoveCity_DepartmentStoreRooftop_Text_2205C2, MSGBOX_DEFAULT
 	giveitem VAR_TEMP_0, 1
 	bufferitemname 1, VAR_TEMP_0
-	bufferstdstring 2, 14
+	bufferstdstring 2, STDSTRING_ITEMS
 	msgbox gText_PutItemInPocket, MSGBOX_DEFAULT
 	goto LilycoveCity_DepartmentStoreRooftop_EventScript_220436
 	end

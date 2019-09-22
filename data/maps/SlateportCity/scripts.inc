@@ -764,7 +764,7 @@ SlateportCity_EventScript_1DD3CA:: @ 81DD3CA
 	case 9, SlateportCity_EventScript_1DD522
 	case 10, SlateportCity_EventScript_1DD536
 	case 11, SlateportCity_EventScript_1DD54A
-	case 127, SlateportCity_EventScript_1DD54A
+	case MULTI_B_PRESSED, SlateportCity_EventScript_1DD54A
 	end
 
 SlateportCity_EventScript_1DD46E:: @ 81DD46E

@@ -1624,7 +1624,7 @@ bool8 ScrCmd_bufferstdstring(struct ScriptContext *ctx)
     u8 stringVarIndex = ScriptReadByte(ctx);
     u16 index = VarGet(ScriptReadHalfword(ctx));
 
-    StringCopy(sScriptStringVars[stringVarIndex], gUnknown_0858BAF0[index]);
+    StringCopy(sScriptStringVars[stringVarIndex], gStdStrings[index]);
     return FALSE;
 }
 

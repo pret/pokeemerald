@@ -564,7 +564,7 @@ LilycoveCity_PokemonTrainerFanClub_EventScript_21CE4D:: @ 821CE4D
 	setvar VAR_0x8004, 8
 	switch VAR_RESULT
 	case 11, LilycoveCity_PokemonTrainerFanClub_EventScript_21CE9F
-	case 127, LilycoveCity_PokemonTrainerFanClub_EventScript_21CE9F
+	case MULTI_B_PRESSED, LilycoveCity_PokemonTrainerFanClub_EventScript_21CE9F
 	setvar VAR_0x8004, 8
 	special BufferStreakTrainerText
 	copyvar VAR_0x8006, VAR_0x800A

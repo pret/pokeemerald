@@ -120,7 +120,7 @@ FallarborTown_BattleTentBattleRoom_EventScript_200A2A:: @ 8200A2A
 	call_if_eq FallarborTown_BattleTentBattleRoom_EventScript_200B43
 	compare VAR_RESULT, 2
 	call_if_eq FallarborTown_BattleTentBattleRoom_EventScript_200B4A
-	multichoice 20, 6, 104, 1
+	multichoice 20, 6, MULTI_GO_ON_REST_RETIRE, 1
 	switch VAR_RESULT
 	case 0, FallarborTown_BattleTentBattleRoom_EventScript_200AD8
 	case 1, FallarborTown_BattleTentBattleRoom_EventScript_200A78
@@ -136,11 +136,11 @@ FallarborTown_BattleTentBattleRoom_EventScript_200A78:: @ 8200A78
 FallarborTown_BattleTentBattleRoom_EventScript_200AA6:: @ 8200AA6
 	message FallarborTown_BattleTentBattleRoom_Text_257E9E
 	waitmessage
-	multichoicedefault 20, 8, 94, 1, 0
+	multichoicedefault 20, 8, MULTI_YESNO, 1, 0
 	switch VAR_RESULT
 	case 1, FallarborTown_BattleTentBattleRoom_EventScript_200A2A
 	case 0, FallarborTown_BattleTentBattleRoom_EventScript_20097E
-	case 127, FallarborTown_BattleTentBattleRoom_EventScript_200A2A
+	case MULTI_B_PRESSED, FallarborTown_BattleTentBattleRoom_EventScript_200A2A
 
 FallarborTown_BattleTentBattleRoom_EventScript_200AD8:: @ 8200AD8
 	closemessage
