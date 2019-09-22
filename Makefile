@@ -102,7 +102,7 @@ endif
 
 CPPFLAGS := -iquote include -Wno-trigraphs -DMODERN=$(MODERN)
 ifeq ($(MODERN),0)
-CPPFLAGS += -I tools/agbcc/include -I tools/agbcc
+CPPFLAGS += -I $(PRET)/include -I $(PRET)
 endif
 
 LDFLAGS = -Map ../../$(MAP)
@@ -251,7 +251,7 @@ $(C_BUILDDIR)/%.o : $(C_SUBDIR)/%.c $$(c_dep)
 ifeq ($(NODEP),1)
 $(C_BUILDDIR)/%.o: c_asm_dep :=
 else
-$(C_BUILDDIR)/%.o: c_asm_dep = $(shell [[ -f $(C_SUBDIR)/$*.s ]] && $(SCANINC) -I $(PRET)/include -I "" $(C_SUBDIR)/$*.s)
+$(C_BUILDDIR)/%.o: c_asm_dep = $(shell [[ -f $(C_SUBDIR)/$*.s ]] && $(SCANINC) -I "" -I include -I $(PRET)/include $(C_SUBDIR)/$*.s)
 endif
 
 $(C_BUILDDIR)/%.o: $(C_SUBDIR)/%.s $$(c_asm_dep)
@@ -260,7 +260,7 @@ $(C_BUILDDIR)/%.o: $(C_SUBDIR)/%.s $$(c_asm_dep)
 ifeq ($(NODEP),1)
 $(ASM_BUILDDIR)/%.o: asm_dep :=
 else
-$(ASM_BUILDDIR)/%.o: asm_dep = $(shell $(SCANINC) -I $(PRET)/include -I "" $(ASM_SUBDIR)/$*.s)
+$(ASM_BUILDDIR)/%.o: asm_dep = $(shell $(SCANINC) -I "" -I include -I $(PRET)/include $(ASM_SUBDIR)/$*.s)
 endif
 
 $(ASM_BUILDDIR)/%.o: $(ASM_SUBDIR)/%.s $$(asm_dep)
@@ -269,7 +269,7 @@ $(ASM_BUILDDIR)/%.o: $(ASM_SUBDIR)/%.s $$(asm_dep)
 ifeq ($(NODEP),1)
 $(DATA_ASM_BUILDDIR)/%.o: data_dep :=
 else
-$(DATA_ASM_BUILDDIR)/%.o: data_dep = $(shell $(SCANINC) -I $(PRET)/include -I include -I "" $(DATA_ASM_SUBDIR)/$*.s)
+$(DATA_ASM_BUILDDIR)/%.o: data_dep = $(shell $(SCANINC) -I "" -I include -I $(PRET)/include $(DATA_ASM_SUBDIR)/$*.s)
 endif
 
 $(DATA_ASM_BUILDDIR)/%.o: $(DATA_ASM_SUBDIR)/%.s $$(data_dep)
