@@ -8,6 +8,7 @@
 [wsl2]: https://docs.microsoft.com/windows/wsl/wsl2-install
 [wsl]: https://docs.microsoft.com/windows/wsl/install-win10
 
+
 The [prerelease version of the Linux subsystem](https://docs.microsoft.com/windows/wsl/install-legacy) available in the 1607 and 1703 releases of Windows 10 is obsolete so consider uninstalling it.
 
 Make sure that the <code>build-essential</code><sup>Debian</sup>/<code>base-devel</code><sup>Arch</sup> package group and `git` are installed.
