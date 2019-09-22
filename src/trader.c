@@ -71,7 +71,7 @@ void CreateAvailableDecorationsMenu(u8 taskId)
         if (curWidth > windowWidth)
             windowWidth = curWidth;
     }
-    windowTemplate.width = convert_pixel_width_to_tile_width(windowWidth);
+    windowTemplate.width = ConvertPixelWidthToTileWidth(windowWidth);
     data[3] = AddWindow(&windowTemplate);
     DrawStdFrameWithCustomTileAndPalette(data[3], FALSE, 0x214, 14);
     for (i = 0; i < 4; i++)

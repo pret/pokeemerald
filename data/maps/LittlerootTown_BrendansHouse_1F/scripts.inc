@@ -17,7 +17,7 @@ LittlerootTown_BrendansHouse_1F_EventScript_1F777A:: @ 81F777A
 
 LittlerootTown_BrendansHouse_1F_EventScript_1F778D:: @ 81F778D
 	checkplayergender
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, MALE
 	goto_if_eq LittlerootTown_BrendansHouse_1F_EventScript_1F779A
 	return
 

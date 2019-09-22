@@ -30,7 +30,7 @@ EverGrandeCity_SidneysRoom_MapScript2_227F3E: @ 8227F3E
 	.2byte 0
 
 EverGrandeCity_SidneysRoom_EventScript_227F48:: @ 8227F48
-	turnobject EVENT_OBJ_ID_PLAYER, 2
+	turnobject EVENT_OBJ_ID_PLAYER, DIR_NORTH
 	end
 
 EverGrandeCity_SidneysRoom_MapScript2_227F4D: @ 8227F4D

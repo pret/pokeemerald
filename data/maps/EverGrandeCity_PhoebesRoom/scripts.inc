@@ -9,7 +9,7 @@ EverGrandeCity_PhoebesRoom_MapScript2_228184: @ 8228184
 	.2byte 0
 
 EverGrandeCity_PhoebesRoom_EventScript_22818E:: @ 822818E
-	turnobject EVENT_OBJ_ID_PLAYER, 2
+	turnobject EVENT_OBJ_ID_PLAYER, DIR_NORTH
 	end
 
 EverGrandeCity_PhoebesRoom_MapScript2_228193: @ 8228193

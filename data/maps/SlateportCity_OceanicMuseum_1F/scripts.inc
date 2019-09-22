@@ -34,11 +34,11 @@ SlateportCity_OceanicMuseum_1F_EventScript_20ADC1:: @ 820ADC1
 	end
 
 SlateportCity_OceanicMuseum_1F_EventScript_20ADE8:: @ 820ADE8
-	checkmoney 0x32, 0
+	checkmoney 50, 0
 	compare VAR_RESULT, 0
 	goto_if_eq SlateportCity_OceanicMuseum_1F_EventScript_20AE18
 	playse SE_REGI
-	takemoney 0x32, 0
+	takemoney 50, 0
 	updatemoneybox 0, 0
 	msgbox SlateportCity_OceanicMuseum_1F_Text_20B026, MSGBOX_DEFAULT
 	setvar VAR_SLATEPORT_MUSEUM_1F_STATE, 1

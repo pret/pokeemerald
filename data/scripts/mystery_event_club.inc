@@ -8,12 +8,12 @@ PetalburgCity_PokemonCenter_1F_EventScript_291539:: @ 8291539
 
 PetalburgCity_PokemonCenter_1F_EventScript_291552:: @ 8291552
 	msgbox PetalburgCity_PokemonCenter_1F_Text_2916FF, MSGBOX_DEFAULT
-	multichoice 17, 6, 20, 0
+	multichoice 17, 6, MULTI_YESNOINFO_2, 0
 	switch VAR_RESULT
 	case 0, PetalburgCity_PokemonCenter_1F_EventScript_29159F
 	case 1, PetalburgCity_PokemonCenter_1F_EventScript_2915EB
 	case 2, PetalburgCity_PokemonCenter_1F_EventScript_291591
-	case 127, PetalburgCity_PokemonCenter_1F_EventScript_2915EB
+	case MULTI_B_PRESSED, PetalburgCity_PokemonCenter_1F_EventScript_2915EB
 	end
 
 PetalburgCity_PokemonCenter_1F_EventScript_291591:: @ 8291591
@@ -60,12 +60,12 @@ PetalburgCity_PokemonCenter_1F_EventScript_2915F5:: @ 82915F5
 
 PetalburgCity_PokemonCenter_1F_EventScript_291603:: @ 8291603
 	msgbox PetalburgCity_PokemonCenter_1F_Text_291A4F, MSGBOX_DEFAULT
-	multichoice 17, 6, 20, 0
+	multichoice 17, 6, MULTI_YESNOINFO_2, 0
 	switch VAR_RESULT
 	case 0, PetalburgCity_PokemonCenter_1F_EventScript_291650
 	case 1, PetalburgCity_PokemonCenter_1F_EventScript_29167C
 	case 2, PetalburgCity_PokemonCenter_1F_EventScript_291642
-	case 127, PetalburgCity_PokemonCenter_1F_EventScript_29167C
+	case MULTI_B_PRESSED, PetalburgCity_PokemonCenter_1F_EventScript_29167C
 	end
 
 PetalburgCity_PokemonCenter_1F_EventScript_291642:: @ 8291642

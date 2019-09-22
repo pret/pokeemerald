@@ -19,11 +19,11 @@ BattleFrontier_Lounge7_EventScript_265276:: @ 8265276
 BattleFrontier_Lounge7_EventScript_265284:: @ 8265284
 	message BattleFrontier_Lounge7_Text_2658EF
 	waitmessage
-	special sub_813A958
+	special ShowBattlePointsWindow
 	setvar VAR_TEMP_E, 0
-	setvar VAR_0x8004, 9
+	setvar VAR_0x8004, SCROLL_MULTI_BF_MOVE_TUTOR_1
 	setvar VAR_0x8006, 0
-	special sub_813A128
+	special ShowScrollableMultichoice
 	waitstate
 	copyvar VAR_TEMP_D, VAR_RESULT
 	switch VAR_RESULT
@@ -38,16 +38,16 @@ BattleFrontier_Lounge7_EventScript_265284:: @ 8265284
 	case 8, BattleFrontier_Lounge7_EventScript_26542F
 	case 9, BattleFrontier_Lounge7_EventScript_26543A
 	case 10, BattleFrontier_Lounge7_EventScript_265635
-	case 127, BattleFrontier_Lounge7_EventScript_265635
+	case MULTI_B_PRESSED, BattleFrontier_Lounge7_EventScript_265635
 	end
 
 BattleFrontier_Lounge7_EventScript_26532F:: @ 826532F
 	message BattleFrontier_Lounge7_Text_2658EF
 	waitmessage
 	setvar VAR_TEMP_E, 0
-	setvar VAR_0x8004, 9
+	setvar VAR_0x8004, SCROLL_MULTI_BF_MOVE_TUTOR_1
 	setvar VAR_0x8006, 1
-	special sub_813A128
+	special ShowScrollableMultichoice
 	waitstate
 	copyvar VAR_TEMP_D, VAR_RESULT
 	switch VAR_RESULT
@@ -62,7 +62,7 @@ BattleFrontier_Lounge7_EventScript_26532F:: @ 826532F
 	case 8, BattleFrontier_Lounge7_EventScript_26542F
 	case 9, BattleFrontier_Lounge7_EventScript_26543A
 	case 10, BattleFrontier_Lounge7_EventScript_265635
-	case 127, BattleFrontier_Lounge7_EventScript_265635
+	case MULTI_B_PRESSED, BattleFrontier_Lounge7_EventScript_265635
 	end
 
 BattleFrontier_Lounge7_EventScript_2653D7:: @ 82653D7
@@ -133,11 +133,11 @@ BattleFrontier_Lounge7_EventScript_265466:: @ 8265466
 BattleFrontier_Lounge7_EventScript_265474:: @ 8265474
 	message BattleFrontier_Lounge7_Text_2658EF
 	waitmessage
-	special sub_813A958
+	special ShowBattlePointsWindow
 	setvar VAR_TEMP_E, 1
-	setvar VAR_0x8004, 10
+	setvar VAR_0x8004, SCROLL_MULTI_BF_MOVE_TUTOR_2
 	setvar VAR_0x8006, 0
-	special sub_813A128
+	special ShowScrollableMultichoice
 	waitstate
 	copyvar VAR_TEMP_D, VAR_RESULT
 	switch VAR_RESULT
@@ -152,16 +152,16 @@ BattleFrontier_Lounge7_EventScript_265474:: @ 8265474
 	case 8, BattleFrontier_Lounge7_EventScript_26561F
 	case 9, BattleFrontier_Lounge7_EventScript_26562A
 	case 10, BattleFrontier_Lounge7_EventScript_265635
-	case 127, BattleFrontier_Lounge7_EventScript_265635
+	case MULTI_B_PRESSED, BattleFrontier_Lounge7_EventScript_265635
 	end
 
 BattleFrontier_Lounge7_EventScript_26551F:: @ 826551F
 	message BattleFrontier_Lounge7_Text_2658EF
 	waitmessage
 	setvar VAR_TEMP_E, 1
-	setvar VAR_0x8004, 10
+	setvar VAR_0x8004, SCROLL_MULTI_BF_MOVE_TUTOR_2
 	setvar VAR_0x8006, 1
-	special sub_813A128
+	special ShowScrollableMultichoice
 	waitstate
 	copyvar VAR_TEMP_D, VAR_RESULT
 	switch VAR_RESULT
@@ -176,7 +176,7 @@ BattleFrontier_Lounge7_EventScript_26551F:: @ 826551F
 	case 8, BattleFrontier_Lounge7_EventScript_26561F
 	case 9, BattleFrontier_Lounge7_EventScript_26562A
 	case 10, BattleFrontier_Lounge7_EventScript_265635
-	case 127, BattleFrontier_Lounge7_EventScript_265635
+	case MULTI_B_PRESSED, BattleFrontier_Lounge7_EventScript_265635
 	end
 
 BattleFrontier_Lounge7_EventScript_2655C7:: @ 82655C7
@@ -230,8 +230,8 @@ BattleFrontier_Lounge7_EventScript_26562A:: @ 826562A
 	end
 
 BattleFrontier_Lounge7_EventScript_265635:: @ 8265635
-	special sub_813ADB8
-	special sub_813A988
+	special CloseBattleFrontierTutorWindow
+	special CloseBattlePointsWindow
 	msgbox BattleFrontier_Lounge7_Text_265A0E, MSGBOX_DEFAULT
 	release
 	end
@@ -241,16 +241,18 @@ BattleFrontier_Lounge7_EventScript_265645:: @ 8265645
 	release
 	end
 
+@ VAR_0x8004 here is used to determine which move name to buffer
+@ VAR_0x8005 here is used to determine which move tutor was spoken to
 BattleFrontier_Lounge7_EventScript_26564F:: @ 826564F
 	copyvar VAR_0x8004, VAR_TEMP_D
 	copyvar VAR_0x8005, VAR_TEMP_E
-	special sub_813AC7C
+	special BufferBattleFrontierTutorMoveName
 	buffernumberstring 1, VAR_0x8008
 	copyvar VAR_0x8004, VAR_TEMP_C
 	msgbox BattleFrontier_Lounge7_Text_265921, MSGBOX_YESNO
 	compare VAR_RESULT, 0
 	goto_if_eq BattleFrontier_Lounge7_EventScript_2656CA
-	specialvar VAR_TEMP_1, sub_813AA04
+	specialvar VAR_TEMP_1, GetFrontierBattlePoints
 	compare VAR_TEMP_1, VAR_0x8008
 	goto_if_ge BattleFrontier_Lounge7_EventScript_265696
 	msgbox BattleFrontier_Lounge7_Text_265997, MSGBOX_DEFAULT
@@ -259,17 +261,17 @@ BattleFrontier_Lounge7_EventScript_26564F:: @ 826564F
 
 BattleFrontier_Lounge7_EventScript_265696:: @ 8265696
 	msgbox BattleFrontier_Lounge7_Text_26595A, MSGBOX_DEFAULT
-	special sub_813AEB4
+	special GetBattleFrontierTutorMoveIndex
 	fadescreen 1
-	special sub_813A988
-	special sub_813ADB8
+	special CloseBattlePointsWindow
+	special CloseBattleFrontierTutorWindow
 	special sub_81B892C
 	waitstate
 	compare VAR_RESULT, 0
 	goto_if_eq BattleFrontier_Lounge7_EventScript_265645
 	msgbox BattleFrontier_Lounge7_Text_2659C7, MSGBOX_DEFAULT
 	copyvar VAR_0x8004, VAR_0x8008
-	special sub_813A9A4
+	special TakeFrontierBattlePoints
 	release
 	end
 

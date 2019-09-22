@@ -22,7 +22,7 @@ CaveOfOrigin_B1F_EventScript_2357A9:: @ 82357A9
 	goto CaveOfOrigin_B1F_EventScript_2357F0
 
 CaveOfOrigin_B1F_EventScript_2357F0:: @ 82357F0
-	multichoice 0, 0, 110, 0
+	multichoice 0, 0, MULTI_WHERES_RAYQUAZA, 0
 	switch VAR_RESULT
 	case 0, CaveOfOrigin_B1F_EventScript_23582C
 	case 1, CaveOfOrigin_B1F_EventScript_235837

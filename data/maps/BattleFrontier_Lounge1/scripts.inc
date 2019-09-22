@@ -29,9 +29,9 @@ BattleFrontier_Lounge1_EventScript_25E7B6:: @ 825E7B6
 
 BattleFrontier_Lounge1_EventScript_25E7BF:: @ 825E7BF
 	specialvar VAR_RESULT, ScriptGetPartyMonSpecies
-	compare VAR_RESULT, 412
+	compare VAR_RESULT, SPECIES_EGG
 	goto_if_eq BattleFrontier_Lounge1_EventScript_25E7FF
-	special sub_8139D98
+	special BufferVarsForIVRater
 	compare VAR_0x8005, 90
 	goto_if_le BattleFrontier_Lounge1_EventScript_25E87F
 	compare VAR_0x8005, 120

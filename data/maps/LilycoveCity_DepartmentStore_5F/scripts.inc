@@ -10,7 +10,7 @@ LilycoveCity_DepartmentStore_5F_MapScript2_21FF80: @ 821FF80
 
 LilycoveCity_DepartmentStore_5F_EventScript_21FF9A:: @ 821FF9A
 	setobjectxy 7, 16, 2
-	turnobject 7, 2
+	turnobject 7, DIR_NORTH
 	end
 
 LilycoveCity_DepartmentStore_5F_EventScript_21FFA6:: @ 821FFA6

@@ -3032,7 +3032,7 @@ static u8 sub_8079A3C(u8 *str, u8 whichParty, u8 monIdx)
 
 static void sub_8079AA4(u8 *a0, u8 a1, u8 a2)
 {
-    u16 arr[4];
+    u16 moves[MAX_MON_MOVES];
     u16 i;
 
     if (!gUnknown_0203229C->unk_51[a1][a2])
@@ -3041,11 +3041,11 @@ static void sub_8079AA4(u8 *a0, u8 a1, u8 a2)
         {
             if (!a1)
             {
-                arr[i] = GetMonData(&gPlayerParty[a2], i + MON_DATA_MOVE1, NULL);
+                moves[i] = GetMonData(&gPlayerParty[a2], i + MON_DATA_MOVE1, NULL);
             }
             else
             {
-                arr[i] = GetMonData(&gEnemyParty[a2], i + MON_DATA_MOVE1, NULL);
+                moves[i] = GetMonData(&gEnemyParty[a2], i + MON_DATA_MOVE1, NULL);
             }
         }
 
@@ -3053,9 +3053,9 @@ static void sub_8079AA4(u8 *a0, u8 a1, u8 a2)
 
         for (i = 0; i < MAX_MON_MOVES; i++)
         {
-            if (arr[i] != MOVE_NONE)
+            if (moves[i] != MOVE_NONE)
             {
-                StringAppend(a0, gMoveNames[arr[i]]);
+                StringAppend(a0, gMoveNames[moves[i]]);
             }
 
             StringAppend(a0, gText_NewLine3);

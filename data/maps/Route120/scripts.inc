@@ -120,27 +120,27 @@ Route120_EventScript_1F5527:: @ 81F5527
 	end
 
 Route120_EventScript_1F55CA:: @ 81F55CA
-	setvar VAR_0x8004, 143
+	setvar VAR_0x8004, ITEM_FIGY_BERRY
 	goto Route120_EventScript_1F5601
 	end
 
 Route120_EventScript_1F55D5:: @ 81F55D5
-	setvar VAR_0x8004, 144
+	setvar VAR_0x8004, ITEM_WIKI_BERRY
 	goto Route120_EventScript_1F5601
 	end
 
 Route120_EventScript_1F55E0:: @ 81F55E0
-	setvar VAR_0x8004, 145
+	setvar VAR_0x8004, ITEM_MAGO_BERRY
 	goto Route120_EventScript_1F5601
 	end
 
 Route120_EventScript_1F55EB:: @ 81F55EB
-	setvar VAR_0x8004, 146
+	setvar VAR_0x8004, ITEM_AGUAV_BERRY
 	goto Route120_EventScript_1F5601
 	end
 
 Route120_EventScript_1F55F6:: @ 81F55F6
-	setvar VAR_0x8004, 147
+	setvar VAR_0x8004, ITEM_IAPAPA_BERRY
 	goto Route120_EventScript_1F5601
 	end
 

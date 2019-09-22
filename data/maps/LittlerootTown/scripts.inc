@@ -208,7 +208,7 @@ LittlerootTown_EventScript_1E7FEC:: @ 81E7FEC
 	addobject 8
 	addobject 7
 	checkplayergender
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, MALE
 	goto_if_eq LittlerootTown_EventScript_1E8004
 	goto LittlerootTown_EventScript_1E8013
 	end

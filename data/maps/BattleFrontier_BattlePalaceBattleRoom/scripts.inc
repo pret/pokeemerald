@@ -126,30 +126,30 @@ BattleFrontier_BattlePalaceBattleRoom_EventScript_24F98A:: @ 824F98A
 	call BattleFrontier_BattlePalaceBattleRoom_EventScript_23E8E0
 	compare VAR_RESULT, 1
 	goto_if_eq BattleFrontier_BattlePalaceBattleRoom_EventScript_24FA42
-	multichoice 19, 4, 103, 1
+	multichoice 19, 4, MULTI_GO_ON_RECORD_REST_RETIRE, 1
 	switch VAR_RESULT
 	case 0, BattleFrontier_BattlePalaceBattleRoom_EventScript_24FB14
 	case 1, BattleFrontier_BattlePalaceBattleRoom_EventScript_24FA78
 	case 2, BattleFrontier_BattlePalaceBattleRoom_EventScript_24FAB4
 	case 3, BattleFrontier_BattlePalaceBattleRoom_EventScript_24FAE2
-	case 127, BattleFrontier_BattlePalaceBattleRoom_EventScript_24F98A
+	case MULTI_B_PRESSED, BattleFrontier_BattlePalaceBattleRoom_EventScript_24F98A
 
 BattleFrontier_BattlePalaceBattleRoom_EventScript_24FA42:: @ 824FA42
-	multichoice 20, 6, 104, 1
+	multichoice 20, 6, MULTI_GO_ON_REST_RETIRE, 1
 	switch VAR_RESULT
 	case 0, BattleFrontier_BattlePalaceBattleRoom_EventScript_24FB14
 	case 1, BattleFrontier_BattlePalaceBattleRoom_EventScript_24FAB4
 	case 2, BattleFrontier_BattlePalaceBattleRoom_EventScript_24FAE2
-	case 127, BattleFrontier_BattlePalaceBattleRoom_EventScript_24F98A
+	case MULTI_B_PRESSED, BattleFrontier_BattlePalaceBattleRoom_EventScript_24F98A
 
 BattleFrontier_BattlePalaceBattleRoom_EventScript_24FA78:: @ 824FA78
 	message BattleFrontier_BattlePalaceBattleRoom_Text_25009E
 	waitmessage
-	multichoicedefault 20, 8, 94, 1, 0
+	multichoicedefault 20, 8, MULTI_YESNO, 1, 0
 	switch VAR_RESULT
 	case 1, BattleFrontier_BattlePalaceBattleRoom_EventScript_24F98A
 	case 0, BattleFrontier_BattlePalaceBattleRoom_EventScript_24FAAA
-	case 127, BattleFrontier_BattlePalaceBattleRoom_EventScript_24F98A
+	case MULTI_B_PRESSED, BattleFrontier_BattlePalaceBattleRoom_EventScript_24F98A
 
 BattleFrontier_BattlePalaceBattleRoom_EventScript_24FAAA:: @ 824FAAA
 	call BattleFrontier_BattlePalaceBattleRoom_EventScript_23E8B4
@@ -165,11 +165,11 @@ BattleFrontier_BattlePalaceBattleRoom_EventScript_24FAB4:: @ 824FAB4
 BattleFrontier_BattlePalaceBattleRoom_EventScript_24FAE2:: @ 824FAE2
 	message BattleFrontier_BattlePalaceBattleRoom_Text_25005A
 	waitmessage
-	multichoicedefault 20, 8, 94, 1, 0
+	multichoicedefault 20, 8, MULTI_YESNO, 1, 0
 	switch VAR_RESULT
 	case 1, BattleFrontier_BattlePalaceBattleRoom_EventScript_24F98A
 	case 0, BattleFrontier_BattlePalaceBattleRoom_EventScript_24F8FA
-	case 127, BattleFrontier_BattlePalaceBattleRoom_EventScript_24F98A
+	case MULTI_B_PRESSED, BattleFrontier_BattlePalaceBattleRoom_EventScript_24F98A
 
 BattleFrontier_BattlePalaceBattleRoom_EventScript_24FB14:: @ 824FB14
 	applymovement 1, BattleFrontier_BattlePalaceBattleRoom_Movement_24FE97
@@ -209,21 +209,21 @@ BattleFrontier_BattlePalaceBattleRoom_EventScript_24FB79:: @ 824FB79
 	call BattleFrontier_BattlePalaceBattleRoom_EventScript_23E8E0
 	compare VAR_RESULT, 1
 	goto_if_eq BattleFrontier_BattlePalaceBattleRoom_EventScript_24FBD0
-	multichoice 19, 4, 103, 1
+	multichoice 19, 4, MULTI_GO_ON_RECORD_REST_RETIRE, 1
 	switch VAR_RESULT
 	case 0, BattleFrontier_BattlePalaceBattleRoom_EventScript_24FC06
 	case 1, BattleFrontier_BattlePalaceBattleRoom_EventScript_24FA78
 	case 2, BattleFrontier_BattlePalaceBattleRoom_EventScript_24FAB4
 	case 3, BattleFrontier_BattlePalaceBattleRoom_EventScript_24FAE2
-	case 127, BattleFrontier_BattlePalaceBattleRoom_EventScript_24FB79
+	case MULTI_B_PRESSED, BattleFrontier_BattlePalaceBattleRoom_EventScript_24FB79
 
 BattleFrontier_BattlePalaceBattleRoom_EventScript_24FBD0:: @ 824FBD0
-	multichoice 20, 6, 104, 1
+	multichoice 20, 6, MULTI_GO_ON_REST_RETIRE, 1
 	switch VAR_RESULT
 	case 0, BattleFrontier_BattlePalaceBattleRoom_EventScript_24FC06
 	case 1, BattleFrontier_BattlePalaceBattleRoom_EventScript_24FAB4
 	case 2, BattleFrontier_BattlePalaceBattleRoom_EventScript_24FAE2
-	case 127, BattleFrontier_BattlePalaceBattleRoom_EventScript_24FB79
+	case MULTI_B_PRESSED, BattleFrontier_BattlePalaceBattleRoom_EventScript_24FB79
 
 BattleFrontier_BattlePalaceBattleRoom_EventScript_24FC06:: @ 824FC06
 	call BattleFrontier_BattlePalaceBattleRoom_EventScript_242170

@@ -118,7 +118,7 @@ LilycoveCity_LilycoveMuseum_2F_EventScript_2198C3:: @ 82198C3
 LilycoveCity_LilycoveMuseum_2F_EventScript_2198EA:: @ 82198EA
 	applymovement 1, Common_Movement_FacePlayer
 	msgbox LilycoveCity_LilycoveMuseum_2F_Text_219EC5, MSGBOX_DEFAULT
-	givedecoration_std 44
+	givedecoration_std DECOR_GLASS_ORNAMENT
 	compare VAR_RESULT, 0
 	goto_if_eq LilycoveCity_LilycoveMuseum_2F_EventScript_219911
 	setflag FLAG_RECEIVED_GLASS_ORNAMENT

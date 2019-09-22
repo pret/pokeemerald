@@ -52,8 +52,8 @@ Route113_GlassWorkshop_EventScript_26ED9D:: @ 826ED9D
 
 Route113_GlassWorkshop_EventScript_26EDA7:: @ 826EDA7
 	setvar VAR_0x8009, 0
-	setvar VAR_0x8004, 1
-	special sub_813A128
+	setvar VAR_0x8004, SCROLL_MULTI_GLASS_WORKSHOP_VENDOR
+	special ShowScrollableMultichoice
 	waitstate
 	switch VAR_RESULT
 	case 0, Route113_GlassWorkshop_EventScript_26EE1E
@@ -64,11 +64,11 @@ Route113_GlassWorkshop_EventScript_26EDA7:: @ 826EDA7
 	case 5, Route113_GlassWorkshop_EventScript_26EF4A
 	case 6, Route113_GlassWorkshop_EventScript_26EF8B
 	case 7, Route113_GlassWorkshop_EventScript_26EFCC
-	case 127, Route113_GlassWorkshop_EventScript_26EFCC
+	case MULTI_B_PRESSED, Route113_GlassWorkshop_EventScript_26EFCC
 	end
 
 Route113_GlassWorkshop_EventScript_26EE1E:: @ 826EE1E
-	setvar VAR_0x8008, 39
+	setvar VAR_0x8008, ITEM_BLUE_FLUTE
 	bufferitemname 0, VAR_0x8008
 	setvar VAR_0x800A, 250
 	compare VAR_ASH_GATHER_COUNT, 250
@@ -82,7 +82,7 @@ Route113_GlassWorkshop_EventScript_26EE1E:: @ 826EE1E
 	end
 
 Route113_GlassWorkshop_EventScript_26EE5A:: @ 826EE5A
-	setvar VAR_0x8008, 40
+	setvar VAR_0x8008, ITEM_YELLOW_FLUTE
 	bufferitemname 0, VAR_0x8008
 	setvar VAR_0x800A, 500
 	compare VAR_ASH_GATHER_COUNT, 500
@@ -96,7 +96,7 @@ Route113_GlassWorkshop_EventScript_26EE5A:: @ 826EE5A
 	end
 
 Route113_GlassWorkshop_EventScript_26EE96:: @ 826EE96
-	setvar VAR_0x8008, 41
+	setvar VAR_0x8008, ITEM_RED_FLUTE
 	bufferitemname 0, VAR_0x8008
 	setvar VAR_0x800A, 500
 	compare VAR_ASH_GATHER_COUNT, 500
@@ -110,7 +110,7 @@ Route113_GlassWorkshop_EventScript_26EE96:: @ 826EE96
 	end
 
 Route113_GlassWorkshop_EventScript_26EED2:: @ 826EED2
-	setvar VAR_0x8008, 43
+	setvar VAR_0x8008, ITEM_WHITE_FLUTE
 	bufferitemname 0, VAR_0x8008
 	setvar VAR_0x800A, 1000
 	compare VAR_ASH_GATHER_COUNT, 1000
@@ -124,7 +124,7 @@ Route113_GlassWorkshop_EventScript_26EED2:: @ 826EED2
 	end
 
 Route113_GlassWorkshop_EventScript_26EF0E:: @ 826EF0E
-	setvar VAR_0x8008, 42
+	setvar VAR_0x8008, ITEM_BLACK_FLUTE
 	bufferitemname 0, VAR_0x8008
 	setvar VAR_0x800A, 1000
 	compare VAR_ASH_GATHER_COUNT, 1000
@@ -139,7 +139,7 @@ Route113_GlassWorkshop_EventScript_26EF0E:: @ 826EF0E
 
 Route113_GlassWorkshop_EventScript_26EF4A:: @ 826EF4A
 	setvar VAR_0x8009, 1
-	setvar VAR_0x8008, 13
+	setvar VAR_0x8008, DECOR_PRETTY_CHAIR
 	bufferdecorationname 0, VAR_0x8008
 	setvar VAR_0x800A, 6000
 	compare VAR_ASH_GATHER_COUNT, 6000
@@ -154,7 +154,7 @@ Route113_GlassWorkshop_EventScript_26EF4A:: @ 826EF4A
 
 Route113_GlassWorkshop_EventScript_26EF8B:: @ 826EF8B
 	setvar VAR_0x8009, 1
-	setvar VAR_0x8008, 6
+	setvar VAR_0x8008, DECOR_PRETTY_DESK
 	bufferdecorationname 0, VAR_0x8008
 	setvar VAR_0x800A, 8000
 	compare VAR_ASH_GATHER_COUNT, 8000
@@ -174,14 +174,14 @@ Route113_GlassWorkshop_EventScript_26EFCC:: @ 826EFCC
 
 Route113_GlassWorkshop_EventScript_26EFD6:: @ 826EFD6
 	setvar VAR_0x800A, 250
-	subvar VAR_0x800A, 16456
+	subvar VAR_0x800A, VAR_ASH_GATHER_COUNT
 	buffernumberstring 0, VAR_0x800A
 	msgbox Route113_GlassWorkshop_Text_26F34E, MSGBOX_DEFAULT
 	release
 	end
 
 Route113_GlassWorkshop_EventScript_26EFEE:: @ 826EFEE
-	subvar VAR_0x800A, 16456
+	subvar VAR_0x800A, VAR_ASH_GATHER_COUNT
 	buffernumberstring 1, VAR_0x800A
 	message Route113_GlassWorkshop_Text_26F543
 	waitmessage
@@ -247,50 +247,50 @@ Route113_GlassWorkshop_EventScript_26F090:: @ 826F090
 
 Route113_GlassWorkshop_EventScript_26F0E3:: @ 826F0E3
 	setvar VAR_0x8009, 0
-	setvar VAR_0x8008, 39
+	setvar VAR_0x8008, ITEM_BLUE_FLUTE
 	bufferitemname 0, VAR_0x8008
 	goto Route113_GlassWorkshop_EventScript_26F16F
 	end
 
 Route113_GlassWorkshop_EventScript_26F0F7:: @ 826F0F7
 	setvar VAR_0x8009, 0
-	setvar VAR_0x8008, 40
+	setvar VAR_0x8008, ITEM_YELLOW_FLUTE
 	bufferitemname 0, VAR_0x8008
 	goto Route113_GlassWorkshop_EventScript_26F16F
 	end
 
 Route113_GlassWorkshop_EventScript_26F10B:: @ 826F10B
 	setvar VAR_0x8009, 0
-	setvar VAR_0x8008, 41
+	setvar VAR_0x8008, ITEM_RED_FLUTE
 	bufferitemname 0, VAR_0x8008
 	goto Route113_GlassWorkshop_EventScript_26F16F
 	end
 
 Route113_GlassWorkshop_EventScript_26F11F:: @ 826F11F
 	setvar VAR_0x8009, 0
-	setvar VAR_0x8008, 43
+	setvar VAR_0x8008, ITEM_WHITE_FLUTE
 	bufferitemname 0, VAR_0x8008
 	goto Route113_GlassWorkshop_EventScript_26F16F
 	end
 
 Route113_GlassWorkshop_EventScript_26F133:: @ 826F133
 	setvar VAR_0x8009, 0
-	setvar VAR_0x8008, 42
+	setvar VAR_0x8008, ITEM_BLACK_FLUTE
 	bufferitemname 0, VAR_0x8008
 	goto Route113_GlassWorkshop_EventScript_26F16F
 	end
 
 Route113_GlassWorkshop_EventScript_26F147:: @ 826F147
 	setvar VAR_0x8009, 1
-	setvar VAR_0x8008, 13
-	bufferdecorationname 0, 13
+	setvar VAR_0x8008, DECOR_PRETTY_CHAIR
+	bufferdecorationname 0, DECOR_PRETTY_CHAIR
 	goto Route113_GlassWorkshop_EventScript_26F16F
 	end
 
 Route113_GlassWorkshop_EventScript_26F15B:: @ 826F15B
 	setvar VAR_0x8009, 1
-	setvar VAR_0x8008, 6
-	bufferdecorationname 0, 6
+	setvar VAR_0x8008, DECOR_PRETTY_DESK
+	bufferdecorationname 0, DECOR_PRETTY_DESK
 	goto Route113_GlassWorkshop_EventScript_26F16F
 	end
 

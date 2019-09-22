@@ -14,7 +14,7 @@ BattleFrontier_Lounge3_EventScript_261D83:: @ 8261D83
 	end
 
 BattleFrontier_Lounge3_EventScript_261DAF:: @ 8261DAF
-	special sub_813A820
+	special ShowFrontierGamblerLookingMessage
 	waitmessage
 	waitbuttonpress
 	msgbox BattleFrontier_Lounge3_Text_262A60, MSGBOX_YESNO
@@ -25,19 +25,19 @@ BattleFrontier_Lounge3_EventScript_261DAF:: @ 8261DAF
 	goto_if_eq BattleFrontier_Lounge3_EventScript_261FA5
 	message BattleFrontier_Lounge3_Text_262B42
 	waitmessage
-	special sub_813A958
+	special ShowBattlePointsWindow
 	goto BattleFrontier_Lounge3_EventScript_261DE9
 	end
 
 BattleFrontier_Lounge3_EventScript_261DE9:: @ 8261DE9
-	multichoice 20, 4, 87, 0
+	multichoice 20, 4, MULTI_FRONTIER_GAMBLER_BET, 0
 	copyvar VAR_FRONTIER_GAMBLER_AMOUNT_BET, VAR_RESULT
 	switch VAR_RESULT
-	case 0, BattleFrontier_Lounge3_EventScript_261E30
-	case 1, BattleFrontier_Lounge3_EventScript_261E3B
-	case 2, BattleFrontier_Lounge3_EventScript_261E46
-	case 3, BattleFrontier_Lounge3_EventScript_261FAF
-	case 127, BattleFrontier_Lounge3_EventScript_261FAF
+	case FRONTIER_GAMBLER_BET_5, BattleFrontier_Lounge3_EventScript_261E30
+	case FRONTIER_GAMBLER_BET_10, BattleFrontier_Lounge3_EventScript_261E3B
+	case FRONTIER_GAMBLER_BET_15, BattleFrontier_Lounge3_EventScript_261E46
+	case FRONTIER_GAMBLER_BET_CANCEL, BattleFrontier_Lounge3_EventScript_261FAF
+	case MULTI_B_PRESSED, BattleFrontier_Lounge3_EventScript_261FAF
 	end
 
 BattleFrontier_Lounge3_EventScript_261E30:: @ 8261E30
@@ -56,7 +56,7 @@ BattleFrontier_Lounge3_EventScript_261E46:: @ 8261E46
 	end
 
 BattleFrontier_Lounge3_EventScript_261E51:: @ 8261E51
-	specialvar VAR_TEMP_1, sub_813AA04
+	specialvar VAR_TEMP_1, GetFrontierBattlePoints
 	compare VAR_TEMP_1, VAR_0x8008
 	goto_if_ge BattleFrontier_Lounge3_EventScript_261E75
 	msgbox BattleFrontier_Lounge3_Text_262B6E, MSGBOX_DEFAULT
@@ -67,19 +67,19 @@ BattleFrontier_Lounge3_EventScript_261E51:: @ 8261E51
 
 BattleFrontier_Lounge3_EventScript_261E75:: @ 8261E75
 	copyvar VAR_0x8004, VAR_0x8008
-	special sub_813A9A4
-	setvar VAR_FRONTIER_GAMBLER_PLACED_BET_F, 1
-	special sub_813A8FC
+	special TakeFrontierBattlePoints
+	setvar VAR_FRONTIER_GAMBLER_STATE, FRONTIER_GAMBLER_PLACED_BET
+	special UpdateBattlePointsWindow
 	playse SE_REGI
 	msgbox BattleFrontier_Lounge3_Text_262BE0, MSGBOX_DEFAULT
 	goto BattleFrontier_Lounge3_EventScript_261E96
 	end
 
 BattleFrontier_Lounge3_EventScript_261E96:: @ 8261E96
-	special sub_813A854
+	special ShowFrontierGamblerGoMessage
 	waitmessage
 	waitbuttonpress
-	special sub_813A988
+	special CloseBattlePointsWindow
 	release
 	end
 
@@ -105,37 +105,37 @@ BattleFrontier_Lounge3_EventScript_261EEB:: @ 8261EEB
 
 BattleFrontier_Lounge3_EventScript_261EF9:: @ 8261EF9
 	msgbox BattleFrontier_Lounge3_Text_26346B, MSGBOX_DEFAULT
-	compare VAR_FRONTIER_GAMBLER_PLACED_BET_F, 1
+	compare VAR_FRONTIER_GAMBLER_STATE, FRONTIER_GAMBLER_PLACED_BET
 	goto_if_ge BattleFrontier_Lounge3_EventScript_261F12
 	goto BattleFrontier_Lounge3_EventScript_261DAF
 	end
 
 BattleFrontier_Lounge3_EventScript_261F12:: @ 8261F12
-	compare VAR_FRONTIER_GAMBLER_PLACED_BET_F, 1
+	compare VAR_FRONTIER_GAMBLER_STATE, FRONTIER_GAMBLER_PLACED_BET
 	goto_if_eq BattleFrontier_Lounge3_EventScript_261F9E
-	compare VAR_FRONTIER_GAMBLER_PLACED_BET_F, 2
+	compare VAR_FRONTIER_GAMBLER_STATE, FRONTIER_GAMBLER_WON
 	goto_if_eq BattleFrontier_Lounge3_EventScript_261F2E
 	goto BattleFrontier_Lounge3_EventScript_261F71
 	end
 
 BattleFrontier_Lounge3_EventScript_261F2E:: @ 8261F2E
 	msgbox BattleFrontier_Lounge3_Text_263334, MSGBOX_DEFAULT
-	compare VAR_FRONTIER_GAMBLER_AMOUNT_BET, 0
+	compare VAR_FRONTIER_GAMBLER_AMOUNT_BET, FRONTIER_GAMBLER_BET_5
 	call_if_eq BattleFrontier_Lounge3_EventScript_261F80
-	compare VAR_FRONTIER_GAMBLER_AMOUNT_BET, 1
+	compare VAR_FRONTIER_GAMBLER_AMOUNT_BET, FRONTIER_GAMBLER_BET_10
 	call_if_eq BattleFrontier_Lounge3_EventScript_261F8A
-	compare VAR_FRONTIER_GAMBLER_AMOUNT_BET, 2
+	compare VAR_FRONTIER_GAMBLER_AMOUNT_BET, FRONTIER_GAMBLER_BET_15
 	call_if_eq BattleFrontier_Lounge3_EventScript_261F94
 	msgbox BattleFrontier_Lounge3_Text_2633D4, 9
-	special sub_813A9D0
+	special GiveFrontierBattlePoints
 	msgbox BattleFrontier_Lounge3_Text_2633F2, MSGBOX_DEFAULT
-	setvar VAR_FRONTIER_GAMBLER_PLACED_BET_F, 0
+	setvar VAR_FRONTIER_GAMBLER_STATE, FRONTIER_GAMBLER_WAITING
 	release
 	end
 
 BattleFrontier_Lounge3_EventScript_261F71:: @ 8261F71
 	msgbox BattleFrontier_Lounge3_Text_263298, MSGBOX_DEFAULT
-	setvar VAR_FRONTIER_GAMBLER_PLACED_BET_F, 0
+	setvar VAR_FRONTIER_GAMBLER_STATE, FRONTIER_GAMBLER_WAITING
 	release
 	end
 
@@ -155,7 +155,7 @@ BattleFrontier_Lounge3_EventScript_261F94:: @ 8261F94
 	return
 
 BattleFrontier_Lounge3_EventScript_261F9E:: @ 8261F9E
-	special sub_813A854
+	special ShowFrontierGamblerGoMessage
 	waitmessage
 	waitbuttonpress
 	release
@@ -167,7 +167,7 @@ BattleFrontier_Lounge3_EventScript_261FA5:: @ 8261FA5
 	end
 
 BattleFrontier_Lounge3_EventScript_261FAF:: @ 8261FAF
-	special sub_813A988
+	special CloseBattlePointsWindow
 	goto BattleFrontier_Lounge3_EventScript_261FA5
 	end
 

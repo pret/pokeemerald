@@ -9,7 +9,7 @@ FallarborTown_BattleTentLobby_MapScript2_1FFE71: @ 81FFE71
 
 FallarborTown_BattleTentLobby_EventScript_1FFE7B:: @ 81FFE7B
 	setvar VAR_TEMP_1, 1
-	turnobject EVENT_OBJ_ID_PLAYER, 2
+	turnobject EVENT_OBJ_ID_PLAYER, DIR_NORTH
 	end
 
 FallarborTown_BattleTentLobby_MapScript2_1FFE85: @ 81FFE85
@@ -140,12 +140,12 @@ FallarborTown_BattleTentLobby_EventScript_200001:: @ 8200001
 FallarborTown_BattleTentLobby_EventScript_200021:: @ 8200021
 	message FallarborTown_BattleTentLobby_Text_2C4843
 	waitmessage
-	multichoice 17, 6, 23, 0
+	multichoice 17, 6, MULTI_CHALLENGEINFO, 0
 	switch VAR_RESULT
 	case 0, FallarborTown_BattleTentLobby_EventScript_20005D
 	case 1, FallarborTown_BattleTentLobby_EventScript_200169
 	case 2, FallarborTown_BattleTentLobby_EventScript_2001C5
-	case 127, FallarborTown_BattleTentLobby_EventScript_2001C5
+	case MULTI_B_PRESSED, FallarborTown_BattleTentLobby_EventScript_2001C5
 
 FallarborTown_BattleTentLobby_EventScript_20005D:: @ 820005D
 	setvar VAR_FRONTIER_FACILITY, 3
@@ -315,7 +315,7 @@ FallarborTown_BattleTentLobby_EventScript_20024F:: @ 820024F
 FallarborTown_BattleTentLobby_EventScript_20025E:: @ 820025E
 	message FallarborTown_BattleTentLobby_Text_256DDF
 	waitmessage
-	multichoice 17, 0, 112, 0
+	multichoice 17, 0, MULTI_FALLARBOR_TENT_RULES, 0
 	switch VAR_RESULT
 	case 0, FallarborTown_BattleTentLobby_EventScript_2002BC
 	case 1, FallarborTown_BattleTentLobby_EventScript_2002CA
@@ -323,7 +323,7 @@ FallarborTown_BattleTentLobby_EventScript_20025E:: @ 820025E
 	case 3, FallarborTown_BattleTentLobby_EventScript_2002E6
 	case 4, FallarborTown_BattleTentLobby_EventScript_2002F4
 	case 5, FallarborTown_BattleTentLobby_EventScript_200302
-	case 127, FallarborTown_BattleTentLobby_EventScript_200302
+	case MULTI_B_PRESSED, FallarborTown_BattleTentLobby_EventScript_200302
 	end
 
 FallarborTown_BattleTentLobby_EventScript_2002BC:: @ 82002BC

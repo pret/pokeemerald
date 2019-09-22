@@ -820,7 +820,7 @@ static bool8 ShouldUseItem(void)
         }
     }
 
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < MAX_TRAINER_ITEMS; i++)
     {
         u16 item;
         const u8 *itemEffects;

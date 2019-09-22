@@ -36,6 +36,7 @@
 #include "new_game.h"
 #include "save.h"
 #include "link.h"
+#include "constants/berry.h"
 #include "constants/rgb.h"
 
 #define BLENDER_SCORE_BEST      0

@@ -41,11 +41,11 @@ Route104_MrBrineysHouse_EventScript_229D8A:: @ 8229D8A
 Route104_MrBrineysHouse_EventScript_229DAE:: @ 8229DAE
 	message Route104_MrBrineysHouse_Text_22A268
 	waitmessage
-	multichoicedefault 20, 8, 14, 1, 0
+	multichoicedefault 20, 8, MULTI_BRINEY_OFF_DEWFORD, 1, 0
 	switch VAR_RESULT
 	case 0, Route104_MrBrineysHouse_EventScript_229E27
 	case 1, Route104_MrBrineysHouse_EventScript_229E1D
-	case 127, Route104_MrBrineysHouse_EventScript_229E1D
+	case MULTI_B_PRESSED, Route104_MrBrineysHouse_EventScript_229E1D
 	end
 
 Route104_MrBrineysHouse_EventScript_229DE1:: @ 8229DE1

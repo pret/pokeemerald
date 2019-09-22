@@ -104,7 +104,7 @@ MtChimney_EventScript_22EEF3:: @ 822EEF3
 	msgbox MtChimney_Text_22FE04, MSGBOX_YESNO
 	compare VAR_RESULT, 0
 	goto_if_eq MtChimney_EventScript_22EF69
-	checkmoney 0xc8, 0
+	checkmoney 200, 0
 	compare VAR_RESULT, 0
 	goto_if_eq MtChimney_EventScript_22EF76
 	msgbox MtChimney_Text_22FE4D, MSGBOX_DEFAULT
@@ -129,7 +129,7 @@ MtChimney_EventScript_22EF51:: @ 822EF51
 	end
 
 MtChimney_EventScript_22EF5E:: @ 822EF5E
-	takemoney 0xc8, 0
+	takemoney 200, 0
 	updatemoneybox 0, 0
 	return
 

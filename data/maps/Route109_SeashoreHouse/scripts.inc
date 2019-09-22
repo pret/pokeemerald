@@ -49,14 +49,14 @@ Route109_SeashoreHouse_EventScript_269460:: @ 8269460
 	end
 
 Route109_SeashoreHouse_EventScript_269484:: @ 8269484
-	checkmoney 0x12c, 0
+	checkmoney 300, 0
 	compare VAR_RESULT, 0
 	goto_if_eq Route109_SeashoreHouse_EventScript_2694C8
 	checkitemspace ITEM_SODA_POP, 1
 	compare VAR_RESULT, 0
 	goto_if_eq Route109_SeashoreHouse_EventScript_2694D5
 	msgbox Route109_SeashoreHouse_Text_2697C8, MSGBOX_DEFAULT
-	takemoney 0x12c, 0
+	takemoney 300, 0
 	updatemoneybox 0, 0
 	giveitem_std ITEM_SODA_POP
 	hidemoneybox

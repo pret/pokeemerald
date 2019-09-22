@@ -24,12 +24,12 @@ SouthernIsland_Interior_OnTransition: @ 8242A6E
 
 SouthernIsland_Interior_EventScript_242A8A:: @ 8242A8A
 	setvar VAR_OBJ_GFX_ID_1, EVENT_OBJ_GFX_LATIOS
-	setvar VAR_TEMP_4, 408
+	setvar VAR_TEMP_4, SPECIES_LATIOS
 	return
 
 SouthernIsland_Interior_EventScript_242A95:: @ 8242A95
 	setvar VAR_OBJ_GFX_ID_1, EVENT_OBJ_GFX_LATIAS
-	setvar VAR_TEMP_4, 407
+	setvar VAR_TEMP_4, SPECIES_LATIAS
 	return
 
 SouthernIsland_Interior_EventScript_242AA0:: @ 8242AA0
@@ -108,21 +108,21 @@ SouthernIsland_Interior_EventScript_242B8F:: @ 8242B8F
 	end
 
 SouthernIsland_Interior_EventScript_242B9A:: @ 8242B9A
-	msgbox SouthernIsland_Interior_Text_2A6AA1, MSGBOX_DEFAULT
+	msgbox SouthernIsland_Interior_Text_Sign, MSGBOX_DEFAULT
 	releaseall
 	end
 
 SouthernIsland_Interior_EventScript_242BA4:: @ 8242BA4
-	setvar VAR_0x8004, 408
+	setvar VAR_0x8004, SPECIES_LATIOS
 	setvar VAR_0x8005, 50
-	setvar VAR_0x8006, 191
+	setvar VAR_0x8006, ITEM_SOUL_DEW
 	special CreateObedientEnemyMon
 	return
 
 SouthernIsland_Interior_EventScript_242BB7:: @ 8242BB7
-	setvar VAR_0x8004, 407
+	setvar VAR_0x8004, SPECIES_LATIAS
 	setvar VAR_0x8005, 50
-	setvar VAR_0x8006, 191
+	setvar VAR_0x8006, ITEM_SOUL_DEW
 	special CreateObedientEnemyMon
 	return
 

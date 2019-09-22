@@ -2,6 +2,7 @@
 #include "constants/items.h"
 #include "constants/map_scripts.h"
 #include "constants/moves.h"
+#include "constants/region_map_sections.h"
 #include "constants/songs.h"
 #include "constants/species.h"
 #include "constants/vars.h"
@@ -19,7 +20,7 @@ MysteryEventScript_StampCard:: @ 8674CB0
 	specialvar VAR_0x8008, sub_813986C
 	setorcopyvar VAR_RESULT, 0
 	specialvar VAR_0x8009, sub_813986C
-	subvar VAR_0x8008, 32777
+	subvar VAR_0x8008, VAR_0x8009
 	buffernumberstring 0, VAR_0x8008
 	lock
 	faceplayer
@@ -66,7 +67,7 @@ SurfPichu_FullParty: @ 8674D73
 SurfPichu_GiveEgg: @ 8674D7E
 	giveegg SPECIES_PICHU
 	setmonobedient VAR_EVENT_PICHU_SLOT
-	setmonmetlocation VAR_EVENT_PICHU_SLOT, 255
+	setmonmetlocation VAR_EVENT_PICHU_SLOT, METLOC_FATEFUL_ENCOUNTER
 	compare_var_to_value VAR_EVENT_PICHU_SLOT, 1
 	vgoto_if 1, SurfPichu_Slot1
 	compare_var_to_value VAR_EVENT_PICHU_SLOT, 2

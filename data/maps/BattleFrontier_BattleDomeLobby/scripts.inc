@@ -16,7 +16,7 @@ BattleFrontier_BattlePyramidLobby_MapScript2_2497FB: @ 82497FB
 
 BattleFrontier_BattleDomeLobby_EventScript_249805:: @ 8249805
 	setvar VAR_TEMP_1, 1
-	turnobject EVENT_OBJ_ID_PLAYER, 2
+	turnobject EVENT_OBJ_ID_PLAYER, DIR_NORTH
 	end
 
 BattleFrontier_BattleDomeLobby_MapScript2_24980F: @ 824980F
@@ -131,11 +131,11 @@ BattleFrontier_BattleDomeLobby_EventScript_249991:: @ 8249991
 	goto_if_eq BattleFrontier_BattleDomeLobby_EventScript_2499E9
 	message BattleFrontier_BattleDomeLobby_Text_24AE17
 	waitmessage
-	multichoicedefault 20, 8, 94, 1, 0
+	multichoicedefault 20, 8, MULTI_YESNO, 1, 0
 	switch VAR_RESULT
 	case 1, BattleFrontier_BattleDomeLobby_EventScript_2499E9
 	case 0, BattleFrontier_BattleDomeLobby_EventScript_2499E4
-	case 127, BattleFrontier_BattleDomeLobby_EventScript_2499E9
+	case MULTI_B_PRESSED, BattleFrontier_BattleDomeLobby_EventScript_2499E9
 
 BattleFrontier_BattleDomeLobby_EventScript_2499E4:: @ 82499E4
 	call BattleFrontier_BattleDomeLobby_EventScript_23E8B4
@@ -193,20 +193,20 @@ BattleFrontier_BattleDomeLobby_EventScript_249A72:: @ 8249A72
 	compare VAR_FRONTIER_BATTLE_MODE, 1
 	call_if_eq BattleFrontier_BattleDomeLobby_EventScript_249D15
 	waitmessage
-	multichoice 17, 6, 23, 0
+	multichoice 17, 6, MULTI_CHALLENGEINFO, 0
 	switch VAR_RESULT
 	case 0, BattleFrontier_BattleDomeLobby_EventScript_249ABF
 	case 1, BattleFrontier_BattleDomeLobby_EventScript_249BFA
 	case 2, BattleFrontier_BattleDomeLobby_EventScript_249C64
-	case 127, BattleFrontier_BattleDomeLobby_EventScript_249C64
+	case MULTI_B_PRESSED, BattleFrontier_BattleDomeLobby_EventScript_249C64
 
 BattleFrontier_BattleDomeLobby_EventScript_249ABF:: @ 8249ABF
 	message BattleFrontier_BattleDomeLobby_Text_24A210
 	waitmessage
-	multichoice 17, 6, 24, 0
+	multichoice 17, 6, MULTI_LEVEL_MODE, 0
 	switch VAR_RESULT
 	case 2, BattleFrontier_BattleDomeLobby_EventScript_249C64
-	case 127, BattleFrontier_BattleDomeLobby_EventScript_249C64
+	case MULTI_B_PRESSED, BattleFrontier_BattleDomeLobby_EventScript_249C64
 	setvar VAR_0x8004, 15
 	special CallFrontierUtilFunc
 	compare VAR_0x8004, 1
@@ -503,13 +503,13 @@ BattleFrontier_BattleDomeLobby_EventScript_249E34:: @ 8249E34
 BattleFrontier_BattleDomeLobby_EventScript_249E43:: @ 8249E43
 	message BattleFrontier_BattleDomeLobby_Text_24AE8B
 	waitmessage
-	multichoice 17, 4, 98, 0
+	multichoice 17, 4, MULTI_BATTLE_DOME_RULES, 0
 	switch VAR_RESULT
 	case 0, BattleFrontier_BattleDomeLobby_EventScript_249E8B
 	case 1, BattleFrontier_BattleDomeLobby_EventScript_249E99
 	case 2, BattleFrontier_BattleDomeLobby_EventScript_249EA7
 	case 3, BattleFrontier_BattleDomeLobby_EventScript_249EB5
-	case 127, BattleFrontier_BattleDomeLobby_EventScript_249EB5
+	case MULTI_B_PRESSED, BattleFrontier_BattleDomeLobby_EventScript_249EB5
 	end
 
 BattleFrontier_BattleDomeLobby_EventScript_249E8B:: @ 8249E8B

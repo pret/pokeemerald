@@ -150,12 +150,12 @@ TrainerHill_Entrance_EventScript_268275:: @ 8268275
 TrainerHill_Entrance_EventScript_26827D:: @ 826827D
 	message TrainerHill_Entrance_Text_2685F8
 	waitmessage
-	multichoice 15, 6, 17, 0
+	multichoice 15, 6, MULTI_YESNOINFO, 0
 	switch VAR_RESULT
 	case 0, TrainerHill_Entrance_EventScript_2682C8
 	case 1, TrainerHill_Entrance_EventScript_268314
 	case 2, TrainerHill_Entrance_EventScript_2682BA
-	case 127, TrainerHill_Entrance_EventScript_268314
+	case MULTI_B_PRESSED, TrainerHill_Entrance_EventScript_268314
 	end
 
 TrainerHill_Entrance_EventScript_2682BA:: @ 82682BA
@@ -164,10 +164,10 @@ TrainerHill_Entrance_EventScript_2682BA:: @ 82682BA
 	end
 
 TrainerHill_Entrance_EventScript_2682C8:: @ 82682C8
-	multichoice 13, 2, 113, 0
+	multichoice 13, 2, MULTI_TAG_MATCH_TYPE, 0
 	switch VAR_RESULT
 	case 4, TrainerHill_Entrance_EventScript_268314
-	case 127, TrainerHill_Entrance_EventScript_268314
+	case MULTI_B_PRESSED, TrainerHill_Entrance_EventScript_268314
 	setvar VAR_0x8004, TRAINER_HILL_FUNC_SET_TAG
 	copyvar VAR_0x8005, VAR_RESULT
 	special CallTrainerHillFunction
