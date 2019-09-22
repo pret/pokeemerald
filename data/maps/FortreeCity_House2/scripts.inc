@@ -7,15 +7,15 @@ FortreeCity_House2_EventScript_2177CB:: @ 82177CB
 	goto_if_set FLAG_RECEIVED_TM10, FortreeCity_House2_EventScript_21786E
 	call_if_unset FLAG_MET_HIDDEN_POWER_GIVER, FortreeCity_House2_EventScript_217862
 	msgbox FortreeCity_House2_Text_2178D6, MSGBOX_DEFAULT
-	multichoice 21, 8, 54, 1
+	multichoice 21, 8, MULTI_RIGHTLEFT, 1
 	switch VAR_RESULT
 	case 1, FortreeCity_House2_EventScript_217878
 	msgbox FortreeCity_House2_Text_21796A, MSGBOX_DEFAULT
-	multichoice 21, 8, 54, 1
+	multichoice 21, 8, MULTI_RIGHTLEFT, 1
 	switch VAR_RESULT
 	case 1, FortreeCity_House2_EventScript_217878
 	msgbox FortreeCity_House2_Text_2179C9, MSGBOX_DEFAULT
-	multichoice 21, 8, 54, 1
+	multichoice 21, 8, MULTI_RIGHTLEFT, 1
 	switch VAR_RESULT
 	case 0, FortreeCity_House2_EventScript_217878
 	msgbox FortreeCity_House2_Text_217A28, MSGBOX_DEFAULT

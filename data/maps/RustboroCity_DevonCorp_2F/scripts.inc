@@ -256,12 +256,12 @@ RustboroCity_DevonCorp_2F_EventScript_211B7A:: @ 8211B7A
 RustboroCity_DevonCorp_2F_EventScript_211B84:: @ 8211B84
 	message RustboroCity_DevonCorp_2F_Text_212092
 	waitmessage
-	multichoice 17, 6, 93, 0
+	multichoice 17, 6, MULTI_FOSSIL, 0
 	switch VAR_RESULT
 	case 0, RustboroCity_DevonCorp_2F_EventScript_211BC1
 	case 1, RustboroCity_DevonCorp_2F_EventScript_211BC7
 	case 2, RustboroCity_DevonCorp_2F_EventScript_211BCD
-	case 127, RustboroCity_DevonCorp_2F_EventScript_211BCD
+	case MULTI_B_PRESSED, RustboroCity_DevonCorp_2F_EventScript_211BCD
 	end
 
 RustboroCity_DevonCorp_2F_EventScript_211BC1:: @ 8211BC1

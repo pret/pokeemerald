@@ -451,7 +451,7 @@ Route110_TrickHouseEntrance_EventScript_26A039:: @ 826A039
 	end
 
 Route110_TrickHouseEntrance_EventScript_26A070:: @ 826A070
-	multichoice 0, 0, 88, 1
+	multichoice 0, 0, MULTI_TENT, 1
 	switch VAR_RESULT
 	case 0, Route110_TrickHouseEntrance_EventScript_26A08A
 	goto Route110_TrickHouseEntrance_EventScript_26A092

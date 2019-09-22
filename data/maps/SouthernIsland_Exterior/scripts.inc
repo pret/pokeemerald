@@ -9,10 +9,10 @@ SouthernIsland_Exterior_OnTransition: @ 82429CE
 SouthernIsland_Exterior_EventScript_2429D2:: @ 82429D2
 	lock
 	faceplayer
-	msgbox SouthernIsland_Exterior_Text_2A69F1, MSGBOX_YESNO
+	msgbox EventTicket_Text_SouthernIslandSailBack, MSGBOX_YESNO
 	compare VAR_RESULT, 0
 	goto_if_eq SouthernIsland_Exterior_EventScript_242A17
-	msgbox SouthernIsland_Exterior_Text_2A6A5D, MSGBOX_DEFAULT
+	msgbox EventTicket_Text_SailHome, MSGBOX_DEFAULT
 	closemessage
 	applymovement VAR_LAST_TALKED, Common_Movement_WalkInPlaceDown
 	waitmovement 0
@@ -26,7 +26,7 @@ SouthernIsland_Exterior_EventScript_2429D2:: @ 82429D2
 	end
 
 SouthernIsland_Exterior_EventScript_242A17:: @ 8242A17
-	msgbox SouthernIsland_Exterior_Text_2A6A82, MSGBOX_DEFAULT
+	msgbox EventTicket_Text_AsYouLike, MSGBOX_DEFAULT
 	release
 	end
 
@@ -50,6 +50,6 @@ BattleFrontier_OutsideWest_Movement_242A39: @ 8242A39
 	step_end
 
 SouthernIsland_Exterior_EventScript_242A3C:: @ 8242A3C
-	msgbox SouthernIsland_Exterior_Text_2A6AD5, MSGBOX_SIGN
+	msgbox SouthernIsland_Exterior_Text_Sign, MSGBOX_SIGN
 	end
 

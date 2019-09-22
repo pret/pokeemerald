@@ -75,7 +75,7 @@ SlateportCity_BattleTentCorridor_EventScript_208F0D:: @ 8208F0D
 	call_if_eq SlateportCity_BattleTentCorridor_EventScript_209014
 	compare VAR_RESULT, 2
 	call_if_eq SlateportCity_BattleTentCorridor_EventScript_20901B
-	multichoice 20, 6, 104, 1
+	multichoice 20, 6, MULTI_GO_ON_REST_RETIRE, 1
 	switch VAR_RESULT
 	case 0, SlateportCity_BattleTentCorridor_EventScript_208FBB
 	case 1, SlateportCity_BattleTentCorridor_EventScript_208F5B
@@ -91,11 +91,11 @@ SlateportCity_BattleTentCorridor_EventScript_208F5B:: @ 8208F5B
 SlateportCity_BattleTentCorridor_EventScript_208F89:: @ 8208F89
 	message SlateportCity_BattleTentCorridor_Text_25A37A
 	waitmessage
-	multichoicedefault 20, 8, 94, 1, 0
+	multichoicedefault 20, 8, MULTI_YESNO, 1, 0
 	switch VAR_RESULT
 	case 1, SlateportCity_BattleTentCorridor_EventScript_208F0D
 	case 0, SlateportCity_BattleTentCorridor_EventScript_209A1B
-	case 127, SlateportCity_BattleTentCorridor_EventScript_208F0D
+	case MULTI_B_PRESSED, SlateportCity_BattleTentCorridor_EventScript_208F0D
 
 SlateportCity_BattleTentCorridor_EventScript_208FBB:: @ 8208FBB
 	setvar VAR_0x8004, 8
@@ -104,7 +104,7 @@ SlateportCity_BattleTentCorridor_EventScript_208FBB:: @ 8208FBB
 	switch VAR_RESULT
 	case 0, SlateportCity_BattleTentCorridor_EventScript_208EB4
 	case 1, SlateportCity_BattleTentCorridor_EventScript_208FF1
-	case 127, SlateportCity_BattleTentCorridor_EventScript_208EB4
+	case MULTI_B_PRESSED, SlateportCity_BattleTentCorridor_EventScript_208EB4
 
 SlateportCity_BattleTentCorridor_EventScript_208FF1:: @ 8208FF1
 	fadescreen 1

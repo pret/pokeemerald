@@ -1,26 +1,7 @@
 #ifndef GUARD_ITEM_H
 #define GUARD_ITEM_H
 
-// These constants are used in gItems
-enum
-{
-    POCKET_NONE,
-    POCKET_ITEMS,
-    POCKET_POKE_BALLS,
-    POCKET_TM_HM,
-    POCKET_BERRIES,
-    POCKET_KEY_ITEMS,
-};
-
-enum
-{
-    ITEMS_POCKET,
-    BALLS_POCKET,
-    TMHM_POCKET,
-    BERRIES_POCKET,
-    KEYITEMS_POCKET,
-    POCKETS_COUNT
-};
+#include "constants/item.h"
 
 typedef void (*ItemUseFunc)(u8);
 
