@@ -48,22 +48,22 @@ SecretBase_EventScript_PCCancel:: @ 823B4E8
     end
 
 SecretBase_EventScript_PCMainMenuWithRegister:: @ 823B4EF
-    multichoice 0, 0, 6, 0
+    multichoice 0, 0, MULTI_BASE_PC_WITH_REGISTRY, 0
     switch VAR_RESULT
     case 0, SecretBase_EventScript_PCDecorationMenu
     case 1, SecretBase_EventScript_PCPackUp
     case 2, SecretBase_EventScript_PCRegistryMenu
     case 3, SecretBase_EventScript_PCTurnOff
-    case 127, SecretBase_EventScript_PCTurnOff
+    case MULTI_B_PRESSED, SecretBase_EventScript_PCTurnOff
     end
 
 SecretBase_EventScript_PCMainMenuWithoutRegister:: @ 823B531
-    multichoice 0, 0, 5, 0
+    multichoice 0, 0, MULTI_BASE_PC_NO_REGISTRY, 0
     switch VAR_RESULT
     case 0, SecretBase_EventScript_PCDecorationMenu
     case 1, SecretBase_EventScript_PCPackUp
     case 2, SecretBase_EventScript_PCTurnOff
-    case 127, SecretBase_EventScript_PCTurnOff
+    case MULTI_B_PRESSED, SecretBase_EventScript_PCTurnOff
     end
 
 SecretBase_EventScript_PCPackUp:: @ 823B568
@@ -98,13 +98,13 @@ SecretBase_EventScript_RecordMixingPC:: @ 823B589
 SecretBase_EventScript_PCRegisterMenu:: @ 823B5A1
     message SecretBase_Text_WhatWouldYouLikeToDo
     waitmessage
-    multichoice 0, 0, 7, 0
+    multichoice 0, 0, MULTI_REGISTER_MENU, 0
     switch VAR_RESULT
     case 0, SecretBase_EventScript_PCRegister
     case 1, SecretBase_EventScript_PCRegistryMenu
     case 2, SecretBase_EventScript_PCRegistryInfo
     case 3, SecretBase_EventScript_PCTurnOff
-    case 127, SecretBase_EventScript_PCTurnOff
+    case MULTI_B_PRESSED, SecretBase_EventScript_PCTurnOff
     end
 
 SecretBase_EventScript_ShowRegisterMenu:: @ 823B5E9
