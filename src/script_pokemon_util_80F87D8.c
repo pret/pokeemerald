@@ -585,14 +585,14 @@ void HasEnoughMonsForDoubleBattle(void)
 {
     switch (GetMonsStateToDoubles())
     {
-    case 0:
-        gSpecialVar_Result = 0;
+    case PLAYER_HAS_TWO_USABLE_MONS:
+        gSpecialVar_Result = PLAYER_HAS_TWO_USABLE_MONS;
         break;
-    case 1:
-        gSpecialVar_Result = 1;
+    case PLAYER_HAS_ONE_MON:
+        gSpecialVar_Result = PLAYER_HAS_ONE_MON;
         break;
-    case 2:
-        gSpecialVar_Result = 2;
+    case PLAYER_HAS_ONE_USABLE_MON:
+        gSpecialVar_Result = PLAYER_HAS_ONE_USABLE_MON;
         break;
     }
 }

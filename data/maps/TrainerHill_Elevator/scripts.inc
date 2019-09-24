@@ -39,18 +39,20 @@ TrainerHill_Elevator_EventScript_269375:: @ 8269375
 	waitstate
 	end
 
+@ Unused
 TrainerHill_Elevator_EventScript_2693CE:: @ 82693CE
 	goto TrainerHill_Elevator_EventScript_2693D4
 	end
 
+@ Functionally unused
 TrainerHill_Elevator_EventScript_2693D4:: @ 82693D4
-	special sub_8139C10
+	special CloseDeptStoreElevatorWindow
 	releaseall
 	end
 
 TrainerHill_Elevator_EventScript_2693D9:: @ 82693D9
 	waitse
-	special ShakeScreenInElevator
+	special MoveElevator
 	waitstate
 	return
 

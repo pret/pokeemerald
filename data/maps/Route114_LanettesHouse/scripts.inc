@@ -12,7 +12,7 @@ Route114_LanettesHouse_EventScript_22B2D2:: @ 822B2D2
 	goto_if_set FLAG_RECEIVED_DOLL_LANETTE, Route114_LanettesHouse_EventScript_22B2FF
 	setflag FLAG_SYS_PC_LANETTE
 	msgbox Route114_LanettesHouse_Text_22B34E, MSGBOX_DEFAULT
-	givedecoration_std 99
+	givedecoration_std DECOR_LOTAD_DOLL
 	compare VAR_RESULT, 0
 	goto_if_eq Route114_LanettesHouse_EventScript_272067
 	setflag FLAG_RECEIVED_DOLL_LANETTE

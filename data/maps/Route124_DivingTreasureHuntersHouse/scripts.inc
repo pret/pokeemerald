@@ -86,7 +86,7 @@ Route124_DivingTreasureHuntersHouse_EventScript_270ADE:: @ 8270ADE
 	end
 
 Route124_DivingTreasureHuntersHouse_EventScript_270B8F:: @ 8270B8F
-	multichoice 0, 0, 58, 0
+	multichoice 0, 0, MULTI_SHARDS_R, 0
 	switch VAR_RESULT
 	case 0, Route124_DivingTreasureHuntersHouse_EventScript_270E84
 	case 1, Route124_DivingTreasureHuntersHouse_EventScript_270F4D
@@ -94,7 +94,7 @@ Route124_DivingTreasureHuntersHouse_EventScript_270B8F:: @ 8270B8F
 	end
 
 Route124_DivingTreasureHuntersHouse_EventScript_270BB5:: @ 8270BB5
-	multichoice 0, 0, 59, 0
+	multichoice 0, 0, MULTI_SHARDS_Y, 0
 	switch VAR_RESULT
 	case 0, Route124_DivingTreasureHuntersHouse_EventScript_270E93
 	case 1, Route124_DivingTreasureHuntersHouse_EventScript_270F4D
@@ -102,7 +102,7 @@ Route124_DivingTreasureHuntersHouse_EventScript_270BB5:: @ 8270BB5
 	end
 
 Route124_DivingTreasureHuntersHouse_EventScript_270BDB:: @ 8270BDB
-	multichoice 0, 0, 60, 0
+	multichoice 0, 0, MULTI_SHARDS_RY, 0
 	switch VAR_RESULT
 	case 0, Route124_DivingTreasureHuntersHouse_EventScript_270E84
 	case 1, Route124_DivingTreasureHuntersHouse_EventScript_270E93
@@ -111,7 +111,7 @@ Route124_DivingTreasureHuntersHouse_EventScript_270BDB:: @ 8270BDB
 	end
 
 Route124_DivingTreasureHuntersHouse_EventScript_270C0C:: @ 8270C0C
-	multichoice 0, 0, 61, 0
+	multichoice 0, 0, MULTI_SHARDS_B, 0
 	switch VAR_RESULT
 	case 0, Route124_DivingTreasureHuntersHouse_EventScript_270EA2
 	case 1, Route124_DivingTreasureHuntersHouse_EventScript_270F4D
@@ -119,7 +119,7 @@ Route124_DivingTreasureHuntersHouse_EventScript_270C0C:: @ 8270C0C
 	end
 
 Route124_DivingTreasureHuntersHouse_EventScript_270C32:: @ 8270C32
-	multichoice 0, 0, 62, 0
+	multichoice 0, 0, MULTI_SHARDS_RB, 0
 	switch VAR_RESULT
 	case 0, Route124_DivingTreasureHuntersHouse_EventScript_270E84
 	case 1, Route124_DivingTreasureHuntersHouse_EventScript_270EA2
@@ -128,7 +128,7 @@ Route124_DivingTreasureHuntersHouse_EventScript_270C32:: @ 8270C32
 	end
 
 Route124_DivingTreasureHuntersHouse_EventScript_270C63:: @ 8270C63
-	multichoice 0, 0, 63, 0
+	multichoice 0, 0, MULTI_SHARDS_YB, 0
 	switch VAR_RESULT
 	case 0, Route124_DivingTreasureHuntersHouse_EventScript_270E93
 	case 1, Route124_DivingTreasureHuntersHouse_EventScript_270EA2
@@ -137,7 +137,7 @@ Route124_DivingTreasureHuntersHouse_EventScript_270C63:: @ 8270C63
 	end
 
 Route124_DivingTreasureHuntersHouse_EventScript_270C94:: @ 8270C94
-	multichoice 0, 0, 64, 0
+	multichoice 0, 0, MULTI_SHARDS_RYB, 0
 	switch VAR_RESULT
 	case 0, Route124_DivingTreasureHuntersHouse_EventScript_270E84
 	case 1, Route124_DivingTreasureHuntersHouse_EventScript_270E93
@@ -147,7 +147,7 @@ Route124_DivingTreasureHuntersHouse_EventScript_270C94:: @ 8270C94
 	end
 
 Route124_DivingTreasureHuntersHouse_EventScript_270CD0:: @ 8270CD0
-	multichoice 0, 0, 65, 0
+	multichoice 0, 0, MULTI_SHARDS_G, 0
 	switch VAR_RESULT
 	case 0, Route124_DivingTreasureHuntersHouse_EventScript_270EB1
 	case 1, Route124_DivingTreasureHuntersHouse_EventScript_270F4D
@@ -155,7 +155,7 @@ Route124_DivingTreasureHuntersHouse_EventScript_270CD0:: @ 8270CD0
 	end
 
 Route124_DivingTreasureHuntersHouse_EventScript_270CF6:: @ 8270CF6
-	multichoice 0, 0, 66, 0
+	multichoice 0, 0, MULTI_SHARDS_RG, 0
 	switch VAR_RESULT
 	case 0, Route124_DivingTreasureHuntersHouse_EventScript_270E84
 	case 1, Route124_DivingTreasureHuntersHouse_EventScript_270EB1
@@ -164,7 +164,7 @@ Route124_DivingTreasureHuntersHouse_EventScript_270CF6:: @ 8270CF6
 	end
 
 Route124_DivingTreasureHuntersHouse_EventScript_270D27:: @ 8270D27
-	multichoice 0, 0, 67, 0
+	multichoice 0, 0, MULTI_SHARDS_YG, 0
 	switch VAR_RESULT
 	case 0, Route124_DivingTreasureHuntersHouse_EventScript_270E93
 	case 1, Route124_DivingTreasureHuntersHouse_EventScript_270EB1
@@ -173,7 +173,7 @@ Route124_DivingTreasureHuntersHouse_EventScript_270D27:: @ 8270D27
 	end
 
 Route124_DivingTreasureHuntersHouse_EventScript_270D58:: @ 8270D58
-	multichoice 0, 0, 68, 0
+	multichoice 0, 0, MULTI_SHARDS_RYG, 0
 	switch VAR_RESULT
 	case 0, Route124_DivingTreasureHuntersHouse_EventScript_270E84
 	case 1, Route124_DivingTreasureHuntersHouse_EventScript_270E93
@@ -183,7 +183,7 @@ Route124_DivingTreasureHuntersHouse_EventScript_270D58:: @ 8270D58
 	end
 
 Route124_DivingTreasureHuntersHouse_EventScript_270D94:: @ 8270D94
-	multichoice 0, 0, 69, 0
+	multichoice 0, 0, MULTI_SHARDS_BG, 0
 	switch VAR_RESULT
 	case 0, Route124_DivingTreasureHuntersHouse_EventScript_270EA2
 	case 1, Route124_DivingTreasureHuntersHouse_EventScript_270EB1
@@ -192,7 +192,7 @@ Route124_DivingTreasureHuntersHouse_EventScript_270D94:: @ 8270D94
 	end
 
 Route124_DivingTreasureHuntersHouse_EventScript_270DC5:: @ 8270DC5
-	multichoice 0, 0, 70, 0
+	multichoice 0, 0, MULTI_SHARDS_RBG, 0
 	switch VAR_RESULT
 	case 0, Route124_DivingTreasureHuntersHouse_EventScript_270E84
 	case 1, Route124_DivingTreasureHuntersHouse_EventScript_270EA2
@@ -202,7 +202,7 @@ Route124_DivingTreasureHuntersHouse_EventScript_270DC5:: @ 8270DC5
 	end
 
 Route124_DivingTreasureHuntersHouse_EventScript_270E01:: @ 8270E01
-	multichoice 0, 0, 71, 0
+	multichoice 0, 0, MULTI_SHARDS_YBG, 0
 	switch VAR_RESULT
 	case 0, Route124_DivingTreasureHuntersHouse_EventScript_270E93
 	case 1, Route124_DivingTreasureHuntersHouse_EventScript_270EA2
@@ -212,7 +212,7 @@ Route124_DivingTreasureHuntersHouse_EventScript_270E01:: @ 8270E01
 	end
 
 Route124_DivingTreasureHuntersHouse_EventScript_270E3D:: @ 8270E3D
-	multichoice 0, 0, 72, 0
+	multichoice 0, 0, MULTI_SHARDS_RYBG, 0
 	switch VAR_RESULT
 	case 0, Route124_DivingTreasureHuntersHouse_EventScript_270E84
 	case 1, Route124_DivingTreasureHuntersHouse_EventScript_270E93
@@ -223,23 +223,23 @@ Route124_DivingTreasureHuntersHouse_EventScript_270E3D:: @ 8270E3D
 	end
 
 Route124_DivingTreasureHuntersHouse_EventScript_270E84:: @ 8270E84
-	setvar VAR_0x8008, 48
-	setvar VAR_0x8009, 95
+	setvar VAR_0x8008, ITEM_RED_SHARD
+	setvar VAR_0x8009, ITEM_FIRE_STONE
 	goto Route124_DivingTreasureHuntersHouse_EventScript_270EC0
 
 Route124_DivingTreasureHuntersHouse_EventScript_270E93:: @ 8270E93
-	setvar VAR_0x8008, 50
-	setvar VAR_0x8009, 96
+	setvar VAR_0x8008, ITEM_YELLOW_SHARD
+	setvar VAR_0x8009, ITEM_THUNDER_STONE
 	goto Route124_DivingTreasureHuntersHouse_EventScript_270EC0
 
 Route124_DivingTreasureHuntersHouse_EventScript_270EA2:: @ 8270EA2
-	setvar VAR_0x8008, 49
-	setvar VAR_0x8009, 97
+	setvar VAR_0x8008, ITEM_BLUE_SHARD
+	setvar VAR_0x8009, ITEM_WATER_STONE
 	goto Route124_DivingTreasureHuntersHouse_EventScript_270EC0
 
 Route124_DivingTreasureHuntersHouse_EventScript_270EB1:: @ 8270EB1
-	setvar VAR_0x8008, 51
-	setvar VAR_0x8009, 98
+	setvar VAR_0x8008, ITEM_GREEN_SHARD
+	setvar VAR_0x8009, ITEM_LEAF_STONE
 	goto Route124_DivingTreasureHuntersHouse_EventScript_270EC0
 
 Route124_DivingTreasureHuntersHouse_EventScript_270EC0:: @ 8270EC0

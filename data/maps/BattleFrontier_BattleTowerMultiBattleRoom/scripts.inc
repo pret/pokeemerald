@@ -43,7 +43,7 @@ BattleFrontier_BattleTowerMultiBattleRoom_MapScript2_243E14: @ 8243E14
 	.2byte 0
 
 BattleFrontier_BattleTowerMultiBattleRoom_EventScript_243E1E:: @ 8243E1E
-	turnobject EVENT_OBJ_ID_PLAYER, 2
+	turnobject EVENT_OBJ_ID_PLAYER, DIR_NORTH
 	end
 
 BattleFrontier_BattleTowerMultiBattleRoom_MapScript2_243E23: @ 8243E23
@@ -86,7 +86,7 @@ BattleFrontier_BattleTowerMultiBattleRoom_EventScript_243E7A:: @ 8243E7A
 	faceplayer
 	message BattleFrontier_BattleTowerMultiBattleRoom_Text_244094
 	waitmessage
-	multichoicedefault 20, 8, 94, 1, 0
+	multichoicedefault 20, 8, MULTI_YESNO, 1, 0
 	compare VAR_RESULT, 0
 	goto_if_eq BattleFrontier_BattleTowerMultiBattleRoom_EventScript_243E9D
 	msgbox BattleFrontier_BattleTowerMultiBattleRoom_Text_24410C, MSGBOX_DEFAULT
@@ -180,10 +180,10 @@ BattleFrontier_BattleTowerMultiBattleRoom_EventScript_243F36:: @ 8243F36
 	setvar VAR_0x8005, 2
 	special sub_8161F74
 	waitmessage
-	multichoicedefault 20, 8, 94, 1, 0
+	multichoicedefault 20, 8, MULTI_YESNO, 1, 0
 	switch VAR_RESULT
 	case 1, BattleFrontier_BattleTowerMultiBattleRoom_EventScript_243FC3
-	case 127, BattleFrontier_BattleTowerMultiBattleRoom_EventScript_243FC3
+	case MULTI_B_PRESSED, BattleFrontier_BattleTowerMultiBattleRoom_EventScript_243FC3
 	setvar VAR_0x8004, 11
 	setvar VAR_0x8005, 3
 	special sub_8161F74

@@ -8,7 +8,7 @@ EverGrandeCity_HallOfFame_MapScript2_229837: @ 8229837
 	.2byte 0
 
 EverGrandeCity_HallOfFame_EventScript_229841:: @ 8229841
-	turnobject EVENT_OBJ_ID_PLAYER, 2
+	turnobject EVENT_OBJ_ID_PLAYER, DIR_NORTH
 	end
 
 EverGrandeCity_HallOfFame_MapScript2_229846: @ 8229846

@@ -42,7 +42,7 @@ BattleFrontier_BattlePikeCorridor_MapScript2_25C7F7: @ 825C7F7
 
 BattleFrontier_BattlePikeCorridor_EventScript_25C801:: @ 825C801
 	setvar VAR_TEMP_1, 1
-	turnobject EVENT_OBJ_ID_PLAYER, 2
+	turnobject EVENT_OBJ_ID_PLAYER, DIR_NORTH
 	end
 
 BattleFrontier_BattlePikeCorridor_Movement_25C80B: @ 825C80B

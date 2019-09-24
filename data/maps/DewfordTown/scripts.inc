@@ -12,12 +12,12 @@ DewfordTown_EventScript_1E9511:: @ 81E9511
 	goto_if_unset FLAG_DELIVERED_STEVEN_LETTER, DewfordTown_EventScript_1E9585
 	message DewfordTown_Text_1E9C8A
 	waitmessage
-	multichoicedefault 21, 6, 0, 2, 0
+	multichoicedefault 21, 6, MULTI_BRINEY_ON_DEWFORD, 2, 0
 	switch VAR_RESULT
 	case 0, DewfordTown_EventScript_1E955A
 	case 1, DewfordTown_EventScript_1E956A
 	case 2, DewfordTown_EventScript_1E957A
-	case 127, DewfordTown_EventScript_1E957A
+	case MULTI_B_PRESSED, DewfordTown_EventScript_1E957A
 	end
 
 DewfordTown_EventScript_1E955A:: @ 81E955A
@@ -97,7 +97,7 @@ DewfordTown_EventScript_1E9620:: @ 81E9620
 DewfordTown_EventScript_1E962A:: @ 81E962A
 	message DewfordTown_Text_1E9FB8
 	waitmessage
-	multichoice 20, 8, 50, 1
+	multichoice 20, 8, MULTI_HOWS_FISHING, 1
 	compare VAR_RESULT, 0
 	goto_if_eq DewfordTown_EventScript_1E964C
 	compare VAR_RESULT, 1
