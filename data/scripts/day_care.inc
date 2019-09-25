@@ -58,7 +58,7 @@ Route117_EventScript_MonReceivedMail:: @ 8291CC8
 Route117_EventScript_CheckOnOneMon:: @ 8291CD1
 	special GetDaycareMonNicknames
 	msgbox Route117_Text_YourMonIsDoingFine, MSGBOX_DEFAULT
-	setvar VAR_0x8004, EGG_MOTHER
+	setvar VAR_0x8004, 0
 	call Route117_EventScript_CheckMonReceivedMail
 	release
 	end
@@ -70,9 +70,9 @@ Route117_EventScript_CheckOnTwoMons:: @ 8291CE8
 	special ShowFieldMessageStringVar4
 	waitmessage
 	waitbuttonpress
-	setvar VAR_0x8004, EGG_MOTHER
+	setvar VAR_0x8004, 0
 	call Route117_EventScript_CheckMonReceivedMail
-	setvar VAR_0x8004, EGG_FATHER
+	setvar VAR_0x8004, 1
 	call Route117_EventScript_CheckMonReceivedMail
 	release
 	end
