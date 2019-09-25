@@ -1963,8 +1963,8 @@ static bool8 Phase2_Ripple_Func2(struct Task *task)
     {
         s16 var = r4 >> 8;
         
-		++var;
-		--var;
+        var++;
+        var--;
         gScanlineEffectRegBuffers[0][i] = sTransitionStructPtr->field_16 + Sin(var, r3);
     }
 
