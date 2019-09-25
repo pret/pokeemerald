@@ -54,8 +54,8 @@ static const struct WindowTemplate sDaycareLevelMenuWindowTemplate =
 // which is copied to VAR_0x8004 and used as an index for GetDaycareCost
 static const struct ListMenuItem sLevelMenuItems[] =
 {
-    {gExpandedPlaceholder_Empty, EGG_MOTHER},
-    {gExpandedPlaceholder_Empty, EGG_FATHER},
+    {gExpandedPlaceholder_Empty, 0},
+    {gExpandedPlaceholder_Empty, 1},
     {gText_Exit, DAYCARE_LEVEL_MENU_EXIT}
 };
 
@@ -202,16 +202,16 @@ void StoreSelectedPokemonInDaycare(void)
 static void ShiftDaycareSlots(struct DayCare *daycare)
 {
     // This condition is only satisfied when the player takes out the first pokemon from the daycare.
-    if (GetBoxMonData(&daycare->mons[EGG_FATHER].mon, MON_DATA_SPECIES) != SPECIES_NONE
-        && GetBoxMonData(&daycare->mons[EGG_MOTHER].mon, MON_DATA_SPECIES) == SPECIES_NONE)
+    if (GetBoxMonData(&daycare->mons[1].mon, MON_DATA_SPECIES) != SPECIES_NONE
+        && GetBoxMonData(&daycare->mons[0].mon, MON_DATA_SPECIES) == SPECIES_NONE)
     {
-        daycare->mons[EGG_MOTHER].mon = daycare->mons[EGG_FATHER].mon;
-        ZeroBoxMonData(&daycare->mons[EGG_FATHER].mon);
+        daycare->mons[0].mon = daycare->mons[1].mon;
+        ZeroBoxMonData(&daycare->mons[1].mon);
 
-        daycare->mons[EGG_MOTHER].mail = daycare->mons[EGG_FATHER].mail;
-        daycare->mons[EGG_MOTHER].steps = daycare->mons[EGG_FATHER].steps;
-        daycare->mons[EGG_FATHER].steps = 0;
-        ClearDaycareMonMail(&daycare->mons[EGG_FATHER].mail);
+        daycare->mons[0].mail = daycare->mons[1].mail;
+        daycare->mons[0].steps = daycare->mons[1].steps;
+        daycare->mons[1].steps = 0;
+        ClearDaycareMonMail(&daycare->mons[1].mail);
     }
 }
 
@@ -341,8 +341,8 @@ void GetDaycareCost(void)
 
 static void Debug_AddDaycareSteps(u16 numSteps)
 {
-    gSaveBlock1Ptr->daycare.mons[EGG_MOTHER].steps += numSteps;
-    gSaveBlock1Ptr->daycare.mons[EGG_FATHER].steps += numSteps;
+    gSaveBlock1Ptr->daycare.mons[0].steps += numSteps;
+    gSaveBlock1Ptr->daycare.mons[1].steps += numSteps;
 }
 
 u8 GetNumLevelsGainedFromDaycare(void)
@@ -424,7 +424,7 @@ static s32 GetParentToInheritNature(struct DayCare *daycare)
     u32 species[DAYCARE_MON_COUNT];
     s32 i;
     s32 dittoCount;
-    s32 parent = NEITHER_PARENT;
+    s32 parent = -1;
 
     // search for female gender
     for (i = 0; i < DAYCARE_MON_COUNT; i++)
@@ -445,16 +445,16 @@ static s32 GetParentToInheritNature(struct DayCare *daycare)
     if (dittoCount == DAYCARE_MON_COUNT)
     {
         if (Random() >= USHRT_MAX / 2)
-            parent = EGG_MOTHER;
+            parent = 0;
         else
-            parent = EGG_FATHER;
+            parent = 1;
     }
 
     // Don't inherit nature if not holding Everstone
     if (GetBoxMonData(&daycare->mons[parent].mon, MON_DATA_HELD_ITEM) != ITEM_EVERSTONE
         || Random() >= USHRT_MAX / 2)
     {
-        return NEITHER_PARENT;
+        return -1;
     }
 
     return parent;
@@ -734,8 +734,8 @@ static void AlterEggSpeciesWithIncenseItem(u16 *species, struct DayCare *daycare
     u16 motherItem, fatherItem;
     if (*species == SPECIES_WYNAUT || *species == SPECIES_AZURILL)
     {
-        motherItem = GetBoxMonData(&daycare->mons[EGG_MOTHER].mon, MON_DATA_HELD_ITEM);
-        fatherItem = GetBoxMonData(&daycare->mons[EGG_FATHER].mon, MON_DATA_HELD_ITEM);
+        motherItem = GetBoxMonData(&daycare->mons[0].mon, MON_DATA_HELD_ITEM);
+        fatherItem = GetBoxMonData(&daycare->mons[1].mon, MON_DATA_HELD_ITEM);
         if (*species == SPECIES_WYNAUT && motherItem != ITEM_LAX_INCENSE && fatherItem != ITEM_LAX_INCENSE)
         {
             *species = SPECIES_WOBBUFFET;
@@ -750,8 +750,8 @@ static void AlterEggSpeciesWithIncenseItem(u16 *species, struct DayCare *daycare
 
 static void GiveVoltTackleIfLightBall(struct Pokemon *mon, struct DayCare *daycare)
 {
-    u32 motherItem = GetBoxMonData(&daycare->mons[EGG_MOTHER].mon, MON_DATA_HELD_ITEM);
-    u32 fatherItem = GetBoxMonData(&daycare->mons[EGG_FATHER].mon, MON_DATA_HELD_ITEM);
+    u32 motherItem = GetBoxMonData(&daycare->mons[0].mon, MON_DATA_HELD_ITEM);
+    u32 fatherItem = GetBoxMonData(&daycare->mons[1].mon, MON_DATA_HELD_ITEM);
 
     if (motherItem == ITEM_LIGHT_BALL || fatherItem == ITEM_LIGHT_BALL)
     {
@@ -771,17 +771,17 @@ static u16 DetermineEggSpeciesAndParentSlots(struct DayCare *daycare, u8 *parent
         species[i] = GetBoxMonData(&daycare->mons[i].mon, MON_DATA_SPECIES);
         if (species[i] == SPECIES_DITTO)
         {
-            parentSlots[EGG_MOTHER] = i ^ 1;
-            parentSlots[EGG_FATHER] = i;
+            parentSlots[0] = i ^ 1;
+            parentSlots[1] = i;
         }
         else if (GetBoxMonGender(&daycare->mons[i].mon) == MON_FEMALE)
         {
-            parentSlots[EGG_MOTHER] = i;
-            parentSlots[EGG_FATHER] = i ^ 1;
+            parentSlots[0] = i;
+            parentSlots[1] = i ^ 1;
         }
     }
 
-    eggSpecies = GetEggSpecies(species[parentSlots[EGG_MOTHER]]);
+    eggSpecies = GetEggSpecies(species[parentSlots[0]]);
     if (eggSpecies == SPECIES_NIDORAN_F && daycare->offspringPersonality & EGG_GENDER_MALE)
     {
         eggSpecies = SPECIES_NIDORAN_M;
@@ -792,11 +792,11 @@ static u16 DetermineEggSpeciesAndParentSlots(struct DayCare *daycare, u8 *parent
     }
 
     // Make Ditto the "mother" slot if the other daycare mon is male.
-    if (species[parentSlots[EGG_FATHER]] == SPECIES_DITTO && GetBoxMonGender(&daycare->mons[parentSlots[EGG_MOTHER]].mon) != MON_FEMALE)
+    if (species[parentSlots[1]] == SPECIES_DITTO && GetBoxMonGender(&daycare->mons[parentSlots[0]].mon) != MON_FEMALE)
     {
-        u8 ditto = parentSlots[EGG_FATHER];
-        parentSlots[EGG_FATHER] = parentSlots[EGG_MOTHER];
-        parentSlots[EGG_MOTHER] = ditto;
+        u8 ditto = parentSlots[1];
+        parentSlots[1] = parentSlots[0];
+        parentSlots[0] = ditto;
     }
 
     return eggSpecies;
@@ -813,7 +813,7 @@ static void _GiveEggFromDaycare(struct DayCare *daycare)
     AlterEggSpeciesWithIncenseItem(&species, daycare);
     SetInitialEggData(&egg, species, daycare);
     InheritIVs(&egg, daycare);
-    BuildEggMoveset(&egg, &daycare->mons[parentSlots[EGG_FATHER]].mon, &daycare->mons[parentSlots[EGG_MOTHER]].mon);
+    BuildEggMoveset(&egg, &daycare->mons[parentSlots[1]].mon, &daycare->mons[parentSlots[0]].mon);
 
     if (species == SPECIES_PICHU)
         GiveVoltTackleIfLightBall(&egg, daycare);
@@ -888,7 +888,7 @@ static bool8 _DoEggActions_CheckHatch(struct DayCare *daycare)
     }
 
     // try to trigger poke sex
-    if (daycare->offspringPersonality == 0 && validEggs == DAYCARE_MON_COUNT && (daycare->mons[EGG_FATHER].steps & 0xFF) == 0xFF)
+    if (daycare->offspringPersonality == 0 && validEggs == DAYCARE_MON_COUNT && (daycare->mons[1].steps & 0xFF) == 0xFF)
     {
         u8 loveScore = GetDaycareCompatibilityScore(daycare);
         if (loveScore > (Random() * 100u) / USHRT_MAX)
@@ -944,16 +944,16 @@ static bool8 IsEggPending(struct DayCare *daycare)
 static void _GetDaycareMonNicknames(struct DayCare *daycare)
 {
     u8 text[12];
-    if (GetBoxMonData(&daycare->mons[EGG_MOTHER].mon, MON_DATA_SPECIES) != 0)
+    if (GetBoxMonData(&daycare->mons[0].mon, MON_DATA_SPECIES) != 0)
     {
-        GetBoxMonNick(&daycare->mons[EGG_MOTHER].mon, gStringVar1);
-        GetBoxMonData(&daycare->mons[EGG_MOTHER].mon, MON_DATA_OT_NAME, text);
+        GetBoxMonNick(&daycare->mons[0].mon, gStringVar1);
+        GetBoxMonData(&daycare->mons[0].mon, MON_DATA_OT_NAME, text);
         StringCopy(gStringVar3, text);
     }
 
-    if (GetBoxMonData(&daycare->mons[EGG_FATHER].mon, MON_DATA_SPECIES) != 0)
+    if (GetBoxMonData(&daycare->mons[1].mon, MON_DATA_SPECIES) != 0)
     {
-        GetBoxMonNick(&daycare->mons[EGG_FATHER].mon, gStringVar2);
+        GetBoxMonNick(&daycare->mons[1].mon, gStringVar2);
     }
 }
 
@@ -1033,16 +1033,16 @@ static u8 GetDaycareCompatibilityScore(struct DayCare *daycare)
     }
 
     // check unbreedable egg group
-    if (eggGroups[EGG_MOTHER][0] == EGG_GROUP_UNDISCOVERED || eggGroups[EGG_FATHER][0] == EGG_GROUP_UNDISCOVERED)
+    if (eggGroups[0][0] == EGG_GROUP_UNDISCOVERED || eggGroups[1][0] == EGG_GROUP_UNDISCOVERED)
         return PARENTS_INCOMPATIBLE;
     // two Ditto can't breed
-    if (eggGroups[EGG_MOTHER][0] == EGG_GROUP_DITTO && eggGroups[EGG_FATHER][0] == EGG_GROUP_DITTO)
+    if (eggGroups[0][0] == EGG_GROUP_DITTO && eggGroups[1][0] == EGG_GROUP_DITTO)
         return PARENTS_INCOMPATIBLE;
 
     // one parent is Ditto
-    if (eggGroups[EGG_MOTHER][0] == EGG_GROUP_DITTO || eggGroups[EGG_FATHER][0] == EGG_GROUP_DITTO)
+    if (eggGroups[0][0] == EGG_GROUP_DITTO || eggGroups[1][0] == EGG_GROUP_DITTO)
     {
-        if (trainerIds[EGG_MOTHER] == trainerIds[EGG_FATHER])
+        if (trainerIds[0] == trainerIds[1])
             return PARENTS_LOW_COMPATIBILITY;
 
         return PARENTS_MED_COMPATABILITY;
@@ -1050,23 +1050,23 @@ static u8 GetDaycareCompatibilityScore(struct DayCare *daycare)
     // neither parent is Ditto
     else
     {
-        if (genders[EGG_MOTHER] == genders[EGG_FATHER])
+        if (genders[0] == genders[1])
             return PARENTS_INCOMPATIBLE;
-        if (genders[EGG_MOTHER] == MON_GENDERLESS || genders[EGG_FATHER] == MON_GENDERLESS)
+        if (genders[0] == MON_GENDERLESS || genders[1] == MON_GENDERLESS)
             return PARENTS_INCOMPATIBLE;
-        if (!EggGroupsOverlap(eggGroups[EGG_MOTHER], eggGroups[EGG_FATHER]))
+        if (!EggGroupsOverlap(eggGroups[0], eggGroups[1]))
             return PARENTS_INCOMPATIBLE;
 
-        if (species[EGG_MOTHER] == species[EGG_FATHER])
+        if (species[0] == species[1])
         {
-            if (trainerIds[EGG_MOTHER] == trainerIds[EGG_FATHER])
+            if (trainerIds[0] == trainerIds[1])
                 return PARENTS_MED_COMPATABILITY; // same species, same trainer
 
             return PARENTS_MAX_COMPATABILITY; // same species, different trainers
         }
         else
         {
-            if (trainerIds[EGG_MOTHER] != trainerIds[EGG_FATHER])
+            if (trainerIds[0] != trainerIds[1])
                 return PARENTS_MED_COMPATABILITY; // different species, different trainers
 
             return PARENTS_LOW_COMPATIBILITY; // different species, same trainer
@@ -1153,9 +1153,9 @@ static void GetDaycareLevelMenuText(struct DayCare *daycare, u8 *dest)
         AppendMonGenderSymbol(monNames[i], &daycare->mons[i].mon);
     }
 
-    StringCopy(dest, monNames[EGG_MOTHER]);
+    StringCopy(dest, monNames[0]);
     StringAppend(dest, gText_NewLine2);
-    StringAppend(dest, monNames[EGG_FATHER]);
+    StringAppend(dest, monNames[1]);
     StringAppend(dest, gText_NewLine2);
     StringAppend(dest, gText_Exit4);
 }
@@ -1243,8 +1243,8 @@ static void Task_HandleDaycareLevelMenuInput(u8 taskId)
     {
         switch (input)
         {
-        case EGG_MOTHER:
-        case EGG_FATHER:
+        case 0:
+        case 1:
             gSpecialVar_Result = input;
             break;
         case DAYCARE_LEVEL_MENU_EXIT:

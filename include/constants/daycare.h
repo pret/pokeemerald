@@ -1,11 +1,6 @@
 #ifndef GUARD_DAYCARE_CONSTANTS_H
 #define GUARD_DAYCARE_CONSTANTS_H
 
-// Egg parents
-#define EGG_MOTHER 0
-#define EGG_FATHER 1
-#define NEITHER_PARENT -1
-
 // Parent compatability scores
 #define PARENTS_INCOMPATIBLE       0
 #define PARENTS_LOW_COMPATIBILITY  20
