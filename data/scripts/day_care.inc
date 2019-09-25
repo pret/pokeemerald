@@ -110,7 +110,7 @@ Route117_PokemonDayCare_EventScript_GiveMonToRaise:: @ 8291D56
 	specialvar VAR_RESULT, CountPartyAliveNonEggMons_IgnoreVar0x8004Slot
 	compare VAR_RESULT, 0
 	goto_if_eq Route117_PokemonDayCare_EventScript_OnlyOneAliveMon
-	specialvar VAR_0x8005, GetSelectedMonNickAndSpecies
+	specialvar VAR_0x8005, GetSelectedMonNicknameAndSpecies
 	waitse
 	playmoncry VAR_0x8005, 0
 	msgbox Route117_PokemonDayCare_Text_WellRaiseYourMon, MSGBOX_DEFAULT
