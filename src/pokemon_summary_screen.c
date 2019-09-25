@@ -227,7 +227,7 @@ static void ResetWindows(void);
 static void Summary_PrintMonInfo(void);
 static void Summary_PrintNotEggInfo(void);
 static void Summary_PrintEggInfo(void);
-static void Summar_PrintGenderSymbol(struct Pokemon *mon, u16 a);
+static void Summary_PrintGenderSymbol(struct Pokemon *mon, u16 a);
 static void PrintPageNamesAndStatsPageToWindows(void);
 static void CreatePageWindowTilemaps(u8 a);
 static void ClearPageWindowTilemaps(u8 a);
@@ -2747,7 +2747,7 @@ static void Summary_PrintNotEggInfo(void)
     strArray[0] = CHAR_SLASH;
     StringCopy(&strArray[1], &gSpeciesNames[summary->species2][0]);
     SummaryScreen_PrintTextOnWindow(PSS_LABEL_WINDOW_PORTRAIT_SPECIES, &strArray[0], 0, 1, 0, 1);
-    Summar_PrintGenderSymbol(mon, summary->species2);
+    Summary_PrintGenderSymbol(mon, summary->species2);
     PutWindowTilemap(PSS_LABEL_WINDOW_PORTRAIT_NICKNAME);
     PutWindowTilemap(PSS_LABEL_WINDOW_PORTRAIT_SPECIES);
 }
@@ -2761,7 +2761,7 @@ static void Summary_PrintEggInfo(void)
     ClearWindowTilemap(PSS_LABEL_WINDOW_PORTRAIT_SPECIES);
 }
 
-static void Summar_PrintGenderSymbol(struct Pokemon *mon, u16 species)
+static void Summary_PrintGenderSymbol(struct Pokemon *mon, u16 species)
 {
     if (species != SPECIES_NIDORAN_M && species != SPECIES_NIDORAN_F)
     {
