@@ -388,13 +388,13 @@ void ScriptHatchMon(void)
     AddHatchedMonToParty(gSpecialVar_0x8004);
 }
 
-static bool8 sub_807158C(struct DayCare *daycare, u8 daycareId)
+static bool8 _CheckDaycareMonReceivedMail(struct DayCare *daycare, u8 daycareId)
 {
-    u8 nick[0x20];
+    u8 nick[32];
     struct DaycareMon *daycareMon = &daycare->mons[daycareId];
 
     GetBoxMonNick(&daycareMon->mon, nick);
-    if (daycareMon->mail.message.itemId != 0
+    if (daycareMon->mail.message.itemId != ITEM_NONE
         && (StringCompareWithoutExtCtrlCodes(nick, daycareMon->mail.monName) != 0
             || StringCompareWithoutExtCtrlCodes(gSaveBlock2Ptr->playerName, daycareMon->mail.OT_name) != 0))
     {
@@ -406,9 +406,9 @@ static bool8 sub_807158C(struct DayCare *daycare, u8 daycareId)
     return FALSE;
 }
 
-bool8 sub_8071614(void)
+bool8 CheckDaycareMonReceivedMail(void)
 {
-    return sub_807158C(&gSaveBlock1Ptr->daycare, gSpecialVar_0x8004);
+    return _CheckDaycareMonReceivedMail(&gSaveBlock1Ptr->daycare, gSpecialVar_0x8004);
 }
 
 static u8 EggHatchCreateMonSprite(u8 a0, u8 switchID, u8 pokeID, u16* speciesLoc)
@@ -880,9 +880,9 @@ u8 GetEggStepsToSubtract(void)
     return 1;
 }
 
-u16 sub_80722E0(void)
+u16 CountPartyAliveNonEggMons(void)
 {
     u16 aliveNonEggMonsCount = CountStorageNonEggMons();
-    aliveNonEggMonsCount += CountPartyAliveNonEggMonsExcept(6);
+    aliveNonEggMonsCount += CountPartyAliveNonEggMonsExcept(PARTY_SIZE);
     return aliveNonEggMonsCount;
 }
