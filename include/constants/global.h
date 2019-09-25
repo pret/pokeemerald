@@ -51,6 +51,7 @@
 #define HALL_FACILITIES_COUNT 9 // 7 facilities for single mode + tower double mode + tower multi mode.
 
 #define TRAINER_ID_LENGTH 4
+#define PARTY_SIZE 6
 #define MAX_MON_MOVES 4
 
 // string lengths
@@ -62,6 +63,7 @@
 
 #define MALE 0
 #define FEMALE 1
+#define GENDER_COUNT 2
 
 #define OPTIONS_BUTTON_MODE_NORMAL 0
 #define OPTIONS_BUTTON_MODE_LR 1

@@ -1,7 +1,7 @@
 #ifndef GUARD_DAYCARE_H
 #define GUARD_DAYCARE_H
 
-#define EGG_HATCH_LEVEL 5
+#include "constants/daycare.h"
 
 u8 *GetMonNick(struct Pokemon *mon, u8 *dest);
 u8 *GetBoxMonNick(struct BoxPokemon *mon, u8 *dest);
