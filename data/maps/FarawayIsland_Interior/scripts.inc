@@ -62,7 +62,7 @@ FarawayIsland_Interior_EventScript_267DA2:: @ 8267DA2
 	waitmovement 0
 	applymovement 1, FarawayIsland_Interior_Movement_267DCE
 	waitmovement 0
-	moveobjectoffscreen 1
+	copyobjectxytoperm 1
 	setvar VAR_TEMP_1, 1
 	releaseall
 	end
@@ -122,7 +122,7 @@ FarawayIsland_Interior_EventScript_267DF2:: @ 8267DF2
 	waitmovement 0
 	setvar VAR_0x8004, 0
 	special sub_81D4A90
-	message FarawayIsland_Interior_Text_2C6DFF
+	message FarawayIsland_Interior_Text_Mew
 	waitse
 	playmoncry SPECIES_MEW, 2
 	compare VAR_FACING, 2

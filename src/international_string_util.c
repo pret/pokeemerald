@@ -45,7 +45,7 @@ int GetMaxWidthInMenuTable(const struct MenuAction *str, int arg1)
             var = stringWidth;
     }
 
-    return convert_pixel_width_to_tile_width(var);
+    return ConvertPixelWidthToTileWidth(var);
 }
 
 int sub_81DB3D8(const struct MenuAction *str, const u8* arg1, int arg2)
@@ -59,7 +59,7 @@ int sub_81DB3D8(const struct MenuAction *str, const u8* arg1, int arg2)
             var = stringWidth;
     }
 
-    return convert_pixel_width_to_tile_width(var);
+    return ConvertPixelWidthToTileWidth(var);
 }
 
 int Intl_GetListMenuWidth(const struct ListMenuTemplate *listMenu)

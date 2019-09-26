@@ -453,7 +453,7 @@ EWRAM_DATA static bool8 sInPartyMenu = 0;
 EWRAM_DATA static u8 sCurrentBoxOption = 0;
 EWRAM_DATA static u8 gUnknown_02039D0E = 0;
 EWRAM_DATA static u8 sWhichToReshow = 0;
-EWRAM_DATA static u8 gUnknown_02039D10 = 0;
+EWRAM_DATA static u8 sLastUsedBox = 0;
 EWRAM_DATA static u16 gUnknown_02039D12 = 0;
 EWRAM_DATA static struct Pokemon gUnknown_02039D14 = {0};
 EWRAM_DATA static s8 sBoxCursorArea = 0;
@@ -464,9 +464,6 @@ EWRAM_DATA static u8 sMovingMonOrigBoxPos = 0;
 EWRAM_DATA static bool8 sCanOnlyMove = 0;
 
 // This file's functions.
-#if !defined(NONMATCHING) && MODERN
-#define static
-#endif
 static void CreatePCMenu(u8 whichMenu, s16 *windowIdPtr);
 static void Cb2_EnterPSS(u8 boxOption);
 static u8 GetCurrentBoxOption(void);
@@ -2170,7 +2167,7 @@ static void Cb2_EnterPSS(u8 boxOption)
         gUnknown_02039D12 = 0;
         sPSSData->state = 0;
         sPSSData->taskId = CreateTask(Cb_InitPSS, 3);
-        gUnknown_02039D10 = StorageGetCurrentBox();
+        sLastUsedBox = StorageGetCurrentBox();
         SetMainCallback2(Cb2_PSS);
     }
 }
@@ -4369,10 +4366,10 @@ static bool8 DoShowPartyMenu(void)
 
 static void sub_80CABE0(void)
 {
-    if (gUnknown_02039D10 != StorageGetCurrentBox())
+    if (sLastUsedBox != StorageGetCurrentBox())
     {
-        FlagClear(FLAG_SYS_STORAGE_UNKNOWN_FLAG);
-        VarSet(VAR_STORAGE_UNKNOWN, StorageGetCurrentBox());
+        FlagClear(FLAG_SHOWN_BOX_WAS_FULL_MESSAGE);
+        VarSet(VAR_PC_BOX_TO_SEND_MON, StorageGetCurrentBox());
     }
 }
 

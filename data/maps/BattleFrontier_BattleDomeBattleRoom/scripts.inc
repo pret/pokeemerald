@@ -595,76 +595,76 @@ BattleFrontier_BattleDomeBattleRoom_EventScript_24C52F:: @ 824C52F
 	return
 
 BattleFrontier_BattleDomeBattleRoom_EventScript_24C530:: @ 824C530
-	createvobject EVENT_OBJ_GFX_SCIENTIST_1, 1, 3, 0, 3, 1
-	createvobject EVENT_OBJ_GFX_EXPERT_F, 4, 6, 0, 3, 1
-	createvobject EVENT_OBJ_GFX_NINJA_BOY, 6, 8, 0, 3, 1
-	createvobject EVENT_OBJ_GFX_LITTLE_GIRL, 9, 11, 0, 3, 1
-	createvobject EVENT_OBJ_GFX_SCIENTIST_1, 11, 13, 0, 3, 1
-	createvobject EVENT_OBJ_GFX_MAN_5, 13, 15, 0, 3, 1
-	createvobject EVENT_OBJ_GFX_BEAUTY, 19, 7, 1, 3, 1
-	createvobject EVENT_OBJ_GFX_WOMAN_5, 22, 11, 1, 3, 1
-	createvobject EVENT_OBJ_GFX_LITTLE_BOY, 25, 15, 1, 3, 1
-	createvobject EVENT_OBJ_GFX_YOUNGSTER, 26, 2, 2, 3, 1
-	createvobject EVENT_OBJ_GFX_SCHOOL_KID_M, 29, 5, 1, 3, 1
+	createvobject EVENT_OBJ_GFX_SCIENTIST_1, 1, 3, 0, 3, DIR_SOUTH
+	createvobject EVENT_OBJ_GFX_EXPERT_F, 4, 6, 0, 3, DIR_SOUTH
+	createvobject EVENT_OBJ_GFX_NINJA_BOY, 6, 8, 0, 3, DIR_SOUTH
+	createvobject EVENT_OBJ_GFX_LITTLE_GIRL, 9, 11, 0, 3, DIR_SOUTH
+	createvobject EVENT_OBJ_GFX_SCIENTIST_1, 11, 13, 0, 3, DIR_SOUTH
+	createvobject EVENT_OBJ_GFX_MAN_5, 13, 15, 0, 3, DIR_SOUTH
+	createvobject EVENT_OBJ_GFX_BEAUTY, 19, 7, 1, 3, DIR_SOUTH
+	createvobject EVENT_OBJ_GFX_WOMAN_5, 22, 11, 1, 3, DIR_SOUTH
+	createvobject EVENT_OBJ_GFX_LITTLE_BOY, 25, 15, 1, 3, DIR_SOUTH
+	createvobject EVENT_OBJ_GFX_YOUNGSTER, 26, 2, 2, 3, DIR_SOUTH
+	createvobject EVENT_OBJ_GFX_SCHOOL_KID_M, 29, 5, 1, 3, DIR_SOUTH
 	return
 
 BattleFrontier_BattleDomeBattleRoom_EventScript_24C594:: @ 824C594
-	createvobject EVENT_OBJ_GFX_SCIENTIST_1, 1, 3, 0, 3, 1
-	createvobject EVENT_OBJ_GFX_EXPERT_F, 4, 6, 0, 3, 1
-	createvobject EVENT_OBJ_GFX_NINJA_BOY, 6, 8, 0, 3, 1
-	createvobject EVENT_OBJ_GFX_WOMAN_2, 7, 9, 0, 3, 1
-	createvobject EVENT_OBJ_GFX_LITTLE_GIRL, 9, 11, 0, 3, 1
-	createvobject EVENT_OBJ_GFX_LASS, 10, 12, 0, 3, 1
-	createvobject EVENT_OBJ_GFX_SCIENTIST_1, 11, 13, 0, 3, 1
-	createvobject EVENT_OBJ_GFX_MAN_5, 13, 15, 0, 3, 1
-	createvobject EVENT_OBJ_GFX_GENTLEMAN, 15, 2, 1, 3, 1
-	createvobject EVENT_OBJ_GFX_NINJA_BOY, 16, 3, 1, 3, 1
-	createvobject EVENT_OBJ_GFX_WOMAN_2, 17, 4, 1, 3, 1
-	createvobject EVENT_OBJ_GFX_BEAUTY, 19, 7, 1, 3, 1
-	createvobject EVENT_OBJ_GFX_EXPERT_F, 20, 9, 1, 3, 1
-	createvobject EVENT_OBJ_GFX_WOMAN_5, 22, 11, 1, 3, 1
-	createvobject EVENT_OBJ_GFX_SCIENTIST_1, 23, 13, 1, 3, 1
-	createvobject EVENT_OBJ_GFX_LITTLE_BOY, 25, 15, 1, 3, 1
-	createvobject EVENT_OBJ_GFX_YOUNGSTER, 26, 2, 2, 3, 1
-	createvobject EVENT_OBJ_GFX_HEX_MANIAC, 28, 5, 2, 3, 1
-	createvobject EVENT_OBJ_GFX_SCHOOL_KID_M, 29, 5, 1, 3, 1
-	createvobject EVENT_OBJ_GFX_MART_EMPLOYEE, 30, 6, 2, 3, 1
+	createvobject EVENT_OBJ_GFX_SCIENTIST_1, 1, 3, 0, 3, DIR_SOUTH
+	createvobject EVENT_OBJ_GFX_EXPERT_F, 4, 6, 0, 3, DIR_SOUTH
+	createvobject EVENT_OBJ_GFX_NINJA_BOY, 6, 8, 0, 3, DIR_SOUTH
+	createvobject EVENT_OBJ_GFX_WOMAN_2, 7, 9, 0, 3, DIR_SOUTH
+	createvobject EVENT_OBJ_GFX_LITTLE_GIRL, 9, 11, 0, 3, DIR_SOUTH
+	createvobject EVENT_OBJ_GFX_LASS, 10, 12, 0, 3, DIR_SOUTH
+	createvobject EVENT_OBJ_GFX_SCIENTIST_1, 11, 13, 0, 3, DIR_SOUTH
+	createvobject EVENT_OBJ_GFX_MAN_5, 13, 15, 0, 3, DIR_SOUTH
+	createvobject EVENT_OBJ_GFX_GENTLEMAN, 15, 2, 1, 3, DIR_SOUTH
+	createvobject EVENT_OBJ_GFX_NINJA_BOY, 16, 3, 1, 3, DIR_SOUTH
+	createvobject EVENT_OBJ_GFX_WOMAN_2, 17, 4, 1, 3, DIR_SOUTH
+	createvobject EVENT_OBJ_GFX_BEAUTY, 19, 7, 1, 3, DIR_SOUTH
+	createvobject EVENT_OBJ_GFX_EXPERT_F, 20, 9, 1, 3, DIR_SOUTH
+	createvobject EVENT_OBJ_GFX_WOMAN_5, 22, 11, 1, 3, DIR_SOUTH
+	createvobject EVENT_OBJ_GFX_SCIENTIST_1, 23, 13, 1, 3, DIR_SOUTH
+	createvobject EVENT_OBJ_GFX_LITTLE_BOY, 25, 15, 1, 3, DIR_SOUTH
+	createvobject EVENT_OBJ_GFX_YOUNGSTER, 26, 2, 2, 3, DIR_SOUTH
+	createvobject EVENT_OBJ_GFX_HEX_MANIAC, 28, 5, 2, 3, DIR_SOUTH
+	createvobject EVENT_OBJ_GFX_SCHOOL_KID_M, 29, 5, 1, 3, DIR_SOUTH
+	createvobject EVENT_OBJ_GFX_MART_EMPLOYEE, 30, 6, 2, 3, DIR_SOUTH
 	createvobject EVENT_OBJ_GFX_WOMAN_5, 31, 8, 2, 3, 1
 	return
 
 BattleFrontier_BattleDomeBattleRoom_EventScript_24C652:: @ 824C652
-	createvobject EVENT_OBJ_GFX_NINJA_BOY, 0, 2, 0, 3, 1
-	createvobject EVENT_OBJ_GFX_SCIENTIST_1, 1, 3, 0, 3, 1
-	createvobject EVENT_OBJ_GFX_BEAUTY, 2, 15, 0, 3, 1
-	createvobject EVENT_OBJ_GFX_MAN_5, 3, 5, 0, 3, 1
-	createvobject EVENT_OBJ_GFX_EXPERT_F, 4, 6, 0, 3, 1
-	createvobject EVENT_OBJ_GFX_SCIENTIST_1, 5, 7, 0, 3, 1
-	createvobject EVENT_OBJ_GFX_NINJA_BOY, 6, 8, 0, 3, 1
-	createvobject EVENT_OBJ_GFX_WOMAN_2, 7, 9, 0, 3, 1
-	createvobject EVENT_OBJ_GFX_WOMAN_3, 8, 10, 0, 3, 1
-	createvobject EVENT_OBJ_GFX_LITTLE_GIRL, 9, 11, 0, 3, 1
-	createvobject EVENT_OBJ_GFX_LASS, 10, 12, 0, 3, 1
-	createvobject EVENT_OBJ_GFX_SCIENTIST_1, 11, 13, 0, 3, 1
-	createvobject EVENT_OBJ_GFX_BEAUTY, 12, 14, 0, 3, 1
-	createvobject EVENT_OBJ_GFX_MAN_5, 13, 15, 2, 3, 1
-	createvobject EVENT_OBJ_GFX_HIKER, 14, 12, 2, 3, 1
-	createvobject EVENT_OBJ_GFX_GENTLEMAN, 15, 2, 1, 3, 1
-	createvobject EVENT_OBJ_GFX_NINJA_BOY, 16, 3, 1, 3, 1
-	createvobject EVENT_OBJ_GFX_WOMAN_2, 17, 4, 1, 3, 1
-	createvobject EVENT_OBJ_GFX_WOMAN_3, 18, 6, 1, 3, 1
-	createvobject EVENT_OBJ_GFX_BEAUTY, 19, 7, 1, 3, 1
-	createvobject EVENT_OBJ_GFX_EXPERT_F, 20, 9, 1, 3, 1
-	createvobject EVENT_OBJ_GFX_MAN_2, 21, 10, 1, 3, 1
-	createvobject EVENT_OBJ_GFX_WOMAN_5, 22, 11, 1, 3, 1
-	createvobject EVENT_OBJ_GFX_SCIENTIST_1, 23, 13, 1, 3, 1
-	createvobject EVENT_OBJ_GFX_GENTLEMAN, 24, 14, 1, 3, 1
-	createvobject EVENT_OBJ_GFX_LITTLE_BOY, 25, 15, 1, 3, 1
-	createvobject EVENT_OBJ_GFX_YOUNGSTER, 26, 2, 2, 3, 1
-	createvobject EVENT_OBJ_GFX_FAT_MAN, 27, 3, 2, 3, 1
-	createvobject EVENT_OBJ_GFX_HEX_MANIAC, 28, 5, 2, 3, 1
-	createvobject EVENT_OBJ_GFX_SCHOOL_KID_M, 29, 5, 1, 3, 1
-	createvobject EVENT_OBJ_GFX_MART_EMPLOYEE, 30, 6, 2, 3, 1
-	createvobject EVENT_OBJ_GFX_WOMAN_5, 31, 8, 2, 3, 1
+	createvobject EVENT_OBJ_GFX_NINJA_BOY, 0, 2, 0, 3, DIR_SOUTH
+	createvobject EVENT_OBJ_GFX_SCIENTIST_1, 1, 3, 0, 3, DIR_SOUTH
+	createvobject EVENT_OBJ_GFX_BEAUTY, 2, 15, 0, 3, DIR_SOUTH
+	createvobject EVENT_OBJ_GFX_MAN_5, 3, 5, 0, 3, DIR_SOUTH
+	createvobject EVENT_OBJ_GFX_EXPERT_F, 4, 6, 0, 3, DIR_SOUTH
+	createvobject EVENT_OBJ_GFX_SCIENTIST_1, 5, 7, 0, 3, DIR_SOUTH
+	createvobject EVENT_OBJ_GFX_NINJA_BOY, 6, 8, 0, 3, DIR_SOUTH
+	createvobject EVENT_OBJ_GFX_WOMAN_2, 7, 9, 0, 3, DIR_SOUTH
+	createvobject EVENT_OBJ_GFX_WOMAN_3, 8, 10, 0, 3, DIR_SOUTH
+	createvobject EVENT_OBJ_GFX_LITTLE_GIRL, 9, 11, 0, 3, DIR_SOUTH
+	createvobject EVENT_OBJ_GFX_LASS, 10, 12, 0, 3, DIR_SOUTH
+	createvobject EVENT_OBJ_GFX_SCIENTIST_1, 11, 13, 0, 3, DIR_SOUTH
+	createvobject EVENT_OBJ_GFX_BEAUTY, 12, 14, 0, 3, DIR_SOUTH
+	createvobject EVENT_OBJ_GFX_MAN_5, 13, 15, 2, 3, DIR_SOUTH
+	createvobject EVENT_OBJ_GFX_HIKER, 14, 12, 2, 3, DIR_SOUTH
+	createvobject EVENT_OBJ_GFX_GENTLEMAN, 15, 2, 1, 3, DIR_SOUTH
+	createvobject EVENT_OBJ_GFX_NINJA_BOY, 16, 3, 1, 3, DIR_SOUTH
+	createvobject EVENT_OBJ_GFX_WOMAN_2, 17, 4, 1, 3, DIR_SOUTH
+	createvobject EVENT_OBJ_GFX_WOMAN_3, 18, 6, 1, 3, DIR_SOUTH
+	createvobject EVENT_OBJ_GFX_BEAUTY, 19, 7, 1, 3, DIR_SOUTH
+	createvobject EVENT_OBJ_GFX_EXPERT_F, 20, 9, 1, 3, DIR_SOUTH
+	createvobject EVENT_OBJ_GFX_MAN_2, 21, 10, 1, 3, DIR_SOUTH
+	createvobject EVENT_OBJ_GFX_WOMAN_5, 22, 11, 1, 3, DIR_SOUTH
+	createvobject EVENT_OBJ_GFX_SCIENTIST_1, 23, 13, 1, 3, DIR_SOUTH
+	createvobject EVENT_OBJ_GFX_GENTLEMAN, 24, 14, 1, 3, DIR_SOUTH
+	createvobject EVENT_OBJ_GFX_LITTLE_BOY, 25, 15, 1, 3, DIR_SOUTH
+	createvobject EVENT_OBJ_GFX_YOUNGSTER, 26, 2, 2, 3, DIR_SOUTH
+	createvobject EVENT_OBJ_GFX_FAT_MAN, 27, 3, 2, 3, DIR_SOUTH
+	createvobject EVENT_OBJ_GFX_HEX_MANIAC, 28, 5, 2, 3, DIR_SOUTH
+	createvobject EVENT_OBJ_GFX_SCHOOL_KID_M, 29, 5, 1, 3, DIR_SOUTH
+	createvobject EVENT_OBJ_GFX_MART_EMPLOYEE, 30, 6, 2, 3, DIR_SOUTH
+	createvobject EVENT_OBJ_GFX_WOMAN_5, 31, 8, 2, 3, DIR_SOUTH
 	return
 
 BattleFrontier_BattleArenaBattleRoom_Movement_24C773: @ 824C773
@@ -880,71 +880,71 @@ BattleFrontier_BattleDomeBattleRoom_Movement_24C82B: @ 824C82B
 	step_end
 
 BattleFrontier_BattleDomeBattleRoom_EventScript_24C82E:: @ 824C82E
-	turnvobject 0, 4
-	turnvobject 2, 4
-	turnvobject 4, 4
-	turnvobject 6, 4
-	turnvobject 8, 4
-	turnvobject 10, 3
-	turnvobject 12, 3
-	turnvobject 14, 3
-	turnvobject 16, 3
-	turnvobject 18, 3
-	turnvobject 20, 4
-	turnvobject 22, 4
-	turnvobject 24, 4
-	turnvobject 26, 4
-	turnvobject 28, 4
-	turnvobject 30, 4
+	turnvobject 0, DIR_EAST
+	turnvobject 2, DIR_EAST
+	turnvobject 4, DIR_EAST
+	turnvobject 6, DIR_EAST
+	turnvobject 8, DIR_EAST
+	turnvobject 10, DIR_WEST
+	turnvobject 12, DIR_WEST
+	turnvobject 14, DIR_WEST
+	turnvobject 16, DIR_WEST
+	turnvobject 18, DIR_WEST
+	turnvobject 20, DIR_EAST
+	turnvobject 22, DIR_EAST
+	turnvobject 24, DIR_EAST
+	turnvobject 26, DIR_EAST
+	turnvobject 28, DIR_EAST
+	turnvobject 30, DIR_EAST
 	delay 20
-	turnvobject 0, 1
-	turnvobject 2, 1
-	turnvobject 4, 1
-	turnvobject 6, 1
-	turnvobject 8, 1
-	turnvobject 10, 1
-	turnvobject 12, 1
-	turnvobject 14, 1
-	turnvobject 16, 1
-	turnvobject 18, 1
-	turnvobject 20, 1
-	turnvobject 22, 1
-	turnvobject 24, 1
-	turnvobject 26, 1
-	turnvobject 28, 1
-	turnvobject 30, 1
+	turnvobject 0, DIR_SOUTH
+	turnvobject 2, DIR_SOUTH
+	turnvobject 4, DIR_SOUTH
+	turnvobject 6, DIR_SOUTH
+	turnvobject 8, DIR_SOUTH
+	turnvobject 10, DIR_SOUTH
+	turnvobject 12, DIR_SOUTH
+	turnvobject 14, DIR_SOUTH
+	turnvobject 16, DIR_SOUTH
+	turnvobject 18, DIR_SOUTH
+	turnvobject 20, DIR_SOUTH
+	turnvobject 22, DIR_SOUTH
+	turnvobject 24, DIR_SOUTH
+	turnvobject 26, DIR_SOUTH
+	turnvobject 28, DIR_SOUTH
+	turnvobject 30, DIR_SOUTH
 	delay 20
-	turnvobject 1, 4
-	turnvobject 3, 4
-	turnvobject 5, 4
-	turnvobject 7, 4
-	turnvobject 9, 4
-	turnvobject 11, 3
-	turnvobject 13, 3
-	turnvobject 15, 3
-	turnvobject 17, 3
-	turnvobject 19, 3
-	turnvobject 21, 4
-	turnvobject 23, 4
-	turnvobject 25, 4
-	turnvobject 27, 3
-	turnvobject 31, 3
+	turnvobject 1, DIR_EAST
+	turnvobject 3, DIR_EAST
+	turnvobject 5, DIR_EAST
+	turnvobject 7, DIR_EAST
+	turnvobject 9, DIR_EAST
+	turnvobject 11, DIR_WEST
+	turnvobject 13, DIR_WEST
+	turnvobject 15, DIR_WEST
+	turnvobject 17, DIR_WEST
+	turnvobject 19, DIR_WEST
+	turnvobject 21, DIR_EAST
+	turnvobject 23, DIR_EAST
+	turnvobject 25, DIR_EAST
+	turnvobject 27, DIR_WEST
+	turnvobject 31, DIR_WEST
 	delay 20
-	turnvobject 1, 1
-	turnvobject 3, 1
-	turnvobject 5, 1
-	turnvobject 7, 1
-	turnvobject 9, 1
-	turnvobject 11, 1
-	turnvobject 13, 1
-	turnvobject 15, 1
-	turnvobject 17, 1
-	turnvobject 19, 1
-	turnvobject 21, 1
-	turnvobject 23, 1
-	turnvobject 25, 1
-	turnvobject 27, 1
-	turnvobject 31, 1
+	turnvobject 1, DIR_SOUTH
+	turnvobject 3, DIR_SOUTH
+	turnvobject 5, DIR_SOUTH
+	turnvobject 7, DIR_SOUTH
+	turnvobject 9, DIR_SOUTH
+	turnvobject 11, DIR_SOUTH
+	turnvobject 13, DIR_SOUTH
+	turnvobject 15, DIR_SOUTH
+	turnvobject 17, DIR_SOUTH
+	turnvobject 19, DIR_SOUTH
+	turnvobject 21, DIR_SOUTH
+	turnvobject 23, DIR_SOUTH
+	turnvobject 25, DIR_SOUTH
+	turnvobject 27, DIR_SOUTH
+	turnvobject 31, DIR_SOUTH
 	delay 20
 	return
 

@@ -19,10 +19,10 @@ FarawayIsland_Entrance_EventScript_267C9D:: @ 8267C9D
 FarawayIsland_Entrance_EventScript_267CA2:: @ 8267CA2
 	lock
 	faceplayer
-	msgbox FarawayIsland_Entrance_Text_2C6B42, MSGBOX_YESNO
+	msgbox FarawayIsland_Entrance_Text_SailorReturn, MSGBOX_YESNO
 	compare VAR_RESULT, 0
 	goto_if_eq FarawayIsland_Entrance_EventScript_267CE7
-	msgbox FarawayIsland_Entrance_Text_2A6A5D, MSGBOX_DEFAULT
+	msgbox EventTicket_Text_SailHome, MSGBOX_DEFAULT
 	closemessage
 	applymovement VAR_LAST_TALKED, Common_Movement_WalkInPlaceDown
 	waitmovement 0
@@ -36,11 +36,11 @@ FarawayIsland_Entrance_EventScript_267CA2:: @ 8267CA2
 	end
 
 FarawayIsland_Entrance_EventScript_267CE7:: @ 8267CE7
-	msgbox FarawayIsland_Entrance_Text_2A6A82, MSGBOX_DEFAULT
+	msgbox EventTicket_Text_AsYouLike, MSGBOX_DEFAULT
 	release
 	end
 
 FarawayIsland_Entrance_EventScript_267CF1:: @ 8267CF1
-	msgbox FarawayIsland_Entrance_Text_2C6D5A, MSGBOX_SIGN
+	msgbox FarawayIsland_Entrance_Text_Sign, MSGBOX_SIGN
 	end
 

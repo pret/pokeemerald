@@ -1479,7 +1479,7 @@ void AnimSonicBoomProjectile(struct Sprite *sprite)
     {
         gBattleAnimArgs[2] = -gBattleAnimArgs[2];
     }
-    else if (GetBattlerSide(gBattleAnimAttacker) != 0)
+    else if (GetBattlerSide(gBattleAnimAttacker) != B_SIDE_PLAYER)
     {
         gBattleAnimArgs[2] = -gBattleAnimArgs[2];
         gBattleAnimArgs[1] = -gBattleAnimArgs[1];
@@ -1609,10 +1609,10 @@ static void sub_8103C0C(u8 taskId)
         switch (gTasks[taskId].data[4])
         {
         case 1:
-            sprite->oam.matrixNum |= 24;
+            sprite->oam.matrixNum |= (ST_OAM_HFLIP | ST_OAM_VFLIP);
             break;
         case 2:
-            sprite->oam.matrixNum = 8;
+            sprite->oam.matrixNum = ST_OAM_HFLIP;
             break;
         }
 
@@ -1646,7 +1646,7 @@ void sub_8103CF0(u8 taskId)
     }
     else
     {
-        if ((gBattlerPositions[gBattleAnimTarget] & 1) == 0)
+        if ((gBattlerPositions[gBattleAnimTarget] & BIT_SIDE) == B_SIDE_PLAYER)
         {
             gTasks[taskId].data[4] = 1;
             gBattleAnimArgs[0] = -gBattleAnimArgs[0];

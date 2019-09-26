@@ -1681,29 +1681,22 @@ static void Cmd_adjustnormaldamage(void)
         RecordItemEffectBattle(gBattlerTarget, holdEffect);
         gSpecialStatuses[gBattlerTarget].focusBanded = 1;
     }
-    if (gBattleMons[gBattlerTarget].status2 & STATUS2_SUBSTITUTE)
-        goto END;
-    if (gBattleMoves[gCurrentMove].effect != EFFECT_FALSE_SWIPE && !gProtectStructs[gBattlerTarget].endured
-     && !gSpecialStatuses[gBattlerTarget].focusBanded)
-        goto END;
-
-    if (gBattleMons[gBattlerTarget].hp > gBattleMoveDamage)
-        goto END;
-
-    gBattleMoveDamage = gBattleMons[gBattlerTarget].hp - 1;
-
-    if (gProtectStructs[gBattlerTarget].endured)
+    if (!(gBattleMons[gBattlerTarget].status2 & STATUS2_SUBSTITUTE)
+     && (gBattleMoves[gCurrentMove].effect == EFFECT_FALSE_SWIPE || gProtectStructs[gBattlerTarget].endured || gSpecialStatuses[gBattlerTarget].focusBanded)
+     && gBattleMons[gBattlerTarget].hp <= gBattleMoveDamage)
     {
-        gMoveResultFlags |= MOVE_RESULT_FOE_ENDURED;
+        gBattleMoveDamage = gBattleMons[gBattlerTarget].hp - 1;
+        if (gProtectStructs[gBattlerTarget].endured)
+        {
+            gMoveResultFlags |= MOVE_RESULT_FOE_ENDURED;
+        }
+        else if (gSpecialStatuses[gBattlerTarget].focusBanded)
+        {
+            gMoveResultFlags |= MOVE_RESULT_FOE_HUNG_ON;
+            gLastUsedItem = gBattleMons[gBattlerTarget].item;
+        }
     }
-    else if (gSpecialStatuses[gBattlerTarget].focusBanded)
-    {
-        gMoveResultFlags |= MOVE_RESULT_FOE_HUNG_ON;
-        gLastUsedItem = gBattleMons[gBattlerTarget].item;
-    }
-
-    END:
-        gBattlescriptCurrInstr++;
+    gBattlescriptCurrInstr++;
 }
 
 static void Cmd_adjustnormaldamage2(void) // The same as adjustnormaldamage except it doesn't check for false swipe move effect.
@@ -1730,27 +1723,22 @@ static void Cmd_adjustnormaldamage2(void) // The same as adjustnormaldamage exce
         RecordItemEffectBattle(gBattlerTarget, holdEffect);
         gSpecialStatuses[gBattlerTarget].focusBanded = 1;
     }
-    if (gBattleMons[gBattlerTarget].status2 & STATUS2_SUBSTITUTE)
-        goto END;
-    if (!gProtectStructs[gBattlerTarget].endured && !gSpecialStatuses[gBattlerTarget].focusBanded)
-        goto END;
-    if (gBattleMons[gBattlerTarget].hp > gBattleMoveDamage)
-        goto END;
-
-    gBattleMoveDamage = gBattleMons[gBattlerTarget].hp - 1;
-
-    if (gProtectStructs[gBattlerTarget].endured)
+    if (!(gBattleMons[gBattlerTarget].status2 & STATUS2_SUBSTITUTE)
+     && (gProtectStructs[gBattlerTarget].endured || gSpecialStatuses[gBattlerTarget].focusBanded)
+     && gBattleMons[gBattlerTarget].hp <= gBattleMoveDamage)
     {
-        gMoveResultFlags |= MOVE_RESULT_FOE_ENDURED;
+        gBattleMoveDamage = gBattleMons[gBattlerTarget].hp - 1;
+        if (gProtectStructs[gBattlerTarget].endured)
+        {
+            gMoveResultFlags |= MOVE_RESULT_FOE_ENDURED;
+        }
+        else if (gSpecialStatuses[gBattlerTarget].focusBanded)
+        {
+            gMoveResultFlags |= MOVE_RESULT_FOE_HUNG_ON;
+            gLastUsedItem = gBattleMons[gBattlerTarget].item;
+        }
     }
-    else if (gSpecialStatuses[gBattlerTarget].focusBanded)
-    {
-        gMoveResultFlags |= MOVE_RESULT_FOE_HUNG_ON;
-        gLastUsedItem = gBattleMons[gBattlerTarget].item;
-    }
-
-    END:
-        gBattlescriptCurrInstr++;
+    gBattlescriptCurrInstr++;
 }
 
 static void Cmd_attackanimation(void)
@@ -4564,27 +4552,26 @@ static void Cmd_moveend(void)
             gBattleScripting.moveendState++;
             break;
         case MOVEEND_CHOICE_MOVE: // update choice band move
-            if (!(gHitMarker & HITMARKER_OBEYS) || holdEffectAtk != HOLD_EFFECT_CHOICE_BAND
-                || gChosenMove == MOVE_STRUGGLE || (*choicedMoveAtk != 0 && *choicedMoveAtk != 0xFFFF))
-                    goto LOOP;
-            if (gChosenMove == MOVE_BATON_PASS && !(gMoveResultFlags & MOVE_RESULT_FAILED))
+            if (gHitMarker & HITMARKER_OBEYS
+             && holdEffectAtk == HOLD_EFFECT_CHOICE_BAND
+             && gChosenMove != MOVE_STRUGGLE 
+             && (*choicedMoveAtk == 0 || *choicedMoveAtk == 0xFFFF))
             {
-                gBattleScripting.moveendState++;
-                break;
-            }
-            *choicedMoveAtk = gChosenMove;
-            LOOP:
-            {
-                for (i = 0; i < MAX_MON_MOVES; i++)
+                if (gChosenMove == MOVE_BATON_PASS && !(gMoveResultFlags & MOVE_RESULT_FAILED))
                 {
-                    if (gBattleMons[gBattlerAttacker].moves[i] == *choicedMoveAtk)
-                        break;
+                    ++gBattleScripting.moveendState;
+                    break;
                 }
-                if (i == MAX_MON_MOVES)
-                    *choicedMoveAtk = 0;
-
-                gBattleScripting.moveendState++;
+                *choicedMoveAtk = gChosenMove;
             }
+            for (i = 0; i < MAX_MON_MOVES; ++i)
+            {
+                if (gBattleMons[gBattlerAttacker].moves[i] == *choicedMoveAtk)
+                    break;
+            }
+            if (i == MAX_MON_MOVES)
+                *choicedMoveAtk = 0;
+            ++gBattleScripting.moveendState;
             break;
         case MOVEEND_CHANGED_ITEMS: // changed held items
             for (i = 0; i < gBattlersCount; i++)
@@ -6152,29 +6139,22 @@ static void Cmd_adjustsetdamage(void) // The same as adjustnormaldamage, except 
         RecordItemEffectBattle(gBattlerTarget, holdEffect);
         gSpecialStatuses[gBattlerTarget].focusBanded = 1;
     }
-    if (gBattleMons[gBattlerTarget].status2 & STATUS2_SUBSTITUTE)
-        goto END;
-    if (gBattleMoves[gCurrentMove].effect != EFFECT_FALSE_SWIPE && !gProtectStructs[gBattlerTarget].endured
-     && !gSpecialStatuses[gBattlerTarget].focusBanded)
-        goto END;
-
-    if (gBattleMons[gBattlerTarget].hp > gBattleMoveDamage)
-        goto END;
-
-    gBattleMoveDamage = gBattleMons[gBattlerTarget].hp - 1;
-
-    if (gProtectStructs[gBattlerTarget].endured)
+    if (!(gBattleMons[gBattlerTarget].status2 & STATUS2_SUBSTITUTE)
+     && (gBattleMoves[gCurrentMove].effect == EFFECT_FALSE_SWIPE || gProtectStructs[gBattlerTarget].endured || gSpecialStatuses[gBattlerTarget].focusBanded)
+     && gBattleMons[gBattlerTarget].hp <= gBattleMoveDamage)
     {
-        gMoveResultFlags |= MOVE_RESULT_FOE_ENDURED;
+        gBattleMoveDamage = gBattleMons[gBattlerTarget].hp - 1;
+        if (gProtectStructs[gBattlerTarget].endured)
+        {
+            gMoveResultFlags |= MOVE_RESULT_FOE_ENDURED;
+        }
+        else if (gSpecialStatuses[gBattlerTarget].focusBanded)
+        {
+            gMoveResultFlags |= MOVE_RESULT_FOE_HUNG_ON;
+            gLastUsedItem = gBattleMons[gBattlerTarget].item;
+        }
     }
-    else if (gSpecialStatuses[gBattlerTarget].focusBanded)
-    {
-        gMoveResultFlags |= MOVE_RESULT_FOE_HUNG_ON;
-        gLastUsedItem = gBattleMons[gBattlerTarget].item;
-    }
-
-    END:
-        gBattlescriptCurrInstr++;
+    gBattlescriptCurrInstr++;
 }
 
 static void Cmd_removeitem(void)
@@ -10184,7 +10164,7 @@ static void Cmd_handleballthrow(void)
             gBattlescriptCurrInstr = BattleScript_SuccessBallThrow;
             SetMonData(&gEnemyParty[gBattlerPartyIndexes[gBattlerTarget]], MON_DATA_POKEBALL, &gLastUsedItem);
 
-            if (CalculatePlayerPartyCount() == 6)
+            if (CalculatePlayerPartyCount() == PARTY_SIZE)
                 gBattleCommunication[MULTISTRING_CHOOSER] = 0;
             else
                 gBattleCommunication[MULTISTRING_CHOOSER] = 1;
@@ -10196,7 +10176,7 @@ static void Cmd_handleballthrow(void)
             odds = Sqrt(Sqrt(16711680 / odds));
             odds = 1048560 / odds;
 
-            for (shakes = 0; shakes < 4 && Random() < odds; shakes++);
+            for (shakes = 0; shakes < BALL_3_SHAKES_SUCCESS && Random() < odds; shakes++);
 
             if (gLastUsedItem == ITEM_MASTER_BALL)
                 shakes = BALL_3_SHAKES_SUCCESS; // why calculate the shakes before that check?
@@ -10209,7 +10189,7 @@ static void Cmd_handleballthrow(void)
                 gBattlescriptCurrInstr = BattleScript_SuccessBallThrow;
                 SetMonData(&gEnemyParty[gBattlerPartyIndexes[gBattlerTarget]], MON_DATA_POKEBALL, &gLastUsedItem);
 
-                if (CalculatePlayerPartyCount() == 6)
+                if (CalculatePlayerPartyCount() == PARTY_SIZE)
                     gBattleCommunication[MULTISTRING_CHOOSER] = 0;
                 else
                     gBattleCommunication[MULTISTRING_CHOOSER] = 1;
@@ -10227,17 +10207,17 @@ static void Cmd_givecaughtmon(void)
 {
     if (GiveMonToPlayer(&gEnemyParty[gBattlerPartyIndexes[gBattlerAttacker ^ BIT_SIDE]]) != MON_GIVEN_TO_PARTY)
     {
-        if (!sub_813B21C())
+        if (!ShouldShowBoxWasFullMessage())
         {
             gBattleCommunication[MULTISTRING_CHOOSER] = 0;
-            StringCopy(gStringVar1, GetBoxNamePtr(VarGet(VAR_STORAGE_UNKNOWN)));
+            StringCopy(gStringVar1, GetBoxNamePtr(VarGet(VAR_PC_BOX_TO_SEND_MON)));
             GetMonData(&gEnemyParty[gBattlerPartyIndexes[gBattlerAttacker ^ BIT_SIDE]], MON_DATA_NICKNAME, gStringVar2);
         }
         else
         {
-            StringCopy(gStringVar1, GetBoxNamePtr(VarGet(VAR_STORAGE_UNKNOWN)));
+            StringCopy(gStringVar1, GetBoxNamePtr(VarGet(VAR_PC_BOX_TO_SEND_MON))); // box the mon was sent to
             GetMonData(&gEnemyParty[gBattlerPartyIndexes[gBattlerAttacker ^ BIT_SIDE]], MON_DATA_NICKNAME, gStringVar2);
-            StringCopy(gStringVar3, GetBoxNamePtr(get_unknown_box_id()));
+            StringCopy(gStringVar3, GetBoxNamePtr(GetPCBoxToSendMon())); //box the mon was going to be sent to
             gBattleCommunication[MULTISTRING_CHOOSER] = 2;
         }
 

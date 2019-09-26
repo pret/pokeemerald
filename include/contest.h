@@ -2,10 +2,7 @@
 #define GUARD_CONTEST_H
 
 #include "palette.h"
-
-#define CONTESTANT_COUNT 4
-#define APPLAUSE_METER_SIZE 5
-#define CONTEST_TURN_COUNT 5
+#include "constants/contest.h"
 
 enum
 {
@@ -16,20 +13,6 @@ enum
     CONTEST_DEBUG_MODE_PRINT_UNK_C,
     // Prints the ContestResourcesField1C::unk_D value as a bitstring for each contestant.
     CONTEST_DEBUG_MODE_PRINT_UNK_D
-};
-
-#define LINK_CONTEST_FLAG_IS_LINK       (1 << 0)
-#define LINK_CONTEST_FLAG_IS_WIRELESS   (1 << 1)
-#define LINK_CONTEST_FLAG_HAS_RS_PLAYER (1 << 2)
-
-enum
-{
-    CONTEST_CATEGORY_COOL,
-    CONTEST_CATEGORY_BEAUTY,
-    CONTEST_CATEGORY_CUTE,
-    CONTEST_CATEGORY_SMART,
-    CONTEST_CATEGORY_TOUGH,
-    CONTEST_CATEGORIES_COUNT,
 };
 
 enum
@@ -244,7 +227,7 @@ struct ContestPokemon
     u8 aiPool_Cute:1; // 0x10
     u8 aiPool_Smart:1; // 0x20
     u8 aiPool_Tough:1; // 0x40
-    /*0x1E*/ u16 moves[4]; // moves
+    /*0x1E*/ u16 moves[MAX_MON_MOVES]; // moves
     /*0x26*/ u8 cool; // cool
     /*0x27*/ u8 beauty; // beauty
     /*0x28*/ u8 cute; // cute

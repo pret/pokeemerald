@@ -508,7 +508,7 @@ void AnimDirtParticleAcrossScreen(struct Sprite *sprite)
             sprite->pos1.x = 304;
             gBattleAnimArgs[1] = -gBattleAnimArgs[1];
             sprite->data[5] = 1;
-            sprite->oam.matrixNum = 8;
+            sprite->oam.matrixNum = ST_OAM_HFLIP;
         }
         else
         {

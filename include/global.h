@@ -63,8 +63,6 @@
 // Converts a Q24.8 fixed-point format number to a regular integer
 #define Q_24_8_TO_INT(n) ((int)((n) >> 8))
 
-#define PARTY_SIZE 6
-
 #define POKEMON_SLOTS_NUMBER 412
 
 #define min(a, b) ((a) < (b) ? (a) : (b))
@@ -212,7 +210,7 @@ struct BerryCrush
 struct ApprenticeMon
 {
     u16 species;
-    u16 moves[4];
+    u16 moves[MAX_MON_MOVES];
     u16 item;
 };
 
@@ -224,7 +222,7 @@ struct Apprentice
     u8 number;
     struct ApprenticeMon party[3];
     u16 easyChatWords[6];
-    u8 playerId[4];
+    u8 playerId[TRAINER_ID_LENGTH];
     u8 playerName[PLAYER_NAME_LENGTH];
     u8 language;
     u32 checksum;
@@ -234,7 +232,7 @@ struct BattleTowerPokemon
 {
     u16 species;
     u16 heldItem;
-    u16 moves[4];
+    u16 moves[MAX_MON_MOVES];
     u8 level;
     u8 ppBonuses;
     u8 hpEV;
@@ -257,13 +255,15 @@ struct BattleTowerPokemon
     u8 friendship;
 };
 
+#define NULL_BATTLE_TOWER_POKEMON { .nickname = __("$$$$$$$$$$$") }
+
 struct EmeraldBattleTowerRecord
 {
     /*0x00*/ u8 lvlMode; // 0 = level 50, 1 = level 100
     /*0x01*/ u8 facilityClass;
     /*0x02*/ u16 winStreak;
     /*0x04*/ u8 name[PLAYER_NAME_LENGTH + 1];
-    /*0x0C*/ u8 trainerId[4];
+    /*0x0C*/ u8 trainerId[TRAINER_ID_LENGTH];
     /*0x10*/ u16 greeting[6];
     /*0x1C*/ u16 speechWon[6];
     /*0x28*/ u16 speechLost[6];
@@ -278,7 +278,7 @@ struct BattleTowerEReaderTrainer
     /*0x01*/ u8 facilityClass;
     /*0x02*/ u16 winStreak;
     /*0x04*/ u8 name[PLAYER_NAME_LENGTH + 1];
-    /*0x0C*/ u8 trainerId[4];
+    /*0x0C*/ u8 trainerId[TRAINER_ID_LENGTH];
     /*0x10*/ u16 greeting[6];
     /*0x1C*/ u16 farewellPlayerLost[6];
     /*0x28*/ u16 farewellPlayerWon[6];
@@ -288,7 +288,7 @@ struct BattleTowerEReaderTrainer
 
 struct FrontierMonData
 {
-    u16 moves[4];
+    u16 moves[MAX_MON_MOVES];
     u8 evs[6];
     u8 nature;
 };
@@ -425,7 +425,7 @@ struct PlayersApprentice
 
 struct RankingHall1P
 {
-    u8 id[4];
+    u8 id[TRAINER_ID_LENGTH];
     u16 winStreak;
     u8 name[PLAYER_NAME_LENGTH + 1];
     u8 language;
@@ -433,8 +433,8 @@ struct RankingHall1P
 
 struct RankingHall2P
 {
-    u8 id1[4];
-    u8 id2[4];
+    u8 id1[TRAINER_ID_LENGTH];
+    u8 id2[TRAINER_ID_LENGTH];
     u16 winStreak;
     u8 name1[PLAYER_NAME_LENGTH + 1];
     u8 name2[PLAYER_NAME_LENGTH + 1];
@@ -446,7 +446,7 @@ struct SaveBlock2
     /*0x00*/ u8 playerName[PLAYER_NAME_LENGTH + 1];
     /*0x08*/ u8 playerGender; // MALE, FEMALE
     /*0x09*/ u8 specialSaveWarpFlags;
-    /*0x0A*/ u8 playerTrainerId[4];
+    /*0x0A*/ u8 playerTrainerId[TRAINER_ID_LENGTH];
     /*0x0E*/ u16 playTimeHours;
     /*0x10*/ u8 playTimeMinutes;
     /*0x11*/ u8 playTimeSeconds;
@@ -495,7 +495,7 @@ struct SecretBase
     /*0x1A9D*/ u8 battledOwnerToday:1;
     /*0x1A9D*/ u8 registryStatus:2;
     /*0x1A9E*/ u8 trainerName[PLAYER_NAME_LENGTH];
-    /*0x1AA5*/ u8 trainerId[4]; // byte 0 is used for determining trainer class
+    /*0x1AA5*/ u8 trainerId[TRAINER_ID_LENGTH]; // byte 0 is used for determining trainer class
     /*0x1AA9*/ u8 language;
     /*0x1AAA*/ u16 numSecretBasesReceived;
     /*0x1AAC*/ u8 numTimesEntered;
@@ -581,7 +581,7 @@ struct MailStruct
 {
     /*0x00*/ u16 words[MAIL_WORDS_COUNT];
     /*0x12*/ u8 playerName[PLAYER_NAME_LENGTH + 1];
-    /*0x1A*/ u8 trainerId[4];
+    /*0x1A*/ u8 trainerId[TRAINER_ID_LENGTH];
     /*0x1E*/ u16 species;
     /*0x20*/ u16 itemId;
 };
@@ -598,7 +598,7 @@ struct MauvilleManBard
     /*0x0E*/ u16 temporaryLyrics[6];
     /*0x1A*/ u8 playerName[8];
     /*0x22*/ u8 filler_2DB6[0x3];
-    /*0x25*/ u8 playerTrainerId[4];
+    /*0x25*/ u8 playerTrainerId[TRAINER_ID_LENGTH];
     /*0x29*/ bool8 hasChangedSong;
     /*0x2A*/ u8 language;
 }; /*size = 0x2C*/
@@ -737,50 +737,43 @@ struct RecordMixingDayCareMail
     bool16 holdsItem[DAYCARE_MON_COUNT];
 };
 
-enum
-{
-    LILYCOVE_LADY_QUIZ,
-    LILYCOVE_LADY_FAVOUR,
-    LILYCOVE_LADY_CONTEST
-};
-
 struct LilycoveLadyQuiz
 {
     /*0x000*/ u8 id;
-    /*0x001*/ u8 phase;
-    /*0x002*/ u16 unk_002[9];
-    /*0x014*/ u16 unk_014;
-    /*0x016*/ u16 unk_016;
+    /*0x001*/ u8 state;
+    /*0x002*/ u16 question[9];
+    /*0x014*/ u16 correctAnswer;
+    /*0x016*/ u16 playerAnswer;
     /*0x018*/ u8 playerName[PLAYER_NAME_LENGTH + 1];
-    /*0x020*/ u16 playerTrainerId[4];
-    /*0x028*/ u16 itemId;
-    /*0x02a*/ u8 unk_02a;
-    /*0x02b*/ u8 unk_02b;
-    /*0x02c*/ u8 unk_02c;
+    /*0x020*/ u16 playerTrainerId[TRAINER_ID_LENGTH];
+    /*0x028*/ u16 prize;
+    /*0x02a*/ bool8 waitingForChallenger;
+    /*0x02b*/ u8 questionId;
+    /*0x02c*/ u8 prevQuestionId;
     /*0x02d*/ u8 language;
 };
 
-struct LilycoveLadyFavour
+struct LilycoveLadyFavor
 {
     /*0x000*/ u8 id;
-    /*0x001*/ u8 phase;
-    /*0x002*/ u8 unk_002;
-    /*0x003*/ u8 unk_003;
+    /*0x001*/ u8 state;
+    /*0x002*/ bool8 likedItem;
+    /*0x003*/ u8 numItemsGiven;
     /*0x004*/ u8 playerName[PLAYER_NAME_LENGTH + 1];
-    /*0x00c*/ u8 unk_00c;
+    /*0x00c*/ u8 favorId;
     /*0x00e*/ u16 itemId;
-    /*0x010*/ u16 unk_010;
+    /*0x010*/ u16 bestItem;
     /*0x012*/ u8 language;
 };
 
 struct LilycoveLadyContest
 {
     /*0x000*/ u8 id;
-    /*0x001*/ u8 phase;
-    /*0x002*/ u8 fave_pkblk;
-    /*0x003*/ u8 other_pkblk;
+    /*0x001*/ bool8 givenPokeblock;
+    /*0x002*/ u8 numGoodPokeblocksGiven;
+    /*0x003*/ u8 numOtherPokeblocksGiven;
     /*0x004*/ u8 playerName[PLAYER_NAME_LENGTH + 1];
-    /*0x00c*/ u8 max_sheen;
+    /*0x00c*/ u8 maxSheen;
     /*0x00d*/ u8 category;
     /*0x00e*/ u8 language;
 };
@@ -788,7 +781,7 @@ struct LilycoveLadyContest
 typedef union // 3b58
 {
     struct LilycoveLadyQuiz quiz;
-    struct LilycoveLadyFavour favour;
+    struct LilycoveLadyFavor favor;
     struct LilycoveLadyContest contest;
     u8 id;
     u8 pad[0x40];
@@ -951,7 +944,7 @@ struct SaveBlock1
     /*0x2B94*/ u8 outbreakPokemonLevel;
     /*0x2B95*/ u8 outbreakUnk1;
     /*0x2B96*/ u16 outbreakUnk2;
-    /*0x2B98*/ u16 outbreakPokemonMoves[4];
+    /*0x2B98*/ u16 outbreakPokemonMoves[MAX_MON_MOVES];
     /*0x2BA0*/ u8 outbreakUnk4;
     /*0x2BA1*/ u8 outbreakPokemonProbability;
     /*0x2BA2*/ u16 outbreakDaysLeft;

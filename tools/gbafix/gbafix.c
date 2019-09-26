@@ -206,7 +206,7 @@ int main(int argc, char *argv[])
     // parse command line
     for (arg=1; arg<argc; arg++)
     {
-        if ((ARGV[0] == '-'))
+        if (ARGV[0] == '-')
         {
             switch (ARGV[1])
             {

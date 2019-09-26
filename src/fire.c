@@ -949,7 +949,7 @@ static u16 sub_8109930(u8 spriteId)
 {
     u16 var1 = gSprites[spriteId].pos1.y + gSprites[spriteId].pos2.y + gSprites[spriteId].centerToCornerVecY;
 
-    if (GetBattlerSide(gBattleAnimAttacker) == 0)
+    if (GetBattlerSide(gBattleAnimAttacker) == B_SIDE_PLAYER)
     {
         var1 = ((var1 << 16) + 0x4A0000) >> 16;
     }
@@ -1059,7 +1059,7 @@ static void sub_8109AFC(struct Sprite *sprite)
         StartSpriteAnim(sprite, gBattleAnimArgs[2]);
         sprite->data[7] = gBattleAnimArgs[2];
 
-        if (GetBattlerSide(gBattleAnimAttacker) != 0)
+        if (GetBattlerSide(gBattleAnimAttacker) != B_SIDE_PLAYER)
         {
             sprite->data[4] = 4;
         }
@@ -1073,7 +1073,7 @@ static void sub_8109AFC(struct Sprite *sprite)
         break;
     case 1:
         sprite->data[1] += 192;
-        if (GetBattlerSide(gBattleAnimAttacker) != 0)
+        if (GetBattlerSide(gBattleAnimAttacker) != B_SIDE_PLAYER)
         {
             sprite->pos2.y = -(sprite->data[1] >> 8);
         }

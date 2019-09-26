@@ -179,11 +179,11 @@ SootopolisCity_EventScript_1E58E5:: @ 81E58E5
 	end
 
 SootopolisCity_EventScript_1E58FC:: @ 81E58FC
-	turnobject EVENT_OBJ_ID_PLAYER, 2
+	turnobject EVENT_OBJ_ID_PLAYER, DIR_NORTH
 	return
 
 SootopolisCity_EventScript_1E5901:: @ 81E5901
-	turnobject EVENT_OBJ_ID_PLAYER, 2
+	turnobject EVENT_OBJ_ID_PLAYER, DIR_NORTH
 	setvar VAR_SKY_PILLAR_STATE, 3
 	return
 
@@ -217,7 +217,7 @@ SootopolisCity_EventScript_1E5946:: @ 81E5946
 	setweather WEATHER_ALTERNATING
 	doweather
 	setvar VAR_0x8004, 0
-	special sub_813B7D8
+	special Script_DoRayquazaScene
 	waitstate
 	applymovement 10, Common_Movement_WalkInPlaceLeft
 	applymovement 9, Common_Movement_WalkInPlaceRight
@@ -317,7 +317,7 @@ SootopolisCity_EventScript_1E5A82:: @ 81E5A82
 	setweather WEATHER_ALTERNATING
 	doweather
 	setvar VAR_0x8004, 0
-	special sub_813B7D8
+	special Script_DoRayquazaScene
 	waitstate
 	applymovement 10, Common_Movement_WalkInPlaceLeft
 	applymovement 9, Common_Movement_WalkInPlaceRight
@@ -509,7 +509,7 @@ SootopolisCity_EventScript_1E5C1E:: @ 81E5C1E
 	removeobject 10
 	addobject 11
 	setvar VAR_0x8004, 1
-	special sub_813B7D8
+	special Script_DoRayquazaScene
 	waitstate
 	playse SE_T_KAMI
 	special SpawnCameraObject
@@ -562,7 +562,7 @@ SootopolisCity_EventScript_1E5CCE:: @ 81E5CCE
 	removeobject 10
 	addobject 11
 	setvar VAR_0x8004, 1
-	special sub_813B7D8
+	special Script_DoRayquazaScene
 	waitstate
 	special SpawnCameraObject
 	applymovement EVENT_OBJ_ID_CAMERA, SootopolisCity_Movement_1E5E63
@@ -748,7 +748,7 @@ SootopolisCity_EventScript_1E5F1B:: @ 81E5F1B
 	msgbox SootopolisCity_Text_2A7BB0, MSGBOX_DEFAULT
 	random 10
 	addvar VAR_RESULT, 20
-	addvar VAR_RESULT, 133
+	addvar VAR_RESULT, FIRST_BERRY_INDEX
 	giveitem_std VAR_RESULT
 	compare VAR_RESULT, 0
 	goto_if_eq Common_EventScript_ShowBagIsFull
@@ -1366,14 +1366,14 @@ SootopolisCity_EventScript_1E646F:: @ 81E646F
 SootopolisCity_EventScript_1E64B2:: @ 81E64B2
 	applymovement 18, SootopolisCity_Movement_1E64EC
 	waitmovement 0
-	moveobjectoffscreen 18
+	copyobjectxytoperm 18
 	setvar VAR_SOOTOPOLIS_WALLACE_STATE, 1
 	return
 
 SootopolisCity_EventScript_1E64C5:: @ 81E64C5
 	applymovement 18, SootopolisCity_Movement_1E64EF
 	waitmovement 0
-	moveobjectoffscreen 18
+	copyobjectxytoperm 18
 	setvar VAR_SOOTOPOLIS_WALLACE_STATE, 2
 	return
 

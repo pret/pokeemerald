@@ -97,16 +97,16 @@ struct HpAndStatus
 
 struct MovePpInfo
 {
-    u16 moves[4];
-    u8 pp[4];
+    u16 moves[MAX_MON_MOVES];
+    u8 pp[MAX_MON_MOVES];
     u8 ppBonuses;
 };
 
 struct ChooseMoveStruct
 {
-    u16 moves[4];
-    u8 currentPp[4];
-    u8 maxPp[4];
+    u16 moves[MAX_MON_MOVES];
+    u8 currentPp[MAX_MON_MOVES];
+    u8 maxPp[MAX_MON_MOVES];
     u16 species;
     u8 monType1;
     u8 monType2;

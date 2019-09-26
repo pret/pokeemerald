@@ -197,7 +197,7 @@ gSpecials:: @ 81DBA64
 	def_special RejectEggFromDayCare
 	def_special GiveEggFromDaycare
 	def_special SetDaycareCompatibilityString
-	def_special GetSelectedMonNickAndSpecies
+	def_special GetSelectedMonNicknameAndSpecies
 	def_special StoreSelectedPokemonInDaycare
 	def_special ChooseSendDaycareMon
 	def_special ShowDaycareLevelMenu
@@ -206,7 +206,7 @@ gSpecials:: @ 81DBA64
 	def_special TakePokemonFromDaycare
 	def_special ScriptHatchMon
 	def_special EggHatch
-	def_special sub_8071614
+	def_special CheckDaycareMonReceivedMail
 	def_special ShowLinkBattleRecords
 	def_special IsEnoughForCostInVar0x8005
 	def_special SubtractMoneyFromVar0x8005
@@ -227,7 +227,7 @@ gSpecials:: @ 81DBA64
 	def_special ShowPokedexRatingMessage
 	def_special DoPCTurnOnEffect
 	def_special DoPCTurnOffEffect
-	def_special SetDepartmentStoreFloorVar
+	def_special SetDeptStoreFloor
 	def_special DoLotteryCornerComputerEffect
 	def_special EndLotteryCornerComputerEffect
 	def_special sub_81B951C
@@ -273,7 +273,7 @@ gSpecials:: @ 81DBA64
 	def_special ShowBerryBlenderRecordWindow
 	def_special ResetTrickHouseEndRoomFlag
 	def_special SetTrickHouseEndRoomFlag
-	def_special ScrSpecial_CreatePCMenu
+	def_special ScriptMenu_CreatePCMultichoice
 	def_special AccessHallOfFamePC
 	def_special Special_ShowDiploma
 	def_special CheckLeadMonCool
@@ -284,8 +284,8 @@ gSpecials:: @ 81DBA64
 	def_special sub_80FB7A4
 	def_special DoSoftReset
 	def_special GameClear
-	def_special ShakeScreenInElevator
-	def_special nullsub_55
+	def_special MoveElevator
+	def_special ShowGlassWorkshopMenu
 	def_special SpawnCameraObject
 	def_special RemoveCameraObject
 	def_special GetPokeblockNameByMonNature
@@ -316,7 +316,7 @@ gSpecials:: @ 81DBA64
 	def_special CopyCurSecretBaseOwnerName_StrVar1
 	def_special ScriptCheckFreePokemonStorageSpace
 	def_special DoSealedChamberShakingEffect1
-	def_special sub_8139B60
+	def_special ShowDeptStoreElevatorFloorSelect
 	def_special GetShieldToyTVDecorationInfo
 	def_special IsPokerusInParty
 	def_special SetSootopolisGymCrackedIceMetatiles
@@ -339,7 +339,7 @@ gSpecials:: @ 81DBA64
 	def_special ScriptGetMultiplayerId
 	def_special ScriptGetPartyMonSpecies
 	def_special sub_81B98DC
-	def_special nullsub_54
+	def_special TryInitBattleTowerAwardManEventObject
 	def_special MoveOutOfSecretBaseFromOutside
 	def_special LoadPlayerBag
 	def_special sub_80B05B4
@@ -356,7 +356,7 @@ gSpecials:: @ 81DBA64
 	def_special sub_80EE2CC
 	def_special sub_80EE72C
 	def_special sub_80EE7C0
-	def_special nullsub_55
+	def_special ShowGlassWorkshopMenu
 	def_special PutFanClubSpecialOnTheAir
 	def_special sub_80EED10
 	def_special sub_80EED34
@@ -372,47 +372,47 @@ gSpecials:: @ 81DBA64
 	def_special SetSecretBaseSecretsTvFlags_LargeDecorationSpot
 	def_special SetSecretBaseSecretsTvFlags_SmallDecorationSpot
 	def_special SetSecretBaseSecretsTvFlags_Poster
-	def_special sub_818D9C0
-	def_special sub_818DAEC
-	def_special sub_818DBE8
-	def_special sub_818DC2C
-	def_special sub_818DC60
-	def_special sub_818DCC8
-	def_special sub_818DD14
-	def_special sub_818DD54
-	def_special sub_818DD78
-	def_special sub_818DE44
-	def_special sub_818DE5C
-	def_special sub_818DEA0
-	def_special sub_818DEDC
-	def_special sub_818E038
-	def_special sub_818E06C
-	def_special sub_818E2D8
-	def_special sub_811A858
-	def_special sub_818E2FC
-	def_special sub_818E308
-	def_special sub_818E358
-	def_special sub_818E37C
-	def_special sub_818E298
-	def_special sub_818E39C
-	def_special sub_818E3BC
-	def_special sub_818E3E0
-	def_special sub_818E430
-	def_special sub_818E47C
-	def_special sub_818E490
+	def_special SetLilycoveLadyGfx
+	def_special Script_GetLilycoveLadyId
+	def_special GetFavorLadyState
+	def_special BufferFavorLadyRequest
+	def_special HasAnotherPlayerGivenFavorLadyItem
+	def_special BufferFavorLadyItemName
+	def_special BufferFavorLadyPlayerName
+	def_special DidFavorLadyLikeItem
+	def_special Script_FavorLadyOpenBagMenu
+	def_special Script_DoesFavorLadyLikeItem
+	def_special IsFavorLadyThresholdMet
+	def_special FavorLadyGetPrize
+	def_special SetFavorLadyState_Complete
+	def_special GetQuizLadyState
+	def_special GetQuizAuthor
+	def_special IsQuizLadyWaitingForChallenger
+	def_special QuizLadyShowQuizQuestion
+	def_special QuizLadyGetPlayerAnswer
+	def_special IsQuizAnswerCorrect
+	def_special BufferQuizPrizeItem
+	def_special SetQuizLadyState_Complete
+	def_special BufferQuizAuthorNameAndCheckIfLady
+	def_special SetQuizLadyState_GivePrize
+	def_special ClearQuizLadyPlayerAnswer
+	def_special Script_QuizLadyOpenBagMenu
+	def_special ClearQuizLadyQuestionAndAnswer
+	def_special QuizLadySetCustomQuestion
+	def_special QuizLadyTakePrizeForCustomQuiz
 	def_special sub_813986C
-	def_special sub_818E4A4
-	def_special sub_818E510
-	def_special sub_818E538
-	def_special sub_818E274
-	def_special sub_818E3EC
-	def_special sub_818E8E0
-	def_special sub_818E8B4
-	def_special sub_818E914
-	def_special sub_818E92C
-	def_special sub_818E940
-	def_special sub_818E960
-	def_special sub_818E990
+	def_special QuizLadyRecordCustomQuizData
+	def_special QuizLadySetWaitingForChallenger
+	def_special BufferQuizCorrectAnswer
+	def_special BufferQuizPrizeName
+	def_special QuizLadyPickNewQuestion
+	def_special ShouldContestLadyShowGoOnAir
+	def_special HasPlayerGivenContestLadyPokeblock
+	def_special Script_BufferContestLadyCategoryAndMonName
+	def_special OpenPokeblockCaseForContestLady
+	def_special SetContestLadyGivenPokeblock
+	def_special GetContestLadyMonSpecies
+	def_special GetContestLadyCategory
 	def_special PutLilycoveContestLadyShowOnTheAir
 	def_special sub_813B880
 	def_special CallApprenticeFunction
@@ -422,7 +422,7 @@ gSpecials:: @ 81DBA64
 	def_special DoMirageTowerCeilingCrumble
 	def_special SetMirageTowerVisibility
 	def_special StartPlayerDescendMirageTower
-	def_special sub_81398C0
+	def_special BufferTMHMMoveName
 	def_special IsWirelessAdapterConnected
 	def_special BerryBlenderLinkBecomeLeader
 	def_special BerryBlenderLinkJoinGroup
@@ -433,7 +433,7 @@ gSpecials:: @ 81DBA64
 	def_special sub_801DC20
 	def_special sub_81B8958
 	def_special sub_8018090
-	def_special sub_813990C
+	def_special IsBadEggInParty
 	def_special ValidateReceivedWonderCard
 	def_special HasAtLeastOneBerry
 	def_special sub_802C920
@@ -441,8 +441,8 @@ gSpecials:: @ 81DBA64
 	def_special sub_8027A5C
 	def_special sub_8027AAC
 	def_special sub_8139980
-	def_special sub_81399F4
-	def_special sub_8139D98
+	def_special GetDeptStoreDefaultFloorChoice
+	def_special BufferVarsForIVRater
 	def_special sub_80F905C
 	def_special sub_800B518
 	def_special sub_80F90DC
@@ -450,43 +450,43 @@ gSpecials:: @ 81DBA64
 	def_special sub_80F9160
 	def_special ShowRankingHallRecordsWindow
 	def_special ScrollRankingHallRecordsWindow
-	def_special sub_8139F20
+	def_special ShowFrontierManiacMessage
 	def_special sub_80F9134
 	def_special sub_80F9154
 	def_special sub_80B3028
-	def_special sub_813A128
+	def_special ShowScrollableMultichoice
 	def_special sub_813A630
-	def_special sub_813A080
+	def_special BufferBattleTowerElevatorFloors
 	def_special sub_81C6A94
 	def_special sub_81C4F24
 	def_special sub_81B95E0
 	def_special sub_81B9620
-	def_special sub_813A76C
-	def_special sub_813A7B8
-	def_special sub_813A958
-	def_special sub_813A8FC
-	def_special sub_813A988
-	def_special sub_813A9D0
-	def_special sub_813A9A4
-	def_special sub_813AA04
-	def_special sub_813AA18
-	def_special sub_813AA44
+	def_special SetBattleTowerLinkPlayerGfx
+	def_special ShowNatureGirlMessage
+	def_special ShowBattlePointsWindow
+	def_special UpdateBattlePointsWindow
+	def_special CloseBattlePointsWindow
+	def_special GiveFrontierBattlePoints
+	def_special TakeFrontierBattlePoints
+	def_special GetFrontierBattlePoints
+	def_special ShowFrontierExchangeCornerItemIconWindow
+	def_special CloseFrontierExchangeCornerItemIconWindow
 	def_special DisplayBerryPowderVendorMenu
 	def_special RemoveBerryPowderVendorMenu
 	def_special HasEnoughBerryPowder
 	def_special TakeBerryPowder
 	def_special PrintPlayerBerryPowderAmount
-	def_special sub_813A820
-	def_special sub_813A854
-	def_special sub_813B7D8
+	def_special ShowFrontierGamblerLookingMessage
+	def_special ShowFrontierGamblerGoMessage
+	def_special Script_DoRayquazaScene
 	def_special sub_81C72A4
-	def_special sp106_CreateStartMenu
+	def_special ScriptMenu_CreateStartMenuForPokenavTutorial
 	def_special CountPlayerTrainerStars
-	def_special sub_813AC7C
-	def_special sub_813ADB8
+	def_special BufferBattleFrontierTutorMoveName
+	def_special CloseBattleFrontierTutorWindow
 	def_special sub_813ADD4
 	def_special sub_81B892C
-	def_special sub_813AEB4
+	def_special GetBattleFrontierTutorMoveIndex
 	def_special sub_813AF48
 	def_special DoDeoxysRockInteraction
 	def_special sub_813B1D0
@@ -495,28 +495,28 @@ gSpecials:: @ 81DBA64
 	def_special StartMirageTowerShake
 	def_special StartMirageTowerFossilFallAndSink
 	def_special ChangeBoxPokemonNickname
-	def_special get_unknown_box_id
-	def_special sub_813B21C
+	def_special GetPCBoxToSendMon
+	def_special ShouldShowBoxWasFullMessage
 	def_special SetMatchCallRegisteredFlag
 	def_special sub_8175280
 	def_special CreateUnusualWeatherEvent
 	def_special GetUnusualWeatherMapNameAndType
-	def_special sub_813B490
+	def_special GetMartEmployeeObjectEventId
 	def_special sub_80A08CC
 	def_special Unused_SetWeatherSunny
 	def_special sub_81AFDA0
 	def_special sub_813B4E0
 	def_special ShouldDoBrailleRegicePuzzle
 	def_special EnableNationalPokedex
-	def_special sub_80E2548
-	def_special sub_80E2878
+	def_special ScriptMenu_CreateLilycoveSSTidalMultichoice
+	def_special GetLilycoveSSTidalSelection
 	def_special TurnOnTVScreen
 	def_special sub_81D4A90
 	def_special sub_813B514
 	def_special sub_813B568
 	def_special sub_813B534
 	def_special CallTrainerHillFunction
-	def_special sub_813B7D8
+	def_special Script_DoRayquazaScene @ Listed twice
 	def_special sub_813B80C
 	def_special sub_81D4BEC
 	def_special sub_80224D0
@@ -524,14 +524,14 @@ gSpecials:: @ 81DBA64
 	def_special DoWaldaNamingScreen
 	def_special TryGetWallpaperWithWaldaPhrase
 	def_special sub_8139ED0
-	def_special sub_813B968
+	def_special GetBattlePyramidHint
 	def_special sub_80F8B94
 	def_special ShowTrainerHillRecords
 	def_special sub_80B4808
-	def_special sub_813B9A0
+	def_special ResetHealLocationFromDewford
 	def_special sub_81B9918
-	def_special sub_80722E0
+	def_special CountPartyAliveNonEggMons
 	def_special TryPrepareSecondApproachingTrainer
 	def_special RemoveRecordsWindow
-	def_special sub_8139C10
+	def_special CloseDeptStoreElevatorWindow
 	def_special sub_80B3BC4

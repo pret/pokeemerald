@@ -1,26 +1,35 @@
 #include "constants/global.h"
+#include "constants/battle.h"
 #include "constants/battle_frontier.h"
 #include "constants/battle_setup.h"
+#include "constants/berry.h"
+#include "constants/contest.h"
+#include "constants/daycare.h"
+#include "constants/decorations.h"
 #include "constants/easy_chat.h"
 #include "constants/event_objects.h"
 #include "constants/event_object_movement_constants.h"
 #include "constants/field_effects.h"
+#include "constants/field_specials.h"
 #include "constants/flags.h"
-#include "constants/decorations.h"
+#include "constants/game_stat.h"
+#include "constants/item.h"
 #include "constants/items.h"
 #include "constants/heal_locations.h"
 #include "constants/layouts.h"
+#include "constants/lilycove_lady.h"
 #include "constants/map_scripts.h"
 #include "constants/maps.h"
+#include "constants/metatile_labels.h"
 #include "constants/moves.h"
+#include "constants/pokemon.h"
+#include "constants/script_menu.h"
 #include "constants/songs.h"
 #include "constants/species.h"
+#include "constants/trainer_hill.h"
 #include "constants/trainers.h"
 #include "constants/vars.h"
 #include "constants/weather.h"
-#include "constants/trainer_hill.h"
-#include "constants/battle.h"
-#include "constants/metatile_labels.h"
 	.include "asm/macros.inc"
 	.include "asm/macros/event.inc"
 	.include "constants/constants.inc"
@@ -466,22 +475,22 @@ gUnknown_0823B4E8:: @ 823B4E8 ;EventScript_SecretBasePCCancel?
 	end
 
 EventScript_SecretBasePCMainMenuChoice:: @ 823B4EF
-	multichoice 0, 0, 6, 0
+	multichoice 0, 0, MULTI_DECOR_REGISTRY, 0
 	switch VAR_RESULT
 	case 0, EventScript_23B581
 	case 1, EventScript_23B568
 	case 2, EventScript_23B585
 	case 3, EventScript_23B66E
-	case 127, EventScript_23B66E
+	case MULTI_B_PRESSED, EventScript_23B66E
 	end
 
 EventScript_23B531:: @ 823B531
-	multichoice 0, 0, 5, 0
+	multichoice 0, 0, MULTI_DECOR_NOREGISTRY, 0
 	switch VAR_RESULT
 	case 0, EventScript_23B581
 	case 1, EventScript_23B568
 	case 2, EventScript_23B66E
-	case 127, EventScript_23B66E
+	case MULTI_B_PRESSED, EventScript_23B66E
 	end
 
 EventScript_23B568:: @ 823B568
@@ -516,13 +525,13 @@ EventScript_RecordMixingSecretBasePC:: @ 823B589
 EventScript_23B5A1:: @ 823B5A1
 	message Text_SecretBasePCStartMenu
 	waitmessage
-	multichoice 0, 0, 7, 0
+	multichoice 0, 0, MULTI_REGISTER_MENU, 0
 	switch VAR_RESULT
 	case 0, EventScript_23B5F0
 	case 1, EventScript_23B585
 	case 2, EventScript_23B660
 	case 3, EventScript_23B66E
-	case 127, EventScript_23B66E
+	case MULTI_B_PRESSED, EventScript_23B66E
 	end
 
 gUnknown_0823B5E9:: @ 823B5E9
@@ -849,86 +858,86 @@ Std_MsgboxAutoclose:: @ 8271494
 	return
 
 EventScript_ResetAllBerries:: @ 827149D
-	setberrytree 2, ITEM_TO_BERRY(ITEM_ORAN_BERRY), 5
-	setberrytree 1, ITEM_TO_BERRY(ITEM_PECHA_BERRY), 5
-	setberrytree 11, ITEM_TO_BERRY(ITEM_ORAN_BERRY), 5
-	setberrytree 13, ITEM_TO_BERRY(ITEM_PECHA_BERRY), 5
-	setberrytree 4, ITEM_TO_BERRY(ITEM_ORAN_BERRY), 5
-	setberrytree 76, ITEM_TO_BERRY(ITEM_CHERI_BERRY), 5
-	setberrytree 8, ITEM_TO_BERRY(ITEM_CHERI_BERRY), 5
-	setberrytree 10, ITEM_TO_BERRY(ITEM_LEPPA_BERRY), 5
-	setberrytree 25, ITEM_TO_BERRY(ITEM_PINAP_BERRY), 5
-	setberrytree 26, ITEM_TO_BERRY(ITEM_CHESTO_BERRY), 5
-	setberrytree 66, ITEM_TO_BERRY(ITEM_CHESTO_BERRY), 5
-	setberrytree 67, ITEM_TO_BERRY(ITEM_PINAP_BERRY), 5
-	setberrytree 69, ITEM_TO_BERRY(ITEM_KELPSY_BERRY), 5
-	setberrytree 70, ITEM_TO_BERRY(ITEM_KELPSY_BERRY), 5
-	setberrytree 71, ITEM_TO_BERRY(ITEM_KELPSY_BERRY), 5
-	setberrytree 55, ITEM_TO_BERRY(ITEM_BLUK_BERRY), 5
-	setberrytree 56, ITEM_TO_BERRY(ITEM_BLUK_BERRY), 5
-	setberrytree 5, ITEM_TO_BERRY(ITEM_CHERI_BERRY), 5
-	setberrytree 6, ITEM_TO_BERRY(ITEM_LEPPA_BERRY), 5
-	setberrytree 7, ITEM_TO_BERRY(ITEM_CHERI_BERRY), 5
-	setberrytree 16, ITEM_TO_BERRY(ITEM_NANAB_BERRY), 5
-	setberrytree 17, ITEM_TO_BERRY(ITEM_NANAB_BERRY), 5
-	setberrytree 18, ITEM_TO_BERRY(ITEM_NANAB_BERRY), 5
-	setberrytree 29, ITEM_TO_BERRY(ITEM_WEPEAR_BERRY), 5
-	setberrytree 28, ITEM_TO_BERRY(ITEM_WEPEAR_BERRY), 5
-	setberrytree 27, ITEM_TO_BERRY(ITEM_WEPEAR_BERRY), 5
-	setberrytree 24, ITEM_TO_BERRY(ITEM_RAWST_BERRY), 5
-	setberrytree 23, ITEM_TO_BERRY(ITEM_PECHA_BERRY), 5
-	setberrytree 22, ITEM_TO_BERRY(ITEM_PECHA_BERRY), 5
-	setberrytree 21, ITEM_TO_BERRY(ITEM_RAWST_BERRY), 5
-	setberrytree 19, ITEM_TO_BERRY(ITEM_RAZZ_BERRY), 5
-	setberrytree 20, ITEM_TO_BERRY(ITEM_RAZZ_BERRY), 5
-	setberrytree 80, ITEM_TO_BERRY(ITEM_ORAN_BERRY), 5
-	setberrytree 81, ITEM_TO_BERRY(ITEM_ORAN_BERRY), 5
-	setberrytree 77, ITEM_TO_BERRY(ITEM_PERSIM_BERRY), 5
-	setberrytree 78, ITEM_TO_BERRY(ITEM_PERSIM_BERRY), 5
-	setberrytree 68, ITEM_TO_BERRY(ITEM_PERSIM_BERRY), 5
-	setberrytree 31, ITEM_TO_BERRY(ITEM_SITRUS_BERRY), 5
-	setberrytree 33, ITEM_TO_BERRY(ITEM_SITRUS_BERRY), 5
-	setberrytree 34, ITEM_TO_BERRY(ITEM_POMEG_BERRY), 5
-	setberrytree 35, ITEM_TO_BERRY(ITEM_POMEG_BERRY), 5
-	setberrytree 36, ITEM_TO_BERRY(ITEM_POMEG_BERRY), 5
-	setberrytree 83, ITEM_TO_BERRY(ITEM_HONDEW_BERRY), 5
-	setberrytree 84, ITEM_TO_BERRY(ITEM_HONDEW_BERRY), 5
-	setberrytree 85, ITEM_TO_BERRY(ITEM_SITRUS_BERRY), 5
-	setberrytree 86, ITEM_TO_BERRY(ITEM_LEPPA_BERRY), 5
-	setberrytree 37, ITEM_TO_BERRY(ITEM_ASPEAR_BERRY), 5
-	setberrytree 38, ITEM_TO_BERRY(ITEM_ASPEAR_BERRY), 5
-	setberrytree 39, ITEM_TO_BERRY(ITEM_ASPEAR_BERRY), 5
-	setberrytree 40, ITEM_TO_BERRY(ITEM_PECHA_BERRY), 5
-	setberrytree 41, ITEM_TO_BERRY(ITEM_PECHA_BERRY), 5
-	setberrytree 42, ITEM_TO_BERRY(ITEM_PECHA_BERRY), 5
-	setberrytree 46, ITEM_TO_BERRY(ITEM_WEPEAR_BERRY), 5
-	setberrytree 45, ITEM_TO_BERRY(ITEM_PINAP_BERRY), 5
-	setberrytree 44, ITEM_TO_BERRY(ITEM_NANAB_BERRY), 5
-	setberrytree 43, ITEM_TO_BERRY(ITEM_RAZZ_BERRY), 5
-	setberrytree 47, ITEM_TO_BERRY(ITEM_PERSIM_BERRY), 5
-	setberrytree 48, ITEM_TO_BERRY(ITEM_ASPEAR_BERRY), 5
-	setberrytree 49, ITEM_TO_BERRY(ITEM_RAWST_BERRY), 5
-	setberrytree 50, ITEM_TO_BERRY(ITEM_CHESTO_BERRY), 5
-	setberrytree 52, ITEM_TO_BERRY(ITEM_NANAB_BERRY), 5
-	setberrytree 53, ITEM_TO_BERRY(ITEM_NANAB_BERRY), 5
-	setberrytree 62, ITEM_TO_BERRY(ITEM_LEPPA_BERRY), 5
-	setberrytree 64, ITEM_TO_BERRY(ITEM_LEPPA_BERRY), 5
-	setberrytree 58, ITEM_TO_BERRY(ITEM_POMEG_BERRY), 5
-	setberrytree 59, ITEM_TO_BERRY(ITEM_POMEG_BERRY), 5
-	setberrytree 60, ITEM_TO_BERRY(ITEM_GREPA_BERRY), 5
-	setberrytree 61, ITEM_TO_BERRY(ITEM_GREPA_BERRY), 5
-	setberrytree 79, ITEM_TO_BERRY(ITEM_QUALOT_BERRY), 5
-	setberrytree 14, ITEM_TO_BERRY(ITEM_QUALOT_BERRY), 5
-	setberrytree 15, ITEM_TO_BERRY(ITEM_POMEG_BERRY), 5
-	setberrytree 30, ITEM_TO_BERRY(ITEM_POMEG_BERRY), 5
-	setberrytree 65, ITEM_TO_BERRY(ITEM_GREPA_BERRY), 5
-	setberrytree 72, ITEM_TO_BERRY(ITEM_GREPA_BERRY), 5
-	setberrytree 73, ITEM_TO_BERRY(ITEM_QUALOT_BERRY), 5
-	setberrytree 74, ITEM_TO_BERRY(ITEM_QUALOT_BERRY), 5
-	setberrytree 87, ITEM_TO_BERRY(ITEM_PECHA_BERRY), 5
-	setberrytree 88, ITEM_TO_BERRY(ITEM_SITRUS_BERRY), 5
-	setberrytree 89, ITEM_TO_BERRY(ITEM_RAWST_BERRY), 5
-	setberrytree 82, ITEM_TO_BERRY(ITEM_LIECHI_BERRY), 5
+	setberrytree 2, ITEM_TO_BERRY(ITEM_ORAN_BERRY), BERRY_STAGE_BERRIES
+	setberrytree 1, ITEM_TO_BERRY(ITEM_PECHA_BERRY), BERRY_STAGE_BERRIES
+	setberrytree 11, ITEM_TO_BERRY(ITEM_ORAN_BERRY), BERRY_STAGE_BERRIES
+	setberrytree 13, ITEM_TO_BERRY(ITEM_PECHA_BERRY), BERRY_STAGE_BERRIES
+	setberrytree 4, ITEM_TO_BERRY(ITEM_ORAN_BERRY), BERRY_STAGE_BERRIES
+	setberrytree 76, ITEM_TO_BERRY(ITEM_CHERI_BERRY), BERRY_STAGE_BERRIES
+	setberrytree 8, ITEM_TO_BERRY(ITEM_CHERI_BERRY), BERRY_STAGE_BERRIES
+	setberrytree 10, ITEM_TO_BERRY(ITEM_LEPPA_BERRY), BERRY_STAGE_BERRIES
+	setberrytree 25, ITEM_TO_BERRY(ITEM_PINAP_BERRY), BERRY_STAGE_BERRIES
+	setberrytree 26, ITEM_TO_BERRY(ITEM_CHESTO_BERRY), BERRY_STAGE_BERRIES
+	setberrytree 66, ITEM_TO_BERRY(ITEM_CHESTO_BERRY), BERRY_STAGE_BERRIES
+	setberrytree 67, ITEM_TO_BERRY(ITEM_PINAP_BERRY), BERRY_STAGE_BERRIES
+	setberrytree 69, ITEM_TO_BERRY(ITEM_KELPSY_BERRY), BERRY_STAGE_BERRIES
+	setberrytree 70, ITEM_TO_BERRY(ITEM_KELPSY_BERRY), BERRY_STAGE_BERRIES
+	setberrytree 71, ITEM_TO_BERRY(ITEM_KELPSY_BERRY), BERRY_STAGE_BERRIES
+	setberrytree 55, ITEM_TO_BERRY(ITEM_BLUK_BERRY), BERRY_STAGE_BERRIES
+	setberrytree 56, ITEM_TO_BERRY(ITEM_BLUK_BERRY), BERRY_STAGE_BERRIES
+	setberrytree 5, ITEM_TO_BERRY(ITEM_CHERI_BERRY), BERRY_STAGE_BERRIES
+	setberrytree 6, ITEM_TO_BERRY(ITEM_LEPPA_BERRY), BERRY_STAGE_BERRIES
+	setberrytree 7, ITEM_TO_BERRY(ITEM_CHERI_BERRY), BERRY_STAGE_BERRIES
+	setberrytree 16, ITEM_TO_BERRY(ITEM_NANAB_BERRY), BERRY_STAGE_BERRIES
+	setberrytree 17, ITEM_TO_BERRY(ITEM_NANAB_BERRY), BERRY_STAGE_BERRIES
+	setberrytree 18, ITEM_TO_BERRY(ITEM_NANAB_BERRY), BERRY_STAGE_BERRIES
+	setberrytree 29, ITEM_TO_BERRY(ITEM_WEPEAR_BERRY), BERRY_STAGE_BERRIES
+	setberrytree 28, ITEM_TO_BERRY(ITEM_WEPEAR_BERRY), BERRY_STAGE_BERRIES
+	setberrytree 27, ITEM_TO_BERRY(ITEM_WEPEAR_BERRY), BERRY_STAGE_BERRIES
+	setberrytree 24, ITEM_TO_BERRY(ITEM_RAWST_BERRY), BERRY_STAGE_BERRIES
+	setberrytree 23, ITEM_TO_BERRY(ITEM_PECHA_BERRY), BERRY_STAGE_BERRIES
+	setberrytree 22, ITEM_TO_BERRY(ITEM_PECHA_BERRY), BERRY_STAGE_BERRIES
+	setberrytree 21, ITEM_TO_BERRY(ITEM_RAWST_BERRY), BERRY_STAGE_BERRIES
+	setberrytree 19, ITEM_TO_BERRY(ITEM_RAZZ_BERRY), BERRY_STAGE_BERRIES
+	setberrytree 20, ITEM_TO_BERRY(ITEM_RAZZ_BERRY), BERRY_STAGE_BERRIES
+	setberrytree 80, ITEM_TO_BERRY(ITEM_ORAN_BERRY), BERRY_STAGE_BERRIES
+	setberrytree 81, ITEM_TO_BERRY(ITEM_ORAN_BERRY), BERRY_STAGE_BERRIES
+	setberrytree 77, ITEM_TO_BERRY(ITEM_PERSIM_BERRY), BERRY_STAGE_BERRIES
+	setberrytree 78, ITEM_TO_BERRY(ITEM_PERSIM_BERRY), BERRY_STAGE_BERRIES
+	setberrytree 68, ITEM_TO_BERRY(ITEM_PERSIM_BERRY), BERRY_STAGE_BERRIES
+	setberrytree 31, ITEM_TO_BERRY(ITEM_SITRUS_BERRY), BERRY_STAGE_BERRIES
+	setberrytree 33, ITEM_TO_BERRY(ITEM_SITRUS_BERRY), BERRY_STAGE_BERRIES
+	setberrytree 34, ITEM_TO_BERRY(ITEM_POMEG_BERRY), BERRY_STAGE_BERRIES
+	setberrytree 35, ITEM_TO_BERRY(ITEM_POMEG_BERRY), BERRY_STAGE_BERRIES
+	setberrytree 36, ITEM_TO_BERRY(ITEM_POMEG_BERRY), BERRY_STAGE_BERRIES
+	setberrytree 83, ITEM_TO_BERRY(ITEM_HONDEW_BERRY), BERRY_STAGE_BERRIES
+	setberrytree 84, ITEM_TO_BERRY(ITEM_HONDEW_BERRY), BERRY_STAGE_BERRIES
+	setberrytree 85, ITEM_TO_BERRY(ITEM_SITRUS_BERRY), BERRY_STAGE_BERRIES
+	setberrytree 86, ITEM_TO_BERRY(ITEM_LEPPA_BERRY), BERRY_STAGE_BERRIES
+	setberrytree 37, ITEM_TO_BERRY(ITEM_ASPEAR_BERRY), BERRY_STAGE_BERRIES
+	setberrytree 38, ITEM_TO_BERRY(ITEM_ASPEAR_BERRY), BERRY_STAGE_BERRIES
+	setberrytree 39, ITEM_TO_BERRY(ITEM_ASPEAR_BERRY), BERRY_STAGE_BERRIES
+	setberrytree 40, ITEM_TO_BERRY(ITEM_PECHA_BERRY), BERRY_STAGE_BERRIES
+	setberrytree 41, ITEM_TO_BERRY(ITEM_PECHA_BERRY), BERRY_STAGE_BERRIES
+	setberrytree 42, ITEM_TO_BERRY(ITEM_PECHA_BERRY), BERRY_STAGE_BERRIES
+	setberrytree 46, ITEM_TO_BERRY(ITEM_WEPEAR_BERRY), BERRY_STAGE_BERRIES
+	setberrytree 45, ITEM_TO_BERRY(ITEM_PINAP_BERRY), BERRY_STAGE_BERRIES
+	setberrytree 44, ITEM_TO_BERRY(ITEM_NANAB_BERRY), BERRY_STAGE_BERRIES
+	setberrytree 43, ITEM_TO_BERRY(ITEM_RAZZ_BERRY), BERRY_STAGE_BERRIES
+	setberrytree 47, ITEM_TO_BERRY(ITEM_PERSIM_BERRY), BERRY_STAGE_BERRIES
+	setberrytree 48, ITEM_TO_BERRY(ITEM_ASPEAR_BERRY), BERRY_STAGE_BERRIES
+	setberrytree 49, ITEM_TO_BERRY(ITEM_RAWST_BERRY), BERRY_STAGE_BERRIES
+	setberrytree 50, ITEM_TO_BERRY(ITEM_CHESTO_BERRY), BERRY_STAGE_BERRIES
+	setberrytree 52, ITEM_TO_BERRY(ITEM_NANAB_BERRY), BERRY_STAGE_BERRIES
+	setberrytree 53, ITEM_TO_BERRY(ITEM_NANAB_BERRY), BERRY_STAGE_BERRIES
+	setberrytree 62, ITEM_TO_BERRY(ITEM_LEPPA_BERRY), BERRY_STAGE_BERRIES
+	setberrytree 64, ITEM_TO_BERRY(ITEM_LEPPA_BERRY), BERRY_STAGE_BERRIES
+	setberrytree 58, ITEM_TO_BERRY(ITEM_POMEG_BERRY), BERRY_STAGE_BERRIES
+	setberrytree 59, ITEM_TO_BERRY(ITEM_POMEG_BERRY), BERRY_STAGE_BERRIES
+	setberrytree 60, ITEM_TO_BERRY(ITEM_GREPA_BERRY), BERRY_STAGE_BERRIES
+	setberrytree 61, ITEM_TO_BERRY(ITEM_GREPA_BERRY), BERRY_STAGE_BERRIES
+	setberrytree 79, ITEM_TO_BERRY(ITEM_QUALOT_BERRY), BERRY_STAGE_BERRIES
+	setberrytree 14, ITEM_TO_BERRY(ITEM_QUALOT_BERRY), BERRY_STAGE_BERRIES
+	setberrytree 15, ITEM_TO_BERRY(ITEM_POMEG_BERRY), BERRY_STAGE_BERRIES
+	setberrytree 30, ITEM_TO_BERRY(ITEM_POMEG_BERRY), BERRY_STAGE_BERRIES
+	setberrytree 65, ITEM_TO_BERRY(ITEM_GREPA_BERRY), BERRY_STAGE_BERRIES
+	setberrytree 72, ITEM_TO_BERRY(ITEM_GREPA_BERRY), BERRY_STAGE_BERRIES
+	setberrytree 73, ITEM_TO_BERRY(ITEM_QUALOT_BERRY), BERRY_STAGE_BERRIES
+	setberrytree 74, ITEM_TO_BERRY(ITEM_QUALOT_BERRY), BERRY_STAGE_BERRIES
+	setberrytree 87, ITEM_TO_BERRY(ITEM_PECHA_BERRY), BERRY_STAGE_BERRIES
+	setberrytree 88, ITEM_TO_BERRY(ITEM_SITRUS_BERRY), BERRY_STAGE_BERRIES
+	setberrytree 89, ITEM_TO_BERRY(ITEM_RAWST_BERRY), BERRY_STAGE_BERRIES
+	setberrytree 82, ITEM_TO_BERRY(ITEM_LIECHI_BERRY), BERRY_STAGE_BERRIES
 	return
 
 EventScript_ResetAllMapFlags:: @ 82715DE
@@ -1036,7 +1045,7 @@ EventScript_ResetAllMapFlags:: @ 82715DE
 	setflag FLAG_HIDE_ROUTE_101_BIRCH
 	setflag FLAG_HIDE_ROUTE_103_BIRCH
 	setflag FLAG_HIDE_LILYCOVE_HARBOR_FERRY_SAILOR
-	setflag FLAG_HIDE_LILYCOVE_HARBOR_EON_TICKET_TAKER
+	setflag FLAG_HIDE_LILYCOVE_HARBOR_EVENT_TICKET_TAKER
 	setflag FLAG_HIDE_SOUTHERN_ISLAND_EON_STONE
 	setflag FLAG_HIDE_SOUTHERN_ISLAND_UNCHOSEN_EON_DUO_MON
 	setflag FLAG_UNKNOWN_0x393
@@ -1390,50 +1399,50 @@ Std_ObtainItem:: @ 8271AD3
 EventScript_271AE3:: @ 8271AE3
 	bufferitemnameplural 1, VAR_0x8000, VAR_0x8001
 	checkitemtype VAR_0x8000
-	call EventScript_271B08
+	call EventScript_BufferStdString
 	compare VAR_0x8007, 1
 	call_if_eq EventScript_271B95
 	compare VAR_0x8007, 0
 	call_if_eq EventScript_271BA9
 	return
 
-EventScript_271B08:: @ 8271B08
+EventScript_BufferStdString:: @ 8271B08
 	switch VAR_RESULT
-	case 1, EventScript_271B45
-	case 5, EventScript_271B55
-	case 2, EventScript_271B65
-	case 3, EventScript_271B75
-	case 4, EventScript_271B85
+	case POCKET_ITEMS, EventScript_StdStringItem
+	case POCKET_KEY_ITEMS, EventScript_StdStringKeyItems
+	case POCKET_POKE_BALLS, EventScript_StdStringPokeballs
+	case POCKET_TM_HM, EventScript_StdStringTMHMS
+	case POCKET_BERRIES, EventScript_StdStringBerries
 	end
 
-EventScript_271B45:: @ 8271B45
-	bufferstdstring 2, 14
+EventScript_StdStringItem:: @ 8271B45
+	bufferstdstring 2, STDSTRING_ITEMS
 	compare VAR_0x8007, 1
-	call_if_eq EventScript_271BAF
+	call_if_eq EventScript_PlayFanfare4
 	return
 
-EventScript_271B55:: @ 8271B55
-	bufferstdstring 2, 15
+EventScript_StdStringKeyItems:: @ 8271B55
+	bufferstdstring 2, STDSTRING_KEYITEMS
 	compare VAR_0x8007, 1
-	call_if_eq EventScript_271BAF
+	call_if_eq EventScript_PlayFanfare4
 	return
 
-EventScript_271B65:: @ 8271B65
-	bufferstdstring 2, 16
+EventScript_StdStringPokeballs:: @ 8271B65
+	bufferstdstring 2, STDSTRING_POKEBALLS
 	compare VAR_0x8007, 1
-	call_if_eq EventScript_271BAF
+	call_if_eq EventScript_PlayFanfare4
 	return
 
-EventScript_271B75:: @ 8271B75
-	bufferstdstring 2, 17
+EventScript_StdStringTMHMS:: @ 8271B75
+	bufferstdstring 2, STDSTRING_TMHMS
 	compare VAR_0x8007, 1
 	call_if_eq EventScript_271BB3
 	return
 
-EventScript_271B85:: @ 8271B85
-	bufferstdstring 2, 18
+EventScript_StdStringBerries:: @ 8271B85
+	bufferstdstring 2, STDSTRING_BERRIES
 	compare VAR_0x8007, 1
-	call_if_eq EventScript_271BAF
+	call_if_eq EventScript_PlayFanfare4
 	return
 
 EventScript_271B95:: @ 8271B95
@@ -1447,7 +1456,7 @@ EventScript_271BA9:: @ 8271BA9
 	setvar VAR_RESULT, 0
 	return
 
-EventScript_271BAF:: @ 8271BAF
+EventScript_PlayFanfare4:: @ 8271BAF
 	playfanfare MUS_FANFA4
 	return
 
@@ -1491,7 +1500,7 @@ Std_FindItem:: @ 8271BFD
 	copyvar VAR_0x8007, VAR_RESULT
 	bufferitemnameplural 1, VAR_0x8000, VAR_0x8001
 	checkitemtype VAR_0x8000
-	call EventScript_271B08
+	call EventScript_BufferStdString
 	compare VAR_0x8007, 1
 	call_if_eq EventScript_PickItemUp
 	compare VAR_0x8007, 0
@@ -1502,7 +1511,7 @@ Std_FindItem:: @ 8271BFD
 EventScript_PickItemUp:: @ 8271C3A
 	removeobject VAR_LAST_TALKED
 	giveitem VAR_0x8004, VAR_0x8005
-	specialvar VAR_RESULT, sub_81398C0
+	specialvar VAR_RESULT, BufferTMHMMoveName
 	copyvar VAR_0x8008, VAR_RESULT
 	compare VAR_0x8008, 1
 	call_if_eq EventScript_271C8F
@@ -1544,7 +1553,7 @@ EventScript_HiddenItemScript:: @ 8271CB7
 	copyvar VAR_0x8007, VAR_RESULT
 	bufferitemnameplural 1, VAR_0x8005, 1
 	checkitemtype VAR_0x8005
-	call EventScript_271B08
+	call EventScript_BufferStdString
 	compare VAR_0x8007, 1
 	goto_if_eq EventScript_271CE8
 	compare VAR_0x8007, 0
@@ -1554,7 +1563,7 @@ EventScript_HiddenItemScript:: @ 8271CB7
 EventScript_271CE8:: @ 8271CE8
 	copyvar VAR_0x8008, VAR_0x8004
 	copyvar VAR_0x8004, VAR_0x8005
-	specialvar VAR_RESULT, sub_81398C0
+	specialvar VAR_RESULT, BufferTMHMMoveName
 	compare VAR_RESULT, 1
 	goto_if_eq EventScript_271D0E
 	compare VAR_RESULT, 0
@@ -1625,7 +1634,7 @@ EventScript_PC:: @ 8271D92
 EventScript_271DAC:: @ 8271DAC
 	message gText_WhichPCShouldBeAccessed
 	waitmessage
-	special ScrSpecial_CreatePCMenu
+	special ScriptMenu_CreatePCMultichoice
 	waitstate
 	goto EventScript_271DBC
 	end
@@ -1636,7 +1645,7 @@ EventScript_271DBC:: @ 8271DBC
 	case 1, EventScript_271DF9
 	case 2, EventScript_271E54
 	case 3, EventScript_271E47
-	case 127, EventScript_271E47
+	case MULTI_B_PRESSED, EventScript_271E47
 	end
 
 EventScript_271DF9:: @ 8271DF9
@@ -2036,15 +2045,13 @@ Route101_EventScript_272184:: @ 8272184
 	msgbox gUnknown_082A633D, MSGBOX_DEFAULT
 	return
 
-BattleFrontier_OutsideWest_EventScript_2721E2:: @ 82721E2
-LilycoveCity_Harbor_EventScript_2721E2:: @ 82721E2
-SlateportCity_Harbor_EventScript_2721E2:: @ 82721E2
+Common_EventScript_FerryDepart:: @ 82721E2
 	delay 60
-	applymovement VAR_0x8004, SlateportCity_Harbor_Movement_2721F0
+	applymovement VAR_0x8004, Movement_FerryDepart
 	waitmovement 0
 	return
 
-SlateportCity_Harbor_Movement_2721F0: @ 82721F0
+Movement_FerryDepart: @ 82721F0
 	walk_slow_right
 	walk_slow_right
 	walk_slow_right
@@ -2101,7 +2108,7 @@ SouthernIsland_Exterior_EventScript_272250:: @ 8272250
 	call_if_eq BattleFrontier_OutsideWest_EventScript_242A2C
 	delay 30
 	hideobjectat 255, MAP_PETALBURG_CITY
-	call BattleFrontier_OutsideWest_EventScript_2721E2
+	call Common_EventScript_FerryDepart
 	return
 
 EventScript_272274:: @ 8272274
@@ -2556,7 +2563,7 @@ gUnknown_08272A3F:: @ 8272A3F
 	.string "Please come again!$"
 
 gUnknown_08272A52:: @ 8272A52
-	.string "{PLAYER}{STRING 5}, welcome!\pWhat can I do for you?$"
+	.string "{PLAYER}{KUN}, welcome!\pWhat can I do for you?$"
 
 gUnknown_08272A78:: @ 8272A78
 	.string "Obtained the {STR_VAR_2}!$"
@@ -2893,34 +2900,34 @@ LittlerootTown_ProfessorBirchsLab_EventScript_2737A0:: @ 82737A0
 MossdeepCity_StevensHouse_EventScript_2737A0:: @ 82737A0
 Route119_WeatherInstitute_2F_EventScript_2737A0:: @ 82737A0
 RustboroCity_DevonCorp_2F_EventScript_2737A0:: @ 82737A0
-	bufferboxname 0, VAR_STORAGE_UNKNOWN
+	bufferboxname 0, VAR_PC_BOX_TO_SEND_MON
 	bufferspeciesname 1, VAR_TEMP_1
 	call_if_unset FLAG_SYS_PC_LANETTE, LittlerootTown_ProfessorBirchsLab_EventScript_2737BB
 	call_if_set FLAG_SYS_PC_LANETTE, LittlerootTown_ProfessorBirchsLab_EventScript_2737E6
 	return
 
 LittlerootTown_ProfessorBirchsLab_EventScript_2737BB:: @ 82737BB
-	specialvar VAR_RESULT, sub_813B21C
+	specialvar VAR_RESULT, ShouldShowBoxWasFullMessage
 	compare VAR_RESULT, 1
 	goto_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_2737D4
 	msgbox gText_PkmnTransferredSomeonesPC, MSGBOX_DEFAULT
 	return
 
 LittlerootTown_ProfessorBirchsLab_EventScript_2737D4:: @ 82737D4
-	specialvar VAR_RESULT, get_unknown_box_id
+	specialvar VAR_RESULT, GetPCBoxToSendMon
 	bufferboxname 2, VAR_RESULT
 	msgbox gText_PkmnBoxSomeonesPCFull, MSGBOX_DEFAULT
 	return
 
 LittlerootTown_ProfessorBirchsLab_EventScript_2737E6:: @ 82737E6
-	specialvar VAR_RESULT, sub_813B21C
+	specialvar VAR_RESULT, ShouldShowBoxWasFullMessage
 	compare VAR_RESULT, 1
 	goto_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_2737FF
 	msgbox gText_PkmnTransferredLanettesPC, MSGBOX_DEFAULT
 	return
 
 LittlerootTown_ProfessorBirchsLab_EventScript_2737FF:: @ 82737FF
-	specialvar VAR_RESULT, get_unknown_box_id
+	specialvar VAR_RESULT, GetPCBoxToSendMon
 	bufferboxname 2, VAR_RESULT
 	msgbox gText_PkmnBoxLanettesPCFull, MSGBOX_DEFAULT
 	return
@@ -2942,7 +2949,7 @@ EventScript_Questionnaire:: @ 827381B
 	call Common_ShowEasyChatScreen
 	lock
 	faceplayer
-	specialvar VAR_0x8008, sub_813B490
+	specialvar VAR_0x8008, GetMartEmployeeObjectEventId
 	compare VAR_0x8004, 1
 	goto_if_eq EventScript_27386D
 	compare VAR_0x8004, 2
@@ -3593,139 +3600,139 @@ gContestPaintingTough3::
 	.string "The mighty tough\n"
 	.string "hyper POKéMON {STR_VAR_1}$"
 
-gUnknown_0827ECBC:: @ 27ECBC
+gTrickHouse_Mechadoll_Oddish:: @ 27ECBC
 	.string "ODDISH$"
 
-gUnknown_0827ECC3:: @ 27ECC3
+gTrickHouse_Mechadoll_Poochyena:: @ 27ECC3
 	.string "POOCHYENA$"
 
-gUnknown_0827ECCD:: @ 27ECCD
+gTrickHouse_Mechadoll_Taillow:: @ 27ECCD
 	.string "TAILLOW$"
 
-gUnknown_0827ECD5:: @ 27ECD5
+gTrickHouse_Mechadoll_Azurill:: @ 27ECD5
 	.string "AZURILL$"
 
-gUnknown_0827ECDD:: @ 27ECDD
+gTrickHouse_Mechadoll_Lotad:: @ 27ECDD
 	.string "LOTAD$"
 
-gUnknown_0827ECE3:: @ 27ECE3
+gTrickHouse_Mechadoll_Wingull:: @ 27ECE3
 	.string "WINGULL$"
 
-gUnknown_0827ECEB:: @ 27ECEB
+gTrickHouse_Mechadoll_Dustox:: @ 27ECEB
 	.string "DUSTOX$"
 
-gUnknown_0827ECF2:: @ 27ECF2
+gTrickHouse_Mechadoll_Zubat:: @ 27ECF2
 	.string "ZUBAT$"
 
-gUnknown_0827ECF8:: @ 27ECF8
+gTrickHouse_Mechadoll_Nincada:: @ 27ECF8
 	.string "NINCADA$"
 
-gUnknown_0827ED00:: @ 27ED00
+gTrickHouse_Mechadoll_Ralts:: @ 27ED00
 	.string "RALTS$"
 
-gUnknown_0827ED06:: @ 27ED06
+gTrickHouse_Mechadoll_Zigzagoon:: @ 27ED06
 	.string "ZIGZAGOON$"
 
-gUnknown_0827ED10:: @ 27ED10
+gTrickHouse_Mechadoll_Slakoth:: @ 27ED10
 	.string "SLAKOTH$"
 
-gUnknown_0827ED18:: @ 27ED18
+gTrickHouse_Mechadoll_Poochyena2:: @ 27ED18
 	.string "POOCHYENA$"
 
-gUnknown_0827ED22:: @ 27ED22
+gTrickHouse_Mechadoll_Shroomish:: @ 27ED22
 	.string "SHROOMISH$"
 
-gUnknown_0827ED2C:: @ 27ED2C
+gTrickHouse_Mechadoll_Zigzagoon2:: @ 27ED2C
 	.string "ZIGZAGOON$"
 
-gUnknown_0827ED36:: @ 27ED36
+gTrickHouse_Mechadoll_Poochyena3:: @ 27ED36
 	.string "POOCHYENA$"
 
-gUnknown_0827ED40:: @ 27ED40
+gTrickHouse_Mechadoll_Zubat2:: @ 27ED40
 	.string "ZUBAT$"
 
-gUnknown_0827ED46:: @ 27ED46
+gTrickHouse_Mechadoll_Carvanha:: @ 27ED46
 	.string "CARVANHA$"
 
-gUnknown_0827ED4F:: @ 27ED4F
+gTrickHouse_Mechadoll_BurnHeal:: @ 27ED4F
 	.string "BURN HEAL$"
 
-gUnknown_0827ED59:: @ 27ED59
+gTrickHouse_Mechadoll_HarborMail:: @ 27ED59
 	.string "HARBOR MAIL$"
 
-gUnknown_0827ED65:: @ 27ED65
+gTrickHouse_Mechadoll_SamePrice:: @ 27ED65
 	.string "Same price$"
 
-gUnknown_0827ED70:: @ 27ED70
+gTrickHouse_Mechadoll_60Yen:: @ 27ED70
 	.string "¥60$"
 
-gUnknown_0827ED74:: @ 27ED74
+gTrickHouse_Mechadoll_55Yen:: @ 27ED74
 	.string "¥55$"
 
-gUnknown_0827ED78:: @ 27ED78
+gTrickHouse_Mechadoll_Nothing:: @ 27ED78
 	.string "Nothing$"
 
-gUnknown_0827ED80:: @ 27ED80
+gTrickHouse_Mechadoll_CostMore:: @ 27ED80
 	.string "They will cost more.$"
 
-gUnknown_0827ED95:: @ 27ED95
+gTrickHouse_Mechadoll_CostLess:: @ 27ED95
 	.string "They will cost less.$"
 
-gUnknown_0827EDAA:: @ 27EDAA
+gTrickHouse_Mechadoll_SamePrice2:: @ 27EDAA
 	.string "Same price$"
 
-gUnknown_0827EDB5:: @ 27EDB5
+gTrickHouse_Mechadoll_Male:: @ 27EDB5
 	.string "Male$"
 
-gUnknown_0827EDBA:: @ 27EDBA
+gTrickHouse_Mechadoll_Female:: @ 27EDBA
 	.string "Female$"
 
-gUnknown_0827EDC1:: @ 27EDC1
+gTrickHouse_Mechadoll_Neither:: @ 27EDC1
 	.string "Neither$"
 
-gUnknown_0827EDC9:: @ 27EDC9
+gTrickHouse_Mechadoll_ElderlyMen:: @ 27EDC9
 	.string "Elderly men$"
 
-gUnknown_0827EDD5:: @ 27EDD5
+gTrickHouse_Mechadoll_ElderlyLadies:: @ 27EDD5
 	.string "Elderly ladies$"
 
-gUnknown_0827EDE4:: @ 27EDE4
+gTrickHouse_Mechadoll_SameNumber:: @ 27EDE4
 	.string "Same number$"
 
-gUnknown_0827EDF0:: @ 27EDF0
+gTrickHouse_Mechadoll_None:: @ 27EDF0
 	.string "None$"
 
-gUnknown_0827EDF5:: @ 27EDF5
+gTrickHouse_Mechadoll_One:: @ 27EDF5
 	.string "1$"
 
-gUnknown_0827EDF7:: @ 27EDF7
+gTrickHouse_Mechadoll_Two:: @ 27EDF7
 	.string "2$"
 
-gUnknown_0827EDF9:: @ 27EDF9
+gTrickHouse_Mechadoll_Two2:: @ 27EDF9
 	.string "2$"
 
-gUnknown_0827EDFB:: @ 27EDFB
+gTrickHouse_Mechadoll_Three:: @ 27EDFB
 	.string "3$"
 
-gUnknown_0827EDFD:: @ 27EDFD
+gTrickHouse_Mechadoll_Four:: @ 27EDFD
 	.string "4$"
 
-gUnknown_0827EDFF:: @ 27EDFF
+gTrickHouse_Mechadoll_Six:: @ 27EDFF
 	.string "6$"
 
-gUnknown_0827EE01:: @ 27EE01
+gTrickHouse_Mechadoll_Seven:: @ 27EE01
 	.string "7$"
 
-gUnknown_0827EE03:: @ 27EE03
+gTrickHouse_Mechadoll_Eight:: @ 27EE03
 	.string "8$"
 
-gUnknown_0827EE05:: @ 27EE05
+gTrickHouse_Mechadoll_Six2:: @ 27EE05
 	.string "6$"
 
-gUnknown_0827EE07:: @ 27EE07
+gTrickHouse_Mechadoll_Seven2:: @ 27EE07
 	.string "7$"
 
-gUnknown_0827EE09:: @ 27EE09
+gTrickHouse_Mechadoll_Eight2:: @ 27EE09
 	.string "8$"
 
 	.include "data/scripts/tv.inc"
@@ -4013,7 +4020,7 @@ BattleFrontier_BattleTowerLobby_EventScript_28CB96:: @ 828CB96
 BattleFrontier_BattleTowerLobby_EventScript_28CBD8:: @ 828CBD8
 	message BattleFrontier_BattleTowerLobby_Text_27F7BA
 	waitmessage
-	multichoice 20, 8, 45, 1
+	multichoice 20, 8, MULTI_SATISFACTION, 1
 	copyvar VAR_0x8008, VAR_RESULT
 	compare VAR_RESULT, 0
 	call_if_eq BattleFrontier_BattleTowerLobby_EventScript_28CC38
@@ -4205,7 +4212,7 @@ MauvilleCity_GameCorner_EventScript_2A5B0D:: @ 82A5B0D
 	.include "data/text/roulette.inc"
 	.include "data/text/pokedex_rating.inc"
 	.include "data/text/lottery_corner.inc"
-	.include "data/text/eon_ticket.inc"
+	.include "data/text/event_ticket_1.inc"
 	.include "data/text/braille.inc"
 	.include "data/text/berries.inc"
 	.include "data/text/shoal_cave.inc"
@@ -4281,23 +4288,23 @@ GraniteCave_B1F_Movement_2A8369: @ 82A8369
 	step_end
 
 LilycoveCity_PokemonCenter_1F_EventScript_2A836B:: @ 82A836B
-	special sub_818DAEC
+	special Script_GetLilycoveLadyId
 	switch VAR_RESULT
-	case 0, LilycoveCity_PokemonCenter_1F_EventScript_2A8554
-	case 1, LilycoveCity_PokemonCenter_1F_EventScript_2A8395
-	case 2, LilycoveCity_PokemonCenter_1F_EventScript_2A882A
+	case LILYCOVE_LADY_QUIZ, LilycoveCity_PokemonCenter_1F_EventScript_2A8554
+	case LILYCOVE_LADY_FAVOR, LilycoveCity_PokemonCenter_1F_EventScript_2A8395
+	case LILYCOVE_LADY_CONTEST, LilycoveCity_PokemonCenter_1F_EventScript_2A882A
 	end
 
 LilycoveCity_PokemonCenter_1F_EventScript_2A8395:: @ 82A8395
 	lock
 	faceplayer
 	msgbox LilycoveCity_PokemonCenter_1F_Text_2A8A69, MSGBOX_DEFAULT
-	specialvar VAR_RESULT, sub_818DBE8
-	compare VAR_RESULT, 0
+	specialvar VAR_RESULT, GetFavorLadyState
+	compare VAR_RESULT, LILYCOVE_LADY_STATE_READY
 	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A83D0
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, LILYCOVE_LADY_STATE_COMPLETED
 	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A83C6
-	compare VAR_RESULT, 2
+	compare VAR_RESULT, LILYCOVE_LADY_STATE_PRIZE
 	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A8510
 	end
 
@@ -4307,9 +4314,9 @@ LilycoveCity_PokemonCenter_1F_EventScript_2A83C6:: @ 82A83C6
 	end
 
 LilycoveCity_PokemonCenter_1F_EventScript_2A83D0:: @ 82A83D0
-	special sub_818DC2C
+	special BufferFavorLadyRequest
 	msgbox LilycoveCity_PokemonCenter_1F_Text_2A8A7D, MSGBOX_DEFAULT
-	specialvar VAR_RESULT, sub_818DC60
+	specialvar VAR_RESULT, HasAnotherPlayerGivenFavorLadyItem
 	compare VAR_RESULT, 0
 	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A8435
 	compare VAR_RESULT, 1
@@ -4317,9 +4324,9 @@ LilycoveCity_PokemonCenter_1F_EventScript_2A83D0:: @ 82A83D0
 	end
 
 LilycoveCity_PokemonCenter_1F_EventScript_2A83F7:: @ 82A83F7
-	special sub_818DCC8
-	special sub_818DD14
-	specialvar VAR_RESULT, sub_818DD54
+	special BufferFavorLadyItemName
+	special BufferFavorLadyPlayerName
+	specialvar VAR_RESULT, DidFavorLadyLikeItem
 	compare VAR_RESULT, 0
 	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A8419
 	compare VAR_RESULT, 1
@@ -4357,7 +4364,7 @@ LilycoveCity_PokemonCenter_1F_EventScript_2A845E:: @ 82A845E
 LilycoveCity_PokemonCenter_1F_EventScript_2A846C:: @ 82A846C
 	fadescreen 1
 	setvar VAR_RESULT, 0
-	special sub_818DD78
+	special Script_FavorLadyOpenBagMenu
 	waitstate
 	compare VAR_RESULT, 0
 	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A848E
@@ -4374,7 +4381,7 @@ LilycoveCity_PokemonCenter_1F_EventScript_2A848E:: @ 82A848E
 	end
 
 LilycoveCity_PokemonCenter_1F_EventScript_2A84AD:: @ 82A84AD
-	specialvar VAR_RESULT, sub_818DE44
+	specialvar VAR_RESULT, Script_DoesFavorLadyLikeItem
 	compare VAR_RESULT, 0
 	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A84C9
 	compare VAR_RESULT, 1
@@ -4382,13 +4389,13 @@ LilycoveCity_PokemonCenter_1F_EventScript_2A84AD:: @ 82A84AD
 	end
 
 LilycoveCity_PokemonCenter_1F_EventScript_2A84C9:: @ 82A84C9
-	special sub_818DC2C
+	special BufferFavorLadyRequest
 	msgbox LilycoveCity_PokemonCenter_1F_Text_2A8C0F, MSGBOX_DEFAULT
 	release
 	end
 
 LilycoveCity_PokemonCenter_1F_EventScript_2A84D6:: @ 82A84D6
-	specialvar VAR_RESULT, sub_818DE5C
+	specialvar VAR_RESULT, IsFavorLadyThresholdMet
 	compare VAR_RESULT, 0
 	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A84F2
 	compare VAR_RESULT, 1
@@ -4396,20 +4403,20 @@ LilycoveCity_PokemonCenter_1F_EventScript_2A84D6:: @ 82A84D6
 	end
 
 LilycoveCity_PokemonCenter_1F_EventScript_2A84F2:: @ 82A84F2
-	special sub_818DC2C
+	special BufferFavorLadyRequest
 	msgbox LilycoveCity_PokemonCenter_1F_Text_2A8C6F, MSGBOX_DEFAULT
 	release
 	end
 
 LilycoveCity_PokemonCenter_1F_EventScript_2A84FF:: @ 82A84FF
-	special sub_818DC2C
+	special BufferFavorLadyRequest
 	msgbox LilycoveCity_PokemonCenter_1F_Text_2A8CC8, MSGBOX_DEFAULT
 	goto LilycoveCity_PokemonCenter_1F_EventScript_2A8510
 	end
 
 LilycoveCity_PokemonCenter_1F_EventScript_2A8510:: @ 82A8510
 	setvar VAR_0x8004, 0
-	specialvar VAR_0x8004, sub_818DEA0
+	specialvar VAR_0x8004, FavorLadyGetPrize
 	msgbox LilycoveCity_PokemonCenter_1F_Text_2A8D5D, MSGBOX_DEFAULT
 	giveitem_std VAR_0x8004
 	compare VAR_RESULT, 0
@@ -4424,7 +4431,7 @@ LilycoveCity_PokemonCenter_1F_EventScript_2A8545:: @ 82A8545
 	end
 
 LilycoveCity_PokemonCenter_1F_EventScript_2A854F:: @ 82A854F
-	special sub_818DEDC
+	special SetFavorLadyState_Complete
 	release
 	end
 
@@ -4432,27 +4439,27 @@ LilycoveCity_PokemonCenter_1F_EventScript_2A8554:: @ 82A8554
 	lock
 	faceplayer
 	msgbox LilycoveCity_PokemonCenter_1F_Text_2A8E2B, MSGBOX_DEFAULT
-	specialvar VAR_RESULT, sub_818E038
-	compare VAR_RESULT, 0
+	specialvar VAR_RESULT, GetQuizLadyState
+	compare VAR_RESULT, LILYCOVE_LADY_STATE_READY
 	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A8585
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, LILYCOVE_LADY_STATE_COMPLETED
 	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A85AC
-	compare VAR_RESULT, 2
+	compare VAR_RESULT, LILYCOVE_LADY_STATE_PRIZE
 	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A86EC
 	end
 
 LilycoveCity_PokemonCenter_1F_EventScript_2A8585:: @ 82A8585
-	specialvar VAR_RESULT, sub_818E06C
-	compare VAR_RESULT, 0
+	specialvar VAR_RESULT, GetQuizAuthor
+	compare VAR_RESULT, QUIZ_AUTHOR_PLAYER
 	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A85C8
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, QUIZ_AUTHOR_OTHER_PLAYER
 	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A85D2
-	compare VAR_RESULT, 2
+	compare VAR_RESULT, QUIZ_AUTHOR_LADY
 	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A85E0
 	end
 
 LilycoveCity_PokemonCenter_1F_EventScript_2A85AC:: @ 82A85AC
-	specialvar VAR_RESULT, sub_818E2D8
+	specialvar VAR_RESULT, IsQuizLadyWaitingForChallenger
 	compare VAR_RESULT, 0
 	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A8759
 	compare VAR_RESULT, 1
@@ -4489,7 +4496,7 @@ LilycoveCity_PokemonCenter_1F_EventScript_2A8612:: @ 82A8612
 	end
 
 LilycoveCity_PokemonCenter_1F_EventScript_2A861C:: @ 82A861C
-	special sub_818E3BC
+	special ClearQuizLadyPlayerAnswer
 	compare VAR_0x8004, 0
 	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A864C
 	compare VAR_0x8004, EASY_CHAT_TYPE_QUIZ_ANSWER
@@ -4503,13 +4510,13 @@ LilycoveCity_PokemonCenter_1F_EventScript_2A8635:: @ 82A8635
 	end
 
 LilycoveCity_PokemonCenter_1F_EventScript_2A864C:: @ 82A864C
-	special sub_811A858
+	special QuizLadyShowQuizQuestion
 	waitstate
 	goto LilycoveCity_PokemonCenter_1F_EventScript_2A8635
 	end
 
 LilycoveCity_PokemonCenter_1F_EventScript_2A8656:: @ 82A8656
-	special sub_818E2FC
+	special QuizLadyGetPlayerAnswer
 	waitstate
 	goto LilycoveCity_PokemonCenter_1F_EventScript_2A8635
 	end
@@ -4528,9 +4535,9 @@ LilycoveCity_PokemonCenter_1F_EventScript_2A867F:: @ 82A867F
 	end
 
 LilycoveCity_PokemonCenter_1F_EventScript_2A8689:: @ 82A8689
-	special sub_818E37C
+	special SetQuizLadyState_Complete
 	msgbox LilycoveCity_PokemonCenter_1F_Text_2A8F4D, MSGBOX_DEFAULT
-	specialvar VAR_RESULT, sub_818E308
+	specialvar VAR_RESULT, IsQuizAnswerCorrect
 	compare VAR_RESULT, 0
 	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A86C7
 	compare VAR_RESULT, 1
@@ -4546,8 +4553,8 @@ LilycoveCity_PokemonCenter_1F_EventScript_2A86B0:: @ 82A86B0
 	end
 
 LilycoveCity_PokemonCenter_1F_EventScript_2A86C7:: @ 82A86C7
-	special sub_818E538
-	special sub_818E274
+	special BufferQuizCorrectAnswer
+	special BufferQuizPrizeName
 	playse SE_HAZURE
 	delay 10
 	playse SE_HAZURE
@@ -4556,8 +4563,9 @@ LilycoveCity_PokemonCenter_1F_EventScript_2A86C7:: @ 82A86C7
 	goto LilycoveCity_PokemonCenter_1F_EventScript_2A8759
 	end
 
+@ VAR_RESULT is essentially ignored, both jumps are identical
 LilycoveCity_PokemonCenter_1F_EventScript_2A86EC:: @ 82A86EC
-	specialvar VAR_RESULT, sub_818E298
+	specialvar VAR_RESULT, BufferQuizAuthorNameAndCheckIfLady
 	compare VAR_RESULT, 1
 	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A8708
 	compare VAR_RESULT, 0
@@ -4576,8 +4584,8 @@ LilycoveCity_PokemonCenter_1F_EventScript_2A8716:: @ 82A8716
 
 LilycoveCity_PokemonCenter_1F_EventScript_2A8724:: @ 82A8724
 	setvar VAR_0x8005, 0
-	special sub_818E358
-	special sub_818E37C
+	special BufferQuizPrizeItem
+	special SetQuizLadyState_Complete
 	giveitem_std VAR_0x8005
 	compare VAR_RESULT, 0
 	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A874C
@@ -4586,7 +4594,7 @@ LilycoveCity_PokemonCenter_1F_EventScript_2A8724:: @ 82A8724
 
 LilycoveCity_PokemonCenter_1F_EventScript_2A874C:: @ 82A874C
 	msgbox LilycoveCity_PokemonCenter_1F_Text_2A906A, MSGBOX_DEFAULT
-	special sub_818E39C
+	special SetQuizLadyState_GivePrize
 	release
 	end
 
@@ -4599,7 +4607,7 @@ LilycoveCity_PokemonCenter_1F_EventScript_2A8759:: @ 82A8759
 	end
 
 LilycoveCity_PokemonCenter_1F_EventScript_2A8778:: @ 82A8778
-	special sub_818E3EC
+	special QuizLadyPickNewQuestion
 	msgbox LilycoveCity_PokemonCenter_1F_Text_2A9131, MSGBOX_DEFAULT
 	release
 	end
@@ -4610,7 +4618,7 @@ LilycoveCity_PokemonCenter_1F_EventScript_2A8785:: @ 82A8785
 LilycoveCity_PokemonCenter_1F_EventScript_2A878D:: @ 82A878D
 	fadescreen 1
 	setvar VAR_RESULT, 0
-	special sub_818E3E0
+	special Script_QuizLadyOpenBagMenu
 	waitstate
 	compare VAR_RESULT, 0
 	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A87AF
@@ -4628,13 +4636,13 @@ LilycoveCity_PokemonCenter_1F_EventScript_2A87AF:: @ 82A87AF
 
 LilycoveCity_PokemonCenter_1F_EventScript_2A87CE:: @ 82A87CE
 	msgbox LilycoveCity_PokemonCenter_1F_Text_2A9270, MSGBOX_DEFAULT
-	special sub_818E430
-	special sub_818E3BC
-	setvar VAR_0x8004, 16
+	special ClearQuizLadyQuestionAndAnswer
+	special ClearQuizLadyPlayerAnswer
+	setvar VAR_0x8004, EASY_CHAT_TYPE_QUIZ_QUESTION
 
 LilycoveCity_PokemonCenter_1F_EventScript_2A87E1:: @ 82A87E1
 	fadescreen 1
-	special sub_818E47C
+	special QuizLadySetCustomQuestion
 	waitstate
 	compare VAR_RESULT, 0
 	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A87F8
@@ -4650,9 +4658,9 @@ LilycoveCity_PokemonCenter_1F_EventScript_2A87F8:: @ 82A87F8
 	end
 
 LilycoveCity_PokemonCenter_1F_EventScript_2A8817:: @ 82A8817
-	special sub_818E490
-	special sub_818E4A4
-	special sub_818E510
+	special QuizLadyTakePrizeForCustomQuiz
+	special QuizLadyRecordCustomQuizData
+	special QuizLadySetWaitingForChallenger
 	msgbox LilycoveCity_PokemonCenter_1F_Text_2A9336, MSGBOX_DEFAULT
 	release
 	end
@@ -4661,15 +4669,16 @@ LilycoveCity_PokemonCenter_1F_EventScript_2A882A:: @ 82A882A
 	lock
 	faceplayer
 	msgbox LilycoveCity_PokemonCenter_1F_Text_2A93A7, MSGBOX_DEFAULT
-	specialvar VAR_RESULT, sub_818E8B4
+	specialvar VAR_RESULT, HasPlayerGivenContestLadyPokeblock
 	compare VAR_RESULT, 0
 	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A8850
 	compare VAR_RESULT, 1
 	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A886C
 	end
 
+@ Redundant with above script, VAR_RESULT will always be 0 here
 LilycoveCity_PokemonCenter_1F_EventScript_2A8850:: @ 82A8850
-	specialvar VAR_RESULT, sub_818E8E0
+	specialvar VAR_RESULT, ShouldContestLadyShowGoOnAir
 	compare VAR_RESULT, 0
 	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A8876
 	compare VAR_RESULT, 1
@@ -4682,7 +4691,7 @@ LilycoveCity_PokemonCenter_1F_EventScript_2A886C:: @ 82A886C
 	end
 
 LilycoveCity_PokemonCenter_1F_EventScript_2A8876:: @ 82A8876
-	special sub_818E914
+	special Script_BufferContestLadyCategoryAndMonName
 	msgbox LilycoveCity_PokemonCenter_1F_Text_2A93F4, MSGBOX_DEFAULT
 	checkitem ITEM_POKEBLOCK_CASE, 1
 	compare VAR_RESULT, 0
@@ -4701,7 +4710,7 @@ LilycoveCity_PokemonCenter_1F_EventScript_2A88B0:: @ 82A88B0
 
 LilycoveCity_PokemonCenter_1F_EventScript_2A88BA:: @ 82A88BA
 	fadescreen 1
-	special sub_818E92C
+	special OpenPokeblockCaseForContestLady
 	waitstate
 	compare VAR_RESULT, 65535
 	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A88D7
@@ -4719,11 +4728,12 @@ LilycoveCity_PokemonCenter_1F_EventScript_2A88D7:: @ 82A88D7
 
 LilycoveCity_PokemonCenter_1F_EventScript_2A88F6:: @ 82A88F6
 	msgbox LilycoveCity_PokemonCenter_1F_Text_2A9571, MSGBOX_DEFAULT
-	special sub_818E940
-	special sub_818E960
+	special SetContestLadyGivenPokeblock
+	special GetContestLadyMonSpecies
 	goto LilycoveCity_PokemonCenter_1F_EventScript_2A890A
 	end
 
+@ VAR_0x8004 here is the return value from GivePokeblockToContestLady
 LilycoveCity_PokemonCenter_1F_EventScript_2A890A:: @ 82A890A
 	applymovement 4, LilycoveCity_PokemonCenter_1F_Movement_2A89B8
 	waitmovement 0
@@ -4745,6 +4755,7 @@ LilycoveCity_PokemonCenter_1F_EventScript_2A893F:: @ 82A893F
 	waitmovement 0
 	delay 60
 
+@ VAR_0x8004 here is the return value from GivePokeblockToContestLady
 LilycoveCity_PokemonCenter_1F_EventScript_2A894C:: @ 82A894C
 	applymovement 4, LilycoveCity_PokemonCenter_1F_Movement_2A89C0
 	waitmovement 0
@@ -4761,13 +4772,13 @@ LilycoveCity_PokemonCenter_1F_EventScript_2A8970:: @ 82A8970
 	end
 
 LilycoveCity_PokemonCenter_1F_EventScript_2A897E:: @ 82A897E
-	special sub_818E914
+	special Script_BufferContestLadyCategoryAndMonName
 	msgbox LilycoveCity_PokemonCenter_1F_Text_2A9605, MSGBOX_DEFAULT
 	goto LilycoveCity_PokemonCenter_1F_EventScript_2A898F
 	end
 
 LilycoveCity_PokemonCenter_1F_EventScript_2A898F:: @ 82A898F
-	specialvar VAR_RESULT, sub_818E8E0
+	specialvar VAR_RESULT, ShouldContestLadyShowGoOnAir
 	compare VAR_RESULT, 1
 	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A89A1
 	release
@@ -4810,18 +4821,18 @@ LilycoveCity_PokemonCenter_1F_Movement_2A89C2: @ 82A89C2
 	step_end
 
 LilycoveCity_PokemonCenter_1F_EventScript_2A89C7:: @ 82A89C7
-	specialvar VAR_RESULT, sub_818E990
-	special sub_818E914
-	special sub_818E960
-	compare VAR_RESULT, 0
+	specialvar VAR_RESULT, GetContestLadyCategory
+	special Script_BufferContestLadyCategoryAndMonName
+	special GetContestLadyMonSpecies
+	compare VAR_RESULT, CONTEST_CATEGORY_COOL
 	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A8A0A
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, CONTEST_CATEGORY_BEAUTY
 	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A8A1D
-	compare VAR_RESULT, 2
+	compare VAR_RESULT, CONTEST_CATEGORY_CUTE
 	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A8A30
-	compare VAR_RESULT, 3
+	compare VAR_RESULT, CONTEST_CATEGORY_SMART
 	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A8A43
-	compare VAR_RESULT, 4
+	compare VAR_RESULT, CONTEST_CATEGORY_TOUGH
 	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A8A56
 	end
 
@@ -5542,17 +5553,17 @@ BattleFrontier_BattlePikeRandomRoom1_EventScript_2C3EE8:: @ 82C3EE8
 	goto_if_eq BattleFrontier_BattlePikeRandomRoom1_EventScript_2C3F3F
 	hideobjectat 2, MAP_BATTLE_FRONTIER_BATTLE_PIKE_RANDOM_ROOM1
 	setvar VAR_TEMP_4, 1
-	turnobject 255, 2
+	turnobject EVENT_OBJ_ID_PLAYER, DIR_NORTH
 	end
 
 BattleFrontier_BattlePikeRandomRoom1_EventScript_2C3F35:: @ 82C3F35
 	setvar VAR_TEMP_4, 1
-	turnobject 255, 2
+	turnobject EVENT_OBJ_ID_PLAYER, DIR_NORTH
 	end
 
 BattleFrontier_BattlePikeRandomRoom1_EventScript_2C3F3F:: @ 82C3F3F
 	setvar VAR_TEMP_4, 1
-	turnobject 255, 2
+	turnobject EVENT_OBJ_ID_PLAYER, DIR_NORTH
 	hideobjectat 1, MAP_BATTLE_FRONTIER_BATTLE_PIKE_RANDOM_ROOM1
 	end
 
@@ -6296,77 +6307,7 @@ VerdanturfTown_BattleTentLobby_Text_2C6878: @ 82C6878
 	.string "The VERDANTURF BATTLE TENT\n"
 	.string "rules are listed.$"
 
-LilycoveCity_Harbor_Text_2C68A5: @ 82C68A5
-	.string "What's up, youngster?\p"
-	.string "What, it's you who's supposed to have\n"
-	.string "a tattered old map?\p"
-	.string "Let's have a look.\n"
-	.string "… … … … … …\p"
-	.string "Boy, this is quite a ways away.\n"
-	.string "I'm afraid I can't help you…$"
-
-LilycoveCity_Harbor_Text_2C6951: @ 82C6951
-	.string "BRINEY: Hold on a second!\p"
-	.string "What's the idea of turning down\n"
-	.string "someone that I owe so much to?$"
-
-LilycoveCity_Harbor_Text_2C69AA: @ 82C69AA
-	.string "{PLAYER}{KUN}, I'm terribly sorry.\p"
-	.string "You came to me seeking my help,\n"
-	.string "and we almost turned you away.\p"
-	.string "Well, let me make things right.\p"
-	.string "We'll sail right away, of course!\p"
-	.string "Let's find this island on\n"
-	.string "this OLD SEA MAP!$"
-
-LilycoveCity_Harbor_Text_2C6A71: @ 82C6A71
-	.string "Is it you who brought that odd\n"
-	.string "ticket?\p"
-	.string "Where you're trying to go is an island\n"
-	.string "that's far, far away.\p"
-	.string "No one knows what awaits there…\p"
-	.string "The very thought excites my blood\n"
-	.string "as a sailing man!\p"
-	.string "Get on board, youngster!$"
-
-FarawayIsland_Entrance_Text_2C6B42: @ 82C6B42
-	.string "CAPT. BRINEY can be so maddeningly\n"
-	.string "fickle…\p"
-	.string "Do you want to return to LILYCOVE?$"
-
-BirthIsland_Harbor_Text_2C6B90: @ 82C6B90
-	.string "What an oddly shaped island, eh?\n"
-	.string "Do you want to return to LILYCOVE?$"
-
-LilycoveCity_Harbor_Text_2C6BD4: @ 82C6BD4
-	.string "Is it you who brought those\n"
-	.string "odd tickets?\p"
-	.string "… … …Hm.\p"
-	.string "These tickets will get you to islands\n"
-	.string "that are far, far away.\p"
-	.string "No one knows what awaits there,\n"
-	.string "or what may happen there.\p"
-	.string "The very thought excites my blood\n"
-	.string "as a sailing man!\p"
-	.string "Get on board, youngster!\n"
-	.string "Where shall we sail first?$"
-
-NavelRock_Harbor_Text_2C6CE6: @ 82C6CE6
-	.string "Did… Did you hear that?\n"
-	.string "That low growling from deep in there.\p"
-	.string "Are you sure it's safe?\n"
-	.string "Do you think we should leave?$"
-
-FarawayIsland_Entrance_Text_2C6D5A: @ 82C6D5A
-	.string "The writing is fading as if it was\n"
-	.string "written a long time ago…\p"
-	.string "“…ber, 6th day\n"
-	.string "If any human…sets foot here…\l"
-	.string "again…et it be a kindhearted pers…\l"
-	.string "…ith that hope, I depar…”$"
-
-FarawayIsland_Interior_Text_2C6DFF: @ 82C6DFF
-	.string "Myuu…$"
+	.include "data/text/event_ticket_2.inc"
 
 MauvilleCity_Text_2C6E05: @ 82C6E05
 	.string "This move can be learned only\n"

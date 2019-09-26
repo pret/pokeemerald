@@ -1174,78 +1174,29 @@ u32 GetTileMapIndexFromCoords(s32 x, s32 y, s32 screenSize, u32 screenWidth, u32
     return (y * 0x20) + x;
 }
 
-#ifdef NONMATCHING // This one has some weird switch statement cases that refuse to cooperate
 void CopyTileMapEntry(const u16 *src, u16 *dest, s32 palette1, s32 tileOffset, s32 palette2)
 {
     u16 var;
+
+    if (palette1 == 16)
+        goto CASE_16;
     switch (palette1)
     {
     case 0 ... 16:
-        if (palette1 != 16)
-            var = ((*src + tileOffset) & 0xFFF) + ((palette1 + palette2) << 12);
-        else
-            var = ((*dest & 0xFC00) + (palette2 << 12)) | ((*src + tileOffset) & 0x3FF);
+        var = ((*src + tileOffset) & 0xFFF) + ((palette1 + palette2) << 12);
+        break;
+    CASE_16:
+        var = *dest;
+        var &= 0xFC00;
+        var += palette2 << 12;
+        var |= (*src + tileOffset) & 0x3FF;
         break;
     default:
         var = *src + tileOffset + (palette2 << 12);
         break;
     }
-
     *dest = var;
 }
-#else
-NAKED
-void CopyTileMapEntry(const u16 *src, u16 *dest, s32 palette1, s32 tileOffset, s32 palette2)
-{
-    asm("push {r4-r6,lr}\n\
-    add r4, r0, #0\n\
-    add r6, r1, #0\n\
-    ldr r5, [sp, #0x10]\n\
-    cmp r2, #0x10\n\
-    beq _08002B14\n\
-    cmp r2, #0x10\n\
-    bgt _08002B34\n\
-    cmp r2, #0\n\
-    blt _08002B34\n\
-    ldrh r0, [r4]\n\
-    add r0, r3\n\
-    ldr r3, =0x00000fff\n\
-    add r1, r3, #0\n\
-    and r0, r1\n\
-    add r1, r2, r5\n\
-    lsl r1, #12\n\
-    b _08002B3A\n\
-    .pool\n\
-_08002B14:\n\
-    ldrh r1, [r6]\n\
-    mov r0, #0xFC\n\
-    lsl r0, #8\n\
-    and r1, r0\n\
-    lsl r2, r5, #12\n\
-    add r2, r1, r2\n\
-    ldrh r0, [r4]\n\
-    add r0, r3\n\
-    ldr r3, =0x000003ff\n\
-    add r1, r3, #0\n\
-    and r0, r1\n\
-    orr r0, r2\n\
-    b _08002B3C\n\
-    .pool\n\
-_08002B34:\n\
-    ldrh r0, [r4]\n\
-    add r0, r3\n\
-    lsl r1, r5, #12\n\
-_08002B3A:\n\
-    add r0, r1\n\
-_08002B3C:\n\
-    lsl r0, #16\n\
-    lsr r1, r0, #16\n\
-    strh r1, [r6]\n\
-    pop {r4-r6}\n\
-    pop {r0}\n\
-    bx r0\n");
-}
-#endif // NONMATCHING
 
 u32 GetBgType(u8 bg)
 {
