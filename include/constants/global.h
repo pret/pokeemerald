@@ -65,6 +65,7 @@
 
 #define MALE 0
 #define FEMALE 1
+#define GENDER_COUNT 2
 
 #define OPTIONS_BUTTON_MODE_NORMAL 0
 #define OPTIONS_BUTTON_MODE_LR 1

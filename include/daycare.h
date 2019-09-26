@@ -1,10 +1,10 @@
 #ifndef GUARD_DAYCARE_H
 #define GUARD_DAYCARE_H
 
-#define EGG_HATCH_LEVEL 5
+#include "constants/daycare.h"
 
-u8 *GetMonNick(struct Pokemon *mon, u8 *dest);
-u8 *GetBoxMonNick(struct BoxPokemon *mon, u8 *dest);
+u8 *GetMonNickname2(struct Pokemon *mon, u8 *dest);
+u8 *GetBoxMonNickname(struct BoxPokemon *mon, u8 *dest);
 u8 CountPokemonInDaycare(struct DayCare *daycare);
 void InitDaycareMailRecordMixing(struct DayCare *daycare, struct RecordMixingDayCareMail *daycareMail);
 void StoreSelectedPokemonInDaycare(void);
@@ -16,7 +16,7 @@ void RejectEggFromDayCare(void);
 void CreateEgg(struct Pokemon *mon, u16 species, bool8 setHotSpringsLocation);
 void GiveEggFromDaycare(void);
 bool8 ShouldEggHatch(void);
-u16 GetSelectedMonNickAndSpecies(void);
+u16 GetSelectedMonNicknameAndSpecies(void);
 void GetDaycareMonNicknames(void);
 u8 GetDaycareState(void);
 void SetDaycareCompatibilityString(void);

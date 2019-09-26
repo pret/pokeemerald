@@ -41,6 +41,8 @@
 #define EGG_GROUP_DRAGON        14
 #define EGG_GROUP_UNDISCOVERED  15
 
+#define EGG_GROUPS_PER_MON      2
+
 // Pokemon natures
 #define NATURE_HARDY    0
 #define NATURE_LONELY   1
