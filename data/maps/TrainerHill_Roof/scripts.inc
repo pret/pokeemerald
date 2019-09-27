@@ -29,14 +29,14 @@ TrainerHill_Roof_EventScript_268FF2:: @ 8268FF2
 TrainerHill_Roof_EventScript_269020:: @ 8269020
 	msgbox TrainerHill_Roof_Text_268AC5, MSGBOX_DEFAULT
 	playfanfare MUS_FANFA1
-	message gUnknown_08272A78
+	message gText_ObtainedTheItem
 	waitfanfare
 	waitmessage
 	goto TrainerHill_Roof_EventScript_269054
 
 TrainerHill_Roof_EventScript_269037:: @ 8269037
 	msgbox TrainerHill_Roof_Text_268AC5, MSGBOX_DEFAULT
-	msgbox gUnknown_08272A89, MSGBOX_DEFAULT
+	msgbox gText_TheBagIsFull, MSGBOX_DEFAULT
 	msgbox TrainerHill_Roof_Text_268B07, MSGBOX_DEFAULT
 	goto TrainerHill_Roof_EventScript_269054
 

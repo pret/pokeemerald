@@ -1232,7 +1232,7 @@ LinkContestRoom1_EventScript_27ACBD:: @ 827ACBD
 
 LinkContestRoom1_EventScript_27ACDF:: @ 827ACDF
 	special sub_80F7FFC
-	incrementgamestat 42
+	incrementgamestat GAME_STAT_RECEIVED_RIBBONS
 	setflag FLAG_SYS_RIBBON_GET
 	lockall
 	msgbox LinkContestRoom1_Text_27BBD4, MSGBOX_DEFAULT

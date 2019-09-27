@@ -51,7 +51,7 @@ AquaHideout_B1F_EventScript_2339EB:: @ 82339EB
 
 AquaHideout_B1F_EventScript_233A2F:: @ 8233A2F
 	setflag FLAG_DEFEATED_ELECTRODE_1_AQUA_HIDEOUT
-	goto AquaHideout_B1F_EventScript_27376D
+	goto Common_EventScript_RemoveStaticPokemon
 	end
 
 AquaHideout_B1F_EventScript_233A38:: @ 8233A38
@@ -78,7 +78,7 @@ AquaHideout_B1F_EventScript_233A38:: @ 8233A38
 
 AquaHideout_B1F_EventScript_233A7C:: @ 8233A7C
 	setflag FLAG_DEFEATED_ELECTRODE_2_AQUA_HIDEOUT
-	goto AquaHideout_B1F_EventScript_27376D
+	goto Common_EventScript_RemoveStaticPokemon
 	end
 
 AquaHideout_B1F_EventScript_233A85:: @ 8233A85

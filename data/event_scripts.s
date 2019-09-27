@@ -24,6 +24,7 @@
 #include "constants/moves.h"
 #include "constants/pokemon.h"
 #include "constants/script_menu.h"
+#include "constants/secret_bases.h"
 #include "constants/songs.h"
 #include "constants/species.h"
 #include "constants/trainer_hill.h"
@@ -425,227 +426,7 @@ gStdScripts_End:: @ 81DC2CC
 	.include "data/maps/TerraCave_End/scripts.inc"
 	.include "data/maps/AlteringCave/scripts.inc"
 	.include "data/maps/MeteorFalls_StevensCave/scripts.inc"
-	.include "data/maps/SecretBase_BlueCave1/scripts.inc"
-	.include "data/maps/SecretBase_BlueCave2/scripts.inc"
-	.include "data/maps/SecretBase_BlueCave3/scripts.inc"
-	.include "data/maps/SecretBase_BlueCave4/scripts.inc"
-	.include "data/maps/SecretBase_BrownCave1/scripts.inc"
-	.include "data/maps/SecretBase_BrownCave2/scripts.inc"
-	.include "data/maps/SecretBase_BrownCave3/scripts.inc"
-	.include "data/maps/SecretBase_BrownCave4/scripts.inc"
-	.include "data/maps/SecretBase_RedCave1/scripts.inc"
-	.include "data/maps/SecretBase_RedCave2/scripts.inc"
-	.include "data/maps/SecretBase_RedCave3/scripts.inc"
-	.include "data/maps/SecretBase_RedCave4/scripts.inc"
-	.include "data/maps/SecretBase_Shrub1/scripts.inc"
-	.include "data/maps/SecretBase_Shrub2/scripts.inc"
-	.include "data/maps/SecretBase_Shrub3/scripts.inc"
-	.include "data/maps/SecretBase_Shrub4/scripts.inc"
-	.include "data/maps/SecretBase_Tree1/scripts.inc"
-	.include "data/maps/SecretBase_Tree2/scripts.inc"
-	.include "data/maps/SecretBase_Tree3/scripts.inc"
-	.include "data/maps/SecretBase_Tree4/scripts.inc"
-	.include "data/maps/SecretBase_YellowCave1/scripts.inc"
-	.include "data/maps/SecretBase_YellowCave2/scripts.inc"
-	.include "data/maps/SecretBase_YellowCave3/scripts.inc"
-	.include "data/maps/SecretBase_YellowCave4/scripts.inc"
-
-EventScript_SecretBasePC:: @ 823B4BB
-	lockall
-	playse SE_PC_LOGIN
-	message Text_SecretBaseBootUpPC
-	dofieldeffect FLDEFF_PCTURN_ON
-	waitstate
-	waitmessage
-	waitbuttonpress
-	playse SE_SELECT
-	goto EventScript_SecretBasePCShowMainMenu
-	end
-
-EventScript_SecretBasePCShowMainMenu:: @ 823B4D3
-	message Text_SecretBasePCStartMenu
-	waitmessage
-	goto_if_set FLAG_SECRET_BASE_REGISTRY_ENABLED, EventScript_SecretBasePCMainMenuChoice
-	goto EventScript_23B531
-	end
-
-gUnknown_0823B4E8:: @ 823B4E8 ;EventScript_SecretBasePCCancel?
-	lockall
-	goto EventScript_SecretBasePCShowMainMenu
-	end
-
-EventScript_SecretBasePCMainMenuChoice:: @ 823B4EF
-	multichoice 0, 0, MULTI_DECOR_REGISTRY, 0
-	switch VAR_RESULT
-	case 0, EventScript_23B581
-	case 1, EventScript_23B568
-	case 2, EventScript_23B585
-	case 3, EventScript_23B66E
-	case MULTI_B_PRESSED, EventScript_23B66E
-	end
-
-EventScript_23B531:: @ 823B531
-	multichoice 0, 0, MULTI_DECOR_NOREGISTRY, 0
-	switch VAR_RESULT
-	case 0, EventScript_23B581
-	case 1, EventScript_23B568
-	case 2, EventScript_23B66E
-	case MULTI_B_PRESSED, EventScript_23B66E
-	end
-
-EventScript_23B568:: @ 823B568
-	msgbox Text_2766AA, MSGBOX_YESNO
-	compare VAR_RESULT, 0
-	goto_if_eq EventScript_SecretBasePCShowMainMenu
-	closemessage
-	special MoveOutOfSecretBase
-	releaseall
-	end
-
-EventScript_23B581:: @ 823B581
-	special ShowSecretBaseDecorationMenu
-	end
-
-EventScript_23B585:: @ 823B585
-	special ShowSecretBaseRegistryMenu
-	end
-
-EventScript_RecordMixingSecretBasePC:: @ 823B589
-	lockall
-	message Text_SecretBaseBootUpPC
-	playse SE_PC_LOGIN
-	dofieldeffect FLDEFF_PCTURN_ON
-	waitstate
-	waitmessage
-	waitbuttonpress
-	playse SE_SELECT
-	goto EventScript_23B5A1
-	end
-
-EventScript_23B5A1:: @ 823B5A1
-	message Text_SecretBasePCStartMenu
-	waitmessage
-	multichoice 0, 0, MULTI_REGISTER_MENU, 0
-	switch VAR_RESULT
-	case 0, EventScript_23B5F0
-	case 1, EventScript_23B585
-	case 2, EventScript_23B660
-	case 3, EventScript_23B66E
-	case MULTI_B_PRESSED, EventScript_23B66E
-	end
-
-gUnknown_0823B5E9:: @ 823B5E9
-	lockall
-	goto EventScript_23B5A1
-	end
-
-EventScript_23B5F0:: @ 823B5F0
-	special GetCurSecretBaseRegistrationValidity
-	compare VAR_RESULT, 1
-	goto_if_eq EventScript_23B62F
-	compare VAR_RESULT, 2
-	goto_if_eq EventScript_CantRegisterTooManyBases
-	special CopyCurSecretBaseOwnerName_StrVar1
-	msgbox Text_WantToRegisterSecretBase, MSGBOX_YESNO
-	compare VAR_RESULT, 0
-	goto_if_eq EventScript_23B5A1
-	msgbox Text_2767D1, MSGBOX_SIGN
-	special ToggleCurSecretBaseRegistry
-	special DoSecretBasePCTurnOffEffect
-	releaseall
-	end
-
-EventScript_23B62F:: @ 823B62F
-	msgbox Text_276731, MSGBOX_YESNO
-	compare VAR_RESULT, 0
-	goto_if_eq EventScript_23B5A1
-	msgbox Text_2767E9, MSGBOX_SIGN
-	special ToggleCurSecretBaseRegistry
-	special DoSecretBasePCTurnOffEffect
-	releaseall
-	end
-
-EventScript_CantRegisterTooManyBases:: @ 823B652
-	msgbox Text_TooManyBasesDeleteSome, MSGBOX_SIGN
-	special DoSecretBasePCTurnOffEffect
-	closemessage
-	releaseall
-	end
-
-EventScript_23B660:: @ 823B660
-	msgbox Text_276835, MSGBOX_DEFAULT
-	goto EventScript_23B5A1
-	end
-
-EventScript_23B66E:: @ 823B66E
-	special DoSecretBasePCTurnOffEffect
-	closemessage
-	releaseall
-	end
-
-EventScript_23B674:: @ 823B674
-	special SetSecretBaseSecretsTvFlags_Poster
-	end
-
-EventScript_23B678:: @ 823B678
-	special SetSecretBaseSecretsTvFlags_MiscFurnature
-	end
-
-EventScript_23B67C:: @ 823B67C
-	special SetSecretBaseSecretsTvFlags_LargeDecorationSpot
-	end
-
-EventScript_23B680:: @ 823B680
-	special SetSecretBaseSecretsTvFlags_SmallDecorationSpot
-	end
-
-EventScript_SecretBaseSandOrnament:: @ 823B684
-	special SetSecretBaseSecretsTvFlags_SandOrnament
-	dofieldeffect FLDEFF_SAND_PILLAR
-	waitstate
-	end
-
-EventScript_SecretBaseShieldOrToyTV:: @ 823B68C
-	special GetShieldToyTVDecorationInfo
-	compare VAR_RESULT, 0
-	goto_if_eq EventScript_23B6BC
-	compare VAR_RESULT, 1
-	goto_if_eq EventScript_23B6C5
-	compare VAR_RESULT, 2
-	goto_if_eq EventScript_23B6CE
-	compare VAR_RESULT, 3
-	goto_if_eq EventScript_23B6D7
-	end
-
-EventScript_23B6BC:: @ 823B6BC
-	msgbox Text_27692B, MSGBOX_SIGN
-	end
-
-EventScript_23B6C5:: @ 823B6C5
-	msgbox Text_276974, MSGBOX_SIGN
-	end
-
-EventScript_23B6CE:: @ 823B6CE
-	msgbox Text_2769B8, MSGBOX_SIGN
-	end
-
-EventScript_23B6D7:: @ 823B6D7
-	msgbox Text_2769FF, MSGBOX_SIGN
-	end
-
-gText_23B6E0:: @ 823B6E0
-	.string "There's a small indent in the wall.$"
-
-gText_23B704:: @ 823B704
-	.string "There's a small indent in the wall.\p"
-	.string "Use the SECRET POWER?$"
-
-gText_23B73E:: @ 823B73E
-	.string "Discovered a small cavern!$"
-
-SecretBase_RedCave1_Text_23B759: @ 823B759
-	.string "Want to make your SECRET BASE here?$"
-
+	.include "data/scripts/shared_secret_base.inc"
 	.include "data/maps/SingleBattleColosseum/scripts.inc"
 	.include "data/maps/TradeCenter/scripts.inc"
 	.include "data/maps/RecordCorner/scripts.inc"
@@ -1211,184 +992,27 @@ EverGrandeCity_HallOfFame_EventScript_ResetEliteFour:: @ 82718CC
 	setvar VAR_ELITE_4_STATE, 0
 	return
 
-DewfordTown_PokemonCenter_1F_EventScript_2718DE:: @ 82718DE
-FallarborTown_PokemonCenter_1F_EventScript_2718DE:: @ 82718DE
-LavaridgeTown_PokemonCenter_1F_EventScript_2718DE:: @ 82718DE
-MauvilleCity_PokemonCenter_1F_EventScript_2718DE:: @ 82718DE
-OldaleTown_PokemonCenter_1F_EventScript_2718DE:: @ 82718DE
-PetalburgCity_PokemonCenter_1F_EventScript_2718DE:: @ 82718DE
-RustboroCity_PokemonCenter_1F_EventScript_2718DE:: @ 82718DE
-SlateportCity_PokemonCenter_1F_EventScript_2718DE:: @ 82718DE
-VerdanturfTown_PokemonCenter_1F_EventScript_2718DE:: @ 82718DE
+Common_EventScript_UpdateBrineyLocation:: @ 82718DE
 	goto_if_unset FLAG_RECEIVED_POKENAV, Common_EventScript_NopReturn
 	goto_if_set FLAG_DEFEATED_PETALBURG_GYM, Common_EventScript_NopReturn
-	goto_if_unset FLAG_HIDE_ROUTE_104_MR_BRINEY_BOAT, OldaleTown_PokemonCenter_1F_EventScript_27190C
-	goto_if_unset FLAG_HIDE_MR_BRINEY_DEWFORD_TOWN, OldaleTown_PokemonCenter_1F_EventScript_271912
-	goto_if_unset FLAG_HIDE_ROUTE_108_MR_BRINEY, OldaleTown_PokemonCenter_1F_EventScript_271918
+	goto_if_unset FLAG_HIDE_ROUTE_104_MR_BRINEY_BOAT, EventScript_SetBrineyLocation_House
+	goto_if_unset FLAG_HIDE_MR_BRINEY_DEWFORD_TOWN, EventScript_SetBrineyLocation_Dewford
+	goto_if_unset FLAG_HIDE_ROUTE_108_MR_BRINEY, EventScript_SetBrineyLocation_Route108
 	return
 
-OldaleTown_PokemonCenter_1F_EventScript_27190C:: @ 827190C
+EventScript_SetBrineyLocation_House:: @ 827190C
 	setvar VAR_BRINEY_LOCATION, 1
 	return
 
-OldaleTown_PokemonCenter_1F_EventScript_271912:: @ 8271912
+EventScript_SetBrineyLocation_Dewford:: @ 8271912
 	setvar VAR_BRINEY_LOCATION, 2
 	return
 
-OldaleTown_PokemonCenter_1F_EventScript_271918:: @ 8271918
+EventScript_SetBrineyLocation_Route108:: @ 8271918
 	setvar VAR_BRINEY_LOCATION, 3
 	return
 
-BattleFrontier_PokemonCenter_1F_EventScript_27191E:: @ 827191E
-DewfordTown_PokemonCenter_1F_EventScript_27191E:: @ 827191E
-EverGrandeCity_PokemonCenter_1F_EventScript_27191E:: @ 827191E
-EverGrandeCity_PokemonLeague_1F_EventScript_27191E:: @ 827191E
-FallarborTown_PokemonCenter_1F_EventScript_27191E:: @ 827191E
-FortreeCity_PokemonCenter_1F_EventScript_27191E:: @ 827191E
-LavaridgeTown_PokemonCenter_1F_EventScript_27191E:: @ 827191E
-LilycoveCity_PokemonCenter_1F_EventScript_27191E:: @ 827191E
-MauvilleCity_PokemonCenter_1F_EventScript_27191E:: @ 827191E
-MossdeepCity_PokemonCenter_1F_EventScript_27191E:: @ 827191E
-OldaleTown_PokemonCenter_1F_EventScript_27191E:: @ 827191E
-PacifidlogTown_PokemonCenter_1F_EventScript_27191E:: @ 827191E
-PetalburgCity_PokemonCenter_1F_EventScript_27191E:: @ 827191E
-RustboroCity_PokemonCenter_1F_EventScript_27191E:: @ 827191E
-SlateportCity_PokemonCenter_1F_EventScript_27191E:: @ 827191E
-SootopolisCity_PokemonCenter_1F_EventScript_27191E:: @ 827191E
-TrainerHill_Entrance_EventScript_27191E:: @ 827191E
-VerdanturfTown_PokemonCenter_1F_EventScript_27191E:: @ 827191E
-	lock
-	faceplayer
-	setvar VAR_0x8004, 0
-	specialvar VAR_RESULT, CountPlayerTrainerStars
-	compare VAR_RESULT, 4
-	goto_if_eq OldaleTown_PokemonCenter_1F_EventScript_271A68
-	msgbox gUnknown_082726EB, MSGBOX_YESNO
-	compare VAR_RESULT, 1
-	goto_if_eq OldaleTown_PokemonCenter_1F_EventScript_27195A
-	compare VAR_RESULT, 0
-	goto_if_eq OldaleTown_PokemonCenter_1F_EventScript_271954
-	end
-
-OldaleTown_PokemonCenter_1F_EventScript_271954:: @ 8271954
-	message gUnknown_082727DB
-	return
-
-OldaleTown_PokemonCenter_1F_EventScript_27195A:: @ 827195A
-	incrementgamestat 15
-	compare VAR_0x8004, 0
-	call_if_eq OldaleTown_PokemonCenter_1F_EventScript_271987
-	compare VAR_0x8004, 1
-	call_if_eq OldaleTown_PokemonCenter_1F_EventScript_27198D
-	waitmessage
-	call OldaleTown_PokemonCenter_1F_EventScript_271993
-	goto_if_unset FLAG_POKERUS_EXPLAINED, OldaleTown_PokemonCenter_1F_EventScript_271A43
-	goto OldaleTown_PokemonCenter_1F_EventScript_2719B1
-	end
-
-OldaleTown_PokemonCenter_1F_EventScript_271987:: @ 8271987
-	message gUnknown_08272768
-	return
-
-OldaleTown_PokemonCenter_1F_EventScript_27198D:: @ 827198D
-	message gUnknown_082729C0
-	return
-
-OldaleTown_PokemonCenter_1F_EventScript_271993:: @ 8271993
-	applymovement VAR_0x800B, Common_Movement_WalkInPlaceLeft
-	waitmovement 0
-	dofieldeffect FLDEFF_POKECENTER_HEAL
-	waitfieldeffect FLDEFF_POKECENTER_HEAL
-	applymovement VAR_0x800B, Common_Movement_WalkInPlaceDown
-	waitmovement 0
-	special HealPlayerParty
-	return
-
-OldaleTown_PokemonCenter_1F_EventScript_2719B1:: @ 82719B1
-	specialvar VAR_RESULT, sub_8139ED0
-	compare VAR_RESULT, 0
-	goto_if_eq OldaleTown_PokemonCenter_1F_EventScript_2719E2
-	specialvar VAR_RESULT, sp182_move_string
-	copyvar VAR_0x8008, VAR_RESULT
-	compare VAR_0x8008, 0
-	goto_if_eq OldaleTown_PokemonCenter_1F_EventScript_2719E2
-	compare VAR_0x8008, 1
-	goto_if_eq OldaleTown_PokemonCenter_1F_EventScript_271A19
-	end
-
-OldaleTown_PokemonCenter_1F_EventScript_2719E2:: @ 82719E2
-	compare VAR_0x8004, 1
-	goto_if_eq OldaleTown_PokemonCenter_1F_EventScript_271A03
-	message gUnknown_08272798
-	waitmessage
-	applymovement VAR_0x800B, OldaleTown_PokemonCenter_1F_Movement_271AD0
-	waitmovement 0
-	message gUnknown_082727DB
-	return
-
-OldaleTown_PokemonCenter_1F_EventScript_271A03:: @ 8271A03
-	message gUnknown_082729F0
-	waitmessage
-	applymovement VAR_0x800B, OldaleTown_PokemonCenter_1F_Movement_271AD0
-	waitmovement 0
-	message gUnknown_08272A07
-	return
-
-OldaleTown_PokemonCenter_1F_EventScript_271A19:: @ 8271A19
-	goto_if_set FLAG_NURSE_UNION_ROOM_REMINDER, OldaleTown_PokemonCenter_1F_EventScript_2719E2
-	msgbox gUnknown_08272798, MSGBOX_DEFAULT
-	setflag FLAG_NURSE_UNION_ROOM_REMINDER
-	message OldaleTown_PokemonCenter_1F_Text_278A48
-	waitmessage
-	applymovement VAR_0x800B, OldaleTown_PokemonCenter_1F_Movement_271AD0
-	waitmovement 0
-	message gUnknown_082727DB
-	return
-
-OldaleTown_PokemonCenter_1F_EventScript_271A43:: @ 8271A43
-	specialvar VAR_RESULT, IsPokerusInParty
-	compare VAR_RESULT, 1
-	goto_if_eq OldaleTown_PokemonCenter_1F_EventScript_Explain_Pokerus
-	compare VAR_RESULT, 0
-	goto_if_eq OldaleTown_PokemonCenter_1F_EventScript_2719B1
-	end
-
-OldaleTown_PokemonCenter_1F_EventScript_Explain_Pokerus:: @ 8271A5F
-	message gText_PokerusExplanation
-	setflag FLAG_POKERUS_EXPLAINED
-	return
-
-OldaleTown_PokemonCenter_1F_EventScript_271A68:: @ 8271A68
-	goto_if_set FLAG_OLDALE_NURSE_MENTIONS_GOLD_CARD, OldaleTown_PokemonCenter_1F_EventScript_271AAC
-	setflag FLAG_OLDALE_NURSE_MENTIONS_GOLD_CARD
-	msgbox gUnknown_082727F5, MSGBOX_DEFAULT
-	playse SE_PIN
-	applymovement VAR_0x800B, Common_Movement_ExclamationMark
-	waitmovement 0
-	applymovement VAR_0x800B, Common_Movement_Delay48
-	waitmovement 0
-	msgbox gUnknown_08272860, MSGBOX_YESNO
-	compare VAR_RESULT, 1
-	goto_if_eq OldaleTown_PokemonCenter_1F_EventScript_271AC5
-	message gUnknown_08272A07
-	return
-
-OldaleTown_PokemonCenter_1F_EventScript_271AAC:: @ 8271AAC
-	msgbox gUnknown_08272982, MSGBOX_YESNO
-	compare VAR_RESULT, 1
-	goto_if_eq OldaleTown_PokemonCenter_1F_EventScript_271AC5
-	message gUnknown_08272A07
-	return
-
-OldaleTown_PokemonCenter_1F_EventScript_271AC5:: @ 8271AC5
-	setvar VAR_0x8004, 1
-	goto OldaleTown_PokemonCenter_1F_EventScript_27195A
-	end
-
-OldaleTown_PokemonCenter_1F_Movement_271AD0: @ 8271AD0
-	nurse_joy_bow
-	delay_4
-	step_end
+	.include "data/scripts/pkmn_center_nurse.inc"
 
 Std_ObtainItem:: @ 8271AD3
 	giveitem VAR_0x8000, VAR_0x8001
@@ -1446,7 +1070,7 @@ EventScript_StdStringBerries:: @ 8271B85
 	return
 
 EventScript_271B95:: @ 8271B95
-	message gUnknown_08272A78
+	message gText_ObtainedTheItem
 	waitfanfare
 	msgbox gText_PutItemInPocket, MSGBOX_DEFAULT
 	setvar VAR_RESULT, 1
@@ -1480,9 +1104,9 @@ EventScript_271BC5:: @ 8271BC5
 
 EventScript_271BE0:: @ 8271BE0
 	playfanfare MUS_FANFA4
-	message gUnknown_08272B09
+	message gText_ObtainedTheMon
 	waitfanfare
-	msgbox gUnknown_08272B48, MSGBOX_DEFAULT
+	msgbox gText_TheMonWasTransferredToThePC, MSGBOX_DEFAULT
 	setvar VAR_RESULT, 1
 	return
 
@@ -1541,7 +1165,7 @@ EventScript_271C9B:: @ 8271C9B
 	return
 
 EventScript_271CA1:: @ 8271CA1
-	msgbox gUnknown_08272A78, MSGBOX_DEFAULT
+	msgbox gText_ObtainedTheItem, MSGBOX_DEFAULT
 	msgbox gText_TooBadBagIsFull, MSGBOX_DEFAULT
 	setvar VAR_RESULT, 0
 	return
@@ -1744,80 +1368,74 @@ EventScript_CancelSurf:: @ 8271ED5
 EventScript_CantSurf:: @ 8271ED6
 	end
 
-Common_EventScript_SetupRivalGender:: @ 8271ED7
+Common_EventScript_SetupRivalGfxId:: @ 8271ED7
 	checkplayergender
 	compare VAR_RESULT, MALE
-	goto_if_eq RustboroCity_EventScript_271EEF
+	goto_if_eq EventScript_SetupRivalGfxIdFemale
 	compare VAR_RESULT, FEMALE
-	goto_if_eq RustboroCity_EventScript_271EF5
+	goto_if_eq EventScript_SetupRivalGfxIdMale
 	end
 
-RustboroCity_EventScript_271EEF:: @ 8271EEF
+EventScript_SetupRivalGfxIdFemale:: @ 8271EEF
 	setvar VAR_OBJ_GFX_ID_0, EVENT_OBJ_GFX_RIVAL_MAY_NORMAL
 	return
 
-RustboroCity_EventScript_271EF5:: @ 8271EF5
+EventScript_SetupRivalGfxIdMale:: @ 8271EF5
 	setvar VAR_OBJ_GFX_ID_0, EVENT_OBJ_GFX_RIVAL_BRENDAN_NORMAL
 	return
 
-Common_EventScript_SetupRivalOnBikeGender:: @ 8271EFB
+Common_EventScript_SetupRivalOnBikeGfxId:: @ 8271EFB
 	checkplayergender
 	compare VAR_RESULT, MALE
-	goto_if_eq LavaridgeTown_EventScript_271F13
+	goto_if_eq EventScript_SetupRivalOnBikeGfxIdFemale
 	compare VAR_RESULT, FEMALE
-	goto_if_eq LavaridgeTown_EventScript_271F19
+	goto_if_eq EventScript_SetupRivalOnBikeGfxIdMale
 	end
 
-LavaridgeTown_EventScript_271F13:: @ 8271F13
+EventScript_SetupRivalOnBikeGfxIdFemale:: @ 8271F13
 	setvar VAR_OBJ_GFX_ID_3, EVENT_OBJ_GFX_RIVAL_MAY_MACH_BIKE
 	return
 
-LavaridgeTown_EventScript_271F19:: @ 8271F19
+EventScript_SetupRivalOnBikeGfxIdMale:: @ 8271F19
 	setvar VAR_OBJ_GFX_ID_3, EVENT_OBJ_GFX_RIVAL_BRENDAN_MACH_BIKE
 	return
 
-EventScript_271F1F:: @ 8271F1F
+@ Unused
+Common_EventScript_SetupRivalGfxIdSameGender:: @ 8271F1F
 	checkplayergender
 	compare VAR_RESULT, MALE
-	goto_if_eq EventScript_271F37
+	goto_if_eq EventScript_SetupRivalGfxIdMale2
 	compare VAR_RESULT, FEMALE
-	goto_if_eq EventScript_271F3D
+	goto_if_eq EventScript_SetupRivalGfxIdFemale2
 	end
 
-EventScript_271F37:: @ 8271F37
+EventScript_SetupRivalGfxIdMale2:: @ 8271F37
 	setvar VAR_OBJ_GFX_ID_0, EVENT_OBJ_GFX_RIVAL_BRENDAN_NORMAL
 	return
 
-EventScript_271F3D:: @ 8271F3D
+EventScript_SetupRivalGfxIdFemale2:: @ 8271F3D
 	setvar VAR_OBJ_GFX_ID_0, EVENT_OBJ_GFX_RIVAL_MAY_NORMAL
 	return
 
-DewfordTown_Gym_EventScript_271F43:: @ 8271F43
-FortreeCity_Gym_EventScript_271F43:: @ 8271F43
-LavaridgeTown_Gym_1F_EventScript_271F43:: @ 8271F43
-MauvilleCity_Gym_EventScript_271F43:: @ 8271F43
-MossdeepCity_Gym_EventScript_271F43:: @ 8271F43
-PetalburgCity_Gym_EventScript_271F43:: @ 8271F43
-RustboroCity_Gym_EventScript_271F43:: @ 8271F43
-SootopolisCity_Gym_1F_EventScript_271F43:: @ 8271F43
+Common_EventScript_SetGymTrainers:: @ 8271F43
 	switch VAR_0x8008
-	case 1, DewfordTown_Gym_EventScript_271FA1
-	case 2, DewfordTown_Gym_EventScript_271FAB
-	case 3, DewfordTown_Gym_EventScript_271FBE
-	case 4, DewfordTown_Gym_EventScript_271FCE
-	case 5, DewfordTown_Gym_EventScript_271FE7
-	case 6, DewfordTown_Gym_EventScript_271FFD
-	case 7, DewfordTown_Gym_EventScript_272010
-	case 8, DewfordTown_Gym_EventScript_272035
+	case 1, RusboroCity_Gym_SetGymTrainers
+	case 2, DewfordTown_Gym_SetGymTrainers
+	case 3, MauvilleCity_Gym_SetGymTrainers
+	case 4, LavaridgeTown_Gym_SetGymTrainers
+	case 5, PetalburgCity_Gym_SetGymTrainers
+	case 6, FortreeCity_Gym_SetGymTrainers
+	case 7, MossdeepCity_Gym_SetGymTrainers
+	case 8, SootopolisCity_Gym_SetGymTrainers
 	end
 
-DewfordTown_Gym_EventScript_271FA1:: @ 8271FA1
+RusboroCity_Gym_SetGymTrainers:: @ 8271FA1
 	settrainerflag TRAINER_JOSH
 	settrainerflag TRAINER_TOMMY
 	settrainerflag TRAINER_MARC
 	return
 
-DewfordTown_Gym_EventScript_271FAB:: @ 8271FAB
+DewfordTown_Gym_SetGymTrainers:: @ 8271FAB
 	settrainerflag TRAINER_TAKAO
 	settrainerflag TRAINER_JOCELYN
 	settrainerflag TRAINER_LAURA
@@ -1826,7 +1444,7 @@ DewfordTown_Gym_EventScript_271FAB:: @ 8271FAB
 	settrainerflag TRAINER_LILITH
 	return
 
-DewfordTown_Gym_EventScript_271FBE:: @ 8271FBE
+MauvilleCity_Gym_SetGymTrainers:: @ 8271FBE
 	settrainerflag TRAINER_KIRK
 	settrainerflag TRAINER_SHAWN
 	settrainerflag TRAINER_BEN
@@ -1834,7 +1452,7 @@ DewfordTown_Gym_EventScript_271FBE:: @ 8271FBE
 	settrainerflag TRAINER_ANGELO
 	return
 
-DewfordTown_Gym_EventScript_271FCE:: @ 8271FCE
+LavaridgeTown_Gym_SetGymTrainers:: @ 8271FCE
 	settrainerflag TRAINER_COLE
 	settrainerflag TRAINER_AXLE
 	settrainerflag TRAINER_KEEGAN
@@ -1845,7 +1463,7 @@ DewfordTown_Gym_EventScript_271FCE:: @ 8271FCE
 	settrainerflag TRAINER_ELI
 	return
 
-DewfordTown_Gym_EventScript_271FE7:: @ 8271FE7
+PetalburgCity_Gym_SetGymTrainers:: @ 8271FE7
 	settrainerflag TRAINER_RANDALL
 	settrainerflag TRAINER_PARKER
 	settrainerflag TRAINER_GEORGE
@@ -1855,7 +1473,7 @@ DewfordTown_Gym_EventScript_271FE7:: @ 8271FE7
 	settrainerflag TRAINER_JODY
 	return
 
-DewfordTown_Gym_EventScript_271FFD:: @ 8271FFD
+FortreeCity_Gym_SetGymTrainers:: @ 8271FFD
 	settrainerflag TRAINER_JARED
 	settrainerflag TRAINER_FLINT
 	settrainerflag TRAINER_ASHLEY
@@ -1864,7 +1482,7 @@ DewfordTown_Gym_EventScript_271FFD:: @ 8271FFD
 	settrainerflag TRAINER_DARIUS
 	return
 
-DewfordTown_Gym_EventScript_272010:: @ 8272010
+MossdeepCity_Gym_SetGymTrainers:: @ 8272010
 	settrainerflag TRAINER_PRESTON
 	settrainerflag TRAINER_VIRGIL
 	settrainerflag TRAINER_BLAKE
@@ -1879,7 +1497,7 @@ DewfordTown_Gym_EventScript_272010:: @ 8272010
 	settrainerflag TRAINER_NICHOLAS
 	return
 
-DewfordTown_Gym_EventScript_272035:: @ 8272035
+SootopolisCity_Gym_SetGymTrainers:: @ 8272035
 	settrainerflag TRAINER_ANDREA
 	settrainerflag TRAINER_CRISSY
 	settrainerflag TRAINER_BRIANNA
@@ -1936,16 +1554,12 @@ EventScript_RegionMap:: @ 827208F
 	releaseall
 	end
 
-DewfordTown_EventScript_2720A0:: @ 82720A0
-Route104_EventScript_2720A0:: @ 82720A0
-Route109_EventScript_2720A0:: @ 82720A0
+Common_EventScript_PlayBrineysBoatMusic:: @ 82720A0
 	setflag FLAG_SPECIAL_FLAG_0x4001
 	playbgm MUS_M_BOAT, 0
 	return
 
-DewfordTown_EventScript_2720A8:: @ 82720A8
-Route104_EventScript_2720A8:: @ 82720A8
-Route109_EventScript_2720A8:: @ 82720A8
+Common_EventScript_StopBrineysBoatMusic:: @ 82720A8
 	clearflag FLAG_SPECIAL_FLAG_0x4001
 	fadedefaultbgm
 	return
@@ -2004,7 +1618,7 @@ Route103_EventScript_272141:: @ 8272141
 	goto_if_unset FLAG_ENABLE_PROF_BIRCH_MATCH_CALL, Route101_EventScript_1FA2D2
 
 Route101_EventScript_272155:: @ 8272155
-	msgbox gUnknown_082A5C9C, MSGBOX_YESNO
+	msgbox gBirchDexRatingText_AreYouCurious, MSGBOX_YESNO
 	compare VAR_RESULT, 0
 	goto_if_eq Route101_EventScript_27216F
 	call Route101_EventScript_272184
@@ -2012,7 +1626,7 @@ Route101_EventScript_272155:: @ 8272155
 	end
 
 Route101_EventScript_27216F:: @ 827216F
-	msgbox Route101_Text_2A5CEB, MSGBOX_DEFAULT
+	msgbox gBirchDexRatingText_Cancel, MSGBOX_DEFAULT
 	release
 	end
 
@@ -2032,7 +1646,7 @@ Route101_EventScript_272184:: @ 8272184
 	copyvar VAR_0x800A, VAR_RESULT
 	buffernumberstring 0, VAR_0x8008
 	buffernumberstring 1, VAR_0x8009
-	msgbox gUnknown_082A5D2C, MSGBOX_DEFAULT
+	msgbox gBirchDexRatingText_SoYouveSeenAndCaught, MSGBOX_DEFAULT
 	call Route101_EventScript_272179
 	compare VAR_0x800A, 0
 	goto_if_eq Common_EventScript_NopReturn
@@ -2042,7 +1656,7 @@ Route101_EventScript_272184:: @ 8272184
 	copyvar VAR_0x8009, VAR_0x8006
 	buffernumberstring 0, VAR_0x8008
 	buffernumberstring 1, VAR_0x8009
-	msgbox gUnknown_082A633D, MSGBOX_DEFAULT
+	msgbox gBirchDexRatingText_OnANationwideBasis, MSGBOX_DEFAULT
 	return
 
 Common_EventScript_FerryDepart:: @ 82721E2
@@ -2241,16 +1855,16 @@ Route119_EventScript_272365:: @ 8272365
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
 	specialvar VAR_RESULT, GetBattleOutcome
 	compare VAR_RESULT, 1
-	goto_if_eq Route119_EventScript_2723C1
+	goto_if_eq EventScript_RemoveKecleon
 	compare VAR_RESULT, 4
-	goto_if_eq Route119_EventScript_2723C1
+	goto_if_eq EventScript_RemoveKecleon
 	compare VAR_RESULT, 5
-	goto_if_eq Route119_EventScript_2723C1
+	goto_if_eq EventScript_RemoveKecleon
 	release
 	end
 
-Route119_EventScript_2723C1:: @ 82723C1
-	goto Route119_EventScript_27376D
+EventScript_RemoveKecleon:: @ 82723C1
+	goto Common_EventScript_RemoveStaticPokemon
 	end
 
 FortreeCity_Movement_2723C7: @ 82723C7
@@ -2279,18 +1893,16 @@ Route120_Movement_2723C7: @ 82723C7
 	set_visible
 	step_end
 
-Common_EventScript_NameReceivedPokemon:: @ 82723DD
+Common_EventScript_NameReceivedPartyMon:: @ 82723DD
 	fadescreen 1
 	special ChangePokemonNickname
 	waitstate
 	return
 
-FallarborTown_House1_EventScript_2723E4:: @ 82723E4
-GraniteCave_StevensRoom_EventScript_2723E4:: @ 82723E4
-SlateportCity_OceanicMuseum_2F_EventScript_2723E4:: @ 82723E4
+Common_EventScript_PlayerHandedOverTheItem:: @ 82723E4
 	bufferitemname 0, VAR_0x8004
 	playfanfare MUS_ME_WAZA
-	message gUnknown_08273161
+	message gText_PlayerHandedOverTheItem
 	waitmessage
 	waitfanfare
 	takeitem VAR_0x8004, 1
@@ -2526,196 +2138,252 @@ gText_AccessedPlayersPC:: @ 82726C2
 gText_AccessedLanettesPC:: @ 82726D4
 	.string "Accessed LANETTE's PC.$"
 
-gUnknown_082726EB:: @ 82726EB
-	.string "Hello, and welcome to\nthe POKéMON CENTER.\pWe restore your tired POKéMON\nto full health.\pWould you like to rest your POKéMON?$"
+	.include "data/text/pkmn_center_nurse.inc"
 
-gUnknown_08272768:: @ 8272768
-	.string "Okay, I'll take your POKéMON\nfor a few seconds.$"
+gText_HowMayIServeYou:: @ 8272A21
+	.string "Welcome!\p"
+	.string "How may I serve you?$"
 
-gUnknown_08272798:: @ 8272798
-	.string "Thank you for waiting.\pWe've restored your POKéMON\nto full health.$"
-
-gUnknown_082727DB:: @ 82727DB
-	.string "We hope to see you again!$"
-
-gUnknown_082727F5:: @ 82727F5
-	.string "Hello, and welcome to\nthe POKéMON CENTER.\pWe restore your tired POKéMON\nto full health.\pWould you like to…$"
-
-gUnknown_08272860:: @ 8272860
-	.string "Th-that card…\nCould it be… The GOLD CARD?!\pOh, the gold color is brilliant!\nThe four stars seem to sparkle!\pI've seen several TRAINERS with\na SILVER CARD before, but, {PLAYER},\lyou're the first TRAINER I've ever\lseen with a GOLD CARD!\pOkay, {PLAYER}, please allow me\nthe honor of resting your POKéMON!$"
-
-gUnknown_08272982:: @ 8272982
-	.string "I'm delighted to see you, {PLAYER}!\nYou want the usual, am I right?$"
-
-gUnknown_082729C0:: @ 82729C0
-	.string "Okay, I'll take your POKéMON\nfor a few seconds.$"
-
-gUnknown_082729F0:: @ 82729F0
-	.string "Thank you for waiting.$"
-
-gUnknown_08272A07:: @ 8272A07
-	.string "We hope to see you again!$"
-
-gUnknown_08272A21:: @ 8272A21
-	.string "Welcome!\pHow may I serve you?$"
-
-gUnknown_08272A3F:: @ 8272A3F
+gText_PleaseComeAgain:: @ 8272A3F
 	.string "Please come again!$"
 
-gUnknown_08272A52:: @ 8272A52
-	.string "{PLAYER}{KUN}, welcome!\pWhat can I do for you?$"
+gText_PlayerWhatCanIDoForYou:: @ 8272A52
+	.string "{PLAYER}{STRING 5}, welcome!\p"
+	.string "What can I do for you?$"
 
-gUnknown_08272A78:: @ 8272A78
+gText_ObtainedTheItem:: @ 8272A78
 	.string "Obtained the {STR_VAR_2}!$"
 
-gUnknown_08272A89:: @ 8272A89
+gText_TheBagIsFull:: @ 8272A89
 	.string "The BAG is full…$"
 
 gText_PutItemInPocket:: @ 8272A9A
-	.string "{PLAYER} put away the {STR_VAR_2}\nin the {STR_VAR_3} POCKET.$"
+	.string "{PLAYER} put away the {STR_VAR_2}\n"
+	.string "in the {STR_VAR_3} POCKET.$"
 
 gText_PlayerFoundOneItem:: @ 8272ABF
 	.string "{PLAYER} found one {STR_VAR_2}!$"
 
 gText_TooBadBagIsFull:: @ 8272AD0
-	.string "Too bad!\nThe BAG is full…$"
+	.string "Too bad!\n"
+	.string "The BAG is full…$"
 
 gText_PlayerPutItemInBag:: @ 8272AEA
-	.string "{PLAYER} put away the {STR_VAR_2}\nin the BAG.$"
+	.string "{PLAYER} put away the {STR_VAR_2}\n"
+	.string "in the BAG.$"
 
-gUnknown_08272B09:: @ 8272B09
+gText_ObtainedTheMon:: @ 8272B09
 	.string "Obtained the {STR_VAR_2}!$"
 
 gText_NoRoomLeftForAnother:: @ 8272B1A
-	.string "Too bad! There's no room left for\nanother {STR_VAR_2}…$"
+	.string "Too bad! There's no room left for\n"
+	.string "another {STR_VAR_2}…$"
 
-gUnknown_08272B48:: @ 8272B48
-	.string "The {STR_VAR_2} was transferred\nto the PC.$"
+gText_TheMonWasTransferredToThePC:: @ 8272B48
+	.string "The {STR_VAR_2} was transferred\n"
+	.string "to the PC.$"
 
 gText_PokemartSign:: @ 8272B6A
-	.string "“Selected items for your convenience!”\nPOKéMON MART$"
+	.string "“Selected items for your convenience!”\n"
+	.string "POKéMON MART$"
 
 gText_PokemonCenterSign:: @ 8272B9E
-	.string "“Rejuvenate your tired partners!”\nPOKéMON CENTER$"
+	.string "“Rejuvenate your tired partners!”\n"
+	.string "POKéMON CENTER$"
 
-gUnknown_08272BCF:: @ 8272BCF
-	.string "{STR_VAR_1} might like this program.\n… … … … … … … … … … … … … … … …\pBetter get going!$"
+gText_MomOrDadMightLikeThisProgram:: @ 8272BCF
+	.string "{STR_VAR_1} might like this program.\n"
+	.string "… … … … … … … … … … … … … … … …\p"
+	.string "Better get going!$"
 
-gUnknown_08272C1D:: @ 8272C1D
-	.string "Welcome to LILYCOVE DEPARTMENT STORE.\pWhich floor would you like?$"
+gText_WhichFloorWouldYouLike:: @ 8272C1D
+	.string "Welcome to LILYCOVE DEPARTMENT STORE.\p"
+	.string "Which floor would you like?$"
 
-gUnknown_08272C5F:: @ 8272C5F
-	.string "The sandstorm is vicious.\nIt's impossible to keep going.$"
+gText_SandstormIsVicious:: @ 8272C5F
+	.string "The sandstorm is vicious.\n"
+	.string "It's impossible to keep going.$"
 
 gText_SelectWithoutRegisteredItem:: @ 8272C98
-	.string "An item in the BAG can be\nregistered to SELECT for easy use.$"
+	.string "An item in the BAG can be\n"
+	.string "registered to SELECT for easy use.$"
 
-gUnknown_08272CD5:: @ 8272CD5
-	.string "There's an e-mail from POKéMON TRAINER\nSCHOOL.\p… … … … … …\pA POKéMON may learn up to four moves.\pA TRAINER's expertise is tested on the\nmove sets chosen for POKéMON.\p… … … … … …$"
+gText_PokemonTrainerSchoolEmail:: @ 8272CD5
+	.string "There's an e-mail from POKéMON TRAINER\n"
+	.string "SCHOOL.\p"
+	.string "… … … … … …\p"
+	.string "A POKéMON may learn up to four moves.\p"
+	.string "A TRAINER's expertise is tested on the\n"
+	.string "move sets chosen for POKéMON.\p"
+	.string "… … … … … …$"
 
 gText_PlayerHouseBootPC:: @ 8272D87
 	.string "{PLAYER} booted up the PC.$"
 
-gUnknown_08272D9C:: @ 8272D9C
+gText_PokeblockLinkCanceled:: @ 8272D9C
 	.string "The link was canceled.$"
 
-gUnknown_08272DB3:: @ 8272DB3
-	.string "Want to give a nickname to\nthe {STR_VAR_2} you received?$"
+gText_UnusedNicknameReceivedPokemon:: @ 8272DB3
+	.string "Want to give a nickname to\n"
+	.string "the {STR_VAR_2} you received?$"
 
-gUnknown_08272DE3:: @ 8272DE3
-	.string "{PLAYER} is out of usable\nPOKéMON!\p{PLAYER} whited out!$"
+gText_PlayerWhitedOut:: @ 8272DE3
+	.string "{PLAYER} is out of usable\n"
+	.string "POKéMON!\p{PLAYER} whited out!$"
 
 gText_RegisteredTrainerinPokeNav:: @ 8272E0F
-	.string "Registered {STR_VAR_1} {STR_VAR_2}\nin the POKéNAV.$"
+	.string "Registered {STR_VAR_1} {STR_VAR_2}\n"
+	.string "in the POKéNAV.$"
 
-gUnknown_08272E30:: @ 8272E30
-	.string "Do you know the TM SECRET POWER?\pOur group, we love the TM SECRET\nPOWER.\pOne of our members will give it to you.\nCome back and show me if you get it.\pWe'll accept you as a member and sell\nyou good stuff in secrecy.$"
+gText_ComeBackWithSecretPower:: @ 8272E30
+	.string "Do you know the TM SECRET POWER?\p"
+	.string "Our group, we love the TM SECRET\n"
+	.string "POWER.\p"
+	.string "One of our members will give it to you.\n"
+	.string "Come back and show me if you get it.\p"
+	.string "We'll accept you as a member and sell\n"
+	.string "you good stuff in secrecy.$"
 
 gText_PokerusExplanation:: @ 8272F07
-	.string "Your POKéMON may be infected with\nPOKéRUS.\pLittle is known about the POKéRUS\nexcept that they are microscopic life-\lforms that attach to POKéMON.\pWhile infected, POKéMON are said to\ngrow exceptionally well.$"
+	.string "Your POKéMON may be infected with\n"
+	.string "POKéRUS.\p"
+	.string "Little is known about the POKéRUS\n"
+	.string "except that they are microscopic life-\l"
+	.string "forms that attach to POKéMON.\p"
+	.string "While infected, POKéMON are said to\n"
+	.string "grow exceptionally well.$"
 
 	.include "data/text/surf.inc"
 
-gUnknown_0827301B:: @ 827301B
-	.string "It sounded as if a door opened\nsomewhere far away.$"
+gText_DoorOpenedFarAway:: @ 827301B
+	.string "It sounded as if a door opened\n"
+	.string "somewhere far away.$"
 
-gUnknown_0827304E:: @ 827304E
+gText_BigHoleInTheWall:: @ 827304E
 	.string "There is a big hole in the wall.$"
 
-gUnknown_0827306F:: @ 827306F
-	.string "I'm terribly sorry.\nThe POKéMON WIRELESS CLUB is\lundergoing adjustments now.$"
+gText_SorryWirelessClubAdjustments:: @ 827306F
+	.string "I'm terribly sorry.\n"
+	.string "The POKéMON WIRELESS CLUB is\l"
+	.string "undergoing adjustments now.$"
 
-gUnknown_082730BC:: @ 82730BC
-	.string "It appears to be undergoing\nadjustments…$"
+gText_UndergoingAdjustments:: @ 82730BC
+	.string "It appears to be undergoing\n"
+	.string "adjustments…$"
 
-gUnknown_082730E5:: @ 82730E5
-	.string "I'm terribly sorry. The TRADE CENTER\nis undergoing inspections.$"
+@ Unused
+gText_SorryTradeCenterInspections:: @ 82730E5
+	.string "I'm terribly sorry. The TRADE CENTER\n"
+	.string "is undergoing inspections.$"
 
-gUnknown_08273125:: @ 8273125
-	.string "I'm terribly sorry. The RECORD CORNER\nis under preparation.$"
+@ Unused
+gText_SorryRecordCornerPreparation:: @ 8273125
+	.string "I'm terribly sorry. The RECORD CORNER\n"
+	.string "is under preparation.$"
 
-gUnknown_08273161:: @ 8273161
-	.string "{PLAYER} handed over the\n{STR_VAR_1}.$"
+gText_PlayerHandedOverTheItem:: @ 8273161
+	.string "{PLAYER} handed over the\n"
+	.string "{STR_VAR_1}.$"
 
-gUnknown_08273178:: @ 8273178
-	.string "Thank you for accessing the\nMYSTERY GIFT System.$"
+gText_ThankYouForAccessingMysteryGift:: @ 8273178
+	.string "Thank you for accessing the\n"
+	.string "MYSTERY GIFT System.$"
 
 gText_PlayerFoundOneItemTwoLines:: @ 82731A9
-	.string "{PLAYER} found one {STR_VAR_1}\n{STR_VAR_2}!$"
+	.string "{PLAYER} found one {STR_VAR_1}\n"
+	.string "{STR_VAR_2}!$"
 
 gText_Sudowoodo_Attacked:: @ 82731BD
-	.string "The weird tree doesn't like the\nWAILMER PAIL!\pThe weird tree attacked!$"
+	.string "The weird tree doesn't like the\n"
+	.string "WAILMER PAIL!\p"
+	.string "The weird tree attacked!$"
 
 gText_LegendaryFlewAway:: @ 8273204
 	.string "The {STR_VAR_1} flew away!$"
 
 gText_PkmnTransferredSomeonesPC:: @ 8273216
-	.string "{STR_VAR_2} was transferred to\nSOMEONE'S PC.\pIt was placed in \nBOX “{STR_VAR_1}.”$"
+	.string "{STR_VAR_2} was transferred to\n"
+	.string "SOMEONE'S PC.\p"
+	.string "It was placed in \n"
+	.string "BOX “{STR_VAR_1}.”$"
 
 gText_PkmnTransferredLanettesPC:: @ 8273256
-	.string "{STR_VAR_2} was transferred to\nLANETTE'S PC.\pIt was placed in \nBOX “{STR_VAR_1}.”$"
+	.string "{STR_VAR_2} was transferred to\nLANETTE'S PC.\p"
+	.string "It was placed in \n"
+	.string "BOX “{STR_VAR_1}.”$"
 
 gText_PkmnBoxSomeonesPCFull:: @ 8273296
-	.string "BOX “{STR_VAR_3}” on\nSOMEONE'S PC was full.\p{STR_VAR_2} was transferred to\nBOX “{STR_VAR_1}.”$"
+	.string "BOX “{STR_VAR_3}” on\n"
+	.string "SOMEONE'S PC was full.\p"
+	.string "{STR_VAR_2} was transferred to\n"
+	.string "BOX “{STR_VAR_1}.”$"
 
 gText_PkmnBoxLanettesPCFull:: @ 82732D9
-	.string "BOX “{STR_VAR_3}” on\nLANETTE'S PC was full.\p{STR_VAR_2} was transferred to\nBOX “{STR_VAR_1}.”$"
+	.string "BOX “{STR_VAR_3}” on\n"
+	.string "LANETTE'S PC was full.\p"
+	.string "{STR_VAR_2} was transferred to\n"
+	.string "BOX “{STR_VAR_1}.”$"
 
-gUnknown_0827331C:: @ 827331C
-	.string "There's no more room for POKéMON!\pThe POKéMON BOXES are full and\ncan't accept any more!$"
+gText_NoMoreRoomForPokemon:: @ 827331C
+	.string "There's no more room for POKéMON!\p"
+	.string "The POKéMON BOXES are full and\n"
+	.string "can't accept any more!$"
 
 gText_NicknameThisPokemon:: @ 8273374
-	.string "Do you want to give a nickname to\nthis {STR_VAR_1}?$"
+	.string "Do you want to give a nickname to\n"
+	.string "this {STR_VAR_1}?$"
 
-gUnknown_0827339F:: @ 827339F
-	.string "There is a questionnaire.\nWould you like to fill it out?$"
+gText_FillOutQuestionnaire:: @ 827339F
+	.string "There is a questionnaire.\n"
+	.string "Would you like to fill it out?$"
 
-gUnknown_082733D8:: @ 82733D8
-	.string "Thank you for taking the time to\nfill out our questionnaire.\pYour feedback will be used for\nfuture reference.$"
+gText_ThankYouForTakingQuestionnaire:: @ 82733D8
+	.string "Thank you for taking the time to\n"
+	.string "fill out our questionnaire.\p"
+	.string "Your feedback will be used for\n"
+	.string "future reference.$"
 
 gUnknown_08273446:: @ 8273446
-	.string "Oh, hello!\nYou know those words?\pThat means you must know about\nthe MYSTERY GIFT.\pFrom now on, you should be\nreceiving MYSTERY GIFTS!$"
+	.string "Oh, hello!\n"
+	.string "You know those words?\p"
+	.string "That means you must know about\n"
+	.string "the MYSTERY GIFT.\p"
+	.string "From now on, you should be\n"
+	.string "receiving MYSTERY GIFTS!$"
 
 gUnknown_082734CC:: @ 82734CC
-	.string "Once you save your game, you can\naccess the MYSTERY GIFT.$"
+	.string "Once you save your game, you can\n"
+	.string "access the MYSTERY GIFT.$"
 
 gUnknown_08273506:: @ 8273506
-	.string "Oh, hello!\nYou know those words?\pThat means you must know about\nthe MYSTERY EVENT.$"
+	.string "Oh, hello!\n"
+	.string "You know those words?\p"
+	.string "That means you must know about\n"
+	.string "the MYSTERY EVENT.$"
 
 gUnknown_08273559:: @ 8273559
-	.string "Once you save your game, you can\naccess the MYSTERY EVENT.$"
+	.string "Once you save your game, you can\n"
+	.string "access the MYSTERY EVENT.$"
 
 gUnknown_08273594:: @ 8273594
-	.string "Thank you for using the MYSTERY\nEVENT System.\pYou must be {PLAYER}.\nThere is a ticket here for you.$"
+	.string "Thank you for using the MYSTERY\n"
+	.string "EVENT System.\p"
+	.string "You must be {PLAYER}.\n"
+	.string "There is a ticket here for you.$"
 
 gUnknown_082735F2:: @ 82735F2
-	.string "It appears to be for use at\nthe LILYCOVE CITY port.\pWhy not give it a try and see what\nit is about?$"
+	.string "It appears to be for use at\n"
+	.string "the LILYCOVE CITY port.\p"
+	.string "Why not give it a try and see what\n"
+	.string "it is about?$"
 
 gText_UnusualWeatherEnded_Rain:: @ 8273656
-	.string "The massive downpour appears to\nhave stopped…$"
+	.string "The massive downpour appears to\n"
+	.string "have stopped…$"
 
 gText_UnusualWeatherEnded_Sun:: @ 8273684
-	.string "The intense sunshine appears to\nhave subsided…$"
+	.string "The intense sunshine appears to\n"
+	.string "have subsided…$"
 
 EventScript_SelectWithoutRegisteredItem:: @ 82736B3
 	msgbox gText_SelectWithoutRegisteredItem, MSGBOX_SIGN
@@ -2733,7 +2401,7 @@ EventScript_Poison:: @ 82736BC
 	end
 
 EventScript_2736D9:: @ 82736D9
-	message gUnknown_08272DE3
+	message gText_PlayerWhitedOut
 	waitmessage
 	waitbuttonpress
 	special sub_80B05B4
@@ -2749,7 +2417,7 @@ EventScript_2736F4:: @ 82736F4
 	return
 
 EventScript_2736F8:: @ 82736F8
-	message gUnknown_08272DE3
+	message gText_PlayerWhitedOut
 	waitmessage
 	waitbuttonpress
 	setvar VAR_0x8004, 16
@@ -2776,11 +2444,12 @@ EventScript_2736F8:: @ 82736F8
 Common_EventScript_NopReturn:: @ 827374E
 	return
 
-EventScript_UnusedSetVarResult1:: @ 827374F
+@ Unused
+EventScript_CableClub_SetVarResult1:: @ 827374F
 	setvar VAR_RESULT, 1
 	return
 
-OldaleTown_PokemonCenter_2F_EventScript_273755:: @ 8273755
+EventScript_CableClub_SetVarResult0:: @ 8273755
 	setvar VAR_RESULT, 0
 	return
 
@@ -2844,30 +2513,14 @@ VerdanturfTown_PokemonCenter_2F_EventScript_273767:: @ 8273767
 	call OldaleTown_PokemonCenter_2F_EventScript_2776A4
 	end
 
-AncientTomb_EventScript_27376D:: @ 827376D
-AquaHideout_B1F_EventScript_27376D:: @ 827376D
-DesertRuins_EventScript_27376D:: @ 827376D
-IslandCave_EventScript_27376D:: @ 827376D
-MarineCave_End_EventScript_27376D:: @ 827376D
-NewMauville_Inside_EventScript_27376D:: @ 827376D
-Route119_EventScript_27376D:: @ 827376D
-TerraCave_End_EventScript_27376D:: @ 827376D
+Common_EventScript_RemoveStaticPokemon:: @ 827376D
 	fadescreenswapbuffers 1
 	removeobject VAR_LAST_TALKED
 	fadescreenswapbuffers 0
 	release
 	end
 
-AncientTomb_EventScript_273776:: @ 8273776
-BirthIsland_Exterior_EventScript_273776:: @ 8273776
-DesertRuins_EventScript_273776:: @ 8273776
-FarawayIsland_Interior_EventScript_273776:: @ 8273776
-IslandCave_EventScript_273776:: @ 8273776
-MarineCave_End_EventScript_273776:: @ 8273776
-NavelRock_Bottom_EventScript_273776:: @ 8273776
-NavelRock_Top_EventScript_273776:: @ 8273776
-SouthernIsland_Interior_EventScript_273776:: @ 8273776
-TerraCave_End_EventScript_273776:: @ 8273776
+Common_EventScript_LegendaryFlewAway:: @ 8273776
 	fadescreenswapbuffers 1
 	removeobject VAR_LAST_TALKED
 	fadescreenswapbuffers 0
@@ -2876,19 +2529,14 @@ TerraCave_End_EventScript_273776:: @ 8273776
 	release
 	end
 
-LittlerootTown_ProfessorBirchsLab_EventScript_27378B:: @ 827378B
-MossdeepCity_StevensHouse_EventScript_27378B:: @ 827378B
-Route119_WeatherInstitute_2F_EventScript_27378B:: @ 827378B
-RustboroCity_DevonCorp_2F_EventScript_27378B:: @ 827378B
+@ VAR_0x8004 here is used by ChangePokemonNickname
+Common_EventScript_GetGiftMonPartySlot:: @ 827378B
 	getpartysize
 	subvar VAR_RESULT, 1
 	copyvar VAR_0x8004, VAR_RESULT
 	return
 
-LittlerootTown_ProfessorBirchsLab_EventScript_273797:: @ 8273797
-MossdeepCity_StevensHouse_EventScript_273797:: @ 8273797
-Route119_WeatherInstitute_2F_EventScript_273797:: @ 8273797
-RustboroCity_DevonCorp_2F_EventScript_273797:: @ 8273797
+Common_EventScript_NameReceivedBoxMon:: @ 8273797
 	fadescreen 1
 	special ChangeBoxPokemonNickname
 	waitstate
@@ -2932,17 +2580,14 @@ LittlerootTown_ProfessorBirchsLab_EventScript_2737FF:: @ 82737FF
 	msgbox gText_PkmnBoxLanettesPCFull, MSGBOX_DEFAULT
 	return
 
-LittlerootTown_ProfessorBirchsLab_EventScript_273811:: @ 8273811
-MossdeepCity_StevensHouse_EventScript_273811:: @ 8273811
-Route119_WeatherInstitute_2F_EventScript_273811:: @ 8273811
-RustboroCity_DevonCorp_2F_EventScript_273811:: @ 8273811
-	msgbox gUnknown_0827331C, MSGBOX_DEFAULT
+Common_EventScript_NoMoreRoomForPokemon:: @ 8273811
+	msgbox gText_NoMoreRoomForPokemon, MSGBOX_DEFAULT
 	release
 	end
 
 EventScript_Questionnaire:: @ 827381B
 	lockall
-	msgbox gUnknown_0827339F, MSGBOX_YESNO
+	msgbox gText_FillOutQuestionnaire, MSGBOX_YESNO
 	compare VAR_RESULT, 0
 	goto_if_eq EventScript_2738FD
 	setvar VAR_0x8004, EASY_CHAT_TYPE_QUESTIONNAIRE
@@ -2999,7 +2644,7 @@ EventScript_2738FD:: @ 82738FD
 EventScript_2738FF:: @ 82738FF
 	applymovement VAR_0x8008, Common_Movement_FaceDown
 	waitmovement 0
-	msgbox gUnknown_082733D8, MSGBOX_DEFAULT
+	msgbox gText_ThankYouForTakingQuestionnaire, MSGBOX_DEFAULT
 	releaseall
 	end
 
@@ -3743,7 +3388,7 @@ LilycoveCity_ContestLobby_EventScript_28C7E9:: @ 828C7E9
 SlateportCity_OceanicMuseum_1F_EventScript_28C7E9:: @ 828C7E9
 SlateportCity_PokemonFanClub_EventScript_28C7E9:: @ 828C7E9
 	special InterviewAfter
-	incrementgamestat 6
+	incrementgamestat GAME_STAT_GOT_INTERVIEWED
 	release
 	end
 
@@ -4287,863 +3932,7 @@ GraniteCave_B1F_Movement_2A8369: @ 82A8369
 	set_invisible
 	step_end
 
-LilycoveCity_PokemonCenter_1F_EventScript_2A836B:: @ 82A836B
-	special Script_GetLilycoveLadyId
-	switch VAR_RESULT
-	case LILYCOVE_LADY_QUIZ, LilycoveCity_PokemonCenter_1F_EventScript_2A8554
-	case LILYCOVE_LADY_FAVOR, LilycoveCity_PokemonCenter_1F_EventScript_2A8395
-	case LILYCOVE_LADY_CONTEST, LilycoveCity_PokemonCenter_1F_EventScript_2A882A
-	end
-
-LilycoveCity_PokemonCenter_1F_EventScript_2A8395:: @ 82A8395
-	lock
-	faceplayer
-	msgbox LilycoveCity_PokemonCenter_1F_Text_2A8A69, MSGBOX_DEFAULT
-	specialvar VAR_RESULT, GetFavorLadyState
-	compare VAR_RESULT, LILYCOVE_LADY_STATE_READY
-	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A83D0
-	compare VAR_RESULT, LILYCOVE_LADY_STATE_COMPLETED
-	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A83C6
-	compare VAR_RESULT, LILYCOVE_LADY_STATE_PRIZE
-	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A8510
-	end
-
-LilycoveCity_PokemonCenter_1F_EventScript_2A83C6:: @ 82A83C6
-	msgbox LilycoveCity_PokemonCenter_1F_Text_2A8AB1, MSGBOX_DEFAULT
-	release
-	end
-
-LilycoveCity_PokemonCenter_1F_EventScript_2A83D0:: @ 82A83D0
-	special BufferFavorLadyRequest
-	msgbox LilycoveCity_PokemonCenter_1F_Text_2A8A7D, MSGBOX_DEFAULT
-	specialvar VAR_RESULT, HasAnotherPlayerGivenFavorLadyItem
-	compare VAR_RESULT, 0
-	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A8435
-	compare VAR_RESULT, 1
-	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A83F7
-	end
-
-LilycoveCity_PokemonCenter_1F_EventScript_2A83F7:: @ 82A83F7
-	special BufferFavorLadyItemName
-	special BufferFavorLadyPlayerName
-	specialvar VAR_RESULT, DidFavorLadyLikeItem
-	compare VAR_RESULT, 0
-	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A8419
-	compare VAR_RESULT, 1
-	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A8427
-	end
-
-LilycoveCity_PokemonCenter_1F_EventScript_2A8419:: @ 82A8419
-	msgbox LilycoveCity_PokemonCenter_1F_Text_2A8ACE, MSGBOX_DEFAULT
-	goto LilycoveCity_PokemonCenter_1F_EventScript_2A8435
-	end
-
-LilycoveCity_PokemonCenter_1F_EventScript_2A8427:: @ 82A8427
-	msgbox LilycoveCity_PokemonCenter_1F_Text_2A8B36, MSGBOX_DEFAULT
-	goto LilycoveCity_PokemonCenter_1F_EventScript_2A8435
-	end
-
-LilycoveCity_PokemonCenter_1F_EventScript_2A8435:: @ 82A8435
-	msgbox LilycoveCity_PokemonCenter_1F_Text_2A8B69, MSGBOX_YESNO
-	compare VAR_RESULT, 0
-	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A8454
-	compare VAR_RESULT, 1
-	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A845E
-	end
-
-LilycoveCity_PokemonCenter_1F_EventScript_2A8454:: @ 82A8454
-	msgbox LilycoveCity_PokemonCenter_1F_Text_2A8BCD, MSGBOX_DEFAULT
-	release
-	end
-
-LilycoveCity_PokemonCenter_1F_EventScript_2A845E:: @ 82A845E
-	msgbox LilycoveCity_PokemonCenter_1F_Text_2A8BAD, MSGBOX_DEFAULT
-	goto LilycoveCity_PokemonCenter_1F_EventScript_2A846C
-	end
-
-LilycoveCity_PokemonCenter_1F_EventScript_2A846C:: @ 82A846C
-	fadescreen 1
-	setvar VAR_RESULT, 0
-	special Script_FavorLadyOpenBagMenu
-	waitstate
-	compare VAR_RESULT, 0
-	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A848E
-	compare VAR_RESULT, 1
-	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A84AD
-	end
-
-LilycoveCity_PokemonCenter_1F_EventScript_2A848E:: @ 82A848E
-	msgbox LilycoveCity_PokemonCenter_1F_Text_2A8BEE, MSGBOX_YESNO
-	compare VAR_RESULT, 1
-	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A8454
-	compare VAR_RESULT, 0
-	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A846C
-	end
-
-LilycoveCity_PokemonCenter_1F_EventScript_2A84AD:: @ 82A84AD
-	specialvar VAR_RESULT, Script_DoesFavorLadyLikeItem
-	compare VAR_RESULT, 0
-	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A84C9
-	compare VAR_RESULT, 1
-	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A84D6
-	end
-
-LilycoveCity_PokemonCenter_1F_EventScript_2A84C9:: @ 82A84C9
-	special BufferFavorLadyRequest
-	msgbox LilycoveCity_PokemonCenter_1F_Text_2A8C0F, MSGBOX_DEFAULT
-	release
-	end
-
-LilycoveCity_PokemonCenter_1F_EventScript_2A84D6:: @ 82A84D6
-	specialvar VAR_RESULT, IsFavorLadyThresholdMet
-	compare VAR_RESULT, 0
-	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A84F2
-	compare VAR_RESULT, 1
-	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A84FF
-	end
-
-LilycoveCity_PokemonCenter_1F_EventScript_2A84F2:: @ 82A84F2
-	special BufferFavorLadyRequest
-	msgbox LilycoveCity_PokemonCenter_1F_Text_2A8C6F, MSGBOX_DEFAULT
-	release
-	end
-
-LilycoveCity_PokemonCenter_1F_EventScript_2A84FF:: @ 82A84FF
-	special BufferFavorLadyRequest
-	msgbox LilycoveCity_PokemonCenter_1F_Text_2A8CC8, MSGBOX_DEFAULT
-	goto LilycoveCity_PokemonCenter_1F_EventScript_2A8510
-	end
-
-LilycoveCity_PokemonCenter_1F_EventScript_2A8510:: @ 82A8510
-	setvar VAR_0x8004, 0
-	specialvar VAR_0x8004, FavorLadyGetPrize
-	msgbox LilycoveCity_PokemonCenter_1F_Text_2A8D5D, MSGBOX_DEFAULT
-	giveitem_std VAR_0x8004
-	compare VAR_RESULT, 0
-	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A8545
-	compare VAR_RESULT, 1
-	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A854F
-	end
-
-LilycoveCity_PokemonCenter_1F_EventScript_2A8545:: @ 82A8545
-	msgbox LilycoveCity_PokemonCenter_1F_Text_2A8DBD, MSGBOX_DEFAULT
-	release
-	end
-
-LilycoveCity_PokemonCenter_1F_EventScript_2A854F:: @ 82A854F
-	special SetFavorLadyState_Complete
-	release
-	end
-
-LilycoveCity_PokemonCenter_1F_EventScript_2A8554:: @ 82A8554
-	lock
-	faceplayer
-	msgbox LilycoveCity_PokemonCenter_1F_Text_2A8E2B, MSGBOX_DEFAULT
-	specialvar VAR_RESULT, GetQuizLadyState
-	compare VAR_RESULT, LILYCOVE_LADY_STATE_READY
-	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A8585
-	compare VAR_RESULT, LILYCOVE_LADY_STATE_COMPLETED
-	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A85AC
-	compare VAR_RESULT, LILYCOVE_LADY_STATE_PRIZE
-	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A86EC
-	end
-
-LilycoveCity_PokemonCenter_1F_EventScript_2A8585:: @ 82A8585
-	specialvar VAR_RESULT, GetQuizAuthor
-	compare VAR_RESULT, QUIZ_AUTHOR_PLAYER
-	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A85C8
-	compare VAR_RESULT, QUIZ_AUTHOR_OTHER_PLAYER
-	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A85D2
-	compare VAR_RESULT, QUIZ_AUTHOR_LADY
-	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A85E0
-	end
-
-LilycoveCity_PokemonCenter_1F_EventScript_2A85AC:: @ 82A85AC
-	specialvar VAR_RESULT, IsQuizLadyWaitingForChallenger
-	compare VAR_RESULT, 0
-	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A8759
-	compare VAR_RESULT, 1
-	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A85C8
-	end
-
-LilycoveCity_PokemonCenter_1F_EventScript_2A85C8:: @ 82A85C8
-	msgbox LilycoveCity_PokemonCenter_1F_Text_2A8E4E, MSGBOX_DEFAULT
-	release
-	end
-
-LilycoveCity_PokemonCenter_1F_EventScript_2A85D2:: @ 82A85D2
-	msgbox LilycoveCity_PokemonCenter_1F_Text_2A8EAC, MSGBOX_DEFAULT
-	goto LilycoveCity_PokemonCenter_1F_EventScript_2A85EE
-	end
-
-LilycoveCity_PokemonCenter_1F_EventScript_2A85E0:: @ 82A85E0
-	msgbox LilycoveCity_PokemonCenter_1F_Text_2A8EAC, MSGBOX_DEFAULT
-	goto LilycoveCity_PokemonCenter_1F_EventScript_2A85EE
-	end
-
-LilycoveCity_PokemonCenter_1F_EventScript_2A85EE:: @ 82A85EE
-	setvar VAR_0x8004, 0
-	msgbox LilycoveCity_PokemonCenter_1F_Text_2A8EEC, MSGBOX_YESNO
-	compare VAR_RESULT, 1
-	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A861C
-	compare VAR_RESULT, 0
-	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A8612
-	end
-
-LilycoveCity_PokemonCenter_1F_EventScript_2A8612:: @ 82A8612
-	msgbox LilycoveCity_PokemonCenter_1F_Text_2A8F65, MSGBOX_DEFAULT
-	release
-	end
-
-LilycoveCity_PokemonCenter_1F_EventScript_2A861C:: @ 82A861C
-	special ClearQuizLadyPlayerAnswer
-	compare VAR_0x8004, 0
-	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A864C
-	compare VAR_0x8004, EASY_CHAT_TYPE_QUIZ_ANSWER
-	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A8656
-
-LilycoveCity_PokemonCenter_1F_EventScript_2A8635:: @ 82A8635
-	compare VAR_RESULT, 0
-	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A8660
-	compare VAR_RESULT, 1
-	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A8689
-	end
-
-LilycoveCity_PokemonCenter_1F_EventScript_2A864C:: @ 82A864C
-	special QuizLadyShowQuizQuestion
-	waitstate
-	goto LilycoveCity_PokemonCenter_1F_EventScript_2A8635
-	end
-
-LilycoveCity_PokemonCenter_1F_EventScript_2A8656:: @ 82A8656
-	special QuizLadyGetPlayerAnswer
-	waitstate
-	goto LilycoveCity_PokemonCenter_1F_EventScript_2A8635
-	end
-
-LilycoveCity_PokemonCenter_1F_EventScript_2A8660:: @ 82A8660
-	msgbox LilycoveCity_PokemonCenter_1F_Text_2A8F7E, MSGBOX_YESNO
-	compare VAR_RESULT, 1
-	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A867F
-	compare VAR_RESULT, 0
-	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A861C
-	end
-
-LilycoveCity_PokemonCenter_1F_EventScript_2A867F:: @ 82A867F
-	msgbox LilycoveCity_PokemonCenter_1F_Text_2A8F9A, MSGBOX_DEFAULT
-	release
-	end
-
-LilycoveCity_PokemonCenter_1F_EventScript_2A8689:: @ 82A8689
-	special SetQuizLadyState_Complete
-	msgbox LilycoveCity_PokemonCenter_1F_Text_2A8F4D, MSGBOX_DEFAULT
-	specialvar VAR_RESULT, IsQuizAnswerCorrect
-	compare VAR_RESULT, 0
-	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A86C7
-	compare VAR_RESULT, 1
-	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A86B0
-	end
-
-LilycoveCity_PokemonCenter_1F_EventScript_2A86B0:: @ 82A86B0
-	playse SE_SEIKAI
-	delay 10
-	playse SE_SEIKAI
-	msgbox LilycoveCity_PokemonCenter_1F_Text_2A8FC7, MSGBOX_DEFAULT
-	goto LilycoveCity_PokemonCenter_1F_EventScript_2A86EC
-	end
-
-LilycoveCity_PokemonCenter_1F_EventScript_2A86C7:: @ 82A86C7
-	special BufferQuizCorrectAnswer
-	special BufferQuizPrizeName
-	playse SE_HAZURE
-	delay 10
-	playse SE_HAZURE
-	msgbox LilycoveCity_PokemonCenter_1F_Text_2A90A5, MSGBOX_DEFAULT
-	msgbox LilycoveCity_PokemonCenter_1F_Text_2A90CD, MSGBOX_DEFAULT
-	goto LilycoveCity_PokemonCenter_1F_EventScript_2A8759
-	end
-
-@ VAR_RESULT is essentially ignored, both jumps are identical
-LilycoveCity_PokemonCenter_1F_EventScript_2A86EC:: @ 82A86EC
-	specialvar VAR_RESULT, BufferQuizAuthorNameAndCheckIfLady
-	compare VAR_RESULT, 1
-	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A8708
-	compare VAR_RESULT, 0
-	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A8716
-	end
-
-LilycoveCity_PokemonCenter_1F_EventScript_2A8708:: @ 82A8708
-	msgbox LilycoveCity_PokemonCenter_1F_Text_2A9007, MSGBOX_DEFAULT
-	goto LilycoveCity_PokemonCenter_1F_EventScript_2A8724
-	end
-
-LilycoveCity_PokemonCenter_1F_EventScript_2A8716:: @ 82A8716
-	msgbox LilycoveCity_PokemonCenter_1F_Text_2A9007, MSGBOX_DEFAULT
-	goto LilycoveCity_PokemonCenter_1F_EventScript_2A8724
-	end
-
-LilycoveCity_PokemonCenter_1F_EventScript_2A8724:: @ 82A8724
-	setvar VAR_0x8005, 0
-	special BufferQuizPrizeItem
-	special SetQuizLadyState_Complete
-	giveitem_std VAR_0x8005
-	compare VAR_RESULT, 0
-	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A874C
-	goto LilycoveCity_PokemonCenter_1F_EventScript_2A8759
-	end
-
-LilycoveCity_PokemonCenter_1F_EventScript_2A874C:: @ 82A874C
-	msgbox LilycoveCity_PokemonCenter_1F_Text_2A906A, MSGBOX_DEFAULT
-	special SetQuizLadyState_GivePrize
-	release
-	end
-
-LilycoveCity_PokemonCenter_1F_EventScript_2A8759:: @ 82A8759
-	msgbox LilycoveCity_PokemonCenter_1F_Text_2A90FB, MSGBOX_YESNO
-	compare VAR_RESULT, 1
-	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A8785
-	compare VAR_RESULT, 0
-	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A8778
-	end
-
-LilycoveCity_PokemonCenter_1F_EventScript_2A8778:: @ 82A8778
-	special QuizLadyPickNewQuestion
-	msgbox LilycoveCity_PokemonCenter_1F_Text_2A9131, MSGBOX_DEFAULT
-	release
-	end
-
-LilycoveCity_PokemonCenter_1F_EventScript_2A8785:: @ 82A8785
-	msgbox LilycoveCity_PokemonCenter_1F_Text_2A9153, MSGBOX_DEFAULT
-
-LilycoveCity_PokemonCenter_1F_EventScript_2A878D:: @ 82A878D
-	fadescreen 1
-	setvar VAR_RESULT, 0
-	special Script_QuizLadyOpenBagMenu
-	waitstate
-	compare VAR_RESULT, 0
-	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A87AF
-	compare VAR_RESULT, 1
-	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A87CE
-	end
-
-LilycoveCity_PokemonCenter_1F_EventScript_2A87AF:: @ 82A87AF
-	msgbox LilycoveCity_PokemonCenter_1F_Text_2A9212, MSGBOX_YESNO
-	compare VAR_RESULT, 1
-	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A8778
-	compare VAR_RESULT, 0
-	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A878D
-	end
-
-LilycoveCity_PokemonCenter_1F_EventScript_2A87CE:: @ 82A87CE
-	msgbox LilycoveCity_PokemonCenter_1F_Text_2A9270, MSGBOX_DEFAULT
-	special ClearQuizLadyQuestionAndAnswer
-	special ClearQuizLadyPlayerAnswer
-	setvar VAR_0x8004, EASY_CHAT_TYPE_QUIZ_QUESTION
-
-LilycoveCity_PokemonCenter_1F_EventScript_2A87E1:: @ 82A87E1
-	fadescreen 1
-	special QuizLadySetCustomQuestion
-	waitstate
-	compare VAR_RESULT, 0
-	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A87F8
-	goto LilycoveCity_PokemonCenter_1F_EventScript_2A8817
-	end
-
-LilycoveCity_PokemonCenter_1F_EventScript_2A87F8:: @ 82A87F8
-	msgbox LilycoveCity_PokemonCenter_1F_Text_2A92D3, MSGBOX_YESNO
-	compare VAR_RESULT, 1
-	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A8778
-	compare VAR_RESULT, 0
-	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A87E1
-	end
-
-LilycoveCity_PokemonCenter_1F_EventScript_2A8817:: @ 82A8817
-	special QuizLadyTakePrizeForCustomQuiz
-	special QuizLadyRecordCustomQuizData
-	special QuizLadySetWaitingForChallenger
-	msgbox LilycoveCity_PokemonCenter_1F_Text_2A9336, MSGBOX_DEFAULT
-	release
-	end
-
-LilycoveCity_PokemonCenter_1F_EventScript_2A882A:: @ 82A882A
-	lock
-	faceplayer
-	msgbox LilycoveCity_PokemonCenter_1F_Text_2A93A7, MSGBOX_DEFAULT
-	specialvar VAR_RESULT, HasPlayerGivenContestLadyPokeblock
-	compare VAR_RESULT, 0
-	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A8850
-	compare VAR_RESULT, 1
-	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A886C
-	end
-
-@ Redundant with above script, VAR_RESULT will always be 0 here
-LilycoveCity_PokemonCenter_1F_EventScript_2A8850:: @ 82A8850
-	specialvar VAR_RESULT, ShouldContestLadyShowGoOnAir
-	compare VAR_RESULT, 0
-	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A8876
-	compare VAR_RESULT, 1
-	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A886C
-	end
-
-LilycoveCity_PokemonCenter_1F_EventScript_2A886C:: @ 82A886C
-	msgbox LilycoveCity_PokemonCenter_1F_Text_2A93D6, MSGBOX_DEFAULT
-	release
-	end
-
-LilycoveCity_PokemonCenter_1F_EventScript_2A8876:: @ 82A8876
-	special Script_BufferContestLadyCategoryAndMonName
-	msgbox LilycoveCity_PokemonCenter_1F_Text_2A93F4, MSGBOX_DEFAULT
-	checkitem ITEM_POKEBLOCK_CASE, 1
-	compare VAR_RESULT, 0
-	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A89AE
-	msgbox LilycoveCity_PokemonCenter_1F_Text_2A94E8, MSGBOX_YESNO
-	compare VAR_RESULT, 0
-	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A88B0
-	compare VAR_RESULT, 1
-	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A88BA
-	end
-
-LilycoveCity_PokemonCenter_1F_EventScript_2A88B0:: @ 82A88B0
-	msgbox LilycoveCity_PokemonCenter_1F_Text_2A9556, MSGBOX_DEFAULT
-	release
-	end
-
-LilycoveCity_PokemonCenter_1F_EventScript_2A88BA:: @ 82A88BA
-	fadescreen 1
-	special OpenPokeblockCaseForContestLady
-	waitstate
-	compare VAR_RESULT, 65535
-	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A88D7
-	compare VAR_RESULT, 65535
-	goto_if_ne LilycoveCity_PokemonCenter_1F_EventScript_2A88F6
-	end
-
-LilycoveCity_PokemonCenter_1F_EventScript_2A88D7:: @ 82A88D7
-	msgbox LilycoveCity_PokemonCenter_1F_Text_2A9537, MSGBOX_YESNO
-	compare VAR_RESULT, 1
-	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A88B0
-	compare VAR_RESULT, 0
-	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A88BA
-	end
-
-LilycoveCity_PokemonCenter_1F_EventScript_2A88F6:: @ 82A88F6
-	msgbox LilycoveCity_PokemonCenter_1F_Text_2A9571, MSGBOX_DEFAULT
-	special SetContestLadyGivenPokeblock
-	special GetContestLadyMonSpecies
-	goto LilycoveCity_PokemonCenter_1F_EventScript_2A890A
-	end
-
-@ VAR_0x8004 here is the return value from GivePokeblockToContestLady
-LilycoveCity_PokemonCenter_1F_EventScript_2A890A:: @ 82A890A
-	applymovement 4, LilycoveCity_PokemonCenter_1F_Movement_2A89B8
-	waitmovement 0
-	delay 60
-	applymovement 5, LilycoveCity_PokemonCenter_1F_Movement_2A89BB
-	waitmovement 0
-	delay 60
-	waitse
-	playmoncry VAR_0x8005, 0
-	delay 120
-	waitmoncry
-	compare VAR_0x8004, 1
-	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A893F
-	goto LilycoveCity_PokemonCenter_1F_EventScript_2A894C
-	end
-
-LilycoveCity_PokemonCenter_1F_EventScript_2A893F:: @ 82A893F
-	applymovement 5, LilycoveCity_PokemonCenter_1F_Movement_2A89C2
-	waitmovement 0
-	delay 60
-
-@ VAR_0x8004 here is the return value from GivePokeblockToContestLady
-LilycoveCity_PokemonCenter_1F_EventScript_2A894C:: @ 82A894C
-	applymovement 4, LilycoveCity_PokemonCenter_1F_Movement_2A89C0
-	waitmovement 0
-	delay 60
-	compare VAR_0x8004, 0
-	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A8970
-	compare VAR_0x8004, 1
-	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A897E
-	end
-
-LilycoveCity_PokemonCenter_1F_EventScript_2A8970:: @ 82A8970
-	msgbox LilycoveCity_PokemonCenter_1F_Text_2A95AD, MSGBOX_DEFAULT
-	goto LilycoveCity_PokemonCenter_1F_EventScript_2A898F
-	end
-
-LilycoveCity_PokemonCenter_1F_EventScript_2A897E:: @ 82A897E
-	special Script_BufferContestLadyCategoryAndMonName
-	msgbox LilycoveCity_PokemonCenter_1F_Text_2A9605, MSGBOX_DEFAULT
-	goto LilycoveCity_PokemonCenter_1F_EventScript_2A898F
-	end
-
-LilycoveCity_PokemonCenter_1F_EventScript_2A898F:: @ 82A898F
-	specialvar VAR_RESULT, ShouldContestLadyShowGoOnAir
-	compare VAR_RESULT, 1
-	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A89A1
-	release
-	end
-
-LilycoveCity_PokemonCenter_1F_EventScript_2A89A1:: @ 82A89A1
-	msgbox LilycoveCity_PokemonCenter_1F_Text_2A9669, MSGBOX_DEFAULT
-	special PutLilycoveContestLadyShowOnTheAir
-	release
-	end
-
-LilycoveCity_PokemonCenter_1F_EventScript_2A89AE:: @ 82A89AE
-	msgbox LilycoveCity_PokemonCenter_1F_Text_2A9451, MSGBOX_DEFAULT
-	release
-	end
-
-LilycoveCity_PokemonCenter_1F_Movement_2A89B8: @ 82A89B8
-	face_right
-	delay_8
-	step_end
-
-LilycoveCity_PokemonCenter_1F_Movement_2A89BB: @ 82A89BB
-	face_left
-	delay_8
-	step_end
-
-LilycoveCity_PokemonCenter_1F_Movement_2A89BE: @ 82A89BE
-	face_down
-	step_end
-
-LilycoveCity_PokemonCenter_1F_Movement_2A89C0: @ 82A89C0
-	face_player
-	step_end
-
-LilycoveCity_PokemonCenter_1F_Movement_2A89C2: @ 82A89C2
-	disable_jump_landing_ground_effect
-	jump_in_place_left
-	disable_jump_landing_ground_effect
-	jump_in_place_left
-	step_end
-
-LilycoveCity_PokemonCenter_1F_EventScript_2A89C7:: @ 82A89C7
-	specialvar VAR_RESULT, GetContestLadyCategory
-	special Script_BufferContestLadyCategoryAndMonName
-	special GetContestLadyMonSpecies
-	compare VAR_RESULT, CONTEST_CATEGORY_COOL
-	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A8A0A
-	compare VAR_RESULT, CONTEST_CATEGORY_BEAUTY
-	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A8A1D
-	compare VAR_RESULT, CONTEST_CATEGORY_CUTE
-	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A8A30
-	compare VAR_RESULT, CONTEST_CATEGORY_SMART
-	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A8A43
-	compare VAR_RESULT, CONTEST_CATEGORY_TOUGH
-	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A8A56
-	end
-
-LilycoveCity_PokemonCenter_1F_EventScript_2A8A0A:: @ 82A8A0A
-	lock
-	faceplayer
-	waitse
-	playmoncry VAR_0x8005, 0
-	msgbox LilycoveCity_PokemonCenter_1F_Text_2A96DA, MSGBOX_DEFAULT
-	waitmoncry
-	release
-	end
-
-LilycoveCity_PokemonCenter_1F_EventScript_2A8A1D:: @ 82A8A1D
-	lock
-	faceplayer
-	waitse
-	playmoncry VAR_0x8005, 0
-	msgbox LilycoveCity_PokemonCenter_1F_Text_2A970E, MSGBOX_DEFAULT
-	waitmoncry
-	release
-	end
-
-LilycoveCity_PokemonCenter_1F_EventScript_2A8A30:: @ 82A8A30
-	lock
-	faceplayer
-	waitse
-	playmoncry VAR_0x8005, 0
-	msgbox LilycoveCity_PokemonCenter_1F_Text_2A96F6, MSGBOX_DEFAULT
-	waitmoncry
-	release
-	end
-
-LilycoveCity_PokemonCenter_1F_EventScript_2A8A43:: @ 82A8A43
-	lock
-	faceplayer
-	waitse
-	playmoncry VAR_0x8005, 0
-	msgbox LilycoveCity_PokemonCenter_1F_Text_2A96E6, MSGBOX_DEFAULT
-	waitmoncry
-	release
-	end
-
-LilycoveCity_PokemonCenter_1F_EventScript_2A8A56:: @ 82A8A56
-	lock
-	faceplayer
-	waitse
-	playmoncry VAR_0x8005, 0
-	msgbox LilycoveCity_PokemonCenter_1F_Text_2A9703, MSGBOX_DEFAULT
-	waitmoncry
-	release
-	end
-
-LilycoveCity_PokemonCenter_1F_Text_2A8A69: @ 82A8A69
-	.string "I'm the FAVOR LADY…$"
-
-LilycoveCity_PokemonCenter_1F_Text_2A8A7D: @ 82A8A7D
-	.string "I've recently developed an obsession\n"
-	.string "for {STR_VAR_1} things…$"
-
-LilycoveCity_PokemonCenter_1F_Text_2A8AB1: @ 82A8AB1
-	.string "Oh…\n"
-	.string "Thank you for last time…$"
-
-LilycoveCity_PokemonCenter_1F_Text_2A8ACE: @ 82A8ACE
-	.string "Before, I think it was {STR_VAR_3}…\p"
-	.string "{STR_VAR_3} gave me one {STR_VAR_2},\n"
-	.string "saying it was {STR_VAR_1}.\p"
-	.string "But it wasn't {STR_VAR_1}.\n"
-	.string "Not in the least bit.$"
-
-LilycoveCity_PokemonCenter_1F_Text_2A8B36: @ 82A8B36
-	.string "Before, {STR_VAR_3} gave me a very\n"
-	.string "{STR_VAR_1} {STR_VAR_2}.\p"
-	.string "I cherish it now.$"
-
-LilycoveCity_PokemonCenter_1F_Text_2A8B69: @ 82A8B69
-	.string "Listen, if you have anything that\n"
-	.string "is {STR_VAR_1}, will you share it\l"
-	.string "with me?$"
-
-LilycoveCity_PokemonCenter_1F_Text_2A8BAD: @ 82A8BAD
-	.string "…Really?\n"
-	.string "What will you give me?$"
-
-LilycoveCity_PokemonCenter_1F_Text_2A8BCD: @ 82A8BCD
-	.string "Is that so?\n"
-	.string "Then, it's good-bye…$"
-
-LilycoveCity_PokemonCenter_1F_Text_2A8BEE: @ 82A8BEE
-	.string "Oh…\n"
-	.string "You're not willing to share?$"
-
-LilycoveCity_PokemonCenter_1F_Text_2A8C0F: @ 82A8C0F
-	.string "Oh?\n"
-	.string "That {STR_VAR_2} is {STR_VAR_1}?\p"
-	.string "…Oh, is that right?\p"
-	.string "Well, I owe you a thanks anyway.\n"
-	.string "I'll try to cherish it…$"
-
-LilycoveCity_PokemonCenter_1F_Text_2A8C6F: @ 82A8C6F
-	.string "Oh…\p"
-	.string "That's a quite {STR_VAR_1}\n"
-	.string "{STR_VAR_2}…\p"
-	.string "Isn't it nice?\n"
-	.string "It's so dreamy…\p"
-	.string "Thank you…\n"
-	.string "I will cherish this…$"
-
-LilycoveCity_PokemonCenter_1F_Text_2A8CC8: @ 82A8CC8
-	.string "…Oh, oh, oh…\p"
-	.string "This is amazing!\n"
-	.string "This really is {STR_VAR_1}!\p"
-	.string "I never knew that one {STR_VAR_2}\n"
-	.string "could be this {STR_VAR_1}!\p"
-	.string "Thank you!\p"
-	.string "I will treasure this for the rest\n"
-	.string "of my life!$"
-
-LilycoveCity_PokemonCenter_1F_Text_2A8D5D: @ 82A8D5D
-	.string "I'll give you this wonderful item in\n"
-	.string "return for your fabulous gift.\p"
-	.string "I hope you will cherish it…$"
-
-LilycoveCity_PokemonCenter_1F_Text_2A8DBD: @ 82A8DBD
-	.string "Oh, you can't have it if you don't have\n"
-	.string "the space for it.\p"
-	.string "Please come see me when you get\n"
-	.string "your BAG organized…$"
-
-LilycoveCity_PokemonCenter_1F_Text_2A8E2B: @ 82A8E2B
-	.string "I'm the QUIZ LADY!\n"
-	.string "I love quizzes!$"
-
-LilycoveCity_PokemonCenter_1F_Text_2A8E4E: @ 82A8E4E
-	.string "Oh?\p"
-	.string "I'm waiting for a challenger to answer\n"
-	.string "the quiz you made.\p"
-	.string "We can chat another time, okay?$"
-
-LilycoveCity_PokemonCenter_1F_Text_2A8EAC: @ 82A8EAC
-	.string "I'm waiting for someone to challenge\n"
-	.string "a quiz this {STR_VAR_1} thought up!$"
-
-LilycoveCity_PokemonCenter_1F_Text_2A8EEC: @ 82A8EEC
-	.string "If you answer correctly, you can win\n"
-	.string "fabulous prizes!\p"
-	.string "Would you like to take the quiz\n"
-	.string "challenge?$"
-
-LilycoveCity_PokemonCenter_1F_Text_2A8F4D: @ 82A8F4D
-	.string "… … … … … …\n"
-	.string "… … … … … …$"
-
-LilycoveCity_PokemonCenter_1F_Text_2A8F65: @ 82A8F65
-	.string "Oh, how boring!\n"
-	.string "Bye-bye!$"
-
-LilycoveCity_PokemonCenter_1F_Text_2A8F7E: @ 82A8F7E
-	.string "Awww!\n"
-	.string "You're going to quit?$"
-
-LilycoveCity_PokemonCenter_1F_Text_2A8F9A: @ 82A8F9A
-	.string "Please take the quiz challenge\n"
-	.string "another time!$"
-
-LilycoveCity_PokemonCenter_1F_Text_2A8FC7: @ 82A8FC7
-	.string "You're amazing! You've got it right!\n"
-	.string "You're one sharp customer!$"
-
-LilycoveCity_PokemonCenter_1F_Text_2A9007: @ 82A9007
-	.string "Congratulations!\n"
-	.string "You've got the quiz right!\p"
-	.string "You've won a prize provided by\n"
-	.string "{STR_VAR_1}!$"
-
-LilycoveCity_PokemonCenter_1F_Text_2A9056: @ 82A9056
-	.string "{STR_VAR_1} received\n"
-	.string "one {STR_VAR_2}!$"
-
-LilycoveCity_PokemonCenter_1F_Text_2A906A: @ 82A906A
-	.string "Oh? Your BAG is filled up!\n"
-	.string "Come see me when you have room.$"
-
-LilycoveCity_PokemonCenter_1F_Text_2A90A5: @ 82A90A5
-	.string "Hmm… Wrong!\n"
-	.string "The correct answer is “{STR_VAR_3}”!$"
-
-LilycoveCity_PokemonCenter_1F_Text_2A90CD: @ 82A90CD
-	.string "Too bad!\p"
-	.string "I get to keep the quiz prize\n"
-	.string "{STR_VAR_1} now!$"
-
-LilycoveCity_PokemonCenter_1F_Text_2A90FB: @ 82A90FB
-	.string "Listen, listen!\n"
-	.string "Would you like to make your own quiz?$"
-
-LilycoveCity_PokemonCenter_1F_Text_2A9131: @ 82A9131
-	.string "Oh, I see…\n"
-	.string "Well, maybe next time!$"
-
-LilycoveCity_PokemonCenter_1F_Text_2A9153: @ 82A9153
-	.string "Okay, the first thing you have to do\n"
-	.string "is pick the prize for the person that\l"
-	.string "answers your quiz correctly.\p"
-	.string "But beware, if the person taking\n"
-	.string "the quiz can't get it right, I get to\l"
-	.string "keep the prize!$"
-
-LilycoveCity_PokemonCenter_1F_Text_2A9212: @ 82A9212
-	.string "If you don't choose a prize,\n"
-	.string "your quiz can't be made.\p"
-	.string "Are you going to quit making\n"
-	.string "your quiz?$"
-
-LilycoveCity_PokemonCenter_1F_Text_2A9270: @ 82A9270
-	.string "Oh, how nice!\n"
-	.string "That's a wonderful prize!\p"
-	.string "Next, you need to write your quiz\n"
-	.string "question and its answer.$"
-
-LilycoveCity_PokemonCenter_1F_Text_2A92D3: @ 82A92D3
-	.string "Are you going to quit writing\n"
-	.string "your quiz question?$"
-
-LilycoveCity_PokemonCenter_1F_Text_2A9305: @ 82A9305
-	.string "Are you going to quit choosing\n"
-	.string "your quiz answer?$"
-
-LilycoveCity_PokemonCenter_1F_Text_2A9336: @ 82A9336
-	.string "Thank you!\n"
-	.string "You've put together a nice quiz.\p"
-	.string "I'll go look for someone who'll take\n"
-	.string "your quiz challenge right away.$"
-
-LilycoveCity_PokemonCenter_1F_Text_2A93A7: @ 82A93A7
-	.string "I'm the CONTEST LADY!\n"
-	.string "I sure do love CONTESTS!$"
-
-LilycoveCity_PokemonCenter_1F_Text_2A93D6: @ 82A93D6
-	.string "Thanks for your {POKEBLOCK} before!$"
-
-LilycoveCity_PokemonCenter_1F_Text_2A93F4: @ 82A93F4
-	.string "This is my friend {STR_VAR_1}!\n"
-	.string "It's the epitome of {STR_VAR_2}!\p"
-	.string "But I think that it will display\n"
-	.string "even more {STR_VAR_2}!$"
-
-LilycoveCity_PokemonCenter_1F_Text_2A9451: @ 82A9451
-	.string "So, I need your help!\p"
-	.string "Please, may I have one {POKEBLOCK}?\n"
-	.string "All I'm asking for is one!\p"
-	.string "…Oh, but…\n"
-	.string "Don't you have a {POKEBLOCK} CASE?\l"
-	.string "That's no good. Next time, then!$"
-
-LilycoveCity_PokemonCenter_1F_Text_2A94E8: @ 82A94E8
-	.string "So, I need your help!\p"
-	.string "Please, may I have one {POKEBLOCK}?\n"
-	.string "All I'm asking for is one!$"
-
-LilycoveCity_PokemonCenter_1F_Text_2A9537: @ 82A9537
-	.string "Awww!\n"
-	.string "I can't have one {POKEBLOCK}?!$"
-
-LilycoveCity_PokemonCenter_1F_Text_2A9556: @ 82A9556
-	.string "Sheesh!\n"
-	.string "What a cheapskate!$"
-
-LilycoveCity_PokemonCenter_1F_Text_2A9571: @ 82A9571
-	.string "Yay!\n"
-	.string "Thank you!\p"
-	.string "I'll feed my POKéMON your {POKEBLOCK}\n"
-	.string "right away.$"
-
-LilycoveCity_PokemonCenter_1F_Text_2A95AD: @ 82A95AD
-	.string "…It doesn't seem to have changed\n"
-	.string "in any way at all…\p"
-	.string "Hmm…\p"
-	.string "Oh, well!\n"
-	.string "Thank you very much!$"
-
-LilycoveCity_PokemonCenter_1F_Text_2A9605: @ 82A9605
-	.string "Oh, yay!\n"
-	.string "It's really delighted!\p"
-	.string "I think it really improved {STR_VAR_1}'s\n"
-	.string "{STR_VAR_2} quality, too.\p"
-	.string "Thank you so much!$"
-
-LilycoveCity_PokemonCenter_1F_Text_2A9669: @ 82A9669
-	.string "Hmm…\p"
-	.string "I think we may be ready to enter\n"
-	.string "some CONTESTS.\p"
-	.string "If you see us in one somewhere,\n"
-	.string "I hope you'll cheer for us.$"
-
-LilycoveCity_PokemonCenter_1F_Text_2A96DA: @ 82A96DA
-	.string "{STR_VAR_1}: Guguuh!$"
-
-LilycoveCity_PokemonCenter_1F_Text_2A96E6: @ 82A96E6
-	.string "{STR_VAR_1}: Igigigiiih!$"
-
-LilycoveCity_PokemonCenter_1F_Text_2A96F6: @ 82A96F6
-	.string "{STR_VAR_1}: Baaarun…$"
-
-LilycoveCity_PokemonCenter_1F_Text_2A9703: @ 82A9703
-	.string "{STR_VAR_1}: Pikka!$"
-
-LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
-	.string "{STR_VAR_1}: Umyaaaan!$"
-
+	.include "data/scripts/lilycove_lady.inc"
 	.include "data/text/match_call.inc"
 	.include "data/scripts/apprentice.inc"
 

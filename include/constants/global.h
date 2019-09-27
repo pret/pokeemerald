@@ -46,6 +46,8 @@
 #define BAG_TMHM_COUNT 64
 #define BAG_BERRIES_COUNT 46
 #define EVENT_OBJECT_TEMPLATES_COUNT 64
+#define DECOR_MAX_SECRET_BASE 16
+#define DECOR_MAX_PLAYERS_HOUSE 12
 
 #define PYRAMID_BAG_ITEMS_COUNT 10
 #define HALL_FACILITIES_COUNT 9 // 7 facilities for single mode + tower double mode + tower multi mode.

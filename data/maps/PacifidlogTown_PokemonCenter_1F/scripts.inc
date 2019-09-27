@@ -9,7 +9,7 @@ PacifidlogTown_PokemonCenter_1F_OnTransition: @ 82034B2
 
 PacifidlogTown_PokemonCenter_1F_EventScript_2034B6:: @ 82034B6
 	setvar VAR_0x800B, 1
-	call PacifidlogTown_PokemonCenter_1F_EventScript_27191E
+	call Common_EventScript_PkmnCenterNurse
 	waitmessage
 	waitbuttonpress
 	release

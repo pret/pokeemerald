@@ -2050,7 +2050,7 @@ bool8 UsedPokemonCenterWarp(void)
     return FALSE;
 }
 
-bool32 sub_8139ED0(void)
+bool32 PlayerNotAtTrainerHillEntrance(void)
 {
     if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(TRAINER_HILL_ENTRANCE) && gSaveBlock1Ptr->location.mapNum == MAP_NUM(TRAINER_HILL_ENTRANCE))
     {

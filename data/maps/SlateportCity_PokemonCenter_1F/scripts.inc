@@ -5,12 +5,12 @@ SlateportCity_PokemonCenter_1F_MapScripts:: @ 820DABF
 
 SlateportCity_PokemonCenter_1F_OnTransition: @ 820DACA
 	setrespawn HEAL_LOCATION_SLATEPORT_CITY
-	call SlateportCity_PokemonCenter_1F_EventScript_2718DE
+	call Common_EventScript_UpdateBrineyLocation
 	end
 
 SlateportCity_PokemonCenter_1F_EventScript_20DAD3:: @ 820DAD3
 	setvar VAR_0x800B, 1
-	call SlateportCity_PokemonCenter_1F_EventScript_27191E
+	call Common_EventScript_PkmnCenterNurse
 	waitmessage
 	waitbuttonpress
 	release

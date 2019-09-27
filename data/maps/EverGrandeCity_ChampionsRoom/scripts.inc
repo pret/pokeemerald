@@ -5,7 +5,7 @@ EverGrandeCity_ChampionsRoom_MapScripts:: @ 82289EF
 	.byte 0
 
 EverGrandeCity_ChampionsRoom_OnTransition: @ 82289FF
-	call Common_EventScript_SetupRivalGender
+	call Common_EventScript_SetupRivalGfxId
 	end
 
 EverGrandeCity_ChampionsRoom_MapScript2_228A05: @ 8228A05

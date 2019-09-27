@@ -86,7 +86,7 @@ MauvilleCity_BikeShop_EventScript_20ECE5:: @ 820ECE5
 	end
 
 MauvilleCity_BikeShop_EventScript_20ECEF:: @ 820ECEF
-	incrementgamestat 4
+	incrementgamestat GAME_STAT_TRADED_BIKES
 	msgbox MauvilleCity_BikeShop_Text_20F294, MSGBOX_DEFAULT
 	takeitem ITEM_ACRO_BIKE, 1
 	giveitem_std ITEM_MACH_BIKE
@@ -94,7 +94,7 @@ MauvilleCity_BikeShop_EventScript_20ECEF:: @ 820ECEF
 	end
 
 MauvilleCity_BikeShop_EventScript_20ED10:: @ 820ED10
-	incrementgamestat 4
+	incrementgamestat GAME_STAT_TRADED_BIKES
 	msgbox MauvilleCity_BikeShop_Text_20F263, MSGBOX_DEFAULT
 	takeitem ITEM_MACH_BIKE, 1
 	giveitem_std ITEM_ACRO_BIKE

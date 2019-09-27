@@ -56,9 +56,9 @@ NavelRock_Top_EventScript_26916F:: @ 826916F
 	applymovement 1, NavelRock_Top_Movement_26923A
 	waitmovement 0
 	special RemoveCameraObject
-	setvar VAR_0x8004, 250
-	setvar VAR_0x8005, 70
-	setvar VAR_0x8006, 0
+	setvar VAR_0x8004, SPECIES_HO_OH
+	setvar VAR_0x8005, 70 @level
+	setvar VAR_0x8006, ITEM_NONE
 	special CreateObedientEnemyMon
 	setflag FLAG_SYS_CTRL_OBJ_DELETE
 	special BattleSetup_StartLegendaryBattle
@@ -78,13 +78,13 @@ NavelRock_Top_EventScript_26916F:: @ 826916F
 
 NavelRock_Top_EventScript_269217:: @ 8269217
 	setflag FLAG_DEFEATED_HO_OH
-	setvar VAR_0x8004, 250
-	goto NavelRock_Top_EventScript_273776
+	setvar VAR_0x8004, SPECIES_HO_OH
+	goto Common_EventScript_LegendaryFlewAway
 	end
 
 NavelRock_Top_EventScript_269225:: @ 8269225
-	setvar VAR_0x8004, 250
-	goto NavelRock_Top_EventScript_273776
+	setvar VAR_0x8004, SPECIES_HO_OH
+	goto Common_EventScript_LegendaryFlewAway
 	end
 
 NavelRock_Top_Movement_269230: @ 8269230

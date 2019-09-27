@@ -965,9 +965,9 @@ static const struct MatchCallText *const sMatchCallGeneralTopics[] =
     sMatchCallBattlePyramidTexts,
 };
 
-extern const u8 gUnknown_082A5C9C[];
-extern const u8 gUnknown_082A5D2C[];
-extern const u8 gUnknown_082A633D[];
+extern const u8 gBirchDexRatingText_AreYouCurious[];
+extern const u8 gBirchDexRatingText_SoYouveSeenAndCaught[];
+extern const u8 gBirchDexRatingText_OnANationwideBasis[];
 
 void InitMatchCallCounters(void)
 {
@@ -1979,10 +1979,10 @@ void sub_8197080(u8 *destStr)
     ConvertIntToDecimalStringN(gStringVar1, numSeen, 0, 3);
     ConvertIntToDecimalStringN(gStringVar2, numCaught, 0, 3);
     dexRatingLevel = GetPokedexRatingLevel(numCaught);
-    str = StringCopy(buffer, gUnknown_082A5C9C);
+    str = StringCopy(buffer, gBirchDexRatingText_AreYouCurious);
     str[0] = CHAR_PROMPT_CLEAR;
     str++;
-    str = StringCopy(str, gUnknown_082A5D2C);
+    str = StringCopy(str, gBirchDexRatingText_SoYouveSeenAndCaught);
     str[0] = CHAR_PROMPT_CLEAR;
     str++;
     StringCopy(str, sBirchDexRatingTexts[dexRatingLevel]);
@@ -1996,7 +1996,7 @@ void sub_8197080(u8 *destStr)
         numCaught = GetNationalPokedexCount(FLAG_GET_CAUGHT);
         ConvertIntToDecimalStringN(gStringVar1, numSeen, 0, 3);
         ConvertIntToDecimalStringN(gStringVar2, numCaught, 0, 3);
-        StringExpandPlaceholders(str, gUnknown_082A633D);
+        StringExpandPlaceholders(str, gBirchDexRatingText_OnANationwideBasis);
     }
 
     Free(buffer);
