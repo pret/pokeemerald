@@ -132,8 +132,8 @@ Route110_TrickHouseEntrance_MapScript2_269BD3: @ 8269BD3
 Route110_TrickHouseEntrance_EventScript_269C15:: @ 8269C15
 	addobject 1
 	showobjectat 1, MAP_ROUTE110_TRICK_HOUSE_ENTRANCE
-	turnobject 1, 4
-	turnobject EVENT_OBJ_ID_PLAYER, 3
+	turnobject 1, DIR_EAST
+	turnobject EVENT_OBJ_ID_PLAYER, DIR_WEST
 	end
 
 Route110_TrickHouseEntrance_EventScript_269C26:: @ 8269C26
@@ -189,13 +189,13 @@ Route110_TrickHouseEntrance_EventScript_269CCC:: @ 8269CCC
 Route110_TrickHouseEntrance_EventScript_269CD0:: @ 8269CD0
 	addobject 1
 	setobjectxy 1, 5, 2
-	turnobject 1, 2
+	turnobject 1, DIR_NORTH
 	end
 
 Route110_TrickHouseEntrance_EventScript_269CDF:: @ 8269CDF
 	addobject 1
 	setobjectxy 1, 5, 2
-	turnobject 1, 1
+	turnobject 1, DIR_SOUTH
 	end
 
 Route110_TrickHouseEntrance_MapScript2_269CEE: @ 8269CEE
@@ -451,17 +451,17 @@ Route110_TrickHouseEntrance_EventScript_26A039:: @ 826A039
 	end
 
 Route110_TrickHouseEntrance_EventScript_26A070:: @ 826A070
-	multichoice 0, 0, 88, 1
+	multichoice 0, 0, MULTI_TENT, 1
 	switch VAR_RESULT
 	case 0, Route110_TrickHouseEntrance_EventScript_26A08A
 	goto Route110_TrickHouseEntrance_EventScript_26A092
 
 Route110_TrickHouseEntrance_EventScript_26A08A:: @ 826A08A
-	givedecoration_std 31
+	givedecoration_std DECOR_RED_TENT
 	return
 
 Route110_TrickHouseEntrance_EventScript_26A092:: @ 826A092
-	givedecoration_std 32
+	givedecoration_std DECOR_BLUE_TENT
 	return
 
 Route110_TrickHouseEntrance_EventScript_26A09A:: @ 826A09A

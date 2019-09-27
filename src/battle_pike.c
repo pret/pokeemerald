@@ -49,7 +49,7 @@ struct PikeWildMon
 {
     u16 species;
     u8 levelDelta;
-    u16 moves[4];
+    u16 moves[MAX_MON_MOVES];
 };
 
 // IWRAM bss

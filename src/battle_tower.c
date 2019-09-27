@@ -1019,7 +1019,7 @@ struct
     u8 level;
     u8 nature;
     u8 evs[6];
-    u16 moves[4];
+    u16 moves[MAX_MON_MOVES];
 } const sStevenMons[3] =
 {
     {
@@ -1561,7 +1561,7 @@ void PutNewBattleTowerRecord(struct EmeraldBattleTowerRecord *newRecordEm)
     for (i = 0; i < 5; i++)
     {
         k = 0;
-        for (j = 0; j < 4; j++)
+        for (j = 0; j < TRAINER_ID_LENGTH; j++)
         {
             if (gSaveBlock2Ptr->frontier.towerRecords[i].trainerId[j] != newRecord->trainerId[j])
                 break;
@@ -3308,7 +3308,7 @@ bool32 RubyBattleTowerRecordToEmerald(struct RSBattleTowerRecord *src, struct Em
 
         for (i = 0; i < PLAYER_NAME_LENGTH + 1; i++)
             dst->name[i] = src->name[i];
-        for (i = 0; i < 4; i++)
+        for (i = 0; i < TRAINER_ID_LENGTH; i++)
             dst->trainerId[i] = src->trainerId[i];
         for (i = 0; i < 6; i++)
             dst->greeting[i] = src->greeting[i];
@@ -3357,7 +3357,7 @@ bool32 EmeraldBattleTowerRecordToRuby(struct EmeraldBattleTowerRecord *src, stru
 
         for (i = 0; i < PLAYER_NAME_LENGTH + 1; i++)
             dst->name[i] = src->name[i];
-        for (i = 0; i < 4; i++)
+        for (i = 0; i < TRAINER_ID_LENGTH; i++)
             dst->trainerId[i] = src->trainerId[i];
         for (i = 0; i < 6; i++)
             dst->greeting[i] = src->greeting[i];

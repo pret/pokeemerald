@@ -541,16 +541,16 @@ static void DisplaySentToPCMessage(void)
 {
     u8 stringToDisplay = 0;
 
-    if (!sub_813B260())
+    if (!IsDestinationBoxFull())
     {
-        StringCopy(gStringVar1, GetBoxNamePtr(VarGet(VAR_STORAGE_UNKNOWN)));
+        StringCopy(gStringVar1, GetBoxNamePtr(VarGet(VAR_PC_BOX_TO_SEND_MON)));
         StringCopy(gStringVar2, gNamingScreenData->destBuffer);
     }
     else
     {
-        StringCopy(gStringVar1, GetBoxNamePtr(VarGet(VAR_STORAGE_UNKNOWN)));
+        StringCopy(gStringVar1, GetBoxNamePtr(VarGet(VAR_PC_BOX_TO_SEND_MON)));
         StringCopy(gStringVar2, gNamingScreenData->destBuffer);
-        StringCopy(gStringVar3, GetBoxNamePtr(get_unknown_box_id()));
+        StringCopy(gStringVar3, GetBoxNamePtr(GetPCBoxToSendMon()));
         stringToDisplay = 2;
     }
 

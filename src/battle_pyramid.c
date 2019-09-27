@@ -77,7 +77,7 @@ struct PyramidWildMon
     u16 species;
     u8 lvl;
     u8 abilityNum;
-    u16 moves[4];
+    u16 moves[MAX_MON_MOVES];
 };
 
 struct PyramidFloorTemplate

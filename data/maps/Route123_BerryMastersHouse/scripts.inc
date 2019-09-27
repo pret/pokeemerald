@@ -14,7 +14,7 @@ Route123_BerryMastersHouse_EventScript_26F845:: @ 826F845
 	msgbox Route123_BerryMastersHouse_Text_2A7386, MSGBOX_DEFAULT
 	random 10
 	addvar VAR_RESULT, 20
-	addvar VAR_RESULT, 133
+	addvar VAR_RESULT, FIRST_BERRY_INDEX
 	giveitem_std VAR_RESULT
 	compare VAR_RESULT, 0
 	goto_if_eq Common_EventScript_ShowBagIsFull
@@ -22,7 +22,7 @@ Route123_BerryMastersHouse_EventScript_26F845:: @ 826F845
 	msgbox Route123_BerryMastersHouse_Text_2A7428, MSGBOX_DEFAULT
 	random 10
 	addvar VAR_RESULT, 20
-	addvar VAR_RESULT, 133
+	addvar VAR_RESULT, FIRST_BERRY_INDEX
 	giveitem_std VAR_RESULT
 	compare VAR_RESULT, 0
 	goto_if_eq Common_EventScript_ShowBagIsFull
@@ -75,7 +75,7 @@ Route123_BerryMastersHouse_EventScript_26F909:: @ 826F909
 Route123_BerryMastersHouse_EventScript_26F94C:: @ 826F94C
 	msgbox Route123_BerryMastersHouse_Text_2A75D0, MSGBOX_DEFAULT
 	random 10
-	addvar VAR_RESULT, 133
+	addvar VAR_RESULT, FIRST_BERRY_INDEX
 	giveitem_std VAR_RESULT
 	compare VAR_RESULT, 0
 	goto_if_eq Common_EventScript_ShowBagIsFull

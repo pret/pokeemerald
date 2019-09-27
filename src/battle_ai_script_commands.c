@@ -298,7 +298,7 @@ void BattleAI_HandleItemUseBeforeAISetup(u8 defaultScoreMoves)
             )
        )
     {
-        for (i = 0; i < 4; i++)
+        for (i = 0; i < MAX_TRAINER_ITEMS; i++)
         {
             if (gTrainers[gTrainerBattleOpponent_A].items[i] != 0)
             {
@@ -397,8 +397,8 @@ u8 BattleAI_ChooseMoveOrAction(void)
 
 static u8 ChooseMoveOrAction_Singles(void)
 {
-    u8 currentMoveArray[4];
-    u8 consideredMoveArray[4];
+    u8 currentMoveArray[MAX_MON_MOVES];
+    u8 consideredMoveArray[MAX_MON_MOVES];
     u8 numOfBestMoves;
     s32 i;
 
@@ -452,11 +452,11 @@ static u8 ChooseMoveOrAction_Doubles(void)
     s32 i;
     s32 j;
     s32 scriptsToRun;
-    s16 bestMovePointsForTarget[4];
-    s8 mostViableTargetsArray[4];
-    u8 actionOrMoveIndex[4];
-    u8 mostViableMovesScores[4];
-    u8 mostViableMovesIndices[4];
+    s16 bestMovePointsForTarget[MAX_BATTLERS_COUNT];
+    s8 mostViableTargetsArray[MAX_BATTLERS_COUNT];
+    u8 actionOrMoveIndex[MAX_BATTLERS_COUNT];
+    u8 mostViableMovesScores[MAX_MON_MOVES];
+    u8 mostViableMovesIndices[MAX_MON_MOVES];
     s32 mostViableTargetsNo;
     s32 mostViableMovesNo;
     s16 mostMovePoints;
@@ -543,7 +543,7 @@ static u8 ChooseMoveOrAction_Doubles(void)
     mostViableTargetsArray[0] = 0;
     mostViableTargetsNo = 1;
 
-    for (i = 1; i < MAX_MON_MOVES; i++)
+    for (i = 1; i < MAX_BATTLERS_COUNT; i++)
     {
         if (mostMovePoints == bestMovePointsForTarget[i])
         {
@@ -1167,7 +1167,7 @@ static void BattleAICmd_get_considered_move_power(void)
 static void BattleAICmd_get_how_powerful_move_is(void)
 {
     s32 i, checkedMove;
-    s32 moveDmgs[4];
+    s32 moveDmgs[MAX_MON_MOVES];
 
     for (i = 0; sDiscouragedPowerfulMoveEffects[i] != 0xFFFF; i++)
     {

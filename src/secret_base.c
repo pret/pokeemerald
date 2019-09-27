@@ -349,7 +349,7 @@ void SetPlayerSecretBase(void)
     u16 i;
 
     gSaveBlock1Ptr->secretBases[0].secretBaseId = sCurSecretBaseId;
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < TRAINER_ID_LENGTH; i++)
         gSaveBlock1Ptr->secretBases[0].trainerId[i] = gSaveBlock2Ptr->playerTrainerId[i];
 
     VarSet(VAR_CURRENT_SECRET_BASE, 0);
@@ -1291,7 +1291,7 @@ static void SetSecretBaseDataAndLanguage(u8 secretBaseId, struct SecretBase *sec
 static bool8 SecretBasesHaveSameTrainerId(struct SecretBase *secretBase1, struct SecretBase *secretBase2)
 {
     u8 i;
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < TRAINER_ID_LENGTH; i++)
     {
         if (secretBase1->trainerId[i] != secretBase2->trainerId[i])
             return FALSE;
@@ -1445,7 +1445,7 @@ bool8 SecretBaseBelongsToPlayer(struct SecretBase *secretBase)
         return FALSE;
 
     // Check if the player's trainer Id matches the secret base's id.
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < TRAINER_ID_LENGTH; i++)
     {
         if (secretBase->trainerId[i] != gSaveBlock2Ptr->playerTrainerId[i])
             return FALSE;

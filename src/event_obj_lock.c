@@ -92,7 +92,7 @@ void ScriptUnfreezeEventObjects(void)
 {
     u8 playerObjectId = GetEventObjectIdByLocalIdAndMap(EVENT_OBJ_ID_PLAYER, 0, 0);
     EventObjectClearHeldMovementIfFinished(&gEventObjects[playerObjectId]);
-    sub_80D338C();
+    ScriptMovement_UnfreezeEventObjects();
     UnfreezeEventObjects();
 }
 
@@ -104,7 +104,7 @@ void sub_8098524(void)
         EventObjectClearHeldMovementIfFinished(&gEventObjects[gSelectedEventObject]);
     playerObjectId = GetEventObjectIdByLocalIdAndMap(EVENT_OBJ_ID_PLAYER, 0, 0);
     EventObjectClearHeldMovementIfFinished(&gEventObjects[playerObjectId]);
-    sub_80D338C();
+    ScriptMovement_UnfreezeEventObjects();
     UnfreezeEventObjects();
 }
 

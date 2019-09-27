@@ -1790,9 +1790,9 @@ static void CB2_HandleStartMultiBattle(void)
         gBattleCommunication[SPRITES_INIT_STATE2] = 0;
         if (gBattleTypeFlags & BATTLE_TYPE_LINK)
         {
-            for (id = 0; id < 4 && (gLinkPlayers[id].version & 0xFF) == 3; id++);
+            for (id = 0; id < MAX_LINK_PLAYERS && (gLinkPlayers[id].version & 0xFF) == VERSION_EMERALD; id++);
 
-            if (id == 4)
+            if (id == MAX_LINK_PLAYERS)
                 gBattleCommunication[MULTIUSE_STATE] = 8;
             else
                 gBattleCommunication[MULTIUSE_STATE] = 10;
@@ -4244,7 +4244,7 @@ static void HandleTurnActionSelectionState(void)
                         moveInfo.monType1 = gBattleMons[gActiveBattler].type1;
                         moveInfo.monType2 = gBattleMons[gActiveBattler].type2;
 
-                        for (i = 0; i < 4; i++)
+                        for (i = 0; i < MAX_MON_MOVES; i++)
                         {
                             moveInfo.moves[i] = gBattleMons[gActiveBattler].moves[i];
                             moveInfo.currentPp[i] = gBattleMons[gActiveBattler].pp[i];
