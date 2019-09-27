@@ -3152,7 +3152,7 @@ BattleScript_PursuitDmgOnSwitchOut::
 	resultmessage
 	waitmessage 0x40
 	tryfaintmon BS_TARGET, FALSE, NULL
-	moveendfromto MOVEEND_CONTACT_ABILITIES, MOVEEND_CHOICE_MOVE
+	moveendfromto MOVEEND_ON_DAMAGE_ABILITIES, MOVEEND_CHOICE_MOVE
 	various4 BS_TARGET
 	jumpifbyte CMP_EQUAL, gBattleCommunication, 0x0, BattleScript_PursuitDmgOnSwitchOutRet
 	setbyte sGIVEEXP_STATE, 0x0

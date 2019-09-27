@@ -4535,8 +4535,8 @@ static void Cmd_moveend(void)
                 effect = TRUE;
             gBattleScripting.moveendState++;
             break;
-        case MOVEEND_CONTACT_ABILITIES: // Also includes Color Change
-            if (AbilityBattleEffects(ABILITYEFFECT_CONTACT, gBattlerTarget, 0, 0, 0))
+        case MOVEEND_ON_DAMAGE_ABILITIES: // Contact abilities and Color Change
+            if (AbilityBattleEffects(ABILITYEFFECT_ON_DAMAGE, gBattlerTarget, 0, 0, 0))
                 effect = TRUE;
             gBattleScripting.moveendState++;
             break;

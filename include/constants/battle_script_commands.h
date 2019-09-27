@@ -116,7 +116,7 @@
 #define MOVEEND_RAGE                              0
 #define MOVEEND_DEFROST                           1
 #define MOVEEND_SYNCHRONIZE_TARGET                2
-#define MOVEEND_CONTACT_ABILITIES                 3
+#define MOVEEND_ON_DAMAGE_ABILITIES               3
 #define MOVEEND_IMMUNITY_ABILITIES                4
 #define MOVEEND_SYNCHRONIZE_ATTACKER              5
 #define MOVEEND_CHOICE_MOVE                       6
