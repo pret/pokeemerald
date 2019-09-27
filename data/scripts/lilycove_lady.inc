@@ -423,9 +423,9 @@ LilycoveCity_PokemonCenter_1F_EventScript_2A88BA:: @ 82A88BA
     fadescreen 1
     special OpenPokeblockCaseForContestLady
     waitstate
-    compare VAR_RESULT, 65535
+    compare VAR_RESULT, 0xFFFF
     goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A88D7
-    compare VAR_RESULT, 65535
+    compare VAR_RESULT, 0xFFFF
     goto_if_ne LilycoveCity_PokemonCenter_1F_EventScript_2A88F6
     end
 
