@@ -39,7 +39,7 @@
 #define BS_EFFECT_BATTLER           2
 #define BS_FAINTED                  3
 #define BS_BATTLER_0                7
-#define BS_ATTACKER_WITH_PARTNER    4 // for Cmd_status_icon_update
+#define BS_ATTACKER_WITH_PARTNER    4 // for Cmd_updatestatusicon
 #define BS_ATTACKER_SIDE            8 // for Cmd_jumpifability
 #define BS_NOT_ATTACKER_SIDE        9 // for Cmd_jumpifability
 #define BS_SCRIPTING                10
@@ -48,7 +48,7 @@
 #define BS_PLAYER2                  13
 #define BS_OPPONENT2                14
 
-// accuracy calc
+// Cmd_accuracycheck
 #define NO_ACC_CALC 0xFFFE
 #define NO_ACC_CALC_CHECK_LOCK_ON 0xFFFF
 #define ACC_CURR_MOVE 0
@@ -61,7 +61,7 @@
 #define CMP_COMMON_BITS         0x4
 #define CMP_NO_COMMON_BITS      0x5
 
-// atk76, various
+// Cmd_various
 #define VARIOUS_CANCEL_MULTI_TURN_MOVES         0
 #define VARIOUS_SET_MAGIC_COAT_TARGET           1
 #define VARIOUS_IS_RUNNING_IMPOSSIBLE           2
@@ -84,25 +84,35 @@
 #define VARIOUS_SET_TELEPORT_OUTCOME            25
 #define VARIOUS_PLAY_TRAINER_DEFEATED_MUSIC     26
 
-// manipulatedmg
+// Cmd_manipulatedmg
 #define DMG_CHANGE_SIGN            0
 #define DMG_RECOIL_FROM_MISS       1
 #define DMG_DOUBLED                2
 
-// flag used for the jumpifcantswitch command
+// Cmd_jumpifcantswitch
 #define SWITCH_IGNORE_ESCAPE_PREVENTION   0x80
 
-// statchange defines
-#define STAT_CHANGE_BS_PTR                  0x1
-#define STAT_CHANGE_NOT_PROTECT_AFFECTED    0x20
+// Cmd_statbuffchange
+#define STAT_BUFF_ALLOW_PTR                 0x1   // If set, allow use of jumpptr. Set in every use of statbuffchange
+#define STAT_BUFF_NOT_PROTECT_AFFECTED      0x20
 
-// playstatchangeanimation
+// stat change flags for Cmd_playstatchangeanimation
 #define STAT_CHANGE_NEGATIVE             0x1
 #define STAT_CHANGE_BY_TWO               0x2
 #define STAT_CHANGE_SKIP_NEXT_ANIM       0x4
 #define STAT_CHANGE_IGNORE_ABILITY       0x8
 
-// moveend cases
+// stat flags for Cmd_playstatchangeanimation
+#define BIT_HP                      0x1
+#define BIT_ATK                     0x2
+#define BIT_DEF                     0x4
+#define BIT_SPEED                   0x8
+#define BIT_SPATK                   0x10
+#define BIT_SPDEF                   0x20
+#define BIT_ACC                     0x40
+#define BIT_EVASION                 0x80
+
+// cases for Cmd_moveend
 #define MOVEEND_RAGE                              0
 #define MOVEEND_DEFROST                           1
 #define MOVEEND_SYNCHRONIZE_TARGET                2
@@ -121,14 +131,5 @@
 #define MOVEEND_MIRROR_MOVE                       15
 #define MOVEEND_NEXT_TARGET                       16
 #define MOVEEND_COUNT                             17
-
-#define BIT_HP                      0x1
-#define BIT_ATK                     0x2
-#define BIT_DEF                     0x4
-#define BIT_SPEED                   0x8
-#define BIT_SPATK                   0x10
-#define BIT_SPDEF                   0x20
-#define BIT_ACC                     0x40
-#define BIT_EVASION                 0x80
 
 #endif // GUARD_CONSTANTS_BATTLE_SCRIPT_COMMANDS_H

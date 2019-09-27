@@ -7169,8 +7169,8 @@ static void Cmd_negativedamage(void)
     gBattlescriptCurrInstr++;
 }
 
-#define STAT_CHANGE_WORKED      0
-#define STAT_CHANGE_DIDNT_WORK  1
+#define STAT_BUFF_WORKED      0
+#define STAT_BUFF_DIDNT_WORK  1
 
 static u8 ChangeStatBuffs(s8 statValue, u8 statId, u8 flags, const u8 *BS_ptr)
 {
@@ -7189,9 +7189,9 @@ static u8 ChangeStatBuffs(s8 statValue, u8 statId, u8 flags, const u8 *BS_ptr)
         certain++;
     flags &= ~(MOVE_EFFECT_CERTAIN);
 
-    if (flags & STAT_CHANGE_NOT_PROTECT_AFFECTED)
+    if (flags & STAT_BUFF_NOT_PROTECT_AFFECTED)
         notProtectAffected++;
-    flags &= ~(STAT_CHANGE_NOT_PROTECT_AFFECTED);
+    flags &= ~(STAT_BUFF_NOT_PROTECT_AFFECTED);
 
     PREPARE_STAT_BUFFER(gBattleTextBuff1, statId)
 
@@ -7200,7 +7200,7 @@ static u8 ChangeStatBuffs(s8 statValue, u8 statId, u8 flags, const u8 *BS_ptr)
         if (gSideTimers[GET_BATTLER_SIDE(gActiveBattler)].mistTimer
             && !certain && gCurrentMove != MOVE_CURSE)
         {
-            if (flags == STAT_CHANGE_BS_PTR)
+            if (flags == STAT_BUFF_ALLOW_PTR)
             {
                 if (gSpecialStatuses[gActiveBattler].statLowered)
                 {
@@ -7214,19 +7214,19 @@ static u8 ChangeStatBuffs(s8 statValue, u8 statId, u8 flags, const u8 *BS_ptr)
                     gSpecialStatuses[gActiveBattler].statLowered = 1;
                 }
             }
-            return STAT_CHANGE_DIDNT_WORK;
+            return STAT_BUFF_DIDNT_WORK;
         }
         else if (gCurrentMove != MOVE_CURSE
                  && notProtectAffected != TRUE && JumpIfMoveAffectedByProtect(0))
         {
             gBattlescriptCurrInstr = BattleScript_ButItFailed;
-            return STAT_CHANGE_DIDNT_WORK;
+            return STAT_BUFF_DIDNT_WORK;
         }
         else if ((gBattleMons[gActiveBattler].ability == ABILITY_CLEAR_BODY
                   || gBattleMons[gActiveBattler].ability == ABILITY_WHITE_SMOKE)
                  && !certain && gCurrentMove != MOVE_CURSE)
         {
-            if (flags == STAT_CHANGE_BS_PTR)
+            if (flags == STAT_BUFF_ALLOW_PTR)
             {
                 if (gSpecialStatuses[gActiveBattler].statLowered)
                 {
@@ -7242,12 +7242,12 @@ static u8 ChangeStatBuffs(s8 statValue, u8 statId, u8 flags, const u8 *BS_ptr)
                     gSpecialStatuses[gActiveBattler].statLowered = 1;
                 }
             }
-            return STAT_CHANGE_DIDNT_WORK;
+            return STAT_BUFF_DIDNT_WORK;
         }
         else if (gBattleMons[gActiveBattler].ability == ABILITY_KEEN_EYE
                  && !certain && statId == STAT_ACC)
         {
-            if (flags == STAT_CHANGE_BS_PTR)
+            if (flags == STAT_BUFF_ALLOW_PTR)
             {
                 BattleScriptPush(BS_ptr);
                 gBattleScripting.battler = gActiveBattler;
@@ -7255,12 +7255,12 @@ static u8 ChangeStatBuffs(s8 statValue, u8 statId, u8 flags, const u8 *BS_ptr)
                 gLastUsedAbility = gBattleMons[gActiveBattler].ability;
                 RecordAbilityBattle(gActiveBattler, gLastUsedAbility);
             }
-            return STAT_CHANGE_DIDNT_WORK;
+            return STAT_BUFF_DIDNT_WORK;
         }
         else if (gBattleMons[gActiveBattler].ability == ABILITY_HYPER_CUTTER
                  && !certain && statId == STAT_ATK)
         {
-            if (flags == STAT_CHANGE_BS_PTR)
+            if (flags == STAT_BUFF_ALLOW_PTR)
             {
                 BattleScriptPush(BS_ptr);
                 gBattleScripting.battler = gActiveBattler;
@@ -7268,11 +7268,11 @@ static u8 ChangeStatBuffs(s8 statValue, u8 statId, u8 flags, const u8 *BS_ptr)
                 gLastUsedAbility = gBattleMons[gActiveBattler].ability;
                 RecordAbilityBattle(gActiveBattler, gLastUsedAbility);
             }
-            return STAT_CHANGE_DIDNT_WORK;
+            return STAT_BUFF_DIDNT_WORK;
         }
         else if (gBattleMons[gActiveBattler].ability == ABILITY_SHIELD_DUST && flags == 0)
         {
-            return STAT_CHANGE_DIDNT_WORK;
+            return STAT_BUFF_DIDNT_WORK;
         }
         else // try to decrease
         {
@@ -7333,19 +7333,19 @@ static u8 ChangeStatBuffs(s8 statValue, u8 statId, u8 flags, const u8 *BS_ptr)
     if (gBattleMons[gActiveBattler].statStages[statId] > 0xC)
         gBattleMons[gActiveBattler].statStages[statId] = 0xC;
 
-    if (gBattleCommunication[MULTISTRING_CHOOSER] == 2 && flags & STAT_CHANGE_BS_PTR)
+    if (gBattleCommunication[MULTISTRING_CHOOSER] == 2 && flags & STAT_BUFF_ALLOW_PTR)
         gMoveResultFlags |= MOVE_RESULT_MISSED;
 
-    if (gBattleCommunication[MULTISTRING_CHOOSER] == 2 && !(flags & STAT_CHANGE_BS_PTR))
-        return STAT_CHANGE_DIDNT_WORK;
+    if (gBattleCommunication[MULTISTRING_CHOOSER] == 2 && !(flags & STAT_BUFF_ALLOW_PTR))
+        return STAT_BUFF_DIDNT_WORK;
 
-    return STAT_CHANGE_WORKED;
+    return STAT_BUFF_WORKED;
 }
 
 static void Cmd_statbuffchange(void)
 {
     const u8* jumpPtr = T1_READ_PTR(gBattlescriptCurrInstr + 2);
-    if (ChangeStatBuffs(gBattleScripting.statChanger & 0xF0, GET_STAT_BUFF_ID(gBattleScripting.statChanger), gBattlescriptCurrInstr[1], jumpPtr) == STAT_CHANGE_WORKED)
+    if (ChangeStatBuffs(gBattleScripting.statChanger & 0xF0, GET_STAT_BUFF_ID(gBattleScripting.statChanger), gBattlescriptCurrInstr[1], jumpPtr) == STAT_BUFF_WORKED)
         gBattlescriptCurrInstr += 6;
 }
 
