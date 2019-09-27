@@ -1,7 +1,7 @@
 #include "global.h"
 #include "main.h"
 #include "pokeblock.h"
-#include "alloc.h"
+#include "malloc.h"
 #include "decompress.h"
 #include "graphics.h"
 #include "palette.h"

@@ -1,5 +1,5 @@
 #include "global.h"
-#include "alloc.h"
+#include "malloc.h"
 #include "battle_pyramid.h"
 #include "berry.h"
 #include "decoration.h"

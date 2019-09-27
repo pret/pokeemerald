@@ -1,7 +1,29 @@
-include $(DEVKITARM)/base_tools
+TOOLCHAIN := $(DEVKITARM)
+COMPARE ?= 0
+
+ifeq ($(CC),)
+HOSTCC := gcc
+else
+HOSTCC := $(CC)
+endif
+
+ifeq ($(CXX),)
+HOSTCXX := g++
+else
+HOSTCXX := $(CXX)
+endif
+
+ifneq (,$(wildcard $(TOOLCHAIN)/base_tools))
+include $(TOOLCHAIN)/base_tools
+else
+export PATH := $(TOOLCHAIN)/bin:$(PATH)
+PREFIX := arm-none-eabi-
+OBJCOPY := $(PREFIX)objcopy
+export CC := $(PREFIX)gcc
+export AS := $(PREFIX)as
+endif
 export CPP := $(PREFIX)cpp
 export LD := $(PREFIX)ld
-COMPARE ?= 0
 
 ifeq ($(OS),Windows_NT)
 EXE := .exe

@@ -2,7 +2,7 @@
 // Includes
 #include "global.h"
 #include "m4a.h"
-#include "alloc.h"
+#include "malloc.h"
 #include "reset_save_heap.h"
 #include "save.h"
 #include "bg.h"
