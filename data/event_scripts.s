@@ -638,251 +638,7 @@ Std_MsgboxAutoclose:: @ 8271494
 	release
 	return
 
-EventScript_ResetAllBerries:: @ 827149D
-	setberrytree 2, ITEM_TO_BERRY(ITEM_ORAN_BERRY), BERRY_STAGE_BERRIES
-	setberrytree 1, ITEM_TO_BERRY(ITEM_PECHA_BERRY), BERRY_STAGE_BERRIES
-	setberrytree 11, ITEM_TO_BERRY(ITEM_ORAN_BERRY), BERRY_STAGE_BERRIES
-	setberrytree 13, ITEM_TO_BERRY(ITEM_PECHA_BERRY), BERRY_STAGE_BERRIES
-	setberrytree 4, ITEM_TO_BERRY(ITEM_ORAN_BERRY), BERRY_STAGE_BERRIES
-	setberrytree 76, ITEM_TO_BERRY(ITEM_CHERI_BERRY), BERRY_STAGE_BERRIES
-	setberrytree 8, ITEM_TO_BERRY(ITEM_CHERI_BERRY), BERRY_STAGE_BERRIES
-	setberrytree 10, ITEM_TO_BERRY(ITEM_LEPPA_BERRY), BERRY_STAGE_BERRIES
-	setberrytree 25, ITEM_TO_BERRY(ITEM_PINAP_BERRY), BERRY_STAGE_BERRIES
-	setberrytree 26, ITEM_TO_BERRY(ITEM_CHESTO_BERRY), BERRY_STAGE_BERRIES
-	setberrytree 66, ITEM_TO_BERRY(ITEM_CHESTO_BERRY), BERRY_STAGE_BERRIES
-	setberrytree 67, ITEM_TO_BERRY(ITEM_PINAP_BERRY), BERRY_STAGE_BERRIES
-	setberrytree 69, ITEM_TO_BERRY(ITEM_KELPSY_BERRY), BERRY_STAGE_BERRIES
-	setberrytree 70, ITEM_TO_BERRY(ITEM_KELPSY_BERRY), BERRY_STAGE_BERRIES
-	setberrytree 71, ITEM_TO_BERRY(ITEM_KELPSY_BERRY), BERRY_STAGE_BERRIES
-	setberrytree 55, ITEM_TO_BERRY(ITEM_BLUK_BERRY), BERRY_STAGE_BERRIES
-	setberrytree 56, ITEM_TO_BERRY(ITEM_BLUK_BERRY), BERRY_STAGE_BERRIES
-	setberrytree 5, ITEM_TO_BERRY(ITEM_CHERI_BERRY), BERRY_STAGE_BERRIES
-	setberrytree 6, ITEM_TO_BERRY(ITEM_LEPPA_BERRY), BERRY_STAGE_BERRIES
-	setberrytree 7, ITEM_TO_BERRY(ITEM_CHERI_BERRY), BERRY_STAGE_BERRIES
-	setberrytree 16, ITEM_TO_BERRY(ITEM_NANAB_BERRY), BERRY_STAGE_BERRIES
-	setberrytree 17, ITEM_TO_BERRY(ITEM_NANAB_BERRY), BERRY_STAGE_BERRIES
-	setberrytree 18, ITEM_TO_BERRY(ITEM_NANAB_BERRY), BERRY_STAGE_BERRIES
-	setberrytree 29, ITEM_TO_BERRY(ITEM_WEPEAR_BERRY), BERRY_STAGE_BERRIES
-	setberrytree 28, ITEM_TO_BERRY(ITEM_WEPEAR_BERRY), BERRY_STAGE_BERRIES
-	setberrytree 27, ITEM_TO_BERRY(ITEM_WEPEAR_BERRY), BERRY_STAGE_BERRIES
-	setberrytree 24, ITEM_TO_BERRY(ITEM_RAWST_BERRY), BERRY_STAGE_BERRIES
-	setberrytree 23, ITEM_TO_BERRY(ITEM_PECHA_BERRY), BERRY_STAGE_BERRIES
-	setberrytree 22, ITEM_TO_BERRY(ITEM_PECHA_BERRY), BERRY_STAGE_BERRIES
-	setberrytree 21, ITEM_TO_BERRY(ITEM_RAWST_BERRY), BERRY_STAGE_BERRIES
-	setberrytree 19, ITEM_TO_BERRY(ITEM_RAZZ_BERRY), BERRY_STAGE_BERRIES
-	setberrytree 20, ITEM_TO_BERRY(ITEM_RAZZ_BERRY), BERRY_STAGE_BERRIES
-	setberrytree 80, ITEM_TO_BERRY(ITEM_ORAN_BERRY), BERRY_STAGE_BERRIES
-	setberrytree 81, ITEM_TO_BERRY(ITEM_ORAN_BERRY), BERRY_STAGE_BERRIES
-	setberrytree 77, ITEM_TO_BERRY(ITEM_PERSIM_BERRY), BERRY_STAGE_BERRIES
-	setberrytree 78, ITEM_TO_BERRY(ITEM_PERSIM_BERRY), BERRY_STAGE_BERRIES
-	setberrytree 68, ITEM_TO_BERRY(ITEM_PERSIM_BERRY), BERRY_STAGE_BERRIES
-	setberrytree 31, ITEM_TO_BERRY(ITEM_SITRUS_BERRY), BERRY_STAGE_BERRIES
-	setberrytree 33, ITEM_TO_BERRY(ITEM_SITRUS_BERRY), BERRY_STAGE_BERRIES
-	setberrytree 34, ITEM_TO_BERRY(ITEM_POMEG_BERRY), BERRY_STAGE_BERRIES
-	setberrytree 35, ITEM_TO_BERRY(ITEM_POMEG_BERRY), BERRY_STAGE_BERRIES
-	setberrytree 36, ITEM_TO_BERRY(ITEM_POMEG_BERRY), BERRY_STAGE_BERRIES
-	setberrytree 83, ITEM_TO_BERRY(ITEM_HONDEW_BERRY), BERRY_STAGE_BERRIES
-	setberrytree 84, ITEM_TO_BERRY(ITEM_HONDEW_BERRY), BERRY_STAGE_BERRIES
-	setberrytree 85, ITEM_TO_BERRY(ITEM_SITRUS_BERRY), BERRY_STAGE_BERRIES
-	setberrytree 86, ITEM_TO_BERRY(ITEM_LEPPA_BERRY), BERRY_STAGE_BERRIES
-	setberrytree 37, ITEM_TO_BERRY(ITEM_ASPEAR_BERRY), BERRY_STAGE_BERRIES
-	setberrytree 38, ITEM_TO_BERRY(ITEM_ASPEAR_BERRY), BERRY_STAGE_BERRIES
-	setberrytree 39, ITEM_TO_BERRY(ITEM_ASPEAR_BERRY), BERRY_STAGE_BERRIES
-	setberrytree 40, ITEM_TO_BERRY(ITEM_PECHA_BERRY), BERRY_STAGE_BERRIES
-	setberrytree 41, ITEM_TO_BERRY(ITEM_PECHA_BERRY), BERRY_STAGE_BERRIES
-	setberrytree 42, ITEM_TO_BERRY(ITEM_PECHA_BERRY), BERRY_STAGE_BERRIES
-	setberrytree 46, ITEM_TO_BERRY(ITEM_WEPEAR_BERRY), BERRY_STAGE_BERRIES
-	setberrytree 45, ITEM_TO_BERRY(ITEM_PINAP_BERRY), BERRY_STAGE_BERRIES
-	setberrytree 44, ITEM_TO_BERRY(ITEM_NANAB_BERRY), BERRY_STAGE_BERRIES
-	setberrytree 43, ITEM_TO_BERRY(ITEM_RAZZ_BERRY), BERRY_STAGE_BERRIES
-	setberrytree 47, ITEM_TO_BERRY(ITEM_PERSIM_BERRY), BERRY_STAGE_BERRIES
-	setberrytree 48, ITEM_TO_BERRY(ITEM_ASPEAR_BERRY), BERRY_STAGE_BERRIES
-	setberrytree 49, ITEM_TO_BERRY(ITEM_RAWST_BERRY), BERRY_STAGE_BERRIES
-	setberrytree 50, ITEM_TO_BERRY(ITEM_CHESTO_BERRY), BERRY_STAGE_BERRIES
-	setberrytree 52, ITEM_TO_BERRY(ITEM_NANAB_BERRY), BERRY_STAGE_BERRIES
-	setberrytree 53, ITEM_TO_BERRY(ITEM_NANAB_BERRY), BERRY_STAGE_BERRIES
-	setberrytree 62, ITEM_TO_BERRY(ITEM_LEPPA_BERRY), BERRY_STAGE_BERRIES
-	setberrytree 64, ITEM_TO_BERRY(ITEM_LEPPA_BERRY), BERRY_STAGE_BERRIES
-	setberrytree 58, ITEM_TO_BERRY(ITEM_POMEG_BERRY), BERRY_STAGE_BERRIES
-	setberrytree 59, ITEM_TO_BERRY(ITEM_POMEG_BERRY), BERRY_STAGE_BERRIES
-	setberrytree 60, ITEM_TO_BERRY(ITEM_GREPA_BERRY), BERRY_STAGE_BERRIES
-	setberrytree 61, ITEM_TO_BERRY(ITEM_GREPA_BERRY), BERRY_STAGE_BERRIES
-	setberrytree 79, ITEM_TO_BERRY(ITEM_QUALOT_BERRY), BERRY_STAGE_BERRIES
-	setberrytree 14, ITEM_TO_BERRY(ITEM_QUALOT_BERRY), BERRY_STAGE_BERRIES
-	setberrytree 15, ITEM_TO_BERRY(ITEM_POMEG_BERRY), BERRY_STAGE_BERRIES
-	setberrytree 30, ITEM_TO_BERRY(ITEM_POMEG_BERRY), BERRY_STAGE_BERRIES
-	setberrytree 65, ITEM_TO_BERRY(ITEM_GREPA_BERRY), BERRY_STAGE_BERRIES
-	setberrytree 72, ITEM_TO_BERRY(ITEM_GREPA_BERRY), BERRY_STAGE_BERRIES
-	setberrytree 73, ITEM_TO_BERRY(ITEM_QUALOT_BERRY), BERRY_STAGE_BERRIES
-	setberrytree 74, ITEM_TO_BERRY(ITEM_QUALOT_BERRY), BERRY_STAGE_BERRIES
-	setberrytree 87, ITEM_TO_BERRY(ITEM_PECHA_BERRY), BERRY_STAGE_BERRIES
-	setberrytree 88, ITEM_TO_BERRY(ITEM_SITRUS_BERRY), BERRY_STAGE_BERRIES
-	setberrytree 89, ITEM_TO_BERRY(ITEM_RAWST_BERRY), BERRY_STAGE_BERRIES
-	setberrytree 82, ITEM_TO_BERRY(ITEM_LIECHI_BERRY), BERRY_STAGE_BERRIES
-	return
-
-EventScript_ResetAllMapFlags:: @ 82715DE
-	setflag FLAG_LINK_CONTEST_POKE_BALL
-	setflag FLAG_HIDE_ROUTE_111_VICTORIA_WINSTRATE
-	setflag FLAG_HIDE_ROUTE_111_VIVI_WINSTRATE
-	setflag FLAG_HIDE_ROUTE_111_VICKY_WINSTRATE
-	setflag FLAG_HIDE_LITTLEROOT_TOWN_BIRCHS_LAB_BIRCH
-	setflag FLAG_HIDE_LITTLEROOT_TOWN_BIRCHS_LAB_RIVAL
-	setflag FLAG_HIDE_LITTLEROOT_TOWN_BIRCHS_LAB_POKEBALL_CYNDAQUIL
-	setflag FLAG_HIDE_LITTLEROOT_TOWN_BIRCHS_LAB_POKEBALL_TOTODILE
-	setflag FLAG_HIDE_LITTLEROOT_TOWN_BIRCHS_LAB_POKEBALL_CHIKORITA
-	setflag FLAG_HIDE_PETALBURG_CITY_WALLY
-	setflag FLAG_UNKNOWN_0x363
-	setflag FLAG_HIDE_RUSTBORO_CITY_AQUA_GRUNT
-	setflag FLAG_HIDE_RUSTBORO_CITY_DEVON_EMPLOYEE_1
-	setflag FLAG_HIDE_RUSBORO_CITY_RIVAL
-	setflag FLAG_HIDE_RUSTBORO_CITY_SCIENTIST
-	setflag FLAG_HIDE_LITTLEROOT_TOWN_FAT_MAN
-	setflag FLAG_HIDE_BRINEYS_HOUSE_MR_BRINEY
-	setflag FLAG_HIDE_BRINEYS_HOUSE_PEEKO
-	setflag FLAG_HIDE_ROUTE_104_MR_BRINEY
-	setflag FLAG_HIDE_MR_BRINEY_DEWFORD_TOWN
-	setflag FLAG_HIDE_ROUTE_108_MR_BRINEY
-	setflag FLAG_HIDE_MR_BRINEY_BOAT_DEWFORD_TOWN
-	setflag FLAG_HIDE_ROUTE_109_MR_BRINEY_BOAT
-	setflag FLAG_HIDE_ROUTE_104_WHITE_HERB_FLORIST
-	setflag FLAG_HIDE_ROUTE_110_BIRCH
-	setflag FLAG_HIDE_LILYCOVE_CONTEST_HALL_CONTEST_ATTENDANT_1
-	setflag FLAG_HIDE_LILYCOVE_CONTEST_HALL_CONTEST_ATTENDANT_2
-	setflag FLAG_HIDE_LILYCOVE_MUSEUM_PATRON_1
-	setflag FLAG_HIDE_LILYCOVE_MUSEUM_PATRON_2
-	setflag FLAG_HIDE_LILYCOVE_MUSEUM_PATRON_3
-	setflag FLAG_HIDE_LILYCOVE_MUSEUM_PATRON_4
-	setflag FLAG_HIDE_LILYCOVE_MUSEUM_TOURISTS
-	setflag FLAG_HIDE_PETALBURG_GYM_GREETER
-	setflag FLAG_HIDE_PETALBURG_GYM_WALLYS_UNCLE
-	setflag FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_BRENDAN
-	setflag FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_BRENDAN
-	setflag FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_RIVAL_BEDROOM
-	setflag FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_RIVAL_BEDROOM
-	setflag FLAG_HIDE_PLAYERS_HOUSE_DAD
-	setflag FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_2F_PICHU_DOLL
-	setflag FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F_SWABLU_DOLL
-	setflag FLAG_HIDE_FANCLUB_OLD_LADY
-	setflag FLAG_HIDE_FANCLUB_BOY
-	setflag FLAG_HIDE_FANCLUB_LITTLE_BOY
-	setflag FLAG_HIDE_FANCLUB_LADY
-	setflag FLAG_HIDE_LILYCOVE_FAN_CLUB_INTERVIEWER
-	setflag FLAG_HIDE_ROUTE_118_GABBY_AND_TY_1
-	setflag FLAG_HIDE_ROUTE_120_GABBY_AND_TY_1
-	setflag FLAG_HIDE_ROUTE_111_GABBY_AND_TY_3
-	setflag FLAG_HIDE_ROUTE_118_GABBY_AND_TY_2
-	setflag FLAG_HIDE_ROUTE_120_GABBY_AND_TY_2
-	setflag FLAG_HIDE_ROUTE_111_GABBY_AND_TY_2
-	setflag FLAG_HIDE_ROUTE_118_GABBY_AND_TY_3
-	setflag FLAG_HIDE_SLATEPORT_CITY_CONTEST_REPORTER
-	setflag FLAG_HIDE_LILYCOVE_CONTEST_HALL_REPORTER
-	setflag FLAG_HIDE_VERDANTURF_TOWN_WANDAS_HOUSE_WALLY
-	setflag FLAG_HIDE_VERDANTURF_TOWN_WANDAS_HOUSE_LOVER_MAN
-	setflag FLAG_HIDE_VERDANTURF_TOWN_WANDAS_HOUSE_WALLYS_UNCLE
-	setflag FLAG_HIDE_VERDANTURF_TOWN_WANDAS_HOUSE_LOVER_WOMAN
-	setflag FLAG_HIDE_VERDANTURF_TOWN_SCOTT
-	setflag FLAG_HIDE_PETALBURG_CITY_WALLYS_UNCLE
-	setflag FLAG_HIDE_PETALBURG_GYM_WALLY
-	setflag FLAG_HIDE_SLATEPORT_CITY_STERNS_SHIPYARD_MR_BRINEY
-	setflag FLAG_HIDE_SEAFLOOR_CAVERN_ROOM_9_ARCHIE
-	setflag FLAG_HIDE_SEAFLOOR_CAVERN_ROOM_9_MAXIE
-	setflag FLAG_HIDE_SEAFLOOR_CAVERN_ROOM_9_MAGMA_GRUNTS
-	setflag FLAG_HIDE_SEAFLOOR_CAVERN_ROOM_9_KYOGRE_1
-	setflag FLAG_HIDE_MAGMA_HIDEOUT_4F_GROUDON_1
-	setflag FLAG_HIDE_SLATEPORT_CITY_HARBOR_CAPTAIN_STERN
-	setflag FLAG_HIDE_SLATEPORT_CITY_HARBOR_AQUA_GRUNT
-	setflag FLAG_HIDE_SLATEPORT_CITY_HARBOR_ARCHIE
-	setflag FLAG_HIDE_SLATEPORT_CITY_HARBOR_SS_TIDAL
-	setflag FLAG_HIDE_LILYCOVE_HARBOR_SSTIDAL
-	setflag FLAG_HIDE_SLATEPORT_CITY_GABBY_AND_TY
-	setflag FLAG_HIDE_SLATEPORT_CITY_CAPTAIN_STERN
-	setflag FLAG_HIDE_SLATEPORT_CITY_HARBOR_SUBMARINE_SHADOW
-	setflag FLAG_HIDE_ROUTE_119_RIVAL
-	setflag FLAG_HIDE_ROUTE_119_SCOTT
-	setflag FLAG_HIDE_SOOTOPOLIS_CITY_STEVEN
-	setflag FLAG_HIDE_SOOTOPOLIS_CITY_WALLACE
-	setflag FLAG_HIDE_LANETTES_HOUSE_LANETTE
-	setflag FLAG_HIDE_TRICK_HOUSE_ENTRANCE_MAN
-	setflag FLAG_HIDE_MT_CHIMNEY_TRAINERS
-	setflag FLAG_HIDE_MT_CHIMNEY_LAVA_COOKIE_LADY
-	setflag FLAG_HIDE_RUSTURF_TUNNEL_OLD_MAN
-	setflag FLAG_HIDE_ROUTE_116_MR_BRINEY
-	setflag FLAG_HIDE_RUSTURF_TUNNEL_PEEKO
-	setflag FLAG_HIDE_RUSTURF_TUNNEL_AQUA_GRUNT
-	setflag FLAG_HIDE_RUSTURF_TUNNEL_LOVER_MAN
-	setflag FLAG_HIDE_RUSTURF_TUNNEL_LOVER_WOMAN
-	setflag FLAG_HIDE_SLATEPORT_CITY_OCEANIC_MUSEUM_2F_ARCHIE
-	setflag FLAG_HIDE_SLATEPORT_CITY_OCEANIC_MUSEUM_2F_AQUA_GRUNT_1
-	setflag FLAG_HIDE_SLATEPORT_CITY_OCEANIC_MUSEUM_2F_AQUA_GRUNT_2
-	setflag FLAG_HIDE_SLATEPORT_MUSEUM_POPULATION
-	setflag FLAG_HIDE_BATTLE_TOWER_OPPONENT
-	setflag FLAG_HIDE_LITTLEROOT_TOWN_MOM_OUTSIDE
-	setflag FLAG_HIDE_LITTLE_ROOT_TOWN_PLAYERS_BEDROOM_MOM
-	setflag FLAG_HIDE_LITTLEROOT_TOWN_RIVAL
-	setflag FLAG_HIDE_LITTLEROOT_TOWN_BIRCH
-	setflag FLAG_HIDE_WEATHER_INSTITUTE_1F_WORKERS
-	setflag FLAG_HIDE_LITTLEROOT_TOWN_BIRCHS_LAB_UNKNOWN_0x380
-	setflag FLAG_HIDE_ROUTE_101_BIRCH
-	setflag FLAG_HIDE_ROUTE_103_BIRCH
-	setflag FLAG_HIDE_LILYCOVE_HARBOR_FERRY_SAILOR
-	setflag FLAG_HIDE_LILYCOVE_HARBOR_EVENT_TICKET_TAKER
-	setflag FLAG_HIDE_SOUTHERN_ISLAND_EON_STONE
-	setflag FLAG_HIDE_SOUTHERN_ISLAND_UNCHOSEN_EON_DUO_MON
-	setflag FLAG_UNKNOWN_0x393
-	setflag FLAG_HIDE_MT_PYRE_SUMMIT_MAXIE
-	setflag FLAG_HIDE_MAUVILLE_CITY_WATTSON
-	setflag FLAG_HIDE_MAUVILLE_CITY_SCOTT
-	setflag FLAG_HIDE_CHAMPIONS_ROOM_RIVAL
-	setflag FLAG_HIDE_CHAMPIONS_ROOM_BIRCH
-	setflag FLAG_HIDE_ROUTE_110_RIVAL_2
-	setflag FLAG_HIDE_ROUTE_119_RIVAL_ON_BIKE
-	setflag FLAG_HIDE_ROUTE_104_RIVAL
-	setflag FLAG_HIDE_LILCOVE_MOTEL_GAME_DESIGNERS
-	setflag FLAG_HIDE_LAVARIDGE_TOWN_RIVAL_1
-	setflag FLAG_HIDE_LAVARIDGE_TOWN_RIVAL_2
-	setflag FLAG_HIDE_MOSSDEEP_CITY_HOUSE_2_WINGULL
-	setflag FLAG_HIDE_METEOR_FALLS_TEAM_AQUA
-	setflag FLAG_HIDE_DEWFORD_HALL_SLUDGE_BOMB_MAN
-	setflag FLAG_HIDE_FALLARBOR_HOUSE_1_PROF_COZMO
-	setflag FLAG_HIDE_WEATHER_INSTITUTE_2F_AQUA_GRUNT_M
-	setflag FLAG_HIDE_ROUTE_128_STEVEN
-	setflag FLAG_HIDE_ROUTE_128_ARCHIE
-	setflag FLAG_HIDE_ROUTE_128_MAXIE
-	setflag FLAG_HIDE_ROUTE_116_DEVON_EMPLOYEE
-	setflag FLAG_HIDE_SLATEPORT_CITY_TM_SALESMAN
-	setflag FLAG_HIDE_SLATEPORT_CITY_SCOTT
-	setflag FLAG_HIDE_VICTORY_ROAD_ENTRANCE_WALLY
-	setflag FLAG_HIDE_VICTORY_ROAD_EXIT_WALLY
-	setflag FLAG_HIDE_SS_TIDAL_CORRIDOR_MR_BRINEY
-	setflag FLAG_HIDE_MOSSDEEP_CITY_STEVENS_HOUSE_STEVEN
-	setflag FLAG_HIDE_MOSSDEEP_CITY_STEVENS_HOUSE_BELDUM_POKEBALL
-	setflag FLAG_HIDE_MOSSDEEP_CITY_STEVENS_HOUSE_INVISIBLE_NINJA_BOY
-	setflag FLAG_HIDE_OLDALE_TOWN_RIVAL
-	setflag FLAG_HIDE_ROUTE_101_BOY
-	setflag FLAG_HIDE_PETALBURG_CITY_SCOTT
-	setflag FLAG_HIDE_SOOTOPOLIS_CITY_RAYQUAZA
-	setflag FLAG_HIDE_SOOTOPOLIS_CITY_KYOGRE
-	setflag FLAG_HIDE_SOOTOPOLIS_CITY_GROUDON
-	setflag FLAG_HIDE_SOOTOPOLIS_CITY_RESIDENTS
-	setflag FLAG_HIDE_SOOTOPOLIS_CITY_ARCHIE
-	setflag FLAG_HIDE_SOOTOPOLIS_CITY_MAXIE
-	setflag FLAG_HIDE_ROUTE_111_DESERT_FOSSIL
-	setflag FLAG_HIDE_ROUTE_111_PLAYER_DESCENT
-	setflag FLAG_HIDE_DESERT_UNDERPASS_FOSSIL
-	setflag FLAG_HIDE_MOSSDEEP_CITY_TEAM_MAGMA
-	setflag FLAG_HIDE_MOSSDEEP_CITY_SPACE_CENTER_1F_TEAM_MAGMA
-	setflag FLAG_HIDE_MOSSDEEP_CITY_SPACE_CENTER_2F_TEAM_MAGMA
-	setflag FLAG_HIDE_MOSSDEEP_CITY_SPACE_CENTER_2F_STEVEN
-	setflag FLAG_HIDE_LILYCOVE_CONTEST_HALL_BLEND_MASTER_ONLOOKERS
-	setflag FLAG_HIDE_DEOXYS
-	setflag FLAG_HIDE_SAFARI_ZONE_SOUTH_EAST_EXPANSION
-	setflag FLAG_HIDE_FALLORBOR_TOWN_BATTLE_TENT_SCOTT
-	setflag FLAG_HIDE_EVER_GRANDE_POKEMON_CENTER_1F_SCOTT
-	setflag FLAG_HIDE_SKY_PILLAR_WALLACE
-	setflag FLAG_RAYQUAZA_ON_SKY_TOWER_SUMMIT
-	call EventScript_ResetAllBerries
-	end
+	.include "data/scripts/new_game.inc"
 
 EverGrandeCity_HallOfFame_EventScript_2717C1:: @ 82717C1
 	special sub_81AFDD0
@@ -1015,213 +771,213 @@ EventScript_SetBrineyLocation_Route108:: @ 8271918
 	.include "data/scripts/pkmn_center_nurse.inc"
 
 Std_ObtainItem:: @ 8271AD3
-	giveitem VAR_0x8000, VAR_0x8001
-	copyvar VAR_0x8007, VAR_RESULT
-	call EventScript_271AE3
-	return
+    giveitem VAR_0x8000, VAR_0x8001
+    copyvar VAR_0x8007, VAR_RESULT
+    call EventScript_271AE3
+    return
 
 EventScript_271AE3:: @ 8271AE3
-	bufferitemnameplural 1, VAR_0x8000, VAR_0x8001
-	checkitemtype VAR_0x8000
-	call EventScript_BufferStdString
-	compare VAR_0x8007, 1
-	call_if_eq EventScript_271B95
-	compare VAR_0x8007, 0
-	call_if_eq EventScript_271BA9
-	return
+    bufferitemnameplural 1, VAR_0x8000, VAR_0x8001
+    checkitemtype VAR_0x8000
+    call EventScript_BufferStdString
+    compare VAR_0x8007, 1
+    call_if_eq EventScript_271B95
+    compare VAR_0x8007, 0
+    call_if_eq EventScript_271BA9
+    return
 
 EventScript_BufferStdString:: @ 8271B08
-	switch VAR_RESULT
-	case POCKET_ITEMS, EventScript_StdStringItem
-	case POCKET_KEY_ITEMS, EventScript_StdStringKeyItems
-	case POCKET_POKE_BALLS, EventScript_StdStringPokeballs
-	case POCKET_TM_HM, EventScript_StdStringTMHMS
-	case POCKET_BERRIES, EventScript_StdStringBerries
-	end
+    switch VAR_RESULT
+    case POCKET_ITEMS, EventScript_StdStringItem
+    case POCKET_KEY_ITEMS, EventScript_StdStringKeyItems
+    case POCKET_POKE_BALLS, EventScript_StdStringPokeballs
+    case POCKET_TM_HM, EventScript_StdStringTMHMS
+    case POCKET_BERRIES, EventScript_StdStringBerries
+    end
 
 EventScript_StdStringItem:: @ 8271B45
-	bufferstdstring 2, STDSTRING_ITEMS
-	compare VAR_0x8007, 1
-	call_if_eq EventScript_PlayFanfare4
-	return
+    bufferstdstring 2, STDSTRING_ITEMS
+    compare VAR_0x8007, 1
+    call_if_eq EventScript_PlayFanfare4
+    return
 
 EventScript_StdStringKeyItems:: @ 8271B55
-	bufferstdstring 2, STDSTRING_KEYITEMS
-	compare VAR_0x8007, 1
-	call_if_eq EventScript_PlayFanfare4
-	return
+    bufferstdstring 2, STDSTRING_KEYITEMS
+    compare VAR_0x8007, 1
+    call_if_eq EventScript_PlayFanfare4
+    return
 
 EventScript_StdStringPokeballs:: @ 8271B65
-	bufferstdstring 2, STDSTRING_POKEBALLS
-	compare VAR_0x8007, 1
-	call_if_eq EventScript_PlayFanfare4
-	return
+    bufferstdstring 2, STDSTRING_POKEBALLS
+    compare VAR_0x8007, 1
+    call_if_eq EventScript_PlayFanfare4
+    return
 
 EventScript_StdStringTMHMS:: @ 8271B75
-	bufferstdstring 2, STDSTRING_TMHMS
-	compare VAR_0x8007, 1
-	call_if_eq EventScript_271BB3
-	return
+    bufferstdstring 2, STDSTRING_TMHMS
+    compare VAR_0x8007, 1
+    call_if_eq EventScript_271BB3
+    return
 
 EventScript_StdStringBerries:: @ 8271B85
-	bufferstdstring 2, STDSTRING_BERRIES
-	compare VAR_0x8007, 1
-	call_if_eq EventScript_PlayFanfare4
-	return
+    bufferstdstring 2, STDSTRING_BERRIES
+    compare VAR_0x8007, 1
+    call_if_eq EventScript_PlayFanfare4
+    return
 
 EventScript_271B95:: @ 8271B95
-	message gText_ObtainedTheItem
-	waitfanfare
-	msgbox gText_PutItemInPocket, MSGBOX_DEFAULT
-	setvar VAR_RESULT, 1
-	return
+    message gText_ObtainedTheItem
+    waitfanfare
+    msgbox gText_PutItemInPocket, MSGBOX_DEFAULT
+    setvar VAR_RESULT, 1
+    return
 
 EventScript_271BA9:: @ 8271BA9
-	setvar VAR_RESULT, 0
-	return
+    setvar VAR_RESULT, 0
+    return
 
 EventScript_PlayFanfare4:: @ 8271BAF
-	playfanfare MUS_FANFA4
-	return
+    playfanfare MUS_FANFA4
+    return
 
 EventScript_271BB3:: @ 8271BB3
-	playfanfare MUS_ME_WAZA
-	return
+    playfanfare MUS_ME_WAZA
+    return
 
 Std_ObtainDecoration:: @ 8271BB7
-	givedecoration VAR_0x8000
-	copyvar VAR_0x8007, VAR_RESULT
-	call EventScript_271BC5
-	return
+    givedecoration VAR_0x8000
+    copyvar VAR_0x8007, VAR_RESULT
+    call EventScript_271BC5
+    return
 
 EventScript_271BC5:: @ 8271BC5
-	bufferdecorationname 1, VAR_0x8000
-	compare VAR_0x8007, 1
-	call_if_eq EventScript_271BE0
-	compare VAR_0x8007, 0
-	call_if_eq EventScript_271BF7
-	return
+    bufferdecorationname 1, VAR_0x8000
+    compare VAR_0x8007, 1
+    call_if_eq EventScript_271BE0
+    compare VAR_0x8007, 0
+    call_if_eq EventScript_271BF7
+    return
 
 EventScript_271BE0:: @ 8271BE0
-	playfanfare MUS_FANFA4
-	message gText_ObtainedTheMon
-	waitfanfare
-	msgbox gText_TheMonWasTransferredToThePC, MSGBOX_DEFAULT
-	setvar VAR_RESULT, 1
-	return
+    playfanfare MUS_FANFA4
+    message gText_ObtainedTheMon
+    waitfanfare
+    msgbox gText_TheMonWasTransferredToThePC, MSGBOX_DEFAULT
+    setvar VAR_RESULT, 1
+    return
 
 EventScript_271BF7:: @ 8271BF7
-	setvar VAR_RESULT, 0
-	return
+    setvar VAR_RESULT, 0
+    return
 
 Std_FindItem:: @ 8271BFD
-	lock
-	faceplayer
-	waitse
-	copyvar VAR_0x8004, VAR_0x8000
-	copyvar VAR_0x8005, VAR_0x8001
-	checkitemspace VAR_0x8000, VAR_0x8001
-	copyvar VAR_0x8007, VAR_RESULT
-	bufferitemnameplural 1, VAR_0x8000, VAR_0x8001
-	checkitemtype VAR_0x8000
-	call EventScript_BufferStdString
-	compare VAR_0x8007, 1
-	call_if_eq EventScript_PickItemUp
-	compare VAR_0x8007, 0
-	call_if_eq EventScript_271CA1
-	release
-	return
+    lock
+    faceplayer
+    waitse
+    copyvar VAR_0x8004, VAR_0x8000
+    copyvar VAR_0x8005, VAR_0x8001
+    checkitemspace VAR_0x8000, VAR_0x8001
+    copyvar VAR_0x8007, VAR_RESULT
+    bufferitemnameplural 1, VAR_0x8000, VAR_0x8001
+    checkitemtype VAR_0x8000
+    call EventScript_BufferStdString
+    compare VAR_0x8007, 1
+    call_if_eq EventScript_PickItemUp
+    compare VAR_0x8007, 0
+    call_if_eq EventScript_271CA1
+    release
+    return
 
 EventScript_PickItemUp:: @ 8271C3A
-	removeobject VAR_LAST_TALKED
-	giveitem VAR_0x8004, VAR_0x8005
-	specialvar VAR_RESULT, BufferTMHMMoveName
-	copyvar VAR_0x8008, VAR_RESULT
-	compare VAR_0x8008, 1
-	call_if_eq EventScript_271C8F
-	compare VAR_0x8008, 0
-	call_if_eq EventScript_271C9B
-	waitfanfare
-	waitmessage
-	bufferitemnameplural 1, VAR_0x8004, VAR_0x8005
-	setvar VAR_0x8004, 12
-	special CallBattlePyramidFunction
-	compare VAR_RESULT, 1
-	goto_if_eq EventScript_271C86
-	msgbox gText_PutItemInPocket, MSGBOX_DEFAULT
-	return
+    removeobject VAR_LAST_TALKED
+    giveitem VAR_0x8004, VAR_0x8005
+    specialvar VAR_RESULT, BufferTMHMMoveName
+    copyvar VAR_0x8008, VAR_RESULT
+    compare VAR_0x8008, 1
+    call_if_eq EventScript_271C8F
+    compare VAR_0x8008, 0
+    call_if_eq EventScript_271C9B
+    waitfanfare
+    waitmessage
+    bufferitemnameplural 1, VAR_0x8004, VAR_0x8005
+    setvar VAR_0x8004, 12
+    special CallBattlePyramidFunction
+    compare VAR_RESULT, 1
+    goto_if_eq EventScript_271C86
+    msgbox gText_PutItemInPocket, MSGBOX_DEFAULT
+    return
 
 EventScript_271C86:: @ 8271C86
-	msgbox gText_PlayerPutItemInBag, MSGBOX_DEFAULT
-	return
+    msgbox gText_PlayerPutItemInBag, MSGBOX_DEFAULT
+    return
 
 EventScript_271C8F:: @ 8271C8F
-	bufferitemnameplural 0, VAR_0x8004, VAR_0x8005
-	message gText_PlayerFoundOneItemTwoLines
-	return
+    bufferitemnameplural 0, VAR_0x8004, VAR_0x8005
+    message gText_PlayerFoundOneItemTwoLines
+    return
 
 EventScript_271C9B:: @ 8271C9B
-	message gText_PlayerFoundOneItem
-	return
+    message gText_PlayerFoundOneItem
+    return
 
 EventScript_271CA1:: @ 8271CA1
-	msgbox gText_ObtainedTheItem, MSGBOX_DEFAULT
-	msgbox gText_TooBadBagIsFull, MSGBOX_DEFAULT
-	setvar VAR_RESULT, 0
-	return
+    msgbox gText_ObtainedTheItem, MSGBOX_DEFAULT
+    msgbox gText_TooBadBagIsFull, MSGBOX_DEFAULT
+    setvar VAR_RESULT, 0
+    return
 
 EventScript_HiddenItemScript:: @ 8271CB7
-	lockall
-	waitse
-	giveitem VAR_0x8005, 1
-	copyvar VAR_0x8007, VAR_RESULT
-	bufferitemnameplural 1, VAR_0x8005, 1
-	checkitemtype VAR_0x8005
-	call EventScript_BufferStdString
-	compare VAR_0x8007, 1
-	goto_if_eq EventScript_271CE8
-	compare VAR_0x8007, 0
-	goto_if_eq EventScript_271D47
-	end
+    lockall
+    waitse
+    giveitem VAR_0x8005, 1
+    copyvar VAR_0x8007, VAR_RESULT
+    bufferitemnameplural 1, VAR_0x8005, 1
+    checkitemtype VAR_0x8005
+    call EventScript_BufferStdString
+    compare VAR_0x8007, 1
+    goto_if_eq EventScript_271CE8
+    compare VAR_0x8007, 0
+    goto_if_eq EventScript_271D47
+    end
 
 EventScript_271CE8:: @ 8271CE8
-	copyvar VAR_0x8008, VAR_0x8004
-	copyvar VAR_0x8004, VAR_0x8005
-	specialvar VAR_RESULT, BufferTMHMMoveName
-	compare VAR_RESULT, 1
-	goto_if_eq EventScript_271D0E
-	compare VAR_RESULT, 0
-	goto_if_eq EventScript_271D1F
-	end
+    copyvar VAR_0x8008, VAR_0x8004
+    copyvar VAR_0x8004, VAR_0x8005
+    specialvar VAR_RESULT, BufferTMHMMoveName
+    compare VAR_RESULT, 1
+    goto_if_eq EventScript_271D0E
+    compare VAR_RESULT, 0
+    goto_if_eq EventScript_271D1F
+    end
 
 EventScript_271D0E:: @ 8271D0E
-	bufferitemnameplural 0, VAR_0x8004, 1
-	message gText_PlayerFoundOneItemTwoLines
-	goto EventScript_271D2A
-	end
+    bufferitemnameplural 0, VAR_0x8004, 1
+    message gText_PlayerFoundOneItemTwoLines
+    goto EventScript_271D2A
+    end
 
 EventScript_271D1F:: @ 8271D1F
-	message gText_PlayerFoundOneItem
-	goto EventScript_271D2A
-	end
+    message gText_PlayerFoundOneItem
+    goto EventScript_271D2A
+    end
 
 EventScript_271D2A:: @ 8271D2A
-	waitmessage
-	waitfanfare
-	bufferitemnameplural 1, VAR_0x8004, 1
-	copyvar VAR_0x8004, VAR_0x8008
-	msgbox gText_PutItemInPocket, MSGBOX_DEFAULT
-	special sub_80EDCE8
-	special SetFlagInVar
-	releaseall
-	end
+    waitmessage
+    waitfanfare
+    bufferitemnameplural 1, VAR_0x8004, 1
+    copyvar VAR_0x8004, VAR_0x8008
+    msgbox gText_PutItemInPocket, MSGBOX_DEFAULT
+    special sub_80EDCE8
+    special SetFlagInVar
+    releaseall
+    end
 
 EventScript_271D47:: @ 8271D47
-	msgbox gText_PlayerFoundOneItem, MSGBOX_DEFAULT
-	msgbox gText_TooBadBagIsFull, MSGBOX_DEFAULT
-	setvar VAR_RESULT, 0
-	releaseall
-	end
+    msgbox gText_PlayerFoundOneItem, MSGBOX_DEFAULT
+    msgbox gText_TooBadBagIsFull, MSGBOX_DEFAULT
+    setvar VAR_RESULT, 0
+    releaseall
+    end
 
 EventScript_271D5E:: @ 8271D5E
 	lock
@@ -1246,72 +1002,7 @@ EventScript_271D89:: @ 8271D89
 	release
 	end
 
-EventScript_PC:: @ 8271D92
-	lockall
-	setvar VAR_0x8004, 0
-	special DoPCTurnOnEffect
-	playse SE_PC_ON
-	msgbox Text_BootUpPC, MSGBOX_DEFAULT
-	goto EventScript_271DAC
-	end
-
-EventScript_271DAC:: @ 8271DAC
-	message gText_WhichPCShouldBeAccessed
-	waitmessage
-	special ScriptMenu_CreatePCMultichoice
-	waitstate
-	goto EventScript_271DBC
-	end
-
-EventScript_271DBC:: @ 8271DBC
-	switch VAR_RESULT
-	case 0, EventScript_271E0E
-	case 1, EventScript_271DF9
-	case 2, EventScript_271E54
-	case 3, EventScript_271E47
-	case MULTI_B_PRESSED, EventScript_271E47
-	end
-
-EventScript_271DF9:: @ 8271DF9
-	playse SE_PC_LOGIN
-	msgbox gText_AccessedPlayersPC, MSGBOX_DEFAULT
-	special PlayerPC
-	waitstate
-	goto EventScript_271DAC
-	end
-
-EventScript_271E0E:: @ 8271E0E
-	playse SE_PC_LOGIN
-	call_if_unset FLAG_SYS_PC_LANETTE, EventScript_271E35
-	call_if_set FLAG_SYS_PC_LANETTE, EventScript_271E3E
-	msgbox gText_StorageSystemOpened, MSGBOX_DEFAULT
-	special ShowPokemonStorageSystemPC
-	waitstate
-	goto EventScript_271DAC
-	end
-
-EventScript_271E35:: @ 8271E35
-	msgbox gText_AccessedSomeonesPC, MSGBOX_DEFAULT
-	return
-
-EventScript_271E3E:: @ 8271E3E
-	msgbox gText_AccessedLanettesPC, MSGBOX_DEFAULT
-	return
-
-EventScript_271E47:: @ 8271E47
-	setvar VAR_0x8004, 0
-	playse SE_PC_OFF
-	special DoPCTurnOffEffect
-	releaseall
-	end
-
-EventScript_271E54:: @ 8271E54
-	goto_if_unset FLAG_SYS_GAME_CLEAR, EventScript_271E47
-	playse SE_PC_LOGIN
-	special AccessHallOfFamePC
-	waitstate
-	goto EventScript_271DBC
-	end
+	.include "data/scripts/pc.inc"
 
 Common_EventScript_ShowPokemartSign:: @ 8271E6A
 	msgbox gText_PokemartSign, MSGBOX_SIGN
@@ -1632,173 +1323,8 @@ SouthernIsland_Exterior_EventScript_272250:: @ 8272250
 	call Common_EventScript_FerryDepart
 	return
 
-EventScript_272274:: @ 8272274
-	lockall
-	waitse
-	playmoncry SPECIES_KYOGRE, 2
-	waitmoncry
-	setvar VAR_TEMP_5, 1
-	releaseall
-	end
-
-EventScript_272283:: @ 8272283
-	lockall
-	setvar VAR_TEMP_1, 1
-	goto EventScript_2722A7
-	end
-
-EventScript_27228F:: @ 827228F
-	lockall
-	setvar VAR_TEMP_2, 1
-	goto EventScript_2722A7
-	end
-
-EventScript_27229B:: @ 827229B
-	lockall
-	setvar VAR_TEMP_3, 1
-	goto EventScript_2722A7
-	end
-
-EventScript_2722A7:: @ 82722A7
-	setvar VAR_0x8004, 1
-	setvar VAR_0x8005, 1
-	setvar VAR_0x8006, 8
-	setvar VAR_0x8007, 5
-	special sub_8139560
-	waitstate
-	releaseall
-	end
-
-CaveOfOrigin_1F_EventScript_2722C1:: @ 82722C1
-CaveOfOrigin_UnusedRubySapphireMap1_EventScript_2722C1:: @ 82722C1
-CaveOfOrigin_UnusedRubySapphireMap2_EventScript_2722C1:: @ 82722C1
-CaveOfOrigin_UnusedRubySapphireMap3_EventScript_2722C1:: @ 82722C1
-	setvar VAR_TEMP_1, 1
-	setvar VAR_TEMP_2, 1
-	setvar VAR_TEMP_3, 1
-	setvar VAR_TEMP_4, 1
-	setvar VAR_TEMP_5, 1
-	return
-
-Route120_EventScript_2722DB:: @ 82722DB
-	lock
-	faceplayer
-	setvar VAR_0x8009, 1
-	goto Route120_EventScript_272336
-	end
-
-Route120_EventScript_2722E8:: @ 82722E8
-	lock
-	faceplayer
-	setvar VAR_0x8009, 2
-	goto Route120_EventScript_272336
-	end
-
-Route120_EventScript_2722F5:: @ 82722F5
-	lock
-	faceplayer
-	setvar VAR_0x8009, 3
-	goto Route120_EventScript_272336
-	end
-
-Route120_EventScript_272302:: @ 8272302
-	lock
-	faceplayer
-	setvar VAR_0x8009, 4
-	goto Route120_EventScript_272336
-	end
-
-Route120_EventScript_27230F:: @ 827230F
-	lock
-	faceplayer
-	setvar VAR_0x8009, 5
-	goto Route120_EventScript_272336
-	end
-
-Route119_EventScript_27231C:: @ 827231C
-	lock
-	faceplayer
-	setvar VAR_0x8009, 6
-	goto Route119_EventScript_272336
-	end
-
-Route119_EventScript_272329:: @ 8272329
-	lock
-	faceplayer
-	setvar VAR_0x8009, 7
-	goto Route119_EventScript_272336
-	end
-
-Route119_EventScript_272336:: @ 8272336
-Route120_EventScript_272336:: @ 8272336
-	checkitem ITEM_DEVON_SCOPE, 1
-	compare VAR_RESULT, 1
-	goto_if_eq Route119_EventScript_272350
-	msgbox Route119_Text_1F5D00, MSGBOX_DEFAULT
-	release
-	end
-
-Route119_EventScript_272350:: @ 8272350
-	msgbox Route119_Text_1F5D23, MSGBOX_YESNO
-	compare VAR_RESULT, 1
-	goto_if_eq Route119_EventScript_272365
-	release
-	end
-
-Route119_EventScript_272365:: @ 8272365
-	msgbox Route119_Text_1F5D63, MSGBOX_DEFAULT
-	closemessage
-	applymovement VAR_LAST_TALKED, Common_Movement_FacePlayer
-	waitmovement 0
-	applymovement VAR_LAST_TALKED, Route119_Movement_2723C7
-	waitmovement 0
-	waitse
-	playmoncry SPECIES_KECLEON, 2
-	delay 40
-	waitmoncry
-	setwildbattle SPECIES_KECLEON, 30, ITEM_NONE
-	setflag FLAG_SYS_CTRL_OBJ_DELETE
-	dowildbattle
-	clearflag FLAG_SYS_CTRL_OBJ_DELETE
-	specialvar VAR_RESULT, GetBattleOutcome
-	compare VAR_RESULT, 1
-	goto_if_eq EventScript_RemoveKecleon
-	compare VAR_RESULT, 4
-	goto_if_eq EventScript_RemoveKecleon
-	compare VAR_RESULT, 5
-	goto_if_eq EventScript_RemoveKecleon
-	release
-	end
-
-EventScript_RemoveKecleon:: @ 82723C1
-	goto Common_EventScript_RemoveStaticPokemon
-	end
-
-FortreeCity_Movement_2723C7: @ 82723C7
-Route119_Movement_2723C7: @ 82723C7
-Route120_Movement_2723C7: @ 82723C7
-	set_visible
-	delay_4
-	set_invisible
-	delay_4
-	set_visible
-	delay_4
-	set_invisible
-	delay_4
-	set_visible
-	delay_8
-	set_invisible
-	delay_8
-	set_visible
-	delay_8
-	set_invisible
-	delay_8
-	set_visible
-	delay_16
-	set_invisible
-	delay_16
-	set_visible
-	step_end
+	.include "data/scripts/cave_of_origin.inc"
+	.include "data/scripts/kecleon.inc"
 
 Common_EventScript_NameReceivedPartyMon:: @ 82723DD
 	fadescreen 1
@@ -1815,210 +1341,9 @@ Common_EventScript_PlayerHandedOverTheItem:: @ 82723E4
 	takeitem VAR_0x8004, 1
 	return
 
-EverGrandeCity_DrakesRoom_EventScript_2723F8:: @ 82723F8
-EverGrandeCity_GlaciasRoom_EventScript_2723F8:: @ 82723F8
-EverGrandeCity_PhoebesRoom_EventScript_2723F8:: @ 82723F8
-EverGrandeCity_SidneysRoom_EventScript_2723F8:: @ 82723F8
-PokemonLeague_EliteFour_SetAdvanceToNextRoomMetatiles:: @ 82723F8
-	applymovement EVENT_OBJ_ID_PLAYER, EverGrandeCity_SidneysRoom_Movement_2725C6
-	waitmovement 0
-	playse SE_DOOR
-	setmetatile 6, 1, METATILE_EliteFour_OpenDoor_Frame, 0
-	setmetatile 6, 2, METATILE_EliteFour_OpenDoor_Opening, 0
-	setmetatile 0, 2, METATILE_EliteFour_RightSpotlightOff, 1
-	setmetatile 1, 2, METATILE_EliteFour_LeftSpotlightOff, 1
-	setmetatile 2, 2, METATILE_EliteFour_RightSpotlightOff, 1
-	setmetatile 3, 2, METATILE_EliteFour_LeftSpotlightOff, 1
-	setmetatile 4, 2, METATILE_EliteFour_RightSpotlightOff, 1
-	setmetatile 8, 2, METATILE_EliteFour_LeftSpotlightOff, 1
-	setmetatile 9, 2, METATILE_EliteFour_RightSpotlightOff, 1
-	setmetatile 10, 2, METATILE_EliteFour_LeftSpotlightOff, 1
-	setmetatile 11, 2, METATILE_EliteFour_RightSpotlightOff, 1
-	setmetatile 12, 2, METATILE_EliteFour_LeftSpotlightOff, 1
-	special DrawWholeMapView
-	return
-
-EverGrandeCity_DrakesRoom_EventScript_272475:: @ 8272475
-EverGrandeCity_GlaciasRoom_EventScript_272475:: @ 8272475
-EverGrandeCity_PhoebesRoom_EventScript_272475:: @ 8272475
-EverGrandeCity_SidneysRoom_EventScript_272475:: @ 8272475
-	applymovement EVENT_OBJ_ID_PLAYER, EverGrandeCity_SidneysRoom_Movement_2725BA
-	waitmovement 0
-	playse SE_TRACK_DOOR
-	setmetatile 5, 12, METATILE_EliteFour_EntryDoor_ClosedTop, 1
-	setmetatile 6, 12, METATILE_EliteFour_EntryDoor_ClosedTop, 1
-	setmetatile 7, 12, METATILE_EliteFour_EntryDoor_ClosedTop, 1
-	setmetatile 5, 13, METATILE_EliteFour_EntryDoor_ClosedBottom, 1
-	setmetatile 6, 13, METATILE_EliteFour_EntryDoor_ClosedBottom, 1
-	setmetatile 7, 13, METATILE_EliteFour_EntryDoor_ClosedBottom, 1
-	special DrawWholeMapView
-	return
-
-EverGrandeCity_DrakesRoom_EventScript_2724BC:: @ 82724BC
-EverGrandeCity_GlaciasRoom_EventScript_2724BC:: @ 82724BC
-EverGrandeCity_PhoebesRoom_EventScript_2724BC:: @ 82724BC
-EverGrandeCity_SidneysRoom_EventScript_2724BC:: @ 82724BC
-	setmetatile 6, 1, METATILE_EliteFour_OpenDoor_Frame, 0
-	setmetatile 6, 2, METATILE_EliteFour_OpenDoor_Opening, 0
-	setmetatile 5, 12, METATILE_EliteFour_EntryDoor_ClosedTop, 1
-	setmetatile 6, 12, METATILE_EliteFour_EntryDoor_ClosedTop, 1
-	setmetatile 7, 12, METATILE_EliteFour_EntryDoor_ClosedTop, 1
-	setmetatile 5, 13, METATILE_EliteFour_EntryDoor_ClosedBottom, 1
-	setmetatile 6, 13, METATILE_EliteFour_EntryDoor_ClosedBottom, 1
-	setmetatile 7, 13, METATILE_EliteFour_EntryDoor_ClosedBottom, 1
-	setmetatile 0, 2, METATILE_EliteFour_RightSpotlightOff, 1
-	setmetatile 1, 2, METATILE_EliteFour_LeftSpotlightOff, 1
-	setmetatile 2, 2, METATILE_EliteFour_RightSpotlightOff, 1
-	setmetatile 3, 2, METATILE_EliteFour_LeftSpotlightOff, 1
-	setmetatile 4, 2, METATILE_EliteFour_RightSpotlightOff, 1
-	setmetatile 8, 2, METATILE_EliteFour_LeftSpotlightOff, 1
-	setmetatile 9, 2, METATILE_EliteFour_RightSpotlightOff, 1
-	setmetatile 10, 2, METATILE_EliteFour_LeftSpotlightOff, 1
-	setmetatile 11, 2, METATILE_EliteFour_RightSpotlightOff, 1
-	setmetatile 12, 2, METATILE_EliteFour_LeftSpotlightOff, 1
-	return
-
-EverGrandeCity_DrakesRoom_EventScript_27255F:: @ 827255F
-EverGrandeCity_GlaciasRoom_EventScript_27255F:: @ 827255F
-EverGrandeCity_PhoebesRoom_EventScript_27255F:: @ 827255F
-EverGrandeCity_SidneysRoom_EventScript_27255F:: @ 827255F
-	setmetatile 5, 12, METATILE_EliteFour_EntryDoor_ClosedTop, 1
-	setmetatile 6, 12, METATILE_EliteFour_EntryDoor_ClosedTop, 1
-	setmetatile 7, 12, METATILE_EliteFour_EntryDoor_ClosedTop, 1
-	setmetatile 5, 13, METATILE_EliteFour_EntryDoor_ClosedBottom, 1
-	setmetatile 6, 13, METATILE_EliteFour_EntryDoor_ClosedBottom, 1
-	setmetatile 7, 13, METATILE_EliteFour_EntryDoor_ClosedBottom, 1
-	return
-
-SlateportCity_Movement_272596: @ 8272596
-	emote_question_mark
-	step_end
-
-Common_Movement_ExclamationMark: @ 8272598
-	emote_exclamation_mark
-	step_end
-
-Common_Movement_Delay48: @ 827259A
-	delay_16
-	delay_16
-	delay_16
-	step_end
-
-Common_Movement_FacePlayer: @ 827259E
-	face_player
-	step_end
-
-Common_Movement_FaceAwayPlayer: @ 82725A0
-	face_away_player
-	step_end
-
-Common_Movement_FaceOriginalDirection: @ 82725A2
-	face_original_direction
-	step_end
-
-Common_Movement_WalkInPlaceLeft: @ 82725A4
-	walk_in_place_fastest_left
-	step_end
-
-Common_Movement_WalkInPlaceUp: @ 82725A6
-	walk_in_place_fastest_up
-	step_end
-
-Common_Movement_WalkInPlaceRight: @ 82725A8
-	walk_in_place_fastest_right
-	step_end
-
-Common_Movement_WalkInPlaceDown: @ 82725AA
-	walk_in_place_fastest_down
-	step_end
-
-RustboroCity_Movement_2725AC: @ 82725AC
-	face_right
-	step_end
-
-RustboroCity_Movement_2725AE: @ 82725AE
-	face_left
-	step_end
-
-Common_Movement_FaceDown: @ 82725B0
-	face_down
-	step_end
-
-Common_Movement_FaceUp: @ 82725B2
-	face_up
-	step_end
-
-BattleFrontier_BattleDomeBattleRoom_Movement_2725B4: @ 82725B4
-MeteorFalls_1F_1R_Movement_2725B4: @ 82725B4
-	walk_in_place_down
-	step_end
-
-BattleFrontier_BattlePalaceBattleRoom_Movement_2725B6: @ 82725B6
-BattleFrontier_BattleTowerBattleRoom_Movement_2725B6: @ 82725B6
-	walk_in_place_left
-	step_end
-
-Route121_Movement_2725B8: @ 82725B8
-	walk_in_place_right
-	step_end
-
-EverGrandeCity_SidneysRoom_Movement_2725BA: @ 82725BA
-	walk_up
-	walk_up
-	walk_up
-	walk_up
-	walk_up
-	walk_up
-	step_end
-
-EverGrandeCity_ChampionsRoom_Movement_2725C1: @ 82725C1
-	walk_up
-	walk_up
-	walk_up
-	walk_up
-	step_end
-
-EverGrandeCity_SidneysRoom_Movement_2725C6: @ 82725C6
-	delay_16
-	delay_16
-	step_end
-
-Route110_TrickHouseEntrance_Movement_2725C9: @ 82725C9
-	walk_up
-	step_end
-
-Movement_2725CB:: @ 82725CB
-	walk_up
-	walk_up
-	step_end
-
-EventScript_PictureBookShelf:: @ 82725CE
-	msgbox Text_PictureBookShelf, MSGBOX_SIGN
-	end
-
-EventScript_BookShelf:: @ 82725D7
-	msgbox Text_BookShelf, MSGBOX_SIGN
-	end
-
-EventScript_PokemonCenterBookShelf:: @ 82725E0
-	msgbox Text_PokemonCenterBookShelf, MSGBOX_SIGN
-	end
-
-EventScript_Vase:: @ 82725E9
-	msgbox Text_Vase, MSGBOX_SIGN
-	end
-
-EventScript_EmptyTrashCan:: @ 82725F2
-	msgbox Text_EmptyTrashCan, MSGBOX_SIGN
-	end
-
-EventScript_ShopShelf:: @ 82725FB
-	msgbox Text_ShopShelf, MSGBOX_SIGN
-	end
-
-EventScript_Blueprint:: @ 8272604
-	msgbox Text_Blueprint, MSGBOX_SIGN
-	end
+	.include "data/scripts/elite_four.inc"
+	.include "data/scripts/movement.inc"
+	.include "data/scripts/check_furniture.inc"
 
 Text_WouldYouLikeToMixRecords: @ 827260D
 	.string "Would you like to mix records with\n"
@@ -2027,24 +1352,7 @@ Text_WouldYouLikeToMixRecords: @ 827260D
 Text_WouldNotLikeToMixRecords: @ 8272640
 	.string "We hope to see you again!$"
 
-Text_BootUpPC: @ 827265A
-	.string "{PLAYER} booted up the PC.$"
-
-gText_WhichPCShouldBeAccessed:: @ 827266F
-	.string "Which PC should be accessed?$"
-
-gText_AccessedSomeonesPC:: @ 827268C
-	.string "Accessed SOMEONE'S PC.$"
-
-gText_StorageSystemOpened:: @ 82726A3
-	.string "POKéMON Storage System opened.$"
-
-gText_AccessedPlayersPC:: @ 82726C2
-	.string "Accessed {PLAYER}'s PC.$"
-
-gText_AccessedLanettesPC:: @ 82726D4
-	.string "Accessed LANETTE's PC.$"
-
+	.include "data/text/pc.inc"
 	.include "data/text/pkmn_center_nurse.inc"
 
 gText_HowMayIServeYou:: @ 8272A21
@@ -2247,57 +1555,7 @@ EventScript_SelectWithoutRegisteredItem:: @ 82736B3
 	msgbox gText_SelectWithoutRegisteredItem, MSGBOX_SIGN
 	end
 
-EventScript_Poison:: @ 82736BC
-	lockall
-	special ExecuteWhiteOut
-	waitstate
-	compare VAR_RESULT, 1
-	goto_if_eq EventScript_2736D9
-	compare VAR_RESULT, 2
-	goto_if_eq EventScript_2736F8
-	releaseall
-	end
-
-EventScript_2736D9:: @ 82736D9
-	message gText_PlayerWhitedOut
-	waitmessage
-	waitbuttonpress
-	special sub_80B05B4
-	waitstate
-	fadescreen 1
-	call_if_set FLAG_FLANNERY_GIVES_BADGE_INFO, EventScript_2736F4
-	special sp0C8_whiteout_maybe
-	waitstate
-	end
-
-EventScript_2736F4:: @ 82736F4
-	setrespawn HEAL_LOCATION_LAVARIDGE_TOWN
-	return
-
-EventScript_2736F8:: @ 82736F8
-	message gText_PlayerWhitedOut
-	waitmessage
-	waitbuttonpress
-	setvar VAR_0x8004, 16
-	special CallBattlePikeFunction
-	compare VAR_RESULT, 1
-	goto_if_eq BattleFrontier_BattlePikeThreePathRoom_EventScript_2C4222
-	setvar VAR_0x8004, 12
-	special CallBattlePyramidFunction
-	compare VAR_RESULT, 1
-	goto_if_eq BattleFrontier_BattlePyramidTop_EventScript_252B42
-	compare VAR_RESULT, 2
-	goto_if_eq BattleFrontier_BattlePyramidTop_EventScript_252B42
-	setvar VAR_0x8004, TRAINER_HILL_FUNC_10
-	special CallTrainerHillFunction
-	compare VAR_RESULT, 1
-	goto_if_eq TrainerHill_1F_EventScript_2C83C9
-	special sub_80B05B4
-	waitstate
-	fadescreen 1
-	special sp0C8_whiteout_maybe
-	waitstate
-	end
+	.include "data/scripts/field_poison.inc"
 
 Common_EventScript_NopReturn:: @ 827374E
 	return
@@ -2514,77 +1772,8 @@ Text_RepelWoreOff: @ 82A4B33
 	.include "data/text/braille.inc"
 	.include "data/text/berries.inc"
 	.include "data/text/shoal_cave.inc"
-
-Text_PictureBookShelf: @ 82A81E5
-	.string "There's a set of POKéMON picture books.$"
-
-Text_BookShelf: @ 82A820D
-	.string "It's filled with all sorts of books.$"
-
-Text_PokemonCenterBookShelf: @ 82A8232
-	.string "POKéMON magazines!\n"
-	.string "POKéMON PAL…\p"
-	.string "POKéMON HANDBOOK…\n"
-	.string "ADORABLE POKéMON…$"
-
-Text_Vase: @ 82A8276
-	.string "This vase looks expensive…\n"
-	.string "Peered inside…\p"
-	.string "But, it was empty.$"
-
-Text_EmptyTrashCan: @ 82A82B3
-	.string "It's empty.$"
-
-Text_ShopShelf: @ 82A82BF
-	.string "The shelves brim with all sorts of\n"
-	.string "POKéMON merchandise.$"
-
-Text_Blueprint: @ 82A82F7
-	.string "A blueprint of some sort?\n"
-	.string "It's too complicated!$"
-
-GraniteCave_B1F_MapScript2_2A8327: @ 82A8327
-MirageTower_2F_MapScript2_2A8327: @ 82A8327
-MirageTower_3F_MapScript2_2A8327: @ 82A8327
-MtPyre_2F_MapScript2_2A8327: @ 82A8327
-SkyPillar_2F_MapScript2_2A8327: @ 82A8327
-SkyPillar_4F_MapScript2_2A8327: @ 82A8327
-	map_script_2 VAR_ICE_STEP_COUNT, 0, EventScript_FallDownHole
-	.2byte 0
-
-GraniteCave_B1F_MapScript1_2A8331: @ 82A8331
-MirageTower_2F_MapScript1_2A8331: @ 82A8331
-MirageTower_3F_MapScript1_2A8331: @ 82A8331
-MtPyre_2F_MapScript1_2A8331: @ 82A8331
-	copyvar VAR_ICE_STEP_COUNT, 0x1
-	end
-
-EventScript_FallDownHole:: @ 82A8337
-	lockall
-	delay 20
-	applymovement EVENT_OBJ_ID_PLAYER, GraniteCave_B1F_Movement_2A8369
-	waitmovement 0
-	playse SE_RU_HYUU
-	delay 60
-	warphole MAP_UNDEFINED
-	waitstate
-	end
-
-gUnknown_082A8350:: @ 82A8350
-	lockall
-	delay 20
-	applymovement EVENT_OBJ_ID_PLAYER, GraniteCave_B1F_Movement_2A8369
-	waitmovement 0
-	playse SE_RU_HYUU
-	delay 60
-	special DoFallWarp
-	waitstate
-	end
-
-GraniteCave_B1F_Movement_2A8369: @ 82A8369
-	set_invisible
-	step_end
-
+	.include "data/text/check_furniture.inc"
+	.include "data/scripts/cave_hole.inc"
 	.include "data/scripts/lilycove_lady.inc"
 	.include "data/text/match_call.inc"
 	.include "data/scripts/apprentice.inc"
@@ -2605,107 +1794,7 @@ EventScript_TestSignpostMsg:: @ 82C8436
 	msgbox Text_ThisIsATestSignpostMsg, MSGBOX_SIGN
 	end
 
-gText_082C843F:: @ 82C843F
-	.string "It's very disappointing…$"
-
-gText_082C8458:: @ 82C8458
-	.string "Okay, I understand…$"
-
-gText_082C846C:: @ 82C846C
-	.string "I'm terribly sorry…$"
-
-gText_082C8480:: @ 82C8480
-	.string "Thank you…$"
-
-gText_082C848B:: @ 82C848B
-	.string "Ahahaha! Aren't you embarrassed?\n"
-	.string "Everyone's watching!$"
-
-gText_082C84C1:: @ 82C84C1
-	.string "Grr…\n"
-	.string "What the…$"
-
-gText_082C84D0:: @ 82C84D0
-	.string "My DOME ACE title isn't just for show!$"
-
-gText_082C84F7:: @ 82C84F7
-	.string "Ahahaha!\n"
-	.string "You're inspiring!$"
-
-gText_082C8512:: @ 82C8512
-	.string "Way to work!\n"
-	.string "That was a good lesson, eh?$"
-
-gText_082C853B:: @ 82C853B
-	.string "Good job!\n"
-	.string "You know what you're doing!$"
-
-gText_082C8561:: @ 82C8561
-	.string "Hey, hey, hey!\n"
-	.string "You're finished already?$"
-
-gText_082C8589:: @ 82C8589
-	.string "What happened here?$"
-
-gText_082C859D:: @ 82C859D
-	.string "Humph…$"
-
-gText_082C85A4:: @ 82C85A4
-	.string "Urk…$"
-
-gText_082C85A9:: @ 82C85A9
-	.string "Hah!$"
-
-gText_082C85AE:: @ 82C85AE
-	.string "Darn!$"
-
-gText_082C85B4:: @ 82C85B4
-	.string "Oh, come on!\n"
-	.string "You have to try harder than that!$"
-
-gText_082C85E3:: @ 82C85E3
-	.string "No way!\n"
-	.string "Good job!$"
-
-gText_082C85F5:: @ 82C85F5
-	.string "Heheh!\n"
-	.string "What did you expect?$"
-
-gText_082C8611:: @ 82C8611
-	.string "Huh?\n"
-	.string "Are you serious?!$"
-
-gText_082C8628:: @ 82C8628
-	.string "Your POKéMON are wimpy because\n"
-	.string "you're wimpy as a TRAINER!$"
-
-gText_082C8662:: @ 82C8662
-	.string "Ah…\n"
-	.string "Now this is something else…$"
-
-gText_082C8682:: @ 82C8682
-	.string "Gwahahaha!\n"
-	.string "My brethren, we have nothing to fear!$"
-
-gText_082C86B3:: @ 82C86B3
-	.string "Gwah!\n"
-	.string "Hahahaha!$"
-
-gText_082C86C3:: @ 82C86C3
-	.string "Hey! What's wrong with you!\n"
-	.string "Let's see some effort! Get up!$"
-
-gText_082C86FE:: @ 82C86FE
-	.string "That's it! You've done great!\n"
-	.string "You've worked hard for this!$"
-
-gText_082C8739:: @ 82C8739
-	.string "Hey! Don't you give up now!\n"
-	.string "Get up! Don't lose faith in yourself!$"
-
-gText_082C877B:: @ 82C877B
-	.string "That's it! You've done it!\n"
-	.string "You kept working for this!$"
+	.include "data/text/frontier_brain.inc"
 
 	.align 2
 	.include "data/text/save.inc"
