@@ -21,15 +21,15 @@ struct FlashStruct
 {
     u8 fromType;
     u8 toType;
-    bool8 unk2;
-    bool8 unk3;
+    bool8 isEnter;
+    bool8 isExit;
     void (*func)(void);
 };
 
 // static functions
 static void hm2_flash(void);
 static void sub_81371B4(void);
-static bool8 MaybeDoMapTransition(void);
+static bool8 TryDoMapTransition(void);
 static void DoExitCaveTransition(void);
 static void Task_ExitCaveTransition1(u8 taskId);
 static void Task_ExitCaveTransition2(u8 taskId);
@@ -45,23 +45,23 @@ static void Task_EnterCaveTransition4(u8 taskId);
 // rodata
 static const struct FlashStruct sTransitionTypes[] =
 {
-    {MAP_TYPE_TOWN,        MAP_TYPE_UNDERGROUND, 1, 0, DoEnterCaveTransition},
-    {MAP_TYPE_CITY,        MAP_TYPE_UNDERGROUND, 1, 0, DoEnterCaveTransition},
-    {MAP_TYPE_ROUTE,       MAP_TYPE_UNDERGROUND, 1, 0, DoEnterCaveTransition},
-    {MAP_TYPE_UNDERWATER,  MAP_TYPE_UNDERGROUND, 1, 0, DoEnterCaveTransition},
-    {MAP_TYPE_OCEAN_ROUTE, MAP_TYPE_UNDERGROUND, 1, 0, DoEnterCaveTransition},
-    {MAP_TYPE_UNUSED_2,    MAP_TYPE_UNDERGROUND, 1, 0, DoEnterCaveTransition},
-    {MAP_TYPE_INDOOR,      MAP_TYPE_UNDERGROUND, 1, 0, DoEnterCaveTransition},
-    {MAP_TYPE_SECRET_BASE, MAP_TYPE_UNDERGROUND, 1, 0, DoEnterCaveTransition},
-    {MAP_TYPE_UNDERGROUND, MAP_TYPE_TOWN,        0, 1, DoExitCaveTransition},
-    {MAP_TYPE_UNDERGROUND, MAP_TYPE_CITY,        0, 1, DoExitCaveTransition},
-    {MAP_TYPE_UNDERGROUND, MAP_TYPE_ROUTE,       0, 1, DoExitCaveTransition},
-    {MAP_TYPE_UNDERGROUND, MAP_TYPE_UNDERWATER,  0, 1, DoExitCaveTransition},
-    {MAP_TYPE_UNDERGROUND, MAP_TYPE_OCEAN_ROUTE, 0, 1, DoExitCaveTransition},
-    {MAP_TYPE_UNDERGROUND, MAP_TYPE_UNUSED_2,    0, 1, DoExitCaveTransition},
-    {MAP_TYPE_UNDERGROUND, MAP_TYPE_INDOOR,      0, 1, DoExitCaveTransition},
-    {MAP_TYPE_UNDERGROUND, MAP_TYPE_SECRET_BASE, 0, 1, DoExitCaveTransition},
-    {0, 0, 0, 0, NULL},
+    {MAP_TYPE_TOWN,        MAP_TYPE_UNDERGROUND,  TRUE, FALSE, DoEnterCaveTransition},
+    {MAP_TYPE_CITY,        MAP_TYPE_UNDERGROUND,  TRUE, FALSE, DoEnterCaveTransition},
+    {MAP_TYPE_ROUTE,       MAP_TYPE_UNDERGROUND,  TRUE, FALSE, DoEnterCaveTransition},
+    {MAP_TYPE_UNDERWATER,  MAP_TYPE_UNDERGROUND,  TRUE, FALSE, DoEnterCaveTransition},
+    {MAP_TYPE_OCEAN_ROUTE, MAP_TYPE_UNDERGROUND,  TRUE, FALSE, DoEnterCaveTransition},
+    {MAP_TYPE_UNUSED_2,    MAP_TYPE_UNDERGROUND,  TRUE, FALSE, DoEnterCaveTransition},
+    {MAP_TYPE_INDOOR,      MAP_TYPE_UNDERGROUND,  TRUE, FALSE, DoEnterCaveTransition},
+    {MAP_TYPE_SECRET_BASE, MAP_TYPE_UNDERGROUND,  TRUE, FALSE, DoEnterCaveTransition},
+    {MAP_TYPE_UNDERGROUND, MAP_TYPE_TOWN,        FALSE,  TRUE, DoExitCaveTransition},
+    {MAP_TYPE_UNDERGROUND, MAP_TYPE_CITY,        FALSE,  TRUE, DoExitCaveTransition},
+    {MAP_TYPE_UNDERGROUND, MAP_TYPE_ROUTE,       FALSE,  TRUE, DoExitCaveTransition},
+    {MAP_TYPE_UNDERGROUND, MAP_TYPE_UNDERWATER,  FALSE,  TRUE, DoExitCaveTransition},
+    {MAP_TYPE_UNDERGROUND, MAP_TYPE_OCEAN_ROUTE, FALSE,  TRUE, DoExitCaveTransition},
+    {MAP_TYPE_UNDERGROUND, MAP_TYPE_UNUSED_2,    FALSE,  TRUE, DoExitCaveTransition},
+    {MAP_TYPE_UNDERGROUND, MAP_TYPE_INDOOR,      FALSE,  TRUE, DoExitCaveTransition},
+    {MAP_TYPE_UNDERGROUND, MAP_TYPE_SECRET_BASE, FALSE,  TRUE, DoExitCaveTransition},
+    {0, 0, FALSE, FALSE, NULL},
 };
 
 static const u16 gCaveTransitionPalette_White[] = INCBIN_U16("graphics/misc/cave_transition_white.gbapal");
@@ -151,11 +151,11 @@ void CB2_DoChangeMap(void)
     REG_IME = ime;
     SetVBlankCallback(VBC_ChangeMapVBlank);
     SetMainCallback2(CB2_ChangeMapMain);
-    if (!MaybeDoMapTransition())
+    if (!TryDoMapTransition())
         SetMainCallback2(gMain.savedCallback);
 }
 
-static bool8 MaybeDoMapTransition(void)
+static bool8 TryDoMapTransition(void)
 {
     u8 i;
     u8 fromType = GetLastUsedWarpMapType();
@@ -183,7 +183,7 @@ bool8 GetMapPairFadeToType(u8 _fromType, u8 _toType)
     {
         if (sTransitionTypes[i].fromType == fromType && sTransitionTypes[i].toType == toType)
         {
-            return sTransitionTypes[i].unk2;
+            return sTransitionTypes[i].isEnter;
         }
     }
 
@@ -200,7 +200,7 @@ bool8 GetMapPairFadeFromType(u8 _fromType, u8 _toType)
     {
         if (sTransitionTypes[i].fromType == fromType && sTransitionTypes[i].toType == toType)
         {
-            return sTransitionTypes[i].unk3;
+            return sTransitionTypes[i].isExit;
         }
     }
 
