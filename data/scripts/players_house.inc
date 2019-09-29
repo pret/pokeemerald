@@ -104,7 +104,7 @@ LittlerootTown_BrendansHouse_2F_EventScript_29280F:: @ 829280F
 	return
 
 LittlerootTown_BrendansHouse_2F_EventScript_29283F:: @ 829283F
-	incrementgamestat 45
+	incrementgamestat GAME_STAT_CHECKED_CLOCK
 	fadescreen 1
 	special Special_ViewWallClock
 	waitstate
@@ -374,7 +374,7 @@ LittlerootTown_BrendansHouse_1F_EventScript_292A94:: @ 8292A94
 LittlerootTown_BrendansHouse_1F_EventScript_292A9E:: @ 8292A9E
 	closemessage
 	call Common_EventScript_OutOfCenterPartyHeal
-	incrementgamestat 16
+	incrementgamestat GAME_STAT_RESTED_AT_HOME
 	msgbox LittlerootTown_BrendansHouse_1F_Text_1F7D5C, MSGBOX_DEFAULT
 	release
 	end

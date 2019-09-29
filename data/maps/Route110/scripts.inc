@@ -9,8 +9,8 @@ Route110_MapScript1_1EF279: @ 81EF279
 	end
 
 Route110_OnTransition: @ 81EF27D
-	call Common_EventScript_SetupRivalGender
-	call Common_EventScript_SetupRivalOnBikeGender
+	call Common_EventScript_SetupRivalGfxId
+	call Common_EventScript_SetupRivalOnBikeGfxId
 	compare VAR_CYCLING_CHALLENGE_STATE, 1
 	call_if_eq Route110_EventScript_1EF293
 	end

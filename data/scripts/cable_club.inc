@@ -47,7 +47,7 @@ OldaleTown_PokemonCenter_2F_EventScript_276B19:: @ 8276B19
 	gotoram
 
 OldaleTown_PokemonCenter_2F_EventScript_276B1A:: @ 8276B1A
-	msgbox gUnknown_08273178, MSGBOX_NPC
+	msgbox gText_ThankYouForAccessingMysteryGift, MSGBOX_NPC
 	end
 
 OldaleTown_PokemonCenter_2F_EventScript_276B23:: @ 8276B23
@@ -64,7 +64,7 @@ OldaleTown_PokemonCenter_2F_EventScript_276B23:: @ 8276B23
 	end
 
 OldaleTown_PokemonCenter_2F_EventScript_276B62:: @ 8276B62
-	msgbox gUnknown_08273178, MSGBOX_DEFAULT
+	msgbox gText_ThankYouForAccessingMysteryGift, MSGBOX_DEFAULT
 	release
 	end
 
@@ -707,13 +707,13 @@ OldaleTown_PokemonCenter_2F_EventScript_277328:: @ 8277328
 	release
 	end
 
-OldaleTown_PokemonCenter_2F_EventScript_277335:: @ 8277335
-	msgbox gUnknown_0827306F, MSGBOX_DEFAULT
+CableClub_EventScript_WirelessClubAdjustements:: @ 8277335
+	msgbox gText_SorryWirelessClubAdjustments, MSGBOX_DEFAULT
 	release
 	end
 
 OldaleTown_PokemonCenter_2F_EventScript_27733F:: @ 827733F
-	msgbox gUnknown_082730BC, MSGBOX_DEFAULT
+	msgbox gText_UndergoingAdjustments, MSGBOX_DEFAULT
 	releaseall
 	end
 
@@ -977,7 +977,7 @@ OldaleTown_PokemonCenter_2F_EventScript_27751B:: @ 827751B
 	lock
 	faceplayer
 	setvar VAR_FRONTIER_FACILITY, 8
-	goto_if_unset FLAG_SYS_POKEDEX_GET, OldaleTown_PokemonCenter_2F_EventScript_277335
+	goto_if_unset FLAG_SYS_POKEDEX_GET, CableClub_EventScript_WirelessClubAdjustements
 	specialvar VAR_RESULT, IsBadEggInParty
 	compare VAR_RESULT, 1
 	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_27731B
@@ -1052,12 +1052,12 @@ OldaleTown_PokemonCenter_2F_EventScript_277626:: @ 8277626
 
 OldaleTown_PokemonCenter_2F_EventScript_27764C:: @ 827764C
 	msgbox OldaleTown_PokemonCenter_2F_Text_27893E, MSGBOX_DEFAULT
-	goto OldaleTown_PokemonCenter_2F_EventScript_273755
+	goto EventScript_CableClub_SetVarResult0
 	end
 
 OldaleTown_PokemonCenter_2F_EventScript_27765A:: @ 827765A
 	msgbox OldaleTown_PokemonCenter_2F_Text_27897B, MSGBOX_DEFAULT
-	goto OldaleTown_PokemonCenter_2F_EventScript_273755
+	goto EventScript_CableClub_SetVarResult0
 	end
 
 OldaleTown_PokemonCenter_2F_EventScript_277668:: @ 8277668
@@ -1068,7 +1068,7 @@ OldaleTown_PokemonCenter_2F_EventScript_277668:: @ 8277668
 OldaleTown_PokemonCenter_2F_EventScript_277672:: @ 8277672
 	lock
 	faceplayer
-	goto_if_unset FLAG_SYS_POKEDEX_GET, OldaleTown_PokemonCenter_2F_EventScript_277335
+	goto_if_unset FLAG_SYS_POKEDEX_GET, CableClub_EventScript_WirelessClubAdjustements
 	msgbox OldaleTown_PokemonCenter_2F_Text_279937, MSGBOX_YESNO
 	compare VAR_RESULT, 0
 	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_27769A
@@ -1085,7 +1085,7 @@ OldaleTown_PokemonCenter_2F_EventScript_2776A4:: @ 82776A4
 	lock
 	faceplayer
 	setvar VAR_FRONTIER_FACILITY, 9
-	goto_if_unset FLAG_SYS_POKEDEX_GET, OldaleTown_PokemonCenter_2F_EventScript_277335
+	goto_if_unset FLAG_SYS_POKEDEX_GET, CableClub_EventScript_WirelessClubAdjustements
 	specialvar VAR_RESULT, IsBadEggInParty
 	compare VAR_RESULT, 1
 	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_27731B
@@ -1856,7 +1856,7 @@ OldaleTown_PokemonCenter_2F_Text_278A39: @ 8278A39
 	.string "Oh…\n"
 	.string "Excuse me!$"
 
-OldaleTown_PokemonCenter_1F_Text_278A48: @ 8278A48
+CableClub_Text_PlayerIsWaiting: @ 8278A48
 	.string "It appears as if {STR_VAR_1} is playing\n"
 	.string "right now.\l"
 	.string "Go for it!$"

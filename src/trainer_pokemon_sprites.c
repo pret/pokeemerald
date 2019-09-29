@@ -1,7 +1,7 @@
 #include "global.h"
 #include "sprite.h"
 #include "window.h"
-#include "alloc.h"
+#include "malloc.h"
 #include "constants/species.h"
 #include "palette.h"
 #include "decompress.h"

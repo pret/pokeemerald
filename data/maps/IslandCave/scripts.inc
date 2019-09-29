@@ -61,7 +61,7 @@ IslandCave_EventScript_238EEF:: @ 8238EEF
 	end
 
 IslandCave_EventScript_238F13:: @ 8238F13
-	msgbox gUnknown_0827304E, MSGBOX_DEFAULT
+	msgbox gText_BigHoleInTheWall, MSGBOX_DEFAULT
 	releaseall
 	end
 
@@ -113,10 +113,10 @@ IslandCave_EventScript_238F58:: @ 8238F58
 
 IslandCave_EventScript_238F9F:: @ 8238F9F
 	setflag FLAG_DEFEATED_REGICE
-	goto IslandCave_EventScript_27376D
+	goto Common_EventScript_RemoveStaticPokemon
 	end
 
 IslandCave_EventScript_238FA8:: @ 8238FA8
-	setvar VAR_0x8004, 402
-	goto IslandCave_EventScript_273776
+	setvar VAR_0x8004, SPECIES_REGICE
+	goto Common_EventScript_LegendaryFlewAway
 	end

@@ -79,9 +79,9 @@ BirthIsland_Exterior_EventScript_267FC1:: @ 8267FC1
 	delay 40
 	waitmoncry
 	setvar VAR_LAST_TALKED, 2
-	setvar VAR_0x8004, 410
-	setvar VAR_0x8005, 30
-	setvar VAR_0x8006, 0
+	setvar VAR_0x8004, SPECIES_DEOXYS
+	setvar VAR_0x8005, 30 @level
+	setvar VAR_0x8006, ITEM_NONE
 	special CreateObedientEnemyMon
 	setflag FLAG_SYS_CTRL_OBJ_DELETE
 	special BattleSetup_StartLegendaryBattle
@@ -100,13 +100,13 @@ BirthIsland_Exterior_EventScript_267FC1:: @ 8267FC1
 
 BirthIsland_Exterior_EventScript_26803B:: @ 826803B
 	setflag FLAG_DEFEATED_DEOXYS
-	setvar VAR_0x8004, 410
-	goto BirthIsland_Exterior_EventScript_273776
+	setvar VAR_0x8004, SPECIES_DEOXYS
+	goto Common_EventScript_LegendaryFlewAway
 	end
 
 BirthIsland_Exterior_EventScript_268049:: @ 8268049
-	setvar VAR_0x8004, 410
-	goto BirthIsland_Exterior_EventScript_273776
+	setvar VAR_0x8004, SPECIES_DEOXYS
+	goto Common_EventScript_LegendaryFlewAway
 	end
 
 BirthIsland_Exterior_Movement_268054: @ 8268054

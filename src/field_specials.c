@@ -1,5 +1,5 @@
 #include "global.h"
-#include "alloc.h"
+#include "malloc.h"
 #include "battle.h"
 #include "battle_tower.h"
 #include "cable_club.h"
@@ -2050,7 +2050,7 @@ bool8 UsedPokemonCenterWarp(void)
     return FALSE;
 }
 
-bool32 sub_8139ED0(void)
+bool32 PlayerNotAtTrainerHillEntrance(void)
 {
     if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(TRAINER_HILL_ENTRANCE) && gSaveBlock1Ptr->location.mapNum == MAP_NUM(TRAINER_HILL_ENTRANCE))
     {

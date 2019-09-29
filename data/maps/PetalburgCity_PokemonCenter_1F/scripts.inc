@@ -5,12 +5,12 @@ PetalburgCity_PokemonCenter_1F_MapScripts:: @ 82079E8
 
 PetalburgCity_PokemonCenter_1F_OnTransition: @ 82079F3
 	setrespawn HEAL_LOCATION_PETALBURG_CITY
-	call PetalburgCity_PokemonCenter_1F_EventScript_2718DE
+	call Common_EventScript_UpdateBrineyLocation
 	end
 
 PetalburgCity_PokemonCenter_1F_EventScript_2079FC:: @ 82079FC
 	setvar VAR_0x800B, 1
-	call PetalburgCity_PokemonCenter_1F_EventScript_27191E
+	call Common_EventScript_PkmnCenterNurse
 	waitmessage
 	waitbuttonpress
 	release

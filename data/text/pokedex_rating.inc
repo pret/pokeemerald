@@ -1,13 +1,13 @@
-gUnknown_082A5C9C::
+gBirchDexRatingText_AreYouCurious::
 	.string "털보박사: 오오 {PLAYER}{KUN}!\p"
 	.string "포켓몬 도감의 상태를\n"
 	.string "보여 주겠니?$"
 
-Route101_Text_2A5CEB:
-.string "응? 보여 줄 정도로\n"
+gBirchDexRatingText_Cancel:
+	.string "응? 보여 줄 정도로\n"
 	.string "포켓몬을 잡지 않았구나$"
 
-gUnknown_082A5D2C::
+gBirchDexRatingText_SoYouveSeenAndCaught::
 	.string "흠흠...\p"
 	.string "발견한 포켓몬 {STR_VAR_1}마리,\n"
 	.string "잡은 포켓몬 {STR_VAR_2}마리군...$"
@@ -99,7 +99,7 @@ gBirchDexRatingText_DexCompleted::
 	.string "축하한다!!\n"
 	.string "포켓몬 도감 완성이다!!$"
 
-gUnknown_082A633D::
+gBirchDexRatingText_OnANationwideBasis::
 	.string "흠흠...\n"
 	.string "전국적으로는...\p"
 	.string "발견한 포켓몬 {STR_VAR_1}마리,\n"

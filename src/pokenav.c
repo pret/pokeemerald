@@ -1,5 +1,5 @@
 #include "global.h"
-#include "alloc.h"
+#include "malloc.h"
 #include "task.h"
 #include "main.h"
 #include "overworld.h"

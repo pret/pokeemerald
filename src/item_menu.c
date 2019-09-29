@@ -25,7 +25,7 @@
 #include "link.h"
 #include "mail.h"
 #include "main.h"
-#include "alloc.h"
+#include "malloc.h"
 #include "map_name_popup.h"
 #include "menu.h"
 #include "money.h"
