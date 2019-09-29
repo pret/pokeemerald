@@ -1579,7 +1579,7 @@ void CB2_LoadMap(void)
     ScriptContext1_Init();
     ScriptContext2_Disable();
     SetMainCallback1(NULL);
-    SetMainCallback2(c2_change_map);
+    SetMainCallback2(CB2_ChangeMap);
     gMain.savedCallback = CB2_LoadMap2;
 }
 

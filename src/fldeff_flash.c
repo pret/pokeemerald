@@ -124,7 +124,7 @@ static void sub_81371EC(void)
     TransferPlttBuffer();
 }
 
-void c2_change_map(void)
+void CB2_ChangeMap(void)
 {
     u16 ime;
 
