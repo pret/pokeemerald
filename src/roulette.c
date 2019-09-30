@@ -3134,7 +3134,7 @@ static void Task_Roulette_0(u8 taskId)
     s32 temp;
     PrintCoinsString(gTasks[taskId].data[13]);
     temp = gUnknown_085B6344[(gSpecialVar_0x8004 & 1) + (gSpecialVar_0x8004 >> 7 << 1)];
-    ConvertIntToDecimalStringN(gStringVar1, temp, 2, 1);
+    ConvertIntToDecimalStringN(gStringVar1, temp, STR_CONV_MODE_LEADING_ZEROS, 1);
     if (gTasks[taskId].data[13] >= temp)
     {
         if ((gSpecialVar_0x8004 & 0x80) && (gSpecialVar_0x8004 & 1))
