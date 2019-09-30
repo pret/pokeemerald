@@ -2864,9 +2864,9 @@ static void sub_802091C(bool32 invisible)
 static void sub_802093C(void)
 {
     u8 x, y;
-    u8 var2 = GetCurrentKeyboardPage();
+    u8 page = GetCurrentKeyboardPage();
     sub_801F0BC(&x, &y);
-    if (var2 != 3)
+    if (page != UNION_ROOM_KB_PAGE_COUNT)
     {
         StartSpriteAnim(gUnknown_02022C8C->unk0, 0);
         gUnknown_02022C8C->unk0->pos1.x = x * 8 + 10;
@@ -2889,7 +2889,7 @@ static void sub_80209AC(int arg0)
 
 static void sub_80209E0(void)
 {
-    if (GetCurrentKeyboardPage() != 3)
+    if (GetCurrentKeyboardPage() != UNION_ROOM_KB_PAGE_COUNT)
         StartSpriteAnim(gUnknown_02022C8C->unk0, 1);
     else
         StartSpriteAnim(gUnknown_02022C8C->unk0, 3);
@@ -2904,7 +2904,7 @@ static bool32 sub_8020A1C(void)
 
     if (++gUnknown_02022C8C->unk14 > 3)
     {
-        if (GetCurrentKeyboardPage() != 3)
+        if (GetCurrentKeyboardPage() != UNION_ROOM_KB_PAGE_COUNT)
             StartSpriteAnim(gUnknown_02022C8C->unk0, 0);
         else
             StartSpriteAnim(gUnknown_02022C8C->unk0, 2);
