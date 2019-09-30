@@ -1053,21 +1053,21 @@ void sub_81ABC3C(u8 a)
     PrintItemDepositAmount(BagMenu_AddWindow(a), 1);
 }
 
-void PrintItemDepositAmount(u8 a, s16 b)
+void PrintItemDepositAmount(u8 windowId, s16 numDeposited)
 {
-    u8 r3 = (gBagPositionStruct.pocket == BERRIES_POCKET) ? 3 : 2;
-    ConvertIntToDecimalStringN(gStringVar1, b, STR_CONV_MODE_LEADING_ZEROS, r3);
+    u8 numDigits = (gBagPositionStruct.pocket == BERRIES_POCKET) ? 3 : 2;
+    ConvertIntToDecimalStringN(gStringVar1, numDeposited, STR_CONV_MODE_LEADING_ZEROS, numDigits);
     StringExpandPlaceholders(gStringVar4, gText_xVar1);
-    AddTextPrinterParameterized(a, 1, gStringVar4, GetStringCenterAlignXOffset(1, gStringVar4, 0x28), 2, 0, 0);
+    AddTextPrinterParameterized(windowId, 1, gStringVar4, GetStringCenterAlignXOffset(1, gStringVar4, 0x28), 2, 0, 0);
 }
 
-void sub_81ABCC0(int a, int b, int c)
+void PrintItemSoldAmount(int windowId, int numSold, int moneyEarned)
 {
-    u8 r3 = (gBagPositionStruct.pocket == BERRIES_POCKET) ? 3 : 2;
-    ConvertIntToDecimalStringN(gStringVar1, b, STR_CONV_MODE_LEADING_ZEROS, r3);
+    u8 numDigits = (gBagPositionStruct.pocket == BERRIES_POCKET) ? 3 : 2;
+    ConvertIntToDecimalStringN(gStringVar1, numSold, STR_CONV_MODE_LEADING_ZEROS, numDigits);
     StringExpandPlaceholders(gStringVar4, gText_xVar1);
-    AddTextPrinterParameterized(a, 1, gStringVar4, 0, 1, -1, 0);
-    PrintMoneyAmount(a, 0x26, 1, c, 0);
+    AddTextPrinterParameterized(windowId, 1, gStringVar4, 0, 1, -1, 0);
+    PrintMoneyAmount(windowId, 38, 1, moneyEarned, 0);
 }
 
 void Task_BagMenu(u8 taskId)
@@ -1961,7 +1961,7 @@ void sub_81AD730(u8 taskId)
     s16* data = gTasks[taskId].data;
     u8 windowId = BagMenu_AddWindow(8);
 
-    sub_81ABCC0(windowId, 1, (ItemId_GetPrice(gSpecialVar_ItemId) / 2) * data[8]);
+    PrintItemSoldAmount(windowId, 1, (ItemId_GetPrice(gSpecialVar_ItemId) / 2) * data[8]);
     bag_menu_AddMoney_window();
     gTasks[taskId].func = sub_81AD794;
 }
@@ -1972,7 +1972,7 @@ void sub_81AD794(u8 taskId)
 
     if (AdjustQuantityAccordingToDPadInput(&data[8], data[2]) == TRUE)
     {
-        sub_81ABCC0(gBagMenu->unk818, data[8], (ItemId_GetPrice(gSpecialVar_ItemId) / 2) * data[8]);
+        PrintItemSoldAmount(gBagMenu->unk818, data[8], (ItemId_GetPrice(gSpecialVar_ItemId) / 2) * data[8]);
     }
     else if (gMain.newKeys & A_BUTTON)
     {
