@@ -401,7 +401,7 @@ static void PrintAllBerryData(void)
 static void PrintBerryNumberAndName(void)
 {
     const struct Berry *berry = GetBerryInfo(sBerryTag->berryId);
-    ConvertIntToDecimalStringN(gStringVar1, sBerryTag->berryId, 2, 2);
+    ConvertIntToDecimalStringN(gStringVar1, sBerryTag->berryId, STR_CONV_MODE_LEADING_ZEROS, 2);
     StringCopy(gStringVar2, berry->name);
     StringExpandPlaceholders(gStringVar4, gText_UnkF908Var1Var2);
     PrintTextInBerryTagScreen(WIN_BERRY_NAME, gStringVar4, 0, 1, 0, 0);
@@ -421,8 +421,8 @@ static void PrintBerrySize(void)
         fraction = (inches % 100) / 10;
         inches /= 100;
 
-        ConvertIntToDecimalStringN(gStringVar1, inches, 0, 2);
-        ConvertIntToDecimalStringN(gStringVar2, fraction, 0, 2);
+        ConvertIntToDecimalStringN(gStringVar1, inches, STR_CONV_MODE_LEFT_ALIGN, 2);
+        ConvertIntToDecimalStringN(gStringVar2, fraction, STR_CONV_MODE_LEFT_ALIGN, 2);
         StringExpandPlaceholders(gStringVar4, gText_Var1DotVar2);
         AddTextPrinterParameterized(WIN_SIZE_FIRM, 1, gStringVar4, 0x28, 1, 0, NULL);
     }

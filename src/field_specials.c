@@ -1621,20 +1621,20 @@ void BufferLottoTicketNumber(void)
     else if (gSpecialVar_Result >= 1000)
     {
         gStringVar1[0] = CHAR_0;
-        ConvertIntToDecimalStringN(gStringVar1 + 1, gSpecialVar_Result, 0, CountDigits(gSpecialVar_Result));
+        ConvertIntToDecimalStringN(gStringVar1 + 1, gSpecialVar_Result, STR_CONV_MODE_LEFT_ALIGN, CountDigits(gSpecialVar_Result));
     }
     else if (gSpecialVar_Result >= 100)
     {
         gStringVar1[0] = CHAR_0;
         gStringVar1[1] = CHAR_0;
-        ConvertIntToDecimalStringN(gStringVar1 + 2, gSpecialVar_Result, 0, CountDigits(gSpecialVar_Result));
+        ConvertIntToDecimalStringN(gStringVar1 + 2, gSpecialVar_Result, STR_CONV_MODE_LEFT_ALIGN, CountDigits(gSpecialVar_Result));
     }
     else if (gSpecialVar_Result >= 10)
     {
         gStringVar1[0] = CHAR_0;
         gStringVar1[1] = CHAR_0;
         gStringVar1[2] = CHAR_0;
-        ConvertIntToDecimalStringN(gStringVar1 + 3, gSpecialVar_Result, 0, CountDigits(gSpecialVar_Result));
+        ConvertIntToDecimalStringN(gStringVar1 + 3, gSpecialVar_Result, STR_CONV_MODE_LEFT_ALIGN, CountDigits(gSpecialVar_Result));
     }
     else
     {
@@ -1642,7 +1642,7 @@ void BufferLottoTicketNumber(void)
         gStringVar1[1] = CHAR_0;
         gStringVar1[2] = CHAR_0;
         gStringVar1[3] = CHAR_0;
-        ConvertIntToDecimalStringN(gStringVar1 + 4, gSpecialVar_Result, 0, CountDigits(gSpecialVar_Result));
+        ConvertIntToDecimalStringN(gStringVar1 + 4, gSpecialVar_Result, STR_CONV_MODE_LEFT_ALIGN, CountDigits(gSpecialVar_Result));
     }
 }
 
