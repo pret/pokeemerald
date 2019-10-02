@@ -5,7 +5,7 @@
 #include "gpu_regs.h"
 #include "scanline_effect.h"
 #include "task.h"
-#include "alloc.h"
+#include "malloc.h"
 #include "decompress.h"
 #include "bg.h"
 #include "window.h"

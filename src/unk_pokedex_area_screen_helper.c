@@ -2,7 +2,7 @@
 #include "main.h"
 #include "menu.h"
 #include "bg.h"
-#include "alloc.h"
+#include "malloc.h"
 #include "palette.h"
 #include "unk_pokedex_area_screen_helper.h"
 

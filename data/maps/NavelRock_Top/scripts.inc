@@ -35,9 +35,9 @@ NavelRock_Top_EventScript_26916F:: @ 826916F
 	lockall
 	setvar VAR_TEMP_1, 1
 	special SpawnCameraObject
-	setvar VAR_0x8004, 3
-	setvar VAR_0x8005, 35
-	special sub_813B80C
+	setvar VAR_0x8004, 3  @ num loops
+	setvar VAR_0x8005, 35 @ delay
+	special LoopWingFlapSE
 	applymovement 1, NavelRock_Top_Movement_269243
 	applymovement EVENT_OBJ_ID_CAMERA, NavelRock_Top_Movement_269230
 	waitmovement 0
@@ -49,9 +49,9 @@ NavelRock_Top_EventScript_26916F:: @ 826916F
 	delay 30
 	waitmoncry
 	delay 60
-	setvar VAR_0x8004, 3
-	setvar VAR_0x8005, 35
-	special sub_813B80C
+	setvar VAR_0x8004, 3  @ num loops
+	setvar VAR_0x8005, 35 @ delay
+	special LoopWingFlapSE
 	applymovement EVENT_OBJ_ID_CAMERA, NavelRock_Top_Movement_269234
 	applymovement 1, NavelRock_Top_Movement_26923A
 	waitmovement 0

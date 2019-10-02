@@ -1,5 +1,5 @@
 #include "global.h"
-#include "alloc.h"
+#include "malloc.h"
 #include "bg.h"
 #include "data.h"
 #include "decompress.h"
@@ -2107,7 +2107,7 @@ static void sub_80C7BE4(void)
     center = GetStringCenterAlignXOffset(1, boxName, 64);
     AddTextPrinterParameterized3(windowId, 1, center, 1, gUnknown_08571734, TEXT_SPEED_FF, boxName);
 
-    ConvertIntToDecimalStringN(text, nPokemonInBox, 1, 2);
+    ConvertIntToDecimalStringN(text, nPokemonInBox, STR_CONV_MODE_RIGHT_ALIGN, 2);
     StringAppend(text, gUnknown_08571737);
     center = GetStringCenterAlignXOffset(1, text, 64);
     AddTextPrinterParameterized3(windowId, 1, center, 17, gUnknown_08571734, TEXT_SPEED_FF, text);

@@ -320,7 +320,7 @@ gSpecials:: @ 81DBA64
 	def_special GetShieldToyTVDecorationInfo
 	def_special IsPokerusInParty
 	def_special SetSootopolisGymCrackedIceMetatiles
-	def_special sub_8139560
+	def_special ShakeCamera
 	def_special StartGroudonKyogreBattle
 	def_special BattleSetup_StartLegendaryBattle
 	def_special StartRegiBattle
@@ -414,7 +414,7 @@ gSpecials:: @ 81DBA64
 	def_special GetContestLadyMonSpecies
 	def_special GetContestLadyCategory
 	def_special PutLilycoveContestLadyShowOnTheAir
-	def_special sub_813B880
+	def_special CloseBattlePikeCurtain
 	def_special CallApprenticeFunction
 	def_special ShouldTryGetTrainerScript
 	def_special ShowMapNamePopup
@@ -440,7 +440,7 @@ gSpecials:: @ 81DBA64
 	def_special sub_802E3C4
 	def_special sub_8027A5C
 	def_special sub_8027AAC
-	def_special sub_8139980
+	def_special OffsetCameraForBattle
 	def_special GetDeptStoreDefaultFloorChoice
 	def_special BufferVarsForIVRater
 	def_special sub_80F905C
@@ -505,7 +505,7 @@ gSpecials:: @ 81DBA64
 	def_special sub_80A08CC
 	def_special Unused_SetWeatherSunny
 	def_special sub_81AFDA0
-	def_special sub_813B4E0
+	def_special IsTrainerRegistered
 	def_special ShouldDoBrailleRegicePuzzle
 	def_special EnableNationalPokedex
 	def_special ScriptMenu_CreateLilycoveSSTidalMultichoice
@@ -517,7 +517,7 @@ gSpecials:: @ 81DBA64
 	def_special sub_813B534
 	def_special CallTrainerHillFunction
 	def_special Script_DoRayquazaScene @ Listed twice
-	def_special sub_813B80C
+	def_special LoopWingFlapSE
 	def_special sub_81D4BEC
 	def_special sub_80224D0
 	def_special TryBufferWaldaPhrase
