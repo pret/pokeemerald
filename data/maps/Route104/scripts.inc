@@ -870,8 +870,8 @@ Route104_EventScript_1ED38D:: @ 81ED38D
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
 	goto_if_eq Route104_EventScript_1ED424
-	setvar VAR_0x8004, 604
-	specialvar VAR_RESULT, sub_813B4E0
+	setvar VAR_0x8004, TRAINER_HALEY_1
+	specialvar VAR_RESULT, IsTrainerRegistered
 	compare VAR_RESULT, 0
 	goto_if_eq Route104_EventScript_1ED3F8
 	msgbox Route104_Text_295689, MSGBOX_DEFAULT
@@ -913,8 +913,8 @@ Route104_EventScript_1ED43B:: @ 81ED43B
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
 	goto_if_eq Route104_EventScript_1ED4D2
-	setvar VAR_0x8004, 136
-	specialvar VAR_RESULT, sub_813B4E0
+	setvar VAR_0x8004, TRAINER_WINSTON_1
+	specialvar VAR_RESULT, IsTrainerRegistered
 	compare VAR_RESULT, 0
 	goto_if_eq Route104_EventScript_1ED4A6
 	msgbox Route104_Text_2958C1, MSGBOX_DEFAULT
@@ -956,8 +956,8 @@ Route104_EventScript_1ED4E9:: @ 81ED4E9
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
 	goto_if_eq Route104_EventScript_1ED580
-	setvar VAR_0x8004, 114
-	specialvar VAR_RESULT, sub_813B4E0
+	setvar VAR_0x8004, TRAINER_CINDY_1
+	specialvar VAR_RESULT, IsTrainerRegistered
 	compare VAR_RESULT, 0
 	goto_if_eq Route104_EventScript_1ED554
 	msgbox Route104_Text_295AC3, MSGBOX_DEFAULT

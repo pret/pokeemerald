@@ -34,18 +34,18 @@ NavelRock_Bottom_EventScript_2692A2:: @ 82692A2
 	waitse
 	delay 20
 	playse SE_T_AME_E
-	setvar VAR_0x8004, 0
-	setvar VAR_0x8005, 3
-	setvar VAR_0x8006, 4
-	setvar VAR_0x8007, 2
-	special sub_8139560
+	setvar VAR_0x8004, 0  @ vertical pan
+	setvar VAR_0x8005, 3  @ horizontal pan
+	setvar VAR_0x8006, 4  @ num shakes
+	setvar VAR_0x8007, 2  @ shake delay
+	special ShakeCamera
 	delay 30
 	playse SE_T_AME_E
-	setvar VAR_0x8004, 0
-	setvar VAR_0x8005, 3
-	setvar VAR_0x8006, 4
-	setvar VAR_0x8007, 2
-	special sub_8139560
+	setvar VAR_0x8004, 0  @ vertical pan
+	setvar VAR_0x8005, 3  @ horizontal pan
+	setvar VAR_0x8006, 4  @ num shakes
+	setvar VAR_0x8007, 2  @ shake delay
+	special ShakeCamera
 	delay 30
 	delay 50
 	waitse
