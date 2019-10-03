@@ -2347,8 +2347,8 @@ void sub_8013F90(u8 taskId)
         {
             memcpy(gUnknown_020321C0, gBlockRecvBuffer[GetMultiplayerId() ^ 1], sizeof(struct MailStruct) * PARTY_SIZE);
             ResetBlockReceivedFlags();
-            gUnknown_02032298[0] = monId;
-            gUnknown_02032298[1] = 6;
+            gSelectedTradeMonPositions[0] = monId;
+            gSelectedTradeMonPositions[1] = PARTY_SIZE;
             gMain.savedCallback = CB2_ReturnToField;
             SetMainCallback2(sub_807AE50);
             sub_801807C(&gUnknown_02022C40);

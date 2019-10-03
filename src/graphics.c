@@ -1518,13 +1518,10 @@ asm(".space 0x20"); //blank palette??
 
 // more trade stuff?
 
-const u16 gUnknown_08DDB3E4[] = INCBIN_U16("graphics/trade/menu.gbapal");
-
+const u16 gTradeMenu_Pal[] = INCBIN_U16("graphics/trade/menu.gbapal");
 const u16 gUnknown_08DDB444[] = INCBIN_U16("graphics/unknown/unknown_DDB444.gbapal");
-
-const u8 gUnknown_08DDB464[] = INCBIN_U8("graphics/trade/menu.4bpp");
-
-const u8 gUnknown_08DDC6E4[] = INCBIN_U8("graphics/trade/buttons.4bpp");
+const u8 gTradeMenu_Gfx[] = INCBIN_U8("graphics/trade/menu.4bpp");
+const u8 gTradeButtons_Gfx[] = INCBIN_U8("graphics/trade/buttons.4bpp");
 
 const u16 gUnused_DDCEE4[] = INCBIN_U16("graphics/unused/unused_DDCEE4.bin");
 

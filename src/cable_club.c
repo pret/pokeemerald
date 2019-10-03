@@ -1084,8 +1084,8 @@ static void sub_80B37FC(u8 taskId)
             task->data[0]++;
         break;
     case 2:
-        gUnknown_02032298[0] = 0;
-        gUnknown_02032298[1] = 0;
+        gSelectedTradeMonPositions[0] = 0;
+        gSelectedTradeMonPositions[1] = 0;
         m4aMPlayAllStop();
         sub_800AC34();
         task->data[0]++;
@@ -1117,8 +1117,8 @@ static void sub_80B3894(u8 taskId)
             data[0]++;
         break;
     case 2:
-        gUnknown_02032298[0] = 0;
-        gUnknown_02032298[1] = 0;
+        gSelectedTradeMonPositions[0] = 0;
+        gSelectedTradeMonPositions[1] = 0;
         m4aMPlayAllStop();
         sub_800ADF8();
         data[0]++;
