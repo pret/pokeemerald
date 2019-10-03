@@ -1540,7 +1540,7 @@ static const u8 gHandCursorTiles[] = INCBIN_U8("graphics/pokemon_storage/hand_cu
 static const u8 gHandCursorShadowTiles[] = INCBIN_U8("graphics/pokemon_storage/hand_cursor_shadow.4bpp");
 
 // code
-void sub_80C6D80(const u8 *string, void *dst, u8 arg2, u8 arg3, s32 arg4)
+void sub_80C6D80(const u8 *string, void *dst, u8 zero1, u8 zero2, s32 arg4)
 {
     s32 i, val, val2;
     u16 windowId;
@@ -1551,14 +1551,14 @@ void sub_80C6D80(const u8 *string, void *dst, u8 arg2, u8 arg3, s32 arg4)
     winTemplate.width = 24;
     winTemplate.height = 2;
     windowId = AddWindow(&winTemplate);
-    FillWindowPixelBuffer(windowId, PIXEL_FILL(arg3));
+    FillWindowPixelBuffer(windowId, PIXEL_FILL(zero2));
     tileData1 = (u8*) GetWindowAttribute(windowId, WINDOW_TILE_DATA);
     tileData2 = (winTemplate.width * 32) + tileData1;
 
-    if (!arg2)
-        txtColor[0] = 0;
+    if (!zero1)
+        txtColor[0] = TEXT_COLOR_TRANSPARENT;
     else
-        txtColor[0] = arg3;
+        txtColor[0] = zero2;
     txtColor[1] = 0xF;
     txtColor[2] = 0xE;
     AddTextPrinterParameterized4(windowId, 1, 0, 1, 0, 0, txtColor, -1, string);
@@ -1580,7 +1580,7 @@ void sub_80C6D80(const u8 *string, void *dst, u8 arg2, u8 arg3, s32 arg4)
     }
 
     if (val2 > 0)
-        CpuFill16((arg3 << 4) | arg3, dst, (u32)(val2) * 0x100);
+        CpuFill16((zero2 << 4) | zero2, dst, (u32)(val2) * 0x100);
 
     RemoveWindow(windowId);
 }

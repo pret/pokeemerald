@@ -2,6 +2,7 @@
 #define GUARD_TRADE_H
 
 #include "link_rfu.h"
+#include "constants/trade.h"
 
 // Exported type declarations
 
@@ -21,6 +22,6 @@ int sub_807A918(struct Pokemon*, u16);
 void sub_807B140(void);
 void sub_807B154(void);
 void sub_807F19C(void);
-void sub_807F1A8(u8, const u8 *, u8);
+void DrawTextOnTradeWindow(u8, const u8 *, u8);
 
 #endif //GUARD_TRADE_H

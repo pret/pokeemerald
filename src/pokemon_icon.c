@@ -1302,7 +1302,7 @@ void sub_80D328C(struct Sprite *sprite)
     DestroySprite(sprite);
 }
 
-void sub_80D32C8(struct Sprite *sprite, u8 animNum)
+void SetPartyHPBarSprite(struct Sprite *sprite, u8 animNum)
 {
     sprite->animNum = animNum;
     sprite->animDelayCounter = 0;

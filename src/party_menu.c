@@ -4983,19 +4983,19 @@ static void sub_81B5A8C(u8 spriteId, u16 hp, u16 maxhp)
     switch (GetHPBarLevel(hp, maxhp))
     {
     case HP_BAR_FULL:
-        sub_80D32C8(&gSprites[spriteId], 0);
+        SetPartyHPBarSprite(&gSprites[spriteId], 0);
         break;
     case HP_BAR_GREEN:
-        sub_80D32C8(&gSprites[spriteId], 1);
+        SetPartyHPBarSprite(&gSprites[spriteId], 1);
         break;
     case HP_BAR_YELLOW:
-        sub_80D32C8(&gSprites[spriteId], 2);
+        SetPartyHPBarSprite(&gSprites[spriteId], 2);
         break;
     case HP_BAR_RED:
-        sub_80D32C8(&gSprites[spriteId], 3);
+        SetPartyHPBarSprite(&gSprites[spriteId], 3);
         break;
     default:
-        sub_80D32C8(&gSprites[spriteId], 4);
+        SetPartyHPBarSprite(&gSprites[spriteId], 4);
         break;
     }
 }

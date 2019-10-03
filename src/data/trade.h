@@ -7,6 +7,7 @@ static const u32 sUnref_0832C6A8[] =
     0x00000064,
     0x00000528
 };
+
 static const u16 gTradeMovesBoxTilemap[] = INCBIN_U16("graphics/trade/moves_box_map.bin");
 static const u16 gTradePartyBoxTilemap[] = INCBIN_U16("graphics/trade/party_box_map.bin");
 static const u8 gTradeStripesBG2Tilemap[] = INCBIN_U8("graphics/trade/stripes_bg2_map.bin");
@@ -24,19 +25,19 @@ static const u8 gText_ThreeDashes2[] = _("---");
 static const u8 gText_FourQuestionMarks[] = _("????");
 static const u8 gText_832DAE4[] = _("");
 static const u8 gText_IsThisTradeOkay[] = _("Is this trade okay?");
-static const u8 gText_Cancel6[] = _("CANCEL");
-static const u8 gText_ChooseAPkmn[] = _("Choose a POKéMON.");
-static const u8 gText_Summary3[] = _("SUMMARY");
-static const u8 gText_Trade2[] = _("TRADE");
-static const u8 gText_CancelTrade[] = _("Cancel trade?");
-static const u8 gJPText_832DB2E[] = _("Bボタン　で　もどります");
-static const u8 gText_Summary4[] = _("SUMMARY");
-static const u8 gText_Trade3[] = _("TRADE");
-static const u8 gText_CommunicationStandby6[] = _("{COLOR DARK_GREY}{HIGHLIGHT WHITE}{SHADOW LIGHT_GREY}Communication standby…\nPlease wait.");
-static const u8 gText_TheTradeHasBeenCanceled[] = _("{COLOR DARK_GREY}{HIGHLIGHT WHITE}{SHADOW LIGHT_GREY}The trade has\nbeen canceled.");
-static const u8 gText_YourOnlyPkmnForBattle[] = _("That's your only\nPOKéMON for battle.");
-static const u8 gText_WaitingForYourFriend[] = _("{COLOR DARK_GREY}{HIGHLIGHT WHITE}{SHADOW LIGHT_GREY}Waiting for your friend\nto finish…");
-static const u8 gText_YourFriendWantsToTrade[] = _("Your friend wants\nto trade POKéMON.");
+static const u8 sText_Cancel[] = _("CANCEL");
+static const u8 sText_ChooseAPkmn[] = _("Choose a POKéMON.");
+static const u8 sText_Summary[] = _("SUMMARY");
+static const u8 sText_Trade[] = _("TRADE");
+static const u8 sText_CancelTrade[] = _("Cancel trade?");
+static const u8 sJPText_PressBButtonToQuit[] = _("Bボタン　で　もどります");
+static const u8 sText_Summary2[] = _("SUMMARY");
+static const u8 sText_Trade2[] = _("TRADE");
+static const u8 sText_CommunicationStandby[] = _("{COLOR DARK_GREY}{HIGHLIGHT WHITE}{SHADOW LIGHT_GREY}Communication standby…\nPlease wait.");
+static const u8 sText_TheTradeHasBeenCanceled[] = _("{COLOR DARK_GREY}{HIGHLIGHT WHITE}{SHADOW LIGHT_GREY}The trade has\nbeen canceled.");
+static const u8 sText_OnlyPkmnForBattle[] = _("That's your only\nPOKéMON for battle.");
+static const u8 sText_WaitingForYourFriend[] = _("{COLOR DARK_GREY}{HIGHLIGHT WHITE}{SHADOW LIGHT_GREY}Waiting for your friend\nto finish…");
+static const u8 sText_YourFriendWantsToTrade[] = _("Your friend wants\nto trade POKéMON.");
 
 static const struct OamData gOamData_832DC14 =
 {
@@ -336,35 +337,41 @@ static const u8 sUnref_0832DE6E[] =
     0x17, 0x0c
 };
 
-static const u8 *const gUnknown_0832DE94[] =
+static const u8 *const sTradeActionTexts[] =
 {
-    gText_Cancel6,
-    gText_ChooseAPkmn,
-    gText_Summary3,
-    gText_Trade2,
-    gText_CancelTrade,
-    gJPText_832DB2E
+    [TRADE_ACTION_TEXT_CANCEL]       = sText_Cancel,
+    [TRADE_ACTION_TEXT_CHOOSE_MON]   = sText_ChooseAPkmn,
+    [TRADE_ACTION_TEXT_SUMMARY]      = sText_Summary,
+    [TRADE_ACTION_TEXT_TRADE]        = sText_Trade,
+    [TRADE_ACTION_TEXT_CANCEL_TRADE] = sText_CancelTrade,
+    [TRADE_ACTION_TEXT_JP_QUIT]      = sJPText_PressBButtonToQuit
 };
 
-static const struct MenuAction gUnknown_0832DEAC[] =
+static const struct MenuAction sSelectTradeMonActions[] =
 {
-    {gText_Summary4, sub_807A000},
-    {gText_Trade3, sub_807A024}
+    [MENU_ACTION_SUMMARY] = {sText_Summary2, sub_807A000},
+    [MENU_ACTION_TRADE]   = {sText_Trade2, sub_807A024}
 };
 
-static const u8 *const gUnknown_0832DEBC[] = {
-    gText_CommunicationStandby6,
-    gText_TheTradeHasBeenCanceled,
-    gText_YourOnlyPkmnForBattle,
-    gText_OnlyPkmnForBattle,
-    gText_WaitingForYourFriend,
-    gText_YourFriendWantsToTrade,
-    gText_PkmnCantBeTradedNow,
-    gText_EggCantBeTradedNow,
-    gText_OtherTrainersPkmnCantBeTraded
+static const u8 *const sTradeMessageTexts[] = 
+{
+    [TRADE_MSG_STANDBY]                    = sText_CommunicationStandby,
+    [TRADE_MSG_CANCELED]                   = sText_TheTradeHasBeenCanceled,
+    [TRADE_MSG_ONLY_MON1]                  = sText_OnlyPkmnForBattle,
+    [TRADE_MSG_ONLY_MON2]                  = gText_OnlyPkmnForBattle, //identical text to above
+    [TRADE_MSG_WAITING_FOR_FRIEND]         = sText_WaitingForYourFriend,
+    [TRADE_MSG_FRIEND_WANTS_TO_TRADE]      = sText_YourFriendWantsToTrade,
+    [TRADE_MSG_MON_CANT_BE_TRADED]         = gText_PkmnCantBeTradedNow,
+    [TRADE_MSG_EGG_CANT_BE_TRADED]         = gText_EggCantBeTradedNow,
+    [TRADE_MSG_FRIENDS_MON_CANT_BE_TRADED] = gText_OtherTrainersPkmnCantBeTraded
 };
 
-static const u8 gUnknown_0832DEE0[] = { 0, 1, 2 };
+static const u8 sTradeTextColors[] = 
+{ 
+    TEXT_COLOR_TRANSPARENT, //bg color
+    TEXT_COLOR_WHITE,       //fg color
+    TEXT_COLOR_DARK_GREY    //shadow color
+};
 
 static const struct BgTemplate gUnknown_0832DEE4[] =
 {
@@ -573,7 +580,7 @@ static const struct WindowTemplate gUnknown_0832DEF4[] =
     DUMMY_WIN_TEMPLATE,
 };
 
-static const struct WindowTemplate gUnknown_0832DF8C =
+static const struct WindowTemplate sTradeYesNoWindowTemplate =
 {
     .bg = 0,
     .tilemapLeft = 23,
@@ -584,7 +591,7 @@ static const struct WindowTemplate gUnknown_0832DF8C =
     .baseBlock = 582
 };
 
-static const u8 gJPText_Shedinja[] = _("ヌケニン");
+static const u8 sJPText_Shedinja[] = _("ヌケニン");
 static const u8 gUnknown_0832DF99[][2] =
 {
     {4,  3},
@@ -592,20 +599,20 @@ static const u8 gUnknown_0832DF99[][2] =
     {0,  0}
 };
 
-static const u16 gTradeBallPalette[] = INCBIN_U16("graphics/trade/ball.gbapal");
-static const u8 gTradeBallTiles[] = INCBIN_U8("graphics/trade/ball.4bpp");
-static const u8 gUnknown_832E5C0[] = INCBIN_U8("graphics/trade/pokeball_symbol.8bpp");
-static const u16 gUnknown_0832FFC0[] = INCBIN_U16("graphics/trade/cable_closeup_map.bin");
-static const u16 gUnknown_083307C0[] = INCBIN_U16("graphics/trade/pokeball_symbol_map.bin");
+static const u16 sTradePal_Ball[] = INCBIN_U16("graphics/trade/ball.gbapal");
+static const u8 sTradeGfx_Ball[] = INCBIN_U8("graphics/trade/ball.4bpp");
+static const u8 sTradeGfx_PokeBallSymbol[] = INCBIN_U8("graphics/trade/pokeball_symbol.8bpp"); // unused?
+static const u16 sTradeTilemap_Cable[] = INCBIN_U16("graphics/trade/cable_closeup_map.bin");
+static const u16 sTradeTilemap_PokeBallSymbol[] = INCBIN_U16("graphics/trade/pokeball_symbol_map.bin"); // unused?
 static const u16 sUnref_083308C0[] = INCBIN_U16("graphics/trade/unknown_3308C0.gbapal");
-static const u16 gUnknown_083308E0[] = INCBIN_U16("graphics/trade/gba.gbapal");
-static const u16 gUnref_08330900[] = INCBIN_U16("graphics/trade/shadow.gbapal");
-static const u16 gUnref_08330920[] = INCBIN_U16("graphics/trade/black.gbapal");
-static const u16 gUnknown_08330940[] = INCBIN_U16("graphics/trade/misc.gbapal");
-static const u8 gTradeGlow1Tiles[] = INCBIN_U8("graphics/trade/glow1.4bpp");
-static const u8 gTradeGlow2Tiles[] = INCBIN_U8("graphics/trade/glow2.4bpp");
-static const u8 gTradeCableEndTiles[] = INCBIN_U8("graphics/trade/cable_end.4bpp");
-static const u8 gTradeGBAScreenTiles[] = INCBIN_U8("graphics/trade/gba_screen.4bpp");
+static const u16 sTradePal_Gba[] = INCBIN_U16("graphics/trade/gba.gbapal");
+static const u16 sTradePal_ShadowUnused[] = INCBIN_U16("graphics/trade/shadow.gbapal");
+static const u16 sTradePal_BlackUnused[] = INCBIN_U16("graphics/trade/black.gbapal");
+static const u16 sTradePal_Misc[] = INCBIN_U16("graphics/trade/misc.gbapal");
+static const u8 sTradeGfx_Glow1[] = INCBIN_U8("graphics/trade/glow1.4bpp");
+static const u8 sTradeGfx_Glow2[] = INCBIN_U8("graphics/trade/glow2.4bpp");
+static const u8 sTradeGfx_CableEnd[] = INCBIN_U8("graphics/trade/cable_end.4bpp");
+static const u8 sTradeGfx_GbaScreen[] = INCBIN_U8("graphics/trade/gba_screen.4bpp");
 const u16 gUnknown_08331F60[] = INCBIN_U16("graphics/trade/shadow_map.bin");
 static const u8 gUnknown_08332F60[] = INCBIN_U8("graphics/trade/gba_affine.8bpp");
 static const u8 sFiller_08335760[64] = {};
@@ -614,11 +621,11 @@ static const u8 gUnknown_083358A0[] = INCBIN_U8("graphics/trade/gba_affine_map_w
 static const u16 gUnknown_083359A0[] = INCBIN_U16("graphics/trade/gba_map_wireless.bin");
 static const u16 gUnknown_083369A0[] = INCBIN_U16("graphics/trade/gba_map_cable.bin");
 static const u32 gUnknown_083379A0[] = INCBIN_U32("graphics/trade/unknown_3379A0.bin.lz");
-static const u16 gUnknown_08337AA0[] = INCBIN_U16("graphics/trade/wireless_signal_send.gbapal");
-static const u16 gUnknown_08337CA0[] = INCBIN_U16("graphics/trade/wireless_signal_receive.gbapal");
-static const u16 gUnknown_08337EA0[] = INCBIN_U16("graphics/trade/black.gbapal");
-static const u32 gUnknown_08337EC0[] = INCBIN_U32("graphics/trade/wireless_signal.4bpp.lz");
-static const u32 gUnknown_08338550[] = INCBIN_U32("graphics/trade/wireless_signal.bin.lz");
+static const u16 sTradePal_WirelessSignalSend[] = INCBIN_U16("graphics/trade/wireless_signal_send.gbapal");
+static const u16 sTradePal_WirelessSignalReceive[] = INCBIN_U16("graphics/trade/wireless_signal_receive.gbapal");
+static const u16 sTradePal_Black[] = INCBIN_U16("graphics/trade/black.gbapal");
+static const u32 sTradeGfx_WirelessSignal[] = INCBIN_U32("graphics/trade/wireless_signal.4bpp.lz");
+static const u32 sTradeTilemap_WirelessSignal[] = INCBIN_U32("graphics/trade/wireless_signal.bin.lz");
 
 static const struct OamData gOamData_8338C44 =
 {
@@ -700,14 +707,14 @@ static const union AffineAnimCmd *const gSpriteAffineAnimTable_8338D0C[] =
 
 static const struct SpriteSheet gUnknown_08338D18 =
 {
-    .data = gTradeBallTiles,
+    .data = sTradeGfx_Ball,
     .size = 0x600,
     .tag = 5557
 };
 
 static const struct SpritePalette gUnknown_08338D20 =
 {
-    .data = gTradeBallPalette,
+    .data = sTradePal_Ball,
     .tag = 5558
 };
 
@@ -756,20 +763,20 @@ static const union AffineAnimCmd *const gSpriteAffineAnimTable_8338D6C[] =
 
 static const struct SpriteSheet gUnknown_08338D70 =
 {
-    .data = gTradeGlow1Tiles,
+    .data = sTradeGfx_Glow1,
     .size = 0x200,
     .tag = 5550
 };
 
 static const struct SpritePalette gUnknown_08338D78 =
 {
-    .data = gUnknown_08330940,
+    .data = sTradePal_Misc,
     .tag = 5551
 };
 
 static const struct SpritePalette gUnknown_08338D80 =
 {
-    .data = gUnknown_083308E0,
+    .data = sTradePal_Gba,
     .tag = 5555
 };
 
@@ -811,7 +818,7 @@ static const union AnimCmd *const gSpriteAnimTable_8338DB8[] =
 
 static const struct SpriteSheet gUnknown_08338DC0 =
 {
-    .data = gTradeGlow2Tiles,
+    .data = sTradeGfx_Glow2,
     .size = 0x300,
     .tag = 5552
 };
@@ -847,7 +854,7 @@ static const union AnimCmd *const gSpriteAnimTable_8338DF0[] =
 
 static const struct SpriteSheet gUnknown_08338DF4 =
 {
-    .data = gTradeCableEndTiles,
+    .data = sTradeGfx_CableEnd,
     .size = 0x100,
     .tag = 5554
 };
@@ -908,7 +915,7 @@ static const union AnimCmd *const gSpriteAnimTable_8338E68[] =
 
 static const struct SpriteSheet gUnknown_08338E6C =
 {
-    .data = gTradeGBAScreenTiles,
+    .data = sTradeGfx_GbaScreen,
     .size = 0x1000,
     .tag = 5556
 };
@@ -1016,7 +1023,7 @@ static const struct InGameTrade sIngameTrades[] =
     }
 };
 
-static const u16 gIngameTradeMail[][10] =
+static const u16 sIngameTradeMail[][INGAME_TRADE_MAIL_LENGTH + 1] =
 {
     {
         EC_WORD_BE,
