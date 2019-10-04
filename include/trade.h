@@ -7,7 +7,7 @@
 // Exported type declarations
 
 // Exported RAM declarations
-extern struct MailStruct gUnknown_020321C0[PARTY_SIZE];
+extern struct MailStruct gTradeMail[PARTY_SIZE];
 extern u8 gSelectedTradeMonPositions[2];
 
 // Exported ROM declarations

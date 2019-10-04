@@ -592,11 +592,10 @@ static const struct WindowTemplate sTradeYesNoWindowTemplate =
 };
 
 static const u8 sJPText_Shedinja[] = _("ヌケニン");
-static const u8 gUnknown_0832DF99[][2] =
+static const u8 sTradeMenuPartyMonBoxDimensions[3][2] =
 {
-    {4,  3},
-    {19, 3},
-    {0,  0}
+    [TRADE_PLAYER]  = {4,  3},
+    [TRADE_PARTNER] = {19, 3}
 };
 
 static const u16 sTradePal_Ball[] = INCBIN_U16("graphics/trade/ball.gbapal");
@@ -614,13 +613,13 @@ static const u8 sTradeGfx_Glow2[] = INCBIN_U8("graphics/trade/glow2.4bpp");
 static const u8 sTradeGfx_CableEnd[] = INCBIN_U8("graphics/trade/cable_end.4bpp");
 static const u8 sTradeGfx_GbaScreen[] = INCBIN_U8("graphics/trade/gba_screen.4bpp");
 const u16 gUnknown_08331F60[] = INCBIN_U16("graphics/trade/shadow_map.bin");
-static const u8 gUnknown_08332F60[] = INCBIN_U8("graphics/trade/gba_affine.8bpp");
+static const u8 sTradeAffine_Gba[] = INCBIN_U8("graphics/trade/gba_affine.8bpp");
 static const u8 sFiller_08335760[64] = {};
-static const u8 gUnknown_083357A0[] = INCBIN_U8("graphics/trade/gba_affine_map_cable.bin");
-static const u8 gUnknown_083358A0[] = INCBIN_U8("graphics/trade/gba_affine_map_wireless.bin");
-static const u16 gUnknown_083359A0[] = INCBIN_U16("graphics/trade/gba_map_wireless.bin");
-static const u16 gUnknown_083369A0[] = INCBIN_U16("graphics/trade/gba_map_cable.bin");
-static const u32 gUnknown_083379A0[] = INCBIN_U32("graphics/trade/unknown_3379A0.bin.lz");
+static const u8 sTradeAffineMap_GbaCable[] = INCBIN_U8("graphics/trade/gba_affine_map_cable.bin");
+static const u8 sTradeAffineMap_GbaWireless[] = INCBIN_U8("graphics/trade/gba_affine_map_wireless.bin");
+static const u16 sTradeTilemap_GbaWireless[] = INCBIN_U16("graphics/trade/gba_map_wireless.bin");
+static const u16 sTradeTilemap_GbaCable[] = INCBIN_U16("graphics/trade/gba_map_cable.bin");
+static const u32 gUnknown_083379A0[] = INCBIN_U32("graphics/trade/unknown_3379A0.bin.lz"); //some wireless tilemap
 static const u16 sTradePal_WirelessSignalSend[] = INCBIN_U16("graphics/trade/wireless_signal_send.gbapal");
 static const u16 sTradePal_WirelessSignalReceive[] = INCBIN_U16("graphics/trade/wireless_signal_receive.gbapal");
 static const u16 sTradePal_Black[] = INCBIN_U16("graphics/trade/black.gbapal");
