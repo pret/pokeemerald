@@ -346,6 +346,7 @@ static void sub_80B2918(u8 taskId)
         HideFieldMessageBox();
         gTasks[taskId].func = sub_80B2CB0;
     }
+    // EXCHANGE_STAT_4 or EXCHANGE_STAT_5 in sub_80B2478
     else if (gSpecialVar_Result == 7 || gSpecialVar_Result == 9)
     {
         CloseLink();
@@ -393,6 +394,7 @@ static void sub_80B2A08(u8 taskId)
         HideFieldMessageBox();
         gTasks[taskId].func = sub_80B2CB0;
     }
+    // EXCHANGE_STAT_4 or EXCHANGE_STAT_5 in sub_80B2478
     else if (gSpecialVar_Result == 7 || gSpecialVar_Result == 9)
     {
         CloseLink();

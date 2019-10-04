@@ -1196,17 +1196,17 @@ struct
     [FIELD_MOVE_SWEET_SCENT] = {SetUpFieldMove_SweetScent, 0x0d},
 };
 
-static const u8 *const gUnknown_08615E0C[] =
+static const u8 *const sUnionRoomTradeMessages[] =
 {
-    gText_NotPkmnOtherTrainerWants,
-    gText_ThatIsntAnEgg,
-    gText_PkmnCantBeTradedNow,
-    gText_PkmnCantBeTradedNow,
-    gText_OtherTrainersPkmnCantBeTraded,
-    gText_EggCantBeTradedNow,
-    gText_OtherTrainerCantAcceptPkmn,
-    gText_CantTradeWithTrainer,
-    gText_CantTradeWithTrainer,
+    [UR_TRADE_MSG_NOT_MON_PARTNER_WANTS - 1]       = gText_NotPkmnOtherTrainerWants,
+    [UR_TRADE_MSG_NOT_EGG - 1]                     = gText_ThatIsntAnEgg,
+    [UR_TRADE_MSG_MON_CANT_BE_TRADED_1 - 1]        = gText_PkmnCantBeTradedNow,
+    [UR_TRADE_MSG_MON_CANT_BE_TRADED_2 - 1]        = gText_PkmnCantBeTradedNow,
+    [UR_TRADE_MSG_PARTNERS_MON_CANT_BE_TRADED - 1] = gText_OtherTrainersPkmnCantBeTraded,
+    [UR_TRADE_MSG_EGG_CANT_BE_TRADED -1]           = gText_EggCantBeTradedNow,
+    [UR_TRADE_MSG_PARTNER_CANT_ACCEPT_MON - 1]     = gText_OtherTrainerCantAcceptPkmn,
+    [UR_TRADE_MSG_CANT_TRADE_WITH_PARTNER_1 - 1]   = gText_CantTradeWithTrainer,
+    [UR_TRADE_MSG_CANT_TRADE_WITH_PARTNER_2 - 1]   = gText_CantTradeWithTrainer,
 };
 
 static const u32 sHeldItemGfx[] = INCBIN_U32("graphics/interface/hold_icons.4bpp");
@@ -4661,11 +4661,11 @@ static void CursorCb_Trade1(u8 taskId)
     u16 species2 = GetMonData(&gPlayerParty[gUnknown_0203CEC8.slotId], MON_DATA_SPECIES2);
     u16 species = GetMonData(&gPlayerParty[gUnknown_0203CEC8.slotId], MON_DATA_SPECIES);
     u8 obedience = GetMonData(&gPlayerParty[gUnknown_0203CEC8.slotId], MON_DATA_OBEDIENCE);
-    u32 stringId = sub_807A7E0(*(struct UnkLinkRfuStruct_02022B14Substruct *)sub_800F7DC(), gUnknown_02022C38, species2, gUnknown_02022C3C, gUnknown_02022C3E, species, obedience);
+    u32 stringId = GetUnionRoomTradeMessageId(*(struct UnkLinkRfuStruct_02022B14Substruct *)sub_800F7DC(), gUnknown_02022C38, species2, gUnionRoomOfferedSpecies, gUnionRoomRequestedMonType, species, obedience);
 
-    if (stringId != 0)
+    if (stringId != UR_TRADE_MSG_NONE)
     {
-        StringExpandPlaceholders(gStringVar4, gUnknown_08615E0C[stringId - 1]);
+        StringExpandPlaceholders(gStringVar4, sUnionRoomTradeMessages[stringId - 1]);
         PlaySE(SE_HAZURE);
         sub_81B302C(&gUnknown_0203CEC4->windowId[0]);
         sub_81B302C(&gUnknown_0203CEC4->windowId[1]);

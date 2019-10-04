@@ -2165,9 +2165,9 @@ void sub_800DD94(struct UnkLinkRfuStruct_02022B14 *data, u8 r9, bool32 r2, s32 r
     data->unk_00.unk_00_4 = 0;
     data->unk_00.unk_00_5 = 0;
     data->unk_00.unk_00_6 = 0;
-    data->unk_00.unk_00_7 = FlagGet(FLAG_IS_CHAMPION);
-    data->unk_00.unk_01_0 = IsNationalPokedexEnabled();
-    data->unk_00.unk_01_1 = FlagGet(FLAG_SYS_GAME_CLEAR);
+    data->unk_00.isChampion = FlagGet(FLAG_IS_CHAMPION);
+    data->unk_00.hasNationalDex = IsNationalPokedexEnabled();
+    data->unk_00.gameClear = FlagGet(FLAG_SYS_GAME_CLEAR);
 }
 
 bool8 sub_800DE7C(struct UnkLinkRfuStruct_02022B14 *buff1, u8 *buff2, u8 idx)
@@ -4259,7 +4259,7 @@ void sub_8010FCC(u32 a0, u32 a1, u32 a2)
 {
     gUnknown_02022B14.type = a0;
     gUnknown_02022B14.species = a1;
-    gUnknown_02022B14.unk_0b_1 = a2;
+    gUnknown_02022B14.level = a2;
 }
 
 u8 sub_801100C(s32 a0)
@@ -4979,7 +4979,7 @@ bool32 sub_801200C(s16 a1, struct UnkLinkRfuStruct_02022B14 *structPtr)
                 return TRUE;
         }
         else if (structPtr->species != structPtr2->species
-                 || structPtr->unk_0b_1 != structPtr2->unk_0b_1
+                 || structPtr->level != structPtr2->level
                  || structPtr->type != structPtr2->type)
         {
             return TRUE;

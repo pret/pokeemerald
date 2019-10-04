@@ -353,7 +353,7 @@ static const struct MenuAction sSelectTradeMonActions[] =
     [MENU_ACTION_TRADE]   = {sText_Trade2, sub_807A024}
 };
 
-static const u8 *const sTradeMessageTexts[] = 
+static const u8 *const sTradeMessages[] = 
 {
     [TRADE_MSG_STANDBY]                    = sText_CommunicationStandby,
     [TRADE_MSG_CANCELED]                   = sText_TheTradeHasBeenCanceled,

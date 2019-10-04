@@ -2193,7 +2193,7 @@ static void sub_807A0C4(void)
 static void PrintTradeMessage(u8 messageId)
 {
     FillWindowPixelBuffer(0, PIXEL_FILL(1));
-    AddTextPrinterParameterized(0, 1, sTradeMessageTexts[messageId], 0, 1, TEXT_SPEED_FF, NULL);
+    AddTextPrinterParameterized(0, 1, sTradeMessages[messageId], 0, 1, TEXT_SPEED_FF, NULL);
     DrawTextBorderOuter(0, 20, 12);
     PutWindowTilemap(0);
     CopyWindowToVram(0, 3);
@@ -2428,6 +2428,10 @@ static u32 sub_807A5F4(struct Pokemon *playerParty, int partyCount, int monIdx)
     }
 }
 
+// Return values are used to determine exchange status in GetLinkPlayerDataExchangeStatusTimed
+// 0: EXCHANGE_COMPLETE
+// 1: EXCHANGE_STAT_4
+// 2: EXCHANGE_STAT_5
 s32 sub_807A728(void)
 {
     s32 val;
@@ -2452,7 +2456,7 @@ s32 sub_807A728(void)
         {
             if (gLinkPlayers[GetMultiplayerId()].name[10] & 0xF0)
             {
-                if (val == 2)
+                if (val == 2) //unnecessary check, val always 2 here
                 {
                     if (gLinkPlayers[GetMultiplayerId() ^ 1].name[10] & 0xF0)
                     {
@@ -2483,80 +2487,80 @@ static bool32 IsDeoxysOrMewUntradable(u16 species, bool8 isObedientBitSet)
     return FALSE;
 }
 
-int sub_807A7E0(struct UnkLinkRfuStruct_02022B14Substruct a0, struct UnkLinkRfuStruct_02022B14Substruct a1, u16 species1, u16 species2, u8 type, u16 species3, u8 isObedientBitSet)
+int GetUnionRoomTradeMessageId(struct UnkLinkRfuStruct_02022B14Substruct a0, struct UnkLinkRfuStruct_02022B14Substruct a1, u16 playerSpecies2, u16 partnerSpecies, u8 requestedType, u16 playerSpecies, u8 isObedientBitSet)
 {
-    u8 r9 = a0.unk_01_0;
-    u8 r2 = a0.unk_00_7;
-    u8 r10 = a1.unk_01_0;
-    u8 r0 = a1.unk_00_7;
+    bool8 playerHasNationalDex = a0.hasNationalDex;
+    bool8 playerIsChampion = a0.isChampion;
+    bool8 partnerHasNationalDex = a1.hasNationalDex;
+    bool8 partnerIsChampion = a1.isChampion;
     u8 r1 = a1.unk_01_2;
 
     if (r1 != 3)
     {
-        if (!r2)
+        if (!playerIsChampion)
         {
-            return 8;
+            return UR_TRADE_MSG_CANT_TRADE_WITH_PARTNER_1;
         }
-        else if (!r0)
+        else if (!partnerIsChampion)
         {
-            return 9;
+            return UR_TRADE_MSG_CANT_TRADE_WITH_PARTNER_2;
         }
     }
 
-    if (IsDeoxysOrMewUntradable(species3, isObedientBitSet))
+    if (IsDeoxysOrMewUntradable(playerSpecies, isObedientBitSet))
     {
-        return 4;
+        return UR_TRADE_MSG_MON_CANT_BE_TRADED_2;
     }
 
-    if (species2 == SPECIES_EGG)
+    if (partnerSpecies == SPECIES_EGG)
     {
-        if (species1 != species2)
+        if (playerSpecies2 != partnerSpecies)
         {
-            return 2;
+            return UR_TRADE_MSG_NOT_EGG;
         }
     }
     else
     {
-        if (gBaseStats[species1].type1 != type && gBaseStats[species1].type2 != type)
+        if (gBaseStats[playerSpecies2].type1 != requestedType && gBaseStats[playerSpecies2].type2 != requestedType)
         {
-            return 1;
+            return UR_TRADE_MSG_NOT_MON_PARTNER_WANTS;
         }
     }
 
-    if (species1 == SPECIES_EGG && species1 != species2)
+    if (playerSpecies2 == SPECIES_EGG && playerSpecies2 != partnerSpecies)
     {
-        return 3;
+        return UR_TRADE_MSG_MON_CANT_BE_TRADED_1;
     }
 
-    if (!r9)
+    if (!playerHasNationalDex)
     {
-        if (species1 == SPECIES_EGG)
+        if (playerSpecies2 == SPECIES_EGG)
         {
-            return 6;
+            return UR_TRADE_MSG_EGG_CANT_BE_TRADED;
         }
 
-        if (!IsSpeciesInHoennDex(species1))
+        if (!IsSpeciesInHoennDex(playerSpecies2))
         {
-            return 4;
+            return UR_TRADE_MSG_MON_CANT_BE_TRADED_2;
         }
 
-        if (!IsSpeciesInHoennDex(species2))
+        if (!IsSpeciesInHoennDex(partnerSpecies))
         {
-            return 5;
+            return UR_TRADE_MSG_PARTNERS_MON_CANT_BE_TRADED;
         }
     }
 
-    if (!r10 && !IsSpeciesInHoennDex(species1))
+    if (!partnerHasNationalDex && !IsSpeciesInHoennDex(playerSpecies2))
     {
-        return 7;
+        return UR_TRADE_MSG_PARTNER_CANT_ACCEPT_MON;
     }
 
-    return 0;
+    return UR_TRADE_MSG_NONE;
 }
 
 int sub_807A8D0(struct UnkLinkRfuStruct_02022B14Substruct a0, u16 species2, u16 species, u8 isObedientBitSet)
 {
-    u8 unk = a0.unk_01_0;
+    u8 unk = a0.hasNationalDex;
 
     if (IsDeoxysOrMewUntradable(species, isObedientBitSet))
     {

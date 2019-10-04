@@ -156,8 +156,8 @@ extern u8 gUnknown_02022C2C;
 extern union UnkUnion_Main gUnknown_02022C30;
 extern struct UnkLinkRfuStruct_02022B14Substruct gUnknown_02022C38;
 
-extern u16 gUnknown_02022C3C;
-extern u8 gUnknown_02022C3E;
+extern u16 gUnionRoomOfferedSpecies;
+extern u8 gUnionRoomRequestedMonType;
 
 // Exported ROM declarations
 
