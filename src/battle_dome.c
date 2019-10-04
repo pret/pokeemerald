@@ -2605,7 +2605,7 @@ static void InitDomeTrainers(void)
 #define CALC_STAT(base, statIndex)                                                          \
 {                                                                                           \
     u8 baseStat = gBaseStats[species].base;                                                 \
-    stats[statIndex] = (((2 * baseStat + ivs + evs[statIndex] / 4) * level) / 100) + 5;     \
+    stats[statIndex] = (((2 * baseStat + ivs + evs[statIndex] / 4) * level) / MAX_LEVEL) + 5;     \
     stats[statIndex] = (u8) ModifyStatByNature(nature, stats[statIndex], statIndex);        \
 }
 
@@ -2638,7 +2638,7 @@ static void CalcDomeMonStats(u16 species, int level, int ivs, u8 evBits, u8 natu
     else
     {
         int n = 2 * gBaseStats[species].baseHP;
-        stats[STAT_HP] = (((n + ivs + evs[STAT_HP] / 4) * level) / 100) + level + 10;
+        stats[STAT_HP] = (((n + ivs + evs[STAT_HP] / 4) * level) / MAX_LEVEL) + level + 10;
     }
 
     CALC_STAT(baseAttack, STAT_ATK);
