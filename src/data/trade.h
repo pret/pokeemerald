@@ -71,7 +71,7 @@ static const union AnimCmd *const gSpriteAnimTable_832DC34[] =
     gSpriteAnim_832DC2C
 };
 
-static const struct SpriteSheet gUnknown_0832DC3C =
+static const struct SpriteSheet sTradeButtonsSpriteSheet =
 {
     .data = gTradeButtons_Gfx,
     .size = 0x800,
@@ -168,7 +168,7 @@ static const struct SpritePalette gSpritePalette_TradeScreenText =
 //  2  3  8  9
 //  4  5 10 11
 //          12
-static const u8 gTradeNextSelectedMonTable[][4][6] =
+static const u8 gTradeNextSelectedMonTable[(PARTY_SIZE * 2) + 1][4][6] =
 {
     {
         {4,  2,  12, 12, 0,  0},
@@ -250,7 +250,7 @@ static const u8 gTradeNextSelectedMonTable[][4][6] =
     }
 };
 
-static const u8 gTradeMonSpriteCoords[][2] =
+static const u8 gTradeMonSpriteCoords[(PARTY_SIZE * 2) + 1][2] =
 {
     // Your party
     {1,  5 },
@@ -271,7 +271,7 @@ static const u8 gTradeMonSpriteCoords[][2] =
     {23, 18} // CANCEL
 };
 
-static const u8 gTradeLevelDisplayCoords[][6][2] =
+static const u8 gTradeLevelDisplayCoords[][PARTY_SIZE][2] =
 {
     {
         // Your party
@@ -293,7 +293,7 @@ static const u8 gTradeLevelDisplayCoords[][6][2] =
     }
 };
 
-static const u8 gTradeMonBoxCoords[][6][2] =
+static const u8 gTradeMonBoxCoords[][PARTY_SIZE][2] =
 {
     {
         // Your party
@@ -598,8 +598,8 @@ static const u8 sTradeMenuPartyMonBoxDimensions[3][2] =
     [TRADE_PARTNER] = {19, 3}
 };
 
-static const u16 sTradePal_Ball[] = INCBIN_U16("graphics/trade/ball.gbapal");
-static const u8 sTradeGfx_Ball[] = INCBIN_U8("graphics/trade/ball.4bpp");
+static const u16 sTradePal_PokeBall[] = INCBIN_U16("graphics/trade/pokeball.gbapal");
+static const u8 sTradeGfx_PokeBall[] = INCBIN_U8("graphics/trade/pokeball.4bpp");
 static const u8 sTradeGfx_PokeBallSymbol[] = INCBIN_U8("graphics/trade/pokeball_symbol.8bpp"); // unused?
 static const u16 sTradeTilemap_Cable[] = INCBIN_U16("graphics/trade/cable_closeup_map.bin");
 static const u16 sTradeTilemap_PokeBallSymbol[] = INCBIN_U16("graphics/trade/pokeball_symbol_map.bin"); // unused?
@@ -704,16 +704,16 @@ static const union AffineAnimCmd *const gSpriteAffineAnimTable_8338D0C[] =
     gSpriteAffineAnim_8338CEC
 };
 
-static const struct SpriteSheet gUnknown_08338D18 =
+static const struct SpriteSheet sPokeBallSpriteSheet =
 {
-    .data = sTradeGfx_Ball,
+    .data = sTradeGfx_PokeBall,
     .size = 0x600,
     .tag = 5557
 };
 
-static const struct SpritePalette gUnknown_08338D20 =
+static const struct SpritePalette sPokeBallSpritePalette =
 {
-    .data = sTradePal_Ball,
+    .data = sTradePal_PokeBall,
     .tag = 5558
 };
 
@@ -760,20 +760,20 @@ static const union AffineAnimCmd *const gSpriteAffineAnimTable_8338D6C[] =
     gSpriteAffineAnim_8338D54
 };
 
-static const struct SpriteSheet gUnknown_08338D70 =
+static const struct SpriteSheet sGlow1SpriteSheet =
 {
     .data = sTradeGfx_Glow1,
     .size = 0x200,
     .tag = 5550
 };
 
-static const struct SpritePalette gUnknown_08338D78 =
+static const struct SpritePalette sMiscTradeSpritePalette =
 {
     .data = sTradePal_Misc,
     .tag = 5551
 };
 
-static const struct SpritePalette gUnknown_08338D80 =
+static const struct SpritePalette sGbaSpritePalette =
 {
     .data = sTradePal_Gba,
     .tag = 5555
@@ -815,7 +815,7 @@ static const union AnimCmd *const gSpriteAnimTable_8338DB8[] =
     gSpriteAnim_8338DB0
 };
 
-static const struct SpriteSheet gUnknown_08338DC0 =
+static const struct SpriteSheet sGlow2SpriteSheet =
 {
     .data = sTradeGfx_Glow2,
     .size = 0x300,
@@ -851,7 +851,7 @@ static const union AnimCmd *const gSpriteAnimTable_8338DF0[] =
     gSpriteAnim_8338DE8
 };
 
-static const struct SpriteSheet gUnknown_08338DF4 =
+static const struct SpriteSheet sCableEndSpriteSheet =
 {
     .data = sTradeGfx_CableEnd,
     .size = 0x100,
@@ -912,7 +912,7 @@ static const union AnimCmd *const gSpriteAnimTable_8338E68[] =
     gSpriteAnim_8338E40
 };
 
-static const struct SpriteSheet gUnknown_08338E6C =
+static const struct SpriteSheet sGbaScreenSpriteSheet =
 {
     .data = sTradeGfx_GbaScreen,
     .size = 0x1000,
@@ -1022,7 +1022,7 @@ static const struct InGameTrade sIngameTrades[] =
     }
 };
 
-static const u16 sIngameTradeMail[][INGAME_TRADE_MAIL_LENGTH + 1] =
+static const u16 sIngameTradeMail[][MAIL_WORDS_COUNT + 1] =
 {
     {
         EC_WORD_BE,
@@ -1122,7 +1122,7 @@ static const struct BgTemplate gUnknown_08339014[] =
     },
 };
 
-static const s8 gTradeBallVerticalVelocityTable[] =
+static const s8 sTradeBallVerticalVelocityTable[] =
 {
     0,  0,  1,  0,
     1,  0,  1,  1,

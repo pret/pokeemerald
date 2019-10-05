@@ -406,7 +406,7 @@ static void CB2_TradeEvolutionSceneLoadGraphics(void)
         gMain.state++;
         break;
     case 2:
-        sub_807F19C();
+        InitTradeBg();
         gMain.state++;
         break;
     case 3:

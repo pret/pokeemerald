@@ -179,7 +179,7 @@ static void DisplayPartyPokemonGenderNidoranCheck(struct Pokemon *, struct Struc
 static void DisplayPartyPokemonHPCheck(struct Pokemon *, struct Struct203CEDC *, u8);
 static void DisplayPartyPokemonMaxHPCheck(struct Pokemon *, struct Struct203CEDC *, u8);
 static void DisplayPartyPokemonHPBarCheck(struct Pokemon *, struct Struct203CEDC *);
-static void DisplayPartyPokemonOtherText(u8, struct Struct203CEDC *, u8);
+static void DisplayPartyPokemonSelectionText(u8, struct Struct203CEDC *, u8);
 static u8 sub_81B8830(void);
 static bool8 GetBattleEntryEligibility(struct Pokemon *);
 static bool8 sub_81B218C(u8);
@@ -1988,7 +1988,7 @@ static void DisplayPartyPokemonSelectData(u8 slot, u8 stringID)
         DisplayPartyPokemonLevelCheck(mon, &gUnknown_0203CEDC[slot], 0);
         DisplayPartyPokemonGenderNidoranCheck(mon, &gUnknown_0203CEDC[slot], 0);
     }
-    DisplayPartyPokemonOtherText(stringID, &gUnknown_0203CEDC[slot], 0);
+    DisplayPartyPokemonSelectionText(stringID, &gUnknown_0203CEDC[slot], 0);
 }
 
 static void DisplayPartyPokemonSelectForBattle(u8 slot)
@@ -3531,7 +3531,7 @@ static void DisplayPartyPokemonHPBar(u16 hp, u16 maxhp, struct Struct203CEDC *pt
     CopyWindowToVram(ptr->windowId, 2);
 }
 
-static void DisplayPartyPokemonOtherText(u8 stringID, struct Struct203CEDC *ptr, u8 c)
+static void DisplayPartyPokemonSelectionText(u8 stringID, struct Struct203CEDC *ptr, u8 c)
 {
     if (c != 0)
     {
@@ -4305,9 +4305,9 @@ static void sub_81B469C(u8 taskId)
         if (gUnknown_0203CEC8.unk8_0 == 12)
         {
             if (GetMonData(mon, MON_DATA_HELD_ITEM) != ITEM_NONE)
-                DisplayPartyPokemonOtherText(11, &gUnknown_0203CEDC[gUnknown_0203CEC8.slotId], 1);
+                DisplayPartyPokemonSelectionText(11, &gUnknown_0203CEDC[gUnknown_0203CEC8.slotId], 1);
             else
-                DisplayPartyPokemonOtherText(12, &gUnknown_0203CEDC[gUnknown_0203CEC8.slotId], 1);
+                DisplayPartyPokemonSelectionText(12, &gUnknown_0203CEDC[gUnknown_0203CEC8.slotId], 1);
         }
         sub_81B1C1C(taskId);
     }
@@ -4403,7 +4403,7 @@ static void sub_81B4988(u8 taskId)
 
         SetMonData(mon, MON_DATA_HELD_ITEM, &item);
         sub_81B5C94(mon, &gUnknown_0203CEDC[gUnknown_0203CEC8.slotId]);
-        DisplayPartyPokemonOtherText(12, &gUnknown_0203CEDC[gUnknown_0203CEC8.slotId], 1);
+        DisplayPartyPokemonSelectionText(12, &gUnknown_0203CEDC[gUnknown_0203CEC8.slotId], 1);
         gTasks[taskId].func = sub_81B1C1C;
     }
 }
@@ -4572,7 +4572,7 @@ static void CursorCb_Enter(u8 taskId)
         {
             PlaySE(SE_SELECT);
             gSelectedOrderFromParty[i] = gUnknown_0203CEC8.slotId + 1;
-            DisplayPartyPokemonOtherText(i + 2, &gUnknown_0203CEDC[gUnknown_0203CEC8.slotId], 1);
+            DisplayPartyPokemonSelectionText(i + 2, &gUnknown_0203CEDC[gUnknown_0203CEC8.slotId], 1);
             if (i == (unk - 1))
                 sub_81B4F88();
             DisplayPartyMenuStdMessage(0);
@@ -4613,11 +4613,11 @@ static void CursorCb_NoEntry(u8 taskId)
             break;
         }
     }
-    DisplayPartyPokemonOtherText(1, &gUnknown_0203CEDC[gUnknown_0203CEC8.slotId], 1);
+    DisplayPartyPokemonSelectionText(1, &gUnknown_0203CEDC[gUnknown_0203CEC8.slotId], 1);
     for (i = 0; i < (unk - 1); i++)
     {
         if (gSelectedOrderFromParty[i] != 0)
-            DisplayPartyPokemonOtherText(i + 2, &gUnknown_0203CEDC[gSelectedOrderFromParty[i] - 1], 1);
+            DisplayPartyPokemonSelectionText(i + 2, &gUnknown_0203CEDC[gSelectedOrderFromParty[i] - 1], 1);
     }
     DisplayPartyMenuStdMessage(0);
     gTasks[taskId].func = sub_81B1370;

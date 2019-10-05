@@ -1312,7 +1312,7 @@ void sub_8013F90(u8 taskId)
             gSelectedTradeMonPositions[TRADE_PLAYER] = monId;
             gSelectedTradeMonPositions[TRADE_PARTNER] = PARTY_SIZE;
             gMain.savedCallback = CB2_ReturnToField;
-            SetMainCallback2(sub_807AE50);
+            SetMainCallback2(CB2_LinkTrade);
             ResetUnionRoomTrade(&sUnionRoomTrade);
             DestroyTask(taskId);
         }

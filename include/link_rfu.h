@@ -128,7 +128,7 @@ struct UnkRfuStruct_Sub_Unused
 
 struct UnkRfuStruct_2
 {
-    /* 0x000 */ void (*unk_00)(void);
+    /* 0x000 */ void (*linkRfuCallback)(void);
     /* 0x004 */ u16 unk_04;
     /* 0x006 */ u8 filler_06[4];
     /* 0x00a */ u16 unk_0a;
@@ -224,7 +224,7 @@ void sub_800F804(void);
 void sub_800F850(void);
 u8 sub_800FCD8(void);
 bool32 sub_800FE84(const u8 *src, size_t size);
-void Rfu_set_zero(void);
+void ClearLinkRfuCallback(void);
 u8 sub_80104F4(void);
 u8 rfu_get_multiplayer_id(void);
 bool8 sub_8010100(u8 a0);

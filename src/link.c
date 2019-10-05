@@ -739,7 +739,7 @@ void ClearLinkCallback(void)
 {
     if (gWirelessCommType)
     {
-        Rfu_set_zero();
+        ClearLinkRfuCallback();
     }
     else
     {
@@ -751,7 +751,7 @@ void ClearLinkCallback_2(void)
 {
     if (gWirelessCommType)
     {
-        Rfu_set_zero();
+        ClearLinkRfuCallback();
     }
     else
     {

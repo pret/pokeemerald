@@ -1559,8 +1559,8 @@ void sub_80C6D80(const u8 *string, void *dst, u8 zero1, u8 zero2, s32 arg4)
         txtColor[0] = TEXT_COLOR_TRANSPARENT;
     else
         txtColor[0] = zero2;
-    txtColor[1] = 0xF;
-    txtColor[2] = 0xE;
+    txtColor[1] = TEXT_DYNAMIC_COLOR_6;
+    txtColor[2] = TEXT_DYNAMIC_COLOR_5;
     AddTextPrinterParameterized4(windowId, 1, 0, 1, 0, 0, txtColor, -1, string);
 
     val = arg4;
