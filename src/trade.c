@@ -2558,31 +2558,24 @@ int GetUnionRoomTradeMessageId(struct UnkLinkRfuStruct_02022B14Substruct a0, str
     return UR_TRADE_MSG_NONE;
 }
 
-int sub_807A8D0(struct UnkLinkRfuStruct_02022B14Substruct a0, u16 species2, u16 species, u8 isObedientBitSet)
+int CanRegisterMonForTradingBoard(struct UnkLinkRfuStruct_02022B14Substruct a0, u16 species2, u16 species, u8 isObedientBitSet)
 {
-    u8 unk = a0.hasNationalDex;
+    bool8 hasNationalDex = a0.hasNationalDex;
 
     if (IsDeoxysOrMewUntradable(species, isObedientBitSet))
-    {
-        return 1;
-    }
+        return CANT_REGISTER_MON;
 
-    if (unk)
-    {
-        return 0;
-    }
+    if (hasNationalDex)
+        return CAN_REGISTER_MON;
 
+    // Eggs can only be traded if the player has the National Dex
     if (species2 == SPECIES_EGG)
-    {
-        return 2;
-    }
+        return CANT_REGISTER_EGG;
 
     if (IsSpeciesInHoennDex(species2))
-    {
-        return 0;
-    }
+        return CAN_REGISTER_MON;
 
-    return 1;
+    return CANT_REGISTER_MON;
 }
 
 // r6/r7 flip. Ugh.

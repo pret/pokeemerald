@@ -4255,11 +4255,11 @@ void sub_8010FA0(bool32 a0, bool32 a1)
     gUnknown_02022B14.unk_00.unk_00_5 = a1;
 }
 
-void sub_8010FCC(u32 a0, u32 a1, u32 a2)
+void sub_8010FCC(u32 type, u32 species, u32 level)
 {
-    gUnknown_02022B14.type = a0;
-    gUnknown_02022B14.species = a1;
-    gUnknown_02022B14.level = a2;
+    gUnknown_02022B14.type = type;
+    gUnknown_02022B14.species = species;
+    gUnknown_02022B14.level = level;
 }
 
 u8 sub_801100C(s32 a0)

@@ -51,16 +51,12 @@ const u8 gText_5PlayerMode[] = _("5-PLAYER\nMODE");
 const u8 *const gUnknown_082EDB60[][5] = {
     {
         gText_1PlayerNeeded,
-        gText_2PlayerMode,
-        NULL,
-        NULL,
-        NULL
+        gText_2PlayerMode
     }, {
         gText_3PlayersNeeded,
         gText_2PlayersNeeded,
         gText_1PlayerNeeded,
-        gText_4PlayerMode,
-        NULL
+        gText_4PlayerMode
     }, {
         gText_1PlayerNeeded,
         gText_2PlayerMode,
@@ -77,8 +73,7 @@ const u8 *const gUnknown_082EDB60[][5] = {
         gText_1PlayerNeeded,
         gText_2PlayerMode,
         gText_3PlayerMode,
-        gText_4PlayerMode,
-        NULL
+        gText_4PlayerMode
     }
 };
 
@@ -196,55 +191,56 @@ const u8 *const unref_text_ptrs_union_room_2[][2] = {
     }
 };
 
-ALIGNED(4) const u8 gUnknown_082EE2E8[] = _("Somebody has contacted you.{PAUSE 60}");
-ALIGNED(4) const u8 gUnknown_082EE308[] = _("{STR_VAR_1} has contacted you.{PAUSE 60}");
+ALIGNED(4) const u8 sText_SomebodyHasContactedYou[] = _("Somebody has contacted you.{PAUSE 60}");
+ALIGNED(4) const u8 sText_XHasContactedYou[] = _("{STR_VAR_1} has contacted you.{PAUSE 60}");
 
-const u8 *const gUnknown_082EE324[] = {
-    gUnknown_082EE2E8,
-    gUnknown_082EE308
+static const u8 *const gUnknown_082EE324[] = {
+    sText_SomebodyHasContactedYou,
+    sText_XHasContactedYou
 };
 
-ALIGNED(4) const u8 gUnknown_082EE32C[] = _("Awaiting a response from\nthe other TRAINER…");
-ALIGNED(4) const u8 gUnknown_082EE358[] = _("Awaiting a response from\n{STR_VAR_1}…");
+ALIGNED(4) const u8 sUnionRoom_AwaitingResponseFromTrainer[] = _("Awaiting a response from\nthe other TRAINER…");
+ALIGNED(4) const u8 sUnionRoom_AwaitingResponseFromX[] = _("Awaiting a response from\n{STR_VAR_1}…");
 
-const u8 *const gUnknown_082EE378[] = {
-    gUnknown_082EE32C,
-    gUnknown_082EE358
+static const u8 *const sUnionRoomTexts_AwaitingResponse[] = {
+    sUnionRoom_AwaitingResponseFromTrainer,
+    sUnionRoom_AwaitingResponseFromX
 };
 
-ALIGNED(4) const u8 gUnionRoom_ShowTrainerCard[] = _("The other TRAINER showed\nyou their TRAINER CARD.\pWould you like to show your\nTRAINER CARD?");
-ALIGNED(4) const u8 gUnionRoom_BattleChallenge[] = _("The other TRAINER challenges you\nto battle.\pWill you accept the battle\nchallenge?");
-ALIGNED(4) const u8 gUnionRoom_ChatInvitation[] = _("The other TRAINER invites you\nto chat.\pWill you accept the chat\ninvitation?");
-ALIGNED(4) const u8 gUnionRoom_OfferToTradeMon[] = _("There is an offer to trade your\nregistered Lv. {SPECIAL_F7 0x00} {SPECIAL_F7 0x01}\pin exchange for a\nLv. {SPECIAL_F7 0x02} {SPECIAL_F7 0x03}.\pWill you accept this trade\noffer?");
-ALIGNED(4) const u8 gUnionRoom_OfferToTradeEgg[] = _("There is an offer to trade your\nregistered EGG.\lWill you accept this trade offer?");
-ALIGNED(4) const u8 gUnionRoom_ChatDropped[] = _("The chat has been dropped.\p");
-ALIGNED(4) const u8 gUnionRoom_OfferDeclined1[] = _("You declined the offer.\p");
-ALIGNED(4) const u8 gUnionRoom_OfferDeclined2[] = _("You declined the offer.\p");
-ALIGNED(4) const u8 gUnionRoom_ChatEnded[] = _("The chat was ended.\p");
+ALIGNED(4) const u8 sText_ShowTrainerCard[] = _("The other TRAINER showed\nyou their TRAINER CARD.\pWould you like to show your\nTRAINER CARD?");
+ALIGNED(4) const u8 sText_BattleChallenge[] = _("The other TRAINER challenges you\nto battle.\pWill you accept the battle\nchallenge?");
+ALIGNED(4) const u8 sText_ChatInvitation[] = _("The other TRAINER invites you\nto chat.\pWill you accept the chat\ninvitation?");
+ALIGNED(4) const u8 sText_OfferToTradeMon[] = _("There is an offer to trade your\nregistered Lv. {SPECIAL_F7 0x00} {SPECIAL_F7 0x01}\pin exchange for a\nLv. {SPECIAL_F7 0x02} {SPECIAL_F7 0x03}.\pWill you accept this trade\noffer?");
+ALIGNED(4) const u8 sText_OfferToTradeEgg[] = _("There is an offer to trade your\nregistered EGG.\lWill you accept this trade offer?");
+ALIGNED(4) const u8 sText_ChatDropped[] = _("The chat has been dropped.\p");
+ALIGNED(4) const u8 sText_OfferDeclined1[] = _("You declined the offer.\p");
+ALIGNED(4) const u8 sText_OfferDeclined2[] = _("You declined the offer.\p");
+ALIGNED(4) const u8 sText_ChatEnded[] = _("The chat was ended.\p");
 
-const u8 *const unref_text_ptrs_union_room_3[] = {
-    gUnionRoom_ShowTrainerCard,
-    gUnionRoom_BattleChallenge,
-    gUnionRoom_ChatInvitation,
-    gUnionRoom_OfferToTradeMon
+// Unused
+static const u8 *const sUnionRoomTexts_Invitation[] = {
+    sText_ShowTrainerCard,
+    sText_BattleChallenge,
+    sText_ChatInvitation,
+    sText_OfferToTradeMon
 };
 
-ALIGNED(4) const u8 gUnknown_082EE5C0[] = _("Oh, hey! We're in a chat right now.\nWant to join us?");
-ALIGNED(4) const u8 gUnknown_082EE5F8[] = _("{STR_VAR_1}: Hey, {PLAYER}!\nWe're having a chat right now.\lWant to join us?");
-ALIGNED(4) const u8 gUnknown_082EE638[] = _("Oh, hi! We're having a chat now.\nWould you like to join us?");
-ALIGNED(4) const u8 gUnknown_082EE674[] = _("{STR_VAR_1}: Oh, hi, {PLAYER}!\nWe're having a chat now.\lWould you like to join us?");
+ALIGNED(4) const u8 sText_JoinChatMale[] = _("Oh, hey! We're in a chat right now.\nWant to join us?");
+ALIGNED(4) const u8 sText_PlayerJoinChatMale[] = _("{STR_VAR_1}: Hey, {PLAYER}!\nWe're having a chat right now.\lWant to join us?");
+ALIGNED(4) const u8 sText_JoinChatFemale[] = _("Oh, hi! We're having a chat now.\nWould you like to join us?");
+ALIGNED(4) const u8 sText_PlayerJoinChatFemale[] = _("{STR_VAR_1}: Oh, hi, {PLAYER}!\nWe're having a chat now.\lWould you like to join us?");
 
-const u8 *const gUnknown_082EE6B8[][2] = {
+const u8 *const sUnionRoomTexts_JoinChat[][GENDER_COUNT] = {
     {
-        gUnknown_082EE5C0,
-        gUnknown_082EE638
+        sText_JoinChatMale,
+        sText_JoinChatFemale
     }, {
-        gUnknown_082EE5F8,
-        gUnknown_082EE674
+        sText_PlayerJoinChatMale,
+        sText_PlayerJoinChatFemale
     }
 };
 
-ALIGNED(4) const u8 gUnknown_082EE6C8[] = _("……\nThe TRAINER appears to be busy…\p");
+ALIGNED(4) const u8 sText_TrainerAppearsBusy[] = _("……\nThe TRAINER appears to be busy…\p");
 ALIGNED(4) const u8 gUnknown_082EE6EC[] = _("A battle, huh?\nAll right, just give me some time.");
 ALIGNED(4) const u8 gUnknown_082EE720[] = _("You want to chat, huh?\nSure, just wait a little.");
 ALIGNED(4) const u8 gUnknown_082EE754[] = _("Sure thing! As my “Greetings,”\nhere's my TRAINER CARD.");
@@ -323,15 +319,15 @@ const u8 *const gUnknown_082EEB80[] = {
     gUnknown_082EEB4C
 };
 
-ALIGNED(4) const u8 gUnknown_082EEB88[] = _("Whoops! Sorry, but I have to do\nsomething else.\lAnother time, okay?\p");
-ALIGNED(4) const u8 gUnknown_082EEBD0[] = _("If you want to battle, you need\ntwo POKéMON that are below\lLv. 30.\p");
-ALIGNED(4) const u8 gUnknown_082EEC14[] = _("For a battle, you need two\nPOKéMON that are below Lv. 30.\p");
-ALIGNED(4) const u8 gUnknown_082EEC50[] = _("Oh, all right.\nCome see me anytime, okay?\p");
-ALIGNED(4) const u8 gUnknown_082EEC7C[] = _("Oh…\nPlease come by anytime.\p");
+ALIGNED(4) const u8 sText_TrainerBattleBusy[] = _("Whoops! Sorry, but I have to do\nsomething else.\lAnother time, okay?\p");
+ALIGNED(4) const u8 sText_NeedTwoMonsOfLevel30OrLower1[] = _("If you want to battle, you need\ntwo POKéMON that are below\lLv. 30.\p");
+ALIGNED(4) const u8 sText_NeedTwoMonsOfLevel30OrLower2[] = _("For a battle, you need two\nPOKéMON that are below Lv. 30.\p");
+ALIGNED(4) const u8 sText_DeclineBattleMale[] = _("Oh, all right.\nCome see me anytime, okay?\p");
+ALIGNED(4) const u8 sText_DeclineBattleFemale[] = _("Oh…\nPlease come by anytime.\p");
 
-const u8 *const gUnknown_082EEC9C[] = {
-    gUnknown_082EEC50,
-    gUnknown_082EEC7C
+const u8 *const sUnionRoomTexts_DeclineBattle[GENDER_COUNT] = {
+    [MALE]  = sText_DeclineBattleMale,
+    [FEMALE] = sText_DeclineBattleFemale
 };
 
 ALIGNED(4) const u8 gUnknown_082EECA4[] = _("Oh, sorry!\nI just can't right this instant.\lLet's chat another time.\p");
@@ -351,13 +347,16 @@ ALIGNED(4) const u8 gUnknown_082EEE24[] = _("That's it!\nThis is the right move 
 ALIGNED(4) const u8 gUnknown_082EEE4C[] = _("That's awesome!\nYou can battle that way?\p");
 ALIGNED(4) const u8 gUnknown_082EEE78[] = _("You have exquisite timing for\nswitching POKéMON!\p");
 
-const u8 *const gUnknown_082EEEAC[][4] = {
+const u8 *const gUnknown_082EEEAC[GENDER_COUNT][4] = {
+    [MALE] = 
     {
         gUnknown_082EED44,
         gUnknown_082EED6C,
         gUnknown_082EED98,
         gUnknown_082EEDBC
-    }, {
+    }, 
+    [FEMALE] = 
+    {
         gUnknown_082EEDF4,
         gUnknown_082EEE24,
         gUnknown_082EEE4C,
@@ -374,13 +373,16 @@ ALIGNED(4) const u8 gUnknown_082EEFA0[] = _("Ahaha!\nWhat is that about?\p");
 ALIGNED(4) const u8 gUnknown_082EEFBC[] = _("Yes, that's exactly it!\nThat's what I meant.\p");
 ALIGNED(4) const u8 gUnknown_082EEFEC[] = _("In other words…\nYes! That's right!\p");
 
-const u8 *const gUnknown_082EF010[][4] = {
+const u8 *const gUnknown_082EF010[GENDER_COUNT][4] = {
+    [MALE] =
     {
         gUnknown_082EEECC,
         gUnknown_082EEEF0,
         gUnknown_082EEF2C,
         gUnknown_082EEF50
-    }, {
+    }, 
+    [FEMALE] =
+    {
         gUnknown_082EEF7C,
         gUnknown_082EEFA0,
         gUnknown_082EEFBC,
@@ -393,65 +395,68 @@ ALIGNED(4) const u8 gUnknown_082EF06C[] = _("I hope I get to know you better!\p"
 ALIGNED(4) const u8 gUnknown_082EF090[] = _("We're showing each other our\nTRAINER CARDS to get acquainted.\p");
 ALIGNED(4) const u8 gUnknown_082EF0D0[] = _("Glad to meet you.\nPlease don't be a stranger!\p");
 
-const u8 *const gUnknown_082EF100[][2] = {
+const u8 *const gUnknown_082EF100[GENDER_COUNT][2] = {
+    [MALE] = 
     {
         gUnknown_082EF030,
         gUnknown_082EF06C
-    }, {
+    }, 
+    [FEMALE] = 
+    {
         gUnknown_082EF090,
         gUnknown_082EF0D0
     }
 };
 
-ALIGNED(4) const u8 gUnknown_082EF110[] = _("Yeahah!\nI really wanted this POKéMON!\p");
-ALIGNED(4) const u8 gUnknown_082EF138[] = _("Finally, a trade got me that\nPOKéMON I'd wanted a long time.\p");
-ALIGNED(4) const u8 gUnknown_082EF178[] = _("I'm trading POKéMON right now.\p");
-ALIGNED(4) const u8 gUnknown_082EF198[] = _("I finally got that POKéMON I\nwanted in a trade!\p");
+ALIGNED(4) const u8 sText_MaleTraded1[] = _("Yeahah!\nI really wanted this POKéMON!\p");
+ALIGNED(4) const u8 sText_MaleTraded2[] = _("Finally, a trade got me that\nPOKéMON I'd wanted a long time.\p");
+ALIGNED(4) const u8 sText_FemaleTraded1[] = _("I'm trading POKéMON right now.\p");
+ALIGNED(4) const u8 sText_FemaleTraded2[] = _("I finally got that POKéMON I\nwanted in a trade!\p");
 
-const u8 *const gUnknown_082EF1CC[][4] = {
+const u8 *const sUnionRoomTexts_Traded[GENDER_COUNT][4] = {
+    [MALE] = 
     {
-        gUnknown_082EF110,
-        gUnknown_082EF138,
-        NULL,
-        NULL
-    }, {
-        gUnknown_082EF178,
-        gUnknown_082EF198,
-        NULL,
-        NULL
+        sText_MaleTraded1,
+        sText_MaleTraded2
+    }, 
+    [FEMALE] = 
+    {
+        sText_FemaleTraded1,
+        sText_FemaleTraded2
     }
 };
 
-ALIGNED(4) const u8 gUnknown_082EF1EC[] = _("{STR_VAR_1} checked the\nTRADING BOARD.\p");
-ALIGNED(4) const u8 gUnknown_082EF20C[] = _("Welcome to the TRADING BOARD.\pYou may register your POKéMON\nand offer it up for a trade.\pWould you like to register one of\nyour POKéMON?");
-ALIGNED(4) const u8 gUnknown_082EF298[] = _("This TRADING BOARD is used for\noffering a POKéMON for a trade.\pAll you need to do is register a\nPOKéMON for a trade.\pAnother TRAINER may offer a party\nPOKéMON in return for the trade.\pWe hope you will register POKéMON\nand trade them with many, many\lother TRAINERS.\pWould you like to register one of\nyour POKéMON?");
-ALIGNED(4) const u8 unref_text_union_room_6[] = _("We have registered your POKéMON for\ntrade on the TRADING BOARD.\pThank you for using this service!\p");
-ALIGNED(4) const u8 unref_text_union_room_7[] = _("Nobody has registered any POKéMON\nfor trade on the TRADING BOARD.\p\n");
-ALIGNED(4) const u8 gUnknown_082EF47C[] = _("Please choose the type of POKéMON\nthat you would like in the trade.\n");
-ALIGNED(4) const u8 gUnknown_082EF4C4[] = _("Which of your party POKéMON will\nyou offer in trade?\p");
-ALIGNED(4) const u8 gUnknown_082EF4FC[] = _("Registration has been canceled.\p");
-ALIGNED(4) const u8 gUnknown_082EF520[] = _("Registration has been completed.\p");
-ALIGNED(4) const u8 gUnknown_082EF544[] = _("The trade has been canceled.\p");
-ALIGNED(4) const u8 gUnknown_082EF564[] = _("Cancel the registration of your\nLv. {STR_VAR_2} {STR_VAR_1}?");
-ALIGNED(4) const u8 gUnknown_082EF590[] = _("Cancel the registration of your\nEGG?");
-ALIGNED(4) const u8 gUnknown_082EF5B8[] = _("The registration has been canceled.\p");
-ALIGNED(4) const u8 unref_text_union_room_8[] = _("TRAINERS wishing to make a trade\nwill be listed.");
-ALIGNED(4) const u8 unref_text_union_room_9[] = _("Please choose the TRAINER with whom\nyou would like to trade POKéMON.");
-ALIGNED(4) const u8 gUnknown_082EF65C[] = _("Would you like to ask {STR_VAR_1} to\nmake a trade?");
-ALIGNED(4) const u8 unref_text_union_room_10[] = _("Awaiting a response from\nthe other TRAINER…");
-ALIGNED(4) const u8 unref_text_union_room_11[] = _("You have not registered a POKéMON\nfor trading.\p");
-ALIGNED(4) const u8 gUnknown_082EF6E4[] = _("You don't have a {STR_VAR_2}-type\nPOKéMON that {STR_VAR_1} wants.\p");
-ALIGNED(4) const u8 gUnknown_082EF718[] = _("You don't have an EGG that\n{STR_VAR_1} wants.\p");
-ALIGNED(4) const u8 gUnknown_082EF740[] = _("{STR_VAR_1} can't make a trade for\nyour POKéMON right now.\p");
-ALIGNED(4) const u8 gUnknown_082EF774[] = _("You can't make a trade for\n{STR_VAR_1}'s POKéMON right now.\p");
+ALIGNED(4) const u8 sText_XCheckedTradingBoard[] = _("{STR_VAR_1} checked the\nTRADING BOARD.\p");
+ALIGNED(4) const u8 sText_RegisterMonAtTradingBoard[] = _("Welcome to the TRADING BOARD.\pYou may register your POKéMON\nand offer it up for a trade.\pWould you like to register one of\nyour POKéMON?");
+ALIGNED(4) const u8 sText_TradingBoardInfo[] = _("This TRADING BOARD is used for\noffering a POKéMON for a trade.\pAll you need to do is register a\nPOKéMON for a trade.\pAnother TRAINER may offer a party\nPOKéMON in return for the trade.\pWe hope you will register POKéMON\nand trade them with many, many\lother TRAINERS.\pWould you like to register one of\nyour POKéMON?");
+ALIGNED(4) const u8 sText_ThankYouForRegistering[] = _("We have registered your POKéMON for\ntrade on the TRADING BOARD.\pThank you for using this service!\p"); // unused
+ALIGNED(4) const u8 sText_NobodyHasRegistered[] = _("Nobody has registered any POKéMON\nfor trade on the TRADING BOARD.\p\n"); // unused
+ALIGNED(4) const u8 sText_ChooseRequestedMonType[] = _("Please choose the type of POKéMON\nthat you would like in the trade.\n");
+ALIGNED(4) const u8 sText_WhichMonWillYouOffer[] = _("Which of your party POKéMON will\nyou offer in trade?\p");
+ALIGNED(4) const u8 sText_RegistrationCanceled[] = _("Registration has been canceled.\p");
+ALIGNED(4) const u8 sText_RegistraionCompleted[] = _("Registration has been completed.\p");
+ALIGNED(4) const u8 sText_TradeCanceled[] = _("The trade has been canceled.\p");
+ALIGNED(4) const u8 sText_CancelRegistrationOfMon[] = _("Cancel the registration of your\nLv. {STR_VAR_2} {STR_VAR_1}?");
+ALIGNED(4) const u8 sText_CancelRegistrationOfEgg[] = _("Cancel the registration of your\nEGG?");
+ALIGNED(4) const u8 sText_RegistrationCanceled2[] = _("The registration has been canceled.\p");
+ALIGNED(4) const u8 sText_TradeTrainersWillBeListed[] = _("TRAINERS wishing to make a trade\nwill be listed."); // unused
+ALIGNED(4) const u8 sText_ChooseTrainerToTradeWith[] = _("Please choose the TRAINER with whom\nyou would like to trade POKéMON."); // unused
+ALIGNED(4) const u8 sText_AskTrainerToMakeTrade[] = _("Would you like to ask {STR_VAR_1} to\nmake a trade?");
+ALIGNED(4) const u8 sText_AwaitingResponseFromTrainer[] = _("Awaiting a response from\nthe other TRAINER…"); // unused
+ALIGNED(4) const u8 sText_NotRegisteredAMonForTrade[] = _("You have not registered a POKéMON\nfor trading.\p"); // unused
+ALIGNED(4) const u8 sText_DontHaveTypeTrainerWants[] = _("You don't have a {STR_VAR_2}-type\nPOKéMON that {STR_VAR_1} wants.\p");
+ALIGNED(4) const u8 sText_DontHaveEggTrainerWants[] = _("You don't have an EGG that\n{STR_VAR_1} wants.\p");
+ALIGNED(4) const u8 sText_CantTradeMonRightNow[] = _("{STR_VAR_1} can't make a trade for\nyour POKéMON right now.\p");
+ALIGNED(4) const u8 sText_CantTradePartnersMonRightNow[] = _("You can't make a trade for\n{STR_VAR_1}'s POKéMON right now.\p");
 
-const u8 *const unref_text_ptrs_union_room_4[] = {
-    gUnknown_082EF740,
-    gUnknown_082EF774
+// unused
+const u8 *const sUnionRoomTexts_CantTradeRightNow[] = {
+    sText_CantTradeMonRightNow,
+    sText_CantTradePartnersMonRightNow
 };
 
-ALIGNED(4) const u8 gUnknown_082EF7B0[] = _("Your trade offer was rejected.\p");
-ALIGNED(4) const u8 gUnknown_082EF7D0[] = _("EGG TRADE");
+ALIGNED(4) const u8 sText_TradeOfferRejected[] = _("Your trade offer was rejected.\p");
+ALIGNED(4) const u8 sText_EggTrade[] = _("EGG TRADE");
 ALIGNED(4) const u8 gUnknown_082EF7DC[] = _("{DPAD_UPDOWN}CHOOSE  {A_BUTTON}JOIN  {B_BUTTON}CANCEL");
 ALIGNED(4) const u8 gUnknown_082EF7F8[] = _("Please choose a TRAINER.");
 ALIGNED(4) const u8 gUnknown_082EF814[] = _("Please choose a TRAINER for\na SINGLE BATTLE.");

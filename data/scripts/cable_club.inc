@@ -1032,7 +1032,7 @@ OldaleTown_PokemonCenter_2F_EventScript_27759F:: @ 827759F
 	hideobjectat EVENT_OBJ_ID_PLAYER, MAP_PETALBURG_CITY
 	closedoor 5, 1
 	waitdooranim
-	special sub_8018090
+	special Script_ResetUnionRoomTrade
 	special SetCableClubWarp
 	warpteleport2 MAP_UNION_ROOM, 255, 7, 11
 	waitstate

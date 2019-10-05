@@ -432,7 +432,7 @@ gSpecials:: @ 81DBA64
 	def_special BufferUnionRoomPlayerName
 	def_special sub_801DC20
 	def_special sub_81B8958
-	def_special sub_8018090
+	def_special Script_ResetUnionRoomTrade
 	def_special IsBadEggInParty
 	def_special ValidateReceivedWonderCard
 	def_special HasAtLeastOneBerry

@@ -48,5 +48,10 @@
 #define UR_TRADE_MSG_CANT_TRADE_WITH_PARTNER_1    8
 #define UR_TRADE_MSG_CANT_TRADE_WITH_PARTNER_2    9
 
+// Return values for CanRegisterMonForTradingBoard
+#define CAN_REGISTER_MON   0
+#define CANT_REGISTER_MON  1
+#define CANT_REGISTER_EGG  2
+
 
 #endif //GUARD_CONSTANTS_TRADE_H

@@ -58,7 +58,7 @@ EWRAM_DATA u32 gFiller_02022C34 = 0;
 EWRAM_DATA struct UnkLinkRfuStruct_02022B14Substruct gUnknown_02022C38 = {};
 EWRAM_DATA u16 gUnionRoomOfferedSpecies = 0;
 EWRAM_DATA u8 gUnionRoomRequestedMonType = 0;
-EWRAM_DATA struct TradeUnkStruct gUnknown_02022C40 = {};
+static EWRAM_DATA struct UnionRoomTrade sUnionRoomTrade = {};
 
 // IWRAM vars
 static struct UnkStruct_Leader *gUnknown_03000DA0;
@@ -96,8 +96,8 @@ void sub_8013BD8(struct UnkStruct_Group *arg0, s32 id);
 void sub_80173D4(void);
 void sub_80177B8(u8 arg0, u8 arg1, u8 arg2, struct UnkStruct_x20 *arg3, u8 arg4, u8 id);
 bool32 sub_8017678(struct UnkStruct_Shared *arg0, struct UnkStruct_Shared *arg1);
-u32 sub_8018120(struct TradeUnkStruct *arg0, u8 multiplayerId);
-void sub_801807C(struct TradeUnkStruct *arg0);
+static u32 GetPartyPositionOfRegisteredMon(struct UnionRoomTrade *arg0, u8 multiplayerId);
+static void ResetUnionRoomTrade(struct UnionRoomTrade *arg0);
 void sub_801AC54(void);
 void sub_80149D8(void);
 void MG_DrawTextBorder(u8 windowId);
@@ -105,8 +105,8 @@ s8 mevent_message_print_and_prompt_yes_no(u8 *textState, u8 *arg1, u8 arg2, cons
 bool32 sub_8016F1C(struct UnkLinkRfuStruct_02022B14 *arg0, s16 arg1);
 u8 sub_8016DF0(struct UnkStruct_Main4 *arg0, struct UnkStruct_Main4 *arg1, u32 arg2);
 void sub_8019F2C(void);
-bool32 sub_80180A0(u32 monId, struct TradeUnkStruct *arg1);
-void sub_80180E8(u32 monId, struct TradeUnkStruct *arg1);
+static bool32 RegisterTradeMonAndGetIsEgg(u32 monId, struct UnionRoomTrade *trade);
+static void RegisterTradeMon(u32 monId, struct UnionRoomTrade *arg1);
 void sub_80181CC(void);
 bool32 sub_8017940(void);
 u8 sub_8016B00(void);
@@ -122,7 +122,7 @@ void sub_801818C(bool32 arg0);
 s32 sub_8017178(u8 *arg0, u8 *arg1, u8 *arg2, const struct WindowTemplate *winTemplate, const struct ListMenuTemplate *menuTemplate);
 s32 sub_80172A0(u8 *arg0, u8 *arg1, u8 *arg2, u8 *arg3, const struct WindowTemplate *winTemplate, const struct ListMenuTemplate *menuTemplate, struct UnkStruct_Main0 *arg6);
 s32 sub_8017CB0(struct UnkStruct_x20 * arg, s32 arg1);
-bool32 sub_8018024(void);
+bool32 HasAtLeastTwoMonsOfLevel30OrLower(void);
 u32 sub_8017984(s32 arg0);
 void sub_8018220(u8 *unused, struct UnkStruct_URoom *arg1, bool8 arg2);
 void sub_8017D9C(u8 *dst, s32 arg1, u32 playerGender);
@@ -601,11 +601,11 @@ void sub_8013078(u8 *dst, u8 caseId)
     {
     case 65:
     case 68:
-        StringExpandPlaceholders(dst, gUnionRoom_OfferDeclined1);
+        StringExpandPlaceholders(dst, sText_OfferDeclined1);
         break;
     case 69:
     case 72:
-        StringExpandPlaceholders(dst, gUnionRoom_OfferDeclined2);
+        StringExpandPlaceholders(dst, sText_OfferDeclined2);
         break;
     }
 }
@@ -1282,7 +1282,7 @@ u8 sub_8013F78(void)
 
 void sub_8013F90(u8 taskId)
 {
-    u32 monId = sub_8018120(&gUnknown_02022C40, GetMultiplayerId());
+    u32 monId = GetPartyPositionOfRegisteredMon(&sUnionRoomTrade, GetMultiplayerId());
 
     switch (gTasks[taskId].data[0])
     {
@@ -1313,7 +1313,7 @@ void sub_8013F90(u8 taskId)
             gSelectedTradeMonPositions[TRADE_PARTNER] = PARTY_SIZE;
             gMain.savedCallback = CB2_ReturnToField;
             SetMainCallback2(sub_807AE50);
-            sub_801807C(&gUnknown_02022C40);
+            ResetUnionRoomTrade(&sUnionRoomTrade);
             DestroyTask(taskId);
         }
         break;
@@ -2296,7 +2296,7 @@ void sub_80156E0(u8 taskId)
         break;
     case 2:
         sub_8010F84(0x40, 0, 0);
-        sub_8010FCC(gUnknown_02022C40.type, gUnknown_02022C40.playerSpecies, gUnknown_02022C40.playerLevel);
+        sub_8010FCC(sUnionRoomTrade.type, sUnionRoomTrade.playerSpecies, sUnionRoomTrade.playerLevel);
         sub_800B488();
         OpenLink();
         sub_8011C84();
@@ -2307,22 +2307,22 @@ void sub_80156E0(u8 taskId)
         data->state = 3;
         break;
     case 3:
-        if ((sub_81B1360() == 8 || sub_81B1360() == 9) && gUnknown_02022C40.field_0 != 0)
+        if ((sub_81B1360() == 8 || sub_81B1360() == 9) && sUnionRoomTrade.field_0 != 0)
         {
             id = GetCursorSelectionMonId();
-            switch (gUnknown_02022C40.field_0)
+            switch (sUnionRoomTrade.field_0)
             {
             case 1:
                 sub_8011090(0x54, 0, 1);
                 if (id >= PARTY_SIZE)
                 {
-                    sub_801807C(&gUnknown_02022C40);
+                    ResetUnionRoomTrade(&sUnionRoomTrade);
                     sub_8010FCC(0, 0, 0);
-                    sub_801568C(gUnknown_082EF4FC);
+                    sub_801568C(sText_RegistrationCanceled);
                 }
-                else if (!sub_80180A0(GetCursorSelectionMonId(), &gUnknown_02022C40))
+                else if (!RegisterTradeMonAndGetIsEgg(GetCursorSelectionMonId(), &sUnionRoomTrade))
                 {
-                    sub_8015664(0x34, gUnknown_082EF47C);
+                    sub_8015664(0x34, sText_ChooseRequestedMonType);
                 }
                 else
                 {
@@ -2331,21 +2331,21 @@ void sub_80156E0(u8 taskId)
                 break;
             case 2:
                 sub_80156C8(data);
-                taskData[1] = gUnknown_02022C40.field_8;
+                taskData[1] = sUnionRoomTrade.field_8;
                 if (id >= PARTY_SIZE)
                 {
-                    sub_801568C(gUnknown_082EF544);
+                    sub_801568C(sText_TradeCanceled);
                 }
                 else
                 {
                     sub_8011090(0x54, 0, 1);
                     gUnknown_02022C2C = 0x44;
-                    sub_80180E8(GetCursorSelectionMonId(), &gUnknown_02022C40);
+                    RegisterTradeMon(GetCursorSelectionMonId(), &sUnionRoomTrade);
                     data->state = 51;
                 }
                 break;
             }
-            gUnknown_02022C40.field_0 = 0;
+            sUnionRoomTrade.field_0 = 0;
         }
         else
         {
@@ -2453,9 +2453,9 @@ void sub_80156E0(u8 taskId)
         case 1:
         case 2:
             if (sub_8011B90() == TRUE)
-                sub_801568C(gUnknown_082EE6C8);
+                sub_801568C(sText_TrainerAppearsBusy);
             else
-                sub_8015664(30, gUnknown_082EE6C8);
+                sub_8015664(30, sText_TrainerAppearsBusy);
 
             gUnknown_02022C2C = 0x40;
             break;
@@ -2513,9 +2513,9 @@ void sub_80156E0(u8 taskId)
                 {
                     gUnknown_02022C2C = var5;
                     gUnknown_02022C2D = (u32)(var5) >> 8;
-                    if (gUnknown_02022C2C == 0x41 && !sub_8018024())
+                    if (gUnknown_02022C2C == 0x41 && !HasAtLeastTwoMonsOfLevel30OrLower())
                     {
-                        sub_8015664(5, gUnknown_082EEBD0);
+                        sub_8015664(5, sText_NeedTwoMonsOfLevel30OrLower1);
                     }
                     else
                     {
@@ -2528,7 +2528,7 @@ void sub_80156E0(u8 taskId)
         }
         break;
     case 28:
-        StringCopy(gStringVar4, gUnknown_082EEB88);
+        StringCopy(gStringVar4, sText_TrainerBattleBusy);
         data->state = 36;
         break;
     case 27:
@@ -2547,15 +2547,15 @@ void sub_80156E0(u8 taskId)
         break;
     case 31:
         data->field_4C[0] = 0x44;
-        data->field_4C[1] = gUnknown_02022C40.species;
-        data->field_4C[2] = gUnknown_02022C40.level;
+        data->field_4C[1] = sUnionRoomTrade.species;
+        data->field_4C[2] = sUnionRoomTrade.level;
         sub_800FE50(data->field_4C);
         data->state = 29;
         break;
     case 29:
         if (gReceivedRemoteLinkPlayers == 0)
         {
-            StringCopy(gStringVar4, gUnknown_082EEB88);
+            StringCopy(gStringVar4, sText_TrainerBattleBusy);
             data->state = 28;
         }
         else
@@ -2603,7 +2603,7 @@ void sub_80156E0(u8 taskId)
             {
                 StringCopy(gStringVar1, gLinkPlayers[GetMultiplayerId() ^ 1].name);
                 id = sub_800E540(gLinkPlayers[1].trainerId, gLinkPlayers[1].name);
-                StringExpandPlaceholders(gStringVar4, gUnknown_082EE378[id]);
+                StringExpandPlaceholders(gStringVar4, sUnionRoomTexts_AwaitingResponse[id]);
                 data->state = 33;
             }
             else
@@ -2627,7 +2627,7 @@ void sub_80156E0(u8 taskId)
         case 1:
         case -1:
             playerGender = sub_8017CF8(taskData[1], data->field_0);
-            sub_801568C(gUnknown_082EEC9C[playerGender]);
+            sub_801568C(sUnionRoomTexts_DeclineBattle[playerGender]);
             break;
         }
         break;
@@ -2712,7 +2712,7 @@ void sub_80156E0(u8 taskId)
         if (sub_80168DC(data) && gMain.newKeys & B_BUTTON)
         {
             sub_8011DE0(1);
-            StringCopy(gStringVar4, gUnionRoom_ChatEnded);
+            StringCopy(gStringVar4, sText_ChatEnded);
             data->state = 36;
         }
         break;
@@ -2733,12 +2733,12 @@ void sub_80156E0(u8 taskId)
             taskData[3] = 0;
             if (gUnknown_02022C2C == 0x41)
             {
-                if (!sub_8018024())
+                if (!HasAtLeastTwoMonsOfLevel30OrLower())
                 {
                     data->field_4C[0] = 0x52;
                     sub_800FE50(data->field_4C);
                     data->state = 10;
-                    StringCopy(gStringVar4, gUnknown_082EEC14);
+                    StringCopy(gStringVar4, sText_NeedTwoMonsOfLevel30OrLower2);
                 }
                 else
                 {
@@ -2828,19 +2828,19 @@ void sub_80156E0(u8 taskId)
         {
             if (sub_800F7DC()->species == SPECIES_EGG)
             {
-                StringCopy(gStringVar4, gUnknown_082EF590);
+                StringCopy(gStringVar4, sText_CancelRegistrationOfEgg);
             }
             else
             {
                 StringCopy(gStringVar1, gSpeciesNames[sub_800F7DC()->species]);
                 ConvertIntToDecimalStringN(gStringVar2, sub_800F7DC()->level, STR_CONV_MODE_LEFT_ALIGN, 3);
-                StringExpandPlaceholders(gStringVar4, gUnknown_082EF564);
+                StringExpandPlaceholders(gStringVar4, sText_CancelRegistrationOfMon);
             }
             sub_8015664(44, gStringVar4);
         }
         break;
     case 43:
-        if (PrintOnTextbox(&data->textState, gUnknown_082EF20C))
+        if (PrintOnTextbox(&data->textState, sText_RegisterMonAtTradingBoard))
             data->state = 47;
         break;
     case 47:
@@ -2856,11 +2856,11 @@ void sub_80156E0(u8 taskId)
             {
                 switch (var5)
                 {
-                case 1:
-                    sub_8015664(53, gUnknown_082EF4C4);
+                case 1: // REGISTER
+                    sub_8015664(53, sText_WhichMonWillYouOffer);
                     break;
-                case 2:
-                    sub_8015664(47, gUnknown_082EF298);
+                case 2: // INFO
+                    sub_8015664(47, sText_TradingBoardInfo);
                     break;
                 }
             }
@@ -2873,7 +2873,7 @@ void sub_80156E0(u8 taskId)
     case 54:
         if (!gPaletteFade.active)
         {
-            gUnknown_02022C40.field_0 = 1;
+            sUnionRoomTrade.field_0 = 1;
             gFieldCallback = sub_80AF128;
             sub_81B8904(8, CB2_ReturnToField);
         }
@@ -2886,20 +2886,20 @@ void sub_80156E0(u8 taskId)
             {
             case -2:
             case 18:
-                sub_801807C(&gUnknown_02022C40);
+                ResetUnionRoomTrade(&sUnionRoomTrade);
                 sub_8010FCC(0, 0, 0);
-                sub_801568C(gUnknown_082EF4FC);
+                sub_801568C(sText_RegistrationCanceled);
                 break;
             default:
-                gUnknown_02022C40.type = var5;
+                sUnionRoomTrade.type = var5;
                 data->state = 55;
                 break;
             }
         }
         break;
     case 55:
-        sub_8010FCC(gUnknown_02022C40.type, gUnknown_02022C40.playerSpecies, gUnknown_02022C40.playerLevel);
-        sub_801568C(gUnknown_082EF520);
+        sub_8010FCC(sUnionRoomTrade.type, sUnionRoomTrade.playerSpecies, sUnionRoomTrade.playerLevel);
+        sub_801568C(sText_RegistraionCompleted);
         break;
     case 44:
         switch (sub_80170B8(&data->textState, FALSE))
@@ -2915,16 +2915,16 @@ void sub_80156E0(u8 taskId)
         }
         break;
     case 56:
-        if (PrintOnTextbox(&data->textState, gUnknown_082EF5B8))
+        if (PrintOnTextbox(&data->textState, sText_RegistrationCanceled2))
         {
             sub_8010FCC(0, 0, 0);
-            sub_801807C(&gUnknown_02022C40);
+            ResetUnionRoomTrade(&sUnionRoomTrade);
             sub_801818C(TRUE);
             data->state = 4;
         }
         break;
     case 45:
-        if (PrintOnTextbox(&data->textState, gUnknown_082EF1EC))
+        if (PrintOnTextbox(&data->textState, sText_XCheckedTradingBoard))
             data->state = 46;
         break;
     case 46:
@@ -2948,18 +2948,18 @@ void sub_80156E0(u8 taskId)
                 {
                 case 0:
                     sub_8018404(gStringVar1, &data->field_0->arr[var5]);
-                    sub_8015664(49, gUnknown_082EF65C);
+                    sub_8015664(49, sText_AskTrainerToMakeTrade);
                     taskData[1] = var5;
                     break;
                 case 1:
                     sub_8018404(gStringVar1, &data->field_0->arr[var5]);
                     StringCopy(gStringVar2, gTypeNames[data->field_0->arr[var5].unk.field_0.type]);
-                    sub_8015664(46, gUnknown_082EF6E4);
+                    sub_8015664(46, sText_DontHaveTypeTrainerWants);
                     break;
                 case 2:
                     sub_8018404(gStringVar1, &data->field_0->arr[var5]);
                     StringCopy(gStringVar2, gTypeNames[data->field_0->arr[var5].unk.field_0.type]);
-                    sub_8015664(46, gUnknown_082EF718);
+                    sub_8015664(46, sText_DontHaveEggTrainerWants);
                     break;
                 }
                 break;
@@ -2980,16 +2980,16 @@ void sub_80156E0(u8 taskId)
         }
         break;
     case 50:
-        if (PrintOnTextbox(&data->textState, gUnknown_082EF4C4))
+        if (PrintOnTextbox(&data->textState, sText_WhichMonWillYouOffer))
         {
-            gUnknown_02022C40.field_0 = 2;
+            sUnionRoomTrade.field_0 = 2;
             memcpy(&gUnknown_02022C38, &data->field_0->arr[taskData[1]].unk.field_0.unk_00, sizeof(gUnknown_02022C38));
             gUnionRoomRequestedMonType = data->field_0->arr[taskData[1]].unk.field_0.type;
             gUnionRoomOfferedSpecies = data->field_0->arr[taskData[1]].unk.field_0.species;
             gFieldCallback = sub_80AF128;
             sub_81B8904(9, CB2_ReturnToField);
             sub_80156B0(data);
-            gUnknown_02022C40.field_8 = taskData[1];
+            sUnionRoomTrade.field_8 = taskData[1];
         }
         break;
     case 51:
@@ -3859,7 +3859,7 @@ s32 sub_80179D4(struct UnkStruct_Main0 *arg0, u8 arg1, u8 arg2, u32 playerGender
         r2 = sub_800E540(ReadAsU16(r5->unk.field_0.unk_00.playerTrainerId), gStringVar1);
         if (r5->unk.field_0.unk_0a_0 == 0x45)
         {
-            StringExpandPlaceholders(gStringVar4, gUnknown_082EE6B8[r2][playerGender]);
+            StringExpandPlaceholders(gStringVar4, sUnionRoomTexts_JoinChat[r2][playerGender]);
             return 2;
         }
         else
@@ -3881,7 +3881,7 @@ s32 sub_80179D4(struct UnkStruct_Main0 *arg0, u8 arg1, u8 arg2, u32 playerGender
             StringExpandPlaceholders(gStringVar4, gUnknown_082EEEAC[playerGender][Random() % 4]);
             break;
         case 4:
-            StringExpandPlaceholders(gStringVar4, gUnknown_082EF1CC[playerGender][Random() % 2]);
+            StringExpandPlaceholders(gStringVar4, sUnionRoomTexts_Traded[playerGender][Random() % 2]);
             break;
         case 5:
             StringExpandPlaceholders(gStringVar4, gUnknown_082EF010[playerGender][Random() % 4]);
@@ -3890,7 +3890,7 @@ s32 sub_80179D4(struct UnkStruct_Main0 *arg0, u8 arg1, u8 arg2, u32 playerGender
             StringExpandPlaceholders(gStringVar4, gUnknown_082EF100[playerGender][Random() % 2]);
             break;
         default:
-            StringExpandPlaceholders(gStringVar4, gUnknown_082EE6C8);
+            StringExpandPlaceholders(gStringVar4, sText_TrainerAppearsBusy);
             break;
         }
         return 0;
@@ -3912,7 +3912,7 @@ void sub_8017B3C(u8 arg0, u8 arg1, struct UnkLinkRfuStruct_02022B14 * arg2, cons
     sub_80173E0(arg0, 1, str, 8, arg1, arg4);
     if (r8 == SPECIES_EGG)
     {
-        sub_80173E0(arg0, 1, gUnknown_082EF7D0, 0x44, arg1, arg4);
+        sub_80173E0(arg0, 1, sText_EggTrade, 0x44, arg1, arg4);
     }
     else
     {
@@ -4023,7 +4023,7 @@ void sub_8017D9C(u8 *dst, s32 arg1, u32 playerGender)
         StringExpandPlaceholders(dst, gUnknown_082EED3C[playerGender]);
         break;
     case 0x44:
-        StringExpandPlaceholders(dst, gUnknown_082EF7B0);
+        StringExpandPlaceholders(dst, sText_TradeOfferRejected);
         break;
     case 0x48:
         StringExpandPlaceholders(dst, gUnknown_082EEB08[playerGender]);
@@ -4059,16 +4059,16 @@ s32 sub_8017EA0(u8 *dst, u32 gender, u16 *arg2, struct UnkStruct_URoom *arg3)
     switch (arg2[0])
     {
     case 0x41:
-        StringExpandPlaceholders(dst, gUnionRoom_BattleChallenge);
+        StringExpandPlaceholders(dst, sText_BattleChallenge);
         result = 1;
         break;
     case 0x45:
-        StringExpandPlaceholders(dst, gUnionRoom_ChatInvitation);
+        StringExpandPlaceholders(dst, sText_ChatInvitation);
         result = 1;
         break;
     case 0x44:
-        ConvertIntToDecimalStringN(arg3->field_58 + 0x00, gUnknown_02022C40.playerLevel, STR_CONV_MODE_LEFT_ALIGN, 3);
-        StringCopy(arg3->field_58 + 0x10, gSpeciesNames[gUnknown_02022C40.playerSpecies]);
+        ConvertIntToDecimalStringN(arg3->field_58 + 0x00, sUnionRoomTrade.playerLevel, STR_CONV_MODE_LEFT_ALIGN, 3);
+        StringCopy(arg3->field_58 + 0x10, gSpeciesNames[sUnionRoomTrade.playerSpecies]);
         for (i = 0; i < 4; i++)
         {
             if (gUnknown_03007890->unk_14[i].unk_04 == 2)
@@ -4081,7 +4081,7 @@ s32 sub_8017EA0(u8 *dst, u32 gender, u16 *arg2, struct UnkStruct_URoom *arg3)
         }
         if (species == SPECIES_EGG)
         {
-            StringCopy(dst, gUnionRoom_OfferToTradeEgg);
+            StringCopy(dst, sText_OfferToTradeEgg);
         }
         else
         {
@@ -4089,16 +4089,16 @@ s32 sub_8017EA0(u8 *dst, u32 gender, u16 *arg2, struct UnkStruct_URoom *arg3)
             {
                 DynamicPlaceholderTextUtil_SetPlaceholderPtr(i, arg3->field_58 + 0x10 * i);
             }
-            DynamicPlaceholderTextUtil_ExpandPlaceholders(dst, gUnionRoom_OfferToTradeMon);
+            DynamicPlaceholderTextUtil_ExpandPlaceholders(dst, sText_OfferToTradeMon);
         }
         result = 1;
         break;
     case 0x48:
-        StringExpandPlaceholders(dst, gUnionRoom_ShowTrainerCard);
+        StringExpandPlaceholders(dst, sText_ShowTrainerCard);
         result = 1;
         break;
     case 0x40:
-        StringExpandPlaceholders(dst, gUnionRoom_ChatDropped);
+        StringExpandPlaceholders(dst, sText_ChatDropped);
         result = 2;
         break;
     }
@@ -4131,14 +4131,14 @@ bool32 InUnionRoom(void)
            ? TRUE : FALSE;
 }
 
-bool32 sub_8018024(void)
+bool32 HasAtLeastTwoMonsOfLevel30OrLower(void)
 {
     s32 i;
     s32 count = 0;
 
     for (i = 0; i < gPlayerPartyCount; i++)
     {
-        if (   GetMonData(&gPlayerParty[i], MON_DATA_LEVEL) <= 30
+        if (GetMonData(&gPlayerParty[i], MON_DATA_LEVEL) <= 30
             && GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2) != SPECIES_EGG)
         {
             count++;
@@ -4146,16 +4146,12 @@ bool32 sub_8018024(void)
     }
 
     if (count > 1)
-    {
         return TRUE;
-    }
     else
-    {
         return FALSE;
-    }
 }
 
-void sub_801807C(struct TradeUnkStruct *arg0)
+static void ResetUnionRoomTrade(struct UnionRoomTrade *arg0)
 {
     arg0->field_0 = 0;
     arg0->type = 0;
@@ -4167,34 +4163,30 @@ void sub_801807C(struct TradeUnkStruct *arg0)
     arg0->personality = 0;
 }
 
-void sub_8018090(void)
+void Script_ResetUnionRoomTrade(void)
 {
-    sub_801807C(&gUnknown_02022C40);
+    ResetUnionRoomTrade(&sUnionRoomTrade);
 }
 
-bool32 sub_80180A0(u32 monId, struct TradeUnkStruct *arg1)
+static bool32 RegisterTradeMonAndGetIsEgg(u32 monId, struct UnionRoomTrade *trade)
 {
-    arg1->playerSpecies = GetMonData(&gPlayerParty[monId], MON_DATA_SPECIES2);
-    arg1->playerLevel = GetMonData(&gPlayerParty[monId], MON_DATA_LEVEL);
-    arg1->playerPersonality = GetMonData(&gPlayerParty[monId], MON_DATA_PERSONALITY);
-    if (arg1->playerSpecies == SPECIES_EGG)
-    {
+    trade->playerSpecies = GetMonData(&gPlayerParty[monId], MON_DATA_SPECIES2);
+    trade->playerLevel = GetMonData(&gPlayerParty[monId], MON_DATA_LEVEL);
+    trade->playerPersonality = GetMonData(&gPlayerParty[monId], MON_DATA_PERSONALITY);
+    if (trade->playerSpecies == SPECIES_EGG)
         return TRUE;
-    }
     else
-    {
         return FALSE;
-    }
 }
 
-void sub_80180E8(u32 monId, struct TradeUnkStruct *arg1)
+static void RegisterTradeMon(u32 monId, struct UnionRoomTrade *trade)
 {
-    arg1->species = GetMonData(&gPlayerParty[monId], MON_DATA_SPECIES2);
-    arg1->level = GetMonData(&gPlayerParty[monId], MON_DATA_LEVEL);
-    arg1->personality = GetMonData(&gPlayerParty[monId], MON_DATA_PERSONALITY);
+    trade->species = GetMonData(&gPlayerParty[monId], MON_DATA_SPECIES2);
+    trade->level = GetMonData(&gPlayerParty[monId], MON_DATA_LEVEL);
+    trade->personality = GetMonData(&gPlayerParty[monId], MON_DATA_PERSONALITY);
 }
 
-u32 sub_8018120(struct TradeUnkStruct *arg0, u8 multiplayerId)
+static u32 GetPartyPositionOfRegisteredMon(struct UnionRoomTrade *trade, u8 multiplayerId)
 {
     u16 response = 0;
     u16 species;
@@ -4203,15 +4195,17 @@ u32 sub_8018120(struct TradeUnkStruct *arg0, u8 multiplayerId)
     u16 cur_species;
     s32 i;
 
+    // player
     if (multiplayerId == 0)
     {
-        species = arg0->playerSpecies;
-        personality = arg0->playerPersonality;
+        species = trade->playerSpecies;
+        personality = trade->playerPersonality;
     }
+    // partner
     else
     {
-        species = arg0->species;
-        personality = arg0->personality;
+        species = trade->species;
+        personality = trade->personality;
     }
 
     for (i = 0; i < gPlayerPartyCount; i++)
@@ -4241,7 +4235,7 @@ void sub_801818C(bool32 arg0)
     gUnknown_02022C2C = 0;
     if (arg0)
     {
-        sub_8010FCC(gUnknown_02022C40.type, gUnknown_02022C40.playerSpecies, gUnknown_02022C40.playerLevel);
+        sub_8010FCC(sUnionRoomTrade.type, sUnionRoomTrade.playerSpecies, sUnionRoomTrade.playerLevel);
         sub_8011090(0x40, 0, 0);
     }
 }

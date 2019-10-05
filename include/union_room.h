@@ -135,7 +135,7 @@ union UnkUnion_Main
     struct UnkStruct_URoom *uRoom;
 };
 
-struct TradeUnkStruct
+struct UnionRoomTrade
 {
     u16 field_0;
     u16 type;
