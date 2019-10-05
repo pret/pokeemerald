@@ -707,3 +707,7 @@ LittlerootTown_BrendansHouse_1F_Movement_292DDE: @ 8292DDE
 	walk_right
 	walk_in_place_fastest_up
 	step_end
+
+EventScript_RunningShoesManual:: @ 8292DE5
+	msgbox LittlerootTown_BrendansHouse_1F_Text_1F7F66, MSGBOX_SIGN
+	end
