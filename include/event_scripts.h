@@ -558,7 +558,7 @@ extern const u8 LittlerootTown_ProfessorBirchsLab_EventScript_1FA4D6[];
 extern const u8 RustboroCity_Gym_EventScript_21307B[];
 extern const u8 MossdeepCity_SpaceCenter_2F_EventScript_224175[];
 extern const u8 SSTidalCorridor_EventScript_23C050[];
-extern const u8 gUnknown_082A8350[];
+extern const u8 EventScript_FallDownHoleMtPyre[];
 
 // Secret Base
 extern const u8 SecretBase_EventScript_PC[];

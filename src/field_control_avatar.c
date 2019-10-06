@@ -733,7 +733,7 @@ static bool8 TryStartWarpEventScript(struct MapPosition *position, u16 metatileB
         }
         if (MetatileBehavior_IsMtPyreHole(metatileBehavior) == TRUE)
         {
-            ScriptContext1_SetupScript(gUnknown_082A8350);
+            ScriptContext1_SetupScript(EventScript_FallDownHoleMtPyre);
             return TRUE;
         }
         if (MetatileBehavior_IsMossdeepGymWarp(metatileBehavior) == TRUE)
