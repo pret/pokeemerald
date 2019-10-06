@@ -6831,15 +6831,15 @@ bool8 MovementAction_ClearAffineAnim_Step0(struct EventObject *eventObject, stru
     return TRUE;
 }
 
-bool8 MovementAction_Unknown1_Step0(struct EventObject *eventObject, struct Sprite *sprite)
+bool8 MovementAction_HideReflection_Step0(struct EventObject *eventObject, struct Sprite *sprite)
 {
-    eventObject->unk3_3 = TRUE;
+    eventObject->hideReflection = TRUE;
     return TRUE;
 }
 
-bool8 MovementAction_Unknown2_Step0(struct EventObject *eventObject, struct Sprite *sprite)
+bool8 MovementAction_ShowReflection_Step0(struct EventObject *eventObject, struct Sprite *sprite)
 {
-    eventObject->unk3_3 = FALSE;
+    eventObject->hideReflection = FALSE;
     return TRUE;
 }
 
