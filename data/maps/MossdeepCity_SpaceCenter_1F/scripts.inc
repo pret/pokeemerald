@@ -82,7 +82,7 @@ MossdeepCity_SpaceCenter_1F_EventScript_223024:: @ 8223024
 	compare VAR_RESULT, 1
 	call_if_ge MossdeepCity_SpaceCenter_1F_EventScript_22305A
 	closemessage
-	applymovement VAR_LAST_TALKED, Common_Movement_WalkInPlaceRight
+	applymovement VAR_LAST_TALKED, Common_Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	release
 	end
@@ -106,7 +106,7 @@ MossdeepCity_SpaceCenter_1F_EventScript_223063:: @ 8223063
 
 MossdeepCity_SpaceCenter_1F_EventScript_22307A:: @ 822307A
 	msgbox MossdeepCity_SpaceCenter_1F_Text_2234B7, MSGBOX_DEFAULT
-	applymovement VAR_LAST_TALKED, Common_Movement_WalkInPlaceRight
+	applymovement VAR_LAST_TALKED, Common_Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	release
 	end
@@ -139,14 +139,14 @@ MossdeepCity_SpaceCenter_1F_EventScript_2230DA:: @ 82230DA
 	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_SUN_STONE_MOSSDEEP
 	msgbox MossdeepCity_SpaceCenter_1F_Text_223664, MSGBOX_DEFAULT
-	applymovement VAR_LAST_TALKED, Common_Movement_WalkInPlaceRight
+	applymovement VAR_LAST_TALKED, Common_Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	release
 	end
 
 MossdeepCity_SpaceCenter_1F_EventScript_223119:: @ 8223119
 	msgbox MossdeepCity_SpaceCenter_1F_Text_223664, MSGBOX_DEFAULT
-	applymovement VAR_LAST_TALKED, Common_Movement_WalkInPlaceRight
+	applymovement VAR_LAST_TALKED, Common_Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	release
 	end

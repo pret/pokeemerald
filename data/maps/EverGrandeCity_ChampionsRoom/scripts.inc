@@ -22,7 +22,7 @@ EverGrandeCity_ChampionsRoom_MapScript2_228A14: @ 8228A14
 
 EverGrandeCity_ChampionsRoom_EventScript_228A1E:: @ 8228A1E
 	lockall
-	applymovement EVENT_OBJ_ID_PLAYER, EverGrandeCity_ChampionsRoom_Movement_2725C1
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkUp4
 	waitmovement 0
 	delay 40
 	applymovement EVENT_OBJ_ID_PLAYER, EverGrandeCity_ChampionsRoom_Movement_228A42
@@ -105,26 +105,26 @@ EverGrandeCity_ChampionsRoom_EventScript_228B30:: @ 8228B30
 	addobject 3
 	applymovement 3, EverGrandeCity_ChampionsRoom_Movement_228C43
 	waitmovement 0
-	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceRight
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	msgbox EverGrandeCity_ChampionsRoom_Text_2291E6, MSGBOX_DEFAULT
 	call EverGrandeCity_ChampionsRoom_EventScript_272184
 	msgbox EverGrandeCity_ChampionsRoom_Text_22934D, MSGBOX_DEFAULT
-	applymovement 1, Common_Movement_WalkInPlaceUp
+	applymovement 1, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	delay 20
-	applymovement 1, Common_Movement_WalkInPlaceDown
+	applymovement 1, Common_Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	msgbox EverGrandeCity_ChampionsRoom_Text_229399, MSGBOX_DEFAULT
 	closemessage
 	delay 30
 	applymovement 1, EverGrandeCity_ChampionsRoom_Movement_228C3B
 	applymovement EVENT_OBJ_ID_PLAYER, EverGrandeCity_ChampionsRoom_Movement_228C1D
-	applymovement 3, Common_Movement_WalkInPlaceUp
+	applymovement 3, Common_Movement_WalkInPlaceFastestUp
 	applymovement 2, EverGrandeCity_ChampionsRoom_Movement_228C38
 	waitmovement 0
 	delay 20
-	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceDown
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	msgbox EverGrandeCity_ChampionsRoom_Text_2293EB, MSGBOX_DEFAULT
 	checkplayergender
@@ -153,7 +153,7 @@ EverGrandeCity_ChampionsRoom_EventScript_228BF4:: @ 8228BF4
 EverGrandeCity_ChampionsRoom_EventScript_228BFD:: @ 8228BFD
 	applymovement 2, EverGrandeCity_ChampionsRoom_Movement_228C26
 	waitmovement 0
-	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceLeft
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceFastestLeft
 	waitmovement 0
 	return
 

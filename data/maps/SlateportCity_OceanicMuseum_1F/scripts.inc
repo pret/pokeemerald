@@ -7,14 +7,14 @@ SlateportCity_OceanicMuseum_1F_EventScript_20AD96:: @ 820AD96
 
 SlateportCity_OceanicMuseum_1F_EventScript_20AD9F:: @ 820AD9F
 	lockall
-	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceLeft
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceFastestLeft
 	waitmovement 0
 	goto SlateportCity_OceanicMuseum_1F_EventScript_20ADC1
 	end
 
 SlateportCity_OceanicMuseum_1F_EventScript_20ADB0:: @ 820ADB0
 	lockall
-	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceRight
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	goto SlateportCity_OceanicMuseum_1F_EventScript_20ADC1
 	end

@@ -9,7 +9,7 @@ NavelRock_Harbor_EventScript_2690BD:: @ 82690BD
 	goto_if_eq NavelRock_Harbor_EventScript_269102
 	msgbox EventTicket_Text_SailHome, MSGBOX_DEFAULT
 	closemessage
-	applymovement VAR_LAST_TALKED, Common_Movement_WalkInPlaceDown
+	applymovement VAR_LAST_TALKED, Common_Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	delay 30
 	hideobjectat 1, MAP_NAVEL_ROCK_HARBOR

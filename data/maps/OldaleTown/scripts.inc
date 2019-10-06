@@ -227,7 +227,7 @@ OldaleTown_EventScript_1E9086:: @ 81E9086
 	lockall
 	applymovement 4, OldaleTown_Movement_1E9170
 	waitmovement 0
-	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceRight
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	setvar VAR_0x8009, 1
 	goto OldaleTown_EventScript_1E90E6
@@ -237,7 +237,7 @@ OldaleTown_EventScript_1E90A6:: @ 81E90A6
 	lockall
 	applymovement 4, OldaleTown_Movement_1E9173
 	waitmovement 0
-	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceRight
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	setvar VAR_0x8009, 1
 	goto OldaleTown_EventScript_1E90E6
@@ -247,7 +247,7 @@ OldaleTown_EventScript_1E90C6:: @ 81E90C6
 	lockall
 	applymovement 4, OldaleTown_Movement_1E9175
 	waitmovement 0
-	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceRight
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	setvar VAR_0x8009, 1
 	goto OldaleTown_EventScript_1E90E6
