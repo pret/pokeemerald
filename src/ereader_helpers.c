@@ -1,5 +1,5 @@
 #include "global.h"
-#include "alloc.h"
+#include "malloc.h"
 #include "decompress.h"
 #include "ereader_helpers.h"
 #include "link.h"
@@ -9,6 +9,12 @@
 #include "sprite.h"
 #include "task.h"
 #include "util.h"
+#include "trainer_hill.h"
+#include "constants/easy_chat.h"
+#include "constants/trainers.h"
+#include "constants/species.h"
+#include "constants/moves.h"
+#include "constants/items.h"
 
 struct Unknown030012C8
 {
@@ -38,14 +44,359 @@ static u16 gUnknown_030012F0;
 static u16 gUnknown_030012F2;
 static u16 gUnknown_030012F4;
 
-extern const u8 gUnknown_08625B6C[][0x148];
+static const struct TrainerHillTrainer sTrainerHillTrainerTemplates_JP[] = {
+    [0] = {
+        .name = __("マキエ$$$$$   "),
+        .facilityClass = FACILITY_CLASS_HEX_MANIAC,
+        .unused = 0x1,
+        .speechBefore = { EC_WORD_PREPOSTEROUS, EC_WORD_CASE, EC_WORD_THERE, EC_WORD_TO_HER, EC_WORD_CHALLENGE, EC_WORD_JOKING },
+        .speechWin = { EC_WORD_HERS, EC_WORD_TRUMP_CARD, EC_MOVE2(SECRET_POWER), EC_WORD_USING, EC_WORD_WON, EC_WORD_EXCL_EXCL },
+        .speechLose = { EC_WORD_TO_HER, EC_WORD_WIN, EC_WORD_JOKING, EC_WORD_HIGHS, EC_WORD_SCARY, EC_WORD_ELLIPSIS_EXCL },
+        .speechAfter = { EC_WORD_IGNORANT, EC_WORD_SO, EC_WORD_TODAY, EC_WORD_NIGHTTIME, EC_WORD_YOU_RE, EC_WORD_ELLIPSIS_ELLIPSIS_ELLIPSIS },
+        .mons = {
+            [0] = NULL_BATTLE_TOWER_POKEMON,
+            [1] = NULL_BATTLE_TOWER_POKEMON,
+            [2] = NULL_BATTLE_TOWER_POKEMON,
+            [3] = {
+                .species = SPECIES_SWALOT,
+                .heldItem = ITEM_SHELL_BELL,
+                .moves = { MOVE_SLUDGE_BOMB, MOVE_SHADOW_BALL, MOVE_PAIN_SPLIT, MOVE_YAWN },
+                .level = 0,
+                .ppBonuses = 0x0,
+                .hpEV = 55,
+                .attackEV = 255,
+                .defenseEV = 100,
+                .speedEV = 0,
+                .spAttackEV = 0,
+                .spDefenseEV = 100,
+                .otId = 0x10000000,
+                .hpIV = 5,
+                .attackIV = 5,
+                .defenseIV = 5,
+                .speedIV = 5,
+                .spAttackIV = 5,
+                .spDefenseIV = 5,
+                .abilityNum = 1,
+                .personality = 0x80,
+                .nickname = __("マルノーム$$$$$$"),
+                .friendship = 255
+            },
+            [4] = {
+                .species = SPECIES_DUSTOX,
+                .heldItem = ITEM_BRIGHT_POWDER,
+                .moves = { MOVE_SILVER_WIND, MOVE_SLUDGE_BOMB, MOVE_SHADOW_BALL, MOVE_GIGA_DRAIN },
+                .level = 0,
+                .ppBonuses = 0x0,
+                .hpEV = 0,
+                .attackEV = 255,
+                .defenseEV = 0,
+                .speedEV = 0,
+                .spAttackEV = 255,
+                .spDefenseEV = 0,
+                .otId = 0x10000000,
+                .hpIV = 5,
+                .attackIV = 5,
+                .defenseIV = 5,
+                .speedIV = 5,
+                .spAttackIV = 5,
+                .spDefenseIV = 5,
+                .abilityNum = 0,
+                .personality = 0x6,
+                .nickname = __("ドクケイル$$$$$$"),
+                .friendship = 255
+            },
+            [5] = {
+                .species = SPECIES_RELICANTH,
+                .heldItem = ITEM_QUICK_CLAW,
+                .moves = { MOVE_ANCIENT_POWER, MOVE_SURF, MOVE_EARTHQUAKE, MOVE_AMNESIA },
+                .level = 0,
+                .ppBonuses = 0x0,
+                .hpEV = 100,
+                .attackEV = 0,
+                .defenseEV = 0,
+                .speedEV = 0,
+                .spAttackEV = 155,
+                .spDefenseEV = 255,
+                .otId = 0x10000000,
+                .hpIV = 5,
+                .attackIV = 5,
+                .defenseIV = 5,
+                .speedIV = 5,
+                .spAttackIV = 5,
+                .spDefenseIV = 5,
+                .abilityNum = 0,
+                .personality = 0x2f,
+                .nickname = __("ジーランス$$$$$$"),
+                .friendship = 255
+            },
+        }
+    },
+    [1] = {
+        .name = __("ハルヒト$$$$   "),
+        .facilityClass = FACILITY_CLASS_CAMPER,
+        .unused = 0x1,
+        .speechBefore = { EC_MOVE2(BOUNCE), EC_WORD_AS_MUCH_AS, 0xFFFF, EC_WORD_THEY_RE, EC_WORD_STRONG, EC_WORD_EXCL },
+        .speechWin = { EC_MOVE(FLY), EC_WORD_AS_MUCH_AS, 0xFFFF, EC_WORD_THEY_RE, EC_WORD_HAPPY, EC_WORD_EXCL },
+        .speechLose = { EC_MOVE2(MINIMIZE), EC_WORD_AS_MUCH_AS, 0xFFFF, EC_WORD_THEY_RE, EC_WORD_SAD, EC_WORD_EXCL },
+        .speechAfter = { EC_MOVE(BITE), EC_WORD_AS_MUCH_AS, 0xFFFF, EC_WORD_THEY_RE, EC_WORD_ANGRY, EC_WORD_EXCL },
+        .mons = {
+            [0] = NULL_BATTLE_TOWER_POKEMON,
+            [1] = NULL_BATTLE_TOWER_POKEMON,
+            [2] = NULL_BATTLE_TOWER_POKEMON,
+            [3] = {
+                .species = SPECIES_CACTURNE,
+                .heldItem = ITEM_QUICK_CLAW,
+                .moves = { MOVE_GIGA_DRAIN, MOVE_FAINT_ATTACK, MOVE_THUNDER_PUNCH, MOVE_GROWTH },
+                .level = 0,
+                .ppBonuses = 0x0,
+                .hpEV = 55,
+                .attackEV = 0,
+                .defenseEV = 100,
+                .speedEV = 0,
+                .spAttackEV = 255,
+                .spDefenseEV = 100,
+                .otId = 0x10000000,
+                .hpIV = 5,
+                .attackIV = 5,
+                .defenseIV = 5,
+                .speedIV = 5,
+                .spAttackIV = 5,
+                .spDefenseIV = 5,
+                .abilityNum = 0,
+                .personality = 0x8c,
+                .nickname = __("ノクタス$$$$$$$"),
+                .friendship = 255
+            },
+            [4] = {
+                .species = SPECIES_SWELLOW,
+                .heldItem = ITEM_BRIGHT_POWDER,
+                .moves = { MOVE_FACADE, MOVE_AERIAL_ACE, MOVE_QUICK_ATTACK, MOVE_DOUBLE_TEAM },
+                .level = 0,
+                .ppBonuses = 0x0,
+                .hpEV = 255,
+                .attackEV = 255,
+                .defenseEV = 0,
+                .speedEV = 0,
+                .spAttackEV = 0,
+                .spDefenseEV = 0,
+                .otId = 0x10000000,
+                .hpIV = 5,
+                .attackIV = 5,
+                .defenseIV = 5,
+                .speedIV = 5,
+                .spAttackIV = 5,
+                .spDefenseIV = 5,
+                .abilityNum = 0,
+                .personality = 0x80,
+                .nickname = __("オオスバメ$$$$$$"),
+                .friendship = 255
+            },
+            [5] = {
+                .species = SPECIES_WHISCASH,
+                .heldItem = ITEM_CHESTO_BERRY,
+                .moves = { MOVE_SURF, MOVE_EARTHQUAKE, MOVE_AMNESIA, MOVE_REST },
+                .level = 0,
+                .ppBonuses = 0x0,
+                .hpEV = 0,
+                .attackEV = 255,
+                .defenseEV = 0,
+                .speedEV = 0,
+                .spAttackEV = 255,
+                .spDefenseEV = 0,
+                .otId = 0x10000000,
+                .hpIV = 5,
+                .attackIV = 5,
+                .defenseIV = 5,
+                .speedIV = 5,
+                .spAttackIV = 5,
+                .spDefenseIV = 5,
+                .abilityNum = 0,
+                .personality = 0x0,
+                .nickname = __("ナマズン$$$$$$$"),
+                .friendship = 255
+            },
+        }
+    },
+    [2] = {
+        .name = __("メイコ$$$$$   "),
+        .facilityClass = FACILITY_CLASS_SCHOOL_KID_F,
+        .unused = 0x1,
+        .speechBefore = { EC_WORD_SHINE, EC_WORD_POKEMON, EC_WORD_RELEASE, EC_WORD_WAS, EC_MOVE2(FRUSTRATION), EC_WORD_WITHOUT },
+        .speechWin = { EC_WORD_SHINE, EC_WORD_POKEMON, EC_WORD_TO_HER, EC_MOVE2(PRESENT), EC_WORD_KNOWS, EC_WORD_WITHOUT },
+        .speechLose = { EC_WORD_THAT, EC_WORD_ABOVE, EC_WORD_LOST, EC_WORD_STORES, EC_WORD_JOKING, EC_WORD_ELLIPSIS_ELLIPSIS_ELLIPSIS },
+        .speechAfter = { EC_WORD_ENTERTAINING, EC_WORD_NONE, EC_WORD_HEY_QUES, EC_WORD_ALMOST, EC_WORD_EXCL, 0xFFFF },
+        .mons = {
+            [0] = NULL_BATTLE_TOWER_POKEMON,
+            [1] = NULL_BATTLE_TOWER_POKEMON,
+            [2] = NULL_BATTLE_TOWER_POKEMON,
+            [3] = {
+                .species = SPECIES_DELCATTY,
+                .heldItem = ITEM_LUM_BERRY,
+                .moves = { MOVE_SING, MOVE_BODY_SLAM, MOVE_SHADOW_BALL, MOVE_IRON_TAIL },
+                .level = 0,
+                .ppBonuses = 0x0,
+                .hpEV = 0,
+                .attackEV = 255,
+                .defenseEV = 0,
+                .speedEV = 255,
+                .spAttackEV = 0,
+                .spDefenseEV = 0,
+                .otId = 0x10000000,
+                .hpIV = 5,
+                .attackIV = 5,
+                .defenseIV = 5,
+                .speedIV = 5,
+                .spAttackIV = 5,
+                .spDefenseIV = 5,
+                .abilityNum = 0,
+                .personality = 0x3,
+                .nickname = __("エネコロロ$$$$$$"),
+                .friendship = 255
+            },
+            [4] = {
+                .species = SPECIES_ROSELIA,
+                .heldItem = ITEM_LEFTOVERS,
+                .moves = { MOVE_GIGA_DRAIN, MOVE_GRASS_WHISTLE, MOVE_TOXIC, MOVE_LEECH_SEED },
+                .level = 0,
+                .ppBonuses = 0x0,
+                .hpEV = 255,
+                .attackEV = 0,
+                .defenseEV = 0,
+                .speedEV = 0,
+                .spAttackEV = 255,
+                .spDefenseEV = 0,
+                .otId = 0x10000000,
+                .hpIV = 5,
+                .attackIV = 5,
+                .defenseIV = 5,
+                .speedIV = 5,
+                .spAttackIV = 5,
+                .spDefenseIV = 5,
+                .abilityNum = 1,
+                .personality = 0x6,
+                .nickname = __("ロゼリア$$$$$$$"),
+                .friendship = 255
+            },
+            [5] = {
+                .species = SPECIES_BEAUTIFLY,
+                .heldItem = ITEM_BRIGHT_POWDER,
+                .moves = { MOVE_SILVER_WIND, MOVE_AERIAL_ACE, MOVE_ATTRACT, MOVE_PSYCHIC },
+                .level = 0,
+                .ppBonuses = 0x0,
+                .hpEV = 100,
+                .attackEV = 200,
+                .defenseEV = 0,
+                .speedEV = 0,
+                .spAttackEV = 200,
+                .spDefenseEV = 0,
+                .otId = 0x10000000,
+                .hpIV = 5,
+                .attackIV = 5,
+                .defenseIV = 5,
+                .speedIV = 5,
+                .spAttackIV = 5,
+                .spDefenseIV = 5,
+                .abilityNum = 0,
+                .personality = 0x6,
+                .nickname = __("アゲハント$$$$$$"),
+                .friendship = 255
+            },
+        }
+    },
+    [3] = {
+        .name = __("ピエール$$$$   "),
+        .facilityClass = FACILITY_CLASS_GENTLEMAN,
+        .unused = 0x1,
+        .speechBefore = { EC_WORD_SHE_WAS, EC_WORD_NO_1, EC_WORD_STRONG, EC_WORD_UNCLE, EC_WORD_THERE, EC_WORD_EXCL },
+        .speechWin = { EC_WORD_HAHAHA, EC_WORD_TEACHER, EC_WORD_BECOMES, EC_WORD_GIVE, EC_WORD_IS_IT_QUES, 0xFFFF },
+        .speechLose = { EC_WORD_OUTSIDE, EC_WORD_UNCLE, EC_WORD_SURPRISE, EC_WORD_THESE, EC_WORD_HEY_QUES, EC_WORD_ELLIPSIS_EXCL },
+        .speechAfter = { EC_WORD_HE_S, EC_WORD_NO_1, EC_WORD_STRONG, EC_WORD_CHILDREN, EC_WORD_CAN_T, EC_WORD_EXCL_EXCL },
+        .mons = {
+            [0] = NULL_BATTLE_TOWER_POKEMON,
+            [1] = NULL_BATTLE_TOWER_POKEMON,
+            [2] = NULL_BATTLE_TOWER_POKEMON,
+            [3] = {
+                .species = SPECIES_MAWILE,
+                .heldItem = ITEM_BRIGHT_POWDER,
+                .moves = { MOVE_CRUNCH, MOVE_FLAMETHROWER, MOVE_THUNDER_PUNCH, MOVE_COMET_PUNCH },
+                .level = 0,
+                .ppBonuses = 0x0,
+                .hpEV = 0,
+                .attackEV = 0,
+                .defenseEV = 100,
+                .speedEV = 0,
+                .spAttackEV = 255,
+                .spDefenseEV = 155,
+                .otId = 0x10000000,
+                .hpIV = 5,
+                .attackIV = 5,
+                .defenseIV = 5,
+                .speedIV = 5,
+                .spAttackIV = 5,
+                .spDefenseIV = 5,
+                .abilityNum = 1,
+                .personality = 0x0,
+                .nickname = __("クチート$$$$$$$"),
+                .friendship = 255
+            },
+            [4] = {
+                .species = SPECIES_SHARPEDO,
+                .heldItem = ITEM_SCOPE_LENS,
+                .moves = { MOVE_SURF, MOVE_CRUNCH, MOVE_DOUBLE_EDGE, MOVE_EARTHQUAKE },
+                .level = 0,
+                .ppBonuses = 0x0,
+                .hpEV = 255,
+                .attackEV = 0,
+                .defenseEV = 0,
+                .speedEV = 0,
+                .spAttackEV = 255,
+                .spDefenseEV = 0,
+                .otId = 0x10000000,
+                .hpIV = 5,
+                .attackIV = 5,
+                .defenseIV = 5,
+                .speedIV = 5,
+                .spAttackIV = 5,
+                .spDefenseIV = 5,
+                .abilityNum = 0,
+                .personality = 0x96,
+                .nickname = __("サメハダー$$$$$$"),
+                .friendship = 255
+            },
+            [5] = {
+                .species = SPECIES_BANETTE,
+                .heldItem = ITEM_LUM_BERRY,
+                .moves = { MOVE_PSYCHIC, MOVE_SHADOW_BALL, MOVE_THUNDERBOLT, MOVE_WILL_O_WISP },
+                .level = 0,
+                .ppBonuses = 0x0,
+                .hpEV = 255,
+                .attackEV = 0,
+                .defenseEV = 0,
+                .speedEV = 0,
+                .spAttackEV = 255,
+                .spDefenseEV = 0,
+                .otId = 0x10000000,
+                .hpIV = 5,
+                .attackIV = 5,
+                .defenseIV = 5,
+                .speedIV = 5,
+                .spAttackIV = 5,
+                .spDefenseIV = 5,
+                .abilityNum = 0,
+                .personality = 0x96,
+                .nickname = __("ジュペッタ$$$$$$"),
+                .friendship = 255
+            },
+        }
+    },
+};
 
 static u8 sub_81D38D4(void)
 {
     return (gSaveBlock1Ptr->trainerHill.unused + 1) % 256;
 }
 
-static bool32 Struct_Unk81D38FC_ValidateChecksum(struct Unk81D38FC *arg0)
+static bool32 Struct_EReaderTrainerHillTrainer_ValidateChecksum(struct EReaderTrainerHillTrainer *arg0)
 {
     int checksum = CalcByteArraySum((u8 *)arg0, 0x270);
     if (checksum != arg0->checksum)
@@ -58,17 +409,17 @@ bool8 EReader_IsReceivedDataValid(struct EReaderTrainerHillSet *buffer)
 {
     u32 i;
     u32 checksum;
-    int var0 = buffer->unk_0;
+    int var0 = buffer->count;
     if (var0 < 1 || var0 > 8)
         return FALSE;
 
     for (i = 0; i < var0; i++)
     {
-        if (!Struct_Unk81D38FC_ValidateChecksum(&buffer->unk_8[i]))
+        if (!Struct_EReaderTrainerHillTrainer_ValidateChecksum(&buffer->unk_8[i]))
             return FALSE;
     }
 
-    checksum = CalcByteArraySum((u8 *)buffer->unk_8, var0 * sizeof(struct Unk81D38FC));
+    checksum = CalcByteArraySum((u8 *)buffer->unk_8, var0 * sizeof(struct EReaderTrainerHillTrainer));
     if (checksum != buffer->checksum)
         return FALSE;
 
@@ -78,7 +429,7 @@ bool8 EReader_IsReceivedDataValid(struct EReaderTrainerHillSet *buffer)
 static bool32 TrainerHill_VerifyChecksum(struct EReaderTrainerHillSet *buffer)
 {
     u32 checksum;
-    int var0 = buffer->unk_0;
+    int var0 = buffer->count;
     if (var0 < 1 || var0 > 8)
         return FALSE;
 
@@ -89,38 +440,39 @@ static bool32 TrainerHill_VerifyChecksum(struct EReaderTrainerHillSet *buffer)
     return TRUE;
 }
 
-static bool32 TryWriteTrainerHill_r(struct EReaderTrainerHillSet *arg0, struct Unk81D3998 *buffer2)
+static bool32 TryWriteTrainerHill_r(struct EReaderTrainerHillSet *ttdata, struct TrHillTag *buffer2)
 {
     int i;
 
-    memset(buffer2, 0, 0x1000);
-    buffer2->unk_000 = arg0->unk_0;
-    buffer2->unk_001 = sub_81D38D4();
-    buffer2->unk_002 = (arg0->unk_0 + 1) / 2;
+    AGB_ASSERT_EX(ttdata->dummy == 0, "cereader_tool.c", 450);
+    AGB_ASSERT_EX(ttdata->id == 0, "cereader_tool.c", 452);
 
-    for (i = 0; i < arg0->unk_0; i++)
+    memset(buffer2, 0, 0x1000);
+    buffer2->unkField_0 = ttdata->count;
+    buffer2->unused1 = sub_81D38D4();
+    buffer2->numFloors = (ttdata->count + 1) / 2;
+
+    for (i = 0; i < ttdata->count; i++)
     {
         if (!(i & 1))
         {
-            buffer2->unk_008[i / 2].unk_000[0] = arg0->unk_8[i].unk0;
-            memcpy(buffer2->unk_008[i / 2].unk_294, arg0->unk_8[i].unk14C, 0x124);
-            memcpy(buffer2->unk_008[i / 2].unk_004, arg0->unk_8[i].unk4, 0x148);
+            buffer2->floors[i / 2].unk0 = ttdata->unk_8[i].unk0;
+            buffer2->floors[i / 2].display = ttdata->unk_8[i].unk14C;
+            buffer2->floors[i / 2].trainers[0] = ttdata->unk_8[i].unk4;
         }
         else
         {
-            buffer2->unk_008[i / 2].unk_000[1] = arg0->unk_8[i].unk0;
-            memcpy(buffer2->unk_008[i / 2].unk_14C, arg0->unk_8[i].unk4, 0x148);
+            buffer2->floors[i / 2].unk1 = ttdata->unk_8[i].unk0;
+            buffer2->floors[i / 2].trainers[1] = ttdata->unk_8[i].unk4;
         }
     }
 
     if (i & 1)
     {
-        u8 * dest = buffer2->unk_008[i / 2].unk_14C;
-        const u8 (* src)[0x148] = gUnknown_08625B6C;
-        memcpy(dest, src[i / 2], 0x148);
+        buffer2->floors[i / 2].trainers[1] = sTrainerHillTrainerTemplates_JP[i / 2];
     }
 
-    buffer2->checksum = CalcByteArraySum((u8 *)buffer2->unk_008, sizeof(struct Unk81D3998) - offsetof(struct Unk81D3998, unk_008));
+    buffer2->checksum = CalcByteArraySum((u8 *)buffer2->floors, 4 * sizeof(struct TrHillFloor));
     if (TryWriteSpecialSaveSection(SECTOR_ID_TRAINER_HILL, (u8 *)buffer2) != 1)
         return FALSE;
 
@@ -129,7 +481,7 @@ static bool32 TryWriteTrainerHill_r(struct EReaderTrainerHillSet *arg0, struct U
 
 bool32 TryWriteTrainerHill(struct EReaderTrainerHillSet *arg0)
 {
-    struct Unk81D3998 *var0 = AllocZeroed(0x1000);
+    void *var0 = AllocZeroed(0x1000);
     bool32 result = TryWriteTrainerHill_r(arg0, var0);
     Free(var0);
     return result;
@@ -163,20 +515,20 @@ bool32 ReadTrainerHillAndValidate(void)
     return result;
 }
 
-static int unref_sub_81D3B54(int arg0, u32 *arg1)
+int EReader_Send(int arg0, u32 *arg1)
 {
     int result;
     u16 var0;
     int var1;
 
-    sub_81D41A0();
+    EReaderHelper_SaveRegsState();
     while (1)
     {
         sub_81D4170();
         if (gUnknown_030012E2 & 2)
             gShouldAdvanceLinkState = 2;
 
-        var1 = sub_81D3D70(1, arg0, arg1, NULL);
+        var1 = EReaderHandleTransfer(1, arg0, arg1, NULL);
         gUnknown_030012E4 = var1;
         if ((gUnknown_030012E4 & 0x13) == 0x10)
         {
@@ -202,24 +554,24 @@ static int unref_sub_81D3B54(int arg0, u32 *arg1)
     }
 
     CpuFill32(0, &gUnknown_030012C8, sizeof(struct Unknown030012C8));
-    sub_81D41F4();
+    EReaderHelper_RestoreRegsState();
     return result;
 }
 
-static int unref_sub_81D3BE8(u32 *arg0)
+int EReader_Recv(u32 *arg0)
 {
     int result;
     u16 var0;
     int var1;
 
-    sub_81D41A0();
+    EReaderHelper_SaveRegsState();
     while (1)
     {
         sub_81D4170();
         if (gUnknown_030012E2 & 2)
             gShouldAdvanceLinkState = 2;
 
-        var1 = sub_81D3D70(0, 0, NULL, arg0);
+        var1 = EReaderHandleTransfer(0, 0, NULL, arg0);
         gUnknown_030012E4 = var1;
         if ((gUnknown_030012E4 & 0x13) == 0x10)
         {
@@ -245,7 +597,7 @@ static int unref_sub_81D3BE8(u32 *arg0)
     }
 
     CpuFill32(0, &gUnknown_030012C8, sizeof(struct Unknown030012C8));
-    sub_81D41F4();
+    EReaderHelper_RestoreRegsState();
     return result;
 }
 
@@ -285,7 +637,7 @@ static void sub_81D3D34(void)
     gUnknown_030012E8 = 0;
 }
 
-int sub_81D3D70(u8 arg0, u32 arg1, u32 *arg2, u32 *arg3)
+int EReaderHandleTransfer(u8 arg0, u32 arg1, u32 *arg2, u32 *arg3)
 {
     switch (gUnknown_030012C8.unk0[1])
     {
@@ -519,7 +871,7 @@ static void sub_81D4170(void)
     gUnknown_030012E0 = keysMask;
 }
 
-void sub_81D41A0(void)
+void EReaderHelper_SaveRegsState(void)
 {
     gUnknown_030012EC = REG_IME;
     gUnknown_030012EE = REG_IE;
@@ -528,7 +880,7 @@ void sub_81D41A0(void)
     gUnknown_030012F4 = REG_RCNT;
 }
 
-void sub_81D41F4(void)
+void EReaderHelper_RestoreRegsState(void)
 {
     REG_IME = gUnknown_030012EC;
     REG_IE = gUnknown_030012EE;

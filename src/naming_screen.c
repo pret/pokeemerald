@@ -1,6 +1,6 @@
 #include "global.h"
 #include "naming_screen.h"
-#include "alloc.h"
+#include "malloc.h"
 #include "palette.h"
 #include "task.h"
 #include "sprite.h"
@@ -43,18 +43,6 @@ extern const u8 gText_YourName[];
 extern const u8 gText_BoxName[];
 extern const u8 gText_PkmnsNickname[];
 extern const u8 gText_TellHimTheWords[];
-extern const u8 gUnknown_0862B88D[];
-extern const u8 gUnknown_0862B8AE[];
-extern const u8 gUnknown_0862B8CF[];
-extern const u8 gUnknown_0862B8F0[];
-extern const u8 gUnknown_0862B911[];
-extern const u8 gUnknown_0862B932[];
-extern const u8 gUnknown_0862B953[];
-extern const u8 gUnknown_0862B974[];
-extern const u8 gUnknown_0862B995[];
-extern const u8 gUnknown_0862B9AE[];
-extern const u8 gUnknown_0862B9C7[];
-extern const u8 gUnknown_0862B9E0[];
 
 
 // start of .rodata
@@ -171,7 +159,7 @@ static const struct SpriteTemplate gUnknown_0858C138;
 static const struct SpriteTemplate sSpriteTemplate_InputArrow;
 static const struct SpriteTemplate sSpriteTemplate_Underscore;
 static const struct SpriteTemplate gUnknown_0858C180;
-static const u8* const gUnknown_0858C198[][4];
+static const u8* const sNamingScreenKeyboardText[KBPAGE_COUNT][KBROW_COUNT];
 static const struct SpriteSheet gUnknown_0858C1C8[];
 static const struct SpritePalette gUnknown_0858C230[];
 
@@ -428,35 +416,52 @@ static void sub_80E31B0(u8 taskId)
     }
 }
 
-static const u8 gUnknown_0858BEBB[] = { 0, 2, 1 };
-static const u8 gUnknown_0858BEBE[] = { 1, 0, 2 };
-static const u8 gUnknown_0858BEC1[] = { 2, 1, 0 };
+static const u8 sPageOrderLowerFirst[] = 
+{ 
+    KBPAGE_LETTERS_LOWER, 
+    KBPAGE_SYMBOLS, 
+    KBPAGE_LETTERS_UPPER 
+};
+
+static const u8 sPageOrderUpperFirst[] = 
+{ 
+    KBPAGE_LETTERS_UPPER, 
+    KBPAGE_LETTERS_LOWER, 
+    KBPAGE_SYMBOLS 
+};
+
+static const u8 sPageOrderSymbolsFirst[] = 
+{ 
+    KBPAGE_SYMBOLS, 
+    KBPAGE_LETTERS_UPPER, 
+    KBPAGE_LETTERS_LOWER 
+};
 
 static u8 sub_80E3244(u8 a1)
 {
-    return gUnknown_0858BEBB[a1];
+    return sPageOrderLowerFirst[a1];
 }
 
 static u8 sub_80E3254(void)
 {
-    return gUnknown_0858BEBE[gNamingScreenData->currentPage];
+    return sPageOrderUpperFirst[gNamingScreenData->currentPage];
 }
 
 static u8 sub_80E3274(void)
 {
-    return gUnknown_0858BEC1[gNamingScreenData->currentPage];
+    return sPageOrderSymbolsFirst[gNamingScreenData->currentPage];
 }
 
 static bool8 MainState_BeginFadeIn(void)
 {
     sub_80E4CF8(3, gUnknown_08DD4544);
-    gNamingScreenData->currentPage = PAGE_UPPER;
+    gNamingScreenData->currentPage = KBPAGE_LETTERS_UPPER;
     sub_80E4CF8(2, gUnknown_08DD46E0);
     sub_80E4CF8(1, gUnknown_08DD4620);
-    sub_80E4DE4(gNamingScreenData->windows[1], 0);
-    sub_80E4DE4(gNamingScreenData->windows[0], 1);
-    nullsub_10(2, 0);
-    nullsub_10(1, 1);
+    sub_80E4DE4(gNamingScreenData->windows[1], KBPAGE_LETTERS_LOWER);
+    sub_80E4DE4(gNamingScreenData->windows[0], KBPAGE_LETTERS_UPPER);
+    nullsub_10(2, KBPAGE_LETTERS_LOWER);
+    nullsub_10(1, KBPAGE_LETTERS_UPPER);
     sub_80E4D10();
     sub_80E4964();
     sub_80E4EF0();
@@ -541,16 +546,16 @@ static void DisplaySentToPCMessage(void)
 {
     u8 stringToDisplay = 0;
 
-    if (!sub_813B260())
+    if (!IsDestinationBoxFull())
     {
-        StringCopy(gStringVar1, GetBoxNamePtr(VarGet(VAR_STORAGE_UNKNOWN)));
+        StringCopy(gStringVar1, GetBoxNamePtr(VarGet(VAR_PC_BOX_TO_SEND_MON)));
         StringCopy(gStringVar2, gNamingScreenData->destBuffer);
     }
     else
     {
-        StringCopy(gStringVar1, GetBoxNamePtr(VarGet(VAR_STORAGE_UNKNOWN)));
+        StringCopy(gStringVar1, GetBoxNamePtr(VarGet(VAR_PC_BOX_TO_SEND_MON)));
         StringCopy(gStringVar2, gNamingScreenData->destBuffer);
-        StringCopy(gStringVar3, GetBoxNamePtr(get_unknown_box_id()));
+        StringCopy(gStringVar3, GetBoxNamePtr(GetPCBoxToSendMon()));
         stringToDisplay = 2;
     }
 
@@ -1660,7 +1665,7 @@ static void sub_80E4CF8(u8 bg, const void *src)
     CopyToBgTilemapBuffer(bg, src, 0, 0);
 }
 
-static void nullsub_10(u8 a1, u8 a2)
+static void nullsub_10(u8 a1, u8 page)
 {
 
 }
@@ -1703,29 +1708,29 @@ static const struct TextColorThing sUnkColorStruct =
     }
 };
 
-static const u8 sFillValues[3] =
+static const u8 sFillValues[KBPAGE_COUNT] =
 {
-    PIXEL_FILL(0xE),
-    PIXEL_FILL(0xD),
-    PIXEL_FILL(0xF)
+    [KBPAGE_LETTERS_LOWER] = PIXEL_FILL(0xE),
+    [KBPAGE_LETTERS_UPPER] = PIXEL_FILL(0xD),
+    [KBPAGE_SYMBOLS] = PIXEL_FILL(0xF)
 };
 
-static const u8 *const sUnkColors[3] =
+static const u8 *const sUnkColors[KBPAGE_COUNT] =
 {
-    sUnkColorStruct.colors[1],
-    sUnkColorStruct.colors[0],
-    sUnkColorStruct.colors[2]
+    [KBPAGE_LETTERS_LOWER] = sUnkColorStruct.colors[1],
+    [KBPAGE_LETTERS_UPPER] = sUnkColorStruct.colors[0],
+    [KBPAGE_SYMBOLS] = sUnkColorStruct.colors[2]
 };
 
-static void sub_80E4DE4(u8 window, u8 a1)
+static void sub_80E4DE4(u8 window, u8 page)
 {
     u8 i;
 
-    FillWindowPixelBuffer(window, sFillValues[a1]);
+    FillWindowPixelBuffer(window, sFillValues[page]);
 
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < KBROW_COUNT; i++)
     {
-        AddTextPrinterParameterized3(window, 1, 0, i * 16 + 1, sUnkColors[a1], 0, gUnknown_0858C198[a1][i]);
+        AddTextPrinterParameterized3(window, 1, 0, i * 16 + 1, sUnkColors[page], 0, sNamingScreenKeyboardText[page][i]);
     }
 
     PutWindowTilemap(window);
@@ -1857,7 +1862,7 @@ static const struct NamingScreenTemplate playerNamingScreenTemplate =
     .maxChars = 7,
     .iconFunction = 1,
     .addGenderIcon = 0,
-    .initialPage = PAGE_UPPER,
+    .initialPage = KBPAGE_LETTERS_UPPER,
     .unused = 35,
     .title = gText_YourName,
 };
@@ -1868,7 +1873,7 @@ static const struct NamingScreenTemplate pcBoxNamingTemplate =
     .maxChars = 8,
     .iconFunction = 2,
     .addGenderIcon = 0,
-    .initialPage = PAGE_UPPER,
+    .initialPage = KBPAGE_LETTERS_UPPER,
     .unused = 19,
     .title = gText_BoxName,
 };
@@ -1879,7 +1884,7 @@ static const struct NamingScreenTemplate monNamingScreenTemplate =
     .maxChars = 10,
     .iconFunction = 3,
     .addGenderIcon = 1,
-    .initialPage = PAGE_UPPER,
+    .initialPage = KBPAGE_LETTERS_UPPER,
     .unused = 35,
     .title = gText_PkmnsNickname,
 };
@@ -1890,7 +1895,7 @@ static const struct NamingScreenTemplate wandaWordsScreenTemplate =
     .maxChars = 15,
     .iconFunction = 4,
     .addGenderIcon = 0,
-    .initialPage = PAGE_UPPER,
+    .initialPage = KBPAGE_LETTERS_UPPER,
     .unused = 11,
     .title = gText_TellHimTheWords,
 };
@@ -2144,25 +2149,28 @@ static const struct SpriteTemplate gUnknown_0858C180 =
     .callback = SpriteCallbackDummy
 };
 
-static const u8* const gUnknown_0858C198[][4] =
+static const u8* const sNamingScreenKeyboardText[KBPAGE_COUNT][KBROW_COUNT] =
 {
+    [KBPAGE_LETTERS_LOWER] = 
     {
-        gUnknown_0862B88D,
-        gUnknown_0862B8AE,
-        gUnknown_0862B8CF,
-        gUnknown_0862B8F0
+        gText_NamingScreenKeyboard_abcdef,
+        gText_NamingScreenKeyboard_ghijkl,
+        gText_NamingScreenKeyboard_mnopqrs,
+        gText_NamingScreenKeyboard_tuvwxyz
     },
+    [KBPAGE_LETTERS_UPPER] = 
     {
-        gUnknown_0862B911,
-        gUnknown_0862B932,
-        gUnknown_0862B953,
-        gUnknown_0862B974
+        gText_NamingScreenKeyboard_ABCDEF,
+        gText_NamingScreenKeyboard_GHIJKL,
+        gText_NamingScreenKeyboard_MNOPQRS,
+        gText_NamingScreenKeyboard_TUVWXYZ
     },
+    [KBPAGE_SYMBOLS] = 
     {
-        gUnknown_0862B995,
-        gUnknown_0862B9AE,
-        gUnknown_0862B9C7,
-        gUnknown_0862B9E0
+        gText_NamingScreenKeyboard_01234,
+        gText_NamingScreenKeyboard_56789,
+        gText_NamingScreenKeyboard_Symbols1,
+        gText_NamingScreenKeyboard_Symbols2
     },
 };
 

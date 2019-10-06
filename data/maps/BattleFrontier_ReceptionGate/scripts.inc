@@ -136,8 +136,8 @@ BattleFrontier_ReceptionGate_EventScript_266310:: @ 8266310
 BattleFrontier_ReceptionGate_EventScript_266320:: @ 8266320
 	message BattleFrontier_ReceptionGate_Text_26689D
 	waitmessage
-	setvar VAR_0x8004, 8
-	special sub_813A128
+	setvar VAR_0x8004, SCROLL_MULTI_BF_RECEPTIONIST
+	special ShowScrollableMultichoice
 	waitstate
 	switch VAR_RESULT
 	case 0, BattleFrontier_ReceptionGate_EventScript_2663AE
@@ -150,7 +150,7 @@ BattleFrontier_ReceptionGate_EventScript_266320:: @ 8266320
 	case 7, BattleFrontier_ReceptionGate_EventScript_266410
 	case 8, BattleFrontier_ReceptionGate_EventScript_26641E
 	case 9, BattleFrontier_ReceptionGate_EventScript_26642C
-	case 127, BattleFrontier_ReceptionGate_EventScript_26642C
+	case MULTI_B_PRESSED, BattleFrontier_ReceptionGate_EventScript_26642C
 	end
 
 BattleFrontier_ReceptionGate_EventScript_2663AE:: @ 82663AE
@@ -213,7 +213,7 @@ BattleFrontier_ReceptionGate_EventScript_266436:: @ 8266436
 BattleFrontier_ReceptionGate_EventScript_266446:: @ 8266446
 	message BattleFrontier_ReceptionGate_Text_266EE0
 	waitmessage
-	multichoice 15, 0, 95, 0
+	multichoice 15, 0, MULTI_FRONTIER_RULES, 0
 	switch VAR_RESULT
 	case 0, BattleFrontier_ReceptionGate_EventScript_2664A4
 	case 1, BattleFrontier_ReceptionGate_EventScript_2664B2
@@ -221,7 +221,7 @@ BattleFrontier_ReceptionGate_EventScript_266446:: @ 8266446
 	case 3, BattleFrontier_ReceptionGate_EventScript_2664CE
 	case 4, BattleFrontier_ReceptionGate_EventScript_2664DC
 	case 5, BattleFrontier_ReceptionGate_EventScript_2664EA
-	case 127, BattleFrontier_ReceptionGate_EventScript_2664EA
+	case MULTI_B_PRESSED, BattleFrontier_ReceptionGate_EventScript_2664EA
 	end
 
 BattleFrontier_ReceptionGate_EventScript_2664A4:: @ 82664A4
@@ -264,13 +264,13 @@ BattleFrontier_ReceptionGate_EventScript_2664F4:: @ 82664F4
 BattleFrontier_ReceptionGate_EventScript_266504:: @ 8266504
 	message BattleFrontier_ReceptionGate_Text_26737C
 	waitmessage
-	multichoice 16, 4, 11, 0
+	multichoice 16, 4, MULTI_FRONTIER_PASS_INFO, 0
 	switch VAR_RESULT
 	case 0, BattleFrontier_ReceptionGate_EventScript_26654C
 	case 1, BattleFrontier_ReceptionGate_EventScript_26655A
 	case 2, BattleFrontier_ReceptionGate_EventScript_266568
 	case 3, BattleFrontier_ReceptionGate_EventScript_266576
-	case 127, BattleFrontier_ReceptionGate_EventScript_266576
+	case MULTI_B_PRESSED, BattleFrontier_ReceptionGate_EventScript_266576
 	end
 
 BattleFrontier_ReceptionGate_EventScript_26654C:: @ 826654C

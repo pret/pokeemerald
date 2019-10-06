@@ -1,9 +1,37 @@
 	.space 0x8
 	.include "main.o"
-	.include "bg.o"
-	.include "window.o"
-	.include "text.o"
-	.include "sprite.o"
+	@ ../gflib/bg.o
+	.align 2
+gUnneededFireRedVariable:
+    .space 4
+    @ ../gflib/window.o
+    .align 4
+gTransparentTileNumber:
+    .space 1
+    .align 4
+gUnknown_03002F70:
+    .space 16
+    @ ../gflib/text.o
+    .align 4
+gFonts:
+    .space 4
+    .align 2
+gUnknown_03002F84:
+    .space 1
+    .align 4
+gUnknown_03002F90:
+    .space 132
+    .align 2
+gTextFlags:
+    .space 4
+    @ ../gflib/sprite.o
+    .align 2
+gOamMatrixAllocBitmap:
+    .space 4
+    .align 2
+gReservedSpritePaletteCount:
+    .space 1
+    .align 4
 	.include "link.o"
 	.include "link_rfu.o"
 	.include "rtc.o"

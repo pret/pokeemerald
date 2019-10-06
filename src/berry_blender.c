@@ -12,7 +12,7 @@
 #include "bg.h"
 #include "palette.h"
 #include "decompress.h"
-#include "alloc.h"
+#include "malloc.h"
 #include "gpu_regs.h"
 #include "text.h"
 #include "text_window.h"
@@ -36,6 +36,7 @@
 #include "new_game.h"
 #include "save.h"
 #include "link.h"
+#include "constants/berry.h"
 #include "constants/rgb.h"
 
 #define BLENDER_SCORE_BEST      0

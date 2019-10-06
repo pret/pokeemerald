@@ -6,7 +6,7 @@ BattleFrontier_BattleArenaBattleRoom_MapScripts:: @ 8257487
 	.byte 0
 
 BattleFrontier_BattleArenaBattleRoom_MapScript1_25749C: @ 825749C
-	special sub_8139980
+	special OffsetCameraForBattle
 	end
 
 BattleFrontier_BattleArenaBattleRoom_MapScript1_2574A0: @ 82574A0
@@ -169,30 +169,30 @@ BattleFrontier_BattleArenaBattleRoom_EventScript_2576B0:: @ 82576B0
 	call BattleFrontier_BattleArenaBattleRoom_EventScript_23E8E0
 	compare VAR_RESULT, 1
 	goto_if_eq BattleFrontier_BattleArenaBattleRoom_EventScript_257768
-	multichoice 19, 4, 103, 1
+	multichoice 19, 4, MULTI_GO_ON_RECORD_REST_RETIRE, 1
 	switch VAR_RESULT
 	case 0, BattleFrontier_BattleArenaBattleRoom_EventScript_25783A
 	case 1, BattleFrontier_BattleArenaBattleRoom_EventScript_25779E
 	case 2, BattleFrontier_BattleArenaBattleRoom_EventScript_2577DA
 	case 3, BattleFrontier_BattleArenaBattleRoom_EventScript_257808
-	case 127, BattleFrontier_BattleArenaBattleRoom_EventScript_2576B0
+	case MULTI_B_PRESSED, BattleFrontier_BattleArenaBattleRoom_EventScript_2576B0
 
 BattleFrontier_BattleArenaBattleRoom_EventScript_257768:: @ 8257768
-	multichoice 20, 6, 104, 1
+	multichoice 20, 6, MULTI_GO_ON_REST_RETIRE, 1
 	switch VAR_RESULT
 	case 0, BattleFrontier_BattleArenaBattleRoom_EventScript_25783A
 	case 1, BattleFrontier_BattleArenaBattleRoom_EventScript_2577DA
 	case 2, BattleFrontier_BattleArenaBattleRoom_EventScript_257808
-	case 127, BattleFrontier_BattleArenaBattleRoom_EventScript_2576B0
+	case MULTI_B_PRESSED, BattleFrontier_BattleArenaBattleRoom_EventScript_2576B0
 
 BattleFrontier_BattleArenaBattleRoom_EventScript_25779E:: @ 825779E
 	message BattleFrontier_BattleArenaBattleRoom_Text_257F04
 	waitmessage
-	multichoicedefault 20, 8, 94, 1, 0
+	multichoicedefault 20, 8, MULTI_YESNO, 1, 0
 	switch VAR_RESULT
 	case 1, BattleFrontier_BattleArenaBattleRoom_EventScript_2576B0
 	case 0, BattleFrontier_BattleArenaBattleRoom_EventScript_2577D0
-	case 127, BattleFrontier_BattleArenaBattleRoom_EventScript_2576B0
+	case MULTI_B_PRESSED, BattleFrontier_BattleArenaBattleRoom_EventScript_2576B0
 
 BattleFrontier_BattleArenaBattleRoom_EventScript_2577D0:: @ 82577D0
 	call BattleFrontier_BattleArenaBattleRoom_EventScript_23E8B4
@@ -208,11 +208,11 @@ BattleFrontier_BattleArenaBattleRoom_EventScript_2577DA:: @ 82577DA
 BattleFrontier_BattleArenaBattleRoom_EventScript_257808:: @ 8257808
 	message BattleFrontier_BattleArenaBattleRoom_Text_257E9E
 	waitmessage
-	multichoicedefault 20, 8, 94, 1, 0
+	multichoicedefault 20, 8, MULTI_YESNO, 1, 0
 	switch VAR_RESULT
 	case 1, BattleFrontier_BattleArenaBattleRoom_EventScript_2576B0
 	case 0, BattleFrontier_BattleArenaBattleRoom_EventScript_257615
-	case 127, BattleFrontier_BattleArenaBattleRoom_EventScript_2576B0
+	case MULTI_B_PRESSED, BattleFrontier_BattleArenaBattleRoom_EventScript_2576B0
 
 BattleFrontier_BattleArenaBattleRoom_EventScript_25783A:: @ 825783A
 	closemessage
@@ -286,21 +286,21 @@ BattleFrontier_BattleArenaBattleRoom_EventScript_2578D4:: @ 82578D4
 	call BattleFrontier_BattleArenaBattleRoom_EventScript_23E8E0
 	compare VAR_RESULT, 1
 	goto_if_eq BattleFrontier_BattleArenaBattleRoom_EventScript_25792B
-	multichoice 19, 4, 103, 1
+	multichoice 19, 4, MULTI_GO_ON_RECORD_REST_RETIRE, 1
 	switch VAR_RESULT
 	case 0, BattleFrontier_BattleArenaBattleRoom_EventScript_257961
 	case 1, BattleFrontier_BattleArenaBattleRoom_EventScript_25779E
 	case 2, BattleFrontier_BattleArenaBattleRoom_EventScript_2577DA
 	case 3, BattleFrontier_BattleArenaBattleRoom_EventScript_257808
-	case 127, BattleFrontier_BattleArenaBattleRoom_EventScript_2578D4
+	case MULTI_B_PRESSED, BattleFrontier_BattleArenaBattleRoom_EventScript_2578D4
 
 BattleFrontier_BattleArenaBattleRoom_EventScript_25792B:: @ 825792B
-	multichoice 20, 6, 104, 1
+	multichoice 20, 6, MULTI_GO_ON_REST_RETIRE, 1
 	switch VAR_RESULT
 	case 0, BattleFrontier_BattleArenaBattleRoom_EventScript_257961
 	case 1, BattleFrontier_BattleArenaBattleRoom_EventScript_2577DA
 	case 2, BattleFrontier_BattleArenaBattleRoom_EventScript_257808
-	case 127, BattleFrontier_BattleArenaBattleRoom_EventScript_2578D4
+	case MULTI_B_PRESSED, BattleFrontier_BattleArenaBattleRoom_EventScript_2578D4
 
 BattleFrontier_BattleArenaBattleRoom_EventScript_257961:: @ 8257961
 	call BattleFrontier_BattleArenaBattleRoom_EventScript_242170

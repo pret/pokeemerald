@@ -116,7 +116,7 @@ SealedChamber_OuterRoom_EventScript_2391D0:: @ 82391D0
 	end
 
 SealedChamber_OuterRoom_EventScript_2391E3:: @ 82391E3
-	msgbox gUnknown_0827304E, MSGBOX_DEFAULT
+	msgbox gText_BigHoleInTheWall, MSGBOX_DEFAULT
 	releaseall
 	end
 

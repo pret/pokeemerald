@@ -16,7 +16,7 @@ BattleFrontier_BattlePikeLobby_MapScript2_25B6F3: @ 825B6F3
 
 BattleFrontier_BattlePikeLobby_EventScript_25B6FD:: @ 825B6FD
 	setvar VAR_TEMP_1, 1
-	turnobject EVENT_OBJ_ID_PLAYER, 2
+	turnobject EVENT_OBJ_ID_PLAYER, DIR_NORTH
 	end
 
 BattleFrontier_BattlePikeLobby_EventScript_25B707:: @ 825B707
@@ -133,20 +133,20 @@ BattleFrontier_BattlePikeLobby_EventScript_25B868:: @ 825B868
 BattleFrontier_BattlePikeLobby_EventScript_25B87F:: @ 825B87F
 	message BattleFrontier_BattlePikeLobby_Text_25BBC1
 	waitmessage
-	multichoice 17, 6, 23, 0
+	multichoice 17, 6, MULTI_CHALLENGEINFO, 0
 	switch VAR_RESULT
 	case 0, BattleFrontier_BattlePikeLobby_EventScript_25B8BB
 	case 1, BattleFrontier_BattlePikeLobby_EventScript_25BA1A
 	case 2, BattleFrontier_BattlePikeLobby_EventScript_25BA76
-	case 127, BattleFrontier_BattlePikeLobby_EventScript_25BA76
+	case MULTI_B_PRESSED, BattleFrontier_BattlePikeLobby_EventScript_25BA76
 
 BattleFrontier_BattlePikeLobby_EventScript_25B8BB:: @ 825B8BB
 	message BattleFrontier_BattlePikeLobby_Text_25BE35
 	waitmessage
-	multichoice 17, 6, 24, 0
+	multichoice 17, 6, MULTI_LEVEL_MODE, 0
 	switch VAR_RESULT
 	case 2, BattleFrontier_BattlePikeLobby_EventScript_25BA76
-	case 127, BattleFrontier_BattlePikeLobby_EventScript_25BA76
+	case MULTI_B_PRESSED, BattleFrontier_BattlePikeLobby_EventScript_25BA76
 	setvar VAR_0x8004, 15
 	special CallFrontierUtilFunc
 	compare VAR_0x8004, 1
@@ -297,13 +297,13 @@ BattleFrontier_BattlePikeLobby_EventScript_25BAC6:: @ 825BAC6
 BattleFrontier_BattlePikeLobby_EventScript_25BAD5:: @ 825BAD5
 	message BattleFrontier_BattlePikeLobby_Text_25C621
 	waitmessage
-	multichoice 16, 4, 102, 0
+	multichoice 16, 4, MULTI_BATTLE_PIKE_RULES, 0
 	switch VAR_RESULT
 	case 0, BattleFrontier_BattlePikeLobby_EventScript_25BB1D
 	case 1, BattleFrontier_BattlePikeLobby_EventScript_25BB2B
 	case 2, BattleFrontier_BattlePikeLobby_EventScript_25BB39
 	case 3, BattleFrontier_BattlePikeLobby_EventScript_25BB47
-	case 127, BattleFrontier_BattlePikeLobby_EventScript_25BB47
+	case MULTI_B_PRESSED, BattleFrontier_BattlePikeLobby_EventScript_25BB47
 	end
 
 BattleFrontier_BattlePikeLobby_EventScript_25BB1D:: @ 825BB1D
@@ -329,8 +329,8 @@ BattleFrontier_BattlePikeCorridor_EventScript_25BB49:: @ 825BB49
 BattleFrontier_BattlePikeLobby_EventScript_25BB49:: @ 825BB49
 BattleFrontier_BattlePikeRandomRoom1_EventScript_25BB49:: @ 825BB49
 BattleFrontier_BattlePikeThreePathRoom_EventScript_25BB49:: @ 825BB49
-	playse 267
-	special sub_813B880
+	playse SE_CURTAIN
+	special CloseBattlePikeCurtain
 	waitstate
 	waitse
 	return

@@ -157,12 +157,12 @@ RustboroCity_DevonCorp_2F_EventScript_211A2C:: @ 8211A2C
 
 RustboroCity_DevonCorp_2F_EventScript_211A3E:: @ 8211A3E
 	setvar VAR_TEMP_1, SPECIES_LILEEP
-	givemon SPECIES_LILEEP, 20, ITEM_NONE, 0x0, 0x0, 0
+	givemon SPECIES_LILEEP, 20, ITEM_NONE
 	compare VAR_RESULT, 0
 	goto_if_eq RustboroCity_DevonCorp_2F_EventScript_211A6E
 	compare VAR_RESULT, 1
 	goto_if_eq RustboroCity_DevonCorp_2F_EventScript_211A96
-	goto RustboroCity_DevonCorp_2F_EventScript_273811
+	goto Common_EventScript_NoMoreRoomForPokemon
 	end
 
 RustboroCity_DevonCorp_2F_EventScript_211A6E:: @ 8211A6E
@@ -170,8 +170,8 @@ RustboroCity_DevonCorp_2F_EventScript_211A6E:: @ 8211A6E
 	msgbox gText_NicknameThisPokemon, MSGBOX_YESNO
 	compare VAR_RESULT, 0
 	goto_if_eq RustboroCity_DevonCorp_2F_EventScript_211AD7
-	call RustboroCity_DevonCorp_2F_EventScript_27378B
-	call Common_EventScript_NameReceivedPokemon
+	call Common_EventScript_GetGiftMonPartySlot
+	call Common_EventScript_NameReceivedPartyMon
 	goto RustboroCity_DevonCorp_2F_EventScript_211AD7
 	end
 
@@ -180,7 +180,7 @@ RustboroCity_DevonCorp_2F_EventScript_211A96:: @ 8211A96
 	msgbox gText_NicknameThisPokemon, MSGBOX_YESNO
 	compare VAR_RESULT, 0
 	goto_if_eq RustboroCity_DevonCorp_2F_EventScript_211AB9
-	call RustboroCity_DevonCorp_2F_EventScript_273797
+	call Common_EventScript_NameReceivedBoxMon
 	goto RustboroCity_DevonCorp_2F_EventScript_211AB9
 	end
 
@@ -206,12 +206,12 @@ RustboroCity_DevonCorp_2F_EventScript_211AD7:: @ 8211AD7
 
 RustboroCity_DevonCorp_2F_EventScript_211AE1:: @ 8211AE1
 	setvar VAR_TEMP_1, SPECIES_ANORITH
-	givemon SPECIES_ANORITH, 20, ITEM_NONE, 0x0, 0x0, 0
+	givemon SPECIES_ANORITH, 20, ITEM_NONE
 	compare VAR_RESULT, 0
 	goto_if_eq RustboroCity_DevonCorp_2F_EventScript_211B11
 	compare VAR_RESULT, 1
 	goto_if_eq RustboroCity_DevonCorp_2F_EventScript_211B39
-	goto RustboroCity_DevonCorp_2F_EventScript_273811
+	goto Common_EventScript_NoMoreRoomForPokemon
 	end
 
 RustboroCity_DevonCorp_2F_EventScript_211B11:: @ 8211B11
@@ -219,8 +219,8 @@ RustboroCity_DevonCorp_2F_EventScript_211B11:: @ 8211B11
 	msgbox gText_NicknameThisPokemon, MSGBOX_YESNO
 	compare VAR_RESULT, 0
 	goto_if_eq RustboroCity_DevonCorp_2F_EventScript_211B7A
-	call RustboroCity_DevonCorp_2F_EventScript_27378B
-	call Common_EventScript_NameReceivedPokemon
+	call Common_EventScript_GetGiftMonPartySlot
+	call Common_EventScript_NameReceivedPartyMon
 	goto RustboroCity_DevonCorp_2F_EventScript_211B7A
 	end
 
@@ -229,7 +229,7 @@ RustboroCity_DevonCorp_2F_EventScript_211B39:: @ 8211B39
 	msgbox gText_NicknameThisPokemon, MSGBOX_YESNO
 	compare VAR_RESULT, 0
 	goto_if_eq RustboroCity_DevonCorp_2F_EventScript_211B5C
-	call RustboroCity_DevonCorp_2F_EventScript_273797
+	call Common_EventScript_NameReceivedBoxMon
 	goto RustboroCity_DevonCorp_2F_EventScript_211B5C
 	end
 
@@ -256,12 +256,12 @@ RustboroCity_DevonCorp_2F_EventScript_211B7A:: @ 8211B7A
 RustboroCity_DevonCorp_2F_EventScript_211B84:: @ 8211B84
 	message RustboroCity_DevonCorp_2F_Text_212092
 	waitmessage
-	multichoice 17, 6, 93, 0
+	multichoice 17, 6, MULTI_FOSSIL, 0
 	switch VAR_RESULT
 	case 0, RustboroCity_DevonCorp_2F_EventScript_211BC1
 	case 1, RustboroCity_DevonCorp_2F_EventScript_211BC7
 	case 2, RustboroCity_DevonCorp_2F_EventScript_211BCD
-	case 127, RustboroCity_DevonCorp_2F_EventScript_211BCD
+	case MULTI_B_PRESSED, RustboroCity_DevonCorp_2F_EventScript_211BCD
 	end
 
 RustboroCity_DevonCorp_2F_EventScript_211BC1:: @ 8211BC1

@@ -35,9 +35,9 @@ NavelRock_Top_EventScript_26916F:: @ 826916F
 	lockall
 	setvar VAR_TEMP_1, 1
 	special SpawnCameraObject
-	setvar VAR_0x8004, 3
-	setvar VAR_0x8005, 35
-	special sub_813B80C
+	setvar VAR_0x8004, 3  @ num loops
+	setvar VAR_0x8005, 35 @ delay
+	special LoopWingFlapSE
 	applymovement 1, NavelRock_Top_Movement_269243
 	applymovement EVENT_OBJ_ID_CAMERA, NavelRock_Top_Movement_269230
 	waitmovement 0
@@ -49,16 +49,16 @@ NavelRock_Top_EventScript_26916F:: @ 826916F
 	delay 30
 	waitmoncry
 	delay 60
-	setvar VAR_0x8004, 3
-	setvar VAR_0x8005, 35
-	special sub_813B80C
+	setvar VAR_0x8004, 3  @ num loops
+	setvar VAR_0x8005, 35 @ delay
+	special LoopWingFlapSE
 	applymovement EVENT_OBJ_ID_CAMERA, NavelRock_Top_Movement_269234
 	applymovement 1, NavelRock_Top_Movement_26923A
 	waitmovement 0
 	special RemoveCameraObject
-	setvar VAR_0x8004, 250
-	setvar VAR_0x8005, 70
-	setvar VAR_0x8006, 0
+	setvar VAR_0x8004, SPECIES_HO_OH
+	setvar VAR_0x8005, 70 @level
+	setvar VAR_0x8006, ITEM_NONE
 	special CreateObedientEnemyMon
 	setflag FLAG_SYS_CTRL_OBJ_DELETE
 	special BattleSetup_StartLegendaryBattle
@@ -78,13 +78,13 @@ NavelRock_Top_EventScript_26916F:: @ 826916F
 
 NavelRock_Top_EventScript_269217:: @ 8269217
 	setflag FLAG_DEFEATED_HO_OH
-	setvar VAR_0x8004, 250
-	goto NavelRock_Top_EventScript_273776
+	setvar VAR_0x8004, SPECIES_HO_OH
+	goto Common_EventScript_LegendaryFlewAway
 	end
 
 NavelRock_Top_EventScript_269225:: @ 8269225
-	setvar VAR_0x8004, 250
-	goto NavelRock_Top_EventScript_273776
+	setvar VAR_0x8004, SPECIES_HO_OH
+	goto Common_EventScript_LegendaryFlewAway
 	end
 
 NavelRock_Top_Movement_269230: @ 8269230

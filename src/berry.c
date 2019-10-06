@@ -11,6 +11,7 @@
 #include "random.h"
 #include "string_util.h"
 #include "text.h"
+#include "constants/berry.h"
 #include "constants/event_object_movement_constants.h"
 #include "constants/items.h"
 

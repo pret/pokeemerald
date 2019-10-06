@@ -4,10 +4,10 @@ VerdanturfTown_Mart_MapScripts:: @ 8202586
 VerdanturfTown_Mart_EventScript_202587:: @ 8202587
 	lock
 	faceplayer
-	message gUnknown_08272A21
+	message gText_HowMayIServeYou
 	waitmessage
 	pokemart VerdanturfTown_Mart_Pokemart_2025A0
-	msgbox gUnknown_08272A3F, MSGBOX_DEFAULT
+	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
 	release
 	end
 

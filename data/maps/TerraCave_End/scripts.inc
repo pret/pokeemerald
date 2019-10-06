@@ -55,12 +55,12 @@ TerraCave_End_EventScript_23B0EC:: @ 823B0EC
 TerraCave_End_EventScript_23B155:: @ 823B155
 	setvar VAR_SHOULD_END_UNUSUAL_WEATHER, 1
 	setflag FLAG_DEFEATED_GROUDON
-	goto TerraCave_End_EventScript_27376D
+	goto Common_EventScript_RemoveStaticPokemon
 	end
 
 TerraCave_End_EventScript_23B163:: @ 823B163
-	setvar VAR_0x8004, 405
-	goto TerraCave_End_EventScript_273776
+	setvar VAR_0x8004, SPECIES_GROUDON
+	goto Common_EventScript_LegendaryFlewAway
 	end
 
 TerraCave_End_Movement_23B16E: @ 823B16E

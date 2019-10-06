@@ -2,9 +2,9 @@
 #define GUARD_EGG_HATCH_H
 
 void ScriptHatchMon(void);
-bool8 sub_8071614(void);
+bool8 CheckDaycareMonReceivedMail(void);
 void EggHatch(void);
 u8 GetEggStepsToSubtract(void);
-u16 sub_80722E0(void);
+u16 CountPartyAliveNonEggMons(void);
 
 #endif // GUARD_EGG_HATCH_H

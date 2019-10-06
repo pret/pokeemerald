@@ -10,7 +10,7 @@ LittlerootTown_BrendansHouse_2F_MapScript1_1F83EE: @ 81F83EE
 	call_if_ge LittlerootTown_BrendansHouse_2F_EventScript_1F841A
 	compare VAR_LITTLEROOT_INTRO_STATE, 4
 	call_if_eq LittlerootTown_BrendansHouse_2F_EventScript_2926FE
-	call LittlerootTown_BrendansHouse_2F_EventScript_275CE1
+	call SecretBase_EventScript_SetDecorationFlags
 	setvar VAR_SECRET_BASE_INITIALIZED, 0
 	end
 
@@ -22,7 +22,7 @@ LittlerootTown_BrendansHouse_2F_EventScript_1F841A:: @ 81F841A
 
 LittlerootTown_BrendansHouse_2F_EventScript_1F8433:: @ 81F8433
 	checkplayergender
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, MALE
 	goto_if_eq LittlerootTown_BrendansHouse_2F_EventScript_1F8456
 	compare VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 2
 	goto_if_ge LittlerootTown_BrendansHouse_2F_EventScript_1F9309
@@ -35,7 +35,7 @@ LittlerootTown_BrendansHouse_2F_EventScript_1F8456:: @ 81F8456
 
 LittlerootTown_BrendansHouse_2F_EventScript_1F8457:: @ 81F8457
 	checkplayergender
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, FEMALE
 	goto_if_eq LittlerootTown_BrendansHouse_2F_EventScript_1F8464
 	return
 
@@ -49,8 +49,8 @@ LittlerootTown_BrendansHouse_2F_MapScript2_1F846A: @ 81F846A
 
 LittlerootTown_BrendansHouse_2F_EventScript_1F8474:: @ 81F8474
 	checkplayergender
-	compare VAR_RESULT, 0
-	goto_if_eq EventScript_275D0C
+	compare VAR_RESULT, MALE
+	goto_if_eq SecretBase_EventScript_InitDecorations
 	end
 
 LittlerootTown_BrendansHouse_2F_EventScript_1F8481:: @ 81F8481
@@ -271,7 +271,7 @@ LittlerootTown_BrendansHouse_2F_EventScript_1F863F:: @ 81F863F
 	end
 
 LittlerootTown_BrendansHouse_2F_EventScript_1F864C:: @ 81F864C
-	msgbox gUnknown_08272CD5, MSGBOX_DEFAULT
+	msgbox gText_PokemonTrainerSchoolEmail, MSGBOX_DEFAULT
 	releaseall
 	end
 

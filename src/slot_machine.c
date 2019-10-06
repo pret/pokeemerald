@@ -14,7 +14,7 @@
 #include "util.h"
 #include "text.h"
 #include "menu.h"
-#include "alloc.h"
+#include "malloc.h"
 #include "bg.h"
 #include "gpu_regs.h"
 #include "coins.h"

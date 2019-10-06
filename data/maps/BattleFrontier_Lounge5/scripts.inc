@@ -1,34 +1,34 @@
 BattleFrontier_Lounge5_MapScripts:: @ 82645C5
 	.byte 0
 
-BattleFrontier_Lounge5_EventScript_2645C6:: @ 82645C6
+BattleFrontier_Lounge5_EventScript_NatureGirl:: @ 82645C6
 	lock
 	faceplayer
-	msgbox BattleFrontier_Lounge5_Text_264632, MSGBOX_YESNO
+	msgbox BattleFrontier_Lounge5_Text_NatureGirlGreeting, MSGBOX_YESNO
 	compare VAR_RESULT, 0
-	goto_if_eq BattleFrontier_Lounge5_EventScript_26460D
+	goto_if_eq BattleFrontier_Lounge5_EventScript_NatureGirlNoneShown
 	special sub_81B94B0
 	waitstate
 	lock
 	faceplayer
 	compare VAR_0x8004, 255
-	goto_if_eq BattleFrontier_Lounge5_EventScript_26460D
+	goto_if_eq BattleFrontier_Lounge5_EventScript_NatureGirlNoneShown
 	specialvar VAR_RESULT, ScriptGetPartyMonSpecies
-	compare VAR_RESULT, 412
-	goto_if_eq BattleFrontier_Lounge5_EventScript_264603
-	special sub_813A7B8
+	compare VAR_RESULT, SPECIES_EGG
+	goto_if_eq BattleFrontier_Lounge5_EventScript_NatureGirlEgg
+	special ShowNatureGirlMessage
 	waitmessage
 	waitbuttonpress
 	release
 	end
 
-BattleFrontier_Lounge5_EventScript_264603:: @ 8264603
-	msgbox BattleFrontier_Lounge5_Text_264EEE, MSGBOX_DEFAULT
+BattleFrontier_Lounge5_EventScript_NatureGirlEgg:: @ 8264603
+	msgbox BattleFrontier_Lounge5_Text_NatureGirlEgg, MSGBOX_DEFAULT
 	release
 	end
 
-BattleFrontier_Lounge5_EventScript_26460D:: @ 826460D
-	msgbox BattleFrontier_Lounge5_Text_26467F, MSGBOX_DEFAULT
+BattleFrontier_Lounge5_EventScript_NatureGirlNoneShown:: @ 826460D
+	msgbox BattleFrontier_Lounge5_Text_NatureGirlNoneShown, MSGBOX_DEFAULT
 	release
 	end
 
@@ -44,149 +44,149 @@ BattleFrontier_Lounge5_EventScript_264629:: @ 8264629
 	msgbox BattleFrontier_Lounge5_Text_264FAB, MSGBOX_NPC
 	end
 
-BattleFrontier_Lounge5_Text_264632:: @ 8264632
+BattleFrontier_Lounge5_Text_NatureGirlGreeting:: @ 8264632
 	.string "Ehehe!\n"
 	.string "I can tell what POKéMON are thinking!\p"
 	.string "Please!\n"
 	.string "Can I see your POKéMON?$"
 
-BattleFrontier_Lounge5_Text_26467F:: @ 826467F
+BattleFrontier_Lounge5_Text_NatureGirlNoneShown:: @ 826467F
 	.string "Boo!\n"
 	.string "Cheapie!$"
 
-BattleFrontier_Lounge5_Text_26468D:: @ 826468D
+BattleFrontier_Lounge5_Text_NatureGirlHardy:: @ 826468D
 	.string "Hmhm…\p"
 	.string "This one says it likes to battle!\n"
 	.string "It will battle even if it has a lot\l"
 	.string "of ouchies!$"
 
-BattleFrontier_Lounge5_Text_2646E5:: @ 82646E5
+BattleFrontier_Lounge5_Text_NatureGirlLonely:: @ 82646E5
 	.string "Hmhm…\p"
 	.string "This one says it likes to be sneaky!\n"
 	.string "But if it gets enough ouchies,\l"
 	.string "it will hit back!$"
 
-BattleFrontier_Lounge5_Text_264741:: @ 8264741
+BattleFrontier_Lounge5_Text_NatureGirlBrave:: @ 8264741
 	.string "Hmhm…\p"
 	.string "This one says it likes to battle!\n"
 	.string "But if it gets enough ouchies,\l"
 	.string "it will worry about itself!$"
 
-BattleFrontier_Lounge5_Text_2647A4:: @ 82647A4
+BattleFrontier_Lounge5_Text_NatureGirlAdamant:: @ 82647A4
 	.string "Hmhm…\p"
 	.string "This one says it likes to battle!\n"
 	.string "It will battle even if it has a lot\l"
 	.string "of ouchies!$"
 
-BattleFrontier_Lounge5_Text_2647FC:: @ 82647FC
+BattleFrontier_Lounge5_Text_NatureGirlNaughty:: @ 82647FC
 	.string "Hmhm…\p"
 	.string "This one says it looks after itself!\n"
 	.string "But if it gets enough ouchies,\l"
 	.string "it will hit back!$"
 
-BattleFrontier_Lounge5_Text_264858:: @ 8264858
+BattleFrontier_Lounge5_Text_NatureGirlBold:: @ 8264858
 	.string "Hmhm…\p"
 	.string "This one says it likes to be sneaky!\n"
 	.string "But if it gets enough ouchies,\l"
 	.string "it will worry about itself!$"
 
-BattleFrontier_Lounge5_Text_2648BE:: @ 82648BE
+BattleFrontier_Lounge5_Text_NatureGirlDocileNaiveQuietQuirky:: @ 82648BE
 	.string "Hmhm…\p"
 	.string "This one says it likes to battle!\n"
 	.string "It will battle even if it has a lot\l"
 	.string "of ouchies!$"
 
-BattleFrontier_Lounge5_Text_264916:: @ 8264916
+BattleFrontier_Lounge5_Text_NatureGirlRelaxed:: @ 8264916
 	.string "Hmhm…\p"
 	.string "This one says it likes to be sneaky!\n"
 	.string "But if it gets enough ouchies,\l"
 	.string "it will hit back!$"
 
-BattleFrontier_Lounge5_Text_264972:: @ 8264972
+BattleFrontier_Lounge5_Text_NatureGirlImpish:: @ 8264972
 	.string "Hmhm…\p"
 	.string "This one says it likes to battle!\n"
 	.string "But if it gets enough ouchies,\l"
 	.string "it will worry about itself!$"
 
-BattleFrontier_Lounge5_Text_2649D5:: @ 82649D5
+BattleFrontier_Lounge5_Text_NatureGirlLax:: @ 82649D5
 	.string "Hmhm…\p"
 	.string "This one says it likes to be sneaky!\n"
 	.string "It says it likes to be sneaky even\l"
 	.string "if it has a lot of ouchies!$"
 
-BattleFrontier_Lounge5_Text_264A3F:: @ 8264A3F
+BattleFrontier_Lounge5_Text_NatureGirlTimid:: @ 8264A3F
 	.string "Hmhm…\p"
 	.string "This one says it likes to battle!\n"
 	.string "But if it gets enough ouchies,\l"
 	.string "it will turn sneaky!$"
 
-BattleFrontier_Lounge5_Text_264A9B:: @ 8264A9B
+BattleFrontier_Lounge5_Text_NatureGirlHasty:: @ 8264A9B
 	.string "Hmhm…\p"
 	.string "This one says it likes to battle!\n"
 	.string "It will battle even if it has a lot\l"
 	.string "of ouchies!$"
 
-BattleFrontier_Lounge5_Text_264AF3:: @ 8264AF3
+BattleFrontier_Lounge5_Text_NatureGirlSerious:: @ 8264AF3
 	.string "Hmhm…\p"
 	.string "This one says it likes to be sneaky!\n"
 	.string "It says it likes to be sneaky even\l"
 	.string "if it has a lot of ouchies!$"
 
-BattleFrontier_Lounge5_Text_264B5D:: @ 8264B5D
+BattleFrontier_Lounge5_Text_NatureGirlJolly:: @ 8264B5D
 	.string "Hmhm…\p"
 	.string "This one says it likes to be sneaky!\n"
 	.string "But if it gets enough ouchies,\l"
 	.string "it will worry about itself!$"
 
-BattleFrontier_Lounge5_Text_264BC3:: @ 8264BC3
+BattleFrontier_Lounge5_Text_NatureGirlModest:: @ 8264BC3
 	.string "Hmhm…\p"
 	.string "This one says it looks after itself!\n"
 	.string "It says it worries about itself whether\l"
 	.string "or not it has a lot of ouchies!$"
 
-BattleFrontier_Lounge5_Text_264C36:: @ 8264C36
+BattleFrontier_Lounge5_Text_NatureGirlMild:: @ 8264C36
 	.string "Hmhm…\p"
 	.string "This one says it looks after itself!\n"
 	.string "But if it gets enough ouchies,\l"
 	.string "it will turn sneaky!$"
 
-BattleFrontier_Lounge5_Text_264C95:: @ 8264C95
+BattleFrontier_Lounge5_Text_NatureGirlBashful:: @ 8264C95
 	.string "Hmhm…\p"
 	.string "This one says it looks after itself!\n"
 	.string "It says it worries about itself even\l"
 	.string "if it has a lot of ouchies!$"
 
-BattleFrontier_Lounge5_Text_264D01:: @ 8264D01
+BattleFrontier_Lounge5_Text_NatureGirlRash:: @ 8264D01
 	.string "Hmhm…\p"
 	.string "This one says it likes to be sneaky!\n"
 	.string "It says it likes to be sneaky even\l"
 	.string "if it has a lot of ouchies!$"
 
-BattleFrontier_Lounge5_Text_264D6B:: @ 8264D6B
+BattleFrontier_Lounge5_Text_NatureGirlCalm:: @ 8264D6B
 	.string "Hmhm…\p"
 	.string "This one says it looks after itself!\n"
 	.string "It says it worries about itself even\l"
 	.string "if it has a lot of ouchies!$"
 
-BattleFrontier_Lounge5_Text_264DD7:: @ 8264DD7
+BattleFrontier_Lounge5_Text_NatureGirlGentle:: @ 8264DD7
 	.string "Hmhm…\p"
 	.string "This one says it looks after itself!\n"
 	.string "But if it gets enough ouchies,\l"
 	.string "it will hit back!$"
 
-BattleFrontier_Lounge5_Text_264E33:: @ 8264E33
+BattleFrontier_Lounge5_Text_NatureGirlSassy:: @ 8264E33
 	.string "Hmhm…\p"
 	.string "This one says it likes to battle!\n"
 	.string "But if it gets enough ouchies,\l"
 	.string "it will turn sneaky!$"
 
-BattleFrontier_Lounge5_Text_264E8F:: @ 8264E8F
+BattleFrontier_Lounge5_Text_NatureGirlCareful:: @ 8264E8F
 	.string "Hmhm…\p"
 	.string "This one says it looks after itself!\n"
 	.string "But if it gets enough ouchies,\l"
 	.string "it will turn sneaky!$"
 
-BattleFrontier_Lounge5_Text_264EEE:: @ 8264EEE
+BattleFrontier_Lounge5_Text_NatureGirlEgg:: @ 8264EEE
 	.string "That's silly! An EGG is asleep!\n"
 	.string "I can't talk to it!$"
 

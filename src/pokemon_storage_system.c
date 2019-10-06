@@ -1,5 +1,5 @@
 #include "global.h"
-#include "alloc.h"
+#include "malloc.h"
 #include "bg.h"
 #include "data.h"
 #include "decompress.h"
@@ -453,7 +453,7 @@ EWRAM_DATA static bool8 sInPartyMenu = 0;
 EWRAM_DATA static u8 sCurrentBoxOption = 0;
 EWRAM_DATA static u8 gUnknown_02039D0E = 0;
 EWRAM_DATA static u8 sWhichToReshow = 0;
-EWRAM_DATA static u8 gUnknown_02039D10 = 0;
+EWRAM_DATA static u8 sLastUsedBox = 0;
 EWRAM_DATA static u16 gUnknown_02039D12 = 0;
 EWRAM_DATA static struct Pokemon gUnknown_02039D14 = {0};
 EWRAM_DATA static s8 sBoxCursorArea = 0;
@@ -2107,7 +2107,7 @@ static void sub_80C7BE4(void)
     center = GetStringCenterAlignXOffset(1, boxName, 64);
     AddTextPrinterParameterized3(windowId, 1, center, 1, gUnknown_08571734, TEXT_SPEED_FF, boxName);
 
-    ConvertIntToDecimalStringN(text, nPokemonInBox, 1, 2);
+    ConvertIntToDecimalStringN(text, nPokemonInBox, STR_CONV_MODE_RIGHT_ALIGN, 2);
     StringAppend(text, gUnknown_08571737);
     center = GetStringCenterAlignXOffset(1, text, 64);
     AddTextPrinterParameterized3(windowId, 1, center, 17, gUnknown_08571734, TEXT_SPEED_FF, text);
@@ -2167,7 +2167,7 @@ static void Cb2_EnterPSS(u8 boxOption)
         gUnknown_02039D12 = 0;
         sPSSData->state = 0;
         sPSSData->taskId = CreateTask(Cb_InitPSS, 3);
-        gUnknown_02039D10 = StorageGetCurrentBox();
+        sLastUsedBox = StorageGetCurrentBox();
         SetMainCallback2(Cb2_PSS);
     }
 }
@@ -4366,10 +4366,10 @@ static bool8 DoShowPartyMenu(void)
 
 static void sub_80CABE0(void)
 {
-    if (gUnknown_02039D10 != StorageGetCurrentBox())
+    if (sLastUsedBox != StorageGetCurrentBox())
     {
-        FlagClear(FLAG_SYS_STORAGE_UNKNOWN_FLAG);
-        VarSet(VAR_STORAGE_UNKNOWN, StorageGetCurrentBox());
+        FlagClear(FLAG_SHOWN_BOX_WAS_FULL_MESSAGE);
+        VarSet(VAR_PC_BOX_TO_SEND_MON, StorageGetCurrentBox());
     }
 }
 

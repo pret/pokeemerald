@@ -105,7 +105,7 @@ TrainerHill_Entrance_EventScript_2681EE:: @ 82681EE
 
 TrainerHill_Entrance_EventScript_2681EF:: @ 82681EF
 	setvar VAR_0x800B, 2
-	call TrainerHill_Entrance_EventScript_27191E
+	call Common_EventScript_PkmnCenterNurse
 	waitmessage
 	waitbuttonpress
 	release
@@ -150,12 +150,12 @@ TrainerHill_Entrance_EventScript_268275:: @ 8268275
 TrainerHill_Entrance_EventScript_26827D:: @ 826827D
 	message TrainerHill_Entrance_Text_2685F8
 	waitmessage
-	multichoice 15, 6, 17, 0
+	multichoice 15, 6, MULTI_YESNOINFO, 0
 	switch VAR_RESULT
 	case 0, TrainerHill_Entrance_EventScript_2682C8
 	case 1, TrainerHill_Entrance_EventScript_268314
 	case 2, TrainerHill_Entrance_EventScript_2682BA
-	case 127, TrainerHill_Entrance_EventScript_268314
+	case MULTI_B_PRESSED, TrainerHill_Entrance_EventScript_268314
 	end
 
 TrainerHill_Entrance_EventScript_2682BA:: @ 82682BA
@@ -164,10 +164,10 @@ TrainerHill_Entrance_EventScript_2682BA:: @ 82682BA
 	end
 
 TrainerHill_Entrance_EventScript_2682C8:: @ 82682C8
-	multichoice 13, 2, 113, 0
+	multichoice 13, 2, MULTI_TAG_MATCH_TYPE, 0
 	switch VAR_RESULT
 	case 4, TrainerHill_Entrance_EventScript_268314
-	case 127, TrainerHill_Entrance_EventScript_268314
+	case MULTI_B_PRESSED, TrainerHill_Entrance_EventScript_268314
 	setvar VAR_0x8004, TRAINER_HILL_FUNC_SET_TAG
 	copyvar VAR_0x8005, VAR_RESULT
 	special CallTrainerHillFunction
@@ -261,11 +261,11 @@ TrainerHill_Entrance_EventScript_2683BE:: @ 82683BE
 TrainerHill_Entrance_EventScript_2683C7:: @ 82683C7
 	lock
 	faceplayer
-	message gUnknown_08272A21
+	message gText_HowMayIServeYou
 	waitmessage
 	goto_if_set FLAG_SYS_GAME_CLEAR, TrainerHill_Entrance_EventScript_268402
 	pokemart TrainerHill_Entrance_Pokemart_2683E8
-	msgbox gUnknown_08272A3F, MSGBOX_DEFAULT
+	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
 	release
 	end
 
@@ -288,7 +288,7 @@ TrainerHill_Entrance_Pokemart_2683E8: @ 82683E8
 
 TrainerHill_Entrance_EventScript_268402:: @ 8268402
 	pokemart TrainerHill_Entrance_Pokemart_268414
-	msgbox gUnknown_08272A3F, MSGBOX_DEFAULT
+	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
 	release
 	end
 

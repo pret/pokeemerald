@@ -5,12 +5,12 @@ DewfordTown_PokemonCenter_1F_MapScripts:: @ 81FC523
 
 DewfordTown_PokemonCenter_1F_OnTransition: @ 81FC52E
 	setrespawn HEAL_LOCATION_DEWFORD_TOWN
-	call DewfordTown_PokemonCenter_1F_EventScript_2718DE
+	call Common_EventScript_UpdateBrineyLocation
 	end
 
 DewfordTown_PokemonCenter_1F_EventScript_1FC537:: @ 81FC537
 	setvar VAR_0x800B, 1
-	call DewfordTown_PokemonCenter_1F_EventScript_27191E
+	call Common_EventScript_PkmnCenterNurse
 	waitmessage
 	waitbuttonpress
 	release

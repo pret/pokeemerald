@@ -6,7 +6,7 @@
 #include "save.h"
 #include "new_game.h"
 #include "overworld.h"
-#include "alloc.h"
+#include "malloc.h"
 
 void sub_81700F8(void)
 {

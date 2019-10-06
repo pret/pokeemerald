@@ -2,7 +2,7 @@
 #include "main.h"
 #include "text.h"
 #include "menu.h"
-#include "alloc.h"
+#include "malloc.h"
 #include "gpu_regs.h"
 #include "palette.h"
 #include "party_menu.h"
@@ -24,6 +24,7 @@
 #include "region_map.h"
 #include "constants/region_map_sections.h"
 #include "heal_location.h"
+#include "constants/field_specials.h"
 #include "constants/heal_locations.h"
 #include "constants/map_types.h"
 #include "constants/rgb.h"
@@ -1144,20 +1145,20 @@ static void RegionMap_InitializeStateBasedOnSSTidalLocation(void)
     x = 0;
     switch (GetSSTidalLocation(&mapGroup, &mapNum, &xOnMap, &yOnMap))
     {
-        case 1:
+        case SS_TIDAL_LOCATION_SLATEPORT:
             gRegionMap->mapSecId = MAPSEC_SLATEPORT_CITY;
             break;
-        case 2:
+        case SS_TIDAL_LOCATION_LILYCOVE:
             gRegionMap->mapSecId = MAPSEC_LILYCOVE_CITY;
             break;
-        case 3:
+        case SS_TIDAL_LOCATION_ROUTE124:
             gRegionMap->mapSecId = MAPSEC_ROUTE_124;
             break;
-        case 4:
+        case SS_TIDAL_LOCATION_ROUTE131:
             gRegionMap->mapSecId = MAPSEC_ROUTE_131;
             break;
         default:
-        case 0:
+        case SS_TIDAL_LOCATION_OTHER:
             mapHeader = Overworld_GetMapHeaderByGroupAndId(mapGroup, mapNum);
 
             gRegionMap->mapSecId = mapHeader->regionMapSectionId;

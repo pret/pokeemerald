@@ -46,10 +46,10 @@ Route104_PrettyPetalFlowerShop_EventScript_22A3DB:: @ 822A3DB
 	return
 
 Route104_PrettyPetalFlowerShop_EventScript_22A3E4:: @ 822A3E4
-	message gUnknown_08272A52
+	message gText_PlayerWhatCanIDoForYou
 	waitmessage
 	pokemartdecoration2 Route104_PrettyPetalFlowerShop_Pokemart_Plants
-	msgbox gUnknown_08272A3F, MSGBOX_DEFAULT
+	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
 	release
 	end
 
@@ -88,7 +88,7 @@ Route104_PrettyPetalFlowerShop_EventScript_22A442:: @ 822A442
 	goto_if_set FLAG_DAILY_FLOWER_SHOP_RECEIVED_BERRY, Route104_PrettyPetalFlowerShop_EventScript_22A482
 	msgbox Route104_PrettyPetalFlowerShop_Text_2A7A98, MSGBOX_DEFAULT
 	random 8
-	addvar VAR_RESULT, 133
+	addvar VAR_RESULT, FIRST_BERRY_INDEX
 	giveitem_std VAR_RESULT
 	compare VAR_RESULT, 0
 	goto_if_eq Common_EventScript_ShowBagIsFull

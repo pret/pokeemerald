@@ -9,7 +9,7 @@
 #include "task.h"
 #include "battle_tower.h"
 #include "party_menu.h"
-#include "alloc.h"
+#include "malloc.h"
 #include "palette.h"
 #include "script.h"
 #include "battle_setup.h"
@@ -49,7 +49,7 @@ struct PikeWildMon
 {
     u16 species;
     u8 levelDelta;
-    u16 moves[4];
+    u16 moves[MAX_MON_MOVES];
 };
 
 // IWRAM bss

@@ -18,7 +18,7 @@ BattleFrontier_BattlePikeThreePathRoom_MapScript2_25C87D: @ 825C87D
 
 BattleFrontier_BattlePikeThreePathRoom_EventScript_25C887:: @ 825C887
 	setvar VAR_TEMP_4, 1
-	turnobject EVENT_OBJ_ID_PLAYER, 2
+	turnobject EVENT_OBJ_ID_PLAYER, DIR_NORTH
 	end
 
 BattleFrontier_BattlePikeThreePathRoom_EventScript_25C891:: @ 825C891
@@ -159,7 +159,7 @@ BattleFrontier_BattlePikeThreePathRoom_EventScript_25CA2A:: @ 825CA2A
 BattleFrontier_BattlePikeThreePathRoom_EventScript_25CA5A:: @ 825CA5A
 	message BattleFrontier_BattlePikeThreePathRoom_Text_25CD3C
 	waitmessage
-	multichoicedefault 20, 8, 94, 1, 0
+	multichoicedefault 20, 8, MULTI_YESNO, 1, 0
 	switch VAR_RESULT
 	case 0, BattleFrontier_BattlePikeThreePathRoom_EventScript_2C4222
 	release

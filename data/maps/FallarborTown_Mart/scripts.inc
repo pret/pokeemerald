@@ -4,10 +4,10 @@ FallarborTown_Mart_MapScripts:: @ 81FFCBE
 FallarborTown_Mart_EventScript_1FFCBF:: @ 81FFCBF
 	lock
 	faceplayer
-	message gUnknown_08272A21
+	message gText_HowMayIServeYou
 	waitmessage
 	pokemart FallarborTown_Mart_Pokemart_1FFCD8
-	msgbox gUnknown_08272A3F, MSGBOX_DEFAULT
+	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
 	release
 	end
 

@@ -1,5 +1,5 @@
 #include "global.h"
-#include "alloc.h"
+#include "malloc.h"
 #include "decompress.h"
 #include "decoration.h"
 #include "decoration_inventory.h"
@@ -40,6 +40,7 @@
 
 #define PLACE_DECORATION_SELECTOR_TAG 0xbe5
 #define PLACE_DECORATION_PLAYER_TAG   0x008
+#define NUM_DECORATION_FLAGS (FLAG_DECORATION_14 - FLAG_DECORATION_0)
 
 struct DecorationItemsMenu
 {
@@ -69,8 +70,8 @@ struct DecorRearrangementDataBuffer
 EWRAM_DATA u8 *gCurDecorationItems = NULL;
 EWRAM_DATA static u8 sDecorationActionsCursorPos = 0;
 EWRAM_DATA static u8 sNumOwnedDecorationsInCurCategory = 0;
-EWRAM_DATA static u8 sSecretBaseItemsIndicesBuffer[16] = {};
-EWRAM_DATA static u8 sPlayerRoomItemsIndicesBuffer[12] = {};
+EWRAM_DATA static u8 sSecretBaseItemsIndicesBuffer[DECOR_MAX_SECRET_BASE] = {};
+EWRAM_DATA static u8 sPlayerRoomItemsIndicesBuffer[DECOR_MAX_PLAYERS_HOUSE] = {};
 EWRAM_DATA static u16 sDecorationsCursorPos = 0;
 EWRAM_DATA static u16 sDecorationsScrollOffset = 0;
 EWRAM_DATA u8 gCurDecorationIndex = 0;
@@ -86,7 +87,7 @@ EWRAM_DATA static u8 sDecor_CameraSpriteObjectIdx1 = 0;
 EWRAM_DATA static u8 sDecor_CameraSpriteObjectIdx2 = 0;
 EWRAM_DATA static u8 sDecorationLastDirectionMoved = 0;
 EWRAM_DATA static struct OamData sDecorSelectorOam = {};
-EWRAM_DATA static struct DecorRearrangementDataBuffer sDecorRearrangementDataBuffer[16] = {};
+EWRAM_DATA static struct DecorRearrangementDataBuffer sDecorRearrangementDataBuffer[DECOR_MAX_SECRET_BASE] = {};
 EWRAM_DATA static u8 sCurDecorSelectedInRearrangement = 0;
 
 static void HandleDecorationActionsMenuInput(u8 taskId);
@@ -128,34 +129,34 @@ void SetUpPlacingDecorationPlayerAvatar(u8 taskId, struct PlaceDecorationGraphic
 void sub_812826C(u8 taskId);
 void sub_81283BC(u8 taskId);
 void sub_8128414(u8 taskId);
-void sub_8128950(u8 taskId);
-void sub_81289D0(u8 taskId);
-void sub_81289F0(u8 taskId);
+void AttemptPlaceDecoration(u8 taskId);
+void PlaceDecorationPrompt(u8 taskId);
+void PlaceDecoration(u8 taskId);
 void sub_8128AAC(u8 taskId);
-void sub_8128B80(u8 taskId);
-void sub_8128BA0(u8 taskId);
+void CancelDecoratingPrompt(u8 taskId);
+void CancelDecorating(u8 taskId);
 void sub_8128BBC(u8 taskId);
 void c1_overworld_prev_quest(u8 taskId);
 void sub_8128CD4(void);
 void sub_8128DE0(void);
-void sub_8128FD8(u8 taskId);
-void sub_8129020(u8 taskId);
+void ContinueDecorating(u8 taskId);
+void CantPlaceDecorationPrompt(u8 taskId);
 void sub_81292D0(struct Sprite *sprite);
 void sub_81292E8(struct Sprite *sprite);
 u8 gpu_pal_decompress_alloc_tag_and_upload(struct PlaceDecorationGraphicsDataBuffer *data, u8 decor);
 const u32 *GetDecorationIconPicOrPalette(u16 decor, u8 mode);
 bool8 sub_81299AC(u8 taskId);
 void sub_8129ABC(u8 taskId);
-void sub_8129B34(u8 taskId);
+void ContinuePuttingAwayDecorations(u8 taskId);
 void sub_8129BCC(u8 taskId);
 void sub_8129BF8(u8 taskId);
 void sub_8129C74(u8 taskId);
-void sub_8129D64(u8 taskId);
+void ContinuePuttingAwayDecorationsPrompt(u8 taskId);
 void sub_812A0E8(u8 taskId);
-void sub_812A1A0(u8 taskId);
-void sub_812A1C0(u8 taskId);
-void sub_812A1F0(u8 taskId);
-void sub_812A210(u8 taskId);
+void ReturnDecorationPrompt(u8 taskId);
+void PutAwayDecoration(u8 taskId);
+void StopPuttingAwayDecorationsPrompt(u8 taskId);
+void StopPuttingAwayDecorations(u8 taskId);
 void sub_812A22C(u8 taskId);
 void sub_812A25C(u8 taskId);
 void sub_812A334(void);
@@ -163,8 +164,8 @@ void sub_812A36C(struct Sprite *sprite);
 void sub_812A39C(void);
 void sub_812A3C8(void);
 void sub_812A3D4(u8 taskId);
-void sub_812A458(u8 taskId);
-void sub_812A478(u8 taskId);
+void TossDecorationPrompt(u8 taskId);
+void TossDecoration(u8 taskId);
 
 #include "data/decoration/tiles.h"
 #include "data/decoration/description.h"
@@ -344,16 +345,16 @@ const struct SpritePalette gUnknown_085A72BC =
     .tag = PLACE_DECORATION_SELECTOR_TAG,
 };
 
-const struct YesNoFuncTable gUnknown_085A72C4 =
+const struct YesNoFuncTable sPlaceDecorationYesNoFunctions =
 {
-    .yesFunc = sub_81289F0,
-    .noFunc = sub_8128FD8,
+    .yesFunc = PlaceDecoration,
+    .noFunc = ContinueDecorating,
 };
 
-const struct YesNoFuncTable gUnknown_085A72CC =
+const struct YesNoFuncTable sCancelDecoratingYesNoFunctions =
 {
-    .yesFunc = sub_8128BA0,
-    .noFunc = sub_8128FD8,
+    .yesFunc = CancelDecorating,
+    .noFunc = ContinueDecorating,
 };
 
 const struct YesNoFuncTable gUnknown_085A72D4[] =
@@ -390,16 +391,16 @@ const u16 gUnknown_085A7308[] = INCBIN_U16("graphics/decorations/unk_85a7308.gba
 
 const u16 gUnknown_085A7328[] = INCBIN_U16("graphics/decorations/unk_85a7328.gbapal");
 
-const struct YesNoFuncTable gUnknown_085A7348 =
+const struct YesNoFuncTable sReturnDecorationYesNoFunctions =
 {
-    .yesFunc = sub_812A1C0,
-    .noFunc = sub_8129B34,
+    .yesFunc = PutAwayDecoration,
+    .noFunc = ContinuePuttingAwayDecorations,
 };
 
-const struct YesNoFuncTable gUnknown_085A7350 =
+const struct YesNoFuncTable sStopPuttingAwayDecorationsYesNoFunctions =
 {
-    .yesFunc = sub_812A210,
-    .noFunc = sub_8129B34,
+    .yesFunc = StopPuttingAwayDecorations,
+    .noFunc = ContinuePuttingAwayDecorations,
 };
 
 const u8 gUnknown_085A7358[] = INCBIN_U8("graphics/misc/decoration_unk_85a7358.4bpp");
@@ -458,9 +459,9 @@ const struct SpriteTemplate gUnknown_085A7404 =
     sub_812A36C
 };
 
-const struct YesNoFuncTable gUnknown_085A741C =
+const struct YesNoFuncTable sTossDecorationYesNoFunctions =
 {
-    .yesFunc = sub_812A478,
+    .yesFunc = TossDecoration,
     .noFunc = sub_8127A30,
 };
 
@@ -633,7 +634,7 @@ static void DecorationMenuAction_Cancel(u8 taskId)
     RemoveDecorationWindow(0);
     if (!gDecorationContext.isPlayerRoom)
     {
-        ScriptContext1_SetupScript(gUnknown_0823B4E8);
+        ScriptContext1_SetupScript(SecretBase_EventScript_PCCancel);
         DestroyTask(taskId);
     }
     else
@@ -1235,12 +1236,12 @@ void ShowDecorationOnMap(u16 mapX, u16 mapY, u16 decoration)
     }
 }
 
-void sub_8127E18(void)
+void SetDecoration(void)
 {
     u8 i;
     u8 j;
 
-    for (i = 0; i < 14; i++)
+    for (i = 0; i < NUM_DECORATION_FLAGS; i++)
     {
         if (FlagGet(FLAG_DECORATION_1 + i) == TRUE)
         {
@@ -1339,7 +1340,7 @@ void sub_8128060(u8 taskId)
             if (IsWeatherNotFadingIn() == TRUE)
             {
                 gTasks[taskId].data[12] = 0;
-                sub_8128FD8(taskId);
+                ContinueDecorating(taskId);
             }
             break;
     }
@@ -1427,7 +1428,7 @@ void sub_81283BC(u8 taskId)
     gSprites[sDecor_CameraSpriteObjectIdx1].data[7] = 1;
     gSprites[sDecor_CameraSpriteObjectIdx2].data[7] = 1;
     sub_8128DE0();
-    sub_8128950(taskId);
+    AttemptPlaceDecoration(taskId);
 }
 
 void sub_8128414(u8 taskId)
@@ -1437,7 +1438,7 @@ void sub_8128414(u8 taskId)
     gSprites[sDecor_CameraSpriteObjectIdx2].data[7] = 1;
     sub_8128DE0();
     StringExpandPlaceholders(gStringVar4, gText_CancelDecorating);
-    DisplayItemMessageOnField(taskId, gStringVar4, sub_8128B80);
+    DisplayItemMessageOnField(taskId, gStringVar4, CancelDecoratingPrompt);
 }
 
 bool8 sub_8128484(u8 behaviorAt, u16 behaviorBy)
@@ -1472,7 +1473,7 @@ bool8 sub_81284F4(u16 behaviorAt, const struct Decoration *decoration)
     return FALSE;
 }
 
-bool8 sub_812853C(u8 taskId, const struct Decoration *decoration)
+bool8 CanPlaceDecoration(u8 taskId, const struct Decoration *decoration)
 {
     u8 i;
     u8 j;
@@ -1586,28 +1587,28 @@ bool8 sub_812853C(u8 taskId, const struct Decoration *decoration)
     return TRUE;
 }
 
-void sub_8128950(u8 taskId)
+void AttemptPlaceDecoration(u8 taskId)
 {
-    if (sub_812853C(taskId, &gDecorations[gCurDecorationItems[gCurDecorationIndex]]) == TRUE)
+    if (CanPlaceDecoration(taskId, &gDecorations[gCurDecorationItems[gCurDecorationIndex]]) == TRUE)
     {
         StringExpandPlaceholders(gStringVar4, gText_PlaceItHere);
-        DisplayItemMessageOnField(taskId, gStringVar4, sub_81289D0);
+        DisplayItemMessageOnField(taskId, gStringVar4, PlaceDecorationPrompt);
     }
     else
     {
         PlaySE(SE_HAZURE);
         StringExpandPlaceholders(gStringVar4, gText_CantBePlacedHere);
-        DisplayItemMessageOnField(taskId, gStringVar4, sub_8129020);
+        DisplayItemMessageOnField(taskId, gStringVar4, CantPlaceDecorationPrompt);
     }
 }
 
-void sub_81289D0(u8 taskId)
+void PlaceDecorationPrompt(u8 taskId)
 {
     DisplayYesNoMenuDefaultYes();
-    DoYesNoFuncWithChoice(taskId, &gUnknown_085A72C4);
+    DoYesNoFuncWithChoice(taskId, &sPlaceDecorationYesNoFunctions);
 }
 
-void sub_81289F0(u8 taskId)
+void PlaceDecoration(u8 taskId)
 {
     ClearDialogWindowAndFrame(0, 0);
     sub_8128AAC(taskId);
@@ -1619,7 +1620,7 @@ void sub_81289F0(u8 taskId)
     {
         sCurDecorMapX = gTasks[taskId].data[0] - 7;
         sCurDecorMapY = gTasks[taskId].data[1] - 7;
-        ScriptContext1_SetupScript(EventScript_275D1F);
+        ScriptContext1_SetupScript(SecretBase_EventScript_SetDecoration);
     }
 
     gSprites[sDecor_CameraSpriteObjectIdx1].pos1.y += 2;
@@ -1645,7 +1646,7 @@ void sub_8128AAC(u8 taskId)
 
     if (!gDecorationContext.isPlayerRoom)
     {
-        for (i = 0; i < 16; i++)
+        for (i = 0; i < DECOR_MAX_SECRET_BASE; i++)
         {
             if (sSecretBaseItemsIndicesBuffer[i] == 0)
             {
@@ -1656,7 +1657,7 @@ void sub_8128AAC(u8 taskId)
     }
     else
     {
-        for (i = 0; i < 12; i++)
+        for (i = 0; i < DECOR_MAX_PLAYERS_HOUSE; i++)
         {
             if (sPlayerRoomItemsIndicesBuffer[i] == 0)
             {
@@ -1667,13 +1668,13 @@ void sub_8128AAC(u8 taskId)
     }
 }
 
-void sub_8128B80(u8 taskId)
+void CancelDecoratingPrompt(u8 taskId)
 {
     DisplayYesNoMenuDefaultYes();
-    DoYesNoFuncWithChoice(taskId, &gUnknown_085A72CC);
+    DoYesNoFuncWithChoice(taskId, &sCancelDecoratingYesNoFunctions);
 }
 
-void sub_8128BA0(u8 taskId)
+void CancelDecorating(u8 taskId)
 {
     ClearDialogWindowAndFrame(0, 0);
     sub_8128BBC(taskId);
@@ -1718,7 +1719,7 @@ void sub_8128C64(u8 taskId)
         data[2]++;
         break;
     case 1:
-        ScriptContext1_SetupScript(EventScript_275D0C);
+        ScriptContext1_SetupScript(SecretBase_EventScript_InitDecorations);
         data[2]++;
         break;
     case 2:
@@ -1857,7 +1858,7 @@ void sub_8128E18(u8 taskId)
     }
 }
 
-void sub_8128FD8(u8 taskId)
+void ContinueDecorating(u8 taskId)
 {
     ClearDialogWindowAndFrame(0, 1);
     gSprites[sDecor_CameraSpriteObjectIdx1].data[7] = 0;
@@ -1865,10 +1866,10 @@ void sub_8128FD8(u8 taskId)
     gTasks[taskId].func = sub_8128E18;
 }
 
-void sub_8129020(u8 taskId)
+void CantPlaceDecorationPrompt(u8 taskId)
 {
     if (gMain.newKeys & A_BUTTON || gMain.newKeys & B_BUTTON)
-        sub_8128FD8(taskId);
+        ContinueDecorating(taskId);
 }
 
 void sub_8129048(struct PlaceDecorationGraphicsDataBuffer *data)
@@ -2043,7 +2044,7 @@ const u32 *GetDecorationIconPicOrPalette(u16 decor, u8 mode)
     if (decor > NUM_DECORATIONS)
         decor = DECOR_NONE;
 
-    return gUnknown_085A6BE8[decor][mode];
+    return gDecorIconTable[decor][mode];
 }
 
 u8 AddDecorationIconObjectFromEventObject(u16 tilesTag, u16 paletteTag, u8 decor)
@@ -2095,7 +2096,7 @@ u8 AddDecorationIconObject(u8 decor, s16 x, s16 y, u8 priority, u16 tilesTag, u1
         gSprites[spriteId].pos2.x = x + 4;
         gSprites[spriteId].pos2.y = y + 4;
     }
-    else if (gUnknown_085A6BE8[decor][0] == NULL)
+    else if (gDecorIconTable[decor][0] == NULL)
     {
         spriteId = AddDecorationIconObjectFromEventObject(tilesTag, paletteTag, decor);
         if (spriteId == MAX_SPRITES)
@@ -2206,7 +2207,7 @@ void sub_81298EC(u8 taskId)
     case 1:
         if (!gPaletteFade.active) {
             DrawWholeMapView();
-            ScriptContext1_SetupScript(EventScript_275D2E);
+            ScriptContext1_SetupScript(SecretBase_EventScript_PutAwayDecoration);
             ClearDialogWindowAndFrame(0, 1);
             gTasks[taskId].data[2] = 2;
         }
@@ -2221,7 +2222,7 @@ void sub_81298EC(u8 taskId)
         if (IsWeatherNotFadingIn() == TRUE)
         {
             StringExpandPlaceholders(gStringVar4, gText_DecorationReturnedToPC);
-            DisplayItemMessageOnField(taskId, gStringVar4, sub_8129D64);
+            DisplayItemMessageOnField(taskId, gStringVar4, ContinuePuttingAwayDecorationsPrompt);
             if (gMapHeader.regionMapSectionId == MAPSEC_SECRET_BASE)
                 TV_PutSecretBaseVisitOnTheAir();
         }
@@ -2284,13 +2285,13 @@ void sub_8129ABC(u8 taskId)
         if (IsWeatherNotFadingIn() == TRUE)
         {
             data[12] = 1;
-            sub_8129B34(taskId);
+            ContinuePuttingAwayDecorations(taskId);
         }
         break;
     }
 }
 
-void sub_8129B34(u8 taskId)
+void ContinuePuttingAwayDecorations(u8 taskId)
 {
     ClearDialogWindowAndFrame(0, 1);
     gSprites[sDecor_CameraSpriteObjectIdx1].data[7] = 0;
@@ -2316,7 +2317,7 @@ void sub_8129BF8(u8 taskId)
     gSprites[sDecor_CameraSpriteObjectIdx1].invisible = FALSE;
     gSprites[sDecor_CameraSpriteObjectIdx1].callback = SpriteCallbackDummy;
     StringExpandPlaceholders(gStringVar4, gText_StopPuttingAwayDecorations);
-    DisplayItemMessageOnField(taskId, gStringVar4, sub_812A1F0);
+    DisplayItemMessageOnField(taskId, gStringVar4, StopPuttingAwayDecorationsPrompt);
 }
 
 void sub_8129C74(u8 taskId)
@@ -2328,7 +2329,7 @@ void sub_8129C74(u8 taskId)
     if (sCurDecorSelectedInRearrangement != 0)
     {
         StringExpandPlaceholders(gStringVar4, gText_ReturnDecorationToPC);
-        DisplayItemMessageOnField(taskId, gStringVar4, sub_812A1A0);
+        DisplayItemMessageOnField(taskId, gStringVar4, ReturnDecorationPrompt);
     }
     else
     {
@@ -2339,20 +2340,20 @@ void sub_8129C74(u8 taskId)
             gSprites[sDecor_CameraSpriteObjectIdx1].invisible = FALSE;
             gSprites[sDecor_CameraSpriteObjectIdx1].callback = SpriteCallbackDummy;
             StringExpandPlaceholders(gStringVar4, gText_StopPuttingAwayDecorations);
-            DisplayItemMessageOnField(taskId, gStringVar4, sub_812A1F0);
+            DisplayItemMessageOnField(taskId, gStringVar4, StopPuttingAwayDecorationsPrompt);
         }
         else
         {
             StringExpandPlaceholders(gStringVar4, gText_NoDecorationHere);
-            DisplayItemMessageOnField(taskId, gStringVar4, sub_8129D64);
+            DisplayItemMessageOnField(taskId, gStringVar4, ContinuePuttingAwayDecorationsPrompt);
         }
     }
 }
 
-void sub_8129D64(u8 taskId)
+void ContinuePuttingAwayDecorationsPrompt(u8 taskId)
 {
     if (gMain.newKeys & A_BUTTON || gMain.newKeys & B_BUTTON)
-        sub_8129B34(taskId);
+        ContinuePuttingAwayDecorations(taskId);
 }
 
 void sub_8129D8C(u8 decor, struct DecorRearrangementDataBuffer *data)
@@ -2542,26 +2543,26 @@ void sub_812A0E8(u8 taskId)
     }
 }
 
-void sub_812A1A0(u8 taskId)
+void ReturnDecorationPrompt(u8 taskId)
 {
     DisplayYesNoMenuDefaultYes();
-    DoYesNoFuncWithChoice(taskId, &gUnknown_085A7348);
+    DoYesNoFuncWithChoice(taskId, &sReturnDecorationYesNoFunctions);
 }
 
-void sub_812A1C0(u8 taskId)
+void PutAwayDecoration(u8 taskId)
 {
     FadeScreen(1, 0);
     gTasks[taskId].data[2] = 0;
     gTasks[taskId].func = sub_81298EC;
 }
 
-void sub_812A1F0(u8 taskId)
+void StopPuttingAwayDecorationsPrompt(u8 taskId)
 {
     DisplayYesNoMenuDefaultYes();
-    DoYesNoFuncWithChoice(taskId, &gUnknown_085A7350);
+    DoYesNoFuncWithChoice(taskId, &sStopPuttingAwayDecorationsYesNoFunctions);
 }
 
-void sub_812A210(u8 taskId)
+void StopPuttingAwayDecorations(u8 taskId)
 {
     ClearDialogWindowAndFrame(0, 0);
     sub_812A22C(taskId);
@@ -2604,7 +2605,7 @@ void sub_812A2C4(u8 taskId)
         data[2]++;
         break;
     case 1:
-        ScriptContext1_SetupScript(EventScript_275D0C);
+        ScriptContext1_SetupScript(SecretBase_EventScript_InitDecorations);
         data[2]++;
         break;
     case 2:
@@ -2658,7 +2659,7 @@ void sub_812A3D4(u8 taskId)
     {
         StringCopy(gStringVar1, gDecorations[gCurDecorationItems[gCurDecorationIndex]].name);
         StringExpandPlaceholders(gStringVar4, gText_DecorationWillBeDiscarded);
-        DisplayItemMessageOnField(taskId, gStringVar4, sub_812A458);
+        DisplayItemMessageOnField(taskId, gStringVar4, TossDecorationPrompt);
     }
     else
     {
@@ -2667,13 +2668,13 @@ void sub_812A3D4(u8 taskId)
     }
 }
 
-void sub_812A458(u8 taskId)
+void TossDecorationPrompt(u8 taskId)
 {
     DisplayYesNoMenuDefaultYes();
-    DoYesNoFuncWithChoice(taskId, &gUnknown_085A741C);
+    DoYesNoFuncWithChoice(taskId, &sTossDecorationYesNoFunctions);
 }
 
-void sub_812A478(u8 taskId)
+void TossDecoration(u8 taskId)
 {
     gCurDecorationItems[gCurDecorationIndex] = DECOR_NONE;
     sNumOwnedDecorationsInCurCategory = GetNumOwnedDecorationsInCategory(sCurDecorationCategory);

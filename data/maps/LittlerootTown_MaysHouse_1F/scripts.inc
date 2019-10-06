@@ -17,7 +17,7 @@ LittlerootTown_MaysHouse_1F_EventScript_1F88CA:: @ 81F88CA
 
 LittlerootTown_MaysHouse_1F_EventScript_1F88DD:: @ 81F88DD
 	checkplayergender
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, FEMALE
 	goto_if_eq LittlerootTown_MaysHouse_1F_EventScript_1F88EA
 	return
 

@@ -1,5 +1,5 @@
 #include "global.h"
-#include "alloc.h"
+#include "malloc.h"
 #include "bg.h"
 #include "decompress.h"
 #include "dma3.h"
@@ -22,6 +22,7 @@
 #include "task.h"
 #include "text.h"
 #include "text_window.h"
+#include "union_room_chat.h"
 #include "window.h"
 #include "constants/rgb.h"
 #include "constants/songs.h"
@@ -37,9 +38,9 @@ struct UnionRoomChat
     u8 unkD;
     u8 unkE;
     u8 unkF;
-    u8 unk10;
+    u8 currentPage;
     u8 unk11;
-    u8 unk12;
+    u8 currentRow;
     u8 unk13;
     u8 unk14;
     u8 unk15;
@@ -50,7 +51,7 @@ struct UnionRoomChat
     u8 unk1A[0x1F];
     u8 unk39[0x40];
     u8 unk79[0x40];
-    u8 unkB9[10][21];
+    u8 unkB9[UNION_ROOM_KB_ROW_COUNT][21];
     u8 filler18B[0x5];
     u8 unk190[0x28];
     u16 unk1B8;
@@ -232,7 +233,13 @@ void (*const gUnknown_082F2A7C[])(void) =
         sub_801E978,
     };
 
-static const u8 sUnknown_082F2AA4[] = {9, 9, 9, 9};
+static const u8 sKeyboardPageMaxRow[] = 
+{
+    [UNION_ROOM_KB_PAGE_UPPER] = 9, 
+    [UNION_ROOM_KB_PAGE_LOWER] = 9, 
+    [UNION_ROOM_KB_PAGE_EMOJI] = 9, 
+    9
+};
 
 static const u8 gUnknown_082F2AA8[] = {
     CHAR_SPACE, 0x16, 0x17, 0x68, 0x19, 0x1A, 0x1B, 0x1C,
@@ -269,10 +276,47 @@ static const u8 gUnknown_082F2AA8[] = {
     CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE
 };
 
-const u8 *const gUnknown_082F2BA8[][10] = {
-    {gUnknown_0862B9F9, gUnknown_0862B9FF, gUnknown_0862BA05, gUnknown_0862BA0B, gUnknown_0862BA11, gUnknown_0862BA17, gUnknown_0862BA1D, gUnknown_0862BA23, gUnknown_0862BA29, gUnknown_0862BA2F},
-    {gUnknown_0862BA35, gUnknown_0862BA3B, gUnknown_0862BA41, gUnknown_0862BA47, gUnknown_0862BA4D, gUnknown_0862BA53, gUnknown_0862BA59, gUnknown_0862BA5F, gUnknown_0862BA65, gUnknown_0862BA6B},
-    {gUnknown_0862BA79, gUnknown_0862BA84, gUnknown_0862BA8F, gUnknown_0862BA9A, gUnknown_0862BAA3, gUnknown_0862BAAE, gUnknown_0862BAB9, gUnknown_0862BAC4, gUnknown_0862BACF, gUnknown_0862BADA}
+static const u8 *const sUnionRoomKeyboardText[UNION_ROOM_KB_PAGE_COUNT][UNION_ROOM_KB_ROW_COUNT] = 
+{
+    [UNION_ROOM_KB_PAGE_UPPER] = 
+    {
+        gText_UnionRoomChatKeyboard_ABCDE, 
+        gText_UnionRoomChatKeyboard_FGHIJ, 
+        gText_UnionRoomChatKeyboard_KLMNO, 
+        gText_UnionRoomChatKeyboard_PQRST, 
+        gText_UnionRoomChatKeyboard_UVWXY, 
+        gText_UnionRoomChatKeyboard_Z, 
+        gText_UnionRoomChatKeyboard_01234Upper, 
+        gText_UnionRoomChatKeyboard_56789Upper, 
+        gText_UnionRoomChatKeyboard_PunctuationUpper, 
+        gText_UnionRoomChatKeyboard_SymbolsUpper
+    },
+    [UNION_ROOM_KB_PAGE_LOWER] = 
+    {
+        gText_UnionRoomChatKeyboard_abcde, 
+        gText_UnionRoomChatKeyboard_fghij, 
+        gText_UnionRoomChatKeyboard_klmno, 
+        gText_UnionRoomChatKeyboard_pqrst, 
+        gText_UnionRoomChatKeyboard_uvwxy, 
+        gText_UnionRoomChatKeyboard_z, 
+        gText_UnionRoomChatKeyboard_01234Lower, 
+        gText_UnionRoomChatKeyboard_56789Lower, 
+        gText_UnionRoomChatKeyboard_PunctuationLower, 
+        gText_UnionRoomChatKeyboard_SymbolsLower
+    },
+    [UNION_ROOM_KB_PAGE_EMOJI] = 
+    {
+        gText_UnionRoomChatKeyboard_Emoji1, 
+        gText_UnionRoomChatKeyboard_Emoji2, 
+        gText_UnionRoomChatKeyboard_Emoji3, 
+        gText_UnionRoomChatKeyboard_Emoji4, 
+        gText_UnionRoomChatKeyboard_Emoji5, 
+        gText_UnionRoomChatKeyboard_Emoji6, 
+        gText_UnionRoomChatKeyboard_Emoji7, 
+        gText_UnionRoomChatKeyboard_Emoji8, 
+        gText_UnionRoomChatKeyboard_Emoji9, 
+        gText_UnionRoomChatKeyboard_Emoji10
+    }
 };
 
 const u16 gUnknown_082F2C20[] = INCBIN_U16("graphics/interface/unk_palette1.gbapal");
@@ -559,9 +603,9 @@ static void sub_801DDD0(struct UnionRoomChat *unionRoomChat)
 
     unionRoomChat->unk4 = 0;
     unionRoomChat->unk6 = 0;
-    unionRoomChat->unk10 = 0;
+    unionRoomChat->currentPage = 0;
     unionRoomChat->unk11 = 0;
-    unionRoomChat->unk12 = 0;
+    unionRoomChat->currentRow = 0;
     unionRoomChat->unk14 = 0;
     unionRoomChat->unk15 = 0;
     unionRoomChat->unk16 = 0;
@@ -571,7 +615,7 @@ static void sub_801DDD0(struct UnionRoomChat *unionRoomChat)
     unionRoomChat->unk17 = 0;
     unionRoomChat->unk18 = 0;
     sub_801EF1C(unionRoomChat->unk190);
-    for (i = 0; i < 10; i++)
+    for (i = 0; i < UNION_ROOM_KB_ROW_COUNT; i++)
         StringCopy(unionRoomChat->unkB9[i], gSaveBlock1Ptr->unk3C88[i]);
 }
 
@@ -715,7 +759,7 @@ static void sub_801E030(void)
         }
         else if (gMain.newKeys & R_BUTTON)
         {
-            if (gUnknown_02022C84->unk10 != 3)
+            if (gUnknown_02022C84->currentPage != UNION_ROOM_KB_PAGE_COUNT)
             {
                 sub_801ED94();
                 sub_801F5EC(8, 0);
@@ -763,7 +807,7 @@ static void sub_801E120(void)
         default:
             sub_801F5EC(4, 0);
             var0 = 1;
-            if (gUnknown_02022C84->unk10 == input || input > 3)
+            if (gUnknown_02022C84->currentPage == input || input > UNION_ROOM_KB_PAGE_COUNT)
                 var0 = 0;
             break;
         case MENU_NOTHING_CHOSEN:
@@ -786,9 +830,9 @@ static void sub_801E120(void)
         }
 
         gUnknown_02022C84->unk11 = 0;
-        gUnknown_02022C84->unk12 = 0;
+        gUnknown_02022C84->currentRow = 0;
         sub_801F5EC(5, 1);
-        gUnknown_02022C84->unk10 = input;
+        gUnknown_02022C84->currentPage = input;
         gUnknown_02022C84->unk6 = 4;
         break;
     case 3:
@@ -1260,15 +1304,15 @@ static bool32 sub_801EBE4(void)
     {
         if (gMain.newAndRepeatedKeys & DPAD_DOWN)
         {
-            if (gUnknown_02022C84->unk12 < sUnknown_082F2AA4[gUnknown_02022C84->unk10])
-                gUnknown_02022C84->unk12++;
+            if (gUnknown_02022C84->currentRow < sKeyboardPageMaxRow[gUnknown_02022C84->currentPage])
+                gUnknown_02022C84->currentRow++;
             else
-                gUnknown_02022C84->unk12 = 0;
+                gUnknown_02022C84->currentRow = 0;
 
             return TRUE;
         }
 
-        if (gUnknown_02022C84->unk10 != 3)
+        if (gUnknown_02022C84->currentPage != UNION_ROOM_KB_PAGE_COUNT)
         {
             if (gMain.newAndRepeatedKeys & DPAD_LEFT)
             {
@@ -1296,10 +1340,10 @@ static bool32 sub_801EBE4(void)
     }
     else
     {
-        if (gUnknown_02022C84->unk12)
-            gUnknown_02022C84->unk12--;
+        if (gUnknown_02022C84->currentRow)
+            gUnknown_02022C84->currentRow--;
         else
-            gUnknown_02022C84->unk12 = sUnknown_082F2AA4[gUnknown_02022C84->unk10];
+            gUnknown_02022C84->currentRow = sKeyboardPageMaxRow[gUnknown_02022C84->currentPage];
 
         return TRUE;
     }
@@ -1313,9 +1357,9 @@ static void sub_801EC94(void)
     u8 *str;
     u8 buffer[21];
 
-    if (gUnknown_02022C84->unk10 != 3)
+    if (gUnknown_02022C84->currentPage != UNION_ROOM_KB_PAGE_COUNT)
     {
-        charsStr = gUnknown_082F2BA8[gUnknown_02022C84->unk10][gUnknown_02022C84->unk12];
+        charsStr = sUnionRoomKeyboardText[gUnknown_02022C84->currentPage][gUnknown_02022C84->currentRow];
         for (i = 0; i < gUnknown_02022C84->unk11; i++)
         {
             if (*charsStr == CHAR_SPECIAL_F9)
@@ -1327,7 +1371,7 @@ static void sub_801EC94(void)
     }
     else
     {
-        u8 *tempStr = StringCopy(buffer, gUnknown_02022C84->unkB9[gUnknown_02022C84->unk12]);
+        u8 *tempStr = StringCopy(buffer, gUnknown_02022C84->unkB9[gUnknown_02022C84->currentRow]);
         tempStr[0] = CHAR_SPACE;
         tempStr[1] = EOS;
         charsStr = buffer;
@@ -1395,7 +1439,7 @@ static bool32 sub_801EDC4(void)
 static void sub_801EDE0(void)
 {
     u8 *src = sub_801F114();
-    StringCopy(gUnknown_02022C84->unkB9[gUnknown_02022C84->unk12], src);
+    StringCopy(gUnknown_02022C84->unkB9[gUnknown_02022C84->currentRow], src);
     gUnknown_02022C84->unk18 = 1;
 }
 
@@ -1409,7 +1453,7 @@ static void sub_801EE10(void)
 static void sub_801EE2C(void)
 {
     int i;
-    for (i = 0; i < 10; i++)
+    for (i = 0; i < UNION_ROOM_KB_ROW_COUNT; i++)
         StringCopy(gSaveBlock1Ptr->unk3C88[i], gUnknown_02022C84->unkB9[i]);
 }
 
@@ -1551,15 +1595,15 @@ static bool32 sub_801EFF8(u8 *arg0, u8 *arg1)
     return FALSE;
 }
 
-static u8 sub_801F0B0(void)
+static u8 GetCurrentKeyboardPage(void)
 {
-    return gUnknown_02022C84->unk10;
+    return gUnknown_02022C84->currentPage;
 }
 
 static void sub_801F0BC(u8 *arg0, u8 *arg1)
 {
     *arg0 = gUnknown_02022C84->unk11;
-    *arg1 = gUnknown_02022C84->unk12;
+    *arg1 = gUnknown_02022C84->currentRow;
 }
 
 static u8 *sub_801F0D0(void)
@@ -2528,7 +2572,7 @@ static void sub_8020118(u16 x, u8 *str, u8 fillValue, u8 arg3, u8 arg4)
 
 static void sub_80201A4(void)
 {
-    u8 var0;
+    u8 page;
     int i;
     int var1;
     u16 left;
@@ -2538,11 +2582,11 @@ static void sub_80201A4(void)
     u8 *str2;
 
     FillWindowPixelBuffer(2, PIXEL_FILL(15));
-    var0 = sub_801F0B0();
+    page = GetCurrentKeyboardPage();
     sp[0] = 0;
     sp[1] = 14;
     sp[2] = 13;
-    if (var0 != 3)
+    if (page != UNION_ROOM_KB_PAGE_COUNT)
     {
         str = &sp[4];
         str[0] = EXT_CTRL_CODE_BEGIN;
@@ -2550,15 +2594,15 @@ static void sub_80201A4(void)
         var1 = 8;
         str[2] = var1;
         left = var1;
-        if (var0 == 2)
+        if (page == UNION_ROOM_KB_PAGE_EMOJI)
             left = 6;
 
-        for (i = 0, top = 0; i < 10; i++, top += 12)
+        for (i = 0, top = 0; i < UNION_ROOM_KB_ROW_COUNT; i++, top += 12)
         {
-            if (!gUnknown_082F2BA8[var0][i])
+            if (!sUnionRoomKeyboardText[page][i])
                 return;
 
-            StringCopy(&sp[7], gUnknown_082F2BA8[var0][i]);
+            StringCopy(&sp[7], sUnionRoomKeyboardText[page][i]);
             AddTextPrinterParameterized3(2, 0, left, top, sp, TEXT_SPEED_FF, &sp[4]);
         }
     }
@@ -2631,7 +2675,7 @@ static void sub_80203B0(void)
     FillWindowPixelBuffer(3, PIXEL_FILL(1));
     DrawTextBorderOuter(3, 1, 13);
     PrintTextArray(3, 2, 8, 1, 14, 5, gUnknown_082F2DC8);
-    sub_81983AC(3, 2, 0, 1, 14, 5, sub_801F0B0());
+    sub_81983AC(3, 2, 0, 1, 14, 5, GetCurrentKeyboardPage());
     PutWindowTilemap(3);
 }
 
@@ -2820,9 +2864,9 @@ static void sub_802091C(bool32 invisible)
 static void sub_802093C(void)
 {
     u8 x, y;
-    u8 var2 = sub_801F0B0();
+    u8 page = GetCurrentKeyboardPage();
     sub_801F0BC(&x, &y);
-    if (var2 != 3)
+    if (page != UNION_ROOM_KB_PAGE_COUNT)
     {
         StartSpriteAnim(gUnknown_02022C8C->unk0, 0);
         gUnknown_02022C8C->unk0->pos1.x = x * 8 + 10;
@@ -2845,7 +2889,7 @@ static void sub_80209AC(int arg0)
 
 static void sub_80209E0(void)
 {
-    if (sub_801F0B0() != 3)
+    if (GetCurrentKeyboardPage() != UNION_ROOM_KB_PAGE_COUNT)
         StartSpriteAnim(gUnknown_02022C8C->unk0, 1);
     else
         StartSpriteAnim(gUnknown_02022C8C->unk0, 3);
@@ -2860,7 +2904,7 @@ static bool32 sub_8020A1C(void)
 
     if (++gUnknown_02022C8C->unk14 > 3)
     {
-        if (sub_801F0B0() != 3)
+        if (GetCurrentKeyboardPage() != UNION_ROOM_KB_PAGE_COUNT)
             StartSpriteAnim(gUnknown_02022C8C->unk0, 0);
         else
             StartSpriteAnim(gUnknown_02022C8C->unk0, 2);
@@ -2914,7 +2958,7 @@ static void sub_8020B20(void)
 
 static void sub_8020B80(void)
 {
-    if (sub_801F0B0() == 3)
+    if (GetCurrentKeyboardPage() == UNION_ROOM_KB_PAGE_COUNT)
     {
         if (sub_801F0DC() != 0)
         {

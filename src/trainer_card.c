@@ -4,7 +4,7 @@
 #include "task.h"
 #include "main.h"
 #include "window.h"
-#include "alloc.h"
+#include "malloc.h"
 #include "link.h"
 #include "bg.h"
 #include "sound.h"
@@ -1010,7 +1010,7 @@ static void PrintMoneyOnCard(void)
     else
         AddTextPrinterParameterized3(1, 1, 16, 57, gUnknown_0856FB0C, TEXT_SPEED_FF, gText_TrainerCardMoney);
 
-    ConvertIntToDecimalStringN(gStringVar1, sData->trainerCard.money, 0, 6);
+    ConvertIntToDecimalStringN(gStringVar1, sData->trainerCard.money, STR_CONV_MODE_LEFT_ALIGN, 6);
     StringExpandPlaceholders(gStringVar4, gText_PokedollarVar1);
     if (!sData->isHoenn)
     {
@@ -1043,7 +1043,7 @@ static void PrintPokedexOnCard(void)
             AddTextPrinterParameterized3(1, 1, 20, 72, gUnknown_0856FB0C, TEXT_SPEED_FF, gText_TrainerCardPokedex);
         else
             AddTextPrinterParameterized3(1, 1, 16, 73, gUnknown_0856FB0C, TEXT_SPEED_FF, gText_TrainerCardPokedex);
-        StringCopy(ConvertIntToDecimalStringN(gStringVar4, sData->trainerCard.caughtMonsCount, 0, 3), gText_EmptyString6);
+        StringCopy(ConvertIntToDecimalStringN(gStringVar4, sData->trainerCard.caughtMonsCount, STR_CONV_MODE_LEFT_ALIGN, 3), gText_EmptyString6);
         if (!sData->isHoenn)
         {
             xOffset = GetStringRightAlignXOffset(1, gStringVar4, 144);
@@ -1103,12 +1103,12 @@ static void PrintTimeOnCard(void)
     r7 -= r10;
 
     FillWindowPixelRect(1, PIXEL_FILL(0), r7, r4, r10, 15);
-    ConvertIntToDecimalStringN(gStringVar4, hours, 1, 3);
+    ConvertIntToDecimalStringN(gStringVar4, hours, STR_CONV_MODE_RIGHT_ALIGN, 3);
     AddTextPrinterParameterized3(1, 1, r7, r4, gUnknown_0856FB0C, TEXT_SPEED_FF, gStringVar4);
     r7 += 18;
     AddTextPrinterParameterized3(1, 1, r7, r4, gUnknown_0856FB40[sData->var_7], TEXT_SPEED_FF, gText_Colon2);
     r7 += width;
-    ConvertIntToDecimalStringN(gStringVar4, minutes, 2, 2);
+    ConvertIntToDecimalStringN(gStringVar4, minutes, STR_CONV_MODE_LEADING_ZEROS, 2);
     AddTextPrinterParameterized3(1, 1, r7, r4, gUnknown_0856FB0C, TEXT_SPEED_FF, gStringVar4);
 }
 
@@ -1151,9 +1151,9 @@ static void PrintHofTimeOnCard(void)
 {
     if (sData->hasHofResult)
     {
-        ConvertIntToDecimalStringN(gStringVar1, sData->trainerCard.hofDebutHours, 1, 3);
-        ConvertIntToDecimalStringN(gStringVar2, sData->trainerCard.hofDebutMinutes, 2, 2);
-        ConvertIntToDecimalStringN(gStringVar3, sData->trainerCard.hofDebutSeconds, 2, 2);
+        ConvertIntToDecimalStringN(gStringVar1, sData->trainerCard.hofDebutHours, STR_CONV_MODE_RIGHT_ALIGN, 3);
+        ConvertIntToDecimalStringN(gStringVar2, sData->trainerCard.hofDebutMinutes, STR_CONV_MODE_LEADING_ZEROS, 2);
+        ConvertIntToDecimalStringN(gStringVar3, sData->trainerCard.hofDebutSeconds, STR_CONV_MODE_LEADING_ZEROS, 2);
         StringExpandPlaceholders(sData->var_93, gUnknown_0856FB4C);
     }
 }
@@ -1180,8 +1180,8 @@ static void PrintLinkResultsNumsOnCard(void)
     if (sData->hasLinkResults)
     {
         StringCopy(sData->var_D9, gUnknown_0856FB5C[sData->cardType]);
-        ConvertIntToDecimalStringN(sData->var_165, sData->trainerCard.linkBattleWins, 0, 4);
-        ConvertIntToDecimalStringN(sData->var_1AB, sData->trainerCard.linkBattleLosses, 0, 4);
+        ConvertIntToDecimalStringN(sData->var_165, sData->trainerCard.linkBattleWins, STR_CONV_MODE_LEFT_ALIGN, 4);
+        ConvertIntToDecimalStringN(sData->var_1AB, sData->trainerCard.linkBattleLosses, STR_CONV_MODE_LEFT_ALIGN, 4);
     }
 }
 
@@ -1199,7 +1199,7 @@ static void PrintWinsLossesStringOnCard(void)
 static void PrintTradesNumOnCard(void)
 {
     if (sData->hasTrades)
-        ConvertIntToDecimalStringN(sData->var_237, sData->trainerCard.pokemonTrades, 1, 5);
+        ConvertIntToDecimalStringN(sData->var_237, sData->trainerCard.pokemonTrades, STR_CONV_MODE_RIGHT_ALIGN, 5);
 }
 
 static void PrintTradesStringOnCard(void)
@@ -1211,7 +1211,7 @@ static void PrintTradesStringOnCard(void)
 static void PrintBerryCrushNumOnCard(void)
 {
     if (sData->cardType == CARD_TYPE_FRLG && sData->trainerCard.berryCrushPoints)
-        ConvertIntToDecimalStringN(sData->var_2C3, sData->trainerCard.berryCrushPoints, 1, 5);
+        ConvertIntToDecimalStringN(sData->var_2C3, sData->trainerCard.berryCrushPoints, STR_CONV_MODE_RIGHT_ALIGN, 5);
 }
 
 static void PrintBerryCrushStringOnCard(void)
@@ -1223,7 +1223,7 @@ static void PrintBerryCrushStringOnCard(void)
 static void PrintUnionNumOnCard(void)
 {
     if (sData->cardType == CARD_TYPE_FRLG && sData->trainerCard.unionRoomNum)
-        ConvertIntToDecimalStringN(sData->var_34F, sData->trainerCard.unionRoomNum, 1, 5);
+        ConvertIntToDecimalStringN(sData->var_34F, sData->trainerCard.unionRoomNum, STR_CONV_MODE_RIGHT_ALIGN, 5);
 }
 
 static void PrintUnionStringOnCard(void)
@@ -1236,7 +1236,7 @@ static void PrintPokeblocksNumOnCard(void)
 {
     if (sData->cardType != CARD_TYPE_FRLG && sData->trainerCard.pokeblocksWithFriends)
     {
-        ConvertIntToDecimalStringN(gStringVar1, sData->trainerCard.pokeblocksWithFriends, 1, 5);
+        ConvertIntToDecimalStringN(gStringVar1, sData->trainerCard.pokeblocksWithFriends, STR_CONV_MODE_RIGHT_ALIGN, 5);
         StringExpandPlaceholders(sData->var_395, gText_Var1DarkGreyShadowLightGrey);
     }
 }
@@ -1250,7 +1250,7 @@ static void PrintPokeblockStringOnCard(void)
 static void PrintContestNumOnCard(void)
 {
     if (sData->cardType != CARD_TYPE_FRLG && sData->trainerCard.contestsWithFriends)
-        ConvertIntToDecimalStringN(sData->var_3DB, sData->trainerCard.contestsWithFriends, 1, 5);
+        ConvertIntToDecimalStringN(sData->var_3DB, sData->trainerCard.contestsWithFriends, STR_CONV_MODE_RIGHT_ALIGN, 5);
 }
 
 static void PrintContestStringOnCard(void)
@@ -1266,15 +1266,15 @@ static void PrintBattleFacilityNumsOnCard(void)
     case CARD_TYPE_RS:
         if (sData->hasBattleTowerWins)
         {
-            ConvertIntToDecimalStringN(gStringVar1, sData->trainerCard.battleTowerWins, 1, 4);
-            ConvertIntToDecimalStringN(gStringVar2, sData->trainerCard.battleTowerStraightWins, 1, 4);
+            ConvertIntToDecimalStringN(gStringVar1, sData->trainerCard.battleTowerWins, STR_CONV_MODE_RIGHT_ALIGN, 4);
+            ConvertIntToDecimalStringN(gStringVar2, sData->trainerCard.battleTowerStraightWins, STR_CONV_MODE_RIGHT_ALIGN, 4);
             StringExpandPlaceholders(sData->var_421, gText_WSlashStraightSlash);
         }
         break;
     case CARD_TYPE_EMERALD:
         if (sData->trainerCard.frontierBP)
         {
-            ConvertIntToDecimalStringN(gStringVar1, sData->trainerCard.frontierBP, 1, 5);
+            ConvertIntToDecimalStringN(gStringVar1, sData->trainerCard.frontierBP, STR_CONV_MODE_RIGHT_ALIGN, 5);
             StringExpandPlaceholders(sData->var_421, gText_Var1DarkLightGreyBP);
         }
         break;

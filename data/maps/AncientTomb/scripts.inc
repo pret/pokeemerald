@@ -47,7 +47,7 @@ AncientTomb_EventScript_239033:: @ 8239033
 	end
 
 AncientTomb_EventScript_239046:: @ 8239046
-	msgbox gUnknown_0827304E, MSGBOX_DEFAULT
+	msgbox gText_BigHoleInTheWall, MSGBOX_DEFAULT
 	releaseall
 	end
 
@@ -84,11 +84,11 @@ AncientTomb_EventScript_23905A:: @ 823905A
 
 AncientTomb_EventScript_2390A1:: @ 82390A1
 	setflag FLAG_DEFEATED_REGISTEEL
-	goto AncientTomb_EventScript_27376D
+	goto Common_EventScript_RemoveStaticPokemon
 	end
 
 AncientTomb_EventScript_2390AA:: @ 82390AA
-	setvar VAR_0x8004, 403
-	goto AncientTomb_EventScript_273776
+	setvar VAR_0x8004, SPECIES_REGISTEEL
+	goto Common_EventScript_LegendaryFlewAway
 	end
 

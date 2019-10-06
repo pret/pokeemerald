@@ -10,7 +10,7 @@ LittlerootTown_MaysHouse_2F_MapScript1_1F92A1: @ 81F92A1
 	call_if_ge LittlerootTown_MaysHouse_2F_EventScript_1F92CD
 	compare VAR_LITTLEROOT_INTRO_STATE, 4
 	call_if_eq LittlerootTown_MaysHouse_2F_EventScript_2926FE
-	call LittlerootTown_MaysHouse_2F_EventScript_275CE1
+	call SecretBase_EventScript_SetDecorationFlags
 	setvar VAR_SECRET_BASE_INITIALIZED, 0
 	end
 
@@ -22,7 +22,7 @@ LittlerootTown_MaysHouse_2F_EventScript_1F92CD:: @ 81F92CD
 
 LittlerootTown_MaysHouse_2F_EventScript_1F92E6:: @ 81F92E6
 	checkplayergender
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, FEMALE
 	goto_if_eq LittlerootTown_MaysHouse_2F_EventScript_1F9309
 	compare VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 2
 	goto_if_ge LittlerootTown_MaysHouse_2F_EventScript_1F9309
@@ -36,7 +36,7 @@ LittlerootTown_MaysHouse_2F_EventScript_1F9309:: @ 81F9309
 
 LittlerootTown_MaysHouse_2F_EventScript_1F930A:: @ 81F930A
 	checkplayergender
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, MALE
 	goto_if_eq LittlerootTown_MaysHouse_2F_EventScript_1F9317
 	return
 
@@ -50,8 +50,8 @@ LittlerootTown_MaysHouse_2F_MapScript2_1F931D: @ 81F931D
 
 LittlerootTown_MaysHouse_2F_EventScript_1F9327:: @ 81F9327
 	checkplayergender
-	compare VAR_RESULT, 1
-	goto_if_eq EventScript_275D0C
+	compare VAR_RESULT, FEMALE
+	goto_if_eq SecretBase_EventScript_InitDecorations
 	end
 
 LittlerootTown_MaysHouse_2F_EventScript_1F9334:: @ 81F9334
@@ -307,7 +307,7 @@ EventScript_PlayerPCFemale:: @ 81F9553
 	end
 
 LittlerootTown_MaysHouse_2F_EventScript_1F956C:: @ 81F956C
-	msgbox gUnknown_08272CD5, MSGBOX_DEFAULT
+	msgbox gText_PokemonTrainerSchoolEmail, MSGBOX_DEFAULT
 	releaseall
 	end
 

@@ -1,7 +1,7 @@
 #include "global.h"
 #include "gpu_regs.h"
 #include "bg.h"
-#include "alloc.h"
+#include "malloc.h"
 #include "constants/items.h"
 #include "constants/event_objects.h"
 #include "constants/moves.h"
@@ -1217,10 +1217,10 @@ static bool8 SetupContestGraphics(u8 *stateVar)
         CreateApplauseMeterSprite();
         sub_80DC5E8();
         sub_80DC7EC();
-        gBattlerPositions[0] = 0;
-        gBattlerPositions[1] = 1;
-        gBattlerPositions[2] = 3;
-        gBattlerPositions[3] = 2;
+        gBattlerPositions[0] = B_POSITION_PLAYER_LEFT;
+        gBattlerPositions[1] = B_POSITION_OPPONENT_LEFT;
+        gBattlerPositions[2] = B_POSITION_OPPONENT_RIGHT;
+        gBattlerPositions[3] = B_POSITION_PLAYER_RIGHT;
         gBattleTypeFlags = 0;
         gBattlerAttacker = 2;
         gBattlerTarget = 3;

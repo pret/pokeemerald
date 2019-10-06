@@ -30,3 +30,4 @@ build/
 .idea/
 porymap.project.cfg
 .vscode/
+*.a

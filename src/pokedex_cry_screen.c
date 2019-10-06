@@ -2,7 +2,7 @@
 #include "bg.h"
 #include "m4a.h"
 #include "main.h"
-#include "alloc.h"
+#include "malloc.h"
 #include "palette.h"
 #include "pokedex_cry_screen.h"
 #include "sound.h"

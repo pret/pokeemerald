@@ -281,8 +281,8 @@ PetalburgWoods_EventScript_22E284:: @ 822E284
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
 	goto_if_eq PetalburgWoods_EventScript_22E31B
-	setvar VAR_0x8004, 621
-	specialvar VAR_RESULT, sub_813B4E0
+	setvar VAR_0x8004, TRAINER_JAMES_1
+	specialvar VAR_RESULT, IsTrainerRegistered
 	compare VAR_RESULT, 0
 	goto_if_eq PetalburgWoods_EventScript_22E2EF
 	msgbox PetalburgWoods_Text_22E889, MSGBOX_DEFAULT

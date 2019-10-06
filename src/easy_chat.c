@@ -1,5 +1,5 @@
 #include "global.h"
-#include "alloc.h"
+#include "malloc.h"
 #include "bard_music.h"
 #include "bg.h"
 #include "data.h"
@@ -209,7 +209,7 @@ static void sub_811D830(void);
 static void sub_811D058(u8, u8, const u8 *, u8, u8, u8, u8, u8, u8);
 static void sub_811DD84(void);
 static void sub_811D6F4(void);
-static void sub_811D758(void);
+static void PrintEasyChatKeyboardText(void);
 static void sub_811D794(void);
 static const u8 *GetEasyChatWordGroupName(u8);
 static void sub_811D864(u8, u8);
@@ -698,11 +698,12 @@ static  const struct WindowTemplate sEasyChatYesNoWindowTemplate = {
 
 static const u8 sText_Clear17[] = _("{CLEAR 17}");
 
-static const u8 *const sUnknown_08597C90[] = {
-    gUnknown_862B810,
-    gUnknown_862B832,
-    gUnknown_862B84B,
-    gUnknown_862B86C,
+static const u8 *const sEasyChatKeyboardText[] = 
+{
+    gText_EasyChatKeyboard_ABCDEFothers,
+    gText_EasyChatKeyboard_GHIJKL,
+    gText_EasyChatKeyboard_MNOPQRS,
+    gText_EasyChatKeyboard_TUVWXYZ,
 };
 
 static const struct SpriteSheet sEasyChatSpriteSheets[] = {
@@ -3967,7 +3968,7 @@ static void sub_811D698(u32 arg0)
         sub_811D6F4();
         break;
     case 1:
-        sub_811D758();
+        PrintEasyChatKeyboardText();
         break;
     case 2:
         sub_811D794();
@@ -4010,12 +4011,12 @@ static void sub_811D6F4(void)
     }
 }
 
-static void sub_811D758(void)
+static void PrintEasyChatKeyboardText(void)
 {
     u32 i;
 
-    for (i = 0; i < ARRAY_COUNT(sUnknown_08597C90); i++)
-        sub_811D028(2, 1, sUnknown_08597C90[i], 10, 97 + i * 16, 0xFF, NULL);
+    for (i = 0; i < ARRAY_COUNT(sEasyChatKeyboardText); i++)
+        sub_811D028(2, 1, sEasyChatKeyboardText[i], 10, 97 + i * 16, 0xFF, NULL);
 }
 
 static void sub_811D794(void)

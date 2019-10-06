@@ -2,7 +2,7 @@
 #include "decompress.h"
 #include "graphics.h"
 #include "item_icon.h"
-#include "alloc.h"
+#include "malloc.h"
 #include "sprite.h"
 #include "constants/items.h"
 
