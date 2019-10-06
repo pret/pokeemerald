@@ -4,7 +4,7 @@
 #include "gpu_regs.h"
 #include "graphics.h"
 #include "main.h"
-#include "alloc.h"
+#include "malloc.h"
 #include "menu.h"
 #include "overworld.h"
 #include "palette.h"

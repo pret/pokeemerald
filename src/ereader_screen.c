@@ -1,5 +1,5 @@
 #include "global.h"
-#include "alloc.h"
+#include "malloc.h"
 #include "decompress.h"
 #include "ereader_helpers.h"
 #include "link.h"
@@ -49,7 +49,7 @@ static void sub_81D4D50(struct Unk03006370 *arg0, int arg1, u32 *arg2)
     REG_IME = 0;
     gIntrTable[1] = sub_81D3FAC;
     gIntrTable[2] = sub_81D3F9C;
-    sub_81D41A0();
+    EReaderHelper_SaveRegsState();
     sub_81D4238();
     REG_IE |= INTR_FLAG_VCOUNT;
     REG_IME = backupIME;
@@ -63,7 +63,7 @@ static void sub_81D4DB8(struct Unk03006370 *arg0)
     volatile u16 backupIME = REG_IME;
     REG_IME = 0;
     sub_81D4238();
-    sub_81D41F4();
+    EReaderHelper_RestoreRegsState();
     RestoreSerialTimer3IntrHandlers();
     REG_IME = backupIME;
 }
@@ -71,7 +71,7 @@ static void sub_81D4DB8(struct Unk03006370 *arg0)
 static u8 sub_81D4DE8(struct Unk03006370 *arg0)
 {
     u8 var0 = 0;
-    arg0->unk0 = sub_81D3D70(1, arg0->unk4, arg0->unk8, NULL);
+    arg0->unk0 = EReaderHandleTransfer(1, arg0->unk4, arg0->unk8, NULL);
     if ((arg0->unk0 & 0x13) == 0x10)
         var0 = 1;
 

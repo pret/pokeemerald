@@ -1,5 +1,5 @@
 #include "global.h"
-#include "alloc.h"
+#include "malloc.h"
 #include "battle.h"
 #include "battle_anim.h"
 #include "battle_controllers.h"
@@ -2918,7 +2918,7 @@ static void sub_81B1E60(u8 taskId)
     if (data[3] == 0 || data[0] == 0 || data[0] == data[1])
     {
         if (data[0] > data[5])
-            ConvertIntToDecimalStringN(gStringVar2, data[0] - data[5], 0, 3);
+            ConvertIntToDecimalStringN(gStringVar2, data[0] - data[5], STR_CONV_MODE_LEFT_ALIGN, 3);
         SwitchTaskToFollowupFunc(taskId);
     }
 }
@@ -3412,7 +3412,7 @@ static void DisplayPartyPokemonLevelCheck(struct Pokemon *mon, struct Struct203C
 
 static void DisplayPartyPokemonLevel(u8 level, struct Struct203CEDC *ptr)
 {
-    ConvertIntToDecimalStringN(gStringVar2, level, 0, 3);
+    ConvertIntToDecimalStringN(gStringVar2, level, STR_CONV_MODE_LEFT_ALIGN, 3);
     StringCopy(gStringVar1, gText_LevelSymbol);
     StringAppend(gStringVar1, gStringVar2);
     DisplayPartyPokemonBarDetail(ptr->windowId, gStringVar1, 0, &ptr->unk0->unk4[4]);
@@ -3464,7 +3464,7 @@ static void DisplayPartyPokemonHPCheck(struct Pokemon *mon, struct Struct203CEDC
 
 static void DisplayPartyPokemonHP(u16 hp, struct Struct203CEDC *ptr)
 {
-    u8 *strOut = ConvertIntToDecimalStringN(gStringVar1, hp, 1, 3);
+    u8 *strOut = ConvertIntToDecimalStringN(gStringVar1, hp, STR_CONV_MODE_RIGHT_ALIGN, 3);
 
     strOut[0] = CHAR_SLASH;
     strOut[1] = EOS;
@@ -3485,7 +3485,7 @@ static void DisplayPartyPokemonMaxHPCheck(struct Pokemon *mon, struct Struct203C
 
 static void DisplayPartyPokemonMaxHP(u16 maxhp, struct Struct203CEDC *ptr)
 {
-    ConvertIntToDecimalStringN(gStringVar2, maxhp, 1, 3);
+    ConvertIntToDecimalStringN(gStringVar2, maxhp, STR_CONV_MODE_RIGHT_ALIGN, 3);
     StringCopy(gStringVar1, gText_Slash);
     StringAppend(gStringVar1, gStringVar2);
     DisplayPartyPokemonBarDetail(ptr->windowId, gStringVar1, 0, &ptr->unk0->unk4[16]);
@@ -4580,7 +4580,7 @@ static void CursorCb_Enter(u8 taskId)
             return;
         }
     }
-    ConvertIntToDecimalStringN(gStringVar1, unk, 0, 1);
+    ConvertIntToDecimalStringN(gStringVar1, unk, STR_CONV_MODE_LEFT_ALIGN, 1);
     StringExpandPlaceholders(gStringVar4, gText_NoMoreThanVar1Pkmn);
     PlaySE(SE_HAZURE);
     sub_81B1B5C(gStringVar4, 1);
@@ -6004,7 +6004,7 @@ void dp05_rare_candy(u8 taskId, TaskFunc task)
         sub_81B754C(gUnknown_0203CEC8.slotId, mon);
         RemoveBagItem(gSpecialVar_ItemId, 1);
         GetMonNickname(mon, gStringVar1);
-        ConvertIntToDecimalStringN(gStringVar2, GetMonData(mon, MON_DATA_LEVEL), 0, 3);
+        ConvertIntToDecimalStringN(gStringVar2, GetMonData(mon, MON_DATA_LEVEL), STR_CONV_MODE_LEFT_ALIGN, 3);
         StringExpandPlaceholders(gStringVar4, gText_PkmnElevatedToLvVar2);
         sub_81B1B5C(gStringVar4, 1);
         schedule_bg_copy_tilemap_to_vram(2);
@@ -6634,7 +6634,7 @@ static u8 sub_81B865C(void)
     {
         if (unk == 1)
             return 14;
-        ConvertIntToDecimalStringN(gStringVar1, unk, 0, 1);
+        ConvertIntToDecimalStringN(gStringVar1, unk, STR_CONV_MODE_LEFT_ALIGN, 1);
         return 17;
     }
 

@@ -55,12 +55,12 @@ MarineCave_End_EventScript_23B01B:: @ 823B01B
 MarineCave_End_EventScript_23B084:: @ 823B084
 	setvar VAR_SHOULD_END_UNUSUAL_WEATHER, 1
 	setflag FLAG_DEFEATED_KYOGRE
-	goto MarineCave_End_EventScript_27376D
+	goto Common_EventScript_RemoveStaticPokemon
 	end
 
 MarineCave_End_EventScript_23B092:: @ 823B092
-	setvar VAR_0x8004, 404
-	goto MarineCave_End_EventScript_273776
+	setvar VAR_0x8004, SPECIES_KYOGRE
+	goto Common_EventScript_LegendaryFlewAway
 	end
 
 MarineCave_End_Movement_23B09D: @ 823B09D

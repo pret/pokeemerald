@@ -26,7 +26,7 @@ LilycoveCity_PokemonCenter_1F_EventScript_21C5E4:: @ 821C5E4
 
 LilycoveCity_PokemonCenter_1F_EventScript_21C5E8:: @ 821C5E8
 	setvar VAR_0x800B, 1
-	call LilycoveCity_PokemonCenter_1F_EventScript_27191E
+	call Common_EventScript_PkmnCenterNurse
 	waitmessage
 	waitbuttonpress
 	release

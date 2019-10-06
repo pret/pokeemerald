@@ -63,8 +63,6 @@
 // Converts a Q24.8 fixed-point format number to a regular integer
 #define Q_24_8_TO_INT(n) ((int)((n) >> 8))
 
-#define PARTY_SIZE 6
-
 #define POKEMON_SLOTS_NUMBER 808
 
 #define min(a, b) ((a) < (b) ? (a) : (b))
@@ -211,7 +209,7 @@ struct BerryCrush
 struct ApprenticeMon
 {
     u16 species;
-    u16 moves[4];
+    u16 moves[MAX_MON_MOVES];
     u16 item;
 };
 
@@ -233,7 +231,7 @@ struct BattleTowerPokemon
 {
     u16 species;
     u16 heldItem;
-    u16 moves[4];
+    u16 moves[MAX_MON_MOVES];
     u8 level;
     u8 ppBonuses;
     u8 hpEV;
@@ -255,6 +253,8 @@ struct BattleTowerPokemon
     u8 nickname[POKEMON_NAME_LENGTH + 1];
     u8 friendship;
 };
+
+#define NULL_BATTLE_TOWER_POKEMON { .nickname = __("$$$$$$$$$$$") }
 
 struct EmeraldBattleTowerRecord
 {
@@ -287,7 +287,7 @@ struct BattleTowerEReaderTrainer
 
 struct FrontierMonData
 {
-    u16 moves[4];
+    u16 moves[MAX_MON_MOVES];
     u8 evs[6];
     u8 nature;
 };
@@ -499,8 +499,8 @@ struct SecretBase
     /*0x1AAA*/ u16 numSecretBasesReceived;
     /*0x1AAC*/ u8 numTimesEntered;
     /*0x1AAD*/ u8 sbr_field_11;
-    /*0x1AAE*/ u8 decorations[16];
-    /*0x1ABE*/ u8 decorationPositions[16];
+    /*0x1AAE*/ u8 decorations[DECOR_MAX_SECRET_BASE];
+    /*0x1ABE*/ u8 decorationPositions[DECOR_MAX_SECRET_BASE];
     /*0x1AD0*/ struct SecretBaseParty party;
 };
 
@@ -924,8 +924,8 @@ struct SaveBlock1
     /*0x159C*/ u32 gameStats[NUM_GAME_STATS];
     /*0x169C*/ struct BerryTree berryTrees[BERRY_TREES_COUNT];
     /*0x1A9C*/ struct SecretBase secretBases[SECRET_BASES_COUNT];
-    /*0x271C*/ u8 playerRoomDecor[12];
-    /*0x2728*/ u8 playerRoomDecorPos[12];
+    /*0x271C*/ u8 playerRoomDecor[DECOR_MAX_PLAYERS_HOUSE];
+    /*0x2728*/ u8 playerRoomDecorPos[DECOR_MAX_PLAYERS_HOUSE];
     /*0x2734*/ u8 decorDesk[10];
     /*0x????*/ u8 decorChair[10];
     /*0x????*/ u8 decorPlant[10];
@@ -943,7 +943,7 @@ struct SaveBlock1
     /*0x2B94*/ u8 outbreakPokemonLevel;
     /*0x2B95*/ u8 outbreakUnk1;
     /*0x2B96*/ u16 outbreakUnk2;
-    /*0x2B98*/ u16 outbreakPokemonMoves[4];
+    /*0x2B98*/ u16 outbreakPokemonMoves[MAX_MON_MOVES];
     /*0x2BA0*/ u8 outbreakUnk4;
     /*0x2BA1*/ u8 outbreakPokemonProbability;
     /*0x2BA2*/ u16 outbreakDaysLeft;

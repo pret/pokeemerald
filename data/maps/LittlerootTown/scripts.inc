@@ -6,7 +6,7 @@ LittlerootTown_MapScripts:: @ 81E7DCB
 
 LittlerootTown_MapScript1_1E7DDB: @ 81E7DDB
 	setflag FLAG_VISITED_LITTLEROOT_TOWN
-	call Common_EventScript_SetupRivalGender
+	call Common_EventScript_SetupRivalGfxId
 	compare VAR_LITTLEROOT_INTRO_STATE, 2
 	call_if_eq LittlerootTown_EventScript_1E7E67
 	call_if_unset FLAG_RESCUED_BIRCH, LittlerootTown_EventScript_1E7E6F
@@ -208,7 +208,7 @@ LittlerootTown_EventScript_1E7FEC:: @ 81E7FEC
 	addobject 8
 	addobject 7
 	checkplayergender
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, MALE
 	goto_if_eq LittlerootTown_EventScript_1E8004
 	goto LittlerootTown_EventScript_1E8013
 	end

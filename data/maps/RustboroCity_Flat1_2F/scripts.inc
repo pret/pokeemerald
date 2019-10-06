@@ -73,7 +73,7 @@ RustboroCity_Flat1_2F_EventScript_215221:: @ 8215221
 	end
 
 RustboroCity_Flat1_2F_EventScript_215238:: @ 8215238
-	turnobject 6, 4
+	turnobject 6, DIR_EAST
 	return
 
 RustboroCity_Flat1_2F_EventScript_21523D:: @ 821523D

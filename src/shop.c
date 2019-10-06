@@ -17,7 +17,7 @@
 #include "item_menu.h"
 #include "list_menu.h"
 #include "main.h"
-#include "alloc.h"
+#include "malloc.h"
 #include "menu.h"
 #include "menu_helpers.h"
 #include "money.h"
@@ -1147,7 +1147,7 @@ static void BuyMenuPrintItemQuantityAndPrice(u8 taskId)
 
     FillWindowPixelBuffer(4, PIXEL_FILL(1));
     PrintMoneyAmount(4, 38, 1, gShopDataPtr->totalCost, TEXT_SPEED_FF);
-    ConvertIntToDecimalStringN(gStringVar1, tItemCount, 2, 2);
+    ConvertIntToDecimalStringN(gStringVar1, tItemCount, STR_CONV_MODE_LEADING_ZEROS, 2);
     StringExpandPlaceholders(gStringVar4, gText_xVar1);
     BuyMenuPrint(4, gStringVar4, 0, 1, 0, 0);
 }

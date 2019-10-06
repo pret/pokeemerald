@@ -40,7 +40,7 @@ SkyPillar_Top_MapScript2_239713: @ 8239713
 	.2byte 0
 
 SkyPillar_Top_EventScript_23971D:: @ 823971D
-	turnobject 1, 1
+	turnobject 1, DIR_SOUTH
 	end
 
 SkyPillar_Top_EventScript_239722:: @ 8239722
@@ -71,7 +71,7 @@ SkyPillar_Top_EventScript_239768:: @ 8239768
 	end
 
 SkyPillar_Top_EventScript_239771:: @ 8239771
-	setvar VAR_0x8004, 406
+	setvar VAR_0x8004, SPECIES_RAYQUAZA
 	goto SkyPillar_Top_EventScript_239785
 	end
 
@@ -104,19 +104,19 @@ SkyPillar_Top_EventScript_23979A:: @ 823979A
 	waitmovement 0
 	waitse
 	playmoncry SPECIES_RAYQUAZA, 2
-	setvar VAR_0x8004, 1
-	setvar VAR_0x8005, 1
-	setvar VAR_0x8006, 8
-	setvar VAR_0x8007, 3
-	special sub_8139560
+	setvar VAR_0x8004, 1  @ vertical pan
+	setvar VAR_0x8005, 1  @ horizontal pan
+	setvar VAR_0x8006, 8  @ num shakes
+	setvar VAR_0x8007, 3  @ shake delay
+	special ShakeCamera
 	waitstate
 	waitse
 	playmoncry SPECIES_RAYQUAZA, 2
-	setvar VAR_0x8004, 1
-	setvar VAR_0x8005, 2
-	setvar VAR_0x8006, 8
-	setvar VAR_0x8007, 5
-	special sub_8139560
+	setvar VAR_0x8004, 1  @ vertical pan
+	setvar VAR_0x8005, 2  @ horizontal pan
+	setvar VAR_0x8006, 8  @ num shakes
+	setvar VAR_0x8007, 5  @ shake delay
+	special ShakeCamera
 	waitstate
 	waitmoncry
 	applymovement 1, SkyPillar_Top_Movement_23984B

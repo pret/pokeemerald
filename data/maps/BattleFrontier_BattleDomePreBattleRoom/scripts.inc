@@ -9,7 +9,7 @@ BattleFrontier_BattleDomePreBattleRoom_MapScript2_24B204: @ 824B204
 
 BattleFrontier_BattleDomePreBattleRoom_EventScript_24B20E:: @ 824B20E
 	setvar VAR_TEMP_1, 1
-	turnobject EVENT_OBJ_ID_PLAYER, 2
+	turnobject EVENT_OBJ_ID_PLAYER, DIR_NORTH
 	end
 
 BattleFrontier_BattleDomePreBattleRoom_MapScript2_24B218: @ 824B218
@@ -35,7 +35,7 @@ BattleFrontier_BattleDomePreBattleRoom_EventScript_24B24F:: @ 824B24F
 	call BattleFrontier_BattleDomePreBattleRoom_EventScript_23E8E0
 	compare VAR_RESULT, 1
 	goto_if_eq BattleFrontier_BattleDomePreBattleRoom_EventScript_24B2C1
-	multichoice 16, 0, 73, 1
+	multichoice 16, 0, MULTI_TOURNEY_WITH_RECORD, 1
 	switch VAR_RESULT
 	case 0, BattleFrontier_BattleDomePreBattleRoom_EventScript_24B3DD
 	case 1, BattleFrontier_BattleDomePreBattleRoom_EventScript_24B3F5
@@ -43,26 +43,26 @@ BattleFrontier_BattleDomePreBattleRoom_EventScript_24B24F:: @ 824B24F
 	case 3, BattleFrontier_BattleDomePreBattleRoom_EventScript_24B30D
 	case 4, BattleFrontier_BattleDomePreBattleRoom_EventScript_24B349
 	case 5, BattleFrontier_BattleDomePreBattleRoom_EventScript_24B377
-	case 127, BattleFrontier_BattleDomePreBattleRoom_EventScript_24B24F
+	case MULTI_B_PRESSED, BattleFrontier_BattleDomePreBattleRoom_EventScript_24B24F
 
 BattleFrontier_BattleDomePreBattleRoom_EventScript_24B2C1:: @ 824B2C1
-	multichoice 16, 2, 107, 1
+	multichoice 16, 2, MULTI_TOURNEY_NO_RECORD, 1
 	switch VAR_RESULT
 	case 0, BattleFrontier_BattleDomePreBattleRoom_EventScript_24B3DD
 	case 1, BattleFrontier_BattleDomePreBattleRoom_EventScript_24B3F5
 	case 2, BattleFrontier_BattleDomePreBattleRoom_EventScript_24B46D
 	case 3, BattleFrontier_BattleDomePreBattleRoom_EventScript_24B349
 	case 4, BattleFrontier_BattleDomePreBattleRoom_EventScript_24B377
-	case 127, BattleFrontier_BattleDomePreBattleRoom_EventScript_24B24F
+	case MULTI_B_PRESSED, BattleFrontier_BattleDomePreBattleRoom_EventScript_24B24F
 
 BattleFrontier_BattleDomePreBattleRoom_EventScript_24B30D:: @ 824B30D
 	message BattleFrontier_BattleDomePreBattleRoom_Text_24BAF7
 	waitmessage
-	multichoicedefault 20, 8, 94, 1, 0
+	multichoicedefault 20, 8, MULTI_YESNO, 1, 0
 	switch VAR_RESULT
 	case 1, BattleFrontier_BattleDomePreBattleRoom_EventScript_24B24F
 	case 0, BattleFrontier_BattleDomePreBattleRoom_EventScript_24B33F
-	case 127, BattleFrontier_BattleDomePreBattleRoom_EventScript_24B24F
+	case MULTI_B_PRESSED, BattleFrontier_BattleDomePreBattleRoom_EventScript_24B24F
 
 BattleFrontier_BattleDomePreBattleRoom_EventScript_24B33F:: @ 824B33F
 	call BattleFrontier_BattleDomePreBattleRoom_EventScript_23E8B4
@@ -78,11 +78,11 @@ BattleFrontier_BattleDomePreBattleRoom_EventScript_24B349:: @ 824B349
 BattleFrontier_BattleDomePreBattleRoom_EventScript_24B377:: @ 824B377
 	message BattleFrontier_BattleDomePreBattleRoom_Text_24BA93
 	waitmessage
-	multichoicedefault 20, 8, 94, 1, 0
+	multichoicedefault 20, 8, MULTI_YESNO, 1, 0
 	switch VAR_RESULT
 	case 1, BattleFrontier_BattleDomePreBattleRoom_EventScript_24B24F
 	case 0, BattleFrontier_BattleDomePreBattleRoom_EventScript_24B3A9
-	case 127, BattleFrontier_BattleDomePreBattleRoom_EventScript_24B24F
+	case MULTI_B_PRESSED, BattleFrontier_BattleDomePreBattleRoom_EventScript_24B24F
 
 BattleFrontier_BattleDomePreBattleRoom_EventScript_24B3A9:: @ 824B3A9
 	setvar VAR_0x8004, 12

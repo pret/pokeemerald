@@ -17,7 +17,7 @@
 #include "list_menu.h"
 #include "mail.h"
 #include "main.h"
-#include "alloc.h"
+#include "malloc.h"
 #include "menu.h"
 #include "menu_helpers.h"
 #include "overworld.h"

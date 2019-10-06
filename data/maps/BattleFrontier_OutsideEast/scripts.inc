@@ -145,7 +145,7 @@ BattleFrontier_OutsideEast_EventScript_242CFC:: @ 8242CFC
 
 BattleFrontier_OutsideEast_EventScript_242D60:: @ 8242D60
 	setflag FLAG_DEFEATED_SUDOWOODO
-	goto IslandCave_EventScript_27376D
+	goto Common_EventScript_RemoveStaticPokemon
 	end
 
 BattleFrontier_OutsideEast_Movement_242D69: @ 8242D69

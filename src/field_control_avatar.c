@@ -225,8 +225,8 @@ static bool8 TryStartInteractionScript(struct MapPosition *position, u16 metatil
     // Don't play interaction sound for certain scripts.
     if (script != EventScript_PlayerPCMale
      && script != EventScript_PlayerPCFemale
-     && script != EventScript_SecretBasePC
-     && script != EventScript_RecordMixingSecretBasePC
+     && script != SecretBase_EventScript_PC
+     && script != SecretBase_EventScript_RecordMixingPC
      && script != SecretBase_EventScript_DollInteract
      && script != SecretBase_EventScript_CushionInteract
      && script != EventScript_PC)
@@ -355,7 +355,7 @@ static const u8 *GetInteractedBackgroundEventScript(struct MapPosition *position
         {
             gSpecialVar_0x8004 = bgEvent->bgUnion.secretBaseId;
             if (TrySetCurSecretBase())
-                return EventScript_2759F1;
+                return SecretBase_EventScript_CheckEntrance;
         }
         return NULL;
     }
@@ -412,13 +412,13 @@ static const u8 *GetInteractedMetatileScript(struct MapPosition *position, u8 me
     if (height == MapGridGetZCoordAt(position->x, position->y))
     {
         if (MetatileBehavior_IsSecretBasePC(metatileBehavior) == TRUE)
-            return EventScript_SecretBasePC;
+            return SecretBase_EventScript_PC;
         if (MetatileBehavior_IsRecordMixingSecretBasePC(metatileBehavior) == TRUE)
-            return EventScript_RecordMixingSecretBasePC;
+            return SecretBase_EventScript_RecordMixingPC;
         if (MetatileBehavior_IsSecretBaseSandOrnament(metatileBehavior) == TRUE)
-            return EventScript_SecretBaseSandOrnament;
+            return SecretBase_EventScript_SandOrnament;
         if (MetatileBehavior_IsSecretBaseShieldOrToyTV(metatileBehavior) == TRUE)
-            return EventScript_SecretBaseShieldOrToyTV;
+            return SecretBase_EventScript_ShieldOrToyTV;
         if (MetatileBehavior_IsMB_C6(metatileBehavior) == TRUE)
         {
             SetSecretBaseSecretsTvFlags_MiscFurnature();

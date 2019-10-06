@@ -81,7 +81,7 @@ LilycoveCity_ContestLobby_EventScript_21A2E4:: @ 821A2E4
 	end
 
 LilycoveCity_ContestLobby_EventScript_21A314:: @ 821A314
-	incrementgamestat 42
+	incrementgamestat GAME_STAT_RECEIVED_RIBBONS
 	special sub_80F8390
 	applymovement 4, LilycoveCity_ContestLobby_Movement_21A41A
 	waitmovement 0
@@ -253,7 +253,7 @@ LilycoveCity_ContestLobby_EventScript_21A4B4:: @ 821A4B4
 	end
 
 LilycoveCity_ContestLobby_EventScript_21A4E4:: @ 821A4E4
-	incrementgamestat 42
+	incrementgamestat GAME_STAT_RECEIVED_RIBBONS
 	setflag FLAG_SYS_RIBBON_GET
 	special sub_80F8390
 	applymovement 11, LilycoveCity_ContestLobby_Movement_21A547
@@ -630,12 +630,12 @@ LilycoveCity_ContestLobby_EventScript_21A806:: @ 821A806
 LilycoveCity_ContestLobby_EventScript_21A819:: @ 821A819
 	message LilycoveCity_ContestLobby_Text_27C0F6
 	waitmessage
-	multichoice 0, 0, 2, 0
+	multichoice 0, 0, MULTI_ENTERINFO, 0
 	switch VAR_RESULT
 	case 0, LilycoveCity_ContestLobby_EventScript_21A856
 	case 1, LilycoveCity_ContestLobby_EventScript_21A90D
 	case 2, LilycoveCity_ContestLobby_EventScript_21A97F
-	case 127, LilycoveCity_ContestLobby_EventScript_21A97F
+	case MULTI_B_PRESSED, LilycoveCity_ContestLobby_EventScript_21A97F
 	end
 
 LilycoveCity_ContestLobby_EventScript_21A856:: @ 821A856
@@ -648,12 +648,12 @@ LilycoveCity_ContestLobby_EventScript_21A856:: @ 821A856
 	message LilycoveCity_ContestLobby_Text_27C8FD
 	waitmessage
 	specialvar VAR_TEMP_D, IsWirelessAdapterConnected
-	multichoice 0, 0, 85, 0
+	multichoice 0, 0, MULTI_LINK_CONTEST_MODE, 0
 	switch VAR_RESULT
 	case 0, LilycoveCity_ContestLobby_EventScript_21A8BB
 	case 1, LilycoveCity_ContestLobby_EventScript_21A8C6
 	case 2, LilycoveCity_ContestLobby_EventScript_21A97F
-	case 127, LilycoveCity_ContestLobby_EventScript_21A97F
+	case MULTI_B_PRESSED, LilycoveCity_ContestLobby_EventScript_21A97F
 	end
 
 LilycoveCity_ContestLobby_EventScript_21A8BB:: @ 821A8BB
@@ -671,10 +671,10 @@ LilycoveCity_ContestLobby_EventScript_21A8C6:: @ 821A8C6
 LilycoveCity_ContestLobby_EventScript_21A8DC:: @ 821A8DC
 	message LilycoveCity_ContestLobby_Text_27C119
 	waitmessage
-	multichoice 0, 0, 4, 0
+	multichoice 0, 0, MULTI_CONTEST_TYPE, 0
 	switch VAR_RESULT
 	case 5, LilycoveCity_ContestLobby_EventScript_21A97F
-	case 127, LilycoveCity_ContestLobby_EventScript_21A97F
+	case MULTI_B_PRESSED, LilycoveCity_ContestLobby_EventScript_21A97F
 	copyvar VAR_CONTEST_CATEGORY, VAR_RESULT
 	goto LilycoveCity_ContestLobby_EventScript_21A98C
 	end
@@ -682,13 +682,13 @@ LilycoveCity_ContestLobby_EventScript_21A8DC:: @ 821A8DC
 LilycoveCity_ContestLobby_EventScript_21A90D:: @ 821A90D
 	message LilycoveCity_ContestLobby_Text_27C0DA
 	waitmessage
-	multichoice 0, 0, 84, 0
+	multichoice 0, 0, MULTI_LINK_CONTEST_INFO, 0
 	switch VAR_RESULT
 	case 0, LilycoveCity_ContestLobby_EventScript_21A955
 	case 1, LilycoveCity_ContestLobby_EventScript_21A963
 	case 2, LilycoveCity_ContestLobby_EventScript_21A971
 	case 3, LilycoveCity_ContestLobby_EventScript_21A819
-	case 127, LilycoveCity_ContestLobby_EventScript_21A819
+	case MULTI_B_PRESSED, LilycoveCity_ContestLobby_EventScript_21A819
 	end
 
 LilycoveCity_ContestLobby_EventScript_21A955:: @ 821A955
@@ -877,12 +877,12 @@ LilycoveCity_ContestLobby_EventScript_21ABA0:: @ 821ABA0
 LilycoveCity_ContestLobby_EventScript_21ABA6:: @ 821ABA6
 	message Text_DecideLinkLeader
 	waitmessage
-	multichoice 16, 6, 81, 0
+	multichoice 16, 6, MULTI_LINK_LEADER, 0
 	switch VAR_RESULT
 	case 0, LilycoveCity_ContestLobby_EventScript_21AC0B
 	case 1, LilycoveCity_ContestLobby_EventScript_21ABE3
 	case 2, LilycoveCity_ContestLobby_EventScript_21A97F
-	case 127, LilycoveCity_ContestLobby_EventScript_21A97F
+	case MULTI_B_PRESSED, LilycoveCity_ContestLobby_EventScript_21A97F
 	end
 
 LilycoveCity_ContestLobby_EventScript_21ABE3:: @ 821ABE3

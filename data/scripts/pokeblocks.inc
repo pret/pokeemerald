@@ -679,7 +679,7 @@ EventScript_PblocLink_DifferentSelections: @ 8294183
 
 EventScript_PblocLink_CloseLink: @ 8294190
 	special CloseLink
-	msgbox gUnknown_08272D9C, MSGBOX_DEFAULT
+	msgbox gText_PokeblockLinkCanceled, MSGBOX_DEFAULT
 	releaseall
 	end
 
@@ -714,12 +714,12 @@ LilycoveCity_ContestLobby_EventScript_2941ED: @ 82941ED
 EventScript_PblocLink_DecideLeader: @ 82941F8
 	message Text_DecideLinkLeader
 	waitmessage
-	multichoice 16, 6, 81, 0
+	multichoice 16, 6, MULTI_LINK_LEADER, 0
 	switch VAR_RESULT
 	case 0, EventScript_PblocLink_TryJoinGroup
 	case 1, EventScript_PblocLink_TryBecomeLeader
 	case 2, EventScript_PblocLink_CloseLink
-	case 127, EventScript_PblocLink_CloseLink
+	case MULTI_B_PRESSED, EventScript_PblocLink_CloseLink
 	end
 
 EventScript_PblocLink_TryBecomeLeader: @ 8294235

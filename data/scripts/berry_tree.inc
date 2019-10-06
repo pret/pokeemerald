@@ -184,7 +184,7 @@ BerryTree_EventScript_WaterBerry:: @ 82744C4
 
 BerryTree_EventScript_PlantBerry:: @ 82744DD
 	special EventObjectInteractionPlantBerryTree
-	incrementgamestat 3
+	incrementgamestat GAME_STAT_PLANTED_BERRIES
 	special sub_80EED10
 	special EventObjectInteractionGetBerryCountString
 	message BerryTree_Text_PlantedOneBerry

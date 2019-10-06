@@ -34,12 +34,12 @@ Route109_EventScript_1EE7C5:: @ 81EE7C5
 
 Route109_EventScript_1EE7D5:: @ 81EE7D5
 	hideobjectat EVENT_OBJ_ID_PLAYER, MAP_ROUTE109
-	call Route109_EventScript_2720A0
+	call Common_EventScript_PlayBrineysBoatMusic
 	applymovement 1, Route109_Movement_1EE84F
 	applymovement EVENT_OBJ_ID_PLAYER, Route109_Movement_1EE84F
 	waitmovement 0
 	delay 50
-	call Route109_EventScript_2720A8
+	call Common_EventScript_StopBrineysBoatMusic
 	showobjectat EVENT_OBJ_ID_PLAYER, MAP_DEWFORD_TOWN
 	applymovement EVENT_OBJ_ID_PLAYER, Route109_Movement_1EE900
 	waitmovement 0
@@ -287,11 +287,11 @@ Route109_EventScript_1EE921:: @ 81EE921
 Route109_EventScript_1EE93F:: @ 81EE93F
 	message Route109_Text_1EEE17
 	waitmessage
-	multichoicedefault 21, 8, 14, 1, 0
+	multichoicedefault 21, 8, MULTI_BRINEY_OFF_DEWFORD, 1, 0
 	switch VAR_RESULT
 	case 0, Route109_EventScript_1EE972
 	case 1, Route109_EventScript_1EE98B
-	case 127, Route109_EventScript_1EE98B
+	case MULTI_B_PRESSED, Route109_EventScript_1EE98B
 	end
 
 Route109_EventScript_1EE972:: @ 81EE972

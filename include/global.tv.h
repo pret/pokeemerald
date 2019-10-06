@@ -4,8 +4,7 @@
 enum
 {
     TVSHOW_OFF_AIR,
-
-    TVSHOW_FAN_CLUB_LETTER = 1,
+    TVSHOW_FAN_CLUB_LETTER,
     TVSHOW_RECENT_HAPPENINGS,
     TVSHOW_PKMN_FAN_CLUB_OPINIONS,
     TVSHOW_UNKN_SHOWTYPE_04,
@@ -482,7 +481,7 @@ typedef union // size = 0x24
         /*0x01*/ bool8 active;
         /*0x02*/ u8 var02;
         /*0x03*/ u8 var03;
-        /*0x04*/ u16 moves[4];
+        /*0x04*/ u16 moves[MAX_MON_MOVES];
         /*0x0C*/ u16 species;
         /*0x0E*/ u16 var0E;
         /*0x10*/ u8 locationMapNum;

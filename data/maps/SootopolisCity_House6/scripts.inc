@@ -9,7 +9,7 @@ SootopolisCity_House6_EventScript_226F5C:: @ 8226F5C
 	compare VAR_RESULT, 0
 	call_if_eq SootopolisCity_House6_EventScript_226F99
 	msgbox SootopolisCity_House6_Text_227034, MSGBOX_DEFAULT
-	givedecoration_std 117
+	givedecoration_std DECOR_WAILMER_DOLL
 	compare VAR_RESULT, 0
 	goto_if_eq SootopolisCity_House6_EventScript_226FAD
 	setflag FLAG_RECEIVED_WAILMER_DOLL
@@ -27,7 +27,7 @@ SootopolisCity_House6_EventScript_226FA3:: @ 8226FA3
 	end
 
 SootopolisCity_House6_EventScript_226FAD:: @ 8226FAD
-	bufferdecorationname 1, 117
+	bufferdecorationname 1, DECOR_WAILMER_DOLL
 	msgbox gText_NoRoomLeftForAnother, MSGBOX_DEFAULT
 	msgbox SootopolisCity_House6_Text_22704A, MSGBOX_DEFAULT
 	release

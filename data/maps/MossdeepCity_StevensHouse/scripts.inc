@@ -85,12 +85,12 @@ MossdeepCity_StevensHouse_EventScript_22285B:: @ 822285B
 
 MossdeepCity_StevensHouse_EventScript_222865:: @ 8222865
 	setvar VAR_TEMP_1, SPECIES_BELDUM
-	givemon SPECIES_BELDUM, 5, ITEM_NONE, 0x0, 0x0, 0
+	givemon SPECIES_BELDUM, 5, ITEM_NONE
 	compare VAR_RESULT, 0
 	goto_if_eq MossdeepCity_StevensHouse_EventScript_222895
 	compare VAR_RESULT, 1
 	goto_if_eq MossdeepCity_StevensHouse_EventScript_2228BD
-	goto MossdeepCity_StevensHouse_EventScript_273811
+	goto Common_EventScript_NoMoreRoomForPokemon
 	end
 
 MossdeepCity_StevensHouse_EventScript_222895:: @ 8222895
@@ -98,8 +98,8 @@ MossdeepCity_StevensHouse_EventScript_222895:: @ 8222895
 	msgbox gText_NicknameThisPokemon, MSGBOX_YESNO
 	compare VAR_RESULT, 0
 	goto_if_eq MossdeepCity_StevensHouse_EventScript_222901
-	call MossdeepCity_StevensHouse_EventScript_27378B
-	call Common_EventScript_NameReceivedPokemon
+	call Common_EventScript_GetGiftMonPartySlot
+	call Common_EventScript_NameReceivedPartyMon
 	goto MossdeepCity_StevensHouse_EventScript_222901
 	end
 
@@ -108,7 +108,7 @@ MossdeepCity_StevensHouse_EventScript_2228BD:: @ 82228BD
 	msgbox gText_NicknameThisPokemon, MSGBOX_YESNO
 	compare VAR_RESULT, 0
 	goto_if_eq MossdeepCity_StevensHouse_EventScript_2228E0
-	call MossdeepCity_StevensHouse_EventScript_273797
+	call Common_EventScript_NameReceivedBoxMon
 	goto MossdeepCity_StevensHouse_EventScript_2228E0
 	end
 

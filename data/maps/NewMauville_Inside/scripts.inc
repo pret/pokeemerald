@@ -202,7 +202,7 @@ NewMauville_Inside_EventScript_2377AF:: @ 82377AF
 
 NewMauville_Inside_EventScript_2377F3:: @ 82377F3
 	setflag FLAG_DEFEATED_VOLTORB_1_NEW_MAUVILLE
-	goto NewMauville_Inside_EventScript_27376D
+	goto Common_EventScript_RemoveStaticPokemon
 	end
 
 NewMauville_Inside_EventScript_2377FC:: @ 82377FC
@@ -229,7 +229,7 @@ NewMauville_Inside_EventScript_2377FC:: @ 82377FC
 
 NewMauville_Inside_EventScript_237840:: @ 8237840
 	setflag FLAG_DEFEATED_VOLTORB_2_NEW_MAUVILLE
-	goto NewMauville_Inside_EventScript_27376D
+	goto Common_EventScript_RemoveStaticPokemon
 	end
 
 NewMauville_Inside_EventScript_237849:: @ 8237849
@@ -256,7 +256,7 @@ NewMauville_Inside_EventScript_237849:: @ 8237849
 
 NewMauville_Inside_EventScript_23788D:: @ 823788D
 	setflag FLAG_DEFEATED_VOLTORB_3_NEW_MAUVILLE
-	goto NewMauville_Inside_EventScript_27376D
+	goto Common_EventScript_RemoveStaticPokemon
 	end
 
 NewMauville_Inside_Text_237896: @ 8237896

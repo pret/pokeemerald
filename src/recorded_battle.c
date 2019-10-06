@@ -10,7 +10,7 @@
 #include "string_util.h"
 #include "palette.h"
 #include "save.h"
-#include "alloc.h"
+#include "malloc.h"
 #include "util.h"
 #include "task.h"
 #include "text.h"
@@ -37,8 +37,8 @@ struct PlayerInfo
 
 struct MovePp
 {
-    u16 moves[4];
-    u8 pp[4];
+    u16 moves[MAX_MON_MOVES];
+    u8 pp[MAX_MON_MOVES];
 };
 
 struct RecordedBattleSave
@@ -91,7 +91,7 @@ EWRAM_DATA static u32 sBattleFlags = 0;
 EWRAM_DATA static u32 sAI_Scripts = 0;
 EWRAM_DATA static struct Pokemon sSavedPlayerParty[PARTY_SIZE] = {0};
 EWRAM_DATA static struct Pokemon sSavedOpponentParty[PARTY_SIZE] = {0};
-EWRAM_DATA static u16 sPlayerMonMoves[2][4] = {0};
+EWRAM_DATA static u16 sPlayerMonMoves[2][MAX_MON_MOVES] = {0};
 EWRAM_DATA static struct PlayerInfo sPlayers[MAX_BATTLERS_COUNT] = {0};
 EWRAM_DATA static u8 sUnknown_0203CCD0 = 0;
 EWRAM_DATA static u8 sRecordMixFriendName[PLAYER_NAME_LENGTH + 1] = {0};
@@ -766,11 +766,11 @@ void sub_818603C(u8 arg0)
             {
                 if (sBattleRecords[battlerId][sRecordedBytesNo[battlerId]] == ACTION_MOVE_CHANGE)
                 {
-                    u8 ppBonuses[4];
-                    u8 array1[4];
-                    u8 array2[4];
+                    u8 ppBonuses[MAX_MON_MOVES];
+                    u8 array1[MAX_MON_MOVES];
+                    u8 array2[MAX_MON_MOVES];
                     struct MovePp movePp;
-                    u8 array3[8];
+                    u8 array3[(MAX_MON_MOVES * 2)];
                     u8 var;
 
                     RecordedBattle_GetBattlerAction(battlerId);

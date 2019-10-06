@@ -735,7 +735,7 @@ void AnimSwirlingSnowball_Step2(struct Sprite *sprite)
 void AnimSwirlingSnowball_Step3(struct Sprite *sprite)
 {
     s16 tempVar;
-    tempVar = GetBattlerSide(gBattleAnimAttacker) != 0 ? 20 : -20;
+    tempVar = GetBattlerSide(gBattleAnimAttacker) != B_SIDE_PLAYER ? 20 : -20;
 
     if (sprite->data[5] <= 31)
     {
@@ -1190,12 +1190,12 @@ void InitPoisonGasCloudAnim(struct Sprite *sprite)
     if (GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_X_2) < GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_X_2))
         sprite->data[7] = 0x8000;
 
-    if (!(gBattlerPositions[gBattleAnimTarget] & 1))
+    if ((gBattlerPositions[gBattleAnimTarget] & BIT_SIDE) == B_SIDE_PLAYER)
     {
         gBattleAnimArgs[1] = -gBattleAnimArgs[1];
         gBattleAnimArgs[3] = -gBattleAnimArgs[3];
 
-        if ((sprite->data[7] & 0x8000) && !(gBattlerPositions[gBattleAnimAttacker] & 1))
+        if ((sprite->data[7] & 0x8000) && (gBattlerPositions[gBattleAnimAttacker] & BIT_SIDE) == B_SIDE_PLAYER)
             sprite->subpriority = gSprites[GetAnimBattlerSpriteId(ANIM_TARGET)].subpriority + 1;
 
         sprite->data[6] = 1;

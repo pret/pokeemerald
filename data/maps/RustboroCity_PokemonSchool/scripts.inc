@@ -10,7 +10,7 @@ RustboroCity_PokemonSchool_EventScript_213EA9:: @ 8213EA9
 RustboroCity_PokemonSchool_EventScript_213EB8:: @ 8213EB8
 	message RustboroCity_PokemonSchool_Text_2140F9
 	waitmessage
-	multichoicegrid 8, 1, 13, 3, 0
+	multichoicegrid 8, 1, MULTI_STATUS_INFO, 3, 0
 	switch VAR_RESULT
 	case 0, RustboroCity_PokemonSchool_EventScript_213F17
 	case 1, RustboroCity_PokemonSchool_EventScript_213F25
@@ -18,7 +18,7 @@ RustboroCity_PokemonSchool_EventScript_213EB8:: @ 8213EB8
 	case 3, RustboroCity_PokemonSchool_EventScript_213F41
 	case 4, RustboroCity_PokemonSchool_EventScript_213F4F
 	case 5, RustboroCity_PokemonSchool_EventScript_213F5D
-	case 127, RustboroCity_PokemonSchool_EventScript_213F5D
+	case MULTI_B_PRESSED, RustboroCity_PokemonSchool_EventScript_213F5D
 	end
 
 RustboroCity_PokemonSchool_EventScript_213F17:: @ 8213F17

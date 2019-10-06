@@ -1132,7 +1132,7 @@ static void StorytellerDisplayStory(u32 player)
 {
     u8 stat = sStorytellerPtr->gameStatIDs[player];
 
-    ConvertIntToDecimalStringN(gStringVar1, StorytellerGetRecordedTrainerStat(player), 0, 10);
+    ConvertIntToDecimalStringN(gStringVar1, StorytellerGetRecordedTrainerStat(player), STR_CONV_MODE_LEFT_ALIGN, 10);
     StringCopy(gStringVar2, GetStoryActionByStat(stat));
     GetStoryByStattellerPlayerName(player, gStringVar3);
     ConvertInternationalString(gStringVar3, sStorytellerPtr->language[player]);
@@ -1155,7 +1155,7 @@ static void PrintStoryList(void)
         if (curWidth > width)
             width = curWidth;
     }
-    sStorytellerWindowId = CreateWindowFromRect(0, 0, convert_pixel_width_to_tile_width(width), GetFreeStorySlot() * 2 + 2);
+    sStorytellerWindowId = CreateWindowFromRect(0, 0, ConvertPixelWidthToTileWidth(width), GetFreeStorySlot() * 2 + 2);
     SetStandardWindowBorderStyle(sStorytellerWindowId, 0);
     for (i = 0; i < 4; i++)
     {

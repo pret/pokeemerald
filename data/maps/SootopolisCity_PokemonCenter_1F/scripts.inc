@@ -9,7 +9,7 @@ SootopolisCity_PokemonCenter_1F_OnTransition: @ 82264FC
 
 SootopolisCity_PokemonCenter_1F_EventScript_226500:: @ 8226500
 	setvar VAR_0x800B, 1
-	call SootopolisCity_PokemonCenter_1F_EventScript_27191E
+	call Common_EventScript_PkmnCenterNurse
 	waitmessage
 	waitbuttonpress
 	release

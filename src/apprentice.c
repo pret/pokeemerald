@@ -10,7 +10,7 @@
 #include "item.h"
 #include "item_menu.h"
 #include "main.h"
-#include "alloc.h"
+#include "malloc.h"
 #include "menu.h"
 #include "new_game.h"
 #include "party_menu.h"
@@ -1100,7 +1100,7 @@ void ResetAllApprenticeData(void)
         gSaveBlock2Ptr->apprentices[i].lvlMode = 0;
         gSaveBlock2Ptr->apprentices[i].number = 0;
         gSaveBlock2Ptr->apprentices[i].field_1 = 0;
-        for (j = 0; j < 4; j++)
+        for (j = 0; j < TRAINER_ID_LENGTH; j++)
             gSaveBlock2Ptr->apprentices[i].playerId[j] = 0;
         gSaveBlock2Ptr->apprentices[i].language = gGameLanguage;
         gSaveBlock2Ptr->apprentices[i].checksum = 0;
@@ -1268,7 +1268,7 @@ static u16 sub_819FF98(u8 arg0)
     u8 id;
     u8 knownMovesCount;
     u16 species;
-    const u16 *learnset;
+    const struct LevelUpMove *learnset;
     bool32 var_24 = FALSE;
     u16 moveId = 0;
     bool32 valid;
@@ -1291,9 +1291,9 @@ static u16 sub_819FF98(u8 arg0)
     else
         level = 60;
 
-    for (j = 0; learnset[j] != 0xFFFF; j++)
+    for (j = 0; learnset[j].move != 0xFFFF; j++)
     {
-        if ((learnset[j] & 0xFE00) > (level << 9))
+        if (learnset[j].level > level)
             break;
     }
 
@@ -1322,7 +1322,7 @@ static u16 sub_819FF98(u8 arg0)
 
                 for (; j < knownMovesCount; j++)
                 {
-                    if ((learnset[j] & 0x1FF) == moveId)
+                    if ((learnset[j].move) == moveId)
                     {
                         valid = FALSE;
                         break;
@@ -1341,12 +1341,12 @@ static u16 sub_819FF98(u8 arg0)
             {
                 do
                 {
-                    u8 learnsetId = Random() % (knownMovesCount - MAX_MON_MOVES);
-                    moveId = learnset[learnsetId] & 0x1FF;
+                    u8 learnsetId = Random() % (knownMovesCount - 4);
+                    moveId = learnset[learnsetId].move;
                     valid = TRUE;
                     for (j = knownMovesCount - MAX_MON_MOVES; j < knownMovesCount; j++)
                     {
-                        if ((learnset[j] & 0x1FF) == moveId)
+                        if ((learnset[j].move) == moveId)
                         {
                             valid = FALSE;
                             break;
@@ -1386,7 +1386,7 @@ static void GetLatestLearnedMoves(u16 species, u16 *moves)
 {
     u8 i, j;
     u8 level, knownMovesCount;
-    const u16 *learnset;
+    const struct LevelUpMove *learnset;
 
     if (PLAYER_APPRENTICE.activeLvlMode == 1)
         level = 50;
@@ -1394,9 +1394,9 @@ static void GetLatestLearnedMoves(u16 species, u16 *moves)
         level = 60;
 
     learnset = gLevelUpLearnsets[species];
-    for (i = 0; learnset[i] != 0xFFFF; i++)
+    for (i = 0; learnset[i].move != 0xFFFF; i++)
     {
-        if ((learnset[i] & 0xFE00) > (level << 9))
+        if ((learnset[i].level) > (level))
             break;
     }
 
@@ -1405,12 +1405,12 @@ static void GetLatestLearnedMoves(u16 species, u16 *moves)
         knownMovesCount = MAX_MON_MOVES;
 
     for (j = 0; j < knownMovesCount; j++)
-        moves[j] = learnset[(i - 1) - j] & 0x1FF;
+        moves[j] = learnset[(i - 1) - j].move;
 }
 
 static u16 sub_81A0284(u8 arg0, u8 speciesTableId, u8 arg2)
 {
-    u16 moves[4];
+    u16 moves[MAX_MON_MOVES];
     u8 i, count;
 
     if (PLAYER_APPRENTICE.field_B1_1 < 3)
@@ -1559,8 +1559,8 @@ static void CreateMenuWithAnswers(u8 arg0)
             pixelWidth = width;
     }
 
-    width = convert_pixel_width_to_tile_width(pixelWidth);
-    left = sub_80E2D5C(left, width);
+    width = ConvertPixelWidthToTileWidth(pixelWidth);
+    left = ScriptMenu_AdjustLeftCoordFromWidth(left, width);
     windowId = CreateAndShowWindow(left, top, width, count * 2);
     SetStandardWindowBorderStyle(windowId, 0);
 
@@ -2063,7 +2063,7 @@ static void sub_81A1370(void)
 
     r10 = 0xFFFF;
     r9 = -1;
-    for (i = 1; i < 4; i++)
+    for (i = 1; i < TRAINER_ID_LENGTH; i++)
     {
         if (GetTrainerId(gSaveBlock2Ptr->apprentices[i].playerId) == GetTrainerId(gSaveBlock2Ptr->playerTrainerId)
             && gSaveBlock2Ptr->apprentices[i].number < r10)
@@ -2092,7 +2092,7 @@ static void sub_81A1438(void)
         gSaveBlock2Ptr->apprentices[0].number++;
 
     sub_81A0390(gSaveBlock2Ptr->apprentices[0].field_1);
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < TRAINER_ID_LENGTH; i++)
         gSaveBlock2Ptr->apprentices[0].playerId[i] = gSaveBlock2Ptr->playerTrainerId[i];
 
     StringCopy(gSaveBlock2Ptr->apprentices[0].playerName, gSaveBlock2Ptr->playerName);
