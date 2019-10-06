@@ -485,7 +485,7 @@ gSpecials:: @ 81DBA64
 	def_special BufferBattleFrontierTutorMoveName
 	def_special CloseBattleFrontierTutorWindow
 	def_special sub_813ADD4
-	def_special sub_81B892C
+	def_special OpenPartyMenuForMoveTutor
 	def_special GetBattleFrontierTutorMoveIndex
 	def_special sub_813AF48
 	def_special DoDeoxysRockInteraction
