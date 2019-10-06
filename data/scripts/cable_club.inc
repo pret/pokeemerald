@@ -1804,29 +1804,17 @@ OldaleTown_PokemonCenter_2F_Text_27878B: @ 827878B
 OldaleTown_PokemonCenter_2F_Text_278792: @ 8278792
 	.string "Please wait.$"
 
-<<<<<<< HEAD
-OldaleTown_PokemonCenter_2F_Text_27879F:: @ 827879F
+CableClub_Text_YouMayTradeHere:: @ 827879F
 	.string "You may trade your Pokémon here\n"
 	.string "with another Trainer.$"
-=======
-CableClub_Text_YouMayTradeHere:: @ 827879F
-	.string "You may trade your POKéMON here\n"
-	.string "with another TRAINER.$"
->>>>>>> pret-master
 
 CableClub_Text_YouMayBattleHere:: @ 82787D5
 	.string "You may battle with your friends\n"
 	.string "here.$"
 
-<<<<<<< HEAD
-OldaleTown_PokemonCenter_2F_Text_2787FC:: @ 82787FC
+CableClub_Text_CanMakeBerryPowder:: @ 82787FC
 	.string "Two to five Trainers can make\n"
 	.string "Berry Powder together.$"
-=======
-CableClub_Text_CanMakeBerryPowder:: @ 82787FC
-	.string "Two to five TRAINERS can make\n"
-	.string "BERRY POWDER together.$"
->>>>>>> pret-master
 
 CableClub_Text_CanMixRecords:: @ 8278831
 	.string "The records of two to four players\n"
@@ -1836,13 +1824,8 @@ OldaleTown_PokemonCenter_2F_Text_27886B: @ 827886B
 	.string "A guide to the Wireless Club's\n"
 	.string "various services.$"
 
-<<<<<<< HEAD
-OldaleTown_PokemonCenter_2F_Text_27889C:: @ 827889C
-	.string "Cancels the selected Menu item.$"
-=======
 CableClub_Text_CancelSelectedItem:: @ 827889C
-	.string "Cancels the selected MENU item.$"
->>>>>>> pret-master
+	.string "Cancels the selected Menu item.$"
 
 OldaleTown_PokemonCenter_2F_Text_2788BC: @ 82788BC
 	.string "Which battle mode would you like?$"
