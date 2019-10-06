@@ -117,6 +117,24 @@ static const u8 sCherishBallDesc[] = _(
     "in commemoration\n"
     "of some event.");
 
+static const u8 sSportBallDesc[] = _(
+    "A special Ball used\n"
+    "in the Bug-Catching\n"
+    "Contest.");
+
+static const u8 sParkBallDesc[] = _(
+    "A special Ball for\n"
+    "the Pal Park.");
+
+static const u8 sDreamBallDesc[] = _(
+    "A Poké Ball used in\n"
+    "the Entree Forest.\n"
+    "It doesn't fail.");
+
+static const u8 sBeastBallDesc[] = _(
+    "A Ball designed to\n"
+    "catch Ultra Beasts.");
+
 // Medicine
 static const u8 sPotionDesc[] = _(
     "Restores the HP of\n"
@@ -866,6 +884,11 @@ static const u8 sStarfBerryDesc[] = _(
     "A hold item that\n"
     "sharply boosts a\n"
     "stat in a pinch.");
+
+static const u8 sMicleBerryDesc[] = _(
+    "When held, it ups\n"
+    "the Accuracy of a\n"
+    "move in a pinch.");
 
 static const u8 sEnigmaBerryDesc[] = _(
     "{POKEBLOCK} ingredient.\n"
