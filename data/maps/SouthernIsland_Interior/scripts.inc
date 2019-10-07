@@ -9,7 +9,7 @@ SouthernIsland_Interior_MapScript1_242A50: @ 8242A50
 
 SouthernIsland_Interior_EventScript_242A5A:: @ 8242A5A
 	specialvar VAR_RESULT, GetBattleOutcome
-	compare VAR_RESULT, 7
+	compare VAR_RESULT, B_OUTCOME_CAUGHT
 	goto_if_ne Common_EventScript_NopReturn
 	removeobject 2
 	return
@@ -86,11 +86,11 @@ SouthernIsland_Interior_EventScript_242AD0:: @ 8242AD0
 	waitstate
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
 	specialvar VAR_RESULT, GetBattleOutcome
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, B_OUTCOME_WON
 	goto_if_eq SouthernIsland_Interior_EventScript_242B81
-	compare VAR_RESULT, 4
+	compare VAR_RESULT, B_OUTCOME_RAN
 	goto_if_eq SouthernIsland_Interior_EventScript_242B8F
-	compare VAR_RESULT, 5
+	compare VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED
 	goto_if_eq SouthernIsland_Interior_EventScript_242B8F
 	setflag FLAG_CAUGHT_LATIAS_OR_LATIOS
 	releaseall

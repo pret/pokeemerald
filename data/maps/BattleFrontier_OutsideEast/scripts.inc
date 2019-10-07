@@ -9,7 +9,7 @@ BattleFrontier_OutsideEast_MapScript1_242C0F: @ 8242C0F
 
 BattleFrontier_OutsideEast_EventScript_242C19:: @ 8242C19
 	specialvar VAR_RESULT, GetBattleOutcome
-	compare VAR_RESULT, 7
+	compare VAR_RESULT, B_OUTCOME_CAUGHT
 	goto_if_ne Common_EventScript_NopReturn
 	removeobject VAR_LAST_TALKED
 	return
@@ -133,11 +133,11 @@ BattleFrontier_OutsideEast_EventScript_242CFC:: @ 8242CFC
 	dowildbattle
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
 	specialvar VAR_RESULT, GetBattleOutcome
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, B_OUTCOME_WON
 	goto_if_eq BattleFrontier_OutsideEast_EventScript_242D60
-	compare VAR_RESULT, 4
+	compare VAR_RESULT, B_OUTCOME_RAN
 	goto_if_eq BattleFrontier_OutsideEast_EventScript_242D60
-	compare VAR_RESULT, 5
+	compare VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED
 	goto_if_eq BattleFrontier_OutsideEast_EventScript_242D60
 	setflag FLAG_DEFEATED_SUDOWOODO
 	release

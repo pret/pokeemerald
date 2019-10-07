@@ -23,7 +23,7 @@ NavelRock_Bottom_MapScript1_269284: @ 8269284
 
 NavelRock_Bottom_EventScript_26928E:: @ 826928E
 	specialvar VAR_RESULT, GetBattleOutcome
-	compare VAR_RESULT, 7
+	compare VAR_RESULT, B_OUTCOME_CAUGHT
 	goto_if_ne Common_EventScript_NopReturn
 	removeobject 1
 	return
@@ -61,11 +61,11 @@ NavelRock_Bottom_EventScript_2692A2:: @ 82692A2
 	waitstate
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
 	specialvar VAR_RESULT, GetBattleOutcome
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, B_OUTCOME_WON
 	goto_if_eq NavelRock_Bottom_EventScript_269336
-	compare VAR_RESULT, 4
+	compare VAR_RESULT, B_OUTCOME_RAN
 	goto_if_eq NavelRock_Bottom_EventScript_269344
-	compare VAR_RESULT, 5
+	compare VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED
 	goto_if_eq NavelRock_Bottom_EventScript_269344
 	setflag FLAG_CAUGHT_LUGIA
 	release
