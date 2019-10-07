@@ -29,6 +29,7 @@
 #include "constants/species.h"
 #include "constants/trainer_hill.h"
 #include "constants/trainers.h"
+#include "constants/tv.h"
 #include "constants/vars.h"
 #include "constants/weather.h"
 	.include "asm/macros.inc"

@@ -42,6 +42,7 @@
 #include "constants/layouts.h"
 #include "constants/metatile_behaviors.h"
 #include "constants/script_menu.h"
+#include "constants/tv.h"
 
 // Static type declarations
 
@@ -1595,7 +1596,7 @@ void SaveRecordedItemPurchasesForTVShow(void)
                     show->smartshopperShow.itemIds[i] = gMartPurchaseHistory[i].itemId;
                     show->smartshopperShow.itemAmounts[i] = gMartPurchaseHistory[i].quantity;
                 }
-                show->smartshopperShow.priceReduced = GetPriceReduction(1);
+                show->smartshopperShow.priceReduced = GetPriceReduction(POKENEWS_SLATEPORT);
                 StringCopy(show->smartshopperShow.playerName, gSaveBlock2Ptr->playerName);
                 tv_store_id_3x(show);
                 show->smartshopperShow.language = gGameLanguage;
