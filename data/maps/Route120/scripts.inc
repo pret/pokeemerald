@@ -192,9 +192,9 @@ Route120_EventScript_1F5672:: @ 81F5672
 Route120_EventScript_1F568B:: @ 81F568B
 	msgbox Route120_Text_1F5B0F, MSGBOX_DEFAULT
 	closemessage
-	compare VAR_FACING, 2
+	compare VAR_FACING, DIR_NORTH
 	call_if_eq Route120_EventScript_1F57A3
-	compare VAR_FACING, 3
+	compare VAR_FACING, DIR_WEST
 	call_if_eq Route120_EventScript_1F57AE
 	applymovement 31, Common_Movement_WalkInPlaceLeft
 	waitmovement 0

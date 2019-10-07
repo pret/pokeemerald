@@ -125,13 +125,13 @@ FarawayIsland_Interior_EventScript_267DF2:: @ 8267DF2
 	message FarawayIsland_Interior_Text_Mew
 	waitse
 	playmoncry SPECIES_MEW, 2
-	compare VAR_FACING, 2
+	compare VAR_FACING, DIR_NORTH
 	call_if_eq FarawayIsland_Interior_EventScript_267EAF
-	compare VAR_FACING, 1
+	compare VAR_FACING, DIR_SOUTH
 	call_if_eq FarawayIsland_Interior_EventScript_267EBA
-	compare VAR_FACING, 3
+	compare VAR_FACING, DIR_WEST
 	call_if_eq FarawayIsland_Interior_EventScript_267EC5
-	compare VAR_FACING, 4
+	compare VAR_FACING, DIR_EAST
 	call_if_eq FarawayIsland_Interior_EventScript_267ED0
 	special sub_81D4BEC
 	delay 40

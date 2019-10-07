@@ -9,9 +9,9 @@ Route109_EventScript_1EE760:: @ 81EE760
 	waitmovement 0
 	removeobject 2
 	switch VAR_FACING
-	case 1, Route109_EventScript_1EE7A5
-	case 3, Route109_EventScript_1EE7C5
-	case 4, Route109_EventScript_1EE7B5
+	case DIR_SOUTH, Route109_EventScript_1EE7A5
+	case DIR_WEST, Route109_EventScript_1EE7C5
+	case DIR_EAST, Route109_EventScript_1EE7B5
 	end
 
 Route109_EventScript_1EE7A5:: @ 81EE7A5
