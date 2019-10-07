@@ -9,7 +9,7 @@ MarineCave_End_MapScript1_23AFEA: @ 823AFEA
 
 MarineCave_End_EventScript_23AFF4:: @ 823AFF4
 	specialvar VAR_RESULT, GetBattleOutcome
-	compare VAR_RESULT, 7
+	compare VAR_RESULT, B_OUTCOME_CAUGHT
 	goto_if_ne Common_EventScript_NopReturn
 	removeobject 1
 	return
@@ -41,11 +41,11 @@ MarineCave_End_EventScript_23B01B:: @ 823B01B
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
 	setvar VAR_TEMP_1, 0
 	specialvar VAR_RESULT, GetBattleOutcome
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, B_OUTCOME_WON
 	goto_if_eq MarineCave_End_EventScript_23B084
-	compare VAR_RESULT, 4
+	compare VAR_RESULT, B_OUTCOME_RAN
 	goto_if_eq MarineCave_End_EventScript_23B092
-	compare VAR_RESULT, 5
+	compare VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED
 	goto_if_eq MarineCave_End_EventScript_23B092
 	setvar VAR_SHOULD_END_UNUSUAL_WEATHER, 1
 	setflag FLAG_DEFEATED_KYOGRE
