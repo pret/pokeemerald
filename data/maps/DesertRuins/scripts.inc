@@ -10,7 +10,7 @@ DesertRuins_MapScript1_22D96B: @ 822D96B
 
 DesertRuins_EventScript_22D975:: @ 822D975
 	specialvar VAR_RESULT, GetBattleOutcome
-	compare VAR_RESULT, 7
+	compare VAR_RESULT, B_OUTCOME_CAUGHT
 	goto_if_ne Common_EventScript_NopReturn
 	removeobject VAR_LAST_TALKED
 	return
@@ -72,11 +72,11 @@ DesertRuins_EventScript_22DA02:: @ 822DA02
 	waitstate
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
 	specialvar VAR_RESULT, GetBattleOutcome
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, B_OUTCOME_WON
 	goto_if_eq DesertRuins_EventScript_22DA49
-	compare VAR_RESULT, 4
+	compare VAR_RESULT, B_OUTCOME_RAN
 	goto_if_eq DesertRuins_EventScript_22DA52
-	compare VAR_RESULT, 5
+	compare VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED
 	goto_if_eq DesertRuins_EventScript_22DA52
 	setflag FLAG_DEFEATED_REGIROCK
 	release
