@@ -109,11 +109,11 @@ SootopolisCity_MysteryEventsHouse_1F_EventScript_227A58:: @ 8227A58
 	special ReducePlayerPartyToSelectedMons
 	msgbox SootopolisCity_MysteryEventsHouse_1F_Text_227D21, MSGBOX_DEFAULT
 	closemessage
-	compare VAR_FACING, 2
+	compare VAR_FACING, DIR_NORTH
 	call_if_eq SootopolisCity_MysteryEventsHouse_1F_EventScript_227AFE
-	compare VAR_FACING, 4
+	compare VAR_FACING, DIR_EAST
 	call_if_eq SootopolisCity_MysteryEventsHouse_1F_EventScript_227B10
-	compare VAR_FACING, 3
+	compare VAR_FACING, DIR_WEST
 	call_if_eq SootopolisCity_MysteryEventsHouse_1F_EventScript_227B22
 	warp MAP_SOOTOPOLIS_CITY_MYSTERY_EVENTS_HOUSE_B1F, 255, 3, 1
 	waitstate

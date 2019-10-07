@@ -34,11 +34,11 @@ EverGrandeCity_PokemonCenter_1F_EventScript_229A79:: @ 8229A79
 	faceplayer
 	msgbox EverGrandeCity_PokemonCenter_1F_Text_229BF1, MSGBOX_DEFAULT
 	closemessage
-	compare VAR_FACING, 2
+	compare VAR_FACING, DIR_NORTH
 	call_if_eq EverGrandeCity_PokemonCenter_1F_EventScript_229AB6
-	compare VAR_FACING, 4
+	compare VAR_FACING, DIR_EAST
 	call_if_eq EverGrandeCity_PokemonCenter_1F_EventScript_229AC1
-	compare VAR_FACING, 3
+	compare VAR_FACING, DIR_WEST
 	call_if_eq EverGrandeCity_PokemonCenter_1F_EventScript_229AC1
 	addvar VAR_SCOTT_STATE, 1
 	setflag FLAG_MET_SCOTT_IN_EVERGRANDE

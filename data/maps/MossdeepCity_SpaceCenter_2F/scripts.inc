@@ -194,7 +194,7 @@ MossdeepCity_SpaceCenter_2F_EventScript_223F7A:: @ 8223F7A
 	delay 30
 	playse SE_KOUKA_L
 	switch VAR_FACING
-	case 1, MossdeepCity_SpaceCenter_2F_EventScript_223FBA
+	case DIR_SOUTH, MossdeepCity_SpaceCenter_2F_EventScript_223FBA
 	applymovement 4, MossdeepCity_SpaceCenter_2F_Movement_223FC6
 	waitmovement 0
 	releaseall
@@ -326,8 +326,8 @@ MossdeepCity_SpaceCenter_2F_EventScript_224071:: @ 8224071
 
 MossdeepCity_SpaceCenter_2F_EventScript_224131:: @ 8224131
 	switch VAR_FACING
-	case 1, MossdeepCity_SpaceCenter_2F_EventScript_22414D
-	case 3, MossdeepCity_SpaceCenter_2F_EventScript_224152
+	case DIR_SOUTH, MossdeepCity_SpaceCenter_2F_EventScript_22414D
+	case DIR_WEST, MossdeepCity_SpaceCenter_2F_EventScript_224152
 	return
 
 MossdeepCity_SpaceCenter_2F_EventScript_22414D:: @ 822414D

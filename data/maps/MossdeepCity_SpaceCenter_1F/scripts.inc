@@ -238,8 +238,8 @@ MossdeepCity_SpaceCenter_1F_EventScript_22321F:: @ 822321F
 	setflag FLAG_DEFEATED_GRUNT_SPACE_CENTER_1F
 	copyobjectxytoperm 9
 	switch VAR_FACING
-	case 3, MossdeepCity_SpaceCenter_1F_EventScript_223278
-	case 3, MossdeepCity_SpaceCenter_1F_EventScript_223289
+	case DIR_WEST, MossdeepCity_SpaceCenter_1F_EventScript_223278
+	case DIR_WEST, MossdeepCity_SpaceCenter_1F_EventScript_223289
 	applymovement 9, MossdeepCity_SpaceCenter_1F_Movement_2232A2
 	waitmovement 0
 	setvar VAR_MOSSDEEP_SPACE_CENTER_STATE_1, 2
