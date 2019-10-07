@@ -294,7 +294,7 @@ static void sub_81B5B38(u8, struct Pokemon*);
 static void UpdatePartyMonIconFrame(struct Sprite*);
 static void UpdatePartyMonIconFrameAndBounce(struct Sprite*);
 static void sub_81B5CB0(u16, struct Struct203CEDC*);
-static void sub_81B5DF0(u8, u8);
+static void CreateHeldItemSpriteForTrade(u8, bool8);
 static void SpriteCB_HeldItem(struct Sprite*);
 static void party_menu_get_status_condition_and_update_object(struct Pokemon*, struct Struct203CEDC*);
 static void party_menu_update_status_condition_object(u8, struct Struct203CEDC*);
@@ -5095,33 +5095,33 @@ void LoadHeldItemIcons(void)
     LoadSpritePalette(&sSpritePalette_HeldItem);
 }
 
-void sub_81B5D4C(u8 *a, u8 *b, u8 c)
+void DrawHeldItemIconsForTrade(u8 *partyCounts, u8 *partySpriteIds, u8 who)
 {
     u16 i;
     u16 item;
 
-    switch (c)
+    switch (who)
     {
-    case 0:
-        for (i = 0; i < a[0]; i++)
+    case TRADE_PLAYER:
+        for (i = 0; i < partyCounts[TRADE_PLAYER]; i++)
         {
             item = GetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM);
             if (item != ITEM_NONE)
-                sub_81B5DF0(b[i], ItemIsMail(item));
+                CreateHeldItemSpriteForTrade(partySpriteIds[i], ItemIsMail(item));
         }
         break;
-    case 1:
-        for (i = 0; i < a[1]; i++)
+    case TRADE_PARTNER:
+        for (i = 0; i < partyCounts[TRADE_PARTNER]; i++)
         {
             item = GetMonData(&gEnemyParty[i], MON_DATA_HELD_ITEM);
             if (item != ITEM_NONE)
-                sub_81B5DF0(b[i + 6], ItemIsMail(item));
+                CreateHeldItemSpriteForTrade(partySpriteIds[i + PARTY_SIZE], ItemIsMail(item));
         }
         break;
     }
 }
 
-static void sub_81B5DF0(u8 spriteId, u8 isMail)
+static void CreateHeldItemSpriteForTrade(u8 spriteId, bool8 isMail)
 {
     u8 subpriority = gSprites[spriteId].subpriority;
     u8 newSpriteId = CreateSprite(&sSpriteTemplate_HeldItem, 250, 170, subpriority - 1);

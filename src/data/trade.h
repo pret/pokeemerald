@@ -39,14 +39,14 @@ static const u8 sText_OnlyPkmnForBattle[] = _("That's your only\nPOKéMON for ba
 static const u8 sText_WaitingForYourFriend[] = _("{COLOR DARK_GREY}{HIGHLIGHT WHITE}{SHADOW LIGHT_GREY}Waiting for your friend\nto finish…");
 static const u8 sText_YourFriendWantsToTrade[] = _("Your friend wants\nto trade POKéMON.");
 
-static const struct OamData gOamData_832DC14 =
+static const struct OamData sTradeOamData_32x16 =
 {
     .shape = SPRITE_SHAPE(32x16),
     .size = SPRITE_SIZE(32x16),
     .priority = 1
 };
 
-static const struct OamData gOamData_832DC1C =
+static const struct OamData sTradeOamData_64x32 =
 {
     .shape = SPRITE_SHAPE(64x32),
     .size = SPRITE_SIZE(64x32),
@@ -134,7 +134,7 @@ static const struct SpriteTemplate gSpriteTemplate_832DC94 =
 {
     .tileTag = 300,
     .paletteTag = 2345,
-    .oam = &gOamData_832DC1C,
+    .oam = &sTradeOamData_64x32,
     .anims = gSpriteAnimTable_832DC34,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
@@ -145,7 +145,7 @@ static const struct SpriteTemplate gSpriteTemplate_832DCAC =
 {
     .tileTag = 200,
     .paletteTag = 4925,
-    .oam = &gOamData_832DC14,
+    .oam = &sTradeOamData_32x16,
     .anims = gSpriteAnimTable_832DC7C,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
@@ -271,7 +271,7 @@ static const u8 gTradeMonSpriteCoords[(PARTY_SIZE * 2) + 1][2] =
     {23, 18} // CANCEL
 };
 
-static const u8 gTradeLevelDisplayCoords[][PARTY_SIZE][2] =
+static const u8 sTradeMonCoords[][PARTY_SIZE][2] =
 {
     {
         // Your party
@@ -293,7 +293,7 @@ static const u8 gTradeLevelDisplayCoords[][PARTY_SIZE][2] =
     }
 };
 
-static const u8 gTradeMonBoxCoords[][PARTY_SIZE][2] =
+static const u8 sTradeMonBoxDimensions[][PARTY_SIZE][2] =
 {
     {
         // Your party
@@ -373,7 +373,7 @@ static const u8 sTradeTextColors[] =
     TEXT_COLOR_DARK_GREY    //shadow color
 };
 
-static const struct BgTemplate gUnknown_0832DEE4[] =
+static const struct BgTemplate sTradeMenuBgTemplates[] =
 {
     {
         .bg = 0,
@@ -413,7 +413,7 @@ static const struct BgTemplate gUnknown_0832DEE4[] =
     },
 };
 
-static const struct WindowTemplate gUnknown_0832DEF4[] =
+static const struct WindowTemplate sTradeMenuWindowTemplates[] =
 {
     {
         .bg = 0,
@@ -1057,7 +1057,7 @@ static const u16 sIngameTradeMail[][MAIL_WORDS_COUNT + 1] =
     }
 };
 
-static const struct WindowTemplate gUnknown_08338FFC[] =
+static const struct WindowTemplate sTradeSequenceWindowTemplates[] =
 {
     {
         .bg = 0,
@@ -1071,7 +1071,7 @@ static const struct WindowTemplate gUnknown_08338FFC[] =
     DUMMY_WIN_TEMPLATE
 };
 
-const struct WindowTemplate gUnknown_0833900C =
+const struct WindowTemplate gTradeEvolutionSceneYesNoWindowTemplate =
 {
     .bg = 0,
     .tilemapLeft = 21,
@@ -1082,7 +1082,7 @@ const struct WindowTemplate gUnknown_0833900C =
     .baseBlock = 188
 };
 
-static const struct BgTemplate gUnknown_08339014[] =
+static const struct BgTemplate sTradeSequenceBgTemplates[] =
 {
     {
         .bg = 0,

@@ -103,7 +103,7 @@ void sub_81B47E0(u8 taskId);
 bool8 FieldCallback_PrepareFadeInFromMenu(void);
 void sub_81B58A8(void);
 void LoadHeldItemIcons(void);
-void sub_81B5D4C(u8 *a, u8 *b, u8 c);
+void DrawHeldItemIconsForTrade(u8 *a, u8 *b, u8 c);
 void sub_81B617C(void);
 void ItemUseCB_Medicine(u8 taskId, TaskFunc task);
 void sub_81B67C8(u8 taskId, TaskFunc task);

@@ -48,7 +48,7 @@
 #define EXTRACT_LINK_ERRORS(status) \
 (((status) & LINK_STAT_ERRORS) >> LINK_STAT_ERRORS_SHIFT)
 
-#define LINKCMD_SEND_LINK_TYPE 0x2222
+#define LINKCMD_SEND_LINK_TYPE     0x2222
 #define LINKCMD_0x2FFE             0x2FFE
 #define LINKCMD_SEND_HELD_KEYS     0x4444
 #define LINKCMD_0x5555             0x5555
@@ -59,9 +59,21 @@
 #define LINKCMD_CONT_BLOCK         0x8888
 #define LINKCMD_0xAAAA             0xAAAA
 #define LINKCMD_0xAAAB             0xAAAB
+#define LINKCMD_0xAABB             0xAABB // used in trade
 #define LINKCMD_INIT_BLOCK         0xBBBB
+#define LINKCMD_0xBBCC             0xBBCC // used in trade
 #define LINKCMD_SEND_HELD_KEYS_2   0xCAFE
 #define LINKCMD_0xCCCC             0xCCCC
+#define LINKCMD_0xCCDD             0xCCDD // all below linkcmds used in trade
+#define LINKCMD_0xDDDD             0xDDDD 
+#define LINKCMD_0xDDEE             0xDDEE
+#define LINKCMD_0xEEAA             0xEEAA
+#define LINKCMD_0xEEBB             0xEEBB
+#define LINKCMD_0xEECC             0xEECC
+
+#define LINKCMD_0xABCD             0xABCD
+#define LINKCMD_0xDCBA             0xDCBA
+
 
 struct LinkStatus
 {

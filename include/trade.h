@@ -11,7 +11,7 @@ extern struct MailStruct gTradeMail[PARTY_SIZE];
 extern u8 gSelectedTradeMonPositions[2];
 
 // Exported ROM declarations
-extern const struct WindowTemplate gUnknown_0833900C;
+extern const struct WindowTemplate gTradeEvolutionSceneYesNoWindowTemplate;
 
 s32 sub_807A728(void);
 void sub_80773AC(void);
