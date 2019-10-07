@@ -1955,11 +1955,11 @@ void sub_80EDB44(void)
         show->rivalTrainer.badgeCount = nBadges;
         if (IsNationalPokedexEnabled())
         {
-            show->rivalTrainer.dexCount = GetNationalPokedexCount(0x01);
+            show->rivalTrainer.dexCount = GetNationalPokedexCount(FLAG_GET_CAUGHT);
         }
         else
         {
-            show->rivalTrainer.dexCount = GetHoennPokedexCount(0x01);
+            show->rivalTrainer.dexCount = GetHoennPokedexCount(FLAG_GET_CAUGHT);
         }
         show->rivalTrainer.location = gMapHeader.regionMapSectionId;
         show->rivalTrainer.mapLayoutId = gMapHeader.mapLayoutId;

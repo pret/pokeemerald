@@ -5,7 +5,7 @@ Route103_MapScripts:: @ 81EC38E
 
 Route103_OnTransition: @ 81EC399
 	call Common_EventScript_SetupRivalGfxId
-	call Route103_EventScript_2720AD
+	call ProfBirch_EventScript_UpdateLocation
 	end
 
 Route103_MapScript1_1EC3A4: @ 81EC3A4

@@ -6,7 +6,7 @@ LittlerootTown_ProfessorBirchsLab_MapScripts:: @ 81F9C91
 
 LittlerootTown_ProfessorBirchsLab_MapScript1_1F9CA1: @ 81F9CA1
 	call Common_EventScript_SetupRivalGfxId
-	call LittlerootTown_ProfessorBirchsLab_EventScript_2720AD
+	call ProfBirch_EventScript_UpdateLocation
 	compare VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 6
 	goto_if_ge LittlerootTown_ProfessorBirchsLab_EventScript_1F9CF7
 	compare VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 4
@@ -482,7 +482,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_1FA25A:: @ 81FA25A
 	compare VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 2
 	goto_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_1FA294
 	goto_if_unset FLAG_HAS_MATCH_CALL, LittlerootTown_ProfessorBirchsLab_EventScript_1FA29E
-	goto_if_unset FLAG_ENABLE_PROF_BIRCH_MATCH_CALL, LittlerootTown_ProfessorBirchsLab_EventScript_1FA2D2
+	goto_if_unset FLAG_ENABLE_PROF_BIRCH_MATCH_CALL, EventScript_RegisterProfBirch
 	goto LittlerootTown_ProfessorBirchsLab_EventScript_1FA29E
 	end
 
@@ -497,19 +497,18 @@ LittlerootTown_ProfessorBirchsLab_EventScript_1FA294:: @ 81FA294
 	end
 
 LittlerootTown_ProfessorBirchsLab_EventScript_1FA29E:: @ 81FA29E
-	goto_if_unset FLAG_HIDE_LITTLEROOT_TOWN_BIRCHS_LAB_UNKNOWN_0x380, LittlerootTown_ProfessorBirchsLab_EventScript_272141
+	goto_if_unset FLAG_HIDE_LITTLEROOT_TOWN_BIRCHS_LAB_UNKNOWN_0x380, ProfBirch_EventScript_RatePokedexOrRegister
 	compare VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 3
-	goto_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_272141
+	goto_if_eq ProfBirch_EventScript_RatePokedexOrRegister
 	compare VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 6
-	goto_if_ge LittlerootTown_ProfessorBirchsLab_EventScript_272141
+	goto_if_ge ProfBirch_EventScript_RatePokedexOrRegister
 	compare VAR_BIRCH_LAB_STATE, 5
 	goto_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_1FA3C4
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_1FAA74, MSGBOX_DEFAULT
 	release
 	end
 
-LittlerootTown_ProfessorBirchsLab_EventScript_1FA2D2:: @ 81FA2D2
-Route101_EventScript_1FA2D2:: @ 81FA2D2
+EventScript_RegisterProfBirch:: @ 81FA2D2
 	msgbox Route101_Text_2B5F52, MSGBOX_DEFAULT
 	closemessage
 	delay 30
