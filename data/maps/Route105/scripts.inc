@@ -19,7 +19,7 @@ Route105_EventScript_1EE20B:: @ 81EE20B
 
 Route105_OnTransition: @ 81EE21E
 	compare VAR_SHOULD_END_UNUSUAL_WEATHER, 1
-	call_if_eq Route105_EventScript_273D13
+	call_if_eq UnusualWeather_EventScript_HideMapNamePopup
 	compare VAR_UNUSUAL_WEATHER_LOCATION, UNUSUAL_WEATHER_ROUTE_105_NORTH
 	call_if_eq UnusualWeather_StartKyogreWeather
 	compare VAR_UNUSUAL_WEATHER_LOCATION, UNUSUAL_WEATHER_ROUTE_105_SOUTH
