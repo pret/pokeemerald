@@ -55,11 +55,11 @@ OldaleTown_PokemonCenter_2F_EventScript_276B23:: @ 8276B23
 	compare VAR_RESULT, 1
 	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_276B19
 	goto_if_set FLAG_SYS_HAS_EON_TICKET, OldaleTown_PokemonCenter_2F_EventScript_276B19
-	msgbox gUnknown_08273594, MSGBOX_DEFAULT
+	msgbox Mevent_Text_TheresATicketForYou, MSGBOX_DEFAULT
 	giveitem_std ITEM_EON_TICKET
 	setflag FLAG_SYS_HAS_EON_TICKET
 	setvar VAR_ALWAYS_ZERO_0x403F, 0
-	msgbox gUnknown_082735F2, MSGBOX_DEFAULT
+	msgbox Mevent_Text_TryUsingItAtLilycovePort, MSGBOX_DEFAULT
 	release
 	end
 
