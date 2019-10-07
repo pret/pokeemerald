@@ -547,7 +547,7 @@ static bool8 TryStartStepCountScript(u16 metatileBehavior)
     {
         if (UpdatePoisonStepCounter() == TRUE)
         {
-            ScriptContext1_SetupScript(EventScript_Poison);
+            ScriptContext1_SetupScript(EventScript_FieldPoison);
             return TRUE;
         }
         if (ShouldEggHatch())

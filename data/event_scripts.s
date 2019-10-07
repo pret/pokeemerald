@@ -1,5 +1,7 @@
 #include "constants/global.h"
 #include "constants/battle.h"
+#include "constants/battle_pike.h"
+#include "constants/battle_pyramid.h"
 #include "constants/battle_frontier.h"
 #include "constants/battle_setup.h"
 #include "constants/berry.h"
@@ -10,6 +12,7 @@
 #include "constants/event_objects.h"
 #include "constants/event_object_movement_constants.h"
 #include "constants/field_effects.h"
+#include "constants/field_poison.h"
 #include "constants/field_specials.h"
 #include "constants/flags.h"
 #include "constants/game_stat.h"
@@ -901,7 +904,7 @@ EventScript_PickItemUp:: @ 8271C3A
 	waitfanfare
 	waitmessage
 	bufferitemnameplural 1, VAR_0x8004, VAR_0x8005
-	setvar VAR_0x8004, 12
+	setvar VAR_0x8004, BATTLE_PYRAMID_FUNC_IS_IN
 	special CallBattlePyramidFunction
 	compare VAR_RESULT, 1
 	goto_if_eq EventScript_271C86

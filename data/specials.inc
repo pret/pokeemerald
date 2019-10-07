@@ -210,8 +210,8 @@ gSpecials:: @ 81DBA64
 	def_special ShowLinkBattleRecords
 	def_special IsEnoughForCostInVar0x8005
 	def_special SubtractMoneyFromVar0x8005
-	def_special ExecuteWhiteOut
-	def_special sp0C8_whiteout_maybe
+	def_special TryFieldPoisonWhiteOut
+	def_special SetCB2WhiteOut
 	def_special RotatingGate_InitPuzzle
 	def_special RotatingGate_InitPuzzleAndGraphics
 	def_special SetSSTidalFlag
@@ -342,7 +342,7 @@ gSpecials:: @ 81DBA64
 	def_special TryInitBattleTowerAwardManEventObject
 	def_special MoveOutOfSecretBaseFromOutside
 	def_special LoadPlayerBag
-	def_special sub_80B05B4
+	def_special Script_FadeOutMapMusic
 	def_special SetPacifidlogTMReceivedDay
 	def_special GetDaysUntilPacifidlogTMAvailable
 	def_special HasAllHoennMons

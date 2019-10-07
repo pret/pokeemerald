@@ -270,7 +270,7 @@ MossdeepCity_SpaceCenter_2F_EventScript_224032:: @ 8224032
 	switch VAR_RESULT
 	case 1, MossdeepCity_SpaceCenter_2F_EventScript_224071
 	fadescreen 1
-	special sp0C8_whiteout_maybe
+	special SetCB2WhiteOut
 	waitstate
 
 MossdeepCity_SpaceCenter_2F_EventScript_224071:: @ 8224071

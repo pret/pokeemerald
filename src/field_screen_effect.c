@@ -48,7 +48,7 @@ static bool32 WaitForWeatherFadeIn(void);
 static void task0A_mpl_807E31C(u8 taskId);
 static void sub_80AFA0C(u8 taskId);
 static void sub_80AFA88(u8 taskId);
-static void task50_0807F0C8(u8);
+static void Task_EnableScriptAfterMusicFade(u8 taskId);
 
 // const
 const u16 sFlashLevelPixelRadii[] = { 200, 72, 64, 56, 48, 40, 32, 24, 0 };
@@ -1231,13 +1231,13 @@ void sub_80B058C(void)
     gTasks[taskId].data[0] = 6;
 }
 
-void sub_80B05B4(void)
+void Script_FadeOutMapMusic(void)
 {
     Overworld_FadeOutMapMusic();
-    CreateTask(task50_0807F0C8, 80);
+    CreateTask(Task_EnableScriptAfterMusicFade, 80);
 }
 
-static void task50_0807F0C8(u8 taskId)
+static void Task_EnableScriptAfterMusicFade(u8 taskId)
 {
     if (BGMusicStopped() == TRUE)
     {

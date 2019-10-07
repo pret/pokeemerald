@@ -30,7 +30,7 @@ SeafloorCavern_Room9_EventScript_234DC9:: @ 8234DC9
 	msgbox SeafloorCavern_Room9_Text_2351E5, MSGBOX_DEFAULT
 	setweather WEATHER_NONE
 	doweather
-	special sub_80B05B4
+	special Script_FadeOutMapMusic
 	waitstate
 	msgbox SeafloorCavern_Room9_Text_235279, MSGBOX_DEFAULT
 	special WaitWeather
