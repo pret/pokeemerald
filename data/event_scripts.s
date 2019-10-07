@@ -1314,9 +1314,9 @@ BirthIsland_Harbor_EventScript_272250:: @ 8272250
 FarawayIsland_Entrance_EventScript_272250:: @ 8272250
 NavelRock_Harbor_EventScript_272250:: @ 8272250
 SouthernIsland_Exterior_EventScript_272250:: @ 8272250
-	compare VAR_FACING, 1
+	compare VAR_FACING, DIR_SOUTH
 	call_if_eq BattleFrontier_OutsideWest_EventScript_242A21
-	compare VAR_FACING, 3
+	compare VAR_FACING, DIR_WEST
 	call_if_eq BattleFrontier_OutsideWest_EventScript_242A2C
 	delay 30
 	hideobjectat 255, MAP_PETALBURG_CITY

@@ -73,13 +73,13 @@ LittlerootTown_BrendansHouse_2F_EventScript_1F8497:: @ 81F8497
 	waitmovement 0
 	delay 10
 	playbgm MUS_BOY_SUP, 1
-	compare VAR_FACING, 2
+	compare VAR_FACING, DIR_NORTH
 	call_if_eq LittlerootTown_BrendansHouse_2F_EventScript_1F8507
-	compare VAR_FACING, 1
+	compare VAR_FACING, DIR_SOUTH
 	call_if_eq LittlerootTown_BrendansHouse_2F_EventScript_1F8536
-	compare VAR_FACING, 3
+	compare VAR_FACING, DIR_WEST
 	call_if_eq LittlerootTown_BrendansHouse_2F_EventScript_1F8565
-	compare VAR_FACING, 4
+	compare VAR_FACING, DIR_EAST
 	call_if_eq LittlerootTown_BrendansHouse_2F_EventScript_1F8594
 	setvar VAR_LITTLEROOT_RIVAL_STATE, 3
 	setflag FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F_POKE_BALL
