@@ -1,3 +1,32 @@
+MauvilleCity_GameCorner_EventScript_2A5AB1:: @ 82A5AB1
+	checkitem ITEM_COIN_CASE, 1
+	compare VAR_RESULT, 0
+	goto_if_eq MauvilleCity_GameCorner_EventScript_210456
+	setvar VAR_0x8004, 0
+	getpricereduction 2
+	compare VAR_RESULT, 0
+	goto_if_eq MauvilleCity_GameCorner_EventScript_2A5B0D
+	addvar VAR_0x8004, 128
+	goto MauvilleCity_GameCorner_EventScript_2A5B0D
+	end
+
+MauvilleCity_GameCorner_EventScript_2A5ADF:: @ 82A5ADF
+	checkitem ITEM_COIN_CASE, 1
+	compare VAR_RESULT, 0
+	goto_if_eq MauvilleCity_GameCorner_EventScript_210456
+	setvar VAR_0x8004, 1
+	getpricereduction 2
+	compare VAR_RESULT, 0
+	goto_if_eq MauvilleCity_GameCorner_EventScript_2A5B0D
+	addvar VAR_0x8004, 128
+	goto MauvilleCity_GameCorner_EventScript_2A5B0D
+	end
+
+MauvilleCity_GameCorner_EventScript_2A5B0D:: @ 82A5B0D
+	special PlayRoulette
+	waitstate
+	end
+	
 gUnknown_082A5B12::
 	.string "여기는 레이트 {STR_VAR_1}의 룰렛입니다\n"
 	.string "룰렛으로 즐기겠습니까?$"

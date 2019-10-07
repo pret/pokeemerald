@@ -1132,7 +1132,7 @@ static void StorytellerDisplayStory(u32 player)
 {
     u8 stat = sStorytellerPtr->gameStatIDs[player];
 
-    ConvertIntToDecimalStringN(gStringVar1, StorytellerGetRecordedTrainerStat(player), 0, 10);
+    ConvertIntToDecimalStringN(gStringVar1, StorytellerGetRecordedTrainerStat(player), STR_CONV_MODE_LEFT_ALIGN, 10);
     StringCopy(gStringVar2, GetStoryActionByStat(stat));
     GetStoryByStattellerPlayerName(player, gStringVar3);
     ConvertInternationalString(gStringVar3, sStorytellerPtr->language[player]);

@@ -9,6 +9,16 @@
 #define KBEVENT_PRESSED_SELECT 8
 #define KBEVENT_PRESSED_START 9
 
+#define KBROW_COUNT 4
+
+enum
+{
+    KBPAGE_LETTERS_LOWER,
+    KBPAGE_LETTERS_UPPER,
+    KBPAGE_SYMBOLS,
+    KBPAGE_COUNT,  
+};
+
 enum
 {
     NAMING_SCREEN_PLAYER,
@@ -59,12 +69,6 @@ struct NamingScreenData {
     MainCallback returnCallback;
 };
 
-enum
-{
-    PAGE_OTHERS,
-    PAGE_UPPER,
-    PAGE_LOWER,
-};
 
 enum
 {
