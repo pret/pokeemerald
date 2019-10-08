@@ -81,7 +81,7 @@ LilycoveCity_ContestLobby_EventScript_21A2E4:: @ 821A2E4
 	end
 
 LilycoveCity_ContestLobby_EventScript_21A314:: @ 821A314
-	incrementgamestat 42
+	incrementgamestat GAME_STAT_RECEIVED_RIBBONS
 	special sub_80F8390
 	applymovement 4, LilycoveCity_ContestLobby_Movement_21A41A
 	waitmovement 0
@@ -253,7 +253,7 @@ LilycoveCity_ContestLobby_EventScript_21A4B4:: @ 821A4B4
 	end
 
 LilycoveCity_ContestLobby_EventScript_21A4E4:: @ 821A4E4
-	incrementgamestat 42
+	incrementgamestat GAME_STAT_RECEIVED_RIBBONS
 	setflag FLAG_SYS_RIBBON_GET
 	special sub_80F8390
 	applymovement 11, LilycoveCity_ContestLobby_Movement_21A547

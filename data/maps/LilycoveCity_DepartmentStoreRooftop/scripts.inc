@@ -21,10 +21,10 @@ LilycoveCity_DepartmentStoreRooftop_EventScript_22022B:: @ 822022B
 LilycoveCity_DepartmentStoreRooftop_EventScript_22022F:: @ 822022F
 	lock
 	faceplayer
-	message gUnknown_08272A21
+	message gText_HowMayIServeYou
 	waitmessage
 	pokemartdecoration LilycoveCity_DepartmentStoreRooftop_PokemartDecor_220248
-	msgbox gUnknown_08272A3F, MSGBOX_DEFAULT
+	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
 	release
 	end
 
@@ -190,7 +190,7 @@ LilycoveCity_DepartmentStoreRooftop_EventScript_220442:: @ 8220442
 	end
 
 LilycoveCity_DepartmentStoreRooftop_EventScript_220450:: @ 8220450
-	msgbox gUnknown_08272A89, MSGBOX_DEFAULT
+	msgbox gText_TheBagIsFull, MSGBOX_DEFAULT
 	goto LilycoveCity_DepartmentStoreRooftop_EventScript_22045E
 	end
 

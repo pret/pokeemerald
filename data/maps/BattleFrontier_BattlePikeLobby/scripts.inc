@@ -329,8 +329,8 @@ BattleFrontier_BattlePikeCorridor_EventScript_25BB49:: @ 825BB49
 BattleFrontier_BattlePikeLobby_EventScript_25BB49:: @ 825BB49
 BattleFrontier_BattlePikeRandomRoom1_EventScript_25BB49:: @ 825BB49
 BattleFrontier_BattlePikeThreePathRoom_EventScript_25BB49:: @ 825BB49
-	playse 267
-	special sub_813B880
+	playse SE_CURTAIN
+	special CloseBattlePikeCurtain
 	waitstate
 	waitse
 	return

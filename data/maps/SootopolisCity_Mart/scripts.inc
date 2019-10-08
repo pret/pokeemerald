@@ -4,10 +4,10 @@ SootopolisCity_Mart_MapScripts:: @ 8226794
 SootopolisCity_Mart_EventScript_226795:: @ 8226795
 	lock
 	faceplayer
-	message gUnknown_08272A21
+	message gText_HowMayIServeYou
 	waitmessage
 	pokemart SootopolisCity_Mart_Pokemart_2267AC
-	msgbox gUnknown_08272A3F, MSGBOX_DEFAULT
+	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
 	release
 	end
 

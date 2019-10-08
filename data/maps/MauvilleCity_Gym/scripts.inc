@@ -98,7 +98,7 @@ MauvilleCity_Gym_EventScript_20DF2B:: @ 820DF2B
 	compare VAR_PETALBURG_GYM_STATE, 6
 	call_if_eq MauvilleCity_Gym_EventScript_271E84
 	setvar VAR_0x8008, 3
-	call MauvilleCity_Gym_EventScript_271F43
+	call Common_EventScript_SetGymTrainers
 	special MauvilleGymSpecial3
 	special DrawWholeMapView
 	playse SE_KI_GASYAN

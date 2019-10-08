@@ -8,7 +8,7 @@
 #include "graphics.h"
 #include "international_string_util.h"
 #include "main.h"
-#include "alloc.h"
+#include "malloc.h"
 #include "menu.h"
 #include "m4a.h"
 #include "overworld.h"
@@ -3889,7 +3889,7 @@ void sub_80C020C(u32 num, u32 value, u32 c, u32 d)
         value = NationalToHoennOrder(num);
     else
         value = num;
-    ConvertIntToDecimalStringN(StringCopy(str, gText_UnkCtrlF908Clear01), value, 2, 3);
+    ConvertIntToDecimalStringN(StringCopy(str, gText_UnkCtrlF908Clear01), value, STR_CONV_MODE_LEADING_ZEROS, 3);
     sub_80BE8DC(str, 0x60, 0x19);
     natNum = NationalPokedexNumToSpecies(num);
     if (natNum)

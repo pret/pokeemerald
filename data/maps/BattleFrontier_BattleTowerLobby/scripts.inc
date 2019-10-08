@@ -304,7 +304,7 @@ BattleFrontier_BattleTowerLobby_EventScript_23EA2A:: @ 823EA2A
 	setvar VAR_TEMP_0, 255
 	compare VAR_RESULT, 0
 	goto_if_eq BattleFrontier_BattleTowerLobby_EventScript_23F0D0
-	incrementgamestat 30
+	incrementgamestat GAME_STAT_ENTERED_BATTLE_TOWER
 	setvar VAR_BRAVO_TRAINER_BATTLE_TOWER_ON, 1
 	goto BattleFrontier_BattleTowerLobby_EventScript_23F0F3
 	end
@@ -384,7 +384,7 @@ BattleFrontier_BattleTowerLobby_EventScript_23EB93:: @ 823EB93
 	setvar VAR_TEMP_0, 255
 	compare VAR_RESULT, 0
 	goto_if_eq BattleFrontier_BattleTowerLobby_EventScript_23F0D0
-	incrementgamestat 30
+	incrementgamestat GAME_STAT_ENTERED_BATTLE_TOWER
 	setvar VAR_BRAVO_TRAINER_BATTLE_TOWER_ON, 0
 	goto BattleFrontier_BattleTowerLobby_EventScript_23F0F3
 	end
@@ -465,7 +465,7 @@ BattleFrontier_BattleTowerLobby_EventScript_23ECFF:: @ 823ECFF
 	setvar VAR_TEMP_0, 255
 	compare VAR_RESULT, 0
 	goto_if_eq BattleFrontier_BattleTowerLobby_EventScript_23F0D0
-	incrementgamestat 30
+	incrementgamestat GAME_STAT_ENTERED_BATTLE_TOWER
 	setvar VAR_BRAVO_TRAINER_BATTLE_TOWER_ON, 0
 	goto BattleFrontier_BattleTowerLobby_EventScript_23F0F3
 	end
@@ -548,7 +548,7 @@ BattleFrontier_BattleTowerLobby_EventScript_23EE68:: @ 823EE68
 	setvar VAR_TEMP_0, 255
 	compare VAR_RESULT, 0
 	goto_if_eq BattleFrontier_BattleTowerLobby_EventScript_23F0D0
-	incrementgamestat 30
+	incrementgamestat GAME_STAT_ENTERED_BATTLE_TOWER
 	specialvar VAR_RESULT, IsWirelessAdapterConnected
 	compare VAR_RESULT, 1
 	goto_if_eq BattleFrontier_BattleTowerLobby_EventScript_23F3E8
@@ -994,7 +994,7 @@ BattleFrontier_BattleTowerLobby_EventScript_23F3A6:: @ 823F3A6
 	return
 
 BattleFrontier_BattleTowerLobby_EventScript_23F3AF:: @ 823F3AF
-	incrementgamestat 30
+	incrementgamestat GAME_STAT_ENTERED_BATTLE_TOWER
 	setvar VAR_BRAVO_TRAINER_BATTLE_TOWER_ON, 0
 	message BattleFrontier_BattleTowerLobby_Text_24144D
 	waitmessage
@@ -1057,7 +1057,7 @@ BattleFrontier_BattleTowerLobby_EventScript_23F463:: @ 823F463
 	return
 
 BattleFrontier_BattleTowerLobby_EventScript_23F496:: @ 823F496
-	incrementgamestat 30
+	incrementgamestat GAME_STAT_ENTERED_BATTLE_TOWER
 	setvar VAR_BRAVO_TRAINER_BATTLE_TOWER_ON, 0
 	message BattleFrontier_BattleTowerLobby_Text_24144D
 	waitmessage

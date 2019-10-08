@@ -13,8 +13,8 @@
 #define MULTI_ENTERINFO                    2
 #define MULTI_CONTEST_INFO                 3
 #define MULTI_CONTEST_TYPE                 4
-#define MULTI_DECOR_NOREGISTRY             5
-#define MULTI_DECOR_REGISTRY               6
+#define MULTI_BASE_PC_NO_REGISTRY          5
+#define MULTI_BASE_PC_WITH_REGISTRY        6
 #define MULTI_REGISTER_MENU                7
 #define MULTI_SSTIDAL_LILYCOVE             8 // Exit only, populated by CreateLilycoveSSTidalMultichoice
 #define MULTI_UNUSED_9                     9

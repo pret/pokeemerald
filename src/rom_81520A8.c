@@ -1,6 +1,6 @@
 #include "global.h"
 #include "rom_81520A8.h"
-#include "alloc.h"
+#include "malloc.h"
 #include "main.h"
 #include "rom_8034C54.h"
 

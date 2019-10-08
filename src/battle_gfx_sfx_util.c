@@ -6,7 +6,7 @@
 #include "constants/battle_anim.h"
 #include "battle_interface.h"
 #include "main.h"
-#include "alloc.h"
+#include "malloc.h"
 #include "graphics.h"
 #include "random.h"
 #include "util.h"

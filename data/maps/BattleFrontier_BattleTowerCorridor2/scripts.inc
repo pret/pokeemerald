@@ -36,7 +36,7 @@ BattleFrontier_BattleTowerCorridor2_EventScript_248D9F:: @ 8248D9F
 	hideobjectat EVENT_OBJ_ID_PLAYER, MAP_BATTLE_FRONTIER_BATTLE_TOWER_CORRIDOR2
 	hideobjectat 1, MAP_BATTLE_FRONTIER_BATTLE_TOWER_CORRIDOR2
 	hideobjectat 4, MAP_BATTLE_FRONTIER_BATTLE_TOWER_CORRIDOR2
-	special sub_8139980
+	special OffsetCameraForBattle
 	end
 
 BattleFrontier_BattleTowerCorridor2_MapScript2_248DB2: @ 8248DB2

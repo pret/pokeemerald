@@ -47,7 +47,7 @@ Route112_CableCarStation_EventScript_22AB38:: @ 822AB38
 	waitmovement 0
 	setvar VAR_0x8004, 0
 	setvar VAR_CABLE_CAR_STATION_STATE, 1
-	incrementgamestat 48
+	incrementgamestat GAME_STAT_RODE_CABLE_CAR
 	special CableCarWarp
 	special CableCar
 	waitstate

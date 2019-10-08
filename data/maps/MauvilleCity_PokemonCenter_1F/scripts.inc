@@ -5,7 +5,7 @@ MauvilleCity_PokemonCenter_1F_MapScripts:: @ 8210E5B
 
 MauvilleCity_PokemonCenter_1F_OnTransition: @ 8210E66
 	setrespawn HEAL_LOCATION_MAUVILLE_CITY
-	call MauvilleCity_PokemonCenter_1F_EventScript_2718DE
+	call Common_EventScript_UpdateBrineyLocation
 	goto MauvilleCity_PokemonCenter_1F_EventScript_210E74
 	end
 
@@ -15,7 +15,7 @@ MauvilleCity_PokemonCenter_1F_EventScript_210E74:: @ 8210E74
 
 MauvilleCity_PokemonCenter_1F_EventScript_210E78:: @ 8210E78
 	setvar VAR_0x800B, 1
-	call MauvilleCity_PokemonCenter_1F_EventScript_27191E
+	call Common_EventScript_PkmnCenterNurse
 	waitmessage
 	waitbuttonpress
 	release

@@ -7,8 +7,8 @@ LavaridgeTown_OnTransition: @ 81EA4DE
 	setflag FLAG_VISITED_LAVARIDGE_TOWN
 	call_if_set FLAG_FLANNERY_GIVES_BADGE_INFO, LavaridgeTown_EventScript_1EA514
 	call_if_set FLAG_DEFEATED_EVIL_TEAM_MT_CHIMNEY, LavaridgeTown_EventScript_1EA53F
-	call Common_EventScript_SetupRivalGender
-	call Common_EventScript_SetupRivalOnBikeGender
+	call Common_EventScript_SetupRivalGfxId
+	call Common_EventScript_SetupRivalOnBikeGfxId
 	compare VAR_LAVARIDGE_TOWN_STATE, 1
 	call_if_eq LavaridgeTown_EventScript_1EA518
 	compare VAR_LAVARIDGE_TOWN_STATE, 1
@@ -216,7 +216,7 @@ LavaridgeTown_EventScript_1EA6FA:: @ 81EA6FA
 	end
 
 LavaridgeTown_EventScript_1EA70B:: @ 81EA70B
-	incrementgamestat 49
+	incrementgamestat GAME_STAT_ENTERED_HOT_SPRINGS
 	end
 
 LavaridgeTown_EventScript_1EA70E:: @ 81EA70E

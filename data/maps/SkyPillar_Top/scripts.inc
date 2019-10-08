@@ -104,19 +104,19 @@ SkyPillar_Top_EventScript_23979A:: @ 823979A
 	waitmovement 0
 	waitse
 	playmoncry SPECIES_RAYQUAZA, 2
-	setvar VAR_0x8004, 1
-	setvar VAR_0x8005, 1
-	setvar VAR_0x8006, 8
-	setvar VAR_0x8007, 3
-	special sub_8139560
+	setvar VAR_0x8004, 1  @ vertical pan
+	setvar VAR_0x8005, 1  @ horizontal pan
+	setvar VAR_0x8006, 8  @ num shakes
+	setvar VAR_0x8007, 3  @ shake delay
+	special ShakeCamera
 	waitstate
 	waitse
 	playmoncry SPECIES_RAYQUAZA, 2
-	setvar VAR_0x8004, 1
-	setvar VAR_0x8005, 2
-	setvar VAR_0x8006, 8
-	setvar VAR_0x8007, 5
-	special sub_8139560
+	setvar VAR_0x8004, 1  @ vertical pan
+	setvar VAR_0x8005, 2  @ horizontal pan
+	setvar VAR_0x8006, 8  @ num shakes
+	setvar VAR_0x8007, 5  @ shake delay
+	special ShakeCamera
 	waitstate
 	waitmoncry
 	applymovement 1, SkyPillar_Top_Movement_23984B

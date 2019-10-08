@@ -228,11 +228,11 @@ SootopolisCity_EventScript_1E5946:: @ 81E5946
 	applymovement 10, SootopolisCity_Movement_1E5BB8
 	applymovement 9, SootopolisCity_Movement_1E5BE5
 	waitmovement 0
-	setvar VAR_0x8004, 1
-	setvar VAR_0x8005, 1
-	setvar VAR_0x8006, 8
-	setvar VAR_0x8007, 5
-	special sub_8139560
+	setvar VAR_0x8004, 1  @ vertical pan
+	setvar VAR_0x8005, 1  @ horizontal pan
+	setvar VAR_0x8006, 8  @ num shakes
+	setvar VAR_0x8007, 5  @ shake delay
+	special ShakeCamera
 	waitstate
 	applymovement 10, SootopolisCity_Movement_1E5BCF
 	applymovement 9, SootopolisCity_Movement_1E5BF0
@@ -242,11 +242,11 @@ SootopolisCity_EventScript_1E5946:: @ 81E5946
 	applymovement 10, SootopolisCity_Movement_1E5BC2
 	applymovement 9, SootopolisCity_Movement_1E5BDD
 	waitmovement 0
-	setvar VAR_0x8004, 1
-	setvar VAR_0x8005, 1
-	setvar VAR_0x8006, 8
-	setvar VAR_0x8007, 5
-	special sub_8139560
+	setvar VAR_0x8004, 1  @ vertical pan
+	setvar VAR_0x8005, 1  @ horizontal pan
+	setvar VAR_0x8006, 8  @ num shakes
+	setvar VAR_0x8007, 5  @ shake delay
+	special ShakeCamera
 	waitstate
 	applymovement 10, SootopolisCity_Movement_1E5BCF
 	applymovement 9, SootopolisCity_Movement_1E5BF0
@@ -256,11 +256,11 @@ SootopolisCity_EventScript_1E5946:: @ 81E5946
 	applymovement 10, SootopolisCity_Movement_1E5BB8
 	applymovement 9, SootopolisCity_Movement_1E5BE5
 	waitmovement 0
-	setvar VAR_0x8004, 1
-	setvar VAR_0x8005, 1
-	setvar VAR_0x8006, 8
-	setvar VAR_0x8007, 5
-	special sub_8139560
+	setvar VAR_0x8004, 1  @ vertical pan
+	setvar VAR_0x8005, 1  @ horizontal pan
+	setvar VAR_0x8006, 8  @ num shakes
+	setvar VAR_0x8007, 5  @ shake delay
+	special ShakeCamera
 	waitstate
 	applymovement 10, SootopolisCity_Movement_1E5BCF
 	applymovement 9, SootopolisCity_Movement_1E5BF0
@@ -328,11 +328,11 @@ SootopolisCity_EventScript_1E5A82:: @ 81E5A82
 	applymovement 10, SootopolisCity_Movement_1E5BB8
 	applymovement 9, SootopolisCity_Movement_1E5BE5
 	waitmovement 0
-	setvar VAR_0x8004, 1
-	setvar VAR_0x8005, 1
-	setvar VAR_0x8006, 8
-	setvar VAR_0x8007, 5
-	special sub_8139560
+	setvar VAR_0x8004, 1  @ vertical pan
+	setvar VAR_0x8005, 1  @ horizontal pan
+	setvar VAR_0x8006, 8  @ num shakes
+	setvar VAR_0x8007, 5  @ shake delay
+	special ShakeCamera
 	waitstate
 	applymovement 10, SootopolisCity_Movement_1E5BCF
 	applymovement 9, SootopolisCity_Movement_1E5BF0
@@ -342,11 +342,11 @@ SootopolisCity_EventScript_1E5A82:: @ 81E5A82
 	applymovement 10, SootopolisCity_Movement_1E5BC2
 	applymovement 9, SootopolisCity_Movement_1E5BDD
 	waitmovement 0
-	setvar VAR_0x8004, 1
-	setvar VAR_0x8005, 1
-	setvar VAR_0x8006, 8
-	setvar VAR_0x8007, 5
-	special sub_8139560
+	setvar VAR_0x8004, 1  @ vertical pan
+	setvar VAR_0x8005, 1  @ horizontal pan
+	setvar VAR_0x8006, 8  @ num shakes
+	setvar VAR_0x8007, 5  @ shake delay
+	special ShakeCamera
 	waitstate
 	applymovement 10, SootopolisCity_Movement_1E5BCF
 	applymovement 9, SootopolisCity_Movement_1E5BF0
@@ -356,11 +356,11 @@ SootopolisCity_EventScript_1E5A82:: @ 81E5A82
 	applymovement 10, SootopolisCity_Movement_1E5BB8
 	applymovement 9, SootopolisCity_Movement_1E5BE5
 	waitmovement 0
-	setvar VAR_0x8004, 1
-	setvar VAR_0x8005, 1
-	setvar VAR_0x8006, 8
-	setvar VAR_0x8007, 5
-	special sub_8139560
+	setvar VAR_0x8004, 1  @ vertical pan
+	setvar VAR_0x8005, 1  @ horizontal pan
+	setvar VAR_0x8006, 8  @ num shakes
+	setvar VAR_0x8007, 5  @ shake delay
+	special ShakeCamera
 	waitstate
 	applymovement 10, SootopolisCity_Movement_1E5BCF
 	applymovement 9, SootopolisCity_Movement_1E5BF0
@@ -517,19 +517,19 @@ SootopolisCity_EventScript_1E5C1E:: @ 81E5C1E
 	waitmovement 0
 	waitse
 	playmoncry SPECIES_RAYQUAZA, 2
-	setvar VAR_0x8004, 1
-	setvar VAR_0x8005, 1
-	setvar VAR_0x8006, 8
-	setvar VAR_0x8007, 3
-	special sub_8139560
+	setvar VAR_0x8004, 1  @ vertical pan
+	setvar VAR_0x8005, 1  @ horizontal pan
+	setvar VAR_0x8006, 8  @ num shakes
+	setvar VAR_0x8007, 3  @ shake delay
+	special ShakeCamera
 	waitstate
 	waitse
 	playmoncry SPECIES_RAYQUAZA, 2
-	setvar VAR_0x8004, 1
-	setvar VAR_0x8005, 2
-	setvar VAR_0x8006, 8
-	setvar VAR_0x8007, 5
-	special sub_8139560
+	setvar VAR_0x8004, 1  @ vertical pan
+	setvar VAR_0x8005, 2  @ horizontal pan
+	setvar VAR_0x8006, 8  @ num shakes
+	setvar VAR_0x8007, 5  @ shake delay
+	special ShakeCamera
 	waitstate
 	waitmoncry
 	setweather WEATHER_NONE
@@ -570,19 +570,19 @@ SootopolisCity_EventScript_1E5CCE:: @ 81E5CCE
 	waitmovement 0
 	waitse
 	playmoncry SPECIES_RAYQUAZA, 2
-	setvar VAR_0x8004, 1
-	setvar VAR_0x8005, 1
-	setvar VAR_0x8006, 8
-	setvar VAR_0x8007, 3
-	special sub_8139560
+	setvar VAR_0x8004, 1  @ vertical pan
+	setvar VAR_0x8005, 1  @ horizontal pan
+	setvar VAR_0x8006, 8  @ num shakes
+	setvar VAR_0x8007, 3  @ shake delay
+	special ShakeCamera
 	waitstate
 	waitse
 	playmoncry SPECIES_RAYQUAZA, 2
-	setvar VAR_0x8004, 1
-	setvar VAR_0x8005, 2
-	setvar VAR_0x8006, 8
-	setvar VAR_0x8007, 5
-	special sub_8139560
+	setvar VAR_0x8004, 1  @ vertical pan
+	setvar VAR_0x8005, 2  @ horizontal pan
+	setvar VAR_0x8006, 8  @ num shakes
+	setvar VAR_0x8007, 5  @ shake delay
+	special ShakeCamera
 	waitstate
 	waitmoncry
 	setweather WEATHER_NONE

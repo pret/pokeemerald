@@ -15,7 +15,7 @@ EverGrandeCity_PokemonCenter_1F_EventScript_229A4C:: @ 8229A4C
 
 EverGrandeCity_PokemonCenter_1F_EventScript_229A59:: @ 8229A59
 	setvar VAR_0x800B, 1
-	call EverGrandeCity_PokemonCenter_1F_EventScript_27191E
+	call Common_EventScript_PkmnCenterNurse
 	waitmessage
 	waitbuttonpress
 	release

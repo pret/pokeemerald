@@ -5,8 +5,8 @@ GraniteCave_StevensRoom_EventScript_22DC7B:: @ 822DC7B
 	lock
 	faceplayer
 	msgbox GraniteCave_StevensRoom_Text_22DD5A, MSGBOX_DEFAULT
-	setvar VAR_0x8004, 274
-	call GraniteCave_StevensRoom_EventScript_2723E4
+	setvar VAR_0x8004, ITEM_LETTER
+	call Common_EventScript_PlayerHandedOverTheItem
 	setflag FLAG_DELIVERED_STEVEN_LETTER
 	msgbox GraniteCave_StevensRoom_Text_22DDBD, MSGBOX_DEFAULT
 	giveitem_std ITEM_TM47

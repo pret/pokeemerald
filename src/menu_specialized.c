@@ -1,5 +1,5 @@
 #include "global.h"
-#include "alloc.h"
+#include "malloc.h"
 #include "battle_main.h"
 #include "contest_effect.h"
 #include "data.h"
@@ -761,7 +761,7 @@ static void MoveRelearnerLoadBattleMoveDescription(u32 chosenMove)
     AddTextPrinterParameterized(0, 1, str, 4, 0x19, TEXT_SPEED_FF, NULL);
 
     x = 4 + GetStringWidth(1, gText_MoveRelearnerPP, 0);
-    ConvertIntToDecimalStringN(buffer, move->pp, 0, 2);
+    ConvertIntToDecimalStringN(buffer, move->pp, STR_CONV_MODE_LEFT_ALIGN, 2);
     AddTextPrinterParameterized(0, 1, buffer, x, 0x29, TEXT_SPEED_FF, NULL);
 
     if (move->power < 2)
@@ -770,7 +770,7 @@ static void MoveRelearnerLoadBattleMoveDescription(u32 chosenMove)
     }
     else
     {
-        ConvertIntToDecimalStringN(buffer, move->power, 0, 3);
+        ConvertIntToDecimalStringN(buffer, move->power, STR_CONV_MODE_LEFT_ALIGN, 3);
         str = buffer;
     }
     AddTextPrinterParameterized(0, 1, str, 0x6A, 0x19, TEXT_SPEED_FF, NULL);
@@ -781,7 +781,7 @@ static void MoveRelearnerLoadBattleMoveDescription(u32 chosenMove)
     }
     else
     {
-        ConvertIntToDecimalStringN(buffer, move->accuracy, 0, 3);
+        ConvertIntToDecimalStringN(buffer, move->accuracy, STR_CONV_MODE_LEFT_ALIGN, 3);
         str = buffer;
     }
     AddTextPrinterParameterized(0, 1, str, 0x6A, 0x29, TEXT_SPEED_FF, NULL);

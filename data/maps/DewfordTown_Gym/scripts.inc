@@ -177,7 +177,7 @@ DewfordTown_Gym_EventScript_1FC7F7:: @ 81FC7F7
 	compare VAR_PETALBURG_GYM_STATE, 6
 	call_if_eq DewfordTown_Gym_EventScript_271E84
 	setvar VAR_0x8008, 2
-	call DewfordTown_Gym_EventScript_271F43
+	call Common_EventScript_SetGymTrainers
 	call DewfordTown_Gym_EventScript_1FC855
 	closemessage
 	delay 30

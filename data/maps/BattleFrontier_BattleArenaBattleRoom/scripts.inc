@@ -6,7 +6,7 @@ BattleFrontier_BattleArenaBattleRoom_MapScripts:: @ 8257487
 	.byte 0
 
 BattleFrontier_BattleArenaBattleRoom_MapScript1_25749C: @ 825749C
-	special sub_8139980
+	special OffsetCameraForBattle
 	end
 
 BattleFrontier_BattleArenaBattleRoom_MapScript1_2574A0: @ 82574A0

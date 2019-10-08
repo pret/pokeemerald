@@ -1,6 +1,6 @@
 #include "global.h"
 #include "crt0.h"
-#include "alloc.h"
+#include "malloc.h"
 #include "link.h"
 #include "link_rfu.h"
 #include "librfu.h"

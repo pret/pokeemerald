@@ -10,7 +10,7 @@
 #include "string_util.h"
 #include "palette.h"
 #include "save.h"
-#include "alloc.h"
+#include "malloc.h"
 #include "util.h"
 #include "task.h"
 #include "text.h"

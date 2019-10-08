@@ -4,7 +4,7 @@ Route103_MapScripts:: @ 81EC38E
 	.byte 0
 
 Route103_OnTransition: @ 81EC399
-	call Common_EventScript_SetupRivalGender
+	call Common_EventScript_SetupRivalGfxId
 	call Route103_EventScript_2720AD
 	end
 

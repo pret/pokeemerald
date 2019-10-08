@@ -33,7 +33,7 @@ FortreeCity_Gym_EventScript_2165FD:: @ 82165FD
 	setflag FLAG_DEFEATED_FORTREE_GYM
 	setflag FLAG_BADGE06_GET
 	setvar VAR_0x8008, 6
-	call FortreeCity_Gym_EventScript_271F43
+	call Common_EventScript_SetGymTrainers
 	call FortreeCity_Gym_EventScript_21666A
 	closemessage
 	delay 30

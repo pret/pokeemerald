@@ -22,8 +22,8 @@ Route102_EventScript_1EC105:: @ 81EC105
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
 	goto_if_eq Route102_EventScript_1EC19C
-	setvar VAR_0x8004, 318
-	specialvar VAR_RESULT, sub_813B4E0
+	setvar VAR_0x8004, TRAINER_CALVIN_1
+	specialvar VAR_RESULT, IsTrainerRegistered
 	compare VAR_RESULT, 0
 	goto_if_eq Route102_EventScript_1EC170
 	msgbox Route102_Text_2945AC, MSGBOX_DEFAULT

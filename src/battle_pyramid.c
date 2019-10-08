@@ -23,7 +23,7 @@
 #include "main.h"
 #include "load_save.h"
 #include "script.h"
-#include "alloc.h"
+#include "malloc.h"
 #include "overworld.h"
 #include "event_scripts.h"
 #include "constants/battle_frontier.h"

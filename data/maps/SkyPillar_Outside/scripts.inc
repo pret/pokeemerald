@@ -41,11 +41,11 @@ SkyPillar_Outside_EventScript_239304:: @ 8239304
 	msgbox SkyPillar_Outside_Text_239416, MSGBOX_DEFAULT
 	closemessage
 	delay 30
-	setvar VAR_0x8004, 1
-	setvar VAR_0x8005, 1
-	setvar VAR_0x8006, 8
-	setvar VAR_0x8007, 3
-	special sub_8139560
+	setvar VAR_0x8004, 1  @ vertical pan
+	setvar VAR_0x8005, 1  @ horizontal pan
+	setvar VAR_0x8006, 8  @ num shakes
+	setvar VAR_0x8007, 3  @ shake delay
+	special ShakeCamera
 	waitstate
 	delay 40
 	msgbox SkyPillar_Outside_Text_2394BC, MSGBOX_DEFAULT
@@ -53,11 +53,11 @@ SkyPillar_Outside_EventScript_239304:: @ 8239304
 	applymovement EVENT_OBJ_ID_PLAYER, SkyPillar_Outside_Movement_2393EB
 	applymovement 1, SkyPillar_Outside_Movement_2393DE
 	waitmovement 0
-	setvar VAR_0x8004, 1
-	setvar VAR_0x8005, 3
-	setvar VAR_0x8006, 20
-	setvar VAR_0x8007, 5
-	special sub_8139560
+	setvar VAR_0x8004, 1   @ vertical pan
+	setvar VAR_0x8005, 3   @ horizontal pan
+	setvar VAR_0x8006, 20  @ num shakes
+	setvar VAR_0x8007, 5   @ shake delay
+	special ShakeCamera
 	waitstate
 	delay 20
 	applymovement 1, Common_Movement_WalkInPlaceLeft

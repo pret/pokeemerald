@@ -124,12 +124,12 @@ DewfordTown_EventScript_1E9660:: @ 81E9660
 	applymovement EVENT_OBJ_ID_PLAYER, DewfordTown_Movement_1E9911
 	waitmovement 0
 	hideobjectat EVENT_OBJ_ID_PLAYER, MAP_DEWFORD_TOWN
-	call DewfordTown_EventScript_2720A0
+	call Common_EventScript_PlayBrineysBoatMusic
 	applymovement 4, DewfordTown_Movement_1E97A2
 	applymovement EVENT_OBJ_ID_PLAYER, DewfordTown_Movement_1E97A2
 	waitmovement 0
 	showobjectat EVENT_OBJ_ID_PLAYER, MAP_ROUTE104
-	call DewfordTown_EventScript_2720A8
+	call Common_EventScript_StopBrineysBoatMusic
 	applymovement EVENT_OBJ_ID_PLAYER, DewfordTown_Movement_1E9914
 	waitmovement 0
 	showobjectat EVENT_OBJ_ID_PLAYER, MAP_ROUTE104
@@ -156,11 +156,11 @@ DewfordTown_EventScript_1E96E7:: @ 81E96E7
 	applymovement EVENT_OBJ_ID_PLAYER, DewfordTown_Movement_1E9911
 	waitmovement 0
 	hideobjectat EVENT_OBJ_ID_PLAYER, MAP_DEWFORD_TOWN
-	call DewfordTown_EventScript_2720A0
+	call Common_EventScript_PlayBrineysBoatMusic
 	applymovement 4, DewfordTown_Movement_1E9865
 	applymovement EVENT_OBJ_ID_PLAYER, DewfordTown_Movement_1E9865
 	waitmovement 0
-	call DewfordTown_EventScript_2720A8
+	call Common_EventScript_StopBrineysBoatMusic
 	showobjectat EVENT_OBJ_ID_PLAYER, MAP_ROUTE109
 	applymovement EVENT_OBJ_ID_PLAYER, DewfordTown_Movement_1E9918
 	waitmovement 0
@@ -619,7 +619,7 @@ DewfordTown_EventScript_1E9952:: @ 81E9952
 	end
 
 DewfordTown_EventScript_1E997D:: @ 81E997D
-	incrementgamestat 2
+	incrementgamestat GAME_STAT_STARTED_TRENDS
 	compare VAR_0x8004, 0
 	goto_if_eq DewfordTown_EventScript_1E999E
 	msgbox DewfordTown_Text_1EA2AA, MSGBOX_DEFAULT

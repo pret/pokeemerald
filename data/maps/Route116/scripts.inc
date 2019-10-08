@@ -258,8 +258,8 @@ Route116_EventScript_1F2EB7:: @ 81F2EB7
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
 	goto_if_eq Route116_EventScript_1F2F4E
-	setvar VAR_0x8004, 273
-	specialvar VAR_RESULT, sub_813B4E0
+	setvar VAR_0x8004, TRAINER_JERRY_1
+	specialvar VAR_RESULT, IsTrainerRegistered
 	compare VAR_RESULT, 0
 	goto_if_eq Route116_EventScript_1F2F22
 	msgbox Route116_Text_29BD92, MSGBOX_DEFAULT
@@ -311,8 +311,8 @@ Route116_EventScript_1F2F93:: @ 81F2F93
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
 	goto_if_eq Route116_EventScript_1F302A
-	setvar VAR_0x8004, 280
-	specialvar VAR_RESULT, sub_813B4E0
+	setvar VAR_0x8004, TRAINER_KAREN_1
+	specialvar VAR_RESULT, IsTrainerRegistered
 	compare VAR_RESULT, 0
 	goto_if_eq Route116_EventScript_1F2FFE
 	msgbox Route116_Text_29C010, MSGBOX_DEFAULT

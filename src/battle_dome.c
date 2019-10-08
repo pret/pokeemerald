@@ -8,7 +8,7 @@
 #include "event_data.h"
 #include "overworld.h"
 #include "util.h"
-#include "alloc.h"
+#include "malloc.h"
 #include "string_util.h"
 #include "random.h"
 #include "task.h"

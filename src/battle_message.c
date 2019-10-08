@@ -2759,7 +2759,7 @@ static void ExpandBattleTextBuffPlaceholders(const u8 *src, u8 *dst)
                 value = T1_READ_32(&src[srcID + 3]);
                 break;
             }
-            ConvertIntToDecimalStringN(dst, value, 0, src[srcID + 2]);
+            ConvertIntToDecimalStringN(dst, value, STR_CONV_MODE_LEFT_ALIGN, src[srcID + 2]);
             srcID += src[srcID + 1] + 3;
             break;
         case B_BUFF_MOVE: // move name
