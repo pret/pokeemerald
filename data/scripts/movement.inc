@@ -70,7 +70,7 @@ Route121_Movement_2725B8: @ 82725B8
 	walk_in_place_right
 	step_end
 
-EverGrandeCity_SidneysRoom_Movement_2725BA: @ 82725BA
+Common_Movement_WalkUp6: @ 82725BA
 	walk_up
 	walk_up
 	walk_up
@@ -79,14 +79,14 @@ EverGrandeCity_SidneysRoom_Movement_2725BA: @ 82725BA
 	walk_up
 	step_end
 
-EverGrandeCity_ChampionsRoom_Movement_2725C1: @ 82725C1
+Common_Movement_WalkUp4: @ 82725C1
 	walk_up
 	walk_up
 	walk_up
 	walk_up
 	step_end
 
-EverGrandeCity_SidneysRoom_Movement_2725C6: @ 82725C6
+Common_Movement_Delay32: @ 82725C6
 	delay_16
 	delay_16
 	step_end
