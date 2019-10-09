@@ -825,7 +825,7 @@ static const struct SpriteSheet sGlow2SpriteSheet =
     .tag = 5552
 };
 
-static const struct SpriteTemplate gSpriteTemplate_8338DC8 =
+static const struct SpriteTemplate sGlowBallSpriteTemplate =
 {
     .tileTag = 5552,
     .paletteTag = 5551,
@@ -1156,7 +1156,7 @@ static const s8 sTradeBallVerticalVelocityTable[] =
     1,  1,  2,  3
 };
 
-static const u8 gUnknown_08339090[][2] =
+static const u8 sWirelessSignalTiming[][2] =
 {
     {0,  1},
     {1,  1},
@@ -1190,6 +1190,6 @@ static const u8 gUnknown_08339090[][2] =
     {13, 4},
     {14, 5},
     {16, 1},
-    {16, -1},
+    {16, 255},
     {0,  0}
 };

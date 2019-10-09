@@ -60,13 +60,13 @@
 #define LINKCMD_0xAAAA                0xAAAA
 #define LINKCMD_0xAAAB                0xAAAB
 #define LINKCMD_READY_TO_TRADE        0xAABB // used in trade
-#define LINKCMD_0xABCD                0xABCD // used in trade
+#define LINKCMD_READY_FINISH_TRADE    0xABCD // used in trade
 #define LINKCMD_INIT_BLOCK            0xBBBB
 #define LINKCMD_SET_CANCEL_TRADE      0xBBCC // used in trade
 #define LINKCMD_SEND_HELD_KEYS_2      0xCAFE
 #define LINKCMD_0xCCCC                0xCCCC
 #define LINKCMD_START_TRADE           0xCCDD // all below linkcmds used in trade
-#define LINKCMD_0xDCBA                0xDCBA
+#define LINKCMD_CONFIRM_FINISH_TRADE  0xDCBA
 #define LINKCMD_SET_MONS_TO_TRADE     0xDDDD 
 #define LINKCMD_0xDDEE                0xDDEE
 #define LINKCMD_REQUEST_CANCEL        0xEEAA

@@ -21,6 +21,8 @@
 #define CANCEL_TRADE    2
 #define WANTS_TO_TRADE   1
 #define WANTS_TO_CANCEL  2
+#define READY_FINISH_TRADE  1
+#define FINISH_TRADE        2
 
 // Return values for CanTradeSelectedMon
 #define CAN_TRADE_MON           0
