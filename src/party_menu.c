@@ -4974,7 +4974,7 @@ static void party_menu_link_mon_icon_anim(u16 species, u32 pid, struct Struct203
 {
     if (species != SPECIES_NONE)
     {
-        ptr->monSpriteId = CreateMonIcon(species, sub_80D3014, ptr->unk4[0], ptr->unk4[1], 4, pid, bit);
+        ptr->monSpriteId = CreateMonIcon(species, UpdateTradeMonIconFrame, ptr->unk4[0], ptr->unk4[1], 4, pid, bit);
         gSprites[ptr->monSpriteId].oam.priority = priority;
     }
 }

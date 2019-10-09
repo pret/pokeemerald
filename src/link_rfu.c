@@ -3800,7 +3800,7 @@ u8 sub_80104F4(void)
     return gUnknown_03005000.playerCount;
 }
 
-bool8 sub_8010500(void)
+bool8 IsLinkRfuTaskFinished(void)
 {
     if (gUnknown_03005000.unk_f1 == 2)
         return FALSE;

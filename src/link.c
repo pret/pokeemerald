@@ -316,10 +316,10 @@ static void InitLocalLinkPlayer(void)
     gLocalLinkPlayer.language = gGameLanguage;
     gLocalLinkPlayer.version = gGameVersion + 0x4000;
     gLocalLinkPlayer.lp_field_2 = 0x8000;
-    gLocalLinkPlayer.name[8] = IsNationalPokedexEnabled();
+    gLocalLinkPlayer.progressFlags = IsNationalPokedexEnabled();
     if (FlagGet(FLAG_IS_CHAMPION))
     {
-        gLocalLinkPlayer.name[8] |= 0x10;
+        gLocalLinkPlayer.progressFlags |= 0x10;
     }
 }
 
@@ -597,9 +597,9 @@ static void ProcessRecvCmds(u8 unused)
                         *linkPlayer = block->linkPlayer;
                         if ((linkPlayer->version & 0xFF) == VERSION_RUBY || (linkPlayer->version & 0xFF) == VERSION_SAPPHIRE)
                         {
-                            linkPlayer->name[10] = 0;
-                            linkPlayer->name[9] = 0;
-                            linkPlayer->name[8] = 0;
+                            linkPlayer->progressFlagsCopy = 0;
+                            linkPlayer->neverRead = 0;
+                            linkPlayer->progressFlags = 0;
                         }
                         sub_800B524(linkPlayer);
                         if (strcmp(block->magic1, gASCIIGameFreakInc) != 0
@@ -1084,7 +1084,7 @@ bool8 IsLinkTaskFinished(void)
 {
     if (gWirelessCommType == TRUE)
     {
-        return sub_8010500();
+        return IsLinkRfuTaskFinished();
     }
     return gLinkCallback == NULL;
 }
@@ -1909,7 +1909,7 @@ u8 sub_800B518(void)
 
 void sub_800B524(struct LinkPlayer *player)
 {
-    player->name[10] = player->name[8];
+    player->progressFlagsCopy = player->progressFlags;
     ConvertInternationalString(player->name, player->language);
 }
 

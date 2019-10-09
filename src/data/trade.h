@@ -168,13 +168,16 @@ static const struct SpritePalette gSpritePalette_TradeScreenText =
 //  2  3  8  9
 //  4  5 10 11
 //          12
-static const u8 gTradeNextSelectedMonTable[(PARTY_SIZE * 2) + 1][4][6] =
+// 1st array is current position ids
+// 2nd array is directions of input
+// 3rd array is the next position ids to go to, stopping at the first occupied position
+static const u8 sTradeNextSelectedMonTable[(PARTY_SIZE * 2) + 1][4][PARTY_SIZE] =
 {
     {
-        {4,  2,  12, 12, 0,  0},
-        {2,  4,  12, 12, 0,  0},
-        {7,  6,  1,  0,  0,  0},
-        {1,  6,  7,  0,  0,  0}
+        {4,  2,  12, 12, 0,  0}, // UP
+        {2,  4,  12, 12, 0,  0}, // DOWN
+        {7,  6,  1,  0,  0,  0}, // LEFT
+        {1,  6,  7,  0,  0,  0}  // RIGHT
     },
     {
         {5,  3,  12, 12, 0,  0},
@@ -339,12 +342,12 @@ static const u8 sUnref_0832DE6E[] =
 
 static const u8 *const sTradeActionTexts[] =
 {
-    [TRADE_ACTION_TEXT_CANCEL]       = sText_Cancel,
-    [TRADE_ACTION_TEXT_CHOOSE_MON]   = sText_ChooseAPkmn,
-    [TRADE_ACTION_TEXT_SUMMARY]      = sText_Summary,
-    [TRADE_ACTION_TEXT_TRADE]        = sText_Trade,
-    [TRADE_ACTION_TEXT_CANCEL_TRADE] = sText_CancelTrade,
-    [TRADE_ACTION_TEXT_JP_QUIT]      = sJPText_PressBButtonToQuit
+    [TRADE_TEXT_CANCEL]       = sText_Cancel,
+    [TRADE_TEXT_CHOOSE_MON]   = sText_ChooseAPkmn,
+    [TRADE_TEXT_SUMMARY]      = sText_Summary,
+    [TRADE_TEXT_TRADE]        = sText_Trade,
+    [TRADE_TEXT_CANCEL_TRADE] = sText_CancelTrade,
+    [TRADE_TEXT_JP_QUIT]      = sJPText_PressBButtonToQuit
 };
 
 static const struct MenuAction sSelectTradeMonActions[] =
@@ -626,7 +629,7 @@ static const u16 sTradePal_Black[] = INCBIN_U16("graphics/trade/black.gbapal");
 static const u32 sTradeGfx_WirelessSignal[] = INCBIN_U32("graphics/trade/wireless_signal.4bpp.lz");
 static const u32 sTradeTilemap_WirelessSignal[] = INCBIN_U32("graphics/trade/wireless_signal.bin.lz");
 
-static const struct OamData gOamData_8338C44 =
+static const struct OamData sTradeOamData_16x16 =
 {
     .affineMode = 1,
     .shape = SPRITE_SHAPE(16x16),
@@ -721,14 +724,14 @@ static const struct SpriteTemplate gSpriteTemplate_8338D28 =
 {
     .tileTag = 5557,
     .paletteTag = 5558,
-    .oam = &gOamData_8338C44,
+    .oam = &sTradeOamData_16x16,
     .anims = gSpriteAnimTable_8338C88,
     .images = NULL,
     .affineAnims = gSpriteAffineAnimTable_8338D0C,
     .callback = sub_807E55C
 };
 
-static const struct OamData gOamData_8338D40 =
+static const struct OamData sTradeOamData_32x32 =
 {
     .affineMode = 1,
     .objMode = 1,
@@ -783,14 +786,14 @@ static const struct SpriteTemplate gUnknown_08338D88 =
 {
     .tileTag = 5550,
     .paletteTag = 5551,
-    .oam = &gOamData_8338D40,
+    .oam = &sTradeOamData_32x32,
     .anims = gSpriteAnimTable_8338D50,
     .images = NULL,
     .affineAnims = gSpriteAffineAnimTable_8338D6C,
     .callback = sub_807AA28
 };
 
-static const struct OamData gOamData_8338DA0 =
+static const struct OamData sTradeOamData_16x32 =
 {
     .shape = SPRITE_SHAPE(16x32),
     .size = SPRITE_SIZE(16x32),
@@ -826,14 +829,14 @@ static const struct SpriteTemplate gSpriteTemplate_8338DC8 =
 {
     .tileTag = 5552,
     .paletteTag = 5551,
-    .oam = &gOamData_8338DA0,
+    .oam = &sTradeOamData_16x32,
     .anims = gSpriteAnimTable_8338DB8,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = sub_807AA7C
 };
 
-static const struct OamData gOamData_8338DE0 =
+static const struct OamData sTradeOamData_16x32_2 =
 {
     .shape = SPRITE_SHAPE(16x32),
     .size = SPRITE_SIZE(16x32),
@@ -862,14 +865,14 @@ static const struct SpriteTemplate gSpriteTemplate_8338DFC =
 {
     .tileTag = 5554,
     .paletteTag = 5555,
-    .oam = &gOamData_8338DE0,
+    .oam = &sTradeOamData_16x32_2,
     .anims = gSpriteAnimTable_8338DF0,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = sub_807AABC
 };
 
-static const struct OamData gOamData_8338E14 =
+static const struct OamData sTradeOamData_64x32_2 =
 {
     .shape = SPRITE_SHAPE(64x32),
     .size = SPRITE_SIZE(64x32),
@@ -923,7 +926,7 @@ static const struct SpriteTemplate gSpriteTemplate_8338E74 =
 {
     .tileTag = 5556,
     .paletteTag = 5555,
-    .oam = &gOamData_8338E14,
+    .oam = &sTradeOamData_64x32_2,
     .anims = gSpriteAnimTable_8338E64,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
@@ -934,7 +937,7 @@ static const struct SpriteTemplate gSpriteTemplate_8338E8C =
 {
     .tileTag = 5556,
     .paletteTag = 5555,
-    .oam = &gOamData_8338E14,
+    .oam = &sTradeOamData_64x32_2,
     .anims = gSpriteAnimTable_8338E68,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,

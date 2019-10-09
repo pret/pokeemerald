@@ -4,6 +4,8 @@
 #define TRADE_PLAYER  0
 #define TRADE_PARTNER 1
 
+#define LINK_TRADE_TIMEOUT 300
+
 // In-game Trade IDs
 #define INGAME_TRADE_SEEDOT 0
 #define INGAME_TRADE_PLUSLE 1
@@ -15,8 +17,8 @@
 #define PARTNER_MON_INVALID  2
 
 // Flag IDs for sending link data
-#define CHOSE_VALID_MON    1
-#define CHOSE_INVALID_MON  2
+#define INITIATE_TRADE  1
+#define CANCEL_TRADE    2
 #define WANTS_TO_TRADE   1
 #define WANTS_TO_CANCEL  2
 
@@ -29,15 +31,20 @@
 #define CANT_TRADE_EGG2         5
 
 // Indexes for sTradeActionTexts
-#define TRADE_ACTION_TEXT_CANCEL        0
-#define TRADE_ACTION_TEXT_CHOOSE_MON    1
-#define TRADE_ACTION_TEXT_SUMMARY       2
-#define TRADE_ACTION_TEXT_TRADE         3
-#define TRADE_ACTION_TEXT_CANCEL_TRADE  4
-#define TRADE_ACTION_TEXT_JP_QUIT       5
+#define TRADE_TEXT_CANCEL        0
+#define TRADE_TEXT_CHOOSE_MON    1
+#define TRADE_TEXT_SUMMARY       2
+#define TRADE_TEXT_TRADE         3
+#define TRADE_TEXT_CANCEL_TRADE  4
+#define TRADE_TEXT_JP_QUIT       5
 
 #define MENU_ACTION_SUMMARY 0
 #define MENU_ACTION_TRADE   1
+#define MENU_ACTION_CONFIRM_TRADE 0
+#define MENU_ACTION_CANCEL_TRADE  1
+
+#define DRAW_PARTY_BEGIN  1
+#define DRAW_PARTY_FINISH 5
 
 // Message indexes for sTradeMessages
 #define TRADE_MSG_STANDBY                     0
@@ -65,6 +72,27 @@
 #define QUEUE_DELAY_MSG   3
 #define QUEUE_DELAY_DATA  5
 
+// IDs for CallTradeMenuFunc
+#define TRADEMENUFUNC_MAIN_MENU                0
+#define TRADEMENUFUNC_SELECTED_MON             1
+#define TRADEMENUFUNC_SHOW_MON_SUMMARY         2
+#define TRADEMENUFUNC_CONFIRM_OR_CANCEL_TRADE  3
+#define TRADEMENUFUNC_CANCEL_TRADE_PROMPT      4
+#define TRADEMENUFUNC_UNUSED_5                 5
+#define TRADEMENUFUNC_BOTH_MONS_SELECTED       6
+#define TRADEMENUFUNC_CONFIRM_TRADE_PROMPT     7
+#define TRADEMENUFUNC_REDRAW_MAIN_MENU         8
+#define TRADEMENUFUNC_LINK_TRADE_FADE_OUT      9
+#define TRADEMENUFUNC_LINK_TRADE_WAIT_FADE     10
+#define TRADEMENUFUNC_CANCEL_TRADE_1           11
+#define TRADEMENUFUNC_CANCEL_TRADE_2           12
+#define TRADEMENUFUNC_START_LINK_TRADE         13
+#define TRADEMENUFUNC_DELAY_TRADE_CONFIRM      14
+#define TRADEMENUFUNC_UNUSED_15                15
+#define TRADEMENUFUNC_LINK_TRADE_WAIT_QUEUE    16
+#define TRADEMENUFUNC_PARTNER_MON_INVALID      17
+#define TRADEMENUFUNC_STANDBY                  100
+
 // Message indexes for sUnionRoomTradeMessages
 #define UR_TRADE_MSG_NONE                         0
 #define UR_TRADE_MSG_NOT_MON_PARTNER_WANTS        1
@@ -81,8 +109,6 @@
 #define CAN_REGISTER_MON   0
 #define CANT_REGISTER_MON  1
 #define CANT_REGISTER_EGG  2
-
-#define LINK_TRADE_TIMEOUT 300
 
 
 #endif //GUARD_CONSTANTS_TRADE_H

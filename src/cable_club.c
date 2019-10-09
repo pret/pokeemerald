@@ -1093,7 +1093,7 @@ static void sub_80B37FC(u8 taskId)
     case 3:
         if (!gReceivedRemoteLinkPlayers)
         {
-            SetMainCallback2(sub_80773AC);
+            SetMainCallback2(CB2_StartCreateTradeMenu);
             DestroyTask(taskId);
         }
         break;

@@ -1267,15 +1267,15 @@ u8 sub_8013E44(void)
     return ret;
 }
 
-void sub_8013F60(u8 taskId)
+static void Task_CreateTradeMenu(u8 taskId)
 {
-    sub_80773AC();
+    CB2_StartCreateTradeMenu();
     DestroyTask(taskId);
 }
 
 u8 sub_8013F78(void)
 {
-    u8 taskId = CreateTask(sub_8013F60, 0);
+    u8 taskId = CreateTask(Task_CreateTradeMenu, 0);
 
     return taskId;
 }
@@ -1589,7 +1589,7 @@ void sub_8014790(u8 taskId)
             if (gUnknown_02022C2C == 29)
             {
                 DestroyTask(taskId);
-                SetMainCallback2(sub_80773AC);
+                SetMainCallback2(CB2_StartCreateTradeMenu);
             }
             else
             {
