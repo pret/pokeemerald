@@ -1,19 +1,21 @@
-static const u32 sUnref_0832C6A8[] =
+// Exists unused in RS as well
+static const u32 sUnusedStructSizes[] =
 {
-    0x00000F2C,
-    0x00003D88,
-    0x0000001C,
-    0x00000024,
-    0x00000064,
-    0x00000528
+    sizeof(struct SaveBlock2),
+    sizeof(struct SaveBlock1),
+    sizeof(struct MapHeader),
+ // 0x00000530, in RS
+    sizeof(struct MailStruct),  //or EventObject / EventObjectGraphicsInfo
+    sizeof(struct Pokemon),     //or TrainerCard
+    0x00000528  // 0x000004D8, in RS
 };
 
 static const u16 sTradeMovesBoxTilemap[] = INCBIN_U16("graphics/trade/moves_box_map.bin");
 static const u16 sTradePartyBoxTilemap[] = INCBIN_U16("graphics/trade/party_box_map.bin");
 static const u8 sTradeStripesBG2Tilemap[] = INCBIN_U8("graphics/trade/stripes_bg2_map.bin");
 static const u8 sTradeStripesBG3Tilemap[] = INCBIN_U8("graphics/trade/stripes_bg3_map.bin");
-static const u8 sText_EmptyString7[] = _("");
-static const u8 sText_ClrWhtHltTrspntShdwDrkGry[] = _("{COLOR WHITE}{HIGHLIGHT TRANSPARENT}{SHADOW DARK_GREY}");
+static const u8 sText_EmptyString[] = _("");
+static const u8 sText_UnusedTextFormat[] = _("{COLOR WHITE}{HIGHLIGHT TRANSPARENT}{SHADOW DARK_GREY}");
 const u8 gText_MaleSymbol4[] = _("♂");
 const u8 gText_FemaleSymbol4[] = _("♀");
 const u8 gText_GenderlessSymbol[] = _("");
@@ -168,9 +170,9 @@ static const struct SpritePalette gSpritePalette_TradeScreenText =
 //  2  3  8  9
 //  4  5 10 11
 //          12
-// 1st array is current position ids
+// 1st array is the current positions
 // 2nd array is directions of input
-// 3rd array is the next position ids to go to, stopping at the first occupied position
+// 3rd array is the next positions to go to (unoccupied spaces are skipped over)
 static const u8 sTradeNextSelectedMonTable[(PARTY_SIZE * 2) + 1][4][PARTY_SIZE] =
 {
     {
@@ -253,7 +255,7 @@ static const u8 sTradeNextSelectedMonTable[(PARTY_SIZE * 2) + 1][4][PARTY_SIZE] 
     }
 };
 
-static const u8 gTradeMonSpriteCoords[(PARTY_SIZE * 2) + 1][2] =
+static const u8 sTradeMonSpriteCoords[(PARTY_SIZE * 2) + 1][2] =
 {
     // Your party
     {1,  5 },

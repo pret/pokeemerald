@@ -5095,12 +5095,12 @@ void LoadHeldItemIcons(void)
     LoadSpritePalette(&sSpritePalette_HeldItem);
 }
 
-void DrawHeldItemIconsForTrade(u8 *partyCounts, u8 *partySpriteIds, u8 who)
+void DrawHeldItemIconsForTrade(u8 *partyCounts, u8 *partySpriteIds, u8 whichParty)
 {
     u16 i;
     u16 item;
 
-    switch (who)
+    switch (whichParty)
     {
     case TRADE_PLAYER:
         for (i = 0; i < partyCounts[TRADE_PLAYER]; i++)

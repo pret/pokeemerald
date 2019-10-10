@@ -1542,7 +1542,7 @@ static const u8 gHandCursorShadowTiles[] = INCBIN_U8("graphics/pokemon_storage/h
 // code
 void DrawTextWindowAndBufferTiles(const u8 *string, void *dst, u8 zero1, u8 zero2, s32 bytesToBuffer)
 {
-    s32 i, tileBytesToBuffer, val2;
+    s32 i, tileBytesToBuffer, remainingBytes;
     u16 windowId;
     u8 txtColor[3];
     u8 *tileData1, *tileData2;
@@ -1566,7 +1566,7 @@ void DrawTextWindowAndBufferTiles(const u8 *string, void *dst, u8 zero1, u8 zero
     tileBytesToBuffer = bytesToBuffer;
     if (tileBytesToBuffer > 6u)
         tileBytesToBuffer = 6;
-    val2 = bytesToBuffer - 6;
+    remainingBytes = bytesToBuffer - 6;
     if (tileBytesToBuffer > 0)
     {
         for (i = tileBytesToBuffer; i != 0; i--)
@@ -1579,9 +1579,9 @@ void DrawTextWindowAndBufferTiles(const u8 *string, void *dst, u8 zero1, u8 zero
         }
     }
 
-    // Never used. bytesToBuffer is always passed <= 6, so val2 is always zero here
-    if (val2 > 0)
-        CpuFill16((zero2 << 4) | zero2, dst, (u32)(val2) * 0x100);
+    // Never used. bytesToBuffer is always passed <= 6, so remainingBytes is always <= 0 here
+    if (remainingBytes > 0)
+        CpuFill16((zero2 << 4) | zero2, dst, (u32)(remainingBytes) * 0x100);
 
     RemoveWindow(windowId);
 }
