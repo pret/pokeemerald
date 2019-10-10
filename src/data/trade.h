@@ -8,23 +8,23 @@ static const u32 sUnref_0832C6A8[] =
     0x00000528
 };
 
-static const u16 gTradeMovesBoxTilemap[] = INCBIN_U16("graphics/trade/moves_box_map.bin");
-static const u16 gTradePartyBoxTilemap[] = INCBIN_U16("graphics/trade/party_box_map.bin");
-static const u8 gTradeStripesBG2Tilemap[] = INCBIN_U8("graphics/trade/stripes_bg2_map.bin");
-static const u8 gTradeStripesBG3Tilemap[] = INCBIN_U8("graphics/trade/stripes_bg3_map.bin");
-static const u8 gText_EmptyString7[] = _("");
-static const u8 gText_ClrWhtHltTrspntShdwDrkGry[] = _("{COLOR WHITE}{HIGHLIGHT TRANSPARENT}{SHADOW DARK_GREY}");
+static const u16 sTradeMovesBoxTilemap[] = INCBIN_U16("graphics/trade/moves_box_map.bin");
+static const u16 sTradePartyBoxTilemap[] = INCBIN_U16("graphics/trade/party_box_map.bin");
+static const u8 sTradeStripesBG2Tilemap[] = INCBIN_U8("graphics/trade/stripes_bg2_map.bin");
+static const u8 sTradeStripesBG3Tilemap[] = INCBIN_U8("graphics/trade/stripes_bg3_map.bin");
+static const u8 sText_EmptyString7[] = _("");
+static const u8 sText_ClrWhtHltTrspntShdwDrkGry[] = _("{COLOR WHITE}{HIGHLIGHT TRANSPARENT}{SHADOW DARK_GREY}");
 const u8 gText_MaleSymbol4[] = _("♂");
 const u8 gText_FemaleSymbol4[] = _("♀");
 const u8 gText_GenderlessSymbol[] = _("");
-static const u8 gText_SpaceMove[] = _(" MOVE");
-static const u8 gText_NewLine3[] = _("\n");
-static const u8 gText_Slash2[] = _("/");
-static const u8 gText_Lv2[] = _("Lv. ");
-static const u8 gText_ThreeDashes2[] = _("---");
-static const u8 gText_FourQuestionMarks[] = _("????");
-static const u8 gText_832DAE4[] = _("");
-static const u8 gText_IsThisTradeOkay[] = _("Is this trade okay?");
+static const u8 sText_SpaceMove[] = _(" MOVE"); // unused
+static const u8 sText_NewLine[] = _("\n");
+static const u8 sText_Slash[] = _("/");
+static const u8 sText_Lv[] = _("Lv. ");
+static const u8 sText_ThreeDashes[] = _("---");
+static const u8 sText_FourQuestionMarks[] = _("????");
+static const u8 sText_832DAE4[] = _("");
+static const u8 sText_IsThisTradeOkay[] = _("Is this trade okay?");
 static const u8 sText_Cancel[] = _("CANCEL");
 static const u8 sText_ChooseAPkmn[] = _("Choose a POKéMON.");
 static const u8 sText_Summary[] = _("SUMMARY");
@@ -274,7 +274,7 @@ static const u8 gTradeMonSpriteCoords[(PARTY_SIZE * 2) + 1][2] =
     {23, 18} // CANCEL
 };
 
-static const u8 sTradeMonCoords[][PARTY_SIZE][2] =
+static const u8 sTradeMonLevelCoords[][PARTY_SIZE][2] =
 {
     {
         // Your party
@@ -296,7 +296,7 @@ static const u8 sTradeMonCoords[][PARTY_SIZE][2] =
     }
 };
 
-static const u8 sTradeMonBoxDimensions[][PARTY_SIZE][2] =
+static const u8 sTradeMonBoxCoords[][PARTY_SIZE][2] =
 {
     {
         // Your party
@@ -352,8 +352,8 @@ static const u8 *const sTradeActionTexts[] =
 
 static const struct MenuAction sSelectTradeMonActions[] =
 {
-    [MENU_ACTION_SUMMARY] = {sText_Summary2, sub_807A000},
-    [MENU_ACTION_TRADE]   = {sText_Trade2, sub_807A024}
+    {sText_Summary2, Task_DrawSelectionSummary},
+    {sText_Trade2,   Task_DrawSelectionTrade}
 };
 
 static const u8 *const sTradeMessages[] = 

@@ -106,8 +106,8 @@ enum
     EXCHANGE_COMPLETE,
     EXCHANGE_TIMED_OUT,
     EXCHANGE_IN_PROGRESS,
-    EXCHANGE_STAT_4,
-    EXCHANGE_STAT_5,
+    EXCHANGE_PLAYER_NOT_READY,
+    EXCHANGE_PARTNER_NOT_READY,
     EXCHANGE_STAT_6,
     EXCHANGE_STAT_7
 };
@@ -132,7 +132,7 @@ struct LinkPlayer
     /* 0x02 */ u16 lp_field_2;
     /* 0x04 */ u32 trainerId;
     /* 0x08 */ u8 name[PLAYER_NAME_LENGTH + 1];
-    /* 0x10 */ u8 progressFlags; // 0x0F is hasClearedGame, 0xF0 is hasNationalDex
+    /* 0x10 */ u8 progressFlags; // (& 0x0F) is hasNationalDex, (& 0xF0) is hasClearedGame
     /* 0x11 */ u8 neverRead;
     /* 0x12 */ u8 progressFlagsCopy;
     /* 0x13 */ u8 gender;

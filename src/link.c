@@ -28,6 +28,7 @@
 #include "link.h"
 #include "link_rfu.h"
 #include "constants/rgb.h"
+#include "constants/trade.h"
 
 extern u16 gHeldKeyCodeToSend;
 
@@ -862,15 +863,15 @@ u8 GetLinkPlayerDataExchangeStatusTimed(int lower, int upper)
             {
                 if (gLinkPlayers[0].linkType == 0x1133)
                 {
-                    switch (sub_807A728())
+                    switch (GetGameProgressForLinkTrade())
                     {
-                        case 1:
-                            sPlayerDataExchangeStatus = EXCHANGE_STAT_4;
+                        case TRADE_PLAYER_NOT_READY:
+                            sPlayerDataExchangeStatus = EXCHANGE_PLAYER_NOT_READY;
                             break;
-                        case 2:
-                            sPlayerDataExchangeStatus = EXCHANGE_STAT_5;
+                        case TRADE_PARTNER_NOT_READY:
+                            sPlayerDataExchangeStatus = EXCHANGE_PARTNER_NOT_READY;
                             break;
-                        case 0:
+                        case TRADE_BOTH_PLAYERS_READY:
                             sPlayerDataExchangeStatus = EXCHANGE_COMPLETE;
                             break;
                     }

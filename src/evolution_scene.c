@@ -438,7 +438,7 @@ static void CB2_TradeEvolutionSceneLoadGraphics(void)
             gSprites[ID].callback = SpriteCallbackDummy_2;
             gSprites[ID].oam.paletteNum = 2;
             gMain.state++;
-            sub_807B154();
+            LinkTradeDrawWindow();
         }
         break;
     case 6:
@@ -452,7 +452,7 @@ static void CB2_TradeEvolutionSceneLoadGraphics(void)
         break;
     case 7:
         BeginNormalPaletteFade(0xFFFFFFFF, 0, 0x10, 0, RGB_BLACK);
-        sub_807B140();
+        InitTradeSequenceBgGpuRegs();
         ShowBg(0);
         ShowBg(1);
         SetMainCallback2(CB2_TradeEvolutionSceneUpdate);

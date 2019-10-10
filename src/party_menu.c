@@ -4685,15 +4685,15 @@ static void CursorCb_Trade2(u8 taskId)
 {
     PartyMenuRemoveWindow(&gUnknown_0203CEC4->windowId[0]);
     PartyMenuRemoveWindow(&gUnknown_0203CEC4->windowId[1]);
-    switch (sub_807A918(gPlayerParty, gUnknown_0203CEC8.slotId))
+    switch (CanTradeSelectedPartyMenuMon(gPlayerParty, gUnknown_0203CEC8.slotId))
     {
-    case 1:
+    case CANT_TRADE_LAST_MON:
         StringExpandPlaceholders(gStringVar4, gText_OnlyPkmnForBattle);
         break;
-    case 2:
+    case CANT_TRADE_NATIONAL:
         StringExpandPlaceholders(gStringVar4, gText_PkmnCantBeTradedNow);
         break;
-    case 3:
+    case CANT_TRADE_EGG:
         StringExpandPlaceholders(gStringVar4, gText_EggCantBeTradedNow);
         break;
     default:

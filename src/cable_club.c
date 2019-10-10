@@ -123,9 +123,9 @@ static u32 sub_80B2478(u8 lower, u8 upper)
         return 1;
     case EXCHANGE_IN_PROGRESS:
         return 3;
-    case EXCHANGE_STAT_4:
+    case EXCHANGE_PLAYER_NOT_READY:
         return 7;
-    case EXCHANGE_STAT_5:
+    case EXCHANGE_PARTNER_NOT_READY:
         return 9;
     case EXCHANGE_STAT_6:
         ConvertIntToDecimalStringN(gStringVar1, GetLinkPlayerCount_2(), STR_CONV_MODE_LEFT_ALIGN, 1);
