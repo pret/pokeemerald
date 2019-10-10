@@ -34,11 +34,11 @@ SlateportCity_OceanicMuseum_1F_EventScript_20ADC1:: @ 820ADC1
 	end
 
 SlateportCity_OceanicMuseum_1F_EventScript_20ADE8:: @ 820ADE8
-	checkmoney 0x32, 0
+	checkmoney 50, 0
 	compare VAR_RESULT, 0
 	goto_if_eq SlateportCity_OceanicMuseum_1F_EventScript_20AE18
 	playse SE_REGI
-	takemoney 0x32, 0
+	takemoney 50, 0
 	updatemoneybox 0, 0
 	msgbox SlateportCity_OceanicMuseum_1F_Text_20B026, MSGBOX_DEFAULT
 	setvar VAR_SLATEPORT_MUSEUM_1F_STATE, 1
@@ -165,13 +165,13 @@ SlateportCity_OceanicMuseum_1F_EventScript_20AEF8:: @ 820AEF8
 	setflag FLAG_RECEIVED_TM46
 	msgbox SlateportCity_OceanicMuseum_1F_Text_20B449, MSGBOX_DEFAULT
 	closemessage
-	compare VAR_FACING, 2
+	compare VAR_FACING, DIR_NORTH
 	goto_if_eq SlateportCity_OceanicMuseum_1F_EventScript_20AF6C
-	compare VAR_FACING, 1
+	compare VAR_FACING, DIR_SOUTH
 	goto_if_eq SlateportCity_OceanicMuseum_1F_EventScript_20AF83
-	compare VAR_FACING, 3
+	compare VAR_FACING, DIR_WEST
 	goto_if_eq SlateportCity_OceanicMuseum_1F_EventScript_20AF93
-	compare VAR_FACING, 4
+	compare VAR_FACING, DIR_EAST
 	goto_if_eq SlateportCity_OceanicMuseum_1F_EventScript_20AF93
 	end
 

@@ -6,7 +6,7 @@
 #include "constants/battle_anim.h"
 #include "battle_interface.h"
 #include "main.h"
-#include "alloc.h"
+#include "malloc.h"
 #include "graphics.h"
 #include "random.h"
 #include "util.h"
@@ -746,7 +746,7 @@ bool8 BattleInitAllSprites(u8 *state1, u8 *battlerId)
         break;
     case 4:
         InitBattlerHealthboxCoords(*battlerId);
-        if (gBattlerPositions[*battlerId] <= 1)
+        if (gBattlerPositions[*battlerId] <= B_POSITION_OPPONENT_LEFT)
             DummyBattleInterfaceFunc(gHealthboxSpriteIds[*battlerId], FALSE);
         else
             DummyBattleInterfaceFunc(gHealthboxSpriteIds[*battlerId], TRUE);

@@ -97,18 +97,25 @@ int main(int argc, char **argv)
         }
         for (auto include : file.GetIncludes())
         {
+            bool exists = false;
+            std::string path("");
             for (auto includeDir : includeDirs)
             {
-                std::string path(includeDir + include);
+                path = includeDir + include;
                 if (CanOpenFile(path))
                 {
-                    bool inserted = dependencies.insert(path).second;
-                    if (inserted)
-                    {
-                        filesToProcess.push(path);
-                    }
+                    exists = true;
                     break;
                 }
+            }
+            if (!exists && file.FileType() == SourceFileType::Asm)
+            {
+                path = include;
+            }
+            bool inserted = dependencies.insert(path).second;
+            if (inserted && exists)
+            {
+                filesToProcess.push(path);
             }
         }
         includeDirs.pop_back();

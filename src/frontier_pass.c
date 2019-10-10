@@ -5,7 +5,7 @@
 #include "battle_anim.h"
 #include "event_data.h"
 #include "recorded_battle.h"
-#include "alloc.h"
+#include "malloc.h"
 #include "sprite.h"
 #include "scanline_effect.h"
 #include "text_window.h"

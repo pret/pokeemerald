@@ -104,7 +104,7 @@ LittlerootTown_BrendansHouse_2F_EventScript_29280F:: @ 829280F
 	return
 
 LittlerootTown_BrendansHouse_2F_EventScript_29283F:: @ 829283F
-	incrementgamestat 45
+	incrementgamestat GAME_STAT_CHECKED_CLOCK
 	fadescreen 1
 	special Special_ViewWallClock
 	waitstate
@@ -374,7 +374,7 @@ LittlerootTown_BrendansHouse_1F_EventScript_292A94:: @ 8292A94
 LittlerootTown_BrendansHouse_1F_EventScript_292A9E:: @ 8292A9E
 	closemessage
 	call Common_EventScript_OutOfCenterPartyHeal
-	incrementgamestat 16
+	incrementgamestat GAME_STAT_RESTED_AT_HOME
 	msgbox LittlerootTown_BrendansHouse_1F_Text_1F7D5C, MSGBOX_DEFAULT
 	release
 	end
@@ -507,7 +507,7 @@ LittlerootTown_MaysHouse_1F_EventScript_292AF2:: @ 8292AF2
 	compare VAR_0x8008, 1
 	call_if_eq LittlerootTown_BrendansHouse_1F_EventScript_292D9D
 	msgbox LittlerootTown_BrendansHouse_1F_Text_1F8351, MSGBOX_DEFAULT
-	multichoice 22, 8, 108, 1
+	multichoice 22, 8, MULTI_TV_LATI, 1
 	copyvar VAR_0x8004, VAR_RESULT
 	special InitRoamer
 	copyvar VAR_ROAMER_POKEMON, VAR_RESULT
@@ -707,3 +707,7 @@ LittlerootTown_BrendansHouse_1F_Movement_292DDE: @ 8292DDE
 	walk_right
 	walk_in_place_fastest_up
 	step_end
+
+EventScript_RunningShoesManual:: @ 8292DE5
+	msgbox LittlerootTown_BrendansHouse_1F_Text_1F7F66, MSGBOX_SIGN
+	end

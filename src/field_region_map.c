@@ -3,7 +3,7 @@
 #include "gpu_regs.h"
 #include "international_string_util.h"
 #include "main.h"
-#include "alloc.h"
+#include "malloc.h"
 #include "menu.h"
 #include "palette.h"
 #include "region_map.h"

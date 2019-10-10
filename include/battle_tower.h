@@ -7,7 +7,7 @@ struct RSBattleTowerRecord
     /*0x01*/ u8 facilityClass;
     /*0x02*/ u16 winStreak;
     /*0x04*/ u8 name[PLAYER_NAME_LENGTH + 1];
-    /*0x0C*/ u8 trainerId[4];
+    /*0x0C*/ u8 trainerId[TRAINER_ID_LENGTH];
     /*0x10*/ u16 greeting[6];
     /*0x1C*/ struct BattleTowerPokemon party[3];
     /*0xA0*/ u32 checksum;
@@ -27,7 +27,7 @@ struct BattleFrontierTrainer
 struct FacilityMon
 {
     u16 species;
-    u16 moves[4];
+    u16 moves[MAX_MON_MOVES];
     u8 itemTableId;
     u8 evSpread;
     u8 nature;

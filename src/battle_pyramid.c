@@ -23,7 +23,7 @@
 #include "main.h"
 #include "load_save.h"
 #include "script.h"
-#include "alloc.h"
+#include "malloc.h"
 #include "overworld.h"
 #include "event_scripts.h"
 #include "constants/battle_frontier.h"
@@ -77,7 +77,7 @@ struct PyramidWildMon
     u16 species;
     u8 lvl;
     u8 abilityNum;
-    u16 moves[4];
+    u16 moves[MAX_MON_MOVES];
 };
 
 struct PyramidFloorTemplate

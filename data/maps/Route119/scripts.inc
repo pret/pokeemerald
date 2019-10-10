@@ -9,14 +9,14 @@ Route119_MapScript1_1F442F: @ 81F442F
 
 Route119_EventScript_1F4439:: @ 81F4439
 	specialvar VAR_RESULT, GetBattleOutcome
-	compare VAR_RESULT, 7
+	compare VAR_RESULT, B_OUTCOME_CAUGHT
 	goto_if_ne Common_EventScript_NopReturn
 	removeobject VAR_LAST_TALKED
 	return
 
 Route119_OnTransition: @ 81F444D
-	call Common_EventScript_SetupRivalGender
-	call Common_EventScript_SetupRivalOnBikeGender
+	call Common_EventScript_SetupRivalGfxId
+	call Common_EventScript_SetupRivalOnBikeGfxId
 	compare VAR_WEATHER_INSTITUTE_STATE, 1
 	call_if_eq Route119_EventScript_1F4466
 	special SetRoute119Weather

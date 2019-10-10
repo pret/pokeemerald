@@ -25,7 +25,7 @@ Route120_EventScript_1F5406:: @ 81F5406
 
 Route120_EventScript_1F5449:: @ 81F5449
 	specialvar VAR_RESULT, GetBattleOutcome
-	compare VAR_RESULT, 7
+	compare VAR_RESULT, B_OUTCOME_CAUGHT
 	goto_if_ne Common_EventScript_NopReturn
 	removeobject 30
 	removeobject 36
@@ -33,7 +33,7 @@ Route120_EventScript_1F5449:: @ 81F5449
 
 Route120_EventScript_1F5460:: @ 81F5460
 	specialvar VAR_RESULT, GetBattleOutcome
-	compare VAR_RESULT, 7
+	compare VAR_RESULT, B_OUTCOME_CAUGHT
 	goto_if_ne Common_EventScript_NopReturn
 	removeobject VAR_LAST_TALKED
 	return
@@ -120,27 +120,27 @@ Route120_EventScript_1F5527:: @ 81F5527
 	end
 
 Route120_EventScript_1F55CA:: @ 81F55CA
-	setvar VAR_0x8004, 143
+	setvar VAR_0x8004, ITEM_FIGY_BERRY
 	goto Route120_EventScript_1F5601
 	end
 
 Route120_EventScript_1F55D5:: @ 81F55D5
-	setvar VAR_0x8004, 144
+	setvar VAR_0x8004, ITEM_WIKI_BERRY
 	goto Route120_EventScript_1F5601
 	end
 
 Route120_EventScript_1F55E0:: @ 81F55E0
-	setvar VAR_0x8004, 145
+	setvar VAR_0x8004, ITEM_MAGO_BERRY
 	goto Route120_EventScript_1F5601
 	end
 
 Route120_EventScript_1F55EB:: @ 81F55EB
-	setvar VAR_0x8004, 146
+	setvar VAR_0x8004, ITEM_AGUAV_BERRY
 	goto Route120_EventScript_1F5601
 	end
 
 Route120_EventScript_1F55F6:: @ 81F55F6
-	setvar VAR_0x8004, 147
+	setvar VAR_0x8004, ITEM_IAPAPA_BERRY
 	goto Route120_EventScript_1F5601
 	end
 
@@ -192,9 +192,9 @@ Route120_EventScript_1F5672:: @ 81F5672
 Route120_EventScript_1F568B:: @ 81F568B
 	msgbox Route120_Text_1F5B0F, MSGBOX_DEFAULT
 	closemessage
-	compare VAR_FACING, 2
+	compare VAR_FACING, DIR_NORTH
 	call_if_eq Route120_EventScript_1F57A3
-	compare VAR_FACING, 3
+	compare VAR_FACING, DIR_WEST
 	call_if_eq Route120_EventScript_1F57AE
 	applymovement 31, Common_Movement_WalkInPlaceLeft
 	waitmovement 0
@@ -215,11 +215,11 @@ Route120_EventScript_1F568B:: @ 81F568B
 	dowildbattle
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
 	specialvar VAR_RESULT, GetBattleOutcome
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, B_OUTCOME_WON
 	goto_if_eq Route120_EventScript_1F571C
-	compare VAR_RESULT, 4
+	compare VAR_RESULT, B_OUTCOME_RAN
 	goto_if_eq Route120_EventScript_1F571C
-	compare VAR_RESULT, 5
+	compare VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED
 	goto_if_eq Route120_EventScript_1F571C
 	goto Route120_EventScript_1F572C
 	end

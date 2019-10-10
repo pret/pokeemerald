@@ -7,7 +7,7 @@
 #include "decompress.h"
 #include "dma3.h"
 #include "gpu_regs.h"
-#include "alloc.h"
+#include "malloc.h"
 #include "palette.h"
 #include "pokemon_icon.h"
 #include "sprite.h"

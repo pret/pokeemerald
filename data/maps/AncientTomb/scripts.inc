@@ -10,7 +10,7 @@ AncientTomb_MapScript1_238FC3: @ 8238FC3
 
 AncientTomb_EventScript_238FCD:: @ 8238FCD
 	specialvar VAR_RESULT, GetBattleOutcome
-	compare VAR_RESULT, 7
+	compare VAR_RESULT, B_OUTCOME_CAUGHT
 	goto_if_ne Common_EventScript_NopReturn
 	removeobject VAR_LAST_TALKED
 	return
@@ -47,7 +47,7 @@ AncientTomb_EventScript_239033:: @ 8239033
 	end
 
 AncientTomb_EventScript_239046:: @ 8239046
-	msgbox gUnknown_0827304E, MSGBOX_DEFAULT
+	msgbox gText_BigHoleInTheWall, MSGBOX_DEFAULT
 	releaseall
 	end
 
@@ -72,11 +72,11 @@ AncientTomb_EventScript_23905A:: @ 823905A
 	waitstate
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
 	specialvar VAR_RESULT, GetBattleOutcome
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, B_OUTCOME_WON
 	goto_if_eq AncientTomb_EventScript_2390A1
-	compare VAR_RESULT, 4
+	compare VAR_RESULT, B_OUTCOME_RAN
 	goto_if_eq AncientTomb_EventScript_2390AA
-	compare VAR_RESULT, 5
+	compare VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED
 	goto_if_eq AncientTomb_EventScript_2390AA
 	setflag FLAG_DEFEATED_REGISTEEL
 	release
@@ -84,11 +84,11 @@ AncientTomb_EventScript_23905A:: @ 823905A
 
 AncientTomb_EventScript_2390A1:: @ 82390A1
 	setflag FLAG_DEFEATED_REGISTEEL
-	goto AncientTomb_EventScript_27376D
+	goto Common_EventScript_RemoveStaticPokemon
 	end
 
 AncientTomb_EventScript_2390AA:: @ 82390AA
-	setvar VAR_0x8004, 403
-	goto AncientTomb_EventScript_273776
+	setvar VAR_0x8004, SPECIES_REGISTEEL
+	goto Common_EventScript_LegendaryFlewAway
 	end
 

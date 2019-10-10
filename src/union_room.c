@@ -1,5 +1,5 @@
 #include "global.h"
-#include "alloc.h"
+#include "malloc.h"
 #include "battle.h"
 #include "berry_crush.h"
 #include "bg.h"
@@ -50,7 +50,7 @@
 #include "constants/songs.h"
 #include "constants/species.h"
 
-EWRAM_DATA u8 gUnknown_02022C20[12] = {};
+EWRAM_DATA u8 sUnionRoomPlayerName[12] = {};
 EWRAM_DATA u8 gUnknown_02022C2C = 0;
 EWRAM_DATA u8 gUnknown_02022C2D = 0;
 EWRAM_DATA union UnkUnion_Main gUnknown_02022C30 = {};
@@ -4101,7 +4101,7 @@ void sub_8016934(void)
 {
     struct UnkStruct_URoom *ptr;
 
-    gUnknown_02022C20[0] = EOS;
+    sUnionRoomPlayerName[0] = EOS;
     CreateTask(sub_801697C, 0);
     gUnknown_02022C30.uRoom = gUnknown_02022C30.uRoom; // Needed to match.
     gUnknown_02022C30.uRoom = ptr = AllocZeroed(0x26C);
@@ -4110,7 +4110,7 @@ void sub_8016934(void)
     ptr->textState = 0;
     ptr->field_10 = 0;
     ptr->field_12 = 0;
-    gUnknown_02022C20[0] = EOS;
+    sUnionRoomPlayerName[0] = EOS;
 }
 
 void sub_801697C(u8 taskId)
@@ -4149,7 +4149,7 @@ void sub_801697C(u8 taskId)
         {
         case 1:
         case 2:
-            if (gUnknown_02022C20[0] == EOS)
+            if (sUnionRoomPlayerName[0] == EOS)
             {
                 for (i = 0; i < PLAYER_NAME_LENGTH + 1; i++)
                 {
@@ -4158,7 +4158,7 @@ void sub_801697C(u8 taskId)
                         sub_8018404(text, &structPtr->field_0->arr[i]);
                         if (sub_800E540(ReadAsU16(structPtr->field_0->arr[i].unk.field_0.unk_00.playerTrainerId), text))
                         {
-                            StringCopy(gUnknown_02022C20, text);
+                            StringCopy(sUnionRoomPlayerName, text);
                             break;
                         }
                     }
@@ -4182,12 +4182,12 @@ void sub_801697C(u8 taskId)
     }
 }
 
-bool16 sp182_move_string(void)
+bool16 BufferUnionRoomPlayerName(void)
 {
-    if (gUnknown_02022C20[0] != EOS)
+    if (sUnionRoomPlayerName[0] != EOS)
     {
-        StringCopy(gStringVar1, gUnknown_02022C20);
-        gUnknown_02022C20[0] = EOS;
+        StringCopy(gStringVar1, sUnionRoomPlayerName);
+        sUnionRoomPlayerName[0] = EOS;
         return TRUE;
     }
     else

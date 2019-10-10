@@ -4,7 +4,6 @@
 #include "decompress.h"
 #include "event_object_movement.h"
 #include "item_menu.h"
-#include "constants/items.h"
 #include "item.h"
 #include "item_use.h"
 #include "main.h"
@@ -15,20 +14,22 @@
 #include "menu_helpers.h"
 #include "palette.h"
 #include "overworld.h"
-#include "constants/songs.h"
 #include "sound.h"
 #include "sprite.h"
 #include "string_util.h"
 #include "strings.h"
 #include "bg.h"
-#include "alloc.h"
+#include "malloc.h"
 #include "scanline_effect.h"
 #include "gpu_regs.h"
 #include "graphics.h"
 #include "item_menu_icons.h"
 #include "decompress.h"
 #include "international_string_util.h"
+#include "constants/berry.h"
+#include "constants/items.h"
 #include "constants/rgb.h"
+#include "constants/songs.h"
 
 // There are 4 windows used in berry tag screen.
 enum
@@ -400,7 +401,7 @@ static void PrintAllBerryData(void)
 static void PrintBerryNumberAndName(void)
 {
     const struct Berry *berry = GetBerryInfo(sBerryTag->berryId);
-    ConvertIntToDecimalStringN(gStringVar1, sBerryTag->berryId, 2, 2);
+    ConvertIntToDecimalStringN(gStringVar1, sBerryTag->berryId, STR_CONV_MODE_LEADING_ZEROS, 2);
     StringCopy(gStringVar2, berry->name);
     StringExpandPlaceholders(gStringVar4, gText_UnkF908Var1Var2);
     PrintTextInBerryTagScreen(WIN_BERRY_NAME, gStringVar4, 0, 1, 0, 0);
@@ -420,8 +421,8 @@ static void PrintBerrySize(void)
         fraction = (inches % 100) / 10;
         inches /= 100;
 
-        ConvertIntToDecimalStringN(gStringVar1, inches, 0, 2);
-        ConvertIntToDecimalStringN(gStringVar2, fraction, 0, 2);
+        ConvertIntToDecimalStringN(gStringVar1, inches, STR_CONV_MODE_LEFT_ALIGN, 2);
+        ConvertIntToDecimalStringN(gStringVar2, fraction, STR_CONV_MODE_LEFT_ALIGN, 2);
         StringExpandPlaceholders(gStringVar4, gText_Var1DotVar2);
         AddTextPrinterParameterized(WIN_SIZE_FIRM, 1, gStringVar4, 0x28, 1, 0, NULL);
     }

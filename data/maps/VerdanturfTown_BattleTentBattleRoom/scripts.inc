@@ -98,7 +98,7 @@ VerdanturfTown_BattleTentBattleRoom_EventScript_20243C:: @ 820243C
 	call_if_eq VerdanturfTown_BattleTentBattleRoom_EventScript_202565
 	compare VAR_RESULT, 2
 	call_if_eq VerdanturfTown_BattleTentBattleRoom_EventScript_20256C
-	multichoice 20, 6, 104, 1
+	multichoice 20, 6, MULTI_GO_ON_REST_RETIRE, 1
 	switch VAR_RESULT
 	case 0, VerdanturfTown_BattleTentBattleRoom_EventScript_2024EA
 	case 1, VerdanturfTown_BattleTentBattleRoom_EventScript_20248A
@@ -114,11 +114,11 @@ VerdanturfTown_BattleTentBattleRoom_EventScript_20248A:: @ 820248A
 VerdanturfTown_BattleTentBattleRoom_EventScript_2024B8:: @ 82024B8
 	message VerdanturfTown_BattleTentBattleRoom_Text_25005A
 	waitmessage
-	multichoicedefault 20, 8, 94, 1, 0
+	multichoicedefault 20, 8, MULTI_YESNO, 1, 0
 	switch VAR_RESULT
 	case 1, VerdanturfTown_BattleTentBattleRoom_EventScript_20243C
 	case 0, VerdanturfTown_BattleTentBattleRoom_EventScript_2023AA
-	case 127, VerdanturfTown_BattleTentBattleRoom_EventScript_20243C
+	case MULTI_B_PRESSED, VerdanturfTown_BattleTentBattleRoom_EventScript_20243C
 
 VerdanturfTown_BattleTentBattleRoom_EventScript_2024EA:: @ 82024EA
 	applymovement 3, Common_Movement_WalkInPlaceRight

@@ -63,13 +63,13 @@ Route116_EventScript_1F2CBB:: @ 81F2CBB
 	goto_if_eq Route116_EventScript_1F2D39
 	msgbox Route116_Text_1F3521, MSGBOX_DEFAULT
 	closemessage
-	compare VAR_FACING, 2
+	compare VAR_FACING, DIR_NORTH
 	call_if_eq Route116_EventScript_1F2D15
-	compare VAR_FACING, 1
+	compare VAR_FACING, DIR_SOUTH
 	call_if_eq Route116_EventScript_1F2D15
-	compare VAR_FACING, 3
+	compare VAR_FACING, DIR_WEST
 	call_if_eq Route116_EventScript_1F2D15
-	compare VAR_FACING, 4
+	compare VAR_FACING, DIR_EAST
 	call_if_eq Route116_EventScript_1F2D20
 	removeobject VAR_LAST_TALKED
 	clearflag FLAG_HIDE_RUSTBORO_CITY_DEVON_CORP_3F_EMPLOYEE
@@ -196,13 +196,13 @@ Route116_EventScript_1F2E1B:: @ 81F2E1B
 
 Route116_EventScript_1F2E2A:: @ 81F2E2A
 	delay 20
-	compare VAR_FACING, 2
+	compare VAR_FACING, DIR_NORTH
 	call_if_eq Route116_EventScript_1F2E5E
-	compare VAR_FACING, 1
+	compare VAR_FACING, DIR_SOUTH
 	call_if_eq Route116_EventScript_1F2E5E
-	compare VAR_FACING, 3
+	compare VAR_FACING, DIR_WEST
 	call_if_eq Route116_EventScript_1F2E5E
-	compare VAR_FACING, 4
+	compare VAR_FACING, DIR_EAST
 	call_if_eq Route116_EventScript_1F2E69
 	removeobject VAR_LAST_TALKED
 	release
@@ -258,8 +258,8 @@ Route116_EventScript_1F2EB7:: @ 81F2EB7
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
 	goto_if_eq Route116_EventScript_1F2F4E
-	setvar VAR_0x8004, 273
-	specialvar VAR_RESULT, sub_813B4E0
+	setvar VAR_0x8004, TRAINER_JERRY_1
+	specialvar VAR_RESULT, IsTrainerRegistered
 	compare VAR_RESULT, 0
 	goto_if_eq Route116_EventScript_1F2F22
 	msgbox Route116_Text_29BD92, MSGBOX_DEFAULT
@@ -311,8 +311,8 @@ Route116_EventScript_1F2F93:: @ 81F2F93
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
 	goto_if_eq Route116_EventScript_1F302A
-	setvar VAR_0x8004, 280
-	specialvar VAR_RESULT, sub_813B4E0
+	setvar VAR_0x8004, TRAINER_KAREN_1
+	specialvar VAR_RESULT, IsTrainerRegistered
 	compare VAR_RESULT, 0
 	goto_if_eq Route116_EventScript_1F2FFE
 	msgbox Route116_Text_29C010, MSGBOX_DEFAULT

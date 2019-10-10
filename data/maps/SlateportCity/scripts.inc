@@ -122,7 +122,7 @@ SlateportCity_EventScript_1DCDBD:: @ 81DCDBD
 	message SlateportCity_Text_1DD64A
 	waitmessage
 	pokemart SlateportCity_Pokemart_1DCDD4
-	msgbox gUnknown_08272A3F, MSGBOX_DEFAULT
+	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
 	release
 	end
 
@@ -489,10 +489,10 @@ SlateportCity_EventScript_1DD153:: @ 81DD153
 SlateportCity_EventScript_1DD16A:: @ 81DD16A
 	lock
 	faceplayer
-	message gUnknown_08272A21
+	message gText_HowMayIServeYou
 	waitmessage
 	pokemartdecoration SlateportCity_PokemartDecor_Dolls
-	msgbox gUnknown_08272A3F, MSGBOX_DEFAULT
+	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
 	release
 	end
 
@@ -506,7 +506,7 @@ SlateportCity_PokemartDecor_Dolls: @ 81DD184
 	end
 
 SlateportCity_EventScript_1DD18E:: @ 81DD18E
-	msgbox gUnknown_08272E30, MSGBOX_DEFAULT
+	msgbox gText_ComeBackWithSecretPower, MSGBOX_DEFAULT
 	release
 	end
 
@@ -514,10 +514,10 @@ SlateportCity_EventScript_1DD198:: @ 81DD198
 	lock
 	faceplayer
 	goto_if_unset FLAG_RECEIVED_SECRET_POWER, SlateportCity_EventScript_1DD18E
-	message gUnknown_08272A21
+	message gText_HowMayIServeYou
 	waitmessage
 	pokemartdecoration SlateportCity_PokemartDecor_1DD1B8
-	msgbox gUnknown_08272A3F, MSGBOX_DEFAULT
+	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
 	release
 	end
 
@@ -543,10 +543,10 @@ SlateportCity_PokemartDecor_1DD1B8: @ 81DD1B8
 SlateportCity_EventScript_1DD1D8:: @ 81DD1D8
 	lock
 	faceplayer
-	message gUnknown_08272A21
+	message gText_HowMayIServeYou
 	waitmessage
 	pokemart SlateportCity_Pokemart_1DD1F0
-	msgbox gUnknown_08272A3F, MSGBOX_DEFAULT
+	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
 	release
 	end
 
@@ -748,8 +748,8 @@ SlateportCity_EventScript_1DD3C0:: @ 81DD3C0
 SlateportCity_EventScript_1DD3CA:: @ 81DD3CA
 	message SlateportCity_Text_1DEE67
 	waitmessage
-	setvar VAR_0x8004, 7
-	special sub_813A128
+	setvar VAR_0x8004, SCROLL_MULTI_BERRY_POWDER_VENDOR
+	special ShowScrollableMultichoice
 	waitstate
 	switch VAR_RESULT
 	case 0, SlateportCity_EventScript_1DD46E
@@ -764,82 +764,82 @@ SlateportCity_EventScript_1DD3CA:: @ 81DD3CA
 	case 9, SlateportCity_EventScript_1DD522
 	case 10, SlateportCity_EventScript_1DD536
 	case 11, SlateportCity_EventScript_1DD54A
-	case 127, SlateportCity_EventScript_1DD54A
+	case MULTI_B_PRESSED, SlateportCity_EventScript_1DD54A
 	end
 
 SlateportCity_EventScript_1DD46E:: @ 81DD46E
 	bufferitemname 0, ITEM_ENERGY_POWDER
-	setvar VAR_0x8008, 30
+	setvar VAR_0x8008, ITEM_ENERGY_POWDER
 	setvar VAR_0x8009, 50
 	goto SlateportCity_EventScript_1DD557
 	end
 
 SlateportCity_EventScript_1DD482:: @ 81DD482
 	bufferitemname 0, ITEM_ENERGY_ROOT
-	setvar VAR_0x8008, 31
+	setvar VAR_0x8008, ITEM_ENERGY_ROOT
 	setvar VAR_0x8009, 80
 	goto SlateportCity_EventScript_1DD557
 	end
 
 SlateportCity_EventScript_1DD496:: @ 81DD496
 	bufferitemname 0, ITEM_HEAL_POWDER
-	setvar VAR_0x8008, 32
+	setvar VAR_0x8008, ITEM_HEAL_POWDER
 	setvar VAR_0x8009, 50
 	goto SlateportCity_EventScript_1DD557
 	end
 
 SlateportCity_EventScript_1DD4AA:: @ 81DD4AA
 	bufferitemname 0, ITEM_REVIVAL_HERB
-	setvar VAR_0x8008, 33
+	setvar VAR_0x8008, ITEM_REVIVAL_HERB
 	setvar VAR_0x8009, 300
 	goto SlateportCity_EventScript_1DD557
 	end
 
 SlateportCity_EventScript_1DD4BE:: @ 81DD4BE
 	bufferitemname 0, ITEM_PROTEIN
-	setvar VAR_0x8008, 64
+	setvar VAR_0x8008, ITEM_PROTEIN
 	setvar VAR_0x8009, 1000
 	goto SlateportCity_EventScript_1DD557
 	end
 
 SlateportCity_EventScript_1DD4D2:: @ 81DD4D2
 	bufferitemname 0, ITEM_IRON
-	setvar VAR_0x8008, 65
+	setvar VAR_0x8008, ITEM_IRON
 	setvar VAR_0x8009, 1000
 	goto SlateportCity_EventScript_1DD557
 	end
 
 SlateportCity_EventScript_1DD4E6:: @ 81DD4E6
 	bufferitemname 0, ITEM_CARBOS
-	setvar VAR_0x8008, 66
+	setvar VAR_0x8008, ITEM_CARBOS
 	setvar VAR_0x8009, 1000
 	goto SlateportCity_EventScript_1DD557
 	end
 
 SlateportCity_EventScript_1DD4FA:: @ 81DD4FA
 	bufferitemname 0, ITEM_CALCIUM
-	setvar VAR_0x8008, 67
+	setvar VAR_0x8008, ITEM_CALCIUM
 	setvar VAR_0x8009, 1000
 	goto SlateportCity_EventScript_1DD557
 	end
 
 SlateportCity_EventScript_1DD50E:: @ 81DD50E
 	bufferitemname 0, ITEM_ZINC
-	setvar VAR_0x8008, 70
+	setvar VAR_0x8008, ITEM_ZINC
 	setvar VAR_0x8009, 1000
 	goto SlateportCity_EventScript_1DD557
 	end
 
 SlateportCity_EventScript_1DD522:: @ 81DD522
 	bufferitemname 0, ITEM_HP_UP
-	setvar VAR_0x8008, 63
+	setvar VAR_0x8008, ITEM_HP_UP
 	setvar VAR_0x8009, 1000
 	goto SlateportCity_EventScript_1DD557
 	end
 
 SlateportCity_EventScript_1DD536:: @ 81DD536
 	bufferitemname 0, ITEM_PP_UP
-	setvar VAR_0x8008, 69
+	setvar VAR_0x8008, ITEM_PP_UP
 	setvar VAR_0x8009, 3000
 	goto SlateportCity_EventScript_1DD557
 	end
@@ -873,7 +873,7 @@ SlateportCity_EventScript_1DD557:: @ 81DD557
 	end
 
 SlateportCity_EventScript_1DD5C1:: @ 81DD5C1
-	msgbox gUnknown_08272A89, MSGBOX_DEFAULT
+	msgbox gText_TheBagIsFull, MSGBOX_DEFAULT
 	special RemoveBerryPowderVendorMenu
 	release
 	end

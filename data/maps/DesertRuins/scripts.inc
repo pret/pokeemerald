@@ -10,7 +10,7 @@ DesertRuins_MapScript1_22D96B: @ 822D96B
 
 DesertRuins_EventScript_22D975:: @ 822D975
 	specialvar VAR_RESULT, GetBattleOutcome
-	compare VAR_RESULT, 7
+	compare VAR_RESULT, B_OUTCOME_CAUGHT
 	goto_if_ne Common_EventScript_NopReturn
 	removeobject VAR_LAST_TALKED
 	return
@@ -47,7 +47,7 @@ DesertRuins_EventScript_22D9DB:: @ 822D9DB
 	end
 
 DesertRuins_EventScript_22D9EE:: @ 822D9EE
-	msgbox gUnknown_0827304E, MSGBOX_DEFAULT
+	msgbox gText_BigHoleInTheWall, MSGBOX_DEFAULT
 	releaseall
 	end
 
@@ -72,11 +72,11 @@ DesertRuins_EventScript_22DA02:: @ 822DA02
 	waitstate
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
 	specialvar VAR_RESULT, GetBattleOutcome
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, B_OUTCOME_WON
 	goto_if_eq DesertRuins_EventScript_22DA49
-	compare VAR_RESULT, 4
+	compare VAR_RESULT, B_OUTCOME_RAN
 	goto_if_eq DesertRuins_EventScript_22DA52
-	compare VAR_RESULT, 5
+	compare VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED
 	goto_if_eq DesertRuins_EventScript_22DA52
 	setflag FLAG_DEFEATED_REGIROCK
 	release
@@ -84,11 +84,11 @@ DesertRuins_EventScript_22DA02:: @ 822DA02
 
 DesertRuins_EventScript_22DA49:: @ 822DA49
 	setflag FLAG_DEFEATED_REGIROCK
-	goto DesertRuins_EventScript_27376D
+	goto Common_EventScript_RemoveStaticPokemon
 	end
 
 DesertRuins_EventScript_22DA52:: @ 822DA52
-	setvar VAR_0x8004, 401
-	goto DesertRuins_EventScript_273776
+	setvar VAR_0x8004, SPECIES_REGIROCK
+	goto Common_EventScript_LegendaryFlewAway
 	end
 

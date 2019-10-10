@@ -18,7 +18,7 @@
 #include "international_string_util.h"
 #include "strings.h"
 #include "list_menu.h"
-#include "alloc.h"
+#include "malloc.h"
 #include "string_util.h"
 #include "util.h"
 #include "data.h"

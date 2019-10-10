@@ -25,7 +25,7 @@ MauvilleCity_BikeShop_EventScript_20EBF7:: @ 820EBF7
 MauvilleCity_BikeShop_EventScript_20EC16:: @ 820EC16
 	message MauvilleCity_BikeShop_Text_20EF32
 	waitmessage
-	multichoice 21, 8, 12, 1
+	multichoice 21, 8, MULTI_BIKE, 1
 	switch VAR_RESULT
 	case 0, MauvilleCity_BikeShop_EventScript_20EC53
 	case 1, MauvilleCity_BikeShop_EventScript_20EC6D
@@ -86,7 +86,7 @@ MauvilleCity_BikeShop_EventScript_20ECE5:: @ 820ECE5
 	end
 
 MauvilleCity_BikeShop_EventScript_20ECEF:: @ 820ECEF
-	incrementgamestat 4
+	incrementgamestat GAME_STAT_TRADED_BIKES
 	msgbox MauvilleCity_BikeShop_Text_20F294, MSGBOX_DEFAULT
 	takeitem ITEM_ACRO_BIKE, 1
 	giveitem_std ITEM_MACH_BIKE
@@ -94,7 +94,7 @@ MauvilleCity_BikeShop_EventScript_20ECEF:: @ 820ECEF
 	end
 
 MauvilleCity_BikeShop_EventScript_20ED10:: @ 820ED10
-	incrementgamestat 4
+	incrementgamestat GAME_STAT_TRADED_BIKES
 	msgbox MauvilleCity_BikeShop_Text_20F263, MSGBOX_DEFAULT
 	takeitem ITEM_MACH_BIKE, 1
 	giveitem_std ITEM_ACRO_BIKE
@@ -112,13 +112,13 @@ MauvilleCity_BikeShop_EventScript_20ED3A:: @ 820ED3A
 	end
 
 MauvilleCity_BikeShop_EventScript_20ED46:: @ 820ED46
-	multichoice 0, 0, 43, 0
+	multichoice 0, 0, MULTI_MACH_BIKE_INFO, 0
 	switch VAR_RESULT
 	case 0, MauvilleCity_BikeShop_EventScript_20ED88
 	case 1, MauvilleCity_BikeShop_EventScript_20ED94
 	case 2, MauvilleCity_BikeShop_EventScript_20EDA0
 	case 3, MauvilleCity_BikeShop_EventScript_20EDAC
-	case 127, MauvilleCity_BikeShop_EventScript_20EDAC
+	case MULTI_B_PRESSED, MauvilleCity_BikeShop_EventScript_20EDAC
 	end
 
 MauvilleCity_BikeShop_EventScript_20ED88:: @ 820ED88
@@ -150,13 +150,13 @@ MauvilleCity_BikeShop_EventScript_20EDAE:: @ 820EDAE
 	end
 
 MauvilleCity_BikeShop_EventScript_20EDBA:: @ 820EDBA
-	multichoice 0, 0, 44, 0
+	multichoice 0, 0, MULTI_ACRO_BIKE_INFO, 0
 	switch VAR_RESULT
 	case 0, MauvilleCity_BikeShop_EventScript_20EDFC
 	case 1, MauvilleCity_BikeShop_EventScript_20EE08
 	case 2, MauvilleCity_BikeShop_EventScript_20EE14
 	case 3, MauvilleCity_BikeShop_EventScript_20EE20
-	case 127, MauvilleCity_BikeShop_EventScript_20EE20
+	case MULTI_B_PRESSED, MauvilleCity_BikeShop_EventScript_20EE20
 	end
 
 MauvilleCity_BikeShop_EventScript_20EDFC:: @ 820EDFC

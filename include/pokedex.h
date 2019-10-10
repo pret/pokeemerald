@@ -4,6 +4,7 @@
 extern u8 gUnusedPokedexU8;
 extern void (*gUnknown_030060B4)(void);
 
+#define KANTO_DEX_COUNT 151
 #define HOENN_DEX_COUNT 202
 #define NATIONAL_DEX_COUNT 386
 
@@ -43,7 +44,7 @@ s8 GetSetPokedexFlag(u16 nationalNum, u8 caseId);
 u16 CreateMonSpriteFromNationalDexNumber(u16, s16, s16, u16);
 bool16 HasAllHoennMons(void);
 void ResetPokedexScrollPositions(void);
-u16 sub_80C0944(void);
+bool16 HasAllMons(void);
 void CB2_Pokedex(void);
 
 #endif // GUARD_POKEDEX_H

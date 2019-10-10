@@ -10,7 +10,7 @@ LilycoveCity_LilycoveMuseum_1F_EventScript_218CC2:: @ 8218CC2
 	applymovement 2, Common_Movement_FacePlayer
 	message LilycoveCity_LilycoveMuseum_1F_Text_218EBC
 	waitmessage
-	multichoice 20, 8, 16, 1
+	multichoice 20, 8, MULTI_VIEWED_PAINTINGS, 1
 	compare VAR_RESULT, 0
 	goto_if_eq LilycoveCity_LilycoveMuseum_1F_EventScript_218CF5
 	compare VAR_RESULT, 1
@@ -40,9 +40,9 @@ LilycoveCity_LilycoveMuseum_1F_EventScript_218D1E:: @ 8218D1E
 	waitmovement 0
 	removeobject 2
 	switch VAR_FACING
-	case 2, LilycoveCity_LilycoveMuseum_1F_EventScript_218D5A
-	case 3, LilycoveCity_LilycoveMuseum_1F_EventScript_218D6F
-	case 4, LilycoveCity_LilycoveMuseum_1F_EventScript_218D84
+	case DIR_NORTH, LilycoveCity_LilycoveMuseum_1F_EventScript_218D5A
+	case DIR_WEST, LilycoveCity_LilycoveMuseum_1F_EventScript_218D6F
+	case DIR_EAST, LilycoveCity_LilycoveMuseum_1F_EventScript_218D84
 	end
 
 LilycoveCity_LilycoveMuseum_1F_EventScript_218D5A:: @ 8218D5A

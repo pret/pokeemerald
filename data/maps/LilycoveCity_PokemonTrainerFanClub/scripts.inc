@@ -558,13 +558,13 @@ LilycoveCity_PokemonTrainerFanClub_EventScript_21CE4D:: @ 821CE4D
 	special BufferStreakTrainerText
 	message LilycoveCity_PokemonTrainerFanClub_Text_281C95
 	waitmessage
-	setvar VAR_0x8004, 2
-	special sub_813A128
+	setvar VAR_0x8004, SCROLL_MULTI_POKEMON_FAN_CLUB_RATER
+	special ShowScrollableMultichoice
 	waitstate
 	setvar VAR_0x8004, 8
 	switch VAR_RESULT
 	case 11, LilycoveCity_PokemonTrainerFanClub_EventScript_21CE9F
-	case 127, LilycoveCity_PokemonTrainerFanClub_EventScript_21CE9F
+	case MULTI_B_PRESSED, LilycoveCity_PokemonTrainerFanClub_EventScript_21CE9F
 	setvar VAR_0x8004, 8
 	special BufferStreakTrainerText
 	copyvar VAR_0x8006, VAR_0x800A
