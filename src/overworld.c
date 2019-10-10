@@ -2742,7 +2742,7 @@ static bool32 PlayerIsAtSouthExit(struct TradeRoomPlayer *player)
         return FALSE;
     else if (!MetatileBehavior_IsSouthArrowWarp(player->field_C))
         return FALSE;
-    else if (player->facing != 1)
+    else if (player->facing != DIR_SOUTH)
         return FALSE;
     else
         return TRUE;
