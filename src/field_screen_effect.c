@@ -970,7 +970,7 @@ static u8 sub_80B003C(s32 centerX, s32 centerY, s32 initialFlashRadius, s32 dest
 #undef tFlashRadiusDelta
 #undef tClearScanlineEffect
 
-void sub_80B009C(u8 flashLevel)
+void AnimateFlash(u8 flashLevel)
 {
     u8 curFlashLevel = Overworld_GetFlashLevel();
     u8 value = 0;
