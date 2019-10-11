@@ -1,6 +1,6 @@
 EverGrandeCity_PokemonLeague_1F_MapScripts:: @ 82295D2
 	map_script MAP_SCRIPT_ON_TRANSITION, EverGrandeCity_PokemonLeague_1F_OnTransition
-	map_script MAP_SCRIPT_ON_RESUME, EverGrandeCity_PokemonLeague_1F_MapScript1_277C30
+	map_script MAP_SCRIPT_ON_RESUME, CableClub_MapScript1_InitUnionRoom
 	.byte 0
 
 EverGrandeCity_PokemonLeague_1F_OnTransition: @ 82295DD

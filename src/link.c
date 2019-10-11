@@ -282,7 +282,7 @@ void LinkTestScreen(void)
     ResetTasks();
     SetVBlankCallback(sub_80096BC);
     ResetBlockSend();
-    gLinkType = 0x1111;
+    gLinkType = LINKTYPE_0x1111;
     OpenLink();
     SeedRng(gMain.vblankCounter2);
     for (i = 0; i < MAX_LINK_PLAYERS; i++)
@@ -1349,7 +1349,7 @@ bool8 sub_800AA60(void)
     {
         if (gLinkPlayers[i].trainerId == gSavedLinkPlayers[i].trainerId)
         {
-            if (gLinkType == 0x2288)
+            if (gLinkType == LINKTYPE_0x2288)
             {
                 if (gLinkType == gLinkPlayers[i].linkType)
                 {

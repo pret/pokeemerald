@@ -124,7 +124,7 @@ void InitChooseHalfPartyForBattle(u8 unused);
 void sub_81B8558(void);
 void sub_81B8904(u8 initArg, MainCallback callback);
 void sub_81B892C(void);
-void sub_81B8958(void);
+void ChooseMonForWirelessMinigame(void);
 void OpenPartyMenuInBattle(u8 arg);
 void sub_81B89F0(void);
 void sub_81B8C68(void);

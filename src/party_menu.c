@@ -240,7 +240,7 @@ static void sub_81B3300(const u8*);
 static void sub_81B1B8C(u8);
 static void DisplayPartyPokemonHPCheck(struct Pokemon*, struct Struct203CEDC*, u8);
 static void DisplayPartyPokemonHPBarCheck(struct Pokemon*, struct Struct203CEDC*);
-static bool16 sub_81B2134(struct Pokemon*);
+static bool16 IsMonAllowedInPokemonJump(struct Pokemon*);
 static bool16 sub_81B2164(struct Pokemon*);
 static void sub_81B2248(u8);
 static void sub_81B227C(u8);
@@ -3007,7 +3007,7 @@ static void sub_81B209C(void)
         if (gSpecialVar_0x8005 == 0)
         {
             for (i = 0; i < gPlayerPartyCount; i++)
-                *ptr += sub_81B2134(&gPlayerParty[i]) << i;
+                *ptr += IsMonAllowedInPokemonJump(&gPlayerParty[i]) << i;
         }
         else
         {
@@ -3017,9 +3017,9 @@ static void sub_81B209C(void)
     }
 }
 
-static bool16 sub_81B2134(struct Pokemon *mon)
+static bool16 IsMonAllowedInPokemonJump(struct Pokemon *mon)
 {
-    if (GetMonData(mon, MON_DATA_IS_EGG) != TRUE && sub_802C908(GetMonData(mon, MON_DATA_SPECIES)))
+    if (GetMonData(mon, MON_DATA_IS_EGG) != TRUE && IsSpeciesAllowedInPokemonJump(GetMonData(mon, MON_DATA_SPECIES)))
         return TRUE;
     return FALSE;
 }
@@ -6761,7 +6761,7 @@ void sub_81B892C(void)
     InitPartyMenu(0, 0, 12, 0, 4, sub_81B1370, CB2_ReturnToFieldContinueScriptPlayMapMusic);
 }
 
-void sub_81B8958(void)
+void ChooseMonForWirelessMinigame(void)
 {
     InitPartyMenu(11, 0, 13, 0, 1, sub_81B1370, CB2_ReturnToFieldContinueScriptPlayMapMusic);
 }

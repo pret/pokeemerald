@@ -1559,7 +1559,7 @@ static void sub_80773D0(void)
 
         if (!gReceivedRemoteLinkPlayers)
         {
-            gLinkType = 0x1122;
+            gLinkType = LINKTYPE_0x1122;
             gUnknown_0203229C->unk_A8 = 0;
 
             if (gWirelessCommType)
@@ -4134,7 +4134,7 @@ void sub_807AE50(void)
         case 0:
             if (!gReceivedRemoteLinkPlayers)
             {
-                gLinkType = 0x1144;
+                gLinkType = LINKTYPE_0x1144;
                 CloseLink();
             }
             gUnknown_020322A0 = AllocZeroed(sizeof(*gUnknown_020322A0));

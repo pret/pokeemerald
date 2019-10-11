@@ -48,6 +48,28 @@
 #define EXTRACT_LINK_ERRORS(status) \
 (((status) & LINK_STAT_ERRORS) >> LINK_STAT_ERRORS_SHIFT)
 
+#define LINKTYPE_0x1111              0x1111  // trade
+#define LINKTYPE_0x1122              0x1122  // trade
+#define LINKTYPE_0x1133              0x1133  // trade
+#define LINKTYPE_0x1144              0x1144  // trade
+#define LINKTYPE_BATTLE              0x2211
+#define LINKTYPE_0x2222              0x2222  // unused battle?
+#define LINKTYPE_SINGLE_BATTLE       0x2233
+#define LINKTYPE_DOUBLE_BATTLE       0x2244
+#define LINKTYPE_MULTI_BATTLE        0x2255
+#define LINKTYPE_BATTLE_TOWER_50     0x2266
+#define LINKTYPE_BATTLE_TOWER_OPEN   0x2277 
+#define LINKTYPE_0x2288              0x2288  // battle?
+#define LINKTYPE_0x3311              0x3311
+#define LINKTYPE_0x3322              0x3322
+#define LINKTYPE_0x4411              0x4411
+#define LINKTYPE_BERRY_BLENDER       0x4422
+#define LINKTYPE_0x5501              0x5501  // mystery event
+#define LINKTYPE_0x5502              0x5502  // unused?
+#define LINKTYPE_0x5503              0x5503  // eReader
+#define LINKTYPE_0x6601              0x6601
+#define LINKTYPE_0x6602              0x6602
+
 #define LINKCMD_SEND_LINK_TYPE 0x2222
 #define LINKCMD_0x2FFE             0x2FFE
 #define LINKCMD_SEND_HELD_KEYS     0x4444
