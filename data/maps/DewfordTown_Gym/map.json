@@ -24,7 +24,7 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "DewfordTown_Gym_EventScript_1FC7C2",
+      "script": "DewfordTown_Gym_EventScript_Brawly",
       "flag": "0"
     },
     {
@@ -37,7 +37,7 @@
       "movement_range_y": 0,
       "trainer_type": "1",
       "trainer_sight_or_berry_tree_id": "3",
-      "script": "DewfordTown_Gym_EventScript_1FC8B7",
+      "script": "DewfordTown_Gym_EventScript_Takao",
       "flag": "0"
     },
     {
@@ -50,7 +50,7 @@
       "movement_range_y": 0,
       "trainer_type": "1",
       "trainer_sight_or_berry_tree_id": "3",
-      "script": "DewfordTown_Gym_EventScript_1FC8D9",
+      "script": "DewfordTown_Gym_EventScript_Jocelyn",
       "flag": "0"
     },
     {
@@ -63,7 +63,7 @@
       "movement_range_y": 0,
       "trainer_type": "1",
       "trainer_sight_or_berry_tree_id": "2",
-      "script": "DewfordTown_Gym_EventScript_1FC8FB",
+      "script": "DewfordTown_Gym_EventScript_Laura",
       "flag": "0"
     },
     {
@@ -76,7 +76,7 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "DewfordTown_Gym_EventScript_1FC983",
+      "script": "DewfordTown_Gym_EventScript_GymGuide",
       "flag": "0"
     },
     {
@@ -89,7 +89,7 @@
       "movement_range_y": 1,
       "trainer_type": "1",
       "trainer_sight_or_berry_tree_id": "3",
-      "script": "DewfordTown_Gym_EventScript_1FC93F",
+      "script": "DewfordTown_Gym_EventScript_Cristian",
       "flag": "0"
     },
     {
@@ -102,7 +102,7 @@
       "movement_range_y": 1,
       "trainer_type": "1",
       "trainer_sight_or_berry_tree_id": "3",
-      "script": "DewfordTown_Gym_EventScript_1FC961",
+      "script": "DewfordTown_Gym_EventScript_Lilith",
       "flag": "0"
     },
     {
@@ -115,7 +115,7 @@
       "movement_range_y": 1,
       "trainer_type": "1",
       "trainer_sight_or_berry_tree_id": "2",
-      "script": "DewfordTown_Gym_EventScript_1FC91D",
+      "script": "DewfordTown_Gym_EventScript_Brenden",
       "flag": "0"
     }
   ],
@@ -143,7 +143,7 @@
       "y": 23,
       "elevation": 3,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
-      "script": "DewfordTown_Gym_EventScript_1FC9A2"
+      "script": "DewfordTown_Gym_EventScript_LeftGymStatue"
     },
     {
       "type": "sign",
@@ -151,7 +151,7 @@
       "y": 23,
       "elevation": 3,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
-      "script": "DewfordTown_Gym_EventScript_1FC9B2"
+      "script": "DewfordTown_Gym_EventScript_RightGymStatue"
     },
     {
       "type": "sign",
@@ -159,7 +159,7 @@
       "y": 24,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
-      "script": "DewfordTown_Gym_EventScript_1FC9A2"
+      "script": "DewfordTown_Gym_EventScript_LeftGymStatue"
     },
     {
       "type": "sign",
@@ -167,7 +167,7 @@
       "y": 24,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
-      "script": "DewfordTown_Gym_EventScript_1FC9B2"
+      "script": "DewfordTown_Gym_EventScript_RightGymStatue"
     }
   ]
 }

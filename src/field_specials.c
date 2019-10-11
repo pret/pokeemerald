@@ -635,6 +635,7 @@ static void LoadLinkPartnerEventObjectSpritePalette(u8 graphicsId, u8 localEvent
     }
 }
 
+// NOTE: Coordinates are +7, +7 from actual in-map coordinates
 static const struct UCoords8 sMauvilleGymSwitchCoords[] =
 {
     { 7, 22},
@@ -643,26 +644,24 @@ static const struct UCoords8 sMauvilleGymSwitchCoords[] =
     {15, 16}
 };
 
-// Flips the switches on the ground when the player steps on them.
-void MauvilleGymSpecial1(void)
+// Presses the stepped-on switch and raises the rest
+void MauvilleGymPressSwitch(void)
 {
     u8 i;
     for (i = 0; i < ARRAY_COUNT(sMauvilleGymSwitchCoords); i++)
     {
         if (i == gSpecialVar_0x8004)
-        {
             MapGridSetMetatileIdAt(sMauvilleGymSwitchCoords[i].x, sMauvilleGymSwitchCoords[i].y, METATILE_ID(MauvilleGym, PressedSwitch));
-        }
         else
-        {
             MapGridSetMetatileIdAt(sMauvilleGymSwitchCoords[i].x, sMauvilleGymSwitchCoords[i].y, METATILE_ID(MauvilleGym, RaisedSwitch));
-        }
     }
 }
 
-void MauvilleGymSpecial2(void)
+// Sets the gym barriers back to the default state; their alt state is handled by MauvilleCity_Gym_EventScript_SetAltBarriers
+void MauvilleGymSetDefaultBarriers(void)
 {
     int x, y;
+    // All switches/barriers are within these coord ranges -7
     for (y = 12; y < 24; y++)
     {
         for (x = 7; x < 16; x++)
@@ -734,13 +733,9 @@ void MauvilleGymSpecial2(void)
                     break;
                 case METATILE_ID(MauvilleGym, FloorTile):
                     if (MapGridGetMetatileIdAt(x, y - 1) == METATILE_ID(MauvilleGym, GreenBeamV1_On))
-                    {
                         MapGridSetMetatileIdAt(x, y, METATILE_ID(MauvilleGym, GreenBeamV2_On) | METATILE_COLLISION_MASK);
-                    }
                     else
-                    {
                         MapGridSetMetatileIdAt(x, y, METATILE_ID(MauvilleGym, RedBeamV2_On) | METATILE_COLLISION_MASK);
-                    }
                     break;
                 case METATILE_ID(MauvilleGym, PoleBottom_Off):
                     MapGridSetMetatileIdAt(x, y, METATILE_ID(MauvilleGym, RedBeamV1_On) | METATILE_COLLISION_MASK);
@@ -757,7 +752,7 @@ void MauvilleGymSpecial2(void)
 }
 
 // Presses all switches and deactivates all beams.
-void MauvilleGymSpecial3(void)
+void MauvilleGymDeactivatePuzzle(void)
 {
     int i, x, y;
     const struct UCoords8 *switchCoords = sMauvilleGymSwitchCoords;
