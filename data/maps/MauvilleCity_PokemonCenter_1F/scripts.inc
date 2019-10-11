@@ -1,6 +1,6 @@
 MauvilleCity_PokemonCenter_1F_MapScripts:: @ 8210E5B
 	map_script MAP_SCRIPT_ON_TRANSITION, MauvilleCity_PokemonCenter_1F_OnTransition
-	map_script MAP_SCRIPT_ON_RESUME, MauvilleCity_PokemonCenter_1F_MapScript1_277C30
+	map_script MAP_SCRIPT_ON_RESUME, CableClub_MapScript1_InitUnionRoom
 	.byte 0
 
 MauvilleCity_PokemonCenter_1F_OnTransition: @ 8210E66

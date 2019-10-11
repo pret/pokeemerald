@@ -1,6 +1,6 @@
 LilycoveCity_PokemonCenter_1F_MapScripts:: @ 821C5B2
 	map_script MAP_SCRIPT_ON_TRANSITION, LilycoveCity_PokemonCenter_1F_OnTransition
-	map_script MAP_SCRIPT_ON_RESUME, LilycoveCity_PokemonCenter_1F_MapScript1_277C30
+	map_script MAP_SCRIPT_ON_RESUME, CableClub_MapScript1_InitUnionRoom
 	.byte 0
 
 LilycoveCity_PokemonCenter_1F_OnTransition: @ 821C5BD

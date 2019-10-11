@@ -24,7 +24,7 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "MossdeepCity_GameCorner_1F_EventScript_224B54",
+      "script": "MossdeepCity_GameCorner_1F_EventScript_OldMan",
       "flag": "0"
     },
     {
@@ -37,7 +37,7 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "MossdeepCity_GameCorner_1F_EventScript_224B4B",
+      "script": "MossdeepCity_GameCorner_1F_EventScript_InfoMan",
       "flag": "0"
     }
   ],
@@ -72,7 +72,7 @@
       "y": 0,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "MossdeepCity_GameCorner_1F_EventScript_224B5D"
+      "script": "RS_MysteryEventsHouse_EventScript_Door"
     },
     {
       "type": "sign",
@@ -80,7 +80,7 @@
       "y": 1,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "MossdeepCity_GameCorner_1F_EventScript_277E9D"
+      "script": "MossdeepCity_GameCorner_1F_EventScript_DodrioBerryPickingRecords"
     },
     {
       "type": "sign",
@@ -88,7 +88,7 @@
       "y": 1,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "MossdeepCity_GameCorner_1F_EventScript_277E96"
+      "script": "MossdeepCity_GameCorner_1F_EventScript_PokemonJumpRecords"
     }
   ]
 }

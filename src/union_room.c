@@ -44,6 +44,7 @@
 #include "union_room_player_avatar.h"
 #include "window.h"
 #include "constants/battle_frontier.h"
+#include "constants/cable_club.h"
 #include "constants/game_stat.h"
 #include "constants/maps.h"
 #include "constants/rgb.h"
@@ -1249,7 +1250,7 @@ bool32 sub_80126CC(u32 caseId)
     }
 }
 
-void BerryBlenderLinkBecomeLeader(void)
+void TryBecomeLinkLeader(void)
 {
     u8 taskId;
     struct UnkStruct_Leader *dataPtr;
@@ -1831,7 +1832,7 @@ u8 sub_8013398(struct UnkStruct_Main0 *arg0)
     return ret;
 }
 
-void BerryBlenderLinkJoinGroup(void)
+void TryJoinLinkGroup(void)
 {
     u8 taskId;
     struct UnkStruct_Group *dataPtr;
@@ -2421,7 +2422,7 @@ void sub_8014210(u16 battleFlags)
     HealPlayerParty();
     SavePlayerParty();
     LoadPlayerBag();
-    gLinkPlayers[0].linkType = 0x2211;
+    gLinkPlayers[0].linkType = LINKTYPE_BATTLE;
     gLinkPlayers[GetMultiplayerId()].id = GetMultiplayerId();
     gLinkPlayers[GetMultiplayerId() ^ 1].id = GetMultiplayerId() ^ 1;
     gMain.savedCallback = sub_80B360C;
@@ -2429,18 +2430,18 @@ void sub_8014210(u16 battleFlags)
     PlayBattleBGM();
 }
 
-void sub_8014290(u16 arg0, u16 x, u16 y)
+static void sub_8014290(u16 linkService, u16 x, u16 y)
 {
-    VarSet(VAR_CABLE_CLUB_STATE, arg0);
+    VarSet(VAR_CABLE_CLUB_STATE, linkService);
     SetWarpDestination(gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum, -1, x, y);
     SetDynamicWarpWithCoords(0, gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum, -1, x, y);
     WarpIntoMap();
 }
 
-void sub_8014304(s8 mapGroup, s8 mapNum, s32 x, s32 y, u16 arg4)
+void sub_8014304(s8 mapGroup, s8 mapNum, s32 x, s32 y, u16 linkService)
 {
-    gSpecialVar_0x8004 = arg4;
-    VarSet(VAR_CABLE_CLUB_STATE, arg4);
+    gSpecialVar_0x8004 = linkService;
+    VarSet(VAR_CABLE_CLUB_STATE, linkService);
     gFieldLinkPlayerCount = GetLinkPlayerCount();
     gLocalLinkPlayerId = GetMultiplayerId();
     SetCableClubWarp();
@@ -2506,7 +2507,7 @@ void sub_801440C(u8 taskId)
         HealPlayerParty();
         SavePlayerParty();
         LoadPlayerBag();
-        sub_8014304(MAP_GROUP(SINGLE_BATTLE_COLOSSEUM), MAP_NUM(SINGLE_BATTLE_COLOSSEUM), 6, 8, 1);
+        sub_8014304(MAP_GROUP(SINGLE_BATTLE_COLOSSEUM), MAP_NUM(SINGLE_BATTLE_COLOSSEUM), 6, 8, USING_SINGLE_BATTLE);
         SetMainCallback2(sub_8014384);
         break;
     case 2:
@@ -2515,7 +2516,7 @@ void sub_801440C(u8 taskId)
         SavePlayerParty();
         LoadPlayerBag();
         sub_80143E4(gBlockSendBuffer, TRUE);
-        sub_8014304(MAP_GROUP(SINGLE_BATTLE_COLOSSEUM), MAP_NUM(SINGLE_BATTLE_COLOSSEUM), 6, 8, 2);
+        sub_8014304(MAP_GROUP(SINGLE_BATTLE_COLOSSEUM), MAP_NUM(SINGLE_BATTLE_COLOSSEUM), 6, 8, USING_DOUBLE_BATTLE);
         SetMainCallback2(sub_8014384);
         break;
     case 3:
@@ -2524,19 +2525,19 @@ void sub_801440C(u8 taskId)
         SavePlayerParty();
         LoadPlayerBag();
         sub_80143E4(gBlockSendBuffer, TRUE);
-        sub_8014304(MAP_GROUP(DOUBLE_BATTLE_COLOSSEUM), MAP_NUM(DOUBLE_BATTLE_COLOSSEUM), 5, 8, 5);
+        sub_8014304(MAP_GROUP(DOUBLE_BATTLE_COLOSSEUM), MAP_NUM(DOUBLE_BATTLE_COLOSSEUM), 5, 8, USING_MULTI_BATTLE);
         SetMainCallback2(sub_8014384);
         break;
     case 4:
         sub_80143E4(gBlockSendBuffer, TRUE);
         CleanupOverworldWindowsAndTilemaps();
-        sub_8014304(MAP_GROUP(TRADE_CENTER), MAP_NUM(TRADE_CENTER), 5, 8, 3);
+        sub_8014304(MAP_GROUP(TRADE_CENTER), MAP_NUM(TRADE_CENTER), 5, 8, USING_TRADE_CENTER);
         SetMainCallback2(sub_8014384);
         break;
     case 15:
         sub_80143E4(gBlockSendBuffer, TRUE);
         CleanupOverworldWindowsAndTilemaps();
-        sub_8014304(MAP_GROUP(RECORD_CORNER), MAP_NUM(RECORD_CORNER), 8, 9, 4);
+        sub_8014304(MAP_GROUP(RECORD_CORNER), MAP_NUM(RECORD_CORNER), 8, 9, USING_RECORD_CORNER);
         SetMainCallback2(sub_8014384);
         break;
     case 68:
@@ -2562,15 +2563,15 @@ void sub_801440C(u8 taskId)
         SetMainCallback2(sub_80141A4);
         break;
     case 9:
-        sub_8014290(8, 5, 1);
+        sub_8014290(USING_MINIGAME, 5, 1);
         sub_802A9A8(GetCursorSelectionMonId(), CB2_LoadMap);
         break;
     case 10:
-        sub_8014290(7, 9, 1);
+        sub_8014290(USING_BERRY_CRUSH, 9, 1);
         sub_8020C70(CB2_LoadMap);
         break;
     case 11:
-        sub_8014290(8, 5, 1);
+        sub_8014290(USING_MINIGAME, 5, 1);
         sub_802493C(GetCursorSelectionMonId(), CB2_LoadMap);
         break;
     }
@@ -2594,7 +2595,7 @@ void sub_8014790(u8 taskId)
         {
         case 14:
         case 28:
-            gLinkPlayers[0].linkType = 0x2211;
+            gLinkPlayers[0].linkType = LINKTYPE_BATTLE;
             gLinkPlayers[0].id = 0;
             gLinkPlayers[1].id = 2;
             sendBuff[0] = GetMonData(&gPlayerParty[gSelectedOrderFromParty[0] - 1], MON_DATA_SPECIES);
@@ -4097,14 +4098,14 @@ bool32 sub_80168DC(struct UnkStruct_URoom *arg0)
     return TRUE;
 }
 
-void sub_8016934(void)
+void InitUnionRoom(void)
 {
     struct UnkStruct_URoom *ptr;
 
     sUnionRoomPlayerName[0] = EOS;
     CreateTask(sub_801697C, 0);
     gUnknown_02022C30.uRoom = gUnknown_02022C30.uRoom; // Needed to match.
-    gUnknown_02022C30.uRoom = ptr = AllocZeroed(0x26C);
+    gUnknown_02022C30.uRoom = ptr = AllocZeroed(sizeof(struct UnkStruct_URoom));
     gUnknown_03000DA8 = gUnknown_02022C30.uRoom;
     ptr->state = 0;
     ptr->textState = 0;
@@ -5205,7 +5206,7 @@ void sub_801807C(struct TradeUnkStruct *arg0)
     arg0->personality = 0;
 }
 
-void sub_8018090(void)
+void Script_ResetUnionRoomTrade(void)
 {
     sub_801807C(&gUnknown_02022C40);
 }

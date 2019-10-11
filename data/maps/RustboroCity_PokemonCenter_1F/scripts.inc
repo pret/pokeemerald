@@ -1,6 +1,6 @@
 RustboroCity_PokemonCenter_1F_MapScripts:: @ 8214D62
 	map_script MAP_SCRIPT_ON_TRANSITION, RustboroCity_PokemonCenter_1F_OnTransition
-	map_script MAP_SCRIPT_ON_RESUME, RustboroCity_PokemonCenter_1F_MapScript1_277C30
+	map_script MAP_SCRIPT_ON_RESUME, CableClub_MapScript1_InitUnionRoom
 	.byte 0
 
 RustboroCity_PokemonCenter_1F_OnTransition: @ 8214D6D
