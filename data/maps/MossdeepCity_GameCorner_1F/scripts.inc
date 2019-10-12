@@ -1,7 +1,7 @@
 MossdeepCity_GameCorner_1F_MapScripts:: @ 8224B27
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, MossdeepCity_GameCorner_1F_MapScript2_224B41
 	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, MossdeepCity_GameCorner_1F_MapScript2_224B37
-	map_script MAP_SCRIPT_ON_LOAD, CableClub_MapScript1_OnLoad
+	map_script MAP_SCRIPT_ON_LOAD, CableClub_OnLoad
 	.byte 0
 
 MossdeepCity_GameCorner_1F_MapScript2_224B37: @ 8224B37

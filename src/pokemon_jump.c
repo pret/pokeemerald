@@ -2209,7 +2209,7 @@ bool32 IsSpeciesAllowedInPokemonJump(u16 species)
     return GetPokemonJumpSpeciesIdx(species) > -1;
 }
 
-void DoesPartyHavePokemonJumpSpecies(void)
+void IsPokemonJumpSpeciesInParty(void)
 {
     int i;
 

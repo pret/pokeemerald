@@ -1,6 +1,6 @@
 BattleFrontier_PokemonCenter_1F_MapScripts:: @ 82678F9
 	map_script MAP_SCRIPT_ON_TRANSITION, BattleFrontier_PokemonCenter_1F_MapScript1_267904
-	map_script MAP_SCRIPT_ON_RESUME, CableClub_MapScript1_InitUnionRoom
+	map_script MAP_SCRIPT_ON_RESUME, CableClub_OnResume
 	.byte 0
 
 BattleFrontier_PokemonCenter_1F_MapScript1_267904: @ 8267904

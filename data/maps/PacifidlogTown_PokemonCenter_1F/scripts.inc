@@ -1,6 +1,6 @@
 PacifidlogTown_PokemonCenter_1F_MapScripts:: @ 82034A7
 	map_script MAP_SCRIPT_ON_TRANSITION, PacifidlogTown_PokemonCenter_1F_OnTransition
-	map_script MAP_SCRIPT_ON_RESUME, CableClub_MapScript1_InitUnionRoom
+	map_script MAP_SCRIPT_ON_RESUME, CableClub_OnResume
 	.byte 0
 
 PacifidlogTown_PokemonCenter_1F_OnTransition: @ 82034B2
