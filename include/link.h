@@ -48,6 +48,31 @@
 #define EXTRACT_LINK_ERRORS(status) \
 (((status) & LINK_STAT_ERRORS) >> LINK_STAT_ERRORS_SHIFT)
 
+#define LINKCMD_SEND_LINK_TYPE        0x2222
+#define LINKCMD_0x2FFE                0x2FFE
+#define LINKCMD_SEND_HELD_KEYS        0x4444
+#define LINKCMD_0x5555                0x5555
+#define LINKCMD_0x5566                0x5566
+#define LINKCMD_0x5FFF                0x5FFF
+#define LINKCMD_0x6666                0x6666
+#define LINKCMD_0x7777                0x7777
+#define LINKCMD_CONT_BLOCK            0x8888
+#define LINKCMD_0xAAAA                0xAAAA
+#define LINKCMD_0xAAAB                0xAAAB
+#define LINKCMD_READY_TO_TRADE        0xAABB
+#define LINKCMD_READY_FINISH_TRADE    0xABCD
+#define LINKCMD_INIT_BLOCK            0xBBBB
+#define LINKCMD_READY_CANCEL_TRADE    0xBBCC
+#define LINKCMD_SEND_HELD_KEYS_2      0xCAFE
+#define LINKCMD_0xCCCC                0xCCCC
+#define LINKCMD_START_TRADE           0xCCDD
+#define LINKCMD_CONFIRM_FINISH_TRADE  0xDCBA
+#define LINKCMD_SET_MONS_TO_TRADE     0xDDDD 
+#define LINKCMD_0xDDEE                0xDDEE
+#define LINKCMD_REQUEST_CANCEL        0xEEAA
+#define LINKCMD_CANCEL_TRADE          0xEEBB
+#define LINKCMD_0xEECC                0xEECC
+
 #define LINKTYPE_0x1111              0x1111  // trade
 #define LINKTYPE_0x1122              0x1122  // trade
 #define LINKTYPE_0x1133              0x1133  // trade
@@ -69,21 +94,6 @@
 #define LINKTYPE_0x5503              0x5503  // eReader
 #define LINKTYPE_0x6601              0x6601
 #define LINKTYPE_0x6602              0x6602
-
-#define LINKCMD_SEND_LINK_TYPE 0x2222
-#define LINKCMD_0x2FFE             0x2FFE
-#define LINKCMD_SEND_HELD_KEYS     0x4444
-#define LINKCMD_0x5555             0x5555
-#define LINKCMD_0x5566             0x5566
-#define LINKCMD_0x5FFF             0x5FFF
-#define LINKCMD_0x6666             0x6666
-#define LINKCMD_0x7777             0x7777
-#define LINKCMD_CONT_BLOCK         0x8888
-#define LINKCMD_0xAAAA             0xAAAA
-#define LINKCMD_0xAAAB             0xAAAB
-#define LINKCMD_INIT_BLOCK         0xBBBB
-#define LINKCMD_SEND_HELD_KEYS_2   0xCAFE
-#define LINKCMD_0xCCCC             0xCCCC
 
 struct LinkStatus
 {
@@ -117,8 +127,8 @@ enum
     EXCHANGE_COMPLETE,
     EXCHANGE_TIMED_OUT,
     EXCHANGE_IN_PROGRESS,
-    EXCHANGE_STAT_4,
-    EXCHANGE_STAT_5,
+    EXCHANGE_PLAYER_NOT_READY,
+    EXCHANGE_PARTNER_NOT_READY,
     EXCHANGE_STAT_6,
     EXCHANGE_STAT_7
 };
@@ -142,7 +152,10 @@ struct LinkPlayer
     /* 0x00 */ u16 version;
     /* 0x02 */ u16 lp_field_2;
     /* 0x04 */ u32 trainerId;
-    /* 0x08 */ u8 name[11];
+    /* 0x08 */ u8 name[PLAYER_NAME_LENGTH + 1];
+    /* 0x10 */ u8 progressFlags; // (& 0x0F) is hasNationalDex, (& 0xF0) is hasClearedGame
+    /* 0x11 */ u8 neverRead;
+    /* 0x12 */ u8 progressFlagsCopy;
     /* 0x13 */ u8 gender;
     /* 0x14 */ u32 linkType;
     /* 0x18 */ u16 id; // battler id in battles

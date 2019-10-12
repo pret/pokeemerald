@@ -125,9 +125,9 @@ static u32 sub_80B2478(u8 lower, u8 upper)
         return 1;
     case EXCHANGE_IN_PROGRESS:
         return 3;
-    case EXCHANGE_STAT_4:
+    case EXCHANGE_PLAYER_NOT_READY:
         return 7;
-    case EXCHANGE_STAT_5:
+    case EXCHANGE_PARTNER_NOT_READY:
         return 9;
     case EXCHANGE_STAT_6:
         ConvertIntToDecimalStringN(gStringVar1, GetLinkPlayerCount_2(), STR_CONV_MODE_LEFT_ALIGN, 1);
@@ -1086,8 +1086,8 @@ static void sub_80B37FC(u8 taskId)
             task->data[0]++;
         break;
     case 2:
-        gUnknown_02032298[0] = 0;
-        gUnknown_02032298[1] = 0;
+        gSelectedTradeMonPositions[TRADE_PLAYER] = 0;
+        gSelectedTradeMonPositions[TRADE_PARTNER] = 0;
         m4aMPlayAllStop();
         sub_800AC34();
         task->data[0]++;
@@ -1095,7 +1095,7 @@ static void sub_80B37FC(u8 taskId)
     case 3:
         if (!gReceivedRemoteLinkPlayers)
         {
-            SetMainCallback2(sub_80773AC);
+            SetMainCallback2(CB2_StartCreateTradeMenu);
             DestroyTask(taskId);
         }
         break;
@@ -1111,7 +1111,7 @@ static void sub_80B3894(u8 taskId)
     case 0:
         ScriptContext2_Enable();
         FadeScreen(1, 0);
-        Rfu_set_zero();
+        ClearLinkRfuCallback();
         data[0]++;
         break;
     case 1:
@@ -1119,8 +1119,8 @@ static void sub_80B3894(u8 taskId)
             data[0]++;
         break;
     case 2:
-        gUnknown_02032298[0] = 0;
-        gUnknown_02032298[1] = 0;
+        gSelectedTradeMonPositions[TRADE_PLAYER] = 0;
+        gSelectedTradeMonPositions[TRADE_PARTNER] = 0;
         m4aMPlayAllStop();
         sub_800ADF8();
         data[0]++;
