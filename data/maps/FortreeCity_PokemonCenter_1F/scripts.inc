@@ -1,6 +1,6 @@
 FortreeCity_PokemonCenter_1F_MapScripts:: @ 82173D8
 	map_script MAP_SCRIPT_ON_TRANSITION, FortreeCity_PokemonCenter_1F_OnTransition
-	map_script MAP_SCRIPT_ON_RESUME, CableClub_MapScript1_InitUnionRoom
+	map_script MAP_SCRIPT_ON_RESUME, CableClub_OnResume
 	.byte 0
 
 FortreeCity_PokemonCenter_1F_OnTransition: @ 82173E3

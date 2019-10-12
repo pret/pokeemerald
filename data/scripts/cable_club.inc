@@ -1,4 +1,4 @@
-CableClub_MapScript_OnTransition: @ 8276ACF
+CableClub_OnTransition: @ 8276ACF
 	call CableClub_EventScript_HideOrShowMysteryGiftMan
 	end
 
@@ -54,7 +54,7 @@ OldaleTown_PokemonCenter_2F_EventScript_276B62:: @ 8276B62
 	release
 	end
 
-CableClub_MapScript2_OnWarp: @ 8276B6C
+CableClub_OnWarp: @ 8276B6C
 	map_script_2 VAR_CABLE_CLUB_STATE, USING_SINGLE_BATTLE, CableClub_EventScript_CheckTurnAttendant
 	map_script_2 VAR_CABLE_CLUB_STATE, USING_DOUBLE_BATTLE, CableClub_EventScript_CheckTurnAttendant
 	map_script_2 VAR_CABLE_CLUB_STATE, USING_MULTI_BATTLE, CableClub_EventScript_CheckTurnAttendant
@@ -72,7 +72,7 @@ CableClub_EventScript_CheckTurnAttendant:: @ 8276BAE
 CableClub_EventScript_DontTurnAttendant:: @ 8276BBD
 	end
 
-CableClub_MapScript1_OnLoad: @ 8276BBE
+CableClub_OnLoad: @ 8276BBE
 	compare VAR_CABLE_CLUB_STATE, USING_SINGLE_BATTLE
 	goto_if_eq CableClub_EventScript_OnLoadFromColosseum
 	compare VAR_CABLE_CLUB_STATE, USING_DOUBLE_BATTLE
@@ -115,7 +115,7 @@ CableClub_EventScript_OnLoadFromGameCorner:: @ 8276C35
 	call EventScript_OpenMossdeepGameCornerBarrier
 	end
 
-CableClub_MapScript2_OnFrame: @ 8276C3B
+CableClub_OnFrame: @ 8276C3B
 	map_script_2 VAR_CABLE_CLUB_TUTORIAL_STATE, 1, CableClub_EventScript_Tutorial
 	map_script_2 VAR_CABLE_CLUB_STATE, USING_SINGLE_BATTLE, CableClub_EventScript_ExitLinkRoom
 	map_script_2 VAR_CABLE_CLUB_STATE, USING_DOUBLE_BATTLE, CableClub_EventScript_ExitLinkRoom
@@ -1350,7 +1350,7 @@ EventScript_CloseMossdeepGameCornerBarrier:: @ 8277C1D
 	setmetatile 5, 3, METATILE_MossdeepGameCorner_CounterClosed_Bottom, 1
 	return
 
-CableClub_MapScript1_InitUnionRoom: @ 8277C30
+CableClub_OnResume: @ 8277C30
 	special InitUnionRoom
 	end
 
@@ -1403,7 +1403,7 @@ MossdeepCity_GameCorner_1F_EventScript_OldMan2:: @ 8277C91
 
 MossdeepCity_GameCorner_1F_EventScript_PlayPokemonJump:: @ 8277CE9
 	setvar VAR_0x8005, 0
-	special DoesPartyHavePokemonJumpSpecies
+	special IsPokemonJumpSpeciesInParty
 	compare VAR_RESULT, FALSE
 	goto_if_eq MossdeepCity_GameCorner_1F_EventScript_DontHaveRequiredMon
 	msgbox MossdeepCity_GameCorner_1F_Text_EnterWhichPokemon, MSGBOX_DEFAULT
@@ -1422,7 +1422,7 @@ MossdeepCity_GameCorner_1F_EventScript_PlayPokemonJump:: @ 8277CE9
 
 MossdeepCity_GameCorner_1F_EventScript_PlayDodrioBerryPicking:: @ 8277D35
 	setvar VAR_0x8005, 1
-	special DoesPartyHaveDodrio
+	special IsDodrioInParty
 	compare VAR_RESULT, FALSE
 	goto_if_eq MossdeepCity_GameCorner_1F_EventScript_DontHaveRequiredMon
 	msgbox MossdeepCity_GameCorner_1F_Text_EnterWhichPokemon, MSGBOX_DEFAULT

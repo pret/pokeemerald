@@ -2580,7 +2580,7 @@ static u8 sub_8027A48(u8 id)
     return gUnknown_02022C98->unk34[id];
 }
 
-void DoesPartyHaveDodrio(void)
+void IsDodrioInParty(void)
 {
     int i;
     for (i = 0; i < PARTY_SIZE; i++)
