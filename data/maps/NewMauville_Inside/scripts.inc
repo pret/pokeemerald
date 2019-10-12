@@ -14,7 +14,7 @@ NewMauville_Inside_MapScript1_2373E7: @ 82373E7
 
 NewMauville_Inside_EventScript_237407:: @ 8237407
 	specialvar VAR_RESULT, GetBattleOutcome
-	compare VAR_RESULT, 7
+	compare VAR_RESULT, B_OUTCOME_CAUGHT
 	goto_if_ne Common_EventScript_NopReturn
 	removeobject VAR_LAST_TALKED
 	return
@@ -190,11 +190,11 @@ NewMauville_Inside_EventScript_2377AF:: @ 82377AF
 	dowildbattle
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
 	specialvar VAR_RESULT, GetBattleOutcome
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, B_OUTCOME_WON
 	goto_if_eq NewMauville_Inside_EventScript_2377F3
-	compare VAR_RESULT, 4
+	compare VAR_RESULT, B_OUTCOME_RAN
 	goto_if_eq NewMauville_Inside_EventScript_2377F3
-	compare VAR_RESULT, 5
+	compare VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED
 	goto_if_eq NewMauville_Inside_EventScript_2377F3
 	setflag FLAG_DEFEATED_VOLTORB_1_NEW_MAUVILLE
 	release
@@ -217,11 +217,11 @@ NewMauville_Inside_EventScript_2377FC:: @ 82377FC
 	dowildbattle
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
 	specialvar VAR_RESULT, GetBattleOutcome
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, B_OUTCOME_WON
 	goto_if_eq NewMauville_Inside_EventScript_237840
-	compare VAR_RESULT, 4
+	compare VAR_RESULT, B_OUTCOME_RAN
 	goto_if_eq NewMauville_Inside_EventScript_237840
-	compare VAR_RESULT, 5
+	compare VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED
 	goto_if_eq NewMauville_Inside_EventScript_237840
 	setflag FLAG_DEFEATED_VOLTORB_2_NEW_MAUVILLE
 	release
@@ -244,11 +244,11 @@ NewMauville_Inside_EventScript_237849:: @ 8237849
 	dowildbattle
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
 	specialvar VAR_RESULT, GetBattleOutcome
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, B_OUTCOME_WON
 	goto_if_eq NewMauville_Inside_EventScript_23788D
-	compare VAR_RESULT, 4
+	compare VAR_RESULT, B_OUTCOME_RAN
 	goto_if_eq NewMauville_Inside_EventScript_23788D
-	compare VAR_RESULT, 5
+	compare VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED
 	goto_if_eq NewMauville_Inside_EventScript_23788D
 	setflag FLAG_DEFEATED_VOLTORB_3_NEW_MAUVILLE
 	release

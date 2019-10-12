@@ -2723,9 +2723,8 @@ bool8 MovementType_WanderAround_Step4(struct EventObject *eventObject, struct Sp
     SetEventObjectDirection(eventObject, chosenDirection);
     sprite->data[1] = 5;
     if (GetCollisionInDirection(eventObject, chosenDirection))
-    {
         sprite->data[1] = 1;
-    }
+
     return TRUE;
 }
 
@@ -3093,9 +3092,8 @@ bool8 MovementType_WanderUpAndDown_Step4(struct EventObject *eventObject, struct
     SetEventObjectDirection(eventObject, direction);
     sprite->data[1] = 5;
     if (GetCollisionInDirection(eventObject, direction))
-    {
         sprite->data[1] = 1;
-    }
+
     return TRUE;
 }
 
@@ -3163,9 +3161,8 @@ bool8 MovementType_WanderLeftAndRight_Step4(struct EventObject *eventObject, str
     SetEventObjectDirection(eventObject, direction);
     sprite->data[1] = 5;
     if (GetCollisionInDirection(eventObject, direction))
-    {
         sprite->data[1] = 1;
-    }
+
     return TRUE;
 }
 
@@ -3952,7 +3949,7 @@ bool8 MovementType_WalkBackAndForth_Step1(struct EventObject *eventObject, struc
 
 bool8 MovementType_WalkBackAndForth_Step2(struct EventObject *eventObject, struct Sprite *sprite)
 {
-    bool8 collisionState;
+    bool8 collision;
     u8 movementActionId;
 
     if (eventObject->directionSequenceIndex && eventObject->initialCoords.x == eventObject->currentCoords.x && eventObject->initialCoords.y == eventObject->currentCoords.y)
@@ -3960,19 +3957,19 @@ bool8 MovementType_WalkBackAndForth_Step2(struct EventObject *eventObject, struc
         eventObject->directionSequenceIndex = 0;
         SetEventObjectDirection(eventObject, GetOppositeDirection(eventObject->movementDirection));
     }
-    collisionState = GetCollisionInDirection(eventObject, eventObject->movementDirection);
+    collision = GetCollisionInDirection(eventObject, eventObject->movementDirection);
     movementActionId = GetWalkNormalMovementAction(eventObject->movementDirection);
-    if (collisionState == TRUE)
+    if (collision == COLLISION_OUTSIDE_RANGE)
     {
         eventObject->directionSequenceIndex++;
         SetEventObjectDirection(eventObject, GetOppositeDirection(eventObject->movementDirection));
         movementActionId = GetWalkNormalMovementAction(eventObject->movementDirection);
-        collisionState = GetCollisionInDirection(eventObject, eventObject->movementDirection);
+        collision = GetCollisionInDirection(eventObject, eventObject->movementDirection);
     }
-    if (collisionState)
-    {
+
+    if (collision)
         movementActionId = GetWalkInPlaceNormalMovementAction(eventObject->facingDirection);
-    }
+
     EventObjectSetSingleMovement(eventObject, sprite, movementActionId);
     eventObject->singleMovementActive = 1;
     sprite->data[1] = 3;
@@ -3998,27 +3995,26 @@ bool8 MovementType_WalkSequence_Step0(struct EventObject *eventObject, struct Sp
 
 bool8 MoveNextDirectionInSequence(struct EventObject *eventObject, struct Sprite *sprite, u8 *route)
 {
-    u8 collisionState;
+    u8 collision;
     u8 movementActionId;
 
     if (eventObject->directionSequenceIndex == 3 && eventObject->initialCoords.x == eventObject->currentCoords.x && eventObject->initialCoords.y == eventObject->currentCoords.y)
-    {
         eventObject->directionSequenceIndex = 0;
-    }
+
     SetEventObjectDirection(eventObject, route[eventObject->directionSequenceIndex]);
     movementActionId = GetWalkNormalMovementAction(eventObject->movementDirection);
-    collisionState = GetCollisionInDirection(eventObject, eventObject->movementDirection);
-    if (collisionState == TRUE)
+    collision = GetCollisionInDirection(eventObject, eventObject->movementDirection);
+    if (collision == COLLISION_OUTSIDE_RANGE)
     {
         eventObject->directionSequenceIndex++;
         SetEventObjectDirection(eventObject, route[eventObject->directionSequenceIndex]);
         movementActionId = GetWalkNormalMovementAction(eventObject->movementDirection);
-        collisionState = GetCollisionInDirection(eventObject, eventObject->movementDirection);
+        collision = GetCollisionInDirection(eventObject, eventObject->movementDirection);
     }
-    if (collisionState)
-    {
+
+    if (collision)
         movementActionId = GetWalkInPlaceNormalMovementAction(eventObject->facingDirection);
-    }
+
     EventObjectSetSingleMovement(eventObject, sprite, movementActionId);
     eventObject->singleMovementActive = 1;
     sprite->data[1] = 2;
@@ -4868,22 +4864,20 @@ static u8 GetCollisionInDirection(struct EventObject *eventObject, u8 direction)
     return GetCollisionAtCoords(eventObject, x, y, direction);
 }
 
-u8 GetCollisionAtCoords(struct EventObject *eventObject, s16 x, s16 y, u32 dirn)
+u8 GetCollisionAtCoords(struct EventObject *eventObject, s16 x, s16 y, u32 dir)
 {
-    u8 direction;
-
-    direction = dirn;
+    u8 direction = dir;
     if (IsCoordOutsideEventObjectMovementRange(eventObject, x, y))
-        return 1;
+        return COLLISION_OUTSIDE_RANGE;
     else if (MapGridIsImpassableAt(x, y) || GetMapBorderIdAt(x, y) == -1 || IsMetatileDirectionallyImpassable(eventObject, x, y, direction))
-        return 2;
+        return COLLISION_IMPASSABLE;
     else if (eventObject->trackedByCamera && !CanCameraMoveInDirection(direction))
-        return 2;
+        return COLLISION_IMPASSABLE;
     else if (IsZCoordMismatchAt(eventObject->currentElevation, x, y))
-        return 3;
+        return COLLISION_ELEVATION_MISMATCH;
     else if (DoesObjectCollideWithObjectAt(eventObject, x, y))
-        return 4;
-    return 0;
+        return COLLISION_EVENT_OBJECT;
+    return COLLISION_NONE;
 }
 
 u8 GetCollisionFlagsAtCoords(struct EventObject *eventObject, s16 x, s16 y, u8 direction)
@@ -6831,15 +6825,15 @@ bool8 MovementAction_ClearAffineAnim_Step0(struct EventObject *eventObject, stru
     return TRUE;
 }
 
-bool8 MovementAction_Unknown1_Step0(struct EventObject *eventObject, struct Sprite *sprite)
+bool8 MovementAction_HideReflection_Step0(struct EventObject *eventObject, struct Sprite *sprite)
 {
-    eventObject->unk3_3 = TRUE;
+    eventObject->hideReflection = TRUE;
     return TRUE;
 }
 
-bool8 MovementAction_Unknown2_Step0(struct EventObject *eventObject, struct Sprite *sprite)
+bool8 MovementAction_ShowReflection_Step0(struct EventObject *eventObject, struct Sprite *sprite)
 {
-    eventObject->unk3_3 = FALSE;
+    eventObject->hideReflection = FALSE;
     return TRUE;
 }
 

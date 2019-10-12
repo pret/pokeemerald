@@ -102,8 +102,8 @@
 	create_movement_action clear_fixed_priority
 	create_movement_action init_affine_anim
 	create_movement_action clear_affine_anim
-	create_movement_action unknown_movement_1
-	create_movement_action unknown_movement_2
+	create_movement_action hide_reflection
+	create_movement_action show_reflection
 	create_movement_action walk_down_start_affine
 	create_movement_action walk_down_affine
 

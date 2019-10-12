@@ -5724,9 +5724,9 @@ u16 ModifyStatByNature(u8 nature, u16 n, u8 statIndex)
     switch (gNatureStatTable[nature][statIndex - 1])
     {
     case 1:
-        return (u16)(n * 110) / 100;
+        return (u16)(n * 110) / 100; // NOTE: will overflow for n > 595 because the intermediate value is cast to u16 before the division. Fix by removing (u16) cast
     case -1:
-        return (u16)(n * 90) / 100;
+        return (u16)(n * 90) / 100;  // NOTE: will overflow for n > 728, see above
     }
 
     return n;

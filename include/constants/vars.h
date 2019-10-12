@@ -77,7 +77,7 @@
 #define VAR_REGICE_STEPS_2                   0x403C
 #define VAR_REGICE_STEPS_3                   0x403D
 #define VAR_ALTERING_CAVE_WILD_SET           0x403E
-#define VAR_ALWAYS_ZERO_0x403F               0x403F // This var is read and written, but is always zero.
+#define VAR_DISTRIBUTE_EON_TICKET            0x403F // This var is read and written, but is always zero. The only way to obtain the Eon Ticket in Emerald is via Record Mixing
 #define VAR_DAYS                             0x4040
 #define VAR_FANCLUB_UNKNOWN_1                0x4041
 #define VAR_FANCLUB_UNKNOWN_2                0x4042

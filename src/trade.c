@@ -388,7 +388,7 @@ static void CB2_CreateTradeMenu(void)
 
         if (!gReceivedRemoteLinkPlayers)
         {
-            gLinkType = 0x1122;
+            gLinkType = LINKTYPE_0x1122;
             sTradeMenuData->timer = 0;
 
             if (gWirelessCommType)
@@ -2939,7 +2939,7 @@ void CB2_LinkTrade(void)
     case 0:
         if (!gReceivedRemoteLinkPlayers)
         {
-            gLinkType = 0x1144;
+            gLinkType = LINKTYPE_0x1144;
             CloseLink();
         }
         sTradeData = AllocZeroed(sizeof(*sTradeData));
