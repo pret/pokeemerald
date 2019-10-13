@@ -9,7 +9,7 @@
 #include "field_weather.h"
 #include "gpu_regs.h"
 #include "main.h"
-#include "alloc.h"
+#include "malloc.h"
 #include "overworld.h"
 #include "palette.h"
 #include "random.h"
@@ -1961,9 +1961,10 @@ static bool8 Phase2_Ripple_Func2(struct Task *task)
 
     for (i = 0; i < 160; i++, r4 += r8)
     {
-        // todo: fix the asm
         s16 var = r4 >> 8;
-        asm("");
+        
+        var++;
+        var--;
         gScanlineEffectRegBuffers[0][i] = sTransitionStructPtr->field_16 + Sin(var, r3);
     }
 

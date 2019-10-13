@@ -165,13 +165,13 @@ SlateportCity_OceanicMuseum_1F_EventScript_20AEF8:: @ 820AEF8
 	setflag FLAG_RECEIVED_TM46
 	msgbox SlateportCity_OceanicMuseum_1F_Text_20B449, MSGBOX_DEFAULT
 	closemessage
-	compare VAR_FACING, 2
+	compare VAR_FACING, DIR_NORTH
 	goto_if_eq SlateportCity_OceanicMuseum_1F_EventScript_20AF6C
-	compare VAR_FACING, 1
+	compare VAR_FACING, DIR_SOUTH
 	goto_if_eq SlateportCity_OceanicMuseum_1F_EventScript_20AF83
-	compare VAR_FACING, 3
+	compare VAR_FACING, DIR_WEST
 	goto_if_eq SlateportCity_OceanicMuseum_1F_EventScript_20AF93
-	compare VAR_FACING, 4
+	compare VAR_FACING, DIR_EAST
 	goto_if_eq SlateportCity_OceanicMuseum_1F_EventScript_20AF93
 	end
 

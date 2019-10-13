@@ -2158,9 +2158,9 @@ static void MainMenu_FormatSavegameTime(void)
 
     StringExpandPlaceholders(gStringVar4, gText_ContinueMenuTime);
     AddTextPrinterParameterized3(2, 1, 0x6C, 17, sTextColor_PlayerGenderColor, -1, gStringVar4);
-    ptr = ConvertIntToDecimalStringN(str, gSaveBlock2Ptr->playTimeHours, 0, 3);
+    ptr = ConvertIntToDecimalStringN(str, gSaveBlock2Ptr->playTimeHours, STR_CONV_MODE_LEFT_ALIGN, 3);
     *ptr = 0xF0;
-    ConvertIntToDecimalStringN(ptr + 1, gSaveBlock2Ptr->playTimeMinutes, 2, 2);
+    ConvertIntToDecimalStringN(ptr + 1, gSaveBlock2Ptr->playTimeMinutes, STR_CONV_MODE_LEADING_ZEROS, 2);
     AddTextPrinterParameterized3(2, 1, GetStringRightAlignXOffset(1, str, 0xD0), 17, sTextColor_PlayerGenderColor, -1, str);
 }
 
@@ -2177,7 +2177,7 @@ static void MainMenu_FormatSavegamePokedex(void)
             dexCount = GetHoennPokedexCount(1);
         StringExpandPlaceholders(gStringVar4, gText_ContinueMenuPokedex);
         AddTextPrinterParameterized3(2, 1, 0, 33, sTextColor_PlayerGenderColor, -1, gStringVar4);
-        ConvertIntToDecimalStringN(str, dexCount, 0, 3);
+        ConvertIntToDecimalStringN(str, dexCount, STR_CONV_MODE_LEFT_ALIGN, 3);
         AddTextPrinterParameterized3(2, 1, GetStringRightAlignXOffset(1, str, 100), 33, sTextColor_PlayerGenderColor, -1, str);
     }
 }
@@ -2195,7 +2195,7 @@ static void MainMenu_FormatSavegameBadges(void)
     }
     StringExpandPlaceholders(gStringVar4, gText_ContinueMenuBadges);
     AddTextPrinterParameterized3(2, 1, 0x6C, 33, sTextColor_PlayerGenderColor, -1, gStringVar4);
-    ConvertIntToDecimalStringN(str, badgeCount, 2, 1);
+    ConvertIntToDecimalStringN(str, badgeCount, STR_CONV_MODE_LEADING_ZEROS, 1);
     AddTextPrinterParameterized3(2, 1, GetStringRightAlignXOffset(1, str, 0xD0), 33, sTextColor_PlayerGenderColor, -1, str);
 }
 

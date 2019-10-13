@@ -81,7 +81,7 @@ LilycoveCity_ContestLobby_EventScript_21A2E4:: @ 821A2E4
 	end
 
 LilycoveCity_ContestLobby_EventScript_21A314:: @ 821A314
-	incrementgamestat 42
+	incrementgamestat GAME_STAT_RECEIVED_RIBBONS
 	special sub_80F8390
 	applymovement 4, LilycoveCity_ContestLobby_Movement_21A41A
 	waitmovement 0
@@ -253,7 +253,7 @@ LilycoveCity_ContestLobby_EventScript_21A4B4:: @ 821A4B4
 	end
 
 LilycoveCity_ContestLobby_EventScript_21A4E4:: @ 821A4E4
-	incrementgamestat 42
+	incrementgamestat GAME_STAT_RECEIVED_RIBBONS
 	setflag FLAG_SYS_RIBBON_GET
 	special sub_80F8390
 	applymovement 11, LilycoveCity_ContestLobby_Movement_21A547
@@ -810,7 +810,7 @@ LilycoveCity_ContestLobby_EventScript_21AAE1:: @ 821AAE1
 
 LilycoveCity_ContestLobby_EventScript_21AAEF:: @ 821AAEF
 	special CloseLink
-	msgbox LilycoveCity_ContestLobby_Text_27821C, MSGBOX_DEFAULT
+	msgbox Text_LinkErrorPleaseReset, MSGBOX_DEFAULT
 	release
 	end
 
@@ -908,12 +908,12 @@ LilycoveCity_ContestLobby_EventScript_21AC0B:: @ 821AC0B
 	end
 
 LilycoveCity_ContestLobby_EventScript_21AC33:: @ 821AC33
-	special BerryBlenderLinkBecomeLeader
+	special TryBecomeLinkLeader
 	waitstate
 	return
 
 LilycoveCity_ContestLobby_EventScript_21AC38:: @ 821AC38
-	special BerryBlenderLinkJoinGroup
+	special TryJoinLinkGroup
 	waitstate
 	return
 

@@ -7,7 +7,7 @@ LavaridgeTown_HerbShop_EventScript_1FE4D7:: @ 81FE4D7
 	message LavaridgeTown_HerbShop_Text_1FE53E
 	waitmessage
 	pokemart LavaridgeTown_HerbShop_Pokemart_1FE4F0
-	msgbox gUnknown_08272A3F, MSGBOX_DEFAULT
+	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
 	release
 	end
 

@@ -11,7 +11,7 @@ gSpecials:: @ 81DBA64
 	def_special HealPlayerParty
 	def_special SetCableClubWarp
 	def_special sub_80AF948
-	def_special sub_80AF9F8
+	def_special ReturnFromLinkRoom
 	def_special CleanupLinkRoomState
 	def_special ExitLinkRoom
 	def_special SetPlayerSecretBase
@@ -25,19 +25,19 @@ gSpecials:: @ 81DBA64
 	def_special ShowSecretBaseDecorationMenu
 	def_special ShowSecretBaseRegistryMenu
 	def_special PrepSecretBaseBattleFlags
-	def_special GetSecretBaseOwnerInteractionState
+	def_special GetSecretBaseOwnerAndState
 	def_special InitSecretBaseDecorationSprites
-	def_special sub_8127E18
+	def_special SetDecoration
 	def_special sub_81297AC
 	def_special GetSecretBaseTypeInFrontOfPlayer
 	def_special SetSecretBaseOwnerGfxId
 	def_special sub_8129708
 	def_special EnterNewlyCreatedSecretBase
-	def_special sub_80EA30C
+	def_special SetBattledOwnerFromResult
 	def_special DoSecretBasePCTurnOffEffect
 	def_special RecordMixingPlayerSpotTriggered
-	def_special sub_80B2DA4
-	def_special sub_80B2E4C
+	def_special TryBattleLinkup
+	def_special TryTradeLinkup
 	def_special sub_80B2E74
 	def_special sub_80B2EA8
 	def_special CloseLink
@@ -51,7 +51,7 @@ gSpecials:: @ 81DBA64
 	def_special SavePlayerParty
 	def_special LoadPlayerParty
 	def_special ChooseHalfPartyForBattle
-	def_special sp02A_crash_sound
+	def_special Script_ShowLinkTrainerCard
 	def_special EventObjectInteractionGetBerryTreeData
 	def_special EventObjectInteractionGetBerryName
 	def_special EventObjectInteractionGetBerryCountString
@@ -197,7 +197,7 @@ gSpecials:: @ 81DBA64
 	def_special RejectEggFromDayCare
 	def_special GiveEggFromDaycare
 	def_special SetDaycareCompatibilityString
-	def_special GetSelectedMonNickAndSpecies
+	def_special GetSelectedMonNicknameAndSpecies
 	def_special StoreSelectedPokemonInDaycare
 	def_special ChooseSendDaycareMon
 	def_special ShowDaycareLevelMenu
@@ -206,7 +206,7 @@ gSpecials:: @ 81DBA64
 	def_special TakePokemonFromDaycare
 	def_special ScriptHatchMon
 	def_special EggHatch
-	def_special sub_8071614
+	def_special CheckDaycareMonReceivedMail
 	def_special ShowLinkBattleRecords
 	def_special IsEnoughForCostInVar0x8005
 	def_special SubtractMoneyFromVar0x8005
@@ -305,8 +305,8 @@ gSpecials:: @ 81DBA64
 	def_special LeadMonHasEffortRibbon
 	def_special GiveLeadMonEffortRibbon
 	def_special Special_AreLeadMonEVsMaxedOut
-	def_special sub_8098574
-	def_special sub_809859C
+	def_special Script_FacePlayer
+	def_special Script_ClearHeldMovement
 	def_special InitRoamer
 	def_special TryUpdateRusturfTunnelState
 	def_special IsGrassTypeInParty
@@ -320,7 +320,7 @@ gSpecials:: @ 81DBA64
 	def_special GetShieldToyTVDecorationInfo
 	def_special IsPokerusInParty
 	def_special SetSootopolisGymCrackedIceMetatiles
-	def_special sub_8139560
+	def_special ShakeCamera
 	def_special StartGroudonKyogreBattle
 	def_special BattleSetup_StartLegendaryBattle
 	def_special StartRegiBattle
@@ -349,7 +349,7 @@ gSpecials:: @ 81DBA64
 	def_special MonOTNameMatchesPlayer
 	def_special BufferLottoTicketNumber
 	def_special sub_81653CC
-	def_special sub_80F9370
+	def_special DoesPartyHaveEnigmaBerry
 	def_special ScriptRandom
 	def_special sub_81AFDD0
 	def_special sub_80EDCE8
@@ -360,7 +360,7 @@ gSpecials:: @ 81DBA64
 	def_special PutFanClubSpecialOnTheAir
 	def_special sub_80EED10
 	def_special sub_80EED34
-	def_special sub_80EB1AC
+	def_special InitSecretBaseVars
 	def_special SetSecretBaseSecretsTvFlags_SandOrnament
 	def_special sub_80EB300
 	def_special sub_80EB438
@@ -414,7 +414,7 @@ gSpecials:: @ 81DBA64
 	def_special GetContestLadyMonSpecies
 	def_special GetContestLadyCategory
 	def_special PutLilycoveContestLadyShowOnTheAir
-	def_special sub_813B880
+	def_special CloseBattlePikeCurtain
 	def_special CallApprenticeFunction
 	def_special ShouldTryGetTrainerScript
 	def_special ShowMapNamePopup
@@ -424,23 +424,23 @@ gSpecials:: @ 81DBA64
 	def_special StartPlayerDescendMirageTower
 	def_special BufferTMHMMoveName
 	def_special IsWirelessAdapterConnected
-	def_special BerryBlenderLinkBecomeLeader
-	def_special BerryBlenderLinkJoinGroup
+	def_special TryBecomeLinkLeader
+	def_special TryJoinLinkGroup
 	def_special UnionRoomSpecial
 	def_special sub_801A42C
-	def_special sub_8016934
-	def_special sp182_move_string
+	def_special InitUnionRoom
+	def_special BufferUnionRoomPlayerName
 	def_special sub_801DC20
-	def_special sub_81B8958
-	def_special sub_8018090
+	def_special ChooseMonForWirelessMinigame
+	def_special Script_ResetUnionRoomTrade
 	def_special IsBadEggInParty
 	def_special ValidateReceivedWonderCard
 	def_special HasAtLeastOneBerry
-	def_special sub_802C920
-	def_special sub_802E3C4
-	def_special sub_8027A5C
-	def_special sub_8027AAC
-	def_special sub_8139980
+	def_special IsPokemonJumpSpeciesInParty
+	def_special ShowPokemonJumpRecords
+	def_special IsDodrioInParty
+	def_special ShowDodrioBerryPickingRecords
+	def_special OffsetCameraForBattle
 	def_special GetDeptStoreDefaultFloorChoice
 	def_special BufferVarsForIVRater
 	def_special sub_80F905C
@@ -505,32 +505,32 @@ gSpecials:: @ 81DBA64
 	def_special sub_80A08CC
 	def_special Unused_SetWeatherSunny
 	def_special sub_81AFDA0
-	def_special sub_813B4E0
+	def_special IsTrainerRegistered
 	def_special ShouldDoBrailleRegicePuzzle
 	def_special EnableNationalPokedex
 	def_special ScriptMenu_CreateLilycoveSSTidalMultichoice
 	def_special GetLilycoveSSTidalSelection
 	def_special TurnOnTVScreen
 	def_special sub_81D4A90
-	def_special sub_813B514
+	def_special ShouldDistributeEonTicket
 	def_special sub_813B568
 	def_special sub_813B534
 	def_special CallTrainerHillFunction
 	def_special Script_DoRayquazaScene @ Listed twice
-	def_special sub_813B80C
+	def_special LoopWingFlapSE
 	def_special sub_81D4BEC
 	def_special sub_80224D0
 	def_special TryBufferWaldaPhrase
 	def_special DoWaldaNamingScreen
 	def_special TryGetWallpaperWithWaldaPhrase
-	def_special sub_8139ED0
+	def_special PlayerNotAtTrainerHillEntrance
 	def_special GetBattlePyramidHint
 	def_special sub_80F8B94
 	def_special ShowTrainerHillRecords
 	def_special sub_80B4808
 	def_special ResetHealLocationFromDewford
 	def_special sub_81B9918
-	def_special sub_80722E0
+	def_special CountPartyAliveNonEggMons
 	def_special TryPrepareSecondApproachingTrainer
 	def_special RemoveRecordsWindow
 	def_special CloseDeptStoreElevatorWindow

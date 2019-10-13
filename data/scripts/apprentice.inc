@@ -74,7 +74,7 @@ Script_Apprentice_FirstMeetingNag:
 	release
 	releaseall
 	switch VAR_FACING
-	case 2, Script_Apprentice_LeaveGoRight
+	case DIR_NORTH, Script_Apprentice_LeaveGoRight
 	goto Script_Apprentice_Leave
 	end
 
@@ -117,7 +117,7 @@ BattleFrontier_BattleTowerLobby_EventScript_2B69D3:
 	release
 	releaseall
 	switch VAR_FACING
-	case 2, Script_Apprentice_LeaveGoRight
+	case DIR_NORTH, Script_Apprentice_LeaveGoRight
 	goto Script_Apprentice_Leave
 	end
 
@@ -163,7 +163,7 @@ BattleFrontier_BattleTowerLobby_EventScript_2B6B09:
 	release
 	releaseall
 	switch VAR_FACING
-	case 2, Script_Apprentice_LeaveGoRight
+	case DIR_NORTH, Script_Apprentice_LeaveGoRight
 	goto Script_Apprentice_Leave
 	end
 
@@ -187,7 +187,7 @@ BattleFrontier_BattleTowerLobby_EventScript_2B6BD4:
 	release
 	releaseall
 	switch VAR_FACING
-	case 2, Script_Apprentice_LeaveGoRight
+	case DIR_NORTH, Script_Apprentice_LeaveGoRight
 	goto Script_Apprentice_Leave
 	end
 
@@ -235,7 +235,7 @@ BattleFrontier_BattleTowerLobby_EventScript_2B6C77:
 	release
 	releaseall
 	switch VAR_FACING
-	case 2, Script_Apprentice_LeaveGoRight
+	case DIR_NORTH, Script_Apprentice_LeaveGoRight
 	goto Script_Apprentice_Leave
 	end
 
@@ -261,7 +261,7 @@ BattleFrontier_BattleTowerLobby_EventScript_2B6D5C:
 	release
 	releaseall
 	switch VAR_FACING
-	case 2, Script_Apprentice_LeaveGoRight
+	case DIR_NORTH, Script_Apprentice_LeaveGoRight
 	goto Script_Apprentice_Leave
 	end
 
@@ -283,7 +283,7 @@ BattleFrontier_BattleTowerLobby_EventScript_2B6DD4:
 	release
 	releaseall
 	switch VAR_FACING
-	case 2, Script_Apprentice_LeaveGoRight
+	case DIR_NORTH, Script_Apprentice_LeaveGoRight
 	goto Script_Apprentice_Leave
 	end
 

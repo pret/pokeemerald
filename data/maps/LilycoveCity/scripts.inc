@@ -8,7 +8,7 @@ LilycoveCity_OnTransition: @ 81E2B47
 	setvar VAR_LINK_CONTEST_ROOM_STATE, 0
 	setflag FLAG_HIDE_LILYCOVE_CONTEST_HALL_REPORTER
 	call_if_set FLAG_SYS_WEATHER_CTRL, Common_EventScript_SetWeather15
-	call Common_EventScript_SetupRivalGender
+	call Common_EventScript_SetupRivalGfxId
 	end
 
 LilycoveCity_MapScript1_1E2B61: @ 81E2B61

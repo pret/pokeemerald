@@ -30,7 +30,4 @@ build/
 .idea/
 porymap.project.cfg
 .vscode/
-*.ss1
-*.ss2
-*.ss3
-pokeemerald.ss9
+*.a

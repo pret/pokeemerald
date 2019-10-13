@@ -1,6 +1,6 @@
 EventScript_TV:: @ 827EE0B
 	lockall
-	incrementgamestat 44
+	incrementgamestat GAME_STAT_WATCHED_TV
 	special ResetTVShowState
 	specialvar VAR_RESULT, CheckForBigMovieOrEmergencyNewsOnTV
 	compare VAR_RESULT, 2
@@ -30,7 +30,7 @@ EventScript_27EE54:: @ 827EE54
 
 EventScript_27EE8A:: @ 827EE8A
 	special GetMomOrDadStringForTVMessage
-	msgbox gUnknown_08272BCF, MSGBOX_DEFAULT
+	msgbox gText_MomOrDadMightLikeThisProgram, MSGBOX_DEFAULT
 	special TurnOffTVScreen
 	releaseall
 	end
@@ -69,7 +69,7 @@ EventScript_27EED0:: @ 827EED0
 
 EventScript_27EED8:: @ 827EED8
 	special GetMomOrDadStringForTVMessage
-	msgbox gUnknown_08272BCF, MSGBOX_DEFAULT
+	msgbox gText_MomOrDadMightLikeThisProgram, MSGBOX_DEFAULT
 	goto EventScript_27EED0
 	end
 

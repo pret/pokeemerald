@@ -26,7 +26,7 @@
 #include "link_rfu.h"
 #include "load_save.h"
 #include "main.h"
-#include "alloc.h"
+#include "malloc.h"
 #include "m4a.h"
 #include "palette.h"
 #include "party_menu.h"
@@ -1491,7 +1491,7 @@ static void CB2_PreInitMultiBattle(void)
     case 3:
         if (gWirelessCommType)
         {
-            if (sub_8010500())
+            if (IsLinkRfuTaskFinished())
             {
                 gBattleTypeFlags = *savedBattleTypeFlags;
                 gMain.savedCallback = *savedCallback;

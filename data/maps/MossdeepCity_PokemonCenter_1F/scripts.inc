@@ -1,6 +1,6 @@
 MossdeepCity_PokemonCenter_1F_MapScripts:: @ 822223F
 	map_script MAP_SCRIPT_ON_TRANSITION, MossdeepCity_PokemonCenter_1F_OnTransition
-	map_script MAP_SCRIPT_ON_RESUME, MossdeepCity_PokemonCenter_1F_MapScript1_277C30
+	map_script MAP_SCRIPT_ON_RESUME, CableClub_OnResume
 	.byte 0
 
 MossdeepCity_PokemonCenter_1F_OnTransition: @ 822224A
@@ -9,7 +9,7 @@ MossdeepCity_PokemonCenter_1F_OnTransition: @ 822224A
 
 MossdeepCity_PokemonCenter_1F_EventScript_22224E:: @ 822224E
 	setvar VAR_0x800B, 1
-	call MossdeepCity_PokemonCenter_1F_EventScript_27191E
+	call Common_EventScript_PkmnCenterNurse
 	waitmessage
 	waitbuttonpress
 	release

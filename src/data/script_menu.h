@@ -31,7 +31,7 @@ static const struct MenuAction MultichoiceList_ContestType[] =
     {gText_Exit},
 };
 
-static const struct MenuAction MultichoiceList_DecorRegistry[] =
+static const struct MenuAction MultichoiceList_BasePCWithRegistry[] =
 {
     {gText_Decoration2},
     {gText_PackUp},
@@ -39,7 +39,7 @@ static const struct MenuAction MultichoiceList_DecorRegistry[] =
     {gText_Exit},
 };
 
-static const struct MenuAction MultichoiceList_DecorNoRegistry[] =
+static const struct MenuAction MultichoiceList_BasePCNoRegistry[] =
 {
     {gText_Decoration2},
     {gText_PackUp},
@@ -789,8 +789,8 @@ static const struct MultichoiceListStruct sMultichoiceLists[] =
     [MULTI_ENTERINFO]                  = MULTICHOICE(MultichoiceList_EnterInfo),
     [MULTI_CONTEST_INFO]               = MULTICHOICE(MultichoiceList_ContestInfo),
     [MULTI_CONTEST_TYPE]               = MULTICHOICE(MultichoiceList_ContestType),
-    [MULTI_DECOR_NOREGISTRY]           = MULTICHOICE(MultichoiceList_DecorNoRegistry),
-    [MULTI_DECOR_REGISTRY]             = MULTICHOICE(MultichoiceList_DecorRegistry),
+    [MULTI_BASE_PC_NO_REGISTRY]        = MULTICHOICE(MultichoiceList_BasePCNoRegistry),
+    [MULTI_BASE_PC_WITH_REGISTRY]      = MULTICHOICE(MultichoiceList_BasePCWithRegistry),
     [MULTI_REGISTER_MENU]              = MULTICHOICE(MultichoiceList_RegisterMenu),
     [MULTI_SSTIDAL_LILYCOVE]           = MULTICHOICE(MultichoiceList_Exit),
     [MULTI_UNUSED_9]                   = MULTICHOICE(MultichoiceList_Exit),

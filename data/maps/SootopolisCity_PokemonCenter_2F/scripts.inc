@@ -1,19 +1,20 @@
 SootopolisCity_PokemonCenter_2F_MapScripts:: @ 822676D
-	map_script MAP_SCRIPT_ON_FRAME_TABLE, SootopolisCity_PokemonCenter_2F_MapScript2_276C3B
-	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, SootopolisCity_PokemonCenter_2F_MapScript2_276B6C
-	map_script MAP_SCRIPT_ON_LOAD, SootopolisCity_PokemonCenter_2F_MapScript1_276BBE
-	map_script MAP_SCRIPT_ON_TRANSITION, PokemonCenter_2F_OnTransition
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, CableClub_OnFrame
+	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, CableClub_OnWarp
+	map_script MAP_SCRIPT_ON_LOAD, CableClub_OnLoad
+	map_script MAP_SCRIPT_ON_TRANSITION, CableClub_OnTransition
 	.byte 0
 
-SootopolisCity_PokemonCenter_2F_EventScript_226782:: @ 8226782
-	call OldaleTown_PokemonCenter_2F_EventScript_276EB7
+@ The below 3 are unused and leftover from RS
+SootopolisCity_PokemonCenter_2F_EventScript_Colosseum:: @ 8226782
+	call CableClub_EventScript_Colosseum
 	end
 
-SootopolisCity_PokemonCenter_2F_EventScript_226788:: @ 8226788
-	call OldaleTown_PokemonCenter_2F_EventScript_2770B2
+SootopolisCity_PokemonCenter_2F_EventScript_TradeCenter:: @ 8226788
+	call CableClub_EventScript_TradeCenter
 	end
 
-SootopolisCity_PokemonCenter_2F_EventScript_22678E:: @ 822678E
-	call OldaleTown_PokemonCenter_2F_EventScript_2771DB
+SootopolisCity_PokemonCenter_2F_EventScript_RecordCorner:: @ 822678E
+	call CableClub_EventScript_RecordCorner
 	end
 

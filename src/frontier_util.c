@@ -24,7 +24,7 @@
 #include "data.h"
 #include "record_mixing.h"
 #include "strings.h"
-#include "alloc.h"
+#include "malloc.h"
 #include "save.h"
 #include "load_save.h"
 #include "battle_dome.h"

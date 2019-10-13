@@ -1612,10 +1612,10 @@ bool8 ScrCmd_buffermovename(struct ScriptContext *ctx)
 bool8 ScrCmd_buffernumberstring(struct ScriptContext *ctx)
 {
     u8 stringVarIndex = ScriptReadByte(ctx);
-    u16 v1 = VarGet(ScriptReadHalfword(ctx));
-    u8 v2 = CountDigits(v1);
+    u16 num = VarGet(ScriptReadHalfword(ctx));
+    u8 numDigits = CountDigits(num);
 
-    ConvertIntToDecimalStringN(sScriptStringVars[stringVarIndex], v1, 0, v2);
+    ConvertIntToDecimalStringN(sScriptStringVars[stringVarIndex], num, STR_CONV_MODE_LEFT_ALIGN, numDigits);
     return FALSE;
 }
 
@@ -2218,6 +2218,8 @@ bool8 ScrCmd_checkmonobedience(struct ScriptContext *ctx)
     return FALSE;
 }
 
+// TODO: Should be renamed. Name implies general usage, but its specifically for Wonder Card
+// See GetSavedRamScriptIfValid, which is NULL if ValidateReceivedWonderCard returns FALSE
 bool8 ScrCmd_gotoram(struct ScriptContext *ctx)
 {
     const u8* v1 = GetSavedRamScriptIfValid();

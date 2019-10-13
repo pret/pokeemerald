@@ -109,8 +109,8 @@ MauvilleCity_EventScript_1DF4AD:: @ 81DF4AD
 	goto_if_eq MauvilleCity_EventScript_1DF683
 	closemessage
 	switch VAR_FACING
-	case 2, MauvilleCity_EventScript_1DF4E0
-	case 4, MauvilleCity_EventScript_1DF53D
+	case DIR_NORTH, MauvilleCity_EventScript_1DF4E0
+	case DIR_EAST, MauvilleCity_EventScript_1DF53D
 	end
 
 MauvilleCity_EventScript_1DF4E0:: @ 81DF4E0
@@ -160,18 +160,18 @@ MauvilleCity_EventScript_1DF593:: @ 81DF593
 	setflag FLAG_DEFEATED_WALLY_MAUVILLE
 	setvar VAR_WALLY_CALL_STEP_COUNTER, 0
 	setflag FLAG_ENABLE_FIRST_WALLY_POKENAV_CALL
-	compare VAR_FACING, 2
+	compare VAR_FACING, DIR_NORTH
 	call_if_eq MauvilleCity_EventScript_1DF5F3
-	compare VAR_FACING, 4
+	compare VAR_FACING, DIR_EAST
 	call_if_eq MauvilleCity_EventScript_1DF601
 	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceDown
 	waitmovement 0
 	msgbox MauvilleCity_Text_1DFED5, MSGBOX_DEFAULT
 	closemessage
 	addvar VAR_SCOTT_STATE, 1
-	compare VAR_FACING, 2
+	compare VAR_FACING, DIR_NORTH
 	call_if_eq MauvilleCity_EventScript_1DF616
-	compare VAR_FACING, 4
+	compare VAR_FACING, DIR_EAST
 	call_if_eq MauvilleCity_EventScript_1DF628
 	removeobject 11
 	releaseall

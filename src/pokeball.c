@@ -1097,7 +1097,7 @@ static void sub_80765E0(struct Sprite *sprite)
     }
 }
 
-u8 sub_807671C(u8 a, u8 b, u8 x, u8 y, u8 oamPriority, u8 subPriority, u8 g, u32 h)
+u8 CreateTradePokeballSprite(u8 a, u8 b, u8 x, u8 y, u8 oamPriority, u8 subPriority, u8 g, u32 h)
 {
     u8 spriteId;
 

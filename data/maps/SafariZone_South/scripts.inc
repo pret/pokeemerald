@@ -69,8 +69,8 @@ SafariZone_South_EventScript_23D31A:: @ 823D31A
 	msgbox SafariZone_South_Text_2A5248, MSGBOX_DEFAULT
 	closemessage
 	switch VAR_FACING
-	case 2, SafariZone_South_EventScript_23D33F
-	case 4, SafariZone_South_EventScript_23D359
+	case DIR_NORTH, SafariZone_South_EventScript_23D33F
+	case DIR_EAST, SafariZone_South_EventScript_23D359
 	end
 
 SafariZone_South_EventScript_23D33F:: @ 823D33F

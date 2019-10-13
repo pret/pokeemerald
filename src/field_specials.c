@@ -1,5 +1,5 @@
 #include "global.h"
-#include "alloc.h"
+#include "malloc.h"
 #include "battle.h"
 #include "battle_tower.h"
 #include "cable_club.h"
@@ -103,8 +103,8 @@ static void PCTurnOnEffect_1(s16, s8, s8);
 static void PCTurnOffEffect(void);
 static void Task_LotteryCornerComputerEffect(u8);
 static void LotteryCornerComputerEffect(struct Task *);
-static void sub_81395BC(u8 taskId);
-static void sub_8139620(u8 taskId);
+static void Task_ShakeCamera(u8 taskId);
+static void StopCameraShake(u8 taskId);
 static void Task_MoveElevator(u8 taskId);
 static void MoveElevatorWindowLights(u16 floorDelta, bool8 descending);
 static void Task_MoveElevatorWindowLights(u8 taskId);
@@ -126,8 +126,8 @@ static void Task_DeoxysRockInteraction(u8 taskId);
 static void ChangeDeoxysRockLevel(u8 a0);
 static void WaitForDeoxysRockMovement(u8 taskId);
 static void sub_813B57C(u8 taskId);
-static void sub_813B824(u8 taskId);
-static void _fwalk(u8 taskId);
+static void Task_LoopWingFlapSE(u8 taskId);
+static void Task_CloseBattlePikeCurtain(u8 taskId);
 static u8 sub_813BF44(void);
 static void sub_813BD84(void);
 static u16 sub_813BB74(void);
@@ -1493,43 +1493,55 @@ bool8 IsPokerusInParty(void)
     return TRUE;
 }
 
-void sub_8139560(void)
+#define horizontalPan  data[0]
+#define delayCounter   data[1]
+#define numShakes      data[2]
+#define delay          data[3]
+#define verticalPan    data[4]
+
+void ShakeCamera(void)
 {
-    u8 taskId = CreateTask(sub_81395BC, 9);
-    gTasks[taskId].data[0] = gSpecialVar_0x8005;
-    gTasks[taskId].data[1] = 0;
-    gTasks[taskId].data[2] = gSpecialVar_0x8006;
-    gTasks[taskId].data[3] = gSpecialVar_0x8007;
-    gTasks[taskId].data[4] = gSpecialVar_0x8004;
+    u8 taskId = CreateTask(Task_ShakeCamera, 9);
+    gTasks[taskId].horizontalPan = gSpecialVar_0x8005;
+    gTasks[taskId].delayCounter = 0;
+    gTasks[taskId].numShakes = gSpecialVar_0x8006;
+    gTasks[taskId].delay = gSpecialVar_0x8007;
+    gTasks[taskId].verticalPan = gSpecialVar_0x8004;
     SetCameraPanningCallback(NULL);
     PlaySE(SE_W070);
 }
 
-static void sub_81395BC(u8 taskId)
+static void Task_ShakeCamera(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
 
-    data[1]++;
-    if (data[1] % data[3] == 0)
+    delayCounter++;
+    if (delayCounter % delay == 0)
     {
-        data[1] = 0;
-        data[2]--;
-        data[0] = -data[0];
-        data[4] = -data[4];
-        SetCameraPanning(data[0], data[4]);
-        if (data[2] == 0)
+        delayCounter = 0;
+        numShakes--;
+        horizontalPan = -horizontalPan;
+        verticalPan = -verticalPan;
+        SetCameraPanning(horizontalPan, verticalPan);
+        if (numShakes == 0)
         {
-            sub_8139620(taskId);
+            StopCameraShake(taskId);
             InstallCameraPanAheadCallback();
         }
     }
 }
 
-static void sub_8139620(u8 taskId)
+static void StopCameraShake(u8 taskId)
 {
     DestroyTask(taskId);
     EnableBothScriptContexts();
 }
+
+#undef horizontalPan
+#undef delayCounter
+#undef numShakes
+#undef delay
+#undef verticalPan
 
 bool8 FoundBlackGlasses(void)
 {
@@ -1621,20 +1633,20 @@ void BufferLottoTicketNumber(void)
     else if (gSpecialVar_Result >= 1000)
     {
         gStringVar1[0] = CHAR_0;
-        ConvertIntToDecimalStringN(gStringVar1 + 1, gSpecialVar_Result, 0, CountDigits(gSpecialVar_Result));
+        ConvertIntToDecimalStringN(gStringVar1 + 1, gSpecialVar_Result, STR_CONV_MODE_LEFT_ALIGN, CountDigits(gSpecialVar_Result));
     }
     else if (gSpecialVar_Result >= 100)
     {
         gStringVar1[0] = CHAR_0;
         gStringVar1[1] = CHAR_0;
-        ConvertIntToDecimalStringN(gStringVar1 + 2, gSpecialVar_Result, 0, CountDigits(gSpecialVar_Result));
+        ConvertIntToDecimalStringN(gStringVar1 + 2, gSpecialVar_Result, STR_CONV_MODE_LEFT_ALIGN, CountDigits(gSpecialVar_Result));
     }
     else if (gSpecialVar_Result >= 10)
     {
         gStringVar1[0] = CHAR_0;
         gStringVar1[1] = CHAR_0;
         gStringVar1[2] = CHAR_0;
-        ConvertIntToDecimalStringN(gStringVar1 + 3, gSpecialVar_Result, 0, CountDigits(gSpecialVar_Result));
+        ConvertIntToDecimalStringN(gStringVar1 + 3, gSpecialVar_Result, STR_CONV_MODE_LEFT_ALIGN, CountDigits(gSpecialVar_Result));
     }
     else
     {
@@ -1642,7 +1654,7 @@ void BufferLottoTicketNumber(void)
         gStringVar1[1] = CHAR_0;
         gStringVar1[2] = CHAR_0;
         gStringVar1[3] = CHAR_0;
-        ConvertIntToDecimalStringN(gStringVar1 + 4, gSpecialVar_Result, 0, CountDigits(gSpecialVar_Result));
+        ConvertIntToDecimalStringN(gStringVar1 + 4, gSpecialVar_Result, STR_CONV_MODE_LEFT_ALIGN, CountDigits(gSpecialVar_Result));
     }
 }
 
@@ -1699,7 +1711,7 @@ bool8 InMultiBattleRoom(void)
     return FALSE;
 }
 
-void sub_8139980(void)
+void OffsetCameraForBattle(void)
 {
     SetCameraPanningCallback(NULL);
     SetCameraPanning(8, 0);
@@ -2050,7 +2062,7 @@ bool8 UsedPokemonCenterWarp(void)
     return FALSE;
 }
 
-bool32 sub_8139ED0(void)
+bool32 PlayerNotAtTrainerHillEntrance(void)
 {
     if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(TRAINER_HILL_ENTRANCE) && gSaveBlock1Ptr->location.mapNum == MAP_NUM(TRAINER_HILL_ENTRANCE))
     {
@@ -3713,7 +3725,7 @@ u32 GetMartEmployeeObjectEventId(void)
     return 1;
 }
 
-bool32 sub_813B4E0(void)
+bool32 IsTrainerRegistered(void)
 {
     int index = GetRematchIdxByTrainerIdx(gSpecialVar_0x8004);
     if (index >= 0)
@@ -3725,12 +3737,11 @@ bool32 sub_813B4E0(void)
 }
 
 // Always returns FALSE
-bool32 sub_813B514(void)
+bool32 ShouldDistributeEonTicket(void)
 {
-    if (!VarGet(VAR_ALWAYS_ZERO_0x403F))
-    {
+    if (!VarGet(VAR_DISTRIBUTE_EON_TICKET))
         return FALSE;
-    }
+    
     return TRUE;
 }
 
@@ -3889,40 +3900,46 @@ void Script_DoRayquazaScene(void)
     }
 }
 
-void sub_813B80C(void)
+#define playCount data[0]
+#define delay     data[1]
+
+void LoopWingFlapSE(void)
 {
-    CreateTask(sub_813B824, 8);
+    CreateTask(Task_LoopWingFlapSE, 8);
     PlaySE(SE_W017);
 }
 
-static void sub_813B824(u8 taskId)
+static void Task_LoopWingFlapSE(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
 
-    data[1]++;
-    if (data[1] == gSpecialVar_0x8005)
+    delay++;
+    if (delay == gSpecialVar_0x8005)
     {
-        data[0]++;
-        data[1] = 0;
+        playCount++;
+        delay = 0;
         PlaySE(SE_W017);
     }
 
-    if (data[0] == gSpecialVar_0x8004 - 1)
+    if (playCount == gSpecialVar_0x8004 - 1)
     {
         DestroyTask(taskId);
     }
 }
 
-void sub_813B880(void)
+#undef playCount
+#undef delay
+
+void CloseBattlePikeCurtain(void)
 {
-    u8 taskId = CreateTask(_fwalk, 8);
+    u8 taskId = CreateTask(Task_CloseBattlePikeCurtain, 8);
     gTasks[taskId].data[0] = 4;
     gTasks[taskId].data[1] = 4;
     gTasks[taskId].data[2] = 4;
     gTasks[taskId].data[3] = 0;
 }
 
-static void _fwalk(u8 taskId)
+static void Task_CloseBattlePikeCurtain(u8 taskId)
 {
     u8 x, y;
     s16 *data = gTasks[taskId].data;
@@ -3934,7 +3951,7 @@ static void _fwalk(u8 taskId)
         {
             for (x = 0; x < 3; x++)
             {
-                MapGridSetMetatileIdAt(gSaveBlock1Ptr->pos.x + x + 6, gSaveBlock1Ptr->pos.y + y + 4, x + 0x201 + y * 8 + data[3] * 32);
+                MapGridSetMetatileIdAt(gSaveBlock1Ptr->pos.x + x + 6, gSaveBlock1Ptr->pos.y + y + 4, x + 513 + y * 8 + data[3] * 32);
             }
         }
         DrawWholeMapView();

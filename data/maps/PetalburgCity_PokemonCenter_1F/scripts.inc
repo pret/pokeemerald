@@ -1,16 +1,16 @@
 PetalburgCity_PokemonCenter_1F_MapScripts:: @ 82079E8
 	map_script MAP_SCRIPT_ON_TRANSITION, PetalburgCity_PokemonCenter_1F_OnTransition
-	map_script MAP_SCRIPT_ON_RESUME, PetalburgCity_PokemonCenter_1F_MapScript1_277C30
+	map_script MAP_SCRIPT_ON_RESUME, CableClub_OnResume
 	.byte 0
 
 PetalburgCity_PokemonCenter_1F_OnTransition: @ 82079F3
 	setrespawn HEAL_LOCATION_PETALBURG_CITY
-	call PetalburgCity_PokemonCenter_1F_EventScript_2718DE
+	call Common_EventScript_UpdateBrineyLocation
 	end
 
 PetalburgCity_PokemonCenter_1F_EventScript_2079FC:: @ 82079FC
 	setvar VAR_0x800B, 1
-	call PetalburgCity_PokemonCenter_1F_EventScript_27191E
+	call Common_EventScript_PkmnCenterNurse
 	waitmessage
 	waitbuttonpress
 	release

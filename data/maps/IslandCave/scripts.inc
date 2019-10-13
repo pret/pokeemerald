@@ -10,7 +10,7 @@ IslandCave_MapScript1_238E3A: @ 8238E3A
 
 IslandCave_EventScript_238E44:: @ 8238E44
 	specialvar VAR_RESULT, GetBattleOutcome
-	compare VAR_RESULT, 7
+	compare VAR_RESULT, B_OUTCOME_CAUGHT
 	goto_if_ne Common_EventScript_NopReturn
 	removeobject VAR_LAST_TALKED
 	return
@@ -61,7 +61,7 @@ IslandCave_EventScript_238EEF:: @ 8238EEF
 	end
 
 IslandCave_EventScript_238F13:: @ 8238F13
-	msgbox gUnknown_0827304E, MSGBOX_DEFAULT
+	msgbox gText_BigHoleInTheWall, MSGBOX_DEFAULT
 	releaseall
 	end
 
@@ -101,11 +101,11 @@ IslandCave_EventScript_238F58:: @ 8238F58
 	waitstate
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
 	specialvar VAR_RESULT, GetBattleOutcome
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, B_OUTCOME_WON
 	goto_if_eq IslandCave_EventScript_238F9F
-	compare VAR_RESULT, 4
+	compare VAR_RESULT, B_OUTCOME_RAN
 	goto_if_eq IslandCave_EventScript_238FA8
-	compare VAR_RESULT, 5
+	compare VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED
 	goto_if_eq IslandCave_EventScript_238FA8
 	setflag FLAG_DEFEATED_REGICE
 	release
@@ -113,10 +113,10 @@ IslandCave_EventScript_238F58:: @ 8238F58
 
 IslandCave_EventScript_238F9F:: @ 8238F9F
 	setflag FLAG_DEFEATED_REGICE
-	goto IslandCave_EventScript_27376D
+	goto Common_EventScript_RemoveStaticPokemon
 	end
 
 IslandCave_EventScript_238FA8:: @ 8238FA8
-	setvar VAR_0x8004, 402
-	goto IslandCave_EventScript_273776
+	setvar VAR_0x8004, SPECIES_REGICE
+	goto Common_EventScript_LegendaryFlewAway
 	end

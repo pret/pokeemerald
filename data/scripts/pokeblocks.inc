@@ -667,25 +667,25 @@ EventScript_PblocLink_NoPokeblock: @ 829416C
 
 EventScript_PblocLink_SomeoneNotReady: @ 8294176
 	special CloseLink
-	msgbox LilycoveCity_ContestLobby_Text_2781C7, MSGBOX_DEFAULT
+	msgbox Text_SomeoneIsNotReadyToLink, MSGBOX_DEFAULT
 	releaseall
 	end
 
 EventScript_PblocLink_DifferentSelections: @ 8294183
 	special CloseLink
-	msgbox LilycoveCity_ContestLobby_Text_278255, MSGBOX_DEFAULT
+	msgbox Text_PlayersMadeDifferentSelections, MSGBOX_DEFAULT
 	releaseall
 	end
 
 EventScript_PblocLink_CloseLink: @ 8294190
 	special CloseLink
-	msgbox gUnknown_08272D9C, MSGBOX_DEFAULT
+	msgbox gText_PokeblockLinkCanceled, MSGBOX_DEFAULT
 	releaseall
 	end
 
 EventScript_PblocLink_LinkError: @ 829419D
 	special CloseLink
-	msgbox LilycoveCity_ContestLobby_Text_27821C, MSGBOX_DEFAULT
+	msgbox Text_LinkErrorPleaseReset, MSGBOX_DEFAULT
 	releaseall
 	end
 
@@ -745,12 +745,12 @@ EventScript_PblocLink_TryJoinGroup: @ 829425D
 	end
 
 EventScript_PblocLink_BecomeLeader: @ 8294285
-	special BerryBlenderLinkBecomeLeader
+	special TryBecomeLinkLeader
 	waitstate
 	return
 
 EventScript_PblocLink_JoinGroup: @ 829428A
-	special BerryBlenderLinkJoinGroup
+	special TryJoinLinkGroup
 	waitstate
 	return
 

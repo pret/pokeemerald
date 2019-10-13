@@ -7,7 +7,7 @@
 #include "decompress.h"
 #include "dma3.h"
 #include "gpu_regs.h"
-#include "alloc.h"
+#include "malloc.h"
 #include "palette.h"
 #include "pokemon_icon.h"
 #include "sprite.h"
@@ -988,7 +988,7 @@ void sub_80A6DAC(bool8 arg0)
     }
 }
 
-void sub_80A6DEC(struct Sprite *sprite)
+void TradeMenuBouncePartySprites(struct Sprite *sprite)
 {
     sprite->data[1] = sprite->pos1.x;
     sprite->data[3] = sprite->pos1.y;
