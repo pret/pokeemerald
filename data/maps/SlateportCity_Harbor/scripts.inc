@@ -230,9 +230,9 @@ SlateportCity_Harbor_EventScript_20CBE9:: @ 820CBE9
 	waitmovement 0
 	delay 30
 	hideobjectat VAR_LAST_TALKED, MAP_SLATEPORT_CITY_HARBOR
-	compare VAR_FACING, 2
+	compare VAR_FACING, DIR_NORTH
 	call_if_eq SlateportCity_Harbor_EventScript_20CC42
-	compare VAR_FACING, 4
+	compare VAR_FACING, DIR_EAST
 	call_if_eq SlateportCity_Harbor_EventScript_20CC37
 	delay 30
 	hideobjectat EVENT_OBJ_ID_PLAYER, MAP_PETALBURG_CITY

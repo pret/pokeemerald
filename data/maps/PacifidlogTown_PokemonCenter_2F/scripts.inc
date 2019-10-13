@@ -1,19 +1,20 @@
 PacifidlogTown_PokemonCenter_2F_MapScripts:: @ 8203635
-	map_script MAP_SCRIPT_ON_FRAME_TABLE, PacifidlogTown_PokemonCenter_2F_MapScript2_276C3B
-	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, PacifidlogTown_PokemonCenter_2F_MapScript2_276B6C
-	map_script MAP_SCRIPT_ON_LOAD, PacifidlogTown_PokemonCenter_2F_MapScript1_276BBE
-	map_script MAP_SCRIPT_ON_TRANSITION, PokemonCenter_2F_OnTransition
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, CableClub_OnFrame
+	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, CableClub_OnWarp
+	map_script MAP_SCRIPT_ON_LOAD, CableClub_OnLoad
+	map_script MAP_SCRIPT_ON_TRANSITION, CableClub_OnTransition
 	.byte 0
 
-PacifidlogTown_PokemonCenter_2F_EventScript_20364A:: @ 820364A
-	call OldaleTown_PokemonCenter_2F_EventScript_276EB7
+@ The below 3 are unused and leftover from RS
+PacifidlogTown_PokemonCenter_2F_EventScript_Colosseum:: @ 820364A
+	call CableClub_EventScript_Colosseum
 	end
 
-PacifidlogTown_PokemonCenter_2F_EventScript_203650:: @ 8203650
-	call OldaleTown_PokemonCenter_2F_EventScript_2770B2
+PacifidlogTown_PokemonCenter_2F_EventScript_TradeCenter:: @ 8203650
+	call CableClub_EventScript_TradeCenter
 	end
 
-PacifidlogTown_PokemonCenter_2F_EventScript_203656:: @ 8203656
-	call OldaleTown_PokemonCenter_2F_EventScript_2771DB
+PacifidlogTown_PokemonCenter_2F_EventScript_RecordCorner:: @ 8203656
+	call CableClub_EventScript_RecordCorner
 	end
 

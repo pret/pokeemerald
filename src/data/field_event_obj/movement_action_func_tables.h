@@ -170,8 +170,8 @@ u8 MovementAction_SetFixedPriority_Step0(struct EventObject *, struct Sprite *);
 u8 MovementAction_ClearFixedPriority_Step0(struct EventObject *, struct Sprite *);
 u8 MovementAction_InitAffineAnim_Step0(struct EventObject *, struct Sprite *);
 u8 MovementAction_ClearAffineAnim_Step0(struct EventObject *, struct Sprite *);
-u8 MovementAction_Unknown1_Step0(struct EventObject *, struct Sprite *);
-u8 MovementAction_Unknown2_Step0(struct EventObject *, struct Sprite *);
+u8 MovementAction_HideReflection_Step0(struct EventObject *, struct Sprite *);
+u8 MovementAction_ShowReflection_Step0(struct EventObject *, struct Sprite *);
 u8 MovementAction_WalkDownStartAffine_Step0(struct EventObject *, struct Sprite *);
 u8 MovementAction_WalkDownStartAffine_Step1(struct EventObject *, struct Sprite *);
 u8 MovementAction_WalkDownAffine_Step0(struct EventObject *, struct Sprite *);
@@ -358,8 +358,8 @@ u8 (*const gMovementActionFuncs_SetFixedPriority[])(struct EventObject *, struct
 u8 (*const gMovementActionFuncs_ClearFixedPriority[])(struct EventObject *, struct Sprite *);
 u8 (*const gMovementActionFuncs_InitAffineAnim[])(struct EventObject *, struct Sprite *);
 u8 (*const gMovementActionFuncs_ClearAffineAnim[])(struct EventObject *, struct Sprite *);
-u8 (*const gMovementActionFuncs_Unknown1[])(struct EventObject *, struct Sprite *);
-u8 (*const gMovementActionFuncs_Unknown2[])(struct EventObject *, struct Sprite *);
+u8 (*const gMovementActionFuncs_HideReflection[])(struct EventObject *, struct Sprite *);
+u8 (*const gMovementActionFuncs_ShowReflection[])(struct EventObject *, struct Sprite *);
 u8 (*const gMovementActionFuncs_WalkDownStartAffine[])(struct EventObject *, struct Sprite *);
 u8 (*const gMovementActionFuncs_WalkDownAffine[])(struct EventObject *, struct Sprite *);
 u8 (*const gMovementActionFuncs_AcroWheelieFaceDown[])(struct EventObject *, struct Sprite *);
@@ -518,8 +518,8 @@ u8 (*const *const gMovementActionFuncs[])(struct EventObject *, struct Sprite *)
     [MOVEMENT_ACTION_CLEAR_FIXED_PRIORITY] = gMovementActionFuncs_ClearFixedPriority,
     [MOVEMENT_ACTION_INIT_AFFINE_ANIM] = gMovementActionFuncs_InitAffineAnim,
     [MOVEMENT_ACTION_CLEAR_AFFINE_ANIM] = gMovementActionFuncs_ClearAffineAnim,
-    [MOVEMENT_ACTION_UNKNOWN1] = gMovementActionFuncs_Unknown1,
-    [MOVEMENT_ACTION_UNKNOWN2] = gMovementActionFuncs_Unknown2,
+    [MOVEMENT_ACTION_HIDE_REFLECTION] = gMovementActionFuncs_HideReflection,
+    [MOVEMENT_ACTION_SHOW_REFLECTION] = gMovementActionFuncs_ShowReflection,
     [MOVEMENT_ACTION_WALK_DOWN_START_AFFINE] = gMovementActionFuncs_WalkDownStartAffine,
     [MOVEMENT_ACTION_WALK_DOWN_AFFINE] = gMovementActionFuncs_WalkDownAffine,
     [MOVEMENT_ACTION_ACRO_WHEELIE_FACE_DOWN] = gMovementActionFuncs_AcroWheelieFaceDown,
@@ -1197,13 +1197,13 @@ u8 (*const gMovementActionFuncs_ClearAffineAnim[])(struct EventObject *, struct 
     MovementAction_Finish,
 };
 
-u8 (*const gMovementActionFuncs_Unknown1[])(struct EventObject *, struct Sprite *) = {
-    MovementAction_Unknown1_Step0,
+u8 (*const gMovementActionFuncs_HideReflection[])(struct EventObject *, struct Sprite *) = {
+    MovementAction_HideReflection_Step0,
     MovementAction_Finish,
 };
 
-u8 (*const gMovementActionFuncs_Unknown2[])(struct EventObject *, struct Sprite *) = {
-    MovementAction_Unknown2_Step0,
+u8 (*const gMovementActionFuncs_ShowReflection[])(struct EventObject *, struct Sprite *) = {
+    MovementAction_ShowReflection_Step0,
     MovementAction_Finish,
 };
 

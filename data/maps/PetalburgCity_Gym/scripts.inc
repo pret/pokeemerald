@@ -125,10 +125,10 @@ PetalburgCity_Gym_EventScript_2049F1:: @ 82049F1
 	msgbox PetalburgCity_Gym_Text_2057A2, MSGBOX_DEFAULT
 	closemessage
 	switch VAR_FACING
-	case 1, PetalburgCity_Gym_EventScript_204A80
-	case 2, PetalburgCity_Gym_EventScript_204A8B
-	case 3, PetalburgCity_Gym_EventScript_204A96
-	case 4, PetalburgCity_Gym_EventScript_204AA1
+	case DIR_SOUTH, PetalburgCity_Gym_EventScript_204A80
+	case DIR_NORTH, PetalburgCity_Gym_EventScript_204A8B
+	case DIR_WEST, PetalburgCity_Gym_EventScript_204A96
+	case DIR_EAST, PetalburgCity_Gym_EventScript_204AA1
 	end
 
 PetalburgCity_Gym_EventScript_204A80:: @ 8204A80
@@ -436,9 +436,9 @@ PetalburgCity_Gym_EventScript_204E3B:: @ 8204E3B
 	delay 10
 	addobject 11
 	switch VAR_FACING
-	case 2, PetalburgCity_Gym_EventScript_204EF5
-	case 3, PetalburgCity_Gym_EventScript_204F09
-	case 4, PetalburgCity_Gym_EventScript_204EFF
+	case DIR_NORTH, PetalburgCity_Gym_EventScript_204EF5
+	case DIR_WEST, PetalburgCity_Gym_EventScript_204F09
+	case DIR_EAST, PetalburgCity_Gym_EventScript_204EFF
 	end
 
 PetalburgCity_Gym_EventScript_204ED2:: @ 8204ED2

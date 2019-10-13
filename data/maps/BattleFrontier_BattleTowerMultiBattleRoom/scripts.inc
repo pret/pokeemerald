@@ -190,9 +190,9 @@ BattleFrontier_BattleTowerMultiBattleRoom_EventScript_243F36:: @ 8243F36
 	waitmessage
 	waitbuttonpress
 	closemessage
-	compare VAR_FACING, 1
+	compare VAR_FACING, DIR_SOUTH
 	call_if_ne BattleFrontier_BattleTowerMultiBattleRoom_EventScript_243FD4
-	compare VAR_FACING, 1
+	compare VAR_FACING, DIR_SOUTH
 	call_if_eq BattleFrontier_BattleTowerMultiBattleRoom_EventScript_243FDF
 	removeobject VAR_LAST_TALKED
 	setflag FLAG_CHOSEN_MULTI_BATTLE_NPC_PARTNER

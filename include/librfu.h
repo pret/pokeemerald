@@ -76,10 +76,10 @@ struct UnkLinkRfuStruct_02022B14Substruct
     u16 unk_00_4:1;
     u16 unk_00_5:1;
     u16 unk_00_6:1;
-    u16 unk_00_7:1;
-    u16 unk_01_0:1;
-    u16 unk_01_1:1;
-    u16 unk_01_2:4;
+    u16 isChampion:1;
+    u16 hasNationalDex:1;
+    u16 gameClear:1; // never read, redundant with isChampion
+    u16 unk_01_2:4;  // always 3?
     u16 unk_01_6:2;
     u8 playerTrainerId[2];
 };
@@ -93,7 +93,7 @@ struct __attribute__((packed, aligned(2))) UnkLinkRfuStruct_02022B14
     u8 unk_0a_0:7;
     u8 unk_0a_7:1;
     u8 playerGender:1;
-    u8 unk_0b_1:7;
+    u8 level:7;
     u8 unk_0c;
 };
 

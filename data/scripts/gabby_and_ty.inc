@@ -214,11 +214,11 @@ Route120_EventScript_28CF36:: @ 828CF36
 Route111_EventScript_28CF56:: @ 828CF56
 	special GabbyAndTyBeforeInterview
 	special GabbyAndTySetScriptVarsToEventObjectLocalIds
-	compare VAR_FACING, 2
+	compare VAR_FACING, DIR_NORTH
 	call_if_eq Route111_EventScript_28CF94
-	compare VAR_FACING, 1
+	compare VAR_FACING, DIR_SOUTH
 	call_if_eq Route111_EventScript_28CF9F
-	compare VAR_FACING, 4
+	compare VAR_FACING, DIR_EAST
 	call_if_eq Route111_EventScript_28CFB1
 	goto_if_set FLAG_TEMP_1, Route111_EventScript_28D0EE
 	msgbox Route111_Text_28B042, MSGBOX_YESNO
@@ -247,11 +247,11 @@ Route118_EventScript_28CFC3:: @ 828CFC3
 Route120_EventScript_28CFC3:: @ 828CFC3
 	special GabbyAndTyBeforeInterview
 	special GabbyAndTySetScriptVarsToEventObjectLocalIds
-	compare VAR_FACING, 2
+	compare VAR_FACING, DIR_NORTH
 	call_if_eq Route111_EventScript_28CF94
-	compare VAR_FACING, 1
+	compare VAR_FACING, DIR_SOUTH
 	call_if_eq Route111_EventScript_28CF9F
-	compare VAR_FACING, 4
+	compare VAR_FACING, DIR_EAST
 	call_if_eq Route111_EventScript_28CFB1
 	goto_if_set FLAG_TEMP_1, Route111_EventScript_28D0EE
 	specialvar VAR_RESULT, GabbyAndTyGetLastQuote
