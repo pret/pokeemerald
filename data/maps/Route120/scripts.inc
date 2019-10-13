@@ -1,10 +1,10 @@
 Route120_MapScripts:: @ 81F53EC
-	map_script MAP_SCRIPT_ON_RESUME, Route120_MapScript1_OnResume
+	map_script MAP_SCRIPT_ON_RESUME, Route120_OnResume
 	map_script MAP_SCRIPT_ON_TRANSITION, Route120_OnTransition
-	map_script MAP_SCRIPT_ON_LOAD, Route120_MapScript1_1F5474
+	map_script MAP_SCRIPT_ON_LOAD, Route120_OnLoad
 	.byte 0
 
-Route120_MapScript1_OnResume: @ 81F53FC
+Route120_OnResume: @ 81F53FC
 	call_if_set FLAG_SYS_CTRL_OBJ_DELETE, Route120_EventScript_RemoveKecleonObject
 	end
 
@@ -38,7 +38,7 @@ Route120_EventScript_RemoveKecleon:: @ 81F5460
 	removeobject VAR_LAST_TALKED
 	return
 
-Route120_MapScript1_1F5474: @ 81F5474
+Route120_OnLoad: @ 81F5474
 	call_if_unset FLAG_REGI_DOORS_OPENED, Route120_EventScript_1F5490
 	call_if_set FLAG_RECEIVED_DEVON_SCOPE, Route120_EventScript_1F54A3
 	call_if_unset FLAG_RECEIVED_DEVON_SCOPE, Route120_EventScript_1F54C8

@@ -1,7 +1,7 @@
 SkyPillar_4F_MapScripts:: @ 8239671
-	map_script MAP_SCRIPT_ON_FRAME_TABLE, CaveHole_MapScript2_CheckFallDownHole
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, CaveHole_CheckFallDownHole
 	map_script MAP_SCRIPT_ON_TRANSITION, SkyPillar_4F_OnTransition
-	map_script MAP_SCRIPT_ON_RESUME, SkyPillar_4F_MapScript1_SetHoleWarp
+	map_script MAP_SCRIPT_ON_RESUME, SkyPillar_4F_SetHoleWarp
 	.byte 0
 
 SkyPillar_4F_OnTransition: @ 8239681
@@ -14,7 +14,7 @@ SkyPillar_4F_EventScript_CleanFloor:: @ 8239692
 	setmaplayoutindex LAYOUT_SKY_PILLAR_4F_CLEAN
 	return
 
-SkyPillar_4F_MapScript1_SetHoleWarp: @ 8239696
+SkyPillar_4F_SetHoleWarp: @ 8239696
 	setstepcallback 7
 	setholewarp MAP_SKY_PILLAR_3F, 255, 0, 0
 	end

@@ -1,8 +1,8 @@
-CaveHole_MapScript2_CheckFallDownHole: @ 82A8327
+CaveHole_CheckFallDownHole: @ 82A8327
 	map_script_2 VAR_ICE_STEP_COUNT, 0, EventScript_FallDownHole
 	.2byte 0
 
-CaveHole_MapScript1_FixCrackedGround: @ 82A8331
+CaveHole_FixCrackedGround: @ 82A8331
 	copyvar VAR_ICE_STEP_COUNT, 1
 	end
 
