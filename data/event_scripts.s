@@ -5,6 +5,7 @@
 #include "constants/battle_frontier.h"
 #include "constants/battle_setup.h"
 #include "constants/berry.h"
+#include "constants/cable_club.h"
 #include "constants/contest.h"
 #include "constants/daycare.h"
 #include "constants/decorations.h"
@@ -31,6 +32,7 @@
 #include "constants/secret_bases.h"
 #include "constants/songs.h"
 #include "constants/species.h"
+#include "constants/trade.h"
 #include "constants/trainer_hill.h"
 #include "constants/trainers.h"
 #include "constants/vars.h"
@@ -1573,64 +1575,16 @@ EventScript_CableClub_SetVarResult0:: @ 8273755
 	setvar VAR_RESULT, 0
 	return
 
-BattleFrontier_PokemonCenter_2F_EventScript_27375B:: @ 827375B
-DewfordTown_PokemonCenter_2F_EventScript_27375B:: @ 827375B
-EverGrandeCity_PokemonCenter_2F_EventScript_27375B:: @ 827375B
-EverGrandeCity_PokemonLeague_2F_EventScript_27375B:: @ 827375B
-FallarborTown_PokemonCenter_2F_EventScript_27375B:: @ 827375B
-FortreeCity_PokemonCenter_2F_EventScript_27375B:: @ 827375B
-LavaridgeTown_PokemonCenter_2F_EventScript_27375B:: @ 827375B
-LilycoveCity_PokemonCenter_2F_EventScript_27375B:: @ 827375B
-MauvilleCity_PokemonCenter_2F_EventScript_27375B:: @ 827375B
-MossdeepCity_PokemonCenter_2F_EventScript_27375B:: @ 827375B
-OldaleTown_PokemonCenter_2F_EventScript_27375B:: @ 827375B
-PacifidlogTown_PokemonCenter_2F_EventScript_27375B:: @ 827375B
-PetalburgCity_PokemonCenter_2F_EventScript_27375B:: @ 827375B
-RustboroCity_PokemonCenter_2F_EventScript_27375B:: @ 827375B
-SlateportCity_PokemonCenter_2F_EventScript_27375B:: @ 827375B
-SootopolisCity_PokemonCenter_2F_EventScript_27375B:: @ 827375B
-VerdanturfTown_PokemonCenter_2F_EventScript_27375B:: @ 827375B
-	call OldaleTown_PokemonCenter_2F_EventScript_27751B
+Common_EventScript_UnionRoomAttendant:: @ 827375B
+	call CableClub_EventScript_UnionRoomAttendant
 	end
 
-BattleFrontier_PokemonCenter_2F_EventScript_273761:: @ 8273761
-DewfordTown_PokemonCenter_2F_EventScript_273761:: @ 8273761
-EverGrandeCity_PokemonCenter_2F_EventScript_273761:: @ 8273761
-EverGrandeCity_PokemonLeague_2F_EventScript_273761:: @ 8273761
-FallarborTown_PokemonCenter_2F_EventScript_273761:: @ 8273761
-FortreeCity_PokemonCenter_2F_EventScript_273761:: @ 8273761
-LavaridgeTown_PokemonCenter_2F_EventScript_273761:: @ 8273761
-LilycoveCity_PokemonCenter_2F_EventScript_273761:: @ 8273761
-MauvilleCity_PokemonCenter_2F_EventScript_273761:: @ 8273761
-MossdeepCity_PokemonCenter_2F_EventScript_273761:: @ 8273761
-OldaleTown_PokemonCenter_2F_EventScript_273761:: @ 8273761
-PacifidlogTown_PokemonCenter_2F_EventScript_273761:: @ 8273761
-PetalburgCity_PokemonCenter_2F_EventScript_273761:: @ 8273761
-RustboroCity_PokemonCenter_2F_EventScript_273761:: @ 8273761
-SlateportCity_PokemonCenter_2F_EventScript_273761:: @ 8273761
-SootopolisCity_PokemonCenter_2F_EventScript_273761:: @ 8273761
-VerdanturfTown_PokemonCenter_2F_EventScript_273761:: @ 8273761
-	call OldaleTown_PokemonCenter_2F_EventScript_277672
+Common_EventScript_WirelessClubAttendant:: @ 8273761
+	call CableClub_EventScript_WirelessClubAttendant
 	end
 
-BattleFrontier_PokemonCenter_2F_EventScript_273767:: @ 8273767
-DewfordTown_PokemonCenter_2F_EventScript_273767:: @ 8273767
-EverGrandeCity_PokemonCenter_2F_EventScript_273767:: @ 8273767
-EverGrandeCity_PokemonLeague_2F_EventScript_273767:: @ 8273767
-FallarborTown_PokemonCenter_2F_EventScript_273767:: @ 8273767
-FortreeCity_PokemonCenter_2F_EventScript_273767:: @ 8273767
-LavaridgeTown_PokemonCenter_2F_EventScript_273767:: @ 8273767
-LilycoveCity_PokemonCenter_2F_EventScript_273767:: @ 8273767
-MauvilleCity_PokemonCenter_2F_EventScript_273767:: @ 8273767
-MossdeepCity_PokemonCenter_2F_EventScript_273767:: @ 8273767
-OldaleTown_PokemonCenter_2F_EventScript_273767:: @ 8273767
-PacifidlogTown_PokemonCenter_2F_EventScript_273767:: @ 8273767
-PetalburgCity_PokemonCenter_2F_EventScript_273767:: @ 8273767
-RustboroCity_PokemonCenter_2F_EventScript_273767:: @ 8273767
-SlateportCity_PokemonCenter_2F_EventScript_273767:: @ 8273767
-SootopolisCity_PokemonCenter_2F_EventScript_273767:: @ 8273767
-VerdanturfTown_PokemonCenter_2F_EventScript_273767:: @ 8273767
-	call OldaleTown_PokemonCenter_2F_EventScript_2776A4
+Common_EventScript_DirectCornerAttendant:: @ 8273767
+	call CableClub_EventScript_DirectCornerAttendant
 	end
 
 Common_EventScript_RemoveStaticPokemon:: @ 827376D
@@ -1735,6 +1689,7 @@ EventScript_GotoTrainerScript:: @ 82742F6
 	.include "data/scripts/berry_tree.inc"
 	.include "data/scripts/secret_base.inc"
 	.include "data/scripts/cable_club.inc"
+	.include "data/text/cable_club.inc"
 	.include "data/scripts/contest_hall.inc"
 	.include "data/text/contest_strings.inc"
 	.include "data/text/contest_link.inc"
