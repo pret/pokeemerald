@@ -103,10 +103,10 @@ Route103_EventScript_1EC4FC:: @ 81EC4FC
 Route103_EventScript_1EC50A:: @ 81EC50A
 	closemessage
 	switch VAR_FACING
-	case 1, Route103_EventScript_1EC585
-	case 2, Route103_EventScript_1EC53D
-	case 3, Route103_EventScript_1EC561
-	case 4, Route103_EventScript_1EC561
+	case DIR_SOUTH, Route103_EventScript_1EC585
+	case DIR_NORTH, Route103_EventScript_1EC53D
+	case DIR_WEST, Route103_EventScript_1EC561
+	case DIR_EAST, Route103_EventScript_1EC561
 	end
 
 Route103_EventScript_1EC53D:: @ 81EC53D

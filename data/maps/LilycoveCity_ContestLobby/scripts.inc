@@ -810,7 +810,7 @@ LilycoveCity_ContestLobby_EventScript_21AAE1:: @ 821AAE1
 
 LilycoveCity_ContestLobby_EventScript_21AAEF:: @ 821AAEF
 	special CloseLink
-	msgbox LilycoveCity_ContestLobby_Text_27821C, MSGBOX_DEFAULT
+	msgbox Text_LinkErrorPleaseReset, MSGBOX_DEFAULT
 	release
 	end
 
@@ -908,12 +908,12 @@ LilycoveCity_ContestLobby_EventScript_21AC0B:: @ 821AC0B
 	end
 
 LilycoveCity_ContestLobby_EventScript_21AC33:: @ 821AC33
-	special BerryBlenderLinkBecomeLeader
+	special TryBecomeLinkLeader
 	waitstate
 	return
 
 LilycoveCity_ContestLobby_EventScript_21AC38:: @ 821AC38
-	special BerryBlenderLinkJoinGroup
+	special TryJoinLinkGroup
 	waitstate
 	return
 

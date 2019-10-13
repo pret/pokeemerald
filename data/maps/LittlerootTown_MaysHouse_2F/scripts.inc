@@ -74,13 +74,13 @@ LittlerootTown_MaysHouse_2F_EventScript_1F934A:: @ 81F934A
 	waitmovement 0
 	delay 10
 	playbgm MUS_GIRL_SUP, 1
-	compare VAR_FACING, 2
+	compare VAR_FACING, DIR_NORTH
 	call_if_eq LittlerootTown_MaysHouse_2F_EventScript_1F93BA
-	compare VAR_FACING, 1
+	compare VAR_FACING, DIR_SOUTH
 	call_if_eq LittlerootTown_MaysHouse_2F_EventScript_1F93E9
-	compare VAR_FACING, 3
+	compare VAR_FACING, DIR_WEST
 	call_if_eq LittlerootTown_MaysHouse_2F_EventScript_1F9418
-	compare VAR_FACING, 4
+	compare VAR_FACING, DIR_EAST
 	call_if_eq LittlerootTown_MaysHouse_2F_EventScript_1F9440
 	setvar VAR_LITTLEROOT_RIVAL_STATE, 3
 	setflag FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_2F_POKE_BALL
