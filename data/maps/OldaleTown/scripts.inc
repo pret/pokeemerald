@@ -42,9 +42,9 @@ OldaleTown_EventScript_1E8EFC:: @ 81E8EFC
 	msgbox OldaleTown_Text_1E91C0, MSGBOX_DEFAULT
 	closemessage
 	switch VAR_FACING
-	case 1, OldaleTown_EventScript_1E8F47
-	case 2, OldaleTown_EventScript_1E8F5E
-	case 4, OldaleTown_EventScript_1E8F75
+	case DIR_SOUTH, OldaleTown_EventScript_1E8F47
+	case DIR_NORTH, OldaleTown_EventScript_1E8F5E
+	case DIR_EAST, OldaleTown_EventScript_1E8F75
 	end
 
 OldaleTown_EventScript_1E8F47:: @ 81E8F47
@@ -286,7 +286,7 @@ OldaleTown_EventScript_1E911A:: @ 81E911A
 	end
 
 OldaleTown_EventScript_1E9148:: @ 81E9148
-	compare VAR_FACING, 1
+	compare VAR_FACING, DIR_SOUTH
 	goto_if_ne OldaleTown_EventScript_1E915E
 	applymovement 4, OldaleTown_Movement_1E9177
 	waitmovement 0

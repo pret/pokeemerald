@@ -1,19 +1,20 @@
 SlateportCity_PokemonCenter_2F_MapScripts:: @ 820DC21
-	map_script MAP_SCRIPT_ON_FRAME_TABLE, SlateportCity_PokemonCenter_2F_MapScript2_276C3B
-	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, SlateportCity_PokemonCenter_2F_MapScript2_276B6C
-	map_script MAP_SCRIPT_ON_LOAD, SlateportCity_PokemonCenter_2F_MapScript1_276BBE
-	map_script MAP_SCRIPT_ON_TRANSITION, PokemonCenter_2F_OnTransition
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, CableClub_OnFrame
+	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, CableClub_OnWarp
+	map_script MAP_SCRIPT_ON_LOAD, CableClub_OnLoad
+	map_script MAP_SCRIPT_ON_TRANSITION, CableClub_OnTransition
 	.byte 0
 
-SlateportCity_PokemonCenter_2F_EventScript_20DC36:: @ 820DC36
-	call OldaleTown_PokemonCenter_2F_EventScript_276EB7
+@ The below 3 are unused and leftover from RS
+SlateportCity_PokemonCenter_2F_EventScript_Colosseum:: @ 820DC36
+	call CableClub_EventScript_Colosseum
 	end
 
-SlateportCity_PokemonCenter_2F_EventScript_20DC3C:: @ 820DC3C
-	call OldaleTown_PokemonCenter_2F_EventScript_2770B2
+SlateportCity_PokemonCenter_2F_EventScript_TradeCenter:: @ 820DC3C
+	call CableClub_EventScript_TradeCenter
 	end
 
-SlateportCity_PokemonCenter_2F_EventScript_20DC42:: @ 820DC42
-	call OldaleTown_PokemonCenter_2F_EventScript_2771DB
+SlateportCity_PokemonCenter_2F_EventScript_RecordCorner:: @ 820DC42
+	call CableClub_EventScript_RecordCorner
 	end
 

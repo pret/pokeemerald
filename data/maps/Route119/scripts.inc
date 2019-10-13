@@ -9,7 +9,7 @@ Route119_MapScript1_1F442F: @ 81F442F
 
 Route119_EventScript_1F4439:: @ 81F4439
 	specialvar VAR_RESULT, GetBattleOutcome
-	compare VAR_RESULT, 7
+	compare VAR_RESULT, B_OUTCOME_CAUGHT
 	goto_if_ne Common_EventScript_NopReturn
 	removeobject VAR_LAST_TALKED
 	return

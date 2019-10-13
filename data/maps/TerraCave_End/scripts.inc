@@ -9,7 +9,7 @@ TerraCave_End_MapScript1_23B0BB: @ 823B0BB
 
 TerraCave_End_EventScript_23B0C5:: @ 823B0C5
 	specialvar VAR_RESULT, GetBattleOutcome
-	compare VAR_RESULT, 7
+	compare VAR_RESULT, B_OUTCOME_CAUGHT
 	goto_if_ne Common_EventScript_NopReturn
 	removeobject 1
 	return
@@ -41,11 +41,11 @@ TerraCave_End_EventScript_23B0EC:: @ 823B0EC
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
 	setvar VAR_TEMP_1, 0
 	specialvar VAR_RESULT, GetBattleOutcome
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, B_OUTCOME_WON
 	goto_if_eq TerraCave_End_EventScript_23B155
-	compare VAR_RESULT, 4
+	compare VAR_RESULT, B_OUTCOME_RAN
 	goto_if_eq TerraCave_End_EventScript_23B163
-	compare VAR_RESULT, 5
+	compare VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED
 	goto_if_eq TerraCave_End_EventScript_23B163
 	setvar VAR_SHOULD_END_UNUSUAL_WEATHER, 1
 	setflag FLAG_DEFEATED_GROUDON

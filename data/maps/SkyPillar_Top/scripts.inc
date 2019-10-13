@@ -10,7 +10,7 @@ SkyPillar_Top_MapScript1_2396C8: @ 82396C8
 
 SkyPillar_Top_EventScript_2396D2:: @ 82396D2
 	specialvar VAR_RESULT, GetBattleOutcome
-	compare VAR_RESULT, 7
+	compare VAR_RESULT, B_OUTCOME_CAUGHT
 	goto_if_ne Common_EventScript_NopReturn
 	removeobject VAR_LAST_TALKED
 	return
@@ -55,11 +55,11 @@ SkyPillar_Top_EventScript_239722:: @ 8239722
 	waitstate
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
 	specialvar VAR_RESULT, GetBattleOutcome
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, B_OUTCOME_WON
 	goto_if_eq SkyPillar_Top_EventScript_239768
-	compare VAR_RESULT, 4
+	compare VAR_RESULT, B_OUTCOME_RAN
 	goto_if_eq SkyPillar_Top_EventScript_239771
-	compare VAR_RESULT, 5
+	compare VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED
 	goto_if_eq SkyPillar_Top_EventScript_239771
 	setflag FLAG_DEFEATED_RAYQUAZA
 	releaseall

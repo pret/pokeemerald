@@ -51,11 +51,11 @@ Route111_EventScript_27661E:: @ 827661E
 	closemessage
 	setflag FLAG_RECEIVED_SECRET_POWER
 	clearflag FLAG_HIDE_SLATEPORT_CITY_TM_SALESMAN
-	compare VAR_FACING, 3
+	compare VAR_FACING, DIR_WEST
 	call_if_eq Route111_EventScript_27666A
-	compare VAR_FACING, 4
+	compare VAR_FACING, DIR_EAST
 	call_if_eq Route111_EventScript_27666A
-	compare VAR_FACING, 2
+	compare VAR_FACING, DIR_NORTH
 	call_if_eq Route111_EventScript_276675
 	removeobject VAR_LAST_TALKED
 	release

@@ -959,9 +959,9 @@ SootopolisCity_EventScript_1E61C2:: @ 81E61C2
 SootopolisCity_EventScript_1E61CC:: @ 81E61CC
 	msgbox SootopolisCity_Text_1E75CB, MSGBOX_DEFAULT
 	closemessage
-	compare VAR_FACING, 3
+	compare VAR_FACING, DIR_WEST
 	call_if_eq SootopolisCity_EventScript_1E6243
-	compare VAR_FACING, 2
+	compare VAR_FACING, DIR_NORTH
 	call_if_eq SootopolisCity_EventScript_1E6255
 	msgbox SootopolisCity_Text_1E7737, MSGBOX_DEFAULT
 	closemessage
@@ -1354,11 +1354,11 @@ SootopolisCity_EventScript_1E646F:: @ 81E646F
 	setflag FLAG_RECEIVED_HM07
 	msgbox SootopolisCity_Text_1E7B86, MSGBOX_DEFAULT
 	closemessage
-	compare VAR_FACING, 2
+	compare VAR_FACING, DIR_NORTH
 	call_if_eq SootopolisCity_EventScript_1E64B2
-	compare VAR_FACING, 4
+	compare VAR_FACING, DIR_EAST
 	call_if_eq SootopolisCity_EventScript_1E64B2
-	compare VAR_FACING, 3
+	compare VAR_FACING, DIR_WEST
 	call_if_eq SootopolisCity_EventScript_1E64C5
 	release
 	end

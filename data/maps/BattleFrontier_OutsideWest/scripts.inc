@@ -144,13 +144,13 @@ BattleFrontier_OutsideWest_EventScript_23D57F:: @ 823D57F
 	lock
 	faceplayer
 	delay 20
-	compare VAR_FACING, 2
+	compare VAR_FACING, DIR_NORTH
 	call_if_eq BattleFrontier_OutsideWest_EventScript_23D5BA
-	compare VAR_FACING, 1
+	compare VAR_FACING, DIR_SOUTH
 	call_if_eq BattleFrontier_OutsideWest_EventScript_23D5C5
-	compare VAR_FACING, 3
+	compare VAR_FACING, DIR_WEST
 	call_if_eq BattleFrontier_OutsideWest_EventScript_23D5BA
-	compare VAR_FACING, 4
+	compare VAR_FACING, DIR_EAST
 	call_if_eq BattleFrontier_OutsideWest_EventScript_23D5BA
 	msgbox BattleFrontier_OutsideWest_Text_23DC36, MSGBOX_DEFAULT
 	release
@@ -169,13 +169,13 @@ BattleFrontier_OutsideWest_EventScript_23D5C6:: @ 823D5C6
 	faceplayer
 	message BattleFrontier_OutsideWest_Text_23DCB0
 	waitmessage
-	compare VAR_FACING, 2
+	compare VAR_FACING, DIR_NORTH
 	call_if_eq BattleFrontier_OutsideWest_EventScript_23D5FD
-	compare VAR_FACING, 1
+	compare VAR_FACING, DIR_SOUTH
 	call_if_eq BattleFrontier_OutsideWest_EventScript_23D608
-	compare VAR_FACING, 3
+	compare VAR_FACING, DIR_WEST
 	call_if_eq BattleFrontier_OutsideWest_EventScript_23D613
-	compare VAR_FACING, 4
+	compare VAR_FACING, DIR_EAST
 	call_if_eq BattleFrontier_OutsideWest_EventScript_23D61E
 	waitbuttonpress
 	release

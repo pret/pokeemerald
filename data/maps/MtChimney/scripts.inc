@@ -56,17 +56,17 @@ MtChimney_EventScript_22EE0B:: @ 822EE0B
 	fadescreen 0
 	setobjectxyperm 1, 10, 12
 	addobject 1
-	compare VAR_FACING, 4
+	compare VAR_FACING, DIR_EAST
 	call_if_eq MtChimney_EventScript_22EEC7
-	compare VAR_FACING, 2
+	compare VAR_FACING, DIR_NORTH
 	call_if_eq MtChimney_EventScript_22EED2
 	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceLeft
 	waitmovement 0
 	msgbox MtChimney_Text_22FC3D, MSGBOX_DEFAULT
 	closemessage
-	compare VAR_FACING, 4
+	compare VAR_FACING, DIR_EAST
 	call_if_eq MtChimney_EventScript_22EEDD
-	compare VAR_FACING, 2
+	compare VAR_FACING, DIR_NORTH
 	call_if_eq MtChimney_EventScript_22EEE8
 	removeobject 1
 	setflag FLAG_HIDE_MT_CHIMNEY_TEAM_AQUA

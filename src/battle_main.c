@@ -1491,7 +1491,7 @@ static void CB2_PreInitMultiBattle(void)
     case 3:
         if (gWirelessCommType)
         {
-            if (sub_8010500())
+            if (IsLinkRfuTaskFinished())
             {
                 gBattleTypeFlags = *savedBattleTypeFlags;
                 gMain.savedCallback = *savedCallback;

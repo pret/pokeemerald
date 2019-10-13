@@ -65,7 +65,7 @@ struct EventObjectTemplate
     /*0x0E*/ u16 trainerRange_berryTreeId;
     /*0x10*/ const u8 *script;
     /*0x14*/ u16 flagId;
-};  /*size = 0x18*/
+};
 
 struct WarpEvent
 {
@@ -82,7 +82,6 @@ struct CoordEvent
     u8 elevation;
     u16 trigger;
     u16 index;
-    u8 filler_A[0x2];
     u8 *script;
 };
 
@@ -90,20 +89,14 @@ struct BgEvent
 {
     u16 x, y;
     u8 elevation;
-    u8 kind;
-    union { // carried over from diego's FR/LG work, seems to be the same struct
-        // in gen 3, "kind" (0x3 in BgEvent struct) determines the method to read the union.
+    u8 kind; // The "kind" field determines how to access bgUnion union below.
+    union {
         u8 *script;
-
-        // hidden item type
         struct {
             u16 item;
-            u16 hiddenItemId; // flag offset to determine flag lookup
+            u16 hiddenItemId;
         } hiddenItem;
-
-        // secret base type
         u32 secretBaseId;
-
     } bgUnion;
 };
 
@@ -113,7 +106,6 @@ struct MapEvents
     u8 warpCount;
     u8 coordEventCount;
     u8 bgEventCount;
-
     struct EventObjectTemplate *eventObjects;
     struct WarpEvent *warps;
     struct CoordEvent *coordEvents;
@@ -122,10 +114,10 @@ struct MapEvents
 
 struct MapConnection
 {
- /*0x00*/ u8 direction;
- /*0x01*/ u32 offset;
- /*0x05*/ u8 mapGroup;
- /*0x06*/ u8 mapNum;
+    u8 direction;
+    u32 offset;
+    u8 mapGroup;
+    u8 mapNum;
 };
 
 struct MapConnections
@@ -180,7 +172,7 @@ struct EventObject
     /*0x03*/ u32 spriteAffineAnimPausedBackup:1;
              u32 disableJumpLandingGroundEffect:1;
              u32 fixedPriority:1;
-             u32 unk3_3:1;
+             u32 hideReflection:1;
     /*0x04*/ u8 spriteId;
     /*0x05*/ u8 graphicsId;
     /*0x06*/ u8 movementType;
@@ -267,7 +259,20 @@ enum
 
 enum
 {
-    COLLISION_LEDGE_JUMP = 6
+    COLLISION_NONE,
+    COLLISION_OUTSIDE_RANGE,
+    COLLISION_IMPASSABLE,
+    COLLISION_ELEVATION_MISMATCH,
+    COLLISION_EVENT_OBJECT,
+    COLLISION_STOP_SURFING,
+    COLLISION_LEDGE_JUMP,
+    COLLISION_PUSHED_BOULDER,
+    COLLISION_ROTATING_GATE,
+    COLLISION_WHEELIE_HOP,
+    COLLISION_ISOLATED_VERTICAL_RAIL,
+    COLLISION_ISOLATED_HORIZONTAL_RAIL,
+    COLLISION_VERTICAL_RAIL,
+    COLLISION_HORIZONTAL_RAIL,
 };
 
 // player running states

@@ -11,7 +11,7 @@ gSpecials:: @ 81DBA64
 	def_special HealPlayerParty
 	def_special SetCableClubWarp
 	def_special sub_80AF948
-	def_special sub_80AF9F8
+	def_special ReturnFromLinkRoom
 	def_special CleanupLinkRoomState
 	def_special ExitLinkRoom
 	def_special SetPlayerSecretBase
@@ -36,8 +36,8 @@ gSpecials:: @ 81DBA64
 	def_special SetBattledOwnerFromResult
 	def_special DoSecretBasePCTurnOffEffect
 	def_special RecordMixingPlayerSpotTriggered
-	def_special sub_80B2DA4
-	def_special sub_80B2E4C
+	def_special TryBattleLinkup
+	def_special TryTradeLinkup
 	def_special sub_80B2E74
 	def_special sub_80B2EA8
 	def_special CloseLink
@@ -51,7 +51,7 @@ gSpecials:: @ 81DBA64
 	def_special SavePlayerParty
 	def_special LoadPlayerParty
 	def_special ChooseHalfPartyForBattle
-	def_special sp02A_crash_sound
+	def_special Script_ShowLinkTrainerCard
 	def_special EventObjectInteractionGetBerryTreeData
 	def_special EventObjectInteractionGetBerryName
 	def_special EventObjectInteractionGetBerryCountString
@@ -305,8 +305,8 @@ gSpecials:: @ 81DBA64
 	def_special LeadMonHasEffortRibbon
 	def_special GiveLeadMonEffortRibbon
 	def_special Special_AreLeadMonEVsMaxedOut
-	def_special sub_8098574
-	def_special sub_809859C
+	def_special Script_FacePlayer
+	def_special Script_ClearHeldMovement
 	def_special InitRoamer
 	def_special TryUpdateRusturfTunnelState
 	def_special IsGrassTypeInParty
@@ -349,7 +349,7 @@ gSpecials:: @ 81DBA64
 	def_special MonOTNameMatchesPlayer
 	def_special BufferLottoTicketNumber
 	def_special sub_81653CC
-	def_special sub_80F9370
+	def_special DoesPartyHaveEnigmaBerry
 	def_special ScriptRandom
 	def_special sub_81AFDD0
 	def_special sub_80EDCE8
@@ -424,22 +424,22 @@ gSpecials:: @ 81DBA64
 	def_special StartPlayerDescendMirageTower
 	def_special BufferTMHMMoveName
 	def_special IsWirelessAdapterConnected
-	def_special BerryBlenderLinkBecomeLeader
-	def_special BerryBlenderLinkJoinGroup
+	def_special TryBecomeLinkLeader
+	def_special TryJoinLinkGroup
 	def_special UnionRoomSpecial
 	def_special sub_801A42C
-	def_special sub_8016934
+	def_special InitUnionRoom
 	def_special BufferUnionRoomPlayerName
 	def_special sub_801DC20
-	def_special sub_81B8958
-	def_special sub_8018090
+	def_special ChooseMonForWirelessMinigame
+	def_special Script_ResetUnionRoomTrade
 	def_special IsBadEggInParty
 	def_special ValidateReceivedWonderCard
 	def_special HasAtLeastOneBerry
-	def_special sub_802C920
-	def_special sub_802E3C4
-	def_special sub_8027A5C
-	def_special sub_8027AAC
+	def_special IsPokemonJumpSpeciesInParty
+	def_special ShowPokemonJumpRecords
+	def_special IsDodrioInParty
+	def_special ShowDodrioBerryPickingRecords
 	def_special OffsetCameraForBattle
 	def_special GetDeptStoreDefaultFloorChoice
 	def_special BufferVarsForIVRater
@@ -512,7 +512,7 @@ gSpecials:: @ 81DBA64
 	def_special GetLilycoveSSTidalSelection
 	def_special TurnOnTVScreen
 	def_special sub_81D4A90
-	def_special sub_813B514
+	def_special ShouldDistributeEonTicket
 	def_special sub_813B568
 	def_special sub_813B534
 	def_special CallTrainerHillFunction

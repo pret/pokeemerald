@@ -30,13 +30,13 @@ gUnknown_08273559:: @ 8273559
 	.string "Once you save your game, you can\n"
 	.string "access the Mystery Event.$"
 
-gUnknown_08273594:: @ 8273594
+Mevent_Text_TheresATicketForYou:: @ 8273594
 	.string "Thank you for using the Mystery\n"
 	.string "Event System.\p"
 	.string "You must be {PLAYER}.\n"
 	.string "There is a ticket here for you.$"
 
-gUnknown_082735F2:: @ 82735F2
+Mevent_Text_TryUsingItAtLilycovePort:: @ 82735F2
 	.string "It appears to be for use at\n"
 	.string "the Lilycove City port.\p"
 	.string "Why not give it a try and see what\n"

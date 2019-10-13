@@ -19,9 +19,9 @@ MossdeepCity_House2_EventScript_2220F1:: @ 82220F1
 	closemessage
 	setflag FLAG_WINGULL_DELIVERED_MAIL
 	clearflag FLAG_HIDE_FORTREE_CITY_HOUSE_4_WINGULL
-	compare VAR_FACING, 2
+	compare VAR_FACING, DIR_NORTH
 	call_if_eq MossdeepCity_House2_EventScript_222124
-	compare VAR_FACING, 3
+	compare VAR_FACING, DIR_WEST
 	call_if_eq MossdeepCity_House2_EventScript_22212F
 	removeobject 3
 	release

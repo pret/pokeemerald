@@ -198,7 +198,7 @@ DewfordTown_Hall_EventScript_1FD73A:: @ 81FD73A
 	end
 
 DewfordTown_Hall_EventScript_1FD75B:: @ 81FD75B
-	compare VAR_FACING, 4
+	compare VAR_FACING, DIR_EAST
 	goto_if_eq DewfordTown_Hall_EventScript_1FD739
 	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceRight
 	waitmovement 0
@@ -217,9 +217,9 @@ DewfordTown_Hall_EventScript_1FD772:: @ 81FD772
 	end
 
 DewfordTown_Hall_EventScript_1FD793:: @ 81FD793
-	compare VAR_FACING, 2
+	compare VAR_FACING, DIR_NORTH
 	call_if_eq DewfordTown_Hall_EventScript_1FD7AA
-	compare VAR_FACING, 1
+	compare VAR_FACING, DIR_SOUTH
 	call_if_eq DewfordTown_Hall_EventScript_1FD7B5
 	return
 
@@ -234,7 +234,7 @@ DewfordTown_Hall_EventScript_1FD7B5:: @ 81FD7B5
 	return
 
 DewfordTown_Hall_EventScript_1FD7C0:: @ 81FD7C0
-	compare VAR_FACING, 3
+	compare VAR_FACING, DIR_WEST
 	goto_if_eq DewfordTown_Hall_EventScript_1FD739
 	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceLeft
 	waitmovement 0

@@ -1,6 +1,6 @@
 VerdanturfTown_PokemonCenter_1F_MapScripts:: @ 8202726
 	map_script MAP_SCRIPT_ON_TRANSITION, VerdanturfTown_PokemonCenter_1F_OnTransition
-	map_script MAP_SCRIPT_ON_RESUME, VerdanturfTown_PokemonCenter_1F_MapScript1_277C30
+	map_script MAP_SCRIPT_ON_RESUME, CableClub_OnResume
 	.byte 0
 
 VerdanturfTown_PokemonCenter_1F_OnTransition: @ 8202731

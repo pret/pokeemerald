@@ -11,13 +11,13 @@ FarawayIsland_Interior_MapScript1_267D0F: @ 8267D0F
 
 FarawayIsland_Interior_EventScript_267D19:: @ 8267D19
 	specialvar VAR_RESULT, GetBattleOutcome
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, B_OUTCOME_WON
 	goto_if_eq FarawayIsland_Interior_EventScript_267D4B
-	compare VAR_RESULT, 4
+	compare VAR_RESULT, B_OUTCOME_RAN
 	goto_if_eq FarawayIsland_Interior_EventScript_267D4B
-	compare VAR_RESULT, 5
+	compare VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED
 	goto_if_eq FarawayIsland_Interior_EventScript_267D4B
-	compare VAR_RESULT, 10
+	compare VAR_RESULT, B_OUTCOME_MON_TELEPORTED
 	goto_if_eq FarawayIsland_Interior_EventScript_267D4B
 	return
 
@@ -32,7 +32,7 @@ FarawayIsland_Interior_MapScript1_267D54: @ 8267D54
 
 FarawayIsland_Interior_EventScript_267D5E:: @ 8267D5E
 	specialvar VAR_RESULT, GetBattleOutcome
-	compare VAR_RESULT, 7
+	compare VAR_RESULT, B_OUTCOME_CAUGHT
 	goto_if_ne Common_EventScript_NopReturn
 	removeobject VAR_LAST_TALKED
 	return
@@ -125,13 +125,13 @@ FarawayIsland_Interior_EventScript_267DF2:: @ 8267DF2
 	message FarawayIsland_Interior_Text_Mew
 	waitse
 	playmoncry SPECIES_MEW, 2
-	compare VAR_FACING, 2
+	compare VAR_FACING, DIR_NORTH
 	call_if_eq FarawayIsland_Interior_EventScript_267EAF
-	compare VAR_FACING, 1
+	compare VAR_FACING, DIR_SOUTH
 	call_if_eq FarawayIsland_Interior_EventScript_267EBA
-	compare VAR_FACING, 3
+	compare VAR_FACING, DIR_WEST
 	call_if_eq FarawayIsland_Interior_EventScript_267EC5
-	compare VAR_FACING, 4
+	compare VAR_FACING, DIR_EAST
 	call_if_eq FarawayIsland_Interior_EventScript_267ED0
 	special sub_81D4BEC
 	delay 40
@@ -145,13 +145,13 @@ FarawayIsland_Interior_EventScript_267DF2:: @ 8267DF2
 	waitstate
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
 	specialvar VAR_RESULT, GetBattleOutcome
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, B_OUTCOME_WON
 	goto_if_eq FarawayIsland_Interior_EventScript_267E96
-	compare VAR_RESULT, 4
+	compare VAR_RESULT, B_OUTCOME_RAN
 	goto_if_eq FarawayIsland_Interior_EventScript_267EA4
-	compare VAR_RESULT, 5
+	compare VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED
 	goto_if_eq FarawayIsland_Interior_EventScript_267EA4
-	compare VAR_RESULT, 10
+	compare VAR_RESULT, B_OUTCOME_MON_TELEPORTED
 	goto_if_eq FarawayIsland_Interior_EventScript_267EA4
 	setflag FLAG_CAUGHT_MEW
 	release

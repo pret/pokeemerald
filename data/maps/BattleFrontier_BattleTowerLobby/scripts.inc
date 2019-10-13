@@ -926,16 +926,16 @@ BattleFrontier_BattleTowerLobby_EventScript_23F2B7:: @ 823F2B7
 	return
 
 BattleFrontier_BattleTowerLobby_EventScript_23F2C5:: @ 823F2C5
-	setvar VAR_0x8004, 9
+	setvar VAR_0x8004, USING_BATTLE_TOWER
 	message gText_PleaseWaitForLink
 	waitmessage
 	setvar VAR_0x8005, 0
-	special sub_80B2DA4
+	special TryBattleLinkup
 	waitstate
 	compare VAR_RESULT, 1
 	goto_if_eq BattleFrontier_BattleTowerLobby_EventScript_23F3AF
 	compare VAR_RESULT, 2
-	goto_if_eq BattleFrontier_BattleTowerLobby_EventScript_2772D2
+	goto_if_eq CableClub_EventScript_AbortLinkSomeoneNotReady
 	compare VAR_RESULT, 3
 	goto_if_eq BattleFrontier_BattleTowerLobby_EventScript_23F327
 	compare VAR_RESULT, 4
@@ -943,7 +943,7 @@ BattleFrontier_BattleTowerLobby_EventScript_23F2C5:: @ 823F2C5
 	compare VAR_RESULT, 5
 	goto_if_eq BattleFrontier_BattleTowerLobby_EventScript_23F0E6
 	compare VAR_RESULT, 6
-	goto_if_eq BattleFrontier_BattleTowerLobby_EventScript_2772C5
+	goto_if_eq CableClub_EventScript_AbortLinkConnectionError
 	compare VAR_RESULT, 11
 	goto_if_eq BattleFrontier_BattleTowerLobby_EventScript_23F366
 	end
@@ -952,7 +952,7 @@ BattleFrontier_BattleTowerLobby_EventScript_23F327:: @ 823F327
 	special CloseLink
 	compare VAR_0x8005, 3
 	goto_if_eq BattleFrontier_BattleTowerLobby_EventScript_23F33F
-	msgbox BattleFrontier_BattleTowerLobby_Text_278255, MSGBOX_DEFAULT
+	msgbox Text_PlayersMadeDifferentSelections, MSGBOX_DEFAULT
 	release
 	end
 
@@ -965,7 +965,7 @@ BattleFrontier_BattleTowerLobby_EventScript_23F33F:: @ 823F33F
 BattleFrontier_BattleTowerLobby_EventScript_23F351:: @ 823F351
 	msgbox BattleFrontier_BattleTowerLobby_Text_241240, MSGBOX_DEFAULT
 	special CloseLink
-	msgbox BattleFrontier_BattleTowerLobby_Text_2782A8, MSGBOX_DEFAULT
+	msgbox CableClub_Text_IncorrectNumberOfParticipants, MSGBOX_DEFAULT
 	release
 	end
 
@@ -1020,7 +1020,7 @@ BattleFrontier_BattleTowerLobby_EventScript_23F3E8:: @ 823F3E8
 	end
 
 BattleFrontier_BattleTowerLobby_EventScript_23F3F3:: @ 823F3F3
-	message BattleFrontier_BattleTowerLobby_Text_2792CD
+	message CableClub_Text_ChooseGroupLeaderOfTwo
 	waitmessage
 	multichoice 16, 6, MULTI_LINK_LEADER, 0
 	switch VAR_RESULT
@@ -1031,7 +1031,7 @@ BattleFrontier_BattleTowerLobby_EventScript_23F3F3:: @ 823F3F3
 	end
 
 BattleFrontier_BattleTowerLobby_EventScript_23F430:: @ 823F430
-	call BattleFrontier_BattleTowerLobby_EventScript_277B30
+	call CableClub_EventScript_TryBecomeLinkLeader
 	compare VAR_RESULT, 1
 	goto_if_eq BattleFrontier_BattleTowerLobby_EventScript_23F496
 	compare VAR_RESULT, 5
@@ -1044,7 +1044,7 @@ BattleFrontier_BattleTowerLobby_EventScript_23F430:: @ 823F430
 	return
 
 BattleFrontier_BattleTowerLobby_EventScript_23F463:: @ 823F463
-	call BattleFrontier_BattleTowerLobby_EventScript_277B35
+	call CableClub_EventScript_TryJoinLinkGroup
 	compare VAR_RESULT, 1
 	goto_if_eq BattleFrontier_BattleTowerLobby_EventScript_23F496
 	compare VAR_RESULT, 5

@@ -9,7 +9,7 @@ AquaHideout_B1F_MapScript1_2339B2: @ 82339B2
 
 AquaHideout_B1F_EventScript_2339BC:: @ 82339BC
 	specialvar VAR_RESULT, GetBattleOutcome
-	compare VAR_RESULT, 7
+	compare VAR_RESULT, B_OUTCOME_CAUGHT
 	goto_if_ne Common_EventScript_NopReturn
 	removeobject VAR_LAST_TALKED
 	return
@@ -39,11 +39,11 @@ AquaHideout_B1F_EventScript_2339EB:: @ 82339EB
 	dowildbattle
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
 	specialvar VAR_RESULT, GetBattleOutcome
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, B_OUTCOME_WON
 	goto_if_eq AquaHideout_B1F_EventScript_233A2F
-	compare VAR_RESULT, 4
+	compare VAR_RESULT, B_OUTCOME_RAN
 	goto_if_eq AquaHideout_B1F_EventScript_233A2F
-	compare VAR_RESULT, 5
+	compare VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED
 	goto_if_eq AquaHideout_B1F_EventScript_233A2F
 	setflag FLAG_DEFEATED_ELECTRODE_1_AQUA_HIDEOUT
 	release
@@ -66,11 +66,11 @@ AquaHideout_B1F_EventScript_233A38:: @ 8233A38
 	dowildbattle
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
 	specialvar VAR_RESULT, GetBattleOutcome
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, B_OUTCOME_WON
 	goto_if_eq AquaHideout_B1F_EventScript_233A7C
-	compare VAR_RESULT, 4
+	compare VAR_RESULT, B_OUTCOME_RAN
 	goto_if_eq AquaHideout_B1F_EventScript_233A7C
-	compare VAR_RESULT, 5
+	compare VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED
 	goto_if_eq AquaHideout_B1F_EventScript_233A7C
 	setflag FLAG_DEFEATED_ELECTRODE_2_AQUA_HIDEOUT
 	release
