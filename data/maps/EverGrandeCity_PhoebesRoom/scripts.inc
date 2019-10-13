@@ -1,10 +1,10 @@
 EverGrandeCity_PhoebesRoom_MapScripts:: @ 8228174
-	map_script MAP_SCRIPT_ON_LOAD, EverGrandeCity_PhoebesRoom_MapScript1_OnLoad
-	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, EverGrandeCity_PhoebesRoom_MapScript2_OnWarp
-	map_script MAP_SCRIPT_ON_FRAME_TABLE, EverGrandeCity_PhoebesRoom_MapScript2_OnFrame
+	map_script MAP_SCRIPT_ON_LOAD, EverGrandeCity_PhoebesRoom_OnLoad
+	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, EverGrandeCity_PhoebesRoom_OnWarp
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, EverGrandeCity_PhoebesRoom_OnFrame
 	.byte 0
 
-EverGrandeCity_PhoebesRoom_MapScript2_OnWarp: @ 8228184
+EverGrandeCity_PhoebesRoom_OnWarp: @ 8228184
 	map_script_2 VAR_TEMP_1, 0, EverGrandeCity_PhoebesRoom_EventScript_PlayerTurnNorth
 	.2byte 0
 
@@ -12,7 +12,7 @@ EverGrandeCity_PhoebesRoom_EventScript_PlayerTurnNorth:: @ 822818E
 	turnobject EVENT_OBJ_ID_PLAYER, DIR_NORTH
 	end
 
-EverGrandeCity_PhoebesRoom_MapScript2_OnFrame: @ 8228193
+EverGrandeCity_PhoebesRoom_OnFrame: @ 8228193
 	map_script_2 VAR_ELITE_4_STATE, 1, EverGrandeCity_PhoebesRoom_EventScript_WalkInCloseDoor
 	.2byte 0
 
@@ -23,7 +23,7 @@ EverGrandeCity_PhoebesRoom_EventScript_WalkInCloseDoor:: @ 822819D
 	releaseall
 	end
 
-EverGrandeCity_PhoebesRoom_MapScript1_OnLoad: @ 82281AA
+EverGrandeCity_PhoebesRoom_OnLoad: @ 82281AA
 	call_if_set FLAG_DEFEATED_ELITE_4_PHOEBE, EverGrandeCity_PhoebesRoom_EventScript_ResetAdvanceToNextRoom
 	compare VAR_ELITE_4_STATE, 2
 	call_if_eq EverGrandeCity_PhoebesRoom_EventScript_CloseDoor

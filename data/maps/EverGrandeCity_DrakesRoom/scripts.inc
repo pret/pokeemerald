@@ -1,11 +1,11 @@
 EverGrandeCity_DrakesRoom_MapScripts:: @ 822869C
-	map_script MAP_SCRIPT_ON_FRAME_TABLE, EverGrandeCity_DrakesRoom_MapScript2_OnFrame
-	map_script MAP_SCRIPT_ON_LOAD, EverGrandeCity_DrakesRoom_MapScript1_OnLoad
-	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, EverGrandeCity_SidneysRoom_MapScript2_OnWarp
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, EverGrandeCity_DrakesRoom_OnFrame
+	map_script MAP_SCRIPT_ON_LOAD, EverGrandeCity_DrakesRoom_OnLoad
+	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, EverGrandeCity_SidneysRoom_OnWarp
 	.byte 0
 
 @ Unused, Drake uses Sidneys identical OnWarp for some reason
-EverGrandeCity_DrakesRoom_MapScript2_OnWarp: @ 82286AC
+EverGrandeCity_DrakesRoom_OnWarp: @ 82286AC
 	map_script_2 VAR_TEMP_1, 0, EverGrandeCity_DrakesRoom_EventScript_PlayerTurnNorth
 	.2byte 0
 
@@ -13,7 +13,7 @@ EverGrandeCity_DrakesRoom_EventScript_PlayerTurnNorth:: @ 82286B6
 	turnobject EVENT_OBJ_ID_PLAYER, DIR_NORTH
 	end
 
-EverGrandeCity_DrakesRoom_MapScript2_OnFrame: @ 82286BB
+EverGrandeCity_DrakesRoom_OnFrame: @ 82286BB
 	map_script_2 VAR_ELITE_4_STATE, 3, EverGrandeCity_DrakesRoom_EventScript_WalkInCloseDoor
 	.2byte 0
 
@@ -24,7 +24,7 @@ EverGrandeCity_DrakesRoom_EventScript_WalkInCloseDoor:: @ 82286C5
 	releaseall
 	end
 
-EverGrandeCity_DrakesRoom_MapScript1_OnLoad: @ 82286D2
+EverGrandeCity_DrakesRoom_OnLoad: @ 82286D2
 	call_if_set FLAG_DEFEATED_ELITE_4_DRAKE, EverGrandeCity_DrakesRoom_EventScript_ResetAdvanceToNextRoom
 	compare VAR_ELITE_4_STATE, 4
 	call_if_eq EverGrandeCity_DrakesRoom_EventScript_CloseDoor

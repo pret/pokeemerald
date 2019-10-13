@@ -1,10 +1,10 @@
 EverGrandeCity_GlaciasRoom_MapScripts:: @ 8228412
-	map_script MAP_SCRIPT_ON_FRAME_TABLE, EverGrandeCity_GlaciasRoom_MapScript2_OnFrame
-	map_script MAP_SCRIPT_ON_LOAD, EverGrandeCity_GlaciasRoom_MapScript1_OnLoad
-	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, EverGrandeCity_GlaciasRoom_MapScript2_OnWarp
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, EverGrandeCity_GlaciasRoom_OnFrame
+	map_script MAP_SCRIPT_ON_LOAD, EverGrandeCity_GlaciasRoom_OnLoad
+	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, EverGrandeCity_GlaciasRoom_OnWarp
 	.byte 0
 
-EverGrandeCity_GlaciasRoom_MapScript2_OnWarp: @ 8228422
+EverGrandeCity_GlaciasRoom_OnWarp: @ 8228422
 	map_script_2 VAR_TEMP_1, 0, EverGrandeCity_GlaciasRoom_EventScript_PlayerTurnNorth
 	.2byte 0
 
@@ -12,7 +12,7 @@ EverGrandeCity_GlaciasRoom_EventScript_PlayerTurnNorth:: @ 822842C
 	turnobject EVENT_OBJ_ID_PLAYER, DIR_NORTH
 	end
 
-EverGrandeCity_GlaciasRoom_MapScript2_OnFrame: @ 8228431
+EverGrandeCity_GlaciasRoom_OnFrame: @ 8228431
 	map_script_2 VAR_ELITE_4_STATE, 2, EverGrandeCity_GlaciasRoom_EventScript_WalkInCloseDoor
 	.2byte 0
 
@@ -23,7 +23,7 @@ EverGrandeCity_GlaciasRoom_EventScript_WalkInCloseDoor:: @ 822843B
 	releaseall
 	end
 
-EverGrandeCity_GlaciasRoom_MapScript1_OnLoad: @ 8228448
+EverGrandeCity_GlaciasRoom_OnLoad: @ 8228448
 	call_if_set FLAG_DEFEATED_ELITE_4_GLACIA, EverGrandeCity_GlaciasRoom_EventScript_ResetAdvanceToNextRoom
 	compare VAR_ELITE_4_STATE, 3
 	call_if_eq EverGrandeCity_GlaciasRoom_EventScript_CloseDoor

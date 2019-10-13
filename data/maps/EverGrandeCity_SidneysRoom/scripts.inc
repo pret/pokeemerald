@@ -1,8 +1,8 @@
 EverGrandeCity_SidneysRoom_MapScripts:: @ 8227F01
-	map_script MAP_SCRIPT_ON_LOAD, EverGrandeCity_SidneysRoom_MapScript1_OnLoad
-	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, EverGrandeCity_SidneysRoom_MapScript2_OnWarp
+	map_script MAP_SCRIPT_ON_LOAD, EverGrandeCity_SidneysRoom_OnLoad
+	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, EverGrandeCity_SidneysRoom_OnWarp
 	map_script MAP_SCRIPT_ON_TRANSITION, EverGrandeCity_SidneysRoom_OnTransition
-	map_script MAP_SCRIPT_ON_FRAME_TABLE, EverGrandeCity_SidneysRoom_MapScript2_OnFrame
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, EverGrandeCity_SidneysRoom_OnFrame
 	.byte 0
 
 EverGrandeCity_SidneysRoom_OnTransition: @ 8227F16
@@ -10,7 +10,7 @@ EverGrandeCity_SidneysRoom_OnTransition: @ 8227F16
 	setflag FLAG_HIDE_EVER_GRANDE_POKEMON_CENTER_1F_SCOTT
 	end
 
-EverGrandeCity_SidneysRoom_MapScript1_OnLoad: @ 8227F1D
+EverGrandeCity_SidneysRoom_OnLoad: @ 8227F1D
 	call_if_set FLAG_DEFEATED_ELITE_4_SIDNEY, EverGrandeCity_SidneysRoom_EventScript_ResetAdvanceToNextRoom
 	compare VAR_ELITE_4_STATE, 1
 	call_if_eq EverGrandeCity_SidneysRoom_EventScript_CloseDoor
@@ -24,7 +24,7 @@ EverGrandeCity_SidneysRoom_EventScript_CloseDoor:: @ 8227F38
 	call PokemonLeague_EliteFour_EventScript_CloseDoor
 	return
 
-EverGrandeCity_SidneysRoom_MapScript2_OnWarp: @ 8227F3E
+EverGrandeCity_SidneysRoom_OnWarp: @ 8227F3E
 	map_script_2 VAR_TEMP_1, 0, EverGrandeCity_SidneysRoom_EventScript_PlayerTurnNorth
 	.2byte 0
 
@@ -32,7 +32,7 @@ EverGrandeCity_SidneysRoom_EventScript_PlayerTurnNorth:: @ 8227F48
 	turnobject EVENT_OBJ_ID_PLAYER, DIR_NORTH
 	end
 
-EverGrandeCity_SidneysRoom_MapScript2_OnFrame: @ 8227F4D
+EverGrandeCity_SidneysRoom_OnFrame: @ 8227F4D
 	map_script_2 VAR_ELITE_4_STATE, 0, EverGrandeCity_SidneysRoom_EventScript_WalkInCloseDoor
 	.2byte 0
 
