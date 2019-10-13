@@ -78,7 +78,7 @@ PetalburgCity_Gym_MapScript2_20498B: @ 820498B
 	.2byte 0
 
 PetalburgCity_Gym_EventScript_204995:: @ 8204995
-	turnobject EVENT_OBJ_ID_PLAYER, 2
+	turnobject EVENT_OBJ_ID_PLAYER, DIR_NORTH
 	end
 
 PetalburgCity_Gym_MapScript2_20499A: @ 820499A
@@ -125,10 +125,10 @@ PetalburgCity_Gym_EventScript_2049F1:: @ 82049F1
 	msgbox PetalburgCity_Gym_Text_2057A2, MSGBOX_DEFAULT
 	closemessage
 	switch VAR_FACING
-	case 1, PetalburgCity_Gym_EventScript_204A80
-	case 2, PetalburgCity_Gym_EventScript_204A8B
-	case 3, PetalburgCity_Gym_EventScript_204A96
-	case 4, PetalburgCity_Gym_EventScript_204AA1
+	case DIR_SOUTH, PetalburgCity_Gym_EventScript_204A80
+	case DIR_NORTH, PetalburgCity_Gym_EventScript_204A8B
+	case DIR_WEST, PetalburgCity_Gym_EventScript_204A96
+	case DIR_EAST, PetalburgCity_Gym_EventScript_204AA1
 	end
 
 PetalburgCity_Gym_EventScript_204A80:: @ 8204A80
@@ -418,12 +418,12 @@ PetalburgCity_Gym_EventScript_204E3B:: @ 8204E3B
 	setflag FLAG_DEFEATED_PETALBURG_GYM
 	setvar VAR_PETALBURG_GYM_STATE, 7
 	setflag FLAG_BADGE05_GET
-	special sub_813B9A0
+	special ResetHealLocationFromDewford
 	call PetalburgCity_Gym_EventScript_2721F8
 	setflag FLAG_HIDE_MAUVILLE_GYM_WATTSON
 	clearflag FLAG_HIDE_MAUVILLE_CITY_WATTSON
 	setvar VAR_0x8008, 5
-	call PetalburgCity_Gym_EventScript_271F43
+	call Common_EventScript_SetGymTrainers
 	clearflag FLAG_HIDE_DEWFORD_HALL_SLUDGE_BOMB_MAN
 	call PetalburgCity_Gym_EventScript_2048FF
 	special DrawWholeMapView
@@ -436,9 +436,9 @@ PetalburgCity_Gym_EventScript_204E3B:: @ 8204E3B
 	delay 10
 	addobject 11
 	switch VAR_FACING
-	case 2, PetalburgCity_Gym_EventScript_204EF5
-	case 3, PetalburgCity_Gym_EventScript_204F09
-	case 4, PetalburgCity_Gym_EventScript_204EFF
+	case DIR_NORTH, PetalburgCity_Gym_EventScript_204EF5
+	case DIR_WEST, PetalburgCity_Gym_EventScript_204F09
+	case DIR_EAST, PetalburgCity_Gym_EventScript_204EFF
 	end
 
 PetalburgCity_Gym_EventScript_204ED2:: @ 8204ED2

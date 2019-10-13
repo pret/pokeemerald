@@ -17,7 +17,7 @@
 #include "menu.h"
 #include "trig.h"
 #include "random.h"
-#include "alloc.h"
+#include "malloc.h"
 #include "dma3.h"
 #include "gpu_regs.h"
 #include "bg.h"
@@ -56,7 +56,7 @@ struct EggHatchData
 
 extern const u32 gUnknown_08331F60[]; // tilemap gameboy circle
 extern const u8 gText_HatchedFromEgg[];
-extern const u8 gText_NickHatchPrompt[];
+extern const u8 gText_NicknameHatchPrompt[];
 
 static void Task_EggHatch(u8 taskID);
 static void CB2_EggHatch_0(void);
@@ -298,13 +298,13 @@ static void CreatedHatchedMon(struct Pokemon *egg, struct Pokemon *temp)
     u16 species;
     u32 personality, pokerus;
     u8 i, friendship, language, gameMet, markings, obedience;
-    u16 moves[4];
+    u16 moves[MAX_MON_MOVES];
     u32 ivs[NUM_STATS];
 
 
     species = GetMonData(egg, MON_DATA_SPECIES);
 
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < MAX_MON_MOVES; i++)
     {
         moves[i] = GetMonData(egg, MON_DATA_MOVE1 + i);
     }
@@ -324,7 +324,7 @@ static void CreatedHatchedMon(struct Pokemon *egg, struct Pokemon *temp)
 
     CreateMon(temp, species, EGG_HATCH_LEVEL, 32, TRUE, personality, OT_ID_PLAYER_ID, 0);
 
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < MAX_MON_MOVES; i++)
     {
         SetMonData(temp, MON_DATA_MOVE1 + i,  &moves[i]);
     }
@@ -368,7 +368,7 @@ static void AddHatchedMonToParty(u8 id)
     GetSetPokedexFlag(pokeNum, FLAG_SET_SEEN);
     GetSetPokedexFlag(pokeNum, FLAG_SET_CAUGHT);
 
-    GetMonNick(mon, gStringVar1);
+    GetMonNickname2(mon, gStringVar1);
 
     ball = ITEM_POKE_BALL;
     SetMonData(mon, MON_DATA_POKEBALL, &ball);
@@ -388,17 +388,17 @@ void ScriptHatchMon(void)
     AddHatchedMonToParty(gSpecialVar_0x8004);
 }
 
-static bool8 sub_807158C(struct DayCare *daycare, u8 daycareId)
+static bool8 _CheckDaycareMonReceivedMail(struct DayCare *daycare, u8 daycareId)
 {
-    u8 nick[0x20];
+    u8 nickname[32];
     struct DaycareMon *daycareMon = &daycare->mons[daycareId];
 
-    GetBoxMonNick(&daycareMon->mon, nick);
-    if (daycareMon->mail.message.itemId != 0
-        && (StringCompareWithoutExtCtrlCodes(nick, daycareMon->mail.monName) != 0
+    GetBoxMonNickname(&daycareMon->mon, nickname);
+    if (daycareMon->mail.message.itemId != ITEM_NONE
+        && (StringCompareWithoutExtCtrlCodes(nickname, daycareMon->mail.monName) != 0
             || StringCompareWithoutExtCtrlCodes(gSaveBlock2Ptr->playerName, daycareMon->mail.OT_name) != 0))
     {
-        StringCopy(gStringVar1, nick);
+        StringCopy(gStringVar1, nickname);
         TVShowConvertInternationalString(gStringVar2, daycareMon->mail.OT_name, daycareMon->mail.gameLanguage);
         TVShowConvertInternationalString(gStringVar3, daycareMon->mail.monName, daycareMon->mail.monLanguage);
         return TRUE;
@@ -406,9 +406,9 @@ static bool8 sub_807158C(struct DayCare *daycare, u8 daycareId)
     return FALSE;
 }
 
-bool8 sub_8071614(void)
+bool8 CheckDaycareMonReceivedMail(void)
 {
-    return sub_807158C(&gSaveBlock1Ptr->daycare, gSpecialVar_0x8004);
+    return _CheckDaycareMonReceivedMail(&gSaveBlock1Ptr->daycare, gSpecialVar_0x8004);
 }
 
 static u8 EggHatchCreateMonSprite(u8 a0, u8 switchID, u8 pokeID, u16* speciesLoc)
@@ -634,7 +634,7 @@ static void CB2_EggHatch_1(void)
         }
         break;
     case 5:
-        GetMonNick(&gPlayerParty[sEggHatchData->eggPartyID], gStringVar1);
+        GetMonNickname2(&gPlayerParty[sEggHatchData->eggPartyID], gStringVar1);
         StringExpandPlaceholders(gStringVar4, gText_HatchedFromEgg);
         EggHatchPrintMessage(sEggHatchData->windowId, gStringVar4, 0, 3, 0xFF);
         PlayFanfare(MUS_FANFA5);
@@ -651,8 +651,8 @@ static void CB2_EggHatch_1(void)
             sEggHatchData->CB2_state++;
         break;
     case 8:
-        GetMonNick(&gPlayerParty[sEggHatchData->eggPartyID], gStringVar1);
-        StringExpandPlaceholders(gStringVar4, gText_NickHatchPrompt);
+        GetMonNickname2(&gPlayerParty[sEggHatchData->eggPartyID], gStringVar1);
+        StringExpandPlaceholders(gStringVar4, gText_NicknameHatchPrompt);
         EggHatchPrintMessage(sEggHatchData->windowId, gStringVar4, 0, 2, 1);
         sEggHatchData->CB2_state++;
         break;
@@ -668,7 +668,7 @@ static void CB2_EggHatch_1(void)
         switch (Menu_ProcessInputNoWrapClearOnChoose())
         {
         case 0:
-            GetMonNick(&gPlayerParty[sEggHatchData->eggPartyID], gStringVar3);
+            GetMonNickname2(&gPlayerParty[sEggHatchData->eggPartyID], gStringVar3);
             species = GetMonData(&gPlayerParty[sEggHatchData->eggPartyID], MON_DATA_SPECIES);
             gender = GetMonGender(&gPlayerParty[sEggHatchData->eggPartyID]);
             personality = GetMonData(&gPlayerParty[sEggHatchData->eggPartyID], MON_DATA_PERSONALITY, 0);
@@ -880,9 +880,9 @@ u8 GetEggStepsToSubtract(void)
     return 1;
 }
 
-u16 sub_80722E0(void)
+u16 CountPartyAliveNonEggMons(void)
 {
     u16 aliveNonEggMonsCount = CountStorageNonEggMons();
-    aliveNonEggMonsCount += CountPartyAliveNonEggMonsExcept(6);
+    aliveNonEggMonsCount += CountPartyAliveNonEggMonsExcept(PARTY_SIZE);
     return aliveNonEggMonsCount;
 }

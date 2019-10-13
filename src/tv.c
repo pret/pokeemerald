@@ -31,15 +31,17 @@
 #include "text.h"
 #include "script_menu.h"
 #include "naming_screen.h"
-#include "alloc.h"
+#include "malloc.h"
 #include "region_map.h"
 #include "constants/region_map_sections.h"
 #include "decoration.h"
 #include "secret_base.h"
 #include "tv.h"
 #include "data.h"
+#include "constants/contest.h"
 #include "constants/layouts.h"
 #include "constants/metatile_behaviors.h"
+#include "constants/script_menu.h"
 
 // Static type declarations
 
@@ -182,7 +184,7 @@ static void DoTVShowPokemonContestLiveUpdates2(void);
 
 static const struct {
     u16 species;
-    u16 moves[4];
+    u16 moves[MAX_MON_MOVES];
     u8 level;
     u8 location;
 } sPokeOutbreakSpeciesList[] = {
@@ -2329,7 +2331,7 @@ void sub_80EE35C(u16 foeSpecies, u16 species, u8 moveIdx, const u16 *movePtr, u1
         show->battleSeminar.foeSpecies = foeSpecies;
         show->battleSeminar.species = species;
         show->battleSeminar.move = movePtr[moveIdx];
-        for (i = 0, j = 0; i < 4; i ++)
+        for (i = 0, j = 0; i < MAX_MON_MOVES; i ++)
         {
             if (i != moveIdx && movePtr[i])
             {
@@ -2786,11 +2788,11 @@ bool8 GetPriceReduction(u8 newsKind)
 {
     u8 i;
 
-    if (newsKind == 0)
+    if (newsKind == POKENEWS_NONE)
     {
         return FALSE;
     }
-    for (i = 0; i < 16; i ++)
+    for (i = 0; i < POKE_NEWS_COUNT; i ++)
     {
         if (gSaveBlock1Ptr->pokeNews[i].kind == newsKind)
         {
@@ -2870,17 +2872,17 @@ void CopyContestRankToStringVar(u8 varIdx, u8 rank)
 {
     switch (rank)
     {
-        case 0: // NORMAL
-            StringCopy(gTVStringVarPtrs[varIdx], gUnknown_0858BAF0[5]);
+        case CONTEST_RANK_NORMAL:
+            StringCopy(gTVStringVarPtrs[varIdx], gStdStrings[STDSTRING_NORMAL]);
             break;
-        case 1: // SUPER
-            StringCopy(gTVStringVarPtrs[varIdx], gUnknown_0858BAF0[6]);
+        case CONTEST_RANK_SUPER:
+            StringCopy(gTVStringVarPtrs[varIdx], gStdStrings[STDSTRING_SUPER]);
             break;
-        case 2: // HYPER
-            StringCopy(gTVStringVarPtrs[varIdx], gUnknown_0858BAF0[7]);
+        case CONTEST_RANK_HYPER:
+            StringCopy(gTVStringVarPtrs[varIdx], gStdStrings[STDSTRING_HYPER]);
             break;
-        case 3: // MASTER
-            StringCopy(gTVStringVarPtrs[varIdx], gUnknown_0858BAF0[8]);
+        case CONTEST_RANK_MASTER:
+            StringCopy(gTVStringVarPtrs[varIdx], gStdStrings[STDSTRING_MASTER]);
             break;
     }
 }
@@ -2889,20 +2891,20 @@ void CopyContestCategoryToStringVar(u8 varIdx, u8 category)
 {
     switch (category)
     {
-        case 0: // COOL
-            StringCopy(gTVStringVarPtrs[varIdx], gUnknown_0858BAF0[0]);
+        case CONTEST_CATEGORY_COOL:
+            StringCopy(gTVStringVarPtrs[varIdx], gStdStrings[STDSTRING_COOL]);
             break;
-        case 1: // BEAUTY
-            StringCopy(gTVStringVarPtrs[varIdx], gUnknown_0858BAF0[1]);
+        case CONTEST_CATEGORY_BEAUTY:
+            StringCopy(gTVStringVarPtrs[varIdx], gStdStrings[STDSTRING_BEAUTY]);
             break;
-        case 2: // CUTE
-            StringCopy(gTVStringVarPtrs[varIdx], gUnknown_0858BAF0[2]);
+        case CONTEST_CATEGORY_CUTE:
+            StringCopy(gTVStringVarPtrs[varIdx], gStdStrings[STDSTRING_CUTE]);
             break;
-        case 3: // SMART
-            StringCopy(gTVStringVarPtrs[varIdx], gUnknown_0858BAF0[3]);
+        case CONTEST_CATEGORY_SMART:
+            StringCopy(gTVStringVarPtrs[varIdx], gStdStrings[STDSTRING_SMART]);
             break;
-        case 4: // TOUGH
-            StringCopy(gTVStringVarPtrs[varIdx], gUnknown_0858BAF0[4]);
+        case CONTEST_CATEGORY_TOUGH:
+            StringCopy(gTVStringVarPtrs[varIdx], gStdStrings[STDSTRING_TOUGH]);
             break;
     }
 }

@@ -24,7 +24,7 @@
 #include "data.h"
 #include "record_mixing.h"
 #include "strings.h"
-#include "alloc.h"
+#include "malloc.h"
 #include "save.h"
 #include "load_save.h"
 #include "battle_dome.h"
@@ -794,15 +794,15 @@ static void sub_81A17A0(void)
     case 0:
         break;
     case 1:
-        sub_813A878(0);
+        FrontierGamblerSetWonOrLost(FALSE);
         VarSet(VAR_TEMP_0, gSaveBlock2Ptr->frontier.field_CA8);
         break;
     case 4:
-        sub_813A878(0);
+        FrontierGamblerSetWonOrLost(FALSE);
         VarSet(VAR_TEMP_0, gSaveBlock2Ptr->frontier.field_CA8);
         break;
     case 3:
-        sub_813A878(1);
+        FrontierGamblerSetWonOrLost(TRUE);
         VarSet(VAR_TEMP_0, gSaveBlock2Ptr->frontier.field_CA8);
         break;
     case 2:

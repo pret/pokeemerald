@@ -12,7 +12,7 @@
 #include "bg.h"
 #include "palette.h"
 #include "decompress.h"
-#include "alloc.h"
+#include "malloc.h"
 #include "gpu_regs.h"
 #include "text.h"
 #include "text_window.h"
@@ -36,6 +36,7 @@
 #include "new_game.h"
 #include "save.h"
 #include "link.h"
+#include "constants/berry.h"
 #include "constants/rgb.h"
 
 #define BLENDER_SCORE_BEST      0
@@ -1173,7 +1174,7 @@ static void sub_8080018(void)
     {
     case 0:
         sub_8080588();
-        gLinkType = 0x4422;
+        gLinkType = LINKTYPE_BERRY_BLENDER;
         sBerryBlenderData->field_72 = 0;
         for (i = 0; i < BLENDER_MAX_PLAYERS; i++)
         {
@@ -1516,7 +1517,7 @@ static void sub_80808D4(void)
 
         sBerryBlenderData->playAgainState = 0;
         sBerryBlenderData->loadGfxState = 0;
-        gLinkType = 0x4422;
+        gLinkType = LINKTYPE_BERRY_BLENDER;
         sBerryBlenderData->mainState++;
         break;
     case 1:

@@ -40,7 +40,7 @@ BattleFrontier_Lounge2_EventScript_26066D:: @ 826066D
 	call_if_le BattleFrontier_Lounge2_EventScript_2606F8
 	compare VAR_FRONTIER_MANIAC_FACILITY, 4
 	call_if_ge BattleFrontier_Lounge2_EventScript_260701
-	special sub_8139F20
+	special ShowFrontierManiacMessage
 	waitmessage
 	waitbuttonpress
 	release
@@ -55,43 +55,43 @@ BattleFrontier_Lounge2_EventScript_260701:: @ 8260701
 	return
 
 BattleFrontier_Lounge2_EventScript_26070A:: @ 826070A
-	bufferstdstring 0, 19
+	bufferstdstring 0, STDSTRING_SINGLE
 	return
 
 BattleFrontier_Lounge2_EventScript_26070F:: @ 826070F
-	bufferstdstring 0, 20
+	bufferstdstring 0, STDSTRING_DOUBLE
 	return
 
 BattleFrontier_Lounge2_EventScript_260714:: @ 8260714
-	bufferstdstring 0, 21
+	bufferstdstring 0, STDSTRING_MULTI
 	return
 
 BattleFrontier_Lounge2_EventScript_260719:: @ 8260719
-	bufferstdstring 0, 22
+	bufferstdstring 0, STDSTRING_MULTI_LINK
 	return
 
 BattleFrontier_Lounge2_EventScript_26071E:: @ 826071E
-	bufferstdstring 0, 24
+	bufferstdstring 0, STDSTRING_BATTLE_DOME
 	return
 
 BattleFrontier_Lounge2_EventScript_260723:: @ 8260723
-	bufferstdstring 0, 25
+	bufferstdstring 0, STDSTRING_BATTLE_FACTORY
 	return
 
 BattleFrontier_Lounge2_EventScript_260728:: @ 8260728
-	bufferstdstring 0, 26
+	bufferstdstring 0, STDSTRING_BATTLE_PALACE
 	return
 
 BattleFrontier_Lounge2_EventScript_26072D:: @ 826072D
-	bufferstdstring 0, 27
+	bufferstdstring 0, STDSTRING_BATTLE_ARENA
 	return
 
 BattleFrontier_Lounge2_EventScript_260732:: @ 8260732
-	bufferstdstring 0, 28
+	bufferstdstring 0, STDSTRING_BATTLE_PIKE
 	return
 
 BattleFrontier_Lounge2_EventScript_260737:: @ 8260737
-	bufferstdstring 0, 29
+	bufferstdstring 0, STDSTRING_BATTLE_PYRAMID
 	return
 
 BattleFrontier_Lounge2_EventScript_26073C:: @ 826073C

@@ -9,7 +9,7 @@ VerdanturfTown_BattleTentLobby_MapScript2_2016DB: @ 82016DB
 
 VerdanturfTown_BattleTentLobby_EventScript_2016E5:: @ 82016E5
 	setvar VAR_TEMP_1, 1
-	turnobject EVENT_OBJ_ID_PLAYER, 2
+	turnobject EVENT_OBJ_ID_PLAYER, DIR_NORTH
 	end
 
 VerdanturfTown_BattleTentLobby_MapScript2_2016EF: @ 82016EF
@@ -141,12 +141,12 @@ VerdanturfTown_BattleTentLobby_EventScript_201873:: @ 8201873
 VerdanturfTown_BattleTentLobby_EventScript_201893:: @ 8201893
 	message VerdanturfTown_BattleTentLobby_Text_2C5129
 	waitmessage
-	multichoice 17, 6, 23, 0
+	multichoice 17, 6, MULTI_CHALLENGEINFO, 0
 	switch VAR_RESULT
 	case 0, VerdanturfTown_BattleTentLobby_EventScript_2018CF
 	case 1, VerdanturfTown_BattleTentLobby_EventScript_2019DB
 	case 2, VerdanturfTown_BattleTentLobby_EventScript_201A37
-	case 127, VerdanturfTown_BattleTentLobby_EventScript_201A37
+	case MULTI_B_PRESSED, VerdanturfTown_BattleTentLobby_EventScript_201A37
 
 VerdanturfTown_BattleTentLobby_EventScript_2018CF:: @ 82018CF
 	setvar VAR_FRONTIER_FACILITY, 2
@@ -332,8 +332,8 @@ VerdanturfTown_BattleTentLobby_EventScript_201B02:: @ 8201B02
 VerdanturfTown_BattleTentLobby_EventScript_201B11:: @ 8201B11
 	message VerdanturfTown_BattleTentLobby_Text_24EF88
 	waitmessage
-	setvar VAR_0x8004, 12
-	special sub_813A128
+	setvar VAR_0x8004, SCROLL_MULTI_BATTLE_TENT_RULES
+	special ShowScrollableMultichoice
 	waitstate
 	switch VAR_RESULT
 	case 0, VerdanturfTown_BattleTentLobby_EventScript_201B7E
@@ -343,7 +343,7 @@ VerdanturfTown_BattleTentLobby_EventScript_201B11:: @ 8201B11
 	case 4, VerdanturfTown_BattleTentLobby_EventScript_201BB6
 	case 5, VerdanturfTown_BattleTentLobby_EventScript_201BC4
 	case 6, VerdanturfTown_BattleTentLobby_EventScript_201BD2
-	case 127, VerdanturfTown_BattleTentLobby_EventScript_201BD2
+	case MULTI_B_PRESSED, VerdanturfTown_BattleTentLobby_EventScript_201BD2
 	end
 
 VerdanturfTown_BattleTentLobby_EventScript_201B7E:: @ 8201B7E

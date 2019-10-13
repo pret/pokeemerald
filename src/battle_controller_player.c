@@ -664,7 +664,7 @@ u32 sub_8057FBC(void) // unused
 
 static void HandleMoveSwitching(void)
 {
-    u8 perMovePPBonuses[4];
+    u8 perMovePPBonuses[MAX_MON_MOVES];
     struct ChooseMoveStruct moveStruct;
     u8 totalPPBonuses;
 

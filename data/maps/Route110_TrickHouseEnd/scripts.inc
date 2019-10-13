@@ -23,7 +23,7 @@ Route110_TrickHouseEnd_MapScript2_26ACDE: @ 826ACDE
 Route110_TrickHouseEnd_EventScript_26ACE8:: @ 826ACE8
 	addobject 1
 	showobjectat 1, MAP_ROUTE110_TRICK_HOUSE_END
-	turnobject 1, 4
+	turnobject 1, DIR_EAST
 	end
 
 Route110_TrickHouseEnd_MapScript2_26ACF5: @ 826ACF5
@@ -150,13 +150,13 @@ Route110_TrickHouseEnd_EventScript_26AEEC:: @ 826AEEC
 Route110_TrickHouseEnd_EventScript_26AF28:: @ 826AF28
 	msgbox Route110_TrickHouseEnd_Text_26B3AB, MSGBOX_DEFAULT
 	closemessage
-	compare VAR_FACING, 1
+	compare VAR_FACING, DIR_SOUTH
 	call_if_eq Route110_TrickHouseEnd_EventScript_26B015
-	compare VAR_FACING, 2
+	compare VAR_FACING, DIR_NORTH
 	call_if_eq Route110_TrickHouseEnd_EventScript_26B020
-	compare VAR_FACING, 3
+	compare VAR_FACING, DIR_WEST
 	call_if_eq Route110_TrickHouseEnd_EventScript_26B02B
-	compare VAR_FACING, 4
+	compare VAR_FACING, DIR_EAST
 	call_if_eq Route110_TrickHouseEnd_EventScript_26B036
 	delay 30
 	msgbox Route110_TrickHouseEnd_Text_26B3FA, MSGBOX_DEFAULT
@@ -176,17 +176,17 @@ Route110_TrickHouseEnd_EventScript_26AF28:: @ 826AF28
 	end
 
 Route110_TrickHouseEnd_EventScript_26AFA5:: @ 826AFA5
-	multichoice 0, 0, 88, 1
+	multichoice 0, 0, MULTI_TENT, 1
 	switch VAR_RESULT
 	case 0, Route110_TrickHouseEnd_EventScript_26AFBF
 	goto Route110_TrickHouseEnd_EventScript_26AFC7
 
 Route110_TrickHouseEnd_EventScript_26AFBF:: @ 826AFBF
-	givedecoration_std 31
+	givedecoration_std DECOR_RED_TENT
 	return
 
 Route110_TrickHouseEnd_EventScript_26AFC7:: @ 826AFC7
-	givedecoration_std 32
+	givedecoration_std DECOR_BLUE_TENT
 	return
 
 Route110_TrickHouseEnd_EventScript_26AFCF:: @ 826AFCF
@@ -233,7 +233,7 @@ Route110_TrickHouseEnd_EventScript_26B036:: @ 826B036
 
 Route110_TrickHouseEnd_EventScript_26B041:: @ 826B041
 	lockall
-	turnobject 1, 3
+	turnobject 1, DIR_WEST
 	playse SE_PIN
 	applymovement 1, Common_Movement_ExclamationMark
 	waitmovement 0
@@ -248,7 +248,7 @@ Route110_TrickHouseEnd_EventScript_26B041:: @ 826B041
 	applymovement EVENT_OBJ_ID_PLAYER, Route110_TrickHouseEnd_Movement_26B089
 	waitmovement 0
 	delay 4
-	turnobject 1, 4
+	turnobject 1, DIR_EAST
 	releaseall
 	end
 

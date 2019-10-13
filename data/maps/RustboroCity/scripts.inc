@@ -5,7 +5,7 @@ RustboroCity_MapScripts:: @ 81E06BD
 
 RustboroCity_OnTransition: @ 81E06C8
 	setflag FLAG_VISITED_RUSTBORO_CITY
-	call Common_EventScript_SetupRivalGender
+	call Common_EventScript_SetupRivalGfxId
 	compare VAR_RUSTBORO_CITY_STATE, 6
 	call_if_eq RustboroCity_EventScript_1E0707
 	getplayerxy VAR_TEMP_0, VAR_TEMP_1
@@ -78,7 +78,7 @@ RustboroCity_EventScript_1E07AC:: @ 81E07AC
 
 RustboroCity_EventScript_1E07BD:: @ 81E07BD
 	setflag FLAG_ADDED_MATCH_CALL_TO_POKENAV
-	special sp106_CreateStartMenu
+	special ScriptMenu_CreateStartMenuForPokenavTutorial
 	waitstate
 	switch VAR_RESULT
 	case 0, RustboroCity_EventScript_1E07AC
@@ -88,7 +88,7 @@ RustboroCity_EventScript_1E07BD:: @ 81E07BD
 	case 5, RustboroCity_EventScript_1E07AC
 	case 6, RustboroCity_EventScript_1E07AC
 	case 7, RustboroCity_EventScript_1E07AC
-	case 127, RustboroCity_EventScript_1E07AC
+	case MULTI_B_PRESSED, RustboroCity_EventScript_1E07AC
 	special sub_81C72A4
 	waitstate
 	delay 20

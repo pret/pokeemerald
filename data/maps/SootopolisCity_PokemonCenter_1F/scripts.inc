@@ -1,6 +1,6 @@
 SootopolisCity_PokemonCenter_1F_MapScripts:: @ 82264F1
 	map_script MAP_SCRIPT_ON_TRANSITION, SootopolisCity_PokemonCenter_1F_OnTransition
-	map_script MAP_SCRIPT_ON_RESUME, SootopolisCity_PokemonCenter_1F_MapScript1_277C30
+	map_script MAP_SCRIPT_ON_RESUME, CableClub_OnResume
 	.byte 0
 
 SootopolisCity_PokemonCenter_1F_OnTransition: @ 82264FC
@@ -9,7 +9,7 @@ SootopolisCity_PokemonCenter_1F_OnTransition: @ 82264FC
 
 SootopolisCity_PokemonCenter_1F_EventScript_226500:: @ 8226500
 	setvar VAR_0x800B, 1
-	call SootopolisCity_PokemonCenter_1F_EventScript_27191E
+	call Common_EventScript_PkmnCenterNurse
 	waitmessage
 	waitbuttonpress
 	release

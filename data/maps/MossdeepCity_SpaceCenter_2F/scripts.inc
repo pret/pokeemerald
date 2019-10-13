@@ -194,7 +194,7 @@ MossdeepCity_SpaceCenter_2F_EventScript_223F7A:: @ 8223F7A
 	delay 30
 	playse SE_KOUKA_L
 	switch VAR_FACING
-	case 1, MossdeepCity_SpaceCenter_2F_EventScript_223FBA
+	case DIR_SOUTH, MossdeepCity_SpaceCenter_2F_EventScript_223FBA
 	applymovement 4, MossdeepCity_SpaceCenter_2F_Movement_223FC6
 	waitmovement 0
 	releaseall
@@ -300,11 +300,11 @@ MossdeepCity_SpaceCenter_2F_EventScript_224071:: @ 8224071
 	removeobject 8
 	removeobject 9
 	setobjectxy 3, 5, 6
-	turnobject 3, 1
+	turnobject 3, DIR_SOUTH
 	setobjectxy 2, 11, 8
-	turnobject 2, 2
+	turnobject 2, DIR_NORTH
 	setobjectxy 1, 6, 2
-	turnobject 1, 2
+	turnobject 1, DIR_NORTH
 	call MossdeepCity_SpaceCenter_2F_EventScript_224131
 	fadescreen 0
 	msgbox MossdeepCity_SpaceCenter_2F_Text_224A4A, MSGBOX_DEFAULT
@@ -326,16 +326,16 @@ MossdeepCity_SpaceCenter_2F_EventScript_224071:: @ 8224071
 
 MossdeepCity_SpaceCenter_2F_EventScript_224131:: @ 8224131
 	switch VAR_FACING
-	case 1, MossdeepCity_SpaceCenter_2F_EventScript_22414D
-	case 3, MossdeepCity_SpaceCenter_2F_EventScript_224152
+	case DIR_SOUTH, MossdeepCity_SpaceCenter_2F_EventScript_22414D
+	case DIR_WEST, MossdeepCity_SpaceCenter_2F_EventScript_224152
 	return
 
 MossdeepCity_SpaceCenter_2F_EventScript_22414D:: @ 822414D
-	turnobject 4, 2
+	turnobject 4, DIR_NORTH
 	return
 
 MossdeepCity_SpaceCenter_2F_EventScript_224152:: @ 8224152
-	turnobject 4, 4
+	turnobject 4, DIR_EAST
 	return
 
 MossdeepCity_SpaceCenter_2F_EventScript_224157:: @ 8224157

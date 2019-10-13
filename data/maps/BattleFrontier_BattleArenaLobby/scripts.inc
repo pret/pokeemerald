@@ -9,7 +9,7 @@ BattleFrontier_BattleArenaLobby_MapScript2_255C41: @ 8255C41
 
 BattleFrontier_BattleArenaLobby_EventScript_255C4B:: @ 8255C4B
 	setvar VAR_TEMP_1, 1
-	turnobject EVENT_OBJ_ID_PLAYER, 2
+	turnobject EVENT_OBJ_ID_PLAYER, DIR_NORTH
 	end
 
 BattleFrontier_BattleArenaLobby_MapScript2_255C55: @ 8255C55
@@ -101,11 +101,11 @@ BattleFrontier_BattleArenaLobby_EventScript_255D59:: @ 8255D59
 	goto_if_eq BattleFrontier_BattleArenaLobby_EventScript_255DBF
 	message BattleFrontier_BattleArenaLobby_Text_256B19
 	waitmessage
-	multichoicedefault 20, 8, 94, 1, 0
+	multichoicedefault 20, 8, MULTI_YESNO, 1, 0
 	switch VAR_RESULT
 	case 1, BattleFrontier_BattleArenaLobby_EventScript_255DBF
 	case 0, BattleFrontier_BattleArenaLobby_EventScript_255DBA
-	case 127, BattleFrontier_BattleArenaLobby_EventScript_255DBF
+	case MULTI_B_PRESSED, BattleFrontier_BattleArenaLobby_EventScript_255DBF
 
 BattleFrontier_BattleArenaLobby_EventScript_255DBA:: @ 8255DBA
 	call BattleFrontier_BattleArenaLobby_EventScript_23E8B4
@@ -140,20 +140,20 @@ BattleFrontier_BattleArenaLobby_EventScript_255DF4:: @ 8255DF4
 BattleFrontier_BattleArenaLobby_EventScript_255E0B:: @ 8255E0B
 	message BattleFrontier_BattleArenaLobby_Text_2561EA
 	waitmessage
-	multichoice 17, 6, 23, 0
+	multichoice 17, 6, MULTI_CHALLENGEINFO, 0
 	switch VAR_RESULT
 	case 0, BattleFrontier_BattleArenaLobby_EventScript_255E47
 	case 1, BattleFrontier_BattleArenaLobby_EventScript_255F9F
 	case 2, BattleFrontier_BattleArenaLobby_EventScript_255FFB
-	case 127, BattleFrontier_BattleArenaLobby_EventScript_255FFB
+	case MULTI_B_PRESSED, BattleFrontier_BattleArenaLobby_EventScript_255FFB
 
 BattleFrontier_BattleArenaLobby_EventScript_255E47:: @ 8255E47
 	message BattleFrontier_BattleArenaLobby_Text_256513
 	waitmessage
-	multichoice 17, 6, 24, 0
+	multichoice 17, 6, MULTI_LEVEL_MODE, 0
 	switch VAR_RESULT
 	case 2, BattleFrontier_BattleArenaLobby_EventScript_255FFB
-	case 127, BattleFrontier_BattleArenaLobby_EventScript_255FFB
+	case MULTI_B_PRESSED, BattleFrontier_BattleArenaLobby_EventScript_255FFB
 	setvar VAR_0x8004, 15
 	special CallFrontierUtilFunc
 	compare VAR_0x8004, 1
@@ -377,14 +377,14 @@ BattleFrontier_BattleArenaLobby_EventScript_2560CA:: @ 82560CA
 BattleFrontier_BattleArenaLobby_EventScript_2560D9:: @ 82560D9
 	message BattleFrontier_BattleArenaLobby_Text_256DDF
 	waitmessage
-	multichoice 17, 2, 96, 0
+	multichoice 17, 2, MULTI_BATTLE_ARENA_RULES, 0
 	switch VAR_RESULT
 	case 0, BattleFrontier_BattleArenaLobby_EventScript_25612C
 	case 1, BattleFrontier_BattleArenaLobby_EventScript_25613A
 	case 2, BattleFrontier_BattleArenaLobby_EventScript_256148
 	case 3, BattleFrontier_BattleArenaLobby_EventScript_256156
 	case 4, BattleFrontier_BattleArenaLobby_EventScript_256164
-	case 127, BattleFrontier_BattleArenaLobby_EventScript_256164
+	case MULTI_B_PRESSED, BattleFrontier_BattleArenaLobby_EventScript_256164
 	end
 
 BattleFrontier_BattleArenaLobby_EventScript_25612C:: @ 825612C

@@ -1,5 +1,5 @@
 #include "global.h"
-#include "alloc.h"
+#include "malloc.h"
 #include "bg.h"
 #include "blit.h"
 #include "dma3.h"
@@ -2148,15 +2148,15 @@ void sub_819A344(u8 a0, u8 *dest, u8 color)
             break;
         case 1:
             if (IsNationalPokedexEnabled())
-                string = ConvertIntToDecimalStringN(string, GetNationalPokedexCount(1), 0, 3);
+                string = ConvertIntToDecimalStringN(string, GetNationalPokedexCount(1), STR_CONV_MODE_LEFT_ALIGN, 3);
             else
-                string = ConvertIntToDecimalStringN(string, GetHoennPokedexCount(1), 0, 3);
+                string = ConvertIntToDecimalStringN(string, GetHoennPokedexCount(1), STR_CONV_MODE_LEFT_ALIGN, 3);
             *string = EOS;
             break;
         case 2:
-            string = ConvertIntToDecimalStringN(string, gSaveBlock2Ptr->playTimeHours, 0, 3);
+            string = ConvertIntToDecimalStringN(string, gSaveBlock2Ptr->playTimeHours, STR_CONV_MODE_LEFT_ALIGN, 3);
             *(string++) = CHAR_COLON;
-            ConvertIntToDecimalStringN(string, gSaveBlock2Ptr->playTimeMinutes, 2, 2);
+            ConvertIntToDecimalStringN(string, gSaveBlock2Ptr->playTimeMinutes, STR_CONV_MODE_LEADING_ZEROS, 2);
             break;
         case 3:
             sub_81245DC(string, gMapHeader.regionMapSectionId);

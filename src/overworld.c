@@ -26,7 +26,7 @@
 #include "link_rfu.h"
 #include "load_save.h"
 #include "main.h"
-#include "alloc.h"
+#include "malloc.h"
 #include "m4a.h"
 #include "map_name_popup.h"
 #include "match_call.h"
@@ -85,9 +85,9 @@
 extern const u8 EventScript_WhiteOut[];
 extern const u8 EventScript_ResetMrBriney[];
 extern const u8 EventScript_DoLinkRoomExit[];
-extern const u8 gEventScript_TradeRoom_TooBusyToNotice[];
-extern const u8 gEventScript_TradeRoom_ReadTrainerCard_NoColor[];
-extern const u8 gEventScript_TradeRoom_ReadTrainerCard_Normal[];
+extern const u8 CableClub_EventScript_TooBusyToNotice[];
+extern const u8 CableClub_EventScript_ReadTrainerCard[];
+extern const u8 CableClub_EventScript_ReadTrainerCardColored[];
 extern const u8 EventScript_DoubleBattleColosseum_PlayerSpot0[];
 extern const u8 EventScript_DoubleBattleColosseum_PlayerSpot1[];
 extern const u8 EventScript_DoubleBattleColosseum_PlayerSpot2[];
@@ -1759,7 +1759,7 @@ void CB2_ContinueSavedGame(void)
 
 static void FieldClearVBlankHBlankCallbacks(void)
 {
-    if (warp0_in_pokecenter() == TRUE)
+    if (UsedPokemonCenterWarp() == TRUE)
         CloseLink();
 
     if (gWirelessCommType != 0)
@@ -2435,7 +2435,7 @@ static void UpdateAllLinkPlayers(u16 *keys, s32 selfId)
     struct TradeRoomPlayer trainer;
     s32 i;
 
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < MAX_LINK_PLAYERS; i++)
     {
         u8 key = keys[i];
         u16 setFacing = FACING_NONE;
@@ -2742,7 +2742,7 @@ static bool32 PlayerIsAtSouthExit(struct TradeRoomPlayer *player)
         return FALSE;
     else if (!MetatileBehavior_IsSouthArrowWarp(player->field_C))
         return FALSE;
-    else if (player->facing != 1)
+    else if (player->facing != DIR_SOUTH)
         return FALSE;
     else
         return TRUE;
@@ -2765,13 +2765,13 @@ static const u8 *TryInteractWithPlayer(struct TradeRoomPlayer *player)
     if (linkPlayerId != 4)
     {
         if (!player->isLocalPlayer)
-            return gEventScript_TradeRoom_TooBusyToNotice;
+            return CableClub_EventScript_TooBusyToNotice;
         else if (sPlayerTradingStates[linkPlayerId] != PLAYER_TRADING_STATE_IDLE)
-            return gEventScript_TradeRoom_TooBusyToNotice;
+            return CableClub_EventScript_TooBusyToNotice;
         else if (!GetLinkTrainerCardColor(linkPlayerId))
-            return gEventScript_TradeRoom_ReadTrainerCard_NoColor;
+            return CableClub_EventScript_ReadTrainerCard;
         else
-            return gEventScript_TradeRoom_ReadTrainerCard_Normal;
+            return CableClub_EventScript_ReadTrainerCardColored;
     }
 
     return GetInteractedLinkPlayerScript(&otherPlayerPos, player->field_C, player->facing);
@@ -3026,7 +3026,7 @@ static s32 sub_80878E4(u8 linkPlayerId)
 static u8 GetLinkPlayerIdAt(s16 x, s16 y)
 {
     u8 i;
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < MAX_LINK_PLAYERS; i++)
     {
         if (gLinkPlayerEventObjects[i].active
          && (gLinkPlayerEventObjects[i].movementMode == 0 || gLinkPlayerEventObjects[i].movementMode == 2))

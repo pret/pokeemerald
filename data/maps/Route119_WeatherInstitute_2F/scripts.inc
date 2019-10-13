@@ -84,12 +84,12 @@ Route119_WeatherInstitute_2F_EventScript_26FFC8:: @ 826FFC8
 Route119_WeatherInstitute_2F_EventScript_27004D:: @ 827004D
 	msgbox Route119_WeatherInstitute_2F_Text_270650, MSGBOX_DEFAULT
 	setvar VAR_TEMP_1, SPECIES_CASTFORM
-	givemon SPECIES_CASTFORM, 25, ITEM_MYSTIC_WATER, 0x0, 0x0, 0
+	givemon SPECIES_CASTFORM, 25, ITEM_MYSTIC_WATER
 	compare VAR_RESULT, 0
 	goto_if_eq Route119_WeatherInstitute_2F_EventScript_270085
 	compare VAR_RESULT, 1
 	goto_if_eq Route119_WeatherInstitute_2F_EventScript_2700AD
-	goto Route119_WeatherInstitute_2F_EventScript_273811
+	goto Common_EventScript_NoMoreRoomForPokemon
 	end
 
 Route119_WeatherInstitute_2F_EventScript_270085:: @ 8270085
@@ -97,8 +97,8 @@ Route119_WeatherInstitute_2F_EventScript_270085:: @ 8270085
 	msgbox gText_NicknameThisPokemon, MSGBOX_YESNO
 	compare VAR_RESULT, 0
 	goto_if_eq Route119_WeatherInstitute_2F_EventScript_2700EA
-	call Route119_WeatherInstitute_2F_EventScript_27378B
-	call Common_EventScript_NameReceivedPokemon
+	call Common_EventScript_GetGiftMonPartySlot
+	call Common_EventScript_NameReceivedPartyMon
 	goto Route119_WeatherInstitute_2F_EventScript_2700EA
 	end
 
@@ -107,7 +107,7 @@ Route119_WeatherInstitute_2F_EventScript_2700AD:: @ 82700AD
 	msgbox gText_NicknameThisPokemon, MSGBOX_YESNO
 	compare VAR_RESULT, 0
 	goto_if_eq Route119_WeatherInstitute_2F_EventScript_2700D0
-	call Route119_WeatherInstitute_2F_EventScript_273797
+	call Common_EventScript_NameReceivedBoxMon
 	goto Route119_WeatherInstitute_2F_EventScript_2700D0
 	end
 

@@ -1,16 +1,16 @@
 LavaridgeTown_PokemonCenter_1F_MapScripts:: @ 81FFAFA
 	map_script MAP_SCRIPT_ON_TRANSITION, LavaridgeTown_PokemonCenter_1F_OnTransition
-	map_script MAP_SCRIPT_ON_RESUME, LavaridgeTown_PokemonCenter_1F_MapScript1_277C30
+	map_script MAP_SCRIPT_ON_RESUME, CableClub_OnResume
 	.byte 0
 
 LavaridgeTown_PokemonCenter_1F_OnTransition: @ 81FFB05
 	setrespawn HEAL_LOCATION_LAVARIDGE_TOWN
-	call LavaridgeTown_PokemonCenter_1F_EventScript_2718DE
+	call Common_EventScript_UpdateBrineyLocation
 	end
 
 LavaridgeTown_PokemonCenter_1F_EventScript_1FFB0E:: @ 81FFB0E
 	setvar VAR_0x800B, 1
-	call LavaridgeTown_PokemonCenter_1F_EventScript_27191E
+	call Common_EventScript_PkmnCenterNurse
 	waitmessage
 	waitbuttonpress
 	release

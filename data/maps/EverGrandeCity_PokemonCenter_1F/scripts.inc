@@ -1,6 +1,6 @@
 EverGrandeCity_PokemonCenter_1F_MapScripts:: @ 8229A34
 	map_script MAP_SCRIPT_ON_TRANSITION, EverGrandeCity_PokemonCenter_1F_OnTransition
-	map_script MAP_SCRIPT_ON_RESUME, EverGrandeCity_PokemonCenter_1F_MapScript1_277C30
+	map_script MAP_SCRIPT_ON_RESUME, CableClub_OnResume
 	.byte 0
 
 EverGrandeCity_PokemonCenter_1F_OnTransition: @ 8229A3F
@@ -15,7 +15,7 @@ EverGrandeCity_PokemonCenter_1F_EventScript_229A4C:: @ 8229A4C
 
 EverGrandeCity_PokemonCenter_1F_EventScript_229A59:: @ 8229A59
 	setvar VAR_0x800B, 1
-	call EverGrandeCity_PokemonCenter_1F_EventScript_27191E
+	call Common_EventScript_PkmnCenterNurse
 	waitmessage
 	waitbuttonpress
 	release
@@ -34,11 +34,11 @@ EverGrandeCity_PokemonCenter_1F_EventScript_229A79:: @ 8229A79
 	faceplayer
 	msgbox EverGrandeCity_PokemonCenter_1F_Text_229BF1, MSGBOX_DEFAULT
 	closemessage
-	compare VAR_FACING, 2
+	compare VAR_FACING, DIR_NORTH
 	call_if_eq EverGrandeCity_PokemonCenter_1F_EventScript_229AB6
-	compare VAR_FACING, 4
+	compare VAR_FACING, DIR_EAST
 	call_if_eq EverGrandeCity_PokemonCenter_1F_EventScript_229AC1
-	compare VAR_FACING, 3
+	compare VAR_FACING, DIR_WEST
 	call_if_eq EverGrandeCity_PokemonCenter_1F_EventScript_229AC1
 	addvar VAR_SCOTT_STATE, 1
 	setflag FLAG_MET_SCOTT_IN_EVERGRANDE

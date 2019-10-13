@@ -1,11 +1,11 @@
 MauvilleCity_PokemonCenter_1F_MapScripts:: @ 8210E5B
 	map_script MAP_SCRIPT_ON_TRANSITION, MauvilleCity_PokemonCenter_1F_OnTransition
-	map_script MAP_SCRIPT_ON_RESUME, MauvilleCity_PokemonCenter_1F_MapScript1_277C30
+	map_script MAP_SCRIPT_ON_RESUME, CableClub_OnResume
 	.byte 0
 
 MauvilleCity_PokemonCenter_1F_OnTransition: @ 8210E66
 	setrespawn HEAL_LOCATION_MAUVILLE_CITY
-	call MauvilleCity_PokemonCenter_1F_EventScript_2718DE
+	call Common_EventScript_UpdateBrineyLocation
 	goto MauvilleCity_PokemonCenter_1F_EventScript_210E74
 	end
 
@@ -15,7 +15,7 @@ MauvilleCity_PokemonCenter_1F_EventScript_210E74:: @ 8210E74
 
 MauvilleCity_PokemonCenter_1F_EventScript_210E78:: @ 8210E78
 	setvar VAR_0x800B, 1
-	call MauvilleCity_PokemonCenter_1F_EventScript_27191E
+	call Common_EventScript_PkmnCenterNurse
 	waitmessage
 	waitbuttonpress
 	release

@@ -16,21 +16,21 @@ SlateportCity_OceanicMuseum_2F_EventScript_20BB00:: @ 820BB00
 	applymovement 3, SlateportCity_OceanicMuseum_2F_Movement_20BCE8
 	applymovement 4, SlateportCity_OceanicMuseum_2F_Movement_20BCF5
 	waitmovement 0
-	compare VAR_FACING, 1
+	compare VAR_FACING, DIR_SOUTH
 	call_if_eq SlateportCity_OceanicMuseum_2F_EventScript_20BC92
-	compare VAR_FACING, 4
+	compare VAR_FACING, DIR_EAST
 	call_if_eq SlateportCity_OceanicMuseum_2F_EventScript_20BC92
 	msgbox SlateportCity_OceanicMuseum_2F_Text_20BE40, MSGBOX_DEFAULT
-	compare VAR_FACING, 4
+	compare VAR_FACING, DIR_EAST
 	call_if_ne SlateportCity_OceanicMuseum_2F_EventScript_20BC9D
 	msgbox SlateportCity_OceanicMuseum_2F_Text_20BE69, MSGBOX_DEFAULT
 	msgbox SlateportCity_OceanicMuseum_2F_Text_20BE93, MSGBOX_DEFAULT
 	closemessage
 	applymovement 4, SlateportCity_OceanicMuseum_2F_Movement_20BCE2
 	waitmovement 0
-	compare VAR_FACING, 1
+	compare VAR_FACING, DIR_SOUTH
 	call_if_eq SlateportCity_OceanicMuseum_2F_EventScript_20BCA8
-	compare VAR_FACING, 3
+	compare VAR_FACING, DIR_WEST
 	call_if_eq SlateportCity_OceanicMuseum_2F_EventScript_20BCB3
 	trainerbattle_no_intro TRAINER_GRUNT_14, SlateportCity_OceanicMuseum_2F_Text_20BEE2
 	msgbox SlateportCity_OceanicMuseum_2F_Text_20BEFA, MSGBOX_DEFAULT
@@ -71,8 +71,8 @@ SlateportCity_OceanicMuseum_2F_EventScript_20BB00:: @ 820BB00
 	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceRight
 	waitmovement 0
 	msgbox SlateportCity_OceanicMuseum_2F_Text_20C2BE, MSGBOX_DEFAULT
-	setvar VAR_0x8004, 269
-	call SlateportCity_OceanicMuseum_2F_EventScript_2723E4
+	setvar VAR_0x8004, ITEM_DEVON_GOODS
+	call Common_EventScript_PlayerHandedOverTheItem
 	msgbox SlateportCity_OceanicMuseum_2F_Text_20C36C, MSGBOX_DEFAULT
 	closemessage
 	fadescreen 1

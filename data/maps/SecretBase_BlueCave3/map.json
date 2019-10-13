@@ -1,6 +1,7 @@
 {
   "id": "MAP_SECRET_BASE_BLUE_CAVE3",
   "name": "SecretBase_BlueCave3",
+  "shared_scripts_map": "SecretBase",
   "layout": "LAYOUT_SECRET_BASE_BLUE_CAVE3",
   "music": "MUS_MACHI_S3",
   "region_map_section": "MAPSEC_SECRET_BASE",
@@ -24,7 +25,7 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "SecretBase_BlueCave3_EventScript_275D64",
+      "script": "SecretBase_EventScript_RecordMixTrainer",
       "flag": "FLAG_DECORATION_0"
     },
     {

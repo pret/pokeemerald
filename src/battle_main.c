@@ -26,7 +26,7 @@
 #include "link_rfu.h"
 #include "load_save.h"
 #include "main.h"
-#include "alloc.h"
+#include "malloc.h"
 #include "m4a.h"
 #include "palette.h"
 #include "party_menu.h"
@@ -1491,7 +1491,7 @@ static void CB2_PreInitMultiBattle(void)
     case 3:
         if (gWirelessCommType)
         {
-            if (sub_8010500())
+            if (IsLinkRfuTaskFinished())
             {
                 gBattleTypeFlags = *savedBattleTypeFlags;
                 gMain.savedCallback = *savedCallback;
@@ -1790,9 +1790,9 @@ static void CB2_HandleStartMultiBattle(void)
         gBattleCommunication[SPRITES_INIT_STATE2] = 0;
         if (gBattleTypeFlags & BATTLE_TYPE_LINK)
         {
-            for (id = 0; id < 4 && (gLinkPlayers[id].version & 0xFF) == 3; id++);
+            for (id = 0; id < MAX_LINK_PLAYERS && (gLinkPlayers[id].version & 0xFF) == VERSION_EMERALD; id++);
 
-            if (id == 4)
+            if (id == MAX_LINK_PLAYERS)
                 gBattleCommunication[MULTIUSE_STATE] = 8;
             else
                 gBattleCommunication[MULTIUSE_STATE] = 10;
@@ -4025,7 +4025,7 @@ void BattleTurnPassed(void)
 
     if (gBattleOutcome != 0)
     {
-        gCurrentActionFuncId = 12;
+        gCurrentActionFuncId = B_ACTION_FINISHED;
         gBattleMainFunc = RunTurnActionsFunctions;
         return;
     }
@@ -4244,7 +4244,7 @@ static void HandleTurnActionSelectionState(void)
                         moveInfo.monType1 = gBattleMons[gActiveBattler].type1;
                         moveInfo.monType2 = gBattleMons[gActiveBattler].type2;
 
-                        for (i = 0; i < 4; i++)
+                        for (i = 0; i < MAX_MON_MOVES; i++)
                         {
                             moveInfo.moves[i] = gBattleMons[gActiveBattler].moves[i];
                             moveInfo.currentPp[i] = gBattleMons[gActiveBattler].pp[i];
@@ -4979,7 +4979,7 @@ static void CheckFocusPunch_ClearVarsBeforeTurnStarts(void)
 static void RunTurnActionsFunctions(void)
 {
     if (gBattleOutcome != 0)
-        gCurrentActionFuncId = 12;
+        gCurrentActionFuncId = B_ACTION_FINISHED;
 
     *(&gBattleStruct->savedTurnActionNumber) = gCurrentTurnActionNumber;
     sTurnActionsFuncsTable[gCurrentActionFuncId]();
@@ -5139,7 +5139,7 @@ static void HandleEndTurn_MonFled(void)
 
 static void HandleEndTurn_FinishBattle(void)
 {
-    if (gCurrentActionFuncId == 0xB || gCurrentActionFuncId == 0xC)
+    if (gCurrentActionFuncId == B_ACTION_TRY_FINISH || gCurrentActionFuncId == B_ACTION_FINISHED)
     {
         if (!(gBattleTypeFlags & (BATTLE_TYPE_LINK
                                   | BATTLE_TYPE_x2000000
@@ -5284,7 +5284,7 @@ static void ReturnFromBattleToOverworld(void)
 
 void RunBattleScriptCommands_PopCallbacksStack(void)
 {
-    if (gCurrentActionFuncId == 0xB || gCurrentActionFuncId == 0xC)
+    if (gCurrentActionFuncId == B_ACTION_TRY_FINISH || gCurrentActionFuncId == B_ACTION_FINISHED)
     {
         if (gBattleResources->battleCallbackStack->size != 0)
             gBattleResources->battleCallbackStack->size--;
@@ -5592,7 +5592,7 @@ static void HandleAction_UseItem(void)
             else
             {
                 PREPARE_STAT_BUFFER(gBattleTextBuff1, STAT_ATK)
-                PREPARE_STRING_BUFFER(gBattleTextBuff2, 0xD2)
+                PREPARE_STRING_BUFFER(gBattleTextBuff2, CHAR_X)
 
                 while (!((*(gBattleStruct->AI_itemFlags + (gBattlerAttacker >> 1))) & 1))
                 {

@@ -10,7 +10,7 @@
 #include "item.h"
 #include "item_menu.h"
 #include "main.h"
-#include "alloc.h"
+#include "malloc.h"
 #include "menu.h"
 #include "new_game.h"
 #include "party_menu.h"
@@ -1100,7 +1100,7 @@ void ResetAllApprenticeData(void)
         gSaveBlock2Ptr->apprentices[i].lvlMode = 0;
         gSaveBlock2Ptr->apprentices[i].number = 0;
         gSaveBlock2Ptr->apprentices[i].field_1 = 0;
-        for (j = 0; j < 4; j++)
+        for (j = 0; j < TRAINER_ID_LENGTH; j++)
             gSaveBlock2Ptr->apprentices[i].playerId[j] = 0;
         gSaveBlock2Ptr->apprentices[i].language = gGameLanguage;
         gSaveBlock2Ptr->apprentices[i].checksum = 0;
@@ -1410,7 +1410,7 @@ static void GetLatestLearnedMoves(u16 species, u16 *moves)
 
 static u16 sub_81A0284(u8 arg0, u8 speciesTableId, u8 arg2)
 {
-    u16 moves[4];
+    u16 moves[MAX_MON_MOVES];
     u8 i, count;
 
     if (PLAYER_APPRENTICE.field_B1_1 < 3)
@@ -1559,8 +1559,8 @@ static void CreateMenuWithAnswers(u8 arg0)
             pixelWidth = width;
     }
 
-    width = convert_pixel_width_to_tile_width(pixelWidth);
-    left = sub_80E2D5C(left, width);
+    width = ConvertPixelWidthToTileWidth(pixelWidth);
+    left = ScriptMenu_AdjustLeftCoordFromWidth(left, width);
     windowId = CreateAndShowWindow(left, top, width, count * 2);
     SetStandardWindowBorderStyle(windowId, 0);
 
@@ -2063,7 +2063,7 @@ static void sub_81A1370(void)
 
     r10 = 0xFFFF;
     r9 = -1;
-    for (i = 1; i < 4; i++)
+    for (i = 1; i < TRAINER_ID_LENGTH; i++)
     {
         if (GetTrainerId(gSaveBlock2Ptr->apprentices[i].playerId) == GetTrainerId(gSaveBlock2Ptr->playerTrainerId)
             && gSaveBlock2Ptr->apprentices[i].number < r10)
@@ -2092,7 +2092,7 @@ static void sub_81A1438(void)
         gSaveBlock2Ptr->apprentices[0].number++;
 
     sub_81A0390(gSaveBlock2Ptr->apprentices[0].field_1);
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < TRAINER_ID_LENGTH; i++)
         gSaveBlock2Ptr->apprentices[0].playerId[i] = gSaveBlock2Ptr->playerTrainerId[i];
 
     StringCopy(gSaveBlock2Ptr->apprentices[0].playerName, gSaveBlock2Ptr->playerName);

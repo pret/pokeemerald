@@ -1,7 +1,7 @@
 #include "global.h"
 #include "event_object_movement.h"
 #include "fieldmap.h"
-#include "alloc.h"
+#include "malloc.h"
 #include "mossdeep_gym.h"
 #include "script_movement.h"
 #include "constants/event_object_movement_constants.h"
@@ -55,7 +55,7 @@ void FinishMossdeepGymTiles(void)
 
     id = GetEventObjectIdByLocalIdAndMap(EVENT_OBJ_ID_PLAYER, 0, 0);
     EventObjectClearHeldMovementIfFinished(&gEventObjects[id]);
-    sub_80D338C();
+    ScriptMovement_UnfreezeEventObjects();
 }
 
 u16 MossdeepGym_MoveEvents(u8 arg0)

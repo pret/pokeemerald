@@ -128,7 +128,7 @@ Route111_EventScript_1F0E60:: @ 81F0E60
 	showobjectat EVENT_OBJ_ID_PLAYER, MAP_LITTLEROOT_TOWN
 	removeobject 45
 	delay 16
-	turnobject EVENT_OBJ_ID_PLAYER, 2
+	turnobject EVENT_OBJ_ID_PLAYER, DIR_NORTH
 	delay 16
 	special StartMirageTowerDisintegration
 	waitstate
@@ -209,7 +209,7 @@ Route111_EventScript_1F0F2E:: @ 81F0F2E
 	end
 
 Route111_EventScript_1F0F45:: @ 81F0F45
-	msgbox gUnknown_08272C5F, MSGBOX_DEFAULT
+	msgbox gText_SandstormIsVicious, MSGBOX_DEFAULT
 	closemessage
 	compare VAR_0x8004, 0
 	call_if_eq Route111_EventScript_1F0F7C

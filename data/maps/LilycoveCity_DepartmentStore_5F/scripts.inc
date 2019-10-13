@@ -10,16 +10,16 @@ LilycoveCity_DepartmentStore_5F_MapScript2_21FF80: @ 821FF80
 
 LilycoveCity_DepartmentStore_5F_EventScript_21FF9A:: @ 821FF9A
 	setobjectxy 7, 16, 2
-	turnobject 7, 2
+	turnobject 7, DIR_NORTH
 	end
 
 LilycoveCity_DepartmentStore_5F_EventScript_21FFA6:: @ 821FFA6
 	lock
 	faceplayer
-	message gUnknown_08272A21
+	message gText_HowMayIServeYou
 	waitmessage
 	pokemartdecoration2 LilycoveCity_DepartmentStore_5F_Pokemart_Dolls
-	msgbox gUnknown_08272A3F, MSGBOX_DEFAULT
+	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
 	release
 	end
 
@@ -44,10 +44,10 @@ LilycoveCity_DepartmentStore_5F_Pokemart_Dolls: @ 821FFC0
 LilycoveCity_DepartmentStore_5F_EventScript_21FFDC:: @ 821FFDC
 	lock
 	faceplayer
-	message gUnknown_08272A21
+	message gText_HowMayIServeYou
 	waitmessage
 	pokemartdecoration2 LilycoveCity_DepartmentStore_5F_Pokemart_Cushions
-	msgbox gUnknown_08272A3F, MSGBOX_DEFAULT
+	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
 	release
 	end
 
@@ -69,10 +69,10 @@ LilycoveCity_DepartmentStore_5F_Pokemart_Cushions: @ 821FFF4
 LilycoveCity_DepartmentStore_5F_EventScript_22000A:: @ 822000A
 	lock
 	faceplayer
-	message gUnknown_08272A21
+	message gText_HowMayIServeYou
 	waitmessage
 	pokemartdecoration2 LilycoveCity_DepartmentStore_5F_Pokemart_Posters
-	msgbox gUnknown_08272A3F, MSGBOX_DEFAULT
+	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
 	release
 	end
 
@@ -94,10 +94,10 @@ LilycoveCity_DepartmentStore_5F_Pokemart_Posters: @ 8220024
 LilycoveCity_DepartmentStore_5F_EventScript_22003A:: @ 822003A
 	lock
 	faceplayer
-	message gUnknown_08272A21
+	message gText_HowMayIServeYou
 	waitmessage
 	pokemartdecoration2 LilycoveCity_DepartmentStore_5F_Pokemart_Mats
-	msgbox gUnknown_08272A3F, MSGBOX_DEFAULT
+	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
 	release
 	end
 

@@ -15,7 +15,7 @@ BattleFrontier_BattleTowerBattleRoom2_EventScript_248F0F:: @ 8248F0F
 	setvar VAR_0x8004, 14
 	special sub_8161F74
 	checkplayergender
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, FEMALE
 	goto_if_eq BattleFrontier_BattleTowerBattleRoom2_EventScript_248F29
 	setvar VAR_OBJ_GFX_ID_F, EVENT_OBJ_GFX_BRENDAN_NORMAL
 	return
@@ -25,7 +25,7 @@ BattleFrontier_BattleTowerBattleRoom2_EventScript_248F29:: @ 8248F29
 	return
 
 BattleFrontier_BattleTowerBattleRoom2_EventScript_248F2F:: @ 8248F2F
-	special sub_813A76C
+	special SetBattleTowerLinkPlayerGfx
 	return
 
 BattleFrontier_BattleTowerBattleRoom2_MapScript2_248F33: @ 8248F33
@@ -173,30 +173,30 @@ BattleFrontier_BattleTowerBattleRoom2_EventScript_249143:: @ 8249143
 	call BattleFrontier_BattleTowerBattleRoom2_EventScript_23E8E0
 	compare VAR_RESULT, 1
 	goto_if_eq BattleFrontier_BattleTowerBattleRoom2_EventScript_2491B1
-	multichoice 19, 4, 103, 1
+	multichoice 19, 4, MULTI_GO_ON_RECORD_REST_RETIRE, 1
 	switch VAR_RESULT
 	case 0, BattleFrontier_BattleTowerBattleRoom2_EventScript_249283
 	case 1, BattleFrontier_BattleTowerBattleRoom2_EventScript_2491E7
 	case 2, BattleFrontier_BattleTowerBattleRoom2_EventScript_249223
 	case 3, BattleFrontier_BattleTowerBattleRoom2_EventScript_249251
-	case 127, BattleFrontier_BattleTowerBattleRoom2_EventScript_249143
+	case MULTI_B_PRESSED, BattleFrontier_BattleTowerBattleRoom2_EventScript_249143
 
 BattleFrontier_BattleTowerBattleRoom2_EventScript_2491B1:: @ 82491B1
-	multichoice 20, 6, 104, 1
+	multichoice 20, 6, MULTI_GO_ON_REST_RETIRE, 1
 	switch VAR_RESULT
 	case 0, BattleFrontier_BattleTowerBattleRoom2_EventScript_249283
 	case 1, BattleFrontier_BattleTowerBattleRoom2_EventScript_249223
 	case 2, BattleFrontier_BattleTowerBattleRoom2_EventScript_249251
-	case 127, BattleFrontier_BattleTowerBattleRoom2_EventScript_249143
+	case MULTI_B_PRESSED, BattleFrontier_BattleTowerBattleRoom2_EventScript_249143
 
 BattleFrontier_BattleTowerBattleRoom2_EventScript_2491E7:: @ 82491E7
 	message BattleFrontier_BattleTowerBattleRoom2_Text_2423A3
 	waitmessage
-	multichoicedefault 20, 8, 94, 1, 0
+	multichoicedefault 20, 8, MULTI_YESNO, 1, 0
 	switch VAR_RESULT
 	case 1, BattleFrontier_BattleTowerBattleRoom2_EventScript_249143
 	case 0, BattleFrontier_BattleTowerBattleRoom2_EventScript_249219
-	case 127, BattleFrontier_BattleTowerBattleRoom2_EventScript_249143
+	case MULTI_B_PRESSED, BattleFrontier_BattleTowerBattleRoom2_EventScript_249143
 
 BattleFrontier_BattleTowerBattleRoom2_EventScript_249219:: @ 8249219
 	call BattleFrontier_BattleTowerBattleRoom2_EventScript_23E8B4
@@ -207,16 +207,16 @@ BattleFrontier_BattleTowerBattleRoom2_EventScript_249223:: @ 8249223
 	switch VAR_RESULT
 	case 0, BattleFrontier_BattleTowerBattleRoom2_EventScript_249143
 	case 1, BattleFrontier_BattleTowerBattleRoom2_EventScript_2492DB
-	case 127, BattleFrontier_BattleTowerBattleRoom2_EventScript_249143
+	case MULTI_B_PRESSED, BattleFrontier_BattleTowerBattleRoom2_EventScript_249143
 
 BattleFrontier_BattleTowerBattleRoom2_EventScript_249251:: @ 8249251
 	message BattleFrontier_BattleTowerBattleRoom2_Text_24244C
 	waitmessage
-	multichoicedefault 20, 8, 94, 1, 0
+	multichoicedefault 20, 8, MULTI_YESNO, 1, 0
 	switch VAR_RESULT
 	case 1, BattleFrontier_BattleTowerBattleRoom2_EventScript_249143
 	case 0, BattleFrontier_BattleTowerBattleRoom2_EventScript_24907E
-	case 127, BattleFrontier_BattleTowerBattleRoom2_EventScript_249143
+	case MULTI_B_PRESSED, BattleFrontier_BattleTowerBattleRoom2_EventScript_249143
 
 BattleFrontier_BattleTowerBattleRoom2_EventScript_249283:: @ 8249283
 	closemessage
@@ -350,20 +350,20 @@ BattleFrontier_BattleTowerBattleRoom2_EventScript_249412:: @ 8249412
 
 BattleFrontier_BattleTowerBattleRoom2_EventScript_249417:: @ 8249417
 	goto_if_set FLAG_TEMP_2, BattleFrontier_BattleTowerBattleRoom2_EventScript_249457
-	multichoice 19, 6, 105, 1
+	multichoice 19, 6, MULTI_GO_ON_RECORD_RETIRE, 1
 	switch VAR_RESULT
 	case 0, BattleFrontier_BattleTowerBattleRoom2_EventScript_249483
 	case 1, BattleFrontier_BattleTowerBattleRoom2_EventScript_2494A8
 	case 2, BattleFrontier_BattleTowerBattleRoom2_EventScript_2494DD
-	case 127, BattleFrontier_BattleTowerBattleRoom2_EventScript_2494DD
+	case MULTI_B_PRESSED, BattleFrontier_BattleTowerBattleRoom2_EventScript_2494DD
 	end
 
 BattleFrontier_BattleTowerBattleRoom2_EventScript_249457:: @ 8249457
-	multichoice 20, 8, 106, 1
+	multichoice 20, 8, MULTI_GO_ON_RETIRE, 1
 	switch VAR_RESULT
 	case 0, BattleFrontier_BattleTowerBattleRoom2_EventScript_249483
 	case 1, BattleFrontier_BattleTowerBattleRoom2_EventScript_2494DD
-	case 127, BattleFrontier_BattleTowerBattleRoom2_EventScript_2494DD
+	case MULTI_B_PRESSED, BattleFrontier_BattleTowerBattleRoom2_EventScript_2494DD
 	end
 
 BattleFrontier_BattleTowerBattleRoom2_EventScript_249483:: @ 8249483
@@ -381,10 +381,10 @@ BattleFrontier_BattleTowerBattleRoom2_EventScript_249483:: @ 8249483
 BattleFrontier_BattleTowerBattleRoom2_EventScript_2494A8:: @ 82494A8
 	message BattleFrontier_BattleTowerBattleRoom2_Text_2423A3
 	waitmessage
-	multichoicedefault 20, 8, 94, 1, 0
+	multichoicedefault 20, 8, MULTI_YESNO, 1, 0
 	switch VAR_RESULT
 	case 1, BattleFrontier_BattleTowerBattleRoom2_EventScript_249143
-	case 127, BattleFrontier_BattleTowerBattleRoom2_EventScript_249143
+	case MULTI_B_PRESSED, BattleFrontier_BattleTowerBattleRoom2_EventScript_249143
 	call BattleFrontier_BattleTowerBattleRoom2_EventScript_23E8B4
 	setflag FLAG_TEMP_2
 	goto BattleFrontier_BattleTowerBattleRoom2_EventScript_249143
@@ -393,7 +393,7 @@ BattleFrontier_BattleTowerBattleRoom2_EventScript_2494A8:: @ 82494A8
 BattleFrontier_BattleTowerBattleRoom2_EventScript_2494DD:: @ 82494DD
 	message BattleFrontier_BattleTowerBattleRoom2_Text_24244C
 	waitmessage
-	multichoicedefault 20, 8, 94, 1, 0
+	multichoicedefault 20, 8, MULTI_YESNO, 1, 0
 	compare VAR_RESULT, 0
 	goto_if_eq BattleFrontier_BattleTowerBattleRoom2_EventScript_2494FA
 	goto BattleFrontier_BattleTowerBattleRoom2_EventScript_249143

@@ -21,10 +21,10 @@ LilycoveCity_DepartmentStoreRooftop_EventScript_22022B:: @ 822022B
 LilycoveCity_DepartmentStoreRooftop_EventScript_22022F:: @ 822022F
 	lock
 	faceplayer
-	message gUnknown_08272A21
+	message gText_HowMayIServeYou
 	waitmessage
 	pokemartdecoration LilycoveCity_DepartmentStoreRooftop_PokemartDecor_220248
-	msgbox gUnknown_08272A3F, MSGBOX_DEFAULT
+	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
 	release
 	end
 
@@ -76,7 +76,7 @@ LilycoveCity_DepartmentStoreRooftop_EventScript_220295:: @ 8220295
 	end
 
 LilycoveCity_DepartmentStoreRooftop_EventScript_2202A6:: @ 82202A6
-	multichoice 16, 0, 42, 0
+	multichoice 16, 0, MULTI_VENDING_MACHINE, 0
 	copyvar VAR_TEMP_1, VAR_RESULT
 	switch VAR_TEMP_1
 	case 0, LilycoveCity_DepartmentStoreRooftop_EventScript_2202E4
@@ -87,42 +87,42 @@ LilycoveCity_DepartmentStoreRooftop_EventScript_2202A6:: @ 82202A6
 	end
 
 LilycoveCity_DepartmentStoreRooftop_EventScript_2202E4:: @ 82202E4
-	setvar VAR_TEMP_0, 26
+	setvar VAR_TEMP_0, ITEM_FRESH_WATER
 	goto LilycoveCity_DepartmentStoreRooftop_EventScript_22032F
 	end
 
 LilycoveCity_DepartmentStoreRooftop_EventScript_2202EF:: @ 82202EF
-	setvar VAR_TEMP_0, 27
+	setvar VAR_TEMP_0, ITEM_SODA_POP
 	goto LilycoveCity_DepartmentStoreRooftop_EventScript_22032F
 	end
 
 LilycoveCity_DepartmentStoreRooftop_EventScript_2202FA:: @ 82202FA
-	setvar VAR_TEMP_0, 28
+	setvar VAR_TEMP_0, ITEM_LEMONADE
 	goto LilycoveCity_DepartmentStoreRooftop_EventScript_22032F
 	end
 
 LilycoveCity_DepartmentStoreRooftop_EventScript_220305:: @ 8220305
-	checkmoney 0xc8, 0
+	checkmoney 200, 0
 	return
 
 LilycoveCity_DepartmentStoreRooftop_EventScript_22030C:: @ 822030C
-	checkmoney 0x12c, 0
+	checkmoney 300, 0
 	return
 
 LilycoveCity_DepartmentStoreRooftop_EventScript_220313:: @ 8220313
-	checkmoney 0x15e, 0
+	checkmoney 350, 0
 	return
 
 LilycoveCity_DepartmentStoreRooftop_EventScript_22031A:: @ 822031A
-	takemoney 0xc8, 0
+	takemoney 200, 0
 	return
 
 LilycoveCity_DepartmentStoreRooftop_EventScript_220321:: @ 8220321
-	takemoney 0x12c, 0
+	takemoney 300, 0
 	return
 
 LilycoveCity_DepartmentStoreRooftop_EventScript_220328:: @ 8220328
-	takemoney 0x15e, 0
+	takemoney 350, 0
 	return
 
 LilycoveCity_DepartmentStoreRooftop_EventScript_22032F:: @ 822032F
@@ -149,7 +149,7 @@ LilycoveCity_DepartmentStoreRooftop_EventScript_22032F:: @ 822032F
 	msgbox LilycoveCity_DepartmentStoreRooftop_Text_2205A1, MSGBOX_DEFAULT
 	giveitem VAR_TEMP_0, 1
 	bufferitemname 1, VAR_TEMP_0
-	bufferstdstring 2, 14
+	bufferstdstring 2, STDSTRING_ITEMS
 	msgbox gText_PutItemInPocket, MSGBOX_DEFAULT
 	random 64
 	compare VAR_RESULT, 0
@@ -161,7 +161,7 @@ LilycoveCity_DepartmentStoreRooftop_EventScript_22032F:: @ 822032F
 	msgbox LilycoveCity_DepartmentStoreRooftop_Text_2205C2, MSGBOX_DEFAULT
 	giveitem VAR_TEMP_0, 1
 	bufferitemname 1, VAR_TEMP_0
-	bufferstdstring 2, 14
+	bufferstdstring 2, STDSTRING_ITEMS
 	msgbox gText_PutItemInPocket, MSGBOX_DEFAULT
 	random 64
 	compare VAR_RESULT, 0
@@ -173,7 +173,7 @@ LilycoveCity_DepartmentStoreRooftop_EventScript_22032F:: @ 822032F
 	msgbox LilycoveCity_DepartmentStoreRooftop_Text_2205C2, MSGBOX_DEFAULT
 	giveitem VAR_TEMP_0, 1
 	bufferitemname 1, VAR_TEMP_0
-	bufferstdstring 2, 14
+	bufferstdstring 2, STDSTRING_ITEMS
 	msgbox gText_PutItemInPocket, MSGBOX_DEFAULT
 	goto LilycoveCity_DepartmentStoreRooftop_EventScript_220436
 	end
@@ -190,7 +190,7 @@ LilycoveCity_DepartmentStoreRooftop_EventScript_220442:: @ 8220442
 	end
 
 LilycoveCity_DepartmentStoreRooftop_EventScript_220450:: @ 8220450
-	msgbox gUnknown_08272A89, MSGBOX_DEFAULT
+	msgbox gText_TheBagIsFull, MSGBOX_DEFAULT
 	goto LilycoveCity_DepartmentStoreRooftop_EventScript_22045E
 	end
 

@@ -56,17 +56,17 @@ MtChimney_EventScript_22EE0B:: @ 822EE0B
 	fadescreen 0
 	setobjectxyperm 1, 10, 12
 	addobject 1
-	compare VAR_FACING, 4
+	compare VAR_FACING, DIR_EAST
 	call_if_eq MtChimney_EventScript_22EEC7
-	compare VAR_FACING, 2
+	compare VAR_FACING, DIR_NORTH
 	call_if_eq MtChimney_EventScript_22EED2
 	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceLeft
 	waitmovement 0
 	msgbox MtChimney_Text_22FC3D, MSGBOX_DEFAULT
 	closemessage
-	compare VAR_FACING, 4
+	compare VAR_FACING, DIR_EAST
 	call_if_eq MtChimney_EventScript_22EEDD
-	compare VAR_FACING, 2
+	compare VAR_FACING, DIR_NORTH
 	call_if_eq MtChimney_EventScript_22EEE8
 	removeobject 1
 	setflag FLAG_HIDE_MT_CHIMNEY_TEAM_AQUA
@@ -104,7 +104,7 @@ MtChimney_EventScript_22EEF3:: @ 822EEF3
 	msgbox MtChimney_Text_22FE04, MSGBOX_YESNO
 	compare VAR_RESULT, 0
 	goto_if_eq MtChimney_EventScript_22EF69
-	checkmoney 0xc8, 0
+	checkmoney 200, 0
 	compare VAR_RESULT, 0
 	goto_if_eq MtChimney_EventScript_22EF76
 	msgbox MtChimney_Text_22FE4D, MSGBOX_DEFAULT
@@ -129,7 +129,7 @@ MtChimney_EventScript_22EF51:: @ 822EF51
 	end
 
 MtChimney_EventScript_22EF5E:: @ 822EF5E
-	takemoney 0xc8, 0
+	takemoney 200, 0
 	updatemoneybox 0, 0
 	return
 
