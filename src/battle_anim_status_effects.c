@@ -14,8 +14,8 @@
 extern const struct CompressedSpriteSheet gBattleAnimPicTable[];
 extern const struct CompressedSpritePalette gBattleAnimPaletteTable[];
 extern const u8 *const gBattleAnims_StatusConditions[];
-extern const struct OamData gUnknown_08524904;
-extern const struct OamData gUnknown_08524A3C;
+extern const struct OamData gOamData_AffineOff_ObjNormal_8x8;
+extern const struct OamData gOamData_AffineOff_ObjBlend_64x64;
 
 // This file's functions.
 static void sub_80A9DB4(u8 taskId);
@@ -46,7 +46,7 @@ const struct SpriteTemplate gUnknown_0853EDFC =
 {
     .tileTag = ANIM_TAG_ORB,
     .paletteTag = ANIM_TAG_ORB,
-    .oam = &gUnknown_0852490C,
+    .oam = &gOamData_AffineOff_ObjNormal_16x16,
     .anims = sSpriteAnimTable_853EDF8,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
@@ -57,7 +57,7 @@ const struct SpriteTemplate gUnknown_0853EE14 =
 {
     .tileTag = ANIM_TAG_ORB,
     .paletteTag = ANIM_TAG_ORB,
-    .oam = &gUnknown_0852490C,
+    .oam = &gOamData_AffineOff_ObjNormal_16x16,
     .anims = sSpriteAnimTable_853EDF8,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
@@ -79,7 +79,7 @@ const struct SpriteTemplate gUnknown_0853EE38 =
 {
     .tileTag = ANIM_TAG_WEATHER_BALL,
     .paletteTag = ANIM_TAG_WEATHER_BALL,
-    .oam = &gUnknown_08524914,
+    .oam = &gOamData_AffineOff_ObjNormal_32x32,
     .anims = sSpriteAnimTable_853EE34,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
@@ -90,7 +90,7 @@ const struct SpriteTemplate gUnknown_0853EE50 =
 {
     .tileTag = ANIM_TAG_WEATHER_BALL,
     .paletteTag = ANIM_TAG_WEATHER_BALL,
-    .oam = &gUnknown_08524914,
+    .oam = &gOamData_AffineOff_ObjNormal_32x32,
     .anims = sSpriteAnimTable_853EE34,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
@@ -116,7 +116,7 @@ const struct SpriteTemplate gUnknown_0853EE84 =
 {
     .tileTag = ANIM_TAG_SPARKLE_4,
     .paletteTag = ANIM_TAG_SPARKLE_4,
-    .oam = &gUnknown_08524914,
+    .oam = &gOamData_AffineOff_ObjNormal_32x32,
     .anims = sSpriteAnimTable_853EE80,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
@@ -127,7 +127,7 @@ const struct SpriteTemplate gUnknown_0853EE9C =
 {
     .tileTag = ANIM_TAG_MONSTER_FOOT,
     .paletteTag = ANIM_TAG_MONSTER_FOOT,
-    .oam = &gUnknown_08524914,
+    .oam = &gOamData_AffineOff_ObjNormal_32x32,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
@@ -163,7 +163,7 @@ const struct SpriteTemplate gUnknown_0853EED8 =
 {
     .tileTag = ANIM_TAG_IMPACT,
     .paletteTag = ANIM_TAG_IMPACT,
-    .oam = &gUnknown_08524914,
+    .oam = &gOamData_AffineOff_ObjNormal_32x32,
     .anims = sSpriteAnimTable_853EECC,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
@@ -197,7 +197,7 @@ const struct SpriteTemplate gUnknown_0853EF18 =
 {
     .tileTag = ANIM_TAG_ORB,
     .paletteTag = ANIM_TAG_ORB,
-    .oam = &gUnknown_085249CC,
+    .oam = &gOamData_AffineDouble_ObjNormal_16x16,
     .anims = sSpriteAnimTable_853EEF8,
     .images = NULL,
     .affineAnims = sSpriteAffineAnimTable_853EEF8,
@@ -221,7 +221,7 @@ static const struct SpriteTemplate gUnknown_0853EF48 =
 {
     .tileTag = ANIM_TAG_ICE_CUBE,
     .paletteTag = ANIM_TAG_ICE_CUBE,
-    .oam = &gUnknown_08524A3C,
+    .oam = &gOamData_AffineOff_ObjBlend_64x64,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
@@ -232,7 +232,7 @@ static const struct SpriteTemplate gUnknown_0853EF60 =
 {
     .tileTag = ANIM_TAG_CIRCLE_IMPACT,
     .paletteTag = ANIM_TAG_CIRCLE_IMPACT,
-    .oam = &gUnknown_08524904,
+    .oam = &gOamData_AffineOff_ObjNormal_8x8,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,

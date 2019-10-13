@@ -577,7 +577,7 @@ const struct SpriteTemplate gSpriteTemplate_8587C18 =
 {
     .tileTag = 0xABE0,
     .paletteTag = 0xABE0,
-    .oam = &gUnknown_0852490C,
+    .oam = &gOamData_AffineOff_ObjNormal_16x16,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
