@@ -8,22 +8,19 @@
           "type": "land_mons",
           "encounter_rates": [
             20, 20, 10, 10, 10, 10, 5, 5, 4, 4, 1, 1
-          ],
-          "groups": {}
+          ]
         },
         {
           "type": "water_mons",
           "encounter_rates": [
             60, 30, 5, 4, 1
-          ],
-          "groups": {}
+          ]
         },
         {
           "type": "rock_smash_mons",
           "encounter_rates": [
             60, 30, 5, 4, 1
-          ],
-          "groups": {}
+          ]
         },
         {
           "type": "fishing_mons",
