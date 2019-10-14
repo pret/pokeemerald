@@ -1273,7 +1273,7 @@ void sub_8103498(struct Sprite *sprite)
     else
         battler = gBattleAnimTarget;
 
-    sub_810310C(battler, sprite);
+    SetSpriteNextToMonHead(battler, sprite);
     sprite->data[0] = 0;
     sprite->data[1] = 0;
     sprite->callback = sub_81034D8;

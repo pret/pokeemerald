@@ -2329,7 +2329,7 @@ Move_CONVERSION:
 	playsewithpan SE_W112, SOUND_PAN_ATTACKER
 	createvisualtask sub_8115D94, 2, ANIM_TAG_CONVERSION, 1, 1, 14335, 12, 0, 0
 	delay 6
-	createvisualtask sub_81022D4, 5
+	createvisualtask AnimTask_ConversionAlphaBlend, 5
 	waitforvisualfinish
 	delay 1
 	clearmonbg ANIM_ATK_PARTNER
@@ -2359,7 +2359,7 @@ Move_CONVERSION_2:
 	createsprite gConversion2SpriteTemplate, ANIM_ATTACKER, 2, -8, 24, 125
 	createsprite gConversion2SpriteTemplate, ANIM_ATTACKER, 2, 8, 24, 130
 	createsprite gConversion2SpriteTemplate, ANIM_ATTACKER, 2, 24, 24, 135
-	createvisualtask sub_81023E0, 5
+	createvisualtask AnimTask_Conversion2AlphaBlend, 5
 	delay 60
 	playsewithpan SE_W129, SOUND_PAN_TARGET
 	delay 10
@@ -3376,7 +3376,7 @@ Move_MOONLIGHT:
 	delay 30
 	createsprite gMoonlightSparkleSpriteTemplate, ANIM_ATTACKER, 40, 10, 0
 	delay 20
-	createvisualtask sub_81025C0, 2
+	createvisualtask AnimTask_FadeScreenBlue, 2
 	waitforvisualfinish
 	call HealingEffect
 	waitforvisualfinish

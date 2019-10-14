@@ -4850,7 +4850,7 @@ void AnimConversion(struct Sprite* sprite)
         DestroyAnimSprite(sprite);
 }
 
-void sub_81022D4(u8 taskId)
+void AnimTask_ConversionAlphaBlend(u8 taskId)
 {
     if (gTasks[taskId].data[2] == 1)
     {
@@ -4899,7 +4899,7 @@ static void AnimConversion2Step(struct Sprite* sprite)
     }
 }
 
-void sub_81023E0(u8 taskId)
+void AnimTask_Conversion2AlphaBlend(u8 taskId)
 {
     if (++gTasks[taskId].data[0] == 4)
     {
@@ -4988,10 +4988,10 @@ static void AnimMoonlightSparkleStep(struct Sprite* sprite)
         DestroyAnimSprite(sprite);
 }
 
-void sub_81026A8(u8);
+void AnimTask_FadeScreenBlueStep(u8);
 
 
-void sub_81025C0(u8 taskId)
+void AnimTask_FadeScreenBlue(u8 taskId)
 {
     int a = sub_80A75AC(1, 0, 0, 0, 0, 0, 0) & 0xFFFF;
     int b;
@@ -5014,11 +5014,11 @@ void sub_81025C0(u8 taskId)
     b = b | (0x10000 << IndexOfSpritePaletteTag(ANIM_TAG_MOON));
     d = IndexOfSpritePaletteTag(ANIM_TAG_GREEN_SPARKLE);
     BeginNormalPaletteFade((0x10000 << d) | b, 0, 0, 16, RGB(27, 29, 31));
-    gTasks[taskId].func = sub_81026A8;
+    gTasks[taskId].func = AnimTask_FadeScreenBlueStep;
     gTasks[taskId].func(taskId);
 }
 
-void sub_81026A8(u8 taskId)
+void AnimTask_FadeScreenBlueStep(u8 taskId)
 {
     struct Task* task = &gTasks[taskId];
     switch (task->data[0])
@@ -5450,7 +5450,7 @@ static void AnimSlowFlyingMusicNotesStep(struct Sprite* sprite)
     }
 }
 
-void sub_810310C(u8 battler, struct Sprite* sprite)
+void SetSpriteNextToMonHead(u8 battler, struct Sprite* sprite)
 {
     if (GetBattlerSide(battler) == B_SIDE_PLAYER)
         sprite->pos1.x = GetBattlerSpriteCoordAttr(battler, BATTLER_COORD_ATTR_RIGHT) + 8;
@@ -5469,7 +5469,7 @@ void AnimThroughtBubble(struct Sprite* sprite)
     else
         battler = gBattleAnimTarget;
 
-    sub_810310C(battler, sprite);
+    SetSpriteNextToMonHead(battler, sprite);
     a = (GetBattlerSide(battler) == B_SIDE_PLAYER) ? 0 : 1;
     sprite->data[0] = gBattleAnimArgs[1];
     sprite->data[1] = a + 2;
@@ -5496,7 +5496,7 @@ void AnimMetronomeFinger(struct Sprite* sprite)
     else
         battler = gBattleAnimTarget;
 
-    sub_810310C(battler, sprite);
+    SetSpriteNextToMonHead(battler, sprite);
     sprite->data[0] = 0;
     StoreSpriteCallbackInData6(sprite, AnimMetronomeFingerStep);
     sprite->callback = RunStoredCallbackWhenAffineAnimEnds;
@@ -5578,7 +5578,7 @@ void AnimTauntFinger(struct Sprite* sprite)
     else
         battler = gBattleAnimTarget;
 
-    sub_810310C(battler, sprite);
+    SetSpriteNextToMonHead(battler, sprite);
     if (GetBattlerSide(battler) == B_SIDE_PLAYER)
     {
         StartSpriteAnim(sprite, 0);
