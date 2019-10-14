@@ -3,7 +3,7 @@
 ## for wild_encounter_group in wild_encounter_groups
 {% if wild_encounter_group.for_maps %}
 ## for wild_encounter_field in wild_encounter_group.fields
-{% if isEmpty(wild_encounter_field.groups) %}
+{% if not existsIn(wild_encounter_field, "groups") %}
 ## for encounter_rate in wild_encounter_field.encounter_rates
 {% if loop.index == 0 %}
 #define ENCOUNTER_CHANCE_{{ upper(wild_encounter_field.type) }}_SLOT_{{ loop.index }} {{ encounter_rate }} {% else %}#define ENCOUNTER_CHANCE_{{ upper(wild_encounter_field.type) }}_SLOT_{{ loop.index }} ENCOUNTER_CHANCE_{{ upper(wild_encounter_field.type) }}_SLOT_{{ subtract(loop.index, 1) }} + {{ encounter_rate }}{% endif %} {{ setVarInt(wild_encounter_field.type, loop.index) }}
