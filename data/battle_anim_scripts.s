@@ -2549,7 +2549,7 @@ Move_THRASH:
 Move_SING:
 	loadspritegfx ANIM_TAG_MUSIC_NOTES
 	monbg ANIM_DEF_PARTNER
-	createvisualtask sub_8102BE8, 2
+	createvisualtask AnimTask_MusicNotesRainbowBlend, 2
 	waitforvisualfinish
 	panse_1B SE_W047, SOUND_PAN_ATTACKER, SOUND_PAN_TARGET, +2, 0
 	createsprite gWavingMusicNotesSpriteTemplate, ANIM_TARGET, 2, 7, 0, 12
@@ -2578,7 +2578,7 @@ Move_SING:
 	delay 4
 	waitforvisualfinish
 	clearmonbg ANIM_DEF_PARTNER
-	createvisualtask sub_8102CA0, 2
+	createvisualtask AnimTask_MusicNotesClearRainbowBlend, 2
 	waitforvisualfinish
 	end
 
@@ -4229,7 +4229,7 @@ Move_GRASS_WHISTLE:
 	loadspritegfx ANIM_TAG_MUSIC_NOTES
 	createsprite gSimplePaletteBlendSpriteTemplate, ANIM_ATTACKER, 2, 1, 2, 0, 4, RGB(18, 31, 12)
 	waitforvisualfinish
-	createvisualtask sub_8102BE8, 2
+	createvisualtask AnimTask_MusicNotesRainbowBlend, 2
 	waitforvisualfinish
 	panse_1B SE_W320, SOUND_PAN_ATTACKER, SOUND_PAN_TARGET, +2, 0
 	createsprite gWavingMusicNotesSpriteTemplate, ANIM_TARGET, 2, 7, 1, 0
@@ -4257,7 +4257,7 @@ Move_GRASS_WHISTLE:
 	createsprite gWavingMusicNotesSpriteTemplate, ANIM_TARGET, 2, 5, 1, 0
 	delay 4
 	waitforvisualfinish
-	createvisualtask sub_8102CA0, 2
+	createvisualtask AnimTask_MusicNotesClearRainbowBlend, 2
 	createsprite gSimplePaletteBlendSpriteTemplate, ANIM_ATTACKER, 2, 1, 4, 4, 0, RGB(18, 31, 12)
 	waitforvisualfinish
 	end
@@ -4577,7 +4577,7 @@ Move_HARDEN:
 Move_BELLY_DRUM:
 	loadspritegfx ANIM_TAG_MUSIC_NOTES
 	loadspritegfx ANIM_TAG_PURPLE_HAND_OUTLINE
-	createvisualtask sub_8102BE8, 2
+	createvisualtask AnimTask_MusicNotesRainbowBlend, 2
 	waitforvisualfinish
 	call BellyDrum1
 	createsprite gSlowFlyingMusicNotesSpriteTemplate, ANIM_ATTACKER, 2, 0, 0, 0, 0
@@ -4603,7 +4603,7 @@ Move_BELLY_DRUM:
 	createsprite gSlowFlyingMusicNotesSpriteTemplate, ANIM_ATTACKER, 2, 1, 0, 3, 0
 	playsewithpan SE_W187, SOUND_PAN_ATTACKER
 	waitforvisualfinish
-	createvisualtask sub_8102CA0, 2
+	createvisualtask AnimTask_MusicNotesClearRainbowBlend, 2
 	waitforvisualfinish
 	end
 
@@ -7595,7 +7595,7 @@ Move_MIMIC:
 	monbg_22 ANIM_DEF_PARTNER
 	monbgprio_29
 	panse_1B SE_W107, SOUND_PAN_TARGET, SOUND_PAN_ATTACKER, -3, 0
-	createvisualtask sub_80FF458, 5, 128, 24
+	createvisualtask AnimTask_DuplicateAndShrinkToPos, 5, 128, 24
 	delay 15
 	createsprite gMimicOrbSpriteTemplate, ANIM_TARGET, 2, -12, 24
 	delay 10
@@ -9696,7 +9696,7 @@ Move_MAGICAL_LEAF:
 	setalpha 12, 8
 	delay 1
 	loopsewithpan SE_W077, SOUND_PAN_ATTACKER, 10, 5
-	createvisualtask sub_81007C4, 5
+	createvisualtask AnimTask_MagicalLeafRainbowBlend, 5
 	createsprite gRazorLeafParticleSpriteTemplate, ANIM_ATTACKER, 2, -3, -2, 10
 	delay 2
 	createsprite gRazorLeafParticleSpriteTemplate, ANIM_ATTACKER, 2, -1, -1, 15

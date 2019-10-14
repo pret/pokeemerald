@@ -44,7 +44,7 @@ void AnimTrickBag(struct Sprite *);
 void AnimFlyingParticle(struct Sprite *);
 void AnimNeedleArmSpike(struct Sprite *);
 void sub_81009F8(struct Sprite *);
-void sub_8100A50(struct Sprite *);
+void AnimWhipHit(struct Sprite *);
 void sub_8100A94(struct Sprite *);
 void AnimCuttingSlice(struct Sprite *);
 void AnimAirCutterSlice(struct Sprite *);
@@ -93,9 +93,9 @@ static void AnimTranslateLinearSingleSineWaveStep(struct Sprite *);
 static void AnimMoveTwisterParticleStep(struct Sprite *);
 static void AnimConstrictBindingStep1(struct Sprite *);
 static void AnimConstrictBindingStep2(struct Sprite *);
-static void AnimTask_ShrinkMonSpriteToPosStep1(u8);
-static void AnimTask_ShrinkMonSpriteToPosStep2(u8);
-static void AnimItemStealStep(struct Sprite *);
+static void AnimTask_DuplicateAndShrinkToPosStep1(u8);
+static void AnimTask_DuplicateAndShrinkToPosStep2(u8);
+static void AnimItemStealStep1(struct Sprite *);
 static void AnimRootFlickerOut(struct Sprite *);
 static void AnimTrickBagStep1(struct Sprite *);
 static void AnimTrickBagStep2(struct Sprite *);
@@ -1091,7 +1091,7 @@ const struct SpriteTemplate gSlamHitSpriteTemplate =
     .anims = gWhipAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_8100A50,
+    .callback = AnimWhipHit,
 };
 
 const struct SpriteTemplate gVineWhipSpriteTemplate =
@@ -1102,7 +1102,7 @@ const struct SpriteTemplate gVineWhipSpriteTemplate =
     .anims = gWhipAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_8100A50,
+    .callback = AnimWhipHit,
 };
 
 const union AnimCmd gUnknown_08592900[] =
@@ -2792,7 +2792,7 @@ static void AnimConstrictBindingStep2(struct Sprite* sprite)
     }
 }
 
-void sub_80FF458(u8 taskId)
+void AnimTask_DuplicateAndShrinkToPos(u8 taskId)
 {
     u8 spriteId = GetAnimBattlerSpriteId(ANIM_TARGET);
     if (gSprites[spriteId].invisible)
@@ -2810,11 +2810,11 @@ void sub_80FF458(u8 taskId)
         gTasks[taskId].data[0] = gBattleAnimArgs[0];
         gTasks[taskId].data[1] = gBattleAnimArgs[1];
         gTasks[taskId].data[11] = 0x100;
-        gTasks[taskId].func = AnimTask_ShrinkMonSpriteToPosStep1;
+        gTasks[taskId].func = AnimTask_DuplicateAndShrinkToPosStep1;
     }
 }
 
-static void AnimTask_ShrinkMonSpriteToPosStep1(u8 taskId)
+static void AnimTask_DuplicateAndShrinkToPosStep1(u8 taskId)
 {
     u8 spriteId = GetAnimBattlerSpriteId(ANIM_TARGET);
     gTasks[taskId].data[10] += gTasks[taskId].data[0];
@@ -2828,11 +2828,11 @@ static void AnimTask_ShrinkMonSpriteToPosStep1(u8 taskId)
     if (--gTasks[taskId].data[1] == 0)
     {
         gTasks[taskId].data[0] = 0;
-        gTasks[taskId].func = AnimTask_ShrinkMonSpriteToPosStep2;
+        gTasks[taskId].func = AnimTask_DuplicateAndShrinkToPosStep2;
     }
 }
 
-static void AnimTask_ShrinkMonSpriteToPosStep2(u8 taskId)
+static void AnimTask_DuplicateAndShrinkToPosStep2(u8 taskId)
 {
     if ((u16)gBattleAnimArgs[7] == 0xFFFF)
     {
@@ -2978,7 +2978,7 @@ void AnimIngrainOrb(struct Sprite* sprite)
         DestroyAnimSprite(sprite);
 }
 
-static void sub_80FF9B8(struct Sprite* sprite, s16 c)
+static void AnimFallingItemStep(struct Sprite* sprite, s16 c)
 {
     int a = (sprite->pos1.x << 8) | sprite->pos1.y;
     int b = (sprite->data[6] << 8) | sprite->data[7];
@@ -2988,38 +2988,38 @@ static void sub_80FF9B8(struct Sprite* sprite, s16 c)
     sprite->data[7] = c;
 }
 
-bool8 sub_80FF9E0(struct Sprite* sprite)
+bool8 moveAlongLinearPath (struct Sprite* sprite)
 {
-    u16 r10 = (u8)(sprite->data[5] >> 8);
-    u16 r9 = (u8)sprite->data[5];
-    s32 r2 = (u8)(sprite->data[6] >> 8);
-    s32 r4 = (u8)sprite->data[6];
-    s16 r6 = sprite->data[7] >> 8;
-    s16 r3 = sprite->data[7] & 0xFF;
+    u16 xStartPos = (u8)(sprite->data[5] >> 8);
+    u16 yStartPos = (u8)sprite->data[5];
+    s32 xEndPos = (u8)(sprite->data[6] >> 8);
+    s32 yEndPos = (u8)sprite->data[6];
+    s16 totalTime = sprite->data[7] >> 8;
+    s16 currentTime = sprite->data[7] & 0xFF;
     s16 r4_2;
     s16 r0;
     s32 var1;
     s32 var2;
 
-    if (r2 == 0)
-        r2 = -32;
-    else if (r2 == 255)
-        r2 = 272;
+    if (xEndPos == 0)
+        xEndPos = -32;
+    else if (xEndPos == 255)
+        xEndPos = 272;
 
-    r4_2 = r4 - r9;
-    r0 = r2 - r10;
-    var1 = r0 * r3 / r6;
-    var2 = r4_2 * r3 / r6;
-    sprite->pos1.x = var1 + r10;
-    sprite->pos1.y = var2 + r9;
-    if (++r3 == r6)
+    r4_2 = yEndPos - yStartPos;
+    r0 = xEndPos - xStartPos;
+    var1 = r0 * currentTime / totalTime;
+    var2 = r4_2 * currentTime / totalTime;
+    sprite->pos1.x = var1 + xStartPos;
+    sprite->pos1.y = var2 + yStartPos;
+    if (++currentTime == totalTime)
         return TRUE;
 
-    sprite->data[7] = (r6 << 8) | r3;
+    sprite->data[7] = (totalTime << 8) | currentTime;
     return FALSE;
 }
 
-void sub_80FFA84(struct Sprite* sprite)
+void AnimItemStealStep2(struct Sprite* sprite)
 {
     if (sprite->data[0] == 10)
         StartSpriteAffineAnim(sprite, 1);
@@ -3029,7 +3029,7 @@ void sub_80FFA84(struct Sprite* sprite)
         DestroyAnimSprite(sprite);
 }
 
-static void sub_80FFAB4(struct Sprite* sprite)
+static void AnimFallingItemStep(struct Sprite* sprite)
 {
     sprite->data[0] += sprite->data[3] * 128 / sprite->data[4];
     if (sprite->data[0] >= 128)
@@ -3039,11 +3039,11 @@ static void sub_80FFAB4(struct Sprite* sprite)
     }
 
     sprite->pos2.y = Sin(sprite->data[0] + 128, 30 - sprite->data[1] * 8);
-    if (sub_80FF9E0(sprite))
+    if (moveAlongLinearPath (sprite))
     {
         sprite->pos2.y = 0;
         sprite->data[0] = 0;
-        sprite->callback = sub_80FFA84;
+        sprite->callback = AnimItemStealStep2;
     }
 }
 
@@ -3058,22 +3058,22 @@ void AnimPresent(struct Sprite* sprite)
     {
         sprite->data[6] = targetX;
         sprite->data[7] = targetY + 10;
-        sub_80FF9B8(sprite, 60);
+        AnimFallingItemStep(sprite, 60);
         sprite->data[3] = 1;
     }
     else
     {
         sprite->data[6] = targetX;
         sprite->data[7] = targetY + 10;
-        sub_80FF9B8(sprite, 60);
+        AnimFallingItemStep(sprite, 60);
         sprite->data[3] = 3;
     }
 
     sprite->data[4] = 60;
-    sprite->callback = sub_80FFAB4;
+    sprite->callback = AnimFallingItemStep;
 }
 
-static void sub_80FFB90(struct Sprite* sprite)
+static void AnimFallingItemStep(struct Sprite* sprite)
 {
     int zero;
     sprite->data[0] += ((sprite->data[3] * 128) / sprite->data[4]);
@@ -3085,7 +3085,7 @@ static void sub_80FFB90(struct Sprite* sprite)
     }
 
     sprite->pos2.y = Sin(sprite->data[0] + 0x80, 30 - sprite->data[1] * 8);
-    if (sub_80FF9E0(sprite))
+    if (moveAlongLinearPath (sprite))
     {
         sprite->pos2.y = zero;
         sprite->data[0] = zero;
@@ -3100,10 +3100,10 @@ void AnimKnockOffItem(struct Sprite* sprite)
     {
         sprite->data[6] = 0;
         sprite->data[7] = targetY + 10;
-        sub_80FF9B8(sprite, 40);
+        AnimFallingItemStep(sprite, 40);
         sprite->data[3] = 3;
         sprite->data[4] = 60;
-        sprite->callback = sub_80FFAB4;
+        sprite->callback = AnimFallingItemStep;
     }
     else
     {
@@ -3112,10 +3112,10 @@ void AnimKnockOffItem(struct Sprite* sprite)
         if (IsContest())
             sprite->data[6] = 0;
 
-        sub_80FF9B8(sprite, 40);
+        AnimFallingItemStep(sprite, 40);
         sprite->data[3] = 3;
         sprite->data[4] = 60;
-        sprite->callback = sub_80FFB90;
+        sprite->callback = AnimFallingItemStep;
     }
 }
 
@@ -3149,22 +3149,22 @@ void AnimItemSteal(struct Sprite* sprite)
     {
         sprite->data[6] = attackerX;
         sprite->data[7] = attackerY + 10;
-        sub_80FF9B8(sprite, 60);
+        AnimFallingItemStep(sprite, 60);
         sprite->data[3] = 1;
     }
     else
     {
         sprite->data[6] = attackerX;
         sprite->data[7] = attackerY + 10;
-        sub_80FF9B8(sprite, 60);
+        AnimFallingItemStep(sprite, 60);
         sprite->data[3] = 3;
     }
 
     sprite->data[4] = 60;
-    sprite->callback = AnimItemStealStep;
+    sprite->callback = AnimItemStealStep1;
 }
 
-static void AnimItemStealStep(struct Sprite* sprite)
+static void AnimItemStealStep1(struct Sprite* sprite)
 {
     int zero;
     sprite->data[0] += ((sprite->data[3] * 128) / sprite->data[4]);
@@ -3179,11 +3179,11 @@ static void AnimItemStealStep(struct Sprite* sprite)
     if (sprite->pos2.y == 0)
         PlaySE12WithPanning(SE_W145B, BattleAnimAdjustPanning(63));
 
-    if (sub_80FF9E0(sprite))
+    if (moveAlongLinearPath (sprite))
     {
         sprite->pos2.y = 0;
         sprite->data[0] = 0;
-        sprite->callback = sub_80FFA84;
+        sprite->callback = AnimItemStealStep2;
         PlaySE12WithPanning(SE_W145B, BattleAnimAdjustPanning(-64));
     }
 }
@@ -3628,7 +3628,7 @@ static void AnimFlyingParticleStep(struct Sprite* sprite)
     DestroySpriteAndMatrix(sprite);
 }
 
-void sub_81007C4(u8 taskId)
+void AnimTask_MagicalLeafRainbowBlend(u8 taskId)
 {
     struct Task* task = &gTasks[taskId];
     switch (task->data[0])
@@ -3730,7 +3730,7 @@ static void AnimNeedleArmSpikeStep(struct Sprite* sprite)
     }
 }
 
-static void sub_81009DC(struct Sprite* sprite)
+static void AnimWhipHitStep(struct Sprite* sprite)
 {
     if (sprite->animEnded)
         DestroyAnimSprite(sprite);
@@ -3753,12 +3753,12 @@ void sub_81009F8(struct Sprite* sprite)
     StoreSpriteCallbackInData6(sprite, DestroyAnimSprite);
 }
 
-void sub_8100A50(struct Sprite* sprite)
+void AnimWhipHit(struct Sprite* sprite)
 {
     if (GetBattlerSide(gBattleAnimAttacker) == B_SIDE_PLAYER)
         StartSpriteAnim(sprite, 1);
 
-    sprite->callback = sub_81009DC;
+    sprite->callback = AnimWhipHitStep;
     SetAnimSpriteInitialXOffset(sprite, gBattleAnimArgs[0]);
     sprite->pos1.y += gBattleAnimArgs[1];
 }
@@ -5237,7 +5237,7 @@ void AnimSuperFang(struct Sprite* sprite)
     sprite->callback = RunStoredCallbackWhenAnimEnds;
 }
 
-void sub_8102BE8(u8 taskId)
+void AnimTask_MusicNotesRainbowBlend(u8 taskId)
 {
     u16 i;
     u16 j;
@@ -5265,7 +5265,7 @@ void sub_8102BE8(u8 taskId)
 }
 
 // clears the rainbow effect for musical notes.
-void sub_8102CA0(u8 taskId)
+void AnimTask_MusicNotesClearRainbowBlend(u8 taskId)
 {
     u16 i;
     for (i = 1; i < ARRAY_COUNT(gParticlesColorBlendTable); i++)
