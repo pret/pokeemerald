@@ -3551,7 +3551,7 @@ Move_SMELLING_SALT:
 
 Move_FOLLOW_ME:
 	loadspritegfx ANIM_TAG_FINGER
-	createsprite gUnknown_085931D4, ANIM_ATTACKER, 2, 0
+	createsprite gFollowMeFingerSpriteTemplate, ANIM_ATTACKER, 2, 0
 	playsewithpan SE_W039, SOUND_PAN_ATTACKER
 	delay 18
 	playsewithpan SE_W213, SOUND_PAN_ATTACKER

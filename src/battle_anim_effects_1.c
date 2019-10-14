@@ -42,7 +42,7 @@ void AnimPresentHealParticle(struct Sprite *);
 void AnimItemSteal(struct Sprite *);
 void AnimTrickBag(struct Sprite *);
 void AnimFlyingParticle(struct Sprite *);
-void sub_8100898(struct Sprite *);
+void AnimNeedleArmSpike(struct Sprite *);
 void sub_81009F8(struct Sprite *);
 void sub_8100A50(struct Sprite *);
 void sub_8100A94(struct Sprite *);
@@ -50,13 +50,13 @@ void AnimCuttingSlice(struct Sprite *);
 void AnimAirCutterSlice(struct Sprite *);
 void sub_8100E1C(struct Sprite *);
 void AnimProtect(struct Sprite *);
-void sub_81010CC(struct Sprite *);
+void AnimMilkBottle(struct Sprite *);
 void AnimGrantingStars(struct Sprite *);
 void AnimSparkingStars(struct Sprite *);
 void sub_8101440(struct Sprite *);
 void AnimSleepLetterZ(struct Sprite *);
 void AnimLockOnTarget(struct Sprite *);
-void sub_8101898(struct Sprite *);
+void AnimLockOnMoveTarget(struct Sprite *);
 void AnimInclineMon(struct Sprite *);
 void sub_8101B90(struct Sprite *);
 void AnimSlashSlice(struct Sprite *);
@@ -65,7 +65,7 @@ void AnimFalseSwipePositionnedSlice(struct Sprite *);
 void AnimEndureEnergy(struct Sprite *);
 void AnimSharpenSphere(struct Sprite *);
 void AnimConversion(struct Sprite *);
-void sub_810234C(struct Sprite *);
+void AnimConversion2(struct Sprite *);
 void AnimMoon(struct Sprite *);
 void AnimMoonlightSparkle(struct Sprite *);
 void AnimHornHit(struct Sprite *);
@@ -74,9 +74,9 @@ void AnimWavingMusicNotes(struct Sprite *);
 void AnimFlyingMusicNotes(struct Sprite *);
 void AnimBellyDrumHand(struct Sprite *);
 void AnimSlowFlyingMusicNotes(struct Sprite *);
-void sub_8103164(struct Sprite *);
-void sub_8103208(struct Sprite *);
+void AnimThroughtBubble(struct Sprite *);
 void AnimMetronomeFinger(struct Sprite *);
+void AnimFollowMeFinger(struct Sprite *);
 void AnimTauntFinger(struct Sprite *);
 static void AnimMovePowderParticleStep(struct Sprite *);
 static void AnimSolarbeamSmallOrbStep(struct Sprite *);
@@ -1056,7 +1056,7 @@ const struct SpriteTemplate gNeedleArmSpikeSpriteTemplate =
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_8100898,
+    .callback = AnimNeedleArmSpike,
 };
 
 const union AnimCmd gWhipAnimCmds1[] =
@@ -1370,7 +1370,7 @@ const struct SpriteTemplate gMilkBottleSpriteTemplate =
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gMilkBottleAffineAnimTable,
-    .callback = sub_81010CC,
+    .callback = AnimMilkBottle,
 };
 
 const union AnimCmd gGrantingStarsAnimCmds[] =
@@ -1532,7 +1532,7 @@ const struct SpriteTemplate gLockOnMoveTargetSpriteTemplate =
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_8101898,
+    .callback = AnimLockOnMoveTarget,
 };
 
 const s8 gInclineMonCoordTable[][2] =
@@ -1775,7 +1775,7 @@ const struct SpriteTemplate gConversion2SpriteTemplate =
     .anims = gConversion2AnimTable,
     .images = NULL,
     .affineAnims = gConversionAffineAnimTable,
-    .callback = sub_810234C,
+    .callback = AnimConversion2,
 };
 
 const struct SpriteTemplate gMoonSpriteTemplate =
@@ -2067,7 +2067,7 @@ const struct SpriteTemplate gThroughtBubbleSpriteTemplate =
     .anims = gMetronomeThroughtBubbleAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_8103164,
+    .callback = AnimThroughtBubble,
 };
 
 const union AffineAnimCmd gMetronomeFingerAffineAnimCmds1[] =
@@ -2113,10 +2113,10 @@ const struct SpriteTemplate gMetronomeFingerSpriteTemplate =
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gMetronomeFingerAffineAnimTable,
-    .callback = sub_8103208,
+    .callback = AnimMetronomeFinger,
 };
 
-const struct SpriteTemplate gUnknown_085931D4 =
+const struct SpriteTemplate gFollowMeFingerSpriteTemplate =
 {
     .tileTag = ANIM_TAG_FINGER,
     .paletteTag = ANIM_TAG_FINGER,
@@ -2124,7 +2124,7 @@ const struct SpriteTemplate gUnknown_085931D4 =
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gMetronomeFingerAffineAnimTable,
-    .callback = AnimMetronomeFinger,
+    .callback = AnimFollowMeFinger,
 };
 
 const union AnimCmd gTauntFingerAnimCmds1[] =
@@ -3658,7 +3658,7 @@ void sub_81007C4(u8 taskId)
         DestroyAnimVisualTask(taskId);
 }
 
-void sub_8100898(struct Sprite* sprite)
+void AnimNeedleArmSpike(struct Sprite* sprite)
 {
     u8 a;
     u8 b;
@@ -4007,7 +4007,7 @@ static void sub_8100FD4(struct Sprite *sprite)
     }
 }
 
-void sub_81010CC(struct Sprite* sprite)
+void AnimMilkBottle(struct Sprite* sprite)
 {
     sprite->pos1.x = GetBattlerSpriteCoord(gBattleAnimTarget, 2);
     sprite->pos1.y = GetBattlerSpriteCoord(gBattleAnimTarget, 3) + 0xFFE8;
@@ -4375,7 +4375,7 @@ static void sub_8101848(struct Sprite* sprite)
         DestroyAnimSprite(sprite);
 }
 
-void sub_8101898(struct Sprite* sprite)
+void AnimLockOnMoveTarget(struct Sprite* sprite)
 {
     sprite->oam.affineParam = gBattleAnimArgs[0];
     if ((s16)sprite->oam.affineParam == 1)
@@ -4874,7 +4874,7 @@ void sub_81022D4(u8 taskId)
     }
 }
 
-void sub_810234C(struct Sprite* sprite)
+void AnimConversion2(struct Sprite* sprite)
 {
     InitSpritePosToAnimTarget(sprite, FALSE);
     sprite->animPaused = 1;
@@ -5460,7 +5460,7 @@ void sub_810310C(u8 battler, struct Sprite* sprite)
     sprite->pos1.y = GetBattlerSpriteCoord(battler, 3) - (s16)GetBattlerSpriteCoordAttr(battler, BATTLER_COORD_ATTR_HEIGHT) / 4;
 }
 
-void sub_8103164(struct Sprite* sprite)
+void AnimThroughtBubble(struct Sprite* sprite)
 {
     u8 a;
     u8 battler;
@@ -5488,7 +5488,7 @@ static void sub_81031D0(struct Sprite* sprite)
     }
 }
 
-void sub_8103208(struct Sprite* sprite)
+void AnimMetronomeFinger(struct Sprite* sprite)
 {
     u8 battler;
     if (gBattleAnimArgs[0] == 0)
@@ -5512,7 +5512,7 @@ static void sub_8103250(struct Sprite* sprite)
     }
 }
 
-void AnimMetronomeFinger(struct Sprite* sprite)
+void AnimFollowMeFinger(struct Sprite* sprite)
 {
     u8 battler;
     if (gBattleAnimArgs[0] == 0)
