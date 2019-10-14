@@ -95,7 +95,7 @@ static void AnimConstrictBindingStep1(struct Sprite *);
 static void AnimConstrictBindingStep2(struct Sprite *);
 static void AnimTask_DuplicateAndShrinkToPosStep1(u8);
 static void AnimTask_DuplicateAndShrinkToPosStep2(u8);
-static void AnimItemStealStep(struct Sprite *);
+static void AnimItemStealStep3(struct Sprite *);
 static void AnimRootFlickerOut(struct Sprite *);
 static void AnimTrickBagStep1(struct Sprite *);
 static void AnimTrickBagStep2(struct Sprite *);
@@ -3019,7 +3019,7 @@ bool8 moveAlongLinearPath(struct Sprite* sprite)
     return FALSE;
 }
 
-void sub_80FFA84(struct Sprite* sprite)
+void AnimItemStealStep2(struct Sprite* sprite)
 {
     if (sprite->data[0] == 10)
         StartSpriteAffineAnim(sprite, 1);
@@ -3029,7 +3029,7 @@ void sub_80FFA84(struct Sprite* sprite)
         DestroyAnimSprite(sprite);
 }
 
-static void sub_80FFAB4(struct Sprite* sprite)
+static void AnimItemStealStep1(struct Sprite* sprite)
 {
     sprite->data[0] += sprite->data[3] * 128 / sprite->data[4];
     if (sprite->data[0] >= 128)
@@ -3043,7 +3043,7 @@ static void sub_80FFAB4(struct Sprite* sprite)
     {
         sprite->pos2.y = 0;
         sprite->data[0] = 0;
-        sprite->callback = sub_80FFA84;
+        sprite->callback = AnimItemStealStep2;
     }
 }
 
@@ -3070,7 +3070,7 @@ void AnimPresent(struct Sprite* sprite)
     }
 
     sprite->data[4] = 60;
-    sprite->callback = sub_80FFAB4;
+    sprite->callback = AnimItemStealStep1;
 }
 
 static void sub_80FFB90(struct Sprite* sprite)
@@ -3103,7 +3103,7 @@ void AnimKnockOffItem(struct Sprite* sprite)
         sub_80FF9B8(sprite, 40);
         sprite->data[3] = 3;
         sprite->data[4] = 60;
-        sprite->callback = sub_80FFAB4;
+        sprite->callback = AnimItemStealStep1;
     }
     else
     {
@@ -3161,10 +3161,10 @@ void AnimItemSteal(struct Sprite* sprite)
     }
 
     sprite->data[4] = 60;
-    sprite->callback = AnimItemStealStep;
+    sprite->callback = AnimItemStealStep3;
 }
 
-static void AnimItemStealStep(struct Sprite* sprite)
+static void AnimItemStealStep3(struct Sprite* sprite)
 {
     int zero;
     sprite->data[0] += ((sprite->data[3] * 128) / sprite->data[4]);
@@ -3183,7 +3183,7 @@ static void AnimItemStealStep(struct Sprite* sprite)
     {
         sprite->pos2.y = 0;
         sprite->data[0] = 0;
-        sprite->callback = sub_80FFA84;
+        sprite->callback = AnimItemStealStep2;
         PlaySE12WithPanning(SE_W145B, BattleAnimAdjustPanning(-64));
     }
 }
