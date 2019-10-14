@@ -2775,7 +2775,7 @@ Move_TELEPORT:
 	end
 
 Move_DOUBLE_TEAM:
-	createvisualtask sub_81029B4, 2
+	createvisualtask AnimTask_DoubleTeam, 2
 	setalpha 12, 8
 	monbg ANIM_ATK_PARTNER
 	playsewithpan SE_W104, SOUND_PAN_ATTACKER
@@ -2841,7 +2841,7 @@ SkullBashSetUp1:
 	return
 SkullBashAttack:
 	loadspritegfx ANIM_TAG_IMPACT
-	createvisualtask sub_8101C94, 2, 0
+	createvisualtask AnimTask_SkullBashPosition, 2, 0
 	playsewithpan SE_W036, SOUND_PAN_ATTACKER
 	waitforvisualfinish
 	playse SE_BAN
@@ -2851,7 +2851,7 @@ SkullBashAttack:
 	createsprite gUnknown_085973E8, ANIM_TARGET, 4, 0, 0, 1, 0
 	loopsewithpan SE_W025B, SOUND_PAN_TARGET, 8, 3
 	waitforvisualfinish
-	createvisualtask sub_8101C94, 2, 1
+	createvisualtask AnimTask_SkullBashPosition, 2, 1
 	goto SkullBashEnd
 
 Move_AMNESIA:
@@ -4492,7 +4492,7 @@ Move_CALM_MIND:
 Move_LEAF_BLADE:
 	loadspritegfx ANIM_TAG_LEAF
 	loadspritegfx ANIM_TAG_CROSS_IMPACT
-	createvisualtask sub_80FFFC0, 5
+	createvisualtask AnimTask_LeafBlade, 5
 	delay 2
 	createvisualtask AnimTask_ShakeMon2, 2, ANIM_TARGET, 2, 0, 8, 1
 	playsewithpan SE_W015, SOUND_PAN_TARGET
