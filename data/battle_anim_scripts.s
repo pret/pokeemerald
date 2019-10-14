@@ -2549,7 +2549,7 @@ Move_THRASH:
 Move_SING:
 	loadspritegfx ANIM_TAG_MUSIC_NOTES
 	monbg ANIM_DEF_PARTNER
-	createvisualtask sub_8102BE8, 2
+	createvisualtask AnimTask_MusicNotesRainbowBlend, 2
 	waitforvisualfinish
 	panse_1B SE_W047, SOUND_PAN_ATTACKER, SOUND_PAN_TARGET, +2, 0
 	createsprite gWavingMusicNotesSpriteTemplate, ANIM_TARGET, 2, 7, 0, 12
@@ -2578,7 +2578,7 @@ Move_SING:
 	delay 4
 	waitforvisualfinish
 	clearmonbg ANIM_DEF_PARTNER
-	createvisualtask sub_8102CA0, 2
+	createvisualtask AnimTask_MusicNotesClearRainbowBlend, 2
 	waitforvisualfinish
 	end
 
@@ -4229,7 +4229,7 @@ Move_GRASS_WHISTLE:
 	loadspritegfx ANIM_TAG_MUSIC_NOTES
 	createsprite gSimplePaletteBlendSpriteTemplate, ANIM_ATTACKER, 2, 1, 2, 0, 4, RGB(18, 31, 12)
 	waitforvisualfinish
-	createvisualtask sub_8102BE8, 2
+	createvisualtask AnimTask_MusicNotesRainbowBlend, 2
 	waitforvisualfinish
 	panse_1B SE_W320, SOUND_PAN_ATTACKER, SOUND_PAN_TARGET, +2, 0
 	createsprite gWavingMusicNotesSpriteTemplate, ANIM_TARGET, 2, 7, 1, 0
@@ -4257,7 +4257,7 @@ Move_GRASS_WHISTLE:
 	createsprite gWavingMusicNotesSpriteTemplate, ANIM_TARGET, 2, 5, 1, 0
 	delay 4
 	waitforvisualfinish
-	createvisualtask sub_8102CA0, 2
+	createvisualtask AnimTask_MusicNotesClearRainbowBlend, 2
 	createsprite gSimplePaletteBlendSpriteTemplate, ANIM_ATTACKER, 2, 1, 4, 4, 0, RGB(18, 31, 12)
 	waitforvisualfinish
 	end
@@ -4577,7 +4577,7 @@ Move_HARDEN:
 Move_BELLY_DRUM:
 	loadspritegfx ANIM_TAG_MUSIC_NOTES
 	loadspritegfx ANIM_TAG_PURPLE_HAND_OUTLINE
-	createvisualtask sub_8102BE8, 2
+	createvisualtask AnimTask_MusicNotesRainbowBlend, 2
 	waitforvisualfinish
 	call BellyDrum1
 	createsprite gSlowFlyingMusicNotesSpriteTemplate, ANIM_ATTACKER, 2, 0, 0, 0, 0
@@ -4603,7 +4603,7 @@ Move_BELLY_DRUM:
 	createsprite gSlowFlyingMusicNotesSpriteTemplate, ANIM_ATTACKER, 2, 1, 0, 3, 0
 	playsewithpan SE_W187, SOUND_PAN_ATTACKER
 	waitforvisualfinish
-	createvisualtask sub_8102CA0, 2
+	createvisualtask AnimTask_MusicNotesClearRainbowBlend, 2
 	waitforvisualfinish
 	end
 
