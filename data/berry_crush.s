@@ -281,23 +281,23 @@ gUnknown_082F4304:: @ 82F4304
 
 	.align 2
 gUnknown_082F430C:: @ 82F430C
-	spr_template 0x0001, 0x0001, gUnknown_0852491C, gUnknown_082F42E8, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
+	spr_template 0x0001, 0x0001, gOamData_AffineOff_ObjNormal_64x64, gUnknown_082F42E8, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
 
 	.align 2
 gUnknown_082F4324:: @ 82F4324
-	spr_template 0x0002, 0x0002, gUnknown_08524914, gUnknown_082F42EC, NULL, gDummySpriteAffineAnimTable, sub_8022A20
+	spr_template 0x0002, 0x0002, gOamData_AffineOff_ObjNormal_32x32, gUnknown_082F42EC, NULL, gDummySpriteAffineAnimTable, sub_8022A20
 
 	.align 2
 gUnknown_082F433C:: @ 82F433C
-	spr_template 0x0003, 0x0002, gUnknown_0852490C, gUnknown_082F42F4, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
+	spr_template 0x0003, 0x0002, gOamData_AffineOff_ObjNormal_16x16, gUnknown_082F42F4, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
 
 	.align 2
 gUnknown_082F4354:: @ 82F4354
-	spr_template 0x0004, 0x0004, gUnknown_08524944, gUnknown_082F42FC, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
+	spr_template 0x0004, 0x0004, gOamData_AffineOff_ObjNormal_8x16, gUnknown_082F42FC, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
 
 	.align 2
 gUnknown_082F436C:: @ 82F436C
-	spr_template 0x0005, 0x0005, gUnknown_085249D4, gUnknown_082F4300, NULL, gUnknown_082F4304, SpriteCallbackDummy
+	spr_template 0x0005, 0x0005, gOamData_AffineDouble_ObjNormal_32x32, gUnknown_082F4300, NULL, gUnknown_082F4304, SpriteCallbackDummy
 
 	.align 2
 gUnknown_082F4384:: @ 82F4384
