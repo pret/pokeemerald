@@ -43,7 +43,7 @@ BattleFrontier_BattleDomeBattleRoom_EventScript_24BD0A:: @ 824BD0A
 	call BattleFrontier_BattleDomeBattleRoom_EventScript_24C1BD
 	compare VAR_RESULT, 0
 	call_if_eq BattleFrontier_BattleDomeBattleRoom_EventScript_24C938
-	applymovement 1, BattleFrontier_BattleDomeBattleRoom_Movement_2725B4
+	applymovement 1, Common_Movement_WalkInPlaceDown
 	waitmovement 0
 	call BattleFrontier_BattleDomeBattleRoom_EventScript_24BFD5
 	msgbox BattleFrontier_BattleDomeBattleRoom_Text_24C970, MSGBOX_DEFAULT
@@ -114,7 +114,7 @@ BattleFrontier_BattleDomeBattleRoom_EventScript_24BDF7:: @ 824BDF7
 	case 1, BattleFrontier_BattleDomeBattleRoom_EventScript_24BEE0
 
 BattleFrontier_BattleDomeBattleRoom_EventScript_24BE4F:: @ 824BE4F
-	applymovement 1, BattleFrontier_BattleDomeBattleRoom_Movement_2725B4
+	applymovement 1, Common_Movement_WalkInPlaceDown
 	waitmovement 0
 	setvar VAR_0x8004, 4
 	special CallBattleDomeFunction
@@ -163,7 +163,7 @@ BattleFrontier_BattleDomeBattleRoom_EventScript_24BED9:: @ 824BED9
 	return
 
 BattleFrontier_BattleDomeBattleRoom_EventScript_24BEE0:: @ 824BEE0
-	applymovement 1, BattleFrontier_BattleDomeBattleRoom_Movement_2725B4
+	applymovement 1, Common_Movement_WalkInPlaceDown
 	waitmovement 0
 	compare VAR_TEMP_2, 0
 	call_if_eq BattleFrontier_BattleDomeBattleRoom_EventScript_24BFC3

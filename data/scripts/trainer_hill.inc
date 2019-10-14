@@ -10,11 +10,11 @@ TrainerHill_Roof_MapScript1_2C8336: @ 82C8336
 	setvar VAR_0x8005, 5
 	special CallFrontierUtilFunc
 	compare VAR_RESULT, B_OUTCOME_LOST
-	goto_if_eq TrainerHill_1F_EventScript_2C83C9
+	goto_if_eq TrainerHill_1F_EventScript_Lost
 	compare VAR_RESULT, B_OUTCOME_DREW
-	goto_if_eq TrainerHill_1F_EventScript_2C83C9
+	goto_if_eq TrainerHill_1F_EventScript_Lost
 	compare VAR_RESULT, B_OUTCOME_FORFEITED
-	goto_if_eq TrainerHill_1F_EventScript_2C83C9
+	goto_if_eq TrainerHill_1F_EventScript_Lost
 	end
 
 TrainerHill_1F_MapScript2_2C8372: @ 82C8372
@@ -56,7 +56,7 @@ TrainerHill_1F_EventScript_2C83BF:: @ 82C83BF
 	waitstate
 	end
 
-TrainerHill_1F_EventScript_2C83C9:: @ 82C83C9
+TrainerHill_1F_EventScript_Lost:: @ 82C83C9
 	setvar VAR_0x8004, TRAINER_HILL_FUNC_12
 	special CallTrainerHillFunction
 	setvar VAR_0x8004, TRAINER_HILL_FUNC_SET_LOST

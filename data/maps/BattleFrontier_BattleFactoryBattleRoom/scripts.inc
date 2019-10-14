@@ -304,12 +304,12 @@ BattleFrontier_BattleFactoryPreBattleRoom_EventScript_25B1AA:: @ 825B1AA
 	end
 
 BattleFrontier_BattleFactoryBattleRoom_EventScript_25B1B4:: @ 825B1B4
-	applymovement 1, Common_Movement_WalkInPlaceRight
-	applymovement 3, Common_Movement_WalkInPlaceRight
-	applymovement 4, Common_Movement_WalkInPlaceRight
-	applymovement 5, Common_Movement_WalkInPlaceLeft
-	applymovement 6, Common_Movement_WalkInPlaceLeft
-	applymovement 7, Common_Movement_WalkInPlaceLeft
+	applymovement 1, Common_Movement_WalkInPlaceFastestRight
+	applymovement 3, Common_Movement_WalkInPlaceFastestRight
+	applymovement 4, Common_Movement_WalkInPlaceFastestRight
+	applymovement 5, Common_Movement_WalkInPlaceFastestLeft
+	applymovement 6, Common_Movement_WalkInPlaceFastestLeft
+	applymovement 7, Common_Movement_WalkInPlaceFastestLeft
 	waitmovement 0
 	return
 

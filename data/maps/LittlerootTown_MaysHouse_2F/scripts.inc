@@ -94,7 +94,7 @@ LittlerootTown_MaysHouse_2F_EventScript_1F934A:: @ 81F934A
 LittlerootTown_MaysHouse_2F_EventScript_1F93BA:: @ 81F93BA
 	applymovement 1, LittlerootTown_MaysHouse_2F_Movement_1F9473
 	waitmovement 0
-	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceLeft
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceFastestLeft
 	waitmovement 0
 	msgbox LittlerootTown_MaysHouse_2F_Text_1F959C, MSGBOX_DEFAULT
 	closemessage
@@ -106,7 +106,7 @@ LittlerootTown_MaysHouse_2F_EventScript_1F93BA:: @ 81F93BA
 LittlerootTown_MaysHouse_2F_EventScript_1F93E9:: @ 81F93E9
 	applymovement 1, LittlerootTown_MaysHouse_2F_Movement_1F948B
 	waitmovement 0
-	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceLeft
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceFastestLeft
 	waitmovement 0
 	msgbox LittlerootTown_MaysHouse_2F_Text_1F959C, MSGBOX_DEFAULT
 	closemessage
@@ -118,7 +118,7 @@ LittlerootTown_MaysHouse_2F_EventScript_1F93E9:: @ 81F93E9
 LittlerootTown_MaysHouse_2F_EventScript_1F9418:: @ 81F9418
 	applymovement 1, LittlerootTown_MaysHouse_2F_Movement_1F949D
 	waitmovement 0
-	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceUp
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	msgbox LittlerootTown_MaysHouse_2F_Text_1F959C, MSGBOX_DEFAULT
 	closemessage
@@ -129,7 +129,7 @@ LittlerootTown_MaysHouse_2F_EventScript_1F9418:: @ 81F9418
 LittlerootTown_MaysHouse_2F_EventScript_1F9440:: @ 81F9440
 	applymovement 1, LittlerootTown_MaysHouse_2F_Movement_1F94AD
 	waitmovement 0
-	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceLeft
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceFastestLeft
 	waitmovement 0
 	msgbox LittlerootTown_MaysHouse_2F_Text_1F959C, MSGBOX_DEFAULT
 	closemessage

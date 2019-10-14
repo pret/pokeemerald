@@ -7,13 +7,7 @@
 
 // Exported ROM declarations
 
-enum {
-    FLDPSN_NONE,
-    FLDPSN_PSN,
-    FLDPSN_FNT
-};
-
-void ExecuteWhiteOut(void);
+void TryFieldPoisonWhiteOut(void);
 s32 DoPoisonFieldEffect(void);
 
 #endif //GUARD_FIELD_POISON_H

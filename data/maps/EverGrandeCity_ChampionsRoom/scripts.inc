@@ -105,26 +105,26 @@ EverGrandeCity_ChampionsRoom_EventScript_BirchArrivesExitForHoF:: @ 8228B30
 	addobject 3
 	applymovement 3, EverGrandeCity_ChampionsRoom_Movement_BirchArrives
 	waitmovement 0
-	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceRight
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	msgbox EverGrandeCity_ChampionsRoom_Text_BirchArriveRatePokedex, MSGBOX_DEFAULT
 	call ProfBirch_EventScript_RatePokedex
 	msgbox EverGrandeCity_ChampionsRoom_Text_BirchCongratulations, MSGBOX_DEFAULT
-	applymovement 1, Common_Movement_WalkInPlaceUp
+	applymovement 1, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	delay 20
-	applymovement 1, Common_Movement_WalkInPlaceDown
+	applymovement 1, Common_Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	msgbox EverGrandeCity_ChampionsRoom_Text_WallaceComeWithMe, MSGBOX_DEFAULT
 	closemessage
 	delay 30
 	applymovement 1, EverGrandeCity_ChampionsRoom_Movement_WallaceExitStart
 	applymovement EVENT_OBJ_ID_PLAYER, EverGrandeCity_ChampionsRoom_Movement_PlayerExitStart
-	applymovement 3, Common_Movement_WalkInPlaceUp
+	applymovement 3, Common_Movement_WalkInPlaceFastestUp
 	applymovement 2, EverGrandeCity_ChampionsRoom_Movement_RivalFollows
 	waitmovement 0
 	delay 20
-	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceDown
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	msgbox EverGrandeCity_ChampionsRoom_Text_WallaceWaitOutside, MSGBOX_DEFAULT
 	checkplayergender
@@ -153,7 +153,7 @@ EverGrandeCity_ChampionsRoom_EventScript_BrendanCongratulations:: @ 8228BF4
 EverGrandeCity_ChampionsRoom_EventScript_RivalApproachPlayer:: @ 8228BFD
 	applymovement 2, EverGrandeCity_ChampionsRoom_Movement_RivalApproachPlayer
 	waitmovement 0
-	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceLeft
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceFastestLeft
 	waitmovement 0
 	return
 
