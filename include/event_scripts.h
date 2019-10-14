@@ -548,7 +548,7 @@ extern const u8 EventScript_UseDive[];
 extern const u8 EventScript_UseDiveUnderwater[];
 extern const u8 EventScript_FallDownHole[];
 extern const u8 BattleFrontier_BattlePyramidEmptySquare_EventScript_252BE8[];
-extern const u8 EventScript_Poison[];
+extern const u8 EventScript_FieldPoison[];
 extern const u8 EventScript_EggHatch[];
 extern const u8 UnusualWeather_EventScript_EndEventAndCleanup_1[];
 extern const u8 IslandCave_EventScript_238EAF[];
@@ -558,7 +558,7 @@ extern const u8 LittlerootTown_ProfessorBirchsLab_EventScript_1FA4D6[];
 extern const u8 RustboroCity_Gym_EventScript_21307B[];
 extern const u8 MossdeepCity_SpaceCenter_2F_EventScript_224175[];
 extern const u8 SSTidalCorridor_EventScript_23C050[];
-extern const u8 gUnknown_082A8350[];
+extern const u8 EventScript_FallDownHoleMtPyre[];
 
 // Secret Base
 extern const u8 SecretBase_EventScript_PC[];

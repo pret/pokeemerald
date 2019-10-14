@@ -51,7 +51,7 @@ Route119_EventScript_1F4488:: @ 81F4488
 	call_if_eq Route119_EventScript_1F46C6
 	compare VAR_TEMP_1, 2
 	call_if_eq Route119_EventScript_1F46D1
-	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceDown
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	delay 30
 	compare VAR_TEMP_1, 1

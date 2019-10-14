@@ -6757,7 +6757,7 @@ void sub_81B8904(u8 initArg, MainCallback callback)
     InitPartyMenu(initArg, 0, 0, 0, 0, sub_81B1370, callback);
 }
 
-void sub_81B892C(void)
+void OpenPartyMenuForMoveTutor(void)
 {
     InitPartyMenu(0, 0, 12, 0, 4, sub_81B1370, CB2_ReturnToFieldContinueScriptPlayMapMusic);
 }
