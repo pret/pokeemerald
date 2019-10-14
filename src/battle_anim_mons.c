@@ -1456,7 +1456,7 @@ static u8 GetBattlerAtPosition_(u8 position)
     return GetBattlerAtPosition(position);
 }
 
-void sub_80A77C8(struct Sprite *sprite)
+void AnimSparklingParticle(struct Sprite *sprite)
 {
     bool8 var;
 

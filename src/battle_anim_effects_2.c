@@ -195,7 +195,7 @@ const struct SpriteTemplate gUnknown_08593304 =
     .anims = gUnknown_085932E4,
     .images = NULL,
     .affineAnims = gUnknown_08593300,
-    .callback = sub_80A77C8,
+    .callback = AnimSparklingParticle,
 };
 
 const union AnimCmd gUnknown_0859331C[] =
@@ -651,7 +651,7 @@ const struct SpriteTemplate gBattleAnimSpriteTemplate_859371C =
     .anims = gUnknown_08593718,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_80A77C8,
+    .callback = AnimSparklingParticle,
 };
 
 const union AffineAnimCmd gUnknown_08593734[] =
@@ -738,7 +738,7 @@ const struct SpriteTemplate gUnknown_0859381C =
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gUnknown_08593810,
-    .callback = sub_80A77C8,
+    .callback = AnimSparklingParticle,
 };
 //*
 const union AffineAnimCmd gUnknown_08593834[] =
@@ -761,7 +761,7 @@ const struct SpriteTemplate gUnknown_08593850 =
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gUnknown_0859384C,
-    .callback = sub_80A77C8,
+    .callback = AnimSparklingParticle,
 };
 
 const struct SpriteTemplate gUnknown_08593868 =
@@ -868,7 +868,7 @@ const struct SpriteTemplate gUnknown_08593938 =
     .anims = gUnknown_08593934,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_80A77C8,
+    .callback = AnimSparklingParticle,
 };
 
 const u16 gUnknown_08593950[] =
@@ -1199,13 +1199,13 @@ const union AffineAnimCmd *const gUnknown_08593C00[] =
     gUnknown_08593BF0,
 };
 
-extern const union AnimCmd *const gUnknown_08592FCC[];
+extern const union AnimCmd *const gMusicNotesAnimTable[];
 const struct SpriteTemplate gUnknown_08593C0C =
 {
     .tileTag = ANIM_TAG_MUSIC_NOTES_2,
     .paletteTag = ANIM_TAG_MUSIC_NOTES_2,
     .oam = &gUnknown_0852496C,
-    .anims = gUnknown_08592FCC,
+    .anims = gMusicNotesAnimTable,
     .images = NULL,
     .affineAnims = gUnknown_08593C00,
     .callback = sub_8106F60,
@@ -1216,7 +1216,7 @@ const struct SpriteTemplate gUnknown_08593C24 =
     .tileTag = ANIM_TAG_MUSIC_NOTES_2,
     .paletteTag = ANIM_TAG_MUSIC_NOTES_2,
     .oam = &gUnknown_0852496C,
-    .anims = gUnknown_08592FCC,
+    .anims = gMusicNotesAnimTable,
     .images = NULL,
     .affineAnims = gUnknown_08593C00,
     .callback = sub_8106F00,
@@ -2554,7 +2554,7 @@ void sub_81051C4(struct Sprite *sprite)
             gBattleAnimArgs[0] = sp0 - r4;
     }
 
-    sprite->callback = sub_80A77C8;
+    sprite->callback = AnimSparklingParticle;
     sprite->callback(sprite);
 }
 
@@ -2661,7 +2661,7 @@ void sub_81054E8(struct Sprite *sprite)
     }
 
     StartSpriteAffineAnim(sprite, 1);
-    sprite->callback = sub_80A77C8;
+    sprite->callback = AnimSparklingParticle;
     sprite->callback(sprite);
 }
 
