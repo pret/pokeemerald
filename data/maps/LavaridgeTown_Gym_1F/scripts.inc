@@ -17,22 +17,18 @@ LavaridgeTown_Gym_1F_EventScript_SetTrainerTempVars:: @ 81FE705
 	checktrainerflag TRAINER_COLE
 	goto_if_eq LavaridgeTown_Gym_1F_EventScript_SetGeraldTempVar
 	setvar VAR_TEMP_B, 1
-
 LavaridgeTown_Gym_1F_EventScript_SetGeraldTempVar:: @ 81FE72C
 	checktrainerflag TRAINER_GERALD
 	goto_if_eq LavaridgeTown_Gym_1F_EventScript_SetAxleTempVar
 	setvar VAR_TEMP_C, 1
-
 LavaridgeTown_Gym_1F_EventScript_SetAxleTempVar:: @ 81FE73A
 	checktrainerflag TRAINER_AXLE
 	goto_if_eq LavaridgeTown_Gym_1F_EventScript_SetDanielleTempVar
 	setvar VAR_TEMP_D, 1
-
 LavaridgeTown_Gym_1F_EventScript_SetDanielleTempVar:: @ 81FE748
 	checktrainerflag TRAINER_DANIELLE
 	goto_if_eq LavaridgeTown_Gym_1F_EventScript_EndSetTrainerTempVars
 	setvar VAR_TEMP_E, 1
-
 LavaridgeTown_Gym_1F_EventScript_EndSetTrainerTempVars:: @ 81FE756
 	return
 
@@ -40,22 +36,18 @@ LavaridgeTown_Gym_1F_EventScript_CheckHideTrainers:: @ 81FE757
 	checktrainerflag TRAINER_COLE
 	goto_if_eq LavaridgeTown_Gym_1F_EventScript_CheckHideGerald
 	setobjectmovementtype 2, MOVEMENT_TYPE_HIDDEN
-
 LavaridgeTown_Gym_1F_EventScript_CheckHideGerald:: @ 81FE764
 	checktrainerflag TRAINER_GERALD
 	goto_if_eq LavaridgeTown_Gym_1F_EventScript_CheckHideAxle
 	setobjectmovementtype 3, MOVEMENT_TYPE_HIDDEN
-
 LavaridgeTown_Gym_1F_EventScript_CheckHideAxle:: @ 81FE771
 	checktrainerflag TRAINER_AXLE
 	goto_if_eq LavaridgeTown_Gym_1F_EventScript_CheckHideDanielle
 	setobjectmovementtype 4, MOVEMENT_TYPE_HIDDEN
-
 LavaridgeTown_Gym_1F_EventScript_CheckHideDanielle:: @ 81FE77E
 	checktrainerflag TRAINER_DANIELLE
 	goto_if_eq LavaridgeTown_Gym_1F_EventScript_EndCheckHideTrainers
 	setobjectmovementtype 5, MOVEMENT_TYPE_HIDDEN
-
 LavaridgeTown_Gym_1F_EventScript_EndCheckHideTrainers:: @ 81FE78B
 	return
 
