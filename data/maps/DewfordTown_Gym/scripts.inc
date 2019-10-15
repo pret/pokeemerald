@@ -127,32 +127,26 @@ DewfordTown_Gym_EventScript_CountTrainersDefeated:: @ 81FC768
 	checktrainerflag TRAINER_TAKAO
 	goto_if_lt DewfordTown_Gym_EventScript_CheckJocelyn
 	addvar VAR_0x8000, 1
-
 DewfordTown_Gym_EventScript_CheckJocelyn:: @ 81FC77B
 	checktrainerflag TRAINER_JOCELYN
 	goto_if_lt DewfordTown_Gym_EventScript_CheckLaura
 	addvar VAR_0x8000, 1
-
 DewfordTown_Gym_EventScript_CheckLaura:: @ 81FC789
 	checktrainerflag TRAINER_LAURA
 	goto_if_lt DewfordTown_Gym_EventScript_CheckBrenden
 	addvar VAR_0x8000, 1
-
 DewfordTown_Gym_EventScript_CheckBrenden:: @ 81FC797
 	checktrainerflag TRAINER_BRENDEN
 	goto_if_lt DewfordTown_Gym_EventScript_CheckCristian
 	addvar VAR_0x8000, 1
-
 DewfordTown_Gym_EventScript_CheckCristian:: @ 81FC7A5
 	checktrainerflag TRAINER_CRISTIAN
 	goto_if_lt DewfordTown_Gym_EventScript_CheckLilith
 	addvar VAR_0x8000, 1
-
 DewfordTown_Gym_EventScript_CheckLilith:: @ 81FC7B3
 	checktrainerflag TRAINER_LILITH
 	goto_if_lt DewfordTown_Gym_EventScript_StopCountingTrainers
 	addvar VAR_0x8000, 1
-
 DewfordTown_Gym_EventScript_StopCountingTrainers:: @ 81FC7C1
 	return
 
