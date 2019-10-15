@@ -42,6 +42,7 @@
 #include "constants/layouts.h"
 #include "constants/metatile_behaviors.h"
 #include "constants/script_menu.h"
+#include "constants/tv.h"
 
 // Static type declarations
 
@@ -1595,7 +1596,7 @@ void SaveRecordedItemPurchasesForTVShow(void)
                     show->smartshopperShow.itemIds[i] = gMartPurchaseHistory[i].itemId;
                     show->smartshopperShow.itemAmounts[i] = gMartPurchaseHistory[i].quantity;
                 }
-                show->smartshopperShow.priceReduced = GetPriceReduction(1);
+                show->smartshopperShow.priceReduced = GetPriceReduction(POKENEWS_SLATEPORT);
                 StringCopy(show->smartshopperShow.playerName, gSaveBlock2Ptr->playerName);
                 tv_store_id_3x(show);
                 show->smartshopperShow.language = gGameLanguage;
@@ -1955,11 +1956,11 @@ void sub_80EDB44(void)
         show->rivalTrainer.badgeCount = nBadges;
         if (IsNationalPokedexEnabled())
         {
-            show->rivalTrainer.dexCount = GetNationalPokedexCount(0x01);
+            show->rivalTrainer.dexCount = GetNationalPokedexCount(FLAG_GET_CAUGHT);
         }
         else
         {
-            show->rivalTrainer.dexCount = GetHoennPokedexCount(0x01);
+            show->rivalTrainer.dexCount = GetHoennPokedexCount(FLAG_GET_CAUGHT);
         }
         show->rivalTrainer.location = gMapHeader.regionMapSectionId;
         show->rivalTrainer.mapLayoutId = gMapHeader.mapLayoutId;

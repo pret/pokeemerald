@@ -4,7 +4,7 @@ Route101_MapScripts:: @ 81EBCBA
 	.byte 0
 
 Route101_OnTransition: @ 81EBCC5
-	call Route101_EventScript_2720AD
+	call ProfBirch_EventScript_UpdateLocation
 	end
 
 Route101_MapScript2_1EBCCB: @ 81EBCCB

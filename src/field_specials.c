@@ -55,6 +55,7 @@
 #include "constants/heal_locations.h"
 #include "constants/map_types.h"
 #include "constants/maps.h"
+#include "constants/tv.h"
 #include "constants/script_menu.h"
 #include "constants/songs.h"
 #include "constants/species.h"
