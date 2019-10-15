@@ -15,7 +15,7 @@ SkyPillar_2F_EventScript_CleanFloor:: @ 823964C
 	return
 
 SkyPillar_2F_MapScript1_239650: @ 8239650
-	setstepcallback 7
+	setstepcallback STEP_CB_CRACKED_FLOOR
 	setholewarp MAP_SKY_PILLAR_1F, 255, 0, 0
 	end
 

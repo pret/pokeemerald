@@ -51,7 +51,7 @@ PetalburgCity_EventScript_1DC32E:: @ 81DC32E
 	clearflag FLAG_HIDE_MAP_NAME_POPUP
 	setvar VAR_PETALBURG_CITY_STATE, 3
 	fadedefaultbgm
-	clearflag FLAG_SPECIAL_FLAG_0x4001
+	clearflag FLAG_DONT_TRANSITION_MUSIC
 	special LoadPlayerParty
 	setvar VAR_PETALBURG_GYM_STATE, 1
 	warp MAP_PETALBURG_CITY_GYM, 255, 4, 108
@@ -78,7 +78,7 @@ PetalburgCity_EventScript_1DC390:: @ 81DC390
 	waitdooranim
 	clearflag FLAG_HIDE_MAP_NAME_POPUP
 	fadedefaultbgm
-	clearflag FLAG_SPECIAL_FLAG_0x4001
+	clearflag FLAG_DONT_TRANSITION_MUSIC
 	warp MAP_PETALBURG_CITY_WALLYS_HOUSE, 255, 2, 4
 	waitstate
 	releaseall

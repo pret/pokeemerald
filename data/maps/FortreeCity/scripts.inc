@@ -8,7 +8,7 @@ FortreeCity_OnTransition: @ 81E25AF
 	end
 
 FortreeCity_MapScript1_1E25B3: @ 81E25B3
-	setstepcallback 2
+	setstepcallback STEP_CB_FORTREE_BRIDGE
 	end
 
 FortreeCity_EventScript_1E25B6:: @ 81E25B6

@@ -12,10 +12,10 @@ extern const u8 gUnknown_08612698[];
 extern const u8 gUnknown_0861269C[];
 extern const u8 gUnknown_086126A0[];
 extern const u8 gUnknown_086126A4[];
-extern const u8 gUnknown_086126A8[];
-extern const u8 gUnknown_086126AA[];
-extern const u8 gUnknown_086126AC[];
-extern const u8 gUnknown_086126AE[];
+extern const u8 MossdeepGym_Movement_FaceRight[];
+extern const u8 MossdeepGym_Movement_FaceDown[];
+extern const u8 MossdeepGym_Movement_FaceLeft[];
+extern const u8 MossdeepGym_Movement_FaceUp[];
 
 struct MossdeepSubStruct
 {
@@ -35,23 +35,23 @@ static void AddEventObject(u8 eventTemplateId, u8 arg1);
 static void sub_81A8D94(u8 eventTemplateId, u8 arg1);
 
 // EWRAM vars
-EWRAM_DATA static struct MossdeepStruct *gUnknown_0203CE50 = NULL;
+EWRAM_DATA static struct MossdeepStruct *sMossdeepGym = NULL;
 
 // code
 void InitMossdeepGymTiles(bool8 arg0)
 {
-    if (gUnknown_0203CE50 == NULL)
-        gUnknown_0203CE50 = AllocZeroed(sizeof(*gUnknown_0203CE50));
+    if (sMossdeepGym == NULL)
+        sMossdeepGym = AllocZeroed(sizeof(*sMossdeepGym));
 
-    gUnknown_0203CE50->unk41 = arg0;
+    sMossdeepGym->unk41 = arg0;
 }
 
 void FinishMossdeepGymTiles(void)
 {
     u8 id;
 
-    if (gUnknown_0203CE50 != NULL)
-        FREE_AND_SET_NULL(gUnknown_0203CE50);
+    if (sMossdeepGym != NULL)
+        FREE_AND_SET_NULL(sMossdeepGym);
 
     id = GetEventObjectIdByLocalIdAndMap(EVENT_OBJ_ID_PLAYER, 0, 0);
     EventObjectClearHeldMovementIfFinished(&gEventObjects[id]);
@@ -72,7 +72,7 @@ u16 MossdeepGym_MoveEvents(u8 arg0)
         s16 y = events[i].y + 7;
         u16 metatile = MapGridGetMetatileIdAt(x, y);
 
-        if (!gUnknown_0203CE50->unk41)
+        if (!sMossdeepGym->unk41)
             var = 0x250;
         else
             var = 0x298;
@@ -138,26 +138,26 @@ void MossdeepGym_TurnEvents(void)
     s32 var;
     struct EventObjectTemplate *events;
 
-    if (gUnknown_0203CE50 == NULL)
+    if (sMossdeepGym == NULL)
         return;
 
-    if (!gUnknown_0203CE50->unk41)
+    if (!sMossdeepGym->unk41)
         var = 0x250;
     else
         var = 0x298;
 
     events = gSaveBlock1Ptr->eventObjectTemplates;
-    for (i = 0; i < gUnknown_0203CE50->count; i++)
+    for (i = 0; i < sMossdeepGym->count; i++)
     {
         s32 r6;
         s8 r0;
         u8 eventObjectId;
-        s16 x = events[gUnknown_0203CE50->objects[i].eventTemplateId].x + 7;
-        s16 y = events[gUnknown_0203CE50->objects[i].eventTemplateId].y + 7;
+        s16 x = events[sMossdeepGym->objects[i].eventTemplateId].x + 7;
+        s16 y = events[sMossdeepGym->objects[i].eventTemplateId].y + 7;
         u16 metatile = MapGridGetMetatileIdAt(x, y);
 
         r0 = (u8)((metatile - var) % 8);
-        r0 -= (gUnknown_0203CE50->objects[i].unk0);
+        r0 -= (sMossdeepGym->objects[i].unk0);
         if (r0 < 0 || r0 == 3)
         {
             if (r0 == -3)
@@ -173,7 +173,7 @@ void MossdeepGym_TurnEvents(void)
                 r6 = 2;
         }
 
-        eventObjectId = GetEventObjectIdByLocalIdAndMap(events[gUnknown_0203CE50->objects[i].eventTemplateId].localId, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
+        eventObjectId = GetEventObjectIdByLocalIdAndMap(events[sMossdeepGym->objects[i].eventTemplateId].localId, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
         if (eventObjectId != EVENT_OBJECTS_COUNT)
         {
             const u8 *movementScript;
@@ -183,25 +183,25 @@ void MossdeepGym_TurnEvents(void)
                 switch (direction)
                 {
                 case DIR_EAST:
-                    movementScript = gUnknown_086126AE;
-                    events[gUnknown_0203CE50->objects[i].eventTemplateId].movementType = MOVEMENT_TYPE_FACE_UP;
+                    movementScript = MossdeepGym_Movement_FaceUp;
+                    events[sMossdeepGym->objects[i].eventTemplateId].movementType = MOVEMENT_TYPE_FACE_UP;
                     break;
                 case DIR_SOUTH:
-                    movementScript = gUnknown_086126A8;
-                    events[gUnknown_0203CE50->objects[i].eventTemplateId].movementType = MOVEMENT_TYPE_FACE_RIGHT;
+                    movementScript = MossdeepGym_Movement_FaceRight;
+                    events[sMossdeepGym->objects[i].eventTemplateId].movementType = MOVEMENT_TYPE_FACE_RIGHT;
                     break;
                 case DIR_WEST:
-                    movementScript = gUnknown_086126AA;
-                    events[gUnknown_0203CE50->objects[i].eventTemplateId].movementType = MOVEMENT_TYPE_FACE_DOWN;
+                    movementScript = MossdeepGym_Movement_FaceDown;
+                    events[sMossdeepGym->objects[i].eventTemplateId].movementType = MOVEMENT_TYPE_FACE_DOWN;
                     break;
                 case DIR_NORTH:
-                    movementScript = gUnknown_086126AC;
-                    events[gUnknown_0203CE50->objects[i].eventTemplateId].movementType = MOVEMENT_TYPE_FACE_LEFT;
+                    movementScript = MossdeepGym_Movement_FaceLeft;
+                    events[sMossdeepGym->objects[i].eventTemplateId].movementType = MOVEMENT_TYPE_FACE_LEFT;
                     break;
                 default:
                     continue;
                 }
-                ScriptMovement_StartObjectMovementScript(events[gUnknown_0203CE50->objects[i].eventTemplateId].localId,
+                ScriptMovement_StartObjectMovementScript(events[sMossdeepGym->objects[i].eventTemplateId].localId,
                                                          gSaveBlock1Ptr->location.mapNum,
                                                          gSaveBlock1Ptr->location.mapGroup,
                                                          movementScript);
@@ -211,25 +211,25 @@ void MossdeepGym_TurnEvents(void)
                 switch (direction)
                 {
                 case DIR_EAST:
-                    movementScript = gUnknown_086126AA;
-                    events[gUnknown_0203CE50->objects[i].eventTemplateId].movementType = MOVEMENT_TYPE_FACE_DOWN;
+                    movementScript = MossdeepGym_Movement_FaceDown;
+                    events[sMossdeepGym->objects[i].eventTemplateId].movementType = MOVEMENT_TYPE_FACE_DOWN;
                     break;
                 case DIR_SOUTH:
-                    movementScript = gUnknown_086126AC;
-                    events[gUnknown_0203CE50->objects[i].eventTemplateId].movementType = MOVEMENT_TYPE_FACE_LEFT;
+                    movementScript = MossdeepGym_Movement_FaceLeft;
+                    events[sMossdeepGym->objects[i].eventTemplateId].movementType = MOVEMENT_TYPE_FACE_LEFT;
                     break;
                 case DIR_WEST:
-                    movementScript = gUnknown_086126AE;
-                    events[gUnknown_0203CE50->objects[i].eventTemplateId].movementType = MOVEMENT_TYPE_FACE_UP;
+                    movementScript = MossdeepGym_Movement_FaceUp;
+                    events[sMossdeepGym->objects[i].eventTemplateId].movementType = MOVEMENT_TYPE_FACE_UP;
                     break;
                 case DIR_NORTH:
-                    movementScript = gUnknown_086126A8;
-                    events[gUnknown_0203CE50->objects[i].eventTemplateId].movementType = MOVEMENT_TYPE_FACE_RIGHT;
+                    movementScript = MossdeepGym_Movement_FaceRight;
+                    events[sMossdeepGym->objects[i].eventTemplateId].movementType = MOVEMENT_TYPE_FACE_RIGHT;
                     break;
                 default:
                     continue;
                 }
-                ScriptMovement_StartObjectMovementScript(events[gUnknown_0203CE50->objects[i].eventTemplateId].localId,
+                ScriptMovement_StartObjectMovementScript(events[sMossdeepGym->objects[i].eventTemplateId].localId,
                                                          gSaveBlock1Ptr->location.mapNum,
                                                          gSaveBlock1Ptr->location.mapGroup,
                                                          movementScript);
@@ -240,9 +240,9 @@ void MossdeepGym_TurnEvents(void)
 
 static void AddEventObject(u8 eventTemplateId, u8 arg1)
 {
-    gUnknown_0203CE50->objects[gUnknown_0203CE50->count].eventTemplateId = eventTemplateId;
-    gUnknown_0203CE50->objects[gUnknown_0203CE50->count].unk0 = arg1;
-    gUnknown_0203CE50->count++;
+    sMossdeepGym->objects[sMossdeepGym->count].eventTemplateId = eventTemplateId;
+    sMossdeepGym->objects[sMossdeepGym->count].unk0 = arg1;
+    sMossdeepGym->count++;
 }
 
 static void sub_81A8D94(u8 eventTemplateId, u8 arg1)
@@ -256,7 +256,7 @@ static void sub_81A8D94(u8 eventTemplateId, u8 arg1)
     s16 y = events[eventTemplateId].y + 7;
     u16 metatile = MapGridGetMetatileIdAt(x, y);
 
-    if (!gUnknown_0203CE50->unk41)
+    if (!sMossdeepGym->unk41)
         var = 0x250;
     else
         var = 0x298;

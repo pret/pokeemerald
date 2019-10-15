@@ -75,6 +75,8 @@
 #define METATILE_MossdeepGym_OuterWall_RightCorner 0x205
 #define METATILE_MossdeepGym_Empty0                0x238
 #define METATILE_MossdeepGym_Empty1                0x239
+#define METATILE_MossdeepGym_YellowRightArrow      0x250
+
 
 // gTileset_BrendansMaysHouse
 #define METATILE_BrendansMaysHouse_BrendanPC_Off    0x25A

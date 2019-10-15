@@ -26,18 +26,18 @@ gUnknown_086126A4:: @ 86126A4
     free_unlock_anim
     step_end
 
-gUnknown_086126A8:: @ 86126A8
+MossdeepGym_Movement_FaceRight:: @ 86126A8
     face_right
     step_end
 
-gUnknown_086126AA:: @ 86126AA
+MossdeepGym_Movement_FaceDown:: @ 86126AA
     face_down
     step_end
 
-gUnknown_086126AC:: @ 86126AC
+MossdeepGym_Movement_FaceLeft:: @ 86126AC
     face_left
     step_end
 
-gUnknown_086126AE:: @ 86126AE
+MossdeepGym_Movement_FaceUp:: @ 86126AE
     face_up
     step_end

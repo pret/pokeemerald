@@ -5,7 +5,7 @@ MirageTower_3F_MapScripts:: @ 823AD2C
 	.byte 0
 
 MirageTower_3F_MapScript1_23AD3C: @ 823AD3C
-	setstepcallback 7
+	setstepcallback STEP_CB_CRACKED_FLOOR
 	setholewarp MAP_MIRAGE_TOWER_2F, 255, 0, 0
 	end
 
