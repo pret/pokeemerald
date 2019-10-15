@@ -1,44 +1,44 @@
 Route120_MapScripts:: @ 81F53EC
-	map_script MAP_SCRIPT_ON_RESUME, Route120_MapScript1_1F53FC
+	map_script MAP_SCRIPT_ON_RESUME, Route120_OnResume
 	map_script MAP_SCRIPT_ON_TRANSITION, Route120_OnTransition
-	map_script MAP_SCRIPT_ON_LOAD, Route120_MapScript1_1F5474
+	map_script MAP_SCRIPT_ON_LOAD, Route120_OnLoad
 	.byte 0
 
-Route120_MapScript1_1F53FC: @ 81F53FC
-	call_if_set FLAG_SYS_CTRL_OBJ_DELETE, Route120_EventScript_1F5406
+Route120_OnResume: @ 81F53FC
+	call_if_set FLAG_SYS_CTRL_OBJ_DELETE, Route120_EventScript_RemoveKecleonObject
 	end
 
-Route120_EventScript_1F5406:: @ 81F5406
+Route120_EventScript_RemoveKecleonObject:: @ 81F5406
 	compare VAR_0x8009, 0
-	call_if_eq Route120_EventScript_1F5449
+	call_if_eq Route120_EventScript_RemoveBridgeKecleon
 	compare VAR_0x8009, 1
-	call_if_eq Route120_EventScript_1F5460
+	call_if_eq Route120_EventScript_RemoveKecleon
 	compare VAR_0x8009, 2
-	call_if_eq Route120_EventScript_1F5460
+	call_if_eq Route120_EventScript_RemoveKecleon
 	compare VAR_0x8009, 3
-	call_if_eq Route120_EventScript_1F5460
+	call_if_eq Route120_EventScript_RemoveKecleon
 	compare VAR_0x8009, 4
-	call_if_eq Route120_EventScript_1F5460
+	call_if_eq Route120_EventScript_RemoveKecleon
 	compare VAR_0x8009, 5
-	call_if_eq Route120_EventScript_1F5460
+	call_if_eq Route120_EventScript_RemoveKecleon
 	return
 
-Route120_EventScript_1F5449:: @ 81F5449
+Route120_EventScript_RemoveBridgeKecleon:: @ 81F5449
 	specialvar VAR_RESULT, GetBattleOutcome
 	compare VAR_RESULT, B_OUTCOME_CAUGHT
 	goto_if_ne Common_EventScript_NopReturn
-	removeobject 30
-	removeobject 36
+	removeobject 30 @ Invisible Bridge Kecleon
+	removeobject 36 @ Visible Bridge Kecleon
 	return
 
-Route120_EventScript_1F5460:: @ 81F5460
+Route120_EventScript_RemoveKecleon:: @ 81F5460
 	specialvar VAR_RESULT, GetBattleOutcome
 	compare VAR_RESULT, B_OUTCOME_CAUGHT
 	goto_if_ne Common_EventScript_NopReturn
 	removeobject VAR_LAST_TALKED
 	return
 
-Route120_MapScript1_1F5474: @ 81F5474
+Route120_OnLoad: @ 81F5474
 	call_if_unset FLAG_REGI_DOORS_OPENED, Route120_EventScript_1F5490
 	call_if_set FLAG_RECEIVED_DEVON_SCOPE, Route120_EventScript_1F54A3
 	call_if_unset FLAG_RECEIVED_DEVON_SCOPE, Route120_EventScript_1F54C8
@@ -166,44 +166,44 @@ Route120_EventScript_1F5638:: @ 81F5638
 	msgbox Route120_Text_2A7183, MSGBOX_DEFAULT
 	return
 
-Route120_EventScript_1F5641:: @ 81F5641
+Route120_EventScript_Steven:: @ 81F5641
 	lock
 	faceplayer
 	goto_if_set FLAG_NOT_READY_FOR_BATTLE_ROUTE_120, Route120_EventScript_1F5672
-	msgbox Route120_Text_1F5998, MSGBOX_YESNO
+	msgbox Route120_Text_StevenGreeting, MSGBOX_YESNO
 	compare VAR_RESULT, 0
-	goto_if_eq Route120_EventScript_1F5665
-	goto Route120_EventScript_1F568B
+	goto_if_eq Route120_EventScript_StevenNotReady
+	goto Route120_EventScript_StevenBattleKecleon
 	end
 
-Route120_EventScript_1F5665:: @ 81F5665
+Route120_EventScript_StevenNotReady:: @ 81F5665
 	msgbox Route120_Text_1F5AAC, MSGBOX_DEFAULT
 	setflag FLAG_NOT_READY_FOR_BATTLE_ROUTE_120
 	release
 	end
 
 Route120_EventScript_1F5672:: @ 81F5672
-	msgbox Route120_Text_1F5ADE, MSGBOX_YESNO
+	msgbox Route120_Text_StevenReadyForBattle, MSGBOX_YESNO
 	compare VAR_RESULT, 0
-	goto_if_eq Route120_EventScript_1F5665
-	goto Route120_EventScript_1F568B
+	goto_if_eq Route120_EventScript_StevenNotReady
+	goto Route120_EventScript_StevenBattleKecleon
 	end
 
-Route120_EventScript_1F568B:: @ 81F568B
-	msgbox Route120_Text_1F5B0F, MSGBOX_DEFAULT
+Route120_EventScript_StevenBattleKecleon:: @ 81F568B
+	msgbox Route120_Text_StevenShowMeYourPower, MSGBOX_DEFAULT
 	closemessage
 	compare VAR_FACING, DIR_NORTH
-	call_if_eq Route120_EventScript_1F57A3
+	call_if_eq Route120_EventScript_PlayerApproachKecleonNorth
 	compare VAR_FACING, DIR_WEST
-	call_if_eq Route120_EventScript_1F57AE
-	applymovement 31, Common_Movement_WalkInPlaceLeft
+	call_if_eq Route120_EventScript_PlayerApproachKecleonWest
+	applymovement 31, Common_Movement_WalkInPlaceFastestLeft
 	waitmovement 0
 	delay 20
-	msgbox Route120_Text_1F5B43, MSGBOX_DEFAULT
+	msgbox Route120_Text_StevenUsedDevonScope, MSGBOX_DEFAULT
 	closemessage
-	applymovement 30, Common_Movement_WalkInPlaceRight
+	applymovement 30, Common_Movement_WalkInPlaceFastestRight
 	waitmovement 0
-	applymovement 30, Route120_Movement_2723C7
+	applymovement 30, Movement_KecleonAppears
 	waitmovement 0
 	waitse
 	playmoncry SPECIES_KECLEON, 2
@@ -216,32 +216,32 @@ Route120_EventScript_1F568B:: @ 81F568B
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
 	specialvar VAR_RESULT, GetBattleOutcome
 	compare VAR_RESULT, B_OUTCOME_WON
-	goto_if_eq Route120_EventScript_1F571C
+	goto_if_eq Route120_EventScript_RemoveBridgeKecleonPostBattle
 	compare VAR_RESULT, B_OUTCOME_RAN
-	goto_if_eq Route120_EventScript_1F571C
+	goto_if_eq Route120_EventScript_RemoveBridgeKecleonPostBattle
 	compare VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED
-	goto_if_eq Route120_EventScript_1F571C
-	goto Route120_EventScript_1F572C
+	goto_if_eq Route120_EventScript_RemoveBridgeKecleonPostBattle
+	goto Route120_EventScript_StevenGiveDeconScope
 	end
 
-Route120_EventScript_1F571C:: @ 81F571C
+Route120_EventScript_RemoveBridgeKecleonPostBattle:: @ 81F571C
 	fadescreenswapbuffers 1
-	removeobject 30
-	removeobject 36
+	removeobject 30 @ Invisible Bridge Kecleon
+	removeobject 36 @ Visible Bridge Kecleon
 	fadescreenswapbuffers 0
-	goto Route120_EventScript_1F572C
+	goto Route120_EventScript_StevenGiveDeconScope
 	end
 
-Route120_EventScript_1F572C:: @ 81F572C
-	applymovement 31, Common_Movement_WalkInPlaceDown
-	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceUp
+Route120_EventScript_StevenGiveDeconScope:: @ 81F572C
+	applymovement 31, Common_Movement_WalkInPlaceFastestDown
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
-	msgbox Route120_Text_1F5BAF, MSGBOX_DEFAULT
+	msgbox Route120_Text_StevenGiveDevonScope, MSGBOX_DEFAULT
 	giveitem_std ITEM_DEVON_SCOPE
 	setflag FLAG_RECEIVED_DEVON_SCOPE
-	msgbox Route120_Text_1F5C7B, MSGBOX_DEFAULT
+	msgbox Route120_Text_StevenGoodbye, MSGBOX_DEFAULT
 	closemessage
-	applymovement 31, Common_Movement_WalkInPlaceDown
+	applymovement 31, Common_Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	delay 50
 	setfieldeffectargument 0, 1
@@ -257,23 +257,23 @@ Route120_EventScript_1F572C:: @ 81F572C
 	release
 	end
 
-Route120_EventScript_1F57A3:: @ 81F57A3
-	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceLeft
+Route120_EventScript_PlayerApproachKecleonNorth:: @ 81F57A3
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceFastestLeft
 	waitmovement 0
 	return
 
-Route120_EventScript_1F57AE:: @ 81F57AE
-	applymovement EVENT_OBJ_ID_PLAYER, Route120_Movement_1F57B9
+Route120_EventScript_PlayerApproachKecleonWest:: @ 81F57AE
+	applymovement EVENT_OBJ_ID_PLAYER, Route120_Movement_ApproachKecleonWest
 	waitmovement 0
 	return
 
-Route120_Movement_1F57B9: @ 81F57B9
+Route120_Movement_ApproachKecleonWest: @ 81F57B9
 	walk_down
 	walk_left
 	step_end
 
-Route120_EventScript_1F57BC:: @ 81F57BC
-	msgbox Route120_Text_1F5D00, MSGBOX_NPC
+Route120_EventScript_InvisibleBridgeKecleon:: @ 81F57BC
+	msgbox Kecleon_Text_SomethingUnseeable, MSGBOX_NPC
 	end
 
 Route120_EventScript_1F57C5:: @ 81F57C5
@@ -383,7 +383,7 @@ Route120_EventScript_1F5981:: @ 81F5981
 	msgbox Route120_Text_29F002, MSGBOX_AUTOCLOSE
 	end
 
-Route120_Text_1F5998: @ 81F5998
+Route120_Text_StevenGreeting: @ 81F5998
 	.string "STEVEN: Hm? {PLAYER}{KUN}, hi.\n"
 	.string "It's been a while.\p"
 	.string "There's something here that you can't\n"
@@ -400,21 +400,21 @@ Route120_Text_1F5AAC: @ 81F5AAC
 	.string "STEVEN: No?\p"
 	.string "I'll wait here, so you can get ready.$"
 
-Route120_Text_1F5ADE: @ 81F5ADE
+Route120_Text_StevenReadyForBattle: @ 81F5ADE
 	.string "STEVEN: {PLAYER}{KUN}, are your POKéMON\n"
 	.string "ready for battle?$"
 
-Route120_Text_1F5B0F: @ 81F5B0F
+Route120_Text_StevenShowMeYourPower: @ 81F5B0F
 	.string "STEVEN: {PLAYER}{KUN}, show me your true\n"
 	.string "power as a TRAINER!$"
 
-Route120_Text_1F5B43: @ 81F5B43
+Route120_Text_StevenUsedDevonScope: @ 81F5B43
 	.string "STEVEN used the DEVON SCOPE.\p"
 	.string "An invisible POKéMON became completely\n"
 	.string "visible!\p"
 	.string "The startled POKéMON attacked!$"
 
-Route120_Text_1F5BAF: @ 81F5BAF
+Route120_Text_StevenGiveDevonScope: @ 81F5BAF
 	.string "STEVEN: I see…\n"
 	.string "Your battle style is intriguing.\p"
 	.string "Your POKéMON have obviously grown\n"
@@ -424,22 +424,21 @@ Route120_Text_1F5BAF: @ 81F5BAF
 	.string "Who knows, there may be other\n"
 	.string "concealed POKéMON.$"
 
-Route120_Text_1F5C7B: @ 81F5C7B
+Route120_Text_StevenGoodbye: @ 81F5C7B
 	.string "STEVEN: {PLAYER}{KUN}.\p"
 	.string "I enjoy seeing POKéMON and TRAINERS\n"
 	.string "who strive together.\p"
 	.string "I think you're doing great.\p"
 	.string "Well, let's meet again somewhere.$"
 
-Route119_Text_1F5D00: @ 81F5D00
-Route120_Text_1F5D00: @ 81F5D00
+Kecleon_Text_SomethingUnseeable: @ 81F5D00
 	.string "Something unseeable is in the way.$"
 
-Route119_Text_1F5D23: @ 81F5D23
+Kecleon_Text_WantToUseDevonScope: @ 81F5D23
 	.string "Something unseeable is in the way.\p"
 	.string "Want to use the DEVON SCOPE?$"
 
-Route119_Text_1F5D63: @ 81F5D63
+Kecleon_Text_UseDevonScopeMonAttacked: @ 81F5D63
 	.string "{PLAYER} used the DEVON SCOPE.\p"
 	.string "An invisible POKéMON became completely\n"
 	.string "visible!\p"

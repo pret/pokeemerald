@@ -247,7 +247,7 @@ LilycoveCity_Harbor_EventScript_OldSeaMapFirstTime:: @ 821E350
 	call LilycoveCity_Harbor_EventScript_GetEventTicketSailor
 	msgbox EventTicket_Text_OldSeaMapTooFar, MSGBOX_DEFAULT
 	closemessage
-	applymovement 4, Common_Movement_WalkInPlaceUp
+	applymovement 4, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	playse SE_PIN
 	applymovement 4, Common_Movement_ExclamationMark
@@ -329,12 +329,12 @@ LilycoveCity_Harbor_EventScript_MultipleEventTicketsFirstTime:: @ 821E44D
 LilycoveCity_Harbor_EventScript_ExitFirstTimeTicketSailSelect:: @ 821E4B6
 	msgbox EventTicket_Text_AsYouLike, MSGBOX_DEFAULT
 	closemessage
-	applymovement 4, Common_Movement_WalkInPlaceUp
+	applymovement 4, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	delay 30
 	removeobject 4
 	delay 30
-	applymovement 1, Common_Movement_WalkInPlaceDown
+	applymovement 1, Common_Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	showobjectat 1, MAP_LILYCOVE_CITY_HARBOR
 	delay 30
@@ -343,7 +343,7 @@ LilycoveCity_Harbor_EventScript_ExitFirstTimeTicketSailSelect:: @ 821E4B6
 	end
 
 LilycoveCity_Harbor_EventScript_GetEventTicketSailor:: @ 821E4EE
-	applymovement VAR_LAST_TALKED, Common_Movement_WalkInPlaceUp
+	applymovement VAR_LAST_TALKED, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	delay 30
 	hideobjectat VAR_LAST_TALKED, MAP_LILYCOVE_CITY_HARBOR
@@ -355,7 +355,7 @@ LilycoveCity_Harbor_EventScript_GetEventTicketSailor:: @ 821E4EE
 	return
 
 LilycoveCity_Harbor_EventScript_BoardFerryWithSailor:: @ 821E514
-	applymovement 4, Common_Movement_WalkInPlaceUp
+	applymovement 4, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	delay 30
 	removeobject 4
@@ -419,7 +419,7 @@ LilycoveCity_Harbor_EventScript_FerryDestinationChangeMind:: @ 821E5C0
 LilycoveCity_Harbor_EventScript_BoardFerry:: @ 821E5CC
 	msgbox LilycoveCity_Harbor_Text_PleaseBoard, MSGBOX_DEFAULT
 	closemessage
-	applymovement VAR_LAST_TALKED, Common_Movement_WalkInPlaceUp
+	applymovement VAR_LAST_TALKED, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	delay 30
 	hideobjectat VAR_LAST_TALKED, MAP_LILYCOVE_CITY_HARBOR
@@ -499,22 +499,22 @@ LilycoveCity_Harbor_Movement_SailorOutOfWayEast: @ 821E671
 	step_end
 
 LilycoveCity_Harbor_EventScript_BrineyFaceSailorNorth:: @ 821E675
-	applymovement 5, Common_Movement_WalkInPlaceLeft
+	applymovement 5, Common_Movement_WalkInPlaceFastestLeft
 	waitmovement 0
 	return
 
 LilycoveCity_Harbor_EventScript_BrineyFaceSailorEast:: @ 821E680
-	applymovement 5, Common_Movement_WalkInPlaceDown
+	applymovement 5, Common_Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	return
 
 LilycoveCity_Harbor_EventScript_BrineyFacePlayerNorth:: @ 821E68B
-	applymovement 5, Common_Movement_WalkInPlaceDown
+	applymovement 5, Common_Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	return
 
 LilycoveCity_Harbor_EventScript_BrineyFacePlayerEast:: @ 821E696
-	applymovement 5, Common_Movement_WalkInPlaceLeft
+	applymovement 5, Common_Movement_WalkInPlaceFastestLeft
 	waitmovement 0
 	return
 

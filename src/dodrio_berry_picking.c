@@ -245,7 +245,7 @@ static u32 sub_8027DFC(u32 arg0);
 static u32 IncrementWithLimit(u32 arg0, u32 arg1);
 static u32 Min(u32 arg0, u32 arg1);
 static u32 sub_80276C0(u8 arg0);
-static void sub_8027ACC(u8 taskId);
+static void Task_ShowDodrioBerryPickingRecords(u8 taskId);
 static void sub_8029314(u8 taskId);
 static void sub_8027BEC(u8 windowId, s32 width);
 static void nullsub_15(struct Sprite *sprite);
@@ -2580,7 +2580,7 @@ static u8 sub_8027A48(u8 id)
     return gUnknown_02022C98->unk34[id];
 }
 
-void sub_8027A5C(void)
+void IsDodrioInParty(void)
 {
     int i;
     for (i = 0; i < PARTY_SIZE; i++)
@@ -2588,18 +2588,18 @@ void sub_8027A5C(void)
         if (GetMonData(&gPlayerParty[i], MON_DATA_SANITY_HAS_SPECIES)
             && GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2) == SPECIES_DODRIO)
         {
-            gSpecialVar_Result = 1;
+            gSpecialVar_Result = TRUE;
             return;
         }
     }
 
-    gSpecialVar_Result = 0;
+    gSpecialVar_Result = FALSE;
 }
 
-void sub_8027AAC(void)
+void ShowDodrioBerryPickingRecords(void)
 {
-    u8 taskId = CreateTask(sub_8027ACC, 0);
-    sub_8027ACC(taskId);
+    u8 taskId = CreateTask(Task_ShowDodrioBerryPickingRecords, 0);
+    Task_ShowDodrioBerryPickingRecords(taskId);
 }
 
 // Data related to printing saved results.
@@ -2621,7 +2621,7 @@ ALIGNED(4)
 static const u8 gUnknown_082F7B44[][2] = {{25}, {41}, {57}};
 static const u8 gUnknown_082F7B4A[][2] = {{25}, {41}, {73}};
 
-static void sub_8027ACC(u8 taskId)
+static void Task_ShowDodrioBerryPickingRecords(u8 taskId)
 {
     struct WindowTemplate window;
     s32 i, width, widthCurr;

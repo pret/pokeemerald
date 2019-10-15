@@ -442,7 +442,7 @@ static const struct SpriteTemplate sSpriteTemplates_Cursors[] =
     {
         .tileTag = 0,
         .paletteTag = 0,
-        .oam = &gUnknown_0852490C,
+        .oam = &gOamData_AffineOff_ObjNormal_16x16,
         .anims = sSpriteAnimTable_8571574,
         .images = NULL,
         .affineAnims = gDummySpriteAffineAnimTable,
@@ -451,7 +451,7 @@ static const struct SpriteTemplate sSpriteTemplates_Cursors[] =
     {
         .tileTag = 1,
         .paletteTag = 1,
-        .oam = &gUnknown_08524934,
+        .oam = &gOamData_AffineOff_ObjNormal_32x16,
         .anims = sSpriteAnimTable_8571598,
         .images = NULL,
         .affineAnims = gDummySpriteAffineAnimTable,
@@ -463,7 +463,7 @@ static const struct SpriteTemplate sSpriteTemplate_Medal =
 {
     .tileTag = 2,
     .paletteTag = 2,
-    .oam = &gUnknown_0852490C,
+    .oam = &gOamData_AffineOff_ObjNormal_16x16,
     .anims = sSpriteAnimTable_857157C,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
@@ -474,7 +474,7 @@ static const struct SpriteTemplate sSpriteTemplate_Head =
 {
     .tileTag = 4,
     .paletteTag = 4,
-    .oam = &gUnknown_0852490C,
+    .oam = &gOamData_AffineOff_ObjNormal_16x16,
     .anims = sSpriteAnimTable_8571574,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,

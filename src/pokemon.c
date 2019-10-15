@@ -5704,7 +5704,7 @@ u8 GetTrainerEncounterMusicId(u16 trainerOpponentId)
 {
     if (InBattlePyramid())
         return GetBattlePyramindTrainerEncounterMusicId(trainerOpponentId);
-    else if (sub_81D5C18())
+    else if (InTrainerHillChallenge())
         return GetTrainerEncounterMusicIdInTrainerHill(trainerOpponentId);
     else
         return TRAINER_ENCOUNTER_MUSIC(trainerOpponentId);

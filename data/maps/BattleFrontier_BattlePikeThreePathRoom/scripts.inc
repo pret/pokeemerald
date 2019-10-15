@@ -35,7 +35,7 @@ BattleFrontier_BattlePikeThreePathRoom_EventScript_25C8A4:: @ 825C8A4
 	lockall
 	message BattleFrontier_BattlePikeThreePathRoom_Text_25CD75
 	waitmessage
-	setvar VAR_0x8004, 8
+	setvar VAR_0x8004, BATTLE_PIKE_FUNC_8
 	setvar VAR_0x8005, 1
 	special CallBattlePikeFunction
 	playse SE_SAVE
@@ -137,7 +137,7 @@ BattleFrontier_BattlePikeThreePathRoom_EventScript_25C9FD:: @ 825C9FD
 	message BattleFrontier_BattlePikeThreePathRoom_Text_25CE08
 	waitmessage
 	special LoadPlayerParty
-	setvar VAR_0x8004, 8
+	setvar VAR_0x8004, BATTLE_PIKE_FUNC_8
 	setvar VAR_0x8005, 2
 	special CallBattlePikeFunction
 	playse SE_SAVE
@@ -161,12 +161,12 @@ BattleFrontier_BattlePikeThreePathRoom_EventScript_25CA5A:: @ 825CA5A
 	waitmessage
 	multichoicedefault 20, 8, MULTI_YESNO, 1, 0
 	switch VAR_RESULT
-	case 0, BattleFrontier_BattlePikeThreePathRoom_EventScript_2C4222
+	case 0, BattleFrontier_BattlePike_EventScript_Retire
 	release
 	end
 
 BattleFrontier_BattlePikeThreePathRoom_EventScript_25CA78:: @ 825CA78
-	setvar VAR_0x8004, 17
+	setvar VAR_0x8004, BATTLE_PIKE_FUNC_SET_HINT_ROOM
 	special CallBattlePikeFunction
 	compare VAR_RESULT, 1
 	goto_if_eq BattleFrontier_BattlePikeThreePathRoom_EventScript_25CA91
@@ -189,7 +189,7 @@ BattleFrontier_BattlePikeThreePathRoom_EventScript_25CA97:: @ 825CA97
 	end
 
 BattleFrontier_BattlePikeThreePathRoom_EventScript_25CABB:: @ 825CABB
-	setvar VAR_0x8004, 19
+	setvar VAR_0x8004, BATTLE_PIKE_FUNC_GET_ROOM_TYPE_HINT
 	special CallBattlePikeFunction
 	compare VAR_RESULT, 4
 	goto_if_eq BattleFrontier_BattlePikeThreePathRoom_EventScript_25CBC2
@@ -209,7 +209,7 @@ BattleFrontier_BattlePikeThreePathRoom_EventScript_25CB00:: @ 825CB00
 	end
 
 BattleFrontier_BattlePikeThreePathRoom_EventScript_25CB0A:: @ 825CB0A
-	setvar VAR_0x8004, 18
+	setvar VAR_0x8004, BATTLE_PIKE_FUNC_SET_HINT_ROOM_ID
 	special CallBattlePikeFunction
 	switch VAR_RESULT
 	case 0, BattleFrontier_BattlePikeThreePathRoom_EventScript_25CB39
@@ -230,7 +230,7 @@ BattleFrontier_BattlePikeThreePathRoom_EventScript_25CB53:: @ 825CB53
 	goto BattleFrontier_BattlePikeThreePathRoom_EventScript_25CB60
 
 BattleFrontier_BattlePikeThreePathRoom_EventScript_25CB60:: @ 825CB60
-	setvar VAR_0x8004, 19
+	setvar VAR_0x8004, BATTLE_PIKE_FUNC_GET_ROOM_TYPE_HINT
 	special CallBattlePikeFunction
 	switch VAR_RESULT
 	case 0, BattleFrontier_BattlePikeThreePathRoom_EventScript_25CB9A

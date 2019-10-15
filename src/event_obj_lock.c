@@ -108,12 +108,12 @@ void sub_8098524(void)
     UnfreezeEventObjects();
 }
 
-void sub_8098574(void)
+void Script_FacePlayer(void)
 {
     EventObjectFaceOppositeDirection(&gEventObjects[gSelectedEventObject], gSpecialVar_Facing);
 }
 
-void sub_809859C(void)
+void Script_ClearHeldMovement(void)
 {
     EventObjectClearHeldMovementIfActive(&gEventObjects[gSelectedEventObject]);
 }

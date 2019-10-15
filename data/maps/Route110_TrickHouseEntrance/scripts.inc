@@ -334,7 +334,7 @@ Route110_TrickHouseEntrance_EventScript_269E51:: @ 8269E51
 	applymovement 1, Common_Movement_Delay48
 	waitmovement 0
 	msgbox Route110_TrickHouseEntrance_Text_26A9AF, MSGBOX_DEFAULT
-	applymovement 1, Common_Movement_WalkInPlaceUp
+	applymovement 1, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	releaseall
 	end
@@ -432,7 +432,7 @@ Route110_TrickHouseEntrance_EventScript_269FF7:: @ 8269FF7
 Route110_TrickHouseEntrance_EventScript_26A023:: @ 826A023
 	setvar VAR_TRICK_HOUSE_PRIZE_PICKUP, 0
 	setvar VAR_TRICK_HOUSE_ENTRANCE_STATE_3, 3
-	applymovement 1, Common_Movement_WalkInPlaceUp
+	applymovement 1, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	releaseall
 	end
@@ -506,7 +506,7 @@ Route110_TrickHouseEntrance_EventScript_26A126:: @ 826A126
 	setmetatile 5, 1, METATILE_GenericBuilding_TrickHouse_Stairs_Down, 0
 	special DrawWholeMapView
 	delay 20
-	applymovement EVENT_OBJ_ID_PLAYER, Route110_TrickHouseEntrance_Movement_2725C9
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkUp
 	waitmovement 0
 	applymovement EVENT_OBJ_ID_PLAYER, Route110_TrickHouseEntrance_Movement_26A1A7
 	waitmovement 0

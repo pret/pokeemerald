@@ -278,10 +278,10 @@ BattleFrontier_BattlePalaceBattleRoom_EventScript_24FCC7:: @ 824FCC7
 	waitfanfare
 	setvar VAR_0x8004, 13
 	special CallFrontierUtilFunc
-	applymovement 2, BattleFrontier_BattlePalaceBattleRoom_Movement_2725B6
+	applymovement 2, Common_Movement_WalkInPlaceLeft
 	waitmovement 0
-	applymovement 1, Common_Movement_WalkInPlaceRight
-	applymovement 3, Common_Movement_WalkInPlaceRight
+	applymovement 1, Common_Movement_WalkInPlaceFastestRight
+	applymovement 3, Common_Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	msgbox BattleFrontier_BattlePalaceBattleRoom_Text_250412, MSGBOX_DEFAULT
 	goto BattleFrontier_BattlePalaceBattleRoom_EventScript_24FB28
@@ -321,10 +321,10 @@ BattleFrontier_BattlePalaceBattleRoom_EventScript_24FD84:: @ 824FD84
 	waitfanfare
 	setvar VAR_0x8004, 13
 	special CallFrontierUtilFunc
-	applymovement 2, BattleFrontier_BattlePalaceBattleRoom_Movement_2725B6
+	applymovement 2, Common_Movement_WalkInPlaceLeft
 	waitmovement 0
-	applymovement 1, Common_Movement_WalkInPlaceRight
-	applymovement 3, Common_Movement_WalkInPlaceRight
+	applymovement 1, Common_Movement_WalkInPlaceFastestRight
+	applymovement 3, Common_Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	msgbox BattleFrontier_BattlePalaceBattleRoom_Text_2506C4, MSGBOX_DEFAULT
 	goto BattleFrontier_BattlePalaceBattleRoom_EventScript_24FB28

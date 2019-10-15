@@ -1,10 +1,10 @@
 MtPyre_2F_MapScripts:: @ 82310FB
-	map_script MAP_SCRIPT_ON_FRAME_TABLE, MtPyre_2F_MapScript2_2A8327
-	map_script MAP_SCRIPT_ON_TRANSITION, MtPyre_2F_MapScript1_2A8331
-	map_script MAP_SCRIPT_ON_RESUME, MtPyre_2F_MapScript1_23110B
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, CaveHole_CheckFallDownHole
+	map_script MAP_SCRIPT_ON_TRANSITION, CaveHole_FixCrackedGround
+	map_script MAP_SCRIPT_ON_RESUME, MtPyre_2F_SetHoleWarp
 	.byte 0
 
-MtPyre_2F_MapScript1_23110B: @ 823110B
+MtPyre_2F_SetHoleWarp: @ 823110B
 	setstepcallback 7
 	setholewarp MAP_MT_PYRE_1F, 255, 0, 0
 	end

@@ -72,7 +72,7 @@ FortreeCity_EventScript_1E2630:: @ 81E2630
 FortreeCity_EventScript_1E2645:: @ 81E2645
 	msgbox FortreeCity_Text_1E2A48, MSGBOX_DEFAULT
 	closemessage
-	applymovement VAR_LAST_TALKED, FortreeCity_Movement_2723C7
+	applymovement VAR_LAST_TALKED, Movement_KecleonAppears
 	waitmovement 0
 	waitse
 	playmoncry SPECIES_KECLEON, 2

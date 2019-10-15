@@ -6,7 +6,7 @@ CaveOfOrigin_B1F_EventScript_2357A9:: @ 82357A9
 	faceplayer
 	msgbox CaveOfOrigin_B1F_Text_23586E, MSGBOX_DEFAULT
 	closemessage
-	applymovement 1, Common_Movement_WalkInPlaceUp
+	applymovement 1, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	delay 60
 	playse SE_PIN

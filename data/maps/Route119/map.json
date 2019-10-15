@@ -477,7 +477,7 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route119_EventScript_27231C",
+      "script": "Route119_EventScript_Kecleon1",
       "flag": "FLAG_HIDE_ROUTE_119_KECLEON_1"
     },
     {
@@ -490,7 +490,7 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route119_EventScript_272329",
+      "script": "Route119_EventScript_Kecleon2",
       "flag": "FLAG_HIDE_ROUTE_119_KECLEON_2"
     },
     {
