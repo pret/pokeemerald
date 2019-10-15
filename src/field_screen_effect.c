@@ -556,7 +556,7 @@ void sub_80AF848(void)
     gFieldCallback = sub_80AF3E8;
 }
 
-void sub_80AF87C(void)
+void DoMossdeepGymWarp(void)
 {
     sub_8085540(1);
     ScriptContext2_Enable();

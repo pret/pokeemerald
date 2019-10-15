@@ -222,7 +222,7 @@ Route110_TrickHousePuzzle7_EventScript_26E31B:: @ 826E31B
 	playse SE_MU_PACHI
 	waitse
 	playse SE_TU_SAA
-	mossdeepgym3 1
+	initrotatingtilepuzzle TRUE
 	mossdeepgym1 0
 	waitmovement 0
 	mossdeepgym2
@@ -234,7 +234,7 @@ Route110_TrickHousePuzzle7_EventScript_26E331:: @ 826E331
 	playse SE_MU_PACHI
 	waitse
 	playse SE_TU_SAA
-	mossdeepgym3 1
+	initrotatingtilepuzzle TRUE
 	mossdeepgym1 1
 	waitmovement 0
 	mossdeepgym2
@@ -246,7 +246,7 @@ Route110_TrickHousePuzzle7_EventScript_26E347:: @ 826E347
 	playse SE_MU_PACHI
 	waitse
 	playse SE_TU_SAA
-	mossdeepgym3 1
+	initrotatingtilepuzzle TRUE
 	mossdeepgym1 2
 	waitmovement 0
 	mossdeepgym2
@@ -258,7 +258,7 @@ Route110_TrickHousePuzzle7_EventScript_26E35D:: @ 826E35D
 	playse SE_MU_PACHI
 	waitse
 	playse SE_TU_SAA
-	mossdeepgym3 1
+	initrotatingtilepuzzle TRUE
 	mossdeepgym1 3
 	waitmovement 0
 	mossdeepgym2
@@ -270,7 +270,7 @@ Route110_TrickHousePuzzle7_EventScript_26E373:: @ 826E373
 	playse SE_MU_PACHI
 	waitse
 	playse SE_TU_SAA
-	mossdeepgym3 1
+	initrotatingtilepuzzle TRUE
 	mossdeepgym1 4
 	waitmovement 0
 	mossdeepgym2

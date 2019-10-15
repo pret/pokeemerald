@@ -213,9 +213,9 @@ gScriptCmdTable:: @ 81DB67C
 	.4byte ScrCmd_setmonmetlocation
 	.4byte ScrCmd_mossdeepgym1
 	.4byte ScrCmd_mossdeepgym2
-	.4byte ScrCmd_mossdeepgym3
+	.4byte ScrCmd_initrotatingtilepuzzle
 	.4byte ScrCmd_mossdeepgym4
-	.4byte ScrCmd_warpD7
+	.4byte ScrCmd_warpmossdeepgym
 	.4byte ScrCmd_cmdD8
 	.4byte ScrCmd_cmdD9
 	.4byte ScrCmd_cmdDA

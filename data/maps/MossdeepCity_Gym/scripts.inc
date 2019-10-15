@@ -2,46 +2,50 @@ MossdeepCity_Gym_MapScripts:: @ 8220800
 	map_script MAP_SCRIPT_ON_LOAD, MossdeepCity_Gym_OnLoad
 	.byte 0
 
+@ NOTE: Mossdeep Gym was redesigned between R/S and E. Leftover (and now functionally unused) scripts are commented below
+
+@ All the below checks are leftover from RS. FLAG_MOSSDEEP_GYM_SWITCH_X is never set
 MossdeepCity_Gym_OnLoad: @ 8220806
-	goto_if_set FLAG_MOSSDEEP_GYM_SWITCH_1, MossdeepCity_Gym_EventScript_22083D
-	goto MossdeepCity_Gym_EventScript_220815
+	goto_if_set FLAG_MOSSDEEP_GYM_SWITCH_1, MossdeepCity_Gym_EventScript_SetSwitch1Metatiles
+	goto MossdeepCity_Gym_EventScript_CheckSwitch2
 	end
 
-MossdeepCity_Gym_EventScript_220815:: @ 8220815
-	goto_if_set FLAG_MOSSDEEP_GYM_SWITCH_2, MossdeepCity_Gym_EventScript_220855
-	goto MossdeepCity_Gym_EventScript_220824
+MossdeepCity_Gym_EventScript_CheckSwitch2:: @ 8220815
+	goto_if_set FLAG_MOSSDEEP_GYM_SWITCH_2, MossdeepCity_Gym_EventScript_SetSwitch2Metatiles
+	goto MossdeepCity_Gym_EventScript_CheckSwitch3
 	end
 
-MossdeepCity_Gym_EventScript_220824:: @ 8220824
-	goto_if_set FLAG_MOSSDEEP_GYM_SWITCH_3, MossdeepCity_Gym_EventScript_22086D
-	goto MossdeepCity_Gym_EventScript_220833
+MossdeepCity_Gym_EventScript_CheckSwitch3:: @ 8220824
+	goto_if_set FLAG_MOSSDEEP_GYM_SWITCH_3, MossdeepCity_Gym_EventScript_SetSwitch3Metatiles
+	goto MossdeepCity_Gym_EventScript_CheckSwitch4
 	end
 
-MossdeepCity_Gym_EventScript_220833:: @ 8220833
-	goto_if_set FLAG_MOSSDEEP_GYM_SWITCH_4, MossdeepCity_Gym_EventScript_220885
+MossdeepCity_Gym_EventScript_CheckSwitch4:: @ 8220833
+	goto_if_set FLAG_MOSSDEEP_GYM_SWITCH_4, MossdeepCity_Gym_EventScript_SetSwitch4Metatiles
 	end
 
-MossdeepCity_Gym_EventScript_22083D:: @ 822083D
-	setmetatile 5, 5, METATILE_MossdeepGym_Obelisk_Top, 0
-	setmetatile 2, 7, METATILE_MossdeepGym_Empty1, 1
-	goto MossdeepCity_Gym_EventScript_220815
+@ All the below set metatile scripts are leftover from RS and are functionally unused
+MossdeepCity_Gym_EventScript_SetSwitch1Metatiles:: @ 822083D
+	setmetatile 5, 5, METATILE_RS_MossdeepGym_RedArrow_Right, 0
+	setmetatile 2, 7, METATILE_RS_MossdeepGym_Switch_Down, 1
+	goto MossdeepCity_Gym_EventScript_CheckSwitch2
 	end
 
-MossdeepCity_Gym_EventScript_220855:: @ 8220855
-	setmetatile 8, 14, METATILE_MossdeepGym_Obelisk_Top, 0
-	setmetatile 8, 10, METATILE_MossdeepGym_Empty1, 1
-	goto MossdeepCity_Gym_EventScript_220824
+MossdeepCity_Gym_EventScript_SetSwitch2Metatiles:: @ 8220855
+	setmetatile 8, 14, METATILE_RS_MossdeepGym_RedArrow_Right, 0
+	setmetatile 8, 10, METATILE_RS_MossdeepGym_Switch_Down, 1
+	goto MossdeepCity_Gym_EventScript_CheckSwitch3
 	end
 
-MossdeepCity_Gym_EventScript_22086D:: @ 822086D
-	setmetatile 15, 17, METATILE_MossdeepGym_Obelisk_Base, 0
-	setmetatile 17, 15, METATILE_MossdeepGym_Empty1, 1
-	goto MossdeepCity_Gym_EventScript_220833
+MossdeepCity_Gym_EventScript_SetSwitch3Metatiles:: @ 822086D
+	setmetatile 15, 17, METATILE_RS_MossdeepGym_RedArrow_Left, 0
+	setmetatile 17, 15, METATILE_RS_MossdeepGym_Switch_Down, 1
+	goto MossdeepCity_Gym_EventScript_CheckSwitch4
 	end
 
-MossdeepCity_Gym_EventScript_220885:: @ 8220885
-	setmetatile 1, 23, METATILE_MossdeepGym_Wall_LeftCorner, 0
-	setmetatile 5, 24, METATILE_MossdeepGym_Empty1, 1
+MossdeepCity_Gym_EventScript_SetSwitch4Metatiles:: @ 8220885
+	setmetatile 1, 23, METATILE_RS_MossdeepGym_RedArrow_Up, 0
+	setmetatile 5, 24, METATILE_RS_MossdeepGym_Switch_Down, 1
 	end
 
 MossdeepCity_Gym_EventScript_TateAndLiza:: @ 8220898
@@ -90,7 +94,7 @@ MossdeepCity_Gym_EventScript_GiveCalmMind2:: @ 8220937
 	giveitem_std ITEM_TM04
 	compare VAR_RESULT, 0
 	goto_if_eq Common_EventScript_ShowBagIsFull
-	msgbox MossdeepCity_Gym_Text_221A40, MSGBOX_DEFAULT
+	msgbox MossdeepCity_Gym_Text_ExplainCalmMind, MSGBOX_DEFAULT
 	setflag FLAG_RECEIVED_TM04
 	release
 	end
@@ -99,7 +103,7 @@ MossdeepCity_Gym_EventScript_GiveCalmMind:: @ 822095B
 	giveitem_std ITEM_TM04
 	compare VAR_RESULT, 0
 	goto_if_eq Common_EventScript_BagIsFull
-	msgbox MossdeepCity_Gym_Text_221A40, MSGBOX_DEFAULT
+	msgbox MossdeepCity_Gym_Text_ExplainCalmMind, MSGBOX_DEFAULT
 	setflag FLAG_RECEIVED_TM04
 	return
 
@@ -108,14 +112,15 @@ MossdeepCity_Gym_EventScript_TateAndLizaRematch:: @ 822097E
 	msgbox MossdeepCity_Gym_Text_TateAndLizaPostRematch, MSGBOX_AUTOCLOSE
 	end
 
-MossdeepCity_Gym_EventScript_220999:: @ 8220999
+@ All the below switch scripts are leftover from RS and are functionally unused
+MossdeepCity_Gym_EventScript_Switch1:: @ 8220999
 	lockall
-	goto_if_set FLAG_MOSSDEEP_GYM_SWITCH_1, MossdeepCity_Gym_EventScript_2209D0
+	goto_if_set FLAG_MOSSDEEP_GYM_SWITCH_1, MossdeepCity_Gym_EventScript_ClearSwitch1
 	setflag FLAG_MOSSDEEP_GYM_SWITCH_1
-	applymovement EVENT_OBJ_ID_PLAYER, MossdeepCity_Gym_Movement_Delay32
+	applymovement EVENT_OBJ_ID_PLAYER, MossdeepCity_Gym_Movement_WaitAfterSwitchUse
 	waitmovement 0
-	setmetatile 5, 5, METATILE_MossdeepGym_Obelisk_Top, 0
-	setmetatile 2, 7, METATILE_MossdeepGym_Empty1, 1
+	setmetatile 5, 5, METATILE_RS_MossdeepGym_RedArrow_Right, 0
+	setmetatile 2, 7, METATILE_RS_MossdeepGym_Switch_Down, 1
 	goto MossdeepCity_Gym_EventScript_DrawMapAfterSwitchUsed
 	end
 
@@ -125,78 +130,78 @@ MossdeepCity_Gym_EventScript_DrawMapAfterSwitchUsed:: @ 82209C8
 	releaseall
 	end
 
-MossdeepCity_Gym_EventScript_2209D0:: @ 82209D0
+MossdeepCity_Gym_EventScript_ClearSwitch1:: @ 82209D0
 	clearflag FLAG_MOSSDEEP_GYM_SWITCH_1
-	applymovement EVENT_OBJ_ID_PLAYER, MossdeepCity_Gym_Movement_Delay32
+	applymovement EVENT_OBJ_ID_PLAYER, MossdeepCity_Gym_Movement_WaitAfterSwitchUse
 	waitmovement 0
-	setmetatile 5, 5, METATILE_MossdeepGym_Obelisk_Base, 0
-	setmetatile 2, 7, METATILE_MossdeepGym_Empty0, 1
+	setmetatile 5, 5, METATILE_RS_MossdeepGym_RedArrow_Left, 0
+	setmetatile 2, 7, METATILE_RS_MossdeepGym_Switch_Up, 1
 	goto MossdeepCity_Gym_EventScript_DrawMapAfterSwitchUsed
 	end
 
-MossdeepCity_Gym_EventScript_2209F5:: @ 82209F5
+MossdeepCity_Gym_EventScript_Switch2:: @ 82209F5
 	lockall
-	goto_if_set FLAG_MOSSDEEP_GYM_SWITCH_2, MossdeepCity_Gym_EventScript_220A24
+	goto_if_set FLAG_MOSSDEEP_GYM_SWITCH_2, MossdeepCity_Gym_EventScript_ClearSwitch2
 	setflag FLAG_MOSSDEEP_GYM_SWITCH_2
-	applymovement EVENT_OBJ_ID_PLAYER, MossdeepCity_Gym_Movement_Delay32
+	applymovement EVENT_OBJ_ID_PLAYER, MossdeepCity_Gym_Movement_WaitAfterSwitchUse
 	waitmovement 0
-	setmetatile 8, 14, METATILE_MossdeepGym_Obelisk_Top, 0
-	setmetatile 8, 10, METATILE_MossdeepGym_Empty1, 1
+	setmetatile 8, 14, METATILE_RS_MossdeepGym_RedArrow_Right, 0
+	setmetatile 8, 10, METATILE_RS_MossdeepGym_Switch_Down, 1
 	goto MossdeepCity_Gym_EventScript_DrawMapAfterSwitchUsed
 	end
 
-MossdeepCity_Gym_EventScript_220A24:: @ 8220A24
+MossdeepCity_Gym_EventScript_ClearSwitch2:: @ 8220A24
 	clearflag FLAG_MOSSDEEP_GYM_SWITCH_2
-	applymovement EVENT_OBJ_ID_PLAYER, MossdeepCity_Gym_Movement_Delay32
+	applymovement EVENT_OBJ_ID_PLAYER, MossdeepCity_Gym_Movement_WaitAfterSwitchUse
 	waitmovement 0
-	setmetatile 8, 14, METATILE_MossdeepGym_OuterWall_RightCorner, 0
-	setmetatile 8, 10, METATILE_MossdeepGym_Empty0, 1
+	setmetatile 8, 14, METATILE_RS_MossdeepGym_RedArrow_Down, 0
+	setmetatile 8, 10, METATILE_RS_MossdeepGym_Switch_Up, 1
 	goto MossdeepCity_Gym_EventScript_DrawMapAfterSwitchUsed
 	end
 
-MossdeepCity_Gym_EventScript_220A49:: @ 8220A49
+MossdeepCity_Gym_EventScript_Switch3:: @ 8220A49
 	lockall
-	goto_if_set FLAG_MOSSDEEP_GYM_SWITCH_3, MossdeepCity_Gym_EventScript_220A78
+	goto_if_set FLAG_MOSSDEEP_GYM_SWITCH_3, MossdeepCity_Gym_EventScript_ClearSwitch3
 	setflag FLAG_MOSSDEEP_GYM_SWITCH_3
-	applymovement EVENT_OBJ_ID_PLAYER, MossdeepCity_Gym_Movement_Delay32
+	applymovement EVENT_OBJ_ID_PLAYER, MossdeepCity_Gym_Movement_WaitAfterSwitchUse
 	waitmovement 0
-	setmetatile 15, 17, METATILE_MossdeepGym_Obelisk_Base, 0
-	setmetatile 17, 15, METATILE_MossdeepGym_Empty1, 1
+	setmetatile 15, 17, METATILE_RS_MossdeepGym_RedArrow_Left, 0
+	setmetatile 17, 15, METATILE_RS_MossdeepGym_Switch_Down, 1
 	goto MossdeepCity_Gym_EventScript_DrawMapAfterSwitchUsed
 	end
 
-MossdeepCity_Gym_EventScript_220A78:: @ 8220A78
+MossdeepCity_Gym_EventScript_ClearSwitch3:: @ 8220A78
 	clearflag FLAG_MOSSDEEP_GYM_SWITCH_3
-	applymovement EVENT_OBJ_ID_PLAYER, MossdeepCity_Gym_Movement_Delay32
+	applymovement EVENT_OBJ_ID_PLAYER, MossdeepCity_Gym_Movement_WaitAfterSwitchUse
 	waitmovement 0
-	setmetatile 15, 17, METATILE_MossdeepGym_Obelisk_Top, 0
-	setmetatile 17, 15, METATILE_MossdeepGym_Empty0, 1
+	setmetatile 15, 17, METATILE_RS_MossdeepGym_RedArrow_Right, 0
+	setmetatile 17, 15, METATILE_RS_MossdeepGym_Switch_Up, 1
 	goto MossdeepCity_Gym_EventScript_DrawMapAfterSwitchUsed
 	end
 
-MossdeepCity_Gym_EventScript_220A9D:: @ 8220A9D
+MossdeepCity_Gym_EventScript_Switch4:: @ 8220A9D
 	lockall
-	goto_if_set FLAG_MOSSDEEP_GYM_SWITCH_4, MossdeepCity_Gym_EventScript_220ACC
+	goto_if_set FLAG_MOSSDEEP_GYM_SWITCH_4, MossdeepCity_Gym_EventScript_ClearSwitch4
 	setflag FLAG_MOSSDEEP_GYM_SWITCH_4
-	applymovement EVENT_OBJ_ID_PLAYER, MossdeepCity_Gym_Movement_Delay32
+	applymovement EVENT_OBJ_ID_PLAYER, MossdeepCity_Gym_Movement_WaitAfterSwitchUse
 	waitmovement 0
-	setmetatile 1, 23, METATILE_MossdeepGym_Wall_LeftCorner, 0
-	setmetatile 5, 24, METATILE_MossdeepGym_Empty1, 1
+	setmetatile 1, 23, METATILE_RS_MossdeepGym_RedArrow_Up, 0
+	setmetatile 5, 24, METATILE_RS_MossdeepGym_Switch_Down, 1
 	goto MossdeepCity_Gym_EventScript_DrawMapAfterSwitchUsed
 	end
 
-MossdeepCity_Gym_EventScript_220ACC:: @ 8220ACC
+MossdeepCity_Gym_EventScript_ClearSwitch4:: @ 8220ACC
 	clearflag FLAG_MOSSDEEP_GYM_SWITCH_4
-	applymovement EVENT_OBJ_ID_PLAYER, MossdeepCity_Gym_Movement_Delay32
+	applymovement EVENT_OBJ_ID_PLAYER, MossdeepCity_Gym_Movement_WaitAfterSwitchUse
 	waitmovement 0
-	setmetatile 1, 23, METATILE_MossdeepGym_Obelisk_Top, 0
-	setmetatile 5, 24, METATILE_MossdeepGym_Empty0, 1
+	setmetatile 1, 23, METATILE_RS_MossdeepGym_RedArrow_Right, 0
+	setmetatile 5, 24, METATILE_RS_MossdeepGym_Switch_Up, 1
 	goto MossdeepCity_Gym_EventScript_DrawMapAfterSwitchUsed
 	end
 
-MossdeepCity_Gym_EventScript_220AF1:: @ 8220AF1
+MossdeepCity_Gym_EventScript_WarpToEntrance:: @ 8220AF1
 	lockall
-	warp7 MAP_MOSSDEEP_CITY_GYM, 255, 7, 30
+	warpmossdeepgym MAP_MOSSDEEP_CITY_GYM, 255, 7, 30
 	waitstate
 	releaseall
 	end
@@ -232,49 +237,50 @@ MossdeepCity_Gym_EventScript_Maura:: @ 8220B70
 	end
 
 MossdeepCity_Gym_EventScript_Sylvia:: @ 8220B87
-	trainerbattle_single TRAINER_SYLVIA, MossdeepCity_Gym_Text_2213C2, MossdeepCity_Gym_Text_2213F4
-	msgbox MossdeepCity_Gym_Text_221412, MSGBOX_AUTOCLOSE
+	trainerbattle_single TRAINER_SYLVIA, MossdeepCity_Gym_Text_SylviaPreBattle, MossdeepCity_Gym_Text_SylviaDefeat
+	msgbox MossdeepCity_Gym_Text_SylviaPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 MossdeepCity_Gym_EventScript_Nate:: @ 8220B9E
-	trainerbattle_single TRAINER_NATE, MossdeepCity_Gym_Text_221460, MossdeepCity_Gym_Text_2214A7
-	msgbox MossdeepCity_Gym_Text_2214D3, MSGBOX_AUTOCLOSE
+	trainerbattle_single TRAINER_NATE, MossdeepCity_Gym_Text_NatePreBattle, MossdeepCity_Gym_Text_NateDefeat
+	msgbox MossdeepCity_Gym_Text_NatePostBattle, MSGBOX_AUTOCLOSE
 	end
 
 MossdeepCity_Gym_EventScript_Macey:: @ 8220BB5
-	trainerbattle_single TRAINER_MACEY, MossdeepCity_Gym_Text_22161B, MossdeepCity_Gym_Text_221658
-	msgbox MossdeepCity_Gym_Text_221680, MSGBOX_AUTOCLOSE
+	trainerbattle_single TRAINER_MACEY, MossdeepCity_Gym_Text_MaceyPreBattle, MossdeepCity_Gym_Text_MaceyDefeat
+	msgbox MossdeepCity_Gym_Text_MaceyPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 MossdeepCity_Gym_EventScript_Clifford:: @ 8220BCC
-	trainerbattle_single TRAINER_CLIFFORD, MossdeepCity_Gym_Text_22157C, MossdeepCity_Gym_Text_2215B8
-	msgbox MossdeepCity_Gym_Text_2215E2, MSGBOX_AUTOCLOSE
+	trainerbattle_single TRAINER_CLIFFORD, MossdeepCity_Gym_Text_CliffordPreBattle, MossdeepCity_Gym_Text_CliffordDefeat
+	msgbox MossdeepCity_Gym_Text_CliffordPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 MossdeepCity_Gym_EventScript_Nicholas:: @ 8220BE3
-	trainerbattle_single TRAINER_NICHOLAS, MossdeepCity_Gym_Text_2216EE, MossdeepCity_Gym_Text_22172D
-	msgbox MossdeepCity_Gym_Text_22173A, MSGBOX_AUTOCLOSE
+	trainerbattle_single TRAINER_NICHOLAS, MossdeepCity_Gym_Text_NicholasPreBattle, MossdeepCity_Gym_Text_NicholasDefeat
+	msgbox MossdeepCity_Gym_Text_NicholasPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 MossdeepCity_Gym_EventScript_Kathleen:: @ 8220BFA
-	trainerbattle_single TRAINER_KATHLEEN, MossdeepCity_Gym_Text_221507, MossdeepCity_Gym_Text_22153B
-	msgbox MossdeepCity_Gym_Text_221545, MSGBOX_AUTOCLOSE
+	trainerbattle_single TRAINER_KATHLEEN, MossdeepCity_Gym_Text_KathleenPreBattle, MossdeepCity_Gym_Text_KathleenDefeat
+	msgbox MossdeepCity_Gym_Text_KathleenPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 MossdeepCity_Gym_EventScript_GymGuide:: @ 8220C11
 	lock
 	faceplayer
-	goto_if_set FLAG_DEFEATED_MOSSDEEP_GYM, MossdeepCity_Gym_EventScript_220C26
+	goto_if_set FLAG_DEFEATED_MOSSDEEP_GYM, MossdeepCity_Gym_EventScript_GymGuidePostVictory
 	msgbox MossdeepCity_Gym_Text_GymGuideAdvice, MSGBOX_DEFAULT
 	release
 	end
 
-MossdeepCity_Gym_EventScript_220C26:: @ 8220C26
-	msgbox MossdeepCity_Gym_Text_220E2A, MSGBOX_DEFAULT
+MossdeepCity_Gym_EventScript_GymGuidePostVictory:: @ 8220C26
+	msgbox MossdeepCity_Gym_Text_GymGuidePostVictory, MSGBOX_DEFAULT
 	release
 	end
 
-MossdeepCity_Gym_Movement_Delay32: @ 8220C30
+@ Leftover from RS, functionally unused
+MossdeepCity_Gym_Movement_WaitAfterSwitchUse: @ 8220C30
 	delay_16
 	delay_16
 	step_end
@@ -301,11 +307,11 @@ MossdeepCity_Gym_EventScript_GymStatue:: @ 8220C5D
 	releaseall
 	end
 
-MossdeepCity_Gym_EventScript_220C67:: @ 8220C67
+MossdeepCity_Gym_EventScript_YellowFloorSwitch:: @ 8220C67
 	playse SE_MU_PACHI
 	waitse
 	playse SE_TU_SAA
-	mossdeepgym3 0
+	initrotatingtilepuzzle FALSE
 	mossdeepgym1 0
 	waitmovement 0
 	mossdeepgym2
@@ -313,11 +319,11 @@ MossdeepCity_Gym_EventScript_220C67:: @ 8220C67
 	mossdeepgym4
 	end
 
-MossdeepCity_Gym_EventScript_220C7D:: @ 8220C7D
+MossdeepCity_Gym_EventScript_BlueFloorSwitch:: @ 8220C7D
 	playse SE_MU_PACHI
 	waitse
 	playse SE_TU_SAA
-	mossdeepgym3 0
+	initrotatingtilepuzzle FALSE
 	mossdeepgym1 1
 	waitmovement 0
 	mossdeepgym2
@@ -325,11 +331,11 @@ MossdeepCity_Gym_EventScript_220C7D:: @ 8220C7D
 	mossdeepgym4
 	end
 
-MossdeepCity_Gym_EventScript_220C93:: @ 8220C93
+MossdeepCity_Gym_EventScript_GreenFloorSwitch:: @ 8220C93
 	playse SE_MU_PACHI
 	waitse
 	playse SE_TU_SAA
-	mossdeepgym3 0
+	initrotatingtilepuzzle FALSE
 	mossdeepgym1 2
 	waitmovement 0
 	mossdeepgym2
@@ -337,11 +343,11 @@ MossdeepCity_Gym_EventScript_220C93:: @ 8220C93
 	mossdeepgym4
 	end
 
-MossdeepCity_Gym_EventScript_220CA9:: @ 8220CA9
+MossdeepCity_Gym_EventScript_PurpleFloorSwitch:: @ 8220CA9
 	playse SE_MU_PACHI
 	waitse
 	playse SE_TU_SAA
-	mossdeepgym3 0
+	initrotatingtilepuzzle FALSE
 	mossdeepgym1 3
 	waitmovement 0
 	mossdeepgym2
@@ -349,11 +355,11 @@ MossdeepCity_Gym_EventScript_220CA9:: @ 8220CA9
 	mossdeepgym4
 	end
 
-MossdeepCity_Gym_EventScript_220CBF:: @ 8220CBF
+MossdeepCity_Gym_EventScript_RedFloorSwitch:: @ 8220CBF
 	playse SE_MU_PACHI
 	waitse
 	playse SE_TU_SAA
-	mossdeepgym3 0
+	initrotatingtilepuzzle FALSE
 	mossdeepgym1 4
 	waitmovement 0
 	mossdeepgym2
@@ -375,7 +381,7 @@ MossdeepCity_Gym_Text_GymGuideAdvice: @ 8220CD5
 	.string "them how tight you are with your\l"
 	.string "POKéMON. Go for it!$"
 
-MossdeepCity_Gym_Text_220E2A: @ 8220E2A
+MossdeepCity_Gym_Text_GymGuidePostVictory: @ 8220E2A
 	.string "Wow, you're astounding!\n"
 	.string "You're one great TRAINER!$"
 
@@ -468,77 +474,77 @@ MossdeepCity_Gym_Text_MauraPostBattle: @ 822132E
 	.string "only despair at the end.\p"
 	.string "What goes around comes around…$"
 
-MossdeepCity_Gym_Text_2213C2: @ 82213C2
+MossdeepCity_Gym_Text_SylviaPreBattle: @ 82213C2
 	.string "Even at the risk of life, I will win\n"
 	.string "this battle!$"
 
-MossdeepCity_Gym_Text_2213F4: @ 82213F4
+MossdeepCity_Gym_Text_SylviaDefeat: @ 82213F4
 	.string "What you do…\n"
 	.string "It horrifies me…$"
 
-MossdeepCity_Gym_Text_221412: @ 8221412
+MossdeepCity_Gym_Text_SylviaPostBattle: @ 8221412
 	.string "How dare you beat me…\p"
 	.string "It won't be my fault if something\n"
 	.string "horrible befalls you…$"
 
-MossdeepCity_Gym_Text_221460: @ 8221460
+MossdeepCity_Gym_Text_NatePreBattle: @ 8221460
 	.string "Hohoho.\p"
 	.string "You need me to show you how tenacious\n"
 	.string "the PSYCHIC type can be.$"
 
-MossdeepCity_Gym_Text_2214A7: @ 82214A7
+MossdeepCity_Gym_Text_NateDefeat: @ 82214A7
 	.string "Oh! My, my!\n"
 	.string "Your battle style is fantastic!$"
 
-MossdeepCity_Gym_Text_2214D3: @ 82214D3
+MossdeepCity_Gym_Text_NatePostBattle: @ 82214D3
 	.string "I… I don't let defeat rattle m-me,\n"
 	.string "however b-badly.$"
 
-MossdeepCity_Gym_Text_221507: @ 8221507
+MossdeepCity_Gym_Text_KathleenPreBattle: @ 8221507
 	.string "Let me show you a perfectly awful,\n"
 	.string "horrifying time!$"
 
-MossdeepCity_Gym_Text_22153B: @ 822153B
+MossdeepCity_Gym_Text_KathleenDefeat: @ 822153B
 	.string "N-nooooo!$"
 
-MossdeepCity_Gym_Text_221545: @ 8221545
+MossdeepCity_Gym_Text_KathleenPostBattle: @ 8221545
 	.string "Your vitality is contagious!\n"
 	.string "Get away from me quickly!$"
 
-MossdeepCity_Gym_Text_22157C: @ 822157C
+MossdeepCity_Gym_Text_CliffordPreBattle: @ 822157C
 	.string "I may be past my prime, but I suggest\n"
 	.string "you not patronize me.$"
 
-MossdeepCity_Gym_Text_2215B8: @ 82215B8
+MossdeepCity_Gym_Text_CliffordDefeat: @ 82215B8
 	.string "Ah, you overflow with the power\n"
 	.string "of youth!$"
 
-MossdeepCity_Gym_Text_2215E2: @ 82215E2
+MossdeepCity_Gym_Text_CliffordPostBattle: @ 82215E2
 	.string "It seems that I could not overcome\n"
 	.string "your youthful energy.$"
 
-MossdeepCity_Gym_Text_22161B: @ 822161B
+MossdeepCity_Gym_Text_MaceyPreBattle: @ 822161B
 	.string "You're not getting through to the end!\n"
 	.string "Not if I can help it!$"
 
-MossdeepCity_Gym_Text_221658: @ 8221658
+MossdeepCity_Gym_Text_MaceyDefeat: @ 8221658
 	.string "How could you be so ludicrously\n"
 	.string "strong?$"
 
-MossdeepCity_Gym_Text_221680: @ 8221680
+MossdeepCity_Gym_Text_MaceyPostBattle: @ 8221680
 	.string "Humph! You may be strong, but you're\n"
 	.string "not suitable for the PSYCHIC type!\p"
 	.string "The way you battle is somehow brutal!$"
 
-MossdeepCity_Gym_Text_2216EE: @ 82216EE
+MossdeepCity_Gym_Text_NicholasPreBattle: @ 82216EE
 	.string "Wroooar! Have a taste of my super\n"
 	.string "POKéMON hard-battling power!$"
 
-MossdeepCity_Gym_Text_22172D: @ 822172D
+MossdeepCity_Gym_Text_NicholasDefeat: @ 822172D
 	.string "Oh!\n"
 	.string "Done in!$"
 
-MossdeepCity_Gym_Text_22173A: @ 822173A
+MossdeepCity_Gym_Text_NicholasPostBattle: @ 822173A
 	.string "All right! I think I'll develop a special\n"
 	.string "invincible POKéMON power next.$"
 
@@ -573,7 +579,7 @@ MossdeepCity_Gym_Text_ExplainMindBadgeTakeThis: @ 8221999
 	.string "DIVE outside of battle.\p"
 	.string "TATE: You should also take this, too.$"
 
-MossdeepCity_Gym_Text_221A40: @ 8221A40
+MossdeepCity_Gym_Text_ExplainCalmMind: @ 8221A40
 	.string "TATE: That TM04 contains…\n"
 	.string "LIZA: CALM MIND!\p"
 	.string "TATE: It raises SP. ATK and…\n"

@@ -1478,21 +1478,21 @@
 	.endm
 
 	@ In FireRed, this command is a nop.
-	.macro mossdeepgym3 var:req
+	.macro initrotatingtilepuzzle isTrickHouse:req
 	.byte 0xd5
-	.2byte \var
+	.2byte \isTrickHouse
 	.endm
 
 	.macro mossdeepgym4
 	.byte 0xd6
 	.endm
 
-	.macro warp7 map:req, byte:req, word1:req, word2:req
+	.macro warpmossdeepgym map:req, warpId:req, x:req, y:req
 	.byte 0xd7
 	map \map
-	.byte \byte
-	.2byte \word1
-	.2byte \word2
+	.byte \warpId
+	.2byte \x
+	.2byte \y
 	.endm
 
 	.macro cmdD8

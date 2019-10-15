@@ -815,7 +815,7 @@ bool8 ScrCmd_warpteleport(struct ScriptContext *ctx)
     return TRUE;
 }
 
-bool8 ScrCmd_warpD7(struct ScriptContext *ctx)
+bool8 ScrCmd_warpmossdeepgym(struct ScriptContext *ctx)
 {
     u8 mapGroup = ScriptReadByte(ctx);
     u8 mapNum = ScriptReadByte(ctx);
@@ -824,7 +824,7 @@ bool8 ScrCmd_warpD7(struct ScriptContext *ctx)
     u16 y = VarGet(ScriptReadHalfword(ctx));
 
     SetWarpDestination(mapGroup, mapNum, warpId, x, y);
-    sub_80AF87C();
+    DoMossdeepGymWarp();
     ResetInitialPlayerAvatarState();
     return TRUE;
 }
@@ -2151,9 +2151,9 @@ bool8 ScrCmd_takecoins(struct ScriptContext *ctx)
 
 bool8 ScrCmd_mossdeepgym1(struct ScriptContext *ctx)
 {
-    u16 v1 = VarGet(ScriptReadHalfword(ctx));
+    u16 puzzleNumber = VarGet(ScriptReadHalfword(ctx));
 
-    sMovingNpcId = MossdeepGym_MoveEvents(v1);
+    sMovingNpcId = MossdeepGym_MoveEvents(puzzleNumber);
     return FALSE;
 }
 
@@ -2163,11 +2163,11 @@ bool8 ScrCmd_mossdeepgym2(struct ScriptContext *ctx)
     return FALSE;
 }
 
-bool8 ScrCmd_mossdeepgym3(struct ScriptContext *ctx)
+bool8 ScrCmd_initrotatingtilepuzzle(struct ScriptContext *ctx)
 {
-    u16 v1 = VarGet(ScriptReadHalfword(ctx));
+    u16 isTrickHouse = VarGet(ScriptReadHalfword(ctx));
 
-    InitMossdeepGymTiles(v1);
+    InitRotatingTilePuzzle(isTrickHouse);
     return FALSE;
 }
 

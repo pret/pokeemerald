@@ -738,7 +738,7 @@ static bool8 TryStartWarpEventScript(struct MapPosition *position, u16 metatileB
         }
         if (MetatileBehavior_IsMossdeepGymWarp(metatileBehavior) == TRUE)
         {
-            sub_80AF87C();
+            DoMossdeepGymWarp();
             return TRUE;
         }
         DoWarp();

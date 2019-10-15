@@ -2,10 +2,11 @@
 #include "event_object_movement.h"
 #include "fieldmap.h"
 #include "malloc.h"
-#include "mossdeep_gym.h"
+#include "rotating_tile_puzzle.h"
 #include "script_movement.h"
 #include "constants/event_object_movement_constants.h"
 #include "constants/event_objects.h"
+#include "constants/metatile_labels.h"
 
 // Movement scripts.
 extern const u8 gUnknown_08612698[];
@@ -23,11 +24,11 @@ struct MossdeepSubStruct
     u8 eventTemplateId;
 };
 
-struct MossdeepStruct
+struct RotatingTilePuzzle
 {
     struct MossdeepSubStruct objects[EVENT_OBJECTS_COUNT];
     u8 count;
-    bool8 unk41;
+    bool8 isTrickHouse;
 };
 
 // This file's functions.
@@ -35,57 +36,57 @@ static void AddEventObject(u8 eventTemplateId, u8 arg1);
 static void sub_81A8D94(u8 eventTemplateId, u8 arg1);
 
 // EWRAM vars
-EWRAM_DATA static struct MossdeepStruct *sMossdeepGym = NULL;
+EWRAM_DATA static struct RotatingTilePuzzle *sRotatingTilePuzzle = NULL;
 
 // code
-void InitMossdeepGymTiles(bool8 arg0)
+void InitRotatingTilePuzzle(bool8 isTrickHouse)
 {
-    if (sMossdeepGym == NULL)
-        sMossdeepGym = AllocZeroed(sizeof(*sMossdeepGym));
+    if (sRotatingTilePuzzle == NULL)
+        sRotatingTilePuzzle = AllocZeroed(sizeof(*sRotatingTilePuzzle));
 
-    sMossdeepGym->unk41 = arg0;
+    sRotatingTilePuzzle->isTrickHouse = isTrickHouse;
 }
 
 void FinishMossdeepGymTiles(void)
 {
     u8 id;
 
-    if (sMossdeepGym != NULL)
-        FREE_AND_SET_NULL(sMossdeepGym);
+    if (sRotatingTilePuzzle != NULL)
+        FREE_AND_SET_NULL(sRotatingTilePuzzle);
 
     id = GetEventObjectIdByLocalIdAndMap(EVENT_OBJ_ID_PLAYER, 0, 0);
     EventObjectClearHeldMovementIfFinished(&gEventObjects[id]);
     ScriptMovement_UnfreezeEventObjects();
 }
 
-u16 MossdeepGym_MoveEvents(u8 arg0)
+u16 MossdeepGym_MoveEvents(u8 puzzleNumber)
 {
     u8 i;
-    struct EventObjectTemplate *events = gSaveBlock1Ptr->eventObjectTemplates;
+    struct EventObjectTemplate *eventObjects = gSaveBlock1Ptr->eventObjectTemplates;
     u16 localId = 0;
 
     for (i = 0; i < EVENT_OBJECT_TEMPLATES_COUNT; i++)
     {
-        s32 var;
+        s32 puzzleTileStart;
         u8 r5;
-        s16 x = events[i].x + 7;
-        s16 y = events[i].y + 7;
+        s16 x = eventObjects[i].x + 7;
+        s16 y = eventObjects[i].y + 7;
         u16 metatile = MapGridGetMetatileIdAt(x, y);
 
-        if (!sMossdeepGym->unk41)
-            var = 0x250;
+        if (!sRotatingTilePuzzle->isTrickHouse)
+            puzzleTileStart = METATILE_MossdeepGym_YellowRightArrow;
         else
-            var = 0x298;
+            puzzleTileStart = METATILE_TrickHousePuzzle_Arrow_YellowOnWhite_Right;
 
-        if (metatile < 0x250)
+        if (metatile < METATILE_MossdeepGym_YellowRightArrow)
             continue;
 
-        if ((u8)((metatile - var) / 8) >= 5)
+        if ((u8)((metatile - puzzleTileStart) / 8) >= 5)
             continue;
-        if ((u8)((metatile - var) / 8) != arg0)
+        if ((u8)((metatile - puzzleTileStart) / 8) != puzzleNumber)
             continue;
 
-        r5 = (u8)((metatile - var) % 8);
+        r5 = (u8)((metatile - puzzleTileStart) % 8);
         if (r5 < 4)
         {
             s8 x = 0;
@@ -114,12 +115,12 @@ u16 MossdeepGym_MoveEvents(u8 arg0)
                 continue;
             }
 
-            events[i].x += x;
-            events[i].y += y;
-            if (GetEventObjectIdByLocalIdAndMap(events[i].localId, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup) != EVENT_OBJECTS_COUNT)
+            eventObjects[i].x += x;
+            eventObjects[i].y += y;
+            if (GetEventObjectIdByLocalIdAndMap(eventObjects[i].localId, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup) != EVENT_OBJECTS_COUNT)
             {
                 AddEventObject(i, r5);
-                localId = events[i].localId;
+                localId = eventObjects[i].localId;
                 ScriptMovement_StartObjectMovementScript(localId, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, movementScript);
             }
             else
@@ -135,29 +136,29 @@ u16 MossdeepGym_MoveEvents(u8 arg0)
 void MossdeepGym_TurnEvents(void)
 {
     u8 i;
-    s32 var;
-    struct EventObjectTemplate *events;
+    s32 puzzleTileStart;
+    struct EventObjectTemplate *eventObjects;
 
-    if (sMossdeepGym == NULL)
+    if (sRotatingTilePuzzle == NULL)
         return;
 
-    if (!sMossdeepGym->unk41)
-        var = 0x250;
+    if (!sRotatingTilePuzzle->isTrickHouse)
+        puzzleTileStart = METATILE_MossdeepGym_YellowRightArrow;
     else
-        var = 0x298;
+        puzzleTileStart = METATILE_TrickHousePuzzle_Arrow_YellowOnWhite_Right;
 
-    events = gSaveBlock1Ptr->eventObjectTemplates;
-    for (i = 0; i < sMossdeepGym->count; i++)
+    eventObjects = gSaveBlock1Ptr->eventObjectTemplates;
+    for (i = 0; i < sRotatingTilePuzzle->count; i++)
     {
         s32 r6;
         s8 r0;
         u8 eventObjectId;
-        s16 x = events[sMossdeepGym->objects[i].eventTemplateId].x + 7;
-        s16 y = events[sMossdeepGym->objects[i].eventTemplateId].y + 7;
+        s16 x = eventObjects[sRotatingTilePuzzle->objects[i].eventTemplateId].x + 7;
+        s16 y = eventObjects[sRotatingTilePuzzle->objects[i].eventTemplateId].y + 7;
         u16 metatile = MapGridGetMetatileIdAt(x, y);
 
-        r0 = (u8)((metatile - var) % 8);
-        r0 -= (sMossdeepGym->objects[i].unk0);
+        r0 = (u8)((metatile - puzzleTileStart) % 8);
+        r0 -= (sRotatingTilePuzzle->objects[i].unk0);
         if (r0 < 0 || r0 == 3)
         {
             if (r0 == -3)
@@ -173,7 +174,7 @@ void MossdeepGym_TurnEvents(void)
                 r6 = 2;
         }
 
-        eventObjectId = GetEventObjectIdByLocalIdAndMap(events[sMossdeepGym->objects[i].eventTemplateId].localId, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
+        eventObjectId = GetEventObjectIdByLocalIdAndMap(eventObjects[sRotatingTilePuzzle->objects[i].eventTemplateId].localId, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
         if (eventObjectId != EVENT_OBJECTS_COUNT)
         {
             const u8 *movementScript;
@@ -184,24 +185,24 @@ void MossdeepGym_TurnEvents(void)
                 {
                 case DIR_EAST:
                     movementScript = MossdeepGym_Movement_FaceUp;
-                    events[sMossdeepGym->objects[i].eventTemplateId].movementType = MOVEMENT_TYPE_FACE_UP;
+                    eventObjects[sRotatingTilePuzzle->objects[i].eventTemplateId].movementType = MOVEMENT_TYPE_FACE_UP;
                     break;
                 case DIR_SOUTH:
                     movementScript = MossdeepGym_Movement_FaceRight;
-                    events[sMossdeepGym->objects[i].eventTemplateId].movementType = MOVEMENT_TYPE_FACE_RIGHT;
+                    eventObjects[sRotatingTilePuzzle->objects[i].eventTemplateId].movementType = MOVEMENT_TYPE_FACE_RIGHT;
                     break;
                 case DIR_WEST:
                     movementScript = MossdeepGym_Movement_FaceDown;
-                    events[sMossdeepGym->objects[i].eventTemplateId].movementType = MOVEMENT_TYPE_FACE_DOWN;
+                    eventObjects[sRotatingTilePuzzle->objects[i].eventTemplateId].movementType = MOVEMENT_TYPE_FACE_DOWN;
                     break;
                 case DIR_NORTH:
                     movementScript = MossdeepGym_Movement_FaceLeft;
-                    events[sMossdeepGym->objects[i].eventTemplateId].movementType = MOVEMENT_TYPE_FACE_LEFT;
+                    eventObjects[sRotatingTilePuzzle->objects[i].eventTemplateId].movementType = MOVEMENT_TYPE_FACE_LEFT;
                     break;
                 default:
                     continue;
                 }
-                ScriptMovement_StartObjectMovementScript(events[sMossdeepGym->objects[i].eventTemplateId].localId,
+                ScriptMovement_StartObjectMovementScript(eventObjects[sRotatingTilePuzzle->objects[i].eventTemplateId].localId,
                                                          gSaveBlock1Ptr->location.mapNum,
                                                          gSaveBlock1Ptr->location.mapGroup,
                                                          movementScript);
@@ -212,24 +213,24 @@ void MossdeepGym_TurnEvents(void)
                 {
                 case DIR_EAST:
                     movementScript = MossdeepGym_Movement_FaceDown;
-                    events[sMossdeepGym->objects[i].eventTemplateId].movementType = MOVEMENT_TYPE_FACE_DOWN;
+                    eventObjects[sRotatingTilePuzzle->objects[i].eventTemplateId].movementType = MOVEMENT_TYPE_FACE_DOWN;
                     break;
                 case DIR_SOUTH:
                     movementScript = MossdeepGym_Movement_FaceLeft;
-                    events[sMossdeepGym->objects[i].eventTemplateId].movementType = MOVEMENT_TYPE_FACE_LEFT;
+                    eventObjects[sRotatingTilePuzzle->objects[i].eventTemplateId].movementType = MOVEMENT_TYPE_FACE_LEFT;
                     break;
                 case DIR_WEST:
                     movementScript = MossdeepGym_Movement_FaceUp;
-                    events[sMossdeepGym->objects[i].eventTemplateId].movementType = MOVEMENT_TYPE_FACE_UP;
+                    eventObjects[sRotatingTilePuzzle->objects[i].eventTemplateId].movementType = MOVEMENT_TYPE_FACE_UP;
                     break;
                 case DIR_NORTH:
                     movementScript = MossdeepGym_Movement_FaceRight;
-                    events[sMossdeepGym->objects[i].eventTemplateId].movementType = MOVEMENT_TYPE_FACE_RIGHT;
+                    eventObjects[sRotatingTilePuzzle->objects[i].eventTemplateId].movementType = MOVEMENT_TYPE_FACE_RIGHT;
                     break;
                 default:
                     continue;
                 }
-                ScriptMovement_StartObjectMovementScript(events[sMossdeepGym->objects[i].eventTemplateId].localId,
+                ScriptMovement_StartObjectMovementScript(eventObjects[sRotatingTilePuzzle->objects[i].eventTemplateId].localId,
                                                          gSaveBlock1Ptr->location.mapNum,
                                                          gSaveBlock1Ptr->location.mapGroup,
                                                          movementScript);
@@ -240,28 +241,28 @@ void MossdeepGym_TurnEvents(void)
 
 static void AddEventObject(u8 eventTemplateId, u8 arg1)
 {
-    sMossdeepGym->objects[sMossdeepGym->count].eventTemplateId = eventTemplateId;
-    sMossdeepGym->objects[sMossdeepGym->count].unk0 = arg1;
-    sMossdeepGym->count++;
+    sRotatingTilePuzzle->objects[sRotatingTilePuzzle->count].eventTemplateId = eventTemplateId;
+    sRotatingTilePuzzle->objects[sRotatingTilePuzzle->count].unk0 = arg1;
+    sRotatingTilePuzzle->count++;
 }
 
 static void sub_81A8D94(u8 eventTemplateId, u8 arg1)
 {
     s8 r0;
     s32 r6;
-    s32 var;
+    s32 puzzleTileStart;
     u16 movementType;
-    struct EventObjectTemplate *events = gSaveBlock1Ptr->eventObjectTemplates;
-    s16 x = events[eventTemplateId].x + 7;
-    s16 y = events[eventTemplateId].y + 7;
+    struct EventObjectTemplate *eventObjects = gSaveBlock1Ptr->eventObjectTemplates;
+    s16 x = eventObjects[eventTemplateId].x + 7;
+    s16 y = eventObjects[eventTemplateId].y + 7;
     u16 metatile = MapGridGetMetatileIdAt(x, y);
 
-    if (!sMossdeepGym->unk41)
-        var = 0x250;
+    if (!sRotatingTilePuzzle->isTrickHouse)
+        puzzleTileStart = METATILE_MossdeepGym_YellowRightArrow;
     else
-        var = 0x298;
+        puzzleTileStart = METATILE_TrickHousePuzzle_Arrow_YellowOnWhite_Right;
 
-    r0 = (u8)((metatile - var) % 8);
+    r0 = (u8)((metatile - puzzleTileStart) % 8);
     r0 -= arg1;
     if (r0 < 0 || r0 == 3)
         r6 = 0;
@@ -270,22 +271,22 @@ static void sub_81A8D94(u8 eventTemplateId, u8 arg1)
     else
         r6 = 2;
 
-    movementType = events[eventTemplateId].movementType;
+    movementType = eventObjects[eventTemplateId].movementType;
     if (r6 == 0)
     {
         switch (movementType)
         {
         case MOVEMENT_TYPE_FACE_RIGHT:
-            events[eventTemplateId].movementType = MOVEMENT_TYPE_FACE_UP;
+            eventObjects[eventTemplateId].movementType = MOVEMENT_TYPE_FACE_UP;
             break;
         case MOVEMENT_TYPE_FACE_DOWN:
-            events[eventTemplateId].movementType = MOVEMENT_TYPE_FACE_RIGHT;
+            eventObjects[eventTemplateId].movementType = MOVEMENT_TYPE_FACE_RIGHT;
             break;
         case MOVEMENT_TYPE_FACE_LEFT:
-            events[eventTemplateId].movementType = MOVEMENT_TYPE_FACE_DOWN;
+            eventObjects[eventTemplateId].movementType = MOVEMENT_TYPE_FACE_DOWN;
             break;
         case MOVEMENT_TYPE_FACE_UP:
-            events[eventTemplateId].movementType = MOVEMENT_TYPE_FACE_LEFT;
+            eventObjects[eventTemplateId].movementType = MOVEMENT_TYPE_FACE_LEFT;
             break;
         default:
             break;
@@ -296,16 +297,16 @@ static void sub_81A8D94(u8 eventTemplateId, u8 arg1)
         switch (movementType)
         {
         case MOVEMENT_TYPE_FACE_RIGHT:
-            events[eventTemplateId].movementType = MOVEMENT_TYPE_FACE_DOWN;
+            eventObjects[eventTemplateId].movementType = MOVEMENT_TYPE_FACE_DOWN;
             break;
         case MOVEMENT_TYPE_FACE_DOWN:
-            events[eventTemplateId].movementType = MOVEMENT_TYPE_FACE_LEFT;
+            eventObjects[eventTemplateId].movementType = MOVEMENT_TYPE_FACE_LEFT;
             break;
         case MOVEMENT_TYPE_FACE_LEFT:
-            events[eventTemplateId].movementType = MOVEMENT_TYPE_FACE_UP;
+            eventObjects[eventTemplateId].movementType = MOVEMENT_TYPE_FACE_UP;
             break;
         case MOVEMENT_TYPE_FACE_UP:
-            events[eventTemplateId].movementType = MOVEMENT_TYPE_FACE_RIGHT;
+            eventObjects[eventTemplateId].movementType = MOVEMENT_TYPE_FACE_RIGHT;
             break;
         default:
             break;
