@@ -25,8 +25,8 @@
 
 #define VERSION_BANNER_RIGHT_TILEOFFSET 64
 #define VERSION_BANNER_BYTES 0x1000
-#define VERSION_BANNER_LEFT_X 154
-#define VERSION_BANNER_RIGHT_X 218
+#define VERSION_BANNER_LEFT_X 162
+#define VERSION_BANNER_RIGHT_X 226
 #define VERSION_BANNER_Y -20
 #define VERSION_BANNER_Y_GOAL 56
 #define START_BANNER_X 128
@@ -706,9 +706,9 @@ static void Task_TitleScreenPhase2(u8 taskId)
         gTasks[taskId].func = Task_TitleScreenPhase3;
     }
 
-    if (!(gTasks[taskId].tCounter & 3) && gTasks[taskId].data[2] != -8)
+    if (!(gTasks[taskId].tCounter % 3) && gTasks[taskId].data[2] != -1)
         gTasks[taskId].data[2]++;
-    if (!(gTasks[taskId].tCounter & 1) && gTasks[taskId].data[3] != -8)
+    if (!(gTasks[taskId].tCounter % 2) && gTasks[taskId].data[3] != -8)
         gTasks[taskId].data[3]++;
 
     // Slide Pokemon logo
@@ -751,7 +751,7 @@ static void Task_TitleScreenPhase3(u8 taskId)
     }
     else
     {
-        SetGpuReg(REG_OFFSET_BG2X_L, -8 * 256);
+        SetGpuReg(REG_OFFSET_BG2X_L, -1 * 256);
         SetGpuReg(REG_OFFSET_BG2X_H, -1);
         SetGpuReg(REG_OFFSET_BG2Y_L, -8 * 256);
         SetGpuReg(REG_OFFSET_BG2Y_H, -1);
