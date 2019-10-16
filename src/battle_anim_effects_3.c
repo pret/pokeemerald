@@ -24,7 +24,7 @@
 #include "constants/species.h"
 #include "constants/weather.h"
 
-extern const struct SpriteTemplate gThroughtBubbleSpriteTemplate;
+extern const struct SpriteTemplate gThoughtBubbleSpriteTemplate;
 
 void sub_815A0D4(struct Sprite *);
 void sub_815A1B0(struct Sprite *);
@@ -1929,7 +1929,7 @@ static void sub_815B054(u8 taskId)
         }
 
         y = task->data[3] + task->data[5];
-        spriteId = CreateSprite(&gThroughtBubbleSpriteTemplate, x, y, 6 - task->data[1]);
+        spriteId = CreateSprite(&gThoughtBubbleSpriteTemplate, x, y, 6 - task->data[1]);
         PlaySE12WithPanning(SE_W118, BattleAnimAdjustPanning(-64));
 
         if (spriteId != MAX_SPRITES)
@@ -1982,7 +1982,7 @@ static void sub_815B054(u8 taskId)
     case 4:
         for (i = 0, j = 0; i < MAX_SPRITES; i++)
         {
-            if (gSprites[i].template == &gThroughtBubbleSpriteTemplate)
+            if (gSprites[i].template == &gThoughtBubbleSpriteTemplate)
             {
                 gSprites[i].data[0] = taskId;
                 gSprites[i].data[1] = 6;

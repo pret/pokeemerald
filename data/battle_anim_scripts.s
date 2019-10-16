@@ -1523,17 +1523,17 @@ Move_VINE_WHIP:
 Move_DRILL_PECK:
 	loadspritegfx ANIM_TAG_IMPACT
 	loadspritegfx ANIM_TAG_WHIRLWIND_LINES
-	createsprite gInclineMonSpriteTemplate, ANIM_ATTACKER, 2, 0
+	createsprite gBowMonSpriteTemplate, ANIM_ATTACKER, 2, 0
 	playsewithpan SE_W029, SOUND_PAN_ATTACKER
 	waitforvisualfinish
 	delay 2
-	createsprite gInclineMonSpriteTemplate, ANIM_ATTACKER, 2, 1
+	createsprite gBowMonSpriteTemplate, ANIM_ATTACKER, 2, 1
 	delay 2
 	loopsewithpan SE_W030, SOUND_PAN_TARGET, 4, 8
 	createvisualtask sub_810EB88, 5
 	createvisualtask AnimTask_ShakeMon2, 2, ANIM_TARGET, 4, 0, 18, 1
 	waitforvisualfinish
-	createsprite gInclineMonSpriteTemplate, ANIM_ATTACKER, 2, 2
+	createsprite gBowMonSpriteTemplate, ANIM_ATTACKER, 2, 2
 	waitforvisualfinish
 	createsprite gSlideMonToOriginalPosSpriteTemplate, ANIM_ATTACKER, 2, 0, 0, 6
 	waitforvisualfinish
@@ -2405,15 +2405,15 @@ Move_ROLLING_KICK:
 
 Move_HEADBUTT:
 	loadspritegfx ANIM_TAG_IMPACT
-	createsprite gInclineMonSpriteTemplate, ANIM_ATTACKER, 2, 0
+	createsprite gBowMonSpriteTemplate, ANIM_ATTACKER, 2, 0
 	playsewithpan SE_W029, SOUND_PAN_ATTACKER
 	waitforvisualfinish
 	delay 2
-	createsprite gInclineMonSpriteTemplate, ANIM_ATTACKER, 2, 1
+	createsprite gBowMonSpriteTemplate, ANIM_ATTACKER, 2, 1
 	waitforvisualfinish
 	createvisualtask AnimTask_ShakeMonInPlace, 2, ANIM_ATTACKER, 2, 0, 4, 1
 	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 5, 0, 6, 1
-	createsprite gInclineMonSpriteTemplate, ANIM_ATTACKER, 2, 2
+	createsprite gBowMonSpriteTemplate, ANIM_ATTACKER, 2, 2
 	createsprite gUnknown_085973E8, ANIM_TARGET, 3, 0, 0, 1, 1
 	playsewithpan SE_W233B, SOUND_PAN_TARGET
 	waitforvisualfinish
@@ -2422,16 +2422,16 @@ Move_HEADBUTT:
 Move_HORN_ATTACK:
 	loadspritegfx ANIM_TAG_IMPACT
 	loadspritegfx ANIM_TAG_HORN_HIT
-	createsprite gInclineMonSpriteTemplate, ANIM_ATTACKER, 2, 0
+	createsprite gBowMonSpriteTemplate, ANIM_ATTACKER, 2, 0
 	playsewithpan SE_W029, SOUND_PAN_ATTACKER
 	waitforvisualfinish
 	delay 2
-	createsprite gInclineMonSpriteTemplate, ANIM_ATTACKER, 2, 1
+	createsprite gBowMonSpriteTemplate, ANIM_ATTACKER, 2, 1
 	createsprite gHornHitSpriteTemplate, ANIM_TARGET, 4, 0, 0, 10
 	waitforvisualfinish
 	createvisualtask AnimTask_ShakeMonInPlace, 2, ANIM_ATTACKER, 2, 0, 4, 1
 	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 5, 0, 6, 1
-	createsprite gInclineMonSpriteTemplate, ANIM_ATTACKER, 2, 2
+	createsprite gBowMonSpriteTemplate, ANIM_ATTACKER, 2, 2
 	createsprite gUnknown_085973E8, ANIM_TARGET, 3, 0, 0, 1, 1
 	playsewithpan SE_W030, SOUND_PAN_TARGET
 	waitforvisualfinish
@@ -2471,11 +2471,11 @@ Move_HORN_DRILL:
 HornDrillContinue:
 	waitbgfadein
 	setalpha 12, 8
-	createsprite gInclineMonSpriteTemplate, ANIM_ATTACKER, 2, 0
+	createsprite gBowMonSpriteTemplate, ANIM_ATTACKER, 2, 0
 	playsewithpan SE_W029, SOUND_PAN_ATTACKER
 	waitforvisualfinish
 	delay 2
-	createsprite gInclineMonSpriteTemplate, ANIM_ATTACKER, 2, 1
+	createsprite gBowMonSpriteTemplate, ANIM_ATTACKER, 2, 1
 	createsprite gHornHitSpriteTemplate, ANIM_TARGET, 4, 0, 0, 12
 	waitforvisualfinish
 	playse SE_BAN
@@ -2514,7 +2514,7 @@ HornDrillContinue:
 	createsprite gUnknown_085973E8, ANIM_TARGET, 3, 32, 0, 1, 2
 	playsewithpan SE_W030, SOUND_PAN_TARGET
 	delay 4
-	createsprite gInclineMonSpriteTemplate, ANIM_ATTACKER, 2, 2
+	createsprite gBowMonSpriteTemplate, ANIM_ATTACKER, 2, 2
 	waitforvisualfinish
 	restorebg
 	waitbgfadeout
@@ -2552,29 +2552,29 @@ Move_SING:
 	createvisualtask AnimTask_MusicNotesRainbowBlend, 2
 	waitforvisualfinish
 	panse_1B SE_W047, SOUND_PAN_ATTACKER, SOUND_PAN_TARGET, +2, 0
-	createsprite gWavingMusicNotesSpriteTemplate, ANIM_TARGET, 2, 7, 0, 12
+	createsprite gWavyMusicNotesSpriteTemplate, ANIM_TARGET, 2, 7, 0, 12
 	delay 5
-	createsprite gWavingMusicNotesSpriteTemplate, ANIM_TARGET, 2, 6, 1, 12
+	createsprite gWavyMusicNotesSpriteTemplate, ANIM_TARGET, 2, 6, 1, 12
 	delay 5
-	createsprite gWavingMusicNotesSpriteTemplate, ANIM_TARGET, 2, 1, 2, 12
+	createsprite gWavyMusicNotesSpriteTemplate, ANIM_TARGET, 2, 1, 2, 12
 	delay 5
-	createsprite gWavingMusicNotesSpriteTemplate, ANIM_TARGET, 2, 2, 3, 12
+	createsprite gWavyMusicNotesSpriteTemplate, ANIM_TARGET, 2, 2, 3, 12
 	delay 5
-	createsprite gWavingMusicNotesSpriteTemplate, ANIM_TARGET, 2, 3, 0, 12
+	createsprite gWavyMusicNotesSpriteTemplate, ANIM_TARGET, 2, 3, 0, 12
 	delay 4
-	createsprite gWavingMusicNotesSpriteTemplate, ANIM_TARGET, 2, 2, 1, 12
+	createsprite gWavyMusicNotesSpriteTemplate, ANIM_TARGET, 2, 2, 1, 12
 	delay 4
-	createsprite gWavingMusicNotesSpriteTemplate, ANIM_TARGET, 2, 5, 2, 12
+	createsprite gWavyMusicNotesSpriteTemplate, ANIM_TARGET, 2, 5, 2, 12
 	delay 4
-	createsprite gWavingMusicNotesSpriteTemplate, ANIM_TARGET, 2, 6, 3, 12
+	createsprite gWavyMusicNotesSpriteTemplate, ANIM_TARGET, 2, 6, 3, 12
 	delay 4
-	createsprite gWavingMusicNotesSpriteTemplate, ANIM_TARGET, 2, 2, 0, 12
+	createsprite gWavyMusicNotesSpriteTemplate, ANIM_TARGET, 2, 2, 0, 12
 	delay 4
-	createsprite gWavingMusicNotesSpriteTemplate, ANIM_TARGET, 2, 2, 1, 12
+	createsprite gWavyMusicNotesSpriteTemplate, ANIM_TARGET, 2, 2, 1, 12
 	delay 4
-	createsprite gWavingMusicNotesSpriteTemplate, ANIM_TARGET, 2, 1, 2, 12
+	createsprite gWavyMusicNotesSpriteTemplate, ANIM_TARGET, 2, 1, 2, 12
 	delay 4
-	createsprite gWavingMusicNotesSpriteTemplate, ANIM_TARGET, 2, 5, 3, 12
+	createsprite gWavyMusicNotesSpriteTemplate, ANIM_TARGET, 2, 5, 3, 12
 	delay 4
 	waitforvisualfinish
 	clearmonbg ANIM_DEF_PARTNER
@@ -2812,7 +2812,7 @@ Move_MINIMIZE:
 Move_METRONOME:
 	loadspritegfx ANIM_TAG_FINGER
 	loadspritegfx ANIM_TAG_THOUGHT_BUBBLE
-	createsprite gThroughtBubbleSpriteTemplate, ANIM_ATTACKER, 11, 0, 100
+	createsprite gThoughtBubbleSpriteTemplate, ANIM_ATTACKER, 11, 0, 100
 	playsewithpan SE_W118, SOUND_PAN_ATTACKER
 	delay 6
 	createsprite gMetronomeFingerSpriteTemplate, ANIM_ATTACKER, 12, 0
@@ -3254,20 +3254,20 @@ Move_FALSE_SWIPE:
 	createsprite gFalseSwipeSliceSpriteTemplate, ANIM_TARGET, 2
 	playsewithpan SE_W233, SOUND_PAN_TARGET
 	delay 16
-	createsprite gFalseSwipePositionnedSliceSpriteTemplate, ANIM_TARGET, 2, 0
+	createsprite gFalseSwipePositionedSliceSpriteTemplate, ANIM_TARGET, 2, 0
 	playsewithpan SE_W104, SOUND_PAN_TARGET
 	delay 2
-	createsprite gFalseSwipePositionnedSliceSpriteTemplate, ANIM_TARGET, 2, 16
+	createsprite gFalseSwipePositionedSliceSpriteTemplate, ANIM_TARGET, 2, 16
 	delay 2
-	createsprite gFalseSwipePositionnedSliceSpriteTemplate, ANIM_TARGET, 2, 32
+	createsprite gFalseSwipePositionedSliceSpriteTemplate, ANIM_TARGET, 2, 32
 	playsewithpan SE_W104, SOUND_PAN_TARGET
 	delay 2
-	createsprite gFalseSwipePositionnedSliceSpriteTemplate, ANIM_TARGET, 2, 48
+	createsprite gFalseSwipePositionedSliceSpriteTemplate, ANIM_TARGET, 2, 48
 	delay 2
-	createsprite gFalseSwipePositionnedSliceSpriteTemplate, ANIM_TARGET, 2, 64
+	createsprite gFalseSwipePositionedSliceSpriteTemplate, ANIM_TARGET, 2, 64
 	playsewithpan SE_W104, SOUND_PAN_TARGET
 	delay 2
-	createsprite gFalseSwipePositionnedSliceSpriteTemplate, ANIM_TARGET, 2, 80
+	createsprite gFalseSwipePositionedSliceSpriteTemplate, ANIM_TARGET, 2, 80
 	delay 2
 	waitforvisualfinish
 	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 5, 0, 6, 1
@@ -3598,7 +3598,7 @@ Move_TAUNT:
 	loadspritegfx ANIM_TAG_FINGER_2
 	loadspritegfx ANIM_TAG_THOUGHT_BUBBLE
 	loadspritegfx ANIM_TAG_ANGER
-	createsprite gThroughtBubbleSpriteTemplate, ANIM_ATTACKER, 11, 0, 45
+	createsprite gThoughtBubbleSpriteTemplate, ANIM_ATTACKER, 11, 0, 45
 	playsewithpan SE_W118, SOUND_PAN_ATTACKER
 	delay 6
 	createsprite gTauntFingerSpriteTemplate, ANIM_ATTACKER, 12, 0
@@ -4232,29 +4232,29 @@ Move_GRASS_WHISTLE:
 	createvisualtask AnimTask_MusicNotesRainbowBlend, 2
 	waitforvisualfinish
 	panse_1B SE_W320, SOUND_PAN_ATTACKER, SOUND_PAN_TARGET, +2, 0
-	createsprite gWavingMusicNotesSpriteTemplate, ANIM_TARGET, 2, 7, 1, 0
+	createsprite gWavyMusicNotesSpriteTemplate, ANIM_TARGET, 2, 7, 1, 0
 	delay 5
-	createsprite gWavingMusicNotesSpriteTemplate, ANIM_TARGET, 2, 6, 1, 0
+	createsprite gWavyMusicNotesSpriteTemplate, ANIM_TARGET, 2, 6, 1, 0
 	delay 5
-	createsprite gWavingMusicNotesSpriteTemplate, ANIM_TARGET, 2, 1, 1, 0
+	createsprite gWavyMusicNotesSpriteTemplate, ANIM_TARGET, 2, 1, 1, 0
 	delay 5
-	createsprite gWavingMusicNotesSpriteTemplate, ANIM_TARGET, 2, 2, 1, 0
+	createsprite gWavyMusicNotesSpriteTemplate, ANIM_TARGET, 2, 2, 1, 0
 	delay 5
-	createsprite gWavingMusicNotesSpriteTemplate, ANIM_TARGET, 2, 3, 1, 0
+	createsprite gWavyMusicNotesSpriteTemplate, ANIM_TARGET, 2, 3, 1, 0
 	delay 4
-	createsprite gWavingMusicNotesSpriteTemplate, ANIM_TARGET, 2, 2, 1, 0
+	createsprite gWavyMusicNotesSpriteTemplate, ANIM_TARGET, 2, 2, 1, 0
 	delay 4
-	createsprite gWavingMusicNotesSpriteTemplate, ANIM_TARGET, 2, 5, 1, 0
+	createsprite gWavyMusicNotesSpriteTemplate, ANIM_TARGET, 2, 5, 1, 0
 	delay 4
-	createsprite gWavingMusicNotesSpriteTemplate, ANIM_TARGET, 2, 6, 1, 0
+	createsprite gWavyMusicNotesSpriteTemplate, ANIM_TARGET, 2, 6, 1, 0
 	delay 4
-	createsprite gWavingMusicNotesSpriteTemplate, ANIM_TARGET, 2, 2, 1, 0
+	createsprite gWavyMusicNotesSpriteTemplate, ANIM_TARGET, 2, 2, 1, 0
 	delay 4
-	createsprite gWavingMusicNotesSpriteTemplate, ANIM_TARGET, 2, 2, 1, 0
+	createsprite gWavyMusicNotesSpriteTemplate, ANIM_TARGET, 2, 2, 1, 0
 	delay 4
-	createsprite gWavingMusicNotesSpriteTemplate, ANIM_TARGET, 2, 1, 1, 0
+	createsprite gWavyMusicNotesSpriteTemplate, ANIM_TARGET, 2, 1, 1, 0
 	delay 4
-	createsprite gWavingMusicNotesSpriteTemplate, ANIM_TARGET, 2, 5, 1, 0
+	createsprite gWavyMusicNotesSpriteTemplate, ANIM_TARGET, 2, 5, 1, 0
 	delay 4
 	waitforvisualfinish
 	createvisualtask AnimTask_MusicNotesClearRainbowBlend, 2
