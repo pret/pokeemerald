@@ -77,7 +77,7 @@
 #define METATILE_RS_MossdeepGym_Switch_Down           0x239
 
 // gTileset_MossdeepGym from Emerald
-#define METATILE_MossdeepGym_YellowRightArrow         0x250
+#define METATILE_MossdeepGym_YellowArrow_Right        0x250
 
 // gTileset_BrendansMaysHouse
 #define METATILE_BrendansMaysHouse_BrendanPC_Off    0x25A

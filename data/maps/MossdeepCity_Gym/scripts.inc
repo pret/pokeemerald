@@ -312,11 +312,11 @@ MossdeepCity_Gym_EventScript_YellowFloorSwitch:: @ 8220C67
 	waitse
 	playse SE_TU_SAA
 	initrotatingtilepuzzle FALSE
-	mossdeepgym1 0
+	moverotatingtileobjects 0
 	waitmovement 0
-	mossdeepgym2
+	turnrotatingtileobjects
 	waitmovement 0
-	mossdeepgym4
+	freerotatingtilepuzzle
 	end
 
 MossdeepCity_Gym_EventScript_BlueFloorSwitch:: @ 8220C7D
@@ -324,11 +324,11 @@ MossdeepCity_Gym_EventScript_BlueFloorSwitch:: @ 8220C7D
 	waitse
 	playse SE_TU_SAA
 	initrotatingtilepuzzle FALSE
-	mossdeepgym1 1
+	moverotatingtileobjects 1
 	waitmovement 0
-	mossdeepgym2
+	turnrotatingtileobjects
 	waitmovement 0
-	mossdeepgym4
+	freerotatingtilepuzzle
 	end
 
 MossdeepCity_Gym_EventScript_GreenFloorSwitch:: @ 8220C93
@@ -336,11 +336,11 @@ MossdeepCity_Gym_EventScript_GreenFloorSwitch:: @ 8220C93
 	waitse
 	playse SE_TU_SAA
 	initrotatingtilepuzzle FALSE
-	mossdeepgym1 2
+	moverotatingtileobjects 2
 	waitmovement 0
-	mossdeepgym2
+	turnrotatingtileobjects
 	waitmovement 0
-	mossdeepgym4
+	freerotatingtilepuzzle
 	end
 
 MossdeepCity_Gym_EventScript_PurpleFloorSwitch:: @ 8220CA9
@@ -348,11 +348,11 @@ MossdeepCity_Gym_EventScript_PurpleFloorSwitch:: @ 8220CA9
 	waitse
 	playse SE_TU_SAA
 	initrotatingtilepuzzle FALSE
-	mossdeepgym1 3
+	moverotatingtileobjects 3
 	waitmovement 0
-	mossdeepgym2
+	turnrotatingtileobjects
 	waitmovement 0
-	mossdeepgym4
+	freerotatingtilepuzzle
 	end
 
 MossdeepCity_Gym_EventScript_RedFloorSwitch:: @ 8220CBF
@@ -360,11 +360,11 @@ MossdeepCity_Gym_EventScript_RedFloorSwitch:: @ 8220CBF
 	waitse
 	playse SE_TU_SAA
 	initrotatingtilepuzzle FALSE
-	mossdeepgym1 4
+	moverotatingtileobjects 4
 	waitmovement 0
-	mossdeepgym2
+	turnrotatingtileobjects
 	waitmovement 0
-	mossdeepgym4
+	freerotatingtilepuzzle
 	end
 
 MossdeepCity_Gym_Text_GymGuideAdvice: @ 8220CD5

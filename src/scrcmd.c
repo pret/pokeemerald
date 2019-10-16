@@ -27,13 +27,13 @@
 #include "event_obj_lock.h"
 #include "menu.h"
 #include "money.h"
-#include "mossdeep_gym.h"
 #include "mystery_event_script.h"
 #include "palette.h"
 #include "party_menu.h"
 #include "pokemon_storage_system.h"
 #include "random.h"
 #include "overworld.h"
+#include "rotating_tile_puzzle.h"
 #include "rtc.h"
 #include "script.h"
 #include "script_menu.h"
@@ -2149,17 +2149,17 @@ bool8 ScrCmd_takecoins(struct ScriptContext *ctx)
     return FALSE;
 }
 
-bool8 ScrCmd_mossdeepgym1(struct ScriptContext *ctx)
+bool8 ScrCmd_moverotatingtileobjects(struct ScriptContext *ctx)
 {
     u16 puzzleNumber = VarGet(ScriptReadHalfword(ctx));
 
-    sMovingNpcId = MossdeepGym_MoveEvents(puzzleNumber);
+    sMovingNpcId = MoveRotatingTileObjects(puzzleNumber);
     return FALSE;
 }
 
-bool8 ScrCmd_mossdeepgym2(struct ScriptContext *ctx)
+bool8 ScrCmd_turnrotatingtileobjects(struct ScriptContext *ctx)
 {
-    MossdeepGym_TurnEvents();
+    TurnRotatingTileObjects();
     return FALSE;
 }
 
@@ -2171,9 +2171,9 @@ bool8 ScrCmd_initrotatingtilepuzzle(struct ScriptContext *ctx)
     return FALSE;
 }
 
-bool8 ScrCmd_mossdeepgym4(struct ScriptContext *ctx)
+bool8 ScrCmd_freerotatingtilepuzzle(struct ScriptContext *ctx)
 {
-    FinishMossdeepGymTiles();
+    FreeRotatingTilePuzzle();
     return FALSE;
 }
 

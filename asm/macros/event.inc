@@ -1468,22 +1468,25 @@
 	.byte \location
 	.endm
 
-	.macro mossdeepgym1 unknown:req
+	@ For the rotating tile puzzles in Mossdeep Gym/Trick House Room 7. Moves the objects on the colored puzzle specified by puzzleNumber one rotation
+	.macro moverotatingtileobjects puzzleNumber:req
 	.byte 0xd3
-	.2byte \unknown
+	.2byte \puzzleNumber
 	.endm
 
-	.macro mossdeepgym2
+	@ For the rotating tile puzzles in Mossdeep Gym/Trick House Room 7. Updates the facing direction of all objects on the puzzle tiles
+	.macro turnrotatingtileobjects
 	.byte 0xd4
 	.endm
 
-	@ In FireRed, this command is a nop.
+	@ For the rotating tile puzzles in Mossdeep Gym/Trick House Room 7. Allocates memory for the puzzle objects. isTrickHouse is needed to determine which of the two maps the puzzle is on, in order to know where in the tileset the puzzle tiles start. In FireRed, this command is a nop.
 	.macro initrotatingtilepuzzle isTrickHouse:req
 	.byte 0xd5
 	.2byte \isTrickHouse
 	.endm
 
-	.macro mossdeepgym4
+	@ For the rotating tile puzzles in Mossdeep Gym/Trick House Room 7. Frees the memory allocated for the puzzle objects.
+	.macro freerotatingtilepuzzle
 	.byte 0xd6
 	.endm
 
