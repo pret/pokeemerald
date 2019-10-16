@@ -1,19 +1,20 @@
 BattleFrontier_PokemonCenter_2F_MapScripts:: @ 8267AA4
-	map_script MAP_SCRIPT_ON_FRAME_TABLE, BattleFrontier_PokemonCenter_2F_MapScript2_276C3B
-	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, BattleFrontier_PokemonCenter_2F_MapScript2_276B6C
-	map_script MAP_SCRIPT_ON_LOAD, BattleFrontier_PokemonCenter_2F_MapScript1_276BBE
-	map_script MAP_SCRIPT_ON_TRANSITION, PokemonCenter_2F_OnTransition
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, CableClub_OnFrame
+	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, CableClub_OnWarp
+	map_script MAP_SCRIPT_ON_LOAD, CableClub_OnLoad
+	map_script MAP_SCRIPT_ON_TRANSITION, CableClub_OnTransition
 	.byte 0
 
-BattleFrontier_PokemonCenter_2F_EventScript_267AB9:: @ 8267AB9
-	call OldaleTown_PokemonCenter_2F_EventScript_276EB7
+@ The below 3 are unused and leftover from RS
+BattleFrontier_PokemonCenter_2F_EventScript_Colosseum:: @ 8267AB9
+	call CableClub_EventScript_Colosseum
 	end
 
-BattleFrontier_PokemonCenter_2F_EventScript_267ABF:: @ 8267ABF
-	call OldaleTown_PokemonCenter_2F_EventScript_2770B2
+BattleFrontier_PokemonCenter_2F_EventScript_TradeCenter:: @ 8267ABF
+	call CableClub_EventScript_TradeCenter
 	end
 
-BattleFrontier_PokemonCenter_2F_EventScript_267AC5:: @ 8267AC5
-	call OldaleTown_PokemonCenter_2F_EventScript_2771DB
+BattleFrontier_PokemonCenter_2F_EventScript_RecordCorner:: @ 8267AC5
+	call CableClub_EventScript_RecordCorner
 	end
 

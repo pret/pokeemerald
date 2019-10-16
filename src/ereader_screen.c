@@ -88,7 +88,7 @@ static u8 sub_81D4DE8(struct Unk03006370 *arg0)
 static void sub_81D4E30(void)
 {
     memset(gDecompressionBuffer, 0, 0x2000);
-    gLinkType = 0x5503;
+    gLinkType = LINKTYPE_0x5503;
     OpenLink();
     SetSuppressLinkErrorMessage(TRUE);
 }

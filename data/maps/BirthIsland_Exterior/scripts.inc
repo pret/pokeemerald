@@ -34,7 +34,7 @@ BirthIsland_Exterior_MapScript1_267F65: @ 8267F65
 
 BirthIsland_Exterior_EventScript_267F6F:: @ 8267F6F
 	specialvar VAR_RESULT, GetBattleOutcome
-	compare VAR_RESULT, 7
+	compare VAR_RESULT, B_OUTCOME_CAUGHT
 	goto_if_ne Common_EventScript_NopReturn
 	removeobject 2
 	return
@@ -88,11 +88,11 @@ BirthIsland_Exterior_EventScript_267FC1:: @ 8267FC1
 	waitstate
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
 	specialvar VAR_RESULT, GetBattleOutcome
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, B_OUTCOME_WON
 	goto_if_eq BirthIsland_Exterior_EventScript_26803B
-	compare VAR_RESULT, 4
+	compare VAR_RESULT, B_OUTCOME_RAN
 	goto_if_eq BirthIsland_Exterior_EventScript_268049
-	compare VAR_RESULT, 5
+	compare VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED
 	goto_if_eq BirthIsland_Exterior_EventScript_268049
 	setflag FLAG_BATTLED_DEOXYS
 	release

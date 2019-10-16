@@ -33,7 +33,7 @@ void sub_80AF8B8(void);
 void sub_80AF948(void);
 void sub_80AF9F8(void);
 void sub_80AFC60(void);
-void sub_80B009C(u8 flashLevel);
+void AnimateFlash(u8 flashLevel);
 void WriteBattlePyramidViewScanlineEffectBuffer(void);
 void sub_80B0244(void);
 void sub_80B0268(void);

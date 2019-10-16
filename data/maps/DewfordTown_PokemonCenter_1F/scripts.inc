@@ -1,6 +1,6 @@
 DewfordTown_PokemonCenter_1F_MapScripts:: @ 81FC523
 	map_script MAP_SCRIPT_ON_TRANSITION, DewfordTown_PokemonCenter_1F_OnTransition
-	map_script MAP_SCRIPT_ON_RESUME, DewfordTown_PokemonCenter_1F_MapScript1_277C30
+	map_script MAP_SCRIPT_ON_RESUME, CableClub_OnResume
 	.byte 0
 
 DewfordTown_PokemonCenter_1F_OnTransition: @ 81FC52E

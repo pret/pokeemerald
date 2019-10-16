@@ -1540,9 +1540,9 @@ static const u8 gHandCursorTiles[] = INCBIN_U8("graphics/pokemon_storage/hand_cu
 static const u8 gHandCursorShadowTiles[] = INCBIN_U8("graphics/pokemon_storage/hand_cursor_shadow.4bpp");
 
 // code
-void sub_80C6D80(const u8 *string, void *dst, u8 arg2, u8 arg3, s32 arg4)
+void DrawTextWindowAndBufferTiles(const u8 *string, void *dst, u8 zero1, u8 zero2, s32 bytesToBuffer)
 {
-    s32 i, val, val2;
+    s32 i, tileBytesToBuffer, remainingBytes;
     u16 windowId;
     u8 txtColor[3];
     u8 *tileData1, *tileData2;
@@ -1551,25 +1551,25 @@ void sub_80C6D80(const u8 *string, void *dst, u8 arg2, u8 arg3, s32 arg4)
     winTemplate.width = 24;
     winTemplate.height = 2;
     windowId = AddWindow(&winTemplate);
-    FillWindowPixelBuffer(windowId, PIXEL_FILL(arg3));
+    FillWindowPixelBuffer(windowId, PIXEL_FILL(zero2));
     tileData1 = (u8*) GetWindowAttribute(windowId, WINDOW_TILE_DATA);
     tileData2 = (winTemplate.width * 32) + tileData1;
 
-    if (!arg2)
-        txtColor[0] = 0;
+    if (!zero1)
+        txtColor[0] = TEXT_COLOR_TRANSPARENT;
     else
-        txtColor[0] = arg3;
-    txtColor[1] = 0xF;
-    txtColor[2] = 0xE;
+        txtColor[0] = zero2;
+    txtColor[1] = TEXT_DYNAMIC_COLOR_6;
+    txtColor[2] = TEXT_DYNAMIC_COLOR_5;
     AddTextPrinterParameterized4(windowId, 1, 0, 1, 0, 0, txtColor, -1, string);
 
-    val = arg4;
-    if (val > 6u)
-        val = 6;
-    val2 = arg4 - 6;
-    if (val > 0)
+    tileBytesToBuffer = bytesToBuffer;
+    if (tileBytesToBuffer > 6u)
+        tileBytesToBuffer = 6;
+    remainingBytes = bytesToBuffer - 6;
+    if (tileBytesToBuffer > 0)
     {
-        for (i = val; i != 0; i--)
+        for (i = tileBytesToBuffer; i != 0; i--)
         {
             CpuCopy16(tileData1, dst, 0x80);
             CpuCopy16(tileData2, dst + 0x80, 0x80);
@@ -1579,8 +1579,9 @@ void sub_80C6D80(const u8 *string, void *dst, u8 arg2, u8 arg3, s32 arg4)
         }
     }
 
-    if (val2 > 0)
-        CpuFill16((arg3 << 4) | arg3, dst, (u32)(val2) * 0x100);
+    // Never used. bytesToBuffer is always passed <= 6, so remainingBytes is always <= 0 here
+    if (remainingBytes > 0)
+        CpuFill16((zero2 << 4) | zero2, dst, (u32)(remainingBytes) * 0x100);
 
     RemoveWindow(windowId);
 }
@@ -5518,7 +5519,7 @@ static void sub_80CCB50(u8 boxId)
     sPSSData->field_738 |= 0x10000 << tagIndex;
 
     StringCopyPadded(sPSSData->field_21B8, GetBoxNamePtr(boxId), 0, 8);
-    sub_80C6D80(sPSSData->field_21B8, sPSSData->field_2F8, 0, 0, 2);
+    DrawTextWindowAndBufferTiles(sPSSData->field_21B8, sPSSData->field_2F8, 0, 0, 2);
     LoadSpriteSheet(&spriteSheet);
     r6 = sub_80CD00C(GetBoxNamePtr(boxId));
 
@@ -5554,7 +5555,7 @@ static void sub_80CCCFC(u8 boxId, s8 direction)
     }
 
     StringCopyPadded(sPSSData->field_21B8, GetBoxNamePtr(boxId), 0, 8);
-    sub_80C6D80(sPSSData->field_21B8, sPSSData->field_2F8, 0, 0, 2);
+    DrawTextWindowAndBufferTiles(sPSSData->field_21B8, sPSSData->field_2F8, 0, 0, 2);
     LoadSpriteSheet(&spriteSheet);
     LoadPalette(gUnknown_08577574[GetBoxWallpaper(boxId)], r8, 4);
     x = sub_80CD00C(GetBoxNamePtr(boxId));

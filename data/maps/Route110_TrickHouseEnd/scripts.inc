@@ -150,13 +150,13 @@ Route110_TrickHouseEnd_EventScript_26AEEC:: @ 826AEEC
 Route110_TrickHouseEnd_EventScript_26AF28:: @ 826AF28
 	msgbox Route110_TrickHouseEnd_Text_26B3AB, MSGBOX_DEFAULT
 	closemessage
-	compare VAR_FACING, 1
+	compare VAR_FACING, DIR_SOUTH
 	call_if_eq Route110_TrickHouseEnd_EventScript_26B015
-	compare VAR_FACING, 2
+	compare VAR_FACING, DIR_NORTH
 	call_if_eq Route110_TrickHouseEnd_EventScript_26B020
-	compare VAR_FACING, 3
+	compare VAR_FACING, DIR_WEST
 	call_if_eq Route110_TrickHouseEnd_EventScript_26B02B
-	compare VAR_FACING, 4
+	compare VAR_FACING, DIR_EAST
 	call_if_eq Route110_TrickHouseEnd_EventScript_26B036
 	delay 30
 	msgbox Route110_TrickHouseEnd_Text_26B3FA, MSGBOX_DEFAULT
@@ -212,22 +212,22 @@ Route110_TrickHouseEnd_EventScript_26B002:: @ 826B002
 	return
 
 Route110_TrickHouseEnd_EventScript_26B015:: @ 826B015
-	applymovement 1, Common_Movement_WalkInPlaceDown
+	applymovement 1, Common_Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	return
 
 Route110_TrickHouseEnd_EventScript_26B020:: @ 826B020
-	applymovement 1, Common_Movement_WalkInPlaceUp
+	applymovement 1, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	return
 
 Route110_TrickHouseEnd_EventScript_26B02B:: @ 826B02B
-	applymovement 1, Common_Movement_WalkInPlaceLeft
+	applymovement 1, Common_Movement_WalkInPlaceFastestLeft
 	waitmovement 0
 	return
 
 Route110_TrickHouseEnd_EventScript_26B036:: @ 826B036
-	applymovement 1, Common_Movement_WalkInPlaceRight
+	applymovement 1, Common_Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	return
 
@@ -241,7 +241,7 @@ Route110_TrickHouseEnd_EventScript_26B041:: @ 826B041
 	applymovement 1, Route110_TrickHouseEnd_Movement_26B08B
 	waitmovement 0
 	playse SE_W153
-	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceDown
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	msgbox Route110_TrickHouseEnd_Text_26B8BD, MSGBOX_DEFAULT
 	closemessage

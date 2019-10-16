@@ -22,20 +22,7 @@
 #include "constants/trainers.h"
 #include "constants/species.h"
 #include "constants/moves.h"
-
-#define PIKE_ROOM_SINGLE_BATTLE 0
-#define PIKE_ROOM_HEAL_FULL 1
-#define PIKE_ROOM_NPC 2
-#define PIKE_ROOM_STATUS 3
-#define PIKE_ROOM_HEAL_PART 4
-#define PIKE_ROOM_WILD_MONS 5
-#define PIKE_ROOM_HARD_BATTLE 6
-#define PIKE_ROOM_DOUBLE_BATTLE 7
-#define PIKE_ROOM_BRAIN 8
-
-// For the room with a status effect.
-#define PIKE_STATUS_KIRLIA 0
-#define PIKE_STATUS_DUSCLOPS 1
+#include "constants/battle_pike.h"
 
 struct PikeRoomNPC
 {
