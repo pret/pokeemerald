@@ -70,7 +70,7 @@ void AnimMoon(struct Sprite *);
 void AnimMoonlightSparkle(struct Sprite *);
 void AnimHornHit(struct Sprite *);
 void AnimSuperFang(struct Sprite *);
-void AnimWavingMusicNotes(struct Sprite *);
+void AnimWavyMusicNotes(struct Sprite *);
 void AnimFlyingMusicNotes(struct Sprite *);
 void AnimBellyDrumHand(struct Sprite *);
 void AnimSlowFlyingMusicNotes(struct Sprite *);
@@ -1878,49 +1878,49 @@ const struct SpriteTemplate gSuperFangSpriteTemplate =
     .callback = AnimSuperFang,
 };
 
-const union AnimCmd gWavingMusicNotesAnimCmds1[] =
+const union AnimCmd gWavyMusicNotesAnimCmds1[] =
 {
     ANIMCMD_FRAME(0, 10),
     ANIMCMD_END,
 };
 
-const union AnimCmd gWavingMusicNotesAnimCmds2[] =
+const union AnimCmd gWavyMusicNotesAnimCmds2[] =
 {
     ANIMCMD_FRAME(4, 10),
     ANIMCMD_END,
 };
 
-const union AnimCmd gWavingMusicNotesAnimCmds3[] =
+const union AnimCmd gWavyMusicNotesAnimCmds3[] =
 {
     ANIMCMD_FRAME(8, 41),
     ANIMCMD_END,
 };
 
-const union AnimCmd gWavingMusicNotesAnimCmds4[] =
+const union AnimCmd gWavyMusicNotesAnimCmds4[] =
 {
     ANIMCMD_FRAME(12, 10),
     ANIMCMD_END,
 };
 
-const union AnimCmd gWavingMusicNotesAnimCmds5[] =
+const union AnimCmd gWavyMusicNotesAnimCmds5[] =
 {
     ANIMCMD_FRAME(16, 10),
     ANIMCMD_END,
 };
 
-const union AnimCmd gWavingMusicNotesAnimCmds6[] =
+const union AnimCmd gWavyMusicNotesAnimCmds6[] =
 {
     ANIMCMD_FRAME(20, 10),
     ANIMCMD_END,
 };
 
-const union AnimCmd gWavingMusicNotesAnimCmds7[] =
+const union AnimCmd gWavyMusicNotesAnimCmds7[] =
 {
     ANIMCMD_FRAME(0, 10, .vFlip = TRUE),
     ANIMCMD_END,
 };
 
-const union AnimCmd gWavingMusicNotesAnimCmds8[] =
+const union AnimCmd gWavyMusicNotesAnimCmds8[] =
 {
     ANIMCMD_FRAME(4, 10, .vFlip = TRUE),
     ANIMCMD_END,
@@ -1928,17 +1928,17 @@ const union AnimCmd gWavingMusicNotesAnimCmds8[] =
 
 const union AnimCmd *const gMusicNotesAnimTable[] =
 {
-    gWavingMusicNotesAnimCmds1,
-    gWavingMusicNotesAnimCmds2,
-    gWavingMusicNotesAnimCmds3,
-    gWavingMusicNotesAnimCmds4,
-    gWavingMusicNotesAnimCmds5,
-    gWavingMusicNotesAnimCmds6,
-    gWavingMusicNotesAnimCmds7,
-    gWavingMusicNotesAnimCmds8,
+    gWavyMusicNotesAnimCmds1,
+    gWavyMusicNotesAnimCmds2,
+    gWavyMusicNotesAnimCmds3,
+    gWavyMusicNotesAnimCmds4,
+    gWavyMusicNotesAnimCmds5,
+    gWavyMusicNotesAnimCmds6,
+    gWavyMusicNotesAnimCmds7,
+    gWavyMusicNotesAnimCmds8,
 };
 
-const union AffineAnimCmd gWavingMusicNotesAffineAnimCmds[] =
+const union AffineAnimCmd gWavyMusicNotesAffineAnimCmds[] =
 {
     AFFINEANIMCMD_FRAME(0xC, 0xC, 0, 16),
     AFFINEANIMCMD_FRAME(0xFFF4, 0xFFF4, 0, 16),
@@ -1947,7 +1947,7 @@ const union AffineAnimCmd gWavingMusicNotesAffineAnimCmds[] =
 
 const union AffineAnimCmd *const gMusicNotesAffineAnimTable[] =
 {
-    gWavingMusicNotesAffineAnimCmds,
+    gWavyMusicNotesAffineAnimCmds,
 };
 
 const struct SpriteTemplate gWavyMusicNotesSpriteTemplate =
@@ -1958,7 +1958,7 @@ const struct SpriteTemplate gWavyMusicNotesSpriteTemplate =
     .anims = gMusicNotesAnimTable,
     .images = NULL,
     .affineAnims = gMusicNotesAffineAnimTable,
-    .callback = AnimWavingMusicNotes,
+    .callback = AnimWavyMusicNotes,
 };
 
 const u16 gParticlesColorBlendTable[][6] =
@@ -5273,7 +5273,7 @@ void AnimTask_MusicNotesClearRainbowBlend(u8 taskId)
     DestroyAnimVisualTask(taskId);
 }
 
-void AnimWavingMusicNotes(struct Sprite* sprite)
+void AnimWavyMusicNotes(struct Sprite* sprite)
 {
     u8 index;
     u8 a;
