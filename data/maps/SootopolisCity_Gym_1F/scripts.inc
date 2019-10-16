@@ -27,15 +27,12 @@ SootopolisCity_Gym_1F_EventScript_CheckSetStairMetatiles:: @ 8224E73
 	goto_if_lt SootopolisCity_Gym_1F_EventScript_OpenFirstAndSecondStairs
 	setmetatile 8, 4, METATILE_SootopolisGym_Stairs, 0
 	setmetatile 8, 5, METATILE_SootopolisGym_Stairs, 0
-
 SootopolisCity_Gym_1F_EventScript_OpenFirstAndSecondStairs:: @ 8224EA6
 	setmetatile 8, 10, METATILE_SootopolisGym_Stairs, 0
 	setmetatile 8, 11, METATILE_SootopolisGym_Stairs, 0
-
 SootopolisCity_Gym_1F_EventScript_OpenFirstStairs:: @ 8224EB8
 	setmetatile 8, 15, METATILE_SootopolisGym_Stairs, 0
 	setmetatile 8, 16, METATILE_SootopolisGym_Stairs, 0
-
 SootopolisCity_Gym_1F_EventScript_StopCheckingStairs:: @ 8224ECA
 	return
 
