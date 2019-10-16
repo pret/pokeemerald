@@ -243,7 +243,7 @@ const union AnimCmd gSolarbeamBigOrbAnimCmds7[] =
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_08592198[] =
+const union AnimCmd gSolarbeamSmallOrbAnimCms[] =
 {
     ANIMCMD_FRAME(7, 1),
     ANIMCMD_END,
@@ -266,9 +266,9 @@ const union AnimCmd *const gSolarbeamBigOrbAnimTable[] =
     gSolarbeamBigOrbAnimCmds7,
 };
 
-const union AnimCmd *const gUnknown_085921C4[] =
+const union AnimCmd *const gSolarbeamSmallOrbAnimTable[] =
 {
-    gUnknown_08592198,
+    gSolarbeamSmallOrbAnimCms,
 };
 
 const union AnimCmd *const gPowerAbsorptionOrbAnimTable[] =
@@ -312,7 +312,7 @@ const struct SpriteTemplate gSolarbeamSmallOrbSpriteTemplate =
     .tileTag = ANIM_TAG_ORBS,
     .paletteTag = ANIM_TAG_ORBS,
     .oam = &gOamData_AffineOff_ObjNormal_8x8,
-    .anims = gUnknown_085921C4,
+    .anims = gSolarbeamSmallOrbAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = AnimSolarbeamSmallOrb,

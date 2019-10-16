@@ -1244,7 +1244,7 @@ const struct SpriteTemplate gUnknown_08593C64 =
 {
     .tileTag = ANIM_TAG_GUARD_RING,
     .paletteTag = ANIM_TAG_GUARD_RING,
-    .oam = &gUnknown_08524B1C,
+    .oam = &gOamData_AffineDouble_ObjBlend_64x32,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gUnknown_08593C5C,
