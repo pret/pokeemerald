@@ -16,18 +16,18 @@ LittlerootTown_MaysHouse_1F_EventScript_292704:: @ 8292704
 	closemessage
 	setvar VAR_LITTLEROOT_INTRO_STATE, 4
 	applymovement EVENT_OBJ_ID_PLAYER, LittlerootTown_BrendansHouse_1F_Movement_292763
-	applymovement VAR_0x8004, Common_Movement_WalkInPlaceUp
+	applymovement VAR_0x8004, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	releaseall
 	end
 
 LittlerootTown_BrendansHouse_1F_EventScript_29274D:: @ 829274D
-	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceRight
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	return
 
 LittlerootTown_BrendansHouse_1F_EventScript_292758:: @ 8292758
-	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceLeft
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceFastestLeft
 	waitmovement 0
 	return
 
@@ -39,7 +39,7 @@ LittlerootTown_BrendansHouse_1F_EventScript_292765:: @ 8292765
 LittlerootTown_MaysHouse_1F_EventScript_292765:: @ 8292765
 	msgbox LittlerootTown_BrendansHouse_1F_Text_1F7B24, MSGBOX_DEFAULT
 	closemessage
-	applymovement VAR_0x8004, Common_Movement_WalkInPlaceUp
+	applymovement VAR_0x8004, Common_Movement_WalkInPlaceFastestUp
 	applymovement EVENT_OBJ_ID_PLAYER, LittlerootTown_BrendansHouse_1F_Movement_292AF0
 	waitmovement 0
 	releaseall
@@ -82,7 +82,7 @@ LittlerootTown_BrendansHouse_2F_EventScript_2927DF:: @ 82927DF
 	addobject VAR_0x8008
 	applymovement VAR_0x8008, LittlerootTown_BrendansHouse_2F_Movement_292850
 	waitmovement 0
-	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceRight
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	msgbox LittlerootTown_BrendansHouse_2F_Text_1F869A, MSGBOX_DEFAULT
 	closemessage
@@ -95,7 +95,7 @@ LittlerootTown_BrendansHouse_2F_EventScript_29280F:: @ 829280F
 	addobject VAR_0x8008
 	applymovement VAR_0x8008, LittlerootTown_BrendansHouse_2F_Movement_29285B
 	waitmovement 0
-	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceLeft
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceFastestLeft
 	waitmovement 0
 	msgbox LittlerootTown_BrendansHouse_2F_Text_1F869A, MSGBOX_DEFAULT
 	closemessage
@@ -154,7 +154,7 @@ LittlerootTown_MaysHouse_1F_EventScript_292866:: @ 8292866
 	end
 
 LittlerootTown_BrendansHouse_1F_EventScript_29286D:: @ 829286D
-	applymovement VAR_0x8005, Common_Movement_WalkInPlaceRight
+	applymovement VAR_0x8005, Common_Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	call LittlerootTown_BrendansHouse_1F_EventScript_29294B
 	applymovement EVENT_OBJ_ID_PLAYER, LittlerootTown_BrendansHouse_1F_Movement_292AE0
@@ -167,7 +167,7 @@ LittlerootTown_BrendansHouse_1F_EventScript_29286D:: @ 829286D
 	applymovement EVENT_OBJ_ID_PLAYER, LittlerootTown_BrendansHouse_1F_Movement_292AE6
 	waitmovement 0
 	call LittlerootTown_BrendansHouse_1F_EventScript_29296C
-	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceLeft
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceFastestLeft
 	waitmovement 0
 	msgbox LittlerootTown_BrendansHouse_1F_Text_1F7BF1, MSGBOX_DEFAULT
 	msgbox LittlerootTown_BrendansHouse_1F_Text_1F7C35, MSGBOX_DEFAULT
@@ -179,7 +179,7 @@ LittlerootTown_BrendansHouse_1F_EventScript_29286D:: @ 829286D
 	end
 
 LittlerootTown_MaysHouse_1F_EventScript_2928DC:: @ 82928DC
-	applymovement VAR_0x8005, Common_Movement_WalkInPlaceLeft
+	applymovement VAR_0x8005, Common_Movement_WalkInPlaceFastestLeft
 	waitmovement 0
 	call LittlerootTown_MaysHouse_1F_EventScript_29294B
 	applymovement EVENT_OBJ_ID_PLAYER, LittlerootTown_MaysHouse_1F_Movement_292AE8
@@ -192,7 +192,7 @@ LittlerootTown_MaysHouse_1F_EventScript_2928DC:: @ 82928DC
 	applymovement EVENT_OBJ_ID_PLAYER, LittlerootTown_MaysHouse_1F_Movement_292AEE
 	waitmovement 0
 	call LittlerootTown_MaysHouse_1F_EventScript_29296C
-	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceRight
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	msgbox LittlerootTown_MaysHouse_1F_Text_1F7BF1, MSGBOX_DEFAULT
 	msgbox LittlerootTown_MaysHouse_1F_Text_1F7C35, MSGBOX_DEFAULT
@@ -216,7 +216,7 @@ LittlerootTown_MaysHouse_1F_EventScript_29294B:: @ 829294B
 
 LittlerootTown_BrendansHouse_1F_EventScript_29296C:: @ 829296C
 LittlerootTown_MaysHouse_1F_EventScript_29296C:: @ 829296C
-	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceUp
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	msgbox LittlerootTown_BrendansHouse_1F_Text_1F7EC6, MSGBOX_DEFAULT
 	fadedefaultbgm
@@ -586,28 +586,28 @@ LittlerootTown_BrendansHouse_1F_EventScript_292D13:: @ 8292D13
 LittlerootTown_BrendansHouse_1F_EventScript_292D1E:: @ 8292D1E
 	applymovement EVENT_OBJ_ID_PLAYER, LittlerootTown_BrendansHouse_1F_Movement_292DD7
 	waitmovement 0
-	applymovement VAR_0x800A, Common_Movement_WalkInPlaceLeft
+	applymovement VAR_0x800A, Common_Movement_WalkInPlaceFastestLeft
 	waitmovement 0
 	return
 
 LittlerootTown_BrendansHouse_1F_EventScript_292D33:: @ 8292D33
 	applymovement EVENT_OBJ_ID_PLAYER, LittlerootTown_BrendansHouse_1F_Movement_292DDE
 	waitmovement 0
-	applymovement VAR_0x800A, Common_Movement_WalkInPlaceRight
+	applymovement VAR_0x800A, Common_Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	return
 
 LittlerootTown_BrendansHouse_1F_EventScript_292D48:: @ 8292D48
 	applymovement VAR_0x800A, LittlerootTown_BrendansHouse_1F_Movement_292999
 	waitmovement 0
-	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceLeft
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceFastestLeft
 	waitmovement 0
 	return
 
 LittlerootTown_BrendansHouse_1F_EventScript_292D5D:: @ 8292D5D
 	applymovement VAR_0x800A, LittlerootTown_BrendansHouse_1F_Movement_29299B
 	waitmovement 0
-	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceRight
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	return
 
@@ -624,14 +624,14 @@ LittlerootTown_BrendansHouse_1F_EventScript_292D7D:: @ 8292D7D
 LittlerootTown_BrendansHouse_1F_EventScript_292D88:: @ 8292D88
 	applymovement VAR_0x800A, LittlerootTown_BrendansHouse_1F_Movement_2929AF
 	waitmovement 0
-	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceRight
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	return
 
 LittlerootTown_BrendansHouse_1F_EventScript_292D9D:: @ 8292D9D
 	applymovement VAR_0x800A, LittlerootTown_BrendansHouse_1F_Movement_2929B3
 	waitmovement 0
-	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceLeft
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceFastestLeft
 	waitmovement 0
 	return
 

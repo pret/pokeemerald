@@ -570,7 +570,7 @@ static bool8 HandleStartMenuInput(void)
         PlaySE(SE_SELECT);
         if (sStartMenuItems[sCurrentStartMenuActions[sStartMenuCursorPos]].func.u8_void == StartMenuPokedexCallback)
         {
-            if (GetNationalPokedexCount(0) == 0)
+            if (GetNationalPokedexCount(FLAG_GET_SEEN) == 0)
                 return FALSE;
         }
 

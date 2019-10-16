@@ -61,7 +61,7 @@ void sub_801C178(u8 whichWindow);
 void sub_801C4C0(void);
 void sub_801C61C(void);
 
-extern const struct OamData gUnknown_08524934;
+extern const struct OamData gOamData_AffineOff_ObjNormal_32x16;
 
 const u8 gUnknown_082F0E10[][3] = {
     {0, 2, 3},
@@ -138,7 +138,7 @@ const struct SpritePalette gUnknown_082F1D08[] = {
     {gWonderCardShadowPal8, 0x8000}
 };
 const struct SpriteTemplate gUnknown_082F1D48 = {
-    0x8000, 0x8000, &gUnknown_08524934, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
+    0x8000, 0x8000, &gOamData_AffineOff_ObjNormal_32x16, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
 };
 const struct UnkStruct_8467FB8 gUnknown_082F1D60[8] = {
     {1, 0, 0, 0, gWonderCardBgGfx1, gWonderCardBgTilemap1, gWonderCardBgPal1},

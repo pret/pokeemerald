@@ -44,7 +44,7 @@ LilycoveCity_CoveLilyMotel_1F_EventScript_218211:: @ 8218211
 	waitmovement 0
 	applymovement 1, Common_Movement_Delay48
 	waitmovement 0
-	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceDown
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	msgbox LilycoveCity_CoveLilyMotel_1F_Text_21839B, MSGBOX_DEFAULT
 	closemessage

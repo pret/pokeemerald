@@ -24,7 +24,7 @@
       "movement_range_y": 1,
       "trainer_type": "3",
       "trainer_sight_or_berry_tree_id": "1",
-      "script": "LavaridgeTown_Gym_B1F_EventScript_1FE91B",
+      "script": "LavaridgeTown_Gym_B1F_EventScript_Jace",
       "flag": "0"
     },
     {
@@ -37,7 +37,7 @@
       "movement_range_y": 1,
       "trainer_type": "3",
       "trainer_sight_or_berry_tree_id": "1",
-      "script": "LavaridgeTown_Gym_B1F_EventScript_1FE8CA",
+      "script": "LavaridgeTown_Gym_B1F_EventScript_Keegan",
       "flag": "0"
     },
     {
@@ -50,7 +50,7 @@
       "movement_range_y": 1,
       "trainer_type": "3",
       "trainer_sight_or_berry_tree_id": "1",
-      "script": "LavaridgeTown_Gym_B1F_EventScript_1FE936",
+      "script": "LavaridgeTown_Gym_B1F_EventScript_Jeff",
       "flag": "0"
     },
     {
@@ -63,7 +63,7 @@
       "movement_range_y": 1,
       "trainer_type": "3",
       "trainer_sight_or_berry_tree_id": "1",
-      "script": "LavaridgeTown_Gym_B1F_EventScript_1FE951",
+      "script": "LavaridgeTown_Gym_B1F_EventScript_Eli",
       "flag": "0"
     }
   ],

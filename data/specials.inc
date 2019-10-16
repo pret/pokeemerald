@@ -150,12 +150,12 @@ gSpecials:: @ 81DBA64
 	def_special sub_80F8864
 	def_special CountPlayerContestPaintings
 	def_special ShowContestWinner
-	def_special MauvilleGymSpecial2
-	def_special MauvilleGymSpecial1
+	def_special MauvilleGymSetDefaultBarriers
+	def_special MauvilleGymPressSwitch
 	def_special ShowFieldMessageStringVar4
 	def_special DrawWholeMapView
 	def_special StorePlayerCoordsInVars
-	def_special MauvilleGymSpecial3
+	def_special MauvilleGymDeactivatePuzzle
 	def_special PetalburgGymSpecial1
 	def_special PetalburgGymSpecial2
 	def_special GetPlayerTrainerIdOnesDigit
@@ -210,8 +210,8 @@ gSpecials:: @ 81DBA64
 	def_special ShowLinkBattleRecords
 	def_special IsEnoughForCostInVar0x8005
 	def_special SubtractMoneyFromVar0x8005
-	def_special ExecuteWhiteOut
-	def_special sp0C8_whiteout_maybe
+	def_special TryFieldPoisonWhiteOut
+	def_special SetCB2WhiteOut
 	def_special RotatingGate_InitPuzzle
 	def_special RotatingGate_InitPuzzleAndGraphics
 	def_special SetSSTidalFlag
@@ -342,7 +342,7 @@ gSpecials:: @ 81DBA64
 	def_special TryInitBattleTowerAwardManEventObject
 	def_special MoveOutOfSecretBaseFromOutside
 	def_special LoadPlayerBag
-	def_special sub_80B05B4
+	def_special Script_FadeOutMapMusic
 	def_special SetPacifidlogTMReceivedDay
 	def_special GetDaysUntilPacifidlogTMAvailable
 	def_special HasAllHoennMons
@@ -485,7 +485,7 @@ gSpecials:: @ 81DBA64
 	def_special BufferBattleFrontierTutorMoveName
 	def_special CloseBattleFrontierTutorWindow
 	def_special sub_813ADD4
-	def_special sub_81B892C
+	def_special OpenPartyMenuForMoveTutor
 	def_special GetBattleFrontierTutorMoveIndex
 	def_special sub_813AF48
 	def_special DoDeoxysRockInteraction
