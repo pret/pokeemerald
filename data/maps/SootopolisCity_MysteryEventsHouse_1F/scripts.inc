@@ -37,7 +37,7 @@ SootopolisCity_MysteryEventsHouse_1F_EventScript_2279B7:: @ 82279B7
 	applymovement 1, SootopolisCity_MysteryEventsHouse_1F_Movement_227A21
 	waitmovement 0
 	copyobjectxytoperm 1
-	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceUp
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	compare VAR_SOOTOPOLIS_MYSTERY_EVENTS_STATE, 1
 	call_if_eq SootopolisCity_MysteryEventsHouse_1F_EventScript_227A04

@@ -307,7 +307,7 @@ Route110_EventScript_1EF64A:: @ 81EF64A
 
 Route110_EventScript_1EF661:: @ 81EF661
 	lockall
-	applymovement 21, Common_Movement_WalkInPlaceRight
+	applymovement 21, Common_Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	call Route110_EventScript_1EF673
 	releaseall
@@ -383,7 +383,7 @@ Route110_EventScript_1EF76E:: @ 81EF76E
 	call_if_eq Route110_EventScript_1EF7E1
 	compare VAR_RESULT, FEMALE
 	call_if_eq Route110_EventScript_1EF7E6
-	applymovement 28, Common_Movement_WalkInPlaceDown
+	applymovement 28, Common_Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	applymovement 28, Common_Movement_ExclamationMark
 	waitmovement 0
@@ -631,13 +631,13 @@ Route110_EventScript_1EF9F7:: @ 81EF9F7
 	msgbox Route110_Text_1F0AB5, MSGBOX_DEFAULT
 	closemessage
 	delay 20
-	applymovement 36, Common_Movement_WalkInPlaceLeft
+	applymovement 36, Common_Movement_WalkInPlaceFastestLeft
 	waitmovement 0
 	delay 10
-	applymovement 36, Common_Movement_WalkInPlaceRight
+	applymovement 36, Common_Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	delay 20
-	applymovement 36, Common_Movement_WalkInPlaceDown
+	applymovement 36, Common_Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	delay 30
 	msgbox Route110_Text_1F0AFF, MSGBOX_DEFAULT

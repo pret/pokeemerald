@@ -607,7 +607,7 @@ bool8 ScrCmd_incrementgamestat(struct ScriptContext *ctx)
 
 bool8 ScrCmd_animateflash(struct ScriptContext *ctx)
 {
-    sub_80B009C(ScriptReadByte(ctx));
+    AnimateFlash(ScriptReadByte(ctx));
     ScriptContext1_Stop();
     return TRUE;
 }
@@ -1930,9 +1930,9 @@ bool8 ScrCmd_setberrytree(struct ScriptContext *ctx)
 
 bool8 ScrCmd_getpricereduction(struct ScriptContext *ctx)
 {
-    u16 value = VarGet(ScriptReadHalfword(ctx));
+    u16 newsKind = VarGet(ScriptReadHalfword(ctx));
 
-    gSpecialVar_Result = GetPriceReduction(value);
+    gSpecialVar_Result = GetPriceReduction(newsKind);
     return FALSE;
 }
 

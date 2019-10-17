@@ -387,7 +387,7 @@ LilycoveCity_EventScript_1E2FFD:: @ 81E2FFD
 
 LilycoveCity_EventScript_1E3006:: @ 81E3006
 	closemessage
-	applymovement VAR_LAST_TALKED, Common_Movement_WalkInPlaceDown
+	applymovement VAR_LAST_TALKED, Common_Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	delay 50
 	setfieldeffectargument 0, 1

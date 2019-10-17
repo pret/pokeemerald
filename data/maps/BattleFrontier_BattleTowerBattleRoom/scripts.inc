@@ -230,7 +230,7 @@ BattleFrontier_BattleTowerBattleRoom_EventScript_241EBA:: @ 8241EBA
 BattleFrontier_BattleTowerBattleRoom_EventScript_241EC3:: @ 8241EC3
 	applymovement 3, BattleFrontier_BattleTowerBattleRoom_Movement_24219A
 	waitmovement 0
-	applymovement 3, BattleFrontier_BattleTowerBattleRoom_Movement_2725B6
+	applymovement 3, Common_Movement_WalkInPlaceLeft
 	waitmovement 0
 	playse SE_PIN
 	applymovement 2, Common_Movement_ExclamationMark

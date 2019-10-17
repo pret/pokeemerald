@@ -57,13 +57,13 @@ MossdeepCity_SpaceCenter_2F_EventScript_223E09:: @ 8223E09
 	trainerbattle_no_intro TRAINER_GRUNT_34, MossdeepCity_SpaceCenter_2F_Text_224461
 	applymovement 6, MossdeepCity_SpaceCenter_2F_Movement_223E85
 	waitmovement 0
-	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceLeft
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceFastestLeft
 	waitmovement 0
 	msgbox MossdeepCity_SpaceCenter_2F_Text_22446E, MSGBOX_DEFAULT
 	trainerbattle_no_intro TRAINER_GRUNT_35, MossdeepCity_SpaceCenter_2F_Text_224499
 	applymovement 5, MossdeepCity_SpaceCenter_2F_Movement_223E81
 	waitmovement 0
-	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceRight
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	msgbox MossdeepCity_SpaceCenter_2F_Text_2244AB, MSGBOX_DEFAULT
 	trainerbattle_no_intro TRAINER_GRUNT_36, MossdeepCity_SpaceCenter_2F_Text_2244F1
@@ -238,13 +238,13 @@ MossdeepCity_SpaceCenter_2F_EventScript_223FDA:: @ 8223FDA
 	goto_if_eq MossdeepCity_SpaceCenter_2F_EventScript_22400C
 	msgbox MossdeepCity_SpaceCenter_2F_Text_224854, MSGBOX_DEFAULT
 	closemessage
-	applymovement VAR_LAST_TALKED, Common_Movement_WalkInPlaceDown
+	applymovement VAR_LAST_TALKED, Common_Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	releaseall
 	end
 
 MossdeepCity_SpaceCenter_2F_EventScript_22400C:: @ 822400C
-	applymovement VAR_LAST_TALKED, Common_Movement_WalkInPlaceDown
+	applymovement VAR_LAST_TALKED, Common_Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	special SavePlayerParty
 	fadescreen 1
@@ -270,19 +270,19 @@ MossdeepCity_SpaceCenter_2F_EventScript_224032:: @ 8224032
 	switch VAR_RESULT
 	case 1, MossdeepCity_SpaceCenter_2F_EventScript_224071
 	fadescreen 1
-	special sp0C8_whiteout_maybe
+	special SetCB2WhiteOut
 	waitstate
 
 MossdeepCity_SpaceCenter_2F_EventScript_224071:: @ 8224071
 	msgbox MossdeepCity_SpaceCenter_2F_Text_2248C2, MSGBOX_DEFAULT
 	closemessage
 	delay 20
-	applymovement 9, Common_Movement_WalkInPlaceLeft
-	applymovement 8, Common_Movement_WalkInPlaceDown
+	applymovement 9, Common_Movement_WalkInPlaceFastestLeft
+	applymovement 8, Common_Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	delay 60
-	applymovement 9, Common_Movement_WalkInPlaceUp
-	applymovement 8, Common_Movement_WalkInPlaceRight
+	applymovement 9, Common_Movement_WalkInPlaceFastestUp
+	applymovement 8, Common_Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	delay 20
 	msgbox MossdeepCity_SpaceCenter_2F_Text_2249DC, MSGBOX_DEFAULT

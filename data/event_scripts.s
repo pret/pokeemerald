@@ -1,5 +1,7 @@
 #include "constants/global.h"
 #include "constants/battle.h"
+#include "constants/battle_pike.h"
+#include "constants/battle_pyramid.h"
 #include "constants/battle_frontier.h"
 #include "constants/battle_setup.h"
 #include "constants/berry.h"
@@ -11,6 +13,7 @@
 #include "constants/event_objects.h"
 #include "constants/event_object_movement_constants.h"
 #include "constants/field_effects.h"
+#include "constants/field_poison.h"
 #include "constants/field_specials.h"
 #include "constants/flags.h"
 #include "constants/game_stat.h"
@@ -23,6 +26,7 @@
 #include "constants/maps.h"
 #include "constants/metatile_labels.h"
 #include "constants/moves.h"
+#include "constants/party_menu.h"
 #include "constants/pokemon.h"
 #include "constants/script_menu.h"
 #include "constants/secret_bases.h"
@@ -31,6 +35,7 @@
 #include "constants/trade.h"
 #include "constants/trainer_hill.h"
 #include "constants/trainers.h"
+#include "constants/tv.h"
 #include "constants/vars.h"
 #include "constants/weather.h"
 	.include "asm/macros.inc"
@@ -902,7 +907,7 @@ EventScript_PickItemUp:: @ 8271C3A
 	waitfanfare
 	waitmessage
 	bufferitemnameplural 1, VAR_0x8004, VAR_0x8005
-	setvar VAR_0x8004, 12
+	setvar VAR_0x8004, BATTLE_PYRAMID_FUNC_IS_IN
 	special CallBattlePyramidFunction
 	compare VAR_RESULT, 1
 	goto_if_eq EventScript_271C86
@@ -1020,10 +1025,7 @@ Common_ShowEasyChatScreen:: @ 8271E7C
 	fadescreen 0
 	return
 
-DewfordTown_Gym_EventScript_271E84:: @ 8271E84
-LavaridgeTown_Gym_1F_EventScript_271E84:: @ 8271E84
-MauvilleCity_Gym_EventScript_271E84:: @ 8271E84
-RustboroCity_Gym_EventScript_271E84:: @ 8271E84
+Common_EventScript_ReadyPetalburgGymForBattle:: @ 8271E84
 	clearflag FLAG_HIDE_PETALBURG_GYM_GREETER
 	setflag FLAG_PETALBURG_MART_EXPANDED_ITEMS
 	return
@@ -1298,7 +1300,7 @@ RusturfTunnel_EventScript_272216:: @ 8272216
 
 EventScript_27222B:: @ 827222B
 	delay 30
-	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceUp
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	showobjectat 255, MAP_PETALBURG_CITY
 	delay 30

@@ -31,14 +31,14 @@ AquaHideout_B2F_EventScript_233E09:: @ 8233E09
 AquaHideout_B2F_EventScript_233E25:: @ 8233E25
 	setvar VAR_0x8008, 1
 	setvar VAR_0x8009, 4
-	applymovement VAR_0x8008, Common_Movement_WalkInPlaceLeft
+	applymovement VAR_0x8008, Common_Movement_WalkInPlaceFastestLeft
 	waitmovement 0
 	delay 20
 	applymovement VAR_0x8008, Common_Movement_FacePlayer
 	waitmovement 0
 	msgbox AquaHideout_B2F_Text_233FA6, MSGBOX_DEFAULT
 	closemessage
-	applymovement VAR_0x8008, Common_Movement_WalkInPlaceLeft
+	applymovement VAR_0x8008, Common_Movement_WalkInPlaceFastestLeft
 	applymovement VAR_0x8009, AquaHideout_B2F_Movement_233E80
 	waitmovement 0
 	removeobject VAR_0x8009

@@ -34,7 +34,7 @@ MtPyre_Summit_EventScript_23203C:: @ 823203C
 	playbgm MUS_AQA_0, 0
 	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_FaceUp
 	waitmovement 0
-	applymovement 2, Common_Movement_WalkInPlaceDown
+	applymovement 2, Common_Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	delay 50
 	compare VAR_0x8008, 0
@@ -86,7 +86,7 @@ MtPyre_Summit_EventScript_2320EC:: @ 82320EC
 MtPyre_Summit_EventScript_2320F7:: @ 82320F7
 	applymovement 3, MtPyre_Summit_Movement_23212C
 	waitmovement 0
-	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceRight
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	return
 
@@ -98,7 +98,7 @@ MtPyre_Summit_EventScript_23210C:: @ 823210C
 MtPyre_Summit_EventScript_232117:: @ 8232117
 	applymovement 3, MtPyre_Summit_Movement_232132
 	waitmovement 0
-	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceLeft
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceFastestLeft
 	waitmovement 0
 	return
 
@@ -207,7 +207,7 @@ MtPyre_Summit_EventScript_232204:: @ 8232204
 	end
 
 MtPyre_Summit_EventScript_232210:: @ 8232210
-	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceUp
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	delay 60
 	compare VAR_0x8008, 0
@@ -292,7 +292,7 @@ MtPyre_Summit_EventScript_23235A:: @ 823235A
 	applymovement EVENT_OBJ_ID_PLAYER, MtPyre_Summit_Movement_2323EA
 	applymovement 8, MtPyre_Summit_Movement_2323ED
 	waitmovement 0
-	applymovement 2, Common_Movement_WalkInPlaceRight
+	applymovement 2, Common_Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	return
 
@@ -300,7 +300,7 @@ MtPyre_Summit_EventScript_232376:: @ 8232376
 	applymovement EVENT_OBJ_ID_PLAYER, MtPyre_Summit_Movement_2323EA
 	applymovement 8, MtPyre_Summit_Movement_2323F3
 	waitmovement 0
-	applymovement 2, Common_Movement_WalkInPlaceRight
+	applymovement 2, Common_Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	return
 
@@ -308,7 +308,7 @@ MtPyre_Summit_EventScript_232392:: @ 8232392
 	applymovement EVENT_OBJ_ID_PLAYER, MtPyre_Summit_Movement_2323EA
 	applymovement 8, MtPyre_Summit_Movement_2323F8
 	waitmovement 0
-	applymovement 2, Common_Movement_WalkInPlaceRight
+	applymovement 2, Common_Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	return
 

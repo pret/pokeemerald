@@ -68,8 +68,8 @@ BattleFrontier_BattleTowerCorridor2_EventScript_248DBC:: @ 8248DBC
 	applymovement 2, BattleFrontier_BattleTowerCorridor2_Movement_248ED5
 	waitmovement 0
 	delay 40
-	applymovement 3, Common_Movement_WalkInPlaceUp
-	applymovement 2, Common_Movement_WalkInPlaceUp
+	applymovement 3, Common_Movement_WalkInPlaceFastestUp
+	applymovement 2, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	opendoor 7, 1
 	waitdooranim

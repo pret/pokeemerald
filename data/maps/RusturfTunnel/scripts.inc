@@ -94,7 +94,7 @@ RusturfTunnel_EventScript_22CF6F:: @ 822CF6F
 	applymovement EVENT_OBJ_ID_PLAYER, RusturfTunnel_Movement_22D045
 	applymovement 1, RusturfTunnel_Movement_22D06C
 	waitmovement 0
-	applymovement 10, Common_Movement_WalkInPlaceDown
+	applymovement 10, Common_Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	return
 
@@ -102,14 +102,14 @@ RusturfTunnel_EventScript_22CF8B:: @ 822CF8B
 	applymovement EVENT_OBJ_ID_PLAYER, RusturfTunnel_Movement_22D045
 	applymovement 1, RusturfTunnel_Movement_22D06C
 	waitmovement 0
-	applymovement 10, Common_Movement_WalkInPlaceDown
+	applymovement 10, Common_Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	return
 
 RusturfTunnel_EventScript_22CFA7:: @ 822CFA7
-	applymovement 1, Common_Movement_WalkInPlaceUp
+	applymovement 1, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
-	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceDown
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	return
 

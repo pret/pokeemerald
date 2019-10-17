@@ -141,7 +141,7 @@ LilycoveCity_DepartmentStore_5F_EventScript_22009C:: @ 822009C
 LilycoveCity_DepartmentStore_5F_EventScript_2200A7:: @ 82200A7
 	msgbox LilycoveCity_DepartmentStore_5F_Text_2201C4, MSGBOX_DEFAULT
 	closemessage
-	applymovement 7, Common_Movement_WalkInPlaceUp
+	applymovement 7, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	releaseall
 	end

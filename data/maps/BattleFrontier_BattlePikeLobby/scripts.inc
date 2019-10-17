@@ -26,16 +26,16 @@ BattleFrontier_BattlePikeLobby_EventScript_25B707:: @ 825B707
 
 BattleFrontier_BattlePikeLobby_EventScript_25B710:: @ 825B710
 	special HealPlayerParty
-	setvar VAR_0x8004, 27
+	setvar VAR_0x8004, BATTLE_PIKE_FUNC_LOAD_MON_HELD_ITEMS
 	special CallBattlePikeFunction
 	lockall
 	msgbox BattleFrontier_BattlePikeLobby_Text_25C2E0, MSGBOX_DEFAULT
 	closemessage
-	setvar VAR_0x8004, 2
+	setvar VAR_0x8004, BATTLE_PIKE_FUNC_SET_DATA
 	setvar VAR_0x8005, 1
 	setvar VAR_0x8006, 0
 	special CallBattlePikeFunction
-	setvar VAR_0x8004, 2
+	setvar VAR_0x8004, BATTLE_PIKE_FUNC_SET_DATA
 	setvar VAR_0x8005, 4
 	setvar VAR_0x8006, 0
 	special CallBattlePikeFunction
@@ -68,21 +68,21 @@ BattleFrontier_BattlePikeLobby_EventScript_25B78D:: @ 825B78D
 	msgbox BattleFrontier_BattlePikeLobby_Text_241520, 9
 	setvar VAR_0x8004, 8
 	special CallFrontierUtilFunc
-	setvar VAR_0x8004, 1
+	setvar VAR_0x8004, BATTLE_PIKE_FUNC_GET_DATA
 	setvar VAR_0x8005, 3
 	special CallBattlePikeFunction
 	addvar VAR_RESULT, 1
-	setvar VAR_0x8004, 2
+	setvar VAR_0x8004, BATTLE_PIKE_FUNC_SET_DATA
 	setvar VAR_0x8005, 3
 	copyvar VAR_0x8006, VAR_RESULT
 	special CallBattlePikeFunction
 	special LoadPlayerParty
 	special HealPlayerParty
-	setvar VAR_0x8004, 27
+	setvar VAR_0x8004, BATTLE_PIKE_FUNC_LOAD_MON_HELD_ITEMS
 	special CallBattlePikeFunction
 	message BattleFrontier_BattlePikeLobby_Text_25C1DF
 	waitmessage
-	setvar VAR_0x8004, 8
+	setvar VAR_0x8004, BATTLE_PIKE_FUNC_8
 	setvar VAR_0x8005, 0
 	special CallBattlePikeFunction
 	playse SE_SAVE
@@ -103,15 +103,15 @@ BattleFrontier_BattlePikeLobby_EventScript_25B806:: @ 825B806
 	setvar VAR_0x8005, 2
 	setvar VAR_0x8006, 0
 	special CallFrontierUtilFunc
-	setvar VAR_0x8004, 2
+	setvar VAR_0x8004, BATTLE_PIKE_FUNC_SET_DATA
 	setvar VAR_0x8005, 4
 	setvar VAR_0x8006, 0
 	special CallBattlePikeFunction
 	special LoadPlayerParty
 	special HealPlayerParty
-	setvar VAR_0x8004, 27
+	setvar VAR_0x8004, BATTLE_PIKE_FUNC_LOAD_MON_HELD_ITEMS
 	special CallBattlePikeFunction
-	setvar VAR_0x8004, 8
+	setvar VAR_0x8004, BATTLE_PIKE_FUNC_8
 	setvar VAR_0x8005, 0
 	special CallBattlePikeFunction
 	playse SE_SAVE
@@ -176,17 +176,17 @@ BattleFrontier_BattlePikeLobby_EventScript_25B95C:: @ 825B95C
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 4
 	special CallFrontierUtilFunc
-	setvar VAR_0x8004, 28
+	setvar VAR_0x8004, BATTLE_PIKE_FUNC_INIT_CHALLENGE
 	special CallBattlePikeFunction
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 0
 	setvar VAR_0x8006, 1
 	special CallFrontierUtilFunc
-	setvar VAR_0x8004, 2
+	setvar VAR_0x8004, BATTLE_PIKE_FUNC_SET_DATA
 	setvar VAR_0x8005, 4
 	setvar VAR_0x8006, 1
 	special CallBattlePikeFunction
-	setvar VAR_0x8004, 26
+	setvar VAR_0x8004, BATTLE_PIKE_FUNC_SAVE_MON_HELD_ITEMS
 	special CallBattlePikeFunction
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 3
@@ -197,7 +197,7 @@ BattleFrontier_BattlePikeLobby_EventScript_25B95C:: @ 825B95C
 	delay 2
 	call Common_EventScript_SaveGame
 	setvar VAR_TEMP_0, 255
-	setvar VAR_0x8004, 26
+	setvar VAR_0x8004, BATTLE_PIKE_FUNC_SAVE_MON_HELD_ITEMS
 	special CallBattlePikeFunction
 	compare VAR_RESULT, 0
 	goto_if_eq BattleFrontier_BattlePikeLobby_EventScript_25BA5C

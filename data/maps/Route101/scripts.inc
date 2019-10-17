@@ -4,7 +4,7 @@ Route101_MapScripts:: @ 81EBCBA
 	.byte 0
 
 Route101_OnTransition: @ 81EBCC5
-	call Route101_EventScript_2720AD
+	call ProfBirch_EventScript_UpdateLocation
 	end
 
 Route101_MapScript2_1EBCCB: @ 81EBCCB
@@ -30,7 +30,7 @@ Route101_EventScript_1EBCDE:: @ 81EBCDE
 	applymovement 4, Route101_Movement_1EBD96
 	applymovement 2, Route101_Movement_1EBDC8
 	waitmovement 0
-	applymovement 2, Common_Movement_WalkInPlaceRight
+	applymovement 2, Common_Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	applymovement 4, Route101_Movement_1EBDBD
 	applymovement 2, Route101_Movement_1EBDEF
@@ -223,7 +223,7 @@ Route101_EventScript_1EBE16:: @ 81EBE16
 	fadescreen 1
 	removeobject 4
 	setobjectxy EVENT_OBJ_ID_PLAYER, 6, 13
-	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceLeft
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceFastestLeft
 	waitmovement 0
 	special ChooseStarter
 	waitstate

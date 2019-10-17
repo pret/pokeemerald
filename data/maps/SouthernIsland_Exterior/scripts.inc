@@ -14,7 +14,7 @@ SouthernIsland_Exterior_EventScript_2429D2:: @ 82429D2
 	goto_if_eq SouthernIsland_Exterior_EventScript_242A17
 	msgbox EventTicket_Text_SailHome, MSGBOX_DEFAULT
 	closemessage
-	applymovement VAR_LAST_TALKED, Common_Movement_WalkInPlaceDown
+	applymovement VAR_LAST_TALKED, Common_Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	delay 30
 	hideobjectat 1, MAP_SOUTHERN_ISLAND_EXTERIOR

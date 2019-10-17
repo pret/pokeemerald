@@ -51,7 +51,7 @@ Route104_EventScript_1ECCB3:: @ 81ECCB3
 	setflag FLAG_HIDE_RUSBORO_CITY_RIVAL
 	setvar VAR_RUSTBORO_CITY_STATE, 8
 	setvar VAR_ROUTE104_STATE, 2
-	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceUp
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	delay 10
 	addobject 34

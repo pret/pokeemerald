@@ -61,11 +61,11 @@ SlateportCity_EventScript_1DCD1C:: @ 81DCD1C
 	waitmovement 0
 	msgbox SlateportCity_Text_1DF032, MSGBOX_DEFAULT
 	closemessage
-	applymovement 35, Common_Movement_WalkInPlaceLeft
+	applymovement 35, Common_Movement_WalkInPlaceFastestLeft
 	waitmovement 0
 	delay 60
 	msgbox SlateportCity_Text_1DF0FE, MSGBOX_DEFAULT
-	applymovement 35, Common_Movement_WalkInPlaceRight
+	applymovement 35, Common_Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	msgbox SlateportCity_Text_1DF12B, MSGBOX_DEFAULT
 	closemessage
@@ -563,10 +563,10 @@ SlateportCity_EventScript_1DD1F8:: @ 81DD1F8
 	msgbox SlateportCity_Text_1DE502, MSGBOX_DEFAULT
 	msgbox SlateportCity_Text_1DE54A, MSGBOX_DEFAULT
 	closemessage
-	applymovement 10, Common_Movement_WalkInPlaceRight
+	applymovement 10, Common_Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	delay 10
-	applymovement 9, Common_Movement_WalkInPlaceDown
+	applymovement 9, Common_Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	delay 25
 	applymovement 11, SlateportCity_Movement_1DD33C
@@ -577,18 +577,18 @@ SlateportCity_EventScript_1DD1F8:: @ 81DD1F8
 	removeobject 10
 	removeobject 9
 	msgbox SlateportCity_Text_1DE5F7, MSGBOX_DEFAULT
-	applymovement 11, Common_Movement_WalkInPlaceUp
+	applymovement 11, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	msgbox SlateportCity_Text_1DE64F, MSGBOX_DEFAULT
 	playbgm MUS_AQA_0, 0
 	msgbox SlateportCity_Text_1DE724, MSGBOX_DEFAULT
-	applymovement 6, Common_Movement_WalkInPlaceLeft
-	applymovement 1, Common_Movement_WalkInPlaceLeft
+	applymovement 6, Common_Movement_WalkInPlaceFastestLeft
+	applymovement 1, Common_Movement_WalkInPlaceFastestLeft
 	applymovement 7, SlateportCity_Movement_1DD309
-	applymovement 3, SlateportCity_Movement_272596
+	applymovement 3, Common_Movement_QuestionMark
 	applymovement 2, SlateportCity_Movement_1DD311
 	waitmovement 0
-	applymovement 11, Common_Movement_WalkInPlaceDown
+	applymovement 11, Common_Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	msgbox SlateportCity_Text_1DE7F7, MSGBOX_DEFAULT
 	playse SE_PIN
@@ -596,7 +596,7 @@ SlateportCity_EventScript_1DD1F8:: @ 81DD1F8
 	waitmovement 0
 	applymovement 11, Common_Movement_Delay48
 	waitmovement 0
-	applymovement 11, Common_Movement_WalkInPlaceUp
+	applymovement 11, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	msgbox SlateportCity_Text_1DE860, MSGBOX_DEFAULT
 	msgbox SlateportCity_Text_1DE8A0, MSGBOX_DEFAULT

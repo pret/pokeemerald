@@ -53,7 +53,7 @@ DewfordTown_Hall_EventScript_1FD547:: @ 81FD547
 	call DewfordTown_Hall_EventScript_271E8B
 	msgbox DewfordTown_Hall_Text_1FDA5C, MSGBOX_DEFAULT
 	closemessage
-	applymovement 4, Common_Movement_WalkInPlaceUp
+	applymovement 4, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	release
 	end
@@ -64,7 +64,7 @@ DewfordTown_Hall_EventScript_1FD563:: @ 81FD563
 	call DewfordTown_Hall_EventScript_271E8B
 	msgbox DewfordTown_Hall_Text_1FDA99, MSGBOX_DEFAULT
 	closemessage
-	applymovement 5, Common_Movement_WalkInPlaceUp
+	applymovement 5, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	release
 	end
@@ -200,7 +200,7 @@ DewfordTown_Hall_EventScript_1FD73A:: @ 81FD73A
 DewfordTown_Hall_EventScript_1FD75B:: @ 81FD75B
 	compare VAR_FACING, DIR_EAST
 	goto_if_eq DewfordTown_Hall_EventScript_1FD739
-	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceRight
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	return
 
@@ -224,19 +224,19 @@ DewfordTown_Hall_EventScript_1FD793:: @ 81FD793
 	return
 
 DewfordTown_Hall_EventScript_1FD7AA:: @ 81FD7AA
-	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceUp
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	return
 
 DewfordTown_Hall_EventScript_1FD7B5:: @ 81FD7B5
-	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceDown
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	return
 
 DewfordTown_Hall_EventScript_1FD7C0:: @ 81FD7C0
 	compare VAR_FACING, DIR_WEST
 	goto_if_eq DewfordTown_Hall_EventScript_1FD739
-	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceLeft
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceFastestLeft
 	waitmovement 0
 	return
 

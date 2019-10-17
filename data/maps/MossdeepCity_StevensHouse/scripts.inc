@@ -28,7 +28,7 @@ MossdeepCity_StevensHouse_MapScript2_2227C0: @ 82227C0
 
 MossdeepCity_StevensHouse_EventScript_2227CA:: @ 82227CA
 	lockall
-	applymovement 1, Common_Movement_WalkInPlaceLeft
+	applymovement 1, Common_Movement_WalkInPlaceFastestLeft
 	waitmovement 0
 	playse SE_PIN
 	applymovement 1, Common_Movement_ExclamationMark

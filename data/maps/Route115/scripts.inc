@@ -13,7 +13,7 @@ Route115_MapScript1_1F2930: @ 81F2930
 
 Route115_OnTransition: @ 81F2947
 	compare VAR_SHOULD_END_UNUSUAL_WEATHER, 1
-	call_if_eq Route115_EventScript_273D13
+	call_if_eq UnusualWeather_EventScript_HideMapNamePopup
 	compare VAR_UNUSUAL_WEATHER_LOCATION, UNUSUAL_WEATHER_ROUTE_115_WEST
 	call_if_eq UnusualWeather_StartGroudonWeather
 	compare VAR_UNUSUAL_WEATHER_LOCATION, UNUSUAL_WEATHER_ROUTE_115_EAST

@@ -357,9 +357,9 @@ LittlerootTown_Movement_1E8118: @ 81E8118
 
 LittlerootTown_EventScript_1E811F:: @ 81E811F
 	lockall
-	applymovement 1, Common_Movement_WalkInPlaceRight
+	applymovement 1, Common_Movement_WalkInPlaceFastestRight
 	waitmovement 0
-	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceLeft
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceFastestLeft
 	waitmovement 0
 	special GetPlayerBigGuyGirlString
 	msgbox LittlerootTown_Text_1E8C3A, MSGBOX_DEFAULT
@@ -490,12 +490,12 @@ LittlerootTown_EventScript_1E828C:: @ 81E828C
 	return
 
 LittlerootTown_EventScript_1E8297:: @ 81E8297
-	applymovement 4, Common_Movement_WalkInPlaceRight
+	applymovement 4, Common_Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	return
 
 LittlerootTown_EventScript_1E82A2:: @ 81E82A2
-	applymovement 4, Common_Movement_WalkInPlaceLeft
+	applymovement 4, Common_Movement_WalkInPlaceFastestLeft
 	waitmovement 0
 	return
 
@@ -530,70 +530,70 @@ LittlerootTown_EventScript_1E82F0:: @ 81E82F0
 	return
 
 LittlerootTown_EventScript_1E8333:: @ 81E8333
-	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceDown
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	applymovement 4, LittlerootTown_Movement_1E85D1
 	waitmovement 0
 	return
 
 LittlerootTown_EventScript_1E8348:: @ 81E8348
-	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceDown
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	applymovement 4, LittlerootTown_Movement_1E85D8
 	waitmovement 0
 	return
 
 LittlerootTown_EventScript_1E835D:: @ 81E835D
-	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceLeft
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceFastestLeft
 	waitmovement 0
 	applymovement 4, LittlerootTown_Movement_1E85DF
 	waitmovement 0
 	return
 
 LittlerootTown_EventScript_1E8372:: @ 81E8372
-	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceLeft
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceFastestLeft
 	waitmovement 0
 	applymovement 4, LittlerootTown_Movement_1E85E4
 	waitmovement 0
 	return
 
 LittlerootTown_EventScript_1E8387:: @ 81E8387
-	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceLeft
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceFastestLeft
 	waitmovement 0
 	applymovement 4, LittlerootTown_Movement_1E85EA
 	waitmovement 0
 	return
 
 LittlerootTown_EventScript_1E839C:: @ 81E839C
-	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceLeft
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceFastestLeft
 	waitmovement 0
 	applymovement 4, LittlerootTown_Movement_1E85ED
 	waitmovement 0
 	return
 
 LittlerootTown_EventScript_1E83B1:: @ 81E83B1
-	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceRight
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	applymovement 4, LittlerootTown_Movement_1E85F1
 	waitmovement 0
 	return
 
 LittlerootTown_EventScript_1E83C6:: @ 81E83C6
-	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceRight
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	applymovement 4, LittlerootTown_Movement_1E85F5
 	waitmovement 0
 	return
 
 LittlerootTown_EventScript_1E83DB:: @ 81E83DB
-	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceRight
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	applymovement 4, LittlerootTown_Movement_1E85F8
 	waitmovement 0
 	return
 
 LittlerootTown_EventScript_1E83F0:: @ 81E83F0
-	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceRight
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	applymovement 4, LittlerootTown_Movement_1E85FE
 	waitmovement 0
@@ -894,7 +894,7 @@ LittlerootTown_EventScript_1E863D:: @ 81E863D
 	compare VAR_RESULT, FEMALE
 	call_if_eq LittlerootTown_EventScript_1E828C
 	call LittlerootTown_EventScript_1E8693
-	applymovement 4, Common_Movement_WalkInPlaceUp
+	applymovement 4, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	opendoor VAR_0x8009, VAR_0x800A
 	waitdooranim

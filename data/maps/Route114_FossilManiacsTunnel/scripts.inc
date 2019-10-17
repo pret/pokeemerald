@@ -23,8 +23,8 @@ Route114_FossilManiacsTunnel_EventScript_22AF53:: @ 822AF53
 
 Route114_FossilManiacsTunnel_EventScript_22AF66:: @ 822AF66
 	lockall
-	applymovement 1, Common_Movement_WalkInPlaceUp
-	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceDown
+	applymovement 1, Common_Movement_WalkInPlaceFastestUp
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	msgbox Route114_FossilManiacsTunnel_Text_22B1F7, MSGBOX_DEFAULT
 	setvar VAR_FOSSIL_MANIAC_STATE, 2

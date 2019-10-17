@@ -38,9 +38,9 @@ BattleFrontier_ReceptionGate_EventScript_266229:: @ 8266229
 	msgbox BattleFrontier_ReceptionGate_Text_2666C6, MSGBOX_DEFAULT
 	msgbox BattleFrontier_ReceptionGate_Text_266703, MSGBOX_DEFAULT
 	closemessage
-	applymovement 1, Common_Movement_WalkInPlaceUp
-	applymovement 2, Common_Movement_WalkInPlaceUp
-	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceUp
+	applymovement 1, Common_Movement_WalkInPlaceFastestUp
+	applymovement 2, Common_Movement_WalkInPlaceFastestUp
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	playse SE_PIN
 	applymovement 1, Common_Movement_ExclamationMark

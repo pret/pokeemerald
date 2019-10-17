@@ -57,7 +57,7 @@ u8 GetTrainerHillTrainerFrontSpriteId(u16 trainerId);
 void InitTrainerHillBattleStruct(void);
 void FreeTrainerHillBattleStruct(void);
 void CopyTrainerHillTrainerText(u8 which, u16 trainerId);
-bool8 sub_81D5C18(void);
+bool8 InTrainerHillChallenge(void);
 void nullsub_129(void);
 void PrintOnTrainerHillRecordsWindow(void);
 void sub_81D5DF8(void);

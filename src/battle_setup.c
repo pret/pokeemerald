@@ -1273,7 +1273,7 @@ void BattleSetup_StartTrainerBattle(void)
 
         MarkApproachingPyramidTrainersAsBattled();
     }
-    else if (sub_81D5C18())
+    else if (InTrainerHillChallenge())
     {
         gBattleTypeFlags |= BATTLE_TYPE_TRAINER_HILL;
 
@@ -1291,7 +1291,7 @@ void BattleSetup_StartTrainerBattle(void)
     gUnknown_03006080 = 0;
     gMain.savedCallback = CB2_EndTrainerBattle;
 
-    if (InBattlePyramid() || sub_81D5C18())
+    if (InBattlePyramid() || InTrainerHillChallenge())
         sub_80B0828();
     else
         DoTrainerBattle();
@@ -1307,7 +1307,7 @@ static void CB2_EndTrainerBattle(void)
     }
     else if (IsPlayerDefeated(gBattleOutcome) == TRUE)
     {
-        if (InBattlePyramid() || sub_81D5C18())
+        if (InBattlePyramid() || InTrainerHillChallenge())
             SetMainCallback2(CB2_ReturnToFieldContinueScriptPlayMapMusic);
         else
             SetMainCallback2(CB2_WhiteOut);
@@ -1315,7 +1315,7 @@ static void CB2_EndTrainerBattle(void)
     else
     {
         SetMainCallback2(CB2_ReturnToFieldContinueScriptPlayMapMusic);
-        if (!InBattlePyramid() && !sub_81D5C18())
+        if (!InBattlePyramid() && !InTrainerHillChallenge())
         {
             RegisterTrainerInMatchCall();
             SetBattledTrainersFlags();
@@ -1361,7 +1361,7 @@ void ShowTrainerIntroSpeech(void)
 
         sub_80982B8();
     }
-    else if (sub_81D5C18())
+    else if (InTrainerHillChallenge())
     {
         if (gNoOfApproachingTrainers == 0 || gNoOfApproachingTrainers == 1)
             CopyTrainerHillTrainerText(2, LocalIdToHillTrainerId(gSpecialVar_LastTalked));

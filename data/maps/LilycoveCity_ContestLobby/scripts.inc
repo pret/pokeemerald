@@ -9,7 +9,7 @@ LilycoveCity_ContestLobby_OnTransition: @ 821A21C
 	end
 
 LilycoveCity_ContestLobby_EventScript_21A227:: @ 821A227
-	getpricereduction 4
+	getpricereduction POKENEWS_BLENDMASTER
 	compare VAR_RESULT, 1
 	goto_if_eq LilycoveCity_ContestLobby_EventScript_21A23C
 	clearflag FLAG_HIDE_LILYCOVE_CONTEST_HALL_POKEBLOCK_EXPERT

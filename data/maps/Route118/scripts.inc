@@ -7,7 +7,7 @@ Route118_MapScripts:: @ 81F3DBC
 Route118_OnTransition: @ 81F3DCC
 	call Route118_EventScript_28CCC7
 	compare VAR_SHOULD_END_UNUSUAL_WEATHER, 1
-	call_if_eq Route118_EventScript_273D13
+	call_if_eq UnusualWeather_EventScript_HideMapNamePopup
 	compare VAR_UNUSUAL_WEATHER_LOCATION, UNUSUAL_WEATHER_ROUTE_118_EAST
 	call_if_eq UnusualWeather_StartGroudonWeather
 	compare VAR_UNUSUAL_WEATHER_LOCATION, UNUSUAL_WEATHER_ROUTE_118_WEST

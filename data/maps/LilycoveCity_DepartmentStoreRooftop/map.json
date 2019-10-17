@@ -63,7 +63,7 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "LilycoveCity_DepartmentStoreRooftop_EventScript_2C8186",
+      "script": "LilycoveCity_DepartmentStoreRooftop_EventScript_SubstituteTutor",
       "flag": "0"
     }
   ],

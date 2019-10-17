@@ -7,7 +7,7 @@ Route116_MapScripts:: @ 81F2C0C
 Route116_OnTransition: @ 81F2C1C
 	call_if_set FLAG_RECOVERED_DEVON_GOODS, Route116_EventScript_1F2C47
 	compare VAR_SHOULD_END_UNUSUAL_WEATHER, 1
-	call_if_eq Route116_EventScript_273D13
+	call_if_eq UnusualWeather_EventScript_HideMapNamePopup
 	compare VAR_UNUSUAL_WEATHER_LOCATION, UNUSUAL_WEATHER_ROUTE_116_NORTH
 	call_if_eq UnusualWeather_StartGroudonWeather
 	compare VAR_UNUSUAL_WEATHER_LOCATION, UNUSUAL_WEATHER_ROUTE_116_SOUTH
@@ -151,8 +151,8 @@ Route116_EventScript_1F2D84:: @ 81F2D84
 
 Route116_EventScript_1F2D95:: @ 81F2D95
 	lockall
-	applymovement 11, Common_Movement_WalkInPlaceRight
-	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceLeft
+	applymovement 11, Common_Movement_WalkInPlaceFastestRight
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceFastestLeft
 	waitmovement 0
 	msgbox Route116_Text_1F309D, MSGBOX_DEFAULT
 	setvar VAR_ROUTE116_STATE, 2

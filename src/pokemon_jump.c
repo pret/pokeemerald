@@ -4093,7 +4093,7 @@ static const struct SpriteTemplate gUnknown_082FE730[] =
     {
         .tileTag = 0x2000,
         .paletteTag = 0x2000,
-        .oam = &gUnknown_08524914,
+        .oam = &gOamData_AffineOff_ObjNormal_32x32,
         .anims = sSpriteAnimTable_82FE718,
         .images = NULL,
         .affineAnims = gDummySpriteAffineAnimTable,

@@ -219,8 +219,8 @@ SootopolisCity_EventScript_1E5946:: @ 81E5946
 	setvar VAR_0x8004, 0
 	special Script_DoRayquazaScene
 	waitstate
-	applymovement 10, Common_Movement_WalkInPlaceLeft
-	applymovement 9, Common_Movement_WalkInPlaceRight
+	applymovement 10, Common_Movement_WalkInPlaceFastestLeft
+	applymovement 9, Common_Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	delay 60
 	waitse
@@ -319,8 +319,8 @@ SootopolisCity_EventScript_1E5A82:: @ 81E5A82
 	setvar VAR_0x8004, 0
 	special Script_DoRayquazaScene
 	waitstate
-	applymovement 10, Common_Movement_WalkInPlaceLeft
-	applymovement 9, Common_Movement_WalkInPlaceRight
+	applymovement 10, Common_Movement_WalkInPlaceFastestLeft
+	applymovement 9, Common_Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	delay 60
 	waitse

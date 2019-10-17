@@ -36,7 +36,7 @@ SkyPillar_Outside_EventScript_239304:: @ 8239304
 	lockall
 	applymovement 1, SkyPillar_Outside_Movement_2393D3
 	waitmovement 0
-	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceLeft
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceFastestLeft
 	waitmovement 0
 	msgbox SkyPillar_Outside_Text_239416, MSGBOX_DEFAULT
 	closemessage
@@ -60,13 +60,13 @@ SkyPillar_Outside_EventScript_239304:: @ 8239304
 	special ShakeCamera
 	waitstate
 	delay 20
-	applymovement 1, Common_Movement_WalkInPlaceLeft
+	applymovement 1, Common_Movement_WalkInPlaceFastestLeft
 	waitmovement 0
 	delay 10
-	applymovement 1, Common_Movement_WalkInPlaceRight
+	applymovement 1, Common_Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	delay 20
-	applymovement 1, Common_Movement_WalkInPlaceDown
+	applymovement 1, Common_Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	delay 30
 	msgbox SkyPillar_Outside_Text_23950C, MSGBOX_DEFAULT

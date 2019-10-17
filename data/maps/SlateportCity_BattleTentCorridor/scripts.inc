@@ -44,7 +44,7 @@ SlateportCity_BattleTentCorridor_EventScript_208E65:: @ 8208E65
 SlateportCity_BattleTentCorridor_EventScript_208EB4:: @ 8208EB4
 	msgbox SlateportCity_BattleTentCorridor_Text_25AB96, MSGBOX_DEFAULT
 	closemessage
-	applymovement 1, Common_Movement_WalkInPlaceUp
+	applymovement 1, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	opendoor 2, 1
 	waitdooranim
