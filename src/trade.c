@@ -1439,8 +1439,8 @@ static void TradeMenuProcessInput_SelectedMon(void)
             QueueAction(QUEUE_DELAY_MSG, QUEUE_MON_CANT_BE_TRADED);
             sTradeMenuData->tradeMenuFunc = TRADEMENUFUNC_REDRAW_MAIN_MENU;
             break;
-        case CANT_TRADE_EGG:
-        case CANT_TRADE_EGG2:
+        case CANT_TRADE_EGG_YET:
+        case CANT_TRADE_EGG_YET2:
             QueueAction(QUEUE_DELAY_MSG, QUEUE_EGG_CANT_BE_TRADED);
             sTradeMenuData->tradeMenuFunc = TRADEMENUFUNC_REDRAW_MAIN_MENU;
             break;
@@ -2352,7 +2352,7 @@ static u32 CanTradeSelectedMon(struct Pokemon *playerParty, int partyCount, int 
     if (!IsNationalPokedexEnabled())
     {
         if (species2[monIdx] == SPECIES_EGG)
-            return CANT_TRADE_EGG;
+            return CANT_TRADE_EGG_YET;
 
         if (!IsSpeciesInHoennDex(species2[monIdx]))
             return CANT_TRADE_NATIONAL;
@@ -2366,7 +2366,7 @@ static u32 CanTradeSelectedMon(struct Pokemon *playerParty, int partyCount, int 
         if (!(player->progressFlagsCopy & 0xF))
         {
             if (species2[monIdx] == SPECIES_EGG)
-                return CANT_TRADE_EGG2;
+                return CANT_TRADE_EGG_YET2;
 
             if (!IsSpeciesInHoennDex(species2[monIdx]))
                 return CANT_TRADE_INVALID_MON;
@@ -2542,8 +2542,10 @@ int CanRegisterMonForTradingBoard(struct UnkLinkRfuStruct_02022B14Substruct rfuP
 }
 
 // r6/r7 flip. Ugh.
+// Spin Trade wasnt fully implemented, but this checks if a mon would be valid to Spin Trade
+// Unlike later generations, this version of Spin Trade isnt only for Eggs
 #ifdef NONMATCHING
-int CanTradeSelectedPartyMenuMon(struct Pokemon *mon, u16 monIdx)
+int CanSpinTradeMon(struct Pokemon *mon, u16 monIdx)
 {
     int i, version, versions, canTradeAnyMon, numMonsLeft;
     int speciesArray[PARTY_SIZE];
@@ -2592,7 +2594,7 @@ int CanTradeSelectedPartyMenuMon(struct Pokemon *mon, u16 monIdx)
             return CANT_TRADE_NATIONAL;
 
         if (speciesArray[monIdx] == SPECIES_NONE)
-            return CANT_TRADE_EGG;
+            return CANT_TRADE_EGG_YET;
     }
 
     numMonsLeft = 0;
@@ -2611,7 +2613,7 @@ int CanTradeSelectedPartyMenuMon(struct Pokemon *mon, u16 monIdx)
 }
 #else
 NAKED
-int CanTradeSelectedPartyMenuMon(struct Pokemon *mon, u16 a1)
+int CanSpinTradeMon(struct Pokemon *mon, u16 a1)
 {
     asm_unified("push {r4-r7,lr}\n\
 	mov r7, r8\n\

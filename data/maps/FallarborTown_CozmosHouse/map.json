@@ -1,6 +1,6 @@
 {
-  "id": "MAP_FALLARBOR_TOWN_HOUSE1",
-  "name": "FallarborTown_House1",
+  "id": "MAP_FALLARBOR_TOWN_COZMOS_HOUSE",
+  "name": "FallarborTown_CozmosHouse",
   "layout": "LAYOUT_HOUSE1",
   "music": "MUS_TONEKUSA",
   "region_map_section": "MAPSEC_FALLARBOR_TOWN",
@@ -24,8 +24,8 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "FallarborTown_House1_EventScript_200F13",
-      "flag": "FLAG_HIDE_FALLARBOR_HOUSE_1_PROF_COZMO"
+      "script": "FallarborTown_CozmosHouse_EventScript_200F13",
+      "flag": "FLAG_HIDE_FALLARBOR_HOUSE_PROF_COZMO"
     },
     {
       "graphics_id": "EVENT_OBJ_GFX_WOMAN_2",
@@ -37,7 +37,7 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "FallarborTown_House1_EventScript_200FBC",
+      "script": "FallarborTown_CozmosHouse_EventScript_200FBC",
       "flag": "0"
     }
   ],

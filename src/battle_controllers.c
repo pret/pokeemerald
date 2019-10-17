@@ -1175,13 +1175,13 @@ void BtlController_EmitChooseItem(u8 bufferId, u8 *arg1)
     PrepareBufferDataTransfer(bufferId, sBattleBuffersTransferData, 4);
 }
 
-void BtlController_EmitChoosePokemon(u8 bufferId, u8 caseId, u8 arg2, u8 abilityId, u8 *arg4)
+void BtlController_EmitChoosePokemon(u8 bufferId, u8 caseId, u8 slotId, u8 abilityId, u8 *arg4)
 {
     s32 i;
 
     sBattleBuffersTransferData[0] = CONTROLLER_CHOOSEPOKEMON;
     sBattleBuffersTransferData[1] = caseId;
-    sBattleBuffersTransferData[2] = arg2;
+    sBattleBuffersTransferData[2] = slotId;
     sBattleBuffersTransferData[3] = abilityId;
     for (i = 0; i < 3; i++)
         sBattleBuffersTransferData[4 + i] = arg4[i];
@@ -1311,12 +1311,12 @@ void BtlController_EmitTwoReturnValues(u8 bufferId, u8 arg1, u16 arg2)
     PrepareBufferDataTransfer(bufferId, sBattleBuffersTransferData, 4);
 }
 
-void BtlController_EmitChosenMonReturnValue(u8 bufferId, u8 b, u8 *c)
+void BtlController_EmitChosenMonReturnValue(u8 bufferId, u8 partyId, u8 *c)
 {
     s32 i;
 
     sBattleBuffersTransferData[0] = CONTROLLER_CHOSENMONRETURNVALUE;
-    sBattleBuffersTransferData[1] = b;
+    sBattleBuffersTransferData[1] = partyId;
     for (i = 0; i < 3; i++)
         sBattleBuffersTransferData[2 + i] = c[i];
     PrepareBufferDataTransfer(bufferId, sBattleBuffersTransferData, 5);

@@ -13,7 +13,7 @@ SlateportCity_House1_EventScript_209AA5:: @ 8209AA5
 
 SlateportCity_House1_EventScript_209AC6:: @ 8209AC6
 	msgbox SlateportCity_House1_Text_209BFF, MSGBOX_DEFAULT
-	special sub_81B94B0
+	special ChoosePartyMon
 	waitstate
 	compare VAR_0x8004, 255
 	goto_if_ne SlateportCity_House1_EventScript_209AF3

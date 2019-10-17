@@ -170,7 +170,7 @@ gSpecials:: @ 81DBA64
 	def_special ChooseStarter
 	def_special StartWallyTutorialBattle
 	def_special ChangePokemonNickname
-	def_special sub_81B94B0
+	def_special ChoosePartyMon
 	def_special GetFirstFreePokeblockSlot
 	def_special DoBerryBlending
 	def_special PlayRoulette
@@ -230,11 +230,11 @@ gSpecials:: @ 81DBA64
 	def_special SetDeptStoreFloor
 	def_special DoLotteryCornerComputerEffect
 	def_special EndLotteryCornerComputerEffect
-	def_special sub_81B951C
-	def_special sub_81B968C
-	def_special sub_81B9770
-	def_special sub_81B9718
-	def_special sub_81B96D0
+	def_special ChooseMonForMoveRelearner
+	def_special MoveDeleterChooseMoveToForget
+	def_special MoveDeleterForgetMove
+	def_special BufferMoveDeleterNicknameAndMove
+	def_special GetNumMovesSelectedMonHas
 	def_special TeachMoveRelearnerMove
 	def_special GetRecordedCyclingRoadResults
 	def_special Special_BeginCyclingRoadChallenge
@@ -338,7 +338,7 @@ gSpecials:: @ 81DBA64
 	def_special SetRoute123Weather
 	def_special ScriptGetMultiplayerId
 	def_special ScriptGetPartyMonSpecies
-	def_special sub_81B98DC
+	def_special IsSelectedMonEgg
 	def_special TryInitBattleTowerAwardManEventObject
 	def_special MoveOutOfSecretBaseFromOutside
 	def_special LoadPlayerBag
@@ -457,10 +457,10 @@ gSpecials:: @ 81DBA64
 	def_special ShowScrollableMultichoice
 	def_special sub_813A630
 	def_special BufferBattleTowerElevatorFloors
-	def_special sub_81C6A94
+	def_special TryStoreHeldItemsInPyramidBag
 	def_special sub_81C4F24
-	def_special sub_81B95E0
-	def_special sub_81B9620
+	def_special DoBattlePyramidMonsHaveHeldItem
+	def_special BattlePyramidChooseMonHeldItems
 	def_special SetBattleTowerLinkPlayerGfx
 	def_special ShowNatureGirlMessage
 	def_special ShowBattlePointsWindow
@@ -485,7 +485,7 @@ gSpecials:: @ 81DBA64
 	def_special BufferBattleFrontierTutorMoveName
 	def_special CloseBattleFrontierTutorWindow
 	def_special sub_813ADD4
-	def_special OpenPartyMenuForMoveTutor
+	def_special ChooseMonForMoveTutor
 	def_special GetBattleFrontierTutorMoveIndex
 	def_special sub_813AF48
 	def_special DoDeoxysRockInteraction
@@ -529,7 +529,7 @@ gSpecials:: @ 81DBA64
 	def_special ShowTrainerHillRecords
 	def_special sub_80B4808
 	def_special ResetHealLocationFromDewford
-	def_special sub_81B9918
+	def_special IsLastMonThatKnowsSurf
 	def_special CountPartyAliveNonEggMons
 	def_special TryPrepareSecondApproachingTrainer
 	def_special RemoveRecordsWindow

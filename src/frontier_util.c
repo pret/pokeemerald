@@ -884,7 +884,7 @@ static void sub_81A1AD4(void)
 {
     s32 i;
 
-    sub_81B8558();
+    ClearSelectedPartyOrder();
     for (i = 0; i < gSpecialVar_0x8005; i++)
         gSelectedOrderFromParty[i] = gSaveBlock2Ptr->frontier.selectedPartyMons[i];
     ReducePlayerPartyToSelectedMons();

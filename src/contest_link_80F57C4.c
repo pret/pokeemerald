@@ -1935,14 +1935,16 @@ static void sub_80F7ED0(int windowId, u8 *str, int arg2)
 
 void sub_80F7F30(void)
 {
-    u8 result = sub_80DAE0C(&gPlayerParty[gContestMonPartyIndex]);
-    if (result)
+    u8 eligibility = GetContestEntryEligibility(&gPlayerParty[gContestMonPartyIndex]);
+
+    // Nonzero eligibility can still be non-eligibile, if mon is fainted or egg
+    if (eligibility)
     {
         sub_80DAB8C(gSpecialVar_ContestCategory, gSpecialVar_ContestRank);
         sub_80DB09C(gSpecialVar_ContestCategory);
     }
 
-    gSpecialVar_Result = result;
+    gSpecialVar_Result = eligibility;
 }
 
 u16 sub_80F7F7C(void)

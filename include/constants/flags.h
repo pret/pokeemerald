@@ -883,7 +883,7 @@
 #define FLAG_HIDE_LILCOVE_MOTEL_GAME_DESIGNERS                      0x39D
 #define FLAG_HIDE_MT_CHIMNEY_TEAM_AQUA                              0x39E
 #define FLAG_HIDE_MT_CHIMNEY_TEAM_MAGMA                             0x39F
-#define FLAG_HIDE_FALLARBOR_HOUSE_1_PROF_COZMO                      0x3A0
+#define FLAG_HIDE_FALLARBOR_HOUSE_PROF_COZMO                        0x3A0
 #define FLAG_HIDE_LAVARIDGE_TOWN_RIVAL_1                            0x3A1
 #define FLAG_HIDE_LAVARIDGE_TOWN_RIVAL_2                            0x3A2
 #define FLAG_HIDE_RUSTURF_TUNNEL_ROCK_1                             0x3A3
@@ -1552,6 +1552,6 @@
 #define FLAG_SPECIAL_FLAG_0x4001                                   0x4001
 #define FLAG_SPECIAL_FLAG_0x4002                                   0x4002
 #define FLAG_SPECIAL_FLAG_0x4003                                   0x4003
-#define FLAG_SPECIAL_FLAG_0x4004                                   0x4004
+#define FLAG_STORING_ITEMS_IN_PYRAMID_BAG                          0x4004
 
 #endif // GUARD_CONSTANTS_FLAGS_H

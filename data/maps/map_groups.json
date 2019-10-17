@@ -132,8 +132,8 @@
     "FallarborTown_BattleTentBattleRoom",
     "FallarborTown_PokemonCenter_1F",
     "FallarborTown_PokemonCenter_2F",
-    "FallarborTown_House1",
-    "FallarborTown_House2"
+    "FallarborTown_CozmosHouse",
+    "FallarborTown_MoveRelearnersHouse"
   ],
   "gMapGroup6": [
     "VerdanturfTown_BattleTentLobby",

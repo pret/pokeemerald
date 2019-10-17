@@ -462,7 +462,7 @@ void OpenPokeblockCase(u8 caseId, void (*callback)(void))
 
 void OpenPokeblockCaseInBattle(void)
 {
-    OpenPokeblockCase(PBLOCK_CASE_BATTLE, SetCB2ToReshowScreenAfterMenu2);
+    OpenPokeblockCase(PBLOCK_CASE_BATTLE, CB2_SetUpReshowBattleScreenAfterMenu2);
 }
 
 void OpenPokeblockCaseOnFeeder(void)

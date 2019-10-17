@@ -39,7 +39,6 @@
 #include "script_menu.h"
 #include "script_movement.h"
 #include "script_pokemon_80F8.h"
-#include "script_pokemon_81B9.h"
 #include "shop.h"
 #include "slot_machine.h"
 #include "sound.h"
@@ -1938,7 +1937,7 @@ bool8 ScrCmd_getpricereduction(struct ScriptContext *ctx)
 
 bool8 ScrCmd_choosecontestmon(struct ScriptContext *ctx)
 {
-    sub_81B9404();
+    ChooseContestMon();
     ScriptContext1_Stop();
     return TRUE;
 }
