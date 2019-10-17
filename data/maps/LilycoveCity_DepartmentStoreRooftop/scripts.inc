@@ -3,7 +3,7 @@ LilycoveCity_DepartmentStoreRooftop_MapScripts:: @ 8220207
 	.byte 0
 
 LilycoveCity_DepartmentStoreRooftop_OnTransition: @ 822020D
-	getpricereduction 3
+	getpricereduction POKENEWS_LILYCOVE
 	compare VAR_RESULT, 1
 	call_if_eq LilycoveCity_DepartmentStoreRooftop_EventScript_220227
 	compare VAR_RESULT, 0
@@ -51,7 +51,7 @@ LilycoveCity_DepartmentStoreRooftop_PokemartDecor_220248: @ 8220248
 LilycoveCity_DepartmentStoreRooftop_EventScript_220268:: @ 8220268
 	lock
 	faceplayer
-	getpricereduction 3
+	getpricereduction POKENEWS_LILYCOVE
 	compare VAR_RESULT, 1
 	call_if_eq LilycoveCity_DepartmentStoreRooftop_EventScript_220282
 	msgbox LilycoveCity_DepartmentStoreRooftop_Text_220463, MSGBOX_DEFAULT
