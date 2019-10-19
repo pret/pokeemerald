@@ -8,7 +8,7 @@ PacifidlogTown_OnTransition: @ 81EBABC
 	end
 
 PacifidlogTown_MapScript1_1EBAC0: @ 81EBAC0
-	setstepcallback 3
+	setstepcallback STEP_CB_PACIFIDLOG_BRIDGE
 	end
 
 PacifidlogTown_EventScript_1EBAC3:: @ 81EBAC3

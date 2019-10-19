@@ -28,7 +28,7 @@ void sub_80AF80C(u8 metatileBehavior);
 void sub_80AF828(void);
 void sub_80AF838(void);
 void sub_80AF848(void);
-void sub_80AF87C(void);
+void DoMossdeepGymWarp(void);
 void sub_80AF8B8(void);
 void sub_80AF948(void);
 void sub_80AF9F8(void);

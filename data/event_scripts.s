@@ -15,6 +15,7 @@
 #include "constants/field_effects.h"
 #include "constants/field_poison.h"
 #include "constants/field_specials.h"
+#include "constants/field_tasks.h"
 #include "constants/flags.h"
 #include "constants/game_stat.h"
 #include "constants/item.h"
@@ -1250,12 +1251,12 @@ EventScript_RegionMap:: @ 827208F
 	end
 
 Common_EventScript_PlayBrineysBoatMusic:: @ 82720A0
-	setflag FLAG_SPECIAL_FLAG_0x4001
+	setflag FLAG_DONT_TRANSITION_MUSIC
 	playbgm MUS_M_BOAT, 0
 	return
 
 Common_EventScript_StopBrineysBoatMusic:: @ 82720A8
-	clearflag FLAG_SPECIAL_FLAG_0x4001
+	clearflag FLAG_DONT_TRANSITION_MUSIC
 	fadedefaultbgm
 	return
 
@@ -1277,7 +1278,7 @@ Movement_FerryDepart: @ 82721F0
 	walk_right
 	step_end
 
-PetalburgCity_Gym_EventScript_2721F8:: @ 82721F8
+EventScript_HideMrBriney:: @ 82721F8
 	setflag FLAG_HIDE_MR_BRINEY_DEWFORD_TOWN
 	setflag FLAG_HIDE_MR_BRINEY_BOAT_DEWFORD_TOWN
 	setflag FLAG_HIDE_ROUTE_108_MR_BRINEY
