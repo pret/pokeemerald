@@ -114,7 +114,7 @@ TrainerHill_Entrance_EventScript_2681EF:: @ 82681EF
 TrainerHill_Entrance_EventScript_2681FD:: @ 82681FD
 	lock
 	faceplayer
-	setvar VAR_0x8004, TRAINER_HILL_FUNC_10
+	setvar VAR_0x8004, TRAINER_HILL_FUNC_IS_IN
 	special CallTrainerHillFunction
 	compare VAR_RESULT, 0
 	goto_if_eq TrainerHill_Entrance_EventScript_26821F

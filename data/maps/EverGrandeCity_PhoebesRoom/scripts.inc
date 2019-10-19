@@ -1,65 +1,65 @@
 EverGrandeCity_PhoebesRoom_MapScripts:: @ 8228174
-	map_script MAP_SCRIPT_ON_LOAD, EverGrandeCity_PhoebesRoom_MapScript1_2281AA
-	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, EverGrandeCity_PhoebesRoom_MapScript2_228184
-	map_script MAP_SCRIPT_ON_FRAME_TABLE, EverGrandeCity_PhoebesRoom_MapScript2_228193
+	map_script MAP_SCRIPT_ON_LOAD, EverGrandeCity_PhoebesRoom_OnLoad
+	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, EverGrandeCity_PhoebesRoom_OnWarp
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, EverGrandeCity_PhoebesRoom_OnFrame
 	.byte 0
 
-EverGrandeCity_PhoebesRoom_MapScript2_228184: @ 8228184
-	map_script_2 VAR_TEMP_1, 0, EverGrandeCity_PhoebesRoom_EventScript_22818E
+EverGrandeCity_PhoebesRoom_OnWarp: @ 8228184
+	map_script_2 VAR_TEMP_1, 0, EverGrandeCity_PhoebesRoom_EventScript_PlayerTurnNorth
 	.2byte 0
 
-EverGrandeCity_PhoebesRoom_EventScript_22818E:: @ 822818E
+EverGrandeCity_PhoebesRoom_EventScript_PlayerTurnNorth:: @ 822818E
 	turnobject EVENT_OBJ_ID_PLAYER, DIR_NORTH
 	end
 
-EverGrandeCity_PhoebesRoom_MapScript2_228193: @ 8228193
-	map_script_2 VAR_ELITE_4_STATE, 1, EverGrandeCity_PhoebesRoom_EventScript_22819D
+EverGrandeCity_PhoebesRoom_OnFrame: @ 8228193
+	map_script_2 VAR_ELITE_4_STATE, 1, EverGrandeCity_PhoebesRoom_EventScript_WalkInCloseDoor
 	.2byte 0
 
-EverGrandeCity_PhoebesRoom_EventScript_22819D:: @ 822819D
+EverGrandeCity_PhoebesRoom_EventScript_WalkInCloseDoor:: @ 822819D
 	lockall
-	call EverGrandeCity_PhoebesRoom_EventScript_272475
+	call PokemonLeague_EliteFour_EventScript_WalkInCloseDoor
 	setvar VAR_ELITE_4_STATE, 2
 	releaseall
 	end
 
-EverGrandeCity_PhoebesRoom_MapScript1_2281AA: @ 82281AA
-	call_if_set FLAG_DEFEATED_ELITE_4_PHOEBE, EverGrandeCity_PhoebesRoom_EventScript_2281BF
+EverGrandeCity_PhoebesRoom_OnLoad: @ 82281AA
+	call_if_set FLAG_DEFEATED_ELITE_4_PHOEBE, EverGrandeCity_PhoebesRoom_EventScript_ResetAdvanceToNextRoom
 	compare VAR_ELITE_4_STATE, 2
-	call_if_eq EverGrandeCity_PhoebesRoom_EventScript_2281C5
+	call_if_eq EverGrandeCity_PhoebesRoom_EventScript_CloseDoor
 	end
 
-EverGrandeCity_PhoebesRoom_EventScript_2281BF:: @ 82281BF
-	call EverGrandeCity_PhoebesRoom_EventScript_2724BC
+EverGrandeCity_PhoebesRoom_EventScript_ResetAdvanceToNextRoom:: @ 82281BF
+	call PokemonLeague_EliteFour_EventScript_ResetAdvanceToNextRoom
 	return
 
-EverGrandeCity_PhoebesRoom_EventScript_2281C5:: @ 82281C5
-	call EverGrandeCity_PhoebesRoom_EventScript_27255F
+EverGrandeCity_PhoebesRoom_EventScript_CloseDoor:: @ 82281C5
+	call PokemonLeague_EliteFour_EventScript_CloseDoor
 	return
 
-EverGrandeCity_PhoebesRoom_EventScript_2281CB:: @ 82281CB
+EverGrandeCity_PhoebesRoom_EventScript_Phoebe:: @ 82281CB
 	lock
 	faceplayer
-	goto_if_set FLAG_DEFEATED_ELITE_4_PHOEBE, EverGrandeCity_PhoebesRoom_EventScript_2281F2
+	goto_if_set FLAG_DEFEATED_ELITE_4_PHOEBE, EverGrandeCity_PhoebesRoom_EventScript_PostBattleSpeech
 	playbgm MUS_SITENNOU, 0
-	msgbox EverGrandeCity_PhoebesRoom_Text_22820E, MSGBOX_DEFAULT
-	trainerbattle_no_intro TRAINER_PHOEBE, EverGrandeCity_PhoebesRoom_Text_228325
-	goto EverGrandeCity_PhoebesRoom_EventScript_2281FC
+	msgbox EverGrandeCity_PhoebesRoom_Text_PreBattleSpeech, MSGBOX_DEFAULT
+	trainerbattle_no_intro TRAINER_PHOEBE, EverGrandeCity_PhoebesRoom_Text_Defeat
+	goto EverGrandeCity_PhoebesRoom_EventScript_Defeated
 	end
 
-EverGrandeCity_PhoebesRoom_EventScript_2281F2:: @ 82281F2
-	msgbox EverGrandeCity_PhoebesRoom_Text_228343, MSGBOX_DEFAULT
+EverGrandeCity_PhoebesRoom_EventScript_PostBattleSpeech:: @ 82281F2
+	msgbox EverGrandeCity_PhoebesRoom_Text_PostBattleSpeech, MSGBOX_DEFAULT
 	release
 	end
 
-EverGrandeCity_PhoebesRoom_EventScript_2281FC:: @ 82281FC
+EverGrandeCity_PhoebesRoom_EventScript_Defeated:: @ 82281FC
 	setflag FLAG_DEFEATED_ELITE_4_PHOEBE
-	call EverGrandeCity_PhoebesRoom_EventScript_2723F8
-	msgbox EverGrandeCity_PhoebesRoom_Text_228343, MSGBOX_DEFAULT
+	call PokemonLeague_EliteFour_SetAdvanceToNextRoomMetatiles
+	msgbox EverGrandeCity_PhoebesRoom_Text_PostBattleSpeech, MSGBOX_DEFAULT
 	release
 	end
 
-EverGrandeCity_PhoebesRoom_Text_22820E: @ 822820E
+EverGrandeCity_PhoebesRoom_Text_PreBattleSpeech: @ 822820E
 	.string "Ahahaha!\p"
 	.string "I'm PHOEBE of the ELITE FOUR.\n"
 	.string "I did my training on MT. PYRE.\p"
@@ -70,11 +70,11 @@ EverGrandeCity_PhoebesRoom_Text_22820E: @ 822820E
 	.string "So, come on, just try and see if you can\n"
 	.string "even inflict damage on my POKéMON!$"
 
-EverGrandeCity_PhoebesRoom_Text_228325: @ 8228325
+EverGrandeCity_PhoebesRoom_Text_Defeat: @ 8228325
 	.string "Oh, darn.\n"
 	.string "I've gone and lost.$"
 
-EverGrandeCity_PhoebesRoom_Text_228343: @ 8228343
+EverGrandeCity_PhoebesRoom_Text_PostBattleSpeech: @ 8228343
 	.string "There's a definite bond between you\n"
 	.string "and your POKéMON, too.\p"
 	.string "I didn't recognize it, so it's only\n"

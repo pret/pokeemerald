@@ -85,9 +85,9 @@
 extern const u8 EventScript_WhiteOut[];
 extern const u8 EventScript_ResetMrBriney[];
 extern const u8 EventScript_DoLinkRoomExit[];
-extern const u8 gEventScript_TradeRoom_TooBusyToNotice[];
-extern const u8 gEventScript_TradeRoom_ReadTrainerCard_NoColor[];
-extern const u8 gEventScript_TradeRoom_ReadTrainerCard_Normal[];
+extern const u8 CableClub_EventScript_TooBusyToNotice[];
+extern const u8 CableClub_EventScript_ReadTrainerCard[];
+extern const u8 CableClub_EventScript_ReadTrainerCardColored[];
 extern const u8 EventScript_DoubleBattleColosseum_PlayerSpot0[];
 extern const u8 EventScript_DoubleBattleColosseum_PlayerSpot1[];
 extern const u8 EventScript_DoubleBattleColosseum_PlayerSpot2[];
@@ -1183,7 +1183,7 @@ void Overworld_ClearSavedMusic(void)
 
 static void sub_8085810(void)
 {
-    if (FlagGet(FLAG_SPECIAL_FLAG_0x4001) != TRUE)
+    if (FlagGet(FLAG_DONT_TRANSITION_MUSIC) != TRUE)
     {
         u16 newMusic = GetWarpDestinationMusic();
         u16 currentMusic = GetCurrentMapMusic();
@@ -1231,7 +1231,7 @@ void TryFadeOutOldMapMusic(void)
 {
     u16 currentMusic = GetCurrentMapMusic();
     u16 warpMusic = GetWarpDestinationMusic();
-    if (FlagGet(FLAG_SPECIAL_FLAG_0x4001) != TRUE && warpMusic != GetCurrentMapMusic())
+    if (FlagGet(FLAG_DONT_TRANSITION_MUSIC) != TRUE && warpMusic != GetCurrentMapMusic())
     {
         if (currentMusic == MUS_NAMINORI
             && VarGet(VAR_SKY_PILLAR_STATE) == 2
@@ -2742,7 +2742,7 @@ static bool32 PlayerIsAtSouthExit(struct TradeRoomPlayer *player)
         return FALSE;
     else if (!MetatileBehavior_IsSouthArrowWarp(player->field_C))
         return FALSE;
-    else if (player->facing != 1)
+    else if (player->facing != DIR_SOUTH)
         return FALSE;
     else
         return TRUE;
@@ -2765,13 +2765,13 @@ static const u8 *TryInteractWithPlayer(struct TradeRoomPlayer *player)
     if (linkPlayerId != 4)
     {
         if (!player->isLocalPlayer)
-            return gEventScript_TradeRoom_TooBusyToNotice;
+            return CableClub_EventScript_TooBusyToNotice;
         else if (sPlayerTradingStates[linkPlayerId] != PLAYER_TRADING_STATE_IDLE)
-            return gEventScript_TradeRoom_TooBusyToNotice;
+            return CableClub_EventScript_TooBusyToNotice;
         else if (!GetLinkTrainerCardColor(linkPlayerId))
-            return gEventScript_TradeRoom_ReadTrainerCard_NoColor;
+            return CableClub_EventScript_ReadTrainerCard;
         else
-            return gEventScript_TradeRoom_ReadTrainerCard_Normal;
+            return CableClub_EventScript_ReadTrainerCardColored;
     }
 
     return GetInteractedLinkPlayerScript(&otherPlayerPos, player->field_C, player->facing);

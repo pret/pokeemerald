@@ -9,7 +9,7 @@ Route119_MapScript1_1F442F: @ 81F442F
 
 Route119_EventScript_1F4439:: @ 81F4439
 	specialvar VAR_RESULT, GetBattleOutcome
-	compare VAR_RESULT, 7
+	compare VAR_RESULT, B_OUTCOME_CAUGHT
 	goto_if_ne Common_EventScript_NopReturn
 	removeobject VAR_LAST_TALKED
 	return
@@ -51,7 +51,7 @@ Route119_EventScript_1F4488:: @ 81F4488
 	call_if_eq Route119_EventScript_1F46C6
 	compare VAR_TEMP_1, 2
 	call_if_eq Route119_EventScript_1F46D1
-	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceDown
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	delay 30
 	compare VAR_TEMP_1, 1

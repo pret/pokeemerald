@@ -18,48 +18,48 @@ SeafloorCavern_Entrance_EventScript_234485:: @ 8234485
 	applymovement 1, Common_Movement_Delay48
 	waitmovement 0
 	delay 20
-	compare VAR_FACING, 3
+	compare VAR_FACING, DIR_WEST
 	call_if_eq SeafloorCavern_Entrance_EventScript_23452E
-	compare VAR_FACING, 4
+	compare VAR_FACING, DIR_EAST
 	call_if_eq SeafloorCavern_Entrance_EventScript_234523
-	compare VAR_FACING, 2
+	compare VAR_FACING, DIR_NORTH
 	call_if_eq SeafloorCavern_Entrance_EventScript_234539
 	delay 30
 	setvar VAR_HAS_TALKED_TO_SEAFLOOR_CAVERN_ENTRANCE_GRUNT, 1
 	copyobjectxytoperm 1
 	msgbox SeafloorCavern_Entrance_Text_234544, MSGBOX_DEFAULT
 	closemessage
-	applymovement 1, Common_Movement_WalkInPlaceUp
+	applymovement 1, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	releaseall
 	end
 
 SeafloorCavern_Entrance_EventScript_2344ED:: @ 82344ED
-	compare VAR_FACING, 3
+	compare VAR_FACING, DIR_WEST
 	call_if_eq SeafloorCavern_Entrance_EventScript_23452E
-	compare VAR_FACING, 4
+	compare VAR_FACING, DIR_EAST
 	call_if_eq SeafloorCavern_Entrance_EventScript_234523
-	compare VAR_FACING, 2
+	compare VAR_FACING, DIR_NORTH
 	call_if_eq SeafloorCavern_Entrance_EventScript_234539
 	msgbox SeafloorCavern_Entrance_Text_2346C8, MSGBOX_DEFAULT
 	closemessage
-	applymovement 1, Common_Movement_WalkInPlaceUp
+	applymovement 1, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	releaseall
 	end
 
 SeafloorCavern_Entrance_EventScript_234523:: @ 8234523
-	applymovement 1, Common_Movement_WalkInPlaceLeft
+	applymovement 1, Common_Movement_WalkInPlaceFastestLeft
 	waitmovement 0
 	return
 
 SeafloorCavern_Entrance_EventScript_23452E:: @ 823452E
-	applymovement 1, Common_Movement_WalkInPlaceRight
+	applymovement 1, Common_Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	return
 
 SeafloorCavern_Entrance_EventScript_234539:: @ 8234539
-	applymovement 1, Common_Movement_WalkInPlaceDown
+	applymovement 1, Common_Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	return
 

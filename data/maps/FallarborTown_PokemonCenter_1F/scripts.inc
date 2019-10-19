@@ -1,6 +1,6 @@
 FallarborTown_PokemonCenter_1F_MapScripts:: @ 8200BCD
 	map_script MAP_SCRIPT_ON_TRANSITION, FallarborTown_PokemonCenter_1F_OnTransition
-	map_script MAP_SCRIPT_ON_RESUME, FallarborTown_PokemonCenter_1F_MapScript1_277C30
+	map_script MAP_SCRIPT_ON_RESUME, CableClub_OnResume
 	.byte 0
 
 FallarborTown_PokemonCenter_1F_OnTransition: @ 8200BD8
@@ -30,8 +30,8 @@ FallarborTown_PokemonCenter_1F_EventScript_200C01:: @ 8200C01
 	msgbox FallarborTown_PokemonCenter_1F_Text_200C6B, MSGBOX_DEFAULT
 	closemessage
 	switch VAR_FACING
-	case 2, FallarborTown_PokemonCenter_1F_EventScript_200C28
-	case 3, FallarborTown_PokemonCenter_1F_EventScript_200C38
+	case DIR_NORTH, FallarborTown_PokemonCenter_1F_EventScript_200C28
+	case DIR_WEST, FallarborTown_PokemonCenter_1F_EventScript_200C38
 	end
 
 FallarborTown_PokemonCenter_1F_EventScript_200C28:: @ 8200C28

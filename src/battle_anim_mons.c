@@ -26,7 +26,7 @@
 
 #define IS_DOUBLE_BATTLE() ((gBattleTypeFlags & BATTLE_TYPE_DOUBLE))
 
-extern const struct OamData gUnknown_0852497C;
+extern const struct OamData gOamData_AffineNormal_ObjNormal_64x64;
 
 static void sub_80A6FB4(struct Sprite *sprite);
 static void sub_80A7144(struct Sprite *sprite);
@@ -92,7 +92,7 @@ static const struct SpriteTemplate sUnknown_08525F90[] =
     {
         .tileTag = 55125,
         .paletteTag = 55125,
-        .oam = &gUnknown_0852497C,
+        .oam = &gOamData_AffineNormal_ObjNormal_64x64,
         .anims = gDummySpriteAnimTable,
         .images = NULL,
         .affineAnims = gDummySpriteAffineAnimTable,
@@ -101,7 +101,7 @@ static const struct SpriteTemplate sUnknown_08525F90[] =
     {
         .tileTag = 55126,
         .paletteTag = 55126,
-        .oam = &gUnknown_0852497C,
+        .oam = &gOamData_AffineNormal_ObjNormal_64x64,
         .anims = gDummySpriteAnimTable,
         .images = NULL,
         .affineAnims = gDummySpriteAffineAnimTable,
@@ -988,7 +988,7 @@ void sub_80A6DAC(bool8 arg0)
     }
 }
 
-void sub_80A6DEC(struct Sprite *sprite)
+void TradeMenuBouncePartySprites(struct Sprite *sprite)
 {
     sprite->data[1] = sprite->pos1.x;
     sprite->data[3] = sprite->pos1.y;
@@ -1456,7 +1456,7 @@ static u8 GetBattlerAtPosition_(u8 position)
     return GetBattlerAtPosition(position);
 }
 
-void sub_80A77C8(struct Sprite *sprite)
+void AnimSparklingParticle(struct Sprite *sprite)
 {
     bool8 var;
 

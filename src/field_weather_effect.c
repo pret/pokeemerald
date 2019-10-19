@@ -2325,7 +2325,7 @@ static const struct SpriteTemplate sBubbleSpriteTemplate =
 {
     .tileTag = 0x1205,
     .paletteTag = 0x1200,
-    .oam = &gUnknown_08524904,
+    .oam = &gOamData_AffineOff_ObjNormal_8x8,
     .anims = sBubbleSpriteAnimCmds,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,

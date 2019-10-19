@@ -23,13 +23,13 @@ GraniteCave_StevensRoom_EventScript_22DC7B:: @ 822DC7B
 	setflag FLAG_REGISTERED_STEVEN_POKENAV
 	msgbox GraniteCave_StevensRoom_Text_22DF8C, MSGBOX_DEFAULT
 	closemessage
-	compare VAR_FACING, 2
+	compare VAR_FACING, DIR_NORTH
 	call_if_eq GraniteCave_StevensRoom_EventScript_22DD0D
-	compare VAR_FACING, 1
+	compare VAR_FACING, DIR_SOUTH
 	call_if_eq GraniteCave_StevensRoom_EventScript_22DD2A
-	compare VAR_FACING, 3
+	compare VAR_FACING, DIR_WEST
 	call_if_eq GraniteCave_StevensRoom_EventScript_22DD18
-	compare VAR_FACING, 4
+	compare VAR_FACING, DIR_EAST
 	call_if_eq GraniteCave_StevensRoom_EventScript_22DD18
 	playse SE_KAIDAN
 	removeobject 1

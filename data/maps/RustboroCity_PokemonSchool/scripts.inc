@@ -78,16 +78,16 @@ RustboroCity_PokemonSchool_EventScript_213F95:: @ 8213F95
 	lock
 	faceplayer
 	goto_if_set FLAG_RECEIVED_QUICK_CLAW, RustboroCity_PokemonSchool_EventScript_213FFB
-	compare VAR_FACING, 4
+	compare VAR_FACING, DIR_EAST
 	call_if_eq RustboroCity_PokemonSchool_EventScript_213FE5
-	compare VAR_FACING, 3
+	compare VAR_FACING, DIR_WEST
 	call_if_eq RustboroCity_PokemonSchool_EventScript_213FF0
 	msgbox RustboroCity_PokemonSchool_Text_214433, MSGBOX_DEFAULT
 	giveitem_std ITEM_QUICK_CLAW
 	compare VAR_RESULT, 0
 	goto_if_eq Common_EventScript_ShowBagIsFull
 	closemessage
-	applymovement VAR_LAST_TALKED, Common_Movement_WalkInPlaceDown
+	applymovement VAR_LAST_TALKED, Common_Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	setflag FLAG_RECEIVED_QUICK_CLAW
 	release
@@ -106,7 +106,7 @@ RustboroCity_PokemonSchool_EventScript_213FF0:: @ 8213FF0
 RustboroCity_PokemonSchool_EventScript_213FFB:: @ 8213FFB
 	msgbox RustboroCity_PokemonSchool_Text_2144C8, MSGBOX_DEFAULT
 	closemessage
-	applymovement VAR_LAST_TALKED, Common_Movement_WalkInPlaceDown
+	applymovement VAR_LAST_TALKED, Common_Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	release
 	end

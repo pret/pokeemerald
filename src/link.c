@@ -28,6 +28,7 @@
 #include "link.h"
 #include "link_rfu.h"
 #include "constants/rgb.h"
+#include "constants/trade.h"
 
 extern u16 gHeldKeyCodeToSend;
 
@@ -282,7 +283,7 @@ void LinkTestScreen(void)
     ResetTasks();
     SetVBlankCallback(sub_80096BC);
     ResetBlockSend();
-    gLinkType = 0x1111;
+    gLinkType = LINKTYPE_0x1111;
     OpenLink();
     SeedRng(gMain.vblankCounter2);
     for (i = 0; i < MAX_LINK_PLAYERS; i++)
@@ -316,10 +317,10 @@ static void InitLocalLinkPlayer(void)
     gLocalLinkPlayer.language = gGameLanguage;
     gLocalLinkPlayer.version = gGameVersion + 0x4000;
     gLocalLinkPlayer.lp_field_2 = 0x8000;
-    gLocalLinkPlayer.name[8] = IsNationalPokedexEnabled();
+    gLocalLinkPlayer.progressFlags = IsNationalPokedexEnabled();
     if (FlagGet(FLAG_IS_CHAMPION))
     {
-        gLocalLinkPlayer.name[8] |= 0x10;
+        gLocalLinkPlayer.progressFlags |= 0x10;
     }
 }
 
@@ -597,9 +598,9 @@ static void ProcessRecvCmds(u8 unused)
                         *linkPlayer = block->linkPlayer;
                         if ((linkPlayer->version & 0xFF) == VERSION_RUBY || (linkPlayer->version & 0xFF) == VERSION_SAPPHIRE)
                         {
-                            linkPlayer->name[10] = 0;
-                            linkPlayer->name[9] = 0;
-                            linkPlayer->name[8] = 0;
+                            linkPlayer->progressFlagsCopy = 0;
+                            linkPlayer->neverRead = 0;
+                            linkPlayer->progressFlags = 0;
                         }
                         sub_800B524(linkPlayer);
                         if (strcmp(block->magic1, gASCIIGameFreakInc) != 0
@@ -739,7 +740,7 @@ void ClearLinkCallback(void)
 {
     if (gWirelessCommType)
     {
-        Rfu_set_zero();
+        ClearLinkRfuCallback();
     }
     else
     {
@@ -751,7 +752,7 @@ void ClearLinkCallback_2(void)
 {
     if (gWirelessCommType)
     {
-        Rfu_set_zero();
+        ClearLinkRfuCallback();
     }
     else
     {
@@ -862,15 +863,15 @@ u8 GetLinkPlayerDataExchangeStatusTimed(int lower, int upper)
             {
                 if (gLinkPlayers[0].linkType == 0x1133)
                 {
-                    switch (sub_807A728())
+                    switch (GetGameProgressForLinkTrade())
                     {
-                        case 1:
-                            sPlayerDataExchangeStatus = EXCHANGE_STAT_4;
+                        case TRADE_PLAYER_NOT_READY:
+                            sPlayerDataExchangeStatus = EXCHANGE_PLAYER_NOT_READY;
                             break;
-                        case 2:
-                            sPlayerDataExchangeStatus = EXCHANGE_STAT_5;
+                        case TRADE_PARTNER_NOT_READY:
+                            sPlayerDataExchangeStatus = EXCHANGE_PARTNER_NOT_READY;
                             break;
-                        case 0:
+                        case TRADE_BOTH_PLAYERS_READY:
                             sPlayerDataExchangeStatus = EXCHANGE_COMPLETE;
                             break;
                     }
@@ -1084,7 +1085,7 @@ bool8 IsLinkTaskFinished(void)
 {
     if (gWirelessCommType == TRUE)
     {
-        return sub_8010500();
+        return IsLinkRfuTaskFinished();
     }
     return gLinkCallback == NULL;
 }
@@ -1349,7 +1350,7 @@ bool8 sub_800AA60(void)
     {
         if (gLinkPlayers[i].trainerId == gSavedLinkPlayers[i].trainerId)
         {
-            if (gLinkType == 0x2288)
+            if (gLinkType == LINKTYPE_0x2288)
             {
                 if (gLinkType == gLinkPlayers[i].linkType)
                 {
@@ -1909,7 +1910,7 @@ u8 sub_800B518(void)
 
 void sub_800B524(struct LinkPlayer *player)
 {
-    player->name[10] = player->name[8];
+    player->progressFlagsCopy = player->progressFlags;
     ConvertInternationalString(player->name, player->language);
 }
 

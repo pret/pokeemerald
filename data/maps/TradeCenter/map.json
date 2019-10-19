@@ -24,7 +24,7 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "TradeCenter_EventScript_2774B6",
+      "script": "TradeCenter_EventScript_Attendant",
       "flag": "0"
     }
   ],

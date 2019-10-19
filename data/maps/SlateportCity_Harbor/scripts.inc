@@ -48,10 +48,10 @@ SlateportCity_Harbor_EventScript_20C9DF:: @ 820C9DF
 	end
 
 SlateportCity_Harbor_EventScript_20C9F5:: @ 820C9F5
-	applymovement 7, Common_Movement_WalkInPlaceDown
+	applymovement 7, Common_Movement_WalkInPlaceFastestDown
 	waitmovement 0
-	applymovement 6, Common_Movement_WalkInPlaceDown
-	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceUp
+	applymovement 6, Common_Movement_WalkInPlaceFastestDown
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	msgbox SlateportCity_Harbor_Text_20D291, MSGBOX_DEFAULT
 	closemessage
@@ -85,21 +85,21 @@ SlateportCity_Harbor_EventScript_20C9F5:: @ 820C9F5
 SlateportCity_Harbor_EventScript_20CA89:: @ 820CA89
 	applymovement 4, SlateportCity_Harbor_Movement_20CAE0
 	waitmovement 0
-	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceDown
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	return
 
 SlateportCity_Harbor_EventScript_20CA9E:: @ 820CA9E
 	applymovement 4, SlateportCity_Harbor_Movement_20CAE6
 	waitmovement 0
-	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceRight
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	return
 
 SlateportCity_Harbor_EventScript_20CAB3:: @ 820CAB3
 	applymovement 4, SlateportCity_Harbor_Movement_20CAEB
 	waitmovement 0
-	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceRight
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	return
 
@@ -226,13 +226,13 @@ SlateportCity_Harbor_EventScript_20CBDD:: @ 820CBDD
 SlateportCity_Harbor_EventScript_20CBE9:: @ 820CBE9
 	msgbox SlateportCity_Harbor_Text_20CFCB, MSGBOX_DEFAULT
 	closemessage
-	applymovement VAR_LAST_TALKED, Common_Movement_WalkInPlaceUp
+	applymovement VAR_LAST_TALKED, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	delay 30
 	hideobjectat VAR_LAST_TALKED, MAP_SLATEPORT_CITY_HARBOR
-	compare VAR_FACING, 2
+	compare VAR_FACING, DIR_NORTH
 	call_if_eq SlateportCity_Harbor_EventScript_20CC42
-	compare VAR_FACING, 4
+	compare VAR_FACING, DIR_EAST
 	call_if_eq SlateportCity_Harbor_EventScript_20CC37
 	delay 30
 	hideobjectat EVENT_OBJ_ID_PLAYER, MAP_PETALBURG_CITY

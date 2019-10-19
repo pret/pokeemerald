@@ -129,7 +129,7 @@
 	.include "src/match_call.o"
 	.include "src/menu.o"
 	.include "src/battle_factory_screen.o"
-	.include "src/mossdeep_gym.o"
+	.include "src/rotating_tile_puzzle.o"
 	.include "src/item_menu.o"
 	.include "src/list_menu.o"
 	.include "src/dynamic_placeholder_text_util.o"

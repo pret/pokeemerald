@@ -24,7 +24,7 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "EverGrandeCity_PokemonCenter_2F_EventScript_27375B",
+      "script": "Common_EventScript_UnionRoomAttendant",
       "flag": "0"
     },
     {
@@ -37,7 +37,7 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "EverGrandeCity_PokemonCenter_2F_EventScript_273761",
+      "script": "Common_EventScript_WirelessClubAttendant",
       "flag": "0"
     },
     {
@@ -50,7 +50,7 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "EverGrandeCity_PokemonCenter_2F_EventScript_273767",
+      "script": "Common_EventScript_DirectCornerAttendant",
       "flag": "0"
     },
     {
@@ -63,7 +63,7 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "EverGrandeCity_PokemonCenter_2F_EventScript_276B03",
+      "script": "CableClub_EventScript_MysteryGiftMan",
       "flag": "FLAG_HIDE_POKEMON_CENTER_2F_MYSTERY_GIFT_MAN"
     }
   ],

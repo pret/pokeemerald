@@ -11,7 +11,7 @@ gSpecials:: @ 81DBA64
 	def_special HealPlayerParty
 	def_special SetCableClubWarp
 	def_special sub_80AF948
-	def_special sub_80AF9F8
+	def_special ReturnFromLinkRoom
 	def_special CleanupLinkRoomState
 	def_special ExitLinkRoom
 	def_special SetPlayerSecretBase
@@ -36,8 +36,8 @@ gSpecials:: @ 81DBA64
 	def_special SetBattledOwnerFromResult
 	def_special DoSecretBasePCTurnOffEffect
 	def_special RecordMixingPlayerSpotTriggered
-	def_special sub_80B2DA4
-	def_special sub_80B2E4C
+	def_special TryBattleLinkup
+	def_special TryTradeLinkup
 	def_special sub_80B2E74
 	def_special sub_80B2EA8
 	def_special CloseLink
@@ -51,7 +51,7 @@ gSpecials:: @ 81DBA64
 	def_special SavePlayerParty
 	def_special LoadPlayerParty
 	def_special ChooseHalfPartyForBattle
-	def_special sp02A_crash_sound
+	def_special Script_ShowLinkTrainerCard
 	def_special EventObjectInteractionGetBerryTreeData
 	def_special EventObjectInteractionGetBerryName
 	def_special EventObjectInteractionGetBerryCountString
@@ -150,14 +150,14 @@ gSpecials:: @ 81DBA64
 	def_special sub_80F8864
 	def_special CountPlayerContestPaintings
 	def_special ShowContestWinner
-	def_special MauvilleGymSpecial2
-	def_special MauvilleGymSpecial1
+	def_special MauvilleGymSetDefaultBarriers
+	def_special MauvilleGymPressSwitch
 	def_special ShowFieldMessageStringVar4
 	def_special DrawWholeMapView
 	def_special StorePlayerCoordsInVars
-	def_special MauvilleGymSpecial3
-	def_special PetalburgGymSpecial1
-	def_special PetalburgGymSpecial2
+	def_special MauvilleGymDeactivatePuzzle
+	def_special PetalburgGymSlideOpenRoomDoors
+	def_special PetalburgGymUnlockRoomDoors
 	def_special GetPlayerTrainerIdOnesDigit
 	def_special GetPlayerBigGuyGirlString
 	def_special GetRivalSonDaughterString
@@ -210,8 +210,8 @@ gSpecials:: @ 81DBA64
 	def_special ShowLinkBattleRecords
 	def_special IsEnoughForCostInVar0x8005
 	def_special SubtractMoneyFromVar0x8005
-	def_special ExecuteWhiteOut
-	def_special sp0C8_whiteout_maybe
+	def_special TryFieldPoisonWhiteOut
+	def_special SetCB2WhiteOut
 	def_special RotatingGate_InitPuzzle
 	def_special RotatingGate_InitPuzzleAndGraphics
 	def_special SetSSTidalFlag
@@ -305,8 +305,8 @@ gSpecials:: @ 81DBA64
 	def_special LeadMonHasEffortRibbon
 	def_special GiveLeadMonEffortRibbon
 	def_special Special_AreLeadMonEVsMaxedOut
-	def_special sub_8098574
-	def_special sub_809859C
+	def_special Script_FacePlayer
+	def_special Script_ClearHeldMovement
 	def_special InitRoamer
 	def_special TryUpdateRusturfTunnelState
 	def_special IsGrassTypeInParty
@@ -342,14 +342,14 @@ gSpecials:: @ 81DBA64
 	def_special TryInitBattleTowerAwardManEventObject
 	def_special MoveOutOfSecretBaseFromOutside
 	def_special LoadPlayerBag
-	def_special sub_80B05B4
+	def_special Script_FadeOutMapMusic
 	def_special SetPacifidlogTMReceivedDay
 	def_special GetDaysUntilPacifidlogTMAvailable
 	def_special HasAllHoennMons
 	def_special MonOTNameMatchesPlayer
 	def_special BufferLottoTicketNumber
 	def_special sub_81653CC
-	def_special sub_80F9370
+	def_special DoesPartyHaveEnigmaBerry
 	def_special ScriptRandom
 	def_special sub_81AFDD0
 	def_special sub_80EDCE8
@@ -424,22 +424,22 @@ gSpecials:: @ 81DBA64
 	def_special StartPlayerDescendMirageTower
 	def_special BufferTMHMMoveName
 	def_special IsWirelessAdapterConnected
-	def_special BerryBlenderLinkBecomeLeader
-	def_special BerryBlenderLinkJoinGroup
+	def_special TryBecomeLinkLeader
+	def_special TryJoinLinkGroup
 	def_special UnionRoomSpecial
 	def_special sub_801A42C
-	def_special sub_8016934
+	def_special InitUnionRoom
 	def_special BufferUnionRoomPlayerName
 	def_special sub_801DC20
-	def_special sub_81B8958
-	def_special sub_8018090
+	def_special ChooseMonForWirelessMinigame
+	def_special Script_ResetUnionRoomTrade
 	def_special IsBadEggInParty
 	def_special ValidateReceivedWonderCard
 	def_special HasAtLeastOneBerry
-	def_special sub_802C920
-	def_special sub_802E3C4
-	def_special sub_8027A5C
-	def_special sub_8027AAC
+	def_special IsPokemonJumpSpeciesInParty
+	def_special ShowPokemonJumpRecords
+	def_special IsDodrioInParty
+	def_special ShowDodrioBerryPickingRecords
 	def_special OffsetCameraForBattle
 	def_special GetDeptStoreDefaultFloorChoice
 	def_special BufferVarsForIVRater
@@ -485,7 +485,7 @@ gSpecials:: @ 81DBA64
 	def_special BufferBattleFrontierTutorMoveName
 	def_special CloseBattleFrontierTutorWindow
 	def_special sub_813ADD4
-	def_special sub_81B892C
+	def_special OpenPartyMenuForMoveTutor
 	def_special GetBattleFrontierTutorMoveIndex
 	def_special sub_813AF48
 	def_special DoDeoxysRockInteraction
@@ -512,7 +512,7 @@ gSpecials:: @ 81DBA64
 	def_special GetLilycoveSSTidalSelection
 	def_special TurnOnTVScreen
 	def_special sub_81D4A90
-	def_special sub_813B514
+	def_special ShouldDistributeEonTicket
 	def_special sub_813B568
 	def_special sub_813B534
 	def_special CallTrainerHillFunction

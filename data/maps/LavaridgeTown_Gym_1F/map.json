@@ -24,7 +24,7 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "LavaridgeTown_Gym_1F_EventScript_1FE78C",
+      "script": "LavaridgeTown_Gym_1F_EventScript_Flannery",
       "flag": "0"
     },
     {
@@ -37,7 +37,7 @@
       "movement_range_y": 0,
       "trainer_type": "3",
       "trainer_sight_or_berry_tree_id": "1",
-      "script": "LavaridgeTown_Gym_1F_EventScript_1FE87F",
+      "script": "LavaridgeTown_Gym_1F_EventScript_Cole",
       "flag": "0"
     },
     {
@@ -50,7 +50,7 @@
       "movement_range_y": 0,
       "trainer_type": "3",
       "trainer_sight_or_berry_tree_id": "1",
-      "script": "LavaridgeTown_Gym_1F_EventScript_1FE900",
+      "script": "LavaridgeTown_Gym_1F_EventScript_Gerald",
       "flag": "0"
     },
     {
@@ -63,7 +63,7 @@
       "movement_range_y": 0,
       "trainer_type": "3",
       "trainer_sight_or_berry_tree_id": "1",
-      "script": "LavaridgeTown_Gym_1F_EventScript_1FE8AF",
+      "script": "LavaridgeTown_Gym_1F_EventScript_Axle",
       "flag": "0"
     },
     {
@@ -76,7 +76,7 @@
       "movement_range_y": 0,
       "trainer_type": "3",
       "trainer_sight_or_berry_tree_id": "1",
-      "script": "LavaridgeTown_Gym_1F_EventScript_1FE8E5",
+      "script": "LavaridgeTown_Gym_1F_EventScript_Danielle",
       "flag": "0"
     },
     {
@@ -89,7 +89,7 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "LavaridgeTown_Gym_1F_EventScript_1FE96C",
+      "script": "LavaridgeTown_Gym_1F_EventScript_GymGuide",
       "flag": "0"
     }
   ],
@@ -285,7 +285,7 @@
       "y": 15,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
-      "script": "LavaridgeTown_Gym_1F_EventScript_1FE98B"
+      "script": "LavaridgeTown_Gym_1F_EventScript_LeftGymStatue"
     },
     {
       "type": "sign",
@@ -293,7 +293,7 @@
       "y": 15,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
-      "script": "LavaridgeTown_Gym_1F_EventScript_1FE99B"
+      "script": "LavaridgeTown_Gym_1F_EventScript_RightGymStatue"
     }
   ]
 }

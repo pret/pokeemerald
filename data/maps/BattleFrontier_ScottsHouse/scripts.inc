@@ -172,13 +172,13 @@ BattleFrontier_ScottsHouse_EventScript_263943:: @ 8263943
 	msgbox BattleFrontier_ScottsHouse_Text_263A3F, MSGBOX_DEFAULT
 	closemessage
 	delay 30
-	compare VAR_FACING, 2
+	compare VAR_FACING, DIR_NORTH
 	call_if_eq BattleFrontier_ScottsHouse_EventScript_263A13
-	compare VAR_FACING, 1
+	compare VAR_FACING, DIR_SOUTH
 	call_if_eq BattleFrontier_ScottsHouse_EventScript_263A1E
-	compare VAR_FACING, 4
+	compare VAR_FACING, DIR_EAST
 	call_if_eq BattleFrontier_ScottsHouse_EventScript_263A29
-	compare VAR_FACING, 3
+	compare VAR_FACING, DIR_WEST
 	call_if_eq BattleFrontier_ScottsHouse_EventScript_263A34
 	msgbox BattleFrontier_ScottsHouse_Text_263B29, MSGBOX_DEFAULT
 	applymovement 1, Common_Movement_FacePlayer
@@ -227,22 +227,22 @@ BattleFrontier_ScottsHouse_EventScript_2639F8:: @ 82639F8
 	end
 
 BattleFrontier_ScottsHouse_EventScript_263A13:: @ 8263A13
-	applymovement 1, Common_Movement_WalkInPlaceUp
+	applymovement 1, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	return
 
 BattleFrontier_ScottsHouse_EventScript_263A1E:: @ 8263A1E
-	applymovement 1, Common_Movement_WalkInPlaceDown
+	applymovement 1, Common_Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	return
 
 BattleFrontier_ScottsHouse_EventScript_263A29:: @ 8263A29
-	applymovement 1, Common_Movement_WalkInPlaceRight
+	applymovement 1, Common_Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	return
 
 BattleFrontier_ScottsHouse_EventScript_263A34:: @ 8263A34
-	applymovement 1, Common_Movement_WalkInPlaceLeft
+	applymovement 1, Common_Movement_WalkInPlaceFastestLeft
 	waitmovement 0
 	return
 
