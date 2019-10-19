@@ -16,6 +16,7 @@
 #include "secret_base.h"
 #include "sound.h"
 #include "task.h"
+#include "constants/field_tasks.h"
 #include "constants/items.h"
 #include "constants/songs.h"
 #include "constants/vars.h"
@@ -38,14 +39,14 @@ static void Task_MuddySlope(u8 taskId);
 
 static const TaskFunc sPerStepCallbacks[] =
 {
-    DummyPerStepCallback,
-    AshGrassPerStepCallback,
-    FortreeBridgePerStepCallback,
-    PacifidlogBridgePerStepCallback,
-    SootopolisGymIcePerStepCallback,
-    EndTruckSequence,
-    SecretBasePerStepCallback,
-    CrackedFloorPerStepCallback
+    [STEP_CB_DUMMY]             = DummyPerStepCallback,
+    [STEP_CB_ASH]               = AshGrassPerStepCallback,
+    [STEP_CB_FORTREE_BRIDGE]    = FortreeBridgePerStepCallback,
+    [STEP_CB_PACIFIDLOG_BRIDGE] = PacifidlogBridgePerStepCallback,
+    [STEP_CB_SOOTOPOLIS_ICE]    = SootopolisGymIcePerStepCallback,
+    [STEP_CB_TRUCK]             = EndTruckSequence,
+    [STEP_CB_SECRET_BASE]       = SecretBasePerStepCallback,
+    [STEP_CB_CRACKED_FLOOR]     = CrackedFloorPerStepCallback
 };
 
 // they are in pairs but declared as 1D array

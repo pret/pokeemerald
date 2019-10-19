@@ -121,8 +121,8 @@ static void sub_811B768(void);
 static u8 sub_811B960(u8);
 static void sub_811B9A0(void);
 static u8 sub_811BA1C(void);
-static int sub_811BF20(void);
-static u16 sub_811BF40(void);
+static int DidPlayerInputMysteryGiftPhrase(void);
+static u16 DidPlayerInputABerryMasterWifePhrase(void);
 static bool8 sub_811CE94(void);
 static void sub_811CF64(void);
 static void sub_811CF04(void);
@@ -2597,17 +2597,17 @@ static int FooterHasFourOptions_(void)
     return FooterHasFourOptions();
 }
 
-u8 sub_811BC7C(const u16 *arg0, u8 arg1)
+static bool8 IsPhraseDifferentThanPlayerInput(const u16 *phrase, u8 phraseLength)
 {
     u8 i;
 
-    for (i = 0; i < arg1; i++)
+    for (i = 0; i < phraseLength; i++)
     {
-        if (arg0[i] != sEasyChatScreen->ecWordBuffer[i])
-            return 1;
+        if (phrase[i] != sEasyChatScreen->ecWordBuffer[i])
+            return TRUE;
     }
 
-    return 0;
+    return FALSE;
 }
 
 static u8 GetDisplayedPersonType(void)
@@ -2730,7 +2730,7 @@ static void sub_811BE9C(void)
         FlagSet(FLAG_SYS_CHAT_USED);
         break;
     case EASY_CHAT_TYPE_QUESTIONNAIRE:
-        if (sub_811BF20())
+        if (DidPlayerInputMysteryGiftPhrase())
             gSpecialVar_0x8004 = 2;
         else
             gSpecialVar_0x8004 = 0;
@@ -2740,22 +2740,22 @@ static void sub_811BE9C(void)
         gSpecialVar_0x8004 = sub_81226D8(sEasyChatScreen->ecWordBuffer);
         break;
     case EASY_CHAT_TYPE_GOOD_SAYING:
-        gSpecialVar_0x8004 = sub_811BF40();
+        gSpecialVar_0x8004 = DidPlayerInputABerryMasterWifePhrase();
         break;
     }
 }
 
-static int sub_811BF20(void)
+static int DidPlayerInputMysteryGiftPhrase(void)
 {
-    return sub_811BC7C(sMysteryGiftPhrase, ARRAY_COUNT(sMysteryGiftPhrase)) == 0;
+    return !IsPhraseDifferentThanPlayerInput(sMysteryGiftPhrase, ARRAY_COUNT(sMysteryGiftPhrase));
 }
 
-static u16 sub_811BF40(void)
+static u16 DidPlayerInputABerryMasterWifePhrase(void)
 {
     int i;
-    for (i = 0; i < 5; i++)
+    for (i = 0; i < (int)ARRAY_COUNT(sBerryMasterWifePhrases); i++)
     {
-        if (!sub_811BC7C(sBerryMasterWifePhrases[i], ARRAY_COUNT(*sBerryMasterWifePhrases)))
+        if (!IsPhraseDifferentThanPlayerInput(sBerryMasterWifePhrases[i], ARRAY_COUNT(*sBerryMasterWifePhrases)))
             return i + 1;
     }
 

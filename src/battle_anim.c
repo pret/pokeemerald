@@ -114,7 +114,7 @@ EWRAM_DATA u8 gBattleAnimTarget = 0;
 EWRAM_DATA u16 gAnimBattlerSpecies[MAX_BATTLERS_COUNT] = {0};
 EWRAM_DATA u8 gUnknown_02038440 = 0;
 
-const struct OamData gUnknown_08524904 =
+const struct OamData gOamData_AffineOff_ObjNormal_8x8 =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
@@ -129,7 +129,7 @@ const struct OamData gUnknown_08524904 =
 };
 
 
-const struct OamData gUnknown_0852490C =
+const struct OamData gOamData_AffineOff_ObjNormal_16x16 =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
@@ -143,7 +143,7 @@ const struct OamData gUnknown_0852490C =
     .paletteNum = 0,
 };
 
-const struct OamData gUnknown_08524914 =
+const struct OamData gOamData_AffineOff_ObjNormal_32x32 =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
@@ -157,7 +157,7 @@ const struct OamData gUnknown_08524914 =
     .paletteNum = 0,
 };
 
-const struct OamData gUnknown_0852491C =
+const struct OamData gOamData_AffineOff_ObjNormal_64x64 =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
@@ -171,7 +171,7 @@ const struct OamData gUnknown_0852491C =
     .paletteNum = 0,
 };
 
-const struct OamData gUnknown_08524924 =
+const struct OamData gOamData_AffineOff_ObjNormal_16x8 =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
@@ -185,7 +185,7 @@ const struct OamData gUnknown_08524924 =
     .paletteNum = 0,
 };
 
-const struct OamData gUnknown_0852492C =
+const struct OamData gOamData_AffineOff_ObjNormal_32x8 =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
@@ -199,7 +199,7 @@ const struct OamData gUnknown_0852492C =
     .paletteNum = 0,
 };
 
-const struct OamData gUnknown_08524934 =
+const struct OamData gOamData_AffineOff_ObjNormal_32x16 =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
@@ -213,7 +213,7 @@ const struct OamData gUnknown_08524934 =
     .paletteNum = 0,
 };
 
-const struct OamData gUnknown_0852493C =
+const struct OamData gOamData_AffineOff_ObjNormal_64x32 =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
@@ -227,7 +227,7 @@ const struct OamData gUnknown_0852493C =
     .paletteNum = 0,
 };
 
-const struct OamData gUnknown_08524944 =
+const struct OamData gOamData_AffineOff_ObjNormal_8x16 =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
@@ -241,7 +241,7 @@ const struct OamData gUnknown_08524944 =
     .paletteNum = 0,
 };
 
-const struct OamData gUnknown_0852494C =
+const struct OamData gOamData_AffineOff_ObjNormal_8x32 =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
@@ -255,7 +255,7 @@ const struct OamData gUnknown_0852494C =
     .paletteNum = 0,
 };
 
-const struct OamData gUnknown_08524954 =
+const struct OamData gOamData_AffineOff_ObjNormal_16x32 =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
@@ -269,7 +269,7 @@ const struct OamData gUnknown_08524954 =
     .paletteNum = 0,
 };
 
-const struct OamData gUnknown_0852495C =
+const struct OamData gOamData_AffineOff_ObjNormal_32x64 =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
@@ -283,7 +283,7 @@ const struct OamData gUnknown_0852495C =
     .paletteNum = 0,
 };
 
-const struct OamData gUnknown_08524964 =
+const struct OamData gOamData_AffineNormal_ObjNormal_8x8 =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_NORMAL,
@@ -297,7 +297,7 @@ const struct OamData gUnknown_08524964 =
     .paletteNum = 0,
 };
 
-const struct OamData gUnknown_0852496C =
+const struct OamData gOamData_AffineNormal_ObjNormal_16x16 =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_NORMAL,
@@ -311,7 +311,7 @@ const struct OamData gUnknown_0852496C =
     .paletteNum = 0,
 };
 
-const struct OamData gUnknown_08524974 =
+const struct OamData gOamData_AffineNormal_ObjNormal_32x32 =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_NORMAL,
@@ -325,7 +325,7 @@ const struct OamData gUnknown_08524974 =
     .paletteNum = 0,
 };
 
-const struct OamData gUnknown_0852497C =
+const struct OamData gOamData_AffineNormal_ObjNormal_64x64 =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_NORMAL,
@@ -339,7 +339,7 @@ const struct OamData gUnknown_0852497C =
     .paletteNum = 0,
 };
 
-const struct OamData gUnknown_08524984 =
+const struct OamData gOamData_AffineNormal_ObjNormal_16x8 =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_NORMAL,
@@ -353,7 +353,7 @@ const struct OamData gUnknown_08524984 =
     .paletteNum = 0,
 };
 
-const struct OamData gUnknown_0852498C =
+const struct OamData gOamData_AffineNormal_ObjNormal_32x8 =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_NORMAL,
@@ -367,7 +367,7 @@ const struct OamData gUnknown_0852498C =
     .paletteNum = 0,
 };
 
-const struct OamData gUnknown_08524994 =
+const struct OamData gOamData_AffineNormal_ObjNormal_32x16 =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_NORMAL,
@@ -381,7 +381,7 @@ const struct OamData gUnknown_08524994 =
     .paletteNum = 0,
 };
 
-const struct OamData gUnknown_0852499C =
+const struct OamData gOamData_AffineNormal_ObjNormal_64x32 =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_NORMAL,
@@ -395,7 +395,7 @@ const struct OamData gUnknown_0852499C =
     .paletteNum = 0,
 };
 
-const struct OamData gUnknown_085249A4 =
+const struct OamData gOamData_AffineNormal_ObjNormal_8x16 =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_NORMAL,
@@ -409,7 +409,7 @@ const struct OamData gUnknown_085249A4 =
     .paletteNum = 0,
 };
 
-const struct OamData gUnknown_085249AC =
+const struct OamData gOamData_AffineNormal_ObjNormal_8x32 =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_NORMAL,
@@ -423,7 +423,7 @@ const struct OamData gUnknown_085249AC =
     .paletteNum = 0,
 };
 
-const struct OamData gUnknown_085249B4 =
+const struct OamData gOamData_AffineNormal_ObjNormal_16x32 =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_NORMAL,
@@ -437,7 +437,7 @@ const struct OamData gUnknown_085249B4 =
     .paletteNum = 0,
 };
 
-const struct OamData gUnknown_085249BC =
+const struct OamData gOamData_AffineNormal_ObjNormal_32x64 =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_NORMAL,
@@ -451,7 +451,7 @@ const struct OamData gUnknown_085249BC =
     .paletteNum = 0,
 };
 
-const struct OamData gUnknown_085249C4 =
+const struct OamData gOamData_AffineDouble_ObjNormal_8x8 =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_DOUBLE,
@@ -465,7 +465,7 @@ const struct OamData gUnknown_085249C4 =
     .paletteNum = 0,
 };
 
-const struct OamData gUnknown_085249CC =
+const struct OamData gOamData_AffineDouble_ObjNormal_16x16 =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_DOUBLE,
@@ -479,7 +479,7 @@ const struct OamData gUnknown_085249CC =
     .paletteNum = 0,
 };
 
-const struct OamData gUnknown_085249D4 =
+const struct OamData gOamData_AffineDouble_ObjNormal_32x32 =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_DOUBLE,
@@ -493,7 +493,7 @@ const struct OamData gUnknown_085249D4 =
     .paletteNum = 0,
 };
 
-const struct OamData gUnknown_085249DC =
+const struct OamData gOamData_AffineDouble_ObjNormal_64x64 =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_DOUBLE,
@@ -507,7 +507,7 @@ const struct OamData gUnknown_085249DC =
     .paletteNum = 0,
 };
 
-const struct OamData gUnknown_085249E4 =
+const struct OamData gOamData_AffineDouble_ObjNormal_16x8 =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_DOUBLE,
@@ -521,7 +521,7 @@ const struct OamData gUnknown_085249E4 =
     .paletteNum = 0,
 };
 
-const struct OamData gUnknown_085249EC =
+const struct OamData gOamData_AffineDouble_ObjNormal_32x8 =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_DOUBLE,
@@ -535,7 +535,7 @@ const struct OamData gUnknown_085249EC =
     .paletteNum = 0,
 };
 
-const struct OamData gUnknown_085249F4 =
+const struct OamData gOamData_AffineDouble_ObjNormal_32x16 =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_DOUBLE,
@@ -549,7 +549,7 @@ const struct OamData gUnknown_085249F4 =
     .paletteNum = 0,
 };
 
-const struct OamData gUnknown_085249FC =
+const struct OamData gOamData_AffineDouble_ObjNormal_64x32 =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_DOUBLE,
@@ -563,7 +563,7 @@ const struct OamData gUnknown_085249FC =
     .paletteNum = 0,
 };
 
-const struct OamData gUnknown_08524A04 =
+const struct OamData gOamData_AffineDouble_ObjNormal_8x16 =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_DOUBLE,
@@ -577,7 +577,7 @@ const struct OamData gUnknown_08524A04 =
     .paletteNum = 0,
 };
 
-const struct OamData gUnknown_08524A0C =
+const struct OamData gOamData_AffineDouble_ObjNormal_8x32 =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_DOUBLE,
@@ -591,7 +591,7 @@ const struct OamData gUnknown_08524A0C =
     .paletteNum = 0,
 };
 
-const struct OamData gUnknown_08524A14 =
+const struct OamData gOamData_AffineDouble_ObjNormal_16x32 =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_DOUBLE,
@@ -605,7 +605,7 @@ const struct OamData gUnknown_08524A14 =
     .paletteNum = 0,
 };
 
-const struct OamData gUnknown_08524A1C =
+const struct OamData gOamData_AffineDouble_ObjNormal_32x64 =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_DOUBLE,
@@ -619,7 +619,7 @@ const struct OamData gUnknown_08524A1C =
     .paletteNum = 0,
 };
 
-const struct OamData gUnknown_08524A24 =
+const struct OamData gOamData_AffineOff_ObjBlend_8x8 =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
@@ -633,7 +633,7 @@ const struct OamData gUnknown_08524A24 =
     .paletteNum = 0,
 };
 
-const struct OamData gUnknown_08524A2C =
+const struct OamData gOamData_AffineOff_ObjBlend_16x16 =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
@@ -647,7 +647,7 @@ const struct OamData gUnknown_08524A2C =
     .paletteNum = 0,
 };
 
-const struct OamData gUnknown_08524A34 =
+const struct OamData gOamData_AffineOff_ObjBlend_32x32 =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
@@ -661,7 +661,7 @@ const struct OamData gUnknown_08524A34 =
     .paletteNum = 0,
 };
 
-const struct OamData gUnknown_08524A3C =
+const struct OamData gOamData_AffineOff_ObjBlend_64x64 =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
@@ -675,7 +675,7 @@ const struct OamData gUnknown_08524A3C =
     .paletteNum = 0,
 };
 
-const struct OamData gUnknown_08524A44 =
+const struct OamData gOamData_AffineOff_ObjBlend_16x8 =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
@@ -689,7 +689,7 @@ const struct OamData gUnknown_08524A44 =
     .paletteNum = 0,
 };
 
-const struct OamData gUnknown_08524A4C =
+const struct OamData gOamData_AffineOff_ObjBlend_32x8 =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
@@ -703,7 +703,7 @@ const struct OamData gUnknown_08524A4C =
     .paletteNum = 0,
 };
 
-const struct OamData gUnknown_08524A54 =
+const struct OamData gOamData_AffineOff_ObjBlend_32x16 =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
@@ -717,7 +717,7 @@ const struct OamData gUnknown_08524A54 =
     .paletteNum = 0,
 };
 
-const struct OamData gUnknown_08524A5C =
+const struct OamData gOamData_AffineOff_ObjBlend_64x32 =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
@@ -731,7 +731,7 @@ const struct OamData gUnknown_08524A5C =
     .paletteNum = 0,
 };
 
-const struct OamData gUnknown_08524A64 =
+const struct OamData gOamData_AffineOff_ObjBlend_8x16 =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
@@ -745,7 +745,7 @@ const struct OamData gUnknown_08524A64 =
     .paletteNum = 0,
 };
 
-const struct OamData gUnknown_08524A6C =
+const struct OamData gOamData_AffineOff_ObjBlend_8x32 =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
@@ -759,7 +759,7 @@ const struct OamData gUnknown_08524A6C =
     .paletteNum = 0,
 };
 
-const struct OamData gUnknown_08524A74 =
+const struct OamData gOamData_AffineOff_ObjBlend_16x32 =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
@@ -773,7 +773,7 @@ const struct OamData gUnknown_08524A74 =
     .paletteNum = 0,
 };
 
-const struct OamData gUnknown_08524A7C =
+const struct OamData gOamData_AffineOff_ObjBlend_32x64 =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
@@ -787,7 +787,7 @@ const struct OamData gUnknown_08524A7C =
     .paletteNum = 0,
 };
 
-const struct OamData gUnknown_08524A84 =
+const struct OamData gOamData_AffineNormal_ObjBlend_8x8 =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_NORMAL,
@@ -801,7 +801,7 @@ const struct OamData gUnknown_08524A84 =
     .paletteNum = 0,
 };
 
-const struct OamData gUnknown_08524A8C =
+const struct OamData gOamData_AffineNormal_ObjBlend_16x16 =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_NORMAL,
@@ -815,7 +815,7 @@ const struct OamData gUnknown_08524A8C =
     .paletteNum = 0,
 };
 
-const struct OamData gUnknown_08524A94 =
+const struct OamData gOamData_AffineNormal_ObjBlend_32x32 =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_NORMAL,
@@ -829,7 +829,7 @@ const struct OamData gUnknown_08524A94 =
     .paletteNum = 0,
 };
 
-const struct OamData gUnknown_08524A9C =
+const struct OamData gOamData_AffineNormal_ObjBlend_64x64 =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_NORMAL,
@@ -843,7 +843,7 @@ const struct OamData gUnknown_08524A9C =
     .paletteNum = 0,
 };
 
-const struct OamData gUnknown_08524AA4 =
+const struct OamData gOamData_AffineNormal_ObjBlend_16x8 =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_NORMAL,
@@ -857,7 +857,7 @@ const struct OamData gUnknown_08524AA4 =
     .paletteNum = 0,
 };
 
-const struct OamData gUnknown_08524AAC =
+const struct OamData gOamData_AffineNormal_ObjBlend_32x8 =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_NORMAL,
@@ -871,7 +871,7 @@ const struct OamData gUnknown_08524AAC =
     .paletteNum = 0,
 };
 
-const struct OamData gUnknown_08524AB4 =
+const struct OamData gOamData_AffineNormal_ObjBlend_32x16 =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_NORMAL,
@@ -885,7 +885,7 @@ const struct OamData gUnknown_08524AB4 =
     .paletteNum = 0,
 };
 
-const struct OamData gUnknown_08524ABC =
+const struct OamData gOamData_AffineNormal_ObjBlend_64x32 =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_NORMAL,
@@ -899,7 +899,7 @@ const struct OamData gUnknown_08524ABC =
     .paletteNum = 0,
 };
 
-const struct OamData gUnknown_08524AC4 =
+const struct OamData gOamData_AffineNormal_ObjBlend_8x16 =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_NORMAL,
@@ -913,7 +913,7 @@ const struct OamData gUnknown_08524AC4 =
     .paletteNum = 0,
 };
 
-const struct OamData gUnknown_08524ACC =
+const struct OamData gOamData_AffineNormal_ObjBlend_8x32 =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_NORMAL,
@@ -927,7 +927,7 @@ const struct OamData gUnknown_08524ACC =
     .paletteNum = 0,
 };
 
-const struct OamData gUnknown_08524AD4 =
+const struct OamData gOamData_AffineNormal_ObjBlend_16x32 =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_NORMAL,
@@ -941,7 +941,7 @@ const struct OamData gUnknown_08524AD4 =
     .paletteNum = 0,
 };
 
-const struct OamData gUnknown_08524ADC =
+const struct OamData gOamData_AffineNormal_ObjBlend_32x64 =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_NORMAL,
@@ -955,7 +955,7 @@ const struct OamData gUnknown_08524ADC =
     .paletteNum = 0,
 };
 
-const struct OamData gUnknown_08524AE4 =
+const struct OamData gOamData_AffineDouble_ObjBlend_8x8 =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_DOUBLE,
@@ -969,7 +969,7 @@ const struct OamData gUnknown_08524AE4 =
     .paletteNum = 0,
 };
 
-const struct OamData gUnknown_08524AEC =
+const struct OamData gOamData_AffineDouble_ObjBlend_16x16 =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_DOUBLE,
@@ -983,7 +983,7 @@ const struct OamData gUnknown_08524AEC =
     .paletteNum = 0,
 };
 
-const struct OamData gUnknown_08524AF4 =
+const struct OamData gOamData_AffineDouble_ObjBlend_32x32 =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_DOUBLE,
@@ -997,7 +997,7 @@ const struct OamData gUnknown_08524AF4 =
     .paletteNum = 0,
 };
 
-const struct OamData gUnknown_08524AFC =
+const struct OamData gOamData_AffineDouble_ObjBlend_64x64 =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_DOUBLE,
@@ -1011,7 +1011,7 @@ const struct OamData gUnknown_08524AFC =
     .paletteNum = 0,
 };
 
-const struct OamData gUnknown_08524B04 =
+const struct OamData gOamData_AffineDouble_ObjBlend_16x8 =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_DOUBLE,
@@ -1025,7 +1025,7 @@ const struct OamData gUnknown_08524B04 =
     .paletteNum = 0,
 };
 
-const struct OamData gUnknown_08524B0C =
+const struct OamData gOamData_AffineDouble_ObjBlend_32x8 =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_DOUBLE,
@@ -1039,7 +1039,7 @@ const struct OamData gUnknown_08524B0C =
     .paletteNum = 0,
 };
 
-const struct OamData gUnknown_08524B14 =
+const struct OamData gOamData_AffineDouble_ObjBlend_32x16 =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_DOUBLE,
@@ -1053,7 +1053,7 @@ const struct OamData gUnknown_08524B14 =
     .paletteNum = 0,
 };
 
-const struct OamData gUnknown_08524B1C =
+const struct OamData gOamData_AffineDouble_ObjBlend_64x32 =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_DOUBLE,
@@ -1067,7 +1067,7 @@ const struct OamData gUnknown_08524B1C =
     .paletteNum = 0,
 };
 
-const struct OamData gUnknown_08524B24 =
+const struct OamData gOamData_AffineDouble_ObjBlend_8x16 =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_DOUBLE,
@@ -1081,7 +1081,7 @@ const struct OamData gUnknown_08524B24 =
     .paletteNum = 0,
 };
 
-const struct OamData gUnknown_08524B2C =
+const struct OamData gOamData_AffineDouble_ObjBlend_8x32 =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_DOUBLE,
@@ -1095,7 +1095,7 @@ const struct OamData gUnknown_08524B2C =
     .paletteNum = 0,
 };
 
-const struct OamData gUnknown_08524B34 =
+const struct OamData gOamData_AffineDouble_ObjBlend_16x32 =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_DOUBLE,
@@ -1109,7 +1109,7 @@ const struct OamData gUnknown_08524B34 =
     .paletteNum = 0,
 };
 
-const struct OamData gUnknown_08524B3C =
+const struct OamData gOamData_AffineDouble_ObjBlend_32x64 =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_DOUBLE,

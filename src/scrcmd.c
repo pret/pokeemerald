@@ -27,13 +27,13 @@
 #include "event_obj_lock.h"
 #include "menu.h"
 #include "money.h"
-#include "mossdeep_gym.h"
 #include "mystery_event_script.h"
 #include "palette.h"
 #include "party_menu.h"
 #include "pokemon_storage_system.h"
 #include "random.h"
 #include "overworld.h"
+#include "rotating_tile_puzzle.h"
 #include "rtc.h"
 #include "script.h"
 #include "script_menu.h"
@@ -607,7 +607,7 @@ bool8 ScrCmd_incrementgamestat(struct ScriptContext *ctx)
 
 bool8 ScrCmd_animateflash(struct ScriptContext *ctx)
 {
-    sub_80B009C(ScriptReadByte(ctx));
+    AnimateFlash(ScriptReadByte(ctx));
     ScriptContext1_Stop();
     return TRUE;
 }
@@ -815,7 +815,7 @@ bool8 ScrCmd_warpteleport(struct ScriptContext *ctx)
     return TRUE;
 }
 
-bool8 ScrCmd_warpD7(struct ScriptContext *ctx)
+bool8 ScrCmd_warpmossdeepgym(struct ScriptContext *ctx)
 {
     u8 mapGroup = ScriptReadByte(ctx);
     u8 mapNum = ScriptReadByte(ctx);
@@ -824,7 +824,7 @@ bool8 ScrCmd_warpD7(struct ScriptContext *ctx)
     u16 y = VarGet(ScriptReadHalfword(ctx));
 
     SetWarpDestination(mapGroup, mapNum, warpId, x, y);
-    sub_80AF87C();
+    DoMossdeepGymWarp();
     ResetInitialPlayerAvatarState();
     return TRUE;
 }
@@ -1930,9 +1930,9 @@ bool8 ScrCmd_setberrytree(struct ScriptContext *ctx)
 
 bool8 ScrCmd_getpricereduction(struct ScriptContext *ctx)
 {
-    u16 value = VarGet(ScriptReadHalfword(ctx));
+    u16 newsKind = VarGet(ScriptReadHalfword(ctx));
 
-    gSpecialVar_Result = GetPriceReduction(value);
+    gSpecialVar_Result = GetPriceReduction(newsKind);
     return FALSE;
 }
 
@@ -2149,31 +2149,31 @@ bool8 ScrCmd_takecoins(struct ScriptContext *ctx)
     return FALSE;
 }
 
-bool8 ScrCmd_mossdeepgym1(struct ScriptContext *ctx)
+bool8 ScrCmd_moverotatingtileobjects(struct ScriptContext *ctx)
 {
-    u16 v1 = VarGet(ScriptReadHalfword(ctx));
+    u16 puzzleNumber = VarGet(ScriptReadHalfword(ctx));
 
-    sMovingNpcId = MossdeepGym_MoveEvents(v1);
+    sMovingNpcId = MoveRotatingTileObjects(puzzleNumber);
     return FALSE;
 }
 
-bool8 ScrCmd_mossdeepgym2(struct ScriptContext *ctx)
+bool8 ScrCmd_turnrotatingtileobjects(struct ScriptContext *ctx)
 {
-    MossdeepGym_TurnEvents();
+    TurnRotatingTileObjects();
     return FALSE;
 }
 
-bool8 ScrCmd_mossdeepgym3(struct ScriptContext *ctx)
+bool8 ScrCmd_initrotatingtilepuzzle(struct ScriptContext *ctx)
 {
-    u16 v1 = VarGet(ScriptReadHalfword(ctx));
+    u16 isTrickHouse = VarGet(ScriptReadHalfword(ctx));
 
-    InitMossdeepGymTiles(v1);
+    InitRotatingTilePuzzle(isTrickHouse);
     return FALSE;
 }
 
-bool8 ScrCmd_mossdeepgym4(struct ScriptContext *ctx)
+bool8 ScrCmd_freerotatingtilepuzzle(struct ScriptContext *ctx)
 {
-    FinishMossdeepGymTiles();
+    FreeRotatingTilePuzzle();
     return FALSE;
 }
 
@@ -2218,6 +2218,8 @@ bool8 ScrCmd_checkmonobedience(struct ScriptContext *ctx)
     return FALSE;
 }
 
+// TODO: Should be renamed. Name implies general usage, but its specifically for Wonder Card
+// See GetSavedRamScriptIfValid, which is NULL if ValidateReceivedWonderCard returns FALSE
 bool8 ScrCmd_gotoram(struct ScriptContext *ctx)
 {
     const u8* v1 = GetSavedRamScriptIfValid();

@@ -188,18 +188,18 @@ static void sub_8144A24(struct Sprite *);
 static void sub_8144E60(struct Sprite *);
 static void sub_8145294(struct Sprite *);
 
-extern const u8 gUnknown_082A5B89[];
-extern const u8 gUnknown_082A5C13[];
-extern const u8 gUnknown_082A5BD7[];
-extern const u8 gUnknown_082A5BCB[];
-extern const u8 gUnknown_082A5BE0[];
-extern const u8 gUnknown_082A5BEF[];
-extern const u8 gUnknown_082A5C21[];
-extern const u8 gUnknown_082A5C61[];
-extern const u8 gUnknown_082A5C04[];
-extern const u8 gUnknown_082A5B12[];
-extern const u8 gUnknown_082A5B6B[];
-extern const u8 gUnknown_082A5B4E[];
+extern const u8 Roulette_Text_ControlsInstruction[];
+extern const u8 Roulette_Text_KeepPlaying[];
+extern const u8 Roulette_Text_Jackpot[];
+extern const u8 Roulette_Text_ItsAHit[];
+extern const u8 Roulette_Text_NothingDoing[];
+extern const u8 Roulette_Text_YouveWonXCoins[];
+extern const u8 Roulette_Text_BoardWillBeCleared[];
+extern const u8 Roulette_Text_CoinCaseIsFull[];
+extern const u8 Roulette_Text_NoCoinsLeft[];
+extern const u8 Roulette_Text_PlayMinimumWagerIsX[];
+extern const u8 Roulette_Text_SpecialRateTable[];
+extern const u8 Roulette_Text_NotEnoughCoins[];
 
 static const u16 gUnknown_085B5BFC[] = INCBIN_U16("graphics/roulette/85B5BFC.gbapal");
 static const u32 gUnknown_085B5DFC[] = INCBIN_U32("graphics/roulette/85B5DFC.bin.lz");
@@ -974,7 +974,7 @@ static void sub_81405CC(void)
         sub_81436D0(0);
         sub_81424FC(0);
         DrawStdWindowFrame(gUnknown_0203AB8C, FALSE);
-        AddTextPrinterParameterized(gUnknown_0203AB8C, 1, gUnknown_082A5B89, 0, 1, TEXT_SPEED_FF, NULL);
+        AddTextPrinterParameterized(gUnknown_0203AB8C, 1, Roulette_Text_ControlsInstruction, 0, 1, TEXT_SPEED_FF, NULL);
         CopyWindowToVram(gUnknown_0203AB8C, 3);
         gSpriteCoordOffsetX = -60;
         gSpriteCoordOffsetY = 0;
@@ -1045,7 +1045,7 @@ static void sub_8140914(u8 taskId)
 {
     DisplayYesNoMenuDefaultYes();
     DrawStdWindowFrame(gUnknown_0203AB8C, 0);
-    AddTextPrinterParameterized(gUnknown_0203AB8C, 1, gUnknown_082A5C13, 0, 1, TEXT_SPEED_FF, 0);
+    AddTextPrinterParameterized(gUnknown_0203AB8C, 1, Roulette_Text_KeepPlaying, 0, 1, TEXT_SPEED_FF, 0);
     CopyWindowToVram(gUnknown_0203AB8C, 3);
     DoYesNoFuncWithChoice(taskId, &gUnknown_085B6410);
 }
@@ -1552,14 +1552,14 @@ static void sub_814189C(u8 taskId)
         {
             PlayFanfare(MUS_ME_B_BIG);
             DrawStdWindowFrame(gUnknown_0203AB8C, FALSE);
-            AddTextPrinterParameterized(gUnknown_0203AB8C, 1, gUnknown_082A5BD7, 0, 1, TEXT_SPEED_FF, NULL);
+            AddTextPrinterParameterized(gUnknown_0203AB8C, 1, Roulette_Text_Jackpot, 0, 1, TEXT_SPEED_FF, NULL);
             CopyWindowToVram(gUnknown_0203AB8C, 3);
         }
         else
         {
             PlayFanfare(MUS_ME_B_SMALL);
             DrawStdWindowFrame(gUnknown_0203AB8C, FALSE);
-            AddTextPrinterParameterized(gUnknown_0203AB8C, 1, gUnknown_082A5BCB, 0, 1, TEXT_SPEED_FF, NULL);
+            AddTextPrinterParameterized(gUnknown_0203AB8C, 1, Roulette_Text_ItsAHit, 0, 1, TEXT_SPEED_FF, NULL);
             CopyWindowToVram(gUnknown_0203AB8C, 3);
         }
         break;
@@ -1567,7 +1567,7 @@ static void sub_814189C(u8 taskId)
     default:
         m4aSongNumStart(SE_HAZURE);
         DrawStdWindowFrame(gUnknown_0203AB8C, FALSE);
-        AddTextPrinterParameterized(gUnknown_0203AB8C, 1, gUnknown_082A5BE0, 0, 1, TEXT_SPEED_FF, NULL);
+        AddTextPrinterParameterized(gUnknown_0203AB8C, 1, Roulette_Text_NothingDoing, 0, 1, TEXT_SPEED_FF, NULL);
         CopyWindowToVram(gUnknown_0203AB8C, 3);
         break;
     }
@@ -1609,7 +1609,7 @@ static void sub_8141984(u8 taskId)
 static void sub_8141A18(u8 taskId)
 {
     ConvertIntToDecimalStringN(gStringVar1, (gUnknown_0203AB88->var19 * gTasks[taskId].data[2]), STR_CONV_MODE_LEFT_ALIGN, 2);
-    StringExpandPlaceholders(gStringVar4, gUnknown_082A5BEF);
+    StringExpandPlaceholders(gStringVar4, Roulette_Text_YouveWonXCoins);
     DrawStdWindowFrame(gUnknown_0203AB8C, FALSE);
     AddTextPrinterParameterized(gUnknown_0203AB8C, 1, gStringVar4, 0, 1, TEXT_SPEED_FF, NULL);
     CopyWindowToVram(gUnknown_0203AB8C, 3);
@@ -1644,14 +1644,14 @@ static void sub_8141B58(u8 taskId)
         if (gTasks[taskId].data[6] == 6)
         {
             DrawStdWindowFrame(gUnknown_0203AB8C, FALSE);
-            AddTextPrinterParameterized(gUnknown_0203AB8C, 1, gUnknown_082A5C21, 0, 1, TEXT_SPEED_FF, NULL);
+            AddTextPrinterParameterized(gUnknown_0203AB8C, 1, Roulette_Text_BoardWillBeCleared, 0, 1, TEXT_SPEED_FF, NULL);
             CopyWindowToVram(gUnknown_0203AB8C, 3);
             sub_8141F7C(taskId, dp01t_12_3_battle_menu, 0xFFFF, 3);
         }
         else if (gTasks[taskId].data[13] == 9999)
         {
             DrawStdWindowFrame(gUnknown_0203AB8C, FALSE);
-            AddTextPrinterParameterized(gUnknown_0203AB8C, 1, gUnknown_082A5C61, 0, 1, TEXT_SPEED_FF, NULL);
+            AddTextPrinterParameterized(gUnknown_0203AB8C, 1, Roulette_Text_CoinCaseIsFull, 0, 1, TEXT_SPEED_FF, NULL);
             CopyWindowToVram(gUnknown_0203AB8C, 3);
             sub_8141F7C(taskId, sub_8140914, 0xFFFF, 0x3);
         }
@@ -1663,7 +1663,7 @@ static void sub_8141B58(u8 taskId)
     else
     {
         DrawStdWindowFrame(gUnknown_0203AB8C, FALSE);
-        AddTextPrinterParameterized(gUnknown_0203AB8C, 1, gUnknown_082A5C04, 0, 1, TEXT_SPEED_FF, NULL);
+        AddTextPrinterParameterized(gUnknown_0203AB8C, 1, Roulette_Text_NoCoinsLeft, 0, 1, TEXT_SPEED_FF, NULL);
         CopyWindowToVram(gUnknown_0203AB8C, 3);
         sub_8141F7C(taskId, sub_8140994, 0x3C, 0x3);
     }
@@ -1688,7 +1688,7 @@ static void dp01t_12_3_battle_menu(u8 taskId)
     if (gTasks[taskId].data[13] == 9999)
     {
         DrawStdWindowFrame(gUnknown_0203AB8C, FALSE);
-        AddTextPrinterParameterized(gUnknown_0203AB8C, 1, gUnknown_082A5C61, 0, 1, TEXT_SPEED_FF, NULL);
+        AddTextPrinterParameterized(gUnknown_0203AB8C, 1, Roulette_Text_CoinCaseIsFull, 0, 1, TEXT_SPEED_FF, NULL);
         CopyWindowToVram(gUnknown_0203AB8C, 3);
         sub_8141F7C(taskId, sub_8140914, 0xFFFF, 3);
     }
@@ -3121,7 +3121,7 @@ static void sub_81429F0(u8 taskId)
     {
         u32 temp = gUnknown_085B6344[(gSpecialVar_0x8004 & 1) + (gSpecialVar_0x8004 >> 7 << 1)];
         ConvertIntToDecimalStringN(gStringVar1, temp, STR_CONV_MODE_LEADING_ZEROS, 1);
-        StringExpandPlaceholders(gStringVar4, gUnknown_082A5B12);
+        StringExpandPlaceholders(gStringVar4, Roulette_Text_PlayMinimumWagerIsX);
         DrawStdWindowFrame(0, FALSE);
         AddTextPrinterParameterized(0, 1, gStringVar4, 0, 1, TEXT_SPEED_FF, NULL);
         CopyWindowToVram(0, 3);
@@ -3140,13 +3140,13 @@ static void Task_Roulette_0(u8 taskId)
         if ((gSpecialVar_0x8004 & 0x80) && (gSpecialVar_0x8004 & 1))
         {
             DrawStdWindowFrame(0, FALSE);
-            AddTextPrinterParameterized(0, 1, gUnknown_082A5B6B, 0, 1, TEXT_SPEED_FF, NULL);
+            AddTextPrinterParameterized(0, 1, Roulette_Text_SpecialRateTable, 0, 1, TEXT_SPEED_FF, NULL);
             CopyWindowToVram(0, 3);
             gTasks[taskId].func = sub_81429F0;
         }
         else
         {
-            StringExpandPlaceholders(gStringVar4, gUnknown_082A5B12);
+            StringExpandPlaceholders(gStringVar4, Roulette_Text_PlayMinimumWagerIsX);
             DrawStdWindowFrame(0, FALSE);
             AddTextPrinterParameterized(0, 1, gStringVar4, 0, 1, TEXT_SPEED_FF, NULL);
             CopyWindowToVram(0, 3);
@@ -3155,7 +3155,7 @@ static void Task_Roulette_0(u8 taskId)
     }
     else
     {
-        StringExpandPlaceholders(gStringVar4, gUnknown_082A5B4E);
+        StringExpandPlaceholders(gStringVar4, Roulette_Text_NotEnoughCoins);
         DrawStdWindowFrame(0, FALSE);
         AddTextPrinterParameterized(0, 1, gStringVar4, 0, 1, TEXT_SPEED_FF, NULL);
         CopyWindowToVram(0, 3);

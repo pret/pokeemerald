@@ -22,7 +22,7 @@ LilycoveCity_DepartmentStore_1F_EventScript_21F69C:: @ 821F69C
 	copyvar VAR_0x8008, VAR_RESULT
 	special BufferLottoTicketNumber
 	msgbox LilycoveCity_DepartmentStore_1F_Text_2A650B, MSGBOX_DEFAULT
-	applymovement 2, Common_Movement_WalkInPlaceRight
+	applymovement 2, Common_Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	playse SE_PC_ON
 	special DoLotteryCornerComputerEffect

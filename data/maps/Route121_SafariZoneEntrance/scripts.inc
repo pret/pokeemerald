@@ -46,7 +46,7 @@ Route121_SafariZoneEntrance_EventScript_22BC0E:: @ 822BC0E
 
 Route121_SafariZoneEntrance_EventScript_22BC18:: @ 822BC18
 	lockall
-	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceUp
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	showmoneybox 0, 0, 0
 	msgbox Route121_SafariZoneEntrance_Text_2A4F74, MSGBOX_YESNO

@@ -39,7 +39,7 @@ const struct SpriteTemplate gBattleAnimSpriteTemplate_8596E7C =
 {
     .tileTag = ANIM_TAG_SMALL_EMBER,
     .paletteTag = ANIM_TAG_SMALL_EMBER,
-    .oam = &gUnknown_08524914,
+    .oam = &gOamData_AffineOff_ObjNormal_32x32,
     .anims = gUnknown_08596E78,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
@@ -92,7 +92,7 @@ const struct SpriteTemplate gUnknown_08596EF4 =
 {
     .tileTag = ANIM_TAG_SMALL_EMBER,
     .paletteTag = ANIM_TAG_SMALL_EMBER,
-    .oam = &gUnknown_085249D4,
+    .oam = &gOamData_AffineDouble_ObjNormal_32x32,
     .anims = gUnknown_08596EB4,
     .images = NULL,
     .affineAnims = gUnknown_08596EEC,
@@ -118,7 +118,7 @@ const struct SpriteTemplate gUnknown_08596F28 =
 {
     .tileTag = ANIM_TAG_FIRE_PLUME,
     .paletteTag = ANIM_TAG_FIRE_PLUME,
-    .oam = &gUnknown_08524914,
+    .oam = &gOamData_AffineOff_ObjNormal_32x32,
     .anims = gUnknown_08596F24,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
@@ -161,7 +161,7 @@ const struct SpriteTemplate gUnknown_08596F80 =
 {
     .tileTag = ANIM_TAG_SMALL_EMBER,
     .paletteTag = ANIM_TAG_SMALL_EMBER,
-    .oam = &gUnknown_085249D4,
+    .oam = &gOamData_AffineDouble_ObjNormal_32x32,
     .anims = gUnknown_08596F50,
     .images = NULL,
     .affineAnims = gUnknown_08596F78,
@@ -172,7 +172,7 @@ const struct SpriteTemplate gUnknown_08596F98 =
 {
     .tileTag = ANIM_TAG_HOLLOW_ORB,
     .paletteTag = ANIM_TAG_HOLLOW_ORB,
-    .oam = &gUnknown_0852490C,
+    .oam = &gOamData_AffineOff_ObjNormal_16x16,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
@@ -183,7 +183,7 @@ const struct SpriteTemplate gUnknown_08596FB0 =
 {
     .tileTag = ANIM_TAG_SMALL_EMBER,
     .paletteTag = ANIM_TAG_SMALL_EMBER,
-    .oam = &gUnknown_08524914,
+    .oam = &gOamData_AffineOff_ObjNormal_32x32,
     .anims = gUnknown_08596E78,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
@@ -249,7 +249,7 @@ const struct SpriteTemplate gDragonRushSpriteTemplate =
 {
     .tileTag = ANIM_TAG_SLAM_HIT_2,
     .paletteTag = ANIM_TAG_RED_HEART,
-    .oam = &gUnknown_0852497C,
+    .oam = &gOamData_AffineNormal_ObjNormal_64x64,
     .anims = gDragonRushAnimTable,
     .images = NULL,
     .affineAnims = gDragonRushAffineAnimTable,
@@ -260,7 +260,7 @@ const struct SpriteTemplate gDracoMetorSpriteTemplate =
 {
     .tileTag = ANIM_TAG_IMPACT,
     .paletteTag = ANIM_TAG_IMPACT,
-    .oam = &gUnknown_085249D4,
+    .oam = &gOamData_AffineDouble_ObjNormal_32x32,
     .anims = gDracoMeteorAnimCmd,
     .images = NULL,
     .affineAnims = gDracoMeteorAffineAnims,
@@ -271,7 +271,7 @@ const struct SpriteTemplate gDragonPulseSpriteTemplate =
 {
     .tileTag = ANIM_TAG_DRAGON_PULSE,
     .paletteTag = ANIM_TAG_DRAGON_PULSE,
-    .oam = &gUnknown_08524954,
+    .oam = &gOamData_AffineOff_ObjNormal_16x32,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,

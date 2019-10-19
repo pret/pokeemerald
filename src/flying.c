@@ -42,7 +42,7 @@ const struct SpriteTemplate gUnknown_08596270 =
 {
     .tileTag = ANIM_TAG_GUST,
     .paletteTag = ANIM_TAG_GUST,
-    .oam = &gUnknown_0852495C,
+    .oam = &gOamData_AffineOff_ObjNormal_32x64,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
@@ -65,7 +65,7 @@ const struct SpriteTemplate gBattleAnimSpriteTemplate_85962A4 =
 {
     .tileTag = ANIM_TAG_GUST,
     .paletteTag = ANIM_TAG_GUST,
-    .oam = &gUnknown_085249BC,
+    .oam = &gOamData_AffineNormal_ObjNormal_32x64,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gUnknown_085962A0,
@@ -90,7 +90,7 @@ const struct SpriteTemplate gUnknown_085962D4 =
 {
     .tileTag = ANIM_TAG_AIR_WAVE_2,
     .paletteTag = ANIM_TAG_AIR_WAVE_2,
-    .oam = &gUnknown_08524934,
+    .oam = &gOamData_AffineOff_ObjNormal_32x16,
     .anims = gUnknown_085962D0,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
@@ -133,7 +133,7 @@ const struct SpriteTemplate gUnknown_08596340 =
 {
     .tileTag = ANIM_TAG_ROUND_SHADOW,
     .paletteTag = ANIM_TAG_ROUND_SHADOW,
-    .oam = &gUnknown_085249DC,
+    .oam = &gOamData_AffineDouble_ObjNormal_64x64,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gUnknown_08596314,
@@ -144,7 +144,7 @@ const struct SpriteTemplate gUnknown_08596358 =
 {
     .tileTag = ANIM_TAG_ROUND_SHADOW,
     .paletteTag = ANIM_TAG_ROUND_SHADOW,
-    .oam = &gUnknown_0852497C,
+    .oam = &gOamData_AffineNormal_ObjNormal_64x64,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gUnknown_08596338,
@@ -173,7 +173,7 @@ const struct SpriteTemplate gUnknown_08596388 =
 {
     .tileTag = ANIM_TAG_WHITE_FEATHER,
     .paletteTag = ANIM_TAG_WHITE_FEATHER,
-    .oam = &gUnknown_08524974,
+    .oam = &gOamData_AffineNormal_ObjNormal_32x32,
     .anims = gUnknown_08596380,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
@@ -184,7 +184,7 @@ const struct SpriteTemplate gUnknown_085963A0 =
 {
     .tileTag = ANIM_TAG_SMALL_BUBBLES,
     .paletteTag = ANIM_TAG_SMALL_BUBBLES,
-    .oam = &gUnknown_0852490C,
+    .oam = &gOamData_AffineOff_ObjNormal_16x16,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
@@ -210,7 +210,7 @@ const struct SpriteTemplate gUnknown_085963D4 =
 {
     .tileTag = ANIM_TAG_WHIRLWIND_LINES,
     .paletteTag = ANIM_TAG_WHIRLWIND_LINES,
-    .oam = &gUnknown_08524934,
+    .oam = &gOamData_AffineOff_ObjNormal_32x16,
     .anims = gUnknown_085963D0,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
@@ -236,7 +236,7 @@ const struct SpriteTemplate gUnknown_08596420 =
 {
     .tileTag = ANIM_TAG_ROUND_SHADOW,
     .paletteTag = ANIM_TAG_ROUND_SHADOW,
-    .oam = &gUnknown_085249DC,
+    .oam = &gOamData_AffineDouble_ObjNormal_64x64,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gUnknown_0859641C,
@@ -258,7 +258,7 @@ const struct SpriteTemplate gUnknown_0859644C =
 {
     .tileTag = ANIM_TAG_ROUND_SHADOW,
     .paletteTag = ANIM_TAG_ROUND_SHADOW,
-    .oam = &gUnknown_085249DC,
+    .oam = &gOamData_AffineDouble_ObjNormal_64x64,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gUnknown_08596448,
@@ -283,7 +283,7 @@ const struct SpriteTemplate gUnknown_08596490 =
 {
     .tileTag = ANIM_TAG_ROUND_SHADOW,
     .paletteTag = ANIM_TAG_ROUND_SHADOW,
-    .oam = &gUnknown_085249DC,
+    .oam = &gOamData_AffineDouble_ObjNormal_64x64,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gUnknown_0859648C,
@@ -307,7 +307,7 @@ const struct SpriteTemplate gUnknown_085964CC =
 {
     .tileTag = ANIM_TAG_SPLASH,
     .paletteTag = ANIM_TAG_SPLASH,
-    .oam = &gUnknown_085249DC,
+    .oam = &gOamData_AffineDouble_ObjNormal_64x64,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
@@ -318,7 +318,7 @@ const struct SpriteTemplate gUnknown_085964E4 =
 {
     .tileTag = ANIM_TAG_SWEAT_BEAD,
     .paletteTag = ANIM_TAG_SWEAT_BEAD,
-    .oam = &gUnknown_08524904,
+    .oam = &gOamData_AffineOff_ObjNormal_8x8,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
@@ -329,7 +329,7 @@ const struct SpriteTemplate gUnknown_085964FC =
 {
     .tileTag = ANIM_TAG_CIRCLE_OF_LIGHT,
     .paletteTag = ANIM_TAG_CIRCLE_OF_LIGHT,
-    .oam = &gUnknown_08524A3C,
+    .oam = &gOamData_AffineOff_ObjBlend_64x64,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
@@ -340,7 +340,7 @@ const struct SpriteTemplate gUnknown_08596514 =
 {
     .tileTag = ANIM_TAG_BIRD,
     .paletteTag = ANIM_TAG_BIRD,
-    .oam = &gUnknown_085249DC,
+    .oam = &gOamData_AffineDouble_ObjNormal_64x64,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
@@ -550,12 +550,12 @@ void sub_810E2C8(struct Sprite *sprite)
 
 struct FeatherDanceData
 {
-    u8 unk0_0a:1;
-    u8 unk0_0b:1;
-    u8 unk0_0c:1;
-    u8 unk0_0d:1;
-    u8 unk0_1:4;
-    u8 unk1;
+    u16 unk0_0a:1;
+    u16 unk0_0b:1;
+    u16 unk0_0c:1;
+    u16 unk0_0d:1;
+    u16 unk0_1:4;
+    u16 unk1:8;
     u16 unk2;
     s16 unk4;
     u16 unk6;
@@ -652,20 +652,11 @@ void sub_810E314(struct Sprite *sprite)
     sprite->callback = sub_810E520;
 }
 
-#ifdef NONMATCHING
-/*
-Things I can't get to match:
-1. data->unk0_1 bitfield behaviour. The way bits are read is different.
-2. sprite->oam.priority--; sprite->oam.priority++; Nonmatching version tail-merges these, original does not.
-3. sprite->pos2.x = (gSineTable[data->unk2] * var) >> 8; data->unk2 is very weirdly read at seemingly random moments inside the switch.
-4. sinVal r6/r7 mismatch.
-*/
 void sub_810E520(struct Sprite *sprite)
 {
-    u8 matrixNum, sinIndex, var;
+    u8 matrixNum, sinIndex;
     s16 sinVal = 0;
     struct FeatherDanceData *data = (struct FeatherDanceData *)sprite->data;
-
     if (data->unk0_0a)
     {
         if (data->unk1-- % 256 == 0)
@@ -676,56 +667,69 @@ void sub_810E520(struct Sprite *sprite)
     }
     else
     {
-        switch (data->unk2 >> 6)
+        switch (data->unk2 / 64)
         {
-        case 0:
-            if (data->unk0_1 == 1)
+        case 0: 
+            if (data->unk0_1 << 24 >> 24 == 1) // the shifts have to be here
             {
                 data->unk0_0d = 1;
                 data->unk0_0a = 1;
                 data->unk1 = 0;
             }
-            else if (data->unk0_1 == 3)
+            else if (data->unk0_1 << 24 >> 24 == 3)
             {
                 data->unk0_0b ^= 1;
+                data->unk0_0a = 1;
                 data->unk1 = 0;
             }
             else if (data->unk0_0d)
             {
                 sprite->hFlip ^= 1;
                 sprite->animNum = sprite->hFlip;
-                sprite->animBeginning = 1;
-                sprite->animEnded = 0;
+                sprite->animBeginning = TRUE;
+                sprite->animEnded = FALSE;
                 if (data->unk0_0c)
                 {
                     if (!IsContest())
                     {
                         if (!data->unkE_0)
+                        {
                             sprite->oam.priority--;
+                            data->unkE_0 ^= 1;
+                        }
                         else
+                        {
                             sprite->oam.priority++;
+                            data->unkE_0 ^= 1;
+                        }
                     }
                     else
                     {
                         if (!data->unkE_0)
+                        {
                             sprite->subpriority -= 12;
+                            data->unkE_0 ^= 1;
+                        }
                         else
+                        {
                             sprite->subpriority += 12;
+                            data->unkE_0 ^= 1;
+                        }
                     }
-                    data->unkE_0 ^= 1;
                 }
                 data->unk0_0d = 0;
+                data->unk2;
             }
             data->unk0_1 = 0;
             break;
         case 1:
-            if (data->unk0_1 == 0)
+            if (data->unk0_1 << 24 >> 24 == 0)
             {
                 data->unk0_0d = 1;
                 data->unk0_0a = 1;
                 data->unk1 = 0;
             }
-            else if (data->unk0_1 == 2)
+            else if (data->unk0_1 << 24 >> 24 == 2)
             {
                 data->unk0_0a = 1;
                 data->unk1 = 0;
@@ -734,38 +738,49 @@ void sub_810E520(struct Sprite *sprite)
             {
                 sprite->hFlip ^= 1;
                 sprite->animNum = sprite->hFlip;
-                sprite->animBeginning = 1;
-                sprite->animEnded = 0;
+                sprite->animBeginning = TRUE;
+                sprite->animEnded = FALSE;
                 if (data->unk0_0c)
                 {
                     if (!IsContest())
                     {
                         if (!data->unkE_0)
+                        {
                             sprite->oam.priority--;
+                            data->unkE_0 ^= 1;
+                        }
                         else
+                        {
                             sprite->oam.priority++;
+                            data->unkE_0 ^= 1;
+                        }
                     }
                     else
                     {
                         if (!data->unkE_0)
+                        {
                             sprite->subpriority -= 12;
+                            data->unkE_0 ^= 1;
+                        }
                         else
+                        {
                             sprite->subpriority += 12;
+                            data->unkE_0 ^= 1;
+                        }
                     }
-                    data->unkE_0 ^= 1;
                 }
                 data->unk0_0d = 0;
             }
             data->unk0_1 = 1;
             break;
         case 2:
-            if (data->unk0_1 == 0)
+            if (data->unk0_1 << 24 >> 24 == 3)
             {
                 data->unk0_0d = 1;
                 data->unk0_0a = 1;
                 data->unk1 = 0;
             }
-            else if (data->unk0_1 == 2)
+            else if (data->unk0_1 << 24 >> 24 == 1)
             {
                 data->unk0_0a = 1;
                 data->unk1 = 0;
@@ -774,72 +789,96 @@ void sub_810E520(struct Sprite *sprite)
             {
                 sprite->hFlip ^= 1;
                 sprite->animNum = sprite->hFlip;
-                sprite->animBeginning = 1;
-                sprite->animEnded = 0;
+                sprite->animBeginning = TRUE;
+                sprite->animEnded = FALSE;
                 if (data->unk0_0c)
                 {
                     if (!IsContest())
                     {
                         if (!data->unkE_0)
+                        {
                             sprite->oam.priority--;
+                            data->unkE_0 ^= 1;
+                        }
                         else
+                        {
                             sprite->oam.priority++;
+                            data->unkE_0 ^= 1;
+                        }
                     }
                     else
                     {
                         if (!data->unkE_0)
+                        {
                             sprite->subpriority -= 12;
+                            data->unkE_0 ^= 1;
+                        }
                         else
+                        {
                             sprite->subpriority += 12;
+                            data->unkE_0 ^= 1;
+                        }
                     }
-                    data->unkE_0 ^= 1;
                 }
                 data->unk0_0d = 0;
             }
             data->unk0_1 = 2;
             break;
         case 3:
-            if (data->unk0_1 == 2)
+            if (data->unk0_1 << 24 >> 24 == 2)
             {
                 data->unk0_0d = 1;
             }
-            else if (data->unk0_1 == 0)
+            else if (data->unk0_1 << 24 >> 24 == 0)
             {
                 data->unk0_0b ^= 1;
+                data->unk0_0a = 1;
                 data->unk1 = 0;
             }
             else if (data->unk0_0d)
             {
                 sprite->hFlip ^= 1;
                 sprite->animNum = sprite->hFlip;
-                sprite->animBeginning = 1;
-                sprite->animEnded = 0;
+                sprite->animBeginning = TRUE;
+                sprite->animEnded = FALSE;
                 if (data->unk0_0c)
                 {
                     if (!IsContest())
                     {
                         if (!data->unkE_0)
+                        {
                             sprite->oam.priority--;
+                            data->unkE_0 ^= 1;
+                        }
                         else
+                        {
                             sprite->oam.priority++;
+                            data->unkE_0 ^= 1;
+                        }
                     }
                     else
                     {
                         if (!data->unkE_0)
+                        {
                             sprite->subpriority -= 12;
+                            data->unkE_0 ^= 1;
+                        }
                         else
+                        {
                             sprite->subpriority += 12;
+                            data->unkE_0 ^= 1;
+                        }
                     }
-                    data->unkE_0 ^= 1;
                 }
                 data->unk0_0d = 0;
             }
             data->unk0_1 = 3;
             break;
         }
-
-        var = data->unkC[data->unk0_0b];
-        sprite->pos2.x = (gSineTable[data->unk2] * var) >> 8;
+        #ifndef NONMATCHING
+            asm("":::"r8");
+        #endif
+        sprite->pos2.x = (data->unkC[data->unk0_0b] * gSineTable[data->unk2]) >> 8;
         matrixNum = sprite->oam.matrixNum;
 
         sinIndex = (-sprite->pos2.x >> 1) + data->unkA;
@@ -856,723 +895,13 @@ void sub_810E520(struct Sprite *sprite)
         else
             data->unk2 = (data->unk2 + (data->unk4 & 0x7FFF)) & 0xFF;
 
-        if (sprite->pos1.y + sprite->pos2.y > data->unkE_1)
+        if (sprite->pos1.y + sprite->pos2.y >= data->unkE_1)
         {
             sprite->data[0] = 0;
             sprite->callback = sub_810E2C8;
         }
     }
 }
-#else
-NAKED
-void sub_810E520(struct Sprite *sprite)
-{
-    asm_unified("push {r4-r7,lr}\n\
-    mov r7, r9\n\
-    mov r6, r8\n\
-    push {r6,r7}\n\
-    adds r5, r0, 0\n\
-    movs r6, 0\n\
-    adds r4, r5, 0\n\
-    adds r4, 0x2E\n\
-    ldrb r2, [r4]\n\
-    movs r7, 0x1\n\
-    movs r0, 0x1\n\
-    mov r9, r0\n\
-    ands r0, r2\n\
-    cmp r0, 0\n\
-    beq _0810E55A\n\
-    ldrb r0, [r4, 0x1]\n\
-    adds r1, r0, 0\n\
-    adds r1, 0xFF\n\
-    strb r1, [r4, 0x1]\n\
-    lsls r0, 24\n\
-    cmp r0, 0\n\
-    beq _0810E54E\n\
-    b _0810EA36\n\
-_0810E54E:\n\
-    movs r0, 0x2\n\
-    negs r0, r0\n\
-    ands r0, r2\n\
-    strb r0, [r4]\n\
-    strb r6, [r4, 0x1]\n\
-    b _0810EA36\n\
-_0810E55A:\n\
-    ldrh r0, [r4, 0x2]\n\
-    lsrs r1, r0, 6\n\
-    mov r12, r0\n\
-    cmp r1, 0x1\n\
-    bne _0810E566\n\
-    b _0810E68A\n\
-_0810E566:\n\
-    cmp r1, 0x1\n\
-    bgt _0810E570\n\
-    cmp r1, 0\n\
-    beq _0810E57E\n\
-    b _0810E97C\n\
-_0810E570:\n\
-    cmp r1, 0x2\n\
-    bne _0810E576\n\
-    b _0810E77E\n\
-_0810E576:\n\
-    cmp r1, 0x3\n\
-    bne _0810E57C\n\
-    b _0810E872\n\
-_0810E57C:\n\
-    b _0810E97C\n\
-_0810E57E:\n\
-    lsls r1, r2, 24\n\
-    lsrs r0, r1, 28\n\
-    cmp r0, 0x1\n\
-    bne _0810E592\n\
-    movs r0, 0x8\n\
-    orrs r0, r2\n\
-    orrs r0, r7\n\
-    strb r0, [r4]\n\
-    strb r6, [r4, 0x1]\n\
-    b _0810E680\n\
-_0810E592:\n\
-    lsrs r0, r1, 28\n\
-    cmp r0, 0x3\n\
-    bne _0810E5B4\n\
-    lsls r0, r2, 30\n\
-    lsrs r0, 31\n\
-    movs r1, 0x1\n\
-    eors r0, r1\n\
-    ands r0, r7\n\
-    lsls r0, 1\n\
-    movs r1, 0x3\n\
-    negs r1, r1\n\
-    ands r1, r2\n\
-    orrs r1, r0\n\
-    orrs r1, r7\n\
-    strb r1, [r4]\n\
-    strb r6, [r4, 0x1]\n\
-    b _0810E680\n\
-_0810E5B4:\n\
-    movs r0, 0x8\n\
-    ands r0, r2\n\
-    cmp r0, 0\n\
-    beq _0810E680\n\
-    adds r3, r5, 0\n\
-    adds r3, 0x3F\n\
-    ldrb r2, [r3]\n\
-    lsls r1, r2, 31\n\
-    lsrs r1, 31\n\
-    movs r6, 0x1\n\
-    eors r1, r6\n\
-    ands r1, r7\n\
-    movs r0, 0x2\n\
-    negs r0, r0\n\
-    mov r8, r0\n\
-    ands r0, r2\n\
-    orrs r0, r1\n\
-    strb r0, [r3]\n\
-    lsls r0, 31\n\
-    lsrs r0, 31\n\
-    adds r1, r5, 0\n\
-    adds r1, 0x2A\n\
-    strb r0, [r1]\n\
-    ldrb r0, [r3]\n\
-    movs r1, 0x4\n\
-    orrs r0, r1\n\
-    movs r1, 0x11\n\
-    negs r1, r1\n\
-    ands r0, r1\n\
-    strb r0, [r3]\n\
-    ldrb r1, [r4]\n\
-    movs r0, 0x4\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    beq _0810E672\n\
-    bl IsContest\n\
-    lsls r0, 24\n\
-    cmp r0, 0\n\
-    bne _0810E642\n\
-    ldrb r1, [r4, 0xE]\n\
-    mov r0, r9\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    bne _0810E628\n\
-    ldrb r2, [r5, 0x5]\n\
-    lsls r1, r2, 28\n\
-    lsrs r1, 30\n\
-    subs r1, 0x1\n\
-    movs r0, 0x3\n\
-    ands r1, r0\n\
-    lsls r1, 2\n\
-    movs r0, 0xD\n\
-    negs r0, r0\n\
-    ands r0, r2\n\
-    orrs r0, r1\n\
-    strb r0, [r5, 0x5]\n\
-    b _0810E660\n\
-_0810E628:\n\
-    ldrb r2, [r5, 0x5]\n\
-    lsls r1, r2, 28\n\
-    lsrs r1, 30\n\
-    adds r1, 0x1\n\
-    movs r0, 0x3\n\
-    ands r1, r0\n\
-    lsls r1, 2\n\
-    movs r0, 0xD\n\
-    negs r0, r0\n\
-    ands r0, r2\n\
-    orrs r0, r1\n\
-    strb r0, [r5, 0x5]\n\
-    b _0810E660\n\
-_0810E642:\n\
-    ldrb r1, [r4, 0xE]\n\
-    mov r0, r9\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    bne _0810E656\n\
-    adds r1, r5, 0\n\
-    adds r1, 0x43\n\
-    ldrb r0, [r1]\n\
-    subs r0, 0xC\n\
-    b _0810E65E\n\
-_0810E656:\n\
-    adds r1, r5, 0\n\
-    adds r1, 0x43\n\
-    ldrb r0, [r1]\n\
-    adds r0, 0xC\n\
-_0810E65E:\n\
-    strb r0, [r1]\n\
-_0810E660:\n\
-    ldrb r2, [r4, 0xE]\n\
-    lsls r0, r2, 31\n\
-    lsrs r0, 31\n\
-    eors r0, r6\n\
-    ands r0, r7\n\
-    mov r1, r8\n\
-    ands r1, r2\n\
-    orrs r1, r0\n\
-    strb r1, [r4, 0xE]\n\
-_0810E672:\n\
-    ldrb r1, [r4]\n\
-    movs r0, 0x9\n\
-    negs r0, r0\n\
-    ands r0, r1\n\
-    strb r0, [r4]\n\
-    ldrh r1, [r4, 0x2]\n\
-    mov r12, r1\n\
-_0810E680:\n\
-    ldrb r1, [r4]\n\
-    movs r0, 0xF\n\
-    ands r0, r1\n\
-    strb r0, [r4]\n\
-    b _0810E97C\n\
-_0810E68A:\n\
-    lsls r1, r2, 24\n\
-    lsrs r0, r1, 28\n\
-    cmp r0, 0\n\
-    bne _0810E698\n\
-    movs r0, 0x8\n\
-    orrs r0, r2\n\
-    b _0810E6A0\n\
-_0810E698:\n\
-    lsrs r0, r1, 28\n\
-    cmp r0, 0x2\n\
-    bne _0810E6A8\n\
-    adds r0, r2, 0\n\
-_0810E6A0:\n\
-    orrs r0, r7\n\
-    strb r0, [r4]\n\
-    strb r6, [r4, 0x1]\n\
-    b _0810E774\n\
-_0810E6A8:\n\
-    movs r0, 0x8\n\
-    ands r0, r2\n\
-    cmp r0, 0\n\
-    beq _0810E774\n\
-    adds r3, r5, 0\n\
-    adds r3, 0x3F\n\
-    ldrb r2, [r3]\n\
-    lsls r1, r2, 31\n\
-    lsrs r1, 31\n\
-    movs r6, 0x1\n\
-    eors r1, r6\n\
-    ands r1, r7\n\
-    movs r0, 0x2\n\
-    negs r0, r0\n\
-    mov r8, r0\n\
-    ands r0, r2\n\
-    orrs r0, r1\n\
-    strb r0, [r3]\n\
-    lsls r0, 31\n\
-    lsrs r0, 31\n\
-    adds r1, r5, 0\n\
-    adds r1, 0x2A\n\
-    strb r0, [r1]\n\
-    ldrb r0, [r3]\n\
-    movs r1, 0x4\n\
-    orrs r0, r1\n\
-    movs r1, 0x11\n\
-    negs r1, r1\n\
-    ands r0, r1\n\
-    strb r0, [r3]\n\
-    ldrb r1, [r4]\n\
-    movs r0, 0x4\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    beq _0810E766\n\
-    bl IsContest\n\
-    lsls r0, 24\n\
-    cmp r0, 0\n\
-    bne _0810E736\n\
-    ldrb r1, [r4, 0xE]\n\
-    mov r0, r9\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    bne _0810E71C\n\
-    ldrb r2, [r5, 0x5]\n\
-    lsls r1, r2, 28\n\
-    lsrs r1, 30\n\
-    subs r1, 0x1\n\
-    movs r0, 0x3\n\
-    ands r1, r0\n\
-    lsls r1, 2\n\
-    movs r0, 0xD\n\
-    negs r0, r0\n\
-    ands r0, r2\n\
-    orrs r0, r1\n\
-    strb r0, [r5, 0x5]\n\
-    b _0810E754\n\
-_0810E71C:\n\
-    ldrb r2, [r5, 0x5]\n\
-    lsls r1, r2, 28\n\
-    lsrs r1, 30\n\
-    adds r1, 0x1\n\
-    movs r0, 0x3\n\
-    ands r1, r0\n\
-    lsls r1, 2\n\
-    movs r0, 0xD\n\
-    negs r0, r0\n\
-    ands r0, r2\n\
-    orrs r0, r1\n\
-    strb r0, [r5, 0x5]\n\
-    b _0810E754\n\
-_0810E736:\n\
-    ldrb r1, [r4, 0xE]\n\
-    mov r0, r9\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    bne _0810E74A\n\
-    adds r1, r5, 0\n\
-    adds r1, 0x43\n\
-    ldrb r0, [r1]\n\
-    subs r0, 0xC\n\
-    b _0810E752\n\
-_0810E74A:\n\
-    adds r1, r5, 0\n\
-    adds r1, 0x43\n\
-    ldrb r0, [r1]\n\
-    adds r0, 0xC\n\
-_0810E752:\n\
-    strb r0, [r1]\n\
-_0810E754:\n\
-    ldrb r2, [r4, 0xE]\n\
-    lsls r0, r2, 31\n\
-    lsrs r0, 31\n\
-    eors r0, r6\n\
-    ands r0, r7\n\
-    mov r1, r8\n\
-    ands r1, r2\n\
-    orrs r1, r0\n\
-    strb r1, [r4, 0xE]\n\
-_0810E766:\n\
-    ldrb r1, [r4]\n\
-    movs r0, 0x9\n\
-    negs r0, r0\n\
-    ands r0, r1\n\
-    strb r0, [r4]\n\
-    ldrh r1, [r4, 0x2]\n\
-    mov r12, r1\n\
-_0810E774:\n\
-    ldrb r0, [r4]\n\
-    movs r1, 0xF\n\
-    ands r1, r0\n\
-    movs r0, 0x10\n\
-    b _0810E978\n\
-_0810E77E:\n\
-    lsls r1, r2, 24\n\
-    lsrs r0, r1, 28\n\
-    cmp r0, 0x3\n\
-    bne _0810E78C\n\
-    movs r0, 0x8\n\
-    orrs r0, r2\n\
-    b _0810E794\n\
-_0810E78C:\n\
-    lsrs r0, r1, 28\n\
-    cmp r0, 0x1\n\
-    bne _0810E79C\n\
-    adds r0, r2, 0\n\
-_0810E794:\n\
-    orrs r0, r7\n\
-    strb r0, [r4]\n\
-    strb r6, [r4, 0x1]\n\
-    b _0810E868\n\
-_0810E79C:\n\
-    movs r0, 0x8\n\
-    ands r0, r2\n\
-    cmp r0, 0\n\
-    beq _0810E868\n\
-    adds r3, r5, 0\n\
-    adds r3, 0x3F\n\
-    ldrb r2, [r3]\n\
-    lsls r1, r2, 31\n\
-    lsrs r1, 31\n\
-    movs r6, 0x1\n\
-    eors r1, r6\n\
-    ands r1, r7\n\
-    movs r0, 0x2\n\
-    negs r0, r0\n\
-    mov r8, r0\n\
-    ands r0, r2\n\
-    orrs r0, r1\n\
-    strb r0, [r3]\n\
-    lsls r0, 31\n\
-    lsrs r0, 31\n\
-    adds r1, r5, 0\n\
-    adds r1, 0x2A\n\
-    strb r0, [r1]\n\
-    ldrb r0, [r3]\n\
-    movs r1, 0x4\n\
-    orrs r0, r1\n\
-    movs r1, 0x11\n\
-    negs r1, r1\n\
-    ands r0, r1\n\
-    strb r0, [r3]\n\
-    ldrb r1, [r4]\n\
-    movs r0, 0x4\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    beq _0810E85A\n\
-    bl IsContest\n\
-    lsls r0, 24\n\
-    cmp r0, 0\n\
-    bne _0810E82A\n\
-    ldrb r1, [r4, 0xE]\n\
-    mov r0, r9\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    bne _0810E810\n\
-    ldrb r2, [r5, 0x5]\n\
-    lsls r1, r2, 28\n\
-    lsrs r1, 30\n\
-    subs r1, 0x1\n\
-    movs r0, 0x3\n\
-    ands r1, r0\n\
-    lsls r1, 2\n\
-    movs r0, 0xD\n\
-    negs r0, r0\n\
-    ands r0, r2\n\
-    orrs r0, r1\n\
-    strb r0, [r5, 0x5]\n\
-    b _0810E848\n\
-_0810E810:\n\
-    ldrb r2, [r5, 0x5]\n\
-    lsls r1, r2, 28\n\
-    lsrs r1, 30\n\
-    adds r1, 0x1\n\
-    movs r0, 0x3\n\
-    ands r1, r0\n\
-    lsls r1, 2\n\
-    movs r0, 0xD\n\
-    negs r0, r0\n\
-    ands r0, r2\n\
-    orrs r0, r1\n\
-    strb r0, [r5, 0x5]\n\
-    b _0810E848\n\
-_0810E82A:\n\
-    ldrb r1, [r4, 0xE]\n\
-    mov r0, r9\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    bne _0810E83E\n\
-    adds r1, r5, 0\n\
-    adds r1, 0x43\n\
-    ldrb r0, [r1]\n\
-    subs r0, 0xC\n\
-    b _0810E846\n\
-_0810E83E:\n\
-    adds r1, r5, 0\n\
-    adds r1, 0x43\n\
-    ldrb r0, [r1]\n\
-    adds r0, 0xC\n\
-_0810E846:\n\
-    strb r0, [r1]\n\
-_0810E848:\n\
-    ldrb r2, [r4, 0xE]\n\
-    lsls r0, r2, 31\n\
-    lsrs r0, 31\n\
-    eors r0, r6\n\
-    ands r0, r7\n\
-    mov r1, r8\n\
-    ands r1, r2\n\
-    orrs r1, r0\n\
-    strb r1, [r4, 0xE]\n\
-_0810E85A:\n\
-    ldrb r1, [r4]\n\
-    movs r0, 0x9\n\
-    negs r0, r0\n\
-    ands r0, r1\n\
-    strb r0, [r4]\n\
-    ldrh r1, [r4, 0x2]\n\
-    mov r12, r1\n\
-_0810E868:\n\
-    ldrb r0, [r4]\n\
-    movs r1, 0xF\n\
-    ands r1, r0\n\
-    movs r0, 0x20\n\
-    b _0810E978\n\
-_0810E872:\n\
-    lsls r1, r2, 24\n\
-    lsrs r0, r1, 28\n\
-    cmp r0, 0x2\n\
-    bne _0810E882\n\
-    movs r0, 0x8\n\
-    orrs r0, r2\n\
-    strb r0, [r4]\n\
-    b _0810E970\n\
-_0810E882:\n\
-    lsrs r0, r1, 28\n\
-    cmp r0, 0\n\
-    bne _0810E8A4\n\
-    lsls r0, r2, 30\n\
-    lsrs r0, 31\n\
-    movs r1, 0x1\n\
-    eors r0, r1\n\
-    ands r0, r7\n\
-    lsls r0, 1\n\
-    movs r1, 0x3\n\
-    negs r1, r1\n\
-    ands r1, r2\n\
-    orrs r1, r0\n\
-    orrs r1, r7\n\
-    strb r1, [r4]\n\
-    strb r6, [r4, 0x1]\n\
-    b _0810E970\n\
-_0810E8A4:\n\
-    movs r0, 0x8\n\
-    ands r0, r2\n\
-    cmp r0, 0\n\
-    beq _0810E970\n\
-    adds r3, r5, 0\n\
-    adds r3, 0x3F\n\
-    ldrb r2, [r3]\n\
-    lsls r1, r2, 31\n\
-    lsrs r1, 31\n\
-    movs r6, 0x1\n\
-    eors r1, r6\n\
-    ands r1, r7\n\
-    movs r0, 0x2\n\
-    negs r0, r0\n\
-    mov r8, r0\n\
-    ands r0, r2\n\
-    orrs r0, r1\n\
-    strb r0, [r3]\n\
-    lsls r0, 31\n\
-    lsrs r0, 31\n\
-    adds r1, r5, 0\n\
-    adds r1, 0x2A\n\
-    strb r0, [r1]\n\
-    ldrb r0, [r3]\n\
-    movs r1, 0x4\n\
-    orrs r0, r1\n\
-    movs r1, 0x11\n\
-    negs r1, r1\n\
-    ands r0, r1\n\
-    strb r0, [r3]\n\
-    ldrb r1, [r4]\n\
-    movs r0, 0x4\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    beq _0810E962\n\
-    bl IsContest\n\
-    lsls r0, 24\n\
-    cmp r0, 0\n\
-    bne _0810E932\n\
-    ldrb r1, [r4, 0xE]\n\
-    mov r0, r9\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    bne _0810E918\n\
-    ldrb r2, [r5, 0x5]\n\
-    lsls r1, r2, 28\n\
-    lsrs r1, 30\n\
-    subs r1, 0x1\n\
-    movs r0, 0x3\n\
-    ands r1, r0\n\
-    lsls r1, 2\n\
-    movs r0, 0xD\n\
-    negs r0, r0\n\
-    ands r0, r2\n\
-    orrs r0, r1\n\
-    strb r0, [r5, 0x5]\n\
-    b _0810E950\n\
-_0810E918:\n\
-    ldrb r2, [r5, 0x5]\n\
-    lsls r1, r2, 28\n\
-    lsrs r1, 30\n\
-    adds r1, 0x1\n\
-    movs r0, 0x3\n\
-    ands r1, r0\n\
-    lsls r1, 2\n\
-    movs r0, 0xD\n\
-    negs r0, r0\n\
-    ands r0, r2\n\
-    orrs r0, r1\n\
-    strb r0, [r5, 0x5]\n\
-    b _0810E950\n\
-_0810E932:\n\
-    ldrb r1, [r4, 0xE]\n\
-    mov r0, r9\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    bne _0810E946\n\
-    adds r1, r5, 0\n\
-    adds r1, 0x43\n\
-    ldrb r0, [r1]\n\
-    subs r0, 0xC\n\
-    b _0810E94E\n\
-_0810E946:\n\
-    adds r1, r5, 0\n\
-    adds r1, 0x43\n\
-    ldrb r0, [r1]\n\
-    adds r0, 0xC\n\
-_0810E94E:\n\
-    strb r0, [r1]\n\
-_0810E950:\n\
-    ldrb r2, [r4, 0xE]\n\
-    lsls r0, r2, 31\n\
-    lsrs r0, 31\n\
-    eors r0, r6\n\
-    ands r0, r7\n\
-    mov r1, r8\n\
-    ands r1, r2\n\
-    orrs r1, r0\n\
-    strb r1, [r4, 0xE]\n\
-_0810E962:\n\
-    ldrb r1, [r4]\n\
-    movs r0, 0x9\n\
-    negs r0, r0\n\
-    ands r0, r1\n\
-    strb r0, [r4]\n\
-    ldrh r1, [r4, 0x2]\n\
-    mov r12, r1\n\
-_0810E970:\n\
-    ldrb r0, [r4]\n\
-    movs r1, 0xF\n\
-    ands r1, r0\n\
-    movs r0, 0x30\n\
-_0810E978:\n\
-    orrs r1, r0\n\
-    strb r1, [r4]\n\
-_0810E97C:\n\
-    ldrb r1, [r4]\n\
-    lsls r1, 30\n\
-    lsrs r1, 31\n\
-    adds r0, r4, 0\n\
-    adds r0, 0xC\n\
-    adds r0, r1\n\
-    ldrb r1, [r0]\n\
-    ldr r3, =gSineTable\n\
-    mov r2, r12\n\
-    lsls r0, r2, 1\n\
-    adds r0, r3\n\
-    movs r2, 0\n\
-    ldrsh r0, [r0, r2]\n\
-    muls r0, r1\n\
-    asrs r0, 8\n\
-    strh r0, [r5, 0x24]\n\
-    ldrb r2, [r5, 0x3]\n\
-    lsls r2, 26\n\
-    lsrs r2, 27\n\
-    movs r1, 0x24\n\
-    ldrsh r0, [r5, r1]\n\
-    negs r0, r0\n\
-    asrs r0, 1\n\
-    ldrb r1, [r4, 0xA]\n\
-    adds r0, r1\n\
-    lsls r0, 24\n\
-    lsrs r0, 24\n\
-    lsls r1, r0, 1\n\
-    adds r1, r3\n\
-    ldrh r6, [r1]\n\
-    ldr r1, =gOamMatrices\n\
-    lsls r2, 3\n\
-    adds r2, r1\n\
-    adds r0, 0x40\n\
-    lsls r0, 1\n\
-    adds r0, r3\n\
-    ldrh r0, [r0]\n\
-    strh r0, [r2, 0x6]\n\
-    strh r0, [r2]\n\
-    strh r6, [r2, 0x2]\n\
-    lsls r0, r6, 16\n\
-    asrs r0, 16\n\
-    negs r0, r0\n\
-    strh r0, [r2, 0x4]\n\
-    ldrh r0, [r4, 0x6]\n\
-    ldrh r2, [r4, 0x8]\n\
-    adds r0, r2\n\
-    strh r0, [r4, 0x8]\n\
-    lsls r0, 16\n\
-    lsrs r0, 24\n\
-    strh r0, [r5, 0x22]\n\
-    movs r1, 0x4\n\
-    ldrsh r0, [r4, r1]\n\
-    movs r1, 0x80\n\
-    lsls r1, 8\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    beq _0810EA0C\n\
-    ldrh r0, [r4, 0x4]\n\
-    subs r1, 0x1\n\
-    ands r1, r0\n\
-    ldrh r0, [r4, 0x2]\n\
-    subs r0, r1\n\
-    movs r1, 0xFF\n\
-    ands r0, r1\n\
-    strh r0, [r4, 0x2]\n\
-    b _0810EA1C\n\
-    .pool\n\
-_0810EA0C:\n\
-    ldrh r0, [r4, 0x4]\n\
-    ldr r1, =0x00007fff\n\
-    ands r1, r0\n\
-    ldrh r2, [r4, 0x2]\n\
-    adds r1, r2\n\
-    movs r0, 0xFF\n\
-    ands r1, r0\n\
-    strh r1, [r4, 0x2]\n\
-_0810EA1C:\n\
-    movs r0, 0x22\n\
-    ldrsh r1, [r5, r0]\n\
-    movs r2, 0x26\n\
-    ldrsh r0, [r5, r2]\n\
-    adds r1, r0\n\
-    ldrh r0, [r4, 0xE]\n\
-    lsrs r0, 1\n\
-    cmp r1, r0\n\
-    blt _0810EA36\n\
-    movs r0, 0\n\
-    strh r0, [r5, 0x2E]\n\
-    ldr r0, =sub_810E2C8\n\
-    str r0, [r5, 0x1C]\n\
-_0810EA36:\n\
-    pop {r3,r4}\n\
-    mov r8, r3\n\
-    mov r9, r4\n\
-    pop {r4-r7}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .pool\n\
-    ");
-}
-#endif
 
 void sub_810EA4C(struct Sprite *sprite)
 {

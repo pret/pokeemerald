@@ -8,7 +8,7 @@ FortreeCity_OnTransition: @ 81E25AF
 	end
 
 FortreeCity_MapScript1_1E25B3: @ 81E25B3
-	setstepcallback 2
+	setstepcallback STEP_CB_FORTREE_BRIDGE
 	end
 
 FortreeCity_EventScript_1E25B6:: @ 81E25B6
@@ -72,7 +72,7 @@ FortreeCity_EventScript_1E2630:: @ 81E2630
 FortreeCity_EventScript_1E2645:: @ 81E2645
 	msgbox FortreeCity_Text_1E2A48, MSGBOX_DEFAULT
 	closemessage
-	applymovement VAR_LAST_TALKED, FortreeCity_Movement_2723C7
+	applymovement VAR_LAST_TALKED, Movement_KecleonAppears
 	waitmovement 0
 	waitse
 	playmoncry SPECIES_KECLEON, 2

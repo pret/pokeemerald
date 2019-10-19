@@ -55,6 +55,7 @@
 #include "constants/heal_locations.h"
 #include "constants/map_types.h"
 #include "constants/maps.h"
+#include "constants/tv.h"
 #include "constants/script_menu.h"
 #include "constants/songs.h"
 #include "constants/species.h"
@@ -68,8 +69,8 @@
 EWRAM_DATA bool8 gBikeCyclingChallenge = FALSE;
 EWRAM_DATA u8 gBikeCollisions = 0;
 static EWRAM_DATA u32 sBikeCyclingTimer = 0;
-static EWRAM_DATA u8 sUnknown_0203AB5C = 0;
-static EWRAM_DATA u8 sPetalburgGymSlidingDoorFrameCounter = 0;
+static EWRAM_DATA u8 sSlidingDoorNextFrameCounter = 0;
+static EWRAM_DATA u8 sSlidingDoorFrame = 0;
 static EWRAM_DATA u8 sTutorMoveAndElevatorWindowId = 0;
 static EWRAM_DATA u16 sLilycoveDeptStore_NeverRead = 0;
 static EWRAM_DATA u16 sLilycoveDeptStore_DefaultFloorChoice = 0;
@@ -95,8 +96,8 @@ u16 GetNumMovedLilycoveFanClubMembers(void);
 
 static void RecordCyclingRoadResults(u32, u8);
 static void LoadLinkPartnerEventObjectSpritePalette(u8 graphicsId, u8 localEventId, u8 paletteNum);
-static void Task_PetalburgGym(u8);
-static void PetalburgGymFunc(u8, u16);
+static void Task_PetalburgGymSlideOpenRoomDoors(u8 taskId);
+static void PetalburgGymSetDoorMetatiles(u8 roomNumber, u16 metatileId);
 static void Task_PCTurnOnEffect(u8);
 static void PCTurnOnEffect_0(struct Task *);
 static void PCTurnOnEffect_1(s16, s8, s8);
@@ -635,6 +636,7 @@ static void LoadLinkPartnerEventObjectSpritePalette(u8 graphicsId, u8 localEvent
     }
 }
 
+// NOTE: Coordinates are +7, +7 from actual in-map coordinates
 static const struct UCoords8 sMauvilleGymSwitchCoords[] =
 {
     { 7, 22},
@@ -643,26 +645,24 @@ static const struct UCoords8 sMauvilleGymSwitchCoords[] =
     {15, 16}
 };
 
-// Flips the switches on the ground when the player steps on them.
-void MauvilleGymSpecial1(void)
+// Presses the stepped-on switch and raises the rest
+void MauvilleGymPressSwitch(void)
 {
     u8 i;
     for (i = 0; i < ARRAY_COUNT(sMauvilleGymSwitchCoords); i++)
     {
         if (i == gSpecialVar_0x8004)
-        {
             MapGridSetMetatileIdAt(sMauvilleGymSwitchCoords[i].x, sMauvilleGymSwitchCoords[i].y, METATILE_ID(MauvilleGym, PressedSwitch));
-        }
         else
-        {
             MapGridSetMetatileIdAt(sMauvilleGymSwitchCoords[i].x, sMauvilleGymSwitchCoords[i].y, METATILE_ID(MauvilleGym, RaisedSwitch));
-        }
     }
 }
 
-void MauvilleGymSpecial2(void)
+// Sets the gym barriers back to the default state; their alt state is handled by MauvilleCity_Gym_EventScript_SetAltBarriers
+void MauvilleGymSetDefaultBarriers(void)
 {
     int x, y;
+    // All switches/barriers are within these coord ranges -7
     for (y = 12; y < 24; y++)
     {
         for (x = 7; x < 16; x++)
@@ -734,13 +734,9 @@ void MauvilleGymSpecial2(void)
                     break;
                 case METATILE_ID(MauvilleGym, FloorTile):
                     if (MapGridGetMetatileIdAt(x, y - 1) == METATILE_ID(MauvilleGym, GreenBeamV1_On))
-                    {
                         MapGridSetMetatileIdAt(x, y, METATILE_ID(MauvilleGym, GreenBeamV2_On) | METATILE_COLLISION_MASK);
-                    }
                     else
-                    {
                         MapGridSetMetatileIdAt(x, y, METATILE_ID(MauvilleGym, RedBeamV2_On) | METATILE_COLLISION_MASK);
-                    }
                     break;
                 case METATILE_ID(MauvilleGym, PoleBottom_Off):
                     MapGridSetMetatileIdAt(x, y, METATILE_ID(MauvilleGym, RedBeamV1_On) | METATILE_COLLISION_MASK);
@@ -757,7 +753,7 @@ void MauvilleGymSpecial2(void)
 }
 
 // Presses all switches and deactivates all beams.
-void MauvilleGymSpecial3(void)
+void MauvilleGymDeactivatePuzzle(void)
 {
     int i, x, y;
     const struct UCoords8 *switchCoords = sMauvilleGymSwitchCoords;
@@ -814,7 +810,7 @@ void MauvilleGymSpecial3(void)
     }
 }
 
-static const u8 gUnknown_085B2B78[] = {0, 1, 1, 1, 1};
+static const bool8 sSlidingDoorNextFrameDelay[] = {0, 1, 1, 1, 1};
 
 static const u16 sPetalburgGymSlidingDoorMetatiles[] = {
     METATILE_ID(PetalburgGym, SlidingDoor_Frame0),
@@ -824,21 +820,21 @@ static const u16 sPetalburgGymSlidingDoorMetatiles[] = {
     METATILE_ID(PetalburgGym, SlidingDoor_Frame4),
 };
 
-void PetalburgGymSpecial1(void)
+void PetalburgGymSlideOpenRoomDoors(void)
 {
-    sUnknown_0203AB5C = 0;
-    sPetalburgGymSlidingDoorFrameCounter = 0;
+    sSlidingDoorNextFrameCounter = 0;
+    sSlidingDoorFrame = 0;
     PlaySE(SE_KI_GASYAN);
-    CreateTask(Task_PetalburgGym, 8);
+    CreateTask(Task_PetalburgGymSlideOpenRoomDoors, 8);
 }
 
-static void Task_PetalburgGym(u8 taskId)
+static void Task_PetalburgGymSlideOpenRoomDoors(u8 taskId)
 {
-    if (gUnknown_085B2B78[sPetalburgGymSlidingDoorFrameCounter] == sUnknown_0203AB5C)
+    if (sSlidingDoorNextFrameDelay[sSlidingDoorFrame] == sSlidingDoorNextFrameCounter)
     {
-        PetalburgGymFunc(gSpecialVar_0x8004, sPetalburgGymSlidingDoorMetatiles[sPetalburgGymSlidingDoorFrameCounter]);
-        sUnknown_0203AB5C = 0;
-        if ((++sPetalburgGymSlidingDoorFrameCounter) == ARRAY_COUNT(sPetalburgGymSlidingDoorMetatiles))
+        PetalburgGymSetDoorMetatiles(gSpecialVar_0x8004, sPetalburgGymSlidingDoorMetatiles[sSlidingDoorFrame]);
+        sSlidingDoorNextFrameCounter = 0;
+        if ((++sSlidingDoorFrame) == ARRAY_COUNT(sPetalburgGymSlidingDoorMetatiles))
         {
             DestroyTask(taskId);
             EnableBothScriptContexts();
@@ -846,11 +842,11 @@ static void Task_PetalburgGym(u8 taskId)
     }
     else
     {
-        sUnknown_0203AB5C++;
+        sSlidingDoorNextFrameCounter++;
     }
 }
 
-static void PetalburgGymFunc(u8 roomNumber, u16 metatileId)
+static void PetalburgGymSetDoorMetatiles(u8 roomNumber, u16 metatileId)
 {
     u16 doorCoordsX[4];
     u16 doorCoordsY[4];
@@ -915,9 +911,9 @@ static void PetalburgGymFunc(u8 roomNumber, u16 metatileId)
     DrawWholeMapView();
 }
 
-void PetalburgGymSpecial2(void)
+void PetalburgGymUnlockRoomDoors(void)
 {
-    PetalburgGymFunc(gSpecialVar_0x8004, sPetalburgGymSlidingDoorMetatiles[4]);
+    PetalburgGymSetDoorMetatiles(gSpecialVar_0x8004, sPetalburgGymSlidingDoorMetatiles[4]);
 }
 
 void ShowFieldMessageStringVar4(void)
@@ -3737,12 +3733,11 @@ bool32 IsTrainerRegistered(void)
 }
 
 // Always returns FALSE
-bool32 sub_813B514(void)
+bool32 ShouldDistributeEonTicket(void)
 {
-    if (!VarGet(VAR_ALWAYS_ZERO_0x403F))
-    {
+    if (!VarGet(VAR_DISTRIBUTE_EON_TICKET))
         return FALSE;
-    }
+    
     return TRUE;
 }
 

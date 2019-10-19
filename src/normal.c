@@ -65,7 +65,7 @@ const struct SpriteTemplate gConfusionDuckSpriteTemplate =
 {
     .tileTag = ANIM_TAG_DUCK,
     .paletteTag = ANIM_TAG_DUCK,
-    .oam = &gUnknown_0852490C,
+    .oam = &gOamData_AffineOff_ObjNormal_16x16,
     .anims = gUnknown_08597254,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
@@ -144,7 +144,7 @@ const struct SpriteTemplate gPowerSwapGuardSwapSpriteTemplate =
 {
     .tileTag = ANIM_TAG_COLORED_ORBS,
     .paletteTag = ANIM_TAG_COLORED_ORBS,
-    .oam = &gUnknown_0852490C,
+    .oam = &gOamData_AffineOff_ObjNormal_16x16,
     .anims = sPowerSwapGuardSwapAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
@@ -170,7 +170,7 @@ const struct SpriteTemplate gUnknown_085972C0 =
 {
     .tileTag = ANIM_TAG_SPARKLE_4,
     .paletteTag = ANIM_TAG_SPARKLE_4,
-    .oam = &gUnknown_08524914,
+    .oam = &gOamData_AffineOff_ObjNormal_32x32,
     .anims = gUnknown_085972BC,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
@@ -227,7 +227,7 @@ const struct SpriteTemplate gBasicHitSplatSpriteTemplate =
 {
     .tileTag = ANIM_TAG_IMPACT,
     .paletteTag = ANIM_TAG_IMPACT,
-    .oam = &gUnknown_08524A94,
+    .oam = &gOamData_AffineNormal_ObjBlend_32x32,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gUnknown_08597348,
@@ -238,7 +238,7 @@ const struct SpriteTemplate gBattleAnimSpriteTemplate_8597370 =
 {
     .tileTag = ANIM_TAG_IMPACT,
     .paletteTag = ANIM_TAG_IMPACT,
-    .oam = &gUnknown_08524A94,
+    .oam = &gOamData_AffineNormal_ObjBlend_32x32,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gUnknown_08597348,
@@ -249,7 +249,7 @@ const struct SpriteTemplate gUnknown_08597388 =
 {
     .tileTag = ANIM_TAG_WATER_IMPACT,
     .paletteTag = ANIM_TAG_WATER_IMPACT,
-    .oam = &gUnknown_08524A94,
+    .oam = &gOamData_AffineNormal_ObjBlend_32x32,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gUnknown_08597348,
@@ -260,7 +260,7 @@ const struct SpriteTemplate gUnknown_085973A0 =
 {
     .tileTag = ANIM_TAG_IMPACT,
     .paletteTag = ANIM_TAG_IMPACT,
-    .oam = &gUnknown_08524A94,
+    .oam = &gOamData_AffineNormal_ObjBlend_32x32,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gUnknown_08597348,
@@ -271,7 +271,7 @@ const struct SpriteTemplate gBattleAnimSpriteTemplate_85973B8 =
 {
     .tileTag = ANIM_TAG_IMPACT,
     .paletteTag = ANIM_TAG_IMPACT,
-    .oam = &gUnknown_08524A94,
+    .oam = &gOamData_AffineNormal_ObjBlend_32x32,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gUnknown_08597348,
@@ -282,7 +282,7 @@ const struct SpriteTemplate gUnknown_085973D0 =
 {
     .tileTag = ANIM_TAG_CROSS_IMPACT,
     .paletteTag = ANIM_TAG_CROSS_IMPACT,
-    .oam = &gUnknown_08524A34,
+    .oam = &gOamData_AffineOff_ObjBlend_32x32,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
@@ -293,7 +293,7 @@ const struct SpriteTemplate gUnknown_085973E8 =
 {
     .tileTag = ANIM_TAG_IMPACT,
     .paletteTag = ANIM_TAG_IMPACT,
-    .oam = &gUnknown_08524974,
+    .oam = &gOamData_AffineNormal_ObjNormal_32x32,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gUnknown_08597348,
@@ -304,7 +304,7 @@ const struct SpriteTemplate gUnknown_08597400 =
 {
     .tileTag = ANIM_TAG_IMPACT,
     .paletteTag = ANIM_TAG_IMPACT,
-    .oam = &gUnknown_08524A94,
+    .oam = &gOamData_AffineNormal_ObjBlend_32x32,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gUnknown_08597348,
@@ -822,7 +822,7 @@ void sub_8115F94(u8 taskId)
         paletteIndex = IndexOfSpritePaletteTag(gSprites[gHealthboxSpriteIds[attackerBattler]].template->paletteTag);
         selectedPalettes |= (1 << paletteIndex) << 16;
     }
-    
+
     if (gTasks[taskId].data[3] & 0x100)
         selectedPalettes |= (1 << attackerBattler) << 16;
 
@@ -994,7 +994,7 @@ void sub_8116420(struct Sprite *sprite)
 {
     if (GetBattlerSide(gBattleAnimAttacker) != B_SIDE_PLAYER && !IsContest())
         gBattleAnimArgs[1] = -gBattleAnimArgs[1];
-    
+
     sub_8116388(sprite);
 }
 

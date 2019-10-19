@@ -38,11 +38,11 @@ const struct SpriteTemplate gUnknown_08596134 =
 {
     .tileTag = ANIM_TAG_TOXIC_BUBBLE,
     .paletteTag = ANIM_TAG_TOXIC_BUBBLE,
-    .oam = &gUnknown_08524954,
+    .oam = &gOamData_AffineOff_ObjNormal_16x32,
     .anims = gUnknown_08596130,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_80A77C8,
+    .callback = AnimSparklingParticle,
 };
 
 const union AnimCmd gUnknown_0859614C[] =
@@ -106,7 +106,7 @@ const struct SpriteTemplate gUnknown_085961A8 =
 {
     .tileTag = ANIM_TAG_POISON_BUBBLE,
     .paletteTag = ANIM_TAG_POISON_BUBBLE,
-    .oam = &gUnknown_085249CC,
+    .oam = &gOamData_AffineDouble_ObjNormal_16x16,
     .anims = gUnknown_08596164,
     .images = NULL,
     .affineAnims = gUnknown_085961A0,
@@ -117,7 +117,7 @@ const struct SpriteTemplate gUnknown_085961C0 =
 {
     .tileTag = ANIM_TAG_POISON_BUBBLE,
     .paletteTag = ANIM_TAG_POISON_BUBBLE,
-    .oam = &gUnknown_085249CC,
+    .oam = &gOamData_AffineDouble_ObjNormal_16x16,
     .anims = gUnknown_08596164,
     .images = NULL,
     .affineAnims = gUnknown_085961A0,
@@ -128,7 +128,7 @@ const struct SpriteTemplate gUnknown_085961D8 =
 {
     .tileTag = ANIM_TAG_POISON_BUBBLE,
     .paletteTag = ANIM_TAG_POISON_BUBBLE,
-    .oam = &gUnknown_0852496C,
+    .oam = &gOamData_AffineNormal_ObjNormal_16x16,
     .anims = gUnknown_0859616C,
     .images = NULL,
     .affineAnims = gUnknown_085961A4,
@@ -151,7 +151,7 @@ const struct SpriteTemplate gUnknown_0859620C =
 {
     .tileTag = ANIM_TAG_POISON_BUBBLE,
     .paletteTag = ANIM_TAG_POISON_BUBBLE,
-    .oam = &gUnknown_085249CC,
+    .oam = &gOamData_AffineDouble_ObjNormal_16x16,
     .anims = gUnknown_08596168,
     .images = NULL,
     .affineAnims = gUnknown_08596208,
@@ -174,7 +174,7 @@ const struct SpriteTemplate gPoisonBubbleSpriteTemplate =
 {
     .tileTag = ANIM_TAG_POISON_BUBBLE,
     .paletteTag = ANIM_TAG_POISON_BUBBLE,
-    .oam = &gUnknown_0852496C,
+    .oam = &gOamData_AffineNormal_ObjNormal_16x16,
     .anims = gUnknown_08596164,
     .images = NULL,
     .affineAnims = gUnknown_0859623C,
@@ -185,7 +185,7 @@ const struct SpriteTemplate gWaterBubbleSpriteTemplate =
 {
     .tileTag = ANIM_TAG_SMALL_BUBBLES,
     .paletteTag = ANIM_TAG_SMALL_BUBBLES,
-    .oam = &gUnknown_08524A8C,
+    .oam = &gOamData_AffineNormal_ObjBlend_16x16,
     .anims = gUnknown_08595200,
     .images = NULL,
     .affineAnims = gUnknown_0859623C,
@@ -196,7 +196,7 @@ const struct SpriteTemplate gGreenPoisonDrip =
 {
 	.tileTag = ANIM_TAG_GREEN_POISON_BUBBLE,
 	.paletteTag = ANIM_TAG_GREEN_POISON_BUBBLE,
-	.oam = &gUnknown_085249CC,
+	.oam = &gOamData_AffineDouble_ObjNormal_16x16,
 	.anims = gUnknown_08596168,
 	.images = NULL,
 	.affineAnims = gUnknown_08596208,
@@ -207,7 +207,7 @@ const struct SpriteTemplate gGreenPoisonBubble =
 {
 	.tileTag = ANIM_TAG_GREEN_POISON_BUBBLE,
 	.paletteTag = ANIM_TAG_GREEN_POISON_BUBBLE,
-	.oam = &gUnknown_085249CC,
+	.oam = &gOamData_AffineDouble_ObjNormal_16x16,
 	.anims = gUnknown_08596164,
 	.images = NULL,
 	.affineAnims = gUnknown_085961A0,
@@ -281,7 +281,7 @@ const struct SpriteTemplate gSuckerPunchSpriteTemplate =
 {
     .tileTag = ANIM_TAG_POISON_JAB,
     .paletteTag = ANIM_TAG_POISON_JAB,
-    .oam = &gUnknown_0852496C,
+    .oam = &gOamData_AffineNormal_ObjNormal_16x16,
     .anims = gSuckerPunchAnim,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
@@ -292,7 +292,7 @@ const struct SpriteTemplate gGunkShoParticlesSpriteTemplate =
 {
     .tileTag = ANIM_TAG_WATER_ORB,
     .paletteTag = ANIM_TAG_POISON_BUBBLE,
-    .oam = &gUnknown_08524A2C,
+    .oam = &gOamData_AffineOff_ObjBlend_16x16,
     .anims = gGunkShotParticlesAnims,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
@@ -303,7 +303,7 @@ const struct SpriteTemplate gGunkShotImpactSpriteTemplate =
 {
     .tileTag = ANIM_TAG_WATER_IMPACT,
     .paletteTag = ANIM_TAG_POISON_BUBBLE,
-    .oam = &gUnknown_08524A94,
+    .oam = &gOamData_AffineNormal_ObjBlend_32x32,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gSuckerPunchImpactAffineAnim,

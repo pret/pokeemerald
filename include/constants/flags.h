@@ -109,10 +109,10 @@
 #define FLAG_MET_TEAM_AQUA_HARBOR            0x61
 #define FLAG_TV_EXPLAINED                    0x62
 #define FLAG_MAUVILLE_GYM_BARRIERS_STATE     0x63
-#define FLAG_MOSSDEEP_GYM_SWITCH_1           0x64
-#define FLAG_MOSSDEEP_GYM_SWITCH_2           0x65
-#define FLAG_MOSSDEEP_GYM_SWITCH_3           0x66
-#define FLAG_MOSSDEEP_GYM_SWITCH_4           0x67
+#define FLAG_MOSSDEEP_GYM_SWITCH_1           0x64 // Leftover from the RS version of Mossdeep Gym, functionally unused
+#define FLAG_MOSSDEEP_GYM_SWITCH_2           0x65 //
+#define FLAG_MOSSDEEP_GYM_SWITCH_3           0x66 //
+#define FLAG_MOSSDEEP_GYM_SWITCH_4           0x67 //
 
 #define FLAG_UNUSED_0x068                    0x68  // Unused Flag
 
@@ -925,7 +925,7 @@
 #define FLAG_HIDE_MOSSDEEP_CITY_STEVENS_HOUSE_STEVEN                0x3C7
 #define FLAG_HIDE_MOSSDEEP_CITY_STEVENS_HOUSE_BELDUM_POKEBALL       0x3C8
 #define FLAG_HIDE_FORTREE_CITY_KECLEON                              0x3C9
-#define FLAG_HIDE_ROUTE_120_KECLEON_1                               0x3CA
+#define FLAG_HIDE_ROUTE_120_KECLEON_BRIDGE_INVISIBLE                0x3CA
 #define FLAG_HIDE_LILYCOVE_CITY_RIVAL                               0x3CB
 #define FLAG_HIDE_ROUTE_120_STEVEN                                  0x3CC
 #define FLAG_HIDE_SOOTOPOLIS_CITY_STEVEN                            0x3CD
@@ -936,14 +936,14 @@
 #define FLAG_HIDE_AQUA_HIDEOUT_B1F_ELECTRODE_2                      0x3D2
 #define FLAG_HIDE_OLDALE_TOWN_RIVAL                                 0x3D3
 #define FLAG_HIDE_UNDERWATER_SEA_FLOOR_CAVERN_STOLEN_SUBMARINE      0x3D4
-#define FLAG_HIDE_ROUTE_120_KECLEON_BRIDGE                          0x3D5
-#define FLAG_HIDE_ROUTE_120_KECLEON_2                               0x3D6
+#define FLAG_HIDE_ROUTE_120_KECLEON_BRIDGE_VISIBLE                  0x3D5
+#define FLAG_HIDE_ROUTE_120_KECLEON_1                               0x3D6
 #define FLAG_HIDE_RUSTURF_TUNNEL_LOVER_WOMAN                        0x3D7
 #define FLAG_HIDE_VERDANTURF_TOWN_WANDAS_HOUSE_LOVER_WOMAN          0x3D8
-#define FLAG_HIDE_ROUTE_120_KECLEON_3                               0x3D9
-#define FLAG_HIDE_ROUTE_120_KECLEON_4                               0x3DA
-#define FLAG_HIDE_ROUTE_120_KECLEON_5                               0x3DB
-#define FLAG_HIDE_ROUTE_120_KECLEON_6                               0x3DC
+#define FLAG_HIDE_ROUTE_120_KECLEON_2                               0x3D9
+#define FLAG_HIDE_ROUTE_120_KECLEON_3                               0x3DA
+#define FLAG_HIDE_ROUTE_120_KECLEON_4                               0x3DB
+#define FLAG_HIDE_ROUTE_120_KECLEON_5                               0x3DC
 #define FLAG_HIDE_ROUTE_119_KECLEON_1                               0x3DD
 #define FLAG_HIDE_ROUTE_119_KECLEON_2                               0x3DE
 #define FLAG_HIDE_ROUTE_101_BOY                                     0x3DF
@@ -1549,7 +1549,7 @@
 // Special Flags (Unknown)
 #define SPECIAL_FLAGS_START                                        0x4000
 #define FLAG_HIDE_MAP_NAME_POPUP                                   0x4000
-#define FLAG_SPECIAL_FLAG_0x4001                                   0x4001
+#define FLAG_DONT_TRANSITION_MUSIC                                 0x4001
 #define FLAG_SPECIAL_FLAG_0x4002                                   0x4002
 #define FLAG_SPECIAL_FLAG_0x4003                                   0x4003
 #define FLAG_SPECIAL_FLAG_0x4004                                   0x4004

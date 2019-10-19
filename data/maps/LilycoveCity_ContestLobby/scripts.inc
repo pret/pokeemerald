@@ -9,7 +9,7 @@ LilycoveCity_ContestLobby_OnTransition: @ 821A21C
 	end
 
 LilycoveCity_ContestLobby_EventScript_21A227:: @ 821A227
-	getpricereduction 4
+	getpricereduction POKENEWS_BLENDMASTER
 	compare VAR_RESULT, 1
 	goto_if_eq LilycoveCity_ContestLobby_EventScript_21A23C
 	clearflag FLAG_HIDE_LILYCOVE_CONTEST_HALL_POKEBLOCK_EXPERT
@@ -810,7 +810,7 @@ LilycoveCity_ContestLobby_EventScript_21AAE1:: @ 821AAE1
 
 LilycoveCity_ContestLobby_EventScript_21AAEF:: @ 821AAEF
 	special CloseLink
-	msgbox LilycoveCity_ContestLobby_Text_27821C, MSGBOX_DEFAULT
+	msgbox Text_LinkErrorPleaseReset, MSGBOX_DEFAULT
 	release
 	end
 
@@ -908,12 +908,12 @@ LilycoveCity_ContestLobby_EventScript_21AC0B:: @ 821AC0B
 	end
 
 LilycoveCity_ContestLobby_EventScript_21AC33:: @ 821AC33
-	special BerryBlenderLinkBecomeLeader
+	special TryBecomeLinkLeader
 	waitstate
 	return
 
 LilycoveCity_ContestLobby_EventScript_21AC38:: @ 821AC38
-	special BerryBlenderLinkJoinGroup
+	special TryJoinLinkGroup
 	waitstate
 	return
 

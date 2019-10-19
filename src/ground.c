@@ -58,7 +58,7 @@ const struct SpriteTemplate gUnknown_08597178 =
 {
     .tileTag = ANIM_TAG_BONE,
     .paletteTag = ANIM_TAG_BONE,
-    .oam = &gUnknown_08524974,
+    .oam = &gOamData_AffineNormal_ObjNormal_32x32,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gUnknown_08597170,
@@ -69,7 +69,7 @@ const struct SpriteTemplate gUnknown_08597190 =
 {
     .tileTag = ANIM_TAG_BONE,
     .paletteTag = ANIM_TAG_BONE,
-    .oam = &gUnknown_08524974,
+    .oam = &gOamData_AffineNormal_ObjNormal_32x32,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gUnknown_08597174,
@@ -80,7 +80,7 @@ const struct SpriteTemplate gUnknown_085971A8 =
 {
     .tileTag = ANIM_TAG_MUD_SAND,
     .paletteTag = ANIM_TAG_MUD_SAND,
-    .oam = &gUnknown_08524904,
+    .oam = &gOamData_AffineOff_ObjNormal_8x8,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
@@ -102,7 +102,7 @@ const struct SpriteTemplate gUnknown_085971CC =
 {
     .tileTag = ANIM_TAG_MUD_SAND,
     .paletteTag = ANIM_TAG_MUD_SAND,
-    .oam = &gUnknown_0852490C,
+    .oam = &gOamData_AffineOff_ObjNormal_16x16,
     .anims = gUnknown_085971C8,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
@@ -113,7 +113,7 @@ const struct SpriteTemplate gUnknown_085971E4 =
 {
     .tileTag = ANIM_TAG_MUD_SAND,
     .paletteTag = ANIM_TAG_MUD_SAND,
-    .oam = &gUnknown_0852490C,
+    .oam = &gOamData_AffineOff_ObjNormal_16x16,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
@@ -124,7 +124,7 @@ const struct SpriteTemplate gUnknown_085971FC =
 {
     .tileTag = ANIM_TAG_MUD_SAND,
     .paletteTag = ANIM_TAG_MUD_SAND,
-    .oam = &gUnknown_08524904,
+    .oam = &gOamData_AffineOff_ObjNormal_8x8,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
@@ -135,7 +135,7 @@ const struct SpriteTemplate gUnknown_08597214 =
 {
     .tileTag = ANIM_TAG_DIRT_MOUND,
     .paletteTag = ANIM_TAG_DIRT_MOUND,
-    .oam = &gUnknown_08524934,
+    .oam = &gOamData_AffineOff_ObjNormal_32x16,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
@@ -146,7 +146,7 @@ const struct SpriteTemplate gMudBombSplash =
 {
     .tileTag = ANIM_TAG_MUD_SAND,
     .paletteTag = ANIM_TAG_MUD_SAND,
-    .oam = &gUnknown_08524904,
+    .oam = &gOamData_AffineOff_ObjNormal_8x8,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
@@ -157,7 +157,7 @@ const struct SpriteTemplate gMudBombToss =
 {
     .tileTag = ANIM_TAG_MUD_SAND ,
     .paletteTag = ANIM_TAG_MUD_SAND,
-    .oam = &gUnknown_0852490C,
+    .oam = &gOamData_AffineOff_ObjNormal_16x16,
     .anims = gUnknown_085971C8,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
@@ -213,7 +213,7 @@ void AnimBoneHitProjectile(struct Sprite *sprite)
     InitSpritePosToAnimTarget(sprite, TRUE);
     if (GetBattlerSide(gBattleAnimAttacker) != B_SIDE_PLAYER)
         gBattleAnimArgs[2] = -gBattleAnimArgs[2];
-    
+
     sprite->data[0] = gBattleAnimArgs[4];
     sprite->data[2] = GetBattlerSpriteCoord(gBattleAnimTarget, 2) + gBattleAnimArgs[2];
     sprite->data[4] = GetBattlerSpriteCoord(gBattleAnimTarget, 3) + gBattleAnimArgs[3];

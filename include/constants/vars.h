@@ -77,7 +77,7 @@
 #define VAR_REGICE_STEPS_2                   0x403C
 #define VAR_REGICE_STEPS_3                   0x403D
 #define VAR_ALTERING_CAVE_WILD_SET           0x403E
-#define VAR_ALWAYS_ZERO_0x403F               0x403F // This var is read and written, but is always zero.
+#define VAR_DISTRIBUTE_EON_TICKET            0x403F // This var is read and written, but is always zero. The only way to obtain the Eon Ticket in Emerald is via Record Mixing
 #define VAR_DAYS                             0x4040
 #define VAR_FANCLUB_UNKNOWN_1                0x4041
 #define VAR_FANCLUB_UNKNOWN_2                0x4042
@@ -147,7 +147,7 @@
 #define VAR_LITTLEROOT_HOUSES_STATE          0x4082
 #define VAR_UNUSED_0x4083                    0x4083 // Unused Var
 #define VAR_BIRCH_LAB_STATE                  0x4084
-#define VAR_PETALBURG_GYM_STATE              0x4085
+#define VAR_PETALBURG_GYM_STATE              0x4085 // 0-1: Wally tutorial, 2-6: 0-4 badges, 7: Defeated Norman, 8: Rematch Norman 
 #define VAR_LINK_CONTEST_ROOM_STATE          0x4086
 #define VAR_CABLE_CLUB_STATE                 0x4087
 #define VAR_CONTEST_LOCATION                 0x4088
