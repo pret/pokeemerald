@@ -141,7 +141,7 @@ bool8 AnimFastTranslateLinear(struct Sprite *sprite);
 void InitAndRunAnimFastLinearTranslation(struct Sprite *sprite);
 void TranslateMonSpriteLinear(struct Sprite *sprite);
 void TranslateSpriteLinear(struct Sprite *sprite);
-void sub_80A77C8(struct Sprite *sprite);
+void AnimSparklingParticle(struct Sprite *sprite);
 void sub_80A7000(struct Sprite *sprite);
 void TranslateSpriteInCircleOverDuration(struct Sprite *sprite);
 void SetGreyscaleOrOriginalPalette(u16 a1, bool8 a2);
@@ -221,7 +221,7 @@ void sub_8116EB4(u8);
 void sub_8117854(u8 taskId, int unused, u16 arg2, u8 battler1, u8 arg4, u8 arg5, u8 arg6, u8 arg7, const u32 *arg8, const u32 *arg9, const u32 *palette);
 
 // battle_anim_effects_1.c
-void sub_810310C(u8 battler, struct Sprite* sprite);
+void SetSpriteNextToMonHead(u8 battler, struct Sprite* sprite);
 void AnimMoveTwisterParticle(struct Sprite* sprite);
 
 // water.c
