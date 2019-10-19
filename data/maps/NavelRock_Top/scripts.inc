@@ -26,7 +26,7 @@ NavelRock_Top_MapScript1_269151: @ 8269151
 
 NavelRock_Top_EventScript_26915B:: @ 826915B
 	specialvar VAR_RESULT, GetBattleOutcome
-	compare VAR_RESULT, 7
+	compare VAR_RESULT, B_OUTCOME_CAUGHT
 	goto_if_ne Common_EventScript_NopReturn
 	removeobject 1
 	return
@@ -66,11 +66,11 @@ NavelRock_Top_EventScript_26916F:: @ 826916F
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
 	setvar VAR_LAST_TALKED, 1
 	specialvar VAR_RESULT, GetBattleOutcome
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, B_OUTCOME_WON
 	goto_if_eq NavelRock_Top_EventScript_269217
-	compare VAR_RESULT, 4
+	compare VAR_RESULT, B_OUTCOME_RAN
 	goto_if_eq NavelRock_Top_EventScript_269225
-	compare VAR_RESULT, 5
+	compare VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED
 	goto_if_eq NavelRock_Top_EventScript_269225
 	setflag FLAG_CAUGHT_HO_OH
 	releaseall

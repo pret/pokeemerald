@@ -1,7 +1,7 @@
 SootopolisCity_Gym_1F_MapScripts:: @ 8224E4C
-	map_script MAP_SCRIPT_ON_FRAME_TABLE, SootopolisCity_Gym_1F_MapScript2_224ECB
-	map_script MAP_SCRIPT_ON_RESUME, SootopolisCity_Gym_1F_MapScript1_224E67
-	map_script MAP_SCRIPT_ON_LOAD, SootopolisCity_Gym_1F_MapScript1_224E6A
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, SootopolisCity_Gym_1F_OnFrame
+	map_script MAP_SCRIPT_ON_RESUME, SootopolisCity_Gym_1F_OnResume
+	map_script MAP_SCRIPT_ON_LOAD, SootopolisCity_Gym_1F_OnLoad
 	map_script MAP_SCRIPT_ON_TRANSITION, SootopolisCity_Gym_1F_OnTransition
 	.byte 0
 
@@ -9,71 +9,68 @@ SootopolisCity_Gym_1F_OnTransition: @ 8224E61
 	setvar VAR_ICE_STEP_COUNT, 1
 	end
 
-SootopolisCity_Gym_1F_MapScript1_224E67: @ 8224E67
-	setstepcallback 4
+SootopolisCity_Gym_1F_OnResume: @ 8224E67
+	setstepcallback STEP_CB_SOOTOPOLIS_ICE
 	end
 
-SootopolisCity_Gym_1F_MapScript1_224E6A: @ 8224E6A
-	call SootopolisCity_Gym_1F_EventScript_224E73
+SootopolisCity_Gym_1F_OnLoad: @ 8224E6A
+	call SootopolisCity_Gym_1F_EventScript_CheckSetStairMetatiles
 	special SetSootopolisGymCrackedIceMetatiles
 	end
 
-SootopolisCity_Gym_1F_EventScript_224E73:: @ 8224E73
+SootopolisCity_Gym_1F_EventScript_CheckSetStairMetatiles:: @ 8224E73
 	compare VAR_ICE_STEP_COUNT, 8
-	goto_if_lt SootopolisCity_Gym_1F_EventScript_224ECA
+	goto_if_lt SootopolisCity_Gym_1F_EventScript_StopCheckingStairs  @ All stairs ice
 	compare VAR_ICE_STEP_COUNT, 28
-	goto_if_lt SootopolisCity_Gym_1F_EventScript_224EB8
+	goto_if_lt SootopolisCity_Gym_1F_EventScript_OpenFirstStairs
 	compare VAR_ICE_STEP_COUNT, 67
-	goto_if_lt SootopolisCity_Gym_1F_EventScript_224EA6
+	goto_if_lt SootopolisCity_Gym_1F_EventScript_OpenFirstAndSecondStairs
 	setmetatile 8, 4, METATILE_SootopolisGym_Stairs, 0
 	setmetatile 8, 5, METATILE_SootopolisGym_Stairs, 0
-
-SootopolisCity_Gym_1F_EventScript_224EA6:: @ 8224EA6
+SootopolisCity_Gym_1F_EventScript_OpenFirstAndSecondStairs:: @ 8224EA6
 	setmetatile 8, 10, METATILE_SootopolisGym_Stairs, 0
 	setmetatile 8, 11, METATILE_SootopolisGym_Stairs, 0
-
-SootopolisCity_Gym_1F_EventScript_224EB8:: @ 8224EB8
+SootopolisCity_Gym_1F_EventScript_OpenFirstStairs:: @ 8224EB8
 	setmetatile 8, 15, METATILE_SootopolisGym_Stairs, 0
 	setmetatile 8, 16, METATILE_SootopolisGym_Stairs, 0
-
-SootopolisCity_Gym_1F_EventScript_224ECA:: @ 8224ECA
+SootopolisCity_Gym_1F_EventScript_StopCheckingStairs:: @ 8224ECA
 	return
 
-SootopolisCity_Gym_1F_MapScript2_224ECB: @ 8224ECB
-	map_script_2 VAR_ICE_STEP_COUNT, 8, SootopolisCity_Gym_1F_EventScript_224EED
-	map_script_2 VAR_ICE_STEP_COUNT, 28, SootopolisCity_Gym_1F_EventScript_224F01
-	map_script_2 VAR_ICE_STEP_COUNT, 67, SootopolisCity_Gym_1F_EventScript_224F15
-	map_script_2 VAR_ICE_STEP_COUNT, 0, SootopolisCity_Gym_1F_EventScript_224F29
+SootopolisCity_Gym_1F_OnFrame: @ 8224ECB
+	map_script_2 VAR_ICE_STEP_COUNT, 8, SootopolisCity_Gym_1F_EventScript_UnlockFirstStairs
+	map_script_2 VAR_ICE_STEP_COUNT, 28, SootopolisCity_Gym_1F_EventScript_UnlockSecondStairs
+	map_script_2 VAR_ICE_STEP_COUNT, 67, SootopolisCity_Gym_1F_EventScript_UnlockThirdStairs
+	map_script_2 VAR_ICE_STEP_COUNT, 0, SootopolisCity_Gym_1F_EventScript_FallThroughIce
 	.2byte 0
 
-SootopolisCity_Gym_1F_EventScript_224EED:: @ 8224EED
+SootopolisCity_Gym_1F_EventScript_UnlockFirstStairs:: @ 8224EED
 	addvar VAR_ICE_STEP_COUNT, 1
 	delay 40
 	playse SE_RU_GASHIN
-	call SootopolisCity_Gym_1F_EventScript_224E73
+	call SootopolisCity_Gym_1F_EventScript_CheckSetStairMetatiles
 	special DrawWholeMapView
 	end
 
-SootopolisCity_Gym_1F_EventScript_224F01:: @ 8224F01
+SootopolisCity_Gym_1F_EventScript_UnlockSecondStairs:: @ 8224F01
 	addvar VAR_ICE_STEP_COUNT, 1
 	delay 40
 	playse SE_RU_GASHIN
-	call SootopolisCity_Gym_1F_EventScript_224E73
+	call SootopolisCity_Gym_1F_EventScript_CheckSetStairMetatiles
 	special DrawWholeMapView
 	end
 
-SootopolisCity_Gym_1F_EventScript_224F15:: @ 8224F15
+SootopolisCity_Gym_1F_EventScript_UnlockThirdStairs:: @ 8224F15
 	addvar VAR_ICE_STEP_COUNT, 1
 	delay 40
 	playse SE_RU_GASHIN
-	call SootopolisCity_Gym_1F_EventScript_224E73
+	call SootopolisCity_Gym_1F_EventScript_CheckSetStairMetatiles
 	special DrawWholeMapView
 	end
 
-SootopolisCity_Gym_1F_EventScript_224F29:: @ 8224F29
+SootopolisCity_Gym_1F_EventScript_FallThroughIce:: @ 8224F29
 	lockall
 	delay 20
-	applymovement EVENT_OBJ_ID_PLAYER, SootopolisCity_Gym_1F_Movement_224F42
+	applymovement EVENT_OBJ_ID_PLAYER, SootopolisCity_Gym_1F_Movement_FallThroughIce
 	waitmovement 0
 	playse SE_RU_HYUU
 	delay 60
@@ -81,26 +78,26 @@ SootopolisCity_Gym_1F_EventScript_224F29:: @ 8224F29
 	waitstate
 	end
 
-SootopolisCity_Gym_1F_Movement_224F42: @ 8224F42
+SootopolisCity_Gym_1F_Movement_FallThroughIce: @ 8224F42
 	set_invisible
 	step_end
 
-SootopolisCity_Gym_1F_EventScript_224F44:: @ 8224F44
-	trainerbattle_single TRAINER_JUAN_1, SootopolisCity_Gym_1F_Text_225268, SootopolisCity_Gym_1F_Text_225432, SootopolisCity_Gym_1F_EventScript_224F82, NO_MUSIC
+SootopolisCity_Gym_1F_EventScript_Juan:: @ 8224F44
+	trainerbattle_single TRAINER_JUAN_1, SootopolisCity_Gym_1F_Text_JuanPreBattle, SootopolisCity_Gym_1F_Text_JuanDefeat, SootopolisCity_Gym_1F_EventScript_JuanDefeated, NO_MUSIC
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare VAR_RESULT, 1
-	goto_if_eq SootopolisCity_Gym_1F_EventScript_225025
-	goto_if_unset FLAG_RECEIVED_TM03, SootopolisCity_Gym_1F_EventScript_224FF7
-	goto_if_unset FLAG_BADGE06_GET, SootopolisCity_Gym_1F_EventScript_22501B
-	msgbox SootopolisCity_Gym_1F_Text_225778, MSGBOX_DEFAULT
+	compare VAR_RESULT, TRUE
+	goto_if_eq SootopolisCity_Gym_1F_EventScript_JuanRematch
+	goto_if_unset FLAG_RECEIVED_TM03, SootopolisCity_Gym_1F_EventScript_GiveWaterPulse2
+	goto_if_unset FLAG_BADGE06_GET, SootopolisCity_Gym_1F_EventScript_GoGetFortreeBadge
+	msgbox SootopolisCity_Gym_1F_Text_JuanPostBattle, MSGBOX_DEFAULT
 	release
 	end
 
-SootopolisCity_Gym_1F_EventScript_224F82:: @ 8224F82
-	message SootopolisCity_Gym_1F_Text_225598
+SootopolisCity_Gym_1F_EventScript_JuanDefeated:: @ 8224F82
+	message SootopolisCity_Gym_1F_Text_ReceivedRainBadge
 	waitmessage
 	call Common_EventScript_PlayGymBadgeFanfare
-	msgbox SootopolisCity_Gym_1F_Text_2255BE, MSGBOX_DEFAULT
+	msgbox SootopolisCity_Gym_1F_Text_ExplainRainBadgeTakeThis, MSGBOX_DEFAULT
 	setflag FLAG_DEFEATED_SOOTOPOLIS_GYM
 	setflag FLAG_BADGE08_GET
 	setflag FLAG_HIDE_SOOTOPOLIS_CITY_RESIDENTS
@@ -110,11 +107,11 @@ SootopolisCity_Gym_1F_EventScript_224F82:: @ 8224F82
 	clearflag FLAG_HIDE_SOOTOPOLIS_CITY_MAN_1
 	setvar VAR_0x8008, 8
 	call Common_EventScript_SetGymTrainers
-	call SootopolisCity_Gym_1F_EventScript_224FD4
+	call SootopolisCity_Gym_1F_EventScript_GiveWaterPulse
 	closemessage
 	delay 30
 	playfanfare MUS_ME_TORE_EYE
-	msgbox SootopolisCity_Gym_1F_Text_22574D, MSGBOX_DEFAULT
+	msgbox SootopolisCity_Gym_1F_Text_RegisteredJuan, MSGBOX_DEFAULT
 	waitfanfare
 	closemessage
 	delay 30
@@ -122,69 +119,69 @@ SootopolisCity_Gym_1F_EventScript_224F82:: @ 8224F82
 	release
 	end
 
-SootopolisCity_Gym_1F_EventScript_224FD4:: @ 8224FD4
+SootopolisCity_Gym_1F_EventScript_GiveWaterPulse:: @ 8224FD4
 	giveitem_std ITEM_TM03
 	compare VAR_RESULT, 0
 	goto_if_eq Common_EventScript_BagIsFull
-	msgbox SootopolisCity_Gym_1F_Text_2256C1, MSGBOX_DEFAULT
+	msgbox SootopolisCity_Gym_1F_Text_ExplainWaterPulse, MSGBOX_DEFAULT
 	setflag FLAG_RECEIVED_TM03
 	return
 
-SootopolisCity_Gym_1F_EventScript_224FF7:: @ 8224FF7
+SootopolisCity_Gym_1F_EventScript_GiveWaterPulse2:: @ 8224FF7
 	giveitem_std ITEM_TM03
 	compare VAR_RESULT, 0
 	goto_if_eq Common_EventScript_ShowBagIsFull
-	msgbox SootopolisCity_Gym_1F_Text_2256C1, MSGBOX_DEFAULT
+	msgbox SootopolisCity_Gym_1F_Text_ExplainWaterPulse, MSGBOX_DEFAULT
 	setflag FLAG_RECEIVED_TM03
 	release
 	end
 
-SootopolisCity_Gym_1F_EventScript_22501B:: @ 822501B
-	msgbox SootopolisCity_Gym_1F_Text_225865, MSGBOX_DEFAULT
+SootopolisCity_Gym_1F_EventScript_GoGetFortreeBadge:: @ 822501B
+	msgbox SootopolisCity_Gym_1F_Text_GoGetFortreeBadge, MSGBOX_DEFAULT
 	release
 	end
 
-SootopolisCity_Gym_1F_EventScript_225025:: @ 8225025
-	trainerbattle_rematch_double TRAINER_JUAN_1, SootopolisCity_Gym_1F_Text_225950, SootopolisCity_Gym_1F_Text_225A2E, SootopolisCity_Gym_1F_Text_225B48
-	msgbox SootopolisCity_Gym_1F_Text_225A67, MSGBOX_AUTOCLOSE
+SootopolisCity_Gym_1F_EventScript_JuanRematch:: @ 8225025
+	trainerbattle_rematch_double TRAINER_JUAN_1, SootopolisCity_Gym_1F_Text_JuanPreRematch, SootopolisCity_Gym_1F_Text_JuanRematchDefeat, SootopolisCity_Gym_1F_Text_JuanRematchNeedTwoMons
+	msgbox SootopolisCity_Gym_1F_Text_JuanPostRematch, MSGBOX_AUTOCLOSE
 	end
 
-SootopolisCity_Gym_1F_EventScript_225040:: @ 8225040
+SootopolisCity_Gym_1F_EventScript_GymGuide:: @ 8225040
 	lock
 	faceplayer
-	goto_if_set FLAG_DEFEATED_SOOTOPOLIS_GYM, SootopolisCity_Gym_1F_EventScript_225055
-	msgbox SootopolisCity_Gym_1F_Text_225093, MSGBOX_DEFAULT
+	goto_if_set FLAG_DEFEATED_SOOTOPOLIS_GYM, SootopolisCity_Gym_1F_EventScript_GymGuidePostVictory
+	msgbox SootopolisCity_Gym_1F_Text_GymGuideAdvice, MSGBOX_DEFAULT
 	release
 	end
 
-SootopolisCity_Gym_1F_EventScript_225055:: @ 8225055
-	msgbox SootopolisCity_Gym_1F_Text_2251AF, MSGBOX_DEFAULT
+SootopolisCity_Gym_1F_EventScript_GymGuidePostVictory:: @ 8225055
+	msgbox SootopolisCity_Gym_1F_Text_GymGuidePostVictory, MSGBOX_DEFAULT
 	release
 	end
 
-SootopolisCity_Gym_1F_EventScript_22505F:: @ 822505F
+SootopolisCity_Gym_1F_EventScript_LeftGymStatue:: @ 822505F
 	lockall
-	goto_if_set FLAG_BADGE08_GET, SootopolisCity_Gym_1F_EventScript_22507F
-	goto SootopolisCity_Gym_1F_EventScript_225089
+	goto_if_set FLAG_BADGE08_GET, SootopolisCity_Gym_1F_EventScript_GymStatueCertified
+	goto SootopolisCity_Gym_1F_EventScript_GymStatue
 	end
 
-SootopolisCity_Gym_1F_EventScript_22506F:: @ 822506F
+SootopolisCity_Gym_1F_EventScript_RightGymStatue:: @ 822506F
 	lockall
-	goto_if_set FLAG_BADGE08_GET, SootopolisCity_Gym_1F_EventScript_22507F
-	goto SootopolisCity_Gym_1F_EventScript_225089
+	goto_if_set FLAG_BADGE08_GET, SootopolisCity_Gym_1F_EventScript_GymStatueCertified
+	goto SootopolisCity_Gym_1F_EventScript_GymStatue
 	end
 
-SootopolisCity_Gym_1F_EventScript_22507F:: @ 822507F
-	msgbox SootopolisCity_Gym_1F_Text_225916, MSGBOX_DEFAULT
+SootopolisCity_Gym_1F_EventScript_GymStatueCertified:: @ 822507F
+	msgbox SootopolisCity_Gym_1F_Text_GymStatueCertified, MSGBOX_DEFAULT
 	releaseall
 	end
 
-SootopolisCity_Gym_1F_EventScript_225089:: @ 8225089
-	msgbox SootopolisCity_Gym_1F_Text_2258FA, MSGBOX_DEFAULT
+SootopolisCity_Gym_1F_EventScript_GymStatue:: @ 8225089
+	msgbox SootopolisCity_Gym_1F_Text_GymStatue, MSGBOX_DEFAULT
 	releaseall
 	end
 
-SootopolisCity_Gym_1F_Text_225093: @ 8225093
+SootopolisCity_Gym_1F_Text_GymGuideAdvice: @ 8225093
 	.string "Yo! How's it going, CHAMPION-\n"
 	.string "bound {PLAYER}?\p"
 	.string "SOOTOPOLIS's GYM LEADER JUAN is\n"
@@ -196,14 +193,14 @@ SootopolisCity_Gym_1F_Text_225093: @ 8225093
 	.string "The rest of the way, you have to\n"
 	.string "go for it yourself!$"
 
-SootopolisCity_Gym_1F_Text_2251AF: @ 82251AF
+SootopolisCity_Gym_1F_Text_GymGuidePostVictory: @ 82251AF
 	.string "Yow! You've beaten even JUAN, who\n"
 	.string "was supposedly the best in all HOENN!\p"
 	.string "Okay! Check out your TRAINER CARD.\p"
 	.string "If you've gotten all the BADGES, you're\n"
 	.string "set for the POKéMON LEAGUE challenge!$"
 
-SootopolisCity_Gym_1F_Text_225268: @ 8225268
+SootopolisCity_Gym_1F_Text_JuanPreBattle: @ 8225268
 	.string "Let me ask you.\n"
 	.string "Did you know?\l"
 	.string "Ah, I should not be so coy.\p"
@@ -226,7 +223,7 @@ SootopolisCity_Gym_1F_Text_225268: @ 8225268
 @ the gDisplayedStringBattle buffer that it's put into, and it stomps all over the gBattleTextBuffs
 @ after, as well as the otherwise unused array after that. One wonders if that's the reason for
 @ the existence of that unused array of ints.
-SootopolisCity_Gym_1F_Text_225432: @ 8225432
+SootopolisCity_Gym_1F_Text_JuanDefeat: @ 8225432
 	.string "Ahahaha, excellent!\n"
 	.string "Very well, you are the winner.\p"
 	.string "From you, I sense the brilliant shine\n"
@@ -241,11 +238,11 @@ SootopolisCity_Gym_1F_Text_225432: @ 8225432
 	.string "Rather than my clothes, I shall reward\n"
 	.string "you with this, the RAIN BADGE!$"
 
-SootopolisCity_Gym_1F_Text_225598: @ 8225598
+SootopolisCity_Gym_1F_Text_ReceivedRainBadge: @ 8225598
 	.string "{PLAYER} received the RAIN BADGE\n"
 	.string "from JUAN.$"
 
-SootopolisCity_Gym_1F_Text_2255BE: @ 82255BE
+SootopolisCity_Gym_1F_Text_ExplainRainBadgeTakeThis: @ 82255BE
 	.string "Having the RAIN BADGE shall assure you\n"
 	.string "the full obedience of all your POKéMON\l"
 	.string "to your every command.\p"
@@ -255,18 +252,18 @@ SootopolisCity_Gym_1F_Text_2255BE: @ 82255BE
 	.string "And, so that you never forget the\n"
 	.string "battle we shared, take this…$"
 
-SootopolisCity_Gym_1F_Text_2256C1: @ 82256C1
+SootopolisCity_Gym_1F_Text_ExplainWaterPulse: @ 82256C1
 	.string "The TECHNICAL MACHINE I handed you\n"
 	.string "contains WATER PULSE.\p"
 	.string "In use, it will occasionally confuse\n"
 	.string "the target with ultrasonic waves.\p"
 	.string "… … … … … …$"
 
-SootopolisCity_Gym_1F_Text_22574D: @ 822574D
+SootopolisCity_Gym_1F_Text_RegisteredJuan: @ 822574D
 	.string "Registered GYM LEADER JUAN\n"
 	.string "in the POKéNAV.$"
 
-SootopolisCity_Gym_1F_Text_225778: @ 8225778
+SootopolisCity_Gym_1F_Text_JuanPostBattle: @ 8225778
 	.string "The TRAINERS who have gathered all\n"
 	.string "the GYM BADGES of HOENN should make\l"
 	.string "way to the ultimate destination.\p"
@@ -276,22 +273,22 @@ SootopolisCity_Gym_1F_Text_225778: @ 8225778
 	.string "There, you shall find the POKéMON\n"
 	.string "LEAGUE.$"
 
-SootopolisCity_Gym_1F_Text_225865: @ 8225865
+SootopolisCity_Gym_1F_Text_GoGetFortreeBadge: @ 8225865
 	.string "There remains but one BADGE to\n"
 	.string "obtain in HOENN.\p"
 	.string "If you wish to challenge the POKéMON\n"
 	.string "LEAGUE, you must obtain the last\l"
 	.string "BADGE from the GYM in FORTREE.$"
 
-SootopolisCity_Gym_1F_Text_2258FA: @ 82258FA
+SootopolisCity_Gym_1F_Text_GymStatue: @ 82258FA
 	.string "SOOTOPOLIS CITY POKéMON GYM$"
 
-SootopolisCity_Gym_1F_Text_225916: @ 8225916
+SootopolisCity_Gym_1F_Text_GymStatueCertified: @ 8225916
 	.string "SOOTOPOLIS CITY POKéMON GYM\p"
 	.string "JUAN'S CERTIFIED TRAINERS:\n"
 	.string "{PLAYER}$"
 
-SootopolisCity_Gym_1F_Text_225950: @ 8225950
+SootopolisCity_Gym_1F_Text_JuanPreRematch: @ 8225950
 	.string "JUAN: Ah, this GYM had returned to its\n"
 	.string "usual state of serenity…\p"
 	.string "But our young typhoon has returned\n"
@@ -300,11 +297,11 @@ SootopolisCity_Gym_1F_Text_225950: @ 8225950
 	.string "I shall be delighted to dance with you\n"
 	.string "as often as you wish!$"
 
-SootopolisCity_Gym_1F_Text_225A2E: @ 8225A2E
+SootopolisCity_Gym_1F_Text_JuanRematchDefeat: @ 8225A2E
 	.string "Ahahaha, you are the winner!\n"
 	.string "You have defeated me again!$"
 
-SootopolisCity_Gym_1F_Text_225A67: @ 8225A67
+SootopolisCity_Gym_1F_Text_JuanPostRematch: @ 8225A67
 	.string "JUAN: If I told you to become my\n"
 	.string "apprentice, you will refuse, I am sure.\p"
 	.string "I would like to make a gift of my coat\n"
@@ -314,7 +311,7 @@ SootopolisCity_Gym_1F_Text_225A67: @ 8225A67
 	.string "And that, my friend, is a certain sign\n"
 	.string "of nobility!$"
 
-SootopolisCity_Gym_1F_Text_225B48: @ 8225B48
+SootopolisCity_Gym_1F_Text_JuanRematchNeedTwoMons: @ 8225B48
 	.string "JUAN: Ah, this GYM had returned to its\n"
 	.string "usual state of serenity…\p"
 	.string "But our young typhoon has returned\n"

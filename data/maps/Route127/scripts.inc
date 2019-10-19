@@ -7,7 +7,7 @@ Route127_MapScripts:: @ 81F69D9
 Route127_OnTransition: @ 81F69E9
 	call_if_set FLAG_SYS_WEATHER_CTRL, Common_EventScript_SetWeather15
 	compare VAR_SHOULD_END_UNUSUAL_WEATHER, 1
-	call_if_eq Route127_EventScript_273D13
+	call_if_eq UnusualWeather_EventScript_HideMapNamePopup
 	compare VAR_UNUSUAL_WEATHER_LOCATION, UNUSUAL_WEATHER_ROUTE_127_NORTH
 	call_if_eq UnusualWeather_StartKyogreWeather
 	compare VAR_UNUSUAL_WEATHER_LOCATION, UNUSUAL_WEATHER_ROUTE_127_SOUTH

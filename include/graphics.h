@@ -6837,13 +6837,13 @@ extern const u32 gCableCarCord_Gfx[];
 extern const u16 gCableCar_Pal[];
 
 // Trade
-extern const u16 gUnknown_08DDB3E4[];
-extern const u8 gUnknown_08DDB464[];
+extern const u16 gTradeMenu_Pal[];
+extern const u8 gTradeMenu_Gfx[];
 extern const u16 gUnknown_08DDCF04[];
 extern const u16 gTradeGba2_Pal[];
 extern const u8 gTradeGba_Gfx[];
-extern const u16 gUnknown_08DDD704[];
-extern const u8 gUnknown_08DDC6E4[];
+extern const u16 gTradeMenuMonBox_Tilemap[];
+extern const u8 gTradeButtons_Gfx[];
 extern const u16 gUnknown_08DDB444[];
 
 // Party menu

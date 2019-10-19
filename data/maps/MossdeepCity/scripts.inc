@@ -255,9 +255,9 @@ MossdeepCity_EventScript_1E4C85:: @ 81E4C85
 	faceplayer
 	msgbox MossdeepCity_Text_1E5453, MSGBOX_DEFAULT
 	closemessage
-	compare VAR_FACING, 2
+	compare VAR_FACING, DIR_NORTH
 	call_if_eq MossdeepCity_EventScript_1E4CB0
-	compare VAR_FACING, 4
+	compare VAR_FACING, DIR_EAST
 	call_if_eq MossdeepCity_EventScript_1E4CC2
 	addvar VAR_SCOTT_STATE, 1
 	removeobject 16

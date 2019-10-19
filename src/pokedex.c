@@ -1345,13 +1345,13 @@ void CB2_Pokedex(void)
             sPokedexView->selectedScreen = 0;
             if (!IsNationalPokedexEnabled())
             {
-                sPokedexView->seenCount = GetHoennPokedexCount(0);
-                sPokedexView->ownCount = GetHoennPokedexCount(1);
+                sPokedexView->seenCount = GetHoennPokedexCount(FLAG_GET_SEEN);
+                sPokedexView->ownCount = GetHoennPokedexCount(FLAG_GET_CAUGHT);
             }
             else
             {
-                sPokedexView->seenCount = GetNationalPokedexCount(0);
-                sPokedexView->ownCount = GetNationalPokedexCount(1);
+                sPokedexView->seenCount = GetNationalPokedexCount(FLAG_GET_SEEN);
+                sPokedexView->ownCount = GetNationalPokedexCount(FLAG_GET_CAUGHT);
             }
             sPokedexView->initialVOffset = 8;
             gMain.state++;
@@ -2581,7 +2581,7 @@ static void CreateInterfaceSprites(u8 a)
             spriteId = CreateSprite(&gUnknown_0855D20C, 17, 91, 1);
             StartSpriteAnim(&gSprites[spriteId], 1);
 
-            r6 = GetHoennPokedexCount(0);
+            r6 = GetHoennPokedexCount(FLAG_GET_SEEN);
             _a = 0;
 
             spriteId = CreateSprite(&gUnknown_0855D23C, 40, 45, 1);
@@ -2624,7 +2624,7 @@ static void CreateInterfaceSprites(u8 a)
             r5 = (sPokedexView->seenCount % 100) % 10;
             StartSpriteAnim(&gSprites[spriteId], r5);
 
-            r6 = GetHoennPokedexCount(1);
+            r6 = GetHoennPokedexCount(FLAG_GET_CAUGHT);
             _a = 0;
 
             spriteId = CreateSprite(&gUnknown_0855D23C, 40, 81, 1);

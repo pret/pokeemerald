@@ -63,7 +63,7 @@ static void TrainerHillGetChallengeStatus(void);
 static void sub_81D5B2C(void);
 static void sub_81D5BBC(void);
 static void sub_81D5C00(void);
-static void sub_81D5C5C(void);
+static void GetInTrainerHill(void);
 static void sub_81D62B4(void);
 static void sub_81D64AC(void);
 static void sub_81D64DC(void);
@@ -231,7 +231,7 @@ static void (* const sHillFunctions[])(void) =
     sub_81D5B2C,
     sub_81D5BBC,
     sub_81D5C00,
-    sub_81D5C5C,
+    GetInTrainerHill,
     sub_81D62B4,
     sub_81D64AC,
     sub_81D64DC,
@@ -534,7 +534,7 @@ static void sub_81D5C00(void)
     FreeDataStruct();
 }
 
-bool8 sub_81D5C18(void)
+bool8 InTrainerHillChallenge(void)
 {
     if (VarGet(VAR_TRAINER_HILL_IS_ACTIVE) == 0)
         return FALSE;
@@ -546,9 +546,9 @@ bool8 sub_81D5C18(void)
         return FALSE;
 }
 
-static void sub_81D5C5C(void)
+static void GetInTrainerHill(void)
 {
-    if (!sub_81D5C18())
+    if (!InTrainerHillChallenge())
         gSpecialVar_Result = 0;
     else
         gSpecialVar_Result = 1;
@@ -997,7 +997,7 @@ static void sub_81D6518(void)
 
 bool32 sub_81D6534(void)
 {
-    if (!sub_81D5C18() || GetCurrentTrainerHillMapId() == 6)
+    if (!InTrainerHillChallenge() || GetCurrentTrainerHillMapId() == 6)
         return FALSE;
 
     sub_81D5C00();

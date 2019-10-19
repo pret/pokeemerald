@@ -1,8 +1,11 @@
 #include "constants/global.h"
 #include "constants/battle.h"
+#include "constants/battle_pike.h"
+#include "constants/battle_pyramid.h"
 #include "constants/battle_frontier.h"
 #include "constants/battle_setup.h"
 #include "constants/berry.h"
+#include "constants/cable_club.h"
 #include "constants/contest.h"
 #include "constants/daycare.h"
 #include "constants/decorations.h"
@@ -10,7 +13,9 @@
 #include "constants/event_objects.h"
 #include "constants/event_object_movement_constants.h"
 #include "constants/field_effects.h"
+#include "constants/field_poison.h"
 #include "constants/field_specials.h"
+#include "constants/field_tasks.h"
 #include "constants/flags.h"
 #include "constants/game_stat.h"
 #include "constants/item.h"
@@ -22,13 +27,16 @@
 #include "constants/maps.h"
 #include "constants/metatile_labels.h"
 #include "constants/moves.h"
+#include "constants/party_menu.h"
 #include "constants/pokemon.h"
 #include "constants/script_menu.h"
 #include "constants/secret_bases.h"
 #include "constants/songs.h"
 #include "constants/species.h"
+#include "constants/trade.h"
 #include "constants/trainer_hill.h"
 #include "constants/trainers.h"
+#include "constants/tv.h"
 #include "constants/vars.h"
 #include "constants/weather.h"
 	.include "asm/macros.inc"
@@ -900,7 +908,7 @@ EventScript_PickItemUp:: @ 8271C3A
 	waitfanfare
 	waitmessage
 	bufferitemnameplural 1, VAR_0x8004, VAR_0x8005
-	setvar VAR_0x8004, 12
+	setvar VAR_0x8004, BATTLE_PYRAMID_FUNC_IS_IN
 	special CallBattlePyramidFunction
 	compare VAR_RESULT, 1
 	goto_if_eq EventScript_271C86
@@ -1018,10 +1026,7 @@ Common_ShowEasyChatScreen:: @ 8271E7C
 	fadescreen 0
 	return
 
-DewfordTown_Gym_EventScript_271E84:: @ 8271E84
-LavaridgeTown_Gym_1F_EventScript_271E84:: @ 8271E84
-MauvilleCity_Gym_EventScript_271E84:: @ 8271E84
-RustboroCity_Gym_EventScript_271E84:: @ 8271E84
+Common_EventScript_ReadyPetalburgGymForBattle:: @ 8271E84
 	clearflag FLAG_HIDE_PETALBURG_GYM_GREETER
 	setflag FLAG_PETALBURG_MART_EXPANDED_ITEMS
 	return
@@ -1246,12 +1251,12 @@ EventScript_RegionMap:: @ 827208F
 	end
 
 Common_EventScript_PlayBrineysBoatMusic:: @ 82720A0
-	setflag FLAG_SPECIAL_FLAG_0x4001
+	setflag FLAG_DONT_TRANSITION_MUSIC
 	playbgm MUS_M_BOAT, 0
 	return
 
 Common_EventScript_StopBrineysBoatMusic:: @ 82720A8
-	clearflag FLAG_SPECIAL_FLAG_0x4001
+	clearflag FLAG_DONT_TRANSITION_MUSIC
 	fadedefaultbgm
 	return
 
@@ -1273,7 +1278,7 @@ Movement_FerryDepart: @ 82721F0
 	walk_right
 	step_end
 
-PetalburgCity_Gym_EventScript_2721F8:: @ 82721F8
+EventScript_HideMrBriney:: @ 82721F8
 	setflag FLAG_HIDE_MR_BRINEY_DEWFORD_TOWN
 	setflag FLAG_HIDE_MR_BRINEY_BOAT_DEWFORD_TOWN
 	setflag FLAG_HIDE_ROUTE_108_MR_BRINEY
@@ -1296,7 +1301,7 @@ RusturfTunnel_EventScript_272216:: @ 8272216
 
 EventScript_27222B:: @ 827222B
 	delay 30
-	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceUp
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	showobjectat 255, MAP_PETALBURG_CITY
 	delay 30
@@ -1314,9 +1319,9 @@ BirthIsland_Harbor_EventScript_272250:: @ 8272250
 FarawayIsland_Entrance_EventScript_272250:: @ 8272250
 NavelRock_Harbor_EventScript_272250:: @ 8272250
 SouthernIsland_Exterior_EventScript_272250:: @ 8272250
-	compare VAR_FACING, 1
+	compare VAR_FACING, DIR_SOUTH
 	call_if_eq BattleFrontier_OutsideWest_EventScript_242A21
-	compare VAR_FACING, 3
+	compare VAR_FACING, DIR_WEST
 	call_if_eq BattleFrontier_OutsideWest_EventScript_242A2C
 	delay 30
 	hideobjectat 255, MAP_PETALBURG_CITY
@@ -1569,64 +1574,16 @@ EventScript_CableClub_SetVarResult0:: @ 8273755
 	setvar VAR_RESULT, 0
 	return
 
-BattleFrontier_PokemonCenter_2F_EventScript_27375B:: @ 827375B
-DewfordTown_PokemonCenter_2F_EventScript_27375B:: @ 827375B
-EverGrandeCity_PokemonCenter_2F_EventScript_27375B:: @ 827375B
-EverGrandeCity_PokemonLeague_2F_EventScript_27375B:: @ 827375B
-FallarborTown_PokemonCenter_2F_EventScript_27375B:: @ 827375B
-FortreeCity_PokemonCenter_2F_EventScript_27375B:: @ 827375B
-LavaridgeTown_PokemonCenter_2F_EventScript_27375B:: @ 827375B
-LilycoveCity_PokemonCenter_2F_EventScript_27375B:: @ 827375B
-MauvilleCity_PokemonCenter_2F_EventScript_27375B:: @ 827375B
-MossdeepCity_PokemonCenter_2F_EventScript_27375B:: @ 827375B
-OldaleTown_PokemonCenter_2F_EventScript_27375B:: @ 827375B
-PacifidlogTown_PokemonCenter_2F_EventScript_27375B:: @ 827375B
-PetalburgCity_PokemonCenter_2F_EventScript_27375B:: @ 827375B
-RustboroCity_PokemonCenter_2F_EventScript_27375B:: @ 827375B
-SlateportCity_PokemonCenter_2F_EventScript_27375B:: @ 827375B
-SootopolisCity_PokemonCenter_2F_EventScript_27375B:: @ 827375B
-VerdanturfTown_PokemonCenter_2F_EventScript_27375B:: @ 827375B
-	call OldaleTown_PokemonCenter_2F_EventScript_27751B
+Common_EventScript_UnionRoomAttendant:: @ 827375B
+	call CableClub_EventScript_UnionRoomAttendant
 	end
 
-BattleFrontier_PokemonCenter_2F_EventScript_273761:: @ 8273761
-DewfordTown_PokemonCenter_2F_EventScript_273761:: @ 8273761
-EverGrandeCity_PokemonCenter_2F_EventScript_273761:: @ 8273761
-EverGrandeCity_PokemonLeague_2F_EventScript_273761:: @ 8273761
-FallarborTown_PokemonCenter_2F_EventScript_273761:: @ 8273761
-FortreeCity_PokemonCenter_2F_EventScript_273761:: @ 8273761
-LavaridgeTown_PokemonCenter_2F_EventScript_273761:: @ 8273761
-LilycoveCity_PokemonCenter_2F_EventScript_273761:: @ 8273761
-MauvilleCity_PokemonCenter_2F_EventScript_273761:: @ 8273761
-MossdeepCity_PokemonCenter_2F_EventScript_273761:: @ 8273761
-OldaleTown_PokemonCenter_2F_EventScript_273761:: @ 8273761
-PacifidlogTown_PokemonCenter_2F_EventScript_273761:: @ 8273761
-PetalburgCity_PokemonCenter_2F_EventScript_273761:: @ 8273761
-RustboroCity_PokemonCenter_2F_EventScript_273761:: @ 8273761
-SlateportCity_PokemonCenter_2F_EventScript_273761:: @ 8273761
-SootopolisCity_PokemonCenter_2F_EventScript_273761:: @ 8273761
-VerdanturfTown_PokemonCenter_2F_EventScript_273761:: @ 8273761
-	call OldaleTown_PokemonCenter_2F_EventScript_277672
+Common_EventScript_WirelessClubAttendant:: @ 8273761
+	call CableClub_EventScript_WirelessClubAttendant
 	end
 
-BattleFrontier_PokemonCenter_2F_EventScript_273767:: @ 8273767
-DewfordTown_PokemonCenter_2F_EventScript_273767:: @ 8273767
-EverGrandeCity_PokemonCenter_2F_EventScript_273767:: @ 8273767
-EverGrandeCity_PokemonLeague_2F_EventScript_273767:: @ 8273767
-FallarborTown_PokemonCenter_2F_EventScript_273767:: @ 8273767
-FortreeCity_PokemonCenter_2F_EventScript_273767:: @ 8273767
-LavaridgeTown_PokemonCenter_2F_EventScript_273767:: @ 8273767
-LilycoveCity_PokemonCenter_2F_EventScript_273767:: @ 8273767
-MauvilleCity_PokemonCenter_2F_EventScript_273767:: @ 8273767
-MossdeepCity_PokemonCenter_2F_EventScript_273767:: @ 8273767
-OldaleTown_PokemonCenter_2F_EventScript_273767:: @ 8273767
-PacifidlogTown_PokemonCenter_2F_EventScript_273767:: @ 8273767
-PetalburgCity_PokemonCenter_2F_EventScript_273767:: @ 8273767
-RustboroCity_PokemonCenter_2F_EventScript_273767:: @ 8273767
-SlateportCity_PokemonCenter_2F_EventScript_273767:: @ 8273767
-SootopolisCity_PokemonCenter_2F_EventScript_273767:: @ 8273767
-VerdanturfTown_PokemonCenter_2F_EventScript_273767:: @ 8273767
-	call OldaleTown_PokemonCenter_2F_EventScript_2776A4
+Common_EventScript_DirectCornerAttendant:: @ 8273767
+	call CableClub_EventScript_DirectCornerAttendant
 	end
 
 Common_EventScript_RemoveStaticPokemon:: @ 827376D
@@ -1731,6 +1688,7 @@ EventScript_GotoTrainerScript:: @ 82742F6
 	.include "data/scripts/berry_tree.inc"
 	.include "data/scripts/secret_base.inc"
 	.include "data/scripts/cable_club.inc"
+	.include "data/text/cable_club.inc"
 	.include "data/scripts/contest_hall.inc"
 	.include "data/text/contest_strings.inc"
 	.include "data/text/contest_link.inc"

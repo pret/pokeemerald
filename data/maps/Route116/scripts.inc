@@ -7,7 +7,7 @@ Route116_MapScripts:: @ 81F2C0C
 Route116_OnTransition: @ 81F2C1C
 	call_if_set FLAG_RECOVERED_DEVON_GOODS, Route116_EventScript_1F2C47
 	compare VAR_SHOULD_END_UNUSUAL_WEATHER, 1
-	call_if_eq Route116_EventScript_273D13
+	call_if_eq UnusualWeather_EventScript_HideMapNamePopup
 	compare VAR_UNUSUAL_WEATHER_LOCATION, UNUSUAL_WEATHER_ROUTE_116_NORTH
 	call_if_eq UnusualWeather_StartGroudonWeather
 	compare VAR_UNUSUAL_WEATHER_LOCATION, UNUSUAL_WEATHER_ROUTE_116_SOUTH
@@ -63,13 +63,13 @@ Route116_EventScript_1F2CBB:: @ 81F2CBB
 	goto_if_eq Route116_EventScript_1F2D39
 	msgbox Route116_Text_1F3521, MSGBOX_DEFAULT
 	closemessage
-	compare VAR_FACING, 2
+	compare VAR_FACING, DIR_NORTH
 	call_if_eq Route116_EventScript_1F2D15
-	compare VAR_FACING, 1
+	compare VAR_FACING, DIR_SOUTH
 	call_if_eq Route116_EventScript_1F2D15
-	compare VAR_FACING, 3
+	compare VAR_FACING, DIR_WEST
 	call_if_eq Route116_EventScript_1F2D15
-	compare VAR_FACING, 4
+	compare VAR_FACING, DIR_EAST
 	call_if_eq Route116_EventScript_1F2D20
 	removeobject VAR_LAST_TALKED
 	clearflag FLAG_HIDE_RUSTBORO_CITY_DEVON_CORP_3F_EMPLOYEE
@@ -151,8 +151,8 @@ Route116_EventScript_1F2D84:: @ 81F2D84
 
 Route116_EventScript_1F2D95:: @ 81F2D95
 	lockall
-	applymovement 11, Common_Movement_WalkInPlaceRight
-	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceLeft
+	applymovement 11, Common_Movement_WalkInPlaceFastestRight
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceFastestLeft
 	waitmovement 0
 	msgbox Route116_Text_1F309D, MSGBOX_DEFAULT
 	setvar VAR_ROUTE116_STATE, 2
@@ -196,13 +196,13 @@ Route116_EventScript_1F2E1B:: @ 81F2E1B
 
 Route116_EventScript_1F2E2A:: @ 81F2E2A
 	delay 20
-	compare VAR_FACING, 2
+	compare VAR_FACING, DIR_NORTH
 	call_if_eq Route116_EventScript_1F2E5E
-	compare VAR_FACING, 1
+	compare VAR_FACING, DIR_SOUTH
 	call_if_eq Route116_EventScript_1F2E5E
-	compare VAR_FACING, 3
+	compare VAR_FACING, DIR_WEST
 	call_if_eq Route116_EventScript_1F2E5E
-	compare VAR_FACING, 4
+	compare VAR_FACING, DIR_EAST
 	call_if_eq Route116_EventScript_1F2E69
 	removeobject VAR_LAST_TALKED
 	release
