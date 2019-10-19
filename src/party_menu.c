@@ -5506,7 +5506,7 @@ void Task_AbilityCapsule(u8 taskId)
         {
             gUnknown_0203CEE8 = 0;
             PlaySE(SE_SELECT);
-            sub_81B1B5C(gText_WontHaveEffect, 1);
+            DisplayPartyMenuMessage(gText_WontHaveEffect, 1);
             schedule_bg_copy_tilemap_to_vram(2);
             gTasks[taskId].func = sub_81B6794;
             return;
@@ -5516,7 +5516,7 @@ void Task_AbilityCapsule(u8 taskId)
         StringCopy(gStringVar2, gAbilityNames[GetAbilityBySpecies(tSpecies, tAbilityNum)]);
         StringExpandPlaceholders(gStringVar4, askText);
         PlaySE(SE_SELECT);
-        sub_81B1B5C(gStringVar4, 1);
+        DisplayPartyMenuMessage(gStringVar4, 1);
         schedule_bg_copy_tilemap_to_vram(2);
         tState++;
         break;
@@ -5541,7 +5541,7 @@ void Task_AbilityCapsule(u8 taskId)
             // Don't exit party selections screen, return to choosing a mon.
             ClearStdWindowAndFrameToTransparent(6, 0);
             ClearWindowTilemap(6);
-            display_pokemon_menu_message(5);
+            DisplayPartyMenuStdMessage(5);
             gTasks[taskId].func = (void *)GetWordTaskArg(taskId, tOldFunc);
             return;
         }
@@ -5549,7 +5549,7 @@ void Task_AbilityCapsule(u8 taskId)
     case 3:
         PlaySE(SE_KAIFUKU);
         StringExpandPlaceholders(gStringVar4, doneText);
-        sub_81B1B5C(gStringVar4, 1);
+        DisplayPartyMenuMessage(gStringVar4, 1);
         schedule_bg_copy_tilemap_to_vram(2);
         tState++;
         break;
@@ -5560,7 +5560,7 @@ void Task_AbilityCapsule(u8 taskId)
     case 5:
         SetMonData(&gPlayerParty[tMonId], MON_DATA_ABILITY_NUM, &tAbilityNum);
         RemoveBagItem(gSpecialVar_ItemId, 1);
-        gTasks[taskId].func = sub_81B12C0;
+        gTasks[taskId].func = Task_ClosePartyMenu;
         break;
     }
 }
