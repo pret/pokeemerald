@@ -2895,7 +2895,7 @@ Move_GLARE:
 	waitforvisualfinish
 	createsprite gEyeSparkleSpriteTemplate, ANIM_ATTACKER, 0, -16, -8
 	createsprite gEyeSparkleSpriteTemplate, ANIM_ATTACKER, 0, 16, -8
-	createvisualtask sub_81064F8, 5
+	createvisualtask AnimTask_ScaryFace, 5
 	playsewithpan SE_W043, SOUND_PAN_ATTACKER
 	delay 2
 	createvisualtask sub_810A094, 3, 20, 1, 0
@@ -3434,19 +3434,19 @@ Move_UPROAR:
 	loadspritegfx ANIM_TAG_JAGGED_MUSIC_NOTE
 	loadspritegfx ANIM_TAG_THIN_RING
 	monbg ANIM_DEF_PARTNER
-	createvisualtask sub_8106D90, 2, 0
+	createvisualtask AnimTask_UproarDistortion, 2, 0
 	createsprite gUproarRingSpriteTemplate, ANIM_ATTACKER, 3, 0, 0, 0, 0, 31, 8
 	playsewithpan SE_W253, SOUND_PAN_ATTACKER
 	createsprite gJaggedMusicNoteSpriteTemplate, ANIM_ATTACKER, 2, 0, 29, -12, 0
 	createsprite gJaggedMusicNoteSpriteTemplate, ANIM_ATTACKER, 2, 0, -12, -29, 1
 	delay 16
-	createvisualtask sub_8106D90, 2, 0
+	createvisualtask AnimTask_UproarDistortion, 2, 0
 	createsprite gUproarRingSpriteTemplate, ANIM_ATTACKER, 3, 0, 0, 0, 0, 31, 8
 	playsewithpan SE_W253, SOUND_PAN_ATTACKER
 	createsprite gJaggedMusicNoteSpriteTemplate, ANIM_ATTACKER, 2, 0, 12, -29, 1
 	createsprite gJaggedMusicNoteSpriteTemplate, ANIM_ATTACKER, 2, 0, -29, -12, 0
 	delay 16
-	createvisualtask sub_8106D90, 2, 0
+	createvisualtask AnimTask_UproarDistortion, 2, 0
 	createsprite gUproarRingSpriteTemplate, ANIM_ATTACKER, 3, 0, 0, 0, 0, 31, 8
 	playsewithpan SE_W253, SOUND_PAN_ATTACKER
 	createsprite gJaggedMusicNoteSpriteTemplate, ANIM_ATTACKER, 2, 0, 24, -24, 1
@@ -7763,7 +7763,7 @@ Move_SCARY_FACE:
 	waitforvisualfinish
 	delay 10
 	playsewithpan SE_W043, SOUND_PAN_ATTACKER
-	createvisualtask sub_81064F8, 5
+	createvisualtask AnimTask_ScaryFace, 5
 	delay 13
 	createsprite gEyeSparkleSpriteTemplate, ANIM_ATTACKER, 0, -16, -8
 	createsprite gEyeSparkleSpriteTemplate, ANIM_ATTACKER, 0, 16, -8

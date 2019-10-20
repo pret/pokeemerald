@@ -1456,7 +1456,7 @@ static u8 GetBattlerAtPosition_(u8 position)
     return GetBattlerAtPosition(position);
 }
 
-void AnimSparklingParticle(struct Sprite *sprite)
+void AnimSpriteOnMonPos(struct Sprite *sprite)
 {
     bool8 var;
 
