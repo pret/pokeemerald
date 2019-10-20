@@ -1800,11 +1800,11 @@ Move_SAFEGUARD:
 	monbg ANIM_ATK_PARTNER
 	setalpha 8, 8
 	playsewithpan SE_W208, SOUND_PAN_ATTACKER
-	createsprite gUnknown_08593C64, ANIM_ATTACKER, 2
+	createsprite gGuardRingSpriteTemplate, ANIM_ATTACKER, 2
 	delay 4
-	createsprite gUnknown_08593C64, ANIM_ATTACKER, 2
+	createsprite gGuardRingSpriteTemplate, ANIM_ATTACKER, 2
 	delay 4
-	createsprite gUnknown_08593C64, ANIM_ATTACKER, 2
+	createsprite gGuardRingSpriteTemplate, ANIM_ATTACKER, 2
 	waitforvisualfinish
 	playsewithpan SE_REAPOKE, SOUND_PAN_ATTACKER
 	createvisualtask sub_8115A04, 2, 10, 0, 2, 0, 10, RGB_WHITE
@@ -2531,8 +2531,8 @@ HornDrillInContest:
 Move_THRASH:
 	loadspritegfx ANIM_TAG_IMPACT
 	loadspritegfx ANIM_TAG_HANDS_AND_FEET
-	createvisualtask AnimTask_ThrashMoveMon, 2
-	createvisualtask sub_8104CA4, 2
+	createvisualtask AnimTask_ThrashMoveMonHorizontal, 2
+	createvisualtask AnimTask_ThrashMoveMonVertical, 2
 	createsprite gUnknown_08595EB0, ANIM_TARGET, 3, 1, 10, 0
 	createvisualtask AnimTask_ShakeMonInPlace, 2, ANIM_TARGET, 4, 0, 7, 1
 	playsewithpan SE_W004, SOUND_PAN_TARGET
@@ -3396,11 +3396,11 @@ ExtremeSpeedContinue:
 	loopsewithpan SE_W013B, SOUND_PAN_ATTACKER, 8, 3
 	waitforvisualfinish
 	delay 1
-	createvisualtask sub_8117F60, 2
+	createvisualtask AnimTask_ExtremeSpeedMoveTarget, 2
 	monbg ANIM_TARGET
 	setalpha 12, 8
 	delay 18
-	createvisualtask sub_8105810, 2
+	createvisualtask AnimTask_ExtremeSpeedImpact, 2
 	delay 2
 	playsewithpan SE_W004, SOUND_PAN_TARGET
 	createsprite gBattleAnimSpriteTemplate_85973B8, ANIM_TARGET, 2, 1, 0, -12, 3
@@ -3413,7 +3413,7 @@ ExtremeSpeedContinue:
 	waitforvisualfinish
 	createvisualtask AnimTask_SpeedDust, 2
 	delay 10
-	createvisualtask sub_810599C, 2
+	createvisualtask AnimTask_ExtremeSpeedMonReappear, 2
 	loopsewithpan SE_W104, SOUND_PAN_ATTACKER, 8, 4
 	waitforvisualfinish
 	restorebg
@@ -3437,20 +3437,20 @@ Move_UPROAR:
 	createvisualtask sub_8106D90, 2, 0
 	createsprite gUproarRingSpriteTemplate, ANIM_ATTACKER, 3, 0, 0, 0, 0, 31, 8
 	playsewithpan SE_W253, SOUND_PAN_ATTACKER
-	createsprite gBattleAnimSpriteTemplate_8593BB8, ANIM_ATTACKER, 2, 0, 29, -12, 0
-	createsprite gBattleAnimSpriteTemplate_8593BB8, ANIM_ATTACKER, 2, 0, -12, -29, 1
+	createsprite gJaggedMusicNoteSpriteTemplate, ANIM_ATTACKER, 2, 0, 29, -12, 0
+	createsprite gJaggedMusicNoteSpriteTemplate, ANIM_ATTACKER, 2, 0, -12, -29, 1
 	delay 16
 	createvisualtask sub_8106D90, 2, 0
 	createsprite gUproarRingSpriteTemplate, ANIM_ATTACKER, 3, 0, 0, 0, 0, 31, 8
 	playsewithpan SE_W253, SOUND_PAN_ATTACKER
-	createsprite gBattleAnimSpriteTemplate_8593BB8, ANIM_ATTACKER, 2, 0, 12, -29, 1
-	createsprite gBattleAnimSpriteTemplate_8593BB8, ANIM_ATTACKER, 2, 0, -29, -12, 0
+	createsprite gJaggedMusicNoteSpriteTemplate, ANIM_ATTACKER, 2, 0, 12, -29, 1
+	createsprite gJaggedMusicNoteSpriteTemplate, ANIM_ATTACKER, 2, 0, -29, -12, 0
 	delay 16
 	createvisualtask sub_8106D90, 2, 0
 	createsprite gUproarRingSpriteTemplate, ANIM_ATTACKER, 3, 0, 0, 0, 0, 31, 8
 	playsewithpan SE_W253, SOUND_PAN_ATTACKER
-	createsprite gBattleAnimSpriteTemplate_8593BB8, ANIM_ATTACKER, 2, 0, 24, -24, 1
-	createsprite gBattleAnimSpriteTemplate_8593BB8, ANIM_ATTACKER, 2, 0, -24, -24, 0
+	createsprite gJaggedMusicNoteSpriteTemplate, ANIM_ATTACKER, 2, 0, 24, -24, 1
+	createsprite gJaggedMusicNoteSpriteTemplate, ANIM_ATTACKER, 2, 0, -24, -24, 0
 	waitforvisualfinish
 	clearmonbg ANIM_DEF_PARTNER
 	end
@@ -5158,7 +5158,7 @@ Move_FAINT_ATTACK:
 	clearmonbg ANIM_ATTACKER
 	invisible ANIM_ATTACKER
 	delay 1
-	createvisualtask sub_8117F60, 2
+	createvisualtask AnimTask_ExtremeSpeedMoveTarget, 2
 	setalpha 12, 8
 	monbg ANIM_TARGET
 	delay 1
@@ -7920,23 +7920,23 @@ Move_BATON_PASS:
 
 Move_PERISH_SONG:
 	loadspritegfx ANIM_TAG_MUSIC_NOTES_2
-	createsprite gUnknown_08593C0C, ANIM_ATTACKER, 4, 0, 0, 0
-	createsprite gUnknown_08593C0C, ANIM_ATTACKER, 4, 1, 1, 16
-	createsprite gUnknown_08593C0C, ANIM_ATTACKER, 4, 2, 1, 32
-	createsprite gUnknown_08593C0C, ANIM_ATTACKER, 4, 3, 2, 48
-	createsprite gUnknown_08593C0C, ANIM_ATTACKER, 4, 4, 2, 64
-	createsprite gUnknown_08593C0C, ANIM_ATTACKER, 4, 5, 0, 80
-	createsprite gUnknown_08593C0C, ANIM_ATTACKER, 4, 6, 0, 96
-	createsprite gUnknown_08593C0C, ANIM_ATTACKER, 4, 7, 1, 112
-	createsprite gUnknown_08593C0C, ANIM_ATTACKER, 4, 8, 2, 128
-	createsprite gUnknown_08593C0C, ANIM_ATTACKER, 4, 9, 0, 144
-	createsprite gUnknown_08593C0C, ANIM_ATTACKER, 4, 10, 2, 160
-	createsprite gUnknown_08593C0C, ANIM_ATTACKER, 4, 11, 0, 176
-	createsprite gUnknown_08593C0C, ANIM_ATTACKER, 4, 12, 1, 192
-	createsprite gUnknown_08593C0C, ANIM_ATTACKER, 4, 13, 3, 208
-	createsprite gUnknown_08593C0C, ANIM_ATTACKER, 4, 14, 3, 224
-	createsprite gUnknown_08593C0C, ANIM_ATTACKER, 4, 15, 0, 240
-	createsprite gUnknown_08593C24, ANIM_ATTACKER, 4, 15, 0, 0
+	createsprite gPerishSongMusicNoteSpriteTemplate, ANIM_ATTACKER, 4, 0, 0, 0
+	createsprite gPerishSongMusicNoteSpriteTemplate, ANIM_ATTACKER, 4, 1, 1, 16
+	createsprite gPerishSongMusicNoteSpriteTemplate, ANIM_ATTACKER, 4, 2, 1, 32
+	createsprite gPerishSongMusicNoteSpriteTemplate, ANIM_ATTACKER, 4, 3, 2, 48
+	createsprite gPerishSongMusicNoteSpriteTemplate, ANIM_ATTACKER, 4, 4, 2, 64
+	createsprite gPerishSongMusicNoteSpriteTemplate, ANIM_ATTACKER, 4, 5, 0, 80
+	createsprite gPerishSongMusicNoteSpriteTemplate, ANIM_ATTACKER, 4, 6, 0, 96
+	createsprite gPerishSongMusicNoteSpriteTemplate, ANIM_ATTACKER, 4, 7, 1, 112
+	createsprite gPerishSongMusicNoteSpriteTemplate, ANIM_ATTACKER, 4, 8, 2, 128
+	createsprite gPerishSongMusicNoteSpriteTemplate, ANIM_ATTACKER, 4, 9, 0, 144
+	createsprite gPerishSongMusicNoteSpriteTemplate, ANIM_ATTACKER, 4, 10, 2, 160
+	createsprite gPerishSongMusicNoteSpriteTemplate, ANIM_ATTACKER, 4, 11, 0, 176
+	createsprite gPerishSongMusicNoteSpriteTemplate, ANIM_ATTACKER, 4, 12, 1, 192
+	createsprite gPerishSongMusicNoteSpriteTemplate, ANIM_ATTACKER, 4, 13, 3, 208
+	createsprite gPerishSongMusicNoteSpriteTemplate, ANIM_ATTACKER, 4, 14, 3, 224
+	createsprite gPerishSongMusicNoteSpriteTemplate, ANIM_ATTACKER, 4, 15, 0, 240
+	createsprite gPerishSongMusicNote2SpriteTemplate, ANIM_ATTACKER, 4, 15, 0, 0
 	delay 20
 	panse_1B SE_W195, SOUND_PAN_ATTACKER, SOUND_PAN_TARGET, +2, 0
 	delay 80
