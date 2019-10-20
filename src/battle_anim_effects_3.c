@@ -166,7 +166,7 @@ const struct SpriteTemplate gUnknown_085CE050 =
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_80A78AC,
+    .callback = AnimThrowProjectile,
 };
 
 const union AnimCmd gUnknown_085CE068[] =
