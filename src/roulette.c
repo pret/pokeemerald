@@ -1213,7 +1213,7 @@ static void sub_8140D6C(u8 r0)
 
 static void sub_8140F6C(u8 r0)
 {
-    sub_80EECA4();
+    IncrementDailyRouletteUses();
     gUnknown_0203AB88->var28 = 0xFF;
     if (gUnknown_0203AB88->var19 == 1)
         gUnknown_0203AB88->var23 = 1;
