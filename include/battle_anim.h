@@ -147,7 +147,7 @@ void TranslateSpriteInCircleOverDuration(struct Sprite *sprite);
 void SetGreyscaleOrOriginalPalette(u16 a1, bool8 a2);
 void PrepareAffineAnimInTaskData(struct Task *task, u8 spriteId, const union AffineAnimCmd *affineAnimCmds);
 bool8 RunAffineAnimFromTaskData(struct Task *task);
-void sub_80A78AC(struct Sprite *sprite);
+void AnimThrowProjectile(struct Sprite *sprite);
 void sub_80A6BFC(struct BattleAnimBgData *unk, u8 unused);
 u8 sub_80A8394(u16 species, bool8 isBackpic, u8 a3, s16 x, s16 y, u8 subpriority, u32 personality, u32 trainerId, u32 battlerId, u32 a10);
 void sub_80A749C(struct Sprite *sprite);
@@ -225,7 +225,7 @@ void SetSpriteNextToMonHead(u8 battler, struct Sprite* sprite);
 void AnimMoveTwisterParticle(struct Sprite* sprite);
 
 // water.c
-void sub_8108C94(struct Sprite *sprite);
+void AnimWaterPulseRing(struct Sprite *sprite);
 
 // flying.c
 void sub_810E2C8(struct Sprite *sprite);

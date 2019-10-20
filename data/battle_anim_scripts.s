@@ -1885,11 +1885,11 @@ Move_PAY_DAY:
 	monbgprio_28 ANIM_TARGET
 	setalpha 12, 8
 	playsewithpan SE_W013B, SOUND_PAN_ATTACKER
-	createsprite gUnknown_085934D8, ANIM_ATTACKER, 2, 20, 0, 0, 0, 1152
+	createsprite gCoinThrowSpriteTemplate, ANIM_ATTACKER, 2, 20, 0, 0, 0, 1152
 	waitforvisualfinish
 	playsewithpan SE_W006, SOUND_PAN_TARGET
 	createsprite gBasicHitSplatSpriteTemplate, ANIM_ATTACKER, 1, 0, 0, 1, 2
-	createsprite gUnknown_085934F0, ANIM_ATTACKER, 2
+	createsprite gFallingCoinSpriteTemplate, ANIM_ATTACKER, 2
 	createvisualtask AnimTask_ShakeMon2, 2, ANIM_TARGET, 1, 0, 6, 1
 	waitforvisualfinish
 	clearmonbg ANIM_TARGET
@@ -4196,7 +4196,7 @@ Move_AIR_CUTTER:
 	monbg ANIM_DEF_PARTNER
 	setalpha 12, 8
 	delay 0
-	createvisualtask sub_8103CF0, 2, 32, -24, 1536, 2, 128
+	createvisualtask AnimTask_AirCutterProjectile, 2, 32, -24, 1536, 2, 128
 	waitforvisualfinish
 	playsewithpan SE_W015, SOUND_PAN_TARGET
 	createsprite gAirCutterSliceSpriteTemplate, ANIM_ATTACKER, 2, 40, -32, 0, 2
@@ -7320,7 +7320,7 @@ Move_EGG_BOMB:
 	loadspritegfx ANIM_TAG_EXPLOSION
 	loadspritegfx ANIM_TAG_LARGE_FRESH_EGG
 	playsewithpan SE_W039, SOUND_PAN_ATTACKER
-	createsprite gUnknown_08593488, ANIM_TARGET, 2, 10, 0, 0, 0, 25, -32
+	createsprite gEggThrowSpriteTemplate, ANIM_TARGET, 2, 10, 0, 0, 0, 25, -32
 	waitforvisualfinish
 	createvisualtask AnimTask_ShakeMon2, 2, ANIM_TARGET, 4, 0, 16, 1
 	createsprite gBattleAnimSpriteTemplate_859371C, ANIM_TARGET, 4, 6, 5, 1, 0
@@ -8593,26 +8593,26 @@ Move_MUDDY_WATER:
 
 Move_BULLET_SEED:
 	loadspritegfx ANIM_TAG_SEED
-	createsprite gUnknown_0859351C, ANIM_TARGET, 2, 20, 0
+	createsprite gBulletSeedSpriteTemplate, ANIM_TARGET, 2, 20, 0
 	delay 5
-	createsprite gUnknown_0859351C, ANIM_TARGET, 2, 20, 0
+	createsprite gBulletSeedSpriteTemplate, ANIM_TARGET, 2, 20, 0
 	delay 5
-	createsprite gUnknown_0859351C, ANIM_TARGET, 2, 20, 0
+	createsprite gBulletSeedSpriteTemplate, ANIM_TARGET, 2, 20, 0
 	delay 5
 	createvisualtask AnimTask_ShakeMon2, 2, ANIM_TARGET, 2, 0, 30, 1
-	createsprite gUnknown_0859351C, ANIM_TARGET, 2, 20, 0
+	createsprite gBulletSeedSpriteTemplate, ANIM_TARGET, 2, 20, 0
 	delay 5
-	createsprite gUnknown_0859351C, ANIM_TARGET, 2, 20, 0
+	createsprite gBulletSeedSpriteTemplate, ANIM_TARGET, 2, 20, 0
 	delay 5
-	createsprite gUnknown_0859351C, ANIM_TARGET, 2, 20, 0
+	createsprite gBulletSeedSpriteTemplate, ANIM_TARGET, 2, 20, 0
 	delay 5
-	createsprite gUnknown_0859351C, ANIM_TARGET, 2, 20, 0
+	createsprite gBulletSeedSpriteTemplate, ANIM_TARGET, 2, 20, 0
 	delay 5
-	createsprite gUnknown_0859351C, ANIM_TARGET, 2, 20, 0
+	createsprite gBulletSeedSpriteTemplate, ANIM_TARGET, 2, 20, 0
 	delay 5
-	createsprite gUnknown_0859351C, ANIM_TARGET, 2, 20, 0
+	createsprite gBulletSeedSpriteTemplate, ANIM_TARGET, 2, 20, 0
 	delay 5
-	createsprite gUnknown_0859351C, ANIM_TARGET, 2, 20, 0
+	createsprite gBulletSeedSpriteTemplate, ANIM_TARGET, 2, 20, 0
 	waitforvisualfinish
 	end
 
@@ -8858,7 +8858,7 @@ Move_METAL_SOUND:
 	end
 MetalSound1:
 	panse_1B SE_W103, SOUND_PAN_ATTACKER, SOUND_PAN_TARGET, +2, 0
-	createsprite gUnknown_08593458, ANIM_TARGET, 2, 16, 0, 0, 0, 30, 0
+	createsprite gMetalSoundSpriteTemplate, ANIM_TARGET, 2, 16, 0, 0, 0, 30, 0
 	delay 2
 	return
 
@@ -9503,13 +9503,13 @@ Move_WATER_PULSE:
 	playsewithpan SE_W145C, SOUND_PAN_TARGET
 	waitforvisualfinish
 	playsewithpan SE_W202, SOUND_PAN_ATTACKER
-	createsprite gUnknown_08593470, ANIM_TARGET, 2, 0, 0, 40, 15
+	createsprite gWaterPulseRingSpriteTemplate, ANIM_TARGET, 2, 0, 0, 40, 15
 	delay 5
 	playsewithpan SE_W202, SOUND_PAN_ATTACKER
-	createsprite gUnknown_08593470, ANIM_TARGET, 2, 0, 0, 40, 15
+	createsprite gWaterPulseRingSpriteTemplate, ANIM_TARGET, 2, 0, 0, 40, 15
 	delay 5
 	playsewithpan SE_W202, SOUND_PAN_ATTACKER
-	createsprite gUnknown_08593470, ANIM_TARGET, 2, 0, 0, 40, 15
+	createsprite gWaterPulseRingSpriteTemplate, ANIM_TARGET, 2, 0, 0, 40, 15
 	delay 13
 	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 0, 8, 18, 1
 	waitforvisualfinish

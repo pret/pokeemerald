@@ -30,7 +30,7 @@ extern const struct OamData gOamData_AffineNormal_ObjNormal_64x64;
 
 static void sub_80A6FB4(struct Sprite *sprite);
 static void sub_80A7144(struct Sprite *sprite);
-static void sub_80A791C(struct Sprite *sprite);
+static void AnimThrowProjectile_Step(struct Sprite *sprite);
 static void sub_80A8DFC(struct Sprite *sprite);
 static void sub_80A8E88(struct Sprite *sprite);
 static u16 GetBattlerYDeltaFromSpriteId(u8 spriteId);
@@ -1513,7 +1513,7 @@ void TranslateAnimSpriteToTargetMonLocation(struct Sprite *sprite)
     StoreSpriteCallbackInData6(sprite, DestroyAnimSprite);
 }
 
-void sub_80A78AC(struct Sprite *sprite)
+void AnimThrowProjectile(struct Sprite *sprite)
 {
     InitSpritePosToAnimAttacker(sprite, 1);
     if (GetBattlerSide(gBattleAnimAttacker))
@@ -1523,10 +1523,10 @@ void sub_80A78AC(struct Sprite *sprite)
     sprite->data[4] = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_Y_PIC_OFFSET) + gBattleAnimArgs[3];
     sprite->data[5] = gBattleAnimArgs[5];
     InitAnimArcTranslation(sprite);
-    sprite->callback = sub_80A791C;
+    sprite->callback = AnimThrowProjectile_Step;
 }
 
-static void sub_80A791C(struct Sprite *sprite)
+static void AnimThrowProjectile_Step(struct Sprite *sprite)
 {
     if (TranslateAnimHorizontalArc(sprite))
         DestroyAnimSprite(sprite);
