@@ -358,8 +358,8 @@ gSpecials:: @ 81DBA64
 	def_special sub_80EE7C0
 	def_special ShowGlassWorkshopMenu
 	def_special PutFanClubSpecialOnTheAir
-	def_special sub_80EED10
-	def_special sub_80EED34
+	def_special IncrementDailyPlantedBerries
+	def_special IncrementDailyPickedBerries
 	def_special InitSecretBaseVars
 	def_special SetSecretBaseSecretsTvFlags_SandOrnament
 	def_special sub_80EB300
