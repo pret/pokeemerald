@@ -3306,7 +3306,7 @@ Move_MILK_DRINK:
 	delay 20
 	playsewithpan SE_W152, SOUND_PAN_ATTACKER
 	waitforvisualfinish
-	createsprite gUnknown_0859381C, ANIM_ATTACKER, 3, 0, 0, 1, 0
+	createsprite gThinRingExpandingSpriteTemplate, ANIM_ATTACKER, 3, 0, 0, 1, 0
 	playsewithpan SE_W208, SOUND_PAN_ATTACKER
 	waitforvisualfinish
 	clearmonbg ANIM_TARGET
@@ -3411,7 +3411,7 @@ ExtremeSpeedContinue:
 	playsewithpan SE_W233B, SOUND_PAN_TARGET
 	createsprite gBattleAnimSpriteTemplate_85973B8, ANIM_TARGET, 2, 1, 0, 0, 3
 	waitforvisualfinish
-	createvisualtask sub_8105AAC, 2
+	createvisualtask AnimTask_SpeedDust, 2
 	delay 10
 	createvisualtask sub_810599C, 2
 	loopsewithpan SE_W104, SOUND_PAN_ATTACKER, 8, 4
@@ -3435,19 +3435,19 @@ Move_UPROAR:
 	loadspritegfx ANIM_TAG_THIN_RING
 	monbg ANIM_DEF_PARTNER
 	createvisualtask sub_8106D90, 2, 0
-	createsprite gBattleAnimSpriteTemplate_8593898, ANIM_ATTACKER, 3, 0, 0, 0, 0, 31, 8
+	createsprite gUproarRingSpriteTemplate, ANIM_ATTACKER, 3, 0, 0, 0, 0, 31, 8
 	playsewithpan SE_W253, SOUND_PAN_ATTACKER
 	createsprite gBattleAnimSpriteTemplate_8593BB8, ANIM_ATTACKER, 2, 0, 29, -12, 0
 	createsprite gBattleAnimSpriteTemplate_8593BB8, ANIM_ATTACKER, 2, 0, -12, -29, 1
 	delay 16
 	createvisualtask sub_8106D90, 2, 0
-	createsprite gBattleAnimSpriteTemplate_8593898, ANIM_ATTACKER, 3, 0, 0, 0, 0, 31, 8
+	createsprite gUproarRingSpriteTemplate, ANIM_ATTACKER, 3, 0, 0, 0, 0, 31, 8
 	playsewithpan SE_W253, SOUND_PAN_ATTACKER
 	createsprite gBattleAnimSpriteTemplate_8593BB8, ANIM_ATTACKER, 2, 0, 12, -29, 1
 	createsprite gBattleAnimSpriteTemplate_8593BB8, ANIM_ATTACKER, 2, 0, -29, -12, 0
 	delay 16
 	createvisualtask sub_8106D90, 2, 0
-	createsprite gBattleAnimSpriteTemplate_8593898, ANIM_ATTACKER, 3, 0, 0, 0, 0, 31, 8
+	createsprite gUproarRingSpriteTemplate, ANIM_ATTACKER, 3, 0, 0, 0, 0, 31, 8
 	playsewithpan SE_W253, SOUND_PAN_ATTACKER
 	createsprite gBattleAnimSpriteTemplate_8593BB8, ANIM_ATTACKER, 2, 0, 24, -24, 1
 	createsprite gBattleAnimSpriteTemplate_8593BB8, ANIM_ATTACKER, 2, 0, -24, -24, 0
@@ -4161,7 +4161,7 @@ Move_AROMATHERAPY:
 	waitforvisualfinish
 	playsewithpan SE_REAPOKE, SOUND_PAN_ATTACKER
 	createsprite gSimplePaletteBlendSpriteTemplate, ANIM_ATTACKER, 0, 43, 3, 10, 0, RGB(13, 31, 12)
-	createsprite gUnknown_08593868, ANIM_ATTACKER, 16, 0, 0, 0, 1
+	createsprite gBlendThinRingExpandingSpriteTemplate, ANIM_ATTACKER, 16, 0, 0, 0, 1
 	waitforvisualfinish
 	end
 
@@ -4473,13 +4473,13 @@ Move_CALM_MIND:
 	waitforvisualfinish
 	createvisualtask sub_81177E4, 5, 1
 	waitforvisualfinish
-	createsprite gUnknown_08593850, ANIM_ATTACKER, 40, 0, 0, 0, 0
+	createsprite gThingRingShrinkingSpriteTemplate, ANIM_ATTACKER, 40, 0, 0, 0, 0
 	playsewithpan SE_W048, SOUND_PAN_ATTACKER
 	delay 14
-	createsprite gUnknown_08593850, ANIM_ATTACKER, 40, 0, 0, 0, 0
+	createsprite gThingRingShrinkingSpriteTemplate, ANIM_ATTACKER, 40, 0, 0, 0, 0
 	playsewithpan SE_W048, SOUND_PAN_ATTACKER
 	delay 14
-	createsprite gUnknown_08593850, ANIM_ATTACKER, 40, 0, 0, 0, 0
+	createsprite gThingRingShrinkingSpriteTemplate, ANIM_ATTACKER, 40, 0, 0, 0, 0
 	playsewithpan SE_W048, SOUND_PAN_ATTACKER
 	waitforvisualfinish
 	createvisualtask sub_81177E4, 5, 0
@@ -7677,15 +7677,15 @@ Move_SOFT_BOILED:
 	monbg ANIM_ATK_PARTNER
 	playsewithpan SE_W039, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_ShakeMon, 2, ANIM_ATTACKER, 0, 2, 6, 1
-	createsprite gUnknown_085937B0, ANIM_ATTACKER, 4, 0, 16, 0
-	createsprite gUnknown_085937B0, ANIM_ATTACKER, 4, 0, 16, 1
+	createsprite gSoftBoiledEggSpriteTemplate, ANIM_ATTACKER, 4, 0, 16, 0
+	createsprite gSoftBoiledEggSpriteTemplate, ANIM_ATTACKER, 4, 0, 16, 1
 	delay 120
 	delay 7
 	playsewithpan SE_W030, SOUND_PAN_ATTACKER
 	createsprite gSimplePaletteBlendSpriteTemplate, ANIM_ATTACKER, 2, 31, 3, 10, 0, RGB(12, 24, 30)
-	createsprite gUnknown_0859381C, ANIM_ATTACKER, 3, 31, 16, 0, 1
+	createsprite gThinRingExpandingSpriteTemplate, ANIM_ATTACKER, 3, 31, 16, 0, 1
 	delay 8
-	createsprite gUnknown_0859381C, ANIM_ATTACKER, 3, 31, 16, 0, 1
+	createsprite gThinRingExpandingSpriteTemplate, ANIM_ATTACKER, 3, 31, 16, 0, 1
 	delay 60
 	setarg 7, -1
 	waitforvisualfinish
@@ -7736,12 +7736,12 @@ Move_HEAL_BELL:
 	playsewithpan SE_REAPOKE, SOUND_PAN_ATTACKER
 	createvisualtask sub_8116664, 10, 4, 3, 10, 0, RGB(12, 24, 30)
 	createvisualtask sub_8116620, 10, 10, 3, 10, 0, RGB_WHITE
-	createsprite gUnknown_08593868, ANIM_ATTACKER, 16, 0, 0, 0, 1
+	createsprite gBlendThinRingExpandingSpriteTemplate, ANIM_ATTACKER, 16, 0, 0, 0, 1
 	end
 HealBell1:
 	createvisualtask sub_8116664, 10, 4, 3, 8, 0, RGB(12, 24, 30)
 	createvisualtask sub_8116620, 10, 10, 3, 2, 10, RGB_WHITE
-	createsprite gUnknown_0859381C, ANIM_ATTACKER, 40, 0, -24, 0, 1
+	createsprite gThinRingExpandingSpriteTemplate, ANIM_ATTACKER, 40, 0, -24, 0, 1
 	playsewithpan SE_W215, SOUND_PAN_ATTACKER
 	return
 
@@ -8468,7 +8468,7 @@ Move_REFRESH:
 	waitforvisualfinish
 	playsewithpan SE_REAPOKE, SOUND_PAN_ATTACKER
 	createsprite gSimplePaletteBlendSpriteTemplate, ANIM_ATTACKER, 2, 31, 3, 10, 0, RGB(12, 24, 30)
-	createsprite gUnknown_0859381C, ANIM_ATTACKER, 3, 0, 0, 0, 0
+	createsprite gThinRingExpandingSpriteTemplate, ANIM_ATTACKER, 3, 0, 0, 0, 0
 	end
 
 Move_BLAZE_KICK:
@@ -8505,7 +8505,7 @@ Move_HYPER_VOICE:
 HyperVoiceEffect:
 	createsprite gSimplePaletteBlendSpriteTemplate, ANIM_ATTACKER, 2, 31, 3, 8, 0, RGB_YELLOW
 	createvisualtask AnimTask_ScaleMonAndRestore, 5, -5, -5, 5, ANIM_ATTACKER, 0
-	createsprite gUnknown_08593880, ANIM_ATTACKER, 0, 45, 0, 0, 0, 0, 0, 1
+	createsprite gHyperVoiceRingSpriteTemplate, ANIM_ATTACKER, 0, 45, 0, 0, 0, 0, 0, 1
 	createvisualtask AnimTask_ShakeMon2, 2, ANIM_TARGET, 1, 0, 6, 1
 	createvisualtask AnimTask_ShakeMon2, 2, ANIM_DEF_PARTNER, 1, 0, 6, 1
 	createvisualtask sub_81162A4, 2, 1, 0, 6, 1
@@ -10440,7 +10440,7 @@ General_ItemEffect:
 	waitforvisualfinish
 	playsewithpan SE_REAPOKE, SOUND_PAN_ATTACKER
 	createsprite gSimplePaletteBlendSpriteTemplate, ANIM_ATTACKER, 2, 2, 3, 7, 0, RGB(17, 31, 25)
-	createsprite gUnknown_0859381C, ANIM_ATTACKER, 3, 0, 0, 0, 0
+	createsprite gThinRingExpandingSpriteTemplate, ANIM_ATTACKER, 3, 0, 0, 0, 0
 	waitforvisualfinish
 	end
 

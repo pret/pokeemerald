@@ -34,11 +34,11 @@ void AnimGuillotinePincer(struct Sprite *);
 void AnimBreathPuff(struct Sprite *);
 void AnimAngerMark(struct Sprite *);
 void AnimPencil(struct Sprite *);
-void sub_81051C4(struct Sprite *);
-void sub_81052A4(struct Sprite *);
-void sub_81054E8(struct Sprite *);
-void sub_8105538(struct Sprite *);
-void sub_8105C48(struct Sprite *);
+void AnimBlendThinRing(struct Sprite *);
+void AnimHyperVoiceRing(struct Sprite *);
+void AnimUproarRing(struct Sprite *);
+void AnimSoftBoiledEgg(struct Sprite *);
+void AnimSpeedDust(struct Sprite *);
 void sub_8105DE8(struct Sprite *);
 void sub_8105E60(struct Sprite *);
 void sub_8106140(struct Sprite *);
@@ -80,17 +80,17 @@ static void ThrashMoveMonStep(u8);
 static void sub_8104D28(u8);
 static void sub_8104F54(u8);
 static void AnimPencil_Step(struct Sprite *);
-static void sub_810557C(struct Sprite *);
-static void sub_81055F4(struct Sprite *);
-static void sub_810561C(struct Sprite *);
-static void sub_8105694(struct Sprite *);
-static void sub_81056D4(struct Sprite *);
-static void sub_810571C(struct Sprite *);
-static void sub_810575C(struct Sprite *);
+static void AnimSoftBoiledEgg_Step1(struct Sprite *);
+static void AnimSoftBoiledEgg_Step2(struct Sprite *);
+static void AnimSoftBoiledEgg_Step3(struct Sprite *);
+static void AnimSoftBoiledEgg_Step3_Callback1(struct Sprite *);
+static void AnimSoftBoiledEgg_Step3_Callback2(struct Sprite *);
+static void AnimSoftBoiledEgg_Step4(struct Sprite *);
+static void AnimSoftBoiledEgg_Step4_Callback(struct Sprite *);
 static void sub_81057B8(u8);
 static void sub_8105878(u8);
 static void sub_81059E0(u8);
-static void sub_8105B08(u8);
+static void SpeedDust_Step1(u8);
 static void sub_8105F30(u8);
 static void sub_8105F84(u8);
 static void sub_810618C(struct Sprite *);
@@ -660,7 +660,7 @@ const struct SpriteTemplate gExplosionSpriteTemplate =
     .callback = AnimSparklingParticle,
 };
 
-const union AffineAnimCmd gUnknown_08593734[] =
+const union AffineAnimCmd gSoftBoiledEggAffineAnimCmds1[] =
 {
     AFFINEANIMCMD_FRAME(0x0, 0x0, -8, 2),
     AFFINEANIMCMD_FRAME(0x0, 0x0, 8, 4),
@@ -668,13 +668,13 @@ const union AffineAnimCmd gUnknown_08593734[] =
     AFFINEANIMCMD_JUMP(0),
 };
 
-const union AffineAnimCmd gUnknown_08593754[] =
+const union AffineAnimCmd gSoftBoiledEggAffineAnimCmds2[] =
 {
     AFFINEANIMCMD_FRAME(0x100, 0x100, 0, 0),
     AFFINEANIMCMD_END,
 };
 
-const union AffineAnimCmd gUnknown_08593764[] =
+const union AffineAnimCmd gSoftBoiledEggAffineAnimCmds3[] =
 {
     AFFINEANIMCMD_FRAME(0xFFF8, 0x4, 0, 8),
     AFFINEANIMCMD_LOOP(0),
@@ -686,121 +686,121 @@ const union AffineAnimCmd gUnknown_08593764[] =
     AFFINEANIMCMD_END,
 };
 
-const union AffineAnimCmd *const gUnknown_085937A4[] =
+const union AffineAnimCmd *const gSoftBoiledEggAffineAnimTable[] =
 {
-    gUnknown_08593734,
-    gUnknown_08593754,
-    gUnknown_08593764,
+    gSoftBoiledEggAffineAnimCmds1,
+    gSoftBoiledEggAffineAnimCmds2,
+    gSoftBoiledEggAffineAnimCmds3,
 };
-//*
-const struct SpriteTemplate gUnknown_085937B0 =
+
+const struct SpriteTemplate gSoftBoiledEggSpriteTemplate =
 {
     .tileTag = ANIM_TAG_BREAKING_EGG,
     .paletteTag = ANIM_TAG_BREAKING_EGG,
     .oam = &gOamData_AffineDouble_ObjBlend_32x32,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
-    .affineAnims = gUnknown_085937A4,
-    .callback = sub_8105538,
+    .affineAnims = gSoftBoiledEggAffineAnimTable,
+    .callback = AnimSoftBoiledEgg,
 };
 
-const union AffineAnimCmd gUnknown_085937C8[] =
+const union AffineAnimCmd gThingRingExpandingAffineAnimCmds1[] =
 {
     AFFINEANIMCMD_FRAME(0x10, 0x10, 0, 0),
     AFFINEANIMCMD_FRAME(0x10, 0x10, 0, 30),
     AFFINEANIMCMD_END_ALT(1),
 };
 
-const union AffineAnimCmd gUnknown_085937E0[] =
+const union AffineAnimCmd gThingRingExpandingAffineAnimCmds2[] =
 {
     AFFINEANIMCMD_FRAME(0x10, 0x10, 0, 0),
     AFFINEANIMCMD_FRAME(0x20, 0x20, 0, 15),
     AFFINEANIMCMD_END_ALT(1),
 };
 
-const union AffineAnimCmd gUnknown_085937F8[] =
+const union AffineAnimCmd gHyperVoiceRingAffineAnimCmds[] =
 {
     AFFINEANIMCMD_FRAME(0x10, 0x10, 0, 0),
     AFFINEANIMCMD_FRAME(0xB, 0xB, 0, 45),
     AFFINEANIMCMD_END_ALT(1),
 };
 
-const union AffineAnimCmd *const gUnknown_08593810[] =
+const union AffineAnimCmd *const gThingRingExpandingAffineAnimTable[] =
 {
-    gUnknown_085937C8,
-    gUnknown_085937E0,
+    gThingRingExpandingAffineAnimCmds1,
+    gThingRingExpandingAffineAnimCmds2,
 };
 
-const union AffineAnimCmd *const gUnknown_08593818[] =
+const union AffineAnimCmd *const gHyperVoiceRingAffineAnimTable[] =
 {
-    gUnknown_085937F8,
+    gHyperVoiceRingAffineAnimCmds,
 };
 
-const struct SpriteTemplate gUnknown_0859381C =
+const struct SpriteTemplate gThinRingExpandingSpriteTemplate =
 {
     .tileTag = ANIM_TAG_THIN_RING,
     .paletteTag = ANIM_TAG_THIN_RING,
     .oam = &gOamData_AffineDouble_ObjNormal_64x64,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
-    .affineAnims = gUnknown_08593810,
+    .affineAnims = gThingRingExpandingAffineAnimTable,
     .callback = AnimSparklingParticle,
 };
-//*
-const union AffineAnimCmd gUnknown_08593834[] =
+
+const union AffineAnimCmd gThingRingShrinkingAffineAnimCmds[] =
 {
     AFFINEANIMCMD_FRAME(0x200, 0x200, 0, 0),
     AFFINEANIMCMD_FRAME(0xFFF0, 0xFFF0, 0, 30),
     AFFINEANIMCMD_END_ALT(1),
 };
 
-const union AffineAnimCmd *const gUnknown_0859384C[] =
+const union AffineAnimCmd *const gThingRingShrinkingAffineAnimTable[] =
 {
-    gUnknown_08593834,
+    gThingRingShrinkingAffineAnimCmds,
 };
 
-const struct SpriteTemplate gUnknown_08593850 =
+const struct SpriteTemplate gThingRingShrinkingSpriteTemplate =
 {
     .tileTag = ANIM_TAG_THIN_RING,
     .paletteTag = ANIM_TAG_THIN_RING,
     .oam = &gOamData_AffineDouble_ObjBlend_64x64,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
-    .affineAnims = gUnknown_0859384C,
+    .affineAnims = gThingRingShrinkingAffineAnimTable,
     .callback = AnimSparklingParticle,
 };
 
-const struct SpriteTemplate gUnknown_08593868 =
+const struct SpriteTemplate gBlendThinRingExpandingSpriteTemplate =
 {
     .tileTag = ANIM_TAG_THIN_RING,
     .paletteTag = ANIM_TAG_THIN_RING,
     .oam = &gOamData_AffineDouble_ObjBlend_64x64,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
-    .affineAnims = gUnknown_08593810,
-    .callback = sub_81051C4,
+    .affineAnims = gThingRingExpandingAffineAnimTable,
+    .callback = AnimBlendThinRing,
 };
 
-const struct SpriteTemplate gUnknown_08593880 =
+const struct SpriteTemplate gHyperVoiceRingSpriteTemplate =
 {
     .tileTag = ANIM_TAG_THIN_RING,
     .paletteTag = ANIM_TAG_THIN_RING,
     .oam = &gOamData_AffineDouble_ObjBlend_64x64,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
-    .affineAnims = gUnknown_08593818,
-    .callback = sub_81052A4,
+    .affineAnims = gHyperVoiceRingAffineAnimTable,
+    .callback = AnimHyperVoiceRing,
 };
 
-const struct SpriteTemplate gBattleAnimSpriteTemplate_8593898 =
+const struct SpriteTemplate gUproarRingSpriteTemplate =
 {
     .tileTag = ANIM_TAG_THIN_RING,
     .paletteTag = ANIM_TAG_THIN_RING,
     .oam = &gOamData_AffineDouble_ObjBlend_64x64,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
-    .affineAnims = gUnknown_08593810,
-    .callback = sub_81054E8,
+    .affineAnims = gThingRingExpandingAffineAnimTable,
+    .callback = AnimUproarRing,
 };
 
 const union AffineAnimCmd gUnknown_085938B0[] =
@@ -809,7 +809,7 @@ const union AffineAnimCmd gUnknown_085938B0[] =
     AFFINEANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_085938C0[] =
+const union AnimCmd gSpeedDustAnimCmds[] =
 {
     ANIMCMD_FRAME(0, 3),
     ANIMCMD_FRAME(4, 3),
@@ -819,20 +819,20 @@ const union AnimCmd gUnknown_085938C0[] =
     ANIMCMD_END,
 };
 
-const union AnimCmd *const gUnknown_085938D8[] =
+const union AnimCmd *const gSpeedDustAnimTable[] =
 {
-    gUnknown_085938C0,
+    gSpeedDustAnimCmds,
 };
 
-const struct SpriteTemplate gUnknown_085938DC =
+const struct SpriteTemplate gSpeedDustSpriteTemplate =
 {
     .tileTag = ANIM_TAG_SPEED_DUST,
     .paletteTag = ANIM_TAG_SPEED_DUST,
     .oam = &gOamData_AffineOff_ObjNormal_16x16,
-    .anims = gUnknown_085938D8,
+    .anims = gSpeedDustAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_8105C48,
+    .callback = AnimSpeedDust,
 };
 
 const s8 gUnknown_085938F4[][2] =
@@ -2533,7 +2533,7 @@ static void AnimPencil_Step(struct Sprite *sprite)
     }
 }
 
-void sub_81051C4(struct Sprite *sprite)
+void AnimBlendThinRing(struct Sprite *sprite)
 {
     u8 battler = 0;
     u16 sp0 = 0;
@@ -2573,7 +2573,7 @@ void sub_8105284(struct Sprite *sprite)
     }
 }
 
-void sub_81052A4(struct Sprite *sprite)
+void AnimHyperVoiceRing(struct Sprite *sprite)
 {
     u16 r9 = 0;
     u16 r6 = 0;
@@ -2658,7 +2658,7 @@ void sub_81052A4(struct Sprite *sprite)
     sprite->callback(sprite);
 }
 
-void sub_81054E8(struct Sprite *sprite)
+void AnimUproarRing(struct Sprite *sprite)
 {
     u8 index = IndexOfSpritePaletteTag(ANIM_TAG_THIN_RING);
     if (index != 0xFF)
@@ -2671,7 +2671,7 @@ void sub_81054E8(struct Sprite *sprite)
     sprite->callback(sprite);
 }
 
-void sub_8105538(struct Sprite *sprite)
+void AnimSoftBoiledEgg(struct Sprite *sprite)
 {
     s16 r1;
     InitSpritePosToAnimAttacker(sprite, FALSE);
@@ -2679,10 +2679,10 @@ void sub_8105538(struct Sprite *sprite)
     sprite->data[0] = 0x380;
     sprite->data[1] = r1;
     sprite->data[7] = gBattleAnimArgs[2];
-    sprite->callback = sub_810557C;
+    sprite->callback = AnimSoftBoiledEgg_Step1;
 }
 
-static void sub_810557C(struct Sprite *sprite)
+static void AnimSoftBoiledEgg_Step1(struct Sprite *sprite)
 {
     s16 add;
     sprite->pos2.y -= (sprite->data[0] >> 8);
@@ -2698,20 +2698,20 @@ static void sub_810557C(struct Sprite *sprite)
         sprite->pos2.x = 0;
         sprite->data[0] = 0;
         StartSpriteAffineAnim(sprite, 1);
-        sprite->callback = sub_81055F4;
+        sprite->callback = AnimSoftBoiledEgg_Step2;
     }
 }
 
-static void sub_81055F4(struct Sprite *sprite)
+static void AnimSoftBoiledEgg_Step2(struct Sprite *sprite)
 {
     if (sprite->data[0]++ > 19)
     {
         StartSpriteAffineAnim(sprite, 2);
-        sprite->callback = sub_810561C;
+        sprite->callback = AnimSoftBoiledEgg_Step3;
     }
 }
 
-static void sub_810561C(struct Sprite *sprite)
+static void AnimSoftBoiledEgg_Step3(struct Sprite *sprite)
 {
     if (sprite->affineAnimEnded)
     {
@@ -2720,17 +2720,17 @@ static void sub_810561C(struct Sprite *sprite)
         if (sprite->data[7] == 0)
         {
             sprite->oam.tileNum += 16;
-            sprite->callback = sub_8105694;
+            sprite->callback = AnimSoftBoiledEgg_Step3_Callback1;
         }
         else
         {
             sprite->oam.tileNum += 32;
-            sprite->callback = sub_810571C;
+            sprite->callback = AnimSoftBoiledEgg_Step4;
         }
     }
 }
 
-static void sub_8105694(struct Sprite *sprite)
+static void AnimSoftBoiledEgg_Step3_Callback1(struct Sprite *sprite)
 {
     sprite->pos2.y -= 2;
     if (++sprite->data[0] == 9)
@@ -2739,34 +2739,34 @@ static void sub_8105694(struct Sprite *sprite)
         sprite->data[1] = 0;
         SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT2_ALL | BLDCNT_EFFECT_BLEND);
         SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND((u16)sprite->data[0], 0));
-        sprite->callback = sub_81056D4;
+        sprite->callback = AnimSoftBoiledEgg_Step3_Callback2;
     }
 }
 
-static void sub_81056D4(struct Sprite *sprite)
+static void AnimSoftBoiledEgg_Step3_Callback2(struct Sprite *sprite)
 {
     if (sprite->data[1]++ % 3 == 0)
     {
         sprite->data[0]--;
         SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(sprite->data[0], 16 - sprite->data[0]));
         if (sprite->data[0] == 0)
-            sprite->callback = sub_810571C;
+            sprite->callback = AnimSoftBoiledEgg_Step4;
     }
 }
 
-static void sub_810571C(struct Sprite *sprite)
+static void AnimSoftBoiledEgg_Step4(struct Sprite *sprite)
 {
     if ((u16)gBattleAnimArgs[7] == 0xFFFF)
     {
         sprite->invisible = 1;
         if (sprite->data[7] == 0)
-            sprite->callback = sub_810575C;
+            sprite->callback = AnimSoftBoiledEgg_Step4_Callback;
         else
             sprite->callback = DestroyAnimSprite;
     }
 }
 
-static void sub_810575C(struct Sprite *sprite)
+static void AnimSoftBoiledEgg_Step4_Callback(struct Sprite *sprite)
 {
     SetGpuReg(REG_OFFSET_BLDCNT, 0);
     SetGpuReg(REG_OFFSET_BLDALPHA, 0);
@@ -2904,7 +2904,7 @@ static void sub_81059E0(u8 taskId)
     }
 }
 
-void sub_8105AAC(u8 taskId)
+void AnimTask_SpeedDust(u8 taskId)
 {
     struct Task* task = &gTasks[taskId];
     task->data[0] = 0;
@@ -2919,10 +2919,10 @@ void sub_8105AAC(u8 taskId)
     task->data[13] = 0;
     task->data[14] = GetBattlerSpriteCoord(gBattleAnimAttacker, ANIM_ATTACKER);
     task->data[15] = GetBattlerSpriteCoord(gBattleAnimAttacker, ANIM_TARGET);
-    task->func = sub_8105B08;
+    task->func = SpeedDust_Step1;
 }
 
-static void sub_8105B08(u8 taskId)
+static void SpeedDust_Step1(u8 taskId)
 {
     struct Task* task = &gTasks[taskId];
     switch (task->data[8])
@@ -2964,7 +2964,7 @@ static void sub_8105B08(u8 taskId)
         {
             u8 spriteId;
             task->data[1] = 0;
-            spriteId = CreateSprite(&gUnknown_085938DC, task->data[14], task->data[15], 0);
+            spriteId = CreateSprite(&gSpeedDustSpriteTemplate, task->data[14], task->data[15], 0);
             if (spriteId != MAX_SPRITES)
             {
                 gSprites[spriteId].data[0] = taskId;
@@ -2988,7 +2988,7 @@ static void sub_8105B08(u8 taskId)
     }
 }
 
-void sub_8105C48(struct Sprite *sprite)
+void AnimSpeedDust(struct Sprite *sprite)
 {
     sprite->invisible = gTasks[sprite->data[0]].data[5];
     if (sprite->animEnded)
