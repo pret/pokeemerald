@@ -40,7 +40,7 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "SafariZone_South_EventScript_23D2E5",
+      "script": "SafariZone_South_EventScript_ExitAttendant",
       "flag": "0"
     },
     {
@@ -53,7 +53,7 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "SafariZone_South_EventScript_23D2CA",
+      "script": "SafariZone_South_EventScript_Boy",
       "flag": "0"
     },
     {
@@ -66,7 +66,7 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "SafariZone_South_EventScript_23D2D3",
+      "script": "SafariZone_South_EventScript_Man",
       "flag": "0"
     },
     {
@@ -79,7 +79,7 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "SafariZone_South_EventScript_23D2DC",
+      "script": "SafariZone_South_EventScript_Youngster",
       "flag": "0"
     },
     {
@@ -92,7 +92,7 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "SafariZone_South_EventScript_23D390",
+      "script": "SafariZone_South_EventScript_ConstructionWorker1",
       "flag": "FLAG_HIDE_SAFARI_ZONE_SOUTH_CONSTRUCTION_WORKERS"
     },
     {
@@ -105,7 +105,7 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "SafariZone_South_EventScript_23D3A2",
+      "script": "SafariZone_South_EventScript_ConstructionWorker2",
       "flag": "FLAG_HIDE_SAFARI_ZONE_SOUTH_CONSTRUCTION_WORKERS"
     }
   ],
