@@ -489,11 +489,11 @@ const struct EventObjectGraphicsInfo *const gEventObjectGraphicsInfoPointers[] =
 };
 
 const struct EventObjectGraphicsInfo *const gMauvilleOldManGraphicsInfoPointers[] = {
-    &gEventObjectGraphicsInfo_Bard,
-    &gEventObjectGraphicsInfo_Hipster,
-    &gEventObjectGraphicsInfo_Trader,
-    &gEventObjectGraphicsInfo_Storyteller,
-    &gEventObjectGraphicsInfo_Giddy,
-    &gEventObjectGraphicsInfo_UnusedMauvilleOldMan1,
-    &gEventObjectGraphicsInfo_UnusedMauvilleOldMan2,
+    [MAUVILLE_MAN_BARD]        = &gEventObjectGraphicsInfo_Bard,
+    [MAUVILLE_MAN_HIPSTER]     = &gEventObjectGraphicsInfo_Hipster,
+    [MAUVILLE_MAN_TRADER]      = &gEventObjectGraphicsInfo_Trader,
+    [MAUVILLE_MAN_STORYTELLER] = &gEventObjectGraphicsInfo_Storyteller,
+    [MAUVILLE_MAN_GIDDY]       = &gEventObjectGraphicsInfo_Giddy,
+    [MAUVILLE_MAN_UNUSED1]     = &gEventObjectGraphicsInfo_UnusedMauvilleOldMan1,
+    [MAUVILLE_MAN_UNUSED2]     = &gEventObjectGraphicsInfo_UnusedMauvilleOldMan2,
 };
