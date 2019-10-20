@@ -1713,7 +1713,7 @@ const struct SpriteTemplate gOctazookaSmokeSpriteTemplate =
     .anims = gOctazookaAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = AnimSparklingParticle,
+    .callback = AnimSpriteOnMonPos,
 };
 
 const union AnimCmd gConversionAnimCmds[] =
@@ -1839,7 +1839,7 @@ const struct SpriteTemplate gHealingBlueStarSpriteTemplate =
     .anims = gHealingBlueStarAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = AnimSparklingParticle,
+    .callback = AnimSpriteOnMonPos,
 };
 
 const struct SpriteTemplate gHornHitSpriteTemplate =

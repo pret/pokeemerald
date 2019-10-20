@@ -141,7 +141,7 @@ bool8 AnimFastTranslateLinear(struct Sprite *sprite);
 void InitAndRunAnimFastLinearTranslation(struct Sprite *sprite);
 void TranslateMonSpriteLinear(struct Sprite *sprite);
 void TranslateSpriteLinear(struct Sprite *sprite);
-void AnimSparklingParticle(struct Sprite *sprite);
+void AnimSpriteOnMonPos(struct Sprite *sprite);
 void sub_80A7000(struct Sprite *sprite);
 void TranslateSpriteInCircleOverDuration(struct Sprite *sprite);
 void SetGreyscaleOrOriginalPalette(u16 a1, bool8 a2);
