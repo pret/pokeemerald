@@ -63,7 +63,7 @@ void AnimForesightMagnifyingGlass(struct Sprite *);
 void AnimMeteorMashStar(struct Sprite *);
 void AnimBlockX(struct Sprite *);
 void sub_815FE80(struct Sprite *);
-void sub_81061C4(struct Sprite *);
+void AnimParticuleBurst(struct Sprite *);
 void AnimKnockOffStrike(struct Sprite *);
 void AnimRecycle(struct Sprite *);
 static void sub_815A114(struct Sprite *);
@@ -1079,7 +1079,7 @@ const struct SpriteTemplate gUnknown_085CE8F4 =
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_81061C4,
+    .callback = AnimParticuleBurst,
 };
 
 const struct SpriteTemplate gBlockXSpriteTemplate =
