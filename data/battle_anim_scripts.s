@@ -1469,19 +1469,19 @@ Move_SELF_DESTRUCT:
 	end
 SelfDestruct1:
 	playsewithpan SE_W120, SOUND_PAN_ATTACKER
-	createsprite gBattleAnimSpriteTemplate_859371C, ANIM_ATTACKER, 3, 0, 0, 0, 1
+	createsprite gExplosionSpriteTemplate, ANIM_ATTACKER, 3, 0, 0, 0, 1
 	delay 6
 	playsewithpan SE_W120, SOUND_PAN_ATTACKER
-	createsprite gBattleAnimSpriteTemplate_859371C, ANIM_ATTACKER, 3, 24, -24, 0, 1
+	createsprite gExplosionSpriteTemplate, ANIM_ATTACKER, 3, 24, -24, 0, 1
 	delay 6
 	playsewithpan SE_W120, SOUND_PAN_ATTACKER
-	createsprite gBattleAnimSpriteTemplate_859371C, ANIM_ATTACKER, 3, -16, 16, 0, 1
+	createsprite gExplosionSpriteTemplate, ANIM_ATTACKER, 3, -16, 16, 0, 1
 	delay 6
 	playsewithpan SE_W120, SOUND_PAN_ATTACKER
-	createsprite gBattleAnimSpriteTemplate_859371C, ANIM_ATTACKER, 3, -24, -12, 0, 1
+	createsprite gExplosionSpriteTemplate, ANIM_ATTACKER, 3, -24, -12, 0, 1
 	delay 6
 	playsewithpan SE_W120, SOUND_PAN_ATTACKER
-	createsprite gBattleAnimSpriteTemplate_859371C, ANIM_ATTACKER, 3, 16, 16, 0, 1
+	createsprite gExplosionSpriteTemplate, ANIM_ATTACKER, 3, 16, 16, 0, 1
 	delay 6
 	return
 
@@ -1637,19 +1637,19 @@ Move_EXPLOSION:
 	end
 Explosion1:
 	playsewithpan SE_W153, SOUND_PAN_ATTACKER
-	createsprite gBattleAnimSpriteTemplate_859371C, ANIM_ATTACKER, 3, 0, 0, 0, 1
+	createsprite gExplosionSpriteTemplate, ANIM_ATTACKER, 3, 0, 0, 0, 1
 	delay 6
 	playsewithpan SE_W153, SOUND_PAN_ATTACKER
-	createsprite gBattleAnimSpriteTemplate_859371C, ANIM_ATTACKER, 3, 24, -24, 0, 1
+	createsprite gExplosionSpriteTemplate, ANIM_ATTACKER, 3, 24, -24, 0, 1
 	delay 6
 	playsewithpan SE_W153, SOUND_PAN_ATTACKER
-	createsprite gBattleAnimSpriteTemplate_859371C, ANIM_ATTACKER, 3, -16, 16, 0, 1
+	createsprite gExplosionSpriteTemplate, ANIM_ATTACKER, 3, -16, 16, 0, 1
 	delay 6
 	playsewithpan SE_W153, SOUND_PAN_ATTACKER
-	createsprite gBattleAnimSpriteTemplate_859371C, ANIM_ATTACKER, 3, -24, -12, 0, 1
+	createsprite gExplosionSpriteTemplate, ANIM_ATTACKER, 3, -24, -12, 0, 1
 	delay 6
 	playsewithpan SE_W153, SOUND_PAN_ATTACKER
-	createsprite gBattleAnimSpriteTemplate_859371C, ANIM_ATTACKER, 3, 16, 16, 0, 1
+	createsprite gExplosionSpriteTemplate, ANIM_ATTACKER, 3, 16, 16, 0, 1
 	delay 6
 	return
 
@@ -2531,7 +2531,7 @@ HornDrillInContest:
 Move_THRASH:
 	loadspritegfx ANIM_TAG_IMPACT
 	loadspritegfx ANIM_TAG_HANDS_AND_FEET
-	createvisualtask sub_8104C38, 2
+	createvisualtask AnimTask_ThrashMoveMon, 2
 	createvisualtask sub_8104CA4, 2
 	createsprite gUnknown_08595EB0, ANIM_TARGET, 3, 1, 10, 0
 	createvisualtask AnimTask_ShakeMonInPlace, 2, ANIM_TARGET, 4, 0, 7, 1
@@ -3063,7 +3063,7 @@ Move_SKETCH:
 	loadspritegfx ANIM_TAG_PENCIL
 	monbg ANIM_TARGET
 	createvisualtask sub_8104E74, 2
-	createsprite gUnknown_085936D4, ANIM_TARGET, 2
+	createsprite gPencilSpriteTemplate, ANIM_TARGET, 2
 	waitforvisualfinish
 	clearmonbg ANIM_TARGET
 	createvisualtask AnimTask_Splash, 2, 0, 2
@@ -5010,9 +5010,9 @@ Snore1:
 	createvisualtask AnimTask_ScaleMonAndRestore, 5, -7, -7, 7, ANIM_ATTACKER, 1
 	createvisualtask AnimTask_ShakeMon2, 2, ANIM_TARGET, 4, 0, 7, 1
 	createsprite gBattleAnimSpriteTemplate_85972D8, ANIM_ATTACKER, 2, 6, 1, 14, 0, 0
-	createsprite gUnknown_085936EC, ANIM_ATTACKER, 2, 0, 0, -42, -38, 24, 0, 0
-	createsprite gUnknown_085936EC, ANIM_ATTACKER, 2, 0, 0, 0, -42, 24, 0, 0
-	createsprite gUnknown_085936EC, ANIM_ATTACKER, 2, 0, 0, 42, -38, 24, 0, 0
+	createsprite gSnoreZSpriteTemplate, ANIM_ATTACKER, 2, 0, 0, -42, -38, 24, 0, 0
+	createsprite gSnoreZSpriteTemplate, ANIM_ATTACKER, 2, 0, 0, 0, -42, 24, 0, 0
+	createsprite gSnoreZSpriteTemplate, ANIM_ATTACKER, 2, 0, 0, 42, -38, 24, 0, 0
 	return
 
 Move_LIGHT_SCREEN:
@@ -6580,19 +6580,19 @@ Move_DYNAMIC_PUNCH:
 	waitsound
 	playsewithpan SE_W120, SOUND_PAN_TARGET
 	createvisualtask AnimTask_ShakeMon2, 5, ANIM_TARGET, 5, 0, 28, 1
-	createsprite gBattleAnimSpriteTemplate_859371C, ANIM_ATTACKER, 3, 0, 0, 1, 1
+	createsprite gExplosionSpriteTemplate, ANIM_ATTACKER, 3, 0, 0, 1, 1
 	delay 6
 	playsewithpan SE_W120, SOUND_PAN_TARGET
-	createsprite gBattleAnimSpriteTemplate_859371C, ANIM_ATTACKER, 3, 24, -24, 1, 1
+	createsprite gExplosionSpriteTemplate, ANIM_ATTACKER, 3, 24, -24, 1, 1
 	delay 6
 	playsewithpan SE_W120, SOUND_PAN_TARGET
-	createsprite gBattleAnimSpriteTemplate_859371C, ANIM_ATTACKER, 3, -16, 16, 1, 1
+	createsprite gExplosionSpriteTemplate, ANIM_ATTACKER, 3, -16, 16, 1, 1
 	delay 6
 	playsewithpan SE_W120, SOUND_PAN_TARGET
-	createsprite gBattleAnimSpriteTemplate_859371C, ANIM_ATTACKER, 3, -24, -12, 1, 1
+	createsprite gExplosionSpriteTemplate, ANIM_ATTACKER, 3, -24, -12, 1, 1
 	delay 6
 	playsewithpan SE_W120, SOUND_PAN_TARGET
-	createsprite gBattleAnimSpriteTemplate_859371C, ANIM_ATTACKER, 3, 16, 16, 1, 1
+	createsprite gExplosionSpriteTemplate, ANIM_ATTACKER, 3, 16, 16, 1, 1
 	waitforvisualfinish
 	clearmonbg ANIM_DEF_PARTNER
 	blendoff
@@ -7323,19 +7323,19 @@ Move_EGG_BOMB:
 	createsprite gEggThrowSpriteTemplate, ANIM_TARGET, 2, 10, 0, 0, 0, 25, -32
 	waitforvisualfinish
 	createvisualtask AnimTask_ShakeMon2, 2, ANIM_TARGET, 4, 0, 16, 1
-	createsprite gBattleAnimSpriteTemplate_859371C, ANIM_TARGET, 4, 6, 5, 1, 0
+	createsprite gExplosionSpriteTemplate, ANIM_TARGET, 4, 6, 5, 1, 0
 	playsewithpan SE_W120, SOUND_PAN_TARGET
 	delay 3
-	createsprite gBattleAnimSpriteTemplate_859371C, ANIM_TARGET, 4, -16, -15, 1, 0
+	createsprite gExplosionSpriteTemplate, ANIM_TARGET, 4, -16, -15, 1, 0
 	playsewithpan SE_W120, SOUND_PAN_TARGET
 	delay 3
-	createsprite gBattleAnimSpriteTemplate_859371C, ANIM_TARGET, 4, 16, -5, 1, 0
+	createsprite gExplosionSpriteTemplate, ANIM_TARGET, 4, 16, -5, 1, 0
 	playsewithpan SE_W120, SOUND_PAN_TARGET
 	delay 3
-	createsprite gBattleAnimSpriteTemplate_859371C, ANIM_TARGET, 4, -12, 18, 1, 0
+	createsprite gExplosionSpriteTemplate, ANIM_TARGET, 4, -12, 18, 1, 0
 	playsewithpan SE_W120, SOUND_PAN_TARGET
 	delay 3
-	createsprite gBattleAnimSpriteTemplate_859371C, ANIM_TARGET, 4, 0, 5, 1, 0
+	createsprite gExplosionSpriteTemplate, ANIM_TARGET, 4, 0, 5, 1, 0
 	playsewithpan SE_W120, SOUND_PAN_TARGET
 	delay 3
 	waitforvisualfinish
@@ -7870,19 +7870,19 @@ Move_PRESENT:
 PresentDamage:
 	loadspritegfx ANIM_TAG_EXPLOSION
 	playsewithpan SE_W120, SOUND_PAN_TARGET
-	createsprite gBattleAnimSpriteTemplate_859371C, ANIM_TARGET, 3, 0, 0, 1, 1
+	createsprite gExplosionSpriteTemplate, ANIM_TARGET, 3, 0, 0, 1, 1
 	delay 6
 	playsewithpan SE_W120, SOUND_PAN_TARGET
-	createsprite gBattleAnimSpriteTemplate_859371C, ANIM_TARGET, 3, 24, -24, 1, 1
+	createsprite gExplosionSpriteTemplate, ANIM_TARGET, 3, 24, -24, 1, 1
 	delay 6
 	playsewithpan SE_W120, SOUND_PAN_TARGET
-	createsprite gBattleAnimSpriteTemplate_859371C, ANIM_TARGET, 3, -16, 16, 1, 1
+	createsprite gExplosionSpriteTemplate, ANIM_TARGET, 3, -16, 16, 1, 1
 	delay 6
 	playsewithpan SE_W120, SOUND_PAN_TARGET
-	createsprite gBattleAnimSpriteTemplate_859371C, ANIM_TARGET, 3, -24, -12, 1, 1
+	createsprite gExplosionSpriteTemplate, ANIM_TARGET, 3, -24, -12, 1, 1
 	delay 6
 	playsewithpan SE_W120, SOUND_PAN_TARGET
-	createsprite gBattleAnimSpriteTemplate_859371C, ANIM_TARGET, 3, 16, 16, 1, 1
+	createsprite gExplosionSpriteTemplate, ANIM_TARGET, 3, 16, 16, 1, 1
 	end
 
 PresentHeal:
@@ -10599,19 +10599,19 @@ General_DoomDesireHit:
 	delay 25
 	createvisualtask AnimTask_ShakeMonInPlace, 2, ANIM_TARGET, 10, 0, 20, 1
 	playsewithpan SE_W120, SOUND_PAN_TARGET
-	createsprite gBattleAnimSpriteTemplate_859371C, ANIM_ATTACKER, 3, 0, 0, 1, 1
+	createsprite gExplosionSpriteTemplate, ANIM_ATTACKER, 3, 0, 0, 1, 1
 	delay 6
 	playsewithpan SE_W120, SOUND_PAN_TARGET
-	createsprite gBattleAnimSpriteTemplate_859371C, ANIM_ATTACKER, 3, 24, -24, 1, 1
+	createsprite gExplosionSpriteTemplate, ANIM_ATTACKER, 3, 24, -24, 1, 1
 	delay 6
 	playsewithpan SE_W120, SOUND_PAN_TARGET
-	createsprite gBattleAnimSpriteTemplate_859371C, ANIM_ATTACKER, 3, -16, 16, 1, 1
+	createsprite gExplosionSpriteTemplate, ANIM_ATTACKER, 3, -16, 16, 1, 1
 	delay 6
 	playsewithpan SE_W120, SOUND_PAN_TARGET
-	createsprite gBattleAnimSpriteTemplate_859371C, ANIM_ATTACKER, 3, -24, -12, 1, 1
+	createsprite gExplosionSpriteTemplate, ANIM_ATTACKER, 3, -24, -12, 1, 1
 	delay 6
 	playsewithpan SE_W120, SOUND_PAN_TARGET
-	createsprite gBattleAnimSpriteTemplate_859371C, ANIM_ATTACKER, 3, 16, 16, 1, 1
+	createsprite gExplosionSpriteTemplate, ANIM_ATTACKER, 3, 16, 16, 1, 1
 	waitforvisualfinish
 	createsprite gSimplePaletteBlendSpriteTemplate, ANIM_ATTACKER, 2, 1, 3, 16, 0, RGB_WHITE
 	waitforvisualfinish

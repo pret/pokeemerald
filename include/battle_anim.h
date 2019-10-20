@@ -101,7 +101,7 @@ void SetAnimSpriteInitialXOffset(struct Sprite *sprite, s16 a2);
 s16 GetBattlerSpriteCoordAttr(u8 battlerId, u8 a2);
 u8 GetBattlerYCoordWithElevation(u8 battlerId);
 void WaitAnimForDuration(struct Sprite *sprite);
-void sub_80A7938(struct Sprite *sprite);
+void AnimSnoreZ(struct Sprite *sprite);
 void InitAnimLinearTranslation(struct Sprite *sprite);
 void sub_80A6F98(struct Sprite *sprite);
 u8 GetBattlerSpriteBGPriority(u8 battlerId);
