@@ -704,14 +704,14 @@ const struct SpriteTemplate gSoftBoiledEggSpriteTemplate =
     .callback = AnimSoftBoiledEgg,
 };
 
-const union AffineAnimCmd gThingRingExpandingAffineAnimCmds1[] =
+const union AffineAnimCmd gThinRingExpandingAffineAnimCmds1[] =
 {
     AFFINEANIMCMD_FRAME(0x10, 0x10, 0, 0),
     AFFINEANIMCMD_FRAME(0x10, 0x10, 0, 30),
     AFFINEANIMCMD_END_ALT(1),
 };
 
-const union AffineAnimCmd gThingRingExpandingAffineAnimCmds2[] =
+const union AffineAnimCmd gThinRingExpandingAffineAnimCmds2[] =
 {
     AFFINEANIMCMD_FRAME(0x10, 0x10, 0, 0),
     AFFINEANIMCMD_FRAME(0x20, 0x20, 0, 15),
@@ -725,10 +725,10 @@ const union AffineAnimCmd gHyperVoiceRingAffineAnimCmds[] =
     AFFINEANIMCMD_END_ALT(1),
 };
 
-const union AffineAnimCmd *const gThingRingExpandingAffineAnimTable[] =
+const union AffineAnimCmd *const gThinRingExpandingAffineAnimTable[] =
 {
-    gThingRingExpandingAffineAnimCmds1,
-    gThingRingExpandingAffineAnimCmds2,
+    gThinRingExpandingAffineAnimCmds1,
+    gThinRingExpandingAffineAnimCmds2,
 };
 
 const union AffineAnimCmd *const gHyperVoiceRingAffineAnimTable[] =
@@ -743,30 +743,30 @@ const struct SpriteTemplate gThinRingExpandingSpriteTemplate =
     .oam = &gOamData_AffineDouble_ObjNormal_64x64,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
-    .affineAnims = gThingRingExpandingAffineAnimTable,
+    .affineAnims = gThinRingExpandingAffineAnimTable,
     .callback = AnimSpriteOnMonPos,
 };
 
-const union AffineAnimCmd gThingRingShrinkingAffineAnimCmds[] =
+const union AffineAnimCmd gThinRingShrinkingAffineAnimCmds[] =
 {
     AFFINEANIMCMD_FRAME(0x200, 0x200, 0, 0),
     AFFINEANIMCMD_FRAME(0xFFF0, 0xFFF0, 0, 30),
     AFFINEANIMCMD_END_ALT(1),
 };
 
-const union AffineAnimCmd *const gThingRingShrinkingAffineAnimTable[] =
+const union AffineAnimCmd *const gThinRingShrinkingAffineAnimTable[] =
 {
-    gThingRingShrinkingAffineAnimCmds,
+    gThinRingShrinkingAffineAnimCmds,
 };
 
-const struct SpriteTemplate gThingRingShrinkingSpriteTemplate =
+const struct SpriteTemplate gThinRingShrinkingSpriteTemplate =
 {
     .tileTag = ANIM_TAG_THIN_RING,
     .paletteTag = ANIM_TAG_THIN_RING,
     .oam = &gOamData_AffineDouble_ObjBlend_64x64,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
-    .affineAnims = gThingRingShrinkingAffineAnimTable,
+    .affineAnims = gThinRingShrinkingAffineAnimTable,
     .callback = AnimSpriteOnMonPos,
 };
 
@@ -777,7 +777,7 @@ const struct SpriteTemplate gBlendThinRingExpandingSpriteTemplate =
     .oam = &gOamData_AffineDouble_ObjBlend_64x64,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
-    .affineAnims = gThingRingExpandingAffineAnimTable,
+    .affineAnims = gThinRingExpandingAffineAnimTable,
     .callback = AnimBlendThinRing,
 };
 
@@ -799,7 +799,7 @@ const struct SpriteTemplate gUproarRingSpriteTemplate =
     .oam = &gOamData_AffineDouble_ObjBlend_64x64,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
-    .affineAnims = gThingRingExpandingAffineAnimTable,
+    .affineAnims = gThinRingExpandingAffineAnimTable,
     .callback = AnimUproarRing,
 };
 
@@ -1150,7 +1150,7 @@ const union AnimCmd *const gMovementWavesAnimTable[] =
     gMovementWavesAnimCmds2,
 };
 
-const struct SpriteTemplate gMovmentWavesSpriteTemplate =
+const struct SpriteTemplate gMovementWavesSpriteTemplate =
 {
     .tileTag = ANIM_TAG_MOVEMENT_WAVES,
     .paletteTag = ANIM_TAG_MOVEMENT_WAVES,
