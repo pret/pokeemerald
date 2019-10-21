@@ -684,7 +684,7 @@ void ScrSpecial_SetMauvilleOldManEventObjGfx(void)
 void sub_8120B70(union OldMan * oldMan)
 {
     s32 i;
-    u8 sp00[8];
+    u8 playerName[PLAYER_NAME_LENGTH + 1];
 
     switch (oldMan->common.id)
     {
@@ -707,13 +707,13 @@ void sub_8120B70(union OldMan * oldMan)
             {
                 if (storyteller->gameStatIDs[i] != 0)
                 {
-                    memcpy(sp00, storyteller->trainerNames[i], PLAYER_NAME_LENGTH);
-                    sp00[PLAYER_NAME_LENGTH] = EOS;
-                    if (IsStringJapanese(sp00))
+                    memcpy(playerName, storyteller->trainerNames[i], PLAYER_NAME_LENGTH);
+                    playerName[PLAYER_NAME_LENGTH] = EOS;
+                    if (IsStringJapanese(playerName))
                     {
-                        memset(sp00, CHAR_SPACE, PLAYER_NAME_LENGTH + 1);
-                        StringCopy(sp00, gText_Friend);
-                        memcpy(storyteller->trainerNames[i], sp00, PLAYER_NAME_LENGTH);
+                        memset(playerName, CHAR_SPACE, PLAYER_NAME_LENGTH + 1);
+                        StringCopy(playerName, gText_Friend);
+                        memcpy(storyteller->trainerNames[i], playerName, PLAYER_NAME_LENGTH);
                         storyteller->language[i] = GAME_LANGUAGE;
                     }
                 }
@@ -798,7 +798,7 @@ void sub_8120C0C(union OldMan * oldMan, u32 r8, u32 r7, u32 r3)
 
 void SanitizeReceivedEmeraldOldMan(union OldMan * oldMan, u32 version, u32 language)
 {
-    u8 sp00[8];
+    u8 playerName[PLAYER_NAME_LENGTH + 1];
     s32 i;
     if (oldMan->common.id == MAUVILLE_MAN_STORYTELLER && language == LANGUAGE_JAPANESE)
     {
@@ -808,9 +808,9 @@ void SanitizeReceivedEmeraldOldMan(union OldMan * oldMan, u32 version, u32 langu
         {
             if (storyteller->gameStatIDs[i] != 0)
             {
-                memcpy(sp00, storyteller->trainerNames[i], PLAYER_NAME_LENGTH);
-                sp00[PLAYER_NAME_LENGTH] = EOS;
-                if (IsStringJapanese(sp00))
+                memcpy(playerName, storyteller->trainerNames[i], PLAYER_NAME_LENGTH);
+                playerName[PLAYER_NAME_LENGTH] = EOS;
+                if (IsStringJapanese(playerName))
                     storyteller->language[i] = LANGUAGE_JAPANESE;
                 else
                     storyteller->language[i] = GAME_LANGUAGE;
