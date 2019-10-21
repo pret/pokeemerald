@@ -2115,6 +2115,11 @@ void SetMoveEffect(bool32 primary, u32 certain)
         && !primary && gBattleScripting.moveEffect <= 7)
         INCREMENT_RESET_RETURN
 
+    if (GetBattlerAbility(gBattlerAttacker) == ABILITY_SHEER_FORCE
+        && gBattleMoves[gCurrentMove].flags & FLAG_SHEER_FORCE_BOOST
+        && affectsUser != MOVE_EFFECT_AFFECTS_USER)
+        INCREMENT_RESET_RETURN
+
     if (gBattleMons[gEffectBattler].hp == 0
         && gBattleScripting.moveEffect != MOVE_EFFECT_PAYDAY
         && gBattleScripting.moveEffect != MOVE_EFFECT_STEAL_ITEM)
