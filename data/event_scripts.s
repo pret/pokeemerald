@@ -965,7 +965,7 @@ Common_EventScript_PlayerHandedOverTheItem:: @ 82723E4
 	.include "data/text/record_mix.inc"
 	.include "data/text/pc.inc"
 	.include "data/text/pkmn_center_nurse.inc"
-	.include "data/text/mart_attendant.inc"
+	.include "data/text/mart_clerk.inc"
 	.include "data/text/obtain_item.inc"
 
 @ The below and surf.inc could be split into some text/notices.inc
