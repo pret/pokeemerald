@@ -78,12 +78,12 @@ LilycoveCity_PokemonCenter_1F_EventScript_ChooseFavorItem:: @ 82A846C
     special Script_FavorLadyOpenBagMenu
     waitstate
     compare VAR_RESULT, 0
-    goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_CancelChooseFavorItem
+    goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_AskQuitChooseFavorItem
     compare VAR_RESULT, 1
     goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_GiveFavorItem
     end
 
-LilycoveCity_PokemonCenter_1F_EventScript_CancelChooseFavorItem:: @ 82A848E
+LilycoveCity_PokemonCenter_1F_EventScript_AskQuitChooseFavorItem:: @ 82A848E
     msgbox LilycoveCity_PokemonCenter_1F_Text_NotWillingToShare, MSGBOX_YESNO
     compare VAR_RESULT, 1
     goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_DeclineFavor
@@ -209,9 +209,9 @@ LilycoveCity_PokemonCenter_1F_EventScript_DeclineQuiz:: @ 82A8612
 LilycoveCity_PokemonCenter_1F_EventScript_TakeQuiz:: @ 82A861C
     special ClearQuizLadyPlayerAnswer
     compare VAR_0x8004, 0
-    goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A864C
+    goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_ShowQuestion
     compare VAR_0x8004, EASY_CHAT_TYPE_QUIZ_ANSWER
-    goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A8656
+    goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_GetAnswer
 
 LilycoveCity_PokemonCenter_1F_EventScript_CheckQuizTakingState:: @ 82A8635
     compare VAR_RESULT, 0
@@ -220,13 +220,13 @@ LilycoveCity_PokemonCenter_1F_EventScript_CheckQuizTakingState:: @ 82A8635
     goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_SubmitQuizResponse
     end
 
-LilycoveCity_PokemonCenter_1F_EventScript_2A864C:: @ 82A864C
+LilycoveCity_PokemonCenter_1F_EventScript_ShowQuestion:: @ 82A864C
     special QuizLadyShowQuizQuestion
     waitstate
     goto LilycoveCity_PokemonCenter_1F_EventScript_CheckQuizTakingState
     end
 
-LilycoveCity_PokemonCenter_1F_EventScript_2A8656:: @ 82A8656
+LilycoveCity_PokemonCenter_1F_EventScript_GetAnswer:: @ 82A8656
     special QuizLadyGetPlayerAnswer
     waitstate
     goto LilycoveCity_PokemonCenter_1F_EventScript_CheckQuizTakingState
