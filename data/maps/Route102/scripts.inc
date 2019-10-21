@@ -75,7 +75,7 @@ Route102_EventScript_1EC1E1:: @ 81EC1E1
 	msgbox Route102_Text_2947DB, MSGBOX_AUTOCLOSE
 	end
 
-PetalburgCity_Text_1EC1F8: @ 81EC1F8
+Route102_Text_WatchMeCatchPokemon: @ 81EC1F8
 	.string "WALLY: {PLAYER}…\n"
 	.string "POKéMON hide in tall grass like this,\l"
 	.string "don't they?\p"
@@ -83,11 +83,11 @@ PetalburgCity_Text_1EC1F8: @ 81EC1F8
 	.string "catch one properly.\p"
 	.string "…Whoa!$"
 
-PetalburgCity_Text_1EC271: @ 81EC271
+Route102_Text_WallyIDidIt: @ 81EC271
 	.string "WALLY: I did it… It's my…\n"
 	.string "My POKéMON!$"
 
-PetalburgCity_Text_1EC297: @ 81EC297
+Route102_Text_LetsGoBack: @ 81EC297
 	.string "{PLAYER}, thank you!\n"
 	.string "Let's go back to the GYM!$"
 

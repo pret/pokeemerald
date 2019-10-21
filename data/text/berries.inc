@@ -1,4 +1,4 @@
-PetalburgCity_Gym_Text_2A6D3D:
+PetalburgCity_Gym_Text_GiveEnigmaBerry:
 	.string "아빠: 여어 {PLAYER}!\p"
 	.string "희귀한 나무열매를 손에 넣었으니\n"
 	.string "선물할게!$"
@@ -27,7 +27,7 @@ Route111_Text_2A6EBD:
 	.string "자!\n"
 	.string "이거 줄게$"
 
-Route111_Text_2A6F3D: @ 82A6F3D
+Route111_Text_2A6F3D:
 	.string "더욱더 열심히 해서\n"
 	.string "빨강포켓몬스넥 만들 거야!\l"
 	.string "{KO_2}도 힘내!$"
