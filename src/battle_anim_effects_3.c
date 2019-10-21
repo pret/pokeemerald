@@ -43,7 +43,7 @@ void AnimBatonPassPokeball(struct Sprite *);
 void AnimWishStar(struct Sprite *);
 void AnimMiniTwinklingStar(struct Sprite *);
 void AnimSwallowBlueOrb(struct Sprite *);
-void sub_815BE04(struct Sprite *);
+void AnimGreenStar(struct Sprite *);
 void AnimWeakFrustrationAngerMark(struct Sprite *);
 void AnimSweetScentPetal(struct Sprite *);
 void AnimPainSplitProjectile(struct Sprite *);
@@ -86,9 +86,9 @@ static void sub_815B054(u8);
 static void sub_815B23C(struct Sprite *);
 static void sub_815B4D4(struct Sprite *);
 static void sub_815B5D0(struct Sprite *);
-static void sub_815BF44(struct Sprite *);
-static void sub_815BFF4(struct Sprite *);
-static void sub_815C050(struct Sprite *);
+static void AnimGreenStar_Step1(struct Sprite *);
+static void AnimGreenStar_Step2(struct Sprite *);
+static void AnimGreenStar_Callback(struct Sprite *);
 static void AnimTask_RockMonBackAndForthStep(u8);
 static void AnimSweetScentPetalStep(struct Sprite *);
 static void AnimTask_FlailMovementStep(u8);
@@ -587,7 +587,7 @@ const union AffineAnimCmd gSwallowDeformMonAffineAnimCmds[] =
     AFFINEANIMCMD_END,
 };
 
-const s8 gUnknown_085CE460[] =
+const s8 gMorningSunLightBeamCoordsTable[] =
 {
     0xE8,
     0x18,
@@ -595,44 +595,44 @@ const s8 gUnknown_085CE460[] =
     0x00,
 };
 
-const union AnimCmd gUnknown_085CE464[] =
+const union AnimCmd gGreenStarAnimCmds1[] =
 {
     ANIMCMD_FRAME(0, 6),
     ANIMCMD_FRAME(4, 6),
     ANIMCMD_JUMP(0),
 };
 
-const union AnimCmd gUnknown_085CE470[] =
+const union AnimCmd gGreenStarAnimCmds2[] =
 {
     ANIMCMD_FRAME(8, 6),
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_085CE478[] =
+const union AnimCmd gGreenStarAnimCmds3[] =
 {
     ANIMCMD_FRAME(12, 6),
     ANIMCMD_END,
 };
 
-const union AnimCmd *const gUnknown_085CE480[] =
+const union AnimCmd *const gGreenStarAnimTable[] =
 {
-    gUnknown_085CE464,
-    gUnknown_085CE470,
-    gUnknown_085CE478,
+    gGreenStarAnimCmds1,
+    gGreenStarAnimCmds2,
+    gGreenStarAnimCmds3,
 };
 
-const struct SpriteTemplate gUnknown_085CE48C =
+const struct SpriteTemplate gGreenStarSpriteTemplate =
 {
     .tileTag = ANIM_TAG_GREEN_STAR,
     .paletteTag = ANIM_TAG_GREEN_STAR,
     .oam = &gOamData_AffineOff_ObjNormal_16x16,
-    .anims = gUnknown_085CE480,
+    .anims = gGreenStarAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_815BE04,
+    .callback = AnimGreenStar,
 };
 
-const s8 gUnknown_085CE4A4[] =
+const s8 gDoomDesireLightBeamCoordTable[] =
 {
     0x78,
     0x50,
@@ -640,7 +640,7 @@ const s8 gUnknown_085CE4A4[] =
     0x00,
 };
 
-const u8 gUnknown_085CE4A8[] =
+const u8 gDoomDesireLightBeamDelayTable[] =
 {
     0,
     0,
@@ -2373,7 +2373,7 @@ void sub_815BB58(u8 taskId)
     DestroyAnimVisualTask(taskId);
 }
 
-void sub_815BB84(u8 taskId)
+void AnimTask_MorningSunLightBeam(u8 taskId)
 {
     struct BattleAnimBgData animBg;
 
@@ -2434,7 +2434,7 @@ void sub_815BB84(u8 taskId)
 
         if (!gTasks[taskId].data[1])
         {
-            gBattle_BG1_X = gUnknown_085CE460[gTasks[taskId].data[2]] + gTasks[taskId].data[10];
+            gBattle_BG1_X = gMorningSunLightBeamCoordsTable[gTasks[taskId].data[2]] + gTasks[taskId].data[10];
             if (++gTasks[taskId].data[2] == 4)
                 gTasks[taskId].data[0] = 4;
             else
@@ -2465,7 +2465,7 @@ void sub_815BB84(u8 taskId)
     }
 }
 
-void sub_815BE04(struct Sprite *sprite)
+void AnimGreenStar(struct Sprite *sprite)
 {
     s16 xOffset;
     u8 spriteId1;
@@ -2481,8 +2481,8 @@ void sub_815BE04(struct Sprite *sprite)
     sprite->data[1] = gBattleAnimArgs[0];
     sprite->data[2] = gBattleAnimArgs[1];
 
-    spriteId1 = CreateSprite(&gUnknown_085CE48C, sprite->pos1.x, sprite->pos1.y, sprite->subpriority + 1);
-    spriteId2 = CreateSprite(&gUnknown_085CE48C, sprite->pos1.x, sprite->pos1.y, sprite->subpriority + 1);
+    spriteId1 = CreateSprite(&gGreenStarSpriteTemplate, sprite->pos1.x, sprite->pos1.y, sprite->subpriority + 1);
+    spriteId2 = CreateSprite(&gGreenStarSpriteTemplate, sprite->pos1.x, sprite->pos1.y, sprite->subpriority + 1);
     StartSpriteAnim(&gSprites[spriteId1], 1);
     StartSpriteAnim(&gSprites[spriteId2], 2);
 
@@ -2494,15 +2494,15 @@ void sub_815BE04(struct Sprite *sprite)
     gSprites[spriteId2].data[7] = -1;
     gSprites[spriteId1].invisible = 1;
     gSprites[spriteId2].invisible = 1;
-    gSprites[spriteId1].callback = sub_815C050;
-    gSprites[spriteId2].callback = sub_815C050;
+    gSprites[spriteId1].callback = AnimGreenStar_Callback;
+    gSprites[spriteId2].callback = AnimGreenStar_Callback;
 
     sprite->data[6] = spriteId1;
     sprite->data[7] = spriteId2;
-    sprite->callback = sub_815BF44;
+    sprite->callback = AnimGreenStar_Step1;
 }
 
-static void sub_815BF44(struct Sprite *sprite)
+static void AnimGreenStar_Step1(struct Sprite *sprite)
 {
     s16 delta = sprite->data[3] + sprite->data[2];
     sprite->pos2.y -= delta >> 8;
@@ -2523,11 +2523,11 @@ static void sub_815BF44(struct Sprite *sprite)
     if (--sprite->data[1] == -1)
     {
         sprite->invisible = 1;
-        sprite->callback = sub_815BFF4;
+        sprite->callback = AnimGreenStar_Step2;
     }
 }
 
-static void sub_815BFF4(struct Sprite *sprite)
+static void AnimGreenStar_Step2(struct Sprite *sprite)
 {
     if (gSprites[sprite->data[6]].callback == SpriteCallbackDummy
      && gSprites[sprite->data[7]].callback == SpriteCallbackDummy)
@@ -2538,7 +2538,7 @@ static void sub_815BFF4(struct Sprite *sprite)
     }
 }
 
-static void sub_815C050(struct Sprite *sprite)
+static void AnimGreenStar_Callback(struct Sprite *sprite)
 {
     if (!sprite->invisible)
     {
@@ -2554,7 +2554,7 @@ static void sub_815C050(struct Sprite *sprite)
     }
 }
 
-void sub_815C0A4(u8 taskId)
+void AnimTask_DoomDesireLightBeam(u8 taskId)
 {
     struct BattleAnimBgData animBg;
 
@@ -2609,9 +2609,9 @@ void sub_815C0A4(u8 taskId)
     case 1:
         gTasks[taskId].data[3] = 0;
         if (GetBattlerSide(gBattleAnimTarget) == B_SIDE_OPPONENT)
-            gBattle_BG1_X = gTasks[taskId].data[10] + gUnknown_085CE4A4[gTasks[taskId].data[2]];
+            gBattle_BG1_X = gTasks[taskId].data[10] + gDoomDesireLightBeamCoordTable[gTasks[taskId].data[2]];
         else
-            gBattle_BG1_X = gTasks[taskId].data[10] - gUnknown_085CE4A4[gTasks[taskId].data[2]];
+            gBattle_BG1_X = gTasks[taskId].data[10] - gDoomDesireLightBeamCoordTable[gTasks[taskId].data[2]];
 
         if (++gTasks[taskId].data[2] == 5)
             gTasks[taskId].data[0] = 5;
@@ -2627,7 +2627,7 @@ void sub_815C0A4(u8 taskId)
             gTasks[taskId].data[0]++;
         break;
     case 3:
-        if (++gTasks[taskId].data[3] > gUnknown_085CE4A8[gTasks[taskId].data[2]])
+        if (++gTasks[taskId].data[3] > gDoomDesireLightBeamDelayTable[gTasks[taskId].data[2]])
             gTasks[taskId].data[0]++;
         break;
     case 4:

@@ -8280,7 +8280,7 @@ Move_TRANSFORM:
 Move_MORNING_SUN:
 	loadspritegfx ANIM_TAG_GREEN_STAR
 	loadspritegfx ANIM_TAG_BLUE_STAR
-	createvisualtask sub_815BB84, 5
+	createvisualtask AnimTask_MorningSunLightBeam, 5
 	delay 8
 	createvisualtask sub_8116620, 10, 0x781, 8, 0, 12, RGB_WHITE
 	delay 14
@@ -8305,7 +8305,7 @@ Move_MORNING_SUN:
 	call HealingEffect
 	end
 MorningSun1:
-	createsprite gUnknown_085CE48C, ANIM_ATTACKER, 2, 30, 640
+	createsprite gGreenStarSpriteTemplate, ANIM_ATTACKER, 2, 30, 640
 	delay 5
 	return
 
@@ -10589,7 +10589,7 @@ General_DoomDesireHit:
 	createsprite gSimplePaletteBlendSpriteTemplate, ANIM_ATTACKER, 2, 1, 3, 0, 16, RGB_WHITE
 	waitforvisualfinish
 	delay 10
-	createvisualtask sub_815C0A4, 5
+	createvisualtask AnimTask_DoomDesireLightBeam, 5
 	delay 9
 	playsewithpan SE_W109, SOUND_PAN_ATTACKER
 	delay 9
