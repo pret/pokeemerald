@@ -26,10 +26,10 @@
 
 extern const struct SpriteTemplate gThoughtBubbleSpriteTemplate;
 
-void sub_815A0D4(struct Sprite *);
-void sub_815A1B0(struct Sprite *);
-void sub_815A254(struct Sprite *);
-void sub_815A2F0(struct Sprite *);
+void AnimBlackSmoke(struct Sprite *);
+void AnimWhiteHalo(struct Sprite *);
+void AnimTealAlert(struct Sprite *);
+void AnimMeanLookEye(struct Sprite *);
 void sub_815A6C4(struct Sprite *);
 void sub_815A7B0(struct Sprite *);
 void sub_815A7EC(struct Sprite *);
@@ -121,7 +121,7 @@ static void AnimTask_TeeterDanceMovementStep(u8);
 static void AnimRecycleStep(struct Sprite *);
 static void AnimTask_SlackOffSquishStep(u8);
 
-const union AnimCmd gUnknown_085CE004[] =
+const union AnimCmd gScratchAnimCmds[] =
 {
     ANIMCMD_FRAME(0, 4),
     ANIMCMD_FRAME(16, 4),
@@ -131,23 +131,23 @@ const union AnimCmd gUnknown_085CE004[] =
     ANIMCMD_END,
 };
 
-const union AnimCmd *const gUnknown_085CE01C[] =
+const union AnimCmd *const gScratchAnimTable[] =
 {
-    gUnknown_085CE004,
+    gScratchAnimCmds,
 };
 
-const struct SpriteTemplate gUnknown_085CE020 =
+const struct SpriteTemplate gScratchSpriteTemplate =
 {
     .tileTag = ANIM_TAG_SCRATCH,
     .paletteTag = ANIM_TAG_SCRATCH,
     .oam = &gOamData_AffineOff_ObjBlend_32x32,
-    .anims = gUnknown_085CE01C,
+    .anims = gScratchAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = AnimSpriteOnMonPos,
 };
 
-const struct SpriteTemplate gUnknown_085CE038 =
+const struct SpriteTemplate gBlackSmokeSpriteTemplate =
 {
     .tileTag = ANIM_TAG_BLACK_SMOKE,
     .paletteTag = ANIM_TAG_BLACK_SMOKE,
@@ -155,10 +155,10 @@ const struct SpriteTemplate gUnknown_085CE038 =
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_815A0D4,
+    .callback = AnimBlackSmoke,
 };
 
-const struct SpriteTemplate gUnknown_085CE050 =
+const struct SpriteTemplate gBlackBallSpriteTemplate =
 {
     .tileTag = ANIM_TAG_BLACK_BALL,
     .paletteTag = ANIM_TAG_BLACK_BALL,
@@ -169,7 +169,7 @@ const struct SpriteTemplate gUnknown_085CE050 =
     .callback = AnimThrowProjectile,
 };
 
-const union AnimCmd gUnknown_085CE068[] =
+const union AnimCmd gOpeningEyeAnimCmds[] =
 {
     ANIMCMD_FRAME(0, 40),
     ANIMCMD_FRAME(16, 8),
@@ -177,23 +177,23 @@ const union AnimCmd gUnknown_085CE068[] =
     ANIMCMD_END,
 };
 
-const union AnimCmd *const gUnknown_085CE078[] =
+const union AnimCmd *const gOpeningEyeAnimTable[] =
 {
-    gUnknown_085CE068,
+    gOpeningEyeAnimCmds,
 };
 
-const struct SpriteTemplate gUnknown_085CE07C =
+const struct SpriteTemplate gOpeningEyeSpriteTemplate =
 {
     .tileTag = ANIM_TAG_OPENING_EYE,
     .paletteTag = ANIM_TAG_OPENING_EYE,
     .oam = &gOamData_AffineOff_ObjNormal_32x32,
-    .anims = gUnknown_085CE078,
+    .anims = gOpeningEyeAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = AnimSpriteOnMonPos,
 };
 
-const struct SpriteTemplate gUnknown_085CE094 =
+const struct SpriteTemplate gWhiteHaloSpriteTemplate =
 {
     .tileTag = ANIM_TAG_ROUND_WHITE_HALO,
     .paletteTag = ANIM_TAG_ROUND_WHITE_HALO,
@@ -201,10 +201,10 @@ const struct SpriteTemplate gUnknown_085CE094 =
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_815A1B0,
+    .callback = AnimWhiteHalo,
 };
 
-const struct SpriteTemplate gUnknown_085CE0AC =
+const struct SpriteTemplate gTealAlertSpriteTemplate =
 {
     .tileTag = ANIM_TAG_TEAL_ALERT,
     .paletteTag = ANIM_TAG_TEAL_ALERT,
@@ -212,10 +212,10 @@ const struct SpriteTemplate gUnknown_085CE0AC =
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_815A254,
+    .callback = AnimTealAlert,
 };
 
-const union AffineAnimCmd gUnknown_085CE0C4[] =
+const union AffineAnimCmd gMeanLookEyeAffineAnimCmds1[] =
 {
     AFFINEANIMCMD_FRAME(0x180, 0x180, 0, 0),
     AFFINEANIMCMD_FRAME(-0x20, 0x18, 0, 5),
@@ -223,28 +223,28 @@ const union AffineAnimCmd gUnknown_085CE0C4[] =
     AFFINEANIMCMD_JUMP(1),
 };
 
-const union AffineAnimCmd gUnknown_085CE0E4[] =
+const union AffineAnimCmd gMeanLookEyeAffineAnimCmds2[] =
 {
     AFFINEANIMCMD_FRAME(0x30, 0x30, 0, 0),
     AFFINEANIMCMD_FRAME(0x20, 0x20, 0, 6),
     AFFINEANIMCMD_END,
 };
 
-const union AffineAnimCmd *const gUnknown_085CE0FC[] =
+const union AffineAnimCmd *const gMeanLookEyeAffineAnimTable[] =
 {
-    gUnknown_085CE0C4,
-    gUnknown_085CE0E4,
+    gMeanLookEyeAffineAnimCmds1,
+    gMeanLookEyeAffineAnimCmds2,
 };
 
-const struct SpriteTemplate gUnknown_085CE104 =
+const struct SpriteTemplate gMeanLookEyeSpriteTemplate =
 {
     .tileTag = ANIM_TAG_EYE,
     .paletteTag = ANIM_TAG_EYE,
     .oam = &gOamData_AffineDouble_ObjBlend_64x64,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
-    .affineAnims = gUnknown_085CE0FC,
-    .callback = sub_815A2F0,
+    .affineAnims = gMeanLookEyeAffineAnimTable,
+    .callback = AnimMeanLookEye,
 };
 
 const struct SpriteTemplate gUnknown_085CE11C =
@@ -1179,7 +1179,7 @@ const union AffineAnimCmd gSlackOffSquishAffineAnimCmds[] =
     AFFINEANIMCMD_END,
 };
 
-void sub_815A0D4(struct Sprite *sprite)
+void AnimBlackSmoke(struct Sprite *sprite)
 {
     sprite->pos1.x += gBattleAnimArgs[0];
     sprite->pos1.y += gBattleAnimArgs[1];
@@ -1217,7 +1217,7 @@ void sub_815A160(u8 taskId)
     DestroyAnimVisualTask(taskId);
 }
 
-void sub_815A1B0(struct Sprite *sprite)
+void AnimWhiteHalo(struct Sprite *sprite)
 {
     sprite->data[0] = 90;
     sprite->callback = WaitAnimForDuration;
@@ -1244,7 +1244,7 @@ static void sub_815A234(struct Sprite *sprite)
     DestroyAnimSprite(sprite);
 }
 
-void sub_815A254(struct Sprite *sprite)
+void AnimTealAlert(struct Sprite *sprite)
 {
     u16 rotation;
     u8 x = GetBattlerSpriteCoord(gBattleAnimTarget, 2);
@@ -1266,7 +1266,7 @@ void sub_815A254(struct Sprite *sprite)
     StoreSpriteCallbackInData6(sprite, DestroyAnimSprite);
 }
 
-void sub_815A2F0(struct Sprite *sprite)
+void AnimMeanLookEye(struct Sprite *sprite)
 {
     SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT2_ALL | BLDCNT_EFFECT_BLEND);
     SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(0, 16));
