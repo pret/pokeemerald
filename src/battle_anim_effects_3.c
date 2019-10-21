@@ -39,10 +39,10 @@ void AnimClappingHand(struct Sprite *);
 void AnimClappingHand2(struct Sprite *);
 void AnimRapidSpin(struct Sprite *);
 void sub_815B27C(struct Sprite *);
-void sub_815B394(struct Sprite *);
-void sub_815B49C(struct Sprite *);
+void AnimBatonPassPokeball(struct Sprite *);
+void AnimWishStar(struct Sprite *);
 void AnimMiniTwinklingStar(struct Sprite *);
-void sub_815B70C(struct Sprite *);
+void AnimSwallowBlueOrb(struct Sprite *);
 void sub_815BE04(struct Sprite *);
 void AnimWeakFrustrationAngerMark(struct Sprite *);
 void AnimSweetScentPetal(struct Sprite *);
@@ -476,7 +476,7 @@ const struct SpriteTemplate gTriForceTriangleSpriteTemplate =
     .callback = sub_815B27C,
 };
 
-const union AnimCmd gUnknown_085CE310[] =
+const union AnimCmd gEclipsingOrbAnimCmds[] =
 {
     ANIMCMD_FRAME(0, 3),
     ANIMCMD_FRAME(16, 3),
@@ -489,23 +489,23 @@ const union AnimCmd gUnknown_085CE310[] =
     ANIMCMD_END,
 };
 
-const union AnimCmd *const gUnknown_085CE334[] =
+const union AnimCmd *const gEclipsingOrbAnimTable[] =
 {
-    gUnknown_085CE310,
+    gEclipsingOrbAnimCmds,
 };
 
-const struct SpriteTemplate gUnknown_085CE338 =
+const struct SpriteTemplate gEclipsingOrbSpriteTemplate =
 {
     .tileTag = ANIM_TAG_ECLIPSING_ORB,
     .paletteTag = ANIM_TAG_ECLIPSING_ORB,
     .oam = &gOamData_AffineOff_ObjNormal_32x32,
-    .anims = gUnknown_085CE334,
+    .anims = gEclipsingOrbAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = AnimSpriteOnMonPos,
 };
 
-const union AffineAnimCmd gUnknown_085CE350[] =
+const union AffineAnimCmd DefenseCurlDeformMonAffineAnimCmds[] =
 {
     AFFINEANIMCMD_FRAME(-12, 20, 0, 8),
     AFFINEANIMCMD_FRAME(12, -20, 0, 8),
@@ -513,7 +513,7 @@ const union AffineAnimCmd gUnknown_085CE350[] =
     AFFINEANIMCMD_END,
 };
 
-const struct SpriteTemplate gUnknown_085CE370 =
+const struct SpriteTemplate gBatonPassPokeballSpriteTemplate =
 {
     .tileTag = ANIM_TAG_POKEBALL,
     .paletteTag = ANIM_TAG_POKEBALL,
@@ -521,10 +521,10 @@ const struct SpriteTemplate gUnknown_085CE370 =
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_815B394,
+    .callback = AnimBatonPassPokeball,
 };
 
-const struct SpriteTemplate gUnknown_085CE388 =
+const struct SpriteTemplate gWishStarSpriteTemplate =
 {
     .tileTag = ANIM_TAG_GOLD_STARS,
     .paletteTag = ANIM_TAG_GOLD_STARS,
@@ -532,7 +532,7 @@ const struct SpriteTemplate gUnknown_085CE388 =
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_815B49C,
+    .callback = AnimWishStar,
 };
 
 const struct SpriteTemplate gMiniTwinklingStarSpriteTemplate =
@@ -546,7 +546,7 @@ const struct SpriteTemplate gMiniTwinklingStarSpriteTemplate =
     .callback = AnimMiniTwinklingStar,
 };
 
-const union AffineAnimCmd gUnknown_085CE3B8[] =
+const union AffineAnimCmd gStockpileDeformMonAffineAnimCmds[] =
 {
     AFFINEANIMCMD_FRAME(8, -8, 0, 12),
     AFFINEANIMCMD_FRAME(-16, 16, 0, 12),
@@ -555,7 +555,7 @@ const union AffineAnimCmd gUnknown_085CE3B8[] =
     AFFINEANIMCMD_END,
 };
 
-const union AffineAnimCmd gUnknown_085CE3E0[] =
+const union AffineAnimCmd gSpitUpDeformMonAffineAnimCmds[] =
 {
     AFFINEANIMCMD_FRAME(0, 6, 0, 20),
     AFFINEANIMCMD_FRAME(0, 0, 0, 20),
@@ -566,7 +566,7 @@ const union AffineAnimCmd gUnknown_085CE3E0[] =
     AFFINEANIMCMD_END,
 };
 
-const struct SpriteTemplate gUnknown_085CE418 =
+const struct SpriteTemplate gSwallowBlueOrbSpriteTemplate =
 {
     .tileTag = ANIM_TAG_BLUE_ORB,
     .paletteTag = ANIM_TAG_BLUE_ORB,
@@ -574,10 +574,10 @@ const struct SpriteTemplate gUnknown_085CE418 =
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_815B70C,
+    .callback = AnimSwallowBlueOrb,
 };
 
-const union AffineAnimCmd gUnknown_085CE430[] =
+const union AffineAnimCmd gSwallowDeformMonAffineAnimCmds[] =
 {
     AFFINEANIMCMD_FRAME(0, 6, 0, 20),
     AFFINEANIMCMD_FRAME(0, 0, 0, 20),
@@ -2044,12 +2044,12 @@ void sub_815B27C(struct Sprite *sprite)
     }
 }
 
-void sub_815B338(u8 taskId)
+void AnimTask_DefenseCurlDeformMon(u8 taskId)
 {
     switch (gTasks[taskId].data[0])
     {
     case 0:
-        PrepareAffineAnimInTaskData(&gTasks[taskId], GetAnimBattlerSpriteId(ANIM_ATTACKER), gUnknown_085CE350);
+        PrepareAffineAnimInTaskData(&gTasks[taskId], GetAnimBattlerSpriteId(ANIM_ATTACKER), DefenseCurlDeformMonAffineAnimCmds);
         gTasks[taskId].data[0]++;
         break;
     case 1:
@@ -2059,7 +2059,7 @@ void sub_815B338(u8 taskId)
     }
 }
 
-void sub_815B394(struct Sprite *sprite)
+void AnimBatonPassPokeball(struct Sprite *sprite)
 {
     u8 spriteId = GetAnimBattlerSpriteId(ANIM_ATTACKER);
 
@@ -2102,7 +2102,7 @@ void sub_815B394(struct Sprite *sprite)
     }
 }
 
-void sub_815B49C(struct Sprite *sprite)
+void AnimWishStar(struct Sprite *sprite)
 {
     if (GetBattlerSide(gBattleAnimAttacker) != B_SIDE_PLAYER)
         sprite->pos1.x = -16;
@@ -2187,11 +2187,11 @@ static void sub_815B5D0(struct Sprite *sprite)
         DestroySprite(sprite);
 }
 
-void sub_815B65C(u8 taskId)
+void AnimTask_StockpileDeformMon(u8 taskId)
 {
     if (!gTasks[taskId].data[0])
     {
-        PrepareAffineAnimInTaskData(&gTasks[taskId], GetAnimBattlerSpriteId(ANIM_ATTACKER), gUnknown_085CE3B8);
+        PrepareAffineAnimInTaskData(&gTasks[taskId], GetAnimBattlerSpriteId(ANIM_ATTACKER), gStockpileDeformMonAffineAnimCmds);
         gTasks[taskId].data[0]++;
     }
     else
@@ -2201,11 +2201,11 @@ void sub_815B65C(u8 taskId)
     }
 }
 
-void sub_815B6B4(u8 taskId)
+void AnimTask_SpitUpDeformMon(u8 taskId)
 {
     if (!gTasks[taskId].data[0])
     {
-        PrepareAffineAnimInTaskData(&gTasks[taskId], GetAnimBattlerSpriteId(ANIM_ATTACKER), gUnknown_085CE3E0);
+        PrepareAffineAnimInTaskData(&gTasks[taskId], GetAnimBattlerSpriteId(ANIM_ATTACKER), gSpitUpDeformMonAffineAnimCmds);
         gTasks[taskId].data[0]++;
     }
     else
@@ -2215,7 +2215,7 @@ void sub_815B6B4(u8 taskId)
     }
 }
 
-void sub_815B70C(struct Sprite *sprite)
+void AnimSwallowBlueOrb(struct Sprite *sprite)
 {
     switch (sprite->data[0])
     {
@@ -2234,11 +2234,11 @@ void sub_815B70C(struct Sprite *sprite)
     }
 }
 
-void sub_815B778(u8 taskId)
+void AnimTask_SwallowDeformMon(u8 taskId)
 {
     if (!gTasks[taskId].data[0])
     {
-        PrepareAffineAnimInTaskData(&gTasks[taskId], GetAnimBattlerSpriteId(ANIM_ATTACKER), gUnknown_085CE430);
+        PrepareAffineAnimInTaskData(&gTasks[taskId], GetAnimBattlerSpriteId(ANIM_ATTACKER), gSwallowDeformMonAffineAnimCmds);
         gTasks[taskId].data[0]++;
     }
     else

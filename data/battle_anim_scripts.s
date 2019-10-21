@@ -1657,9 +1657,9 @@ Move_DEFENSE_CURL:
 	loadspritegfx ANIM_TAG_ECLIPSING_ORB
 	loopsewithpan SE_W161, SOUND_PAN_ATTACKER, 18, 3
 	createvisualtask AnimTask_SetGreyscaleOrOriginalPal, 5, ANIM_ATTACKER, 0
-	createvisualtask sub_815B338, 5
+	createvisualtask AnimTask_DefenseCurlDeformMon, 5
 	waitforvisualfinish
-	createsprite gUnknown_085CE338, ANIM_ATTACKER, 2, 0, 6, 0, 1
+	createsprite gEclipsingOrbSpriteTemplate, ANIM_ATTACKER, 2, 0, 6, 0, 1
 	waitforvisualfinish
 	createvisualtask AnimTask_SetGreyscaleOrOriginalPal, 5, ANIM_ATTACKER, 1
 	waitforvisualfinish
@@ -7915,7 +7915,7 @@ Move_BATON_PASS:
 	loadspritegfx ANIM_TAG_POKEBALL
 	playsewithpan SE_W226, SOUND_PAN_ATTACKER
 	createvisualtask sub_8115A04, 2, 31, 1, 2, 0, 11, RGB(31, 22, 30)
-	createsprite gUnknown_085CE370, ANIM_ATTACKER, 2
+	createsprite gBatonPassPokeballSpriteTemplate, ANIM_ATTACKER, 2
 	end
 
 Move_PERISH_SONG:
@@ -8146,7 +8146,7 @@ Move_WISH:
 	createsprite gSimplePaletteBlendSpriteTemplate, ANIM_ATTACKER, 2, 1, 3, 0, 10, RGB_BLACK
 	waitforvisualfinish
 	panse_27 SE_W115, SOUND_PAN_TARGET, SOUND_PAN_ATTACKER, -3, 0
-	createsprite gUnknown_085CE388, ANIM_ATTACKER, 40
+	createsprite gWishStarSpriteTemplate, ANIM_ATTACKER, 40
 	waitforvisualfinish
 	delay 60
 	loopsewithpan SE_W215, SOUND_PAN_ATTACKER, 16, 3
@@ -8160,7 +8160,7 @@ Move_STOCKPILE:
 	loadspritegfx ANIM_TAG_GRAY_ORB
 	playsewithpan SE_W025, SOUND_PAN_ATTACKER
 	createvisualtask sub_8115A04, 2, 2, 8, 1, 0, 12, RGB_WHITE
-	createvisualtask sub_815B65C, 5
+	createvisualtask AnimTask_StockpileDeformMon, 5
 	call Stockpile1
 	call Stockpile1
 	waitforvisualfinish
@@ -8189,7 +8189,7 @@ Move_SPIT_UP:
 	loadspritegfx ANIM_TAG_RED_ORB_2
 	loadspritegfx ANIM_TAG_IMPACT
 	playsewithpan SE_W036, SOUND_PAN_ATTACKER
-	createvisualtask sub_815B6B4, 5
+	createvisualtask AnimTask_SpitUpDeformMon, 5
 	createvisualtask AnimTask_ShakeMon2, 2, ANIM_ATTACKER, 1, 0, 8, 2
 	delay 45
 	playsewithpan SE_W255, SOUND_PAN_ATTACKER
@@ -8236,7 +8236,7 @@ Move_SWALLOW:
 	loadspritegfx ANIM_TAG_BLUE_ORB
 	loadspritegfx ANIM_TAG_BLUE_STAR
 	playsewithpan SE_W036, SOUND_PAN_ATTACKER
-	createvisualtask sub_815B778, 5
+	createvisualtask AnimTask_SwallowDeformMon, 5
 	createvisualtask AnimTask_ShakeMon2, 2, ANIM_ATTACKER, 1, 0, 8, 2
 	delay 38
 	playsewithpan SE_W255, SOUND_PAN_ATTACKER
@@ -8249,15 +8249,15 @@ SwallowContinue:
 	call HealingEffect
 	end
 SwallowEffect:
-	createsprite gUnknown_085CE418, ANIM_ATTACKER, 2, 0, -8
+	createsprite gSwallowBlueOrbSpriteTemplate, ANIM_ATTACKER, 2, 0, -8
 	delay 1
-	createsprite gUnknown_085CE418, ANIM_ATTACKER, 2, -24, -8
+	createsprite gSwallowBlueOrbSpriteTemplate, ANIM_ATTACKER, 2, -24, -8
 	delay 1
-	createsprite gUnknown_085CE418, ANIM_ATTACKER, 2, 16, -8
+	createsprite gSwallowBlueOrbSpriteTemplate, ANIM_ATTACKER, 2, 16, -8
 	delay 1
-	createsprite gUnknown_085CE418, ANIM_ATTACKER, 2, -16, -8
+	createsprite gSwallowBlueOrbSpriteTemplate, ANIM_ATTACKER, 2, -16, -8
 	delay 1
-	createsprite gUnknown_085CE418, ANIM_ATTACKER, 2, 24, -8
+	createsprite gSwallowBlueOrbSpriteTemplate, ANIM_ATTACKER, 2, 24, -8
 	delay 1
 	return
 SwallowGood:
