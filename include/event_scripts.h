@@ -376,7 +376,7 @@ extern const u8 BattleFrontier_BattlePyramidEmptySquare_EventScript_252C88[];
 //field effects
 extern const u8 EventScript_FldEffStrength[];
 extern const u8 EventScript_FailSweetScent[];
-extern const u8 EventScript_2926F8[];
+extern const u8 EventScript_FldEffFlash[];
 extern const u8 EventScript_FldEffRockSmash[];
 
 //player pc
