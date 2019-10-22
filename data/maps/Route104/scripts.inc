@@ -1,15 +1,15 @@
 Route104_MapScripts:: @ 81ECC32
-	map_script MAP_SCRIPT_ON_FRAME_TABLE, Route104_MapScript2_1ECC3D
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, Route104_OnFrame
 	map_script MAP_SCRIPT_ON_TRANSITION, Route104_OnTransition
 	.byte 0
 
-Route104_MapScript2_1ECC3D: @ 81ECC3D
-	map_script_2 VAR_BOARD_BRINEY_BOAT_STATE, 1, Route104_EventScript_1ECC47
+Route104_OnFrame: @ 81ECC3D
+	map_script_2 VAR_BOARD_BRINEY_BOAT_STATE, 1, Route104_EventScript_StartSailToDewford
 	.2byte 0
 
-Route104_EventScript_1ECC47:: @ 81ECC47
+Route104_EventScript_StartSailToDewford:: @ 81ECC47
 	lockall
-	goto Route104_EventScript_1ED099
+	goto Route104_EventScript_SailToDewford
 	end
 
 Route104_OnTransition: @ 81ECC4E
@@ -355,13 +355,13 @@ Route104_EventScript_1ED090:: @ 81ED090
 	msgbox Route104_Text_1ED7A2, MSGBOX_NPC
 	end
 
-Route104_EventScript_1ED099:: @ 81ED099
+Route104_EventScript_SailToDewford:: @ 81ED099
 	setobjectpriority 8, MAP_ROUTE104, 0
 	setobjectpriority EVENT_OBJ_ID_PLAYER, MAP_ROUTE104, 0
-	applymovement 8, Route104_Movement_1ED359
+	applymovement 8, Route104_Movement_BrineyBoardBoat
 	waitmovement 0
 	removeobject 8
-	applymovement EVENT_OBJ_ID_PLAYER, Route104_Movement_1ED34F
+	applymovement EVENT_OBJ_ID_PLAYER, Route104_Movement_PlayerBoardBoat
 	waitmovement 0
 	hideobjectat EVENT_OBJ_ID_PLAYER, MAP_ROUTE104
 	call Common_EventScript_PlayBrineysBoatMusic
@@ -829,7 +829,7 @@ Route104_Movement_1ED28C: @ 81ED28C
 	walk_down
 	step_end
 
-Route104_Movement_1ED34F: @ 81ED34F
+Route104_Movement_PlayerBoardBoat: @ 81ED34F
 	walk_left
 	walk_down
 	walk_down
@@ -845,7 +845,7 @@ Route104_Movement_1ED355: @ 81ED355
 	walk_in_place_fastest_right
 	step_end
 
-Route104_Movement_1ED359: @ 81ED359
+Route104_Movement_BrineyBoardBoat: @ 81ED359
 	walk_down
 	walk_down
 	step_end

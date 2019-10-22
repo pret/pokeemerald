@@ -188,7 +188,7 @@ OldaleTown_Movement_Unknown2: @ 81E9013
 	walk_up
 	step_end
 
-OldaleTown_EventScript_1E901F:: @ 81E901F
+OldaleTown_EventScript_FootprintsMan:: @ 81E901F
 	lock
 	faceplayer
 	goto_if_set FLAG_ADVENTURE_STARTED, OldaleTown_EventScript_NotBlockingPath
