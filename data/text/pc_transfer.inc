@@ -9,13 +9,13 @@ gText_PkmnTransferredLanettesPC:: @ 8273256
 	.string "It was placed in \n"
 	.string "BOX “{STR_VAR_1}.”$"
 
-gText_PkmnBoxSomeonesPCFull:: @ 8273296
+gText_PkmnTransferredSomeonesPCBoxFull:: @ 8273296
 	.string "BOX “{STR_VAR_3}” on\n"
 	.string "SOMEONE'S PC was full.\p"
 	.string "{STR_VAR_2} was transferred to\n"
 	.string "BOX “{STR_VAR_1}.”$"
 
-gText_PkmnBoxLanettesPCFull:: @ 82732D9
+gText_PkmnTransferredLanettesPCBoxFull:: @ 82732D9
 	.string "BOX “{STR_VAR_3}” on\n"
 	.string "LANETTE'S PC was full.\p"
 	.string "{STR_VAR_2} was transferred to\n"

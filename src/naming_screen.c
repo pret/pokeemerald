@@ -34,10 +34,6 @@ extern u16 gKeyRepeatStartDelay;
 
 // extern text
 extern const u8 gExpandedPlaceholder_Empty[];
-extern const u8 gText_PkmnTransferredSomeonesPC[];
-extern const u8 gText_PkmnTransferredLanettesPC[];
-extern const u8 gText_PkmnBoxSomeonesPCFull[];
-extern const u8 gText_PkmnBoxLanettesPCFull[];
 extern const u8 gText_MoveOkBack[];
 extern const u8 gText_YourName[];
 extern const u8 gText_BoxName[];
@@ -51,12 +47,12 @@ static const u8 gSpriteImage_858BCB8[] = INCBIN_U8("graphics/naming_screen/pc_ic
 static const u16 gUnknown_0858BD78[] = INCBIN_U16("graphics/naming_screen/0.gbapal");
 static const u16 gUnknown_0858BD98[] = INCBIN_U16("graphics/naming_screen/1.gbapal");
 
-static const u8 *const gUnknown_0858BDB8[] =
+static const u8 *const sTransferredToPCMessages[] =
 {
     gText_PkmnTransferredSomeonesPC,
     gText_PkmnTransferredLanettesPC,
-    gText_PkmnBoxSomeonesPCFull,
-    gText_PkmnBoxLanettesPCFull
+    gText_PkmnTransferredSomeonesPCBoxFull,
+    gText_PkmnTransferredLanettesPCBoxFull
 };
 
 static const u8 gUnknown_0858BDC8[] = _("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz!");
@@ -562,7 +558,7 @@ static void DisplaySentToPCMessage(void)
     if (FlagGet(FLAG_SYS_PC_LANETTE))
         stringToDisplay++;
 
-    StringExpandPlaceholders(gStringVar4, gUnknown_0858BDB8[stringToDisplay]);
+    StringExpandPlaceholders(gStringVar4, sTransferredToPCMessages[stringToDisplay]);
     DrawDialogueFrame(0, 0);
     gTextFlags.canABSpeedUpPrint = TRUE;
     AddTextPrinterParameterized2(0, 1, gStringVar4, GetPlayerTextSpeedDelay(), 0, 2, 1, 3);
