@@ -112,7 +112,7 @@ Route119_WeatherInstitute_2F_EventScript_2700AD:: @ 82700AD
 	end
 
 Route119_WeatherInstitute_2F_EventScript_2700D0:: @ 82700D0
-	call Route119_WeatherInstitute_2F_EventScript_2737A0
+	call Common_EventScript_TransferredToPC
 	goto Route119_WeatherInstitute_2F_EventScript_2700EA
 	end
 
