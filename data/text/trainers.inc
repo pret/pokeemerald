@@ -1,245 +1,245 @@
-Route102_Text_294513: @ 8294513
+Route102_Text_CalvinIntro: @ 8294513
 	.string "If you have POKéMON with you, then\n"
 	.string "you're an official POKéMON TRAINER!\l"
 	.string "You can't say no to my challenge!$"
 
-Route102_Text_29457C: @ 829457C
+Route102_Text_CalvinDefeated: @ 829457C
 	.string "Arrgh, I lost…\n"
 	.string "I should have trained mine more…$"
 
-Route102_Text_2945AC: @ 82945AC
+Route102_Text_CalvinPostBattle: @ 82945AC
 	.string "Listen, you. If you're strong,\n"
 	.string "you should have told me before!$"
 
-Route102_Text_2945EB: @ 82945EB
+Route102_Text_CalvinRegister: @ 82945EB
 	.string "I've been working hard at this since\n"
 	.string "I saw you before.\p"
 	.string "I'd like to battle you again, so can\n"
 	.string "you register me in your POKéNAV?$"
 
-Route102_Text_294668: @ 8294668
+Route102_Text_CalvinRegisterShort: @ 8294668
 	.string "I'd like to battle you again, so can\n"
 	.string "you register me in your POKéNAV?$"
 
-Route102_Text_2946AE: @ 82946AE
+Route102_Text_CalvinRematchIntro: @ 82946AE
 	.string "Ever since I lost to you, I desperately\n"
 	.string "trained my POKéMON.\l"
 	.string "You can't say no to my challenge!$"
 
-Route102_Text_29470C: @ 829470C
+Route102_Text_CalvinRematchDefeated: @ 829470C
 	.string "Arrgh, I lost…\n"
 	.string "Is my training method not right?$"
 
-Route102_Text_29473C: @ 829473C
+Route102_Text_CalvinRematchPostBattle: @ 829473C
 	.string "If you're going to get stronger,\n"
 	.string "I'll get stronger, too.$"
 
-Route102_Text_294775: @ 8294775
+Route102_Text_AllenIntro: @ 8294775
 	.string "Did you just become a TRAINER?\n"
 	.string "We're both beginners!$"
 
-Route102_Text_2947AA: @ 82947AA
+Route102_Text_AllenDefeated: @ 82947AA
 	.string "I called you because I thought\n"
 	.string "I could beat you…$"
 
-Route102_Text_2947DB: @ 82947DB
+Route102_Text_AllenPostBattle: @ 82947DB
 	.string "I haven't won once yet…\n"
 	.string "I wish I would win soon…$"
 
-Route102_Text_29480C: @ 829480C
+Route102_Text_RickIntro: @ 829480C
 	.string "Hahah! Our eyes met!\n"
 	.string "I'll take you on with my BUG POKéMON!$"
 
-Route102_Text_294847: @ 8294847
+Route102_Text_RickDefeated: @ 8294847
 	.string "Ow! Down and out!$"
 
-Route102_Text_294859: @ 8294859
+Route102_Text_RickPostBattle: @ 8294859
 	.string "If you lock eyes with a TRAINER,\n"
 	.string "you have to challenge! It's a rule!$"
 
-Route102_Text_29489E: @ 829489E
+Route102_Text_TianaIntro: @ 829489E
 	.string "I'm going to keep winning and aim\n"
 	.string "to be the best TRAINER.\p"
 	.string "Help me further my career!$"
 
-Route102_Text_2948F3: @ 82948F3
+Route102_Text_TianaDefeated: @ 82948F3
 	.string "I ended up furthering your career…$"
 
-Route102_Text_294916: @ 8294916
+Route102_Text_TianaPostBattle: @ 8294916
 	.string "To keep winning my way up, I see that\n"
 	.string "I have to catch more POKéMON.$"
 
-Route103_Text_29495A: @ 829495A
+Route103_Text_DaisyIntro: @ 829495A
 	.string "Did you feel the tug of our\n"
 	.string "soul-soothing fragrance?$"
 
-Route103_Text_29498F: @ 829498F
+Route103_Text_DaisyDefeated: @ 829498F
 	.string "You weren't led astray by our aroma…$"
 
-Route103_Text_2949B4: @ 82949B4
+Route103_Text_DaisyPostBattle: @ 82949B4
 	.string "Aromatherapy is a form of mental\n"
 	.string "healing that works with fragrances.$"
 
-Route103_Text_2949F9: @ 82949F9
+Route103_Text_AmyIntro: @ 82949F9
 	.string "AMY: I'm AMY.\n"
 	.string "And this is my little sister LIV.\l"
 	.string "We battle together!$"
 
-Route103_Text_294A3D: @ 8294A3D
+Route103_Text_AmyDefeated: @ 8294A3D
 	.string "AMY: Uh-oh, we lost.$"
 
-Route103_Text_294A52: @ 8294A52
+Route103_Text_AmyPostBattle: @ 8294A52
 	.string "AMY: You have to think about all\n"
 	.string "kinds of things when you're battling\l"
 	.string "against two TRAINERS.$"
 
-Route103_Text_294AAE: @ 8294AAE
+Route103_Text_AmyNotEnoughPokemon: @ 8294AAE
 	.string "AMY: Uh-oh, you have only one\n"
 	.string "POKéMON with you.\l"
 	.string "You can't battle us like that.$"
 
-Route103_Text_294AFD: @ 8294AFD
+Route103_Text_LivIntro: @ 8294AFD
 	.string "LIV: We battle together as one\n"
 	.string "team.$"
 
-Route103_Text_294B22: @ 8294B22
+Route103_Text_LivDefeated: @ 8294B22
 	.string "LIV: Oh, we lost, big sister…$"
 
-Route103_Text_294B40: @ 8294B40
+Route103_Text_LivPostBattle: @ 8294B40
 	.string "LIV: We work perfectly together,\n"
 	.string "me and my big sister…\p"
 	.string "But we still lost…$"
 
-Route103_Text_294B8A: @ 8294B8A
+Route103_Text_AmyLivRegister: @ 8294B8A
 	.string "LIV: Really, we're a lot better…\n"
 	.string "It's true! We'll show you next time!$"
 
-Route103_Text_294BD0: @ 8294BD0
+Route103_Text_LivNotEnoughPokemon: @ 8294BD0
 	.string "LIV: If you want to battle us,\n"
 	.string "you have to have two POKéMON!\l"
 	.string "It's not fair if you don't!$"
 
-Route103_Text_294C29: @ 8294C29
+Route103_Text_AmyRematchIntro: @ 8294C29
 	.string "AMY: I'm AMY.\n"
 	.string "And this is my little sister LIV.\l"
 	.string "We battle together!$"
 
-Route103_Text_294C6D: @ 8294C6D
+Route103_Text_AmyRematchDefeated: @ 8294C6D
 	.string "AMY: Aww, boo!\n"
 	.string "We couldn't win again…$"
 
-Route103_Text_294C93: @ 8294C93
+Route103_Text_AmyRematchPostBattle: @ 8294C93
 	.string "AMY: You have to think about all\n"
 	.string "kinds of things when you're battling\l"
 	.string "against two TRAINERS.$"
 
-Route103_Text_294CEF: @ 8294CEF
+Route103_Text_AmyRematchNotEnoughPokemon: @ 8294CEF
 	.string "AMY: Uh-oh, you have only one\n"
 	.string "POKéMON with you.\l"
 	.string "You can't battle us like that.$"
 
-Route103_Text_294D3E: @ 8294D3E
+Route103_Text_LivRematchIntro: @ 8294D3E
 	.string "LIV: We battle together as one\n"
 	.string "team.$"
 
-Route103_Text_294D63: @ 8294D63
+Route103_Text_LivRematchDefeated: @ 8294D63
 	.string "LIV: Awww, we lost again…\n"
 	.string "Big sister…$"
 
-Route103_Text_294D89: @ 8294D89
+Route103_Text_LivRematchPostBattle: @ 8294D89
 	.string "LIV: We work perfectly together,\n"
 	.string "me and my big sister…\p"
 	.string "But why did we lose again?$"
 
-Route103_Text_294DDB: @ 8294DDB
+Route103_Text_LivRematchNotEnoughPokemon: @ 8294DDB
 	.string "LIV: If you want to battle us, you\n"
 	.string "have to have two POKéMON!\l"
 	.string "It's not fair if you don't!$"
 
-Route103_Text_294E34: @ 8294E34
+Route103_Text_AndrewIntro: @ 8294E34
 	.string "Gah! My fishing line's all snarled up!\n"
 	.string "I'm getting frustrated and mean!\l"
 	.string "That's it! Battle me!$"
 
-Route103_Text_294E92: @ 8294E92
+Route103_Text_AndrewDefeated: @ 8294E92
 	.string "Gah! Lost it!\n"
 	.string "I'm even more annoyed now!$"
 
-Route103_Text_294EBB: @ 8294EBB
+Route103_Text_AndrewPostBattle: @ 8294EBB
 	.string "Gah, I'm still boiling mad…\n"
 	.string "Grrrrr…$"
 
-Route103_Text_294EDF: @ 8294EDF
+Route103_Text_MiguelIntro: @ 8294EDF
 	.string "My POKéMON is delightfully adorable!\n"
 	.string "Don't be shy--I'll show you!$"
 
-Route103_Text_294F21: @ 8294F21
+Route103_Text_MiguelDefeated: @ 8294F21
 	.string "Oh, my gosh!\n"
 	.string "My darling POKéMON!$"
 
-Route103_Text_294F42: @ 8294F42
+Route103_Text_MiguelPostBattle: @ 8294F42
 	.string "My delightful POKéMON looks darling\n"
 	.string "even when it's fainted!$"
 
-Route103_Text_294F7E: @ 8294F7E
+Route103_Text_MiguelRegister: @ 8294F7E
 	.string "I'll get you to come out and look in\n"
 	.string "on my delightful POKéMON again!$"
 
-Route103_Text_294FC3: @ 8294FC3
+Route103_Text_MiguelRematchIntro: @ 8294FC3
 	.string "Hi, you! My delightfully adorable\n"
 	.string "POKéMON has become more darling!$"
 
-Route103_Text_295006: @ 8295006
+Route103_Text_MiguelRematchDefeated: @ 8295006
 	.string "Oh!\n"
 	.string "My darling POKéMON!$"
 
-Route103_Text_29501E: @ 829501E
+Route103_Text_MiguelRematchPostBattle: @ 829501E
 	.string "The more I spend time with it,\n"
 	.string "the more adorable my POKéMON becomes.$"
 
-Route103_Text_295063: @ 8295063
+Route103_Text_PeteIntro: @ 8295063
 	.string "This sort of distance…\n"
 	.string "You should just swim it!$"
 
-Route103_Text_295093: @ 8295093
+Route103_Text_PeteDefeated: @ 8295093
 	.string "Oh, that's good going!$"
 
-Route103_Text_2950AA: @ 82950AA
+Route103_Text_PetePostBattle: @ 82950AA
 	.string "Oh, I understand where you're coming\n"
 	.string "from now.\p"
 	.string "If I had a POKéMON that trusty,\n"
 	.string "I'd want to SURF on it, too!$"
 
-Route103_Text_295116: @ 8295116
+Route103_Text_IsabelleIntro: @ 8295116
 	.string "Watch where you're going!\n"
 	.string "We're going to crash!$"
 
-Route103_Text_295146: @ 8295146
+Route103_Text_IsabelleDefeated: @ 8295146
 	.string "Groan…$"
 
-Route103_Text_29514D: @ 829514D
+Route103_Text_IsabellePostBattle: @ 829514D
 	.string "I'm a poor swimmer so I was practicing…\n"
 	.string "Sorry for almost crashing into you.$"
 
-Route103_Text_295199: @ 8295199
+Route103_Text_RhettIntro: @ 8295199
 	.string "Whoa!\n"
 	.string "How'd you get into a space this small?$"
 
-Route103_Text_2951C6: @ 82951C6
+Route103_Text_RhettDefeated: @ 82951C6
 	.string "Whoa!\n"
 	.string "The kid can rock!$"
 
-Route103_Text_2951DE: @ 82951DE
+Route103_Text_RhettPostBattle: @ 82951DE
 	.string "Do you like cramped quarters\n"
 	.string "like this?$"
 
-Route103_Text_295206: @ 8295206
+Route103_Text_MarcosIntro: @ 8295206
 	.string "Did my guitar's wailing draw you in?$"
 
-Route103_Text_29522B: @ 829522B
+Route103_Text_MarcosDefeated: @ 829522B
 	.string "My one-man show is ruined…$"
 
-Route103_Text_295246: @ 8295246
+Route103_Text_MarcosPostBattle: @ 8295246
 	.string "I was playing my guitar where few\n"
 	.string "people were around, but a lot of fans\l"
 	.string "have gathered.\p"
