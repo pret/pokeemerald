@@ -5,7 +5,7 @@ JaggedPass_MapScripts:: @ 8230656
 	.byte 0
 
 JaggedPass_MapScript1_230666: @ 8230666
-	setstepcallback 1
+	setstepcallback STEP_CB_ASH
 	compare VAR_JAGGED_PASS_STATE, 0
 	call_if_eq JaggedPass_EventScript_230674
 	end

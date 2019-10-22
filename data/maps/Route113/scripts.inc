@@ -4,7 +4,7 @@ Route113_MapScripts:: @ 81F2153
 	.byte 0
 
 Route113_MapScript1_1F215E: @ 81F215E
-	setstepcallback 1
+	setstepcallback STEP_CB_ASH
 	end
 
 Route113_OnTransition: @ 81F2161

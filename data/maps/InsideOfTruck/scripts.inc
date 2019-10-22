@@ -10,7 +10,7 @@ InsideOfTruck_MapScript1_23BEE5: @ 823BEE5
 	end
 
 InsideOfTruck_MapScript1_23BF01: @ 823BF01
-	setstepcallback 5
+	setstepcallback STEP_CB_TRUCK
 	end
 
 InsideOfTruck_EventScript_23BF04:: @ 823BF04

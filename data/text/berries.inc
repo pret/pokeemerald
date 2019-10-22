@@ -1,4 +1,4 @@
-PetalburgCity_Gym_Text_2A6D3D: @ 82A6D3D
+PetalburgCity_Gym_Text_GiveEnigmaBerry: @ 82A6D3D
 	.string "Dad: Hi, {PLAYER}!\p"
 	.string "I just received a very rare Berry.\n"
 	.string "I'd like you to have it.$"

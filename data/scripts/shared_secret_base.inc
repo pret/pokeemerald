@@ -20,7 +20,7 @@ SecretBase_MapScript2_OnFrame: @ 823B4AE
     .2byte 0
 
 SecretBase_MapScript1_OnResume: @ 823B4B8
-    setstepcallback 6
+    setstepcallback STEP_CB_SECRET_BASE
     end
 
 SecretBase_EventScript_PC:: @ 823B4BB

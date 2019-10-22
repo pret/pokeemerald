@@ -24,7 +24,7 @@
 #include "constants/species.h"
 #include "constants/weather.h"
 
-extern const struct SpriteTemplate gUnknown_08593114;
+extern const struct SpriteTemplate gThoughtBubbleSpriteTemplate;
 
 void sub_815A0D4(struct Sprite *);
 void sub_815A1B0(struct Sprite *);
@@ -63,7 +63,7 @@ void AnimForesightMagnifyingGlass(struct Sprite *);
 void AnimMeteorMashStar(struct Sprite *);
 void AnimBlockX(struct Sprite *);
 void sub_815FE80(struct Sprite *);
-void sub_81061C4(struct Sprite *);
+void AnimParticuleBurst(struct Sprite *);
 void AnimKnockOffStrike(struct Sprite *);
 void AnimRecycle(struct Sprite *);
 static void sub_815A114(struct Sprite *);
@@ -144,7 +144,7 @@ const struct SpriteTemplate gUnknown_085CE020 =
     .anims = gUnknown_085CE01C,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_80A77C8,
+    .callback = AnimSpriteOnMonPos,
 };
 
 const struct SpriteTemplate gUnknown_085CE038 =
@@ -166,7 +166,7 @@ const struct SpriteTemplate gUnknown_085CE050 =
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_80A78AC,
+    .callback = AnimThrowProjectile,
 };
 
 const union AnimCmd gUnknown_085CE068[] =
@@ -190,7 +190,7 @@ const struct SpriteTemplate gUnknown_085CE07C =
     .anims = gUnknown_085CE078,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_80A77C8,
+    .callback = AnimSpriteOnMonPos,
 };
 
 const struct SpriteTemplate gUnknown_085CE094 =
@@ -502,7 +502,7 @@ const struct SpriteTemplate gUnknown_085CE338 =
     .anims = gUnknown_085CE334,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_80A77C8,
+    .callback = AnimSpriteOnMonPos,
 };
 
 const union AffineAnimCmd gUnknown_085CE350[] =
@@ -1079,7 +1079,7 @@ const struct SpriteTemplate gUnknown_085CE8F4 =
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_81061C4,
+    .callback = AnimParticuleBurst,
 };
 
 const struct SpriteTemplate gBlockXSpriteTemplate =
@@ -1929,7 +1929,7 @@ static void sub_815B054(u8 taskId)
         }
 
         y = task->data[3] + task->data[5];
-        spriteId = CreateSprite(&gUnknown_08593114, x, y, 6 - task->data[1]);
+        spriteId = CreateSprite(&gThoughtBubbleSpriteTemplate, x, y, 6 - task->data[1]);
         PlaySE12WithPanning(SE_W118, BattleAnimAdjustPanning(-64));
 
         if (spriteId != MAX_SPRITES)
@@ -1982,7 +1982,7 @@ static void sub_815B054(u8 taskId)
     case 4:
         for (i = 0, j = 0; i < MAX_SPRITES; i++)
         {
-            if (gSprites[i].template == &gUnknown_08593114)
+            if (gSprites[i].template == &gThoughtBubbleSpriteTemplate)
             {
                 gSprites[i].data[0] = taskId;
                 gSprites[i].data[1] = 6;

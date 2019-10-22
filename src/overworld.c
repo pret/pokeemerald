@@ -1183,7 +1183,7 @@ void Overworld_ClearSavedMusic(void)
 
 static void sub_8085810(void)
 {
-    if (FlagGet(FLAG_SPECIAL_FLAG_0x4001) != TRUE)
+    if (FlagGet(FLAG_DONT_TRANSITION_MUSIC) != TRUE)
     {
         u16 newMusic = GetWarpDestinationMusic();
         u16 currentMusic = GetCurrentMapMusic();
@@ -1231,7 +1231,7 @@ void TryFadeOutOldMapMusic(void)
 {
     u16 currentMusic = GetCurrentMapMusic();
     u16 warpMusic = GetWarpDestinationMusic();
-    if (FlagGet(FLAG_SPECIAL_FLAG_0x4001) != TRUE && warpMusic != GetCurrentMapMusic())
+    if (FlagGet(FLAG_DONT_TRANSITION_MUSIC) != TRUE && warpMusic != GetCurrentMapMusic())
     {
         if (currentMusic == MUS_NAMINORI
             && VarGet(VAR_SKY_PILLAR_STATE) == 2

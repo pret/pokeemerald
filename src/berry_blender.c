@@ -3339,7 +3339,7 @@ static bool8 Blender_PrintBlendingResults(void)
         TryAddContestLinkTvShow(&pokeblock, &sBerryBlenderData->tvBlender);
 
         CreateTask(sub_8083F3C, 6);
-        sub_80EECEC();
+        IncrementDailyBerryBlender();
 
         RemoveBagItem(gSpecialVar_ItemId, 1);
         AddPokeblock(&pokeblock);

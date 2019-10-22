@@ -1,3 +1,4 @@
+@ Only contains a portion of the mauville_man text. The rest is in scripts/mauville_man.inc
 gText_SoPretty:: @ 8294295
 	.string " so pretty!$"
 

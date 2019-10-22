@@ -222,60 +222,60 @@ Route110_TrickHousePuzzle7_EventScript_26E31B:: @ 826E31B
 	playse SE_MU_PACHI
 	waitse
 	playse SE_TU_SAA
-	mossdeepgym3 1
-	mossdeepgym1 0
+	initrotatingtilepuzzle TRUE
+	moverotatingtileobjects 0
 	waitmovement 0
-	mossdeepgym2
+	turnrotatingtileobjects
 	waitmovement 0
-	mossdeepgym4
+	freerotatingtilepuzzle
 	end
 
 Route110_TrickHousePuzzle7_EventScript_26E331:: @ 826E331
 	playse SE_MU_PACHI
 	waitse
 	playse SE_TU_SAA
-	mossdeepgym3 1
-	mossdeepgym1 1
+	initrotatingtilepuzzle TRUE
+	moverotatingtileobjects 1
 	waitmovement 0
-	mossdeepgym2
+	turnrotatingtileobjects
 	waitmovement 0
-	mossdeepgym4
+	freerotatingtilepuzzle
 	end
 
 Route110_TrickHousePuzzle7_EventScript_26E347:: @ 826E347
 	playse SE_MU_PACHI
 	waitse
 	playse SE_TU_SAA
-	mossdeepgym3 1
-	mossdeepgym1 2
+	initrotatingtilepuzzle TRUE
+	moverotatingtileobjects 2
 	waitmovement 0
-	mossdeepgym2
+	turnrotatingtileobjects
 	waitmovement 0
-	mossdeepgym4
+	freerotatingtilepuzzle
 	end
 
 Route110_TrickHousePuzzle7_EventScript_26E35D:: @ 826E35D
 	playse SE_MU_PACHI
 	waitse
 	playse SE_TU_SAA
-	mossdeepgym3 1
-	mossdeepgym1 3
+	initrotatingtilepuzzle TRUE
+	moverotatingtileobjects 3
 	waitmovement 0
-	mossdeepgym2
+	turnrotatingtileobjects
 	waitmovement 0
-	mossdeepgym4
+	freerotatingtilepuzzle
 	end
 
 Route110_TrickHousePuzzle7_EventScript_26E373:: @ 826E373
 	playse SE_MU_PACHI
 	waitse
 	playse SE_TU_SAA
-	mossdeepgym3 1
-	mossdeepgym1 4
+	initrotatingtilepuzzle TRUE
+	moverotatingtileobjects 4
 	waitmovement 0
-	mossdeepgym2
+	turnrotatingtileobjects
 	waitmovement 0
-	mossdeepgym4
+	freerotatingtilepuzzle
 	end
 
 Route110_TrickHousePuzzle7_EventScript_26E389:: @ 826E389
