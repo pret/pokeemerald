@@ -2003,7 +2003,7 @@ void sub_80EDC60(const u16 *words)
     }
 }
 
-void sub_80EDCE8(void)
+void TryPutTreasureInvestigatorsOnAir(void)
 {
     TVShow *show;
 
