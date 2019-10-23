@@ -1,3 +1,4 @@
+	.align 2
 gText_ConfirmSave::
 	.string "지금까지의 활약을\n"
 	.string "포켓몬 리포트로 작성할까요?$"

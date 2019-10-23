@@ -1,244 +1,244 @@
-Route102_Text_294513:
+Route102_Text_CalvinIntro:
 	.string "포켓몬을 데리고 있다면\n"
 	.string "너도 이제 어엿한 포켓몬 트레이너!\l"
 	.string "내 도전을 받아 줄 거지?!$"
 
-Route102_Text_29457C:
+Route102_Text_CalvinDefeated:
 	.string "으아 져버렸어...\n"
 	.string "더 키워 놨으면 이길 수 있었을 텐데...$"
 
-Route102_Text_2945AC:
+Route102_Text_CalvinPostBattle:
 	.string "너 말이야! 강하면 강하다고\n"
 	.string "처음부터 말을 해 줬어야지!$"
 
-Route102_Text_2945EB:
+Route102_Text_CalvinRegister:
 	.string "너를 만나고 나서부터\n"
 	.string "열심히 노력했어!\p"
 	.string "나중에 다시 포켓몬 승부하고 싶은데\n"
 	.string "네 포켓내비에 등록해 주라!$"
 
-Route102_Text_294668:
+Route102_Text_CalvinRegisterShort:
 	.string "나중에 다시 포켓몬 승부하고 싶은데\n"
 	.string "네 포켓내비에 등록해 주라!$"
 
-Route102_Text_2946AE:
+Route102_Text_CalvinRematchIntro:
 	.string "너한테 지고 나서 필사적으로\n"
 	.string "포켓몬을 키웠어!\l"
 	.string "당연히 내 도전을 받아주겠지?!$"
 
-Route102_Text_29470C:
+Route102_Text_CalvinRematchDefeated:
 	.string "아아... 졌어...\n"
 	.string "키우는 방법이 잘못됐나?$"
 
-Route102_Text_29473C:
+Route102_Text_CalvinRematchPostBattle:
 	.string "네가 강해진다면\n"
 	.string "나도 더욱 강해지겠어!$"
 
-Route102_Text_294775:
+Route102_Text_AllenIntro:
 	.string "이제 막 트레이너가 됐니?\n"
 	.string "우리 둘 다 초심자구나!$"
 
-Route102_Text_2947AA:
+Route102_Text_AllenDefeated:
 	.string "이길 수 있을 거 같아서\n"
 	.string "말을 걸었던 건데!$"
 
-Route102_Text_2947DB:
+Route102_Text_AllenPostBattle:
 	.string "아직 한 번도 못 이겼어...\n"
 	.string "빨리 이기고 싶다...$"
 
-Route102_Text_29480C:
+Route102_Text_RickIntro:
 	.string "앗! 눈이 마주쳤다!\n"
 	.string "벌레포켓몬으로 상대해주마!$"
 
-Route102_Text_294847:
+Route102_Text_RickDefeated:
 	.string "지고 말았다!$"
 
-Route102_Text_294859:
+Route102_Text_RickPostBattle:
 	.string "눈이 마주친 트레이너에게는\n"
 	.string "승부를 거는 게 원칙이지!$"
 
-Route102_Text_29489E:
+Route102_Text_TianaIntro:
 	.string "나는 계속 이겨서\n"
 	.string "최강 트레이너가 될 거야!\p"
 	.string "너도 협력해!$"
 
-Route102_Text_2948F3:
+Route102_Text_TianaDefeated:
 	.string "내가 너한테\n"
 	.string "협력해 준 것 같아...$"
 
-Route102_Text_294916:
+Route102_Text_TianaPostBattle:
 	.string "계속 이기기 위해서는\n"
     .string "포켓몬을 더 많이\l"
 	.string "잡아야 할 것 같아!$"
 
-Route103_Text_29495A:
+Route103_Text_DaisyIntro:
 	.string "당신도 마음이 편안해지는\n"
 	.string "향기에 이끌려 왔군요...$"
 
-Route103_Text_29498F:
+Route103_Text_DaisyDefeated:
 	.string "제 향기에\n" 
 	.string "넘어가지 않으셨군요...$"
 
-Route103_Text_2949B4:
+Route103_Text_DaisyPostBattle:
 	.string "아로마란 향기를 말합니다...\n"
 	.string "향기는 몸과 마음을 치유하지요$"
 
-Route103_Text_2949F9:
+Route103_Text_AmyIntro:
 	.string "루비: 나는 루비!\n"
 	.string "이쪽은 여동생 루미!\l"
 	.string "둘이서 같이 승부할 거야!$"
 
-Route103_Text_294A3D:
+Route103_Text_AmyDefeated:
 	.string "루비: 져버렸쪄...$"
 
-Route103_Text_294A52:
+Route103_Text_AmyPostBattle:
 	.string "루비: 두 명을 상대하려면\n"
 	.string "여러 가지를 곰곰이 생각해야 해!$"
 
-Route103_Text_294AAE:
+Route103_Text_AmyNotEnoughPokemon:
 	.string "루비: 어? 포켓몬을\n"
 	.string "딱 1마리만 데리고 있구나!\l"
 	.string "그럼 우리랑 승부할 수 없어!$"
 
-Route103_Text_294AFD:
+Route103_Text_LivIntro:
 	.string "루미: 우리 둘은 하나\n"
 	.string "같이 승부할 거야!$"
 
-Route103_Text_294B22:
+Route103_Text_LivDefeated:
 	.string "루미: 져버렸쪄... 언니...$"
 
-Route103_Text_294B40:
+Route103_Text_LivPostBattle:
 	.string "루미: 언니랑 나는\n"
 	.string "호흡이 딱 맞는데...\p"
 	.string "져버렸쪄...$"
 
-Route103_Text_294B8A:
+Route103_Text_AmyLivRegister:
 	.string "루미: 더 강해질 수 있쪄...\n"
 	.string "다음에 보여 줄게!$"
 
-Route103_Text_294BD0:
+Route103_Text_LivNotEnoughPokemon:
 	.string "루미: 우리랑 승부하고 싶으면\n"
 	.string "포켓몬이 2마리 있어야 해!\l"
 	.string "없으면 승부할 수 없어!$"
 
-Route103_Text_294C29:
+Route103_Text_AmyRematchIntro:
 	.string "루비: 나는 루비!\n"
 	.string "이쪽은 여동생 루미!\l"
 	.string "둘이서 같이 승부할 거야!$"
 
-Route103_Text_294C6D:
+Route103_Text_AmyRematchDefeated:
 	.string "루비: 분해...\n"
 	.string "또 져버렸쪄...$"
 
-Route103_Text_294C93:
+Route103_Text_AmyRematchPostBattle:
 	.string "루비: 두 명을 상대하려면\n"
 	.string "여러 가지를 곰곰이 생각해야 해!$"
 
-Route103_Text_294CEF:
+Route103_Text_AmyRematchNotEnoughPokemon:
 	.string "루비: 어? 포켓몬을\n"
 	.string "딱 1마리만 데리고 있구나!\l"
 	.string "그럼 우리랑 승부할 수 없어!$"
 
-Route103_Text_294D3E:
+Route103_Text_LivRematchIntro:
 	.string "루미: 우리 둘은 하나\n"
 	.string "항상 같이 승부하고 있어!$"
 
-Route103_Text_294D63:
+Route103_Text_LivRematchDefeated:
 	.string "루미: 또 져버렸쪄...\n"
 	.string "언니...$"
 
-Route103_Text_294D89:
+Route103_Text_LivRematchPostBattle:
 	.string "루미: 언니랑 나는\n"
 	.string "호흡이 딱 맞는데...\p"
 	.string "왜 또 져버렸을까?$"
 
-Route103_Text_294DDB:
+Route103_Text_LivRematchNotEnoughPokemon:
 	.string "루미: 우리랑 승부하고 싶으면\n"
 	.string "포켓몬이 2마리 있어야 해!\l"
 	.string "없으면 승부할 수 없어!$"
 
-Route103_Text_294E34:
+Route103_Text_AndrewIntro:
 	.string "낚싯줄이 엉켜서 진짜 짜증 난다!\n"
 	.string "에라잇! 승부다!$"
 
-Route103_Text_294E92:
+Route103_Text_AndrewDefeated:
 	.string "졌다!\n"
 	.string "괜히 더 짜증 난다-!$"
 
-Route103_Text_294EBB:
+Route103_Text_AndrewPostBattle:
 	.string "아오 열 받아...!$"
 
-Route103_Text_294EDF:
+Route103_Text_MiguelIntro:
 	.string "나의 엄청나게 귀여운\n"
 	.string "포켓몬을 보고 가시지!$"
 
-Route103_Text_294F21:
+Route103_Text_MiguelDefeated:
 	.string "으아아...\n"
 	.string "나의 귀여운 포켓몬이!$"
 
-Route103_Text_294F42:
+Route103_Text_MiguelPostBattle:
 	.string "나의 귀여운 포켓몬은\n"
 	.string "패배한 모습도 귀엽군...$"
 
-Route103_Text_294F7E:
+Route103_Text_MiguelRegister:
 	.string "내 귀여운 포켓몬을\n"
 	.string "다시 보게 해줄게!$"
 
-Route103_Text_294FC3:
+Route103_Text_MiguelRematchIntro:
 	.string "이봐 너! 나의 귀여운 포켓몬이\n"
 	.string "더 귀여워졌다!$"
 
-Route103_Text_295006:
+Route103_Text_MiguelRematchDefeated:
 	.string "아아!\n"
 	.string "나의 귀여운 포켓몬이!$"
 
-Route103_Text_29501E:
+Route103_Text_MiguelRematchPostBattle:
 	.string "함께 있으면 있을수록\n"
 	.string "포켓몬이 귀여워져서 참을 수가 없다!$"
 
-Route103_Text_295063:
+Route103_Text_PeteIntro:
 	.string "이 거리쯤이야...\n"
 	.string "헤엄치면 껌이지!$"
 
-Route103_Text_295093:
+Route103_Text_PeteDefeated:
 	.string "오, 너도 잘하는데!$"
 
-Route103_Text_2950AA:
+Route103_Text_PetePostBattle:
 	.string "네가 지금 어디서\n"
 	.string "왔는지 알겠어\p"
 	.string "나도 믿을만한 포켓몬이 있다면\n"
 	.string "파도타기를 쓸 텐데!$"
 
-Route103_Text_295116:
+Route103_Text_IsabelleIntro:
 	.string "조심해서 다녀!\n"
 	.string "부딪쳤잖아!$"
 
-Route103_Text_295146:
+Route103_Text_IsabelleDefeated:
 	.string "끄흠...$"
 
-Route103_Text_29514D:
+Route103_Text_IsabellePostBattle:
 	.string "사실 수영 연습 중이었어\n"
 	.string "부딪쳐서 미안해...$"
 
-Route103_Text_295199:
+Route103_Text_RhettIntro:
 	.string "우와!\n"
 	.string "이 조그만 장소에서 뭐 하는 거야?$"
 
-Route103_Text_2951C6:
+Route103_Text_RhettDefeated:
 	.string "우와!\n"
 	.string "꼬맹이가 끝내주네!$"
 
-Route103_Text_2951DE:
+Route103_Text_RhettPostBattle:
 	.string "이렇게 좋은 장소가\n"
 	.string "맘에 들어?$"
 
-Route103_Text_295206:
+Route103_Text_MarcosIntro:
 	.string "내 기타 소리에 이끌렸구나!$"
 
-Route103_Text_29522B:
+Route103_Text_MarcosDefeated:
 	.string "내 원 맨 쇼는 망했어...$"
 
-Route103_Text_295246:
+Route103_Text_MarcosPostBattle:
 	.string "난 기타를 연주했을 뿐인데\n"
 	.string "많은 팬이 생겼어!\p"
 	.string "이제 나도 프로인가?$"

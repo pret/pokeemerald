@@ -22,6 +22,7 @@
 #include "field_message_box.h"
 #include "script_menu.h"
 #include "trader.h"
+#include "constants/mauville_old_man.h"
 
 #define CHAR_SONG_WORD_SEPARATOR 0x37
 
@@ -41,7 +42,7 @@ static EWRAM_DATA u16 sUnknownBardRelated = 0;
 static EWRAM_DATA struct MauvilleManStoryteller * sStorytellerPtr = NULL;
 static EWRAM_DATA u8 sStorytellerWindowId = 0;
 
-static const u16 sDefaultBardSongLyrics[6] = {
+static const u16 sDefaultBardSongLyrics[BARD_SONG_LENGTH] = {
     EC_WORD_SHAKE,
     EC_WORD_IT,
     EC_WORD_DO,
@@ -80,7 +81,7 @@ static void SetupBard(void)
     bard->id = MAUVILLE_MAN_BARD;
     bard->hasChangedSong = FALSE;
     bard->language = gGameLanguage;
-    for (i = 0; i < 6; i++)
+    for (i = 0; i < BARD_SONG_LENGTH; i++)
         bard->songLyrics[i] = sDefaultBardSongLyrics[i];
 }
 
@@ -166,10 +167,10 @@ void ScrSpecial_SaveBardSongLyrics(void)
 
     StringCopy(bard->playerName, gSaveBlock2Ptr->playerName);
 
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < TRAINER_ID_LENGTH; i++)
         bard->playerTrainerId[i] = gSaveBlock2Ptr->playerTrainerId[i];
 
-    for (i = 0; i < 6; i++)
+    for (i = 0; i < BARD_SONG_LENGTH; i++)
         bard->songLyrics[i] = bard->temporaryLyrics[i];
 
     bard->hasChangedSong = TRUE;
@@ -248,15 +249,15 @@ void ScrSpecial_SetHipsterSpokenFlag(void)
 
 void ScrSpecial_HipsterTeachWord(void)
 {
-    u16 var = sub_811F01C();
+    u16 phrase = GetNewHipsterPhraseToTeach();
 
-    if (var == 0xFFFF)
+    if (phrase == 0xFFFF)
     {
         gSpecialVar_Result = FALSE;
     }
     else
     {
-        CopyEasyChatWord(gStringVar1, var);
+        CopyEasyChatWord(gStringVar1, phrase);
         gSpecialVar_Result = TRUE;
     }
 }
@@ -458,7 +459,7 @@ static void BardSing(struct Task *task, struct BardSong *song)
                 lyrics = bard->songLyrics;
             else
                 lyrics = bard->temporaryLyrics;
-            for (i = 0; i < 6; i++)
+            for (i = 0; i < BARD_SONG_LENGTH; i++)
                 song->lyrics[i] = lyrics[i];
             song->currWord = 0;
         }
@@ -683,14 +684,14 @@ void ScrSpecial_SetMauvilleOldManEventObjGfx(void)
 void sub_8120B70(union OldMan * oldMan)
 {
     s32 i;
-    u8 sp00[8];
+    u8 playerName[PLAYER_NAME_LENGTH + 1];
 
     switch (oldMan->common.id)
     {
         case MAUVILLE_MAN_TRADER:
         {
             struct MauvilleOldManTrader * trader = &oldMan->trader;
-            for (i = 0; i < 4; i++)
+            for (i = 0; i < NUM_TRADER_ITEMS; i++)
             {
                 if (trader->language[i] == LANGUAGE_JAPANESE)
                 {
@@ -702,17 +703,17 @@ void sub_8120B70(union OldMan * oldMan)
         case MAUVILLE_MAN_STORYTELLER:
         {
             struct MauvilleManStoryteller * storyteller = &oldMan->storyteller;
-            for (i = 0; i < 4; i++)
+            for (i = 0; i < NUM_STORYTELLER_TALES; i++)
             {
                 if (storyteller->gameStatIDs[i] != 0)
                 {
-                    memcpy(sp00, storyteller->trainerNames[i], 7);
-                    sp00[7] = EOS;
-                    if (IsStringJapanese(sp00))
+                    memcpy(playerName, storyteller->trainerNames[i], PLAYER_NAME_LENGTH);
+                    playerName[PLAYER_NAME_LENGTH] = EOS;
+                    if (IsStringJapanese(playerName))
                     {
-                        memset(sp00, CHAR_SPACE, 8);
-                        StringCopy(sp00, gText_Friend);
-                        memcpy(storyteller->trainerNames[i], sp00, 7);
+                        memset(playerName, CHAR_SPACE, PLAYER_NAME_LENGTH + 1);
+                        StringCopy(playerName, gText_Friend);
+                        memcpy(storyteller->trainerNames[i], playerName, PLAYER_NAME_LENGTH);
                         storyteller->language[i] = GAME_LANGUAGE;
                     }
                 }
@@ -732,7 +733,7 @@ void sub_8120C0C(union OldMan * oldMan, u32 r8, u32 r7, u32 r3)
         {
             struct MauvilleOldManTrader * trader = &oldMan->trader;
 
-            for (i = 0; i < 4; i++)
+            for (i = 0; i < NUM_TRADER_ITEMS; i++)
             {
                 if (IsStringJapanese(trader->playerNames[i]))
                 {
@@ -749,7 +750,7 @@ void sub_8120C0C(union OldMan * oldMan, u32 r8, u32 r7, u32 r3)
         {
             struct MauvilleManStoryteller * storyteller = &oldMan->storyteller;
 
-            for (i = 0; i < 4; i++)
+            for (i = 0; i < NUM_STORYTELLER_TALES; i++)
             {
                 if (IsStringJapanese(storyteller->trainerNames[i]))
                 {
@@ -797,19 +798,19 @@ void sub_8120C0C(union OldMan * oldMan, u32 r8, u32 r7, u32 r3)
 
 void SanitizeReceivedEmeraldOldMan(union OldMan * oldMan, u32 version, u32 language)
 {
-    u8 sp00[8];
+    u8 playerName[PLAYER_NAME_LENGTH + 1];
     s32 i;
     if (oldMan->common.id == MAUVILLE_MAN_STORYTELLER && language == LANGUAGE_JAPANESE)
     {
         struct MauvilleManStoryteller * storyteller = &oldMan->storyteller;
 
-        for (i = 0; i < 4; i++)
+        for (i = 0; i < NUM_STORYTELLER_TALES; i++)
         {
             if (storyteller->gameStatIDs[i] != 0)
             {
-                memcpy(sp00, storyteller->trainerNames[i], 7);
-                sp00[7] = EOS;
-                if (IsStringJapanese(sp00))
+                memcpy(playerName, storyteller->trainerNames[i], PLAYER_NAME_LENGTH);
+                playerName[PLAYER_NAME_LENGTH] = EOS;
+                if (IsStringJapanese(playerName))
                     storyteller->language[i] = LANGUAGE_JAPANESE;
                 else
                     storyteller->language[i] = GAME_LANGUAGE;
@@ -831,7 +832,7 @@ void SanitizeReceivedRubyOldMan(union OldMan * oldMan, u32 version, u32 language
 
             if (isRuby)
             {
-                for (i = 0; i < 4; i++)
+                for (i = 0; i < NUM_TRADER_ITEMS; i++)
                 {
                     u8 * str = trader->playerNames[i];
                     if (str[0] == EXT_CTRL_CODE_BEGIN && str[1] == EXT_CTRL_CODE_JPN)
@@ -845,7 +846,7 @@ void SanitizeReceivedRubyOldMan(union OldMan * oldMan, u32 version, u32 language
             }
             else
             {
-                for (i = 0; i < 4; i++)
+                for (i = 0; i < NUM_TRADER_ITEMS; i++)
                 {
                     if (trader->language[i] == LANGUAGE_JAPANESE)
                     {
@@ -863,7 +864,7 @@ void SanitizeReceivedRubyOldMan(union OldMan * oldMan, u32 version, u32 language
 
             if (isRuby)
             {
-                for (i = 0; i < 4; i++)
+                for (i = 0; i < NUM_STORYTELLER_TALES; i++)
                 {
                     if (storyteller->gameStatIDs[i] != 0)
                         storyteller->language[i] = language;
@@ -914,42 +915,223 @@ struct Story
 };
 
 static const struct Story sStorytellerStories[] = {
-    {GAME_STAT_NUM_UNION_ROOM_BATTLES, 1, MauvilleCity_PokemonCenter_1F_Text_28E930, MauvilleCity_PokemonCenter_1F_Text_28E947, MauvilleCity_PokemonCenter_1F_Text_28E956},
-    {GAME_STAT_STARTED_TRENDS, 1, MauvilleCity_PokemonCenter_1F_Text_28E9D7, MauvilleCity_PokemonCenter_1F_Text_28E9EF, MauvilleCity_PokemonCenter_1F_Text_28E9FE},
-    {GAME_STAT_PLANTED_BERRIES, 1, MauvilleCity_PokemonCenter_1F_Text_28EA7D, MauvilleCity_PokemonCenter_1F_Text_28EA98, MauvilleCity_PokemonCenter_1F_Text_28EAA8},
-    {GAME_STAT_TRADED_BIKES, 1, MauvilleCity_PokemonCenter_1F_Text_28EB19, MauvilleCity_PokemonCenter_1F_Text_28EB31, MauvilleCity_PokemonCenter_1F_Text_28EB3E},
-    {GAME_STAT_GOT_INTERVIEWED, 1, MauvilleCity_PokemonCenter_1F_Text_28EBB5, MauvilleCity_PokemonCenter_1F_Text_28EBCD, MauvilleCity_PokemonCenter_1F_Text_28EBDD},
-    {GAME_STAT_TRAINER_BATTLES, 1, MauvilleCity_PokemonCenter_1F_Text_28EC60, MauvilleCity_PokemonCenter_1F_Text_28EC79, MauvilleCity_PokemonCenter_1F_Text_28EC81},
-    {GAME_STAT_POKEMON_CAPTURES, 1, MauvilleCity_PokemonCenter_1F_Text_28ED04, MauvilleCity_PokemonCenter_1F_Text_28ED21, MauvilleCity_PokemonCenter_1F_Text_28ED30},
-    {GAME_STAT_FISHING_CAPTURES, 1, MauvilleCity_PokemonCenter_1F_Text_28EDA1, MauvilleCity_PokemonCenter_1F_Text_28EDB5, MauvilleCity_PokemonCenter_1F_Text_28EDCF},
-    {GAME_STAT_HATCHED_EGGS, 1, MauvilleCity_PokemonCenter_1F_Text_28EE45, MauvilleCity_PokemonCenter_1F_Text_28EE5D, MauvilleCity_PokemonCenter_1F_Text_28EE6A},
-    {GAME_STAT_EVOLVED_POKEMON, 1, MauvilleCity_PokemonCenter_1F_Text_28EEDD, MauvilleCity_PokemonCenter_1F_Text_28EEF1, MauvilleCity_PokemonCenter_1F_Text_28EF01},
-    {GAME_STAT_USED_POKECENTER, 1, MauvilleCity_PokemonCenter_1F_Text_28EF73, MauvilleCity_PokemonCenter_1F_Text_28EF95, MauvilleCity_PokemonCenter_1F_Text_28EFAA},
-    {GAME_STAT_RESTED_AT_HOME, 1, MauvilleCity_PokemonCenter_1F_Text_28F045, MauvilleCity_PokemonCenter_1F_Text_28F05A, MauvilleCity_PokemonCenter_1F_Text_28F071},
-    {GAME_STAT_ENTERED_SAFARI_ZONE, 1, MauvilleCity_PokemonCenter_1F_Text_28F0F3, MauvilleCity_PokemonCenter_1F_Text_28F10D, MauvilleCity_PokemonCenter_1F_Text_28F125},
-    {GAME_STAT_USED_CUT, 1, MauvilleCity_PokemonCenter_1F_Text_28F1BE, MauvilleCity_PokemonCenter_1F_Text_28F1D5, MauvilleCity_PokemonCenter_1F_Text_28F1DE},
-    {GAME_STAT_USED_ROCK_SMASH, 1, MauvilleCity_PokemonCenter_1F_Text_28F24F, MauvilleCity_PokemonCenter_1F_Text_28F269, MauvilleCity_PokemonCenter_1F_Text_28F277},
-    {GAME_STAT_MOVED_SECRET_BASE, 1, MauvilleCity_PokemonCenter_1F_Text_28F2FC, MauvilleCity_PokemonCenter_1F_Text_28F314, MauvilleCity_PokemonCenter_1F_Text_28F32A},
-    {GAME_STAT_USED_SPLASH, 1, MauvilleCity_PokemonCenter_1F_Text_28F3AD, MauvilleCity_PokemonCenter_1F_Text_28F3C6, MauvilleCity_PokemonCenter_1F_Text_28F3D2},
-    {GAME_STAT_USED_STRUGGLE, 1, MauvilleCity_PokemonCenter_1F_Text_28F44B, MauvilleCity_PokemonCenter_1F_Text_28F461, MauvilleCity_PokemonCenter_1F_Text_28F47C},
-    {GAME_STAT_SLOT_JACKPOTS, 1, MauvilleCity_PokemonCenter_1F_Text_28F50C, MauvilleCity_PokemonCenter_1F_Text_28F51B, MauvilleCity_PokemonCenter_1F_Text_28F538},
-    {GAME_STAT_CONSECUTIVE_ROULETTE_WINS, 2, MauvilleCity_PokemonCenter_1F_Text_28F5BE, MauvilleCity_PokemonCenter_1F_Text_28F5D1, MauvilleCity_PokemonCenter_1F_Text_28F5F2},
-    {GAME_STAT_ENTERED_BATTLE_TOWER, 1, MauvilleCity_PokemonCenter_1F_Text_28F678, MauvilleCity_PokemonCenter_1F_Text_28F694, MauvilleCity_PokemonCenter_1F_Text_28F6B4},
-    {GAME_STAT_POKEBLOCKS, 1, MauvilleCity_PokemonCenter_1F_Text_28F751, MauvilleCity_PokemonCenter_1F_Text_28F76A, MauvilleCity_PokemonCenter_1F_Text_28F776},
-    {GAME_STAT_ENTERED_CONTEST, 1, MauvilleCity_PokemonCenter_1F_Text_28F7F6, MauvilleCity_PokemonCenter_1F_Text_28F811, MauvilleCity_PokemonCenter_1F_Text_28F822},
-    {GAME_STAT_WON_CONTEST, 1, MauvilleCity_PokemonCenter_1F_Text_28F89C, MauvilleCity_PokemonCenter_1F_Text_28F8AF, MauvilleCity_PokemonCenter_1F_Text_28F8BC},
-    {GAME_STAT_SHOPPED, 1, MauvilleCity_PokemonCenter_1F_Text_28F92F, MauvilleCity_PokemonCenter_1F_Text_28F941, MauvilleCity_PokemonCenter_1F_Text_28F949},
-    {GAME_STAT_USED_ITEMFINDER, 1, MauvilleCity_PokemonCenter_1F_Text_28F9D1, MauvilleCity_PokemonCenter_1F_Text_28F9EA, MauvilleCity_PokemonCenter_1F_Text_28F9FD},
-    {GAME_STAT_GOT_RAINED_ON, 1, MauvilleCity_PokemonCenter_1F_Text_28FA81, MauvilleCity_PokemonCenter_1F_Text_28FA99, MauvilleCity_PokemonCenter_1F_Text_28FAA7},
-    {GAME_STAT_CHECKED_POKEDEX, 1, MauvilleCity_PokemonCenter_1F_Text_28FB1D, MauvilleCity_PokemonCenter_1F_Text_28FB35, MauvilleCity_PokemonCenter_1F_Text_28FB47},
-    {GAME_STAT_RECEIVED_RIBBONS, 1, MauvilleCity_PokemonCenter_1F_Text_28FBC4, MauvilleCity_PokemonCenter_1F_Text_28FBD9, MauvilleCity_PokemonCenter_1F_Text_28FBEA},
-    {GAME_STAT_JUMPED_DOWN_LEDGES, 1, MauvilleCity_PokemonCenter_1F_Text_28FC6B, MauvilleCity_PokemonCenter_1F_Text_28FC85, MauvilleCity_PokemonCenter_1F_Text_28FC98},
-    {GAME_STAT_WATCHED_TV, 1, MauvilleCity_PokemonCenter_1F_Text_28FD1D, MauvilleCity_PokemonCenter_1F_Text_28FD35, MauvilleCity_PokemonCenter_1F_Text_28FD40},
-    {GAME_STAT_CHECKED_CLOCK, 1, MauvilleCity_PokemonCenter_1F_Text_28FDA2, MauvilleCity_PokemonCenter_1F_Text_28FDBD, MauvilleCity_PokemonCenter_1F_Text_28FDCE},
-    {GAME_STAT_WON_POKEMON_LOTTERY, 1, MauvilleCity_PokemonCenter_1F_Text_28FE57, MauvilleCity_PokemonCenter_1F_Text_28FE72, MauvilleCity_PokemonCenter_1F_Text_28FE88},
-    {GAME_STAT_USED_DAYCARE, 1, MauvilleCity_PokemonCenter_1F_Text_28FF0C, MauvilleCity_PokemonCenter_1F_Text_28FF27, MauvilleCity_PokemonCenter_1F_Text_28FF44},
-    {GAME_STAT_RODE_CABLE_CAR, 1, MauvilleCity_PokemonCenter_1F_Text_28FFDD, MauvilleCity_PokemonCenter_1F_Text_28FFFA, MauvilleCity_PokemonCenter_1F_Text_29000D},
-    {GAME_STAT_ENTERED_HOT_SPRINGS, 1, MauvilleCity_PokemonCenter_1F_Text_290097, MauvilleCity_PokemonCenter_1F_Text_2900B5, MauvilleCity_PokemonCenter_1F_Text_2900CB}
+    // The 50 below is replaced with GAME_STAT_SAVED_GAME
+    {
+        50, 1, 
+        MauvilleCity_PokemonCenter_1F_Text_SavedGameTitle, 
+        MauvilleCity_PokemonCenter_1F_Text_SavedGameAction, 
+        MauvilleCity_PokemonCenter_1F_Text_SavedGameStory
+    },
+    {
+        GAME_STAT_STARTED_TRENDS, 1, 
+        MauvilleCity_PokemonCenter_1F_Text_TrendsStartedTitle, 
+        MauvilleCity_PokemonCenter_1F_Text_TrendsStartedAction, 
+        MauvilleCity_PokemonCenter_1F_Text_TrendsStartedStory
+    },
+    {
+        GAME_STAT_PLANTED_BERRIES, 1, 
+        MauvilleCity_PokemonCenter_1F_Text_BerriesPlantedTitle, 
+        MauvilleCity_PokemonCenter_1F_Text_BerriesPlantedAction, 
+        MauvilleCity_PokemonCenter_1F_Text_BerriesPlantedStory
+    },
+    {
+        GAME_STAT_TRADED_BIKES, 1, 
+        MauvilleCity_PokemonCenter_1F_Text_BikeTradesTitle, 
+        MauvilleCity_PokemonCenter_1F_Text_BikeTradesAction, 
+        MauvilleCity_PokemonCenter_1F_Text_BikeTradesStory
+    },
+    {
+        GAME_STAT_GOT_INTERVIEWED, 1, 
+        MauvilleCity_PokemonCenter_1F_Text_InterviewsTitle, 
+        MauvilleCity_PokemonCenter_1F_Text_InterviewsAction, 
+        MauvilleCity_PokemonCenter_1F_Text_InterviewsStory
+    },
+    {
+        GAME_STAT_TRAINER_BATTLES, 1, 
+        MauvilleCity_PokemonCenter_1F_Text_TrainerBattlesTitle, 
+        MauvilleCity_PokemonCenter_1F_Text_TrainerBattlesAction, 
+        MauvilleCity_PokemonCenter_1F_Text_TrainerBattlesStory
+    },
+    {
+        GAME_STAT_POKEMON_CAPTURES, 1, 
+        MauvilleCity_PokemonCenter_1F_Text_PokemonCaughtTitle, 
+        MauvilleCity_PokemonCenter_1F_Text_PokemonCaughtAction, 
+        MauvilleCity_PokemonCenter_1F_Text_PokemonCaughtStory
+    },
+    {
+        GAME_STAT_FISHING_CAPTURES, 1, 
+        MauvilleCity_PokemonCenter_1F_Text_FishingPokemonCaughtTitle, 
+        MauvilleCity_PokemonCenter_1F_Text_FishingPokemonCaughtAction, 
+        MauvilleCity_PokemonCenter_1F_Text_FishingPokemonCaughtStory
+    },
+    {
+        GAME_STAT_HATCHED_EGGS, 1, 
+        MauvilleCity_PokemonCenter_1F_Text_EggsHatchedTitle, 
+        MauvilleCity_PokemonCenter_1F_Text_EggsHatchedAction, 
+        MauvilleCity_PokemonCenter_1F_Text_EggsHatchedStory
+    },
+    {
+        GAME_STAT_EVOLVED_POKEMON, 1, 
+        MauvilleCity_PokemonCenter_1F_Text_PokemonEvolvedTitle, 
+        MauvilleCity_PokemonCenter_1F_Text_PokemonEvolvedAction, 
+        MauvilleCity_PokemonCenter_1F_Text_PokemonEvolvedStory
+    },
+    {
+        GAME_STAT_USED_POKECENTER, 1, 
+        MauvilleCity_PokemonCenter_1F_Text_UsedPokemonCenterTitle, 
+        MauvilleCity_PokemonCenter_1F_Text_UsedPokemonCenterAction, 
+        MauvilleCity_PokemonCenter_1F_Text_UsedPokemonCenterStory
+    },
+    {
+        GAME_STAT_RESTED_AT_HOME, 1, 
+        MauvilleCity_PokemonCenter_1F_Text_RestedAtHomeTitle, 
+        MauvilleCity_PokemonCenter_1F_Text_RestedAtHomeAction, 
+        MauvilleCity_PokemonCenter_1F_Text_RestedAtHomeStory
+    },
+    {
+        GAME_STAT_ENTERED_SAFARI_ZONE, 1, 
+        MauvilleCity_PokemonCenter_1F_Text_SafariGamesTitle, 
+        MauvilleCity_PokemonCenter_1F_Text_SafariGamesAction, 
+        MauvilleCity_PokemonCenter_1F_Text_SafariGamesStory
+    },
+    {
+        GAME_STAT_USED_CUT, 1, 
+        MauvilleCity_PokemonCenter_1F_Text_UsedCutTitle, 
+        MauvilleCity_PokemonCenter_1F_Text_UsedCutAction, 
+        MauvilleCity_PokemonCenter_1F_Text_UsedCutStory
+    },
+    {
+        GAME_STAT_USED_ROCK_SMASH, 1, 
+        MauvilleCity_PokemonCenter_1F_Text_UsedRockSmashTitle, 
+        MauvilleCity_PokemonCenter_1F_Text_UsedRockSmashAction, 
+        MauvilleCity_PokemonCenter_1F_Text_UsedRockSmashStory
+    },
+    {
+        GAME_STAT_MOVED_SECRET_BASE, 1, 
+        MauvilleCity_PokemonCenter_1F_Text_MovedBasesTitle, 
+        MauvilleCity_PokemonCenter_1F_Text_MovedBasesAction, 
+        MauvilleCity_PokemonCenter_1F_Text_MovedBasesStory
+    },
+    {
+        GAME_STAT_USED_SPLASH, 1, 
+        MauvilleCity_PokemonCenter_1F_Text_UsedSplashTitle, 
+        MauvilleCity_PokemonCenter_1F_Text_UsedSplashAction, 
+        MauvilleCity_PokemonCenter_1F_Text_UsedSplashStory
+    },
+    {
+        GAME_STAT_USED_STRUGGLE, 1, 
+        MauvilleCity_PokemonCenter_1F_Text_UsedStruggleTitle, 
+        MauvilleCity_PokemonCenter_1F_Text_UsedStruggleAction, 
+        MauvilleCity_PokemonCenter_1F_Text_UsedStruggleStory
+    },
+    {
+        GAME_STAT_SLOT_JACKPOTS, 1, 
+        MauvilleCity_PokemonCenter_1F_Text_SlotJackpotsTitle, 
+        MauvilleCity_PokemonCenter_1F_Text_SlotJackpotsAction, 
+        MauvilleCity_PokemonCenter_1F_Text_SlotJackpotsStory
+    },
+    {
+        GAME_STAT_CONSECUTIVE_ROULETTE_WINS, 2, 
+        MauvilleCity_PokemonCenter_1F_Text_RouletteWinsTitle, 
+        MauvilleCity_PokemonCenter_1F_Text_RouletteWinsAction, 
+        MauvilleCity_PokemonCenter_1F_Text_RouletteWinsStory
+    },
+    {
+        GAME_STAT_ENTERED_BATTLE_TOWER, 1, 
+        MauvilleCity_PokemonCenter_1F_Text_BattleTowerChallengesTitle, 
+        MauvilleCity_PokemonCenter_1F_Text_BattleTowerChallengesAction, 
+        MauvilleCity_PokemonCenter_1F_Text_BattleTowerChallengesStory
+    },
+    {
+        GAME_STAT_POKEBLOCKS, 1, 
+        MauvilleCity_PokemonCenter_1F_Text_MadePokeblocksTitle, 
+        MauvilleCity_PokemonCenter_1F_Text_MadePokeblocksAction, 
+        MauvilleCity_PokemonCenter_1F_Text_MadePokeblocksStory
+    },
+    {
+        GAME_STAT_ENTERED_CONTEST, 1, 
+        MauvilleCity_PokemonCenter_1F_Text_EnteredContestsTitle, 
+        MauvilleCity_PokemonCenter_1F_Text_EnteredContestsAction, 
+        MauvilleCity_PokemonCenter_1F_Text_EnteredContestsStory
+    },
+    {
+        GAME_STAT_WON_CONTEST, 1, 
+        MauvilleCity_PokemonCenter_1F_Text_WonContestsTitle, 
+        MauvilleCity_PokemonCenter_1F_Text_WonContestsAction, 
+        MauvilleCity_PokemonCenter_1F_Text_WonContestsStory
+    },
+    {
+        GAME_STAT_SHOPPED, 1, 
+        MauvilleCity_PokemonCenter_1F_Text_TimesShoppedTitle, 
+        MauvilleCity_PokemonCenter_1F_Text_TimesShoppedAction, 
+        MauvilleCity_PokemonCenter_1F_Text_TimesShoppedStory
+    },
+    {
+        GAME_STAT_USED_ITEMFINDER, 1, 
+        MauvilleCity_PokemonCenter_1F_Text_UsedItemFinderTitle, 
+        MauvilleCity_PokemonCenter_1F_Text_UsedItemFinderAction, 
+        MauvilleCity_PokemonCenter_1F_Text_UsedItemFinderStory
+    },
+    {
+        GAME_STAT_GOT_RAINED_ON, 1, 
+        MauvilleCity_PokemonCenter_1F_Text_TimesRainedTitle, 
+        MauvilleCity_PokemonCenter_1F_Text_TimesRainedAction, 
+        MauvilleCity_PokemonCenter_1F_Text_TimesRainedStory
+    },
+    {
+        GAME_STAT_CHECKED_POKEDEX, 1, 
+        MauvilleCity_PokemonCenter_1F_Text_CheckedPokedexTitle, 
+        MauvilleCity_PokemonCenter_1F_Text_CheckedPokedexAction, 
+        MauvilleCity_PokemonCenter_1F_Text_CheckedPokedexStory
+    },
+    {
+        GAME_STAT_RECEIVED_RIBBONS, 1, 
+        MauvilleCity_PokemonCenter_1F_Text_ReceivedRibbonsTitle, 
+        MauvilleCity_PokemonCenter_1F_Text_ReceivedRibbonsAction, 
+        MauvilleCity_PokemonCenter_1F_Text_ReceivedRibbonsStory
+    },
+    {
+        GAME_STAT_JUMPED_DOWN_LEDGES, 1, 
+        MauvilleCity_PokemonCenter_1F_Text_LedgesJumpedTitle, 
+        MauvilleCity_PokemonCenter_1F_Text_LedgesJumpedAction, 
+        MauvilleCity_PokemonCenter_1F_Text_LedgesJumpedStory
+    },
+    {
+        GAME_STAT_WATCHED_TV, 1, 
+        MauvilleCity_PokemonCenter_1F_Text_TVWatchedTitle, 
+        MauvilleCity_PokemonCenter_1F_Text_TVWatchedAction, 
+        MauvilleCity_PokemonCenter_1F_Text_TVWatchedStory
+    },
+    {
+        GAME_STAT_CHECKED_CLOCK, 1, 
+        MauvilleCity_PokemonCenter_1F_Text_CheckedClockTitle, 
+        MauvilleCity_PokemonCenter_1F_Text_CheckedClockAction, 
+        MauvilleCity_PokemonCenter_1F_Text_CheckedClockStory
+    },
+    {
+        GAME_STAT_WON_POKEMON_LOTTERY, 1, 
+        MauvilleCity_PokemonCenter_1F_Text_WonLotteryTitle, 
+        MauvilleCity_PokemonCenter_1F_Text_WonLotteryAction, 
+        MauvilleCity_PokemonCenter_1F_Text_WonLotteryStory
+    },
+    {
+        GAME_STAT_USED_DAYCARE, 1, 
+        MauvilleCity_PokemonCenter_1F_Text_UsedDaycareTitle, 
+        MauvilleCity_PokemonCenter_1F_Text_UsedDaycareAction, 
+        MauvilleCity_PokemonCenter_1F_Text_UsedDaycareStory
+    },
+    {
+        GAME_STAT_RODE_CABLE_CAR, 1, 
+        MauvilleCity_PokemonCenter_1F_Text_RodeCableCarTitle, 
+        MauvilleCity_PokemonCenter_1F_Text_RodeCableCarAction, 
+        MauvilleCity_PokemonCenter_1F_Text_RodeCableCarStory
+    },
+    {
+        GAME_STAT_ENTERED_HOT_SPRINGS, 1, 
+        MauvilleCity_PokemonCenter_1F_Text_HotSpringsTitle, 
+        MauvilleCity_PokemonCenter_1F_Text_HotSpringsAction, 
+        MauvilleCity_PokemonCenter_1F_Text_HotSpringsStory
+    }
 };
 
 static void StorytellerSetup(void)
@@ -959,7 +1141,7 @@ static void StorytellerSetup(void)
 
     sStorytellerPtr->id = MAUVILLE_MAN_STORYTELLER;
     sStorytellerPtr->alreadyRecorded = FALSE;
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < NUM_STORYTELLER_TALES; i++)
     {
         sStorytellerPtr->gameStatIDs[i] = 0;
         sStorytellerPtr->trainerNames[0][i] = EOS;  // Maybe they meant storyteller->trainerNames[i][0] instead?
@@ -977,7 +1159,7 @@ static void Storyteller_ResetFlag(void)
 static u32 StorytellerGetGameStat(u8 stat)
 {
     if (stat == 50)
-        stat = 0;
+        stat = GAME_STAT_SAVED_GAME;
     return GetGameStat(stat);
 }
 
@@ -985,12 +1167,12 @@ static const struct Story *GetStoryByStat(u32 stat)
 {
     s32 i;
 
-    for (i = 0; i < 36; i++)
+    for (i = 0; i < (int)ARRAY_COUNT(sStorytellerStories); i++)
     {
         if (sStorytellerStories[i].stat == stat)
             return &sStorytellerStories[i];
     }
-    return &sStorytellerStories[35];
+    return &sStorytellerStories[ARRAY_COUNT(sStorytellerStories) - 1];
 }
 
 static const u8 *GetStoryTitleByStat(u32 stat)
@@ -1012,7 +1194,7 @@ static u8 GetFreeStorySlot(void)
 {
     u8 i;
 
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < NUM_STORYTELLER_TALES; i++)
     {
         if (sStorytellerPtr->gameStatIDs[i] == 0)
             break;
@@ -1049,15 +1231,15 @@ static void GetStoryByStattellerPlayerName(u32 player, void *dst)
 {
     u8 *name = sStorytellerPtr->trainerNames[player];
 
-    memset(dst, EOS, 8);
-    memcpy(dst, name, 7);
+    memset(dst, EOS, PLAYER_NAME_LENGTH + 1);
+    memcpy(dst, name, PLAYER_NAME_LENGTH);
 }
 
 static void StorytellerSetPlayerName(u32 player, const u8 * src)
 {
     u8 * name = sStorytellerPtr->trainerNames[player];
-    memset(name, EOS, 7);
-    memcpy(name, src, 7);
+    memset(name, EOS, PLAYER_NAME_LENGTH);
+    memcpy(name, src, PLAYER_NAME_LENGTH);
 }
 
 
@@ -1110,15 +1292,15 @@ static bool8 StorytellerInitializeRandomStat(void)
         u8 stat = sStorytellerStories[arr[i]].stat;
         u8 minVal = sStorytellerStories[arr[i]].minVal;
 
-        for (j = 0; j < 4; j++)
+        for (j = 0; j < NUM_STORYTELLER_TALES; j++)
         {
             if (sStorytellerPtr->gameStatIDs[j] == stat)
                 break;
         }
-        if (j == 4 && StorytellerGetGameStat(stat) >= minVal)
+        if (j == NUM_STORYTELLER_TALES && StorytellerGetGameStat(stat) >= minVal)
         {
             sStorytellerPtr->alreadyRecorded = TRUE;
-            if (GetFreeStorySlot() == 4)
+            if (GetFreeStorySlot() == NUM_STORYTELLER_TALES)
                 StorytellerRecordNewStat(sSelectedStory, stat);
             else
                 StorytellerRecordNewStat(GetFreeStorySlot(), stat);
@@ -1144,7 +1326,7 @@ static void PrintStoryList(void)
     s32 i;
     s32 width = GetStringWidth(1, gText_Exit, 0);
     u8 tileWidth;
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < NUM_STORYTELLER_TALES; i++)
     {
         s32 curWidth;
         u16 gameStatID = sStorytellerPtr->gameStatIDs[i];
@@ -1157,7 +1339,7 @@ static void PrintStoryList(void)
     }
     sStorytellerWindowId = CreateWindowFromRect(0, 0, ConvertPixelWidthToTileWidth(width), GetFreeStorySlot() * 2 + 2);
     SetStandardWindowBorderStyle(sStorytellerWindowId, 0);
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < NUM_STORYTELLER_TALES; i++)
     {
         u16 gameStatID = sStorytellerPtr->gameStatIDs[i];
         if (gameStatID == 0)
@@ -1169,7 +1351,7 @@ static void PrintStoryList(void)
     CopyWindowToVram(sStorytellerWindowId, 3);
 }
 
-static void Task_StoryListMenu(u8 taskId) // Task_StoryListMenu
+static void Task_StoryListMenu(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
     s32 selection;

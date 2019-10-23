@@ -161,7 +161,7 @@ gSpecials:: @ 81DBA64
 	def_special GetPlayerTrainerIdOnesDigit
 	def_special GetPlayerBigGuyGirlString
 	def_special GetRivalSonDaughterString
-	def_special SetFlagInVar
+	def_special SetHiddenItemFlag
 	def_special CableCarWarp
 	def_special CableCar
 	def_special Overworld_PlaySpecialMapMusic
@@ -352,7 +352,7 @@ gSpecials:: @ 81DBA64
 	def_special DoesPartyHaveEnigmaBerry
 	def_special ScriptRandom
 	def_special sub_81AFDD0
-	def_special sub_80EDCE8
+	def_special TryPutTreasureInvestigatorsOnAir
 	def_special sub_80EE2CC
 	def_special sub_80EE72C
 	def_special sub_80EE7C0

@@ -129,11 +129,11 @@ void InitializeEasyChatWordArray(u16 *words, u16 length);
 u8 *ConvertEasyChatWordsToString(u8 *dest, const u16 *src, u16 columns, u16 rows);
 bool8 ECWord_CheckIfOutsideOfValidRange(u16 word);
 u16 sub_811EE38(u16 group);
-u16 sub_811F01C(void);
+u16 GetNewHipsterPhraseToTeach(void);
 u16 EasyChat_GetNumWordsInGroup(u8);
 u16 sub_811EE90(u16);
 void DoEasyChatScreen(u8 type, u16 *words, MainCallback callback, u8 displayedPersonType);
 void sub_811F8BC(void);
-void sub_811EFC0(u8 additionalPhraseId);
+void UnlockAdditionalPhrase(u8 additionalPhraseId);
 
 #endif // GUARD_EASYCHAT_H
