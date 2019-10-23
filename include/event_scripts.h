@@ -380,8 +380,8 @@ extern const u8 EventScript_FldEffFlash[];
 extern const u8 EventScript_FldEffRockSmash[];
 
 //player pc
-extern const u8 LittlerootTown_BrendansHouse_2F_EventScript_1F863F[];
-extern const u8 LittlerootTown_MaysHouse_2F_EventScript_1F958F[];
+extern const u8 LittlerootTown_BrendansHouse_2F_EventScript_TurnOffPlayerPC[];
+extern const u8 LittlerootTown_MaysHouse_2F_EventScript_TurnOffPlayerPC[];
 
 //contest_strings
 extern const u8 gText_0827D507[];
@@ -517,8 +517,8 @@ extern const u8 MauvilleCity_PokemonCenter_1F_Text_HotSpringsTitle[];
 extern const u8 MauvilleCity_PokemonCenter_1F_Text_HotSpringsAction[];
 extern const u8 MauvilleCity_PokemonCenter_1F_Text_HotSpringsStory[];
 
-extern const u8 EventScript_PlayerPCMale[];
-extern const u8 EventScript_PlayerPCFemale[];
+extern const u8 LittlerootTown_BrendansHouse_2F_EventScript_PC[];
+extern const u8 LittlerootTown_MaysHouse_2F_EventScript_PC[];
 extern const u8 EventScript_PC[];
 extern const u8 EventScript_TestSignpostMsg[];
 extern const u8 EventScript_HiddenItemScript[];

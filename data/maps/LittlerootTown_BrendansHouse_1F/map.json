@@ -24,7 +24,7 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "LittlerootTown_BrendansHouse_1F_EventScript_2929C5",
+      "script": "PlayersHouse_1F_EventScript_Mom",
       "flag": "FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_MOM"
     },
     {
@@ -37,7 +37,7 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "LittlerootTown_BrendansHouse_1F_EventScript_292ACD",
+      "script": "PlayersHouse_1F_EventScript_Vigoroth2",
       "flag": "FLAG_HIDE_LITTLEROOT_TOWN_PLAYERS_HOUSE_VIGOROTH_2"
     },
     {
@@ -50,7 +50,7 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "LittlerootTown_BrendansHouse_1F_EventScript_292ABA",
+      "script": "PlayersHouse_1F_EventScript_Vigoroth1",
       "flag": "FLAG_HIDE_LITTLEROOT_TOWN_PLAYERS_HOUSE_VIGOROTH_1"
     },
     {
@@ -63,7 +63,7 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "LittlerootTown_BrendansHouse_1F_EventScript_1F89F3",
+      "script": "RivalsHouse_1F_EventScript_RivalMom",
       "flag": "FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_RIVAL_MOM"
     },
     {
@@ -89,7 +89,7 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "LittlerootTown_BrendansHouse_1F_EventScript_1F8A3D",
+      "script": "RivalsHouse_1F_EventScript_RivalSibling",
       "flag": "FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_RIVAL_SIBLING"
     },
     {
@@ -137,7 +137,7 @@
       "elevation": 0,
       "var": "VAR_LITTLEROOT_INTRO_STATE",
       "var_value": "4",
-      "script": "LittlerootTown_BrendansHouse_1F_EventScript_1F78A3"
+      "script": "LittlerootTown_BrendansHouse_1F_EventScript_GoSeeRoom"
     },
     {
       "type": "trigger",
@@ -146,7 +146,7 @@
       "elevation": 0,
       "var": "VAR_LITTLEROOT_RIVAL_STATE",
       "var_value": "2",
-      "script": "LittlerootTown_BrendansHouse_1F_EventScript_1F78BE"
+      "script": "LittlerootTown_BrendansHouse_1F_EventScript_MeetRival0"
     },
     {
       "type": "trigger",
@@ -155,7 +155,7 @@
       "elevation": 0,
       "var": "VAR_LITTLEROOT_RIVAL_STATE",
       "var_value": "2",
-      "script": "LittlerootTown_BrendansHouse_1F_EventScript_1F78CA"
+      "script": "LittlerootTown_BrendansHouse_1F_EventScript_MeetRival1"
     },
     {
       "type": "trigger",
@@ -164,7 +164,7 @@
       "elevation": 0,
       "var": "VAR_LITTLEROOT_RIVAL_STATE",
       "var_value": "2",
-      "script": "LittlerootTown_BrendansHouse_1F_EventScript_1F78D6"
+      "script": "LittlerootTown_BrendansHouse_1F_EventScript_MeetRival2"
     }
   ],
   "bg_events": []

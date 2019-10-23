@@ -36,12 +36,12 @@ EventScript_27EE8A:: @ 827EE8A
 	end
 
 EventScript_27EE9A:: @ 827EE9A
-	msgbox LittlerootTown_BrendansHouse_1F_Text_1F7F0F, MSGBOX_DEFAULT
+	msgbox PlayersHouse_1F_Text_TheresAMovieOnTV, MSGBOX_DEFAULT
 	releaseall
 	end
 
 EventScript_27EEA4:: @ 827EEA4
-	msgbox LittlerootTown_BrendansHouse_1F_Text_1F826F, MSGBOX_DEFAULT
+	msgbox PlayersHouse_1F_Text_LatiEmergencyNewsFlash, MSGBOX_DEFAULT
 	@ This is a junk call. Its input var (VAR_0x8004) hasn't been set, and
 	@ It's called again when Mom actually asks for the color, overwriting
 	@ whatever it does here.
