@@ -12,7 +12,7 @@ void sub_80EE35C(u16 foeSpecies, u16 species, u8 moveIdx, const u16 *movePtr, u1
 void sub_80EE8C8(u16 winStreak, u8 facility);
 void DoTVShow(void);
 void DoTVShowInSearchOfTrainers(void);
-void sub_80EDCE8(void);
+void TryPutTreasureInvestigatorsOnAir(void);
 void sub_80EE2CC(void);
 void sub_80EE72C(void);
 void IncrementDailyPlantedBerries(void);

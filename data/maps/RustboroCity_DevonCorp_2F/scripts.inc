@@ -185,7 +185,7 @@ RustboroCity_DevonCorp_2F_EventScript_211A96:: @ 8211A96
 	end
 
 RustboroCity_DevonCorp_2F_EventScript_211AB9:: @ 8211AB9
-	call RustboroCity_DevonCorp_2F_EventScript_2737A0
+	call Common_EventScript_TransferredToPC
 	goto RustboroCity_DevonCorp_2F_EventScript_211AD7
 	end
 
@@ -234,7 +234,7 @@ RustboroCity_DevonCorp_2F_EventScript_211B39:: @ 8211B39
 	end
 
 RustboroCity_DevonCorp_2F_EventScript_211B5C:: @ 8211B5C
-	call RustboroCity_DevonCorp_2F_EventScript_2737A0
+	call Common_EventScript_TransferredToPC
 	goto RustboroCity_DevonCorp_2F_EventScript_211B7A
 	end
 

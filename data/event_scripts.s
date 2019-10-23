@@ -1075,7 +1075,7 @@ gText_ThankYouForAccessingMysteryGift:: @ 8273178
 	.string "Thank you for accessing the\n"
 	.string "Mystery Gift System.$"
 
-gText_PlayerFoundOneItemTwoLines:: @ 82731A9
+gText_PlayerFoundOneTMHM:: @ 82731A9
 	.string "{PLAYER} found one {STR_VAR_1}\n"
 	.string "{STR_VAR_2}!$"
 
