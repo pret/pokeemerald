@@ -35,7 +35,7 @@
       "movement_range_y": 0,
       "trainer_type": "1",
       "trainer_sight_or_berry_tree_id": "3",
-      "script": "Route106_EventScript_1EE493",
+      "script": "Route106_EventScript_Douglas",
       "flag": "0"
     },
     {
@@ -48,7 +48,7 @@
       "movement_range_y": 0,
       "trainer_type": "1",
       "trainer_sight_or_berry_tree_id": "3",
-      "script": "Route106_EventScript_1EE4AA",
+      "script": "Route106_EventScript_Kyla",
       "flag": "0"
     },
     {
@@ -61,7 +61,7 @@
       "movement_range_y": 0,
       "trainer_type": "1",
       "trainer_sight_or_berry_tree_id": "4",
-      "script": "Route106_EventScript_1EE4C1",
+      "script": "Route106_EventScript_Elliot",
       "flag": "0"
     },
     {
@@ -74,7 +74,7 @@
       "movement_range_y": 0,
       "trainer_type": "1",
       "trainer_sight_or_berry_tree_id": "3",
-      "script": "Route106_EventScript_1EE523",
+      "script": "Route106_EventScript_Ned",
       "flag": "0"
     },
     {
@@ -132,7 +132,7 @@
       "y": 13,
       "elevation": 3,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "Route106_EventScript_1EE48A"
+      "script": "Route106_EventScript_TrainerTipsSign"
     }
   ]
 }
