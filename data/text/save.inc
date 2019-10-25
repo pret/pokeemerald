@@ -32,4 +32,3 @@ gText_SaveError::
 gText_SavingDontTurnOffPower::
 	.string "포켓몬 리포트를 작성하고 있습니다\n"
 	.string "전원을 끄지 않도록 해주십시오$"
-	.string "테스트용$"
