@@ -139,23 +139,23 @@ Route123_BerryMastersHouse_Text_2A761B:
 Route123_BerryMastersHouse_Text_2A7682:
 	.string "아...$"
 
-Route104_PrettyPetalFlowerShop_Text_2A7686:
+Route104_PrettyPetalFlowerShop_Text_ThisIsPrettyPetalFlowerShop:
 	.string "안녕하세요!\p"
 	.string "꽃을 온 세상에 퍼뜨리는\n"
 	.string "플라워숍 꽃잎 화원입니다!$"
 
-Route104_PrettyPetalFlowerShop_Text_2A76D9:
+Route104_PrettyPetalFlowerShop_Text_LearnAboutBerries:
 	.string "{PLAYER}\n"
 	.string "나무열매에 대해 알고 싶어?$"
 
-Route104_PrettyPetalFlowerShop_Text_2A7706:
+Route104_PrettyPetalFlowerShop_Text_IntroLearnAboutBerries:
 	.string "당신의 이름은...\p"
 	.string "{PLAYER}(이)구나!\n"
 	.string "정말 좋은 이름이네!\p"
 	.string "{PLAYER}\n"
 	.string "나무열매에 대해 알고 싶어?$"
 
-Route104_PrettyPetalFlowerShop_Text_2A775B:
+Route104_PrettyPetalFlowerShop_Text_BerriesExplanation:
 	.string "나무열매는 말이지 푹신푹신한\n"
 	.string "흙에서 어쩌다가 가끔 딸 수 있어\l"
 	.string "그리고...\p"
@@ -170,11 +170,11 @@ Route104_PrettyPetalFlowerShop_Text_2A775B:
 	.string "그러니까 {PLAYER}도 나무열매를 심어서\n"
 	.string "온 세상에 꽃을 퍼뜨려줘!$"
 
-Route104_PrettyPetalFlowerShop_Text_2A78DF:
+Route104_PrettyPetalFlowerShop_Text_FlowersBringHappiness:
 	.string "꽃은 정말 행복한 기분으로\n"
 	.string "만들어 주는 거 같아$"
 
-Route104_PrettyPetalFlowerShop_Text_2A7916:
+Route104_PrettyPetalFlowerShop_Text_YouCanHaveThis:
 	.string "안녕!\p"
 	.string "꽃은 진심을 담아 돌보면\n"
 	.string "꽃도 예쁘게 피고\l"
@@ -182,7 +182,7 @@ Route104_PrettyPetalFlowerShop_Text_2A7916:
 	.string "너도 돌보고 싶어졌지?\n"
 	.string "이거 줄게$"
 
-Route104_PrettyPetalFlowerShop_Text_2A79A6:
+Route104_PrettyPetalFlowerShop_Text_WailmerPailExplanation:
 	.string "나무열매가 자랄 때마다\n"
 	.string "물뿌리개로 물을 주도록 해!\p"
 	.string "그리고\p"
@@ -193,12 +193,12 @@ Route104_PrettyPetalFlowerShop_Text_2A79A6:
 	.string "정말 대단하지 않아?\n"
 	.string "생명의 힘이 느껴져$"
 
-Route104_PrettyPetalFlowerShop_Text_2A7A98:
+Route104_PrettyPetalFlowerShop_Text_ImGrowingFlowers:
 	.string "언니들을 본받아서\n"
 	.string "열심히 꽃을 키우고 있어\p"
 	.string "자! 이거 줄게!$"
 
-Route104_PrettyPetalFlowerShop_Text_2A7AF3:
+Route104_PrettyPetalFlowerShop_Text_MachineMixesBerries:
 	.string "나무열매는 심어서\n"
 	.string "다시 자라게 하거나\l"
 	.string "포켓몬한테 지니게 할 수 있어!\p"

@@ -427,386 +427,386 @@ Route104_Text_295CD3:
 	.string "이름에 킹이라고 들어가 있는데\n"
 	.string "무지 약하잖아$"
 
-Route105_Text_295D0F:
+Route105_Text_FosterIntro:
 	.string "이 근처에\n"
 	.string "이상한 바위가 있다는데\l"
 	.string "넌 뭐 아는 거 없나?$"
 
-Route105_Text_295D62:
+Route105_Text_FosterDefeated:
 	.string "바위 생각만 하고 있었더니\n"
 	.string "포켓몬은 생각하지 못했군...$"
 
-Route105_Text_295DAB:
+Route105_Text_FosterPostBattle:
 	.string "멋진 바위는\n"
 	.string "몇 시간을 보고 있어도 질리지 않지...$"
 
-Route105_Text_295DF5:
+Route105_Text_LuisIntro:
 	.string "다행이야! 어린애가 물에\n"
 	.string "빠진 줄 알고 걱정했어!\p"
 	.string "멀쩡해 보이니 나랑 승부하자!$"
 
-Route105_Text_295E66:
+Route105_Text_LuisDefeated:
 	.string "꼬륵... 꼬륵...$"
 
-Route105_Text_295E72:
+Route105_Text_LuisPostBattle:
 	.string "해변 쪽으로 팔을 흔들면\n"
 	.string "그게 물에 빠졌다는 신호야!$"
 
-Route105_Text_295EB7:
+Route105_Text_DominikIntro:
 	.string "새파란 바다에서 헤엄치고 있으면\n"
 	.string "정말 기분 최고지!$"
 
-Route105_Text_295EEA:
+Route105_Text_DominikDefeated:
 	.string "졌다...\n"
 	.string "마음에 시퍼런 멍이 들었어...$"
 
-Route105_Text_295F08:
+Route105_Text_DominikPostBattle:
 	.string "바다가 파란 이유?!\p"
 	.string "잿빛도시에 있는 박물관에서\n"
 	.string "듣긴 들었는데\l"
 	.string "금방 잊어버렸다!$"
 
-Route105_Text_295F5C:
+Route105_Text_BeverlyIntro:
 	.string "물속에 들어오면 몸이 가벼워져서\n"
 	.string "왠지 날씬해진 것 같은 기분이 들어!$"
 
-Route105_Text_295FA0:
+Route105_Text_BeverlyDefeated:
 	.string "둥실둥실...$"
 
-Route105_Text_295FAE:
+Route105_Text_PostBattle:
 	.string "물속에서는 체중이\n"
 	.string "10분의 1 정도가 돼\p"
 	.string "그럼 지금 난...\n"
 	.string "안 돼! 내 몸무게가 들통 나고 말아!$"
 
-Route105_Text_296025:
+Route105_Text_ImaniIntro:
 	.string "파란 하늘...\n"
 	.string "넓은 바다...\l"
 	.string "정말 편하고 느긋해...$"
 
-Route105_Text_296059:
+Route105_Text_ImaniDefeated:
 	.string "느긋하게 있다가\n"
 	.string "져버렸어-!$"
 
-Route105_Text_296076:
+Route105_Text_ImaniPostBattle:
 	.string "“너랑 같이 있으면 편안해져”\n"
 	.string "라는 말을 듣고 싶어\p"
 	.string "후후후후...!$"
 
-Route105_Text_2960A9:
+Route105_Text_AndresIntro:
 	.string "바다는 분명히\n"
 	.string "우리가 모르는 비밀을\l"
 	.string "가지고 있을 거야$"
 
-Route105_Text_2960DB:
+Route105_Text_AndresDefeated:
 	.string "맞아...\n"
 	.string "난 승부를 잘 못해...$"
 
-Route105_Text_2960FA:
+Route105_Text_AndresPostBattle:
 	.string "바다에는 수많은 비밀들이\n"
 	.string "숨겨져 있을 거야\p"
 	.string "내가 몽땅 찾아내야지!$"
 
-Route105_Text_296159:
+Route105_Text_AndresRegister:
 	.string "나는 약하지만 너라면\n"
 	.string "기꺼이 날 등록해 주겠지?$"
 
-Route105_Text_29619E:
+Route105_Text_AndresRematchIntro:
 	.string "약하다고 했는데\n"
 	.string "진짜 이럴 거야?$"
 
-Route105_Text_2961DD:
+Route105_Text_AndresRematchDefeated:
 	.string "맞아...\n"
 	.string "어차피 이길 거라 생각도 안 했어$"
 
-Route105_Text_2961FE:
+Route105_Text_AndresRematchPostBattle:
 	.string "승부에선 약하지만\n"
 	.string "탐험하겠다는 마음만큼은\l"
 	.string "1등이지\p"
 	.string "기다려라 바다에 숨어있는 것들아!$"
 
-Route105_Text_29626F:
+Route105_Text_JosueIntro:
 	.string "평소에 안 하던 수영을 하니\n"
 	.string "몹시 힘드네 그러니\p"
 	.string "기분 전환을 위해 승부하자!$"
 
-Route105_Text_2962CB:
+Route105_Text_JosueDefeated:
 	.string "바다에서 승부해서 진거야$"
 
-Route105_Text_2962EC:
+Route105_Text_JosuePostBattle:
 	.string "하늘에서 했다면\n"
 	.string "내가 이겼을 거야$"
 
-Route106_Text_296327:
+Route106_Text_ElliotIntro:
 	.string "바다낚시와 민물낚시\n"
 	.string "넌 어느 쪽이 더 좋으냐?$"
 
-Route106_Text_29635C:
+Route106_Text_ElliotDefeated:
 	.string "마치 바다낚시와 같은\n"
 	.string "광활한 패배다!$"
 
-Route106_Text_29638C:
+Route106_Text_ElliotPostBattle:
 	.string "바다든 강이든 낚시는 최고다!\n"
 	.string "너도 그렇게 생각하지 않나?!$"
 
-Route106_Text_2963E3:
+Route106_Text_ElliotRegister:
 	.string "낚시도 좋고 승부도 좋다!\n"
 	.string "괜찮다면 다시 승부하지 않겠나?$"
 
-Route106_Text_29642E:
+Route106_Text_ElliotRematchIntro:
 	.string "포켓몬을 왕창 낚았다!\n"
 	.string "엄청난 승부를 펼쳐주마-!$"
 
-Route106_Text_296477:
+Route106_Text_ElliotRematchDefeated:
 	.string "또 광활한 패배다-!$"
 
-Route106_Text_296493:
+Route106_Text_ElliotRematchPostBattle:
 	.string "이기든 지든 포켓몬은 최고다!\n"
 	.string "너도 그렇게 생각하지 않나?!$"
 
-Route106_Text_2964D4:
+Route106_Text_NedIntro:
 	.string "다들 화장실에 가고 싶을 때는\n"
 	.string "어떻게 하는 걸까...?\p"
 	.string "화장실에 가 있는 동안 월척이\n"
 	.string "걸릴지도 모른다고 생각하면...$"
 
-Route106_Text_296553:
+Route106_Text_NedDefeated:
 	.string "화장실에 안 가고 참고 있어서\n"
 	.string "진 거야 분명히...$"
 
-Route106_Text_296588:
+Route106_Text_NedPostBattle:
 	.string "으앗! 월척을\n"
 	.string "낚을 수 있을 것 같은 예감이...!$"
 
-Route106_Text_2965BB:
+Route106_Text_DouglasIntro:
 	.string "음핫핫핫!\n"
 	.string "육지에서는 빨리 달릴 수 없지만\l"
 	.string "물속에서는 지지 않는다!$"
 
-Route106_Text_2965FD:
+Route106_Text_DouglasDefeated:
 	.string "제가 졌습니다-!$"
 
-Route106_Text_296608:
+Route106_Text_DouglasPostBattle:
 	.string "수영이라면\n"
 	.string "지지 않을 자신이 있는데...$"
 
-Route106_Text_296628:
+Route106_Text_KylaIntro:
 	.string "바다는 내 구역이나 마찬가지야!\n"
 	.string "어린애라고 봐주지 않겠어!$"
 
-Route106_Text_296674:
+Route106_Text_KylaDefeated:
 	.string "설마\n"
 	.string "정말 안 봐준 거야?$"
 
-Route106_Text_29669E:
+Route106_Text_KylaPostBattle:
 	.string "흔들리는 파도에\n"
 	.string "몸을 싣고 떠도는 게 좋아\p"
 	.string "너도 해볼래?$"
 
-Route107_Text_2966E5:
+Route107_Text_DarrinIntro:
 	.string "흠냐흠냐...\p"
 	.string "적당한 파도에 몸을 맡겼더니\n"
 	.string "기분이 좋아서 깜빡 졸고 말았군!$"
 
-Route107_Text_29672F:
+Route107_Text_DarrinDefeated:
 	.string "아하하... 졌다...\n"
 	.string "다시 잠이나 자야겠어...$"
 
-Route107_Text_29675B:
+Route107_Text_DarrinPostBattle:
 	.string "바다 위에 떠서 파도에 몸을 맡기면\n"
 	.string "꼭 푹신푹신한 침대 위에\l"
 	.string "누워 있는 느낌이야!$"
 
-Route107_Text_2967AD:
+Route107_Text_TonyIntro:
 	.string "바다는 내 구역이나 마찬가지다!\n"
 	.string "승부하자!$"
 
-Route107_Text_2967D8:
+Route107_Text_TonyDefeated:
 	.string "홈그라운드에서 져버리다니...\n"
 	.string "쇼크다!$"
 
-Route107_Text_2967FF:
+Route107_Text_TonyPostBattle:
 	.string "커다란 꿈을 가득 채우고-\n"
 	.string "드넓은 바다를 한번 헤엄쳐 볼까-?\p"
 	.string "자 그럼!\n"
 	.string "계속 헤엄치는 거다!$"
 
-Route107_Text_29685A:
+Route107_Text_TonyRegister:
 	.string "뼛속까지 충격이다!\n"
 	.string "널 절대 잊지 않겠어...$"
 
-Route107_Text_296897:
+Route107_Text_TonyRematchIntro:
 	.string "드넓은 바다를 헤엄치고 있었더니\n"
 	.string "포켓몬이 엄청 강해졌다!$"
 
-Route107_Text_2968D5:
+Route107_Text_TonyRematchDefeated:
 	.string "쇼크다!!\p"
 	.string "포켓몬은 강해졌지만\n"
 	.string "정작 트레이너인 난 약한 그대로인 건가?!$"
 
-Route107_Text_296923:
+Route107_Text_TonyRematchPostBattle:
 	.string "배틀 속에서 익힌 모든 것들이\n"
 	.string "트레이너의 실력으로 이어진다!\l"
 	.string "드넓은 바다가 그렇게 말했다고-!$"
 
-Route107_Text_296974:
+Route107_Text_DeniseIntro:
 	.string "무로마을이라는\n"
 	.string "작은 마을을 알고 있니?$"
 
-Route107_Text_29699E:
+Route107_Text_DeniseDefeated:
 	.string "아 정말 이게 뭐야-!$"
 
-Route107_Text_2969AB:
+Route107_Text_DenisePostBattle:
 	.string "무로마을에 있는 무로집회소에서\n"
 	.string "이상한 말이 유행하고 있어!$"
 
-Route107_Text_2969E4:
+Route107_Text_BethIntro:
 	.string "나랑 승부하고 싶은 거야?\n"
 	.string "좋아! 상대해 줄게!$"
 
-Route107_Text_296A17:
+Route107_Text_BethDefeated:
 	.string "나는 전혀 상대가 안 되는구나!$"
 
-Route107_Text_296A35:
+Route107_Text_BethPostBattle:
 	.string "넌 앞으로도 계속 강해질 것 같아\n"
 	.string "나도 열심히 해야지!$"
 
-Route107_Text_296A77:
+Route107_Text_LisaIntro:
 	.string "유미: 우리 남매 둘이서\n"
 	.string "상대해줄게!$"
 
-Route107_Text_296AA7:
+Route107_Text_LisaDefeated:
 	.string "유미: 굉장해\n"
 	.string "레벨이 다른 실력이야$"
 
-Route107_Text_296ADC:
+Route107_Text_LisaPostBattle:
 	.string "유미: 넌 같이 바다로\n"
 	.string "놀러 갈 만한\l"
 	.string "친구가 있니?$"
 
-Route107_Text_296B1E:
+Route107_Text_LisaNotEnoughPokemon:
 	.string "유미: 우리랑 승부할 거면\n"
 	.string "포켓몬을 더 데려오라고$"
 
-Route107_Text_296B57:
+Route107_Text_RayIntro:
 	.string "빈: 항상 둘이서\n"
 	.string "포켓몬 승부를 하고 있어!\p"
 	.string "...항상 내가 지고 있지만\n"
 	.string "2대 2라면 널 이길 수 있어!$"
 
-Route107_Text_296BB3:
+Route107_Text_RayDefeated:
 	.string "빈: 으아-\n"
 	.string "레벨이 달라도 너무 다르다$"
 
-Route107_Text_296BE1:
+Route107_Text_RayPostBattle:
 	.string "빈: 누나한테 받아서 키운\n"
 	.string "내 포켓몬은\l"
 	.string "나의 소중한 파트너야!$"
 
-Route107_Text_296C34:
+Route107_Text_RayNotEnoughPokemon:
 	.string "빈: 우리랑 승부하고 싶으면\n"
 	.string "포켓몬을 더 데려와!$"
 
-Route107_Text_296C6F:
+Route107_Text_CamronIntro:
 	.string "트라이애슬론 중반이지만\n"
 	.string "난 전혀 피곤하지 않아!$"
 
-Route107_Text_296CAD:
+Route107_Text_CamronDefeated:
 	.string "갑자기 피곤해졌어...$"
 
-Route107_Text_296CC0:
+Route107_Text_CamronPostBattle:
 	.string "아직 수영이랑 달리기가\n"
 	.string "남아있어\p"
 	.string "나 괜찮겠지?$"
 
-Route108_Text_296D10:
+Route108_Text_JeromeIntro:
 	.string "내 꿈은 전 세계에 있는\n"
 	.string "7곳의 모든 바다에서\l"
 	.string "헤엄치는 거야!!$"
 
-Route108_Text_296D3C:
+Route108_Text_JeromeDefeated:
 	.string "이래서는\n"
 	.string "7곳의 모든 바다를 헤엄칠 수 없어...$"
 
-Route108_Text_296D6E:
+Route108_Text_JeromePostBattle:
 	.string "바다 포켓몬과 노는 것도\n"
 	.string "헤엄치고 있을 때의\l"
 	.string "즐거움 중 하나야!$"
 
-Route108_Text_296DAF:
+Route108_Text_MatthewIntro:
 	.string "이봐 너!\n"
 	.string "너도 버려진 배에 가는 거야?$"
 
-Route108_Text_296DEA:
+Route108_Text_MatthewDefeated:
 	.string "가라앉는다!\n"
 	.string "꼬륵... 꼬륵...$"
 
-Route108_Text_296E03:
+Route108_Text_MatthewPostBattle:
 	.string "어떤 사람들은 버려진 배 안으로\n"
 	.string "들어가기까지 해!$"
 
-Route108_Text_296E33:
+Route108_Text_TaraIntro:
 	.string "거짓말쟁이 그 사람이 말했었어...\n"
 	.string "비키니 입은 모습이\l"
 	.string "정말 예쁘다고...$"
 
-Route108_Text_296E71:
+Route108_Text_TaraDefeated:
 	.string "싫어- 져버렸어-!$"
 
-Route108_Text_296E7A:
+Route108_Text_TaraPostBattle:
 	.string "거짓말이라도\n"
 	.string "예쁘다는 말을 듣고 싶은\l"
 	.string "복잡한 여자의 마음...$"
 
-Route108_Text_296EC7:
+Route108_Text_MissyIntro:
 	.string "바다가 너무 좋아!\n"
 	.string "헤엄치고 있으면\l"
 	.string "슬픈 일들을 잊어버릴 수 있어!$"
 
-Route108_Text_296EFC:
+Route108_Text_MissyDefeated:
 	.string "승부에서 지면\n"
 	.string "스트레스가 쌓여-!$"
 
-Route108_Text_296F2A:
+Route108_Text_MissyPostBattle:
 	.string "스트레스는 수영으로 발산할 거야!\n"
 	.string "건강에도 최고지-!$"
 
-Route108_Text_296F5D:
+Route108_Text_CoryIntro:
 	.string "물타입 포켓몬도 좋고\n"
 	.string "다른 포켓몬도 좋다!$"
 
-Route108_Text_296F93:
+Route108_Text_CoryDefeated:
 	.string "와하하핫! 졌군!\n"
 	.string "와하하하하하핫!$"
 
-Route108_Text_296FB0:
+Route108_Text_CoryPostBattle:
 	.string "소리치니 개운하구나!\n"
 	.string "기분 좋다!$"
 
-Route108_Text_296FD8:
+Route108_Text_CoryRegister:
 	.string "터프한 트레이너도 좋다!\n"
 	.string "포켓내비에 등록하자!$"
 
-Route108_Text_297011:
+Route108_Text_CoryRematchIntro:
 	.string "이기든 지든\n"
 	.string "바다에서 승부하는 건 좋다!$"
 
-Route108_Text_297036:
+Route108_Text_CoryRematchDefeated:
 	.string "와하하핫! 또 졌군!\n"
 	.string "와하하하하하핫!$"
 
-Route108_Text_297059:
+Route108_Text_CoryRematchPostBattle:
 	.string "고난에 부딪쳤다면\n"
 	.string "바다를 향해 소리쳐봐라!$"
 
-Route108_Text_297094:
+Route108_Text_CarolinaIntro:
 	.string "내 포켓몬은 자랑스러워\n"
 	.string "우리의 스피드를 보여줄게!$"
 
-Route108_Text_2970D7:
+Route108_Text_CarolinaDefeated:
 	.string "전혀 빠르지 않았어...$"
 
-Route108_Text_2970F0:
+Route108_Text_CarolinaPostBattle:
 	.string "이렇게 바다에 있으니까\n"
 	.string "수영복이 입고 싶어졌어...$"
 
