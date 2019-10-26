@@ -799,206 +799,206 @@ Route108_Text_CarolinaPostBattle: @ 82970F0
 	.string "Since I'm at sea like this, I wouldn't\n"
 	.string "mind putting on a pink, frilly swimsuit…$"
 
-Route109_Text_297140: @ 8297140
+Route109_Text_DavidIntro: @ 8297140
 	.string "Hiyah! Look at my chiseled abs!\n"
 	.string "This is what you call “cut”!$"
 
-Route109_Text_29717D: @ 829717D
+Route109_Text_DavidDefeated: @ 829717D
 	.string "Aiyah!\n"
 	.string "Flubbed out!$"
 
-Route109_Text_297191: @ 8297191
+Route109_Text_DavidPostBattle: @ 8297191
 	.string "Hiyah!\p"
 	.string "My sculpted abs have nothing to do\n"
 	.string "with POKéMON battles!$"
 
-Route109_Text_2971D1: @ 82971D1
+Route109_Text_AliceIntro: @ 82971D1
 	.string "Are you properly protected against\n"
 	.string "the sun?$"
 
-Route109_Text_2971FD: @ 82971FD
+Route109_Text_AliceDefeated: @ 82971FD
 	.string "Ouch, ouch, ouch!$"
 
-Route109_Text_29720F: @ 829720F
+Route109_Text_AlicePostBattle: @ 829720F
 	.string "Cheeks are the most prone to burning!$"
 
-Route109_Text_297235: @ 8297235
+Route109_Text_HueyIntro: @ 8297235
 	.string "I've laid anchor in ports around\n"
 	.string "the world, but SLATEPORT's the best.$"
 
-Route109_Text_29727B: @ 829727B
+Route109_Text_HueyDefeated: @ 829727B
 	.string "You're the best!$"
 
-Route109_Text_29728C: @ 829728C
+Route109_Text_HueyPostBattle: @ 829728C
 	.string "In the best port was the best\n"
 	.string "TRAINER…$"
 
-Route109_Text_2972B3: @ 82972B3
+Route109_Text_EdmondIntro: @ 82972B3
 	.string "Urrrrppp…\n"
 	.string "Battle? With me?$"
 
-Route109_Text_2972CE: @ 82972CE
+Route109_Text_EdmondDefeated: @ 82972CE
 	.string "Urp… Ooooooohhhhhh…\n"
 	.string "Urrrrpppp…$"
 
-Route109_Text_2972ED: @ 82972ED
+Route109_Text_EdmondPostBattle: @ 82972ED
 	.string "I'm usually stronger than this!\n"
 	.string "I'm just seasick as a dog!\p"
 	.string "I'm a SAILOR, but…$"
 
-Route109_Text_29733B: @ 829733B
+Route109_Text_RickyIntro: @ 829733B
 	.string "I'm thirsty… I could go for a SODA POP\n"
 	.string "at the SEASHORE HOUSE…$"
 
-Route109_Text_297379: @ 8297379
+Route109_Text_RickyDefeated: @ 8297379
 	.string "Groan…$"
 
-Route109_Text_297380: @ 8297380
+Route109_Text_RickyPostBattle: @ 8297380
 	.string "I'm getting famished… My inner tube\n"
 	.string "looks like a giant doughnut…$"
 
-Route109_Text_2973C1: @ 82973C1
+Route109_Text_RickyRegister: @ 82973C1
 	.string "Will you have another match with me\n"
 	.string "when I'm not all thirsty?$"
 
-Route109_Text_2973FF: @ 82973FF
+Route109_Text_RickyRematchIntro: @ 82973FF
 	.string "I'm hungry, but I've got enough pep in\n"
 	.string "me for a battle!$"
 
-Route109_Text_297437: @ 8297437
+Route109_Text_RickyRematchDefeated: @ 8297437
 	.string "I lost…\n"
 	.string "It's because I'm hungry…$"
 
-Route109_Text_297458: @ 8297458
+Route109_Text_RickyRematchPostBattle: @ 8297458
 	.string "When you eat on a beach, everything\n"
 	.string "seems to taste a little better.$"
 
-Route109_Text_29749C: @ 829749C
+Route109_Text_LolaIntro: @ 829749C
 	.string "Doesn't a beach umbrella look like\n"
 	.string "a giant flower?$"
 
-Route109_Text_2974CF: @ 82974CF
+Route109_Text_LolaDefeated: @ 82974CF
 	.string "Mommy!$"
 
-Route109_Text_2974D6: @ 82974D6
+Route109_Text_LolaPostBattle: @ 82974D6
 	.string "If you look at the beach from the sky,\n"
 	.string "it looks like a big flower garden!$"
 
-Route109_Text_297520: @ 8297520
+Route109_Text_LolaRegister: @ 8297520
 	.string "Me?\n"
 	.string "I'm here every day!$"
 
-Route109_Text_297538: @ 8297538
+Route109_Text_LolaRematchIntro: @ 8297538
 	.string "I'm not losing to you again!\n"
 	.string "That's why I have my inner tube!$"
 
-Route109_Text_297576: @ 8297576
+Route109_Text_LolaRematchDefeated: @ 8297576
 	.string "Mommy!$"
 
-Route109_Text_29757D: @ 829757D
+Route109_Text_LolaRematchPostBattle: @ 829757D
 	.string "If I have an inner tube, me and my\n"
 	.string "POKéMON's cuteness goes way up!$"
 
-Route109_Text_2975C0: @ 82975C0
+Route109_Text_AustinaIntro: @ 82975C0
 	.string "I can't swim without my inner tube,\n"
 	.string "but I won't lose at POKéMON!$"
 
-Route109_Text_297601: @ 8297601
+Route109_Text_AustinaDefeated: @ 8297601
 	.string "Did I lose because I have an inner\n"
 	.string "tube?$"
 
-Route109_Text_29762A: @ 829762A
+Route109_Text_AustinaPostBattle: @ 829762A
 	.string "My inner tube is a fashion item.\n"
 	.string "I can't be seen without it.$"
 
-Route109_Text_297667: @ 8297667
+Route109_Text_GwenIntro: @ 8297667
 	.string "Hi, big TRAINER.\n"
 	.string "Will you battle with me?$"
 
-Route109_Text_297691: @ 8297691
+Route109_Text_GwenDefeated: @ 8297691
 	.string "Oh, you're strong.$"
 
-Route109_Text_2976A4: @ 82976A4
+Route109_Text_GwenPostBattle: @ 82976A4
 	.string "How did you get to be so strong?$"
 
-Route109_Text_2976C5: @ 82976C5
+Route109_Text_CarterIntro: @ 82976C5
 	.string "Wahahah! This dude's going to catch\n"
 	.string "himself a big one!$"
 
-Route109_Text_2976FC: @ 82976FC
+Route109_Text_CarterDefeated: @ 82976FC
 	.string "This dude just lost one…$"
 
-Route109_Text_297715: @ 8297715
+Route109_Text_CarterPostBattle: @ 8297715
 	.string "This dude thinks you're a big one.\n"
 	.string "No, you're a big-one-to-be!$"
 
-Route109_Text_297754: @ 8297754
+Route109_Text_PaulIntro: @ 8297754
 	.string "PAUL: Well, this is a mood-breaker.\p"
 	.string "I wish you wouldn't disturb our\n"
 	.string "precious time together.$"
 
-Route109_Text_2977B0: @ 82977B0
+Route109_Text_PaulDefeated: @ 82977B0
 	.string "PAUL: Well, I give up.$"
 
-Route109_Text_2977C7: @ 82977C7
+Route109_Text_PaulPostBattle: @ 82977C7
 	.string "PAUL: Well, don't tell anyone that\n"
 	.string "we're here.\l"
 	.string "This is just our private world of two!$"
 
-Route109_Text_29781D: @ 829781D
+Route109_Text_PaulNotEnoughPokemon: @ 829781D
 	.string "PAUL: We're totally, deeply in love.\n"
 	.string "That's why we make our POKéMON battle\l"
 	.string "together.$"
 
-Route109_Text_297872: @ 8297872
+Route109_Text_MelIntro: @ 8297872
 	.string "MEL: We're, like, totally in love.\n"
 	.string "Our romance is heating up all of HOENN!$"
 
-Route109_Text_2978BD: @ 82978BD
+Route109_Text_MelDefeated: @ 82978BD
 	.string "MEL: We lost, and it's my fault!\n"
 	.string "PAUL will hate me!$"
 
-Route109_Text_2978F1: @ 82978F1
+Route109_Text_MelPostBattle: @ 82978F1
 	.string "MEL: Um, PAUL, are you angry with me?\n"
 	.string "Please don't be angry.$"
 
-Route109_Text_29792E: @ 829792E
+Route109_Text_MelNotEnoughPokemon: @ 829792E
 	.string "MEL: We're, like, deeply and truly in love.\n"
 	.string "That's why we make our POKéMON\l"
 	.string "battle together.$"
 
-Route109_Text_29798A: @ 829798A
+Route109_Text_ChandlerIntro: @ 829798A
 	.string "Tadaah! See?\n"
 	.string "My inner tube's round!$"
 
-Route109_Text_2979AE: @ 82979AE
+Route109_Text_ChandlerDefeated: @ 82979AE
 	.string "Oh, oh!\n"
 	.string "Too bad!$"
 
-Route109_Text_2979BF: @ 82979BF
+Route109_Text_ChandlerPostBattle: @ 82979BF
 	.string "After I showed you my round inner\n"
 	.string "tube, too…$"
 
-Route109_Text_2979EC: @ 82979EC
+Route109_Text_HaileyIntro: @ 82979EC
 	.string "I can't swim, so I'm pretending\n"
 	.string "to swim.$"
 
-Route109_Text_297A15: @ 8297A15
+Route109_Text_HaileyDefeated: @ 8297A15
 	.string "I thought so!\n"
 	.string "I didn't think we could win.$"
 
-Route109_Text_297A40: @ 8297A40
+Route109_Text_HaileyPostBattle: @ 8297A40
 	.string "When I learn how to swim, I think\n"
 	.string "my POKéMON will become tougher.$"
 
-Route109_Text_297A82: @ 8297A82
+Route109_Text_ElijahIntro: @ 8297A82
 	.string "For a guy as macho as me, this kind\n"
 	.string "of POKéMON is the perfect match!$"
 
-Route109_Text_297AC7: @ 8297AC7
+Route109_Text_ElijahDefeated: @ 8297AC7
 	.string "I'm cool even in defeat, hey?$"
 
-Route109_Text_297AE5: @ 8297AE5
+Route109_Text_ElijahPostBattle: @ 8297AE5
 	.string "For a guy as macho as me, a port\n"
 	.string "is the perfect setting!\p"
 	.string "I guess I'll head for SLATEPORT.$"

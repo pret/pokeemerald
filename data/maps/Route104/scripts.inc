@@ -418,17 +418,17 @@ Route104_EventScript_1ED139:: @ 81ED139
 	resetobjectpriority 2, MAP_DEWFORD_TOWN
 	copyobjectxytoperm 2
 	setvar VAR_BOARD_BRINEY_BOAT_STATE, 0
-	goto_if_unset FLAG_DELIVERED_STEVEN_LETTER, Route104_EventScript_1ED1B4
-	goto_if_set FLAG_DELIVERED_STEVEN_LETTER, Route104_EventScript_1ED1BE
+	goto_if_unset FLAG_DELIVERED_STEVEN_LETTER, Route104_EventScript_DeliverLetterReminder
+	goto_if_set FLAG_DELIVERED_STEVEN_LETTER, Route104_EventScript_LandedInDewford
 	end
 
-Route104_EventScript_1ED1B4:: @ 81ED1B4
-	msgbox Route104_Text_1E9AAF, MSGBOX_DEFAULT
+Route104_EventScript_DeliverLetterReminder:: @ 81ED1B4
+	msgbox Route104_Text_LandedInDewfordDeliverLetter, MSGBOX_DEFAULT
 	releaseall
 	end
 
-Route104_EventScript_1ED1BE:: @ 81ED1BE
-	msgbox Route104_Text_1E9C1D, MSGBOX_DEFAULT
+Route104_EventScript_LandedInDewford:: @ 81ED1BE
+	msgbox DewfordTown_Text_BrineyLandedInDewford, MSGBOX_DEFAULT
 	releaseall
 	end
 
