@@ -2232,7 +2232,7 @@ BattleScript_EffectMemento::
 	waitanimation
 	jumpifstatus2 BS_TARGET, STATUS2_SUBSTITUTE, BattleScript_EffectMementoPrintNoEffect
 	setbyte sSTAT_ANIM_PLAYED, FALSE
-	playstatchangeanimation BS_TARGET, BIT_ATK | BIT_SPATK, STAT_CHANGE_NEGATIVE | STAT_CHANGE_BY_TWO | STAT_CHANGE_SKIP_NEXT_ANIM
+	playstatchangeanimation BS_TARGET, BIT_ATK | BIT_SPATK, STAT_CHANGE_NEGATIVE | STAT_CHANGE_BY_TWO | STAT_CHANGE_MULTIPLE_STATS
 	playstatchangeanimation BS_TARGET, BIT_ATK, STAT_CHANGE_NEGATIVE | STAT_CHANGE_BY_TWO
 	setstatchanger STAT_ATK, 2, TRUE
 	statbuffchange STAT_BUFF_ALLOW_PTR, BattleScript_EffectMementoTrySpAtk
@@ -2677,7 +2677,7 @@ BattleScript_TickleDoMoveAnim::
 	attackanimation
 	waitanimation
 	setbyte sSTAT_ANIM_PLAYED, FALSE
-	playstatchangeanimation BS_TARGET, BIT_ATK | BIT_DEF, STAT_CHANGE_NEGATIVE | STAT_CHANGE_SKIP_NEXT_ANIM
+	playstatchangeanimation BS_TARGET, BIT_ATK | BIT_DEF, STAT_CHANGE_NEGATIVE | STAT_CHANGE_MULTIPLE_STATS
 	playstatchangeanimation BS_TARGET, BIT_ATK, STAT_CHANGE_NEGATIVE
 	setstatchanger STAT_ATK, 1, TRUE
 	statbuffchange STAT_BUFF_ALLOW_PTR, BattleScript_TickleTryLowerDef
@@ -3635,15 +3635,15 @@ BattleScript_PrintMonIsRooted::
 
 BattleScript_AtkDefDown::
 	setbyte sSTAT_ANIM_PLAYED, FALSE
-	playstatchangeanimation BS_ATTACKER, BIT_DEF | BIT_ATK, STAT_CHANGE_IGNORE_ABILITY | STAT_CHANGE_NEGATIVE | STAT_CHANGE_SKIP_NEXT_ANIM
-	playstatchangeanimation BS_ATTACKER, BIT_ATK, STAT_CHANGE_IGNORE_ABILITY | STAT_CHANGE_NEGATIVE
+	playstatchangeanimation BS_ATTACKER, BIT_DEF | BIT_ATK, STAT_CHANGE_CANT_PREVENT | STAT_CHANGE_NEGATIVE | STAT_CHANGE_MULTIPLE_STATS
+	playstatchangeanimation BS_ATTACKER, BIT_ATK, STAT_CHANGE_CANT_PREVENT | STAT_CHANGE_NEGATIVE
 	setstatchanger STAT_ATK, 1, TRUE
 	statbuffchange MOVE_EFFECT_AFFECTS_USER | MOVE_EFFECT_CERTAIN | STAT_BUFF_ALLOW_PTR, BattleScript_82DB144
 	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, 0x2, BattleScript_82DB144
 	printfromtable gStatDownStringIds
 	waitmessage 0x40
 BattleScript_82DB144::
-	playstatchangeanimation BS_ATTACKER, BIT_DEF, STAT_CHANGE_IGNORE_ABILITY | STAT_CHANGE_NEGATIVE
+	playstatchangeanimation BS_ATTACKER, BIT_DEF, STAT_CHANGE_CANT_PREVENT | STAT_CHANGE_NEGATIVE
 	setstatchanger STAT_DEF, 1, TRUE
 	statbuffchange MOVE_EFFECT_AFFECTS_USER | MOVE_EFFECT_CERTAIN | STAT_BUFF_ALLOW_PTR, BattleScript_82DB167
 	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, 0x2, BattleScript_82DB167
@@ -3709,7 +3709,7 @@ BattleScript_OneHitKOMsg::
 
 BattleScript_SAtkDown2::
 	setbyte sSTAT_ANIM_PLAYED, FALSE
-	playstatchangeanimation BS_ATTACKER, BIT_SPATK, STAT_CHANGE_IGNORE_ABILITY | STAT_CHANGE_NEGATIVE | STAT_CHANGE_BY_TWO
+	playstatchangeanimation BS_ATTACKER, BIT_SPATK, STAT_CHANGE_CANT_PREVENT | STAT_CHANGE_NEGATIVE | STAT_CHANGE_BY_TWO
 	setstatchanger STAT_SPATK, 2, TRUE
 	statbuffchange MOVE_EFFECT_AFFECTS_USER | MOVE_EFFECT_CERTAIN | STAT_BUFF_ALLOW_PTR, BattleScript_SAtkDown2End
 	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, 0x2, BattleScript_SAtkDown2End

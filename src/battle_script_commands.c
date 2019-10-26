@@ -4393,7 +4393,7 @@ static void Cmd_playstatchangeanimation(void)
         {
             if (statsToCheck & 1)
             {
-                if (gBattlescriptCurrInstr[3] & STAT_CHANGE_IGNORE_ABILITY)
+                if (gBattlescriptCurrInstr[3] & STAT_CHANGE_CANT_PREVENT)
                 {
                     if (gBattleMons[gActiveBattler].statStages[currStat] > 0)
                     {
@@ -4452,7 +4452,7 @@ static void Cmd_playstatchangeanimation(void)
         }
     }
 
-    if (gBattlescriptCurrInstr[3] & STAT_CHANGE_SKIP_NEXT_ANIM && changeableStatsCount < 2)
+    if (gBattlescriptCurrInstr[3] & STAT_CHANGE_MULTIPLE_STATS && changeableStatsCount < 2)
     {
         gBattlescriptCurrInstr += 4;
     }
@@ -4460,7 +4460,7 @@ static void Cmd_playstatchangeanimation(void)
     {
         BtlController_EmitBattleAnimation(0, B_ANIM_STATS_CHANGE, statAnimId);
         MarkBattlerForControllerExec(gActiveBattler);
-        if (gBattlescriptCurrInstr[3] & STAT_CHANGE_SKIP_NEXT_ANIM && changeableStatsCount > 1)
+        if (gBattlescriptCurrInstr[3] & STAT_CHANGE_MULTIPLE_STATS && changeableStatsCount > 1)
             gBattleScripting.statAnimPlayed = TRUE;
         gBattlescriptCurrInstr += 4;
     }

@@ -99,8 +99,8 @@
 // stat change flags for Cmd_playstatchangeanimation
 #define STAT_CHANGE_NEGATIVE             0x1
 #define STAT_CHANGE_BY_TWO               0x2
-#define STAT_CHANGE_SKIP_NEXT_ANIM       0x4
-#define STAT_CHANGE_IGNORE_ABILITY       0x8
+#define STAT_CHANGE_MULTIPLE_STATS       0x4
+#define STAT_CHANGE_CANT_PREVENT         0x8
 
 // stat flags for Cmd_playstatchangeanimation
 #define BIT_HP                      0x1
