@@ -4,6 +4,8 @@
 #include "main.h"
 #include "task.h"
 
+// seems like the last two fields may have been left as all-purpose vars
+// and the second of the two just happens to only be used in one case
 struct PartyMenu
 {
     MainCallback exitCallback;
@@ -15,13 +17,13 @@ struct PartyMenu
     s8 slotId2;
     u8 action;
     u16 bagItem;
-    s16 unkE; // used as both a moveId and a move slot/cursor position
-    s16 learnMoveState;
+    s16 data1;           // used variously as a moveId, counter, moveSlotId, or cursorPos
+    s16 learnMoveState;  // data2, used only as a learn move state
 };
 
 extern struct PartyMenu gPartyMenu;
-extern bool8 gUnknown_0203CEE8;
-extern u8 gUnknown_0203CEE9;
+extern bool8 gPartyMenuUseExitCallback;
+extern u8 gSelectedMonPartyId;
 extern MainCallback gPostMenuFieldCallback;
 extern u8 gSelectedOrderFromParty[4];
 extern u8 gBattlePartyCurrentOrder[3];
@@ -71,9 +73,9 @@ void OpenPartyMenuInBattle(u8 arg);
 void ChooseMonForInBattleItem(void);
 void sub_81B8C68(void);
 void sub_81B8D64(u8 battlerId, u8 multiplayerFlag);
-void sub_81B8E80(u8 battlerId, u8 unk, u8 arrayIndex);
+void SwitchPartyOrderLinkMulti(u8 battlerId, u8 slot, u8 arrayIndex);
 void SwitchPartyMonSlots(u8 slot, u8 slot2);
-u8 GetBattlerPartyId(u8 slot);
+u8 GetPartyIdFromBattlePartyId(u8 slot);
 void ShowPartyMenuToShowcaseMultiBattleParty(void);
 void ChooseMonForDaycare(void);
 bool8 CB2_FadeFromPartyMenu(void);

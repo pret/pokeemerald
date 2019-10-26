@@ -1342,8 +1342,8 @@ static void WaitForMonSelection(void)
 {
     if (gMain.callback2 == BattleMainCB2 && !gPaletteFade.active)
     {
-        if (gUnknown_0203CEE8 == TRUE)
-            BtlController_EmitChosenMonReturnValue(1, gUnknown_0203CEE9, gBattlePartyCurrentOrder);
+        if (gPartyMenuUseExitCallback == TRUE)
+            BtlController_EmitChosenMonReturnValue(1, gSelectedMonPartyId, gBattlePartyCurrentOrder);
         else
             BtlController_EmitChosenMonReturnValue(1, PARTY_SIZE, NULL);
 

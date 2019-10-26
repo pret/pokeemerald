@@ -54,7 +54,7 @@
 #define PARTY_MENU_TYPE_CONTEST                   2 
 #define PARTY_MENU_TYPE_CHOOSE_MON                3 
 #define PARTY_MENU_TYPE_CHOOSE_HALF               4  // multi battles, eReader battles, and some battle facilities
-#define PARTY_MENU_TYPE_IN_MULTI_BATTLE           5  // TODO: investigate
+#define PARTY_MENU_TYPE_MULTI_SHOWCASE            5
 #define PARTY_MENU_TYPE_DAYCARE                   6 
 #define PARTY_MENU_TYPE_MOVE_RELEARNER            7 
 #define PARTY_MENU_TYPE_UNION_ROOM_REGISTER       8  // trading board

@@ -5434,7 +5434,7 @@ static void atk51_switchhandleorder(void)
         break;
     case 1:
         if (!(gBattleTypeFlags & BATTLE_TYPE_MULTI))
-            sub_803BDA0(gActiveBattler);
+            SwitchPartyOrder(gActiveBattler);
         break;
     case 2:
         if (!(gBattleStruct->field_93 & gBitTable[gActiveBattler]))
@@ -5459,11 +5459,11 @@ static void atk51_switchhandleorder(void)
         }
         else if (gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER)
         {
-            sub_80571DC(gActiveBattler, *(gBattleStruct->monToSwitchIntoId + gActiveBattler));
+            SwitchPartyOrderInGameMulti(gActiveBattler, *(gBattleStruct->monToSwitchIntoId + gActiveBattler));
         }
         else
         {
-            sub_803BDA0(gActiveBattler);
+            SwitchPartyOrder(gActiveBattler);
         }
 
         PREPARE_SPECIES_BUFFER(gBattleTextBuff1, gBattleMons[gBattlerAttacker].species)
@@ -7567,19 +7567,19 @@ static void atk8F_forcerandomswitch(void)
             *(gBattleStruct->monToSwitchIntoId + gBattlerTarget) = i;
 
             if (!IsMultiBattle())
-                sub_803BDA0(gBattlerTarget);
+                SwitchPartyOrder(gBattlerTarget);
 
             if ((gBattleTypeFlags & BATTLE_TYPE_LINK && gBattleTypeFlags & BATTLE_TYPE_BATTLE_TOWER)
                 || (gBattleTypeFlags & BATTLE_TYPE_LINK && gBattleTypeFlags & BATTLE_TYPE_MULTI)
                 || (gBattleTypeFlags & BATTLE_TYPE_x2000000 && gBattleTypeFlags & BATTLE_TYPE_BATTLE_TOWER)
                 || (gBattleTypeFlags & BATTLE_TYPE_x2000000 && gBattleTypeFlags & BATTLE_TYPE_MULTI))
             {
-                sub_81B8E80(gBattlerTarget, i, 0);
-                sub_81B8E80(gBattlerTarget ^ BIT_FLANK, i, 1);
+                SwitchPartyOrderLinkMulti(gBattlerTarget, i, 0);
+                SwitchPartyOrderLinkMulti(gBattlerTarget ^ BIT_FLANK, i, 1);
             }
 
             if (gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER)
-                sub_80571DC(gBattlerTarget, i);
+                SwitchPartyOrderInGameMulti(gBattlerTarget, i);
         }
     }
     else

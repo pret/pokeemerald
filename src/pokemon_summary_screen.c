@@ -2575,9 +2575,9 @@ static void DrawPokerusCuredSymbol(struct Pokemon *mon) // This checks if the mo
 static void SetDexNumberColor(bool8 isMonShiny)
 {
     if (!isMonShiny)
-        sub_8199C30(3, 1, 4, 8, 8, 0);
+        SetBgTilemapPalette(3, 1, 4, 8, 8, 0);
     else
-        sub_8199C30(3, 1, 4, 8, 8, 5);
+        SetBgTilemapPalette(3, 1, 4, 8, 8, 5);
     schedule_bg_copy_tilemap_to_vram(3);
 }
 

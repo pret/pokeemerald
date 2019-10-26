@@ -481,7 +481,7 @@ static void CB2_CreateTradeMenu(void)
         {
             struct Pokemon *mon = &gPlayerParty[i];
             sTradeMenuData->partySpriteIds[TRADE_PLAYER][i] = CreateMonIcon(GetMonData(mon, MON_DATA_SPECIES2),
-                                                         UpdateTradeMonIconFrame,
+                                                         MonIconSpriteCallback,
                                                          (sTradeMonSpriteCoords[i][0] * 8) + 14,
                                                          (sTradeMonSpriteCoords[i][1] * 8) - 12,
                                                          1,
@@ -493,7 +493,7 @@ static void CB2_CreateTradeMenu(void)
         {
             struct Pokemon *mon = &gEnemyParty[i];
             sTradeMenuData->partySpriteIds[TRADE_PARTNER][i] = CreateMonIcon(GetMonData(mon, MON_DATA_SPECIES2, NULL),
-                                                         UpdateTradeMonIconFrame,
+                                                         MonIconSpriteCallback,
                                                          (sTradeMonSpriteCoords[i + PARTY_SIZE][0] * 8) + 14,
                                                          (sTradeMonSpriteCoords[i + PARTY_SIZE][1] * 8) - 12,
                                                          1,
@@ -668,7 +668,7 @@ static void CB2_ReturnToTradeMenu(void)
         {
             struct Pokemon *mon = &gPlayerParty[i];
             sTradeMenuData->partySpriteIds[TRADE_PLAYER][i] = CreateMonIcon(GetMonData(mon, MON_DATA_SPECIES2, NULL),
-                                                         UpdateTradeMonIconFrame,
+                                                         MonIconSpriteCallback,
                                                          (sTradeMonSpriteCoords[i][0] * 8) + 14,
                                                          (sTradeMonSpriteCoords[i][1] * 8) - 12,
                                                          1,
@@ -680,7 +680,7 @@ static void CB2_ReturnToTradeMenu(void)
         {
             struct Pokemon *mon = &gEnemyParty[i];
             sTradeMenuData->partySpriteIds[TRADE_PARTNER][i] = CreateMonIcon(GetMonData(mon, MON_DATA_SPECIES2, NULL),
-                                                         UpdateTradeMonIconFrame,
+                                                         MonIconSpriteCallback,
                                                          (sTradeMonSpriteCoords[i + PARTY_SIZE][0] * 8) + 14,
                                                          (sTradeMonSpriteCoords[i + PARTY_SIZE][1] * 8) - 12,
                                                          1,
@@ -1809,7 +1809,7 @@ static void DrawTradeMenuParty(u8 whichParty)
         gSprites[sTradeMenuData->partySpriteIds[0][partyIdx + (selectedMonParty * PARTY_SIZE)]].data[0] = 20;
         gSprites[sTradeMenuData->partySpriteIds[0][partyIdx + (selectedMonParty * PARTY_SIZE)]].data[2] = (sTradeMonSpriteCoords[selectedMonParty * PARTY_SIZE][0] + sTradeMonSpriteCoords[selectedMonParty * PARTY_SIZE + 1][0]) / 2 * 8 + 14;
         gSprites[sTradeMenuData->partySpriteIds[0][partyIdx + (selectedMonParty * PARTY_SIZE)]].data[4] = (sTradeMonSpriteCoords[selectedMonParty * PARTY_SIZE][1] * 8) - 12;
-        StoreSpriteCallbackInData6(&gSprites[sTradeMenuData->partySpriteIds[0][partyIdx + (selectedMonParty * PARTY_SIZE)]], UpdateTradeMonIconFrame);
+        StoreSpriteCallbackInData6(&gSprites[sTradeMenuData->partySpriteIds[0][partyIdx + (selectedMonParty * PARTY_SIZE)]], MonIconSpriteCallback);
         sTradeMenuData->drawPartyState[whichParty]++;
         TradeMenuBouncePartySprites(&gSprites[sTradeMenuData->partySpriteIds[0][partyIdx + (selectedMonParty * PARTY_SIZE)]]);
         CopyToBgTilemapBufferRect_ChangePalette(1, sTradePartyBoxTilemap, whichParty * 15, 0, 15, 17, 0);
@@ -1820,7 +1820,7 @@ static void DrawTradeMenuParty(u8 whichParty)
             PrintNicknamesForTradeMenu();
         break;
     case 2:
-        if (gSprites[sTradeMenuData->partySpriteIds[0][partyIdx + (selectedMonParty * PARTY_SIZE)]].callback == UpdateTradeMonIconFrame)
+        if (gSprites[sTradeMenuData->partySpriteIds[0][partyIdx + (selectedMonParty * PARTY_SIZE)]].callback == MonIconSpriteCallback)
             sTradeMenuData->drawPartyState[whichParty] = 3;
         break;
     case 3:
