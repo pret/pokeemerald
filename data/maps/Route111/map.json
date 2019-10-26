@@ -196,7 +196,7 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route111_EventScript_28CDF6",
+      "script": "GabbyAndTy_EventScript_TyBattle1",
       "flag": "FLAG_HIDE_ROUTE_111_GABBY_AND_TY_1"
     },
     {
@@ -209,7 +209,7 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route111_EventScript_28CDD6",
+      "script": "GabbyAndTy_EventScript_GabbyBattle1",
       "flag": "FLAG_HIDE_ROUTE_111_GABBY_AND_TY_1"
     },
     {
@@ -300,7 +300,7 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route111_EventScript_28CE96",
+      "script": "GabbyAndTy_EventScript_GabbyBattle4",
       "flag": "FLAG_HIDE_ROUTE_111_GABBY_AND_TY_3"
     },
     {
@@ -313,7 +313,7 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route111_EventScript_28CEB6",
+      "script": "GabbyAndTy_EventScript_TyBattle4",
       "flag": "FLAG_HIDE_ROUTE_111_GABBY_AND_TY_3"
     },
     {
@@ -326,7 +326,7 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route111_EventScript_28CF16",
+      "script": "GabbyAndTy_EventScript_GabbyBattle6",
       "flag": "FLAG_HIDE_ROUTE_111_GABBY_AND_TY_2"
     },
     {
@@ -339,7 +339,7 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route111_EventScript_28CF36",
+      "script": "GabbyAndTy_EventScript_TyBattle6",
       "flag": "FLAG_HIDE_ROUTE_111_GABBY_AND_TY_2"
     },
     {
