@@ -785,6 +785,7 @@ BattleScript_EffectPsychoShiftCanWork:
 	trypsychoshift BattleScript_MoveEnd
 	attackanimation
 	waitanimation
+	copybyte gEffectBattler, gBattlerTarget
 	printfromtable gStatusConditionsStringIds
 	waitmessage 0x40
 	statusanimation BS_TARGET
