@@ -1003,232 +1003,232 @@ Route109_Text_ElijahPostBattle: @ 8297AE5
 	.string "is the perfect setting!\p"
 	.string "I guess I'll head for SLATEPORT.$"
 
-Route110_Text_297B3F: @ 8297B3F
+Route110_Text_JacobIntro: @ 8297B3F
 	.string "Whoa! Watch it!\n"
 	.string "I guess you're not used to BIKE racing.$"
 
-Route110_Text_297B77: @ 8297B77
+Route110_Text_JacobDefeated: @ 8297B77
 	.string "Whoa!\n"
 	.string "My brakes failed!$"
 
-Route110_Text_297B8F: @ 8297B8F
+Route110_Text_JacobPostBattle: @ 8297B8F
 	.string "Flat tires and brake problems can\n"
 	.string "cause serious injury!\l"
 	.string "Inspect your BIKE for problems!$"
 
-Route110_Text_297BE7: @ 8297BE7
+Route110_Text_AnthonyIntro: @ 8297BE7
 	.string "Yo, you!\n"
 	.string "Can you keep up with my speed?$"
 
-Route110_Text_297C0F: @ 8297C0F
+Route110_Text_AnthonyDefeated: @ 8297C0F
 	.string "Crash and burn!$"
 
-Route110_Text_297C1F: @ 8297C1F
+Route110_Text_AnthonyPostBattle: @ 8297C1F
 	.string "Speed alone won't let me win at POKéMON.\n"
 	.string "I need to reconsider this…$"
 
-Route110_Text_297C63: @ 8297C63
+Route110_Text_BenjaminIntro: @ 8297C63
 	.string "Don't panic if your BIKE's going fast!$"
 
-Route110_Text_297C8A: @ 8297C8A
+Route110_Text_BenjaminDefeated: @ 8297C8A
 	.string "I shouldn't panic during POKéMON\n"
 	.string "battles…$"
 
-Route110_Text_297CB4: @ 8297CB4
+Route110_Text_BenjaminPostBattle: @ 8297CB4
 	.string "There's no need to panic or stress.\n"
 	.string "Take it easy. There's plenty of time.$"
 
-Route110_Text_297CFE: @ 8297CFE
+Route110_Text_BenjaminRegister: @ 8297CFE
 	.string "I'll keep chugging on without stressing.\n"
 	.string "Give me a shout if you're up to it.$"
 
-Route110_Text_297D4B: @ 8297D4B
+Route110_Text_BenjaminRematchIntro: @ 8297D4B
 	.string "Aren't you going a little too fast?\n"
 	.string "Take it easy and let's battle.$"
 
-Route110_Text_297D8E: @ 8297D8E
+Route110_Text_BenjaminRematchDefeated: @ 8297D8E
 	.string "I didn't panic, but I still lost…$"
 
-Route110_Text_297DB0: @ 8297DB0
+Route110_Text_BenjaminRematchPostBattle: @ 8297DB0
 	.string "There's no need to panic or stress.\n"
 	.string "Take it easy. There's plenty of time.$"
 
-Route110_Text_297DFA: @ 8297DFA
+Route110_Text_AbigailIntro: @ 8297DFA
 	.string "The triathlon is hard in the extreme.\p"
 	.string "You have to complete the three events\n"
 	.string "of swimming, cycling, and running.$"
 
-Route110_Text_297E69: @ 8297E69
+Route110_Text_AbigailDefeated: @ 8297E69
 	.string "POKéMON battles are hard, too!$"
 
-Route110_Text_297E88: @ 8297E88
+Route110_Text_AbigailPostBattle: @ 8297E88
 	.string "I'm exhausted, so I need a break.\n"
 	.string "It's important to get proper rest.$"
 
-Route110_Text_297ECD: @ 8297ECD
+Route110_Text_AbigailRegister: @ 8297ECD
 	.string "You know, I like you!\n"
 	.string "Let's have a rematch on CYCLING ROAD.$"
 
-Route110_Text_297F09: @ 8297F09
+Route110_Text_AbigailRematchIntro: @ 8297F09
 	.string "Isn't it neat to hold a battle while\n"
 	.string "cycling?$"
 
-Route110_Text_297F37: @ 8297F37
+Route110_Text_AbigailRematchDefeated: @ 8297F37
 	.string "Wow…\n"
 	.string "How could you be so strong?$"
 
-Route110_Text_297F58: @ 8297F58
+Route110_Text_AbigailRematchPostBattle: @ 8297F58
 	.string "Were you going after a record?\p"
 	.string "I'm sorry if I held you up!$"
 
-Route110_Text_297F93: @ 8297F93
+Route110_Text_JasmineIntro: @ 8297F93
 	.string "I've been riding without stopping.\n"
 	.string "My thighs are like rocks!$"
 
-Route110_Text_297FD0: @ 8297FD0
+Route110_Text_JasmineDefeated: @ 8297FD0
 	.string "I'm worried about muscle cramps…$"
 
-Route110_Text_297FF1: @ 8297FF1
+Route110_Text_JasminePostBattle: @ 8297FF1
 	.string "Oh, you have some GYM BADGES?\n"
 	.string "No wonder you're so strong!$"
 
-Route110_Text_29802B: @ 829802B
+Route110_Text_EdwardIntro: @ 829802B
 	.string "I have foreseen your intentions!\n"
 	.string "I cannot possibly lose!$"
 
-Route110_Text_298064: @ 8298064
+Route110_Text_EdwardDefeated: @ 8298064
 	.string "I failed to prophesize my own demise!$"
 
-Route110_Text_29808A: @ 829808A
+Route110_Text_EdwardPostBattle: @ 829808A
 	.string "I see your future…\p"
 	.string "Hmm…\n"
 	.string "I see a shining light…$"
 
-Route110_Text_2980B9: @ 82980B9
+Route110_Text_JaclynIntro: @ 82980B9
 	.string "Ahahahaha!\n"
 	.string "I'll dazzle you with my wonders!$"
 
-Route110_Text_2980E5: @ 82980E5
+Route110_Text_JaclynDefeated: @ 82980E5
 	.string "I wondrously lost!$"
 
-Route110_Text_2980F8: @ 82980F8
+Route110_Text_JaclynPostBattle: @ 82980F8
 	.string "You managed to win only because it was\n"
 	.string "a wonder! Yes, a wonder!\l"
 	.string "Don't think you can win all the time!$"
 
-Route110_Text_29815E: @ 829815E
+Route110_Text_EdwinIntro: @ 829815E
 	.string "Could I see your POKéMON?\n"
 	.string "Just one look, please?$"
 
-Route110_Text_29818F: @ 829818F
+Route110_Text_EdwinDefeated: @ 829818F
 	.string "I wanted to complete\n"
 	.string "my collection…$"
 
-Route110_Text_2981B3: @ 82981B3
+Route110_Text_EdwinPostBattle: @ 82981B3
 	.string "When I see a POKéMON that I don't know,\n"
 	.string "my passion as a collector is ignited!$"
 
-Route110_Text_298201: @ 8298201
+Route110_Text_EdwinRegister: @ 8298201
 	.string "I like collecting MATCH CALL\n"
 	.string "registrations, too…$"
 
-Route110_Text_298232: @ 8298232
+Route110_Text_EdwinRematchIntro: @ 8298232
 	.string "Hi, have you caught any new POKéMON?\p"
 	.string "Could I see your POKéMON?\n"
 	.string "Just one look, please?$"
 
-Route110_Text_298288: @ 8298288
+Route110_Text_EdwinRematchDefeated: @ 8298288
 	.string "Your POKéMON…\n"
 	.string "I envy you.$"
 
-Route110_Text_2982A2: @ 82982A2
+Route110_Text_EdwinRematchPostBattle: @ 82982A2
 	.string "Oh, I long to make all rare POKéMON\n"
 	.string "mine!$"
 
-Route110_Text_2982CC: @ 82982CC
+Route110_Text_DaleIntro: @ 82982CC
 	.string "Hey!\n"
 	.string "Don't sneak up behind me like that!$"
 
-Route110_Text_2982F5: @ 82982F5
+Route110_Text_DaleDefeated: @ 82982F5
 	.string "I lost!\n"
 	.string "Drat!$"
 
-Route110_Text_298303: @ 8298303
+Route110_Text_DalePostBattle: @ 8298303
 	.string "Fishing is all about concentration.\n"
 	.string "You have to focus on the floater.$"
 
-Route110_Text_298349: @ 8298349
+Route110_Text_IsabelIntro: @ 8298349
 	.string "Ahahaha! I would go anywhere to show\n"
 	.string "off my delightful POKéMON.$"
 
-Route110_Text_298389: @ 8298389
+Route110_Text_IsabelDefeated: @ 8298389
 	.string "Oh, dear, this won't do.$"
 
-Route110_Text_2983A2: @ 82983A2
+Route110_Text_IsabelPostBattle: @ 82983A2
 	.string "Rather than battling, perhaps I should\n"
 	.string "show off my POKéMON at the FAN CLUB.$"
 
-Route110_Text_2983EE: @ 82983EE
+Route110_Text_IsabelRegister: @ 82983EE
 	.string "That wasn't close to what I could\n"
 	.string "do to show off my POKéMON.\p"
 	.string "I'll have you as my captive audience\n"
 	.string "as often as possible!$"
 
-Route110_Text_298466: @ 8298466
+Route110_Text_IsabelRematchIntro: @ 8298466
 	.string "Ahahahaha! I would be happy to show\n"
 	.string "off my POKéMON as often as you like!$"
 
-Route110_Text_2984AF: @ 82984AF
+Route110_Text_IsabelRematchDefeated: @ 82984AF
 	.string "Oh, dear, this won't do.$"
 
-Route110_Text_2984C8: @ 82984C8
+Route110_Text_IsabelRematchPostBattle: @ 82984C8
 	.string "I don't think that I could ever stop\n"
 	.string "from showing off my POKéMON.\p"
 	.string "But I like to battle, too!$"
 
-Route110_Text_298525: @ 8298525
+Route110_Text_TimmyIntro: @ 8298525
 	.string "I found some cool POKéMON in the grass\n"
 	.string "around here!$"
 
-Route110_Text_298559: @ 8298559
+Route110_Text_TimmyDefeated: @ 8298559
 	.string "Being cool isn't enough to win…$"
 
-Route110_Text_298579: @ 8298579
+Route110_Text_TimmyPostBattle: @ 8298579
 	.string "It's hard to battle with POKéMON you\n"
 	.string "just caught.$"
 
-Route110_Text_2985AB: @ 82985AB
+Route110_Text_AlyssaIntro: @ 82985AB
 	.string "I fell off CYCLING ROAD…\p"
 	.string "I'll get over my embarrassment by\n"
 	.string "battling with you!$"
 
-Route110_Text_2985F9: @ 82985F9
+Route110_Text_AlyssaDefeated: @ 82985F9
 	.string "Oops!\n"
 	.string "I ended up losing!$"
 
-Route110_Text_298612: @ 8298612
+Route110_Text_AlyssaPostBattle: @ 8298612
 	.string "Falling… Losing…\n"
 	.string "This is so humiliating for me!$"
 
-Route110_Text_298642: @ 8298642
+Route110_Text_JosephIntro: @ 8298642
 	.string "Okay! Full-throttle time! If you can't\n"
 	.string "groove, you get left behind!$"
 
-Route110_Text_298686: @ 8298686
+Route110_Text_JosephDefeated: @ 8298686
 	.string "You got into the groove all right…$"
 
-Route110_Text_2986A9: @ 82986A9
+Route110_Text_JosephPostBattle: @ 82986A9
 	.string "This isn't going to bring me down!\n"
 	.string "Losing has made me a better man!$"
 
-Route110_Text_2986ED: @ 82986ED
+Route110_Text_KalebIntro: @ 82986ED
 	.string "When cute POKéMON help each other…\n"
 	.string "You won't see a more adorable sight!$"
 
-Route110_Text_298735: @ 8298735
+Route110_Text_KalebDefeated: @ 8298735
 	.string "Have you no compassion or pity?$"
 
-Route110_Text_298755: @ 8298755
+Route110_Text_KalebPostBattle: @ 8298755
 	.string "Okay, okay, you've done the best you\n"
 	.string "could, my pretties.$"
 
