@@ -1,7 +1,7 @@
 const struct Decoration gDecorations[] = {
     {
         DECOR_NONE,
-        _("SMALL DESK"),
+        _("작은 책상"),
         DECORPERM_SOLID_FLOOR,
         DECORSHAPE_1x1,
         DECORCAT_DESK,
@@ -10,7 +10,7 @@ const struct Decoration gDecorations[] = {
         DecorGfx_SMALL_DESK
     }, {
         DECOR_SMALL_DESK,
-        _("SMALL DESK"),
+        _("작은 책상"),
         DECORPERM_SOLID_FLOOR,
         DECORSHAPE_1x1,
         DECORCAT_DESK,
@@ -19,7 +19,7 @@ const struct Decoration gDecorations[] = {
         DecorGfx_SMALL_DESK
     }, {
         DECOR_POKEMON_DESK,
-        _("POKéMON DESK"),
+        _("포켓몬책상"),
         DECORPERM_SOLID_FLOOR,
         DECORSHAPE_1x1,
         DECORCAT_DESK,
@@ -28,7 +28,7 @@ const struct Decoration gDecorations[] = {
         DecorGfx_POKEMON_DESK
     }, {
         DECOR_HEAVY_DESK,
-        _("HEAVY DESK"),
+        _("묵직한 책상"),
         DECORPERM_SOLID_FLOOR,
         DECORSHAPE_3x2,
         DECORCAT_DESK,
@@ -37,7 +37,7 @@ const struct Decoration gDecorations[] = {
         DecorGfx_HEAVY_DESK
     }, {
         DECOR_RAGGED_DESK,
-        _("RAGGED DESK"),
+        _("울퉁불퉁책상"),
         DECORPERM_SOLID_FLOOR,
         DECORSHAPE_3x2,
         DECORCAT_DESK,
@@ -46,7 +46,7 @@ const struct Decoration gDecorations[] = {
         DecorGfx_RAGGED_DESK
     }, {
         DECOR_COMFORT_DESK,
-        _("COMFORT DESK"),
+        _("푹신푹신책상"),
         DECORPERM_SOLID_FLOOR,
         DECORSHAPE_3x2,
         DECORCAT_DESK,
@@ -55,7 +55,7 @@ const struct Decoration gDecorations[] = {
         DecorGfx_COMFORT_DESK
     }, {
         DECOR_PRETTY_DESK,
-        _("PRETTY DESK"),
+        _("고운 책상"),
         DECORPERM_SOLID_FLOOR,
         DECORSHAPE_3x3,
         DECORCAT_DESK,
@@ -64,7 +64,7 @@ const struct Decoration gDecorations[] = {
         DecorGfx_PRETTY_DESK
     }, {
         DECOR_BRICK_DESK,
-        _("BRICK DESK"),
+        _("벽돌책상"),
         DECORPERM_SOLID_FLOOR,
         DECORSHAPE_3x3,
         DECORCAT_DESK,
@@ -73,7 +73,7 @@ const struct Decoration gDecorations[] = {
         DecorGfx_BRICK_DESK
     }, {
         DECOR_CAMP_DESK,
-        _("CAMP DESK"),
+        _("캠프책상"),
         DECORPERM_SOLID_FLOOR,
         DECORSHAPE_3x3,
         DECORCAT_DESK,
@@ -82,7 +82,7 @@ const struct Decoration gDecorations[] = {
         DecorGfx_CAMP_DESK
     }, {
         DECOR_HARD_DESK,
-        _("HARD DESK"),
+        _("딱딱한 책상"),
         DECORPERM_SOLID_FLOOR,
         DECORSHAPE_3x3,
         DECORCAT_DESK,
@@ -91,7 +91,7 @@ const struct Decoration gDecorations[] = {
         DecorGfx_HARD_DESK
     }, {
         DECOR_SMALL_CHAIR,
-        _("SMALL CHAIR"),
+        _("작은 의자"),
         DECORPERM_PASS_FLOOR,
         DECORSHAPE_1x1,
         DECORCAT_CHAIR,
@@ -100,7 +100,7 @@ const struct Decoration gDecorations[] = {
         DecorGfx_SMALL_CHAIR
     }, {
         DECOR_POKEMON_CHAIR,
-        _("POKéMON CHAIR"),
+        _("포켓몬의자"),
         DECORPERM_PASS_FLOOR,
         DECORSHAPE_1x1,
         DECORCAT_CHAIR,
@@ -109,7 +109,7 @@ const struct Decoration gDecorations[] = {
         DecorGfx_POKEMON_CHAIR
     }, {
         DECOR_HEAVY_CHAIR,
-        _("HEAVY CHAIR"),
+        _("묵직한 의자"),
         DECORPERM_PASS_FLOOR,
         DECORSHAPE_1x1,
         DECORCAT_CHAIR,
@@ -118,7 +118,7 @@ const struct Decoration gDecorations[] = {
         DecorGfx_HEAVY_CHAIR
     }, {
         DECOR_PRETTY_CHAIR,
-        _("PRETTY CHAIR"),
+        _("고운 의자"),
         DECORPERM_PASS_FLOOR,
         DECORSHAPE_1x1,
         DECORCAT_CHAIR,
@@ -127,7 +127,7 @@ const struct Decoration gDecorations[] = {
         DecorGfx_PRETTY_CHAIR
     }, {
         DECOR_COMFORT_CHAIR,
-        _("COMFORT CHAIR"),
+        _("푹신푹신의자"),
         DECORPERM_PASS_FLOOR,
         DECORSHAPE_1x1,
         DECORCAT_CHAIR,
@@ -136,7 +136,7 @@ const struct Decoration gDecorations[] = {
         DecorGfx_COMFORT_CHAIR
     }, {
         DECOR_RAGGED_CHAIR,
-        _("RAGGED CHAIR"),
+        _("울퉁불퉁의자"),
         DECORPERM_PASS_FLOOR,
         DECORSHAPE_1x1,
         DECORCAT_CHAIR,
@@ -145,7 +145,7 @@ const struct Decoration gDecorations[] = {
         DecorGfx_RAGGED_CHAIR
     }, {
         DECOR_BRICK_CHAIR,
-        _("BRICK CHAIR"),
+        _("벽돌의자"),
         DECORPERM_PASS_FLOOR,
         DECORSHAPE_1x1,
         DECORCAT_CHAIR,
@@ -154,7 +154,7 @@ const struct Decoration gDecorations[] = {
         DecorGfx_BRICK_CHAIR
     }, {
         DECOR_CAMP_CHAIR,
-        _("CAMP CHAIR"),
+        _("캠프의자"),
         DECORPERM_PASS_FLOOR,
         DECORSHAPE_1x1,
         DECORCAT_CHAIR,
@@ -163,7 +163,7 @@ const struct Decoration gDecorations[] = {
         DecorGfx_CAMP_CHAIR
     }, {
         DECOR_HARD_CHAIR,
-        _("HARD CHAIR"),
+        _("딱딱한 의자"),
         DECORPERM_PASS_FLOOR,
         DECORSHAPE_1x1,
         DECORCAT_CHAIR,
@@ -172,7 +172,7 @@ const struct Decoration gDecorations[] = {
         DecorGfx_HARD_CHAIR
     }, {
         DECOR_RED_PLANT,
-        _("RED PLANT"),
+        _("새빨간 화분"),
         DECORPERM_BEHIND_FLOOR,
         DECORSHAPE_1x2,
         DECORCAT_PLANT,
@@ -181,7 +181,7 @@ const struct Decoration gDecorations[] = {
         DecorGfx_RED_PLANT
     }, {
         DECOR_TROPICAL_PLANT,
-        _("TROPICAL PLANT"),
+        _("남국의 화분"),
         DECORPERM_BEHIND_FLOOR,
         DECORSHAPE_1x2,
         DECORCAT_PLANT,
@@ -190,7 +190,7 @@ const struct Decoration gDecorations[] = {
         DecorGfx_TROPICAL_PLANT
     }, {
         DECOR_PRETTY_FLOWERS,
-        _("PRETTY FLOWERS"),
+        _("귀여운 꽃"),
         DECORPERM_BEHIND_FLOOR,
         DECORSHAPE_1x2,
         DECORCAT_PLANT,
@@ -199,7 +199,7 @@ const struct Decoration gDecorations[] = {
         DecorGfx_PRETTY_FLOWERS
     }, {
         DECOR_COLORFUL_PLANT,
-        _("COLORFUL PLANT"),
+        _("컬러풀 화분"),
         DECORPERM_BEHIND_FLOOR,
         DECORSHAPE_2x2,
         DECORCAT_PLANT,
@@ -208,7 +208,7 @@ const struct Decoration gDecorations[] = {
         DecorGfx_COLORFUL_PLANT
     }, {
         DECOR_BIG_PLANT,
-        _("BIG PLANT"),
+        _("큰 화분"),
         DECORPERM_BEHIND_FLOOR,
         DECORSHAPE_2x2,
         DECORCAT_PLANT,
@@ -217,7 +217,7 @@ const struct Decoration gDecorations[] = {
         DecorGfx_BIG_PLANT
     }, {
         DECOR_GORGEOUS_PLANT,
-        _("GORGEOUS PLANT"),
+        _("훌륭한 화분"),
         DECORPERM_BEHIND_FLOOR,
         DECORSHAPE_2x2,
         DECORCAT_PLANT,
@@ -226,7 +226,7 @@ const struct Decoration gDecorations[] = {
         DecorGfx_GORGEOUS_PLANT
     }, {
         DECOR_RED_BRICK,
-        _("RED BRICK"),
+        _("빨강벽돌"),
         DECORPERM_SOLID_FLOOR,
         DECORSHAPE_1x2,
         DECORCAT_ORNAMENT,
@@ -235,7 +235,7 @@ const struct Decoration gDecorations[] = {
         DecorGfx_RED_BRICK
     }, {
         DECOR_YELLOW_BRICK,
-        _("YELLOW BRICK"),
+        _("노랑벽돌"),
         DECORPERM_SOLID_FLOOR,
         DECORSHAPE_1x2,
         DECORCAT_ORNAMENT,
@@ -244,7 +244,7 @@ const struct Decoration gDecorations[] = {
         DecorGfx_YELLOW_BRICK
     }, {
         DECOR_BLUE_BRICK,
-        _("BLUE BRICK"),
+        _("파랑벽돌"),
         DECORPERM_SOLID_FLOOR,
         DECORSHAPE_1x2,
         DECORCAT_ORNAMENT,
@@ -253,7 +253,7 @@ const struct Decoration gDecorations[] = {
         DecorGfx_BLUE_BRICK
     }, {
         DECOR_RED_BALLOON,
-        _("RED BALLOON"),
+        _("빨강풍선"),
         DECORPERM_PASS_FLOOR,
         DECORSHAPE_1x1,
         DECORCAT_ORNAMENT,
@@ -262,7 +262,7 @@ const struct Decoration gDecorations[] = {
         DecorGfx_RED_BALLOON
     }, {
         DECOR_BLUE_BALLOON,
-        _("BLUE BALLOON"),
+        _("파랑풍선"),
         DECORPERM_PASS_FLOOR,
         DECORSHAPE_1x1,
         DECORCAT_ORNAMENT,
@@ -271,7 +271,7 @@ const struct Decoration gDecorations[] = {
         DecorGfx_BLUE_BALLOON
     }, {
         DECOR_YELLOW_BALLOON,
-        _("YELLOW BALLOON"),
+        _("노랑풍선"),
         DECORPERM_PASS_FLOOR,
         DECORSHAPE_1x1,
         DECORCAT_ORNAMENT,
@@ -280,7 +280,7 @@ const struct Decoration gDecorations[] = {
         DecorGfx_YELLOW_BALLOON
     }, {
         DECOR_RED_TENT,
-        _("RED TENT"),
+        _("빨강텐트"),
         DECORPERM_PASS_FLOOR,
         DECORSHAPE_3x3,
         DECORCAT_ORNAMENT,
@@ -289,7 +289,7 @@ const struct Decoration gDecorations[] = {
         DecorGfx_RED_TENT
     }, {
         DECOR_BLUE_TENT,
-        _("BLUE TENT"),
+        _("파랑텐트"),
         DECORPERM_PASS_FLOOR,
         DECORSHAPE_3x3,
         DECORCAT_ORNAMENT,
@@ -298,7 +298,7 @@ const struct Decoration gDecorations[] = {
         DecorGfx_BLUE_TENT
     }, {
         DECOR_SOLID_BOARD,
-        _("SOLID BOARD"),
+        _("단단한 판자"),
         DECORPERM_PASS_FLOOR,
         DECORSHAPE_1x2,
         DECORCAT_ORNAMENT,
@@ -307,7 +307,7 @@ const struct Decoration gDecorations[] = {
         DecorGfx_SOLID_BOARD
     }, {
         DECOR_SLIDE,
-        _("SLIDE"),
+        _("미끄럼대"),
         DECORPERM_PASS_FLOOR,
         DECORSHAPE_2x4,
         DECORCAT_ORNAMENT,
@@ -316,7 +316,7 @@ const struct Decoration gDecorations[] = {
         DecorGfx_SLIDE
     }, {
         DECOR_FENCE_LENGTH,
-        _("FENCE LENGTH"),
+        _("세로울타리"),
         DECORPERM_SOLID_FLOOR,
         DECORSHAPE_1x1,
         DECORCAT_ORNAMENT,
@@ -325,7 +325,7 @@ const struct Decoration gDecorations[] = {
         DecorGfx_FENCE_LENGTH
     }, {
         DECOR_FENCE_WIDTH,
-        _("FENCE WIDTH"),
+        _("가로울타리"),
         DECORPERM_SOLID_FLOOR,
         DECORSHAPE_1x1,
         DECORCAT_ORNAMENT,
@@ -334,7 +334,7 @@ const struct Decoration gDecorations[] = {
         DecorGfx_FENCE_WIDTH
     }, {
         DECOR_TIRE,
-        _("TIRE"),
+        _("타이어"),
         DECORPERM_SOLID_FLOOR,
         DECORSHAPE_2x2,
         DECORCAT_ORNAMENT,
@@ -343,7 +343,7 @@ const struct Decoration gDecorations[] = {
         DecorGfx_TIRE
     }, {
         DECOR_STAND,
-        _("STAND"),
+        _("큰 받침대"),
         DECORPERM_PASS_FLOOR,
         DECORSHAPE_4x2,
         DECORCAT_ORNAMENT,
@@ -352,7 +352,7 @@ const struct Decoration gDecorations[] = {
         DecorGfx_STAND
     }, {
         DECOR_MUD_BALL,
-        _("MUD BALL"),
+        _("진흙경단"),
         DECORPERM_PASS_FLOOR,
         DECORSHAPE_1x1,
         DECORCAT_ORNAMENT,
@@ -361,7 +361,7 @@ const struct Decoration gDecorations[] = {
         DecorGfx_MUD_BALL
     }, {
         DECOR_BREAKABLE_DOOR,
-        _("BREAKABLE DOOR"),
+        _("부서지는 도어"),
         DECORPERM_PASS_FLOOR,
         DECORSHAPE_1x2,
         DECORCAT_ORNAMENT,
@@ -370,7 +370,7 @@ const struct Decoration gDecorations[] = {
         DecorGfx_BREAKABLE_DOOR
     }, {
         DECOR_SAND_ORNAMENT,
-        _("SAND ORNAMENT"),
+        _("모래장식품"),
         DECORPERM_BEHIND_FLOOR,
         DECORSHAPE_1x2,
         DECORCAT_ORNAMENT,
@@ -379,7 +379,7 @@ const struct Decoration gDecorations[] = {
         DecorGfx_SAND_ORNAMENT
     }, {
         DECOR_SILVER_SHIELD,
-        _("SILVER SHIELD"),
+        _("은상패"),
         DECORPERM_BEHIND_FLOOR,
         DECORSHAPE_1x2,
         DECORCAT_ORNAMENT,
@@ -388,7 +388,7 @@ const struct Decoration gDecorations[] = {
         DecorGfx_SILVER_SHIELD
     }, {
         DECOR_GOLD_SHIELD,
-        _("GOLD SHIELD"),
+        _("금상패"),
         DECORPERM_BEHIND_FLOOR,
         DECORSHAPE_1x2,
         DECORCAT_ORNAMENT,
@@ -397,7 +397,7 @@ const struct Decoration gDecorations[] = {
         DecorGfx_GOLD_SHIELD
     }, {
         DECOR_GLASS_ORNAMENT,
-        _("GLASS ORNAMENT"),
+        _("글라스오브제"),
         DECORPERM_BEHIND_FLOOR,
         DECORSHAPE_1x2,
         DECORCAT_ORNAMENT,
@@ -415,7 +415,7 @@ const struct Decoration gDecorations[] = {
         DecorGfx_TV
     }, {
         DECOR_ROUND_TV,
-        _("ROUND TV"),
+        _("둥근 TV"),
         DECORPERM_SOLID_FLOOR,
         DECORSHAPE_1x1,
         DECORCAT_ORNAMENT,
@@ -424,7 +424,7 @@ const struct Decoration gDecorations[] = {
         DecorGfx_ROUND_TV
     }, {
         DECOR_CUTE_TV,
-        _("CUTE TV"),
+        _("귀여운 TV"),
         DECORPERM_SOLID_FLOOR,
         DECORSHAPE_1x1,
         DECORCAT_ORNAMENT,
@@ -433,7 +433,7 @@ const struct Decoration gDecorations[] = {
         DecorGfx_CUTE_TV
     }, {
         DECOR_GLITTER_MAT,
-        _("GLITTER MAT"),
+        _("반짝반짝매트"),
         DECORPERM_PASS_FLOOR,
         DECORSHAPE_1x1,
         DECORCAT_MAT,
@@ -442,7 +442,7 @@ const struct Decoration gDecorations[] = {
         DecorGfx_GLITTER_MAT
     }, {
         DECOR_JUMP_MAT,
-        _("JUMP MAT"),
+        _("점프매트"),
         DECORPERM_PASS_FLOOR,
         DECORSHAPE_1x1,
         DECORCAT_MAT,
@@ -451,7 +451,7 @@ const struct Decoration gDecorations[] = {
         DecorGfx_JUMP_MAT
     }, {
         DECOR_SPIN_MAT,
-        _("SPIN MAT"),
+        _("뱅그르매트"),
         DECORPERM_PASS_FLOOR,
         DECORSHAPE_1x1,
         DECORCAT_MAT,
@@ -460,7 +460,7 @@ const struct Decoration gDecorations[] = {
         DecorGfx_SPIN_MAT
     }, {
         DECOR_C_LOW_NOTE_MAT,
-        _("C Low NOTE MAT"),
+        _("음표매트CL"),
         DECORPERM_PASS_FLOOR,
         DECORSHAPE_1x1,
         DECORCAT_MAT,
@@ -469,7 +469,7 @@ const struct Decoration gDecorations[] = {
         DecorGfx_C_LOW_NOTE_MAT
     }, {
         DECOR_D_NOTE_MAT,
-        _("D NOTE MAT"),
+        _("음표매트D"),
         DECORPERM_PASS_FLOOR,
         DECORSHAPE_1x1,
         DECORCAT_MAT,
@@ -478,7 +478,7 @@ const struct Decoration gDecorations[] = {
         DecorGfx_D_NOTE_MAT
     }, {
         DECOR_E_NOTE_MAT,
-        _("E NOTE MAT"),
+        _("음표매트E"),
         DECORPERM_PASS_FLOOR,
         DECORSHAPE_1x1,
         DECORCAT_MAT,
@@ -487,7 +487,7 @@ const struct Decoration gDecorations[] = {
         DecorGfx_E_NOTE_MAT
     }, {
         DECOR_F_NOTE_MAT,
-        _("F NOTE MAT"),
+        _("음표매트F"),
         DECORPERM_PASS_FLOOR,
         DECORSHAPE_1x1,
         DECORCAT_MAT,
@@ -496,7 +496,7 @@ const struct Decoration gDecorations[] = {
         DecorGfx_F_NOTE_MAT
     }, {
         DECOR_G_NOTE_MAT,
-        _("G NOTE MAT"),
+        _("음표매트G"),
         DECORPERM_PASS_FLOOR,
         DECORSHAPE_1x1,
         DECORCAT_MAT,
@@ -505,7 +505,7 @@ const struct Decoration gDecorations[] = {
         DecorGfx_G_NOTE_MAT
     }, {
         DECOR_A_NOTE_MAT,
-        _("A NOTE MAT"),
+        _("음표매트A"),
         DECORPERM_PASS_FLOOR,
         DECORSHAPE_1x1,
         DECORCAT_MAT,
@@ -514,7 +514,7 @@ const struct Decoration gDecorations[] = {
         DecorGfx_A_NOTE_MAT
     }, {
         DECOR_B_NOTE_MAT,
-        _("B NOTE MAT"),
+        _("음표매트B"),
         DECORPERM_PASS_FLOOR,
         DECORSHAPE_1x1,
         DECORCAT_MAT,
@@ -523,7 +523,7 @@ const struct Decoration gDecorations[] = {
         DecorGfx_B_NOTE_MAT
     }, {
         DECOR_C_HIGH_NOTE_MAT,
-        _("C High NOTE MAT"),
+        _("음표매트CH"),
         DECORPERM_PASS_FLOOR,
         DECORSHAPE_1x1,
         DECORCAT_MAT,
@@ -532,7 +532,7 @@ const struct Decoration gDecorations[] = {
         DecorGfx_C_HIGH_NOTE_MAT
     }, {
         DECOR_SURF_MAT,
-        _("SURF MAT"),
+        _("파도타기매트"),
         DECORPERM_PASS_FLOOR,
         DECORSHAPE_3x3,
         DECORCAT_MAT,
@@ -541,7 +541,7 @@ const struct Decoration gDecorations[] = {
         DecorGfx_SURF_MAT
     }, {
         DECOR_THUNDER_MAT,
-        _("THUNDER MAT"),
+        _("번개매트"),
         DECORPERM_PASS_FLOOR,
         DECORSHAPE_3x3,
         DECORCAT_MAT,
@@ -550,7 +550,7 @@ const struct Decoration gDecorations[] = {
         DecorGfx_THUNDER_MAT
     }, {
         DECOR_FIRE_BLAST_MAT,
-        _("FIRE BLAST MAT"),
+        _("불대문자매트"),
         DECORPERM_PASS_FLOOR,
         DECORSHAPE_3x3,
         DECORCAT_MAT,
@@ -559,7 +559,7 @@ const struct Decoration gDecorations[] = {
         DecorGfx_FIRE_BLAST_MAT
     }, {
         DECOR_POWDER_SNOW_MAT,
-        _("POWDER SNOW MAT"),
+        _("눈싸라기매트"),
         DECORPERM_PASS_FLOOR,
         DECORSHAPE_3x3,
         DECORCAT_MAT,
@@ -568,7 +568,7 @@ const struct Decoration gDecorations[] = {
         DecorGfx_POWDER_SNOW_MAT
     }, {
         DECOR_ATTRACT_MAT,
-        _("ATTRACT MAT"),
+        _("헤롱헤롱매트"),
         DECORPERM_PASS_FLOOR,
         DECORSHAPE_3x3,
         DECORCAT_MAT,
@@ -577,7 +577,7 @@ const struct Decoration gDecorations[] = {
         DecorGfx_ATTRACT_MAT
     }, {
         DECOR_FISSURE_MAT,
-        _("FISSURE MAT"),
+        _("땅가르기매트"),
         DECORPERM_PASS_FLOOR,
         DECORSHAPE_3x3,
         DECORCAT_MAT,
@@ -586,7 +586,7 @@ const struct Decoration gDecorations[] = {
         DecorGfx_FISSURE_MAT
     }, {
         DECOR_SPIKES_MAT,
-        _("SPIKES MAT"),
+        _("압정뿌리기매트"),
         DECORPERM_PASS_FLOOR,
         DECORSHAPE_3x3,
         DECORCAT_MAT,
@@ -595,7 +595,7 @@ const struct Decoration gDecorations[] = {
         DecorGfx_SPIKES_MAT
     }, {
         DECOR_BALL_POSTER,
-        _("BALL POSTER"),
+        _("볼포스터"),
         DECORPERM_NA_WALL,
         DECORSHAPE_1x1,
         DECORCAT_POSTER,
@@ -604,7 +604,7 @@ const struct Decoration gDecorations[] = {
         DecorGfx_BALL_POSTER
     }, {
         DECOR_GREEN_POSTER,
-        _("GREEN POSTER"),
+        _("초록포스터"),
         DECORPERM_NA_WALL,
         DECORSHAPE_1x1,
         DECORCAT_POSTER,
@@ -613,7 +613,7 @@ const struct Decoration gDecorations[] = {
         DecorGfx_GREEN_POSTER
     }, {
         DECOR_RED_POSTER,
-        _("RED POSTER"),
+        _("빨강포스터"),
         DECORPERM_NA_WALL,
         DECORSHAPE_1x1,
         DECORCAT_POSTER,
@@ -622,7 +622,7 @@ const struct Decoration gDecorations[] = {
         DecorGfx_RED_POSTER
     }, {
         DECOR_BLUE_POSTER,
-        _("BLUE POSTER"),
+        _("옥색포스터"),
         DECORPERM_NA_WALL,
         DECORSHAPE_1x1,
         DECORCAT_POSTER,
@@ -631,7 +631,7 @@ const struct Decoration gDecorations[] = {
         DecorGfx_BLUE_POSTER
     }, {
         DECOR_CUTE_POSTER,
-        _("CUTE POSTER"),
+        _("귀여운 포스터"),
         DECORPERM_NA_WALL,
         DECORSHAPE_1x1,
         DECORCAT_POSTER,
@@ -640,7 +640,7 @@ const struct Decoration gDecorations[] = {
         DecorGfx_CUTE_POSTER
     }, {
         DECOR_PIKA_POSTER,
-        _("PIKA POSTER"),
+        _("번쩍번쩍포스터"),
         DECORPERM_NA_WALL,
         DECORSHAPE_2x1,
         DECORCAT_POSTER,
@@ -649,7 +649,7 @@ const struct Decoration gDecorations[] = {
         DecorGfx_PIKA_POSTER
     }, {
         DECOR_LONG_POSTER,
-        _("LONG POSTER"),
+        _("긴 포스터"),
         DECORPERM_NA_WALL,
         DECORSHAPE_2x1,
         DECORCAT_POSTER,
@@ -658,7 +658,7 @@ const struct Decoration gDecorations[] = {
         DecorGfx_LONG_POSTER
     }, {
         DECOR_SEA_POSTER,
-        _("SEA POSTER"),
+        _("바다포스터"),
         DECORPERM_NA_WALL,
         DECORSHAPE_2x1,
         DECORCAT_POSTER,
@@ -667,7 +667,7 @@ const struct Decoration gDecorations[] = {
         DecorGfx_SEA_POSTER
     }, {
         DECOR_SKY_POSTER,
-        _("SKY POSTER"),
+        _("하늘포스터"),
         DECORPERM_NA_WALL,
         DECORSHAPE_2x1,
         DECORCAT_POSTER,
@@ -676,7 +676,7 @@ const struct Decoration gDecorations[] = {
         DecorGfx_SKY_POSTER
     }, {
         DECOR_KISS_POSTER,
-        _("KISS POSTER"),
+        _("키스포스터"),
         DECORPERM_NA_WALL,
         DECORSHAPE_2x1,
         DECORCAT_POSTER,
@@ -685,7 +685,7 @@ const struct Decoration gDecorations[] = {
         DecorGfx_KISS_POSTER
     }, {
         DECOR_PICHU_DOLL,
-        _("PICHU DOLL"),
+        _("피츄인형"),
         DECORPERM_SPRITE,
         DECORSHAPE_1x1,
         DECORCAT_DOLL,
@@ -694,7 +694,7 @@ const struct Decoration gDecorations[] = {
         DecorGfx_PICHU_DOLL
     }, {
         DECOR_PIKACHU_DOLL,
-        _("PIKACHU DOLL"),
+        _("피카츄인형"),
         DECORPERM_SPRITE,
         DECORSHAPE_1x1,
         DECORCAT_DOLL,
@@ -703,7 +703,7 @@ const struct Decoration gDecorations[] = {
         DecorGfx_PIKACHU_DOLL
     }, {
         DECOR_MARILL_DOLL,
-        _("MARILL DOLL"),
+        _("마릴인형"),
         DECORPERM_SPRITE,
         DECORSHAPE_1x1,
         DECORCAT_DOLL,
@@ -712,7 +712,7 @@ const struct Decoration gDecorations[] = {
         DecorGfx_MARILL_DOLL
     }, {
         DECOR_TOGEPI_DOLL,
-        _("TOGEPI DOLL"),
+        _("토게피인형"),
         DECORPERM_SPRITE,
         DECORSHAPE_1x1,
         DECORCAT_DOLL,
@@ -721,7 +721,7 @@ const struct Decoration gDecorations[] = {
         DecorGfx_TOGEPI_DOLL
     }, {
         DECOR_CYNDAQUIL_DOLL,
-        _("CYNDAQUIL DOLL"),
+        _("브케인인형"),
         DECORPERM_SPRITE,
         DECORSHAPE_1x1,
         DECORCAT_DOLL,
@@ -730,7 +730,7 @@ const struct Decoration gDecorations[] = {
         DecorGfx_CYNDAQUIL_DOLL
     }, {
         DECOR_CHIKORITA_DOLL,
-        _("CHIKORITA DOLL"),
+        _("치코리타인형"),
         DECORPERM_SPRITE,
         DECORSHAPE_1x1,
         DECORCAT_DOLL,
@@ -739,7 +739,7 @@ const struct Decoration gDecorations[] = {
         DecorGfx_CHIKORITA_DOLL
     }, {
         DECOR_TOTODILE_DOLL,
-        _("TOTODILE DOLL"),
+        _("리아코인형"),
         DECORPERM_SPRITE,
         DECORSHAPE_1x1,
         DECORCAT_DOLL,
@@ -748,7 +748,7 @@ const struct Decoration gDecorations[] = {
         DecorGfx_TOTODILE_DOLL
     }, {
         DECOR_JIGGLYPUFF_DOLL,
-        _("JIGGLYPUFF DOLL"),
+        _("푸린인형"),
         DECORPERM_SPRITE,
         DECORSHAPE_1x1,
         DECORCAT_DOLL,
@@ -757,7 +757,7 @@ const struct Decoration gDecorations[] = {
         DecorGfx_JIGGLYPUFF_DOLL
     }, {
         DECOR_MEOWTH_DOLL,
-        _("MEOWTH DOLL"),
+        _("나옹인형"),
         DECORPERM_SPRITE,
         DECORSHAPE_1x1,
         DECORCAT_DOLL,
@@ -766,7 +766,7 @@ const struct Decoration gDecorations[] = {
         DecorGfx_MEOWTH_DOLL
     }, {
         DECOR_CLEFAIRY_DOLL,
-        _("CLEFAIRY DOLL"),
+        _("삐삐인형"),
         DECORPERM_SPRITE,
         DECORSHAPE_1x1,
         DECORCAT_DOLL,
@@ -775,7 +775,7 @@ const struct Decoration gDecorations[] = {
         DecorGfx_CLEFAIRY_DOLL
     }, {
         DECOR_DITTO_DOLL,
-        _("DITTO DOLL"),
+        _("메타몽인형"),
         DECORPERM_SPRITE,
         DECORSHAPE_1x1,
         DECORCAT_DOLL,
@@ -784,7 +784,7 @@ const struct Decoration gDecorations[] = {
         DecorGfx_DITTO_DOLL
     }, {
         DECOR_SMOOCHUM_DOLL,
-        _("SMOOCHUM DOLL"),
+        _("뽀뽀라인형"),
         DECORPERM_SPRITE,
         DECORSHAPE_1x1,
         DECORCAT_DOLL,
@@ -793,7 +793,7 @@ const struct Decoration gDecorations[] = {
         DecorGfx_SMOOCHUM_DOLL
     }, {
         DECOR_TREECKO_DOLL,
-        _("TREECKO DOLL"),
+        _("나무지기인형"),
         DECORPERM_SPRITE,
         DECORSHAPE_1x1,
         DECORCAT_DOLL,
@@ -802,7 +802,7 @@ const struct Decoration gDecorations[] = {
         DecorGfx_TREECKO_DOLL
     }, {
         DECOR_TORCHIC_DOLL,
-        _("TORCHIC DOLL"),
+        _("아차모인형"),
         DECORPERM_SPRITE,
         DECORSHAPE_1x1,
         DECORCAT_DOLL,
@@ -811,7 +811,7 @@ const struct Decoration gDecorations[] = {
         DecorGfx_TORCHIC_DOLL
     }, {
         DECOR_MUDKIP_DOLL,
-        _("MUDKIP DOLL"),
+        _("물짱이인형"),
         DECORPERM_SPRITE,
         DECORSHAPE_1x1,
         DECORCAT_DOLL,
@@ -820,7 +820,7 @@ const struct Decoration gDecorations[] = {
         DecorGfx_MUDKIP_DOLL
     }, {
         DECOR_DUSKULL_DOLL,
-        _("DUSKULL DOLL"),
+        _("해골몽인형"),
         DECORPERM_SPRITE,
         DECORSHAPE_1x1,
         DECORCAT_DOLL,
@@ -829,7 +829,7 @@ const struct Decoration gDecorations[] = {
         DecorGfx_DUSKULL_DOLL
     }, {
         DECOR_WYNAUT_DOLL,
-        _("WYNAUT DOLL"),
+        _("마자인형"),
         DECORPERM_SPRITE,
         DECORSHAPE_1x1,
         DECORCAT_DOLL,
@@ -838,7 +838,7 @@ const struct Decoration gDecorations[] = {
         DecorGfx_WYNAUT_DOLL
     }, {
         DECOR_BALTOY_DOLL,
-        _("BALTOY DOLL"),
+        _("오뚝군인형"),
         DECORPERM_SPRITE,
         DECORSHAPE_1x1,
         DECORCAT_DOLL,
@@ -847,7 +847,7 @@ const struct Decoration gDecorations[] = {
         DecorGfx_BALTOY_DOLL
     }, {
         DECOR_KECLEON_DOLL,
-        _("KECLEON DOLL"),
+        _("켈리몬인형"),
         DECORPERM_SPRITE,
         DECORSHAPE_1x1,
         DECORCAT_DOLL,
@@ -856,7 +856,7 @@ const struct Decoration gDecorations[] = {
         DecorGfx_KECLEON_DOLL
     }, {
         DECOR_AZURILL_DOLL,
-        _("AZURILL DOLL"),
+        _("루리리인형"),
         DECORPERM_SPRITE,
         DECORSHAPE_1x1,
         DECORCAT_DOLL,
@@ -865,7 +865,7 @@ const struct Decoration gDecorations[] = {
         DecorGfx_AZURILL_DOLL
     }, {
         DECOR_SKITTY_DOLL,
-        _("SKITTY DOLL"),
+        _("에나비인형"),
         DECORPERM_SPRITE,
         DECORSHAPE_1x1,
         DECORCAT_DOLL,
@@ -874,7 +874,7 @@ const struct Decoration gDecorations[] = {
         DecorGfx_SKITTY_DOLL
     }, {
         DECOR_SWABLU_DOLL,
-        _("SWABLU DOLL"),
+        _("파비코인형"),
         DECORPERM_SPRITE,
         DECORSHAPE_1x1,
         DECORCAT_DOLL,
@@ -883,7 +883,7 @@ const struct Decoration gDecorations[] = {
         DecorGfx_SWABLU_DOLL
     }, {
         DECOR_GULPIN_DOLL,
-        _("GULPIN DOLL"),
+        _("꼴깍몬인형"),
         DECORPERM_SPRITE,
         DECORSHAPE_1x1,
         DECORCAT_DOLL,
@@ -892,7 +892,7 @@ const struct Decoration gDecorations[] = {
         DecorGfx_GULPIN_DOLL
     }, {
         DECOR_LOTAD_DOLL,
-        _("LOTAD DOLL"),
+        _("연꽃몬인형"),
         DECORPERM_SPRITE,
         DECORSHAPE_1x1,
         DECORCAT_DOLL,
@@ -901,7 +901,7 @@ const struct Decoration gDecorations[] = {
         DecorGfx_LOTAD_DOLL
     }, {
         DECOR_SEEDOT_DOLL,
-        _("SEEDOT DOLL"),
+        _("도토링인형"),
         DECORPERM_SPRITE,
         DECORSHAPE_1x1,
         DECORCAT_DOLL,
@@ -910,7 +910,7 @@ const struct Decoration gDecorations[] = {
         DecorGfx_SEEDOT_DOLL
     }, {
         DECOR_PIKA_CUSHION,
-        _("PIKA CUSHION"),
+        _("번쩍쿠션"),
         DECORPERM_SPRITE,
         DECORSHAPE_1x1,
         DECORCAT_CUSHION,
@@ -919,7 +919,7 @@ const struct Decoration gDecorations[] = {
         DecorGfx_PIKA_CUSHION
     }, {
         DECOR_ROUND_CUSHION,
-        _("ROUND CUSHION"),
+        _("둥근 쿠션"),
         DECORPERM_SPRITE,
         DECORSHAPE_1x1,
         DECORCAT_CUSHION,
@@ -928,7 +928,7 @@ const struct Decoration gDecorations[] = {
         DecorGfx_ROUND_CUSHION
     }, {
         DECOR_KISS_CUSHION,
-        _("KISS CUSHION"),
+        _("키스쿠션"),
         DECORPERM_SPRITE,
         DECORSHAPE_1x1,
         DECORCAT_CUSHION,
@@ -937,7 +937,7 @@ const struct Decoration gDecorations[] = {
         DecorGfx_KISS_CUSHION
     }, {
         DECOR_ZIGZAG_CUSHION,
-        _("ZIGZAG CUSHION"),
+        _("지그재그쿠션"),
         DECORPERM_SPRITE,
         DECORSHAPE_1x1,
         DECORCAT_CUSHION,
@@ -946,7 +946,7 @@ const struct Decoration gDecorations[] = {
         DecorGfx_ZIGZAG_CUSHION
     }, {
         DECOR_SPIN_CUSHION,
-        _("SPIN CUSHION"),
+        _("빙그르쿠션"),
         DECORPERM_SPRITE,
         DECORSHAPE_1x1,
         DECORCAT_CUSHION,
@@ -955,7 +955,7 @@ const struct Decoration gDecorations[] = {
         DecorGfx_SPIN_CUSHION
     }, {
         DECOR_DIAMOND_CUSHION,
-        _("DIAMOND CUSHION"),
+        _("다이아쿠션"),
         DECORPERM_SPRITE,
         DECORSHAPE_1x1,
         DECORCAT_CUSHION,
@@ -964,7 +964,7 @@ const struct Decoration gDecorations[] = {
         DecorGfx_DIAMOND_CUSHION
     }, {
         DECOR_BALL_CUSHION,
-        _("BALL CUSHION"),
+        _("볼쿠션"),
         DECORPERM_SPRITE,
         DECORSHAPE_1x1,
         DECORCAT_CUSHION,
@@ -973,7 +973,7 @@ const struct Decoration gDecorations[] = {
         DecorGfx_BALL_CUSHION
     }, {
         DECOR_GRASS_CUSHION,
-        _("GRASS CUSHION"),
+        _("풀쿠션"),
         DECORPERM_SPRITE,
         DECORSHAPE_1x1,
         DECORCAT_CUSHION,
@@ -982,7 +982,7 @@ const struct Decoration gDecorations[] = {
         DecorGfx_GRASS_CUSHION
     }, {
         DECOR_FIRE_CUSHION,
-        _("FIRE CUSHION"),
+        _("불꽃쿠션"),
         DECORPERM_SPRITE,
         DECORSHAPE_1x1,
         DECORCAT_CUSHION,
@@ -991,7 +991,7 @@ const struct Decoration gDecorations[] = {
         DecorGfx_FIRE_CUSHION
     }, {
         DECOR_WATER_CUSHION,
-        _("WATER CUSHION"),
+        _("물쿠션"),
         DECORPERM_SPRITE,
         DECORSHAPE_1x1,
         DECORCAT_CUSHION,
@@ -1000,7 +1000,7 @@ const struct Decoration gDecorations[] = {
         DecorGfx_WATER_CUSHION
     }, {
         DECOR_SNORLAX_DOLL,
-        _("SNORLAX DOLL"),
+        _("잠만보인형"),
         DECORPERM_SPRITE,
         DECORSHAPE_1x2,
         DECORCAT_DOLL,
@@ -1009,7 +1009,7 @@ const struct Decoration gDecorations[] = {
         DecorGfx_SNORLAX_DOLL
     }, {
         DECOR_RHYDON_DOLL,
-        _("RHYDON DOLL"),
+        _("코뿌리인형"),
         DECORPERM_SPRITE,
         DECORSHAPE_1x2,
         DECORCAT_DOLL,
@@ -1018,7 +1018,7 @@ const struct Decoration gDecorations[] = {
         DecorGfx_RHYDON_DOLL
     }, {
         DECOR_LAPRAS_DOLL,
-        _("LAPRAS DOLL"),
+        _("라프라스인형"),
         DECORPERM_SPRITE,
         DECORSHAPE_1x2,
         DECORCAT_DOLL,
@@ -1027,7 +1027,7 @@ const struct Decoration gDecorations[] = {
         DecorGfx_LAPRAS_DOLL
     }, {
         DECOR_VENUSAUR_DOLL,
-        _("VENUSAUR DOLL"),
+        _("이상해꽃인형"),
         DECORPERM_SPRITE,
         DECORSHAPE_1x2,
         DECORCAT_DOLL,
@@ -1036,7 +1036,7 @@ const struct Decoration gDecorations[] = {
         DecorGfx_VENUSAUR_DOLL
     }, {
         DECOR_CHARIZARD_DOLL,
-        _("CHARIZARD DOLL"),
+        _("리자몽인형"),
         DECORPERM_SPRITE,
         DECORSHAPE_1x2,
         DECORCAT_DOLL,
@@ -1045,7 +1045,7 @@ const struct Decoration gDecorations[] = {
         DecorGfx_CHARIZARD_DOLL
     }, {
         DECOR_BLASTOISE_DOLL,
-        _("BLASTOISE DOLL"),
+        _("거북왕인형"),
         DECORPERM_SPRITE,
         DECORSHAPE_1x2,
         DECORCAT_DOLL,
@@ -1054,7 +1054,7 @@ const struct Decoration gDecorations[] = {
         DecorGfx_BLASTOISE_DOLL
     }, {
         DECOR_WAILMER_DOLL,
-        _("WAILMER DOLL"),
+        _("고래왕자인형"),
         DECORPERM_SPRITE,
         DECORSHAPE_1x2,
         DECORCAT_DOLL,
@@ -1063,7 +1063,7 @@ const struct Decoration gDecorations[] = {
         DecorGfx_WAILMER_DOLL
     }, {
         DECOR_REGIROCK_DOLL,
-        _("REGIROCK DOLL"),
+        _("레지락인형"),
         DECORPERM_SPRITE,
         DECORSHAPE_1x2,
         DECORCAT_DOLL,
@@ -1072,7 +1072,7 @@ const struct Decoration gDecorations[] = {
         DecorGfx_REGIROCK_DOLL
     }, {
         DECOR_REGICE_DOLL,
-        _("REGICE DOLL"),
+        _("레지아이스인형"),
         DECORPERM_SPRITE,
         DECORSHAPE_1x2,
         DECORCAT_DOLL,
@@ -1081,7 +1081,7 @@ const struct Decoration gDecorations[] = {
         DecorGfx_REGICE_DOLL
     }, {
         DECOR_REGISTEEL_DOLL,
-        _("REGISTEEL DOLL"),
+        _("레지스틸인형"),
         DECORPERM_SPRITE,
         DECORSHAPE_1x2,
         DECORCAT_DOLL,
