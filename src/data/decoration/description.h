@@ -1,573 +1,560 @@
 const u8 DecorDesc_SMALL_DESK[] = _(
-    "A small desk built\n"
-        "for one.");
+    "1인용 사이즈의\n"
+    "작은 책상");
 
 const u8 DecorDesc_POKEMON_DESK[] = _(
-    "A small desk built in\n"
-        "the shape of a POKé\n"
-        "BALL.");
+    "몬스터볼 형태의\n"
+    "작은 책상");
 
 const u8 DecorDesc_HEAVY_DESK[] = _(
-    "A large desk made\n"
-        "of steel. Put some\n"
-        "decorations on it.");
+    "철로 만들어진\n"
+	"큰 책상\n"
+    "위에 물건을 놓을 수 있다");
 
 const u8 DecorDesc_RAGGED_DESK[] = _(
-    "A large desk made\n"
-        "of wood. Put some\n"
-        "decorations on it.");
+    "나무로 만들어진\n"
+	"큰 책상\n"
+    "위에 물건을 놓을 수 있다");
 
 const u8 DecorDesc_COMFORT_DESK[] = _(
-    "A large desk made\n"
-        "of leaves. Put some\n"
-        "decorations on it.");
+    "나뭇잎으로 만들어진\n"
+    "큰 책상\n"
+    "위에 물건을 놓을 수 있다");
 
 const u8 DecorDesc_PRETTY_DESK[] = _(
-    "A huge desk made\n"
-        "of glass. Holds lots\n"
-        "of decorations.");
+    "유리로 만들어진\n"
+    "거대한 책상\n"
+    "많은 물건을 놓을 수 있다");
 
 const u8 DecorDesc_BRICK_DESK[] = _(
-    "A huge desk made\n"
-        "of brick. Holds lots\n"
-        "of decorations.");
+    "벽돌로 만들어진\n"
+    "거대한 책상\n"
+    "많은 물건을 놓을 수 있다");
 
 const u8 DecorDesc_CAMP_DESK[] = _(
-    "A huge desk made\n"
-        "of logs. Put lots of\n"
-        "decorations on it.");
+    "통나무로 만들어진\n"
+    "거대한 책상\n"
+    "많은 물건을 놓을 수 있다");
 
 const u8 DecorDesc_HARD_DESK[] = _(
-    "A huge desk made\n"
-        "of rocks. Holds\n"
-        "many decorations.");
+    "돌로 만들어진\n"
+    "거대한 책상\n"
+    "많은 물건을 놓을 수 있다");
 
 const u8 DecorDesc_SMALL_CHAIR[] = _(
-    "A small chair made\n"
-        "for one.");
+    "혼자 앉는\n"
+    "작은 의자");
 
 const u8 DecorDesc_POKEMON_CHAIR[] = _(
-    "A small chair built\n"
-        "in the shape of a\n"
-        "POKé BALL.");
+    "몬스터볼\n"
+    "형태의\n"
+    "작은 의자");
 
 const u8 DecorDesc_HEAVY_CHAIR[] = _(
-    "A small chair made\n"
-        "of steel.");
+    "철로 만들어진\n"
+    "작은 의자");
 
 const u8 DecorDesc_PRETTY_CHAIR[] = _(
-    "A small chair made\n"
-        "of glass.");
+    "유리로 만들어진\n"
+    "작은 의자");
 
 const u8 DecorDesc_COMFORT_CHAIR[] = _(
-    "A small chair made\n"
-        "of leaves.");
+    "나뭇잎으로 만들어진\n"
+    "작은 의자");
 
 const u8 DecorDesc_RAGGED_CHAIR[] = _(
-    "A small chair made\n"
-        "of wood.");
+    "나무로 만들어진\n"
+    "작은 의자");
 
 const u8 DecorDesc_BRICK_CHAIR[] = _(
-    "A small chair made\n"
-        "of brick.");
+    "벽돌로 만들어진\n"
+    "작은 의자");
 
 const u8 DecorDesc_CAMP_CHAIR[] = _(
-    "A small chair made\n"
-        "of logs.");
+    "통나무로 만들어진\n"
+    "작은 의자");
 
 const u8 DecorDesc_HARD_CHAIR[] = _(
-    "A small chair made\n"
-        "of rock.");
+    "돌로 만들어진\n"
+    "작은 의자");
 
 const u8 DecorDesc_RED_PLANT[] = _(
-    "A vivid red potted\n"
-        "plant.");
+    "새빨간 꽃이\n"
+    "피어 있는 화분");
 
 const u8 DecorDesc_TROPICAL_PLANT[] = _(
-    "A flowering tropical\n"
-        "plant in a pot.");
+    "남국의 꽃이\n"
+    "피어 있는 화분");
 
 const u8 DecorDesc_PRETTY_FLOWERS[] = _(
-    "A pot of cute\n"
-        "flowers.");
+    "귀여운 꽃이\n"
+    "피어 있는 화분");
 
 const u8 DecorDesc_COLORFUL_PLANT[] = _(
-    "A large pot with\n"
-        "many colorful\n"
-        "flowers.");
+    "여러 가지 꽃이\n"
+    "피어 있는\n"
+    "큰 화분");
 
 const u8 DecorDesc_BIG_PLANT[] = _(
-    "A large, umbrella-\n"
-        "shaped plant in a\n"
-        "big pot.");
+    "우산 같은\n"
+    "형태를 한\n"
+    "큰 화분");
 
 const u8 DecorDesc_GORGEOUS_PLANT[] = _(
-    "A large, impressive\n"
-        "plant in a big pot.");
+    "훌륭한 나무가\n"
+    "심어져 있는 화분");
 
 const u8 DecorDesc_RED_BRICK[] = _(
-    "A red-colored brick.\n"
-        "Decorations can be\n"
-        "placed on top.");
+    "빨간색 벽돌\n"
+    "위에 물건을 놓을 수 있다");
 
 const u8 DecorDesc_YELLOW_BRICK[] = _(
-    "A yellow-colored\n"
-        "brick. Put some\n"
-        "decorations on top.");
+    "노란색 벽돌\n"
+    "위에 물건을 놓을 수 있다");
 
 const u8 DecorDesc_BLUE_BRICK[] = _(
-    "A blue-colored\n"
-        "brick. Put some\n"
-        "decorations on top.");
+    "파란색 벽돌\n"
+    "위에 물건을 놓을 수 있다");
 
 const u8 DecorDesc_RED_BALLOON[] = _(
-    "A red balloon filled\n"
-        "with water. Bursts\n"
-        "if stepped on.");
+    "물이 들어 있는\n"
+    "빨간 풍선\n"
+    "밟으면 터진다");
 
 const u8 DecorDesc_BLUE_BALLOON[] = _(
-    "A blue balloon filled\n"
-        "with water. Bursts\n"
-        "if stepped on.");
+    "물이 들어 있는\n"
+    "파란 풍선\n"
+    "밟으면 터진다");
 
 const u8 DecorDesc_YELLOW_BALLOON[] = _(
-    "A yellow balloon\n"
-        "filled with water.\n"
-        "Pops if stepped on.");
+    "물이 들어 있는\n"
+    "노란 풍선\n"
+    "밟으면 터진다");
 
 const u8 DecorDesc_RED_TENT[] = _(
-    "A large red tent.\n"
-        "You can hide inside\n"
-        "it.");
+    "크고 빨간 텐트\n"
+    "안에 들어갈 수 있다");
 
 const u8 DecorDesc_BLUE_TENT[] = _(
-    "A large blue tent.\n"
-        "You can hide inside\n"
-        "it.");
+    "크고 파란 텐트\n"
+    "안에 들어갈 수 있다");
 
 const u8 DecorDesc_SOLID_BOARD[] = _(
-    "Place over a hole to\n"
-        "cross to the other\n"
-        "side.");
+    "구멍 위에 놓으면\n"
+    "다리처럼 건널 수 있다");
 
 const u8 DecorDesc_SLIDE[] = _(
-    "Use to slide down\n"
-        "from the platform.");
+    "미끄럼대 위에서\n"
+	"미끄러지며\n"
+    "내려올 수 있다");
 
 const u8 DecorDesc_FENCE_LENGTH[] = _(
-    "A small fence that\n"
-        "blocks passage.");
+    "작은 울타리\n"
+    "지나갈 수 없다");
 
 const u8 DecorDesc_FENCE_WIDTH[] = _(
-    "A small fence that\n"
-        "blocks passage.");
+    "작은 울타리\n"
+    "지나갈 수 없다");
 
 const u8 DecorDesc_TIRE[] = _(
-    "An old large tire.\n"
-        "Decorations can be\n"
-        "placed on top.");
+    "낡고 큰 타이어\n"
+    "위에 물건을 놓을 수 있다");
 
 const u8 DecorDesc_STAND[] = _(
-    "A large pedestal\n"
-        "with steps.");
+    "계단 위를 걸어\n"
+    "미끄럼대에 올라간다");
 
 const u8 DecorDesc_MUD_BALL[] = _(
-    "A large ball of mud.\n"
-        "Crumbles if stepped\n"
-        "on.");
+    "둥근 진흙경단\n"
+    "밟으면 부서진다");
 
 const u8 DecorDesc_BREAKABLE_DOOR[] = _(
-    "A weird door that\n"
-        "people can walk\n"
-        "right through.");
+    "빠져나갈 수 있는\n"
+    "이상한 도어");
 
 const u8 DecorDesc_SAND_ORNAMENT[] = _(
-    "An ornament made\n"
-        "of sand. Crumbles if\n"
-        "touched.");
+    "만지면 무너지는\n"
+    "모래 장식품");
 
 const u8 DecorDesc_SILVER_SHIELD[] = _(
-    "Awarded for 50\n"
-        "straight wins at\n"
-        "the BATTLE TOWER.");
+    "배틀타워에서\n"
+    "50명 연승한\n"
+    "기념의 상패");
 
 const u8 DecorDesc_GOLD_SHIELD[] = _(
-    "Awarded for 100\n"
-        "straight wins at\n"
-        "the BATTLE TOWER.");
+    "배틀타워에서\n"
+    "100명 연승한\n"
+    "기념의 상패");
 
 const u8 DecorDesc_GLASS_ORNAMENT[] = _(
-    "A glass replica of\n"
-        "a famous sculpture\n"
-        "at the ART MUSEUM.");
+    "미술관에 있는\n"
+    "유명한 조각을\n"
+    "유리로 본떠 만든 것");
 
 const u8 DecorDesc_TV[] = _(
-    "A small, gray-\n"
-        "colored toy TV.");
+    "회색빛의 작은\n"
+    "장난감 TV");
 
 const u8 DecorDesc_ROUND_TV[] = _(
-    "A toy TV modeled\n"
-        "in the image of a\n"
-        "SEEDOT.");
+    "도토링을 모델로 하여\n"
+    "만들어진\n"
+    "장난감 TV");
 
 const u8 DecorDesc_CUTE_TV[] = _(
-    "A toy TV modeled\n"
-        "in the image of a\n"
-        "SKITTY.");
+    "에나비를 모델로 하여\n"
+    "만들어진\n"
+    "장난감 TV");
 
 const u8 DecorDesc_GLITTER_MAT[] = _(
-    "An odd mat that\n"
-        "glitters if stepped\n"
-        "on.");
+    "밟으면 반짝이는\n"
+    "이상한 매트");
 
 const u8 DecorDesc_JUMP_MAT[] = _(
-    "A trick mat that\n"
-        "jumps when it is\n"
-        "stepped on.");
+    "밟으면 점프하는\n"
+    "짓궂은 매트");
 
 const u8 DecorDesc_SPIN_MAT[] = _(
-    "A trick mat that\n"
-        "spins around when\n"
-        "stepped on.");
+    "밟으면 빙글빙글 도는\n"
+    "짖궂은 매트");
 
 const u8 DecorDesc_C_LOW_NOTE_MAT[] = _(
-    "A mat that plays\n"
-        "a low C note when\n"
-        "stepped on.");
+    "밟으면 도에 해당하는\n"
+    "소리가 나는 매트");
 
 const u8 DecorDesc_D_NOTE_MAT[] = _(
-    "A mat that plays\n"
-        "a D note when\n"
-        "stepped on.");
+    "밟으면 레에 해당하는\n"
+    "소리가 나는 매트");
 
 const u8 DecorDesc_E_NOTE_MAT[] = _(
-    "A mat that plays\n"
-        "an E note when\n"
-        "stepped on.");
+    "밟으면 미에 해당하는\n"
+    "소리가 나는 매트");
 
 const u8 DecorDesc_F_NOTE_MAT[] = _(
-    "A mat that plays\n"
-        "an F note when\n"
-        "stepped on.");
+    "밟으면 파에 해당하는\n"
+    "소리가 나는 매트");
 
 const u8 DecorDesc_G_NOTE_MAT[] = _(
-    "A mat that plays\n"
-        "a G note when\n"
-        "stepped on.");
+    "밟으면 솔에 해당하는\n"
+    "소리가 나는 매트");
 
 const u8 DecorDesc_A_NOTE_MAT[] = _(
-    "A mat that plays\n"
-        "an A note when\n"
-        "stepped on.");
+    "밟으면 라에 해당하는\n"
+    "소리가 나는 매트");
 
 const u8 DecorDesc_B_NOTE_MAT[] = _(
-    "A mat that plays\n"
-        "a B note when\n"
-        "stepped on.");
+    "밟으면 시에 해당하는\n"
+    "소리가 나는 매트");
 
 const u8 DecorDesc_C_HIGH_NOTE_MAT[] = _(
-    "A mat that plays\n"
-        "a high C note when\n"
-        "stepped on.");
+    "밟으면 높은 도에 해당하는\n"
+    "소리가 나는 매트");
 
 const u8 DecorDesc_SURF_MAT[] = _(
-    "A mat designed with\n"
-        "a SURF image.\n"
-        "Put items on top.");
+    "파도타기의 표현으로\n"
+    "만들어진 매트\n"
+    "위에 물건을 놓을 수 있다");
 
 const u8 DecorDesc_THUNDER_MAT[] = _(
-    "A mat designed with\n"
-        "a THUNDER image.\n"
-        "Put items on top.");
+    "번개의 표현으로\n"
+    "만들어진 매트\n"
+    "위에 물건을 놓을 수 있다");
 
 const u8 DecorDesc_FIRE_BLAST_MAT[] = _(
-    "A mat designed with\n"
-        "a FIRE BLAST image.\n"
-        "Put items on top.");
+    "불대문자의 표현으로\n"
+    "만들어진 매트\n"
+    "위에 물건을 놓을 수 있다");
 
 const u8 DecorDesc_POWDER_SNOW_MAT[] = _(
-    "A mat with a POWDER\n"
-        "SNOW image design.\n"
-        "Put items on top.");
+    "눈싸라기의 표현으로\n"
+    "만들어진 매트\n"
+    "위에 물건을 놓을 수 있다");
 
 const u8 DecorDesc_ATTRACT_MAT[] = _(
-    "A mat designed with\n"
-        "an ATTRACT image.\n"
-        "Put items on top.");
+    "헤롱헤롱의 표현으로\n"
+    "만들어진 매트\n"
+    "위에 물건을 놓을 수 있다");
 
 const u8 DecorDesc_FISSURE_MAT[] = _(
-    "A mat designed with\n"
-        "a FISSURE image.\n"
-        "Put items on top.");
+    "땅가르기의 표현으로\n"
+    "만들어진 매트\n"
+    "위에 물건을 놓을 수 있다");
 
 const u8 DecorDesc_SPIKES_MAT[] = _(
-    "A mat designed with\n"
-        "a SPIKES image.\n"
-        "Put items on top.");
+    "압정뿌리기의 표현으로\n"
+    "만들어진 매트\n"
+    "위에 물건을 놓을 수 있다");
 
 const u8 DecorDesc_BALL_POSTER[] = _(
-    "A small poster\n"
-        "printed with POKé\n"
-        "BALLS.");
+    "몬스터볼이\n"
+    "프린트되어 있는\n"
+    "작은 포스터");
 
 const u8 DecorDesc_GREEN_POSTER[] = _(
-    "A small poster with\n"
-        "a TREECKO print.");
+    "나무지기가\n"
+    "프린트되어 있는\n"
+    "작은 포스터");
 
 const u8 DecorDesc_RED_POSTER[] = _(
-    "A small poster with\n"
-        "a TORCHIC print.");
+    "아차모가\n"
+    "프린트되어 있는\n"
+    "작은 포스터");
 
 const u8 DecorDesc_BLUE_POSTER[] = _(
-    "A small poster with\n"
-        "a MUDKIP print.");
+    "물짱이가\n"
+    "프린트되어 있는\n"
+    "작은 포스터");
 
 const u8 DecorDesc_CUTE_POSTER[] = _(
-    "A small poster with\n"
-        "an AZURILL print.");
+    "루리리가\n"
+    "프린트되어 있는\n"
+    "작은 포스터");
 
 const u8 DecorDesc_PIKA_POSTER[] = _(
-    "A large poster with\n"
-        "a PIKACHU and\n"
-        "PICHU print.");
+    "피카츄와 피츄가\n"
+    "프린트되어 있는\n"
+    "큰 포스터");
 
 const u8 DecorDesc_LONG_POSTER[] = _(
-    "A large poster with\n"
-        "a SEVIPER print.");
+    "세비퍼가\n"
+    "프린트되어 있는\n"
+    "큰 포스터");
 
 const u8 DecorDesc_SEA_POSTER[] = _(
-    "A large poster with\n"
-        "a RELICANTH print.");
+    "시라칸이\n"
+    "프린트되어 있는\n"
+    "큰 포스터");
 
 const u8 DecorDesc_SKY_POSTER[] = _(
-    "A large poster with\n"
-        "a WINGULL print.");
+    "갈모매가\n"
+    "프린트되어 있는\n"
+    "큰 포스터");
 
 const u8 DecorDesc_KISS_POSTER[] = _(
-    "A large poster with\n"
-        "a SMOOCHUM print.");
+    "뽀뽀라가\n"
+    "프린트되어 있는\n"
+    "큰 포스터");
 
 const u8 DecorDesc_PICHU_DOLL[] = _(
-    "A PICHU doll.\n"
-        "Place it on a mat\n"
-        "or a desk.");
+    "피츄의 봉제인형\n"
+    "매트나 책상\n"
+    "위에 놓는다");
 
 const u8 DecorDesc_PIKACHU_DOLL[] = _(
-    "A PIKACHU doll.\n"
-        "Place it on a mat\n"
-        "or a desk.");
+    "피카츄의 봉제인형\n"
+    "매트나 책상\n"
+    "위에 놓는다");
 
 const u8 DecorDesc_MARILL_DOLL[] = _(
-    "A MARILL doll.\n"
-        "Place it on a mat\n"
-        "or a desk.");
+    "마릴의 봉제인형\n"
+    "매트나 책상\n"
+    "위에 놓는다");
 
 const u8 DecorDesc_TOGEPI_DOLL[] = _(
-    "A TOGEPI doll.\n"
-        "Place it on a mat\n"
-        "or a desk.");
+    "토게피의 봉제인형\n"
+    "매트나 책상\n"
+    "위에 놓는다");
 
 const u8 DecorDesc_CYNDAQUIL_DOLL[] = _(
-    "A CYNDAQUIL doll.\n"
-        "Place it on a mat\n"
-        "or a desk.");
+    "브케인의 봉제인형\n"
+    "매트나 책상\n"
+    "위에 놓는다");
 
 const u8 DecorDesc_CHIKORITA_DOLL[] = _(
-    "A CHIKORITA doll.\n"
-        "Place it on a mat\n"
-        "or a desk.");
+    "치코리타의 봉제인형\n"
+    "매트나 책상\n"
+    "위에 놓는다");
 
 const u8 DecorDesc_TOTODILE_DOLL[] = _(
-    "A TOTODILE doll.\n"
-        "Place it on a mat\n"
-        "or a desk.");
+    "리아코의 봉제인형\n"
+    "매트나 책상\n"
+    "위에 놓는다");
 
 const u8 DecorDesc_JIGGLYPUFF_DOLL[] = _(
-    "A JIGGLYPUFF doll.\n"
-        "Place it on a mat\n"
-        "or a desk.");
+    "푸린의 봉제인형\n"
+    "매트나 책상\n"
+    "위에 놓는다");
 
 const u8 DecorDesc_MEOWTH_DOLL[] = _(
-    "A MEOWTH doll.\n"
-        "Place it on a mat\n"
-        "or a desk.");
+    "나옹의 봉제인형\n"
+    "매트나 책상\n"
+    "위에 놓는다");
 
 const u8 DecorDesc_CLEFAIRY_DOLL[] = _(
-    "A CLEFAIRY doll.\n"
-        "Place it on a mat\n"
-        "or a desk.");
+    "삐삐의 봉제인형\n"
+    "매트나 책상\n"
+    "위에 놓는다");
 
 const u8 DecorDesc_DITTO_DOLL[] = _(
-    "A DITTO doll.\n"
-        "Place it on a mat\n"
-        "or a desk.");
+    "메타몽의 봉제인형\n"
+    "매트나 책상\n"
+    "위에 놓는다");
 
 const u8 DecorDesc_SMOOCHUM_DOLL[] = _(
-    "A SMOOCHUM doll.\n"
-        "Place it on a mat\n"
-        "or a desk.");
+    "뽀뽀라의 봉제인형\n"
+    "매트나 책상\n"
+    "위에 놓는다");
 
 const u8 DecorDesc_TREECKO_DOLL[] = _(
-    "A TREECKO doll.\n"
-        "Place it on a mat\n"
-        "or a desk.");
+    "나무지기의 봉제인형\n"
+    "매트나 책상\n"
+    "위에 놓는다");
 
 const u8 DecorDesc_TORCHIC_DOLL[] = _(
-    "A TORCHIC doll.\n"
-        "Place it on a mat\n"
-        "or a desk.");
+    "아차모의 봉제인형\n"
+    "매트나 책상\n"
+    "위에 놓는다");
 
 const u8 DecorDesc_MUDKIP_DOLL[] = _(
-    "A MUDKIP doll.\n"
-        "Place it on a mat\n"
-        "or a desk.");
+    "물짱이의 봉제인형\n"
+    "매트나 책상\n"
+    "위에 놓는다");
 
 const u8 DecorDesc_DUSKULL_DOLL[] = _(
-    "A DUSKULL doll.\n"
-        "Place it on a mat\n"
-        "or a desk.");
+    "해골몽의 봉제인형\n"
+    "매트나 책상\n"
+    "위에 놓는다");
 
 const u8 DecorDesc_WYNAUT_DOLL[] = _(
-    "A WYNAUT doll.\n"
-        "Place it on a mat\n"
-        "or a desk.");
+    "마자의 봉제인형\n"
+    "매트나 책상\n"
+    "위에 놓는다");
 
 const u8 DecorDesc_BALTOY_DOLL[] = _(
-    "A BALTOY doll.\n"
-        "Place it on a mat\n"
-        "or a desk.");
+    "오뚝군의 봉제인형\n"
+    "매트나 책상\n"
+    "위에 놓는다");
 
 const u8 DecorDesc_KECLEON_DOLL[] = _(
-    "A KECLEON doll.\n"
-        "Place it on a mat\n"
-        "or a desk.");
+    "켈리몬의 봉제인형\n"
+    "매트나 책상\n"
+    "위에 놓는다");
 
 const u8 DecorDesc_AZURILL_DOLL[] = _(
-    "An AZURILL doll.\n"
-        "Place it on a mat\n"
-        "or a desk.");
+    "루리리의 봉제인형\n"
+    "매트나 책상\n"
+    "위에 놓는다");
 
 const u8 DecorDesc_SKITTY_DOLL[] = _(
-    "A SKITTY doll.\n"
-        "Place it on a mat\n"
-        "or a desk.");
+    "에나비의 봉제인형\n"
+    "매트나 책상\n"
+    "위에 놓는다");
 
 const u8 DecorDesc_SWABLU_DOLL[] = _(
-    "A SWABLU doll.\n"
-        "Place it on a mat\n"
-        "or a desk.");
+    "파비코의 봉제인형\n"
+    "매트나 책상\n"
+    "위에 놓는다");
 
 const u8 DecorDesc_GULPIN_DOLL[] = _(
-    "A GULPIN doll.\n"
-        "Place it on a mat\n"
-        "or a desk.");
+    "꼴깍몬의 봉제인형\n"
+    "매트나 책상\n"
+    "위에 놓는다");
 
 const u8 DecorDesc_LOTAD_DOLL[] = _(
-    "A LOTAD doll.\n"
-        "Place it on a mat\n"
-        "or a desk.");
+    "연꽃몬의 봉제인형\n"
+    "매트나 책상\n"
+    "위에 놓는다");
 
 const u8 DecorDesc_SEEDOT_DOLL[] = _(
-    "A SEEDOT doll.\n"
-        "Place it on a mat\n"
-        "or a desk.");
+    "도토링의 봉제인형\n"
+    "매트나 책상\n"
+    "위에 놓는다");
 
 const u8 DecorDesc_PIKA_CUSHION[] = _(
-    "A PIKACHU cushion.\n"
-        "Place it on a mat\n"
-        "or a desk.");
+    "피카츄 쿠션\n"
+    "매트나 책상\n"
+    "위에 놓는다");
 
 const u8 DecorDesc_ROUND_CUSHION[] = _(
-    "A MARILL cushion.\n"
-        "Place it on a mat\n"
-        "or a desk.");
+    "마릴리 쿠션\n"
+    "매트나 책상\n"
+    "위에 놓는다");
 
 const u8 DecorDesc_KISS_CUSHION[] = _(
-    "A SMOOCHUM\n"
-        "cushion. Place it on\n"
-        "a mat or a desk.");
+    "뽀뽀라 쿠션\n"
+    "매트나 책상\n"
+    "위에 놓는다");
 
 const u8 DecorDesc_ZIGZAG_CUSHION[] = _(
-    "A ZIGZAGOON\n"
-        "cushion. Place it on\n"
-        "a mat or a desk.");
+    "지그제구리 쿠션\n"
+    "매트나 책상\n"
+    "위에 놓는다");
 
 const u8 DecorDesc_SPIN_CUSHION[] = _(
-    "A SPINDA cushion.\n"
-        "Place it on a mat\n"
-        "or a desk.");
+    "얼루기 쿠션\n"
+    "매트나 책상\n"
+    "위에 놓는다");
 
 const u8 DecorDesc_DIAMOND_CUSHION[] = _(
-    "A SABLEYE cushion.\n"
-        "Place it on a mat\n"
-        "or a desk.");
+    "깜까미 쿠션\n"
+    "매트나 책상\n"
+    "위에 놓는다");
 
 const u8 DecorDesc_BALL_CUSHION[] = _(
-    "A BALL cushion.\n"
-        "Place it on a mat\n"
-        "or a desk.");
+    "볼 쿠션\n"
+    "매트나 책상\n"
+    "위에 놓는다");
 
 const u8 DecorDesc_GRASS_CUSHION[] = _(
-    "A grass-mark\n"
-        "cushion. Place it on\n"
-        "a mat or a desk.");
+    "풀마크 쿠션\n"
+    "매트나 책상\n"
+    "위에 놓는다");
 
 const u8 DecorDesc_FIRE_CUSHION[] = _(
-    "A fire-mark\n"
-        "cushion. Place it on\n"
-        "a mat or a desk.");
+    "불꽃마크 쿠션\n"
+    "매트나 책상\n"
+    "위에 놓는다");
 
 const u8 DecorDesc_WATER_CUSHION[] = _(
-    "A water-mark\n"
-        "cushion. Place it on\n"
-        "a mat or a desk.");
+    "물마크 쿠션\n"
+    "매트나 책상\n"
+    "위에 놓는다");
 
 const u8 DecorDesc_SNORLAX_DOLL[] = _(
-    "A large doll.\n"
-        "Place it on a mat\n"
-        "or a desk.");
+    "잠만보의 봉제인형\n"
+    "매트나 책상\n"
+    "위에 놓는다");
 
 const u8 DecorDesc_RHYDON_DOLL[] = _(
-    "A large doll.\n"
-        "Place it on a mat\n"
-        "or a desk.");
+    "코뿌리의 봉제인형\n"
+    "매트나 책상\n"
+    "위에 놓는다");
 
 const u8 DecorDesc_LAPRAS_DOLL[] = _(
-    "A large doll.\n"
-        "Place it on a mat\n"
-        "or a desk.");
+    "라프라스의 봉제인형\n"
+    "매트나 책상\n"
+    "위에 놓는다");
 
 const u8 DecorDesc_VENUSAUR_DOLL[] = _(
-    "A large doll.\n"
-        "Place it on a mat\n"
-        "or a desk.");
+    "이상해꽃의 봉제인형\n"
+    "매트나 책상\n"
+    "위에 놓는다");
 
 const u8 DecorDesc_CHARIZARD_DOLL[] = _(
-    "A large doll.\n"
-        "Place it on a mat\n"
-        "or a desk.");
+    "리자몽의 봉제인형\n"
+    "매트나 책상\n"
+    "위에 놓는다");
 
 const u8 DecorDesc_BLASTOISE_DOLL[] = _(
-    "A large doll.\n"
-        "Place it on a mat\n"
-        "or a desk.");
+    "거북왕의 봉제인형\n"
+    "매트나 책상\n"
+    "위에 놓는다");
 
 const u8 DecorDesc_WAILMER_DOLL[] = _(
-    "A large doll.\n"
-        "Place it on a mat\n"
-        "or a desk.");
+    "고래왕자의 봉제인형\n"
+    "매트나 책상\n"
+    "위에 놓는다");
 
 const u8 DecorDesc_REGIROCK_DOLL[] = _(
-    "A large doll.\n"
-        "Place it on a mat\n"
-        "or a desk.");
+    "레지락의 봉제인형\n"
+    "매트나 책상\n"
+    "위에 놓는다");
 
 const u8 DecorDesc_REGICE_DOLL[] = _(
-    "A large doll.\n"
-        "Place it on a mat\n"
-        "or a desk.");
+    "레지아이스의 봉제인형\n"
+    "매트나 책상\n"
+    "위에 놓는다");
 
 const u8 DecorDesc_REGISTEEL_DOLL[] = _(
-    "A large doll.\n"
-        "Place it on a mat\n"
-        "or a desk.");
+    "레지스틸의 봉제인형\n"
+    "매트나 책상\n"
+    "위에 놓는다");

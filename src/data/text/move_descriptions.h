@@ -2,560 +2,560 @@ static const u8 sNullDescription[] = _(
     "");
 
 static const u8 sPoundDescription[] = _(
-    "Pounds the foe with\n"
-    "forelegs or tail.");
+    "손이나 꼬리 등으로\n"
+    "적을 때려서 공격");
 
 static const u8 sKarateChopDescription[] = _(
-    "A chopping attack with a\n"
-    "high critical-hit ratio.");
+    "당수로 적을 공격\n"
+    "급소에 맞기 쉬워진다");
 
 static const u8 sDoubleSlapDescription[] = _(
-    "Repeatedly slaps the foe\n"
-    "2 to 5 times.");
+    "적을 연속 뺨치기로\n"
+    "2-5회 연속으로 공격");
 
 static const u8 sCometPunchDescription[] = _(
-    "Repeatedly punches the foe\n"
-    "2 to 5 times.");
+    "적을 연속으로 세게 때려서\n"
+    "2-5회 연속으로 공격");
 
 static const u8 sMegaPunchDescription[] = _(
-    "A strong punch thrown with\n"
-    "incredible power.");
+    "굉장한 힘을 담은 펀치로\n"
+    "적을 때려서 공격");
 
 static const u8 sPayDayDescription[] = _(
-    "Throws coins at the foe.\n"
-    "Money is recovered after.");
+    "돈을 던져서 적을 공격\n"
+    "배틀 후에 돈을 얻을 수 있다");
 
 static const u8 sFirePunchDescription[] = _(
-    "A fiery punch that may burn\n"
-    "the foe.");
+    "불꽃을 담은 펀치로 공격\n"
+    "적을 화상 입힐 때가 있다");
 
 static const u8 sIcePunchDescription[] = _(
-    "An icy punch that may\n"
-    "freeze the foe.");
+    "냉기를 담은 펀치로 공격\n"
+    "적을 얼릴 때가 있다");
 
 static const u8 sThunderPunchDescription[] = _(
-    "An electrified punch that\n"
-    "may paralyze the foe.");
+    "전격을 담은 펀치로 공격\n"
+    "적을 마비시킬 때가 있다");
 
 static const u8 sScratchDescription[] = _(
-    "Scratches the foe with\n"
-    "sharp claws.");
+    "날카로운 손톱으로\n"
+    "적을 할퀴어서 공격");
 
 static const u8 sViceGripDescription[] = _(
-    "Grips the foe with large and\n"
-    "powerful pincers.");
+    "큰 집게를 사용해서\n"
+    "적을 집어 공격");
 
 static const u8 sGuillotineDescription[] = _(
-    "A powerful pincer attack\n"
-    "that may cause fainting.");
+    "큰 집게를 사용해서\n"
+    "적을 집어 전투불능으로 만든다");
 
 static const u8 sRazorWindDescription[] = _(
-    "A 2-turn move that strikes\n"
-    "the foe on the 2nd turn.");
+    "1턴째에 바람의 칼날을 만들어\n"
+    "다음 턴에 적을 공격");
 
 static const u8 sSwordsDanceDescription[] = _(
-    "A fighting dance that\n"
-    "sharply raises ATTACK.");
+    "싸움의 춤을 추어\n"
+    "공격을 크게 올린다");
 
 static const u8 sCutDescription[] = _(
-    "Cuts the foe with sharp\n"
-    "scythes, claws, etc.");
+    "날카로운 낫이나 손톱 등으로\n"
+    "적을 베어 공격");
 
 static const u8 sGustDescription[] = _(
-    "Strikes the foe with a gust\n"
-    "of wind whipped up by wings.");
+    "날개로 격한 바람을 일으켜\n"
+    "바람을 적에게 부딪쳐서 공격");
 
 static const u8 sWingAttackDescription[] = _(
-    "Strikes the foe with wings\n"
-    "spread wide.");
+    "날개를 크게 펼쳐\n"
+    "그대로 적에게 맞힌다");
 
 static const u8 sWhirlwindDescription[] = _(
-    "Blows away the foe with\n"
-    "wind and ends the battle.");
+    "강한 바람으로 적을 날려버린다\n"
+    "날려버리면 배틀은 끝난다");
 
 static const u8 sFlyDescription[] = _(
-    "Flies up on the first turn,\n"
-    "then strikes the next turn.");
+    "1턴째에 하늘로 날아올라\n"
+    "다음 턴에 적을 공격");
 
 static const u8 sBindDescription[] = _(
-    "Binds and squeezes the foe\n"
-    "for 2 to 5 turns.");
+    "2-5턴 동안 긴 몸이나\n"
+    "덩굴 등을 써서 적을 조인다");
 
 static const u8 sSlamDescription[] = _(
-    "Slams the foe with a long\n"
-    "tail, vine, etc.");
+    "긴 꼬리나 덩굴 등을 써서\n"
+    "적을 힘껏 쳐서 공격");
 
 static const u8 sVineWhipDescription[] = _(
-    "Strikes the foe with\n"
-    "slender, whiplike vines.");
+    "채찍처럼 가늘고 긴 덩굴을\n"
+    "적에게 힘껏 쳐서 공격");
 
 static const u8 sStompDescription[] = _(
-    "Stomps the enemy with a big\n"
-    "foot. May cause flinching.");
+    "큰 발로 적을 짓밟아서 공격\n"
+    "적을 풀죽게 할 때가 있다");
 
 static const u8 sDoubleKickDescription[] = _(
-    "A double-kicking attack\n"
-    "that strikes the foe twice.");
+    "2개의 다리로 적을\n"
+    "2회 연속으로 공격");
 
 static const u8 sMegaKickDescription[] = _(
-    "An extremely powerful kick\n"
-    "with intense force.");
+    "굉장한 힘을 담은 킥으로\n"
+    "적을 걷어차서 공격");
 
 static const u8 sJumpKickDescription[] = _(
-    "A strong jumping kick. May\n"
-    "miss and hurt the kicker.");
+    "점프한 기세로 킥을\n"
+    "날린다 빗나가면 데미지를 입는다");
 
 static const u8 sRollingKickDescription[] = _(
-    "A fast kick delivered from\n"
-    "a rapid spin.");
+    "몸을 재빨리 1회전시켜\n"
+    "그 기세로 킥을 날린다");
 
 static const u8 sSandAttackDescription[] = _(
-    "Reduces the foe's accuracy\n"
-    "by hurling sand in its face.");
+    "적의 얼굴 등에 모래를 뿌려서\n"
+    "명중률을 떨어뜨리게 한다");
 
 static const u8 sHeadbuttDescription[] = _(
-    "A ramming attack that may\n"
-    "cause flinching.");
+    "머리부터 돌진하여 공격\n"
+    "적을 풀죽게 만들 때가 있다");
 
 static const u8 sHornAttackDescription[] = _(
-    "Jabs the foe with sharp\n"
-    "horns.");
+    "뾰족한 뿔로\n"
+    "적을 찔러서 공격");
 
 static const u8 sFuryAttackDescription[] = _(
-    "Jabs the foe 2 to 5 times\n"
-    "with sharp horns, etc.");
+    "뾰족한 뿔 등으로\n"
+    "2-5회 연속으로 공격");
 
 static const u8 sHornDrillDescription[] = _(
-    "A one-hit KO attack that\n"
-    "uses a horn like a drill.");
+    "뿔을 드릴같이 회전시켜\n"
+    "적을 찔러서 전투불능으로 만든다");
 
 static const u8 sTackleDescription[] = _(
-    "Charges the foe with a full-\n"
-    "body tackle.");
+    "몸 전체를 써가며\n"
+    "적에게 부딪쳐서 공격");
 
 static const u8 sBodySlamDescription[] = _(
-    "A full-body slam that may\n"
-    "cause paralysis.");
+    "몸째로 자빠져서 공격\n"
+    "적을 마비시킬 때가 있다");
 
 static const u8 sWrapDescription[] = _(
-    "Wraps and squeezes the foe\n"
-    "2 to 5 times with vines, etc.");
+    "2-5턴 동안 긴 몸이나\n"
+    "덩굴을 사용해 적을 조인다");
 
 static const u8 sTakeDownDescription[] = _(
-    "A reckless charge attack\n"
-    "that also hurts the user.");
+    "기세를 더해 적에게 부딪친다\n"
+    "자신도 조금 데미지를 입는다");
 
 static const u8 sThrashDescription[] = _(
-    "A rampage of 2 to 3 turns\n"
-    "that confuses the user.");
+    "2-3턴 동안 난동부린다\n"
+    "난동부린 뒤에는 혼란에 빠져버린다");
 
 static const u8 sDoubleEdgeDescription[] = _(
-    "A life-risking tackle that\n"
-    "also hurts the user.");
+    "목숨을 걸고 적에게 부딪친다\n"
+    "자신도 조금 데미지를 입는다");
 
 static const u8 sTailWhipDescription[] = _(
-    "Wags the tail to lower the\n"
-    "foe's DEFENSE.");
+    "적에게 꼬리를 흔들어 방심시켜서\n"
+    "방어를 떨어뜨리게 한다");
 
 static const u8 sPoisonStingDescription[] = _(
-    "A toxic attack with barbs,\n"
-    "etc., that may poison.");
+    "독이 있는 침이나 뿔로 공격\n"
+    "적에게 독을 줄 때가 있다");
 
 static const u8 sTwineedleDescription[] = _(
-    "Stingers on the forelegs\n"
-    "jab the foe twice.");
+    "양손의 침을 써서\n"
+    "적을 2회 연속으로 공격");
 
 static const u8 sPinMissileDescription[] = _(
-    "Sharp pins are fired to\n"
-    "strike 2 to 5 times.");
+    "날카로운 침을 적에게 발사해서\n"
+    "2-5회 연속으로 공격");
 
 static const u8 sLeerDescription[] = _(
-    "Frightens the foe with a\n"
-    "leer to lower DEFENSE.");
+    "적을 째려봐서 겁을 주어\n"
+    "방어를 떨어뜨리게 한다");
 
 static const u8 sBiteDescription[] = _(
-    "Bites with vicious fangs.\n"
-    "May cause flinching.");
+    "날카로운 이빨로 물어서 공격\n"
+    "적을 풀죽게 만들 때가 있다");
 
 static const u8 sGrowlDescription[] = _(
-    "Growls cutely to reduce the\n"
-    "foe's ATTACK.");
+    "귀엽게 울어 적을 방심시켜서\n"
+    "공격을 떨어뜨리게 한다");
 
 static const u8 sRoarDescription[] = _(
-    "Makes the foe flee to end\n"
-    "the battle.");
+    "짖어서 적을 도망치게 한다\n"
+    "적이 도망치면 배틀은 끝난다");
 
 static const u8 sSingDescription[] = _(
-    "A soothing song lulls the\n"
-    "foe into a deep slumber.");
+    "기분 좋은 노랫소리로\n"
+    "적을 깊은 잠으로 유도한다");
 
 static const u8 sSupersonicDescription[] = _(
-    "Emits bizarre sound waves\n"
-    "that may confuse the foe.");
+    "몸에서 괴음파를 발산하여\n"
+    "적을 혼란시킬 때가 있다");
 
 static const u8 sSonicBoomDescription[] = _(
-    "Launches shock waves that\n"
-    "always inflict 20 HP damage.");
+    "충격파로 적을 공격\n"
+    "언제나 20의 데미지를 준다");
 
 static const u8 sDisableDescription[] = _(
-    "Psychically disables one of\n"
-    "the foe's moves.");
+    "초능력으로 적의 움직임을\n"
+    "막아서 기술을 1개 쓰지 못하게 한다");
 
 static const u8 sAcidDescription[] = _(
-    "Sprays a hide-melting acid.\n"
-    "May lower DEFENSE.");
+    "강한 산으로 적의 피부를 녹인다\n"
+    "방어를 떨어뜨릴 때가 있다");
 
 static const u8 sEmberDescription[] = _(
-    "A weak fire attack that may\n"
-    "inflict a burn.");
+    "작은 불꽃으로 공격\n"
+    "적을 화상 입힐 때가 있다");
 
 static const u8 sFlamethrowerDescription[] = _(
-    "A powerful fire attack that\n"
-    "may inflict a burn.");
+    "굉장한 불꽃으로 공격\n"
+    "적을 화상 입힐 때가 있다");
 
 static const u8 sMistDescription[] = _(
-    "Creates a mist that stops\n"
-    "reduction of abilities.");
+    "하얀 안개로 몸을 덮어\n"
+    "능력이 떨어지지 않게 한다");
 
 static const u8 sWaterGunDescription[] = _(
-    "Squirts water to attack\n"
-    "the foe.");
+    "물을 발사하여\n"
+    "적을 공격");
 
 static const u8 sHydroPumpDescription[] = _(
-    "Blasts water at high power\n"
-    "to strike the foe.");
+    "물을 굉장한 기세로\n"
+    "발사하여 적을 공격");
 
 static const u8 sSurfDescription[] = _(
-    "Creates a huge wave, then\n"
-    "crashes it down on the foe.");
+    "물에 파도를 일으켜 그것을\n"
+    "굉장한 힘으로 내려친다");
 
 static const u8 sIceBeamDescription[] = _(
-    "Blasts the foe with an icy\n"
-    "beam that may freeze it.");
+    "냉기를 발사하여 공격\n"
+    "적을 얼릴 때가 있다");
 
 static const u8 sBlizzardDescription[] = _(
-    "Hits the foe with an icy\n"
-    "storm that may freeze it.");
+    "눈을 강한 바람에 실어서 공격\n"
+    "적을 얼릴 때가 있다");
 
 static const u8 sPsybeamDescription[] = _(
-    "Fires a peculiar ray that\n"
-    "may confuse the foe.");
+    "이상한 빛을 발사한다\n"
+    "적을 혼란시킬 때가 있다");
 
 static const u8 sBubbleBeamDescription[] = _(
-    "Forcefully sprays bubbles\n"
-    "that may lower SPEED.");
+    "거품을 기세 좋게 발사한다\n"
+    "적의 스피드를 떨어뜨릴 때가 있다");
 
 static const u8 sAuroraBeamDescription[] = _(
-    "Fires a rainbow-colored\n"
-    "beam that may lower ATTACK.");
+    "무지개색의 빛을 발사한다\n"
+    "공격을 떨어뜨릴 때가 있다");
 
 static const u8 sHyperBeamDescription[] = _(
-    "Powerful, but leaves the\n"
-    "user immobile the next turn.");
+    "데미지는 크지만 사용하면\n"
+    "다음 턴은 움직일 수 없게 되어버린다");
 
 static const u8 sPeckDescription[] = _(
-    "Attacks the foe with a\n"
-    "jabbing beak, etc.");
+    "부리 등으로\n"
+    "적을 쪼아서 공격");
 
 static const u8 sDrillPeckDescription[] = _(
-    "A corkscrewing attack with\n"
-    "the beak acting as a drill.");
+    "부리를 중심으로 몸을\n"
+    "회전시켜서 적에게 돌진한다");
 
 static const u8 sSubmissionDescription[] = _(
-    "A reckless body slam that\n"
-    "also hurts the user.");
+    "자신과 함께 땅에 내던진다\n"
+    "자신도 조금 데미지를 입는다");
 
 static const u8 sLowKickDescription[] = _(
-    "A kick that inflicts more\n"
-    "damage on heavier foes.");
+    "무거운 포켓몬에게는 더\n"
+    "큰 데미지를 준다");
 
 static const u8 sCounterDescription[] = _(
-    "Retaliates any physical hit\n"
-    "with double the power.");
+    "적으로부터 받은 물리공격의\n"
+    "데미지를 배로 만들어 돌려준다");
 
 static const u8 sSeismicTossDescription[] = _(
-    "Inflicts damage identical\n"
-    "to the user's level.");
+    "인력을 이용해 내던진다\n"
+    "레벨만큼의 데미지를 준다");
 
 static const u8 sStrengthDescription[] = _(
-    "Builds enormous power,\n"
-    "then slams the foe.");
+    "전신에 굉장한 힘을 담아서\n"
+    "적을 공격");
 
 static const u8 sAbsorbDescription[] = _(
-    "An attack that absorbs\n"
-    "half the damage inflicted.");
+    "적에게 입힌 데미지의\n"
+    "절반에 해당하는 체력을 회복한다");
 
 static const u8 sMegaDrainDescription[] = _(
-    "An attack that absorbs\n"
-    "half the damage inflicted.");
+    "적에게 입힌 데미지의\n"
+    "절반에 해당하는 체력을 회복한다");
 
 static const u8 sLeechSeedDescription[] = _(
-    "Plants a seed on the foe to\n"
-    "steal HP on every turn.");
+    "적의 몸에 씨를 뿌려서\n"
+    "턴마다 체력을 흡수한다");
 
 static const u8 sGrowthDescription[] = _(
-    "Forces the body to grow\n"
-    "and heightens SP. ATK.");
+    "일시에 몸을 성장시켜\n"
+    "특수공격을 올린다");
 
 static const u8 sRazorLeafDescription[] = _(
-    "Cuts the enemy with leaves.\n"
-    "High critical-hit ratio.");
+    "잎사귀로 적을 벤다\n"
+    "급소에 맞기 쉽다");
 
 static const u8 sSolarBeamDescription[] = _(
-    "Absorbs light in one turn,\n"
-    "then attacks next turn.");
+    "1턴째에 빛을 흡수\n"
+    "다음 턴에 적을 공격");
 
 static const u8 sPoisonPowderDescription[] = _(
-    "Scatters a toxic powder\n"
-    "that may poison the foe.");
+    "독소를 품은 가루를 흩뿌려서\n"
+    "적에게 독을 준다");
 
 static const u8 sStunSporeDescription[] = _(
-    "Scatters a powder that may\n"
-    "paralyze the foe.");
+    "저리 가루를 흩뿌려서\n"
+    "적을 마비시켜 버린다");
 
 static const u8 sSleepPowderDescription[] = _(
-    "Scatters a powder that may\n"
-    "cause the foe to sleep.");
+    "잠이 오는 가루를 흩뿌려서\n"
+    "적을 잠들게 해버린다");
 
 static const u8 sPetalDanceDescription[] = _(
-    "A rampage of 2 to 3 turns\n"
-    "that confuses the user.");
+    "2-3턴 동안 난동부린다\n"
+    "난동부린 뒤에는 혼란에 빠져버린다");
 
 static const u8 sStringShotDescription[] = _(
-    "Binds the foe with string\n"
-    "to reduce its SPEED.");
+    "실을 적의 몸에 휘감아서\n"
+    "스피드를 떨어뜨리게 한다");
 
 static const u8 sDragonRageDescription[] = _(
-    "Launches shock waves that\n"
-    "always inflict 40 HP damage.");
+    "충격파로 적을 공격\n"
+    "언제나 40의 데미지를 준다");
 
 static const u8 sFireSpinDescription[] = _(
-    "Traps the foe in a ring of\n"
-    "fire for 2 to 5 turns.");
+    "2-5턴 동안 적을\n"
+    "불꽃의 중심에 가둔다");
 
 static const u8 sThunderShockDescription[] = _(
-    "An electrical attack that\n"
-    "may paralyze the foe.");
+    "전격을 날려서 공격\n"
+    "적을 마비시킬 때가 있다");
 
 static const u8 sThunderboltDescription[] = _(
-    "A strong electrical attack\n"
-    "that may paralyze the foe.");
+    "강한 전격을 날려서 공격\n"
+    "적을 마비시킬 때가 있다");
 
 static const u8 sThunderWaveDescription[] = _(
-    "A weak jolt of electricity\n"
-    "that paralyzes the foe.");
+    "약한 전격을 적에게 던져서\n"
+    "마비시켜 버린다");
 
 static const u8 sThunderDescription[] = _(
-    "A lightning attack that may\n"
-    "cause paralysis.");
+    "적을 향해 번개를 떨어뜨린다\n"
+    "마비시킬 때가 있다");
 
 static const u8 sRockThrowDescription[] = _(
-    "Throws small rocks to\n"
-    "strike the foe.");
+    "작은 바위를 내던져서\n"
+    "적을 공격");
 
 static const u8 sEarthquakeDescription[] = _(
-    "A powerful quake, but has\n"
-    "no effect on flying foes.");
+    "땅을 흔들어서 공격\n"
+    "날고 있는 포켓몬 이외에 큰 데미지");
 
 static const u8 sFissureDescription[] = _(
-    "A one-hit KO move that\n"
-    "drops the foe in a fissure.");
+    "땅을 갈라서 적을 삼킨다\n"
+    "삼켜지면 전투불능이 된다");
 
 static const u8 sDigDescription[] = _(
-    "Digs underground the first\n"
-    "turn and strikes next turn.");
+    "1턴째에 땅으로 파고들어\n"
+    "다음 턴에 적을 공격");
 
 static const u8 sToxicDescription[] = _(
-    "Poisons the foe with an\n"
-    "intensifying toxin.");
+    "서서히 데미지가 증가하는 독을\n"
+    "적에게 준다");
 
 static const u8 sConfusionDescription[] = _(
-    "A psychic attack that may\n"
-    "cause confusion.");
+    "초능력으로 공격\n"
+    "적을 혼란시킬 때가 있다");
 
 static const u8 sPsychicDescription[] = _(
-    "A powerful psychic attack\n"
-    "that may lower SP. DEF.");
+    "강한 염동력으로 적을 공격\n"
+    "특수방어를 떨어뜨릴 때가 있다");
 
 static const u8 sHypnosisDescription[] = _(
-    "A hypnotizing move that\n"
-    "may induce sleep.");
+    "적에게 암시를 걸어서\n"
+    "깊은 잠으로 유도한다");
 
 static const u8 sMeditateDescription[] = _(
-    "Meditates in a peaceful\n"
-    "fashion to raise ATTACK.");
+    "요가포즈로 잠든 힘을\n"
+    "끌어내어 공격을 올린다");
 
 static const u8 sAgilityDescription[] = _(
-    "Relaxes the body to sharply\n"
-    "boost SPEED.");
+    "힘을 빼고 몸을 가볍게 해서\n"
+    "스피드를 크게 올린다");
 
 static const u8 sQuickAttackDescription[] = _(
-    "An extremely fast attack\n"
-    "that always strikes first.");
+    "굉장한 속도로 움직여서\n"
+    "선제공격한다");
 
 static const u8 sRageDescription[] = _(
-    "Raises the user's ATTACK\n"
-    "every time it is hit.");
+    "공격을 받았을 때 분노로\n"
+    "공격이 오른다");
 
 static const u8 sTeleportDescription[] = _(
-    "A psychic move for fleeing\n"
-    "from battle instantly.");
+    "초능력을 사용해\n"
+    "배틀에서 탈출한다");
 
 static const u8 sNightShadeDescription[] = _(
-    "Inflicts damage identical\n"
-    "to the user's level.");
+    "적에게 무시무시한 환상을 보게 해\n"
+    "레벨만큼의 데미지를 준다");
 
 static const u8 sMimicDescription[] = _(
-    "Copies a move used by the\n"
-    "foe during one battle.");
+    "적이 사용한 기술이\n"
+    "그때에만 자신의 기술이 된다");
 
 static const u8 sScreechDescription[] = _(
-    "Emits a screech to sharply\n"
-    "reduce the foe's DEFENSE.");
+    "싫은 소리를 내어 적의\n"
+    "방어를 크게 떨어뜨리게 한다");
 
 static const u8 sDoubleTeamDescription[] = _(
-    "Creates illusory copies to\n"
-    "raise evasiveness.");
+    "분신으로 적을 혼란시켜\n"
+    "회피율을 올린다");
 
 static const u8 sRecoverDescription[] = _(
-    "Recovers up to half the\n"
-    "user's maximum HP.");
+    "상처 입은 몸을 체력의\n"
+    "절반만큼 회복한다");
 
 static const u8 sHardenDescription[] = _(
-    "Stiffens the body's \n"
-    "muscles to raise DEFENSE.");
+    "전신에 힘을 담아 단단하게 해\n"
+    "방어를 올린다");
 
 static const u8 sMinimizeDescription[] = _(
-    "Minimizes the user's size\n"
-    "to raise evasiveness.");
+    "몸을 축소하여 작아짐으로써\n"
+    "회피율을 올린다");
 
 static const u8 sSmokescreenDescription[] = _(
-    "Lowers the foe's accuracy\n"
-    "using smoke, ink, etc.");
+    "연기나 먹물 등으로 적의\n"
+    "명중률을 떨어뜨리게 한다");
 
 static const u8 sConfuseRayDescription[] = _(
-    "A sinister ray that\n"
-    "confuses the foe.");
+    "이상한 빛으로 적을\n"
+    "당황하게 해서 혼란시켜 버린다");
 
 static const u8 sWithdrawDescription[] = _(
-    "Withdraws the body into its\n"
-    "hard shell to raise DEFENSE.");
+    "단단한 껍질에 숨어\n"
+    "방어를 올린다");
 
 static const u8 sDefenseCurlDescription[] = _(
-    "Curls up to conceal weak\n"
-    "spots and raise DEFENSE.");
+    "몸을 둥글게 해 급소를\n"
+    "숨김으로써 방어를 올린다");
 
 static const u8 sBarrierDescription[] = _(
-    "Creates a barrier that\n"
-    "sharply raises DEFENSE.");
+    "눈앞에 장막을 만들어\n"
+    "방어를 크게 올린다");
 
 static const u8 sLightScreenDescription[] = _(
-    "Creates a wall of light that\n"
-    "lowers SP. ATK damage.");
+    "빛의 장막을 만들어\n"
+    "특수공격의 데미지를 약하게 한다");
 
 static const u8 sHazeDescription[] = _(
-    "Creates a black haze that\n"
-    "eliminates all stat changes.");
+    "흑안개에 덮여 능력의\n"
+    "이상을 원래대로 돌린다");
 
 static const u8 sReflectDescription[] = _(
-    "Creates a wall of light that\n"
-    "weakens physical attacks.");
+    "장막을 만들어 물리공격의\n"
+    "데미지를 약하게 한다");
 
 static const u8 sFocusEnergyDescription[] = _(
-    "Focuses power to raise the\n"
-    "critical-hit ratio.");
+    "공격에 기합을 넣어\n"
+    "급소에 맞기 쉬워진다");
 
 static const u8 sBideDescription[] = _(
-    "Endures attack for 2\n"
-    "turns to retaliate double.");
+    "2턴 공격을 견뎌\n"
+    "받은 데미지를 배로 되돌려준다");
 
 static const u8 sMetronomeDescription[] = _(
-    "Waggles a finger to use any\n"
-    "POKéMON move at random.");
+    "손가락을 흔들어 뇌를 자극해서\n"
+    "여러 기술을 랜덤으로 날린다");
 
 static const u8 sMirrorMoveDescription[] = _(
-    "Counters the foe's attack\n"
-    "with the same move.");
+    "적의 기술을 흉내 내어\n"
+    "똑같은 기술로 적을 공격");
 
 static const u8 sSelfDestructDescription[] = _(
-    "Inflicts severe damage but\n"
-    "makes the user faint.");
+    "적에게 큰 데미지를 주지만\n"
+    "쓰고 나서 전투불능이 된다");
 
 static const u8 sEggBombDescription[] = _(
-    "An egg is forcibly hurled at\n"
-    "the foe.");
+    "알을 있는 힘껏 내던져서\n"
+    "적을 공격");
 
 static const u8 sLickDescription[] = _(
-    "Licks with a long tongue to\n"
-    "injure. May also paralyze.");
+    "긴 혀로 핥아서 공격\n"
+    "적을 마비시킬 때가 있다");
 
 static const u8 sSmogDescription[] = _(
-    "An exhaust-gas attack\n"
-    "that may also poison.");
+    "배기가스를 내뿜어 공격\n"
+    "적에게 독을 줄 때가 있다");
 
 static const u8 sSludgeDescription[] = _(
-    "Sludge is hurled to inflict\n"
-    "damage. May also poison.");
+    "오물을 내던져서 공격\n"
+    "적에게 독을 줄 때가 있다");
 
 static const u8 sBoneClubDescription[] = _(
-    "Clubs the foe with a bone.\n"
-    "May cause flinching.");
+    "손에 들고 있는 뼈로 적을 공격\n"
+    "적을 풀죽게 만들 때가 있다");
 
 static const u8 sFireBlastDescription[] = _(
-    "Incinerates everything it\n"
-    "strikes. May cause a burn.");
+    "큰 문자가 모든 것을 불태운다\n"
+    "적을 화상 입힐 때가 있다");
 
 static const u8 sWaterfallDescription[] = _(
-    "Charges the foe with speed\n"
-    "to climb waterfalls.");
+    "폭포를 거슬러 올라갈 듯한 기세로\n"
+    "적에게 돌진한다");
 
 static const u8 sClampDescription[] = _(
-    "Traps and squeezes the\n"
-    "foe for 2 to 5 turns.");
+    "2-5턴 동안 적을\n"
+    "껍질에 끼워버린다");
 
 static const u8 sSwiftDescription[] = _(
-    "Sprays star-shaped rays\n"
-    "that never miss.");
+    "절대 피할 수 없는 별 모양의\n"
+    "광선을 무수히 발사한다");
 
 static const u8 sSkullBashDescription[] = _(
-    "Tucks in the head, then\n"
-    "attacks on the next turn.");
+    "1턴째에 머리를 움츠리고\n"
+    "다음 턴에 적을 공격");
 
 static const u8 sSpikeCannonDescription[] = _(
-    "Launches sharp spikes that\n"
-    "strike 2 to 5 times.");
+    "날카로운 침을 적에게 발사해서\n"
+    "2-5회 연속으로 공격");
 
 static const u8 sConstrictDescription[] = _(
-    "Constricts to inflict pain.\n"
-    "May lower SPEED.");
+    "적을 휘감아서 공격한다\n"
+    "적의 스피드를 떨어뜨릴 때가 있다");
 
 static const u8 sAmnesiaDescription[] = _(
-    "Forgets about something\n"
-    "and sharply raises SP. DEF.");
+    "순간적으로 무언가를 잊어버림으로써\n"
+    "특수방어를 크게 올린다");
 
 static const u8 sKinesisDescription[] = _(
-    "Distracts the foe.\n"
-    "May lower accuracy.");
+    "적의 눈을 숟가락으로 향하게 하여\n"
+    "명중률을 낮추게 한다");
 
 static const u8 sSoftBoiledDescription[] = _(
-    "Recovers up to half the\n"
-    "user's maximum HP.");
+    "상처 입은 몸을 체력의\n"
+    "절반만큼 회복한다");
 
 static const u8 sHiJumpKickDescription[] = _(
-    "A jumping knee kick. If it\n"
-    "misses, the user is hurt.");
+    "점프한 기세로 무릎차기를\n"
+    "날린다 빗나가면 데미지를 입는다");
 
 static const u8 sGlareDescription[] = _(
-    "Intimidates and frightens\n"
-    "the foe into paralysis.");
+    "배의 무늬로 적을 위협해\n"
+    "겁을 주어서 마비시켜 버린다");
 
 static const u8 sDreamEaterDescription[] = _(
-    "Takes one half the damage\n"
-    "inflicted on a sleeping foe.");
+    "잠자고 있는 적에게 준 데미지의\n"
+    "절반만큼 체력을 회복한다");
 
 static const u8 sPoisonGasDescription[] = _(
-    "Envelops the foe in a toxic\n"
-    "gas that may poison.");
+    "독가스를 적에게 내뿜어\n"
+    "독을 준다");
 
 static const u8 sBarrageDescription[] = _(
     "Hurls round objects at the\n"
