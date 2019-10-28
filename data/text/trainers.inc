@@ -810,446 +810,446 @@ Route108_Text_CarolinaPostBattle:
 	.string "이렇게 바다에 있으니까\n"
 	.string "수영복이 입고 싶어졌어...$"
 
-Route109_Text_297140:
+Route109_Text_DavidIntro:
 	.string "흐아아압!\n"
 	.string "멋지게 갈라진 이 복근을 봐랏-!!$"
 
-Route109_Text_29717D:
+Route109_Text_DavidDefeated:
 	.string "흐아아압-!!\n"
 	.string "져버렸다-!!$"
 
-Route109_Text_297191:
+Route109_Text_DavidPostBattle:
 	.string "흐아아압!!\p"
 	.string "복근과 포켓몬 승부는\n"
 	.string "아무 상관이 없다앗-!!$"
 
-Route109_Text_2971D1:
+Route109_Text_AliceIntro:
 	.string "자외선 차단 잘 하고 있니?$"
 
-Route109_Text_2971FD:
+Route109_Text_AliceDefeated:
 	.string "아따따따가워!$"
 
-Route109_Text_29720F:
+Route109_Text_AlicePostBattle:
 	.string "볼 주변이 제일\n"
 	.string "타기 쉬워!$"
 
-Route109_Text_297235:
+Route109_Text_HueyIntro:
 	.string "전 세계의 항구를 찾아가 봤지만\n"
 	.string "잿빛도시는 최고의 항구도시다!$"
 
-Route109_Text_29727B:
+Route109_Text_HueyDefeated:
 	.string "너도 최고군...$"
 
-Route109_Text_29728C:
+Route109_Text_HueyPostBattle:
 	.string "최고의 항구에는\n"
 	.string "최고의 트레이너가 있었군...$"
 
-Route109_Text_2972B3:
+Route109_Text_EdmondIntro:
 	.string "으으으...\n"
 	.string "지금 승부하려고? 나랑?$"
 
-Route109_Text_2972CE:
+Route109_Text_EdmondDefeated:
 	.string "우웨에에엑...$"
 
-Route109_Text_2972ED:
+Route109_Text_EdmondPostBattle:
 	.string "원래 평소엔 더 강해!\n"
 	.string "뱃멀미 때문에\l"
 	.string "상태가 안 좋을 뿐이야!\p"
 	.string "선원이긴 하지만...$"
 
-Route109_Text_29733B:
+Route109_Text_RickyIntro:
 	.string "목마르다...\n"
 	.string "바다의 집에서\l"
 	.string "미네랄사이다가 마시고 싶어...$"
 
-Route109_Text_297379:
+Route109_Text_RickyDefeated:
 	.string "으-으...$"
 
-Route109_Text_297380:
+Route109_Text_RickyPostBattle:
 	.string "배도 고파오니까...\n"
 	.string "튜브가 커다란 도넛으로\l"
 	.string "보이기 시작했어$"
 
-Route109_Text_2973C1:
+Route109_Text_RickyRegister:
 	.string "배고프지 않을 때\n"
 	.string "다시 승부하지 않을래?$"
 
-Route109_Text_2973FF:
+Route109_Text_RickyRematchIntro:
 	.string "배는 고프지만\n"
 	.string "승부할 힘은 남아 있어!$"
 
-Route109_Text_297437:
+Route109_Text_RickyRematchDefeated:
 	.string "졌다...\n"
 	.string "배가 고파서 진 거야$"
 
-Route109_Text_297458:
+Route109_Text_RickyRematchPostBattle:
 	.string "백사장에서 먹으면\n"
 	.string "뭐든지 다 맛있게 느껴져$"
 
-Route109_Text_29749C:
+Route109_Text_LolaIntro:
 	.string "비치파라솔은\n"
 	.string "커다란 꽃처럼 보여-!$"
 
-Route109_Text_2974CF:
+Route109_Text_LolaDefeated:
 	.string "엄마아-!$"
 
-Route109_Text_2974D6:
+Route109_Text_LolaPostBattle:
 	.string "하늘에서 모래 해변을 보면\n"
 	.string "꽃밭처럼 보여!$"
 
-Route109_Text_297520:
+Route109_Text_LolaRegister:
 	.string "나?\n"
 	.string "난 항상 여기 있어!$"
 
-Route109_Text_297538:
+Route109_Text_LolaRematchIntro:
 	.string "이제 지지 않을 거야!\n"
 	.string "이기기 위해 튜브도 끼고 있으니까!$"
 
-Route109_Text_297576:
+Route109_Text_LolaRematchDefeated:
 	.string "엄마아-!$"
 
-Route109_Text_29757D:
+Route109_Text_LolaRematchPostBattle:
 	.string "튜브를 가지고 있으면\n"
 	.string "나랑 포켓몬이 더 귀여워 보여!$"
 
-Route109_Text_2975C0:
+Route109_Text_AustinaIntro:
 	.string "튜브가 없으면 헤엄칠 수 없지만\n"
 	.string "포켓몬이라면 절대 지지 않아!$"
 
-Route109_Text_297601:
+Route109_Text_AustinaDefeated:
 	.string "튜브 때문에 진 건가?$"
 
-Route109_Text_29762A:
+Route109_Text_AustinaPostBattle:
 	.string "튜브는 내 패션의 완성이니까\n"
 	.string "놓을 수가 없어$"
 
-Route109_Text_297667:
+Route109_Text_GwenIntro:
 	.string "지나가는 트레이너님!\n"
 	.string "저랑 승부해쥬세여!$"
 
-Route109_Text_297691:
+Route109_Text_GwenDefeated:
 	.string "너무 강했쪄여...$"
 
-Route109_Text_2976A4:
+Route109_Text_GwenPostBattle:
 	.string "어떻게 하면\n"
 	.string "그렇게 강해질 쭈 있나여...?$"
 
-Route109_Text_2976C5:
+Route109_Text_CarterIntro:
 	.string "으하하하! 이 아저씨가\n"
 	.string "대어를 낚는 걸 잘 보라고!$"
 
-Route109_Text_2976FC:
+Route109_Text_CarterDefeated:
 	.string "아저씬 져버렸군...$"
 
-Route109_Text_297715:
+Route109_Text_CarterPostBattle:
 	.string "네가 진짜 대어인 것 같구나!\n"
 	.string "분명 앞으로\l"
 	.string "더욱 큰물에서 놀게 될 거다!$"
 
-Route109_Text_297754:
+Route109_Text_PaulIntro:
 	.string "리키: 흠- 이를 어쩌지?\p"
 	.string "둘만의 시간을\n"
 	.string "방해받고 싶지 않았는데 말이야$"
 
-Route109_Text_2977B0:
+Route109_Text_PaulDefeated:
 	.string "리키: 흠- 이를 어쩌지?$"
 
-Route109_Text_2977C7:
+Route109_Text_PaulPostBattle:
 	.string "리키: 흠- 우리가 여기 있다고\n"
 	.string "아무한테도 말하지 말아줘!\l"
 	.string "여긴 우리 둘만의 세계니까 말이야!$"
 
-Route109_Text_29781D:
+Route109_Text_PaulNotEnoughPokemon:
 	.string "리키: 우리들은 러브러브니까\n"
 	.string "우리들의 포켓몬도\l"
 	.string "2마리가 같이 배틀하게 할 거야!$"
 
-Route109_Text_297872:
+Route109_Text_MelIntro:
 	.string "지목: 우리 둘 사이가 뜨거우니까\n"
 	.string "호연지방이 뜨거운 거예요옹-!$"
 
-Route109_Text_2978BD:
+Route109_Text_MelDefeated:
 	.string "지목: 나 때문에 진 거야...\n"
 	.string "리키가 날 싫어하게 되면 어떡하지...$"
 
-Route109_Text_2978F1:
+Route109_Text_MelPostBattle:
 	.string "지목: 저기 리키\n"
 	.string "나한테 화낼 거야?\l"
 	.string "화내면 나 싫어-$"
 
-Route109_Text_29792E:
+Route109_Text_MelNotEnoughPokemon:
 	.string "지목: 우리들은 러브러브니까\n"
 	.string "우리들의 포켓몬도\l"
 	.string "2마리가 같이 배틀하게 할 거야!$"
 
-Route109_Text_29798A:
+Route109_Text_ChandlerIntro:
 	.string "이거 보여?\n"
 	.string "내 튜브는 둥글다!$"
 
-Route109_Text_2979AE:
+Route109_Text_ChandlerDefeated:
 	.string "안돼!$"
 
-Route109_Text_2979BF:
+Route109_Text_ChandlerPostBattle:
 	.string "그냥 내 둥근 튜브를\n"
 	.string "보여주고 싶었어...$"
 
-Route109_Text_2979EC:
+Route109_Text_HaileyIntro:
 	.string "난 수영을 못해\n"
 	.string "그래서 그냥 하는 척 중이야$"
 
-Route109_Text_297A15:
+Route109_Text_HaileyDefeated:
 	.string "그럼 그렇지\n"
 	.string "질 줄 알았다니까...$"
 
-Route109_Text_297A40:
+Route109_Text_HaileyPostBattle:
 	.string "내가 수영을 배우고 있으면\n"
 	.string "포켓몬도 덩달아 강해지는 거 같아$"
 
-Route109_Text_297A82:
+Route109_Text_ElijahIntro:
 	.string "마초맨 같은 나에겐\n"
 	.string "이 포켓몬 환상의 파트너야!$"
 
-Route109_Text_297AC7:
+Route109_Text_ElijahDefeated:
 	.string "난 패배해도 멋져, 응?$"
 
-Route109_Text_297AE5:
+Route109_Text_ElijahPostBattle:
 	.string "마초맨 같은 나에겐\n"
 	.string "항구는 완벽한 장소야!\p"
 	.string "잿빛항구로 가야겠다$"
 
-Route110_Text_297B3F:
+Route110_Text_JacobIntro:
 	.string "어이쿠 위험했다!\n"
 	.string "자전거 레이스에\l"
 	.string "익숙하지 않은 모양이군?!$"
 
-Route110_Text_297B77:
+Route110_Text_JacobDefeated:
 	.string "끼-익!\n"
 	.string "브레이크가 고장 났다!$"
 
-Route110_Text_297B8F:
+Route110_Text_JacobPostBattle:
 	.string "타이어 펑크나\n"
 	.string "브레이크 고장은 부상의 원인이지\l"
 	.string "꼼꼼하게 점검해야 한다$"
 
-Route110_Text_297BE7:
+Route110_Text_AnthonyIntro:
 	.string "헤이 유-!\n"
 	.string "내 스피드를 따라잡을 수 있을까?!$"
 
-Route110_Text_297C0F:
+Route110_Text_AnthonyDefeated:
 	.string "오 마이 갓-!$"
 
-Route110_Text_297C1F:
+Route110_Text_AnthonyPostBattle:
 	.string "스피드만으론 포켓몬 승부\n"
 	.string "이길 수 없습니다-! 반성하겠습니다-!$"
 
-Route110_Text_297C63:
+Route110_Text_BenjaminIntro:
 	.string "자전거 스피드가 빨라져도\n"
 	.string "서두르면 안 돼!$"
 
-Route110_Text_297C8A:
+Route110_Text_BenjaminDefeated:
 	.string "포켓몬 승부도\n"
 	.string "서두르면 안 되지...$"
 
-Route110_Text_297CB4:
+Route110_Text_BenjaminPostBattle:
 	.string "서두르지 말고 여유를 가지자\n"
 	.string "시간은 충분하니까!$"
 
-Route110_Text_297CFE:
+Route110_Text_BenjaminRegister:
 	.string "스트레스 때문에 서두르고 싶지만\n"
 	.string "너를 등록해서 참아야지$"
 
-Route110_Text_297D4B:
+Route110_Text_BenjaminRematchIntro:
 	.string "오! 너무 빠른 거 아니야?\n"
 	.string "잠깐 느긋하게 승부하자고!$"
 
-Route110_Text_297D8E:
+Route110_Text_BenjaminRematchDefeated:
 	.string "별로 서두르지도 않았는데...\n"
 	.string "왠지 자꾸 져버리네...$"
 
-Route110_Text_297DB0:
+Route110_Text_BenjaminRematchPostBattle:
 	.string "서두르지 말고 여유를 가지자\n"
 	.string "시간은 충분하니까!$"
 
-Route110_Text_297DFA:
+Route110_Text_AbigailIntro:
 	.string "트라이애슬론은 하드한 스포츠\n"
 	.string "수영, 자전거, 마라톤의\l"
 	.string "3종목을 소화하는 거야!$"
 
-Route110_Text_297E69:
+Route110_Text_AbigailDefeated:
 	.string "포켓몬 승부도 하드하네!$"
 
-Route110_Text_297E88:
+Route110_Text_AbigailPostBattle:
 	.string "지쳤으니까 한숨 돌려야겠어\n"
 	.string "휴식은 중요하다고!$"
 
-Route110_Text_297ECD:
+Route110_Text_AbigailRegister:
 	.string "마음에 들었어!\n"
 	.string "사이클링 로드에서 다시 승부하자!$"
 
-Route110_Text_297F09:
+Route110_Text_AbigailRematchIntro:
 	.string "자전거 타면서\n"
 	.string "포켓몬 승부하는 것도 좋네!$"
 
-Route110_Text_297F37:
+Route110_Text_AbigailRematchDefeated:
 	.string "우와-\n"
 	.string "어째서 그렇게 강한 거야?$"
 
-Route110_Text_297F58:
+Route110_Text_AbigailRematchPostBattle:
 	.string "혹시 기록에\n"
 	.string "도전하고 있었던 거야?\p"
 	.string "방해해서 미안해-$"
 
-Route110_Text_297F93:
+Route110_Text_JasmineIntro:
 	.string "자전거를 계속 밟아서\n"
 	.string "허벅지가 딴딴해졌어$"
 
-Route110_Text_297FD0:
+Route110_Text_JasmineDefeated:
 	.string "근육이 걱정이야...$"
 
-Route110_Text_297FF1:
+Route110_Text_JasminePostBattle:
 	.string "체육관 배지를 가지고 있어?\n"
 	.string "당연히 강하겠네!$"
 
-Route110_Text_29802B:
+Route110_Text_EdwardIntro:
 	.string "너의 작전은 이미\n"
 	.string "모두 나에게 보였다!\l"
 	.string "내가 질 이유는 없지!$"
 
-Route110_Text_298064:
+Route110_Text_EdwardDefeated:
 	.string "나 자신의 패배는 보이지 않았다...!$"
 
-Route110_Text_29808A:
+Route110_Text_EdwardPostBattle:
 	.string "너의 미래가 보인다...\p"
 	.string "흠...\n"
 	.string "아주 밝은 빛이 보이는군...!$"
 
-Route110_Text_2980B9:
+Route110_Text_JaclynIntro:
 	.string "오호호호홋!\n"
 	.string "저의 미라클을 보여드리죠!$"
 
-Route110_Text_2980E5:
+Route110_Text_JaclynDefeated:
 	.string "미라클하게 졌다-앗!$"
 
-Route110_Text_2980F8:
+Route110_Text_JaclynPostBattle:
 	.string "저에게 이긴 것이 미라클...\n"
 	.string "그래 기적이에요!\l"
 	.string "언제나 이긴다고 생각하지 마세요!$"
 
-Route110_Text_29815E:
+Route110_Text_EdwinIntro:
 	.string "네 포켓몬을 보여주지 않을래?\n"
 	.string "살짝 보기만 할 테니까 제발!$"
 
-Route110_Text_29818F:
+Route110_Text_EdwinDefeated:
 	.string "도감을 완성하고 싶었는데...!$"
 
-Route110_Text_2981B3:
+Route110_Text_EdwinPostBattle:
 	.string "처음 보는 포켓몬을 만나면\n"
 	.string "내 수집욕이 불타오르지!$"
 
-Route110_Text_298201:
+Route110_Text_EdwinRegister:
 	.string "난 엔트리콜에 사람들을\n"
 	.string "모으는 것도 좋아해!$"
 
-Route110_Text_298232:
+Route110_Text_EdwinRematchIntro:
 	.string "저기 있잖아\n"
 	.string "새로운 포켓몬은 잡았니?\p"
 	.string "괜찮으면 포켓몬을\n"
 	.string "보여주지 않을래?\l"
 	.string "살짝 보기만 할 테니까 제발!$"
 
-Route110_Text_298288:
+Route110_Text_EdwinRematchDefeated:
 	.string "네 포켓몬...\n"
 	.string "부럽다...$"
 
-Route110_Text_2982A2:
+Route110_Text_EdwinRematchPostBattle:
 	.string "아-! 희귀한 포켓몬은\n"
 	.string "무조건 몽땅 다 내 손에 넣고 싶어-!$"
 
-Route110_Text_2982CC:
+Route110_Text_DaleIntro:
 	.string "에-잇!\n"
 	.string "뒤에서 보지 말라고-!!$"
 
-Route110_Text_2982F5:
+Route110_Text_DaleDefeated:
 	.string "졌다!\n"
 	.string "분하닷!!$"
 
-Route110_Text_298303:
+Route110_Text_DalePostBattle:
 	.string "수면에 떠 있는 낚시찌를\n"
 	.string "계속 바라본다...\l"
 	.string "집중력이 중요해$"
 
-Route110_Text_298349:
+Route110_Text_IsabelIntro:
 	.string "오호홋! 소중한 포켓몬을\n"
 	.string "자랑하기 위해서라면\l"
 	.string "어디든 갈 수 있어요$"
 
-Route110_Text_298389:
+Route110_Text_IsabelDefeated:
 	.string "어머 왜 이러니 싫다-$"
 
-Route110_Text_2983A2:
+Route110_Text_IsabelPostBattle:
 	.string "승부보다는\n"
 	.string "콘테스트에 올인할까?$"
 
-Route110_Text_2983EE:
+Route110_Text_IsabelRegister:
 	.string "콘테스트에도\n"
 	.string "갈 필요가 없겠군요\p"
 	.string "당신을\n"
 	.string "사로잡힌 나의 청중으로 모실게요!$"
 
-Route110_Text_298466:
+Route110_Text_IsabelRematchIntro:
 	.string "오호홋! 소중한 포켓몬이라면\n"
 	.string "몇 번이든 계속 자랑하겠어요!$"
 
-Route110_Text_2984AF:
+Route110_Text_IsabelRematchDefeated:
 	.string "어머 왜 이러니 싫다-$"
 
-Route110_Text_2984C8:
+Route110_Text_IsabelRematchPostBattle:
 	.string "콘테스트도 좋지만\n"
 	.string "승부하는 것도 좋아해요!$"
 
-Route110_Text_298525:
+Route110_Text_TimmyIntro:
 	.string "이 주변 풀숲에서\n"
 	.string "멋있는 포켓몬을 발견했어!$"
 
-Route110_Text_298559:
+Route110_Text_TimmyDefeated:
 	.string "멋있기만 하면 안 되는 건가...$"
 
-Route110_Text_298579:
+Route110_Text_TimmyPostBattle:
 	.string "방금 막 잡은 포켓몬으론\n"
 	.string "배틀을 잘 할 수 없어!$"
 
-Route110_Text_2985AB:
+Route110_Text_AlyssaIntro:
 	.string "사이클링 로드에서 떨어졌어...\p"
 	.string "너무 창피하니까\n"
 	.string "너랑 승부해야겠어!$"
 
-Route110_Text_2985F9:
+Route110_Text_AlyssaDefeated:
 	.string "앗!\n"
 	.string "지고 말았다!$"
 
-Route110_Text_298612:
+Route110_Text_AlyssaPostBattle:
 	.string "떨어지고... 지고...\n"
 	.string "오늘은 날이 아니네$"
 
-Route110_Text_298642:
+Route110_Text_JosephIntro:
 	.string "오케이! 풀스로틀 시간이다!\n"
 	.string "음악에 뒤처질 수 없지!$"
 
-Route110_Text_298686:
+Route110_Text_JosephDefeated:
 	.string "더 잘 따라오잖아....$"
 
-Route110_Text_2986A9:
+Route110_Text_JosephPostBattle:
 	.string "패배가 더 나은 날 만들지!\n"
 	.string "실망하지 않았어!$"
 
-Route110_Text_2986ED:
+Route110_Text_KalebIntro:
 	.string "귀여운 포켓몬이 서로 돕는 모습...\n"
 	.string "상상만 해도 너무 귀엽잖아!$"
 
-Route110_Text_298735:
+Route110_Text_KalebDefeated:
 	.string "너는 피도 눈물도 없구나$"
 
-Route110_Text_298755:
+Route110_Text_KalebPostBattle:
 	.string "그래그래, 너희들은\n"
 	.string "최선을 다했어 귀염둥이들$"
 
