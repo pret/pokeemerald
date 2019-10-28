@@ -94,7 +94,8 @@ const u8 gMoveNames[MOVES_COUNT][MOVE_NAME_LENGTH + 1] =
     [MOVE_DIG] = _("구멍파기"),
     [MOVE_TOXIC] = _("맹독"),
     [MOVE_CONFUSION] = _("염동력"),
-    [MOVE_PSYCHIC] = _("사이코키네시스"),
+    // 수정필요 (사이코키네시스)
+    [MOVE_PSYCHIC] = _("사이코키네"),
     [MOVE_HYPNOSIS] = _("최면술"),
     [MOVE_MEDITATE] = _("요가포즈"),
     [MOVE_AGILITY] = _("고속이동"),
@@ -177,7 +178,8 @@ const u8 gMoveNames[MOVES_COUNT][MOVE_NAME_LENGTH + 1] =
     [MOVE_CURSE] = _("저주"),
     [MOVE_FLAIL] = _("바둥바둥"),
     [MOVE_CONVERSION_2] = _("텍스처2"),
-    [MOVE_AEROBLAST] = _("에어로블라스트"),
+    // 수정필요 (에어로블라스트)
+    [MOVE_AEROBLAST] = _("에어로블라"),
     [MOVE_COTTON_SPORE] = _("목화포자"),
     [MOVE_REVERSAL] = _("기사회생"),
     [MOVE_SPITE] = _("원한"),

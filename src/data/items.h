@@ -217,7 +217,8 @@ const struct Item gItems[] =
 
     [ITEM_ICE_HEAL] =
     {
-        .name = _("얼음상태치료제"),
+        // 수정필요 (얼음상태치료제)
+        .name = _("얼음상태치료"),
         .itemId = ITEM_ICE_HEAL,
         .price = 250,
         .description = sIceHealDesc,
@@ -1155,7 +1156,8 @@ const struct Item gItems[] =
 
     [ITEM_REPEL] =
     {
-        .name = _("벌레회피스프레이"),
+        // 수정필요 (벌레회피스프레이)
+        .name = _("벌레회피스프"),
         .itemId = ITEM_REPEL,
         .price = 350,
         .holdEffectParam = 100,
@@ -3497,7 +3499,8 @@ const struct Item gItems[] =
 
     [ITEM_WAILMER_PAIL] =
     {
-        .name = _("고래왕자물뿌리개"),
+        // 수정필요 (고래왕자물뿌리개)
+        .name = _("고래왕자물뿌"),
         .itemId = ITEM_WAILMER_PAIL,
         .price = 0,
         .description = sWailmerPailDesc,
@@ -3563,7 +3566,8 @@ const struct Item gItems[] =
 
     [ITEM_POKEBLOCK_CASE] =
     {
-        .name = _("포켓몬스넥케이스"),
+        // 수정필요 (포켓몬스넥케이스)
+        .name = _("포켓몬스넥케"),
         .itemId = ITEM_POKEBLOCK_CASE,
         .price = 0,
         .description = sPokeblockCaseDesc,
@@ -3577,7 +3581,8 @@ const struct Item gItems[] =
 
     [ITEM_LETTER] =
     {
-        .name = _("성호에게줄편지"),
+        // 수정필요 (성호에게줄편지)
+        .name = _("성호에게줄편"),
         .itemId = ITEM_LETTER,
         .price = 0,
         .description = sLetterDesc,
@@ -4595,7 +4600,8 @@ const struct Item gItems[] =
 
     [ITEM_LIFT_KEY] =
     {
-        .name = _("엘리베이터열쇠"),
+        // 수정필요 (엘리베이터열쇠)
+        .name = _("엘리베이터열"),
         .itemId = ITEM_LIFT_KEY,
         .price = 0,
         .description = sLiftKeyDesc,
@@ -4703,7 +4709,8 @@ const struct Item gItems[] =
 
     [ITEM_TM_CASE] =
     {
-        .name = _("기술머신케이스"),
+        // 수정필요 (기술머신케이스)
+        .name = _("기술머신케이"),
         .itemId = ITEM_TM_CASE,
         .price = 0,
         .description = sTMCaseDesc,
