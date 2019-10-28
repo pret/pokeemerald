@@ -1355,7 +1355,7 @@ static const u8 sHM06Desc[] = _(
 static const u8 sHM07Desc[] = _(
     "폭포를 거꾸로 오르는 듯한\n"
     "기세로 적에게\n"
-    "돌진한다")
+    "돌진한다");
 
 static const u8 sHM08Desc[] = _(
     "1턴째에 물에\n"
