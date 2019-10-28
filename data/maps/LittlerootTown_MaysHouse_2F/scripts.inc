@@ -284,7 +284,7 @@ RivalsHouse_2F_EventScript_MayPostLilycove:: @ 81F951D
 	return
 
 RivalsHouse_2F_EventScript_BrendanPostLilycove:: @ 81F952F
-	goto_if_set FLAG_MET_RIVAL_IN_HOUSE_AFTER_LILYCOVE, PlayersHouse_2F_EventScript_BrendanWhereShouldIGoNext
+	goto_if_set FLAG_MET_RIVAL_IN_HOUSE_AFTER_LILYCOVE, RivalsHouse_2F_EventScript_BrendanWhereShouldIGoNext
 	msgbox RivalsHouse_2F_Text_BrendanJustCheckingMyPokedex, MSGBOX_DEFAULT
 	return
 
@@ -292,7 +292,7 @@ RivalsHouse_2F_EventScript_MayWhereShouldIGoNext:: @ 81F9541
 	msgbox RivalsHouse_2F_Text_MayWhereShouldIGoNext, MSGBOX_DEFAULT
 	return
 
-PlayersHouse_2F_EventScript_BrendanWhereShouldIGoNext:: @ 81F954A
+RivalsHouse_2F_EventScript_BrendanWhereShouldIGoNext:: @ 81F954A
 	msgbox RivalsHouse_2F_Text_BrendanWhereShouldIGoNext, MSGBOX_DEFAULT
 	return
 
