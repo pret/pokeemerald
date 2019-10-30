@@ -885,7 +885,7 @@ void BagMenu_PrintDescription(int a)
         str = gStringVar4;
     }
     FillWindowPixelBuffer(1, PIXEL_FILL(0));
-    BagMenu_Print(1, 1, str, 3, 1, 0, 0, 0, 0);
+    BagMenu_Print(1, 7, str, 3, 1, 0, 0, 0, 0);
 }
 
 void BagMenu_PrintCursor_(u8 a, u8 b)
