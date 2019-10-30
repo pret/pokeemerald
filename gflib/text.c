@@ -1755,7 +1755,7 @@ u16 RenderText(struct TextPrinter *textPrinter)
             return 1;
         }
 
-        /* 한글 문자 체크 & 문자 가져오기 */
+        // 한글 문자 체크 & 문자 가져오기
         if (CheckKoreanGlyph(currChar))
         {
             currChar = (currChar << 8) | *textPrinter->printerTemplate.currentChar;
@@ -2121,7 +2121,7 @@ s32 GetStringWidth(u8 fontId, const u8 *str, s16 letterSpacing)
         default:
             glyphWidth = func(*str, isJapanese);
 
-            /* 한글 문자일 경우 1바이트 건너뛰기 */
+            // 한글 문자일 경우 1바이트 건너뛰기
             if (CheckKoreanGlyph(*str))
                 str++;
 
@@ -2582,12 +2582,12 @@ void DecompressGlyphFont1(u16 glyphId, bool32 isJapanese)
         if (glyphId >= 0x3700)
         {
             u16 index = glyphId - 0x3700;
-            glyphs = gFont1KoreanGlyphs + (0x20 * index);
+            glyphs = gFont2KoreanGlyphs + (0x20 * index);
             DecompressGlyphTile(glyphs, gUnknown_03002F90.unk0);
             DecompressGlyphTile(glyphs + 0x8, gUnknown_03002F90.unk20);
             DecompressGlyphTile(glyphs + 0x10, gUnknown_03002F90.unk40);
             DecompressGlyphTile(glyphs + 0x18, gUnknown_03002F90.unk60);
-            gUnknown_03002F90.unk80 = 12;
+            gUnknown_03002F90.unk80 = 11;
             gUnknown_03002F90.unk81 = 15;
         }
         else
@@ -2616,12 +2616,16 @@ void DecompressGlyphFont1(u16 glyphId, bool32 isJapanese)
 u32 GetGlyphWidthFont1(u16 glyphId, bool32 isJapanese)
 {
     if (CheckKoreanGlyph(glyphId))
-        return 12;
+        return 11;
 
     if (isJapanese == TRUE)
+    {
         return 8;
+    }
     else
+    {
         return gFont1LatinGlyphWidths[glyphId];
+    }
 }
 
 void DecompressGlyphFont9(u16 glyphId)
