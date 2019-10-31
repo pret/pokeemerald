@@ -24,7 +24,7 @@
       "movement_range_y": 15,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "1",
-      "script": "FarawayIsland_Interior_EventScript_267DF2",
+      "script": "FarawayIsland_Interior_EventScript_Mew",
       "flag": "FLAG_HIDE_MEW"
     }
   ],

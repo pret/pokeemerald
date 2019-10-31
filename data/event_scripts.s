@@ -910,30 +910,26 @@ RusturfTunnel_EventScript_272216:: @ 8272216
 	setflag FLAG_RUSTURF_TUNNEL_OPENED
 	return
 
-EventScript_27222B:: @ 827222B
+EventScript_UnusedBoardFerry:: @ 827222B
 	delay 30
 	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	showobjectat 255, MAP_PETALBURG_CITY
 	delay 30
-	applymovement EVENT_OBJ_ID_PLAYER, Movement_27224E
+	applymovement EVENT_OBJ_ID_PLAYER, Movement_UnusedBoardFerry
 	waitmovement 0
 	delay 30
 	return
 
-Movement_27224E: @ 827224E
+Movement_UnusedBoardFerry: @ 827224E
 	walk_up
 	step_end
 
-BattleFrontier_OutsideWest_EventScript_272250:: @ 8272250
-BirthIsland_Harbor_EventScript_272250:: @ 8272250
-FarawayIsland_Entrance_EventScript_272250:: @ 8272250
-NavelRock_Harbor_EventScript_272250:: @ 8272250
-SouthernIsland_Exterior_EventScript_272250:: @ 8272250
+Common_EventScript_FerryDepartIsland:: @ 8272250
 	compare VAR_FACING, DIR_SOUTH
-	call_if_eq BattleFrontier_OutsideWest_EventScript_242A21
+	call_if_eq Ferry_EventScript_DepartIslandSouth
 	compare VAR_FACING, DIR_WEST
-	call_if_eq BattleFrontier_OutsideWest_EventScript_242A2C
+	call_if_eq Ferry_EventScript_DepartIslandWest
 	delay 30
 	hideobjectat 255, MAP_PETALBURG_CITY
 	call Common_EventScript_FerryDepart

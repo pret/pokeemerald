@@ -3,6 +3,6 @@ CaveOfOrigin_UnusedRubySapphireMap3_MapScripts:: @ 8235798
 	.byte 0
 
 CaveOfOrigin_UnusedRubySapphireMap3_OnTransition: @ 823579E
-	call_if_set FLAG_UNUSED_RS_LEGENDARY_BATTLE_DONE, CaveOfOrigin_UnusedRubySapphireMap3_EventScript_2722C1
+	call_if_set FLAG_UNUSED_RS_LEGENDARY_BATTLE_DONE, CaveOfOrigin_EventScript_SetTempVars
 	end
 

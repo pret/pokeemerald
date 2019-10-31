@@ -218,7 +218,7 @@ gScriptCmdTable:: @ 81DB67C
 	.4byte ScrCmd_warpmossdeepgym
 	.4byte ScrCmd_cmdD8
 	.4byte ScrCmd_cmdD9
-	.4byte ScrCmd_cmdDA
+	.4byte ScrCmd_closebraillemessage
 	.4byte ScrCmd_cmdDB
 	.4byte ScrCmd_fadescreenswapbuffers
 	.4byte ScrCmd_buffertrainerclassname

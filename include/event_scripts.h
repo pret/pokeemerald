@@ -551,7 +551,7 @@ extern const u8 BattleFrontier_BattlePyramidEmptySquare_EventScript_252BE8[];
 extern const u8 EventScript_FieldPoison[];
 extern const u8 EventScript_EggHatch[];
 extern const u8 UnusualWeather_EventScript_EndEventAndCleanup_1[];
-extern const u8 IslandCave_EventScript_238EAF[];
+extern const u8 IslandCave_EventScript_OpenRegiEntrance[];
 extern const u8 MauvilleCity_EventScript_1DF7BA[];
 extern const u8 Route119_EventScript_1F49EC[];
 extern const u8 LittlerootTown_ProfessorBirchsLab_EventScript_1FA4D6[];

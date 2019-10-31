@@ -65,7 +65,7 @@
       "y": 11,
       "elevation": 3,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
-      "script": "SouthernIsland_Interior_EventScript_242AC4"
+      "script": "SouthernIsland_Interior_EventScript_TryLatiEncounter"
     }
   ]
 }

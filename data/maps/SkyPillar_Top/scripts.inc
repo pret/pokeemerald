@@ -1,14 +1,14 @@
 SkyPillar_Top_MapScripts:: @ 82396B8
-	map_script MAP_SCRIPT_ON_RESUME, SkyPillar_Top_MapScript1_2396C8
+	map_script MAP_SCRIPT_ON_RESUME, SkyPillar_Top_OnResume
 	map_script MAP_SCRIPT_ON_TRANSITION, SkyPillar_Top_OnTransition
-	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, SkyPillar_Top_MapScript2_239713
+	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, SkyPillar_Top_OnWarp
 	.byte 0
 
-SkyPillar_Top_MapScript1_2396C8: @ 82396C8
-	call_if_set FLAG_SYS_CTRL_OBJ_DELETE, SkyPillar_Top_EventScript_2396D2
+SkyPillar_Top_OnResume: @ 82396C8
+	call_if_set FLAG_SYS_CTRL_OBJ_DELETE, SkyPillar_Top_EventScript_TryRemoveRayquaza
 	end
 
-SkyPillar_Top_EventScript_2396D2:: @ 82396D2
+SkyPillar_Top_EventScript_TryRemoveRayquaza:: @ 82396D2
 	specialvar VAR_RESULT, GetBattleOutcome
 	compare VAR_RESULT, B_OUTCOME_CAUGHT
 	goto_if_ne Common_EventScript_NopReturn
@@ -17,33 +17,33 @@ SkyPillar_Top_EventScript_2396D2:: @ 82396D2
 
 SkyPillar_Top_OnTransition: @ 82396E6
 	compare VAR_SKY_PILLAR_STATE, 2
-	call_if_lt SkyPillar_Top_EventScript_2396FD
+	call_if_lt SkyPillar_Top_EventScript_SetCleanLayout
 	compare VAR_SKY_PILLAR_STATE, 2
-	call_if_ge SkyPillar_Top_EventScript_239705
+	call_if_ge SkyPillar_Top_EventScript_TryShowRayquaza
 	end
 
-SkyPillar_Top_EventScript_2396FD:: @ 82396FD
+SkyPillar_Top_EventScript_SetCleanLayout:: @ 82396FD
 	setmaplayoutindex LAYOUT_SKY_PILLAR_TOP_CLEAN
 	setobjectmovementtype 1, MOVEMENT_TYPE_FACE_DOWN
 	return
 
-SkyPillar_Top_EventScript_239705:: @ 8239705
-	call_if_unset FLAG_DEFEATED_RAYQUAZA, SkyPillar_Top_EventScript_23970F
+SkyPillar_Top_EventScript_TryShowRayquaza:: @ 8239705
+	call_if_unset FLAG_DEFEATED_RAYQUAZA, SkyPillar_Top_EventScript_ShowRayquaza
 	return
 
-SkyPillar_Top_EventScript_23970F:: @ 823970F
-	clearflag FLAG_RAYQUAZA_ON_SKY_TOWER_SUMMIT
+SkyPillar_Top_EventScript_ShowRayquaza:: @ 823970F
+	clearflag FLAG_HIDE_RAYQUAZA_SKY_TOWER_SUMMIT
 	return
 
-SkyPillar_Top_MapScript2_239713: @ 8239713
-	map_script_2 VAR_SKY_PILLAR_STATE, 0, SkyPillar_Top_EventScript_23971D
+SkyPillar_Top_OnWarp: @ 8239713
+	map_script_2 VAR_SKY_PILLAR_STATE, 0, SkyPillar_Top_EventScript_RayquazaFaceDown
 	.2byte 0
 
-SkyPillar_Top_EventScript_23971D:: @ 823971D
+SkyPillar_Top_EventScript_RayquazaFaceDown:: @ 823971D
 	turnobject 1, DIR_SOUTH
 	end
 
-SkyPillar_Top_EventScript_239722:: @ 8239722
+SkyPillar_Top_EventScript_Rayquaza:: @ 8239722
 	lockall
 	waitse
 	playmoncry SPECIES_RAYQUAZA, 2
@@ -56,33 +56,33 @@ SkyPillar_Top_EventScript_239722:: @ 8239722
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
 	specialvar VAR_RESULT, GetBattleOutcome
 	compare VAR_RESULT, B_OUTCOME_WON
-	goto_if_eq SkyPillar_Top_EventScript_239768
+	goto_if_eq SkyPillar_Top_EventScript_DefeatedRayquaza
 	compare VAR_RESULT, B_OUTCOME_RAN
-	goto_if_eq SkyPillar_Top_EventScript_239771
+	goto_if_eq SkyPillar_Top_EventScript_RanFromRayquaza
 	compare VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED
-	goto_if_eq SkyPillar_Top_EventScript_239771
+	goto_if_eq SkyPillar_Top_EventScript_RanFromRayquaza
 	setflag FLAG_DEFEATED_RAYQUAZA
 	releaseall
 	end
 
-SkyPillar_Top_EventScript_239768:: @ 8239768
+SkyPillar_Top_EventScript_DefeatedRayquaza:: @ 8239768
 	setflag FLAG_DEFEATED_RAYQUAZA
-	goto SkyPillar_Top_EventScript_23977C
+	goto SkyPillar_Top_EventScript_DefeatedRayquaza2
 	end
 
-SkyPillar_Top_EventScript_239771:: @ 8239771
+SkyPillar_Top_EventScript_RanFromRayquaza:: @ 8239771
 	setvar VAR_0x8004, SPECIES_RAYQUAZA
-	goto SkyPillar_Top_EventScript_239785
+	goto SkyPillar_Top_EventScript_RanFromRayquaza2
 	end
 
-SkyPillar_Top_EventScript_23977C:: @ 823977C
+SkyPillar_Top_EventScript_DefeatedRayquaza2:: @ 823977C
 	fadescreenswapbuffers 1
 	removeobject VAR_LAST_TALKED
 	fadescreenswapbuffers 0
 	releaseall
 	end
 
-SkyPillar_Top_EventScript_239785:: @ 8239785
+SkyPillar_Top_EventScript_RanFromRayquaza2:: @ 8239785
 	fadescreenswapbuffers 1
 	removeobject VAR_LAST_TALKED
 	fadescreenswapbuffers 0
@@ -91,16 +91,16 @@ SkyPillar_Top_EventScript_239785:: @ 8239785
 	releaseall
 	end
 
-SkyPillar_Top_EventScript_23979A:: @ 823979A
+SkyPillar_Top_EventScript_AwakenRayquaza:: @ 823979A
 	lockall
 	fadeoutbgm 1
 	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_FaceUp
 	waitmovement 0
 	special SpawnCameraObject
-	applymovement EVENT_OBJ_ID_CAMERA, SkyPillar_Top_Movement_239858
+	applymovement EVENT_OBJ_ID_CAMERA, SkyPillar_Top_Movement_CameraPanUp
 	waitmovement 0
 	special RemoveCameraObject
-	applymovement 1, SkyPillar_Top_Movement_23983A
+	applymovement 1, SkyPillar_Top_Movement_RayquazaStir
 	waitmovement 0
 	waitse
 	playmoncry SPECIES_RAYQUAZA, 2
@@ -119,15 +119,15 @@ SkyPillar_Top_EventScript_23979A:: @ 823979A
 	special ShakeCamera
 	waitstate
 	waitmoncry
-	applymovement 1, SkyPillar_Top_Movement_23984B
+	applymovement 1, SkyPillar_Top_Movement_RayquazaFlyOff
 	waitmovement 0
 	removeobject 1
-	msgbox SkyPillar_Top_Text_239860, MSGBOX_DEFAULT
+	msgbox SkyPillar_Top_Text_RayquazaFlewOff, MSGBOX_DEFAULT
 	closemessage
 	delay 20
 	fadeinbgm 1
 	special SpawnCameraObject
-	applymovement EVENT_OBJ_ID_CAMERA, SkyPillar_Top_Movement_23985C
+	applymovement EVENT_OBJ_ID_CAMERA, SkyPillar_Top_Movement_CameraPanDown
 	waitmovement 0
 	special RemoveCameraObject
 	setvar VAR_SOOTOPOLIS_CITY_STATE, 5
@@ -136,7 +136,7 @@ SkyPillar_Top_EventScript_23979A:: @ 823979A
 	releaseall
 	end
 
-SkyPillar_Top_Movement_23983A: @ 823983A
+SkyPillar_Top_Movement_RayquazaStir: @ 823983A
 	delay_16
 	walk_in_place_fast_left
 	delay_16
@@ -155,7 +155,7 @@ SkyPillar_Top_Movement_23983A: @ 823983A
 	delay_16
 	step_end
 
-SkyPillar_Top_Movement_23984B: @ 823984B
+SkyPillar_Top_Movement_RayquazaFlyOff: @ 823984B
 	delay_16
 	walk_in_place_down
 	delay_8
@@ -170,18 +170,18 @@ SkyPillar_Top_Movement_23984B: @ 823984B
 	slide_up
 	step_end
 
-SkyPillar_Top_Movement_239858: @ 8239858
+SkyPillar_Top_Movement_CameraPanUp: @ 8239858
 	walk_slow_up
 	walk_slow_up
 	walk_slow_up
 	step_end
 
-SkyPillar_Top_Movement_23985C: @ 823985C
+SkyPillar_Top_Movement_CameraPanDown: @ 823985C
 	walk_slow_down
 	walk_slow_down
 	walk_slow_down
 	step_end
 
-SkyPillar_Top_Text_239860: @ 8239860
+SkyPillar_Top_Text_RayquazaFlewOff: @ 8239860
 	.string "The awakened RAYQUAZA flew off…$"
 

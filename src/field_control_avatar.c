@@ -563,7 +563,7 @@ static bool8 TryStartStepCountScript(u16 metatileBehavior)
         }
         if (ShouldDoBrailleRegicePuzzle() == TRUE)
         {
-            ScriptContext1_SetupScript(IslandCave_EventScript_238EAF);
+            ScriptContext1_SetupScript(IslandCave_EventScript_OpenRegiEntrance);
             return TRUE;
         }
         if (ShouldDoWallyCall() == TRUE)

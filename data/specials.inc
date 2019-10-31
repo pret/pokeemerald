@@ -489,7 +489,7 @@ gSpecials:: @ 81DBA64
 	def_special GetBattleFrontierTutorMoveIndex
 	def_special sub_813AF48
 	def_special DoDeoxysRockInteraction
-	def_special sub_813B1D0
+	def_special SetDeoxysRockPalette
 	def_special CreateObedientEnemyMon
 	def_special StartMirageTowerDisintegration
 	def_special StartMirageTowerShake
