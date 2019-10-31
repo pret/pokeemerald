@@ -43,9 +43,9 @@
 #include "constants/vars.h"
 #include "event_obj_lock.h"
 
-extern u8 BerryTree_EventScript_274482[];
-extern u8 BerryTree_EventScript_2744C0[];
-extern u8 BattleFrontier_OutsideEast_EventScript_242CFC[];
+extern u8 BerryTree_EventScript_ItemUsePlantBerry[];
+extern u8 BerryTree_EventScript_ItemUseWailmerPail[];
+extern u8 BattleFrontier_OutsideEast_EventScript_WaterSudowoodo[];
 
 void SetUpItemUseCallback(u8 taskId);
 void MapPostLoadHook_UseItem(void);
@@ -61,9 +61,9 @@ void sub_80FDA94(u8 taskId);
 void sub_80FDADC(u8 taskId);
 void sub_80FD7C8(u8 taskId);
 void sub_80FDC00(u8 taskId);
-void sub_80FDD74(u8 taskId);
-void sub_80FDE08(u8 taskId);
-void sub_80FDE7C(u8 taskId);
+void ItemUseOnFieldCB_Berry(u8 taskId);
+void ItemUseOnFieldCB_WailmerPailBerry(u8 taskId);
+void ItemUseOnFieldCB_WailmerPailSudowoodo(u8 taskId);
 static void BootUpSoundTMHM(u8 taskId);
 static void Task_ShowTMHMContainedMessage(u8 taskId);
 static void UseTMHMYesNo(u8 taskId);
@@ -81,7 +81,7 @@ u8 sub_80FD9B0(s16 a, s16 b);
 void sub_80FDA24(u8 a);
 void sub_80FD8E0(u8 taskId, s16 x, s16 y);
 void sub_80FDBEC(void);
-bool8 sub_80FDE2C(void);
+bool8 TryToWaterSudowoodo(void);
 void ItemUseOutOfBattle_CannotUse(u8 taskId);
 
 // EWRAM variables
@@ -651,11 +651,11 @@ void ItemUseOutOfBattle_PowderJar(u8 taskId)
     }
 }
 
-void sub_80FDD10(u8 taskId)
+void ItemUseOutOfBattle_Berry(u8 taskId)
 {
     if (IsPlayerFacingEmptyBerryTreePatch() == TRUE)
     {
-        gUnknown_0203A0F4 = sub_80FDD74;
+        gUnknown_0203A0F4 = ItemUseOnFieldCB_Berry;
         gFieldCallback = MapPostLoadHook_UseItem;
         gBagMenu->mainCallback2 = CB2_ReturnToField;
         unknown_ItemMenu_Confirm(taskId);
@@ -666,24 +666,24 @@ void sub_80FDD10(u8 taskId)
     }
 }
 
-void sub_80FDD74(u8 taskId)
+void ItemUseOnFieldCB_Berry(u8 taskId)
 {
     RemoveBagItem(gSpecialVar_ItemId, 1);
     ScriptContext2_Enable();
-    ScriptContext1_SetupScript(BerryTree_EventScript_274482);
+    ScriptContext1_SetupScript(BerryTree_EventScript_ItemUsePlantBerry);
     DestroyTask(taskId);
 }
 
 void ItemUseOutOfBattle_WailmerPail(u8 taskId)
 {
-    if (sub_80FDE2C() == TRUE)
+    if (TryToWaterSudowoodo() == TRUE)
     {
-        gUnknown_0203A0F4 = sub_80FDE7C;
+        gUnknown_0203A0F4 = ItemUseOnFieldCB_WailmerPailSudowoodo;
         SetUpItemUseOnFieldCallback(taskId);
     }
     else if (TryToWaterBerryTree() == TRUE)
     {
-        gUnknown_0203A0F4 = sub_80FDE08;
+        gUnknown_0203A0F4 = ItemUseOnFieldCB_WailmerPailBerry;
         SetUpItemUseOnFieldCallback(taskId);
     }
     else
@@ -692,14 +692,14 @@ void ItemUseOutOfBattle_WailmerPail(u8 taskId)
     }
 }
 
-void sub_80FDE08(u8 taskId)
+void ItemUseOnFieldCB_WailmerPailBerry(u8 taskId)
 {
     ScriptContext2_Enable();
-    ScriptContext1_SetupScript(BerryTree_EventScript_2744C0);
+    ScriptContext1_SetupScript(BerryTree_EventScript_ItemUseWailmerPail);
     DestroyTask(taskId);
 }
 
-bool8 sub_80FDE2C(void)
+bool8 TryToWaterSudowoodo(void)
 {
     u16 x, y;
     u8 z;
@@ -707,16 +707,16 @@ bool8 sub_80FDE2C(void)
     GetXYCoordsOneStepInFrontOfPlayer(&x, &y);
     z = PlayerGetZCoord();
     objId = GetEventObjectIdByXYZ(x, y, z);
-    if (objId == 16 || gEventObjects[objId].graphicsId != 0xE4)
+    if (objId == EVENT_OBJECTS_COUNT || gEventObjects[objId].graphicsId != EVENT_OBJ_GFX_SUDOWOODO)
         return FALSE;
     else
         return TRUE;
 }
 
-void sub_80FDE7C(u8 taskId)
+void ItemUseOnFieldCB_WailmerPailSudowoodo(u8 taskId)
 {
     ScriptContext2_Enable();
-    ScriptContext1_SetupScript(BattleFrontier_OutsideEast_EventScript_242CFC);
+    ScriptContext1_SetupScript(BattleFrontier_OutsideEast_EventScript_WaterSudowoodo);
     DestroyTask(taskId);
 }
 

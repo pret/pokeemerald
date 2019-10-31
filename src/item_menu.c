@@ -1652,7 +1652,7 @@ void ItemMenu_UseOutOfBattle(u8 taskId)
             if (gBagPositionStruct.pocket != BERRIES_POCKET)
                 ItemId_GetFieldFunc(gSpecialVar_ItemId)(taskId);
             else
-                sub_80FDD10(taskId);
+                ItemUseOutOfBattle_Berry(taskId);
         }
     }
 }

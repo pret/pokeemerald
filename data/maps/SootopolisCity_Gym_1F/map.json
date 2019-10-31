@@ -24,7 +24,7 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "SootopolisCity_Gym_1F_EventScript_224F44",
+      "script": "SootopolisCity_Gym_1F_EventScript_Juan",
       "flag": "0"
     },
     {
@@ -37,7 +37,7 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "SootopolisCity_Gym_1F_EventScript_225040",
+      "script": "SootopolisCity_Gym_1F_EventScript_GymGuide",
       "flag": "0"
     }
   ],
@@ -72,7 +72,7 @@
       "y": 24,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "SootopolisCity_Gym_1F_EventScript_22505F"
+      "script": "SootopolisCity_Gym_1F_EventScript_LeftGymStatue"
     },
     {
       "type": "sign",
@@ -80,7 +80,7 @@
       "y": 24,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
-      "script": "SootopolisCity_Gym_1F_EventScript_22506F"
+      "script": "SootopolisCity_Gym_1F_EventScript_RightGymStatue"
     }
   ]
 }

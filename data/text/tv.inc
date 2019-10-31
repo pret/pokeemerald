@@ -2694,25 +2694,23 @@ gTVPokemonBattleUpdateText07:: @ 0828AE26
 	.string "This concludes this episode of\n"
 	.string "“POKéMON BATTLE UPDATE!”$"
 
-Route111_Text_28AF05: @ 0828AF05
+GabbyAndTy_Text_GabbyPreFirstBattle: @ 0828AF05
 	.string "GABBY: Oh! We've just spotted a tough-\n"
 	.string "looking TRAINER here of all places!\p"
 	.string "Okay, roll camera!\n"
 	.string "Let's get this interview.$"
 
-Route111_Text_28AF7D: @ 0828AF7D
-Route118_Text_28AF7D: @ 0828AF7D
-Route120_Text_28AF7D: @ 0828AF7D
+GabbyAndTy_Text_GabbyPreBattle: @ 0828AF7D
 	.string "GABBY: Oh! You're {PLAYER}! Hi!\n"
 	.string "Do you remember us from last time?\p"
 	.string "Can you show us how much stronger\n"
 	.string "you've become? Okay, cue interview!$"
 
-Route111_Text_28B000: @ 0828B000
+GabbyAndTy_Text_GabbyDefeatFirstTime: @ 0828B000
 	.string "GABBY: My eyes didn't lie!\n"
 	.string "I did discover an astonishing TRAINER!$"
 
-Route111_Text_28B042: @ 0828B042
+GabbyAndTy_Text_WhoAreYouInterview: @ 0828B042
 	.string "GABBY: Awesome! Awesome!\n"
 	.string "Who are you?!\p"
 	.string "I knew we were onto something wild\n"
@@ -2723,19 +2721,19 @@ Route111_Text_28B042: @ 0828B042
 	.string "So, would you give us a bit of your time\n"
 	.string "for an interview?$"
 
-Route111_Text_28B137: @ 0828B137
+GabbyAndTy_Text_QuoteFromLastInterview: @ 0828B137
 	.string "GABBY: “{STR_VAR_1}!”\p"
 	.string "Remember? That's the quote you gave\n"
 	.string "us as the battle clincher last time.\p"
 	.string "I never, ever forget stuff like that!$"
 
-Route111_Text_28B1B3: @ 0828B1B3
+GabbyAndTy_Text_YouStompedUsInterviewAgain: @ 0828B1B3
 	.string "The last time we battled, you stomped\n"
 	.string "us before we could brace ourselves…\p"
 	.string "Anyway, what do you think?\n"
 	.string "Do you want to be interviewed again?$"
 
-Route111_Text_28B23D: @ 0828B23D
+GabbyAndTy_Text_YouThrewABallAtUsInterviewAgain: @ 0828B23D
 	.string "The last time we battled, didn't you\n"
 	.string "throw a POKé BALL at us?\p"
 	.string "We were shocked! So we told everyone,\n"
@@ -2743,30 +2741,30 @@ Route111_Text_28B23D: @ 0828B23D
 	.string "Anyway, what do you think?\n"
 	.string "Do you want to be interviewed again?$"
 
-Route111_Text_28B2FA: @ 0828B2FA
+GabbyAndTy_Text_CleverItemSkillsInterviewAgain: @ 0828B2FA
 	.string "The last time we battled, your item\n"
 	.string "skills cleverly did us in.\p"
 	.string "Anyway, what do you think?\n"
 	.string "Do you want to be interviewed again?$"
 
-Route111_Text_28B379: @ 0828B379
+GabbyAndTy_Text_WeLookedRespectableInterviewAgain: @ 0828B379
 	.string "The last time we battled, we managed\n"
 	.string "to look respectable.\p"
 	.string "Anyway, what do you think?\n"
 	.string "Do you want to be interviewed again?$"
 
-Route111_Text_28B3F3: @ 0828B3F3
+GabbyAndTy_Text_InterviewAgain: @ 0828B3F3
 	.string "Anyway, what do you think?\n"
 	.string "Do you want to be interviewed again?$"
 
-Route111_Text_28B433: @ 0828B433
+GabbyAndTy_Text_DescribeYourFeelings: @ 0828B433
 	.string "You will?\n"
 	.string "Thank you!\p"
 	.string "Okay, I need you to describe your\n"
 	.string "feelings about our battle, but it\l"
 	.string "has to be short and sweet. Go!$"
 
-Route111_Text_28B4AB: @ 0828B4AB
+GabbyAndTy_Text_PerfectWellBeSeeingYou: @ 0828B4AB
 	.string "GABBY: Mmm, yeah!\n"
 	.string "That's the perfect clincher!\p"
 	.string "I get the feeling that this will make\n"
@@ -2776,24 +2774,20 @@ Route111_Text_28B4AB: @ 0828B4AB
 	.string "Okay!\n"
 	.string "We'll be seeing you!$"
 
-Route111_Text_28B577: @ 0828B577
+GabbyAndTy_Text_DontGiveUpKeepingEyeOut: @ 0828B577
 	.string "GABBY: Oh…\p"
 	.string "Okay, but don't give up!\n"
 	.string "We'll be keeping an eye out for you!$"
 
-Route111_Text_28B5C0: @ 0828B5C0
-Route118_Text_28B5C0: @ 0828B5C0
-Route120_Text_28B5C0: @ 0828B5C0
+GabbyAndTy_Text_KeepingAnEyeOutForYou: @ 0828B5C0
 	.string "GABBY: We'll be keeping an eye out\n"
 	.string "for you!$"
 
-Route111_Text_28B5EC: @ 0828B5EC
-Route118_Text_28B5EC: @ 0828B5EC
-Route120_Text_28B5EC: @ 0828B5EC
+GabbyAndTy_Text_GabbyNotEnoughMons: @ 0828B5EC
 	.string "GABBY: Is there a strong TRAINER\n"
 	.string "anywhere with a lot of POKéMON?$"
 
-Route111_Text_28B62D: @ 0828B62D
+GabbyAndTy_Text_GiveUsAnInterviewThisTime: @ 0828B62D
 	.string "GABBY: Wow, you are something!\p"
 	.string "You've gotten a lot stronger--a lot--\n"
 	.string "since we last battled.\p"
@@ -2803,46 +2797,36 @@ Route111_Text_28B62D: @ 0828B62D
 	.string "Are you willing to give us an interview\l"
 	.string "this time?$"
 
-Route111_Text_28B719: @ 0828B719
-Route118_Text_28B719: @ 0828B719
-Route120_Text_28B719: @ 0828B719
+GabbyAndTy_Text_GabbyDefeat: @ 0828B719
 	.string "GABBY: That was an intense battle!\n"
 	.string "Did you get all that on camera?$"
 
-Route111_Text_28B75C: @ 0828B75C
+GabbyAndTy_Text_TyPreFirstBattle: @ 0828B75C
 	.string "TY: Hey, lookie here! A tough-looking\n"
 	.string "TRAINER here, of all places!\l"
 	.string "Camera's rolling!$"
 
-Route111_Text_28B7B1: @ 0828B7B1
-Route118_Text_28B7B1: @ 0828B7B1
-Route120_Text_28B7B1: @ 0828B7B1
+GabbyAndTy_Text_TyPreBattle: @ 0828B7B1
 	.string "TY: Hey, lookie here!\n"
 	.string "I remember you!\p"
 	.string "I'll get this battle all on this\n"
 	.string "here camera!$"
 
-Route111_Text_28B805: @ 0828B805
-Route118_Text_28B805: @ 0828B805
-Route120_Text_28B805: @ 0828B805
+GabbyAndTy_Text_TyPostBattle: @ 0828B805
 	.string "TY: You're a natural!\n"
 	.string "Got me some prime footage right here!$"
 
-Route111_Text_28B841: @ 0828B841
-Route118_Text_28B841: @ 0828B841
-Route120_Text_28B841: @ 0828B841
+GabbyAndTy_Text_TyNotEnoughMons: @ 0828B841
 	.string "TY: Do you only have the one POKéMON\n"
 	.string "and that's it?\p"
 	.string "If you had more POKéMON, it'd make for\n"
 	.string "better footage, but…$"
 
-Route111_Text_28B8B1: @ 0828B8B1
+GabbyAndTy_Text_TyDefeatFirstTime: @ 0828B8B1
 	.string "TY: Yep, we sure spotted a hot TRAINER.\n"
 	.string "This is a huge scoop for us!$"
 
-Route111_Text_28B8F6: @ 0828B8F6
-Route118_Text_28B8F6: @ 0828B8F6
-Route120_Text_28B8F6: @ 0828B8F6
+GabbyAndTy_Text_TyDefeat: @ 0828B8F6
 	.string "TY: Yep, I got it all.\n"
 	.string "That whole battle's on camera.$"
 

@@ -8,7 +8,7 @@ MtChimney_OnTransition: @ 822EDCC
 	end
 
 MtChimney_MapScript1_22EDD2: @ 822EDD2
-	setstepcallback 1
+	setstepcallback STEP_CB_ASH
 	end
 
 MtChimney_EventScript_22EDD5:: @ 822EDD5

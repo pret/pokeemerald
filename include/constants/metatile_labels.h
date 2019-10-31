@@ -68,13 +68,16 @@
 #define METATILE_PetalburgGym_SlidingDoor_Frame3 0x21B
 #define METATILE_PetalburgGym_SlidingDoor_Frame4 0x21C
 
-// gTileset_MossdeepGym
-#define METATILE_MossdeepGym_Obelisk_Top           0x204
-#define METATILE_MossdeepGym_Obelisk_Base          0x20C
-#define METATILE_MossdeepGym_Wall_LeftCorner       0x20D
-#define METATILE_MossdeepGym_OuterWall_RightCorner 0x205
-#define METATILE_MossdeepGym_Empty0                0x238
-#define METATILE_MossdeepGym_Empty1                0x239
+// gTileset_MossdeepGym from R/S
+#define METATILE_RS_MossdeepGym_RedArrow_Right        0x204
+#define METATILE_RS_MossdeepGym_RedArrow_Left         0x20C
+#define METATILE_RS_MossdeepGym_RedArrow_Up           0x20D
+#define METATILE_RS_MossdeepGym_RedArrow_Down         0x205
+#define METATILE_RS_MossdeepGym_Switch_Up             0x238
+#define METATILE_RS_MossdeepGym_Switch_Down           0x239
+
+// gTileset_MossdeepGym from Emerald
+#define METATILE_MossdeepGym_YellowArrow_Right        0x250
 
 // gTileset_BrendansMaysHouse
 #define METATILE_BrendansMaysHouse_BrendanPC_Off    0x25A
@@ -376,6 +379,7 @@
 #define METATILE_TrickHousePuzzle_Arrow_RedOnBlack_Down      0x263
 #define METATILE_TrickHousePuzzle_Arrow_RedOnBlack_Left_Alt  0x27B
 #define METATILE_TrickHousePuzzle_Arrow_RedOnBlack_Right_Alt 0x27C
+#define METATILE_TrickHousePuzzle_Arrow_YellowOnWhite_Right  0x298
 
 // gTileset_BikeShop
 #define METATILE_BikeShop_Barrier_Hidden_Top      0x269

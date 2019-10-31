@@ -2035,8 +2035,8 @@ extern const u8 gText_Confusion[];
 extern const u8 gText_Love[];
 
 // battle message
-extern const u8 gText_PkmnBoxSomeonesPCFull[];
-extern const u8 gText_PkmnBoxLanettesPCFull[];
+extern const u8 gText_PkmnTransferredSomeonesPCBoxFull[];
+extern const u8 gText_PkmnTransferredLanettesPCBoxFull[];
 extern const u8 gText_PkmnTransferredSomeonesPC[];
 extern const u8 gText_PkmnTransferredLanettesPC[];
 

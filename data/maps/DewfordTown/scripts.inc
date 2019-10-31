@@ -115,7 +115,7 @@ DewfordTown_EventScript_1E9656:: @ 81E9656
 	end
 
 DewfordTown_EventScript_1E9660:: @ 81E9660
-	call DewfordTown_EventScript_271E95
+	call EventScript_BackupMrBrineyLocation
 	setobjectpriority 2, MAP_DEWFORD_TOWN, 0
 	setobjectpriority EVENT_OBJ_ID_PLAYER, MAP_DEWFORD_TOWN, 0
 	applymovement 2, DewfordTown_Movement_1E991D
@@ -147,7 +147,7 @@ DewfordTown_EventScript_1E9660:: @ 81E9660
 	end
 
 DewfordTown_EventScript_1E96E7:: @ 81E96E7
-	call DewfordTown_EventScript_271E95
+	call EventScript_BackupMrBrineyLocation
 	setobjectpriority 2, MAP_DEWFORD_TOWN, 0
 	setobjectpriority EVENT_OBJ_ID_PLAYER, MAP_DEWFORD_TOWN, 1
 	applymovement 2, DewfordTown_Movement_1E991D
@@ -169,7 +169,7 @@ DewfordTown_EventScript_1E96E7:: @ 81E96E7
 	setobjectpriority 2, MAP_ROUTE109, 0
 	applymovement 2, DewfordTown_Movement_1E991F
 	waitmovement 0
-	clearflag FLAG_HIDE_ROUTE_108_MR_BRINEY
+	clearflag FLAG_HIDE_ROUTE_109_MR_BRINEY
 	addobject 1
 	clearflag FLAG_HIDE_ROUTE_109_MR_BRINEY_BOAT
 	setflag FLAG_HIDE_MR_BRINEY_BOAT_DEWFORD_TOWN
@@ -185,11 +185,11 @@ DewfordTown_EventScript_1E96E7:: @ 81E96E7
 	end
 
 DewfordTown_EventScript_1E9790:: @ 81E9790
-	msgbox DewfordTown_Text_1EEC1D, MSGBOX_DEFAULT
+	msgbox DewfordTown_Text_BrineyLandedInSlateportDeliverGoods, MSGBOX_DEFAULT
 	return
 
 DewfordTown_EventScript_1E9799:: @ 81E9799
-	msgbox DewfordTown_Text_1EEDA7, MSGBOX_DEFAULT
+	msgbox DewfordTown_Text_BrineyLandedInSlateport, MSGBOX_DEFAULT
 	return
 
 DewfordTown_Movement_1E97A2: @ 81E97A2
@@ -654,7 +654,7 @@ DewfordTown_Text_1E9A7F: @ 81E9A7F
 	.string "DEWFORD HALL\n"
 	.string "“Everyone's information exchange!”$"
 
-Route104_Text_1E9AAF: @ 81E9AAF
+Route104_Text_LandedInDewfordDeliverLetter: @ 81E9AAF
 	.string "MR. BRINEY: Ahoy!\n"
 	.string "We've hit land in DEWFORD.\p"
 	.string "I suppose you're off to deliver that\n"
@@ -675,8 +675,7 @@ DewfordTown_Text_1E9BD9: @ 81E9BD9
 	.string "MR. BRINEY: Then you go on and deliver\n"
 	.string "the LETTER. I'll be waiting.$"
 
-Route104_Text_1E9C1D: @ 81E9C1D
-Route109_Text_1E9C1D: @ 81E9C1D
+DewfordTown_Text_BrineyLandedInDewford: @ 81E9C1D
 	.string "MR. BRINEY: Ahoy!\n"
 	.string "We've hit land in DEWFORD!\p"
 	.string "You just go on and tell me whenever\n"

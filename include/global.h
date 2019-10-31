@@ -594,9 +594,9 @@ struct MauvilleManCommon
 struct MauvilleManBard
 {
     /*0x00*/ u8 id;
-    /*0x02*/ u16 songLyrics[6];
-    /*0x0E*/ u16 temporaryLyrics[6];
-    /*0x1A*/ u8 playerName[8];
+    /*0x02*/ u16 songLyrics[BARD_SONG_LENGTH];
+    /*0x0E*/ u16 temporaryLyrics[BARD_SONG_LENGTH];
+    /*0x1A*/ u8 playerName[PLAYER_NAME_LENGTH + 1];
     /*0x22*/ u8 filler_2DB6[0x3];
     /*0x25*/ u8 playerTrainerId[TRAINER_ID_LENGTH];
     /*0x29*/ bool8 hasChangedSong;
@@ -608,10 +608,10 @@ struct MauvilleManStoryteller
     u8 id;
     bool8 alreadyRecorded;
     u8 filler2[2];
-    u8 gameStatIDs[4];
-    u8 trainerNames[4][7];
-    u8 statValues[4][4];
-    u8 language[4];
+    u8 gameStatIDs[NUM_STORYTELLER_TALES];
+    u8 trainerNames[NUM_STORYTELLER_TALES][PLAYER_NAME_LENGTH];
+    u8 statValues[NUM_STORYTELLER_TALES][4];
+    u8 language[NUM_STORYTELLER_TALES];
 };
 
 struct MauvilleManGiddy
@@ -634,10 +634,10 @@ struct MauvilleManHipster
 struct MauvilleOldManTrader
 {
     u8 id;
-    u8 decorIds[4];
-    u8 playerNames[4][11];
+    u8 decorIds[NUM_TRADER_ITEMS];
+    u8 playerNames[NUM_TRADER_ITEMS][11];
     u8 alreadyTraded;
-    u8 language[4];
+    u8 language[NUM_TRADER_ITEMS];
 };
 
 typedef union OldMan

@@ -31,6 +31,7 @@
 #include "constants/event_objects.h"
 #include "constants/flags.h"
 #include "constants/lilycove_lady.h"
+#include "constants/mauville_old_man.h"
 #include "constants/songs.h"
 #include "constants/species.h"
 #include "constants/rgb.h"
@@ -220,7 +221,7 @@ static void sub_811E0EC(s8, s8);
 static void sub_811E1A4(s8, s8);
 static void sub_811E2DC(struct Sprite *);
 static void sub_811E34C(u8, u8);
-static bool8 sub_811F0F8(void);
+static bool8 EasyChatIsNationalPokedexEnabled(void);
 static u16 sub_811F108(void);
 static void sub_811F2D4(void);
 static void sub_811F46C(void);
@@ -1263,7 +1264,7 @@ void ShowEasyChatScreen(void)
         break;
     case EASY_CHAT_TYPE_BARD_SONG:
         bard = &gSaveBlock1Ptr->oldMan.bard;
-        for (i = 0; i < 6; i ++)
+        for (i = 0; i < BARD_SONG_LENGTH; i ++)
             bard->temporaryLyrics[i] = bard->songLyrics[i];
 
         words = bard->temporaryLyrics;
@@ -4809,7 +4810,7 @@ static void sub_811E948(void)
     PutWindowTilemap(windowId);
 }
 
-static bool8 sub_811EA28(u8 groupId)
+static bool8 IsEasyChatGroupUnlocked(u8 groupId)
 {
     switch (groupId)
     {
@@ -4820,7 +4821,7 @@ static bool8 sub_811EA28(u8 groupId)
     case EC_GROUP_MOVE_2:
         return FlagGet(FLAG_SYS_GAME_CLEAR);
     case EC_GROUP_POKEMON_2:
-        return sub_811F0F8();
+        return EasyChatIsNationalPokedexEnabled();
     default:
         return TRUE;
     }
@@ -4831,7 +4832,7 @@ u16 EasyChat_GetNumWordsInGroup(u8 groupId)
     if (groupId == EC_GROUP_POKEMON)
         return GetNationalPokedexCount(FLAG_GET_SEEN);
 
-    if (sub_811EA28(groupId))
+    if (IsEasyChatGroupUnlocked(groupId))
         return gEasyChatGroups[groupId].numEnabledWords;
 
     return 0;
@@ -5071,7 +5072,7 @@ u16 sub_811EE38(u16 groupId)
 
 u16 sub_811EE90(u16 groupId)
 {
-    if (!sub_811EA28(groupId))
+    if (!IsEasyChatGroupUnlocked(groupId))
         return 0xFFFF;
 
     if (groupId == EC_GROUP_POKEMON)
@@ -5129,16 +5130,16 @@ void sub_811EF6C(void)
     CopyEasyChatWord(gStringVar2, easyChatWord);
 }
 
-static bool8 sub_811EF98(u8 additionalPhraseId)
+static bool8 IsAdditionalPhraseUnlocked(u8 additionalPhraseId)
 {
     int byteOffset = additionalPhraseId / 8;
     int shift = additionalPhraseId % 8;
     return (gSaveBlock1Ptr->additionalPhrases[byteOffset] >> shift) & 1;
 }
 
-void sub_811EFC0(u8 additionalPhraseId)
+void UnlockAdditionalPhrase(u8 additionalPhraseId)
 {
-    if (additionalPhraseId < 33)
+    if (additionalPhraseId < NUM_ADDITIONAL_PHRASES)
     {
         int byteOffset = additionalPhraseId / 8;
         int shift = additionalPhraseId % 8;
@@ -5146,32 +5147,32 @@ void sub_811EFC0(u8 additionalPhraseId)
     }
 }
 
-u8 sub_811EFF0(void)
+static u8 GetNumAdditionalPhrasesUnlocked(void)
 {
     u8 i;
     u8 numAdditionalPhrasesUnlocked;
 
-    for (i = 0, numAdditionalPhrasesUnlocked = 0; i < 33; i++)
+    for (i = 0, numAdditionalPhrasesUnlocked = 0; i < NUM_ADDITIONAL_PHRASES; i++)
     {
-        if (sub_811EF98(i))
+        if (IsAdditionalPhraseUnlocked(i))
             numAdditionalPhrasesUnlocked++;
     }
 
     return numAdditionalPhrasesUnlocked;
 }
 
-u16 sub_811F01C(void)
+u16 GetNewHipsterPhraseToTeach(void)
 {
     u16 i;
     u16 additionalPhraseId;
-    u8 numAdditionalPhrasesUnlocked = sub_811EFF0();
-    if (numAdditionalPhrasesUnlocked == 33)
+    u8 numAdditionalPhrasesUnlocked = GetNumAdditionalPhrasesUnlocked();
+    if (numAdditionalPhrasesUnlocked == NUM_ADDITIONAL_PHRASES)
         return 0xFFFF;
 
-    additionalPhraseId = Random() % (33 - numAdditionalPhrasesUnlocked);
-    for (i = 0; i < 33; i++)
+    additionalPhraseId = Random() % (NUM_ADDITIONAL_PHRASES - numAdditionalPhrasesUnlocked);
+    for (i = 0; i < NUM_ADDITIONAL_PHRASES; i++)
     {
-        if (!sub_811EF98(i))
+        if (!IsAdditionalPhraseUnlocked(i))
         {
             if (additionalPhraseId)
             {
@@ -5179,7 +5180,7 @@ u16 sub_811F01C(void)
             }
             else
             {
-                sub_811EFC0(i);
+                UnlockAdditionalPhrase(i);
                 return EC_WORD(EC_GROUP_TRENDY_SAYING, i);
             }
         }
@@ -5188,17 +5189,18 @@ u16 sub_811F01C(void)
     return 0xFFFF;
 }
 
-u16 sub_811F090(void)
+// Unused
+u16 GetRandomTaughtHipsterPhrase(void)
 {
     u16 i;
-    u16 additionalPhraseId = sub_811EFF0();
+    u16 additionalPhraseId = GetNumAdditionalPhrasesUnlocked();
     if (additionalPhraseId == 0)
         return 0xFFFF;
 
     additionalPhraseId = Random() % additionalPhraseId;
-    for (i = 0; i < 33; i++)
+    for (i = 0; i < NUM_ADDITIONAL_PHRASES; i++)
     {
-        if (sub_811EF98(i))
+        if (IsAdditionalPhraseUnlocked(i))
         {
             if (additionalPhraseId)
                 additionalPhraseId--;
@@ -5210,7 +5212,7 @@ u16 sub_811F090(void)
     return 0xFFFF;
 }
 
-static bool8 sub_811F0F8(void)
+static bool8 EasyChatIsNationalPokedexEnabled(void)
 {
     return IsNationalPokedexEnabled();
 }
@@ -5497,7 +5499,7 @@ static bool8 sub_811F764(u16 wordIndex, u8 groupId)
     case EC_GROUP_MOVE_2:
         return TRUE;
     case EC_GROUP_TRENDY_SAYING:
-        return sub_811EF98(wordIndex);
+        return IsAdditionalPhraseUnlocked(wordIndex);
     default:
         return gEasyChatGroups[groupId].wordData.words[wordIndex].enabled;
     }
@@ -5545,7 +5547,7 @@ bool32 sub_811F8D8(int easyChatWord)
     int groupId = EC_GROUP(easyChatWord);
     int mask = 0x7F;
     int index = EC_INDEX(easyChatWord);
-    if (!sub_811EA28(groupId & mask))
+    if (!IsEasyChatGroupUnlocked(groupId & mask))
         return FALSE;
     else
         return sub_811F764(index, groupId & mask);

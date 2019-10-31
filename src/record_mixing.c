@@ -631,7 +631,7 @@ static void ReceiveOldManData(OldMan *oldMan, size_t recordSize, u8 which)
     u8 version;
     u16 language;
     OldMan *dest;
-    u32 mixIndices[4];
+    u32 mixIndices[MAX_LINK_PLAYERS];
 
     ShufflePlayerIndices(mixIndices);
     dest = (void *)oldMan + recordSize * mixIndices[which];

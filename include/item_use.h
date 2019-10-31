@@ -50,6 +50,6 @@ void ItemUseOutOfBattle_EnigmaBerry(u8);
 void ItemUseInBattle_EnigmaBerry(u8);
 void ItemUseOutOfBattle_CannotUse(u8);
 u8 CheckIfItemIsTMHMOrEvolutionStone(u16 itemId);
-void sub_80FDD10(u8);
+void ItemUseOutOfBattle_Berry(u8);
 
 #endif // GUARD_ITEM_USE_H

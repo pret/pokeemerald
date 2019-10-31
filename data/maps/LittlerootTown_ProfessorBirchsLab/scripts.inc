@@ -366,7 +366,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_1FA0CC:: @ 81FA0CC
 	end
 
 LittlerootTown_ProfessorBirchsLab_EventScript_1FA0F2:: @ 81FA0F2
-	call LittlerootTown_ProfessorBirchsLab_EventScript_2737A0
+	call Common_EventScript_TransferredToPC
 	goto LittlerootTown_ProfessorBirchsLab_EventScript_1FA0FD
 	end
 
@@ -411,7 +411,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_1FA16D:: @ 81FA16D
 	end
 
 LittlerootTown_ProfessorBirchsLab_EventScript_1FA193:: @ 81FA193
-	call LittlerootTown_ProfessorBirchsLab_EventScript_2737A0
+	call Common_EventScript_TransferredToPC
 	goto LittlerootTown_ProfessorBirchsLab_EventScript_1FA19E
 	end
 
@@ -456,7 +456,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_1FA20E:: @ 81FA20E
 	end
 
 LittlerootTown_ProfessorBirchsLab_EventScript_1FA234:: @ 81FA234
-	call LittlerootTown_ProfessorBirchsLab_EventScript_2737A0
+	call Common_EventScript_TransferredToPC
 	goto LittlerootTown_ProfessorBirchsLab_EventScript_1FA23F
 	end
 
