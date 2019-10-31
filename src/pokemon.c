@@ -5658,21 +5658,23 @@ void EvolutionRenameMon(struct Pokemon *mon, u16 oldSpecies, u16 newSpecies)
         SetMonData(mon, MON_DATA_NICKNAME, gSpeciesNames[newSpecies]);
 }
 
-bool8 sub_806D7EC(void)
+// The below two functions determine which side of a multi battle the trainer battles on
+// 0 is the left (top in  party menu), 1 is right (bottom in party menu)
+u8 GetPlayerFlankId(void)
 {
-    bool8 retVal = FALSE;
+    u8 flankId = 0;
     switch (gLinkPlayers[GetMultiplayerId()].id)
     {
     case 0:
     case 3:
-        retVal = FALSE;
+        flankId = 0;
         break;
     case 1:
     case 2:
-        retVal = TRUE;
+        flankId = 1;
         break;
     }
-    return retVal;
+    return flankId;
 }
 
 u16 GetLinkTrainerFlankId(u8 linkPlayerId)

@@ -1184,7 +1184,7 @@ void FreeMonIconPalette(u16 species)
     FreeSpritePaletteByTag(gMonIconPaletteTable[palIndex].tag);
 }
 
-void MonIconSpriteCallback(struct Sprite *sprite)
+void SpriteCB_MonIcon(struct Sprite *sprite)
 {
     UpdateMonIconFrame(sprite);
 }

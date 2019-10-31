@@ -981,7 +981,7 @@ static void HandleMenuActionInput(u8 taskId)
                 sub_8199134(0, 1);
             }
         }
-        else if (gMain.newKeys & DPAD_LEFT || GetLRKeysPressed() == 1)
+        else if (gMain.newKeys & DPAD_LEFT || GetLRKeysPressed() == MENU_L_PRESSED)
         {
             if (id & 1 && IsValidMenuAction(id - 1))
             {
@@ -989,7 +989,7 @@ static void HandleMenuActionInput(u8 taskId)
                 sub_8199134(-1, 0);
             }
         }
-        else if (gMain.newKeys & DPAD_RIGHT || GetLRKeysPressed() == 2)
+        else if (gMain.newKeys & DPAD_RIGHT || GetLRKeysPressed() == MENU_R_PRESSED)
         {
             if (!(id & 1) && IsValidMenuAction(id + 1))
             {

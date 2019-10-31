@@ -811,7 +811,7 @@ bool8 BattleInitAllSprites(u8 *state1, u8 *battlerId)
         break;
     case 6:
         LoadAndCreateEnemyShadowSprites();
-        sub_81B8C68();
+        BufferBattlePartyCurrentOrder();
         retVal = TRUE;
         break;
     }

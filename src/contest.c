@@ -2802,7 +2802,7 @@ void sub_80DACBC(u8 contestType, u8 rank, bool32 isPostgame)
 u8 GetContestEntryEligibility(struct Pokemon *pkmn)
 {
     u8 ribbon;
-    u8 contestViability;
+    u8 eligibility;
 
     if (GetMonData(pkmn, MON_DATA_IS_EGG))
         return CANT_ENTER_CONTEST_EGG;
@@ -2833,12 +2833,12 @@ u8 GetContestEntryEligibility(struct Pokemon *pkmn)
     // Returns 2, 1, or 0 respectively if ribbon's rank is above, equal, or below
     // the current contest rank.
     if (ribbon > gSpecialVar_ContestRank)
-        contestViability = CAN_ENTER_CONTEST_HIGH_RANK;
+        eligibility = CAN_ENTER_CONTEST_HIGH_RANK;
     else if (ribbon >= gSpecialVar_ContestRank)
-        contestViability = CAN_ENTER_CONTEST_EQUAL_RANK;
+        eligibility = CAN_ENTER_CONTEST_EQUAL_RANK;
     else
-        contestViability = CANT_ENTER_CONTEST;
-    return contestViability;
+        eligibility = CANT_ENTER_CONTEST;
+    return eligibility;
 }
 
 static void DrawContestantWindowText(void)
