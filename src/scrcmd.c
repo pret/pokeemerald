@@ -68,7 +68,7 @@ extern const SpecialFunc gSpecials[];
 extern const u8 *gStdScripts[];
 extern const u8 *gStdScripts_End[];
 
-void sub_809BDB4(void);
+static void CloseBrailleWindow(void);
 
 // This is defined in here so the optimizer can't see its value when compiling
 // script.c.
@@ -1528,9 +1528,9 @@ bool8 ScrCmd_braillemessage(struct ScriptContext *ctx)
     return FALSE;
 }
 
-bool8 ScrCmd_cmdDA(struct ScriptContext *ctx)
+bool8 ScrCmd_closebraillemessage(struct ScriptContext *ctx)
 {
-    sub_809BDB4();
+    CloseBrailleWindow();
     return FALSE;
 }
 
@@ -2257,7 +2257,7 @@ bool8 ScrCmd_setmonmetlocation(struct ScriptContext *ctx)
     return FALSE;
 }
 
-void sub_809BDB4(void)
+static void CloseBrailleWindow(void)
 {
     ClearStdWindowAndFrame(gBrailleWindowId, 1);
     RemoveWindow(gBrailleWindowId);

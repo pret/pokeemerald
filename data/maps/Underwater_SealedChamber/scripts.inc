@@ -22,7 +22,7 @@ Underwater_SealedChamber_EventScript_2390FC:: @ 82390FC
 	lockall
 	braillemessage Underwater_SealedChamber_Braille_2A6B15
 	waitbuttonpress
-	hidebox2
+	closebraillemessage
 	releaseall
 	end
 

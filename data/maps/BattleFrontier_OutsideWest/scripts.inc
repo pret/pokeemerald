@@ -68,7 +68,7 @@ BattleFrontier_OutsideWest_EventScript_23D4BA:: @ 823D4BA
 	delay 30
 	hideobjectat 3, MAP_BATTLE_FRONTIER_OUTSIDE_WEST
 	setvar VAR_0x8004, 2
-	call BattleFrontier_OutsideWest_EventScript_272250
+	call Common_EventScript_FerryDepartIsland
 	return
 
 BattleFrontier_OutsideWest_EventScript_23D4D8:: @ 823D4D8
