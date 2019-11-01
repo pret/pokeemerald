@@ -824,7 +824,7 @@ static void Mailbox_DoGiveMailPokeMenu(u8 taskId)
     {
         sub_81D1EC0();
         CleanupOverworldWindowsAndTilemaps();
-        sub_81B8448();
+        ChooseMonToGiveMailFromMailbox();
         DestroyTask(taskId);
     }
 }

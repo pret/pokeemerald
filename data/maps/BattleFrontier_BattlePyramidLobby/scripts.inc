@@ -61,10 +61,10 @@ BattleFrontier_BattlePyramidLobby_EventScript_2507D2:: @ 82507D2
 	msgbox BattleFrontier_BattlePyramidLobby_Text_2525F4, MSGBOX_DEFAULT
 
 BattleFrontier_BattlePyramidLobby_EventScript_2507DA:: @ 82507DA
-	special sub_81B95E0
-	compare VAR_RESULT, 1
+	special DoBattlePyramidMonsHaveHeldItem
+	compare VAR_RESULT, TRUE
 	call_if_eq BattleFrontier_BattlePyramidLobby_EventScript_250DDB
-	clearflag FLAG_SPECIAL_FLAG_0x4004
+	clearflag FLAG_STORING_ITEMS_IN_PYRAMID_BAG
 	setvar VAR_0x8004, 8
 	special CallFrontierUtilFunc
 	special LoadPlayerParty
@@ -494,8 +494,8 @@ BattleFrontier_BattlePyramidLobby_Movement_250DD8: @ 8250DD8
 
 BattleFrontier_BattlePyramidLobby_EventScript_250DDB:: @ 8250DDB
 	msgbox BattleFrontier_BattlePyramidLobby_Text_2517FC, MSGBOX_DEFAULT
-	setflag FLAG_SPECIAL_FLAG_0x4004
-	special sub_81C6A94
+	setflag FLAG_STORING_ITEMS_IN_PYRAMID_BAG
+	special TryStoreHeldItemsInPyramidBag
 	compare VAR_RESULT, 0
 	goto_if_eq BattleFrontier_BattlePyramidLobby_EventScript_250E00
 	message BattleFrontier_BattlePyramidLobby_Text_2518C6
@@ -525,7 +525,7 @@ BattleFrontier_BattlePyramidLobby_EventScript_250E40:: @ 8250E40
 	end
 
 BattleFrontier_BattlePyramidLobby_EventScript_250E50:: @ 8250E50
-	special sub_81B9620
+	special BattlePyramidChooseMonHeldItems
 	waitstate
 	message BattleFrontier_BattlePyramidLobby_Text_25197E
 	waitmessage
@@ -533,8 +533,8 @@ BattleFrontier_BattlePyramidLobby_EventScript_250E50:: @ 8250E50
 	end
 
 BattleFrontier_BattlePyramidLobby_EventScript_250E60:: @ 8250E60
-	special sub_81B95E0
-	compare VAR_RESULT, 1
+	special DoBattlePyramidMonsHaveHeldItem
+	compare VAR_RESULT, TRUE
 	goto_if_eq BattleFrontier_BattlePyramidLobby_EventScript_250E6F
 	return
 

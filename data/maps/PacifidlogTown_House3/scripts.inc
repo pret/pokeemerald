@@ -12,7 +12,7 @@ PacifidlogTown_House3_EventScript_203C11:: @ 8203C11
 	msgbox PacifidlogTown_House3_Text_203CBE, MSGBOX_YESNO
 	compare VAR_RESULT, 0
 	goto_if_eq PacifidlogTown_House3_EventScript_203C93
-	special sub_81B94B0
+	special ChoosePartyMon
 	waitstate
 	copyvar VAR_0x800A, VAR_0x8004
 	compare VAR_0x8004, 255

@@ -265,7 +265,7 @@ BattleFrontier_Lounge7_EventScript_265696:: @ 8265696
 	fadescreen 1
 	special CloseBattlePointsWindow
 	special CloseBattleFrontierTutorWindow
-	special OpenPartyMenuForMoveTutor
+	special ChooseMonForMoveTutor
 	waitstate
 	compare VAR_RESULT, 0
 	goto_if_eq BattleFrontier_Lounge7_EventScript_265645

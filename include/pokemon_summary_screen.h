@@ -9,10 +9,9 @@ extern const u8 *const gMoveDescriptionPointers[];
 extern const u8 *const gNatureNamePointers[];
 
 void ShowPokemonSummaryScreen(u8 mode, void *mons, u8 monIndex, u8 maxMonIndex, void (*callback)(void));
-void sub_81C4F98(u8, void(*)(void));
 void ShowSelectMovePokemonSummaryScreen(struct Pokemon *, u8, u8, MainCallback, u16);
 void ShowPokemonSummaryScreenSet40EF(u8 mode, struct BoxPokemon *mons, u8 monIndex, u8 maxMonIndex, void (*callback)(void));
-u8 sub_81C1B94(void);
+u8 GetMoveSlotToReplace(void);
 void SummaryScreen_SetUnknownTaskId(u8 a0);
 void SummaryScreen_DestroyUnknownTask(void);
 

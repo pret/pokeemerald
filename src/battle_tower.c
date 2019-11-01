@@ -3191,7 +3191,7 @@ static void FillPartnerParty(u16 trainerId)
                       sStevenMons[i].fixedIV,
                       TRUE, i, // BUG: personality was stored in the 'j' variable. As a result, Steven's pokemon do not have the intended natures.
                       OT_ID_PRESET, STEVEN_OTID);
-            for (j = 0; j < 6; j++)
+            for (j = 0; j < PARTY_SIZE; j++)
                 SetMonData(&gPlayerParty[3 + i], MON_DATA_HP_EV + j, &sStevenMons[i].evs[j]);
             for (j = 0; j < MAX_MON_MOVES; j++)
                 SetMonMoveSlot(&gPlayerParty[3 + i], sStevenMons[i].moves[j], j);

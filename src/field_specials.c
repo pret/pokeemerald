@@ -60,6 +60,7 @@
 #include "constants/songs.h"
 #include "constants/species.h"
 #include "constants/moves.h"
+#include "constants/party_menu.h"
 #include "constants/vars.h"
 #include "constants/battle_frontier.h"
 #include "constants/weather.h"
