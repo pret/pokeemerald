@@ -52,6 +52,7 @@
 #include "menu_specialized.h"
 #include "constants/rgb.h"
 #include "data.h"
+#include "constants/party_menu.h"
 
 extern struct MusicPlayerInfo gMPlayInfo_BGM;
 
@@ -5107,13 +5108,13 @@ static void atk4F_jumpifcantswitch(void)
     }
 }
 
-static void sub_804CF10(u8 arg0)
+static void sub_804CF10(u8 slotId)
 {
     *(gBattleStruct->field_58 + gActiveBattler) = gBattlerPartyIndexes[gActiveBattler];
-    *(gBattleStruct->monToSwitchIntoId + gActiveBattler) = 6;
+    *(gBattleStruct->monToSwitchIntoId + gActiveBattler) = PARTY_SIZE;
     gBattleStruct->field_93 &= ~(gBitTable[gActiveBattler]);
 
-    BtlController_EmitChoosePokemon(0, PARTY_MUST_CHOOSE_MON, arg0, 0, gBattleStruct->field_60[gActiveBattler]);
+    BtlController_EmitChoosePokemon(0, PARTY_ACTION_SEND_OUT, slotId, ABILITY_NONE, gBattleStruct->field_60[gActiveBattler]);
     MarkBattlerForControllerExec(gActiveBattler);
 }
 
@@ -5145,7 +5146,7 @@ static void atk50_openpartyscreen(void)
                     }
                     else if (!gSpecialStatuses[gActiveBattler].flag40)
                     {
-                        sub_804CF10(6);
+                        sub_804CF10(PARTY_SIZE);
                         gSpecialStatuses[gActiveBattler].flag40 = 1;
                     }
                 }
@@ -5352,9 +5353,9 @@ static void atk50_openpartyscreen(void)
     else
     {
         if (gBattlescriptCurrInstr[1] & 0x80)
-            hitmarkerFaintBits = PARTY_CHOOSE_MON; // Used here as the caseId for the EmitChoose function.
+            hitmarkerFaintBits = PARTY_ACTION_CHOOSE_MON; // Used here as the caseId for the EmitChoose function.
         else
-            hitmarkerFaintBits = PARTY_MUST_CHOOSE_MON;
+            hitmarkerFaintBits = PARTY_ACTION_SEND_OUT;
 
         battlerId = GetBattlerForBattleScript(gBattlescriptCurrInstr[1] & ~(0x80));
         if (gSpecialStatuses[battlerId].flag40)
@@ -5375,7 +5376,7 @@ static void atk50_openpartyscreen(void)
             *(gBattleStruct->monToSwitchIntoId + gActiveBattler) = 6;
             gBattleStruct->field_93 &= ~(gBitTable[gActiveBattler]);
 
-            BtlController_EmitChoosePokemon(0, hitmarkerFaintBits, *(gBattleStruct->monToSwitchIntoId + (gActiveBattler ^ 2)), 0, gBattleStruct->field_60[gActiveBattler]);
+            BtlController_EmitChoosePokemon(0, hitmarkerFaintBits, *(gBattleStruct->monToSwitchIntoId + (gActiveBattler ^ 2)), ABILITY_NONE, gBattleStruct->field_60[gActiveBattler]);
             MarkBattlerForControllerExec(gActiveBattler);
 
             gBattlescriptCurrInstr += 6;
@@ -5433,7 +5434,7 @@ static void atk51_switchhandleorder(void)
         break;
     case 1:
         if (!(gBattleTypeFlags & BATTLE_TYPE_MULTI))
-            sub_803BDA0(gActiveBattler);
+            SwitchPartyOrder(gActiveBattler);
         break;
     case 2:
         if (!(gBattleStruct->field_93 & gBitTable[gActiveBattler]))
@@ -5458,11 +5459,11 @@ static void atk51_switchhandleorder(void)
         }
         else if (gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER)
         {
-            sub_80571DC(gActiveBattler, *(gBattleStruct->monToSwitchIntoId + gActiveBattler));
+            SwitchPartyOrderInGameMulti(gActiveBattler, *(gBattleStruct->monToSwitchIntoId + gActiveBattler));
         }
         else
         {
-            sub_803BDA0(gActiveBattler);
+            SwitchPartyOrder(gActiveBattler);
         }
 
         PREPARE_SPECIES_BUFFER(gBattleTextBuff1, gBattleMons[gBattlerAttacker].species)
@@ -5615,15 +5616,15 @@ static void atk59_handlelearnnewmove(void)
     const u8 *jumpPtr1 = T1_READ_PTR(gBattlescriptCurrInstr + 1);
     const u8 *jumpPtr2 = T1_READ_PTR(gBattlescriptCurrInstr + 5);
 
-    u16 ret = MonTryLearningNewMove(&gPlayerParty[gBattleStruct->expGetterMonId], gBattlescriptCurrInstr[9]);
-    while (ret == 0xFFFE)
-        ret = MonTryLearningNewMove(&gPlayerParty[gBattleStruct->expGetterMonId], 0);
+    u16 learnMove = MonTryLearningNewMove(&gPlayerParty[gBattleStruct->expGetterMonId], gBattlescriptCurrInstr[9]);
+    while (learnMove == MON_ALREADY_KNOWS_MOVE)
+        learnMove = MonTryLearningNewMove(&gPlayerParty[gBattleStruct->expGetterMonId], FALSE);
 
-    if (ret == 0)
+    if (learnMove == 0)
     {
         gBattlescriptCurrInstr = jumpPtr2;
     }
-    else if (ret == 0xFFFF)
+    else if (learnMove == MON_HAS_MAX_MOVES)
     {
         gBattlescriptCurrInstr += 10;
     }
@@ -5634,7 +5635,7 @@ static void atk59_handlelearnnewmove(void)
         if (gBattlerPartyIndexes[gActiveBattler] == gBattleStruct->expGetterMonId
             && !(gBattleMons[gActiveBattler].status2 & STATUS2_TRANSFORMED))
         {
-            GiveMoveToBattleMon(&gBattleMons[gActiveBattler], ret);
+            GiveMoveToBattleMon(&gBattleMons[gActiveBattler], learnMove);
         }
         if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
         {
@@ -5642,7 +5643,7 @@ static void atk59_handlelearnnewmove(void)
             if (gBattlerPartyIndexes[gActiveBattler] == gBattleStruct->expGetterMonId
                 && !(gBattleMons[gActiveBattler].status2 & STATUS2_TRANSFORMED))
             {
-                GiveMoveToBattleMon(&gBattleMons[gActiveBattler], ret);
+                GiveMoveToBattleMon(&gBattleMons[gActiveBattler], learnMove);
             }
         }
 
@@ -5715,8 +5716,8 @@ static void atk5A_yesnoboxlearnmove(void)
     case 4:
         if (!gPaletteFade.active && gMain.callback2 == BattleMainCB2)
         {
-            u8 movePosition = sub_81C1B94();
-            if (movePosition == 4)
+            u8 movePosition = GetMoveSlotToReplace();
+            if (movePosition == MAX_MON_MOVES)
             {
                 gBattleScripting.learnMoveState = 5;
             }
@@ -7566,19 +7567,19 @@ static void atk8F_forcerandomswitch(void)
             *(gBattleStruct->monToSwitchIntoId + gBattlerTarget) = i;
 
             if (!IsMultiBattle())
-                sub_803BDA0(gBattlerTarget);
+                SwitchPartyOrder(gBattlerTarget);
 
             if ((gBattleTypeFlags & BATTLE_TYPE_LINK && gBattleTypeFlags & BATTLE_TYPE_BATTLE_TOWER)
                 || (gBattleTypeFlags & BATTLE_TYPE_LINK && gBattleTypeFlags & BATTLE_TYPE_MULTI)
                 || (gBattleTypeFlags & BATTLE_TYPE_x2000000 && gBattleTypeFlags & BATTLE_TYPE_BATTLE_TOWER)
                 || (gBattleTypeFlags & BATTLE_TYPE_x2000000 && gBattleTypeFlags & BATTLE_TYPE_MULTI))
             {
-                sub_81B8E80(gBattlerTarget, i, 0);
-                sub_81B8E80(gBattlerTarget ^ BIT_FLANK, i, 1);
+                SwitchPartyOrderLinkMulti(gBattlerTarget, i, 0);
+                SwitchPartyOrderLinkMulti(gBattlerTarget ^ BIT_FLANK, i, 1);
             }
 
             if (gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER)
-                sub_80571DC(gBattlerTarget, i);
+                SwitchPartyOrderInGameMulti(gBattlerTarget, i);
         }
     }
     else

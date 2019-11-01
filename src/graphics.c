@@ -1138,9 +1138,9 @@ const u32 gBattleAnimSpritePal_Slash2[] = INCBIN_U32("graphics/battle_anims/spri
 const u32 gBattleAnimSpriteGfx_WhiteShadow[] = INCBIN_U32("graphics/battle_anims/sprites/white_shadow.4bpp.lz");
 const u32 gBattleAnimSpritePal_WhiteShadow[] = INCBIN_U32("graphics/battle_anims/sprites/white_shadow.gbapal.lz");
 
-const u32 gPartyMenuMisc_Gfx[] = INCBIN_U32("graphics/interface/party_menu_misc.4bpp.lz");
-const u32 gPartyMenuMisc_Pal[] = INCBIN_U32("graphics/interface/party_menu_misc.gbapal.lz");
-const u32 gPartyMenuMisc_Tilemap[] = INCBIN_U32("graphics/interface/party_menu_misc.bin.lz");
+const u32 gPartyMenuBg_Gfx[] = INCBIN_U32("graphics/interface/party_menu_bg.4bpp.lz");
+const u32 gPartyMenuBg_Pal[] = INCBIN_U32("graphics/interface/party_menu_bg.gbapal.lz");
+const u32 gPartyMenuBg_Tilemap[] = INCBIN_U32("graphics/interface/party_menu_bg.bin.lz");
 
 const u32 gPartyMenuPokeball_Gfx[] = INCBIN_U32("graphics/interface/party_menu_pokeball.4bpp.lz");
 const u32 gPartyMenuPokeballSmall_Gfx[] = INCBIN_U32("graphics/interface/party_menu_pokeball_small.4bpp.lz"); //unused

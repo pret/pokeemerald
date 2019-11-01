@@ -419,12 +419,12 @@ static void PlayerPC_Decoration(u8 taskId)
 
 static void PlayerPC_TurnOff(u8 taskId)
 {
-    if (gPcItemMenuOptionsNum == 4) // if the option count is 4, we are at the bedroom PC and not player PC, so do gender specific handling.
+    if (gPcItemMenuOptionsNum == 4) // if the option count is 4, we are at the bedroom PC, so do gender specific handling.
     {
         if (gSaveBlock2Ptr->playerGender == MALE)
-            ScriptContext1_SetupScript(LittlerootTown_BrendansHouse_2F_EventScript_1F863F);
+            ScriptContext1_SetupScript(LittlerootTown_BrendansHouse_2F_EventScript_TurnOffPlayerPC);
         else
-            ScriptContext1_SetupScript(LittlerootTown_MaysHouse_2F_EventScript_1F958F);
+            ScriptContext1_SetupScript(LittlerootTown_MaysHouse_2F_EventScript_TurnOffPlayerPC);
     }
     else
     {
@@ -824,7 +824,7 @@ static void Mailbox_DoGiveMailPokeMenu(u8 taskId)
     {
         sub_81D1EC0();
         CleanupOverworldWindowsAndTilemaps();
-        sub_81B8448();
+        ChooseMonToGiveMailFromMailbox();
         DestroyTask(taskId);
     }
 }

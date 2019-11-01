@@ -175,8 +175,8 @@ gStdScripts_End:: @ 81DC2CC
 	.include "data/maps/FallarborTown_BattleTentBattleRoom/scripts.inc"
 	.include "data/maps/FallarborTown_PokemonCenter_1F/scripts.inc"
 	.include "data/maps/FallarborTown_PokemonCenter_2F/scripts.inc"
-	.include "data/maps/FallarborTown_House1/scripts.inc"
-	.include "data/maps/FallarborTown_House2/scripts.inc"
+	.include "data/maps/FallarborTown_CozmosHouse/scripts.inc"
+	.include "data/maps/FallarborTown_MoveRelearnersHouse/scripts.inc"
 	.include "data/maps/VerdanturfTown_BattleTentLobby/scripts.inc"
 	.include "data/maps/VerdanturfTown_BattleTentCorridor/scripts.inc"
 	.include "data/maps/VerdanturfTown_BattleTentBattleRoom/scripts.inc"
@@ -712,13 +712,13 @@ EventScript_ResetMrBriney:: @ 8271862
 	compare VAR_BRINEY_LOCATION, 2
 	goto_if_eq EventScript_MoveMrBrineyToDewford
 	compare VAR_BRINEY_LOCATION, 3
-	goto_if_eq EventScript_MoveMrBrineyToRoute108
+	goto_if_eq EventScript_MoveMrBrineyToRoute109
 	end
 
 EventScript_MoveMrBrineyToHouse:: @ 8271884
 	setflag FLAG_HIDE_MR_BRINEY_DEWFORD_TOWN
 	setflag FLAG_HIDE_MR_BRINEY_BOAT_DEWFORD_TOWN
-	setflag FLAG_HIDE_ROUTE_108_MR_BRINEY
+	setflag FLAG_HIDE_ROUTE_109_MR_BRINEY
 	setflag FLAG_HIDE_ROUTE_109_MR_BRINEY_BOAT
 	clearflag FLAG_HIDE_ROUTE_104_MR_BRINEY_BOAT
 	clearflag FLAG_HIDE_BRINEYS_HOUSE_MR_BRINEY
@@ -726,7 +726,7 @@ EventScript_MoveMrBrineyToHouse:: @ 8271884
 	end
 
 EventScript_MoveMrBrineyToDewford:: @ 827189A
-	setflag FLAG_HIDE_ROUTE_108_MR_BRINEY
+	setflag FLAG_HIDE_ROUTE_109_MR_BRINEY
 	setflag FLAG_HIDE_ROUTE_109_MR_BRINEY_BOAT
 	setflag FLAG_HIDE_ROUTE_104_MR_BRINEY
 	setflag FLAG_HIDE_ROUTE_104_MR_BRINEY_BOAT
@@ -736,14 +736,14 @@ EventScript_MoveMrBrineyToDewford:: @ 827189A
 	clearflag FLAG_HIDE_MR_BRINEY_BOAT_DEWFORD_TOWN
 	end
 
-EventScript_MoveMrBrineyToRoute108:: @ 82718B3
+EventScript_MoveMrBrineyToRoute109:: @ 82718B3
 	setflag FLAG_HIDE_ROUTE_104_MR_BRINEY
 	setflag FLAG_HIDE_ROUTE_104_MR_BRINEY_BOAT
 	setflag FLAG_HIDE_BRINEYS_HOUSE_MR_BRINEY
 	setflag FLAG_HIDE_BRINEYS_HOUSE_PEEKO
 	setflag FLAG_HIDE_MR_BRINEY_DEWFORD_TOWN
 	setflag FLAG_HIDE_MR_BRINEY_BOAT_DEWFORD_TOWN
-	clearflag FLAG_HIDE_ROUTE_108_MR_BRINEY
+	clearflag FLAG_HIDE_ROUTE_109_MR_BRINEY
 	clearflag FLAG_HIDE_ROUTE_109_MR_BRINEY_BOAT
 	end
 
@@ -760,7 +760,7 @@ Common_EventScript_UpdateBrineyLocation:: @ 82718DE
 	goto_if_set FLAG_DEFEATED_PETALBURG_GYM, Common_EventScript_NopReturn
 	goto_if_unset FLAG_HIDE_ROUTE_104_MR_BRINEY_BOAT, EventScript_SetBrineyLocation_House
 	goto_if_unset FLAG_HIDE_MR_BRINEY_DEWFORD_TOWN, EventScript_SetBrineyLocation_Dewford
-	goto_if_unset FLAG_HIDE_ROUTE_108_MR_BRINEY, EventScript_SetBrineyLocation_Route108
+	goto_if_unset FLAG_HIDE_ROUTE_109_MR_BRINEY, EventScript_SetBrineyLocation_Route109
 	return
 
 EventScript_SetBrineyLocation_House:: @ 827190C
@@ -771,7 +771,7 @@ EventScript_SetBrineyLocation_Dewford:: @ 8271912
 	setvar VAR_BRINEY_LOCATION, 2
 	return
 
-EventScript_SetBrineyLocation_Route108:: @ 8271918
+EventScript_SetBrineyLocation_Route109:: @ 8271918
 	setvar VAR_BRINEY_LOCATION, 3
 	return
 
@@ -807,9 +807,7 @@ DewfordTown_Hall_EventScript_271E8B:: @ 8271E8B
 	special BufferTrendyPhraseString
 	return
 
-DewfordTown_EventScript_271E95:: @ 8271E95
-Route104_MrBrineysHouse_EventScript_271E95:: @ 8271E95
-Route109_EventScript_271E95:: @ 8271E95
+EventScript_BackupMrBrineyLocation:: @ 8271E95
 	copyvar VAR_0x8008, VAR_BRINEY_LOCATION
 	setvar VAR_BRINEY_LOCATION, 0
 	return
@@ -894,7 +892,7 @@ Movement_FerryDepart: @ 82721F0
 EventScript_HideMrBriney:: @ 82721F8
 	setflag FLAG_HIDE_MR_BRINEY_DEWFORD_TOWN
 	setflag FLAG_HIDE_MR_BRINEY_BOAT_DEWFORD_TOWN
-	setflag FLAG_HIDE_ROUTE_108_MR_BRINEY
+	setflag FLAG_HIDE_ROUTE_109_MR_BRINEY
 	setflag FLAG_HIDE_ROUTE_109_MR_BRINEY_BOAT
 	setflag FLAG_HIDE_ROUTE_104_MR_BRINEY
 	setflag FLAG_HIDE_ROUTE_104_MR_BRINEY_BOAT
@@ -912,30 +910,26 @@ RusturfTunnel_EventScript_272216:: @ 8272216
 	setflag FLAG_RUSTURF_TUNNEL_OPENED
 	return
 
-EventScript_27222B:: @ 827222B
+EventScript_UnusedBoardFerry:: @ 827222B
 	delay 30
 	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	showobjectat 255, MAP_PETALBURG_CITY
 	delay 30
-	applymovement EVENT_OBJ_ID_PLAYER, Movement_27224E
+	applymovement EVENT_OBJ_ID_PLAYER, Movement_UnusedBoardFerry
 	waitmovement 0
 	delay 30
 	return
 
-Movement_27224E: @ 827224E
+Movement_UnusedBoardFerry: @ 827224E
 	walk_up
 	step_end
 
-BattleFrontier_OutsideWest_EventScript_272250:: @ 8272250
-BirthIsland_Harbor_EventScript_272250:: @ 8272250
-FarawayIsland_Entrance_EventScript_272250:: @ 8272250
-NavelRock_Harbor_EventScript_272250:: @ 8272250
-SouthernIsland_Exterior_EventScript_272250:: @ 8272250
+Common_EventScript_FerryDepartIsland:: @ 8272250
 	compare VAR_FACING, DIR_SOUTH
-	call_if_eq BattleFrontier_OutsideWest_EventScript_242A21
+	call_if_eq Ferry_EventScript_DepartIslandSouth
 	compare VAR_FACING, DIR_WEST
-	call_if_eq BattleFrontier_OutsideWest_EventScript_242A2C
+	call_if_eq Ferry_EventScript_DepartIslandWest
 	delay 30
 	hideobjectat 255, MAP_PETALBURG_CITY
 	call Common_EventScript_FerryDepart

@@ -12,7 +12,7 @@ BattleFrontier_Lounge6_EventScript_264FED:: @ 8264FED
 	msgbox BattleFrontier_Lounge6_Text_26508D, MSGBOX_YESNO
 	compare VAR_RESULT, 0
 	goto_if_eq BattleFrontier_Lounge6_EventScript_26506B
-	special sub_81B94B0
+	special ChoosePartyMon
 	waitstate
 	copyvar VAR_0x800A, VAR_0x8004
 	compare VAR_0x8004, 255

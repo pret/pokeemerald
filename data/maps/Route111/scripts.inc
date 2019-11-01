@@ -46,7 +46,7 @@ Route111_OnTransition: @ 81F0D87
 	compare VAR_MIRAGE_TOWER_STATE, 2
 	call_if_eq Route111_EventScript_1F0E40
 	call Route111_EventScript_1F0DE6
-	call Route111_EventScript_28CCC7
+	call GabbyAndTy_EventScript_UpdateLocation
 	checktrainerflag TRAINER_VICKY
 	goto_if_lt Route111_EventScript_1F0E26
 	end

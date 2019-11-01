@@ -60,6 +60,7 @@
 #include "constants/songs.h"
 #include "constants/species.h"
 #include "constants/moves.h"
+#include "constants/party_menu.h"
 #include "constants/vars.h"
 #include "constants/battle_frontier.h"
 #include "constants/weather.h"
@@ -3481,7 +3482,7 @@ void IncrementBirthIslandRockStepCount(void)
     }
 }
 
-void sub_813B1D0(void)
+void SetDeoxysRockPalette(void)
 {
     LoadPalette(&sDeoxysRockPalettes[(u8)VarGet(VAR_DEOXYS_ROCK_LEVEL)], 0x1A0, 8);
     BlendPalettes(0x04000000, 16, 0);

@@ -142,7 +142,7 @@ bool8 CheckBagHasItem(u16 itemId, u16 count)
 
     if (ItemId_GetPocket(itemId) == 0)
         return FALSE;
-    if (InBattlePyramid() || FlagGet(FLAG_SPECIAL_FLAG_0x4004) == TRUE)
+    if (InBattlePyramid() || FlagGet(FLAG_STORING_ITEMS_IN_PYRAMID_BAG) == TRUE)
         return CheckPyramidBagHasItem(itemId, count);
     pocket = ItemId_GetPocket(itemId) - 1;
     // Check for item slots that contain the item
@@ -189,7 +189,7 @@ bool8 CheckBagHasSpace(u16 itemId, u16 count)
     if (ItemId_GetPocket(itemId) == POCKET_NONE)
         return FALSE;
 
-    if (InBattlePyramid() || FlagGet(FLAG_SPECIAL_FLAG_0x4004) == TRUE)
+    if (InBattlePyramid() || FlagGet(FLAG_STORING_ITEMS_IN_PYRAMID_BAG) == TRUE)
     {
         return CheckPyramidBagHasSpace(itemId, count);
     }
@@ -404,7 +404,7 @@ bool8 AddBagItem(u16 itemId, u16 count)
         return FALSE;
 
     // check Battle Pyramid Bag
-    if (InBattlePyramid() || FlagGet(FLAG_SPECIAL_FLAG_0x4004) == TRUE)
+    if (InBattlePyramid() || FlagGet(FLAG_STORING_ITEMS_IN_PYRAMID_BAG) == TRUE)
     {
         return AddPyramidBagItem(itemId, count);
     }
@@ -517,7 +517,7 @@ bool8 RemoveBagItem(u16 itemId, u16 count)
         return FALSE;
 
     // check Battle Pyramid Bag
-    if (InBattlePyramid() || FlagGet(FLAG_SPECIAL_FLAG_0x4004) == TRUE)
+    if (InBattlePyramid() || FlagGet(FLAG_STORING_ITEMS_IN_PYRAMID_BAG) == TRUE)
     {
         return RemovePyramidBagItem(itemId, count);
     }

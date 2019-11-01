@@ -11,7 +11,7 @@ BattleFrontier_Lounge1_EventScript_25E775:: @ 825E775
 	end
 
 BattleFrontier_Lounge1_EventScript_25E792:: @ 825E792
-	special sub_81B94B0
+	special ChoosePartyMon
 	waitstate
 	compare VAR_0x8004, 255
 	goto_if_ne BattleFrontier_Lounge1_EventScript_25E7BF

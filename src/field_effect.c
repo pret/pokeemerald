@@ -63,7 +63,7 @@ static void PokeballGlowEffect_7(struct Sprite *);
 static u8 PokecenterHealEffectHelper(s16, s16);
 static void HallOfFameRecordEffectHelper(s16, s16, s16, u8);
 
-static void mapldr_080842E8(void);
+static void FieldCallback_Fly(void);
 static void task00_8084310(u8);
 static void mapldr_08084390(void);
 static void c3_080843F8(u8);
@@ -1364,13 +1364,13 @@ void SpriteCB_HallOfFameMonitor(struct Sprite *sprite)
 }
 
 
-void sub_80B69DC(void)
+void ReturnToFieldFromFlyMapSelect(void)
 {
     SetMainCallback2(CB2_ReturnToField);
-    gFieldCallback = mapldr_080842E8;
+    gFieldCallback = FieldCallback_Fly;
 }
 
-static void mapldr_080842E8(void)
+static void FieldCallback_Fly(void)
 {
     pal_fill_black();
     CreateTask(task00_8084310, 0);

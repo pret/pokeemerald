@@ -911,7 +911,7 @@ EventScript_DoLinkRoomExit:: @ 8277513
 CableClub_EventScript_UnionRoomAttendant:: @ 827751B
 	lock
 	faceplayer
-	setvar VAR_FRONTIER_FACILITY, 8
+	setvar VAR_FRONTIER_FACILITY, FACILITY_UNION_ROOM
 	goto_if_unset FLAG_SYS_POKEDEX_GET, CableClub_EventScript_WirelessClubAdjustements
 	specialvar VAR_RESULT, IsBadEggInParty
 	compare VAR_RESULT, TRUE
@@ -1019,7 +1019,7 @@ CableClub_EventScript_DontAskAboutLinking:: @ 827769A
 CableClub_EventScript_DirectCornerAttendant:: @ 82776A4
 	lock
 	faceplayer
-	setvar VAR_FRONTIER_FACILITY, 9
+	setvar VAR_FRONTIER_FACILITY, FACILITY_MULTI_OR_EREADER  @ Set preemptively for multi battles, ignored otherwise
 	goto_if_unset FLAG_SYS_POKEDEX_GET, CableClub_EventScript_WirelessClubAdjustements
 	specialvar VAR_RESULT, IsBadEggInParty
 	compare VAR_RESULT, TRUE

@@ -24,7 +24,7 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "LittlerootTown_MaysHouse_2F_EventScript_1F94C1",
+      "script": "RivalsHouse_2F_EventScript_Rival",
       "flag": "FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_RIVAL_BEDROOM"
     },
     {
@@ -219,7 +219,7 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "LittlerootTown_MaysHouse_2F_EventScript_1F9334",
+      "script": "LittlerootTown_MaysHouse_2F_EventScript_RivalsPokeBall",
       "flag": "FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_2F_POKE_BALL"
     }
   ],
@@ -240,7 +240,7 @@
       "y": 1,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "LittlerootTown_MaysHouse_2F_EventScript_1F865F"
+      "script": "PlayersHouse_2F_EventScript_GameCube"
     },
     {
       "type": "sign",
@@ -248,7 +248,7 @@
       "y": 1,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "LittlerootTown_MaysHouse_2F_EventScript_1F8656"
+      "script": "PlayersHouse_2F_EventScript_Notebook"
     },
     {
       "type": "sign",
@@ -256,7 +256,7 @@
       "y": 1,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "LittlerootTown_MaysHouse_2F_EventScript_29278D"
+      "script": "LittlerootTown_MaysHouse_2F_EventScript_WallClock"
     },
     {
       "type": "sign",
@@ -264,7 +264,7 @@
       "y": 1,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "EventScript_PlayerPCFemale"
+      "script": "LittlerootTown_MaysHouse_2F_EventScript_PC"
     }
   ]
 }

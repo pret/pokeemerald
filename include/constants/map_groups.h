@@ -98,8 +98,8 @@
 #define MAP_FALLARBOR_TOWN_BATTLE_TENT_BATTLE_ROOM (3 | (5 << 8))
 #define MAP_FALLARBOR_TOWN_POKEMON_CENTER_1F       (4 | (5 << 8))
 #define MAP_FALLARBOR_TOWN_POKEMON_CENTER_2F       (5 | (5 << 8))
-#define MAP_FALLARBOR_TOWN_HOUSE1                  (6 | (5 << 8))
-#define MAP_FALLARBOR_TOWN_HOUSE2                  (7 | (5 << 8))
+#define MAP_FALLARBOR_TOWN_COZMOS_HOUSE            (6 | (5 << 8))
+#define MAP_FALLARBOR_TOWN_MOVE_RELEARNERS_HOUSE   (7 | (5 << 8))
 
 // Map Group 6
 #define MAP_VERDANTURF_TOWN_BATTLE_TENT_LOBBY       (0 | (6 << 8))

@@ -12,7 +12,7 @@ FortreeCity_House1_EventScript_2162BB:: @ 82162BB
 	msgbox FortreeCity_House1_Text_21637B, MSGBOX_YESNO
 	compare VAR_RESULT, 0
 	goto_if_eq FortreeCity_House1_EventScript_21633D
-	special sub_81B94B0
+	special ChoosePartyMon
 	waitstate
 	copyvar VAR_0x800A, VAR_0x8004
 	compare VAR_0x8004, 255

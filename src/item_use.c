@@ -64,10 +64,10 @@ void sub_80FDC00(u8 taskId);
 void ItemUseOnFieldCB_Berry(u8 taskId);
 void ItemUseOnFieldCB_WailmerPailBerry(u8 taskId);
 void ItemUseOnFieldCB_WailmerPailSudowoodo(u8 taskId);
-void sub_80FDF90(u8 taskId);
-void task08_0809AD8C(u8 taskId);
-void sub_80FE024(u8 taskId);
-void sub_80FE03C(u8 taskId);
+static void BootUpSoundTMHM(u8 taskId);
+static void Task_ShowTMHMContainedMessage(u8 taskId);
+static void UseTMHMYesNo(u8 taskId);
+static void UseTMHM(u8 taskId);
 void sub_80FE124(u8 taskId);
 void sub_80FE164(u8 taskId);
 
@@ -91,16 +91,16 @@ EWRAM_DATA static void(*gUnknown_0203A0F4)(u8 taskId) = NULL;
 
 static const MainCallback gUnknown_085920D8[] =
 {
-    sub_81B617C,
+    CB2_ShowPartyMenuForItemUse,
     CB2_ReturnToField,
     NULL,
 };
 
 static const u8 gUnknown_085920E4[] = {DIR_NORTH, DIR_EAST, DIR_SOUTH, DIR_WEST};
 
-static const struct YesNoFuncTable gUnknown_085920E8 =
+static const struct YesNoFuncTable sUseTMHMYesNoFuncTable =
 {
-    .yesFunc = sub_80FE03C,
+    .yesFunc = UseTMHM,
     .noFunc = BagMenu_InitListsMenu,
 };
 
@@ -350,7 +350,7 @@ bool8 ItemfinderCheckForHiddenItems(const struct MapEvents *events, u8 taskId)
     gTasks[taskId].data[2] = FALSE;
     for (i = 0; i < events->bgEventCount; i++)
     {
-        if (events->bgEvents[i].kind == BG_EVENT_HIDDEN_ITEM && !FlagGet(events->bgEvents[i].bgUnion.hiddenItem.hiddenItemId + 0x1F4))
+        if (events->bgEvents[i].kind == BG_EVENT_HIDDEN_ITEM && !FlagGet(events->bgEvents[i].bgUnion.hiddenItem.hiddenItemId + FLAG_HIDDEN_ITEMS_START))
         {
             distanceX = (u16)events->bgEvents[i].x + 7;
             newDistanceX = distanceX - x;
@@ -379,7 +379,7 @@ bool8 sub_80FD6D4(const struct MapEvents *events, s16 x, s16 y)
     {
         if (bgEvent[i].kind == BG_EVENT_HIDDEN_ITEM && x == (u16)bgEvent[i].x && y == (u16)bgEvent[i].y) // hidden item and coordinates matches x and y passed?
         {
-            if (!FlagGet(bgEvent[i].bgUnion.hiddenItem.hiddenItemId + 0x1F4))
+            if (!FlagGet(bgEvent[i].bgUnion.hiddenItem.hiddenItemId + FLAG_HIDDEN_ITEMS_START))
                 return TRUE;
             else
                 return FALSE;
@@ -722,72 +722,72 @@ void ItemUseOnFieldCB_WailmerPailSudowoodo(u8 taskId)
 
 void ItemUseOutOfBattle_Medicine(u8 taskId)
 {
-    gUnknown_03006328 = ItemUseCB_Medicine;
+    gItemUseCB = ItemUseCB_Medicine;
     SetUpItemUseCallback(taskId);
 }
 
 void ItemUseOutOfBattle_ReduceEV(u8 taskId)
 {
-    gUnknown_03006328 = sub_81B67C8;
+    gItemUseCB = ItemUseCB_ReduceEV;
     SetUpItemUseCallback(taskId);
 }
 
 void ItemUseOutOfBattle_SacredAsh(u8 taskId)
 {
-    gUnknown_03006328 = sub_81B79E8;
+    gItemUseCB = ItemUseCB_SacredAsh;
     SetUpItemUseCallback(taskId);
 }
 
 void ItemUseOutOfBattle_PPRecovery(u8 taskId)
 {
-    gUnknown_03006328 = dp05_ether;
+    gItemUseCB = ItemUseCB_PPRecovery;
     SetUpItemUseCallback(taskId);
 }
 
 void ItemUseOutOfBattle_PPUp(u8 taskId)
 {
-    gUnknown_03006328 = dp05_pp_up;
+    gItemUseCB = ItemUseCB_PPUp;
     SetUpItemUseCallback(taskId);
 }
 
 void ItemUseOutOfBattle_RareCandy(u8 taskId)
 {
-    gUnknown_03006328 = dp05_rare_candy;
+    gItemUseCB = ItemUseCB_RareCandy;
     SetUpItemUseCallback(taskId);
 }
 
 void ItemUseOutOfBattle_TMHM(u8 taskId)
 {
     if (gSpecialVar_ItemId >= ITEM_HM01_CUT)
-        DisplayItemMessage(taskId, 1, gText_BootedUpHM, sub_80FDF90); // HM
+        DisplayItemMessage(taskId, 1, gText_BootedUpHM, BootUpSoundTMHM); // HM
     else
-        DisplayItemMessage(taskId, 1, gText_BootedUpTM, sub_80FDF90); // TM
+        DisplayItemMessage(taskId, 1, gText_BootedUpTM, BootUpSoundTMHM); // TM
 }
 
-void sub_80FDF90(u8 taskId)
+static void BootUpSoundTMHM(u8 taskId)
 {
     PlaySE(SE_PC_LOGIN);
-    gTasks[taskId].func = task08_0809AD8C;
+    gTasks[taskId].func = Task_ShowTMHMContainedMessage;
 }
 
-void task08_0809AD8C(u8 taskId)
+static void Task_ShowTMHMContainedMessage(u8 taskId)
 {
     if (gMain.newKeys & (A_BUTTON | B_BUTTON))
     {
         StringCopy(gStringVar1, gMoveNames[ItemIdToBattleMoveId(gSpecialVar_ItemId)]);
         StringExpandPlaceholders(gStringVar4, gText_TMHMContainedVar1);
-        DisplayItemMessage(taskId, 1, gStringVar4, sub_80FE024);
+        DisplayItemMessage(taskId, 1, gStringVar4, UseTMHMYesNo);
     }
 }
 
-void sub_80FE024(u8 taskId)
+static void UseTMHMYesNo(u8 taskId)
 {
-    BagMenu_YesNo(taskId, 6, &gUnknown_085920E8);
+    BagMenu_YesNo(taskId, 6, &sUseTMHMYesNoFuncTable);
 }
 
-void sub_80FE03C(u8 taskId)
+static void UseTMHM(u8 taskId)
 {
-    gUnknown_03006328 = sub_81B6DC4;
+    gItemUseCB = ItemUseCB_TMHM;
     SetUpItemUseCallback(taskId);
 }
 
@@ -912,7 +912,7 @@ void ItemUseOutOfBattle_EscapeRope(u8 taskId)
 
 void ItemUseOutOfBattle_EvolutionStone(u8 taskId)
 {
-    gUnknown_03006328 = sub_81B7C74;
+    gItemUseCB = ItemUseCB_EvolutionStone;
     SetUpItemUseCallback(taskId);
 }
 
@@ -976,36 +976,37 @@ void ItemUseInBattle_StatIncrease(u8 taskId)
     }
 }
 
-void sub_80FE54C(u8 taskId)
+static void ItemUseInBattle_ShowPartyMenu(u8 taskId)
 {
     if (!InBattlePyramid())
     {
-        gBagMenu->mainCallback2 = sub_81B89F0;
+        gBagMenu->mainCallback2 = ChooseMonForInBattleItem;
         unknown_ItemMenu_Confirm(taskId);
     }
     else
     {
-        gPyramidBagResources->callback2 = sub_81B89F0;
+        gPyramidBagResources->callback2 = ChooseMonForInBattleItem;
         sub_81C5B14(taskId);
     }
 }
 
 void ItemUseInBattle_Medicine(u8 taskId)
 {
-    gUnknown_03006328 = ItemUseCB_Medicine;
-    sub_80FE54C(taskId);
+    gItemUseCB = ItemUseCB_Medicine;
+    ItemUseInBattle_ShowPartyMenu(taskId);
 }
 
-void sub_80FE5AC(u8 taskId)
+// Unused. Sacred Ash cannot be used in battle
+void ItemUseInBattle_SacredAsh(u8 taskId)
 {
-    gUnknown_03006328 = sub_81B79E8;
-    sub_80FE54C(taskId);
+    gItemUseCB = ItemUseCB_SacredAsh;
+    ItemUseInBattle_ShowPartyMenu(taskId);
 }
 
 void ItemUseInBattle_PPRecovery(u8 taskId)
 {
-    gUnknown_03006328 = dp05_ether;
-    sub_80FE54C(taskId);
+    gItemUseCB = ItemUseCB_PPRecovery;
+    ItemUseInBattle_ShowPartyMenu(taskId);
 }
 
 void ItemUseInBattle_Escape(u8 taskId)

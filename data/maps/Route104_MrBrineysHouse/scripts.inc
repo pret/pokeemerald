@@ -74,7 +74,7 @@ Route104_MrBrineysHouse_EventScript_229E1D:: @ 8229E1D
 
 Route104_MrBrineysHouse_EventScript_229E27:: @ 8229E27
 	msgbox Route104_MrBrineysHouse_Text_229FE9, MSGBOX_DEFAULT
-	call Route104_MrBrineysHouse_EventScript_271E95
+	call EventScript_BackupMrBrineyLocation
 	setvar VAR_BOARD_BRINEY_BOAT_STATE, 1
 	clearflag FLAG_HIDE_ROUTE_104_MR_BRINEY
 	setflag FLAG_HIDE_BRINEYS_HOUSE_MR_BRINEY

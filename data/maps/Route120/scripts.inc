@@ -61,7 +61,7 @@ Route120_EventScript_1F54C8:: @ 81F54C8
 	return
 
 Route120_OnTransition: @ 81F54CD
-	call Route120_EventScript_28CCC7
+	call GabbyAndTy_EventScript_UpdateLocation
 	call Route120_EventScript_1F54D8
 	end
 
