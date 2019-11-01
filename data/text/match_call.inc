@@ -2306,7 +2306,7 @@ gText_Wallace_Pokenav_2B3790:: @ 82B3790
 	.string "But what is a rare stone exactly?\n"
 	.string "All I can think of is a METEORITE…$"
 
-MossdeepCity_SpaceCenter_2F_Text_2B38C1: @ 82B38C1
+MossdeepCity_SpaceCenter_2F_Text_MayRayquazaCall: @ 82B38C1
 	.string "… … … … … …\n"
 	.string "… … … … … Beep!\p"
 	.string "MAY: Hi, {PLAYER}{KUN}!\p"
@@ -2321,7 +2321,7 @@ MossdeepCity_SpaceCenter_2F_Text_2B38C1: @ 82B38C1
 	.string "… … … … … …\n"
 	.string "… … … … … Click!$"
 
-MossdeepCity_SpaceCenter_2F_Text_2B39C6: @ 82B39C6
+MossdeepCity_SpaceCenter_2F_Text_BrendanRayquazaCall: @ 82B39C6
 	.string "… … … … … …\n"
 	.string "… … … … … Beep!\p"
 	.string "BRENDAN: Hey, {PLAYER}!\n"
