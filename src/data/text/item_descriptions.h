@@ -1450,8 +1450,8 @@ static const u8 sTeachyTVDesc[] = _(
     "있게 해주는 TV");
 
 static const u8 sTriPassDesc[] = _(
-    "1번째 섬과 2번째 섬과\n"
-    "3번째 섬을 왕래하는\n"
+    "1섬과 2섬과\n"
+    "3섬을 왕래하는\n"
     "배에 탈 수 있다");
 
 static const u8 sRainbowPassDesc[] = _(
