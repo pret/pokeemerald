@@ -184,7 +184,7 @@ Route110_EventScript_Edwin:: @ 81EF420
 	end
 
 Route110_EventScript_EdwinRegisterMatchCallAfterBattle:: @ 81EF44C
-	special sub_80B4808
+	special PlayerFaceTrainerAfterBattle
 	waitmovement 0
 	msgbox Route110_Text_EdwinRegister, MSGBOX_DEFAULT
 	register_matchcall TRAINER_EDWIN_1
@@ -221,7 +221,7 @@ Route110_EventScript_Benjamin:: @ 81EF4C7
 	end
 
 Route110_EventScript_BenjaminRegisterMatchCallAfterBattle:: @ 81EF4F3
-	special sub_80B4808
+	special PlayerFaceTrainerAfterBattle
 	waitmovement 0
 	msgbox Route110_Text_BenjaminRegister, MSGBOX_DEFAULT
 	register_matchcall TRAINER_BENJAMIN_1
@@ -248,7 +248,7 @@ Route110_EventScript_Abigail:: @ 81EF540
 	end
 
 Route110_EventScript_AbigailRegisterMatchCallAfterBattle:: @ 81EF56C
-	special sub_80B4808
+	special PlayerFaceTrainerAfterBattle
 	waitmovement 0
 	msgbox Route110_Text_AbigailRegister, MSGBOX_DEFAULT
 	register_matchcall TRAINER_ABIGAIL_1
@@ -270,7 +270,7 @@ Route110_EventScript_Isabel:: @ 81EF5A2
 	end
 
 Route110_EventScript_IsabelRegisterMatchCallAfterBattle:: @ 81EF5CE
-	special sub_80B4808
+	special PlayerFaceTrainerAfterBattle
 	waitmovement 0
 	msgbox Route110_Text_IsabelRegister, MSGBOX_DEFAULT
 	register_matchcall TRAINER_ISABEL_1

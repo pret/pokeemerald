@@ -1,5 +1,5 @@
 MossdeepCity_SpaceCenter_1F_MapScripts:: @ 8222F41
-	map_script MAP_SCRIPT_ON_LOAD, MossdeepCity_SpaceCenter_1F_MapScript1_222FC2
+	map_script MAP_SCRIPT_ON_LOAD, MossdeepCity_SpaceCenter_1F_OnLoad
 	map_script MAP_SCRIPT_ON_TRANSITION, MossdeepCity_SpaceCenter_1F_OnTransition
 	.byte 0
 
@@ -38,7 +38,7 @@ MossdeepCity_SpaceCenter_1F_EventScript_222FBA:: @ 8222FBA
 	setobjectxyperm 9, 14, 2
 	end
 
-MossdeepCity_SpaceCenter_1F_MapScript1_222FC2: @ 8222FC2
+MossdeepCity_SpaceCenter_1F_OnLoad: @ 8222FC2
 	compare VAR_MOSSDEEP_CITY_STATE, 2
 	goto_if_le MossdeepCity_SpaceCenter_1F_EventScript_222FCE
 	end

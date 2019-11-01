@@ -403,7 +403,7 @@ Route109_EventScript_Ricky:: @ 81EEA99
 	end
 
 Route109_EventScript_RickyRegisterMatchCallAfterBattle:: @ 81EEAC5
-	special sub_80B4808
+	special PlayerFaceTrainerAfterBattle
 	waitmovement 0
 	msgbox Route109_Text_RickyRegister, MSGBOX_DEFAULT
 	register_matchcall TRAINER_RICKY_1
@@ -425,7 +425,7 @@ Route109_EventScript_Lola:: @ 81EEAFB
 	end
 
 Route109_EventScript_LolaRegisterMatchCallAfterBattle:: @ 81EEB27
-	special sub_80B4808
+	special PlayerFaceTrainerAfterBattle
 	waitmovement 0
 	msgbox Route109_Text_LolaRegister, MSGBOX_DEFAULT
 	register_matchcall TRAINER_LOLA_1

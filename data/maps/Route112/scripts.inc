@@ -75,7 +75,7 @@ Route112_EventScript_1F1E81:: @ 81F1E81
 	end
 
 Route112_EventScript_1F1EAD:: @ 81F1EAD
-	special sub_80B4808
+	special PlayerFaceTrainerAfterBattle
 	waitmovement 0
 	msgbox Route112_Text_29993C, MSGBOX_DEFAULT
 	register_matchcall TRAINER_TRENT_1

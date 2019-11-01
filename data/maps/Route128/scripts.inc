@@ -184,7 +184,7 @@ Route128_EventScript_1F6CBE:: @ 81F6CBE
 	end
 
 Route128_EventScript_1F6CEA:: @ 81F6CEA
-	special sub_80B4808
+	special PlayerFaceTrainerAfterBattle
 	waitmovement 0
 	msgbox Route128_Text_2A2916, MSGBOX_DEFAULT
 	register_matchcall TRAINER_ISAIAH_1
@@ -206,7 +206,7 @@ Route128_EventScript_1F6D20:: @ 81F6D20
 	end
 
 Route128_EventScript_1F6D4C:: @ 81F6D4C
-	special sub_80B4808
+	special PlayerFaceTrainerAfterBattle
 	waitmovement 0
 	msgbox Route128_Text_2A2AF9, MSGBOX_DEFAULT
 	register_matchcall TRAINER_KATELYN_1

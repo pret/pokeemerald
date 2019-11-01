@@ -2280,7 +2280,7 @@ bool8 ScrCmd_buffertrainername(struct ScriptContext *ctx)
     return FALSE;
 }
 
-void sub_809BE48(u16 npcId)
+void SetMovingNpcId(u16 npcId)
 {
     sMovingNpcId = npcId;
 }

@@ -36,7 +36,7 @@ Route108_EventScript_Cory:: @ 81EE6FD
 	end
 
 Route108_EventScript_CoryRegisterMatchCallAfterBattle:: @ 81EE729
-	special sub_80B4808
+	special PlayerFaceTrainerAfterBattle
 	waitmovement 0
 	msgbox Route108_Text_CoryRegister, MSGBOX_DEFAULT
 	register_matchcall TRAINER_CORY_1

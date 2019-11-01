@@ -299,7 +299,7 @@ Route120_EventScript_1F57EE:: @ 81F57EE
 	end
 
 Route120_EventScript_1F581A:: @ 81F581A
-	special sub_80B4808
+	special PlayerFaceTrainerAfterBattle
 	waitmovement 0
 	msgbox Route120_Text_29E75D, MSGBOX_DEFAULT
 	register_matchcall TRAINER_ROBERT_1
@@ -331,7 +331,7 @@ Route120_EventScript_1F587E:: @ 81F587E
 	end
 
 Route120_EventScript_1F58AA:: @ 81F58AA
-	special sub_80B4808
+	special PlayerFaceTrainerAfterBattle
 	waitmovement 0
 	msgbox Route120_Text_29EA31, MSGBOX_DEFAULT
 	register_matchcall TRAINER_JEFFREY_1

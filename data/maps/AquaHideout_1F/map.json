@@ -24,7 +24,7 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "AquaHideout_1F_EventScript_233494",
+      "script": "AquaHideout_1F_EventScript_HideoutEntranceGrunt1",
       "flag": "FLAG_HIDE_AQUA_HIDEOUT_1F_GRUNT_1_BLOCKING_ENTRANCE"
     },
     {
@@ -37,7 +37,7 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "AquaHideout_1F_EventScript_2334C6",
+      "script": "AquaHideout_1F_EventScript_HideoutEntranceGrunt2",
       "flag": "FLAG_HIDE_AQUA_HIDEOUT_1F_GRUNT_2_BLOCKING_ENTRANCE"
     },
     {
@@ -50,7 +50,7 @@
       "movement_range_y": 5,
       "trainer_type": "1",
       "trainer_sight_or_berry_tree_id": "3",
-      "script": "AquaHideout_1F_EventScript_2334F8",
+      "script": "AquaHideout_1F_EventScript_Grunt1",
       "flag": "FLAG_HIDE_AQUA_HIDEOUT_GRUNTS"
     }
   ],

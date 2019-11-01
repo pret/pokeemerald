@@ -491,7 +491,7 @@ MtChimney_EventScript_22F14A:: @ 822F14A
 	end
 
 MtChimney_EventScript_22F176:: @ 822F176
-	special sub_80B4808
+	special PlayerFaceTrainerAfterBattle
 	waitmovement 0
 	msgbox MtChimney_Text_2300E3, MSGBOX_DEFAULT
 	register_matchcall TRAINER_SHELBY_1
@@ -533,7 +533,7 @@ MtChimney_EventScript_22F208:: @ 822F208
 	end
 
 MtChimney_EventScript_22F234:: @ 822F234
-	special sub_80B4808
+	special PlayerFaceTrainerAfterBattle
 	waitmovement 0
 	msgbox MtChimney_Text_230557, MSGBOX_DEFAULT
 	register_matchcall TRAINER_SAWYER_1
