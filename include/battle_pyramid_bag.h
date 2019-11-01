@@ -36,13 +36,13 @@ extern struct PyramidBagCursorData gPyramidBagCursorData;
 
 void InitBattlePyramidBagCursorPosition(void);
 void CB2_PyramidBagMenuFromStartMenu(void);
-void sub_81C4F84(void);
+void CB2_ReturnToPyramidBagMenu(void);
 void sub_81C5924(void);
 void sub_81C59BC(void);
 void sub_81C4EFC(void);
-void sub_81C4F98(u8 a0, void (*callback)(void));
+void GoToBattlePyramidBagMenu(u8 a0, void (*callback)(void));
 void sub_81C6714(u8 taskId);
-void sub_81C6A94(void);
+void TryStoreHeldItemsInPyramidBag(void);
 void sub_81C4F24(void);
 void sub_81C5B14(u8 taskId);
 void DisplayItemMessageInBattlePyramid(u8 taskId, const u8 *str, void (*callback)(u8 taskId));

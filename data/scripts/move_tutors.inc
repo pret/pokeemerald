@@ -289,7 +289,7 @@ MoveTutor_EventScript_ExplosionTaught:: @ 82C831C
 	end
 
 MoveTutor_EventScript_OpenPartyMenu:: @ 82C8326
-	special OpenPartyMenuForMoveTutor
+	special ChooseMonForMoveTutor
 	waitstate
 	lock
 	faceplayer

@@ -186,7 +186,7 @@ SealedChamber_InnerRoom_Braille_2A6C73: @ 82A6C73
 	.braille "POKEMON\n"
 	.braille "WAITS.$"
 
-DesertRuins_Braille_2A6CA0: @ 82A6CA0
+DesertRuins_Braille_UseRockSmash: @ 82A6CA0
 	.byte 1
 	.byte 0
 	.byte 27
@@ -198,7 +198,7 @@ DesertRuins_Braille_2A6CA0: @ 82A6CA0
 	.braille "THEN, USE\n"
 	.braille "ROCK SMASH.$"
 
-IslandCave_Braille_2A6CD4: @ 82A6CD4
+IslandCave_Braille_RunLapAroundWall: @ 82A6CD4
 	.byte 5
 	.byte 0
 	.byte 25
@@ -210,7 +210,7 @@ IslandCave_Braille_2A6CD4: @ 82A6CD4
 	.braille "RUN AROUND\n"
 	.braille "ONE LAP.$"
 
-AncientTomb_Braille_2A6D06: @ 82A6D06
+AncientTomb_Braille_ShineInTheMiddle: @ 82A6D06
 	.byte 3
 	.byte 0
 	.byte 25

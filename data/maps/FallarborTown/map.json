@@ -104,14 +104,14 @@
       "x": 6,
       "y": 17,
       "elevation": 0,
-      "dest_map": "MAP_FALLARBOR_TOWN_HOUSE1",
+      "dest_map": "MAP_FALLARBOR_TOWN_COZMOS_HOUSE",
       "dest_warp_id": 0
     },
     {
       "x": 1,
       "y": 6,
       "elevation": 0,
-      "dest_map": "MAP_FALLARBOR_TOWN_HOUSE2",
+      "dest_map": "MAP_FALLARBOR_TOWN_MOVE_RELEARNERS_HOUSE",
       "dest_warp_id": 0
     }
   ],

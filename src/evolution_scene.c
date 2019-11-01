@@ -743,12 +743,12 @@ static void Task_EvolutionScene(u8 taskID)
                 GetMonData(mon, MON_DATA_NICKNAME, text);
                 StringCopy10(gBattleTextBuff1, text);
 
-                if (var == 0xFFFF) // no place to learn it
+                if (var == MON_HAS_MAX_MOVES)
                     gTasks[taskID].tState = 22;
-                else if (var == 0xFFFE) // it already knows that move
+                else if (var == MON_ALREADY_KNOWS_MOVE)
                     break;
                 else
-                    gTasks[taskID].tState = 20; // has less than 4 moves, so it's been learned
+                    gTasks[taskID].tState = 20; // move has been learned
             }
             else // no move to learn
             {
@@ -909,8 +909,8 @@ static void Task_EvolutionScene(u8 taskID)
         case 6:
             if (!gPaletteFade.active && gMain.callback2 == CB2_EvolutionSceneUpdate)
             {
-                var = sub_81C1B94(); // moveID
-                if (var == 4)
+                var = GetMoveSlotToReplace();
+                if (var == MAX_MON_MOVES)
                 {
                     gTasks[taskID].tLearnMoveState = 10;
                 }
@@ -1100,9 +1100,9 @@ static void Task_TradeEvolutionScene(u8 taskID)
                 GetMonData(mon, MON_DATA_NICKNAME, text);
                 StringCopy10(gBattleTextBuff1, text);
 
-                if (var == 0xFFFF)
+                if (var == MON_HAS_MAX_MOVES)
                     gTasks[taskID].tState = 20;
-                else if (var == 0xFFFE)
+                else if (var == MON_ALREADY_KNOWS_MOVE)
                     break;
                 else
                     gTasks[taskID].tState = 18;
@@ -1243,8 +1243,8 @@ static void Task_TradeEvolutionScene(u8 taskID)
         case 6:
             if (!gPaletteFade.active && gMain.callback2 == CB2_TradeEvolutionSceneUpdate)
             {
-                var = sub_81C1B94(); // moveID
-                if (var == 4)
+                var = GetMoveSlotToReplace();
+                if (var == MAX_MON_MOVES)
                 {
                     gTasks[taskID].tLearnMoveState = 9;
                 }

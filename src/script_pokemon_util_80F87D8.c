@@ -646,7 +646,7 @@ void ScriptSetMonMoveSlot(u8 monIndex, u16 move, u8 slot)
 void ChooseHalfPartyForBattle(void)
 {
     gMain.savedCallback = CB2_ReturnFromChooseHalfParty;
-    VarSet(VAR_FRONTIER_FACILITY, FRONTIER_FACILITY_DOUBLE_COLOSSEUM);
+    VarSet(VAR_FRONTIER_FACILITY, FACILITY_MULTI_OR_EREADER);
     InitChooseHalfPartyForBattle(0);
 }
 

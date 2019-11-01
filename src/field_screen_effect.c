@@ -1124,7 +1124,7 @@ static void sub_80B0318(u8 taskId)
         SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(12, 7));
         SetGpuReg(REG_OFFSET_WININ, WININ_WIN0_BG_ALL | WININ_WIN0_OBJ | WININ_WIN0_CLR);
         SetGpuReg(REG_OFFSET_WINOUT, WINOUT_WIN01_BG1 | WINOUT_WIN01_BG2 | WINOUT_WIN01_BG3 | WINOUT_WIN01_OBJ);
-        sub_8199C30(0, 0, 0, 0x1E, 0x14, 0xF);
+        SetBgTilemapPalette(0, 0, 0, 0x1E, 0x14, 0xF);
         schedule_bg_copy_tilemap_to_vram(0);
         SetFlash2ScanlineEffectWindowBoundaries(&gScanlineEffectRegBuffers[0][0], data[2], data[3], 1);
         CpuFastSet(&gScanlineEffectRegBuffers[0], &gScanlineEffectRegBuffers[1], 480);
