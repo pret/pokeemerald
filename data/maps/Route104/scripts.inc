@@ -879,7 +879,7 @@ Route104_EventScript_1ED38D:: @ 81ED38D
 	end
 
 Route104_EventScript_1ED3CE:: @ 81ED3CE
-	special sub_80B4808
+	special PlayerFaceTrainerAfterBattle
 	waitmovement 0
 	goto_if_set FLAG_HAS_MATCH_CALL, Route104_EventScript_1ED3DF
 	release
@@ -922,7 +922,7 @@ Route104_EventScript_1ED43B:: @ 81ED43B
 	end
 
 Route104_EventScript_1ED47C:: @ 81ED47C
-	special sub_80B4808
+	special PlayerFaceTrainerAfterBattle
 	waitmovement 0
 	goto_if_set FLAG_HAS_MATCH_CALL, Route104_EventScript_1ED48D
 	release
@@ -965,7 +965,7 @@ Route104_EventScript_1ED4E9:: @ 81ED4E9
 	end
 
 Route104_EventScript_1ED52A:: @ 81ED52A
-	special sub_80B4808
+	special PlayerFaceTrainerAfterBattle
 	waitmovement 0
 	goto_if_set FLAG_HAS_MATCH_CALL, Route104_EventScript_1ED53B
 	release

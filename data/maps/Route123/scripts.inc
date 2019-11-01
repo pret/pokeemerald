@@ -69,7 +69,7 @@ Route123_EventScript_1F620A:: @ 81F620A
 	end
 
 Route123_EventScript_1F6236:: @ 81F6236
-	special sub_80B4808
+	special PlayerFaceTrainerAfterBattle
 	waitmovement 0
 	msgbox Route123_Text_29FE70, MSGBOX_DEFAULT
 	register_matchcall TRAINER_CAMERON_1
@@ -91,7 +91,7 @@ Route123_EventScript_1F626C:: @ 81F626C
 	end
 
 Route123_EventScript_1F6298:: @ 81F6298
-	special sub_80B4808
+	special PlayerFaceTrainerAfterBattle
 	waitmovement 0
 	msgbox Route123_Text_2A0027, MSGBOX_DEFAULT
 	register_matchcall TRAINER_JACKI_1
@@ -163,7 +163,7 @@ Route123_EventScript_1F63BC:: @ 81F63BC
 	end
 
 Route123_EventScript_1F63E8:: @ 81F63E8
-	special sub_80B4808
+	special PlayerFaceTrainerAfterBattle
 	waitmovement 0
 	msgbox Route123_Text_2A03C1, MSGBOX_DEFAULT
 	register_matchcall TRAINER_FERNANDO_1

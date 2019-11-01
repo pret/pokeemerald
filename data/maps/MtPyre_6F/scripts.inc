@@ -11,7 +11,7 @@ MtPyre_6F_EventScript_231D3B:: @ 8231D3B
 	end
 
 MtPyre_6F_EventScript_231D67:: @ 8231D67
-	special sub_80B4808
+	special PlayerFaceTrainerAfterBattle
 	waitmovement 0
 	msgbox MtPyre_6F_Text_231E43, MSGBOX_DEFAULT
 	register_matchcall TRAINER_VALERIE_1

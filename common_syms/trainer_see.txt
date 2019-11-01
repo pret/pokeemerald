@@ -1,5 +1,5 @@
-gUnknown_03006080
-gUnknown_03006084
+gWhichTrainerToFaceAfterBattle
+gPostBattleMovementScript
 gApproachingTrainers
 gNoOfApproachingTrainers
-gUnknown_030060AC
+gTrainerApproachedPlayer

@@ -292,8 +292,8 @@ gSpecials:: @ 81DBA64
 	def_special GetSecretBaseNearbyMapName
 	def_special CheckRelicanthWailord
 	def_special ShouldDoBrailleRegirockEffectOld
-	def_special sub_80B0534
-	def_special sub_80B058C
+	def_special DoOrbEffect
+	def_special FadeOutOrbEffect
 	def_special WaitWeather
 	def_special BufferEReaderTrainerName
 	def_special GetSlotMachineId
@@ -527,7 +527,7 @@ gSpecials:: @ 81DBA64
 	def_special GetBattlePyramidHint
 	def_special sub_80F8B94
 	def_special ShowTrainerHillRecords
-	def_special sub_80B4808
+	def_special PlayerFaceTrainerAfterBattle
 	def_special ResetHealLocationFromDewford
 	def_special IsLastMonThatKnowsSurf
 	def_special CountPartyAliveNonEggMons

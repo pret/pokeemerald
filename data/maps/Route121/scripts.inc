@@ -80,7 +80,7 @@ Route121_EventScript_1F5E8B:: @ 81F5E8B
 	end
 
 Route121_EventScript_1F5EB7:: @ 81F5EB7
-	special sub_80B4808
+	special PlayerFaceTrainerAfterBattle
 	waitmovement 0
 	msgbox Route121_Text_29F25B, MSGBOX_DEFAULT
 	register_matchcall TRAINER_WALTER_1
@@ -117,7 +117,7 @@ Route121_EventScript_1F5F3A:: @ 81F5F3A
 	end
 
 Route121_EventScript_1F5F66:: @ 81F5F66
-	special sub_80B4808
+	special PlayerFaceTrainerAfterBattle
 	waitmovement 0
 	msgbox Route121_Text_29F69F, MSGBOX_DEFAULT
 	register_matchcall TRAINER_JESSICA_1
@@ -159,7 +159,7 @@ Route121_EventScript_1F5FF8:: @ 81F5FF8
 	end
 
 Route121_EventScript_1F6024:: @ 81F6024
-	special sub_80B4808
+	special PlayerFaceTrainerAfterBattle
 	waitmovement 0
 	msgbox Route121_Text_29F80D, MSGBOX_DEFAULT
 	register_matchcall TRAINER_CRISTIN_1

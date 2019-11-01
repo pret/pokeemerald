@@ -1,4 +1,4 @@
-	.include "asm/macros.inc"
+    .include "asm/macros.inc"
 	.include "constants/constants.inc"
 
 	.section .rodata
@@ -30,8 +30,8 @@ gOverworldBackgroundLayerFlags:: @ 82EC7C4
 	.2byte 0x0400 /* BLDCNT_TGT2_BG2 */
 	.2byte 0x0800 /* BLDCNT_TGT2_BG3 */
 
-gUnknown_82EC7CC:: @ 82EC7CC
-	.2byte 0x0001
-	.2byte 0x0002
-	.2byte 0x0004
-	.2byte 0x0008
+gOrbEffectBackgroundLayerFlags:: @ 82EC7CC
+	.2byte 0x0001 /* BLDCNT_TGT1_BG0 */
+	.2byte 0x0002 /* BLDCNT_TGT1_BG1 */
+	.2byte 0x0004 /* BLDCNT_TGT1_BG2 */
+	.2byte 0x0008 /* BLDCNT_TGT1_BG3 */
