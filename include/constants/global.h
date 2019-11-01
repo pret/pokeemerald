@@ -54,6 +54,8 @@
 
 #define TRAINER_ID_LENGTH 4
 #define PARTY_SIZE 6
+#define FRONTIER_PARTY_SIZE 3
+#define MULTI_PARTY_SIZE PARTY_SIZE / 2
 #define MAX_MON_MOVES 4
 
 // string lengths

@@ -12,7 +12,6 @@ struct PartyMenu
     TaskFunc task;
     u8 menuType:4;
     u8 layout:2;
-    u8 unused:2;
     s8 slotId;
     s8 slotId2;
     u8 action;

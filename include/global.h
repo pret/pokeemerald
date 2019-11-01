@@ -220,7 +220,7 @@ struct Apprentice
     u8 lvlMode:2; // + 1
     u8 field_1;
     u8 number;
-    struct ApprenticeMon party[3];
+    struct ApprenticeMon party[MULTI_PARTY_SIZE];
     u16 easyChatWords[6];
     u8 playerId[TRAINER_ID_LENGTH];
     u8 playerName[PLAYER_NAME_LENGTH];
@@ -282,7 +282,7 @@ struct BattleTowerEReaderTrainer
     /*0x10*/ u16 greeting[6];
     /*0x1C*/ u16 farewellPlayerLost[6];
     /*0x28*/ u16 farewellPlayerWon[6];
-    /*0x34*/ struct BattleTowerPokemon party[3];
+    /*0x34*/ struct BattleTowerPokemon party[FRONTIER_PARTY_SIZE];
     /*0xB8*/ u32 checksum;
 };
 
@@ -329,7 +329,7 @@ struct BattleFrontier
     /*0xCA9*/ u8 field_CA9_d:1;   // 0x20
     /*0xCA9*/ u8 field_CA9_e:1;   // 0x40
     /*0xCA9*/ u8 field_CA9_f:1;   // 0x80
-    /*0xCAA*/ u16 selectedPartyMons[3];
+    /*0xCAA*/ u16 selectedPartyMons[FRONTIER_PARTY_SIZE];
     /*0xCB0*/ u16 field_CB0;
     /*0xCB2*/ u16 curChallengeBattleNum; // In case of battle pyramid, the floor.
     /*0xCB4*/ u16 trainerIds[20];
@@ -356,7 +356,7 @@ struct BattleFrontier
     /*0xD14*/ u16 domeRecordWinStreaks[2][2];
     /*0xD1C*/ u16 domeTotalChampionships[2][2];
     /*0xD24*/ struct BattleDomeTrainer domeTrainers[DOME_TOURNAMENT_TRAINERS_COUNT];
-    /*0xD64*/ u16 domeMonIds[DOME_TOURNAMENT_TRAINERS_COUNT][3];
+    /*0xD64*/ u16 domeMonIds[DOME_TOURNAMENT_TRAINERS_COUNT][FRONTIER_PARTY_SIZE];
     /*0xDC4*/ u16 field_DC4;
     /*0xDC6*/ u16 field_DC6;
     /*0xDC8*/ u16 palaceWinStreaks[2][2];
@@ -375,7 +375,7 @@ struct BattleFrontier
     /*0xE10*/ u8 pikeHintedRoomIndex:3;
     /*0xE10*/ u8 pikeHintedRoomType:4;
     /*0xE10*/ u8 pikeHealingRoomsDisabled:1;
-    /*0xE12*/ u16 pikeHeldItemsBackup[3];
+    /*0xE12*/ u16 pikeHeldItemsBackup[FRONTIER_PARTY_SIZE];
     /*0xE18*/ u16 pyramidRewardItem;
     /*0xE1A*/ u16 pyramidWinStreaks[2];
     /*0xE1E*/ u16 pyramidRecordStreaks[2];
@@ -419,7 +419,7 @@ struct PlayersApprentice
     /*0xB2*/ u8 field_B2_0:3;
     /*0xB2*/ u8 field_B2_1:2;
     /*0xB3*/ u8 field_B3;
-    /*0xB4*/ u8 monIds[3];
+    /*0xB4*/ u8 monIds[MULTI_PARTY_SIZE];
     /*0xB8*/ struct Sav2_B8 field_B8[9];
 };
 

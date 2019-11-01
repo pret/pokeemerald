@@ -155,7 +155,7 @@ static EWRAM_DATA u16 *sSlot2TilemapBuffer = 0; //
 EWRAM_DATA u8 gSelectedOrderFromParty[4] = {0};
 static EWRAM_DATA u16 sPartyMenuItemId = 0;
 static EWRAM_DATA u16 sUnused_0203CEFE = 0;
-EWRAM_DATA u8 gBattlePartyCurrentOrder[3] = {0}; // bits 0-3 are the current pos of Slot 1, 4-7 are Slot 2, and so on
+EWRAM_DATA u8 gBattlePartyCurrentOrder[PARTY_SIZE / 2] = {0}; // bits 0-3 are the current pos of Slot 1, 4-7 are Slot 2, and so on
 
 // IWRAM common
 void (*gItemUseCB)(u8, TaskFunc);
@@ -750,10 +750,10 @@ static void InitPartyMenuBoxes(u8 layout)
 
 static void RenderPartyMenuBox(u8 slot)
 {
-    if (gPartyMenu.menuType == PARTY_MENU_TYPE_MULTI_SHOWCASE && slot > 2)
+    if (gPartyMenu.menuType == PARTY_MENU_TYPE_MULTI_SHOWCASE && slot >= MULTI_PARTY_SIZE)
     {
         DisplayPartyPokemonDataForMultiBattle(slot);
-        if (gMultiPartnerParty[slot - 3].species == SPECIES_NONE)
+        if (gMultiPartnerParty[slot - MULTI_PARTY_SIZE].species == SPECIES_NONE)
             LoadPartyBoxPalette(&sPartyMenuBoxes[slot], PARTY_PAL_NO_MON);
         else
             LoadPartyBoxPalette(&sPartyMenuBoxes[slot], PARTY_PAL_MULTI_ALT);
@@ -986,10 +986,10 @@ static void CreatePartyMonSprites(u8 slot)
 {
     u8 actualSlot;
 
-    if (gPartyMenu.menuType == PARTY_MENU_TYPE_MULTI_SHOWCASE && slot > 2)
+    if (gPartyMenu.menuType == PARTY_MENU_TYPE_MULTI_SHOWCASE && slot >= MULTI_PARTY_SIZE)
     {
         u8 status;
-        actualSlot = slot - 3;
+        actualSlot = slot - MULTI_PARTY_SIZE;
 
         if (gMultiPartnerParty[actualSlot].species != SPECIES_NONE)
         {
@@ -1117,7 +1117,7 @@ static bool8 PartyBoxPal_ParnterOrDisqualifiedInArena(u8 slot)
     if (gPartyMenu.layout == PARTY_LAYOUT_MULTI && (slot == 1 || slot == 4 || slot == 5))
         return TRUE;
 
-    if (slot < 3 && (gBattleTypeFlags & BATTLE_TYPE_ARENA) && gMain.inBattle && (gBattleStruct->arenaLostPlayerMons >> GetPartyIdFromBattleSlot(slot) & 1))
+    if (slot < MULTI_PARTY_SIZE && (gBattleTypeFlags & BATTLE_TYPE_ARENA) && gMain.inBattle && (gBattleStruct->arenaLostPlayerMons >> GetPartyIdFromBattleSlot(slot) & 1))
         return TRUE;
 
     return FALSE;
@@ -6076,7 +6076,7 @@ static void Task_MultiPartnerPartySlideIn(u8 taskId)
         {
             for (i = 3; i < PARTY_SIZE; i++)
             {
-                if (gMultiPartnerParty[i - 3].species != SPECIES_NONE)
+                if (gMultiPartnerParty[i - MULTI_PARTY_SIZE].species != SPECIES_NONE)
                     AnimateSelectedPartyIcon(sPartyMenuBoxes[i].monSpriteId, 0);
             }
             PlaySE(SE_W231); // The Harden SE plays once the partners party mons have slid on screen
@@ -6107,7 +6107,7 @@ static void SlideMultiPartyMenuBoxSpritesOneStep(u8 taskId)
 
     for (i = 3; i < PARTY_SIZE; i++)
     {
-        if (gMultiPartnerParty[i - 3].species != SPECIES_NONE)
+        if (gMultiPartnerParty[i - MULTI_PARTY_SIZE].species != SPECIES_NONE)
         {
             MoveMultiPartyMenuBoxSprite(sPartyMenuBoxes[i].monSpriteId, tXPos - 8);
             MoveMultiPartyMenuBoxSprite(sPartyMenuBoxes[i].itemSpriteId, tXPos - 8);
@@ -6236,7 +6236,7 @@ void DoBattlePyramidMonsHaveHeldItem(void)
     u8 i;
 
     gSpecialVar_Result = FALSE;
-    for (i = 0; i < 3; i++)
+    for (i = 0; i < FRONTIER_PARTY_SIZE; i++)
     {
         if (GetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM) != ITEM_NONE)
         {

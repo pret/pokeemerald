@@ -84,7 +84,7 @@ void RunBattleScriptCommands_PopCallbacksStack(void);
 void RunBattleScriptCommands(void);
 bool8 TryRunFromBattle(u8 battlerId);
 
-extern struct UnknownPokemonStruct4 gMultiPartnerParty[PARTY_SIZE / 2];
+extern struct UnknownPokemonStruct4 gMultiPartnerParty[MULTI_PARTY_SIZE];
 
 extern const struct SpriteTemplate gUnknown_0831AC88;
 extern const struct OamData gOamData_831ACA8;
