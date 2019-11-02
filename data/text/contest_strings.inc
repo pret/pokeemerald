@@ -259,8 +259,8 @@ gText_0827D531::
 	.string "하지만 참가할 수 없다!$"
 
 gText_0827D55A::
-	.string "{STR_VAR_1}(은)는\n"
-	.string "{STR_VAR_2}(으)로 어필!$"
+	.string "{STR_VAR_1}{K_EUNNEUN}\n"
+	.string "{STR_VAR_2}{K_EU}로 어필!$"
 
 gText_0827D56F::
 	.string "{STR_VAR_1} was watching\n"
@@ -312,27 +312,27 @@ gText_0827D71D::
 	.string "아주 약간 잘했다!$"
 
 gText_0827D743::
-	.string "{STR_VAR_1}(은)는\n"
+	.string "{STR_VAR_1}{K_EUNNEUN}\n"
 	.string "전혀 눈에 띄지 않았다...{PAUSE_UNTIL_PRESS}$"
 
 gText_0827D764::
-	.string "{STR_VAR_1}(은)는\n"
+	.string "{STR_VAR_1}{K_EUNNEUN}\n"
 	.string "그다지 눈에 띄지 않았다...{PAUSE_UNTIL_PRESS}$"
 
 gText_0827D785::
-	.string "{STR_VAR_1}(은)는\n"
+	.string "{STR_VAR_1}{K_EUNNEUN}\n"
 	.string "그런대로 눈에 띄었다{PAUSE_UNTIL_PRESS}$"
 
 gText_0827D7A5::
-	.string "{STR_VAR_1}(은)는\n"
+	.string "{STR_VAR_1}{K_EUNNEUN}\n"
 	.string "상당히 눈에 띄었다!{PAUSE_UNTIL_PRESS}$"
 
 gText_0827D7C8::
-	.string "{STR_VAR_1}(은)는\n"
+	.string "{STR_VAR_1}{K_EUNNEUN}\n"
 	.string "대단히 눈에 띄었다!{PAUSE_UNTIL_PRESS}$"
 
 gText_0827D7E8::
-	.string "{STR_VAR_1}(은)는\n"
+	.string "{STR_VAR_1}{K_EUNNEUN}\n"
 	.string "어필하지 않았다!{PAUSE_UNTIL_PRESS}$"
 
 gText_0827D805::
@@ -347,7 +347,7 @@ gText_0827D831::
 	.string "인상은 변하지 않는다!$"
 
 gText_0827D855::
-	.string "{STR_VAR_1}의 {STR_VAR_3}(은)는\n"
+	.string "{STR_VAR_1}의 {STR_VAR_3}{K_EUNNEUN}\n"
 	.string "인상을 바꾸어 놓았다!$"
 
 gText_0827D872::
@@ -419,7 +419,7 @@ gText_0827DADA::
 	.string "수만큼 주목받았다!$"
 
 gText_0827DB03::
-	.string "{STR_VAR_1}(와)과\n"
+	.string "{STR_VAR_1}{K_WAGWA}})\n"
 	.string "같은 정도로 주목받았다!$"
 
 gText_0827DB1F::
@@ -435,7 +435,7 @@ gText_827DB75::
 	.string "걱정이 밀려왔다!{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
 
 gText_827DBB0::
-	.string "{STR_VAR_1}(은)는 이후부터\n"
+	.string "{STR_VAR_1}{K_EUNNEUN} 이후부터\n"
 	.string "어필을 할 수 없게 되었다!{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
 
 gText_827DBE0::
@@ -470,7 +470,7 @@ gText_827DD3D::
 	.string "긴장하도록 했다!{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
 
 gText_827DD6F::
-	.string "{STR_VAR_1}(은)는\n"
+	.string "{STR_VAR_1}{K_EUNNEUN}\n"
 	.string "긴장해 버렸다!{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
 
 gText_827DD8E::
@@ -490,11 +490,11 @@ gText_827DE14::
 	.string "방해해 보았다!{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
 
 gText_827DE44::
-	.string "주목받고 있는 {STR_VAR_1}(은)는\n"
+	.string "주목받고 있는 {STR_VAR_1}{K_EUNNEUN}\n"
 	.string "더욱 힘을 냈다!{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
 
 gText_827DE73::
-	.string "주목받지 못한 {STR_VAR_1}(은)는\n"
+	.string "주목받지 못한 {STR_VAR_1}{K_EUNNEUN}\n"
 	.string "열심히 했다!{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
 
 gText_827DEA5::
@@ -502,7 +502,7 @@ gText_827DEA5::
 	.string "지지 않을 정도로 힘을 냈다!{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
 
 gText_827DED9::
-	.string "{STR_VAR_1}(은)는 어필을\n"
+	.string "{STR_VAR_1}{K_EUNNEUN} 어필을\n"
 	.string "잘 보여주지 못했다!{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
 
 gText_827DF02::
@@ -510,47 +510,47 @@ gText_827DF02::
 	.string "같은 정도로 힘을 냈다!{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
 
 gText_827DF3A::
-	.string "{STR_VAR_1}(은)는 어필을\n"
+	.string "{STR_VAR_1}{K_EUNNEUN} 어필을\n"
 	.string "잘 보여주지 못했다!{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
 
 gText_827DF63::
-	.string "{STR_VAR_1}(은)는 어필을\n"
+	.string "{STR_VAR_1}{K_EUNNEUN} 어필을\n"
 	.string "잘 보여주지 못했다!{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
 
 gText_827DF8C::
-	.string "{STR_VAR_1}(은)는\n"
+	.string "{STR_VAR_1}{K_EUNNEUN}\n"
 	.string "그럭저럭 어필을 잘했다!{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
 
 gText_827DFB8::
-	.string "{STR_VAR_1}(은)는\n"
+	.string "{STR_VAR_1}{K_EUNNEUN}\n"
 	.string "매우 어필을 잘했다!{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
 
 gText_827DFE2::
-	.string "{STR_VAR_1}(은)는\n"
+	.string "{STR_VAR_1}{K_EUNNEUN}\n"
 	.string "굉장히 어필을 잘했다!{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
 
 gText_827E00C::
-	.string "{STR_VAR_1}(은)는\n"
+	.string "{STR_VAR_1}{K_EUNNEUN}\n"
 	.string "어필을 실패하고 말았다!{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
 
 gText_827E02F::
-	.string "{STR_VAR_1}(은)는\n"
+	.string "{STR_VAR_1}{K_EUNNEUN}\n"
 	.string "그다지 어필을 잘하지 못했다!{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
 
 gText_827E05F::
-	.string "{STR_VAR_1}(은)는\n"
+	.string "{STR_VAR_1}{K_EUNNEUN}\n"
 	.string "그럭저럭 어필을 잘했다!{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
 
 gText_827E08B::
-	.string "{STR_VAR_1}(은)는\n"
+	.string "{STR_VAR_1}{K_EUNNEUN}\n"
 	.string "매우 어필을 잘했다!{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
 
 gText_827E0B5::
-	.string "{STR_VAR_1}(은)는\n"
+	.string "{STR_VAR_1}{K_EUNNEUN}\n"
 	.string "상당히 어필을 잘했다!{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
 
 gText_827E0DD::
-	.string "{STR_VAR_1}(은)는\n"
+	.string "{STR_VAR_1}{K_EUNNEUN}\n"
 	.string "굉장히 어필을 잘했다!{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
 
 gText_827E107::
@@ -574,7 +574,7 @@ gText_827E1F3::
 	.string "평상시보다 좋아졌다!{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
 
 gText_827E220::
-	.string "{STR_VAR_1}(은)는 컨디션이 좋아서\n"
+	.string "{STR_VAR_1}{K_EUNNEUN} 컨디션이 좋아서\n"
 	.string "더할 수 없이 좋은 어필을 했다!{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
 
 gText_827E254::
@@ -591,7 +591,7 @@ gText_827E2C5::
 
 gText_0827E2FE::
 	.string "심사위원이 기대하며\n"
-	.string "{STR_VAR_1}(을)를 바라봤다!{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}$"
+	.string "{STR_VAR_1}{K_EULREUL} 바라봤다!{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}$"
 
 gText_0827E32E::
 	.string "어필의 조합이\n"
@@ -606,19 +606,19 @@ gText_0827E38D::
 	.string "굉장히 마음에 들었다!{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}$"
 
 gText_0827E3C1::
-	.string "{STR_VAR_1}(은)는 어떻게든\n"
+	.string "{STR_VAR_1}{K_EUNNEUN} 어떻게든\n"
 	.string "시선을 돌렸다!{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}$"
 
 gText_0827E3EB::
-	.string "{STR_VAR_1}(은)는\n"
+	.string "{STR_VAR_1}{K_EUNNEUN}\n"
 	.string "그쪽을 보지 않았다!{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}$"
 
 gText_0827E416::
-	.string "{STR_VAR_1}(은)는\n"
+	.string "{STR_VAR_1}{K_EUNNEUN}\n"
 	.string "괜찮았다!{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}$"
 
 gText_0827E448::
-	.string "{STR_VAR_1}(은)는 조금\n"
+	.string "{STR_VAR_1}{K_EUNNEUN} 조금\n"
 	.string "정신이 팔리고 말았다!{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}$"
 
 gText_0827E473::
@@ -626,27 +626,27 @@ gText_0827E473::
 	.string "놀라게 만들어 보았다!{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}$"
 
 gText_0827E4A6::
-	.string "{STR_VAR_1}(은)는 정신이 팔려서\n"
+	.string "{STR_VAR_1}{K_EUNNEUN} 정신이 팔려서\n"
 	.string "아래를 내려다봐버렸다!{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}$"
 
 gText_0827E4D5::
-	.string "{STR_VAR_1}(은)는 정신이 팔려서\n"
+	.string "{STR_VAR_1}{K_EUNNEUN} 정신이 팔려서\n"
 	.string "돌아봐버렸다!{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}$"
 
 gText_0827E504::
-	.string "{STR_VAR_1}(은)는 무의식 중에\n"
+	.string "{STR_VAR_1}{K_EUNNEUN} 무의식 중에\n"
 	.string "소리를 질러버렸다!{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}$"
 
 gText_0827E531::
-	.string "{STR_VAR_1}(은)는 자기도 모르게\n"
+	.string "{STR_VAR_1}{K_EUNNEUN} 자기도 모르게\n"
 	.string "펄쩍 뛰어버렸다!{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}$"
 
 gText_0827E55A::
-	.string "{STR_VAR_1}(은)는 정신이 팔려서\n"
+	.string "{STR_VAR_1}{K_EUNNEUN} 정신이 팔려서\n"
 	.string "뒤집히고 말았다!{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}$"
 
 gText_0827E58A::
-	.string "{STR_VAR_1}(은)는 긴장해서\n"
+	.string "{STR_VAR_1}{K_EUNNEUN} 긴장해서\n"
 	.string "어필을 할 수 없었다!{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}$"
 
 gText_0827E5B2::
@@ -672,19 +672,19 @@ gText_0827E68B::
 	.string "그리 잘하지 못했다...{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}$"
 
 gText_0827E6C4::
-	.string "{STR_VAR_1}(은)는\n"
+	.string "{STR_VAR_1}{K_EUNNEUN}\n"
 	.string "괜찮았다!{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}$"
 
 gText_RepeatedAppeal::
-	.string "{STR_VAR_1}(은)는 같은 어필을\n"
+	.string "{STR_VAR_1}{K_EUNNEUN} 같은 어필을\n"
 	.string "계속했기에 모두를 실망시켰다!{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}$"
 
 gText_0827E717::
-	.string "{STR_VAR_1}의 {STR_VAR_3}(이)가\n"
+	.string "{STR_VAR_1}의 {STR_VAR_3}{K_IGA}}\n"
 	.string "주변에서 엄청 좋았다!{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}$"
 
 gText_0827E73C::
-	.string "{STR_VAR_1}의 {STR_VAR_3}(은)는\n"
+	.string "{STR_VAR_1}의 {STR_VAR_3}{K_EUNNEUN}\n"
 	.string "여기서 먹히지 않는 듯하다...{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}$"
 
 gText_0827E76A::
@@ -692,7 +692,7 @@ gText_0827E76A::
 	.string "주변의 분위기가 달아올랐다!{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}$"
 
 gText_0827E793::
-	.string "{STR_VAR_1}(은)는 다음 어필에\n"
+	.string "{STR_VAR_1}{K_EUNNEUN} 다음 어필에\n"
 	.string "참가할 수 없게 되었다!{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}$"
 
 gText_0827E7BA::
@@ -700,11 +700,11 @@ gText_0827E7BA::
 	.string "주의를 끌었다!{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}$"
 
 gText_0827E7EA::
-	.string "관객은 {STR_VAR_3}(을)를\n"
+	.string "관객은 {STR_VAR_3}{K_EULREUL}\n"
 	.string "계속 주목하고 있다!{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}$"
 
 gText_0827E817::
-	.string "{STR_VAR_1}의 {STR_VAR_2}(은)는\n"
+	.string "{STR_VAR_1}의 {STR_VAR_2}{K_EUNNEUN}\n"
 	.string "눈길을 받지 못했다...{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}$"
 
 gText_Contest_Shyness::

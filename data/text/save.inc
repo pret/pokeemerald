@@ -12,7 +12,7 @@ gText_SavingDontTurnOff::
 	.string "전원을 끄지 않도록 해주십시오$"
 
 gText_PlayerSavedGame::
-	.string "{PLAYER}(은)는\n"
+	.string "{PLAYER}{K_EUNNEUN}\n"
     .string "리포트를 꼼꼼히 기록했다!$"
 
 gText_DifferentSaveFile::

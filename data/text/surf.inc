@@ -3,5 +3,5 @@ gText_WantToUseSurf::
 	.string "파도타기를 쓰겠습니까?$"
 
 gText_PlayerUsedSurf::
-	.string "{STR_VAR_1}(은)는\n"
+	.string "{STR_VAR_1}{K_EUNNEUN}\n"
 	.string "파도타기를 썼다!$"

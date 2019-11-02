@@ -152,7 +152,7 @@ AbandonedShip_HiddenFloorCorridors_Text_238BC3:
 	.string "문에는 6호실이라고 쓰여 있다$"
 
 AbandonedShip_HiddenFloorCorridors_Text_238BF7:
-	.string "{PLAYER}(은)는\n"
+	.string "{PLAYER}{K_EUNNEUN}\n"
 	.string "열쇠를 썼다!\p"
 	.string "열쇠 구멍에 꽂은 열쇠는\n"
 	.string "빠지지 않게 되었지만\l"

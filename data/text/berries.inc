@@ -30,7 +30,7 @@ Route111_Text_2A6EBD:
 Route111_Text_2A6F3D:
 	.string "더욱더 열심히 해서\n"
 	.string "빨강포켓몬스넥 만들 거야!\l"
-	.string "{KO_2}도 힘내!$"
+	.string "{K_GIRL_CALL}도 힘내!$"
 
 Route111_Text_2A6F9A:
 	.string "오늘은 무슨 색의 나무열매를\n"
@@ -150,7 +150,7 @@ Route104_PrettyPetalFlowerShop_Text_LearnAboutBerries:
 
 Route104_PrettyPetalFlowerShop_Text_IntroLearnAboutBerries:
 	.string "당신의 이름은...\p"
-	.string "{PLAYER}(이)구나!\n"
+	.string "{PLAYER}{K_I}구나!\n"
 	.string "정말 좋은 이름이네!\p"
 	.string "{PLAYER}\n"
 	.string "나무열매에 대해 알고 싶어?$"
