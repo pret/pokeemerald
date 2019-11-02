@@ -419,7 +419,7 @@ gText_0827DADA::
 	.string "수만큼 주목받았다!$"
 
 gText_0827DB03::
-	.string "{STR_VAR_1}{K_WAGWA}})\n"
+	.string "{STR_VAR_1}{K_WAGWA})\n"
 	.string "같은 정도로 주목받았다!$"
 
 gText_0827DB1F::
@@ -680,7 +680,7 @@ gText_RepeatedAppeal::
 	.string "계속했기에 모두를 실망시켰다!{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}$"
 
 gText_0827E717::
-	.string "{STR_VAR_1}의 {STR_VAR_3}{K_IGA}}\n"
+	.string "{STR_VAR_1}의 {STR_VAR_3}{K_IGA}\n"
 	.string "주변에서 엄청 좋았다!{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}$"
 
 gText_0827E73C::
