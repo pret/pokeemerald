@@ -123,7 +123,7 @@
       "elevation": 3,
       "var": "VAR_SEAFLOOR_CAVERN_STATE",
       "var_value": "0",
-      "script": "SeafloorCavern_Room9_EventScript_234DC9"
+      "script": "SeafloorCavern_Room9_EventScript_ArchieAwakenKyogre"
     }
   ],
   "bg_events": []

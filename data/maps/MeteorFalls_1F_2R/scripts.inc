@@ -11,7 +11,7 @@ MeteorFalls_1F_2R_EventScript_22C4DE:: @ 822C4DE
 	end
 
 MeteorFalls_1F_2R_EventScript_22C50A:: @ 822C50A
-	special sub_80B4808
+	special PlayerFaceTrainerAfterBattle
 	waitmovement 0
 	msgbox MeteorFalls_1F_2R_Text_22C6F6, MSGBOX_DEFAULT
 	register_matchcall TRAINER_NICOLAS_1

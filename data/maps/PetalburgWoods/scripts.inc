@@ -290,7 +290,7 @@ PetalburgWoods_EventScript_James:: @ 822E284
 	end
 
 PetalburgWoods_EventScript_TryRegisterJames:: @ 822E2C5
-	special sub_80B4808
+	special PlayerFaceTrainerAfterBattle
 	waitmovement 0
 	goto_if_set FLAG_HAS_MATCH_CALL, PetalburgWoods_EventScript_RegisterJames
 	release

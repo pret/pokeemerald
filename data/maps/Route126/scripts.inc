@@ -51,7 +51,7 @@ Route126_EventScript_1F6977:: @ 81F6977
 	end
 
 Route126_EventScript_1F69A3:: @ 81F69A3
-	special sub_80B4808
+	special PlayerFaceTrainerAfterBattle
 	waitmovement 0
 	msgbox Route126_Text_2A1F5A, MSGBOX_DEFAULT
 	register_matchcall TRAINER_PABLO_1

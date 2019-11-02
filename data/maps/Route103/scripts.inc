@@ -259,7 +259,7 @@ Route103_EventScript_Miguel:: @ 81EC6E8
 	end
 
 Route102_EventScript_MiguelRegisterMatchCallAfterBattle:: @ 81EC714
-	special sub_80B4808
+	special PlayerFaceTrainerAfterBattle
 	waitmovement 0
 	msgbox Route103_Text_MiguelRegister, MSGBOX_DEFAULT
 	register_matchcall TRAINER_MIGUEL_1

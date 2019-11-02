@@ -20,7 +20,7 @@ AbandonedShip_Rooms_1F_EventScript_237AB3::
 	end
 
 AbandonedShip_Rooms_1F_EventScript_237ADF::
-	special sub_80B4808
+	special PlayerFaceTrainerAfterBattle
 	waitmovement 0
 	msgbox AbandonedShip_Rooms_1F_Text_237C2A, MSGBOX_DEFAULT
 	register_matchcall TRAINER_THALIA_1
