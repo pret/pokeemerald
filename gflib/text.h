@@ -135,6 +135,15 @@
 #define PLACEHOLDER_ID_MAXIE         0xB
 #define PLACEHOLDER_ID_KYOGRE        0xC
 #define PLACEHOLDER_ID_GROUDON       0xD
+#define PLACEHOLDER_ID_BOY_CALL      0xE
+#define PLACEHOLDER_ID_GIRL_CALL     0xF
+#define PLACEHOLDER_ID_EUNNEUN       0x10
+#define PLACEHOLDER_ID_IGA           0x11
+#define PLACEHOLDER_ID_EULREUL       0x12
+#define PLACEHOLDER_ID_EU            0x13
+#define PLACEHOLDER_ID_I             0x14
+#define PLACEHOLDER_ID_WAGWA         0x15
+#define PLACEHOLDER_ID_AYA           0x16
 
 // battle placeholders are located in battle_message.h
 
@@ -204,7 +213,6 @@ struct TextPrinter
     u8 scrollDistance;
     u8 minLetterSpacing;  // 0x20
     u8 japanese;
-    u8 koreanState;
 };
 
 struct FontInfo

@@ -1756,11 +1756,7 @@ u16 RenderText(struct TextPrinter *textPrinter)
         }
 
         // 한글 문자 체크 & 문자 가져오기
-        if (CheckKoreanGlyph(currChar))
-        {
-            currChar = (currChar << 8) | *textPrinter->printerTemplate.currentChar;
-            textPrinter->printerTemplate.currentChar++;
-        }
+        currChar = GetKoreanChar(textPrinter, currChar);
 
         switch (subStruct->glyphId)
         {

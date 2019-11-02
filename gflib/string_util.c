@@ -1,12 +1,14 @@
 #include "global.h"
 #include "string_util.h"
 #include "text.h"
+#include "korean.h"
 
 EWRAM_DATA u8 gStringVar1[0x100] = {0};
 EWRAM_DATA u8 gStringVar2[0x100] = {0};
 EWRAM_DATA u8 gStringVar3[0x100] = {0};
 EWRAM_DATA u8 gStringVar4[0x3E8] = {0};
 EWRAM_DATA static u8 sUnknownStringVar[16] = {0};
+EWRAM_DATA static bool8 sHasJongSeong = FALSE;
 
 static const u8 sDigits[] = __("0123456789ABCDEF");
 
@@ -38,6 +40,21 @@ extern const u8 gExpandedPlaceholder_Kyogre[];
 extern const u8 gExpandedPlaceholder_Groudon[];
 extern const u8 gExpandedPlaceholder_Brendan[];
 extern const u8 gExpandedPlaceholder_May[];
+extern const u8 gExpandedPlaceholder_BoyCallMale[];
+extern const u8 gExpandedPlaceholder_BoyCallFemale[];
+extern const u8 gExpandedPlaceholder_GirlCallMale[];
+extern const u8 gExpandedPlaceholder_GirlCallFemale[];
+extern const u8 gExpandedPlaceholder_Eun[];
+extern const u8 gExpandedPlaceholder_Neun[];
+extern const u8 gExpandedPlaceholder_Eu[];
+extern const u8 gExpandedPlaceholder_I[];
+extern const u8 gExpandedPlaceholder_Ga[];
+extern const u8 gExpandedPlaceholder_Eul[];
+extern const u8 gExpandedPlaceholder_Reul[];
+extern const u8 gExpandedPlaceholder_Wa[];
+extern const u8 gExpandedPlaceholder_Gwa[];
+extern const u8 gExpandedPlaceholder_A[];
+extern const u8 gExpandedPlaceholder_Ya[];
 
 u8 *StringCopy10(u8 *dest, const u8 *src)
 {
@@ -352,11 +369,17 @@ u8 *StringExpandPlaceholders(u8 *dest, const u8 *src)
     {
         u8 c = *src++;
         u8 placeholderId;
+        u16 prevChar;
         const u8 *expandedString;
 
         switch (c)
         {
             case PLACEHOLDER_BEGIN:
+                // 글자 추출 및 종성유무 체크
+                prevChar = (*(dest - 2) << 8) | *(dest - 1);
+                sHasJongSeong = CheckHasJongSeong(prevChar);
+
+                // placeholder 설정
                 placeholderId = *src++;
                 expandedString = GetExpandedPlaceholder(placeholderId);
                 dest = StringExpandPlaceholders(dest, expandedString);
@@ -499,6 +522,80 @@ static const u8 *ExpandPlaceholder_Groudon(void)
     return gExpandedPlaceholder_Groudon;
 }
 
+static const u8 *ExpandPlaceholder_BoyCall(void)
+{
+
+    if (gSaveBlock2Ptr->playerGender == MALE)
+        return gExpandedPlaceholder_BoyCallMale;
+    else
+        return gExpandedPlaceholder_BoyCallFemale;
+}
+
+static const u8 *ExpandPlaceholder_GirlCall(void)
+{
+
+    if (gSaveBlock2Ptr->playerGender == MALE)
+        return gExpandedPlaceholder_GirlCallMale;
+    else
+        return gExpandedPlaceholder_GirlCallFemale;
+}
+
+static const u8 *ExpandPlaceholder_EunNeun(void)
+{
+    if (sHasJongSeong)
+        return gExpandedPlaceholder_Eun;
+    else
+        return gExpandedPlaceholder_Neun;
+}
+
+static const u8 *ExpandPlaceholder_Iga(void)
+{
+    if (sHasJongSeong)
+        return gExpandedPlaceholder_I;
+    else
+        return gExpandedPlaceholder_Ga;
+}
+
+static const u8 *ExpandPlaceholder_EulReul(void)
+{
+    if (sHasJongSeong)
+        return gExpandedPlaceholder_Eul;
+    else
+        return gExpandedPlaceholder_Reul;
+}
+
+static const u8 *ExpandPlaceholder_Eu(void)
+{
+    if (sHasJongSeong)
+        return gExpandedPlaceholder_Eu;
+    else
+        return gExpandedPlaceholder_Empty;
+}
+
+static const u8 *ExpandPlaceholder_I(void)
+{
+    if (sHasJongSeong)
+        return gExpandedPlaceholder_I;
+    else
+        return gExpandedPlaceholder_Empty;
+}
+
+static const u8 *ExpandPlaceholder_WaGwa(void)
+{
+    if (sHasJongSeong)
+        return gExpandedPlaceholder_Wa;
+    else
+        return gExpandedPlaceholder_Gwa;
+}
+
+static const u8 *ExpandPlaceholder_Aya(void)
+{
+    if (sHasJongSeong)
+        return gExpandedPlaceholder_A;
+    else
+        return gExpandedPlaceholder_Ya;
+}
+
 const u8 *GetExpandedPlaceholder(u32 id)
 {
     typedef const u8 *(*ExpandPlaceholderFunc)(void);
@@ -519,6 +616,15 @@ const u8 *GetExpandedPlaceholder(u32 id)
         [PLACEHOLDER_ID_MAXIE]        = ExpandPlaceholder_Maxie,
         [PLACEHOLDER_ID_KYOGRE]       = ExpandPlaceholder_Kyogre,
         [PLACEHOLDER_ID_GROUDON]      = ExpandPlaceholder_Groudon,
+        [PLACEHOLDER_ID_BOY_CALL]     = ExpandPlaceholder_BoyCall,
+        [PLACEHOLDER_ID_GIRL_CALL]    = ExpandPlaceholder_GirlCall,
+        [PLACEHOLDER_ID_EUNNEUN]      = ExpandPlaceholder_EunNeun,
+        [PLACEHOLDER_ID_IGA]          = ExpandPlaceholder_Iga,
+        [PLACEHOLDER_ID_EULREUL]      = ExpandPlaceholder_EulReul,
+        [PLACEHOLDER_ID_EU]           = ExpandPlaceholder_Eu,
+        [PLACEHOLDER_ID_I]            = ExpandPlaceholder_I,
+        [PLACEHOLDER_ID_WAGWA]        = ExpandPlaceholder_WaGwa,
+        [PLACEHOLDER_ID_AYA]          = ExpandPlaceholder_Aya
     };
 
     if (id >= ARRAY_COUNT(funcs))

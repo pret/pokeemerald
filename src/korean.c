@@ -1,5 +1,6 @@
 #include "global.h"
 #include "text.h"
+#include "korean.h"
 #include "korean_table.h"
 
 u8 CheckKoreanGlyph(u16 glyph)
@@ -257,8 +258,32 @@ u8 SplitJong(u8 ch, u8 index)
     return 0;
 }
 
-void SetKoreanState(struct TextPrinter *textPrinter, u16 glyph)
+bool8 CheckHasJongSeong(u16 ch)
 {
-    u8 hasJong = gConvertKoreanToUnicodeTable[glyph - 0x3700] % 28;
-    textPrinter->koreanState = hasJong;
+    if (CheckKoreanGlyph((ch & 0xff00) >> 8))
+    {
+        // 한글 종성유무 체크
+        return gConvertKoreanToUnicodeTable[ch - 0x3700] % 28;
+    }
+    else
+    {
+        // 다른 경우는 종성이 아닌걸로 처리
+        return FALSE;
+    }
+}
+
+u16 GetKoreanChar(struct TextPrinter *textPrinter, u16 currChar)
+{
+    if (CheckKoreanGlyph(currChar))
+    {
+        // 현재 바이트와 다음 바이트와 조합
+        u16 newChar = (currChar << 8) | *textPrinter->printerTemplate.currentChar;
+        textPrinter->printerTemplate.currentChar++;
+        return newChar;
+    }
+    else
+    {
+        // 한글 바이트가 아닐경우 기존 글자로 반환
+        return currChar;
+    }
 }
