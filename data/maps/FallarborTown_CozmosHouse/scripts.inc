@@ -15,7 +15,7 @@ FallarborTown_CozmosHouse_EventScript_ProfCozmo:: @ 8200F13
 FallarborTown_CozmosHouse_EventScript_PlayerHasMeteorite:: @ 8200F38
 	call_if_unset FLAG_TEMP_2, FallarborTown_CozmosHouse_EventScript_NoticeMeteorite
 	call_if_set FLAG_TEMP_2, FallarborTown_CozmosHouse_EventScript_AskForMeteorite
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq FallarborTown_CozmosHouse_EventScript_DeclineGiveMeteorite
 	msgbox FallarborTown_CozmosHouse_Text_PleaseUseThisTM, MSGBOX_DEFAULT
 	giveitem_std ITEM_TM27

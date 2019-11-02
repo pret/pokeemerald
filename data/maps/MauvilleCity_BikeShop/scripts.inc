@@ -8,17 +8,17 @@ MauvilleCity_BikeShop_EventScript_Rydel:: @ 820EBBC
 	goto_if_set FLAG_DECLINED_BIKE, MauvilleCity_BikeShop_EventScript_SkipGreeting
 	msgbox MauvilleCity_BikeShop_Text_RydelGreeting, MSGBOX_DEFAULT
 	msgbox MauvilleCity_BikeShop_Text_DidYouComeFromFarAway, MSGBOX_YESNO
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, YES
 	goto_if_eq MauvilleCity_BikeShop_EventScript_YesFar
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq MauvilleCity_BikeShop_EventScript_NotFar
 	end
 
 MauvilleCity_BikeShop_EventScript_SkipGreeting:: @ 820EBF7
 	msgbox MauvilleCity_BikeShop_Text_DidYouComeFromFarAway, MSGBOX_YESNO
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, YES
 	goto_if_eq MauvilleCity_BikeShop_EventScript_YesFar
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq MauvilleCity_BikeShop_EventScript_NotFar
 	end
 
@@ -62,9 +62,9 @@ MauvilleCity_BikeShop_EventScript_ComeBackToSwitchBikes:: @ 820EC87
 
 MauvilleCity_BikeShop_EventScript_AskSwitchBikes:: @ 820EC94
 	msgbox MauvilleCity_BikeShop_Text_WantToSwitchBikes, MSGBOX_YESNO
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, YES
 	goto_if_eq MauvilleCity_BikeShop_EventScript_SwitchBikes
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq MauvilleCity_BikeShop_EventScript_KeepBike
 	end
 

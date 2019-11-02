@@ -246,7 +246,7 @@ Route124_DivingTreasureHuntersHouse_EventScript_TryTradeShard:: @ 8270EC0
 	bufferitemname 0, VAR_0x8008
 	bufferitemname 1, VAR_0x8009
 	msgbox Route124_DivingTreasureHuntersHouse_Text_YoullTradeShardForStone, MSGBOX_YESNO
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq Route124_DivingTreasureHuntersHouse_EventScript_DeclineTrade
 	checkitemspace VAR_0x8009, 1
 	compare VAR_RESULT, TRUE
@@ -265,7 +265,7 @@ Route124_DivingTreasureHuntersHouse_EventScript_TradeShard:: @ 8270F01
 	compare VAR_TEMP_1, 0
 	goto_if_eq Route124_DivingTreasureHuntersHouse_EventScript_EndTrade
 	msgbox Route124_DivingTreasureHuntersHouse_Text_TradeSomethingElse, MSGBOX_YESNO
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, YES
 	goto_if_eq Route124_DivingTreasureHuntersHouse_EventScript_ShowTradeOptions
 	goto Route124_DivingTreasureHuntersHouse_EventScript_DeclineTrade
 	end
