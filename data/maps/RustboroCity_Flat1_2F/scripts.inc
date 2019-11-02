@@ -26,14 +26,14 @@ RustboroCity_Flat1_2F_EventScript_215157:: @ 8215157
 
 RustboroCity_Flat1_2F_EventScript_21518D:: @ 821518D
 	msgbox RustboroCity_Flat1_2F_Text_2152FA, MSGBOX_YESNO
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq RustboroCity_Flat1_2F_EventScript_2151CD
 	msgbox RustboroCity_Flat1_2F_Text_2154AD, MSGBOX_DEFAULT
 	goto RustboroCity_Flat1_2F_EventScript_215157
 
 RustboroCity_Flat1_2F_EventScript_2151AD:: @ 82151AD
 	msgbox RustboroCity_Flat1_2F_Text_215448, MSGBOX_YESNO
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq RustboroCity_Flat1_2F_EventScript_2151CD
 	msgbox RustboroCity_Flat1_2F_Text_2154AD, MSGBOX_DEFAULT
 	goto RustboroCity_Flat1_2F_EventScript_215157

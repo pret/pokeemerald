@@ -5,7 +5,7 @@ BattleFrontier_Lounge5_EventScript_NatureGirl:: @ 82645C6
 	lock
 	faceplayer
 	msgbox BattleFrontier_Lounge5_Text_NatureGirlGreeting, MSGBOX_YESNO
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq BattleFrontier_Lounge5_EventScript_NatureGirlNoneShown
 	special ChoosePartyMon
 	waitstate

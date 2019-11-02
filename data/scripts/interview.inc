@@ -14,9 +14,9 @@ SlateportCity_PokemonFanClub_EventScript_28C7F0:: @ 828C7F0
 	goto_if_eq SlateportCity_PokemonFanClub_EventScript_28C879
 	copyvar VAR_0x8009, VAR_0x8006
 	msgbox SlateportCity_PokemonFanClub_Text_280674, MSGBOX_YESNO
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, YES
 	goto_if_eq SlateportCity_PokemonFanClub_EventScript_28C827
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq SlateportCity_PokemonFanClub_EventScript_28C85C
 	end
 
@@ -61,17 +61,17 @@ SlateportCity_OceanicMuseum_1F_EventScript_Reporter:: @ 828C883
 	goto_if_set FLAG_OCEANIC_MUSEUM_MET_REPORTER, SlateportCity_OceanicMuseum_1F_EventScript_28C8C8
 	setflag FLAG_OCEANIC_MUSEUM_MET_REPORTER
 	msgbox SlateportCity_OceanicMuseum_1F_Text_2811A0, MSGBOX_YESNO
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, YES
 	goto_if_eq SlateportCity_OceanicMuseum_1F_EventScript_28C8E7
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq SlateportCity_OceanicMuseum_1F_EventScript_28C91C
 	end
 
 SlateportCity_OceanicMuseum_1F_EventScript_28C8C8:: @ 828C8C8
 	msgbox SlateportCity_OceanicMuseum_1F_Text_28126D, MSGBOX_YESNO
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, YES
 	goto_if_eq SlateportCity_OceanicMuseum_1F_EventScript_28C8E7
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq SlateportCity_OceanicMuseum_1F_EventScript_28C91C
 	end
 
@@ -117,9 +117,9 @@ SlateportCity_PokemonFanClub_EventScript_28C943:: @ 828C943
 	goto_if_eq SlateportCity_PokemonFanClub_EventScript_28CA4F
 	copyvar VAR_0x8009, VAR_0x8006
 	msgbox SlateportCity_PokemonFanClub_Text_280270, MSGBOX_YESNO
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, YES
 	goto_if_eq SlateportCity_PokemonFanClub_EventScript_28C98C
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq SlateportCity_PokemonFanClub_EventScript_28CA45
 	end
 
@@ -190,9 +190,9 @@ LilycoveCity_ContestLobby_EventScript_28CA59:: @ 828CA59
 	goto_if_eq LilycoveCity_ContestLobby_EventScript_28CB21
 	copyvar VAR_0x8009, VAR_0x8006
 	msgbox LilycoveCity_ContestLobby_Text_27EF15, MSGBOX_YESNO
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, YES
 	goto_if_eq LilycoveCity_ContestLobby_EventScript_28CA9B
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq LilycoveCity_ContestLobby_EventScript_28CAD0
 	end
 
@@ -271,9 +271,9 @@ BattleFrontier_BattleTowerLobby_EventScript_28CB96:: @ 828CB96
 	goto_if_eq BattleFrontier_BattleTowerLobby_EventScript_28CC7A
 	copyvar VAR_0x8009, VAR_0x8006
 	msgbox BattleFrontier_BattleTowerLobby_Text_27F704, MSGBOX_YESNO
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, YES
 	goto_if_eq BattleFrontier_BattleTowerLobby_EventScript_28CBD8
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq BattleFrontier_BattleTowerLobby_EventScript_28CC2E
 	end
 

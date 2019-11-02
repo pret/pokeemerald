@@ -276,7 +276,7 @@ Route111_EventScript_1F0FC5:: @ 81F0FC5
 	faceplayer
 	setflag FLAG_LANDMARK_WINSTRATE_FAMILY
 	msgbox Route111_Text_1F1475, MSGBOX_YESNO
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, YES
 	goto_if_eq Route111_EventScript_1F0FE7
 	msgbox Route111_Text_1F14F5, MSGBOX_DEFAULT
 	release

@@ -87,7 +87,7 @@ LilycoveCity_Harbor_EventScript_GoToFarawayIsland:: @ 821E139
 
 LilycoveCity_Harbor_EventScript_GoToSlateport:: @ 821E149
 	msgbox LilycoveCity_Harbor_Text_SlateportItIs, MSGBOX_YESNO
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq LilycoveCity_Harbor_EventScript_FerryDestinationChangeMind
 	setvar VAR_PORTHOLE_STATE, 5
 	call LilycoveCity_Harbor_EventScript_BoardFerry
@@ -98,7 +98,7 @@ LilycoveCity_Harbor_EventScript_GoToSlateport:: @ 821E149
 
 LilycoveCity_Harbor_EventScript_GoToBattleFrontier:: @ 821E171
 	msgbox LilycoveCity_Harbor_Text_BattleFrontierItIs, MSGBOX_YESNO
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq LilycoveCity_Harbor_EventScript_FerryDestinationChangeMind
 	call LilycoveCity_Harbor_EventScript_BoardFerry
 	warp MAP_BATTLE_FRONTIER_OUTSIDE_WEST, 255, 19, 67
@@ -390,7 +390,7 @@ LilycoveCity_Harbor_EventScript_NoTicket:: @ 821E56B
 @ Unused
 LilycoveCity_Harbor_EventScript_GoToSlateportUnused:: @ 821E575
 	msgbox LilycoveCity_Harbor_Text_SlateportItIs, MSGBOX_YESNO
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq LilycoveCity_Harbor_EventScript_FerryDestinationChangeMind
 	setvar VAR_PORTHOLE_STATE, 5
 	call LilycoveCity_Harbor_EventScript_BoardFerry
@@ -402,7 +402,7 @@ LilycoveCity_Harbor_EventScript_GoToSlateportUnused:: @ 821E575
 @ Unused
 LilycoveCity_Harbor_EventScript_GoToBattleFrontierUnused:: @ 821E59D
 	msgbox LilycoveCity_Harbor_Text_BattleFrontierItIs, MSGBOX_YESNO
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq LilycoveCity_Harbor_EventScript_FerryDestinationChangeMind
 	call LilycoveCity_Harbor_EventScript_BoardFerry
 	warp MAP_BATTLE_FRONTIER_OUTSIDE_WEST, 255, 19, 67

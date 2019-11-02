@@ -226,7 +226,7 @@ MossdeepCity_EventScript_1E4C26:: @ 81E4C26
 	faceplayer
 	goto_if_set FLAG_RECEIVED_KINGS_ROCK, MossdeepCity_EventScript_1E4C68
 	msgbox MossdeepCity_Text_1E4CED, MSGBOX_YESNO
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq MossdeepCity_EventScript_1E4C72
 	msgbox MossdeepCity_Text_1E4D5B, MSGBOX_DEFAULT
 	giveitem_std ITEM_KINGS_ROCK

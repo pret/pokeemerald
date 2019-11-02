@@ -279,7 +279,7 @@ Route109_EventScript_MrBriney:: @ 81EE910
 Route109_EventScript_HaveNotDeliveredDevonGood:: @ 81EE921
 	message Route109_Text_BrineySailToDewfordQuestion
 	msgbox Route109_Text_BrineySailToDewfordQuestion, MSGBOX_YESNO
-	compare VAR_RESULT, FALSE
+	compare VAR_RESULT, NO
 	goto_if_eq Route109_EventScript_StayHere
 	goto Route109_EventScript_SailToDewford
 	end

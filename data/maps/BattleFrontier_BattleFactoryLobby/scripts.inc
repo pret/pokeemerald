@@ -186,9 +186,9 @@ BattleFrontier_BattleFactoryLobby_EventScript_258653:: @ 8258653
 	special CallFrontierUtilFunc
 	msgbox BattleFrontier_BattleFactoryLobby_Text_258C27, MSGBOX_YESNO
 	switch VAR_RESULT
-	case 0, BattleFrontier_BattleFactoryLobby_EventScript_25879A
-	case 1, BattleFrontier_BattleFactoryLobby_EventScript_2586B9
-	case 127, BattleFrontier_BattleFactoryLobby_EventScript_25879A
+	case NO, BattleFrontier_BattleFactoryLobby_EventScript_25879A
+	case YES, BattleFrontier_BattleFactoryLobby_EventScript_2586B9
+	case MULTI_B_PRESSED, BattleFrontier_BattleFactoryLobby_EventScript_25879A
 
 BattleFrontier_BattleFactoryLobby_EventScript_2586B9:: @ 82586B9
 	setvar VAR_TEMP_0, 0

@@ -17,7 +17,7 @@ FallarborTown_MoveRelearnersHouse_EventScript_AskTeachMove:: @ 82013A8
 	goto_if_eq FallarborTown_MoveRelearnersHouse_EventScript_ComeBackWithHeartScale
 	msgbox FallarborTown_MoveRelearnersHouse_Text_ThatsAHeartScaleWantMeToTeachMove, MSGBOX_YESNO
 	switch VAR_RESULT
-	case 0, FallarborTown_MoveRelearnersHouse_EventScript_ComeBackWithHeartScale
+	case NO, FallarborTown_MoveRelearnersHouse_EventScript_ComeBackWithHeartScale
 	goto FallarborTown_MoveRelearnersHouse_EventScript_ChooseMon
 	end
 

@@ -532,9 +532,9 @@ LilycoveCity_PokemonTrainerFanClub_EventScript_21CDEE:: @ 821CDEE
 	setvar VAR_0x8004, 8
 	special BufferStreakTrainerText
 	msgbox LilycoveCity_PokemonTrainerFanClub_Text_281C3D, MSGBOX_YESNO
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, YES
 	goto_if_eq LilycoveCity_PokemonTrainerFanClub_EventScript_21CEC6
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq LilycoveCity_PokemonTrainerFanClub_EventScript_21CE15
 	end
 
@@ -577,9 +577,9 @@ LilycoveCity_PokemonTrainerFanClub_EventScript_21CE9F:: @ 821CE9F
 	setvar VAR_0x8004, 8
 	special BufferStreakTrainerText
 	msgbox LilycoveCity_PokemonTrainerFanClub_Text_281CCD, MSGBOX_YESNO
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, YES
 	goto_if_eq LilycoveCity_PokemonTrainerFanClub_EventScript_21CEC6
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq LilycoveCity_PokemonTrainerFanClub_EventScript_21CE4D
 	end
 

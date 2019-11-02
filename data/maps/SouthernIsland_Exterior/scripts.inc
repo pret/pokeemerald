@@ -10,7 +10,7 @@ SouthernIsland_Exterior_EventScript_Sailor:: @ 82429D2
 	lock
 	faceplayer
 	msgbox EventTicket_Text_SouthernIslandSailBack, MSGBOX_YESNO
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq SouthernIsland_Exterior_EventScript_AsYouLike
 	msgbox EventTicket_Text_SailHome, MSGBOX_DEFAULT
 	closemessage

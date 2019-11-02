@@ -99,9 +99,9 @@ LittlerootTown_ProfessorBirchsLab_EventScript_1F9DDB:: @ 81F9DDB
 	playfanfare MUS_FANFA4
 	waitfanfare
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_1FA8B1, MSGBOX_YESNO
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, YES
 	goto_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_1F9E07
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_1F9E17
 	end
 
@@ -113,9 +113,9 @@ LittlerootTown_ProfessorBirchsLab_EventScript_1F9E07:: @ 81F9E07
 
 LittlerootTown_ProfessorBirchsLab_EventScript_1F9E17:: @ 81F9E17
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_1FA8F6, MSGBOX_YESNO
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, YES
 	goto_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_1F9E36
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_1F9E48
 	end
 
@@ -128,9 +128,9 @@ LittlerootTown_ProfessorBirchsLab_EventScript_1F9E36:: @ 81F9E36
 
 LittlerootTown_ProfessorBirchsLab_EventScript_1F9E48:: @ 81F9E48
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_1FAA35, MSGBOX_YESNO
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, YES
 	goto_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_1F9E36
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_1F9E48
 	end
 
@@ -290,7 +290,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_1F9FBB:: @ 81F9FBB
 	waitmovement 0
 	showmonpic SPECIES_CYNDAQUIL, 10, 3
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_1FB7F6, MSGBOX_YESNO
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_1FA061
 	goto LittlerootTown_ProfessorBirchsLab_EventScript_1FA06C
 	end
@@ -303,7 +303,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_1F9FEF:: @ 81F9FEF
 	waitmovement 0
 	showmonpic SPECIES_TOTODILE, 10, 3
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_1FB869, MSGBOX_YESNO
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_1FA061
 	goto LittlerootTown_ProfessorBirchsLab_EventScript_1FA10D
 	end
@@ -316,7 +316,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_1FA023:: @ 81FA023
 	waitmovement 0
 	showmonpic SPECIES_CHIKORITA, 10, 3
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_1FB8E0, MSGBOX_YESNO
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_1FA061
 	goto LittlerootTown_ProfessorBirchsLab_EventScript_1FA1AE
 	end
@@ -348,7 +348,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_1FA0A1:: @ 81FA0A1
 	call LittlerootTown_ProfessorBirchsLab_EventScript_1FA24F
 	removeobject 4
 	msgbox gText_NicknameThisPokemon, MSGBOX_YESNO
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_1FA0FD
 	call Common_EventScript_GetGiftMonPartySlot
 	call Common_EventScript_NameReceivedPartyMon
@@ -359,7 +359,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_1FA0CC:: @ 81FA0CC
 	call LittlerootTown_ProfessorBirchsLab_EventScript_1FA24F
 	removeobject 4
 	msgbox gText_NicknameThisPokemon, MSGBOX_YESNO
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_1FA0F2
 	call Common_EventScript_NameReceivedBoxMon
 	goto LittlerootTown_ProfessorBirchsLab_EventScript_1FA0F2
@@ -393,7 +393,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_1FA142:: @ 81FA142
 	call LittlerootTown_ProfessorBirchsLab_EventScript_1FA24F
 	removeobject 5
 	msgbox gText_NicknameThisPokemon, MSGBOX_YESNO
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_1FA19E
 	call Common_EventScript_GetGiftMonPartySlot
 	call Common_EventScript_NameReceivedPartyMon
@@ -404,7 +404,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_1FA16D:: @ 81FA16D
 	call LittlerootTown_ProfessorBirchsLab_EventScript_1FA24F
 	removeobject 5
 	msgbox gText_NicknameThisPokemon, MSGBOX_YESNO
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_1FA193
 	call Common_EventScript_NameReceivedBoxMon
 	goto LittlerootTown_ProfessorBirchsLab_EventScript_1FA193
@@ -438,7 +438,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_1FA1E3:: @ 81FA1E3
 	call LittlerootTown_ProfessorBirchsLab_EventScript_1FA24F
 	removeobject 6
 	msgbox gText_NicknameThisPokemon, MSGBOX_YESNO
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_1FA23F
 	call Common_EventScript_GetGiftMonPartySlot
 	call Common_EventScript_NameReceivedPartyMon
@@ -449,7 +449,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_1FA20E:: @ 81FA20E
 	call LittlerootTown_ProfessorBirchsLab_EventScript_1FA24F
 	removeobject 6
 	msgbox gText_NicknameThisPokemon, MSGBOX_YESNO
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_1FA234
 	call Common_EventScript_NameReceivedBoxMon
 	goto LittlerootTown_ProfessorBirchsLab_EventScript_1FA234

@@ -13,7 +13,7 @@ LilycoveCity_DepartmentStore_1F_EventScript_21F69C:: @ 821F69C
 	goto_if_ne LilycoveCity_DepartmentStore_1F_EventScript_21F7F7
 	goto_if_set FLAG_DAILY_PICKED_LOTO_TICKET, LilycoveCity_DepartmentStore_1F_EventScript_21F78D
 	msgbox LilycoveCity_DepartmentStore_1F_Text_2A6390, MSGBOX_YESNO
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq LilycoveCity_DepartmentStore_1F_EventScript_21F797
 	setflag FLAG_DAILY_PICKED_LOTO_TICKET
 	message LilycoveCity_DepartmentStore_1F_Text_2A64C8

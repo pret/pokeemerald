@@ -10,7 +10,7 @@ PacifidlogTown_House3_EventScript_203C11:: @ 8203C11
 	specialvar VAR_RESULT, GetInGameTradeSpeciesInfo
 	copyvar VAR_0x8009, VAR_RESULT
 	msgbox PacifidlogTown_House3_Text_203CBE, MSGBOX_YESNO
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq PacifidlogTown_House3_EventScript_203C93
 	special ChoosePartyMon
 	waitstate

@@ -103,9 +103,9 @@ MauvilleCity_EventScript_1DF452:: @ 81DF452
 	end
 
 MauvilleCity_EventScript_1DF4AD:: @ 81DF4AD
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, YES
 	call_if_eq MauvilleCity_EventScript_1DF63A
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq MauvilleCity_EventScript_1DF683
 	closemessage
 	switch VAR_FACING
