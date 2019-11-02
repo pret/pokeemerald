@@ -890,7 +890,7 @@ RecordCorner_EventScript_AlreadyMixed:: @ 82774E0
 
 EventScript_ConfirmLeaveTradeRoom:: @ 82774EF
 	msgbox Text_TerminateLinkConfirmation, MSGBOX_YESNO
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, YES
 	goto_if_eq EventScript_TerminateLink
 	erasebox 0, 0, 29, 19
 	releaseall
@@ -1005,7 +1005,7 @@ CableClub_EventScript_WirelessClubAttendant:: @ 8277672
 	faceplayer
 	goto_if_unset FLAG_SYS_POKEDEX_GET, CableClub_EventScript_WirelessClubAdjustements
 	msgbox CableClub_Text_AskAboutLinking, MSGBOX_YESNO
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq CableClub_EventScript_DontAskAboutLinking
 	msgbox CableClub_Text_ExplainWirelessClub, MSGBOX_DEFAULT
 	release
@@ -1080,7 +1080,7 @@ CableClub_EventScript_DirectCornerHasRecordMix:: @ 82777CB
 
 CableClub_EventScript_WirelessTrade:: @ 827780D
 	msgbox CableClub_Text_TradePokemon, MSGBOX_YESNO
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq CableClub_EventScript_AbortLink
 	call CableClub_EventScript_CheckPartyTradeRequirements
 	compare VAR_RESULT, 0
@@ -1132,7 +1132,7 @@ CableClub_EventScript_WirelessBattleInfo:: @ 82778CB
 
 CableClub_EventScript_WirelessRecordMix:: @ 82778D9
 	msgbox CableClub_Text_AccessRecordCorner, MSGBOX_YESNO
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq CableClub_EventScript_AbortLink
 	setvar VAR_0x8004, 12
 	goto CableClub_EventScript_SaveAndChooseLinkLeader
@@ -1140,7 +1140,7 @@ CableClub_EventScript_WirelessRecordMix:: @ 82778D9
 
 CableClub_EventScript_WirelessBerryCrush:: @ 82778F7
 	msgbox CableClub_Text_UseBerryCrush, MSGBOX_YESNO
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq CableClub_EventScript_AbortLink
 	special HasAtLeastOneBerry
 	compare VAR_RESULT, FALSE
@@ -1500,7 +1500,7 @@ MossdeepCity_GameCorner_1F_EventScript_AdapterNotConnected:: @ 8277E48
 
 MossdeepCity_GameCorner_1F_EventScript_DontHaveRequiredMon:: @ 8277E55
 	msgbox MossdeepCity_GameCorner_1F_Text_ExplainRequiredMon, MSGBOX_YESNO
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq MossdeepCity_GameCorner_1F_EventScript_AbortMinigame
 	compare VAR_0x8005, 0
 	call_if_eq MossdeepCity_GameCorner_1F_EventScript_ExplainPokemonJumpRequirements

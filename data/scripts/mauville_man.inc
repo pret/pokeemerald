@@ -13,9 +13,9 @@ MauvilleCity_PokemonCenter_1F_EventScript_Bard:: @ 828E0A6
 	lock
 	faceplayer
 	msgbox MauvilleCity_PokemonCenter_1F_Text_WouldYouLikeToHearMySong, MSGBOX_YESNO
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, YES
 	goto_if_eq MauvilleCity_PokemonCenter_1F_EventScript_PlaySong
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq MauvilleCity_PokemonCenter_1F_EventScript_DeclineSong
 	end
 
@@ -37,9 +37,9 @@ MauvilleCity_PokemonCenter_1F_EventScript_DeclineSong:: @ 828E0EA
 
 MauvilleCity_PokemonCenter_1F_EventScript_AskToWriteLyrics:: @ 828E0F4
 	msgbox MauvilleCity_PokemonCenter_1F_Text_WouldYouLikeToWriteSomeLyrics, MSGBOX_YESNO
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, YES
 	goto_if_eq MauvilleCity_PokemonCenter_1F_EventScript_WriteLyrics
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq MauvilleCity_PokemonCenter_1F_EventScript_DeclineWritingLyrics
 	end
 
@@ -55,7 +55,7 @@ MauvilleCity_PokemonCenter_1F_EventScript_WriteLyrics:: @ 828E113
 	special ScrSpecial_PlayBardSong
 	delay 60
 	msgbox MauvilleCity_PokemonCenter_1F_Text_ThatHowYouWantedSongToGo, MSGBOX_YESNO
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq MauvilleCity_PokemonCenter_1F_EventScript_WriteLyrics
 	special ScrSpecial_SaveBardSongLyrics
 	msgbox MauvilleCity_PokemonCenter_1F_Text_IllSingThisSongForAWhile, MSGBOX_DEFAULT
@@ -158,7 +158,7 @@ MauvilleCity_PokemonCenter_1F_EventScript_Trader:: @ 828E4D4
 	lock
 	faceplayer
 	msgbox MauvilleCity_PokemonCenter_1F_Text_WantToTradeDecor, MSGBOX_YESNO
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq MauvilleCity_PokemonCenter_1F_EventScript_DeclineTrade
 	special ScrSpecial_GetTraderTradedFlag
 	compare VAR_RESULT, TRUE
@@ -186,7 +186,7 @@ MauvilleCity_PokemonCenter_1F_EventScript_PickDecorToReceive:: @ 828E517
 	compare VAR_0x8004, 0xFFFF
 	goto_if_eq MauvilleCity_PokemonCenter_1F_EventScript_InvalidDecor
 	msgbox MauvilleCity_PokemonCenter_1F_Text_OnceBelongedToPlayerDoYouWantIt, MSGBOX_YESNO
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq MauvilleCity_PokemonCenter_1F_EventScript_PickDifferentDecor
 	special ScrSpecial_DoesPlayerHaveNoDecorations
 	compare VAR_RESULT, TRUE
@@ -228,7 +228,7 @@ MauvilleCity_PokemonCenter_1F_EventScript_PickDecorToGive:: @ 828E584
 	compare VAR_RESULT, TRUE
 	goto_if_eq MauvilleCity_PokemonCenter_1F_EventScript_NoRoomForDecor
 	msgbox MauvilleCity_PokemonCenter_1F_Text_SoWellTradeTheseDecor, MSGBOX_YESNO
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq MauvilleCity_PokemonCenter_1F_EventScript_PickDecorToGive
 	special ScrSpecial_TraderDoDecorationTrade
 	msgbox MauvilleCity_PokemonCenter_1F_Text_SendDecorToYourPC, MSGBOX_DEFAULT
@@ -815,7 +815,7 @@ MauvilleCity_PokemonCenter_1F_EventScript_Storyteller:: @ 829014A
 	setvar VAR_0x800A, 0
 	setvar VAR_0x800B, 0
 	msgbox MauvilleCity_PokemonCenter_1F_Text_WillYouHearMyTale, MSGBOX_YESNO
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq MauvilleCity_PokemonCenter_1F_EventScript_DeclineStoryteller
 	specialvar VAR_RESULT, ScrSpecial_StorytellerGetFreeStorySlot
 	compare VAR_RESULT, 0
@@ -850,7 +850,7 @@ MauvilleCity_PokemonCenter_1F_EventScript_KnowNoTales:: @ 82901DA
 	msgbox MauvilleCity_PokemonCenter_1F_Text_IKnowNoTales, MSGBOX_DEFAULT
 MauvilleCity_PokemonCenter_1F_EventScript_DoYouHaveAnyTales:: @ 82901E2
 	msgbox MauvilleCity_PokemonCenter_1F_Text_HaveYouAnyLegendaryTales, MSGBOX_YESNO
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq MauvilleCity_PokemonCenter_1F_EventScript_DeclineStoryteller
 	specialvar VAR_RESULT, ScrSpecial_StorytellerInitializeRandomStat
 	compare VAR_RESULT, 1
@@ -901,9 +901,9 @@ MauvilleCity_PokemonCenter_1F_EventScript_Giddy:: @ 82902F6
 	lock
 	faceplayer
 	msgbox MauvilleCity_PokemonCenter_1F_Text_HearMyStory, MSGBOX_YESNO
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, YES
 	goto_if_eq MauvilleCity_PokemonCenter_1F_EventScript_TryTellTale
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq MauvilleCity_PokemonCenter_1F_EventScript_DeclineGiddy
 	end
 

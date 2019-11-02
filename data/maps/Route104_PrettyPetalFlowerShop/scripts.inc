@@ -21,18 +21,18 @@ Route104_PrettyPetalFlowerShop_EventScript_ShopOwner:: @ 822A373
 	goto_if_set FLAG_MET_PRETTY_PETAL_SHOP_OWNER, Route104_PrettyPetalFlowerShop_EventScript_AlreadyMet
 	setflag FLAG_MET_PRETTY_PETAL_SHOP_OWNER
 	msgbox Route104_PrettyPetalFlowerShop_Text_IntroLearnAboutBerries, MSGBOX_YESNO
-	compare VAR_RESULT, TRUE
+	compare VAR_RESULT, YES
 	call_if_eq Route104_PrettyPetalFlowerShop_EventScript_ExplainBerries
-	compare VAR_RESULT, FALSE
+	compare VAR_RESULT, NO
 	call_if_eq Route104_PrettyPetalFlowerShop_EventScript_DontExplainBerries
 	release
 	end
 
 Route104_PrettyPetalFlowerShop_EventScript_AlreadyMet:: @ 822A3B2
 	msgbox Route104_PrettyPetalFlowerShop_Text_LearnAboutBerries, MSGBOX_YESNO
-	compare VAR_RESULT, TRUE
+	compare VAR_RESULT, YES
 	call_if_eq Route104_PrettyPetalFlowerShop_EventScript_ExplainBerries
-	compare VAR_RESULT, FALSE
+	compare VAR_RESULT, NO
 	call_if_eq Route104_PrettyPetalFlowerShop_EventScript_DontExplainBerries
 	release
 	end

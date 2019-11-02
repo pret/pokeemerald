@@ -71,9 +71,9 @@ BattleFrontier_BattleDomePreBattleRoom_EventScript_24B33F:: @ 824B33F
 BattleFrontier_BattleDomePreBattleRoom_EventScript_24B349:: @ 824B349
 	msgbox BattleFrontier_BattleDomePreBattleRoom_Text_24BA69, MSGBOX_YESNO
 	switch VAR_RESULT
-	case 0, BattleFrontier_BattleDomePreBattleRoom_EventScript_24B24F
-	case 1, BattleFrontier_BattleDomePreBattleRoom_EventScript_24B3BB
-	case 127, BattleFrontier_BattleDomePreBattleRoom_EventScript_24B24F
+	case NO, BattleFrontier_BattleDomePreBattleRoom_EventScript_24B24F
+	case YES, BattleFrontier_BattleDomePreBattleRoom_EventScript_24B3BB
+	case MULTI_B_PRESSED, BattleFrontier_BattleDomePreBattleRoom_EventScript_24B24F
 
 BattleFrontier_BattleDomePreBattleRoom_EventScript_24B377:: @ 824B377
 	message BattleFrontier_BattleDomePreBattleRoom_Text_24BA93

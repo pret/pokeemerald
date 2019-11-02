@@ -37,7 +37,7 @@ MossdeepCity_SpaceCenter_2F_EventScript_ThreeMagmaGrunts:: @ 8223DBF
 	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_Delay48
 	waitmovement 0
 	msgbox MossdeepCity_SpaceCenter_2F_Text_YoureOutnumberedTakeUsOn, MSGBOX_YESNO
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, YES
 	goto_if_eq MossdeepCity_SpaceCenter_2F_EventScript_BattleThreeMagmaGrunts
 	msgbox MossdeepCity_SpaceCenter_2F_Text_GoodAnswer, MSGBOX_DEFAULT
 	closemessage
@@ -235,7 +235,7 @@ MossdeepCity_SpaceCenter_2F_EventScript_ReadyForBattlePrompt:: @ 8223FDA
 	applymovement VAR_LAST_TALKED, Common_Movement_FacePlayer
 	waitmovement 0
 	msgbox MossdeepCity_SpaceCenter_2F_Text_StevenAreYouReadyToBattle, MSGBOX_YESNO
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, YES
 	goto_if_eq MossdeepCity_SpaceCenter_2F_EventScript_ChoosePartyForMultiBattle
 	msgbox MossdeepCity_SpaceCenter_2F_Text_StevenHurryGetReadyQuickly, MSGBOX_DEFAULT
 	closemessage

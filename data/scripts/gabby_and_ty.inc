@@ -305,7 +305,7 @@ GabbyAndTy_EventScript_RequestInterviewLostAMon:: @ 828D099
 	end
 
 GabbyAndTy_EventScript_Interview:: @ 828D0A7
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq GabbyAndTy_EventScript_DontGiveUpKeepingEyeOut
 	msgbox GabbyAndTy_Text_DescribeYourFeelings, MSGBOX_DEFAULT
 	setvar VAR_0x8004, EASY_CHAT_TYPE_GABBY_AND_TY

@@ -116,7 +116,7 @@ Route104_EventScript_1ECD4B:: @ 81ECD4B
 	waitmovement 0
 	copyobjectxytoperm 34
 	msgbox Route104_Text_1EDCED, MSGBOX_YESNO
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, YES
 	goto_if_eq Route104_EventScript_1ECDED
 	msgbox Route104_Text_1EDD2A, MSGBOX_DEFAULT
 	call Route104_EventScript_1ECE31
@@ -139,7 +139,7 @@ Route104_Movement_1ECDCD: @ 81ECDCD
 
 Route104_EventScript_1ECDD0:: @ 81ECDD0
 	msgbox Route104_Text_1EDD9F, MSGBOX_YESNO
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, YES
 	goto_if_eq Route104_EventScript_1ECDED
 	msgbox Route104_Text_1EDD2A, MSGBOX_DEFAULT
 	releaseall
@@ -205,7 +205,7 @@ Route104_EventScript_1ECE6F:: @ 81ECE6F
 	waitmovement 0
 	copyobjectxytoperm 34
 	msgbox Route104_Text_1EE009, MSGBOX_YESNO
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, YES
 	goto_if_eq Route104_EventScript_1ECF09
 	msgbox Route104_Text_1EE04D, MSGBOX_DEFAULT
 	call Route104_EventScript_1ECE31
@@ -214,7 +214,7 @@ Route104_EventScript_1ECE6F:: @ 81ECE6F
 
 Route104_EventScript_1ECEEC:: @ 81ECEEC
 	msgbox Route104_Text_1EE094, MSGBOX_YESNO
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, YES
 	goto_if_eq Route104_EventScript_1ECF09
 	msgbox Route104_Text_1EE04D, MSGBOX_DEFAULT
 	releaseall

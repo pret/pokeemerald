@@ -151,7 +151,7 @@ MauvilleCity_GameCorner_EventScript_20FD83:: @ 820FD83
 
 MauvilleCity_GameCorner_EventScript_20FD91:: @ 820FD91
 	msgbox MauvilleCity_GameCorner_Text_210705, MSGBOX_YESNO
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq MauvilleCity_GameCorner_EventScript_20FE92
 	switch VAR_TEMP_1
 	case 1, MauvilleCity_GameCorner_EventScript_20FDCB
@@ -290,7 +290,7 @@ MauvilleCity_GameCorner_EventScript_20FF77:: @ 820FF77
 MauvilleCity_GameCorner_EventScript_20FF8A:: @ 820FF8A
 	special BufferTMHMMoveName
 	msgbox MauvilleCity_GameCorner_Text_210629, MSGBOX_YESNO
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq MauvilleCity_GameCorner_EventScript_210118
 	switch VAR_TEMP_1
 	case 1, MauvilleCity_GameCorner_EventScript_20FFDD
@@ -404,7 +404,7 @@ MauvilleCity_GameCorner_EventScript_210137:: @ 8210137
 	faceplayer
 	goto_if_set FLAG_RECEIVED_STARTER_DOLL, MauvilleCity_GameCorner_EventScript_210213
 	msgbox MauvilleCity_GameCorner_Text_210750, MSGBOX_YESNO
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq MauvilleCity_GameCorner_EventScript_210209
 	switch VAR_STARTER_MON
 	case 0, MauvilleCity_GameCorner_EventScript_21017C

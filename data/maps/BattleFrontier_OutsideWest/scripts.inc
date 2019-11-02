@@ -35,7 +35,7 @@ BattleFrontier_OutsideWest_EventScript_23D44E:: @ 823D44E
 
 BattleFrontier_OutsideWest_EventScript_23D458:: @ 823D458
 	msgbox BattleFrontier_OutsideWest_Text_23D8F2, MSGBOX_YESNO
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq BattleFrontier_OutsideWest_EventScript_23D4AE
 	msgbox BattleFrontier_OutsideWest_Text_23D94B, MSGBOX_DEFAULT
 	call BattleFrontier_OutsideWest_EventScript_23D4BA
@@ -46,7 +46,7 @@ BattleFrontier_OutsideWest_EventScript_23D458:: @ 823D458
 
 BattleFrontier_OutsideWest_EventScript_23D483:: @ 823D483
 	msgbox BattleFrontier_OutsideWest_Text_23D90E, MSGBOX_YESNO
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq BattleFrontier_OutsideWest_EventScript_23D4AE
 	msgbox BattleFrontier_OutsideWest_Text_23D94B, MSGBOX_DEFAULT
 	call BattleFrontier_OutsideWest_EventScript_23D4BA

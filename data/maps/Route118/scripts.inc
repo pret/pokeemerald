@@ -30,9 +30,9 @@ Route118_EventScript_1F3E14:: @ 81F3E14
 	faceplayer
 	goto_if_set FLAG_RECEIVED_GOOD_ROD, Route118_EventScript_1F3E69
 	msgbox Route118_Text_1F427B, MSGBOX_YESNO
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, YES
 	goto_if_eq Route118_EventScript_1F3E3E
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq Route118_EventScript_1F3E5F
 	end
 

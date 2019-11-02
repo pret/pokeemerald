@@ -64,7 +64,7 @@ FortreeCity_EventScript_1E2614:: @ 81E2614
 
 FortreeCity_EventScript_1E2630:: @ 81E2630
 	msgbox FortreeCity_Text_1E2A08, MSGBOX_YESNO
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, YES
 	goto_if_eq FortreeCity_EventScript_1E2645
 	release
 	end

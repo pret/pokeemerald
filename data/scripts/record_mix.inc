@@ -3,9 +3,9 @@ EventScript_MixRecordsPrompt:: @ 8271D5E
 	lock
 	faceplayer
 	msgbox Text_WouldYouLikeToMixRecords, MSGBOX_YESNO
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, YES
 	goto_if_eq EventScript_MixRecords
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq EventScript_DeclineMixRecords
 	goto EventScript_DeclineMixRecords
 

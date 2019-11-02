@@ -852,7 +852,7 @@ SlateportCity_EventScript_1DD54A:: @ 81DD54A
 
 SlateportCity_EventScript_1DD557:: @ 81DD557
 	msgbox SlateportCity_Text_1DEE90, MSGBOX_YESNO
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq SlateportCity_EventScript_1DD3CA
 	copyvar VAR_0x8004, VAR_0x8009
 	specialvar VAR_RESULT, HasEnoughBerryPowder
@@ -865,7 +865,7 @@ SlateportCity_EventScript_1DD557:: @ 81DD557
 	special TakeBerryPowder
 	special PrintPlayerBerryPowderAmount
 	msgbox SlateportCity_Text_1DEEF7, MSGBOX_YESNO
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, YES
 	goto_if_eq SlateportCity_EventScript_1DD3CA
 	msgbox SlateportCity_Text_1DEF79, MSGBOX_DEFAULT
 	special RemoveBerryPowderVendorMenu

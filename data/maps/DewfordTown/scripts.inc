@@ -42,7 +42,7 @@ DewfordTown_EventScript_1E957A:: @ 81E957A
 
 DewfordTown_EventScript_1E9585:: @ 81E9585
 	msgbox DewfordTown_Text_1E9B24, MSGBOX_YESNO
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, YES
 	goto_if_eq DewfordTown_EventScript_1E95A2
 	msgbox DewfordTown_Text_1E9BD9, MSGBOX_DEFAULT
 	release
@@ -75,9 +75,9 @@ DewfordTown_EventScript_1E95D5:: @ 81E95D5
 	faceplayer
 	goto_if_set FLAG_RECEIVED_OLD_ROD, DewfordTown_EventScript_1E962A
 	msgbox DewfordTown_Text_1E9DD1, MSGBOX_YESNO
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, YES
 	goto_if_eq DewfordTown_EventScript_1E95FF
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq DewfordTown_EventScript_1E9620
 	end
 
@@ -595,9 +595,9 @@ DewfordTown_EventScript_1E9922:: @ 81E9922
 	faceplayer
 	call DewfordTown_EventScript_271E8B
 	msgbox DewfordTown_Text_1EA136, MSGBOX_YESNO
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, YES
 	goto_if_eq DewfordTown_EventScript_1E9948
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq DewfordTown_EventScript_1E9952
 	end
 

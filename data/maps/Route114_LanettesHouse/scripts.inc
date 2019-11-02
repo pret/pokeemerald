@@ -27,7 +27,7 @@ Route114_LanettesHouse_EventScript_22B2FF:: @ 822B2FF
 Route114_LanettesHouse_EventScript_22B309:: @ 822B309
 	lockall
 	msgbox Route114_LanettesHouse_Text_22B485, MSGBOX_YESNO
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, YES
 	goto_if_eq Route114_LanettesHouse_EventScript_22B327
 	msgbox Route114_LanettesHouse_Text_22B6E4, MSGBOX_DEFAULT
 	releaseall
@@ -35,7 +35,7 @@ Route114_LanettesHouse_EventScript_22B309:: @ 822B309
 
 Route114_LanettesHouse_EventScript_22B327:: @ 822B327
 	msgbox Route114_LanettesHouse_Text_22B53C, MSGBOX_YESNO
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, YES
 	call_if_eq Route114_LanettesHouse_EventScript_22B33C
 	releaseall
 	end
