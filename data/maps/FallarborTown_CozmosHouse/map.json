@@ -24,7 +24,7 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "FallarborTown_CozmosHouse_EventScript_200F13",
+      "script": "FallarborTown_CozmosHouse_EventScript_ProfCozmo",
       "flag": "FLAG_HIDE_FALLARBOR_HOUSE_PROF_COZMO"
     },
     {
@@ -37,7 +37,7 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "FallarborTown_CozmosHouse_EventScript_200FBC",
+      "script": "FallarborTown_CozmosHouse_EventScript_CozmosWife",
       "flag": "0"
     }
   ],
