@@ -7,7 +7,8 @@ PacifidlogTown_PokemonCenter_1F_OnTransition: @ 82034B2
 	setrespawn HEAL_LOCATION_PACIFIDLOG_TOWN
 	end
 
-PacifidlogTown_PokemonCenter_1F_EventScript_2034B6:: @ 82034B6
+@ VAR_0x800B is the Nurse's object event id
+PacifidlogTown_PokemonCenter_1F_EventScript_Nurse:: @ 82034B6
 	setvar VAR_0x800B, 1
 	call Common_EventScript_PkmnCenterNurse
 	waitmessage
@@ -15,29 +16,29 @@ PacifidlogTown_PokemonCenter_1F_EventScript_2034B6:: @ 82034B6
 	release
 	end
 
-PacifidlogTown_PokemonCenter_1F_EventScript_2034C4:: @ 82034C4
-	msgbox PacifidlogTown_PokemonCenter_1F_Text_2034DF, MSGBOX_NPC
+PacifidlogTown_PokemonCenter_1F_EventScript_Girl:: @ 82034C4
+	msgbox PacifidlogTown_PokemonCenter_1F_Text_WhatColorTrainerCard, MSGBOX_NPC
 	end
 
-PacifidlogTown_PokemonCenter_1F_EventScript_2034CD:: @ 82034CD
-	msgbox PacifidlogTown_PokemonCenter_1F_Text_20350F, MSGBOX_NPC
+PacifidlogTown_PokemonCenter_1F_EventScript_Woman:: @ 82034CD
+	msgbox PacifidlogTown_PokemonCenter_1F_Text_OnColonyOfCorsola, MSGBOX_NPC
 	end
 
-PacifidlogTown_PokemonCenter_1F_EventScript_2034D6:: @ 82034D6
-	msgbox PacifidlogTown_PokemonCenter_1F_Text_20356F, MSGBOX_NPC
+PacifidlogTown_PokemonCenter_1F_EventScript_OldMan:: @ 82034D6
+	msgbox PacifidlogTown_PokemonCenter_1F_Text_AncestorsLivedOnBoats, MSGBOX_NPC
 	end
 
-PacifidlogTown_PokemonCenter_1F_Text_2034DF: @ 82034DF
+PacifidlogTown_PokemonCenter_1F_Text_WhatColorTrainerCard: @ 82034DF
 	.string "What color is your TRAINER CARD?\n"
 	.string "Mine's copper!$"
 
-PacifidlogTown_PokemonCenter_1F_Text_20350F: @ 820350F
+PacifidlogTown_PokemonCenter_1F_Text_OnColonyOfCorsola: @ 820350F
 	.string "PACIFIDLOG TOWN floats on top of\n"
 	.string "a colony of CORSOLA.\p"
 	.string "If I told you that, would you believe\n"
 	.string "me?$"
 
-PacifidlogTown_PokemonCenter_1F_Text_20356F: @ 820356F
+PacifidlogTown_PokemonCenter_1F_Text_AncestorsLivedOnBoats: @ 820356F
 	.string "The ancestors of the people in\n"
 	.string "PACIFIDLOG were said to have been\l"
 	.string "born on boats and then lived and died \l"

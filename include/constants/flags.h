@@ -1033,7 +1033,7 @@
 #define FLAG_HIDE_ROUTE_119_KECLEON_2                               0x3DE
 #define FLAG_HIDE_ROUTE_101_BOY                                     0x3DF
 #define FLAG_HIDE_WEATHER_INSTITUTE_2F_AQUA_GRUNT_M                 0x3E0
-#define FLAG_HIDE_LILYCOVE_POKEMON_CENTER_LADY                      0x3E1
+#define FLAG_HIDE_LILYCOVE_POKEMON_CENTER_CONTEST_LADY_MON          0x3E1
 #define FLAG_HIDE_MT_CHIMNEY_LAVA_COOKIE_LADY                       0x3E2
 #define FLAG_HIDE_PETALBURG_CITY_SCOTT                              0x3E3
 #define FLAG_HIDE_SOOTOPOLIS_CITY_RAYQUAZA                          0x3E4
