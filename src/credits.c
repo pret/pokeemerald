@@ -128,16 +128,17 @@ enum
     TDE_TASK_A_ID = 2,
 };
 
-struct Unk201C000
+#define NUM_PKMN_SLIDES 71
+struct CreditsData
 {
-    u16 unk0[71];
-    u16 unk8E;
-    u16 unk90;
-    u16 unk92;
-    u16 unk94;
-    u16 unk96[NATIONAL_DEX_COUNT];
-    u16 unk39A;
-    u16 unk39C[7];
+    u16 pkmnToShow[NUM_PKMN_SLIDES]; // List of Pokemon species ids that will show during the credits
+    u16 imgCounter; //how many mon images have been shown
+    u16 nextImgPos; //if the next image spawns left/center/right
+    u16 currShownPkmn; //index into pkmnToShow
+    u16 numPkmnToShow; //number of pokemon to show, always NUM_PKMN_SLIDES after determine function
+    u16 caughtPkmnIds[NATIONAL_DEX_COUNT]; //temporary location to hold a condensed array of all caught pokemon
+    u16 numCaughtPkmn; //count of filled spaces in caughtPkmnIds
+    u16 unk39C[7]; // unused padding?
 };
 
 struct CreditsEntry
@@ -151,7 +152,7 @@ static EWRAM_DATA s16 gUnknown_0203BCE0 = 0;
 static EWRAM_DATA u16 gUnknown_0203BCE2 = 0; // TASK A
 EWRAM_DATA bool8 gHasHallOfFameRecords = 0;
 static EWRAM_DATA u8 gUnknown_0203BCE5 = 0;
-static EWRAM_DATA struct Unk201C000 *gUnknown_0203BCE8 = {0};
+static EWRAM_DATA struct CreditsData *sCreditsData = {0};
 
 static const u16 gUnknown_085E56F0[][16] =
 {
@@ -959,7 +960,7 @@ static const struct WindowTemplate sWindowTemplates[] =
     },
     DUMMY_WIN_TEMPLATE,
 };
-static const u8 gUnknown_085E6F7C[][2] =
+static const u8 sMonSpritePos[][2] =
 {
     {104, 36},
     {120, 36},
@@ -1127,8 +1128,8 @@ static void LoadTheEndScreen(u16, u16, u16);
 static void sub_8176E40(u16 arg0, u16 palette);
 static void sub_8176EE8(struct Sprite *sprite);
 static void sub_8176F90(struct Sprite *sprite);
-static u8 sub_8177224(u16 species, s16 x, s16 y, u16 position);
-static void sub_8177388(void);
+static u8 MakeMonSprite(u16 species, s16 x, s16 y, u16 position);
+static void DeterminePokemonToShow(void);
 
 static void CreditsVBlankCallback(void)
 {
@@ -1241,13 +1242,13 @@ void CB2_StartCreditsSequence(void)
     m4aSongNumStart(MUS_THANKFOR);
     SetMainCallback2(CB2_RunCreditsSequence);
     gUnknown_0203BCE5 = 0;
-    gUnknown_0203BCE8 = AllocZeroed(sizeof(struct Unk201C000));
+    sCreditsData = AllocZeroed(sizeof(struct CreditsData));
 
-    sub_8177388();
+    DeterminePokemonToShow();
 
-    gUnknown_0203BCE8->unk8E = 0;
-    gUnknown_0203BCE8->unk90 = 0;
-    gUnknown_0203BCE8->unk92 = 0;
+    sCreditsData->imgCounter = 0;
+    sCreditsData->nextImgPos = 0;
+    sCreditsData->currShownPkmn = 0;
 
     gUnknown_0203BCE2 = taskIdA;
 }
@@ -1604,7 +1605,7 @@ static void sub_8175DA0(u8 taskIdB)
         gTasks[gTasks[taskIdB].data[TDB_TASK_A_ID]].data[TDA_4] = 1;
         DestroyTask(taskIdB);
         sub_81755A4();
-        FREE_AND_SET_NULL(gUnknown_0203BCE8);
+        FREE_AND_SET_NULL(sCreditsData);
         return;
     }
 }
@@ -1683,29 +1684,29 @@ static void sub_81760FC(u8 taskIdD)
     case 0:
         break;
     case 1:
-        if (gUnknown_0203BCE8->unk90 == 0 && gTasks[gTasks[taskIdD].data[TDD_TASK_A_ID]].data[TDA_14] == 0)
+        if (sCreditsData->nextImgPos == 0 && gTasks[gTasks[taskIdD].data[TDD_TASK_A_ID]].data[TDA_14] == 0)
             break;
         gTasks[taskIdD].data[TDD_STATE]++;
         break;
     case 2:
-        if (gUnknown_0203BCE8->unk8E == 71 || gTasks[gTasks[taskIdD].data[TDD_TASK_A_ID]].func != Task_ProgressCreditTasks)
+        if (sCreditsData->imgCounter == NUM_PKMN_SLIDES || gTasks[gTasks[taskIdD].data[TDD_TASK_A_ID]].func != Task_ProgressCreditTasks)
             break;
-        r2 = sub_8177224(gUnknown_0203BCE8->unk0[gUnknown_0203BCE8->unk92], gUnknown_085E6F7C[gUnknown_0203BCE8->unk90][0], gUnknown_085E6F7C[gUnknown_0203BCE8->unk90][1], gUnknown_0203BCE8->unk90);
-        if (gUnknown_0203BCE8->unk92 < gUnknown_0203BCE8->unk94 - 1)
+        r2 = MakeMonSprite(sCreditsData->pkmnToShow[sCreditsData->currShownPkmn], sMonSpritePos[sCreditsData->nextImgPos][0], sMonSpritePos[sCreditsData->nextImgPos][1], sCreditsData->nextImgPos);
+        if (sCreditsData->currShownPkmn < sCreditsData->numPkmnToShow - 1)
         {
-            gUnknown_0203BCE8->unk92++;
+            sCreditsData->currShownPkmn++;
             gSprites[r2].data[3] = 50;
         }
         else
         {
-            gUnknown_0203BCE8->unk92 = 0;
+            sCreditsData->currShownPkmn = 0;
             gSprites[r2].data[3] = 512;
         }
-        gUnknown_0203BCE8->unk8E++;
-        if (gUnknown_0203BCE8->unk90 == 2)
-            gUnknown_0203BCE8->unk90 = 0;
+        sCreditsData->imgCounter++;
+        if (sCreditsData->nextImgPos == 2)
+            sCreditsData->nextImgPos = 0;
         else
-            gUnknown_0203BCE8->unk90++;
+            sCreditsData->nextImgPos++;
         gTasks[taskIdD].data[TDD_3] = 50;
         gTasks[taskIdD].data[TDD_STATE]++;
         break;
@@ -2256,7 +2257,7 @@ static void sub_8177050(struct Sprite *sprite)
     }
 }
 
-static u8 sub_8177224(u16 nationalDexNum, s16 x, s16 y, u16 position)
+static u8 MakeMonSprite(u16 nationalDexNum, s16 x, s16 y, u16 position)
 {
     u8 spriteId;
     u8 spriteId2;
@@ -2292,73 +2293,86 @@ static void sub_81772B8(struct Sprite *sprite)
     sprite->pos1.y = gSprites[sprite->data[0]].pos1.y;
 }
 
-static void sub_8177388(void)
+static void DeterminePokemonToShow(void)
 {
     u16 starter = SpeciesToNationalPokedexNum(GetStarterPokemon(VarGet(VAR_STARTER_MON)));
     u16 page;
     u16 dexNum;
     u16 j;
-
+    
+    // Go through the Pokedex, and anything that has gotten caught we put into our massive array.
+    // This basically packs all of the caught pokemon into the front of the array
     for (dexNum = 1, j = 0; dexNum < NATIONAL_DEX_COUNT; dexNum++)
     {
         if (GetSetPokedexFlag(dexNum, FLAG_GET_CAUGHT))
         {
-            gUnknown_0203BCE8->unk96[j] = dexNum;
+            sCreditsData->caughtPkmnIds[j] = dexNum;
             j++;
         }
     }
 
+    // Fill the rest of the array with zeroes
     for (dexNum = j; dexNum < NATIONAL_DEX_COUNT; dexNum++)
-        gUnknown_0203BCE8->unk96[dexNum] = 0;
+        sCreditsData->caughtPkmnIds[dexNum] = 0;
 
-    gUnknown_0203BCE8->unk39A = j;
-    if (gUnknown_0203BCE8->unk39A < 71)
-        gUnknown_0203BCE8->unk94 = j;
+    // Cap the number of pokemon we care about to NUM_PKMN_SLIDES, the max we show in the credits scene (-1 for the starter)
+    sCreditsData->numCaughtPkmn = j;
+    if (sCreditsData->numCaughtPkmn < NUM_PKMN_SLIDES)
+        sCreditsData->numPkmnToShow = j;
     else
-        gUnknown_0203BCE8->unk94 = 71;
+        sCreditsData->numPkmnToShow = NUM_PKMN_SLIDES;
 
+    // Loop through our list of caught pokemon and select randomly from it to fill the images to show
     j = 0;
     do
     {
-        page = Random() % gUnknown_0203BCE8->unk39A;
-        gUnknown_0203BCE8->unk0[j] = gUnknown_0203BCE8->unk96[page];
-
+        // Select a random mon, insert into array
+        page = Random() % sCreditsData->numCaughtPkmn;
+        sCreditsData->pkmnToShow[j] = sCreditsData->caughtPkmnIds[page];
+        
+        // Remove the select mon from the array, and condense array entries
         j++;
-        gUnknown_0203BCE8->unk96[page] = 0;
-        gUnknown_0203BCE8->unk39A--;
-        if (page != gUnknown_0203BCE8->unk39A)
+        sCreditsData->caughtPkmnIds[page] = 0;
+        sCreditsData->numCaughtPkmn--;
+        if (page != sCreditsData->numCaughtPkmn)
         {
-            gUnknown_0203BCE8->unk96[page] = gUnknown_0203BCE8->unk96[gUnknown_0203BCE8->unk39A];
-            gUnknown_0203BCE8->unk96[gUnknown_0203BCE8->unk39A] = 0;
+            // Instead of looping through and moving everything down, just take from the end. Order doesn't matter after all.
+            sCreditsData->caughtPkmnIds[page] = sCreditsData->caughtPkmnIds[sCreditsData->numCaughtPkmn];
+            sCreditsData->caughtPkmnIds[sCreditsData->numCaughtPkmn] = 0;
         }
     }
-    while (gUnknown_0203BCE8->unk39A != 0 && j < 71);
+    while (sCreditsData->numCaughtPkmn != 0 && j < NUM_PKMN_SLIDES);
 
-    if (gUnknown_0203BCE8->unk94 < 71)
+    // If we don't have enough pokemon in the dex to fill everything, copy the selected mon into the end of the array, so it loops
+    if (sCreditsData->numPkmnToShow < NUM_PKMN_SLIDES)
     {
-        for (j = gUnknown_0203BCE8->unk94, page = 0; j < 71; j++)
+        for (j = sCreditsData->numPkmnToShow, page = 0; j < NUM_PKMN_SLIDES; j++)
         {
-            gUnknown_0203BCE8->unk0[j] = gUnknown_0203BCE8->unk0[page];
+            sCreditsData->pkmnToShow[j] = sCreditsData->pkmnToShow[page];
 
             page++;
-            if (page == gUnknown_0203BCE8->unk94)
+            if (page == sCreditsData->numPkmnToShow)
                 page = 0;
         }
-        gUnknown_0203BCE8->unk0[70] = starter;
+        // Ensure the last pokemon is our starter
+        sCreditsData->pkmnToShow[NUM_PKMN_SLIDES-1] = starter;
     }
     else
     {
-        for (dexNum = 0; gUnknown_0203BCE8->unk0[dexNum] != starter && dexNum < 71; dexNum++);
+        // Check to see if our starter has already appeared in this list, break if it has
+        for (dexNum = 0; sCreditsData->pkmnToShow[dexNum] != starter && dexNum < NUM_PKMN_SLIDES; dexNum++);
 
-        if (dexNum < gUnknown_0203BCE8->unk94 - 1)
+        // If it has, swap it with the last pokemon, to ensure our starter is the last image
+        if (dexNum < sCreditsData->numPkmnToShow - 1)
         {
-            gUnknown_0203BCE8->unk0[dexNum] = gUnknown_0203BCE8->unk0[70];
-            gUnknown_0203BCE8->unk0[70] = starter;
+            sCreditsData->pkmnToShow[dexNum] = sCreditsData->pkmnToShow[NUM_PKMN_SLIDES-1];
+            sCreditsData->pkmnToShow[NUM_PKMN_SLIDES-1] = starter;
         }
         else
         {
-            gUnknown_0203BCE8->unk0[70] = starter;
+            // Ensure the last pokemon is our starter
+            sCreditsData->pkmnToShow[NUM_PKMN_SLIDES-1] = starter;
         }
     }
-    gUnknown_0203BCE8->unk94 = 71;
+    sCreditsData->numPkmnToShow = NUM_PKMN_SLIDES;
 }
