@@ -24,7 +24,7 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "BattleFrontier_Mart_EventScript_267ACC",
+      "script": "BattleFrontier_Mart_EventScript_Clerk",
       "flag": "0"
     },
     {
@@ -37,7 +37,7 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "BattleFrontier_Mart_EventScript_267B0B",
+      "script": "BattleFrontier_Mart_EventScript_OldWoman",
       "flag": "0"
     },
     {
@@ -50,7 +50,7 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "BattleFrontier_Mart_EventScript_267B02",
+      "script": "BattleFrontier_Mart_EventScript_OldMan",
       "flag": "0"
     },
     {
@@ -63,7 +63,7 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "BattleFrontier_Mart_EventScript_267B20",
+      "script": "BattleFrontier_Mart_EventScript_Boy",
       "flag": "0"
     }
   ],
