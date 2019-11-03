@@ -62,6 +62,6 @@ u8 *GetSavedRamScriptIfValid(void);
 void InitRamScript_NoEventObject(u8 *script, u16 scriptSize);
 
 // srccmd.h
-void sub_809BE48(u16 npcId);
+void SetMovingNpcId(u16 npcId);
 
 #endif // GUARD_SCRIPT_H

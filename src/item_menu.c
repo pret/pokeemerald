@@ -4,6 +4,7 @@
 #include "battle_controllers.h"
 #include "battle_pyramid.h"
 #include "frontier_util.h"
+#include "battle_pyramid_bag.h"
 #include "berry_tag_screen.h"
 #include "bg.h"
 #include "constants/items.h"
@@ -466,9 +467,9 @@ void CB2_BagMenuFromStartMenu(void)
 void sub_81AABB0(void)
 {
     if (!InBattlePyramid())
-        GoToBagMenu(RETURN_LOCATION_BATTLE, POCKETS_COUNT, SetCB2ToReshowScreenAfterMenu2);
+        GoToBagMenu(RETURN_LOCATION_BATTLE, POCKETS_COUNT, CB2_SetUpReshowBattleScreenAfterMenu2);
     else
-        sub_81C4F98(1, SetCB2ToReshowScreenAfterMenu2);
+        GoToBattlePyramidBagMenu(1, CB2_SetUpReshowBattleScreenAfterMenu2);
 }
 
 void CB2_ChooseBerry(void)
@@ -1148,13 +1149,13 @@ u8 GetSwitchBagPocketDirection(void)
     u8 LRKeys;
     if (gBagMenu->unk81B != 0)
         return 0;
-    LRKeys = GetLRKeysState();
-    if ((gMain.newKeys & DPAD_LEFT) || LRKeys == 1)
+    LRKeys = GetLRKeysPressed();
+    if ((gMain.newKeys & DPAD_LEFT) || LRKeys == MENU_L_PRESSED)
     {
         PlaySE(SE_SELECT);
         return 1;
     }
-    if ((gMain.newKeys & DPAD_RIGHT) || LRKeys == 2)
+    if ((gMain.newKeys & DPAD_RIGHT) || LRKeys == MENU_R_PRESSED)
     {
         PlaySE(SE_SELECT);
         return 2;
@@ -1581,7 +1582,7 @@ void Task_HandleOutOfBattleItemMenuInput(u8 taskId)
                 sub_8199134(0, 1);
             }
         }
-        else if ((gMain.newKeys & DPAD_LEFT) || GetLRKeysState() == 1)
+        else if ((gMain.newKeys & DPAD_LEFT) || GetLRKeysPressed() == MENU_L_PRESSED)
         {
             if ((cursorPos & 1) && sub_81ACDFC(cursorPos - 1))
             {
@@ -1589,7 +1590,7 @@ void Task_HandleOutOfBattleItemMenuInput(u8 taskId)
                 sub_8199134(-1, 0);
             }
         }
-        else if ((gMain.newKeys & DPAD_RIGHT) || GetLRKeysState() == 2)
+        else if ((gMain.newKeys & DPAD_RIGHT) || GetLRKeysPressed() == MENU_R_PRESSED)
         {
             if (!(cursorPos & 1) && sub_81ACDFC(cursorPos + 1))
             {
@@ -1651,7 +1652,7 @@ void ItemMenu_UseOutOfBattle(u8 taskId)
             if (gBagPositionStruct.pocket != BERRIES_POCKET)
                 ItemId_GetFieldFunc(gSpecialVar_ItemId)(taskId);
             else
-                sub_80FDD10(taskId);
+                ItemUseOutOfBattle_Berry(taskId);
         }
     }
 }
@@ -1782,7 +1783,7 @@ void ItemMenu_Give(u8 taskId)
             BagMenu_PrintThereIsNoPokemon(taskId);
         else
         {
-            gBagMenu->mainCallback2 = sub_81B7F60;
+            gBagMenu->mainCallback2 = CB2_ChooseMonToGiveItem;
             unknown_ItemMenu_Confirm(taskId);
         }
     }
@@ -2157,7 +2158,7 @@ void DoWallyTutorialBagMenu(void)
     PrepareBagForWallyTutorial();
     AddBagItem(ITEM_POTION, 1);
     AddBagItem(ITEM_POKE_BALL, 1);
-    GoToBagMenu(RETURN_LOCATION_BATTLE_2, ITEMS_POCKET, SetCB2ToReshowScreenAfterMenu2);
+    GoToBagMenu(RETURN_LOCATION_BATTLE_2, ITEMS_POCKET, CB2_SetUpReshowBattleScreenAfterMenu2);
 }
 
 void Task_WallyTutorialBagMenu(u8 taskId)

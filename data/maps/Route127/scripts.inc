@@ -70,7 +70,7 @@ Route127_EventScript_1F6AD6:: @ 81F6AD6
 	end
 
 Route127_EventScript_1F6B02:: @ 81F6B02
-	special sub_80B4808
+	special PlayerFaceTrainerAfterBattle
 	waitmovement 0
 	msgbox Route127_Text_2A26EE, MSGBOX_DEFAULT
 	register_matchcall TRAINER_KOJI_1

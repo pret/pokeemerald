@@ -169,9 +169,9 @@ FallarborTown_BattleTentLobby_EventScript_20005D:: @ 820005D
 	goto_if_eq FallarborTown_BattleTentLobby_EventScript_2001C2
 	msgbox FallarborTown_BattleTentLobby_Text_2C4B35, MSGBOX_YESNO
 	switch VAR_RESULT
-	case 0, FallarborTown_BattleTentLobby_EventScript_2001C2
-	case 1, FallarborTown_BattleTentLobby_EventScript_2000E2
-	case 127, FallarborTown_BattleTentLobby_EventScript_2001C2
+	case NO, FallarborTown_BattleTentLobby_EventScript_2001C2
+	case YES, FallarborTown_BattleTentLobby_EventScript_2000E2
+	case MULTI_B_PRESSED, FallarborTown_BattleTentLobby_EventScript_2001C2
 
 FallarborTown_BattleTentLobby_EventScript_2000E2:: @ 82000E2
 	setvar VAR_TEMP_0, 0

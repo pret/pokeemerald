@@ -5,7 +5,7 @@ Route118_MapScripts:: @ 81F3DBC
 	.byte 0
 
 Route118_OnTransition: @ 81F3DCC
-	call Route118_EventScript_28CCC7
+	call GabbyAndTy_EventScript_UpdateLocation
 	compare VAR_SHOULD_END_UNUSUAL_WEATHER, 1
 	call_if_eq UnusualWeather_EventScript_HideMapNamePopup
 	compare VAR_UNUSUAL_WEATHER_LOCATION, UNUSUAL_WEATHER_ROUTE_118_EAST
@@ -30,9 +30,9 @@ Route118_EventScript_1F3E14:: @ 81F3E14
 	faceplayer
 	goto_if_set FLAG_RECEIVED_GOOD_ROD, Route118_EventScript_1F3E69
 	msgbox Route118_Text_1F427B, MSGBOX_YESNO
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, YES
 	goto_if_eq Route118_EventScript_1F3E3E
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq Route118_EventScript_1F3E5F
 	end
 
@@ -195,7 +195,7 @@ Route118_EventScript_1F3F87:: @ 81F3F87
 	end
 
 Route118_EventScript_1F3FB3:: @ 81F3FB3
-	special sub_80B4808
+	special PlayerFaceTrainerAfterBattle
 	waitmovement 0
 	msgbox Route118_Text_29D343, MSGBOX_DEFAULT
 	register_matchcall TRAINER_ROSE_1
@@ -227,7 +227,7 @@ Route118_EventScript_1F4017:: @ 81F4017
 	end
 
 Route118_EventScript_1F4043:: @ 81F4043
-	special sub_80B4808
+	special PlayerFaceTrainerAfterBattle
 	waitmovement 0
 	msgbox Route118_Text_29D74A, MSGBOX_DEFAULT
 	register_matchcall TRAINER_DALTON_1

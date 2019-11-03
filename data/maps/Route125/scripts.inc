@@ -55,7 +55,7 @@ Route125_EventScript_1F6800:: @ 81F6800
 	end
 
 Route125_EventScript_1F682C:: @ 81F682C
-	special sub_80B4808
+	special PlayerFaceTrainerAfterBattle
 	waitmovement 0
 	msgbox Route125_Text_2A17CF, MSGBOX_DEFAULT
 	register_matchcall TRAINER_ERNEST_1

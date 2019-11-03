@@ -1,15 +1,15 @@
 Route104_MapScripts:: @ 81ECC32
-	map_script MAP_SCRIPT_ON_FRAME_TABLE, Route104_MapScript2_1ECC3D
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, Route104_OnFrame
 	map_script MAP_SCRIPT_ON_TRANSITION, Route104_OnTransition
 	.byte 0
 
-Route104_MapScript2_1ECC3D: @ 81ECC3D
-	map_script_2 VAR_BOARD_BRINEY_BOAT_STATE, 1, Route104_EventScript_1ECC47
+Route104_OnFrame: @ 81ECC3D
+	map_script_2 VAR_BOARD_BRINEY_BOAT_STATE, 1, Route104_EventScript_StartSailToDewford
 	.2byte 0
 
-Route104_EventScript_1ECC47:: @ 81ECC47
+Route104_EventScript_StartSailToDewford:: @ 81ECC47
 	lockall
-	goto Route104_EventScript_1ED099
+	goto Route104_EventScript_SailToDewford
 	end
 
 Route104_OnTransition: @ 81ECC4E
@@ -116,7 +116,7 @@ Route104_EventScript_1ECD4B:: @ 81ECD4B
 	waitmovement 0
 	copyobjectxytoperm 34
 	msgbox Route104_Text_1EDCED, MSGBOX_YESNO
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, YES
 	goto_if_eq Route104_EventScript_1ECDED
 	msgbox Route104_Text_1EDD2A, MSGBOX_DEFAULT
 	call Route104_EventScript_1ECE31
@@ -139,7 +139,7 @@ Route104_Movement_1ECDCD: @ 81ECDCD
 
 Route104_EventScript_1ECDD0:: @ 81ECDD0
 	msgbox Route104_Text_1EDD9F, MSGBOX_YESNO
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, YES
 	goto_if_eq Route104_EventScript_1ECDED
 	msgbox Route104_Text_1EDD2A, MSGBOX_DEFAULT
 	releaseall
@@ -205,7 +205,7 @@ Route104_EventScript_1ECE6F:: @ 81ECE6F
 	waitmovement 0
 	copyobjectxytoperm 34
 	msgbox Route104_Text_1EE009, MSGBOX_YESNO
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, YES
 	goto_if_eq Route104_EventScript_1ECF09
 	msgbox Route104_Text_1EE04D, MSGBOX_DEFAULT
 	call Route104_EventScript_1ECE31
@@ -214,7 +214,7 @@ Route104_EventScript_1ECE6F:: @ 81ECE6F
 
 Route104_EventScript_1ECEEC:: @ 81ECEEC
 	msgbox Route104_Text_1EE094, MSGBOX_YESNO
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, YES
 	goto_if_eq Route104_EventScript_1ECF09
 	msgbox Route104_Text_1EE04D, MSGBOX_DEFAULT
 	releaseall
@@ -355,13 +355,13 @@ Route104_EventScript_1ED090:: @ 81ED090
 	msgbox Route104_Text_1ED7A2, MSGBOX_NPC
 	end
 
-Route104_EventScript_1ED099:: @ 81ED099
+Route104_EventScript_SailToDewford:: @ 81ED099
 	setobjectpriority 8, MAP_ROUTE104, 0
 	setobjectpriority EVENT_OBJ_ID_PLAYER, MAP_ROUTE104, 0
-	applymovement 8, Route104_Movement_1ED359
+	applymovement 8, Route104_Movement_BrineyBoardBoat
 	waitmovement 0
 	removeobject 8
-	applymovement EVENT_OBJ_ID_PLAYER, Route104_Movement_1ED34F
+	applymovement EVENT_OBJ_ID_PLAYER, Route104_Movement_PlayerBoardBoat
 	waitmovement 0
 	hideobjectat EVENT_OBJ_ID_PLAYER, MAP_ROUTE104
 	call Common_EventScript_PlayBrineysBoatMusic
@@ -379,11 +379,11 @@ Route104_EventScript_1ED0EF:: @ 81ED0EF
 	applymovement 7, Route104_Movement_1ED1C8
 	applymovement EVENT_OBJ_ID_PLAYER, Route104_Movement_1ED1C8
 	waitmovement 0
-	pokenavcall Route104_Text_1EE336
+	pokenavcall Route104_Text_DadPokenavCall
 	waitmessage
 	delay 30
 	playfanfare MUS_ME_TORE_EYE
-	msgbox Route104_Text_1EE463, MSGBOX_DEFAULT
+	msgbox Route104_Text_RegisteredDadInPokenav, MSGBOX_DEFAULT
 	waitfanfare
 	closemessage
 	delay 30
@@ -418,17 +418,17 @@ Route104_EventScript_1ED139:: @ 81ED139
 	resetobjectpriority 2, MAP_DEWFORD_TOWN
 	copyobjectxytoperm 2
 	setvar VAR_BOARD_BRINEY_BOAT_STATE, 0
-	goto_if_unset FLAG_DELIVERED_STEVEN_LETTER, Route104_EventScript_1ED1B4
-	goto_if_set FLAG_DELIVERED_STEVEN_LETTER, Route104_EventScript_1ED1BE
+	goto_if_unset FLAG_DELIVERED_STEVEN_LETTER, Route104_EventScript_DeliverLetterReminder
+	goto_if_set FLAG_DELIVERED_STEVEN_LETTER, Route104_EventScript_LandedInDewford
 	end
 
-Route104_EventScript_1ED1B4:: @ 81ED1B4
-	msgbox Route104_Text_1E9AAF, MSGBOX_DEFAULT
+Route104_EventScript_DeliverLetterReminder:: @ 81ED1B4
+	msgbox Route104_Text_LandedInDewfordDeliverLetter, MSGBOX_DEFAULT
 	releaseall
 	end
 
-Route104_EventScript_1ED1BE:: @ 81ED1BE
-	msgbox Route104_Text_1E9C1D, MSGBOX_DEFAULT
+Route104_EventScript_LandedInDewford:: @ 81ED1BE
+	msgbox DewfordTown_Text_BrineyLandedInDewford, MSGBOX_DEFAULT
 	releaseall
 	end
 
@@ -829,7 +829,7 @@ Route104_Movement_1ED28C: @ 81ED28C
 	walk_down
 	step_end
 
-Route104_Movement_1ED34F: @ 81ED34F
+Route104_Movement_PlayerBoardBoat: @ 81ED34F
 	walk_left
 	walk_down
 	walk_down
@@ -845,7 +845,7 @@ Route104_Movement_1ED355: @ 81ED355
 	walk_in_place_fastest_right
 	step_end
 
-Route104_Movement_1ED359: @ 81ED359
+Route104_Movement_BrineyBoardBoat: @ 81ED359
 	walk_down
 	walk_down
 	step_end
@@ -879,7 +879,7 @@ Route104_EventScript_1ED38D:: @ 81ED38D
 	end
 
 Route104_EventScript_1ED3CE:: @ 81ED3CE
-	special sub_80B4808
+	special PlayerFaceTrainerAfterBattle
 	waitmovement 0
 	goto_if_set FLAG_HAS_MATCH_CALL, Route104_EventScript_1ED3DF
 	release
@@ -922,7 +922,7 @@ Route104_EventScript_1ED43B:: @ 81ED43B
 	end
 
 Route104_EventScript_1ED47C:: @ 81ED47C
-	special sub_80B4808
+	special PlayerFaceTrainerAfterBattle
 	waitmovement 0
 	goto_if_set FLAG_HAS_MATCH_CALL, Route104_EventScript_1ED48D
 	release
@@ -965,7 +965,7 @@ Route104_EventScript_1ED4E9:: @ 81ED4E9
 	end
 
 Route104_EventScript_1ED52A:: @ 81ED52A
-	special sub_80B4808
+	special PlayerFaceTrainerAfterBattle
 	waitmovement 0
 	goto_if_set FLAG_HAS_MATCH_CALL, Route104_EventScript_1ED53B
 	release

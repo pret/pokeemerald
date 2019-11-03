@@ -68,7 +68,7 @@ Route113_EventScript_1F21EE:: @ 81F21EE
 	end
 
 Route113_EventScript_1F221A:: @ 81F221A
-	special sub_80B4808
+	special PlayerFaceTrainerAfterBattle
 	waitmovement 0
 	msgbox Route113_Text_299F49, MSGBOX_DEFAULT
 	register_matchcall TRAINER_MADELINE_1
@@ -90,7 +90,7 @@ Route113_EventScript_1F2250:: @ 81F2250
 	end
 
 Route113_EventScript_1F227C:: @ 81F227C
-	special sub_80B4808
+	special PlayerFaceTrainerAfterBattle
 	waitmovement 0
 	msgbox Route113_Text_29A0A2, MSGBOX_DEFAULT
 	register_matchcall TRAINER_LAO_1

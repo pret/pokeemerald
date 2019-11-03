@@ -6283,7 +6283,7 @@ bool32 SetIllusionMon(struct Pokemon *mon, u32 battlerId)
     // Find last alive non-egg pokemon.
     for (i = PARTY_SIZE - 1; i >= 0; i--)
     {
-        id = pokemon_order_func(i);
+        id = GetPartyIdFromBattlePartyId(i);
         if (GetMonData(&party[id], MON_DATA_SANITY_HAS_SPECIES)
             && GetMonData(&party[id], MON_DATA_HP)
             && &party[id] != mon

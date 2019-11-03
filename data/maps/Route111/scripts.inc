@@ -46,7 +46,7 @@ Route111_OnTransition: @ 81F0D87
 	compare VAR_MIRAGE_TOWER_STATE, 2
 	call_if_eq Route111_EventScript_1F0E40
 	call Route111_EventScript_1F0DE6
-	call Route111_EventScript_28CCC7
+	call GabbyAndTy_EventScript_UpdateLocation
 	checktrainerflag TRAINER_VICKY
 	goto_if_lt Route111_EventScript_1F0E26
 	end
@@ -276,7 +276,7 @@ Route111_EventScript_1F0FC5:: @ 81F0FC5
 	faceplayer
 	setflag FLAG_LANDMARK_WINSTRATE_FAMILY
 	msgbox Route111_Text_1F1475, MSGBOX_YESNO
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, YES
 	goto_if_eq Route111_EventScript_1F0FE7
 	msgbox Route111_Text_1F14F5, MSGBOX_DEFAULT
 	release
@@ -476,7 +476,7 @@ Route111_EventScript_1F1260:: @ 81F1260
 	end
 
 Route111_EventScript_1F128C:: @ 81F128C
-	special sub_80B4808
+	special PlayerFaceTrainerAfterBattle
 	waitmovement 0
 	msgbox Route111_Text_298C00, MSGBOX_DEFAULT
 	register_matchcall TRAINER_DUSTY_1
@@ -513,7 +513,7 @@ Route111_EventScript_1F1307:: @ 81F1307
 	end
 
 Route111_EventScript_1F1333:: @ 81F1333
-	special sub_80B4808
+	special PlayerFaceTrainerAfterBattle
 	waitmovement 0
 	msgbox Route111_Text_29903D, MSGBOX_DEFAULT
 	register_matchcall TRAINER_WILTON_1
@@ -535,7 +535,7 @@ Route111_EventScript_1F1369:: @ 81F1369
 	end
 
 Route111_EventScript_1F1395:: @ 81F1395
-	special sub_80B4808
+	special PlayerFaceTrainerAfterBattle
 	waitmovement 0
 	msgbox Route111_Text_29921D, MSGBOX_DEFAULT
 	register_matchcall TRAINER_BROOKE_1

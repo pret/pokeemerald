@@ -21,7 +21,7 @@ MtPyre_3F_EventScript_231781:: @ 8231781
 	end
 
 MtPyre_3F_EventScript_2317AD:: @ 82317AD
-	special sub_80B4808
+	special PlayerFaceTrainerAfterBattle
 	waitmovement 0
 	msgbox MtPyre_3F_Text_231A49, MSGBOX_DEFAULT
 	register_matchcall TRAINER_GABRIELLE_1

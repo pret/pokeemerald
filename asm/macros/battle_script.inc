@@ -1319,7 +1319,7 @@
 	various \battler, 4
 	.endm
 	
-	.macro resetintrimidatetracebits battler:req
+	.macro resetintimidatetracebits battler:req
 	various \battler, VARIOUS_RESET_INTIMIDATE_TRACE_BITS
 	.endm
 	

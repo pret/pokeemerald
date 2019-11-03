@@ -1506,7 +1506,7 @@
 	.byte 0xd9
 	.endm
 
-	.macro hidebox2
+	.macro closebraillemessage
 	.byte 0xda
 	.endm
 

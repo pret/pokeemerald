@@ -42,7 +42,7 @@ const struct SpriteTemplate gUnknown_08596134 =
     .anims = gUnknown_08596130,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = AnimSparklingParticle,
+    .callback = AnimSpriteOnMonPos,
 };
 
 const union AnimCmd gUnknown_0859614C[] =

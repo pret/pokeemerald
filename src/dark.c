@@ -245,7 +245,7 @@ const struct SpriteTemplate gPunishmentSpriteTemplate =
     .anims = gPunishmentAnim,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = AnimSparklingParticle,
+    .callback = AnimSpriteOnMonPos,
 };
 
 const struct SpriteTemplate gPunishmentImpactSpriteTemplate =

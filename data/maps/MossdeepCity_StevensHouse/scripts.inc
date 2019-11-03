@@ -73,7 +73,7 @@ MossdeepCity_StevensHouse_Movement_22283B: @ 822283B
 MossdeepCity_StevensHouse_EventScript_222841:: @ 8222841
 	lockall
 	msgbox MossdeepCity_StevensHouse_Text_222B9E, MSGBOX_YESNO
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq MossdeepCity_StevensHouse_EventScript_22285B
 	goto MossdeepCity_StevensHouse_EventScript_222865
 	end
@@ -96,7 +96,7 @@ MossdeepCity_StevensHouse_EventScript_222865:: @ 8222865
 MossdeepCity_StevensHouse_EventScript_222895:: @ 8222895
 	call MossdeepCity_StevensHouse_EventScript_2228EB
 	msgbox gText_NicknameThisPokemon, MSGBOX_YESNO
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq MossdeepCity_StevensHouse_EventScript_222901
 	call Common_EventScript_GetGiftMonPartySlot
 	call Common_EventScript_NameReceivedPartyMon
@@ -106,14 +106,14 @@ MossdeepCity_StevensHouse_EventScript_222895:: @ 8222895
 MossdeepCity_StevensHouse_EventScript_2228BD:: @ 82228BD
 	call MossdeepCity_StevensHouse_EventScript_2228EB
 	msgbox gText_NicknameThisPokemon, MSGBOX_YESNO
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq MossdeepCity_StevensHouse_EventScript_2228E0
 	call Common_EventScript_NameReceivedBoxMon
 	goto MossdeepCity_StevensHouse_EventScript_2228E0
 	end
 
 MossdeepCity_StevensHouse_EventScript_2228E0:: @ 82228E0
-	call MossdeepCity_StevensHouse_EventScript_2737A0
+	call Common_EventScript_TransferredToPC
 	goto MossdeepCity_StevensHouse_EventScript_222901
 	end
 

@@ -172,13 +172,13 @@
 #define VAR_UNUSED_0x409B                    0x409B // Unused Var
 #define VAR_ELITE_4_STATE                    0x409C
 #define VAR_UNUSED_0x409D                    0x409D // Unused Var
-#define VAR_MOSSDEEP_SPACE_CENTER_STATE_1    0x409E
-#define VAR_MOSSDEEP_SPACE_CENTER_STATE_2    0x409F
+#define VAR_MOSSDEEP_SPACE_CENTER_STAIR_GUARD_STATE    0x409E
+#define VAR_MOSSDEEP_SPACE_CENTER_STATE      0x409F
 #define VAR_SLATEPORT_HARBOR_STATE           0x40A0
 #define VAR_UNUSED_0x40A1                    0x40A1 // Unused var
 #define VAR_SEAFLOOR_CAVERN_STATE            0x40A2
 #define VAR_CABLE_CAR_STATION_STATE          0x40A3
-#define VAR_SAFARI_ZONE_STATE                0x40A4
+#define VAR_SAFARI_ZONE_STATE                0x40A4  // 0: In or out of SZ, 1: Player exiting SZ, 2: Player entering SZ
 #define VAR_TRICK_HOUSE_ENTRANCE_STATE_1     0x40A5
 #define VAR_TRICK_HOUSE_ENTRANCE_STATE_2     0x40A6
 #define VAR_TRICK_HOUSE_ENTRANCE_STATE_3     0x40A7

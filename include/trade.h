@@ -18,7 +18,7 @@ void CB2_StartCreateTradeMenu(void);
 void CB2_LinkTrade(void);
 int CanRegisterMonForTradingBoard(struct UnkLinkRfuStruct_02022B14Substruct a0, u16, u16, u8);
 int GetUnionRoomTradeMessageId(struct UnkLinkRfuStruct_02022B14Substruct a0, struct UnkLinkRfuStruct_02022B14Substruct a1, u16 a2, u16 a3, u8 a4, u16 a5, u8 a6);
-int CanTradeSelectedPartyMenuMon(struct Pokemon*, u16);
+int CanSpinTradeMon(struct Pokemon*, u16);
 void InitTradeSequenceBgGpuRegs(void);
 void LinkTradeDrawWindow(void);
 void InitTradeBg(void);

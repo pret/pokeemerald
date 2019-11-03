@@ -35,7 +35,7 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route102_EventScript_1EC0E1",
+      "script": "Route102_EventScript_LittleBoy",
       "flag": "0"
     },
     {
@@ -48,7 +48,7 @@
       "movement_range_y": 0,
       "trainer_type": "1",
       "trainer_sight_or_berry_tree_id": "3",
-      "script": "Route102_EventScript_1EC105",
+      "script": "Route102_EventScript_Calvin",
       "flag": "0"
     },
     {
@@ -61,7 +61,7 @@
       "movement_range_y": 0,
       "trainer_type": "1",
       "trainer_sight_or_berry_tree_id": "2",
-      "script": "Route102_EventScript_1EC1B3",
+      "script": "Route102_EventScript_Rick",
       "flag": "0"
     },
     {
@@ -74,7 +74,7 @@
       "movement_range_y": 0,
       "trainer_type": "1",
       "trainer_sight_or_berry_tree_id": "3",
-      "script": "Route102_EventScript_1EC1CA",
+      "script": "Route102_EventScript_Tiana",
       "flag": "0"
     },
     {
@@ -87,7 +87,7 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route102_EventScript_1EC0FC",
+      "script": "Route102_EventScript_Boy",
       "flag": "0"
     },
     {
@@ -139,7 +139,7 @@
       "movement_range_y": 1,
       "trainer_type": "1",
       "trainer_sight_or_berry_tree_id": "3",
-      "script": "Route102_EventScript_1EC1E1",
+      "script": "Route102_EventScript_Allen",
       "flag": "0"
     }
   ],
@@ -152,7 +152,7 @@
       "y": 2,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "Route102_EventScript_1EC0F3"
+      "script": "Route102_EventScript_RouteSignPetalburg"
     },
     {
       "type": "sign",
@@ -160,7 +160,7 @@
       "y": 9,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "Route102_EventScript_1EC0EA"
+      "script": "Route102_EventScript_RouteSignOldale"
     }
   ]
 }

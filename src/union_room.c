@@ -47,6 +47,7 @@
 #include "constants/cable_club.h"
 #include "constants/game_stat.h"
 #include "constants/maps.h"
+#include "constants/party_menu.h"
 #include "constants/rgb.h"
 #include "constants/songs.h"
 #include "constants/species.h"
@@ -2308,7 +2309,9 @@ void sub_80156E0(u8 taskId)
         data->state = 3;
         break;
     case 3:
-        if ((sub_81B1360() == 8 || sub_81B1360() == 9) && sUnionRoomTrade.field_0 != 0)
+        if ((GetPartyMenuType() == PARTY_MENU_TYPE_UNION_ROOM_REGISTER 
+           || GetPartyMenuType() == PARTY_MENU_TYPE_UNION_ROOM_TRADE) 
+           && sUnionRoomTrade.field_0 != 0)
         {
             id = GetCursorSelectionMonId();
             switch (sUnionRoomTrade.field_0)
@@ -2876,7 +2879,7 @@ void sub_80156E0(u8 taskId)
         {
             sUnionRoomTrade.field_0 = 1;
             gFieldCallback = sub_80AF128;
-            sub_81B8904(8, CB2_ReturnToField);
+            ChooseMonForTradingBoard(PARTY_MENU_TYPE_UNION_ROOM_REGISTER, CB2_ReturnToField);
         }
         break;
     case 52:
@@ -2988,7 +2991,7 @@ void sub_80156E0(u8 taskId)
             gUnionRoomRequestedMonType = data->field_0->arr[taskData[1]].unk.field_0.type;
             gUnionRoomOfferedSpecies = data->field_0->arr[taskData[1]].unk.field_0.species;
             gFieldCallback = sub_80AF128;
-            sub_81B8904(9, CB2_ReturnToField);
+            ChooseMonForTradingBoard(PARTY_MENU_TYPE_UNION_ROOM_TRADE, CB2_ReturnToField);
             sub_80156B0(data);
             sUnionRoomTrade.field_8 = taskData[1];
         }

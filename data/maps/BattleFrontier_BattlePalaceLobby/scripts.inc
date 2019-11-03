@@ -197,9 +197,9 @@ BattleFrontier_BattlePalaceLobby_EventScript_24D9E6:: @ 824D9E6
 	goto_if_eq BattleFrontier_BattlePalaceLobby_EventScript_24DB91
 	msgbox BattleFrontier_BattlePalaceLobby_Text_24E3C8, MSGBOX_YESNO
 	switch VAR_RESULT
-	case 0, BattleFrontier_BattlePalaceLobby_EventScript_24DB91
-	case 1, BattleFrontier_BattlePalaceLobby_EventScript_24DA87
-	case 127, BattleFrontier_BattlePalaceLobby_EventScript_24DB91
+	case NO, BattleFrontier_BattlePalaceLobby_EventScript_24DB91
+	case YES, BattleFrontier_BattlePalaceLobby_EventScript_24DA87
+	case MULTI_B_PRESSED, BattleFrontier_BattlePalaceLobby_EventScript_24DB91
 
 BattleFrontier_BattlePalaceLobby_EventScript_24DA87:: @ 824DA87
 	setvar VAR_TEMP_0, 0

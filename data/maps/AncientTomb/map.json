@@ -24,7 +24,7 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "AncientTomb_EventScript_23905A",
+      "script": "AncientTomb_EventScript_Registeel",
       "flag": "FLAG_HIDE_REGISTEEL"
     }
   ],
@@ -59,7 +59,7 @@
       "y": 20,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "AncientTomb_EventScript_239033"
+      "script": "AncientTomb_EventScript_CaveEntranceMiddle"
     },
     {
       "type": "sign",
@@ -67,7 +67,7 @@
       "y": 20,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "AncientTomb_EventScript_239050"
+      "script": "AncientTomb_EventScript_CaveEntranceSide"
     },
     {
       "type": "sign",
@@ -75,7 +75,7 @@
       "y": 20,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "AncientTomb_EventScript_239050"
+      "script": "AncientTomb_EventScript_CaveEntranceSide"
     }
   ]
 }

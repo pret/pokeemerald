@@ -5,15 +5,15 @@ SlateportCity_House1_EventScript_209AA5:: @ 8209AA5
 	lock
 	faceplayer
 	msgbox SlateportCity_House1_Text_209B8E, MSGBOX_YESNO
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, YES
 	goto_if_eq SlateportCity_House1_EventScript_209AC6
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq SlateportCity_House1_EventScript_209AE9
 	end
 
 SlateportCity_House1_EventScript_209AC6:: @ 8209AC6
 	msgbox SlateportCity_House1_Text_209BFF, MSGBOX_DEFAULT
-	special sub_81B94B0
+	special ChoosePartyMon
 	waitstate
 	compare VAR_0x8004, 255
 	goto_if_ne SlateportCity_House1_EventScript_209AF3
@@ -39,9 +39,9 @@ SlateportCity_House1_EventScript_209AF3:: @ 8209AF3
 	compare VAR_RESULT, 1
 	goto_if_eq SlateportCity_House1_EventScript_209B50
 	msgbox SlateportCity_House1_Text_209C2B, MSGBOX_YESNO
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, YES
 	goto_if_eq SlateportCity_House1_EventScript_209B5A
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq SlateportCity_House1_EventScript_209AE9
 	end
 

@@ -36,7 +36,7 @@ static void sub_8117500(u8);
 static void sub_81175C4(u32, u16);
 static void sub_81176D8(u8);
 static void sub_8117A60(u8);
-static void sub_8117FD0(u8);
+static void ExtremSpeedMoveTarget_Step(u8);
 
 const u16 gUnknown_08597418 = RGB(31, 31, 31);
 
@@ -1036,7 +1036,7 @@ void sub_8117F30(u8 taskId)
     DestroyAnimVisualTask(taskId);
 }
 
-void sub_8117F60(u8 taskId)
+void AnimTask_ExtremeSpeedMoveTarget(u8 taskId)
 {
     if (IsContest())
     {
@@ -1046,12 +1046,12 @@ void sub_8117F60(u8 taskId)
     {
         gTasks[taskId].data[0] = gBattleSpritesDataPtr->battlerData[gBattleAnimAttacker].invisible;
         gBattleSpritesDataPtr->battlerData[gBattleAnimAttacker].invisible = 1;
-        gTasks[taskId].func = sub_8117FD0;
+        gTasks[taskId].func = ExtremSpeedMoveTarget_Step;
         gAnimVisualTaskCount--;
     }
 }
 
-static void sub_8117FD0(u8 taskId)
+static void ExtremSpeedMoveTarget_Step(u8 taskId)
 {
     if (gBattleAnimArgs[7] == 0x1000)
     {

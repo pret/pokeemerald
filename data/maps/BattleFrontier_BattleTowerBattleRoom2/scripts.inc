@@ -205,8 +205,8 @@ BattleFrontier_BattleTowerBattleRoom2_EventScript_249219:: @ 8249219
 BattleFrontier_BattleTowerBattleRoom2_EventScript_249223:: @ 8249223
 	msgbox BattleFrontier_BattleTowerBattleRoom2_Text_2423FC, MSGBOX_YESNO
 	switch VAR_RESULT
-	case 0, BattleFrontier_BattleTowerBattleRoom2_EventScript_249143
-	case 1, BattleFrontier_BattleTowerBattleRoom2_EventScript_2492DB
+	case NO, BattleFrontier_BattleTowerBattleRoom2_EventScript_249143
+	case YES, BattleFrontier_BattleTowerBattleRoom2_EventScript_2492DB
 	case MULTI_B_PRESSED, BattleFrontier_BattleTowerBattleRoom2_EventScript_249143
 
 BattleFrontier_BattleTowerBattleRoom2_EventScript_249251:: @ 8249251

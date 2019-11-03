@@ -126,8 +126,8 @@ BattleFrontier_BattlePikeThreePathRoom_EventScript_25C9C8:: @ 825C9C8
 BattleFrontier_BattlePikeThreePathRoom_EventScript_25C9D8:: @ 825C9D8
 	msgbox BattleFrontier_BattlePikeThreePathRoom_Text_25CCD4, MSGBOX_YESNO
 	switch VAR_RESULT
-	case 0, BattleFrontier_BattlePikeThreePathRoom_EventScript_25CA2A
-	case 127, BattleFrontier_BattlePikeThreePathRoom_EventScript_25CA2A
+	case NO, BattleFrontier_BattlePikeThreePathRoom_EventScript_25CA2A
+	case MULTI_B_PRESSED, BattleFrontier_BattlePikeThreePathRoom_EventScript_25CA2A
 	release
 	end
 
@@ -150,9 +150,9 @@ BattleFrontier_BattlePikeThreePathRoom_EventScript_25C9FD:: @ 825C9FD
 BattleFrontier_BattlePikeThreePathRoom_EventScript_25CA2A:: @ 825CA2A
 	msgbox BattleFrontier_BattlePikeThreePathRoom_Text_25CCFB, MSGBOX_YESNO
 	switch VAR_RESULT
-	case 1, BattleFrontier_BattlePikeThreePathRoom_EventScript_25C9FD
-	case 0, BattleFrontier_BattlePikeThreePathRoom_EventScript_25CA5A
-	case 127, BattleFrontier_BattlePikeThreePathRoom_EventScript_25CA5A
+	case YES, BattleFrontier_BattlePikeThreePathRoom_EventScript_25C9FD
+	case NO, BattleFrontier_BattlePikeThreePathRoom_EventScript_25CA5A
+	case MULTI_B_PRESSED, BattleFrontier_BattlePikeThreePathRoom_EventScript_25CA5A
 	release
 	end
 
@@ -197,9 +197,9 @@ BattleFrontier_BattlePikeThreePathRoom_EventScript_25CABB:: @ 825CABB
 	faceplayer
 	msgbox BattleFrontier_BattlePikeThreePathRoom_Text_25CE69, MSGBOX_YESNO
 	switch VAR_RESULT
-	case 1, BattleFrontier_BattlePikeThreePathRoom_EventScript_25CB0A
-	case 0, BattleFrontier_BattlePikeThreePathRoom_EventScript_25CB00
-	case 127, BattleFrontier_BattlePikeThreePathRoom_EventScript_25CB00
+	case YES, BattleFrontier_BattlePikeThreePathRoom_EventScript_25CB0A
+	case NO, BattleFrontier_BattlePikeThreePathRoom_EventScript_25CB00
+	case MULTI_B_PRESSED, BattleFrontier_BattlePikeThreePathRoom_EventScript_25CB00
 	release
 	end
 

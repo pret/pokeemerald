@@ -35,7 +35,7 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "SafariZone_Northeast_EventScript_23D3C6",
+      "script": "SafariZone_Northeast_EventScript_Boy",
       "flag": "0"
     },
     {
@@ -48,7 +48,7 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "SafariZone_Northeast_EventScript_23D3D8",
+      "script": "SafariZone_Northeast_EventScript_Girl",
       "flag": "0"
     },
     {
@@ -74,7 +74,7 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "SafariZone_Northeast_EventScript_23D3CF",
+      "script": "SafariZone_Northeast_EventScript_Woman",
       "flag": "0"
     },
     {

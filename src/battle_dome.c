@@ -2330,7 +2330,7 @@ static void GetDomeData(void)
         }
         break;
     case 8:
-        sub_81B8558();
+        ClearSelectedPartyOrder();
         gSelectedOrderFromParty[0] = gSaveBlock2Ptr->frontier.field_CB0;
         gSelectedOrderFromParty[1] = gSaveBlock2Ptr->frontier.field_CB0 >> 8;
         break;

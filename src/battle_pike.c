@@ -22,6 +22,7 @@
 #include "constants/trainers.h"
 #include "constants/species.h"
 #include "constants/moves.h"
+#include "constants/party_menu.h"
 #include "constants/battle_pike.h"
 
 struct PikeRoomNPC
@@ -922,7 +923,7 @@ static bool8 TryInflictRandomStatus(void)
             for (i = 0; i < 3; i++)
             {
                 mon = &gPlayerParty[indices[i]];
-                if (pokemon_ailments_get_primary(GetMonData(mon, MON_DATA_STATUS)) == 0
+                if (GetAilmentFromStatus(GetMonData(mon, MON_DATA_STATUS)) == AILMENT_NONE
                     && GetMonData(mon, MON_DATA_HP) != 0)
                 {
                     j++;
@@ -964,7 +965,7 @@ static bool8 TryInflictRandomStatus(void)
     for (i = 0; i < 3; i++)
     {
         mon = &gPlayerParty[indices[i]];
-        if (pokemon_ailments_get_primary(GetMonData(mon, MON_DATA_STATUS)) == 0
+        if (GetAilmentFromStatus(GetMonData(mon, MON_DATA_STATUS)) == AILMENT_NONE
             && GetMonData(mon, MON_DATA_HP) != 0)
         {
             j++;
@@ -996,7 +997,7 @@ static bool8 AtLeastOneHealthyMon(void)
     for (i = 0; i < 3; i++)
     {
         struct Pokemon *mon = &gPlayerParty[i];
-        if (pokemon_ailments_get_primary(GetMonData(mon, MON_DATA_STATUS)) == 0
+        if (GetAilmentFromStatus(GetMonData(mon, MON_DATA_STATUS)) == AILMENT_NONE
             && GetMonData(mon, MON_DATA_HP) != 0)
         {
             healthyMonsCount++;
@@ -1285,7 +1286,7 @@ static void TryHealMons(u8 healCount)
         {
             canBeHealed = TRUE;
         }
-        else if (pokemon_ailments_get_primary(GetMonData(mon, MON_DATA_STATUS)) != 0)
+        else if (GetAilmentFromStatus(GetMonData(mon, MON_DATA_STATUS)) != AILMENT_NONE)
         {
             canBeHealed = TRUE;
         }
@@ -1556,7 +1557,7 @@ static void CanAnyPartyMonsBeHealed(void)
         struct Pokemon *mon = &gPlayerParty[i];
         u16 curr = GetMonData(mon, MON_DATA_HP);
         u16 max = GetMonData(mon, MON_DATA_MAX_HP);
-        if (curr >= max && pokemon_ailments_get_primary(GetMonData(mon, MON_DATA_STATUS)) == 0)
+        if (curr >= max && GetAilmentFromStatus(GetMonData(mon, MON_DATA_STATUS)) == AILMENT_NONE)
         {
             u8 ppBonuses = GetMonData(mon, MON_DATA_PP_BONUSES);
             for (j = 0; j < MAX_MON_MOVES; j++)

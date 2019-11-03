@@ -1,71 +1,70 @@
 LittlerootTown_MaysHouse_2F_MapScripts:: @ 81F9296
-	map_script MAP_SCRIPT_ON_TRANSITION, LittlerootTown_MaysHouse_2F_MapScript1_1F92A1
-	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, LittlerootTown_MaysHouse_2F_MapScript2_1F931D
+	map_script MAP_SCRIPT_ON_TRANSITION, LittlerootTown_MaysHouse_2F_OnTransition
+	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, LittlerootTown_MaysHouse_2F_OnWarp
 	.byte 0
 
-LittlerootTown_MaysHouse_2F_MapScript1_1F92A1: @ 81F92A1
+LittlerootTown_MaysHouse_2F_OnTransition: @ 81F92A1
 	compare VAR_LITTLEROOT_RIVAL_STATE, 2
-	call_if_lt LittlerootTown_MaysHouse_2F_EventScript_1F930A
+	call_if_lt LittlerootTown_MaysHouse_2F_EventScript_CheckSetReadyToMeetMay
 	compare VAR_LITTLEROOT_RIVAL_STATE, 3
-	call_if_ge LittlerootTown_MaysHouse_2F_EventScript_1F92CD
+	call_if_ge LittlerootTown_MaysHouse_2F_EventScript_CheckShouldUpdateMayPos
 	compare VAR_LITTLEROOT_INTRO_STATE, 4
-	call_if_eq LittlerootTown_MaysHouse_2F_EventScript_2926FE
+	call_if_eq PlayersHouse_2F_EventScript_BlockStairsUntilClockIsSet
 	call SecretBase_EventScript_SetDecorationFlags
 	setvar VAR_SECRET_BASE_INITIALIZED, 0
 	end
 
-LittlerootTown_MaysHouse_2F_EventScript_1F92CD:: @ 81F92CD
-	goto_if_set FLAG_MET_RIVAL_LILYCOVE, LittlerootTown_MaysHouse_2F_EventScript_1F92E6
+LittlerootTown_MaysHouse_2F_EventScript_CheckShouldUpdateMayPos:: @ 81F92CD
+	goto_if_set FLAG_MET_RIVAL_LILYCOVE, LittlerootTown_MaysHouse_2F_EventScript_TryUpdateMayPos
 	compare VAR_BIRCH_LAB_STATE, 2
-	goto_if_ge LittlerootTown_MaysHouse_2F_EventScript_1F9309
-	goto LittlerootTown_MaysHouse_2F_EventScript_1F92E6
+	goto_if_ge LittlerootTown_MaysHouse_2F_EventScript_Ret
+	goto LittlerootTown_MaysHouse_2F_EventScript_TryUpdateMayPos
 
-LittlerootTown_MaysHouse_2F_EventScript_1F92E6:: @ 81F92E6
+LittlerootTown_MaysHouse_2F_EventScript_TryUpdateMayPos:: @ 81F92E6
 	checkplayergender
 	compare VAR_RESULT, FEMALE
-	goto_if_eq LittlerootTown_MaysHouse_2F_EventScript_1F9309
+	goto_if_eq LittlerootTown_MaysHouse_2F_EventScript_Ret
 	compare VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 2
-	goto_if_ge LittlerootTown_MaysHouse_2F_EventScript_1F9309
+	goto_if_ge LittlerootTown_MaysHouse_2F_EventScript_Ret
 	setobjectxyperm 1, 8, 2
 	setobjectmovementtype 1, MOVEMENT_TYPE_FACE_UP
 	return
 
-LittlerootTown_BrendansHouse_2F_EventScript_1F9309:: @ 81F9309
-LittlerootTown_MaysHouse_2F_EventScript_1F9309:: @ 81F9309
+LittlerootTown_MaysHouse_2F_EventScript_Ret:: @ 81F9309
 	return
 
-LittlerootTown_MaysHouse_2F_EventScript_1F930A:: @ 81F930A
+LittlerootTown_MaysHouse_2F_EventScript_CheckSetReadyToMeetMay:: @ 81F930A
 	checkplayergender
 	compare VAR_RESULT, MALE
-	goto_if_eq LittlerootTown_MaysHouse_2F_EventScript_1F9317
+	goto_if_eq LittlerootTown_MaysHouse_2F_EventScript_SetReadyToMeetMay
 	return
 
-LittlerootTown_MaysHouse_2F_EventScript_1F9317:: @ 81F9317
+LittlerootTown_MaysHouse_2F_EventScript_SetReadyToMeetMay:: @ 81F9317
 	setvar VAR_LITTLEROOT_RIVAL_STATE, 2
 	return
 
-LittlerootTown_MaysHouse_2F_MapScript2_1F931D: @ 81F931D
-	map_script_2 VAR_SECRET_BASE_INITIALIZED, 0, LittlerootTown_MaysHouse_2F_EventScript_1F9327
+LittlerootTown_MaysHouse_2F_OnWarp: @ 81F931D
+	map_script_2 VAR_SECRET_BASE_INITIALIZED, 0, LittlerootTown_MaysHouse_2F_EventScript_CheckInitDecor
 	.2byte 0
 
-LittlerootTown_MaysHouse_2F_EventScript_1F9327:: @ 81F9327
+LittlerootTown_MaysHouse_2F_EventScript_CheckInitDecor:: @ 81F9327
 	checkplayergender
 	compare VAR_RESULT, FEMALE
 	goto_if_eq SecretBase_EventScript_InitDecorations
 	end
 
-LittlerootTown_MaysHouse_2F_EventScript_1F9334:: @ 81F9334
+LittlerootTown_MaysHouse_2F_EventScript_RivalsPokeBall:: @ 81F9334
 	lockall
 	compare VAR_LITTLEROOT_RIVAL_STATE, 2
-	goto_if_eq LittlerootTown_MaysHouse_2F_EventScript_1F934A
-	msgbox LittlerootTown_MaysHouse_2F_Text_1F9991, MSGBOX_DEFAULT
+	goto_if_eq LittlerootTown_MaysHouse_2F_EventScript_MeetMay
+	msgbox RivalsHouse_2F_Text_ItsRivalsPokeBall, MSGBOX_DEFAULT
 	releaseall
 	end
 
-LittlerootTown_MaysHouse_2F_EventScript_1F934A:: @ 81F934A
+LittlerootTown_MaysHouse_2F_EventScript_MeetMay:: @ 81F934A
 	delay 10
 	addobject 1
-	applymovement 1, LittlerootTown_MaysHouse_2F_Movement_1F946F
+	applymovement 1, LittlerootTown_MaysHouse_2F_Movement_MayEnters
 	waitmovement 0
 	playse SE_PIN
 	applymovement 1, Common_Movement_ExclamationMark
@@ -75,13 +74,13 @@ LittlerootTown_MaysHouse_2F_EventScript_1F934A:: @ 81F934A
 	delay 10
 	playbgm MUS_GIRL_SUP, 1
 	compare VAR_FACING, DIR_NORTH
-	call_if_eq LittlerootTown_MaysHouse_2F_EventScript_1F93BA
+	call_if_eq LittlerootTown_MaysHouse_2F_EventScript_MeetMayNorth
 	compare VAR_FACING, DIR_SOUTH
-	call_if_eq LittlerootTown_MaysHouse_2F_EventScript_1F93E9
+	call_if_eq LittlerootTown_MaysHouse_2F_EventScript_MeetMaySouth
 	compare VAR_FACING, DIR_WEST
-	call_if_eq LittlerootTown_MaysHouse_2F_EventScript_1F9418
+	call_if_eq LittlerootTown_MaysHouse_2F_EventScript_MeetMayWest
 	compare VAR_FACING, DIR_EAST
-	call_if_eq LittlerootTown_MaysHouse_2F_EventScript_1F9440
+	call_if_eq LittlerootTown_MaysHouse_2F_EventScript_MeetMayEast
 	setvar VAR_LITTLEROOT_RIVAL_STATE, 3
 	setflag FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_2F_POKE_BALL
 	clearflag FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_RIVAL_BEDROOM
@@ -91,60 +90,60 @@ LittlerootTown_MaysHouse_2F_EventScript_1F934A:: @ 81F934A
 	releaseall
 	end
 
-LittlerootTown_MaysHouse_2F_EventScript_1F93BA:: @ 81F93BA
-	applymovement 1, LittlerootTown_MaysHouse_2F_Movement_1F9473
+LittlerootTown_MaysHouse_2F_EventScript_MeetMayNorth:: @ 81F93BA
+	applymovement 1, LittlerootTown_MaysHouse_2F_Movement_MayApproachPlayerNorth
 	waitmovement 0
 	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceFastestLeft
 	waitmovement 0
-	msgbox LittlerootTown_MaysHouse_2F_Text_1F959C, MSGBOX_DEFAULT
+	msgbox RivalsHouse_2F_Text_MayWhoAreYou, MSGBOX_DEFAULT
 	closemessage
-	applymovement EVENT_OBJ_ID_PLAYER, LittlerootTown_MaysHouse_2F_Movement_1F9483
-	applymovement 1, LittlerootTown_MaysHouse_2F_Movement_1F9479
+	applymovement EVENT_OBJ_ID_PLAYER, LittlerootTown_MaysHouse_2F_Movement_PlayerWatchMayNorth
+	applymovement 1, LittlerootTown_MaysHouse_2F_Movement_MayWalkToPCNorth
 	waitmovement 0
 	return
 
-LittlerootTown_MaysHouse_2F_EventScript_1F93E9:: @ 81F93E9
-	applymovement 1, LittlerootTown_MaysHouse_2F_Movement_1F948B
+LittlerootTown_MaysHouse_2F_EventScript_MeetMaySouth:: @ 81F93E9
+	applymovement 1, LittlerootTown_MaysHouse_2F_Movement_MayApproachPlayerSouth
 	waitmovement 0
 	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceFastestLeft
 	waitmovement 0
-	msgbox LittlerootTown_MaysHouse_2F_Text_1F959C, MSGBOX_DEFAULT
+	msgbox RivalsHouse_2F_Text_MayWhoAreYou, MSGBOX_DEFAULT
 	closemessage
-	applymovement EVENT_OBJ_ID_PLAYER, LittlerootTown_MaysHouse_2F_Movement_1F9497
-	applymovement 1, LittlerootTown_MaysHouse_2F_Movement_1F948F
+	applymovement EVENT_OBJ_ID_PLAYER, LittlerootTown_MaysHouse_2F_Movement_PlayerWatchMaySouth
+	applymovement 1, LittlerootTown_MaysHouse_2F_Movement_MayWalkToPCSouth
 	waitmovement 0
 	return
 
-LittlerootTown_MaysHouse_2F_EventScript_1F9418:: @ 81F9418
-	applymovement 1, LittlerootTown_MaysHouse_2F_Movement_1F949D
+LittlerootTown_MaysHouse_2F_EventScript_MeetMayWest:: @ 81F9418
+	applymovement 1, LittlerootTown_MaysHouse_2F_Movement_MayApproachPlayerWest
 	waitmovement 0
 	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
-	msgbox LittlerootTown_MaysHouse_2F_Text_1F959C, MSGBOX_DEFAULT
+	msgbox RivalsHouse_2F_Text_MayWhoAreYou, MSGBOX_DEFAULT
 	closemessage
-	applymovement 1, LittlerootTown_MaysHouse_2F_Movement_1F94A4
+	applymovement 1, LittlerootTown_MaysHouse_2F_Movement_MayWalkToPCWest
 	waitmovement 0
 	return
 
-LittlerootTown_MaysHouse_2F_EventScript_1F9440:: @ 81F9440
-	applymovement 1, LittlerootTown_MaysHouse_2F_Movement_1F94AD
+LittlerootTown_MaysHouse_2F_EventScript_MeetMayEast:: @ 81F9440
+	applymovement 1, LittlerootTown_MaysHouse_2F_Movement_MayApproachPlayerEast
 	waitmovement 0
 	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceFastestLeft
 	waitmovement 0
-	msgbox LittlerootTown_MaysHouse_2F_Text_1F959C, MSGBOX_DEFAULT
+	msgbox RivalsHouse_2F_Text_MayWhoAreYou, MSGBOX_DEFAULT
 	closemessage
-	applymovement EVENT_OBJ_ID_PLAYER, LittlerootTown_MaysHouse_2F_Movement_1F94BB
-	applymovement 1, LittlerootTown_MaysHouse_2F_Movement_1F94B2
+	applymovement EVENT_OBJ_ID_PLAYER, LittlerootTown_MaysHouse_2F_Movement_PlayerWatchMayEast
+	applymovement 1, LittlerootTown_MaysHouse_2F_Movement_MayWalkToPCEast
 	waitmovement 0
 	return
 
-LittlerootTown_MaysHouse_2F_Movement_1F946F: @ 81F946F
+LittlerootTown_MaysHouse_2F_Movement_MayEnters: @ 81F946F
 	walk_down
 	walk_down
 	walk_in_place_fastest_right
 	step_end
 
-LittlerootTown_MaysHouse_2F_Movement_1F9473: @ 81F9473
+LittlerootTown_MaysHouse_2F_Movement_MayApproachPlayerNorth: @ 81F9473
 	walk_right
 	walk_right
 	walk_down
@@ -152,7 +151,7 @@ LittlerootTown_MaysHouse_2F_Movement_1F9473: @ 81F9473
 	walk_right
 	step_end
 
-LittlerootTown_MaysHouse_2F_Movement_1F9479: @ 81F9479
+LittlerootTown_MaysHouse_2F_Movement_MayWalkToPCNorth: @ 81F9479
 	walk_up
 	walk_up
 	walk_up
@@ -164,7 +163,7 @@ LittlerootTown_MaysHouse_2F_Movement_1F9479: @ 81F9479
 	walk_in_place_fastest_up
 	step_end
 
-LittlerootTown_MaysHouse_2F_Movement_1F9483: @ 81F9483
+LittlerootTown_MaysHouse_2F_Movement_PlayerWatchMayNorth: @ 81F9483
 	delay_16
 	walk_in_place_fastest_up
 	delay_16
@@ -174,13 +173,13 @@ LittlerootTown_MaysHouse_2F_Movement_1F9483: @ 81F9483
 	walk_in_place_fastest_right
 	step_end
 
-LittlerootTown_MaysHouse_2F_Movement_1F948B: @ 81F948B
+LittlerootTown_MaysHouse_2F_Movement_MayApproachPlayerSouth: @ 81F948B
 	walk_right
 	walk_right
 	walk_right
 	step_end
 
-LittlerootTown_MaysHouse_2F_Movement_1F948F: @ 81F948F
+LittlerootTown_MaysHouse_2F_Movement_MayWalkToPCSouth: @ 81F948F
 	walk_up
 	walk_in_place_fastest_right
 	walk_right
@@ -190,7 +189,7 @@ LittlerootTown_MaysHouse_2F_Movement_1F948F: @ 81F948F
 	walk_in_place_fastest_up
 	step_end
 
-LittlerootTown_MaysHouse_2F_Movement_1F9497: @ 81F9497
+LittlerootTown_MaysHouse_2F_Movement_PlayerWatchMaySouth: @ 81F9497
 	delay_16
 	walk_in_place_fastest_up
 	delay_16
@@ -198,7 +197,7 @@ LittlerootTown_MaysHouse_2F_Movement_1F9497: @ 81F9497
 	walk_in_place_fastest_right
 	step_end
 
-LittlerootTown_MaysHouse_2F_Movement_1F949D: @ 81F949D
+LittlerootTown_MaysHouse_2F_Movement_MayApproachPlayerWest: @ 81F949D
 	walk_right
 	walk_right
 	walk_right
@@ -207,27 +206,28 @@ LittlerootTown_MaysHouse_2F_Movement_1F949D: @ 81F949D
 	walk_in_place_fastest_down
 	step_end
 
-LittlerootTown_MaysHouse_2F_Movement_1F94A4: @ 81F94A4
+LittlerootTown_MaysHouse_2F_Movement_MayWalkToPCWest: @ 81F94A4
 	walk_up
 	walk_right
 	walk_right
 	walk_in_place_fastest_up
 	step_end
 
-LittlerootTown_MaysHouse_2F_Movement_1F94A9: @ 81F94A9
+@ Unused, the player is already facing this direction so its unneeded
+LittlerootTown_MaysHouse_2F_Movement_PlayerWatchMayWest: @ 81F94A9
 	delay_16
 	delay_16
 	walk_in_place_fastest_right
 	step_end
 
-LittlerootTown_MaysHouse_2F_Movement_1F94AD: @ 81F94AD
+LittlerootTown_MaysHouse_2F_Movement_MayApproachPlayerEast: @ 81F94AD
 	walk_right
 	walk_right
 	walk_down
 	walk_in_place_fastest_right
 	step_end
 
-LittlerootTown_MaysHouse_2F_Movement_1F94B2: @ 81F94B2
+LittlerootTown_MaysHouse_2F_Movement_MayWalkToPCEast: @ 81F94B2
 	walk_up
 	walk_up
 	walk_right
@@ -238,7 +238,7 @@ LittlerootTown_MaysHouse_2F_Movement_1F94B2: @ 81F94B2
 	walk_in_place_fastest_up
 	step_end
 
-LittlerootTown_MaysHouse_2F_Movement_1F94BB: @ 81F94BB
+LittlerootTown_MaysHouse_2F_Movement_PlayerWatchMayEast: @ 81F94BB
 	delay_16
 	walk_in_place_fastest_up
 	delay_16
@@ -246,72 +246,71 @@ LittlerootTown_MaysHouse_2F_Movement_1F94BB: @ 81F94BB
 	walk_in_place_fastest_right
 	step_end
 
-LittlerootTown_BrendansHouse_2F_EventScript_1F94C1:: @ 81F94C1
-LittlerootTown_MaysHouse_2F_EventScript_1F94C1:: @ 81F94C1
+RivalsHouse_2F_EventScript_Rival:: @ 81F94C1
 	lockall
-	goto_if_set FLAG_MET_RIVAL_LILYCOVE, LittlerootTown_BrendansHouse_2F_EventScript_1F94F7
+	goto_if_set FLAG_MET_RIVAL_LILYCOVE, RivalsHouse_2F_EventScript_RivalPostLilycove
 	checkplayergender
 	compare VAR_RESULT, MALE
-	goto_if_eq LittlerootTown_BrendansHouse_2F_EventScript_1F94E3
+	goto_if_eq RivalsHouse_2F_EventScript_May
 	compare VAR_RESULT, FEMALE
-	goto_if_eq LittlerootTown_BrendansHouse_2F_EventScript_1F94ED
+	goto_if_eq RivalsHouse_2F_EventScript_Brendan
 	end
 
-LittlerootTown_BrendansHouse_2F_EventScript_1F94E3:: @ 81F94E3
-	msgbox LittlerootTown_BrendansHouse_2F_Text_1F978A, MSGBOX_DEFAULT
+RivalsHouse_2F_EventScript_May:: @ 81F94E3
+	msgbox RivalsHouse_2F_Text_MayGettingReady, MSGBOX_DEFAULT
 	releaseall
 	end
 
-LittlerootTown_BrendansHouse_2F_EventScript_1F94ED:: @ 81F94ED
-	msgbox LittlerootTown_BrendansHouse_2F_Text_1F9962, MSGBOX_DEFAULT
+RivalsHouse_2F_EventScript_Brendan:: @ 81F94ED
+	msgbox RivalsHouse_2F_Text_BrendanGettingReady, MSGBOX_DEFAULT
 	releaseall
 	end
 
-LittlerootTown_BrendansHouse_2F_EventScript_1F94F7:: @ 81F94F7
+RivalsHouse_2F_EventScript_RivalPostLilycove:: @ 81F94F7
 	applymovement VAR_LAST_TALKED, Common_Movement_FacePlayer
 	waitmovement 0
 	checkplayergender
 	compare VAR_RESULT, MALE
-	call_if_eq LittlerootTown_BrendansHouse_2F_EventScript_1F951D
+	call_if_eq RivalsHouse_2F_EventScript_MayPostLilycove
 	compare VAR_RESULT, FEMALE
-	call_if_eq LittlerootTown_BrendansHouse_2F_EventScript_1F952F
+	call_if_eq RivalsHouse_2F_EventScript_BrendanPostLilycove
 	setflag FLAG_MET_RIVAL_IN_HOUSE_AFTER_LILYCOVE
 	releaseall
 	end
 
-LittlerootTown_BrendansHouse_2F_EventScript_1F951D:: @ 81F951D
-	goto_if_set FLAG_MET_RIVAL_IN_HOUSE_AFTER_LILYCOVE, LittlerootTown_BrendansHouse_2F_EventScript_1F9541
-	msgbox LittlerootTown_BrendansHouse_2F_Text_1F99C9, MSGBOX_DEFAULT
+RivalsHouse_2F_EventScript_MayPostLilycove:: @ 81F951D
+	goto_if_set FLAG_MET_RIVAL_IN_HOUSE_AFTER_LILYCOVE, RivalsHouse_2F_EventScript_MayWhereShouldIGoNext
+	msgbox RivalsHouse_2F_Text_MayJustCheckingMyPokedex, MSGBOX_DEFAULT
 	return
 
-LittlerootTown_BrendansHouse_2F_EventScript_1F952F:: @ 81F952F
-	goto_if_set FLAG_MET_RIVAL_IN_HOUSE_AFTER_LILYCOVE, LittlerootTown_BrendansHouse_2F_EventScript_1F954A
-	msgbox LittlerootTown_BrendansHouse_2F_Text_1F9B0D, MSGBOX_DEFAULT
+RivalsHouse_2F_EventScript_BrendanPostLilycove:: @ 81F952F
+	goto_if_set FLAG_MET_RIVAL_IN_HOUSE_AFTER_LILYCOVE, RivalsHouse_2F_EventScript_BrendanWhereShouldIGoNext
+	msgbox RivalsHouse_2F_Text_BrendanJustCheckingMyPokedex, MSGBOX_DEFAULT
 	return
 
-LittlerootTown_BrendansHouse_2F_EventScript_1F9541:: @ 81F9541
-	msgbox LittlerootTown_BrendansHouse_2F_Text_1F9A9E, MSGBOX_DEFAULT
+RivalsHouse_2F_EventScript_MayWhereShouldIGoNext:: @ 81F9541
+	msgbox RivalsHouse_2F_Text_MayWhereShouldIGoNext, MSGBOX_DEFAULT
 	return
 
-LittlerootTown_BrendansHouse_2F_EventScript_1F954A:: @ 81F954A
-	msgbox LittlerootTown_BrendansHouse_2F_Text_1F9BE7, MSGBOX_DEFAULT
+RivalsHouse_2F_EventScript_BrendanWhereShouldIGoNext:: @ 81F954A
+	msgbox RivalsHouse_2F_Text_BrendanWhereShouldIGoNext, MSGBOX_DEFAULT
 	return
 
-EventScript_PlayerPCFemale:: @ 81F9553
+LittlerootTown_MaysHouse_2F_EventScript_PC:: @ 81F9553
 	lockall
 	checkplayergender
 	compare VAR_RESULT, MALE
-	goto_if_eq LittlerootTown_MaysHouse_2F_EventScript_1F956C
+	goto_if_eq LittlerootTown_MaysHouse_2F_EventScript_CheckRivalsPC
 	compare VAR_RESULT, FEMALE
-	goto_if_eq LittlerootTown_MaysHouse_2F_EventScript_1F9576
+	goto_if_eq LittlerootTown_MaysHouse_2F_EventScript_CheckPlayersPC
 	end
 
-LittlerootTown_MaysHouse_2F_EventScript_1F956C:: @ 81F956C
+LittlerootTown_MaysHouse_2F_EventScript_CheckRivalsPC:: @ 81F956C
 	msgbox gText_PokemonTrainerSchoolEmail, MSGBOX_DEFAULT
 	releaseall
 	end
 
-LittlerootTown_MaysHouse_2F_EventScript_1F9576:: @ 81F9576
+LittlerootTown_MaysHouse_2F_EventScript_CheckPlayersPC:: @ 81F9576
 	setvar VAR_0x8004, 2
 	special DoPCTurnOnEffect
 	playse SE_PC_ON
@@ -321,14 +320,14 @@ LittlerootTown_MaysHouse_2F_EventScript_1F9576:: @ 81F9576
 	releaseall
 	end
 
-LittlerootTown_MaysHouse_2F_EventScript_1F958F:: @ 81F958F
+LittlerootTown_MaysHouse_2F_EventScript_TurnOffPlayerPC:: @ 81F958F
 	setvar VAR_0x8004, 2
 	playse SE_PC_OFF
 	special DoPCTurnOffEffect
 	releaseall
 	end
 
-LittlerootTown_MaysHouse_2F_Text_1F959C: @ 81F959C
+RivalsHouse_2F_Text_MayWhoAreYou: @ 81F959C
 	.string "Huh?\n"
 	.string "Who… Who are you?\p"
 	.string "… … … … … … … …\n"
@@ -352,11 +351,11 @@ LittlerootTown_MaysHouse_2F_Text_1F959C: @ 81F959C
 	.string "some wild POKéMON!\p"
 	.string "{PLAYER}{KUN}, I'll catch you later!$"
 
-LittlerootTown_BrendansHouse_2F_Text_1F978A: @ 81F978A
+RivalsHouse_2F_Text_MayGettingReady: @ 81F978A
 	.string "POKéMON fully restored!\n"
 	.string "Items ready, and…$"
 
-LittlerootTown_BrendansHouse_2F_Text_1F97B4: @ 81F97B4
+RivalsHouse_2F_Text_BrendanWhoAreYou: @ 81F97B4
 	.string "Hey!\n"
 	.string "You…\p"
 	.string "Who are you?\p"
@@ -376,16 +375,15 @@ LittlerootTown_BrendansHouse_2F_Text_1F97B4: @ 81F97B4
 	.string "some wild POKéMON.\p"
 	.string "Some other time, okay?$"
 
-LittlerootTown_BrendansHouse_2F_Text_1F9962: @ 81F9962
+RivalsHouse_2F_Text_BrendanGettingReady: @ 81F9962
 	.string "POKéMON fully restored…\n"
 	.string "Items all packed, and…$"
 
-LittlerootTown_BrendansHouse_2F_Text_1F9991: @ 81F9991
-LittlerootTown_MaysHouse_2F_Text_1F9991: @ 81F9991
+RivalsHouse_2F_Text_ItsRivalsPokeBall: @ 81F9991
 	.string "It's {RIVAL}'s POKé BALL!\p"
 	.string "Better leave it right where it is.$"
 
-LittlerootTown_BrendansHouse_2F_Text_1F99C9: @ 81F99C9
+RivalsHouse_2F_Text_MayJustCheckingMyPokedex: @ 81F99C9
 	.string "MAY: {PLAYER}{KUN}!\p"
 	.string "I was just checking my POKéDEX.\p"
 	.string "There's still a lot of POKéMON that\n"
@@ -395,13 +393,13 @@ LittlerootTown_BrendansHouse_2F_Text_1F99C9: @ 81F99C9
 	.string "I wonder where I should go catch\n"
 	.string "some POKéMON next?$"
 
-LittlerootTown_BrendansHouse_2F_Text_1F9A9E: @ 81F9A9E
+RivalsHouse_2F_Text_MayWhereShouldIGoNext: @ 81F9A9E
 	.string "MAY: I wonder where I should go catch\n"
 	.string "some POKéMON next?\p"
 	.string "Wouldn't it be funny if we ran into each\n"
 	.string "other, {PLAYER}{KUN}?$"
 
-LittlerootTown_BrendansHouse_2F_Text_1F9B0D: @ 81F9B0D
+RivalsHouse_2F_Text_BrendanJustCheckingMyPokedex: @ 81F9B0D
 	.string "BRENDAN: Hey, it's {PLAYER}.\p"
 	.string "I was just checking out my POKéDEX.\p"
 	.string "There are still many POKéMON that\n"
@@ -410,7 +408,7 @@ LittlerootTown_BrendansHouse_2F_Text_1F9B0D: @ 81F9B0D
 	.string "Checking this POKéDEX out gives me\n"
 	.string "the urge to hit the road again.$"
 
-LittlerootTown_BrendansHouse_2F_Text_1F9BE7: @ 81F9BE7
+RivalsHouse_2F_Text_BrendanWhereShouldIGoNext: @ 81F9BE7
 	.string "BRENDAN: I'm having a hard time deciding\n"
 	.string "where I should catch POKéMON next.\p"
 	.string "Hey, {PLAYER}, if I see you while I'm out\n"

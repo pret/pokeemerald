@@ -514,7 +514,7 @@ void sub_810CE68(struct Sprite *sprite)
 
     StartSpriteAnim(sprite, gBattleAnimArgs[6]);
     gBattleAnimArgs[6] = 0;
-    sub_80A7938(sprite);
+    AnimSnoreZ(sprite);
 }
 
 void sub_810CEB4(struct Sprite *sprite)

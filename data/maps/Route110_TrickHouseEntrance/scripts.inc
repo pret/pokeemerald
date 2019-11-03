@@ -497,7 +497,7 @@ Route110_TrickHouseEntrance_EventScript_26A106:: @ 826A106
 Route110_TrickHouseEntrance_EventScript_26A110:: @ 826A110
 	msgbox Route110_TrickHouseEntrance_Text_26A887, MSGBOX_YESNO
 	closemessage
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, YES
 	goto_if_eq Route110_TrickHouseEntrance_EventScript_26A126
 	releaseall
 	end

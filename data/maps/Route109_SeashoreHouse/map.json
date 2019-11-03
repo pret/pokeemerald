@@ -24,7 +24,7 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route109_SeashoreHouse_EventScript_2693FE",
+      "script": "Route109_SeashoreHouse_EventScript_Owner",
       "flag": "0"
     },
     {
@@ -37,7 +37,7 @@
       "movement_range_y": 0,
       "trainer_type": "1",
       "trainer_sight_or_berry_tree_id": "2",
-      "script": "Route109_SeashoreHouse_EventScript_2694E2",
+      "script": "Route109_SeashoreHouse_EventScript_Dwayne",
       "flag": "0"
     },
     {
@@ -50,7 +50,7 @@
       "movement_range_y": 0,
       "trainer_type": "1",
       "trainer_sight_or_berry_tree_id": "2",
-      "script": "Route109_SeashoreHouse_EventScript_269518",
+      "script": "Route109_SeashoreHouse_EventScript_Simon",
       "flag": "0"
     },
     {
@@ -63,7 +63,7 @@
       "movement_range_y": 0,
       "trainer_type": "1",
       "trainer_sight_or_berry_tree_id": "2",
-      "script": "Route109_SeashoreHouse_EventScript_2694FD",
+      "script": "Route109_SeashoreHouse_EventScript_Johanna",
       "flag": "0"
     }
   ],
