@@ -24,7 +24,7 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "EverGrandeCity_PokemonCenter_1F_EventScript_229A59",
+      "script": "EverGrandeCity_PokemonCenter_1F_EventScript_Nurse",
       "flag": "0"
     },
     {
@@ -37,7 +37,7 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "EverGrandeCity_PokemonCenter_1F_EventScript_229A67",
+      "script": "EverGrandeCity_PokemonCenter_1F_EventScript_Woman",
       "flag": "0"
     },
     {
@@ -50,7 +50,7 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "EverGrandeCity_PokemonCenter_1F_EventScript_229A70",
+      "script": "EverGrandeCity_PokemonCenter_1F_EventScript_ExpertM",
       "flag": "0"
     },
     {
@@ -63,7 +63,7 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "EverGrandeCity_PokemonCenter_1F_EventScript_229A79",
+      "script": "EverGrandeCity_PokemonCenter_1F_EventScript_Scott",
       "flag": "FLAG_HIDE_EVER_GRANDE_POKEMON_CENTER_1F_SCOTT"
     }
   ],

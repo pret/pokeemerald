@@ -8,7 +8,8 @@ SlateportCity_PokemonCenter_1F_OnTransition: @ 820DACA
 	call Common_EventScript_UpdateBrineyLocation
 	end
 
-SlateportCity_PokemonCenter_1F_EventScript_20DAD3:: @ 820DAD3
+@ VAR_0x800B is the Nurse's object event id
+SlateportCity_PokemonCenter_1F_EventScript_Nurse:: @ 820DAD3
 	setvar VAR_0x800B, 1
 	call Common_EventScript_PkmnCenterNurse
 	waitmessage
@@ -16,15 +17,15 @@ SlateportCity_PokemonCenter_1F_EventScript_20DAD3:: @ 820DAD3
 	release
 	end
 
-SlateportCity_PokemonCenter_1F_EventScript_20DAE1:: @ 820DAE1
-	msgbox SlateportCity_PokemonCenter_1F_Text_20DAF3, MSGBOX_NPC
+SlateportCity_PokemonCenter_1F_EventScript_Sailor:: @ 820DAE1
+	msgbox SlateportCity_PokemonCenter_1F_Text_RaiseDifferentTypesOfPokemon, MSGBOX_NPC
 	end
 
-SlateportCity_PokemonCenter_1F_EventScript_20DAEA:: @ 820DAEA
-	msgbox SlateportCity_PokemonCenter_1F_Text_20DBBC, MSGBOX_NPC
+SlateportCity_PokemonCenter_1F_EventScript_Woman:: @ 820DAEA
+	msgbox SlateportCity_PokemonCenter_1F_Text_TradedMonWithFriend, MSGBOX_NPC
 	end
 
-SlateportCity_PokemonCenter_1F_Text_20DAF3: @ 820DAF3
+SlateportCity_PokemonCenter_1F_Text_RaiseDifferentTypesOfPokemon: @ 820DAF3
 	.string "Want a tip for battling?\p"
 	.string "I'd say it's raising different kinds\n"
 	.string "of POKéMON in a balanced manner.\p"
@@ -33,7 +34,7 @@ SlateportCity_PokemonCenter_1F_Text_20DAF3: @ 820DAF3
 	.string "If it has a type disadvantage,\n"
 	.string "it might not stand a chance.$"
 
-SlateportCity_PokemonCenter_1F_Text_20DBBC: @ 820DBBC
+SlateportCity_PokemonCenter_1F_Text_TradedMonWithFriend: @ 820DBBC
 	.string "I trade POKéMON with my friends.\p"
 	.string "If a traded POKéMON is holding an\n"
 	.string "item, it makes me twice as happy!$"
