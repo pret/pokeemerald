@@ -353,7 +353,7 @@ gSpecials:: @ 81DBA64
 	def_special ScriptRandom
 	def_special sub_81AFDD0
 	def_special TryPutTreasureInvestigatorsOnAir
-	def_special sub_80EE2CC
+	def_special TryPutLotteryWinnerReportOnAir
 	def_special sub_80EE72C
 	def_special sub_80EE7C0
 	def_special ShowGlassWorkshopMenu
