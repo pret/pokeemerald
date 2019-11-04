@@ -53,21 +53,21 @@ MossdeepCity_SpaceCenter_2F_Movement_PlayerExit: @ 8223E07
 	step_end
 
 MossdeepCity_SpaceCenter_2F_EventScript_BattleThreeMagmaGrunts:: @ 8223E09
-	msgbox MossdeepCity_SpaceCenter_2F_Text_Grunt34Intro, MSGBOX_DEFAULT
-	trainerbattle_no_intro TRAINER_GRUNT_34, MossdeepCity_SpaceCenter_2F_Text_Grunt34Defeat
-	applymovement 6, MossdeepCity_SpaceCenter_2F_Movement_Grunt34Defeated
+	msgbox MossdeepCity_SpaceCenter_2F_Text_Grunt5Intro, MSGBOX_DEFAULT
+	trainerbattle_no_intro TRAINER_GRUNT_SPACE_CENTER_5, MossdeepCity_SpaceCenter_2F_Text_Grunt5Defeat
+	applymovement 6, MossdeepCity_SpaceCenter_2F_Movement_Grunt5Defeated
 	waitmovement 0
 	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceFastestLeft
 	waitmovement 0
-	msgbox MossdeepCity_SpaceCenter_2F_Text_Grunt35Intro, MSGBOX_DEFAULT
-	trainerbattle_no_intro TRAINER_GRUNT_35, MossdeepCity_SpaceCenter_2F_Text_Grunt35Defeat
-	applymovement 5, MossdeepCity_SpaceCenter_2F_Movement_Grunt35Defeated
+	msgbox MossdeepCity_SpaceCenter_2F_Text_Grunt6Intro, MSGBOX_DEFAULT
+	trainerbattle_no_intro TRAINER_GRUNT_SPACE_CENTER_6, MossdeepCity_SpaceCenter_2F_Text_Grunt6Defeat
+	applymovement 5, MossdeepCity_SpaceCenter_2F_Movement_Grunt6Defeated
 	waitmovement 0
 	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceFastestRight
 	waitmovement 0
-	msgbox MossdeepCity_SpaceCenter_2F_Text_Grunt36Intro, MSGBOX_DEFAULT
-	trainerbattle_no_intro TRAINER_GRUNT_36, MossdeepCity_SpaceCenter_2F_Text_Grunt36Defeat
-	applymovement 7, MossdeepCity_SpaceCenter_2F_Movement_Grunt36Defeated
+	msgbox MossdeepCity_SpaceCenter_2F_Text_Grunt7Intro, MSGBOX_DEFAULT
+	trainerbattle_no_intro TRAINER_GRUNT_SPACE_CENTER_7, MossdeepCity_SpaceCenter_2F_Text_Grunt7Defeat
+	applymovement 7, MossdeepCity_SpaceCenter_2F_Movement_Grunt7Defeated
 	waitmovement 0
 	setvar VAR_MOSSDEEP_SPACE_CENTER_STATE, 2
 	copyobjectxytoperm 5
@@ -76,19 +76,19 @@ MossdeepCity_SpaceCenter_2F_EventScript_BattleThreeMagmaGrunts:: @ 8223E09
 	releaseall
 	end
 
-MossdeepCity_SpaceCenter_2F_Movement_Grunt35Defeated: @ 8223E81
+MossdeepCity_SpaceCenter_2F_Movement_Grunt6Defeated: @ 8223E81
 	lock_facing_direction
 	walk_left
 	unlock_facing_direction
 	step_end
 
-MossdeepCity_SpaceCenter_2F_Movement_Grunt34Defeated: @ 8223E85
+MossdeepCity_SpaceCenter_2F_Movement_Grunt5Defeated: @ 8223E85
 	lock_facing_direction
 	walk_down
 	unlock_facing_direction
 	step_end
 
-MossdeepCity_SpaceCenter_2F_Movement_Grunt36Defeated: @ 8223E89
+MossdeepCity_SpaceCenter_2F_Movement_Grunt7Defeated: @ 8223E89
 	lock_facing_direction
 	walk_right
 	unlock_facing_direction
@@ -158,16 +158,16 @@ MossdeepCity_SpaceCenter_2F_EventScript_RichBoyMagma:: @ 8223F34
 	end
 
 @ Battle for the below 3 grunts is handled in MossdeepCity_SpaceCenter_2F_EventScript_BattleThreeMagmaGrunts
-MossdeepCity_SpaceCenter_2F_EventScript_Grunt35:: @ 8223F3E
-	msgbox MossdeepCity_SpaceCenter_2F_Text_Grunt35PostBattle, MSGBOX_NPC
+MossdeepCity_SpaceCenter_2F_EventScript_Grunt6:: @ 8223F3E
+	msgbox MossdeepCity_SpaceCenter_2F_Text_Grunt6PostBattle, MSGBOX_NPC
 	end
 
-MossdeepCity_SpaceCenter_2F_EventScript_Grunt36:: @ 8223F47
-	msgbox MossdeepCity_SpaceCenter_2F_Text_Grunt36PostBattle, MSGBOX_NPC
+MossdeepCity_SpaceCenter_2F_EventScript_Grunt7:: @ 8223F47
+	msgbox MossdeepCity_SpaceCenter_2F_Text_Grunt7PostBattle, MSGBOX_NPC
 	end
 
-MossdeepCity_SpaceCenter_2F_EventScript_Grunt34:: @ 8223F50
-	msgbox MossdeepCity_SpaceCenter_2F_Text_Grunt34PostBattle, MSGBOX_NPC
+MossdeepCity_SpaceCenter_2F_EventScript_Grunt5:: @ 8223F50
+	msgbox MossdeepCity_SpaceCenter_2F_Text_Grunt5PostBattle, MSGBOX_NPC
 	end
 
 MossdeepCity_SpaceCenter_2F_EventScript_Tabitha:: @ 8223F59
@@ -408,39 +408,39 @@ MossdeepCity_SpaceCenter_2F_Text_GoodAnswer: @ 82243FE
 	.string "Good answer!\n"
 	.string "That's what a smart person'll do!$"
 
-MossdeepCity_SpaceCenter_2F_Text_Grunt34Intro: @ 822442D
+MossdeepCity_SpaceCenter_2F_Text_Grunt5Intro: @ 822442D
 	.string "A reckless go-getter, are you?\n"
 	.string "Okay, I'll go first!$"
 
-MossdeepCity_SpaceCenter_2F_Text_Grunt34Defeat: @ 8224461
+MossdeepCity_SpaceCenter_2F_Text_Grunt5Defeat: @ 8224461
 	.string "I lost!\n"
 	.string "But!$"
 
-MossdeepCity_SpaceCenter_2F_Text_Grunt35Intro: @ 822446E
+MossdeepCity_SpaceCenter_2F_Text_Grunt6Intro: @ 822446E
 	.string "It's too soon to be relieved!\n"
 	.string "I'm up next!$"
 
-MossdeepCity_SpaceCenter_2F_Text_Grunt35Defeat: @ 8224499
+MossdeepCity_SpaceCenter_2F_Text_Grunt6Defeat: @ 8224499
 	.string "I lost, too!\n"
 	.string "But!$"
 
-MossdeepCity_SpaceCenter_2F_Text_Grunt36Intro: @ 82244AB
+MossdeepCity_SpaceCenter_2F_Text_Grunt7Intro: @ 82244AB
 	.string "I bet you want to take a break.\n"
 	.string "But I'm not about to let you do that!$"
 
-MossdeepCity_SpaceCenter_2F_Text_Grunt36Defeat: @ 82244F1
+MossdeepCity_SpaceCenter_2F_Text_Grunt7Defeat: @ 82244F1
 	.string "We should've taken a break…\n"
 	.string "That's what we should've done…$"
 
-MossdeepCity_SpaceCenter_2F_Text_Grunt35PostBattle: @ 822452C
+MossdeepCity_SpaceCenter_2F_Text_Grunt6PostBattle: @ 822452C
 	.string "Three of us here, and look at the sorry\n"
 	.string "mess we got ourselves into.$"
 
-MossdeepCity_SpaceCenter_2F_Text_Grunt36PostBattle: @ 8224570
+MossdeepCity_SpaceCenter_2F_Text_Grunt7PostBattle: @ 8224570
 	.string "We three losing like this…\n"
 	.string "We look worse than usual by triple!$"
 
-MossdeepCity_SpaceCenter_2F_Text_Grunt34PostBattle: @ 82245AF
+MossdeepCity_SpaceCenter_2F_Text_Grunt5PostBattle: @ 82245AF
 	.string "Are we being useful to our leader\n"
 	.string "at all?$"
 

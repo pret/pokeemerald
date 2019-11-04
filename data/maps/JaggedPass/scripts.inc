@@ -77,9 +77,9 @@ JaggedPass_EventScript_MagmaHideoutGuard:: @ 8230718
 	waitmovement 0
 	applymovement 5, Common_Movement_FacePlayer
 	waitmovement 0
-	msgbox JaggedPass_Text_Grunt30Intro, MSGBOX_DEFAULT
+	msgbox JaggedPass_Text_GruntIntro, MSGBOX_DEFAULT
 	closemessage
-	trainerbattle_no_intro TRAINER_GRUNT_30, JaggedPass_Text_Grunt30Defeat
+	trainerbattle_no_intro TRAINER_GRUNT_JAGGED_PASS, JaggedPass_Text_GruntDefeat
 	setflag FLAG_BEAT_MAGMA_GRUNT_JAGGED_PASS
 	applymovement 5, Common_Movement_FaceOriginalDirection
 	waitmovement 0
@@ -226,13 +226,13 @@ JaggedPass_Text_EthanPostRematch: @ 8230C94
 	.string "I should get an ACRO BIKE from RYDEL\n"
 	.string "in MAUVILLE CITY…$"
 
-JaggedPass_Text_Grunt30Intro: @ 8230CCB
+JaggedPass_Text_GruntIntro: @ 8230CCB
 	.string "Wah!\n"
 	.string "What are you doing here?\p"
 	.string "What am I doing in a place like this?\p"
 	.string "What business is it of yours?$"
 
-JaggedPass_Text_Grunt30Defeat: @ 8230D2D
+JaggedPass_Text_GruntDefeat: @ 8230D2D
 	.string "Urrrgh…\p"
 	.string "I should've ducked into our HIDEOUT\n"
 	.string "right away…$"

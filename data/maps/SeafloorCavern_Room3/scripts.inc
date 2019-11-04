@@ -6,9 +6,9 @@ SeafloorCavern_Room3_EventScript_Shelly:: @ 8234938
 	msgbox SeafloorCavern_Room3_Text_ShellyPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-SeafloorCavern_Room3_EventScript_Grunt27:: @ 823494F
-	trainerbattle_single TRAINER_GRUNT_27, SeafloorCavern_Room3_Text_Grunt27Intro, SeafloorCavern_Room3_Text_Grunt27Defeat
-	msgbox SeafloorCavern_Room3_Text_Grunt27PostBattle, MSGBOX_AUTOCLOSE
+SeafloorCavern_Room3_EventScript_Grunt5:: @ 823494F
+	trainerbattle_single TRAINER_GRUNT_SEAFLOOR_CAVERN_5, SeafloorCavern_Room3_Text_Grunt5Intro, SeafloorCavern_Room3_Text_Grunt5Defeat
+	msgbox SeafloorCavern_Room3_Text_Grunt5PostBattle, MSGBOX_AUTOCLOSE
 	end
 
 SeafloorCavern_Room3_Text_ShellyIntro: @ 8234966
@@ -36,7 +36,7 @@ SeafloorCavern_Room3_Text_ShellyPostBattle: @ 8234A8A
 	.string "world our BOSS has promised as\l"
 	.string "one of us…$"
 
-SeafloorCavern_Room3_Text_Grunt27Intro: @ 8234B3A
+SeafloorCavern_Room3_Text_Grunt5Intro: @ 8234B3A
 	.string "For our dream to become real, we need\n"
 	.string "the power of POKéMON.\p"
 	.string "But meddlers like you use the power of\n"
@@ -45,10 +45,10 @@ SeafloorCavern_Room3_Text_Grunt27Intro: @ 8234B3A
 	.string "Life just doesn't work the way we\n"
 	.string "need it to!$"
 
-SeafloorCavern_Room3_Text_Grunt27Defeat: @ 8234BFE
+SeafloorCavern_Room3_Text_Grunt5Defeat: @ 8234BFE
 	.string "Gwah!$"
 
-SeafloorCavern_Room3_Text_Grunt27PostBattle: @ 8234C04
+SeafloorCavern_Room3_Text_Grunt5PostBattle: @ 8234C04
 	.string "You know, we don't dare question\n"
 	.string "the motives of our leader.\p"
 	.string "But here you are, just some punk,\n"

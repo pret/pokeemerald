@@ -312,7 +312,7 @@ RusturfTunnel_EventScript_22D0C2:: @ 822D0C2
 	faceplayer
 	playbgm MUS_AQA_0, 0
 	msgbox RusturfTunnel_Text_22D20A, MSGBOX_DEFAULT
-	trainerbattle_no_intro TRAINER_GRUNT_10, RusturfTunnel_Text_22D2B0
+	trainerbattle_no_intro TRAINER_GRUNT_RUSTURF_TUNNEL, RusturfTunnel_Text_22D2B0
 	msgbox RusturfTunnel_Text_22D2E1, MSGBOX_DEFAULT
 	giveitem_std ITEM_DEVON_GOODS
 	closemessage

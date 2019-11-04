@@ -61,40 +61,40 @@ Route119_WeatherInstitute_1F_EventScript_Bed:: @ 826FB18
 	releaseall
 	end
 
-Route119_WeatherInstitute_1F_EventScript_Grunt11:: @ 826FB29
-	trainerbattle_single TRAINER_GRUNT_11, Route119_WeatherInstitute_1F_Text_Grunt11Intro, Route119_WeatherInstitute_1F_Text_Grunt11Defeat
-	msgbox Route119_WeatherInstitute_1F_Text_Grunt11PostBattle, MSGBOX_AUTOCLOSE
+Route119_WeatherInstitute_1F_EventScript_Grunt1:: @ 826FB29
+	trainerbattle_single TRAINER_GRUNT_WEATHER_INST_1, Route119_WeatherInstitute_1F_Text_Grunt1Intro, Route119_WeatherInstitute_1F_Text_Grunt1Defeat
+	msgbox Route119_WeatherInstitute_1F_Text_Grunt1PostBattle, MSGBOX_AUTOCLOSE
 	end
 
-Route119_WeatherInstitute_1F_EventScript_Grunt20:: @ 826FB40
-	trainerbattle_single TRAINER_GRUNT_20, Route119_WeatherInstitute_1F_Text_Grunt20Intro, Route119_WeatherInstitute_1F_Text_Grunt20Defeat
-	msgbox Route119_WeatherInstitute_1F_Text_Grunt20PostBattle, MSGBOX_AUTOCLOSE
+Route119_WeatherInstitute_1F_EventScript_Grunt4:: @ 826FB40
+	trainerbattle_single TRAINER_GRUNT_WEATHER_INST_4, Route119_WeatherInstitute_1F_Text_Grunt4Intro, Route119_WeatherInstitute_1F_Text_Grunt4Defeat
+	msgbox Route119_WeatherInstitute_1F_Text_Grunt4PostBattle, MSGBOX_AUTOCLOSE
 	end
 
-Route119_WeatherInstitute_1F_Text_Grunt11Intro: @ 826FB57
+Route119_WeatherInstitute_1F_Text_Grunt1Intro: @ 826FB57
 	.string "The BOSS got interested in\n"
 	.string "the research they have going here,\l"
 	.string "so he sent us out.\p"
 	.string "You quit meddling!$"
 
-Route119_WeatherInstitute_1F_Text_Grunt11Defeat: @ 826FBBB
+Route119_WeatherInstitute_1F_Text_Grunt1Defeat: @ 826FBBB
 	.string "Blast it…\n"
 	.string "Blasted by a kid…$"
 
-Route119_WeatherInstitute_1F_Text_Grunt11PostBattle: @ 826FBD7
+Route119_WeatherInstitute_1F_Text_Grunt1PostBattle: @ 826FBD7
 	.string "Our BOSS knows everything.\p"
 	.string "But I'm just a GRUNT. What would I know\n"
 	.string "about what he's thinking?$"
 
-Route119_WeatherInstitute_1F_Text_Grunt20Intro: @ 826FC34
+Route119_WeatherInstitute_1F_Text_Grunt4Intro: @ 826FC34
 	.string "Huh?\n"
 	.string "What's a kid doing here?$"
 
-Route119_WeatherInstitute_1F_Text_Grunt20Defeat: @ 826FC52
+Route119_WeatherInstitute_1F_Text_Grunt4Defeat: @ 826FC52
 	.string "Huh?\n"
 	.string "I lost?!$"
 
-Route119_WeatherInstitute_1F_Text_Grunt20PostBattle: @ 826FC60
+Route119_WeatherInstitute_1F_Text_Grunt4PostBattle: @ 826FC60
 	.string "Oh, no…\n"
 	.string "I'll catch an earful for losing to a kid…\p"
 	.string "I should just take a nap in the bed…$"

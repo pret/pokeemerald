@@ -25,19 +25,19 @@ Route119_WeatherInstitute_2F_EventScript_SetScientistPosGameClear:: @ 826FF5C
 	setobjectmovementtype 5, MOVEMENT_TYPE_FACE_UP
 	return
 
-Route119_WeatherInstitute_2F_EventScript_Grunt37:: @ 826FF68
-	trainerbattle_single TRAINER_GRUNT_37, Route119_WeatherInstitute_2F_Text_Grunt37Intro, Route119_WeatherInstitute_2F_Text_Grunt37Defeat
-	msgbox Route119_WeatherInstitute_2F_Text_Grunt37PostBattle, MSGBOX_AUTOCLOSE
+Route119_WeatherInstitute_2F_EventScript_Grunt5:: @ 826FF68
+	trainerbattle_single TRAINER_GRUNT_WEATHER_INST_5, Route119_WeatherInstitute_2F_Text_Grunt5Intro, Route119_WeatherInstitute_2F_Text_Grunt5Defeat
+	msgbox Route119_WeatherInstitute_2F_Text_Grunt5PostBattle, MSGBOX_AUTOCLOSE
 	end
 
-Route119_WeatherInstitute_2F_EventScript_Grunt12:: @ 826FF7F
-	trainerbattle_single TRAINER_GRUNT_12, Route119_WeatherInstitute_2F_Text_Grunt12Intro, Route119_WeatherInstitute_2F_Text_Grunt12Defeat
-	msgbox Route119_WeatherInstitute_2F_Text_Grunt12PostBattle, MSGBOX_AUTOCLOSE
+Route119_WeatherInstitute_2F_EventScript_Grunt2:: @ 826FF7F
+	trainerbattle_single TRAINER_GRUNT_WEATHER_INST_2, Route119_WeatherInstitute_2F_Text_Grunt2Intro, Route119_WeatherInstitute_2F_Text_Grunt2Defeat
+	msgbox Route119_WeatherInstitute_2F_Text_Grunt2PostBattle, MSGBOX_AUTOCLOSE
 	end
 
-Route119_WeatherInstitute_2F_EventScript_Grunt13:: @ 826FF96
-	trainerbattle_single TRAINER_GRUNT_13, Route119_WeatherInstitute_2F_Text_Grunt13Intro, Route119_WeatherInstitute_2F_Text_Grunt13Defeat
-	msgbox Route119_WeatherInstitute_2F_Text_Grunt13PostBattle, MSGBOX_AUTOCLOSE
+Route119_WeatherInstitute_2F_EventScript_Grunt3:: @ 826FF96
+	trainerbattle_single TRAINER_GRUNT_WEATHER_INST_3, Route119_WeatherInstitute_2F_Text_Grunt3Intro, Route119_WeatherInstitute_2F_Text_Grunt3Defeat
+	msgbox Route119_WeatherInstitute_2F_Text_Grunt3PostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route119_WeatherInstitute_2F_EventScript_Shelly:: @ 826FFAD
@@ -211,42 +211,42 @@ Route119_WeatherInstitute_2F_EventScript_WeatherScientist:: @ 827018B
 	goto Route119_WeatherInstitute_2F_EventScript_ReceiveCastform
 	end
 
-Route119_WeatherInstitute_2F_Text_Grunt12Intro: @ 827019C
+Route119_WeatherInstitute_2F_Text_Grunt2Intro: @ 827019C
 	.string "The INSTITUTE created a type of\n"
 	.string "POKéMON that has something to do with\l"
 	.string "the weather. We're here to take them!$"
 
-Route119_WeatherInstitute_2F_Text_Grunt12Defeat: @ 8270208
+Route119_WeatherInstitute_2F_Text_Grunt2Defeat: @ 8270208
 	.string "Our plan's being spoiled by a kid?$"
 
-Route119_WeatherInstitute_2F_Text_Grunt12PostBattle: @ 827022B
+Route119_WeatherInstitute_2F_Text_Grunt2PostBattle: @ 827022B
 	.string "If the POKéMON they made here can\n"
 	.string "control the weather freely, then we of\l"
 	.string "TEAM AQUA definitely need it!$"
 
-Route119_WeatherInstitute_2F_Text_Grunt13Intro: @ 8270292
+Route119_WeatherInstitute_2F_Text_Grunt3Intro: @ 8270292
 	.string "We're TEAM AQUA!\n"
 	.string "We appear wherever anything rare is\l"
 	.string "found!$"
 
-Route119_WeatherInstitute_2F_Text_Grunt13Defeat: @ 82702CE
+Route119_WeatherInstitute_2F_Text_Grunt3Defeat: @ 82702CE
 	.string "You got me!$"
 
-Route119_WeatherInstitute_2F_Text_Grunt13PostBattle: @ 82702DA
+Route119_WeatherInstitute_2F_Text_Grunt3PostBattle: @ 82702DA
 	.string "You don't have any idea what we of\n"
 	.string "TEAM AQUA are working towards!\l"
 	.string "You stay out of our way!$"
 
-Route119_WeatherInstitute_2F_Text_Grunt37Intro: @ 8270335
+Route119_WeatherInstitute_2F_Text_Grunt5Intro: @ 8270335
 	.string "Don't tell me you're looking for that\n"
 	.string "weather POKéMON, too?\p"
 	.string "That's a no-no!\n"
 	.string "We were here to get it first!$"
 
-Route119_WeatherInstitute_2F_Text_Grunt37Defeat: @ 827039F
+Route119_WeatherInstitute_2F_Text_Grunt5Defeat: @ 827039F
 	.string "Oh, will you look at my POKéMON?$"
 
-Route119_WeatherInstitute_2F_Text_Grunt37PostBattle: @ 82703C0
+Route119_WeatherInstitute_2F_Text_Grunt5PostBattle: @ 82703C0
 	.string "Humph, so what?\n"
 	.string "What we want…\p"
 	.string "What we really want isn't here…\n"

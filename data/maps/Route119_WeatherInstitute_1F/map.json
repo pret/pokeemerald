@@ -24,7 +24,7 @@
       "movement_range_y": 0,
       "trainer_type": "1",
       "trainer_sight_or_berry_tree_id": "3",
-      "script": "Route119_WeatherInstitute_1F_EventScript_Grunt11",
+      "script": "Route119_WeatherInstitute_1F_EventScript_Grunt1",
       "flag": "FLAG_HIDE_ROUTE_119_TEAM_AQUA"
     },
     {
@@ -37,7 +37,7 @@
       "movement_range_y": 0,
       "trainer_type": "1",
       "trainer_sight_or_berry_tree_id": "2",
-      "script": "Route119_WeatherInstitute_1F_EventScript_Grunt20",
+      "script": "Route119_WeatherInstitute_1F_EventScript_Grunt4",
       "flag": "FLAG_HIDE_ROUTE_119_TEAM_AQUA"
     },
     {

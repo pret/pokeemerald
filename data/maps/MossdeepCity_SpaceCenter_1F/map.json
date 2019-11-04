@@ -89,7 +89,7 @@
       "movement_range_y": 1,
       "trainer_type": "1",
       "trainer_sight_or_berry_tree_id": "2",
-      "script": "MossdeepCity_SpaceCenter_1F_EventScript_Grunt32",
+      "script": "MossdeepCity_SpaceCenter_1F_EventScript_Grunt3",
       "flag": "FLAG_HIDE_MOSSDEEP_CITY_SPACE_CENTER_1F_TEAM_MAGMA"
     },
     {
@@ -102,7 +102,7 @@
       "movement_range_y": 1,
       "trainer_type": "1",
       "trainer_sight_or_berry_tree_id": "2",
-      "script": "MossdeepCity_SpaceCenter_1F_EventScript_Grunt16",
+      "script": "MossdeepCity_SpaceCenter_1F_EventScript_Grunt1",
       "flag": "FLAG_HIDE_MOSSDEEP_CITY_SPACE_CENTER_1F_TEAM_MAGMA"
     },
     {
@@ -115,7 +115,7 @@
       "movement_range_y": 1,
       "trainer_type": "1",
       "trainer_sight_or_berry_tree_id": "2",
-      "script": "MossdeepCity_SpaceCenter_1F_EventScript_Grunt33",
+      "script": "MossdeepCity_SpaceCenter_1F_EventScript_Grunt4",
       "flag": "FLAG_HIDE_MOSSDEEP_CITY_SPACE_CENTER_1F_TEAM_MAGMA"
     },
     {
@@ -128,7 +128,7 @@
       "movement_range_y": 1,
       "trainer_type": "1",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "MossdeepCity_SpaceCenter_1F_EventScript_Grunt23",
+      "script": "MossdeepCity_SpaceCenter_1F_EventScript_Grunt2",
       "flag": "FLAG_HIDE_MOSSDEEP_CITY_SPACE_CENTER_1F_TEAM_MAGMA"
     },
     {

@@ -427,9 +427,9 @@ MtChimney_EventScript_Tabitha:: @ 822F06E
 	msgbox MtChimney_Text_TabithaPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-MtChimney_EventScript_Grunt31:: @ 822F085
-	trainerbattle_single TRAINER_GRUNT_31, MtChimney_Text_Grunt31Intro, MtChimney_Text_Grunt31Defeat
-	msgbox MtChimney_Text_Grunt31PostBattle, MSGBOX_AUTOCLOSE
+MtChimney_EventScript_Grunt2:: @ 822F085
+	trainerbattle_single TRAINER_GRUNT_MT_CHIMNEY_2, MtChimney_Text_Grunt2Intro, MtChimney_Text_Grunt2Defeat
+	msgbox MtChimney_Text_Grunt2PostBattle, MSGBOX_AUTOCLOSE
 	end
 
 MtChimney_EventScript_BusyMagmaGrunt1:: @ 822F09C
@@ -533,9 +533,9 @@ MtChimney_EventScript_Shirley:: @ 822F1DA
 	msgbox MtChimney_Text_ShirleyPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-MtChimney_EventScript_Grunt24:: @ 822F1F1
-	trainerbattle_single TRAINER_GRUNT_24, MtChimney_Text_Grunt24Intro, MtChimney_Text_Grunt24Defeat
-	msgbox MtChimney_Text_Grunt24PostBattle, MSGBOX_AUTOCLOSE
+MtChimney_EventScript_Grunt1:: @ 822F1F1
+	trainerbattle_single TRAINER_GRUNT_MT_CHIMNEY_1, MtChimney_Text_Grunt1Intro, MtChimney_Text_Grunt1Defeat
+	msgbox MtChimney_Text_Grunt1PostBattle, MSGBOX_AUTOCLOSE
 	end
 
 MtChimney_EventScript_Sawyer:: @ 822F208
@@ -627,32 +627,32 @@ MtChimney_Text_TabithaPostBattle: @ 822F76D
 	.string "Give it the METEORITE's energy!\p"
 	.string "Hehehe…$"
 
-MtChimney_Text_Grunt31Intro: @ 822F7A2
+MtChimney_Text_Grunt2Intro: @ 822F7A2
 	.string "We of TEAM MAGMA are working hard for\n"
 	.string "everyone's sake.\p"
 	.string "Like, if that thing's power made more\n"
 	.string "land, there'd be more places to live.\p"
 	.string "Everyone'd be happy!$"
 
-MtChimney_Text_Grunt31Defeat: @ 822F83A
+MtChimney_Text_Grunt2Defeat: @ 822F83A
 	.string "Hunh?\n"
 	.string "What do you mean I lost?$"
 
-MtChimney_Text_Grunt31PostBattle: @ 822F859
+MtChimney_Text_Grunt2PostBattle: @ 822F859
 	.string "Our BOSS says, “It will make everyone\n"
 	.string "happy.”\p"
 	.string "But why does everyone keep getting\n"
 	.string "in our way?$"
 
-MtChimney_Text_Grunt24Intro: @ 822F8B6
+MtChimney_Text_Grunt1Intro: @ 822F8B6
 	.string "If there were more land, I'd be able\n"
 	.string "to get a big house of my own!\p"
 	.string "I'm going to build it on hardened lava!$"
 
-MtChimney_Text_Grunt24Defeat: @ 822F921
+MtChimney_Text_Grunt1Defeat: @ 822F921
 	.string "My dream of a big house…$"
 
-MtChimney_Text_Grunt24PostBattle: @ 822F93A
+MtChimney_Text_Grunt1PostBattle: @ 822F93A
 	.string "A kid like you, you ought to be\n"
 	.string "splashing about in the waves!$"
 

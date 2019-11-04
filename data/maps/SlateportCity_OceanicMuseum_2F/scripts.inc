@@ -32,7 +32,7 @@ SlateportCity_OceanicMuseum_2F_EventScript_CaptStern:: @ 820BB00
 	call_if_eq SlateportCity_OceanicMuseum_2F_EventScript_PlayerApproachGruntSouth
 	compare VAR_FACING, DIR_WEST
 	call_if_eq SlateportCity_OceanicMuseum_2F_EventScript_PlayerApproachGruntWest
-	trainerbattle_no_intro TRAINER_GRUNT_14, SlateportCity_OceanicMuseum_2F_Text_Grunt14Defeat
+	trainerbattle_no_intro TRAINER_GRUNT_MUSEUM_1, SlateportCity_OceanicMuseum_2F_Text_Grunt1Defeat
 	msgbox SlateportCity_OceanicMuseum_2F_Text_BossGoingToBeFurious, MSGBOX_DEFAULT
 	closemessage
 	applymovement 4, SlateportCity_OceanicMuseum_2F_Movement_GruntDefeated
@@ -40,7 +40,7 @@ SlateportCity_OceanicMuseum_2F_EventScript_CaptStern:: @ 820BB00
 	applymovement 3, SlateportCity_OceanicMuseum_2F_Movement_GruntApproachToBattle
 	waitmovement 0
 	msgbox SlateportCity_OceanicMuseum_2F_Text_LetMeTakeCareOfThis, MSGBOX_DEFAULT
-	trainerbattle_no_intro TRAINER_GRUNT_15, SlateportCity_OceanicMuseum_2F_Text_Grunt15Defeat
+	trainerbattle_no_intro TRAINER_GRUNT_MUSEUM_2, SlateportCity_OceanicMuseum_2F_Text_Grunt2Defeat
 	applymovement 3, SlateportCity_OceanicMuseum_2F_Movement_GruntDefeated
 	waitmovement 0
 	applymovement 3, Common_Movement_WalkInPlaceFastestDown
@@ -295,7 +295,7 @@ SlateportCity_OceanicMuseum_2F_Text_WereTeamAqua: @ 820BE93
 	.string "Our BOSS wants those parts!\n"
 	.string "Shut your yap and fork them over!$"
 
-SlateportCity_OceanicMuseum_2F_Text_Grunt14Defeat: @ 820BEE2
+SlateportCity_OceanicMuseum_2F_Text_Grunt1Defeat: @ 820BEE2
 	.string "Awaaaah!\n"
 	.string "A kid beat me!$"
 
@@ -307,7 +307,7 @@ SlateportCity_OceanicMuseum_2F_Text_LetMeTakeCareOfThis: @ 820BF35
 	.string "Humph, sniveling wimp!\n"
 	.string "Let me take care of this!$"
 
-SlateportCity_OceanicMuseum_2F_Text_Grunt15Defeat: @ 820BF66
+SlateportCity_OceanicMuseum_2F_Text_Grunt2Defeat: @ 820BF66
 	.string "What?!\n"
 	.string "I lost, too!$"
 

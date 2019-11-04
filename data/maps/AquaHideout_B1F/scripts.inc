@@ -82,7 +82,7 @@ AquaHideout_B1F_EventScript_DefeatedElectrode2:: @ 8233A7C
 	end
 
 AquaHideout_B1F_EventScript_Grunt2:: @ 8233A85
-	trainerbattle_single TRAINER_GRUNT_2, AquaHideout_B1F_Text_Grunt2Intro, AquaHideout_B1F_Text_Grunt2Defeat, AquaHideout_B1F_EventScript_Grunt2Defeated
+	trainerbattle_single TRAINER_GRUNT_AQUA_HIDEOUT_2, AquaHideout_B1F_Text_Grunt2Intro, AquaHideout_B1F_Text_Grunt2Defeat, AquaHideout_B1F_EventScript_Grunt2Defeated
 	msgbox AquaHideout_B1F_Text_Grunt2PostBattle, MSGBOX_AUTOCLOSE
 	end
 
@@ -94,7 +94,7 @@ AquaHideout_B1F_EventScript_Grunt2Defeated:: @ 8233AA0
 	end
 
 AquaHideout_B1F_EventScript_Grunt3:: @ 8233AB0
-	trainerbattle_single TRAINER_GRUNT_3, AquaHideout_B1F_Text_Grunt3Intro, AquaHideout_B1F_Text_Grunt3Defeat, AquaHideout_B1F_EventScript_Grunt3Defeated
+	trainerbattle_single TRAINER_GRUNT_AQUA_HIDEOUT_3, AquaHideout_B1F_Text_Grunt3Intro, AquaHideout_B1F_Text_Grunt3Defeat, AquaHideout_B1F_EventScript_Grunt3Defeated
 	msgbox AquaHideout_B1F_Text_Grunt3PostBattle, MSGBOX_AUTOCLOSE
 	end
 
@@ -103,14 +103,14 @@ AquaHideout_B1F_EventScript_Grunt3Defeated:: @ 8233ACB
 	release
 	end
 
-AquaHideout_B1F_EventScript_Grunt21:: @ 8233AD5
-	trainerbattle_single TRAINER_GRUNT_21, AquaHideout_B1F_Text_Grunt21Intro, AquaHideout_B1F_Text_Grunt21Defeat
-	msgbox AquaHideout_B1F_Text_Grunt21PostBattle, MSGBOX_AUTOCLOSE
+AquaHideout_B1F_EventScript_Grunt5:: @ 8233AD5
+	trainerbattle_single TRAINER_GRUNT_AQUA_HIDEOUT_5, AquaHideout_B1F_Text_Grunt5Intro, AquaHideout_B1F_Text_Grunt5Defeat
+	msgbox AquaHideout_B1F_Text_Grunt5PostBattle, MSGBOX_AUTOCLOSE
 	end
 
-AquaHideout_B1F_EventScript_Grunt25:: @ 8233AEC
-	trainerbattle_single TRAINER_GRUNT_25, AquaHideout_B1F_Text_Grunt25Intro, AquaHideout_B1F_Text_Grunt25Defeat
-	msgbox AquaHideout_B1F_Text_Grunt25PostBattle, MSGBOX_AUTOCLOSE
+AquaHideout_B1F_EventScript_Grunt7:: @ 8233AEC
+	trainerbattle_single TRAINER_GRUNT_AQUA_HIDEOUT_7, AquaHideout_B1F_Text_Grunt7Intro, AquaHideout_B1F_Text_Grunt7Defeat
+	msgbox AquaHideout_B1F_Text_Grunt7PostBattle, MSGBOX_AUTOCLOSE
 	end
 
 AquaHideout_B1F_Text_Grunt2Intro: @ 8233B03
@@ -141,27 +141,27 @@ AquaHideout_B1F_Text_Grunt3PostBattle: @ 8233C41
 	.string "This was supposed to happen!\p"
 	.string "My mission was to just hold you up!$"
 
-AquaHideout_B1F_Text_Grunt21Intro: @ 8233C89
+AquaHideout_B1F_Text_Grunt5Intro: @ 8233C89
 	.string "Yawn… Keeping watch over the\n"
 	.string "HIDEOUT bores me. I'll take you on.$"
 
-AquaHideout_B1F_Text_Grunt21Defeat: @ 8233CCA
+AquaHideout_B1F_Text_Grunt5Defeat: @ 8233CCA
 	.string "Yawn…\n"
 	.string "Oh, I lost…$"
 
-AquaHideout_B1F_Text_Grunt21PostBattle: @ 8233CDC
+AquaHideout_B1F_Text_Grunt5PostBattle: @ 8233CDC
 	.string "If you scurry too much, other TEAM\n"
 	.string "AQUA members might get you.$"
 
-AquaHideout_B1F_Text_Grunt25Intro: @ 8233D1B
+AquaHideout_B1F_Text_Grunt7Intro: @ 8233D1B
 	.string "Hey!\n"
 	.string "You there!\p"
 	.string "Which do you think is cooler?\n"
 	.string "TEAM AQUA's uniform or TEAM MAGMA's?$"
 
-AquaHideout_B1F_Text_Grunt25Defeat: @ 8233D6E
+AquaHideout_B1F_Text_Grunt7Defeat: @ 8233D6E
 	.string "I lost in a cool way…$"
 
-AquaHideout_B1F_Text_Grunt25PostBattle: @ 8233D84
+AquaHideout_B1F_Text_Grunt7PostBattle: @ 8233D84
 	.string "If you have a cool uniform, you look\n"
 	.string "good even in a loss, don't you think?$"

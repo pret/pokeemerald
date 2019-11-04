@@ -422,40 +422,40 @@ MtPyre_Summit_Movement_MaxieApproachArchie2: @ 82323F8
 	walk_in_place_fastest_left
 	step_end
 
-MtPyre_Summit_EventScript_Grunt17:: @ 82323FD
-	trainerbattle_single TRAINER_GRUNT_17, MtPyre_Summit_Text_Grunt17Intro, MtPyre_Summit_Text_Grunt17Defeat
-	msgbox MtPyre_Summit_Text_Grunt17PostBattle, MSGBOX_AUTOCLOSE
+MtPyre_Summit_EventScript_Grunt1:: @ 82323FD
+	trainerbattle_single TRAINER_GRUNT_MT_PYRE_1, MtPyre_Summit_Text_Grunt1Intro, MtPyre_Summit_Text_Grunt1Defeat
+	msgbox MtPyre_Summit_Text_Grunt1PostBattle, MSGBOX_AUTOCLOSE
 	end
 
-MtPyre_Summit_EventScript_Grunt18:: @ 8232414
-	trainerbattle_single TRAINER_GRUNT_18, MtPyre_Summit_Text_Grunt18Intro, MtPyre_Summit_Text_Grunt18Defeat
-	msgbox MtPyre_Summit_Text_Grunt18PostBattle, MSGBOX_AUTOCLOSE
+MtPyre_Summit_EventScript_Grunt2:: @ 8232414
+	trainerbattle_single TRAINER_GRUNT_MT_PYRE_2, MtPyre_Summit_Text_Grunt2Intro, MtPyre_Summit_Text_Grunt2Defeat
+	msgbox MtPyre_Summit_Text_Grunt2PostBattle, MSGBOX_AUTOCLOSE
 	end
 
-MtPyre_Summit_EventScript_Grunt19:: @ 823242B
-	trainerbattle_single TRAINER_GRUNT_19, MtPyre_Summit_Text_Grunt19Intro, MtPyre_Summit_Text_Grunt19Defeat
-	msgbox MtPyre_Summit_Text_Grunt19PostBattle, MSGBOX_AUTOCLOSE
+MtPyre_Summit_EventScript_Grunt3:: @ 823242B
+	trainerbattle_single TRAINER_GRUNT_MT_PYRE_3, MtPyre_Summit_Text_Grunt3Intro, MtPyre_Summit_Text_Grunt3Defeat
+	msgbox MtPyre_Summit_Text_Grunt3PostBattle, MSGBOX_AUTOCLOSE
 	end
 
-MtPyre_Summit_EventScript_Grunt29:: @ 8232442
-	trainerbattle_single TRAINER_GRUNT_29, MtPyre_Summit_Text_Grunt29Intro, MtPyre_Summit_Text_Grunt29Defeat
-	msgbox MtPyre_Summit_Text_Grunt29PostBattle, MSGBOX_AUTOCLOSE
+MtPyre_Summit_EventScript_Grunt4:: @ 8232442
+	trainerbattle_single TRAINER_GRUNT_MT_PYRE_4, MtPyre_Summit_Text_Grunt4Intro, MtPyre_Summit_Text_Grunt4Defeat
+	msgbox MtPyre_Summit_Text_Grunt4PostBattle, MSGBOX_AUTOCLOSE
 	end
 
-MtPyre_Summit_Text_Grunt17Intro: @ 8232459
+MtPyre_Summit_Text_Grunt1Intro: @ 8232459
 	.string "No! Those TEAM MAGMA goons got\n"
 	.string "here ahead of us!\p"
 	.string "We can't fall behind!$"
 
-MtPyre_Summit_Text_Grunt17Defeat: @ 82324A0
+MtPyre_Summit_Text_Grunt1Defeat: @ 82324A0
 	.string "I thought you were one of the MAGMAS\n"
 	.string "who happened to come back…$"
 
-MtPyre_Summit_Text_Grunt17PostBattle: @ 82324E0
+MtPyre_Summit_Text_Grunt1PostBattle: @ 82324E0
 	.string "Yeah, so you are strong…\n"
 	.string "But there're a lot of us!$"
 
-MtPyre_Summit_Text_Grunt18Intro: @ 8232513
+MtPyre_Summit_Text_Grunt2Intro: @ 8232513
 	.string "Hah!\n"
 	.string "Too bad for you!\p"
 	.string "If you came earlier, you only would've\n"
@@ -463,42 +463,42 @@ MtPyre_Summit_Text_Grunt18Intro: @ 8232513
 	.string "But since you arrived now, you have\n"
 	.string "to take on us toughies!$"
 
-MtPyre_Summit_Text_Grunt18Defeat: @ 82325B0
+MtPyre_Summit_Text_Grunt2Defeat: @ 82325B0
 	.string "Urgh… I should've let you take on\n"
 	.string "TEAM MAGMA first…$"
 
-MtPyre_Summit_Text_Grunt18PostBattle: @ 82325E4
+MtPyre_Summit_Text_Grunt2PostBattle: @ 82325E4
 	.string "You don't know anything!\n"
 	.string "So why are you messing with us?$"
 
-MtPyre_Summit_Text_Grunt19Intro: @ 823261D
+MtPyre_Summit_Text_Grunt3Intro: @ 823261D
 	.string "You…\n"
 	.string "We saw you at MT. CHIMNEY.\p"
 	.string "You don't belong to either TEAM,\n"
 	.string "so why would you be here?$"
 
-MtPyre_Summit_Text_Grunt19Defeat: @ 8232678
+MtPyre_Summit_Text_Grunt3Defeat: @ 8232678
 	.string "If you're going to mess with anyone,\n"
 	.string "let it be TEAM MAGMA…$"
 
-MtPyre_Summit_Text_Grunt19PostBattle: @ 82326B3
+MtPyre_Summit_Text_Grunt3PostBattle: @ 82326B3
 	.string "Heh, it doesn't matter!\n"
 	.string "We bought ourselves some time!\p"
 	.string "The BOSS should have snatched what\n"
 	.string "he was after!$"
 
-MtPyre_Summit_Text_Grunt29Intro: @ 823271B
+MtPyre_Summit_Text_Grunt4Intro: @ 823271B
 	.string "Oh, I know!\n"
 	.string "You tried to join TEAM MAGMA,\l"
 	.string "but they wouldn't have you!\p"
 	.string "Well, don't think that we'll let you\n"
 	.string "join our TEAM AQUA!$"
 
-MtPyre_Summit_Text_Grunt29Defeat: @ 823279A
+MtPyre_Summit_Text_Grunt4Defeat: @ 823279A
 	.string "If you want to join TEAM AQUA that\n"
 	.string "badly, we can consider it…$"
 
-MtPyre_Summit_Text_Grunt29PostBattle: @ 82327D8
+MtPyre_Summit_Text_Grunt4PostBattle: @ 82327D8
 	.string "We have a great combination going\n"
 	.string "with us members and our leader.$"
 

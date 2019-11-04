@@ -63,7 +63,7 @@
       "movement_range_y": 0,
       "trainer_type": "1",
       "trainer_sight_or_berry_tree_id": "3",
-      "script": "MtPyre_Summit_EventScript_Grunt17",
+      "script": "MtPyre_Summit_EventScript_Grunt1",
       "flag": "FLAG_HIDE_MT_PYRE_SUMMIT_TEAM_AQUA"
     },
     {
@@ -76,7 +76,7 @@
       "movement_range_y": 0,
       "trainer_type": "1",
       "trainer_sight_or_berry_tree_id": "3",
-      "script": "MtPyre_Summit_EventScript_Grunt18",
+      "script": "MtPyre_Summit_EventScript_Grunt2",
       "flag": "FLAG_HIDE_MT_PYRE_SUMMIT_TEAM_AQUA"
     },
     {
@@ -89,7 +89,7 @@
       "movement_range_y": 0,
       "trainer_type": "1",
       "trainer_sight_or_berry_tree_id": "3",
-      "script": "MtPyre_Summit_EventScript_Grunt19",
+      "script": "MtPyre_Summit_EventScript_Grunt3",
       "flag": "FLAG_HIDE_MT_PYRE_SUMMIT_TEAM_AQUA"
     },
     {
@@ -102,7 +102,7 @@
       "movement_range_y": 1,
       "trainer_type": "1",
       "trainer_sight_or_berry_tree_id": "3",
-      "script": "MtPyre_Summit_EventScript_Grunt29",
+      "script": "MtPyre_Summit_EventScript_Grunt4",
       "flag": "FLAG_HIDE_MT_PYRE_SUMMIT_TEAM_AQUA"
     },
     {
