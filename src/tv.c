@@ -2298,7 +2298,7 @@ void sub_80EE184(void)
     }
 }
 
-void sub_80EE2CC(void)
+void TryPutLotteryWinnerReportOnAir(void)
 {
     TVShow *show;
 
