@@ -49,7 +49,7 @@ ProfBirch_EventScript_RatePokedexOrRegister:: @ 8272141
 
 ProfBirch_EventScript_AskRatePokedex:: @ 8272155
 	msgbox gBirchDexRatingText_AreYouCurious, MSGBOX_YESNO
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq ProfBirch_EventScript_DeclineRating
 	call ProfBirch_EventScript_RatePokedex
 	release

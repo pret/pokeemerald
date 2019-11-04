@@ -6,7 +6,7 @@ MossdeepCity_House3_EventScript_2225C3:: @ 82225C3
 	faceplayer
 	goto_if_set FLAG_RECEIVED_SUPER_ROD, MossdeepCity_House3_EventScript_222602
 	msgbox MossdeepCity_House3_Text_222616, MSGBOX_YESNO
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq MossdeepCity_House3_EventScript_22260C
 	msgbox MossdeepCity_House3_Text_2226B6, MSGBOX_DEFAULT
 	giveitem_std ITEM_SUPER_ROD

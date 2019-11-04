@@ -57,7 +57,7 @@ EventScript_Kecleon:: @ 8272336
 
 EventScript_AskUseDevonScope:: @ 8272350
 	msgbox Kecleon_Text_WantToUseDevonScope, MSGBOX_YESNO
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, YES
 	goto_if_eq EventScript_BattleKecleon
 	release
 	end

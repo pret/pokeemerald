@@ -84,9 +84,9 @@ SlateportCity_BattleTentCorridor_EventScript_208F0D:: @ 8208F0D
 SlateportCity_BattleTentCorridor_EventScript_208F5B:: @ 8208F5B
 	msgbox SlateportCity_BattleTentCorridor_Text_25A350, MSGBOX_YESNO
 	switch VAR_RESULT
-	case 0, SlateportCity_BattleTentCorridor_EventScript_208F0D
-	case 1, SlateportCity_BattleTentCorridor_EventScript_209022
-	case 127, SlateportCity_BattleTentCorridor_EventScript_208F0D
+	case NO, SlateportCity_BattleTentCorridor_EventScript_208F0D
+	case YES, SlateportCity_BattleTentCorridor_EventScript_209022
+	case MULTI_B_PRESSED, SlateportCity_BattleTentCorridor_EventScript_208F0D
 
 SlateportCity_BattleTentCorridor_EventScript_208F89:: @ 8208F89
 	message SlateportCity_BattleTentCorridor_Text_25A37A
@@ -102,8 +102,8 @@ SlateportCity_BattleTentCorridor_EventScript_208FBB:: @ 8208FBB
 	special sub_81B9D08
 	msgbox SlateportCity_BattleTentCorridor_Text_25AB2E, MSGBOX_YESNO
 	switch VAR_RESULT
-	case 0, SlateportCity_BattleTentCorridor_EventScript_208EB4
-	case 1, SlateportCity_BattleTentCorridor_EventScript_208FF1
+	case NO, SlateportCity_BattleTentCorridor_EventScript_208EB4
+	case YES, SlateportCity_BattleTentCorridor_EventScript_208FF1
 	case MULTI_B_PRESSED, SlateportCity_BattleTentCorridor_EventScript_208EB4
 
 SlateportCity_BattleTentCorridor_EventScript_208FF1:: @ 8208FF1

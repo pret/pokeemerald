@@ -844,7 +844,7 @@ RustboroCity_EventScript_1E100B:: @ 81E100B
 	setvar VAR_ROUTE104_STATE, 2
 	setvar VAR_0x8008, 0
 	msgbox RustboroCity_Text_1E1AFA, MSGBOX_YESNO
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, YES
 	goto_if_eq RustboroCity_EventScript_1E1092
 	msgbox RustboroCity_Text_1E1BD3, MSGBOX_DEFAULT
 	call RustboroCity_EventScript_1E10D6
@@ -854,7 +854,7 @@ RustboroCity_EventScript_1E100B:: @ 81E100B
 RustboroCity_EventScript_1E1070:: @ 81E1070
 	setvar VAR_0x8008, 1
 	msgbox RustboroCity_Text_1E1C48, MSGBOX_YESNO
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, YES
 	goto_if_eq RustboroCity_EventScript_1E1092
 	msgbox RustboroCity_Text_1E1BD3, MSGBOX_DEFAULT
 	releaseall
@@ -914,7 +914,7 @@ RustboroCity_EventScript_1E1114:: @ 81E1114
 	setvar VAR_RUSTBORO_CITY_STATE, 8
 	setvar VAR_ROUTE104_STATE, 2
 	msgbox RustboroCity_Text_1E1E34, MSGBOX_YESNO
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, YES
 	goto_if_eq RustboroCity_EventScript_1E1191
 	msgbox RustboroCity_Text_1E1F2F, MSGBOX_DEFAULT
 	call RustboroCity_EventScript_1E10D6
@@ -923,7 +923,7 @@ RustboroCity_EventScript_1E1114:: @ 81E1114
 
 RustboroCity_EventScript_1E1174:: @ 81E1174
 	msgbox RustboroCity_Text_1E1F76, MSGBOX_YESNO
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, YES
 	goto_if_eq RustboroCity_EventScript_1E1191
 	msgbox RustboroCity_Text_1E1F2F, MSGBOX_DEFAULT
 	releaseall

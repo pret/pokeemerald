@@ -278,9 +278,9 @@ BattleFrontier_BattleTowerLobby_EventScript_23E984:: @ 823E984
 	goto_if_eq BattleFrontier_BattleTowerLobby_EventScript_23F0E3
 	msgbox BattleFrontier_BattleTowerLobby_Text_23FDC7, MSGBOX_YESNO
 	switch VAR_RESULT
-	case 0, BattleFrontier_BattleTowerLobby_EventScript_23F0E3
-	case 1, BattleFrontier_BattleTowerLobby_EventScript_23EA2A
-	case 127, BattleFrontier_BattleTowerLobby_EventScript_23F0E3
+	case NO, BattleFrontier_BattleTowerLobby_EventScript_23F0E3
+	case YES, BattleFrontier_BattleTowerLobby_EventScript_23EA2A
+	case MULTI_B_PRESSED, BattleFrontier_BattleTowerLobby_EventScript_23F0E3
 
 BattleFrontier_BattleTowerLobby_EventScript_23EA2A:: @ 823EA2A
 	setvar VAR_0x8004, 2
@@ -358,9 +358,9 @@ BattleFrontier_BattleTowerLobby_EventScript_23EAED:: @ 823EAED
 	goto_if_eq BattleFrontier_BattleTowerLobby_EventScript_23F0E3
 	msgbox BattleFrontier_BattleTowerLobby_Text_23FDC7, MSGBOX_YESNO
 	switch VAR_RESULT
-	case 0, BattleFrontier_BattleTowerLobby_EventScript_23F0E3
-	case 1, BattleFrontier_BattleTowerLobby_EventScript_23EB93
-	case 127, BattleFrontier_BattleTowerLobby_EventScript_23F0E3
+	case NO, BattleFrontier_BattleTowerLobby_EventScript_23F0E3
+	case YES, BattleFrontier_BattleTowerLobby_EventScript_23EB93
+	case MULTI_B_PRESSED, BattleFrontier_BattleTowerLobby_EventScript_23F0E3
 
 BattleFrontier_BattleTowerLobby_EventScript_23EB93:: @ 823EB93
 	setvar VAR_0x8004, 2
@@ -439,9 +439,9 @@ BattleFrontier_BattleTowerLobby_EventScript_23EC59:: @ 823EC59
 	goto_if_eq BattleFrontier_BattleTowerLobby_EventScript_23F0E3
 	msgbox BattleFrontier_BattleTowerLobby_Text_23FDC7, MSGBOX_YESNO
 	switch VAR_RESULT
-	case 0, BattleFrontier_BattleTowerLobby_EventScript_23F0E3
-	case 1, BattleFrontier_BattleTowerLobby_EventScript_23ECFF
-	case 127, BattleFrontier_BattleTowerLobby_EventScript_23F0E3
+	case NO, BattleFrontier_BattleTowerLobby_EventScript_23F0E3
+	case YES, BattleFrontier_BattleTowerLobby_EventScript_23ECFF
+	case MULTI_B_PRESSED, BattleFrontier_BattleTowerLobby_EventScript_23F0E3
 
 BattleFrontier_BattleTowerLobby_EventScript_23ECFF:: @ 823ECFF
 	setvar VAR_0x8004, 2
@@ -519,9 +519,9 @@ BattleFrontier_BattleTowerLobby_EventScript_23EDC2:: @ 823EDC2
 	goto_if_eq BattleFrontier_BattleTowerLobby_EventScript_23F0E3
 	msgbox BattleFrontier_BattleTowerLobby_Text_23FDC7, MSGBOX_YESNO
 	switch VAR_RESULT
-	case 0, BattleFrontier_BattleTowerLobby_EventScript_23F0E3
-	case 1, BattleFrontier_BattleTowerLobby_EventScript_23EE68
-	case 127, BattleFrontier_BattleTowerLobby_EventScript_23F0E3
+	case NO, BattleFrontier_BattleTowerLobby_EventScript_23F0E3
+	case YES, BattleFrontier_BattleTowerLobby_EventScript_23EE68
+	case MULTI_B_PRESSED, BattleFrontier_BattleTowerLobby_EventScript_23F0E3
 
 BattleFrontier_BattleTowerLobby_EventScript_23EE68:: @ 823EE68
 	setvar VAR_0x8004, 2

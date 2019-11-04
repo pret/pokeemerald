@@ -129,9 +129,9 @@ FallarborTown_BattleTentBattleRoom_EventScript_200A2A:: @ 8200A2A
 FallarborTown_BattleTentBattleRoom_EventScript_200A78:: @ 8200A78
 	msgbox FallarborTown_BattleTentBattleRoom_Text_257E6B, MSGBOX_YESNO
 	switch VAR_RESULT
-	case 0, FallarborTown_BattleTentBattleRoom_EventScript_200A2A
-	case 1, FallarborTown_BattleTentBattleRoom_EventScript_200B51
-	case 127, FallarborTown_BattleTentBattleRoom_EventScript_200A2A
+	case NO, FallarborTown_BattleTentBattleRoom_EventScript_200A2A
+	case YES, FallarborTown_BattleTentBattleRoom_EventScript_200B51
+	case MULTI_B_PRESSED, FallarborTown_BattleTentBattleRoom_EventScript_200A2A
 
 FallarborTown_BattleTentBattleRoom_EventScript_200AA6:: @ 8200AA6
 	message FallarborTown_BattleTentBattleRoom_Text_257E9E

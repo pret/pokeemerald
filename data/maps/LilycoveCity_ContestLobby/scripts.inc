@@ -44,9 +44,9 @@ LilycoveCity_ContestLobby_EventScript_21A264:: @ 821A264
 	drawcontestwinner 0
 	lockall
 	msgbox LilycoveCity_ContestLobby_Text_21AE78, MSGBOX_YESNO
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, YES
 	goto_if_eq LilycoveCity_ContestLobby_EventScript_21A2AA
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq LilycoveCity_ContestLobby_EventScript_21A2E4
 	releaseall
 	end
@@ -69,7 +69,7 @@ LilycoveCity_ContestLobby_EventScript_21A2AA:: @ 821A2AA
 
 LilycoveCity_ContestLobby_EventScript_21A2E4:: @ 821A2E4
 	msgbox LilycoveCity_ContestLobby_Text_21B0BC, MSGBOX_YESNO
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, YES
 	goto_if_eq LilycoveCity_ContestLobby_EventScript_21A2AA
 	msgbox LilycoveCity_ContestLobby_Text_21B132, MSGBOX_DEFAULT
 	closemessage
@@ -217,9 +217,9 @@ LilycoveCity_ContestLobby_EventScript_21A436:: @ 821A436
 	fadescreen 1
 	drawcontestwinner 0
 	msgbox LilycoveCity_ContestLobby_Text_21AE78, MSGBOX_YESNO
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, YES
 	goto_if_eq LilycoveCity_ContestLobby_EventScript_21A47A
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq LilycoveCity_ContestLobby_EventScript_21A4B4
 	end
 
@@ -241,7 +241,7 @@ LilycoveCity_ContestLobby_EventScript_21A47A:: @ 821A47A
 
 LilycoveCity_ContestLobby_EventScript_21A4B4:: @ 821A4B4
 	msgbox LilycoveCity_ContestLobby_Text_21B0BC, MSGBOX_YESNO
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, YES
 	goto_if_eq LilycoveCity_ContestLobby_EventScript_21A47A
 	msgbox LilycoveCity_ContestLobby_Text_21B132, MSGBOX_DEFAULT
 	closemessage
@@ -640,7 +640,7 @@ LilycoveCity_ContestLobby_EventScript_21A819:: @ 821A819
 
 LilycoveCity_ContestLobby_EventScript_21A856:: @ 821A856
 	msgbox LilycoveCity_ContestLobby_Text_27BD17, MSGBOX_YESNO
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq LilycoveCity_ContestLobby_EventScript_21A97F
 	call Common_EventScript_SaveGame
 	compare VAR_RESULT, 0

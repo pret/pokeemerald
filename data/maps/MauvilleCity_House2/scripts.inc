@@ -19,9 +19,9 @@ MauvilleCity_House2_EventScript_210C82:: @ 8210C82
 	applymovement VAR_LAST_TALKED, Common_Movement_Delay48
 	waitmovement 0
 	msgbox MauvilleCity_House2_Text_210D76, MSGBOX_YESNO
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, YES
 	goto_if_eq MauvilleCity_House2_EventScript_210CB8
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq MauvilleCity_House2_EventScript_210CE4
 	end
 

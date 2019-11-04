@@ -10,7 +10,7 @@ FortreeCity_House1_EventScript_2162BB:: @ 82162BB
 	specialvar VAR_RESULT, GetInGameTradeSpeciesInfo
 	copyvar VAR_0x8009, VAR_RESULT
 	msgbox FortreeCity_House1_Text_21637B, MSGBOX_YESNO
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq FortreeCity_House1_EventScript_21633D
 	special ChoosePartyMon
 	waitstate

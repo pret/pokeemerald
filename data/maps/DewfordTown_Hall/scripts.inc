@@ -31,9 +31,9 @@ DewfordTown_Hall_EventScript_1FD50A:: @ 81FD50A
 	call DewfordTown_Hall_EventScript_271E8B
 	special sub_811EF6C
 	msgbox DewfordTown_Hall_Text_1FD948, MSGBOX_YESNO
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, YES
 	goto_if_eq DewfordTown_Hall_EventScript_1FD533
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq DewfordTown_Hall_EventScript_1FD53D
 	end
 

@@ -198,7 +198,7 @@ SlateportCity_Harbor_EventScript_20CB88:: @ 820CB88
 
 SlateportCity_Harbor_EventScript_20CB92:: @ 820CB92
 	msgbox SlateportCity_Harbor_Text_20CF93, MSGBOX_YESNO
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq SlateportCity_Harbor_EventScript_20CBDD
 	setvar VAR_PORTHOLE_STATE, 1
 	call SlateportCity_Harbor_EventScript_20CBE9
@@ -209,7 +209,7 @@ SlateportCity_Harbor_EventScript_20CB92:: @ 820CB92
 
 SlateportCity_Harbor_EventScript_20CBBA:: @ 820CBBA
 	msgbox SlateportCity_Harbor_Text_20CFAE, MSGBOX_YESNO
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq SlateportCity_Harbor_EventScript_20CBDD
 	call SlateportCity_Harbor_EventScript_20CBE9
 	warp MAP_BATTLE_FRONTIER_OUTSIDE_WEST, 255, 19, 67
@@ -354,7 +354,7 @@ SlateportCity_Harbor_EventScript_20CD44:: @ 820CD44
 
 SlateportCity_Harbor_EventScript_20CD7B:: @ 820CD7B
 	msgbox SlateportCity_Harbor_Text_20D8BC, MSGBOX_YESNO
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq SlateportCity_Harbor_EventScript_20CE05
 	giveitem_std ITEM_DEEP_SEA_TOOTH
 	compare VAR_RESULT, 0
@@ -367,7 +367,7 @@ SlateportCity_Harbor_EventScript_20CD7B:: @ 820CD7B
 
 SlateportCity_Harbor_EventScript_20CDBB:: @ 820CDBB
 	msgbox SlateportCity_Harbor_Text_20D8F1, MSGBOX_YESNO
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq SlateportCity_Harbor_EventScript_20CE05
 	giveitem_std ITEM_DEEP_SEA_SCALE
 	compare VAR_RESULT, 0

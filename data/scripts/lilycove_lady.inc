@@ -56,9 +56,9 @@ LilycoveCity_PokemonCenter_1F_EventScript_PlayerGaveGreatThing:: @ 82A8427
 
 LilycoveCity_PokemonCenter_1F_EventScript_RequestItem:: @ 82A8435
     msgbox LilycoveCity_PokemonCenter_1F_Text_WillYouShareThing, MSGBOX_YESNO
-    compare VAR_RESULT, 0
+    compare VAR_RESULT, NO
     goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_DeclineFavor
-    compare VAR_RESULT, 1
+    compare VAR_RESULT, YES
     goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_AcceptFavor
     end
 
@@ -85,9 +85,9 @@ LilycoveCity_PokemonCenter_1F_EventScript_ChooseFavorItem:: @ 82A846C
 
 LilycoveCity_PokemonCenter_1F_EventScript_AskQuitChooseFavorItem:: @ 82A848E
     msgbox LilycoveCity_PokemonCenter_1F_Text_NotWillingToShare, MSGBOX_YESNO
-    compare VAR_RESULT, 1
+    compare VAR_RESULT, YES
     goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_DeclineFavor
-    compare VAR_RESULT, 0
+    compare VAR_RESULT, NO
     goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_ChooseFavorItem
     end
 
@@ -195,9 +195,9 @@ LilycoveCity_PokemonCenter_1F_EventScript_LadyQuizReady:: @ 82A85E0
 LilycoveCity_PokemonCenter_1F_EventScript_AskTakeQuiz:: @ 82A85EE
     setvar VAR_0x8004, 0
     msgbox LilycoveCity_PokemonCenter_1F_Text_TakeQuizChallenge, MSGBOX_YESNO
-    compare VAR_RESULT, 1
+    compare VAR_RESULT, YES
     goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_TakeQuiz
-    compare VAR_RESULT, 0
+    compare VAR_RESULT, NO
     goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_DeclineQuiz
     end
 
@@ -234,9 +234,9 @@ LilycoveCity_PokemonCenter_1F_EventScript_GetAnswer:: @ 82A8656
 
 LilycoveCity_PokemonCenter_1F_EventScript_AskQuitQuiz:: @ 82A8660
     msgbox LilycoveCity_PokemonCenter_1F_Text_YoureGoingToQuit, MSGBOX_YESNO
-    compare VAR_RESULT, 1
+    compare VAR_RESULT, YES
     goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_QuitTakingQuiz
-    compare VAR_RESULT, 0
+    compare VAR_RESULT, NO
     goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_TakeQuiz
     end
 
@@ -311,9 +311,9 @@ LilycoveCity_PokemonCenter_1F_EventScript_NoSpaceForQuizPrize:: @ 82A874C
 
 LilycoveCity_PokemonCenter_1F_EventScript_AskMakeQuiz:: @ 82A8759
     msgbox LilycoveCity_PokemonCenter_1F_Text_MakeYourOwnQuiz, MSGBOX_YESNO
-    compare VAR_RESULT, 1
+    compare VAR_RESULT, YES
     goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_MakeQuiz
-    compare VAR_RESULT, 0
+    compare VAR_RESULT, NO
     goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_DeclineMakeQuiz
     end
 
@@ -338,9 +338,9 @@ LilycoveCity_PokemonCenter_1F_EventScript_PickPrize:: @ 82A878D
 
 LilycoveCity_PokemonCenter_1F_EventScript_AskQuitChoosingPrize:: @ 82A87AF
     msgbox LilycoveCity_PokemonCenter_1F_Text_QuitChoosingPrize, MSGBOX_YESNO
-    compare VAR_RESULT, 1
+    compare VAR_RESULT, YES
     goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_DeclineMakeQuiz
-    compare VAR_RESULT, 0
+    compare VAR_RESULT, NO
     goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_PickPrize
     end
 
@@ -360,9 +360,9 @@ LilycoveCity_PokemonCenter_1F_EventScript_WriteQuizQuestion:: @ 82A87E1
 
 LilycoveCity_PokemonCenter_1F_EventScript_AskQuitWritingQuizQuestion:: @ 82A87F8
     msgbox LilycoveCity_PokemonCenter_1F_Text_QuitWritingQuizQuestion, MSGBOX_YESNO
-    compare VAR_RESULT, 1
+    compare VAR_RESULT, YES
     goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_DeclineMakeQuiz
-    compare VAR_RESULT, 0
+    compare VAR_RESULT, NO
     goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_WriteQuizQuestion
     end
 
@@ -406,9 +406,9 @@ LilycoveCity_PokemonCenter_1F_EventScript_AskForPokeblock:: @ 82A8876
     compare VAR_RESULT, FALSE
     goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_NoPokeblockCase
     msgbox LilycoveCity_PokemonCenter_1F_Text_AskingForOnePokeblock, MSGBOX_YESNO
-    compare VAR_RESULT, 0
+    compare VAR_RESULT, NO
     goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_DeclineGivePokeblock
-    compare VAR_RESULT, 1
+    compare VAR_RESULT, YES
     goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_ChoosePokeblock
     end
 
@@ -429,9 +429,9 @@ LilycoveCity_PokemonCenter_1F_EventScript_ChoosePokeblock:: @ 82A88BA
 
 LilycoveCity_PokemonCenter_1F_EventScript_AskQuitGivingPokeblock:: @ 82A88D7
     msgbox LilycoveCity_PokemonCenter_1F_Text_ICantHaveOnePokeblock, MSGBOX_YESNO
-    compare VAR_RESULT, 1
+    compare VAR_RESULT, YES
     goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_DeclineGivePokeblock
-    compare VAR_RESULT, 0
+    compare VAR_RESULT, NO
     goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_ChoosePokeblock
     end
 

@@ -37,7 +37,7 @@ Route111_EventScript_2765FF:: @ 82765FF
 	lock
 	faceplayer
 	msgbox Route111_Text_2762C9, MSGBOX_YESNO
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, YES
 	goto_if_eq Route111_EventScript_27661E
 	msgbox Route111_Text_27655C, MSGBOX_DEFAULT
 	release

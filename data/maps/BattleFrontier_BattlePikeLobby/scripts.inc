@@ -166,9 +166,9 @@ BattleFrontier_BattlePikeLobby_EventScript_25B8BB:: @ 825B8BB
 	goto_if_eq BattleFrontier_BattlePikeLobby_EventScript_25BA73
 	msgbox BattleFrontier_BattlePikeLobby_Text_25C0D8, MSGBOX_YESNO
 	switch VAR_RESULT
-	case 0, BattleFrontier_BattlePikeLobby_EventScript_25BA73
-	case 1, BattleFrontier_BattlePikeLobby_EventScript_25B95C
-	case 127, BattleFrontier_BattlePikeLobby_EventScript_25BA73
+	case NO, BattleFrontier_BattlePikeLobby_EventScript_25BA73
+	case YES, BattleFrontier_BattlePikeLobby_EventScript_25B95C
+	case MULTI_B_PRESSED, BattleFrontier_BattlePikeLobby_EventScript_25BA73
 
 BattleFrontier_BattlePikeLobby_EventScript_25B95C:: @ 825B95C
 	setvar VAR_TEMP_0, 0

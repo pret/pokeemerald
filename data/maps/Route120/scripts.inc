@@ -101,9 +101,9 @@ Route120_EventScript_1F5527:: @ 81F5527
 	dotimebasedevents
 	goto_if_set FLAG_DAILY_ROUTE_120_RECEIVED_BERRY, Route120_EventScript_1F5625
 	msgbox Route120_Text_2A70C7, MSGBOX_YESNO
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, YES
 	call_if_eq Route120_EventScript_1F562F
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	call_if_eq Route120_EventScript_1F5638
 	specialvar VAR_RESULT, GetPlayerTrainerIdOnesDigit
 	switch VAR_RESULT
@@ -171,7 +171,7 @@ Route120_EventScript_Steven:: @ 81F5641
 	faceplayer
 	goto_if_set FLAG_NOT_READY_FOR_BATTLE_ROUTE_120, Route120_EventScript_1F5672
 	msgbox Route120_Text_StevenGreeting, MSGBOX_YESNO
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq Route120_EventScript_StevenNotReady
 	goto Route120_EventScript_StevenBattleKecleon
 	end
@@ -184,7 +184,7 @@ Route120_EventScript_StevenNotReady:: @ 81F5665
 
 Route120_EventScript_1F5672:: @ 81F5672
 	msgbox Route120_Text_StevenReadyForBattle, MSGBOX_YESNO
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq Route120_EventScript_StevenNotReady
 	goto Route120_EventScript_StevenBattleKecleon
 	end

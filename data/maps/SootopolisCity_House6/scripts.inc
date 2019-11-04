@@ -6,7 +6,7 @@ SootopolisCity_House6_EventScript_226F5C:: @ 8226F5C
 	faceplayer
 	goto_if_set FLAG_RECEIVED_WAILMER_DOLL, SootopolisCity_House6_EventScript_226FA3
 	msgbox SootopolisCity_House6_Text_226FC3, MSGBOX_YESNO
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	call_if_eq SootopolisCity_House6_EventScript_226F99
 	msgbox SootopolisCity_House6_Text_227034, MSGBOX_DEFAULT
 	givedecoration_std DECOR_WAILMER_DOLL

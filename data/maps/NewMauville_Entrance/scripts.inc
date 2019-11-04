@@ -30,7 +30,7 @@ NewMauville_Entrance_EventScript_2372FF:: @ 82372FF
 	compare VAR_RESULT, 0
 	goto_if_eq NewMauville_Entrance_EventScript_237380
 	msgbox NewMauville_Entrance_Text_237396, MSGBOX_YESNO
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq NewMauville_Entrance_EventScript_237380
 	msgbox NewMauville_Entrance_Text_2373AC, MSGBOX_DEFAULT
 	setmetatile 3, 0, METATILE_Facility_NewMauvilleDoor_Open_Tile0, 0

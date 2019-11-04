@@ -252,7 +252,7 @@ EventScript_Pblock1_Ask:: @ 8293C3E
 	applymovement 16, LilycoveCity_ContestLobby_Movement_294053
 	waitmovement 0
 	msgbox Text_Pblock1_Ask, MSGBOX_YESNO
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, YES
 	goto_if_eq EventScript_Pblock1_Yes
 	goto EventScript_Pblock1_No
 	end
@@ -283,7 +283,7 @@ LilycoveCity_ContestLobby_EventScript_293C9C: @ 8293C9C
 
 EventScript_Pblock1_KnowHow: @ 8293CB9
 	msgbox Text_Pblock1_KnowHow, MSGBOX_YESNO
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, YES
 	goto_if_eq EventScript_Pblock1_Start
 	goto EventScript_Pblock1_Explain
 	end
@@ -337,7 +337,7 @@ LilycoveCity_ContestLobby_EventScript_293D4D:: @ 8293D4D
 	applymovement 3, LilycoveCity_ContestLobby_Movement_294053
 	waitmovement 0
 	msgbox LilycoveCity_ContestLobby_Text_293201, MSGBOX_YESNO
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, YES
 	goto_if_eq LilycoveCity_ContestLobby_EventScript_293DC6
 	goto LilycoveCity_ContestLobby_EventScript_293D7D
 	end
@@ -354,7 +354,7 @@ LilycoveCity_ContestLobby_EventScript_293D87: @ 8293D87
 
 LilycoveCity_ContestLobby_EventScript_293D91: @ 8293D91
 	msgbox LilycoveCity_ContestLobby_Text_29328C, MSGBOX_YESNO
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, YES
 	goto_if_eq LilycoveCity_ContestLobby_EventScript_293DAA
 	goto LilycoveCity_ContestLobby_EventScript_293DB8
 	end
@@ -403,7 +403,7 @@ LilycoveCity_ContestLobby_EventScript_293E1E:: @ 8293E1E
 	applymovement VAR_0x8008, LilycoveCity_ContestLobby_Movement_294053
 	waitmovement 0
 	msgbox LilycoveCity_ContestLobby_Text_293842, MSGBOX_YESNO
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, YES
 	goto_if_eq LilycoveCity_ContestLobby_EventScript_293EA3
 	goto LilycoveCity_ContestLobby_EventScript_293E5A
 	end
@@ -420,7 +420,7 @@ LilycoveCity_ContestLobby_EventScript_293E64: @ 8293E64
 
 LilycoveCity_ContestLobby_EventScript_293E6E: @ 8293E6E
 	msgbox LilycoveCity_ContestLobby_Text_29357E, MSGBOX_YESNO
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, YES
 	goto_if_eq LilycoveCity_ContestLobby_EventScript_293E87
 	goto LilycoveCity_ContestLobby_EventScript_293E95
 	end
