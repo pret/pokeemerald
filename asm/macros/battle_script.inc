@@ -391,11 +391,11 @@
 	.byte 0x47
 	.endm
 
-	.macro playstatchangeanimation battler:req, param1:req, param2:req
+	.macro playstatchangeanimation battler:req, stats:req, statchange:req
 	.byte 0x48
 	.byte \battler
-	.byte \param1
-	.byte \param2
+	.byte \stats
+	.byte \statchange
 	.endm
 
 	.macro moveend param0:req, param1:req
@@ -738,10 +738,10 @@
 	.byte 0x88
 	.endm
 
-	.macro statbuffchange param0:req, param1:req
+	.macro statbuffchange flags:req, jumpptr:req
 	.byte 0x89
-	.byte \param0
-	.4byte \param1
+	.byte \flags
+	.4byte \jumpptr
 	.endm
 
 	.macro normalisebuffs

@@ -3954,7 +3954,7 @@ static void TryDoEventsBeforeFirstTurn(void)
     *(&gBattleStruct->turnEffectsBattlerId) = 0;
     *(&gBattleStruct->wishPerishSongState) = 0;
     *(&gBattleStruct->wishPerishSongBattlerId) = 0;
-    gBattleScripting.atk49_state = 0;
+    gBattleScripting.moveendState = 0;
     gBattleStruct->faintedActionsState = 0;
     gBattleStruct->turnCountersTracker = 0;
     gMoveResultFlags = 0;
@@ -4017,7 +4017,7 @@ void BattleTurnPassed(void)
     gHitMarker &= ~(HITMARKER_x100000);
     gBattleScripting.animTurn = 0;
     gBattleScripting.animTargetsHit = 0;
-    gBattleScripting.atk49_state = 0;
+    gBattleScripting.moveendState = 0;
     gBattleMoveDamage = 0;
     gMoveResultFlags = 0;
 
@@ -5885,7 +5885,7 @@ static void HandleAction_ActionFinished(void)
     gLastHitByType[gBattlerAttacker] = 0;
     gBattleStruct->dynamicMoveType = 0;
     gDynamicBasePower = 0;
-    gBattleScripting.atk49_state = 0;
+    gBattleScripting.moveendState = 0;
     gBattleCommunication[3] = 0;
     gBattleCommunication[4] = 0;
     gBattleScripting.multihitMoveEffect = 0;
