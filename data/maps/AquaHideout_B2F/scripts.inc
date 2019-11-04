@@ -67,7 +67,7 @@ AquaHideout_B2F_Movement_SumbarineDepartRight: @ 8233E85
 	step_end
 
 AquaHideout_B2F_EventScript_Grunt4:: @ 8233E8A
-	trainerbattle_single TRAINER_GRUNT_4, AquaHideout_B2F_Text_Grunt4Intro, AquaHideout_B2F_Text_Grunt4Defeat, AquaHideout_B2F_EventScript_Grunt4Defeated
+	trainerbattle_single TRAINER_GRUNT_AQUA_HIDEOUT_4, AquaHideout_B2F_Text_Grunt4Intro, AquaHideout_B2F_Text_Grunt4Defeat, AquaHideout_B2F_EventScript_Grunt4Defeated
 	msgbox AquaHideout_B2F_Text_Grunt4PostBattle, MSGBOX_AUTOCLOSE
 	end
 
@@ -76,14 +76,14 @@ AquaHideout_B2F_EventScript_Grunt4Defeated:: @ 8233EA5
 	release
 	end
 
-AquaHideout_B2F_EventScript_Grunt22:: @ 8233EAF
-	trainerbattle_single TRAINER_GRUNT_22, AquaHideout_B2F_Text_Grunt22Intro, AquaHideout_B2F_Text_Grunt22Defeat
-	msgbox AquaHideout_B2F_Text_Grunt22PostBattle, MSGBOX_AUTOCLOSE
+AquaHideout_B2F_EventScript_Grunt6:: @ 8233EAF
+	trainerbattle_single TRAINER_GRUNT_AQUA_HIDEOUT_6, AquaHideout_B2F_Text_Grunt6Intro, AquaHideout_B2F_Text_Grunt6Defeat
+	msgbox AquaHideout_B2F_Text_Grunt6PostBattle, MSGBOX_AUTOCLOSE
 	end
 
-AquaHideout_B2F_EventScript_Grunt26:: @ 8233EC6
-	trainerbattle_single TRAINER_GRUNT_26, AquaHideout_B2F_Text_Grunt26Intro, AquaHideout_B2F_Text_Grunt26Defeat
-	msgbox AquaHideout_B2F_Text_Grunt26PostBattle, MSGBOX_AUTOCLOSE
+AquaHideout_B2F_EventScript_Grunt8:: @ 8233EC6
+	trainerbattle_single TRAINER_GRUNT_AQUA_HIDEOUT_8, AquaHideout_B2F_Text_Grunt8Intro, AquaHideout_B2F_Text_Grunt8Defeat
+	msgbox AquaHideout_B2F_Text_Grunt8PostBattle, MSGBOX_AUTOCLOSE
 	end
 
 AquaHideout_B2F_Text_MattIntro: @ 8233EDD
@@ -127,7 +127,7 @@ AquaHideout_B2F_Text_Grunt4PostBattle: @ 8234112
 	.string "BOSS…\n"
 	.string "Is this good enough?$"
 
-AquaHideout_B2F_Text_Grunt22Intro: @ 823412D
+AquaHideout_B2F_Text_Grunt6Intro: @ 823412D
 	.string "Warp panels, the HIDEOUT's pride\n"
 	.string "and joy!\p"
 	.string "You're clueless about where you are,\n"
@@ -135,25 +135,25 @@ AquaHideout_B2F_Text_Grunt22Intro: @ 823412D
 	.string "Fluster and tire out the enemy, then\n"
 	.string "lower the boom! That's our plan!$"
 
-AquaHideout_B2F_Text_Grunt22Defeat: @ 82341CE
+AquaHideout_B2F_Text_Grunt6Defeat: @ 82341CE
 	.string "What's wrong with you?\n"
 	.string "You're not tired at all!$"
 
-AquaHideout_B2F_Text_Grunt22PostBattle: @ 82341FE
+AquaHideout_B2F_Text_Grunt6PostBattle: @ 82341FE
 	.string "That reminds me… I can't remember\n"
 	.string "where I put the MASTER BALL.\p"
 	.string "If I fail to guard it, our BOSS will\n"
 	.string "chew me out…$"
 
-AquaHideout_B2F_Text_Grunt26Intro: @ 823426F
+AquaHideout_B2F_Text_Grunt8Intro: @ 823426F
 	.string "When I joined TEAM AQUA, the first\n"
 	.string "thing I had to learn was how these\l"
 	.string "warp panels connected.$"
 
-AquaHideout_B2F_Text_Grunt26Defeat: @ 82342CC
+AquaHideout_B2F_Text_Grunt8Defeat: @ 82342CC
 	.string "I was too occupied thinking about\n"
 	.string "the warp panels…$"
 
-AquaHideout_B2F_Text_Grunt26PostBattle: @ 82342FF
+AquaHideout_B2F_Text_Grunt8PostBattle: @ 82342FF
 	.string "I'll have to learn about how I can\n"
 	.string "battle more effectively…$"
