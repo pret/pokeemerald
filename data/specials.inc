@@ -400,7 +400,7 @@ gSpecials:: @ 81DBA64
 	def_special ClearQuizLadyQuestionAndAnswer
 	def_special QuizLadySetCustomQuestion
 	def_special QuizLadyTakePrizeForCustomQuiz
-	def_special sub_813986C
+	def_special GetMysteryEventCardVal
 	def_special QuizLadyRecordCustomQuizData
 	def_special QuizLadySetWaitingForChallenger
 	def_special BufferQuizCorrectAnswer
