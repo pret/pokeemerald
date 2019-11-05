@@ -15,11 +15,11 @@
 	.section .rodata
 
 	.align 2
-	.include "data/scripts/meventmsg_stamp_card.inc"
-	.include "data/scripts/meventmsg_pichu.inc"
-	.include "data/scripts/meventmsg_trainer.inc"
-	.include "data/scripts/meventmsg_battle_card.inc"
-	.include "data/scripts/meventmsg_aurora_ticket.inc"
-	.include "data/scripts/meventmsg_mystic_ticket.inc"
-	.include "data/scripts/meventmsg_altering_cave.inc"
-	.include "data/scripts/meventmsg_old_sea_map.inc"
+	.include "data/scripts/mevent_stamp_card.inc"
+	.include "data/scripts/mevent_pichu.inc"
+	.include "data/scripts/mevent_trainer.inc"
+	.include "data/scripts/mevent_battle_card.inc"
+	.include "data/scripts/mevent_aurora_ticket.inc"
+	.include "data/scripts/mevent_mystic_ticket.inc"
+	.include "data/scripts/mevent_altering_cave.inc"
+	.include "data/scripts/mevent_old_sea_map.inc"
