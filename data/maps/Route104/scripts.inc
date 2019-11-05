@@ -48,7 +48,7 @@ Route104_EventScript_1ECC9E:: @ 81ECC9E
 
 Route104_EventScript_1ECCB3:: @ 81ECCB3
 	lockall
-	setflag FLAG_HIDE_RUSBORO_CITY_RIVAL
+	setflag FLAG_HIDE_RUSTBORO_CITY_RIVAL
 	setvar VAR_RUSTBORO_CITY_STATE, 8
 	setvar VAR_ROUTE104_STATE, 2
 	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceFastestUp
@@ -62,7 +62,7 @@ Route104_EventScript_1ECCB3:: @ 81ECCB3
 	waitmovement 0
 	delay 20
 	setvar VAR_0x8008, 0
-	call Route104_EventScript_1E0DD1
+	call RustboroCity_EventScript_PlayRivalMusic
 	playse SE_PIN
 	applymovement 34, Common_Movement_ExclamationMark
 	waitmovement 0

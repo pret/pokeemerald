@@ -277,7 +277,7 @@ RustboroCity_DevonCorp_2F_EventScript_CancelFossilSelect:: @ 8211BCD
 	release
 	end
 
-RustboroCity_DevonCorp_2F_EventScript_PokenavFeatureScientist:: @ 8211BCF
+RustboroCity_DevonCorp_2F_EventScript_MatchCallScientist:: @ 8211BCF
 	lock
 	faceplayer
 	compare VAR_FOSSIL_RESURRECTION_STATE, 1
