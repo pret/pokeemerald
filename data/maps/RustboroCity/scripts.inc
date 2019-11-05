@@ -172,12 +172,12 @@ RustboroCity_EventScript_Man1HaveBadge:: @ 81E08A8
 RustboroCity_EventScript_Boy2:: @ 81E08B2
 	lock
 	faceplayer
-	goto_if_set FLAG_RECEIVED_POKENAV, RustboroCity_EventScript_BrineyLeftTunnel
+	goto_if_set FLAG_RECEIVED_POKENAV, RustboroCity_EventScript_Boy2BrineyLeftTunnel
 	msgbox RustboroCity_Text_MrBrineyWalksInTheTunnel, MSGBOX_DEFAULT
 	release
 	end
 
-RustboroCity_EventScript_BrineyLeftTunnel:: @ 81E08C7
+RustboroCity_EventScript_Boy2BrineyLeftTunnel:: @ 81E08C7
 	msgbox RustboroCity_Text_MrBrineyLovesPeeko, MSGBOX_DEFAULT
 	release
 	end

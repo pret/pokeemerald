@@ -76,6 +76,7 @@ RustboroCity_DevonCorp_2F_EventScript_FossilScientist:: @ 82118F1
 	release
 	end
 
+@ This whole section has needless duplication and could be condensed considerably
 RustboroCity_DevonCorp_2F_EventScript_NoticeRootFossil:: @ 8211933
 	closemessage
 	playse SE_PIN
@@ -143,7 +144,6 @@ RustboroCity_DevonCorp_2F_EventScript_FossilMonReady:: @ 8211A03
 	goto_if_eq RustboroCity_DevonCorp_2F_EventScript_AnorithReady
 	end
 
-@ This whole section has needless duplication and could be condensed considerably
 RustboroCity_DevonCorp_2F_EventScript_LileepReady:: @ 8211A1A
 	bufferspeciesname 1, SPECIES_LILEEP
 	msgbox RustboroCity_DevonCorp_2F_Text_FossilizedMonBroughtBackToLife, MSGBOX_DEFAULT
