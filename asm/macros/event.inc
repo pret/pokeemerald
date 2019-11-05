@@ -1630,6 +1630,14 @@
 	call_if 5, \dest
 	.endm
 
+	.macro vgoto_if_eq dest:req
+	vgoto_if 1, \dest
+	.endm
+
+	.macro vgoto_if_ne dest:req
+	vgoto_if 0, \dest
+	.endm
+
 	.macro switch var:req
 	copyvar VAR_0x8000, \var
 	.endm
