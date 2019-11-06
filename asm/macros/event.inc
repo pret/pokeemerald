@@ -1680,9 +1680,9 @@
 	callstd STD_REGISTER_MATCH_CALL
 	.endm
 
-	.macro dofieldeffectsparkle x:req y:req
+	.macro dofieldeffectsparkle x:req, y:req, priority:req
 	setfieldeffectargument 0, \x
 	setfieldeffectargument 1, \y
-	setfieldeffectargument 2, 0
+	setfieldeffectargument 2, \priority
 	dofieldeffect FLDEFF_SPARKLE
 	.endm
