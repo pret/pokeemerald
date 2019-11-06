@@ -1671,3 +1671,10 @@
 	setorcopyvar VAR_0x8000, \trainer
 	callstd STD_REGISTER_MATCH_CALL
 	.endm
+
+	.macro dofieldeffectsparkle x:req y:req
+	setfieldeffectargument 0, \x
+	setfieldeffectargument 1, \y
+	setfieldeffectargument 2, 0
+	dofieldeffect FLDEFF_SPARKLE
+	.endm

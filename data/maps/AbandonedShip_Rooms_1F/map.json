@@ -24,7 +24,7 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "AbandonedShip_Rooms_1F_EventScript_237A93",
+      "script": "AbandonedShip_Rooms_1F_EventScript_Gentleman",
       "flag": "0"
     },
     {
@@ -50,7 +50,7 @@
       "movement_range_y": 1,
       "trainer_type": "1",
       "trainer_sight_or_berry_tree_id": "4",
-      "script": "AbandonedShip_Rooms_1F_EventScript_237AB3",
+      "script": "AbandonedShip_Rooms_1F_EventScript_Thalia",
       "flag": "0"
     },
     {
@@ -63,7 +63,7 @@
       "movement_range_y": 1,
       "trainer_type": "1",
       "trainer_sight_or_berry_tree_id": "4",
-      "script": "AbandonedShip_Rooms_1F_EventScript_237A9C",
+      "script": "AbandonedShip_Rooms_1F_EventScript_Demetrius",
       "flag": "0"
     }
   ],

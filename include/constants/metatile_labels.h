@@ -255,10 +255,10 @@
 #define METATILE_EliteFour_EntryDoor_ClosedBottom   0x20E
 
 // gTileset_InsideShip
-#define METATILE_InsideShip_InTactDoor0_Bottom 0x233
-#define METATILE_InsideShip_InTactDoor1_Bottom 0x22B
-#define METATILE_InsideShip_DoorIndent1        0x21A
-#define METATILE_InsideShip_DoorIndent0        0x234
+#define METATILE_InsideShip_IntactDoor_Bottom_Unlocked 0x22B
+#define METATILE_InsideShip_IntactDoor_Bottom_Locked   0x233
+#define METATILE_InsideShip_DoorIndent_Unlocked        0x21A
+#define METATILE_InsideShip_DoorIndent_Locked          0x234
 
 // gTileset_BattlePike
 #define METATILE_BattlePike_Curtain_Stage0_Tile0 0x24A
