@@ -445,7 +445,7 @@ Route110_TrickHouseEntrance_EventScript_26A039:: @ 826A039
 	compare VAR_RESULT, 1
 	goto_if_eq Route110_TrickHouseEntrance_EventScript_26A09A
 	compare VAR_RESULT, 0
-	call_if_eq Common_EventScript_NoRoomLeftForAnother
+	call_if_eq Common_EventScript_NoRoomForDecor
 	msgbox Route110_TrickHouseEntrance_Text_26ABBD, MSGBOX_DEFAULT
 	releaseall
 	end

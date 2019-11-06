@@ -825,12 +825,12 @@ Common_EventScript_BagIsFull:: @ 827205E
 	msgbox gText_TooBadBagIsFull, MSGBOX_DEFAULT
 	return
 
-Route114_LanettesHouse_EventScript_272067:: @ 8272067
+Common_EventScript_ShowNoRoomForDecor:: @ 8272067
 	msgbox gText_NoRoomLeftForAnother, MSGBOX_DEFAULT
 	release
 	end
 
-Common_EventScript_NoRoomLeftForAnother:: @ 8272071
+Common_EventScript_NoRoomForDecor:: @ 8272071
 	msgbox gText_NoRoomLeftForAnother, MSGBOX_DEFAULT
 	return
 
