@@ -88,50 +88,50 @@ LilycoveCity_Text_2A7321: @ 82A7321
 	.string "The way dignified simplicity suits me,\n"
 	.string "{POKEBLOCK}S perfectly suit POKéMON.$"
 
-Route123_BerryMastersHouse_Text_2A7386: @ 82A7386
+Route123_BerryMastersHouse_Text_YoureDeservingOfBerry: @ 82A7386
 	.string "You may call me the BERRY MASTER.\p"
 	.string "I dream of filling the world with\n"
 	.string "beautiful flowers, so I raise BERRIES\l"
 	.string "and hand them out to everyone.\p"
 	.string "You're deserving of one!$"
 
-Route123_BerryMastersHouse_Text_2A7428: @ 82A7428
+Route123_BerryMastersHouse_Text_WhyBeStingyTakeAnother: @ 82A7428
 	.string "Why be stingy?\n"
 	.string "Take another!$"
 
-Route123_BerryMastersHouse_Text_2A7445: @ 82A7445
+Route123_BerryMastersHouse_Text_VisitPrettyPetalFlowerShop: @ 82A7445
 	.string "Be sure to visit the PRETTY PETAL\n"
 	.string "flower shop near RUSTBORO.\p"
 	.string "Let flowers fill the world!$"
 
-Route123_BerryMastersHouse_Text_2A749E: @ 82A749E
+Route123_BerryMastersHouse_Text_DoneForToday: @ 82A749E
 	.string "I'm done for today.\n"
 	.string "Come again another day.\p"
 	.string "Let flowers fill the world!$"
 
-Route123_BerryMastersHouse_Text_2A74E6: @ 82A74E6
+Route123_BerryMastersHouse_Text_HeardAGoodSayingLately: @ 82A74E6
 	.string "The way my husband grows BERRIES,\n"
 	.string "oh, he's the best in the world.\p"
 	.string "He makes me proud, that he does.\p"
 	.string "Incidentally, child, have you heard\n"
 	.string "a good saying lately?$"
 
-Route123_BerryMastersHouse_Text_2A7583: @ 82A7583
+Route123_BerryMastersHouse_Text_InspirationalTakeThis: @ 82A7583
 	.string "Ah! What a remarkable saying!\n"
 	.string "Inspirational, it is!\p"
 	.string "I want you to have this.$"
 
-Route123_BerryMastersHouse_Text_2A75D0: @ 82A75D0
+Route123_BerryMastersHouse_Text_GoodSayingTakeThis: @ 82A75D0
 	.string "Oh! A good saying it is.\n"
 	.string "You're quite remarkable.\p"
 	.string "I want you to have this.$"
 
-Route123_BerryMastersHouse_Text_2A761B: @ 82A761B
+Route123_BerryMastersHouse_Text_JoyNeverGoesOutOfMyLife: @ 82A761B
 	.string "Our four grandchildren should become\n"
 	.string "more accomplished than my husband.\p"
 	.string "Joy never goes out of my life!$"
 
-Route123_BerryMastersHouse_Text_2A7682: @ 82A7682
+Route123_BerryMastersHouse_Text_Ah: @ 82A7682
 	.string "Ah…$"
 
 Route104_PrettyPetalFlowerShop_Text_ThisIsPrettyPetalFlowerShop: @ 82A7686
