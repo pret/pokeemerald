@@ -238,7 +238,7 @@ Route113_GlassWorkshop_EventScript_NoRoomForFlute:: @ 826F072
 	end
 
 Route113_GlassWorkshop_EventScript_NoRoomForDecor:: @ 826F081
-	call Common_EventScript_NoRoomLeftForAnother
+	call Common_EventScript_NoRoomForDecor
 	msgbox Route113_GlassWorkshop_Text_NoRoomInPC, MSGBOX_DEFAULT
 	release
 	end

@@ -213,7 +213,7 @@ MauvilleCity_GameCorner_EventScript_20FE79:: @ 820FE79
 	end
 
 MauvilleCity_GameCorner_EventScript_20FE87:: @ 820FE87
-	call Common_EventScript_NoRoomLeftForAnother
+	call Common_EventScript_NoRoomForDecor
 	goto MauvilleCity_GameCorner_EventScript_20FD20
 	end
 
@@ -446,7 +446,7 @@ MauvilleCity_GameCorner_EventScript_2101D0:: @ 82101D0
 	end
 
 MauvilleCity_GameCorner_EventScript_2101FA:: @ 82101FA
-	call Common_EventScript_NoRoomLeftForAnother
+	call Common_EventScript_NoRoomForDecor
 	msgbox MauvilleCity_GameCorner_Text_2107A9, MSGBOX_DEFAULT
 	release
 	end

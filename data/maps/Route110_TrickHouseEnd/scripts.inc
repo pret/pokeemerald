@@ -206,7 +206,7 @@ Route110_TrickHouseEnd_EventScript_26AFEF:: @ 826AFEF
 	return
 
 Route110_TrickHouseEnd_EventScript_26B002:: @ 826B002
-	call Common_EventScript_NoRoomLeftForAnother
+	call Common_EventScript_NoRoomForDecor
 	msgbox Route110_TrickHouseEnd_Text_26B615, MSGBOX_DEFAULT
 	setvar VAR_TRICK_HOUSE_PRIZE_PICKUP, 1
 	return
