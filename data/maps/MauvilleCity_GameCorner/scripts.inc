@@ -56,8 +56,6 @@ MauvilleCity_GameCorner_EventScript_Buy50Coins:: @ 820FC33
 	playse SE_REGI
 	msgbox MauvilleCity_GameCorner_Text_ThankYouHereAreYourCoins, MSGBOX_DEFAULT
 	hidemoneybox
-	nop
-	nop
 	hidecoinsbox 0, 5
 	release
 	end
@@ -76,8 +74,6 @@ MauvilleCity_GameCorner_EventScript_Buy500Coins:: @ 820FC75
 	playse SE_REGI
 	msgbox MauvilleCity_GameCorner_Text_ThankYouHereAreYourCoins, MSGBOX_DEFAULT
 	hidemoneybox
-	nop
-	nop
 	hidecoinsbox 0, 5
 	release
 	end
@@ -90,8 +86,6 @@ MauvilleCity_GameCorner_EventScript_NeedCoinCase:: @ 820FCB7
 MauvilleCity_GameCorner_EventScript_NotEnoughMoney:: @ 820FCC1
 	msgbox MauvilleCity_GameCorner_Text_DontHaveEnoughMoney, MSGBOX_DEFAULT
 	hidemoneybox
-	nop
-	nop
 	hidecoinsbox 0, 5
 	release
 	end
@@ -99,8 +93,6 @@ MauvilleCity_GameCorner_EventScript_NotEnoughMoney:: @ 820FCC1
 MauvilleCity_GameCorner_EventScript_CancelBuyCoins:: @ 820FCD1
 	msgbox MauvilleCity_GameCorner_Text_DontNeedCoinsThen, MSGBOX_DEFAULT
 	hidemoneybox
-	nop
-	nop
 	hidecoinsbox 0, 5
 	release
 	end
@@ -108,8 +100,6 @@ MauvilleCity_GameCorner_EventScript_CancelBuyCoins:: @ 820FCD1
 MauvilleCity_GameCorner_EventScript_NoRoomForCoins:: @ 820FCE1
 	msgbox MauvilleCity_GameCorner_Text_CoinCaseIsFull, MSGBOX_DEFAULT
 	hidemoneybox
-	nop
-	nop
 	hidecoinsbox 0, 5
 	release
 	end

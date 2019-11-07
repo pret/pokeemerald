@@ -1083,6 +1083,8 @@
 	@ Hides the secondary box spawned by showmoney.
 	.macro hidemoneybox
 	.byte 0x94
+	nop
+	nop
 	.endm
 
 	@ Updates the secondary box spawned by showmoney. Consumes but does not use arguments.

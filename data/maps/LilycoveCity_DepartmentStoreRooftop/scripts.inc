@@ -196,8 +196,6 @@ LilycoveCity_DepartmentStoreRooftop_EventScript_NoRoomForDrink:: @ 8220450
 
 LilycoveCity_DepartmentStoreRooftop_EventScript_ExitVendingMachine:: @ 822045E
 	hidemoneybox
-	nop
-	nop
 	releaseall
 	end
 

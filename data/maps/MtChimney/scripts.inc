@@ -115,16 +115,12 @@ MtChimney_EventScript_LavaCookieLady:: @ 822EEF3
 	compare VAR_RESULT, FALSE
 	goto_if_eq MtChimney_EventScript_BagIsFull
 	hidemoneybox
-	nop
-	nop
 	release
 	end
 
 MtChimney_EventScript_BagIsFull:: @ 822EF51
 	msgbox gText_TooBadBagIsFull, MSGBOX_DEFAULT
 	hidemoneybox
-	nop
-	nop
 	release
 	end
 
@@ -136,16 +132,12 @@ MtChimney_EventScript_TakeMoney:: @ 822EF5E
 MtChimney_EventScript_DeclineLavaCookie:: @ 822EF69
 	msgbox MtChimney_Text_OhFineThen, MSGBOX_DEFAULT
 	hidemoneybox
-	nop
-	nop
 	release
 	end
 
 MtChimney_EventScript_NotEnoughMoney:: @ 822EF76
 	msgbox MtChimney_Text_YouveNotGotTheMoney, MSGBOX_DEFAULT
 	hidemoneybox
-	nop
-	nop
 	release
 	end
 
