@@ -687,7 +687,7 @@ static void CB2_InitBattleInternal(void)
     if (gBattleTypeFlags & BATTLE_TYPE_RECORDED)
         gBattleTerrain = BATTLE_TERRAIN_BUILDING;
 
-    sub_80356D0();
+    InitBattleBgsVideo();
     LoadBattleTextboxAndBackground();
     ResetSpriteData();
     ResetTasks();
@@ -1024,7 +1024,7 @@ static void CB2_HandleStartBattle(void)
             ResetBlockReceivedFlags();
             sub_8036EB8(2, playerMultiplayerId);
             SetAllPlayersBerryData();
-            taskId = CreateTask(sub_8035D74, 0);
+            taskId = CreateTask(InitLinkBattleVsScreen, 0);
             gTasks[taskId].data[1] = 0x10E;
             gTasks[taskId].data[2] = 0x5A;
             gTasks[taskId].data[5] = 0;
@@ -1226,7 +1226,7 @@ static void CB2_HandleStartMultiPartnerBattle(void)
             ResetBlockReceivedFlags();
             sub_8036EB8(2, playerMultiplayerId);
             SetAllPlayersBerryData();
-            taskId = CreateTask(sub_8035D74, 0);
+            taskId = CreateTask(InitLinkBattleVsScreen, 0);
             gTasks[taskId].data[1] = 0x10E;
             gTasks[taskId].data[2] = 0x5A;
             gTasks[taskId].data[5] = 0;
@@ -1612,7 +1612,7 @@ static void CB2_HandleStartMultiBattle(void)
             sub_8036EB8(4, playerMultiplayerId);
             SetAllPlayersBerryData();
             SetDeoxysStats();
-            var = CreateTask(sub_8035D74, 0);
+            var = CreateTask(InitLinkBattleVsScreen, 0);
             gTasks[var].data[1] = 0x10E;
             gTasks[var].data[2] = 0x5A;
             gTasks[var].data[5] = 0;
@@ -2250,7 +2250,7 @@ void sub_8038D64(void)
         gBattle_BG3_X = 0;
         gBattle_BG3_Y = 0;
 
-        sub_80356D0();
+        InitBattleBgsVideo();
         LoadCompressedPalette(gBattleTextboxPalette, 0, 64);
         LoadBattleMenuWindowGfx();
         ResetSpriteData();
@@ -2261,7 +2261,7 @@ void sub_8038D64(void)
         gReservedSpritePaletteCount = 4;
         SetVBlankCallback(VBlankCB_Battle);
 
-        taskId = CreateTask(sub_8035D74, 0);
+        taskId = CreateTask(InitLinkBattleVsScreen, 0);
         gTasks[taskId].data[1] = 0x10E;
         gTasks[taskId].data[2] = 0x5A;
         gTasks[taskId].data[5] = 1;
@@ -2446,7 +2446,7 @@ static void sub_80392A8(void)
     gBattle_BG2_Y = 0;
     gBattle_BG3_X = 0;
     gBattle_BG3_Y = 0;
-    sub_80356D0();
+    InitBattleBgsVideo();
     SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_ON | DISPCNT_OBJ_1D_MAP);
     LoadBattleMenuWindowGfx();
 
