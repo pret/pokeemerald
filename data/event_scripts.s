@@ -746,8 +746,7 @@ Common_EventScript_ReadyPetalburgGymForBattle:: @ 8271E84
 	setflag FLAG_PETALBURG_MART_EXPANDED_ITEMS
 	return
 
-DewfordTown_EventScript_271E8B:: @ 8271E8B
-DewfordTown_Hall_EventScript_271E8B:: @ 8271E8B
+Common_EventScript_BufferTrendyPhrase:: @ 8271E8B
 	dotimebasedevents
 	setvar VAR_0x8004, 0
 	special BufferTrendyPhraseString
