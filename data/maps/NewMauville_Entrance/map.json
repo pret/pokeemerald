@@ -38,7 +38,7 @@
       "elevation": 3,
       "var": "VAR_NEW_MAUVILLE_STATE",
       "var_value": "0",
-      "script": "NewMauville_Entrance_EventScript_2372FF"
+      "script": "NewMauville_Entrance_EventScript_Door"
     }
   ],
   "bg_events": []
