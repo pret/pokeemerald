@@ -37,7 +37,7 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "ShoalCave_LowTideLowerRoom_EventScript_2371B2",
+      "script": "ShoalCave_LowTideLowerRoom_EventScript_BlackBelt",
       "flag": "0"
     }
   ],
@@ -79,7 +79,7 @@
       "y": 2,
       "elevation": 3,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "ShoalCave_LowTideLowerRoom_EventScript_237176"
+      "script": "ShoalCave_LowTideLowerRoom_EventScript_ShoalSalt4"
     }
   ]
 }

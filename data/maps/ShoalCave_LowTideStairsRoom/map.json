@@ -52,7 +52,7 @@
       "y": 11,
       "elevation": 3,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "ShoalCave_LowTideStairsRoom_EventScript_23711A"
+      "script": "ShoalCave_LowTideStairsRoom_EventScript_ShoalSalt3"
     }
   ]
 }
