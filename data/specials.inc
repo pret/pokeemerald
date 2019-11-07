@@ -180,7 +180,7 @@ gSpecials:: @ 81DBA64
 	def_special sub_813BA30
 	def_special UpdateMovedLilycoveFanClubMembers
 	def_special sub_813BF60
-	def_special sub_813BA60
+	def_special UpdateTrainerFanClubGameClear
 	def_special sub_813BF7C
 	def_special RockSmashWildEncounter
 	def_special GabbyAndTyGetBattleNum
@@ -351,7 +351,7 @@ gSpecials:: @ 81DBA64
 	def_special sub_81653CC
 	def_special DoesPartyHaveEnigmaBerry
 	def_special ScriptRandom
-	def_special sub_81AFDD0
+	def_special SetChampionSaveWarp
 	def_special TryPutTreasureInvestigatorsOnAir
 	def_special TryPutLotteryWinnerReportOnAir
 	def_special sub_80EE72C
