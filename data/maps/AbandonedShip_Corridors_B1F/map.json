@@ -24,7 +24,7 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "AbandonedShip_Corridors_B1F_EventScript_237DBF",
+      "script": "AbandonedShip_Corridors_B1F_EventScript_TuberM",
       "flag": "0"
     },
     {
@@ -37,7 +37,7 @@
       "movement_range_y": 0,
       "trainer_type": "1",
       "trainer_sight_or_berry_tree_id": "4",
-      "script": "AbandonedShip_Corridors_B1F_EventScript_237E13",
+      "script": "AbandonedShip_Corridors_B1F_EventScript_Duncan",
       "flag": "0"
     }
   ],
@@ -107,7 +107,7 @@
       "y": 4,
       "elevation": 3,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "AbandonedShip_Corridors_B1F_EventScript_237DC8"
+      "script": "AbandonedShip_Corridors_B1F_EventScript_StorageRoomDoor"
     }
   ]
 }

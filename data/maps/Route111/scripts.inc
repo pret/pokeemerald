@@ -136,7 +136,7 @@ Route111_EventScript_1F0E60:: @ 81F0E60
 	waitstate
 	setvar VAR_MIRAGE_TOWER_STATE, 2
 	clearflag FLAG_HIDE_DESERT_UNDERPASS_FOSSIL
-	goto_if_set FLAG_CHOSE_ROOT_FOSSIL, Route111_EventScript_1F0EA7
+	goto_if_set FLAG_CHOSE_CLAW_FOSSIL, Route111_EventScript_1F0EA7
 	msgbox Route111_Text_1F1C74, MSGBOX_DEFAULT
 	releaseall
 	end

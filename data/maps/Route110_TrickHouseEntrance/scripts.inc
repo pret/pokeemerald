@@ -452,7 +452,7 @@ Route110_TrickHouseEntrance_EventScript_MechadollReward:: @ 826A039
 	compare VAR_RESULT, TRUE
 	goto_if_eq Route110_TrickHouseEntrance_EventScript_ReceivedTent
 	compare VAR_RESULT, FALSE
-	call_if_eq Common_EventScript_NoRoomLeftForAnother
+	call_if_eq Common_EventScript_NoRoomForDecor
 	msgbox Route110_TrickHouseEntrance_Text_PCFullAgain, MSGBOX_DEFAULT
 	releaseall
 	end

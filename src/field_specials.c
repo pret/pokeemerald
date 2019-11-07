@@ -55,6 +55,7 @@
 #include "constants/heal_locations.h"
 #include "constants/map_types.h"
 #include "constants/maps.h"
+#include "constants/mevent.h"
 #include "constants/tv.h"
 #include "constants/script_menu.h"
 #include "constants/songs.h"
@@ -1655,19 +1656,19 @@ void BufferLottoTicketNumber(void)
     }
 }
 
-u16 sub_813986C(void)
+u16 GetMysteryEventCardVal(void)
 {
     switch (gSpecialVar_Result)
     {
-        case 0:
-            return mevent_081445C0(3);
-        case 1:
-            return mevent_081445C0(4);
-        case 2:
-            return mevent_081445C0(0);
-        case 3:
+        case GET_NUM_STAMPS:
+            return mevent_081445C0(GET_NUM_STAMPS_INTERNAL);
+        case GET_MAX_STAMPS:
+            return mevent_081445C0(GET_MAX_STAMPS_INTERNAL);
+        case GET_CARD_BATTLES_WON:
+            return mevent_081445C0(GET_CARD_BATTLES_WON_INTERNAL);
+        case 3: // Never occurs
             return mevent_081445C0(1);
-        case 4:
+        case 4: // Never occurs
             return mevent_081445C0(2);
         default:
             return 0;

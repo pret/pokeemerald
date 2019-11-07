@@ -1630,6 +1630,14 @@
 	call_if 5, \dest
 	.endm
 
+	.macro vgoto_if_eq dest:req
+	vgoto_if 1, \dest
+	.endm
+
+	.macro vgoto_if_ne dest:req
+	vgoto_if 0, \dest
+	.endm
+
 	.macro switch var:req
 	copyvar VAR_0x8000, \var
 	.endm
@@ -1670,4 +1678,11 @@
 	special SetMatchCallRegisteredFlag
 	setorcopyvar VAR_0x8000, \trainer
 	callstd STD_REGISTER_MATCH_CALL
+	.endm
+
+	.macro dofieldeffectsparkle x:req, y:req, priority:req
+	setfieldeffectargument 0, \x
+	setfieldeffectargument 1, \y
+	setfieldeffectargument 2, \priority
+	dofieldeffect FLDEFF_SPARKLE
 	.endm
