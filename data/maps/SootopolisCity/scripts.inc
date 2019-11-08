@@ -110,7 +110,7 @@ SootopolisCity_EventScript_1E5805:: @ 81E5805
 	compare VAR_SKY_PILLAR_STATE, 1
 	goto_if_eq SootopolisCity_EventScript_1E583E
 	compare VAR_SKY_PILLAR_STATE, 1
-	goto_if_le Common_EventScript_SetWeather15
+	goto_if_le Common_EventScript_SetAlternatingWeather
 	return
 
 SootopolisCity_EventScript_1E583D:: @ 81E583D
