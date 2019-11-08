@@ -35,7 +35,7 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "PacifidlogTown_EventScript_1EBACC",
+      "script": "PacifidlogTown_EventScript_Girl",
       "flag": "0"
     },
     {
@@ -48,7 +48,7 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "PacifidlogTown_EventScript_1EBAD5",
+      "script": "PacifidlogTown_EventScript_Fisherman",
       "flag": "0"
     },
     {
@@ -61,7 +61,7 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "PacifidlogTown_EventScript_1EBAC3",
+      "script": "PacifidlogTown_EventScript_NinjaBoy",
       "flag": "0"
     }
   ],
@@ -125,7 +125,7 @@
       "y": 16,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "PacifidlogTown_EventScript_1EBADE"
+      "script": "PacifidlogTown_EventScript_TownSign"
     },
     {
       "type": "sign",

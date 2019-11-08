@@ -645,61 +645,7 @@ Std_MsgboxAutoclose:: @ 8271494
 	return
 
 	.include "data/scripts/new_game.inc"
-
-@ Below seems to be hall_of_fame.inc and briney.inc together?
-EverGrandeCity_HallOfFame_EventScript_2717C1:: @ 82717C1
-	special sub_81AFDD0
-	setflag FLAG_IS_CHAMPION
-	call EverGrandeCity_HallOfFame_EventScript_ResetDefeatedEventLegendaries
-	compare VAR_FOSSIL_MANIAC_STATE, 0
-	call_if_eq EverGrandeCity_HallOfFame_EventScript_271839
-	clearflag FLAG_HIDE_LILCOVE_MOTEL_GAME_DESIGNERS
-	call EverGrandeCity_HallOfFame_EventScript_ResetEliteFour
-	setflag FLAG_HIDE_SLATEPORT_CITY_STERNS_SHIPYARD_MR_BRINEY
-	clearflag FLAG_HIDE_SS_TIDAL_CORRIDOR_MR_BRINEY
-	clearflag FLAG_HIDE_MOSSDEEP_CITY_STEVENS_HOUSE_INVISIBLE_NINJA_BOY
-	setvar VAR_STEVENS_HOUSE_STATE, 2
-	setflag FLAG_HIDE_VICTORY_ROAD_ENTRANCE_WALLY
-	clearflag FLAG_HIDE_VICTORY_ROAD_EXIT_WALLY
-	clearflag FLAG_HIDE_SLATEPORT_CITY_HARBOR_SS_TIDAL
-	clearflag FLAG_HIDE_LILYCOVE_HARBOR_SSTIDAL
-	setflag FLAG_HIDE_SAFARI_ZONE_SOUTH_CONSTRUCTION_WORKERS
-	clearflag FLAG_HIDE_SAFARI_ZONE_SOUTH_EAST_EXPANSION
-	setflag FLAG_HIDE_LILYCOVE_CITY_RIVAL
-	special sub_813BA60
-	call_if_unset FLAG_RECEIVED_SS_TICKET, EverGrandeCity_HallOfFame_EventScript_271843
-	call_if_unset FLAG_RECEIVED_BELDUM, EverGrandeCity_HallOfFame_EventScript_27183F
-	setflag FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_RIVAL_BEDROOM
-	setflag FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_RIVAL_BEDROOM
-	compare VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 0
-	call_if_eq EverGrandeCity_HallOfFame_EventScript_271851
-	return
-
-EverGrandeCity_HallOfFame_EventScript_ResetDefeatedEventLegendaries:: @ 8271829
-	clearflag FLAG_DEFEATED_MEW
-	clearflag FLAG_DEFEATED_LATIAS_OR_LATIOS
-	clearflag FLAG_DEFEATED_DEOXYS
-	clearflag FLAG_DEFEATED_LUGIA
-	clearflag FLAG_DEFEATED_HO_OH
-	return
-
-EverGrandeCity_HallOfFame_EventScript_271839:: @ 8271839
-	setvar VAR_FOSSIL_MANIAC_STATE, 1
-	return
-
-EverGrandeCity_HallOfFame_EventScript_27183F:: @ 827183F
-	clearflag FLAG_HIDE_MOSSDEEP_CITY_STEVENS_HOUSE_BELDUM_POKEBALL
-	return
-
-EverGrandeCity_HallOfFame_EventScript_271843:: @ 8271843
-	setvar VAR_LITTLEROOT_HOUSES_STATE, 3
-	setvar VAR_LITTLEROOT_HOUSES_STATE_2, 3
-	clearflag FLAG_HIDE_PLAYERS_HOUSE_DAD
-	return
-
-EverGrandeCity_HallOfFame_EventScript_271851:: @ 8271851
-	setvar VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 1
-	return
+	.include "data/scripts/hall_of_fame.inc"
 
 EventScript_WhiteOut:: @ 8271857
 	call EverGrandeCity_HallOfFame_EventScript_ResetEliteFour
@@ -800,8 +746,7 @@ Common_EventScript_ReadyPetalburgGymForBattle:: @ 8271E84
 	setflag FLAG_PETALBURG_MART_EXPANDED_ITEMS
 	return
 
-DewfordTown_EventScript_271E8B:: @ 8271E8B
-DewfordTown_Hall_EventScript_271E8B:: @ 8271E8B
+Common_EventScript_BufferTrendyPhrase:: @ 8271E8B
 	dotimebasedevents
 	setvar VAR_0x8004, 0
 	special BufferTrendyPhraseString
