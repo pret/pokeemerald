@@ -780,7 +780,7 @@ Common_EventScript_NoRoomForDecor:: @ 8272071
 	msgbox gText_NoRoomLeftForAnother, MSGBOX_DEFAULT
 	return
 
-Common_EventScript_SetWeather15:: @ 827207A
+Common_EventScript_SetAlternatingWeather:: @ 827207A
 	setweather WEATHER_ALTERNATING
 	return
 

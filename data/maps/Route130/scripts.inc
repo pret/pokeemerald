@@ -31,7 +31,7 @@ Route130_EventScript_1F73B1:: @ 81F73B1
 	end
 
 Route130_EventScript_1F73B5:: @ 81F73B5
-	call_if_set FLAG_SYS_WEATHER_CTRL, Common_EventScript_SetWeather15
+	call_if_set FLAG_SYS_WEATHER_CTRL, Common_EventScript_SetAlternatingWeather
 	return
 
 Route130_EventScript_1F73BF:: @ 81F73BF
