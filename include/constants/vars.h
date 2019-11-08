@@ -194,7 +194,7 @@
 #define VAR_TRICK_HOUSE_PUZZLE_7_STATE       0x40B1
 #define VAR_TRICK_HOUSE_PUZZLE_8_STATE       0x40B2
 #define VAR_WEATHER_INSTITUTE_STATE          0x40B3
-#define VAR_PORTHOLE_STATE                   0x40B4
+#define VAR_SS_TIDAL_STATE                   0x40B4
 #define VAR_TRICK_HOUSE_ENTER_FROM_CORRIDOR  0x40B5
 #define VAR_TRICK_HOUSE_PUZZLE_7_STATE_2     0x40B6 // Leftover from RS, never set
 #define VAR_SLATEPORT_FAN_CLUB_STATE         0x40B7
