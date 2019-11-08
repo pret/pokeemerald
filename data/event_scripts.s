@@ -6,6 +6,7 @@
 #include "constants/battle_setup.h"
 #include "constants/berry.h"
 #include "constants/cable_club.h"
+#include "constants/coins.h"
 #include "constants/contest.h"
 #include "constants/daycare.h"
 #include "constants/decorations.h"
@@ -746,8 +747,7 @@ Common_EventScript_ReadyPetalburgGymForBattle:: @ 8271E84
 	setflag FLAG_PETALBURG_MART_EXPANDED_ITEMS
 	return
 
-DewfordTown_EventScript_271E8B:: @ 8271E8B
-DewfordTown_Hall_EventScript_271E8B:: @ 8271E8B
+Common_EventScript_BufferTrendyPhrase:: @ 8271E8B
 	dotimebasedevents
 	setvar VAR_0x8004, 0
 	special BufferTrendyPhraseString
@@ -847,7 +847,7 @@ EventScript_HideMrBriney:: @ 82721F8
 	setvar VAR_BRINEY_LOCATION, 0
 	return
 
-RusturfTunnel_EventScript_272216:: @ 8272216
+RusturfTunnel_EventScript_SetRusturfTunnelOpen:: @ 8272216
 	removeobject 1
 	removeobject 10
 	clearflag FLAG_HIDE_VERDANTURF_TOWN_WANDAS_HOUSE_LOVER_MAN

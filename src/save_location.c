@@ -133,5 +133,5 @@ void sub_81AFDA0(void)
 
 void SetChampionSaveWarp(void)
 {
-    gSaveBlock2Ptr->specialSaveWarpFlags |= 0x80;
+    gSaveBlock2Ptr->specialSaveWarpFlags |= CHAMPION_SAVEWARP;
 }

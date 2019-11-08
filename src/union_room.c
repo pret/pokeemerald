@@ -30,6 +30,7 @@
 #include "party_menu.h"
 #include "pokemon_jump.h"
 #include "random.h"
+#include "save_location.h"
 #include "script.h"
 #include "script_pokemon_util_80F87D8.h"
 #include "sound.h"
@@ -1078,7 +1079,7 @@ u32 sub_8013B8C(struct UnkStruct_Group *arg0, s32 id)
 
     if (gUnknown_02022C2C == 4 && structPtr->unk.field_0.unk_00.unk_01_2 != 3)
     {
-        if (!(gSaveBlock2Ptr->specialSaveWarpFlags & 0x80))
+        if (!(gSaveBlock2Ptr->specialSaveWarpFlags & CHAMPION_SAVEWARP))
             return 1;
         else if (structPtr->unk.field_0.unk_00.isChampion)
             return 0;

@@ -75,8 +75,6 @@ Route121_SafariZoneEntrance_EventScript_TryEnterSafariZone:: @ 822BC48
 	msgbox Route121_SafariZoneEntrance_Text_PleaseEnjoyYourself, MSGBOX_DEFAULT
 	closemessage
 	hidemoneybox
-	nop
-	nop
 	applymovement EVENT_OBJ_ID_PLAYER, Route121_SafariZoneEntrance_Movement_EnterSafariZone
 	waitmovement 0
 	special EnterSafariMode
@@ -113,8 +111,6 @@ Route121_SafariZoneEntrance_EventScript_NotEnoughMoney:: @ 822BCF8
 Route121_SafariZoneEntrance_EventScript_MovePlayerBackFromCounter:: @ 822BD06
 	closemessage
 	hidemoneybox
-	nop
-	nop
 	applymovement EVENT_OBJ_ID_PLAYER, Route121_SafariZoneEntrance_Movement_BackAwayFromCounter
 	waitmovement 0
 	releaseall

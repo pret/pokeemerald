@@ -119,7 +119,7 @@
 #define FLAG_OCEANIC_MUSEUM_MET_REPORTER     0x69
 #define FLAG_RECEIVED_HM04                   0x6A
 #define FLAG_RECEIVED_HM06                   0x6B
-#define FLAG_FLANNERY_GIVES_BADGE_INFO       0x6C
+#define FLAG_WHITEOUT_TO_LAVARIDGE           0x6C // Set after defeating Flannery, so the player cant white out from poison before receiving Go Goggles
 #define FLAG_RECEIVED_HM05                   0x6D
 #define FLAG_RECEIVED_HM02                   0x6E
 #define FLAG_GROUDON_AWAKENED_MAGMA_HIDEOUT  0x6F
@@ -261,7 +261,7 @@
 #define FLAG_USED_ROOM_2_KEY                 0xF1
 #define FLAG_USED_ROOM_4_KEY                 0xF2
 #define FLAG_USED_ROOM_6_KEY                 0xF3
-#define FLAG_MET_PROF_COSMO                  0xF4
+#define FLAG_MET_PROF_COZMO                  0xF4
 #define FLAG_RECEIVED_WAILMER_DOLL           0xF5
 #define FLAG_RECEIVED_CHESTO_BERRY_ROUTE_104 0xF6
 #define FLAG_DEFEATED_SS_TIDAL_TRAINERS      0xF7
@@ -807,7 +807,7 @@
 #define FLAG_HIDE_BIRTH_ISLAND_DEOXYS_TRIANGLE                      0x2FC
 #define FLAG_HIDE_MAUVILLE_CITY_SCOTT                               0x2FD
 #define FLAG_HIDE_VERDANTURF_TOWN_SCOTT                             0x2FE
-#define FLAG_HIDE_FALLORBOR_TOWN_BATTLE_TENT_SCOTT                  0x2FF
+#define FLAG_HIDE_FALLARBOR_TOWN_BATTLE_TENT_SCOTT                  0x2FF
 #define FLAG_HIDE_ROUTE_111_VICTOR_WINSTRATE                        0x300
 #define FLAG_HIDE_ROUTE_111_VICTORIA_WINSTRATE                      0x301
 #define FLAG_HIDE_ROUTE_111_VIVI_WINSTRATE                          0x302
@@ -919,7 +919,7 @@
 #define FLAG_HIDE_ROUTE_111_DESERT_FOSSIL                           0x36C
 #define FLAG_HIDE_MT_CHIMNEY_TRAINERS                               0x36D
 #define FLAG_HIDE_RUSTURF_TUNNEL_AQUA_GRUNT                         0x36E
-#define FLAG_HIDE_RUSTURF_TUNNEL_OLD_MAN                            0x36F
+#define FLAG_HIDE_RUSTURF_TUNNEL_BRINEY                             0x36F
 #define FLAG_HIDE_RUSTURF_TUNNEL_PEEKO                              0x370
 #define FLAG_HIDE_BRINEYS_HOUSE_PEEKO                               0x371
 #define FLAG_HIDE_SLATEPORT_CITY_TEAM_AQUA                          0x372
@@ -969,8 +969,8 @@
 #define FLAG_HIDE_MT_CHIMNEY_TEAM_AQUA                              0x39E
 #define FLAG_HIDE_MT_CHIMNEY_TEAM_MAGMA                             0x39F
 #define FLAG_HIDE_FALLARBOR_HOUSE_PROF_COZMO                        0x3A0
-#define FLAG_HIDE_LAVARIDGE_TOWN_RIVAL_1                            0x3A1
-#define FLAG_HIDE_LAVARIDGE_TOWN_RIVAL_2                            0x3A2
+#define FLAG_HIDE_LAVARIDGE_TOWN_RIVAL                              0x3A1
+#define FLAG_HIDE_LAVARIDGE_TOWN_RIVAL_ON_BIKE                      0x3A2
 #define FLAG_HIDE_RUSTURF_TUNNEL_ROCK_1                             0x3A3
 #define FLAG_HIDE_RUSTURF_TUNNEL_ROCK_2                             0x3A4
 #define FLAG_HIDE_FORTREE_CITY_HOUSE_4_WINGULL                      0x3A5

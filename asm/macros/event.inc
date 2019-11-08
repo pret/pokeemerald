@@ -1080,9 +1080,11 @@
 	.byte \check
 	.endm
 
-	@ Hides the secondary box spawned by showmoney.
+	@ Hides the secondary box spawned by showmoney. Consumption of the x and y arguments was dummied out.
 	.macro hidemoneybox
 	.byte 0x94
+	.byte 0  @ \x
+	.byte 0  @ \y
 	.endm
 
 	@ Updates the secondary box spawned by showmoney. Consumes but does not use arguments.

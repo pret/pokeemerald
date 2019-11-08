@@ -43,8 +43,6 @@ Route109_SeashoreHouse_EventScript_AlreadyReceivedSodaPop:: @ 8269460
 	goto_if_eq Route109_SeashoreHouse_EventScript_BuySodaPop
 	msgbox Route109_SeashoreHouse_Text_ThatsTooBad, MSGBOX_DEFAULT
 	hidemoneybox
-	nop
-	nop
 	release
 	end
 
@@ -60,24 +58,18 @@ Route109_SeashoreHouse_EventScript_BuySodaPop:: @ 8269484
 	updatemoneybox 0, 0
 	giveitem_std ITEM_SODA_POP
 	hidemoneybox
-	nop
-	nop
 	release
 	end
 
 Route109_SeashoreHouse_EventScript_NotEnoughMoney:: @ 82694C8
 	msgbox Route109_SeashoreHouse_Text_NotEnoughMoney, MSGBOX_DEFAULT
 	hidemoneybox
-	nop
-	nop
 	release
 	end
 
 Route109_SeashoreHouse_EventScript_NotEnoughSpace:: @ 82694D5
 	msgbox gText_TooBadBagIsFull, MSGBOX_DEFAULT
 	hidemoneybox
-	nop
-	nop
 	release
 	end
 
