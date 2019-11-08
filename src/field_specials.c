@@ -303,9 +303,10 @@ void ResetSSTidalFlag(void)
     FlagClear(FLAG_SYS_CRUISE_MODE);
 }
 
+// Returns TRUE if the Cruise is over
 bool32 CountSSTidalStep(u16 delta)
 {
-    if (!FlagGet(FLAG_SYS_CRUISE_MODE) || (*GetVarPointer(VAR_CRUISE_STEP_COUNT) += delta) <= 0xcc)
+    if (!FlagGet(FLAG_SYS_CRUISE_MODE) || (*GetVarPointer(VAR_CRUISE_STEP_COUNT) += delta) < SS_TIDAL_MAX_STEPS)
     {
         return FALSE;
     }
@@ -315,21 +316,21 @@ bool32 CountSSTidalStep(u16 delta)
 u8 GetSSTidalLocation(s8 *mapGroup, s8 *mapNum, s16 *x, s16 *y)
 {
     u16 *varCruiseStepCount = GetVarPointer(VAR_CRUISE_STEP_COUNT);
-    switch (*GetVarPointer(VAR_PORTHOLE_STATE))
+    switch (*GetVarPointer(VAR_SS_TIDAL_STATE))
     {
-        case 1:
-        case 8:
+        case SS_TIDAL_BOARD_SLATEPORT:
+        case SS_TIDAL_LAND_SLATEPORT:
             return SS_TIDAL_LOCATION_SLATEPORT;
-        case 3:
-        case 9:
+        case SS_TIDAL_HALFWAY_LILYCOVE:
+        case SS_TIDAL_EXIT_CURRENTS_RIGHT:
             return SS_TIDAL_LOCATION_ROUTE131;
-        case 4:
-        case 5:
+        case SS_TIDAL_LAND_LILYCOVE:
+        case SS_TIDAL_BOARD_LILYCOVE:
             return SS_TIDAL_LOCATION_LILYCOVE;
-        case 6:
-        case 10:
+        case SS_TIDAL_DEPART_LILYCOVE:
+        case SS_TIDAL_EXIT_CURRENTS_LEFT:
             return SS_TIDAL_LOCATION_ROUTE124;
-        case 2:
+        case SS_TIDAL_DEPART_SLATEPORT:
             if (*varCruiseStepCount < 60)
             {
                 *mapNum = MAP_NUM(ROUTE134);
@@ -346,7 +347,7 @@ u8 GetSSTidalLocation(s8 *mapGroup, s8 *mapNum, s16 *x, s16 *y)
                 *x = *varCruiseStepCount - 140;
             }
             break;
-        case 7:
+        case SS_TIDAL_HALFWAY_SLATEPORT:
             if (*varCruiseStepCount < 66)
             {
                 *mapNum = MAP_NUM(ROUTE132);
