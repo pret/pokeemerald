@@ -1,23 +1,23 @@
 GraniteCave_1F_MapScripts:: @ 822DA5D
 	.byte 0
 
-GraniteCave_1F_EventScript_22DA5E:: @ 822DA5E
+GraniteCave_1F_EventScript_Hiker:: @ 822DA5E
 	lock
 	faceplayer
-	goto_if_set FLAG_RECEIVED_HM05, GraniteCave_1F_EventScript_22DA8A
-	msgbox GraniteCave_1F_Text_22DA94, MSGBOX_DEFAULT
+	goto_if_set FLAG_RECEIVED_HM05, GraniteCave_1F_EventScript_ReceivedFlash
+	msgbox GraniteCave_1F_Text_GetsDarkAheadHereYouGo, MSGBOX_DEFAULT
 	giveitem_std ITEM_HM05
 	setflag FLAG_RECEIVED_HM05
-	msgbox GraniteCave_1F_Text_22DBB7, MSGBOX_DEFAULT
+	msgbox GraniteCave_1F_Text_ExplainFlash, MSGBOX_DEFAULT
 	release
 	end
 
-GraniteCave_1F_EventScript_22DA8A:: @ 822DA8A
-	msgbox GraniteCave_1F_Text_22DBB7, MSGBOX_DEFAULT
+GraniteCave_1F_EventScript_ReceivedFlash:: @ 822DA8A
+	msgbox GraniteCave_1F_Text_ExplainFlash, MSGBOX_DEFAULT
 	release
 	end
 
-GraniteCave_1F_Text_22DA94: @ 822DA94
+GraniteCave_1F_Text_GetsDarkAheadHereYouGo: @ 822DA94
 	.string "Hey, you.\n"
 	.string "It gets awfully dark ahead.\l"
 	.string "It'll be tough trying to explore.\p"
@@ -29,7 +29,7 @@ GraniteCave_1F_Text_22DA94: @ 822DA94
 	.string "that we meet is our motto.\p"
 	.string "Here you go, I'll pass this on to you.$"
 
-GraniteCave_1F_Text_22DBB7: @ 822DBB7
+GraniteCave_1F_Text_ExplainFlash: @ 822DBB7
 	.string "Teach that hidden move FLASH to\n"
 	.string "a POKéMON and use it.\p"
 	.string "It lights up even the inky darkness\n"
