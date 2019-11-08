@@ -30,7 +30,7 @@
       "movement_range_y": 2,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "LittlerootTown_EventScript_1E8034",
+      "script": "LittlerootTown_EventScript_Twin",
       "flag": "0"
     },
     {
@@ -43,7 +43,7 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "LittlerootTown_EventScript_1E8022",
+      "script": "LittlerootTown_EventScript_FatMan",
       "flag": "FLAG_HIDE_LITTLEROOT_TOWN_FAT_MAN"
     },
     {
@@ -56,7 +56,7 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "LittlerootTown_EventScript_1E802B",
+      "script": "LittlerootTown_EventScript_Boy",
       "flag": "0"
     },
     {
@@ -69,7 +69,7 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "LittlerootTown_EventScript_1E863D",
+      "script": "LittlerootTown_EventScript_Mom",
       "flag": "FLAG_HIDE_LITTLEROOT_TOWN_MOM_OUTSIDE"
     },
     {
@@ -156,7 +156,7 @@
       "elevation": 3,
       "var": "VAR_LITTLEROOT_TOWN_STATE",
       "var_value": "0",
-      "script": "LittlerootTown_EventScript_1E8091"
+      "script": "LittlerootTown_EventScript_NeedPokemonTriggerLeft"
     },
     {
       "type": "trigger",
@@ -165,7 +165,7 @@
       "elevation": 3,
       "var": "VAR_LITTLEROOT_TOWN_STATE",
       "var_value": "0",
-      "script": "LittlerootTown_EventScript_1E80EF"
+      "script": "LittlerootTown_EventScript_NeedPokemonTriggerRight"
     },
     {
       "type": "trigger",
@@ -174,7 +174,7 @@
       "elevation": 3,
       "var": "VAR_LITTLEROOT_TOWN_STATE",
       "var_value": "1",
-      "script": "LittlerootTown_EventScript_1E811F"
+      "script": "LittlerootTown_EventScript_GoSaveBirchTrigger"
     },
     {
       "type": "trigger",
@@ -183,7 +183,7 @@
       "elevation": 3,
       "var": "VAR_LITTLEROOT_TOWN_STATE",
       "var_value": "3",
-      "script": "LittlerootTown_EventScript_1E81F9"
+      "script": "LittlerootTown_EventScript_GiveRunningShoesTrigger4"
     },
     {
       "type": "trigger",
@@ -192,7 +192,7 @@
       "elevation": 3,
       "var": "VAR_LITTLEROOT_TOWN_STATE",
       "var_value": "3",
-      "script": "LittlerootTown_EventScript_1E8205"
+      "script": "LittlerootTown_EventScript_GiveRunningShoesTrigger5"
     },
     {
       "type": "trigger",
@@ -201,7 +201,7 @@
       "elevation": 3,
       "var": "VAR_LITTLEROOT_TOWN_STATE",
       "var_value": "3",
-      "script": "LittlerootTown_EventScript_1E81E1"
+      "script": "LittlerootTown_EventScript_GiveRunningShoesTrigger2"
     },
     {
       "type": "trigger",
@@ -210,7 +210,7 @@
       "elevation": 3,
       "var": "VAR_LITTLEROOT_TOWN_STATE",
       "var_value": "3",
-      "script": "LittlerootTown_EventScript_1E81ED"
+      "script": "LittlerootTown_EventScript_GiveRunningShoesTrigger3"
     },
     {
       "type": "trigger",
@@ -219,7 +219,7 @@
       "elevation": 3,
       "var": "VAR_LITTLEROOT_TOWN_STATE",
       "var_value": "3",
-      "script": "LittlerootTown_EventScript_1E81BB"
+      "script": "LittlerootTown_EventScript_GiveRunningShoesTrigger0"
     },
     {
       "type": "trigger",
@@ -228,7 +228,7 @@
       "elevation": 3,
       "var": "VAR_LITTLEROOT_TOWN_STATE",
       "var_value": "3",
-      "script": "LittlerootTown_EventScript_1E81CE"
+      "script": "LittlerootTown_EventScript_GiveRunningShoesTrigger1"
     }
   ],
   "bg_events": [
@@ -238,7 +238,7 @@
       "y": 13,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "LittlerootTown_EventScript_1E8151"
+      "script": "LittlerootTown_EventScript_TownSign"
     },
     {
       "type": "sign",
@@ -246,7 +246,7 @@
       "y": 17,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "LittlerootTown_EventScript_1E815A"
+      "script": "LittlerootTown_EventScript_BirchsLabSign"
     },
     {
       "type": "sign",
@@ -254,7 +254,7 @@
       "y": 8,
       "elevation": 3,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "LittlerootTown_EventScript_1E8163"
+      "script": "LittlerootTown_EventScript_BrendansHouseSign"
     },
     {
       "type": "sign",
@@ -262,7 +262,7 @@
       "y": 8,
       "elevation": 3,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "LittlerootTown_EventScript_1E818F"
+      "script": "LittlerootTown_EventScript_MaysHouseSign"
     }
   ]
 }

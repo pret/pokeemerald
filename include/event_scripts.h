@@ -554,7 +554,7 @@ extern const u8 UnusualWeather_EventScript_EndEventAndCleanup_1[];
 extern const u8 IslandCave_EventScript_OpenRegiEntrance[];
 extern const u8 MauvilleCity_EventScript_1DF7BA[];
 extern const u8 Route119_EventScript_1F49EC[];
-extern const u8 LittlerootTown_ProfessorBirchsLab_EventScript_1FA4D6[];
+extern const u8 LittlerootTown_ProfessorBirchsLab_EventScript_ScottAboardSSTidalCall[];
 extern const u8 RustboroCity_Gym_EventScript_RegisterRoxanne[];
 extern const u8 MossdeepCity_SpaceCenter_2F_EventScript_RivalRayquazaCall[];
 extern const u8 SSTidalCorridor_EventScript_23C050[];

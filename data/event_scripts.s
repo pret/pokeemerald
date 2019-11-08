@@ -692,8 +692,8 @@ EverGrandeCity_HallOfFame_EventScript_27183F:: @ 827183F
 	return
 
 EverGrandeCity_HallOfFame_EventScript_271843:: @ 8271843
-	setvar VAR_LITTLEROOT_HOUSES_STATE, 3
-	setvar VAR_LITTLEROOT_HOUSES_STATE_2, 3
+	setvar VAR_LITTLEROOT_HOUSES_STATE_MAY, 3
+	setvar VAR_LITTLEROOT_HOUSES_STATE_BRENDAN, 3
 	clearflag FLAG_HIDE_PLAYERS_HOUSE_DAD
 	return
 

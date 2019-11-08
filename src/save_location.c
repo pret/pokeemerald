@@ -118,6 +118,8 @@ void TrySetMapSaveWarpStatus(void)
     sub_81AFD5C();
 }
 
+// Called when receiving the Pokedex
+// Only place field_A8 is written (aside from clearing on new game), never read
 void sub_81AFDA0(void)
 {
     gSaveBlock2Ptr->field_A8 |= 0x8000;
