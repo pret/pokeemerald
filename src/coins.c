@@ -6,8 +6,7 @@
 #include "string_util.h"
 #include "menu.h"
 #include "international_string_util.h"
-
-#define MAX_COINS 9999
+#include "constants/coins.h"
 
 EWRAM_DATA u8 sCoinsWindowId = 0;
 

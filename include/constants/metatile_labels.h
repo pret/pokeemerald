@@ -381,7 +381,7 @@
 #define METATILE_TrickHousePuzzle_Arrow_RedOnBlack_Right_Alt 0x27C
 #define METATILE_TrickHousePuzzle_Arrow_YellowOnWhite_Right  0x298
 
-// gTileset_BikeShop
+// gTileset_BikeShop (also used by New Mauville)
 #define METATILE_BikeShop_Barrier_Hidden_Top      0x269
 #define METATILE_BikeShop_Barrier_Hidden_Bottom   0x271
 #define METATILE_BikeShop_Floor_Shadow_Top        0x26D
