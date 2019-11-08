@@ -9,6 +9,6 @@
 
 void TrySetMapSaveWarpStatus(void);
 void sub_81AFDA0(void);
-void sub_81AFDD0(void);
+void SetChampionSaveWarp(void);
 
 #endif // GUARD_SAVE_LOCATION_H

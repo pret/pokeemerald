@@ -131,7 +131,7 @@ void sub_81AFDA0(void)
     gSaveBlock2Ptr->field_A8 |= 0x8;
 }
 
-void sub_81AFDD0(void)
+void SetChampionSaveWarp(void)
 {
     gSaveBlock2Ptr->specialSaveWarpFlags |= 0x80;
 }

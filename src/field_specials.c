@@ -4033,7 +4033,7 @@ void sub_813BA30(void)
     }
 }
 
-void sub_813BA60(void)
+void UpdateTrainerFanClubGameClear(void)
 {
     if (!((gSaveBlock1Ptr->vars[VAR_FANCLUB_UNKNOWN_1 - VARS_START] >> 7) & 1))
     {
