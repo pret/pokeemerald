@@ -388,9 +388,9 @@ CableClub_EventScript_EnterColosseum:: @ 8276FBD
 	waitdooranim
 	release
 	compare VAR_0x8004, USING_MULTI_BATTLE
-	goto_if_eq CableClub_EventScript_WarpToDoubleColosseum
+	goto_if_eq CableClub_EventScript_WarpTo4PColosseum
 	special SetCableClubWarp
-	warp MAP_SINGLE_BATTLE_COLOSSEUM, 255, 6, 8
+	warp MAP_BATTLE_COLOSSEUM_2P, 255, 6, 8
 	special sub_80AF948
 	waitstate
 	end
@@ -401,9 +401,9 @@ CableClub_EventScript_PlayerApproachLinkRoomRight:: @ 827702B
 	waitmovement 0
 	return
 
-CableClub_EventScript_WarpToDoubleColosseum:: @ 8277036
+CableClub_EventScript_WarpTo4PColosseum:: @ 8277036
 	special SetCableClubWarp
-	warp MAP_DOUBLE_BATTLE_COLOSSEUM, 255, 5, 8
+	warp MAP_BATTLE_COLOSSEUM_4P, 255, 5, 8
 	special sub_80AF948
 	waitstate
 	end
@@ -710,63 +710,63 @@ EventScript_CableBoxResults:: @ 8277365
 	releaseall
 	end
 
-EventScript_SingleBattleColosseum_PlayerSpot0:: @ 8277374
+EventScript_BattleColosseum2P_PlayerSpot0:: @ 8277374
 	setvar VAR_0x8005, 0
 	special ColosseumPlayerSpotTriggered
 	waitstate
 	end
 
-EventScript_SingleBattleColosseum_PlayerSpot1:: @ 827737E
+EventScript_BattleColosseum2P_PlayerSpot1:: @ 827737E
 	setvar VAR_0x8005, 1
 	special ColosseumPlayerSpotTriggered
 	waitstate
 	end
 
-EventScript_DoubleBattleColosseum_PlayerSpot0:: @ 8277388
+EventScript_BattleColosseum4P_PlayerSpot0:: @ 8277388
 	fadescreen 1
 	special ChooseHalfPartyForBattle
 	waitstate
 	compare VAR_RESULT, 0
-	goto_if_eq EventScript_DoubleBattleColosseum_CancelSpotTrigger
+	goto_if_eq EventScript_BattleColosseum4P_CancelSpotTrigger
 	setvar VAR_0x8005, 0
 	special ColosseumPlayerSpotTriggered
 	waitstate
 	end
 
-EventScript_DoubleBattleColosseum_PlayerSpot1:: @ 82773A3
+EventScript_BattleColosseum4P_PlayerSpot1:: @ 82773A3
 	fadescreen 1
 	special ChooseHalfPartyForBattle
 	waitstate
 	compare VAR_RESULT, 0
-	goto_if_eq EventScript_DoubleBattleColosseum_CancelSpotTrigger
+	goto_if_eq EventScript_BattleColosseum4P_CancelSpotTrigger
 	setvar VAR_0x8005, 1
 	special ColosseumPlayerSpotTriggered
 	waitstate
 	end
 
-EventScript_DoubleBattleColosseum_PlayerSpot2:: @ 82773BE
+EventScript_BattleColosseum4P_PlayerSpot2:: @ 82773BE
 	fadescreen 1
 	special ChooseHalfPartyForBattle
 	waitstate
 	compare VAR_RESULT, 0
-	goto_if_eq EventScript_DoubleBattleColosseum_CancelSpotTrigger
+	goto_if_eq EventScript_BattleColosseum4P_CancelSpotTrigger
 	setvar VAR_0x8005, 2
 	special ColosseumPlayerSpotTriggered
 	waitstate
 	end
 
-EventScript_DoubleBattleColosseum_PlayerSpot3:: @ 82773D9
+EventScript_BattleColosseum4P_PlayerSpot3:: @ 82773D9
 	fadescreen 1
 	special ChooseHalfPartyForBattle
 	waitstate
 	compare VAR_RESULT, 0
-	goto_if_eq EventScript_DoubleBattleColosseum_CancelSpotTrigger
+	goto_if_eq EventScript_BattleColosseum4P_CancelSpotTrigger
 	setvar VAR_0x8005, 3
 	special ColosseumPlayerSpotTriggered
 	waitstate
 	end
 
-EventScript_DoubleBattleColosseum_CancelSpotTrigger:: @ 82773F4
+EventScript_BattleColosseum4P_CancelSpotTrigger:: @ 82773F4
 	end
 
 EventScript_TradeCenter_Chair0:: @ 82773F5
@@ -854,9 +854,9 @@ CableClub_EventScript_TooBusyToNotice:: @ 827749C
 	closemessage
 	end
 
-SingleBattleColosseum_EventScript_Attendant:: @ 82774A6
+BattleColosseum2P_EventScript_Attendant:: @ 82774A6
 	special Script_FacePlayer
-	msgbox SingleBattleColosseum_Text_TakePlaceStartBattle, MSGBOX_DEFAULT
+	msgbox BattleColosseum2P_Text_TakePlaceStartBattle, MSGBOX_DEFAULT
 	special Script_ClearHeldMovement
 	closemessage
 	end
