@@ -1223,8 +1223,8 @@ _080224C0:
 	bx r0
 	thumb_func_end sub_8022250
 
-	thumb_func_start sub_80224D0
-sub_80224D0: @ 80224D0
+	thumb_func_start ShowBerryCrushRankings
+ShowBerryCrushRankings: @ 80224D0
 	push {lr}
 	bl ScriptContext2_Enable
 	ldr r0, =sub_8022250
@@ -1259,7 +1259,7 @@ sub_80224D0: @ 80224D0
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_80224D0
+	thumb_func_end ShowBerryCrushRankings
 
 	thumb_func_start sub_8022524
 sub_8022524: @ 8022524

@@ -1609,18 +1609,16 @@ u16 SetPacifidlogTMReceivedDay(void)
     return gLocalTime.days;
 }
 
-bool8 MonOTNameMatchesPlayer(void)
+bool8 MonOTNameNotPlayer(void)
 {
     if (GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_LANGUAGE) != GAME_LANGUAGE)
-    {
-        return TRUE;    // huh?
-    }
+        return TRUE;
 
     GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_OT_NAME, gStringVar1);
+
     if (!StringCompare(gSaveBlock2Ptr->playerName, gStringVar1))
-    {
         return FALSE;
-    }
+
     return TRUE;
 }
 
