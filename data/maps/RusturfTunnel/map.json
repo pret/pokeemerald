@@ -25,7 +25,7 @@
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "RusturfTunnel_EventScript_WandasBoyfriend",
-      "flag": "FLAG_HIDE_RUSTURF_TUNNEL_LOVER_MAN"
+      "flag": "FLAG_HIDE_RUSTURF_TUNNEL_WANDAS_BOYFRIEND"
     },
     {
       "graphics_id": "EVENT_OBJ_GFX_BREAKABLE_ROCK",
@@ -142,7 +142,7 @@
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "RusturfTunnel_EventScript_Wanda",
-      "flag": "FLAG_HIDE_RUSTURF_TUNNEL_LOVER_WOMAN"
+      "flag": "FLAG_HIDE_RUSTURF_TUNNEL_WANDA"
     }
   ],
   "warp_events": [
