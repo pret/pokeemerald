@@ -134,9 +134,9 @@ gSpecials:: @ 81DBA64
 	def_special CompareSeedotSize
 	def_special GetLotadSizeRecordInfo
 	def_special CompareLotadSize
-	def_special TV_PutNameRaterShowOnTheAirIfNicknameChanged
-	def_special TV_CopyNicknameToStringVar1AndEnsureTerminated
-	def_special TV_CheckMonOTIDEqualsPlayerID
+	def_special TryPutNameRaterShowOnTheAir
+	def_special BufferMonNickname
+	def_special IsMonOTIDNotPlayers
 	def_special BufferTrendyPhraseString
 	def_special TrendyPhraseIsOld
 	def_special sub_811EF6C
@@ -346,7 +346,7 @@ gSpecials:: @ 81DBA64
 	def_special SetPacifidlogTMReceivedDay
 	def_special GetDaysUntilPacifidlogTMAvailable
 	def_special HasAllHoennMons
-	def_special MonOTNameMatchesPlayer
+	def_special MonOTNameNotPlayer
 	def_special BufferLottoTicketNumber
 	def_special sub_81653CC
 	def_special DoesPartyHaveEnigmaBerry
@@ -519,7 +519,7 @@ gSpecials:: @ 81DBA64
 	def_special Script_DoRayquazaScene @ Listed twice
 	def_special LoopWingFlapSE
 	def_special sub_81D4BEC
-	def_special sub_80224D0
+	def_special ShowBerryCrushRankings
 	def_special TryBufferWaldaPhrase
 	def_special DoWaldaNamingScreen
 	def_special TryGetWallpaperWithWaldaPhrase

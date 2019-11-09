@@ -105,7 +105,7 @@ SlateportCity_OceanicMuseum_1F_EventScript_28C939:: @ 828C939
 	release
 	end
 
-SlateportCity_PokemonFanClub_EventScript_28C943:: @ 828C943
+SlateportCity_PokemonFanClub_EventScript_Reporter:: @ 828C943
 	lock
 	faceplayer
 	specialvar VAR_RESULT, sub_80EF8F8

@@ -37,7 +37,7 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "SlateportCity_SternsShipyard_2F_EventScript_20863E",
+      "script": "SlateportCity_SternsShipyard_2F_EventScript_Scientist1",
       "flag": "0"
     },
     {
@@ -50,7 +50,7 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "SlateportCity_SternsShipyard_2F_EventScript_208647",
+      "script": "SlateportCity_SternsShipyard_2F_EventScript_Scientist2",
       "flag": "0"
     }
   ],
