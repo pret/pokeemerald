@@ -35,7 +35,7 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "VerdanturfTown_EventScript_1EB5A8",
+      "script": "VerdanturfTown_EventScript_Man",
       "flag": "0"
     },
     {
@@ -48,7 +48,7 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "VerdanturfTown_EventScript_1EB575",
+      "script": "VerdanturfTown_EventScript_Twin",
       "flag": "0"
     },
     {
@@ -61,7 +61,7 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "VerdanturfTown_EventScript_1EB5BA",
+      "script": "VerdanturfTown_EventScript_Boy",
       "flag": "0"
     },
     {
@@ -74,7 +74,7 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "VerdanturfTown_EventScript_1EB5B1",
+      "script": "VerdanturfTown_EventScript_Camper",
       "flag": "0"
     }
   ],
@@ -145,7 +145,7 @@
       "y": 6,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "VerdanturfTown_EventScript_1EB5D9"
+      "script": "VerdanturfTown_EventScript_TownSign"
     },
     {
       "type": "sign",
@@ -161,7 +161,7 @@
       "y": 14,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "VerdanturfTown_EventScript_1EB5E2"
+      "script": "VerdanturfTown_EventScript_WandasHouseSign"
     },
     {
       "type": "sign",
@@ -185,7 +185,7 @@
       "y": 8,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "VerdanturfTown_EventScript_1EB5EB"
+      "script": "VerdanturfTown_EventScript_BattleTentSign"
     },
     {
       "type": "sign",
@@ -193,7 +193,7 @@
       "y": 3,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "VerdanturfTown_EventScript_1EB5F4"
+      "script": "VerdanturfTown_EventScript_RusturfTunnelSign"
     }
   ]
 }
