@@ -51,7 +51,7 @@ gReservedSpritePaletteCount:
 	.include "contest.o"
 	.include "tv.o"
 	.include "mauville_old_man.o"
-	.include "contest_painting_effects.o"
+	.include "image_processing_effects.o"
 	
 	.space 0x4
 	

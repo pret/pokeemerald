@@ -1,5 +1,5 @@
 #include "global.h"
-#include "contest_painting_effects.h"
+#include "image_processing_effects.h"
 #include "contest_painting.h"
 #include "constants/rgb.h"
 
@@ -53,7 +53,7 @@ static u16 QuantizePixel_PrimaryColors(u16*);
 
 extern const u8 gPointillismPoints[][3];
 
-void ApplyImageProcessingEffects(struct ContestPaintingContext *context)
+void ApplyImageProcessingEffects(struct ImageProcessingContext *context)
 {
     gCanvasPixels = context->canvasPixels;
     gCanvasMonPersonality = context->personality;
@@ -762,7 +762,7 @@ static u16 QuantizePixel_BlurHard(u16 *prevPixel, u16 *curPixel, u16 *nextPixel)
 }
 
 /*
-void ConvertImageProcessingToGBA(struct ContestPaintingContext *arg0)
+void ConvertImageProcessingToGBA(struct ImageProcessingContext *arg0)
 {
     u16 i, j, k;
     u8 r5 = arg0->canvasWidth >> 3;
@@ -787,7 +787,7 @@ void ConvertImageProcessingToGBA(struct ContestPaintingContext *arg0)
 */
 
 NAKED
-void ConvertImageProcessingToGBA(struct ContestPaintingContext *arg0)
+void ConvertImageProcessingToGBA(struct ImageProcessingContext *arg0)
 {
     asm_unified("\n\
     push {r4-r7,lr}\n\
@@ -968,7 +968,7 @@ _08126194:\n\
     bx r0");
 }
 
-void ApplyImageProcessingQuantization(struct ContestPaintingContext *context)
+void ApplyImageProcessingQuantization(struct ImageProcessingContext *context)
 {
     gCanvasPaletteStart = context->paletteStart * 16;
     gCanvasPalette = &context->canvasPalette[gCanvasPaletteStart];
