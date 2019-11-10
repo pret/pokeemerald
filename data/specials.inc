@@ -45,7 +45,7 @@ gSpecials:: @ 81DBA64
 	def_special PlayerEnteredTradeSeat
 	def_special nullsub_37
 	def_special sub_80B3254
-	def_special sub_80B2FD8
+	def_special TryBerryBlenderLinkup
 	def_special GetLinkPartnerNames
 	def_special SpawnLinkPartnerEventObject
 	def_special SavePlayerParty

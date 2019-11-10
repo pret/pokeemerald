@@ -72,18 +72,18 @@ Route120_Text_2A7217: @ 82A7217
 	.string "I'll get more BERRIES from\n"
 	.string "the BERRY MASTER.$"
 
-LilycoveCity_Text_2A7244: @ 82A7244
+LilycoveCity_Text_BerrySuitsYou: @ 82A7244
 	.string "When it gets right down to it…\p"
 	.string "The same way suits suit me perfectly,\n"
 	.string "a crisp breeze suits the sea.\p"
 	.string "And you, a BERRY suits you to a “T”…\p"
 	.string "Why should that be so?$"
 
-LilycoveCity_Text_2A72E3: @ 82A72E3
+LilycoveCity_Text_BecauseYoureTrainer: @ 82A72E3
 	.string "When it gets right down to it…\p"
 	.string "It's because you're a TRAINER!$"
 
-LilycoveCity_Text_2A7321: @ 82A7321
+LilycoveCity_Text_PokeblocksSuitPokemon: @ 82A7321
 	.string "When it gets right down to it…\p"
 	.string "The way dignified simplicity suits me,\n"
 	.string "{POKEBLOCK}S perfectly suit POKéMON.$"

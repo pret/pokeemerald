@@ -3,6 +3,8 @@ LilycoveCity_ContestLobby_MapScripts:: @ 821A211
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, LilycoveCity_ContestLobby_MapScript2_21A243
 	.byte 0
 
+@ Some scripts for this room are split into data/scripts/contest_hall and data/scripts/berry_blender
+
 LilycoveCity_ContestLobby_OnTransition: @ 821A21C
 	call LilycoveCity_ContestLobby_EventScript_28CB2B
 	call LilycoveCity_ContestLobby_EventScript_21A227
@@ -12,13 +14,13 @@ LilycoveCity_ContestLobby_EventScript_21A227:: @ 821A227
 	getpricereduction POKENEWS_BLENDMASTER
 	compare VAR_RESULT, 1
 	goto_if_eq LilycoveCity_ContestLobby_EventScript_21A23C
-	clearflag FLAG_HIDE_LILYCOVE_CONTEST_HALL_POKEBLOCK_EXPERT
-	setflag FLAG_HIDE_LILYCOVE_CONTEST_HALL_BLEND_MASTER_ONLOOKERS
+	clearflag FLAG_HIDE_LILYCOVE_CONTEST_HALL_BLEND_MASTER_REPLACEMENT
+	setflag FLAG_HIDE_LILYCOVE_CONTEST_HALL_BLEND_MASTER
 	return
 
 LilycoveCity_ContestLobby_EventScript_21A23C:: @ 821A23C
-	setflag FLAG_HIDE_LILYCOVE_CONTEST_HALL_POKEBLOCK_EXPERT
-	clearflag FLAG_HIDE_LILYCOVE_CONTEST_HALL_BLEND_MASTER_ONLOOKERS
+	setflag FLAG_HIDE_LILYCOVE_CONTEST_HALL_BLEND_MASTER_REPLACEMENT
+	clearflag FLAG_HIDE_LILYCOVE_CONTEST_HALL_BLEND_MASTER
 	return
 
 LilycoveCity_ContestLobby_MapScript2_21A243: @ 821A243
@@ -41,7 +43,7 @@ LilycoveCity_ContestLobby_EventScript_21A264:: @ 821A264
 	msgbox LilycoveCity_ContestLobby_Text_21ADB9, MSGBOX_DEFAULT
 	lockall
 	fadescreen 1
-	drawcontestwinner 0
+	showcontestwinner 0
 	lockall
 	msgbox LilycoveCity_ContestLobby_Text_21AE78, MSGBOX_YESNO
 	compare VAR_RESULT, YES
@@ -215,7 +217,7 @@ LilycoveCity_ContestLobby_EventScript_21A436:: @ 821A436
 	msgbox LilycoveCity_ContestLobby_Text_21ADB9, MSGBOX_DEFAULT
 	lockall
 	fadescreen 1
-	drawcontestwinner 0
+	showcontestwinner 0
 	msgbox LilycoveCity_ContestLobby_Text_21AE78, MSGBOX_YESNO
 	compare VAR_RESULT, YES
 	goto_if_eq LilycoveCity_ContestLobby_EventScript_21A47A
@@ -315,7 +317,7 @@ LilycoveCity_ContestLobby_Movement_21A54B: @ 821A54B
 	walk_in_place_fastest_left
 	step_end
 
-LilycoveCity_ContestLobby_EventScript_21A554:: @ 821A554
+LilycoveCity_ContestLobby_EventScript_ContestReceptionist:: @ 821A554
 	special sub_80F9154
 	specialvar VAR_RESULT, sub_80F8D24
 	compare VAR_RESULT, 1
@@ -355,7 +357,7 @@ LilycoveCity_ContestLobby_EventScript_21A5C9:: @ 821A5C9
 
 LilycoveCity_ContestLobby_EventScript_21A5CF:: @ 821A5CF
 	setflag FLAG_HIDE_LILYCOVE_MUSEUM_CURATOR
-	copyvar VAR_LILYCOVE_MUSEUM_2F_STATE, 0x1
+	copyvar VAR_LILYCOVE_MUSEUM_2F_STATE, 1
 	giveitem ITEM_CONTEST_PASS, 1
 	setvar VAR_0x800B, 8
 	setvar VAR_CONTEST_RANK, 3
@@ -474,81 +476,81 @@ LilycoveCity_ContestLobby_Movement_21A706: @ 821A706
 	walk_in_place_fastest_right
 	step_end
 
-LilycoveCity_ContestLobby_EventScript_21A708:: @ 821A708
+LilycoveCity_ContestLobby_EventScript_BlackBelt:: @ 821A708
 	msgbox LilycoveCity_ContestLobby_Text_21B1B1, MSGBOX_NPC
 	end
 
-LilycoveCity_ContestLobby_EventScript_21A711:: @ 821A711
+LilycoveCity_ContestLobby_EventScript_Girl:: @ 821A711
 	msgbox LilycoveCity_ContestLobby_Text_21B24D, MSGBOX_NPC
 	end
 
-LilycoveCity_ContestLobby_EventScript_21A71A:: @ 821A71A
+LilycoveCity_ContestLobby_EventScript_Artist:: @ 821A71A
 	msgbox LilycoveCity_ContestLobby_Text_21B2BA, MSGBOX_NPC
 	end
 
-LilycoveCity_ContestLobby_EventScript_21A723:: @ 821A723
+LilycoveCity_ContestLobby_EventScript_FatMan:: @ 821A723
 	msgbox LilycoveCity_ContestLobby_Text_21B334, MSGBOX_NPC
 	end
 
-LilycoveCity_ContestLobby_EventScript_21A72C:: @ 821A72C
+LilycoveCity_ContestLobby_EventScript_Fisherman:: @ 821A72C
 	msgbox LilycoveCity_ContestLobby_Text_21B392, MSGBOX_NPC
 	end
 
-LilycoveCity_ContestLobby_EventScript_21A735:: @ 821A735
+LilycoveCity_ContestLobby_EventScript_NinjaBoy:: @ 821A735
 	msgbox LilycoveCity_ContestLobby_Text_21B3FC, MSGBOX_NPC
 	end
 
-LilycoveCity_ContestLobby_EventScript_21A73E:: @ 821A73E
+LilycoveCity_ContestLobby_EventScript_ContestWinner1:: @ 821A73E
 	lockall
 	fadescreen 1
-	drawcontestwinner 1
+	showcontestwinner 1
 	releaseall
 	end
 
-LilycoveCity_ContestLobby_EventScript_21A745:: @ 821A745
+LilycoveCity_ContestLobby_EventScript_ContestWinner2:: @ 821A745
 	lockall
 	fadescreen 1
-	drawcontestwinner 2
+	showcontestwinner 2
 	releaseall
 	end
 
-LilycoveCity_ContestLobby_EventScript_21A74C:: @ 821A74C
+LilycoveCity_ContestLobby_EventScript_ContestWinner3:: @ 821A74C
 	lockall
 	fadescreen 1
-	drawcontestwinner 3
+	showcontestwinner 3
 	releaseall
 	end
 
-LilycoveCity_ContestLobby_EventScript_21A753:: @ 821A753
+LilycoveCity_ContestLobby_EventScript_ContestWinner4:: @ 821A753
 	lockall
 	fadescreen 1
-	drawcontestwinner 4
+	showcontestwinner 4
 	releaseall
 	end
 
-LilycoveCity_ContestLobby_EventScript_21A75A:: @ 821A75A
+LilycoveCity_ContestLobby_EventScript_ContestWinner5:: @ 821A75A
 	lockall
 	fadescreen 1
-	drawcontestwinner 5
+	showcontestwinner 5
 	releaseall
 	end
 
-LilycoveCity_ContestLobby_EventScript_21A761:: @ 821A761
+LilycoveCity_ContestLobby_EventScript_ContestWinner6:: @ 821A761
 	lockall
 	fadescreen 1
-	drawcontestwinner 6
+	showcontestwinner 6
 	releaseall
 	end
 
-LilycoveCity_ContestLobby_EventScript_21A768:: @ 821A768
-	msgbox LilycoveCity_ContestLobby_Text_2931AA, MSGBOX_NPC
+LilycoveCity_ContestLobby_EventScript_Blender3Boy:: @ 821A768
+	msgbox LilycoveCity_ContestLobby_Text_LetsGetBlendingAlready, MSGBOX_NPC
 	end
 
-LilycoveCity_ContestLobby_EventScript_21A771:: @ 821A771
-	msgbox LilycoveCity_ContestLobby_Text_2931C6, MSGBOX_NPC
+LilycoveCity_ContestLobby_EventScript_Blender3Girl:: @ 821A771
+	msgbox LilycoveCity_ContestLobby_Text_WhatKindOfPokeblockWillIGet, MSGBOX_NPC
 	end
 
-LilycoveCity_ContestLobby_EventScript_21A77A:: @ 821A77A
+LilycoveCity_ContestLobby_EventScript_BerryBlenderSpeedRecords:: @ 821A77A
 	lockall
 	special ShowBerryBlenderRecordWindow
 	waitbuttonpress
@@ -556,7 +558,7 @@ LilycoveCity_ContestLobby_EventScript_21A77A:: @ 821A77A
 	releaseall
 	end
 
-LilycoveCity_ContestLobby_EventScript_21A784:: @ 821A784
+LilycoveCity_ContestLobby_EventScript_LinkContestResults:: @ 821A784
 	lockall
 	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_RESULTS_WINDOW
 	setvar VAR_0x8005, 7
@@ -566,60 +568,60 @@ LilycoveCity_ContestLobby_EventScript_21A784:: @ 821A784
 	releaseall
 	end
 
-LilycoveCity_ContestLobby_EventScript_21A798:: @ 821A798
+LilycoveCity_ContestLobby_EventScript_BlendMaster:: @ 821A798
 	lock
 	faceplayer
-	msgbox LilycoveCity_ContestLobby_Text_2C427C, MSGBOX_DEFAULT
-	goto LilycoveCity_ContestLobby_EventScript_21A7F9
+	msgbox LilycoveCity_ContestLobby_Text_BlendWithTheBlendMaster, MSGBOX_DEFAULT
+	goto LilycoveCity_ContestLobby_EventScript_FaceOriginalDirection
 	end
 
-LilycoveCity_ContestLobby_EventScript_21A7A8:: @ 821A7A8
+LilycoveCity_ContestLobby_EventScript_BlendMasterOnlooker1:: @ 821A7A8
 	lock
 	msgbox LilycoveCity_ContestLobby_Text_2C464B, MSGBOX_DEFAULT
 	release
 	end
 
-LilycoveCity_ContestLobby_EventScript_21A7B3:: @ 821A7B3
+LilycoveCity_ContestLobby_EventScript_BlendMasterOnlooker2:: @ 821A7B3
 	lock
 	msgbox LilycoveCity_ContestLobby_Text_2C465A, MSGBOX_DEFAULT
 	release
 	end
 
-LilycoveCity_ContestLobby_EventScript_21A7BE:: @ 821A7BE
+LilycoveCity_ContestLobby_EventScript_BlendMasterOnlooker3:: @ 821A7BE
 	lock
 	msgbox LilycoveCity_ContestLobby_Text_2C4669, MSGBOX_DEFAULT
 	release
 	end
 
-LilycoveCity_ContestLobby_EventScript_21A7C9:: @ 821A7C9
+LilycoveCity_ContestLobby_EventScript_BlendMasterOnlooker4:: @ 821A7C9
 	lock
 	faceplayer
 	msgbox LilycoveCity_ContestLobby_Text_2C4679, MSGBOX_DEFAULT
-	goto LilycoveCity_ContestLobby_EventScript_21A7F9
+	goto LilycoveCity_ContestLobby_EventScript_FaceOriginalDirection
 	end
 
-LilycoveCity_ContestLobby_EventScript_21A7D9:: @ 821A7D9
+LilycoveCity_ContestLobby_EventScript_BlendMasterOnlooker5:: @ 821A7D9
 	lock
 	faceplayer
 	msgbox LilycoveCity_ContestLobby_Text_2C46B1, MSGBOX_DEFAULT
-	goto LilycoveCity_ContestLobby_EventScript_21A7F9
+	goto LilycoveCity_ContestLobby_EventScript_FaceOriginalDirection
 	end
 
-LilycoveCity_ContestLobby_EventScript_21A7E9:: @ 821A7E9
+LilycoveCity_ContestLobby_EventScript_BlendMasterOnlooker6:: @ 821A7E9
 	lock
 	faceplayer
 	msgbox LilycoveCity_ContestLobby_Text_2C4763, MSGBOX_DEFAULT
-	goto LilycoveCity_ContestLobby_EventScript_21A7F9
+	goto LilycoveCity_ContestLobby_EventScript_FaceOriginalDirection
 	end
 
-LilycoveCity_ContestLobby_EventScript_21A7F9:: @ 821A7F9
+LilycoveCity_ContestLobby_EventScript_FaceOriginalDirection:: @ 821A7F9
 	closemessage
 	applymovement VAR_LAST_TALKED, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end
 
-LilycoveCity_ContestLobby_EventScript_21A806:: @ 821A806
+LilycoveCity_ContestLobby_EventScript_LinkContestReceptionist:: @ 821A806
 	special sub_80F9154
 	lock
 	faceplayer
@@ -1001,7 +1003,7 @@ LilycoveCity_ContestLobby_Movement_21ACEF: @ 821ACEF
 	walk_in_place_fastest_left
 	step_end
 
-LilycoveCity_ContestLobby_EventScript_21ACF1:: @ 821ACF1
+LilycoveCity_ContestLobby_EventScript_LittleGirl:: @ 821ACF1
 	lock
 	faceplayer
 	goto_if_set FLAG_RECEIVED_POKEBLOCK_CASE, LilycoveCity_ContestLobby_EventScript_21AD06

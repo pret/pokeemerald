@@ -1,34 +1,34 @@
-LilycoveCity_ContestLobby_Text_2C427C: @ 82C427C
+LilycoveCity_ContestLobby_Text_BlendWithTheBlendMaster: @ 82C427C
 	.string "BLEND MASTER: Indeed I am!\n"
 	.string "The BLEND MASTER am I!\p"
 	.string "Blend with me, and you shall witness\n"
 	.string "the mastery I bring to blending!$"
 
-LilycoveCity_ContestLobby_Text_2C42F4: @ 82C42F4
+LilycoveCity_ContestLobby_Text_SeeMyMasteryInAction: @ 82C42F4
 	.string "BLEND MASTER: Hmmm! So, you wish to\n"
 	.string "see my mastery in action?$"
 
-LilycoveCity_ContestLobby_Text_2C4332: @ 82C4332
+LilycoveCity_ContestLobby_Text_TooBusyNowIsee: @ 82C4332
 	.string "Hmmm!\p"
 	.string "So, you are too busy now, I see!\p"
 	.string "But fear not!\n"
 	.string "I shall be here all day!\l"
 	.string "Hurry back from your errand!$"
 
-LilycoveCity_ContestLobby_Text_2C439D: @ 82C439D
+LilycoveCity_ContestLobby_Text_BlendMasterNoBerries: @ 82C439D
 	.string "Hmmm!\p"
 	.string "You haven't got a single BERRY!\p"
 	.string "I shall be here all day!\n"
 	.string "Hurry back with some BERRIES!$"
 
-LilycoveCity_ContestLobby_Text_2C43FA: @ 82C43FA
+LilycoveCity_ContestLobby_Text_BlendMasterKnowHowToMakePokeblocks: @ 82C43FA
 	.string "Of course!\n"
 	.string "Of course!\p"
 	.string "Incidentally…\n"
 	.string "You do know how to blend {POKEBLOCK}S\l"
 	.string "from BERRIES?$"
 
-LilycoveCity_ContestLobby_Text_2C444C: @ 82C444C
+LilycoveCity_ContestLobby_Text_BlendMasterExplainBerryBlending: @ 82C444C
 	.string "Hmmm!\p"
 	.string "Ah, but it is a simple process!\p"
 	.string "When the BLENDER's arrow comes to\n"
@@ -37,20 +37,20 @@ LilycoveCity_ContestLobby_Text_2C444C: @ 82C444C
 	.string "When you see how precisely I press\n"
 	.string "the A Button, you will understand.$"
 
-LilycoveCity_ContestLobby_Text_2C451B: @ 82C451B
+LilycoveCity_ContestLobby_Text_BlendMasterLetsBerryBlender: @ 82C451B
 	.string "Fine!\p"
 	.string "Let's get started, then!\p"
 	.string "All together with the BLEND MASTER,\n"
 	.string "let's BERRY BLENDER!$"
 
-LilycoveCity_ContestLobby_Text_2C4573: @ 82C4573
+LilycoveCity_ContestLobby_Text_BlendMasterNoPokeblockCase: @ 82C4573
 	.string "Hmmm!\p"
 	.string "You don't appear to have gotten\n"
 	.string "the {POKEBLOCK} CASE!\p"
 	.string "I shall be here all day!\n"
 	.string "Obtain the {POKEBLOCK} CASE and hurry back!$"
 
-LilycoveCity_ContestLobby_Text_2C45E8: @ 82C45E8
+LilycoveCity_ContestLobby_Text_BlendMasterPokeblockCaseFull: @ 82C45E8
 	.string "Hmmm!\p"
 	.string "Your {POKEBLOCK} CASE appears to be full!\p"
 	.string "I shall be here all day!\n"

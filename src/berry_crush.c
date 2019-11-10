@@ -249,7 +249,7 @@ static void sub_8020D8C(void)
 void sub_8020E1C(void)
 {
     DestroyTask(gUnknown_02022C90->unkA);
-    sub_81AABF0(sub_8020D8C);
+    ChooseBerrySetCallback(sub_8020D8C);
 }
 
 static void sub_8020E3C(void)
