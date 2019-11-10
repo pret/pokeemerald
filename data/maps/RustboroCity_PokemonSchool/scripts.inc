@@ -1,88 +1,88 @@
 RustboroCity_PokemonSchool_MapScripts:: @ 8213EA8
 	.byte 0
 
-RustboroCity_PokemonSchool_EventScript_213EA9:: @ 8213EA9
+RustboroCity_PokemonSchool_EventScript_Blackboard:: @ 8213EA9
 	lockall
-	msgbox RustboroCity_PokemonSchool_Text_2140B2, MSGBOX_DEFAULT
-	goto RustboroCity_PokemonSchool_EventScript_213EB8
+	msgbox RustboroCity_PokemonSchool_Text_BlackboardListsStatusChanges, MSGBOX_DEFAULT
+	goto RustboroCity_PokemonSchool_EventScript_ChooseBlackboardTopic
 	end
 
-RustboroCity_PokemonSchool_EventScript_213EB8:: @ 8213EB8
-	message RustboroCity_PokemonSchool_Text_2140F9
+RustboroCity_PokemonSchool_EventScript_ChooseBlackboardTopic:: @ 8213EB8
+	message RustboroCity_PokemonSchool_Text_ReadWhichTopic
 	waitmessage
 	multichoicegrid 8, 1, MULTI_STATUS_INFO, 3, 0
 	switch VAR_RESULT
-	case 0, RustboroCity_PokemonSchool_EventScript_213F17
-	case 1, RustboroCity_PokemonSchool_EventScript_213F25
-	case 2, RustboroCity_PokemonSchool_EventScript_213F33
-	case 3, RustboroCity_PokemonSchool_EventScript_213F41
-	case 4, RustboroCity_PokemonSchool_EventScript_213F4F
-	case 5, RustboroCity_PokemonSchool_EventScript_213F5D
-	case MULTI_B_PRESSED, RustboroCity_PokemonSchool_EventScript_213F5D
+	case 0, RustboroCity_PokemonSchool_EventScript_Poison
+	case 1, RustboroCity_PokemonSchool_EventScript_Paralysis
+	case 2, RustboroCity_PokemonSchool_EventScript_Sleep
+	case 3, RustboroCity_PokemonSchool_EventScript_Burn
+	case 4, RustboroCity_PokemonSchool_EventScript_Freeze
+	case 5, RustboroCity_PokemonSchool_EventScript_ExitTopicSelect
+	case MULTI_B_PRESSED, RustboroCity_PokemonSchool_EventScript_ExitTopicSelect
 	end
 
-RustboroCity_PokemonSchool_EventScript_213F17:: @ 8213F17
-	msgbox RustboroCity_PokemonSchool_Text_21411A, MSGBOX_DEFAULT
-	goto RustboroCity_PokemonSchool_EventScript_213EB8
+RustboroCity_PokemonSchool_EventScript_Poison:: @ 8213F17
+	msgbox RustboroCity_PokemonSchool_Text_ExplainPoison, MSGBOX_DEFAULT
+	goto RustboroCity_PokemonSchool_EventScript_ChooseBlackboardTopic
 	end
 
-RustboroCity_PokemonSchool_EventScript_213F25:: @ 8213F25
-	msgbox RustboroCity_PokemonSchool_Text_2141D8, MSGBOX_DEFAULT
-	goto RustboroCity_PokemonSchool_EventScript_213EB8
+RustboroCity_PokemonSchool_EventScript_Paralysis:: @ 8213F25
+	msgbox RustboroCity_PokemonSchool_Text_ExplainParalysis, MSGBOX_DEFAULT
+	goto RustboroCity_PokemonSchool_EventScript_ChooseBlackboardTopic
 	end
 
-RustboroCity_PokemonSchool_EventScript_213F33:: @ 8213F33
-	msgbox RustboroCity_PokemonSchool_Text_21427D, MSGBOX_DEFAULT
-	goto RustboroCity_PokemonSchool_EventScript_213EB8
+RustboroCity_PokemonSchool_EventScript_Sleep:: @ 8213F33
+	msgbox RustboroCity_PokemonSchool_Text_ExplainSleep, MSGBOX_DEFAULT
+	goto RustboroCity_PokemonSchool_EventScript_ChooseBlackboardTopic
 	end
 
-RustboroCity_PokemonSchool_EventScript_213F41:: @ 8213F41
-	msgbox RustboroCity_PokemonSchool_Text_214336, MSGBOX_DEFAULT
-	goto RustboroCity_PokemonSchool_EventScript_213EB8
+RustboroCity_PokemonSchool_EventScript_Burn:: @ 8213F41
+	msgbox RustboroCity_PokemonSchool_Text_ExplainBurn, MSGBOX_DEFAULT
+	goto RustboroCity_PokemonSchool_EventScript_ChooseBlackboardTopic
 	end
 
-RustboroCity_PokemonSchool_EventScript_213F4F:: @ 8213F4F
-	msgbox RustboroCity_PokemonSchool_Text_2143B8, MSGBOX_DEFAULT
-	goto RustboroCity_PokemonSchool_EventScript_213EB8
+RustboroCity_PokemonSchool_EventScript_Freeze:: @ 8213F4F
+	msgbox RustboroCity_PokemonSchool_Text_ExplainFreeze, MSGBOX_DEFAULT
+	goto RustboroCity_PokemonSchool_EventScript_ChooseBlackboardTopic
 	end
 
-RustboroCity_PokemonSchool_EventScript_213F5D:: @ 8213F5D
+RustboroCity_PokemonSchool_EventScript_ExitTopicSelect:: @ 8213F5D
 	releaseall
 	end
 
-RustboroCity_PokemonSchool_EventScript_213F5F:: @ 8213F5F
-	msgbox RustboroCity_PokemonSchool_Text_21459F, MSGBOX_NPC
+RustboroCity_PokemonSchool_EventScript_GameboyKid1:: @ 8213F5F
+	msgbox RustboroCity_PokemonSchool_Text_TradingRightNow, MSGBOX_NPC
 	end
 
-RustboroCity_PokemonSchool_EventScript_213F68:: @ 8213F68
-	msgbox RustboroCity_PokemonSchool_Text_2145CD, MSGBOX_NPC
+RustboroCity_PokemonSchool_EventScript_GameboyKid2:: @ 8213F68
+	msgbox RustboroCity_PokemonSchool_Text_AlwaysWantedSeedot, MSGBOX_NPC
 	end
 
-RustboroCity_PokemonSchool_EventScript_213F71:: @ 8213F71
-	msgbox RustboroCity_PokemonSchool_Text_214604, MSGBOX_NPC
+RustboroCity_PokemonSchool_EventScript_RichBoy:: @ 8213F71
+	msgbox RustboroCity_PokemonSchool_Text_PokemontCantUseManMadeItems, MSGBOX_NPC
 	end
 
-RustboroCity_PokemonSchool_EventScript_213F7A:: @ 8213F7A
-	msgbox RustboroCity_PokemonSchool_Text_214669, MSGBOX_NPC
+RustboroCity_PokemonSchool_EventScript_Lass:: @ 8213F7A
+	msgbox RustboroCity_PokemonSchool_Text_ConfusedPokemonAttacksItself, MSGBOX_NPC
 	end
 
-RustboroCity_PokemonSchool_EventScript_213F83:: @ 8213F83
-	msgbox RustboroCity_PokemonSchool_Text_214719, MSGBOX_NPC
+RustboroCity_PokemonSchool_EventScript_SchoolKidM:: @ 8213F83
+	msgbox RustboroCity_PokemonSchool_Text_PokemonHealItselfWithBerry, MSGBOX_NPC
 	end
 
-RustboroCity_PokemonSchool_EventScript_213F8C:: @ 8213F8C
-	msgbox RustboroCity_PokemonSchool_Text_2147A2, MSGBOX_SIGN
+RustboroCity_PokemonSchool_EventScript_StudentNotebook:: @ 8213F8C
+	msgbox RustboroCity_PokemonSchool_Text_StudentsNotes, MSGBOX_SIGN
 	end
 
-RustboroCity_PokemonSchool_EventScript_213F95:: @ 8213F95
+RustboroCity_PokemonSchool_EventScript_Teacher:: @ 8213F95
 	lock
 	faceplayer
-	goto_if_set FLAG_RECEIVED_QUICK_CLAW, RustboroCity_PokemonSchool_EventScript_213FFB
+	goto_if_set FLAG_RECEIVED_QUICK_CLAW, RustboroCity_PokemonSchool_EventScript_GaveQuickClaw
 	compare VAR_FACING, DIR_EAST
-	call_if_eq RustboroCity_PokemonSchool_EventScript_213FE5
+	call_if_eq RustboroCity_PokemonSchool_EventScript_TeacherCheckOnStudentsEast
 	compare VAR_FACING, DIR_WEST
-	call_if_eq RustboroCity_PokemonSchool_EventScript_213FF0
-	msgbox RustboroCity_PokemonSchool_Text_214433, MSGBOX_DEFAULT
+	call_if_eq RustboroCity_PokemonSchool_EventScript_TeacherCheckOnStudentsWest
+	msgbox RustboroCity_PokemonSchool_Text_StudentsWhoDontStudyGetQuickClaw, MSGBOX_DEFAULT
 	giveitem_std ITEM_QUICK_CLAW
 	compare VAR_RESULT, 0
 	goto_if_eq Common_EventScript_ShowBagIsFull
@@ -93,25 +93,25 @@ RustboroCity_PokemonSchool_EventScript_213F95:: @ 8213F95
 	release
 	end
 
-RustboroCity_PokemonSchool_EventScript_213FE5:: @ 8213FE5
-	applymovement VAR_LAST_TALKED, RustboroCity_PokemonSchool_Movement_214027
+RustboroCity_PokemonSchool_EventScript_TeacherCheckOnStudentsEast:: @ 8213FE5
+	applymovement VAR_LAST_TALKED, RustboroCity_PokemonSchool_Movement_TeacherCheckOnStudentsEast
 	waitmovement 0
 	return
 
-RustboroCity_PokemonSchool_EventScript_213FF0:: @ 8213FF0
-	applymovement VAR_LAST_TALKED, RustboroCity_PokemonSchool_Movement_214010
+RustboroCity_PokemonSchool_EventScript_TeacherCheckOnStudentsWest:: @ 8213FF0
+	applymovement VAR_LAST_TALKED, RustboroCity_PokemonSchool_Movement_TeacherCheckOnStudentsWest
 	waitmovement 0
 	return
 
-RustboroCity_PokemonSchool_EventScript_213FFB:: @ 8213FFB
-	msgbox RustboroCity_PokemonSchool_Text_2144C8, MSGBOX_DEFAULT
+RustboroCity_PokemonSchool_EventScript_GaveQuickClaw:: @ 8213FFB
+	msgbox RustboroCity_PokemonSchool_Text_ExplainQuickClaw, MSGBOX_DEFAULT
 	closemessage
 	applymovement VAR_LAST_TALKED, Common_Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	release
 	end
 
-RustboroCity_PokemonSchool_Movement_214010: @ 8214010
+RustboroCity_PokemonSchool_Movement_TeacherCheckOnStudentsWest: @ 8214010
 	walk_left
 	walk_down
 	walk_down
@@ -136,7 +136,7 @@ RustboroCity_PokemonSchool_Movement_214010: @ 8214010
 	walk_right
 	step_end
 
-RustboroCity_PokemonSchool_Movement_214027: @ 8214027
+RustboroCity_PokemonSchool_Movement_TeacherCheckOnStudentsEast: @ 8214027
 	walk_right
 	walk_right
 	walk_down
@@ -163,53 +163,53 @@ RustboroCity_PokemonSchool_Movement_214027: @ 8214027
 	walk_left
 	step_end
 
-RustboroCity_PokemonSchool_EventScript_214040:: @ 8214040
+RustboroCity_PokemonSchool_EventScript_Scott:: @ 8214040
 	lock
 	faceplayer
-	goto_if_set FLAG_MET_SCOTT_AFTER_OBTAINING_STONE_BADGE, RustboroCity_PokemonSchool_EventScript_2140A8
-	goto_if_set FLAG_MET_SCOTT_RUSTBORO, RustboroCity_PokemonSchool_EventScript_21406F
-	goto_if_set FLAG_BADGE01_GET, RustboroCity_PokemonSchool_EventScript_214082
-	msgbox RustboroCity_PokemonSchool_Text_2148C0, MSGBOX_DEFAULT
+	goto_if_set FLAG_MET_SCOTT_AFTER_OBTAINING_STONE_BADGE, RustboroCity_PokemonSchool_EventScript_ScottWatchStudents
+	goto_if_set FLAG_MET_SCOTT_RUSTBORO, RustboroCity_PokemonSchool_EventScript_ScottSpokeAlready
+	goto_if_set FLAG_BADGE01_GET, RustboroCity_PokemonSchool_EventScript_ScottGreetHasBadge
+	msgbox RustboroCity_PokemonSchool_Text_ScottMetAlreadyCut, MSGBOX_DEFAULT
 	addvar VAR_SCOTT_STATE, 1
 	setflag FLAG_MET_SCOTT_RUSTBORO
 	release
 	end
 
-RustboroCity_PokemonSchool_EventScript_21406F:: @ 821406F
-	goto_if_set FLAG_BADGE01_GET, RustboroCity_PokemonSchool_EventScript_214090
-	msgbox RustboroCity_PokemonSchool_Text_214A5F, MSGBOX_DEFAULT
+RustboroCity_PokemonSchool_EventScript_ScottSpokeAlready:: @ 821406F
+	goto_if_set FLAG_BADGE01_GET, RustboroCity_PokemonSchool_EventScript_ScottNoticeBadge
+	msgbox RustboroCity_PokemonSchool_Text_StudentTalentLevelUnknown, MSGBOX_DEFAULT
 	release
 	end
 
-RustboroCity_PokemonSchool_EventScript_214082:: @ 8214082
-	msgbox RustboroCity_PokemonSchool_Text_214B8A, MSGBOX_DEFAULT
-	goto RustboroCity_PokemonSchool_EventScript_21409E
+RustboroCity_PokemonSchool_EventScript_ScottGreetHasBadge:: @ 8214082
+	msgbox RustboroCity_PokemonSchool_Text_ScottMetAlreadyStoneBadge, MSGBOX_DEFAULT
+	goto RustboroCity_PokemonSchool_EventScript_MetScottAfterBadge
 	end
 
-RustboroCity_PokemonSchool_EventScript_214090:: @ 8214090
-	msgbox RustboroCity_PokemonSchool_Text_214AB6, MSGBOX_DEFAULT
-	goto RustboroCity_PokemonSchool_EventScript_21409E
+RustboroCity_PokemonSchool_EventScript_ScottNoticeBadge:: @ 8214090
+	msgbox RustboroCity_PokemonSchool_Text_ScottStoneBadge, MSGBOX_DEFAULT
+	goto RustboroCity_PokemonSchool_EventScript_MetScottAfterBadge
 	end
 
-RustboroCity_PokemonSchool_EventScript_21409E:: @ 821409E
+RustboroCity_PokemonSchool_EventScript_MetScottAfterBadge:: @ 821409E
 	addvar VAR_SCOTT_STATE, 1
 	setflag FLAG_MET_SCOTT_AFTER_OBTAINING_STONE_BADGE
 	release
 	end
 
-RustboroCity_PokemonSchool_EventScript_2140A8:: @ 82140A8
-	msgbox RustboroCity_PokemonSchool_Text_214A5F, MSGBOX_DEFAULT
+RustboroCity_PokemonSchool_EventScript_ScottWatchStudents:: @ 82140A8
+	msgbox RustboroCity_PokemonSchool_Text_StudentTalentLevelUnknown, MSGBOX_DEFAULT
 	release
 	end
 
-RustboroCity_PokemonSchool_Text_2140B2: @ 82140B2
+RustboroCity_PokemonSchool_Text_BlackboardListsStatusChanges: @ 82140B2
 	.string "The blackboard lists status changes\n"
 	.string "that may affect POKéMON in battle.$"
 
-RustboroCity_PokemonSchool_Text_2140F9: @ 82140F9
+RustboroCity_PokemonSchool_Text_ReadWhichTopic: @ 82140F9
 	.string "Which topic do you want to read?$"
 
-RustboroCity_PokemonSchool_Text_21411A: @ 821411A
+RustboroCity_PokemonSchool_Text_ExplainPoison: @ 821411A
 	.string "If a POKéMON is poisoned, it will\n"
 	.string "steadily lose HP.\p"
 	.string "The effects of poison remain after\n"
@@ -218,7 +218,7 @@ RustboroCity_PokemonSchool_Text_21411A: @ 821411A
 	.string "while it is traveling.\p"
 	.string "Heal a poisoning using an ANTIDOTE.$"
 
-RustboroCity_PokemonSchool_Text_2141D8: @ 82141D8
+RustboroCity_PokemonSchool_Text_ExplainParalysis: @ 82141D8
 	.string "If a POKéMON becomes paralyzed,\n"
 	.string "its SPEED drops.\p"
 	.string "It may also not be able to move while\n"
@@ -226,7 +226,7 @@ RustboroCity_PokemonSchool_Text_2141D8: @ 82141D8
 	.string "Paralysis remains after battle.\n"
 	.string "Cure it using a PARLYZ HEAL.$"
 
-RustboroCity_PokemonSchool_Text_21427D: @ 821427D
+RustboroCity_PokemonSchool_Text_ExplainSleep: @ 821427D
 	.string "If a POKéMON falls asleep, it will be\n"
 	.string "unable to attack.\p"
 	.string "A POKéMON may wake up on its own,\n"
@@ -234,26 +234,26 @@ RustboroCity_PokemonSchool_Text_21427D: @ 821427D
 	.string "sleeping, it will stay asleep.\p"
 	.string "Wake it up using an AWAKENING.$"
 
-RustboroCity_PokemonSchool_Text_214336: @ 8214336
+RustboroCity_PokemonSchool_Text_ExplainBurn: @ 8214336
 	.string "A burn reduces ATTACK power, and it\n"
 	.string "steadily reduces the victim's HP.\p"
 	.string "A burn lingers after battle.\n"
 	.string "Cure a burn using a BURN HEAL.$"
 
-RustboroCity_PokemonSchool_Text_2143B8: @ 82143B8
+RustboroCity_PokemonSchool_Text_ExplainFreeze: @ 82143B8
 	.string "If a POKéMON is frozen, it becomes\n"
 	.string "completely helpless.\p"
 	.string "It will remain frozen after battle.\n"
 	.string "Thaw it out using an ICE HEAL.$"
 
-RustboroCity_PokemonSchool_Text_214433: @ 8214433
+RustboroCity_PokemonSchool_Text_StudentsWhoDontStudyGetQuickClaw: @ 8214433
 	.string "Students who don't study get a little\n"
 	.string "taste of my QUICK CLAW.\p"
 	.string "Whether or not you are a good student \n"
 	.string "will be evident from the way you use\l"
 	.string "this item.$"
 
-RustboroCity_PokemonSchool_Text_2144C8: @ 82144C8
+RustboroCity_PokemonSchool_Text_ExplainQuickClaw: @ 82144C8
 	.string "A POKéMON holding the QUICK CLAW will\n"
 	.string "occasionally speed up and get to move\l"
 	.string "before its opponent.\p"
@@ -262,20 +262,20 @@ RustboroCity_PokemonSchool_Text_2144C8: @ 82144C8
 	.string "Just those alone will give you many\n"
 	.string "topics to study!$"
 
-RustboroCity_PokemonSchool_Text_21459F: @ 821459F
+RustboroCity_PokemonSchool_Text_TradingRightNow: @ 821459F
 	.string "I'm trading POKéMON with my friend\n"
 	.string "right now.$"
 
-RustboroCity_PokemonSchool_Text_2145CD: @ 82145CD
+RustboroCity_PokemonSchool_Text_AlwaysWantedSeedot: @ 82145CD
 	.string "I always wanted a SEEDOT, and\n"
 	.string "I'm finally getting one!$"
 
-RustboroCity_PokemonSchool_Text_214604: @ 8214604
+RustboroCity_PokemonSchool_Text_PokemontCantUseManMadeItems: @ 8214604
 	.string "POKéMON can hold items, but they\n"
 	.string "don't know what to do with man-made\l"
 	.string "items like POTION and ANTIDOTE.$"
 
-RustboroCity_PokemonSchool_Text_214669: @ 8214669
+RustboroCity_PokemonSchool_Text_ConfusedPokemonAttacksItself: @ 8214669
 	.string "You know how some POKéMON moves can\n"
 	.string "confuse a POKéMON?\p"
 	.string "A confused POKéMON will sometimes\n"
@@ -283,7 +283,7 @@ RustboroCity_PokemonSchool_Text_214669: @ 8214669
 	.string "But once it leaves battle, it will\n"
 	.string "return to normal.$"
 
-RustboroCity_PokemonSchool_Text_214719: @ 8214719
+RustboroCity_PokemonSchool_Text_PokemonHealItselfWithBerry: @ 8214719
 	.string "A POKéMON holding a BERRY will heal\n"
 	.string "itself…\p"
 	.string "There are many kinds of items that\n"
@@ -291,7 +291,7 @@ RustboroCity_PokemonSchool_Text_214719: @ 8214719
 	.string "Boy, it sure is hard taking notes\n"
 	.string "down…$"
 
-RustboroCity_PokemonSchool_Text_2147A2: @ 82147A2
+RustboroCity_PokemonSchool_Text_StudentsNotes: @ 82147A2
 	.string "It's this student's notebook…\p"
 	.string "POKéMON are to be caught using\n"
 	.string "POKé BALLS.\p"
@@ -304,7 +304,7 @@ RustboroCity_PokemonSchool_Text_2147A2: @ 82147A2
 	.string "the strong TRAINERS who await\l"
 	.string "challengers in POKéMON GYMS.$"
 
-RustboroCity_PokemonSchool_Text_2148C0: @ 82148C0
+RustboroCity_PokemonSchool_Text_ScottMetAlreadyCut: @ 82148C0
 	.string "Hello? Didn't we meet before?\n"
 	.string "I think back in PETALBURG CITY.\p"
 	.string "Let me introduce myself.\n"
@@ -320,12 +320,12 @@ RustboroCity_PokemonSchool_Text_2148C0: @ 82148C0
 	.string "If I remember correctly, someone in\n"
 	.string "this town has CUT.$"
 
-RustboroCity_PokemonSchool_Text_214A5F: @ 8214A5F
+RustboroCity_PokemonSchool_Text_StudentTalentLevelUnknown: @ 8214A5F
 	.string "SCOTT: Hmm…\p"
 	.string "The talent levels of the students here\n"
 	.string "are unknown. The potential's there.$"
 
-RustboroCity_PokemonSchool_Text_214AB6: @ 8214AB6
+RustboroCity_PokemonSchool_Text_ScottStoneBadge: @ 8214AB6
 	.string "SCOTT: Oh, what's that?\p"
 	.string "It's a STONE BADGE, isn't it?\n"
 	.string "That's pretty impressive, I'd say.\p"
@@ -334,7 +334,7 @@ RustboroCity_PokemonSchool_Text_214AB6: @ 8214AB6
 	.string "It's hard to tell what you're like as\n"
 	.string "a TRAINER from a LEAGUE BADGE.$"
 
-RustboroCity_PokemonSchool_Text_214B8A: @ 8214B8A
+RustboroCity_PokemonSchool_Text_ScottMetAlreadyStoneBadge: @ 8214B8A
 	.string "Hello? Didn't we meet before?\n"
 	.string "I think back in PETALBURG CITY.\p"
 	.string "Let me introduce myself.\n"

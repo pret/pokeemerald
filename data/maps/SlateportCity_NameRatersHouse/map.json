@@ -1,6 +1,6 @@
 {
-  "id": "MAP_SLATEPORT_CITY_HOUSE1",
-  "name": "SlateportCity_House1",
+  "id": "MAP_SLATEPORT_CITY_NAME_RATERS_HOUSE",
+  "name": "SlateportCity_NameRatersHouse",
   "layout": "LAYOUT_HOUSE_WITH_BED",
   "music": "MUS_FINECITY",
   "region_map_section": "MAPSEC_SLATEPORT_CITY",
@@ -24,7 +24,7 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "SlateportCity_House1_EventScript_209AA5",
+      "script": "SlateportCity_NameRatersHouse_EventScript_NameRater",
       "flag": "0"
     }
   ],

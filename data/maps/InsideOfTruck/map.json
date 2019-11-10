@@ -24,7 +24,7 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "InsideOfTruck_EventScript_23BF6C",
+      "script": "InsideOfTruck_EventScript_MovingBox",
       "flag": "0"
     },
     {
@@ -37,7 +37,7 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "InsideOfTruck_EventScript_23BF6C",
+      "script": "InsideOfTruck_EventScript_MovingBox",
       "flag": "0"
     },
     {
@@ -50,7 +50,7 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "InsideOfTruck_EventScript_23BF6C",
+      "script": "InsideOfTruck_EventScript_MovingBox",
       "flag": "0"
     }
   ],
@@ -85,7 +85,7 @@
       "elevation": 3,
       "var": "VAR_LITTLEROOT_INTRO_STATE",
       "var_value": "0",
-      "script": "InsideOfTruck_EventScript_23BF04"
+      "script": "InsideOfTruck_EventScript_SetIntroFlags"
     },
     {
       "type": "trigger",
@@ -94,7 +94,7 @@
       "elevation": 3,
       "var": "VAR_LITTLEROOT_INTRO_STATE",
       "var_value": "0",
-      "script": "InsideOfTruck_EventScript_23BF04"
+      "script": "InsideOfTruck_EventScript_SetIntroFlags"
     },
     {
       "type": "trigger",
@@ -103,7 +103,7 @@
       "elevation": 3,
       "var": "VAR_LITTLEROOT_INTRO_STATE",
       "var_value": "0",
-      "script": "InsideOfTruck_EventScript_23BF04"
+      "script": "InsideOfTruck_EventScript_SetIntroFlags"
     }
   ],
   "bg_events": [
@@ -113,7 +113,7 @@
       "y": 0,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "InsideOfTruck_EventScript_23BF6C"
+      "script": "InsideOfTruck_EventScript_MovingBox"
     },
     {
       "type": "sign",
@@ -121,7 +121,7 @@
       "y": 4,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "InsideOfTruck_EventScript_23BF6C"
+      "script": "InsideOfTruck_EventScript_MovingBox"
     },
     {
       "type": "sign",
@@ -129,7 +129,7 @@
       "y": 3,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "InsideOfTruck_EventScript_23BF6C"
+      "script": "InsideOfTruck_EventScript_MovingBox"
     },
     {
       "type": "sign",
@@ -137,7 +137,7 @@
       "y": 1,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "InsideOfTruck_EventScript_23BF6C"
+      "script": "InsideOfTruck_EventScript_MovingBox"
     },
     {
       "type": "sign",
@@ -145,7 +145,7 @@
       "y": 2,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "InsideOfTruck_EventScript_23BF6C"
+      "script": "InsideOfTruck_EventScript_MovingBox"
     }
   ]
 }

@@ -36,7 +36,7 @@ struct BattleBackground
 // .rodata
 static const u16 sUnrefArray[] = {0x0300, 0x0000}; //OamData?
 
-static const struct OamData gUnknown_0831A988 =
+static const struct OamData sVsLetter_V_OamData =
 {
     .y = 0,
     .affineMode = 3,
@@ -53,7 +53,7 @@ static const struct OamData gUnknown_0831A988 =
     .affineParam = 0,
 };
 
-static const struct OamData gUnknown_0831A990 =
+static const struct OamData sVsLetter_S_OamData =
 {
     .y = 0,
     .affineMode = 3,
@@ -70,13 +70,13 @@ static const struct OamData gUnknown_0831A990 =
     .affineParam = 0,
 };
 
-static const union AffineAnimCmd gUnknown_0831A998[] =
+static const union AffineAnimCmd sVsLetterAffineAnimCmds0[] =
 {
     AFFINEANIMCMD_FRAME(0x0080, 0x0080, 0x00, 0x00),
     AFFINEANIMCMD_END,
 };
 
-static const union AffineAnimCmd gUnknown_0831A9A8[] =
+static const union AffineAnimCmd sVsLetterAffineAnimCmds1[] =
 {
     AFFINEANIMCMD_FRAME(0x0080, 0x0080, 0x00, 0x00),
     AFFINEANIMCMD_FRAME(0x0018, 0x0018, 0x00, 0x80),
@@ -84,37 +84,39 @@ static const union AffineAnimCmd gUnknown_0831A9A8[] =
     AFFINEANIMCMD_END,
 };
 
-static const union AffineAnimCmd * const gUnknown_0831A9C8[] =
+static const union AffineAnimCmd *const sVsLetterAffineAnimTable[] =
 {
-    gUnknown_0831A998,
-    gUnknown_0831A9A8,
+    sVsLetterAffineAnimCmds0,
+    sVsLetterAffineAnimCmds1,
 };
 
-static const struct SpriteTemplate gUnknown_0831A9D0 =
+#define TAG_VS_LETTERS 10000
+
+static const struct SpriteTemplate sVsLetter_V_SpriteTemplate =
 {
-    .tileTag = 0x2710,
-    .paletteTag = 0x2710,
-    .oam = &gUnknown_0831A988,
+    .tileTag = TAG_VS_LETTERS,
+    .paletteTag = TAG_VS_LETTERS,
+    .oam = &sVsLetter_V_OamData,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
-    .affineAnims = gUnknown_0831A9C8,
+    .affineAnims = sVsLetterAffineAnimTable,
     .callback = nullsub_17
 };
 
-static const struct SpriteTemplate gUnknown_0831A9E8 =
+static const struct SpriteTemplate sVsLetter_S_SpriteTemplate =
 {
-    .tileTag = 0x2710,
-    .paletteTag = 0x2710,
-    .oam = &gUnknown_0831A990,
+    .tileTag = TAG_VS_LETTERS,
+    .paletteTag = TAG_VS_LETTERS,
+    .oam = &sVsLetter_S_OamData,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
-    .affineAnims = gUnknown_0831A9C8,
+    .affineAnims = sVsLetterAffineAnimTable,
     .callback = nullsub_17
 };
 
-static const struct CompressedSpriteSheet gUnknown_0831AA00 =
+static const struct CompressedSpriteSheet sVsLettersSpriteSheet =
 {
-    gUnknown_08D77B0C, 0x1000, 0x2710
+    gVsLettersGfx, 0x1000, TAG_VS_LETTERS
 };
 
 const struct BgTemplate gBattleBgTemplates[] =
@@ -689,7 +691,6 @@ static const struct BattleBackground gBattleTerrainTable[] =
     },
 };
 
-// .text
 void BattleInitBgsAndWindows(void)
 {
     ResetBgsAndClearDma3BusyFlags(0);
@@ -710,7 +711,7 @@ void BattleInitBgsAndWindows(void)
     DeactivateAllTextPrinters();
 }
 
-void sub_80356D0(void)
+void InitBattleBgsVideo(void)
 {
     DisableInterrupts(INTR_FLAG_HBLANK);
     EnableInterrupts(INTR_FLAG_VBLANK | INTR_FLAG_VCOUNT | INTR_FLAG_TIMER3 | INTR_FLAG_SERIAL);
@@ -725,10 +726,11 @@ void LoadBattleMenuWindowGfx(void)
 {
     LoadUserWindowBorderGfx(2, 0x12, 0x10);
     LoadUserWindowBorderGfx(2, 0x22, 0x10);
-    LoadCompressedPalette(gUnknown_08D85600, 0x50, 0x20);
+    LoadCompressedPalette(gBattleWindowTextPalette, 0x50, 0x20);
 
     if (gBattleTypeFlags & BATTLE_TYPE_ARENA)
     {
+        // Load graphics for the Battle Arena referee's mid-battle messages.
         Menu_LoadStdPalAt(0x70);
         LoadMessageBoxGfx(0, 0x30, 0x70);
         gPlttBufferUnfaded[0x76] = 0;
@@ -837,86 +839,81 @@ void DrawMainBattleBackground(void)
 
 void LoadBattleTextboxAndBackground(void)
 {
-    LZDecompressVram(gBattleTextboxTiles, (void*)(VRAM));
+    LZDecompressVram(gBattleTextboxTiles, (void*)(BG_CHAR_ADDR(0)));
     CopyToBgTilemapBuffer(0, gBattleTextboxTilemap, 0, 0);
     CopyBgTilemapBufferToVram(0);
     LoadCompressedPalette(gBattleTextboxPalette, 0, 0x40);
     LoadBattleMenuWindowGfx();
-
     DrawMainBattleBackground();
 }
 
-static void sub_8035AE4(u8 taskId, u8 battlerId, u8 bgId, u8 destX, u8 destY)
+static void DrawLinkBattleParticipantPokeballs(u8 taskId, u8 multiplayerId, u8 bgId, u8 destX, u8 destY)
 {
     s32 i;
-    u16 var = 0;
-    u16 src[6];
+    u16 pokeballStatuses = 0;
+    u16 tiles[6];
 
     if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
     {
         if (gTasks[taskId].data[5] != 0)
         {
-            switch (battlerId)
+            switch (multiplayerId)
             {
             case 0:
-                var = 0x3F & gTasks[taskId].data[3];
+                pokeballStatuses = 0x3F & gTasks[taskId].data[3];
                 break;
             case 1:
-                var = (0xFC0 & gTasks[taskId].data[4]) >> 6;
+                pokeballStatuses = (0xFC0 & gTasks[taskId].data[4]) >> 6;
                 break;
             case 2:
-                var = (0xFC0 & gTasks[taskId].data[3]) >> 6;
+                pokeballStatuses = (0xFC0 & gTasks[taskId].data[3]) >> 6;
                 break;
             case 3:
-                var = 0x3F & gTasks[taskId].data[4];
+                pokeballStatuses = 0x3F & gTasks[taskId].data[4];
                 break;
             }
         }
         else
         {
-            switch (battlerId)
+            switch (multiplayerId)
             {
             case 0:
-                var = 0x3F & gTasks[taskId].data[3];
+                pokeballStatuses = 0x3F & gTasks[taskId].data[3];
                 break;
             case 1:
-                var = 0x3F & gTasks[taskId].data[4];
+                pokeballStatuses = 0x3F & gTasks[taskId].data[4];
                 break;
             case 2:
-                var = (0xFC0 & gTasks[taskId].data[3]) >> 6;
+                pokeballStatuses = (0xFC0 & gTasks[taskId].data[3]) >> 6;
                 break;
             case 3:
-                var = (0xFC0 & gTasks[taskId].data[4]) >> 6;
+                pokeballStatuses = (0xFC0 & gTasks[taskId].data[4]) >> 6;
                 break;
             }
         }
 
         for (i = 0; i < 3; i++)
-        {
-            src[i] = ((var & (3 << (i * 2))) >> (i * 2)) + 0x6001;
-        }
+            tiles[i] = ((pokeballStatuses & (3 << (i * 2))) >> (i * 2)) + 0x6001;
 
-        CopyToBgTilemapBufferRect_ChangePalette(bgId, src, destX, destY, 3, 1, 0x11);
+        CopyToBgTilemapBufferRect_ChangePalette(bgId, tiles, destX, destY, 3, 1, 0x11);
         CopyBgTilemapBufferToVram(bgId);
     }
     else
     {
-        if (battlerId == gBattleScripting.multiplayerId)
-            var = gTasks[taskId].data[3];
+        if (multiplayerId == gBattleScripting.multiplayerId)
+            pokeballStatuses = gTasks[taskId].data[3];
         else
-            var = gTasks[taskId].data[4];
+            pokeballStatuses = gTasks[taskId].data[4];
 
         for (i = 0; i < 6; i++)
-        {
-            src[i] = ((var & (3 << (i * 2))) >> (i * 2)) + 0x6001;
-        }
+            tiles[i] = ((pokeballStatuses & (3 << (i * 2))) >> (i * 2)) + 0x6001;
 
-        CopyToBgTilemapBufferRect_ChangePalette(bgId, src, destX, destY, 6, 1, 0x11);
+        CopyToBgTilemapBufferRect_ChangePalette(bgId, tiles, destX, destY, 6, 1, 0x11);
         CopyBgTilemapBufferToVram(bgId);
     }
 }
 
-static void sub_8035C4C(void)
+static void DrawLinkBattleVsScreenOutcomeText(void)
 {
     if (gBattleOutcome == B_OUTCOME_DREW)
     {
@@ -997,7 +994,7 @@ static void sub_8035C4C(void)
     }
 }
 
-void sub_8035D74(u8 taskId)
+void InitLinkBattleVsScreen(u8 taskId)
 {
     struct LinkPlayer *linkPlayer;
     u8 *name;
@@ -1017,19 +1014,19 @@ void sub_8035D74(u8 taskId)
                 {
                 case 0:
                     BattlePutTextOnWindow(name, 0x11);
-                    sub_8035AE4(taskId, linkPlayer->id, 1, 2, 4);
+                    DrawLinkBattleParticipantPokeballs(taskId, linkPlayer->id, 1, 2, 4);
                     break;
                 case 1:
                     BattlePutTextOnWindow(name, 0x12);
-                    sub_8035AE4(taskId, linkPlayer->id, 2, 2, 4);
+                    DrawLinkBattleParticipantPokeballs(taskId, linkPlayer->id, 2, 2, 4);
                     break;
                 case 2:
                     BattlePutTextOnWindow(name, 0x13);
-                    sub_8035AE4(taskId, linkPlayer->id, 1, 2, 8);
+                    DrawLinkBattleParticipantPokeballs(taskId, linkPlayer->id, 1, 2, 8);
                     break;
                 case 3:
                     BattlePutTextOnWindow(name, 0x14);
-                    sub_8035AE4(taskId, linkPlayer->id, 2, 2, 8);
+                    DrawLinkBattleParticipantPokeballs(taskId, linkPlayer->id, 2, 2, 8);
                     break;
                 }
             }
@@ -1049,16 +1046,16 @@ void sub_8035D74(u8 taskId)
             name = gLinkPlayers[opponentId].name;
             BattlePutTextOnWindow(name, 0x10);
 
-            sub_8035AE4(taskId, playerId, 1, 2, 7);
-            sub_8035AE4(taskId, opponentId, 2, 2, 7);
+            DrawLinkBattleParticipantPokeballs(taskId, playerId, 1, 2, 7);
+            DrawLinkBattleParticipantPokeballs(taskId, opponentId, 2, 2, 7);
         }
         gTasks[taskId].data[0]++;
         break;
     case 1:
-        palId = AllocSpritePalette(0x2710);
+        palId = AllocSpritePalette(TAG_VS_LETTERS);
         gPlttBufferUnfaded[palId * 16 + 0x10F] = gPlttBufferFaded[palId * 16 + 0x10F] = 0x7FFF;
-        gBattleStruct->linkBattleVsSpriteId_V = CreateSprite(&gUnknown_0831A9D0, 111, 80, 0);
-        gBattleStruct->linkBattleVsSpriteId_S = CreateSprite(&gUnknown_0831A9E8, 129, 80, 0);
+        gBattleStruct->linkBattleVsSpriteId_V = CreateSprite(&sVsLetter_V_SpriteTemplate, 111, 80, 0);
+        gBattleStruct->linkBattleVsSpriteId_S = CreateSprite(&sVsLetter_S_SpriteTemplate, 129, 80, 0);
         gSprites[gBattleStruct->linkBattleVsSpriteId_V].invisible = TRUE;
         gSprites[gBattleStruct->linkBattleVsSpriteId_S].invisible = TRUE;
         gTasks[taskId].data[0]++;
@@ -1087,7 +1084,7 @@ void sub_8035D74(u8 taskId)
         else
         {
             if (gTasks[taskId].data[5] != 0)
-                sub_8035C4C();
+                DrawLinkBattleVsScreenOutcomeText();
 
             PlaySE(SE_W231);
             DestroyTask(taskId);
@@ -1110,7 +1107,7 @@ void DrawBattleEntryBackground(void)
     if (gBattleTypeFlags & BATTLE_TYPE_LINK)
     {
         LZDecompressVram(gUnknown_08D778F0, (void*)(BG_CHAR_ADDR(1)));
-        LZDecompressVram(gUnknown_08D77B0C, (void*)(VRAM + 0x10000));
+        LZDecompressVram(gVsLettersGfx, (void*)(VRAM + 0x10000));
         LoadCompressedPalette(gUnknown_08D77AE4, 0x60, 0x20);
         SetBgAttribute(1, BG_ATTR_SCREENSIZE, 1);
         SetGpuReg(REG_OFFSET_BG1CNT, 0x5C04);
@@ -1122,7 +1119,7 @@ void DrawBattleEntryBackground(void)
         SetGpuReg(REG_OFFSET_WINOUT, 0x36);
         gBattle_BG1_Y = 0xFF5C;
         gBattle_BG2_Y = 0xFF5C;
-        LoadCompressedSpriteSheetUsingHeap(&gUnknown_0831AA00);
+        LoadCompressedSpriteSheetUsingHeap(&sVsLettersSpriteSheet);
     }
     else if (gBattleTypeFlags & (BATTLE_TYPE_FRONTIER | BATTLE_TYPE_LINK | BATTLE_TYPE_x2000000 | BATTLE_TYPE_EREADER_TRAINER))
     {
@@ -1195,7 +1192,7 @@ bool8 LoadChosenBattleElement(u8 caseId)
     switch (caseId)
     {
     case 0:
-        LZDecompressVram(gBattleTextboxTiles, (void*)(VRAM));
+        LZDecompressVram(gBattleTextboxTiles, (void*)(BG_CHAR_ADDR(0)));
         break;
     case 1:
         CopyToBgTilemapBuffer(0, gBattleTextboxTilemap, 0, 0);

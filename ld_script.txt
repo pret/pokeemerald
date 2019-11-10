@@ -689,7 +689,7 @@ SECTIONS {
         data/text_input_strings.o(.rodata);
         data/fonts.o(.rodata);
         src/mystery_event_msg.o(.rodata);
-        data/mystery_event_msg.o(.rodata);
+        data/mystery_event.o(.rodata);
         src/m4a_tables.o(.rodata);
         data/sound_data.o(.rodata);
     } =0

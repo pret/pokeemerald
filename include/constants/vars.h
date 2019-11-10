@@ -144,7 +144,7 @@
 #define VAR_ROUTE132_STATE                   0x407F // Unused Var
 #define VAR_ROUTE133_STATE                   0x4080 // Unused Var
 #define VAR_ROUTE134_STATE                   0x4081 // Unused Var
-#define VAR_LITTLEROOT_HOUSES_STATE          0x4082
+#define VAR_LITTLEROOT_HOUSES_STATE_MAY      0x4082
 #define VAR_UNUSED_0x4083                    0x4083 // Unused Var
 #define VAR_BIRCH_LAB_STATE                  0x4084
 #define VAR_PETALBURG_GYM_STATE              0x4085 // 0-1: Wally tutorial, 2-6: 0-4 badges, 7: Defeated Norman, 8: Rematch Norman 
@@ -154,7 +154,7 @@
 #define VAR_SECRET_BASE_INITIALIZED          0x4089
 #define VAR_CONTEST_PRIZE_PICKUP             0x408A
 #define VAR_UNUSED_0x408B                    0x408B // Unused Var
-#define VAR_LITTLEROOT_HOUSES_STATE_2        0x408C
+#define VAR_LITTLEROOT_HOUSES_STATE_BRENDAN  0x408C
 #define VAR_LITTLEROOT_RIVAL_STATE           0x408D
 #define VAR_BOARD_BRINEY_BOAT_STATE          0x408E
 #define VAR_DEVON_CORP_3F_STATE              0x408F
@@ -179,9 +179,9 @@
 #define VAR_SEAFLOOR_CAVERN_STATE            0x40A2
 #define VAR_CABLE_CAR_STATION_STATE          0x40A3
 #define VAR_SAFARI_ZONE_STATE                0x40A4  // 0: In or out of SZ, 1: Player exiting SZ, 2: Player entering SZ
-#define VAR_TRICK_HOUSE_ENTRANCE_STATE_1     0x40A5
-#define VAR_TRICK_HOUSE_ENTRANCE_STATE_2     0x40A6
-#define VAR_TRICK_HOUSE_ENTRANCE_STATE_3     0x40A7
+#define VAR_TRICK_HOUSE_BEING_WATCHED_STATE  0x40A5
+#define VAR_TRICK_HOUSE_FOUND_TRICK_MASTER   0x40A6
+#define VAR_TRICK_HOUSE_ENTRANCE_STATE       0x40A7
 #define VAR_UNUSED_0x40A8                    0x40A8 // Unused Var
 #define VAR_CYCLING_CHALLENGE_STATE          0x40A9
 #define VAR_SLATEPORT_MUSEUM_1F_STATE        0x40AA
@@ -195,8 +195,8 @@
 #define VAR_TRICK_HOUSE_PUZZLE_8_STATE       0x40B2
 #define VAR_WEATHER_INSTITUTE_STATE          0x40B3
 #define VAR_PORTHOLE_STATE                   0x40B4
-#define VAR_TRICK_HOUSE_STATE                0x40B5 // TODO: needs some further investigation
-#define VAR_TRICK_HOUSE_PUZZLE_7_STATE_2     0x40B6
+#define VAR_TRICK_HOUSE_ENTER_FROM_CORRIDOR  0x40B5
+#define VAR_TRICK_HOUSE_PUZZLE_7_STATE_2     0x40B6 // Leftover from RS, never set
 #define VAR_SLATEPORT_FAN_CLUB_STATE         0x40B7
 #define VAR_UNUSED_0x40B8                    0x40B8 // Unused Var
 #define VAR_MT_PYRE_STATE                    0x40B9

@@ -134,9 +134,9 @@ gSpecials:: @ 81DBA64
 	def_special CompareSeedotSize
 	def_special GetLotadSizeRecordInfo
 	def_special CompareLotadSize
-	def_special TV_PutNameRaterShowOnTheAirIfNicknameChanged
-	def_special TV_CopyNicknameToStringVar1AndEnsureTerminated
-	def_special TV_CheckMonOTIDEqualsPlayerID
+	def_special TryPutNameRaterShowOnTheAir
+	def_special BufferMonNickname
+	def_special IsMonOTIDNotPlayers
 	def_special BufferTrendyPhraseString
 	def_special TrendyPhraseIsOld
 	def_special sub_811EF6C
@@ -180,7 +180,7 @@ gSpecials:: @ 81DBA64
 	def_special sub_813BA30
 	def_special UpdateMovedLilycoveFanClubMembers
 	def_special sub_813BF60
-	def_special sub_813BA60
+	def_special UpdateTrainerFanClubGameClear
 	def_special sub_813BF7C
 	def_special RockSmashWildEncounter
 	def_special GabbyAndTyGetBattleNum
@@ -346,12 +346,12 @@ gSpecials:: @ 81DBA64
 	def_special SetPacifidlogTMReceivedDay
 	def_special GetDaysUntilPacifidlogTMAvailable
 	def_special HasAllHoennMons
-	def_special MonOTNameMatchesPlayer
+	def_special MonOTNameNotPlayer
 	def_special BufferLottoTicketNumber
 	def_special sub_81653CC
 	def_special DoesPartyHaveEnigmaBerry
 	def_special ScriptRandom
-	def_special sub_81AFDD0
+	def_special SetChampionSaveWarp
 	def_special TryPutTreasureInvestigatorsOnAir
 	def_special TryPutLotteryWinnerReportOnAir
 	def_special sub_80EE72C
@@ -400,7 +400,7 @@ gSpecials:: @ 81DBA64
 	def_special ClearQuizLadyQuestionAndAnswer
 	def_special QuizLadySetCustomQuestion
 	def_special QuizLadyTakePrizeForCustomQuiz
-	def_special sub_813986C
+	def_special GetMysteryEventCardVal
 	def_special QuizLadyRecordCustomQuizData
 	def_special QuizLadySetWaitingForChallenger
 	def_special BufferQuizCorrectAnswer
@@ -479,7 +479,7 @@ gSpecials:: @ 81DBA64
 	def_special ShowFrontierGamblerLookingMessage
 	def_special ShowFrontierGamblerGoMessage
 	def_special Script_DoRayquazaScene
-	def_special sub_81C72A4
+	def_special OpenPokenavForTutorial
 	def_special ScriptMenu_CreateStartMenuForPokenavTutorial
 	def_special CountPlayerTrainerStars
 	def_special BufferBattleFrontierTutorMoveName
@@ -519,7 +519,7 @@ gSpecials:: @ 81DBA64
 	def_special Script_DoRayquazaScene @ Listed twice
 	def_special LoopWingFlapSE
 	def_special sub_81D4BEC
-	def_special sub_80224D0
+	def_special ShowBerryCrushRankings
 	def_special TryBufferWaldaPhrase
 	def_special DoWaldaNamingScreen
 	def_special TryGetWallpaperWithWaldaPhrase

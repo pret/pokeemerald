@@ -16,7 +16,7 @@ EventScript_FieldWhiteOut:: @ 82736D9
 	special Script_FadeOutMapMusic
 	waitstate
 	fadescreen 1
-	call_if_set FLAG_FLANNERY_GIVES_BADGE_INFO, EventScript_SetRespawnLavaridgePkmnCenter
+	call_if_set FLAG_WHITEOUT_TO_LAVARIDGE, EventScript_SetRespawnLavaridgePkmnCenter
 	special SetCB2WhiteOut
 	waitstate
 	end

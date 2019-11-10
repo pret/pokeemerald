@@ -30,6 +30,7 @@
 #include "party_menu.h"
 #include "pokemon_jump.h"
 #include "random.h"
+#include "save_location.h"
 #include "script.h"
 #include "script_pokemon_util_80F87D8.h"
 #include "sound.h"
@@ -1078,7 +1079,7 @@ u32 sub_8013B8C(struct UnkStruct_Group *arg0, s32 id)
 
     if (gUnknown_02022C2C == 4 && structPtr->unk.field_0.unk_00.unk_01_2 != 3)
     {
-        if (!(gSaveBlock2Ptr->specialSaveWarpFlags & 0x80))
+        if (!(gSaveBlock2Ptr->specialSaveWarpFlags & CHAMPION_SAVEWARP))
             return 1;
         else if (structPtr->unk.field_0.unk_00.isChampion)
             return 0;
@@ -1470,7 +1471,7 @@ void sub_801440C(u8 taskId)
         HealPlayerParty();
         SavePlayerParty();
         LoadPlayerBag();
-        sub_8014304(MAP_GROUP(SINGLE_BATTLE_COLOSSEUM), MAP_NUM(SINGLE_BATTLE_COLOSSEUM), 6, 8, USING_SINGLE_BATTLE);
+        sub_8014304(MAP_GROUP(BATTLE_COLOSSEUM_2P), MAP_NUM(BATTLE_COLOSSEUM_2P), 6, 8, USING_SINGLE_BATTLE);
         SetMainCallback2(sub_8014384);
         break;
     case 2:
@@ -1479,7 +1480,7 @@ void sub_801440C(u8 taskId)
         SavePlayerParty();
         LoadPlayerBag();
         sub_80143E4(gBlockSendBuffer, TRUE);
-        sub_8014304(MAP_GROUP(SINGLE_BATTLE_COLOSSEUM), MAP_NUM(SINGLE_BATTLE_COLOSSEUM), 6, 8, USING_DOUBLE_BATTLE);
+        sub_8014304(MAP_GROUP(BATTLE_COLOSSEUM_2P), MAP_NUM(BATTLE_COLOSSEUM_2P), 6, 8, USING_DOUBLE_BATTLE);
         SetMainCallback2(sub_8014384);
         break;
     case 3:
@@ -1488,7 +1489,7 @@ void sub_801440C(u8 taskId)
         SavePlayerParty();
         LoadPlayerBag();
         sub_80143E4(gBlockSendBuffer, TRUE);
-        sub_8014304(MAP_GROUP(DOUBLE_BATTLE_COLOSSEUM), MAP_NUM(DOUBLE_BATTLE_COLOSSEUM), 5, 8, USING_MULTI_BATTLE);
+        sub_8014304(MAP_GROUP(BATTLE_COLOSSEUM_4P), MAP_NUM(BATTLE_COLOSSEUM_4P), 5, 8, USING_MULTI_BATTLE);
         SetMainCallback2(sub_8014384);
         break;
     case 4:

@@ -24,7 +24,7 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route111_WinstrateFamilysHouse_EventScript_22A4E8",
+      "script": "Route111_WinstrateFamilysHouse_EventScript_Vivi",
       "flag": "0"
     },
     {
@@ -37,7 +37,7 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route111_WinstrateFamilysHouse_EventScript_22A48D",
+      "script": "Route111_WinstrateFamilysHouse_EventScript_Victor",
       "flag": "0"
     },
     {
@@ -50,7 +50,7 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route111_WinstrateFamilysHouse_EventScript_22A4A2",
+      "script": "Route111_WinstrateFamilysHouse_EventScript_Victoria",
       "flag": "0"
     },
     {
@@ -63,7 +63,7 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route111_WinstrateFamilysHouse_EventScript_22A4FD",
+      "script": "Route111_WinstrateFamilysHouse_EventScript_Vicky",
       "flag": "0"
     }
   ],

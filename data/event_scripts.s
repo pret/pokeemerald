@@ -6,6 +6,7 @@
 #include "constants/battle_setup.h"
 #include "constants/berry.h"
 #include "constants/cable_club.h"
+#include "constants/coins.h"
 #include "constants/contest.h"
 #include "constants/daycare.h"
 #include "constants/decorations.h"
@@ -205,12 +206,12 @@ gStdScripts_End:: @ 81DC2CC
 	.include "data/maps/SlateportCity_BattleTentLobby/scripts.inc"
 	.include "data/maps/SlateportCity_BattleTentCorridor/scripts.inc"
 	.include "data/maps/SlateportCity_BattleTentBattleRoom/scripts.inc"
-	.include "data/maps/SlateportCity_House1/scripts.inc"
+	.include "data/maps/SlateportCity_NameRatersHouse/scripts.inc"
 	.include "data/maps/SlateportCity_PokemonFanClub/scripts.inc"
 	.include "data/maps/SlateportCity_OceanicMuseum_1F/scripts.inc"
 	.include "data/maps/SlateportCity_OceanicMuseum_2F/scripts.inc"
 	.include "data/maps/SlateportCity_Harbor/scripts.inc"
-	.include "data/maps/SlateportCity_House2/scripts.inc"
+	.include "data/maps/SlateportCity_House/scripts.inc"
 	.include "data/maps/SlateportCity_PokemonCenter_1F/scripts.inc"
 	.include "data/maps/SlateportCity_PokemonCenter_2F/scripts.inc"
 	.include "data/maps/SlateportCity_Mart/scripts.inc"
@@ -436,10 +437,10 @@ gStdScripts_End:: @ 81DC2CC
 	.include "data/maps/AlteringCave/scripts.inc"
 	.include "data/maps/MeteorFalls_StevensCave/scripts.inc"
 	.include "data/scripts/shared_secret_base.inc"
-	.include "data/maps/SingleBattleColosseum/scripts.inc"
+	.include "data/maps/BattleColosseum2P/scripts.inc"
 	.include "data/maps/TradeCenter/scripts.inc"
 	.include "data/maps/RecordCorner/scripts.inc"
-	.include "data/maps/DoubleBattleColosseum/scripts.inc"
+	.include "data/maps/BattleColosseum4P/scripts.inc"
 	.include "data/maps/LinkContestRoom1/scripts.inc"
 	.include "data/maps/UnknownLinkContestRoom_25_29/scripts.inc"
 	.include "data/maps/UnknownLinkContestRoom_25_30/scripts.inc"
@@ -645,61 +646,7 @@ Std_MsgboxAutoclose:: @ 8271494
 	return
 
 	.include "data/scripts/new_game.inc"
-
-@ Below seems to be hall_of_fame.inc and briney.inc together?
-EverGrandeCity_HallOfFame_EventScript_2717C1:: @ 82717C1
-	special sub_81AFDD0
-	setflag FLAG_IS_CHAMPION
-	call EverGrandeCity_HallOfFame_EventScript_ResetDefeatedEventLegendaries
-	compare VAR_FOSSIL_MANIAC_STATE, 0
-	call_if_eq EverGrandeCity_HallOfFame_EventScript_271839
-	clearflag FLAG_HIDE_LILCOVE_MOTEL_GAME_DESIGNERS
-	call EverGrandeCity_HallOfFame_EventScript_ResetEliteFour
-	setflag FLAG_HIDE_SLATEPORT_CITY_STERNS_SHIPYARD_MR_BRINEY
-	clearflag FLAG_HIDE_SS_TIDAL_CORRIDOR_MR_BRINEY
-	clearflag FLAG_HIDE_MOSSDEEP_CITY_STEVENS_HOUSE_INVISIBLE_NINJA_BOY
-	setvar VAR_STEVENS_HOUSE_STATE, 2
-	setflag FLAG_HIDE_VICTORY_ROAD_ENTRANCE_WALLY
-	clearflag FLAG_HIDE_VICTORY_ROAD_EXIT_WALLY
-	clearflag FLAG_HIDE_SLATEPORT_CITY_HARBOR_SS_TIDAL
-	clearflag FLAG_HIDE_LILYCOVE_HARBOR_SSTIDAL
-	setflag FLAG_HIDE_SAFARI_ZONE_SOUTH_CONSTRUCTION_WORKERS
-	clearflag FLAG_HIDE_SAFARI_ZONE_SOUTH_EAST_EXPANSION
-	setflag FLAG_HIDE_LILYCOVE_CITY_RIVAL
-	special sub_813BA60
-	call_if_unset FLAG_RECEIVED_SS_TICKET, EverGrandeCity_HallOfFame_EventScript_271843
-	call_if_unset FLAG_RECEIVED_BELDUM, EverGrandeCity_HallOfFame_EventScript_27183F
-	setflag FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_RIVAL_BEDROOM
-	setflag FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_RIVAL_BEDROOM
-	compare VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 0
-	call_if_eq EverGrandeCity_HallOfFame_EventScript_271851
-	return
-
-EverGrandeCity_HallOfFame_EventScript_ResetDefeatedEventLegendaries:: @ 8271829
-	clearflag FLAG_DEFEATED_MEW
-	clearflag FLAG_DEFEATED_LATIAS_OR_LATIOS
-	clearflag FLAG_DEFEATED_DEOXYS
-	clearflag FLAG_DEFEATED_LUGIA
-	clearflag FLAG_DEFEATED_HO_OH
-	return
-
-EverGrandeCity_HallOfFame_EventScript_271839:: @ 8271839
-	setvar VAR_FOSSIL_MANIAC_STATE, 1
-	return
-
-EverGrandeCity_HallOfFame_EventScript_27183F:: @ 827183F
-	clearflag FLAG_HIDE_MOSSDEEP_CITY_STEVENS_HOUSE_BELDUM_POKEBALL
-	return
-
-EverGrandeCity_HallOfFame_EventScript_271843:: @ 8271843
-	setvar VAR_LITTLEROOT_HOUSES_STATE, 3
-	setvar VAR_LITTLEROOT_HOUSES_STATE_2, 3
-	clearflag FLAG_HIDE_PLAYERS_HOUSE_DAD
-	return
-
-EverGrandeCity_HallOfFame_EventScript_271851:: @ 8271851
-	setvar VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 1
-	return
+	.include "data/scripts/hall_of_fame.inc"
 
 EventScript_WhiteOut:: @ 8271857
 	call EverGrandeCity_HallOfFame_EventScript_ResetEliteFour
@@ -800,8 +747,7 @@ Common_EventScript_ReadyPetalburgGymForBattle:: @ 8271E84
 	setflag FLAG_PETALBURG_MART_EXPANDED_ITEMS
 	return
 
-DewfordTown_EventScript_271E8B:: @ 8271E8B
-DewfordTown_Hall_EventScript_271E8B:: @ 8271E8B
+Common_EventScript_BufferTrendyPhrase:: @ 8271E8B
 	dotimebasedevents
 	setvar VAR_0x8004, 0
 	special BufferTrendyPhraseString
@@ -825,16 +771,16 @@ Common_EventScript_BagIsFull:: @ 827205E
 	msgbox gText_TooBadBagIsFull, MSGBOX_DEFAULT
 	return
 
-Route114_LanettesHouse_EventScript_272067:: @ 8272067
+Common_EventScript_ShowNoRoomForDecor:: @ 8272067
 	msgbox gText_NoRoomLeftForAnother, MSGBOX_DEFAULT
 	release
 	end
 
-Common_EventScript_NoRoomLeftForAnother:: @ 8272071
+Common_EventScript_NoRoomForDecor:: @ 8272071
 	msgbox gText_NoRoomLeftForAnother, MSGBOX_DEFAULT
 	return
 
-Common_EventScript_SetWeather15:: @ 827207A
+Common_EventScript_SetAlternatingWeather:: @ 827207A
 	setweather WEATHER_ALTERNATING
 	return
 
@@ -901,11 +847,11 @@ EventScript_HideMrBriney:: @ 82721F8
 	setvar VAR_BRINEY_LOCATION, 0
 	return
 
-RusturfTunnel_EventScript_272216:: @ 8272216
+RusturfTunnel_EventScript_SetRusturfTunnelOpen:: @ 8272216
 	removeobject 1
 	removeobject 10
-	clearflag FLAG_HIDE_VERDANTURF_TOWN_WANDAS_HOUSE_LOVER_MAN
-	clearflag FLAG_HIDE_VERDANTURF_TOWN_WANDAS_HOUSE_LOVER_WOMAN
+	clearflag FLAG_HIDE_VERDANTURF_TOWN_WANDAS_HOUSE_WANDAS_BOYFRIEND
+	clearflag FLAG_HIDE_VERDANTURF_TOWN_WANDAS_HOUSE_WANDA
 	setvar VAR_RUSTURF_TUNNEL_STATE, 6
 	setflag FLAG_RUSTURF_TUNNEL_OPENED
 	return

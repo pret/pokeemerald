@@ -24,7 +24,7 @@
       "movement_range_y": 1,
       "trainer_type": "1",
       "trainer_sight_or_berry_tree_id": "3",
-      "script": "MtPyre_6F_EventScript_231D3B",
+      "script": "MtPyre_6F_EventScript_Valerie",
       "flag": "0"
     },
     {
@@ -50,7 +50,7 @@
       "movement_range_y": 1,
       "trainer_type": "1",
       "trainer_sight_or_berry_tree_id": "3",
-      "script": "MtPyre_6F_EventScript_231D9D",
+      "script": "MtPyre_6F_EventScript_Cedric",
       "flag": "0"
     }
   ],

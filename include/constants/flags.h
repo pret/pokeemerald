@@ -119,7 +119,7 @@
 #define FLAG_OCEANIC_MUSEUM_MET_REPORTER     0x69
 #define FLAG_RECEIVED_HM04                   0x6A
 #define FLAG_RECEIVED_HM06                   0x6B
-#define FLAG_FLANNERY_GIVES_BADGE_INFO       0x6C
+#define FLAG_WHITEOUT_TO_LAVARIDGE           0x6C // Set after defeating Flannery, so the player cant white out from poison before receiving Go Goggles
 #define FLAG_RECEIVED_HM05                   0x6D
 #define FLAG_RECEIVED_HM02                   0x6E
 #define FLAG_GROUDON_AWAKENED_MAGMA_HIDEOUT  0x6F
@@ -207,11 +207,11 @@
 #define FLAG_DEFEATED_GRUNT_SPACE_CENTER_1F  0xBF
 #define FLAG_RECEIVED_SUN_STONE_MOSSDEEP     0xC0
 #define FLAG_WALLY_SPEECH                    0xC1
-#define FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_1   0xC2
-#define FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_2   0xC3
-#define FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_3   0xC4
-#define FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_4   0xC5
-#define FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_5   0xC6
+#define FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_1   0xC2 // Leftover from the RS version of Puzzle Room 7, functionally unused
+#define FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_2   0xC3 //
+#define FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_3   0xC4 //
+#define FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_4   0xC5 //
+#define FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_5   0xC6 //
 #define FLAG_RUSTURF_TUNNEL_OPENED           0xC7
 #define FLAG_RECEIVED_RED_SCARF              0xC8
 #define FLAG_RECEIVED_BLUE_SCARF             0xC9
@@ -261,7 +261,7 @@
 #define FLAG_USED_ROOM_2_KEY                 0xF1
 #define FLAG_USED_ROOM_4_KEY                 0xF2
 #define FLAG_USED_ROOM_6_KEY                 0xF3
-#define FLAG_MET_PROF_COSMO                  0xF4
+#define FLAG_MET_PROF_COZMO                  0xF4
 #define FLAG_RECEIVED_WAILMER_DOLL           0xF5
 #define FLAG_RECEIVED_CHESTO_BERRY_ROUTE_104 0xF6
 #define FLAG_DEFEATED_SS_TIDAL_TRAINERS      0xF7
@@ -353,8 +353,8 @@
 #define FLAG_UNUSED_MYSTERY_GIFT_0x14D       0x14D
 
 #define FLAG_MIRAGE_TOWER_VISIBLE            0x14E
-#define FLAG_CHOSE_CLAW_FOSSIL               0x14F
-#define FLAG_CHOSE_ROOT_FOSSIL               0x150
+#define FLAG_CHOSE_ROOT_FOSSIL               0x14F
+#define FLAG_CHOSE_CLAW_FOSSIL               0x150
 #define FLAG_RECEIVED_POWDER_JAR             0x151
 
 #define FLAG_CHOSEN_MULTI_BATTLE_NPC_PARTNER 0x152
@@ -807,7 +807,7 @@
 #define FLAG_HIDE_BIRTH_ISLAND_DEOXYS_TRIANGLE                      0x2FC
 #define FLAG_HIDE_MAUVILLE_CITY_SCOTT                               0x2FD
 #define FLAG_HIDE_VERDANTURF_TOWN_SCOTT                             0x2FE
-#define FLAG_HIDE_FALLORBOR_TOWN_BATTLE_TENT_SCOTT                  0x2FF
+#define FLAG_HIDE_FALLARBOR_TOWN_BATTLE_TENT_SCOTT                  0x2FF
 #define FLAG_HIDE_ROUTE_111_VICTOR_WINSTRATE                        0x300
 #define FLAG_HIDE_ROUTE_111_VICTORIA_WINSTRATE                      0x301
 #define FLAG_HIDE_ROUTE_111_VIVI_WINSTRATE                          0x302
@@ -847,14 +847,14 @@
 #define FLAG_HIDE_MAUVILLE_CITY_WALLY                               0x324
 #define FLAG_HIDE_MAUVILLE_CITY_WALLYS_UNCLE                        0x325
 #define FLAG_HIDE_VERDANTURF_TOWN_WANDAS_HOUSE_WALLY                0x326
-#define FLAG_HIDE_RUSTURF_TUNNEL_LOVER_MAN                          0x327
-#define FLAG_HIDE_VERDANTURF_TOWN_WANDAS_HOUSE_LOVER_MAN            0x328
+#define FLAG_HIDE_RUSTURF_TUNNEL_WANDAS_BOYFRIEND                   0x327
+#define FLAG_HIDE_VERDANTURF_TOWN_WANDAS_HOUSE_WANDAS_BOYFRIEND     0x328
 #define FLAG_HIDE_VERDANTURF_TOWN_WANDAS_HOUSE_WALLYS_UNCLE         0x329
 #define FLAG_HIDE_SS_TIDAL_CORRIDOR_SCOTT                           0x32A
 #define FLAG_HIDE_LITTLEROOT_TOWN_BIRCHS_LAB_POKEBALL_CYNDAQUIL     0x32B
 #define FLAG_HIDE_LITTLEROOT_TOWN_BIRCHS_LAB_POKEBALL_TOTODILE      0x32C
 #define FLAG_HIDE_ROUTE_116_DROPPED_GLASSES_MAN                     0x32D
-#define FLAG_HIDE_RUSBORO_CITY_RIVAL                                0x32E
+#define FLAG_HIDE_RUSTBORO_CITY_RIVAL                               0x32E
 #define FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F_SWABLU_DOLL     0x32F
 #define FLAG_HIDE_SOOTOPOLIS_CITY_WALLACE                           0x330
 #define FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F_POKE_BALL       0x331
@@ -919,7 +919,7 @@
 #define FLAG_HIDE_ROUTE_111_DESERT_FOSSIL                           0x36C
 #define FLAG_HIDE_MT_CHIMNEY_TRAINERS                               0x36D
 #define FLAG_HIDE_RUSTURF_TUNNEL_AQUA_GRUNT                         0x36E
-#define FLAG_HIDE_RUSTURF_TUNNEL_OLD_MAN                            0x36F
+#define FLAG_HIDE_RUSTURF_TUNNEL_BRINEY                             0x36F
 #define FLAG_HIDE_RUSTURF_TUNNEL_PEEKO                              0x370
 #define FLAG_HIDE_BRINEYS_HOUSE_PEEKO                               0x371
 #define FLAG_HIDE_SLATEPORT_CITY_TEAM_AQUA                          0x372
@@ -969,8 +969,8 @@
 #define FLAG_HIDE_MT_CHIMNEY_TEAM_AQUA                              0x39E
 #define FLAG_HIDE_MT_CHIMNEY_TEAM_MAGMA                             0x39F
 #define FLAG_HIDE_FALLARBOR_HOUSE_PROF_COZMO                        0x3A0
-#define FLAG_HIDE_LAVARIDGE_TOWN_RIVAL_1                            0x3A1
-#define FLAG_HIDE_LAVARIDGE_TOWN_RIVAL_2                            0x3A2
+#define FLAG_HIDE_LAVARIDGE_TOWN_RIVAL                              0x3A1
+#define FLAG_HIDE_LAVARIDGE_TOWN_RIVAL_ON_BIKE                      0x3A2
 #define FLAG_HIDE_RUSTURF_TUNNEL_ROCK_1                             0x3A3
 #define FLAG_HIDE_RUSTURF_TUNNEL_ROCK_2                             0x3A4
 #define FLAG_HIDE_FORTREE_CITY_HOUSE_4_WINGULL                      0x3A5
@@ -1023,8 +1023,8 @@
 #define FLAG_HIDE_UNDERWATER_SEA_FLOOR_CAVERN_STOLEN_SUBMARINE      0x3D4
 #define FLAG_HIDE_ROUTE_120_KECLEON_BRIDGE_VISIBLE                  0x3D5
 #define FLAG_HIDE_ROUTE_120_KECLEON_1                               0x3D6
-#define FLAG_HIDE_RUSTURF_TUNNEL_LOVER_WOMAN                        0x3D7
-#define FLAG_HIDE_VERDANTURF_TOWN_WANDAS_HOUSE_LOVER_WOMAN          0x3D8
+#define FLAG_HIDE_RUSTURF_TUNNEL_WANDA                              0x3D7
+#define FLAG_HIDE_VERDANTURF_TOWN_WANDAS_HOUSE_WANDA                0x3D8
 #define FLAG_HIDE_ROUTE_120_KECLEON_2                               0x3D9
 #define FLAG_HIDE_ROUTE_120_KECLEON_3                               0x3DA
 #define FLAG_HIDE_ROUTE_120_KECLEON_4                               0x3DB
