@@ -9,7 +9,7 @@ LilycoveCity_ContestLobby_EventScript_279CC5:: @ 8279CC5
 	end
 
 LilycoveCity_ContestLobby_EventScript_279CEA:: @ 8279CEA
-	msgbox LilycoveCity_ContestLobby_Text_27AEA8, MSGBOX_DEFAULT
+	msgbox LilycoveCity_ContestLobby_Text_ContestReceptionCounter, MSGBOX_DEFAULT
 	return
 
 LilycoveCity_ContestLobby_EventScript_279CF3:: @ 8279CF3
@@ -1462,7 +1462,7 @@ LilycoveCity_ContestLobby_Text_27AE47: @ 827AE47
 	.string "This is the reception counter for\n"
 	.string "POKéMON CONTESTS.$"
 
-LilycoveCity_ContestLobby_Text_27AEA8: @ 827AEA8
+LilycoveCity_ContestLobby_Text_ContestReceptionCounter: @ 827AEA8
 	.string "Hello!\p"
 	.string "This is the reception counter for\n"
 	.string "POKéMON CONTESTS.$"

@@ -203,7 +203,7 @@ static void sub_80B2634(u8 taskId)
     if (data[0] == 0)
     {
         OpenLinkTimed();
-        sub_800AB98();
+        ResetLinkPlayerCount();
         ResetLinkPlayers();
         data[5] = AddWindow(&gUnknown_08550594);
     }
@@ -678,9 +678,9 @@ static void sub_80B2EE4(u8 taskId)
     }
 }
 
-void sub_80B2FD8(void)
+void TryBerryBlenderLinkup(void)
 {
-    gLinkType = LINKTYPE_0x4411;
+    gLinkType = LINKTYPE_BERRY_BLENDER_SETUP;
     gBattleTypeFlags = 0;
     sub_80B236C(2, 4);
 }

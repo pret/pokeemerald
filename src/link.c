@@ -1399,7 +1399,7 @@ void sub_800AB18(void)
     }
 }
 
-void sub_800AB98(void)
+void ResetLinkPlayerCount(void)
 {
     gSavedLinkPlayerCount = 0;
     gSavedMultiplayerId = 0;

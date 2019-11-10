@@ -180,7 +180,7 @@ SlateportCity_PokemonFanClub_EventScript_28CA4F:: @ 828CA4F
 	release
 	end
 
-LilycoveCity_ContestLobby_EventScript_28CA59:: @ 828CA59
+LilycoveCity_ContestLobby_EventScript_Reporter:: @ 828CA59
 	lock
 	faceplayer
 	goto_if_set FLAG_TEMP_2, LilycoveCity_ContestLobby_EventScript_28CB21
