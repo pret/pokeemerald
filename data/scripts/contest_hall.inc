@@ -154,15 +154,15 @@ LilycoveCity_ContestLobby_EventScript_279F12:: @ 8279F12
 LilycoveCity_ContestLobby_EventScript_279F21:: @ 8279F21
 	msgbox LilycoveCity_ContestLobby_Text_27B5C4, MSGBOX_YESNO
 	switch VAR_RESULT
-	case 0, LilycoveCity_ContestLobby_EventScript_279E13
-	case 1, LilycoveCity_ContestLobby_EventScript_279F87
+	case NO, LilycoveCity_ContestLobby_EventScript_279E13
+	case YES, LilycoveCity_ContestLobby_EventScript_279F87
 	end
 
 LilycoveCity_ContestLobby_EventScript_279F45:: @ 8279F45
 	msgbox LilycoveCity_ContestLobby_Text_27B547, MSGBOX_YESNO
 	switch VAR_RESULT
-	case 0, LilycoveCity_ContestLobby_EventScript_279E13
-	case 1, LilycoveCity_ContestLobby_EventScript_279F87
+	case NO, LilycoveCity_ContestLobby_EventScript_279E13
+	case YES, LilycoveCity_ContestLobby_EventScript_279F87
 	end
 
 LilycoveCity_ContestLobby_EventScript_279F69:: @ 8279F69

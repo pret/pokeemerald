@@ -102,24 +102,24 @@ BattleFrontier_OutsideEast_EventScript_242CE1:: @ 8242CE1
 	msgbox BattleFrontier_OutsideEast_Text_243230, MSGBOX_NPC
 	end
 
-BattleFrontier_OutsideEast_EventScript_242CEA:: @ 8242CEA
+BattleFrontier_OutsideEast_EventScript_Sudowoodo:: @ 8242CEA
 	lock
 	faceplayer
 	waitse
 	playse 269
-	applymovement 14, BattleFrontier_OutsideEast_Movement_242D69
+	applymovement 14, BattleFrontier_OutsideEast_Movement_SudowoodoShake
 	waitmovement 0
 	release
 	end
 
-BattleFrontier_OutsideEast_EventScript_242CFC:: @ 8242CFC
+BattleFrontier_OutsideEast_EventScript_WaterSudowoodo:: @ 8242CFC
 	lock
 	faceplayer
 	special DoWateringBerryTreeAnim
 	waitstate
 	waitse
-	playse 269
-	applymovement 14, BattleFrontier_OutsideEast_Movement_242D69
+	playse SE_USSOKI
+	applymovement 14, BattleFrontier_OutsideEast_Movement_SudowoodoShake
 	waitmovement 0
 	msgbox gText_Sudowoodo_Attacked, MSGBOX_DEFAULT
 	closemessage
@@ -127,28 +127,28 @@ BattleFrontier_OutsideEast_EventScript_242CFC:: @ 8242CFC
 	playmoncry SPECIES_SUDOWOODO, 2
 	delay 40
 	waitmoncry
-	setvar VAR_LAST_TALKED, 14
+	setvar VAR_LAST_TALKED, 14  @ Sudowoodo object event id
 	setwildbattle SPECIES_SUDOWOODO, 40, ITEM_NONE
 	setflag FLAG_SYS_CTRL_OBJ_DELETE
 	dowildbattle
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
 	specialvar VAR_RESULT, GetBattleOutcome
 	compare VAR_RESULT, B_OUTCOME_WON
-	goto_if_eq BattleFrontier_OutsideEast_EventScript_242D60
+	goto_if_eq BattleFrontier_OutsideEast_EventScript_RemoveSudowoodo
 	compare VAR_RESULT, B_OUTCOME_RAN
-	goto_if_eq BattleFrontier_OutsideEast_EventScript_242D60
+	goto_if_eq BattleFrontier_OutsideEast_EventScript_RemoveSudowoodo
 	compare VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED
-	goto_if_eq BattleFrontier_OutsideEast_EventScript_242D60
+	goto_if_eq BattleFrontier_OutsideEast_EventScript_RemoveSudowoodo
 	setflag FLAG_DEFEATED_SUDOWOODO
 	release
 	end
 
-BattleFrontier_OutsideEast_EventScript_242D60:: @ 8242D60
+BattleFrontier_OutsideEast_EventScript_RemoveSudowoodo:: @ 8242D60
 	setflag FLAG_DEFEATED_SUDOWOODO
 	goto Common_EventScript_RemoveStaticPokemon
 	end
 
-BattleFrontier_OutsideEast_Movement_242D69: @ 8242D69
+BattleFrontier_OutsideEast_Movement_SudowoodoShake: @ 8242D69
 	face_right
 	delay_8
 	face_down

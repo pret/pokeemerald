@@ -24,7 +24,7 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route114_FossilManiacsTunnel_EventScript_22AF87",
+      "script": "Route114_FossilManiacsTunnel_EventScript_FossilManiac",
       "flag": "0"
     }
   ],
@@ -59,7 +59,7 @@
       "elevation": 3,
       "var": "VAR_FOSSIL_MANIAC_STATE",
       "var_value": "1",
-      "script": "Route114_FossilManiacsTunnel_EventScript_22AF66"
+      "script": "Route114_FossilManiacsTunnel_EventScript_ManiacMentionCaveIn"
     },
     {
       "type": "trigger",
@@ -68,7 +68,7 @@
       "elevation": 3,
       "var": "VAR_FOSSIL_MANIAC_STATE",
       "var_value": "1",
-      "script": "Route114_FossilManiacsTunnel_EventScript_22AF66"
+      "script": "Route114_FossilManiacsTunnel_EventScript_ManiacMentionCaveIn"
     }
   ],
   "bg_events": []

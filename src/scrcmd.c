@@ -39,7 +39,6 @@
 #include "script_menu.h"
 #include "script_movement.h"
 #include "script_pokemon_80F8.h"
-#include "script_pokemon_81B9.h"
 #include "shop.h"
 #include "slot_machine.h"
 #include "sound.h"
@@ -68,7 +67,7 @@ extern const SpecialFunc gSpecials[];
 extern const u8 *gStdScripts[];
 extern const u8 *gStdScripts_End[];
 
-void sub_809BDB4(void);
+static void CloseBrailleWindow(void);
 
 // This is defined in here so the optimizer can't see its value when compiling
 // script.c.
@@ -1528,9 +1527,9 @@ bool8 ScrCmd_braillemessage(struct ScriptContext *ctx)
     return FALSE;
 }
 
-bool8 ScrCmd_cmdDA(struct ScriptContext *ctx)
+bool8 ScrCmd_closebraillemessage(struct ScriptContext *ctx)
 {
-    sub_809BDB4();
+    CloseBrailleWindow();
     return FALSE;
 }
 
@@ -1938,7 +1937,7 @@ bool8 ScrCmd_getpricereduction(struct ScriptContext *ctx)
 
 bool8 ScrCmd_choosecontestmon(struct ScriptContext *ctx)
 {
-    sub_81B9404();
+    ChooseContestMon();
     ScriptContext1_Stop();
     return TRUE;
 }
@@ -2257,7 +2256,7 @@ bool8 ScrCmd_setmonmetlocation(struct ScriptContext *ctx)
     return FALSE;
 }
 
-void sub_809BDB4(void)
+static void CloseBrailleWindow(void)
 {
     ClearStdWindowAndFrame(gBrailleWindowId, 1);
     RemoveWindow(gBrailleWindowId);
@@ -2281,7 +2280,7 @@ bool8 ScrCmd_buffertrainername(struct ScriptContext *ctx)
     return FALSE;
 }
 
-void sub_809BE48(u16 npcId)
+void SetMovingNpcId(u16 npcId)
 {
     sMovingNpcId = npcId;
 }

@@ -24,7 +24,7 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "FarawayIsland_Entrance_EventScript_267CA2",
+      "script": "FarawayIsland_Entrance_EventScript_Sailor",
       "flag": "0"
     },
     {
@@ -65,7 +65,7 @@
       "elevation": 3,
       "var": "0",
       "var_value": "0",
-      "script": "FarawayIsland_Entrance_EventScript_267C98"
+      "script": "FarawayIsland_Entrance_EventScript_SetCloudsWeather"
     },
     {
       "type": "trigger",
@@ -74,7 +74,7 @@
       "elevation": 3,
       "var": "0",
       "var_value": "0",
-      "script": "FarawayIsland_Entrance_EventScript_267C9D"
+      "script": "FarawayIsland_Entrance_EventScript_ClearWeather"
     },
     {
       "type": "trigger",
@@ -83,7 +83,7 @@
       "elevation": 3,
       "var": "0",
       "var_value": "0",
-      "script": "FarawayIsland_Entrance_EventScript_267C98"
+      "script": "FarawayIsland_Entrance_EventScript_SetCloudsWeather"
     }
   ],
   "bg_events": [
@@ -93,7 +93,7 @@
       "y": 32,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
-      "script": "FarawayIsland_Entrance_EventScript_267CF1"
+      "script": "FarawayIsland_Entrance_EventScript_Sign"
     }
   ]
 }

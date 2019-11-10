@@ -24,7 +24,7 @@
       "movement_range_y": 1,
       "trainer_type": "1",
       "trainer_sight_or_berry_tree_id": "3",
-      "script": "SeafloorCavern_Room4_EventScript_234C9C",
+      "script": "SeafloorCavern_Room4_EventScript_Grunt3",
       "flag": "FLAG_HIDE_SEAFLOOR_CAVERN_AQUA_GRUNTS"
     },
     {
@@ -37,7 +37,7 @@
       "movement_range_y": 1,
       "trainer_type": "1",
       "trainer_sight_or_berry_tree_id": "3",
-      "script": "SeafloorCavern_Room4_EventScript_234CB3",
+      "script": "SeafloorCavern_Room4_EventScript_Grunt4",
       "flag": "FLAG_HIDE_SEAFLOOR_CAVERN_AQUA_GRUNTS"
     }
   ],

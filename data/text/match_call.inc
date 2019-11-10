@@ -2306,7 +2306,7 @@ gText_Wallace_Pokenav_2B3790:: @ 82B3790
 	.string "But what is a rare stone exactly?\n"
 	.string "All I can think of is a METEORITE…$"
 
-MossdeepCity_SpaceCenter_2F_Text_2B38C1: @ 82B38C1
+MossdeepCity_SpaceCenter_2F_Text_MayRayquazaCall: @ 82B38C1
 	.string "… … … … … …\n"
 	.string "… … … … … Beep!\p"
 	.string "MAY: Hi, {PLAYER}{KUN}!\p"
@@ -2321,7 +2321,7 @@ MossdeepCity_SpaceCenter_2F_Text_2B38C1: @ 82B38C1
 	.string "… … … … … …\n"
 	.string "… … … … … Click!$"
 
-MossdeepCity_SpaceCenter_2F_Text_2B39C6: @ 82B39C6
+MossdeepCity_SpaceCenter_2F_Text_BrendanRayquazaCall: @ 82B39C6
 	.string "… … … … … …\n"
 	.string "… … … … … Beep!\p"
 	.string "BRENDAN: Hey, {PLAYER}!\n"
@@ -2831,7 +2831,7 @@ gText_Steven_Pokenav_2B5ED9:: @ 82B5ED9
 	.string "I hope we can meet again\n"
 	.string "somewhere!$"
 
-Route101_Text_2B5F52: @ 82B5F52
+MatchCall_Text_BirchRegisterCall: @ 82B5F52
 	.string "PROF. BIRCH: Oh, {PLAYER}{KUN}!\n"
 	.string "I've already heard about you!\p"
 	.string "It seems your POKéNAV's been\n"
@@ -2842,10 +2842,11 @@ Route101_Text_2B5F52: @ 82B5F52
 	.string "out in the field.\p"
 	.string "… … … … … …$"
 
-Route101_Text_2B603A: @ 82B603A
+MatchCall_Text_RegisteredBirch: @ 82B603A
 	.string "Registered PROF. BIRCH\n"
 	.string "in the POKéNAV.$"
 
+MatchCall_Text_UnusedProfBirch:
 	.string "PROF. BIRCH: When one has both\n"
 	.string "the POKéDEX and POKéNAV, studying\l"
 	.string "POKéMON becomes more fun, eh?$"

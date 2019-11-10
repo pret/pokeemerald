@@ -272,7 +272,7 @@ Route116_EventScript_1F2EF8:: @ 81F2EF8
 	end
 
 Route116_EventScript_1F2F03:: @ 81F2F03
-	special sub_80B4808
+	special PlayerFaceTrainerAfterBattle
 	waitmovement 0
 	msgbox Route116_Text_29BE71, MSGBOX_DEFAULT
 	register_matchcall TRAINER_JERRY_1
@@ -325,7 +325,7 @@ Route116_EventScript_1F2FD4:: @ 81F2FD4
 	end
 
 Route116_EventScript_1F2FDF:: @ 81F2FDF
-	special sub_80B4808
+	special PlayerFaceTrainerAfterBattle
 	waitmovement 0
 	msgbox Route116_Text_29C096, MSGBOX_DEFAULT
 	register_matchcall TRAINER_KAREN_1

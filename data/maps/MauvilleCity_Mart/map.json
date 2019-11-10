@@ -24,7 +24,7 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "MauvilleCity_Mart_EventScript_2110E6",
+      "script": "MauvilleCity_Mart_EventScript_Clerk",
       "flag": "0"
     },
     {
@@ -37,7 +37,7 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "MauvilleCity_Mart_EventScript_21111C",
+      "script": "MauvilleCity_Mart_EventScript_ExpertM",
       "flag": "0"
     },
     {
@@ -50,7 +50,7 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "MauvilleCity_Mart_EventScript_211125",
+      "script": "MauvilleCity_Mart_EventScript_Man",
       "flag": "0"
     }
   ],

@@ -1,10 +1,10 @@
 SealedChamber_OuterRoom_MapScripts:: @ 8239106
-	map_script MAP_SCRIPT_ON_RESUME, SealedChamber_OuterRoom_MapScript1_239116
+	map_script MAP_SCRIPT_ON_RESUME, SealedChamber_OuterRoom_OnResume
 	map_script MAP_SCRIPT_ON_TRANSITION, SealedChamber_OuterRoom_OnTransition
-	map_script MAP_SCRIPT_ON_LOAD, SealedChamber_OuterRoom_MapScript1_23912B
+	map_script MAP_SCRIPT_ON_LOAD, SealedChamber_OuterRoom_OnLoad
 	.byte 0
 
-SealedChamber_OuterRoom_MapScript1_239116: @ 8239116
+SealedChamber_OuterRoom_OnResume: @ 8239116
 	setdivewarp MAP_UNDERWATER_SEALED_CHAMBER, 255, 12, 44
 	setescapewarp MAP_UNDERWATER_SEALED_CHAMBER, 255, 12, 44
 	end
@@ -13,11 +13,11 @@ SealedChamber_OuterRoom_OnTransition: @ 8239127
 	setflag FLAG_LANDMARK_SEALED_CHAMBER
 	end
 
-SealedChamber_OuterRoom_MapScript1_23912B: @ 823912B
-	call_if_unset FLAG_SYS_BRAILLE_DIG, SealedChamber_OuterRoom_EventScript_239135
+SealedChamber_OuterRoom_OnLoad: @ 823912B
+	call_if_unset FLAG_SYS_BRAILLE_DIG, SealedChamber_OuterRoom_EventScript_CloseInnerRoomEntrance
 	end
 
-SealedChamber_OuterRoom_EventScript_239135:: @ 8239135
+SealedChamber_OuterRoom_EventScript_CloseInnerRoomEntrance:: @ 8239135
 	setmetatile 9, 1, METATILE_Cave_EntranceCover, 1
 	setmetatile 10, 1, METATILE_Cave_EntranceCover, 1
 	setmetatile 11, 1, METATILE_Cave_EntranceCover, 1
@@ -26,105 +26,105 @@ SealedChamber_OuterRoom_EventScript_239135:: @ 8239135
 	setmetatile 11, 2, METATILE_Cave_SealedChamberBraille_Mid, 1
 	return
 
-SealedChamber_OuterRoom_EventScript_23916C:: @ 823916C
+SealedChamber_OuterRoom_EventScript_BrailleABC:: @ 823916C
 	lockall
-	braillemessage SealedChamber_OuterRoom_Braille_2A6B27
+	braillemessage SealedChamber_OuterRoom_Braille_ABC
 	waitbuttonpress
-	hidebox2
+	closebraillemessage
 	releaseall
 	end
 
-SealedChamber_OuterRoom_EventScript_239176:: @ 8239176
+SealedChamber_OuterRoom_EventScript_BrailleGHI:: @ 8239176
 	lockall
-	braillemessage SealedChamber_OuterRoom_Braille_2A6B31
+	braillemessage SealedChamber_OuterRoom_Braille_GHI
 	waitbuttonpress
-	hidebox2
+	closebraillemessage
 	releaseall
 	end
 
-SealedChamber_OuterRoom_EventScript_239180:: @ 8239180
+SealedChamber_OuterRoom_EventScript_BrailleMNO:: @ 8239180
 	lockall
-	braillemessage SealedChamber_OuterRoom_Braille_2A6B3B
+	braillemessage SealedChamber_OuterRoom_Braille_MNO
 	waitbuttonpress
-	hidebox2
+	closebraillemessage
 	releaseall
 	end
 
-SealedChamber_OuterRoom_EventScript_23918A:: @ 823918A
+SealedChamber_OuterRoom_EventScript_BrailleTUV:: @ 823918A
 	lockall
-	braillemessage SealedChamber_OuterRoom_Braille_2A6B45
+	braillemessage SealedChamber_OuterRoom_Braille_TUV
 	waitbuttonpress
-	hidebox2
+	closebraillemessage
 	releaseall
 	end
 
-SealedChamber_OuterRoom_EventScript_239194:: @ 8239194
+SealedChamber_OuterRoom_EventScript_BrailleDEF:: @ 8239194
 	lockall
-	braillemessage SealedChamber_OuterRoom_Braille_2A6B4F
+	braillemessage SealedChamber_OuterRoom_Braille_DEF
 	waitbuttonpress
-	hidebox2
+	closebraillemessage
 	releaseall
 	end
 
-SealedChamber_OuterRoom_EventScript_23919E:: @ 823919E
+SealedChamber_OuterRoom_EventScript_BrailleJKL:: @ 823919E
 	lockall
-	braillemessage SealedChamber_OuterRoom_Braille_2A6B59
+	braillemessage SealedChamber_OuterRoom_Braille_JKL
 	waitbuttonpress
-	hidebox2
+	closebraillemessage
 	releaseall
 	end
 
-SealedChamber_OuterRoom_EventScript_2391A8:: @ 82391A8
+SealedChamber_OuterRoom_EventScript_BraillePQRS:: @ 82391A8
 	lockall
-	braillemessage SealedChamber_OuterRoom_Braille_2A6B63
+	braillemessage SealedChamber_OuterRoom_Braille_PQRS
 	waitbuttonpress
-	hidebox2
+	closebraillemessage
 	releaseall
 	end
 
-SealedChamber_OuterRoom_EventScript_2391B2:: @ 82391B2
+SealedChamber_OuterRoom_EventScript_BraillePeriod:: @ 82391B2
 	lockall
-	braillemessage SealedChamber_OuterRoom_Braille_2A6B6E
+	braillemessage SealedChamber_OuterRoom_Braille_Period
 	waitbuttonpress
-	hidebox2
+	closebraillemessage
 	releaseall
 	end
 
-SealedChamber_OuterRoom_EventScript_2391BC:: @ 82391BC
+SealedChamber_OuterRoom_EventScript_BrailleWXYZ:: @ 82391BC
 	lockall
-	braillemessage SealedChamber_OuterRoom_Braille_2A6B76
+	braillemessage SealedChamber_OuterRoom_Braille_WXYZ
 	waitbuttonpress
-	hidebox2
+	closebraillemessage
 	releaseall
 	end
 
-SealedChamber_OuterRoom_EventScript_2391C6:: @ 82391C6
+SealedChamber_OuterRoom_EventScript_BrailleComma:: @ 82391C6
 	lockall
-	braillemessage SealedChamber_OuterRoom_Braille_2A6B81
+	braillemessage SealedChamber_OuterRoom_Braille_Comma
 	waitbuttonpress
-	hidebox2
+	closebraillemessage
 	releaseall
 	end
 
-SealedChamber_OuterRoom_EventScript_2391D0:: @ 82391D0
+SealedChamber_OuterRoom_EventScript_InnerRoomEntranceWall:: @ 82391D0
 	lockall
-	goto_if_set FLAG_SYS_BRAILLE_DIG, SealedChamber_OuterRoom_EventScript_2391E3
-	braillemessage SealedChamber_OuterRoom_Braille_2A6B89
+	goto_if_set FLAG_SYS_BRAILLE_DIG, SealedChamber_OuterRoom_EventScript_HoleInWall
+	braillemessage SealedChamber_OuterRoom_Braille_DigHere
 	waitbuttonpress
-	hidebox2
+	closebraillemessage
 	releaseall
 	end
 
-SealedChamber_OuterRoom_EventScript_2391E3:: @ 82391E3
+SealedChamber_OuterRoom_EventScript_HoleInWall:: @ 82391E3
 	msgbox gText_BigHoleInTheWall, MSGBOX_DEFAULT
 	releaseall
 	end
 
-SealedChamber_OuterRoom_EventScript_2391ED:: @ 82391ED
+SealedChamber_OuterRoom_EventScript_BrailleDigHere:: @ 82391ED
 	lockall
-	braillemessage SealedChamber_OuterRoom_Braille_2A6B89
+	braillemessage SealedChamber_OuterRoom_Braille_DigHere
 	waitbuttonpress
-	hidebox2
+	closebraillemessage
 	releaseall
 	end
 

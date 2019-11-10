@@ -52,10 +52,10 @@ static const u16 sSaveLocationPokeCenterList[] =
     MAP_EVER_GRANDE_CITY_POKEMON_LEAGUE_2F,
     MAP_BATTLE_FRONTIER_POKEMON_CENTER_1F,
     MAP_BATTLE_FRONTIER_POKEMON_CENTER_2F,
-    MAP_SINGLE_BATTLE_COLOSSEUM,
+    MAP_BATTLE_COLOSSEUM_2P,
     MAP_TRADE_CENTER,
     MAP_RECORD_CORNER,
-    MAP_DOUBLE_BATTLE_COLOSSEUM,
+    MAP_BATTLE_COLOSSEUM_4P,
     0xFFFF,
 };
 
@@ -118,6 +118,8 @@ void TrySetMapSaveWarpStatus(void)
     sub_81AFD5C();
 }
 
+// Called when receiving the Pokedex
+// Only place field_A8 is written (aside from clearing on new game), never read
 void sub_81AFDA0(void)
 {
     gSaveBlock2Ptr->field_A8 |= 0x8000;
@@ -129,7 +131,7 @@ void sub_81AFDA0(void)
     gSaveBlock2Ptr->field_A8 |= 0x8;
 }
 
-void sub_81AFDD0(void)
+void SetChampionSaveWarp(void)
 {
-    gSaveBlock2Ptr->specialSaveWarpFlags |= 0x80;
+    gSaveBlock2Ptr->specialSaveWarpFlags |= CHAMPION_SAVEWARP;
 }

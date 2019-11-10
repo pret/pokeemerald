@@ -5,7 +5,7 @@ Route127_MapScripts:: @ 81F69D9
 	.byte 0
 
 Route127_OnTransition: @ 81F69E9
-	call_if_set FLAG_SYS_WEATHER_CTRL, Common_EventScript_SetWeather15
+	call_if_set FLAG_SYS_WEATHER_CTRL, Common_EventScript_SetAlternatingWeather
 	compare VAR_SHOULD_END_UNUSUAL_WEATHER, 1
 	call_if_eq UnusualWeather_EventScript_HideMapNamePopup
 	compare VAR_UNUSUAL_WEATHER_LOCATION, UNUSUAL_WEATHER_ROUTE_127_NORTH
@@ -70,7 +70,7 @@ Route127_EventScript_1F6AD6:: @ 81F6AD6
 	end
 
 Route127_EventScript_1F6B02:: @ 81F6B02
-	special sub_80B4808
+	special PlayerFaceTrainerAfterBattle
 	waitmovement 0
 	msgbox Route127_Text_2A26EE, MSGBOX_DEFAULT
 	register_matchcall TRAINER_KOJI_1

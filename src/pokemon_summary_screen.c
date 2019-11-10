@@ -42,6 +42,7 @@
 #include "window.h"
 #include "constants/items.h"
 #include "constants/moves.h"
+#include "constants/party_menu.h"
 #include "constants/region_map_sections.h"
 #include "constants/rgb.h"
 #include "constants/songs.h"
@@ -162,7 +163,7 @@ static EWRAM_DATA struct PokemonSummaryScreenData
     u8 unk_filler4[6];
 } *sMonSummaryScreen = NULL;
 EWRAM_DATA u8 gLastViewedMonIndex = 0;
-static EWRAM_DATA u8 sUnknown_0203CF21 = 0;
+static EWRAM_DATA u8 sMoveSlotToReplace = 0;
 ALIGNED(4) static EWRAM_DATA u8 sUnknownTaskId = 0;
 
 struct UnkStruct_61CC04
@@ -1491,11 +1492,11 @@ static void HandleInput(u8 taskId)
         {
             ChangeSummaryPokemon(taskId, 1);
         }
-        else if ((gMain.newKeys & DPAD_LEFT) || GetLRKeysState() == 1)
+        else if ((gMain.newKeys & DPAD_LEFT) || GetLRKeysPressed() == MENU_L_PRESSED)
         {
             ChangePage(taskId, -1);
         }
-        else if ((gMain.newKeys & DPAD_RIGHT) || GetLRKeysState() == 2)
+        else if ((gMain.newKeys & DPAD_RIGHT) || GetLRKeysPressed() == MENU_R_PRESSED)
         {
             ChangePage(taskId, 1);
         }
@@ -2159,11 +2160,11 @@ static void HandleReplaceMoveInput(u8 taskId)
                 data[0] = 4;
                 sub_81C1070(data, 1, &sMonSummaryScreen->firstMoveIndex);
             }
-            else if (gMain.newKeys & DPAD_LEFT || GetLRKeysState() == 1)
+            else if (gMain.newKeys & DPAD_LEFT || GetLRKeysPressed() == MENU_L_PRESSED)
             {
                 ChangePage(taskId, -1);
             }
-            else if (gMain.newKeys & DPAD_RIGHT || GetLRKeysState() == 2)
+            else if (gMain.newKeys & DPAD_RIGHT || GetLRKeysPressed() == MENU_R_PRESSED)
             {
                 ChangePage(taskId, 1);
             }
@@ -2173,8 +2174,8 @@ static void HandleReplaceMoveInput(u8 taskId)
                 {
                     StopPokemonAnimations();
                     PlaySE(SE_SELECT);
-                    sUnknown_0203CF21 = sMonSummaryScreen->firstMoveIndex;
-                    gSpecialVar_0x8005 = sUnknown_0203CF21;
+                    sMoveSlotToReplace = sMonSummaryScreen->firstMoveIndex;
+                    gSpecialVar_0x8005 = sMoveSlotToReplace;
                     BeginCloseSummaryScreen(taskId);
                 }
                 else
@@ -2188,8 +2189,8 @@ static void HandleReplaceMoveInput(u8 taskId)
                 u32 var1;
                 StopPokemonAnimations();
                 PlaySE(SE_SELECT);
-                sUnknown_0203CF21 = 4;
-                gSpecialVar_0x8005 = 4;
+                sMoveSlotToReplace = MAX_MON_MOVES;
+                gSpecialVar_0x8005 = MAX_MON_MOVES;
                 BeginCloseSummaryScreen(taskId);
             }
         }
@@ -2238,7 +2239,7 @@ static void HandleHMMovesCantBeForgottenInput(u8 taskId)
             data[1] = 0;
             gTasks[taskId].func = HandleReplaceMoveInput;
         }
-        else if (gMain.newKeys & DPAD_LEFT || GetLRKeysState() == 1)
+        else if (gMain.newKeys & DPAD_LEFT || GetLRKeysPressed() == MENU_L_PRESSED)
         {
             if (sMonSummaryScreen->currPageIndex != 2)
             {
@@ -2252,7 +2253,7 @@ static void HandleHMMovesCantBeForgottenInput(u8 taskId)
                 sub_81C1EFC(9, -2, move);
             }
         }
-        else if (gMain.newKeys & DPAD_RIGHT || GetLRKeysState() == 2)
+        else if (gMain.newKeys & DPAD_RIGHT || GetLRKeysPressed() == MENU_R_PRESSED)
         {
             if (sMonSummaryScreen->currPageIndex != 3)
             {
@@ -2281,9 +2282,9 @@ static void HandleHMMovesCantBeForgottenInput(u8 taskId)
     }
 }
 
-u8 sub_81C1B94(void)
+u8 GetMoveSlotToReplace(void)
 {
-    return sUnknown_0203CF21;
+    return sMoveSlotToReplace;
 }
 
 static void DrawPagination(void) // Updates the pagination dots at the top of the summary screen
@@ -2574,9 +2575,9 @@ static void DrawPokerusCuredSymbol(struct Pokemon *mon) // This checks if the mo
 static void SetDexNumberColor(bool8 isMonShiny)
 {
     if (!isMonShiny)
-        sub_8199C30(3, 1, 4, 8, 8, 0);
+        SetBgTilemapPalette(3, 1, 4, 8, 8, 0);
     else
-        sub_8199C30(3, 1, 4, 8, 8, 5);
+        SetBgTilemapPalette(3, 1, 4, 8, 8, 5);
     schedule_bg_copy_tilemap_to_vram(3);
 }
 

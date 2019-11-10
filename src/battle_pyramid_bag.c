@@ -346,12 +346,12 @@ void InitBattlePyramidBagCursorPosition(void)
 
 void CB2_PyramidBagMenuFromStartMenu(void)
 {
-    sub_81C4F98(0, CB2_ReturnToFieldWithOpenMenu);
+    GoToBattlePyramidBagMenu(0, CB2_ReturnToFieldWithOpenMenu);
 }
 
 static void sub_81C4F10(void)
 {
-    sub_81C4F98(1, SetCB2ToReshowScreenAfterMenu2);
+    GoToBattlePyramidBagMenu(1, CB2_SetUpReshowBattleScreenAfterMenu2);
 }
 
 void sub_81C4F24(void)
@@ -366,18 +366,18 @@ static void sub_81C4F44(u8 taskId)
     if (!gPaletteFade.active)
     {
         CleanupOverworldWindowsAndTilemaps();
-        gFieldCallback2 = hm_add_c3_without_phase_2;
-        sub_81C4F98(3, CB2_ReturnToField);
+        gFieldCallback2 = CB2_FadeFromPartyMenu;
+        GoToBattlePyramidBagMenu(3, CB2_ReturnToField);
         DestroyTask(taskId);
     }
 }
 
-void sub_81C4F84(void)
+void CB2_ReturnToPyramidBagMenu(void)
 {
-    sub_81C4F98(4, gPyramidBagCursorData.callback);
+    GoToBattlePyramidBagMenu(4, gPyramidBagCursorData.callback);
 }
 
-void sub_81C4F98(u8 a0, void (*callback)(void))
+void GoToBattlePyramidBagMenu(u8 a0, void (*callback)(void))
 {
     gPyramidBagResources = AllocZeroed(sizeof(*gPyramidBagResources));
 
@@ -981,7 +981,7 @@ static void HandleMenuActionInput(u8 taskId)
                 sub_8199134(0, 1);
             }
         }
-        else if (gMain.newKeys & DPAD_LEFT || GetLRKeysState() == 1)
+        else if (gMain.newKeys & DPAD_LEFT || GetLRKeysPressed() == MENU_L_PRESSED)
         {
             if (id & 1 && IsValidMenuAction(id - 1))
             {
@@ -989,7 +989,7 @@ static void HandleMenuActionInput(u8 taskId)
                 sub_8199134(-1, 0);
             }
         }
-        else if (gMain.newKeys & DPAD_RIGHT || GetLRKeysState() == 2)
+        else if (gMain.newKeys & DPAD_RIGHT || GetLRKeysPressed() == MENU_R_PRESSED)
         {
             if (!(id & 1) && IsValidMenuAction(id + 1))
             {
@@ -1202,7 +1202,7 @@ static void BagAction_Give(u8 taskId)
     }
     else if (!ItemId_GetImportance(gSpecialVar_ItemId))
     {
-        gPyramidBagResources->callback2 = sub_81B7F60;
+        gPyramidBagResources->callback2 = CB2_ChooseMonToGiveItem;
         sub_81C5B14(taskId);
     }
     else
@@ -1350,7 +1350,7 @@ static void sub_81C6A14(u8 taskId)
     SetTaskToMainPyramidBagInputHandler(taskId);
 }
 
-void sub_81C6A94(void)
+void TryStoreHeldItemsInPyramidBag(void)
 {
     u8 i;
     struct Pokemon *party = gPlayerParty;
@@ -1363,8 +1363,9 @@ void sub_81C6A94(void)
     for (i = 0; i < 3; i++)
     {
         heldItem = GetMonData(&party[i], MON_DATA_HELD_ITEM);
-        if (heldItem != 0 && !AddBagItem(heldItem, 1))
+        if (heldItem != ITEM_NONE && !AddBagItem(heldItem, 1))
         {
+            // Cant store party held items in pyramid bag because bag is full
             memcpy(gSaveBlock2Ptr->frontier.pyramidBag.itemId[gSaveBlock2Ptr->frontier.lvlMode], newItems, PYRAMID_BAG_ITEMS_COUNT * sizeof(u16));
             memcpy(gSaveBlock2Ptr->frontier.pyramidBag.quantity[gSaveBlock2Ptr->frontier.lvlMode], newQuantities, PYRAMID_BAG_ITEMS_COUNT * sizeof(u8));
             Free(newItems);
@@ -1374,7 +1375,7 @@ void sub_81C6A94(void)
         }
     }
 
-    heldItem = 0;
+    heldItem = ITEM_NONE;
     for (i = 0; i < 3; i++)
     {
         SetMonData(&party[i], MON_DATA_HELD_ITEM, &heldItem);

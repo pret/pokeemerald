@@ -43,9 +43,9 @@
 #include "constants/vars.h"
 #include "event_obj_lock.h"
 
-extern u8 BerryTree_EventScript_274482[];
-extern u8 BerryTree_EventScript_2744C0[];
-extern u8 BattleFrontier_OutsideEast_EventScript_242CFC[];
+extern u8 BerryTree_EventScript_ItemUsePlantBerry[];
+extern u8 BerryTree_EventScript_ItemUseWailmerPail[];
+extern u8 BattleFrontier_OutsideEast_EventScript_WaterSudowoodo[];
 
 void SetUpItemUseCallback(u8 taskId);
 void MapPostLoadHook_UseItem(void);
@@ -61,13 +61,13 @@ void sub_80FDA94(u8 taskId);
 void sub_80FDADC(u8 taskId);
 void sub_80FD7C8(u8 taskId);
 void sub_80FDC00(u8 taskId);
-void sub_80FDD74(u8 taskId);
-void sub_80FDE08(u8 taskId);
-void sub_80FDE7C(u8 taskId);
-void sub_80FDF90(u8 taskId);
-void task08_0809AD8C(u8 taskId);
-void sub_80FE024(u8 taskId);
-void sub_80FE03C(u8 taskId);
+void ItemUseOnFieldCB_Berry(u8 taskId);
+void ItemUseOnFieldCB_WailmerPailBerry(u8 taskId);
+void ItemUseOnFieldCB_WailmerPailSudowoodo(u8 taskId);
+static void BootUpSoundTMHM(u8 taskId);
+static void Task_ShowTMHMContainedMessage(u8 taskId);
+static void UseTMHMYesNo(u8 taskId);
+static void UseTMHM(u8 taskId);
 void sub_80FE124(u8 taskId);
 void sub_80FE164(u8 taskId);
 
@@ -81,7 +81,7 @@ u8 sub_80FD9B0(s16 a, s16 b);
 void sub_80FDA24(u8 a);
 void sub_80FD8E0(u8 taskId, s16 x, s16 y);
 void sub_80FDBEC(void);
-bool8 sub_80FDE2C(void);
+bool8 TryToWaterSudowoodo(void);
 void ItemUseOutOfBattle_CannotUse(u8 taskId);
 
 // EWRAM variables
@@ -91,16 +91,16 @@ EWRAM_DATA static void(*gUnknown_0203A0F4)(u8 taskId) = NULL;
 
 static const MainCallback gUnknown_085920D8[] =
 {
-    sub_81B617C,
+    CB2_ShowPartyMenuForItemUse,
     CB2_ReturnToField,
     NULL,
 };
 
 static const u8 gUnknown_085920E4[] = {DIR_NORTH, DIR_EAST, DIR_SOUTH, DIR_WEST};
 
-static const struct YesNoFuncTable gUnknown_085920E8 =
+static const struct YesNoFuncTable sUseTMHMYesNoFuncTable =
 {
-    .yesFunc = sub_80FE03C,
+    .yesFunc = UseTMHM,
     .noFunc = BagMenu_InitListsMenu,
 };
 
@@ -350,7 +350,7 @@ bool8 ItemfinderCheckForHiddenItems(const struct MapEvents *events, u8 taskId)
     gTasks[taskId].data[2] = FALSE;
     for (i = 0; i < events->bgEventCount; i++)
     {
-        if (events->bgEvents[i].kind == BG_EVENT_HIDDEN_ITEM && !FlagGet(events->bgEvents[i].bgUnion.hiddenItem.hiddenItemId + 0x1F4))
+        if (events->bgEvents[i].kind == BG_EVENT_HIDDEN_ITEM && !FlagGet(events->bgEvents[i].bgUnion.hiddenItem.hiddenItemId + FLAG_HIDDEN_ITEMS_START))
         {
             distanceX = (u16)events->bgEvents[i].x + 7;
             newDistanceX = distanceX - x;
@@ -379,7 +379,7 @@ bool8 sub_80FD6D4(const struct MapEvents *events, s16 x, s16 y)
     {
         if (bgEvent[i].kind == BG_EVENT_HIDDEN_ITEM && x == (u16)bgEvent[i].x && y == (u16)bgEvent[i].y) // hidden item and coordinates matches x and y passed?
         {
-            if (!FlagGet(bgEvent[i].bgUnion.hiddenItem.hiddenItemId + 0x1F4))
+            if (!FlagGet(bgEvent[i].bgUnion.hiddenItem.hiddenItemId + FLAG_HIDDEN_ITEMS_START))
                 return TRUE;
             else
                 return FALSE;
@@ -651,11 +651,11 @@ void ItemUseOutOfBattle_PowderJar(u8 taskId)
     }
 }
 
-void sub_80FDD10(u8 taskId)
+void ItemUseOutOfBattle_Berry(u8 taskId)
 {
     if (IsPlayerFacingEmptyBerryTreePatch() == TRUE)
     {
-        gUnknown_0203A0F4 = sub_80FDD74;
+        gUnknown_0203A0F4 = ItemUseOnFieldCB_Berry;
         gFieldCallback = MapPostLoadHook_UseItem;
         gBagMenu->mainCallback2 = CB2_ReturnToField;
         unknown_ItemMenu_Confirm(taskId);
@@ -666,24 +666,24 @@ void sub_80FDD10(u8 taskId)
     }
 }
 
-void sub_80FDD74(u8 taskId)
+void ItemUseOnFieldCB_Berry(u8 taskId)
 {
     RemoveBagItem(gSpecialVar_ItemId, 1);
     ScriptContext2_Enable();
-    ScriptContext1_SetupScript(BerryTree_EventScript_274482);
+    ScriptContext1_SetupScript(BerryTree_EventScript_ItemUsePlantBerry);
     DestroyTask(taskId);
 }
 
 void ItemUseOutOfBattle_WailmerPail(u8 taskId)
 {
-    if (sub_80FDE2C() == TRUE)
+    if (TryToWaterSudowoodo() == TRUE)
     {
-        gUnknown_0203A0F4 = sub_80FDE7C;
+        gUnknown_0203A0F4 = ItemUseOnFieldCB_WailmerPailSudowoodo;
         SetUpItemUseOnFieldCallback(taskId);
     }
     else if (TryToWaterBerryTree() == TRUE)
     {
-        gUnknown_0203A0F4 = sub_80FDE08;
+        gUnknown_0203A0F4 = ItemUseOnFieldCB_WailmerPailBerry;
         SetUpItemUseOnFieldCallback(taskId);
     }
     else
@@ -692,14 +692,14 @@ void ItemUseOutOfBattle_WailmerPail(u8 taskId)
     }
 }
 
-void sub_80FDE08(u8 taskId)
+void ItemUseOnFieldCB_WailmerPailBerry(u8 taskId)
 {
     ScriptContext2_Enable();
-    ScriptContext1_SetupScript(BerryTree_EventScript_2744C0);
+    ScriptContext1_SetupScript(BerryTree_EventScript_ItemUseWailmerPail);
     DestroyTask(taskId);
 }
 
-bool8 sub_80FDE2C(void)
+bool8 TryToWaterSudowoodo(void)
 {
     u16 x, y;
     u8 z;
@@ -707,87 +707,87 @@ bool8 sub_80FDE2C(void)
     GetXYCoordsOneStepInFrontOfPlayer(&x, &y);
     z = PlayerGetZCoord();
     objId = GetEventObjectIdByXYZ(x, y, z);
-    if (objId == 16 || gEventObjects[objId].graphicsId != 0xE4)
+    if (objId == EVENT_OBJECTS_COUNT || gEventObjects[objId].graphicsId != EVENT_OBJ_GFX_SUDOWOODO)
         return FALSE;
     else
         return TRUE;
 }
 
-void sub_80FDE7C(u8 taskId)
+void ItemUseOnFieldCB_WailmerPailSudowoodo(u8 taskId)
 {
     ScriptContext2_Enable();
-    ScriptContext1_SetupScript(BattleFrontier_OutsideEast_EventScript_242CFC);
+    ScriptContext1_SetupScript(BattleFrontier_OutsideEast_EventScript_WaterSudowoodo);
     DestroyTask(taskId);
 }
 
 void ItemUseOutOfBattle_Medicine(u8 taskId)
 {
-    gUnknown_03006328 = ItemUseCB_Medicine;
+    gItemUseCB = ItemUseCB_Medicine;
     SetUpItemUseCallback(taskId);
 }
 
 void ItemUseOutOfBattle_ReduceEV(u8 taskId)
 {
-    gUnknown_03006328 = sub_81B67C8;
+    gItemUseCB = ItemUseCB_ReduceEV;
     SetUpItemUseCallback(taskId);
 }
 
 void ItemUseOutOfBattle_SacredAsh(u8 taskId)
 {
-    gUnknown_03006328 = sub_81B79E8;
+    gItemUseCB = ItemUseCB_SacredAsh;
     SetUpItemUseCallback(taskId);
 }
 
 void ItemUseOutOfBattle_PPRecovery(u8 taskId)
 {
-    gUnknown_03006328 = dp05_ether;
+    gItemUseCB = ItemUseCB_PPRecovery;
     SetUpItemUseCallback(taskId);
 }
 
 void ItemUseOutOfBattle_PPUp(u8 taskId)
 {
-    gUnknown_03006328 = dp05_pp_up;
+    gItemUseCB = ItemUseCB_PPUp;
     SetUpItemUseCallback(taskId);
 }
 
 void ItemUseOutOfBattle_RareCandy(u8 taskId)
 {
-    gUnknown_03006328 = dp05_rare_candy;
+    gItemUseCB = ItemUseCB_RareCandy;
     SetUpItemUseCallback(taskId);
 }
 
 void ItemUseOutOfBattle_TMHM(u8 taskId)
 {
     if (gSpecialVar_ItemId >= ITEM_HM01_CUT)
-        DisplayItemMessage(taskId, 1, gText_BootedUpHM, sub_80FDF90); // HM
+        DisplayItemMessage(taskId, 1, gText_BootedUpHM, BootUpSoundTMHM); // HM
     else
-        DisplayItemMessage(taskId, 1, gText_BootedUpTM, sub_80FDF90); // TM
+        DisplayItemMessage(taskId, 1, gText_BootedUpTM, BootUpSoundTMHM); // TM
 }
 
-void sub_80FDF90(u8 taskId)
+static void BootUpSoundTMHM(u8 taskId)
 {
     PlaySE(SE_PC_LOGIN);
-    gTasks[taskId].func = task08_0809AD8C;
+    gTasks[taskId].func = Task_ShowTMHMContainedMessage;
 }
 
-void task08_0809AD8C(u8 taskId)
+static void Task_ShowTMHMContainedMessage(u8 taskId)
 {
     if (gMain.newKeys & (A_BUTTON | B_BUTTON))
     {
         StringCopy(gStringVar1, gMoveNames[ItemIdToBattleMoveId(gSpecialVar_ItemId)]);
         StringExpandPlaceholders(gStringVar4, gText_TMHMContainedVar1);
-        DisplayItemMessage(taskId, 1, gStringVar4, sub_80FE024);
+        DisplayItemMessage(taskId, 1, gStringVar4, UseTMHMYesNo);
     }
 }
 
-void sub_80FE024(u8 taskId)
+static void UseTMHMYesNo(u8 taskId)
 {
-    BagMenu_YesNo(taskId, 6, &gUnknown_085920E8);
+    BagMenu_YesNo(taskId, 6, &sUseTMHMYesNoFuncTable);
 }
 
-void sub_80FE03C(u8 taskId)
+static void UseTMHM(u8 taskId)
 {
-    gUnknown_03006328 = sub_81B6DC4;
+    gItemUseCB = ItemUseCB_TMHM;
     SetUpItemUseCallback(taskId);
 }
 
@@ -912,7 +912,7 @@ void ItemUseOutOfBattle_EscapeRope(u8 taskId)
 
 void ItemUseOutOfBattle_EvolutionStone(u8 taskId)
 {
-    gUnknown_03006328 = sub_81B7C74;
+    gItemUseCB = ItemUseCB_EvolutionStone;
     SetUpItemUseCallback(taskId);
 }
 
@@ -976,36 +976,37 @@ void ItemUseInBattle_StatIncrease(u8 taskId)
     }
 }
 
-void sub_80FE54C(u8 taskId)
+static void ItemUseInBattle_ShowPartyMenu(u8 taskId)
 {
     if (!InBattlePyramid())
     {
-        gBagMenu->mainCallback2 = sub_81B89F0;
+        gBagMenu->mainCallback2 = ChooseMonForInBattleItem;
         unknown_ItemMenu_Confirm(taskId);
     }
     else
     {
-        gPyramidBagResources->callback2 = sub_81B89F0;
+        gPyramidBagResources->callback2 = ChooseMonForInBattleItem;
         sub_81C5B14(taskId);
     }
 }
 
 void ItemUseInBattle_Medicine(u8 taskId)
 {
-    gUnknown_03006328 = ItemUseCB_Medicine;
-    sub_80FE54C(taskId);
+    gItemUseCB = ItemUseCB_Medicine;
+    ItemUseInBattle_ShowPartyMenu(taskId);
 }
 
-void sub_80FE5AC(u8 taskId)
+// Unused. Sacred Ash cannot be used in battle
+void ItemUseInBattle_SacredAsh(u8 taskId)
 {
-    gUnknown_03006328 = sub_81B79E8;
-    sub_80FE54C(taskId);
+    gItemUseCB = ItemUseCB_SacredAsh;
+    ItemUseInBattle_ShowPartyMenu(taskId);
 }
 
 void ItemUseInBattle_PPRecovery(u8 taskId)
 {
-    gUnknown_03006328 = dp05_ether;
-    sub_80FE54C(taskId);
+    gItemUseCB = ItemUseCB_PPRecovery;
+    ItemUseInBattle_ShowPartyMenu(taskId);
 }
 
 void ItemUseInBattle_Escape(u8 taskId)

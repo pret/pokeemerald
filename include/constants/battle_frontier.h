@@ -4,16 +4,17 @@
 #define FRONTIER_CHALLENGE(facility, mode) ((facility << 8) + mode)
 
 // Battle Frontier facility ids.
-#define FRONTIER_FACILITY_TOWER 0
-#define FRONTIER_FACILITY_DOME 1
-#define FRONTIER_FACILITY_PALACE 2
-#define FRONTIER_FACILITY_ARENA 3
-#define FRONTIER_FACILITY_FACTORY 4
-#define FRONTIER_FACILITY_PIKE 5
-#define FRONTIER_FACILITY_PYRAMID 6
-#define NUM_FRONTIER_FACILITIES 7
+#define FRONTIER_FACILITY_TOWER    0
+#define FRONTIER_FACILITY_DOME     1
+#define FRONTIER_FACILITY_PALACE   2
+#define FRONTIER_FACILITY_ARENA    3
+#define FRONTIER_FACILITY_FACTORY  4
+#define FRONTIER_FACILITY_PIKE     5
+#define FRONTIER_FACILITY_PYRAMID  6
+#define NUM_FRONTIER_FACILITIES    7
 // The multiplayer battle colosseum rooms re-use VAR_FRONTIER_FACILITY.
-#define FRONTIER_FACILITY_DOUBLE_COLOSSEUM 9
+#define FACILITY_UNION_ROOM        8
+#define FACILITY_MULTI_OR_EREADER  9  // Direct Corner multi battles, multi battle with Steven, and e-Reader battles
 
 #define TENT_VERDANTURF 2
 #define TENT_FALLARBOR 3

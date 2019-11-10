@@ -24,7 +24,7 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "BattleFrontier_PokemonCenter_1F_EventScript_267908",
+      "script": "BattleFrontier_PokemonCenter_1F_EventScript_Nurse",
       "flag": "0"
     },
     {
@@ -37,7 +37,7 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "BattleFrontier_PokemonCenter_1F_EventScript_267916",
+      "script": "BattleFrontier_PokemonCenter_1F_EventScript_SchoolKid",
       "flag": "0"
     },
     {
@@ -50,7 +50,7 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "BattleFrontier_PokemonCenter_1F_EventScript_26791F",
+      "script": "BattleFrontier_PokemonCenter_1F_EventScript_Man",
       "flag": "0"
     },
     {
@@ -63,7 +63,7 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "BattleFrontier_PokemonCenter_1F_EventScript_267928",
+      "script": "BattleFrontier_PokemonCenter_1F_EventScript_Picnicker",
       "flag": "0"
     },
     {
@@ -76,7 +76,7 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "BattleFrontier_PokemonCenter_1F_EventScript_267931",
+      "script": "BattleFrontier_PokemonCenter_1F_EventScript_Skitty",
       "flag": "0"
     }
   ],

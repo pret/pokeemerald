@@ -24,7 +24,7 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "LilycoveCity_DepartmentStore_4F_EventScript_21FDEB",
+      "script": "LilycoveCity_DepartmentStore_4F_EventScript_Gentleman",
       "flag": "0"
     },
     {
@@ -37,7 +37,7 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "LilycoveCity_DepartmentStore_4F_EventScript_21FDF4",
+      "script": "LilycoveCity_DepartmentStore_4F_EventScript_Woman",
       "flag": "0"
     },
     {
@@ -50,7 +50,7 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "LilycoveCity_DepartmentStore_4F_EventScript_21FDFD",
+      "script": "LilycoveCity_DepartmentStore_4F_EventScript_Youngster",
       "flag": "0"
     },
     {
@@ -63,7 +63,7 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "LilycoveCity_DepartmentStore_4F_EventScript_21FE06",
+      "script": "LilycoveCity_DepartmentStore_4F_EventScript_ClerkLeft",
       "flag": "0"
     },
     {
@@ -76,7 +76,7 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "LilycoveCity_DepartmentStore_4F_EventScript_21FE2C",
+      "script": "LilycoveCity_DepartmentStore_4F_EventScript_ClerkRight",
       "flag": "0"
     }
   ],

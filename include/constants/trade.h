@@ -20,13 +20,13 @@
 #define READY_FINISH_TRADE  1
 #define FINISH_TRADE        2
 
-// Return values for CanTradeSelectedMon and CanTradeSelectedPartyMenuMon
+// Return values for CanTradeSelectedMon and CanSpinTradeMon
 #define CAN_TRADE_MON           0
 #define CANT_TRADE_LAST_MON     1
 #define CANT_TRADE_NATIONAL     2
-#define CANT_TRADE_EGG          3
+#define CANT_TRADE_EGG_YET      3
 #define CANT_TRADE_INVALID_MON  4
-#define CANT_TRADE_EGG2         5
+#define CANT_TRADE_EGG_YET2     5
 
 // Return values for CheckValidityOfTradeMons
 #define PLAYER_MON_INVALID   0

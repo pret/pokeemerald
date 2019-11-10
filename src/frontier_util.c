@@ -884,7 +884,7 @@ static void sub_81A1AD4(void)
 {
     s32 i;
 
-    sub_81B8558();
+    ClearSelectedPartyOrder();
     for (i = 0; i < gSpecialVar_0x8005; i++)
         gSelectedOrderFromParty[i] = gSaveBlock2Ptr->frontier.selectedPartyMons[i];
     ReducePlayerPartyToSelectedMons();
@@ -1889,11 +1889,11 @@ static void sub_81A3B64(void)
 
     points = gSaveBlock2Ptr->frontier.field_EBA;
     points += gUnknown_086118B4[challengeNum][facility][battleMode];
-    sub_80EED60(gUnknown_086118B4[challengeNum][facility][battleMode]);
+    IncrementDailyBattlePoints(gUnknown_086118B4[challengeNum][facility][battleMode]);
     if (gTrainerBattleOpponent_A == TRAINER_FRONTIER_BRAIN)
     {
         points += 10;
-        sub_80EED60(10);
+        IncrementDailyBattlePoints(10);
     }
     if (points > 0xFFFF)
         points = 0xFFFF;

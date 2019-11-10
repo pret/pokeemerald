@@ -388,9 +388,9 @@ CableClub_EventScript_EnterColosseum:: @ 8276FBD
 	waitdooranim
 	release
 	compare VAR_0x8004, USING_MULTI_BATTLE
-	goto_if_eq CableClub_EventScript_WarpToDoubleColosseum
+	goto_if_eq CableClub_EventScript_WarpTo4PColosseum
 	special SetCableClubWarp
-	warp MAP_SINGLE_BATTLE_COLOSSEUM, 255, 6, 8
+	warp MAP_BATTLE_COLOSSEUM_2P, 255, 6, 8
 	special sub_80AF948
 	waitstate
 	end
@@ -401,9 +401,9 @@ CableClub_EventScript_PlayerApproachLinkRoomRight:: @ 827702B
 	waitmovement 0
 	return
 
-CableClub_EventScript_WarpToDoubleColosseum:: @ 8277036
+CableClub_EventScript_WarpTo4PColosseum:: @ 8277036
 	special SetCableClubWarp
-	warp MAP_DOUBLE_BATTLE_COLOSSEUM, 255, 5, 8
+	warp MAP_BATTLE_COLOSSEUM_4P, 255, 5, 8
 	special sub_80AF948
 	waitstate
 	end
@@ -710,63 +710,63 @@ EventScript_CableBoxResults:: @ 8277365
 	releaseall
 	end
 
-EventScript_SingleBattleColosseum_PlayerSpot0:: @ 8277374
+EventScript_BattleColosseum2P_PlayerSpot0:: @ 8277374
 	setvar VAR_0x8005, 0
 	special ColosseumPlayerSpotTriggered
 	waitstate
 	end
 
-EventScript_SingleBattleColosseum_PlayerSpot1:: @ 827737E
+EventScript_BattleColosseum2P_PlayerSpot1:: @ 827737E
 	setvar VAR_0x8005, 1
 	special ColosseumPlayerSpotTriggered
 	waitstate
 	end
 
-EventScript_DoubleBattleColosseum_PlayerSpot0:: @ 8277388
+EventScript_BattleColosseum4P_PlayerSpot0:: @ 8277388
 	fadescreen 1
 	special ChooseHalfPartyForBattle
 	waitstate
 	compare VAR_RESULT, 0
-	goto_if_eq EventScript_DoubleBattleColosseum_CancelSpotTrigger
+	goto_if_eq EventScript_BattleColosseum4P_CancelSpotTrigger
 	setvar VAR_0x8005, 0
 	special ColosseumPlayerSpotTriggered
 	waitstate
 	end
 
-EventScript_DoubleBattleColosseum_PlayerSpot1:: @ 82773A3
+EventScript_BattleColosseum4P_PlayerSpot1:: @ 82773A3
 	fadescreen 1
 	special ChooseHalfPartyForBattle
 	waitstate
 	compare VAR_RESULT, 0
-	goto_if_eq EventScript_DoubleBattleColosseum_CancelSpotTrigger
+	goto_if_eq EventScript_BattleColosseum4P_CancelSpotTrigger
 	setvar VAR_0x8005, 1
 	special ColosseumPlayerSpotTriggered
 	waitstate
 	end
 
-EventScript_DoubleBattleColosseum_PlayerSpot2:: @ 82773BE
+EventScript_BattleColosseum4P_PlayerSpot2:: @ 82773BE
 	fadescreen 1
 	special ChooseHalfPartyForBattle
 	waitstate
 	compare VAR_RESULT, 0
-	goto_if_eq EventScript_DoubleBattleColosseum_CancelSpotTrigger
+	goto_if_eq EventScript_BattleColosseum4P_CancelSpotTrigger
 	setvar VAR_0x8005, 2
 	special ColosseumPlayerSpotTriggered
 	waitstate
 	end
 
-EventScript_DoubleBattleColosseum_PlayerSpot3:: @ 82773D9
+EventScript_BattleColosseum4P_PlayerSpot3:: @ 82773D9
 	fadescreen 1
 	special ChooseHalfPartyForBattle
 	waitstate
 	compare VAR_RESULT, 0
-	goto_if_eq EventScript_DoubleBattleColosseum_CancelSpotTrigger
+	goto_if_eq EventScript_BattleColosseum4P_CancelSpotTrigger
 	setvar VAR_0x8005, 3
 	special ColosseumPlayerSpotTriggered
 	waitstate
 	end
 
-EventScript_DoubleBattleColosseum_CancelSpotTrigger:: @ 82773F4
+EventScript_BattleColosseum4P_CancelSpotTrigger:: @ 82773F4
 	end
 
 EventScript_TradeCenter_Chair0:: @ 82773F5
@@ -854,9 +854,9 @@ CableClub_EventScript_TooBusyToNotice:: @ 827749C
 	closemessage
 	end
 
-SingleBattleColosseum_EventScript_Attendant:: @ 82774A6
+BattleColosseum2P_EventScript_Attendant:: @ 82774A6
 	special Script_FacePlayer
-	msgbox SingleBattleColosseum_Text_TakePlaceStartBattle, MSGBOX_DEFAULT
+	msgbox BattleColosseum2P_Text_TakePlaceStartBattle, MSGBOX_DEFAULT
 	special Script_ClearHeldMovement
 	closemessage
 	end
@@ -890,7 +890,7 @@ RecordCorner_EventScript_AlreadyMixed:: @ 82774E0
 
 EventScript_ConfirmLeaveTradeRoom:: @ 82774EF
 	msgbox Text_TerminateLinkConfirmation, MSGBOX_YESNO
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, YES
 	goto_if_eq EventScript_TerminateLink
 	erasebox 0, 0, 29, 19
 	releaseall
@@ -911,7 +911,7 @@ EventScript_DoLinkRoomExit:: @ 8277513
 CableClub_EventScript_UnionRoomAttendant:: @ 827751B
 	lock
 	faceplayer
-	setvar VAR_FRONTIER_FACILITY, 8
+	setvar VAR_FRONTIER_FACILITY, FACILITY_UNION_ROOM
 	goto_if_unset FLAG_SYS_POKEDEX_GET, CableClub_EventScript_WirelessClubAdjustements
 	specialvar VAR_RESULT, IsBadEggInParty
 	compare VAR_RESULT, TRUE
@@ -1005,7 +1005,7 @@ CableClub_EventScript_WirelessClubAttendant:: @ 8277672
 	faceplayer
 	goto_if_unset FLAG_SYS_POKEDEX_GET, CableClub_EventScript_WirelessClubAdjustements
 	msgbox CableClub_Text_AskAboutLinking, MSGBOX_YESNO
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq CableClub_EventScript_DontAskAboutLinking
 	msgbox CableClub_Text_ExplainWirelessClub, MSGBOX_DEFAULT
 	release
@@ -1019,7 +1019,7 @@ CableClub_EventScript_DontAskAboutLinking:: @ 827769A
 CableClub_EventScript_DirectCornerAttendant:: @ 82776A4
 	lock
 	faceplayer
-	setvar VAR_FRONTIER_FACILITY, 9
+	setvar VAR_FRONTIER_FACILITY, FACILITY_MULTI_OR_EREADER  @ Set preemptively for multi battles, ignored otherwise
 	goto_if_unset FLAG_SYS_POKEDEX_GET, CableClub_EventScript_WirelessClubAdjustements
 	specialvar VAR_RESULT, IsBadEggInParty
 	compare VAR_RESULT, TRUE
@@ -1080,7 +1080,7 @@ CableClub_EventScript_DirectCornerHasRecordMix:: @ 82777CB
 
 CableClub_EventScript_WirelessTrade:: @ 827780D
 	msgbox CableClub_Text_TradePokemon, MSGBOX_YESNO
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq CableClub_EventScript_AbortLink
 	call CableClub_EventScript_CheckPartyTradeRequirements
 	compare VAR_RESULT, 0
@@ -1132,7 +1132,7 @@ CableClub_EventScript_WirelessBattleInfo:: @ 82778CB
 
 CableClub_EventScript_WirelessRecordMix:: @ 82778D9
 	msgbox CableClub_Text_AccessRecordCorner, MSGBOX_YESNO
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq CableClub_EventScript_AbortLink
 	setvar VAR_0x8004, 12
 	goto CableClub_EventScript_SaveAndChooseLinkLeader
@@ -1140,7 +1140,7 @@ CableClub_EventScript_WirelessRecordMix:: @ 82778D9
 
 CableClub_EventScript_WirelessBerryCrush:: @ 82778F7
 	msgbox CableClub_Text_UseBerryCrush, MSGBOX_YESNO
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq CableClub_EventScript_AbortLink
 	special HasAtLeastOneBerry
 	compare VAR_RESULT, FALSE
@@ -1500,7 +1500,7 @@ MossdeepCity_GameCorner_1F_EventScript_AdapterNotConnected:: @ 8277E48
 
 MossdeepCity_GameCorner_1F_EventScript_DontHaveRequiredMon:: @ 8277E55
 	msgbox MossdeepCity_GameCorner_1F_Text_ExplainRequiredMon, MSGBOX_YESNO
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq MossdeepCity_GameCorner_1F_EventScript_AbortMinigame
 	compare VAR_0x8005, 0
 	call_if_eq MossdeepCity_GameCorner_1F_EventScript_ExplainPokemonJumpRequirements

@@ -4,7 +4,7 @@ Route128_MapScripts:: @ 81F6B38
 	.byte 0
 
 Route128_OnTransition: @ 81F6B43
-	call_if_set FLAG_SYS_WEATHER_CTRL, Common_EventScript_SetWeather15
+	call_if_set FLAG_SYS_WEATHER_CTRL, Common_EventScript_SetAlternatingWeather
 	end
 
 Route128_MapScript2_1F6B4D: @ 81F6B4D
@@ -184,7 +184,7 @@ Route128_EventScript_1F6CBE:: @ 81F6CBE
 	end
 
 Route128_EventScript_1F6CEA:: @ 81F6CEA
-	special sub_80B4808
+	special PlayerFaceTrainerAfterBattle
 	waitmovement 0
 	msgbox Route128_Text_2A2916, MSGBOX_DEFAULT
 	register_matchcall TRAINER_ISAIAH_1
@@ -206,7 +206,7 @@ Route128_EventScript_1F6D20:: @ 81F6D20
 	end
 
 Route128_EventScript_1F6D4C:: @ 81F6D4C
-	special sub_80B4808
+	special PlayerFaceTrainerAfterBattle
 	waitmovement 0
 	msgbox Route128_Text_2A2AF9, MSGBOX_DEFAULT
 	register_matchcall TRAINER_KATELYN_1

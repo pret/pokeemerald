@@ -26,8 +26,8 @@ struct FlashStruct
 };
 
 // static functions
-static void hm2_flash(void);
-static void sub_81371B4(void);
+static void FieldCallback_Flash(void);
+static void FldEff_UseFlash(void);
 static bool8 sub_8137304(void);
 static void sub_81373F0(void);
 static void sub_8137404(u8 taskId);
@@ -86,26 +86,26 @@ bool8 SetUpFieldMove_Flash(void)
     else if (gMapHeader.cave == TRUE && !FlagGet(FLAG_SYS_USE_FLASH))
     {
         gFieldCallback2 = FieldCallback_PrepareFadeInFromMenu;
-        gPostMenuFieldCallback = hm2_flash;
+        gPostMenuFieldCallback = FieldCallback_Flash;
         return TRUE;
     }
 
     return FALSE;
 }
 
-static void hm2_flash(void)
+static void FieldCallback_Flash(void)
 {
     u8 taskId = oei_task_add();
     gFieldEffectArguments[0] = GetCursorSelectionMonId();
-    gTasks[taskId].data[8] = (uintptr_t)sub_81371B4 >> 16;
-    gTasks[taskId].data[9] = (uintptr_t)sub_81371B4;
+    gTasks[taskId].data[8] = (uintptr_t)FldEff_UseFlash >> 16;
+    gTasks[taskId].data[9] = (uintptr_t)FldEff_UseFlash;
 }
 
-static void sub_81371B4(void)
+static void FldEff_UseFlash(void)
 {
     PlaySE(SE_W115);
     FlagSet(FLAG_SYS_USE_FLASH);
-    ScriptContext1_SetupScript(EventScript_2926F8);
+    ScriptContext1_SetupScript(EventScript_FldEffFlash);
 }
 
 static void sub_81371D4(void)

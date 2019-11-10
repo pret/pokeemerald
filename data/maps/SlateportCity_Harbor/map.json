@@ -24,7 +24,7 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "SlateportCity_Harbor_EventScript_20CAF1",
+      "script": "SlateportCity_Harbor_EventScript_FerryAttendant",
       "flag": "FLAG_HIDE_SLATEPORT_CITY_HARBOR_PATRONS"
     },
     {
@@ -37,7 +37,7 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "SlateportCity_Harbor_EventScript_20CC52",
+      "script": "SlateportCity_Harbor_EventScript_Sailor",
       "flag": "FLAG_HIDE_SLATEPORT_CITY_HARBOR_PATRONS"
     },
     {
@@ -50,7 +50,7 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "SlateportCity_Harbor_EventScript_20CC99",
+      "script": "SlateportCity_Harbor_EventScript_FatMan",
       "flag": "FLAG_HIDE_SLATEPORT_CITY_HARBOR_PATRONS"
     },
     {
@@ -63,7 +63,7 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "SlateportCity_Harbor_EventScript_20CCA2",
+      "script": "SlateportCity_Harbor_EventScript_CaptStern",
       "flag": "FLAG_HIDE_SLATEPORT_CITY_HARBOR_CAPTAIN_STERN"
     },
     {
@@ -157,7 +157,7 @@
       "elevation": 3,
       "var": "VAR_SLATEPORT_HARBOR_STATE",
       "var_value": "1",
-      "script": "SlateportCity_Harbor_EventScript_20C9BB"
+      "script": "SlateportCity_Harbor_EventScript_AquaEscapeTrigger0"
     },
     {
       "type": "trigger",
@@ -166,7 +166,7 @@
       "elevation": 3,
       "var": "VAR_SLATEPORT_HARBOR_STATE",
       "var_value": "1",
-      "script": "SlateportCity_Harbor_EventScript_20C9C7"
+      "script": "SlateportCity_Harbor_EventScript_AquaEscapeTrigger1"
     },
     {
       "type": "trigger",
@@ -175,7 +175,7 @@
       "elevation": 3,
       "var": "VAR_SLATEPORT_HARBOR_STATE",
       "var_value": "1",
-      "script": "SlateportCity_Harbor_EventScript_20C9D3"
+      "script": "SlateportCity_Harbor_EventScript_AquaEscapeTrigger2"
     },
     {
       "type": "trigger",
@@ -184,7 +184,7 @@
       "elevation": 3,
       "var": "VAR_SLATEPORT_HARBOR_STATE",
       "var_value": "1",
-      "script": "SlateportCity_Harbor_EventScript_20C9DF"
+      "script": "SlateportCity_Harbor_EventScript_AquaEscapeTrigger3"
     }
   ],
   "bg_events": []

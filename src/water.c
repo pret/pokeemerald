@@ -39,7 +39,7 @@ void sub_8108B94(struct Sprite *);
 void sub_8108BE0(struct Sprite *);
 void sub_8108C08(struct Sprite *);
 void sub_8108C54(struct Sprite *);
-void sub_8108CDC(struct Sprite *);
+void AnimWaterPulseRing_Step(struct Sprite *);
 void sub_810756C(u8);
 void sub_81076F4(u8);
 void sub_8107B84(u8);
@@ -54,7 +54,7 @@ void sub_810871C(struct Task*, u8);
 void sub_8108AC0(struct Task*);
 void sub_8108D54(struct Sprite*, int, int);
 
-extern const union AffineAnimCmd *const gUnknown_08593420[];
+extern const union AffineAnimCmd *const gGrowingRingAffineAnimTable[];
 extern const union AffineAnimCmd *const gUnknown_08596208[];
 extern const union AnimCmd *const gUnknown_08595AB8[];
 
@@ -257,7 +257,7 @@ const struct SpriteTemplate gUnknown_08595170 =
     .oam = &gOamData_AffineDouble_ObjNormal_16x32,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
-    .affineAnims = gUnknown_08593420,
+    .affineAnims = gGrowingRingAffineAnimTable,
     .callback = sub_81075EC,
 };
 
@@ -337,7 +337,7 @@ const struct SpriteTemplate gUnknown_08595208 =
     .anims = gUnknown_08595200,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_80A78AC,
+    .callback = AnimThrowProjectile,
 };
 
 const struct SpriteTemplate gUnknown_08595220 =
@@ -1975,17 +1975,17 @@ void sub_8108C54(struct Sprite *sprite)
     }
 }
 
-void sub_8108C94(struct Sprite *sprite)
+void AnimWaterPulseRing(struct Sprite *sprite)
 {
     InitSpritePosToAnimAttacker(sprite, TRUE);
     sprite->data[1] = GetBattlerSpriteCoord(gBattleAnimTarget, 2);
     sprite->data[2] = GetBattlerSpriteCoord(gBattleAnimTarget, 3);
     sprite->data[3] = gBattleAnimArgs[2];
     sprite->data[4] = gBattleAnimArgs[3];
-    sprite->callback = sub_8108CDC;
+    sprite->callback = AnimWaterPulseRing_Step;
 }
 
-void sub_8108CDC(struct Sprite *sprite)
+void AnimWaterPulseRing_Step(struct Sprite *sprite)
 {
     int xDiff = sprite->data[1] - sprite->pos1.x;
     int yDiff = sprite->data[2] - sprite->pos1.y;

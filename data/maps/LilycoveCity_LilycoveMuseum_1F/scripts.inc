@@ -23,9 +23,9 @@ LilycoveCity_LilycoveMuseum_1F_EventScript_218CEC:: @ 8218CEC
 
 LilycoveCity_LilycoveMuseum_1F_EventScript_218CF5:: @ 8218CF5
 	msgbox LilycoveCity_LilycoveMuseum_1F_Text_218F98, MSGBOX_YESNO
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq LilycoveCity_LilycoveMuseum_1F_EventScript_218D14
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, YES
 	goto_if_eq LilycoveCity_LilycoveMuseum_1F_EventScript_218D1E
 	end
 

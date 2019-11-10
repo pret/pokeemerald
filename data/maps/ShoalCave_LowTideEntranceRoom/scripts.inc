@@ -4,90 +4,91 @@ ShoalCave_LowTideEntranceRoom_MapScripts:: @ 8236DBA
 
 ShoalCave_LowTideEntranceRoom_OnTransition: @ 8236DC0
 	special UpdateShoalTideFlag
-	goto_if_set FLAG_SYS_SHOAL_TIDE, ShoalCave_LowTideEntranceRoom_EventScript_236DD1
-	goto ShoalCave_LowTideEntranceRoom_EventScript_236DD5
+	goto_if_set FLAG_SYS_SHOAL_TIDE, ShoalCave_LowTideEntranceRoom_EventScript_SetHighTide
+	goto ShoalCave_LowTideEntranceRoom_EventScript_SetLowTide
 
-ShoalCave_LowTideEntranceRoom_EventScript_236DD1:: @ 8236DD1
+ShoalCave_LowTideEntranceRoom_EventScript_SetHighTide:: @ 8236DD1
 	setmaplayoutindex LAYOUT_SHOAL_CAVE_HIGH_TIDE_ENTRANCE_ROOM
 	end
 
-ShoalCave_LowTideEntranceRoom_EventScript_236DD5:: @ 8236DD5
+ShoalCave_LowTideEntranceRoom_EventScript_SetLowTide:: @ 8236DD5
 	setmaplayoutindex LAYOUT_SHOAL_CAVE_LOW_TIDE_ENTRANCE_ROOM
 	end
 
-ShoalCave_LowTideEntranceRoom_EventScript_236DD9:: @ 8236DD9
+ShoalCave_LowTideEntranceRoom_EventScript_ShellBellExpert:: @ 8236DD9
 	lock
 	faceplayer
 	dotimebasedevents
-	call_if_set FLAG_SYS_SHOAL_ITEM, ShoalCave_LowTideEntranceRoom_EventScript_236ED9
+	call_if_set FLAG_SYS_SHOAL_ITEM, ShoalCave_LowTideEntranceRoom_EventScript_ResetShoalItems
 	checkitem ITEM_SHOAL_SALT, 4
-	compare VAR_RESULT, 0
-	goto_if_eq ShoalCave_LowTideEntranceRoom_EventScript_236E9B
+	compare VAR_RESULT, FALSE
+	goto_if_eq ShoalCave_LowTideEntranceRoom_EventScript_NotEnoughShoalSaltOrShells
 	checkitem ITEM_SHOAL_SHELL, 4
-	compare VAR_RESULT, 0
-	goto_if_eq ShoalCave_LowTideEntranceRoom_EventScript_236E9B
-	msgbox ShoalCave_LowTideEntranceRoom_Text_2A7F37, MSGBOX_YESNO
-	compare VAR_RESULT, 0
-	goto_if_eq ShoalCave_LowTideEntranceRoom_EventScript_236ECF
+	compare VAR_RESULT, FALSE
+	goto_if_eq ShoalCave_LowTideEntranceRoom_EventScript_NotEnoughShoalSaltOrShells
+	msgbox ShoalCave_LowTideEntranceRoom_Text_WouldYouLikeShellBell, MSGBOX_YESNO
+	compare VAR_RESULT, NO
+	goto_if_eq ShoalCave_LowTideEntranceRoom_EventScript_DeclineShellBell
 	checkitemspace ITEM_SHELL_BELL, 1
-	compare VAR_RESULT, 0
-	call_if_eq ShoalCave_LowTideEntranceRoom_EventScript_236E69
+	compare VAR_RESULT, FALSE
+	call_if_eq ShoalCave_LowTideEntranceRoom_EventScript_CheckSpaceWillBeFreed
 	compare VAR_RESULT, 2
-	goto_if_eq ShoalCave_LowTideEntranceRoom_EventScript_236E91
-	msgbox ShoalCave_LowTideEntranceRoom_Text_2A7FAC, MSGBOX_DEFAULT
+	goto_if_eq ShoalCave_LowTideEntranceRoom_EventScript_NoRoomForShellBell
+	msgbox ShoalCave_LowTideEntranceRoom_Text_MakeShellBellRightAway, MSGBOX_DEFAULT
 	takeitem ITEM_SHOAL_SALT, 4
 	takeitem ITEM_SHOAL_SHELL, 4
 	giveitem_std ITEM_SHELL_BELL
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_ShowBagIsFull
-	msgbox ShoalCave_LowTideEntranceRoom_Text_2A8012, MSGBOX_DEFAULT
+	msgbox ShoalCave_LowTideEntranceRoom_Text_ExplainShellBell, MSGBOX_DEFAULT
 	setflag FLAG_TEMP_2
 	release
 	end
 
-ShoalCave_LowTideEntranceRoom_EventScript_236E69:: @ 8236E69
+@ If the bag is full, check if a slot will be freed when 4 Shoal Salt or Shells are given
+ShoalCave_LowTideEntranceRoom_EventScript_CheckSpaceWillBeFreed:: @ 8236E69
 	checkitem ITEM_SHOAL_SALT, 5
-	compare VAR_RESULT, 1
-	goto_if_eq ShoalCave_LowTideEntranceRoom_EventScript_236E7A
+	compare VAR_RESULT, TRUE
+	goto_if_eq ShoalCave_LowTideEntranceRoom_EventScript_CheckSpaceWillBeFreedShells
 	return
 
-ShoalCave_LowTideEntranceRoom_EventScript_236E7A:: @ 8236E7A
+ShoalCave_LowTideEntranceRoom_EventScript_CheckSpaceWillBeFreedShells:: @ 8236E7A
 	checkitem ITEM_SHOAL_SHELL, 5
-	compare VAR_RESULT, 1
-	goto_if_eq ShoalCave_LowTideEntranceRoom_EventScript_236E8B
+	compare VAR_RESULT, TRUE
+	goto_if_eq ShoalCave_LowTideEntranceRoom_EventScript_NoSpaceWillBeFreed
 	return
 
-ShoalCave_LowTideEntranceRoom_EventScript_236E8B:: @ 8236E8B
+ShoalCave_LowTideEntranceRoom_EventScript_NoSpaceWillBeFreed:: @ 8236E8B
 	setvar VAR_RESULT, 2
 	return
 
-ShoalCave_LowTideEntranceRoom_EventScript_236E91:: @ 8236E91
-	msgbox ShoalCave_LowTideEntranceRoom_Text_2A80F5, MSGBOX_DEFAULT
+ShoalCave_LowTideEntranceRoom_EventScript_NoRoomForShellBell:: @ 8236E91
+	msgbox ShoalCave_LowTideEntranceRoom_Text_NoSpaceInYourBag, MSGBOX_DEFAULT
 	release
 	end
 
-ShoalCave_LowTideEntranceRoom_EventScript_236E9B:: @ 8236E9B
+ShoalCave_LowTideEntranceRoom_EventScript_NotEnoughShoalSaltOrShells:: @ 8236E9B
 	checkitem ITEM_SHOAL_SALT, 1
-	compare VAR_RESULT, 1
-	goto_if_eq ShoalCave_LowTideEntranceRoom_EventScript_236EC5
+	compare VAR_RESULT, TRUE
+	goto_if_eq ShoalCave_LowTideEntranceRoom_EventScript_HasSomeShoalSaltOrShell
 	checkitem ITEM_SHOAL_SHELL, 1
-	compare VAR_RESULT, 1
-	goto_if_eq ShoalCave_LowTideEntranceRoom_EventScript_236EC5
-	msgbox ShoalCave_LowTideEntranceRoom_Text_2A7E0E, MSGBOX_DEFAULT
+	compare VAR_RESULT, TRUE
+	goto_if_eq ShoalCave_LowTideEntranceRoom_EventScript_HasSomeShoalSaltOrShell
+	msgbox ShoalCave_LowTideEntranceRoom_Text_AreYouPlanningOnGoingInThere, MSGBOX_DEFAULT
 	release
 	end
 
-ShoalCave_LowTideEntranceRoom_EventScript_236EC5:: @ 8236EC5
-	msgbox ShoalCave_LowTideEntranceRoom_Text_2A7EB3, MSGBOX_DEFAULT
+ShoalCave_LowTideEntranceRoom_EventScript_HasSomeShoalSaltOrShell:: @ 8236EC5
+	msgbox ShoalCave_LowTideEntranceRoom_Text_BringMe4ShoalSaltAndShells, MSGBOX_DEFAULT
 	release
 	end
 
-ShoalCave_LowTideEntranceRoom_EventScript_236ECF:: @ 8236ECF
-	msgbox ShoalCave_LowTideEntranceRoom_Text_2A80C6, MSGBOX_DEFAULT
+ShoalCave_LowTideEntranceRoom_EventScript_DeclineShellBell:: @ 8236ECF
+	msgbox ShoalCave_LowTideEntranceRoom_Text_WantedToMakeShellBell, MSGBOX_DEFAULT
 	release
 	end
 
-ShoalCave_LowTideEntranceRoom_EventScript_236ED9:: @ 8236ED9
+ShoalCave_LowTideEntranceRoom_EventScript_ResetShoalItems:: @ 8236ED9
 	clearflag FLAG_RECEIVED_SHOAL_SALT_1
 	clearflag FLAG_RECEIVED_SHOAL_SALT_2
 	clearflag FLAG_RECEIVED_SHOAL_SALT_3

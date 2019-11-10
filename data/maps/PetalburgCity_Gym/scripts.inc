@@ -791,9 +791,9 @@ PetalburgCity_Gym_EventScript_SpeedRoomDoor:: @ 8205137
 	setvar VAR_0x8008, 7
 	setvar VAR_0x8009, 85
 	msgbox PetalburgCity_Gym_Text_EnterSpeedRoom, MSGBOX_YESNO
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, YES
 	goto_if_eq PetalburgCity_Gym_EventScript_EnterRoom
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq PetalburgCity_Gym_EventScript_DontEnterRoom
 	end
 
@@ -822,9 +822,9 @@ PetalburgCity_Gym_EventScript_AccuracyRoomDoor:: @ 8205187
 	setvar VAR_0x8008, 1
 	setvar VAR_0x8009, 98
 	msgbox PetalburgCity_Gym_Text_EnterAccuracyRoom, MSGBOX_YESNO
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, YES
 	goto_if_eq PetalburgCity_Gym_EventScript_EnterRoom
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq PetalburgCity_Gym_EventScript_DontEnterRoom
 	end
 
@@ -835,9 +835,9 @@ PetalburgCity_Gym_EventScript_ConfusionRoomDoor:: @ 82051BC
 	setvar VAR_0x8008, 7
 	setvar VAR_0x8009, 46
 	msgbox PetalburgCity_Gym_Text_EnterConfusionRoom, MSGBOX_YESNO
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, YES
 	goto_if_eq PetalburgCity_Gym_EventScript_EnterRoom
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq PetalburgCity_Gym_EventScript_DontEnterRoom
 	end
 
@@ -848,9 +848,9 @@ PetalburgCity_Gym_EventScript_LeftDefenseRoomDoor:: @ 82051EF
 	setvar VAR_0x8008, 1
 	setvar VAR_0x8009, 59
 	msgbox PetalburgCity_Gym_Text_EnterDefenseRoom, MSGBOX_YESNO
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, YES
 	goto_if_eq PetalburgCity_Gym_EventScript_EnterRoom
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq PetalburgCity_Gym_EventScript_DontEnterRoom
 	end
 
@@ -861,9 +861,9 @@ PetalburgCity_Gym_EventScript_RightDefenseRoomDoor:: @ 8205222
 	setvar VAR_0x8008, 7
 	setvar VAR_0x8009, 59
 	msgbox PetalburgCity_Gym_Text_EnterDefenseRoom, MSGBOX_YESNO
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, YES
 	goto_if_eq PetalburgCity_Gym_EventScript_EnterRoom
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq PetalburgCity_Gym_EventScript_DontEnterRoom
 	end
 
@@ -874,9 +874,9 @@ PetalburgCity_Gym_EventScript_RecoveryRoomDoor:: @ 8205255
 	setvar VAR_0x8008, 1
 	setvar VAR_0x8009, 72
 	msgbox PetalburgCity_Gym_Text_EnterRecoveryRoom, MSGBOX_YESNO
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, YES
 	goto_if_eq PetalburgCity_Gym_EventScript_EnterRoom
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq PetalburgCity_Gym_EventScript_DontEnterRoom
 	end
 
@@ -887,9 +887,9 @@ PetalburgCity_Gym_EventScript_LeftStrengthRoomDoor:: @ 8205288
 	setvar VAR_0x8008, 1
 	setvar VAR_0x8009, 20
 	msgbox PetalburgCity_Gym_Text_EnterStrengthRoom, MSGBOX_YESNO
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, YES
 	goto_if_eq PetalburgCity_Gym_EventScript_EnterRoom
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq PetalburgCity_Gym_EventScript_DontEnterRoom
 	end
 
@@ -900,9 +900,9 @@ PetalburgCity_Gym_EventScript_RightStrengthRoomDoor:: @ 82052BB
 	setvar VAR_0x8008, 7
 	setvar VAR_0x8009, 20
 	msgbox PetalburgCity_Gym_Text_EnterStrengthRoom, MSGBOX_YESNO
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, YES
 	goto_if_eq PetalburgCity_Gym_EventScript_EnterRoom
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq PetalburgCity_Gym_EventScript_DontEnterRoom
 	end
 
@@ -913,9 +913,9 @@ PetalburgCity_Gym_EventScript_LeftOHKORoomDoor:: @ 82052EE
 	setvar VAR_0x8008, 1
 	setvar VAR_0x8009, 33
 	msgbox PetalburgCity_Gym_Text_EnterOHKORoom, MSGBOX_YESNO
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, YES
 	goto_if_eq PetalburgCity_Gym_EventScript_EnterRoom
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq PetalburgCity_Gym_EventScript_DontEnterRoom
 	end
 
@@ -926,9 +926,9 @@ PetalburgCity_Gym_EventScript_RightOHKORoomDoor:: @ 8205321
 	setvar VAR_0x8008, 7
 	setvar VAR_0x8009, 33
 	msgbox PetalburgCity_Gym_Text_EnterOHKORoom, MSGBOX_YESNO
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, YES
 	goto_if_eq PetalburgCity_Gym_EventScript_EnterRoom
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq PetalburgCity_Gym_EventScript_DontEnterRoom
 	end
 
@@ -939,9 +939,9 @@ PetalburgCity_Gym_EventScript_LeftGymLeadersRoomDoor:: @ 8205354
 	setvar VAR_0x8008, 1
 	setvar VAR_0x8009, 7
 	msgbox PetalburgCity_Gym_Text_EnterGymLeadersRoom, MSGBOX_YESNO
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, YES
 	goto_if_eq PetalburgCity_Gym_EventScript_EnterRoom
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq PetalburgCity_Gym_EventScript_DontEnterRoom
 	end
 
@@ -952,9 +952,9 @@ PetalburgCity_Gym_EventScript_RightGymLeadersRoomDoor:: @ 8205387
 	setvar VAR_0x8008, 7
 	setvar VAR_0x8009, 7
 	msgbox PetalburgCity_Gym_Text_EnterGymLeadersRoom, MSGBOX_YESNO
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, YES
 	goto_if_eq PetalburgCity_Gym_EventScript_EnterRoom
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq PetalburgCity_Gym_EventScript_DontEnterRoom
 	end
 

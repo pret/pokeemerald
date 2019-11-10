@@ -6,32 +6,32 @@ Route114_FossilManiacsHouse_OnTransition: @ 822AD36
 	setflag FLAG_LANDMARK_FOSSIL_MANIACS_HOUSE
 	end
 
-Route114_FossilManiacsHouse_EventScript_22AD3A:: @ 822AD3A
+Route114_FossilManiacsHouse_EventScript_FossilManiacsBrother:: @ 822AD3A
 	lock
 	faceplayer
-	goto_if_set FLAG_RECEIVED_TM28, Route114_FossilManiacsHouse_EventScript_22AD69
-	msgbox Route114_FossilManiacsHouse_Text_22AD85, MSGBOX_DEFAULT
+	goto_if_set FLAG_RECEIVED_TM28, Route114_FossilManiacsHouse_EventScript_ReceivedDig
+	msgbox Route114_FossilManiacsHouse_Text_HaveThisToDigLikeMyBrother, MSGBOX_DEFAULT
 	giveitem_std ITEM_TM28
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_TM28
 	release
 	end
 
-Route114_FossilManiacsHouse_EventScript_22AD69:: @ 822AD69
-	msgbox Route114_FossilManiacsHouse_Text_22AE48, MSGBOX_DEFAULT
+Route114_FossilManiacsHouse_EventScript_ReceivedDig:: @ 822AD69
+	msgbox Route114_FossilManiacsHouse_Text_DigReturnsYouToEntrance, MSGBOX_DEFAULT
 	release
 	end
 
-Route114_FossilManiacsHouse_EventScript_22AD73:: @ 822AD73
-	msgbox Route114_FossilManiacsHouse_Text_22AE92, MSGBOX_SIGN
+Route114_FossilManiacsHouse_EventScript_RockDisplay:: @ 822AD73
+	msgbox Route114_FossilManiacsHouse_Text_RocksFillDisplayCase, MSGBOX_SIGN
 	end
 
-Route114_FossilManiacsHouse_EventScript_22AD7C:: @ 822AD7C
-	msgbox Route114_FossilManiacsHouse_Text_22AEC2, MSGBOX_SIGN
+Route114_FossilManiacsHouse_EventScript_Bookshelf:: @ 822AD7C
+	msgbox Route114_FossilManiacsHouse_Text_CrammedWithBooks, MSGBOX_SIGN
 	end
 
-Route114_FossilManiacsHouse_Text_22AD85: @ 822AD85
+Route114_FossilManiacsHouse_Text_HaveThisToDigLikeMyBrother: @ 822AD85
 	.string "My big brother's the FOSSIL MANIAC…\n"
 	.string "He's a nice guy who loves FOSSILS…\p"
 	.string "He loves digging holes, too…\n"
@@ -39,15 +39,15 @@ Route114_FossilManiacsHouse_Text_22AD85: @ 822AD85
 	.string "You can have this, so you can DIG\n"
 	.string "holes just like my big brother…$"
 
-Route114_FossilManiacsHouse_Text_22AE48: @ 822AE48
+Route114_FossilManiacsHouse_Text_DigReturnsYouToEntrance: @ 822AE48
 	.string "If you make a POKéMON DIG inside a\n"
 	.string "cave, you're returned to the entrance…$"
 
-Route114_FossilManiacsHouse_Text_22AE92: @ 822AE92
+Route114_FossilManiacsHouse_Text_RocksFillDisplayCase: @ 822AE92
 	.string "Rocks in peculiar shapes fill\n"
 	.string "the display case…$"
 
-Route114_FossilManiacsHouse_Text_22AEC2: @ 822AEC2
+Route114_FossilManiacsHouse_Text_CrammedWithBooks: @ 822AEC2
 	.string "THE COMPOSITION OF STRATA…\n"
 	.string "HOW RAIN SHAPES THE LAND…\l"
 	.string "STONES, SOIL, AND ROCK…\p"
