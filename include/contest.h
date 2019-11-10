@@ -453,7 +453,7 @@ extern u8 gNumLinkContestPlayers;
 extern u8 gHighestRibbonRank;
 extern struct ContestResources *gContestResources;
 extern u8 sContestBgCopyFlags;
-extern struct ContestWinner gUnknown_02039F3C;
+extern struct ContestWinner gCurContestWinner;
 extern u8 gUnknown_02039F5C;
 extern u8 gUnknown_02039F5D;
 

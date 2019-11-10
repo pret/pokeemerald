@@ -3,498 +3,497 @@
 #include "contest_painting.h"
 #include "constants/rgb.h"
 
-struct Unk8125954
-{
-    u8 unk0;
-    u8 unk1;
-    u16 unk2;
-};
-
 // IWRAM common
-u8 gUnknown_03006164;
-u16 (*gUnknown_03006168)[][32];
-u8 gUnknown_0300616C;
-u8 gUnknown_03006170;
-u8 gUnknown_03006174;
-u8 gUnknown_03006178;
-u8 gUnknown_0300617C;
-u8 gUnknown_03006180;
-u16 *gUnknown_03006184;
-u16 gUnknown_03006188;
+u8 gCanvasColumnStart;
+u16 (*gCanvasPixels)[][32];
+u8 gCanvasRowEnd;
+u8 gCanvasHeight;
+u8 gCanvasColumnEnd;
+u8 gCanvasRowStart;
+u8 gCanvasMonPersonality;
+u8 gCanvasWidth;
+u16 *gCanvasPalette;
+u16 gCanvasPaletteStart;
 
-static void sub_8125230(void);
-static void sub_81252E8(void);
-static void sub_81254E0(void);
-static void sub_8125630(void);
-static void sub_8125448(void);
-static void sub_81257F8(void);
-static void sub_81258A0(void);
-static void sub_81256C8(void);
-static void sub_8125250(void);
-static void sub_81253A4(u8);
-static void sub_81250B8(u8);
-static void sub_8125170(u8);
-static void sub_8125954(u16);
+static void ApplyImageEffect_Pointillism(void);
+static void ApplyImageEffect_Blur(void);
+static void ApplyImageEffect_BlackOutline(void);
+static void ApplyImageEffect_Invert(void);
+static void ApplyImageEffect_BlackAndWhite(void);
+static void ApplyImageEffect_BlurRight(void);
+static void ApplyImageEffect_BlurDown(void);
+static void ApplyImageEffect_Shimmer(void);
+static void ApplyImageEffect_Grayscale(void);
+static void ApplyImageEffect_PersonalityColor(u8);
+static void ApplyImageEffect_RedChannelGrayscale(u8);
+static void ApplyImageEffect_RedChannelGrayscaleHighlight(u8);
+static void AddPointillismPoints(u16);
 static u16 ConvertColorToGrayscale(u16*);
-static u16 sub_8125E18(u16*, u16*, u16*);
-static u16 ConvertCoolColor(u16*, u8);
-static u16 ConvertToBlackOrWhite(u16*);
-static u16 sub_8125C98(u16*, u16*);
-static u16 InvertColor(u16*);
-static u16 sub_8125F38(u16*, u16*, u16*);
-static u16 sub_8125CF4(u16*, u16*);
-static u16 GetCoolColorFromPersonality(u8);
-static void sub_81263A4(bool8);
-static void sub_8126270(void);
-static void sub_8126714(void);
-static void sub_8126370(void);
-static void sub_8126664(void);
-static void sub_8126334(void);
-static void sub_81265B4(void);
-static void sub_8126318(void);
-static void sub_81264FC(void);
-static u16 sub_81267C4(u16*);
-static u16 sub_8126908(u16*);
-static u16 sub_812693C(u16*);
-static u16 sub_8126838(u16*);
+static u16 QuantizePixel_Blur(u16*, u16*, u16*);
+static u16 QuantizePixel_PersonalityColor(u16*, u8);
+static u16 QuantizePixel_BlackAndWhite(u16*);
+static u16 QuantizePixel_BlackOutline(u16*, u16*);
+static u16 QuantizePixel_Invert(u16*);
+static u16 QuantizePixel_BlurHard(u16*, u16*, u16*);
+static u16 QuantizePixel_MotionBlur(u16*, u16*);
+static u16 GetColorFromPersonality(u8);
+static void QuantizePalette_Standard(bool8);
+static void SetPresetPalette_PrimaryColors(void);
+static void QuantizePalette_PrimaryColors(void);
+static void SetPresetPalette_Grayscale(void);
+static void QuantizePalette_Grayscale(void);
+static void SetPresetPalette_GrayscaleSmall(void);
+static void QuantizePalette_GrayscaleSmall(void);
+static void SetPresetPalette_BlackAndWhite(void);
+static void QuantizePalette_BlackAndWhite(void);
+static u16 QuantizePixel_Standard(u16*);
+static u16 QuantizePixel_GrayscaleSmall(u16*);
+static u16 QuantizePixel_Grayscale(u16*);
+static u16 QuantizePixel_PrimaryColors(u16*);
 
-extern const u8 gUnknown_085A1F94[][3];
+extern const u8 gPointillismPoints[][3];
 
-void sub_8124F2C(struct Unk030061A0 *info)
+void ApplyImageProcessingEffects(struct ContestPaintingContext *context)
 {
-    gUnknown_03006168 = info->var_4;
-    gUnknown_0300617C = info->var_1F;
-    gUnknown_03006164 = info->var_19;
-    gUnknown_03006178 = info->var_1A;
-    gUnknown_03006174 = info->var_1B;
-    gUnknown_0300616C = info->var_1C;
-    gUnknown_03006180 = info->var_1D;
-    gUnknown_03006170 = info->var_1E;
-    switch (info->var_0)
+    gCanvasPixels = context->canvasPixels;
+    gCanvasMonPersonality = context->personality;
+    gCanvasColumnStart = context->columnStart;
+    gCanvasRowStart = context->rowStart;
+    gCanvasColumnEnd = context->columnEnd;
+    gCanvasRowEnd = context->rowEnd;
+    gCanvasWidth = context->canvasWidth;
+    gCanvasHeight = context->canvasHeight;
+
+    switch (context->effect)
     {
-    case 2:
-        sub_8125230();
+    case IMAGE_EFFECT_POINTILLISM:
+        ApplyImageEffect_Pointillism();
         break;
-    case 8:
-        sub_81252E8();
+    case IMAGE_EFFECT_BLUR:
+        ApplyImageEffect_Blur();
         break;
-    case 9:
-        sub_81254E0();
-        sub_81253A4(gUnknown_0300617C);
+    case IMAGE_EFFECT_OUTLINE_COLORED:
+        ApplyImageEffect_BlackOutline();
+        ApplyImageEffect_PersonalityColor(gCanvasMonPersonality);
         break;
-    case 10:
-        sub_81254E0();
-        sub_8125630();
-        sub_8125448();
-    case 31:
-        sub_8125630();
+    case IMAGE_EFFECT_INVERT_BLACK_WHITE:
+        ApplyImageEffect_BlackOutline();
+        ApplyImageEffect_Invert();
+        ApplyImageEffect_BlackAndWhite();
+    case IMAGE_EFFECT_INVERT:
+        ApplyImageEffect_Invert();
         break;
-    case 11:
-        sub_81254E0();
-        sub_81257F8();
-        sub_81257F8();
-        sub_81258A0();
-        sub_8125448();
+    case IMAGE_EFFECT_THICK_BLACK_WHITE:
+        ApplyImageEffect_BlackOutline();
+        ApplyImageEffect_BlurRight();
+        ApplyImageEffect_BlurRight();
+        ApplyImageEffect_BlurDown();
+        ApplyImageEffect_BlackAndWhite();
         break;
-    case 13:
-        sub_81256C8();
+    case IMAGE_EFFECT_SHIMMER:
+        ApplyImageEffect_Shimmer();
         break;
-    case 30:
-        sub_81254E0();
+    case IMAGE_EFFECT_OUTLINE:
+        ApplyImageEffect_BlackOutline();
         break;
-    case 32:
-        sub_81257F8();
+    case IMAGE_EFFECT_BLUR_RIGHT:
+        ApplyImageEffect_BlurRight();
         break;
-    case 33:
-        sub_81258A0();
+    case IMAGE_EFFECT_BLUR_DOWN:
+        ApplyImageEffect_BlurDown();
         break;
-    case 6:
-        sub_8125250();
-        sub_81250B8(3);
+    case IMAGE_EFFECT_GRAYSCALE_LIGHT:
+        ApplyImageEffect_Grayscale();
+        ApplyImageEffect_RedChannelGrayscale(3);
         break;
-    case 36:
-        sub_81254E0();
-        sub_81257F8();
-        sub_81258A0();
-        sub_8125448();
-        sub_81252E8();
-        sub_81252E8();
-        sub_81250B8(2);
-        sub_8125170(4);
+    case IMAGE_EFFECT_CHARCOAL:
+        ApplyImageEffect_BlackOutline();
+        ApplyImageEffect_BlurRight();
+        ApplyImageEffect_BlurDown();
+        ApplyImageEffect_BlackAndWhite();
+        ApplyImageEffect_Blur();
+        ApplyImageEffect_Blur();
+        ApplyImageEffect_RedChannelGrayscale(2);
+        ApplyImageEffect_RedChannelGrayscaleHighlight(4);
         break;
     }
 }
 
-static void sub_81250B8(u8 a0) // it changes palette someway somehow... .__.
+static void ApplyImageEffect_RedChannelGrayscale(u8 delta)
 {
     u8 i, j;
 
-    for (i = 0; i < gUnknown_0300616C; i++)
+    for (j = 0; j < gCanvasRowEnd; j++)
     {
-        u16* var2 = &(*gUnknown_03006168)[0][(gUnknown_03006178 + i) * gUnknown_03006180];
-        u16* pal = &var2[gUnknown_03006164];
-        for (j = 0; j < gUnknown_03006174; j++, pal++)
+        u16 *pixelRow = &(*gCanvasPixels)[0][(gCanvasRowStart + j) * gCanvasWidth];
+        u16 *pixel = &pixelRow[gCanvasColumnStart];
+        for (i = 0; i < gCanvasColumnEnd; i++, pixel++)
         {
-            if (!(0x8000 & *pal))
+            if (!(0x8000 & *pixel))
             {
-                u8 val = (31 & *pal);
-                val += a0;
-                if (val > 31)
-                    val = 31;
+                // Gets the grayscale value, based on the pixel's red channel.
+                // Also adds a delta to skew lighter or darker.
+                u8 grayValue = (31 & *pixel);
+                grayValue += delta;
+                if (grayValue > 31)
+                    grayValue = 31;
 
-                *pal = RGB2(val, val, val);
+                *pixel = RGB2(grayValue, grayValue, grayValue);
             }
         }
     }
 }
 
-static void sub_8125170(u8 a0)
+static void ApplyImageEffect_RedChannelGrayscaleHighlight(u8 highlight)
 {
     u8 i, j;
 
-    for (i = 0; i < gUnknown_0300616C; i++)
+    for (j = 0; j < gCanvasRowEnd; j++)
     {
-        u16* var2 = &(*gUnknown_03006168)[0][(gUnknown_03006178 + i) * gUnknown_03006180];
-        u16* pal = &var2[gUnknown_03006164];
-        for (j = 0; j < gUnknown_03006174; j++, pal++)
+        u16 *pixelRow = &(*gCanvasPixels)[0][(gCanvasRowStart + j) * gCanvasWidth];
+        u16 *pixel = &pixelRow[gCanvasColumnStart];
+        for (i = 0; i < gCanvasColumnEnd; i++, pixel++)
         {
-            if (!(0x8000 & *pal))
+            if (!(0x8000 & *pixel))
             {
-                u8 val = (31 & *pal);
-                if (val > 31 - a0)
-                    val = 31 - (a0 >> 1);
+                u8 grayValue = (31 & *pixel);
+                if (grayValue > 31 - highlight)
+                    grayValue = 31 - (highlight >> 1);
 
-                *pal = RGB2(val, val, val);
+                *pixel = RGB2(grayValue, grayValue, grayValue);
             }
         }
     }
 }
 
-static void sub_8125230(void)
+static void ApplyImageEffect_Pointillism(void)
 {
     u32 i;
     for (i = 0; i < 3200; i++)
-        sub_8125954(i);
+        AddPointillismPoints(i);
 }
 
-static void sub_8125250(void)
+static void ApplyImageEffect_Grayscale(void)
 {
     u8 i, j;
 
-    for (i = 0; i < gUnknown_0300616C; i++)
+    for (j = 0; j < gCanvasRowEnd; j++)
     {
-        u16* var2 = &(*gUnknown_03006168)[0][(gUnknown_03006178 + i) * gUnknown_03006180];
-        u16* color = &var2[gUnknown_03006164];
-        for (j = 0; j < gUnknown_03006174; j++, color++)
+        u16 *pixelRow = &(*gCanvasPixels)[0][(gCanvasRowStart + j) * gCanvasWidth];
+        u16 *pixel = &pixelRow[gCanvasColumnStart];
+        for (i = 0; i < gCanvasColumnEnd; i++, pixel++)
         {
-            if (!(0x8000 & *color))
-            {
-                *color = ConvertColorToGrayscale(color);
-            }
+            if (!(0x8000 & *pixel))
+                *pixel = ConvertColorToGrayscale(pixel);
         }
     }
 }
 
-static void sub_81252E8(void)
+static void ApplyImageEffect_Blur(void)
 {
     u8 i, j;
 
-    for (i = 0; i < gUnknown_03006174; i++)
+    for (i = 0; i < gCanvasColumnEnd; i++)
     {
-        u16* var0 = &(*gUnknown_03006168)[0][gUnknown_03006178 * gUnknown_03006180];
-        u16* palette = &var0[gUnknown_03006164 + i];
-        u16 color = *palette;
+        u16 *pixelRow = &(*gCanvasPixels)[0][gCanvasRowStart * gCanvasWidth];
+        u16 *pixel = &pixelRow[gCanvasColumnStart + i];
+        u16 prevPixel = *pixel;
 
         j = 1;
-        palette += gUnknown_03006180;
-        while (j < gUnknown_0300616C - 1)
+        pixel += gCanvasWidth;
+        while (j < gCanvasRowEnd - 1)
         {
-            if (!(0x8000 & *palette))
+            if (!(0x8000 & *pixel))
             {
-                *palette = sub_8125E18(&color, palette, palette + gUnknown_03006180);
-                color = *palette;
+                *pixel = QuantizePixel_Blur(&prevPixel, pixel, pixel + gCanvasWidth);
+                prevPixel = *pixel;
             }
 
             j++;
-            palette += gUnknown_03006180;
+            pixel += gCanvasWidth;
         }
     }
 }
 
-static void sub_81253A4(u8 arg0)
+static void ApplyImageEffect_PersonalityColor(u8 personality)
 {
     u8 i, j;
 
-    for (i = 0; i < gUnknown_0300616C; i++)
+    for (j = 0; j < gCanvasRowEnd; j++)
     {
-        u16* var0 = &(*gUnknown_03006168)[0][(gUnknown_03006178 + i) * gUnknown_03006180];
-        u16* color = &var0[gUnknown_03006164];
-        for (j = 0; j < gUnknown_03006174; j++, color++)
+        u16 *pixelRow = &(*gCanvasPixels)[0][(gCanvasRowStart + j) * gCanvasWidth];
+        u16 *pixel = &pixelRow[gCanvasColumnStart];
+        for (i = 0; i < gCanvasColumnEnd; i++, pixel++)
         {
-            if (!(0x8000 & *color))
-            {
-                *color = ConvertCoolColor(color, arg0);
-            }
+            if (!(0x8000 & *pixel))
+                *pixel = QuantizePixel_PersonalityColor(pixel, personality);
         }
     }
 }
 
-static void sub_8125448(void)
+static void ApplyImageEffect_BlackAndWhite(void)
 {
     u8 i, j;
 
-    for (i = 0; i < gUnknown_0300616C; i++)
+    for (j = 0; j < gCanvasRowEnd; j++)
     {
-        u16* var0 = &(*gUnknown_03006168)[0][(gUnknown_03006178 + i) * gUnknown_03006180];
-        u16* color = &var0[gUnknown_03006164];
-        for (j = 0; j < gUnknown_03006174; j++, color++)
+        u16 *pixelRow = &(*gCanvasPixels)[0][(gCanvasRowStart + j) * gCanvasWidth];
+        u16 *pixel = &pixelRow[gCanvasColumnStart];
+        for (i = 0; i < gCanvasColumnEnd; i++, pixel++)
         {
-            if (!(0x8000 & *color))
-            {
-                *color = ConvertToBlackOrWhite(color);
-            }
+            if (!(0x8000 & *pixel))
+                *pixel = QuantizePixel_BlackAndWhite(pixel);
         }
     }
 }
 
-static void sub_81254E0(void)
+static void ApplyImageEffect_BlackOutline(void)
 {
     u8 i, j;
-    u16 *palette;
+    u16 *pixel;
 
-    for (i = 0; i < gUnknown_0300616C; i++)
+    // Handle top row of pixels first.
+    for (j = 0; j < gCanvasRowEnd; j++)
     {
-        u16 *var0 = &(*gUnknown_03006168)[0][(gUnknown_03006178 + i) * gUnknown_03006180];
-        palette = &var0[gUnknown_03006164];
-        *palette = sub_8125C98(palette, palette + 1);
-        for (j = 1, palette = palette + 1; j < gUnknown_03006174 - 1; j++, palette++)
+        u16 *pixelRow = &(*gCanvasPixels)[0][(gCanvasRowStart + j) * gCanvasWidth];
+        pixel = &pixelRow[gCanvasColumnStart];
+        *pixel = QuantizePixel_BlackOutline(pixel, pixel + 1);
+        for (i = 1, pixel++; i < gCanvasColumnEnd - 1; i++, pixel++)
         {
-            *palette = sub_8125C98(palette, palette + 1);
-            *palette = sub_8125C98(palette, palette - 1);
+            *pixel = QuantizePixel_BlackOutline(pixel, pixel + 1);
+            *pixel = QuantizePixel_BlackOutline(pixel, pixel - 1);
         }
 
-        *palette = sub_8125C98(palette, palette - 1);
+        *pixel = QuantizePixel_BlackOutline(pixel, pixel - 1);
     }
 
-    for (j = 0; j < gUnknown_03006174; j++)
+    // Handle each column from left to right.
+    for (i = 0; i < gCanvasColumnEnd; i++)
     {
-        u16 *var0 = &(*gUnknown_03006168)[0][gUnknown_03006178 * gUnknown_03006180];
-        palette = &var0[gUnknown_03006164 + j];
-        *palette = sub_8125C98(palette, palette + gUnknown_03006180);
-        for (i = 1, palette = palette + gUnknown_03006180; i < gUnknown_0300616C - 1; i++, palette += gUnknown_03006180)
+        u16 *pixelRow = &(*gCanvasPixels)[0][gCanvasRowStart * gCanvasWidth];
+        pixel = &pixelRow[gCanvasColumnStart + i];
+        *pixel = QuantizePixel_BlackOutline(pixel, pixel + gCanvasWidth);
+        for (j = 1, pixel += gCanvasWidth; j < gCanvasRowEnd - 1; j++, pixel += gCanvasWidth)
         {
-            *palette = sub_8125C98(palette, palette + gUnknown_03006180);
-            *palette = sub_8125C98(palette, palette - gUnknown_03006180);
+            *pixel = QuantizePixel_BlackOutline(pixel, pixel + gCanvasWidth);
+            *pixel = QuantizePixel_BlackOutline(pixel, pixel - gCanvasWidth);
         }
 
-        *palette = sub_8125C98(palette, palette - gUnknown_03006180);
-    }
-}
-
-static void sub_8125630(void)
-{
-    u8 i, j;
-
-    for (i = 0; i < gUnknown_0300616C; i++)
-    {
-        u16 *var0 = &(*gUnknown_03006168)[0][(gUnknown_03006178 + i) * gUnknown_03006180];
-        u16 *color = &var0[gUnknown_03006164];
-        for (j = 0; j < gUnknown_03006174; j++, color++)
-        {
-            if (!(0x8000 & *color))
-            {
-                *color = InvertColor(color);
-            }
-        }
+        *pixel = QuantizePixel_BlackOutline(pixel, pixel - gCanvasWidth);
     }
 }
 
-static void sub_81256C8(void)
+static void ApplyImageEffect_Invert(void)
 {
     u8 i, j;
-    u16 *palette;
-    u16 color;
 
-    palette = (*gUnknown_03006168)[0];
+    for (j = 0; j < gCanvasRowEnd; j++)
+    {
+        u16 *pixelRow = &(*gCanvasPixels)[0][(gCanvasRowStart + j) * gCanvasWidth];
+        u16 *pixel = &pixelRow[gCanvasColumnStart];
+        for (i = 0; i < gCanvasColumnEnd; i++, pixel++)
+        {
+            if (!(0x8000 & *pixel))
+                *pixel = QuantizePixel_Invert(pixel);
+        }
+    }
+}
+
+static void ApplyImageEffect_Shimmer(void)
+{
+    u8 i, j;
+    u16 *pixel;
+    u16 prevPixel;
+
+    // First, invert all of the colors.
+    pixel = (*gCanvasPixels)[0];
     for (i = 0; i < 64; i++)
     {
-        for (j = 0; j < 64; j++, palette++)
+        for (j = 0; j < 64; j++, pixel++)
         {
-            if (!(0x8000 & *palette))
-            {
-                *palette = InvertColor(palette);
-            }
+            if (!(0x8000 & *pixel))
+                *pixel = QuantizePixel_Invert(pixel);
         }
     }
 
+    // Blur the pixels twice.
     for (j = 0; j < 64; j++)
     {
-        palette = &(*gUnknown_03006168)[0][j];
-        color = *palette;
-        *palette = 0x8000;
-        for (i = 1, palette += 64; i < 63; i++, palette += 64)
+        pixel = &(*gCanvasPixels)[0][j];
+        prevPixel = *pixel;
+        *pixel = 0x8000;
+        for (i = 1, pixel += 64; i < 63; i++, pixel += 64)
         {
-            if (!(0x8000 & *palette))
+            if (!(0x8000 & *pixel))
             {
-                *palette = sub_8125F38(&color, palette, palette + 64);
-                color = *palette;
+                *pixel = QuantizePixel_BlurHard(&prevPixel, pixel, pixel + 64);
+                prevPixel = *pixel;
             }
         }
 
-        *palette = 0x8000;
-        palette = &(*gUnknown_03006168)[0][j];
-        color = *palette;
-        *palette = 0x8000;
-        for (i = 1, palette += 64; i < 63; i++, palette += 64)
+        *pixel = 0x8000;
+        pixel = &(*gCanvasPixels)[0][j];
+        prevPixel = *pixel;
+        *pixel = 0x8000;
+        for (i = 1, pixel += 64; i < 63; i++, pixel += 64)
         {
-            if (!(0x8000 & *palette))
+            if (!(0x8000 & *pixel))
             {
-                *palette = sub_8125F38(&color, palette, palette + 64);
-                color = *palette;
+                *pixel = QuantizePixel_BlurHard(&prevPixel, pixel, pixel + 64);
+                prevPixel = *pixel;
             }
         }
 
-        *palette = 0x8000;
+        *pixel = 0x8000;
     }
 
-    palette = (*gUnknown_03006168)[0];
+    // Finally, invert colors back to the original color space.
+    // The above blur causes the outline areas to darken, which makes
+    // this inversion give the effect of light outlines.
+    pixel = (*gCanvasPixels)[0];
     for (i = 0; i < 64; i++)
     {
-        for (j = 0; j < 64; j++, palette++)
+        for (j = 0; j < 64; j++, pixel++)
         {
-            if (!(0x8000 & *palette))
-            {
-                *palette = InvertColor(palette);
-            }
+            if (!(0x8000 & *pixel))
+                *pixel = QuantizePixel_Invert(pixel);
         }
     }
 }
 
-static void sub_81257F8(void)
+static void ApplyImageEffect_BlurRight(void)
 {
     u8 i, j;
 
-    for (i = 0; i < gUnknown_0300616C; i++)
+    for (j = 0; j < gCanvasRowEnd; j++)
     {
-        u16 *var0 = &(*gUnknown_03006168)[0][(gUnknown_03006178 + i) * gUnknown_03006180];
-        u16 *palette = &var0[gUnknown_03006164];
-        u16 color = *palette;
-        for (j = 1, palette++; j < gUnknown_03006174 - 1; j++, palette++)
+        u16 *pixelRow = &(*gCanvasPixels)[0][(gCanvasRowStart + j) * gCanvasWidth];
+        u16 *pixel = &pixelRow[gCanvasColumnStart];
+        u16 prevPixel = *pixel;
+        for (i = 1, pixel++; i < gCanvasColumnEnd - 1; i++, pixel++)
         {
-            if (!(0x8000 & *palette))
+            if (!(0x8000 & *pixel))
             {
-                *palette = sub_8125CF4(&color, palette);
-                color = *palette;
+                *pixel = QuantizePixel_MotionBlur(&prevPixel, pixel);
+                prevPixel = *pixel;
             }
         }
     }
 }
 
-static void sub_81258A0(void)
+static void ApplyImageEffect_BlurDown(void)
 {
     u8 i, j;
 
-    for (i = 0; i < gUnknown_03006174; i++)
+    for (i = 0; i < gCanvasColumnEnd; i++)
     {
-        u16* var0 = &(*gUnknown_03006168)[0][gUnknown_03006178 * gUnknown_03006180];
-        u16* palette = &var0[gUnknown_03006164 + i];
-        u16 color = *palette;
-        for (j = 1, palette += gUnknown_03006180; j < gUnknown_0300616C - 1; j++, palette += gUnknown_03006180)
+        u16 *pixelRow = &(*gCanvasPixels)[0][gCanvasRowStart * gCanvasWidth];
+        u16 *pixel = &pixelRow[gCanvasColumnStart + i];
+        u16 prevPixel = *pixel;
+        for (j = 1, pixel += gCanvasWidth; j < gCanvasRowEnd - 1; j++, pixel += gCanvasWidth)
         {
-            if (!(0x8000 & *palette))
+            if (!(0x8000 & *pixel))
             {
-                *palette = sub_8125CF4(&color, palette);
-                color = *palette;
+                *pixel = QuantizePixel_MotionBlur(&prevPixel, pixel);
+                prevPixel = *pixel;
             }
         }
     }
 }
 
-static void sub_8125954(u16 arg0)
+struct PointillismPoint
+{
+    u8 column;
+    u8 row;
+    u16 delta;
+};
+
+static void AddPointillismPoints(u16 arg0)
 {
     u8 i;
-    u8 r5, r9;
-    struct Unk8125954 unkStruct[6];
+    bool8 offsetDownLeft;
+    u8 colorType;
+    struct PointillismPoint points[6];
 
-    unkStruct[0].unk0 = gUnknown_085A1F94[arg0][0];
-    unkStruct[0].unk1 = gUnknown_085A1F94[arg0][1];
-    unkStruct[0].unk2 = (gUnknown_085A1F94[arg0][2] >> 3) & 7;
+    points[0].column = gPointillismPoints[arg0][0];
+    points[0].row = gPointillismPoints[arg0][1];
+    points[0].delta = (gPointillismPoints[arg0][2] >> 3) & 7;
 
-    r9 = (gUnknown_085A1F94[arg0][2] >> 1) & 3;
-    r5 = gUnknown_085A1F94[arg0][2] & 1;
-    for (i = 1; i < unkStruct[0].unk2; i++)
+    colorType = (gPointillismPoints[arg0][2] >> 1) & 3;
+    offsetDownLeft = gPointillismPoints[arg0][2] & 1;
+    for (i = 1; i < points[0].delta; i++)
     {
-        if (!r5)
+        if (!offsetDownLeft)
         {
-            unkStruct[i].unk0 = unkStruct[0].unk0 - i;
-            unkStruct[i].unk1 = unkStruct[0].unk1 + i;
+            points[i].column = points[0].column - i;
+            points[i].row = points[0].row + i;
         }
         else
         {
-            unkStruct[i].unk0 = unkStruct[0].unk0 + 1;
-            unkStruct[i].unk1 = unkStruct[0].unk1 - 1;
+            points[i].column = points[0].column + 1;
+            points[i].row = points[0].row - 1;
         }
 
-        if (unkStruct[i].unk0 > 63 || unkStruct[i].unk1 > 63)
+        if (points[i].column > 63 || points[i].row > 63)
         {
-            unkStruct[0].unk2 = i - 1;
+            points[0].delta = i - 1;
             break;
         }
 
-        unkStruct[i].unk2 = unkStruct[0].unk2 - i;
+        points[i].delta = points[0].delta - i;
     }
 
-    for (i = 0; i < unkStruct[0].unk2; i++)
+    for (i = 0; i < points[0].delta; i++)
     {
-        u16 *pal = &(*gUnknown_03006168)[unkStruct[i].unk1 * 2][unkStruct[i].unk0];
+        u16 *pixel = &(*gCanvasPixels)[points[i].row * 2][points[i].column];
 
-        if (!(0x8000 & *pal))
+        if (!(0x8000 & *pixel))
         {
-            u16 r = (*pal) & 0x1F;
-            u16 g = (*pal >> 5) & 0x1F;
-            u16 b = (*pal >> 10) & 0x1F;
+            u16 red = (*pixel) & 0x1F;
+            u16 green = (*pixel >> 5) & 0x1F;
+            u16 blue = (*pixel >> 10) & 0x1F;
 
-            switch (r9)
+            switch (colorType)
             {
             case 0:
             case 1:
-                switch (((gUnknown_085A1F94[arg0][2] >> 3) & 7) % 3)
+                switch (((gPointillismPoints[arg0][2] >> 3) & 7) % 3)
                 {
                 case 0:
-                    if (r >= unkStruct[i].unk2)
-                        r -= unkStruct[i].unk2;
+                    if (red >= points[i].delta)
+                        red -= points[i].delta;
                     else
-                        r = 0;
+                        red = 0;
                     break;
                 case 1:
-                    if (g >= unkStruct[i].unk2)
-                        g -= unkStruct[i].unk2;
+                    if (green >= points[i].delta)
+                        green -= points[i].delta;
                     else
-                        g = 0;
+                        green = 0;
                     break;
                 case 2:
-                    if (b >= unkStruct[i].unk2)
-                        b -= unkStruct[i].unk2;
+                    if (blue >= points[i].delta)
+                        blue -= points[i].delta;
                     else
-                        b = 0;
+                        blue = 0;
                     break;
                 }
                 break;
             case 2:
             case 3:
-                r += unkStruct[i].unk2;
-                g += unkStruct[i].unk2;
-                b += unkStruct[i].unk2;
-                if (r > 31)
-                    r = 31;
-                if (g > 31)
-                    g = 31;
-                if (b > 31)
-                    b = 31;
+                red += points[i].delta;
+                green += points[i].delta;
+                blue += points[i].delta;
+                if (red > 31)
+                    red = 31;
+                if (green > 31)
+                    green = 31;
+                if (blue > 31)
+                    blue = 31;
                 break;
             }
 
-            *pal = RGB2(r, g, b);
+            *pixel = RGB2(red, green, blue);
         }
     }
 }
@@ -511,21 +510,21 @@ static u16 ConvertColorToGrayscale(u16 *color)
 
 // The dark colors are the colored edges of the Cool painting effect.
 // Everything else is white.
-static u16 ConvertCoolColor(u16 *color, u8 personality)
+static u16 QuantizePixel_PersonalityColor(u16 *color, u8 personality)
 {
     u16 red = *color & 0x1F;
     u16 green = (*color >> 5) & 0x1F;
     u16 blue = (*color >> 10) & 0x1F;
 
     if (red < 17 && green < 17 && blue < 17)
-        return GetCoolColorFromPersonality(personality);
+        return GetColorFromPersonality(personality);
     else
         return RGB_WHITE;
 }
 
 // Based on the given value, which comes from the first 8 bits of
 // the mon's personality value, return a color.
-static u16 GetCoolColorFromPersonality(u8 personality)
+static u16 GetColorFromPersonality(u8 personality)
 {
     u16 red = 0;
     u16 green = 0;
@@ -576,7 +575,7 @@ static u16 GetCoolColorFromPersonality(u8 personality)
     return RGB2(red, green, blue);
 }
 
-static u16 ConvertToBlackOrWhite(u16 *color)
+static u16 QuantizePixel_BlackAndWhite(u16 *color)
 {
     u16 red = *color & 0x1F;
     u16 green = (*color >> 5) & 0x1F;
@@ -588,22 +587,22 @@ static u16 ConvertToBlackOrWhite(u16 *color)
         return RGB_WHITE;
 }
 
-static u16 sub_8125C98(u16 *colorA, u16 *colorB)
+static u16 QuantizePixel_BlackOutline(u16 *pixelA, u16 *pixelB)
 {
-    if (*colorA)
+    if (*pixelA != RGB_BLACK)
     {
-        if (*colorA & 0x8000)
+        if (*pixelA & 0x8000)
             return 0x8000;
-        if (*colorB & 0x8000)
+        if (*pixelB & 0x8000)
             return RGB_BLACK;
 
-        return *colorA;
+        return *pixelA;
     }
 
     return RGB_BLACK;
 }
 
-static u16 InvertColor(u16 *color)
+static u16 QuantizePixel_Invert(u16 *color)
 {
     u16 red = *color & 0x1F;
     u16 green = (*color >> 5) & 0x1F;
@@ -616,158 +615,160 @@ static u16 InvertColor(u16 *color)
     return RGB2(red, green, blue);
 }
 
-static u16 sub_8125CF4(u16 *a0, u16 *a1)
+static u16 QuantizePixel_MotionBlur(u16 *prevPixel, u16 *curPixel)
 {
-    u16 sp0[2][3];
-    u16 spC[3];
-    u8 r4;
-    u16 r2;
-    u16 r, g, b;
-
-    if (*a0 == *a1)
-        return *a1;
-
-    sp0[0][0] = (*a0 >> 0) & 0x1F;
-    sp0[0][1] = (*a0 >> 5) & 0x1F;
-    sp0[0][2] = (*a0 >> 10) & 0x1F;
-    sp0[1][0] = (*a1 >> 0) & 0x1F;
-    sp0[1][1] = (*a1 >> 5) & 0x1F;
-    sp0[1][2] = (*a1 >> 10) & 0x1F;
-
-    if (sp0[0][0] > 25 && sp0[0][1] > 25 && sp0[0][2] > 25)
-        return *a1;
-    if (sp0[1][0] > 25 && sp0[1][1] > 25 && sp0[1][2] > 25)
-        return *a1;
-
-    for (r4 = 0; r4 < 3; r4++)
-    {
-        if (sp0[0][r4] > sp0[1][r4])
-            spC[r4] = sp0[0][r4] - sp0[1][r4];
-        else
-            spC[r4] = sp0[1][r4] - sp0[0][r4];
-    }
-
-    if (spC[0] >= spC[1])
-    {
-        if (spC[0] >= spC[2])
-            r2 = spC[0];
-        else if (spC[1] >= spC[2])
-            r2 = spC[1];
-        else
-            r2 = spC[2];
-    }
-    else
-    {
-        if (spC[1] >= spC[2])
-            r2 = spC[1];
-        else if (spC[2] >= spC[0])
-            r2 = spC[2];
-        else
-            r2 = spC[0];
-    }
-
-    r = (sp0[1][0] * (31 - r2 / 2)) / 31;
-    g = (sp0[1][1] * (31 - r2 / 2)) / 31;
-    b = (sp0[1][2] * (31 - r2 / 2)) / 31;
-    return RGB2(r, g, b);
-}
-
-static u16 sub_8125E18(u16 * a0, u16 * a1, u16 * a2)
-{
+    u16 pixelChannels[2][3];
+    u16 diffs[3];
+    u8 i;
+    u16 largestDiff;
     u16 red, green, blue;
-    u16 avg0, avg1, avg2;
-    u16 diff1, diff2;
-    u32 minimum;
-    u16 factor;
 
-    if (*a0 == *a1 && *a2 == *a1)
-        return *a1;
+    if (*prevPixel == *curPixel)
+        return *curPixel;
 
-    red = (*a1 >> 0) & 0x1F;
-    green = (*a1 >> 5) & 0x1F;
-    blue = (*a1 >> 10) & 0x1F;
+    pixelChannels[0][0] = (*prevPixel >> 0)  & 0x1F;
+    pixelChannels[0][1] = (*prevPixel >> 5)  & 0x1F;
+    pixelChannels[0][2] = (*prevPixel >> 10) & 0x1F;
+    pixelChannels[1][0] = (*curPixel  >> 0)  & 0x1F;
+    pixelChannels[1][1] = (*curPixel  >> 5)  & 0x1F;
+    pixelChannels[1][2] = (*curPixel  >> 10) & 0x1F;
 
-    avg0 = (((*a0 >> 0) & 0x1F) + ((*a0 >> 5) & 0x1F) + ((*a0 >> 10) & 0x1F)) / 3;
-    avg1 = (((*a1 >> 0) & 0x1F) + ((*a1 >> 5) & 0x1F) + ((*a1 >> 10) & 0x1F)) / 3;
-    avg2 = (((*a2 >> 0) & 0x1F) + ((*a2 >> 5) & 0x1F) + ((*a2 >> 10) & 0x1F)) / 3;
+    // Don't blur light colors.
+    if (pixelChannels[0][0] > 25 && pixelChannels[0][1] > 25 && pixelChannels[0][2] > 25)
+        return *curPixel;
+    if (pixelChannels[1][0] > 25 && pixelChannels[1][1] > 25 && pixelChannels[1][2] > 25)
+        return *curPixel;
 
-    if (avg0 == avg1 && avg2 == avg1)
-        return *a1;
+    for (i = 0; i < 3; i++)
+    {
+        if (pixelChannels[0][i] > pixelChannels[1][i])
+            diffs[i] = pixelChannels[0][i] - pixelChannels[1][i];
+        else
+            diffs[i] = pixelChannels[1][i] - pixelChannels[0][i];
+    }
 
-    if (avg0 > avg1)
-        diff1 = avg0 - avg1;
+    // Find the largest diff of any of the color channels.
+    if (diffs[0] >= diffs[1])
+    {
+        if (diffs[0] >= diffs[2])
+            largestDiff = diffs[0];
+        else if (diffs[1] >= diffs[2])
+            largestDiff = diffs[1];
+        else
+            largestDiff = diffs[2];
+    }
     else
-        diff1 = avg1 - avg0;
+    {
+        if (diffs[1] >= diffs[2])
+            largestDiff = diffs[1];
+        else if (diffs[2] >= diffs[0])
+            largestDiff = diffs[2];
+        else
+            largestDiff = diffs[0];
+    }
 
-    if (avg2 > avg1)
-        diff2 = avg2 - avg1;
-    else
-        diff2 = avg1 - avg2;
-
-    if (diff1 >= diff2)
-        minimum = diff1;
-    else
-        minimum = diff2;
-
-    factor = 31 - minimum / 2;
-    red = red * factor / 31;
-    green = green * factor / 31;
-    blue = blue * factor / 31;
+    red =   (pixelChannels[1][0] * (31 - largestDiff / 2)) / 31;
+    green = (pixelChannels[1][1] * (31 - largestDiff / 2)) / 31;
+    blue =  (pixelChannels[1][2] * (31 - largestDiff / 2)) / 31;
     return RGB2(red, green, blue);
 }
 
-static u16 sub_8125F38(u16 *a0, u16 *a1, u16 *a2)
+static u16 QuantizePixel_Blur(u16 *prevPixel, u16 *curPixel, u16 *nextPixel)
 {
     u16 red, green, blue;
-    u16 avg0, avg1, avg2;
-    u16 diff1, diff2;
-    u32 minimum;
+    u16 prevAvg, curAvg, nextAvg;
+    u16 prevDiff, nextDiff;
+    u32 diff;
     u16 factor;
 
-    if (*a0 == *a1 && *a2 == *a1)
-        return *a1;
+    if (*prevPixel == *curPixel && *nextPixel == *curPixel)
+        return *curPixel;
 
-    red = (*a1 >> 0) & 0x1F;
-    green = (*a1 >> 5) & 0x1F;
-    blue = (*a1 >> 10) & 0x1F;
+    red   = (*curPixel >> 0)  & 0x1F;
+    green = (*curPixel >> 5)  & 0x1F;
+    blue  = (*curPixel >> 10) & 0x1F;
 
-    avg0 = (((*a0 >> 0) & 0x1F) + ((*a0 >> 5) & 0x1F) + ((*a0 >> 10) & 0x1F)) / 3;
-    avg1 = (((*a1 >> 0) & 0x1F) + ((*a1 >> 5) & 0x1F) + ((*a1 >> 10) & 0x1F)) / 3;
-    avg2 = (((*a2 >> 0) & 0x1F) + ((*a2 >> 5) & 0x1F) + ((*a2 >> 10) & 0x1F)) / 3;
+    prevAvg = (((*prevPixel >> 0) & 0x1F) + ((*prevPixel >> 5) & 0x1F) + ((*prevPixel >> 10) & 0x1F)) / 3;
+    curAvg  = (((*curPixel  >> 0) & 0x1F) + ((*curPixel  >> 5) & 0x1F) + ((*curPixel  >> 10) & 0x1F)) / 3;
+    nextAvg = (((*nextPixel >> 0) & 0x1F) + ((*nextPixel >> 5) & 0x1F) + ((*nextPixel >> 10) & 0x1F)) / 3;
 
-    if (avg0 == avg1 && avg2 == avg1)
-        return *a1;
+    if (prevAvg == curAvg && nextAvg == curAvg)
+        return *curPixel;
 
-    if (avg0 > avg1)
-        diff1 = avg0 - avg1;
+    if (prevAvg > curAvg)
+        prevDiff = prevAvg - curAvg;
     else
-        diff1 = avg1 - avg0;
+        prevDiff = curAvg - prevAvg;
 
-    if (avg2 > avg1)
-        diff2 = avg2 - avg1;
+    if (nextAvg > curAvg)
+        nextDiff = nextAvg - curAvg;
     else
-        diff2 = avg1 - avg2;
+        nextDiff = curAvg - nextAvg;
 
-    if (diff1 >= diff2)
-        minimum = diff1;
+    if (prevDiff >= nextDiff)
+        diff = prevDiff;
     else
-        minimum = diff2;
+        diff = nextDiff;
 
-    factor = 31 - minimum;
-    red = red * factor / 31;
-    green = green * factor / 31;
-    blue = blue * factor / 31;
+    factor = 31 - diff / 2;
+    red   = (red   * factor) / 31;
+    green = (green * factor) / 31;
+    blue  = (blue  * factor) / 31;
+    return RGB2(red, green, blue);
+}
+
+static u16 QuantizePixel_BlurHard(u16 *prevPixel, u16 *curPixel, u16 *nextPixel)
+{
+    u16 red, green, blue;
+    u16 prevAvg, curAvg, nextAvg;
+    u16 prevDiff, nextDiff;
+    u32 diff;
+    u16 factor;
+
+    if (*prevPixel == *curPixel && *nextPixel == *curPixel)
+        return *curPixel;
+
+    red   = (*curPixel >> 0)  & 0x1F;
+    green = (*curPixel >> 5)  & 0x1F;
+    blue  = (*curPixel >> 10) & 0x1F;
+
+    prevAvg = (((*prevPixel >> 0) & 0x1F) + ((*prevPixel >> 5) & 0x1F) + ((*prevPixel >> 10) & 0x1F)) / 3;
+    curAvg  = (((*curPixel  >> 0) & 0x1F) + ((*curPixel  >> 5) & 0x1F) + ((*curPixel  >> 10) & 0x1F)) / 3;
+    nextAvg = (((*nextPixel >> 0) & 0x1F) + ((*nextPixel >> 5) & 0x1F) + ((*nextPixel >> 10) & 0x1F)) / 3;
+
+    if (prevAvg == curAvg && nextAvg == curAvg)
+        return *curPixel;
+
+    if (prevAvg > curAvg)
+        prevDiff = prevAvg - curAvg;
+    else
+        prevDiff = curAvg - prevAvg;
+
+    if (nextAvg > curAvg)
+        nextDiff = nextAvg - curAvg;
+    else
+        nextDiff = curAvg - nextAvg;
+
+    if (prevDiff >= nextDiff)
+        diff = prevDiff;
+    else
+        diff = nextDiff;
+
+    factor = 31 - diff;
+    red   = (red   * factor) / 31;
+    green = (green * factor) / 31;
+    blue  = (blue  * factor) / 31;
     return RGB2(red, green, blue);
 }
 
 /*
-void sub_8126058(struct Unk030061A0 *arg0)
+void ConvertImageProcessingToGBA(struct ContestPaintingContext *arg0)
 {
     u16 i, j, k;
-    u8 r5 = arg0->var_1D >> 3;
-    u8 var_24 = arg0->var_1E >> 3;
-    u16 (*var_2C)[][32] = arg0->var_4;
-    u32 var_28 = arg0->var_10;
+    u8 r5 = arg0->canvasWidth >> 3;
+    u8 var_24 = arg0->canvasHeight >> 3;
+    u16 (*var_2C)[][32] = arg0->canvasPixels;
+    u32 var_28 = arg0->dest;
 
     if (arg0->var_16 == 2)
     {
@@ -786,7 +787,7 @@ void sub_8126058(struct Unk030061A0 *arg0)
 */
 
 NAKED
-void sub_8126058(struct Unk030061A0 *arg0)
+void ConvertImageProcessingToGBA(struct ContestPaintingContext *arg0)
 {
     asm_unified("\n\
     push {r4-r7,lr}\n\
@@ -967,139 +968,147 @@ _08126194:\n\
     bx r0");
 }
 
-void sub_81261A4(struct Unk030061A0 *arg0)
+void ApplyImageProcessingQuantization(struct ContestPaintingContext *context)
 {
-    gUnknown_03006188 = arg0->var_18 * 16;
-    gUnknown_03006184 = &arg0->var_8[gUnknown_03006188];
-    gUnknown_03006168 = arg0->var_4;
-    gUnknown_03006164 = arg0->var_19;
-    gUnknown_03006178 = arg0->var_1A;
-    gUnknown_03006174 = arg0->var_1B;
-    gUnknown_0300616C = arg0->var_1C;
-    gUnknown_03006180 = arg0->var_1D;
-    gUnknown_03006170 = arg0->var_1E;
+    gCanvasPaletteStart = context->paletteStart * 16;
+    gCanvasPalette = &context->canvasPalette[gCanvasPaletteStart];
+    gCanvasPixels = context->canvasPixels;
+    gCanvasColumnStart = context->columnStart;
+    gCanvasRowStart = context->rowStart;
+    gCanvasColumnEnd = context->columnEnd;
+    gCanvasRowEnd = context->rowEnd;
+    gCanvasWidth = context->canvasWidth;
+    gCanvasHeight = context->canvasHeight;
 
-    switch (arg0->var_14)
+    switch (context->quantizeEffect)
     {
-    case 0:
-        sub_81263A4(FALSE);
+    case QUANTIZE_EFFECT_STANDARD:
+        QuantizePalette_Standard(FALSE);
         break;
-    case 1:
-        sub_81263A4(TRUE);
+    case QUANTIZE_EFFECT_STANDARD_LIMITED_COLORS:
+        QuantizePalette_Standard(TRUE);
         break;
-    case 2:
-        sub_8126270();
-        sub_8126714();
+    case QUANTIZE_EFFECT_PRIMARY_COLORS:
+        SetPresetPalette_PrimaryColors();
+        QuantizePalette_PrimaryColors();
         break;
-    case 3:
-        sub_8126370();
-        sub_8126664();
+    case QUANTIZE_EFFECT_GRAYSCALE:
+        SetPresetPalette_Grayscale();
+        QuantizePalette_Grayscale();
         break;
-    case 4:
-        sub_8126334();
-        sub_81265B4();
+    case QUANTIZE_EFFECT_GRAYSCALE_SMALL:
+        SetPresetPalette_GrayscaleSmall();
+        QuantizePalette_GrayscaleSmall();
         break;
-    case 5:
-        sub_8126318();
-        sub_81264FC();
+    case QUANTIZE_EFFECT_BLACK_WHITE:
+        SetPresetPalette_BlackAndWhite();
+        QuantizePalette_BlackAndWhite();
         break;
     }
 }
 
-static void sub_8126270(void)
+static void SetPresetPalette_PrimaryColors(void)
 {
-    gUnknown_03006184[0] = RGB2(0, 0, 0);
-    gUnknown_03006184[1] = RGB2(6, 6, 6);
-    gUnknown_03006184[2] = RGB2(29, 29, 29);
-    gUnknown_03006184[3] = RGB2(11, 11, 11);
-    gUnknown_03006184[4] = RGB2(29, 6, 6);
-    gUnknown_03006184[5] = RGB2(6, 29, 6);
-    gUnknown_03006184[6] = RGB2(6, 6, 29);
-    gUnknown_03006184[7] = RGB2(29, 29, 6);
-    gUnknown_03006184[8] = RGB2(29, 6, 29);
-    gUnknown_03006184[9] = RGB2(6, 29, 29);
-    gUnknown_03006184[10] = RGB2(29, 11, 6);
-    gUnknown_03006184[11] = RGB2(11, 29, 6);
-    gUnknown_03006184[12] = RGB2(6, 11, 29);
-    gUnknown_03006184[13] = RGB2(29, 6, 11);
-    gUnknown_03006184[14] = RGB2(6, 29, 11);
-    gUnknown_03006184[15] = RGB2(11, 6, 29);
+    gCanvasPalette[0]  = RGB2(0, 0, 0);
+    gCanvasPalette[1]  = RGB2(6, 6, 6);
+    gCanvasPalette[2]  = RGB2(29, 29, 29);
+    gCanvasPalette[3]  = RGB2(11, 11, 11);
+    gCanvasPalette[4]  = RGB2(29, 6, 6);
+    gCanvasPalette[5]  = RGB2(6, 29, 6);
+    gCanvasPalette[6]  = RGB2(6, 6, 29);
+    gCanvasPalette[7]  = RGB2(29, 29, 6);
+    gCanvasPalette[8]  = RGB2(29, 6, 29);
+    gCanvasPalette[9]  = RGB2(6, 29, 29);
+    gCanvasPalette[10] = RGB2(29, 11, 6);
+    gCanvasPalette[11] = RGB2(11, 29, 6);
+    gCanvasPalette[12] = RGB2(6, 11, 29);
+    gCanvasPalette[13] = RGB2(29, 6, 11);
+    gCanvasPalette[14] = RGB2(6, 29, 11);
+    gCanvasPalette[15] = RGB2(11, 6, 29);
 }
 
-static void sub_8126318(void)
+static void SetPresetPalette_BlackAndWhite(void)
 {
-    gUnknown_03006184[0] = RGB2(0, 0, 0);
-    gUnknown_03006184[1] = RGB2(0, 0, 0);
-    gUnknown_03006184[2] = RGB2(31, 31, 31);
+    gCanvasPalette[0] = RGB2(0, 0, 0);
+    gCanvasPalette[1] = RGB2(0, 0, 0);
+    gCanvasPalette[2] = RGB2(31, 31, 31);
 }
 
-static void sub_8126334(void)
+static void SetPresetPalette_GrayscaleSmall(void)
 {
     u8 i;
 
-    gUnknown_03006184[0] = RGB2(0, 0, 0);
-    gUnknown_03006184[1] = RGB2(0, 0, 0);
+    gCanvasPalette[0] = RGB2(0, 0, 0);
+    gCanvasPalette[1] = RGB2(0, 0, 0);
     for (i = 0; i < 14; i++)
-        gUnknown_03006184[i + 2] = RGB2(2 * (i + 2), 2 * (i + 2), 2 * (i + 2));
+        gCanvasPalette[i + 2] = RGB2(2 * (i + 2), 2 * (i + 2), 2 * (i + 2));
 }
 
-static void sub_8126370(void)
+static void SetPresetPalette_Grayscale(void)
 {
     u8 i;
 
-    gUnknown_03006184[0] = RGB2(0, 0, 0);
+    gCanvasPalette[0] = RGB2(0, 0, 0);
     for (i = 0; i < 32; i++)
-        gUnknown_03006184[i + 1] = RGB2(i, i, i);
+        gCanvasPalette[i + 1] = RGB2(i, i, i);
 }
 
-static void sub_81263A4(bool8 arg0)
+static void QuantizePalette_Standard(bool8 useLimitedPalette)
 {
     u8 i, j;
     u16 maxIndex;
 
     maxIndex = 0xDF;
-    if (!arg0)
+    if (!useLimitedPalette)
         maxIndex = 0xFF;
 
-    for (j = 0; j < maxIndex; j++)
-        gUnknown_03006184[j] = 0;
+    for (i = 0; i < maxIndex; i++)
+        gCanvasPalette[i] = RGB_BLACK;
 
-    gUnknown_03006184[maxIndex] = RGB2(15, 15, 15);
-    for (i = 0; i < gUnknown_0300616C; i++)
+    gCanvasPalette[maxIndex] = RGB2(15, 15, 15);
+    for (j = 0; j < gCanvasRowEnd; j++)
     {
-        u16* var2 = &(*gUnknown_03006168)[0][(gUnknown_03006178 + i) * gUnknown_03006180];
-        u16* pal = &var2[gUnknown_03006164];
-        for (j = 0; j < gUnknown_03006174; j++, pal++)
+        u16 *pixelRow = &(*gCanvasPixels)[0][(gCanvasRowStart + j) * gCanvasWidth];
+        u16 *pixel = &pixelRow[gCanvasColumnStart];
+        for (i = 0; i < gCanvasColumnEnd; i++, pixel++)
         {
-            if (*pal & 0x8000)
+            if (*pixel & 0x8000)
             {
-                *pal = gUnknown_03006188;
+                *pixel = gCanvasPaletteStart;
             }
             else
             {
-                u16 color = sub_81267C4(pal);
+                u16 quantizedColor = QuantizePixel_Standard(pixel);
                 u8 curIndex = 1;
                 if (curIndex < maxIndex)
                 {
-                    if (gUnknown_03006184[curIndex] == RGB_BLACK)
+                    if (gCanvasPalette[curIndex] == RGB_BLACK)
                     {
-                        gUnknown_03006184[curIndex] = color;
-                        *pal = gUnknown_03006188 + curIndex;
+                        // The quantized color does not match any existing color in the
+                        // palette, so we add it to the palette.
+                        // This if block seems pointless because the below while loop handles
+                        // this same logic.
+                        gCanvasPalette[curIndex] = quantizedColor;
+                        *pixel = gCanvasPaletteStart + curIndex;
                     }
                     else
                     {
                         while (curIndex < maxIndex)
                         {
-                            if (gUnknown_03006184[curIndex] == RGB_BLACK)
+                            if (gCanvasPalette[curIndex] == RGB_BLACK)
                             {
-                                gUnknown_03006184[curIndex] = color;
-                                *pal = gUnknown_03006188 + curIndex;
+                                // The quantized color does not match any existing color in the
+                                // palette, so we add it to the palette.
+                                gCanvasPalette[curIndex] = quantizedColor;
+                                *pixel = gCanvasPaletteStart + curIndex;
                                 break;
                             }
 
-                            if (gUnknown_03006184[curIndex] == color)
+                            if (gCanvasPalette[curIndex] == quantizedColor)
                             {
-                                *pal = gUnknown_03006188 + curIndex;
+                                // The quantized color matches this existing color in the
+                                // palette, so we use this existing color for the pixel.
+                                *pixel = gCanvasPaletteStart + curIndex;
                                 break;
                             }
 
@@ -1110,99 +1119,110 @@ static void sub_81263A4(bool8 arg0)
 
                 if (curIndex == maxIndex)
                 {
+                    // The entire palette's colors are already in use, which means
+                    // the base image has too many colors to handle. This error is handled
+                    // by marking such pixels as gray color.
                     curIndex = maxIndex;
-                    *pal = curIndex;
+                    *pixel = curIndex;
                 }
             }
         }
     }
 }
 
-static void sub_81264FC(void)
+static void QuantizePalette_BlackAndWhite(void)
 {
     u8 i, j;
 
-    for (i = 0; i < gUnknown_0300616C; i++)
+    for (j = 0; j < gCanvasRowEnd; j++)
     {
-        u16* var2 = &(*gUnknown_03006168)[0][(gUnknown_03006178 + i) * gUnknown_03006180];
-        u16* pal = &var2[gUnknown_03006164];
-        for (j = 0; j < gUnknown_03006174; j++, pal++)
+        u16 *pixelRow = &(*gCanvasPixels)[0][(gCanvasRowStart + j) * gCanvasWidth];
+        u16 *pixel = &pixelRow[gCanvasColumnStart];
+        for (i = 0; i < gCanvasColumnEnd; i++, pixel++)
         {
-            if (*pal & 0x8000)
+            if (*pixel & 0x8000)
             {
-                *pal = gUnknown_03006188;
+                *pixel = gCanvasPaletteStart;
             }
             else
             {
-                if (ConvertToBlackOrWhite(pal) == RGB_BLACK)
-                    *pal = gUnknown_03006188 + 1;
+                if (QuantizePixel_BlackAndWhite(pixel) == RGB_BLACK)
+                {
+                    // Black is the first color in the quantized palette.
+                    *pixel = gCanvasPaletteStart + 1;
+                }
                 else
-                    *pal = gUnknown_03006188 + 2;
+                {
+                    // White is the second color in the quantized palette.
+                    *pixel = gCanvasPaletteStart + 2;
+                }
             }
         }
     }
 }
 
-static void sub_81265B4(void)
+static void QuantizePalette_GrayscaleSmall(void)
 {
     u8 i, j;
 
-    for (i = 0; i < gUnknown_0300616C; i++)
+    for (j = 0; j < gCanvasRowEnd; j++)
     {
-        u16* var2 = &(*gUnknown_03006168)[0][(gUnknown_03006178 + i) * gUnknown_03006180];
-        u16* pal = &var2[gUnknown_03006164];
-        for (j = 0; j < gUnknown_03006174; j++, pal++)
+        u16 *pixelRow = &(*gCanvasPixels)[0][(gCanvasRowStart + j) * gCanvasWidth];
+        u16 *pixel = &pixelRow[gCanvasColumnStart];
+        for (i = 0; i < gCanvasColumnEnd; i++, pixel++)
         {
-            if (*pal & 0x8000)
-                *pal = gUnknown_03006188;
+            if (*pixel & 0x8000)
+                *pixel = gCanvasPaletteStart;
             else
-                *pal = sub_8126908(pal) + gUnknown_03006188;
+                *pixel = QuantizePixel_GrayscaleSmall(pixel) + gCanvasPaletteStart;
         }
     }
 }
 
-static void sub_8126664(void)
+static void QuantizePalette_Grayscale(void)
 {
     u8 i, j;
 
-    for (i = 0; i < gUnknown_0300616C; i++)
+    for (j = 0; j < gCanvasRowEnd; j++)
     {
-        u16* var2 = &(*gUnknown_03006168)[0][(gUnknown_03006178 + i) * gUnknown_03006180];
-        u16* pal = &var2[gUnknown_03006164];
-        for (j = 0; j < gUnknown_03006174; j++, pal++)
+        u16 *pixelRow = &(*gCanvasPixels)[0][(gCanvasRowStart + j) * gCanvasWidth];
+        u16 *pixel = &pixelRow[gCanvasColumnStart];
+        for (i = 0; i < gCanvasColumnEnd; i++, pixel++)
         {
-            if (*pal & 0x8000)
-                *pal = gUnknown_03006188;
+            if (*pixel & 0x8000)
+                *pixel = gCanvasPaletteStart;
             else
-                *pal = sub_812693C(pal) + gUnknown_03006188;
+                *pixel = QuantizePixel_Grayscale(pixel) + gCanvasPaletteStart;
         }
     }
 }
 
-static void sub_8126714(void)
+static void QuantizePalette_PrimaryColors(void)
 {
     u8 i, j;
 
-    for (i = 0; i < gUnknown_0300616C; i++)
+    for (j = 0; j < gCanvasRowEnd; j++)
     {
-        u16* var2 = &(*gUnknown_03006168)[0][(gUnknown_03006178 + i) * gUnknown_03006180];
-        u16* pal = &var2[gUnknown_03006164];
-        for (j = 0; j < gUnknown_03006174; j++, pal++)
+        u16 *pixelRow = &(*gCanvasPixels)[0][(gCanvasRowStart + j) * gCanvasWidth];
+        u16 *pixel = &pixelRow[gCanvasColumnStart];
+        for (i = 0; i < gCanvasColumnEnd; i++, pixel++)
         {
-            if (*pal & 0x8000)
-                *pal = gUnknown_03006188;
+            if (*pixel & 0x8000)
+                *pixel = gCanvasPaletteStart;
             else
-                *pal = sub_8126838(pal) + gUnknown_03006188;
+                *pixel = QuantizePixel_PrimaryColors(pixel) + gCanvasPaletteStart;
         }
     }
 }
 
-static u16 sub_81267C4(u16 *color)
+// Quantizes the pixel's color channels to nearest multiple of 4, and clamps to [6, 30].
+static u16 QuantizePixel_Standard(u16 *pixel)
 {
-    u16 red = *color & 0x1F;
-    u16 green = (*color >> 5) & 0x1F;
-    u16 blue = (*color >> 10) & 0x1F;
+    u16 red = *pixel & 0x1F;
+    u16 green = (*pixel >> 5) & 0x1F;
+    u16 blue = (*pixel >> 10) & 0x1F;
 
+    // Quantize color channels to muliples of 4, rounding up.
     if (red & 3)
         red = (red & 0x1C) + 4;
     if (green & 3)
@@ -1210,16 +1230,15 @@ static u16 sub_81267C4(u16 *color)
     if (blue & 3)
         blue = (blue & 0x1C) + 4;
 
+    // Clamp channels to [6, 30].
     if (red < 6)
         red = 6;
     if (red > 30)
         red = 30;
-
     if (green < 6)
         green = 6;
     if (green > 30)
         green = 30;
-
     if (blue < 6)
         blue = 6;
     if (blue > 30)
@@ -1228,7 +1247,7 @@ static u16 sub_81267C4(u16 *color)
     return RGB2(red, green, blue);
 }
 
-static u16 sub_8126838(u16* color)
+static u16 QuantizePixel_PrimaryColors(u16* color)
 {
     u16 red = *color & 0x1F;
     u16 green = (*color >> 5) & 0x1F;
@@ -1343,7 +1362,7 @@ static u16 sub_8126838(u16* color)
     return 3;
 }
 
-static u16 sub_8126908(u16 *color)
+static u16 QuantizePixel_GrayscaleSmall(u16 *color)
 {
     u16 red = *color & 0x1F;
     u16 green = (*color >> 5) & 0x1F;
@@ -1355,7 +1374,7 @@ static u16 sub_8126908(u16 *color)
         return average / 2;
 }
 
-static u16 sub_812693C(u16 *color)
+static u16 QuantizePixel_Grayscale(u16 *color)
 {
     u16 red = *color & 0x1F;
     u16 green = (*color >> 5) & 0x1F;

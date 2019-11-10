@@ -1,28 +1,53 @@
 #ifndef GUARD_CONTEST_PAINTING_EFFECTS_H
 #define GUARD_CONTEST_PAINTING_EFFECTS_H
 
-struct Unk030061A0
+enum
 {
-    u8 var_0;
-    u8 pad1[3];
-    u16 (*var_4)[][32];
-    u16 *var_8;
-    u8 pad0C[4];
-    u32 var_10;
-    u16 var_14;
-    u16 var_16;
-    u8 var_18;
-    u8 var_19;
-    u8 var_1A;
-    u8 var_1B;
-    u8 var_1C;
-    u8 var_1D;
-    u8 var_1E;
-    u8 var_1F;
+    IMAGE_EFFECT_POINTILLISM = 2,
+    IMAGE_EFFECT_GRAYSCALE_LIGHT = 6,
+    IMAGE_EFFECT_BLUR = 8,
+    IMAGE_EFFECT_OUTLINE_COLORED = 9,
+    IMAGE_EFFECT_INVERT_BLACK_WHITE = 10,
+    IMAGE_EFFECT_THICK_BLACK_WHITE = 11,
+    IMAGE_EFFECT_SHIMMER = 13,
+    IMAGE_EFFECT_OUTLINE = 30,
+    IMAGE_EFFECT_INVERT = 31,
+    IMAGE_EFFECT_BLUR_RIGHT = 32,
+    IMAGE_EFFECT_BLUR_DOWN = 33,
+    IMAGE_EFFECT_CHARCOAL = 36,
 };
 
-void sub_8124F2C(struct Unk030061A0 *);
-void sub_81261A4(struct Unk030061A0 *);
-void sub_8126058(struct Unk030061A0 *);
+enum
+{
+    QUANTIZE_EFFECT_STANDARD,
+    QUANTIZE_EFFECT_STANDARD_LIMITED_COLORS,
+    QUANTIZE_EFFECT_PRIMARY_COLORS,
+    QUANTIZE_EFFECT_GRAYSCALE,
+    QUANTIZE_EFFECT_GRAYSCALE_SMALL,
+    QUANTIZE_EFFECT_BLACK_WHITE,
+};
+
+struct ContestPaintingContext
+{
+    u8 effect;
+    void *canvasPixels;
+    u16 *canvasPalette;
+    u8 fillerC[0x4];
+    u32 dest;
+    u16 quantizeEffect;
+    u16 var_16;
+    u8 paletteStart;
+    u8 columnStart;
+    u8 rowStart;
+    u8 columnEnd;
+    u8 rowEnd;
+    u8 canvasWidth;
+    u8 canvasHeight;
+    u8 personality;
+};
+
+void ApplyImageProcessingEffects(struct ContestPaintingContext *);
+void ApplyImageProcessingQuantization(struct ContestPaintingContext *);
+void ConvertImageProcessingToGBA(struct ContestPaintingContext *);
 
 #endif
