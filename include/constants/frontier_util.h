@@ -1,0 +1,32 @@
+#ifndef GUARD_CONSTANTS_FRONTIER_UTIL_H
+#define GUARD_CONSTANTS_FRONTIER_UTIL_H
+
+#define FRONTIER_BEFORE_TEXT      0
+#define FRONTIER_PLAYER_LOST_TEXT 1
+#define FRONTIER_PLAYER_WON_TEXT  2
+
+#define FRONTIER_UTIL_FUNC_0                      0
+#define FRONTIER_UTIL_FUNC_1                      1
+#define FRONTIER_UTIL_FUNC_2                      2
+#define FRONTIER_UTIL_FUNC_LOAD_SELECTED_PARTY    3
+#define FRONTIER_UTIL_FUNC_SOFT_RESET             4
+#define FRONTIER_UTIL_FUNC_SET_FRONTIER_TRAINERS  5
+#define FRONTIER_UTIL_FUNC_6                      6
+#define FRONTIER_UTIL_FUNC_RESULTS_WINDOW         7
+#define FRONTIER_UTIL_FUNC_8                      8
+#define FRONTIER_UTIL_FUNC_9                      9
+#define FRONTIER_UTIL_FUNC_IS_FRONTIER_BRAIN      10
+#define FRONTIER_UTIL_FUNC_11                     11
+#define FRONTIER_UTIL_FUNC_GET_FACILITY_SYMBOLS   12
+#define FRONTIER_UTIL_FUNC_GIVE_FACILITY_SYMBOL   13
+#define FRONTIER_UTIL_FUNC_CHECK_BATTLE_TYPE      14
+#define FRONTIER_UTIL_FUNC_15                     15
+#define FRONTIER_UTIL_FUNC_CHECK_VISIT_TRAINER    16
+#define FRONTIER_UTIL_FUNC_17                     17
+#define FRONTIER_UTIL_FUNC_18                     18
+#define FRONTIER_UTIL_FUNC_19                     19
+#define FRONTIER_UTIL_FUNC_BUFFER_TRAINER_NAME    20
+#define FRONTIER_UTIL_FUNC_21                     21
+#define FRONTIER_UTIL_FUNC_SET_BRAIN_OBJECT       22
+
+#endif // GUARD_CONSTANTS_FRONTIER_UTIL_H

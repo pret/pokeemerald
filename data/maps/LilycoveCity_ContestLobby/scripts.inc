@@ -558,7 +558,7 @@ LilycoveCity_ContestLobby_EventScript_21A77A:: @ 821A77A
 
 LilycoveCity_ContestLobby_EventScript_21A784:: @ 821A784
 	lockall
-	setvar VAR_0x8004, 7
+	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_RESULTS_WINDOW
 	setvar VAR_0x8005, 7
 	special CallFrontierUtilFunc
 	waitbuttonpress
