@@ -238,7 +238,7 @@ EWRAM_DATA u8 gNumLinkContestPlayers = 0;
 EWRAM_DATA u8 gHighestRibbonRank = 0;
 EWRAM_DATA struct ContestResources *gContestResources = NULL;
 EWRAM_DATA u8 sContestBgCopyFlags = 0;
-EWRAM_DATA struct ContestWinner gUnknown_02039F3C = {0};
+EWRAM_DATA struct ContestWinner gCurContestWinner = {0};
 EWRAM_DATA u8 gUnknown_02039F5C = 0;
 EWRAM_DATA u8 gUnknown_02039F5D = 0;
 
@@ -5353,12 +5353,12 @@ bool8 sub_80DEDA8(u8 a)
     }
     else
     {
-        gUnknown_02039F3C.personality = gContestMons[i].personality;
-        gUnknown_02039F3C.trainerId = gContestMons[i].otId;
-        gUnknown_02039F3C.species = gContestMons[i].species;
-        StringCopy(gUnknown_02039F3C.monName, gContestMons[i].nickname);
-        StringCopy(gUnknown_02039F3C.trainerName, gContestMons[i].trainerName);
-        gUnknown_02039F3C.contestCategory = r7;
+        gCurContestWinner.personality = gContestMons[i].personality;
+        gCurContestWinner.trainerId = gContestMons[i].otId;
+        gCurContestWinner.species = gContestMons[i].species;
+        StringCopy(gCurContestWinner.monName, gContestMons[i].nickname);
+        StringCopy(gCurContestWinner.trainerName, gContestMons[i].trainerName);
+        gCurContestWinner.contestCategory = r7;
     }
     return TRUE;
 }

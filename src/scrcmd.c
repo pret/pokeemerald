@@ -1467,10 +1467,10 @@ bool8 ScrCmd_hidemonpic(struct ScriptContext *ctx)
 
 bool8 ScrCmd_showcontestwinner(struct ScriptContext *ctx)
 {
-    u8 v1 = ScriptReadByte(ctx);
+    u8 contestWinnerId = ScriptReadByte(ctx);
+    if (contestWinnerId)
+        SetContestWinnerForPainting(contestWinnerId);
 
-    if (v1)
-        sub_812FDA8(v1);
     ShowContestWinner();
     ScriptContext1_Stop();
     return TRUE;
