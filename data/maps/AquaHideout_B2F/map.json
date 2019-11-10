@@ -76,7 +76,7 @@
       "movement_range_y": 1,
       "trainer_type": "1",
       "trainer_sight_or_berry_tree_id": "5",
-      "script": "AquaHideout_B2F_EventScript_Grunt22",
+      "script": "AquaHideout_B2F_EventScript_Grunt6",
       "flag": "FLAG_HIDE_AQUA_HIDEOUT_GRUNTS"
     },
     {
@@ -89,7 +89,7 @@
       "movement_range_y": 1,
       "trainer_type": "1",
       "trainer_sight_or_berry_tree_id": "5",
-      "script": "AquaHideout_B2F_EventScript_Grunt26",
+      "script": "AquaHideout_B2F_EventScript_Grunt8",
       "flag": "FLAG_HIDE_AQUA_HIDEOUT_GRUNTS"
     }
   ],

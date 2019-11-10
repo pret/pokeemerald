@@ -297,7 +297,7 @@
       "movement_range_y": 0,
       "trainer_type": "1",
       "trainer_sight_or_berry_tree_id": "3",
-      "script": "MtChimney_EventScript_Grunt31",
+      "script": "MtChimney_EventScript_Grunt2",
       "flag": "FLAG_HIDE_MT_CHIMNEY_TEAM_MAGMA"
     },
     {
@@ -388,7 +388,7 @@
       "movement_range_y": 1,
       "trainer_type": "1",
       "trainer_sight_or_berry_tree_id": "3",
-      "script": "MtChimney_EventScript_Grunt24",
+      "script": "MtChimney_EventScript_Grunt1",
       "flag": "FLAG_HIDE_MT_CHIMNEY_TEAM_MAGMA"
     },
     {

@@ -13,7 +13,7 @@ void sub_80EE8C8(u16 winStreak, u8 facility);
 void DoTVShow(void);
 void DoTVShowInSearchOfTrainers(void);
 void TryPutTreasureInvestigatorsOnAir(void);
-void sub_80EE2CC(void);
+void TryPutLotteryWinnerReportOnAir(void);
 void sub_80EE72C(void);
 void IncrementDailyPlantedBerries(void);
 void IncrementDailyPickedBerries(void);
