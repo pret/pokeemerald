@@ -1,30 +1,30 @@
 LilycoveCity_CoveLilyMotel_2F_MapScripts:: @ 82186D2
 	.byte 0
 
-LilycoveCity_CoveLilyMotel_2F_EventScript_2186D3:: @ 82186D3
+LilycoveCity_CoveLilyMotel_2F_EventScript_GameDesigner:: @ 82186D3
 	lock
 	faceplayer
-	call_if_unset FLAG_TEMP_2, LilycoveCity_CoveLilyMotel_2F_EventScript_2186F9
-	call_if_set FLAG_TEMP_2, LilycoveCity_CoveLilyMotel_2F_EventScript_21870F
+	call_if_unset FLAG_TEMP_2, LilycoveCity_CoveLilyMotel_2F_EventScript_ShowMeCompletedDex
+	call_if_set FLAG_TEMP_2, LilycoveCity_CoveLilyMotel_2F_EventScript_ShowDiploma
 	specialvar VAR_RESULT, HasAllHoennMons
-	compare VAR_RESULT, 1
-	goto_if_eq LilycoveCity_CoveLilyMotel_2F_EventScript_218702
+	compare VAR_RESULT, TRUE
+	goto_if_eq LilycoveCity_CoveLilyMotel_2F_EventScript_AllHoennMonsFanfare
 	release
 	end
 
-LilycoveCity_CoveLilyMotel_2F_EventScript_2186F9:: @ 82186F9
-	msgbox LilycoveCity_CoveLilyMotel_2F_Text_218774, MSGBOX_DEFAULT
+LilycoveCity_CoveLilyMotel_2F_EventScript_ShowMeCompletedDex:: @ 82186F9
+	msgbox LilycoveCity_CoveLilyMotel_2F_Text_ShowMeCompletedDex, MSGBOX_DEFAULT
 	return
 
-LilycoveCity_CoveLilyMotel_2F_EventScript_218702:: @ 8218702
+LilycoveCity_CoveLilyMotel_2F_EventScript_AllHoennMonsFanfare:: @ 8218702
 	setflag FLAG_TEMP_2
 	playfanfare MUS_FANFA4
 	waitfanfare
-	goto LilycoveCity_CoveLilyMotel_2F_EventScript_21870F
+	goto LilycoveCity_CoveLilyMotel_2F_EventScript_ShowDiploma
 	end
 
-LilycoveCity_CoveLilyMotel_2F_EventScript_21870F:: @ 821870F
-	message LilycoveCity_CoveLilyMotel_2F_Text_21881C
+LilycoveCity_CoveLilyMotel_2F_EventScript_ShowDiploma:: @ 821870F
+	message LilycoveCity_CoveLilyMotel_2F_Text_FilledPokedexGiveYouThis
 	waitmessage
 	call Common_EventScript_PlayGymBadgeFanfare
 	special Special_ShowDiploma
@@ -32,42 +32,42 @@ LilycoveCity_CoveLilyMotel_2F_EventScript_21870F:: @ 821870F
 	release
 	end
 
-LilycoveCity_CoveLilyMotel_2F_EventScript_218720:: @ 8218720
-	msgbox LilycoveCity_CoveLilyMotel_2F_Text_2188D6, MSGBOX_NPC
+LilycoveCity_CoveLilyMotel_2F_EventScript_Programmer:: @ 8218720
+	msgbox LilycoveCity_CoveLilyMotel_2F_Text_ImTheProgrammer, MSGBOX_NPC
 	end
 
-LilycoveCity_CoveLilyMotel_2F_EventScript_218729:: @ 8218729
-	msgbox LilycoveCity_CoveLilyMotel_2F_Text_21892B, MSGBOX_NPC
+LilycoveCity_CoveLilyMotel_2F_EventScript_GraphicArtist:: @ 8218729
+	msgbox LilycoveCity_CoveLilyMotel_2F_Text_ImTheGraphicArtist, MSGBOX_NPC
 	end
 
-LilycoveCity_CoveLilyMotel_2F_EventScript_218732:: @ 8218732
-	msgbox LilycoveCity_CoveLilyMotel_2F_Text_21896C, MSGBOX_NPC
+LilycoveCity_CoveLilyMotel_2F_EventScript_FatMan:: @ 8218732
+	msgbox LilycoveCity_CoveLilyMotel_2F_Text_GirlsAreCute, MSGBOX_NPC
 	end
 
-LilycoveCity_CoveLilyMotel_2F_EventScript_21873B:: @ 821873B
-	msgbox LilycoveCity_CoveLilyMotel_2F_Text_218A21, MSGBOX_NPC
+LilycoveCity_CoveLilyMotel_2F_EventScript_Woman:: @ 821873B
+	msgbox LilycoveCity_CoveLilyMotel_2F_Text_SeaBreezeTicklesHeart, MSGBOX_NPC
 	end
 
-LilycoveCity_CoveLilyMotel_2F_EventScript_218744:: @ 8218744
-	msgbox LilycoveCity_CoveLilyMotel_2F_Text_218A5B, MSGBOX_NPC
+LilycoveCity_CoveLilyMotel_2F_EventScript_GameBoyKid:: @ 8218744
+	msgbox LilycoveCity_CoveLilyMotel_2F_Text_NeverLeaveWithoutGameBoy, MSGBOX_NPC
 	end
 
-LilycoveCity_CoveLilyMotel_2F_EventScript_21874D:: @ 821874D
+LilycoveCity_CoveLilyMotel_2F_EventScript_Scott:: @ 821874D
 	lock
 	faceplayer
-	goto_if_set FLAG_MET_SCOTT_IN_LILYCOVE, LilycoveCity_CoveLilyMotel_2F_EventScript_21876A
-	msgbox LilycoveCity_CoveLilyMotel_2F_Text_218ACF, MSGBOX_DEFAULT
+	goto_if_set FLAG_MET_SCOTT_IN_LILYCOVE, LilycoveCity_CoveLilyMotel_2F_EventScript_MetScott
+	msgbox LilycoveCity_CoveLilyMotel_2F_Text_SnoozingPreferBattles, MSGBOX_DEFAULT
 	addvar VAR_SCOTT_STATE, 1
 	setflag FLAG_MET_SCOTT_IN_LILYCOVE
 	release
 	end
 
-LilycoveCity_CoveLilyMotel_2F_EventScript_21876A:: @ 821876A
-	msgbox LilycoveCity_CoveLilyMotel_2F_Text_218C33, MSGBOX_DEFAULT
+LilycoveCity_CoveLilyMotel_2F_EventScript_MetScott:: @ 821876A
+	msgbox LilycoveCity_CoveLilyMotel_2F_Text_ContestsDoTakeStrategy, MSGBOX_DEFAULT
 	release
 	end
 
-LilycoveCity_CoveLilyMotel_2F_Text_218774: @ 8218774
+LilycoveCity_CoveLilyMotel_2F_Text_ShowMeCompletedDex: @ 8218774
 	.string "I'm the GAME DESIGNER.\p"
 	.string "Oh, is that right?\n"
 	.string "You're working on a POKéDEX?\p"
@@ -76,7 +76,7 @@ LilycoveCity_CoveLilyMotel_2F_Text_218774: @ 8218774
 	.string "If you do complete it, please come\n"
 	.string "show me.$"
 
-LilycoveCity_CoveLilyMotel_2F_Text_21881C: @ 821881C
+LilycoveCity_CoveLilyMotel_2F_Text_FilledPokedexGiveYouThis: @ 821881C
 	.string "Wow! That's awesome!\n"
 	.string "Yep, it's totally awesome!\p"
 	.string "This POKéDEX is completely filled!\n"
@@ -85,17 +85,17 @@ LilycoveCity_CoveLilyMotel_2F_Text_21881C: @ 821881C
 	.string "Let me give you something in\n"
 	.string "recognition of your feat!$"
 
-LilycoveCity_CoveLilyMotel_2F_Text_2188D6: @ 82188D6
+LilycoveCity_CoveLilyMotel_2F_Text_ImTheProgrammer: @ 82188D6
 	.string "Me? You're talking to me?\n"
 	.string "I'm the PROGRAMMER.\p"
 	.string "I wonder what the SLOTS are\n"
 	.string "like here.$"
 
-LilycoveCity_CoveLilyMotel_2F_Text_21892B: @ 821892B
+LilycoveCity_CoveLilyMotel_2F_Text_ImTheGraphicArtist: @ 821892B
 	.string "I'm the GRAPHIC ARTIST! Aren't the\n"
 	.string "POKéMON of HOENN interesting?$"
 
-LilycoveCity_CoveLilyMotel_2F_Text_21896C: @ 821896C
+LilycoveCity_CoveLilyMotel_2F_Text_GirlsAreCute: @ 821896C
 	.string "The girl TUBERS, they're cute, hey?\n"
 	.string "To battle against a cute TUBER…\p"
 	.string "Whoop, it's so awesome!\p"
@@ -103,17 +103,17 @@ LilycoveCity_CoveLilyMotel_2F_Text_21896C: @ 821896C
 	.string "A 2-on-2 battle with TWINS…\p"
 	.string "Whoop, it's unbearably fun!$"
 
-LilycoveCity_CoveLilyMotel_2F_Text_218A21: @ 8218A21
+LilycoveCity_CoveLilyMotel_2F_Text_SeaBreezeTicklesHeart: @ 8218A21
 	.string "The sea breeze tickles my heart.\n"
 	.string "It feels wonderful here!$"
 
-LilycoveCity_CoveLilyMotel_2F_Text_218A5B: @ 8218A5B
+LilycoveCity_CoveLilyMotel_2F_Text_NeverLeaveWithoutGameBoy: @ 8218A5B
 	.string "You never know when and where\n"
 	.string "people will challenge you.\p"
 	.string "That's why I never leave home without\n"
 	.string "my GAME BOY ADVANCE.$"
 
-LilycoveCity_CoveLilyMotel_2F_Text_218ACF: @ 8218ACF
+LilycoveCity_CoveLilyMotel_2F_Text_SnoozingPreferBattles: @ 8218ACF
 	.string "SCOTT: … … … … …\n"
 	.string "… … … … … Zzz…\p"
 	.string "… … … … … Huh?!\n"
@@ -129,7 +129,7 @@ LilycoveCity_CoveLilyMotel_2F_Text_218ACF: @ 8218ACF
 	.string "like the GYMS, CONTESTS, BATTLE TENT,\l"
 	.string "the whole works!$"
 
-LilycoveCity_CoveLilyMotel_2F_Text_218C33: @ 8218C33
+LilycoveCity_CoveLilyMotel_2F_Text_ContestsDoTakeStrategy: @ 8218C33
 	.string "SCOTT: I think it does take strategy\n"
 	.string "to win a CONTEST.\p"
 	.string "Devising CONTEST strategies is one way\n"
