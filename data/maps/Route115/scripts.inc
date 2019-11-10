@@ -46,7 +46,7 @@ Route115_EventScript_1F298E:: @ 81F298E
 	end
 
 Route115_EventScript_1F29BA:: @ 81F29BA
-	special sub_80B4808
+	special PlayerFaceTrainerAfterBattle
 	waitmovement 0
 	msgbox Route115_Text_29B2B3, MSGBOX_DEFAULT
 	register_matchcall TRAINER_TIMOTHY_1
@@ -73,7 +73,7 @@ Route115_EventScript_1F2A07:: @ 81F2A07
 	end
 
 Route115_EventScript_1F2A33:: @ 81F2A33
-	special sub_80B4808
+	special PlayerFaceTrainerAfterBattle
 	waitmovement 0
 	msgbox Route115_Text_29B50B, MSGBOX_DEFAULT
 	register_matchcall TRAINER_NOB_1
@@ -95,7 +95,7 @@ Route115_EventScript_1F2A69:: @ 81F2A69
 	end
 
 Route115_EventScript_1F2A95:: @ 81F2A95
-	special sub_80B4808
+	special PlayerFaceTrainerAfterBattle
 	waitmovement 0
 	msgbox Route115_Text_29B6AB, MSGBOX_DEFAULT
 	register_matchcall TRAINER_CYNDY_1

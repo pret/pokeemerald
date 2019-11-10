@@ -24,7 +24,7 @@
       "movement_range_y": 0,
       "trainer_type": "1",
       "trainer_sight_or_berry_tree_id": "1",
-      "script": "Route110_TrickHousePuzzle8_EventScript_26E81F",
+      "script": "Route110_TrickHousePuzzle8_EventScript_Vincent",
       "flag": "0"
     },
     {
@@ -37,7 +37,7 @@
       "movement_range_y": 0,
       "trainer_type": "1",
       "trainer_sight_or_berry_tree_id": "1",
-      "script": "Route110_TrickHousePuzzle8_EventScript_26E84D",
+      "script": "Route110_TrickHousePuzzle8_EventScript_Leroy",
       "flag": "0"
     },
     {
@@ -50,7 +50,7 @@
       "movement_range_y": 0,
       "trainer_type": "1",
       "trainer_sight_or_berry_tree_id": "1",
-      "script": "Route110_TrickHousePuzzle8_EventScript_26E836",
+      "script": "Route110_TrickHousePuzzle8_EventScript_Keira",
       "flag": "0"
     },
     {
@@ -98,7 +98,7 @@
       "y": 21,
       "elevation": 3,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "Route110_TrickHousePuzzle8_EventScript_26E802"
+      "script": "Route110_TrickHousePuzzle8_EventScript_Scroll"
     }
   ]
 }

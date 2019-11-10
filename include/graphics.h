@@ -3238,7 +3238,7 @@ extern const u32 gBattleTextboxTiles[];
 extern const u32 gBattleTextboxTilemap[];
 extern const u32 gBattleTextboxPalette[];
 extern const u32 gUnknown_08D778F0[];
-extern const u32 gUnknown_08D77B0C[];
+extern const u32 gVsLettersGfx[];
 extern const u32 gUnknown_08D77AE4[];
 extern const u32 gUnknown_08D779D8[];
 extern const u32 gUnknown_08D857A8[];
@@ -4462,9 +4462,9 @@ extern const u16 gIntro2FlygonPal[];
 extern const u32 gIntro2FlygonGfx[];
 
 // party menu graphics
-extern const u32 gPartyMenuMisc_Gfx[];
-extern const u32 gPartyMenuMisc_Tilemap[];
-extern const u32 gPartyMenuMisc_Pal[];
+extern const u32 gPartyMenuBg_Gfx[];
+extern const u32 gPartyMenuBg_Tilemap[];
+extern const u32 gPartyMenuBg_Pal[];
 
 // berry pics
 extern const u32 gBerryPic_Cheri[];
@@ -4704,7 +4704,7 @@ extern const u32 gUnknown_08D84970[];
 extern const u32 gUnknown_08D84F00[];
 extern const u32 gUnknown_08D85444[];
 extern const u32 gUnknown_08D85358[];
-extern const u32 gUnknown_08D85600[];
+extern const u32 gBattleWindowTextPalette[];
 extern const u32 gUnknown_08D854C8[];
 extern const u32 gUnknown_08D82F10[];
 extern const u32 gUnknown_08D834FC[];

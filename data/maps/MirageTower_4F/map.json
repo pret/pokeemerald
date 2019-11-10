@@ -24,7 +24,7 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "MirageTower_4F_EventScript_23AD48",
+      "script": "MirageTower_4F_EventScript_RootFossil",
       "flag": "FLAG_HIDE_MIRAGE_TOWER_ROOT_FOSSIL"
     },
     {
@@ -37,7 +37,7 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "MirageTower_4F_EventScript_23AD89",
+      "script": "MirageTower_4F_EventScript_ClawFossil",
       "flag": "FLAG_HIDE_MIRAGE_TOWER_CLAW_FOSSIL"
     },
     {

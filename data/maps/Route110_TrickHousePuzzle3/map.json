@@ -24,7 +24,7 @@
       "movement_range_y": 0,
       "trainer_type": "1",
       "trainer_sight_or_berry_tree_id": "2",
-      "script": "Route110_TrickHousePuzzle3_EventScript_26C5C4",
+      "script": "Route110_TrickHousePuzzle3_EventScript_Justin",
       "flag": "0"
     },
     {
@@ -37,7 +37,7 @@
       "movement_range_y": 0,
       "trainer_type": "1",
       "trainer_sight_or_berry_tree_id": "1",
-      "script": "Route110_TrickHousePuzzle3_EventScript_26C5DB",
+      "script": "Route110_TrickHousePuzzle3_EventScript_Martha",
       "flag": "0"
     },
     {
@@ -50,7 +50,7 @@
       "movement_range_y": 0,
       "trainer_type": "1",
       "trainer_sight_or_berry_tree_id": "1",
-      "script": "Route110_TrickHousePuzzle3_EventScript_26C5F2",
+      "script": "Route110_TrickHousePuzzle3_EventScript_Alan",
       "flag": "0"
     },
     {
@@ -137,7 +137,7 @@
       "elevation": 3,
       "var": "VAR_TEMP_1",
       "var_value": "0",
-      "script": "Route110_TrickHousePuzzle3_EventScript_26C4CD"
+      "script": "Route110_TrickHousePuzzle3_EventScript_Button1"
     },
     {
       "type": "trigger",
@@ -146,7 +146,7 @@
       "elevation": 3,
       "var": "VAR_TEMP_2",
       "var_value": "0",
-      "script": "Route110_TrickHousePuzzle3_EventScript_26C4D9"
+      "script": "Route110_TrickHousePuzzle3_EventScript_Button2"
     },
     {
       "type": "trigger",
@@ -155,7 +155,7 @@
       "elevation": 3,
       "var": "VAR_TEMP_3",
       "var_value": "0",
-      "script": "Route110_TrickHousePuzzle3_EventScript_26C4E5"
+      "script": "Route110_TrickHousePuzzle3_EventScript_Button3"
     },
     {
       "type": "trigger",
@@ -164,7 +164,7 @@
       "elevation": 3,
       "var": "VAR_TEMP_4",
       "var_value": "0",
-      "script": "Route110_TrickHousePuzzle3_EventScript_26C4F1"
+      "script": "Route110_TrickHousePuzzle3_EventScript_Button4"
     }
   ],
   "bg_events": [
@@ -174,7 +174,7 @@
       "y": 14,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "Route110_TrickHousePuzzle3_EventScript_26C5A7"
+      "script": "Route110_TrickHousePuzzle3_EventScript_Scroll"
     }
   ]
 }

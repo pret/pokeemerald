@@ -107,9 +107,9 @@ VerdanturfTown_BattleTentBattleRoom_EventScript_20243C:: @ 820243C
 VerdanturfTown_BattleTentBattleRoom_EventScript_20248A:: @ 820248A
 	msgbox VerdanturfTown_BattleTentBattleRoom_Text_250030, MSGBOX_YESNO
 	switch VAR_RESULT
-	case 0, VerdanturfTown_BattleTentBattleRoom_EventScript_20243C
-	case 1, VerdanturfTown_BattleTentBattleRoom_EventScript_20251F
-	case 127, VerdanturfTown_BattleTentBattleRoom_EventScript_20243C
+	case NO, VerdanturfTown_BattleTentBattleRoom_EventScript_20243C
+	case YES, VerdanturfTown_BattleTentBattleRoom_EventScript_20251F
+	case MULTI_B_PRESSED, VerdanturfTown_BattleTentBattleRoom_EventScript_20243C
 
 VerdanturfTown_BattleTentBattleRoom_EventScript_2024B8:: @ 82024B8
 	message VerdanturfTown_BattleTentBattleRoom_Text_25005A

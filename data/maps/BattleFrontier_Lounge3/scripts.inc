@@ -18,10 +18,10 @@ BattleFrontier_Lounge3_EventScript_261DAF:: @ 8261DAF
 	waitmessage
 	waitbuttonpress
 	msgbox BattleFrontier_Lounge3_Text_262A60, MSGBOX_YESNO
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq BattleFrontier_Lounge3_EventScript_261FA5
 	msgbox BattleFrontier_Lounge3_Text_262ABD, MSGBOX_YESNO
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq BattleFrontier_Lounge3_EventScript_261FA5
 	message BattleFrontier_Lounge3_Text_262B42
 	waitmessage

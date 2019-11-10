@@ -68,7 +68,7 @@ SecretBase_EventScript_PCMainMenuWithoutRegister:: @ 823B531
 
 SecretBase_EventScript_PCPackUp:: @ 823B568
     msgbox SecretBase_Text_AllDecorationsWillBeReturned, MSGBOX_YESNO
-    compare VAR_RESULT, 0
+    compare VAR_RESULT, NO
     goto_if_eq SecretBase_EventScript_PCShowMainMenu
     closemessage
     special MoveOutOfSecretBase
@@ -120,7 +120,7 @@ SecretBase_EventScript_PCRegister:: @ 823B5F0
     goto_if_eq SecretBase_EventScript_CantRegisterTooManyBases
     special CopyCurSecretBaseOwnerName_StrVar1
     msgbox SecretBase_Text_WantToRegisterSecretBase, MSGBOX_YESNO
-    compare VAR_RESULT, 0
+    compare VAR_RESULT, NO
     goto_if_eq SecretBase_EventScript_PCRegisterMenu
     msgbox SecretBase_Text_RegistrationCompleted, MSGBOX_SIGN
     special ToggleCurSecretBaseRegistry
@@ -130,7 +130,7 @@ SecretBase_EventScript_PCRegister:: @ 823B5F0
 
 SecretBase_EventScript_AlreadyRegistered:: @ 823B62F
     msgbox SecretBase_Text_AlreadyRegisteredDelete, MSGBOX_YESNO
-    compare VAR_RESULT, 0
+    compare VAR_RESULT, NO
     goto_if_eq SecretBase_EventScript_PCRegisterMenu
     msgbox SecretBase_Text_DataUnregistered, MSGBOX_SIGN
     special ToggleCurSecretBaseRegistry

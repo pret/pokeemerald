@@ -6,7 +6,7 @@ SootopolisCity_LotadAndSeedotHouse_EventScript_22722B:: @ 822722B
 	lock
 	faceplayer
 	msgbox SootopolisCity_LotadAndSeedotHouse_Text_227369, MSGBOX_DEFAULT
-	special sub_81B94B0
+	special ChoosePartyMon
 	waitstate
 	copyvar VAR_RESULT, VAR_0x8004
 	compare VAR_RESULT, 255
@@ -55,7 +55,7 @@ SootopolisCity_LotadAndSeedotHouse_EventScript_2272BC:: @ 82272BC
 	lock
 	faceplayer
 	msgbox SootopolisCity_LotadAndSeedotHouse_Text_227676, MSGBOX_DEFAULT
-	special sub_81B94B0
+	special ChoosePartyMon
 	waitstate
 	copyvar VAR_RESULT, VAR_0x8004
 	compare VAR_RESULT, 255

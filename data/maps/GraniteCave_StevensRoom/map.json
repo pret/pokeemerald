@@ -24,7 +24,7 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "GraniteCave_StevensRoom_EventScript_22DC7B",
+      "script": "GraniteCave_StevensRoom_EventScript_Steven",
       "flag": "FLAG_HIDE_GRANITE_CAVE_STEVEN"
     }
   ],

@@ -170,9 +170,9 @@ VerdanturfTown_BattleTentLobby_EventScript_2018CF:: @ 82018CF
 	goto_if_eq VerdanturfTown_BattleTentLobby_EventScript_201A34
 	msgbox VerdanturfTown_BattleTentLobby_Text_2C5662, MSGBOX_YESNO
 	switch VAR_RESULT
-	case 0, VerdanturfTown_BattleTentLobby_EventScript_201A34
-	case 1, VerdanturfTown_BattleTentLobby_EventScript_201954
-	case 127, VerdanturfTown_BattleTentLobby_EventScript_201A34
+	case NO, VerdanturfTown_BattleTentLobby_EventScript_201A34
+	case YES, VerdanturfTown_BattleTentLobby_EventScript_201954
+	case MULTI_B_PRESSED, VerdanturfTown_BattleTentLobby_EventScript_201A34
 
 VerdanturfTown_BattleTentLobby_EventScript_201954:: @ 8201954
 	setvar VAR_TEMP_0, 0

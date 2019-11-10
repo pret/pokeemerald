@@ -144,9 +144,9 @@ SlateportCity_BattleTentLobby_EventScript_208906:: @ 8208906
 	special CallFrontierUtilFunc
 	msgbox SlateportCity_BattleTentLobby_Text_2C5B06, MSGBOX_YESNO
 	switch VAR_RESULT
-	case 0, SlateportCity_BattleTentLobby_EventScript_208A2B
-	case 1, SlateportCity_BattleTentLobby_EventScript_208950
-	case 127, SlateportCity_BattleTentLobby_EventScript_208A2B
+	case NO, SlateportCity_BattleTentLobby_EventScript_208A2B
+	case YES, SlateportCity_BattleTentLobby_EventScript_208950
+	case MULTI_B_PRESSED, SlateportCity_BattleTentLobby_EventScript_208A2B
 
 SlateportCity_BattleTentLobby_EventScript_208950:: @ 8208950
 	setvar VAR_TEMP_0, 0

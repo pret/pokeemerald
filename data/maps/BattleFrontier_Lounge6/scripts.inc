@@ -10,9 +10,9 @@ BattleFrontier_Lounge6_EventScript_264FED:: @ 8264FED
 	specialvar VAR_RESULT, GetInGameTradeSpeciesInfo
 	copyvar VAR_0x8009, VAR_RESULT
 	msgbox BattleFrontier_Lounge6_Text_26508D, MSGBOX_YESNO
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq BattleFrontier_Lounge6_EventScript_26506B
-	special sub_81B94B0
+	special ChoosePartyMon
 	waitstate
 	copyvar VAR_0x800A, VAR_0x8004
 	compare VAR_0x8004, 255

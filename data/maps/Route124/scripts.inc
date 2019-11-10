@@ -3,7 +3,7 @@ Route124_MapScripts:: @ 81F656C
 	.byte 0
 
 Route124_OnTransition: @ 81F6572
-	call_if_set FLAG_SYS_WEATHER_CTRL, Common_EventScript_SetWeather15
+	call_if_set FLAG_SYS_WEATHER_CTRL, Common_EventScript_SetAlternatingWeather
 	end
 
 Route124_EventScript_1F657C:: @ 81F657C
@@ -30,7 +30,7 @@ Route124_EventScript_1F65B3:: @ 81F65B3
 	end
 
 Route124_EventScript_1F65DF:: @ 81F65DF
-	special sub_80B4808
+	special PlayerFaceTrainerAfterBattle
 	waitmovement 0
 	msgbox Route124_Text_2A0C14, MSGBOX_DEFAULT
 	register_matchcall TRAINER_JENNY_1

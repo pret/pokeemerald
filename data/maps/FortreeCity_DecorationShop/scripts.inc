@@ -1,15 +1,15 @@
 FortreeCity_DecorationShop_MapScripts:: @ 821800D
 	.byte 0
 
-FortreeCity_DecorationShop_EventScript_21800E:: @ 821800E
-	msgbox FortreeCity_DecorationShop_Text_218078, MSGBOX_NPC
+FortreeCity_DecorationShop_EventScript_PokefanM:: @ 821800E
+	msgbox FortreeCity_DecorationShop_Text_MerchandiseSentToPC, MSGBOX_NPC
 	end
 
-FortreeCity_DecorationShop_EventScript_218017:: @ 8218017
-	msgbox FortreeCity_DecorationShop_Text_2180ED, MSGBOX_NPC
+FortreeCity_DecorationShop_EventScript_Girl:: @ 8218017
+	msgbox FortreeCity_DecorationShop_Text_BuyingDeskForDolls, MSGBOX_NPC
 	end
 
-FortreeCity_DecorationShop_EventScript_218020:: @ 8218020
+FortreeCity_DecorationShop_EventScript_ClerkDesks:: @ 8218020
 	lock
 	faceplayer
 	message gText_HowMayIServeYou
@@ -33,7 +33,7 @@ FortreeCity_DecorationShop_PokemartDecor_Desks: @ 8218038
 	release
 	end
 
-FortreeCity_DecorationShop_EventScript_21804C:: @ 821804C
+FortreeCity_DecorationShop_EventScript_ClerkChairs:: @ 821804C
 	lock
 	faceplayer
 	message gText_HowMayIServeYou
@@ -57,13 +57,13 @@ FortreeCity_DecorationShop_PokemartDecor_Chairs: @ 8218064
 	release
 	end
 
-FortreeCity_DecorationShop_Text_218078: @ 8218078
+FortreeCity_DecorationShop_Text_MerchandiseSentToPC: @ 8218078
 	.string "Merchandise you buy here is sent to\n"
 	.string "your own PC.\p"
 	.string "That's fantastic! I wish they could\n"
 	.string "also deliver me home like that.$"
 
-FortreeCity_DecorationShop_Text_2180ED: @ 82180ED
+FortreeCity_DecorationShop_Text_BuyingDeskForDolls: @ 82180ED
 	.string "I'm buying a pretty desk and I'm\n"
 	.string "putting my cute DOLLS on it.\p"
 	.string "If I don't, when I decorate my\n"

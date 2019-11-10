@@ -30,6 +30,7 @@
 #include "party_menu.h"
 #include "pokemon_jump.h"
 #include "random.h"
+#include "save_location.h"
 #include "script.h"
 #include "script_pokemon_util_80F87D8.h"
 #include "sound.h"
@@ -47,6 +48,7 @@
 #include "constants/cable_club.h"
 #include "constants/game_stat.h"
 #include "constants/maps.h"
+#include "constants/party_menu.h"
 #include "constants/rgb.h"
 #include "constants/songs.h"
 #include "constants/species.h"
@@ -1077,7 +1079,7 @@ u32 sub_8013B8C(struct UnkStruct_Group *arg0, s32 id)
 
     if (gUnknown_02022C2C == 4 && structPtr->unk.field_0.unk_00.unk_01_2 != 3)
     {
-        if (!(gSaveBlock2Ptr->specialSaveWarpFlags & 0x80))
+        if (!(gSaveBlock2Ptr->specialSaveWarpFlags & CHAMPION_SAVEWARP))
             return 1;
         else if (structPtr->unk.field_0.unk_00.isChampion)
             return 0;
@@ -1469,7 +1471,7 @@ void sub_801440C(u8 taskId)
         HealPlayerParty();
         SavePlayerParty();
         LoadPlayerBag();
-        sub_8014304(MAP_GROUP(SINGLE_BATTLE_COLOSSEUM), MAP_NUM(SINGLE_BATTLE_COLOSSEUM), 6, 8, USING_SINGLE_BATTLE);
+        sub_8014304(MAP_GROUP(BATTLE_COLOSSEUM_2P), MAP_NUM(BATTLE_COLOSSEUM_2P), 6, 8, USING_SINGLE_BATTLE);
         SetMainCallback2(sub_8014384);
         break;
     case 2:
@@ -1478,7 +1480,7 @@ void sub_801440C(u8 taskId)
         SavePlayerParty();
         LoadPlayerBag();
         sub_80143E4(gBlockSendBuffer, TRUE);
-        sub_8014304(MAP_GROUP(SINGLE_BATTLE_COLOSSEUM), MAP_NUM(SINGLE_BATTLE_COLOSSEUM), 6, 8, USING_DOUBLE_BATTLE);
+        sub_8014304(MAP_GROUP(BATTLE_COLOSSEUM_2P), MAP_NUM(BATTLE_COLOSSEUM_2P), 6, 8, USING_DOUBLE_BATTLE);
         SetMainCallback2(sub_8014384);
         break;
     case 3:
@@ -1487,7 +1489,7 @@ void sub_801440C(u8 taskId)
         SavePlayerParty();
         LoadPlayerBag();
         sub_80143E4(gBlockSendBuffer, TRUE);
-        sub_8014304(MAP_GROUP(DOUBLE_BATTLE_COLOSSEUM), MAP_NUM(DOUBLE_BATTLE_COLOSSEUM), 5, 8, USING_MULTI_BATTLE);
+        sub_8014304(MAP_GROUP(BATTLE_COLOSSEUM_4P), MAP_NUM(BATTLE_COLOSSEUM_4P), 5, 8, USING_MULTI_BATTLE);
         SetMainCallback2(sub_8014384);
         break;
     case 4:
@@ -2308,7 +2310,9 @@ void sub_80156E0(u8 taskId)
         data->state = 3;
         break;
     case 3:
-        if ((sub_81B1360() == 8 || sub_81B1360() == 9) && sUnionRoomTrade.field_0 != 0)
+        if ((GetPartyMenuType() == PARTY_MENU_TYPE_UNION_ROOM_REGISTER 
+           || GetPartyMenuType() == PARTY_MENU_TYPE_UNION_ROOM_TRADE) 
+           && sUnionRoomTrade.field_0 != 0)
         {
             id = GetCursorSelectionMonId();
             switch (sUnionRoomTrade.field_0)
@@ -2876,7 +2880,7 @@ void sub_80156E0(u8 taskId)
         {
             sUnionRoomTrade.field_0 = 1;
             gFieldCallback = sub_80AF128;
-            sub_81B8904(8, CB2_ReturnToField);
+            ChooseMonForTradingBoard(PARTY_MENU_TYPE_UNION_ROOM_REGISTER, CB2_ReturnToField);
         }
         break;
     case 52:
@@ -2988,7 +2992,7 @@ void sub_80156E0(u8 taskId)
             gUnionRoomRequestedMonType = data->field_0->arr[taskData[1]].unk.field_0.type;
             gUnionRoomOfferedSpecies = data->field_0->arr[taskData[1]].unk.field_0.species;
             gFieldCallback = sub_80AF128;
-            sub_81B8904(9, CB2_ReturnToField);
+            ChooseMonForTradingBoard(PARTY_MENU_TYPE_UNION_ROOM_TRADE, CB2_ReturnToField);
             sub_80156B0(data);
             sUnionRoomTrade.field_8 = taskData[1];
         }

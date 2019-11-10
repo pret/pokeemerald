@@ -93,13 +93,13 @@ SootopolisCity_MysteryEventsHouse_1F_EventScript_227A58:: @ 8227A58
 	special SavePlayerParty
 	special BufferEReaderTrainerName
 	msgbox SootopolisCity_MysteryEventsHouse_1F_Text_227BFC, MSGBOX_YESNO
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq SootopolisCity_MysteryEventsHouse_1F_EventScript_227AE2
 	call SootopolisCity_MysteryEventsHouse_1F_EventScript_227AEF
 	compare VAR_RESULT, 0
 	goto_if_eq SootopolisCity_MysteryEventsHouse_1F_EventScript_227AE2
 	msgbox SootopolisCity_MysteryEventsHouse_1F_Text_227CEB, MSGBOX_YESNO
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq SootopolisCity_MysteryEventsHouse_1F_EventScript_227AE2
 	special LoadPlayerParty
 	call Common_EventScript_SaveGame

@@ -1,7 +1,7 @@
 {
-  "id": "MAP_DOUBLE_BATTLE_COLOSSEUM",
-  "name": "DoubleBattleColosseum",
-  "layout": "LAYOUT_DOUBLE_BATTLE_COLOSSEUM",
+  "id": "MAP_BATTLE_COLOSSEUM_4P",
+  "name": "BattleColosseum4P",
+  "layout": "LAYOUT_BATTLE_COLOSSEUM_4P",
   "music": "MUS_RAINBOW",
   "region_map_section": "MAPSEC_DYNAMIC",
   "requires_flash": false,
@@ -52,7 +52,7 @@
       "elevation": 3,
       "var": "VAR_TEMP_0",
       "var_value": "0",
-      "script": "EventScript_DoubleBattleColosseum_PlayerSpot0"
+      "script": "EventScript_BattleColosseum4P_PlayerSpot0"
     },
     {
       "type": "trigger",
@@ -61,7 +61,7 @@
       "elevation": 3,
       "var": "VAR_TEMP_0",
       "var_value": "0",
-      "script": "EventScript_DoubleBattleColosseum_PlayerSpot2"
+      "script": "EventScript_BattleColosseum4P_PlayerSpot2"
     },
     {
       "type": "trigger",
@@ -70,7 +70,7 @@
       "elevation": 3,
       "var": "VAR_TEMP_0",
       "var_value": "0",
-      "script": "EventScript_DoubleBattleColosseum_PlayerSpot1"
+      "script": "EventScript_BattleColosseum4P_PlayerSpot1"
     },
     {
       "type": "trigger",
@@ -79,7 +79,7 @@
       "elevation": 3,
       "var": "VAR_TEMP_0",
       "var_value": "0",
-      "script": "EventScript_DoubleBattleColosseum_PlayerSpot3"
+      "script": "EventScript_BattleColosseum4P_PlayerSpot3"
     }
   ],
   "bg_events": []

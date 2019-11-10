@@ -54,6 +54,8 @@
 
 #define TRAINER_ID_LENGTH 4
 #define PARTY_SIZE 6
+#define FRONTIER_PARTY_SIZE 3
+#define MULTI_PARTY_SIZE PARTY_SIZE / 2
 #define MAX_MON_MOVES 4
 
 // string lengths
@@ -66,6 +68,10 @@
 #define MALE 0
 #define FEMALE 1
 #define GENDER_COUNT 2
+
+#define BARD_SONG_LENGTH       6
+#define NUM_STORYTELLER_TALES  4
+#define NUM_TRADER_ITEMS       4
 
 #define OPTIONS_BUTTON_MODE_NORMAL 0
 #define OPTIONS_BUTTON_MODE_LR 1

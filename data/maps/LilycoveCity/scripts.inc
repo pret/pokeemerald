@@ -7,7 +7,7 @@ LilycoveCity_OnTransition: @ 81E2B47
 	setflag FLAG_VISITED_LILYCOVE_CITY
 	setvar VAR_LINK_CONTEST_ROOM_STATE, 0
 	setflag FLAG_HIDE_LILYCOVE_CONTEST_HALL_REPORTER
-	call_if_set FLAG_SYS_WEATHER_CTRL, Common_EventScript_SetWeather15
+	call_if_set FLAG_SYS_WEATHER_CTRL, Common_EventScript_SetAlternatingWeather
 	call Common_EventScript_SetupRivalGfxId
 	end
 
@@ -241,7 +241,7 @@ LilycoveCity_EventScript_1E2DF8:: @ 81E2DF8
 	playbgm MUS_GIRL_SUP, 1
 	call_if_set FLAG_DECLINED_RIVAL_BATTLE_LILYCOVE, LilycoveCity_EventScript_1E2E48
 	call_if_unset FLAG_DECLINED_RIVAL_BATTLE_LILYCOVE, LilycoveCity_EventScript_1E2E51
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq LilycoveCity_EventScript_1E2E5A
 	msgbox LilycoveCity_Text_1E3234, MSGBOX_DEFAULT
 	switch VAR_STARTER_MON
@@ -270,7 +270,7 @@ LilycoveCity_EventScript_1E2E6B:: @ 81E2E6B
 	playbgm MUS_BOY_SUP, 1
 	call_if_set FLAG_DECLINED_RIVAL_BATTLE_LILYCOVE, LilycoveCity_EventScript_1E2EBB
 	call_if_unset FLAG_DECLINED_RIVAL_BATTLE_LILYCOVE, LilycoveCity_EventScript_1E2EC4
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq LilycoveCity_EventScript_1E2ECD
 	msgbox LilycoveCity_Text_1E373C, MSGBOX_DEFAULT
 	switch VAR_STARTER_MON
@@ -405,9 +405,9 @@ LilycoveCity_EventScript_1E302D:: @ 81E302D
 	lock
 	faceplayer
 	msgbox LilycoveCity_Text_1E4774, MSGBOX_YESNO
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, YES
 	call_if_eq LilycoveCity_EventScript_1E304F
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	call_if_eq LilycoveCity_EventScript_1E3058
 	release
 	end

@@ -26,6 +26,7 @@
 #include "constants/event_objects.h"
 #include "constants/field_effects.h"
 #include "constants/items.h"
+#include "constants/mauville_old_man.h"
 
 // this file was known as evobjmv.c in Game Freak's original source
 

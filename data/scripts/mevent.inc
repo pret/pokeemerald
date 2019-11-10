@@ -1,7 +1,7 @@
 EventScript_Questionnaire:: @ 827381B
 	lockall
 	msgbox Mevent_Text_FillOutQuestionnaire, MSGBOX_YESNO
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq Mevent_EventScript_Release
 	setvar VAR_0x8004, EASY_CHAT_TYPE_QUESTIONNAIRE
 	call Common_ShowEasyChatScreen

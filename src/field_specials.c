@@ -55,11 +55,13 @@
 #include "constants/heal_locations.h"
 #include "constants/map_types.h"
 #include "constants/maps.h"
+#include "constants/mevent.h"
 #include "constants/tv.h"
 #include "constants/script_menu.h"
 #include "constants/songs.h"
 #include "constants/species.h"
 #include "constants/moves.h"
+#include "constants/party_menu.h"
 #include "constants/vars.h"
 #include "constants/battle_frontier.h"
 #include "constants/weather.h"
@@ -973,7 +975,7 @@ void CableCarWarp(void)
     }
 }
 
-void SetFlagInVar(void)
+void SetHiddenItemFlag(void)
 {
     FlagSet(gSpecialVar_0x8004);
 }
@@ -1425,7 +1427,9 @@ bool8 Special_AreLeadMonEVsMaxedOut(void)
 
 u8 TryUpdateRusturfTunnelState(void)
 {
-    if (!FlagGet(FLAG_RUSTURF_TUNNEL_OPENED) && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(RUSTURF_TUNNEL) && gSaveBlock1Ptr->location.mapNum == MAP_NUM(RUSTURF_TUNNEL))
+    if (!FlagGet(FLAG_RUSTURF_TUNNEL_OPENED) 
+        && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(RUSTURF_TUNNEL) 
+        && gSaveBlock1Ptr->location.mapNum == MAP_NUM(RUSTURF_TUNNEL))
     {
         if (FlagGet(FLAG_HIDE_RUSTURF_TUNNEL_ROCK_1))
         {
@@ -1605,18 +1609,16 @@ u16 SetPacifidlogTMReceivedDay(void)
     return gLocalTime.days;
 }
 
-bool8 MonOTNameMatchesPlayer(void)
+bool8 MonOTNameNotPlayer(void)
 {
     if (GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_LANGUAGE) != GAME_LANGUAGE)
-    {
-        return TRUE;    // huh?
-    }
+        return TRUE;
 
     GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_OT_NAME, gStringVar1);
+
     if (!StringCompare(gSaveBlock2Ptr->playerName, gStringVar1))
-    {
         return FALSE;
-    }
+
     return TRUE;
 }
 
@@ -1654,19 +1656,19 @@ void BufferLottoTicketNumber(void)
     }
 }
 
-u16 sub_813986C(void)
+u16 GetMysteryEventCardVal(void)
 {
     switch (gSpecialVar_Result)
     {
-        case 0:
-            return mevent_081445C0(3);
-        case 1:
-            return mevent_081445C0(4);
-        case 2:
-            return mevent_081445C0(0);
-        case 3:
+        case GET_NUM_STAMPS:
+            return mevent_081445C0(GET_NUM_STAMPS_INTERNAL);
+        case GET_MAX_STAMPS:
+            return mevent_081445C0(GET_MAX_STAMPS_INTERNAL);
+        case GET_CARD_BATTLES_WON:
+            return mevent_081445C0(GET_CARD_BATTLES_WON_INTERNAL);
+        case 3: // Never occurs
             return mevent_081445C0(1);
-        case 4:
+        case 4: // Never occurs
             return mevent_081445C0(2);
         default:
             return 0;
@@ -3481,7 +3483,7 @@ void IncrementBirthIslandRockStepCount(void)
     }
 }
 
-void sub_813B1D0(void)
+void SetDeoxysRockPalette(void)
 {
     LoadPalette(&sDeoxysRockPalettes[(u8)VarGet(VAR_DEOXYS_ROCK_LEVEL)], 0x1A0, 8);
     BlendPalettes(0x04000000, 16, 0);
@@ -3996,10 +3998,10 @@ bool8 InPokemonCenter(void)
         MAP_EVER_GRANDE_CITY_POKEMON_CENTER_1F,
         MAP_EVER_GRANDE_CITY_POKEMON_LEAGUE_1F,
         MAP_BATTLE_FRONTIER_POKEMON_CENTER_1F,
-        MAP_SINGLE_BATTLE_COLOSSEUM,
+        MAP_BATTLE_COLOSSEUM_2P,
         MAP_TRADE_CENTER,
         MAP_RECORD_CORNER,
-        MAP_DOUBLE_BATTLE_COLOSSEUM,
+        MAP_BATTLE_COLOSSEUM_4P,
         0xFFFF
     };
 
@@ -4031,7 +4033,7 @@ void sub_813BA30(void)
     }
 }
 
-void sub_813BA60(void)
+void UpdateTrainerFanClubGameClear(void)
 {
     if (!((gSaveBlock1Ptr->vars[VAR_FANCLUB_UNKNOWN_1 - VARS_START] >> 7) & 1))
     {

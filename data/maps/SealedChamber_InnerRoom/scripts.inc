@@ -1,15 +1,15 @@
 SealedChamber_InnerRoom_MapScripts:: @ 82391F7
 	.byte 0
 
-SealedChamber_InnerRoom_EventScript_2391F8:: @ 82391F8
+SealedChamber_InnerRoom_EventScript_BrailleBackWall:: @ 82391F8
 	lockall
-	braillemessage SealedChamber_InnerRoom_Braille_2A6B99
+	braillemessage SealedChamber_InnerRoom_Braille_FirstWailordLastRelicanth
 	waitbuttonpress
-	hidebox2
-	goto_if_set FLAG_REGI_DOORS_OPENED, SealedChamber_InnerRoom_EventScript_239253
+	closebraillemessage
+	goto_if_set FLAG_REGI_DOORS_OPENED, SealedChamber_InnerRoom_EventScript_NoEffect
 	specialvar VAR_RESULT, CheckRelicanthWailord
-	compare VAR_RESULT, 0
-	goto_if_eq SealedChamber_InnerRoom_EventScript_239253
+	compare VAR_RESULT, FALSE
+	goto_if_eq SealedChamber_InnerRoom_EventScript_NoEffect
 	fadeoutbgm 0
 	playse SE_TRACK_MOVE
 	special DoSealedChamberShakingEffect1
@@ -34,55 +34,55 @@ SealedChamber_InnerRoom_EventScript_2391F8:: @ 82391F8
 	releaseall
 	end
 
-SealedChamber_InnerRoom_EventScript_239253:: @ 8239253
+SealedChamber_InnerRoom_EventScript_NoEffect:: @ 8239253
 	releaseall
 	end
 
-SealedChamber_InnerRoom_EventScript_239255:: @ 8239255
+SealedChamber_InnerRoom_EventScript_BrailleStoryPart1:: @ 8239255
 	lockall
-	braillemessage SealedChamber_InnerRoom_Braille_2A6BCA
+	braillemessage SealedChamber_InnerRoom_Braille_InThisCaveWeHaveLived
 	waitbuttonpress
-	hidebox2
+	closebraillemessage
 	releaseall
 	end
 
-SealedChamber_InnerRoom_EventScript_23925F:: @ 823925F
+SealedChamber_InnerRoom_EventScript_BrailleStoryPart2:: @ 823925F
 	lockall
-	braillemessage SealedChamber_InnerRoom_Braille_2A6BEC
+	braillemessage SealedChamber_InnerRoom_Braille_WeOweAllToThePokemon
 	waitbuttonpress
-	hidebox2
+	closebraillemessage
 	releaseall
 	end
 
-SealedChamber_InnerRoom_EventScript_239269:: @ 8239269
+SealedChamber_InnerRoom_EventScript_BrailleStoryPart3:: @ 8239269
 	lockall
-	braillemessage SealedChamber_InnerRoom_Braille_2A6C0D
+	braillemessage SealedChamber_InnerRoom_Braille_ButWeSealedThePokemonAway
 	waitbuttonpress
-	hidebox2
+	closebraillemessage
 	releaseall
 	end
 
-SealedChamber_InnerRoom_EventScript_239273:: @ 8239273
+SealedChamber_InnerRoom_EventScript_BrailleStoryPart4:: @ 8239273
 	lockall
-	braillemessage SealedChamber_InnerRoom_Braille_2A6C34
+	braillemessage SealedChamber_InnerRoom_Braille_WeFearedIt
 	waitbuttonpress
-	hidebox2
+	closebraillemessage
 	releaseall
 	end
 
-SealedChamber_InnerRoom_EventScript_23927D:: @ 823927D
+SealedChamber_InnerRoom_EventScript_BrailleStoryPart5:: @ 823927D
 	lockall
-	braillemessage SealedChamber_InnerRoom_Braille_2A6C48
+	braillemessage SealedChamber_InnerRoom_Braille_ThoseWithCourageHope
 	waitbuttonpress
-	hidebox2
+	closebraillemessage
 	releaseall
 	end
 
-SealedChamber_InnerRoom_EventScript_239287:: @ 8239287
+SealedChamber_InnerRoom_EventScript_BrailleStoryPart6:: @ 8239287
 	lockall
-	braillemessage SealedChamber_InnerRoom_Braille_2A6C73
+	braillemessage SealedChamber_InnerRoom_Braille_OpenDoorEternalPokemonWaits
 	waitbuttonpress
-	hidebox2
+	closebraillemessage
 	releaseall
 	end
 

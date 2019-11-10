@@ -23,7 +23,7 @@ Route129_OnTransition: @ 81F72AB
 	end
 
 Route129_EventScript_1F72D8:: @ 81F72D8
-	call_if_set FLAG_SYS_WEATHER_CTRL, Common_EventScript_SetWeather15
+	call_if_set FLAG_SYS_WEATHER_CTRL, Common_EventScript_SetAlternatingWeather
 	return
 
 Route129_MapScript2_1F72E2: @ 81F72E2

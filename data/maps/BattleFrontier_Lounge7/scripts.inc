@@ -250,7 +250,7 @@ BattleFrontier_Lounge7_EventScript_26564F:: @ 826564F
 	buffernumberstring 1, VAR_0x8008
 	copyvar VAR_0x8004, VAR_TEMP_C
 	msgbox BattleFrontier_Lounge7_Text_265921, MSGBOX_YESNO
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq BattleFrontier_Lounge7_EventScript_2656CA
 	specialvar VAR_TEMP_1, GetFrontierBattlePoints
 	compare VAR_TEMP_1, VAR_0x8008
@@ -265,7 +265,7 @@ BattleFrontier_Lounge7_EventScript_265696:: @ 8265696
 	fadescreen 1
 	special CloseBattlePointsWindow
 	special CloseBattleFrontierTutorWindow
-	special OpenPartyMenuForMoveTutor
+	special ChooseMonForMoveTutor
 	waitstate
 	compare VAR_RESULT, 0
 	goto_if_eq BattleFrontier_Lounge7_EventScript_265645

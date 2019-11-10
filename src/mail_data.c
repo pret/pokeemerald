@@ -63,7 +63,7 @@ u8 GiveMailToMon(struct Pokemon *mon, u16 itemId)
             gSaveBlock1Ptr->mail[id].playerName[i] = EOS;
             PadNameString(gSaveBlock1Ptr->mail[id].playerName, CHAR_SPACE);
 
-            for (i = 0; i < 4; i++)
+            for (i = 0; i < TRAINER_ID_LENGTH; i++)
                 gSaveBlock1Ptr->mail[id].trainerId[i] = gSaveBlock2Ptr->playerTrainerId[i];
 
             species = GetBoxMonData(&mon->box, MON_DATA_SPECIES);
