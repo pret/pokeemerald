@@ -1,5 +1,5 @@
-#ifndef GUARD_CONTEST_PAINTING_EFFECTS_H
-#define GUARD_CONTEST_PAINTING_EFFECTS_H
+#ifndef GUARD_IMAGE_PROCESSING_EFFECTS_H
+#define GUARD_IMAGE_PROCESSING_EFFECTS_H
 
 enum
 {
@@ -27,7 +27,7 @@ enum
     QUANTIZE_EFFECT_BLACK_WHITE,
 };
 
-struct ContestPaintingContext
+struct ImageProcessingContext
 {
     u8 effect;
     void *canvasPixels;
@@ -46,8 +46,8 @@ struct ContestPaintingContext
     u8 personality;
 };
 
-void ApplyImageProcessingEffects(struct ContestPaintingContext *);
-void ApplyImageProcessingQuantization(struct ContestPaintingContext *);
-void ConvertImageProcessingToGBA(struct ContestPaintingContext *);
+void ApplyImageProcessingEffects(struct ImageProcessingContext *);
+void ApplyImageProcessingQuantization(struct ImageProcessingContext *);
+void ConvertImageProcessingToGBA(struct ImageProcessingContext *);
 
 #endif

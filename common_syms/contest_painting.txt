@@ -1,4 +1,4 @@
 gContestMonPixels
-gContestPaintingContext
+gImageProcessingContext
 gContestPaintingWinner
 gContestPaintingMonPalette

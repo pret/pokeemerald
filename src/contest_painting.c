@@ -5,10 +5,10 @@
 #include "bg.h"
 #include "contest.h"
 #include "contest_painting.h"
-#include "contest_painting_effects.h"
 #include "data.h"
 #include "decompress.h"
 #include "gpu_regs.h"
+#include "image_processing_effects.h"
 #include "international_string_util.h"
 #include "main.h"
 #include "lilycove_lady.h"
@@ -23,7 +23,7 @@
 
 // IWRAM common
 u16 (*gContestMonPixels)[][32];
-struct ContestPaintingContext gContestPaintingContext;
+struct ImageProcessingContext gImageProcessingContext;
 struct ContestWinner *gContestPaintingWinner;
 u16 *gContestPaintingMonPalette;
 
@@ -657,38 +657,38 @@ static void AllocPaintingResources(void)
 
 static void DoContestPaintingImageProcessing(u8 imageEffect)
 {
-    gContestPaintingContext.canvasPixels = gContestMonPixels;
-    gContestPaintingContext.canvasPalette = gContestPaintingMonPalette;
-    gContestPaintingContext.paletteStart = 0;
-    gContestPaintingContext.personality = gContestPaintingWinner->personality % 256;
-    gContestPaintingContext.columnStart = 0;
-    gContestPaintingContext.rowStart = 0;
-    gContestPaintingContext.columnEnd = 64;
-    gContestPaintingContext.rowEnd = 64;
-    gContestPaintingContext.canvasWidth = 64;
-    gContestPaintingContext.canvasHeight = 64;
+    gImageProcessingContext.canvasPixels = gContestMonPixels;
+    gImageProcessingContext.canvasPalette = gContestPaintingMonPalette;
+    gImageProcessingContext.paletteStart = 0;
+    gImageProcessingContext.personality = gContestPaintingWinner->personality % 256;
+    gImageProcessingContext.columnStart = 0;
+    gImageProcessingContext.rowStart = 0;
+    gImageProcessingContext.columnEnd = 64;
+    gImageProcessingContext.rowEnd = 64;
+    gImageProcessingContext.canvasWidth = 64;
+    gImageProcessingContext.canvasHeight = 64;
 
     switch (imageEffect)
     {
     case IMAGE_EFFECT_CHARCOAL:
     case IMAGE_EFFECT_GRAYSCALE_LIGHT:
-        gContestPaintingContext.quantizeEffect = QUANTIZE_EFFECT_GRAYSCALE;
+        gImageProcessingContext.quantizeEffect = QUANTIZE_EFFECT_GRAYSCALE;
         break;
     case IMAGE_EFFECT_OUTLINE_COLORED:
     case IMAGE_EFFECT_SHIMMER:
     case IMAGE_EFFECT_POINTILLISM:
     default:
-        gContestPaintingContext.quantizeEffect = QUANTIZE_EFFECT_STANDARD_LIMITED_COLORS;
+        gImageProcessingContext.quantizeEffect = QUANTIZE_EFFECT_STANDARD_LIMITED_COLORS;
         break;
     }
 
-    gContestPaintingContext.var_16 = 2;
-    gContestPaintingContext.effect = imageEffect;
-    gContestPaintingContext.dest = OBJ_VRAM0;
+    gImageProcessingContext.var_16 = 2;
+    gImageProcessingContext.effect = imageEffect;
+    gImageProcessingContext.dest = OBJ_VRAM0;
 
-    ApplyImageProcessingEffects(&gContestPaintingContext);
-    ApplyImageProcessingQuantization(&gContestPaintingContext);
-    ConvertImageProcessingToGBA(&gContestPaintingContext);
+    ApplyImageProcessingEffects(&gImageProcessingContext);
+    ApplyImageProcessingQuantization(&gImageProcessingContext);
+    ConvertImageProcessingToGBA(&gImageProcessingContext);
     LoadPalette(gContestPaintingMonPalette, 0x100, 0x200);
 }
 
