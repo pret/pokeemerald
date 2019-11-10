@@ -1102,7 +1102,7 @@ Common_EventScript_LegendaryFlewAway:: @ 8273776
 	.include "data/scripts/day_care.inc"
 	.include "data/scripts/flash.inc"
 	.include "data/scripts/players_house.inc"
-	.include "data/scripts/pokeblocks.inc"
+	.include "data/scripts/berry_blender.inc"
 	.include "data/text/mauville_man.inc"
 	.include "data/text/trainers.inc"
 	.include "data/scripts/repel.inc"
