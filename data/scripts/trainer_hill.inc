@@ -6,7 +6,7 @@ TrainerHill_Roof_MapScript1_2C8336: @ 82C8336
 	setvar VAR_TEMP_2, 0
 	setvar VAR_0x8004, TRAINER_HILL_FUNC_RESUME_TIMER
 	special CallTrainerHillFunction
-	setvar VAR_0x8004, 1
+	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_1
 	setvar VAR_0x8005, 5
 	special CallFrontierUtilFunc
 	compare VAR_RESULT, B_OUTCOME_LOST

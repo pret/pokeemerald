@@ -20,6 +20,7 @@
 #include "trainer_hill.h"
 #include "window.h"
 #include "constants/battle_string_ids.h"
+#include "constants/frontier_util.h"
 #include "constants/items.h"
 #include "constants/moves.h"
 #include "constants/trainers.h"
