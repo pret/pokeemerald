@@ -1410,9 +1410,9 @@ void GiveLeadMonEffortRibbon(void)
     ribbonSet = TRUE;
     leadMon = &gPlayerParty[GetLeadMonIndex()];
     SetMonData(leadMon, MON_DATA_EFFORT_RIBBON, &ribbonSet);
-    if (GetRibbonCount(leadMon) > 4)
+    if (GetRibbonCount(leadMon) > NUM_CUTIES_RIBBONS)
     {
-        sub_80EE4DC(leadMon, 0x47);
+        TryPutSpotTheCutiesOnAir(leadMon, 0x47);
     }
 }
 

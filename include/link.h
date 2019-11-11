@@ -92,8 +92,8 @@
 #define LINKTYPE_0x5501              0x5501  // mystery event
 #define LINKTYPE_0x5502              0x5502  // unused?
 #define LINKTYPE_0x5503              0x5503  // eReader
-#define LINKTYPE_0x6601              0x6601
-#define LINKTYPE_0x6602              0x6602
+#define LINKTYPE_CONTEST_GMODE       0x6601
+#define LINKTYPE_CONTEST_EMODE       0x6602
 
 struct LinkStatus
 {

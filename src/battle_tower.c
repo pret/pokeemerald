@@ -30,6 +30,7 @@
 #include "constants/moves.h"
 #include "constants/species.h"
 #include "constants/easy_chat.h"
+#include "constants/tv.h"
 
 extern const u8 MossdeepCity_SpaceCenter_2F_EventScript_MaxieTrainer[];
 extern const u8 MossdeepCity_SpaceCenter_2F_EventScript_TabithaTrainer[];
@@ -3026,9 +3027,9 @@ static void AwardBattleTowerRibbons(void)
                 ribbons[i] = prevBest;
             }
         }
-        if (ribbons[0].count > 4)
+        if (ribbons[0].count > NUM_CUTIES_RIBBONS)
         {
-            sub_80EE4DC(&gSaveBlock1Ptr->playerParty[ribbons[0].partyIndex], ribbonType);
+            TryPutSpotTheCutiesOnAir(&gSaveBlock1Ptr->playerParty[ribbons[0].partyIndex], ribbonType);
         }
     }
 }

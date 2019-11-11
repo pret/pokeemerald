@@ -1015,7 +1015,7 @@ BattleFrontier_BattleTowerLobby_EventScript_23F3DA:: @ 823F3DA
 	end
 
 BattleFrontier_BattleTowerLobby_EventScript_23F3E8:: @ 823F3E8
-	setvar VAR_0x8004, 20
+	setvar VAR_0x8004, LINK_GROUP_BATTLE_TOWER
 	goto BattleFrontier_BattleTowerLobby_EventScript_23F3F3
 	end
 
