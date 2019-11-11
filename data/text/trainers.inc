@@ -3590,268 +3590,268 @@ Route123_Text_2A096E: @ 82A096E
 	.string "Using accessories effectively is\n"
 	.string "the secret behind fashion appeal.$"
 
-Route124_Text_2A09B1: @ 82A09B1
+Route124_Text_SpencerIntro: @ 82A09B1
 	.string "Hey, are you lost at sea?\p"
 	.string "If you can beat my POKéMON,\n"
 	.string "I can serve as your pilot.$"
 
-Route124_Text_2A0A02: @ 82A0A02
+Route124_Text_SpencerDefeat: @ 82A0A02
 	.string "I lost my bearings in battle!$"
 
-Route124_Text_2A0A20: @ 82A0A20
+Route124_Text_SpencerPostBattle: @ 82A0A20
 	.string "Many people lose their bearings at sea.\p"
 	.string "If you're that sort, you should refer\n"
 	.string "to the POKéNAV's MAP.$"
 
-Route124_Text_2A0A84: @ 82A0A84
+Route124_Text_RolandIntro: @ 82A0A84
 	.string "Hm! You're riding a POKéMON instead\n"
 	.string "of swimming yourself…\p"
 	.string "I am envious!$"
 
-Route124_Text_2A0ACC: @ 82A0ACC
+Route124_Text_RolandDefeat: @ 82A0ACC
 	.string "Oh!\n"
 	.string "I can't…$"
 
-Route124_Text_2A0AD9: @ 82A0AD9
+Route124_Text_RolandPostBattle: @ 82A0AD9
 	.string "I'm getting chilled…\n"
 	.string "I've been in the water too long…\p"
 	.string "I wish I could ride a POKéMON like you…$"
 
-Route124_Text_2A0B37: @ 82A0B37
+Route124_Text_JennyIntro: @ 82A0B37
 	.string "If you just float in the sea like\n"
 	.string "this, POKéMON come around to play.$"
 
-Route124_Text_2A0B7C: @ 82A0B7C
+Route124_Text_JennyDefeat: @ 82A0B7C
 	.string "Oh, darn.\n"
 	.string "I've gone and lost.$"
 
-Route124_Text_2A0B9A: @ 82A0B9A
+Route124_Text_JennyPostBattle: @ 82A0B9A
 	.string "While swimming, I noticed that some\n"
 	.string "POKéMON attack, and some just watch.\p"
 	.string "I guess POKéMON have personalities\n"
 	.string "of their own.$"
 
-Route124_Text_2A0C14: @ 82A0C14
+Route124_Text_JennyRegister: @ 82A0C14
 	.string "It's only on a whim, but maybe I'll get\n"
 	.string "you to register me in your POKéNAV.$"
 
-Route124_Text_2A0C60: @ 82A0C60
+Route124_Text_JennyRematchIntro: @ 82A0C60
 	.string "If you just float in the sea like this,\n"
 	.string "TRAINERS challenge you!$"
 
-Route124_Text_2A0CA0: @ 82A0CA0
+Route124_Text_JennyRematchDefeat: @ 82A0CA0
 	.string "That's strange…\n"
 	.string "I lost again…$"
 
-Route124_Text_2A0CBE: @ 82A0CBE
+Route124_Text_JennyPostRematch: @ 82A0CBE
 	.string "This has nothing to do with anything,\n"
 	.string "but maybe I'll visit the TRICK HOUSE.$"
 
-Route124_Text_2A0D0A: @ 82A0D0A
+Route124_Text_GraceIntro: @ 82A0D0A
 	.string "I'm growing bored of swimming…\n"
 	.string "How about a battle?$"
 
-Route124_Text_2A0D3D: @ 82A0D3D
+Route124_Text_GraceDefeat: @ 82A0D3D
 	.string "I had no idea that you were\n"
 	.string "this strong!$"
 
-Route124_Text_2A0D66: @ 82A0D66
+Route124_Text_GracePostBattle: @ 82A0D66
 	.string "All the effort you put in must have\n"
 	.string "made you this strong.$"
 
-Route124_Text_2A0DA0: @ 82A0DA0
+Route124_Text_ChadIntro: @ 82A0DA0
 	.string "Fufufufu… I dive deep underwater\n"
 	.string "to go deep under cover.\l"
 	.string "Plumbing the depths is where I excel!$"
 
-Route124_Text_2A0DFF: @ 82A0DFF
+Route124_Text_ChadDefeat: @ 82A0DFF
 	.string "Glub, glub, glub…\n"
 	.string "I'm sinking…$"
 
-Route124_Text_2A0E1E: @ 82A0E1E
+Route124_Text_ChadPostBattle: @ 82A0E1E
 	.string "I have it on good authority that\n"
 	.string "there's a DIVE spot around here.\p"
 	.string "It gives me the urge to go deep\n"
 	.string "again…$"
 
-Route124_Text_2A0E87: @ 82A0E87
+Route124_Text_LilaIntro: @ 82A0E87
 	.string "LILA: Sigh…\p"
 	.string "Here I am in the sea, but who's with me?\n"
 	.string "My little brother!\p"
 	.string "Let's battle so I won't have to dwell\n"
 	.string "on that!$"
 
-Route124_Text_2A0EFE: @ 82A0EFE
+Route124_Text_LilaDefeat: @ 82A0EFE
 	.string "LILA: ROY! It's your fault we lost!\n"
 	.string "You're in for it later!$"
 
-Route124_Text_2A0F3A: @ 82A0F3A
+Route124_Text_LilaPostBattle: @ 82A0F3A
 	.string "LILA: Sigh…\p"
 	.string "If only it wasn't my little brother\n"
 	.string "next to me, but a nice boyfriend…$"
 
-Route124_Text_2A0F8C: @ 82A0F8C
+Route124_Text_LilaNotEnoughMons: @ 82A0F8C
 	.string "LILA: You're planning to battle us?\n"
 	.string "Not unless you have two POKéMON.$"
 
-Route124_Text_2A0FD1: @ 82A0FD1
+Route124_Text_RoyIntro: @ 82A0FD1
 	.string "ROY: My big sister is tough at POKéMON!\p"
 	.string "Don't cry when you lose!$"
 
-Route124_Text_2A1012: @ 82A1012
+Route124_Text_RoyDefeat: @ 82A1012
 	.string "ROY: Uh-oh…\n"
 	.string "My big sister will chew me out…$"
 
-Route124_Text_2A103E: @ 82A103E
+Route124_Text_RoyPostBattle: @ 82A103E
 	.string "ROY: My big sister is really scary\n"
 	.string "when she gets angry.\p"
 	.string "That's why she doesn't have a\n"
 	.string "boyfriend.$"
 
-Route124_Text_2A109F: @ 82A109F
+Route124_Text_LilaRoyRegister: @ 82A109F
 	.string "ROY: Will you battle with us again?\n"
 	.string "But take it easy next time, okay?$"
 
-Route124_Text_2A10E5: @ 82A10E5
+Route124_Text_RoyNotEnoughMons: @ 82A10E5
 	.string "ROY: Did you want to battle us?\n"
 	.string "Bring two POKéMON, then.$"
 
-Route124_Text_2A111E: @ 82A111E
+Route124_Text_LilaRematchIntro: @ 82A111E
 	.string "LILA: Sigh…\p"
 	.string "Here I am in the sea, but who's with me?\n"
 	.string "My little brother!\p"
 	.string "Oh, hi, it's been a while. Let's battle\n"
 	.string "so I won't have to dwell on things!$"
 
-Route124_Text_2A11B2: @ 82A11B2
+Route124_Text_LilaRematchDefeat: @ 82A11B2
 	.string "LILA: ROY!\n"
 	.string "It's your fault we lost again!\p"
 	.string "We're having a training session later!$"
 
-Route124_Text_2A1203: @ 82A1203
+Route124_Text_LilaPostRematch: @ 82A1203
 	.string "LILA: Sigh…\p"
 	.string "If I had a nice boyfriend, we'd beat\n"
 	.string "anyone with lovely combinations…$"
 
-Route124_Text_2A1255: @ 82A1255
+Route124_Text_LilaRematchNotEnoughMons: @ 82A1255
 	.string "LILA: You're planning to battle us?\n"
 	.string "Not unless you have two POKéMON.$"
 
-Route124_Text_2A129A: @ 82A129A
+Route124_Text_RoyRematchIntro: @ 82A129A
 	.string "ROY: If we lose, I'll catch heck.\n"
 	.string "I'm going to go totally all out!$"
 
-Route124_Text_2A12DD: @ 82A12DD
+Route124_Text_RoyRematchDefeat: @ 82A12DD
 	.string "ROY: Uh-oh…\n"
 	.string "My big sister will chew me out again.$"
 
-Route124_Text_2A130F: @ 82A130F
+Route124_Text_RoyPostRematch: @ 82A130F
 	.string "ROY: My big sister is really scary\n"
 	.string "when she gets angry.\p"
 	.string "She's going to make me train really\n"
 	.string "hard with POKéMON later…$"
 
-Route124_Text_2A1384: @ 82A1384
+Route124_Text_RoyRematchNotEnoughMons: @ 82A1384
 	.string "ROY: Did you want to battle us?\n"
 	.string "Bring two POKéMON, then.$"
 
-Route124_Text_2A13BD: @ 82A13BD
+Route124_Text_DeclanIntro: @ 82A13BD
 	.string "Here I am swimming by my lonesome\n"
 	.string "on this wide, beautiful sea.\p"
 	.string "There's no other word for it.\n"
 	.string "This is pathetic!$"
 
-Route124_Text_2A142C: @ 82A142C
+Route124_Text_DeclanDefeat: @ 82A142C
 	.string "I'm feeling blue.\n"
 	.string "Blue as the sky…$"
 
-Route124_Text_2A144F: @ 82A144F
+Route124_Text_DeclanPostBattle: @ 82A144F
 	.string "I should chat up lady SWIMMERS\n"
 	.string "and invite them on a long swim.$"
 
-Route124_Text_2A148E: @ 82A148E
+Route124_Text_IsabellaIntro: @ 82A148E
 	.string "I'm not going to lose to some\n"
 	.string "surfer TRAINER.$"
 
-Route124_Text_2A14BC: @ 82A14BC
+Route124_Text_IsabellaDefeat: @ 82A14BC
 	.string "I've only got sweat in my eyes!\n"
 	.string "I am not crying!$"
 
-Route124_Text_2A14ED: @ 82A14ED
+Route124_Text_IsabellaPostBattle: @ 82A14ED
 	.string "You can find pretty colored shards\n"
 	.string "of things around here.$"
 
-Route125_Text_2A1527: @ 82A1527
+Route125_Text_NolenIntro: @ 82A1527
 	.string "I heard you approaching, so I hung\n"
 	.string "around for you!$"
 
-Route125_Text_2A155A: @ 82A155A
+Route125_Text_NolenDefeat: @ 82A155A
 	.string "I surrender!$"
 
-Route125_Text_2A1567: @ 82A1567
+Route125_Text_NolenPostBattle: @ 82A1567
 	.string "Sound travels faster in water than\n"
 	.string "it does through air.$"
 
-Route125_Text_2A159F: @ 82A159F
+Route125_Text_StanIntro: @ 82A159F
 	.string "Hey, there!\n"
 	.string "Check out my sweet POKéMON!$"
 
-Route125_Text_2A15C7: @ 82A15C7
+Route125_Text_StanDefeat: @ 82A15C7
 	.string "I floundered…$"
 
-Route125_Text_2A15D5: @ 82A15D5
+Route125_Text_StanPostBattle: @ 82A15D5
 	.string "I was blown away by HORSEA's charm,\n"
 	.string "so I started swimming, too.$"
 
-Route125_Text_2A1615: @ 82A1615
+Route125_Text_TanyaIntro: @ 82A1615
 	.string "I'm tired of swimming.\n"
 	.string "Are you up for a battle with me?$"
 
-Route125_Text_2A164D: @ 82A164D
+Route125_Text_TanyaDefeat: @ 82A164D
 	.string "You're too much!$"
 
-Route125_Text_2A165E: @ 82A165E
+Route125_Text_TanyaPostBattle: @ 82A165E
 	.string "Whew…\n"
 	.string "Which way is it to MOSSDEEP CITY?$"
 
-Route125_Text_2A1686: @ 82A1686
+Route125_Text_SharonIntro: @ 82A1686
 	.string "How would you like to take on the\n"
 	.string "WATER-type POKéMON I raised?$"
 
-Route125_Text_2A16C5: @ 82A16C5
+Route125_Text_SharonDefeat: @ 82A16C5
 	.string "Lost it…$"
 
-Route125_Text_2A16CE: @ 82A16CE
+Route125_Text_SharonPostBattle: @ 82A16CE
 	.string "Your power… You're the real deal.\n"
 	.string "I'm amazed!$"
 
-Route125_Text_2A16FC: @ 82A16FC
+Route125_Text_ErnestIntro: @ 82A16FC
 	.string "Ahoy! I'm a buff, tough SAILOR!\n"
 	.string "I've braved the world's seas!$"
 
-Route125_Text_2A173A: @ 82A173A
+Route125_Text_ErnestDefeat: @ 82A173A
 	.string "Gwrroooar!\n"
 	.string "I couldn't win!$"
 
-Route125_Text_2A1755: @ 82A1755
+Route125_Text_ErnestPostBattle: @ 82A1755
 	.string "The tide ebbs and flows inside the\n"
 	.string "SHOAL CAVE.\p"
 	.string "By the way, it's about six hours from\n"
 	.string "high tide to low tide. Did you know?$"
 
-Route125_Text_2A17CF: @ 82A17CF
+Route125_Text_ErnestRegister: @ 82A17CF
 	.string "Register me in your POKéNAV,\n"
 	.string "and I'll tell you something good.$"
 
-Route125_Text_2A180E: @ 82A180E
+Route125_Text_ErnestRematchIntro: @ 82A180E
 	.string "It's high time I get my payback\n"
 	.string "from you! Come on, we're battling!$"
 
-Route125_Text_2A1851: @ 82A1851
+Route125_Text_ErnestRematchDefeat: @ 82A1851
 	.string "I couldn't win!\n"
 	.string "I flat out couldn't win!$"
 
-Route125_Text_2A187A: @ 82A187A
+Route125_Text_ErnestRematchPostBattle: @ 82A187A
 	.string "The SHOAL CAVE…\p"
 	.string "There are places you can and can't\n"
 	.string "get to depending on the rise and fall\l"
@@ -3859,524 +3859,524 @@ Route125_Text_2A187A: @ 82A187A
 	.string "By the way, it's about six hours from\n"
 	.string "high tide to low tide. Don't forget!$"
 
-Route125_Text_2A192B: @ 82A192B
+Route125_Text_KimIntro: @ 82A192B
 	.string "KIM: A funny old man lives in the\n"
 	.string "SHOAL CAVE. Someone told me.\l"
 	.string "Are you going to see him, too?$"
 
-Route125_Text_2A1989: @ 82A1989
+Route125_Text_KimDefeat: @ 82A1989
 	.string "KIM: I thought we would win.$"
 
-Route125_Text_2A19A6: @ 82A19A6
+Route125_Text_KimPostBattle: @ 82A19A6
 	.string "KIM: A funny old man lives in the\n"
 	.string "SHOAL CAVE, doesn't he?\p"
 	.string "Let's go see him, IRIS!$"
 
-Route125_Text_2A19F8: @ 82A19F8
+Route125_Text_KimNotEnoughMons: @ 82A19F8
 	.string "KIM: No, no, no! You need two POKéMON,\n"
 	.string "or it's just no good!$"
 
-Route125_Text_2A1A35: @ 82A1A35
+Route125_Text_IrisIntro: @ 82A1A35
 	.string "IRIS: KIM, can you tell me what we're\n"
 	.string "looking for out here?$"
 
-Route125_Text_2A1A71: @ 82A1A71
+Route125_Text_IrisDefeat: @ 82A1A71
 	.string "IRIS: Oh, we came sort of close.$"
 
-Route125_Text_2A1A92: @ 82A1A92
+Route125_Text_IrisPostBattle: @ 82A1A92
 	.string "IRIS: KIM, are we really going into\n"
 	.string "the SHOAL CAVE?\l"
 	.string "We'll get all wet.$"
 
-Route125_Text_2A1AD9: @ 82A1AD9
+Route125_Text_IrisNotEnoughMons: @ 82A1AD9
 	.string "IRIS: Oh, we could never, ever do\n"
 	.string "anything like a 2-on-1 battle.$"
 
-Route125_Text_2A1B1A: @ 82A1B1A
+Route125_Text_PresleyIntro: @ 82A1B1A
 	.string "Why would a BIRDKEEPER like me\n"
 	.string "come out to the sea?$"
 
-Route125_Text_2A1B4E: @ 82A1B4E
+Route125_Text_PresleyDefeat: @ 82A1B4E
 	.string "Okay.\n"
 	.string "I'll tell you why I'm here.$"
 
-Route125_Text_2A1B70: @ 82A1B70
+Route125_Text_PresleyPostBattle: @ 82A1B70
 	.string "I put a message in a bottle and put\n"
 	.string "it out to sea.\p"
 	.string "I'm sure that a girl SWIMMER will\n"
 	.string "find it!$"
 
-Route125_Text_2A1BCE: @ 82A1BCE
+Route125_Text_AuronIntro: @ 82A1BCE
 	.string "Hey! Was it you throwing garbage\n"
 	.string "into the sea?$"
 
-Route125_Text_2A1BFD: @ 82A1BFD
+Route125_Text_AuronDefeat: @ 82A1BFD
 	.string "Oh, you weren't throwing trash into\n"
 	.string "the sea.$"
 
-Route125_Text_2A1C2A: @ 82A1C2A
+Route125_Text_AuronPostBattle: @ 82A1C2A
 	.string "I found an unsightly bottle bobbing\n"
 	.string "in the waves earlier.\p"
 	.string "It angers me that someone would\n"
 	.string "pollute the sea!$"
 
-Route126_Text_2A1C95: @ 82A1C95
+Route126_Text_BarryIntro: @ 82A1C95
 	.string "Swimming is a full-body workout!\n"
 	.string "You will get fit!$"
 
-Route126_Text_2A1CC8: @ 82A1CC8
+Route126_Text_BarryDefeat: @ 82A1CC8
 	.string "I admit it!\n"
 	.string "You win!$"
 
-Route126_Text_2A1CDD: @ 82A1CDD
+Route126_Text_BarryPostBattle: @ 82A1CDD
 	.string "Thanks to my daily swimming routine…\n"
 	.string "Look! Feast your eyes on this physique!$"
 
-Route126_Text_2A1D2A: @ 82A1D2A
+Route126_Text_DeanIntro: @ 82A1D2A
 	.string "This towering white mountain of rock\n"
 	.string "is SOOTOPOLIS CITY.$"
 
-Route126_Text_2A1D63: @ 82A1D63
+Route126_Text_DeanDefeat: @ 82A1D63
 	.string "I was done in?$"
 
-Route126_Text_2A1D72: @ 82A1D72
+Route126_Text_DeanPostBattle: @ 82A1D72
 	.string "I can't find the entrance to\n"
 	.string "SOOTOPOLIS. Where could it be?$"
 
-Route126_Text_2A1DAE: @ 82A1DAE
+Route126_Text_NikkiIntro: @ 82A1DAE
 	.string "Ufufufufu!\n"
 	.string "I'm a mermaid!$"
 
-Route126_Text_2A1DC8: @ 82A1DC8
+Route126_Text_NikkiDefeat: @ 82A1DC8
 	.string "My fantasy burst as if it were a bubble!\n"
 	.string "Blub, blub, blub…$"
 
-Route126_Text_2A1E03: @ 82A1E03
+Route126_Text_NikkiPostBattle: @ 82A1E03
 	.string "You thrashed me… I want to\n"
 	.string "disappear in a wave of despair…$"
 
-Route126_Text_2A1E3E: @ 82A1E3E
+Route126_Text_BrendaIntro: @ 82A1E3E
 	.string "Hello, kiddo!\n"
 	.string "Want a battle with me?$"
 
-Route126_Text_2A1E63: @ 82A1E63
+Route126_Text_BrendaDefeat: @ 82A1E63
 	.string "Oh, noooooh!$"
 
-Route126_Text_2A1E70: @ 82A1E70
+Route126_Text_BrendaPostBattle: @ 82A1E70
 	.string "I love frolicking with POKéMON in\n"
 	.string "the sea like this!$"
 
-Route126_Text_2A1EA5: @ 82A1EA5
+Route126_Text_PabloIntro: @ 82A1EA5
 	.string "Check out this sculpted body!\n"
 	.string "I'm more cut than a BLACK BELT!$"
 
-Route126_Text_2A1EE3: @ 82A1EE3
+Route126_Text_PabloDefeat: @ 82A1EE3
 	.string "Whoops! Too strong!\n"
 	.string "Not bad! Not bad at all!$"
 
-Route126_Text_2A1F10: @ 82A1F10
+Route126_Text_PabloPostBattle: @ 82A1F10
 	.string "Losing to you stimulated my senses!\n"
 	.string "I'll train myself and POKéMON harder!$"
 
-Route126_Text_2A1F5A: @ 82A1F5A
+Route126_Text_PabloRegister: @ 82A1F5A
 	.string "Yep, you're not bad at all!\n"
 	.string "I'd like to get to know you more!$"
 
-Route126_Text_2A1F98: @ 82A1F98
+Route126_Text_PabloRematchIntro: @ 82A1F98
 	.string "Check out this beautiful body!\n"
 	.string "I'm more shapely than a SWIMMER!$"
 
-Route126_Text_2A1FD8: @ 82A1FD8
+Route126_Text_PabloRematchDefeat: @ 82A1FD8
 	.string "Whoops! Really too strong!\n"
 	.string "Not bad! Not bad at all!$"
 
-Route126_Text_2A200C: @ 82A200C
+Route126_Text_PabloPostRematch: @ 82A200C
 	.string "I'm going to train even harder!\n"
 	.string "You're a great motivator!\l"
 	.string "You have to come back again!$"
 
-Route126_Text_2A2063: @ 82A2063
+Route126_Text_LeonardoIntro: @ 82A2063
 	.string "I couldn't even swim last year,\n"
 	.string "but now I'm a decent SWIMMER.\p"
 	.string "I think I'm capable of anything now.$"
 
-Route126_Text_2A20C6: @ 82A20C6
+Route126_Text_LeonardoDefeat: @ 82A20C6
 	.string "Sheesh, getting greedy didn't do\n"
 	.string "a thing for me.$"
 
-Route126_Text_2A20F7: @ 82A20F7
+Route126_Text_LeonardoPostBattle: @ 82A20F7
 	.string "If you practice at something,\n"
 	.string "you will get better at it.\p"
 	.string "You're young--don't be afraid to\n"
 	.string "try all sorts of things!$"
 
-Route126_Text_2A216A: @ 82A216A
+Route126_Text_IsobelIntro: @ 82A216A
 	.string "If seawater gets up your nose,\n"
 	.string "doesn't it feel terrible?$"
 
-Route126_Text_2A21A3: @ 82A21A3
+Route126_Text_IsobelDefeat: @ 82A21A3
 	.string "Ack! Why, you…\n"
 	.string "Glub!$"
 
-Route126_Text_2A21B8: @ 82A21B8
+Route126_Text_IsobelPostBattle: @ 82A21B8
 	.string "Ooh, I choked on some water!\n"
 	.string "It's bitter! It's salty!!$"
 
-Route126_Text_2A21EF: @ 82A21EF
+Route126_Text_SiennaIntro: @ 82A21EF
 	.string "I'm throwing my whole heart\n"
 	.string "into this!$"
 
-Route126_Text_2A2216: @ 82A2216
+Route126_Text_SiennaDefeat: @ 82A2216
 	.string "You had more heart!$"
 
-Route126_Text_2A222A: @ 82A222A
+Route126_Text_SiennaPostBattle: @ 82A222A
 	.string "I need to cool down now…\n"
 	.string "I think I'll go for a dive.$"
 
-Route127_Text_2A225F: @ 82A225F
+Route127_Text_CamdenIntro: @ 82A225F
 	.string "I can see it in your face.\n"
 	.string "You want to challenge me.$"
 
-Route127_Text_2A2294: @ 82A2294
+Route127_Text_CamdenDefeat: @ 82A2294
 	.string "Awawawawawa…$"
 
-Route127_Text_2A22A1: @ 82A22A1
+Route127_Text_CamdenPostBattle: @ 82A22A1
 	.string "A well-played match leaves me feeling\n"
 	.string "refreshed and serene.$"
 
-Route127_Text_2A22DD: @ 82A22DD
+Route127_Text_DonnyIntro: @ 82A22DD
 	.string "Do you have a rival whom you just\n"
 	.string "hate to lose against?$"
 
-Route127_Text_2A2315: @ 82A2315
+Route127_Text_DonnyDefeat: @ 82A2315
 	.string "Arrrgh!\n"
 	.string "I hate losing!$"
 
-Route127_Text_2A232C: @ 82A232C
+Route127_Text_DonnyPostBattle: @ 82A232C
 	.string "If you have a rival, don't you get the\n"
 	.string "feeling that you have to keep getting\l"
 	.string "better?$"
 
-Route127_Text_2A2381: @ 82A2381
+Route127_Text_JonahIntro: @ 82A2381
 	.string "Through fishing, I have attained a\n"
 	.string "state of becalmed serenity…\p"
 	.string "Please, allow me to demonstrate…$"
 
-Route127_Text_2A23E1: @ 82A23E1
+Route127_Text_JonahDefeat: @ 82A23E1
 	.string "Though I have lost, my heart remains\n"
 	.string "calm…$"
 
-Route127_Text_2A240C: @ 82A240C
+Route127_Text_JonahPostBattle: @ 82A240C
 	.string "It matters not that I catch nothing.\n"
 	.string "The line remains in the water…$"
 
-Route127_Text_2A2450: @ 82A2450
+Route127_Text_HenryIntro: @ 82A2450
 	.string "Whoops! Don't tell me I snagged\n"
 	.string "a SURFING POKéMON?$"
 
-Route127_Text_2A2483: @ 82A2483
+Route127_Text_HenryDefeat: @ 82A2483
 	.string "I can't keep up!$"
 
-Route127_Text_2A2494: @ 82A2494
+Route127_Text_HenryPostBattle: @ 82A2494
 	.string "It'd be a handful if I hooked\n"
 	.string "your tough POKéMON!$"
 
-Route127_Text_2A24C6: @ 82A24C6
+Route127_Text_RogerIntro: @ 82A24C6
 	.string "Well, hey! This is a match between\n"
 	.string "a POKéMON fan and a fishing buff!$"
 
-Route127_Text_2A250B: @ 82A250B
+Route127_Text_RogerDefeat: @ 82A250B
 	.string "No! My line's all tangled!\n"
 	.string "The party's over!$"
 
-Route127_Text_2A2538: @ 82A2538
+Route127_Text_RogerPostBattle: @ 82A2538
 	.string "My fishing line's doing a dance!\n"
 	.string "The tangle tango! Hahaha, snarl!$"
 
-Route127_Text_2A257A: @ 82A257A
+Route127_Text_AidanIntro: @ 82A257A
 	.string "BIRD POKéMON have excellent vision.\n"
 	.string "They spot prey from great heights.$"
 
-Route127_Text_2A25C1: @ 82A25C1
+Route127_Text_AidanDefeat: @ 82A25C1
 	.string "Whew… I give up.$"
 
-Route127_Text_2A25D2: @ 82A25D2
+Route127_Text_AidanPostBattle: @ 82A25D2
 	.string "There're lots of diving spots in\n"
 	.string "the sea around here.\p"
 	.string "You can spot them easily from the sky\n"
 	.string "because of their darker color.$"
 
-Route127_Text_2A264D: @ 82A264D
+Route127_Text_KojiIntro: @ 82A264D
 	.string "Run in your bare feet.\n"
 	.string "That will toughen up your soles!$"
 
-Route127_Text_2A2685: @ 82A2685
+Route127_Text_KojiDefeat: @ 82A2685
 	.string "Yowch!\n"
 	.string "I got a pebble under a toenail!$"
 
-Route127_Text_2A26AC: @ 82A26AC
+Route127_Text_KojiPostBattle: @ 82A26AC
 	.string "Going barefoot feels great.\n"
 	.string "But your RUNNING SHOES are cool, too.$"
 
-Route127_Text_2A26EE: @ 82A26EE
+Route127_Text_KojiRegister: @ 82A26EE
 	.string "This is what I do to people who beat me!\n"
 	.string "I hope we can do this again.$"
 
-Route127_Text_2A2734: @ 82A2734
+Route127_Text_KojiRematchIntro: @ 82A2734
 	.string "I still run in my bare feet daily.\n"
 	.string "My soles are tough!$"
 
-Route127_Text_2A276B: @ 82A276B
+Route127_Text_KojiRematchDefeat: @ 82A276B
 	.string "Yowch!\n"
 	.string "Pebbles dug into my arches!$"
 
-Route127_Text_2A278E: @ 82A278E
+Route127_Text_KojiPostRematch: @ 82A278E
 	.string "Want to go barefoot for a while?\n"
 	.string "So I can try your RUNNING SHOES?$"
 
-Route127_Text_2A27D0: @ 82A27D0
+Route127_Text_AthenaIntro: @ 82A27D0
 	.string "We should have a slow and methodical\n"
 	.string "match.$"
 
-Route127_Text_2A27FC: @ 82A27FC
+Route127_Text_AthenaDefeat: @ 82A27FC
 	.string "You didn't give me the chance to\n"
 	.string "do any strategizing.$"
 
-Route127_Text_2A2832: @ 82A2832
+Route127_Text_AthenaPostBattle: @ 82A2832
 	.string "When I'm surrounded by the blue sea\n"
 	.string "and sky, it feels as if time slows down.$"
 
-Route128_Text_2A287F: @ 82A287F
+Route128_Text_IsaiahIntro: @ 82A287F
 	.string "EVER GRANDE CITY is still a long ways\n"
 	.string "away…$"
 
-Route128_Text_2A28AB: @ 82A28AB
+Route128_Text_IsaiahDefeat: @ 82A28AB
 	.string "My first victory seems to be far\n"
 	.string "away, too…$"
 
-Route128_Text_2A28D7: @ 82A28D7
+Route128_Text_IsaiahPostBattle: @ 82A28D7
 	.string "My whole life has been about losing,\n"
 	.string "but I will never give up!$"
 
-Route128_Text_2A2916: @ 82A2916
+Route128_Text_IsaiahRegister: @ 82A2916
 	.string "I know I'm not good now, but I think\n"
 	.string "I can win eventually.\p"
 	.string "Please register me in your POKéNAV.$"
 
-Route128_Text_2A2975: @ 82A2975
+Route128_Text_IsaiahRematchIntro: @ 82A2975
 	.string "I'm still feeling good. I'll keep on\n"
 	.string "swimming to EVER GRANDE CITY.$"
 
-Route128_Text_2A29B8: @ 82A29B8
+Route128_Text_IsaiahRematchDefeat: @ 82A29B8
 	.string "I've yet to taste my first victory…$"
 
-Route128_Text_2A29DC: @ 82A29DC
+Route128_Text_IsaiahPostRematch: @ 82A29DC
 	.string "I'll eventually reach EVER GRANDE CITY\n"
 	.string "where I can eventually win…$"
 
-Route128_Text_2A2A1F: @ 82A2A1F
+Route128_Text_KatelynIntro: @ 82A2A1F
 	.string "You have to swim, cycle, and then run\n"
 	.string "a marathon in a triathlon.\p"
 	.string "It's a grueling race that consists\n"
 	.string "of three events.$"
 
-Route128_Text_2A2A94: @ 82A2A94
+Route128_Text_KatelynDefeat: @ 82A2A94
 	.string "A POKéMON battle is grueling, too…$"
 
-Route128_Text_2A2AB7: @ 82A2AB7
+Route128_Text_KatelynPostBattle: @ 82A2AB7
 	.string "I have to ride a BIKE next, but…\n"
 	.string "I'm about to throw in the towel…$"
 
-Route128_Text_2A2AF9: @ 82A2AF9
+Route128_Text_KatelynRegister: @ 82A2AF9
 	.string "Well, I may as well make the best\n"
 	.string "of this. I'd like a rematch sometime.$"
 
-Route128_Text_2A2B41: @ 82A2B41
+Route128_Text_KatelynRematchIntro: @ 82A2B41
 	.string "A triathlon is long. But I guess the\n"
 	.string "road to become the POKéMON CHAMPION\l"
 	.string "is also a long and grueling one.$"
 
-Route128_Text_2A2BAB: @ 82A2BAB
+Route128_Text_KatelynRematchDefeat: @ 82A2BAB
 	.string "A POKéMON battle really is harsh\n"
 	.string "and unforgiving…$"
 
-Route128_Text_2A2BDD: @ 82A2BDD
+Route128_Text_KatelynPostRematch: @ 82A2BDD
 	.string "You should give serious thought to\n"
 	.string "challenges on VICTORY ROAD.$"
 
-Route128_Text_2A2C1C: @ 82A2C1C
+Route128_Text_AlexaIntro: @ 82A2C1C
 	.string "We've been working so hard to mount\n"
 	.string "a POKéMON LEAGUE challenge…\p"
 	.string "We can't afford to lose now!$"
 
-Route128_Text_2A2C79: @ 82A2C79
+Route128_Text_AlexaDefeat: @ 82A2C79
 	.string "Oh!\n"
 	.string "How could this happen?!$"
 
-Route128_Text_2A2C95: @ 82A2C95
+Route128_Text_AlexaPostBattle: @ 82A2C95
 	.string "After all I've done to get here,\n"
 	.string "I won't give up after one setback.$"
 
-Route128_Text_2A2CD9: @ 82A2CD9
+Route128_Text_RubenIntro: @ 82A2CD9
 	.string "There is no stronger TRAINER than I!$"
 
-Route128_Text_2A2CFE: @ 82A2CFE
+Route128_Text_RubenDefeat: @ 82A2CFE
 	.string "This can't be!$"
 
-Route128_Text_2A2D0D: @ 82A2D0D
+Route128_Text_RubenPostBattle: @ 82A2D0D
 	.string "There probably is no stronger TRAINER\n"
 	.string "than you!$"
 
-Route128_Text_2A2D3D: @ 82A2D3D
+Route128_Text_WayneIntro: @ 82A2D3D
 	.string "I want to visit EVER GRANDE, so I\n"
 	.string "caught myself a POKéMON that knows\l"
 	.string "the move WATERFALL to crest the falls.$"
 
-Route128_Text_2A2DA9: @ 82A2DA9
+Route128_Text_WayneDefeat: @ 82A2DA9
 	.string "I'm crestfallen!$"
 
-Route128_Text_2A2DBA: @ 82A2DBA
+Route128_Text_WaynePostBattle: @ 82A2DBA
 	.string "Awww, phooey!\p"
 	.string "My POKéMON knows WATERFALL, but\n"
 	.string "I don't have the SOOTOPOLIS GYM BADGE!$"
 
-Route128_Text_2A2E0F: @ 82A2E0F
+Route128_Text_HarrisonIntro: @ 82A2E0F
 	.string "You're looking awfully tough.\n"
 	.string "I wonder if I can win?$"
 
-Route128_Text_2A2E44: @ 82A2E44
+Route128_Text_HarrisonDefeat: @ 82A2E44
 	.string "Ouch!\n"
 	.string "I guess it was impossible to win.$"
 
-Route128_Text_2A2E6C: @ 82A2E6C
+Route128_Text_HarrisonPostBattle: @ 82A2E6C
 	.string "There are tough TRAINERS galore\n"
 	.string "around EVER GRANDE.\p"
 	.string "Do you think I may be out\n"
 	.string "of my league?$"
 
-Route128_Text_2A2EC8: @ 82A2EC8
+Route128_Text_CarleeIntro: @ 82A2EC8
 	.string "The sunlight seems to be more harsh\n"
 	.string "in this area.$"
 
-Route128_Text_2A2EFA: @ 82A2EFA
+Route128_Text_CarleeDefeat: @ 82A2EFA
 	.string "I couldn't see very well because of\n"
 	.string "the sun's glare.$"
 
-Route128_Text_2A2F2F: @ 82A2F2F
+Route128_Text_CarleePostBattle: @ 82A2F2F
 	.string "I should go back soon.\n"
 	.string "I need to reapply my sunscreen.$"
 
-Route129_Text_2A2F66: @ 82A2F66
+Route129_Text_ChaseIntro: @ 82A2F66
 	.string "This is my first triathlon.\n"
 	.string "I'm all tense and nervous!$"
 
-Route129_Text_2A2F9D: @ 82A2F9D
+Route129_Text_ChaseDefeat: @ 82A2F9D
 	.string "Wroooaaar!\n"
 	.string "I failed to win!$"
 
-Route129_Text_2A2FB9: @ 82A2FB9
+Route129_Text_ChasePostBattle: @ 82A2FB9
 	.string "If I'm all tensed up, I won't be able to\n"
 	.string "give it my all.$"
 
-Route129_Text_2A2FF2: @ 82A2FF2
+Route129_Text_AllisonIntro: @ 82A2FF2
 	.string "I'm in the middle of a triathlon,\n"
 	.string "but, sure, why don't we battle?$"
 
-Route129_Text_2A3034: @ 82A3034
+Route129_Text_AllisonDefeat: @ 82A3034
 	.string "I was sure I'd win!$"
 
-Route129_Text_2A3048: @ 82A3048
+Route129_Text_AllisonPostBattle: @ 82A3048
 	.string "Do you know what's the greatest thing\n"
 	.string "about triathlons?\p"
 	.string "Testing the limits of your own\n"
 	.string "strength and endurance against\l"
 	.string "Mother Nature!$"
 
-Route129_Text_2A30CD: @ 82A30CD
+Route129_Text_ReedIntro: @ 82A30CD
 	.string "Say hey, hey!\n"
 	.string "Let's get on with it!$"
 
-Route129_Text_2A30F1: @ 82A30F1
+Route129_Text_ReedDefeat: @ 82A30F1
 	.string "Beat, I'm beaten.\n"
 	.string "That's it, done!$"
 
-Route129_Text_2A3114: @ 82A3114
+Route129_Text_ReedPostBattle: @ 82A3114
 	.string "There's nothing for a loser.\n"
 	.string "Time for me to beat it home.$"
 
-Route129_Text_2A314E: @ 82A314E
+Route129_Text_TishaIntro: @ 82A314E
 	.string "What's the hurry?\n"
 	.string "Let's take it slow and easy.$"
 
-Route129_Text_2A317D: @ 82A317D
+Route129_Text_TishaDefeat: @ 82A317D
 	.string "Oh, my.\n"
 	.string "I wanted to relax a little more…$"
 
-Route129_Text_2A31A6: @ 82A31A6
+Route129_Text_TishaPostBattle: @ 82A31A6
 	.string "Don't you hate making mistakes when\n"
 	.string "you're in a rush?\p"
 	.string "That's why I try to take things\n"
 	.string "slowly.$"
 
-Route129_Text_2A3204: @ 82A3204
+Route129_Text_ClarenceIntro: @ 82A3204
 	.string "Surfing isn't as easy as it seems,\n"
 	.string "isn't that right?$"
 
-Route129_Text_2A3239: @ 82A3239
+Route129_Text_ClarenceDefeat: @ 82A3239
 	.string "Winning sure isn't easy.$"
 
-Route129_Text_2A3252: @ 82A3252
+Route129_Text_ClarencePostBattle: @ 82A3252
 	.string "You have your sights on the POKéMON\n"
 	.string "LEAGUE? Keep at it!$"
 
-Route130_Text_2A328A: @ 82A328A
+Route130_Text_RodneyIntro: @ 82A328A
 	.string "What a surprise! I didn't expect to\n"
 	.string "see a TRAINER out in the sea.\p"
 	.string "I think we should battle!$"
 
-Route130_Text_2A32E6: @ 82A32E6
+Route130_Text_RodneyDefeat: @ 82A32E6
 	.string "This kid's awfully tough…$"
 
-Route130_Text_2A3300: @ 82A3300
+Route130_Text_RodneyPostBattle: @ 82A3300
 	.string "Your eyes have that look of someone\n"
 	.string "who's experienced harsh challenges\l"
 	.string "and won. It suits you well!$"
 
-Route130_Text_2A3363: @ 82A3363
+Route130_Text_KatieIntro: @ 82A3363
 	.string "In the deep blue sea,\n"
 	.string "my shattered blue heart finds\l"
 	.string "comfort among waves.$"
 
-Route130_Text_2A33AC: @ 82A33AC
+Route130_Text_KatieDefeat: @ 82A33AC
 	.string "Like the vast blue sea,\n"
 	.string "the world of POKéMON spans\l"
 	.string "depths beyond belief.$"
 
-Route130_Text_2A33F5: @ 82A33F5
+Route130_Text_KatiePostBattle: @ 82A33F5
 	.string "The world's children dream\n"
 	.string "of one day becoming\l"
 	.string "the POKéMON CHAMPION.$"
 
-Route130_Text_2A343A: @ 82A343A
+Route130_Text_SantiagoIntro: @ 82A343A
 	.string "Floating on the open sea like this…\n"
 	.string "It's peaceful.$"
 
-Route130_Text_2A346D: @ 82A346D
+Route130_Text_SantiagoDefeat: @ 82A346D
 	.string "I needed to be a little less peaceful!$"
 
-Route130_Text_2A3494: @ 82A3494
+Route130_Text_SantiagoPostBattle: @ 82A3494
 	.string "Swimming and battling like this…\n"
 	.string "I'm one happy guy…$"
 
-Route131_Text_2A34C8: @ 82A34C8
+Route131_Text_RichardIntro: @ 82A34C8
 	.string "The sea is teeming with POKéMON.\n"
 	.string "It's not easy swimming, I tell you.$"
 
-Route131_Text_2A350D: @ 82A350D
+Route131_Text_RichardDefeat: @ 82A350D
 	.string "POKéMON raised by TRAINERS are\n"
 	.string "seriously tough…$"
 
-Route131_Text_2A353D: @ 82A353D
+Route131_Text_RichardPostBattle: @ 82A353D
 	.string "Gasp… Gasp…\n"
 	.string "I'm wiped out…\p"
 	.string "The going's easy. It's the leaving\n"
@@ -4384,398 +4384,398 @@ Route131_Text_2A353D: @ 82A353D
 	.string "Will I have any energy left to make\n"
 	.string "the return trip?$"
 
-Route131_Text_2A35C6: @ 82A35C6
+Route131_Text_HermanIntro: @ 82A35C6
 	.string "The sea… The sea… The sea…\n"
 	.string "The sea as far as these eyes can see!\l"
 	.string "I'm sick and tired of the sea!$"
 
-Route131_Text_2A3626: @ 82A3626
+Route131_Text_HermanDefeat: @ 82A3626
 	.string "Bleah!$"
 
-Route131_Text_2A362D: @ 82A362D
+Route131_Text_HermanPostBattle: @ 82A362D
 	.string "Bored I am by the sea, but swim I must.\p"
 	.string "I'm a born swimmer!\n"
 	.string "That's what I am.$"
 
-Route131_Text_2A367B: @ 82A367B
+Route131_Text_SusieIntro: @ 82A367B
 	.string "Hi, sweetie, wait!\n"
 	.string "We should battle, you and I!$"
 
-Route131_Text_2A36AB: @ 82A36AB
+Route131_Text_SusieDefeat: @ 82A36AB
 	.string "You're tough in spite of the way\n"
 	.string "you look!$"
 
-Route131_Text_2A36D6: @ 82A36D6
+Route131_Text_SusiePostBattle: @ 82A36D6
 	.string "Did you see a guy over there who whines\n"
 	.string "that he's bored of the sea?\p"
 	.string "That's all talk.\n"
 	.string "He's hopelessly in love with the sea!$"
 
-Route131_Text_2A3751: @ 82A3751
+Route131_Text_KaraIntro: @ 82A3751
 	.string "Why do men love bathing suits so much?\p"
 	.string "They all ogle me!$"
 
-Route131_Text_2A378A: @ 82A378A
+Route131_Text_KaraDefeat: @ 82A378A
 	.string "I'm out of my depth!$"
 
-Route131_Text_2A379F: @ 82A379F
+Route131_Text_KaraPostBattle: @ 82A379F
 	.string "Maybe it's not my bathing suit that\n"
 	.string "makes men look. It must be my beauty!$"
 
-Route131_Text_2A37E9: @ 82A37E9
+Route131_Text_ReliIntro: @ 82A37E9
 	.string "RELI: We'll work together as siblings\n"
 	.string "to take you on!$"
 
-Route131_Text_2A381F: @ 82A381F
+Route131_Text_ReliDefeat: @ 82A381F
 	.string "RELI: We couldn't win even though we\n"
 	.string "worked together…$"
 
-Route131_Text_2A3855: @ 82A3855
+Route131_Text_ReliPostBattle: @ 82A3855
 	.string "RELI: The people of PACIFIDLOG are\n"
 	.string "together with the sea and POKéMON from\l"
 	.string "the time they are born.$"
 
-Route131_Text_2A38B7: @ 82A38B7
+Route131_Text_ReliNotEnoughMons: @ 82A38B7
 	.string "RELI: You don't have two POKéMON?\n"
 	.string "We can't enjoy a battle, then.$"
 
-Route131_Text_2A38F8: @ 82A38F8
+Route131_Text_IanIntro: @ 82A38F8
 	.string "IAN: I'm doing my best together with\n"
 	.string "my sis!$"
 
-Route131_Text_2A3925: @ 82A3925
+Route131_Text_IanDefeat: @ 82A3925
 	.string "IAN: I did my best with my sis,\n"
 	.string "but we still couldn't win…$"
 
-Route131_Text_2A3960: @ 82A3960
+Route131_Text_IanPostBattle: @ 82A3960
 	.string "IAN: You know how PACIFIDLOG is\n"
 	.string "a floating town?\p"
 	.string "So, wherever there is the sea,\n"
 	.string "that's a part of PACIFIDLOG!$"
 
-Route131_Text_2A39CD: @ 82A39CD
+Route131_Text_IanNotEnoughMons: @ 82A39CD
 	.string "IAN: If you have two POKéMON,\n"
 	.string "we'll take you on!$"
 
-Route131_Text_2A39FE: @ 82A39FE
+Route131_Text_TaliaIntro: @ 82A39FE
 	.string "If you can beat me, I'll give you some\n"
 	.string "great information!$"
 
-Route131_Text_2A3A38: @ 82A3A38
+Route131_Text_TaliaDefeat: @ 82A3A38
 	.string "Oh?\n"
 	.string "Did I lose?$"
 
-Route131_Text_2A3A48: @ 82A3A48
+Route131_Text_TaliaPostBattle: @ 82A3A48
 	.string "There is an odd place nearby.\n"
 	.string "There's a huge tower there.\l"
 	.string "Why don't you go take a look?$"
 
-Route131_Text_2A3AA0: @ 82A3AA0
+Route131_Text_KevinIntro: @ 82A3AA0
 	.string "The people of PACIFIDLOG are\n"
 	.string "a peaceful bunch.\p"
 	.string "They never get angry.\n"
 	.string "That goes for me, too.$"
 
-Route131_Text_2A3AFC: @ 82A3AFC
+Route131_Text_KevinDefeat: @ 82A3AFC
 	.string "Oops!$"
 
-Route131_Text_2A3B02: @ 82A3B02
+Route131_Text_KevinPostBattle: @ 82A3B02
 	.string "Tch! …Oh, wait.\n"
 	.string "I'm not angry. Honestly!\p"
 	.string "But, boy, you're strong!\n"
 	.string "Hahaha!$"
 
-Route132_Text_2A3B4C: @ 82A3B4C
+Route132_Text_GilbertIntro: @ 82A3B4C
 	.string "I used to catch colds all the time as\n"
 	.string "a kid, but I became totally fit after\l"
 	.string "I started swimming.$"
 
-Route132_Text_2A3BAC: @ 82A3BAC
+Route132_Text_GilbertDefeat: @ 82A3BAC
 	.string "I crave more power…$"
 
-Route132_Text_2A3BC0: @ 82A3BC0
+Route132_Text_GilbertPostBattle: @ 82A3BC0
 	.string "TRAINERS travel the fields and\n"
 	.string "mountains, so they must be fit, too.$"
 
-Route132_Text_2A3C04: @ 82A3C04
+Route132_Text_DanaIntro: @ 82A3C04
 	.string "I try not to swim where the currents\n"
 	.string "are too strong.$"
 
-Route132_Text_2A3C39: @ 82A3C39
+Route132_Text_DanaDefeat: @ 82A3C39
 	.string "Oh, please, no!$"
 
-Route132_Text_2A3C49: @ 82A3C49
+Route132_Text_DanaPostBattle: @ 82A3C49
 	.string "If I get swept away, I'll lose all my\n"
 	.string "sense of place…$"
 
-Route132_Text_2A3C7F: @ 82A3C7F
+Route132_Text_RonaldIntro: @ 82A3C7F
 	.string "Win or lose, you'll never know until\n"
 	.string "you try!$"
 
-Route132_Text_2A3CAD: @ 82A3CAD
+Route132_Text_RonaldDefeat: @ 82A3CAD
 	.string "Waah!\n"
 	.string "I sank in defeat!$"
 
-Route132_Text_2A3CC5: @ 82A3CC5
+Route132_Text_RonaldPostBattle: @ 82A3CC5
 	.string "I never battle when I know I'll win.\n"
 	.string "I like to battle at the razor's edge of\l"
 	.string "victory and defeat!$"
 
-Route132_Text_2A3D26: @ 82A3D26
+Route132_Text_KiyoIntro: @ 82A3D26
 	.string "I contemplate POKéMON 24 hours a day.\n"
 	.string "How could you possibly beat me?$"
 
-Route132_Text_2A3D6C: @ 82A3D6C
+Route132_Text_KiyoDefeat: @ 82A3D6C
 	.string "I lose.\n"
 	.string "I will concede defeat.$"
 
-Route132_Text_2A3D8B: @ 82A3D8B
+Route132_Text_KiyoPostBattle: @ 82A3D8B
 	.string "Urggh…\n"
 	.string "You're a POKéMON fanatic, aren't you?\p"
 	.string "You must contemplate POKéMON 24 hours\n"
 	.string "a day, don't you?$"
 
-Route132_Text_2A3DF0: @ 82A3DF0
+Route132_Text_MakaylaIntro: @ 82A3DF0
 	.string "I'm always with my husband,\n"
 	.string "but I can win even without him.$"
 
-Route132_Text_2A3E2C: @ 82A3E2C
+Route132_Text_MakaylaDefeat: @ 82A3E2C
 	.string "Oh, I guess I wasn't good enough.$"
 
-Route132_Text_2A3E4E: @ 82A3E4E
+Route132_Text_MakaylaPostBattle: @ 82A3E4E
 	.string "That young man over there looks just\n"
 	.string "like my husband when he was young.\p"
 	.string "He's making me blush!$"
 
-Route132_Text_2A3EAC: @ 82A3EAC
+Route132_Text_JonathanIntro: @ 82A3EAC
 	.string "Someone's been watching me intently.\n"
 	.string "Was it you?$"
 
-Route132_Text_2A3EDD: @ 82A3EDD
+Route132_Text_JonathanDefeat: @ 82A3EDD
 	.string "Wow!\n"
 	.string "That's pretty strong, all right!$"
 
-Route132_Text_2A3F03: @ 82A3F03
+Route132_Text_JonathanPostBattle: @ 82A3F03
 	.string "I can't shake this feeling that\n"
 	.string "someone's watching me.\p"
 	.string "I can't concentrate!$"
 
-Route132_Text_2A3F4F: @ 82A3F4F
+Route132_Text_PaxtonIntro: @ 82A3F4F
 	.string "Now where could my wife have gone?\n"
 	.string "I'm always with her.\l"
 	.string "I wonder if I can win on my own.$"
 
-Route132_Text_2A3FA8: @ 82A3FA8
+Route132_Text_PaxtonDefeat: @ 82A3FA8
 	.string "Ah, I see that I couldn't manage\n"
 	.string "to win on my own after all.$"
 
-Route132_Text_2A3FE5: @ 82A3FE5
+Route132_Text_PaxtonPostBattle: @ 82A3FE5
 	.string "My wife must be looking for me.\n"
 	.string "I'd best go find her right away.$"
 
-Route132_Text_2A4026: @ 82A4026
+Route132_Text_DarcyIntro: @ 82A4026
 	.string "I liked training here by myself.\n"
 	.string "It's awful that all these people came!$"
 
-Route132_Text_2A406E: @ 82A406E
+Route132_Text_DarcyDefeat: @ 82A406E
 	.string "Okay! I won't complain about other\n"
 	.string "people being here.$"
 
-Route132_Text_2A40A4: @ 82A40A4
+Route132_Text_DarcyPostBattle: @ 82A40A4
 	.string "I suppose I can partner up with that\n"
 	.string "old man and challenge that other team.$"
 
-Route133_Text_2A40F0: @ 82A40F0
+Route133_Text_FranklinIntro: @ 82A40F0
 	.string "Did the currents carry you here, too?\n"
 	.string "This must have been fated.\l"
 	.string "Let's battle!$"
 
-Route133_Text_2A413F: @ 82A413F
+Route133_Text_FranklinDefeat: @ 82A413F
 	.string "Strong!\n"
 	.string "Too much so!$"
 
-Route133_Text_2A4154: @ 82A4154
+Route133_Text_FranklinPostBattle: @ 82A4154
 	.string "It's just my luck that a tough TRAINER\n"
 	.string "like you would drift here…\l"
 	.string "I must be cursed…$"
 
-Route133_Text_2A41A8: @ 82A41A8
+Route133_Text_DebraIntro: @ 82A41A8
 	.string "I've led a life of woe and misery…\n"
 	.string "I've been cast away, and this is where\l"
 	.string "I've drifted…$"
 
-Route133_Text_2A4200: @ 82A4200
+Route133_Text_DebraDefeat: @ 82A4200
 	.string "Another loss…$"
 
-Route133_Text_2A420E: @ 82A420E
+Route133_Text_DebraPostBattle: @ 82A420E
 	.string "A life adrift…\n"
 	.string "I don't want it anymore!$"
 
-Route133_Text_2A4236: @ 82A4236
+Route133_Text_LindaIntro: @ 82A4236
 	.string "Welcome!\n"
 	.string "I've been expecting you!$"
 
-Route133_Text_2A4258: @ 82A4258
+Route133_Text_LindaDefeat: @ 82A4258
 	.string "No! Please!$"
 
-Route133_Text_2A4264: @ 82A4264
+Route133_Text_LindaPostBattle: @ 82A4264
 	.string "A strong child TRAINER…\n"
 	.string "That's so annoying!$"
 
-Route133_Text_2A4290: @ 82A4290
+Route133_Text_WarrenIntro: @ 82A4290
 	.string "I want to win like everyone else, but I\n"
 	.string "won't raise POKéMON like everyone else.$"
 
-Route133_Text_2A42E0: @ 82A42E0
+Route133_Text_WarrenDefeat: @ 82A42E0
 	.string "Darn it!\n"
 	.string "My way is still too slack!$"
 
-Route133_Text_2A4304: @ 82A4304
+Route133_Text_WarrenPostBattle: @ 82A4304
 	.string "It's way more fun to do things the way\n"
 	.string "I want than to be like everybody else.\l"
 	.string "I mean, that's obvious!$"
 
-Route133_Text_2A436A: @ 82A436A
+Route133_Text_BeckIntro: @ 82A436A
 	.string "I came all the way out here with my\n"
 	.string "BIRD POKéMON.$"
 
-Route133_Text_2A439C: @ 82A439C
+Route133_Text_BeckDefeat: @ 82A439C
 	.string "You…\n"
 	.string "You're stunningly cool!$"
 
-Route133_Text_2A43B9: @ 82A43B9
+Route133_Text_BeckPostBattle: @ 82A43B9
 	.string "I'd like to go back to FORTREE,\n"
 	.string "but I've grown to like this place, too.$"
 
-Route133_Text_2A4401: @ 82A4401
+Route133_Text_MollieIntro: @ 82A4401
 	.string "I must have battled thousands\n"
 	.string "of times. I've lost count.$"
 
-Route133_Text_2A443A: @ 82A443A
+Route133_Text_MollieDefeat: @ 82A443A
 	.string "I may have lost thousands of times,\n"
 	.string "but a loss still stings.$"
 
-Route133_Text_2A4477: @ 82A4477
+Route133_Text_MolliePostBattle: @ 82A4477
 	.string "Keep at this, youngster. So you can\n"
 	.string "become like my husband and me.$"
 
-Route133_Text_2A44BA: @ 82A44BA
+Route133_Text_ConorIntro: @ 82A44BA
 	.string "Young people are too happy to go with\n"
 	.string "the flow. They're without direction.$"
 
-Route133_Text_2A4505: @ 82A4505
+Route133_Text_ConorDefeat: @ 82A4505
 	.string "You have a firm sense of purpose.$"
 
-Route133_Text_2A4527: @ 82A4527
+Route133_Text_ConorPostBattle: @ 82A4527
 	.string "Don't let others lead you astray.\n"
 	.string "Don't lose direction as you grow older.$"
 
-Route134_Text_2A4571: @ 82A4571
+Route134_Text_JackIntro: @ 82A4571
 	.string "Even those POKéMON that can swim are\n"
 	.string "carried along by the rapid currents.$"
 
-Route134_Text_2A45BB: @ 82A45BB
+Route134_Text_JackDefeat: @ 82A45BB
 	.string "Aiyeeeeh!$"
 
-Route134_Text_2A45C5: @ 82A45C5
+Route134_Text_JackPostBattle: @ 82A45C5
 	.string "I think POKéMON enjoy the fast-running\n"
 	.string "currents around these parts.$"
 
-Route134_Text_2A4609: @ 82A4609
+Route134_Text_LaurelIntro: @ 82A4609
 	.string "My LUVDISC are looking for a fun\n"
 	.string "match. Will you join us?$"
 
-Route134_Text_2A4643: @ 82A4643
+Route134_Text_LaurelDefeat: @ 82A4643
 	.string "Oopsie!$"
 
-Route134_Text_2A464B: @ 82A464B
+Route134_Text_LaurelPostBattle: @ 82A464B
 	.string "There's a collector who's after\n"
 	.string "the SCALES of LUVDISC.$"
 
-Route134_Text_2A4682: @ 82A4682
+Route134_Text_AlexIntro: @ 82A4682
 	.string "Okeydokey! That's enough rest, gang!\n"
 	.string "It's time for a match!$"
 
-Route134_Text_2A46BE: @ 82A46BE
+Route134_Text_AlexDefeat: @ 82A46BE
 	.string "Tuckered out again…$"
 
-Route134_Text_2A46D2: @ 82A46D2
+Route134_Text_AlexPostBattle: @ 82A46D2
 	.string "My BIRD POKéMON get tired quickly after\n"
 	.string "a long flight…$"
 
-Route134_Text_2A4709: @ 82A4709
+Route134_Text_HitoshiIntro: @ 82A4709
 	.string "You're a POKéMON TRAINER.\n"
 	.string "No need for words. We battle now.$"
 
-Route134_Text_2A4745: @ 82A4745
+Route134_Text_HitoshiDefeat: @ 82A4745
 	.string "… … … … … …\n"
 	.string "… … … … … …$"
 
-Route134_Text_2A475D: @ 82A475D
+Route134_Text_HitoshiPostBattle: @ 82A475D
 	.string "It was I who challenged you, and yet\n"
 	.string "I lost. I am deeply shamed…$"
 
-Route134_Text_2A479E: @ 82A479E
+Route134_Text_AaronIntro: @ 82A479E
 	.string "The savage tide in this area serves to\n"
 	.string "make us stronger than ever.$"
 
-Route134_Text_2A47E1: @ 82A47E1
+Route134_Text_AaronDefeat: @ 82A47E1
 	.string "I willingly concede defeat.$"
 
-Route134_Text_2A47FD: @ 82A47FD
+Route134_Text_AaronPostBattle: @ 82A47FD
 	.string "We will return for more training at\n"
 	.string "METEOR FALLS.\p"
 	.string "If you'd like, you should go, too.\n"
 	.string "It will definitely toughen you up!$"
 
-Route134_Text_2A4875: @ 82A4875
+Route134_Text_KelvinIntro: @ 82A4875
 	.string "O-our boat!\n"
 	.string "The tide carried it away!$"
 
-Route134_Text_2A489B: @ 82A489B
+Route134_Text_KelvinDefeat: @ 82A489B
 	.string "Awawawawah!\n"
 	.string "Please, stop! Please!$"
 
-Route134_Text_2A48BD: @ 82A48BD
+Route134_Text_KelvinPostBattle: @ 82A48BD
 	.string "If we can't SURF, how are we supposed\n"
 	.string "to get home?\p"
 	.string "Actually, I know a fainted POKéMON\n"
 	.string "can still SURF, but it feels wrong.$"
 
-Route134_Text_2A4937: @ 82A4937
+Route134_Text_MarleyIntro: @ 82A4937
 	.string "Can your POKéMON dodge our\n"
 	.string "lightning-quick attacks?$"
 
-Route134_Text_2A496B: @ 82A496B
+Route134_Text_MarleyDefeat: @ 82A496B
 	.string "I never knew such a technique existed!\n"
 	.string "You've defeated us thoroughly.$"
 
-Route134_Text_2A49B1: @ 82A49B1
+Route134_Text_MarleyPostBattle: @ 82A49B1
 	.string "I haven't lost my passion for speed.\n"
 	.string "I will try harder.$"
 
-Route134_Text_2A49E9: @ 82A49E9
+Route134_Text_ReynaIntro: @ 82A49E9
 	.string "My POKéMON can't be taken down\n"
 	.string "easily!$"
 
-Route134_Text_2A4A10: @ 82A4A10
+Route134_Text_ReynaDefeat: @ 82A4A10
 	.string "You're kidding!\n"
 	.string "Explain how I lost!$"
 
-Route134_Text_2A4A34: @ 82A4A34
+Route134_Text_ReynaPostBattle: @ 82A4A34
 	.string "Haha!\n"
 	.string "You won, all right!\p"
 	.string "I'll work my way back up by taking on\n"
 	.string "TRAINERS I happen to meet!$"
 
-Route134_Text_2A4A8F: @ 82A4A8F
+Route134_Text_HudsonIntro: @ 82A4A8F
 	.string "Listen, have you seen another SAILOR\n"
 	.string "around here?$"
 
-Route134_Text_2A4AC1: @ 82A4AC1
+Route134_Text_HudsonDefeat: @ 82A4AC1
 	.string "Now, that's something!$"
 
-Route134_Text_2A4AD8: @ 82A4AD8
+Route134_Text_HudsonPostBattle: @ 82A4AD8
 	.string "Our boat drifted out to sea.\p"
 	.string "My buddy's a timid fellow, so I'm\n"
 	.string "worried about him.$"
