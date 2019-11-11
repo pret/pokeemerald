@@ -50,7 +50,7 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "LilycoveCity_ContestLobby_EventScript_Blender2Man",
+      "script": "BerryBlender_EventScript_Blender2Man",
       "flag": "0"
     },
     {
@@ -141,7 +141,7 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "LilycoveCity_ContestLobby_EventScript_Blender2Twin",
+      "script": "BerryBlender_EventScript_Blender2Twin",
       "flag": "0"
     },
     {
@@ -206,7 +206,7 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "LilycoveCity_ContestLobby_EventScript_Blender3PokefanF",
+      "script": "BerryBlender_EventScript_Blender3PokefanF",
       "flag": "0"
     },
     {
@@ -219,7 +219,7 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "LilycoveCity_ContestLobby_EventScript_Blender1ExpertM",
+      "script": "BerryBlender_EventScript_Blender1ExpertM",
       "flag": "FLAG_HIDE_LILYCOVE_CONTEST_HALL_BLEND_MASTER_REPLACEMENT"
     },
     {
@@ -378,7 +378,7 @@
       "y": 5,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "LilycoveCity_ContestLobby_EventScript_BerryBlenderLink"
+      "script": "BerryBlender_EventScript_BerryBlenderLink"
     },
     {
       "type": "sign",
@@ -386,7 +386,7 @@
       "y": 9,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "LilycoveCity_ContestLobby_EventScript_BerryBlender3"
+      "script": "BerryBlender_EventScript_BerryBlender3"
     },
     {
       "type": "sign",
@@ -450,7 +450,7 @@
       "y": 5,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "LilycoveCity_ContestLobby_EventScript_BerryBlender1"
+      "script": "BerryBlender_EventScript_BerryBlender1"
     },
     {
       "type": "sign",
@@ -458,7 +458,7 @@
       "y": 9,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "LilycoveCity_ContestLobby_EventScript_BerryBlender2"
+      "script": "BerryBlender_EventScript_BerryBlender2"
     },
     {
       "type": "sign",

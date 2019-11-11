@@ -1085,7 +1085,7 @@ CableClub_EventScript_WirelessTrade:: @ 827780D
 	call CableClub_EventScript_CheckPartyTradeRequirements
 	compare VAR_RESULT, 0
 	goto_if_eq CableClub_EventScript_AbortLink
-	setvar VAR_0x8004, 3
+	setvar VAR_0x8004, LINK_GROUP_TRADE
 	goto CableClub_EventScript_SaveAndChooseLinkLeader
 	end
 
@@ -1103,7 +1103,7 @@ CableClub_EventScript_WirelessBattleSelect:: @ 827783B
 	end
 
 CableClub_EventScript_WirelessSingleBattle:: @ 827788E
-	setvar VAR_0x8004, 0
+	setvar VAR_0x8004, LINK_GROUP_SINGLE_BATTLE
 	goto CableClub_EventScript_SaveAndChooseLinkLeader
 	end
 
@@ -1111,7 +1111,7 @@ CableClub_EventScript_WirelessDoubleBattle:: @ 8277899
 	special HasEnoughMonsForDoubleBattle
 	compare VAR_RESULT, PLAYER_HAS_TWO_USABLE_MONS
 	goto_if_ne CableClub_EventScript_TwoMonsNeededForWirelessDoubleBattle
-	setvar VAR_0x8004, 1
+	setvar VAR_0x8004, LINK_GROUP_DOUBLE_BATTLE
 	goto CableClub_EventScript_SaveAndChooseLinkLeader
 	end
 
@@ -1121,7 +1121,7 @@ CableClub_EventScript_TwoMonsNeededForWirelessDoubleBattle:: @ 82778B2
 	end
 
 CableClub_EventScript_WirelessMultiBattle:: @ 82778C0
-	setvar VAR_0x8004, 2
+	setvar VAR_0x8004, LINK_GROUP_MULTI_BATTLE
 	goto CableClub_EventScript_SaveAndChooseLinkLeader
 	end
 
@@ -1134,7 +1134,7 @@ CableClub_EventScript_WirelessRecordMix:: @ 82778D9
 	msgbox CableClub_Text_AccessRecordCorner, MSGBOX_YESNO
 	compare VAR_RESULT, NO
 	goto_if_eq CableClub_EventScript_AbortLink
-	setvar VAR_0x8004, 12
+	setvar VAR_0x8004, LINK_GROUP_RECORD_CORNER
 	goto CableClub_EventScript_SaveAndChooseLinkLeader
 	end
 
@@ -1145,7 +1145,7 @@ CableClub_EventScript_WirelessBerryCrush:: @ 82778F7
 	special HasAtLeastOneBerry
 	compare VAR_RESULT, FALSE
 	goto_if_eq CableClub_EventScript_NeedBerryForBerryCrush
-	setvar VAR_0x8004, 5
+	setvar VAR_0x8004, LINK_GROUP_BERRY_CRUSH
 	goto CableClub_EventScript_SaveAndChooseLinkLeader
 	end
 
@@ -1159,12 +1159,12 @@ CableClub_EventScript_SaveAndChooseLinkLeader:: @ 8277931
 	compare VAR_RESULT, 0
 	goto_if_eq CableClub_EventScript_AbortLink
 	switch VAR_0x8004
-	case 3, CableClub_EventScript_ChooseLinkLeaderFrom2
-	case 0, CableClub_EventScript_ChooseLinkLeaderFrom2
-	case 1, CableClub_EventScript_ChooseLinkLeaderFrom2
-	case 2, CableClub_EventScript_ChooseLinkLeaderFrom4
-	case 5, CableClub_EventScript_ChooseLinkLeader
-	case 12, CableClub_EventScript_ChooseLinkLeader
+	case LINK_GROUP_TRADE, CableClub_EventScript_ChooseLinkLeaderFrom2
+	case LINK_GROUP_SINGLE_BATTLE, CableClub_EventScript_ChooseLinkLeaderFrom2
+	case LINK_GROUP_DOUBLE_BATTLE, CableClub_EventScript_ChooseLinkLeaderFrom2
+	case LINK_GROUP_MULTI_BATTLE, CableClub_EventScript_ChooseLinkLeaderFrom4
+	case LINK_GROUP_BERRY_CRUSH, CableClub_EventScript_ChooseLinkLeader
+	case LINK_GROUP_RECORD_CORNER, CableClub_EventScript_ChooseLinkLeader
 	end
 
 CableClub_EventScript_ChooseLinkLeaderFrom2:: @ 8277989
@@ -1416,7 +1416,7 @@ MossdeepCity_GameCorner_1F_EventScript_PlayPokemonJump:: @ 8277CE9
 	call Common_EventScript_SaveGame
 	compare VAR_RESULT, 0
 	goto_if_eq MossdeepCity_GameCorner_1F_EventScript_AbortMinigame
-	setvar VAR_0x8004, 4
+	setvar VAR_0x8004, LINK_GROUP_POKEMON_JUMP
 	goto MossdeepCity_GameCorner_1F_EventScript_ChooseLinkLeader
 	end
 
@@ -1435,7 +1435,7 @@ MossdeepCity_GameCorner_1F_EventScript_PlayDodrioBerryPicking:: @ 8277D35
 	call Common_EventScript_SaveGame
 	compare VAR_RESULT, 0
 	goto_if_eq MossdeepCity_GameCorner_1F_EventScript_AbortMinigame
-	setvar VAR_0x8004, 6
+	setvar VAR_0x8004, LINK_GROUP_BERRY_PICKING
 	goto MossdeepCity_GameCorner_1F_EventScript_ChooseLinkLeader
 	end
 

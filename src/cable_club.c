@@ -685,16 +685,16 @@ void TryBerryBlenderLinkup(void)
     sub_80B236C(2, 4);
 }
 
-void sub_80B3000(void)
+void TryContestGModeLinkup(void)
 {
-    gLinkType = LINKTYPE_0x6601;
+    gLinkType = LINKTYPE_CONTEST_GMODE;
     gBattleTypeFlags = 0;
     sub_80B236C(4, 4);
 }
 
-void sub_80B3028(void)
+void TryContestEModeLinkup(void)
 {
-    gLinkType = LINKTYPE_0x6602;
+    gLinkType = LINKTYPE_CONTEST_EMODE;
     gBattleTypeFlags = 0;
     sub_80B236C(2, 4);
 }

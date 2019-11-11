@@ -219,15 +219,15 @@ static void sub_80DF9E0(u8 *, s32);
 static void SwapMoveDescAndContestTilemaps(void);
 
 // EWRAM vars.
-EWRAM_DATA struct ContestPokemon gContestMons[4] = {0};
-EWRAM_DATA s16 gContestMonConditions[4] = {0};
-EWRAM_DATA s16 gUnknown_02039F08[4] = {0};
-EWRAM_DATA s16 gUnknown_02039F10[4] = {0};
-EWRAM_DATA s16 gUnknown_02039F18[4] = {0};
-EWRAM_DATA u8 gContestFinalStandings[4] = {0};
+EWRAM_DATA struct ContestPokemon gContestMons[CONTESTANT_COUNT] = {0};
+EWRAM_DATA s16 gContestMonConditions[CONTESTANT_COUNT] = {0};
+EWRAM_DATA s16 gUnknown_02039F08[CONTESTANT_COUNT] = {0};
+EWRAM_DATA s16 gUnknown_02039F10[CONTESTANT_COUNT] = {0};
+EWRAM_DATA s16 gUnknown_02039F18[CONTESTANT_COUNT] = {0};
+EWRAM_DATA u8 gContestFinalStandings[CONTESTANT_COUNT] = {0};
 EWRAM_DATA u8 gContestMonPartyIndex = 0;
 EWRAM_DATA u8 gContestPlayerMonIndex = 0;
-EWRAM_DATA u8 gContestantTurnOrder[4] = {0};
+EWRAM_DATA u8 gContestantTurnOrder[CONTESTANT_COUNT] = {0};
 EWRAM_DATA u8 gLinkContestFlags = 0;
 // Bit 0: Is a link contest
 // Bit 1: Link contest uses wireless adapter
@@ -1574,7 +1574,7 @@ static void sub_80D8A88(u8 taskId)
         {
             s32 i;
 
-            for (i = 0; i + gNumLinkContestPlayers < 4; i++)
+            for (i = 0; i + gNumLinkContestPlayers < CONTESTANT_COUNT; i++)
             {
                 eContestantStatus[gNumLinkContestPlayers + i].currMove = GetChosenMove(gNumLinkContestPlayers + i);
             }
@@ -1735,7 +1735,7 @@ static void sub_80D8B38(u8 taskId)
         {
             if (eContestantStatus[r6].effectStringId2 != CONTEST_STRING_NONE)
             {
-                for (i = 0; i < 4; i++)
+                for (i = 0; i < CONTESTANT_COUNT; i++)
                 {
                     if (i != r6 && eContestantStatus[i].effectStringId != CONTEST_STRING_NONE)
                         break;
@@ -1838,10 +1838,10 @@ static void sub_80D8B38(u8 taskId)
             s32 r2 = 0;
 
             r3 = 0;
-            for (i = gTasks[taskId].data[1]; i < 4; i++)
+            for (i = gTasks[taskId].data[1]; i < CONTESTANT_COUNT; i++)
             {
                 r3 = 0;
-                for (r2 = 0; r2 < 4; r2++)
+                for (r2 = 0; r2 < CONTESTANT_COUNT; r2++)
                 {
                     if (r2 != r6 && gContestantTurnOrder[r2] == i
                         && eContestantStatus[r2].effectStringId != CONTEST_STRING_NONE)
@@ -1906,7 +1906,7 @@ static void sub_80D8B38(u8 taskId)
         }
         return;
     case 30:
-        for (i = 0; i < 4; i++)
+        for (i = 0; i < CONTESTANT_COUNT; i++)
         {
             if (gContestantTurnOrder[i] == gTasks[taskId].data[1])
                 break;
@@ -2509,7 +2509,7 @@ static void sub_80DA5E8(u8 taskId)
 
     gBattle_BG0_Y = 0;
     gBattle_BG2_Y = 0;
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < CONTESTANT_COUNT; i++)
         gUnknown_02039F10[i] = eContestantStatus[i].pointTotal;
     sub_80DBD18();
     ContestClearGeneralTextWindow();
@@ -2786,9 +2786,9 @@ void sub_80DACBC(u8 contestType, u8 rank, bool32 isPostgame)
             opponents[opponentsCount++] = i;
     }
     opponents[opponentsCount] = 0xFF;
-    for (i = 0; i < 4 - gNumLinkContestPlayers; i++)
+    for (i = 0; i < CONTESTANT_COUNT - gNumLinkContestPlayers; i++)
     {
-        u16 rnd = sub_80F903C() % opponentsCount;
+        u16 rnd = GetContestRand() % opponentsCount;
 
         gContestMons[gNumLinkContestPlayers + i] = gContestOpponents[opponents[rnd]];
         sub_80DF9D4(gContestMons[gNumLinkContestPlayers + i].trainerName);
@@ -2934,7 +2934,7 @@ void sub_80DB09C(u8 contestCategory)
 {
     s32 i;
 
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < CONTESTANT_COUNT; i++)
         gContestMonConditions[i] = sub_80DAFE0(i, contestCategory);
 }
 
@@ -3101,7 +3101,7 @@ static void sub_80DB584(void)
 {
     s32 i;
 
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < CONTESTANT_COUNT; i++)
         sub_80DB4E0(eContestantStatus[i].currMove, i);
 }
 
@@ -3212,7 +3212,7 @@ static void sub_80DB884(void)
 {
     s32 i;
 
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < CONTESTANT_COUNT; i++)
         sub_80DB798(i);
 }
 
@@ -3862,7 +3862,7 @@ static void sub_80DC864(void)
 {
     s32 i;
 
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < CONTESTANT_COUNT; i++)
         sub_80DC87C(i);
 }
 
@@ -4259,7 +4259,7 @@ static void sub_80DD080(u8 contestant)
     eContestResources8.jam2 = eContestResources8.jam;
 
     eContestResources8.contestant = contestant;
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < CONTESTANT_COUNT; i++)
     {
         eContestantStatus[i].jam = 0;
         eContestResources8.unnervedPokes[i] = 0;
@@ -4796,7 +4796,7 @@ static void sub_80DE008(bool8 a)
 {
     s32 i;
 
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < CONTESTANT_COUNT; i++)
     {
         if (eContestantStatus[i].turnOrderMod != 0 && a)
         {
@@ -5302,7 +5302,7 @@ void ResetContestLinkResults(void)
             gSaveBlock2Ptr->contestLinkResults[i][j] = 0;
 }
 
-bool8 sub_80DEDA8(u8 a)
+bool8 sub_80DEDA8(u8 rank)
 {
     s32 i;
     u8 r7 = Random() % 3;
@@ -5312,7 +5312,7 @@ bool8 sub_80DEDA8(u8 a)
         if (gContestFinalStandings[i] == 0)
             break;
     }
-    if (a == 0xFF && i != gContestPlayerMonIndex)
+    if (rank == 0xFF && i != gContestPlayerMonIndex)
         return FALSE;
     switch (gSpecialVar_ContestCategory)
     {
@@ -5332,9 +5332,9 @@ bool8 sub_80DEDA8(u8 a)
         r7 += 12;
         break;
     }
-    if (a != 0xFE)
+    if (rank != 0xFE)
     {
-        u8 r4 = sub_80DEFA8(a, 1);
+        u8 r4 = sub_80DEFA8(rank, 1);
 
         gSaveBlock1Ptr->contestWinners[r4].personality = gContestMons[i].personality;
         gSaveBlock1Ptr->contestWinners[r4].species = gContestMons[i].species;
@@ -5342,11 +5342,11 @@ bool8 sub_80DEDA8(u8 a)
         StringCopy(gSaveBlock1Ptr->contestWinners[r4].monName, gContestMons[i].nickname);
         StringCopy(gSaveBlock1Ptr->contestWinners[r4].trainerName, gContestMons[i].trainerName);
         if(gLinkContestFlags & LINK_CONTEST_FLAG_IS_LINK)
-            gSaveBlock1Ptr->contestWinners[r4].contestRank = 4;
+            gSaveBlock1Ptr->contestWinners[r4].contestRank = CONTEST_RANK_LINK;
         else
             gSaveBlock1Ptr->contestWinners[r4].contestRank = gSpecialVar_ContestRank;
 
-        if (a != 0xFF)
+        if (rank != 0xFF)
             gSaveBlock1Ptr->contestWinners[r4].contestCategory = gSpecialVar_ContestCategory;
         else
             gSaveBlock1Ptr->contestWinners[r4].contestCategory = r7;
@@ -5363,23 +5363,23 @@ bool8 sub_80DEDA8(u8 a)
     return TRUE;
 }
 
-u8 sub_80DEFA8(u8 a, u8 b)
+u8 sub_80DEFA8(u8 rank, u8 b)
 {
     s32 i;
 
-    switch (a)
+    switch (rank)
     {
-    case 0:
-    case 1:
-    case 2:
-    case 3:
+    case CONTEST_RANK_NORMAL:
+    case CONTEST_RANK_SUPER:
+    case CONTEST_RANK_HYPER:
+    case CONTEST_RANK_MASTER:
         if (b != 0)
         {
             for (i = 5; i >= 1; i--)
                 memcpy(&gSaveBlock1Ptr->contestWinners[i], &gSaveBlock1Ptr->contestWinners[i - 1], sizeof(struct ContestWinner));
         }
         return 0;
-    default:
+    default: // CONTEST_RANK_LINK
         switch (gSpecialVar_ContestCategory)
         {
         case CONTEST_CATEGORY_COOL:
@@ -5434,7 +5434,7 @@ static void sub_80DF080(u8 contestant)
         gContestResources->field_1c[contestant].unkC |= 8;
     }
 
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < CONTESTANT_COUNT; i++)
     {
         if (i != contestant && eContestantStatus[i].jam != 0)
         {
@@ -5481,7 +5481,7 @@ static void sub_80DF250(void)
     r1 = 0;
     var_38 = 0;
 
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < CONTESTANT_COUNT; i++)
     {
         if (gContestFinalStandings[i] == 0)
             var_38 = i;
@@ -5508,7 +5508,7 @@ static void sub_80DF250(void)
 
         r12 = FALSE;
         r8 = FALSE;
-        for (j = 0; j < 4; j++)
+        for (j = 0; j < CONTESTANT_COUNT; j++)
         {
             if (gContestMonConditions[i] > gContestMonConditions[j])
                 r12 = TRUE;

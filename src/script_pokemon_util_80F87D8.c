@@ -29,6 +29,7 @@
 #include "constants/event_objects.h"
 #include "constants/items.h"
 #include "constants/species.h"
+#include "constants/tv.h"
 #include "constants/vars.h"
 #include "constants/battle_frontier.h"
 
@@ -39,8 +40,8 @@ extern const u16 gEventObjectPalette34[];
 
 static const u8 gUnknown_0858D8EC[] = { 3, 4, 5, 14 };
 
-static void sub_80F8EE8(u8 taskId);
-static void sub_80F9088(u8 taskId);
+static void Task_ShowContestEntryMonPic(u8 taskId);
+static void Task_LinkContestWaitForConnection(u8 taskId);
 static void CB2_ReturnFromChooseHalfParty(void);
 static void sub_80F94B8(void);
 
@@ -74,11 +75,11 @@ void sub_80F8814(void)
     gSpecialVar_0x8004 = var1;
 }
 
-void sub_80F8850(void)
+void BufferContestTrainerAndMonNames(void)
 {
-    sub_80F8264();
-    sub_80F8290();
-    sub_80F8438();
+    BufferContestantTrainerName();
+    BufferContestantMonNickname();
+    BufferContestantMonSpecies();
 }
 
 void sub_80F8864(void)
@@ -110,22 +111,22 @@ void sub_80F8864(void)
         gSpecialVar_0x8004 = 1;
 }
 
-void sub_80F88DC(void)
+void SaveMuseumContestPainting(void)
 {
     sub_80DEDA8(0xFF);
 }
 
-void sub_80F88E8(void)
+void ShouldReadyContestArtist(void)
 {
     if (gContestFinalStandings[gContestPlayerMonIndex] == 0
-     && gSpecialVar_ContestRank == 3
+     && gSpecialVar_ContestRank == CONTEST_RANK_MASTER
      && gUnknown_02039F08[gContestPlayerMonIndex] >= 800)
     {
-        gSpecialVar_0x8004 = 1;
+        gSpecialVar_0x8004 = TRUE;
     }
     else
     {
-        gSpecialVar_0x8004 = 0;
+        gSpecialVar_0x8004 = FALSE;
     }
 }
 
@@ -219,11 +220,22 @@ static void ShowContestWinnerCleanup(void)
 
 void ShowContestWinner(void)
 {
+    /*
+    if(gUnknown_0203856C)
+    {
+        sub_80AAF30();
+        gBattleStruct->unk15DDF = 1;
+        gBattleStruct->unk15DDE = sub_80B2C4C(254, 0);
+        Contest_SaveWinner(3);
+        gUnknown_0203856C = 0;
+    }
+    */
+
     SetMainCallback2(CB2_ContestPainting);
     gMain.savedCallback = ShowContestWinnerCleanup;
 }
 
-void sub_80F8AFC(void)
+void SetLinkContestPlayerGfx(void)
 {
     int i;
 
@@ -248,7 +260,7 @@ void sub_80F8AFC(void)
     }
 }
 
-void sub_80F8B94(void)
+void LoadLinkContestPlayerPalettes(void)
 {
     int i;
     u8 eventObjectId;
@@ -287,13 +299,15 @@ u8 GiveMonArtistRibbon(void)
     u8 hasArtistRibbon;
 
     hasArtistRibbon = GetMonData(&gPlayerParty[gContestMonPartyIndex], MON_DATA_ARTIST_RIBBON);
-    if (!hasArtistRibbon && gContestFinalStandings[gContestPlayerMonIndex] == 0 && gSpecialVar_ContestRank == 3
-     && gUnknown_02039F08[gContestPlayerMonIndex] >= 800)
+    if (!hasArtistRibbon 
+        && gContestFinalStandings[gContestPlayerMonIndex] == 0 
+        && gSpecialVar_ContestRank == CONTEST_RANK_MASTER
+        && gUnknown_02039F08[gContestPlayerMonIndex] >= 800)
     {
         hasArtistRibbon = 1;
         SetMonData(&gPlayerParty[gContestMonPartyIndex], MON_DATA_ARTIST_RIBBON, &hasArtistRibbon);
-        if (GetRibbonCount(&gPlayerParty[gContestMonPartyIndex]) > 4)
-            sub_80EE4DC(&gPlayerParty[gContestMonPartyIndex], MON_DATA_ARTIST_RIBBON);
+        if (GetRibbonCount(&gPlayerParty[gContestMonPartyIndex]) > NUM_CUTIES_RIBBONS)
+            TryPutSpotTheCutiesOnAir(&gPlayerParty[gContestMonPartyIndex], MON_DATA_ARTIST_RIBBON);
 
         return 1;
     }
@@ -303,9 +317,9 @@ u8 GiveMonArtistRibbon(void)
     }
 }
 
-u8 sub_80F8D24(void)
+bool8 IsContestDebugActive(void)
 {
-    return 0;
+    return FALSE; // gUnknown_0203856C in pokeruby
 }
 
 void ShowContestEntryMonPic(void)
@@ -317,7 +331,7 @@ void ShowContestEntryMonPic(void)
     u8 taskId;
     u8 left, top;
 
-    if (FindTaskIdByFunc(sub_80F8EE8) == 0xFF)
+    if (FindTaskIdByFunc(Task_ShowContestEntryMonPic) == 0xFF)
     {
         AllocateMonSpritesGfx();
         left = 10;
@@ -325,7 +339,7 @@ void ShowContestEntryMonPic(void)
         species = gContestMons[gSpecialVar_0x8006].species;
         personality = gContestMons[gSpecialVar_0x8006].personality;
         otId = gContestMons[gSpecialVar_0x8006].otId;
-        taskId = CreateTask(sub_80F8EE8, 0x50);
+        taskId = CreateTask(Task_ShowContestEntryMonPic, 0x50);
         gTasks[taskId].data[0] = 0;
         gTasks[taskId].data[1] = species;
         if (gSpecialVar_0x8006 == gContestPlayerMonIndex)
@@ -357,9 +371,9 @@ void ShowContestEntryMonPic(void)
     }
 }
 
-void sub_80F8EB8(void)
+void HideContestEntryMonPic(void)
 {
-    u8 taskId = FindTaskIdByFunc(sub_80F8EE8);
+    u8 taskId = FindTaskIdByFunc(Task_ShowContestEntryMonPic);
     if (taskId != 0xFF)
     {
         gTasks[taskId].data[0]++;
@@ -367,7 +381,7 @@ void sub_80F8EB8(void)
     }
 }
 
-static void sub_80F8EE8(u8 taskId)
+static void Task_ShowContestEntryMonPic(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
     struct Sprite *sprite;
@@ -403,10 +417,12 @@ static void sub_80F8EE8(u8 taskId)
 
 void ScriptGetMultiplayerId(void)
 {
-    if ((gLinkContestFlags & LINK_CONTEST_FLAG_IS_LINK) && gNumLinkContestPlayers == 4 && !(gLinkContestFlags & LINK_CONTEST_FLAG_IS_WIRELESS))
+    if ((gLinkContestFlags & LINK_CONTEST_FLAG_IS_LINK) 
+        && gNumLinkContestPlayers == CONTESTANT_COUNT 
+        && !(gLinkContestFlags & LINK_CONTEST_FLAG_IS_WIRELESS))
         gSpecialVar_Result = GetMultiplayerId();
     else
-        gSpecialVar_Result = 4;
+        gSpecialVar_Result = MAX_LINK_PLAYERS;
 }
 
 void ScriptRandom(void)
@@ -428,26 +444,26 @@ void ScriptRandom(void)
     *scriptPtr = random % *scriptPtr;
 }
 
-u16 sub_80F903C(void)
+u16 GetContestRand(void)
 {
     gContestRngValue = 1103515245 * gContestRngValue + 24691;
     return gContestRngValue >> 16;
 }
 
-u8 sub_80F905C(void)
+bool8 LinkContestWaitForConnection(void)
 {
     if (gLinkContestFlags & LINK_CONTEST_FLAG_IS_WIRELESS)
     {
-        CreateTask(sub_80F9088, 5);
-        return 1;
+        CreateTask(Task_LinkContestWaitForConnection, 5);
+        return TRUE;
     }
     else
     {
-        return 0;
+        return FALSE;
     }
 }
 
-static void sub_80F9088(u8 taskId)
+static void Task_LinkContestWaitForConnection(u8 taskId)
 {
     switch (gTasks[taskId].data[0])
     {
@@ -471,7 +487,7 @@ static void sub_80F9088(u8 taskId)
     }
 }
 
-void sub_80F90DC(void)
+void LinkContestTryShowWirelessIndicator(void)
 {
     if (gLinkContestFlags & LINK_CONTEST_FLAG_IS_WIRELESS)
     {
@@ -483,7 +499,7 @@ void sub_80F90DC(void)
     }
 }
 
-void sub_80F910C(void)
+void LinkContestTryHideWirelessIndicator(void)
 {
     if (gLinkContestFlags & LINK_CONTEST_FLAG_IS_WIRELESS)
     {
@@ -492,25 +508,25 @@ void sub_80F910C(void)
     }
 }
 
-u8 sub_80F9134(void)
+bool8 IsContestWithRSPlayer(void)
 {
     if (gLinkContestFlags & LINK_CONTEST_FLAG_HAS_RS_PLAYER)
-        return 1;
+        return TRUE;
     else
-        return 0;
+        return FALSE;
 }
 
-void sub_80F9154(void)
+void ClearLinkContestFlags(void)
 {
     gLinkContestFlags = 0;
 }
 
-u8 sub_80F9160(void)
+bool8 IsWirelessContest(void)
 {
     if (gLinkContestFlags & LINK_CONTEST_FLAG_IS_WIRELESS)
-        return 1;
+        return TRUE;
     else
-        return 0;
+        return FALSE;
 }
 
 void HealPlayerParty(void)

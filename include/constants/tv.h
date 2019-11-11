@@ -43,4 +43,7 @@
 //                                                  //
 #define TVSHOW_MASS_OUTBREAK                        41 
 
+// Number of ribbons to put Spot the Cuties on air
+#define NUM_CUTIES_RIBBONS  4
+
 #endif //GUARD_CONSTANTS_TV_H

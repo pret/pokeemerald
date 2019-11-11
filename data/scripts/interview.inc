@@ -238,27 +238,27 @@ LilycoveCity_ContestLobby_EventScript_28CB21:: @ 828CB21
 	release
 	end
 
-LilycoveCity_ContestLobby_EventScript_28CB2B:: @ 828CB2B
-	compare VAR_LINK_CONTEST_ROOM_STATE, 2
-	goto_if_ne LilycoveCity_ContestLobby_EventScript_28CB95
+LilycoveCity_ContestLobby_EventScript_TryShowContestReporter:: @ 828CB2B
+	compare VAR_CONTEST_HALL_STATE, 2
+	goto_if_ne LilycoveCity_ContestLobby_EventScript_DontShowContestReporter
 	setvar VAR_0x8005, 6
 	special InterviewBefore
-	compare VAR_RESULT, 1
-	goto_if_eq LilycoveCity_ContestLobby_EventScript_28CB95
-	switch VAR_CONTEST_LOCATION
-	case 0, LilycoveCity_ContestLobby_EventScript_28CB95
-	case 2, LilycoveCity_ContestLobby_EventScript_28CB91
-	case 1, LilycoveCity_ContestLobby_EventScript_28CB91
-	case 3, LilycoveCity_ContestLobby_EventScript_28CB91
-	case 4, LilycoveCity_ContestLobby_EventScript_28CB91
-	case 5, LilycoveCity_ContestLobby_EventScript_28CB95
+	compare VAR_RESULT, TRUE
+	goto_if_eq LilycoveCity_ContestLobby_EventScript_DontShowContestReporter
+	switch VAR_CONTEST_TYPE
+	case 0, LilycoveCity_ContestLobby_EventScript_DontShowContestReporter
+	case 2, LilycoveCity_ContestLobby_EventScript_ShowContestReporter
+	case 1, LilycoveCity_ContestLobby_EventScript_ShowContestReporter
+	case 3, LilycoveCity_ContestLobby_EventScript_ShowContestReporter
+	case 4, LilycoveCity_ContestLobby_EventScript_ShowContestReporter
+	case 5, LilycoveCity_ContestLobby_EventScript_DontShowContestReporter
 	end
 
-LilycoveCity_ContestLobby_EventScript_28CB91:: @ 828CB91
+LilycoveCity_ContestLobby_EventScript_ShowContestReporter:: @ 828CB91
 	clearflag FLAG_HIDE_LILYCOVE_CONTEST_HALL_REPORTER
 	return
 
-LilycoveCity_ContestLobby_EventScript_28CB95:: @ 828CB95
+LilycoveCity_ContestLobby_EventScript_DontShowContestReporter:: @ 828CB95
 	return
 
 BattleFrontier_BattleTowerLobby_EventScript_28CB96:: @ 828CB96
