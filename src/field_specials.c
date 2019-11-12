@@ -2083,63 +2083,63 @@ void ShowFrontierManiacMessage(void)
     {
         [FRONTIER_MANIAC_BATTLE_TOWER_SINGLES] =
         { 
-            BattleFrontier_Lounge2_Text_260971, 
-            BattleFrontier_Lounge2_Text_260A1E, 
-            BattleFrontier_Lounge2_Text_260AE7 
+            BattleFrontier_Lounge2_Text_SalonMaidenIsThere, 
+            BattleFrontier_Lounge2_Text_SalonMaidenSilverMons, 
+            BattleFrontier_Lounge2_Text_SalonMaidenGoldMons 
         },
         [FRONTIER_MANIAC_BATTLE_TOWER_DOUBLES] =
         { 
-            BattleFrontier_Lounge2_Text_2619AC, 
-            BattleFrontier_Lounge2_Text_261A91, 
-            BattleFrontier_Lounge2_Text_261B0C 
+            BattleFrontier_Lounge2_Text_DoubleBattleAdvice1, 
+            BattleFrontier_Lounge2_Text_DoubleBattleAdvice2, 
+            BattleFrontier_Lounge2_Text_DoubleBattleAdvice3 
         },
         [FRONTIER_MANIAC_BATTLE_TOWER_MULTIS] = 
         { 
-            BattleFrontier_Lounge2_Text_261B95, 
-            BattleFrontier_Lounge2_Text_261B95, 
-            BattleFrontier_Lounge2_Text_261B95 
+            BattleFrontier_Lounge2_Text_MultiBattleAdvice, 
+            BattleFrontier_Lounge2_Text_MultiBattleAdvice, 
+            BattleFrontier_Lounge2_Text_MultiBattleAdvice 
         },
         [FRONTIER_MANIAC_BATTLE_TOWER_LINK_MULTIS] =
         { 
-            BattleFrontier_Lounge2_Text_261C1A, 
-            BattleFrontier_Lounge2_Text_261C1A, 
-            BattleFrontier_Lounge2_Text_261C1A 
+            BattleFrontier_Lounge2_Text_LinkMultiBattleAdvice, 
+            BattleFrontier_Lounge2_Text_LinkMultiBattleAdvice, 
+            BattleFrontier_Lounge2_Text_LinkMultiBattleAdvice 
         },
         [FRONTIER_MANIAC_BATTLE_DOME] =
         { 
-            BattleFrontier_Lounge2_Text_260BC4, 
-            BattleFrontier_Lounge2_Text_260C6D, 
-            BattleFrontier_Lounge2_Text_260D3A 
+            BattleFrontier_Lounge2_Text_DomeAceIsThere, 
+            BattleFrontier_Lounge2_Text_DomeAceSilverMons, 
+            BattleFrontier_Lounge2_Text_DomeAceGoldMons 
         },
         [FRONTIER_MANIAC_BATTLE_FACTORY] =
         { 
-            BattleFrontier_Lounge2_Text_260E1E, 
-            BattleFrontier_Lounge2_Text_260EC7, 
-            BattleFrontier_Lounge2_Text_260F74 
+            BattleFrontier_Lounge2_Text_FactoryHeadIsThere, 
+            BattleFrontier_Lounge2_Text_FactoryHeadSilverMons, 
+            BattleFrontier_Lounge2_Text_FactoryHeadGoldMons 
         },
         [FRONTIER_MANIAC_BATTLE_PALACE] =
         { 
-            BattleFrontier_Lounge2_Text_2614E6, 
-            BattleFrontier_Lounge2_Text_261591, 
-            BattleFrontier_Lounge2_Text_26166F 
+            BattleFrontier_Lounge2_Text_PalaceMavenIsThere, 
+            BattleFrontier_Lounge2_Text_PalaceMavenSilverMons, 
+            BattleFrontier_Lounge2_Text_PalaceMavenGoldMons 
         },
         [FRONTIER_MANIAC_BATTLE_ARENA] =
         { 
-            BattleFrontier_Lounge2_Text_261282, 
-            BattleFrontier_Lounge2_Text_261329, 
-            BattleFrontier_Lounge2_Text_261403 
+            BattleFrontier_Lounge2_Text_ArenaTycoonIsThere, 
+            BattleFrontier_Lounge2_Text_ArenaTycoonSilverMons, 
+            BattleFrontier_Lounge2_Text_ArenaTycoonGoldMons 
         },
         [FRONTIER_MANIAC_BATTLE_PIKE] = 
         { 
-            BattleFrontier_Lounge2_Text_261026, 
-            BattleFrontier_Lounge2_Text_2610CC, 
-            BattleFrontier_Lounge2_Text_261194 
+            BattleFrontier_Lounge2_Text_PikeQueenIsThere, 
+            BattleFrontier_Lounge2_Text_PikeQueenSilverMons, 
+            BattleFrontier_Lounge2_Text_PikeQueenGoldMons 
         },
         [FRONTIER_MANIAC_BATTLE_PYRAMID] =
         { 
-            BattleFrontier_Lounge2_Text_26174D, 
-            BattleFrontier_Lounge2_Text_2617F9, 
-            BattleFrontier_Lounge2_Text_2618C4 
+            BattleFrontier_Lounge2_Text_PyramidKingIsThere, 
+            BattleFrontier_Lounge2_Text_PyramidKingSilverMons, 
+            BattleFrontier_Lounge2_Text_PyramidKingGoldMons 
         },
     };
 
@@ -2904,18 +2904,18 @@ void ShowFrontierGamblerLookingMessage(void)
 {
     static const u8 *const sFrontierGamblerLookingMessages[] = 
     {
-        BattleFrontier_Lounge3_Text_262261,
-        BattleFrontier_Lounge3_Text_26230D,
-        BattleFrontier_Lounge3_Text_2623B9,
-        BattleFrontier_Lounge3_Text_262464,
-        BattleFrontier_Lounge3_Text_26250E,
-        BattleFrontier_Lounge3_Text_2625B8,
-        BattleFrontier_Lounge3_Text_26266A,
-        BattleFrontier_Lounge3_Text_26271C,
-        BattleFrontier_Lounge3_Text_2627C9,
-        BattleFrontier_Lounge3_Text_262876,
-        BattleFrontier_Lounge3_Text_26291A,
-        BattleFrontier_Lounge3_Text_2629BC,
+        BattleFrontier_Lounge3_Text_ChallengeBattleTowerSingle,
+        BattleFrontier_Lounge3_Text_ChallengeBattleTowerDouble,
+        BattleFrontier_Lounge3_Text_ChallengeBattleTowerMulti,
+        BattleFrontier_Lounge3_Text_ChallengeBattleDomeSingle,
+        BattleFrontier_Lounge3_Text_ChallengeBattleDomeDouble,
+        BattleFrontier_Lounge3_Text_ChallengeBattleFactorySingle,
+        BattleFrontier_Lounge3_Text_ChallengeBattleFactoryDouble,
+        BattleFrontier_Lounge3_Text_ChallengeBattlePalaceSingle,
+        BattleFrontier_Lounge3_Text_ChallengeBattlePalaceDouble,
+        BattleFrontier_Lounge3_Text_ChallengeBattleArena,
+        BattleFrontier_Lounge3_Text_ChallengeBattlePike,
+        BattleFrontier_Lounge3_Text_ChallengeBattlePyramid,
     };
 
     u16 challenge = VarGet(VAR_FRONTIER_GAMBLER_CHALLENGE);
@@ -2927,18 +2927,18 @@ void ShowFrontierGamblerGoMessage(void)
 {
     static const u8 *const sFrontierGamblerGoMessages[] = 
     {
-        BattleFrontier_Lounge3_Text_262C04,
-        BattleFrontier_Lounge3_Text_262C90,
-        BattleFrontier_Lounge3_Text_262D1C,
-        BattleFrontier_Lounge3_Text_262DA7,
-        BattleFrontier_Lounge3_Text_262E34,
-        BattleFrontier_Lounge3_Text_262EC1,
-        BattleFrontier_Lounge3_Text_262F56,
-        BattleFrontier_Lounge3_Text_262FEB,
-        BattleFrontier_Lounge3_Text_263078,
-        BattleFrontier_Lounge3_Text_263105,
-        BattleFrontier_Lounge3_Text_26318C,
-        BattleFrontier_Lounge3_Text_263211,
+        BattleFrontier_Lounge3_Text_GetToBattleTowerSingle,
+        BattleFrontier_Lounge3_Text_GetToBattleTowerDouble,
+        BattleFrontier_Lounge3_Text_GetToBattleTowerMulti,
+        BattleFrontier_Lounge3_Text_GetToBattleDomeSingle,
+        BattleFrontier_Lounge3_Text_GetToBattleDomeDouble,
+        BattleFrontier_Lounge3_Text_GetToBattleFactorySingle,
+        BattleFrontier_Lounge3_Text_GetToBattleFactoryDouble,
+        BattleFrontier_Lounge3_Text_GetToBattlePalaceSingle,
+        BattleFrontier_Lounge3_Text_GetToBattlePalaceDouble,
+        BattleFrontier_Lounge3_Text_GetToBattleArena,
+        BattleFrontier_Lounge3_Text_GetToBattlePike,
+        BattleFrontier_Lounge3_Text_GetToBattlePyramid,
     };
 
     ShowFieldMessage(sFrontierGamblerGoMessages[VarGet(VAR_FRONTIER_GAMBLER_SET_CHALLENGE)]);
@@ -3213,31 +3213,31 @@ static void ShowBattleFrontierTutorMoveDescription(u8 menu, u16 selection)
 {
     static const u8 *const sBattleFrontier_TutorMoveDescriptions1[] = 
     {
-        BattleFrontier_Lounge7_Text_265E30,
-        BattleFrontier_Lounge7_Text_265E5B,
-        BattleFrontier_Lounge7_Text_265E8A,
-        BattleFrontier_Lounge7_Text_265EC0,
-        BattleFrontier_Lounge7_Text_265EED,
-        BattleFrontier_Lounge7_Text_265F1C,
-        BattleFrontier_Lounge7_Text_265F47,
-        BattleFrontier_Lounge7_Text_265F77,
-        BattleFrontier_Lounge7_Text_265FAA,
-        BattleFrontier_Lounge7_Text_265FDD,
+        BattleFrontier_Lounge7_Text_SoftboiledDesc,
+        BattleFrontier_Lounge7_Text_SeismicTossDesc,
+        BattleFrontier_Lounge7_Text_DreamEaterDesc,
+        BattleFrontier_Lounge7_Text_MegaPunchDesc,
+        BattleFrontier_Lounge7_Text_MegaKickDesc,
+        BattleFrontier_Lounge7_Text_BodySlamDesc,
+        BattleFrontier_Lounge7_Text_RockSlideDesc,
+        BattleFrontier_Lounge7_Text_CounterDesc,
+        BattleFrontier_Lounge7_Text_ThunderWaveDesc,
+        BattleFrontier_Lounge7_Text_SwordsDanceDesc,
         gText_Exit,
     };
 
     static const u8 *const sBattleFrontier_TutorMoveDescriptions2[] = 
     {
-        BattleFrontier_Lounge7_Text_26600A,
-        BattleFrontier_Lounge7_Text_26603E,
-        BattleFrontier_Lounge7_Text_266070,
-        BattleFrontier_Lounge7_Text_2660A6,
-        BattleFrontier_Lounge7_Text_2660D0,
-        BattleFrontier_Lounge7_Text_2660FF,
-        BattleFrontier_Lounge7_Text_26612D,
-        BattleFrontier_Lounge7_Text_26615F,
-        BattleFrontier_Lounge7_Text_266185,
-        BattleFrontier_Lounge7_Text_2661B5,
+        BattleFrontier_Lounge7_Text_DefenseCurlDesc,
+        BattleFrontier_Lounge7_Text_SnoreDesc,
+        BattleFrontier_Lounge7_Text_MudSlapDesc,
+        BattleFrontier_Lounge7_Text_SwiftDesc,
+        BattleFrontier_Lounge7_Text_IcyWindDesc,
+        BattleFrontier_Lounge7_Text_EndureDesc,
+        BattleFrontier_Lounge7_Text_PsychUpDesc,
+        BattleFrontier_Lounge7_Text_IcePunchDesc,
+        BattleFrontier_Lounge7_Text_ThunderPunchDesc,
+        BattleFrontier_Lounge7_Text_FirePunchDesc,
         gText_Exit,
     };
 
