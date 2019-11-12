@@ -18,32 +18,32 @@ Route104_Text_2A6E32: @ 82A6E32
 	.string "It's up to you whether to grow BERRIES\n"
 	.string "or use them.$"
 
-Route111_Text_2A6EBD: @ 82A6EBD
+Route111_Text_WateredPlantsEveryDayTakeBerry: @ 82A6EBD
 	.string "I watered the plants every day.\n"
 	.string "They grew lots of flowers.\p"
 	.string "And they gave me lots of BERRIES, too.\p"
 	.string "Here you go!\n"
 	.string "You can have it!$"
 
-Route111_Text_2A6F3D: @ 82A6F3D
+Route111_Text_GoingToTryToMakeDifferentColorBerries: @ 82A6F3D
 	.string "I'm going to try really hard and make\n"
 	.string "BERRIES in different colors.\p"
 	.string "I hope you try hard, too!$"
 
-Route111_Text_2A6F9A: @ 82A6F9A
+Route111_Text_WhatColorBerriesToLookForToday: @ 82A6F9A
 	.string "I wonder what color BERRIES I'll look\n"
 	.string "for today?$"
 
-Route114_Text_2A6FCB: @ 82A6FCB
+Route114_Text_LoveUsingBerryCrushShareBerry: @ 82A6FCB
 	.string "I love using the BERRY CRUSH machine,\n"
 	.string "so I'm collecting BERRIES.\p"
 	.string "I'll share one with you, if you'd like.$"
 
-Route114_Text_2A7034: @ 82A7034
+Route114_Text_TryBerryCrushWithFriends: @ 82A7034
 	.string "You should try the BERRY CRUSH\n"
 	.string "machine with your friends.$"
 
-Route114_Text_2A706E: @ 82A706E
+Route114_Text_FunToThinkAboutBerries: @ 82A706E
 	.string "Which BERRY should be planted?\n"
 	.string "Should you use or hoard BERRIES?\p"
 	.string "It's fun to think about.$"
