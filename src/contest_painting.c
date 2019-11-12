@@ -684,7 +684,7 @@ static void DoContestPaintingImageProcessing(u8 imageEffect)
 
     gImageProcessingContext.var_16 = 2;
     gImageProcessingContext.effect = imageEffect;
-    gImageProcessingContext.dest = OBJ_VRAM0;
+    gImageProcessingContext.dest = (void *)OBJ_VRAM0;
 
     ApplyImageProcessingEffects(&gImageProcessingContext);
     ApplyImageProcessingQuantization(&gImageProcessingContext);
