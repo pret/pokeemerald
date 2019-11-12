@@ -761,211 +761,53 @@ static u16 QuantizePixel_BlurHard(u16 *prevPixel, u16 *curPixel, u16 *nextPixel)
     return RGB2(red, green, blue);
 }
 
-/*
-void ConvertImageProcessingToGBA(struct ImageProcessingContext *arg0)
+void ConvertImageProcessingToGBA(struct ImageProcessingContext *context)
 {
     u16 i, j, k;
-    u8 r5 = arg0->canvasWidth >> 3;
-    u8 var_24 = arg0->canvasHeight >> 3;
-    u16 (*var_2C)[][32] = arg0->canvasPixels;
-    u32 var_28 = arg0->dest;
+    u16 *src, *dest, *src_, *dest_;
+    u16 width, height;
 
-    if (arg0->var_16 == 2)
+    width = context->canvasWidth >> 3;
+    height = context->canvasHeight >> 3;
+    src_ = context->canvasPixels;
+    dest_ = context->dest;
+
+    if (context->var_16 == 2)
     {
-        for (i = 0; i < var_24; i++)
+        for (i = 0; i < height; i++)
         {
-            for (j = 0; j < r5; j++)
+            for (j = 0; j < width; j++)
             {
                 for (k = 0; k < 8; k++)
                 {
-                    (*var_2C)[][];
+                    dest = dest_ + ((i * width + j) << 5) + (k << 2);
+                    src = src_ + ((((i << 3) + k) << 3) * width) + (j << 3);
+
+                    dest[0] = src[0] | (src[1] << 8);
+                    dest[1] = src[2] | (src[3] << 8);
+                    dest[2] = src[4] | (src[5] << 8);
+                    dest[3] = src[6] | (src[7] << 8);
                 }
             }
         }
     }
-}
-*/
+    else
+    {
+        for (i = 0; i < height; i++)
+        {
+            for (j = 0; j < width; j++)
+            {
+                for (k = 0; k < 8; k++)
+                {
+                    dest = dest_ + ((i * width + j) << 4) + (k << 1);
+                    src = src_ + ((((i << 3) + k) << 3) * width) + (j << 3);
 
-NAKED
-void ConvertImageProcessingToGBA(struct ImageProcessingContext *arg0)
-{
-    asm_unified("\n\
-    push {r4-r7,lr}\n\
-    mov r7, r10\n\
-    mov r6, r9\n\
-    mov r5, r8\n\
-    push {r5-r7}\n\
-    sub sp, 0xC\n\
-    ldrb r1, [r0, 0x1D]\n\
-    lsrs r5, r1, 3\n\
-    ldrb r1, [r0, 0x1E]\n\
-    lsrs r1, 3\n\
-    str r1, [sp, 0x8]\n\
-    ldr r1, [r0, 0x4]\n\
-    str r1, [sp]\n\
-    ldr r2, [r0, 0x10]\n\
-    str r2, [sp, 0x4]\n\
-    ldrh r0, [r0, 0x16]\n\
-    cmp r0, 0x2\n\
-    bne _08126108\n\
-    movs r1, 0\n\
-    ldr r0, [sp, 0x8]\n\
-    cmp r1, r0\n\
-    bcc _08126086\n\
-    b _08126194\n\
-_08126086:\n\
-    movs r0, 0\n\
-    adds r2, r1, 0x1\n\
-    mov r10, r2\n\
-    cmp r0, r5\n\
-    bcs _081260FA\n\
-    adds r2, r1, 0\n\
-    muls r2, r5\n\
-    mov r9, r2\n\
-    lsls r1, 3\n\
-    mov r8, r1\n\
-_0812609A:\n\
-    movs r4, 0\n\
-    lsls r6, r0, 4\n\
-    adds r7, r0, 0x1\n\
-    add r0, r9\n\
-    lsls r0, 6\n\
-    ldr r1, [sp, 0x4]\n\
-    adds r1, r0\n\
-    mov r12, r1\n\
-_081260AA:\n\
-    lsls r0, r4, 3\n\
-    mov r2, r12\n\
-    adds r3, r2, r0\n\
-    mov r1, r8\n\
-    adds r0, r1, r4\n\
-    lsls r0, 3\n\
-    muls r0, r5\n\
-    lsls r0, 1\n\
-    ldr r2, [sp]\n\
-    adds r0, r2, r0\n\
-    adds r2, r0, r6\n\
-    ldrh r0, [r2, 0x2]\n\
-    lsls r0, 8\n\
-    ldrh r1, [r2]\n\
-    orrs r0, r1\n\
-    strh r0, [r3]\n\
-    ldrh r0, [r2, 0x6]\n\
-    lsls r0, 8\n\
-    ldrh r1, [r2, 0x4]\n\
-    orrs r0, r1\n\
-    strh r0, [r3, 0x2]\n\
-    ldrh r0, [r2, 0xA]\n\
-    lsls r0, 8\n\
-    ldrh r1, [r2, 0x8]\n\
-    orrs r0, r1\n\
-    strh r0, [r3, 0x4]\n\
-    ldrh r0, [r2, 0xE]\n\
-    lsls r0, 8\n\
-    ldrh r1, [r2, 0xC]\n\
-    orrs r0, r1\n\
-    strh r0, [r3, 0x6]\n\
-    adds r0, r4, 0x1\n\
-    lsls r0, 16\n\
-    lsrs r4, r0, 16\n\
-    cmp r4, 0x7\n\
-    bls _081260AA\n\
-    lsls r0, r7, 16\n\
-    lsrs r0, 16\n\
-    cmp r0, r5\n\
-    bcc _0812609A\n\
-_081260FA:\n\
-    mov r1, r10\n\
-    lsls r0, r1, 16\n\
-    lsrs r1, r0, 16\n\
-    ldr r2, [sp, 0x8]\n\
-    cmp r1, r2\n\
-    bcc _08126086\n\
-    b _08126194\n\
-_08126108:\n\
-    movs r1, 0\n\
-    ldr r0, [sp, 0x8]\n\
-    cmp r1, r0\n\
-    bcs _08126194\n\
-_08126110:\n\
-    movs r0, 0\n\
-    adds r2, r1, 0x1\n\
-    mov r10, r2\n\
-    cmp r0, r5\n\
-    bcs _08126188\n\
-    adds r2, r1, 0\n\
-    muls r2, r5\n\
-    mov r9, r2\n\
-    lsls r1, 3\n\
-    mov r8, r1\n\
-_08126124:\n\
-    movs r4, 0\n\
-    lsls r6, r0, 4\n\
-    adds r7, r0, 0x1\n\
-    add r0, r9\n\
-    lsls r0, 5\n\
-    ldr r1, [sp, 0x4]\n\
-    adds r1, r0\n\
-    mov r12, r1\n\
-_08126134:\n\
-    lsls r0, r4, 2\n\
-    mov r2, r12\n\
-    adds r3, r2, r0\n\
-    mov r1, r8\n\
-    adds r0, r1, r4\n\
-    lsls r0, 3\n\
-    muls r0, r5\n\
-    lsls r0, 1\n\
-    ldr r2, [sp]\n\
-    adds r0, r2, r0\n\
-    adds r2, r0, r6\n\
-    ldrh r1, [r2, 0x2]\n\
-    lsls r1, 4\n\
-    ldrh r0, [r2]\n\
-    orrs r1, r0\n\
-    ldrh r0, [r2, 0x4]\n\
-    lsls r0, 8\n\
-    orrs r1, r0\n\
-    ldrh r0, [r2, 0x6]\n\
-    lsls r0, 12\n\
-    orrs r1, r0\n\
-    strh r1, [r3]\n\
-    ldrh r1, [r2, 0xA]\n\
-    lsls r1, 4\n\
-    ldrh r0, [r2, 0x8]\n\
-    orrs r1, r0\n\
-    ldrh r0, [r2, 0xC]\n\
-    lsls r0, 8\n\
-    orrs r1, r0\n\
-    ldrh r0, [r2, 0xE]\n\
-    lsls r0, 12\n\
-    orrs r1, r0\n\
-    strh r1, [r3, 0x2]\n\
-    adds r0, r4, 0x1\n\
-    lsls r0, 16\n\
-    lsrs r4, r0, 16\n\
-    cmp r4, 0x7\n\
-    bls _08126134\n\
-    lsls r0, r7, 16\n\
-    lsrs r0, 16\n\
-    cmp r0, r5\n\
-    bcc _08126124\n\
-_08126188:\n\
-    mov r1, r10\n\
-    lsls r0, r1, 16\n\
-    lsrs r1, r0, 16\n\
-    ldr r2, [sp, 0x8]\n\
-    cmp r1, r2\n\
-    bcc _08126110\n\
-_08126194:\n\
-    add sp, 0xC\n\
-    pop {r3-r5}\n\
-    mov r8, r3\n\
-    mov r9, r4\n\
-    mov r10, r5\n\
-    pop {r4-r7}\n\
-    pop {r0}\n\
-    bx r0");
+                    dest[0] = src[0] | (src[1] << 4) | (src[2] << 8) | (src[3] << 0xC);
+                    dest[1] = src[4] | (src[5] << 4) | (src[6] << 8) | (src[7] << 0xC);
+                }
+            }
+        }
+    }
 }
 
 void ApplyImageProcessingQuantization(struct ImageProcessingContext *context)
