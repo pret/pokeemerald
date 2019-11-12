@@ -76,13 +76,13 @@ gSpecials:: @ 81DBA64
 	def_special TurnOffTVScreen
 	def_special DoTVShow
 	def_special DoPokeNews
-	def_special special_0x44
-	def_special special_0x45
+	def_special GetRandomActiveShowIdx
+	def_special GetSelectedTVShow
 	def_special InterviewBefore
 	def_special InterviewAfter
-	def_special sub_80EF8F8
+	def_special IsLeadMonNicknamedOrNotEnglish
 	def_special SetContestCategoryStringVarForInterview
-	def_special special_0x4a
+	def_special GetNextActiveShowIfMassOutbreak
 	def_special TV_IsScriptShowKindAlreadyInQueue
 	def_special CheckForBigMovieOrEmergencyNewsOnTV
 	def_special GetMomOrDadStringForTVMessage

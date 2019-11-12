@@ -90,7 +90,7 @@ Route117_PokemonDayCare_EventScript_DaycareWoman:: @ 8291D11
 	msgbox Route117_PokemonDayCare_Text_WouldYouLikeUsToRaiseAMon, MSGBOX_YESNO
 	compare VAR_RESULT, YES
 	goto_if_eq Route117_PokemonDayCare_EventScript_GiveMonToRaise
-	msgbox Route117_PokemonDayCare_Text_292416, MSGBOX_DEFAULT
+	msgbox Route117_PokemonDayCare_Text_FineThenComeAgain, MSGBOX_DEFAULT
 	release
 	end
 
@@ -375,7 +375,7 @@ Route117_PokemonDayCare_Text_WeCanRaiseOneMore: @ 82923AF
 Route117_PokemonDayCare_Text_HusbandWasLookingForYou: @ 82923F6
 	.string "My husband was looking for you.$"
 
-Route117_PokemonDayCare_Text_292416: @ 8292416
+Route117_PokemonDayCare_Text_FineThenComeAgain: @ 8292416
 	.string "Oh, fine, then.\n"
 	.string "Come again.$"
 
@@ -402,7 +402,8 @@ Route117_PokemonDayCare_Text_YourTeamIsFull: @ 82924EF
 	.string "Your POKéMON team is full.\n"
 	.string "Make room, then come see me.$"
 
-Route117_PokemonDayCare_Text_292527: @ 8292527
+@ Unused
+Route117_PokemonDayCare_Text_TakeBackWhichMon: @ 8292527
 	.string "Which POKéMON will you take back?$"
 
 Route117_PokemonDayCare_Text_ItWillCostX: @ 8292549

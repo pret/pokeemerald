@@ -27,7 +27,7 @@ SecretBase_Text_DiscoveredSmallEntrance: @ 8274883
 SecretBase_EventScript_CheckEntrance:: @ 82759F1
 	special GetSecretBaseTypeInFrontOfPlayer
 	special CheckPlayerHasSecretBase
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, TRUE
 	goto_if_eq SecretBase_EventScript_AlreadyHasSecretBase
 	checkpartymove MOVE_SECRET_POWER
 	setfieldeffectargument 0, VAR_RESULT
@@ -185,7 +185,7 @@ SecretBase_EventScript_Enter:: @ 8275BB7
 	setvar VAR_INIT_SECRET_BASE, 1
 	playse SE_KAIDAN
 	special IsCurSecretBaseOwnedByAnotherPlayer
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, FALSE
 	goto_if_eq SecretBase_EventScript_EnterPlayersBase
 	clearflag FLAG_DECORATION_0
 	special EnterSecretBase
