@@ -395,9 +395,9 @@ bool32 ShouldDoWallyCall(void)
     return TRUE;
 }
 
-bool32 ShouldDoWinonaCall(void)
+bool32 ShouldDoScottFortreeCall(void)
 {
-    if (FlagGet(FLAG_REGISTER_WINONA_POKENAV))
+    if (FlagGet(FLAG_SCOTT_CALL_FORTREE_GYM))
     {
         switch (gMapHeader.mapType)
         {
@@ -405,7 +405,7 @@ bool32 ShouldDoWinonaCall(void)
             case MAP_TYPE_CITY:
             case MAP_TYPE_ROUTE:
             case MAP_TYPE_OCEAN_ROUTE:
-                if (++(*GetVarPointer(VAR_WINONA_CALL_STEP_COUNTER)) < 10)
+                if (++(*GetVarPointer(VAR_SCOTT_FORTREE_CALL_STEP_COUNTER)) < 10)
                 {
                     return FALSE;
                 }
@@ -422,9 +422,9 @@ bool32 ShouldDoWinonaCall(void)
     return TRUE;
 }
 
-bool32 ShouldDoScottCall(void)
+bool32 ShouldDoScottBattleFrontierCall(void)
 {
-    if (FlagGet(FLAG_SCOTT_CALL_NATIONAL_DEX))
+    if (FlagGet(FLAG_SCOTT_CALL_BATTLE_FRONTIER))
     {
         switch (gMapHeader.mapType)
         {
@@ -432,7 +432,7 @@ bool32 ShouldDoScottCall(void)
             case MAP_TYPE_CITY:
             case MAP_TYPE_ROUTE:
             case MAP_TYPE_OCEAN_ROUTE:
-                if (++(*GetVarPointer(VAR_SCOTT_CALL_STEP_COUNTER)) < 10)
+                if (++(*GetVarPointer(VAR_SCOTT_BF_CALL_STEP_COUNTER)) < 10)
                 {
                     return FALSE;
                 }
