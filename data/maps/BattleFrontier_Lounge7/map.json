@@ -24,7 +24,7 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "BattleFrontier_Lounge7_EventScript_2656DB",
+      "script": "BattleFrontier_Lounge7_EventScript_Sailor",
       "flag": "0"
     },
     {
@@ -37,7 +37,7 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "BattleFrontier_Lounge7_EventScript_265255",
+      "script": "BattleFrontier_Lounge7_EventScript_LeftMoveTutor",
       "flag": "0"
     },
     {
@@ -50,7 +50,7 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "BattleFrontier_Lounge7_EventScript_265445",
+      "script": "BattleFrontier_Lounge7_EventScript_RightMoveTutor",
       "flag": "0"
     },
     {
@@ -63,7 +63,7 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "BattleFrontier_Lounge7_EventScript_2656E4",
+      "script": "BattleFrontier_Lounge7_EventScript_Gentleman",
       "flag": "0"
     }
   ],
