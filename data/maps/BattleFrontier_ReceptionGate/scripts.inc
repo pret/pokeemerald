@@ -1,5 +1,5 @@
 BattleFrontier_ReceptionGate_MapScripts:: @ 82661DA
-	map_script MAP_SCRIPT_ON_FRAME_TABLE, BattleFrontier_ReceptionGate_MapScript2_2661E9
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, BattleFrontier_ReceptionGate_OnFrame
 	map_script MAP_SCRIPT_ON_TRANSITION, BattleFrontier_ReceptionGate_OnTransition
 	.byte 0
 
@@ -7,7 +7,7 @@ BattleFrontier_ReceptionGate_OnTransition: @ 82661E5
 	setflag FLAG_LANDMARK_BATTLE_FRONTIER
 	end
 
-BattleFrontier_ReceptionGate_MapScript2_2661E9: @ 82661E9
+BattleFrontier_ReceptionGate_OnFrame: @ 82661E9
 	map_script_2 VAR_HAS_ENTERED_BATTLE_FRONTIER, 0, BattleFrontier_ReceptionGate_EventScript_2661F3
 	.2byte 0
 

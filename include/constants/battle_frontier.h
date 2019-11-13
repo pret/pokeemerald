@@ -77,6 +77,11 @@
 // For 'ShowFacilityResultsWindow' function which is a part of the 'CallFrontierUtilFunc' special.
 #define RESULTS_LINK_CONTEST 7
 
+#define EXCHANGE_CORNER_DECOR1_CLERK     0
+#define EXCHANGE_CORNER_DECOR2_CLERK     1
+#define EXCHANGE_CORNER_VITAMIN_CLERK    2
+#define EXCHANGE_CORNER_HOLD_ITEM_CLERK  3
+
 #define F_EV_SPREAD_HP         (1 << 0)
 #define F_EV_SPREAD_ATTACK     (1 << 1)
 #define F_EV_SPREAD_DEFENSE    (1 << 2)

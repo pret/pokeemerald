@@ -810,35 +810,33 @@ extern const u8 BattleFrontier_Lounge3_Text_263211[];
 
 extern const u8 gText_BP[];
 
-extern const u8 BattleFrontier_BattlePointExchangeServiceCorner_Text_2601AA[];
-extern const u8 BattleFrontier_BattlePointExchangeServiceCorner_Text_2601D0[];
-extern const u8 BattleFrontier_BattlePointExchangeServiceCorner_Text_260201[];
-extern const u8 BattleFrontier_BattlePointExchangeServiceCorner_Text_26022F[];
-extern const u8 BattleFrontier_BattlePointExchangeServiceCorner_Text_26025B[];
-extern const u8 BattleFrontier_BattlePointExchangeServiceCorner_Text_260287[];
-extern const u8 BattleFrontier_BattlePointExchangeServiceCorner_Text_2602B5[];
-extern const u8 BattleFrontier_BattlePointExchangeServiceCorner_Text_2602E0[];
-extern const u8 BattleFrontier_BattlePointExchangeServiceCorner_Text_26030F[];
-extern const u8 BattleFrontier_BattlePointExchangeServiceCorner_Text_26033E[];
-
-extern const u8 BattleFrontier_BattlePointExchangeServiceCorner_Text_26036C[];
-
-extern const u8 BattleFrontier_BattlePointExchangeServiceCorner_Text_260397[];
-extern const u8 BattleFrontier_BattlePointExchangeServiceCorner_Text_2603BE[];
-extern const u8 BattleFrontier_BattlePointExchangeServiceCorner_Text_2603E6[];
-extern const u8 BattleFrontier_BattlePointExchangeServiceCorner_Text_26040E[];
-extern const u8 BattleFrontier_BattlePointExchangeServiceCorner_Text_260436[];
-extern const u8 BattleFrontier_BattlePointExchangeServiceCorner_Text_26045C[];
-
-extern const u8 BattleFrontier_BattlePointExchangeServiceCorner_Text_26047A[];
-extern const u8 BattleFrontier_BattlePointExchangeServiceCorner_Text_2604AC[];
-extern const u8 BattleFrontier_BattlePointExchangeServiceCorner_Text_2604D8[];
-extern const u8 BattleFrontier_BattlePointExchangeServiceCorner_Text_26050F[];
-extern const u8 BattleFrontier_BattlePointExchangeServiceCorner_Text_260542[];
-extern const u8 BattleFrontier_BattlePointExchangeServiceCorner_Text_260575[];
-extern const u8 BattleFrontier_BattlePointExchangeServiceCorner_Text_2605A8[];
-extern const u8 BattleFrontier_BattlePointExchangeServiceCorner_Text_2605E2[];
-extern const u8 BattleFrontier_BattlePointExchangeServiceCorner_Text_260613[];
+// Battle Frontier Exchange Corner
+extern const u8 BattleFrontier_ExchangeServiceCorner_Text_KissPosterDesc[];
+extern const u8 BattleFrontier_ExchangeServiceCorner_Text_KissCushionDesc[];
+extern const u8 BattleFrontier_ExchangeServiceCorner_Text_SmoochumDollDesc[];
+extern const u8 BattleFrontier_ExchangeServiceCorner_Text_TogepiDollDesc[];
+extern const u8 BattleFrontier_ExchangeServiceCorner_Text_MeowthDollDesc[];
+extern const u8 BattleFrontier_ExchangeServiceCorner_Text_ClefairyDollDesc[];
+extern const u8 BattleFrontier_ExchangeServiceCorner_Text_DittoDollDesc[];
+extern const u8 BattleFrontier_ExchangeServiceCorner_Text_CyndaquilDollDesc[];
+extern const u8 BattleFrontier_ExchangeServiceCorner_Text_ChikoritaDollDesc[];
+extern const u8 BattleFrontier_ExchangeServiceCorner_Text_TotodileDollDesc[];
+extern const u8 BattleFrontier_ExchangeServiceCorner_Text_LargeDollDesc[];
+extern const u8 BattleFrontier_ExchangeServiceCorner_Text_ProteinDesc[];
+extern const u8 BattleFrontier_ExchangeServiceCorner_Text_CalciumDesc[];
+extern const u8 BattleFrontier_ExchangeServiceCorner_Text_IronDesc[];
+extern const u8 BattleFrontier_ExchangeServiceCorner_Text_ZincDesc[];
+extern const u8 BattleFrontier_ExchangeServiceCorner_Text_CarbosDesc[];
+extern const u8 BattleFrontier_ExchangeServiceCorner_Text_HPUpDesc[];
+extern const u8 BattleFrontier_ExchangeServiceCorner_Text_LeftoversDesc[];
+extern const u8 BattleFrontier_ExchangeServiceCorner_Text_WhiteHerbDesc[];
+extern const u8 BattleFrontier_ExchangeServiceCorner_Text_QuickClawDesc[];
+extern const u8 BattleFrontier_ExchangeServiceCorner_Text_MentalHerbDesc[];
+extern const u8 BattleFrontier_ExchangeServiceCorner_Text_BrightpowderDesc[];
+extern const u8 BattleFrontier_ExchangeServiceCorner_Text_ChoiceBandDesc[];
+extern const u8 BattleFrontier_ExchangeServiceCorner_Text_KingsRockDesc[];
+extern const u8 BattleFrontier_ExchangeServiceCorner_Text_FocusBandDesc[];
+extern const u8 BattleFrontier_ExchangeServiceCorner_Text_ScopeLensDesc[];
 
 extern const u8 BattleFrontier_Lounge7_Text_265E30[];
 extern const u8 BattleFrontier_Lounge7_Text_265E5B[];
