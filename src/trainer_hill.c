@@ -286,7 +286,7 @@ void ResetTrainerHillResults(void)
 {
     s32 i;
 
-    gSaveBlock2Ptr->frontier.savedGame = FALSE;
+    gSaveBlock2Ptr->frontier.savedGame = 0;
     gSaveBlock2Ptr->frontier.neverRead = 0;
     gSaveBlock1Ptr->trainerHill.bestTime = 0;
     for (i = 0; i < 4; i++)
@@ -528,6 +528,7 @@ static void BufferChallengeTime(void)
 
 // Returns TRUE if all 4 floors are used
 // Returns FALSE otherwise, and buffers the number of floors used
+// The only time fewer than all 4 floors are used is for the JP-exclusive E-Reader and Default modes
 static void GetAllFloorsUsed(void)
 {
     SetUpDataStruct();
@@ -838,7 +839,7 @@ const struct WarpEvent* SetWarpDestinationTrainerHill4F(void)
 }
 
 // For warping from the roof in challenges where the 4F is not the final challenge floor
-// This would only occur in an E-Reader challenge, which is exclusive to JP Emerald
+// This would only occur in the JP-exclusive Default and E-Reader challenges
 const struct WarpEvent* SetWarpDestinationTrainerHillFinalFloor(u8 warpEventId)
 {
     u8 numFloors;
@@ -1045,7 +1046,7 @@ static void TrainerHillSetTag(void)
     gSaveBlock1Ptr->trainerHill.bestTime = gSaveBlock1Ptr->trainerHillTimes[gSpecialVar_0x8005];
 }
 
-static u8 GetPrizeListId(bool8 npcChallenge)
+static u8 GetPrizeListId(bool8 maxTrainers)
 {
     u8 prizeListId, i, modBy;
 
@@ -1056,8 +1057,8 @@ static u8 GetPrizeListId(bool8 npcChallenge)
         prizeListId ^= sHillData->floors[i].trainerNum2 & 0x1F;
     }
 
-    // Not possible to win TMs from E-Reader challenges
-    if (npcChallenge)
+    // Not possible to win TMs with fewer than 8 trainers
+    if (maxTrainers)
         modBy = NUM_TRAINER_HILL_PRIZE_LISTS;
     else
         modBy = NUM_TRAINER_HILL_PRIZE_LISTS / 2;
@@ -1080,7 +1081,7 @@ static u16 GetPrizeItemId(void)
 
     prizeListSetId = var / 256;
     prizeListSetId %= 2;
-    if (FlagGet(FLAG_SYS_GAME_CLEAR) && sHillData->tag.trainerType == HILL_TRAINER_TYPE_NPC)
+    if (FlagGet(FLAG_SYS_GAME_CLEAR) && sHillData->tag.numTrainers == NUM_TRAINER_HILL_TRAINERS)
         i = GetPrizeListId(TRUE);
     else
         i = GetPrizeListId(FALSE);
