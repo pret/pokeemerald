@@ -174,6 +174,8 @@ struct SpecialStatus
     u8 gemBoost:1;
     u8 gemParam;
     u8 damagedMons:4; // Mons that have been damaged directly by using a move, includes substitute.
+    u8 dancerUsedMove:1;
+    u8 dancerOriginalTarget:3;
     s32 dmg;
     s32 physicalDmg;
     s32 specialDmg;
@@ -594,7 +596,7 @@ struct BattleScripting
     u8 battleStyle;
     u8 drawlvlupboxState;
     u8 learnMoveState;
-    u8 field_20;
+    u8 savedBattler;
     u8 reshowMainState;
     u8 reshowHelperState;
     u8 field_23;
