@@ -40,7 +40,7 @@ struct TrHillFloor
 
 struct TrHillTag
 {
-    u8 trainerType;
+    u8 numTrainers;
     u8 unused1;
     u8 numFloors;
     u32 checksum;

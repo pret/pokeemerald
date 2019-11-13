@@ -220,7 +220,8 @@ TrainerHill_Entrance_Movement_PushPlayerBackFromCounter: @ 8268381
 	walk_down
 	step_end
 
-TrainerHill_Entrance_Movement_268383: @ 8268383
+@ Unused
+TrainerHill_Entrance_Movement_FaceUp: @ 8268383
 	face_up
 	step_end
 

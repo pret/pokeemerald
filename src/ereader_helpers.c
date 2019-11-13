@@ -448,7 +448,7 @@ static bool32 TryWriteTrainerHill_r(struct EReaderTrainerHillSet *ttdata, struct
     AGB_ASSERT_EX(ttdata->id == 0, "cereader_tool.c", 452);
 
     memset(buffer2, 0, 0x1000);
-    buffer2->trainerType = ttdata->count;
+    buffer2->numTrainers = ttdata->count;
     buffer2->unused1 = sub_81D38D4();
     buffer2->numFloors = (ttdata->count + 1) / 2;
 
