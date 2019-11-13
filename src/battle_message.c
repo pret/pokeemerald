@@ -24,6 +24,7 @@
 #include "constants/items.h"
 #include "constants/moves.h"
 #include "constants/trainers.h"
+#include "constants/trainer_hill.h"
 
 struct BattleWindowText
 {
@@ -2574,7 +2575,7 @@ u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst)
                 }
                 else if (gBattleTypeFlags & BATTLE_TYPE_TRAINER_HILL)
                 {
-                    CopyTrainerHillTrainerText(4, gTrainerBattleOpponent_A);
+                    CopyTrainerHillTrainerText(TRAINER_HILL_TEXT_PLAYER_WON, gTrainerBattleOpponent_A);
                     toCpy = gStringVar4;
                 }
                 else
@@ -2590,7 +2591,7 @@ u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst)
                 }
                 else if (gBattleTypeFlags & BATTLE_TYPE_TRAINER_HILL)
                 {
-                    CopyTrainerHillTrainerText(3, gTrainerBattleOpponent_A);
+                    CopyTrainerHillTrainerText(TRAINER_HILL_TEXT_PLAYER_LOST, gTrainerBattleOpponent_A);
                     toCpy = gStringVar4;
                 }
                 break;
@@ -2671,7 +2672,7 @@ u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst)
                 }
                 else if (gBattleTypeFlags & BATTLE_TYPE_TRAINER_HILL)
                 {
-                    CopyTrainerHillTrainerText(4, gTrainerBattleOpponent_B);
+                    CopyTrainerHillTrainerText(TRAINER_HILL_TEXT_PLAYER_WON, gTrainerBattleOpponent_B);
                     toCpy = gStringVar4;
                 }
                 else
@@ -2687,7 +2688,7 @@ u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst)
                 }
                 else if (gBattleTypeFlags & BATTLE_TYPE_TRAINER_HILL)
                 {
-                    CopyTrainerHillTrainerText(3, gTrainerBattleOpponent_B);
+                    CopyTrainerHillTrainerText(TRAINER_HILL_TEXT_PLAYER_LOST, gTrainerBattleOpponent_B);
                     toCpy = gStringVar4;
                 }
                 break;

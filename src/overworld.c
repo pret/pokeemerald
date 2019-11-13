@@ -64,6 +64,7 @@
 #include "constants/region_map_sections.h"
 #include "constants/songs.h"
 #include "constants/species.h"
+#include "constants/trainer_hill.h"
 #include "constants/weather.h"
 
 #define PLAYER_TRADING_STATE_IDLE 0x80
@@ -854,7 +855,7 @@ static void mli0_load_map(u32 a1)
         if (gMapHeader.mapLayoutId == LAYOUT_BATTLE_FRONTIER_BATTLE_PYRAMID_EMPTY_SQUARE)
             LoadBattlePyramidEventObjectTemplates();
         else if (InTrainerHill())
-            sub_81D5DF8();
+            LoadTrainerHillEventObjectTemplates();
         else
             LoadEventObjTemplatesFromHeader();
     }
@@ -1721,8 +1722,8 @@ void CB2_ContinueSavedGame(void)
     trainerHillMapId = GetCurrentTrainerHillMapId();
     if (gMapHeader.mapLayoutId == LAYOUT_BATTLE_FRONTIER_BATTLE_PYRAMID_EMPTY_SQUARE)
         LoadBattlePyramidFloorEventObjectScripts();
-    else if (trainerHillMapId != 0 && trainerHillMapId != 6)
-        sub_81D5F48();
+    else if (trainerHillMapId != 0 && trainerHillMapId != TRAINER_HILL_ENTRANCE)
+        LoadTrainerHillFloorEventObjectScripts();
     else
         LoadSaveblockEventObjScripts();
 

@@ -582,6 +582,6 @@ extern const u8 SecretBase_EventScript_TreeUseSecretPower[];
 extern const u8 SecretBase_EventScript_ShrubUseSecretPower[];
 
 // trainer hill
-extern const u8 EventScript_2C83F0[];
+extern const u8 TrainerHill_EventScript_TrainerBattle[];
 
 #endif // GUARD_EVENT_SCRIPTS_H

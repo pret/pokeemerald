@@ -24,7 +24,7 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "TrainerHill_Entrance_EventScript_2681FD",
+      "script": "TrainerHill_Entrance_EventScript_Attendant",
       "flag": "0"
     },
     {
@@ -37,7 +37,7 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "TrainerHill_Entrance_EventScript_2681EF",
+      "script": "TrainerHill_Entrance_EventScript_Nurse",
       "flag": "0"
     },
     {
@@ -50,7 +50,7 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "TrainerHill_Entrance_EventScript_2683C7",
+      "script": "TrainerHill_Entrance_EventScript_Clerk",
       "flag": "0"
     },
     {
@@ -63,7 +63,7 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "TrainerHill_Entrance_EventScript_2683AC",
+      "script": "TrainerHill_Entrance_EventScript_Girl",
       "flag": "0"
     },
     {
@@ -76,7 +76,7 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "TrainerHill_Entrance_EventScript_268391",
+      "script": "TrainerHill_Entrance_EventScript_Man",
       "flag": "0"
     }
   ],
@@ -111,7 +111,7 @@
       "elevation": 3,
       "var": "VAR_TRAINER_HILL_IS_ACTIVE",
       "var_value": "0",
-      "script": "TrainerHill_Entrance_EventScript_268229"
+      "script": "TrainerHill_Entrance_EventScript_EntryTrigger"
     }
   ],
   "bg_events": [
@@ -121,7 +121,7 @@
       "y": 10,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
-      "script": "TrainerHill_Entrance_EventScript_268388"
+      "script": "TrainerHill_Entrance_EventScript_Records"
     }
   ]
 }
