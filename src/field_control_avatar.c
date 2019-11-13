@@ -33,6 +33,7 @@
 #include "constants/map_types.h"
 #include "constants/maps.h"
 #include "constants/songs.h"
+#include "constants/trainer_hill.h"
 
 static EWRAM_DATA u8 sWildEncounterImmunitySteps = 0;
 static EWRAM_DATA u16 sPreviousPlayerMetatileBehavior = 0;
@@ -792,20 +793,16 @@ static void SetupWarp(struct MapHeader *unused, s8 warpEventId, struct MapPositi
 
     if (trainerHillMapId)
     {
-        if (trainerHillMapId == sub_81D6490())
+        if (trainerHillMapId == GetNumFloorsInTrainerHillChallenge())
         {
             if (warpEventId == 0)
-            {
                 warpEvent = &gMapHeader.events->warps[0];
-            }
             else
-            {
-                warpEvent = sub_81D6120();
-            }
+                warpEvent = SetWarpDestinationTrainerHill4F();
         }
-        else if (trainerHillMapId == 5)
+        else if (trainerHillMapId == TRAINER_HILL_ROOF)
         {
-            warpEvent = sub_81D6134(warpEventId);
+            warpEvent = SetWarpDestinationTrainerHillFinalFloor(warpEventId);
         }
         else
         {
