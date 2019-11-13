@@ -8188,6 +8188,114 @@ static const union AnimCmd sAnim_MEGA_DIANCIE_1[] =
 	ANIMCMD_END,
 };
 
+static const union AnimCmd sAnim_ALOLAN_RATTATA_1[] =
+{
+    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sAnim_ALOLAN_RATICATE_1[] =
+{
+    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sAnim_ALOLAN_RAICHU_1[] =
+{
+    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sAnim_ALOLAN_SANDSHREW_1[] =
+{
+    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sAnim_ALOLAN_SANDSLASH_1[] =
+{
+    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sAnim_ALOLAN_VULPIX_1[] =
+{
+    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sAnim_ALOLAN_NINETALES_1[] =
+{
+    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sAnim_ALOLAN_DIGLETT_1[] =
+{
+    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sAnim_ALOLAN_DUGTRIO_1[] =
+{
+    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sAnim_ALOLAN_MEOWTH_1[] =
+{
+    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sAnim_ALOLAN_PERSIAN_1[] =
+{
+    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sAnim_ALOLAN_GEODUDE_1[] =
+{
+    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sAnim_ALOLAN_GRAVELER_1[] =
+{
+    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sAnim_ALOLAN_GOLEM_1[] =
+{
+    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sAnim_ALOLAN_GRIMER_1[] =
+{
+    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sAnim_ALOLAN_MUK_1[] =
+{
+    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sAnim_ALOLAN_EXEGGUTOR_1[] =
+{
+    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sAnim_ALOLAN_MAROWAK_1[] =
+{
+    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_END,
+};
+
 static const union AnimCmd *const sAnims_NONE[] ={
     sAnim_GeneralFrame0,
     sAnim_NONE_1,
@@ -12708,6 +12816,96 @@ static const union AnimCmd *const sAnims_MEGA_DIANCIE[] ={
 	sAnim_MEGA_DIANCIE_1,
 };
 
+static const union AnimCmd *const sAnims_ALOLAN_RATTATA[] ={
+    sAnim_GeneralFrame0,
+    sAnim_ALOLAN_RATTATA_1,
+};
+
+static const union AnimCmd *const sAnims_ALOLAN_RATICATE[] ={
+    sAnim_GeneralFrame0,
+    sAnim_ALOLAN_RATICATE_1,
+};
+
+static const union AnimCmd *const sAnims_ALOLAN_RAICHU[] ={
+    sAnim_GeneralFrame0,
+    sAnim_ALOLAN_RAICHU_1,
+};
+
+static const union AnimCmd *const sAnims_ALOLAN_SANDSHREW[] ={
+    sAnim_GeneralFrame0,
+    sAnim_ALOLAN_SANDSHREW_1,
+};
+
+static const union AnimCmd *const sAnims_ALOLAN_SANDSLASH[] ={
+    sAnim_GeneralFrame0,
+    sAnim_ALOLAN_SANDSLASH_1,
+};
+
+static const union AnimCmd *const sAnims_ALOLAN_VULPIX[] ={
+    sAnim_GeneralFrame0,
+    sAnim_ALOLAN_VULPIX_1,
+};
+
+static const union AnimCmd *const sAnims_ALOLAN_NINETALES[] ={
+    sAnim_GeneralFrame0,
+    sAnim_ALOLAN_NINETALES_1,
+};
+
+static const union AnimCmd *const sAnims_ALOLAN_DIGLETT[] ={
+    sAnim_GeneralFrame0,
+    sAnim_ALOLAN_DIGLETT_1,
+};
+
+static const union AnimCmd *const sAnims_ALOLAN_DUGTRIO[] ={
+    sAnim_GeneralFrame0,
+    sAnim_ALOLAN_DUGTRIO_1,
+};
+
+static const union AnimCmd *const sAnims_ALOLAN_MEOWTH[] ={
+    sAnim_GeneralFrame0,
+    sAnim_ALOLAN_MEOWTH_1,
+};
+
+static const union AnimCmd *const sAnims_ALOLAN_PERSIAN[] ={
+    sAnim_GeneralFrame0,
+    sAnim_ALOLAN_PERSIAN_1,
+};
+
+static const union AnimCmd *const sAnims_ALOLAN_GEODUDE[] ={
+    sAnim_GeneralFrame0,
+    sAnim_ALOLAN_GEODUDE_1,
+};
+
+static const union AnimCmd *const sAnims_ALOLAN_GRAVELER[] ={
+    sAnim_GeneralFrame0,
+    sAnim_ALOLAN_GRAVELER_1,
+};
+
+static const union AnimCmd *const sAnims_ALOLAN_GOLEM[] ={
+    sAnim_GeneralFrame0,
+    sAnim_ALOLAN_GOLEM_1,
+};
+
+static const union AnimCmd *const sAnims_ALOLAN_GRIMER[] ={
+    sAnim_GeneralFrame0,
+    sAnim_ALOLAN_GRIMER_1,
+};
+
+static const union AnimCmd *const sAnims_ALOLAN_MUK[] ={
+    sAnim_GeneralFrame0,
+    sAnim_ALOLAN_MUK_1,
+};
+
+static const union AnimCmd *const sAnims_ALOLAN_EXEGGUTOR[] ={
+    sAnim_GeneralFrame0,
+    sAnim_ALOLAN_EXEGGUTOR_1,
+};
+
+static const union AnimCmd *const sAnims_ALOLAN_MAROWAK[] ={
+    sAnim_GeneralFrame0,
+    sAnim_ALOLAN_MAROWAK_1,
+};
+
 #define ANIM_CMD(name)             [SPECIES_##name] = sAnims_##name
 #define ANIM_CMD_FULL(name, anims) [SPECIES_##name] = anims
 
@@ -13582,5 +13780,23 @@ const union AnimCmd *const *const gMonFrontAnimsPtrTable[] =
     ANIM_CMD(MEGA_GALLADE),
     ANIM_CMD(MEGA_AUDINO),
     ANIM_CMD(MEGA_DIANCIE),
+    ANIM_CMD(ALOLAN_RATTATA),
+    ANIM_CMD(ALOLAN_RATICATE),
+    ANIM_CMD(ALOLAN_RAICHU),
+    ANIM_CMD(ALOLAN_SANDSHREW),
+    ANIM_CMD(ALOLAN_SANDSLASH),
+    ANIM_CMD(ALOLAN_VULPIX),
+    ANIM_CMD(ALOLAN_NINETALES),
+    ANIM_CMD(ALOLAN_DIGLETT),
+    ANIM_CMD(ALOLAN_DUGTRIO),
+    ANIM_CMD(ALOLAN_MEOWTH),
+    ANIM_CMD(ALOLAN_PERSIAN),
+    ANIM_CMD(ALOLAN_GEODUDE),
+    ANIM_CMD(ALOLAN_GRAVELER),
+    ANIM_CMD(ALOLAN_GOLEM),
+    ANIM_CMD(ALOLAN_GRIMER),
+    ANIM_CMD(ALOLAN_MUK),
+    ANIM_CMD(ALOLAN_EXEGGUTOR),
+    ANIM_CMD(ALOLAN_MAROWAK),
 };
 
