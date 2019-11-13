@@ -3972,14 +3972,14 @@
       "blockdata_filepath": "data/layouts/BattleFrontier_Lounge1/map.bin"
     },
     {
-      "id": "LAYOUT_BATTLE_FRONTIER_BATTLE_POINT_EXCHANGE_SERVICE_CORNER",
-      "name": "BattleFrontier_BattlePointExchangeServiceCorner_Layout",
+      "id": "LAYOUT_BATTLE_FRONTIER_EXCHANGE_SERVICE_CORNER",
+      "name": "BattleFrontier_ExchangeServiceCorner_Layout",
       "width": 15,
       "height": 11,
       "primary_tileset": "gTileset_Building",
       "secondary_tileset": "gTileset_BattleFrontier",
-      "border_filepath": "data/layouts/BattleFrontier_BattlePointExchangeServiceCorner/border.bin",
-      "blockdata_filepath": "data/layouts/BattleFrontier_BattlePointExchangeServiceCorner/map.bin"
+      "border_filepath": "data/layouts/BattleFrontier_ExchangeServiceCorner/border.bin",
+      "blockdata_filepath": "data/layouts/BattleFrontier_ExchangeServiceCorner/map.bin"
     },
     {
       "id": "LAYOUT_BATTLE_FRONTIER_RECEPTION_GATE",

@@ -507,7 +507,7 @@ gStdScripts_End:: @ 81DC2CC
 	.include "data/maps/BattleFrontier_BattlePikeRandomRoom3/scripts.inc"
 	.include "data/maps/BattleFrontier_RankingHall/scripts.inc"
 	.include "data/maps/BattleFrontier_Lounge1/scripts.inc"
-	.include "data/maps/BattleFrontier_BattlePointExchangeServiceCorner/scripts.inc"
+	.include "data/maps/BattleFrontier_ExchangeServiceCorner/scripts.inc"
 	.include "data/maps/BattleFrontier_Lounge2/scripts.inc"
 	.include "data/maps/BattleFrontier_Lounge3/scripts.inc"
 	.include "data/maps/BattleFrontier_Lounge4/scripts.inc"
