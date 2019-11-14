@@ -383,10 +383,6 @@ extern const u8 EventScript_FldEffRockSmash[];
 extern const u8 LittlerootTown_BrendansHouse_2F_EventScript_TurnOffPlayerPC[];
 extern const u8 LittlerootTown_MaysHouse_2F_EventScript_TurnOffPlayerPC[];
 
-//contest_strings
-extern const u8 gText_0827D507[];
-extern const u8 gText_0827D531[];
-
 //mauville_old_man
 extern const u8 gOtherText_Is[];
 extern const u8 gOtherText_DontYouAgree[];

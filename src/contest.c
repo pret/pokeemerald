@@ -246,29 +246,8 @@ EWRAM_DATA u8 gUnknown_02039F5D = 0;
 u32 gContestRngValue;
 
 extern const u8 gText_LinkStandby4[];
-extern const u8 gText_0827D55A[];
-extern const u8 gText_0827E793[];
-extern const u8 gText_0827E32E[];
-extern const u8 gText_0827E35B[];
-extern const u8 gText_0827E38D[];
-extern const u8 gText_0827E2FE[];
-extern const u8 gText_RepeatedAppeal[];
-extern const u8 gText_0827E73C[];
-extern const u8 gText_0827E717[];
-extern const u8 gText_0827E76A[];
-extern const u8 gText_0827E7EA[];
-extern const u8 gText_0827E817[];
-extern const u8 gText_0827E58A[];
-extern const u8 gText_0827D56F[];
-extern const u8 gText_0827D597[];
-extern const u8 gText_Contest_Shyness[];
-extern const u8 gText_Contest_Anxiety[];
-extern const u8 gText_Contest_Laziness[];
-extern const u8 gText_Contest_Hesitancy[];
-extern const u8 gText_Contest_Fear[];
 extern const u8 gText_BDot[];
 extern const u8 gText_CDot[];
-extern const u8 *const gUnknown_08587E10[];
 extern void (*const gContestEffectFuncs[])(void);
 
 static const u8 gUnknown_08587A6C[] =
@@ -1345,9 +1324,9 @@ static void sub_80D833C(u8 taskId)
         DmaCopy32Defvars(3, gPlttBufferUnfaded, eUnknownHeap1A004.unk18204, PLTT_BUFFER_SIZE * 2);
         ConvertIntToDecimalStringN(gStringVar1, eContest.turnNumber + 1, STR_CONV_MODE_LEFT_ALIGN, 1);
         if (!Contest_IsMonsTurnDisabled(gContestPlayerMonIndex))
-            StringCopy(gDisplayedStringBattle, gText_0827D507);
+            StringCopy(gDisplayedStringBattle, gText_AppealNumWhichMoveWillBePlayed);
         else
-            StringCopy(gDisplayedStringBattle, gText_0827D531);
+            StringCopy(gDisplayedStringBattle, gText_AppealNumButItCantParticipate);
         ContestClearGeneralTextWindow();
         StringExpandPlaceholders(gStringVar4, gDisplayedStringBattle);
         Contest_StartTextPrinter(gStringVar4, TRUE);
@@ -1443,9 +1422,9 @@ static void sub_80D8610(u8 taskId)
             sub_80DC490(FALSE);
             ConvertIntToDecimalStringN(gStringVar1, eContest.turnNumber + 1, STR_CONV_MODE_LEFT_ALIGN, 1);
             if (!Contest_IsMonsTurnDisabled(gContestPlayerMonIndex))
-                StringCopy(gDisplayedStringBattle, gText_0827D507);
+                StringCopy(gDisplayedStringBattle, gText_AppealNumWhichMoveWillBePlayed);
             else
-                StringCopy(gDisplayedStringBattle, gText_0827D531);
+                StringCopy(gDisplayedStringBattle, gText_AppealNumButItCantParticipate);
             ContestClearGeneralTextWindow();
             StringExpandPlaceholders(gStringVar4, gDisplayedStringBattle);
             Contest_StartTextPrinter(gStringVar4, 0);
@@ -1673,8 +1652,8 @@ static void sub_80D8B38(u8 taskId)
             if (eContestantStatus[r6].currMove < MOVES_COUNT)
                 StringCopy(gStringVar2, gMoveNames[eContestantStatus[r6].currMove]);
             else
-                StringCopy(gStringVar2, gUnknown_08587F1C[eContestantStatus[r6].moveCategory]);
-            StringExpandPlaceholders(gStringVar4, gText_0827D55A);
+                StringCopy(gStringVar2, sInvalidContestMoveNames[eContestantStatus[r6].moveCategory]);
+            StringExpandPlaceholders(gStringVar4, gText_MonAppealedWithMove);
             Contest_StartTextPrinter(gStringVar4, 1);
             gTasks[taskId].data[0] = 6;
         }
@@ -1932,7 +1911,7 @@ static void sub_80D8B38(u8 taskId)
             {
                 ContestClearGeneralTextWindow();
                 StringCopy(gStringVar1, gContestMons[r6].nickname);
-                StringExpandPlaceholders(gStringVar4, gText_0827E793);
+                StringExpandPlaceholders(gStringVar4, gText_MonCantAppealNextTurn);
                 Contest_StartTextPrinter(gStringVar4, 1);
             }
             gTasks[taskId].data[0] = 52;
@@ -1953,11 +1932,11 @@ static void sub_80D8B38(u8 taskId)
         {
             ContestClearGeneralTextWindow();
             if (r3 == 1)
-                Contest_StartTextPrinter(gText_0827E32E, TRUE);
+                Contest_StartTextPrinter(gText_AppealComboWentOverWell, TRUE);
             else if (r3 == 2)
-                Contest_StartTextPrinter(gText_0827E35B, TRUE);
+                Contest_StartTextPrinter(gText_AppealComboWentOverVeryWell, TRUE);
             else
-                Contest_StartTextPrinter(gText_0827E38D, TRUE);
+                Contest_StartTextPrinter(gText_AppealComboWentOverExcellently, TRUE);
             sub_80DD720(3);
             gTasks[taskId].data[10] = 0;
             gTasks[taskId].data[0] = 45;
@@ -1966,7 +1945,7 @@ static void sub_80D8B38(u8 taskId)
         {
             ContestClearGeneralTextWindow();
             StringCopy(gStringVar1, gContestMons[r6].nickname);
-            StringExpandPlaceholders(gStringVar4, gText_0827E2FE);
+            StringExpandPlaceholders(gStringVar4, gText_JudgeLookedAtMonExpectantly);
             Contest_StartTextPrinter(gStringVar4, 1);
             sub_80DD720(2);
             gTasks[taskId].data[10] = 0;
@@ -2056,7 +2035,7 @@ static void sub_80D8B38(u8 taskId)
             }
             else
             {
-                StringCopy(gStringVar3, gUnknown_08587F08[gContestMoves[eContestantStatus[r6].currMove].contestCategory]);
+                StringCopy(gStringVar3, sContestConditions[gContestMoves[eContestantStatus[r6].currMove].contestCategory]);
             }
             if (r3 > 0)
             {
@@ -2075,11 +2054,11 @@ static void sub_80D8B38(u8 taskId)
             else
             {
                 if (r3 < 0)
-                    StringExpandPlaceholders(gStringVar4, gText_0827E73C);
+                    StringExpandPlaceholders(gStringVar4, gText_MonsXDidntGoOverWell);
                 else if (r3 > 0 && eContest.applauseLevel <= 4)
-                    StringExpandPlaceholders(gStringVar4, gText_0827E717);
+                    StringExpandPlaceholders(gStringVar4, gText_MonsXWentOverGreat);
                 else
-                    StringExpandPlaceholders(gStringVar4, gText_0827E76A);
+                    StringExpandPlaceholders(gStringVar4, gText_MonsXGotTheCrowdGoing);
                 Contest_StartTextPrinter(gStringVar4, 1);
                 gTasks[taskId].data[10] = 0;
                 gTasks[taskId].data[11] = 0;
@@ -2189,7 +2168,7 @@ static void sub_80D8B38(u8 taskId)
         StringCopy(gStringVar3, gContestMons[gContestResources->field_10->excitementFreezer].nickname);
         StringCopy(gStringVar1, gContestMons[r6].nickname);
         StringCopy(gStringVar2, gMoveNames[eContestantStatus[r6].currMove]);
-        StringExpandPlaceholders(gStringVar4, gText_0827E7EA);
+        StringExpandPlaceholders(gStringVar4, gText_CrowdContinuesToWatchMon);
         Contest_StartTextPrinter(gStringVar4, TRUE);
         gTasks[taskId].data[0] = 58;
         return;
@@ -2197,7 +2176,7 @@ static void sub_80D8B38(u8 taskId)
         if (!Contest_RunTextPrinters())
         {
             ContestClearGeneralTextWindow();
-            StringExpandPlaceholders(gStringVar4, gText_0827E817);
+            StringExpandPlaceholders(gStringVar4, gText_MonsMoveIsIgnored);
             Contest_StartTextPrinter(gStringVar4, TRUE);
             gTasks[taskId].data[0] = 59;
         }
@@ -2215,7 +2194,7 @@ static void sub_80D8B38(u8 taskId)
         sub_80DC9B4(r6);
         StringCopy(gStringVar1, gContestMons[r6].nickname);
         StringCopy(gStringVar2, gMoveNames[eContestantStatus[r6].currMove]);
-        StringExpandPlaceholders(gStringVar4, gText_0827E58A);
+        StringExpandPlaceholders(gStringVar4, gText_MonWasTooNervousToMove);
         Contest_StartTextPrinter(gStringVar4, TRUE);
         gTasks[taskId].data[0] = 34;
         return;
@@ -2259,7 +2238,7 @@ static void sub_80D8B38(u8 taskId)
     case 31:
         ContestClearGeneralTextWindow();
         StringCopy(gStringVar1, gContestMons[r6].nickname);
-        StringExpandPlaceholders(gStringVar4, gText_0827D56F);
+        StringExpandPlaceholders(gStringVar4, gText_MonWasWatchingOthers);
         Contest_StartTextPrinter(gStringVar4, TRUE);
         gTasks[taskId].data[0] = 32;
         return;
@@ -2427,11 +2406,11 @@ static void sub_80DA3CC(u8 taskId)
 {
     if (gTasks[taskId].data[0] == 0)
     {
-        u8 r4 = eContestantStatus[gContestPlayerMonIndex].attentionLevel;
+        u8 attention = eContestantStatus[gContestPlayerMonIndex].attentionLevel;
 
         ContestClearGeneralTextWindow();
         StringCopy(gStringVar1, gContestMons[gContestPlayerMonIndex].nickname);
-        StringExpandPlaceholders(gStringVar4, gUnknown_08587D90[r4]);
+        StringExpandPlaceholders(gStringVar4, sRoundResultTexts[attention]);
         Contest_StartTextPrinter(gStringVar4, TRUE);
         gTasks[taskId].data[0]++;
     }
@@ -2522,7 +2501,7 @@ static void sub_80DA5E8(u8 taskId)
         ContestDebugPrintBitStrings();
     }
     gContestRngValue = gRngValue;
-    StringExpandPlaceholders(gStringVar4, gText_0827D597);
+    StringExpandPlaceholders(gStringVar4, gText_AllOutOfAppealTime);
     Contest_StartTextPrinter(gStringVar4, TRUE);
     gTasks[taskId].data[2] = 0;
     gTasks[taskId].func = sub_80DA6B4;
@@ -4381,7 +4360,7 @@ static void sub_80DD45C(u8 contestant, u8 stringId)
         StringCopy(gStringVar3, gText_Contest_Hesitancy);
     else
         StringCopy(gStringVar3, gText_Contest_Fear);
-    StringExpandPlaceholders(gStringVar4, gUnknown_08587E10[stringId]);
+    StringExpandPlaceholders(gStringVar4, sAppealResultTexts[stringId]);
     ContestClearGeneralTextWindow();
     Contest_StartTextPrinter(gStringVar4, 1);
 }
