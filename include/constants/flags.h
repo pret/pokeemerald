@@ -95,7 +95,7 @@
 #define FLAG_UNUSED_0x054                    0x54  // Unused Flag
 #define FLAG_UNUSED_0x055                    0x55  // Unused Flag
 
-#define FLAG_LINK_CONTEST_POKE_BALL          0x56
+#define FLAG_HIDE_CONTEST_POKE_BALL          0x56  // Always set after new game, object it hides is added directly
 #define FLAG_MET_RIVAL_MOM                   0x57
 #define FLAG_BIRCH_AIDE_MET                  0x58
 #define FLAG_DECLINED_BIKE                   0x59
@@ -287,7 +287,7 @@
 #define FLAG_RECEIVED_REVIVED_FOSSIL_MON     0x10B
 #define FLAG_SECRET_BASE_REGISTRY_ENABLED    0x10C
 #define FLAG_RECEIVED_TM46                   0x10D
-#define FLAG_CONTEST_SKETCH_CREATED          0x10E
+#define FLAG_CONTEST_SKETCH_CREATED          0x10E  // Set but never read
 #define FLAG_EVIL_TEAM_ESCAPED_STERN_SPOKE   0x10F
 #define FLAG_RECEIVED_EXP_SHARE              0x110
 #define FLAG_POKERUS_EXPLAINED               0x111
@@ -361,7 +361,7 @@
 
 #define FLAG_MET_BATTLE_FRONTIER_BREEDER     0x153
 #define FLAG_MET_BATTLE_FRONTIER_MANIAC      0x154
-#define FLAG_ENTERED_LINK_CONTEST            0x155
+#define FLAG_ENTERED_CONTEST                 0x155
 #define FLAG_MET_SLATEPORT_FANCLUB_CHAIRMAN  0x156
 #define FLAG_MET_BATTLE_FRONTIER_BETTOR      0x157
 #define FLAG_ENABLE_MR_STONE_POKENAV         0x158
@@ -872,7 +872,7 @@
 #define FLAG_HIDE_SEAFLOOR_CAVERN_ROOM_9_MAXIE                      0x33D
 #define FLAG_HIDE_PETALBURG_CITY_WALLYS_UNCLE                       0x33E
 #define FLAG_HIDE_SEAFLOOR_CAVERN_ROOM_9_MAGMA_GRUNTS               0x33F
-#define FLAG_HIDE_LILYCOVE_CONTEST_HALL_BLEND_MASTER_ONLOOKERS      0x340
+#define FLAG_HIDE_LILYCOVE_CONTEST_HALL_BLEND_MASTER                0x340
 #define FLAG_HIDE_GRANITE_CAVE_STEVEN                               0x341
 #define FLAG_HIDE_ROUTE_128_STEVEN                                  0x342
 #define FLAG_HIDE_SLATEPORT_CITY_GABBY_AND_TY                       0x343
@@ -913,7 +913,7 @@
 #define FLAG_HIDE_LANETTES_HOUSE_LANETTE                            0x366
 #define FLAG_HIDE_FALLORBOR_POKEMON_CENTER_LANETTE                  0x367
 #define FLAG_HIDE_TRICK_HOUSE_ENTRANCE_MAN                          0x368
-#define FLAG_HIDE_LILYCOVE_CONTEST_HALL_POKEBLOCK_EXPERT            0x369
+#define FLAG_HIDE_LILYCOVE_CONTEST_HALL_BLEND_MASTER_REPLACEMENT    0x369
 #define FLAG_HIDE_DESERT_UNDERPASS_FOSSIL                           0x36A
 #define FLAG_HIDE_ROUTE_111_PLAYER_DESCENT                          0x36B
 #define FLAG_HIDE_ROUTE_111_DESERT_FOSSIL                           0x36C

@@ -4,7 +4,7 @@ FallarborTown_MapScripts:: @ 81EB1FA
 
 FallarborTown_OnTransition: @ 81EB200
 	setflag FLAG_VISITED_FALLARBOR_TOWN
-	setvar VAR_LINK_CONTEST_ROOM_STATE, 0
+	setvar VAR_CONTEST_HALL_STATE, 0
 	clearflag FLAG_CONTEST_SKETCH_CREATED
 	end
 

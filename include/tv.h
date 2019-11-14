@@ -20,7 +20,7 @@ void IncrementDailyPickedBerries(void);
 void IncrementDailyBattlePoints(u16 delta);
 void sub_80F01B8(void);
 void ReceiveTvShowsData(void *src, u32 size, u8 masterIdx);
-void sub_80EE4DC(struct Pokemon *pokemon, u8 ribbonMonDataIdx);
+void TryPutSpotTheCutiesOnAir(struct Pokemon *pokemon, u8 ribbonMonDataIdx);
 u32 GetPlayerIDAsU32(void);
 bool8 GetPriceReduction(u8 newsKind);
 void sub_80F14F8(TVShow *shows);

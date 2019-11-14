@@ -1410,9 +1410,9 @@ void GiveLeadMonEffortRibbon(void)
     ribbonSet = TRUE;
     leadMon = &gPlayerParty[GetLeadMonIndex()];
     SetMonData(leadMon, MON_DATA_EFFORT_RIBBON, &ribbonSet);
-    if (GetRibbonCount(leadMon) > 4)
+    if (GetRibbonCount(leadMon) > NUM_CUTIES_RIBBONS)
     {
-        sub_80EE4DC(leadMon, 0x47);
+        TryPutSpotTheCutiesOnAir(leadMon, 0x47);
     }
 }
 
@@ -4051,7 +4051,7 @@ void UpdateTrainerFanClubGameClear(void)
 
 u8 sub_813BADC(u8 a0)
 {
-    static const u8 gUnknown_085B3470[] = { 0x02, 0x01, 0x02, 0x01 };
+    static const u8 gUnknown_085B3470[] = { 2, 1, 2, 1 };
 
     if (VarGet(VAR_LILYCOVE_FAN_CLUB_STATE) == 2)
     {
@@ -4078,12 +4078,15 @@ u8 sub_813BADC(u8 a0)
 
 static u16 sub_813BB74(void)
 {
-    static const u8 gUnknown_085B3474[] = { 0x08, 0x09, 0x0a, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f };
+    static const u8 gUnknown_085B3474[NUM_TRAINER_CLUB_MEMBERS] = 
+    { 
+        8, 9, 10, 11, 12, 13, 14, 15 
+    };
 
     u8 i;
     u8 retVal = 0;
 
-    for (i = 0; i < 8; i++)
+    for (i = 0; i < ARRAY_COUNT(gUnknown_085B3474); i++)
     {
         if (!((gSaveBlock1Ptr->vars[VAR_FANCLUB_UNKNOWN_1 - VARS_START] >> gUnknown_085B3474[i]) & 1))
         {
@@ -4101,7 +4104,10 @@ static u16 sub_813BB74(void)
 
 static u16 sub_813BC00(void)
 {
-    static const u8 gUnknown_085B347C[] = { 0x08, 0x0d, 0x0e, 0x0b, 0x0a, 0x0c, 0x0f, 0x09 };
+    static const u8 gUnknown_085B347C[NUM_TRAINER_CLUB_MEMBERS] = 
+    { 
+        8, 13, 14, 11, 10, 12, 15, 9 
+    };
 
     u8 i;
     u8 retVal = 0;
@@ -4111,7 +4117,7 @@ static u16 sub_813BC00(void)
         return 0;
     }
 
-    for (i = 0; i < 8; i++)
+    for (i = 0; i < ARRAY_COUNT(gUnknown_085B347C); i++)
     {
         if (((gSaveBlock1Ptr->vars[VAR_FANCLUB_UNKNOWN_1 - VARS_START] >> gUnknown_085B347C[i]) & 1) != 0)
         {
@@ -4137,7 +4143,7 @@ u16 GetNumMovedLilycoveFanClubMembers(void)
     u8 i;
     u8 retVal = 0;
 
-    for (i = 0; i < 8; i++)
+    for (i = 0; i < NUM_TRAINER_CLUB_MEMBERS; i++)
     {
         if (((gSaveBlock1Ptr->vars[VAR_FANCLUB_UNKNOWN_1 - VARS_START] >> (i + 8)) & 1) != 0)
         {
@@ -4160,7 +4166,7 @@ void UpdateMovedLilycoveFanClubMembers(void)
                 gSaveBlock1Ptr->vars[VAR_FANCLUB_UNKNOWN_2 - VARS_START] = gSaveBlock2Ptr->playTimeHours;
                 break;
             }
-            else if (i == 8)
+            else if (i == NUM_TRAINER_CLUB_MEMBERS)
             {
                 break;
             }
@@ -4266,14 +4272,10 @@ void sub_813BF10(void)
     if (VarGet(VAR_LILYCOVE_FAN_CLUB_STATE) == 2)
     {
         sub_813BA30();
-        if (gBattleOutcome == 1)
-        {
+        if (gBattleOutcome == B_OUTCOME_WON)
             sub_813BB74();
-        }
         else
-        {
             sub_813BC00();
-        }
     }
 }
 

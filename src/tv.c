@@ -2357,7 +2357,7 @@ void sub_80EE44C(u8 nMonsCaught, u8 nPkblkUsed)
     }
 }
 
-void sub_80EE4DC(struct Pokemon *pokemon, u8 ribbonMonDataIdx)
+void TryPutSpotTheCutiesOnAir(struct Pokemon *pokemon, u8 ribbonMonDataIdx)
 {
     TVShow *show;
 
