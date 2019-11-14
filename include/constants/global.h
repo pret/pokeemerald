@@ -48,6 +48,7 @@
 #define EVENT_OBJECT_TEMPLATES_COUNT 64
 #define DECOR_MAX_SECRET_BASE 16
 #define DECOR_MAX_PLAYERS_HOUSE 12
+#define APPRENTICE_COUNT 4
 
 #define PYRAMID_BAG_ITEMS_COUNT 10
 #define HALL_FACILITIES_COUNT 9 // 7 facilities for single mode + tower double mode + tower multi mode.
@@ -63,6 +64,7 @@
 #define POKEMON_NAME_LENGTH 10
 #define PLAYER_NAME_LENGTH 7
 #define MAIL_WORDS_COUNT 9
+#define EASY_CHAT_BATTLE_WORDS_COUNT 6
 #define MOVE_NAME_LENGTH 12
 
 #define MALE 0

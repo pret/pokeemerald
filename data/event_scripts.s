@@ -1,4 +1,5 @@
 #include "constants/global.h"
+#include "constants/apprentice.h"
 #include "constants/battle.h"
 #include "constants/battle_pike.h"
 #include "constants/battle_pyramid.h"
@@ -1110,6 +1111,7 @@ Common_EventScript_LegendaryFlewAway:: @ 8273776
 	.include "data/scripts/lilycove_lady.inc"
 	.include "data/text/match_call.inc"
 	.include "data/scripts/apprentice.inc"
+	.include "data/text/apprentice.inc"
 	.include "data/text/battle_dome.inc"
 	.include "data/scripts/battle_pike.inc"
 	.include "data/text/blend_master.inc"

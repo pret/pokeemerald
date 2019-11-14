@@ -1113,14 +1113,14 @@ void GetPlayerHallRecords(struct PlayerHallRecords *dst)
     }
 }
 
-static bool32 sub_80E841C(struct Apprentice *arg0, struct Apprentice *arg1)
+static bool32 sub_80E841C(struct Apprentice *mixApprentice, struct Apprentice *apprentices)
 {
     s32 i;
 
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < APPRENTICE_COUNT; i++)
     {
-        if (GetTrainerId(arg0->playerId) == GetTrainerId(arg1[i].playerId)
-            && arg0->number == arg1[i].number)
+        if (GetTrainerId(mixApprentice->playerId) == GetTrainerId(apprentices[i].playerId)
+            && mixApprentice->number == apprentices[i].number)
         {
             return TRUE;
         }
