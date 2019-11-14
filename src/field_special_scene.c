@@ -36,13 +36,13 @@ static const s8 gTruckCamera_HorizontalTable[] = {0, 0, 0, 0, 0, 0, 0, 0, 1, 2, 
 
 static const u8 sSSTidalSailEastMovementScript[] = 
 {
-    MOVEMENT_TYPE_ROTATE_CLOCKWISE, 
+    MOVEMENT_ACTION_WALK_FAST_RIGHT, 
     MOVEMENT_ACTION_STEP_END
 };
 
 static const u8 sSSTidalSailWestMovementScript[] = 
 {
-    MOVEMENT_TYPE_ROTATE_COUNTERCLOCKWISE, 
+    MOVEMENT_ACTION_WALK_FAST_LEFT, 
     MOVEMENT_ACTION_STEP_END
 };
 
