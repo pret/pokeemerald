@@ -1312,11 +1312,11 @@ extern const u8 gText_Are2[];
 extern const u8 gText_123Dot[][3];
 
 // Frontier util.
-extern const u8 gUnknown_085ED164[];
-extern const u8 gUnknown_085ED170[];
-extern const u8 gUnknown_085ED17C[];
-extern const u8 gUnknown_085ED188[];
-extern const u8 gUnknown_085ED190[];
+extern const u8 gText_FacilitySingle[];
+extern const u8 gText_FacilityDouble[];
+extern const u8 gText_FacilityMulti[];
+extern const u8 gText_FacilityLink[];
+extern const u8 gText_Facility[];
 
 extern const u8 gText_RecordsLv50[];
 extern const u8 gText_RecordsOpenLevel[];

@@ -680,38 +680,38 @@ const u16 gFrontierBannedSpecies[] =
     SPECIES_KYOGRE, SPECIES_GROUDON, SPECIES_RAYQUAZA, SPECIES_JIRACHI, SPECIES_DEOXYS, 0xFFFF
 };
 
-static const u8 *const gUnknown_08611CB0[][2] =
+static const u8 *const sRecordsWindowChallengeTexts[][2] =
 {
-    {gText_BattleTower2,  gUnknown_085ED164},
-    {gText_BattleTower2,  gUnknown_085ED170},
-    {gText_BattleTower2,  gUnknown_085ED17C},
-    {gText_BattleDome,    gUnknown_085ED164},
-    {gText_BattlePalace,  gUnknown_085ED164},
-    {gText_BattleArena,   gUnknown_085ED190},
-    {gText_BattleFactory, gUnknown_085ED164},
-    {gText_BattlePike,    gUnknown_085ED190},
-    {gText_BattlePyramid, gUnknown_085ED190},
-    {gText_BattleTower2,  gUnknown_085ED188},
+    [RANKING_HALL_BATTLE_TOWER_SINGLES] = {gText_BattleTower2,  gText_FacilitySingle},
+    [RANKING_HALL_BATTLE_TOWER_DOUBLES] = {gText_BattleTower2,  gText_FacilityDouble},
+    [RANKING_HALL_BATTLE_TOWER_MULTIS]  = {gText_BattleTower2,  gText_FacilityMulti},
+    [RANKING_HALL_BATTLE_DOME]          = {gText_BattleDome,    gText_FacilitySingle},
+    [RANKING_HALL_BATTLE_PALACE]        = {gText_BattlePalace,  gText_FacilitySingle},
+    [RANKING_HALL_BATTLE_ARENA]         = {gText_BattleArena,   gText_Facility},
+    [RANKING_HALL_BATTLE_FACTORY]       = {gText_BattleFactory, gText_FacilitySingle},
+    [RANKING_HALL_BATTLE_PIKE]          = {gText_BattlePike,    gText_Facility},
+    [RANKING_HALL_BATTLE_PYRAMID]       = {gText_BattlePyramid, gText_Facility},
+    [RANKING_HALL_BATTLE_TOWER_LINK]    = {gText_BattleTower2,  gText_FacilityLink},
 };
 
-static const u8 *const gLevelModeText[] =
+static const u8 *const sLevelModeText[] =
 {
     gText_RecordsLv50,
     gText_RecordsOpenLevel,
 };
 
-static const u8 *const gHallFacilityToRecordsText[] =
+static const u8 *const sHallFacilityToRecordsText[] =
 {
-    gText_FrontierFacilityWinStreak,
-    gText_FrontierFacilityWinStreak,
-    gText_FrontierFacilityWinStreak,
-    gText_FrontierFacilityClearStreak,
-    gText_FrontierFacilityWinStreak,
-    gText_FrontierFacilityKOsStreak,
-    gText_FrontierFacilityWinStreak,
-    gText_FrontierFacilityRoomsCleared,
-    gText_FrontierFacilityFloorsCleared,
-    gText_FrontierFacilityWinStreak,
+    [RANKING_HALL_BATTLE_TOWER_SINGLES] = gText_FrontierFacilityWinStreak,
+    [RANKING_HALL_BATTLE_TOWER_DOUBLES] = gText_FrontierFacilityWinStreak,
+    [RANKING_HALL_BATTLE_TOWER_MULTIS]  = gText_FrontierFacilityWinStreak,
+    [RANKING_HALL_BATTLE_DOME]          = gText_FrontierFacilityClearStreak,
+    [RANKING_HALL_BATTLE_PALACE]        = gText_FrontierFacilityWinStreak,
+    [RANKING_HALL_BATTLE_ARENA]         = gText_FrontierFacilityKOsStreak,
+    [RANKING_HALL_BATTLE_FACTORY]       = gText_FrontierFacilityWinStreak,
+    [RANKING_HALL_BATTLE_PIKE]          = gText_FrontierFacilityRoomsCleared,
+    [RANKING_HALL_BATTLE_PYRAMID]       = gText_FrontierFacilityFloorsCleared,
+    [RANKING_HALL_BATTLE_TOWER_LINK]    = gText_FrontierFacilityWinStreak,
 };
 
 static const u16 gFacilityToBrainTrainerId[] =
@@ -2220,8 +2220,8 @@ static void Print1PRecord(s32 position, s32 x, s32 y, struct RankingHall1P *hall
         if (winStreak > 9999)
             winStreak = 9999;
         ConvertIntToDecimalStringN(gStringVar2, winStreak, STR_CONV_MODE_RIGHT_ALIGN, 4);
-        StringExpandPlaceholders(gStringVar4, gHallFacilityToRecordsText[hallFacilityId]);
-        AddTextPrinterParameterized(gRecordsWindowId, 1, gStringVar4, GetStringRightAlignXOffset(1, gHallFacilityToRecordsText[hallFacilityId], 0xC8), (8 * (y + 5 * position)) + 1, TEXT_SPEED_FF, NULL);
+        StringExpandPlaceholders(gStringVar4, sHallFacilityToRecordsText[hallFacilityId]);
+        AddTextPrinterParameterized(gRecordsWindowId, 1, gStringVar4, GetStringRightAlignXOffset(1, sHallFacilityToRecordsText[hallFacilityId], 0xC8), (8 * (y + 5 * position)) + 1, TEXT_SPEED_FF, NULL);
     }
 }
 
@@ -2247,8 +2247,8 @@ static void Print2PRecord(s32 position, s32 x, s32 y, struct RankingHall2P *hall
         if (winStreak > 9999)
             winStreak = 9999;
         ConvertIntToDecimalStringN(gStringVar2, winStreak, STR_CONV_MODE_RIGHT_ALIGN, 4);
-        StringExpandPlaceholders(gStringVar4, gHallFacilityToRecordsText[9]);
-        AddTextPrinterParameterized(gRecordsWindowId, 1, gStringVar4, GetStringRightAlignXOffset(1, gHallFacilityToRecordsText[9], 0xC8), (8 * (y + 5 * position)) + 1, TEXT_SPEED_FF, NULL);
+        StringExpandPlaceholders(gStringVar4, sHallFacilityToRecordsText[RANKING_HALL_BATTLE_TOWER_LINK]);
+        AddTextPrinterParameterized(gRecordsWindowId, 1, gStringVar4, GetStringRightAlignXOffset(1, sHallFacilityToRecordsText[RANKING_HALL_BATTLE_TOWER_LINK], 0xC8), (8 * (y + 5 * position)) + 1, TEXT_SPEED_FF, NULL);
     }
 }
 
@@ -2327,12 +2327,12 @@ static void PrintHallRecords(s32 hallFacilityId, s32 lvlMode)
     struct RankingHall1P records1P[3];
     struct RankingHall2P records2P[3];
 
-    StringCopy(gStringVar1, gUnknown_08611CB0[hallFacilityId][0]);
-    StringExpandPlaceholders(gStringVar4, gUnknown_08611CB0[hallFacilityId][1]);
+    StringCopy(gStringVar1, sRecordsWindowChallengeTexts[hallFacilityId][0]);
+    StringExpandPlaceholders(gStringVar4, sRecordsWindowChallengeTexts[hallFacilityId][1]);
     AddTextPrinterParameterized(gRecordsWindowId, 1, gStringVar4, 0, 1, TEXT_SPEED_FF, NULL);
-    x = GetStringRightAlignXOffset(1, gLevelModeText[lvlMode], 0xD0);
-    AddTextPrinterParameterized(gRecordsWindowId, 1, gLevelModeText[lvlMode], x, 1, TEXT_SPEED_FF, NULL);
-    if (hallFacilityId == HALL_FACILITIES_COUNT)
+    x = GetStringRightAlignXOffset(1, sLevelModeText[lvlMode], 0xD0);
+    AddTextPrinterParameterized(gRecordsWindowId, 1, sLevelModeText[lvlMode], x, 1, TEXT_SPEED_FF, NULL);
+    if (hallFacilityId == RANKING_HALL_BATTLE_TOWER_LINK)
     {
         gSaveBlock2Ptr->frontier.opponentName[0][PLAYER_NAME_LENGTH] = EOS;
         gSaveBlock2Ptr->frontier.opponentName[1][PLAYER_NAME_LENGTH] = EOS;
