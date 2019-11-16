@@ -61,7 +61,7 @@ BattleFrontier_BattlePalaceLobby_EventScript_24D840:: @ 824D840
 	msgbox BattleFrontier_BattlePalaceLobby_Text_24EEB9, MSGBOX_DEFAULT
 	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_11
 	special CallFrontierUtilFunc
-	msgbox BattleFrontier_BattlePalaceLobby_Text_241520, 9
+	msgbox BattleFrontier_Text_ObtainedXBattlePoints, MSGBOX_GETPOINTS
 	message BattleFrontier_BattlePalaceLobby_Text_24E4F7
 	waitmessage
 	call BattleFrontier_BattlePalaceLobby_EventScript_24D8A1

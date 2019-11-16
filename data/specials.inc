@@ -243,7 +243,7 @@ gSpecials:: @ 81DBA64
 	def_special UpdateCyclingRoadState
 	def_special GetLeadMonFriendshipScore
 	def_special CallFrontierUtilFunc
-	def_special sub_8161F74
+	def_special CallBattleTowerFunc
 	def_special CallBattleDomeFunction
 	def_special CallBattlePalaceFunction
 	def_special CopyEReaderTrainerGreeting

@@ -1,9 +1,10 @@
 #include "constants/global.h"
 #include "constants/battle.h"
+#include "constants/battle_frontier.h"
 #include "constants/battle_pike.h"
 #include "constants/battle_pyramid.h"
-#include "constants/battle_frontier.h"
 #include "constants/battle_setup.h"
+#include "constants/battle_tower.h"
 #include "constants/berry.h"
 #include "constants/cable_club.h"
 #include "constants/coins.h"
@@ -88,7 +89,7 @@ gStdScripts:: @ 81DC2A0
 	.4byte Std_MsgboxAutoclose
 	.4byte Std_ObtainDecoration
 	.4byte Std_RegisteredInMatchCall
-	.4byte Std_9
+	.4byte Std_MsgboxGetPoints
 	.4byte Std_10
 gStdScripts_End:: @ 81DC2CC
 
@@ -607,7 +608,7 @@ Std_MsgboxYesNo: @ 8271332
 	yesnobox 20, 8
 	return
 
-Std_9: @ 827133C
+Std_MsgboxGetPoints: @ 827133C
 	message 0x0
 	playfanfare MUS_ME_POINTGET
 	waitfanfare

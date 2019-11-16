@@ -12,8 +12,8 @@ BattleFrontier_BattleTowerBattleRoom2_MapScript1_248EF8: @ 8248EF8
 	end
 
 BattleFrontier_BattleTowerBattleRoom2_EventScript_248F0F:: @ 8248F0F
-	setvar VAR_0x8004, 14
-	special sub_8161F74
+	setvar VAR_0x8004, BATTLE_TOWER_FUNC_14
+	special CallBattleTowerFunc
 	checkplayergender
 	compare VAR_RESULT, FEMALE
 	goto_if_eq BattleFrontier_BattleTowerBattleRoom2_EventScript_248F29
@@ -63,8 +63,8 @@ BattleFrontier_BattleTowerBattleRoom2_EventScript_248F4D:: @ 8248F4D
 	goto BattleFrontier_BattleTowerBattleRoom2_EventScript_249143
 
 BattleFrontier_BattleTowerBattleRoom2_EventScript_248FB4:: @ 8248FB4
-	setvar VAR_0x8004, 3
-	special sub_8161F74
+	setvar VAR_0x8004, BATTLE_TOWER_FUNC_CHOOSE_TRAINER
+	special CallBattleTowerFunc
 	addobject 1
 	addobject 4
 	applymovement 1, BattleFrontier_BattleTowerBattleRoom2_Movement_249528
@@ -72,17 +72,17 @@ BattleFrontier_BattleTowerBattleRoom2_EventScript_248FB4:: @ 8248FB4
 	waitmovement 0
 	compare VAR_FRONTIER_BATTLE_MODE, 3
 	goto_if_eq BattleFrontier_BattleTowerBattleRoom2_EventScript_249026
-	setvar VAR_0x8004, 7
+	setvar VAR_0x8004, BATTLE_TOWER_FUNC_7
 	setvar VAR_0x8005, 0
-	special sub_8161F74
+	special CallBattleTowerFunc
 	delay 15
 	applymovement 1, BattleFrontier_BattleTowerBattleRoom2_Movement_249545
 	waitmovement 0
 	msgbox gStringVar4, MSGBOX_DEFAULT
 	waitmessage
-	setvar VAR_0x8004, 7
+	setvar VAR_0x8004, BATTLE_TOWER_FUNC_7
 	setvar VAR_0x8005, 1
-	special sub_8161F74
+	special CallBattleTowerFunc
 	applymovement 4, BattleFrontier_BattleTowerBattleRoom2_Movement_249545
 	waitmovement 0
 	msgbox gStringVar4, MSGBOX_DEFAULT
@@ -90,18 +90,18 @@ BattleFrontier_BattleTowerBattleRoom2_EventScript_248FB4:: @ 8248FB4
 	goto BattleFrontier_BattleTowerBattleRoom2_EventScript_249069
 
 BattleFrontier_BattleTowerBattleRoom2_EventScript_249026:: @ 8249026
-	setvar VAR_0x8004, 7
+	setvar VAR_0x8004, BATTLE_TOWER_FUNC_7
 	setvar VAR_0x8005, 0
-	special sub_8161F74
+	special CallBattleTowerFunc
 	delay 15
 	applymovement 1, BattleFrontier_BattleTowerBattleRoom2_Movement_249545
 	waitmovement 0
 	messageautoscroll 0x2021fc4
 	waitmessage
 	delay 48
-	setvar VAR_0x8004, 7
+	setvar VAR_0x8004, BATTLE_TOWER_FUNC_7
 	setvar VAR_0x8005, 1
-	special sub_8161F74
+	special CallBattleTowerFunc
 	applymovement 4, BattleFrontier_BattleTowerBattleRoom2_Movement_249545
 	waitmovement 0
 	messageautoscroll 0x2021fc4
@@ -118,17 +118,17 @@ BattleFrontier_BattleTowerBattleRoom2_EventScript_24907E:: @ 824907E
 	setvar VAR_0x8005, 0
 	setvar VAR_0x8006, 4
 	special CallFrontierUtilFunc
-	setvar VAR_0x8004, 2
+	setvar VAR_0x8004, BATTLE_TOWER_FUNC_2
 	setvar VAR_0x8005, 3
-	special sub_8161F74
+	special CallBattleTowerFunc
 	setvar VAR_0x8004, 3
 	special sub_813BF7C
 	goto BattleFrontier_BattleTowerBattleRoom2_EventScript_2421B8
 
 BattleFrontier_BattleTowerBattleRoom2_EventScript_2490AA:: @ 82490AA
 	call BattleFrontier_BattleTowerBattleRoom2_EventScript_241EBA
-	setvar VAR_0x8004, 4
-	special sub_8161F74
+	setvar VAR_0x8004, BATTLE_TOWER_FUNC_4
+	special CallBattleTowerFunc
 	switch VAR_RESULT
 	case 7, BattleFrontier_BattleTowerBattleRoom2_EventScript_2492AF
 	applymovement 4, BattleFrontier_BattleTowerBattleRoom2_Movement_249534
@@ -235,9 +235,9 @@ BattleFrontier_BattleTowerBattleRoom2_EventScript_2492AF:: @ 82492AF
 	setvar VAR_0x8005, 0
 	setvar VAR_0x8006, 3
 	special CallFrontierUtilFunc
-	setvar VAR_0x8004, 2
+	setvar VAR_0x8004, BATTLE_TOWER_FUNC_2
 	setvar VAR_0x8005, 3
-	special sub_8161F74
+	special CallBattleTowerFunc
 	setvar VAR_0x8004, 3
 	special sub_813BF7C
 	goto BattleFrontier_BattleTowerBattleRoom2_EventScript_2421B8
@@ -245,9 +245,9 @@ BattleFrontier_BattleTowerBattleRoom2_EventScript_2492AF:: @ 82492AF
 BattleFrontier_BattleTowerBattleRoom2_EventScript_2492DB:: @ 82492DB
 	message BattleFrontier_BattleTowerBattleRoom2_Text_242426
 	waitmessage
-	setvar VAR_0x8004, 6
+	setvar VAR_0x8004, BATTLE_TOWER_FUNC_SAVE
 	setvar VAR_0x8005, 2
-	special sub_8161F74
+	special CallBattleTowerFunc
 	playse SE_SAVE
 	waitse
 	fadescreen 1

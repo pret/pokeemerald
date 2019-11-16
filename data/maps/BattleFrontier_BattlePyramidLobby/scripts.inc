@@ -78,7 +78,7 @@ BattleFrontier_BattlePyramidLobby_EventScript_2507DA:: @ 82507DA
 	msgbox BattleFrontier_BattlePyramidLobby_Text_252662, MSGBOX_DEFAULT
 	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_11
 	special CallFrontierUtilFunc
-	msgbox BattleFrontier_BattlePyramidLobby_Text_241520, 9
+	msgbox BattleFrontier_Text_ObtainedXBattlePoints, MSGBOX_GETPOINTS
 	message BattleFrontier_BattlePyramidLobby_Text_251A77
 	waitmessage
 	setvar VAR_0x8004, BATTLE_PYRAMID_FUNC_SET_REWARD

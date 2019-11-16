@@ -48,7 +48,7 @@ extern u16 gUnknown_03006298[];
 extern const struct BattleFrontierTrainer *gFacilityTrainers;
 extern const struct FacilityMon *gFacilityTrainerMons;
 
-void sub_8161F74(void);
+void CallBattleTowerFunc(void);
 u16 sub_8162548(u8 challengeNum, u8 battleNum);
 void SetBattleFacilityTrainerGfxId(u16 trainerId, u8 tempVarId);
 void SetEReaderTrainerGfxId(void);

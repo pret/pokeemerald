@@ -65,7 +65,7 @@ BattleFrontier_BattlePikeLobby_EventScript_25B78D:: @ 825B78D
 	msgbox BattleFrontier_BattlePikeLobby_Text_25C3D9, MSGBOX_DEFAULT
 	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_11
 	special CallFrontierUtilFunc
-	msgbox BattleFrontier_BattlePikeLobby_Text_241520, 9
+	msgbox BattleFrontier_Text_ObtainedXBattlePoints, MSGBOX_GETPOINTS
 	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_8
 	special CallFrontierUtilFunc
 	setvar VAR_0x8004, BATTLE_PIKE_FUNC_GET_DATA
