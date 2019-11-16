@@ -129,7 +129,7 @@ BattleFrontier_Lounge3_EventScript_WonChallenge:: @ 8261F2E
 	compare VAR_FRONTIER_GAMBLER_AMOUNT_BET, FRONTIER_GAMBLER_BET_10
 	call_if_eq BattleFrontier_Lounge3_EventScript_RewardBet10
 	compare VAR_FRONTIER_GAMBLER_AMOUNT_BET, FRONTIER_GAMBLER_BET_15
-	call_if_eq BattleFrontier_Lounge3_EventScript_RewardBet20
+	call_if_eq BattleFrontier_Lounge3_EventScript_RewardBet15
 	msgbox BattleFrontier_Lounge3_Text_ObtainedBattlePoints, 9
 	special GiveFrontierBattlePoints
 	msgbox BattleFrontier_Lounge3_Text_ThinkOfMeForAnotherChallenge, MSGBOX_DEFAULT
@@ -153,7 +153,7 @@ BattleFrontier_Lounge3_EventScript_RewardBet10:: @ 8261F8A
 	setvar VAR_0x8004, (BET_AMOUNT_10 * 2)
 	return
 
-BattleFrontier_Lounge3_EventScript_RewardBet20:: @ 8261F94
+BattleFrontier_Lounge3_EventScript_RewardBet15:: @ 8261F94
 	buffernumberstring 0, (BET_AMOUNT_15 * 2)
 	setvar VAR_0x8004, (BET_AMOUNT_15 * 2)
 	return
