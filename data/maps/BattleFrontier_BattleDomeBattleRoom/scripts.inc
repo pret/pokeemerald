@@ -78,9 +78,9 @@ BattleFrontier_BattleDomeBattleRoom_EventScript_24BD82:: @ 824BD82
 	applymovement 13, BattleFrontier_BattleDomeBattleRoom_Movement_24C77B
 	applymovement 15, BattleFrontier_BattleDomeBattleRoom_Movement_24C789
 	waitmovement 0
-	setvar VAR_0x8004, 7
+	setvar VAR_0x8004, BATTLE_TOWER_FUNC_7
 	setvar VAR_0x8005, 0
-	special sub_8161F74
+	special CallBattleTowerFunc
 	msgbox gStringVar4, MSGBOX_DEFAULT
 	closemessage
 	setvar VAR_0x8004, 5

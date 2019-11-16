@@ -54,8 +54,8 @@ BattleFrontier_BattlePalaceBattleRoom_EventScript_24F8B5:: @ 824F8B5
 	waitmovement 0
 
 BattleFrontier_BattlePalaceBattleRoom_EventScript_24F8BF:: @ 824F8BF
-	setvar VAR_0x8004, 3
-	special sub_8161F74
+	setvar VAR_0x8004, BATTLE_TOWER_FUNC_CHOOSE_TRAINER
+	special CallBattleTowerFunc
 	addobject 2
 	applymovement 2, BattleFrontier_BattlePalaceBattleRoom_Movement_24FEA1
 	waitmovement 0

@@ -41,8 +41,8 @@ VerdanturfTown_BattleTentBattleRoom_EventScript_202348:: @ 8202348
 	goto_if_ne VerdanturfTown_BattleTentBattleRoom_EventScript_20243C
 
 VerdanturfTown_BattleTentBattleRoom_EventScript_20236F:: @ 820236F
-	setvar VAR_0x8004, 3
-	special sub_8161F74
+	setvar VAR_0x8004, BATTLE_TOWER_FUNC_CHOOSE_TRAINER
+	special CallBattleTowerFunc
 	addobject 2
 	applymovement 2, VerdanturfTown_BattleTentBattleRoom_Movement_20257B
 	waitmovement 0

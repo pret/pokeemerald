@@ -73,7 +73,7 @@ BattleFrontier_BattleDomeLobby_EventScript_2498C9:: @ 82498C9
 	msgbox BattleFrontier_BattleDomeLobby_Text_24ADB1, MSGBOX_DEFAULT
 	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_11
 	special CallFrontierUtilFunc
-	msgbox BattleFrontier_BattleDomeLobby_Text_241520, 9
+	msgbox BattleFrontier_Text_ObtainedXBattlePoints, MSGBOX_GETPOINTS
 	message BattleFrontier_BattleDomeLobby_Text_24A5D6
 	waitmessage
 	special LoadPlayerParty
@@ -482,16 +482,17 @@ BattleFrontier_BattleDomeLobby_EventScript_249E10:: @ 8249E10
 	msgbox BattleFrontier_BattleDomeLobby_Text_24ACD3, MSGBOX_NPC
 	end
 
-BattleFrontier_OutsideWest_EventScript_249E19:: @ 8249E19
+@ A few OutsideWest event scripts are inserted here instead, two of which are unused
+BattleFrontier_OutsideWest_EventScript_Man3:: @ 8249E19
 	msgbox BattleFrontier_OutsideWest_Text_24AB06, MSGBOX_NPC
 	end
 
-BattleFrontier_OutsideWest_EventScript_249E22:: @ 8249E22
-	msgbox BattleFrontier_OutsideWest_Text_24AB44, MSGBOX_NPC
+BattleFrontier_OutsideWest_EventScript_BattleDomeSign2:: @ 8249E22
+	msgbox BattleFrontier_OutsideWest_Text_BattleDomeSign2, MSGBOX_NPC
 	end
 
-BattleFrontier_OutsideWest_EventScript_249E2B:: @ 8249E2B
-	msgbox BattleFrontier_OutsideWest_Text_24AB75, MSGBOX_NPC
+BattleFrontier_OutsideWest_EventScript_UnderConstructionSign:: @ 8249E2B
+	msgbox BattleFrontier_OutsideWest_Text_QuestionMarkUnderConstruction, MSGBOX_NPC
 	end
 
 BattleFrontier_BattleDomeLobby_EventScript_249E34:: @ 8249E34
@@ -699,11 +700,11 @@ BattleFrontier_OutsideWest_Text_24AB06: @ 824AB06
 	.string "The BATTLE FRONTIER…\n"
 	.string "I've long dreamed about a place like it.$"
 
-BattleFrontier_OutsideWest_Text_24AB44: @ 824AB44
+BattleFrontier_OutsideWest_Text_BattleDomeSign2: @ 824AB44
 	.string "The BATTLE DOME\n"
 	.string "Become the Unbeatable Superstar!$"
 
-BattleFrontier_OutsideWest_Text_24AB75: @ 824AB75
+BattleFrontier_OutsideWest_Text_QuestionMarkUnderConstruction: @ 824AB75
 	.string "The ??????\n"
 	.string "Under Construction!$"
 
