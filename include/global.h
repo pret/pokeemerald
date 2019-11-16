@@ -394,7 +394,7 @@ struct BattleFrontier
     /*0xEE0*/ u8 trainerFlags;
     /*0xEE1*/ u8 opponentName[2][PLAYER_NAME_LENGTH + 1];
     /*0xEF1*/ u8 field_EF1[2][4];
-    /*0xEF9*/ u8 neverRead:7;
+    /*0xEF9*/ u8 unk_EF9:7;
     /*0xEF9*/ u8 savedGame:1;
     /*0xEFA*/ u8 field_EFA;
     /*0xEFB*/ u8 field_EFB;
@@ -806,7 +806,7 @@ struct SaveTrainerHill
 {
     /*0x3D64*/ u32 timer;
     /*0x3D68*/ u32 bestTime;
-    /*0x3D6C*/ u8 neverRead;
+    /*0x3D6C*/ u8 unk_3D6C;
     /*0x3D6D*/ u8 unused;
     /*0x3D6E*/ u16 receivedPrize:1;
     /*0x3D6E*/ u16 checkedFinalTime:1;
