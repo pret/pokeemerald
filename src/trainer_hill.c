@@ -447,9 +447,8 @@ static void GiveChallengePrize(void)
     }
 }
 
-// Either the bestTime and Timer field names are incorrect or something weird is going on
-// Because when gSpecialVar_Result == 0 after this call the player is complimented on their fast time
-// And when gSpecialVar_Result == 1 theyre told that they werent very quick
+// If bestTime > timer, the challenge was completed faster and its a new record
+// Otherwise the owner says it was a slow time and to complete it faster next time
 static void CheckFinalTime(void)
 {
     if (gSaveBlock1Ptr->trainerHill.checkedFinalTime)
