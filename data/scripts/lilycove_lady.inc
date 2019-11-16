@@ -298,7 +298,7 @@ LilycoveCity_PokemonCenter_1F_EventScript_GivePrize:: @ 82A8724
     special BufferQuizPrizeItem
     special SetQuizLadyState_Complete
     giveitem_std VAR_0x8005
-    compare VAR_RESULT, 0
+    compare VAR_RESULT, FALSE
     goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_NoSpaceForQuizPrize
     goto LilycoveCity_PokemonCenter_1F_EventScript_AskMakeQuiz
     end

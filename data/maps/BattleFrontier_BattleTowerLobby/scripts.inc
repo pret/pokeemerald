@@ -10,7 +10,7 @@ BattleFrontier_BattleTowerLobby_MapScript1_23E690: @ 823E690
 	end
 
 BattleFrontier_BattleTowerLobby_MapScript1_23E694: @ 823E694
-	call BattleFrontier_BattleTowerLobby_EventScript_28CC84
+	call BattleFrontier_BattleTowerLobby_EventScript_ShowOrHideReporter
 	setvar VAR_0x8004, 10
 	special CallApprenticeFunction
 	compare VAR_0x8004, 0
