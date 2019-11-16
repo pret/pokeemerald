@@ -2099,7 +2099,7 @@ void ShowFrontierManiacMessage(void)
             BattleFrontier_Lounge2_Text_MultiBattleAdvice, 
             BattleFrontier_Lounge2_Text_MultiBattleAdvice 
         },
-        [FRONTIER_MANIAC_BATTLE_TOWER_LINK_MULTIS] =
+        [FRONTIER_MANIAC_BATTLE_TOWER_LINK] =
         { 
             BattleFrontier_Lounge2_Text_LinkMultiBattleAdvice, 
             BattleFrontier_Lounge2_Text_LinkMultiBattleAdvice, 
@@ -2145,16 +2145,16 @@ void ShowFrontierManiacMessage(void)
 
     static const u8 sFrontierManiacStreakThresholds[][FRONTIER_MANIAC_MESSAGE_COUNT - 1] = 
     {
-        [FRONTIER_MANIAC_BATTLE_TOWER_SINGLES]     = { 21, 56 },
-        [FRONTIER_MANIAC_BATTLE_TOWER_DOUBLES]     = { 21, 35 },
-        [FRONTIER_MANIAC_BATTLE_TOWER_MULTIS]      = { 255, 255 },
-        [FRONTIER_MANIAC_BATTLE_TOWER_LINK_MULTIS] = { 255, 255 },
-        [FRONTIER_MANIAC_BATTLE_DOME]              = { 2, 4 },
-        [FRONTIER_MANIAC_BATTLE_FACTORY]           = { 7, 21 },
-        [FRONTIER_MANIAC_BATTLE_PALACE]            = { 7, 21 },
-        [FRONTIER_MANIAC_BATTLE_ARENA]             = { 14, 28 },
-        [FRONTIER_MANIAC_BATTLE_PIKE]              = { 13, 112 }, //BUG: 112 (0x70) is probably a mistake; the Pike Queen is battled twice well before that
-        [FRONTIER_MANIAC_BATTLE_PYRAMID]           = { 7, 56 }
+        [FRONTIER_MANIAC_BATTLE_TOWER_SINGLES] = { 21, 56 },
+        [FRONTIER_MANIAC_BATTLE_TOWER_DOUBLES] = { 21, 35 },
+        [FRONTIER_MANIAC_BATTLE_TOWER_MULTIS]  = { 255, 255 },
+        [FRONTIER_MANIAC_BATTLE_TOWER_LINK]    = { 255, 255 },
+        [FRONTIER_MANIAC_BATTLE_DOME]          = { 2, 4 },
+        [FRONTIER_MANIAC_BATTLE_FACTORY]       = { 7, 21 },
+        [FRONTIER_MANIAC_BATTLE_PALACE]        = { 7, 21 },
+        [FRONTIER_MANIAC_BATTLE_ARENA]         = { 14, 28 },
+        [FRONTIER_MANIAC_BATTLE_PIKE]          = { 13, 112 }, //BUG: 112 (0x70) is probably a mistake; the Pike Queen is battled twice well before that
+        [FRONTIER_MANIAC_BATTLE_PYRAMID]       = { 7, 56 }
     };
 
     u8 i;
@@ -2166,7 +2166,7 @@ void ShowFrontierManiacMessage(void)
         case FRONTIER_MANIAC_BATTLE_TOWER_SINGLES:
         case FRONTIER_MANIAC_BATTLE_TOWER_DOUBLES:
         case FRONTIER_MANIAC_BATTLE_TOWER_MULTIS:
-        case FRONTIER_MANIAC_BATTLE_TOWER_LINK_MULTIS:
+        case FRONTIER_MANIAC_BATTLE_TOWER_LINK:
             if (gSaveBlock2Ptr->frontier.towerWinStreaks[facility][FRONTIER_LVL_50] 
                 >= gSaveBlock2Ptr->frontier.towerWinStreaks[facility][FRONTIER_LVL_OPEN])
             {

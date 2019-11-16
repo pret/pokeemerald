@@ -1220,11 +1220,11 @@ const u8 gText_BattleArena[] = _("BATTLE ARENA");
 const u8 gText_BattlePike[] = _("BATTLE PIKE");
 const u8 gText_BattlePyramid[] = _("BATTLE PYRAMID");
 
-ALIGNED(4) const u8 gUnknown_085ED164[] = _("{STR_VAR_1} SINGLE");
-ALIGNED(4) const u8 gUnknown_085ED170[] = _("{STR_VAR_1} DOUBLE");
-ALIGNED(4) const u8 gUnknown_085ED17C[] = _("{STR_VAR_1} MULTI");
-ALIGNED(4) const u8 gUnknown_085ED188[] = _("{STR_VAR_1} LINK");
-ALIGNED(4) const u8 gUnknown_085ED190[] = _("{STR_VAR_1}");
+ALIGNED(4) const u8 gText_FacilitySingle[] = _("{STR_VAR_1} SINGLE");
+ALIGNED(4) const u8 gText_FacilityDouble[] = _("{STR_VAR_1} DOUBLE");
+ALIGNED(4) const u8 gText_FacilityMulti[] = _("{STR_VAR_1} MULTI");
+ALIGNED(4) const u8 gText_FacilityLink[] = _("{STR_VAR_1} LINK");
+ALIGNED(4) const u8 gText_Facility[] = _("{STR_VAR_1}");
 
 const u8 gText_Give[] = _("Give");
 const u8 gText_NoNeed[] = _("No need");
