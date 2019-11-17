@@ -62,7 +62,17 @@
 #define DEPT_STORE_FLOORNUM_11F      14
 #define DEPT_STORE_FLOORNUM_ROOFTOP  15
 
-// Pokemon Trainer Fan Club
-#define NUM_TRAINER_CLUB_MEMBERS  8
+// Lilycove Pokemon Trainer Fan Club
+#define NUM_TRAINER_FAN_CLUB_MEMBERS  8
+
+#define FANCLUB_GOT_FIRST_FANS 7
+#define FANCLUB_MEMBER1        8
+#define FANCLUB_MEMBER2        9
+#define FANCLUB_MEMBER3        10
+#define FANCLUB_MEMBER4        11
+#define FANCLUB_MEMBER5        12
+#define FANCLUB_MEMBER6        13
+#define FANCLUB_MEMBER7        14
+#define FANCLUB_MEMBER8        15
 
 #endif // GUARD_CONSTANTS_FIELD_SPECIALS_H

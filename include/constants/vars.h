@@ -79,8 +79,8 @@
 #define VAR_ALTERING_CAVE_WILD_SET           0x403E
 #define VAR_DISTRIBUTE_EON_TICKET            0x403F // This var is read and written, but is always zero. The only way to obtain the Eon Ticket in Emerald is via Record Mixing
 #define VAR_DAYS                             0x4040
-#define VAR_FANCLUB_UNKNOWN_1                0x4041
-#define VAR_FANCLUB_UNKNOWN_2                0x4042
+#define VAR_FANCLUB_FAN_COUNTER              0x4041 // First 7 bits are a counter for adding new fans, bit 8 is a flag set after first gaining fans, and bits 9-16 are flags set for each of the 8 fans when they like the player
+#define VAR_FANCLUB_LOSE_FAN_TIMER           0x4042
 #define VAR_DEPT_STORE_FLOOR                 0x4043
 #define VAR_TRICK_HOUSE_LEVEL                0x4044
 #define VAR_POKELOT_PRIZE_ITEM               0x4045

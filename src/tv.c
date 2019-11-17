@@ -2432,7 +2432,7 @@ u8 TV_MonDataIdxToRibbon(u8 monDataIdx)
     return 0;
 }
 
-void sub_80EE72C(void)
+void TrySetUpTrainerFanClubSpecial(void)
 {
     TVShow *show;
 
@@ -2450,22 +2450,19 @@ void sub_80EE72C(void)
     }
 }
 
-bool8 sub_80EE7C0(void)
+bool8 ShouldHideFanClubInterviewer(void)
 {
     sCurTVShowSlot = FindEmptyTVSlotWithinFirstFiveShowsOfArray(gSaveBlock1Ptr->tvShows);
     if (sCurTVShowSlot == -1)
-    {
         return TRUE;
-    }
+
     FindActiveBroadcastByShowType_SetScriptResult(TVSHOW_FAN_CLUB_SPECIAL);
     if (gSpecialVar_Result == TRUE)
-    {
         return TRUE;
-    }
+
     if (gSaveBlock1Ptr->linkBattleRecords.entries[0].name[0] == EOS)
-    {
         return TRUE;
-    }
+    
     return FALSE;
 }
 

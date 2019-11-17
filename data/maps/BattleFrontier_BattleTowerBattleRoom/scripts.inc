@@ -61,7 +61,7 @@ BattleFrontier_BattleTowerMultiBattleRoom_EventScript_241C03:: @ 8241C03
 	setvar VAR_0x8005, 3
 	special sub_8161F74
 	setvar VAR_0x8004, 3
-	special sub_813BF7C
+	special Script_TryGainNewFanFromCounter
 	goto BattleFrontier_BattleTowerBattleRoom_EventScript_2421B8
 
 BattleFrontier_BattleTowerBattleRoom_EventScript_241C2F:: @ 8241C2F
@@ -161,7 +161,7 @@ BattleFrontier_BattleTowerBattleRoom_EventScript_241DF6:: @ 8241DF6
 	setvar VAR_0x8005, 3
 	special sub_8161F74
 	setvar VAR_0x8004, 3
-	special sub_813BF7C
+	special Script_TryGainNewFanFromCounter
 	goto BattleFrontier_BattleTowerBattleRoom_EventScript_2421B8
 
 BattleFrontier_BattleTowerBattleRoom_EventScript_241E22:: @ 8241E22
