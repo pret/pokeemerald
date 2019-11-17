@@ -31,7 +31,7 @@
       "y": 6,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "SealedChamber_OuterRoom_EventScript_23916C"
+      "script": "SealedChamber_OuterRoom_EventScript_BrailleABC"
     },
     {
       "type": "sign",
@@ -39,7 +39,7 @@
       "y": 9,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "SealedChamber_OuterRoom_EventScript_239176"
+      "script": "SealedChamber_OuterRoom_EventScript_BrailleGHI"
     },
     {
       "type": "sign",
@@ -47,7 +47,7 @@
       "y": 12,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "SealedChamber_OuterRoom_EventScript_239180"
+      "script": "SealedChamber_OuterRoom_EventScript_BrailleMNO"
     },
     {
       "type": "sign",
@@ -55,7 +55,7 @@
       "y": 15,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "SealedChamber_OuterRoom_EventScript_23918A"
+      "script": "SealedChamber_OuterRoom_EventScript_BrailleTUV"
     },
     {
       "type": "sign",
@@ -63,7 +63,7 @@
       "y": 6,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "SealedChamber_OuterRoom_EventScript_239194"
+      "script": "SealedChamber_OuterRoom_EventScript_BrailleDEF"
     },
     {
       "type": "sign",
@@ -71,7 +71,7 @@
       "y": 9,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "SealedChamber_OuterRoom_EventScript_23919E"
+      "script": "SealedChamber_OuterRoom_EventScript_BrailleJKL"
     },
     {
       "type": "sign",
@@ -79,7 +79,7 @@
       "y": 12,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "SealedChamber_OuterRoom_EventScript_2391A8"
+      "script": "SealedChamber_OuterRoom_EventScript_BraillePQRS"
     },
     {
       "type": "sign",
@@ -87,7 +87,7 @@
       "y": 15,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "SealedChamber_OuterRoom_EventScript_2391BC"
+      "script": "SealedChamber_OuterRoom_EventScript_BrailleWXYZ"
     },
     {
       "type": "sign",
@@ -95,7 +95,7 @@
       "y": 6,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "SealedChamber_OuterRoom_EventScript_2391B2"
+      "script": "SealedChamber_OuterRoom_EventScript_BraillePeriod"
     },
     {
       "type": "sign",
@@ -103,7 +103,7 @@
       "y": 9,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "SealedChamber_OuterRoom_EventScript_2391C6"
+      "script": "SealedChamber_OuterRoom_EventScript_BrailleComma"
     },
     {
       "type": "sign",
@@ -111,7 +111,7 @@
       "y": 2,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "SealedChamber_OuterRoom_EventScript_2391D0"
+      "script": "SealedChamber_OuterRoom_EventScript_InnerRoomEntranceWall"
     },
     {
       "type": "sign",
@@ -119,7 +119,7 @@
       "y": 6,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "SealedChamber_OuterRoom_EventScript_23916C"
+      "script": "SealedChamber_OuterRoom_EventScript_BrailleABC"
     },
     {
       "type": "sign",
@@ -127,7 +127,7 @@
       "y": 6,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "SealedChamber_OuterRoom_EventScript_23916C"
+      "script": "SealedChamber_OuterRoom_EventScript_BrailleABC"
     },
     {
       "type": "sign",
@@ -135,7 +135,7 @@
       "y": 9,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "SealedChamber_OuterRoom_EventScript_239176"
+      "script": "SealedChamber_OuterRoom_EventScript_BrailleGHI"
     },
     {
       "type": "sign",
@@ -143,7 +143,7 @@
       "y": 9,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "SealedChamber_OuterRoom_EventScript_239176"
+      "script": "SealedChamber_OuterRoom_EventScript_BrailleGHI"
     },
     {
       "type": "sign",
@@ -151,7 +151,7 @@
       "y": 12,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "SealedChamber_OuterRoom_EventScript_239180"
+      "script": "SealedChamber_OuterRoom_EventScript_BrailleMNO"
     },
     {
       "type": "sign",
@@ -159,7 +159,7 @@
       "y": 12,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "SealedChamber_OuterRoom_EventScript_239180"
+      "script": "SealedChamber_OuterRoom_EventScript_BrailleMNO"
     },
     {
       "type": "sign",
@@ -167,7 +167,7 @@
       "y": 15,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "SealedChamber_OuterRoom_EventScript_23918A"
+      "script": "SealedChamber_OuterRoom_EventScript_BrailleTUV"
     },
     {
       "type": "sign",
@@ -175,7 +175,7 @@
       "y": 15,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "SealedChamber_OuterRoom_EventScript_23918A"
+      "script": "SealedChamber_OuterRoom_EventScript_BrailleTUV"
     },
     {
       "type": "sign",
@@ -183,7 +183,7 @@
       "y": 6,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "SealedChamber_OuterRoom_EventScript_239194"
+      "script": "SealedChamber_OuterRoom_EventScript_BrailleDEF"
     },
     {
       "type": "sign",
@@ -191,7 +191,7 @@
       "y": 6,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "SealedChamber_OuterRoom_EventScript_239194"
+      "script": "SealedChamber_OuterRoom_EventScript_BrailleDEF"
     },
     {
       "type": "sign",
@@ -199,7 +199,7 @@
       "y": 9,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "SealedChamber_OuterRoom_EventScript_23919E"
+      "script": "SealedChamber_OuterRoom_EventScript_BrailleJKL"
     },
     {
       "type": "sign",
@@ -207,7 +207,7 @@
       "y": 9,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "SealedChamber_OuterRoom_EventScript_23919E"
+      "script": "SealedChamber_OuterRoom_EventScript_BrailleJKL"
     },
     {
       "type": "sign",
@@ -215,7 +215,7 @@
       "y": 12,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "SealedChamber_OuterRoom_EventScript_2391A8"
+      "script": "SealedChamber_OuterRoom_EventScript_BraillePQRS"
     },
     {
       "type": "sign",
@@ -223,7 +223,7 @@
       "y": 12,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "SealedChamber_OuterRoom_EventScript_2391A8"
+      "script": "SealedChamber_OuterRoom_EventScript_BraillePQRS"
     },
     {
       "type": "sign",
@@ -231,7 +231,7 @@
       "y": 15,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "SealedChamber_OuterRoom_EventScript_2391BC"
+      "script": "SealedChamber_OuterRoom_EventScript_BrailleWXYZ"
     },
     {
       "type": "sign",
@@ -239,7 +239,7 @@
       "y": 15,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "SealedChamber_OuterRoom_EventScript_2391BC"
+      "script": "SealedChamber_OuterRoom_EventScript_BrailleWXYZ"
     },
     {
       "type": "sign",
@@ -247,7 +247,7 @@
       "y": 2,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "SealedChamber_OuterRoom_EventScript_2391ED"
+      "script": "SealedChamber_OuterRoom_EventScript_BrailleDigHere"
     },
     {
       "type": "sign",
@@ -255,7 +255,7 @@
       "y": 2,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "SealedChamber_OuterRoom_EventScript_2391ED"
+      "script": "SealedChamber_OuterRoom_EventScript_BrailleDigHere"
     }
   ]
 }

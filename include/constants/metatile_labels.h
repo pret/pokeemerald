@@ -149,8 +149,8 @@
 #define METATILE_Fortree_SecretBase_LongGrass_BottomLeft  0x281
 #define METATILE_Fortree_SecretBase_LongGrass_BottomMid   0x282
 #define METATILE_Fortree_SecretBase_LongGrass_BottomRight 0x283
-#define METATILE_Fortree_WoodBridge_Kecleon0              0x297
-#define METATILE_Fortree_WoodBridge_Kecleon1              0x29F
+#define METATILE_Fortree_WoodBridge1_Top                  0x297
+#define METATILE_Fortree_WoodBridge1_Bottom               0x29F
 
 // gTileset_Sootopolis
 #define METATILE_Sootopolis_Door_Closed    0x248
@@ -255,10 +255,10 @@
 #define METATILE_EliteFour_EntryDoor_ClosedBottom   0x20E
 
 // gTileset_InsideShip
-#define METATILE_InsideShip_InTactDoor0_Bottom 0x233
-#define METATILE_InsideShip_InTactDoor1_Bottom 0x22B
-#define METATILE_InsideShip_DoorIndent1        0x21A
-#define METATILE_InsideShip_DoorIndent0        0x234
+#define METATILE_InsideShip_IntactDoor_Bottom_Unlocked 0x22B
+#define METATILE_InsideShip_IntactDoor_Bottom_Locked   0x233
+#define METATILE_InsideShip_DoorIndent_Unlocked        0x21A
+#define METATILE_InsideShip_DoorIndent_Locked          0x234
 
 // gTileset_BattlePike
 #define METATILE_BattlePike_Curtain_Stage0_Tile0 0x24A
@@ -381,7 +381,7 @@
 #define METATILE_TrickHousePuzzle_Arrow_RedOnBlack_Right_Alt 0x27C
 #define METATILE_TrickHousePuzzle_Arrow_YellowOnWhite_Right  0x298
 
-// gTileset_BikeShop
+// gTileset_BikeShop (also used by New Mauville)
 #define METATILE_BikeShop_Barrier_Hidden_Top      0x269
 #define METATILE_BikeShop_Barrier_Hidden_Bottom   0x271
 #define METATILE_BikeShop_Floor_Shadow_Top        0x26D

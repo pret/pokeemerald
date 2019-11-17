@@ -34,7 +34,7 @@ VerdanturfTown_BattleTentBattleRoom_EventScript_202348:: @ 8202348
 	showobjectat 1, MAP_VERDANTURF_TOWN_BATTLE_TENT_BATTLE_ROOM
 	applymovement 1, VerdanturfTown_BattleTentBattleRoom_Movement_202575
 	waitmovement 0
-	setvar VAR_0x8004, 1
+	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_1
 	setvar VAR_0x8005, 2
 	special CallFrontierUtilFunc
 	compare VAR_RESULT, 0
@@ -55,7 +55,7 @@ VerdanturfTown_BattleTentBattleRoom_EventScript_20236F:: @ 820236F
 	case 1, VerdanturfTown_BattleTentBattleRoom_EventScript_2023C8
 
 VerdanturfTown_BattleTentBattleRoom_EventScript_2023AA:: @ 82023AA
-	setvar VAR_0x8004, 2
+	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_2
 	setvar VAR_0x8005, 0
 	setvar VAR_0x8006, 4
 	special CallFrontierUtilFunc
@@ -64,11 +64,11 @@ VerdanturfTown_BattleTentBattleRoom_EventScript_2023AA:: @ 82023AA
 	waitstate
 
 VerdanturfTown_BattleTentBattleRoom_EventScript_2023C8:: @ 82023C8
-	setvar VAR_0x8004, 1
+	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_1
 	setvar VAR_0x8005, 2
 	special CallFrontierUtilFunc
 	addvar VAR_RESULT, 1
-	setvar VAR_0x8004, 2
+	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_2
 	setvar VAR_0x8005, 2
 	copyvar VAR_0x8006, VAR_RESULT
 	special CallFrontierUtilFunc
@@ -83,15 +83,15 @@ VerdanturfTown_BattleTentBattleRoom_EventScript_2023C8:: @ 82023C8
 	msgbox VerdanturfTown_BattleTentBattleRoom_Text_24FF00, MSGBOX_DEFAULT
 	special LoadPlayerParty
 	special SavePlayerParty
-	setvar VAR_0x8004, 3
-	setvar VAR_0x8005, 3
+	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_LOAD_SELECTED_PARTY
+	setvar VAR_0x8005, FRONTIER_PARTY_SIZE
 	special CallFrontierUtilFunc
 	playfanfare MUS_ME_ASA
 	waitfanfare
 	special HealPlayerParty
 
 VerdanturfTown_BattleTentBattleRoom_EventScript_20243C:: @ 820243C
-	setvar VAR_0x8004, 1
+	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_1
 	setvar VAR_0x8005, 2
 	special CallFrontierUtilFunc
 	compare VAR_RESULT, 1
@@ -107,9 +107,9 @@ VerdanturfTown_BattleTentBattleRoom_EventScript_20243C:: @ 820243C
 VerdanturfTown_BattleTentBattleRoom_EventScript_20248A:: @ 820248A
 	msgbox VerdanturfTown_BattleTentBattleRoom_Text_250030, MSGBOX_YESNO
 	switch VAR_RESULT
-	case 0, VerdanturfTown_BattleTentBattleRoom_EventScript_20243C
-	case 1, VerdanturfTown_BattleTentBattleRoom_EventScript_20251F
-	case 127, VerdanturfTown_BattleTentBattleRoom_EventScript_20243C
+	case NO, VerdanturfTown_BattleTentBattleRoom_EventScript_20243C
+	case YES, VerdanturfTown_BattleTentBattleRoom_EventScript_20251F
+	case MULTI_B_PRESSED, VerdanturfTown_BattleTentBattleRoom_EventScript_20243C
 
 VerdanturfTown_BattleTentBattleRoom_EventScript_2024B8:: @ 82024B8
 	message VerdanturfTown_BattleTentBattleRoom_Text_25005A
@@ -128,7 +128,7 @@ VerdanturfTown_BattleTentBattleRoom_EventScript_2024EA:: @ 82024EA
 	goto VerdanturfTown_BattleTentBattleRoom_EventScript_20236F
 
 VerdanturfTown_BattleTentBattleRoom_EventScript_202501:: @ 8202501
-	setvar VAR_0x8004, 2
+	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_2
 	setvar VAR_0x8005, 0
 	setvar VAR_0x8006, 3
 	special CallFrontierUtilFunc
@@ -145,7 +145,7 @@ VerdanturfTown_BattleTentBattleRoom_EventScript_20251F:: @ 820251F
 	playse SE_SAVE
 	waitse
 	fadescreen 1
-	setvar VAR_0x8004, 4
+	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_SOFT_RESET
 	special CallFrontierUtilFunc
 	end
 

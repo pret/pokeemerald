@@ -33,7 +33,7 @@ Route121_SafariZoneEntrance_EventScript_InfoAttendant:: @ 822BBEF
 	lock
 	faceplayer
 	msgbox Route121_SafariZoneEntrance_Text_WelcomeFirstTime, MSGBOX_YESNO
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, YES
 	goto_if_eq Route121_SafariZoneEntrance_EventScript_FirstTimeInfo
 	msgbox Route121_SafariZoneEntrance_Text_ComeInAndEnjoy, MSGBOX_DEFAULT
 	release
@@ -50,7 +50,7 @@ Route121_SafariZoneEntrance_EventScript_EntranceCounterTrigger:: @ 822BC18
 	waitmovement 0
 	showmoneybox 0, 0, 0
 	msgbox Route121_SafariZoneEntrance_Text_WouldYouLikeToPlay, MSGBOX_YESNO
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, YES
 	goto_if_eq Route121_SafariZoneEntrance_EventScript_TryEnterSafariZone
 	msgbox Route121_SafariZoneEntrance_Text_PlayAnotherTime, MSGBOX_DEFAULT
 	goto Route121_SafariZoneEntrance_EventScript_MovePlayerBackFromCounter
@@ -75,8 +75,6 @@ Route121_SafariZoneEntrance_EventScript_TryEnterSafariZone:: @ 822BC48
 	msgbox Route121_SafariZoneEntrance_Text_PleaseEnjoyYourself, MSGBOX_DEFAULT
 	closemessage
 	hidemoneybox
-	nop
-	nop
 	applymovement EVENT_OBJ_ID_PLAYER, Route121_SafariZoneEntrance_Movement_EnterSafariZone
 	waitmovement 0
 	special EnterSafariMode
@@ -113,8 +111,6 @@ Route121_SafariZoneEntrance_EventScript_NotEnoughMoney:: @ 822BCF8
 Route121_SafariZoneEntrance_EventScript_MovePlayerBackFromCounter:: @ 822BD06
 	closemessage
 	hidemoneybox
-	nop
-	nop
 	applymovement EVENT_OBJ_ID_PLAYER, Route121_SafariZoneEntrance_Movement_BackAwayFromCounter
 	waitmovement 0
 	releaseall

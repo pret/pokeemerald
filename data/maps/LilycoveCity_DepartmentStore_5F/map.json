@@ -24,7 +24,7 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "LilycoveCity_DepartmentStore_5F_EventScript_2200BC",
+      "script": "LilycoveCity_DepartmentStore_5F_EventScript_LittleGirl",
       "flag": "0"
     },
     {
@@ -37,7 +37,7 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "LilycoveCity_DepartmentStore_5F_EventScript_22006C",
+      "script": "LilycoveCity_DepartmentStore_5F_EventScript_PokefanF",
       "flag": "0"
     },
     {
@@ -50,7 +50,7 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "LilycoveCity_DepartmentStore_5F_EventScript_21FFA6",
+      "script": "LilycoveCity_DepartmentStore_5F_EventScript_ClerkFarLeft",
       "flag": "0"
     },
     {
@@ -63,7 +63,7 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "LilycoveCity_DepartmentStore_5F_EventScript_21FFDC",
+      "script": "LilycoveCity_DepartmentStore_5F_EventScript_ClerkMidLeft",
       "flag": "0"
     },
     {
@@ -76,7 +76,7 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "LilycoveCity_DepartmentStore_5F_EventScript_22000A",
+      "script": "LilycoveCity_DepartmentStore_5F_EventScript_ClerkMidRight",
       "flag": "0"
     },
     {
@@ -89,7 +89,7 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "LilycoveCity_DepartmentStore_5F_EventScript_22003A",
+      "script": "LilycoveCity_DepartmentStore_5F_EventScript_ClerkFarRight",
       "flag": "0"
     },
     {
@@ -102,7 +102,7 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "LilycoveCity_DepartmentStore_5F_EventScript_220075",
+      "script": "LilycoveCity_DepartmentStore_5F_EventScript_Woman",
       "flag": "0"
     }
   ],

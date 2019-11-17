@@ -1030,7 +1030,7 @@ static void sub_807FAC8(void)
             UnsetBgTilemapBuffer(2);
             UnsetBgTilemapBuffer(1);
             SetVBlankCallback(NULL);
-            sub_81AABF0(sub_807FFA4);
+            ChooseBerrySetCallback(sub_807FFA4);
 
             sBerryBlenderData->mainState = 0;
         }
@@ -1109,7 +1109,7 @@ static void Blender_SetPlayerNamesLocal(u8 opponentsNum)
         sBerryBlenderData->playersNo = 2;
         StringCopy(gLinkPlayers[0].name, gSaveBlock2Ptr->playerName);
 
-        if (!FlagGet(FLAG_HIDE_LILYCOVE_CONTEST_HALL_BLEND_MASTER_ONLOOKERS))
+        if (!FlagGet(FLAG_HIDE_LILYCOVE_CONTEST_HALL_BLEND_MASTER))
             StringCopy(gLinkPlayers[1].name, sBlenderOpponentsNames[BLENDER_MASTER]);
         else
             StringCopy(gLinkPlayers[1].name, sBlenderOpponentsNames[BLENDER_MISTER]);
@@ -1432,7 +1432,7 @@ static void Blender_SetOpponentsBerryData(u16 playerBerryItemId, u8 playersNum, 
     {
         opponentBerryId = sOpponentBerrySets[opponentSetId][i];
         var = playerBerryItemId - 163;
-        if (!FlagGet(FLAG_HIDE_LILYCOVE_CONTEST_HALL_BLEND_MASTER_ONLOOKERS) && gSpecialVar_0x8004 == 1)
+        if (!FlagGet(FLAG_HIDE_LILYCOVE_CONTEST_HALL_BLEND_MASTER) && gSpecialVar_0x8004 == 1)
         {
             opponentSetId %= 5;
             opponentBerryId = sSpecialOpponentBerrySets[opponentSetId];
@@ -1632,7 +1632,7 @@ static void sub_80808D4(void)
 
         if (gSpecialVar_0x8004 == 1)
         {
-            if (!FlagGet(FLAG_HIDE_LILYCOVE_CONTEST_HALL_BLEND_MASTER_ONLOOKERS))
+            if (!FlagGet(FLAG_HIDE_LILYCOVE_CONTEST_HALL_BLEND_MASTER))
                 sBerryBlenderData->field_120[0] = CreateTask(sub_8081224, 10);
             else
                 sBerryBlenderData->field_120[0] = CreateTask(sUnknown_083399EC[0], 10);

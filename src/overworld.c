@@ -64,6 +64,7 @@
 #include "constants/region_map_sections.h"
 #include "constants/songs.h"
 #include "constants/species.h"
+#include "constants/trainer_hill.h"
 #include "constants/weather.h"
 
 #define PLAYER_TRADING_STATE_IDLE 0x80
@@ -88,16 +89,16 @@ extern const u8 EventScript_DoLinkRoomExit[];
 extern const u8 CableClub_EventScript_TooBusyToNotice[];
 extern const u8 CableClub_EventScript_ReadTrainerCard[];
 extern const u8 CableClub_EventScript_ReadTrainerCardColored[];
-extern const u8 EventScript_DoubleBattleColosseum_PlayerSpot0[];
-extern const u8 EventScript_DoubleBattleColosseum_PlayerSpot1[];
-extern const u8 EventScript_DoubleBattleColosseum_PlayerSpot2[];
-extern const u8 EventScript_DoubleBattleColosseum_PlayerSpot3[];
+extern const u8 EventScript_BattleColosseum4P_PlayerSpot0[];
+extern const u8 EventScript_BattleColosseum4P_PlayerSpot1[];
+extern const u8 EventScript_BattleColosseum4P_PlayerSpot2[];
+extern const u8 EventScript_BattleColosseum4P_PlayerSpot3[];
 extern const u8 EventScript_RecordCenter_Spot0[];
 extern const u8 EventScript_RecordCenter_Spot1[];
 extern const u8 EventScript_RecordCenter_Spot2[];
 extern const u8 EventScript_RecordCenter_Spot3[];
-extern const u8 EventScript_SingleBattleColosseum_PlayerSpot0[];
-extern const u8 EventScript_SingleBattleColosseum_PlayerSpot1[];
+extern const u8 EventScript_BattleColosseum2P_PlayerSpot0[];
+extern const u8 EventScript_BattleColosseum2P_PlayerSpot1[];
 extern const u8 EventScript_TradeCenter_Chair1[];
 extern const u8 EventScript_TradeCenter_Chair0[];
 extern const u8 EventScript_ConfirmLeaveTradeRoom[];
@@ -854,7 +855,7 @@ static void mli0_load_map(u32 a1)
         if (gMapHeader.mapLayoutId == LAYOUT_BATTLE_FRONTIER_BATTLE_PYRAMID_EMPTY_SQUARE)
             LoadBattlePyramidEventObjectTemplates();
         else if (InTrainerHill())
-            sub_81D5DF8();
+            LoadTrainerHillEventObjectTemplates();
         else
             LoadEventObjTemplatesFromHeader();
     }
@@ -1721,8 +1722,8 @@ void CB2_ContinueSavedGame(void)
     trainerHillMapId = GetCurrentTrainerHillMapId();
     if (gMapHeader.mapLayoutId == LAYOUT_BATTLE_FRONTIER_BATTLE_PYRAMID_EMPTY_SQUARE)
         LoadBattlePyramidFloorEventObjectScripts();
-    else if (trainerHillMapId != 0 && trainerHillMapId != 6)
-        sub_81D5F48();
+    else if (trainerHillMapId != 0 && trainerHillMapId != TRAINER_HILL_ENTRANCE)
+        LoadTrainerHillFloorEventObjectScripts();
     else
         LoadSaveblockEventObjScripts();
 
@@ -2781,13 +2782,13 @@ static const u8 *TryInteractWithPlayer(struct TradeRoomPlayer *player)
 // these event scripts runs.
 static u16 GetDirectionForEventScript(const u8 *script)
 {
-    if (script == EventScript_DoubleBattleColosseum_PlayerSpot0)
+    if (script == EventScript_BattleColosseum4P_PlayerSpot0)
         return FACING_FORCED_RIGHT;
-    else if (script == EventScript_DoubleBattleColosseum_PlayerSpot1)
+    else if (script == EventScript_BattleColosseum4P_PlayerSpot1)
         return FACING_FORCED_LEFT;
-    else if (script == EventScript_DoubleBattleColosseum_PlayerSpot2)
+    else if (script == EventScript_BattleColosseum4P_PlayerSpot2)
         return FACING_FORCED_RIGHT;
-    else if (script == EventScript_DoubleBattleColosseum_PlayerSpot3)
+    else if (script == EventScript_BattleColosseum4P_PlayerSpot3)
         return FACING_FORCED_LEFT;
     else if (script == EventScript_RecordCenter_Spot0)
         return FACING_FORCED_RIGHT;
@@ -2797,9 +2798,9 @@ static u16 GetDirectionForEventScript(const u8 *script)
         return FACING_FORCED_RIGHT;
     else if (script == EventScript_RecordCenter_Spot3)
         return FACING_FORCED_LEFT;
-    else if (script == EventScript_SingleBattleColosseum_PlayerSpot0)
+    else if (script == EventScript_BattleColosseum2P_PlayerSpot0)
         return FACING_FORCED_RIGHT;
-    else if (script == EventScript_SingleBattleColosseum_PlayerSpot1)
+    else if (script == EventScript_BattleColosseum2P_PlayerSpot1)
         return FACING_FORCED_LEFT;
     else if (script == EventScript_TradeCenter_Chair0)
         return FACING_FORCED_RIGHT;

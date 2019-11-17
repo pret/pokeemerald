@@ -11,7 +11,7 @@ BattleFrontier_BattlePikeRandomRoom2_EventScript_25E3A7:: @ 825E3A7
 	delay 16
 	applymovement 1, BattleFrontier_BattlePikeRandomRoom2_Movement_25E3DB
 	waitmovement 0
-	setvar VAR_0x8004, 2
+	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_2
 	setvar VAR_0x8005, 0
 	setvar VAR_0x8006, 3
 	special CallFrontierUtilFunc

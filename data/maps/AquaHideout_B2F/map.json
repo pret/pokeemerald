@@ -24,7 +24,7 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "AquaHideout_B2F_EventScript_233E09",
+      "script": "AquaHideout_B2F_EventScript_Matt",
       "flag": "FLAG_HIDE_AQUA_HIDEOUT_GRUNTS"
     },
     {
@@ -37,7 +37,7 @@
       "movement_range_y": 3,
       "trainer_type": "1",
       "trainer_sight_or_berry_tree_id": "3",
-      "script": "AquaHideout_B2F_EventScript_233E8A",
+      "script": "AquaHideout_B2F_EventScript_Grunt4",
       "flag": "FLAG_HIDE_AQUA_HIDEOUT_GRUNTS"
     },
     {
@@ -76,7 +76,7 @@
       "movement_range_y": 1,
       "trainer_type": "1",
       "trainer_sight_or_berry_tree_id": "5",
-      "script": "AquaHideout_B2F_EventScript_233EAF",
+      "script": "AquaHideout_B2F_EventScript_Grunt6",
       "flag": "FLAG_HIDE_AQUA_HIDEOUT_GRUNTS"
     },
     {
@@ -89,7 +89,7 @@
       "movement_range_y": 1,
       "trainer_type": "1",
       "trainer_sight_or_berry_tree_id": "5",
-      "script": "AquaHideout_B2F_EventScript_233EC6",
+      "script": "AquaHideout_B2F_EventScript_Grunt8",
       "flag": "FLAG_HIDE_AQUA_HIDEOUT_GRUNTS"
     }
   ],
@@ -173,7 +173,7 @@
       "elevation": 3,
       "var": "VAR_TEMP_1",
       "var_value": "0",
-      "script": "AquaHideout_B2F_EventScript_233DE5"
+      "script": "AquaHideout_B2F_EventScript_MattNoticePlayer"
     },
     {
       "type": "trigger",
@@ -182,7 +182,7 @@
       "elevation": 3,
       "var": "VAR_TEMP_1",
       "var_value": "0",
-      "script": "AquaHideout_B2F_EventScript_233DE5"
+      "script": "AquaHideout_B2F_EventScript_MattNoticePlayer"
     }
   ],
   "bg_events": []

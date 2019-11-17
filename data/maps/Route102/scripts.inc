@@ -31,7 +31,7 @@ Route102_EventScript_Calvin:: @ 81EC105
 	end
 
 Route102_EventScript_CalvinRegisterMatchCallAfterBattle:: @ 81EC146
-	special sub_80B4808
+	special PlayerFaceTrainerAfterBattle
 	waitmovement 0
 	goto_if_set FLAG_HAS_MATCH_CALL, Route102_EventScript_CalvinRegisterMatchCall
 	release

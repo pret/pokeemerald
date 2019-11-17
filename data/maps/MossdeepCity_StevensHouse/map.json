@@ -24,7 +24,7 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "MossdeepCity_StevensHouse_EventScript_222912",
+      "script": "MossdeepCity_StevensHouse_EventScript_Steven",
       "flag": "FLAG_HIDE_MOSSDEEP_CITY_STEVENS_HOUSE_STEVEN"
     },
     {
@@ -37,7 +37,7 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "MossdeepCity_StevensHouse_EventScript_222841",
+      "script": "MossdeepCity_StevensHouse_EventScript_BeldumPokeball",
       "flag": "FLAG_HIDE_MOSSDEEP_CITY_STEVENS_HOUSE_BELDUM_POKEBALL"
     },
     {
@@ -50,7 +50,7 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "MossdeepCity_StevensHouse_EventScript_22291B",
+      "script": "MossdeepCity_StevensHouse_EventScript_Letter",
       "flag": "FLAG_HIDE_MOSSDEEP_CITY_STEVENS_HOUSE_INVISIBLE_NINJA_BOY"
     }
   ],
@@ -78,7 +78,7 @@
       "y": 1,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "MossdeepCity_StevensHouse_EventScript_222909"
+      "script": "MossdeepCity_StevensHouse_EventScript_RockDisplay"
     },
     {
       "type": "sign",
@@ -86,7 +86,7 @@
       "y": 1,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "MossdeepCity_StevensHouse_EventScript_222909"
+      "script": "MossdeepCity_StevensHouse_EventScript_RockDisplay"
     },
     {
       "type": "sign",
@@ -94,7 +94,7 @@
       "y": 4,
       "elevation": 3,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "MossdeepCity_StevensHouse_EventScript_222909"
+      "script": "MossdeepCity_StevensHouse_EventScript_RockDisplay"
     },
     {
       "type": "sign",
@@ -102,7 +102,7 @@
       "y": 6,
       "elevation": 3,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "MossdeepCity_StevensHouse_EventScript_222909"
+      "script": "MossdeepCity_StevensHouse_EventScript_RockDisplay"
     }
   ]
 }

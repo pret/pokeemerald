@@ -16,7 +16,7 @@ EventScript_FieldWhiteOut:: @ 82736D9
 	special Script_FadeOutMapMusic
 	waitstate
 	fadescreen 1
-	call_if_set FLAG_FLANNERY_GIVES_BADGE_INFO, EventScript_SetRespawnLavaridgePkmnCenter
+	call_if_set FLAG_WHITEOUT_TO_LAVARIDGE, EventScript_SetRespawnLavaridgePkmnCenter
 	special SetCB2WhiteOut
 	waitstate
 	end
@@ -39,7 +39,7 @@ EventScript_FrontierFieldWhiteOut:: @ 82736F8
 	goto_if_eq BattleFrontier_BattlePyramidTop_EventScript_252B42
 	compare VAR_RESULT, 2
 	goto_if_eq BattleFrontier_BattlePyramidTop_EventScript_252B42
-	setvar VAR_0x8004, TRAINER_HILL_FUNC_IS_IN
+	setvar VAR_0x8004, TRAINER_HILL_FUNC_IN_CHALLENGE
 	special CallTrainerHillFunction
 	compare VAR_RESULT, 1
 	goto_if_eq TrainerHill_1F_EventScript_Lost

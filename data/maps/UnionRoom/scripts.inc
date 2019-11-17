@@ -1,9 +1,9 @@
 UnionRoom_MapScripts:: @ 823D1A6
-	map_script MAP_SCRIPT_ON_RESUME, UnionRoom_MapScript1_23D1B1
+	map_script MAP_SCRIPT_ON_RESUME, UnionRoom_OnResume
 	map_script MAP_SCRIPT_ON_TRANSITION, UnionRoom_OnTransition
 	.byte 0
 
-UnionRoom_MapScript1_23D1B1: @ 823D1B1
+UnionRoom_OnResume: @ 823D1B1
 	setflag FLAG_HIDE_UNION_ROOM_PLAYER_1
 	setflag FLAG_HIDE_UNION_ROOM_PLAYER_2
 	setflag FLAG_HIDE_UNION_ROOM_PLAYER_3
@@ -26,7 +26,7 @@ UnionRoom_MapScript1_23D1B1: @ 823D1B1
 UnionRoom_OnTransition: @ 823D1E5
 	end
 
-UnionRoom_EventScript_23D1E6:: @ 823D1E6
+UnionRoom_EventScript_Player1:: @ 823D1E6
 	lock
 	faceplayer
 	setvar VAR_RESULT, 1
@@ -34,7 +34,7 @@ UnionRoom_EventScript_23D1E6:: @ 823D1E6
 	release
 	end
 
-UnionRoom_EventScript_23D1F0:: @ 823D1F0
+UnionRoom_EventScript_Player2:: @ 823D1F0
 	lock
 	faceplayer
 	setvar VAR_RESULT, 2
@@ -42,7 +42,7 @@ UnionRoom_EventScript_23D1F0:: @ 823D1F0
 	release
 	end
 
-UnionRoom_EventScript_23D1FA:: @ 823D1FA
+UnionRoom_EventScript_Player3:: @ 823D1FA
 	lock
 	faceplayer
 	setvar VAR_RESULT, 3
@@ -50,7 +50,7 @@ UnionRoom_EventScript_23D1FA:: @ 823D1FA
 	release
 	end
 
-UnionRoom_EventScript_23D204:: @ 823D204
+UnionRoom_EventScript_Player4:: @ 823D204
 	lock
 	faceplayer
 	setvar VAR_RESULT, 4
@@ -58,7 +58,7 @@ UnionRoom_EventScript_23D204:: @ 823D204
 	release
 	end
 
-UnionRoom_EventScript_23D20E:: @ 823D20E
+UnionRoom_EventScript_Player5:: @ 823D20E
 	lock
 	faceplayer
 	setvar VAR_RESULT, 5
@@ -66,7 +66,7 @@ UnionRoom_EventScript_23D20E:: @ 823D20E
 	release
 	end
 
-UnionRoom_EventScript_23D218:: @ 823D218
+UnionRoom_EventScript_Player6:: @ 823D218
 	lock
 	faceplayer
 	setvar VAR_RESULT, 6
@@ -74,7 +74,7 @@ UnionRoom_EventScript_23D218:: @ 823D218
 	release
 	end
 
-UnionRoom_EventScript_23D222:: @ 823D222
+UnionRoom_EventScript_Player7:: @ 823D222
 	lock
 	faceplayer
 	setvar VAR_RESULT, 7
@@ -82,7 +82,7 @@ UnionRoom_EventScript_23D222:: @ 823D222
 	release
 	end
 
-UnionRoom_EventScript_23D22C:: @ 823D22C
+UnionRoom_EventScript_Player8:: @ 823D22C
 	lock
 	faceplayer
 	setvar VAR_RESULT, 8
@@ -90,7 +90,7 @@ UnionRoom_EventScript_23D22C:: @ 823D22C
 	release
 	end
 
-UnionRoom_EventScript_23D236:: @ 823D236
+UnionRoom_EventScript_Attendant:: @ 823D236
 	lock
 	faceplayer
 	setvar VAR_RESULT, 9
@@ -98,7 +98,7 @@ UnionRoom_EventScript_23D236:: @ 823D236
 	release
 	end
 
-UnionRoom_EventScript_23D240:: @ 823D240
+UnionRoom_EventScript_Unused:: @ 823D240
 	lockall
 	setvar VAR_RESULT, 10
 	waitstate

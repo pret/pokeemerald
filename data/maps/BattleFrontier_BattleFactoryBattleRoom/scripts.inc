@@ -5,14 +5,14 @@ BattleFrontier_BattleFactoryBattleRoom_MapScripts:: @ 825ADAB
 	.byte 0
 
 BattleFrontier_BattleFactoryBattleRoom_MapScript1_25ADBB: @ 825ADBB
-	setvar VAR_0x8004, 5
+	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_SET_FRONTIER_TRAINERS
 	special CallFrontierUtilFunc
 	checkplayergender
 	compare VAR_RESULT, MALE
 	call_if_eq BattleFrontier_BattleFactoryBattleRoom_EventScript_25AE25
 	compare VAR_RESULT, FEMALE
 	call_if_eq BattleFrontier_BattleFactoryBattleRoom_EventScript_25AE2B
-	setvar VAR_0x8004, 9
+	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_9
 	special CallFrontierUtilFunc
 	copyvar VAR_TEMP_F, VAR_RESULT
 	compare VAR_RESULT, 0
@@ -85,7 +85,7 @@ BattleFrontier_BattleFactoryBattleRoom_EventScript_25AEA7:: @ 825AEA7
 	msgbox gStringVar4, MSGBOX_DEFAULT
 	waitmessage
 	closemessage
-	setvar VAR_0x8004, 2
+	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_2
 	setvar VAR_0x8005, 6
 	setvar VAR_0x8006, 0
 	special CallFrontierUtilFunc
@@ -99,7 +99,7 @@ BattleFrontier_BattleFactoryBattleRoom_EventScript_25AEA7:: @ 825AEA7
 
 BattleFrontier_BattleFactoryBattleRoom_EventScript_25AEF8:: @ 825AEF8
 BattleFrontier_BattleFactoryPreBattleRoom_EventScript_25AEF8:: @ 825AEF8
-	setvar VAR_0x8004, 2
+	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_2
 	setvar VAR_0x8005, 0
 	setvar VAR_0x8006, 4
 	special CallFrontierUtilFunc
@@ -122,11 +122,11 @@ BattleFrontier_BattleFactoryBattleRoom_EventScript_25AF3E:: @ 825AF3E
 	call BattleFrontier_BattleFactoryBattleRoom_EventScript_241EBA
 
 BattleFrontier_BattleFactoryBattleRoom_EventScript_25AF43:: @ 825AF43
-	setvar VAR_0x8004, 1
+	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_1
 	setvar VAR_0x8005, 2
 	special CallFrontierUtilFunc
 	addvar VAR_RESULT, 1
-	setvar VAR_0x8004, 2
+	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_2
 	setvar VAR_0x8005, 2
 	copyvar VAR_0x8006, VAR_RESULT
 	special CallFrontierUtilFunc
@@ -137,7 +137,7 @@ BattleFrontier_BattleFactoryBattleRoom_EventScript_25AF43:: @ 825AF43
 	waitstate
 
 BattleFrontier_BattleFactoryBattleRoom_EventScript_25AF85:: @ 825AF85
-	setvar VAR_0x8004, 2
+	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_2
 	setvar VAR_0x8005, 0
 	setvar VAR_0x8006, 3
 	special CallFrontierUtilFunc
@@ -148,13 +148,13 @@ BattleFrontier_BattleFactoryBattleRoom_EventScript_25AF9C:: @ 825AF9C
 	case 2, BattleFrontier_BattleFactoryBattleRoom_EventScript_25B051
 	case 3, BattleFrontier_BattleFactoryBattleRoom_EventScript_25AFEF
 	case 4, BattleFrontier_BattleFactoryBattleRoom_EventScript_25B07E
-	setvar VAR_0x8004, 1
+	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_1
 	setvar VAR_0x8005, 7
 	special CallFrontierUtilFunc
 	compare VAR_RESULT, 0
 	goto_if_ne BattleFrontier_BattleFactoryBattleRoom_EventScript_25AFEF
 	msgbox BattleFrontier_BattleFactoryBattleRoom_Text_25B1FB, MSGBOX_DEFAULT
-	setvar VAR_0x8004, 2
+	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_2
 	setvar VAR_0x8005, 7
 	special CallFrontierUtilFunc
 
@@ -166,7 +166,7 @@ BattleFrontier_BattleFactoryBattleRoom_EventScript_25AFEF:: @ 825AFEF
 	goto BattleFrontier_BattleFactoryBattleRoom_EventScript_25AEF8
 
 BattleFrontier_BattleFactoryBattleRoom_EventScript_25B00C:: @ 825B00C
-	setvar VAR_0x8004, 12
+	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_GET_FACILITY_SYMBOLS
 	special CallFrontierUtilFunc
 	compare VAR_RESULT, 0
 	goto_if_ne BattleFrontier_BattleFactoryBattleRoom_EventScript_25B105
@@ -178,19 +178,19 @@ BattleFrontier_BattleFactoryBattleRoom_EventScript_25B00C:: @ 825B00C
 	message BattleFrontier_BattleFactoryBattleRoom_Text_25B460
 	waitmessage
 	waitfanfare
-	setvar VAR_0x8004, 13
+	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_GIVE_FACILITY_SYMBOL
 	special CallFrontierUtilFunc
 	msgbox BattleFrontier_BattleFactoryBattleRoom_Text_25B498, MSGBOX_DEFAULT
 	goto BattleFrontier_BattleFactoryBattleRoom_EventScript_25B105
 
 BattleFrontier_BattleFactoryBattleRoom_EventScript_25B051:: @ 825B051
-	setvar VAR_0x8004, 1
+	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_1
 	setvar VAR_0x8005, 7
 	special CallFrontierUtilFunc
 	compare VAR_RESULT, 0
 	goto_if_ne BattleFrontier_BattleFactoryBattleRoom_EventScript_25B07E
 	msgbox BattleFrontier_BattleFactoryBattleRoom_Text_25B517, MSGBOX_DEFAULT
-	setvar VAR_0x8004, 2
+	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_2
 	setvar VAR_0x8005, 7
 	special CallFrontierUtilFunc
 
@@ -202,7 +202,7 @@ BattleFrontier_BattleFactoryBattleRoom_EventScript_25B07E:: @ 825B07E
 	goto BattleFrontier_BattleFactoryBattleRoom_EventScript_25AEF8
 
 BattleFrontier_BattleFactoryBattleRoom_EventScript_25B09B:: @ 825B09B
-	setvar VAR_0x8004, 12
+	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_GET_FACILITY_SYMBOLS
 	special CallFrontierUtilFunc
 	compare VAR_RESULT, 2
 	goto_if_eq BattleFrontier_BattleFactoryBattleRoom_EventScript_25B105
@@ -214,14 +214,14 @@ BattleFrontier_BattleFactoryBattleRoom_EventScript_25B09B:: @ 825B09B
 	message BattleFrontier_BattleFactoryBattleRoom_Text_25B640
 	waitmessage
 	waitfanfare
-	setvar VAR_0x8004, 13
+	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_GIVE_FACILITY_SYMBOL
 	special CallFrontierUtilFunc
 	msgbox BattleFrontier_BattleFactoryBattleRoom_Text_25B66D, MSGBOX_DEFAULT
 	goto BattleFrontier_BattleFactoryBattleRoom_EventScript_25B105
 
 BattleFrontier_BattleFactoryBattleRoom_EventScript_25B0E0:: @ 825B0E0
 	closemessage
-	setvar VAR_0x8004, 2
+	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_2
 	setvar VAR_0x8005, 6
 	setvar VAR_0x8006, 0
 	special CallFrontierUtilFunc
@@ -253,7 +253,7 @@ BattleFrontier_BattleFactoryBattleRoom_EventScript_25B105:: @ 825B105
 	setvar VAR_0x8005, 1
 	copyvar VAR_0x8006, VAR_RESULT
 	special CallBattleFactoryFunction
-	setvar VAR_0x8004, 1
+	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_1
 	setvar VAR_0x8005, 2
 	special CallFrontierUtilFunc
 	addvar VAR_RESULT, 1

@@ -35,7 +35,7 @@
       "movement_range_y": 6,
       "trainer_type": "1",
       "trainer_sight_or_berry_tree_id": "3",
-      "script": "Route130_EventScript_1F73BF",
+      "script": "Route130_EventScript_Rodney",
       "flag": "0"
     },
     {
@@ -48,7 +48,7 @@
       "movement_range_y": 4,
       "trainer_type": "1",
       "trainer_sight_or_berry_tree_id": "5",
-      "script": "Route130_EventScript_1F73D6",
+      "script": "Route130_EventScript_Katie",
       "flag": "0"
     },
     {
@@ -74,7 +74,7 @@
       "movement_range_y": 4,
       "trainer_type": "1",
       "trainer_sight_or_berry_tree_id": "5",
-      "script": "Route130_EventScript_1F73ED",
+      "script": "Route130_EventScript_Santiago",
       "flag": "0"
     }
   ],

@@ -960,7 +960,7 @@ const u32 gUnknown_08D778F0[] = INCBIN_U32("graphics/battle_transitions/vs_frame
 const u32 gUnknown_08D779D8[] = INCBIN_U32("graphics/battle_transitions/vs_frame.bin.lz");
 const u32 gUnknown_08D77AE4[] = INCBIN_U32("graphics/battle_transitions/vs_frame.gbapal.lz");
 
-const u32 gUnknown_08D77B0C[] = INCBIN_U32("graphics/battle_transitions/vs.4bpp.lz");
+const u32 gVsLettersGfx[] = INCBIN_U32("graphics/battle_transitions/vs.4bpp.lz");
 
 #include "data/graphics/battle_terrain.h"
 
@@ -987,7 +987,7 @@ const u32 gUnknown_08D854C8[] = INCBIN_U32("graphics/battle_frontier/options_pal
 const u32 gBattleArenaJudgementSymbolsGfx[] = INCBIN_U32("graphics/battle_frontier/arena_judgement_symbols.4bpp.lz");
 const u32 gBattleArenaJudgementSymbolsPalette[] = INCBIN_U32("graphics/battle_frontier/arena_judgement_symbols.gbapal.lz");
 
-const u32 gUnknown_08D85600[] = INCBIN_U32("graphics/battle_frontier/text.gbapal.lz");
+const u32 gBattleWindowTextPalette[] = INCBIN_U32("graphics/battle_interface/text.gbapal.lz");
 const u16 gUnknown_08D85620[] = INCBIN_U16("graphics/battle_frontier/text_pp.gbapal");
 
 const u16 gTilesetAnims_BattleDomePals0_0[] = INCBIN_U16("graphics/battle_frontier/dome_anim1.gbapal");

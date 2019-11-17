@@ -1,0 +1,10 @@
+gCanvasColumnStart
+gCanvasPixels
+gCanvasRowEnd
+gCanvasHeight
+gCanvasColumnEnd
+gCanvasRowStart
+gCanvasMonPersonality
+gCanvasWidth
+gCanvasPalette
+gCanvasPaletteStart

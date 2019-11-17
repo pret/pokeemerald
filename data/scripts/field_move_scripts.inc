@@ -9,7 +9,7 @@ EventScript_CutTree:: @ 82906BB
 	bufferpartymonnick 0, VAR_RESULT
 	buffermovename 1, MOVE_CUT
 	msgbox Text_WantToCut, MSGBOX_YESNO
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq EventScript_CancelCut
 	msgbox Text_MonUsedFieldMove, MSGBOX_DEFAULT
 	closemessage
@@ -68,7 +68,7 @@ EventScript_RockSmash:: @ 82907A6
 	bufferpartymonnick 0, VAR_RESULT
 	buffermovename 1, MOVE_ROCK_SMASH
 	msgbox Text_WantToSmash, MSGBOX_YESNO
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq EventScript_CancelSmash
 	msgbox Text_MonUsedFieldMove, MSGBOX_DEFAULT
 	closemessage
@@ -133,7 +133,7 @@ EventScript_StrengthBoulder:: @ 82908BA
 	goto_if_eq EventScript_CantStrength
 	setfieldeffectargument 0, VAR_RESULT
 	msgbox Text_WantToStrength, MSGBOX_YESNO
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq EventScript_CancelStrength
 	closemessage
 	dofieldeffect FLDEFF_USE_STRENGTH
@@ -195,7 +195,7 @@ EventScript_UseWaterfall:: @ 8290A49
 	bufferpartymonnick 0, VAR_RESULT
 	setfieldeffectargument 0, VAR_RESULT
 	msgbox Text_WantToWaterfall, MSGBOX_YESNO
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq EventScript_EndWaterfall
 	msgbox Text_MonUsedWaterfall, MSGBOX_DEFAULT
 	dofieldeffect FLDEFF_USE_WATERFALL
@@ -231,7 +231,7 @@ EventScript_UseDive:: @ 8290B0F
 	setfieldeffectargument 0, VAR_RESULT
 	setfieldeffectargument 1, 1
 	msgbox Text_WantToDive, MSGBOX_YESNO
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq EventScript_EndDive
 	msgbox Text_MonUsedDive, MSGBOX_DEFAULT
 	dofieldeffect FLDEFF_USE_DIVE
@@ -256,7 +256,7 @@ EventScript_UseDiveUnderwater:: @ 8290B5A
 	setfieldeffectargument 0, VAR_RESULT
 	setfieldeffectargument 1, 1
 	msgbox Text_WantToSurface, MSGBOX_YESNO
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq EventScript_EndSurface
 	msgbox Text_MonUsedDive, MSGBOX_DEFAULT
 	dofieldeffect FLDEFF_USE_DIVE

@@ -677,7 +677,7 @@
 	.elseif \type == TRAINER_BATTLE_SET_TRAINER_B
 		.4byte \pointer1 @ text
 		.4byte \pointer2 @ text
-	.elseif \type == TRAINER_BATTLE_12
+	.elseif \type == TRAINER_BATTLE_HILL
 		.4byte \pointer1 @ text
 		.4byte \pointer2 @ text
 	.endif
@@ -891,7 +891,7 @@
 	.endm
 
 	@ Draws an image of the winner of the contest. In FireRed, this command is a nop. (The argument is discarded.)
-	.macro drawcontestwinner a:req
+	.macro showcontestwinner a:req
 	.byte 0x77
 	.byte \a
 	.endm
@@ -1080,9 +1080,11 @@
 	.byte \check
 	.endm
 
-	@ Hides the secondary box spawned by showmoney.
+	@ Hides the secondary box spawned by showmoney. Consumption of the x and y arguments was dummied out.
 	.macro hidemoneybox
 	.byte 0x94
+	.byte 0  @ \x
+	.byte 0  @ \y
 	.endm
 
 	@ Updates the secondary box spawned by showmoney. Consumes but does not use arguments.
@@ -1630,6 +1632,14 @@
 	call_if 5, \dest
 	.endm
 
+	.macro vgoto_if_eq dest:req
+	vgoto_if 1, \dest
+	.endm
+
+	.macro vgoto_if_ne dest:req
+	vgoto_if 0, \dest
+	.endm
+
 	.macro switch var:req
 	copyvar VAR_0x8000, \var
 	.endm
@@ -1670,4 +1680,11 @@
 	special SetMatchCallRegisteredFlag
 	setorcopyvar VAR_0x8000, \trainer
 	callstd STD_REGISTER_MATCH_CALL
+	.endm
+
+	.macro dofieldeffectsparkle x:req, y:req, priority:req
+	setfieldeffectargument 0, \x
+	setfieldeffectargument 1, \y
+	setfieldeffectargument 2, \priority
+	dofieldeffect FLDEFF_SPARKLE
 	.endm

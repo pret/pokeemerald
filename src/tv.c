@@ -762,7 +762,7 @@ void ClearTVShowData(void)
     ClearPokemonNews();
 }
 
-u8 special_0x44(void)
+u8 GetRandomActiveShowIdx(void)
 {
     u8 i;
     u8 j;
@@ -771,10 +771,8 @@ u8 special_0x44(void)
 
     for (i = 5; i < ARRAY_COUNT(gSaveBlock1Ptr->tvShows) - 1; i ++)
     {
-        if (gSaveBlock1Ptr->tvShows[i].common.kind == 0)
-        {
+        if (gSaveBlock1Ptr->tvShows[i].common.kind == TVSHOW_OFF_AIR)
             break;
-        }
     }
     j = Random() % i;
     selIdx = j;
@@ -783,44 +781,38 @@ u8 special_0x44(void)
         if (GetTVChannelByShowType(gSaveBlock1Ptr->tvShows[j].common.kind) != 4)
         {
             if (gSaveBlock1Ptr->tvShows[j].common.active == TRUE)
-            {
                 return j;
-            }
         }
         else
         {
             show = &gSaveBlock1Ptr->tvShows[j];
             if (show->massOutbreak.daysLeft == 0 && show->massOutbreak.active == TRUE)
-            {
                 return j;
-            }
         }
+
         if (j == 0)
-        {
             j = ARRAY_COUNT(gSaveBlock1Ptr->tvShows) - 2;
-        }
         else
-        {
             j --;
-        }
+
     } while (j != selIdx);
     return 0xFF;
 }
 
 u8 FindAnyTVShowOnTheAir(void)
 {
-    u8 response;
+    u8 show;
 
-    response = special_0x44();
-    if (response == 0xFF)
+    show = GetRandomActiveShowIdx();
+    if (show == 0xFF)
     {
         return 0xFF;
     }
-    if (gSaveBlock1Ptr->outbreakPokemonSpecies != SPECIES_NONE && gSaveBlock1Ptr->tvShows[response].common.kind == TVSHOW_MASS_OUTBREAK)
+    if (gSaveBlock1Ptr->outbreakPokemonSpecies != SPECIES_NONE && gSaveBlock1Ptr->tvShows[show].common.kind == TVSHOW_MASS_OUTBREAK)
     {
         return FindFirstActiveTVShowThatIsNotAMassOutbreak();
     }
-    return response;
+    return show;
 }
 
 void UpdateTVScreensOnMap(int width, int height)
@@ -876,7 +868,7 @@ void TurnOnTVScreen(void)
     DrawWholeMapView();
 }
 
-u8 special_0x45(void)
+u8 GetSelectedTVShow(void)
 {
     return gSaveBlock1Ptr->tvShows[gSpecialVar_0x8004].common.kind;
 }
@@ -887,7 +879,7 @@ u8 FindFirstActiveTVShowThatIsNotAMassOutbreak(void)
 
     for (i = 0; i < ARRAY_COUNT(gSaveBlock1Ptr->tvShows) - 1; i ++)
     {
-        if (gSaveBlock1Ptr->tvShows[i].common.kind != 0 && gSaveBlock1Ptr->tvShows[i].common.kind != TVSHOW_MASS_OUTBREAK && gSaveBlock1Ptr->tvShows[i].common.active == TRUE)
+        if (gSaveBlock1Ptr->tvShows[i].common.kind != TVSHOW_OFF_AIR && gSaveBlock1Ptr->tvShows[i].common.kind != TVSHOW_MASS_OUTBREAK && gSaveBlock1Ptr->tvShows[i].common.active == TRUE)
         {
             return i;
         }
@@ -895,7 +887,7 @@ u8 FindFirstActiveTVShowThatIsNotAMassOutbreak(void)
     return 0xFF;
 }
 
-u8 special_0x4a(void)
+u8 GetNextActiveShowIfMassOutbreak(void)
 {
     TVShow *tvShow;
 
@@ -2298,7 +2290,7 @@ void sub_80EE184(void)
     }
 }
 
-void sub_80EE2CC(void)
+void TryPutLotteryWinnerReportOnAir(void)
 {
     TVShow *show;
 
@@ -2365,7 +2357,7 @@ void sub_80EE44C(u8 nMonsCaught, u8 nPkblkUsed)
     }
 }
 
-void sub_80EE4DC(struct Pokemon *pokemon, u8 ribbonMonDataIdx)
+void TryPutSpotTheCutiesOnAir(struct Pokemon *pokemon, u8 ribbonMonDataIdx)
 {
     TVShow *show;
 
@@ -3149,7 +3141,7 @@ static void InterviewBefore_FanClubSpecial(void)
     }
 }
 
-bool8 sub_80EF88C(u8 monIdx)
+static bool8 IsPartyMonNicknamedOrNotEnglish(u8 monIdx)
 {
     struct Pokemon *pokemon;
     u8 language;
@@ -3164,9 +3156,9 @@ bool8 sub_80EF88C(u8 monIdx)
     return TRUE;
 }
 
-bool8 sub_80EF8F8(void)
+bool8 IsLeadMonNicknamedOrNotEnglish(void)
 {
-    return sub_80EF88C(GetLeadMonIndex());
+    return IsPartyMonNicknamedOrNotEnglish(GetLeadMonIndex());
 }
 
 void DeleteTVShowInArrayByIdx(TVShow *shows, u8 idx)
@@ -3436,13 +3428,14 @@ bool8 TV_IsScriptShowKindAlreadyInQueue(void)
     return FALSE;
 }
 
-bool8 TV_PutNameRaterShowOnTheAirIfNicknameChanged(void)
+bool8 TryPutNameRaterShowOnTheAir(void)
 {
     GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_NICKNAME, gStringVar1);
+
+    // Nickname wasnt changed
     if (!StringCompare(gStringVar3, gStringVar1))
-    {
         return FALSE;
-    }
+
     PutNameRaterShowOnTheAir();
     return TRUE;
 }
@@ -3478,22 +3471,18 @@ void ChangeBoxPokemonNickname_CB(void)
     CB2_ReturnToFieldContinueScriptPlayMapMusic();
 }
 
-void TV_CopyNicknameToStringVar1AndEnsureTerminated(void)
+void BufferMonNickname(void)
 {
     GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_NICKNAME, gStringVar1);
     StringGetEnd10(gStringVar1);
 }
 
-void TV_CheckMonOTIDEqualsPlayerID(void)
+void IsMonOTIDNotPlayers(void)
 {
     if (GetPlayerIDAsU32() == GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_OT_ID, NULL))
-    {
         gSpecialVar_Result = FALSE;
-    }
     else
-    {
         gSpecialVar_Result = TRUE;
-    }
 }
 
 u8 GetTVChannelByShowType(u8 kind)

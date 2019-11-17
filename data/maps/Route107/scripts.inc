@@ -16,7 +16,7 @@ Route107_EventScript_Tony:: @ 81EE5AC
 	end
 
 Route107_EventScript_TonyRegisterMatchCallAfterBattle:: @ 81EE5D8
-	special sub_80B4808
+	special PlayerFaceTrainerAfterBattle
 	waitmovement 0
 	msgbox Route107_Text_TonyRegister, MSGBOX_DEFAULT
 	register_matchcall TRAINER_TONY_1

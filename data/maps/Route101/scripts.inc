@@ -1,13 +1,13 @@
 Route101_MapScripts:: @ 81EBCBA
 	map_script MAP_SCRIPT_ON_TRANSITION, Route101_OnTransition
-	map_script MAP_SCRIPT_ON_FRAME_TABLE, Route101_MapScript2_1EBCCB
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, Route101_OnFrame
 	.byte 0
 
 Route101_OnTransition: @ 81EBCC5
 	call ProfBirch_EventScript_UpdateLocation
 	end
 
-Route101_MapScript2_1EBCCB: @ 81EBCCB
+Route101_OnFrame: @ 81EBCCB
 	map_script_2 VAR_ROUTE101_STATE, 0, Route101_EventScript_HideMapNamePopup
 	.2byte 0
 

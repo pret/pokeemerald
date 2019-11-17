@@ -27,7 +27,7 @@ const struct Trainer gTrainers[] = {
         .party = {.NoItemDefaultMoves = sParty_Sawyer1},
     },
 
-    [TRAINER_GRUNT_1] =
+    [TRAINER_GRUNT_AQUA_HIDEOUT_1] =
     {
         .partyFlags = 0,
         .trainerClass = TRAINER_CLASS_TEAM_AQUA,
@@ -37,11 +37,11 @@ const struct Trainer gTrainers[] = {
         .items = {},
         .doubleBattle = FALSE,
         .aiFlags = AI_SCRIPT_CHECK_BAD_MOVE,
-        .partySize = ARRAY_COUNT(sParty_Grunt1),
-        .party = {.NoItemDefaultMoves = sParty_Grunt1},
+        .partySize = ARRAY_COUNT(sParty_GruntAquaHideout1),
+        .party = {.NoItemDefaultMoves = sParty_GruntAquaHideout1},
     },
 
-    [TRAINER_GRUNT_2] =
+    [TRAINER_GRUNT_AQUA_HIDEOUT_2] =
     {
         .partyFlags = 0,
         .trainerClass = TRAINER_CLASS_TEAM_AQUA,
@@ -51,11 +51,11 @@ const struct Trainer gTrainers[] = {
         .items = {},
         .doubleBattle = FALSE,
         .aiFlags = AI_SCRIPT_CHECK_BAD_MOVE,
-        .partySize = ARRAY_COUNT(sParty_Grunt2),
-        .party = {.NoItemDefaultMoves = sParty_Grunt2},
+        .partySize = ARRAY_COUNT(sParty_GruntAquaHideout2),
+        .party = {.NoItemDefaultMoves = sParty_GruntAquaHideout2},
     },
 
-    [TRAINER_GRUNT_3] =
+    [TRAINER_GRUNT_AQUA_HIDEOUT_3] =
     {
         .partyFlags = 0,
         .trainerClass = TRAINER_CLASS_TEAM_AQUA,
@@ -65,11 +65,11 @@ const struct Trainer gTrainers[] = {
         .items = {},
         .doubleBattle = FALSE,
         .aiFlags = AI_SCRIPT_CHECK_BAD_MOVE,
-        .partySize = ARRAY_COUNT(sParty_Grunt3),
-        .party = {.NoItemDefaultMoves = sParty_Grunt3},
+        .partySize = ARRAY_COUNT(sParty_GruntAquaHideout3),
+        .party = {.NoItemDefaultMoves = sParty_GruntAquaHideout3},
     },
 
-    [TRAINER_GRUNT_4] =
+    [TRAINER_GRUNT_AQUA_HIDEOUT_4] =
     {
         .partyFlags = 0,
         .trainerClass = TRAINER_CLASS_TEAM_AQUA,
@@ -79,11 +79,11 @@ const struct Trainer gTrainers[] = {
         .items = {},
         .doubleBattle = FALSE,
         .aiFlags = AI_SCRIPT_CHECK_BAD_MOVE,
-        .partySize = ARRAY_COUNT(sParty_Grunt4),
-        .party = {.NoItemDefaultMoves = sParty_Grunt4},
+        .partySize = ARRAY_COUNT(sParty_GruntAquaHideout4),
+        .party = {.NoItemDefaultMoves = sParty_GruntAquaHideout4},
     },
 
-    [TRAINER_GRUNT_5] =
+    [TRAINER_GRUNT_SEAFLOOR_CAVERN_1] =
     {
         .partyFlags = 0,
         .trainerClass = TRAINER_CLASS_TEAM_AQUA,
@@ -93,11 +93,11 @@ const struct Trainer gTrainers[] = {
         .items = {},
         .doubleBattle = FALSE,
         .aiFlags = AI_SCRIPT_CHECK_BAD_MOVE,
-        .partySize = ARRAY_COUNT(sParty_Grunt5),
-        .party = {.NoItemDefaultMoves = sParty_Grunt5},
+        .partySize = ARRAY_COUNT(sParty_GruntSeafloorCavern1),
+        .party = {.NoItemDefaultMoves = sParty_GruntSeafloorCavern1},
     },
 
-    [TRAINER_GRUNT_6] =
+    [TRAINER_GRUNT_SEAFLOOR_CAVERN_2] =
     {
         .partyFlags = 0,
         .trainerClass = TRAINER_CLASS_TEAM_AQUA,
@@ -107,11 +107,11 @@ const struct Trainer gTrainers[] = {
         .items = {},
         .doubleBattle = FALSE,
         .aiFlags = AI_SCRIPT_CHECK_BAD_MOVE,
-        .partySize = ARRAY_COUNT(sParty_Grunt6),
-        .party = {.NoItemDefaultMoves = sParty_Grunt6},
+        .partySize = ARRAY_COUNT(sParty_GruntSeafloorCavern2),
+        .party = {.NoItemDefaultMoves = sParty_GruntSeafloorCavern2},
     },
 
-    [TRAINER_GRUNT_7] =
+    [TRAINER_GRUNT_SEAFLOOR_CAVERN_3] =
     {
         .partyFlags = 0,
         .trainerClass = TRAINER_CLASS_TEAM_AQUA,
@@ -121,8 +121,8 @@ const struct Trainer gTrainers[] = {
         .items = {},
         .doubleBattle = FALSE,
         .aiFlags = AI_SCRIPT_CHECK_BAD_MOVE,
-        .partySize = ARRAY_COUNT(sParty_Grunt7),
-        .party = {.NoItemDefaultMoves = sParty_Grunt7},
+        .partySize = ARRAY_COUNT(sParty_GruntSeafloorCavern3),
+        .party = {.NoItemDefaultMoves = sParty_GruntSeafloorCavern3},
     },
 
     [TRAINER_GABRIELLE_1] =
@@ -139,7 +139,7 @@ const struct Trainer gTrainers[] = {
         .party = {.NoItemDefaultMoves = sParty_Gabrielle1},
     },
 
-    [TRAINER_GRUNT_8] =
+    [TRAINER_GRUNT_PETALBURG_WOODS] =
     {
         .partyFlags = 0,
         .trainerClass = TRAINER_CLASS_TEAM_AQUA,
@@ -149,8 +149,8 @@ const struct Trainer gTrainers[] = {
         .items = {},
         .doubleBattle = FALSE,
         .aiFlags = AI_SCRIPT_CHECK_BAD_MOVE,
-        .partySize = ARRAY_COUNT(sParty_Grunt8),
-        .party = {.NoItemDefaultMoves = sParty_Grunt8},
+        .partySize = ARRAY_COUNT(sParty_GruntPetalburgWoods),
+        .party = {.NoItemDefaultMoves = sParty_GruntPetalburgWoods},
     },
 
     [TRAINER_MARCEL] =
@@ -195,7 +195,7 @@ const struct Trainer gTrainers[] = {
         .party = {.NoItemDefaultMoves = sParty_Ed},
     },
 
-    [TRAINER_GRUNT_9] =
+    [TRAINER_GRUNT_SEAFLOOR_CAVERN_4] =
     {
         .partyFlags = 0,
         .trainerClass = TRAINER_CLASS_TEAM_AQUA,
@@ -205,8 +205,8 @@ const struct Trainer gTrainers[] = {
         .items = {},
         .doubleBattle = FALSE,
         .aiFlags = AI_SCRIPT_CHECK_BAD_MOVE,
-        .partySize = ARRAY_COUNT(sParty_Grunt9),
-        .party = {.NoItemDefaultMoves = sParty_Grunt9},
+        .partySize = ARRAY_COUNT(sParty_GruntSeafloorCavern4),
+        .party = {.NoItemDefaultMoves = sParty_GruntSeafloorCavern4},
     },
 
     [TRAINER_DECLAN] =
@@ -223,7 +223,7 @@ const struct Trainer gTrainers[] = {
         .party = {.NoItemDefaultMoves = sParty_Declan},
     },
 
-    [TRAINER_GRUNT_10] =
+    [TRAINER_GRUNT_RUSTURF_TUNNEL] =
     {
         .partyFlags = 0,
         .trainerClass = TRAINER_CLASS_TEAM_AQUA,
@@ -233,11 +233,11 @@ const struct Trainer gTrainers[] = {
         .items = {},
         .doubleBattle = FALSE,
         .aiFlags = AI_SCRIPT_CHECK_BAD_MOVE,
-        .partySize = ARRAY_COUNT(sParty_Grunt10),
-        .party = {.NoItemDefaultMoves = sParty_Grunt10},
+        .partySize = ARRAY_COUNT(sParty_GruntRusturfTunnel),
+        .party = {.NoItemDefaultMoves = sParty_GruntRusturfTunnel},
     },
 
-    [TRAINER_GRUNT_11] =
+    [TRAINER_GRUNT_WEATHER_INST_1] =
     {
         .partyFlags = 0,
         .trainerClass = TRAINER_CLASS_TEAM_AQUA,
@@ -247,11 +247,11 @@ const struct Trainer gTrainers[] = {
         .items = {},
         .doubleBattle = FALSE,
         .aiFlags = AI_SCRIPT_CHECK_BAD_MOVE,
-        .partySize = ARRAY_COUNT(sParty_Grunt11),
-        .party = {.NoItemDefaultMoves = sParty_Grunt11},
+        .partySize = ARRAY_COUNT(sParty_GruntWeatherInst1),
+        .party = {.NoItemDefaultMoves = sParty_GruntWeatherInst1},
     },
 
-    [TRAINER_GRUNT_12] =
+    [TRAINER_GRUNT_WEATHER_INST_2] =
     {
         .partyFlags = 0,
         .trainerClass = TRAINER_CLASS_TEAM_AQUA,
@@ -261,11 +261,11 @@ const struct Trainer gTrainers[] = {
         .items = {},
         .doubleBattle = FALSE,
         .aiFlags = AI_SCRIPT_CHECK_BAD_MOVE,
-        .partySize = ARRAY_COUNT(sParty_Grunt12),
-        .party = {.NoItemDefaultMoves = sParty_Grunt12},
+        .partySize = ARRAY_COUNT(sParty_GruntWeatherInst2),
+        .party = {.NoItemDefaultMoves = sParty_GruntWeatherInst2},
     },
 
-    [TRAINER_GRUNT_13] =
+    [TRAINER_GRUNT_WEATHER_INST_3] =
     {
         .partyFlags = 0,
         .trainerClass = TRAINER_CLASS_TEAM_AQUA,
@@ -275,11 +275,11 @@ const struct Trainer gTrainers[] = {
         .items = {},
         .doubleBattle = FALSE,
         .aiFlags = AI_SCRIPT_CHECK_BAD_MOVE,
-        .partySize = ARRAY_COUNT(sParty_Grunt13),
-        .party = {.NoItemDefaultMoves = sParty_Grunt13},
+        .partySize = ARRAY_COUNT(sParty_GruntWeatherInst3),
+        .party = {.NoItemDefaultMoves = sParty_GruntWeatherInst3},
     },
 
-    [TRAINER_GRUNT_14] =
+    [TRAINER_GRUNT_MUSEUM_1] =
     {
         .partyFlags = 0,
         .trainerClass = TRAINER_CLASS_TEAM_AQUA,
@@ -289,11 +289,11 @@ const struct Trainer gTrainers[] = {
         .items = {},
         .doubleBattle = FALSE,
         .aiFlags = AI_SCRIPT_CHECK_BAD_MOVE,
-        .partySize = ARRAY_COUNT(sParty_Grunt14),
-        .party = {.NoItemDefaultMoves = sParty_Grunt14},
+        .partySize = ARRAY_COUNT(sParty_GruntMuseum1),
+        .party = {.NoItemDefaultMoves = sParty_GruntMuseum1},
     },
 
-    [TRAINER_GRUNT_15] =
+    [TRAINER_GRUNT_MUSEUM_2] =
     {
         .partyFlags = 0,
         .trainerClass = TRAINER_CLASS_TEAM_AQUA,
@@ -303,11 +303,11 @@ const struct Trainer gTrainers[] = {
         .items = {},
         .doubleBattle = FALSE,
         .aiFlags = AI_SCRIPT_CHECK_BAD_MOVE,
-        .partySize = ARRAY_COUNT(sParty_Grunt15),
-        .party = {.NoItemDefaultMoves = sParty_Grunt15},
+        .partySize = ARRAY_COUNT(sParty_GruntMuseum2),
+        .party = {.NoItemDefaultMoves = sParty_GruntMuseum2},
     },
 
-    [TRAINER_GRUNT_16] =
+    [TRAINER_GRUNT_SPACE_CENTER_1] =
     {
         .partyFlags = 0,
         .trainerClass = TRAINER_CLASS_TEAM_MAGMA,
@@ -317,11 +317,11 @@ const struct Trainer gTrainers[] = {
         .items = {},
         .doubleBattle = FALSE,
         .aiFlags = AI_SCRIPT_CHECK_BAD_MOVE,
-        .partySize = ARRAY_COUNT(sParty_Grunt16),
-        .party = {.NoItemDefaultMoves = sParty_Grunt16},
+        .partySize = ARRAY_COUNT(sParty_GruntSpaceCenter1),
+        .party = {.NoItemDefaultMoves = sParty_GruntSpaceCenter1},
     },
 
-    [TRAINER_GRUNT_17] =
+    [TRAINER_GRUNT_MT_PYRE_1] =
     {
         .partyFlags = 0,
         .trainerClass = TRAINER_CLASS_TEAM_AQUA,
@@ -331,11 +331,11 @@ const struct Trainer gTrainers[] = {
         .items = {},
         .doubleBattle = FALSE,
         .aiFlags = AI_SCRIPT_CHECK_BAD_MOVE,
-        .partySize = ARRAY_COUNT(sParty_Grunt17),
-        .party = {.NoItemDefaultMoves = sParty_Grunt17},
+        .partySize = ARRAY_COUNT(sParty_GruntMtPyre1),
+        .party = {.NoItemDefaultMoves = sParty_GruntMtPyre1},
     },
 
-    [TRAINER_GRUNT_18] =
+    [TRAINER_GRUNT_MT_PYRE_2] =
     {
         .partyFlags = 0,
         .trainerClass = TRAINER_CLASS_TEAM_AQUA,
@@ -345,11 +345,11 @@ const struct Trainer gTrainers[] = {
         .items = {},
         .doubleBattle = FALSE,
         .aiFlags = AI_SCRIPT_CHECK_BAD_MOVE,
-        .partySize = ARRAY_COUNT(sParty_Grunt18),
-        .party = {.NoItemDefaultMoves = sParty_Grunt18},
+        .partySize = ARRAY_COUNT(sParty_GruntMtPyre2),
+        .party = {.NoItemDefaultMoves = sParty_GruntMtPyre2},
     },
 
-    [TRAINER_GRUNT_19] =
+    [TRAINER_GRUNT_MT_PYRE_3] =
     {
         .partyFlags = 0,
         .trainerClass = TRAINER_CLASS_TEAM_AQUA,
@@ -359,11 +359,11 @@ const struct Trainer gTrainers[] = {
         .items = {},
         .doubleBattle = FALSE,
         .aiFlags = AI_SCRIPT_CHECK_BAD_MOVE,
-        .partySize = ARRAY_COUNT(sParty_Grunt19),
-        .party = {.NoItemDefaultMoves = sParty_Grunt19},
+        .partySize = ARRAY_COUNT(sParty_GruntMtPyre3),
+        .party = {.NoItemDefaultMoves = sParty_GruntMtPyre3},
     },
 
-    [TRAINER_GRUNT_20] =
+    [TRAINER_GRUNT_WEATHER_INST_4] =
     {
         .partyFlags = 0,
         .trainerClass = TRAINER_CLASS_TEAM_AQUA,
@@ -373,11 +373,11 @@ const struct Trainer gTrainers[] = {
         .items = {},
         .doubleBattle = FALSE,
         .aiFlags = AI_SCRIPT_CHECK_BAD_MOVE,
-        .partySize = ARRAY_COUNT(sParty_Grunt20),
-        .party = {.NoItemDefaultMoves = sParty_Grunt20},
+        .partySize = ARRAY_COUNT(sParty_GruntWeatherInst4),
+        .party = {.NoItemDefaultMoves = sParty_GruntWeatherInst4},
     },
 
-    [TRAINER_GRUNT_21] =
+    [TRAINER_GRUNT_AQUA_HIDEOUT_5] =
     {
         .partyFlags = 0,
         .trainerClass = TRAINER_CLASS_TEAM_AQUA,
@@ -387,11 +387,11 @@ const struct Trainer gTrainers[] = {
         .items = {},
         .doubleBattle = FALSE,
         .aiFlags = AI_SCRIPT_CHECK_BAD_MOVE,
-        .partySize = ARRAY_COUNT(sParty_Grunt21),
-        .party = {.NoItemDefaultMoves = sParty_Grunt21},
+        .partySize = ARRAY_COUNT(sParty_GruntAquaHideout5),
+        .party = {.NoItemDefaultMoves = sParty_GruntAquaHideout5},
     },
 
-    [TRAINER_GRUNT_22] =
+    [TRAINER_GRUNT_AQUA_HIDEOUT_6] =
     {
         .partyFlags = 0,
         .trainerClass = TRAINER_CLASS_TEAM_AQUA,
@@ -401,8 +401,8 @@ const struct Trainer gTrainers[] = {
         .items = {},
         .doubleBattle = FALSE,
         .aiFlags = AI_SCRIPT_CHECK_BAD_MOVE,
-        .partySize = ARRAY_COUNT(sParty_Grunt22),
-        .party = {.NoItemDefaultMoves = sParty_Grunt22},
+        .partySize = ARRAY_COUNT(sParty_GruntAquaHideout6),
+        .party = {.NoItemDefaultMoves = sParty_GruntAquaHideout6},
     },
 
     [TRAINER_FREDRICK] =
@@ -1623,7 +1623,7 @@ const struct Trainer gTrainers[] = {
         .party = {.ItemCustomMoves = sParty_Daphne},
     },
 
-    [TRAINER_GRUNT_23] =
+    [TRAINER_GRUNT_SPACE_CENTER_2] =
     {
         .partyFlags = 0,
         .trainerClass = TRAINER_CLASS_TEAM_MAGMA,
@@ -1633,8 +1633,8 @@ const struct Trainer gTrainers[] = {
         .items = {},
         .doubleBattle = FALSE,
         .aiFlags = AI_SCRIPT_CHECK_BAD_MOVE,
-        .partySize = ARRAY_COUNT(sParty_Grunt23),
-        .party = {.NoItemDefaultMoves = sParty_Grunt23},
+        .partySize = ARRAY_COUNT(sParty_GruntSpaceCenter2),
+        .party = {.NoItemDefaultMoves = sParty_GruntSpaceCenter2},
     },
 
     [TRAINER_CINDY_2] =
@@ -2043,7 +2043,7 @@ const struct Trainer gTrainers[] = {
         .party = {.NoItemDefaultMoves = sParty_Mark},
     },
 
-    [TRAINER_GRUNT_24] =
+    [TRAINER_GRUNT_MT_CHIMNEY_1] =
     {
         .partyFlags = 0,
         .trainerClass = TRAINER_CLASS_TEAM_MAGMA,
@@ -2053,8 +2053,8 @@ const struct Trainer gTrainers[] = {
         .items = {},
         .doubleBattle = FALSE,
         .aiFlags = AI_SCRIPT_CHECK_BAD_MOVE,
-        .partySize = ARRAY_COUNT(sParty_Grunt24),
-        .party = {.NoItemDefaultMoves = sParty_Grunt24},
+        .partySize = ARRAY_COUNT(sParty_GruntMtChimney1),
+        .party = {.NoItemDefaultMoves = sParty_GruntMtChimney1},
     },
 
     [TRAINER_STEVE_2] =
@@ -2687,7 +2687,7 @@ const struct Trainer gTrainers[] = {
         .party = {.NoItemCustomMoves = sParty_Kirk},
     },
 
-    [TRAINER_GRUNT_25] =
+    [TRAINER_GRUNT_AQUA_HIDEOUT_7] =
     {
         .partyFlags = 0,
         .trainerClass = TRAINER_CLASS_TEAM_AQUA,
@@ -2697,11 +2697,11 @@ const struct Trainer gTrainers[] = {
         .items = {},
         .doubleBattle = FALSE,
         .aiFlags = AI_SCRIPT_CHECK_BAD_MOVE,
-        .partySize = ARRAY_COUNT(sParty_Grunt25),
-        .party = {.NoItemDefaultMoves = sParty_Grunt25},
+        .partySize = ARRAY_COUNT(sParty_GruntAquaHideout7),
+        .party = {.NoItemDefaultMoves = sParty_GruntAquaHideout7},
     },
 
-    [TRAINER_GRUNT_26] =
+    [TRAINER_GRUNT_AQUA_HIDEOUT_8] =
     {
         .partyFlags = 0,
         .trainerClass = TRAINER_CLASS_TEAM_AQUA,
@@ -2711,8 +2711,8 @@ const struct Trainer gTrainers[] = {
         .items = {},
         .doubleBattle = FALSE,
         .aiFlags = AI_SCRIPT_CHECK_BAD_MOVE,
-        .partySize = ARRAY_COUNT(sParty_Grunt26),
-        .party = {.NoItemDefaultMoves = sParty_Grunt26},
+        .partySize = ARRAY_COUNT(sParty_GruntAquaHideout8),
+        .party = {.NoItemDefaultMoves = sParty_GruntAquaHideout8},
     },
 
     [TRAINER_SHAWN] =
@@ -7937,7 +7937,7 @@ const struct Trainer gTrainers[] = {
         .party = {.NoItemDefaultMoves = sParty_Julio},
     },
 
-    [TRAINER_GRUNT_27] =
+    [TRAINER_GRUNT_SEAFLOOR_CAVERN_5] =
     {
         .partyFlags = 0,
         .trainerClass = TRAINER_CLASS_TEAM_AQUA,
@@ -7947,11 +7947,11 @@ const struct Trainer gTrainers[] = {
         .items = {},
         .doubleBattle = FALSE,
         .aiFlags = AI_SCRIPT_CHECK_BAD_MOVE,
-        .partySize = ARRAY_COUNT(sParty_Grunt27),
-        .party = {.NoItemDefaultMoves = sParty_Grunt27},
+        .partySize = ARRAY_COUNT(sParty_GruntSeafloorCavern5),
+        .party = {.NoItemDefaultMoves = sParty_GruntSeafloorCavern5},
     },
 
-    [TRAINER_GRUNT_28] =
+    [TRAINER_GRUNT_UNUSED] =
     {
         .partyFlags = 0,
         .trainerClass = TRAINER_CLASS_TEAM_MAGMA,
@@ -7961,11 +7961,11 @@ const struct Trainer gTrainers[] = {
         .items = {},
         .doubleBattle = FALSE,
         .aiFlags = AI_SCRIPT_CHECK_BAD_MOVE,
-        .partySize = ARRAY_COUNT(sParty_Grunt28),
-        .party = {.NoItemDefaultMoves = sParty_Grunt28},
+        .partySize = ARRAY_COUNT(sParty_GruntUnused),
+        .party = {.NoItemDefaultMoves = sParty_GruntUnused},
     },
 
-    [TRAINER_GRUNT_29] =
+    [TRAINER_GRUNT_MT_PYRE_4] =
     {
         .partyFlags = 0,
         .trainerClass = TRAINER_CLASS_TEAM_AQUA,
@@ -7975,11 +7975,11 @@ const struct Trainer gTrainers[] = {
         .items = {},
         .doubleBattle = FALSE,
         .aiFlags = AI_SCRIPT_CHECK_BAD_MOVE,
-        .partySize = ARRAY_COUNT(sParty_Grunt29),
-        .party = {.NoItemDefaultMoves = sParty_Grunt29},
+        .partySize = ARRAY_COUNT(sParty_GruntMtPyre4),
+        .party = {.NoItemDefaultMoves = sParty_GruntMtPyre4},
     },
 
-    [TRAINER_GRUNT_30] =
+    [TRAINER_GRUNT_JAGGED_PASS] =
     {
         .partyFlags = 0,
         .trainerClass = TRAINER_CLASS_TEAM_MAGMA,
@@ -7989,8 +7989,8 @@ const struct Trainer gTrainers[] = {
         .items = {},
         .doubleBattle = FALSE,
         .aiFlags = AI_SCRIPT_CHECK_BAD_MOVE,
-        .partySize = ARRAY_COUNT(sParty_Grunt30),
-        .party = {.NoItemDefaultMoves = sParty_Grunt30},
+        .partySize = ARRAY_COUNT(sParty_GruntJaggedPass),
+        .party = {.NoItemDefaultMoves = sParty_GruntJaggedPass},
     },
 
     [TRAINER_MARC] =
@@ -8105,7 +8105,7 @@ const struct Trainer gTrainers[] = {
         .party = {.NoItemDefaultMoves = sParty_Harrison},
     },
 
-    [TRAINER_GRUNT_31] =
+    [TRAINER_GRUNT_MT_CHIMNEY_2] =
     {
         .partyFlags = 0,
         .trainerClass = TRAINER_CLASS_TEAM_MAGMA,
@@ -8115,8 +8115,8 @@ const struct Trainer gTrainers[] = {
         .items = {},
         .doubleBattle = FALSE,
         .aiFlags = AI_SCRIPT_CHECK_BAD_MOVE,
-        .partySize = ARRAY_COUNT(sParty_Grunt31),
-        .party = {.NoItemDefaultMoves = sParty_Grunt31},
+        .partySize = ARRAY_COUNT(sParty_GruntMtChimney2),
+        .party = {.NoItemDefaultMoves = sParty_GruntMtChimney2},
     },
 
     [TRAINER_CLARENCE] =
@@ -8203,7 +8203,7 @@ const struct Trainer gTrainers[] = {
         .party = {.NoItemDefaultMoves = sParty_Nicholas},
     },
 
-    [TRAINER_GRUNT_32] =
+    [TRAINER_GRUNT_SPACE_CENTER_3] =
     {
         .partyFlags = 0,
         .trainerClass = TRAINER_CLASS_TEAM_MAGMA,
@@ -8213,11 +8213,11 @@ const struct Trainer gTrainers[] = {
         .items = {},
         .doubleBattle = FALSE,
         .aiFlags = AI_SCRIPT_CHECK_BAD_MOVE,
-        .partySize = ARRAY_COUNT(sParty_Grunt32),
-        .party = {.NoItemDefaultMoves = sParty_Grunt32},
+        .partySize = ARRAY_COUNT(sParty_GruntSpaceCenter3),
+        .party = {.NoItemDefaultMoves = sParty_GruntSpaceCenter3},
     },
 
-    [TRAINER_GRUNT_33] =
+    [TRAINER_GRUNT_SPACE_CENTER_4] =
     {
         .partyFlags = 0,
         .trainerClass = TRAINER_CLASS_TEAM_MAGMA,
@@ -8227,11 +8227,11 @@ const struct Trainer gTrainers[] = {
         .items = {},
         .doubleBattle = FALSE,
         .aiFlags = AI_SCRIPT_CHECK_BAD_MOVE,
-        .partySize = ARRAY_COUNT(sParty_Grunt33),
-        .party = {.NoItemDefaultMoves = sParty_Grunt33},
+        .partySize = ARRAY_COUNT(sParty_GruntSpaceCenter4),
+        .party = {.NoItemDefaultMoves = sParty_GruntSpaceCenter4},
     },
 
-    [TRAINER_GRUNT_34] =
+    [TRAINER_GRUNT_SPACE_CENTER_5] =
     {
         .partyFlags = 0,
         .trainerClass = TRAINER_CLASS_TEAM_MAGMA,
@@ -8241,11 +8241,11 @@ const struct Trainer gTrainers[] = {
         .items = {},
         .doubleBattle = FALSE,
         .aiFlags = AI_SCRIPT_CHECK_BAD_MOVE,
-        .partySize = ARRAY_COUNT(sParty_Grunt34),
-        .party = {.NoItemDefaultMoves = sParty_Grunt34},
+        .partySize = ARRAY_COUNT(sParty_GruntSpaceCenter5),
+        .party = {.NoItemDefaultMoves = sParty_GruntSpaceCenter5},
     },
 
-    [TRAINER_GRUNT_35] =
+    [TRAINER_GRUNT_SPACE_CENTER_6] =
     {
         .partyFlags = 0,
         .trainerClass = TRAINER_CLASS_TEAM_MAGMA,
@@ -8255,11 +8255,11 @@ const struct Trainer gTrainers[] = {
         .items = {},
         .doubleBattle = FALSE,
         .aiFlags = AI_SCRIPT_CHECK_BAD_MOVE,
-        .partySize = ARRAY_COUNT(sParty_Grunt35),
-        .party = {.NoItemDefaultMoves = sParty_Grunt35},
+        .partySize = ARRAY_COUNT(sParty_GruntSpaceCenter6),
+        .party = {.NoItemDefaultMoves = sParty_GruntSpaceCenter6},
     },
 
-    [TRAINER_GRUNT_36] =
+    [TRAINER_GRUNT_SPACE_CENTER_7] =
     {
         .partyFlags = 0,
         .trainerClass = TRAINER_CLASS_TEAM_MAGMA,
@@ -8269,8 +8269,8 @@ const struct Trainer gTrainers[] = {
         .items = {},
         .doubleBattle = FALSE,
         .aiFlags = AI_SCRIPT_CHECK_BAD_MOVE,
-        .partySize = ARRAY_COUNT(sParty_Grunt36),
-        .party = {.NoItemDefaultMoves = sParty_Grunt36},
+        .partySize = ARRAY_COUNT(sParty_GruntSpaceCenter7),
+        .party = {.NoItemDefaultMoves = sParty_GruntSpaceCenter7},
     },
 
     [TRAINER_MACEY] =
@@ -8343,7 +8343,7 @@ const struct Trainer gTrainers[] = {
         .party = {.NoItemDefaultMoves = sParty_Isabella},
     },
 
-    [TRAINER_GRUNT_37] =
+    [TRAINER_GRUNT_WEATHER_INST_5] =
     {
         .partyFlags = 0,
         .trainerClass = TRAINER_CLASS_TEAM_AQUA,
@@ -8353,8 +8353,8 @@ const struct Trainer gTrainers[] = {
         .items = {},
         .doubleBattle = FALSE,
         .aiFlags = AI_SCRIPT_CHECK_BAD_MOVE,
-        .partySize = ARRAY_COUNT(sParty_Grunt37),
-        .party = {.NoItemDefaultMoves = sParty_Grunt37},
+        .partySize = ARRAY_COUNT(sParty_GruntWeatherInst5),
+        .party = {.NoItemDefaultMoves = sParty_GruntWeatherInst5},
     },
 
     [TRAINER_TABITHA_2] =
@@ -10023,7 +10023,7 @@ const struct Trainer gTrainers[] = {
         .party = {.NoItemDefaultMoves = sParty_Deandre},
     },
 
-    [TRAINER_GRUNT_38] =
+    [TRAINER_GRUNT_MAGMA_HIDEOUT_1] =
     {
         .partyFlags = 0,
         .trainerClass = TRAINER_CLASS_TEAM_MAGMA,
@@ -10033,11 +10033,11 @@ const struct Trainer gTrainers[] = {
         .items = {},
         .doubleBattle = FALSE,
         .aiFlags = AI_SCRIPT_CHECK_BAD_MOVE,
-        .partySize = ARRAY_COUNT(sParty_Grunt38),
-        .party = {.NoItemDefaultMoves = sParty_Grunt38},
+        .partySize = ARRAY_COUNT(sParty_GruntMagmaHideout1),
+        .party = {.NoItemDefaultMoves = sParty_GruntMagmaHideout1},
     },
 
-    [TRAINER_GRUNT_39] =
+    [TRAINER_GRUNT_MAGMA_HIDEOUT_2] =
     {
         .partyFlags = 0,
         .trainerClass = TRAINER_CLASS_TEAM_MAGMA,
@@ -10047,11 +10047,11 @@ const struct Trainer gTrainers[] = {
         .items = {},
         .doubleBattle = FALSE,
         .aiFlags = AI_SCRIPT_CHECK_BAD_MOVE,
-        .partySize = ARRAY_COUNT(sParty_Grunt39),
-        .party = {.NoItemDefaultMoves = sParty_Grunt39},
+        .partySize = ARRAY_COUNT(sParty_GruntMagmaHideout2),
+        .party = {.NoItemDefaultMoves = sParty_GruntMagmaHideout2},
     },
 
-    [TRAINER_GRUNT_40] =
+    [TRAINER_GRUNT_MAGMA_HIDEOUT_3] =
     {
         .partyFlags = 0,
         .trainerClass = TRAINER_CLASS_TEAM_MAGMA,
@@ -10061,11 +10061,11 @@ const struct Trainer gTrainers[] = {
         .items = {},
         .doubleBattle = FALSE,
         .aiFlags = AI_SCRIPT_CHECK_BAD_MOVE,
-        .partySize = ARRAY_COUNT(sParty_Grunt40),
-        .party = {.NoItemDefaultMoves = sParty_Grunt40},
+        .partySize = ARRAY_COUNT(sParty_GruntMagmaHideout3),
+        .party = {.NoItemDefaultMoves = sParty_GruntMagmaHideout3},
     },
 
-    [TRAINER_GRUNT_41] =
+    [TRAINER_GRUNT_MAGMA_HIDEOUT_4] =
     {
         .partyFlags = 0,
         .trainerClass = TRAINER_CLASS_TEAM_MAGMA,
@@ -10075,11 +10075,11 @@ const struct Trainer gTrainers[] = {
         .items = {},
         .doubleBattle = FALSE,
         .aiFlags = AI_SCRIPT_CHECK_BAD_MOVE,
-        .partySize = ARRAY_COUNT(sParty_Grunt41),
-        .party = {.NoItemDefaultMoves = sParty_Grunt41},
+        .partySize = ARRAY_COUNT(sParty_GruntMagmaHideout4),
+        .party = {.NoItemDefaultMoves = sParty_GruntMagmaHideout4},
     },
 
-    [TRAINER_GRUNT_42] =
+    [TRAINER_GRUNT_MAGMA_HIDEOUT_5] =
     {
         .partyFlags = 0,
         .trainerClass = TRAINER_CLASS_TEAM_MAGMA,
@@ -10089,11 +10089,11 @@ const struct Trainer gTrainers[] = {
         .items = {},
         .doubleBattle = FALSE,
         .aiFlags = AI_SCRIPT_CHECK_BAD_MOVE,
-        .partySize = ARRAY_COUNT(sParty_Grunt42),
-        .party = {.NoItemDefaultMoves = sParty_Grunt42},
+        .partySize = ARRAY_COUNT(sParty_GruntMagmaHideout5),
+        .party = {.NoItemDefaultMoves = sParty_GruntMagmaHideout5},
     },
 
-    [TRAINER_GRUNT_43] =
+    [TRAINER_GRUNT_MAGMA_HIDEOUT_6] =
     {
         .partyFlags = 0,
         .trainerClass = TRAINER_CLASS_TEAM_MAGMA,
@@ -10103,11 +10103,11 @@ const struct Trainer gTrainers[] = {
         .items = {},
         .doubleBattle = FALSE,
         .aiFlags = AI_SCRIPT_CHECK_BAD_MOVE,
-        .partySize = ARRAY_COUNT(sParty_Grunt43),
-        .party = {.NoItemDefaultMoves = sParty_Grunt43},
+        .partySize = ARRAY_COUNT(sParty_GruntMagmaHideout6),
+        .party = {.NoItemDefaultMoves = sParty_GruntMagmaHideout6},
     },
 
-    [TRAINER_GRUNT_44] =
+    [TRAINER_GRUNT_MAGMA_HIDEOUT_7] =
     {
         .partyFlags = 0,
         .trainerClass = TRAINER_CLASS_TEAM_MAGMA,
@@ -10117,11 +10117,11 @@ const struct Trainer gTrainers[] = {
         .items = {},
         .doubleBattle = FALSE,
         .aiFlags = AI_SCRIPT_CHECK_BAD_MOVE,
-        .partySize = ARRAY_COUNT(sParty_Grunt44),
-        .party = {.NoItemDefaultMoves = sParty_Grunt44},
+        .partySize = ARRAY_COUNT(sParty_GruntMagmaHideout7),
+        .party = {.NoItemDefaultMoves = sParty_GruntMagmaHideout7},
     },
 
-    [TRAINER_GRUNT_45] =
+    [TRAINER_GRUNT_MAGMA_HIDEOUT_8] =
     {
         .partyFlags = 0,
         .trainerClass = TRAINER_CLASS_TEAM_MAGMA,
@@ -10131,11 +10131,11 @@ const struct Trainer gTrainers[] = {
         .items = {},
         .doubleBattle = FALSE,
         .aiFlags = AI_SCRIPT_CHECK_BAD_MOVE,
-        .partySize = ARRAY_COUNT(sParty_Grunt45),
-        .party = {.NoItemDefaultMoves = sParty_Grunt45},
+        .partySize = ARRAY_COUNT(sParty_GruntMagmaHideout8),
+        .party = {.NoItemDefaultMoves = sParty_GruntMagmaHideout8},
     },
 
-    [TRAINER_GRUNT_46] =
+    [TRAINER_GRUNT_MAGMA_HIDEOUT_9] =
     {
         .partyFlags = 0,
         .trainerClass = TRAINER_CLASS_TEAM_MAGMA,
@@ -10145,11 +10145,11 @@ const struct Trainer gTrainers[] = {
         .items = {},
         .doubleBattle = FALSE,
         .aiFlags = AI_SCRIPT_CHECK_BAD_MOVE,
-        .partySize = ARRAY_COUNT(sParty_Grunt46),
-        .party = {.NoItemDefaultMoves = sParty_Grunt46},
+        .partySize = ARRAY_COUNT(sParty_GruntMagmaHideout9),
+        .party = {.NoItemDefaultMoves = sParty_GruntMagmaHideout9},
     },
 
-    [TRAINER_GRUNT_47] =
+    [TRAINER_GRUNT_MAGMA_HIDEOUT_10] =
     {
         .partyFlags = 0,
         .trainerClass = TRAINER_CLASS_TEAM_MAGMA,
@@ -10159,11 +10159,11 @@ const struct Trainer gTrainers[] = {
         .items = {},
         .doubleBattle = FALSE,
         .aiFlags = AI_SCRIPT_CHECK_BAD_MOVE,
-        .partySize = ARRAY_COUNT(sParty_Grunt47),
-        .party = {.NoItemDefaultMoves = sParty_Grunt47},
+        .partySize = ARRAY_COUNT(sParty_GruntMagmaHideout10),
+        .party = {.NoItemDefaultMoves = sParty_GruntMagmaHideout10},
     },
 
-    [TRAINER_GRUNT_48] =
+    [TRAINER_GRUNT_MAGMA_HIDEOUT_11] =
     {
         .partyFlags = 0,
         .trainerClass = TRAINER_CLASS_TEAM_MAGMA,
@@ -10173,11 +10173,11 @@ const struct Trainer gTrainers[] = {
         .items = {},
         .doubleBattle = FALSE,
         .aiFlags = AI_SCRIPT_CHECK_BAD_MOVE,
-        .partySize = ARRAY_COUNT(sParty_Grunt48),
-        .party = {.NoItemDefaultMoves = sParty_Grunt48},
+        .partySize = ARRAY_COUNT(sParty_GruntMagmaHideout11),
+        .party = {.NoItemDefaultMoves = sParty_GruntMagmaHideout11},
     },
 
-    [TRAINER_GRUNT_49] =
+    [TRAINER_GRUNT_MAGMA_HIDEOUT_12] =
     {
         .partyFlags = 0,
         .trainerClass = TRAINER_CLASS_TEAM_MAGMA,
@@ -10187,11 +10187,11 @@ const struct Trainer gTrainers[] = {
         .items = {},
         .doubleBattle = FALSE,
         .aiFlags = AI_SCRIPT_CHECK_BAD_MOVE,
-        .partySize = ARRAY_COUNT(sParty_Grunt49),
-        .party = {.NoItemDefaultMoves = sParty_Grunt49},
+        .partySize = ARRAY_COUNT(sParty_GruntMagmaHideout12),
+        .party = {.NoItemDefaultMoves = sParty_GruntMagmaHideout12},
     },
 
-    [TRAINER_GRUNT_50] =
+    [TRAINER_GRUNT_MAGMA_HIDEOUT_13] =
     {
         .partyFlags = 0,
         .trainerClass = TRAINER_CLASS_TEAM_MAGMA,
@@ -10201,11 +10201,11 @@ const struct Trainer gTrainers[] = {
         .items = {},
         .doubleBattle = FALSE,
         .aiFlags = AI_SCRIPT_CHECK_BAD_MOVE,
-        .partySize = ARRAY_COUNT(sParty_Grunt50),
-        .party = {.NoItemDefaultMoves = sParty_Grunt50},
+        .partySize = ARRAY_COUNT(sParty_GruntMagmaHideout13),
+        .party = {.NoItemDefaultMoves = sParty_GruntMagmaHideout13},
     },
 
-    [TRAINER_GRUNT_51] =
+    [TRAINER_GRUNT_MAGMA_HIDEOUT_14] =
     {
         .partyFlags = 0,
         .trainerClass = TRAINER_CLASS_TEAM_MAGMA,
@@ -10215,11 +10215,11 @@ const struct Trainer gTrainers[] = {
         .items = {},
         .doubleBattle = FALSE,
         .aiFlags = AI_SCRIPT_CHECK_BAD_MOVE,
-        .partySize = ARRAY_COUNT(sParty_Grunt51),
-        .party = {.NoItemDefaultMoves = sParty_Grunt51},
+        .partySize = ARRAY_COUNT(sParty_GruntMagmaHideout14),
+        .party = {.NoItemDefaultMoves = sParty_GruntMagmaHideout14},
     },
 
-    [TRAINER_GRUNT_52] =
+    [TRAINER_GRUNT_MAGMA_HIDEOUT_15] =
     {
         .partyFlags = 0,
         .trainerClass = TRAINER_CLASS_TEAM_MAGMA,
@@ -10229,11 +10229,11 @@ const struct Trainer gTrainers[] = {
         .items = {},
         .doubleBattle = FALSE,
         .aiFlags = AI_SCRIPT_CHECK_BAD_MOVE,
-        .partySize = ARRAY_COUNT(sParty_Grunt52),
-        .party = {.NoItemDefaultMoves = sParty_Grunt52},
+        .partySize = ARRAY_COUNT(sParty_GruntMagmaHideout15),
+        .party = {.NoItemDefaultMoves = sParty_GruntMagmaHideout15},
     },
 
-    [TRAINER_GRUNT_53] =
+    [TRAINER_GRUNT_MAGMA_HIDEOUT_16] =
     {
         .partyFlags = 0,
         .trainerClass = TRAINER_CLASS_TEAM_MAGMA,
@@ -10243,8 +10243,8 @@ const struct Trainer gTrainers[] = {
         .items = {},
         .doubleBattle = FALSE,
         .aiFlags = AI_SCRIPT_CHECK_BAD_MOVE,
-        .partySize = ARRAY_COUNT(sParty_Grunt53),
-        .party = {.NoItemDefaultMoves = sParty_Grunt53},
+        .partySize = ARRAY_COUNT(sParty_GruntMagmaHideout16),
+        .party = {.NoItemDefaultMoves = sParty_GruntMagmaHideout16},
     },
 
     [TRAINER_TABITHA_3] =

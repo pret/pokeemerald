@@ -2202,14 +2202,14 @@
       "blockdata_filepath": "data/layouts/SecretBase_Shrub4/map.bin"
     },
     {
-      "id": "LAYOUT_SINGLE_BATTLE_COLOSSEUM",
-      "name": "SingleBattleColosseum_Layout",
+      "id": "LAYOUT_BATTLE_COLOSSEUM_2P",
+      "name": "BattleColosseum2P_Layout",
       "width": 14,
       "height": 9,
       "primary_tileset": "gTileset_Building",
       "secondary_tileset": "gTileset_CableClub",
-      "border_filepath": "data/layouts/SingleBattleColosseum/border.bin",
-      "blockdata_filepath": "data/layouts/SingleBattleColosseum/map.bin"
+      "border_filepath": "data/layouts/BattleColosseum2P/border.bin",
+      "blockdata_filepath": "data/layouts/BattleColosseum2P/map.bin"
     },
     {
       "id": "LAYOUT_TRADE_CENTER",
@@ -2232,24 +2232,24 @@
       "blockdata_filepath": "data/layouts/RecordCorner/map.bin"
     },
     {
-      "id": "LAYOUT_DOUBLE_BATTLE_COLOSSEUM",
-      "name": "DoubleBattleColosseum_Layout",
+      "id": "LAYOUT_BATTLE_COLOSSEUM_4P",
+      "name": "BattleColosseum4P_Layout",
       "width": 14,
       "height": 9,
       "primary_tileset": "gTileset_Building",
       "secondary_tileset": "gTileset_CableClub",
-      "border_filepath": "data/layouts/DoubleBattleColosseum/border.bin",
-      "blockdata_filepath": "data/layouts/DoubleBattleColosseum/map.bin"
+      "border_filepath": "data/layouts/BattleColosseum4P/border.bin",
+      "blockdata_filepath": "data/layouts/BattleColosseum4P/map.bin"
     },
     {
-      "id": "LAYOUT_LINK_CONTEST_ROOM1",
-      "name": "LinkContestRoom1_Layout",
+      "id": "LAYOUT_CONTEST_HALL",
+      "name": "ContestHall_Layout",
       "width": 15,
       "height": 11,
       "primary_tileset": "gTileset_General",
       "secondary_tileset": "gTileset_Contest",
-      "border_filepath": "data/layouts/LinkContestRoom1/border.bin",
-      "blockdata_filepath": "data/layouts/LinkContestRoom1/map.bin"
+      "border_filepath": "data/layouts/ContestHall/border.bin",
+      "blockdata_filepath": "data/layouts/ContestHall/map.bin"
     },
     {
       "id": "LAYOUT_UNKNOWN_LINK_CONTEST_ROOM_25_29",
@@ -2312,54 +2312,54 @@
       "blockdata_filepath": "data/layouts/UnknownLinkContestRoom_25_34/map.bin"
     },
     {
-      "id": "LAYOUT_LINK_CONTEST_ROOM2",
-      "name": "LinkContestRoom2_Layout",
+      "id": "LAYOUT_CONTEST_HALL_BEAUTY",
+      "name": "ContestHallBeauty_Layout",
       "width": 15,
       "height": 11,
       "primary_tileset": "gTileset_General",
       "secondary_tileset": "gTileset_Contest",
-      "border_filepath": "data/layouts/LinkContestRoom2/border.bin",
-      "blockdata_filepath": "data/layouts/LinkContestRoom2/map.bin"
+      "border_filepath": "data/layouts/ContestHallBeauty/border.bin",
+      "blockdata_filepath": "data/layouts/ContestHallBeauty/map.bin"
     },
     {
-      "id": "LAYOUT_LINK_CONTEST_ROOM3",
-      "name": "LinkContestRoom3_Layout",
+      "id": "LAYOUT_CONTEST_HALL_TOUGH",
+      "name": "ContestHallTough_Layout",
       "width": 15,
       "height": 11,
       "primary_tileset": "gTileset_General",
       "secondary_tileset": "gTileset_Contest",
-      "border_filepath": "data/layouts/LinkContestRoom3/border.bin",
-      "blockdata_filepath": "data/layouts/LinkContestRoom3/map.bin"
+      "border_filepath": "data/layouts/ContestHallTough/border.bin",
+      "blockdata_filepath": "data/layouts/ContestHallTough/map.bin"
     },
     {
-      "id": "LAYOUT_LINK_CONTEST_ROOM4",
-      "name": "LinkContestRoom4_Layout",
+      "id": "LAYOUT_CONTEST_HALL_COOL",
+      "name": "ContestHallCool_Layout",
       "width": 15,
       "height": 11,
       "primary_tileset": "gTileset_General",
       "secondary_tileset": "gTileset_Contest",
-      "border_filepath": "data/layouts/LinkContestRoom4/border.bin",
-      "blockdata_filepath": "data/layouts/LinkContestRoom4/map.bin"
+      "border_filepath": "data/layouts/ContestHallCool/border.bin",
+      "blockdata_filepath": "data/layouts/ContestHallCool/map.bin"
     },
     {
-      "id": "LAYOUT_LINK_CONTEST_ROOM5",
-      "name": "LinkContestRoom5_Layout",
+      "id": "LAYOUT_CONTEST_HALL_SMART",
+      "name": "ContestHallSmart_Layout",
       "width": 15,
       "height": 11,
       "primary_tileset": "gTileset_General",
       "secondary_tileset": "gTileset_Contest",
-      "border_filepath": "data/layouts/LinkContestRoom5/border.bin",
-      "blockdata_filepath": "data/layouts/LinkContestRoom5/map.bin"
+      "border_filepath": "data/layouts/ContestHallSmart/border.bin",
+      "blockdata_filepath": "data/layouts/ContestHallSmart/map.bin"
     },
     {
-      "id": "LAYOUT_LINK_CONTEST_ROOM6",
-      "name": "LinkContestRoom6_Layout",
+      "id": "LAYOUT_CONTEST_HALL_CUTE",
+      "name": "ContestHallCute_Layout",
       "width": 15,
       "height": 11,
       "primary_tileset": "gTileset_General",
       "secondary_tileset": "gTileset_Contest",
-      "border_filepath": "data/layouts/LinkContestRoom6/border.bin",
-      "blockdata_filepath": "data/layouts/LinkContestRoom6/map.bin"
+      "border_filepath": "data/layouts/ContestHallCute/border.bin",
+      "blockdata_filepath": "data/layouts/ContestHallCute/map.bin"
     },
     {
       "id": "LAYOUT_INSIDE_OF_TRUCK",
@@ -3972,14 +3972,14 @@
       "blockdata_filepath": "data/layouts/BattleFrontier_Lounge1/map.bin"
     },
     {
-      "id": "LAYOUT_BATTLE_FRONTIER_BATTLE_POINT_EXCHANGE_SERVICE_CORNER",
-      "name": "BattleFrontier_BattlePointExchangeServiceCorner_Layout",
+      "id": "LAYOUT_BATTLE_FRONTIER_EXCHANGE_SERVICE_CORNER",
+      "name": "BattleFrontier_ExchangeServiceCorner_Layout",
       "width": 15,
       "height": 11,
       "primary_tileset": "gTileset_Building",
       "secondary_tileset": "gTileset_BattleFrontier",
-      "border_filepath": "data/layouts/BattleFrontier_BattlePointExchangeServiceCorner/border.bin",
-      "blockdata_filepath": "data/layouts/BattleFrontier_BattlePointExchangeServiceCorner/map.bin"
+      "border_filepath": "data/layouts/BattleFrontier_ExchangeServiceCorner/border.bin",
+      "blockdata_filepath": "data/layouts/BattleFrontier_ExchangeServiceCorner/map.bin"
     },
     {
       "id": "LAYOUT_BATTLE_FRONTIER_RECEPTION_GATE",

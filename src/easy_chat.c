@@ -532,11 +532,11 @@ static const u16 sMysteryGiftPhrase[] = {
 };
 
 static const u16 sBerryMasterWifePhrases[][2] = {
-    {EC_WORD_GREAT, EC_WORD_BATTLE},
-    {EC_WORD_CHALLENGE, EC_WORD_CONTEST},
-    {EC_WORD_OVERWHELMING, EC_POKEMON(LATIAS)},
-    {EC_WORD_COOL, EC_POKEMON(LATIOS)},
-    {EC_WORD_SUPER, EC_WORD_HUSTLE},
+    [PHRASE_GREAT_BATTLE - 1]        = {EC_WORD_GREAT, EC_WORD_BATTLE},
+    [PHRASE_CHALLENGE_CONTEST - 1]   = {EC_WORD_CHALLENGE, EC_WORD_CONTEST},
+    [PHRASE_OVERWHELMING_LATIAS - 1] = {EC_WORD_OVERWHELMING, EC_POKEMON(LATIAS)},
+    [PHRASE_COOL_LATIOS - 1]         = {EC_WORD_COOL, EC_POKEMON(LATIOS)},
+    [PHRASE_SUPER_HUSTLE - 1]        = {EC_WORD_SUPER, EC_WORD_HUSTLE},
 };
 
 static const u16 sEasyChatTriangleCursorPalette[] = INCBIN_U16("graphics/easy_chat/triangle_cursor.gbapal");

@@ -21,7 +21,7 @@ FallarborTown_BattleTentLobby_MapScript2_1FFE85: @ 81FFE85
 	.2byte 0
 
 FallarborTown_BattleTentLobby_EventScript_1FFEAF:: @ 81FFEAF
-	setvar VAR_0x8004, 0
+	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_0
 	special CallFrontierUtilFunc
 	end
 
@@ -29,12 +29,12 @@ FallarborTown_BattleTentLobby_EventScript_1FFEB8:: @ 81FFEB8
 	lockall
 	msgbox FallarborTown_BattleTentLobby_Text_2C4DED, MSGBOX_DEFAULT
 	closemessage
-	setvar VAR_0x8004, 2
+	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_2
 	setvar VAR_0x8005, 0
 	setvar VAR_0x8006, 0
 	special CallFrontierUtilFunc
 	setvar VAR_TEMP_0, 255
-	setvar VAR_0x8004, 2
+	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_2
 	setvar VAR_0x8005, 1
 	setvar VAR_0x8006, 0
 	special CallFrontierUtilFunc
@@ -48,7 +48,7 @@ FallarborTown_BattleTentLobby_EventScript_1FFEED:: @ 81FFEED
 	waitmessage
 	setvar VAR_0x8004, 4
 	special sub_81B9B80
-	setvar VAR_0x8004, 2
+	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_2
 	setvar VAR_0x8005, 1
 	setvar VAR_0x8006, 0
 	special CallFrontierUtilFunc
@@ -64,7 +64,7 @@ FallarborTown_BattleTentLobby_EventScript_1FFF27:: @ 81FFF27
 	special sub_81B9B80
 	switch VAR_RESULT
 	case 0, FallarborTown_BattleTentLobby_EventScript_1FFF73
-	setvar VAR_0x8004, 2
+	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_2
 	setvar VAR_0x8005, 0
 	setvar VAR_0x8006, 0
 	special CallFrontierUtilFunc
@@ -96,7 +96,7 @@ FallarborTown_BattleTentLobby_EventScript_1FFF93:: @ 81FFF93
 	lockall
 	message FallarborTown_BattleTentLobby_Text_2C4FD7
 	waitmessage
-	setvar VAR_0x8004, 2
+	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_2
 	setvar VAR_0x8005, 1
 	setvar VAR_0x8006, 0
 	special CallFrontierUtilFunc
@@ -120,7 +120,7 @@ FallarborTown_BattleTentLobby_EventScript_1FFFCD:: @ 81FFFCD
 	special sub_81B9B80
 	playse SE_SAVE
 	waitse
-	setvar VAR_0x8004, 2
+	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_2
 	setvar VAR_0x8005, 3
 	setvar VAR_0x8006, 0
 	special CallFrontierUtilFunc
@@ -151,11 +151,11 @@ FallarborTown_BattleTentLobby_EventScript_20005D:: @ 820005D
 	setvar VAR_FRONTIER_FACILITY, 3
 	setvar VAR_FRONTIER_BATTLE_MODE, 0
 	setvar VAR_RESULT, 2
-	setvar VAR_0x8004, 15
+	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_15
 	special CallFrontierUtilFunc
 	compare VAR_0x8004, 1
 	goto_if_eq FallarborTown_BattleTentLobby_EventScript_200176
-	setvar VAR_0x8004, 2
+	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_2
 	setvar VAR_0x8005, 1
 	setvar VAR_0x8006, 2
 	special CallFrontierUtilFunc
@@ -169,22 +169,22 @@ FallarborTown_BattleTentLobby_EventScript_20005D:: @ 820005D
 	goto_if_eq FallarborTown_BattleTentLobby_EventScript_2001C2
 	msgbox FallarborTown_BattleTentLobby_Text_2C4B35, MSGBOX_YESNO
 	switch VAR_RESULT
-	case 0, FallarborTown_BattleTentLobby_EventScript_2001C2
-	case 1, FallarborTown_BattleTentLobby_EventScript_2000E2
-	case 127, FallarborTown_BattleTentLobby_EventScript_2001C2
+	case NO, FallarborTown_BattleTentLobby_EventScript_2001C2
+	case YES, FallarborTown_BattleTentLobby_EventScript_2000E2
+	case MULTI_B_PRESSED, FallarborTown_BattleTentLobby_EventScript_2001C2
 
 FallarborTown_BattleTentLobby_EventScript_2000E2:: @ 82000E2
 	setvar VAR_TEMP_0, 0
-	setvar VAR_0x8004, 2
+	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_2
 	setvar VAR_0x8005, 4
 	special CallFrontierUtilFunc
 	setvar VAR_0x8004, 0
 	special sub_81B9B80
-	setvar VAR_0x8004, 2
+	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_2
 	setvar VAR_0x8005, 0
 	setvar VAR_0x8006, 1
 	special CallFrontierUtilFunc
-	setvar VAR_0x8004, 2
+	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_2
 	setvar VAR_0x8005, 3
 	setvar VAR_0x8006, 0
 	special CallFrontierUtilFunc
@@ -198,8 +198,8 @@ FallarborTown_BattleTentLobby_EventScript_2000E2:: @ 82000E2
 
 FallarborTown_BattleTentLobby_EventScript_20013C:: @ 820013C
 	special SavePlayerParty
-	setvar VAR_0x8004, 3
-	setvar VAR_0x8005, 3
+	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_LOAD_SELECTED_PARTY
+	setvar VAR_0x8005, FRONTIER_PARTY_SIZE
 	special CallFrontierUtilFunc
 	msgbox FallarborTown_BattleTentLobby_Text_2C4DC3, MSGBOX_DEFAULT
 	closemessage
@@ -227,7 +227,7 @@ FallarborTown_BattleTentLobby_EventScript_20019E:: @ 820019E
 	goto FallarborTown_BattleTentLobby_EventScript_2001CD
 
 FallarborTown_BattleTentLobby_EventScript_2001AB:: @ 82001AB
-	setvar VAR_0x8004, 2
+	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_2
 	setvar VAR_0x8005, 0
 	setvar VAR_0x8006, 0
 	special CallFrontierUtilFunc

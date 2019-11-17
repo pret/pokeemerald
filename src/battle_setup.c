@@ -1,25 +1,18 @@
 #include "global.h"
-#include "constants/trainers.h"
 #include "battle.h"
-#include "constants/battle_setup.h"
 #include "battle_setup.h"
 #include "battle_transition.h"
 #include "main.h"
 #include "task.h"
 #include "safari_zone.h"
 #include "script.h"
-#include "constants/game_stat.h"
 #include "event_data.h"
-#include "constants/species.h"
-#include "constants/songs.h"
 #include "metatile_behavior.h"
-#include "constants/maps.h"
 #include "field_player_avatar.h"
 #include "fieldmap.h"
 #include "random.h"
 #include "starter_choose.h"
 #include "script_pokemon_80F8.h"
-#include "constants/items.h"
 #include "palette.h"
 #include "window.h"
 #include "event_object_movement.h"
@@ -42,10 +35,18 @@
 #include "fldeff_misc.h"
 #include "field_control_avatar.h"
 #include "mirage_tower.h"
-#include "constants/map_types.h"
-#include "constants/battle_frontier.h"
 #include "field_screen_effect.h"
 #include "data.h"
+#include "constants/battle_frontier.h"
+#include "constants/battle_setup.h"
+#include "constants/game_stat.h"
+#include "constants/items.h"
+#include "constants/songs.h"
+#include "constants/map_types.h"
+#include "constants/maps.h"
+#include "constants/species.h"
+#include "constants/trainers.h"
+#include "constants/trainer_hill.h"
 
 enum
 {
@@ -897,7 +898,7 @@ static void CB2_GiveStarter(void)
 
     *GetVarPointer(VAR_STARTER_MON) = gSpecialVar_Result;
     starterMon = GetStarterPokemon(gSpecialVar_Result);
-    ScriptGiveMon(starterMon, 5, 0, 0, 0, 0);
+    ScriptGiveMon(starterMon, 5, ITEM_NONE, 0, 0, 0);
     ResetTasks();
     PlayBattleBGM();
     SetMainCallback2(CB2_StartFirstBattle);
@@ -1140,7 +1141,7 @@ const u8 *BattleSetup_ConfigureTrainerBattle(const u8 *data)
     case TRAINER_BATTLE_SET_TRAINER_B:
         TrainerBattleLoadArgs(sTrainerBOrdinaryBattleParams, data);
         return NULL;
-    case TRAINER_BATTLE_12:
+    case TRAINER_BATTLE_HILL:
         if (gApproachingTrainerId == 0)
         {
             TrainerBattleLoadArgs(sOrdinaryBattleParams, data);
@@ -1288,7 +1289,7 @@ void BattleSetup_StartTrainerBattle(void)
     sNoOfPossibleTrainerRetScripts = gNoOfApproachingTrainers;
     gNoOfApproachingTrainers = 0;
     sShouldCheckTrainerBScript = FALSE;
-    gUnknown_03006080 = 0;
+    gWhichTrainerToFaceAfterBattle = 0;
     gMain.savedCallback = CB2_EndTrainerBattle;
 
     if (InBattlePyramid() || InTrainerHillChallenge())
@@ -1364,9 +1365,9 @@ void ShowTrainerIntroSpeech(void)
     else if (InTrainerHillChallenge())
     {
         if (gNoOfApproachingTrainers == 0 || gNoOfApproachingTrainers == 1)
-            CopyTrainerHillTrainerText(2, LocalIdToHillTrainerId(gSpecialVar_LastTalked));
+            CopyTrainerHillTrainerText(TRAINER_HILL_TEXT_INTRO, LocalIdToHillTrainerId(gSpecialVar_LastTalked));
         else
-            CopyTrainerHillTrainerText(2, LocalIdToHillTrainerId(gEventObjects[gApproachingTrainers[gApproachingTrainerId].eventObjectId].localId));
+            CopyTrainerHillTrainerText(TRAINER_HILL_TEXT_INTRO, LocalIdToHillTrainerId(gEventObjects[gApproachingTrainers[gApproachingTrainerId].eventObjectId].localId));
 
         sub_80982B8();
     }
@@ -1391,7 +1392,7 @@ const u8 *BattleSetup_GetTrainerPostBattleScript(void)
         sShouldCheckTrainerBScript = FALSE;
         if (sTrainerBBattleScriptRetAddr != NULL)
         {
-            gUnknown_03006080 = 1;
+            gWhichTrainerToFaceAfterBattle = 1;
             return sTrainerBBattleScriptRetAddr;
         }
     }
@@ -1399,7 +1400,7 @@ const u8 *BattleSetup_GetTrainerPostBattleScript(void)
     {
         if (sTrainerABattleScriptRetAddr != NULL)
         {
-            gUnknown_03006080 = 0;
+            gWhichTrainerToFaceAfterBattle = 0;
             return sTrainerABattleScriptRetAddr;
         }
     }

@@ -7,8 +7,8 @@ LilycoveCity_MoveDeletersHouse_EventScript_MoveDeleter:: @ 821EA0B
 	waitmovement 0
 	msgbox LilycoveCity_MoveDeletersHouse_Text_ICanMakeMonForgetMove, MSGBOX_YESNO
 	switch VAR_RESULT
-	case 1, LilycoveCity_MoveDeletersHouse_EventScript_ChooseMonAndMoveToForget
-	case 0, LilycoveCity_MoveDeletersHouse_EventScript_ComeAgain
+	case YES, LilycoveCity_MoveDeletersHouse_EventScript_ChooseMonAndMoveToForget
+	case NO, LilycoveCity_MoveDeletersHouse_EventScript_ComeAgain
 	releaseall
 	end
 
@@ -33,8 +33,8 @@ LilycoveCity_MoveDeletersHouse_EventScript_ChooseMonAndMoveToForget:: @ 821EA3B
 	special BufferMoveDeleterNicknameAndMove
 	msgbox LilycoveCity_MoveDeletersHouse_Text_MonsMoveShouldBeForgotten, MSGBOX_YESNO
 	switch VAR_RESULT
-	case 1, LilycoveCity_MoveDeletersHouse_EventScript_TryForgetMove
-	case 0, LilycoveCity_MoveDeletersHouse_EventScript_ComeAgain
+	case YES, LilycoveCity_MoveDeletersHouse_EventScript_TryForgetMove
+	case NO, LilycoveCity_MoveDeletersHouse_EventScript_ComeAgain
 	releaseall
 	end
 

@@ -14,7 +14,7 @@ SafariZone_EventScript_Exit:: @ 82A4B5D
 SafariZone_EventScript_RetirePrompt:: @ 82A4B6F
 	lockall
 	msgbox SafariZone_Text_WouldYouLikeToExit, MSGBOX_YESNO
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, YES
 	goto_if_eq SafariZone_EventScript_Retire
 	releaseall
 	end
@@ -46,7 +46,7 @@ EventScript_PokeBlockFeeder:: @ 82A4BAC
 	compare VAR_RESULT, 0xFFFF
 	goto_if_ne SafariZone_EventScript_PokeblockPresent
 	msgbox SafariZone_Text_PlacePokeblockOnFeeder, MSGBOX_YESNO
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, YES
 	goto_if_eq SafariZone_EventScript_ChoosePokeblock
 	releaseall
 	end

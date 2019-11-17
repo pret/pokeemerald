@@ -72,7 +72,7 @@
       "elevation": 3,
       "var": "0",
       "var_value": "0",
-      "script": "MtPyre_Exterior_EventScript_231FED"
+      "script": "MtPyre_Exterior_EventScript_FogTrigger"
     },
     {
       "type": "trigger",
@@ -81,7 +81,7 @@
       "elevation": 3,
       "var": "0",
       "var_value": "0",
-      "script": "MtPyre_Exterior_EventScript_231FED"
+      "script": "MtPyre_Exterior_EventScript_FogTrigger"
     },
     {
       "type": "trigger",
@@ -90,7 +90,7 @@
       "elevation": 3,
       "var": "0",
       "var_value": "0",
-      "script": "MtPyre_Exterior_EventScript_231FF2"
+      "script": "MtPyre_Exterior_EventScript_SunTrigger"
     },
     {
       "type": "trigger",
@@ -99,7 +99,7 @@
       "elevation": 3,
       "var": "0",
       "var_value": "0",
-      "script": "MtPyre_Exterior_EventScript_231FF2"
+      "script": "MtPyre_Exterior_EventScript_SunTrigger"
     },
     {
       "type": "trigger",
@@ -108,7 +108,7 @@
       "elevation": 3,
       "var": "0",
       "var_value": "0",
-      "script": "MtPyre_Exterior_EventScript_231FED"
+      "script": "MtPyre_Exterior_EventScript_FogTrigger"
     }
   ],
   "bg_events": [

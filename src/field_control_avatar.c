@@ -33,6 +33,7 @@
 #include "constants/map_types.h"
 #include "constants/maps.h"
 #include "constants/songs.h"
+#include "constants/trainer_hill.h"
 
 static EWRAM_DATA u8 sWildEncounterImmunitySteps = 0;
 static EWRAM_DATA u16 sPreviousPlayerMetatileBehavior = 0;
@@ -373,14 +374,14 @@ static const u8 *GetInteractedMetatileScript(struct MapPosition *position, u8 me
         return EventScript_PC;
     if (MetatileBehavior_IsClosedSootopolisDoor(metatileBehavior) == TRUE)
         return EventScript_ClosedSootopolisDoor;
-    if (MetatileBehavior_IsUnknownClosedDoor(metatileBehavior) == TRUE)
-        return SkyPillar_Outside_EventScript_2393F9;
+    if (MetatileBehavior_IsSkyPillarClosedDoor(metatileBehavior) == TRUE)
+        return SkyPillar_Outside_EventScript_ClosedDoor;
     if (MetatileBehavior_IsCableBoxResults1(metatileBehavior) == TRUE)
         return EventScript_CableBoxResults;
     if (MetatileBehavior_IsPokeblockFeeder(metatileBehavior) == TRUE)
         return EventScript_PokeBlockFeeder;
     if (MetatileBehavior_IsTrickHousePuzzleDoor(metatileBehavior) == TRUE)
-        return Route110_TrickHouseEntrance_EventScript_26A22A;
+        return Route110_TrickHousePuzzle_EventScript_Door;
     if (MetatileBehavior_IsRegionMap(metatileBehavior) == TRUE)
         return EventScript_RegionMap;
     if (MetatileBehavior_IsRunningShoesManual(metatileBehavior) == TRUE)
@@ -568,17 +569,17 @@ static bool8 TryStartStepCountScript(u16 metatileBehavior)
         }
         if (ShouldDoWallyCall() == TRUE)
         {
-            ScriptContext1_SetupScript(MauvilleCity_EventScript_1DF7BA);
+            ScriptContext1_SetupScript(MauvilleCity_EventScript_RegisterWallyCall);
             return TRUE;
         }
-        if (ShouldDoWinonaCall() == TRUE)
+        if (ShouldDoScottFortreeCall() == TRUE)
         {
-            ScriptContext1_SetupScript(Route119_EventScript_1F49EC);
+            ScriptContext1_SetupScript(Route119_EventScript_ScottWonAtFortreeGymCall);
             return TRUE;
         }
-        if (ShouldDoScottCall() == TRUE)
+        if (ShouldDoScottBattleFrontierCall() == TRUE)
         {
-            ScriptContext1_SetupScript(LittlerootTown_ProfessorBirchsLab_EventScript_1FA4D6);
+            ScriptContext1_SetupScript(LittlerootTown_ProfessorBirchsLab_EventScript_ScottAboardSSTidalCall);
             return TRUE;
         }
         if (ShouldDoRoxanneCall() == TRUE)
@@ -588,7 +589,7 @@ static bool8 TryStartStepCountScript(u16 metatileBehavior)
         }
         if (ShouldDoRivalRayquazaCall() == TRUE)
         {
-            ScriptContext1_SetupScript(MossdeepCity_SpaceCenter_2F_EventScript_224175);
+            ScriptContext1_SetupScript(MossdeepCity_SpaceCenter_2F_EventScript_RivalRayquazaCall);
             return TRUE;
         }
     }
@@ -597,7 +598,7 @@ static bool8 TryStartStepCountScript(u16 metatileBehavior)
         return TRUE;
     if (CountSSTidalStep(1) == TRUE)
     {
-        ScriptContext1_SetupScript(SSTidalCorridor_EventScript_23C050);
+        ScriptContext1_SetupScript(SSTidalCorridor_EventScript_ReachedStepCount);
         return TRUE;
     }
     if (TryStartMatchCall())
@@ -792,20 +793,16 @@ static void SetupWarp(struct MapHeader *unused, s8 warpEventId, struct MapPositi
 
     if (trainerHillMapId)
     {
-        if (trainerHillMapId == sub_81D6490())
+        if (trainerHillMapId == GetNumFloorsInTrainerHillChallenge())
         {
             if (warpEventId == 0)
-            {
                 warpEvent = &gMapHeader.events->warps[0];
-            }
             else
-            {
-                warpEvent = sub_81D6120();
-            }
+                warpEvent = SetWarpDestinationTrainerHill4F();
         }
-        else if (trainerHillMapId == 5)
+        else if (trainerHillMapId == TRAINER_HILL_ROOF)
         {
-            warpEvent = sub_81D6134(warpEventId);
+            warpEvent = SetWarpDestinationTrainerHillFinalFloor(warpEventId);
         }
         else
         {

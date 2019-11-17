@@ -21,7 +21,7 @@ BattleFrontier_BattleArenaLobby_MapScript2_255C55: @ 8255C55
 	.2byte 0
 
 BattleFrontier_BattleArenaLobby_EventScript_255C7F:: @ 8255C7F
-	setvar VAR_0x8004, 0
+	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_0
 	special CallFrontierUtilFunc
 	end
 
@@ -37,7 +37,7 @@ BattleFrontier_BattleArenaLobby_EventScript_255C88:: @ 8255C88
 	setvar VAR_0x8005, 2
 	setvar VAR_0x8006, 0
 	special CallBattleArenaFunction
-	setvar VAR_0x8004, 2
+	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_2
 	setvar VAR_0x8005, 0
 	setvar VAR_0x8006, 0
 	special CallFrontierUtilFunc
@@ -47,9 +47,9 @@ BattleFrontier_BattleArenaLobby_EventScript_255C88:: @ 8255C88
 
 BattleFrontier_BattleArenaLobby_EventScript_255CCF:: @ 8255CCF
 	lockall
-	setvar VAR_0x8004, 10
+	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_IS_FRONTIER_BRAIN
 	special CallFrontierUtilFunc
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, TRUE
 	goto_if_eq BattleFrontier_BattleArenaLobby_EventScript_255CF0
 	msgbox BattleFrontier_BattleArenaLobby_Text_2568E7, MSGBOX_DEFAULT
 	goto BattleFrontier_BattleArenaLobby_EventScript_255CF8
@@ -59,7 +59,7 @@ BattleFrontier_BattleArenaLobby_EventScript_255CF0:: @ 8255CF0
 
 BattleFrontier_BattleArenaLobby_EventScript_255CF8:: @ 8255CF8
 	msgbox BattleFrontier_BattleArenaLobby_Text_257353, MSGBOX_DEFAULT
-	setvar VAR_0x8004, 11
+	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_11
 	special CallFrontierUtilFunc
 	msgbox BattleFrontier_BattleArenaLobby_Text_241520, 9
 	message BattleFrontier_BattleArenaLobby_Text_256931
@@ -87,7 +87,7 @@ BattleFrontier_BattleArenaLobby_EventScript_255D2B:: @ 8255D2B
 	end
 
 BattleFrontier_BattleArenaLobby_EventScript_255D59:: @ 8255D59
-	setvar VAR_0x8004, 8
+	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_8
 	special CallFrontierUtilFunc
 	special LoadPlayerParty
 	special HealPlayerParty
@@ -122,7 +122,7 @@ BattleFrontier_BattleArenaLobby_EventScript_255DC0:: @ 8255DC0
 	special CallBattleArenaFunction
 	playse SE_SAVE
 	waitse
-	setvar VAR_0x8004, 2
+	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_2
 	setvar VAR_0x8005, 3
 	setvar VAR_0x8006, 0
 	special CallFrontierUtilFunc
@@ -154,11 +154,11 @@ BattleFrontier_BattleArenaLobby_EventScript_255E47:: @ 8255E47
 	switch VAR_RESULT
 	case 2, BattleFrontier_BattleArenaLobby_EventScript_255FFB
 	case MULTI_B_PRESSED, BattleFrontier_BattleArenaLobby_EventScript_255FFB
-	setvar VAR_0x8004, 15
+	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_15
 	special CallFrontierUtilFunc
 	compare VAR_0x8004, 1
 	goto_if_eq BattleFrontier_BattleArenaLobby_EventScript_255FAC
-	setvar VAR_0x8004, 2
+	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_2
 	setvar VAR_0x8005, 1
 	copyvar VAR_0x8006, VAR_RESULT
 	special CallFrontierUtilFunc
@@ -173,13 +173,13 @@ BattleFrontier_BattleArenaLobby_EventScript_255E47:: @ 8255E47
 	goto_if_eq BattleFrontier_BattleArenaLobby_EventScript_255FF8
 	msgbox BattleFrontier_BattleArenaLobby_Text_2564CE, MSGBOX_YESNO
 	switch VAR_RESULT
-	case 0, BattleFrontier_BattleArenaLobby_EventScript_255FF8
-	case 1, BattleFrontier_BattleArenaLobby_EventScript_255EE8
-	case 127, BattleFrontier_BattleArenaLobby_EventScript_255FF8
+	case NO, BattleFrontier_BattleArenaLobby_EventScript_255FF8
+	case YES, BattleFrontier_BattleArenaLobby_EventScript_255EE8
+	case MULTI_B_PRESSED, BattleFrontier_BattleArenaLobby_EventScript_255FF8
 
 BattleFrontier_BattleArenaLobby_EventScript_255EE8:: @ 8255EE8
 	setvar VAR_TEMP_0, 0
-	setvar VAR_0x8004, 2
+	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_2
 	setvar VAR_0x8005, 4
 	special CallFrontierUtilFunc
 	setvar VAR_0x8004, 0
@@ -188,11 +188,11 @@ BattleFrontier_BattleArenaLobby_EventScript_255EE8:: @ 8255EE8
 	setvar VAR_0x8005, 2
 	setvar VAR_0x8006, 1
 	special CallBattleArenaFunction
-	setvar VAR_0x8004, 2
+	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_2
 	setvar VAR_0x8005, 0
 	setvar VAR_0x8006, 1
 	special CallFrontierUtilFunc
-	setvar VAR_0x8004, 2
+	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_2
 	setvar VAR_0x8005, 3
 	setvar VAR_0x8006, 0
 	special CallFrontierUtilFunc
@@ -206,12 +206,12 @@ BattleFrontier_BattleArenaLobby_EventScript_255EE8:: @ 8255EE8
 
 BattleFrontier_BattleArenaLobby_EventScript_255F54:: @ 8255F54
 	special SavePlayerParty
-	setvar VAR_0x8004, 3
-	setvar VAR_0x8005, 3
+	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_LOAD_SELECTED_PARTY
+	setvar VAR_0x8005, FRONTIER_PARTY_SIZE
 	special CallFrontierUtilFunc
 	msgbox BattleFrontier_BattleArenaLobby_Text_2567E6, MSGBOX_DEFAULT
 	closemessage
-	setvar VAR_0x8004, 1
+	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_1
 	setvar VAR_0x8005, 1
 	special CallFrontierUtilFunc
 	compare VAR_RESULT, 0
@@ -241,7 +241,7 @@ BattleFrontier_BattleArenaLobby_EventScript_255FD4:: @ 8255FD4
 	goto BattleFrontier_BattleArenaLobby_EventScript_256003
 
 BattleFrontier_BattleArenaLobby_EventScript_255FE1:: @ 8255FE1
-	setvar VAR_0x8004, 2
+	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_2
 	setvar VAR_0x8005, 0
 	setvar VAR_0x8006, 0
 	special CallFrontierUtilFunc
@@ -344,7 +344,7 @@ BattleFrontier_BattleArenaLobby_Movement_256088: @ 8256088
 
 BattleFrontier_BattleArenaLobby_EventScript_256092:: @ 8256092
 	lockall
-	setvar VAR_0x8004, 7
+	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_RESULTS_WINDOW
 	setvar VAR_0x8005, 3
 	special CallFrontierUtilFunc
 	waitbuttonpress

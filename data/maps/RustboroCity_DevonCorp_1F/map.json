@@ -24,7 +24,7 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "RustboroCity_DevonCorp_1F_EventScript_211261",
+      "script": "RustboroCity_DevonCorp_1F_EventScript_Employee",
       "flag": "0"
     },
     {
@@ -37,7 +37,7 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "RustboroCity_DevonCorp_1F_EventScript_211293",
+      "script": "RustboroCity_DevonCorp_1F_EventScript_StairGuard",
       "flag": "0"
     },
     {
@@ -50,7 +50,7 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "RustboroCity_DevonCorp_1F_EventScript_2112CE",
+      "script": "RustboroCity_DevonCorp_1F_EventScript_Greeter",
       "flag": "0"
     }
   ],
@@ -85,7 +85,7 @@
       "y": 2,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "RustboroCity_DevonCorp_1F_EventScript_211312"
+      "script": "RustboroCity_DevonCorp_1F_EventScript_ProductsDisplay"
     },
     {
       "type": "sign",
@@ -93,7 +93,7 @@
       "y": 2,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "RustboroCity_DevonCorp_1F_EventScript_211309"
+      "script": "RustboroCity_DevonCorp_1F_EventScript_RocksMetalDisplay"
     }
   ]
 }

@@ -1,10 +1,6 @@
 #ifndef GUARD_FRONTIER_UTIL_H
 #define GUARD_FRONTIER_UTIL_H
 
-#define FRONTIER_BEFORE_TEXT 0
-#define FRONTIER_PLAYER_LOST_TEXT 1
-#define FRONTIER_PLAYER_WON_TEXT 2
-
 void CallFrontierUtilFunc(void);
 u8 sub_81A3610(void);
 void CopyFrontierTrainerText(u8 whichText, u16 trainerId);

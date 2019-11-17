@@ -1,9 +1,9 @@
 LilycoveCity_PokemonTrainerFanClub_MapScripts:: @ 821C785
-	map_script MAP_SCRIPT_ON_FRAME_TABLE, LilycoveCity_PokemonTrainerFanClub_MapScript2_21C790
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, LilycoveCity_PokemonTrainerFanClub_OnFrame
 	map_script MAP_SCRIPT_ON_TRANSITION, LilycoveCity_PokemonTrainerFanClub_OnTransition
 	.byte 0
 
-LilycoveCity_PokemonTrainerFanClub_MapScript2_21C790: @ 821C790
+LilycoveCity_PokemonTrainerFanClub_OnFrame: @ 821C790
 	map_script_2 VAR_LILYCOVE_FAN_CLUB_STATE, 1, LilycoveCity_PokemonTrainerFanClub_EventScript_21C79A
 	.2byte 0
 
@@ -11,13 +11,13 @@ LilycoveCity_PokemonTrainerFanClub_EventScript_21C79A:: @ 821C79A
 	lockall
 	applymovement 1, Common_Movement_WalkInPlaceFastestDown
 	waitmovement 0
-	msgbox LilycoveCity_PokemonTrainerFanClub_Text_21CF00, MSGBOX_DEFAULT
+	msgbox LilycoveCity_PokemonTrainerFanClub_Text_OhWowItsPlayer, MSGBOX_DEFAULT
 	applymovement 4, LilycoveCity_PokemonTrainerFanClub_Movement_21C7FD
 	applymovement 2, LilycoveCity_PokemonTrainerFanClub_Movement_21C7F5
 	waitmovement 0
 	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceFastestRight
 	waitmovement 0
-	msgbox LilycoveCity_PokemonTrainerFanClub_Text_21CF12, MSGBOX_DEFAULT
+	msgbox LilycoveCity_PokemonTrainerFanClub_Text_HeardAboutYouImYourFan, MSGBOX_DEFAULT
 	applymovement 4, LilycoveCity_PokemonTrainerFanClub_Movement_21C804
 	waitmovement 0
 	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceFastestLeft
@@ -118,7 +118,7 @@ LilycoveCity_PokemonTrainerFanClub_EventScript_21C8F1:: @ 821C8F1
 	return
 
 LilycoveCity_PokemonTrainerFanClub_EventScript_21C8F5:: @ 821C8F5
-	setvar VAR_0x8005, 8
+	setvar VAR_0x8005, NUM_TRAINER_CLUB_MEMBERS
 	setvar VAR_0x8004, 8
 	specialvar VAR_RESULT, ShouldMoveLilycoveFanClubMember
 	compare VAR_RESULT, 0
@@ -469,7 +469,7 @@ LilycoveCity_PokemonTrainerFanClub_EventScript_21CD19:: @ 821CD19
 	setvar VAR_0x8004, 15
 	special BufferStreakTrainerText
 	specialvar VAR_RESULT, ShouldMoveLilycoveFanClubMember
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, TRUE
 	goto_if_eq LilycoveCity_PokemonTrainerFanClub_EventScript_21CD4D
 	specialvar VAR_RESULT, GetNumMovedLilycoveFanClubMembers
 	compare VAR_RESULT, 7
@@ -481,13 +481,13 @@ LilycoveCity_PokemonTrainerFanClub_EventScript_21CD19:: @ 821CD19
 LilycoveCity_PokemonTrainerFanClub_EventScript_21CD4D:: @ 821CD4D
 	specialvar VAR_RESULT, GetNumMovedLilycoveFanClubMembers
 	compare VAR_RESULT, 1
-	goto_if_eq LilycoveCity_PokemonTrainerFanClub_EventScript_21CD67
-	msgbox LilycoveCity_PokemonTrainerFanClub_Text_21DE72, MSGBOX_DEFAULT
+	goto_if_eq LilycoveCity_PokemonTrainerFanClub_EventScript_OnlyFan
+	msgbox LilycoveCity_PokemonTrainerFanClub_Text_YouImpressive, MSGBOX_DEFAULT
 	release
 	end
 
-LilycoveCity_PokemonTrainerFanClub_EventScript_21CD67:: @ 821CD67
-	msgbox LilycoveCity_PokemonTrainerFanClub_Text_21DE83, MSGBOX_DEFAULT
+LilycoveCity_PokemonTrainerFanClub_EventScript_OnlyFan:: @ 821CD67
+	msgbox LilycoveCity_PokemonTrainerFanClub_Text_OnlyIRecognizeYourTrueWorth, MSGBOX_DEFAULT
 	release
 	end
 
@@ -496,123 +496,124 @@ LilycoveCity_PokemonTrainerFanClub_EventScript_21CD71:: @ 821CD71
 	release
 	end
 
-LilycoveCity_PokemonTrainerFanClub_EventScript_21CD7B:: @ 821CD7B
+LilycoveCity_PokemonTrainerFanClub_EventScript_Interviewer:: @ 821CD7B
 	lock
 	faceplayer
-	goto_if_set FLAG_FAN_CLUB_STRENGTH_SHARED, LilycoveCity_PokemonTrainerFanClub_EventScript_21CEED
-	goto_if_unset FLAG_FAN_CLUB_STRENGTH_SHARED, LilycoveCity_PokemonTrainerFanClub_EventScript_21CD90
+	goto_if_set FLAG_FAN_CLUB_STRENGTH_SHARED, LilycoveCity_PokemonTrainerFanClub_EventScript_AlreadyInterviewed
+	goto_if_unset FLAG_FAN_CLUB_STRENGTH_SHARED, LilycoveCity_PokemonTrainerFanClub_EventScript_Interview
 	end
 
-LilycoveCity_PokemonTrainerFanClub_EventScript_21CD90:: @ 821CD90
-	setvar VAR_0x8005, 11
+LilycoveCity_PokemonTrainerFanClub_EventScript_Interview:: @ 821CD90
+	setvar VAR_0x8005, TVSHOW_FAN_CLUB_SPECIAL
 	special InterviewBefore
-	compare VAR_RESULT, 1
-	goto_if_eq LilycoveCity_PokemonTrainerFanClub_EventScript_21CEFF
+	compare VAR_RESULT, TRUE
+	goto_if_eq LilycoveCity_PokemonTrainerFanClub_EventScript_AlreadyInterviewed2
 	copyvar VAR_0x800A, VAR_0x8006
 	setvar VAR_0x8004, 8
 	special BufferStreakTrainerText
-	msgbox LilycoveCity_PokemonTrainerFanClub_Text_281BCB, MSGBOX_DEFAULT
+	msgbox LilycoveCity_PokemonTrainerFanClub_Text_WhatsYourOpinionOfTrainer, MSGBOX_DEFAULT
 	setvar VAR_0x8004, EASY_CHAT_TYPE_FAN_QUESTION
 	copyvar VAR_0x8005, VAR_0x800A
 	call Common_ShowEasyChatScreen
 	lock
 	faceplayer
 	compare VAR_RESULT, 1
-	goto_if_eq LilycoveCity_PokemonTrainerFanClub_EventScript_21CDE0
+	goto_if_eq LilycoveCity_PokemonTrainerFanClub_EventScript_SubmitOpinion
 	compare VAR_RESULT, 0
-	goto_if_eq LilycoveCity_PokemonTrainerFanClub_EventScript_21CDEE
+	goto_if_eq LilycoveCity_PokemonTrainerFanClub_EventScript_CancelGiveOpinion
 	end
 
-LilycoveCity_PokemonTrainerFanClub_EventScript_21CDE0:: @ 821CDE0
-	msgbox LilycoveCity_PokemonTrainerFanClub_Text_281C06, MSGBOX_DEFAULT
-	goto LilycoveCity_PokemonTrainerFanClub_EventScript_21CE4D
+LilycoveCity_PokemonTrainerFanClub_EventScript_SubmitOpinion:: @ 821CDE0
+	msgbox LilycoveCity_PokemonTrainerFanClub_Text_ThatsWhatYouThink, MSGBOX_DEFAULT
+	goto LilycoveCity_PokemonTrainerFanClub_EventScript_RateTrainer
 	end
 
-LilycoveCity_PokemonTrainerFanClub_EventScript_21CDEE:: @ 821CDEE
+LilycoveCity_PokemonTrainerFanClub_EventScript_CancelGiveOpinion:: @ 821CDEE
 	setvar VAR_0x8004, 8
 	special BufferStreakTrainerText
-	msgbox LilycoveCity_PokemonTrainerFanClub_Text_281C3D, MSGBOX_YESNO
-	compare VAR_RESULT, 1
-	goto_if_eq LilycoveCity_PokemonTrainerFanClub_EventScript_21CEC6
-	compare VAR_RESULT, 0
-	goto_if_eq LilycoveCity_PokemonTrainerFanClub_EventScript_21CE15
+	msgbox LilycoveCity_PokemonTrainerFanClub_Text_HaveYouForgottenTrainer, MSGBOX_YESNO
+	compare VAR_RESULT, YES
+	goto_if_eq LilycoveCity_PokemonTrainerFanClub_EventScript_ForgetTrainer
+	compare VAR_RESULT, NO
+	goto_if_eq LilycoveCity_PokemonTrainerFanClub_EventScript_AskForOpinion
 	end
 
-LilycoveCity_PokemonTrainerFanClub_EventScript_21CE15:: @ 821CE15
+LilycoveCity_PokemonTrainerFanClub_EventScript_AskForOpinion:: @ 821CE15
 	setvar VAR_0x8004, 8
 	special BufferStreakTrainerText
-	msgbox LilycoveCity_PokemonTrainerFanClub_Text_281C65, MSGBOX_DEFAULT
+	msgbox LilycoveCity_PokemonTrainerFanClub_Text_WhatsYourOpinionOfTrainer2, MSGBOX_DEFAULT
 	setvar VAR_0x8004, EASY_CHAT_TYPE_FAN_QUESTION
 	copyvar VAR_0x8005, VAR_0x800A
 	call Common_ShowEasyChatScreen
 	lock
 	faceplayer
 	compare VAR_RESULT, 1
-	goto_if_eq LilycoveCity_PokemonTrainerFanClub_EventScript_21CDE0
+	goto_if_eq LilycoveCity_PokemonTrainerFanClub_EventScript_SubmitOpinion
 	compare VAR_RESULT, 0
-	goto_if_eq LilycoveCity_PokemonTrainerFanClub_EventScript_21CDEE
+	goto_if_eq LilycoveCity_PokemonTrainerFanClub_EventScript_CancelGiveOpinion
 	end
 
-LilycoveCity_PokemonTrainerFanClub_EventScript_21CE4D:: @ 821CE4D
+LilycoveCity_PokemonTrainerFanClub_EventScript_RateTrainer:: @ 821CE4D
 	setvar VAR_0x8004, 8
 	special BufferStreakTrainerText
-	message LilycoveCity_PokemonTrainerFanClub_Text_281C95
+	message LilycoveCity_PokemonTrainerFanClub_Text_HowStrongRateTrainer
 	waitmessage
 	setvar VAR_0x8004, SCROLL_MULTI_POKEMON_FAN_CLUB_RATER
 	special ShowScrollableMultichoice
 	waitstate
 	setvar VAR_0x8004, 8
 	switch VAR_RESULT
-	case 11, LilycoveCity_PokemonTrainerFanClub_EventScript_21CE9F
-	case MULTI_B_PRESSED, LilycoveCity_PokemonTrainerFanClub_EventScript_21CE9F
+	case 11, LilycoveCity_PokemonTrainerFanClub_EventScript_CancelRateTrainer
+	case MULTI_B_PRESSED, LilycoveCity_PokemonTrainerFanClub_EventScript_CancelRateTrainer
 	setvar VAR_0x8004, 8
 	special BufferStreakTrainerText
 	copyvar VAR_0x8006, VAR_0x800A
 	copyvar VAR_0x8005, VAR_RESULT
 	special PutFanClubSpecialOnTheAir
-	goto LilycoveCity_PokemonTrainerFanClub_EventScript_21CED8
+	goto LilycoveCity_PokemonTrainerFanClub_EventScript_CompleteInterview
 	end
 
-LilycoveCity_PokemonTrainerFanClub_EventScript_21CE9F:: @ 821CE9F
+LilycoveCity_PokemonTrainerFanClub_EventScript_CancelRateTrainer:: @ 821CE9F
 	setvar VAR_0x8004, 8
 	special BufferStreakTrainerText
-	msgbox LilycoveCity_PokemonTrainerFanClub_Text_281CCD, MSGBOX_YESNO
-	compare VAR_RESULT, 1
-	goto_if_eq LilycoveCity_PokemonTrainerFanClub_EventScript_21CEC6
-	compare VAR_RESULT, 0
-	goto_if_eq LilycoveCity_PokemonTrainerFanClub_EventScript_21CE4D
+	msgbox LilycoveCity_PokemonTrainerFanClub_Text_HaveYouForgottenTrainer2, MSGBOX_YESNO
+	compare VAR_RESULT, YES
+	goto_if_eq LilycoveCity_PokemonTrainerFanClub_EventScript_ForgetTrainer
+	compare VAR_RESULT, NO
+	goto_if_eq LilycoveCity_PokemonTrainerFanClub_EventScript_RateTrainer
 	end
 
-LilycoveCity_PokemonTrainerFanClub_EventScript_21CEC6:: @ 821CEC6
+LilycoveCity_PokemonTrainerFanClub_EventScript_ForgetTrainer:: @ 821CEC6
 	setvar VAR_0x8004, 8
 	special BufferStreakTrainerText
-	msgbox LilycoveCity_PokemonTrainerFanClub_Text_281CF5, MSGBOX_DEFAULT
+	msgbox LilycoveCity_PokemonTrainerFanClub_Text_YouShouldMeetTrainer, MSGBOX_DEFAULT
 	release
 	end
 
-LilycoveCity_PokemonTrainerFanClub_EventScript_21CED8:: @ 821CED8
+LilycoveCity_PokemonTrainerFanClub_EventScript_CompleteInterview:: @ 821CED8
 	setvar VAR_0x8004, 8
 	special BufferStreakTrainerText
-	msgbox LilycoveCity_PokemonTrainerFanClub_Text_281D40, MSGBOX_DEFAULT
+	msgbox LilycoveCity_PokemonTrainerFanClub_Text_ThankYouIllShareThisInfo, MSGBOX_DEFAULT
 	setflag FLAG_FAN_CLUB_STRENGTH_SHARED
 	release
 	end
 
-LilycoveCity_PokemonTrainerFanClub_EventScript_21CEED:: @ 821CEED
+LilycoveCity_PokemonTrainerFanClub_EventScript_AlreadyInterviewed:: @ 821CEED
 	setvar VAR_0x8004, 8
 	special BufferStreakTrainerText
-	msgbox LilycoveCity_PokemonTrainerFanClub_Text_281DB4, MSGBOX_DEFAULT
+	msgbox LilycoveCity_PokemonTrainerFanClub_HopeYouCatchTVSpecial, MSGBOX_DEFAULT
 	release
 	end
 
-LilycoveCity_PokemonTrainerFanClub_EventScript_21CEFF:: @ 821CEFF
+@ Shouldnt be reached
+LilycoveCity_PokemonTrainerFanClub_EventScript_AlreadyInterviewed2:: @ 821CEFF
 	end
 
-LilycoveCity_PokemonTrainerFanClub_Text_21CF00: @ 821CF00
+LilycoveCity_PokemonTrainerFanClub_Text_OhWowItsPlayer: @ 821CF00
 	.string "Oh, wow!\n"
 	.string "It's {PLAYER}!$"
 
-LilycoveCity_PokemonTrainerFanClub_Text_21CF12: @ 821CF12
+LilycoveCity_PokemonTrainerFanClub_Text_HeardAboutYouImYourFan: @ 821CF12
 	.string "I've heard the news!\n"
 	.string "You're really strong, aren't you?\p"
 	.string "We always argue about who is the\n"
@@ -833,11 +834,11 @@ LilycoveCity_PokemonTrainerFanClub_Text_21DDCE: @ 821DDCE
 	.string "{STR_VAR_1} is definitely stronger!\n"
 	.string "I'm positive!$"
 
-LilycoveCity_PokemonTrainerFanClub_Text_21DE72: @ 821DE72
+LilycoveCity_PokemonTrainerFanClub_Text_YouImpressive: @ 821DE72
 	.string "You…\p"
 	.string "Impressive!$"
 
-LilycoveCity_PokemonTrainerFanClub_Text_21DE83: @ 821DE83
+LilycoveCity_PokemonTrainerFanClub_Text_OnlyIRecognizeYourTrueWorth: @ 821DE83
 	.string "Your true worth, it is fine if only\n"
 	.string "I recognized it.\p"
 	.string "The others I doubt will understand\n"

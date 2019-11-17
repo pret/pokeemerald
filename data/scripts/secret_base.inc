@@ -27,7 +27,7 @@ SecretBase_Text_DiscoveredSmallEntrance: @ 8274883
 SecretBase_EventScript_CheckEntrance:: @ 82759F1
 	special GetSecretBaseTypeInFrontOfPlayer
 	special CheckPlayerHasSecretBase
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, TRUE
 	goto_if_eq SecretBase_EventScript_AlreadyHasSecretBase
 	checkpartymove MOVE_SECRET_POWER
 	setfieldeffectargument 0, VAR_RESULT
@@ -52,7 +52,7 @@ SecretBase_EventScript_Cave:: @ 8275A50
 	goto_if_eq SecretBase_EventScript_CaveNoSecretPower
 	bufferpartymonnick 0, VAR_RESULT
 	msgbox SecretBase_Text_IndentUseSecretPower, MSGBOX_YESNO
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq SecretBase_EventScript_CancelOnEntrance
 	msgbox Text_MonUsedFieldMove, MSGBOX_DEFAULT
 	closemessage
@@ -84,7 +84,7 @@ SecretBase_EventScript_Tree:: @ 8275AA9
 	goto_if_eq SecretBase_EventScript_TreeNoSecretPower
 	bufferpartymonnick 0, VAR_RESULT
 	msgbox SecretBase_Text_TreeUseSecretPower, MSGBOX_YESNO
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq SecretBase_EventScript_CancelOnEntrance
 	msgbox Text_MonUsedFieldMove, MSGBOX_DEFAULT
 	closemessage
@@ -116,7 +116,7 @@ SecretBase_EventScript_Shrub:: @ 8275B02
 	goto_if_eq SecretBase_EventScript_ShrubNoSecretPower
 	bufferpartymonnick 0, VAR_RESULT
 	msgbox SecretBase_Text_ClumpUseSecretPower, MSGBOX_YESNO
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq SecretBase_EventScript_CancelOnEntrance
 	msgbox Text_MonUsedFieldMove, MSGBOX_DEFAULT
 	closemessage
@@ -161,7 +161,7 @@ SecretBase_EventScript_FirstEntrance:: @ 8275B81
 	waitmovement 0
 	setvar VAR_INIT_SECRET_BASE, 1
 	msgbox SecretBase_Text_WantToMakeYourSecretBaseHere, MSGBOX_YESNO
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, YES
 	goto_if_eq SecretBase_EventScript_SetAsBase
 	closemessage
 	playse SE_KAIDAN
@@ -185,7 +185,7 @@ SecretBase_EventScript_Enter:: @ 8275BB7
 	setvar VAR_INIT_SECRET_BASE, 1
 	playse SE_KAIDAN
 	special IsCurSecretBaseOwnedByAnotherPlayer
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, FALSE
 	goto_if_eq SecretBase_EventScript_EnterPlayersBase
 	clearflag FLAG_DECORATION_0
 	special EnterSecretBase
@@ -209,17 +209,17 @@ SecretBase_EventScript_AlreadyHasSecretBase:: @ 8275BE8
 	lockall
 	special GetSecretBaseNearbyMapName
 	msgbox SecretBase_Text_WouldYouLikeToMoveBases, MSGBOX_YESNO
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq SecretBase_EventScript_CancelOnEntrance
 	msgbox SecretBase_Text_AllDecorationsWillBeReturned, MSGBOX_YESNO
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq SecretBase_EventScript_CancelOnEntrance
 	fadescreenswapbuffers 1
 	special MoveOutOfSecretBaseFromOutside
 	closemessage
 	fadescreenswapbuffers 0
 	msgbox SecretBase_Text_MovingCompletedUseSecretPower, MSGBOX_YESNO
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq SecretBase_EventScript_CancelOnEntrance
 	bufferpartymonnick 0, VAR_0x8004
 	buffermovename 1, MOVE_SECRET_POWER
@@ -347,7 +347,7 @@ SecretBase_EventScript_Trainer0:: @ 8275DD6
 	compare VAR_RESULT, 1
 	goto_if_eq SecretBase_EventScript_Trainer0PostBattle
 	msgbox SecretBase_Text_Trainer0PreBattle, MSGBOX_YESNO
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq SecretBase_EventScript_Trainer0DeclineBattle
 	setvar VAR_RESULT, 1
 	special SetBattledOwnerFromResult
@@ -384,7 +384,7 @@ SecretBase_EventScript_Trainer1:: @ 8275E4E
 	compare VAR_RESULT, 1
 	goto_if_eq SecretBase_EventScript_Trainer1PostBattle
 	msgbox SecretBase_Text_Trainer1PreBattle, MSGBOX_YESNO
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq SecretBase_EventScript_Trainer1DeclineBattle
 	setvar VAR_RESULT, 1
 	special SetBattledOwnerFromResult
@@ -421,7 +421,7 @@ SecretBase_EventScript_Trainer2:: @ 8275EC6
 	compare VAR_RESULT, 1
 	goto_if_eq SecretBase_EventScript_Trainer2PostBattle
 	msgbox SecretBase_Text_Trainer2PreBattle, MSGBOX_YESNO
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq SecretBase_EventScript_Trainer2DeclineBattle
 	setvar VAR_RESULT, 1
 	special SetBattledOwnerFromResult
@@ -458,7 +458,7 @@ SecretBase_EventScript_Trainer3:: @ 8275F3E
 	compare VAR_RESULT, 1
 	goto_if_eq SecretBase_EventScript_Trainer3PostBattle
 	msgbox SecretBase_Text_Trainer3PreBattle, MSGBOX_YESNO
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq SecretBase_EventScript_Trainer3DeclineBattle
 	setvar VAR_RESULT, 1
 	special SetBattledOwnerFromResult
@@ -495,7 +495,7 @@ SecretBase_EventScript_Trainer4:: @ 8275FB6
 	compare VAR_RESULT, 1
 	goto_if_eq SecretBase_EventScript_Trainer4PostBattle
 	msgbox SecretBase_Text_Trainer4PreBattle, MSGBOX_YESNO
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq SecretBase_EventScript_Trainer4DeclineBattle
 	setvar VAR_RESULT, 1
 	special SetBattledOwnerFromResult
@@ -532,7 +532,7 @@ SecretBase_EventScript_Trainer5:: @ 827602E
 	compare VAR_RESULT, 1
 	goto_if_eq SecretBase_EventScript_Trainer5PostBattle
 	msgbox SecretBase_Text_Trainer5PreBattle, MSGBOX_YESNO
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq SecretBase_EventScript_Trainer5DeclineBattle
 	setvar VAR_RESULT, 1
 	special SetBattledOwnerFromResult
@@ -569,7 +569,7 @@ SecretBase_EventScript_Trainer6:: @ 82760A6
 	compare VAR_RESULT, 1
 	goto_if_eq SecretBase_EventScript_Trainer6PostBattle
 	msgbox SecretBase_Text_Trainer6PreBattle, MSGBOX_YESNO
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq SecretBase_EventScript_Trainer6DeclineBattle
 	setvar VAR_RESULT, 1
 	special SetBattledOwnerFromResult
@@ -606,7 +606,7 @@ SecretBase_EventScript_Trainer7:: @ 827611E
 	compare VAR_RESULT, 1
 	goto_if_eq SecretBase_EventScript_Trainer7PostBattle
 	msgbox SecretBase_Text_Trainer7PreBattle, MSGBOX_YESNO
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq SecretBase_EventScript_Trainer7DeclineBattle
 	setvar VAR_RESULT, 1
 	special SetBattledOwnerFromResult
@@ -643,7 +643,7 @@ SecretBase_EventScript_Trainer8:: @ 8276196
 	compare VAR_RESULT, 1
 	goto_if_eq SecretBase_EventScript_Trainer8PostBattle
 	msgbox SecretBase_Text_Trainer8PreBattle, MSGBOX_YESNO
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq SecretBase_EventScript_Trainer8DeclineBattle
 	setvar VAR_RESULT, 1
 	special SetBattledOwnerFromResult
@@ -680,7 +680,7 @@ SecretBase_EventScript_Trainer9:: @ 827620E
 	compare VAR_RESULT, 1
 	goto_if_eq SecretBase_EventScript_Trainer9PostBattle
 	msgbox SecretBase_Text_Trainer9PreBattle, MSGBOX_YESNO
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq SecretBase_EventScript_Trainer9DeclineBattle
 	setvar VAR_RESULT, 1
 	special SetBattledOwnerFromResult

@@ -184,13 +184,13 @@ GabbyAndTy_EventScript_TyBattle4:: @ 828CEB6
 	release
 	end
 
-Route118_EventScript_GabbyBattle5:: @ 828CED6
+GabbyAndTy_EventScript_GabbyBattle5:: @ 828CED6
 	trainerbattle_double TRAINER_GABBY_AND_TY_5, GabbyAndTy_Text_GabbyPreBattle, GabbyAndTy_Text_GabbyDefeat, GabbyAndTy_Text_GabbyNotEnoughMons, GabbyAndTy_EventScript_RequestInterview
 	msgbox GabbyAndTy_Text_KeepingAnEyeOutForYou, MSGBOX_DEFAULT
 	release
 	end
 
-Route118_EventScript_TyBattle5:: @ 828CEF6
+GabbyAndTy_EventScript_TyBattle5:: @ 828CEF6
 	trainerbattle_double TRAINER_GABBY_AND_TY_5, GabbyAndTy_Text_TyPreBattle, GabbyAndTy_Text_TyDefeat, GabbyAndTy_Text_TyNotEnoughMons, GabbyAndTy_EventScript_RequestInterview
 	msgbox GabbyAndTy_Text_TyPostBattle, MSGBOX_DEFAULT
 	release
@@ -305,7 +305,7 @@ GabbyAndTy_EventScript_RequestInterviewLostAMon:: @ 828D099
 	end
 
 GabbyAndTy_EventScript_Interview:: @ 828D0A7
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq GabbyAndTy_EventScript_DontGiveUpKeepingEyeOut
 	msgbox GabbyAndTy_Text_DescribeYourFeelings, MSGBOX_DEFAULT
 	setvar VAR_0x8004, EASY_CHAT_TYPE_GABBY_AND_TY

@@ -30,6 +30,7 @@
 #include "party_menu.h"
 #include "pokemon_jump.h"
 #include "random.h"
+#include "save_location.h"
 #include "script.h"
 #include "script_pokemon_util_80F87D8.h"
 #include "sound.h"
@@ -51,6 +52,7 @@
 #include "constants/rgb.h"
 #include "constants/songs.h"
 #include "constants/species.h"
+#include "constants/union_room.h"
 
 EWRAM_DATA u8 sUnionRoomPlayerName[12] = {};
 EWRAM_DATA u8 gUnknown_02022C2C = 0;
@@ -235,7 +237,7 @@ void sub_8012780(u8 taskId)
     switch (data->state)
     {
     case 0:
-        if (gSpecialVar_0x8004 == 20 && gSaveBlock2Ptr->frontier.lvlMode == FRONTIER_LVL_OPEN)
+        if (gSpecialVar_0x8004 == LINK_GROUP_BATTLE_TOWER && gSaveBlock2Ptr->frontier.lvlMode == FRONTIER_LVL_OPEN)
             gSpecialVar_0x8004++;
         gUnknown_02022C2C = gUnknown_082F00C4[gSpecialVar_0x8004];
         gUnknown_02022C2D = gUnknown_082F00C4[gSpecialVar_0x8004] >> 8;
@@ -817,7 +819,7 @@ void sub_80134E8(u8 taskId)
     switch (data->state)
     {
     case 0:
-        if (gSpecialVar_0x8004 == 20 && gSaveBlock2Ptr->frontier.lvlMode == FRONTIER_LVL_OPEN)
+        if (gSpecialVar_0x8004 == LINK_GROUP_BATTLE_TOWER && gSaveBlock2Ptr->frontier.lvlMode == FRONTIER_LVL_OPEN)
             gSpecialVar_0x8004++;
         gUnknown_02022C2C = gUnknown_082F0530[gSpecialVar_0x8004];
         sub_8010F84(gUnknown_02022C2C, 0, 0);
@@ -829,7 +831,7 @@ void sub_80134E8(u8 taskId)
         data->state = 1;
         break;
     case 1:
-        if (PrintOnTextbox(&data->textState, gUnknown_082EFB70[gSpecialVar_0x8004]))
+        if (PrintOnTextbox(&data->textState, sChooseTrainerTexts[gSpecialVar_0x8004]))
             data->state = 2;
         break;
     case 2:
@@ -841,7 +843,7 @@ void sub_80134E8(u8 taskId)
         data->field_D = AddWindow(&gUnknown_082F017C);
 
         FillWindowPixelBuffer(data->field_C, PIXEL_FILL(2));
-        sub_80173E0(data->field_C, 0, gUnknown_082EF7DC, 8, 1, 4);
+        sub_80173E0(data->field_C, 0, sText_ChooseJoinCancel, 8, 1, 4);
         PutWindowTilemap(data->field_C);
         CopyWindowToVram(data->field_C, 2);
 
@@ -1078,7 +1080,7 @@ u32 sub_8013B8C(struct UnkStruct_Group *arg0, s32 id)
 
     if (gUnknown_02022C2C == 4 && structPtr->unk.field_0.unk_00.unk_01_2 != 3)
     {
-        if (!(gSaveBlock2Ptr->specialSaveWarpFlags & 0x80))
+        if (!(gSaveBlock2Ptr->specialSaveWarpFlags & CHAMPION_SAVEWARP))
             return 1;
         else if (structPtr->unk.field_0.unk_00.isChampion)
             return 0;
@@ -1470,7 +1472,7 @@ void sub_801440C(u8 taskId)
         HealPlayerParty();
         SavePlayerParty();
         LoadPlayerBag();
-        sub_8014304(MAP_GROUP(SINGLE_BATTLE_COLOSSEUM), MAP_NUM(SINGLE_BATTLE_COLOSSEUM), 6, 8, USING_SINGLE_BATTLE);
+        sub_8014304(MAP_GROUP(BATTLE_COLOSSEUM_2P), MAP_NUM(BATTLE_COLOSSEUM_2P), 6, 8, USING_SINGLE_BATTLE);
         SetMainCallback2(sub_8014384);
         break;
     case 2:
@@ -1479,7 +1481,7 @@ void sub_801440C(u8 taskId)
         SavePlayerParty();
         LoadPlayerBag();
         sub_80143E4(gBlockSendBuffer, TRUE);
-        sub_8014304(MAP_GROUP(SINGLE_BATTLE_COLOSSEUM), MAP_NUM(SINGLE_BATTLE_COLOSSEUM), 6, 8, USING_DOUBLE_BATTLE);
+        sub_8014304(MAP_GROUP(BATTLE_COLOSSEUM_2P), MAP_NUM(BATTLE_COLOSSEUM_2P), 6, 8, USING_DOUBLE_BATTLE);
         SetMainCallback2(sub_8014384);
         break;
     case 3:
@@ -1488,7 +1490,7 @@ void sub_801440C(u8 taskId)
         SavePlayerParty();
         LoadPlayerBag();
         sub_80143E4(gBlockSendBuffer, TRUE);
-        sub_8014304(MAP_GROUP(DOUBLE_BATTLE_COLOSSEUM), MAP_NUM(DOUBLE_BATTLE_COLOSSEUM), 5, 8, USING_MULTI_BATTLE);
+        sub_8014304(MAP_GROUP(BATTLE_COLOSSEUM_4P), MAP_NUM(BATTLE_COLOSSEUM_4P), 5, 8, USING_MULTI_BATTLE);
         SetMainCallback2(sub_8014384);
         break;
     case 4:
@@ -1897,7 +1899,7 @@ void sub_8014F48(u8 taskId)
         data->state = 1;
         break;
     case 1:
-        AddTextPrinterToWindow1(gUnknown_082EF7F8);
+        AddTextPrinterToWindow1(sText_ChooseTrainer);
         data->state = 2;
         break;
     case 2:
@@ -4281,7 +4283,7 @@ void sub_8018220(u8 *unused, struct UnkStruct_URoom *arg1, bool8 arg2)
 
     DynamicPlaceholderTextUtil_SetPlaceholderPtr(1, trainerCard->playerName);
 
-    StringCopy(arg1->field_174, gUnknown_082EFF50[trainerCard->stars]);
+    StringCopy(arg1->field_174, sCardColorTexts[trainerCard->stars]);
     DynamicPlaceholderTextUtil_SetPlaceholderPtr(2, arg1->field_174);
 
     ConvertIntToDecimalStringN(arg1->field_C0[2], trainerCard->caughtMonsCount, STR_CONV_MODE_LEFT_ALIGN, 3);

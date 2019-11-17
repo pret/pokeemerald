@@ -440,7 +440,7 @@ ALIGNED(4) const u8 sText_CancelRegistrationOfMon[] = _("Cancel the registration
 ALIGNED(4) const u8 sText_CancelRegistrationOfEgg[] = _("Cancel the registration of your\nEgg?");
 ALIGNED(4) const u8 sText_RegistrationCanceled2[] = _("The registration has been canceled.\p");
 ALIGNED(4) const u8 sText_TradeTrainersWillBeListed[] = _("Trainers wishing to make a trade\nwill be listed."); // unused
-ALIGNED(4) const u8 sText_ChooseTrainerToTradeWith[] = _("Please choose the Trainer with whom\nyou would like to trade Pokémon."); // unused
+ALIGNED(4) const u8 sText_ChooseTrainerToTradeWith2[] = _("Please choose the Trainer with whom\nyou would like to trade Pokémon."); // unused
 ALIGNED(4) const u8 sText_AskTrainerToMakeTrade[] = _("Would you like to ask {STR_VAR_1} to\nmake a trade?");
 ALIGNED(4) const u8 sText_AwaitingResponseFromTrainer[] = _("Awaiting a response from\nthe other Trainer…"); // unused
 ALIGNED(4) const u8 sText_NotRegisteredAMonForTrade[] = _("You have not registered a Pokémon\nfor trading.\p"); // unused
@@ -457,50 +457,51 @@ const u8 *const sUnionRoomTexts_CantTradeRightNow[] = {
 
 ALIGNED(4) const u8 sText_TradeOfferRejected[] = _("Your trade offer was rejected.\p");
 ALIGNED(4) const u8 sText_EggTrade[] = _("Egg Trade");
-ALIGNED(4) const u8 gUnknown_082EF7DC[] = _("{DPAD_UPDOWN}Choose  {A_BUTTON}Join  {B_BUTTON}Cancel");
-ALIGNED(4) const u8 gUnknown_082EF7F8[] = _("Please choose a Trainer.");
-ALIGNED(4) const u8 gUnknown_082EF814[] = _("Please choose a Trainer for\na Single Battle.");
-ALIGNED(4) const u8 gUnknown_082EF844[] = _("Please choose a Trainer for\na Double Battle.");
-ALIGNED(4) const u8 gUnknown_082EF874[] = _("Please choose the Leader\nfor a Multi Battle.");
-ALIGNED(4) const u8 gUnknown_082EF8A4[] = _("Please choose the Trainer to\ntrade with.");
-ALIGNED(4) const u8 gUnknown_082EF8D0[] = _("Please choose the Trainer who is\nsharing Wonder Cards.");
-ALIGNED(4) const u8 gUnknown_082EF908[] = _("Please choose the Trainer who is\nsharing Wonder News.");
-ALIGNED(4) const u8 gUnknown_082EF940[] = _("Jump with mini Pokémon!\nPlease choose the Leader.");
-ALIGNED(4) const u8 gUnknown_082EF974[] = _("Berry Crush!\nPlease choose the Leader.");
-ALIGNED(4) const u8 gUnknown_082EF99C[] = _("Dodrio Berry-Picking!\nPlease choose the Leader.");
-ALIGNED(4) const u8 gUnknown_082EF9CC[] = _("Berry Blender!\nPlease choose the Leader.");
-ALIGNED(4) const u8 gUnknown_082EF9F8[] = _("Record Corner!\nPlease choose the Leader.");
-ALIGNED(4) const u8 gUnknown_082EFA24[] = _("Coolness Contest!\nPlease choose the Leader.");
-ALIGNED(4) const u8 gUnknown_082EFA50[] = _("Beauty Contest!\nPlease choose the Leader.");
-ALIGNED(4) const u8 gUnknown_082EFA7C[] = _("Cuteness Contest!\nPlease choose the Leader.");
-ALIGNED(4) const u8 gUnknown_082EFAA8[] = _("Smartness Contest!\nPlease choose the Leader.");
-ALIGNED(4) const u8 gUnknown_082EFAD8[] = _("Toughness Contest!\nPlease choose the Leader.");
-ALIGNED(4) const u8 gUnknown_082EFB08[] = _("Battle Tower Level 50!\nPlease choose the Leader.");
-ALIGNED(4) const u8 gUnknown_082EFB3C[] = _("Battle Tower Open Level!\nPlease choose the Leader.");
+ALIGNED(4) const u8 sText_ChooseJoinCancel[] = _("{DPAD_UPDOWN}Choose  {A_BUTTON}Join  {B_BUTTON}Cancel");
+ALIGNED(4) const u8 sText_ChooseTrainer[] = _("Please choose a Trainer.");
+ALIGNED(4) const u8 sText_ChooseTrainerSingleBattle[] = _("Please choose a Trainer for\na Single Battle.");
+ALIGNED(4) const u8 sText_ChooseTrainerDoubleBattle[] = _("Please choose a Trainer for\na Double Battle.");
+ALIGNED(4) const u8 sText_ChooseLeaderMultiBattle[] = _("Please choose the Leader\nfor a Multi Battle.");
+ALIGNED(4) const u8 sText_ChooseTrainerToTradeWith[] = _("Please choose the Trainer to\ntrade with.");
+ALIGNED(4) const u8 sText_ChooseTrainerToShareWonderCards[] = _("Please choose the Trainer who is\nsharing Wonder Cards.");
+ALIGNED(4) const u8 sText_ChooseTrainerToShareWonderNews[] = _("Please choose the Trainer who is\nsharing Wonder News.");
+ALIGNED(4) const u8 sText_ChooseLeaderPokemonJump[] = _("Jump with mini Pokémon!\nPlease choose the Leader.");
+ALIGNED(4) const u8 sText_ChooseLeaderBerryCrush[] = _("Berry Crush!\nPlease choose the Leader.");
+ALIGNED(4) const u8 sText_ChooseLeaderBerryPicking[] = _("Dodrio Berry-Picking!\nPlease choose the Leader.");
+ALIGNED(4) const u8 sText_ChooseLeaderBerryBlender[] = _("Berry Blender!\nPlease choose the Leader.");
+ALIGNED(4) const u8 sText_ChooseLeaderRecordCorner[] = _("Record Corner!\nPlease choose the Leader.");
+ALIGNED(4) const u8 sText_ChooseLeaderCoolContest[] = _("Coolness Contest!\nPlease choose the Leader.");
+ALIGNED(4) const u8 sText_ChooseLeaderBeautyContest[] = _("Beauty Contest!\nPlease choose the Leader.");
+ALIGNED(4) const u8 sText_ChooseLeaderCuteContest[] = _("Cuteness Contest!\nPlease choose the Leader.");
+ALIGNED(4) const u8 sText_ChooseLeaderSmartContest[] = _("Smartness Contest!\nPlease choose the Leader.");
+ALIGNED(4) const u8 sText_ChooseLeaderToughContest[] = _("Toughness Contest!\nPlease choose the Leader.");
+ALIGNED(4) const u8 sText_ChooseLeaderBattleTowerLv50[] = _("Battle Tower Level 50!\nPlease choose the Leader.");
+ALIGNED(4) const u8 sText_ChooseLeaderBattleTowerOpenLv[] = _("Battle Tower Open Level!\nPlease choose the Leader.");
 
-const u8 *const gUnknown_082EFB70[] = {
-    gUnknown_082EF814,
-    gUnknown_082EF844,
-    gUnknown_082EF874,
-    gUnknown_082EF8A4,
-    gUnknown_082EF940,
-    gUnknown_082EF974,
-    gUnknown_082EF99C,
-    gUnknown_082EF8D0,
-    gUnknown_082EF908,
-    NULL,
-    NULL,
-    NULL,
-    gUnknown_082EF9F8,
-    gUnknown_082EF9CC,
-    NULL,
-    gUnknown_082EFA24,
-    gUnknown_082EFA50,
-    gUnknown_082EFA7C,
-    gUnknown_082EFAA8,
-    gUnknown_082EFAD8,
-    gUnknown_082EFB08,
-    gUnknown_082EFB3C
+static const u8 *const sChooseTrainerTexts[NUM_LINK_GROUP_TYPES] = 
+{
+    [LINK_GROUP_SINGLE_BATTLE]     = sText_ChooseTrainerSingleBattle,
+    [LINK_GROUP_DOUBLE_BATTLE]     = sText_ChooseTrainerDoubleBattle,
+    [LINK_GROUP_MULTI_BATTLE]      = sText_ChooseLeaderMultiBattle,
+    [LINK_GROUP_TRADE]             = sText_ChooseTrainerToTradeWith,
+    [LINK_GROUP_POKEMON_JUMP]      = sText_ChooseLeaderPokemonJump,
+    [LINK_GROUP_BERRY_CRUSH]       = sText_ChooseLeaderBerryCrush,
+    [LINK_GROUP_BERRY_PICKING]     = sText_ChooseLeaderBerryPicking,
+    [LINK_GROUP_WONDER_CARD]       = sText_ChooseTrainerToShareWonderCards,
+    [LINK_GROUP_WONDER_NEWS]       = sText_ChooseTrainerToShareWonderNews,
+    [LINK_GROUP_UNK_9]             = NULL,
+    [LINK_GROUP_UNK_10]            = NULL,
+    [LINK_GROUP_UNK_11]            = NULL,
+    [LINK_GROUP_RECORD_CORNER]     = sText_ChooseLeaderRecordCorner,
+    [LINK_GROUP_BERRY_BLENDER]     = sText_ChooseLeaderBerryBlender,
+    [LINK_GROUP_UNK_14]            = NULL,
+    [LINK_GROUP_COOL_CONTEST]      = sText_ChooseLeaderCoolContest,
+    [LINK_GROUP_BEAUTY_CONTEST]    = sText_ChooseLeaderBeautyContest,
+    [LINK_GROUP_CUTE_CONTEST]      = sText_ChooseLeaderCuteContest,
+    [LINK_GROUP_SMART_CONTEST]     = sText_ChooseLeaderSmartContest,
+    [LINK_GROUP_TOUGH_CONTEST]     = sText_ChooseLeaderToughContest,
+    [LINK_GROUP_BATTLE_TOWER]      = sText_ChooseLeaderBattleTowerLv50,
+    [LINK_GROUP_BATTLE_TOWER_OPEN] = sText_ChooseLeaderBattleTowerOpenLv
 };
 
 ALIGNED(4) const u8 gUnknown_082EFBC8[] = _("Searching for a Wireless\nCommunication System. Wait...");
@@ -524,39 +525,42 @@ ALIGNED(4) const u8 gUnknown_082EFD7C[] = _("Exit");
 ALIGNED(4) const u8 gUnknown_082EFD84[] = _("Exit");
 ALIGNED(4) const u8 gUnknown_082EFD8C[] = _("Info");
 ALIGNED(4) const u8 gUnknown_082EFD94[] = _("Name{CLEAR_TO 0x3C}Wanted{CLEAR_TO 0x6E}Offer{CLEAR_TO 0xC6}LV.");
-ALIGNED(4) const u8 gUnknown_082EFDB0[] = _("Single Battle");
-ALIGNED(4) const u8 gUnknown_082EFDC0[] = _("Double Battle");
-ALIGNED(4) const u8 gUnknown_082EFDD0[] = _("Multi Battle");
-ALIGNED(4) const u8 gUnknown_082EFDE0[] = _("Pokémon Trades");
-ALIGNED(4) const u8 gUnknown_082EFDF0[] = _("Chat");
-ALIGNED(4) const u8 gUnknown_082EFDF8[] = _("Cards");
-ALIGNED(4) const u8 gUnknown_082EFE00[] = _("Wonder Cards");
-ALIGNED(4) const u8 gUnknown_082EFE10[] = _("Wonder News");
-ALIGNED(4) const u8 gUnknown_082EFE1C[] = _("Pokémon Jump");
-ALIGNED(4) const u8 gUnknown_082EFE2C[] = _("Berry Crush");
-ALIGNED(4) const u8 gUnknown_082EFE38[] = _("Berry-Picking");
-ALIGNED(4) const u8 gUnknown_082EFE48[] = _("Search");
-ALIGNED(4) const u8 gUnknown_082EFE50[] = _("Berry Blender");
-ALIGNED(4) const u8 gUnknown_082EFE60[] = _("Record Corner");
-ALIGNED(4) const u8 gUnknown_082EFE70[] = _("Cool Contest");
-ALIGNED(4) const u8 gUnknown_082EFE80[] = _("Beauty Contest");
-ALIGNED(4) const u8 gUnknown_082EFE90[] = _("Cute Contest");
-ALIGNED(4) const u8 gUnknown_082EFEA0[] = _("Smart Contest");
-ALIGNED(4) const u8 gUnknown_082EFEB0[] = _("Tough Contest");
-ALIGNED(4) const u8 gUnknown_082EFEC0[] = _("Battle Tower LV. 50");
-ALIGNED(4) const u8 gUnknown_082EFED4[] = _("Battle Tower Open Level");
-ALIGNED(4) const u8 gUnknown_082EFEEC[] = _("It's a Normal Card.");
-ALIGNED(4) const u8 gUnknown_082EFF00[] = _("It's a Bronze Card!");
-ALIGNED(4) const u8 gUnknown_082EFF14[] = _("It's a Copper Card!");
-ALIGNED(4) const u8 gUnknown_082EFF28[] = _("It's a Silver Card!");
-ALIGNED(4) const u8 gUnknown_082EFF3C[] = _("It's a Gold Card!");
 
-const u8 *const gUnknown_082EFF50[] = {
-    gUnknown_082EFEEC,
-    gUnknown_082EFF00,
-    gUnknown_082EFF14,
-    gUnknown_082EFF28,
-    gUnknown_082EFF3C
+ALIGNED(4) const u8 sText_SingleBattle[] = _("Single Battle");
+ALIGNED(4) const u8 sText_DoubleBattle[] = _("Double Battle");
+ALIGNED(4) const u8 sText_MultiBattle[] = _("Multi Battle");
+ALIGNED(4) const u8 sText_PokemonTrades[] = _("Pokémon Trades");
+ALIGNED(4) const u8 sText_Chat[] = _("Chat");
+ALIGNED(4) const u8 sText_Cards[] = _("Cards");
+ALIGNED(4) const u8 sText_WonderCards[] = _("Wonder Cards");
+ALIGNED(4) const u8 sText_WonderNews[] = _("Wonder News");
+ALIGNED(4) const u8 sText_PokemonJump[] = _("Pokémon Jump");
+ALIGNED(4) const u8 sText_BerryCrush[] = _("Berry Crush");
+ALIGNED(4) const u8 sText_BerryPicking[] = _("Berry-Picking");
+ALIGNED(4) const u8 sText_Search[] = _("Search");
+
+
+ALIGNED(4) const u8 sText_BerryBlender[] = _("Berry Blender");
+ALIGNED(4) const u8 sText_RecordCorner[] = _("Record Corner");
+ALIGNED(4) const u8 sText_CoolContest[] = _("Cool Contest");
+ALIGNED(4) const u8 sText_BeautyContest[] = _("Beauty Contest");
+ALIGNED(4) const u8 sText_CuteContest[] = _("Cute Contest");
+ALIGNED(4) const u8 sText_SmartContest[] = _("Smart Contest");
+ALIGNED(4) const u8 sText_ToughContest[] = _("Tough Contest");
+ALIGNED(4) const u8 sText_BattleTowerLv50[] = _("Battle Tower LV. 50");
+ALIGNED(4) const u8 sText_BattleTowerOpenLv[] = _("Battle Tower Open Level");
+ALIGNED(4) const u8 sText_ItsNormalCard[] = _("It's a Normal Card.");
+ALIGNED(4) const u8 sText_ItsBronzeCard[] = _("It's a Bronze Card!");
+ALIGNED(4) const u8 sText_ItsCopperCard[] = _("It's a Copper Card!");
+ALIGNED(4) const u8 sText_ItsSilverCard[] = _("It's a Silver Card!");
+ALIGNED(4) const u8 sText_ItsGoldCard[] = _("It's a Gold Card!");
+
+static const u8 *const sCardColorTexts[] = {
+    sText_ItsNormalCard,
+    sText_ItsBronzeCard,
+    sText_ItsCopperCard,
+    sText_ItsSilverCard,
+    sText_ItsGoldCard
 };
 
 ALIGNED(4) const u8 gUnknown_082EFF64[] = _("This is {SPECIAL_F7 0x00} {SPECIAL_F7 0x01}'s\nTrainer Card…\l{SPECIAL_F7 0x02}\pPokédex: {SPECIAL_F7 0x03}\nTime:    {SPECIAL_F7 0x04}:{SPECIAL_F7 0x05}\p");
@@ -573,34 +577,34 @@ ALIGNED(4) const u8 gUnknown_082F0020[] = _("Finished checking {SPECIAL_F7 0x01}
 
 const u8 *const gUnknown_082F0048[] = {
     gText_EmptyString,
-    gUnknown_082EFDB0,
-    gUnknown_082EFDC0,
-    gUnknown_082EFDD0,
-    gUnknown_082EFDE0,
-    gUnknown_082EFDF0,
-    gUnknown_082EFE00,
-    gUnknown_082EFE10,
-    gUnknown_082EFDF8,
-    gUnknown_082EFE1C,
-    gUnknown_082EFE2C,
-    gUnknown_082EFE38,
-    gUnknown_082EFE48,
+    sText_SingleBattle,
+    sText_DoubleBattle,
+    sText_MultiBattle,
+    sText_PokemonTrades,
+    sText_Chat,
+    sText_WonderCards,
+    sText_WonderNews,
+    sText_Cards,
+    sText_PokemonJump,
+    sText_BerryCrush,
+    sText_BerryPicking,
+    sText_Search,
     gText_EmptyString,
-    gUnknown_082EFED4,
-    gUnknown_082EFE60,
-    gUnknown_082EFE50,
-    gText_EmptyString,
-    gText_EmptyString,
+    sText_BattleTowerOpenLv,
+    sText_RecordCorner,
+    sText_BerryBlender,
     gText_EmptyString,
     gText_EmptyString,
-    gUnknown_082EFE00,
-    gUnknown_082EFE10,
-    gUnknown_082EFE70,
-    gUnknown_082EFE80,
-    gUnknown_082EFE90,
-    gUnknown_082EFEA0,
-    gUnknown_082EFEB0,
-    gUnknown_082EFEC0
+    gText_EmptyString,
+    gText_EmptyString,
+    sText_WonderCards,
+    sText_WonderNews,
+    sText_CoolContest,
+    sText_BeautyContest,
+    sText_CuteContest,
+    sText_SmartContest,
+    sText_ToughContest,
+    sText_BattleTowerLv50
 };
 
 const struct WindowTemplate gUnknown_082F00BC = {
@@ -613,7 +617,7 @@ const struct WindowTemplate gUnknown_082F00BC = {
     .baseBlock = 0x0008
 };
 
-const u32 gUnknown_082F00C4[] = {
+const u32 gUnknown_082F00C4[NUM_LINK_GROUP_TYPES] = {
     0x0201,
     0x0202,
     0x0403,
@@ -1012,7 +1016,7 @@ ALIGNED(4) const u8 gUnknown_082F04CC[] = {0x1b, 0xff};
 ALIGNED(4) const u8 gUnknown_082F04D0[] = {0x1c, 0xff};
 ALIGNED(4) const u8 gUnknown_082F04D4[] = {0x0e, 0xff};
 
-const u8 *const gUnknown_082F04D8[] = {
+const u8 *const gUnknown_082F04D8[NUM_LINK_GROUP_TYPES] = {
     gUnknown_082F0474,
     gUnknown_082F0478,
     gUnknown_082F047C,
@@ -1037,8 +1041,29 @@ const u8 *const gUnknown_082F04D8[] = {
     gUnknown_082F04D4
 };
 
-const u8 gUnknown_082F0530[] = {
-    0x01, 0x02, 0x03, 0x04, 0x09, 0x0a, 0x0b, 0x15,
-    0x16, 0x00, 0x00, 0x00, 0x0f, 0x10, 0x00, 0x17,
-    0x18, 0x19, 0x1a, 0x1b, 0x1c, 0x0e, 0x00, 0x00
+// Link group type to ID for gUnknown_02022C2C
+const u8 gUnknown_082F0530[NUM_LINK_GROUP_TYPES + 2] = 
+{
+    0x01, 
+    0x02, 
+    0x03, 
+    0x04, 
+    0x09, 
+    0x0a, 
+    0x0b, 
+    0x15,
+    0x16, 
+    0x00, 
+    0x00, 
+    0x00, 
+    0x0f, 
+    0x10, 
+    0x00, 
+    0x17,
+    0x18, 
+    0x19, 
+    0x1a, 
+    0x1b, 
+    0x1c, 
+    0x0e
 };

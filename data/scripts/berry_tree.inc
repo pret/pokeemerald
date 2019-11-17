@@ -32,9 +32,9 @@ BerryTree_EventScript_CheckSoil:: @ 8274359
 
 BerryTree_EventScript_WantToPlant:: @ 8274374
 	msgbox BerryTree_Text_WantToPlant, MSGBOX_YESNO
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, YES
 	goto_if_eq BerryTree_EventScript_ChooseBerryToPlant
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq BerryTree_EventScript_CancelPlanting
 	end
 
@@ -110,9 +110,9 @@ BerryTree_EventScript_CheckBerryFullyGrown:: @ 8274421
 	faceplayer
 	special EventObjectInteractionGetBerryCountString
 	msgbox BerryTree_Text_WantToPick, MSGBOX_YESNO
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, YES
 	goto_if_eq BerryTree_EventScript_PickBerry
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq BerryTree_EventScript_CancelPickingBerry
 
 BerryTree_EventScript_PickBerry:: @ 8274448
@@ -159,9 +159,9 @@ BerryTree_EventScript_WantToWater:: @ 827448D
 	goto_if_eq BerryTree_EventScript_DontWater
 	special EventObjectInteractionGetBerryName
 	msgbox BerryTree_Text_WantToWater, MSGBOX_YESNO
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, YES
 	goto_if_eq BerryTree_EventScript_WaterBerry
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq BerryTree_EventScript_DontWater
 
 BerryTree_EventScript_DontWater:: @ 82744BE

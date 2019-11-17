@@ -42,7 +42,7 @@ BattleFrontier_BattlePikeRandomRoom1_EventScript_25D1C6:: @ 825D1C6
 	case 1, BattleFrontier_BattlePikeRandomRoom1_EventScript_25D226
 
 BattleFrontier_BattlePikeRandomRoom1_EventScript_25D20A:: @ 825D20A
-	setvar VAR_0x8004, 2
+	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_2
 	setvar VAR_0x8005, 0
 	setvar VAR_0x8006, 4
 	special CallFrontierUtilFunc
@@ -142,13 +142,13 @@ BattleFrontier_BattlePikeRandomRoom1_EventScript_25D2FB:: @ 825D2FB
 	case 2, BattleFrontier_BattlePikeRandomRoom1_EventScript_25D416
 	case 3, BattleFrontier_BattlePikeRandomRoom1_EventScript_25D3BD
 	case 4, BattleFrontier_BattlePikeRandomRoom1_EventScript_25D443
-	setvar VAR_0x8004, 1
+	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_1
 	setvar VAR_0x8005, 7
 	special CallFrontierUtilFunc
 	compare VAR_RESULT, 0
 	goto_if_ne BattleFrontier_BattlePikeRandomRoom1_EventScript_25D3BD
 	msgbox BattleFrontier_BattlePikeRandomRoom1_Text_25DED2, MSGBOX_DEFAULT
-	setvar VAR_0x8004, 2
+	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_2
 	setvar VAR_0x8005, 7
 	special CallFrontierUtilFunc
 
@@ -160,7 +160,7 @@ BattleFrontier_BattlePikeRandomRoom1_EventScript_25D3BD:: @ 825D3BD
 	goto BattleFrontier_BattlePikeRandomRoom1_EventScript_25D20A
 
 BattleFrontier_BattlePikeRandomRoom1_EventScript_25D3DA:: @ 825D3DA
-	setvar VAR_0x8004, 12
+	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_GET_FACILITY_SYMBOLS
 	special CallFrontierUtilFunc
 	compare VAR_RESULT, 0
 	goto_if_ne BattleFrontier_BattlePikeRandomRoom1_EventScript_25D49D
@@ -170,20 +170,20 @@ BattleFrontier_BattlePikeRandomRoom1_EventScript_25D3DA:: @ 825D3DA
 	message BattleFrontier_BattlePikeRandomRoom1_Text_25DFD0
 	waitmessage
 	waitfanfare
-	setvar VAR_0x8004, 13
+	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_GIVE_FACILITY_SYMBOL
 	special CallFrontierUtilFunc
 	msgbox BattleFrontier_BattlePikeRandomRoom1_Text_25E003, MSGBOX_DEFAULT
 	closemessage
 	goto BattleFrontier_BattlePikeRandomRoom1_EventScript_25D49D
 
 BattleFrontier_BattlePikeRandomRoom1_EventScript_25D416:: @ 825D416
-	setvar VAR_0x8004, 1
+	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_1
 	setvar VAR_0x8005, 7
 	special CallFrontierUtilFunc
 	compare VAR_RESULT, 0
 	goto_if_ne BattleFrontier_BattlePikeRandomRoom1_EventScript_25D443
 	msgbox BattleFrontier_BattlePikeRandomRoom1_Text_25E02C, MSGBOX_DEFAULT
-	setvar VAR_0x8004, 2
+	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_2
 	setvar VAR_0x8005, 7
 	special CallFrontierUtilFunc
 
@@ -195,7 +195,7 @@ BattleFrontier_BattlePikeRandomRoom1_EventScript_25D443:: @ 825D443
 	goto BattleFrontier_BattlePikeRandomRoom1_EventScript_25D20A
 
 BattleFrontier_BattlePikeRandomRoom1_EventScript_25D460:: @ 825D460
-	setvar VAR_0x8004, 12
+	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_GET_FACILITY_SYMBOLS
 	special CallFrontierUtilFunc
 	compare VAR_RESULT, 2
 	goto_if_eq BattleFrontier_BattlePikeRandomRoom1_EventScript_25D49D
@@ -205,7 +205,7 @@ BattleFrontier_BattlePikeRandomRoom1_EventScript_25D460:: @ 825D460
 	message BattleFrontier_BattlePikeRandomRoom1_Text_25E118
 	waitmessage
 	waitfanfare
-	setvar VAR_0x8004, 13
+	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_GIVE_FACILITY_SYMBOL
 	special CallFrontierUtilFunc
 	msgbox BattleFrontier_BattlePikeRandomRoom1_Text_25E140, MSGBOX_DEFAULT
 	closemessage

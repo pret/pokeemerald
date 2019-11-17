@@ -4,55 +4,55 @@ Route131_MapScripts:: @ 81F7404
 
 Route131_OnTransition: @ 81F740A
 	compare VAR_SOOTOPOLIS_CITY_STATE, 4
-	call_if_ge Route131_EventScript_1F741F
-	call Route131_EventScript_1F741B
+	call_if_ge Route131_EventScript_CheckSetAlternatingWeather
+	call Route131_EventScript_SetLayout
 	end
 
-Route131_EventScript_1F741B:: @ 81F741B
+Route131_EventScript_SetLayout:: @ 81F741B
 	setmaplayoutindex LAYOUT_ROUTE131_SKY_PILLAR
 	return
 
-Route131_EventScript_1F741F:: @ 81F741F
-	call_if_set FLAG_SYS_WEATHER_CTRL, Common_EventScript_SetWeather15
+Route131_EventScript_CheckSetAlternatingWeather:: @ 81F741F
+	call_if_set FLAG_SYS_WEATHER_CTRL, Common_EventScript_SetAlternatingWeather
 	return
 
-Route131_EventScript_1F7429:: @ 81F7429
-	trainerbattle_single TRAINER_RICHARD, Route131_Text_2A34C8, Route131_Text_2A350D
-	msgbox Route131_Text_2A353D, MSGBOX_AUTOCLOSE
+Route131_EventScript_Richard:: @ 81F7429
+	trainerbattle_single TRAINER_RICHARD, Route131_Text_RichardIntro, Route131_Text_RichardDefeat
+	msgbox Route131_Text_RichardPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-Route131_EventScript_1F7440:: @ 81F7440
-	trainerbattle_single TRAINER_HERMAN, Route131_Text_2A35C6, Route131_Text_2A3626
-	msgbox Route131_Text_2A362D, MSGBOX_AUTOCLOSE
+Route131_EventScript_Herman:: @ 81F7440
+	trainerbattle_single TRAINER_HERMAN, Route131_Text_HermanIntro, Route131_Text_HermanDefeat
+	msgbox Route131_Text_HermanPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-Route131_EventScript_1F7457:: @ 81F7457
-	trainerbattle_single TRAINER_SUSIE, Route131_Text_2A367B, Route131_Text_2A36AB
-	msgbox Route131_Text_2A36D6, MSGBOX_AUTOCLOSE
+Route131_EventScript_Susie:: @ 81F7457
+	trainerbattle_single TRAINER_SUSIE, Route131_Text_SusieIntro, Route131_Text_SusieDefeat
+	msgbox Route131_Text_SusiePostBattle, MSGBOX_AUTOCLOSE
 	end
 
-Route131_EventScript_1F746E:: @ 81F746E
-	trainerbattle_single TRAINER_KARA, Route131_Text_2A3751, Route131_Text_2A378A
-	msgbox Route131_Text_2A379F, MSGBOX_AUTOCLOSE
+Route131_EventScript_Kara:: @ 81F746E
+	trainerbattle_single TRAINER_KARA, Route131_Text_KaraIntro, Route131_Text_KaraDefeat
+	msgbox Route131_Text_KaraPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-Route131_EventScript_1F7485:: @ 81F7485
-	trainerbattle_double TRAINER_RELI_AND_IAN, Route131_Text_2A37E9, Route131_Text_2A381F, Route131_Text_2A38B7
-	msgbox Route131_Text_2A3855, MSGBOX_AUTOCLOSE
+Route131_EventScript_Reli:: @ 81F7485
+	trainerbattle_double TRAINER_RELI_AND_IAN, Route131_Text_ReliIntro, Route131_Text_ReliDefeat, Route131_Text_ReliNotEnoughMons
+	msgbox Route131_Text_ReliPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-Route131_EventScript_1F74A0:: @ 81F74A0
-	trainerbattle_double TRAINER_RELI_AND_IAN, Route131_Text_2A38F8, Route131_Text_2A3925, Route131_Text_2A39CD
-	msgbox Route131_Text_2A3960, MSGBOX_AUTOCLOSE
+Route131_EventScript_Ian:: @ 81F74A0
+	trainerbattle_double TRAINER_RELI_AND_IAN, Route131_Text_IanIntro, Route131_Text_IanDefeat, Route131_Text_IanNotEnoughMons
+	msgbox Route131_Text_IanPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-Route131_EventScript_1F74BB:: @ 81F74BB
-	trainerbattle_single TRAINER_TALIA, Route131_Text_2A39FE, Route131_Text_2A3A38
-	msgbox Route131_Text_2A3A48, MSGBOX_AUTOCLOSE
+Route131_EventScript_Talia:: @ 81F74BB
+	trainerbattle_single TRAINER_TALIA, Route131_Text_TaliaIntro, Route131_Text_TaliaDefeat
+	msgbox Route131_Text_TaliaPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-Route131_EventScript_1F74D2:: @ 81F74D2
-	trainerbattle_single TRAINER_KEVIN, Route131_Text_2A3AA0, Route131_Text_2A3AFC
-	msgbox Route131_Text_2A3B02, MSGBOX_AUTOCLOSE
+Route131_EventScript_Kevin:: @ 81F74D2
+	trainerbattle_single TRAINER_KEVIN, Route131_Text_KevinIntro, Route131_Text_KevinDefeat
+	msgbox Route131_Text_KevinPostBattle, MSGBOX_AUTOCLOSE
 	end
 

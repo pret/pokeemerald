@@ -3,25 +3,25 @@ MtPyre_Exterior_MapScripts:: @ 8231FCC
 	.byte 0
 
 MtPyre_Exterior_OnTransition: @ 8231FD2
-	call MtPyre_Exterior_EventScript_231FD8
+	call MtPyre_Exterior_EventScript_CheckEnterFromSummit
 	end
 
-MtPyre_Exterior_EventScript_231FD8:: @ 8231FD8
+MtPyre_Exterior_EventScript_CheckEnterFromSummit:: @ 8231FD8
 	getplayerxy VAR_TEMP_0, VAR_TEMP_1
 	compare VAR_TEMP_1, 12
-	goto_if_lt MtPyre_Exterior_EventScript_231FE9
+	goto_if_lt MtPyre_Exterior_EventScript_EnterFromSummit
 	return
 
-MtPyre_Exterior_EventScript_231FE9:: @ 8231FE9
+MtPyre_Exterior_EventScript_EnterFromSummit:: @ 8231FE9
 	setweather WEATHER_FOG_1
 	return
 
-MtPyre_Exterior_EventScript_231FED:: @ 8231FED
+MtPyre_Exterior_EventScript_FogTrigger:: @ 8231FED
 	setweather WEATHER_FOG_1
 	doweather
 	end
 
-MtPyre_Exterior_EventScript_231FF2:: @ 8231FF2
+MtPyre_Exterior_EventScript_SunTrigger:: @ 8231FF2
 	setweather WEATHER_SUNNY
 	doweather
 	end
