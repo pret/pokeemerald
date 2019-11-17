@@ -356,7 +356,7 @@ static void sub_80F5CE4(u8 taskId)
                     InterviewAfter();
             }
 
-            sub_813BADC(2);
+            TryGainNewFanFromCounter(2);
             sub_80DEDA8(gSpecialVar_ContestRank);
             sub_80DEDA8(0xFE);
             gUnknown_02039F5C = 1;
@@ -411,7 +411,7 @@ static void sub_80F5CE4(u8 taskId)
             sub_80DEDA8(0xFE);
             gUnknown_02039F5C = 1;
             gUnknown_02039F5D = sub_80DEFA8(0xFE, 0);
-            sub_813BADC(2);
+            TryGainNewFanFromCounter(2);
             gTasks[taskId].func = sub_80F5F74;
         }
     }
