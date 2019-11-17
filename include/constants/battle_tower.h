@@ -10,7 +10,7 @@
 #define BATTLE_TOWER_FUNC_SAVE            6
 #define BATTLE_TOWER_FUNC_7               7
 #define BATTLE_TOWER_FUNC_NOP             8
-#define BATTLE_TOWER_FUNC_NOP_SPRITE      9
+#define BATTLE_TOWER_FUNC_NOP2            9
 #define BATTLE_TOWER_FUNC_10              10
 #define BATTLE_TOWER_FUNC_11              11
 #define BATTLE_TOWER_FUNC_12              12

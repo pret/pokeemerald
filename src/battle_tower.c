@@ -53,7 +53,7 @@ static void AwardBattleTowerRibbons(void);
 static void SaveBattleTowerProgress(void);
 static void sub_8163914(void);
 static void nullsub_61(void);
-static void SpriteCB_Null6(void);
+static void nullsub_116(void);
 static void sub_81642A0(void);
 static void sub_8164828(void);
 static void sub_8164B74(void);
@@ -1063,7 +1063,7 @@ static void (* const sBattleTowerFuncs[])(void) =
     [BATTLE_TOWER_FUNC_SAVE] = SaveBattleTowerProgress,
     [BATTLE_TOWER_FUNC_7] = sub_8163914,
     [BATTLE_TOWER_FUNC_NOP] = nullsub_61,
-    [BATTLE_TOWER_FUNC_NOP_SPRITE] = SpriteCB_Null6,
+    [BATTLE_TOWER_FUNC_NOP2] = nullsub_116,
     [BATTLE_TOWER_FUNC_10] = sub_81642A0,
     [BATTLE_TOWER_FUNC_11] = sub_8164828,
     [BATTLE_TOWER_FUNC_12] = sub_8164B74,
@@ -2439,7 +2439,7 @@ static void nullsub_61(void)
 
 }
 
-static void SpriteCB_Null6(void)
+static void nullsub_116(void)
 {
 
 }
