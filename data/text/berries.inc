@@ -3,14 +3,14 @@ PetalburgCity_Gym_Text_GiveEnigmaBerry: @ 82A6D3D
 	.string "I just received a very rare BERRY.\n"
 	.string "I'd like you to have it.$"
 
-Route104_Text_2A6D86: @ 82A6D86
+Route104_Text_PlantBerriesInSoilTakeThis: @ 82A6D86
 	.string "If you see BERRIES growing in loamy\n"
 	.string "soil, feel free to take them.\p"
 	.string "But make sure you plant a BERRY in the\n"
 	.string "same spot. That's common courtesy.\p"
 	.string "Here, I'll share this with you.$"
 
-Route104_Text_2A6E32: @ 82A6E32
+Route104_Text_TrainersOftenMakeMonHoldBerries: @ 82A6E32
 	.string "The way you look, you must be a\n"
 	.string "TRAINER, no?\p"
 	.string "TRAINERS often make POKéMON hold\n"
@@ -18,57 +18,57 @@ Route104_Text_2A6E32: @ 82A6E32
 	.string "It's up to you whether to grow BERRIES\n"
 	.string "or use them.$"
 
-Route111_Text_2A6EBD: @ 82A6EBD
+Route111_Text_WateredPlantsEveryDayTakeBerry: @ 82A6EBD
 	.string "I watered the plants every day.\n"
 	.string "They grew lots of flowers.\p"
 	.string "And they gave me lots of BERRIES, too.\p"
 	.string "Here you go!\n"
 	.string "You can have it!$"
 
-Route111_Text_2A6F3D: @ 82A6F3D
+Route111_Text_GoingToTryToMakeDifferentColorBerries: @ 82A6F3D
 	.string "I'm going to try really hard and make\n"
 	.string "BERRIES in different colors.\p"
 	.string "I hope you try hard, too!$"
 
-Route111_Text_2A6F9A: @ 82A6F9A
+Route111_Text_WhatColorBerriesToLookForToday: @ 82A6F9A
 	.string "I wonder what color BERRIES I'll look\n"
 	.string "for today?$"
 
-Route114_Text_2A6FCB: @ 82A6FCB
+Route114_Text_LoveUsingBerryCrushShareBerry: @ 82A6FCB
 	.string "I love using the BERRY CRUSH machine,\n"
 	.string "so I'm collecting BERRIES.\p"
 	.string "I'll share one with you, if you'd like.$"
 
-Route114_Text_2A7034: @ 82A7034
+Route114_Text_TryBerryCrushWithFriends: @ 82A7034
 	.string "You should try the BERRY CRUSH\n"
 	.string "machine with your friends.$"
 
-Route114_Text_2A706E: @ 82A706E
+Route114_Text_FunToThinkAboutBerries: @ 82A706E
 	.string "Which BERRY should be planted?\n"
 	.string "Should you use or hoard BERRIES?\p"
 	.string "It's fun to think about.$"
 
-Route120_Text_2A70C7: @ 82A70C7
+Route120_Text_BerriesExpressionOfLoveIsntIt: @ 82A70C7
 	.string "BERRIES grow by soaking up sunlight.\p"
 	.string "We help the BERRIES grow by watering\n"
 	.string "them regularly.\p"
 	.string "It's an expression of love, isn't it?$"
 
-Route120_Text_2A7147: @ 82A7147
+Route120_Text_YesYouUnderstand: @ 82A7147
 	.string "Yes, yes.\n"
 	.string "You understand what I mean.\p"
 	.string "You should take this.$"
 
-Route120_Text_2A7183: @ 82A7183
+Route120_Text_MakeYourOwnImpressions: @ 82A7183
 	.string "Oh… But it is important to make your\n"
 	.string "own impressions, I guess…\p"
 	.string "You can have this.$"
 
-Route120_Text_2A71D5: @ 82A71D5
+Route120_Text_BerryIsRareRaiseItWithCare: @ 82A71D5
 	.string "I think that BERRY is rare.\n"
 	.string "I hope you raise it with loving care.$"
 
-Route120_Text_2A7217: @ 82A7217
+Route120_Text_IllGetMoreBerriesFromBerryMaster: @ 82A7217
 	.string "I'll get more BERRIES from\n"
 	.string "the BERRY MASTER.$"
 

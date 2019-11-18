@@ -75,7 +75,7 @@ void InitBattlePyramidMap(bool8 setPlayerPosition)
 void InitTrainerHillMap(void)
 {
     CpuFastFill(0x03ff03ff, gBackupMapData, sizeof(gBackupMapData));
-    sub_81D5FB4(gBackupMapData);
+    GenerateTrainerHillFloorLayout(gBackupMapData);
 }
 
 static void InitMapLayoutData(struct MapHeader *mapHeader)

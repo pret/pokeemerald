@@ -1,16 +1,17 @@
 #define TRAINER_HILL_OTID 0x10000000
 
-static const struct TrHillTag gUnknown_0862609C = {
-    .unkField_0 = 4,
+static const struct TrHillTag sDataTagJPDefault = {
+    .numTrainers = NUM_TRAINER_HILL_TRAINERS_JP,
     .unused1 = 1,
-    .numFloors = 2,
+    .numFloors = NUM_TRAINER_HILL_FLOORS_JP,
     .checksum = 0x0
 };
 
-static const struct TrHillFloor gUnknown_0862609C_floors[] = {
+
+static const struct TrHillFloor sDataTagJPDefault_Floors[] = {
     [0] = {
-        .unk0 = 0,
-        .unk1 = 0,
+        .trainerNum1 = 0,
+        .trainerNum2 = 0,
         .trainers = {
             [0] = {
                 .name = __("シゲノブ$$$$   "),
@@ -33,7 +34,7 @@ static const struct TrHillFloor gUnknown_0862609C_floors[] = {
                         .speedEV = 100,
                         .spAttackEV = 0,
                         .spDefenseEV = 100,
-                        .otId = 0x10000000,
+                        .otId = TRAINER_HILL_OTID,
                         .hpIV = 5,
                         .attackIV = 5,
                         .defenseIV = 5,
@@ -57,7 +58,7 @@ static const struct TrHillFloor gUnknown_0862609C_floors[] = {
                         .speedEV = 0,
                         .spAttackEV = 150,
                         .spDefenseEV = 120,
-                        .otId = 0x10000000,
+                        .otId = TRAINER_HILL_OTID,
                         .hpIV = 5,
                         .attackIV = 5,
                         .defenseIV = 5,
@@ -81,7 +82,7 @@ static const struct TrHillFloor gUnknown_0862609C_floors[] = {
                         .speedEV = 0,
                         .spAttackEV = 0,
                         .spDefenseEV = 200,
-                        .otId = 0x10000000,
+                        .otId = TRAINER_HILL_OTID,
                         .hpIV = 5,
                         .attackIV = 5,
                         .defenseIV = 5,
@@ -122,7 +123,7 @@ static const struct TrHillFloor gUnknown_0862609C_floors[] = {
                         .speedEV = 0,
                         .spAttackEV = 100,
                         .spDefenseEV = 100,
-                        .otId = 0x10000000,
+                        .otId = TRAINER_HILL_OTID,
                         .hpIV = 5,
                         .attackIV = 5,
                         .defenseIV = 5,
@@ -146,7 +147,7 @@ static const struct TrHillFloor gUnknown_0862609C_floors[] = {
                         .speedEV = 0,
                         .spAttackEV = 100,
                         .spDefenseEV = 100,
-                        .otId = 0x10000000,
+                        .otId = TRAINER_HILL_OTID,
                         .hpIV = 5,
                         .attackIV = 5,
                         .defenseIV = 5,
@@ -170,7 +171,7 @@ static const struct TrHillFloor gUnknown_0862609C_floors[] = {
                         .speedEV = 0,
                         .spAttackEV = 100,
                         .spDefenseEV = 100,
-                        .otId = 0x10000000,
+                        .otId = TRAINER_HILL_OTID,
                         .hpIV = 5,
                         .attackIV = 5,
                         .defenseIV = 5,
@@ -194,8 +195,8 @@ static const struct TrHillFloor gUnknown_0862609C_floors[] = {
         }
     },
     [1] = {
-        .unk0 = 0,
-        .unk1 = 0,
+        .trainerNum1 = 0,
+        .trainerNum2 = 0,
         .trainers = {
             [0] = {
                 .name = __("シゲゾウ$$$$   "),
@@ -218,7 +219,7 @@ static const struct TrHillFloor gUnknown_0862609C_floors[] = {
                         .speedEV = 120,
                         .spAttackEV = 150,
                         .spDefenseEV = 0,
-                        .otId = 0x10000000,
+                        .otId = TRAINER_HILL_OTID,
                         .hpIV = 5,
                         .attackIV = 5,
                         .defenseIV = 5,
@@ -242,7 +243,7 @@ static const struct TrHillFloor gUnknown_0862609C_floors[] = {
                         .speedEV = 0,
                         .spAttackEV = 100,
                         .spDefenseEV = 100,
-                        .otId = 0x10000000,
+                        .otId = TRAINER_HILL_OTID,
                         .hpIV = 5,
                         .attackIV = 5,
                         .defenseIV = 5,
@@ -266,7 +267,7 @@ static const struct TrHillFloor gUnknown_0862609C_floors[] = {
                         .speedEV = 0,
                         .spAttackEV = 110,
                         .spDefenseEV = 100,
-                        .otId = 0x10000000,
+                        .otId = TRAINER_HILL_OTID,
                         .hpIV = 5,
                         .attackIV = 5,
                         .defenseIV = 5,
@@ -307,7 +308,7 @@ static const struct TrHillFloor gUnknown_0862609C_floors[] = {
                         .speedEV = 0,
                         .spAttackEV = 110,
                         .spDefenseEV = 100,
-                        .otId = 0x10000000,
+                        .otId = TRAINER_HILL_OTID,
                         .hpIV = 5,
                         .attackIV = 5,
                         .defenseIV = 5,
@@ -331,7 +332,7 @@ static const struct TrHillFloor gUnknown_0862609C_floors[] = {
                         .speedEV = 100,
                         .spAttackEV = 110,
                         .spDefenseEV = 100,
-                        .otId = 0x10000000,
+                        .otId = TRAINER_HILL_OTID,
                         .hpIV = 5,
                         .attackIV = 5,
                         .defenseIV = 5,
@@ -355,7 +356,7 @@ static const struct TrHillFloor gUnknown_0862609C_floors[] = {
                         .speedEV = 80,
                         .spAttackEV = 80,
                         .spDefenseEV = 80,
-                        .otId = 0x10000000,
+                        .otId = TRAINER_HILL_OTID,
                         .hpIV = 5,
                         .attackIV = 5,
                         .defenseIV = 5,
@@ -382,18 +383,18 @@ static const struct TrHillFloor gUnknown_0862609C_floors[] = {
 
 static const struct TrHillTag sDataTagNormal =
 {
-    .unkField_0 = 8,
+    .numTrainers = NUM_TRAINER_HILL_TRAINERS,
     .unused1 = 2,
-    .numFloors = 4,
+    .numFloors = NUM_TRAINER_HILL_FLOORS,
     .checksum = 0x00051E05
 };
 
-static const struct TrHillFloor sDataTagNormal_floors[] =
+static const struct TrHillFloor sDataTagNormal_Floors[] =
 {
     [0] =
     {
-        .unk0 = 0x11,
-        .unk1 = 0x12,
+        .trainerNum1 = 17,
+        .trainerNum2 = 18,
         .trainers =
         {
             [0] =
@@ -694,8 +695,8 @@ static const struct TrHillFloor sDataTagNormal_floors[] =
     },
     [1] =
     {
-        .unk0 = 0x13,
-        .unk1 = 0x14,
+        .trainerNum1 = 19,
+        .trainerNum2 = 20,
         .trainers =
         {
             [0] =
@@ -999,8 +1000,8 @@ static const struct TrHillFloor sDataTagNormal_floors[] =
     },
     [2] =
     {
-        .unk0 = 0x15,
-        .unk1 = 0x16,
+        .trainerNum1 = 21,
+        .trainerNum2 = 22,
         .trainers =
         {
             [0] =
@@ -1303,8 +1304,8 @@ static const struct TrHillFloor sDataTagNormal_floors[] =
     },
     [3] =
     {
-        .unk0 = 0x17,
-        .unk1 = 0x18,
+        .trainerNum1 = 23,
+        .trainerNum2 = 24,
         .trainers =
         {
             [0] =
@@ -1602,17 +1603,17 @@ static const struct TrHillFloor sDataTagNormal_floors[] =
 
 static const struct TrHillTag sDataTagVariety =
 {
-    .unkField_0 = 8,
+    .numTrainers = NUM_TRAINER_HILL_TRAINERS,
     .unused1 = 1,
-    .numFloors = 4,
+    .numFloors = NUM_TRAINER_HILL_FLOORS,
     .checksum = 0x00054C15
 };
 
-static const struct TrHillFloor sDataTagVariety_floors[] = {
+static const struct TrHillFloor sDataTagVariety_Floors[] = {
     [0] =
         {
-            .unk0 = 0x29,
-            .unk1 = 0x2A,
+            .trainerNum1 = 41,
+            .trainerNum2 = 42,
             .trainers =
                 {
                     [0] =
@@ -1904,8 +1905,8 @@ static const struct TrHillFloor sDataTagVariety_floors[] = {
         },
     [1] =
         {
-            .unk0 = 0x2B,
-            .unk1 = 0x2C,
+            .trainerNum1 = 43,
+            .trainerNum2 = 44,
             .trainers =
                 {
                     [0] =
@@ -2227,8 +2228,8 @@ static const struct TrHillFloor sDataTagVariety_floors[] = {
         },
     [2] =
         {
-            .unk0 = 0x2D,
-            .unk1 = 0x2E,
+            .trainerNum1 = 45,
+            .trainerNum2 = 46,
             .trainers =
                 {
                     [0] =
@@ -2531,8 +2532,8 @@ static const struct TrHillFloor sDataTagVariety_floors[] = {
         },
     [3] =
         {
-            .unk0 = 0x2F,
-            .unk1 = 0x30,
+            .trainerNum1 = 47,
+            .trainerNum2 = 48,
             .trainers =
                 {
                     [0] =
@@ -2828,17 +2829,17 @@ static const struct TrHillFloor sDataTagVariety_floors[] = {
 
 static const struct TrHillTag sDataTagUnique =
 {
-    .unkField_0 = 8,
+    .numTrainers = NUM_TRAINER_HILL_TRAINERS,
     .unused1 = 3,
-    .numFloors = 4,
+    .numFloors = NUM_TRAINER_HILL_FLOORS,
     .checksum = 0x000652F3
 };
 
-static const struct TrHillFloor sDataTagUnique_floors[] = {
+static const struct TrHillFloor sDataTagUnique_Floors[] = {
     [0] =
         {
-            .unk0 = 0x31,
-            .unk1 = 0x32,
+            .trainerNum1 = 49,
+            .trainerNum2 = 50,
             .trainers =
                 {
                     [0] =
@@ -3135,8 +3136,8 @@ static const struct TrHillFloor sDataTagUnique_floors[] = {
         },
     [1] =
         {
-            .unk0 = 0x33,
-            .unk1 = 0x34,
+            .trainerNum1 = 51,
+            .trainerNum2 = 52,
             .trainers =
                 {
                     [0] =
@@ -3439,8 +3440,8 @@ static const struct TrHillFloor sDataTagUnique_floors[] = {
         },
     [2] =
         {
-            .unk0 = 0x35,
-            .unk1 = 0x36,
+            .trainerNum1 = 53,
+            .trainerNum2 = 54,
             .trainers =
                 {
                     [0] =
@@ -3743,8 +3744,8 @@ static const struct TrHillFloor sDataTagUnique_floors[] = {
         },
     [3] =
         {
-            .unk0 = 0x38,
-            .unk1 = 0x37,
+            .trainerNum1 = 56,
+            .trainerNum2 = 55,
             .trainers =
                 {
                     [0] =
@@ -4039,17 +4040,17 @@ static const struct TrHillFloor sDataTagUnique_floors[] = {
 
 static const struct TrHillTag sDataTagExpert =
 {
-    .unkField_0 = 8,
+    .numTrainers = NUM_TRAINER_HILL_TRAINERS,
     .unused1 = 1,
-    .numFloors = 4,
+    .numFloors = NUM_TRAINER_HILL_FLOORS,
     .checksum = 0x00061F3F
 };
 
-static const struct TrHillFloor sDataTagExpert_floors[] = {
+static const struct TrHillFloor sDataTagExpert_Floors[] = {
     [0] =
         {
-            .unk0 = 0x39,
-            .unk1 = 0x3A,
+            .trainerNum1 = 57,
+            .trainerNum2 = 58,
             .trainers =
                 {
                     [0] =
@@ -4353,8 +4354,8 @@ static const struct TrHillFloor sDataTagExpert_floors[] = {
         },
     [1] =
         {
-            .unk0 = 0x3B,
-            .unk1 = 0x3C,
+            .trainerNum1 = 59,
+            .trainerNum2 = 60,
             .trainers =
                 {
                     [0] =
@@ -4658,8 +4659,8 @@ static const struct TrHillFloor sDataTagExpert_floors[] = {
         },
     [2] =
         {
-            .unk0 = 0x3D,
-            .unk1 = 0x3E,
+            .trainerNum1 = 61,
+            .trainerNum2 = 62,
             .trainers =
                 {
                     [0] =
@@ -4963,8 +4964,8 @@ static const struct TrHillFloor sDataTagExpert_floors[] = {
         },
     [3] =
         {
-            .unk0 = 0x3F,
-            .unk1 = 0x40,
+            .trainerNum1 = 63,
+            .trainerNum2 = 64,
             .trainers =
                 {
                     [0] =

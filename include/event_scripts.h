@@ -383,10 +383,6 @@ extern const u8 EventScript_FldEffRockSmash[];
 extern const u8 LittlerootTown_BrendansHouse_2F_EventScript_TurnOffPlayerPC[];
 extern const u8 LittlerootTown_MaysHouse_2F_EventScript_TurnOffPlayerPC[];
 
-//contest_strings
-extern const u8 gText_0827D507[];
-extern const u8 gText_0827D531[];
-
 //mauville_old_man
 extern const u8 gOtherText_Is[];
 extern const u8 gOtherText_DontYouAgree[];
@@ -553,11 +549,11 @@ extern const u8 EventScript_EggHatch[];
 extern const u8 UnusualWeather_EventScript_EndEventAndCleanup_1[];
 extern const u8 IslandCave_EventScript_OpenRegiEntrance[];
 extern const u8 MauvilleCity_EventScript_RegisterWallyCall[];
-extern const u8 Route119_EventScript_1F49EC[];
+extern const u8 Route119_EventScript_ScottWonAtFortreeGymCall[];
 extern const u8 LittlerootTown_ProfessorBirchsLab_EventScript_ScottAboardSSTidalCall[];
 extern const u8 RustboroCity_Gym_EventScript_RegisterRoxanne[];
 extern const u8 MossdeepCity_SpaceCenter_2F_EventScript_RivalRayquazaCall[];
-extern const u8 SSTidalCorridor_EventScript_23C050[];
+extern const u8 SSTidalCorridor_EventScript_ReachedStepCount[];
 extern const u8 EventScript_FallDownHoleMtPyre[];
 
 // Secret Base
@@ -586,6 +582,6 @@ extern const u8 SecretBase_EventScript_TreeUseSecretPower[];
 extern const u8 SecretBase_EventScript_ShrubUseSecretPower[];
 
 // trainer hill
-extern const u8 EventScript_2C83F0[];
+extern const u8 TrainerHill_EventScript_TrainerBattle[];
 
 #endif // GUARD_EVENT_SCRIPTS_H

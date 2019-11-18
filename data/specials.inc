@@ -76,13 +76,13 @@ gSpecials:: @ 81DBA64
 	def_special TurnOffTVScreen
 	def_special DoTVShow
 	def_special DoPokeNews
-	def_special special_0x44
-	def_special special_0x45
+	def_special GetRandomActiveShowIdx
+	def_special GetSelectedTVShow
 	def_special InterviewBefore
 	def_special InterviewAfter
-	def_special sub_80EF8F8
+	def_special IsLeadMonNicknamedOrNotEnglish
 	def_special SetContestCategoryStringVarForInterview
-	def_special special_0x4a
+	def_special GetNextActiveShowIfMassOutbreak
 	def_special TV_IsScriptShowKindAlreadyInQueue
 	def_special CheckForBigMovieOrEmergencyNewsOnTV
 	def_special GetMomOrDadStringForTVMessage
@@ -243,7 +243,7 @@ gSpecials:: @ 81DBA64
 	def_special UpdateCyclingRoadState
 	def_special GetLeadMonFriendshipScore
 	def_special CallFrontierUtilFunc
-	def_special sub_8161F74
+	def_special CallBattleTowerFunc
 	def_special CallBattleDomeFunction
 	def_special CallBattlePalaceFunction
 	def_special CopyEReaderTrainerGreeting
@@ -281,7 +281,7 @@ gSpecials:: @ 81DBA64
 	def_special CheckLeadMonCute
 	def_special CheckLeadMonSmart
 	def_special CheckLeadMonTough
-	def_special sub_80FB7A4
+	def_special LookThroughPorthole
 	def_special DoSoftReset
 	def_special GameClear
 	def_special MoveElevator

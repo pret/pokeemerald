@@ -91,9 +91,9 @@ EventScript_PkmnCenterNurse_PlayerWaitingInUnionRoom:: @ 8271A19
 
 EventScript_PkmnCenterNurse_CheckPokerus:: @ 8271A43
     specialvar VAR_RESULT, IsPokerusInParty
-    compare VAR_RESULT, 1
+    compare VAR_RESULT, TRUE
     goto_if_eq EventScript_PkmnCenterNurse_ExplainPokerus
-    compare VAR_RESULT, 0
+    compare VAR_RESULT, FALSE
     goto_if_eq EventScript_PkmnCenterNurse_CheckTrainerHillAndUnionRoom
     end
 

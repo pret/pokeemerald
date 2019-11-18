@@ -24,7 +24,7 @@
       "movement_range_y": 2,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "BattleFrontier_Lounge8_EventScript_2676DC",
+      "script": "BattleFrontier_Lounge8_EventScript_NinjaBoy",
       "flag": "0"
     },
     {
@@ -37,7 +37,7 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "BattleFrontier_Lounge8_EventScript_2676CA",
+      "script": "BattleFrontier_Lounge8_EventScript_Man",
       "flag": "0"
     },
     {
@@ -50,7 +50,7 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "BattleFrontier_Lounge8_EventScript_2676D3",
+      "script": "BattleFrontier_Lounge8_EventScript_Woman",
       "flag": "0"
     }
   ],

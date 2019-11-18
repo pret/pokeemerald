@@ -24,7 +24,7 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "SSTidalCorridor_EventScript_23C119",
+      "script": "SSTidalCorridor_EventScript_ExitSailor",
       "flag": "0"
     },
     {
@@ -37,7 +37,7 @@
       "movement_range_y": 2,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "SSTidalCorridor_EventScript_23C1A3",
+      "script": "SSTidalCorridor_EventScript_Sailor",
       "flag": "0"
     },
     {
@@ -50,7 +50,7 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "SSTidalCorridor_EventScript_23C0D9",
+      "script": "SSTidalCorridor_EventScript_Briney",
       "flag": "FLAG_HIDE_SS_TIDAL_CORRIDOR_MR_BRINEY"
     },
     {
@@ -63,7 +63,7 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "SSTidalCorridor_EventScript_23C0E2",
+      "script": "SSTidalCorridor_EventScript_Peeko",
       "flag": "FLAG_HIDE_SS_TIDAL_CORRIDOR_MR_BRINEY"
     },
     {
@@ -153,7 +153,7 @@
       "y": 1,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "SSTidalCorridor_EventScript_23C17D"
+      "script": "SSTidalCorridor_EventScript_Porthole"
     },
     {
       "type": "sign",
@@ -161,7 +161,7 @@
       "y": 1,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "SSTidalCorridor_EventScript_23C17D"
+      "script": "SSTidalCorridor_EventScript_Porthole"
     },
     {
       "type": "sign",
@@ -169,7 +169,7 @@
       "y": 1,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "SSTidalCorridor_EventScript_23C17D"
+      "script": "SSTidalCorridor_EventScript_Porthole"
     },
     {
       "type": "sign",
@@ -177,7 +177,7 @@
       "y": 1,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "SSTidalCorridor_EventScript_23C17D"
+      "script": "SSTidalCorridor_EventScript_Porthole"
     },
     {
       "type": "sign",
@@ -185,7 +185,7 @@
       "y": 1,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "SSTidalCorridor_EventScript_23C17D"
+      "script": "SSTidalCorridor_EventScript_Porthole"
     },
     {
       "type": "sign",
@@ -193,7 +193,7 @@
       "y": 1,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "SSTidalCorridor_EventScript_23C17D"
+      "script": "SSTidalCorridor_EventScript_Porthole"
     },
     {
       "type": "sign",
@@ -201,7 +201,7 @@
       "y": 1,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "SSTidalCorridor_EventScript_23C17D"
+      "script": "SSTidalCorridor_EventScript_Porthole"
     },
     {
       "type": "sign",
@@ -209,7 +209,7 @@
       "y": 1,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "SSTidalCorridor_EventScript_23C17D"
+      "script": "SSTidalCorridor_EventScript_Porthole"
     },
     {
       "type": "sign",
@@ -217,7 +217,7 @@
       "y": 9,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
-      "script": "SSTidalCorridor_EventScript_23C0F5"
+      "script": "SSTidalCorridor_EventScript_Cabin1Sign"
     },
     {
       "type": "sign",
@@ -225,7 +225,7 @@
       "y": 9,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
-      "script": "SSTidalCorridor_EventScript_23C0FE"
+      "script": "SSTidalCorridor_EventScript_Cabin2Sign"
     },
     {
       "type": "sign",
@@ -233,7 +233,7 @@
       "y": 9,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
-      "script": "SSTidalCorridor_EventScript_23C107"
+      "script": "SSTidalCorridor_EventScript_Cabin3Sign"
     },
     {
       "type": "sign",
@@ -241,7 +241,7 @@
       "y": 9,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
-      "script": "SSTidalCorridor_EventScript_23C110"
+      "script": "SSTidalCorridor_EventScript_Cabin4Sign"
     }
   ]
 }

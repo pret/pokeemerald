@@ -24,6 +24,7 @@
 #include "tv.h"
 #include "battle_factory.h"
 #include "constants/battle_frontier.h"
+#include "constants/battle_tower.h"
 #include "constants/items.h"
 #include "constants/trainers.h"
 #include "constants/event_objects.h"
@@ -52,7 +53,7 @@ static void AwardBattleTowerRibbons(void);
 static void SaveBattleTowerProgress(void);
 static void sub_8163914(void);
 static void nullsub_61(void);
-static void SpriteCB_Null6(void);
+static void nullsub_116(void);
 static void sub_81642A0(void);
 static void sub_8164828(void);
 static void sub_8164B74(void);
@@ -1051,24 +1052,24 @@ struct
 
 #include "data/battle_frontier/battle_tent.h"
 
-static void (* const gUnknown_085DF96C[])(void) =
+static void (* const sBattleTowerFuncs[])(void) =
 {
-    sub_8161F94,
-    sub_8162054,
-    sub_81620F4,
-    ChooseNextBattleTowerTrainer,
-    sub_81621C0,
-    AwardBattleTowerRibbons,
-    SaveBattleTowerProgress,
-    sub_8163914,
-    nullsub_61,
-    SpriteCB_Null6,
-    sub_81642A0,
-    sub_8164828,
-    sub_8164B74,
-    sub_8164DCC,
-    sub_8164DE4,
-    sub_8164E04,
+    [BATTLE_TOWER_FUNC_0] = sub_8161F94,
+    [BATTLE_TOWER_FUNC_1] = sub_8162054,
+    [BATTLE_TOWER_FUNC_2] = sub_81620F4,
+    [BATTLE_TOWER_FUNC_CHOOSE_TRAINER] = ChooseNextBattleTowerTrainer,
+    [BATTLE_TOWER_FUNC_4] = sub_81621C0,
+    [BATTLE_TOWER_FUNC_GIVE_RIBBONS] = AwardBattleTowerRibbons,
+    [BATTLE_TOWER_FUNC_SAVE] = SaveBattleTowerProgress,
+    [BATTLE_TOWER_FUNC_7] = sub_8163914,
+    [BATTLE_TOWER_FUNC_NOP] = nullsub_61,
+    [BATTLE_TOWER_FUNC_NOP2] = nullsub_116,
+    [BATTLE_TOWER_FUNC_10] = sub_81642A0,
+    [BATTLE_TOWER_FUNC_11] = sub_8164828,
+    [BATTLE_TOWER_FUNC_12] = sub_8164B74,
+    [BATTLE_TOWER_FUNC_13] = sub_8164DCC,
+    [BATTLE_TOWER_FUNC_14] = sub_8164DE4,
+    [BATTLE_TOWER_FUNC_15] = sub_8164E04,
 };
 
 static const u32 gUnknown_085DF9AC[][2] =
@@ -1145,9 +1146,9 @@ static const u16 gUnknown_085DFA52[] =
 };
 
 // code
-void sub_8161F74(void)
+void CallBattleTowerFunc(void)
 {
-    gUnknown_085DF96C[gSpecialVar_0x8004]();
+    sBattleTowerFuncs[gSpecialVar_0x8004]();
 }
 
 static void sub_8161F94(void)
@@ -2438,7 +2439,7 @@ static void nullsub_61(void)
 
 }
 
-static void SpriteCB_Null6(void)
+static void nullsub_116(void)
 {
 
 }

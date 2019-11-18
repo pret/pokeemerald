@@ -20,8 +20,8 @@ BattleFrontier_BattleTowerMultiBattleRoom_MapScript1_243DB0: @ 8243DB0
 	clearflag FLAG_HIDE_BATTLE_TOWER_MULTI_BATTLE_PARTNER_6
 	setflag FLAG_HIDE_BATTLE_TOWER_MULTI_BATTLE_PARTNER_ALT_1
 	setflag FLAG_HIDE_BATTLE_TOWER_MULTI_BATTLE_PARTNER_ALT_2
-	setvar VAR_0x8004, 10
-	special sub_8161F74
+	setvar VAR_0x8004, BATTLE_TOWER_FUNC_10
+	special CallBattleTowerFunc
 	end
 
 BattleFrontier_BattleTowerMultiBattleRoom_EventScript_243DDA:: @ 8243DDA
@@ -166,27 +166,27 @@ BattleFrontier_BattleTowerMultiBattleRoom_EventScript_243F29:: @ 8243F29
 
 BattleFrontier_BattleTowerMultiBattleRoom_EventScript_243F36:: @ 8243F36
 	goto_if_set FLAG_CHOSEN_MULTI_BATTLE_NPC_PARTNER, BattleFrontier_BattleTowerMultiBattleRoom_EventScript_243FC3
-	setvar VAR_0x8004, 11
+	setvar VAR_0x8004, BATTLE_TOWER_FUNC_11
 	setvar VAR_0x8005, 0
-	special sub_8161F74
+	special CallBattleTowerFunc
 	waitmessage
 	waitbuttonpress
-	setvar VAR_0x8004, 11
+	setvar VAR_0x8004, BATTLE_TOWER_FUNC_11
 	setvar VAR_0x8005, 1
-	special sub_8161F74
+	special CallBattleTowerFunc
 	waitmessage
 	waitbuttonpress
-	setvar VAR_0x8004, 11
+	setvar VAR_0x8004, BATTLE_TOWER_FUNC_11
 	setvar VAR_0x8005, 2
-	special sub_8161F74
+	special CallBattleTowerFunc
 	waitmessage
 	multichoicedefault 20, 8, MULTI_YESNO, 1, 0
 	switch VAR_RESULT
 	case 1, BattleFrontier_BattleTowerMultiBattleRoom_EventScript_243FC3
 	case MULTI_B_PRESSED, BattleFrontier_BattleTowerMultiBattleRoom_EventScript_243FC3
-	setvar VAR_0x8004, 11
+	setvar VAR_0x8004, BATTLE_TOWER_FUNC_11
 	setvar VAR_0x8005, 3
-	special sub_8161F74
+	special CallBattleTowerFunc
 	waitmessage
 	waitbuttonpress
 	closemessage
@@ -202,9 +202,9 @@ BattleFrontier_BattleTowerMultiBattleRoom_EventScript_243F36:: @ 8243F36
 	end
 
 BattleFrontier_BattleTowerMultiBattleRoom_EventScript_243FC3:: @ 8243FC3
-	setvar VAR_0x8004, 11
+	setvar VAR_0x8004, BATTLE_TOWER_FUNC_11
 	setvar VAR_0x8005, 4
-	special sub_8161F74
+	special CallBattleTowerFunc
 	waitmessage
 	waitbuttonpress
 	release

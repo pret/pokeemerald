@@ -42,8 +42,8 @@ FallarborTown_BattleTentBattleRoom_EventScript_2008E7:: @ 82008E7
 	goto_if_ne FallarborTown_BattleTentBattleRoom_EventScript_200B73
 
 FallarborTown_BattleTentBattleRoom_EventScript_20090F:: @ 820090F
-	setvar VAR_0x8004, 3
-	special sub_8161F74
+	setvar VAR_0x8004, BATTLE_TOWER_FUNC_CHOOSE_TRAINER
+	special CallBattleTowerFunc
 	addobject 3
 	applymovement 3, FallarborTown_BattleTentBattleRoom_Movement_200B96
 	waitmovement 0
