@@ -4032,6 +4032,7 @@ bool8 InPokemonCenter(void)
     If the player has at least 3 fans, this is the only way to gain fans
     If the player has fewer than 3 fans, they may also gain fans by completing certain tasks enough times (see TryGainNewFanFromCounter)
     If the player has at least 5 fans, they can lose a fan every 12 real-time hours, or more often if the timer variable is reset (see TryLoseFansFromPlayTime)
+    If the player has only 1 fan left it cannot be lost
 
     ## Variables
     VAR_FANCLUB_FAN_COUNTER, a bitfield for tracking the fans
@@ -4047,7 +4048,6 @@ bool8 InPokemonCenter(void)
       0: Player is not the champion yet
       1: Player is the champion, ready to meet their initial fans
       2: Player has met their initial fans
-
 */
 
 #define FANCLUB_BITFIELD (gSaveBlock1Ptr->vars[VAR_FANCLUB_FAN_COUNTER - VARS_START])
