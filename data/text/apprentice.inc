@@ -62,7 +62,7 @@ gText_ApprenticeChallenge15:: @ 82B71F9
 	.string "I am {STR_VAR_1}'s no. {STR_VAR_2} apprentice,\n"
 	.string "and that's no lie.$"
 
-gText_ApprenticeIntro0:: @ 82B7229
+gText_ApprenticePleaseTeach0:: @ 82B7229
 	.string "Are you… {PLAYER}?\n"
 	.string "Oh! Sniff…sob…\p"
 	.string "Oh! S-sorry…\n"
@@ -100,7 +100,7 @@ gText_ApprenticeLevelModeThanks0:: @ 82B7423
 	.string "Thank you so much!\l"
 	.string "Please talk with me again!$"
 
-gText_ApprenticeIntro1:: @ 82B74C1
+gText_ApprenticePleaseTeach1:: @ 82B74C1
 	.string "Wowee! You're {PLAYER}, aren't you?\n"
 	.string "You're awesomely strong, aren't you?\p"
 	.string "I'm {STR_VAR_1}!\n"
@@ -127,7 +127,7 @@ gText_ApprenticeLevelModeThanks1:: @ 82B763F
 	.string "If we meet here again, please teach\n"
 	.string "me something else, teacher!$"
 
-gText_ApprenticeIntro2:: @ 82B76AC
+gText_ApprenticePleaseTeach2:: @ 82B76AC
 	.string "Um… Are you {PLAYER}?\n"
 	.string "My name is {STR_VAR_1}.\p"
 	.string "I want to become a POKéMON TRAINER,\n"
@@ -156,7 +156,7 @@ gText_ApprenticeLevelModeThanks2:: @ 82B7871
 	.string "If I have another question, I'll come\n"
 	.string "back here for your advice!$"
 
-gText_ApprenticeIntro3:: @ 82B78D4
+gText_ApprenticePleaseTeach3:: @ 82B78D4
 	.string "Oh? Huh? You're…\n"
 	.string "No, that can't be true.\p"
 	.string "There isn't any way that someone\n"
@@ -211,7 +211,7 @@ gText_ApprenticeLevelModeThanks3:: @ 82B7D18
 	.string "Thank you very much for spending\n"
 	.string "time with someone like me.$"
 
-gText_ApprenticeIntro4:: @ 82B7DD4
+gText_ApprenticePleaseTeach4:: @ 82B7DD4
 	.string "Oh! You're {PLAYER}{KUN}, aren't you?\p"
 	.string "I've heard that you're tough at\n"
 	.string "POKéMON!\p"
@@ -246,7 +246,7 @@ gText_ApprenticeLevelModeThanks4:: @ 82B7FE8
 	.string "Okay, I'll look to you for advice again.\n"
 	.string "Bye!$"
 
-gText_ApprenticeIntro5:: @ 82B8087
+gText_ApprenticePleaseTeach5:: @ 82B8087
 	.string "Oh, hi, there! {PLAYER}{KUN}!\n"
 	.string "I know you because you're famous!\l"
 	.string "Call me {STR_VAR_1}! Glad to meet you!\p"
@@ -282,7 +282,7 @@ gText_ApprenticeLevelModeThanks5:: @ 82B8356
 	.string "…Whoops, I'd better go to work!\n"
 	.string "Thanks! See you around!$"
 
-gText_ApprenticeIntro6:: @ 82B83CE
+gText_ApprenticePleaseTeach6:: @ 82B83CE
 	.string "No way! Uh-uh!\n"
 	.string "Are you maybe the real {PLAYER}?\p"
 	.string "A-hah! Awesome! I'm {STR_VAR_1},\n"
@@ -322,7 +322,7 @@ gText_ApprenticeLevelModeThanks6:: @ 82B8656
 	.string "Let's meet here again, okay?\n"
 	.string "Thanks!$"
 
-gText_ApprenticeIntro7:: @ 82B86EA
+gText_ApprenticePleaseTeach7:: @ 82B86EA
 	.string "I beg your pardon, but…\n"
 	.string "Are you {PLAYER}?\p"
 	.string "I'm {STR_VAR_1}, and I am delighted to\n"
@@ -361,7 +361,7 @@ gText_ApprenticeLevelModeThanks7:: @ 82B8957
 	.string "I hope I can count on you again.\l"
 	.string "Please take care!$"
 
-gText_ApprenticeIntro8:: @ 82B89C6
+gText_ApprenticePleaseTeach8:: @ 82B89C6
 	.string "Eek! Eek! {PLAYER}!\n"
 	.string "You spoke to me!\l"
 	.string "I… I'm overjoyed!\p"
@@ -398,7 +398,7 @@ gText_ApprenticeLevelModeThanks8:: @ 82B8C20
 	.string "I hope you'll be willing to teach me\n"
 	.string "some more another time.$"
 
-gText_ApprenticeIntro9:: @ 82B8CAA
+gText_ApprenticePleaseTeach9:: @ 82B8CAA
 	.string "Whoa! Could you be…\n"
 	.string "Might you be… {PLAYER}{KUN}?!\l"
 	.string "That strong and famous TRAINER?\l"
@@ -432,7 +432,7 @@ gText_ApprenticeLevelModeThanks9:: @ 82B8ED5
 	.string "All right, I'll look to you as my mentor!\n"
 	.string "Adios!$"
 
-gText_ApprenticeIntro10:: @ 82B8F45
+gText_ApprenticePleaseTeach10:: @ 82B8F45
 	.string "Oh, hey, {PLAYER}{KUN}, right?\n"
 	.string "The police were looking for you!\p"
 	.string "… … …\n"
@@ -473,7 +473,7 @@ gText_ApprenticeLevelModeThanks10:: @ 82B9204
 	.string "Thanks, master!\n"
 	.string "I hope you'll keep teaching me!$"
 
-gText_ApprenticeIntro11:: @ 82B929C
+gText_ApprenticePleaseTeach11:: @ 82B929C
 	.string "A-H-O-Y!\n"
 	.string "And that spells ahoy, and it means hi!\p"
 	.string "I'm {STR_VAR_1}, the rappin' SAILOR\n"
@@ -513,7 +513,7 @@ gText_ApprenticeLevelModeThanks11:: @ 82B9564
 	.string "If it's advice I ever need,\n"
 	.string "{PLAYER}, your word I'll always heed!$"
 
-gText_ApprenticeIntro12:: @ 82B95D8
+gText_ApprenticePleaseTeach12:: @ 82B95D8
 	.string "Say, hey, aren't you {PLAYER}?\n"
 	.string "What should I do? Talk to you?\l"
 	.string "Why not? I'm already talking to you!\p"
@@ -550,7 +550,7 @@ gText_ApprenticeLevelModeThanks12:: @ 82B989A
 	.string "but don't you forget about me.\p"
 	.string "See you again, my smart friend!$"
 
-gText_ApprenticeIntro13:: @ 82B992D
+gText_ApprenticePleaseTeach13:: @ 82B992D
 	.string "Oh, hi! You there!\n"
 	.string "Can I get you to massage my shoulder?\p"
 	.string "…Yes, there! That's it!\n"
@@ -584,7 +584,7 @@ gText_ApprenticeLevelModeThanks13:: @ 82B9B76
 	.string "I hope I can keep hitting you up for\n"
 	.string "help--after all, you're my mentor!$"
 
-gText_ApprenticeIntro14:: @ 82B9BF2
+gText_ApprenticePleaseTeach14:: @ 82B9BF2
 	.string "Er… Um…\n"
 	.string "{PLAYER}{KUN}…?\p"
 	.string "Please, don't look at me that way.\n"
@@ -625,7 +625,7 @@ gText_ApprenticeLevelModeThanks14:: @ 82B9EAA
 	.string "If we meet again, I hope you will be\l"
 	.string "as helpful.$"
 
-gText_ApprenticeIntro15:: @ 82B9F55
+gText_ApprenticePleaseTeach15:: @ 82B9F55
 	.string "Hm? You appear to be {PLAYER}{KUN}…\n"
 	.string "But are you really real?\p"
 	.string "You may call me {STR_VAR_1}.\p"
@@ -677,12 +677,12 @@ gText_ApprenticeHoldNothing0:: @ 82BA34E
 	.string "Oh, really? I shouldn't make\n"
 	.string "my {STR_VAR_1} hold anything?$"
 
-gText_ApprenticeThanksHeldItem0:: @ 82BA380
+gText_ApprenticeThanksNoHeldItem0:: @ 82BA380
 	.string "Oh, okay! I'm delighted it's settled!\n"
 	.string "Awesome! Wicked! Awoooh!\p"
 	.string "Thank you so much!$"
 
-gText_ApprenticeThanksHaveHeldItem0:: @ 82BA3D2
+gText_ApprenticeThanksHeldItem0:: @ 82BA3D2
 	.string "Oh, I'm so glad…\n"
 	.string "I think I have that {STR_VAR_1}, too.\p"
 	.string "I'm delighted it's settled!\n"
@@ -709,11 +709,11 @@ gText_ApprenticeHoldNothing1:: @ 82BA58C
 	.string "Huh? You mean my {STR_VAR_1} doesn't\n"
 	.string "have to hold anything?$"
 
-gText_ApprenticeThanksHeldItem1:: @ 82BA5BF
+gText_ApprenticeThanksNoHeldItem1:: @ 82BA5BF
 	.string "Oh, I get it! I'll do that!\n"
 	.string "Thanks for teaching me!$"
 
-gText_ApprenticeThanksHaveHeldItem1:: @ 82BA5F3
+gText_ApprenticeThanksHeldItem1:: @ 82BA5F3
 	.string "Oh, wow! One {STR_VAR_1}, huh?\n"
 	.string "Okay, I'll do that!\p"
 	.string "Thanks for teaching me!$"
@@ -735,11 +735,11 @@ gText_ApprenticeHoldNothing2:: @ 82BA742
 	.string "Oh, then my {STR_VAR_1} doesn't have\n"
 	.string "to hold anything?$"
 
-gText_ApprenticeThanksHeldItem2:: @ 82BA770
+gText_ApprenticeThanksNoHeldItem2:: @ 82BA770
 	.string "Okay, I got it!\n"
 	.string "See you again!$"
 
-gText_ApprenticeThanksHaveHeldItem2:: @ 82BA78F
+gText_ApprenticeThanksHeldItem2:: @ 82BA78F
 	.string "Oh, the item {STR_VAR_1}?\n"
 	.string "Understood!\p"
 	.string "I'll do my best to find one!\n"
@@ -768,13 +768,13 @@ gText_ApprenticeHoldNothing3:: @ 82BA96B
 	.string "A POKéMON belonging to someone like me\n"
 	.string "would be better off without an item?$"
 
-gText_ApprenticeThanksHeldItem3:: @ 82BA9B7
+gText_ApprenticeThanksNoHeldItem3:: @ 82BA9B7
 	.string "I understand…\n"
 	.string "You're saying I shouldn't rely on items.\l"
 	.string "I'll do my best not to!\p"
 	.string "Thank you very much!$"
 
-gText_ApprenticeThanksHaveHeldItem3:: @ 82BAA1B
+gText_ApprenticeThanksHeldItem3:: @ 82BAA1B
 	.string "The item {STR_VAR_1}, okay.\n"
 	.string "I'm not sure if I can get one…\l"
 	.string "No! I'll do my best to get it.\p"
@@ -804,7 +804,7 @@ gText_ApprenticeHoldNothing4:: @ 82BAC43
 	.string "Oh! So my {STR_VAR_1} should do\n"
 	.string "the best it can empty-handed?$"
 
-gText_ApprenticeThanksHeldItem4:: @ 82BAC78
+gText_ApprenticeThanksNoHeldItem4:: @ 82BAC78
 	.string "If you think that's best, I'll do that.\p"
 	.string "Knowing that you made the decision,\n"
 	.string "{PLAYER}{KUN}, I won't be so upset if\l"
@@ -812,7 +812,7 @@ gText_ApprenticeThanksHeldItem4:: @ 82BAC78
 	.string "Okay, I'll look to you for advice again.\n"
 	.string "Bye!$"
 
-gText_ApprenticeThanksHaveHeldItem4:: @ 82BAD17
+gText_ApprenticeThanksHeldItem4:: @ 82BAD17
 	.string "The item {STR_VAR_1}, huh?\n"
 	.string "Not bad. I'll use it!\p"
 	.string "Knowing that you made the decision,\n"
@@ -844,13 +844,13 @@ gText_ApprenticeHoldNothing5:: @ 82BAF4E
 	.string "Oh, so me being a busy guy, you say\n"
 	.string "my {STR_VAR_1} doesn't need anything?$"
 
-gText_ApprenticeThanksHeldItem5:: @ 82BAF8F
+gText_ApprenticeThanksNoHeldItem5:: @ 82BAF8F
 	.string "Okay, gotcha.\n"
 	.string "I won't need any time for that.\p"
 	.string "Thanks today!\n"
 	.string "See you around!$"
 
-gText_ApprenticeThanksHaveHeldItem5:: @ 82BAFDB
+gText_ApprenticeThanksHeldItem5:: @ 82BAFDB
 	.string "Okay, gotcha.\n"
 	.string "I'll find time somehow and find\l"
 	.string "that {STR_VAR_1} you recommended.\p"
@@ -877,14 +877,14 @@ gText_ApprenticeHoldNothing6:: @ 82BB18C
 	.string "Is that right? My {STR_VAR_1} doesn't\n"
 	.string "need to hold an item, you're saying.$"
 
-gText_ApprenticeThanksHeldItem6:: @ 82BB1CE
+gText_ApprenticeThanksNoHeldItem6:: @ 82BB1CE
 	.string "Okay, that's what I'll do!\p"
 	.string "I guess that's about all I wanted\n"
 	.string "to ask you today.\p"
 	.string "Let's meet here again, okay?\n"
 	.string "Thanks!$"
 
-gText_ApprenticeThanksHaveHeldItem6:: @ 82BB242
+gText_ApprenticeThanksHeldItem6:: @ 82BB242
 	.string "Uh-huh! One {STR_VAR_1}.\n"
 	.string "What a cool choice!\l"
 	.string "I'll definitely try that!\p"
@@ -919,14 +919,14 @@ gText_ApprenticeHoldNothing7:: @ 82BB4C3
 	.string "In other words… My POKéMON has\n"
 	.string "no need to hold an item?$"
 
-gText_ApprenticeThanksHeldItem7:: @ 82BB4FB
+gText_ApprenticeThanksNoHeldItem7:: @ 82BB4FB
 	.string "I understand clearly now!\n"
 	.string "I will keep trying like this.\p"
 	.string "Thank you, {PLAYER}.\n"
 	.string "I hope I can count on you again.\l"
 	.string "Please take care!$"
 
-gText_ApprenticeThanksHaveHeldItem7:: @ 82BB575
+gText_ApprenticeThanksHeldItem7:: @ 82BB575
 	.string "One {STR_VAR_1} it is!\n"
 	.string "I will order it right away.\p"
 	.string "Thank you, {PLAYER}.\n"
@@ -951,13 +951,13 @@ gText_ApprenticeHoldNothing8:: @ 82BB6E5
 	.string "Oh, wow! I didn't expect that answer!\n"
 	.string "So, a hold item isn't necessary?$"
 
-gText_ApprenticeThanksHeldItem8:: @ 82BB72C
+gText_ApprenticeThanksNoHeldItem8:: @ 82BB72C
 	.string "Perfectly understood!\n"
 	.string "I'll keep at this without an item!\p"
 	.string "I hope you'll be willing to teach me\n"
 	.string "some more another time.$"
 
-gText_ApprenticeThanksHaveHeldItem8:: @ 82BB7A2
+gText_ApprenticeThanksHeldItem8:: @ 82BB7A2
 	.string "{STR_VAR_1}! I'll use that!\p"
 	.string "Um… Could it be, {PLAYER}, you also\n"
 	.string "make your POKéMON hold that item?\p"
@@ -986,13 +986,13 @@ gText_ApprenticeHoldNothing9:: @ 82BB970
 	.string "Oh? So, you're saying my {STR_VAR_1}\n"
 	.string "can win without holding any item?$"
 
-gText_ApprenticeThanksHeldItem9:: @ 82BB9AE
+gText_ApprenticeThanksNoHeldItem9:: @ 82BB9AE
 	.string "Si, bueno!\n"
 	.string "I'll give it my best shot, like, slam!\p"
 	.string "All right, thanks, as always!\n"
 	.string "Adios!$"
 
-gText_ApprenticeThanksHaveHeldItem9:: @ 82BBA05
+gText_ApprenticeThanksHeldItem9:: @ 82BBA05
 	.string "Uh-huh, that's one {STR_VAR_1}?\n"
 	.string "Si, bueno!\l"
 	.string "I'll go find me one, like, bam!\p"
@@ -1023,7 +1023,7 @@ gText_ApprenticeHoldNothing10:: @ 82BBC1C
 	.string "What's that mean?\n"
 	.string "Don't make it hold anything?$"
 
-gText_ApprenticeThanksHeldItem10:: @ 82BBC4B
+gText_ApprenticeThanksNoHeldItem10:: @ 82BBC4B
 	.string "Okay, so it shouldn't hold anything.\n"
 	.string "Then, I'd better get something for it!\p"
 	.string "Just kidding!\n"
@@ -1031,7 +1031,7 @@ gText_ApprenticeThanksHeldItem10:: @ 82BBC4B
 	.string "Thanks, master!\n"
 	.string "I hope you'll keep teaching me!$"
 
-gText_ApprenticeThanksHaveHeldItem10:: @ 82BBCF6
+gText_ApprenticeThanksHeldItem10:: @ 82BBCF6
 	.string "Okay, so it's one {STR_VAR_1}!\n"
 	.string "I'll make it hold anything but that!\p"
 	.string "Just kidding!\n"
@@ -1062,13 +1062,13 @@ gText_ApprenticeHoldNothing11:: @ 82BBEE5
 	.string "My {STR_VAR_1} doesn't need to be\l"
 	.string "holding anything tight?$"
 
-gText_ApprenticeThanksHeldItem11:: @ 82BBF25
+gText_ApprenticeThanksNoHeldItem11:: @ 82BBF25
 	.string "Okay, I hear you, sure I do!\n"
 	.string "My POKéMON will go empty-handed, too!\p"
 	.string "If it's advice I ever need,\n"
 	.string "{PLAYER}, your word I'll always heed!$"
 
-gText_ApprenticeThanksHaveHeldItem11:: @ 82BBFA4
+gText_ApprenticeThanksHeldItem11:: @ 82BBFA4
 	.string "Okay, one {STR_VAR_1},\n"
 	.string "that's what I'll use.\l"
 	.string "I was right to make you choose!\p"
@@ -1101,14 +1101,14 @@ gText_ApprenticeHoldNothing12:: @ 82BC213
 	.string "My {STR_VAR_1} needs nothing?\n"
 	.string "Doesn't need to hold anything?$"
 
-gText_ApprenticeThanksHeldItem12:: @ 82BC247
+gText_ApprenticeThanksNoHeldItem12:: @ 82BC247
 	.string "If holding nothing is the best,\n"
 	.string "I'll do as you suggest!\p"
 	.string "Well, {PLAYER}, I have to roam free,\n"
 	.string "but don't you forget about me.\p"
 	.string "See you again, my smart friend!$"
 
-gText_ApprenticeThanksHaveHeldItem12:: @ 82BC2DD
+gText_ApprenticeThanksHeldItem12:: @ 82BC2DD
 	.string "If holding that {STR_VAR_1} is\n"
 	.string "the best, I'll do as you suggest!\p"
 	.string "Well, {PLAYER}, I have to roam free,\n"
@@ -1139,13 +1139,13 @@ gText_ApprenticeHoldNothing13:: @ 82BC514
 	.string "So your suggestion is my {STR_VAR_1}\n"
 	.string "doesn't have to hold anything?$"
 
-gText_ApprenticeThanksHeldItem13:: @ 82BC555
+gText_ApprenticeThanksNoHeldItem13:: @ 82BC555
 	.string "Hm, all right. That would be easier\n"
 	.string "for me, the way things are now.\p"
 	.string "I hope I can keep hitting you up\n"
 	.string "for help like this.$"
 
-gText_ApprenticeThanksHaveHeldItem13:: @ 82BC5CE
+gText_ApprenticeThanksHeldItem13:: @ 82BC5CE
 	.string "Hm, all right. That's one {STR_VAR_1}.\n"
 	.string "My POKéMON's arm is fine, so I'll make\l"
 	.string "it hold that item right away.\p"
@@ -1177,7 +1177,7 @@ gText_ApprenticeHoldNothing14:: @ 82BC808
 	.string "Oh… Then, you think it would be better\n"
 	.string "if my {STR_VAR_1} didn't have an item?$"
 
-gText_ApprenticeThanksHeldItem14:: @ 82BC84D
+gText_ApprenticeThanksNoHeldItem14:: @ 82BC84D
 	.string "Oh… Okay!\n"
 	.string "I'll go without an item.\p"
 	.string "This is nerve-racking, though.\n"
@@ -1186,7 +1186,7 @@ gText_ApprenticeThanksHeldItem14:: @ 82BC84D
 	.string "If we meet again, I hope you will be\l"
 	.string "as helpful.$"
 
-gText_ApprenticeThanksHaveHeldItem14:: @ 82BC8EA
+gText_ApprenticeThanksHeldItem14:: @ 82BC8EA
 	.string "Oh… Okay!\n"
 	.string "I'll go with that {STR_VAR_1}.\p"
 	.string "This is nerve-racking, though.\n"
@@ -1220,12 +1220,12 @@ gText_ApprenticeHoldNothing15:: @ 82BCB75
 	.string "It's better if it held nothing?\n"
 	.string "Are you certain?$"
 
-gText_ApprenticeThanksHeldItem15:: @ 82BCBA6
+gText_ApprenticeThanksNoHeldItem15:: @ 82BCBA6
 	.string "I see. If that's the case, that's fine.\n"
 	.string "I thank you for your time.\p"
 	.string "Let us meet again!$"
 
-gText_ApprenticeThanksHaveHeldItem15:: @ 82BCBFC
+gText_ApprenticeThanksHeldItem15:: @ 82BCBFC
 	.string "One {STR_VAR_1}?\n"
 	.string "Are you certain?\p"
 	.string "I see. If that's the case, that's fine.\n"

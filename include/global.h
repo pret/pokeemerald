@@ -223,7 +223,7 @@ struct Apprentice
     u8 field_1;
     u8 number;
     struct ApprenticeMon party[MULTI_PARTY_SIZE];
-    u16 easyChatWords[EASY_CHAT_BATTLE_WORDS_COUNT];
+    u16 speechWon[EASY_CHAT_BATTLE_WORDS_COUNT];
     u8 playerId[TRAINER_ID_LENGTH];
     u8 playerName[PLAYER_NAME_LENGTH];
     u8 language;
@@ -415,9 +415,9 @@ struct Sav2_B8
 struct PlayersApprentice
 {
     /*0xB0*/ u8 id;
-    /*0xB1*/ u8 lvlMode:2; //0: Unassigned, 1: Lv 50, 2: Open Lv
-    /*0xB1*/ u8 field_B1_1:4;
-    /*0xB1*/ u8 field_B1_2:2;
+    /*0xB1*/ u8 lvlMode:2;  //0: Unassigned, 1: Lv 50, 2: Open Lv
+    /*0xB1*/ u8 questionsAnswered:4;
+    /*0xB1*/ u8 firstMonId:2;
     /*0xB2*/ u8 field_B2_0:3;
     /*0xB2*/ u8 field_B2_1:2;
     /*0xB3*/ u8 field_B3;

@@ -10,7 +10,7 @@ struct ApprenticeTrainer
     u8 facilityClass;
     u16 species[APPRENTICE_SPECIES_COUNT];
     u8 id;
-    u16 easyChatWords[6];
+    u16 speechLost[EASY_CHAT_BATTLE_WORDS_COUNT];
 };
 
 extern const struct ApprenticeTrainer gApprentices[];

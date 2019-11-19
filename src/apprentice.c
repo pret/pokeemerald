@@ -36,35 +36,35 @@
 struct Unk030062ECStruct
 {
     u8 unk0;
-    u16 unk2[MULTI_PARTY_SIZE][5];
-    u8 unk20[3][5];
+    u16 unkA[MULTI_PARTY_SIZE][5];
+    u8 unkB[3][5];
 };
 
 struct Unk030062F0Struct
 {
     u16 unk0;
-    u16 unk2;
+    u16 unkX;
     u16 unk4;
     u16 unk6;
 };
 
 // data/text/apprentice.inc
-extern const u8 gText_ApprenticeIntro0[];
-extern const u8 gText_ApprenticeIntro1[];
-extern const u8 gText_ApprenticeIntro2[];
-extern const u8 gText_ApprenticeIntro3[];
-extern const u8 gText_ApprenticeIntro4[];
-extern const u8 gText_ApprenticeIntro5[];
-extern const u8 gText_ApprenticeIntro6[];
-extern const u8 gText_ApprenticeIntro7[];
-extern const u8 gText_ApprenticeIntro8[];
-extern const u8 gText_ApprenticeIntro9[];
-extern const u8 gText_ApprenticeIntro10[];
-extern const u8 gText_ApprenticeIntro11[];
-extern const u8 gText_ApprenticeIntro12[];
-extern const u8 gText_ApprenticeIntro13[];
-extern const u8 gText_ApprenticeIntro14[];
-extern const u8 gText_ApprenticeIntro15[];
+extern const u8 gText_ApprenticePleaseTeach0[];
+extern const u8 gText_ApprenticePleaseTeach1[];
+extern const u8 gText_ApprenticePleaseTeach2[];
+extern const u8 gText_ApprenticePleaseTeach3[];
+extern const u8 gText_ApprenticePleaseTeach4[];
+extern const u8 gText_ApprenticePleaseTeach5[];
+extern const u8 gText_ApprenticePleaseTeach6[];
+extern const u8 gText_ApprenticePleaseTeach7[];
+extern const u8 gText_ApprenticePleaseTeach8[];
+extern const u8 gText_ApprenticePleaseTeach9[];
+extern const u8 gText_ApprenticePleaseTeach10[];
+extern const u8 gText_ApprenticePleaseTeach11[];
+extern const u8 gText_ApprenticePleaseTeach12[];
+extern const u8 gText_ApprenticePleaseTeach13[];
+extern const u8 gText_ApprenticePleaseTeach14[];
+extern const u8 gText_ApprenticePleaseTeach15[];
 extern const u8 gText_ApprenticeRejectTeaching0[];
 extern const u8 gText_ApprenticeRejectTeaching1[];
 extern const u8 gText_ApprenticeRejectTeaching2[];
@@ -179,6 +179,22 @@ extern const u8 gText_ApprenticeHoldNothing12[];
 extern const u8 gText_ApprenticeHoldNothing13[];
 extern const u8 gText_ApprenticeHoldNothing14[];
 extern const u8 gText_ApprenticeHoldNothing15[];
+extern const u8 gText_ApprenticeThanksNoHeldItem0[];
+extern const u8 gText_ApprenticeThanksNoHeldItem1[];
+extern const u8 gText_ApprenticeThanksNoHeldItem2[];
+extern const u8 gText_ApprenticeThanksNoHeldItem3[];
+extern const u8 gText_ApprenticeThanksNoHeldItem4[];
+extern const u8 gText_ApprenticeThanksNoHeldItem5[];
+extern const u8 gText_ApprenticeThanksNoHeldItem6[];
+extern const u8 gText_ApprenticeThanksNoHeldItem7[];
+extern const u8 gText_ApprenticeThanksNoHeldItem8[];
+extern const u8 gText_ApprenticeThanksNoHeldItem9[];
+extern const u8 gText_ApprenticeThanksNoHeldItem10[];
+extern const u8 gText_ApprenticeThanksNoHeldItem11[];
+extern const u8 gText_ApprenticeThanksNoHeldItem12[];
+extern const u8 gText_ApprenticeThanksNoHeldItem13[];
+extern const u8 gText_ApprenticeThanksNoHeldItem14[];
+extern const u8 gText_ApprenticeThanksNoHeldItem15[];
 extern const u8 gText_ApprenticeThanksHeldItem0[];
 extern const u8 gText_ApprenticeThanksHeldItem1[];
 extern const u8 gText_ApprenticeThanksHeldItem2[];
@@ -195,22 +211,6 @@ extern const u8 gText_ApprenticeThanksHeldItem12[];
 extern const u8 gText_ApprenticeThanksHeldItem13[];
 extern const u8 gText_ApprenticeThanksHeldItem14[];
 extern const u8 gText_ApprenticeThanksHeldItem15[];
-extern const u8 gText_ApprenticeThanksHaveHeldItem0[];
-extern const u8 gText_ApprenticeThanksHaveHeldItem1[];
-extern const u8 gText_ApprenticeThanksHaveHeldItem2[];
-extern const u8 gText_ApprenticeThanksHaveHeldItem3[];
-extern const u8 gText_ApprenticeThanksHaveHeldItem4[];
-extern const u8 gText_ApprenticeThanksHaveHeldItem5[];
-extern const u8 gText_ApprenticeThanksHaveHeldItem6[];
-extern const u8 gText_ApprenticeThanksHaveHeldItem7[];
-extern const u8 gText_ApprenticeThanksHaveHeldItem8[];
-extern const u8 gText_ApprenticeThanksHaveHeldItem9[];
-extern const u8 gText_ApprenticeThanksHaveHeldItem10[];
-extern const u8 gText_ApprenticeThanksHaveHeldItem11[];
-extern const u8 gText_ApprenticeThanksHaveHeldItem12[];
-extern const u8 gText_ApprenticeThanksHaveHeldItem13[];
-extern const u8 gText_ApprenticeThanksHaveHeldItem14[];
-extern const u8 gText_ApprenticeThanksHaveHeldItem15[];
 extern const u8 gText_ApprenticeItemAlreadyRecommended0[];
 extern const u8 gText_ApprenticeItemAlreadyRecommended1[];
 extern const u8 gText_ApprenticeItemAlreadyRecommended2[];
@@ -359,28 +359,28 @@ static void ExecuteFuncAfterButtonPress(void (*func)(void));
 
 static void Script_GivenApprenticeLvlMode(void);
 static void Script_SetApprenticeLvlMode(void);
-static void sub_81A0978(void);
+static void Script_SetApprenticeId(void);
 static void sub_819FC60(void);
 static void sub_81A0984(void);
-static void sub_81A0990(void);
+static void IncrementQuestionsAnswered(void);
 static void sub_81A09D0(void);
 static void Script_CreateApprenticeMenu(void);
 static void Script_PrintApprenticeMessage(void);
 static void Script_ResetPlayerApprentice(void);
-static void SetVar0x8004True1(void);
-static void sub_81A0CC0(void);
-static void sub_81A09B4(void);
-static void sub_81A0D40(void);
-static void sub_81A0DD4(void);
-static void sub_81A0FE4(void);
+static void GetShouldCheckApprenticeGone(void);
+static void ApprenticeGetQuestion(void);
+static void GetNumApprenticePartyMonsSelected(void);
+static void SetApprenticePartyMon(void);
+static void InitApprenticeQuestionData(void);
+static void FreeApprenticeQuestionData(void);
 static void ApprenticeBufferString(void);
-static void sub_81A0D80(void);
-static void sub_81A11F8(void);
-static void sub_81A1218(void);
+static void SetApprenticeMonMove(void);
+static void SetFirstApprenticeMon(void);
+static void Script_ApprenticeOpenBagMenu(void);
 static void sub_81A1224(void);
 static void sub_81A1438(void);
-static void sub_81A150C(void);
-static void Script_SetPlayerApprenticeTrainerGfxId(void);
+static void SetSavedApprenticeTrainerGfxId(void);
+static void SetPlayerApprenticeTrainerGfxId(void);
 static void GetShouldApprenticeLeave(void);
 static void sub_81A1370(void);
 
@@ -394,7 +394,7 @@ const struct ApprenticeTrainer gApprentices[NUM_APPRENTICES] =
         .facilityClass = FACILITY_CLASS_BUG_CATCHER,
         .species = {SPECIES_BEAUTIFLY, SPECIES_DUSTOX, SPECIES_ILLUMISE, SPECIES_SHIFTRY, SPECIES_BRELOOM, SPECIES_NINJASK, SPECIES_SHEDINJA, SPECIES_PINSIR, SPECIES_HERACROSS, SPECIES_VOLBEAT},
         .id = 0,
-        .easyChatWords = {EC_WORD_NO, EC_WORD_MISTAKE, EC_WORD_EXCL, EC_WORD_I, EC_WORD_LOST, EC_WORD_BADLY},
+        .speechLost = {EC_WORD_NO, EC_WORD_MISTAKE, EC_WORD_EXCL, EC_WORD_I, EC_WORD_LOST, EC_WORD_BADLY},
     },
     {
         .name = {_("ヒロオ"), _("LIONEL"), _("LIONEL"), _("CAIO"), _("LUDWIG"), _("LEO")},
@@ -402,7 +402,7 @@ const struct ApprenticeTrainer gApprentices[NUM_APPRENTICES] =
         .facilityClass = FACILITY_CLASS_YOUNGSTER,
         .species = {SPECIES_SWELLOW, SPECIES_SWALOT, SPECIES_SHUCKLE, SPECIES_MANECTRIC, SPECIES_TORKOAL, SPECIES_HARIYAMA, SPECIES_MIGHTYENA, SPECIES_LUDICOLO, SPECIES_CRAWDAUNT, SPECIES_WHISCASH},
         .id = 1,
-        .easyChatWords = {EC_WORD_OKAY, EC_WORD_I, EC_WORD_LOST, EC_WORD_YOU_RE, EC_WORD_A, EC_WORD_MASTER},
+        .speechLost = {EC_WORD_OKAY, EC_WORD_I, EC_WORD_LOST, EC_WORD_YOU_RE, EC_WORD_A, EC_WORD_MASTER},
     },
     {
         .name = {_("ケイジ"), _("SONNY"), _("HERVE"), _("FEDRO"), _("WENZEL"), _("SANTI")},
@@ -410,7 +410,7 @@ const struct ApprenticeTrainer gApprentices[NUM_APPRENTICES] =
         .facilityClass = FACILITY_CLASS_SCHOOL_KID_M,
         .species = {SPECIES_LINOONE, SPECIES_MIGHTYENA, SPECIES_WHISCASH, SPECIES_ZANGOOSE, SPECIES_SEVIPER, SPECIES_NINETALES, SPECIES_KECLEON, SPECIES_SHUCKLE, SPECIES_MANECTRIC, SPECIES_MACHAMP},
         .id = 2,
-        .easyChatWords = {EC_WORD_I, EC_WORD_WENT, EC_WORD_AND, EC_WORD_LOST, EC_WORD_AWW, EC_WORD_ELLIPSIS},
+        .speechLost = {EC_WORD_I, EC_WORD_WENT, EC_WORD_AND, EC_WORD_LOST, EC_WORD_AWW, EC_WORD_ELLIPSIS},
     },
     {
         .name = {_("ユラ"), _("LAYLA"), _("LAYLA"), _("ASTRID"), _("SONJA"), _("LOLA")},
@@ -418,7 +418,7 @@ const struct ApprenticeTrainer gApprentices[NUM_APPRENTICES] =
         .facilityClass = FACILITY_CLASS_LASS,
         .species = {SPECIES_SWALOT, SPECIES_XATU, SPECIES_ALTARIA, SPECIES_GOLDUCK, SPECIES_FLYGON, SPECIES_ALAKAZAM, SPECIES_GARDEVOIR, SPECIES_WAILORD, SPECIES_GRUMPIG, SPECIES_MIGHTYENA},
         .id = 3,
-        .easyChatWords = {EC_WORD_IS, EC_WORD_THIS, EC_WORD_TOO, EC_WORD_MUCH, EC_WORD_QUES, 0xFFFF},
+        .speechLost = {EC_WORD_IS, EC_WORD_THIS, EC_WORD_TOO, EC_WORD_MUCH, EC_WORD_QUES, 0xFFFF},
     },
     {
         .name = {_("ヨウカ"), _("MACY"), _("AMELIE"), _("CLEO"), _("MARIA"), _("ELISA")},
@@ -426,7 +426,7 @@ const struct ApprenticeTrainer gApprentices[NUM_APPRENTICES] =
         .facilityClass = FACILITY_CLASS_SCHOOL_KID_F,
         .species = {SPECIES_WIGGLYTUFF, SPECIES_LINOONE, SPECIES_KINGDRA, SPECIES_DELCATTY, SPECIES_RAICHU, SPECIES_FEAROW, SPECIES_STARMIE, SPECIES_MEDICHAM, SPECIES_SHIFTRY, SPECIES_BEAUTIFLY},
         .id = 4,
-        .easyChatWords = {EC_WORD_THIS, EC_WORD_WON_T, EC_WORD_BE, EC_WORD_HAPPENING, EC_WORD_NEXT, EC_WORD_TIME},
+        .speechLost = {EC_WORD_THIS, EC_WORD_WON_T, EC_WORD_BE, EC_WORD_HAPPENING, EC_WORD_NEXT, EC_WORD_TIME},
     },
     {
         .name = {_("ヤスシ"), _("DONTE"), _("BRAHIM"), _("GLAUCO"), _("JOSEF"), _("ROQUE")},
@@ -434,7 +434,7 @@ const struct ApprenticeTrainer gApprentices[NUM_APPRENTICES] =
         .facilityClass = FACILITY_CLASS_RUNNING_TRIATHLETE_M,
         .species = {SPECIES_STARMIE, SPECIES_DODRIO, SPECIES_AGGRON, SPECIES_MAGNETON, SPECIES_MACHAMP, SPECIES_ARMALDO, SPECIES_HERACROSS, SPECIES_NOSEPASS, SPECIES_EXPLOUD, SPECIES_MIGHTYENA},
         .id = 5,
-        .easyChatWords = {EC_WORD_I_AM, EC_WORD_GOING, EC_WORD_TO, EC_WORD_RUN, EC_WORD_BYE_BYE, EC_WORD_EXCL},
+        .speechLost = {EC_WORD_I_AM, EC_WORD_GOING, EC_WORD_TO, EC_WORD_RUN, EC_WORD_BYE_BYE, EC_WORD_EXCL},
     },
     {
         .name = {_("ミサオ"), _("AMIRA"), _("LAURE"), _("DAFNE"), _("AMELIE"), _("LARA")},
@@ -442,7 +442,7 @@ const struct ApprenticeTrainer gApprentices[NUM_APPRENTICES] =
         .facilityClass = FACILITY_CLASS_RUNNING_TRIATHLETE_F,
         .species = {SPECIES_STARMIE, SPECIES_DODRIO, SPECIES_MAGNETON, SPECIES_MEDICHAM, SPECIES_MIGHTYENA, SPECIES_GLALIE, SPECIES_GOLEM, SPECIES_ELECTRODE, SPECIES_PELIPPER, SPECIES_SHARPEDO},
         .id = 6,
-        .easyChatWords = {EC_WORD_AHAHA, EC_WORD_DEFEATED, EC_WORD_EXCL, EC_WORD_IT_S, EC_WORD_NOTHING, EC_WORD_EXCL},
+        .speechLost = {EC_WORD_AHAHA, EC_WORD_DEFEATED, EC_WORD_EXCL, EC_WORD_IT_S, EC_WORD_NOTHING, EC_WORD_EXCL},
     },
     {
         .name = {_("カズサ"), _("KALI"), _("JODIE"), _("ILENIA"), _("KARO"), _("ELSA")},
@@ -450,7 +450,7 @@ const struct ApprenticeTrainer gApprentices[NUM_APPRENTICES] =
         .facilityClass = FACILITY_CLASS_BEAUTY,
         .species = {SPECIES_NINETALES, SPECIES_ALAKAZAM, SPECIES_SCEPTILE, SPECIES_SALAMENCE, SPECIES_GOLDUCK, SPECIES_MAWILE, SPECIES_WEEZING, SPECIES_LANTURN, SPECIES_GARDEVOIR, SPECIES_MILOTIC},
         .id = 7,
-        .easyChatWords = {EC_WORD_YOU_RE, EC_WORD_STRONG, EC_WORD_AREN_T, EC_WORD_YOU, EC_WORD_QUES, 0xFFFF},
+        .speechLost = {EC_WORD_YOU_RE, EC_WORD_STRONG, EC_WORD_AREN_T, EC_WORD_YOU, EC_WORD_QUES, 0xFFFF},
     },
     {
         .name = {_("スミレ"), _("ANNIE"), _("ANNIE"), _("IMELDA"), _("INES"), _("ROSA")},
@@ -458,7 +458,7 @@ const struct ApprenticeTrainer gApprentices[NUM_APPRENTICES] =
         .facilityClass = FACILITY_CLASS_AROMA_LADY,
         .species = {SPECIES_SCEPTILE, SPECIES_VILEPLUME, SPECIES_BELLOSSOM, SPECIES_ROSELIA, SPECIES_CORSOLA, SPECIES_FLYGON, SPECIES_BRELOOM, SPECIES_MILOTIC, SPECIES_ALTARIA, SPECIES_CRADILY},
         .id = 8,
-        .easyChatWords = {EC_WORD_WHAT, EC_WORD_TOUGH, EC_WORD_POKEMON, EC_WORD_YOU, EC_WORD_HAVE, EC_WORD_EXCL},
+        .speechLost = {EC_WORD_WHAT, EC_WORD_TOUGH, EC_WORD_POKEMON, EC_WORD_YOU, EC_WORD_HAVE, EC_WORD_EXCL},
     },
     {
         .name = {_("アキノリ"), _("DILLEN"), _("RENE"), _("INDRO"), _("DETLEF"), _("PEDRO")},
@@ -466,7 +466,7 @@ const struct ApprenticeTrainer gApprentices[NUM_APPRENTICES] =
         .facilityClass = FACILITY_CLASS_HIKER,
         .species = {SPECIES_SKARMORY, SPECIES_GOLEM, SPECIES_BLAZIKEN, SPECIES_CAMERUPT, SPECIES_DONPHAN, SPECIES_MUK, SPECIES_SALAMENCE, SPECIES_TROPIUS, SPECIES_SOLROCK, SPECIES_RHYDON},
         .id = 9,
-        .easyChatWords = {EC_WORD_WE, EC_WORD_WERE, EC_WORD_JUST, EC_WORD_SHREDDED, EC_WORD_ELLIPSIS, 0xFFFF},
+        .speechLost = {EC_WORD_WE, EC_WORD_WERE, EC_WORD_JUST, EC_WORD_SHREDDED, EC_WORD_ELLIPSIS, 0xFFFF},
     },
     {
         .name = {_("トウゾウ"), _("DALLAS"), _("BRUNO"), _("LEARCO"), _("ANSGAR"), _("MANOLO")},
@@ -474,7 +474,7 @@ const struct ApprenticeTrainer gApprentices[NUM_APPRENTICES] =
         .facilityClass = FACILITY_CLASS_FISHERMAN,
         .species = {SPECIES_SEAKING, SPECIES_STARMIE, SPECIES_GOLDUCK, SPECIES_TENTACRUEL, SPECIES_OCTILLERY, SPECIES_GOREBYSS, SPECIES_GLALIE, SPECIES_WAILORD, SPECIES_SHARPEDO, SPECIES_KINGDRA},
         .id = 10,
-        .easyChatWords = {EC_WORD_YOUR, EC_WORD_WIN, EC_WORD_ANGERS, EC_WORD_ME, EC_WORD_EXCL, 0xFFFF},
+        .speechLost = {EC_WORD_YOUR, EC_WORD_WIN, EC_WORD_ANGERS, EC_WORD_ME, EC_WORD_EXCL, 0xFFFF},
     },
     {
         .name = {_("セイヤ"), _("FRANK"), _("FRANK"), _("OLINDO"), _("FRANK"), _("MAURO")},
@@ -482,7 +482,7 @@ const struct ApprenticeTrainer gApprentices[NUM_APPRENTICES] =
         .facilityClass = FACILITY_CLASS_SAILOR,
         .species = {SPECIES_QUAGSIRE, SPECIES_STARMIE, SPECIES_PELIPPER, SPECIES_CRAWDAUNT, SPECIES_WAILORD, SPECIES_GYARADOS, SPECIES_SWAMPERT, SPECIES_LANTURN, SPECIES_WHISCASH, SPECIES_SHUCKLE},
         .id = 11,
-        .easyChatWords = {EC_WORD_LOSING, EC_WORD_DOESN_T, EC_MOVE(CUT), EC_WORD_ME, EC_WORD_DEEP, EC_WORD_OK_QUES},
+        .speechLost = {EC_WORD_LOSING, EC_WORD_DOESN_T, EC_MOVE(CUT), EC_WORD_ME, EC_WORD_DEEP, EC_WORD_OK_QUES},
     },
     {
         .name = {_("リュウジ"), _("LAMONT"), _("XAV"), _("ORFEO"), _("JÜRGEN"), _("JORGE")},
@@ -490,7 +490,7 @@ const struct ApprenticeTrainer gApprentices[NUM_APPRENTICES] =
         .facilityClass = FACILITY_CLASS_GUITARIST,
         .species = {SPECIES_ABSOL, SPECIES_CROBAT, SPECIES_EXPLOUD, SPECIES_MAGNETON, SPECIES_SHARPEDO, SPECIES_MANECTRIC, SPECIES_METAGROSS, SPECIES_ELECTRODE, SPECIES_NOSEPASS, SPECIES_WEEZING},
         .id = 12,
-        .easyChatWords = {EC_WORD_A, EC_WORD_LOSS, EC_WORD_IS, EC_WORD_WHAT, EC_WORD_THIS, EC_WORD_IS},
+        .speechLost = {EC_WORD_A, EC_WORD_LOSS, EC_WORD_IS, EC_WORD_WHAT, EC_WORD_THIS, EC_WORD_IS},
     },
     {
         .name = {_("カツアキ"), _("TYRESE"), _("ANDY"), _("PARIDE"), _("DAVID"), _("CHICHO")},
@@ -498,7 +498,7 @@ const struct ApprenticeTrainer gApprentices[NUM_APPRENTICES] =
         .facilityClass = FACILITY_CLASS_BLACK_BELT,
         .species = {SPECIES_BLAZIKEN, SPECIES_GOLEM, SPECIES_MACHAMP, SPECIES_RHYDON, SPECIES_HARIYAMA, SPECIES_AGGRON, SPECIES_MEDICHAM, SPECIES_ZANGOOSE, SPECIES_VIGOROTH, SPECIES_SLAKING},
         .id = 13,
-        .easyChatWords = {EC_WORD_I_AM, EC_WORD_TOO_WEAK, EC_WORD_AND, EC_WORD_LOW, EC_WORD_OF, EC_WORD_POWER},
+        .speechLost = {EC_WORD_I_AM, EC_WORD_TOO_WEAK, EC_WORD_AND, EC_WORD_LOW, EC_WORD_OF, EC_WORD_POWER},
     },
     {
         .name = {_("トシミツ"), _("DANTE"), _("DANTE"), _("RAOUL"), _("LOTHAR"), _("PABLO")},
@@ -506,7 +506,7 @@ const struct ApprenticeTrainer gApprentices[NUM_APPRENTICES] =
         .facilityClass = FACILITY_CLASS_RUIN_MANIAC,
         .species = {SPECIES_SCEPTILE, SPECIES_SANDSLASH, SPECIES_FLYGON, SPECIES_CLAYDOL, SPECIES_ARMALDO, SPECIES_CROBAT, SPECIES_CRADILY, SPECIES_SOLROCK, SPECIES_LUNATONE, SPECIES_GOLEM},
         .id = 14,
-        .easyChatWords = {EC_WORD_I, EC_WORD_DON_T, EC_WORD_UNDERSTAND, EC_WORD_WHAT, EC_WORD_IS, EC_WORD_HAPPENING},
+        .speechLost = {EC_WORD_I, EC_WORD_DON_T, EC_WORD_UNDERSTAND, EC_WORD_WHAT, EC_WORD_IS, EC_WORD_HAPPENING},
     },
     {
         .name = {_("ローウェン"), _("ARTURO"), _("ARTURO"), _("ROMOLO"), _("BRIAN"), _("ARTURO")},
@@ -514,7 +514,7 @@ const struct ApprenticeTrainer gApprentices[NUM_APPRENTICES] =
         .facilityClass = FACILITY_CLASS_GENTLEMAN,
         .species = {SPECIES_ABSOL, SPECIES_MIGHTYENA, SPECIES_ALAKAZAM, SPECIES_BANETTE, SPECIES_NINETALES, SPECIES_CLAYDOL, SPECIES_MUK, SPECIES_SALAMENCE, SPECIES_WALREIN, SPECIES_DUSCLOPS},
         .id = 15,
-        .easyChatWords = {EC_WORD_THIS, EC_WORD_HAS, EC_WORD_TO, EC_WORD_BE, EC_WORD_A, EC_WORD_LIE},
+        .speechLost = {EC_WORD_THIS, EC_WORD_HAS, EC_WORD_TO, EC_WORD_BE, EC_WORD_A, EC_WORD_LIE},
     },
 };
 
@@ -525,22 +525,22 @@ const struct ApprenticeTrainer gApprentices[NUM_APPRENTICES] =
 // Fourth is after a level mode is chosen for the apprentice
 static const u8 *const sApprenticeFirstMeetingTexts[NUM_APPRENTICES][4] =
 {
-    {gText_ApprenticeIntro0,  gText_ApprenticeRejectTeaching0,  gText_ApprenticeWhichLevelMode0,  gText_ApprenticeLevelModeThanks0},
-    {gText_ApprenticeIntro1,  gText_ApprenticeRejectTeaching1,  gText_ApprenticeWhichLevelMode1,  gText_ApprenticeLevelModeThanks1},
-    {gText_ApprenticeIntro2,  gText_ApprenticeRejectTeaching2,  gText_ApprenticeWhichLevelMode2,  gText_ApprenticeLevelModeThanks2},
-    {gText_ApprenticeIntro3,  gText_ApprenticeRejectTeaching3,  gText_ApprenticeWhichLevelMode3,  gText_ApprenticeLevelModeThanks3},
-    {gText_ApprenticeIntro4,  gText_ApprenticeRejectTeaching4,  gText_ApprenticeWhichLevelMode4,  gText_ApprenticeLevelModeThanks4},
-    {gText_ApprenticeIntro5,  gText_ApprenticeRejectTeaching5,  gText_ApprenticeWhichLevelMode5,  gText_ApprenticeLevelModeThanks5},
-    {gText_ApprenticeIntro6,  gText_ApprenticeRejectTeaching6,  gText_ApprenticeWhichLevelMode6,  gText_ApprenticeLevelModeThanks6},
-    {gText_ApprenticeIntro7,  gText_ApprenticeRejectTeaching7,  gText_ApprenticeWhichLevelMode7,  gText_ApprenticeLevelModeThanks7},
-    {gText_ApprenticeIntro8,  gText_ApprenticeRejectTeaching8,  gText_ApprenticeWhichLevelMode8,  gText_ApprenticeLevelModeThanks8},
-    {gText_ApprenticeIntro9,  gText_ApprenticeRejectTeaching9,  gText_ApprenticeWhichLevelMode9,  gText_ApprenticeLevelModeThanks9},
-    {gText_ApprenticeIntro10, gText_ApprenticeRejectTeaching10, gText_ApprenticeWhichLevelMode10, gText_ApprenticeLevelModeThanks10},
-    {gText_ApprenticeIntro11, gText_ApprenticeRejectTeaching11, gText_ApprenticeWhichLevelMode11, gText_ApprenticeLevelModeThanks11},
-    {gText_ApprenticeIntro12, gText_ApprenticeRejectTeaching12, gText_ApprenticeWhichLevelMode12, gText_ApprenticeLevelModeThanks12},
-    {gText_ApprenticeIntro13, gText_ApprenticeRejectTeaching13, gText_ApprenticeWhichLevelMode13, gText_ApprenticeLevelModeThanks13},
-    {gText_ApprenticeIntro14, gText_ApprenticeRejectTeaching14, gText_ApprenticeWhichLevelMode14, gText_ApprenticeLevelModeThanks14},
-    {gText_ApprenticeIntro15, gText_ApprenticeRejectTeaching15, gText_ApprenticeWhichLevelMode15, gText_ApprenticeLevelModeThanks15},
+    {gText_ApprenticePleaseTeach0,  gText_ApprenticeRejectTeaching0,  gText_ApprenticeWhichLevelMode0,  gText_ApprenticeLevelModeThanks0},
+    {gText_ApprenticePleaseTeach1,  gText_ApprenticeRejectTeaching1,  gText_ApprenticeWhichLevelMode1,  gText_ApprenticeLevelModeThanks1},
+    {gText_ApprenticePleaseTeach2,  gText_ApprenticeRejectTeaching2,  gText_ApprenticeWhichLevelMode2,  gText_ApprenticeLevelModeThanks2},
+    {gText_ApprenticePleaseTeach3,  gText_ApprenticeRejectTeaching3,  gText_ApprenticeWhichLevelMode3,  gText_ApprenticeLevelModeThanks3},
+    {gText_ApprenticePleaseTeach4,  gText_ApprenticeRejectTeaching4,  gText_ApprenticeWhichLevelMode4,  gText_ApprenticeLevelModeThanks4},
+    {gText_ApprenticePleaseTeach5,  gText_ApprenticeRejectTeaching5,  gText_ApprenticeWhichLevelMode5,  gText_ApprenticeLevelModeThanks5},
+    {gText_ApprenticePleaseTeach6,  gText_ApprenticeRejectTeaching6,  gText_ApprenticeWhichLevelMode6,  gText_ApprenticeLevelModeThanks6},
+    {gText_ApprenticePleaseTeach7,  gText_ApprenticeRejectTeaching7,  gText_ApprenticeWhichLevelMode7,  gText_ApprenticeLevelModeThanks7},
+    {gText_ApprenticePleaseTeach8,  gText_ApprenticeRejectTeaching8,  gText_ApprenticeWhichLevelMode8,  gText_ApprenticeLevelModeThanks8},
+    {gText_ApprenticePleaseTeach9,  gText_ApprenticeRejectTeaching9,  gText_ApprenticeWhichLevelMode9,  gText_ApprenticeLevelModeThanks9},
+    {gText_ApprenticePleaseTeach10, gText_ApprenticeRejectTeaching10, gText_ApprenticeWhichLevelMode10, gText_ApprenticeLevelModeThanks10},
+    {gText_ApprenticePleaseTeach11, gText_ApprenticeRejectTeaching11, gText_ApprenticeWhichLevelMode11, gText_ApprenticeLevelModeThanks11},
+    {gText_ApprenticePleaseTeach12, gText_ApprenticeRejectTeaching12, gText_ApprenticeWhichLevelMode12, gText_ApprenticeLevelModeThanks12},
+    {gText_ApprenticePleaseTeach13, gText_ApprenticeRejectTeaching13, gText_ApprenticeWhichLevelMode13, gText_ApprenticeLevelModeThanks13},
+    {gText_ApprenticePleaseTeach14, gText_ApprenticeRejectTeaching14, gText_ApprenticeWhichLevelMode14, gText_ApprenticeLevelModeThanks14},
+    {gText_ApprenticePleaseTeach15, gText_ApprenticeRejectTeaching15, gText_ApprenticeWhichLevelMode15, gText_ApprenticeLevelModeThanks15},
 };
 
 static const u8 *const sApprenticeWhichMonTexts[NUM_APPRENTICES][2] =
@@ -569,22 +569,22 @@ static const u8 *const sApprenticeWhichMonTexts[NUM_APPRENTICES][2] =
 // TODO
 static const u8 *const sApprenticeHeldItemTexts[NUM_APPRENTICES][5] =
 {
-    {gText_ApprenticeWhatHeldItem0,  gText_ApprenticeHoldNothing0,  gText_ApprenticeThanksHeldItem0,  gText_ApprenticeThanksHaveHeldItem0,  gText_ApprenticeItemAlreadyRecommended0},
-    {gText_ApprenticeWhatHeldItem1,  gText_ApprenticeHoldNothing1,  gText_ApprenticeThanksHeldItem1,  gText_ApprenticeThanksHaveHeldItem1,  gText_ApprenticeItemAlreadyRecommended1},
-    {gText_ApprenticeWhatHeldItem2,  gText_ApprenticeHoldNothing2,  gText_ApprenticeThanksHeldItem2,  gText_ApprenticeThanksHaveHeldItem2,  gText_ApprenticeItemAlreadyRecommended2},
-    {gText_ApprenticeWhatHeldItem3,  gText_ApprenticeHoldNothing3,  gText_ApprenticeThanksHeldItem3,  gText_ApprenticeThanksHaveHeldItem3,  gText_ApprenticeItemAlreadyRecommended3},
-    {gText_ApprenticeWhatHeldItem4,  gText_ApprenticeHoldNothing4,  gText_ApprenticeThanksHeldItem4,  gText_ApprenticeThanksHaveHeldItem4,  gText_ApprenticeItemAlreadyRecommended4},
-    {gText_ApprenticeWhatHeldItem5,  gText_ApprenticeHoldNothing5,  gText_ApprenticeThanksHeldItem5,  gText_ApprenticeThanksHaveHeldItem5,  gText_ApprenticeItemAlreadyRecommended5},
-    {gText_ApprenticeWhatHeldItem6,  gText_ApprenticeHoldNothing6,  gText_ApprenticeThanksHeldItem6,  gText_ApprenticeThanksHaveHeldItem6,  gText_ApprenticeItemAlreadyRecommended6},
-    {gText_ApprenticeWhatHeldItem7,  gText_ApprenticeHoldNothing7,  gText_ApprenticeThanksHeldItem7,  gText_ApprenticeThanksHaveHeldItem7,  gText_ApprenticeItemAlreadyRecommended7},
-    {gText_ApprenticeWhatHeldItem8,  gText_ApprenticeHoldNothing8,  gText_ApprenticeThanksHeldItem8,  gText_ApprenticeThanksHaveHeldItem8,  gText_ApprenticeItemAlreadyRecommended8},
-    {gText_ApprenticeWhatHeldItem9,  gText_ApprenticeHoldNothing9,  gText_ApprenticeThanksHeldItem9,  gText_ApprenticeThanksHaveHeldItem9,  gText_ApprenticeItemAlreadyRecommended9},
-    {gText_ApprenticeWhatHeldItem10, gText_ApprenticeHoldNothing10, gText_ApprenticeThanksHeldItem10, gText_ApprenticeThanksHaveHeldItem10, gText_ApprenticeItemAlreadyRecommended10},
-    {gText_ApprenticeWhatHeldItem11, gText_ApprenticeHoldNothing11, gText_ApprenticeThanksHeldItem11, gText_ApprenticeThanksHaveHeldItem11, gText_ApprenticeItemAlreadyRecommended11},
-    {gText_ApprenticeWhatHeldItem12, gText_ApprenticeHoldNothing12, gText_ApprenticeThanksHeldItem12, gText_ApprenticeThanksHaveHeldItem12, gText_ApprenticeItemAlreadyRecommended12},
-    {gText_ApprenticeWhatHeldItem13, gText_ApprenticeHoldNothing13, gText_ApprenticeThanksHeldItem13, gText_ApprenticeThanksHaveHeldItem13, gText_ApprenticeItemAlreadyRecommended13},
-    {gText_ApprenticeWhatHeldItem14, gText_ApprenticeHoldNothing14, gText_ApprenticeThanksHeldItem14, gText_ApprenticeThanksHaveHeldItem14, gText_ApprenticeItemAlreadyRecommended14},
-    {gText_ApprenticeWhatHeldItem15, gText_ApprenticeHoldNothing15, gText_ApprenticeThanksHeldItem15, gText_ApprenticeThanksHaveHeldItem15, gText_ApprenticeItemAlreadyRecommended15},
+    {gText_ApprenticeWhatHeldItem0,  gText_ApprenticeHoldNothing0,  gText_ApprenticeThanksNoHeldItem0,  gText_ApprenticeThanksHeldItem0,  gText_ApprenticeItemAlreadyRecommended0},
+    {gText_ApprenticeWhatHeldItem1,  gText_ApprenticeHoldNothing1,  gText_ApprenticeThanksNoHeldItem1,  gText_ApprenticeThanksHeldItem1,  gText_ApprenticeItemAlreadyRecommended1},
+    {gText_ApprenticeWhatHeldItem2,  gText_ApprenticeHoldNothing2,  gText_ApprenticeThanksNoHeldItem2,  gText_ApprenticeThanksHeldItem2,  gText_ApprenticeItemAlreadyRecommended2},
+    {gText_ApprenticeWhatHeldItem3,  gText_ApprenticeHoldNothing3,  gText_ApprenticeThanksNoHeldItem3,  gText_ApprenticeThanksHeldItem3,  gText_ApprenticeItemAlreadyRecommended3},
+    {gText_ApprenticeWhatHeldItem4,  gText_ApprenticeHoldNothing4,  gText_ApprenticeThanksNoHeldItem4,  gText_ApprenticeThanksHeldItem4,  gText_ApprenticeItemAlreadyRecommended4},
+    {gText_ApprenticeWhatHeldItem5,  gText_ApprenticeHoldNothing5,  gText_ApprenticeThanksNoHeldItem5,  gText_ApprenticeThanksHeldItem5,  gText_ApprenticeItemAlreadyRecommended5},
+    {gText_ApprenticeWhatHeldItem6,  gText_ApprenticeHoldNothing6,  gText_ApprenticeThanksNoHeldItem6,  gText_ApprenticeThanksHeldItem6,  gText_ApprenticeItemAlreadyRecommended6},
+    {gText_ApprenticeWhatHeldItem7,  gText_ApprenticeHoldNothing7,  gText_ApprenticeThanksNoHeldItem7,  gText_ApprenticeThanksHeldItem7,  gText_ApprenticeItemAlreadyRecommended7},
+    {gText_ApprenticeWhatHeldItem8,  gText_ApprenticeHoldNothing8,  gText_ApprenticeThanksNoHeldItem8,  gText_ApprenticeThanksHeldItem8,  gText_ApprenticeItemAlreadyRecommended8},
+    {gText_ApprenticeWhatHeldItem9,  gText_ApprenticeHoldNothing9,  gText_ApprenticeThanksNoHeldItem9,  gText_ApprenticeThanksHeldItem9,  gText_ApprenticeItemAlreadyRecommended9},
+    {gText_ApprenticeWhatHeldItem10, gText_ApprenticeHoldNothing10, gText_ApprenticeThanksNoHeldItem10, gText_ApprenticeThanksHeldItem10, gText_ApprenticeItemAlreadyRecommended10},
+    {gText_ApprenticeWhatHeldItem11, gText_ApprenticeHoldNothing11, gText_ApprenticeThanksNoHeldItem11, gText_ApprenticeThanksHeldItem11, gText_ApprenticeItemAlreadyRecommended11},
+    {gText_ApprenticeWhatHeldItem12, gText_ApprenticeHoldNothing12, gText_ApprenticeThanksNoHeldItem12, gText_ApprenticeThanksHeldItem12, gText_ApprenticeItemAlreadyRecommended12},
+    {gText_ApprenticeWhatHeldItem13, gText_ApprenticeHoldNothing13, gText_ApprenticeThanksNoHeldItem13, gText_ApprenticeThanksHeldItem13, gText_ApprenticeItemAlreadyRecommended13},
+    {gText_ApprenticeWhatHeldItem14, gText_ApprenticeHoldNothing14, gText_ApprenticeThanksNoHeldItem14, gText_ApprenticeThanksHeldItem14, gText_ApprenticeItemAlreadyRecommended14},
+    {gText_ApprenticeWhatHeldItem15, gText_ApprenticeHoldNothing15, gText_ApprenticeThanksNoHeldItem15, gText_ApprenticeThanksHeldItem15, gText_ApprenticeItemAlreadyRecommended15},
 };
 
 static const u8 *const sApprenticeWhichMoveTexts[NUM_APPRENTICES][2] =
@@ -1026,39 +1026,40 @@ static const bool8 gUnknown_08611370[MOVES_COUNT] =
     [MOVE_PSYCHO_BOOST] = TRUE,
 };
 
-static const u8 gUnknown_086114D3[] = {0x01, 0x01, 0x01, 0x02, 0x02, 0x02, 0x02, 0x02, 0x03, 0x00, 0x00, 0x00, 0x00};
+static const u8 gUnknown_086114D3[] = {1, 1, 1, 2, 2, 2, 2, 2, 3, 0};
 
 static void (* const sApprenticeFunctions[])(void) =
 {
-    [APPRENTICE_FUNC_0] = Script_GivenApprenticeLvlMode,
-    [APPRENTICE_FUNC_1] = Script_SetApprenticeLvlMode,
-    [APPRENTICE_FUNC_2] = sub_81A0978,
+    [APPRENTICE_FUNC_GAVE_LVLMODE] = Script_GivenApprenticeLvlMode,
+    [APPRENTICE_FUNC_SET_LVLMODE] = Script_SetApprenticeLvlMode,
+    [APPRENTICE_FUNC_SET_ID] = Script_SetApprenticeId,
     [APPRENTICE_FUNC_3] = sub_819FC60,
     [APPRENTICE_FUNC_4] = sub_81A0984,
-    [APPRENTICE_FUNC_5] = sub_81A0990,
+    [APPRENTICE_FUNC_ANSWERED_QUESTION] = IncrementQuestionsAnswered,
     [APPRENTICE_FUNC_6] = sub_81A09D0,
     [APPRENTICE_FUNC_MENU] = Script_CreateApprenticeMenu,
     [APPRENTICE_FUNC_PRINT_MSG] = Script_PrintApprenticeMessage,
-    [APPRENTICE_FUNC_9] = Script_ResetPlayerApprentice,
-    [APPRENTICE_FUNC_SET_TRUE_1] = SetVar0x8004True1,
-    [APPRENTICE_FUNC_11] = sub_81A0CC0,
-    [APPRENTICE_FUNC_12] = sub_81A09B4,
-    [APPRENTICE_FUNC_13] = sub_81A0D40,
-    [APPRENTICE_FUNC_14] = sub_81A0DD4,
-    [APPRENTICE_FUNC_15] = sub_81A0FE4,
-    [APPRENTICE_FUNC_16] = ApprenticeBufferString,
-    [APPRENTICE_FUNC_17] = sub_81A0D80,
-    [APPRENTICE_FUNC_18] = sub_81A11F8,
-    [APPRENTICE_FUNC_19] = sub_81A1218,
+    [APPRENTICE_FUNC_RESET] = Script_ResetPlayerApprentice,
+    [APPRENTICE_FUNC_CHECK_GONE] = GetShouldCheckApprenticeGone,
+    [APPRENTICE_FUNC_GET_QUESTION] = ApprenticeGetQuestion,
+    [APPRENTICE_FUNC_GET_NUM_PARTY_MONS] = GetNumApprenticePartyMonsSelected,
+    [APPRENTICE_FUNC_SET_PARTY_MON] = SetApprenticePartyMon,
+    [APPRENTICE_FUNC_INIT_QUESTION_DATA] = InitApprenticeQuestionData,
+    [APPRENTICE_FUNC_FREE_QUESTION_DATA] = FreeApprenticeQuestionData,
+    [APPRENTICE_FUNC_BUFFER_STRING] = ApprenticeBufferString,
+    [APPRENTICE_FUNC_SET_MOVE] = SetApprenticeMonMove,
+    [APPRENTICE_FUNC_SET_FIRST_MON] = SetFirstApprenticeMon,
+    [APPRENTICE_FUNC_OPEN_BAG] = Script_ApprenticeOpenBagMenu,
     [APPRENTICE_FUNC_20] = sub_81A1224,
     [APPRENTICE_FUNC_21] = sub_81A1438,
-    [APPRENTICE_FUNC_22] = sub_81A150C,
-    [APPRENTICE_FUNC_23] = Script_SetPlayerApprenticeTrainerGfxId,
+    [APPRENTICE_FUNC_SET_GFX_SAVED] = SetSavedApprenticeTrainerGfxId,
+    [APPRENTICE_FUNC_SET_GFX] = SetPlayerApprenticeTrainerGfxId,
     [APPRENTICE_FUNC_SHOULD_LEAVE] = GetShouldApprenticeLeave,
     [APPRENTICE_FUNC_25] = sub_81A1370,
 };
 
-static const u8 gUnknown_08611548[8] = {0x00, 0x01, 0x02, 0x03, 0x06, 0x07, 0x08, 0x09};
+// The first Apprentice can only be one of these
+static const u8 sInitialApprenticeIds[8] = {0, 1, 2, 3, 6, 7, 8, 9};
 
 // text
 /*
@@ -1067,11 +1068,11 @@ extern const u8 gText_No[];*/
 
 void CopyFriendsApprenticeChallengeText(u8 saveblockApprenticeId)
 {
-    u8 i, var;
+    u8 i, num;
     const u8 *Intro;
 
-    var = gSaveBlock2Ptr->apprentices[saveblockApprenticeId].number;
-    for (i = 0; var != 0 && i < APPRENTICE_COUNT; var /= 10, i++)
+    num = gSaveBlock2Ptr->apprentices[saveblockApprenticeId].number;
+    for (i = 0; num != 0 && i < APPRENTICE_COUNT; num /= 10, i++)
         ;
 
     StringCopy7(gStringVar1, gSaveBlock2Ptr->apprentices[saveblockApprenticeId].playerName);
@@ -1090,8 +1091,8 @@ void ResetApprenticeStruct(struct Apprentice *apprentice)
 {
     u8 i;
 
-    for (i = 0; i < ARRAY_COUNT(apprentice->easyChatWords); i++)
-        apprentice->easyChatWords[i] = 0xFFFF;
+    for (i = 0; i < ARRAY_COUNT(apprentice->speechWon); i++)
+        apprentice->speechWon[i] = 0xFFFF;
 
     apprentice->playerName[0] = EOS;
     apprentice->id = NUM_APPRENTICES;
@@ -1104,8 +1105,8 @@ void ResetAllApprenticeData(void)
     PLAYER_APPRENTICE.field_B2_1 = 0;
     for (i = 0; i < APPRENTICE_COUNT; i++)
     {
-        for (j = 0; j < ARRAY_COUNT(gSaveBlock2Ptr->apprentices[i].easyChatWords); j++)
-            gSaveBlock2Ptr->apprentices[i].easyChatWords[j] = 0xFFFF;
+        for (j = 0; j < ARRAY_COUNT(gSaveBlock2Ptr->apprentices[i].speechWon); j++)
+            gSaveBlock2Ptr->apprentices[i].speechWon[j] = 0xFFFF;
         gSaveBlock2Ptr->apprentices[i].id = NUM_APPRENTICES;
         gSaveBlock2Ptr->apprentices[i].playerName[0] = EOS;
         gSaveBlock2Ptr->apprentices[i].lvlMode = 0;
@@ -1120,18 +1121,18 @@ void ResetAllApprenticeData(void)
     Script_ResetPlayerApprentice();
 }
 
-static bool8 GivenPlayersApprenticeLvlMode(void)
+static bool8 GivenApprenticeLvlMode(void)
 {
     return (PLAYER_APPRENTICE.lvlMode != 0);
 }
 
-static void sub_819FBC8(void)
+static void SetApprenticeId(void)
 {
     if (gSaveBlock2Ptr->apprentices[0].number == 0)
     {
         do
         {
-            PLAYER_APPRENTICE.id = gUnknown_08611548[Random() % ARRAY_COUNT(gUnknown_08611548)];
+            PLAYER_APPRENTICE.id = sInitialApprenticeIds[Random() % ARRAY_COUNT(sInitialApprenticeIds)];
         } while (PLAYER_APPRENTICE.id == gSaveBlock2Ptr->apprentices[0].id);
     }
     else
@@ -1168,6 +1169,7 @@ static void sub_819FC60(void)
         PLAYER_APPRENTICE.monIds[i] = ((array[i * 2] & 0xF) << 4) | ((array[i * 2 + 1]) & 0xF);
 }
 
+// TODO:
 static u8 sub_819FCF8(u8 val, u8 *arg1, u8 *arg2)
 {
     u8 i, count;
@@ -1177,13 +1179,13 @@ static u8 sub_819FCF8(u8 val, u8 *arg1, u8 *arg2)
     {
         do
         {
-            monId = Random() % 3;
+            monId = Random() % (MULTI_PARTY_SIZE);
             for (count = 0, i = 0; i < 5; i++)
             {
-                if (gUnknown_030062EC->unk2[monId][i] != MOVE_NONE)
+                if (gUnknown_030062EC->unkA[monId][i] != MOVE_NONE)
                     count++;
             }
-        } while (count > 3);
+        } while (count > MULTI_PARTY_SIZE);
     }
     else if (val == 1)
     {
@@ -1196,8 +1198,8 @@ static u8 sub_819FCF8(u8 val, u8 *arg1, u8 *arg2)
 
 static void sub_819FD64(void)
 {
-    u8 sp_0[10];
-    u8 sp_C[3];
+    u8 sp_0[ARRAY_COUNT(gUnknown_086114D3)]; // TODO replace with constant, used in global for field_B8
+    u8 sp_C[MULTI_PARTY_SIZE];
     u8 sp_10;
     u8 i, j;
     u8 rand1, rand2;
@@ -1213,7 +1215,7 @@ static void sub_819FD64(void)
         SWAP(sp_C[rand1], sp_C[rand2], temp);
     }
 
-    for (i = 0; i < ARRAY_COUNT(sp_0); i++)
+    for (i = 0; i < ARRAY_COUNT(gUnknown_086114D3); i++)
         sp_0[i] = gUnknown_086114D3[i];
     for (i = 0; i < 50; i++)
     {
@@ -1228,11 +1230,11 @@ static void sub_819FD64(void)
     for (i = 0; i < 5; i++)
     {
         for (j = 0; j < 3; j++)
-            gUnknown_030062EC->unk20[j][i] = 4;
+            gUnknown_030062EC->unkB[j][i] = 4;
     }
 
     sp_10 = 0;
-    for (i = 0; i < 9; i++)
+    for (i = 0; i < ARRAY_COUNT(gUnknown_086114D3) - 1; i++)
     {
         PLAYER_APPRENTICE.field_B8[i].unk0_0 = sp_0[i];
         if (sp_0[i] != 3)
@@ -1246,12 +1248,12 @@ static void sub_819FD64(void)
                     rand1 = Random() % 4;
                     for (j = 0; j < gUnknown_030062EC->unk0 + 1; j++)
                     {
-                        if (gUnknown_030062EC->unk20[id][j] == rand1)
+                        if (gUnknown_030062EC->unkB[id][j] == rand1)
                             break;
                     }
                 } while (j != gUnknown_030062EC->unk0 + 1);
 
-                gUnknown_030062EC->unk20[id][gUnknown_030062EC->unk0] = rand1;
+                gUnknown_030062EC->unkB[id][gUnknown_030062EC->unk0] = rand1;
                 PLAYER_APPRENTICE.field_B8[i].unk0_2 = rand1;
                 PLAYER_APPRENTICE.field_B8[i].unk2 = sub_819FF98(PLAYER_APPRENTICE.field_B8[i].unk0_1);
             }
@@ -1379,17 +1381,18 @@ static u16 sub_819FF98(u8 monId)
     return moveId;
 }
 
+// TODO:
 static bool8 sub_81A0194(u8 monId, u16 moveId)
 {
     u8 i;
 
     for (i = 0; i < 5; i++)
     {
-        if (gUnknown_030062EC->unk2[monId][i] == moveId)
+        if (gUnknown_030062EC->unkA[monId][i] == moveId)
             return FALSE;
     }
 
-    gUnknown_030062EC->unk2[monId][gUnknown_030062EC->unk0] = moveId;
+    gUnknown_030062EC->unkA[monId][gUnknown_030062EC->unk0] = moveId;
     return TRUE;
 }
 
@@ -1424,7 +1427,7 @@ static u16 sub_81A0284(u8 arg0, u8 speciesTableId, u8 arg2)
     u16 moves[MAX_MON_MOVES];
     u8 i, count;
 
-    if (PLAYER_APPRENTICE.field_B1_1 < 3)
+    if (PLAYER_APPRENTICE.questionsAnswered < 3)
         return 0;
 
     count = 0;
@@ -1436,7 +1439,7 @@ static u16 sub_81A0284(u8 arg0, u8 speciesTableId, u8 arg2)
     }
 
     GetLatestLearnedMoves(gApprentices[PLAYER_APPRENTICE.id].species[speciesTableId], moves);
-    for (i = 0; i < count && i < PLAYER_APPRENTICE.field_B1_1 - 3; i++)
+    for (i = 0; i < count && i < PLAYER_APPRENTICE.questionsAnswered - 3; i++)
     {
         if (PLAYER_APPRENTICE.field_B8[i].unk0_0 == 2
             && PLAYER_APPRENTICE.field_B8[i].unk0_1 == arg0
@@ -1463,7 +1466,7 @@ static void sub_81A0390(u8 arg0)
             gSaveBlock2Ptr->apprentices[0].party[i].moves[j] = 0;
     }
 
-    j = PLAYER_APPRENTICE.field_B1_2;
+    j = PLAYER_APPRENTICE.firstMonId;
     for (i = 0; i < MULTI_PARTY_SIZE; i++)
     {
         apprenticeMons[j] = &gSaveBlock2Ptr->apprentices[0].party[i];
@@ -1533,9 +1536,9 @@ static void CreateApprenticeMenu(u8 arg0)
     case APPRENTICE_ASK_2SPECIES:
         left = 0x12;
         top = 8;
-        if (PLAYER_APPRENTICE.field_B1_1 > 2)
+        if (PLAYER_APPRENTICE.questionsAnswered > 2)
             return;
-        strings[1] = gSpeciesNames[gUnknown_030062F0->unk2];
+        strings[1] = gSpeciesNames[gUnknown_030062F0->unkX];
         strings[0] = gSpeciesNames[gUnknown_030062F0->unk0];
         break;
     case APPRENTICE_ASK_MOVES:
@@ -1660,10 +1663,10 @@ static void Script_ResetPlayerApprentice(void)
 {
     u8 i;
 
-    sub_819FBC8();
+    SetApprenticeId();
     PLAYER_APPRENTICE.lvlMode = 0;
-    PLAYER_APPRENTICE.field_B1_1 = 0;
-    PLAYER_APPRENTICE.field_B1_2 = 0;
+    PLAYER_APPRENTICE.questionsAnswered = 0;
+    PLAYER_APPRENTICE.firstMonId = 0;
     PLAYER_APPRENTICE.field_B2_0 = 0;
 
     for (i = 0; i < MULTI_PARTY_SIZE; i++)
@@ -1679,9 +1682,10 @@ static void Script_ResetPlayerApprentice(void)
     }
 }
 
+// The Apprentice is considered active after the first conversation, where the player decides a Lvl Mode for them
 static void Script_GivenApprenticeLvlMode(void)
 {
-    if (!GivenPlayersApprenticeLvlMode())
+    if (!GivenApprenticeLvlMode())
         gSpecialVar_Result = FALSE;
     else
         gSpecialVar_Result = TRUE;
@@ -1694,9 +1698,10 @@ static void Script_SetApprenticeLvlMode(void)
     SetPlayersApprenticeLvlMode(gSpecialVar_0x8005);
 }
 
-static void sub_81A0978(void)
+// Never called, APPRENTICE_FUNC_SET_ID is unused
+static void Script_SetApprenticeId(void)
 {
-    sub_819FBC8();
+    SetApprenticeId();
 }
 
 static void sub_81A0984(void)
@@ -1704,19 +1709,21 @@ static void sub_81A0984(void)
     sub_819FD64();
 }
 
-static void sub_81A0990(void)
+static void IncrementQuestionsAnswered(void)
 {
-    PLAYER_APPRENTICE.field_B1_1++;
+    PLAYER_APPRENTICE.questionsAnswered++;
 }
 
-static void sub_81A09B4(void)
+// The first 3 questions answered after meeting the Apprentice are always selecting party mons
+//  after which this is never called
+static void GetNumApprenticePartyMonsSelected(void)
 {
-    gSpecialVar_Result = PLAYER_APPRENTICE.field_B1_1;
+    gSpecialVar_Result = PLAYER_APPRENTICE.questionsAnswered;
 }
 
 static void sub_81A09D0(void)
 {
-    s32 var = PLAYER_APPRENTICE.field_B1_1 - 3;
+    s32 var = PLAYER_APPRENTICE.questionsAnswered - 3;
     if (var < 0)
     {
         gSpecialVar_Result = FALSE;
@@ -1754,71 +1761,71 @@ static void PrintApprenticeMessage(void)
 {
     const u8 *string;
 
-    if (gSpecialVar_0x8006 == 6)
+    if (gSpecialVar_0x8006 == APPRENTICE_MSG_WHICH_MON)
     {
         string = sApprenticeWhichMonTexts[PLAYER_APPRENTICE.id][0];
     }
-    else if (gSpecialVar_0x8006 == 7)
+    else if (gSpecialVar_0x8006 == APPRENTICE_MSG_THANKS_MON)
     {
         string = sApprenticeWhichMonTexts[PLAYER_APPRENTICE.id][1];
     }
-    else if (gSpecialVar_0x8006 == 8)
+    else if (gSpecialVar_0x8006 == APPRENTICE_MSG_WHICH_MOVE)
     {
         string = sApprenticeWhichMoveTexts[PLAYER_APPRENTICE.id][0];
     }
-    else if (gSpecialVar_0x8006 == 9)
+    else if (gSpecialVar_0x8006 == APPRENTICE_MSG_THANKS_MOVE)
     {
         string = sApprenticeWhichMoveTexts[PLAYER_APPRENTICE.id][1];
     }
-    else if (gSpecialVar_0x8006 == 4)
+    else if (gSpecialVar_0x8006 == APPRENTICE_MSG_WHICH_MON_FIRST)
     {
         string = sApprenticeWhichMonFirstTexts[PLAYER_APPRENTICE.id][0];
     }
-    else if (gSpecialVar_0x8006 == 5)
+    else if (gSpecialVar_0x8006 == APPRENTICE_MSG_THANKS_MON_FIRST)
     {
         string = sApprenticeWhichMonFirstTexts[PLAYER_APPRENTICE.id][1];
     }
-    else if (gSpecialVar_0x8006 == 10)
+    else if (gSpecialVar_0x8006 == APPRENTICE_MSG_WHAT_HELD_ITEM)
     {
         string = sApprenticeHeldItemTexts[PLAYER_APPRENTICE.id][0];
     }
-    else if (gSpecialVar_0x8006 == 11)
+    else if (gSpecialVar_0x8006 == APPRENTICE_MSG_PICK_WIN_SPEECH)
     {
         string = sApprenticePickWinSpeechTexts[PLAYER_APPRENTICE.id][0];
     }
-    else if (gSpecialVar_0x8006 == 12)
+    else if (gSpecialVar_0x8006 == APPRENTICE_MSG_THANKS_HELD_ITEM)
     {
         string = sApprenticeHeldItemTexts[PLAYER_APPRENTICE.id][3];
     }
-    else if (gSpecialVar_0x8006 == 13)
+    else if (gSpecialVar_0x8006 == APPRENTICE_MSG_HOLD_NOTHING)
     {
         string = sApprenticeHeldItemTexts[PLAYER_APPRENTICE.id][1];
     }
-    else if (gSpecialVar_0x8006 == 16)
+    else if (gSpecialVar_0x8006 == APPRENTICE_MSG_ITEM_ALREADY_SUGGESTED)
     {
         string = sApprenticeHeldItemTexts[PLAYER_APPRENTICE.id][4];
     }
-    else if (gSpecialVar_0x8006 == 14)
+    else if (gSpecialVar_0x8006 == APPRENTICE_MSG_THANKS_NO_HELD_ITEM)
     {
         string = sApprenticeHeldItemTexts[PLAYER_APPRENTICE.id][2];
     }
-    else if (gSpecialVar_0x8006 == 15)
+    else if (gSpecialVar_0x8006 == APPRENTICE_MSG_THANKS_WIN_SPEECH)
     {
         string = sApprenticePickWinSpeechTexts[PLAYER_APPRENTICE.id][1];
     }
-    else if (gSpecialVar_0x8006 == 0)
+    else if (gSpecialVar_0x8006 == APPRENTICE_MSG_PLEASE_TEACH)
     {
         string = sApprenticeFirstMeetingTexts[PLAYER_APPRENTICE.id][0];
     }
-    else if (gSpecialVar_0x8006 == 1)
+    else if (gSpecialVar_0x8006 == APPRENTICE_MSG_REJECT)
     {
         string = sApprenticeFirstMeetingTexts[PLAYER_APPRENTICE.id][1];
     }
-    else if (gSpecialVar_0x8006 == 2)
+    else if (gSpecialVar_0x8006 == APPRENTICE_MSG_WHICH_LVL_MODE)
     {
         string = sApprenticeFirstMeetingTexts[PLAYER_APPRENTICE.id][2];
     }
-    else if (gSpecialVar_0x8006 == 3)
+    else if (gSpecialVar_0x8006 == APPRENTICE_MSG_THANKS_LVL_MODE)
     {
         string = sApprenticeFirstMeetingTexts[PLAYER_APPRENTICE.id][3];
     }
@@ -1843,19 +1850,19 @@ static void Script_PrintApprenticeMessage(void)
     PrintApprenticeMessage();
 }
 
-static void sub_81A0CC0(void)
+static void ApprenticeGetQuestion(void)
 {
-    if (PLAYER_APPRENTICE.field_B1_1 < 3)
+    if (PLAYER_APPRENTICE.questionsAnswered < MULTI_PARTY_SIZE)
     {
         gSpecialVar_Result = 2;
     }
-    else if (PLAYER_APPRENTICE.field_B1_1 > 11)
+    else if (PLAYER_APPRENTICE.questionsAnswered > 11)
     {
         gSpecialVar_Result = 5;
     }
     else
     {
-        s32 id = PLAYER_APPRENTICE.field_B1_1 - 3;
+        s32 id = PLAYER_APPRENTICE.questionsAnswered - 3;
         switch (PLAYER_APPRENTICE.field_B8[id].unk0_0)
         {
         case 1:
@@ -1874,7 +1881,9 @@ static void sub_81A0CC0(void)
     }
 }
 
-static void sub_81A0D40(void)
+// gSpecialVar_0x8005 is 0 or 1 for the mon selection (0 is already on the team)
+// gSpecialVar_0x8006 is 0-2 for the number of party mons selected so far
+static void SetApprenticePartyMon(void)
 {
     if (gSpecialVar_0x8005)
     {
@@ -1883,11 +1892,11 @@ static void sub_81A0D40(void)
     }
 }
 
-static void sub_81A0D80(void)
+static void SetApprenticeMonMove(void)
 {
-    if (PLAYER_APPRENTICE.field_B1_1 >= 3)
+    if (PLAYER_APPRENTICE.questionsAnswered >= MULTI_PARTY_SIZE)
     {
-        u8 id = PLAYER_APPRENTICE.field_B1_1 - 3;
+        u8 id = PLAYER_APPRENTICE.questionsAnswered - MULTI_PARTY_SIZE;
         if (gSpecialVar_0x8005)
             PLAYER_APPRENTICE.field_B8[id].unk0_3 = 1;
         else
@@ -1895,7 +1904,7 @@ static void sub_81A0D80(void)
     }
 }
 
-static void sub_81A0DD4(void)
+static void InitApprenticeQuestionData(void)
 {
     u8 i;
     u8 count = 0;
@@ -1905,44 +1914,45 @@ static void sub_81A0DD4(void)
         ;
 
     gUnknown_030062F0 = AllocZeroed(sizeof(*gUnknown_030062F0));
-    if (gSpecialVar_0x8005 == 2)
+    if (gSpecialVar_0x8005 == APPRENTICE_QUESTION_WHICH_MON)
     {
-        if (PLAYER_APPRENTICE.field_B1_1 < MULTI_PARTY_SIZE)
+        if (PLAYER_APPRENTICE.questionsAnswered < 3)
         {
-            id1 = PLAYER_APPRENTICE.monIds[PLAYER_APPRENTICE.field_B1_1] >> 4;
-            gUnknown_030062F0->unk2 = gApprentices[PLAYER_APPRENTICE.id].species[id1];
+            // For the first 3 questions its used as an id to retrieve pokemon
+            id1 = PLAYER_APPRENTICE.monIds[PLAYER_APPRENTICE.questionsAnswered] >> 4;
+            gUnknown_030062F0->unkX = gApprentices[PLAYER_APPRENTICE.id].species[id1];
 
-            id2 = PLAYER_APPRENTICE.monIds[PLAYER_APPRENTICE.field_B1_1] & 0xF;
+            id2 = PLAYER_APPRENTICE.monIds[PLAYER_APPRENTICE.questionsAnswered] & 0xF;
             gUnknown_030062F0->unk0 = gApprentices[PLAYER_APPRENTICE.id].species[id2];
         }
     }
-    else if (gSpecialVar_0x8005 == 3)
+    else if (gSpecialVar_0x8005 == APPRENTICE_QUESTION_WHICH_MOVE)
     {
-        if (PLAYER_APPRENTICE.field_B1_1 >= 3
-            && PLAYER_APPRENTICE.field_B1_1 < count + 3
-            && PLAYER_APPRENTICE.field_B8[PLAYER_APPRENTICE.field_B1_1 - 3].unk0_0 == 2)
+        if (PLAYER_APPRENTICE.questionsAnswered >= 3
+            && PLAYER_APPRENTICE.questionsAnswered < count + 3
+            && PLAYER_APPRENTICE.field_B8[PLAYER_APPRENTICE.questionsAnswered - 3].unk0_0 == 2)
         {
-            count = PLAYER_APPRENTICE.field_B8[PLAYER_APPRENTICE.field_B1_1 - 3].unk0_1;
+            count = PLAYER_APPRENTICE.field_B8[PLAYER_APPRENTICE.questionsAnswered - 3].unk0_1;
             APPRENTICE_SPECIES_ID_2(id1, count);
             gUnknown_030062F0->unk0 = gApprentices[PLAYER_APPRENTICE.id].species[id1];
-            gUnknown_030062F0->unk4 = sub_81A0284(count, id1, PLAYER_APPRENTICE.field_B8[PLAYER_APPRENTICE.field_B1_1 - 3].unk0_2);
-            gUnknown_030062F0->unk6 = PLAYER_APPRENTICE.field_B8[PLAYER_APPRENTICE.field_B1_1 - 3].unk2;
+            gUnknown_030062F0->unk4 = sub_81A0284(count, id1, PLAYER_APPRENTICE.field_B8[PLAYER_APPRENTICE.questionsAnswered - 3].unk0_2);
+            gUnknown_030062F0->unk6 = PLAYER_APPRENTICE.field_B8[PLAYER_APPRENTICE.questionsAnswered - 3].unk2;
         }
     }
-    else if (gSpecialVar_0x8005 == 4)
+    else if (gSpecialVar_0x8005 == APPRENTICE_QUESTION_WHAT_ITEM)
     {
-        if (PLAYER_APPRENTICE.field_B1_1 >= 3
-            && PLAYER_APPRENTICE.field_B1_1 < count + 3
-            && PLAYER_APPRENTICE.field_B8[PLAYER_APPRENTICE.field_B1_1 - 3].unk0_0 == 1)
+        if (PLAYER_APPRENTICE.questionsAnswered >= 3
+            && PLAYER_APPRENTICE.questionsAnswered < count + 3
+            && PLAYER_APPRENTICE.field_B8[PLAYER_APPRENTICE.questionsAnswered - 3].unk0_0 == 1)
         {
-            count = PLAYER_APPRENTICE.field_B8[PLAYER_APPRENTICE.field_B1_1 - 3].unk0_1;
+            count = PLAYER_APPRENTICE.field_B8[PLAYER_APPRENTICE.questionsAnswered - 3].unk0_1;
             APPRENTICE_SPECIES_ID_2(id2, count);
             gUnknown_030062F0->unk0 = gApprentices[PLAYER_APPRENTICE.id].species[id2];
         }
     }
 }
 
-static void sub_81A0FE4(void)
+static void FreeApprenticeQuestionData(void)
 {
     FREE_AND_SET_NULL(gUnknown_030062F0);
 }
@@ -1974,7 +1984,7 @@ static void ApprenticeBufferString(void)
         StringCopy(stringDst, gSpeciesNames[gUnknown_030062F0->unk0]);
         break;
     case APPRENTICE_BUFF_SPECIES2:
-        StringCopy(stringDst, gSpeciesNames[gUnknown_030062F0->unk2]);
+        StringCopy(stringDst, gSpeciesNames[gUnknown_030062F0->unkX]);
         break;
     case APPRENTICE_BUFF_SPECIES3:
         StringCopy(stringDst, gSpeciesNames[gUnknown_030062F0->unk0]);
@@ -1986,7 +1996,7 @@ static void ApprenticeBufferString(void)
         StringCopy(stringDst, gMoveNames[gUnknown_030062F0->unk6]);
         break;
     case APPRENTICE_BUFF_ITEM:
-        StringCopy(stringDst, ItemId_GetName(PLAYER_APPRENTICE.field_B8[PLAYER_APPRENTICE.field_B1_1 - 3].unk2));
+        StringCopy(stringDst, ItemId_GetName(PLAYER_APPRENTICE.field_B8[PLAYER_APPRENTICE.questionsAnswered - 3].unk2));
         break;
     case APPRENTICE_BUFF_NAME:
         TVShowConvertInternationalString(text, GetApprenticeNameInLanguage(PLAYER_APPRENTICE.id, LANGUAGE_ENGLISH), LANGUAGE_ENGLISH);
@@ -1998,14 +2008,14 @@ static void ApprenticeBufferString(void)
         else // == APPRENTICE_LVL_MODE_OPEN
             StringCopy(stringDst, gText_OpenLevel);
         break;
-    case APPRENTICE_BUFF_EASY_CHAT:
-        FrontierSpeechToString(gSaveBlock2Ptr->apprentices[0].easyChatWords);
+    case APPRENTICE_BUFF_WIN_SPEECH:
+        FrontierSpeechToString(gSaveBlock2Ptr->apprentices[0].speechWon);
         StringCopy(stringDst, gStringVar4);
         break;
-    case APPRENTICE_BUFF_SPECIES4:
-        if (PLAYER_APPRENTICE.field_B1_2 < MULTI_PARTY_SIZE)
+    case APPRENTICE_BUFF_FIRST_MON_SPECIES:
+        if (PLAYER_APPRENTICE.firstMonId < MULTI_PARTY_SIZE)
         {
-            APPRENTICE_SPECIES_ID(speciesArrayId, PLAYER_APPRENTICE.field_B1_2);
+            APPRENTICE_SPECIES_ID(speciesArrayId, PLAYER_APPRENTICE.firstMonId);
         }
         else
         {
@@ -2016,14 +2026,14 @@ static void ApprenticeBufferString(void)
     }
 }
 
-static void sub_81A11F8(void)
+static void SetFirstApprenticeMon(void)
 {
-    PLAYER_APPRENTICE.field_B1_2 = gSpecialVar_0x8005;
+    PLAYER_APPRENTICE.firstMonId = gSpecialVar_0x8005;
 }
 
-static void sub_81A1218(void)
+static void Script_ApprenticeOpenBagMenu(void)
 {
-    sub_81AAC28();
+    ApprenticeOpenBagMenu();
 }
 
 static void sub_81A1224(void)
@@ -2031,36 +2041,36 @@ static void sub_81A1224(void)
     u8 i, j;
     u8 count;
 
-    if (PLAYER_APPRENTICE.field_B1_1 < 3)
+    if (PLAYER_APPRENTICE.questionsAnswered < 3)
         return;
 
     for (count = 0, j = 0; j < 9 && PLAYER_APPRENTICE.field_B8[j].unk0_0; count++, j++)
         ;
 
-    for (i = 0; i < count && i < PLAYER_APPRENTICE.field_B1_1 - 3; i++)
+    for (i = 0; i < count && i < PLAYER_APPRENTICE.questionsAnswered - 3; i++)
     {
         do {} while(0);
         if (PLAYER_APPRENTICE.field_B8[i].unk0_0 == 1
             && PLAYER_APPRENTICE.field_B8[i].unk0_3
             && PLAYER_APPRENTICE.field_B8[i].unk2 == gSpecialVar_0x8005)
         {
-            PLAYER_APPRENTICE.field_B8[PLAYER_APPRENTICE.field_B1_1 - 3].unk0_3 = 0;
-            PLAYER_APPRENTICE.field_B8[PLAYER_APPRENTICE.field_B1_1 - 3].unk2 = gSpecialVar_0x8005;
+            PLAYER_APPRENTICE.field_B8[PLAYER_APPRENTICE.questionsAnswered - 3].unk0_3 = 0;
+            PLAYER_APPRENTICE.field_B8[PLAYER_APPRENTICE.questionsAnswered - 3].unk2 = gSpecialVar_0x8005;
             gSpecialVar_Result = FALSE;
             return;
         }
     }
 
-    PLAYER_APPRENTICE.field_B8[PLAYER_APPRENTICE.field_B1_1 - 3].unk0_3 = 1;
-    PLAYER_APPRENTICE.field_B8[PLAYER_APPRENTICE.field_B1_1 - 3].unk2 = gSpecialVar_0x8005;
+    PLAYER_APPRENTICE.field_B8[PLAYER_APPRENTICE.questionsAnswered - 3].unk0_3 = 1;
+    PLAYER_APPRENTICE.field_B8[PLAYER_APPRENTICE.questionsAnswered - 3].unk2 = gSpecialVar_0x8005;
     gSpecialVar_Result = TRUE;
 }
 
 static void sub_81A1370(void)
 {
     s32 i;
-    s32 r10;
-    s32 r9;
+    s32 apprenticeNum;
+    s32 apprenticeIdx;
 
     if (gSaveBlock2Ptr->apprentices[0].playerName[0] == EOS)
         return;
@@ -2074,20 +2084,20 @@ static void sub_81A1370(void)
         }
     }
 
-    r10 = 0xFFFF;
-    r9 = -1;
+    apprenticeNum = 0xFFFF;
+    apprenticeIdx = -1;
     for (i = 1; i < TRAINER_ID_LENGTH; i++)
     {
         if (GetTrainerId(gSaveBlock2Ptr->apprentices[i].playerId) == GetTrainerId(gSaveBlock2Ptr->playerTrainerId)
-            && gSaveBlock2Ptr->apprentices[i].number < r10)
+            && gSaveBlock2Ptr->apprentices[i].number < apprenticeNum)
         {
-            r10 = gSaveBlock2Ptr->apprentices[i].number;
-            r9 = i;
+            apprenticeNum = gSaveBlock2Ptr->apprentices[i].number;
+            apprenticeIdx = i;
         }
     }
 
-    if (r9 > 0)
-        gSaveBlock2Ptr->apprentices[r9] = gSaveBlock2Ptr->apprentices[0];
+    if (apprenticeIdx > 0)
+        gSaveBlock2Ptr->apprentices[apprenticeIdx] = gSaveBlock2Ptr->apprentices[0];
 }
 
 static void sub_81A1438(void)
@@ -2113,7 +2123,8 @@ static void sub_81A1438(void)
     CalcApprenticeChecksum(&gSaveBlock2Ptr->apprentices[0]);
 }
 
-static void sub_81A150C(void)
+// Never called, APPRENTICE_FUNC_SET_GFX_SAVED is unused
+static void SetSavedApprenticeTrainerGfxId(void)
 {
     u8 i;
     u8 mapObjectGfxId;
@@ -2138,7 +2149,7 @@ static void sub_81A150C(void)
     }
 }
 
-static void Script_SetPlayerApprenticeTrainerGfxId(void)
+static void SetPlayerApprenticeTrainerGfxId(void)
 {
     u8 i;
     u8 mapObjectGfxId;
@@ -2162,9 +2173,9 @@ static void Script_SetPlayerApprenticeTrainerGfxId(void)
     }
 }
 
-// Both of the below functions may have dummied / used for debug
+// Both of the below functions may have been dummied / used for debug
 // In all cases theres a conditional for VAR_0x8004 right after the call to these functions
-static void SetVar0x8004True1(void)
+static void GetShouldCheckApprenticeGone(void)
 {
     gSpecialVar_0x8004 = TRUE;
 }
@@ -2196,7 +2207,8 @@ const u8 *GetApprenticeNameInLanguage(u32 apprenticeId, s32 language)
     }
 }
 
-static void sub_81A16B4(u8 taskId)
+// Functionally unused
+static void Task_SwitchToFollowupFuncAfterButtonPress(u8 taskId)
 {
     if (gMain.newKeys & A_BUTTON || gMain.newKeys & B_BUTTON)
         SwitchTaskToFollowupFunc(taskId);
@@ -2219,8 +2231,9 @@ static void ExecuteFuncAfterButtonPress(void (*func)(void))
     gTasks[taskId].data[1] = (u32)(func) >> 16;
 }
 
-static void sub_81A175C(TaskFunc taskFunc)
+// Unused
+static void ExecuteFollowupFuncAfterButtonPress(TaskFunc task)
 {
-    u8 taskId = CreateTask(sub_81A16B4, 1);
-    SetTaskFuncWithFollowupFunc(taskId, sub_81A16B4, taskFunc);
+    u8 taskId = CreateTask(Task_SwitchToFollowupFuncAfterButtonPress, 1);
+    SetTaskFuncWithFollowupFunc(taskId, Task_SwitchToFollowupFuncAfterButtonPress, task);
 }
