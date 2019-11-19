@@ -140,7 +140,7 @@ void sub_80BB78C(u8);
 void sub_80BB7D4(u8);
 void sub_80BBA28(u8);
 void sub_80BBA78(u8);
-void sub_80BBBF4(u8);
+void LoadPageOnceMonFinishedMoving(u8);
 void sub_80BBC74(u8);
 void sub_80BBD1C(u8);
 void sub_80BBDE8(u8);
@@ -169,7 +169,7 @@ u8 sub_80BDA40(void);
 u16 GetPokemonSpriteToDisplay(u16);
 u32 sub_80BDACC(u16, s16, s16);
 static void CreateInterfaceSprites(u8);
-void sub_80BE470(struct Sprite *sprite);
+void MoveMonIntoPosition(struct Sprite *sprite);
 static void SpriteCB_Scrollbar(struct Sprite *sprite);
 void sub_80BE658(struct Sprite *sprite);
 void sub_80BE758(struct Sprite *sprite);
@@ -177,29 +177,29 @@ void sub_80BE780(struct Sprite *sprite);
 void sub_80BE44C(struct Sprite *sprite);
 void sub_80BE834(struct Sprite *sprite);
 void sub_80BE4E0(struct Sprite *sprite);
-u8 sub_80BE91C(struct PokedexListItem*, u8);
+u8 SetupInfoScreen(struct PokedexListItem*, u8 monSpriteId);
 bool8 sub_80BE9C4(u8);
 u8 sub_80BE9F8(struct PokedexListItem*, u8);
-void sub_80BEA24(u8);
-void sub_80BEDF4(u8);
-void sub_80BEFD0(u8);
-void sub_80BF038(u8);
-void sub_80BF070(u8);
-void sub_80BF0AC(u8);
+void LoadInfoScreen(u8);
+void ChangePokedexScreen(u8);
+void LoadSelectedScreen(u8);
+void BeginChangeInfoScreen(u8);
+void BeginReturnToPokedex(u8);
+void LoadAreaScreen(u8);
 void sub_80BF1B4(u8);
 void sub_80BF1EC(u8);
-void sub_80BF250(u8);
+void LoadCryScreen(u8);
 void sub_80BF5CC(u8);
 void sub_80BF790(u8);
 void sub_80BF7FC(u8);
-void sub_80BF82C(u8);
+void LoadSizeScreen(u8);
 void sub_80BFBB0(u8);
 void sub_80BFC78(u8);
 void sub_80BFCDC(u16);
 void sub_80BFCF4(u16);
 void sub_80BFD0C(u8, u16);
 void sub_80BFD7C(u8, u16);
-void sub_80BFE38(u8);
+static void Task_DisplayNewMonData(u8);
 void sub_80C0088(u8);
 void blockset_load_palette_to_gpu(u8);
 void sub_80C01CC(struct Sprite *sprite);
@@ -211,8 +211,8 @@ u8 sub_80C0B44(u8, u16, u8, u8);
 void sub_80C0D30(u8, u16);
 u16 sub_80C0EF8(u16, s16, s16, s8);
 u16 sub_80C0E0C(u8, u16, u16, u16);
-u8 sub_80C1258();
-void sub_80C12E0(u8);
+u8 LoadSearchMenu(void);
+void Task_LoadSearchMenu(u8);
 void sub_80C1570(u8);
 void sub_80C15B0(u8);
 void sub_80C16CC(u8);
@@ -717,7 +717,7 @@ static const struct SpritePalette sInterfaceSpritePalette[] =
 static const u8 gUnknown_0855D28C[] = {0x4, 0x8, 0x10, 0x20, 0x20};
 static const u8 gUnknown_0855D291[] = {0x8, 0x4, 0x2, 0x1, 0x1};
 
-static const struct BgTemplate gBgTemplates_0855D298[] =
+static const struct BgTemplate sPokedex_BgTemplate[] =
 {
     {
         .bg = 0,
@@ -782,7 +782,7 @@ ALIGNED(4) static const u8 gExpandedPlaceholder_PokedexDescription[] = _("");
 
 static const u16 gUnknown_0856E610[] = INCBIN_U16("graphics/pokedex/black.gbapal");
 
-static const struct BgTemplate gUnknown_0856E630[] =
+static const struct BgTemplate sInfoScreen_BgTemplate[] =
 {
     {
         .bg = 0,
@@ -822,9 +822,14 @@ static const struct BgTemplate gUnknown_0856E630[] =
     }
 };
 
-static const struct WindowTemplate gUnknown_0856E640[] =
+#define WIN_INFO 0
+#define WIN_FOOTPRINT 1
+#define WIN_CRY_WAVE 2
+#define WIN_VU_METER 3
+
+static const struct WindowTemplate sInfoScreen_WindowTemplates[] =
 {
-    {
+    { // WIN_INFO
         .bg = 2,
         .tilemapLeft = 0,
         .tilemapTop = 0,
@@ -833,7 +838,7 @@ static const struct WindowTemplate gUnknown_0856E640[] =
         .paletteNum = 0,
         .baseBlock = 0x0001,
     },
-    {
+    { // WIN_FOOTPRINT
         .bg = 2,
         .tilemapLeft = 25,
         .tilemapTop = 8,
@@ -842,7 +847,7 @@ static const struct WindowTemplate gUnknown_0856E640[] =
         .paletteNum = 15,
         .baseBlock = 0x0281,
     },
-    {
+    { // WIN_CRY_WAVE
         .bg = 0,
         .tilemapLeft = 0,
         .tilemapTop = 12,
@@ -851,7 +856,7 @@ static const struct WindowTemplate gUnknown_0856E640[] =
         .paletteNum = 8,
         .baseBlock = 0x0285,
     },
-    {
+    { // WIN_VU_METER
         .bg = 2,
         .tilemapLeft = 18,
         .tilemapTop = 3,
@@ -863,7 +868,7 @@ static const struct WindowTemplate gUnknown_0856E640[] =
     DUMMY_WIN_TEMPLATE
 };
 
-static const struct BgTemplate gUnknown_0856E668[] =
+static const struct BgTemplate sNewEntryInfoScreen_BgTemplate[] =
 {
     {
         .bg = 2,
@@ -885,9 +890,9 @@ static const struct BgTemplate gUnknown_0856E668[] =
     },
 };
 
-static const struct WindowTemplate gUnknown_0856E670[] =
+static const struct WindowTemplate sNewEntryInfoScreen_WindowTemplates[] =
 {
-    {
+    { // WIN_INFO
         .bg = 2,
         .tilemapLeft = 0,
         .tilemapTop = 0,
@@ -896,7 +901,7 @@ static const struct WindowTemplate gUnknown_0856E670[] =
         .paletteNum = 0,
         .baseBlock = 0x0001,
     },
-    {
+    { // WIN_FOOTPRINT
         .bg = 2,
         .tilemapLeft = 25,
         .tilemapTop = 8,
@@ -1164,7 +1169,7 @@ static const struct UnknownStruct1 gUnknown_0856EFC8[] =
     {gDexModeOptions, 2, 3, 2},
 };
 
-static const struct BgTemplate gUnknown_0856EFF8[] =
+static const struct BgTemplate sSearchMenu_BgTemplate[] =
 {
     {
         .bg = 0,
@@ -1204,7 +1209,7 @@ static const struct BgTemplate gUnknown_0856EFF8[] =
     }
 };
 
-static const struct WindowTemplate gUnknown_0856F008[] =
+static const struct WindowTemplate sSearchMenu_WindowTemplate[] =
 {
     {
         .bg = 2,
@@ -1397,8 +1402,8 @@ void sub_80BB7D4(u8 taskId)
         {
             sub_80BD8D0();
             BeginNormalPaletteFade(~(1 << (gSprites[sPokedexView->selectedMonSpriteId].oam.paletteNum + 16)), 0, 0, 0x10, RGB_BLACK);
-            gSprites[sPokedexView->selectedMonSpriteId].callback = sub_80BE470;
-            gTasks[taskId].func = sub_80BBBF4;
+            gSprites[sPokedexView->selectedMonSpriteId].callback = MoveMonIntoPosition;
+            gTasks[taskId].func = LoadPageOnceMonFinishedMoving;
             PlaySE(SE_PIN);
             sub_80BC890();
         }
@@ -1415,7 +1420,7 @@ void sub_80BB7D4(u8 taskId)
         {
             PlaySE(SE_SELECT);
             BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 0x10, RGB_BLACK);
-            gTasks[taskId].data[0] = sub_80C1258();
+            gTasks[taskId].data[0] = LoadSearchMenu();
             sPokedexView->unk64E = 0;
             sPokedexView->unk62A = sPokedexView->unk62C;
             sPokedexView->unk610 = sPokedexView->selectedPokemon;
@@ -1508,12 +1513,12 @@ void sub_80BBA78(u8 taskId)
     }
 }
 
-void sub_80BBBF4(u8 taskId)
+void LoadPageOnceMonFinishedMoving(u8 taskId)
 {
     if (gSprites[sPokedexView->selectedMonSpriteId].pos1.x == 48 && gSprites[sPokedexView->selectedMonSpriteId].pos1.y == 56)
     {
         sPokedexView->unk64B = sPokedexView->unk64A;
-        gTasks[taskId].data[0] = sub_80BE91C(&sPokedexView->pokedexList[sPokedexView->selectedPokemon], sPokedexView->selectedMonSpriteId);
+        gTasks[taskId].data[0] = SetupInfoScreen(&sPokedexView->pokedexList[sPokedexView->selectedPokemon], sPokedexView->selectedMonSpriteId);
         gTasks[taskId].func = sub_80BBC74;
     }
 }
@@ -1597,7 +1602,7 @@ void sub_80BBEB8(u8 taskId)
 
             sub_80BD8D0();
             a = (1 << (gSprites[sPokedexView->selectedMonSpriteId].oam.paletteNum + 16));
-            gSprites[sPokedexView->selectedMonSpriteId].callback = sub_80BE470;
+            gSprites[sPokedexView->selectedMonSpriteId].callback = MoveMonIntoPosition;
             BeginNormalPaletteFade(~a, 0, 0, 0x10, RGB_BLACK);
             gTasks[taskId].func = sub_80BC2D4;
             PlaySE(SE_PIN);
@@ -1614,7 +1619,7 @@ void sub_80BBEB8(u8 taskId)
         else if (gMain.newKeys & SELECT_BUTTON)
         {
             BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 0x10, RGB_BLACK);
-            gTasks[taskId].data[0] = sub_80C1258();
+            gTasks[taskId].data[0] = LoadSearchMenu();
             sPokedexView->unk64E = 0;
             gTasks[taskId].func = sub_80BBD1C;
             PlaySE(SE_PC_LOGIN);
@@ -1712,7 +1717,7 @@ void sub_80BC2D4(u8 taskId)
     if (gSprites[sPokedexView->selectedMonSpriteId].pos1.x == 48 && gSprites[sPokedexView->selectedMonSpriteId].pos1.y == 56)
     {
         sPokedexView->unk64B = sPokedexView->unk64A;
-        gTasks[taskId].data[0] = sub_80BE91C(&sPokedexView->pokedexList[sPokedexView->selectedPokemon], sPokedexView->selectedMonSpriteId);
+        gTasks[taskId].data[0] = SetupInfoScreen(&sPokedexView->pokedexList[sPokedexView->selectedPokemon], sPokedexView->selectedMonSpriteId);
         sPokedexView->selectedMonSpriteId = -1;
         gTasks[taskId].func = sub_80BC360;
     }
@@ -1774,7 +1779,7 @@ bool8 sub_80BC514(u8 a)
             sub_80C09B0(0);
             SetGpuReg(REG_OFFSET_BG2VOFS, sPokedexView->initialVOffset);
             ResetBgsAndClearDma3BusyFlags(0);
-            InitBgsFromTemplates(0, gBgTemplates_0855D298, 4);
+            InitBgsFromTemplates(0, sPokedex_BgTemplate, 4);
             SetBgTilemapBuffer(3, AllocZeroed(0x800));
             SetBgTilemapBuffer(2, AllocZeroed(0x800));
             SetBgTilemapBuffer(1, AllocZeroed(0x800));
@@ -2690,7 +2695,7 @@ void sub_80BE44C(struct Sprite *sprite)
 }
 
 //Move Pokemon into position for description page
-void sub_80BE470(struct Sprite *sprite)
+void MoveMonIntoPosition(struct Sprite *sprite)
 {
     sprite->oam.priority = 0;
     sprite->oam.affineMode = 0;
@@ -2860,25 +2865,27 @@ void sub_80BE8DC(const u8* str, u8 left, u8 top)
     AddTextPrinterParameterized4(0, 1, left, top, 0, 0, color, -1, str);
 }
 
-u8 sub_80BE91C(struct PokedexListItem* item, u8 b)
+#define tMonSpriteId data[4]
+
+u8 SetupInfoScreen(struct PokedexListItem* item, u8 monSpriteId)
 {
     u8 taskId;
 
     sPokedexListItem = item;
-    taskId = CreateTask(sub_80BEA24, 0);
+    taskId = CreateTask(LoadInfoScreen, 0);
     gTasks[taskId].data[0] = 0;
     gTasks[taskId].data[1] = 1;
     gTasks[taskId].data[2] = 0;
     gTasks[taskId].data[3] = 0;
-    gTasks[taskId].data[4] = b;
+    gTasks[taskId].tMonSpriteId = monSpriteId;
     gTasks[taskId].data[5] = 255;
     ResetBgsAndClearDma3BusyFlags(0);
-    InitBgsFromTemplates(0, gUnknown_0856E630, 4);
+    InitBgsFromTemplates(0, sInfoScreen_BgTemplate, 4);
     SetBgTilemapBuffer(3, AllocZeroed(0x800));
     SetBgTilemapBuffer(2, AllocZeroed(0x800));
     SetBgTilemapBuffer(1, AllocZeroed(0x800));
     SetBgTilemapBuffer(0, AllocZeroed(0x800));
-    InitWindows(gUnknown_0856E640);
+    InitWindows(sInfoScreen_WindowTemplates);
     DeactivateAllTextPrinters();
 
     return taskId;
@@ -2886,7 +2893,7 @@ u8 sub_80BE91C(struct PokedexListItem* item, u8 b)
 
 bool8 sub_80BE9C4(u8 taskId)
 {
-    if (gTasks[taskId].data[0] == 0 && gTasks[taskId].func == sub_80BEDF4)
+    if (gTasks[taskId].data[0] == 0 && gTasks[taskId].func == ChangePokedexScreen)
         return FALSE;
     else
         return TRUE;
@@ -2902,7 +2909,7 @@ u8 sub_80BE9F8(struct PokedexListItem *item, u8 b)
     return b;
 }
 
-void sub_80BEA24(u8 taskId)
+void LoadInfoScreen(u8 taskId)
 {
     switch (gMain.state)
     {
@@ -2956,8 +2963,8 @@ void sub_80BEA24(u8 taskId)
         case 5:
             if (gTasks[taskId].data[1] == 0)
             {
-                gTasks[taskId].data[4] = (u16)CreateMonSpriteFromNationalDexNumber(sPokedexListItem->dexNum, 48, 56, 0);
-                gSprites[gTasks[taskId].data[4]].oam.priority = 0;
+                gTasks[taskId].tMonSpriteId = (u16)CreateMonSpriteFromNationalDexNumber(sPokedexListItem->dexNum, 48, 56, 0);
+                gSprites[gTasks[taskId].tMonSpriteId].oam.priority = 0;
             }
             gMain.state++;
             break;
@@ -2968,7 +2975,7 @@ void sub_80BEA24(u8 taskId)
                 if (gTasks[taskId].data[2] != 0)
                     r3 = 0x14;
                 if (gTasks[taskId].data[1] != 0)
-                    r3 |= (1 << (gSprites[gTasks[taskId].data[4]].oam.paletteNum + 16));
+                    r3 |= (1 << (gSprites[gTasks[taskId].tMonSpriteId].oam.paletteNum + 16));
                 BeginNormalPaletteFade(~r3, 0, 16, 0, RGB_BLACK);
                 SetVBlankCallback(gUnknown_030060B4);
                 gMain.state++;
@@ -3009,7 +3016,7 @@ void sub_80BEA24(u8 taskId)
             gTasks[taskId].data[1] = 0;
             gTasks[taskId].data[2] = 1;
             gTasks[taskId].data[3] = 1;
-            gTasks[taskId].func = sub_80BEDF4;
+            gTasks[taskId].func = ChangePokedexScreen;
             gMain.state = 0;
             break;
     }
@@ -3033,19 +3040,19 @@ void sub_80BEDB0(void)
         Free(r0);
 }
 
-void sub_80BEDF4(u8 taskId)
+void ChangePokedexScreen(u8 taskId)
 {
     if (gTasks[taskId].data[0] != 0)
     {
         BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
-        gTasks[taskId].func = sub_80BF038;
+        gTasks[taskId].func = BeginChangeInfoScreen;
         PlaySE(SE_Z_SCROLL);
         return;
     }
     if (gMain.newKeys & B_BUTTON)
     {
         BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
-        gTasks[taskId].func = sub_80BF070;
+        gTasks[taskId].func = BeginReturnToPokedex;
         PlaySE(SE_PC_OFF);
         return;
     }
@@ -3056,13 +3063,13 @@ void sub_80BEDF4(u8 taskId)
             case AREA_SCREEN:
                 BeginNormalPaletteFade(0xFFFFFFEB, 0, 0, 16, RGB_BLACK);
                 sPokedexView->unk64E = 1;
-                gTasks[taskId].func = sub_80BEFD0;
+                gTasks[taskId].func = LoadSelectedScreen;
                 PlaySE(SE_PIN);
                 break;
             case CRY_SCREEN:
                 BeginNormalPaletteFade(0xFFFFFFEB, 0, 0, 0x10, RGB_BLACK);
                 sPokedexView->unk64E = 2;
-                gTasks[taskId].func = sub_80BEFD0;
+                gTasks[taskId].func = LoadSelectedScreen;
                 PlaySE(SE_PIN);
                 break;
             case SIZE_SCREEN:
@@ -3074,13 +3081,13 @@ void sub_80BEDF4(u8 taskId)
                 {
                     BeginNormalPaletteFade(0xFFFFFFEB, 0, 0, 0x10, RGB_BLACK);
                     sPokedexView->unk64E = 3;
-                    gTasks[taskId].func = sub_80BEFD0;
+                    gTasks[taskId].func = LoadSelectedScreen;
                     PlaySE(SE_PIN);
                 }
                 break;
             case CANCEL_SCREEN:
                 BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 0x10, RGB_BLACK);
-                gTasks[taskId].func = sub_80BF070;
+                gTasks[taskId].func = BeginReturnToPokedex;
                 PlaySE(SE_PC_OFF);
                 break;
         }
@@ -3106,47 +3113,47 @@ void sub_80BEDF4(u8 taskId)
     }
 }
 
-void sub_80BEFD0(u8 taskId)
+void LoadSelectedScreen(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
-        FreeAndDestroyMonPicSprite(gTasks[taskId].data[4]);
+        FreeAndDestroyMonPicSprite(gTasks[taskId].tMonSpriteId);
         switch (sPokedexView->unk64E)
         {
             case 1:
             default:
-                gTasks[taskId].func = sub_80BF0AC;
+                gTasks[taskId].func = LoadAreaScreen;
                 break;
             case 2:
-                gTasks[taskId].func = sub_80BF250;
+                gTasks[taskId].func = LoadCryScreen;
                 break;
             case 3:
-                gTasks[taskId].func = sub_80BF82C;
+                gTasks[taskId].func = LoadSizeScreen;
                 break;
         }
     }
 }
 
-void sub_80BF038(u8 taskId)
+void BeginChangeInfoScreen(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
-        FreeAndDestroyMonPicSprite(gTasks[taskId].data[4]);
-        gTasks[taskId].func = sub_80BEA24;
+        FreeAndDestroyMonPicSprite(gTasks[taskId].tMonSpriteId);
+        gTasks[taskId].func = LoadInfoScreen;
     }
 }
 
-void sub_80BF070(u8 taskId)
+void BeginReturnToPokedex(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
-        FreeAndDestroyMonPicSprite(gTasks[taskId].data[4]);
+        FreeAndDestroyMonPicSprite(gTasks[taskId].tMonSpriteId);
         sub_80BEDB0();
         DestroyTask(taskId);
     }
 }
 
-void sub_80BF0AC(u8 taskId)
+void LoadAreaScreen(u8 taskId)
 {
     switch (gMain.state)
     {
@@ -3193,16 +3200,16 @@ void sub_80BF1EC(u8 taskId)
         {
             case 1:
             default:
-                gTasks[taskId].func = sub_80BEA24;
+                gTasks[taskId].func = LoadInfoScreen;
                 break;
             case 2:
-                gTasks[taskId].func = sub_80BF250;
+                gTasks[taskId].func = LoadCryScreen;
                 break;
         }
     }
 }
 
-void sub_80BF250(u8 taskId)
+void LoadCryScreen(u8 taskId)
 {
     switch (gMain.state)
     {
@@ -3222,10 +3229,10 @@ void sub_80BF250(u8 taskId)
         case 1:
             DecompressAndLoadBgGfxUsingHeap(3, &gPokedexMenu_Gfx, 0x2000, 0, 0);
             CopyToBgTilemapBuffer(3, &gPokedexTilemap_CryScreen, 0, 0);
-            FillWindowPixelBuffer(0, PIXEL_FILL(0));
-            PutWindowTilemap(0);
-            PutWindowTilemap(3);
-            PutWindowTilemap(2);
+            FillWindowPixelBuffer(WIN_INFO, PIXEL_FILL(0));
+            PutWindowTilemap(WIN_INFO);
+            PutWindowTilemap(WIN_VU_METER);
+            PutWindowTilemap(WIN_CRY_WAVE);
             gMain.state++;
             break;
         case 2:
@@ -3244,8 +3251,8 @@ void sub_80BF250(u8 taskId)
             gMain.state++;
             break;
         case 5:
-            gTasks[taskId].data[4] = CreateMonSpriteFromNationalDexNumber(sPokedexListItem->dexNum, 48, 56, 0);
-            gSprites[gTasks[taskId].data[4]].oam.priority = 0;
+            gTasks[taskId].tMonSpriteId = CreateMonSpriteFromNationalDexNumber(sPokedexListItem->dexNum, 48, 56, 0);
+            gSprites[gTasks[taskId].tMonSpriteId].oam.priority = 0;
             gDexCryScreenState = 0;
             gMain.state++;
             break;
@@ -3274,8 +3281,8 @@ void sub_80BF250(u8 taskId)
                 spC.yPos = 3;
                 if (sub_8145850(&spC, 3) != 0)
                     gMain.state++;
-                CopyWindowToVram(3, 2);
-                CopyWindowToVram(0, 3);
+                CopyWindowToVram(WIN_VU_METER, 2);
+                CopyWindowToVram(WIN_INFO, 3);
                 CopyBgTilemapBufferToVram(0);
                 CopyBgTilemapBufferToVram(1);
                 CopyBgTilemapBufferToVram(2);
@@ -3367,18 +3374,18 @@ void sub_80BF790(u8 taskId)
     if (!gPaletteFade.active)
     {
         sub_8145914();
-        FreeAndDestroyMonPicSprite(gTasks[taskId].data[4]);
+        FreeAndDestroyMonPicSprite(gTasks[taskId].tMonSpriteId);
         switch (sPokedexView->unk64E)
         {
             default:
             case 1:
-                gTasks[taskId].func = sub_80BEA24;
+                gTasks[taskId].func = LoadInfoScreen;
                 break;
             case 2:
-                gTasks[taskId].func = sub_80BF0AC;
+                gTasks[taskId].func = LoadAreaScreen;
                 break;
             case 3:
-                gTasks[taskId].func = sub_80BF82C;
+                gTasks[taskId].func = LoadSizeScreen;
                 break;
         }
     }
@@ -3395,7 +3402,7 @@ void sub_80BF7FC(u8 a)
     LoadPalette(&unk, 0x5D, 2);
 }
 
-void sub_80BF82C(u8 taskId)
+void LoadSizeScreen(u8 taskId)
 {
     u8 spriteId;
 
@@ -3416,8 +3423,8 @@ void sub_80BF82C(u8 taskId)
         case 1:
             DecompressAndLoadBgGfxUsingHeap(3, gPokedexMenu_Gfx, 0x2000, 0, 0);
             CopyToBgTilemapBuffer(3, gPokedexTilemap_SizeScreen, 0, 0);
-            FillWindowPixelBuffer(0, PIXEL_FILL(0));
-            PutWindowTilemap(0);
+            FillWindowPixelBuffer(WIN_INFO, PIXEL_FILL(0));
+            PutWindowTilemap(WIN_INFO);
             gMain.state++;
             break;
         case 2:
@@ -3459,8 +3466,8 @@ void sub_80BF82C(u8 taskId)
             gSprites[spriteId].pos2.y = gPokedexEntries[sPokedexListItem->dexNum].pokemonOffset;
             SetOamMatrix(2, gPokedexEntries[sPokedexListItem->dexNum].pokemonScale, 0, 0, gPokedexEntries[sPokedexListItem->dexNum].pokemonScale);
             LoadPalette(gUnknown_0856E610, (gSprites[spriteId].oam.paletteNum + 16) * 16, 0x20);
-            gTasks[taskId].data[4] = spriteId;
-            CopyWindowToVram(0, 3);
+            gTasks[taskId].tMonSpriteId = spriteId;
+            CopyWindowToVram(WIN_INFO, 3);
             CopyBgTilemapBufferToVram(1);
             CopyBgTilemapBufferToVram(2);
             CopyBgTilemapBufferToVram(3);
@@ -3516,16 +3523,16 @@ void sub_80BFC78(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
-        FreeAndDestroyMonPicSprite(gTasks[taskId].data[4]);
+        FreeAndDestroyMonPicSprite(gTasks[taskId].tMonSpriteId);
         FreeAndDestroyTrainerPicSprite(gTasks[taskId].data[5]);
         switch (sPokedexView->unk64E)
         {
             default:
             case 1:
-                gTasks[taskId].func = sub_80BEA24;
+                gTasks[taskId].func = LoadInfoScreen;
                 break;
             case 2:
-                gTasks[taskId].func = sub_80BF250;
+                gTasks[taskId].func = LoadCryScreen;
                 break;
         }
     }
@@ -3729,7 +3736,7 @@ _080BFDB4:\n\
 
 u8 CreateDexDisplayMonDataTask(u16 dexNum, u32 b, u32 c)
 {
-    u8 taskId = CreateTask(sub_80BFE38, 0);
+    u8 taskId = CreateTask(Task_DisplayNewMonData, 0);
 
     gTasks[taskId].data[0] = 0;
     gTasks[taskId].data[1] = dexNum;
@@ -3740,7 +3747,7 @@ u8 CreateDexDisplayMonDataTask(u16 dexNum, u32 b, u32 c)
     return taskId;
 }
 
-void sub_80BFE38(u8 taskId)
+static void Task_DisplayNewMonData(u8 taskId)
 {
     u8 spriteId;
     u16 dexNum = gTasks[taskId].data[1];
@@ -3755,10 +3762,10 @@ void sub_80BFE38(u8 taskId)
                 SetVBlankCallback(NULL);
                 sub_80C09B0(0x100);
                 ResetBgsAndClearDma3BusyFlags(0);
-                InitBgsFromTemplates(0, gUnknown_0856E668, 2);
+                InitBgsFromTemplates(0, sNewEntryInfoScreen_BgTemplate, 2);
                 SetBgTilemapBuffer(3, AllocZeroed(0x800));
                 SetBgTilemapBuffer(2, AllocZeroed(0x800));
-                InitWindows(gUnknown_0856E670);
+                InitWindows(sNewEntryInfoScreen_WindowTemplates);
                 DeactivateAllTextPrinters();
                 gTasks[taskId].data[0] = 1;
             }
@@ -3766,11 +3773,11 @@ void sub_80BFE38(u8 taskId)
         case 1:
             DecompressAndLoadBgGfxUsingHeap(3, gPokedexMenu_Gfx, 0x2000, 0, 0);
             CopyToBgTilemapBuffer(3, gPokedexTilemap_DescriptionScreen, 0, 0);
-            FillWindowPixelBuffer(0, PIXEL_FILL(0));
-            PutWindowTilemap(0);
-            PutWindowTilemap(1);
+            FillWindowPixelBuffer(WIN_INFO, PIXEL_FILL(0));
+            PutWindowTilemap(WIN_INFO);
+            PutWindowTilemap(WIN_FOOTPRINT);
             sub_80C0D30(1, gTasks[taskId].data[1]);
-            CopyWindowToVram(1, 2);
+            CopyWindowToVram(WIN_FOOTPRINT, 2);
             ResetPaletteFade();
             LoadPokedexBgPalette(0);
             gTasks[taskId].data[0]++;
@@ -3780,7 +3787,7 @@ void sub_80BFE38(u8 taskId)
             break;
         case 3:
             sub_80C020C(dexNum, IsNationalPokedexEnabled(), 1, 1);
-            CopyWindowToVram(0, 3);
+            CopyWindowToVram(WIN_INFO, 3);
             CopyBgTilemapBufferToVram(2);
             CopyBgTilemapBufferToVram(3);
             gTasks[taskId].data[0]++;
@@ -4764,9 +4771,9 @@ int sub_80C0F30(u8 dexMode, u8 sortMode, u8 abcGroup, u8 bodyColor, u8 type1, u8
     return resultsCount;
 }
 
-u8 sub_80C1258(void)
+u8 LoadSearchMenu(void)
 {
-    return CreateTask(sub_80C12E0, 0);
+    return CreateTask(Task_LoadSearchMenu, 0);
 }
 
 void sub_80C1270(const u8 *str, u32 left, u32 top)
@@ -4784,7 +4791,7 @@ void sub_80C12B0(u32 x, u32 y, u32 width, u32 height)
     FillWindowPixelRect(0, PIXEL_FILL(0), x, y, width, height);
 }
 
-void sub_80C12E0(u8 taskId)
+void Task_LoadSearchMenu(u8 taskId)
 {
     u16 i;
 
@@ -4797,12 +4804,12 @@ void sub_80C12E0(u8 taskId)
                 sPokedexView->unk64A = 2;
                 sub_80C09B0(0);
                 ResetBgsAndClearDma3BusyFlags(0);
-                InitBgsFromTemplates(0, gUnknown_0856EFF8, 4);
+                InitBgsFromTemplates(0, sSearchMenu_BgTemplate, 4);
                 SetBgTilemapBuffer(3, AllocZeroed(0x800));
                 SetBgTilemapBuffer(2, AllocZeroed(0x800));
                 SetBgTilemapBuffer(1, AllocZeroed(0x800));
                 SetBgTilemapBuffer(0, AllocZeroed(0x800));
-                InitWindows(gUnknown_0856F008);
+                InitWindows(sSearchMenu_WindowTemplate);
                 DeactivateAllTextPrinters();
                 PutWindowTilemap(0);
                 DecompressAndLoadBgGfxUsingHeap(3, gPokedexSearchMenu_Gfx, 0x2000, 0, 0);
