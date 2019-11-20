@@ -220,7 +220,7 @@ struct Apprentice
 {
     u8 id:5;
     u8 lvlMode:2; // + 1
-    u8 field_1;
+    u8 numQuestions;
     u8 number;
     struct ApprenticeMon party[MULTI_PARTY_SIZE];
     u16 speechWon[EASY_CHAT_BATTLE_WORDS_COUNT];
@@ -403,13 +403,13 @@ struct BattleFrontier
     /*0xEFC*/ struct FrontierMonData field_EFC[3];
 };
 
-struct Sav2_B8
+struct ApprenticeQuestion
 {
-    u8 unk0_0:2;
-    u8 unk0_1:2;
-    u8 unk0_2:2;
-    u8 unk0_3:2;
-    u16 unk2;
+    u8 questionId:2;
+    u8 monId:2;
+    u8 moveSlot:2;
+    u8 suggestedChange:2; // TRUE if told to use held item or second move, FALSE if told to use no item or first move
+    u16 data; // used both as an itemId and a moveId
 };
 
 struct PlayersApprentice
@@ -417,12 +417,12 @@ struct PlayersApprentice
     /*0xB0*/ u8 id;
     /*0xB1*/ u8 lvlMode:2;  //0: Unassigned, 1: Lv 50, 2: Open Lv
     /*0xB1*/ u8 questionsAnswered:4;
-    /*0xB1*/ u8 firstMonId:2;
-    /*0xB2*/ u8 field_B2_0:3;
-    /*0xB2*/ u8 field_B2_1:2;
-    /*0xB3*/ u8 field_B3;
-    /*0xB4*/ u8 monIds[MULTI_PARTY_SIZE];
-    /*0xB8*/ struct Sav2_B8 field_B8[9];
+    /*0xB1*/ u8 leadMonId:2;
+    /*0xB2*/ u8 party:3;
+    /*0xB2*/ u8 field_B2_1:2; 
+    /*0xB3*/ u8 unused;
+    /*0xB4*/ u8 speciesIds[MULTI_PARTY_SIZE];
+    /*0xB8*/ struct ApprenticeQuestion questions[APPRENTICE_MAX_QUESTIONS];
 };
 
 struct RankingHall1P

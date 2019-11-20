@@ -5,7 +5,7 @@
 
 struct ApprenticeTrainer
 {
-    u8 name[6][PLAYER_NAME_LENGTH + 1]; // For all six languages.
+    u8 name[NUM_LANGUAGES - 1][PLAYER_NAME_LENGTH + 1]; // For all languages except the unused one.
     u16 otId;
     u8 facilityClass;
     u16 species[APPRENTICE_SPECIES_COUNT];
@@ -15,7 +15,7 @@ struct ApprenticeTrainer
 
 extern const struct ApprenticeTrainer gApprentices[];
 
-void CopyFriendsApprenticeChallengeText(u8 saveblockApprenticeId);
+void BufferApprenticeChallengeText(u8 saveApprenticeId);
 void Apprentice_EnableBothScriptContexts(void);
 void ResetApprenticeStruct(struct Apprentice *apprentice);
 void ResetAllApprenticeData(void);

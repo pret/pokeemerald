@@ -1698,7 +1698,7 @@ void CopyFrontierTrainerText(u8 whichText, u16 trainerId)
         else if (trainerId < TRAINER_RECORD_MIXING_APPRENTICE)
             FrontierSpeechToString(gSaveBlock2Ptr->frontier.towerRecords[trainerId - TRAINER_RECORD_MIXING_FRIEND].greeting);
         else
-            CopyFriendsApprenticeChallengeText(trainerId - TRAINER_RECORD_MIXING_APPRENTICE);
+            BufferApprenticeChallengeText(trainerId - TRAINER_RECORD_MIXING_APPRENTICE);
         break;
     case FRONTIER_PLAYER_LOST_TEXT:
         if (trainerId == TRAINER_EREADER)

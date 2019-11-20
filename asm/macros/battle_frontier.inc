@@ -60,8 +60,13 @@ special CallApprenticeFunction
 waitstate
 .endm
 
-.macro apprentice_3
-setvar VAR_0x8004, APPRENTICE_FUNC_3
+.macro apprentice_shufflespecies
+setvar VAR_0x8004, APPRENTICE_FUNC_SHUFFLE_SPECIES
+special CallApprenticeFunction
+.endm
+
+.macro apprentice_randomizequestions
+setvar VAR_0x8004, APPRENTICE_FUNC_RANDOMIZE_QUESTIONS
 special CallApprenticeFunction
 .endm
 
@@ -129,9 +134,9 @@ setvar VAR_0x8004, APPRENTICE_FUNC_SET_MOVE
 special CallApprenticeFunction
 .endm
 
-.macro apprentice_setfirstmon  monId:req
+.macro apprentice_setleadmon  monId:req
 copyvar VAR_0x8005, \monId
-setvar VAR_0x8004, APPRENTICE_FUNC_SET_FIRST_MON
+setvar VAR_0x8004, APPRENTICE_FUNC_SET_LEAD_MON
 special CallApprenticeFunction
 .endm
 
@@ -141,6 +146,16 @@ special CallApprenticeFunction
 waitstate
 .endm
 
+.macro apprentice_trysetitem
+setvar VAR_0x8004, APPRENTICE_FUNC_TRY_SET_HELD_ITEM
+special CallApprenticeFunction
+.endm
+
+.macro apprentice_save
+setvar VAR_0x8004, APPRENTICE_FUNC_SAVE
+special CallApprenticeFunction
+.endm
+
 .macro apprentice_setgfx
 setvar VAR_0x8004, APPRENTICE_FUNC_SET_GFX
 special CallApprenticeFunction
@@ -148,5 +163,10 @@ special CallApprenticeFunction
 
 .macro apprentice_shouldleave
 setvar VAR_0x8004, APPRENTICE_FUNC_SHOULD_LEAVE
+special CallApprenticeFunction
+.endm
+
+.macro apprentice_shiftsaved
+setvar VAR_0x8004, APPRENTICE_FUNC_SHIFT_SAVED
 special CallApprenticeFunction
 .endm

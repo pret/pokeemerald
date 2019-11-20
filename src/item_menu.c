@@ -495,20 +495,20 @@ void sub_81AAC14(void)
 void ApprenticeOpenBagMenu(void)
 {
     GoToBagMenu(RETURN_LOCATION_FIELD_6, POCKETS_COUNT, CB2_ApprenticeExitBagMenu);
-    gSpecialVar_0x8005 = 0;
-    gSpecialVar_Result = 0;
+    gSpecialVar_0x8005 = ITEM_NONE;
+    gSpecialVar_Result = FALSE;
 }
 
 void FavorLadyOpenBagMenu(void)
 {
     GoToBagMenu(RETURN_LOCATION_FIELD_4, POCKETS_COUNT, CB2_FavorLadyExitBagMenu);
-    gSpecialVar_Result = 0;
+    gSpecialVar_Result = FALSE;
 }
 
 void QuizLadyOpenBagMenu(void)
 {
     GoToBagMenu(RETURN_LOCATION_FIELD_5, POCKETS_COUNT, CB2_QuizLadyExitBagMenu);
-    gSpecialVar_Result = 0;
+    gSpecialVar_Result = FALSE;
 }
 
 void GoToBagMenu(u8 bagMenuType, u8 pocketId, void ( *postExitMenuMainCallback2)())

@@ -34,10 +34,10 @@ Apprentice_EventScript_WhichLvlMode: @ 82B6925
 	apprentice_msg FALSE, APPRENTICE_MSG_WHICH_LVL_MODE
 	apprentice_menu APPRENTICE_ASK_WHICH_LEVEL
 	apprentice_setlvlmode VAR_RESULT
-	apprentice_3
+	apprentice_shufflespecies
 	apprentice_buff 0, APPRENTICE_BUFF_LEVEL
 	apprentice_msg TRUE, APPRENTICE_MSG_THANKS_LVL_MODE
-	call Apprentice_EventScript_Hide
+	call Apprentice_EventScript_SetHideFlags
 	release
 	releaseall
 	switch VAR_FACING
@@ -70,7 +70,7 @@ Apprentice_EventScript_UseWhichMon: @ 82B69D3
 	apprentice_buffv 0, VAR_0x8007
 	apprentice_freequestion
 	apprentice_msg TRUE, APPRENTICE_MSG_THANKS_MON
-	call Apprentice_EventScript_Hide
+	call Apprentice_EventScript_SetHideFlags
 	release
 	releaseall
 	switch VAR_FACING
@@ -87,8 +87,7 @@ Apprentice_EventScript_ChoseSecondMon: @ 82B6AC0
 	return
 
 Apprentice_EventScript_LastMonSelected: @ 82B6AC6
-	setvar VAR_0x8004, APPRENTICE_FUNC_4
-	special CallApprenticeFunction
+	apprentice_randomizequestions
 	return
 
 Apprentice_EventScript_UseWhatHeldItem: @ 82B6ACF
@@ -100,16 +99,15 @@ Apprentice_EventScript_ChooseHoldItem: @ 82B6B09
 	fadescreen 1
 	setvar VAR_RESULT, 0
 	apprentice_openbag
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, FALSE
 	goto_if_eq Apprentice_EventScript_ConfirmHoldNothing
-	setvar VAR_0x8004, APPRENTICE_FUNC_20
-	special CallApprenticeFunction
+	apprentice_trysetitem
 	compare VAR_RESULT, FALSE
 	goto_if_eq Apprentice_EventScript_AlreadySuggestedItem
 	apprentice_buff 0, APPRENTICE_BUFF_ITEM
 	apprentice_msg TRUE, APPRENTICE_MSG_THANKS_HELD_ITEM
 	apprentice_answeredquestion
-	call Apprentice_EventScript_Hide
+	call Apprentice_EventScript_SetHideFlags
 	release
 	releaseall
 	switch VAR_FACING
@@ -128,7 +126,7 @@ Apprentice_EventScript_ConfirmHoldNothing: @ 82B6B81
 Apprentice_EventScript_HoldNothing: @ 82B6BD4
 	apprentice_msg TRUE, APPRENTICE_MSG_THANKS_NO_HELD_ITEM
 	apprentice_answeredquestion
-	call Apprentice_EventScript_Hide
+	call Apprentice_EventScript_SetHideFlags
 	release
 	releaseall
 	switch VAR_FACING
@@ -136,6 +134,8 @@ Apprentice_EventScript_HoldNothing: @ 82B6BD4
 	goto Apprentice_EventScript_Leave
 	end
 
+@ Because Battle Tower mons may not hold the same item, the player must suggest a
+@ different item if theyve already told the Apprentice to use it for another mon
 Apprentice_EventScript_AlreadySuggestedItem: @ 82B6C0C
 	apprentice_initquestion APPRENTICE_QUESTION_WHAT_ITEM
 	apprentice_buff 0, APPRENTICE_BUFF_ITEM
@@ -157,15 +157,15 @@ Apprentice_EventScript_UseWhichMove: @ 82B6C77
 	apprentice_menu APPRENTICE_ASK_MOVES
 	copyvar VAR_0x8005, VAR_RESULT
 	compare VAR_0x8005, 0
-	call_if_eq Apprentice_EventScript_ChoseFirstMove
+	call_if_eq Apprentice_EventScript_ChoseMove1
 	compare VAR_0x8005, 1
-	call_if_eq Apprentice_EventScript_ChoseSecondMove
+	call_if_eq Apprentice_EventScript_ChoseMove2
 	apprentice_setmove
 	apprentice_answeredquestion
 	apprentice_buffv 0, VAR_0x8007
 	apprentice_freequestion
 	apprentice_msg TRUE, APPRENTICE_MSG_THANKS_MOVE
-	call Apprentice_EventScript_Hide
+	call Apprentice_EventScript_SetHideFlags
 	release
 	releaseall
 	switch VAR_FACING
@@ -173,22 +173,22 @@ Apprentice_EventScript_UseWhichMove: @ 82B6C77
 	goto Apprentice_EventScript_Leave
 	end
 
-Apprentice_EventScript_ChoseFirstMove: @ 82B6D50
+Apprentice_EventScript_ChoseMove1: @ 82B6D50
 	setvar VAR_0x8007, APPRENTICE_BUFF_MOVE1
 	return
 
-Apprentice_EventScript_ChoseSecondMove: @ 82B6D56
+Apprentice_EventScript_ChoseMove2: @ 82B6D56
 	setvar VAR_0x8007, APPRENTICE_BUFF_MOVE2
 	return
 
 Apprentice_EventScript_PutWhichMonFirst: @ 82B6D5C
 	apprentice_msg FALSE, APPRENTICE_MSG_WHICH_MON_FIRST
 	apprentice_menu APPRENTICE_ASK_3SPECIES
-	apprentice_setfirstmon VAR_RESULT
+	apprentice_setleadmon VAR_RESULT
 	apprentice_answeredquestion
-	apprentice_buff 0, APPRENTICE_BUFF_FIRST_MON_SPECIES
+	apprentice_buff 0, APPRENTICE_BUFF_LEAD_MON_SPECIES
 	apprentice_msg TRUE, APPRENTICE_MSG_THANKS_MON_FIRST
-	call Apprentice_EventScript_Hide
+	call Apprentice_EventScript_SetHideFlags
 	release
 	releaseall
 	switch VAR_FACING
@@ -199,18 +199,16 @@ Apprentice_EventScript_PutWhichMonFirst: @ 82B6D5C
 @ Last question, after which the Apprentice leaves (and is saved) to be replaced by another
 Apprentice_EventScript_PickWinSpeech: @ 82B6DD4
 	apprentice_msg TRUE, APPRENTICE_MSG_PICK_WIN_SPEECH
-	setvar VAR_0x8004, APPRENTICE_FUNC_25
-	special CallApprenticeFunction
+	apprentice_shiftsaved
 	setvar VAR_0x8004, EASY_CHAT_TYPE_APPRENTICE
 	call Common_ShowEasyChatScreen
 	lock
 	faceplayer
-	setvar VAR_0x8004, APPRENTICE_FUNC_21
-	special CallApprenticeFunction
+	apprentice_save
 	apprentice_buff 0, APPRENTICE_BUFF_WIN_SPEECH
 	apprentice_msg TRUE, APPRENTICE_MSG_THANKS_WIN_SPEECH
 	apprentice_reset
-	call Apprentice_EventScript_Hide
+	call Apprentice_EventScript_SetHideFlags
 	release
 	releaseall
 	switch VAR_FACING
@@ -218,7 +216,7 @@ Apprentice_EventScript_PickWinSpeech: @ 82B6DD4
 	goto Apprentice_EventScript_Leave
 	end
 
-Apprentice_EventScript_Hide: @ 82B6E4D
+Apprentice_EventScript_SetHideFlags: @ 82B6E4D
 	setflag FLAG_HIDE_APPRENTICE
 	setflag FLAG_DAILY_APPRENTICE_LEAVES
 	return
