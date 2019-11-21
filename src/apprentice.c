@@ -31,10 +31,37 @@
 #include "constants/trainers.h"
 #include "constants/moves.h"
 
+/* Summary of Apprentice, because (as of writing at least) its not very well documented online
+ *
+ * ## Basic info
+ * In the Battle Tower lobby there is an NPC which asks to be taught by the player
+ * They can be any 1 of 16 NPC trainers, each with their own name, class, and set of possible party species
+ * They ask the player a series of questions once per day, and eventually depart the lobby to be replaced by a new Apprentice
+ *
+ * ## Initial Questions
+ * The first question they always ask is a request to be taught, which cannot be rejected
+ * The second question (which follows immediately after) is whether they should participate in Battle Tower Lv 50 or Open Lv
+ * After these opening questions they always ask the player to choose between 2 mons, which they repeat 3 times
+ *
+ * ## Random Questions
+ * After choosing 3 mons for them, the Apprentice will randomly ask between 1 and 8 questions of 4 different types, as follows
+ * - Asking which mon to lead with, which they will only ask at most once
+ * - Asking which move a mon should use, which they will ask at most 5 times
+ * - Asking what held item to give to a mon, which they will ask at most 3 times (once for each mon)
+ * - Asking what they should say when they win a battle, which will always be their final question before departing
+ * 
+ * ## After departing
+ * After telling them what they should say when they win a battle they will leave the lobby for a final time
+ * They will then be replaced by a new random Apprentice (they can repeat)
+ * Up to 4 old Apprentices are saved and can be encountered (or partnered with) during challenges of the mode they were told to battle in
+ * They can also be record mixed to and from other Emerald games
+ * Old/record mixed Apprentices are stored in struct Apprentice apprentices of SaveBlock2
+ *   and the current Apprentice is stored in struct PlayersApprentice playerApprentice of SaveBlock2
+ */
+
 #define PLAYER_APPRENTICE gSaveBlock2Ptr->playerApprentice
 #define CURRENT_QUESTION_NUM  PLAYER_APPRENTICE.questionsAnswered - NUM_WHICH_MON_QUESTIONS
 
-// The below a TODO
 struct ApprenticePartyMovesData
 {
     u8 moveCounter;
@@ -373,8 +400,8 @@ static void GetShouldCheckApprenticeGone(void);
 static void ApprenticeGetQuestion(void);
 static void GetNumApprenticePartyMonsAssigned(void);
 static void SetApprenticePartyMon(void);
-static void InitApprenticeQuestionData(void);
-static void FreeApprenticeQuestionData(void);
+static void InitQuestionData(void);
+static void FreeQuestionData(void);
 static void ApprenticeBufferString(void);
 static void SetApprenticeMonMove(void);
 static void SetLeadApprenticeMon(void);
@@ -1044,32 +1071,32 @@ static const u8 sQuestionPossibilities[] =
 
 static void (* const sApprenticeFunctions[])(void) =
 {
-    [APPRENTICE_FUNC_GAVE_LVLMODE] = Script_GivenApprenticeLvlMode,
-    [APPRENTICE_FUNC_SET_LVLMODE] = Script_SetApprenticeLvlMode,
-    [APPRENTICE_FUNC_SET_ID] = Script_SetApprenticeId,
-    [APPRENTICE_FUNC_SHUFFLE_SPECIES] = ShuffleApprenticeSpecies,
+    [APPRENTICE_FUNC_GAVE_LVLMODE]        = Script_GivenApprenticeLvlMode,
+    [APPRENTICE_FUNC_SET_LVLMODE]         = Script_SetApprenticeLvlMode,
+    [APPRENTICE_FUNC_SET_ID]              = Script_SetApprenticeId,
+    [APPRENTICE_FUNC_SHUFFLE_SPECIES]     = ShuffleApprenticeSpecies,
     [APPRENTICE_FUNC_RANDOMIZE_QUESTIONS] = Script_SetRandomQuestionData,
-    [APPRENTICE_FUNC_ANSWERED_QUESTION] = IncrementQuestionsAnswered,
-    [APPRENTICE_FUNC_IS_FINAL_QUESTION] = IsFinalQuestion,
-    [APPRENTICE_FUNC_MENU] = Script_CreateApprenticeMenu,
-    [APPRENTICE_FUNC_PRINT_MSG] = Script_PrintApprenticeMessage,
-    [APPRENTICE_FUNC_RESET] = Script_ResetPlayerApprentice,
-    [APPRENTICE_FUNC_CHECK_GONE] = GetShouldCheckApprenticeGone,
-    [APPRENTICE_FUNC_GET_QUESTION] = ApprenticeGetQuestion,
-    [APPRENTICE_FUNC_GET_NUM_PARTY_MONS] = GetNumApprenticePartyMonsAssigned,
-    [APPRENTICE_FUNC_SET_PARTY_MON] = SetApprenticePartyMon,
-    [APPRENTICE_FUNC_INIT_QUESTION_DATA] = InitApprenticeQuestionData,
-    [APPRENTICE_FUNC_FREE_QUESTION_DATA] = FreeApprenticeQuestionData,
-    [APPRENTICE_FUNC_BUFFER_STRING] = ApprenticeBufferString,
-    [APPRENTICE_FUNC_SET_MOVE] = SetApprenticeMonMove,
-    [APPRENTICE_FUNC_SET_LEAD_MON] = SetLeadApprenticeMon,
-    [APPRENTICE_FUNC_OPEN_BAG] = Script_ApprenticeOpenBagMenu,
-    [APPRENTICE_FUNC_TRY_SET_HELD_ITEM] = TrySetApprenticeHeldItem,
-    [APPRENTICE_FUNC_SAVE] = SaveApprentice,
-    [APPRENTICE_FUNC_SET_GFX_SAVED] = SetSavedApprenticeTrainerGfxId,
-    [APPRENTICE_FUNC_SET_GFX] = SetPlayerApprenticeTrainerGfxId,
-    [APPRENTICE_FUNC_SHOULD_LEAVE] = GetShouldApprenticeLeave,
-    [APPRENTICE_FUNC_SHIFT_SAVED] = ShiftSavedApprentices,
+    [APPRENTICE_FUNC_ANSWERED_QUESTION]   = IncrementQuestionsAnswered,
+    [APPRENTICE_FUNC_IS_FINAL_QUESTION]   = IsFinalQuestion,
+    [APPRENTICE_FUNC_MENU]                = Script_CreateApprenticeMenu,
+    [APPRENTICE_FUNC_PRINT_MSG]           = Script_PrintApprenticeMessage,
+    [APPRENTICE_FUNC_RESET]               = Script_ResetPlayerApprentice,
+    [APPRENTICE_FUNC_CHECK_GONE]          = GetShouldCheckApprenticeGone,
+    [APPRENTICE_FUNC_GET_QUESTION]        = ApprenticeGetQuestion,
+    [APPRENTICE_FUNC_GET_NUM_PARTY_MONS]  = GetNumApprenticePartyMonsAssigned,
+    [APPRENTICE_FUNC_SET_PARTY_MON]       = SetApprenticePartyMon,
+    [APPRENTICE_FUNC_INIT_QUESTION_DATA]  = InitQuestionData,
+    [APPRENTICE_FUNC_FREE_QUESTION_DATA]  = FreeQuestionData,
+    [APPRENTICE_FUNC_BUFFER_STRING]       = ApprenticeBufferString,
+    [APPRENTICE_FUNC_SET_MOVE]            = SetApprenticeMonMove,
+    [APPRENTICE_FUNC_SET_LEAD_MON]        = SetLeadApprenticeMon,
+    [APPRENTICE_FUNC_OPEN_BAG]            = Script_ApprenticeOpenBagMenu,
+    [APPRENTICE_FUNC_TRY_SET_HELD_ITEM]   = TrySetApprenticeHeldItem,
+    [APPRENTICE_FUNC_SAVE]                = SaveApprentice,
+    [APPRENTICE_FUNC_SET_GFX_SAVED]       = SetSavedApprenticeTrainerGfxId,
+    [APPRENTICE_FUNC_SET_GFX]             = SetPlayerApprenticeTrainerGfxId,
+    [APPRENTICE_FUNC_SHOULD_LEAVE]        = GetShouldApprenticeLeave,
+    [APPRENTICE_FUNC_SHIFT_SAVED]         = ShiftSavedApprentices,
 };
 
 // The first Apprentice can only be one of these
@@ -1079,7 +1106,7 @@ static const u8 sInitialApprenticeIds[8] = {0, 1, 2, 3, 6, 7, 8, 9};
 void BufferApprenticeChallengeText(u8 saveApprenticeId)
 {
     u8 i, num;
-    const u8 *Intro;
+    const u8 *challengeText;
 
     num = gSaveBlock2Ptr->apprentices[saveApprenticeId].number;
     for (i = 0; num != 0 && i < APPRENTICE_COUNT; num /= 10, i++)
@@ -1088,8 +1115,8 @@ void BufferApprenticeChallengeText(u8 saveApprenticeId)
     StringCopy7(gStringVar1, gSaveBlock2Ptr->apprentices[saveApprenticeId].playerName);
     ConvertInternationalString(gStringVar1, gSaveBlock2Ptr->apprentices[saveApprenticeId].language);
     ConvertIntToDecimalStringN(gStringVar2, gSaveBlock2Ptr->apprentices[saveApprenticeId].number, STR_CONV_MODE_RIGHT_ALIGN, i);
-    Intro = sApprenticeChallengeTexts[gSaveBlock2Ptr->apprentices[saveApprenticeId].id];
-    StringExpandPlaceholders(gStringVar4, Intro);
+    challengeText = sApprenticeChallengeTexts[gSaveBlock2Ptr->apprentices[saveApprenticeId].id];
+    StringExpandPlaceholders(gStringVar4, challengeText);
 }
 
 void Apprentice_EnableBothScriptContexts(void)
@@ -1112,7 +1139,7 @@ void ResetAllApprenticeData(void)
 {
     u8 i, j;
 
-    PLAYER_APPRENTICE.field_B2_1 = 0;
+    PLAYER_APPRENTICE.saveId = 0;
     for (i = 0; i < APPRENTICE_COUNT; i++)
     {
         for (j = 0; j < ARRAY_COUNT(gSaveBlock2Ptr->apprentices[i].speechWon); j++)
@@ -1944,7 +1971,7 @@ static void SetApprenticeMonMove(void)
     }
 }
 
-static void InitApprenticeQuestionData(void)
+static void InitQuestionData(void)
 {
     u8 i;
     u8 count = 0;
@@ -1994,7 +2021,7 @@ static void InitApprenticeQuestionData(void)
     }
 }
 
-static void FreeApprenticeQuestionData(void)
+static void FreeQuestionData(void)
 {
     FREE_AND_SET_NULL(gApprenticeQuestionData);
 }
