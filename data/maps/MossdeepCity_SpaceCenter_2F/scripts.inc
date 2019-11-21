@@ -258,7 +258,7 @@ MossdeepCity_SpaceCenter_2F_EventScript_ChoosePartyForMultiBattle:: @ 822400C
 
 MossdeepCity_SpaceCenter_2F_EventScript_DoStevenMultiBattle:: @ 8224032
 	special ReducePlayerPartyToSelectedMons
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_2
+	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_SET_DATA
 	setvar VAR_0x8005, 4
 	special CallFrontierUtilFunc
 	setvar VAR_0x8004, SPECIAL_BATTLE_STEVEN

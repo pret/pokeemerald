@@ -842,7 +842,7 @@ static void InitPyramidChallenge(void)
     bool32 isCurrent;
     u32 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
 
-    gSaveBlock2Ptr->frontier.field_CA8 = 0;
+    gSaveBlock2Ptr->frontier.challengeOutcome = 0;
     gSaveBlock2Ptr->frontier.curChallengeBattleNum = 0;
     gSaveBlock2Ptr->frontier.field_CA9_a = 0;
     if (lvlMode != FRONTIER_LVL_50)
@@ -930,7 +930,7 @@ static void SetBattlePyramidData(void)
 
 static void sub_81A9134(void)
 {
-    gSaveBlock2Ptr->frontier.field_CA8 = gSpecialVar_0x8005;
+    gSaveBlock2Ptr->frontier.challengeOutcome = gSpecialVar_0x8005;
     VarSet(VAR_TEMP_0, 0);
     gSaveBlock2Ptr->frontier.field_CA9_a = 1;
     save_serialize_map();
@@ -1434,7 +1434,7 @@ void sub_81A9E90(void)
     if (InBattlePyramid())
     {
         RestorePyramidPlayerParty();
-        gSaveBlock2Ptr->frontier.field_CA8 = 2;
+        gSaveBlock2Ptr->frontier.challengeOutcome = 2;
         VarSet(VAR_TEMP_E, 0);
         LoadPlayerParty();
     }

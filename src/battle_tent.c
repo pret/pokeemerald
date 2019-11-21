@@ -98,7 +98,7 @@ void sub_81B99B4(void)
 
 static void sub_81B99D4(void)
 {
-    gSaveBlock2Ptr->frontier.field_CA8 = 0;
+    gSaveBlock2Ptr->frontier.challengeOutcome = 0;
     gSaveBlock2Ptr->frontier.curChallengeBattleNum = 0;
     gSaveBlock2Ptr->frontier.field_CA9_a = FALSE;
     SetDynamicWarp(0, gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum, -1);
@@ -128,7 +128,7 @@ static void sub_81B9A90(void)
 
 static void sub_81B9ABC(void)
 {
-    gSaveBlock2Ptr->frontier.field_CA8 = gSpecialVar_0x8005;
+    gSaveBlock2Ptr->frontier.challengeOutcome = gSpecialVar_0x8005;
     VarSet(VAR_TEMP_0, 0);
     gSaveBlock2Ptr->frontier.field_CA9_a = TRUE;
     sub_81A4C30();
@@ -160,7 +160,7 @@ void sub_81B9B80(void)
 
 static void sub_81B9BA0(void)
 {
-    gSaveBlock2Ptr->frontier.field_CA8 = 0;
+    gSaveBlock2Ptr->frontier.challengeOutcome = 0;
     gSaveBlock2Ptr->frontier.curChallengeBattleNum = 0;
     gSaveBlock2Ptr->frontier.field_CA9_a = FALSE;
     SetDynamicWarp(0, gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum, -1);
@@ -178,7 +178,7 @@ static void sub_81B9C10(void)
 
 static void sub_81B9C2C(void)
 {
-    gSaveBlock2Ptr->frontier.field_CA8 = gSpecialVar_0x8005;
+    gSaveBlock2Ptr->frontier.challengeOutcome = gSpecialVar_0x8005;
     VarSet(VAR_TEMP_0, 0);
     gSaveBlock2Ptr->frontier.field_CA9_a = TRUE;
     sub_81A4C30();
@@ -215,7 +215,7 @@ void sub_81B9D08(void)
 
 static void sub_81B9D28(void)
 {
-    gSaveBlock2Ptr->frontier.field_CA8 = 0;
+    gSaveBlock2Ptr->frontier.challengeOutcome = 0;
     gSaveBlock2Ptr->frontier.curChallengeBattleNum = 0;
     gSaveBlock2Ptr->frontier.field_CA9_a = FALSE;
     SetDynamicWarp(0, gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum, -1);
@@ -233,7 +233,7 @@ static void sub_81B9D98(void)
 
 static void sub_81B9DB4(void)
 {
-    gSaveBlock2Ptr->frontier.field_CA8 = gSpecialVar_0x8005;
+    gSaveBlock2Ptr->frontier.challengeOutcome = gSpecialVar_0x8005;
     VarSet(VAR_TEMP_0, 0);
     gSaveBlock2Ptr->frontier.field_CA9_a = TRUE;
     sub_81A4C30();

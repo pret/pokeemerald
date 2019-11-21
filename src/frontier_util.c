@@ -49,16 +49,16 @@ struct FrontierBrainMon
 };
 
 // This file's functions.
-static void sub_81A17A0(void);
-static void sub_81A1830(void);
-static void sub_81A1968(void);
+static void GetChallengeStatus(void);
+static void GetFrontierData(void);
+static void SetFrontierData(void);
 static void LoadSelectedParty(void);
 static void DoSoftReset_(void);
 static void SetFrontierTrainers(void);
 static void sub_81A1B38(void);
 static void ShowFacilityResultsWindow(void);
 static void sub_81A31FC(void);
-static void sub_81A35EC(void);
+static void Script_GetFrontierBrainStatus(void);
 static void IsTrainerFrontierBrain(void);
 static void sub_81A3B64(void);
 static void GetFacilitySymbolCount(void);
@@ -70,7 +70,7 @@ static void sub_81A4230(void);
 static void sub_81A43A8(void);
 static void sub_81A4410(void);
 static void BufferFrontierTrainerName(void);
-static void sub_81A447C(void);
+static void ResetSketchedMoves(void);
 static void SetFacilityBrainEventObject(void);
 static void ShowTowerResultsWindow(u8);
 static void ShowDomeResultsWindow(u8);
@@ -83,15 +83,15 @@ static void ShowLinkContestResultsWindow(void);
 static void CopyFrontierBrainText(bool8 playerWonText);
 
 // const rom data
-static const u8 gUnknown_08611550[][4] =
+static const u8 sFrontierBrainStreakAppearances[NUM_FRONTIER_FACILITIES][4] =
 {
-    [FRONTIER_FACILITY_TOWER]   = {0x23, 0x46, 0x23, 0x01},
-    [FRONTIER_FACILITY_DOME]    = {0x04, 0x09, 0x05, 0x00},
-    [FRONTIER_FACILITY_PALACE]  = {0x15, 0x2a, 0x15, 0x01},
-    [FRONTIER_FACILITY_ARENA]   = {0x1c, 0x38, 0x1c, 0x01},
-    [FRONTIER_FACILITY_FACTORY] = {0x15, 0x2a, 0x15, 0x01},
-    [FRONTIER_FACILITY_PIKE]    = {0x1c, 0x8c, 0x38, 0x01},
-    [FRONTIER_FACILITY_PYRAMID] = {0x15, 0x46, 0x23, 0x00},
+    [FRONTIER_FACILITY_TOWER]   = {35,  70, 35, 1},
+    [FRONTIER_FACILITY_DOME]    = { 4,   9,  5, 0},
+    [FRONTIER_FACILITY_PALACE]  = {21,  42, 21, 1},
+    [FRONTIER_FACILITY_ARENA]   = {28,  56, 28, 1},
+    [FRONTIER_FACILITY_FACTORY] = {21,  42, 21, 1},
+    [FRONTIER_FACILITY_PIKE]    = {28, 140, 56, 1},
+    [FRONTIER_FACILITY_PYRAMID] = {21,  70, 35, 0},
 };
 
 static const struct FrontierBrainMon sFrontierBrainsMons[][2][3] =
@@ -104,7 +104,7 @@ static const struct FrontierBrainMon sFrontierBrainsMons[][2][3] =
                 .species = SPECIES_ALAKAZAM,
                 .heldItem = ITEM_BRIGHT_POWDER,
                 .fixedIV = 24,
-                .nature = 15,
+                .nature = NATURE_MODEST,
                 .evs = {106, 0, 152, 152, 100, 0},
                 .moves = {MOVE_THUNDER_PUNCH, MOVE_FIRE_PUNCH, MOVE_ICE_PUNCH, MOVE_DISABLE},
             },
@@ -112,7 +112,7 @@ static const struct FrontierBrainMon sFrontierBrainsMons[][2][3] =
                 .species = SPECIES_ENTEI,
                 .heldItem = ITEM_LUM_BERRY,
                 .fixedIV = 24,
-                .nature = 1,
+                .nature = NATURE_LONELY,
                 .evs = {100, 152, 152, 0, 100, 6},
                 .moves = {MOVE_FIRE_BLAST, MOVE_CALM_MIND, MOVE_RETURN, MOVE_ROAR},
             },
@@ -120,7 +120,7 @@ static const struct FrontierBrainMon sFrontierBrainsMons[][2][3] =
                 .species = SPECIES_SNORLAX,
                 .heldItem = ITEM_QUICK_CLAW,
                 .fixedIV = 24,
-                .nature = 3,
+                .nature = NATURE_ADAMANT,
                 .evs = {152, 152, 0, 0, 106, 100},
                 .moves = {MOVE_BODY_SLAM, MOVE_BELLY_DRUM, MOVE_YAWN, MOVE_SHADOW_BALL},
             },
@@ -131,7 +131,7 @@ static const struct FrontierBrainMon sFrontierBrainsMons[][2][3] =
                 .species = SPECIES_RAIKOU,
                 .heldItem = ITEM_LUM_BERRY,
                 .fixedIV = 31,
-                .nature = 15,
+                .nature = NATURE_MODEST,
                 .evs = {158, 0, 252, 100, 0, 0},
                 .moves = {MOVE_THUNDERBOLT, MOVE_CALM_MIND, MOVE_REFLECT, MOVE_REST},
             },
@@ -139,7 +139,7 @@ static const struct FrontierBrainMon sFrontierBrainsMons[][2][3] =
                 .species = SPECIES_LATIOS,
                 .heldItem = ITEM_BRIGHT_POWDER,
                 .fixedIV = 31,
-                .nature = 15,
+                .nature = NATURE_MODEST,
                 .evs = {252, 0, 252, 6, 0, 0},
                 .moves = {MOVE_PSYCHIC, MOVE_CALM_MIND, MOVE_RECOVER, MOVE_DRAGON_CLAW},
             },
@@ -147,7 +147,7 @@ static const struct FrontierBrainMon sFrontierBrainsMons[][2][3] =
                 .species = SPECIES_SNORLAX,
                 .heldItem = ITEM_CHESTO_BERRY,
                 .fixedIV = 31,
-                .nature = 3,
+                .nature = NATURE_ADAMANT,
                 .evs = {252, 252, 0, 0, 6, 0},
                 .moves = {MOVE_CURSE, MOVE_RETURN, MOVE_REST, MOVE_SHADOW_BALL},
             },
@@ -161,7 +161,7 @@ static const struct FrontierBrainMon sFrontierBrainsMons[][2][3] =
                 .species = SPECIES_SWAMPERT,
                 .heldItem = ITEM_FOCUS_BAND,
                 .fixedIV = 20,
-                .nature = 2,
+                .nature = NATURE_BRAVE,
                 .evs = {152, 152, 106, 0, 100, 0},
                 .moves = {MOVE_SURF, MOVE_EARTHQUAKE, MOVE_ICE_BEAM, MOVE_COUNTER},
             },
@@ -169,7 +169,7 @@ static const struct FrontierBrainMon sFrontierBrainsMons[][2][3] =
                 .species = SPECIES_SALAMENCE,
                 .heldItem = ITEM_LUM_BERRY,
                 .fixedIV = 20,
-                .nature = 3,
+                .nature = NATURE_ADAMANT,
                 .evs = {152, 152, 106, 100, 0, 0},
                 .moves = {MOVE_EARTHQUAKE, MOVE_BRICK_BREAK, MOVE_DRAGON_CLAW, MOVE_AERIAL_ACE},
             },
@@ -177,7 +177,7 @@ static const struct FrontierBrainMon sFrontierBrainsMons[][2][3] =
                 .species = SPECIES_CHARIZARD,
                 .heldItem = ITEM_WHITE_HERB,
                 .fixedIV = 20,
-                .nature = 17,
+                .nature = NATURE_QUIET,
                 .evs = {100, 152, 106, 152, 0, 0},
                 .moves = {MOVE_OVERHEAT, MOVE_ROCK_SLIDE, MOVE_AERIAL_ACE, MOVE_EARTHQUAKE},
             },
@@ -188,7 +188,7 @@ static const struct FrontierBrainMon sFrontierBrainsMons[][2][3] =
                 .species = SPECIES_SWAMPERT,
                 .heldItem = ITEM_LEFTOVERS,
                 .fixedIV = 31,
-                .nature = 2,
+                .nature = NATURE_BRAVE,
                 .evs = {252, 252, 6, 0, 0, 0},
                 .moves = {MOVE_SURF, MOVE_EARTHQUAKE, MOVE_ICE_BEAM, MOVE_MIRROR_COAT},
             },
@@ -196,7 +196,7 @@ static const struct FrontierBrainMon sFrontierBrainsMons[][2][3] =
                 .species = SPECIES_METAGROSS,
                 .heldItem = ITEM_QUICK_CLAW,
                 .fixedIV = 31,
-                .nature = 2,
+                .nature = NATURE_BRAVE,
                 .evs = {252, 252, 6, 0, 0, 0},
                 .moves = {MOVE_PSYCHIC, MOVE_METEOR_MASH, MOVE_EARTHQUAKE, MOVE_PROTECT},
             },
@@ -204,7 +204,7 @@ static const struct FrontierBrainMon sFrontierBrainsMons[][2][3] =
                 .species = SPECIES_LATIAS,
                 .heldItem = ITEM_CHESTO_BERRY,
                 .fixedIV = 31,
-                .nature = 15,
+                .nature = NATURE_MODEST,
                 .evs = {252, 0, 252, 6, 0, 0},
                 .moves = {MOVE_THUNDERBOLT, MOVE_PSYCHIC, MOVE_CALM_MIND, MOVE_REST},
             },
@@ -218,7 +218,7 @@ static const struct FrontierBrainMon sFrontierBrainsMons[][2][3] =
                 .species = SPECIES_CROBAT,
                 .heldItem = ITEM_BRIGHT_POWDER,
                 .fixedIV = 16,
-                .nature = 3,
+                .nature = NATURE_ADAMANT,
                 .evs = {152, 0, 0, 152, 100, 106},
                 .moves = {MOVE_CONFUSE_RAY, MOVE_DOUBLE_TEAM, MOVE_TOXIC, MOVE_FLY},
             },
@@ -226,7 +226,7 @@ static const struct FrontierBrainMon sFrontierBrainsMons[][2][3] =
                 .species = SPECIES_SLAKING,
                 .heldItem = ITEM_SCOPE_LENS,
                 .fixedIV = 16,
-                .nature = 0,
+                .nature = NATURE_HARDY,
                 .evs = {152, 152, 0, 106, 100, 0},
                 .moves = {MOVE_EARTHQUAKE, MOVE_SWAGGER, MOVE_SHADOW_BALL, MOVE_BRICK_BREAK},
             },
@@ -234,7 +234,7 @@ static const struct FrontierBrainMon sFrontierBrainsMons[][2][3] =
                 .species = SPECIES_LAPRAS,
                 .heldItem = ITEM_QUICK_CLAW,
                 .fixedIV = 16,
-                .nature = 17,
+                .nature = NATURE_QUIET,
                 .evs = {0, 0, 252, 0, 106, 152},
                 .moves = {MOVE_ICE_BEAM, MOVE_HORN_DRILL, MOVE_CONFUSE_RAY, MOVE_PROTECT},
             },
@@ -245,7 +245,7 @@ static const struct FrontierBrainMon sFrontierBrainsMons[][2][3] =
                 .species = SPECIES_ARCANINE,
                 .heldItem = ITEM_WHITE_HERB,
                 .fixedIV = 31,
-                .nature = 11,
+                .nature = NATURE_HASTY,
                 .evs = {6, 252, 252, 0, 0, 0},
                 .moves = {MOVE_OVERHEAT, MOVE_EXTREME_SPEED, MOVE_ROAR, MOVE_PROTECT},
             },
@@ -253,7 +253,7 @@ static const struct FrontierBrainMon sFrontierBrainsMons[][2][3] =
                 .species = SPECIES_SLAKING,
                 .heldItem = ITEM_SCOPE_LENS,
                 .fixedIV = 31,
-                .nature = 0,
+                .nature = NATURE_HARDY,
                 .evs = {6, 252, 0, 252, 0, 0},
                 .moves = {MOVE_HYPER_BEAM, MOVE_EARTHQUAKE, MOVE_SHADOW_BALL, MOVE_YAWN},
             },
@@ -261,7 +261,7 @@ static const struct FrontierBrainMon sFrontierBrainsMons[][2][3] =
                 .species = SPECIES_SUICUNE,
                 .heldItem = ITEM_KINGS_ROCK,
                 .fixedIV = 31,
-                .nature = 11,
+                .nature = NATURE_HASTY,
                 .evs = {252, 0, 252, 6, 0, 0},
                 .moves = {MOVE_BLIZZARD, MOVE_SURF, MOVE_BITE, MOVE_CALM_MIND},
             },
@@ -275,7 +275,7 @@ static const struct FrontierBrainMon sFrontierBrainsMons[][2][3] =
                 .species = SPECIES_HERACROSS,
                 .heldItem = ITEM_SALAC_BERRY,
                 .fixedIV = 20,
-                .nature = 13,
+                .nature = NATURE_JOLLY,
                 .evs = {106, 152, 0, 152, 0, 100},
                 .moves = {MOVE_MEGAHORN, MOVE_ROCK_TOMB, MOVE_ENDURE, MOVE_REVERSAL},
             },
@@ -283,7 +283,7 @@ static const struct FrontierBrainMon sFrontierBrainsMons[][2][3] =
                 .species = SPECIES_UMBREON,
                 .heldItem = ITEM_LEFTOVERS,
                 .fixedIV = 20,
-                .nature = 20,
+                .nature = NATURE_CALM,
                 .evs = {152, 0, 100, 0, 152, 106},
                 .moves = {MOVE_BODY_SLAM, MOVE_CONFUSE_RAY, MOVE_PSYCHIC, MOVE_FAINT_ATTACK},
             },
@@ -291,7 +291,7 @@ static const struct FrontierBrainMon sFrontierBrainsMons[][2][3] =
                 .species = SPECIES_SHEDINJA,
                 .heldItem = ITEM_BRIGHT_POWDER,
                 .fixedIV = 20,
-                .nature = 3,
+                .nature = NATURE_ADAMANT,
                 .evs = {0, 252, 6, 252, 0, 0},
                 .moves = {MOVE_SHADOW_BALL, MOVE_RETURN, MOVE_CONFUSE_RAY, MOVE_AERIAL_ACE},
             },
@@ -302,7 +302,7 @@ static const struct FrontierBrainMon sFrontierBrainsMons[][2][3] =
                 .species = SPECIES_UMBREON,
                 .heldItem = ITEM_CHESTO_BERRY,
                 .fixedIV = 31,
-                .nature = 20,
+                .nature = NATURE_CALM,
                 .evs = {252, 0, 0, 0, 252, 6},
                 .moves = {MOVE_DOUBLE_EDGE, MOVE_CONFUSE_RAY, MOVE_REST, MOVE_PSYCHIC},
             },
@@ -310,7 +310,7 @@ static const struct FrontierBrainMon sFrontierBrainsMons[][2][3] =
                 .species = SPECIES_GENGAR,
                 .heldItem = ITEM_LEFTOVERS,
                 .fixedIV = 31,
-                .nature = 15,
+                .nature = NATURE_MODEST,
                 .evs = {252, 0, 252, 0, 6, 0},
                 .moves = {MOVE_PSYCHIC, MOVE_HYPNOSIS, MOVE_DREAM_EATER, MOVE_DESTINY_BOND},
             },
@@ -318,7 +318,7 @@ static const struct FrontierBrainMon sFrontierBrainsMons[][2][3] =
                 .species = SPECIES_BRELOOM,
                 .heldItem = ITEM_LUM_BERRY,
                 .fixedIV = 31,
-                .nature = 13,
+                .nature = NATURE_JOLLY,
                 .evs = {6, 252, 0, 252, 0, 0},
                 .moves = {MOVE_SPORE, MOVE_FOCUS_PUNCH, MOVE_GIGA_DRAIN, MOVE_HEADBUTT},
             },
@@ -333,7 +333,7 @@ static const struct FrontierBrainMon sFrontierBrainsMons[][2][3] =
                 .species = SPECIES_METANG,
                 .heldItem = ITEM_SITRUS_BERRY,
                 .fixedIV = 31,
-                .nature = 2,
+                .nature = NATURE_BRAVE,
                 .evs = {0, 252, 252, 0, 6, 0},
                 .moves = {MOVE_LIGHT_SCREEN, MOVE_PSYCHIC, MOVE_REFLECT, MOVE_METAL_CLAW},
             },
@@ -341,7 +341,7 @@ static const struct FrontierBrainMon sFrontierBrainsMons[][2][3] =
                 .species = SPECIES_SKARMORY,
                 .heldItem = ITEM_SITRUS_BERRY,
                 .fixedIV = 31,
-                .nature = 8,
+                .nature = NATURE_IMPISH,
                 .evs = {252, 0, 0, 0, 6, 252},
                 .moves = {MOVE_TOXIC, MOVE_AERIAL_ACE, MOVE_PROTECT, MOVE_STEEL_WING},
             },
@@ -349,7 +349,7 @@ static const struct FrontierBrainMon sFrontierBrainsMons[][2][3] =
                 .species = SPECIES_AGGRON,
                 .heldItem = ITEM_SITRUS_BERRY,
                 .fixedIV = 31,
-                .nature = 3,
+                .nature = NATURE_ADAMANT,
                 .evs = {0, 252, 0, 0, 252, 6},
                 .moves = {MOVE_THUNDERBOLT, MOVE_PROTECT, MOVE_SOLAR_BEAM, MOVE_DRAGON_CLAW},
             },
@@ -359,7 +359,7 @@ static const struct FrontierBrainMon sFrontierBrainsMons[][2][3] =
                 .species = SPECIES_METANG,
                 .heldItem = ITEM_SITRUS_BERRY,
                 .fixedIV = 31,
-                .nature = 2,
+                .nature = NATURE_BRAVE,
                 .evs = {0, 252, 252, 0, 6, 0},
                 .moves = {MOVE_LIGHT_SCREEN, MOVE_PSYCHIC, MOVE_REFLECT, MOVE_METAL_CLAW},
             },
@@ -367,7 +367,7 @@ static const struct FrontierBrainMon sFrontierBrainsMons[][2][3] =
                 .species = SPECIES_SKARMORY,
                 .heldItem = ITEM_SITRUS_BERRY,
                 .fixedIV = 31,
-                .nature = 8,
+                .nature = NATURE_IMPISH,
                 .evs = {252, 0, 0, 0, 6, 252},
                 .moves = {MOVE_TOXIC, MOVE_AERIAL_ACE, MOVE_PROTECT, MOVE_STEEL_WING},
             },
@@ -375,7 +375,7 @@ static const struct FrontierBrainMon sFrontierBrainsMons[][2][3] =
                 .species = SPECIES_AGGRON,
                 .heldItem = ITEM_SITRUS_BERRY,
                 .fixedIV = 31,
-                .nature = 3,
+                .nature = NATURE_ADAMANT,
                 .evs = {0, 252, 0, 0, 252, 6},
                 .moves = {MOVE_THUNDERBOLT, MOVE_PROTECT, MOVE_SOLAR_BEAM, MOVE_DRAGON_CLAW},
             },
@@ -389,7 +389,7 @@ static const struct FrontierBrainMon sFrontierBrainsMons[][2][3] =
                 .species = SPECIES_SEVIPER,
                 .heldItem = ITEM_QUICK_CLAW,
                 .fixedIV = 16,
-                .nature = 2,
+                .nature = NATURE_BRAVE,
                 .evs = {252, 0, 252, 0, 6, 0},
                 .moves = {MOVE_SWAGGER, MOVE_CRUNCH, MOVE_POISON_FANG, MOVE_GIGA_DRAIN},
             },
@@ -397,7 +397,7 @@ static const struct FrontierBrainMon sFrontierBrainsMons[][2][3] =
                 .species = SPECIES_SHUCKLE,
                 .heldItem = ITEM_CHESTO_BERRY,
                 .fixedIV = 16,
-                .nature = 5,
+                .nature = NATURE_BOLD,
                 .evs = {252, 0, 0, 0, 106, 252},
                 .moves = {MOVE_TOXIC, MOVE_SANDSTORM, MOVE_PROTECT, MOVE_REST},
             },
@@ -405,7 +405,7 @@ static const struct FrontierBrainMon sFrontierBrainsMons[][2][3] =
                 .species = SPECIES_MILOTIC,
                 .heldItem = ITEM_LEFTOVERS,
                 .fixedIV = 16,
-                .nature = 15,
+                .nature = NATURE_MODEST,
                 .evs = {152, 0, 100, 0, 152, 106},
                 .moves = {MOVE_ICE_BEAM, MOVE_MIRROR_COAT, MOVE_SURF, MOVE_RECOVER},
             },
@@ -416,7 +416,7 @@ static const struct FrontierBrainMon sFrontierBrainsMons[][2][3] =
                 .species = SPECIES_SEVIPER,
                 .heldItem = ITEM_FOCUS_BAND,
                 .fixedIV = 31,
-                .nature = 5,
+                .nature = NATURE_BOLD,
                 .evs = {252, 0, 0, 0, 252, 6},
                 .moves = {MOVE_SWAGGER, MOVE_CRUNCH, MOVE_SLUDGE_BOMB, MOVE_GIGA_DRAIN},
             },
@@ -424,7 +424,7 @@ static const struct FrontierBrainMon sFrontierBrainsMons[][2][3] =
                 .species = SPECIES_STEELIX,
                 .heldItem = ITEM_BRIGHT_POWDER,
                 .fixedIV = 31,
-                .nature = 2,
+                .nature = NATURE_BRAVE,
                 .evs = {252, 0, 0, 0, 6, 252},
                 .moves = {MOVE_EARTHQUAKE, MOVE_ROCK_SLIDE, MOVE_EXPLOSION, MOVE_SCREECH},
             },
@@ -432,7 +432,7 @@ static const struct FrontierBrainMon sFrontierBrainsMons[][2][3] =
                 .species = SPECIES_GYARADOS,
                 .heldItem = ITEM_CHESTO_BERRY,
                 .fixedIV = 31,
-                .nature = 3,
+                .nature = NATURE_ADAMANT,
                 .evs = {252, 6, 0, 0, 0, 252},
                 .moves = {MOVE_DRAGON_DANCE, MOVE_RETURN, MOVE_ROAR, MOVE_REST},
             },
@@ -446,7 +446,7 @@ static const struct FrontierBrainMon sFrontierBrainsMons[][2][3] =
                 .species = SPECIES_REGIROCK,
                 .heldItem = ITEM_QUICK_CLAW,
                 .fixedIV = 16,
-                .nature = 3,
+                .nature = NATURE_ADAMANT,
                 .evs = {152, 152, 0, 0, 106, 100},
                 .moves = {MOVE_EXPLOSION, MOVE_SUPERPOWER, MOVE_EARTHQUAKE, MOVE_ANCIENT_POWER},
             },
@@ -454,7 +454,7 @@ static const struct FrontierBrainMon sFrontierBrainsMons[][2][3] =
                 .species = SPECIES_REGISTEEL,
                 .heldItem = ITEM_LEFTOVERS,
                 .fixedIV = 16,
-                .nature = 3,
+                .nature = NATURE_ADAMANT,
                 .evs = {152, 152, 0, 0, 6, 200},
                 .moves = {MOVE_EARTHQUAKE, MOVE_METAL_CLAW, MOVE_TOXIC, MOVE_IRON_DEFENSE},
             },
@@ -462,7 +462,7 @@ static const struct FrontierBrainMon sFrontierBrainsMons[][2][3] =
                 .species = SPECIES_REGICE,
                 .heldItem = ITEM_CHESTO_BERRY,
                 .fixedIV = 16,
-                .nature = 15,
+                .nature = NATURE_MODEST,
                 .evs = {106, 0, 152, 0, 100, 152},
                 .moves = {MOVE_ICE_BEAM, MOVE_AMNESIA, MOVE_THUNDER, MOVE_REST},
             },
@@ -473,7 +473,7 @@ static const struct FrontierBrainMon sFrontierBrainsMons[][2][3] =
                 .species = SPECIES_ARTICUNO,
                 .heldItem = ITEM_SCOPE_LENS,
                 .fixedIV = 31,
-                .nature = 16,
+                .nature = NATURE_MILD,
                 .evs = {6, 0, 252, 252, 0, 0},
                 .moves = {MOVE_BLIZZARD, MOVE_WATER_PULSE, MOVE_AERIAL_ACE, MOVE_REFLECT},
             },
@@ -481,7 +481,7 @@ static const struct FrontierBrainMon sFrontierBrainsMons[][2][3] =
                 .species = SPECIES_ZAPDOS,
                 .heldItem = ITEM_LUM_BERRY,
                 .fixedIV = 31,
-                .nature = 16,
+                .nature = NATURE_MILD,
                 .evs = {6, 0, 252, 252, 0, 0},
                 .moves = {MOVE_THUNDER, MOVE_DETECT, MOVE_DRILL_PECK, MOVE_LIGHT_SCREEN},
             },
@@ -489,7 +489,7 @@ static const struct FrontierBrainMon sFrontierBrainsMons[][2][3] =
                 .species = SPECIES_MOLTRES,
                 .heldItem = ITEM_BRIGHT_POWDER,
                 .fixedIV = 31,
-                .nature = 16,
+                .nature = NATURE_MILD,
                 .evs = {6, 0, 252, 252, 0, 0},
                 .moves = {MOVE_FIRE_BLAST, MOVE_HYPER_BEAM, MOVE_AERIAL_ACE, MOVE_SAFEGUARD},
             },
@@ -497,7 +497,7 @@ static const struct FrontierBrainMon sFrontierBrainsMons[][2][3] =
     },
 };
 
-static const u8 gUnknown_086118B4[][7][4] =
+static const u8 sBattlePointAwards[][NUM_FRONTIER_FACILITIES][FRONTIER_MODE_COUNT] =
 {
     {
         {1, 2, 3, 3}, {1, 1, 0, 0}, {4, 5, 0, 0}, {1, 0, 0, 0}, {3, 4, 0, 0}, {1, 0, 0, 0}, {5, 0, 0, 0}
@@ -591,7 +591,7 @@ static const u8 gUnknown_086118B4[][7][4] =
     },
 };
 
-static const u16 gUnknown_08611BFC[][2] =
+static const u16 sFacilitySymbolBitFlags[NUM_FRONTIER_FACILITIES][2] =
 {
     [FRONTIER_FACILITY_TOWER]   = {0x0001, 0x0002},
     [FRONTIER_FACILITY_DOME]    = {0x0004, 0x0008},
@@ -604,16 +604,16 @@ static const u16 gUnknown_08611BFC[][2] =
 
 static void (* const sFrontierUtilFuncs[])(void) =
 {
-    [FRONTIER_UTIL_FUNC_0]                     = sub_81A17A0,
-    [FRONTIER_UTIL_FUNC_1]                     = sub_81A1830,
-    [FRONTIER_UTIL_FUNC_2]                     = sub_81A1968,
+    [FRONTIER_UTIL_FUNC_GET_STATUS]            = GetChallengeStatus,
+    [FRONTIER_UTIL_FUNC_GET_DATA]              = GetFrontierData,
+    [FRONTIER_UTIL_FUNC_SET_DATA]              = SetFrontierData,
     [FRONTIER_UTIL_FUNC_LOAD_SELECTED_PARTY]   = LoadSelectedParty,
     [FRONTIER_UTIL_FUNC_SOFT_RESET]            = DoSoftReset_,
     [FRONTIER_UTIL_FUNC_SET_FRONTIER_TRAINERS] = SetFrontierTrainers,
     [FRONTIER_UTIL_FUNC_6]                     = sub_81A1B38,
     [FRONTIER_UTIL_FUNC_RESULTS_WINDOW]        = ShowFacilityResultsWindow,
     [FRONTIER_UTIL_FUNC_8]                     = sub_81A31FC,
-    [FRONTIER_UTIL_FUNC_9]                     = sub_81A35EC,
+    [FRONTIER_UTIL_FUNC_GET_BRAIN_STATUS]      = Script_GetFrontierBrainStatus,
     [FRONTIER_UTIL_FUNC_IS_FRONTIER_BRAIN]     = IsTrainerFrontierBrain,
     [FRONTIER_UTIL_FUNC_11]                    = sub_81A3B64,
     [FRONTIER_UTIL_FUNC_GET_FACILITY_SYMBOLS]  = GetFacilitySymbolCount,
@@ -625,7 +625,7 @@ static void (* const sFrontierUtilFuncs[])(void) =
     [FRONTIER_UTIL_FUNC_18]                    = sub_81A43A8,
     [FRONTIER_UTIL_FUNC_19]                    = sub_81A4410,
     [FRONTIER_UTIL_FUNC_BUFFER_TRAINER_NAME]   = BufferFrontierTrainerName,
-    [FRONTIER_UTIL_FUNC_21]                    = sub_81A447C,
+    [FRONTIER_UTIL_FUNC_RESET_SKETCH_MOVES]    = ResetSketchedMoves,
     [FRONTIER_UTIL_FUNC_SET_BRAIN_OBJECT]      = SetFacilityBrainEventObject,
 };
 
@@ -663,7 +663,7 @@ static const struct WindowTemplate gUnknown_08611C84 =
 };
 
 // Second field - whether the character is female.
-static const u8 sFacilityToBrainEventObjGfx[][2] =
+static const u8 sFrontierBrainObjEventGfx[NUM_FRONTIER_FACILITIES][2] =
 {
     [FRONTIER_FACILITY_TOWER]   = {EVENT_OBJ_GFX_ANABEL,  TRUE},
     [FRONTIER_FACILITY_DOME]    = {EVENT_OBJ_GFX_TUCKER,  FALSE},
@@ -714,7 +714,7 @@ static const u8 *const sHallFacilityToRecordsText[] =
     [RANKING_HALL_BATTLE_TOWER_LINK]    = gText_FrontierFacilityWinStreak,
 };
 
-static const u16 gFacilityToBrainTrainerId[] =
+static const u16 sFrontierBrainTrainerIds[NUM_FRONTIER_FACILITIES] =
 {
     [FRONTIER_FACILITY_TOWER]   = TRAINER_ANABEL,
     [FRONTIER_FACILITY_DOME]    = TRAINER_TUCKER,
@@ -725,60 +725,60 @@ static const u16 gFacilityToBrainTrainerId[] =
     [FRONTIER_FACILITY_PYRAMID] = TRAINER_BRANDON,
 };
 
-static const u8 *const gUnknown_08611D40[] =
+static const u8 *const sFrontierBrainPlayerLostSilverTexts[NUM_FRONTIER_FACILITIES] =
 {
-    gText_082C843F,
-    gText_082C848B,
-    gText_082C8628,
-    gText_082C85B4,
-    gText_082C8512,
-    gText_082C859D,
-    gText_082C86C3,
+    [FRONTIER_FACILITY_TOWER]   = gText_AnabelWonSilver,
+    [FRONTIER_FACILITY_DOME]    = gText_TuckerWonSilver,
+    [FRONTIER_FACILITY_PALACE]  = gText_SpenserWonSilver,
+    [FRONTIER_FACILITY_ARENA]   = gText_GretaWonSilver,
+    [FRONTIER_FACILITY_FACTORY] = gText_NolandWonSilver,
+    [FRONTIER_FACILITY_PIKE]    = gText_LucyWonSilver,
+    [FRONTIER_FACILITY_PYRAMID] = gText_BrandonWonSilver,
 };
 
-static const u8 *const gUnknown_08611D5C[] =
+static const u8 *const sFrontierBrainPlayerWonSilverTexts[NUM_FRONTIER_FACILITIES] =
 {
-    gText_082C8458,
-    gText_082C84C1,
-    gText_082C8662,
-    gText_082C85E3,
-    gText_082C853B,
-    gText_082C85A4,
-    gText_082C86FE,
+    [FRONTIER_FACILITY_TOWER]   = gText_AnabelDefeatSilver,
+    [FRONTIER_FACILITY_DOME]    = gText_TuckerDefeatSilver,
+    [FRONTIER_FACILITY_PALACE]  = gText_SpenserDefeatSilver,
+    [FRONTIER_FACILITY_ARENA]   = gText_GretaDefeatSilver,
+    [FRONTIER_FACILITY_FACTORY] = gText_NolandDefeatSilver,
+    [FRONTIER_FACILITY_PIKE]    = gText_LucyDefeatSilver,
+    [FRONTIER_FACILITY_PYRAMID] = gText_BrandonDefeatSilver,
 };
 
-static const u8 *const gUnknown_08611D78[] =
+static const u8 *const sFrontierBrainPlayerLostGoldTexts[NUM_FRONTIER_FACILITIES] =
 {
-    gText_082C846C,
-    gText_082C84D0,
-    gText_082C8682,
-    gText_082C85F5,
-    gText_082C8561,
-    gText_082C85A9,
-    gText_082C8739,
+    [FRONTIER_FACILITY_TOWER]   = gText_AnabelWonGold,
+    [FRONTIER_FACILITY_DOME]    = gText_TuckerWonGold,
+    [FRONTIER_FACILITY_PALACE]  = gText_SpenserWonGold,
+    [FRONTIER_FACILITY_ARENA]   = gText_GretaWonGold,
+    [FRONTIER_FACILITY_FACTORY] = gText_NolandWonGold,
+    [FRONTIER_FACILITY_PIKE]    = gText_LucyWonGold,
+    [FRONTIER_FACILITY_PYRAMID] = gText_BrandonWonGold,
 };
 
-static const u8 *const gUnknown_08611D94[] =
+static const u8 *const sFrontierBrainPlayerWonGoldTexts[NUM_FRONTIER_FACILITIES] =
 {
-    gText_082C8480,
-    gText_082C84F7,
-    gText_082C86B3,
-    gText_082C8611,
-    gText_082C8589,
-    gText_082C85AE,
-    gText_082C877B,
+    [FRONTIER_FACILITY_TOWER]   = gText_AnabelDefeatGold,
+    [FRONTIER_FACILITY_DOME]    = gText_TuckerDefeatGold,
+    [FRONTIER_FACILITY_PALACE]  = gText_SpenserDefeatGold,
+    [FRONTIER_FACILITY_ARENA]   = gText_GretaDefeatGold,
+    [FRONTIER_FACILITY_FACTORY] = gText_NolandDefeatGold,
+    [FRONTIER_FACILITY_PIKE]    = gText_LucyDefeatGold,
+    [FRONTIER_FACILITY_PYRAMID] = gText_BrandonDefeatGold,
 };
 
-static const u8 *const *const gUnknown_08611DB0[] =
+static const u8 *const *const sFrontierBrainPlayerLostTexts[] =
 {
-    gUnknown_08611D40,
-    gUnknown_08611D78,
+    sFrontierBrainPlayerLostSilverTexts,
+    sFrontierBrainPlayerLostGoldTexts,
 };
 
-static const u8 *const *const gUnknown_08611DB8[] =
+static const u8 *const *const sFrontierBrainPlayerWonTexts[] =
 {
-    gUnknown_08611D5C,
-    gUnknown_08611D94,
+    sFrontierBrainPlayerWonSilverTexts,
+    sFrontierBrainPlayerWonGoldTexts,
 };
 
 // code
@@ -787,42 +787,44 @@ void CallFrontierUtilFunc(void)
     sFrontierUtilFuncs[gSpecialVar_0x8004]();
 }
 
-static void sub_81A17A0(void)
+// Buffers into VAR_TEMP_0 specifically because this is used to react to the outcome in OnFrame map scripts
+// TODO: use constants, fix name, rename field, compare to get/set data 0
+static void GetChallengeStatus(void)
 {
     VarSet(VAR_TEMP_0, 0xFF);
-    switch (gSaveBlock2Ptr->frontier.field_CA8)
+    switch (gSaveBlock2Ptr->frontier.challengeOutcome)
     {
     case 0:
         break;
     case 1:
         FrontierGamblerSetWonOrLost(FALSE);
-        VarSet(VAR_TEMP_0, gSaveBlock2Ptr->frontier.field_CA8);
+        VarSet(VAR_TEMP_0, gSaveBlock2Ptr->frontier.challengeOutcome);
         break;
     case 4:
         FrontierGamblerSetWonOrLost(FALSE);
-        VarSet(VAR_TEMP_0, gSaveBlock2Ptr->frontier.field_CA8);
+        VarSet(VAR_TEMP_0, gSaveBlock2Ptr->frontier.challengeOutcome);
         break;
     case 3:
         FrontierGamblerSetWonOrLost(TRUE);
-        VarSet(VAR_TEMP_0, gSaveBlock2Ptr->frontier.field_CA8);
+        VarSet(VAR_TEMP_0, gSaveBlock2Ptr->frontier.challengeOutcome);
         break;
     case 2:
-        VarSet(VAR_TEMP_0, gSaveBlock2Ptr->frontier.field_CA8);
+        VarSet(VAR_TEMP_0, gSaveBlock2Ptr->frontier.challengeOutcome);
         break;
     }
 }
 
-static void sub_81A1830(void)
+static void GetFrontierData(void)
 {
     u8 facility = VarGet(VAR_FRONTIER_FACILITY);
-    u8 currSymbol = GetPlayerSymbolCountForFacility(facility);
-    if (currSymbol == 2)
-        currSymbol = 1;
+    u8 hasSymbol = GetPlayerSymbolCountForFacility(facility);
+    if (hasSymbol == 2)
+        hasSymbol = 1;
 
     switch (gSpecialVar_0x8005)
     {
     case 0:
-        gSpecialVar_Result = gSaveBlock2Ptr->frontier.field_CA8;
+        gSpecialVar_Result = gSaveBlock2Ptr->frontier.challengeOutcome;
         break;
     case 1:
         gSpecialVar_Result = gSaveBlock2Ptr->frontier.lvlMode;
@@ -841,23 +843,23 @@ static void sub_81A1830(void)
         gSpecialVar_Result = gSaveBlock2Ptr->frontier.field_CA9_b;
         break;
     case 7:
-        gSpecialVar_Result = gSaveBlock2Ptr->frontier.field_D00 & gUnknown_08611BFC[facility][currSymbol];
+        gSpecialVar_Result = gSaveBlock2Ptr->frontier.symbolFlags & sFacilitySymbolBitFlags[facility][hasSymbol];
         break;
     }
 }
 
-static void sub_81A1968(void)
+static void SetFrontierData(void)
 {
     s32 i;
     u8 facility = VarGet(VAR_FRONTIER_FACILITY);
-    u8 currSymbol = GetPlayerSymbolCountForFacility(facility);
-    if (currSymbol == 2)
-        currSymbol = 1;
+    u8 hasSymbol = GetPlayerSymbolCountForFacility(facility);
+    if (hasSymbol == 2)
+        hasSymbol = 1;
 
     switch (gSpecialVar_0x8005)
     {
     case 0:
-        gSaveBlock2Ptr->frontier.field_CA8 = gSpecialVar_0x8006;
+        gSaveBlock2Ptr->frontier.challengeOutcome = gSpecialVar_0x8006;
         break;
     case 1:
         gSaveBlock2Ptr->frontier.lvlMode = gSpecialVar_0x8006;
@@ -876,7 +878,7 @@ static void sub_81A1968(void)
         gSaveBlock2Ptr->frontier.field_CA9_b = gSpecialVar_0x8006;
         break;
     case 7:
-        gSaveBlock2Ptr->frontier.field_D00 |= gUnknown_08611BFC[facility][currSymbol];
+        gSaveBlock2Ptr->frontier.symbolFlags |= sFacilitySymbolBitFlags[facility][hasSymbol];
         break;
     }
 }
@@ -915,7 +917,7 @@ static void sub_81A1B38(void)
 
 static void ShowFacilityResultsWindow(void)
 {
-    if (gSpecialVar_0x8006 > 3)
+    if (gSpecialVar_0x8006 >= FRONTIER_MODE_COUNT)
         gSpecialVar_0x8006 = 0;
     switch (gSpecialVar_0x8005)
     {
@@ -940,7 +942,7 @@ static void ShowFacilityResultsWindow(void)
     case FRONTIER_FACILITY_PYRAMID:
         ShowPyramidResultsWindow();
         break;
-    case RESULTS_LINK_CONTEST:
+    case FACILITY_LINK_CONTEST:
         ShowLinkContestResultsWindow();
         break;
     }
@@ -1644,44 +1646,49 @@ static void sub_81A31FC(void)
     }
 }
 
-static void sub_81A35EC(void)
+static void Script_GetFrontierBrainStatus(void)
 {
     VarGet(VAR_FRONTIER_FACILITY); // Unused return value.
-    gSpecialVar_Result = sub_81A3610();
+    gSpecialVar_Result = GetFrontierBrainStatus();
 }
 
-u8 sub_81A3610(void)
+u8 GetFrontierBrainStatus(void)
 {
-    s32 ret = 0;
+    s32 status = FRONTIER_BRAIN_NOT_READY;
     s32 facility = VarGet(VAR_FRONTIER_FACILITY);
     s32 battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
-    u16 val = GetCurrentFacilityWinStreak();
-    s32 r5 = val + gUnknown_08611550[facility][3];
+    u16 winStreakNoModifier = GetCurrentFacilityWinStreak();
+    s32 winStreak = winStreakNoModifier + sFrontierBrainStreakAppearances[facility][3];
     s32 symbolsCount;
 
     if (battleMode != FRONTIER_MODE_SINGLES)
-        return 0;
+        return FRONTIER_BRAIN_NOT_READY;
 
     symbolsCount = GetPlayerSymbolCountForFacility(facility);
     switch (symbolsCount)
     {
+    // Missing a symbol
     case 0:
     case 1:
-        if (r5 == gUnknown_08611550[facility][symbolsCount])
-            ret = symbolsCount + 1;
+        if (winStreak == sFrontierBrainStreakAppearances[facility][symbolsCount])
+            status = symbolsCount + 1; // FRONTIER_BRAIN_SILVER and FRONTIER_BRAIN_GOLD
         break;
+    // Already received both symbols
     case 2:
     default:
-        if (r5 == gUnknown_08611550[facility][0])
-            ret = 3;
-        else if (r5 == gUnknown_08611550[facility][1])
-            ret = 4;
-        else if (r5 > gUnknown_08611550[facility][1] && (r5 - gUnknown_08611550[facility][1]) % gUnknown_08611550[facility][2] == 0)
-            ret = 4;
+        // Silver streak is reached
+        if (winStreak == sFrontierBrainStreakAppearances[facility][0])
+            status = FRONTIER_BRAIN_STREAK;
+        // Gold streak is reached
+        else if (winStreak == sFrontierBrainStreakAppearances[facility][1])
+            status = FRONTIER_BRAIN_STREAK_LONG;
+        // Some increment of the gold streak is reached
+        else if (winStreak > sFrontierBrainStreakAppearances[facility][1] && (winStreak - sFrontierBrainStreakAppearances[facility][1]) % sFrontierBrainStreakAppearances[facility][2] == 0)
+            status = FRONTIER_BRAIN_STREAK_LONG;
         break;
     }
 
-    return ret;
+    return status;
 }
 
 void CopyFrontierTrainerText(u8 whichText, u16 trainerId)
@@ -1789,8 +1796,8 @@ void sub_81A3908(void)
             }
         }
     }
-    if (gSaveBlock2Ptr->frontier.field_CA8 != 0)
-        gSaveBlock2Ptr->frontier.field_CA8 = 1;
+    if (gSaveBlock2Ptr->frontier.challengeOutcome != 0)
+        gSaveBlock2Ptr->frontier.challengeOutcome = 1;
 }
 
 u32 GetCurrentFacilityWinStreak(void)
@@ -1877,20 +1884,20 @@ static void sub_81A3B64(void)
 
     if (challengeNum != 0)
         challengeNum--;
-    if (challengeNum >= ARRAY_COUNT(gUnknown_086118B4))
-        challengeNum = ARRAY_COUNT(gUnknown_086118B4) - 1;
+    if (challengeNum >= ARRAY_COUNT(sBattlePointAwards))
+        challengeNum = ARRAY_COUNT(sBattlePointAwards) - 1;
 
-    points = gUnknown_086118B4[challengeNum][facility][battleMode];
+    points = sBattlePointAwards[challengeNum][facility][battleMode];
     if (gTrainerBattleOpponent_A == TRAINER_FRONTIER_BRAIN)
         points += 10;
     gSaveBlock2Ptr->frontier.battlePoints += points;
     ConvertIntToDecimalStringN(gStringVar1, points, STR_CONV_MODE_LEFT_ALIGN, 2);
-    if (gSaveBlock2Ptr->frontier.battlePoints > 9999)
-        gSaveBlock2Ptr->frontier.battlePoints = 9999;
+    if (gSaveBlock2Ptr->frontier.battlePoints > MAX_BATTLE_FRONTIER_POINTS)
+        gSaveBlock2Ptr->frontier.battlePoints = MAX_BATTLE_FRONTIER_POINTS;
 
     points = gSaveBlock2Ptr->frontier.field_EBA;
-    points += gUnknown_086118B4[challengeNum][facility][battleMode];
-    IncrementDailyBattlePoints(gUnknown_086118B4[challengeNum][facility][battleMode]);
+    points += sBattlePointAwards[challengeNum][facility][battleMode];
+    IncrementDailyBattlePoints(sBattlePointAwards[challengeNum][facility][battleMode]);
     if (gTrainerBattleOpponent_A == TRAINER_FRONTIER_BRAIN)
     {
         points += 10;
@@ -1924,12 +1931,12 @@ static void CheckBattleTypeFlag(void)
         gSpecialVar_Result = FALSE;
 }
 
-static u8 sub_81A3DD0(u16 species, u8 arg1, s32 arg2)
+static u8 AppendBannedMonSpeciesName(u16 species, u8 count, s32 numBannedMonsCaught)
 {
     if (GetSetPokedexFlag(SpeciesToNationalPokedexNum(species), FLAG_GET_CAUGHT))
     {
-        arg1++;
-        switch (arg1)
+        count++;
+        switch (count)
         {
         case 1:
         case 3:
@@ -1937,20 +1944,20 @@ static u8 sub_81A3DD0(u16 species, u8 arg1, s32 arg2)
         case 7:
         case 9:
         case 11:
-            if (arg2 == arg1)
+            if (numBannedMonsCaught == count)
                 StringAppend(gStringVar1, gText_SpaceAndSpace);
-            else if (arg2 > arg1)
+            else if (numBannedMonsCaught > count)
                 StringAppend(gStringVar1, gText_CommaSpace);
             break;
         case 2:
-            if (arg1 == arg2)
+            if (count == numBannedMonsCaught)
                 StringAppend(gStringVar1, gText_SpaceAndSpace);
             else
                 StringAppend(gStringVar1, gText_CommaSpace);
             StringAppend(gStringVar1, gText_NewLine);
             break;
         default:
-            if (arg1 == arg2)
+            if (count == numBannedMonsCaught)
                 StringAppend(gStringVar1, gText_SpaceAndSpace);
             else
                 StringAppend(gStringVar1, gText_CommaSpace);
@@ -1960,7 +1967,7 @@ static u8 sub_81A3DD0(u16 species, u8 arg1, s32 arg2)
         StringAppend(gStringVar1, gSpeciesNames[species]);
     }
 
-    return arg1;
+    return count;
 }
 
 static void AppendIfValid(u16 species, u16 heldItem, u16 hp, u8 lvlMode, u8 monLevel, u16 *speciesArray, u16 *itemsArray, u8 *count)
@@ -1998,8 +2005,8 @@ static void AppendIfValid(u16 species, u16 heldItem, u16 hp, u8 lvlMode, u8 monL
 
 static void sub_81A3FD4(void)
 {
-    u16 speciesArray[6];
-    u16 itemArray[6];
+    u16 speciesArray[PARTY_SIZE];
+    u16 itemArray[PARTY_SIZE];
     s32 monId = 0;
     s32 toChoose = 0;
     u8 count = 0;
@@ -2036,7 +2043,7 @@ static void sub_81A3FD4(void)
             u16 hp = GetMonData(&gPlayerParty[monId], MON_DATA_HP);
             if (VarGet(VAR_FRONTIER_FACILITY) == FRONTIER_FACILITY_PYRAMID)
             {
-                if (heldItem == 0)
+                if (heldItem == ITEM_NONE)
                     AppendIfValid(species, heldItem, hp, gSpecialVar_Result, level, speciesArray, itemArray, &count);
             }
             else
@@ -2065,7 +2072,7 @@ static void sub_81A3FD4(void)
         gSpecialVar_0x8004 = 1;
         count = 0;
         for (i = 0; gFrontierBannedSpecies[i] != 0xFFFF; i++)
-            count = sub_81A3DD0(gFrontierBannedSpecies[i], count, caughtBannedMons);
+            count = AppendBannedMonSpeciesName(gFrontierBannedSpecies[i], count, caughtBannedMons);
 
         if (count == 0)
         {
@@ -2174,7 +2181,7 @@ static void BufferFrontierTrainerName(void)
     }
 }
 
-static void sub_81A447C(void)
+static void ResetSketchedMoves(void)
 {
     u8 i, j, k;
 
@@ -2426,7 +2433,7 @@ u8 GetFrontierBrainTrainerPicIndex(void)
     else
         facility = VarGet(VAR_FRONTIER_FACILITY);
 
-    return gTrainers[gFacilityToBrainTrainerId[facility]].trainerPic;
+    return gTrainers[sFrontierBrainTrainerIds[facility]].trainerPic;
 }
 
 u8 GetFrontierBrainTrainerClass(void)
@@ -2438,7 +2445,7 @@ u8 GetFrontierBrainTrainerClass(void)
     else
         facility = VarGet(VAR_FRONTIER_FACILITY);
 
-    return gTrainers[gFacilityToBrainTrainerId[facility]].trainerClass;
+    return gTrainers[sFrontierBrainTrainerIds[facility]].trainerClass;
 }
 
 void CopyFrontierBrainTrainerName(u8 *dst)
@@ -2452,7 +2459,7 @@ void CopyFrontierBrainTrainerName(u8 *dst)
         facility = VarGet(VAR_FRONTIER_FACILITY);
 
     for (i = 0; i < PLAYER_NAME_LENGTH; i++)
-        dst[i] = gTrainers[gFacilityToBrainTrainerId[facility]].trainerName[i];
+        dst[i] = gTrainers[sFrontierBrainTrainerIds[facility]].trainerName[i];
 
     dst[i] = EOS;
 }
@@ -2460,13 +2467,13 @@ void CopyFrontierBrainTrainerName(u8 *dst)
 bool8 IsFrontierBrainFemale(void)
 {
     s32 facility = VarGet(VAR_FRONTIER_FACILITY);
-    return sFacilityToBrainEventObjGfx[facility][1];
+    return sFrontierBrainObjEventGfx[facility][1];
 }
 
 void SetFrontierBrainEventObjGfx_2(void)
 {
     s32 facility = VarGet(VAR_FRONTIER_FACILITY);
-    VarSet(VAR_OBJ_GFX_ID_0, sFacilityToBrainEventObjGfx[facility][0]);
+    VarSet(VAR_OBJ_GFX_ID_0, sFrontierBrainObjEventGfx[facility][0]);
 }
 
 #define FRONTIER_BRAIN_OTID 61226
@@ -2769,7 +2776,7 @@ u16 GetFrontierBrainMonSpecies(u8 monId)
 void SetFrontierBrainEventObjGfx(u8 facility)
 {
     gTrainerBattleOpponent_A = TRAINER_FRONTIER_BRAIN;
-    VarSet(VAR_OBJ_GFX_ID_0, sFacilityToBrainEventObjGfx[facility][0]);
+    VarSet(VAR_OBJ_GFX_ID_0, sFrontierBrainObjEventGfx[facility][0]);
 }
 
 u16 GetFrontierBrainMonMove(u8 monId, u8 moveSlotId)
@@ -2804,17 +2811,18 @@ s32 GetFronterBrainSymbol(void)
     if (symbol == 2)
     {
         u16 winStreak = GetCurrentFacilityWinStreak();
-        if (winStreak + gUnknown_08611550[facility][3] == gUnknown_08611550[facility][0])
+        if (winStreak + sFrontierBrainStreakAppearances[facility][3] == sFrontierBrainStreakAppearances[facility][0])
             symbol = 0;
-        else if (winStreak + gUnknown_08611550[facility][3] == gUnknown_08611550[facility][1])
+        else if (winStreak + sFrontierBrainStreakAppearances[facility][3] == sFrontierBrainStreakAppearances[facility][1])
             symbol = 1;
-        else if (winStreak + gUnknown_08611550[facility][3] > gUnknown_08611550[facility][1]
-                 && (winStreak + gUnknown_08611550[facility][3] - gUnknown_08611550[facility][1]) % gUnknown_08611550[facility][2] == 0)
+        else if (winStreak + sFrontierBrainStreakAppearances[facility][3] > sFrontierBrainStreakAppearances[facility][1]
+                 && (winStreak + sFrontierBrainStreakAppearances[facility][3] - sFrontierBrainStreakAppearances[facility][1]) % sFrontierBrainStreakAppearances[facility][2] == 0)
             symbol = 1;
     }
     return symbol;
 }
 
+// Called for intro speech as well despite the fact that its handled in the map scripts files instead
 static void CopyFrontierBrainText(bool8 playerWonText)
 {
     s32 facility;
@@ -2834,10 +2842,10 @@ static void CopyFrontierBrainText(bool8 playerWonText)
     switch (playerWonText)
     {
     case FALSE:
-        StringCopy(gStringVar4, gUnknown_08611DB0[symbol][facility]);
+        StringCopy(gStringVar4, sFrontierBrainPlayerLostTexts[symbol][facility]);
         break;
     case TRUE:
-        StringCopy(gStringVar4, gUnknown_08611DB8[symbol][facility]);
+        StringCopy(gStringVar4, sFrontierBrainPlayerWonTexts[symbol][facility]);
         break;
     }
 }

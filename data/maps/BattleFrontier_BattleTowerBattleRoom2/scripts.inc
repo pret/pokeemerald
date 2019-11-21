@@ -45,7 +45,7 @@ BattleFrontier_BattleTowerBattleRoom2_EventScript_248F4D:: @ 8248F4D
 	applymovement 5, BattleFrontier_BattleTowerBattleRoom2_Movement_249518
 	applymovement 6, BattleFrontier_BattleTowerBattleRoom2_Movement_24951E
 	waitmovement 0
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_1
+	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_GET_DATA
 	setvar VAR_0x8005, 2
 	special CallFrontierUtilFunc
 	compare VAR_RESULT, 0
@@ -56,7 +56,7 @@ BattleFrontier_BattleTowerBattleRoom2_EventScript_248F4D:: @ 8248F4D
 	applymovement 5, BattleFrontier_BattleTowerBattleRoom2_Movement_249524
 	applymovement 6, BattleFrontier_BattleTowerBattleRoom2_Movement_249524
 	waitmovement 0
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_2
+	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_SET_DATA
 	setvar VAR_0x8005, 6
 	setvar VAR_0x8006, 1
 	special CallFrontierUtilFunc
@@ -114,10 +114,7 @@ BattleFrontier_BattleTowerBattleRoom2_EventScript_249069:: @ 8249069
 	case 1, BattleFrontier_BattleTowerBattleRoom2_EventScript_2490AA
 
 BattleFrontier_BattleTowerBattleRoom2_EventScript_24907E:: @ 824907E
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_2
-	setvar VAR_0x8005, 0
-	setvar VAR_0x8006, 4
-	special CallFrontierUtilFunc
+	frontier_setchallengestatus CHALLENGE_STATUS_LOST
 	setvar VAR_0x8004, BATTLE_TOWER_FUNC_2
 	setvar VAR_0x8005, 3
 	special CallBattleTowerFunc
@@ -164,7 +161,7 @@ BattleFrontier_BattleTowerBattleRoom2_EventScript_249121:: @ 8249121
 	special HealPlayerParty
 
 BattleFrontier_BattleTowerBattleRoom2_EventScript_249143:: @ 8249143
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_1
+	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_GET_DATA
 	setvar VAR_0x8005, 2
 	special CallFrontierUtilFunc
 	call BattleFrontier_BattleTowerBattleRoom2_EventScript_2492FD
@@ -231,10 +228,7 @@ BattleFrontier_BattleTowerBattleRoom2_EventScript_249283:: @ 8249283
 	end
 
 BattleFrontier_BattleTowerBattleRoom2_EventScript_2492AF:: @ 82492AF
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_2
-	setvar VAR_0x8005, 0
-	setvar VAR_0x8006, 3
-	special CallFrontierUtilFunc
+	frontier_setchallengestatus CHALLENGE_STATUS_WON
 	setvar VAR_0x8004, BATTLE_TOWER_FUNC_2
 	setvar VAR_0x8005, 3
 	special CallBattleTowerFunc

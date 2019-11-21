@@ -1156,7 +1156,7 @@ static void sub_8161F94(void)
     u32 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
     u32 battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
 
-    gSaveBlock2Ptr->frontier.field_CA8 = 1;
+    gSaveBlock2Ptr->frontier.challengeOutcome = 1;
     gSaveBlock2Ptr->frontier.curChallengeBattleNum = 0;
     gSaveBlock2Ptr->frontier.field_CA9_a = 0;
     gSaveBlock2Ptr->frontier.field_CA9_b = 0;
@@ -2428,7 +2428,7 @@ static void SaveBattleTowerProgress(void)
     if (gSpecialVar_0x8005 == 0 && (challengeNum > 1 || gSaveBlock2Ptr->frontier.curChallengeBattleNum != 0))
         sub_8163EE4();
 
-    gSaveBlock2Ptr->frontier.field_CA8 =gSpecialVar_0x8005;
+    gSaveBlock2Ptr->frontier.challengeOutcome =gSpecialVar_0x8005;
     VarSet(VAR_TEMP_0, 0);
     gSaveBlock2Ptr->frontier.field_CA9_a = 1;
     sub_81A4C30();
@@ -3158,7 +3158,7 @@ static void CopyEReaderTrainerFarewellMessage(void)
 
 void sub_81653CC(void)
 {
-    if (gSaveBlock2Ptr->frontier.field_CA8 == 1)
+    if (gSaveBlock2Ptr->frontier.challengeOutcome == 1)
         sub_80F01B8();
     if (FlagGet(FLAG_CANCEL_BATTLE_ROOM_CHALLENGE) == TRUE)
     {

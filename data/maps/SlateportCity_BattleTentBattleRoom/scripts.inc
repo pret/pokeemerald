@@ -63,23 +63,15 @@ SlateportCity_BattleTentBattleRoom_EventScript_2099BE:: @ 82099BE
 	case 1, SlateportCity_BattleTentBattleRoom_EventScript_209A39
 
 SlateportCity_BattleTentCorridor_EventScript_209A1B:: @ 8209A1B
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_2
-	setvar VAR_0x8005, 0
-	setvar VAR_0x8006, 4
-	special CallFrontierUtilFunc
+	frontier_setchallengestatus CHALLENGE_STATUS_LOST
 	special LoadPlayerParty
 	warp MAP_SLATEPORT_CITY_BATTLE_TENT_LOBBY, 255, 6, 6
 	waitstate
 
 SlateportCity_BattleTentBattleRoom_EventScript_209A39:: @ 8209A39
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_1
-	setvar VAR_0x8005, 2
-	special CallFrontierUtilFunc
+	frontier_getbattlenum
 	addvar VAR_RESULT, 1
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_2
-	setvar VAR_0x8005, 2
-	copyvar VAR_0x8006, VAR_RESULT
-	special CallFrontierUtilFunc
+	frontier_setbattlenum VAR_RESULT
 	switch VAR_RESULT
 	case 3, SlateportCity_BattleTentBattleRoom_EventScript_209A7B
 @ 	case 3, SlateportCity_BattleTentCorridor_EventScript_209A7B
@@ -89,10 +81,7 @@ SlateportCity_BattleTentBattleRoom_EventScript_209A39:: @ 8209A39
 
 SlateportCity_BattleTentBattleRoom_EventScript_209A7B:: @ 8209A7B
 SlateportCity_BattleTentCorridor_EventScript_209A7B:: @ 8209A7B
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_2
-	setvar VAR_0x8005, 0
-	setvar VAR_0x8006, 3
-	special CallFrontierUtilFunc
+	frontier_setchallengestatus CHALLENGE_STATUS_WON
 	special LoadPlayerParty
 	warp MAP_SLATEPORT_CITY_BATTLE_TENT_LOBBY, 255, 6, 6
 	waitstate

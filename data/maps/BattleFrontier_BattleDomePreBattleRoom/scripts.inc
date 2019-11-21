@@ -19,7 +19,7 @@ BattleFrontier_BattleDomePreBattleRoom_MapScript2_24B218: @ 824B218
 BattleFrontier_BattleDomePreBattleRoom_EventScript_24B222:: @ 824B222
 	compare VAR_0x8006, 1
 	goto_if_eq BattleFrontier_BattleDomePreBattleRoom_EventScript_24B5C7
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_2
+	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_SET_DATA
 	setvar VAR_0x8005, 6
 	setvar VAR_0x8006, 1
 	special CallFrontierUtilFunc
@@ -120,7 +120,7 @@ BattleFrontier_BattleDomePreBattleRoom_EventScript_24B3F5:: @ 824B3F5
 	goto BattleFrontier_BattleDomePreBattleRoom_EventScript_24B24F
 
 BattleFrontier_BattleDomePreBattleRoom_EventScript_24B40A:: @ 824B40A
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_1
+	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_GET_DATA
 	setvar VAR_0x8005, 2
 	special CallFrontierUtilFunc
 	switch VAR_RESULT
@@ -156,8 +156,7 @@ BattleFrontier_BattleDomePreBattleRoom_EventScript_24B46D:: @ 824B46D
 	setvar VAR_0x8005, 2
 	special sub_80F9490
 	waitstate
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_21
-	special CallFrontierUtilFunc
+	frontier_resetsketch
 	compare VAR_RESULT, 0
 	goto_if_eq BattleFrontier_BattleDomePreBattleRoom_EventScript_24B24F
 	setvar VAR_0x8004, 2
@@ -185,7 +184,7 @@ BattleFrontier_BattleDomePreBattleRoom_EventScript_24B46D:: @ 824B46D
 	end
 
 BattleFrontier_BattleDomePreBattleRoom_EventScript_24B4FB:: @ 824B4FB
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_1
+	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_GET_DATA
 	setvar VAR_0x8005, 2
 	special CallFrontierUtilFunc
 	switch VAR_RESULT
@@ -208,13 +207,12 @@ BattleFrontier_BattleDomePreBattleRoom_EventScript_24B546:: @ 824B546
 	return
 
 BattleFrontier_BattleDomePreBattleRoom_EventScript_24B54C:: @ 824B54C
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_9
-	special CallFrontierUtilFunc
+	frontier_getbrainstatus
 	switch VAR_RESULT
-	case 1, BattleFrontier_BattleDomePreBattleRoom_EventScript_24B58B
-	case 2, BattleFrontier_BattleDomePreBattleRoom_EventScript_24B5A0
-	case 3, BattleFrontier_BattleDomePreBattleRoom_EventScript_24B58B
-	case 4, BattleFrontier_BattleDomePreBattleRoom_EventScript_24B5A0
+	case FRONTIER_BRAIN_SILVER, BattleFrontier_BattleDomePreBattleRoom_EventScript_24B58B
+	case FRONTIER_BRAIN_GOLD, BattleFrontier_BattleDomePreBattleRoom_EventScript_24B5A0
+	case FRONTIER_BRAIN_STREAK, BattleFrontier_BattleDomePreBattleRoom_EventScript_24B58B
+	case FRONTIER_BRAIN_STREAK_LONG, BattleFrontier_BattleDomePreBattleRoom_EventScript_24B5A0
 	message BattleFrontier_BattleDomePreBattleRoom_Text_24B6E3
 	return
 
@@ -242,9 +240,7 @@ BattleFrontier_BattleDomePreBattleRoom_EventScript_24B5C7:: @ 824B5C7
 	setvar VAR_TEMP_0, 1
 	msgbox BattleFrontier_BattleDomePreBattleRoom_Text_24B760, MSGBOX_DEFAULT
 	special LoadPlayerParty
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_LOAD_SELECTED_PARTY
-	setvar VAR_0x8005, FRONTIER_PARTY_SIZE
-	special CallFrontierUtilFunc
+	frontier_loadselectedmons
 	playfanfare MUS_ME_ASA
 	waitfanfare
 	special HealPlayerParty
@@ -256,7 +252,7 @@ BattleFrontier_BattleDomePreBattleRoom_EventScript_24B5C7:: @ 824B5C7
 	goto BattleFrontier_BattleDomePreBattleRoom_EventScript_24B24F
 
 BattleFrontier_BattleDomePreBattleRoom_EventScript_24B600:: @ 824B600
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_1
+	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_GET_DATA
 	setvar VAR_0x8005, 2
 	special CallFrontierUtilFunc
 	switch VAR_RESULT

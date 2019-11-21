@@ -5,16 +5,24 @@
 #define FRONTIER_PLAYER_LOST_TEXT 1
 #define FRONTIER_PLAYER_WON_TEXT  2
 
-#define FRONTIER_UTIL_FUNC_0                      0
-#define FRONTIER_UTIL_FUNC_1                      1
-#define FRONTIER_UTIL_FUNC_2                      2
+// return values for GetFrontierBrainStatus
+#define FRONTIER_BRAIN_NOT_READY   0
+#define FRONTIER_BRAIN_SILVER      1
+#define FRONTIER_BRAIN_GOLD        2
+#define FRONTIER_BRAIN_STREAK      3  // for encountering the brain after getting both symbols
+#define FRONTIER_BRAIN_STREAK_LONG 4  //
+
+
+#define FRONTIER_UTIL_FUNC_GET_STATUS             0
+#define FRONTIER_UTIL_FUNC_GET_DATA               1
+#define FRONTIER_UTIL_FUNC_SET_DATA               2
 #define FRONTIER_UTIL_FUNC_LOAD_SELECTED_PARTY    3
 #define FRONTIER_UTIL_FUNC_SOFT_RESET             4
 #define FRONTIER_UTIL_FUNC_SET_FRONTIER_TRAINERS  5
 #define FRONTIER_UTIL_FUNC_6                      6
 #define FRONTIER_UTIL_FUNC_RESULTS_WINDOW         7
 #define FRONTIER_UTIL_FUNC_8                      8
-#define FRONTIER_UTIL_FUNC_9                      9
+#define FRONTIER_UTIL_FUNC_GET_BRAIN_STATUS       9
 #define FRONTIER_UTIL_FUNC_IS_FRONTIER_BRAIN      10
 #define FRONTIER_UTIL_FUNC_11                     11
 #define FRONTIER_UTIL_FUNC_GET_FACILITY_SYMBOLS   12
@@ -26,7 +34,16 @@
 #define FRONTIER_UTIL_FUNC_18                     18
 #define FRONTIER_UTIL_FUNC_19                     19
 #define FRONTIER_UTIL_FUNC_BUFFER_TRAINER_NAME    20
-#define FRONTIER_UTIL_FUNC_21                     21
+#define FRONTIER_UTIL_FUNC_RESET_SKETCH_MOVES     21
 #define FRONTIER_UTIL_FUNC_SET_BRAIN_OBJECT       22
+
+#define FRONTIER_DATA_CHALLENGE_STATUS   0
+#define FRONTIER_DATA_LVL_MODE           1
+#define FRONTIER_DATA_BATTLE_NUM         2
+#define FRONTIER_DATA_3                  3
+#define FRONTIER_DATA_4                  4
+#define FRONTIER_DATA_BATTLE_OUTCOME     5
+#define FRONTIER_DATA_6                  6
+#define FRONTIER_DATA_SYMBOL             7
 
 #endif // GUARD_CONSTANTS_FRONTIER_UTIL_H
