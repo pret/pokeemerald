@@ -70,7 +70,7 @@ static const u8 gSpriteImage_858DB78[] = INCBIN_U8("graphics/unknown/858E588/4.4
 
 static const u8 gUnusedEmptySpace_858DBF8[32] = {0};
 
-static const u16 gFieldEffectObjectPalette7[] = INCBIN_U16("graphics/event_objects/palettes/field_effect_object_palette_07.gbapal");
+static const u16 gFieldEffectObjectPalette7[] = INCBIN_U16("graphics/object_events/palettes/field_effect_object_palette_07.gbapal");
 static const u8 gSpriteImage_858DC38[] = INCBIN_U8("graphics/unknown/858E5D8/0.4bpp");
 static const u8 gSpriteImage_858DCB8[] = INCBIN_U8("graphics/unknown/858E5D8/1.4bpp");
 static const u8 gSpriteImage_858DD38[] = INCBIN_U8("graphics/unknown/858E5D8/2.4bpp");
@@ -82,7 +82,7 @@ static const u8 gSpriteImage_858DFB8[] = INCBIN_U8("graphics/unknown/858E5B0/2.4
 static const u8 gSpriteImage_858E038[] = INCBIN_U8("graphics/unknown/858E5B0/3.4bpp");
 static const u8 gSpriteImage_858E0B8[] = INCBIN_U8("graphics/unknown/858E5B0/4.4bpp");
 static const u8 gSpriteImage_858E138[] = INCBIN_U8("graphics/unknown/858E5B0/5.4bpp");
-static const u16 gFieldEffectObjectPalette8[] = INCBIN_U16("graphics/event_objects/palettes/field_effect_object_palette_08.gbapal");
+static const u16 gFieldEffectObjectPalette8[] = INCBIN_U16("graphics/object_events/palettes/field_effect_object_palette_08.gbapal");
 static const u8 gSpriteImage_858E1D8[] = INCBIN_U8("graphics/unknown/858E674/0.4bpp");
 static const u8 gSpriteImage_858E2D8[] = INCBIN_U8("graphics/unknown/858E674/1.4bpp");
 static const u8 gSpriteImage_858E3D8[] = INCBIN_U8("graphics/unknown/858E674/2.4bpp");

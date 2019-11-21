@@ -817,7 +817,7 @@ static const struct SpriteTemplate sSpriteTemplate_85C8EBC =
     .callback = sub_8148380
 };
 
-static const u16 gFieldEffectObjectPalette10[] = INCBIN_U16("graphics/event_objects/palettes/field_effect_object_palette_10.gbapal");
+static const u16 gFieldEffectObjectPalette10[] = INCBIN_U16("graphics/object_events/palettes/field_effect_object_palette_10.gbapal");
 
 const struct SpritePalette gFieldEffectObjectPaletteInfo10 =
 {
