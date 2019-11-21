@@ -46,7 +46,7 @@ static void Bike_UpdateDirTimerHistory(u8);
 static void Bike_UpdateABStartSelectHistory(u8);
 static u8 Bike_DPadToDirection(u16);
 static u8 GetBikeCollision(u8);
-static u8 GetBikeCollisionAt(struct EventObject *, s16, s16, u8, u8);
+static u8 GetBikeCollisionAt(struct ObjectEvent *, s16, s16, u8, u8);
 static bool8 IsRunningDisallowedByMetatile(u8);
 static void Bike_TryAdvanceCyclingRoadCollisions();
 static u8 CanBikeFaceDirOnMetatile(u8, u8);
@@ -186,7 +186,7 @@ static void MachBikeTransition_FaceDirection(u8 direction)
 
 static void MachBikeTransition_TurnDirection(u8 direction)
 {
-    struct EventObject *playerEventObj = &gEventObjects[gPlayerAvatar.eventObjectId];
+    struct ObjectEvent *playerEventObj = &gObjectEvents[gPlayerAvatar.objectEventId];
 
     if (CanBikeFaceDirOnMetatile(direction, playerEventObj->currentMetatileBehavior))
     {
@@ -201,7 +201,7 @@ static void MachBikeTransition_TurnDirection(u8 direction)
 
 static void MachBikeTransition_TrySpeedUp(u8 direction)
 {
-    struct EventObject *playerEventObj = &gEventObjects[gPlayerAvatar.eventObjectId];
+    struct ObjectEvent *playerEventObj = &gObjectEvents[gPlayerAvatar.objectEventId];
     u8 collision;
 
     if (CanBikeFaceDirOnMetatile(direction, playerEventObj->currentMetatileBehavior) == FALSE)
@@ -366,10 +366,10 @@ static u8 AcroBikeHandleInputTurning(u8 *newDirection, u16 newKeys, u16 heldKeys
 static u8 AcroBikeHandleInputWheelieStanding(u8 *newDirection, u16 newKeys, u16 heldKeys)
 {
     u8 direction;
-    struct EventObject *playerEventObj;
+    struct ObjectEvent *playerEventObj;
 
     direction = GetPlayerMovementDirection();
-    playerEventObj = &gEventObjects[gPlayerAvatar.eventObjectId];
+    playerEventObj = &gObjectEvents[gPlayerAvatar.objectEventId];
     gPlayerAvatar.runningState = NOT_MOVING;
 
     if (heldKeys & B_BUTTON)
@@ -413,10 +413,10 @@ static u8 AcroBikeHandleInputWheelieStanding(u8 *newDirection, u16 newKeys, u16 
 static u8 AcroBikeHandleInputBunnyHop(u8 *newDirection, u16 newKeys, u16 heldKeys)
 {
     u8 direction;
-    struct EventObject *playerEventObj;
+    struct ObjectEvent *playerEventObj;
 
     direction = GetPlayerMovementDirection();
-    playerEventObj = &gEventObjects[gPlayerAvatar.eventObjectId];
+    playerEventObj = &gObjectEvents[gPlayerAvatar.objectEventId];
     if (!(heldKeys & B_BUTTON))
     {
         // B button was released
@@ -460,10 +460,10 @@ static u8 AcroBikeHandleInputBunnyHop(u8 *newDirection, u16 newKeys, u16 heldKey
 static u8 AcroBikeHandleInputWheelieMoving(u8 *newDirection, u16 newKeys, u16 heldKeys)
 {
     u8 direction;
-    struct EventObject *playerEventObj;
+    struct ObjectEvent *playerEventObj;
 
     direction = GetPlayerFacingDirection();
-    playerEventObj = &gEventObjects[gPlayerAvatar.eventObjectId];
+    playerEventObj = &gObjectEvents[gPlayerAvatar.objectEventId];
     if (!(heldKeys & B_BUTTON))
     {
         // we were moving on a wheelie, but we let go while moving. reset bike still status
@@ -514,10 +514,10 @@ static u8 AcroBikeHandleInputWheelieMoving(u8 *newDirection, u16 newKeys, u16 he
 
 static u8 AcroBikeHandleInputSidewaysJump(u8 *ptr, u16 newKeys, u16 heldKeys)
 {
-    struct EventObject *playerEventObj = &gEventObjects[gPlayerAvatar.eventObjectId];
+    struct ObjectEvent *playerEventObj = &gObjectEvents[gPlayerAvatar.objectEventId];
 
     playerEventObj->facingDirectionLocked = 0;
-    SetEventObjectDirection(playerEventObj, playerEventObj->facingDirection);
+    SetObjectEventDirection(playerEventObj, playerEventObj->facingDirection);
     gPlayerAvatar.acroBikeState = ACRO_STATE_NORMAL;
     return CheckMovementInputAcroBike(ptr, newKeys, heldKeys);
 }
@@ -535,7 +535,7 @@ static void AcroBikeTransition_FaceDirection(u8 direction)
 
 static void AcroBikeTransition_TurnDirection(u8 direction)
 {
-    struct EventObject *playerEventObj = &gEventObjects[gPlayerAvatar.eventObjectId];
+    struct ObjectEvent *playerEventObj = &gObjectEvents[gPlayerAvatar.objectEventId];
 
     if (CanBikeFaceDirOnMetatile(direction, playerEventObj->currentMetatileBehavior) == 0)
         direction = playerEventObj->movementDirection;
@@ -545,7 +545,7 @@ static void AcroBikeTransition_TurnDirection(u8 direction)
 static void AcroBikeTransition_Moving(u8 direction)
 {
     u8 collision;
-    struct EventObject *playerEventObj = &gEventObjects[gPlayerAvatar.eventObjectId];
+    struct ObjectEvent *playerEventObj = &gObjectEvents[gPlayerAvatar.objectEventId];
 
     if (CanBikeFaceDirOnMetatile(direction, playerEventObj->currentMetatileBehavior) == 0)
     {
@@ -570,7 +570,7 @@ static void AcroBikeTransition_Moving(u8 direction)
 
 static void AcroBikeTransition_NormalToWheelie(u8 direction)
 {
-    struct EventObject *playerEventObj = &gEventObjects[gPlayerAvatar.eventObjectId];
+    struct ObjectEvent *playerEventObj = &gObjectEvents[gPlayerAvatar.objectEventId];
 
     if (CanBikeFaceDirOnMetatile(direction, playerEventObj->currentMetatileBehavior) == 0)
         direction = playerEventObj->movementDirection;
@@ -579,7 +579,7 @@ static void AcroBikeTransition_NormalToWheelie(u8 direction)
 
 static void AcroBikeTransition_WheelieToNormal(u8 direction)
 {
-    struct EventObject *playerEventObj = &gEventObjects[gPlayerAvatar.eventObjectId];
+    struct ObjectEvent *playerEventObj = &gObjectEvents[gPlayerAvatar.objectEventId];
 
     if (CanBikeFaceDirOnMetatile(direction, playerEventObj->currentMetatileBehavior) == 0)
         direction = playerEventObj->movementDirection;
@@ -588,7 +588,7 @@ static void AcroBikeTransition_WheelieToNormal(u8 direction)
 
 static void AcroBikeTransition_WheelieIdle(u8 direction)
 {
-    struct EventObject *playerEventObj = &gEventObjects[gPlayerAvatar.eventObjectId];
+    struct ObjectEvent *playerEventObj = &gObjectEvents[gPlayerAvatar.objectEventId];
 
     if (CanBikeFaceDirOnMetatile(direction, playerEventObj->currentMetatileBehavior) == 0)
         direction = playerEventObj->movementDirection;
@@ -597,7 +597,7 @@ static void AcroBikeTransition_WheelieIdle(u8 direction)
 
 static void AcroBikeTransition_WheelieHoppingStanding(u8 direction)
 {
-    struct EventObject *playerEventObj = &gEventObjects[gPlayerAvatar.eventObjectId];
+    struct ObjectEvent *playerEventObj = &gObjectEvents[gPlayerAvatar.objectEventId];
 
     if (CanBikeFaceDirOnMetatile(direction, playerEventObj->currentMetatileBehavior) == 0)
         direction = playerEventObj->movementDirection;
@@ -607,7 +607,7 @@ static void AcroBikeTransition_WheelieHoppingStanding(u8 direction)
 static void AcroBikeTransition_WheelieHoppingMoving(u8 direction)
 {
     u8 collision;
-    struct EventObject *playerEventObj = &gEventObjects[gPlayerAvatar.eventObjectId];
+    struct ObjectEvent *playerEventObj = &gObjectEvents[gPlayerAvatar.objectEventId];
 
     if (CanBikeFaceDirOnMetatile(direction, playerEventObj->currentMetatileBehavior) == 0)
     {
@@ -641,7 +641,7 @@ static void AcroBikeTransition_WheelieHoppingMoving(u8 direction)
 static void AcroBikeTransition_SideJump(u8 direction)
 {
     u8 collision;
-    struct EventObject *playerEventObj;
+    struct ObjectEvent *playerEventObj;
 
     collision = GetBikeCollision(direction);
     if (collision)
@@ -659,7 +659,7 @@ static void AcroBikeTransition_SideJump(u8 direction)
             return;
         }
     }
-    playerEventObj = &gEventObjects[gPlayerAvatar.eventObjectId];
+    playerEventObj = &gObjectEvents[gPlayerAvatar.objectEventId];
     PlaySE(SE_JITE_PYOKO);
     playerEventObj->facingDirectionLocked = 1;
     PlayerSetAnimId(GetJumpMovementAction(direction), 2);
@@ -673,7 +673,7 @@ static void AcroBikeTransition_TurnJump(u8 direction)
 static void AcroBikeTransition_WheelieMoving(u8 direction)
 {
     u8 collision;
-    struct EventObject *playerEventObj = &gEventObjects[gPlayerAvatar.eventObjectId];
+    struct ObjectEvent *playerEventObj = &gObjectEvents[gPlayerAvatar.objectEventId];
 
     if (CanBikeFaceDirOnMetatile(direction, playerEventObj->currentMetatileBehavior) == 0)
     {
@@ -707,7 +707,7 @@ static void AcroBikeTransition_WheelieMoving(u8 direction)
 static void AcroBikeTransition_WheelieRisingMoving(u8 direction)
 {
     u8 collision;
-    struct EventObject *playerEventObj = &gEventObjects[gPlayerAvatar.eventObjectId];
+    struct ObjectEvent *playerEventObj = &gObjectEvents[gPlayerAvatar.objectEventId];
 
     if (CanBikeFaceDirOnMetatile(direction, playerEventObj->currentMetatileBehavior) == 0)
     {
@@ -741,7 +741,7 @@ static void AcroBikeTransition_WheelieRisingMoving(u8 direction)
 static void AcroBikeTransition_WheelieLoweringMoving(u8 direction)
 {
     u8 collision;
-    struct EventObject *playerEventObj = &gEventObjects[gPlayerAvatar.eventObjectId];
+    struct ObjectEvent *playerEventObj = &gObjectEvents[gPlayerAvatar.objectEventId];
 
     if (CanBikeFaceDirOnMetatile(direction, playerEventObj->currentMetatileBehavior) == 0)
     {
@@ -868,7 +868,7 @@ static u8 Bike_DPadToDirection(u16 heldKeys)
 static u8 GetBikeCollision(u8 direction)
 {
     u8 metatitleBehavior;
-    struct EventObject *playerEventObj = &gEventObjects[gPlayerAvatar.eventObjectId];
+    struct ObjectEvent *playerEventObj = &gObjectEvents[gPlayerAvatar.objectEventId];
     s16 x = playerEventObj->currentCoords.x;
     s16 y = playerEventObj->currentCoords.y;
     MoveCoords(direction, &x, &y);
@@ -876,9 +876,9 @@ static u8 GetBikeCollision(u8 direction)
     return GetBikeCollisionAt(playerEventObj, x, y, direction, metatitleBehavior);
 }
 
-static u8 GetBikeCollisionAt(struct EventObject *eventObject, s16 x, s16 y, u8 direction, u8 metatitleBehavior)
+static u8 GetBikeCollisionAt(struct ObjectEvent *objectEvent, s16 x, s16 y, u8 direction, u8 metatitleBehavior)
 {
-    u8 collision = CheckForEventObjectCollision(eventObject, x, y, direction, metatitleBehavior);
+    u8 collision = CheckForObjectEventCollision(objectEvent, x, y, direction, metatitleBehavior);
 
     if (collision > COLLISION_EVENT_OBJECT)
         return collision;
@@ -966,7 +966,7 @@ bool8 IsBikingDisallowedByPlayer(void)
 
 bool8 player_should_look_direction_be_enforced_upon_movement(void)
 {
-    if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_ACRO_BIKE) != FALSE && MetatileBehavior_IsBumpySlope(gEventObjects[gPlayerAvatar.eventObjectId].currentMetatileBehavior) != FALSE)
+    if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_ACRO_BIKE) != FALSE && MetatileBehavior_IsBumpySlope(gObjectEvents[gPlayerAvatar.objectEventId].currentMetatileBehavior) != FALSE)
         return FALSE;
     else
         return TRUE;

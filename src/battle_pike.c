@@ -52,7 +52,7 @@ static void SetRoomType(void);
 static void GetBattlePikeData(void);
 static void SetBattlePikeData(void);
 static void GetInFinalRoom(void);
-static void SetupRoomEventObjects(void);
+static void SetupRoomObjectEvents(void);
 static void GetRoomType(void);
 static void sub_81A7400(void);
 static void sub_81A740C(void);
@@ -483,7 +483,7 @@ static void (* const sBattlePikeFunctions[])(void) =
     GetBattlePikeData,
     SetBattlePikeData,
     GetInFinalRoom,
-    SetupRoomEventObjects,
+    SetupRoomObjectEvents,
     GetRoomType,
     sub_81A7400,
     sub_81A740C,
@@ -551,7 +551,7 @@ static void SetRoomType(void)
     sRoomType = roomType;
 }
 
-static void SetupRoomEventObjects(void)
+static void SetupRoomObjectEvents(void)
 {
     bool32 setObjGfx1, setObjGfx2;
     u32 objGfx1;

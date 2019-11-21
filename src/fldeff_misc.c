@@ -317,7 +317,7 @@ static const struct SpriteTemplate gUnknown_0858E880 =
 {
     .tileTag = 0xFFFF,
     .paletteTag = 0x1000,
-    .oam = &gEventObjectBaseOam_32x8,
+    .oam = &gObjectEventBaseOam_32x8,
     .anims = gSpriteAnimTable_858E87C,
     .images = gUnknown_0858E84C,
     .affineAnims = gDummySpriteAffineAnimTable,
@@ -1002,8 +1002,8 @@ static void SpriteCB_GlitterMatSparkle(struct Sprite *sprite)
 
 void DoSecretBaseGlitterMatSparkle(void)
 {
-    s16 x = gEventObjects[gPlayerAvatar.eventObjectId].currentCoords.x;
-    s16 y = gEventObjects[gPlayerAvatar.eventObjectId].currentCoords.y;
+    s16 x = gObjectEvents[gPlayerAvatar.objectEventId].currentCoords.x;
+    s16 y = gObjectEvents[gPlayerAvatar.objectEventId].currentCoords.y;
     u8 spriteId;
 
     sub_80930E0(&x, &y, 8, 4);
@@ -1229,27 +1229,27 @@ static void Task_WateringBerryTreeAnim_0(u8 taskId)
 
 static void Task_WateringBerryTreeAnim_1(u8 taskId)
 {
-    struct EventObject *playerEventObj = &gEventObjects[gPlayerAvatar.eventObjectId];
+    struct ObjectEvent *playerEventObj = &gObjectEvents[gPlayerAvatar.objectEventId];
 
-    if (!EventObjectIsMovementOverridden(playerEventObj)
-        || EventObjectClearHeldMovementIfFinished(playerEventObj))
+    if (!ObjectEventIsMovementOverridden(playerEventObj)
+        || ObjectEventClearHeldMovementIfFinished(playerEventObj))
     {
         sub_808C228(GetPlayerFacingDirection());
-        EventObjectSetHeldMovement(playerEventObj, GetWalkInPlaceNormalMovementAction(GetPlayerFacingDirection()));
+        ObjectEventSetHeldMovement(playerEventObj, GetWalkInPlaceNormalMovementAction(GetPlayerFacingDirection()));
         gTasks[taskId].func = Task_WateringBerryTreeAnim_2;
     }
 }
 
 static void Task_WateringBerryTreeAnim_2(u8 taskId)
 {
-    struct EventObject *playerEventObj = &gEventObjects[gPlayerAvatar.eventObjectId];
+    struct ObjectEvent *playerEventObj = &gObjectEvents[gPlayerAvatar.objectEventId];
 
-    if (EventObjectClearHeldMovementIfFinished(playerEventObj))
+    if (ObjectEventClearHeldMovementIfFinished(playerEventObj))
     {
         s16 value = gTasks[taskId].data[1]++;
 
         if (value < 10)
-            EventObjectSetHeldMovement(playerEventObj, GetWalkInPlaceNormalMovementAction(GetPlayerFacingDirection()));
+            ObjectEventSetHeldMovement(playerEventObj, GetWalkInPlaceNormalMovementAction(GetPlayerFacingDirection()));
 
         else
             gTasks[taskId].func = Task_WateringBerryTreeAnim_3;

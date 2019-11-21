@@ -71,7 +71,7 @@ static void sub_81A43A8(void);
 static void sub_81A4410(void);
 static void BufferFrontierTrainerName(void);
 static void sub_81A447C(void);
-static void SetFacilityBrainEventObject(void);
+static void SetFacilityBrainObjectEvent(void);
 static void ShowTowerResultsWindow(u8);
 static void ShowDomeResultsWindow(u8);
 static void ShowPalaceResultsWindow(u8);
@@ -626,7 +626,7 @@ static void (* const sFrontierUtilFuncs[])(void) =
     [FRONTIER_UTIL_FUNC_19]                    = sub_81A4410,
     [FRONTIER_UTIL_FUNC_BUFFER_TRAINER_NAME]   = BufferFrontierTrainerName,
     [FRONTIER_UTIL_FUNC_21]                    = sub_81A447C,
-    [FRONTIER_UTIL_FUNC_SET_BRAIN_OBJECT]      = SetFacilityBrainEventObject,
+    [FRONTIER_UTIL_FUNC_SET_BRAIN_OBJECT]      = SetFacilityBrainObjectEvent,
 };
 
 static const struct WindowTemplate gUnknown_08611C74 =
@@ -2199,7 +2199,7 @@ static void sub_81A447C(void)
     }
 }
 
-static void SetFacilityBrainEventObject(void)
+static void SetFacilityBrainObjectEvent(void)
 {
     SetFrontierBrainEventObjGfx(VarGet(VAR_FRONTIER_FACILITY));
 }

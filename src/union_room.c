@@ -4249,7 +4249,7 @@ void sub_801818C(bool32 arg0)
 void sub_80181CC(void)
 {
     ScriptContext2_Enable();
-    ScriptFreezeEventObjects();
+    ScriptFreezeObjectEvents();
 }
 
 u8 sub_80181DC(struct UnkStruct_URoom *arg0)

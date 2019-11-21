@@ -543,7 +543,7 @@ void ShowStartMenu(void) // Called from overworld.c and field_control_avatar.s
 {
     if (!IsUpdateLinkStateCBActive())
     {
-        FreezeEventObjects();
+        FreezeObjectEvents();
         sub_808B864();
         sub_808BCF4();
     }
@@ -746,7 +746,7 @@ static bool8 StartMenuBattlePyramidRetireCallback(void)
 void sub_809FDD4(void)
 {
     ClearDialogWindowAndFrameToTransparent(0, FALSE);
-    ScriptUnfreezeEventObjects();
+    ScriptUnfreezeObjectEvents();
     CreateStartMenuTask(sub_809FA34);
     ScriptContext2_Enable();
 }
@@ -788,7 +788,7 @@ static bool8 SaveCallback(void)
     case SAVE_SUCCESS:
     case SAVE_ERROR:    // Close start menu
         ClearDialogWindowAndFrameToTransparent(0, TRUE);
-        ScriptUnfreezeEventObjects();
+        ScriptUnfreezeObjectEvents();
         ScriptContext2_Disable();
         SoftResetInBattlePyramid();
         return TRUE;
@@ -825,7 +825,7 @@ static bool8 BattlePyramidRetireCallback(void)
         return FALSE;
     case SAVE_CANCELED: // Yes (Retire from battle pyramid)
         ClearDialogWindowAndFrameToTransparent(0, TRUE);
-        ScriptUnfreezeEventObjects();
+        ScriptUnfreezeObjectEvents();
         ScriptContext2_Disable();
         ScriptContext1_SetupScript(BattleFrontier_BattlePyramidEmptySquare_EventScript_252C88);
         return TRUE;
@@ -1382,7 +1382,7 @@ static void HideStartMenuWindow(void)
 {
     ClearStdWindowAndFrame(GetStartMenuWindowId(), TRUE);
     RemoveStartMenuWindow();
-    ScriptUnfreezeEventObjects();
+    ScriptUnfreezeObjectEvents();
     ScriptContext2_Disable();
 }
 

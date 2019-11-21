@@ -30,17 +30,17 @@ struct InitialPlayerAvatarState
     u8 direction;
 };
 
-struct LinkPlayerEventObject
+struct LinkPlayerObjectEvent
 {
     u8 active;
     u8 linkPlayerId;
-    u8 eventObjId;
+    u8 objEventId;
     u8 movementMode;
 };
 
 // Exported RAM declarations
 extern struct WarpData gLastUsedWarp;
-extern struct LinkPlayerEventObject gLinkPlayerEventObjects[4];
+extern struct LinkPlayerObjectEvent gLinkPlayerObjectEvents[4];
 
 extern u16 *gBGTilemapBuffers1;
 extern u16 *gBGTilemapBuffers2;
@@ -157,6 +157,6 @@ bool32 sub_8087598(void);
 bool32 sub_80875C8(void);
 bool32 sub_8087634(void);
 bool32 sub_808766C(void);
-void ClearLinkPlayerEventObjects(void);
+void ClearLinkPlayerObjectEvents(void);
 
 #endif // GUARD_OVERWORLD_H

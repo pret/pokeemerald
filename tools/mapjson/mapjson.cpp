@@ -149,7 +149,7 @@ string generate_map_events_text(Json map_data) {
     string objects_label, warps_label, coords_label, bgs_label;
 
     if (map_data["object_events"].array_items().size() > 0) {
-        objects_label = map_data["name"].string_value() + "_EventObjects";
+        objects_label = map_data["name"].string_value() + "_ObjectEvents";
         text << objects_label << ":\n";
         for (unsigned int i = 0; i < map_data["object_events"].array_items().size(); i++) {
             auto obj_event = map_data["object_events"].array_items()[i];

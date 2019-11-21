@@ -1823,7 +1823,7 @@ static void PrintMessage(void)
 static void Script_PrintMessage(void)
 {
     ScriptContext2_Enable();
-    FreezeEventObjects();
+    FreezeObjectEvents();
     sub_808B864();
     sub_808BCF4();
     DrawDialogueFrame(0, 1);

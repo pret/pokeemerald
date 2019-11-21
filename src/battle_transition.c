@@ -750,7 +750,7 @@ static const struct SpriteTemplate gUnknown_085C8E68 =
 {
     .tileTag = 0xFFFF,
     .paletteTag = 4105,
-    .oam = &gEventObjectBaseOam_32x32,
+    .oam = &gObjectEventBaseOam_32x32,
     .anims = sSpriteAnimTable_85C8E3C,
     .images = sSpriteImageTable_85C8E2C,
     .affineAnims = sSpriteAffineAnimTable_85C8E60,

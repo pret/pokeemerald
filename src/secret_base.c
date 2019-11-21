@@ -437,7 +437,7 @@ bool8 SecretBaseMapPopupEnabled(void)
 
 static void EnterNewlyCreatedSecretBase_WaitFadeIn(u8 taskId)
 {
-    EventObjectTurn(&gEventObjects[gPlayerAvatar.eventObjectId], DIR_NORTH);
+    ObjectEventTurn(&gObjectEvents[gPlayerAvatar.objectEventId], DIR_NORTH);
     if (IsWeatherNotFadingIn() == TRUE)
     {
         EnableBothScriptContexts();
@@ -531,13 +531,13 @@ void InitSecretBaseDecorationSprites(void)
     u8 i;
     u8 *decorations;
     u8 *decorationPositions;
-    u8 eventObjectId;
+    u8 objectEventId;
     u8 metatileBehavior;
     u8 category;
     u8 permission;
     u8 numDecorations;
 
-    eventObjectId = 0;
+    objectEventId = 0;
     if (!CurMapIsSecretBase())
     {
         decorations = gSaveBlock1Ptr->playerRoomDecor;
@@ -561,13 +561,13 @@ void InitSecretBaseDecorationSprites(void)
         category = gDecorations[decorations[i]].category;
         if (permission == DECORPERM_SPRITE)
         {
-            for (eventObjectId = 0; eventObjectId < gMapHeader.events->eventObjectCount; eventObjectId++)
+            for (objectEventId = 0; objectEventId < gMapHeader.events->objectEventCount; objectEventId++)
             {
-                if (gMapHeader.events->eventObjects[eventObjectId].flagId == FLAG_DECORATION_1 + gSpecialVar_0x8004)
+                if (gMapHeader.events->objectEvents[objectEventId].flagId == FLAG_DECORATION_1 + gSpecialVar_0x8004)
                     break;
             }
 
-            if (eventObjectId == gMapHeader.events->eventObjectCount)
+            if (objectEventId == gMapHeader.events->objectEventCount)
                 continue;
 
             gSpecialVar_0x8006 = decorationPositions[i] >> 4;
@@ -576,13 +576,13 @@ void InitSecretBaseDecorationSprites(void)
             if (MetatileBehavior_HoldsSmallDecoration(metatileBehavior) == TRUE
              || MetatileBehavior_HoldsLargeDecoration(metatileBehavior) == TRUE)
             {
-                gSpecialVar_Result = VAR_OBJ_GFX_ID_0 + (gMapHeader.events->eventObjects[eventObjectId].graphicsId - EVENT_OBJ_GFX_VAR_0);
+                gSpecialVar_Result = VAR_OBJ_GFX_ID_0 + (gMapHeader.events->objectEvents[objectEventId].graphicsId - EVENT_OBJ_GFX_VAR_0);
                 VarSet(gSpecialVar_Result, gDecorations[decorations[i]].tiles[0]);
-                gSpecialVar_Result = gMapHeader.events->eventObjects[eventObjectId].localId;
+                gSpecialVar_Result = gMapHeader.events->objectEvents[objectEventId].localId;
                 FlagClear(FLAG_DECORATION_1 + gSpecialVar_0x8004);
-                TrySpawnEventObject(gSpecialVar_Result, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
-                TryMoveEventObjectToMapCoords(gSpecialVar_Result, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, gSpecialVar_0x8006, gSpecialVar_0x8007);
-                TryOverrideEventObjectTemplateCoords(gSpecialVar_Result, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
+                TrySpawnObjectEvent(gSpecialVar_Result, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
+                TryMoveObjectEventToMapCoords(gSpecialVar_Result, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, gSpecialVar_0x8006, gSpecialVar_0x8007);
+                TryOverrideObjectEventTemplateCoords(gSpecialVar_Result, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
                 if (CurMapIsSecretBase() == TRUE && VarGet(VAR_CURRENT_SECRET_BASE) != 0)
                 {
                     if (category == DECORCAT_DOLL)
@@ -611,16 +611,16 @@ void InitSecretBaseDecorationSprites(void)
 
 void HideSecretBaseDecorationSprites(void)
 {
-    u8 eventObjectId;
+    u8 objectEventId;
     u16 flag;
 
-    for (eventObjectId = 0; eventObjectId < gMapHeader.events->eventObjectCount; eventObjectId++)
+    for (objectEventId = 0; objectEventId < gMapHeader.events->objectEventCount; objectEventId++)
     {
-        flag = gMapHeader.events->eventObjects[eventObjectId].flagId;
+        flag = gMapHeader.events->objectEvents[objectEventId].flagId;
         if (flag >= FLAG_DECORATION_1 && flag <= FLAG_DECORATION_14)
         {
-            RemoveEventObjectByLocalIdAndMap(
-                gMapHeader.events->eventObjects[eventObjectId].localId,
+            RemoveObjectEventByLocalIdAndMap(
+                gMapHeader.events->objectEvents[objectEventId].localId,
                 gSaveBlock1Ptr->location.mapNum,
                 gSaveBlock1Ptr->location.mapGroup);
             FlagSet(flag);

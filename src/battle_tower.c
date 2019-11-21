@@ -2508,9 +2508,9 @@ static void sub_81642A0(void)
     s32 challengeNum;
     u32 species1, species2;
     u32 level;
-    struct EventObjectTemplate *eventObjTemplates;
+    struct ObjectEventTemplate *objEventTemplates;
 
-    eventObjTemplates = gSaveBlock1Ptr->eventObjectTemplates;
+    objEventTemplates = gSaveBlock1Ptr->objectEventTemplates;
     lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
     battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
     challengeNum = gSaveBlock2Ptr->frontier.towerWinStreaks[battleMode][lvlMode] / 7;
@@ -2540,7 +2540,7 @@ static void sub_81642A0(void)
     for (i = 0; i < 6; i++)
     {
         trainerId = gSaveBlock2Ptr->frontier.trainerIds[i];
-        eventObjTemplates[i + 1].graphicsId = GetBattleFacilityTrainerGfxId(trainerId);
+        objEventTemplates[i + 1].graphicsId = GetBattleFacilityTrainerGfxId(trainerId);
         for (j = 0; j < 2; j++)
         {
             while (1)
@@ -2594,7 +2594,7 @@ static void sub_81642A0(void)
     if (r10 != 0)
     {
         gSaveBlock2Ptr->frontier.trainerIds[6] = spArray[Random() % r10];
-        eventObjTemplates[7].graphicsId = GetBattleFacilityTrainerGfxId(gSaveBlock2Ptr->frontier.trainerIds[6]);
+        objEventTemplates[7].graphicsId = GetBattleFacilityTrainerGfxId(gSaveBlock2Ptr->frontier.trainerIds[6]);
         FlagClear(FLAG_HIDE_BATTLE_TOWER_MULTI_BATTLE_PARTNER_ALT_1);
         sub_81640E0(gSaveBlock2Ptr->frontier.trainerIds[6]);
     }
@@ -2637,7 +2637,7 @@ static void sub_81642A0(void)
     if (r10 != 0)
     {
         gSaveBlock2Ptr->frontier.trainerIds[7] = spArray[Random() % r10];
-        eventObjTemplates[8].graphicsId = GetBattleFacilityTrainerGfxId(gSaveBlock2Ptr->frontier.trainerIds[7]);
+        objEventTemplates[8].graphicsId = GetBattleFacilityTrainerGfxId(gSaveBlock2Ptr->frontier.trainerIds[7]);
         FlagClear(FLAG_HIDE_BATTLE_TOWER_MULTI_BATTLE_PARTNER_ALT_2);
         sub_8164188(gSaveBlock2Ptr->frontier.trainerIds[7]);
     }

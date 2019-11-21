@@ -346,16 +346,16 @@ void StartPlayerDescendMirageTower(void)
 
 static void PlayerDescendMirageTower(u8 taskId)
 {
-    u8 eventObjectId;
-    struct EventObject *fakePlayerEventObject;
-    struct EventObject *playerEventObject;
+    u8 objectEventId;
+    struct ObjectEvent *fakePlayerObjectEvent;
+    struct ObjectEvent *playerObjectEvent;
 
-    TryGetEventObjectIdByLocalIdAndMap(45, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, &eventObjectId);
-    fakePlayerEventObject = &gEventObjects[eventObjectId];
-    gSprites[fakePlayerEventObject->spriteId].pos2.y += 4;
-    playerEventObject = &gEventObjects[gPlayerAvatar.eventObjectId];
-    if ((gSprites[fakePlayerEventObject->spriteId].pos1.y + gSprites[fakePlayerEventObject->spriteId].pos2.y) >=
-        (gSprites[playerEventObject->spriteId].pos1.y + gSprites[playerEventObject->spriteId].pos2.y))
+    TryGetObjectEventIdByLocalIdAndMap(45, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, &objectEventId);
+    fakePlayerObjectEvent = &gObjectEvents[objectEventId];
+    gSprites[fakePlayerObjectEvent->spriteId].pos2.y += 4;
+    playerObjectEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
+    if ((gSprites[fakePlayerObjectEvent->spriteId].pos1.y + gSprites[fakePlayerObjectEvent->spriteId].pos2.y) >=
+        (gSprites[playerObjectEvent->spriteId].pos1.y + gSprites[playerObjectEvent->spriteId].pos2.y))
     {
         DestroyTask(taskId);
         EnableBothScriptContexts();
