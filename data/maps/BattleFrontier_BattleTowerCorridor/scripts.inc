@@ -24,13 +24,13 @@ BattleFrontier_BattleTowerCorridor_EventScript_241AF0:: @ 8241AF0
 	compare VAR_0x8006, 1
 	goto_if_eq BattleFrontier_BattleTowerCorridor_EventScript_241B16
 	applymovement 1, BattleFrontier_BattleTowerCorridor_Movement_241B3A
-	applymovement EVENT_OBJ_ID_PLAYER, BattleFrontier_BattleTowerCorridor_Movement_241B39
+	applymovement OBJ_EVENT_ID_PLAYER, BattleFrontier_BattleTowerCorridor_Movement_241B39
 	waitmovement 0
 	goto BattleFrontier_BattleTowerCorridor_EventScript_241B27
 
 BattleFrontier_BattleTowerCorridor_EventScript_241B16:: @ 8241B16
 	applymovement 1, BattleFrontier_BattleTowerCorridor_Movement_241B37
-	applymovement EVENT_OBJ_ID_PLAYER, BattleFrontier_BattleTowerCorridor_Movement_241B36
+	applymovement OBJ_EVENT_ID_PLAYER, BattleFrontier_BattleTowerCorridor_Movement_241B36
 	waitmovement 0
 
 BattleFrontier_BattleTowerCorridor_EventScript_241B27:: @ 8241B27

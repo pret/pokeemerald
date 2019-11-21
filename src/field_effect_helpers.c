@@ -13,7 +13,7 @@
 #include "constants/field_effects.h"
 #include "constants/songs.h"
 
-#define EVENT_OBJ_PAL_TAG_NONE 0x11FF // duplicate of define in event_object_movement.c
+#define OBJ_EVENT_PAL_TAG_NONE 0x11FF // duplicate of define in event_object_movement.c
 
 static void UpdateObjectReflectionSprite(struct Sprite *);
 static void LoadObjectReflectionPalette(struct ObjectEvent *objectEvent, struct Sprite *sprite);
@@ -81,7 +81,7 @@ static void LoadObjectRegularReflectionPalette(struct ObjectEvent *objectEvent, 
     const struct ObjectEventGraphicsInfo *graphicsInfo;
 
     graphicsInfo = GetObjectEventGraphicsInfo(objectEvent->graphicsId);
-    if (graphicsInfo->paletteTag2 != EVENT_OBJ_PAL_TAG_NONE)
+    if (graphicsInfo->paletteTag2 != OBJ_EVENT_PAL_TAG_NONE)
     {
         if (graphicsInfo->paletteSlot == 0)
         {
@@ -106,7 +106,7 @@ static void LoadObjectHighBridgeReflectionPalette(struct ObjectEvent *objectEven
     const struct ObjectEventGraphicsInfo *graphicsInfo;
 
     graphicsInfo = GetObjectEventGraphicsInfo(objectEvent->graphicsId);
-    if (graphicsInfo->paletteTag2 != EVENT_OBJ_PAL_TAG_NONE)
+    if (graphicsInfo->paletteTag2 != OBJ_EVENT_PAL_TAG_NONE)
     {
         PatchObjectPalette(graphicsInfo->paletteTag2, paletteNum);
         UpdateSpritePaletteWithWeather(paletteNum);
@@ -1553,7 +1553,7 @@ static void sub_81561FC(struct Sprite *sprite, u8 z, u8 offset)
     struct Sprite *linkedSprite;
 
     SetObjectSubpriorityByZCoord(z, sprite, offset);
-    for (i = 0; i < EVENT_OBJECTS_COUNT; i ++)
+    for (i = 0; i < OBJECT_EVENTS_COUNT; i ++)
     {
         struct ObjectEvent *objectEvent = &gObjectEvents[i];
         if (objectEvent->active)

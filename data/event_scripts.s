@@ -850,11 +850,11 @@ RusturfTunnel_EventScript_SetRusturfTunnelOpen:: @ 8272216
 
 EventScript_UnusedBoardFerry:: @ 827222B
 	delay 30
-	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceFastestUp
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	showobjectat 255, MAP_PETALBURG_CITY
 	delay 30
-	applymovement EVENT_OBJ_ID_PLAYER, Movement_UnusedBoardFerry
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_UnusedBoardFerry
 	waitmovement 0
 	delay 30
 	return

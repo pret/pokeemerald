@@ -25,14 +25,14 @@ BattleFrontier_BattleTowerMultiBattleRoom_MapScript1_243DB0: @ 8243DB0
 	end
 
 BattleFrontier_BattleTowerMultiBattleRoom_EventScript_243DDA:: @ 8243DDA
-	setvar VAR_OBJ_GFX_ID_0, EVENT_OBJ_GFX_BOY_1
-	setvar VAR_OBJ_GFX_ID_1, EVENT_OBJ_GFX_BOY_1
-	setvar VAR_OBJ_GFX_ID_2, EVENT_OBJ_GFX_BOY_1
-	setvar VAR_OBJ_GFX_ID_3, EVENT_OBJ_GFX_BOY_1
-	setvar VAR_OBJ_GFX_ID_4, EVENT_OBJ_GFX_BOY_1
-	setvar VAR_OBJ_GFX_ID_5, EVENT_OBJ_GFX_BOY_1
-	setvar VAR_OBJ_GFX_ID_6, EVENT_OBJ_GFX_BOY_1
-	setvar VAR_OBJ_GFX_ID_7, EVENT_OBJ_GFX_BOY_1
+	setvar VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_BOY_1
+	setvar VAR_OBJ_GFX_ID_1, OBJ_EVENT_GFX_BOY_1
+	setvar VAR_OBJ_GFX_ID_2, OBJ_EVENT_GFX_BOY_1
+	setvar VAR_OBJ_GFX_ID_3, OBJ_EVENT_GFX_BOY_1
+	setvar VAR_OBJ_GFX_ID_4, OBJ_EVENT_GFX_BOY_1
+	setvar VAR_OBJ_GFX_ID_5, OBJ_EVENT_GFX_BOY_1
+	setvar VAR_OBJ_GFX_ID_6, OBJ_EVENT_GFX_BOY_1
+	setvar VAR_OBJ_GFX_ID_7, OBJ_EVENT_GFX_BOY_1
 	setvar VAR_TEMP_1, 1
 	setvar VAR_TEMP_3, 1
 	setobjectxyperm 1, 10, 2
@@ -43,7 +43,7 @@ BattleFrontier_BattleTowerMultiBattleRoom_MapScript2_243E14: @ 8243E14
 	.2byte 0
 
 BattleFrontier_BattleTowerMultiBattleRoom_EventScript_243E1E:: @ 8243E1E
-	turnobject EVENT_OBJ_ID_PLAYER, DIR_NORTH
+	turnobject OBJ_EVENT_ID_PLAYER, DIR_NORTH
 	end
 
 BattleFrontier_BattleTowerMultiBattleRoom_MapScript2_243E23: @ 8243E23
@@ -59,12 +59,12 @@ BattleFrontier_BattleTowerMultiBattleRoom_EventScript_243E35:: @ 8243E35
 
 BattleFrontier_BattleTowerMultiBattleRoom_EventScript_243E41:: @ 8243E41
 	lockall
-	applymovement EVENT_OBJ_ID_PLAYER, BattleFrontier_BattleTowerMultiBattleRoom_Movement_243E75
+	applymovement OBJ_EVENT_ID_PLAYER, BattleFrontier_BattleTowerMultiBattleRoom_Movement_243E75
 	waitmovement 0
 	applymovement 1, BattleFrontier_BattleTowerMultiBattleRoom_Movement_243E77
 	waitmovement 0
 	copyobjectxytoperm 1
-	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceFastestUp
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	msgbox BattleFrontier_BattleTowerMultiBattleRoom_Text_244056, MSGBOX_DEFAULT
 	special HealPlayerParty
@@ -118,19 +118,19 @@ BattleFrontier_BattleTowerMultiBattleRoom_EventScript_243EB5:: @ 8243EB5
 
 BattleFrontier_BattleTowerMultiBattleRoom_EventScript_243EE4:: @ 8243EE4
 	applymovement 1, BattleFrontier_BattleTowerMultiBattleRoom_Movement_243F26
-	applymovement EVENT_OBJ_ID_PLAYER, BattleFrontier_BattleTowerMultiBattleRoom_Movement_243F1A
+	applymovement OBJ_EVENT_ID_PLAYER, BattleFrontier_BattleTowerMultiBattleRoom_Movement_243F1A
 	waitmovement 0
 	return
 
 BattleFrontier_BattleTowerMultiBattleRoom_EventScript_243EF6: @ 8243EF6
 	applymovement 1, BattleFrontier_BattleTowerMultiBattleRoom_Movement_243F26
-	applymovement EVENT_OBJ_ID_PLAYER, BattleFrontier_BattleTowerMultiBattleRoom_Movement_243F1E
+	applymovement OBJ_EVENT_ID_PLAYER, BattleFrontier_BattleTowerMultiBattleRoom_Movement_243F1E
 	waitmovement 0
 	return
 
 BattleFrontier_BattleTowerMultiBattleRoom_EventScript_243F08: @ 8243F08
 	applymovement 1, BattleFrontier_BattleTowerMultiBattleRoom_Movement_243F26
-	applymovement EVENT_OBJ_ID_PLAYER, BattleFrontier_BattleTowerMultiBattleRoom_Movement_243F22
+	applymovement OBJ_EVENT_ID_PLAYER, BattleFrontier_BattleTowerMultiBattleRoom_Movement_243F22
 	waitmovement 0
 	return
 

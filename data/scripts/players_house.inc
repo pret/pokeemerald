@@ -13,19 +13,19 @@ PlayersHouse_1F_EventScript_EnterHouseMovingIn:: @ 8292704
 	msgbox PlayersHouse_1F_Text_MoversPokemonGoSetClock, MSGBOX_DEFAULT
 	closemessage
 	setvar VAR_LITTLEROOT_INTRO_STATE, 4
-	applymovement EVENT_OBJ_ID_PLAYER, PlayersHouse_1F_Movement_PlayerWalkIn
+	applymovement OBJ_EVENT_ID_PLAYER, PlayersHouse_1F_Movement_PlayerWalkIn
 	applymovement VAR_0x8004, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	releaseall
 	end
 
 PlayersHouse_1F_EventScript_MomFacePlayerMovingInMale:: @ 829274D
-	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceFastestRight
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	return
 
 PlayersHouse_1F_EventScript_MomFacePlayerMovingInFemale:: @ 8292758
-	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceFastestLeft
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestLeft
 	waitmovement 0
 	return
 
@@ -37,7 +37,7 @@ PlayersHouse_1F_EventScript_MomGoSeeRoom:: @ 8292765
 	msgbox PlayersHouse_1F_Text_ArentYouInterestedInRoom, MSGBOX_DEFAULT
 	closemessage
 	applymovement VAR_0x8004, Common_Movement_WalkInPlaceFastestUp
-	applymovement EVENT_OBJ_ID_PLAYER, PlayersHouse_1F_Movement_MovePlayerAwayFromDoor
+	applymovement OBJ_EVENT_ID_PLAYER, PlayersHouse_1F_Movement_MovePlayerAwayFromDoor
 	waitmovement 0
 	releaseall
 	end
@@ -78,7 +78,7 @@ PlayersHouse_2F_EventScript_MomComesUpstairsMale:: @ 82927DF
 	addobject VAR_0x8008
 	applymovement VAR_0x8008, PlayersHouse_2F_Movement_MomEntersMale
 	waitmovement 0
-	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceFastestRight
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	msgbox PlayersHouse_2F_Text_HowDoYouLikeYourRoom, MSGBOX_DEFAULT
 	closemessage
@@ -91,7 +91,7 @@ PlayersHouse_2F_EventScript_MomComesUpstairsFemale:: @ 829280F
 	addobject VAR_0x8008
 	applymovement VAR_0x8008, PlayersHouse_2F_Movement_MomEntersFemale
 	waitmovement 0
-	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceFastestLeft
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestLeft
 	waitmovement 0
 	msgbox PlayersHouse_2F_Text_HowDoYouLikeYourRoom, MSGBOX_DEFAULT
 	closemessage
@@ -152,17 +152,17 @@ PlayersHouse_1F_EventScript_PetalburgGymReportMale:: @ 829286D
 	applymovement VAR_0x8005, Common_Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	call PlayersHouse_1F_EventScript_MomNoticeGymBroadcast
-	applymovement EVENT_OBJ_ID_PLAYER, PlayersHouse_1F_Movement_PlayerApproachTVForGymMale
+	applymovement OBJ_EVENT_ID_PLAYER, PlayersHouse_1F_Movement_PlayerApproachTVForGymMale
 	waitmovement 0
 	playbgm MUS_INTER_V, 0
 	msgbox PlayersHouse_1F_Text_MaybeDadWillBeOn, MSGBOX_DEFAULT
 	closemessage
 	applymovement VAR_0x8005, PlayersHouse_1F_Movement_MomMakeRoomToSeeTVMale
 	waitmovement 0
-	applymovement EVENT_OBJ_ID_PLAYER, PlayersHouse_1F_Movement_PlayerMoveToTVMale
+	applymovement OBJ_EVENT_ID_PLAYER, PlayersHouse_1F_Movement_PlayerMoveToTVMale
 	waitmovement 0
 	call PlayersHouse_1F_EventScript_WatchGymBroadcast
-	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceFastestLeft
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestLeft
 	waitmovement 0
 	msgbox PlayersHouse_1F_Text_ItsOverWeMissedHim, MSGBOX_DEFAULT
 	msgbox PlayersHouse_1F_Text_GoIntroduceYourselfNextDoor, MSGBOX_DEFAULT
@@ -177,17 +177,17 @@ PlayersHouse_1F_EventScript_PetalburgGymReportFemale:: @ 82928DC
 	applymovement VAR_0x8005, Common_Movement_WalkInPlaceFastestLeft
 	waitmovement 0
 	call PlayersHouse_1F_EventScript_MomNoticeGymBroadcast
-	applymovement EVENT_OBJ_ID_PLAYER, PlayersHouse_1F_Movement_PlayerApproachTVForGymFemale
+	applymovement OBJ_EVENT_ID_PLAYER, PlayersHouse_1F_Movement_PlayerApproachTVForGymFemale
 	waitmovement 0
 	playbgm MUS_INTER_V, 0
 	msgbox PlayersHouse_1F_Text_MaybeDadWillBeOn, MSGBOX_DEFAULT
 	closemessage
 	applymovement VAR_0x8005, PlayersHouse_1F_Movement_MomMakeRoomToSeeTVFemale
 	waitmovement 0
-	applymovement EVENT_OBJ_ID_PLAYER, PlayersHouse_1F_Movement_PlayerMoveToTVFemale
+	applymovement OBJ_EVENT_ID_PLAYER, PlayersHouse_1F_Movement_PlayerMoveToTVFemale
 	waitmovement 0
 	call PlayersHouse_1F_EventScript_WatchGymBroadcast
-	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceFastestRight
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	msgbox PlayersHouse_1F_Text_ItsOverWeMissedHim, MSGBOX_DEFAULT
 	msgbox PlayersHouse_1F_Text_GoIntroduceYourselfNextDoor, MSGBOX_DEFAULT
@@ -209,7 +209,7 @@ PlayersHouse_1F_EventScript_MomNoticeGymBroadcast:: @ 829294B
 	return
 
 PlayersHouse_1F_EventScript_WatchGymBroadcast:: @ 829296C
-	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceFastestUp
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	msgbox PlayersHouse_1F_Text_ReportFromPetalburgGym, MSGBOX_DEFAULT
 	fadedefaultbgm
@@ -549,38 +549,38 @@ PlayersHouse_1F_EventScript_MomApproachDadFemale:: @ 8292CC1
 	return
 
 PlayersHouse_1F_EventScript_DadExitsMale:: @ 8292CD6
-	applymovement EVENT_OBJ_ID_PLAYER, PlayersHouse_1F_Movement_MomAndPlayerWatchDadExit
+	applymovement OBJ_EVENT_ID_PLAYER, PlayersHouse_1F_Movement_MomAndPlayerWatchDadExit
 	applymovement VAR_0x800A, PlayersHouse_1F_Movement_MomAndPlayerWatchDadExit
 	applymovement VAR_0x8009, PlayersHouse_1F_Movement_DadExitsMale
 	waitmovement 0
 	return
 
 PlayersHouse_1F_EventScript_DadExitsFemale:: @ 8292CEF
-	applymovement EVENT_OBJ_ID_PLAYER, PlayersHouse_1F_Movement_MomAndPlayerWatchDadExit
+	applymovement OBJ_EVENT_ID_PLAYER, PlayersHouse_1F_Movement_MomAndPlayerWatchDadExit
 	applymovement VAR_0x800A, PlayersHouse_1F_Movement_MomAndPlayerWatchDadExit
 	applymovement VAR_0x8009, PlayersHouse_1F_Movement_DadExitsFemale
 	waitmovement 0
 	return
 
 PlayersHouse_1F_EventScript_PlayerEnterRoomMale:: @ 8292D08
-	applymovement EVENT_OBJ_ID_PLAYER, PlayersHouse_1F_Movement_PlayerEnterRoomMale
+	applymovement OBJ_EVENT_ID_PLAYER, PlayersHouse_1F_Movement_PlayerEnterRoomMale
 	waitmovement 0
 	return
 
 PlayersHouse_1F_EventScript_PlayerEnterRoomFemale:: @ 8292D13
-	applymovement EVENT_OBJ_ID_PLAYER, PlayersHouse_1F_Movement_PlayerEnterRoomFemale
+	applymovement OBJ_EVENT_ID_PLAYER, PlayersHouse_1F_Movement_PlayerEnterRoomFemale
 	waitmovement 0
 	return
 
 PlayersHouse_1F_EventScript_PlayerApproachTVForLatiMale:: @ 8292D1E
-	applymovement EVENT_OBJ_ID_PLAYER, PlayersHouse_1F_Movement_PlayerApproachTVForLatiMale
+	applymovement OBJ_EVENT_ID_PLAYER, PlayersHouse_1F_Movement_PlayerApproachTVForLatiMale
 	waitmovement 0
 	applymovement VAR_0x800A, Common_Movement_WalkInPlaceFastestLeft
 	waitmovement 0
 	return
 
 PlayersHouse_1F_EventScript_PlayerApproachTVForLatiFemale:: @ 8292D33
-	applymovement EVENT_OBJ_ID_PLAYER, PlayersHouse_1F_Movement_PlayerApproachTVForLatiFemale
+	applymovement OBJ_EVENT_ID_PLAYER, PlayersHouse_1F_Movement_PlayerApproachTVForLatiFemale
 	waitmovement 0
 	applymovement VAR_0x800A, Common_Movement_WalkInPlaceFastestRight
 	waitmovement 0
@@ -589,14 +589,14 @@ PlayersHouse_1F_EventScript_PlayerApproachTVForLatiFemale:: @ 8292D33
 PlayersHouse_1F_EventScript_MomApproachPlayerMale:: @ 8292D48
 	applymovement VAR_0x800A, PlayersHouse_1F_Movement_MomApproachPlayerMale
 	waitmovement 0
-	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceFastestLeft
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestLeft
 	waitmovement 0
 	return
 
 PlayersHouse_1F_EventScript_MomApproachPlayerFemale:: @ 8292D5D
 	applymovement VAR_0x800A, PlayersHouse_1F_Movement_MomApproachPlayerFemale
 	waitmovement 0
-	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceFastestRight
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	return
 
@@ -613,14 +613,14 @@ PlayersHouse_1F_EventScript_MomNoticesLatiBroadcastFemale:: @ 8292D7D
 PlayersHouse_1F_EventScript_MomApproachPlayerAfterTVMale:: @ 8292D88
 	applymovement VAR_0x800A, PlayersHouse_1F_Movement_MomApproachPlayerAfterTVMale
 	waitmovement 0
-	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceFastestRight
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	return
 
 PlayersHouse_1F_EventScript_MomApproachPlayerAfterTVFemale:: @ 8292D9D
 	applymovement VAR_0x800A, PlayersHouse_1F_Movement_MomApproachPlayerAfterTVFemale
 	waitmovement 0
-	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceFastestLeft
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestLeft
 	waitmovement 0
 	return
 

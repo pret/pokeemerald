@@ -32,7 +32,7 @@
 #include "constants/species.h"
 
 static EWRAM_DATA u8 gUnknown_0203734C = 0;
-EWRAM_DATA struct ObjectEvent gObjectEvents[EVENT_OBJECTS_COUNT] = {};
+EWRAM_DATA struct ObjectEvent gObjectEvents[OBJECT_EVENTS_COUNT] = {};
 EWRAM_DATA struct PlayerAvatar gPlayerAvatar = {};
 
 // static declarations
@@ -233,49 +233,49 @@ static bool8 (*const sArrowWarpMetatileBehaviorChecks[])(u8) =
 
 static const u8 sRivalAvatarGfxIds[][2] =
 {
-    {EVENT_OBJ_GFX_RIVAL_BRENDAN_NORMAL,     EVENT_OBJ_GFX_RIVAL_MAY_NORMAL},
-    {EVENT_OBJ_GFX_RIVAL_BRENDAN_MACH_BIKE,  EVENT_OBJ_GFX_RIVAL_MAY_MACH_BIKE},
-    {EVENT_OBJ_GFX_RIVAL_BRENDAN_ACRO_BIKE,  EVENT_OBJ_GFX_RIVAL_MAY_ACRO_BIKE},
-    {EVENT_OBJ_GFX_RIVAL_BRENDAN_SURFING,    EVENT_OBJ_GFX_RIVAL_MAY_SURFING},
-    {EVENT_OBJ_GFX_BRENDAN_UNDERWATER,       EVENT_OBJ_GFX_MAY_UNDERWATER},
-    {EVENT_OBJ_GFX_RIVAL_BRENDAN_FIELD_MOVE, EVENT_OBJ_GFX_RIVAL_MAY_FIELD_MOVE},
-    {EVENT_OBJ_GFX_BRENDAN_FISHING,          EVENT_OBJ_GFX_MAY_FISHING},
-    {EVENT_OBJ_GFX_BRENDAN_WATERING,         EVENT_OBJ_GFX_MAY_WATERING}
+    {OBJ_EVENT_GFX_RIVAL_BRENDAN_NORMAL,     OBJ_EVENT_GFX_RIVAL_MAY_NORMAL},
+    {OBJ_EVENT_GFX_RIVAL_BRENDAN_MACH_BIKE,  OBJ_EVENT_GFX_RIVAL_MAY_MACH_BIKE},
+    {OBJ_EVENT_GFX_RIVAL_BRENDAN_ACRO_BIKE,  OBJ_EVENT_GFX_RIVAL_MAY_ACRO_BIKE},
+    {OBJ_EVENT_GFX_RIVAL_BRENDAN_SURFING,    OBJ_EVENT_GFX_RIVAL_MAY_SURFING},
+    {OBJ_EVENT_GFX_BRENDAN_UNDERWATER,       OBJ_EVENT_GFX_MAY_UNDERWATER},
+    {OBJ_EVENT_GFX_RIVAL_BRENDAN_FIELD_MOVE, OBJ_EVENT_GFX_RIVAL_MAY_FIELD_MOVE},
+    {OBJ_EVENT_GFX_BRENDAN_FISHING,          OBJ_EVENT_GFX_MAY_FISHING},
+    {OBJ_EVENT_GFX_BRENDAN_WATERING,         OBJ_EVENT_GFX_MAY_WATERING}
 };
 
 static const u8 sPlayerAvatarGfxIds[][2] =
 {
-    {EVENT_OBJ_GFX_BRENDAN_NORMAL,     EVENT_OBJ_GFX_MAY_NORMAL},
-    {EVENT_OBJ_GFX_BRENDAN_MACH_BIKE,  EVENT_OBJ_GFX_MAY_MACH_BIKE},
-    {EVENT_OBJ_GFX_BRENDAN_ACRO_BIKE,  EVENT_OBJ_GFX_MAY_ACRO_BIKE},
-    {EVENT_OBJ_GFX_BRENDAN_SURFING,    EVENT_OBJ_GFX_MAY_SURFING},
-    {EVENT_OBJ_GFX_BRENDAN_UNDERWATER, EVENT_OBJ_GFX_MAY_UNDERWATER},
-    {EVENT_OBJ_GFX_BRENDAN_FIELD_MOVE, EVENT_OBJ_GFX_MAY_FIELD_MOVE},
-    {EVENT_OBJ_GFX_BRENDAN_FISHING,    EVENT_OBJ_GFX_MAY_FISHING},
-    {EVENT_OBJ_GFX_BRENDAN_WATERING,   EVENT_OBJ_GFX_MAY_WATERING},
+    {OBJ_EVENT_GFX_BRENDAN_NORMAL,     OBJ_EVENT_GFX_MAY_NORMAL},
+    {OBJ_EVENT_GFX_BRENDAN_MACH_BIKE,  OBJ_EVENT_GFX_MAY_MACH_BIKE},
+    {OBJ_EVENT_GFX_BRENDAN_ACRO_BIKE,  OBJ_EVENT_GFX_MAY_ACRO_BIKE},
+    {OBJ_EVENT_GFX_BRENDAN_SURFING,    OBJ_EVENT_GFX_MAY_SURFING},
+    {OBJ_EVENT_GFX_BRENDAN_UNDERWATER, OBJ_EVENT_GFX_MAY_UNDERWATER},
+    {OBJ_EVENT_GFX_BRENDAN_FIELD_MOVE, OBJ_EVENT_GFX_MAY_FIELD_MOVE},
+    {OBJ_EVENT_GFX_BRENDAN_FISHING,    OBJ_EVENT_GFX_MAY_FISHING},
+    {OBJ_EVENT_GFX_BRENDAN_WATERING,   OBJ_EVENT_GFX_MAY_WATERING},
 };
 
-static const u8 sFRLGAvatarGfxIds[] = {EVENT_OBJ_GFX_RED, EVENT_OBJ_GFX_LEAF};
+static const u8 sFRLGAvatarGfxIds[] = {OBJ_EVENT_GFX_RED, OBJ_EVENT_GFX_LEAF};
 
-static const u8 sRSAvatarGfxIds[] = {EVENT_OBJ_GFX_LINK_RS_BRENDAN, EVENT_OBJ_GFX_LINK_RS_MAY};
+static const u8 sRSAvatarGfxIds[] = {OBJ_EVENT_GFX_LINK_RS_BRENDAN, OBJ_EVENT_GFX_LINK_RS_MAY};
 
 static const u8 gUnknown_0849750C[2][5][2] =
 {
     //male
     {
-        {EVENT_OBJ_GFX_BRENDAN_NORMAL, 1},
-        {EVENT_OBJ_GFX_BRENDAN_MACH_BIKE, 2},
-        {EVENT_OBJ_GFX_BRENDAN_ACRO_BIKE, 4},
-        {EVENT_OBJ_GFX_BRENDAN_SURFING, 8},
-        {EVENT_OBJ_GFX_BRENDAN_UNDERWATER, 16},
+        {OBJ_EVENT_GFX_BRENDAN_NORMAL, 1},
+        {OBJ_EVENT_GFX_BRENDAN_MACH_BIKE, 2},
+        {OBJ_EVENT_GFX_BRENDAN_ACRO_BIKE, 4},
+        {OBJ_EVENT_GFX_BRENDAN_SURFING, 8},
+        {OBJ_EVENT_GFX_BRENDAN_UNDERWATER, 16},
     },
     //female
     {
-        {EVENT_OBJ_GFX_MAY_NORMAL, 1},
-        {EVENT_OBJ_GFX_MAY_MACH_BIKE, 2},
-        {EVENT_OBJ_GFX_MAY_ACRO_BIKE, 4},
-        {EVENT_OBJ_GFX_MAY_SURFING, 8},
-        {EVENT_OBJ_GFX_MAY_UNDERWATER, 16},
+        {OBJ_EVENT_GFX_MAY_NORMAL, 1},
+        {OBJ_EVENT_GFX_MAY_MACH_BIKE, 2},
+        {OBJ_EVENT_GFX_MAY_ACRO_BIKE, 4},
+        {OBJ_EVENT_GFX_MAY_SURFING, 8},
+        {OBJ_EVENT_GFX_MAY_UNDERWATER, 16},
     }
 };
 
@@ -620,7 +620,7 @@ static void PlayerNotOnBikeMoving(u8 direction, u16 heldKeys)
             PlayerJumpLedge(direction);
             return;
         }
-        else if (collision == COLLISION_EVENT_OBJECT && IsPlayerCollidingWithFarawayIslandMew(direction))
+        else if (collision == COLLISION_OBJECT_EVENT && IsPlayerCollidingWithFarawayIslandMew(direction))
         {
             PlayerNotOnBikeCollideWithFarawayIslandMew(direction);
             return;
@@ -687,7 +687,7 @@ u8 CheckForObjectEventCollision(struct ObjectEvent *objectEvent, s16 x, s16 y, u
         IncrementGameStat(GAME_STAT_JUMPED_DOWN_LEDGES);
         return COLLISION_LEDGE_JUMP;
     }
-    if (collision == COLLISION_EVENT_OBJECT && TryPushBoulder(x, y, direction))
+    if (collision == COLLISION_OBJECT_EVENT && TryPushBoulder(x, y, direction))
         return COLLISION_PUSHED_BOULDER;
 
     if (collision == COLLISION_NONE)
@@ -716,7 +716,7 @@ static bool8 CanStopSurfing(s16 x, s16 y, u8 direction)
 {
     if ((gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_SURFING)
      && MapGridGetZCoordAt(x, y) == 3
-     && GetObjectEventIdByXYZ(x, y, 3) == EVENT_OBJECTS_COUNT)
+     && GetObjectEventIdByXYZ(x, y, 3) == OBJECT_EVENTS_COUNT)
     {
         CreateStopSurfingTask(direction);
         return TRUE;
@@ -741,7 +741,7 @@ static bool8 TryPushBoulder(s16 x, s16 y, u8 direction)
     {
         u8 objectEventId = GetObjectEventIdByXY(x, y);
 
-        if (objectEventId != 16 && gObjectEvents[objectEventId].graphicsId == EVENT_OBJ_GFX_PUSHABLE_BOULDER)
+        if (objectEventId != 16 && gObjectEvents[objectEventId].graphicsId == OBJ_EVENT_GFX_PUSHABLE_BOULDER)
         {
             x = gObjectEvents[objectEventId].currentCoords.x;
             y = gObjectEvents[objectEventId].currentCoords.y;
@@ -785,7 +785,7 @@ bool8 IsPlayerCollidingWithFarawayIslandMew(u8 direction)
 
     MoveCoords(direction, &playerX, &playerY);
     mewObjectId = GetObjectEventIdByLocalIdAndMap(1, MAP_NUM(FARAWAY_ISLAND_INTERIOR), MAP_GROUP(FARAWAY_ISLAND_INTERIOR));
-    if (mewObjectId == EVENT_OBJECTS_COUNT)
+    if (mewObjectId == OBJECT_EVENTS_COUNT)
         return FALSE;
 
     object = &gObjectEvents[mewObjectId];
@@ -1248,14 +1248,14 @@ u8 unref_GetRivalAvatarGenderByGraphicsId(u8 gfxId)
 {
     switch (gfxId)
     {
-    case EVENT_OBJ_GFX_RIVAL_MAY_NORMAL:
-    case EVENT_OBJ_GFX_RIVAL_MAY_MACH_BIKE:
-    case EVENT_OBJ_GFX_RIVAL_MAY_ACRO_BIKE:
-    case EVENT_OBJ_GFX_RIVAL_MAY_SURFING:
-    case EVENT_OBJ_GFX_RIVAL_MAY_FIELD_MOVE:
-    case EVENT_OBJ_GFX_MAY_UNDERWATER:
-    case EVENT_OBJ_GFX_MAY_FISHING:
-    case EVENT_OBJ_GFX_MAY_WATERING:
+    case OBJ_EVENT_GFX_RIVAL_MAY_NORMAL:
+    case OBJ_EVENT_GFX_RIVAL_MAY_MACH_BIKE:
+    case OBJ_EVENT_GFX_RIVAL_MAY_ACRO_BIKE:
+    case OBJ_EVENT_GFX_RIVAL_MAY_SURFING:
+    case OBJ_EVENT_GFX_RIVAL_MAY_FIELD_MOVE:
+    case OBJ_EVENT_GFX_MAY_UNDERWATER:
+    case OBJ_EVENT_GFX_MAY_FISHING:
+    case OBJ_EVENT_GFX_MAY_WATERING:
         return FEMALE;
     default:
         return MALE;
@@ -1266,14 +1266,14 @@ u8 GetPlayerAvatarGenderByGraphicsId(u8 gfxId)
 {
     switch (gfxId)
     {
-    case EVENT_OBJ_GFX_MAY_NORMAL:
-    case EVENT_OBJ_GFX_MAY_MACH_BIKE:
-    case EVENT_OBJ_GFX_MAY_ACRO_BIKE:
-    case EVENT_OBJ_GFX_MAY_SURFING:
-    case EVENT_OBJ_GFX_MAY_FIELD_MOVE:
-    case EVENT_OBJ_GFX_MAY_UNDERWATER:
-    case EVENT_OBJ_GFX_MAY_FISHING:
-    case EVENT_OBJ_GFX_MAY_WATERING:
+    case OBJ_EVENT_GFX_MAY_NORMAL:
+    case OBJ_EVENT_GFX_MAY_MACH_BIKE:
+    case OBJ_EVENT_GFX_MAY_ACRO_BIKE:
+    case OBJ_EVENT_GFX_MAY_SURFING:
+    case OBJ_EVENT_GFX_MAY_FIELD_MOVE:
+    case OBJ_EVENT_GFX_MAY_UNDERWATER:
+    case OBJ_EVENT_GFX_MAY_FISHING:
+    case OBJ_EVENT_GFX_MAY_WATERING:
         return FEMALE;
     default:
         return MALE;
@@ -1370,7 +1370,7 @@ void InitPlayerAvatar(s16 x, s16 y, u8 direction, u8 gender)
     u8 objectEventId;
     struct ObjectEvent *objectEvent;
 
-    playerEventObjTemplate.localId = EVENT_OBJ_ID_PLAYER;
+    playerEventObjTemplate.localId = OBJ_EVENT_ID_PLAYER;
     playerEventObjTemplate.graphicsId = GetPlayerAvatarGraphicsIdByStateIdAndGender(PLAYER_AVATAR_STATE_NORMAL, gender);
     playerEventObjTemplate.x = x - 7;
     playerEventObjTemplate.y = y - 7;

@@ -9,7 +9,7 @@ VerdanturfTown_BattleTentLobby_MapScript2_2016DB: @ 82016DB
 
 VerdanturfTown_BattleTentLobby_EventScript_2016E5:: @ 82016E5
 	setvar VAR_TEMP_1, 1
-	turnobject EVENT_OBJ_ID_PLAYER, DIR_NORTH
+	turnobject OBJ_EVENT_ID_PLAYER, DIR_NORTH
 	end
 
 VerdanturfTown_BattleTentLobby_MapScript2_2016EF: @ 82016EF
@@ -246,12 +246,12 @@ VerdanturfTown_BattleTentLobby_EventScript_201A3F:: @ 8201A3F
 
 VerdanturfTown_BattleTentLobby_EventScript_201A41:: @ 8201A41
 	applymovement 1, VerdanturfTown_BattleTentLobby_Movement_201A70
-	applymovement EVENT_OBJ_ID_PLAYER, VerdanturfTown_BattleTentLobby_Movement_201A70
+	applymovement OBJ_EVENT_ID_PLAYER, VerdanturfTown_BattleTentLobby_Movement_201A70
 	waitmovement 0
 	opendoor 6, 1
 	waitdooranim
 	applymovement 1, VerdanturfTown_BattleTentLobby_Movement_201A74
-	applymovement EVENT_OBJ_ID_PLAYER, VerdanturfTown_BattleTentLobby_Movement_201A77
+	applymovement OBJ_EVENT_ID_PLAYER, VerdanturfTown_BattleTentLobby_Movement_201A77
 	waitmovement 0
 	closedoor 6, 1
 	waitdooranim

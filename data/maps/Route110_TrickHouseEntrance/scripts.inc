@@ -142,7 +142,7 @@ Route110_TrickHouseEntrance_EventScript_TrickMasterFound:: @ 8269C15
 	addobject 1
 	showobjectat 1, MAP_ROUTE110_TRICK_HOUSE_ENTRANCE
 	turnobject 1, DIR_EAST
-	turnobject EVENT_OBJ_ID_PLAYER, DIR_WEST
+	turnobject OBJ_EVENT_ID_PLAYER, DIR_WEST
 	end
 
 Route110_TrickHouseEntrance_EventScript_SetTrickMasterHidingSpot:: @ 8269C26
@@ -245,9 +245,9 @@ Route110_TrickHouseEntrance_EventScript_TrickMaster:: @ 8269D3B
 
 Route110_TrickHouseEntrance_EventScript_FoundTrickMaster:: @ 8269D6E
 	playse SE_PIN
-	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_ExclamationMark
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_ExclamationMark
 	waitmovement 0
-	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_Delay48
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_Delay48
 	waitmovement 0
 	compare VAR_TRICK_HOUSE_LEVEL, 0
 	call_if_eq Route110_TrickHouseEntrance_EventScript_FoundBeneathDesk
@@ -513,9 +513,9 @@ Route110_TrickHouseEntrance_EventScript_EnterPuzzleRoom:: @ 826A126
 	setmetatile 5, 1, METATILE_GenericBuilding_TrickHouse_Stairs_Down, 0
 	special DrawWholeMapView
 	delay 20
-	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkUp
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkUp
 	waitmovement 0
-	applymovement EVENT_OBJ_ID_PLAYER, Route110_TrickHouseEntrance_Movement_EnterRoom
+	applymovement OBJ_EVENT_ID_PLAYER, Route110_TrickHouseEntrance_Movement_EnterRoom
 	waitmovement 0
 	switch VAR_TRICK_HOUSE_LEVEL
 	case 0, Route110_TrickHouseEntrance_EventScript_EnterPuzzleRoom1

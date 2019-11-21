@@ -253,7 +253,7 @@ static const u8 *const sTagMatchStrings[] =
 
 static const struct ObjectEventTemplate sTrainerObjectEventTemplate =
 {
-    .graphicsId = EVENT_OBJ_GFX_RIVAL_BRENDAN_NORMAL,
+    .graphicsId = OBJ_EVENT_GFX_RIVAL_BRENDAN_NORMAL,
     .elevation = 3,
     .movementType = MOVEMENT_TYPE_LOOK_AROUND,
     .movementRangeX = 1,

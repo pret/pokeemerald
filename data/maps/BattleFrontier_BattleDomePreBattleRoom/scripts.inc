@@ -9,7 +9,7 @@ BattleFrontier_BattleDomePreBattleRoom_MapScript2_24B204: @ 824B204
 
 BattleFrontier_BattleDomePreBattleRoom_EventScript_24B20E:: @ 824B20E
 	setvar VAR_TEMP_1, 1
-	turnobject EVENT_OBJ_ID_PLAYER, DIR_NORTH
+	turnobject OBJ_EVENT_ID_PLAYER, DIR_NORTH
 	end
 
 BattleFrontier_BattleDomePreBattleRoom_MapScript2_24B218: @ 824B218
@@ -24,7 +24,7 @@ BattleFrontier_BattleDomePreBattleRoom_EventScript_24B222:: @ 824B222
 	setvar VAR_0x8006, 1
 	special CallFrontierUtilFunc
 	setvar VAR_TEMP_0, 1
-	applymovement EVENT_OBJ_ID_PLAYER, BattleFrontier_BattleDomePreBattleRoom_Movement_24B652
+	applymovement OBJ_EVENT_ID_PLAYER, BattleFrontier_BattleDomePreBattleRoom_Movement_24B652
 	waitmovement 0
 	lockall
 
@@ -171,11 +171,11 @@ BattleFrontier_BattleDomePreBattleRoom_EventScript_24B46D:: @ 824B46D
 	closemessage
 	applymovement 1, BattleFrontier_BattleDomePreBattleRoom_Movement_24B64F
 	waitmovement 0
-	applymovement EVENT_OBJ_ID_PLAYER, BattleFrontier_BattleDomePreBattleRoom_Movement_24B657
+	applymovement OBJ_EVENT_ID_PLAYER, BattleFrontier_BattleDomePreBattleRoom_Movement_24B657
 	waitmovement 0
 	opendoor 5, 1
 	waitdooranim
-	applymovement EVENT_OBJ_ID_PLAYER, BattleFrontier_BattleDomePreBattleRoom_Movement_24B659
+	applymovement OBJ_EVENT_ID_PLAYER, BattleFrontier_BattleDomePreBattleRoom_Movement_24B659
 	waitmovement 0
 	closedoor 5, 1
 	waitdooranim

@@ -1,5 +1,5 @@
-#ifndef GUARD_FIELD_EVENT_OBJ_H
-#define GUARD_FIELD_EVENT_OBJ_H
+#ifndef GUARD_FIELD_OBJ_EVENT_H
+#define GUARD_FIELD_OBJ_EVENT_H
 
 #define NUM_OBJECT_GRAPHICS_INFO 239
 #define SPRITE_VAR 240
@@ -54,7 +54,7 @@ struct PairedPalettes
 
 struct LockedAnimObjectEvents
 {
-    u8 objectEventIds[EVENT_OBJECTS_COUNT];
+    u8 objectEventIds[OBJECT_EVENTS_COUNT];
     u8 count;
 };
 
@@ -423,4 +423,4 @@ void sub_8097BB4(u8 var1, u8 graphicsId);
 void sub_8097CC4(u8 var1, u8 var2);
 bool32 sub_8097D9C(u8 var);
 
-#endif //GUARD_FIELD_EVENT_OBJ_H
+#endif //GUARD_FIELD_OBJ_EVENT_H

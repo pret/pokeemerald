@@ -797,7 +797,7 @@ static void BuyMenuCollectObjectEventData(void)
 
     GetXYCoordsOneStepInFrontOfPlayer(&facingX, &facingY);
     for (y = 0; y < 16; y++)
-        gShopDataPtr->viewportObjects[y][EVENT_OBJ_ID] = 16;
+        gShopDataPtr->viewportObjects[y][OBJ_EVENT_ID] = 16;
     for (y = 0; y < 5; y++)
     {
         for (x = 0; x < 7; x++)
@@ -806,7 +806,7 @@ static void BuyMenuCollectObjectEventData(void)
 
             if (objEventId != 16)
             {
-                gShopDataPtr->viewportObjects[r8][EVENT_OBJ_ID] = objEventId;
+                gShopDataPtr->viewportObjects[r8][OBJ_EVENT_ID] = objEventId;
                 gShopDataPtr->viewportObjects[r8][X_COORD] = x;
                 gShopDataPtr->viewportObjects[r8][Y_COORD] = y;
                 gShopDataPtr->viewportObjects[r8][LAYER_TYPE] = MapGridGetMetatileLayerTypeAt(facingX - 4 + x, facingY - 2 + y);
@@ -841,13 +841,13 @@ static void BuyMenuDrawObjectEvents(void)
 
     for (i = 0; i < 16; i++) // max objects?
     {
-        if (gShopDataPtr->viewportObjects[i][EVENT_OBJ_ID] == 16)
+        if (gShopDataPtr->viewportObjects[i][OBJ_EVENT_ID] == 16)
             continue;
 
-        graphicsInfo = GetObjectEventGraphicsInfo(gObjectEvents[gShopDataPtr->viewportObjects[i][EVENT_OBJ_ID]].graphicsId);
+        graphicsInfo = GetObjectEventGraphicsInfo(gObjectEvents[gShopDataPtr->viewportObjects[i][OBJ_EVENT_ID]].graphicsId);
 
         spriteId = AddPseudoObjectEvent(
-            gObjectEvents[gShopDataPtr->viewportObjects[i][EVENT_OBJ_ID]].graphicsId,
+            gObjectEvents[gShopDataPtr->viewportObjects[i][OBJ_EVENT_ID]].graphicsId,
             SpriteCallbackDummy,
             (u16)gShopDataPtr->viewportObjects[i][X_COORD] * 16 + 8,
             (u16)gShopDataPtr->viewportObjects[i][Y_COORD] * 16 + 48 - graphicsInfo->height / 2,

@@ -25,7 +25,7 @@ MarineCave_End_EventScript_ShowKyogre:: @ 823B012
 
 MarineCave_End_EventScript_Kyogre:: @ 823B01B
 	lockall
-	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_FaceUp
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_FaceUp
 	waitmovement 0
 	applymovement 1, MarineCave_End_Movement_KyogreApproach
 	waitmovement 0

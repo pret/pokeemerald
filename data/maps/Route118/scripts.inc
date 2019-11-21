@@ -69,7 +69,7 @@ Route118_EventScript_RouteSign119:: @ 81F3E85
 Route118_EventScript_StevenTrigger0:: @ 81F3E8E
 	lockall
 	setvar VAR_0x8008, 0
-	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_FaceUp
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_FaceUp
 	waitmovement 0
 	applymovement 19, Route118_Movement_StevenApproachLedge0
 	waitmovement 0
@@ -79,7 +79,7 @@ Route118_EventScript_StevenTrigger0:: @ 81F3E8E
 Route118_EventScript_StevenTrigger1:: @ 81F3EAE
 	lockall
 	setvar VAR_0x8008, 1
-	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_FaceUp
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_FaceUp
 	waitmovement 0
 	goto Route118_EventScript_StevenTrigger
 	end
@@ -87,7 +87,7 @@ Route118_EventScript_StevenTrigger1:: @ 81F3EAE
 Route118_EventScript_StevenTrigger2:: @ 81F3EC4
 	lockall
 	setvar VAR_0x8008, 2
-	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_FaceUp
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_FaceUp
 	waitmovement 0
 	applymovement 19, Route118_Movement_StevenApproachLedge2
 	waitmovement 0
@@ -113,19 +113,19 @@ Route118_EventScript_StevenTrigger:: @ 81F3EE4
 	end
 
 Route118_EventScript_StevenExit0:: @ 81F3F28
-	applymovement EVENT_OBJ_ID_PLAYER, Route118_Movement_PlayerWatchStevenExit
+	applymovement OBJ_EVENT_ID_PLAYER, Route118_Movement_PlayerWatchStevenExit
 	applymovement 19, Route118_Movement_StevenExit0
 	waitmovement 0
 	return
 
 Route118_EventScript_StevenExit1:: @ 81F3F3A
-	applymovement EVENT_OBJ_ID_PLAYER, Route118_Movement_PlayerWatchStevenExit
+	applymovement OBJ_EVENT_ID_PLAYER, Route118_Movement_PlayerWatchStevenExit
 	applymovement 19, Route118_Movement_StevenExit1
 	waitmovement 0
 	return
 
 Route118_EventScript_StevenExit2:: @ 81F3F4C
-	applymovement EVENT_OBJ_ID_PLAYER, Route118_Movement_PlayerWatchStevenExit
+	applymovement OBJ_EVENT_ID_PLAYER, Route118_Movement_PlayerWatchStevenExit
 	applymovement 19, Route118_Movement_StevenExit2
 	waitmovement 0
 	return

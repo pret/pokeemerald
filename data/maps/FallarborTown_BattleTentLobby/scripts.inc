@@ -9,7 +9,7 @@ FallarborTown_BattleTentLobby_MapScript2_1FFE71: @ 81FFE71
 
 FallarborTown_BattleTentLobby_EventScript_1FFE7B:: @ 81FFE7B
 	setvar VAR_TEMP_1, 1
-	turnobject EVENT_OBJ_ID_PLAYER, DIR_NORTH
+	turnobject OBJ_EVENT_ID_PLAYER, DIR_NORTH
 	end
 
 FallarborTown_BattleTentLobby_MapScript2_1FFE85: @ 81FFE85
@@ -245,12 +245,12 @@ FallarborTown_BattleTentLobby_EventScript_2001CD:: @ 82001CD
 
 FallarborTown_BattleTentLobby_EventScript_2001CF:: @ 82001CF
 	applymovement 1, FallarborTown_BattleTentLobby_Movement_2001FE
-	applymovement EVENT_OBJ_ID_PLAYER, FallarborTown_BattleTentLobby_Movement_200205
+	applymovement OBJ_EVENT_ID_PLAYER, FallarborTown_BattleTentLobby_Movement_200205
 	waitmovement 0
 	opendoor 6, 1
 	waitdooranim
 	applymovement 1, FallarborTown_BattleTentLobby_Movement_200202
-	applymovement EVENT_OBJ_ID_PLAYER, FallarborTown_BattleTentLobby_Movement_200209
+	applymovement OBJ_EVENT_ID_PLAYER, FallarborTown_BattleTentLobby_Movement_200209
 	waitmovement 0
 	closedoor 6, 1
 	waitdooranim

@@ -9,7 +9,7 @@ BattleFrontier_BattleArenaLobby_MapScript2_255C41: @ 8255C41
 
 BattleFrontier_BattleArenaLobby_EventScript_255C4B:: @ 8255C4B
 	setvar VAR_TEMP_1, 1
-	turnobject EVENT_OBJ_ID_PLAYER, DIR_NORTH
+	turnobject OBJ_EVENT_ID_PLAYER, DIR_NORTH
 	end
 
 BattleFrontier_BattleArenaLobby_MapScript2_255C55: @ 8255C55
@@ -259,12 +259,12 @@ BattleFrontier_BattleArenaLobby_EventScript_256003:: @ 8256003
 
 BattleFrontier_BattleArenaLobby_EventScript_256005:: @ 8256005
 	applymovement 1, BattleFrontier_BattleArenaLobby_Movement_256034
-	applymovement EVENT_OBJ_ID_PLAYER, BattleFrontier_BattleArenaLobby_Movement_256041
+	applymovement OBJ_EVENT_ID_PLAYER, BattleFrontier_BattleArenaLobby_Movement_256041
 	waitmovement 0
 	opendoor 2, 2
 	waitdooranim
 	applymovement 1, BattleFrontier_BattleArenaLobby_Movement_25603E
-	applymovement EVENT_OBJ_ID_PLAYER, BattleFrontier_BattleArenaLobby_Movement_25604C
+	applymovement OBJ_EVENT_ID_PLAYER, BattleFrontier_BattleArenaLobby_Movement_25604C
 	waitmovement 0
 	closedoor 2, 2
 	waitdooranim
@@ -308,12 +308,12 @@ BattleFrontier_BattleArenaLobby_Movement_25604C: @ 825604C
 
 BattleFrontier_BattleArenaLobby_EventScript_256050:: @ 8256050
 	applymovement 1, BattleFrontier_BattleArenaLobby_Movement_25607F
-	applymovement EVENT_OBJ_ID_PLAYER, BattleFrontier_BattleArenaLobby_Movement_256088
+	applymovement OBJ_EVENT_ID_PLAYER, BattleFrontier_BattleArenaLobby_Movement_256088
 	waitmovement 0
 	opendoor 11, 2
 	waitdooranim
 	applymovement 1, BattleFrontier_BattleArenaLobby_Movement_25603E
-	applymovement EVENT_OBJ_ID_PLAYER, BattleFrontier_BattleArenaLobby_Movement_25604C
+	applymovement OBJ_EVENT_ID_PLAYER, BattleFrontier_BattleArenaLobby_Movement_25604C
 	waitmovement 0
 	closedoor 11, 2
 	waitdooranim

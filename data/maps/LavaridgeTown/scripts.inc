@@ -134,7 +134,7 @@ LavaridgeTown_EventScript_RivalExitHerbShop:: @ 81EA65C
 	waitmovement 0
 	applymovement 8, Common_Movement_Delay48
 	waitmovement 0
-	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceFastestRight
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	return
 
@@ -149,7 +149,7 @@ LavaridgeTown_EventScript_RivalApproachPlayer2:: @ 81EA6AC
 	return
 
 LavaridgeTown_EventScript_RivalExit1:: @ 81EA6B7
-	applymovement EVENT_OBJ_ID_PLAYER, LavaridgeTown_Movement_PlayerWatchRivalExit
+	applymovement OBJ_EVENT_ID_PLAYER, LavaridgeTown_Movement_PlayerWatchRivalExit
 	applymovement 7, LavaridgeTown_Movement_RivalExit1
 	waitmovement 0
 	return

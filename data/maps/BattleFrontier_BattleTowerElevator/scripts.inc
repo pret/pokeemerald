@@ -10,7 +10,7 @@ BattleFrontier_BattleTowerElevator_MapScript2_2419E6: @ 82419E6
 BattleFrontier_BattleTowerElevator_EventScript_2419F0:: @ 82419F0
 	setvar VAR_TEMP_0, 1
 	applymovement 1, BattleFrontier_BattleTowerElevator_Movement_241A86
-	applymovement EVENT_OBJ_ID_PLAYER, BattleFrontier_BattleTowerElevator_Movement_241A8A
+	applymovement OBJ_EVENT_ID_PLAYER, BattleFrontier_BattleTowerElevator_Movement_241A8A
 	waitmovement 0
 	special BufferBattleTowerElevatorFloors
 	waitse
@@ -18,7 +18,7 @@ BattleFrontier_BattleTowerElevator_EventScript_2419F0:: @ 82419F0
 	waitstate
 	delay 48
 	applymovement 1, BattleFrontier_BattleTowerElevator_Movement_241A8E
-	applymovement EVENT_OBJ_ID_PLAYER, BattleFrontier_BattleTowerElevator_Movement_241A92
+	applymovement OBJ_EVENT_ID_PLAYER, BattleFrontier_BattleTowerElevator_Movement_241A92
 	waitmovement 0
 	call BattleFrontier_BattleTowerElevator_EventScript_241A28
 	end
@@ -85,6 +85,6 @@ BattleFrontier_BattleTowerElevator_MapScript2_241A96: @ 8241A96
 
 BattleFrontier_BattleTowerElevator_EventScript_241AA0:: @ 8241AA0
 	setvar VAR_TEMP_1, 1
-	turnobject EVENT_OBJ_ID_PLAYER, DIR_NORTH
+	turnobject OBJ_EVENT_ID_PLAYER, DIR_NORTH
 	end
 

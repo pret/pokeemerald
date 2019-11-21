@@ -19,13 +19,13 @@ BattleFrontier_BattlePalaceBattleRoom_EventScript_24F833:: @ 824F833
 	return
 
 BattleFrontier_BattlePalaceBattleRoom_EventScript_24F84B:: @ 824F84B
-	setvar VAR_OBJ_GFX_ID_1, EVENT_OBJ_GFX_RIVAL_BRENDAN_NORMAL
-	setvar VAR_OBJ_GFX_ID_0, EVENT_OBJ_GFX_RIVAL_BRENDAN_NORMAL
+	setvar VAR_OBJ_GFX_ID_1, OBJ_EVENT_GFX_RIVAL_BRENDAN_NORMAL
+	setvar VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_RIVAL_BRENDAN_NORMAL
 	return
 
 BattleFrontier_BattlePalaceBattleRoom_EventScript_24F856:: @ 824F856
-	setvar VAR_OBJ_GFX_ID_1, EVENT_OBJ_GFX_RIVAL_MAY_NORMAL
-	setvar VAR_OBJ_GFX_ID_0, EVENT_OBJ_GFX_RIVAL_MAY_NORMAL
+	setvar VAR_OBJ_GFX_ID_1, OBJ_EVENT_GFX_RIVAL_MAY_NORMAL
+	setvar VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_RIVAL_MAY_NORMAL
 	return
 
 BattleFrontier_BattlePalaceBattleRoom_MapScript2_24F861: @ 824F861
@@ -357,7 +357,7 @@ BattleFrontier_BattlePalaceBattleRoom_EventScript_24FE3E:: @ 824FE3E
 	hideobjectat 1, MAP_BATTLE_FRONTIER_BATTLE_PALACE_BATTLE_ROOM
 	call BattleFrontier_BattlePalaceBattleRoom_EventScript_24F833
 	setvar VAR_TEMP_1, 1
-	applymovement EVENT_OBJ_ID_PLAYER, BattleFrontier_BattlePalaceBattleRoom_Movement_24FE90
+	applymovement OBJ_EVENT_ID_PLAYER, BattleFrontier_BattlePalaceBattleRoom_Movement_24FE90
 	removeobject 2
 	applymovement 4, BattleFrontier_BattlePalaceBattleRoom_Movement_24FE90
 	applymovement 5, BattleFrontier_BattlePalaceBattleRoom_Movement_24FE90

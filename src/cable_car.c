@@ -768,15 +768,15 @@ static void LoadCableCarSprites(void)
     u8 i;
 
     u8 playerGraphicsIds[2] = {
-        EVENT_OBJ_GFX_RIVAL_BRENDAN_NORMAL,
-        EVENT_OBJ_GFX_RIVAL_MAY_NORMAL
+        OBJ_EVENT_GFX_RIVAL_BRENDAN_NORMAL,
+        OBJ_EVENT_GFX_RIVAL_MAY_NORMAL
     };
     u16 rval = Random();
     u8 hikerGraphicsIds[4] = {
-        EVENT_OBJ_GFX_HIKER,
-        EVENT_OBJ_GFX_CAMPER,
-        EVENT_OBJ_GFX_PICNICKER,
-        EVENT_OBJ_GFX_ZIGZAGOON_1
+        OBJ_EVENT_GFX_HIKER,
+        OBJ_EVENT_GFX_CAMPER,
+        OBJ_EVENT_GFX_PICNICKER,
+        OBJ_EVENT_GFX_ZIGZAGOON_1
     };
     s16 hikerCoords[2][2] = {
         {   0,  80 },

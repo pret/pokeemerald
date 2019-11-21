@@ -48,8 +48,8 @@ BattleFrontier_BattlePikeRandomRoom1_MapScript2_2C3EDE: @ 82C3EDE
 	.2byte 0
 
 BattleFrontier_BattlePikeRandomRoom1_EventScript_2C3EE8:: @ 82C3EE8
-	setvar VAR_OBJ_GFX_ID_1, EVENT_OBJ_GFX_LINK_RECEPTIONIST
-	setvar VAR_OBJ_GFX_ID_0, EVENT_OBJ_GFX_LINK_RECEPTIONIST
+	setvar VAR_OBJ_GFX_ID_1, OBJ_EVENT_GFX_LINK_RECEPTIONIST
+	setvar VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_LINK_RECEPTIONIST
 	setvar VAR_0x8004, BATTLE_PIKE_FUNC_GET_ROOM_TYPE
 	special CallBattlePikeFunction
 	compare VAR_RESULT, 3
@@ -62,17 +62,17 @@ BattleFrontier_BattlePikeRandomRoom1_EventScript_2C3EE8:: @ 82C3EE8
 	goto_if_eq BattleFrontier_BattlePikeRandomRoom1_EventScript_2C3F3F
 	hideobjectat 2, MAP_BATTLE_FRONTIER_BATTLE_PIKE_RANDOM_ROOM1
 	setvar VAR_TEMP_4, 1
-	turnobject EVENT_OBJ_ID_PLAYER, DIR_NORTH
+	turnobject OBJ_EVENT_ID_PLAYER, DIR_NORTH
 	end
 
 BattleFrontier_BattlePikeRandomRoom1_EventScript_2C3F35:: @ 82C3F35
 	setvar VAR_TEMP_4, 1
-	turnobject EVENT_OBJ_ID_PLAYER, DIR_NORTH
+	turnobject OBJ_EVENT_ID_PLAYER, DIR_NORTH
 	end
 
 BattleFrontier_BattlePikeRandomRoom1_EventScript_2C3F3F:: @ 82C3F3F
 	setvar VAR_TEMP_4, 1
-	turnobject EVENT_OBJ_ID_PLAYER, DIR_NORTH
+	turnobject OBJ_EVENT_ID_PLAYER, DIR_NORTH
 	hideobjectat 1, MAP_BATTLE_FRONTIER_BATTLE_PIKE_RANDOM_ROOM1
 	end
 
@@ -125,7 +125,7 @@ BattleFrontier_BattlePikeThreePathRoom_EventScript_2C3F6F:: @ 82C3F6F
 	end
 
 BattleFrontier_BattlePikeThreePathRoom_EventScript_2C4030:: @ 82C4030
-	applymovement EVENT_OBJ_ID_PLAYER, BattleFrontier_BattlePikeThreePathRoom_Movement_2C427A
+	applymovement OBJ_EVENT_ID_PLAYER, BattleFrontier_BattlePikeThreePathRoom_Movement_2C427A
 	waitmovement 0
 	call BattleFrontier_BattlePikeThreePathRoom_EventScript_25BB49
 	warpsilent MAP_BATTLE_FRONTIER_BATTLE_PIKE_RANDOM_ROOM1, 255, 4, 7
@@ -133,7 +133,7 @@ BattleFrontier_BattlePikeThreePathRoom_EventScript_2C4030:: @ 82C4030
 	end
 
 BattleFrontier_BattlePikeThreePathRoom_EventScript_2C4049:: @ 82C4049
-	applymovement EVENT_OBJ_ID_PLAYER, BattleFrontier_BattlePikeThreePathRoom_Movement_2C427A
+	applymovement OBJ_EVENT_ID_PLAYER, BattleFrontier_BattlePikeThreePathRoom_Movement_2C427A
 	waitmovement 0
 	call BattleFrontier_BattlePikeThreePathRoom_EventScript_25BB49
 	warpsilent MAP_BATTLE_FRONTIER_BATTLE_PIKE_RANDOM_ROOM3, 255, 4, 19
@@ -214,7 +214,7 @@ BattleFrontier_BattlePikeRandomRoom3_EventScript_2C4136:: @ 82C4136
 
 BattleFrontier_BattlePikeRandomRoom1_EventScript_2C4144:: @ 82C4144
 BattleFrontier_BattlePikeRandomRoom3_EventScript_2C4144:: @ 82C4144
-	applymovement EVENT_OBJ_ID_PLAYER, BattleFrontier_BattlePikeRandomRoom1_Movement_2C427A
+	applymovement OBJ_EVENT_ID_PLAYER, BattleFrontier_BattlePikeRandomRoom1_Movement_2C427A
 	waitmovement 0
 	call BattleFrontier_BattlePikeRandomRoom1_EventScript_25BB49
 	warpsilent MAP_BATTLE_FRONTIER_BATTLE_PIKE_RANDOM_ROOM2, 255, 2, 7
@@ -222,7 +222,7 @@ BattleFrontier_BattlePikeRandomRoom3_EventScript_2C4144:: @ 82C4144
 
 BattleFrontier_BattlePikeRandomRoom1_EventScript_2C415C:: @ 82C415C
 BattleFrontier_BattlePikeRandomRoom3_EventScript_2C415C:: @ 82C415C
-	applymovement EVENT_OBJ_ID_PLAYER, BattleFrontier_BattlePikeRandomRoom1_Movement_2C427A
+	applymovement OBJ_EVENT_ID_PLAYER, BattleFrontier_BattlePikeRandomRoom1_Movement_2C427A
 	waitmovement 0
 	call BattleFrontier_BattlePikeRandomRoom1_EventScript_25BB49
 	warpsilent MAP_BATTLE_FRONTIER_BATTLE_PIKE_THREE_PATH_ROOM, 255, 6, 10

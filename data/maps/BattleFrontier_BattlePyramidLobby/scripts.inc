@@ -9,7 +9,7 @@ BattleFrontier_BattlePyramidLobby_MapScript2_250721: @ 8250721
 
 BattleFrontier_BattlePyramidLobby_EventScript_25072B: @ 825072B
 	setvar VAR_TEMP_1, 1
-	turnobject EVENT_OBJ_ID_PLAYER, DIR_NORTH
+	turnobject OBJ_EVENT_ID_PLAYER, DIR_NORTH
 	end
 
 BattleFrontier_BattlePyramidLobby_MapScript2_250735: @ 8250735
@@ -434,7 +434,7 @@ BattleFrontier_BattlePyramidLobby_EventScript_250D42:: @ 8250D42
 
 BattleFrontier_BattlePyramidLobby_EventScript_250D56:: @ 8250D56
 	applymovement 1, BattleFrontier_BattlePyramidLobby_Movement_250DC4
-	applymovement EVENT_OBJ_ID_PLAYER, BattleFrontier_BattlePyramidLobby_Movement_250DCD
+	applymovement OBJ_EVENT_ID_PLAYER, BattleFrontier_BattlePyramidLobby_Movement_250DCD
 	waitmovement 0
 	msgbox BattleFrontier_BattlePyramidLobby_Text_251569, MSGBOX_DEFAULT
 	setvar VAR_0x8004, BATTLE_PYRAMID_FUNC_GET_DATA
@@ -457,7 +457,7 @@ BattleFrontier_BattlePyramidLobby_EventScript_250D9C:: @ 8250D9C
 	closemessage
 	applymovement 1, BattleFrontier_BattlePyramidLobby_Movement_250DD5
 	waitmovement 0
-	applymovement EVENT_OBJ_ID_PLAYER, BattleFrontier_BattlePyramidLobby_Movement_250DD8
+	applymovement OBJ_EVENT_ID_PLAYER, BattleFrontier_BattlePyramidLobby_Movement_250DD8
 	waitmovement 0
 	return
 

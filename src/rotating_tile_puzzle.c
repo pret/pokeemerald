@@ -29,7 +29,7 @@ struct RotatingTileObject
 
 struct RotatingTilePuzzle
 {
-    struct RotatingTileObject objects[EVENT_OBJECTS_COUNT];
+    struct RotatingTileObject objects[OBJECT_EVENTS_COUNT];
     u8 numObjects;
     bool8 isTrickHouse;
 };
@@ -57,7 +57,7 @@ void FreeRotatingTilePuzzle(void)
     if (sRotatingTilePuzzle != NULL)
         FREE_AND_SET_NULL(sRotatingTilePuzzle);
 
-    id = GetObjectEventIdByLocalIdAndMap(EVENT_OBJ_ID_PLAYER, 0, 0);
+    id = GetObjectEventIdByLocalIdAndMap(OBJ_EVENT_ID_PLAYER, 0, 0);
     ObjectEventClearHeldMovementIfFinished(&gObjectEvents[id]);
     ScriptMovement_UnfreezeObjectEvents();
 }
@@ -68,7 +68,7 @@ u16 MoveRotatingTileObjects(u8 puzzleNumber)
     struct ObjectEventTemplate *objectEvents = gSaveBlock1Ptr->objectEventTemplates;
     u16 localId = 0;
 
-    for (i = 0; i < EVENT_OBJECT_TEMPLATES_COUNT; i++)
+    for (i = 0; i < OBJECT_EVENT_TEMPLATES_COUNT; i++)
     {
         s32 puzzleTileStart;
         u8 puzzleTileNum;
@@ -127,7 +127,7 @@ u16 MoveRotatingTileObjects(u8 puzzleNumber)
 
             objectEvents[i].x += x;
             objectEvents[i].y += y;
-            if (GetObjectEventIdByLocalIdAndMap(objectEvents[i].localId, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup) != EVENT_OBJECTS_COUNT)
+            if (GetObjectEventIdByLocalIdAndMap(objectEvents[i].localId, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup) != OBJECT_EVENTS_COUNT)
             {
                 SaveRotatingTileObject(i, puzzleTileNum);
                 localId = objectEvents[i].localId;
@@ -195,7 +195,7 @@ void TurnRotatingTileObjects(void)
         }
 
         objectEventId = GetObjectEventIdByLocalIdAndMap(objectEvents[sRotatingTilePuzzle->objects[i].eventTemplateId].localId, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
-        if (objectEventId != EVENT_OBJECTS_COUNT)
+        if (objectEventId != OBJECT_EVENTS_COUNT)
         {
             const u8 *movementScript;
             u8 direction = gObjectEvents[objectEventId].facingDirection;

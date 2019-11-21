@@ -16,7 +16,7 @@ BattleFrontier_BattlePyramidLobby_MapScript2_2497FB: @ 82497FB
 
 BattleFrontier_BattleDomeLobby_EventScript_249805:: @ 8249805
 	setvar VAR_TEMP_1, 1
-	turnobject EVENT_OBJ_ID_PLAYER, DIR_NORTH
+	turnobject OBJ_EVENT_ID_PLAYER, DIR_NORTH
 	end
 
 BattleFrontier_BattleDomeLobby_MapScript2_24980F: @ 824980F
@@ -313,7 +313,7 @@ BattleFrontier_BattleDomeLobby_EventScript_249C6E:: @ 8249C6E
 	call_if_eq BattleFrontier_BattleDomeLobby_EventScript_249CDD
 	compare VAR_FRONTIER_BATTLE_MODE, 1
 	call_if_eq BattleFrontier_BattleDomeLobby_EventScript_249CE5
-	applymovement EVENT_OBJ_ID_PLAYER, BattleFrontier_BattleDomeLobby_Movement_249D45
+	applymovement OBJ_EVENT_ID_PLAYER, BattleFrontier_BattleDomeLobby_Movement_249D45
 	waitmovement 0
 	compare VAR_FRONTIER_BATTLE_MODE, 0
 	call_if_eq BattleFrontier_BattleDomeLobby_EventScript_249D2D
@@ -324,7 +324,7 @@ BattleFrontier_BattleDomeLobby_EventScript_249C6E:: @ 8249C6E
 	call_if_eq BattleFrontier_BattleDomeLobby_EventScript_249CED
 	compare VAR_FRONTIER_BATTLE_MODE, 1
 	call_if_eq BattleFrontier_BattleDomeLobby_EventScript_249CF5
-	applymovement EVENT_OBJ_ID_PLAYER, BattleFrontier_BattleDomeLobby_Movement_249D4E
+	applymovement OBJ_EVENT_ID_PLAYER, BattleFrontier_BattleDomeLobby_Movement_249D4E
 	waitmovement 0
 	compare VAR_FRONTIER_BATTLE_MODE, 0
 	call_if_eq BattleFrontier_BattleDomeLobby_EventScript_249D39

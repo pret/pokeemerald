@@ -16,7 +16,7 @@ MeteorFalls_1F_1R_EventScript_OpenStevensCave:: @ 822BD3A
 MeteorFalls_1F_1R_EventScript_MagmaStealsMeteoriteScene:: @ 822BD5F
 	lockall
 	playbgm MUS_MGM0, 0
-	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_FaceDown
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_FaceDown
 	waitmovement 0
 	delay 30
 	applymovement 5, Common_Movement_WalkInPlaceDown
@@ -37,7 +37,7 @@ MeteorFalls_1F_1R_EventScript_MagmaStealsMeteoriteScene:: @ 822BD5F
 	waitmovement 0
 	msgbox MeteorFalls_1F_1R_Text_HoldItRightThereMagma, MSGBOX_DEFAULT
 	closemessage
-	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceFastestLeft
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestLeft
 	applymovement 5, Common_Movement_WalkInPlaceFastestLeft
 	applymovement 6, Common_Movement_WalkInPlaceFastestLeft
 	waitmovement 0
@@ -54,7 +54,7 @@ MeteorFalls_1F_1R_EventScript_MagmaStealsMeteoriteScene:: @ 822BD5F
 	waitmovement 0
 	msgbox MeteorFalls_1F_1R_Text_BeSeeingYouTeamAqua, MSGBOX_DEFAULT
 	closemessage
-	applymovement EVENT_OBJ_ID_PLAYER, MeteorFalls_1F_1R_Movement_PushPlayerOutOfWay
+	applymovement OBJ_EVENT_ID_PLAYER, MeteorFalls_1F_1R_Movement_PushPlayerOutOfWay
 	applymovement 5, MeteorFalls_1F_1R_Movement_MagmaGrunt1Exit
 	applymovement 6, MeteorFalls_1F_1R_Movement_MagmaGrunt2Exit
 	waitmovement 0

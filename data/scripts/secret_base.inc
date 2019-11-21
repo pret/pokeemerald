@@ -157,7 +157,7 @@ SecretBase_EventScript_InitSecretBase:: @ 8275B5B
 	end
 
 SecretBase_EventScript_FirstEntrance:: @ 8275B81
-	applymovement EVENT_OBJ_ID_PLAYER, SecretBase_Movement_275BB4
+	applymovement OBJ_EVENT_ID_PLAYER, SecretBase_Movement_275BB4
 	waitmovement 0
 	setvar VAR_INIT_SECRET_BASE, 1
 	msgbox SecretBase_Text_WantToMakeYourSecretBaseHere, MSGBOX_YESNO

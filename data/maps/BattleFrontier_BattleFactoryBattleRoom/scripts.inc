@@ -30,7 +30,7 @@ BattleFrontier_BattleFactoryBattleRoom_MapScript2_25AE00: @ 825AE00
 
 BattleFrontier_BattleFactoryBattleRoom_EventScript_25AE0A:: @ 825AE0A
 	setvar VAR_TEMP_1, 1
-	hideobjectat EVENT_OBJ_ID_PLAYER, MAP_BATTLE_FRONTIER_BATTLE_FACTORY_BATTLE_ROOM
+	hideobjectat OBJ_EVENT_ID_PLAYER, MAP_BATTLE_FRONTIER_BATTLE_FACTORY_BATTLE_ROOM
 	compare VAR_TEMP_F, 0
 	goto_if_ne BattleFrontier_BattleFactoryBattleRoom_EventScript_25AE24
 	hideobjectat 2, MAP_BATTLE_FRONTIER_BATTLE_FACTORY_BATTLE_ROOM
@@ -39,11 +39,11 @@ BattleFrontier_BattleFactoryBattleRoom_EventScript_25AE24:: @ 825AE24
 	end
 
 BattleFrontier_BattleFactoryBattleRoom_EventScript_25AE25:: @ 825AE25
-	setvar VAR_OBJ_GFX_ID_F, EVENT_OBJ_GFX_RIVAL_BRENDAN_NORMAL
+	setvar VAR_OBJ_GFX_ID_F, OBJ_EVENT_GFX_RIVAL_BRENDAN_NORMAL
 	return
 
 BattleFrontier_BattleFactoryBattleRoom_EventScript_25AE2B:: @ 825AE2B
-	setvar VAR_OBJ_GFX_ID_F, EVENT_OBJ_GFX_RIVAL_MAY_NORMAL
+	setvar VAR_OBJ_GFX_ID_F, OBJ_EVENT_GFX_RIVAL_MAY_NORMAL
 	return
 
 BattleFrontier_BattleFactoryBattleRoom_MapScript2_25AE31: @ 825AE31
@@ -55,7 +55,7 @@ BattleFrontier_BattleFactoryBattleRoom_EventScript_25AE3B:: @ 825AE3B
 	closemessage
 	applymovement 2, BattleFrontier_BattleFactoryBattleRoom_Movement_25B18B
 	applymovement 8, BattleFrontier_BattleFactoryBattleRoom_Movement_25B17B
-	applymovement EVENT_OBJ_ID_PLAYER, BattleFrontier_BattleFactoryBattleRoom_Movement_25B17B
+	applymovement OBJ_EVENT_ID_PLAYER, BattleFrontier_BattleFactoryBattleRoom_Movement_25B17B
 	waitmovement 0
 	call BattleFrontier_BattleFactoryBattleRoom_EventScript_25B1B4
 	goto BattleFrontier_BattleFactoryBattleRoom_EventScript_25AEA7
@@ -65,7 +65,7 @@ BattleFrontier_BattleFactoryBattleRoom_EventScript_25AE67:: @ 825AE67
 	compare VAR_TEMP_F, 0
 	goto_if_ne BattleFrontier_BattleFactoryBattleRoom_EventScript_25AE3B
 	applymovement 8, BattleFrontier_BattleFactoryBattleRoom_Movement_25B17B
-	applymovement EVENT_OBJ_ID_PLAYER, BattleFrontier_BattleFactoryBattleRoom_Movement_25B17B
+	applymovement OBJ_EVENT_ID_PLAYER, BattleFrontier_BattleFactoryBattleRoom_Movement_25B17B
 	waitmovement 0
 	call BattleFrontier_BattleFactoryBattleRoom_EventScript_25B1B4
 	setvar VAR_0x8004, 11

@@ -15,7 +15,7 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "EVENT_OBJ_GFX_ITEM_BALL",
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 32,
       "y": 25,
       "elevation": 3,
@@ -28,7 +28,7 @@
       "flag": "FLAG_ITEM_NEW_MAUVILLE_ULTRA_BALL"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_ITEM_BALL",
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 16,
       "y": 22,
       "elevation": 3,
@@ -41,7 +41,7 @@
       "flag": "FLAG_ITEM_NEW_MAUVILLE_ESCAPE_ROPE"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_ITEM_BALL",
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 39,
       "y": 4,
       "elevation": 3,
@@ -54,7 +54,7 @@
       "flag": "FLAG_ITEM_NEW_MAUVILLE_THUNDER_STONE"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_ITEM_BALL",
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 17,
       "y": 10,
       "elevation": 3,
@@ -67,7 +67,7 @@
       "flag": "FLAG_ITEM_NEW_MAUVILLE_FULL_HEAL"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_ITEM_BALL",
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 2,
       "y": 11,
       "elevation": 3,
@@ -80,7 +80,7 @@
       "flag": "FLAG_ITEM_NEW_MAUVILLE_PARALYZE_HEAL"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_ITEM_BALL",
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 25,
       "y": 18,
       "elevation": 3,
@@ -93,7 +93,7 @@
       "flag": "FLAG_HIDE_NEW_MAUVILLE_VOLTORB_1"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_ITEM_BALL",
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 6,
       "y": 11,
       "elevation": 3,
@@ -106,7 +106,7 @@
       "flag": "FLAG_HIDE_NEW_MAUVILLE_VOLTORB_2"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_ITEM_BALL",
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 13,
       "y": 10,
       "elevation": 3,

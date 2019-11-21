@@ -19,7 +19,7 @@ BattleFrontier_BattlePyramidTop_MapScript2_2550CE: @ 82550CE
 
 BattleFrontier_BattlePyramidTop_EventScript_2550D8:: @ 82550D8
 	setvar VAR_TEMP_1, 1
-	turnobject EVENT_OBJ_ID_PLAYER, DIR_NORTH
+	turnobject OBJ_EVENT_ID_PLAYER, DIR_NORTH
 	compare VAR_TEMP_C, 0
 	goto_if_ne BattleFrontier_BattlePyramidTop_EventScript_2550F3
 	setobjectxyperm 2, 0, 0
@@ -96,7 +96,7 @@ BattleFrontier_BattlePyramidTop_EventScript_2551D0:: @ 82551D0
 	closemessage
 	applymovement 1, BattleFrontier_BattlePyramidTop_Movement_2553FD
 	waitmovement 0
-	applymovement EVENT_OBJ_ID_PLAYER, BattleFrontier_BattlePyramidTop_Movement_255403
+	applymovement OBJ_EVENT_ID_PLAYER, BattleFrontier_BattlePyramidTop_Movement_255403
 	waitmovement 0
 	applymovement 1, BattleFrontier_BattlePyramidTop_Movement_255400
 	waitmovement 0
@@ -139,7 +139,7 @@ BattleFrontier_BattlePyramidTop_EventScript_255256:: @ 8255256
 	compare VAR_RESULT, 0
 	goto_if_ne BattleFrontier_BattlePyramidTop_EventScript_2552D0
 	special SpawnCameraObject
-	applymovement EVENT_OBJ_ID_CAMERA, BattleFrontier_BattlePyramidTop_Movement_25540C
+	applymovement OBJ_EVENT_ID_CAMERA, BattleFrontier_BattlePyramidTop_Movement_25540C
 	waitmovement 0
 	msgbox BattleFrontier_BattlePyramidTop_Text_255669, MSGBOX_DEFAULT
 	closemessage
@@ -186,7 +186,7 @@ BattleFrontier_BattlePyramidTop_EventScript_255335:: @ 8255335
 	compare VAR_RESULT, 0
 	goto_if_ne BattleFrontier_BattlePyramidTop_EventScript_255388
 	special SpawnCameraObject
-	applymovement EVENT_OBJ_ID_CAMERA, BattleFrontier_BattlePyramidTop_Movement_25540C
+	applymovement OBJ_EVENT_ID_CAMERA, BattleFrontier_BattlePyramidTop_Movement_25540C
 	waitmovement 0
 	msgbox BattleFrontier_BattlePyramidTop_Text_255951, MSGBOX_DEFAULT
 	closemessage

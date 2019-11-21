@@ -9,7 +9,7 @@ BattleFrontier_BattlePalaceLobby_MapScript2_24D789: @ 824D789
 
 BattleFrontier_BattlePalaceLobby_EventScript_24D793:: @ 824D793
 	setvar VAR_TEMP_1, 1
-	turnobject EVENT_OBJ_ID_PLAYER, DIR_NORTH
+	turnobject OBJ_EVENT_ID_PLAYER, DIR_NORTH
 	end
 
 BattleFrontier_BattlePalaceLobby_MapScript2_24D79D: @ 824D79D
@@ -303,7 +303,7 @@ BattleFrontier_BattlePalaceLobby_EventScript_24DBBC:: @ 824DBBC
 	compare VAR_FRONTIER_BATTLE_MODE, 1
 	call_if_eq BattleFrontier_BattlePalaceLobby_EventScript_24DC29
 	applymovement VAR_LAST_TALKED, BattleFrontier_BattlePalaceLobby_Movement_24DC47
-	applymovement EVENT_OBJ_ID_PLAYER, BattleFrontier_BattlePalaceLobby_Movement_24DC47
+	applymovement OBJ_EVENT_ID_PLAYER, BattleFrontier_BattlePalaceLobby_Movement_24DC47
 	waitmovement 0
 	compare VAR_FRONTIER_BATTLE_MODE, 0
 	call_if_eq BattleFrontier_BattlePalaceLobby_EventScript_24DC2F
@@ -311,7 +311,7 @@ BattleFrontier_BattlePalaceLobby_EventScript_24DBBC:: @ 824DBBC
 	call_if_eq BattleFrontier_BattlePalaceLobby_EventScript_24DC35
 	waitdooranim
 	applymovement VAR_LAST_TALKED, BattleFrontier_BattlePalaceLobby_Movement_24DC49
-	applymovement EVENT_OBJ_ID_PLAYER, BattleFrontier_BattlePalaceLobby_Movement_24DC4C
+	applymovement OBJ_EVENT_ID_PLAYER, BattleFrontier_BattlePalaceLobby_Movement_24DC4C
 	waitmovement 0
 	compare VAR_FRONTIER_BATTLE_MODE, 0
 	call_if_eq BattleFrontier_BattlePalaceLobby_EventScript_24DC3B

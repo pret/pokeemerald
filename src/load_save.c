@@ -185,7 +185,7 @@ void SaveObjectEvents(void)
 {
     int i;
 
-    for (i = 0; i < EVENT_OBJECTS_COUNT; i++)
+    for (i = 0; i < OBJECT_EVENTS_COUNT; i++)
         gSaveBlock1Ptr->objectEvents[i] = gObjectEvents[i];
 }
 
@@ -193,7 +193,7 @@ void LoadObjectEvents(void)
 {
     int i;
 
-    for (i = 0; i < EVENT_OBJECTS_COUNT; i++)
+    for (i = 0; i < OBJECT_EVENTS_COUNT; i++)
         gObjectEvents[i] = gSaveBlock1Ptr->objectEvents[i];
 }
 

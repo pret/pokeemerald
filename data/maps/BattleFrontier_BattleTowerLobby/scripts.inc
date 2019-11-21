@@ -35,7 +35,7 @@ BattleFrontier_BattleTowerLobby_MapScript2_23E6C9: @ 823E6C9
 
 BattleFrontier_BattleTowerLobby_EventScript_23E6D3:: @ 823E6D3
 	setvar VAR_TEMP_1, 1
-	turnobject EVENT_OBJ_ID_PLAYER, DIR_NORTH
+	turnobject OBJ_EVENT_ID_PLAYER, DIR_NORTH
 	end
 
 BattleFrontier_BattleTowerLobby_MapScript2_23E6DD: @ 823E6DD
@@ -767,12 +767,12 @@ BattleFrontier_BattleTowerLobby_EventScript_23F15B:: @ 823F15B
 	call BattleFrontier_BattleTowerLobby_EventScript_23F1E8
 	call BattleFrontier_BattleTowerLobby_EventScript_23F22D
 	applymovement VAR_LAST_TALKED, BattleFrontier_BattleTowerLobby_Movement_23F195
-	applymovement EVENT_OBJ_ID_PLAYER, BattleFrontier_BattleTowerLobby_Movement_23F195
+	applymovement OBJ_EVENT_ID_PLAYER, BattleFrontier_BattleTowerLobby_Movement_23F195
 	waitmovement 0
 	opendoor VAR_0x8004, 1
 	waitdooranim
 	applymovement VAR_LAST_TALKED, BattleFrontier_BattleTowerLobby_Movement_23F199
-	applymovement EVENT_OBJ_ID_PLAYER, BattleFrontier_BattleTowerLobby_Movement_23F19C
+	applymovement OBJ_EVENT_ID_PLAYER, BattleFrontier_BattleTowerLobby_Movement_23F19C
 	waitmovement 0
 	closedoor VAR_0x8004, 1
 	waitdooranim

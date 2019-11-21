@@ -323,7 +323,7 @@ bool8 ObjectEventIsFarawayIslandMew(struct ObjectEvent *objectEvent)
     if (gSaveBlock1Ptr->location.mapNum == MAP_NUM(FARAWAY_ISLAND_INTERIOR)
      && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(FARAWAY_ISLAND_INTERIOR))
     {
-        if (objectEvent->graphicsId == EVENT_OBJ_GFX_MEW)
+        if (objectEvent->graphicsId == OBJ_EVENT_GFX_MEW)
             return TRUE;
     }
 

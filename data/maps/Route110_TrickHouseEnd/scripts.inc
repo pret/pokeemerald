@@ -241,11 +241,11 @@ Route110_TrickHouseEnd_EventScript_TrickMasterExitTrigger:: @ 826B041
 	applymovement 1, Route110_TrickHouseEnd_Movement_TrickMasterSurprise
 	waitmovement 0
 	playse SE_W153
-	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceFastestDown
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	msgbox Route110_TrickHouseEnd_Text_YoureIgnoringMe, MSGBOX_DEFAULT
 	closemessage
-	applymovement EVENT_OBJ_ID_PLAYER, Route110_TrickHouseEnd_Movement_KeepPlayerInRoom
+	applymovement OBJ_EVENT_ID_PLAYER, Route110_TrickHouseEnd_Movement_KeepPlayerInRoom
 	waitmovement 0
 	delay 4
 	turnobject 1, DIR_EAST

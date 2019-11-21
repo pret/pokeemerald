@@ -396,42 +396,42 @@ const u8 gInitialMovementTypeFacingDirections[] = {
     [MOVEMENT_TYPE_WALK_SLOWLY_IN_PLACE_RIGHT] = DIR_EAST,
 };
 
-#define EVENT_OBJ_PAL_TAG_0  0x1103
-#define EVENT_OBJ_PAL_TAG_1  0x1104
-#define EVENT_OBJ_PAL_TAG_2  0x1105
-#define EVENT_OBJ_PAL_TAG_3  0x1106
-#define EVENT_OBJ_PAL_TAG_4  0x1107
-#define EVENT_OBJ_PAL_TAG_5  0x1108
-#define EVENT_OBJ_PAL_TAG_6  0x1109
-#define EVENT_OBJ_PAL_TAG_7  0x110A
-#define EVENT_OBJ_PAL_TAG_8  0x1100
-#define EVENT_OBJ_PAL_TAG_9  0x1101
-#define EVENT_OBJ_PAL_TAG_10 0x1102
-#define EVENT_OBJ_PAL_TAG_11 0x1115
-#define EVENT_OBJ_PAL_TAG_12 0x110B
-#define EVENT_OBJ_PAL_TAG_13 0x110C
-#define EVENT_OBJ_PAL_TAG_14 0x110D
-#define EVENT_OBJ_PAL_TAG_15 0x110E
-#define EVENT_OBJ_PAL_TAG_16 0x110F
-#define EVENT_OBJ_PAL_TAG_17 0x1110
-#define EVENT_OBJ_PAL_TAG_18 0x1111
-#define EVENT_OBJ_PAL_TAG_19 0x1112
-#define EVENT_OBJ_PAL_TAG_20 0x1113
-#define EVENT_OBJ_PAL_TAG_21 0x1114
-#define EVENT_OBJ_PAL_TAG_22 0x1116
-#define EVENT_OBJ_PAL_TAG_23 0x1117
-#define EVENT_OBJ_PAL_TAG_24 0x1118
-#define EVENT_OBJ_PAL_TAG_25 0x1119
-#define EVENT_OBJ_PAL_TAG_26 0x111B
-#define EVENT_OBJ_PAL_TAG_27 0x111C
-#define EVENT_OBJ_PAL_TAG_28 0x111D
-#define EVENT_OBJ_PAL_TAG_29 0x111E
-#define EVENT_OBJ_PAL_TAG_30 0x111F
-#define EVENT_OBJ_PAL_TAG_31 0x1120
-#define EVENT_OBJ_PAL_TAG_32 0x1121
-#define EVENT_OBJ_PAL_TAG_33 0x1122
-#define EVENT_OBJ_PAL_TAG_34 0x1123
-#define EVENT_OBJ_PAL_TAG_NONE 0x11FF
+#define OBJ_EVENT_PAL_TAG_0  0x1103
+#define OBJ_EVENT_PAL_TAG_1  0x1104
+#define OBJ_EVENT_PAL_TAG_2  0x1105
+#define OBJ_EVENT_PAL_TAG_3  0x1106
+#define OBJ_EVENT_PAL_TAG_4  0x1107
+#define OBJ_EVENT_PAL_TAG_5  0x1108
+#define OBJ_EVENT_PAL_TAG_6  0x1109
+#define OBJ_EVENT_PAL_TAG_7  0x110A
+#define OBJ_EVENT_PAL_TAG_8  0x1100
+#define OBJ_EVENT_PAL_TAG_9  0x1101
+#define OBJ_EVENT_PAL_TAG_10 0x1102
+#define OBJ_EVENT_PAL_TAG_11 0x1115
+#define OBJ_EVENT_PAL_TAG_12 0x110B
+#define OBJ_EVENT_PAL_TAG_13 0x110C
+#define OBJ_EVENT_PAL_TAG_14 0x110D
+#define OBJ_EVENT_PAL_TAG_15 0x110E
+#define OBJ_EVENT_PAL_TAG_16 0x110F
+#define OBJ_EVENT_PAL_TAG_17 0x1110
+#define OBJ_EVENT_PAL_TAG_18 0x1111
+#define OBJ_EVENT_PAL_TAG_19 0x1112
+#define OBJ_EVENT_PAL_TAG_20 0x1113
+#define OBJ_EVENT_PAL_TAG_21 0x1114
+#define OBJ_EVENT_PAL_TAG_22 0x1116
+#define OBJ_EVENT_PAL_TAG_23 0x1117
+#define OBJ_EVENT_PAL_TAG_24 0x1118
+#define OBJ_EVENT_PAL_TAG_25 0x1119
+#define OBJ_EVENT_PAL_TAG_26 0x111B
+#define OBJ_EVENT_PAL_TAG_27 0x111C
+#define OBJ_EVENT_PAL_TAG_28 0x111D
+#define OBJ_EVENT_PAL_TAG_29 0x111E
+#define OBJ_EVENT_PAL_TAG_30 0x111F
+#define OBJ_EVENT_PAL_TAG_31 0x1120
+#define OBJ_EVENT_PAL_TAG_32 0x1121
+#define OBJ_EVENT_PAL_TAG_33 0x1122
+#define OBJ_EVENT_PAL_TAG_34 0x1123
+#define OBJ_EVENT_PAL_TAG_NONE 0x11FF
 
 #include "data/event_object/event_object_graphics_info_pointers.h"
 #include "data/event_object/field_effect_object_template_pointers.h"
@@ -442,216 +442,216 @@ const u8 gInitialMovementTypeFacingDirections[] = {
 #include "data/event_object/event_object_graphics_info.h"
 
 const struct SpritePalette sObjectEventSpritePalettes[] = {
-    {gObjectEventPalette0,  EVENT_OBJ_PAL_TAG_0},
-    {gObjectEventPalette1,  EVENT_OBJ_PAL_TAG_1},
-    {gObjectEventPalette2,  EVENT_OBJ_PAL_TAG_2},
-    {gObjectEventPalette3,  EVENT_OBJ_PAL_TAG_3},
-    {gObjectEventPalette4,  EVENT_OBJ_PAL_TAG_4},
-    {gObjectEventPalette5,  EVENT_OBJ_PAL_TAG_5},
-    {gObjectEventPalette6,  EVENT_OBJ_PAL_TAG_6},
-    {gObjectEventPalette7,  EVENT_OBJ_PAL_TAG_7},
-    {gObjectEventPalette8,  EVENT_OBJ_PAL_TAG_8},
-    {gObjectEventPalette9,  EVENT_OBJ_PAL_TAG_9},
-    {gObjectEventPalette10, EVENT_OBJ_PAL_TAG_10},
-    {gObjectEventPalette11, EVENT_OBJ_PAL_TAG_11},
-    {gObjectEventPalette12, EVENT_OBJ_PAL_TAG_12},
-    {gObjectEventPalette13, EVENT_OBJ_PAL_TAG_13},
-    {gObjectEventPalette14, EVENT_OBJ_PAL_TAG_14},
-    {gObjectEventPalette15, EVENT_OBJ_PAL_TAG_15},
-    {gObjectEventPalette16, EVENT_OBJ_PAL_TAG_16},
-    {gObjectEventPalette17, EVENT_OBJ_PAL_TAG_17},
-    {gObjectEventPalette18, EVENT_OBJ_PAL_TAG_18},
-    {gObjectEventPalette19, EVENT_OBJ_PAL_TAG_19},
-    {gObjectEventPalette20, EVENT_OBJ_PAL_TAG_20},
-    {gObjectEventPalette21, EVENT_OBJ_PAL_TAG_21},
-    {gObjectEventPalette22, EVENT_OBJ_PAL_TAG_22},
-    {gObjectEventPalette23, EVENT_OBJ_PAL_TAG_23},
-    {gObjectEventPalette24, EVENT_OBJ_PAL_TAG_24},
-    {gObjectEventPalette25, EVENT_OBJ_PAL_TAG_25},
-    {gObjectEventPalette26, EVENT_OBJ_PAL_TAG_26},
-    {gObjectEventPalette27, EVENT_OBJ_PAL_TAG_27},
-    {gObjectEventPalette28, EVENT_OBJ_PAL_TAG_28},
-    {gObjectEventPalette29, EVENT_OBJ_PAL_TAG_29},
-    {gObjectEventPalette30, EVENT_OBJ_PAL_TAG_30},
-    {gObjectEventPalette31, EVENT_OBJ_PAL_TAG_31},
-    {gObjectEventPalette32, EVENT_OBJ_PAL_TAG_32},
-    {gObjectEventPalette33, EVENT_OBJ_PAL_TAG_33},
-    {gObjectEventPalette34, EVENT_OBJ_PAL_TAG_34},
+    {gObjectEventPalette0,  OBJ_EVENT_PAL_TAG_0},
+    {gObjectEventPalette1,  OBJ_EVENT_PAL_TAG_1},
+    {gObjectEventPalette2,  OBJ_EVENT_PAL_TAG_2},
+    {gObjectEventPalette3,  OBJ_EVENT_PAL_TAG_3},
+    {gObjectEventPalette4,  OBJ_EVENT_PAL_TAG_4},
+    {gObjectEventPalette5,  OBJ_EVENT_PAL_TAG_5},
+    {gObjectEventPalette6,  OBJ_EVENT_PAL_TAG_6},
+    {gObjectEventPalette7,  OBJ_EVENT_PAL_TAG_7},
+    {gObjectEventPalette8,  OBJ_EVENT_PAL_TAG_8},
+    {gObjectEventPalette9,  OBJ_EVENT_PAL_TAG_9},
+    {gObjectEventPalette10, OBJ_EVENT_PAL_TAG_10},
+    {gObjectEventPalette11, OBJ_EVENT_PAL_TAG_11},
+    {gObjectEventPalette12, OBJ_EVENT_PAL_TAG_12},
+    {gObjectEventPalette13, OBJ_EVENT_PAL_TAG_13},
+    {gObjectEventPalette14, OBJ_EVENT_PAL_TAG_14},
+    {gObjectEventPalette15, OBJ_EVENT_PAL_TAG_15},
+    {gObjectEventPalette16, OBJ_EVENT_PAL_TAG_16},
+    {gObjectEventPalette17, OBJ_EVENT_PAL_TAG_17},
+    {gObjectEventPalette18, OBJ_EVENT_PAL_TAG_18},
+    {gObjectEventPalette19, OBJ_EVENT_PAL_TAG_19},
+    {gObjectEventPalette20, OBJ_EVENT_PAL_TAG_20},
+    {gObjectEventPalette21, OBJ_EVENT_PAL_TAG_21},
+    {gObjectEventPalette22, OBJ_EVENT_PAL_TAG_22},
+    {gObjectEventPalette23, OBJ_EVENT_PAL_TAG_23},
+    {gObjectEventPalette24, OBJ_EVENT_PAL_TAG_24},
+    {gObjectEventPalette25, OBJ_EVENT_PAL_TAG_25},
+    {gObjectEventPalette26, OBJ_EVENT_PAL_TAG_26},
+    {gObjectEventPalette27, OBJ_EVENT_PAL_TAG_27},
+    {gObjectEventPalette28, OBJ_EVENT_PAL_TAG_28},
+    {gObjectEventPalette29, OBJ_EVENT_PAL_TAG_29},
+    {gObjectEventPalette30, OBJ_EVENT_PAL_TAG_30},
+    {gObjectEventPalette31, OBJ_EVENT_PAL_TAG_31},
+    {gObjectEventPalette32, OBJ_EVENT_PAL_TAG_32},
+    {gObjectEventPalette33, OBJ_EVENT_PAL_TAG_33},
+    {gObjectEventPalette34, OBJ_EVENT_PAL_TAG_34},
     {NULL,                  0x0000},
 };
 
 const u16 gPlayerReflectionPaletteTags[] = {
-    EVENT_OBJ_PAL_TAG_9,
-    EVENT_OBJ_PAL_TAG_9,
-    EVENT_OBJ_PAL_TAG_9,
-    EVENT_OBJ_PAL_TAG_9,
+    OBJ_EVENT_PAL_TAG_9,
+    OBJ_EVENT_PAL_TAG_9,
+    OBJ_EVENT_PAL_TAG_9,
+    OBJ_EVENT_PAL_TAG_9,
 };
 
 const u16 Unknown_0850BCF0[] = {
-    EVENT_OBJ_PAL_TAG_18,
-    EVENT_OBJ_PAL_TAG_18,
-    EVENT_OBJ_PAL_TAG_18,
-    EVENT_OBJ_PAL_TAG_18,
+    OBJ_EVENT_PAL_TAG_18,
+    OBJ_EVENT_PAL_TAG_18,
+    OBJ_EVENT_PAL_TAG_18,
+    OBJ_EVENT_PAL_TAG_18,
 };
 
 const u16 gPlayerUnderwaterReflectionPaletteTags[] = {
-    EVENT_OBJ_PAL_TAG_11,
-    EVENT_OBJ_PAL_TAG_11,
-    EVENT_OBJ_PAL_TAG_11,
-    EVENT_OBJ_PAL_TAG_11,
+    OBJ_EVENT_PAL_TAG_11,
+    OBJ_EVENT_PAL_TAG_11,
+    OBJ_EVENT_PAL_TAG_11,
+    OBJ_EVENT_PAL_TAG_11,
 };
 
 const struct PairedPalettes gPlayerReflectionPaletteSets[] = {
-    {EVENT_OBJ_PAL_TAG_8, gPlayerReflectionPaletteTags},
-    {EVENT_OBJ_PAL_TAG_17, Unknown_0850BCF0},
-    {EVENT_OBJ_PAL_TAG_11, gPlayerUnderwaterReflectionPaletteTags},
-    {EVENT_OBJ_PAL_TAG_NONE, NULL},
+    {OBJ_EVENT_PAL_TAG_8, gPlayerReflectionPaletteTags},
+    {OBJ_EVENT_PAL_TAG_17, Unknown_0850BCF0},
+    {OBJ_EVENT_PAL_TAG_11, gPlayerUnderwaterReflectionPaletteTags},
+    {OBJ_EVENT_PAL_TAG_NONE, NULL},
 };
 
 const u16 gQuintyPlumpReflectionPaletteTags[] = {
-    EVENT_OBJ_PAL_TAG_13,
-    EVENT_OBJ_PAL_TAG_13,
-    EVENT_OBJ_PAL_TAG_13,
-    EVENT_OBJ_PAL_TAG_13,
+    OBJ_EVENT_PAL_TAG_13,
+    OBJ_EVENT_PAL_TAG_13,
+    OBJ_EVENT_PAL_TAG_13,
+    OBJ_EVENT_PAL_TAG_13,
 };
 
 const u16 gTruckReflectionPaletteTags[] = {
-    EVENT_OBJ_PAL_TAG_14,
-    EVENT_OBJ_PAL_TAG_14,
-    EVENT_OBJ_PAL_TAG_14,
-    EVENT_OBJ_PAL_TAG_14,
+    OBJ_EVENT_PAL_TAG_14,
+    OBJ_EVENT_PAL_TAG_14,
+    OBJ_EVENT_PAL_TAG_14,
+    OBJ_EVENT_PAL_TAG_14,
 };
 
 const u16 gVigorothMoverReflectionPaletteTags[] = {
-    EVENT_OBJ_PAL_TAG_15,
-    EVENT_OBJ_PAL_TAG_15,
-    EVENT_OBJ_PAL_TAG_15,
-    EVENT_OBJ_PAL_TAG_15,
+    OBJ_EVENT_PAL_TAG_15,
+    OBJ_EVENT_PAL_TAG_15,
+    OBJ_EVENT_PAL_TAG_15,
+    OBJ_EVENT_PAL_TAG_15,
 };
 
 const u16 gMovingBoxReflectionPaletteTags[] = {
-    EVENT_OBJ_PAL_TAG_19,
-    EVENT_OBJ_PAL_TAG_19,
-    EVENT_OBJ_PAL_TAG_19,
-    EVENT_OBJ_PAL_TAG_19,
+    OBJ_EVENT_PAL_TAG_19,
+    OBJ_EVENT_PAL_TAG_19,
+    OBJ_EVENT_PAL_TAG_19,
+    OBJ_EVENT_PAL_TAG_19,
 };
 
 const u16 gCableCarReflectionPaletteTags[] = {
-    EVENT_OBJ_PAL_TAG_20,
-    EVENT_OBJ_PAL_TAG_20,
-    EVENT_OBJ_PAL_TAG_20,
-    EVENT_OBJ_PAL_TAG_20,
+    OBJ_EVENT_PAL_TAG_20,
+    OBJ_EVENT_PAL_TAG_20,
+    OBJ_EVENT_PAL_TAG_20,
+    OBJ_EVENT_PAL_TAG_20,
 };
 
 const u16 gSSTidalReflectionPaletteTags[] = {
-    EVENT_OBJ_PAL_TAG_21,
-    EVENT_OBJ_PAL_TAG_21,
-    EVENT_OBJ_PAL_TAG_21,
-    EVENT_OBJ_PAL_TAG_21,
+    OBJ_EVENT_PAL_TAG_21,
+    OBJ_EVENT_PAL_TAG_21,
+    OBJ_EVENT_PAL_TAG_21,
+    OBJ_EVENT_PAL_TAG_21,
 };
 
 const u16 gSubmarineShadowReflectionPaletteTags[] = {
-    EVENT_OBJ_PAL_TAG_26,
-    EVENT_OBJ_PAL_TAG_26,
-    EVENT_OBJ_PAL_TAG_26,
-    EVENT_OBJ_PAL_TAG_26,
+    OBJ_EVENT_PAL_TAG_26,
+    OBJ_EVENT_PAL_TAG_26,
+    OBJ_EVENT_PAL_TAG_26,
+    OBJ_EVENT_PAL_TAG_26,
 };
 
 const u16 Unknown_0850BD58[] = { // Kyogre2?
-    EVENT_OBJ_PAL_TAG_23,
-    EVENT_OBJ_PAL_TAG_23,
-    EVENT_OBJ_PAL_TAG_23,
-    EVENT_OBJ_PAL_TAG_23,
+    OBJ_EVENT_PAL_TAG_23,
+    OBJ_EVENT_PAL_TAG_23,
+    OBJ_EVENT_PAL_TAG_23,
+    OBJ_EVENT_PAL_TAG_23,
 };
 
 const u16 Unknown_0850BD60[] = { // Groudon2?
-    EVENT_OBJ_PAL_TAG_25,
-    EVENT_OBJ_PAL_TAG_25,
-    EVENT_OBJ_PAL_TAG_25,
-    EVENT_OBJ_PAL_TAG_25,
+    OBJ_EVENT_PAL_TAG_25,
+    OBJ_EVENT_PAL_TAG_25,
+    OBJ_EVENT_PAL_TAG_25,
+    OBJ_EVENT_PAL_TAG_25,
 };
 
 const u16 Unknown_0850BD68[] = { // Invisible Keckleon?
-    EVENT_OBJ_PAL_TAG_6,
-    EVENT_OBJ_PAL_TAG_6,
-    EVENT_OBJ_PAL_TAG_6,
-    EVENT_OBJ_PAL_TAG_6,
+    OBJ_EVENT_PAL_TAG_6,
+    OBJ_EVENT_PAL_TAG_6,
+    OBJ_EVENT_PAL_TAG_6,
+    OBJ_EVENT_PAL_TAG_6,
 };
 
 const u16 gRedLeafReflectionPaletteTags[] = {
-    EVENT_OBJ_PAL_TAG_28,
-    EVENT_OBJ_PAL_TAG_28,
-    EVENT_OBJ_PAL_TAG_28,
-    EVENT_OBJ_PAL_TAG_28,
+    OBJ_EVENT_PAL_TAG_28,
+    OBJ_EVENT_PAL_TAG_28,
+    OBJ_EVENT_PAL_TAG_28,
+    OBJ_EVENT_PAL_TAG_28,
 };
 
 const struct PairedPalettes gSpecialObjectReflectionPaletteSets[] = {
-    {EVENT_OBJ_PAL_TAG_8, gPlayerReflectionPaletteTags},
-    {EVENT_OBJ_PAL_TAG_17, Unknown_0850BCF0},
-    {EVENT_OBJ_PAL_TAG_12, gQuintyPlumpReflectionPaletteTags},
-    {EVENT_OBJ_PAL_TAG_14, gTruckReflectionPaletteTags},
-    {EVENT_OBJ_PAL_TAG_15, gVigorothMoverReflectionPaletteTags},
-    {EVENT_OBJ_PAL_TAG_19, gMovingBoxReflectionPaletteTags},
-    {EVENT_OBJ_PAL_TAG_20, gCableCarReflectionPaletteTags},
-    {EVENT_OBJ_PAL_TAG_21, gSSTidalReflectionPaletteTags},
-    {EVENT_OBJ_PAL_TAG_22, Unknown_0850BD58},
-    {EVENT_OBJ_PAL_TAG_24, Unknown_0850BD60},
-    {EVENT_OBJ_PAL_TAG_2, Unknown_0850BD68},
-    {EVENT_OBJ_PAL_TAG_26, gSubmarineShadowReflectionPaletteTags},
-    {EVENT_OBJ_PAL_TAG_28, gRedLeafReflectionPaletteTags},
-    {EVENT_OBJ_PAL_TAG_NONE, NULL},
+    {OBJ_EVENT_PAL_TAG_8, gPlayerReflectionPaletteTags},
+    {OBJ_EVENT_PAL_TAG_17, Unknown_0850BCF0},
+    {OBJ_EVENT_PAL_TAG_12, gQuintyPlumpReflectionPaletteTags},
+    {OBJ_EVENT_PAL_TAG_14, gTruckReflectionPaletteTags},
+    {OBJ_EVENT_PAL_TAG_15, gVigorothMoverReflectionPaletteTags},
+    {OBJ_EVENT_PAL_TAG_19, gMovingBoxReflectionPaletteTags},
+    {OBJ_EVENT_PAL_TAG_20, gCableCarReflectionPaletteTags},
+    {OBJ_EVENT_PAL_TAG_21, gSSTidalReflectionPaletteTags},
+    {OBJ_EVENT_PAL_TAG_22, Unknown_0850BD58},
+    {OBJ_EVENT_PAL_TAG_24, Unknown_0850BD60},
+    {OBJ_EVENT_PAL_TAG_2, Unknown_0850BD68},
+    {OBJ_EVENT_PAL_TAG_26, gSubmarineShadowReflectionPaletteTags},
+    {OBJ_EVENT_PAL_TAG_28, gRedLeafReflectionPaletteTags},
+    {OBJ_EVENT_PAL_TAG_NONE, NULL},
 };
 
 const u16 gObjectPaletteTags0[] = {
-    EVENT_OBJ_PAL_TAG_8,
-    EVENT_OBJ_PAL_TAG_9,
-    EVENT_OBJ_PAL_TAG_0,
-    EVENT_OBJ_PAL_TAG_1,
-    EVENT_OBJ_PAL_TAG_2,
-    EVENT_OBJ_PAL_TAG_3,
-    EVENT_OBJ_PAL_TAG_4,
-    EVENT_OBJ_PAL_TAG_5,
-    EVENT_OBJ_PAL_TAG_6,
-    EVENT_OBJ_PAL_TAG_7,
+    OBJ_EVENT_PAL_TAG_8,
+    OBJ_EVENT_PAL_TAG_9,
+    OBJ_EVENT_PAL_TAG_0,
+    OBJ_EVENT_PAL_TAG_1,
+    OBJ_EVENT_PAL_TAG_2,
+    OBJ_EVENT_PAL_TAG_3,
+    OBJ_EVENT_PAL_TAG_4,
+    OBJ_EVENT_PAL_TAG_5,
+    OBJ_EVENT_PAL_TAG_6,
+    OBJ_EVENT_PAL_TAG_7,
 };
 
 const u16 gObjectPaletteTags1[] = {
-    EVENT_OBJ_PAL_TAG_8,
-    EVENT_OBJ_PAL_TAG_9,
-    EVENT_OBJ_PAL_TAG_0,
-    EVENT_OBJ_PAL_TAG_1,
-    EVENT_OBJ_PAL_TAG_2,
-    EVENT_OBJ_PAL_TAG_3,
-    EVENT_OBJ_PAL_TAG_4,
-    EVENT_OBJ_PAL_TAG_5,
-    EVENT_OBJ_PAL_TAG_6,
-    EVENT_OBJ_PAL_TAG_7,
+    OBJ_EVENT_PAL_TAG_8,
+    OBJ_EVENT_PAL_TAG_9,
+    OBJ_EVENT_PAL_TAG_0,
+    OBJ_EVENT_PAL_TAG_1,
+    OBJ_EVENT_PAL_TAG_2,
+    OBJ_EVENT_PAL_TAG_3,
+    OBJ_EVENT_PAL_TAG_4,
+    OBJ_EVENT_PAL_TAG_5,
+    OBJ_EVENT_PAL_TAG_6,
+    OBJ_EVENT_PAL_TAG_7,
 };
 
 const u16 gObjectPaletteTags2[] = {
-    EVENT_OBJ_PAL_TAG_8,
-    EVENT_OBJ_PAL_TAG_9,
-    EVENT_OBJ_PAL_TAG_0,
-    EVENT_OBJ_PAL_TAG_1,
-    EVENT_OBJ_PAL_TAG_2,
-    EVENT_OBJ_PAL_TAG_3,
-    EVENT_OBJ_PAL_TAG_4,
-    EVENT_OBJ_PAL_TAG_5,
-    EVENT_OBJ_PAL_TAG_6,
-    EVENT_OBJ_PAL_TAG_7,
+    OBJ_EVENT_PAL_TAG_8,
+    OBJ_EVENT_PAL_TAG_9,
+    OBJ_EVENT_PAL_TAG_0,
+    OBJ_EVENT_PAL_TAG_1,
+    OBJ_EVENT_PAL_TAG_2,
+    OBJ_EVENT_PAL_TAG_3,
+    OBJ_EVENT_PAL_TAG_4,
+    OBJ_EVENT_PAL_TAG_5,
+    OBJ_EVENT_PAL_TAG_6,
+    OBJ_EVENT_PAL_TAG_7,
 };
 
 const u16 gObjectPaletteTags3[] = {
-    EVENT_OBJ_PAL_TAG_8,
-    EVENT_OBJ_PAL_TAG_9,
-    EVENT_OBJ_PAL_TAG_0,
-    EVENT_OBJ_PAL_TAG_1,
-    EVENT_OBJ_PAL_TAG_2,
-    EVENT_OBJ_PAL_TAG_3,
-    EVENT_OBJ_PAL_TAG_4,
-    EVENT_OBJ_PAL_TAG_5,
-    EVENT_OBJ_PAL_TAG_6,
-    EVENT_OBJ_PAL_TAG_7,
+    OBJ_EVENT_PAL_TAG_8,
+    OBJ_EVENT_PAL_TAG_9,
+    OBJ_EVENT_PAL_TAG_0,
+    OBJ_EVENT_PAL_TAG_1,
+    OBJ_EVENT_PAL_TAG_2,
+    OBJ_EVENT_PAL_TAG_3,
+    OBJ_EVENT_PAL_TAG_4,
+    OBJ_EVENT_PAL_TAG_5,
+    OBJ_EVENT_PAL_TAG_6,
+    OBJ_EVENT_PAL_TAG_7,
 };
 
 const u16 *const gObjectPaletteTagSets[] = {
@@ -1106,7 +1106,7 @@ static void ClearAllObjectEvents(void)
 {
     u8 i;
 
-    for (i = 0; i < EVENT_OBJECTS_COUNT; i++)
+    for (i = 0; i < OBJECT_EVENTS_COUNT; i++)
         ClearObjectEvent(&gObjectEvents[i]);
 }
 
@@ -1136,7 +1136,7 @@ static void CreateReflectionEffectSprites(void)
 u8 GetFirstInactiveObjectEventId(void)
 {
     u8 i;
-    for (i = 0; i < EVENT_OBJECTS_COUNT; i++)
+    for (i = 0; i < OBJECT_EVENTS_COUNT; i++)
     {
         if (!gObjectEvents[i].active)
             break;
@@ -1147,7 +1147,7 @@ u8 GetFirstInactiveObjectEventId(void)
 
 u8 GetObjectEventIdByLocalIdAndMap(u8 localId, u8 mapNum, u8 mapGroupId)
 {
-    if (localId < EVENT_OBJ_ID_PLAYER)
+    if (localId < OBJ_EVENT_ID_PLAYER)
     {
         return GetObjectEventIdByLocalIdAndMapInternal(localId, mapNum, mapGroupId);
     }
@@ -1157,7 +1157,7 @@ u8 GetObjectEventIdByLocalIdAndMap(u8 localId, u8 mapNum, u8 mapGroupId)
 bool8 TryGetObjectEventIdByLocalIdAndMap(u8 localId, u8 mapNum, u8 mapGroupId, u8 *objectEventId)
 {
     *objectEventId = GetObjectEventIdByLocalIdAndMap(localId, mapNum, mapGroupId);
-    if (*objectEventId == EVENT_OBJECTS_COUNT)
+    if (*objectEventId == OBJECT_EVENTS_COUNT)
         return TRUE;
     else
         return FALSE;
@@ -1166,7 +1166,7 @@ bool8 TryGetObjectEventIdByLocalIdAndMap(u8 localId, u8 mapNum, u8 mapGroupId, u
 u8 GetObjectEventIdByXY(s16 x, s16 y)
 {
     u8 i;
-    for (i = 0; i < EVENT_OBJECTS_COUNT; i++)
+    for (i = 0; i < OBJECT_EVENTS_COUNT; i++)
     {
         if (gObjectEvents[i].active && gObjectEvents[i].currentCoords.x == x && gObjectEvents[i].currentCoords.y == y)
             break;
@@ -1178,25 +1178,25 @@ u8 GetObjectEventIdByXY(s16 x, s16 y)
 static u8 GetObjectEventIdByLocalIdAndMapInternal(u8 localId, u8 mapNum, u8 mapGroupId)
 {
     u8 i;
-    for (i = 0; i < EVENT_OBJECTS_COUNT; i++)
+    for (i = 0; i < OBJECT_EVENTS_COUNT; i++)
     {
         if (gObjectEvents[i].active && gObjectEvents[i].localId == localId && gObjectEvents[i].mapNum == mapNum && gObjectEvents[i].mapGroup == mapGroupId)
             return i;
     }
 
-    return EVENT_OBJECTS_COUNT;
+    return OBJECT_EVENTS_COUNT;
 }
 
 static u8 GetObjectEventIdByLocalId(u8 localId)
 {
     u8 i;
-    for (i = 0; i < EVENT_OBJECTS_COUNT; i++)
+    for (i = 0; i < OBJECT_EVENTS_COUNT; i++)
     {
         if (gObjectEvents[i].active && gObjectEvents[i].localId == localId)
             return i;
     }
 
-    return EVENT_OBJECTS_COUNT;
+    return OBJECT_EVENTS_COUNT;
 }
 
 // This function has the same nonmatching quirk as in Ruby/Sapphire.
@@ -1211,7 +1211,7 @@ static u8 InitObjectEventStateFromTemplate(struct ObjectEventTemplate *template,
     // mapNum and mapGroup are in the wrong registers (r7/r6 instead of r6/r7)
     if (GetAvailableObjectEventId(template->localId, mapNum, mapGroup, &objectEventId))
     {
-        return EVENT_OBJECTS_COUNT;
+        return OBJECT_EVENTS_COUNT;
     }
     objectEvent = &gObjectEvents[objectEventId];
     ClearObjectEvent(objectEvent);
@@ -1441,7 +1441,7 @@ u8 Unref_TryInitLocalObjectEvent(u8 localId)
             }
         }
     }
-    return EVENT_OBJECTS_COUNT;
+    return OBJECT_EVENTS_COUNT;
 }
 
 static bool8 GetAvailableObjectEventId(u16 localId, u8 mapNum, u8 mapGroup, u8 *objectEventId)
@@ -1453,14 +1453,14 @@ static bool8 GetAvailableObjectEventId(u16 localId, u8 mapNum, u8 mapGroup, u8 *
 {
     u8 i = 0;
 
-    for (i = 0; i < EVENT_OBJECTS_COUNT; i++)
+    for (i = 0; i < OBJECT_EVENTS_COUNT; i++)
     {
         if (!gObjectEvents[i].active)
             break;
         if (gObjectEvents[i].localId == localId && gObjectEvents[i].mapNum == mapNum && gObjectEvents[i].mapGroup == mapGroup)
             return TRUE;
     }
-    if (i >= EVENT_OBJECTS_COUNT)
+    if (i >= OBJECT_EVENTS_COUNT)
         return TRUE;
     *objectEventId = i;
     do
@@ -1468,7 +1468,7 @@ static bool8 GetAvailableObjectEventId(u16 localId, u8 mapNum, u8 mapGroup, u8 *
         if (gObjectEvents[i].active && gObjectEvents[i].localId == localId && gObjectEvents[i].mapNum == mapNum && gObjectEvents[i].mapGroup == mapGroup)
             return TRUE;
         i++;
-    } while (i < EVENT_OBJECTS_COUNT);
+    } while (i < OBJECT_EVENTS_COUNT);
     return FALSE;
 }
 
@@ -1500,7 +1500,7 @@ void RemoveAllObjectEventsExceptPlayer(void)
 {
     u8 i;
 
-    for (i = 0; i < EVENT_OBJECTS_COUNT; i++)
+    for (i = 0; i < OBJECT_EVENTS_COUNT; i++)
     {
         if (i != gPlayerAvatar.objectEventId)
             RemoveObjectEvent(&gObjectEvents[i]);
@@ -1517,8 +1517,8 @@ static u8 TrySetupObjectEventSprite(struct ObjectEventTemplate *objectEventTempl
     const struct ObjectEventGraphicsInfo *graphicsInfo;
 
     objectEventId = InitObjectEventStateFromTemplate(objectEventTemplate, mapNum, mapGroup);
-    if (objectEventId == EVENT_OBJECTS_COUNT)
-        return EVENT_OBJECTS_COUNT;
+    if (objectEventId == OBJECT_EVENTS_COUNT)
+        return OBJECT_EVENTS_COUNT;
 
     objectEvent = &gObjectEvents[objectEventId];
     graphicsInfo = GetObjectEventGraphicsInfo(objectEvent->graphicsId);
@@ -1545,7 +1545,7 @@ static u8 TrySetupObjectEventSprite(struct ObjectEventTemplate *objectEventTempl
     if (spriteId == MAX_SPRITES)
     {
         gObjectEvents[objectEventId].active = FALSE;
-        return EVENT_OBJECTS_COUNT;
+        return OBJECT_EVENTS_COUNT;
     }
 
     sprite = &gSprites[spriteId];
@@ -1580,8 +1580,8 @@ static u8 TrySpawnObjectEventTemplate(struct ObjectEventTemplate *objectEventTem
     spriteFrameImage.size = graphicsInfo->size;
     spriteTemplate.images = &spriteFrameImage;
     objectEventId = TrySetupObjectEventSprite(objectEventTemplate, &spriteTemplate, mapNum, mapGroup, cameraX, cameraY);
-    if (objectEventId == EVENT_OBJECTS_COUNT)
-        return EVENT_OBJECTS_COUNT;
+    if (objectEventId == OBJECT_EVENTS_COUNT)
+        return OBJECT_EVENTS_COUNT;
 
     gSprites[gObjectEvents[objectEventId].spriteId].images = graphicsInfo->images;
     if (subspriteTables)
@@ -1626,7 +1626,7 @@ u8 TrySpawnObjectEvent(u8 localId, u8 mapNum, u8 mapGroup)
 
     objectEventTemplate = GetObjectEventTemplateByLocalIdAndMap(localId, mapNum, mapGroup);
     if (!objectEventTemplate)
-        return EVENT_OBJECTS_COUNT;
+        return OBJECT_EVENTS_COUNT;
 
     GetObjectEventMovingCameraOffset(&cameraX, &cameraY);
     return TrySpawnObjectEventTemplate(objectEventTemplate, mapNum, mapGroup, cameraX, cameraY);
@@ -1773,7 +1773,7 @@ void RemoveObjectEventsOutsideView(void)
     u8 i, j;
     bool8 isActiveLinkPlayer;
 
-    for (i = 0; i < EVENT_OBJECTS_COUNT; i++)
+    for (i = 0; i < OBJECT_EVENTS_COUNT; i++)
     {
         for (j = 0, isActiveLinkPlayer = FALSE; j < ARRAY_COUNT(gLinkPlayerObjectEvents); j++)
         {
@@ -1811,7 +1811,7 @@ void sub_808E16C(s16 x, s16 y)
     u8 i;
 
     ClearPlayerAvatarInfo();
-    for (i = 0; i < EVENT_OBJECTS_COUNT; i++)
+    for (i = 0; i < OBJECT_EVENTS_COUNT; i++)
     {
         if (gObjectEvents[i].active)
         {
@@ -2025,14 +2025,14 @@ const struct ObjectEventGraphicsInfo *GetObjectEventGraphicsInfo(u8 graphicsId)
     {
         graphicsId = VarGetObjectEventGraphicsId(graphicsId - SPRITE_VAR);
     }
-    if (graphicsId == EVENT_OBJ_GFX_BARD)
+    if (graphicsId == OBJ_EVENT_GFX_BARD)
     {
         bard = GetCurrentMauvilleOldMan();
         return gMauvilleOldManGraphicsInfoPointers[bard];
     }
     if (graphicsId >= NUM_OBJECT_GRAPHICS_INFO)
     {
-        graphicsId = EVENT_OBJ_GFX_NINJA_BOY;
+        graphicsId = OBJ_EVENT_GFX_NINJA_BOY;
     }
     return gObjectEventGraphicsInfoPointers[graphicsId];
 }
@@ -2068,7 +2068,7 @@ void sub_808E75C(s16 x, s16 y)
     struct ObjectEvent *objectEvent;
 
     objectEventId = GetObjectEventIdByXY(x, y);
-    if (objectEventId != EVENT_OBJECTS_COUNT)
+    if (objectEventId != OBJECT_EVENTS_COUNT)
     {
         objectEvent = &gObjectEvents[objectEventId];
         objectEvent->triggerGroundEffectsOnMove = TRUE;
@@ -2126,7 +2126,7 @@ static void LoadObjectEventPalette(u16 paletteTag)
 {
     u16 i = FindObjectEventPaletteIndexByTag(paletteTag);
 
-    if (i != EVENT_OBJ_PAL_TAG_NONE) // always true
+    if (i != OBJ_EVENT_PAL_TAG_NONE) // always true
     {
         sub_808E8F4(&sObjectEventSpritePalettes[i]);
     }
@@ -2136,7 +2136,7 @@ void Unused_LoadObjectEventPaletteSet(u16 *paletteTags)
 {
     u8 i;
 
-    for (i = 0; paletteTags[i] != EVENT_OBJ_PAL_TAG_NONE; i++)
+    for (i = 0; paletteTags[i] != OBJ_EVENT_PAL_TAG_NONE; i++)
     {
         LoadObjectEventPalette(paletteTags[i]);
     }
@@ -2172,7 +2172,7 @@ static u8 FindObjectEventPaletteIndexByTag(u16 tag)
 {
     u8 i;
 
-    for (i = 0; sObjectEventSpritePalettes[i].tag != EVENT_OBJ_PAL_TAG_NONE; i++)
+    for (i = 0; sObjectEventSpritePalettes[i].tag != OBJ_EVENT_PAL_TAG_NONE; i++)
     {
         if (sObjectEventSpritePalettes[i].tag == tag)
         {
@@ -2187,7 +2187,7 @@ void LoadPlayerObjectReflectionPalette(u16 tag, u8 slot)
     u8 i;
 
     PatchObjectPalette(tag, slot);
-    for (i = 0; gPlayerReflectionPaletteSets[i].tag != EVENT_OBJ_PAL_TAG_NONE; i++)
+    for (i = 0; gPlayerReflectionPaletteSets[i].tag != OBJ_EVENT_PAL_TAG_NONE; i++)
     {
         if (gPlayerReflectionPaletteSets[i].tag == tag)
         {
@@ -2203,7 +2203,7 @@ void LoadSpecialObjectReflectionPalette(u16 tag, u8 slot)
 
     sCurrentSpecialObjectPaletteTag = tag;
     PatchObjectPalette(tag, slot);
-    for (i = 0; gSpecialObjectReflectionPaletteSets[i].tag != EVENT_OBJ_PAL_TAG_NONE; i++)
+    for (i = 0; gSpecialObjectReflectionPaletteSets[i].tag != OBJ_EVENT_PAL_TAG_NONE; i++)
     {
         if (gSpecialObjectReflectionPaletteSets[i].tag == tag)
         {
@@ -2286,7 +2286,7 @@ void UpdateObjectEventCoordsForCameraUpdate(void)
     {
         dx = gCamera.x;
         dy = gCamera.y;
-        for (i = 0; i < EVENT_OBJECTS_COUNT; i++)
+        for (i = 0; i < OBJECT_EVENTS_COUNT; i++)
         {
             if (gObjectEvents[i].active)
             {
@@ -2305,7 +2305,7 @@ u8 GetObjectEventIdByXYZ(u16 x, u16 y, u8 z)
 {
     u8 i;
 
-    for (i = 0; i < EVENT_OBJECTS_COUNT; i++)
+    for (i = 0; i < OBJECT_EVENTS_COUNT; i++)
     {
         if (gObjectEvents[i].active)
         {
@@ -2315,7 +2315,7 @@ u8 GetObjectEventIdByXYZ(u16 x, u16 y, u8 z)
             }
         }
     }
-    return EVENT_OBJECTS_COUNT;
+    return OBJECT_EVENTS_COUNT;
 }
 
 static bool8 ObjectEventDoesZCoordMatch(struct ObjectEvent *objectEvent, u8 z)
@@ -2576,7 +2576,7 @@ struct ObjectEventTemplate *GetBaseTemplateForObjectEvent(const struct ObjectEve
     {
         return NULL;
     }
-    for (i = 0; i < EVENT_OBJECT_TEMPLATES_COUNT; i++)
+    for (i = 0; i < OBJECT_EVENT_TEMPLATES_COUNT; i++)
     {
         if (objectEvent->localId == gSaveBlock1Ptr->objectEventTemplates[i].localId)
         {
@@ -2645,7 +2645,7 @@ void OverrideSecretBaseDecorationSpriteScript(u8 localId, u8 mapNum, u8 mapGroup
 void InitObjectEventPalettes(u8 palSlot)
 {
     FreeAndReserveObjectSpritePalettes();
-    sCurrentSpecialObjectPaletteTag = EVENT_OBJ_PAL_TAG_NONE;
+    sCurrentSpecialObjectPaletteTag = OBJ_EVENT_PAL_TAG_NONE;
     sCurrentReflectionType = palSlot;
     if (palSlot == 1)
     {
@@ -2666,14 +2666,14 @@ u16 GetObjectPaletteTag(u8 palSlot)
     {
         return gObjectPaletteTagSets[sCurrentReflectionType][palSlot];
     }
-    for (i = 0; gSpecialObjectReflectionPaletteSets[i].tag != EVENT_OBJ_PAL_TAG_NONE; i++)
+    for (i = 0; gSpecialObjectReflectionPaletteSets[i].tag != OBJ_EVENT_PAL_TAG_NONE; i++)
     {
         if (gSpecialObjectReflectionPaletteSets[i].tag == sCurrentSpecialObjectPaletteTag)
         {
             return gSpecialObjectReflectionPaletteSets[i].data[sCurrentReflectionType];
         }
     }
-    return EVENT_OBJ_PAL_TAG_NONE;
+    return OBJ_EVENT_PAL_TAG_NONE;
 }
 
 movement_type_empty_callback(MovementType_None)
@@ -4877,7 +4877,7 @@ u8 GetCollisionAtCoords(struct ObjectEvent *objectEvent, s16 x, s16 y, u32 dir)
     else if (IsZCoordMismatchAt(objectEvent->currentElevation, x, y))
         return COLLISION_ELEVATION_MISMATCH;
     else if (DoesObjectCollideWithObjectAt(objectEvent, x, y))
-        return COLLISION_EVENT_OBJECT;
+        return COLLISION_OBJECT_EVENT;
     return COLLISION_NONE;
 }
 
@@ -4939,7 +4939,7 @@ static bool8 DoesObjectCollideWithObjectAt(struct ObjectEvent *objectEvent, s16 
     u8 i;
     struct ObjectEvent *curObject;
 
-    for (i = 0; i < EVENT_OBJECTS_COUNT; i++)
+    for (i = 0; i < OBJECT_EVENTS_COUNT; i++)
     {
         curObject = &gObjectEvents[i];
         if (curObject->active && curObject != objectEvent)
@@ -5313,7 +5313,7 @@ void npc_apply_direction(struct ObjectEvent *objectEvent, struct Sprite *sprite,
     ShiftObjectEventCoords(objectEvent, x, y);
     oamt_npc_ministep_reset(sprite, direction, speed);
     sprite->animPaused = FALSE;
-    if (gLockedAnimObjectEvents != NULL && FindLockedObjectEventIndex(objectEvent) != EVENT_OBJECTS_COUNT)
+    if (gLockedAnimObjectEvents != NULL && FindLockedObjectEventIndex(objectEvent) != OBJECT_EVENTS_COUNT)
     {
         sprite->animPaused = TRUE;
     }
@@ -6396,7 +6396,7 @@ bool8 MovementAction_FacePlayer_Step0(struct ObjectEvent *objectEvent, struct Sp
 {
     u8 playerObjectId;
 
-    if (!TryGetObjectEventIdByLocalIdAndMap(EVENT_OBJ_ID_PLAYER, 0, 0, &playerObjectId))
+    if (!TryGetObjectEventIdByLocalIdAndMap(OBJ_EVENT_ID_PLAYER, 0, 0, &playerObjectId))
     {
         FaceDirection(objectEvent, sprite, GetDirectionToFace(objectEvent->currentCoords.x, objectEvent->currentCoords.y, gObjectEvents[playerObjectId].currentCoords.x, gObjectEvents[playerObjectId].currentCoords.y));
     }
@@ -6408,7 +6408,7 @@ bool8 MovementAction_FaceAwayPlayer_Step0(struct ObjectEvent *objectEvent, struc
 {
     u8 playerObjectId;
 
-    if (!TryGetObjectEventIdByLocalIdAndMap(EVENT_OBJ_ID_PLAYER, 0, 0, &playerObjectId))
+    if (!TryGetObjectEventIdByLocalIdAndMap(OBJ_EVENT_ID_PLAYER, 0, 0, &playerObjectId))
     {
         FaceDirection(objectEvent, sprite, GetOppositeDirection(GetDirectionToFace(objectEvent->currentCoords.x, objectEvent->currentCoords.y, gObjectEvents[playerObjectId].currentCoords.x, gObjectEvents[playerObjectId].currentCoords.y)));
     }
@@ -8375,7 +8375,7 @@ bool8 FreezeObjectEvent(struct ObjectEvent *objectEvent)
 void FreezeObjectEvents(void)
 {
     u8 i;
-    for (i = 0; i < EVENT_OBJECTS_COUNT; i++)
+    for (i = 0; i < OBJECT_EVENTS_COUNT; i++)
         if (gObjectEvents[i].active && i != gPlayerAvatar.objectEventId)
             FreezeObjectEvent(&gObjectEvents[i]);
 }
@@ -8383,7 +8383,7 @@ void FreezeObjectEvents(void)
 void FreezeObjectEventsExceptOne(u8 objectEventId)
 {
     u8 i;
-    for (i = 0; i < EVENT_OBJECTS_COUNT; i++)
+    for (i = 0; i < OBJECT_EVENTS_COUNT; i++)
         if (i != objectEventId && gObjectEvents[i].active && i != gPlayerAvatar.objectEventId)
             FreezeObjectEvent(&gObjectEvents[i]);
 }
@@ -8401,7 +8401,7 @@ void UnfreezeObjectEvent(struct ObjectEvent *objectEvent)
 void UnfreezeObjectEvents(void)
 {
     u8 i;
-    for (i = 0; i < EVENT_OBJECTS_COUNT; i++)
+    for (i = 0; i < OBJECT_EVENTS_COUNT; i++)
         if (gObjectEvents[i].active)
             UnfreezeObjectEvent(&gObjectEvents[i]);
 }
@@ -9083,12 +9083,12 @@ u8 FindLockedObjectEventIndex(struct ObjectEvent *objectEvent)
 {
     u8 i;
 
-    for (i = 0; i < EVENT_OBJECTS_COUNT; i++)
+    for (i = 0; i < OBJECT_EVENTS_COUNT; i++)
     {
         if (gLockedAnimObjectEvents->objectEventIds[i] == objectEvent->localId)
             return i;
     }
-    return EVENT_OBJECTS_COUNT;
+    return OBJECT_EVENTS_COUNT;
 }
 
 void CreateLevitateMovementTask(struct ObjectEvent *objectEvent)
@@ -9132,7 +9132,7 @@ void sub_8098074(u8 var1, u8 var2)
 {
     u8 i;
 
-    for(i = 0; i < EVENT_OBJECTS_COUNT; i++)
+    for(i = 0; i < OBJECT_EVENTS_COUNT; i++)
     {
         if(i != var1 && i != var2 &&
             gObjectEvents[i].active && i != gPlayerAvatar.objectEventId)

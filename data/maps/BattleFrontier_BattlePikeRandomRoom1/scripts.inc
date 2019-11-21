@@ -113,7 +113,7 @@ BattleFrontier_BattlePikeRandomRoom1_EventScript_25D2FB:: @ 825D2FB
 	msgbox BattleFrontier_BattlePikeRandomRoom1_Text_25E311, MSGBOX_DEFAULT
 	closemessage
 	special SpawnCameraObject
-	applymovement EVENT_OBJ_ID_CAMERA, BattleFrontier_BattlePikeRandomRoom1_Movement_25D9B0
+	applymovement OBJ_EVENT_ID_CAMERA, BattleFrontier_BattlePikeRandomRoom1_Movement_25D9B0
 	applymovement 2, BattleFrontier_BattlePikeRandomRoom1_Movement_25D7E2
 	waitmovement 0
 	playse 267
@@ -215,7 +215,7 @@ BattleFrontier_BattlePikeRandomRoom1_EventScript_25D460:: @ 825D460
 BattleFrontier_BattlePikeRandomRoom1_EventScript_25D49D:: @ 825D49D
 	applymovement 1, BattleFrontier_BattlePikeRandomRoom1_Movement_25D7EA
 	waitmovement 0
-	applymovement EVENT_OBJ_ID_PLAYER, BattleFrontier_BattlePikeRandomRoom1_Movement_25D7DC
+	applymovement OBJ_EVENT_ID_PLAYER, BattleFrontier_BattlePikeRandomRoom1_Movement_25D7DC
 	waitmovement 0
 	setvar VAR_0x8004, BATTLE_PIKE_FUNC_GET_DATA
 	setvar VAR_0x8005, 1
@@ -277,7 +277,7 @@ BattleFrontier_BattlePikeRandomRoom1_EventScript_25D53E:: @ 825D53E
 	applymovement 1, BattleFrontier_BattlePikeRandomRoom1_Movement_25D7C8
 	applymovement 2, BattleFrontier_BattlePikeRandomRoom1_Movement_25D7CA
 	waitmovement 0
-	applymovement EVENT_OBJ_ID_PLAYER, BattleFrontier_BattlePikeRandomRoom1_Movement_25D7BB
+	applymovement OBJ_EVENT_ID_PLAYER, BattleFrontier_BattlePikeRandomRoom1_Movement_25D7BB
 	waitmovement 0
 	setvar VAR_0x8004, BATTLE_PIKE_FUNC_BUFFER_RECORD_MIX_MSG
 	setvar VAR_0x8005, 0
@@ -285,7 +285,7 @@ BattleFrontier_BattlePikeRandomRoom1_EventScript_25D53E:: @ 825D53E
 	msgbox gStringVar4, MSGBOX_DEFAULT
 	closemessage
 	delay 16
-	applymovement EVENT_OBJ_ID_PLAYER, BattleFrontier_BattlePikeRandomRoom1_Movement_25D7BD
+	applymovement OBJ_EVENT_ID_PLAYER, BattleFrontier_BattlePikeRandomRoom1_Movement_25D7BD
 	waitmovement 0
 	setvar VAR_0x8004, BATTLE_PIKE_FUNC_BUFFER_RECORD_MIX_MSG
 	setvar VAR_0x8005, 1
@@ -302,13 +302,13 @@ BattleFrontier_BattlePikeRandomRoom1_EventScript_25D53E:: @ 825D53E
 	end
 
 BattleFrontier_BattlePikeRandomRoom1_EventScript_25D5DC:: @ 825D5DC
-	applymovement EVENT_OBJ_ID_PLAYER, BattleFrontier_BattlePikeRandomRoom1_Movement_25D7BD
+	applymovement OBJ_EVENT_ID_PLAYER, BattleFrontier_BattlePikeRandomRoom1_Movement_25D7BD
 	waitmovement 0
 	applymovement 1, BattleFrontier_BattlePikeRandomRoom1_Movement_25D7CC
 	waitmovement 0
 	applymovement 2, BattleFrontier_BattlePikeRandomRoom1_Movement_25D7D4
 	waitmovement 0
-	applymovement EVENT_OBJ_ID_PLAYER, BattleFrontier_BattlePikeRandomRoom1_Movement_25D7BF
+	applymovement OBJ_EVENT_ID_PLAYER, BattleFrontier_BattlePikeRandomRoom1_Movement_25D7BF
 	waitmovement 0
 	end
 
@@ -431,7 +431,7 @@ BattleFrontier_BattlePikeRandomRoom1_EventScript_25D774:: @ 825D774
 
 BattleFrontier_BattlePikeRandomRoom1_EventScript_25D77B:: @ 825D77B
 	closemessage
-	applymovement EVENT_OBJ_ID_PLAYER, BattleFrontier_BattlePikeRandomRoom1_Movement_25D7DC
+	applymovement OBJ_EVENT_ID_PLAYER, BattleFrontier_BattlePikeRandomRoom1_Movement_25D7DC
 	waitmovement 0
 	setvar VAR_0x8004, SPECIAL_BATTLE_PIKE_SINGLE
 	setvar VAR_0x8005, 0

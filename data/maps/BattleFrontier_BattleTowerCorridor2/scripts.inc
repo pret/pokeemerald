@@ -17,11 +17,11 @@ BattleFrontier_BattleTowerCorridor2_EventScript_248D71:: @ 8248D71
 	checkplayergender
 	compare VAR_RESULT, FEMALE
 	goto_if_eq BattleFrontier_BattleTowerCorridor2_EventScript_248D8B
-	setvar VAR_OBJ_GFX_ID_F, EVENT_OBJ_GFX_BRENDAN_NORMAL
+	setvar VAR_OBJ_GFX_ID_F, OBJ_EVENT_GFX_BRENDAN_NORMAL
 	return
 
 BattleFrontier_BattleTowerCorridor2_EventScript_248D8B:: @ 8248D8B
-	setvar VAR_OBJ_GFX_ID_F, EVENT_OBJ_GFX_MAY_NORMAL
+	setvar VAR_OBJ_GFX_ID_F, OBJ_EVENT_GFX_MAY_NORMAL
 	return
 
 BattleFrontier_BattleTowerCorridor2_EventScript_248D91:: @ 8248D91
@@ -33,7 +33,7 @@ BattleFrontier_BattleTowerCorridor2_MapScript2_248D95: @ 8248D95
 	.2byte 0
 
 BattleFrontier_BattleTowerCorridor2_EventScript_248D9F:: @ 8248D9F
-	hideobjectat EVENT_OBJ_ID_PLAYER, MAP_BATTLE_FRONTIER_BATTLE_TOWER_CORRIDOR2
+	hideobjectat OBJ_EVENT_ID_PLAYER, MAP_BATTLE_FRONTIER_BATTLE_TOWER_CORRIDOR2
 	hideobjectat 1, MAP_BATTLE_FRONTIER_BATTLE_TOWER_CORRIDOR2
 	hideobjectat 4, MAP_BATTLE_FRONTIER_BATTLE_TOWER_CORRIDOR2
 	special OffsetCameraForBattle

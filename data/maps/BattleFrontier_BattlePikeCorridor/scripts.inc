@@ -18,14 +18,14 @@ BattleFrontier_BattlePikeCorridor_EventScript_25C786:: @ 825C786
 	setvar VAR_0x8004, BATTLE_PIKE_FUNC_SET_HEALING_ROOMS_DISABLED
 	setvar VAR_0x8005, 1
 	special CallBattlePikeFunction
-	applymovement EVENT_OBJ_ID_PLAYER, BattleFrontier_BattlePikeCorridor_Movement_25C80B
+	applymovement OBJ_EVENT_ID_PLAYER, BattleFrontier_BattlePikeCorridor_Movement_25C80B
 	applymovement 1, BattleFrontier_BattlePikeCorridor_Movement_25C812
 	waitmovement 0
 	lockall
 	msgbox BattleFrontier_BattlePikeCorridor_Text_25C817, MSGBOX_DEFAULT
 	closemessage
 	releaseall
-	applymovement EVENT_OBJ_ID_PLAYER, BattleFrontier_BattlePikeCorridor_Movement_25C80E
+	applymovement OBJ_EVENT_ID_PLAYER, BattleFrontier_BattlePikeCorridor_Movement_25C80E
 	waitmovement 0
 	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_2
 	setvar VAR_0x8005, 0
@@ -42,7 +42,7 @@ BattleFrontier_BattlePikeCorridor_MapScript2_25C7F7: @ 825C7F7
 
 BattleFrontier_BattlePikeCorridor_EventScript_25C801:: @ 825C801
 	setvar VAR_TEMP_1, 1
-	turnobject EVENT_OBJ_ID_PLAYER, DIR_NORTH
+	turnobject OBJ_EVENT_ID_PLAYER, DIR_NORTH
 	end
 
 BattleFrontier_BattlePikeCorridor_Movement_25C80B: @ 825C80B

@@ -4718,13 +4718,13 @@ static void sub_811E828(void)
     switch (GetDisplayedPersonType())
     {
     case EASY_CHAT_PERSON_REPORTER_MALE:
-        graphicsId = EVENT_OBJ_GFX_REPORTER_M;
+        graphicsId = OBJ_EVENT_GFX_REPORTER_M;
         break;
     case EASY_CHAT_PERSON_REPORTER_FEMALE:
-        graphicsId = EVENT_OBJ_GFX_REPORTER_F;
+        graphicsId = OBJ_EVENT_GFX_REPORTER_F;
         break;
     case EASY_CHAT_PERSON_BOY:
-        graphicsId = EVENT_OBJ_GFX_BOY_1;
+        graphicsId = OBJ_EVENT_GFX_BOY_1;
         break;
     default:
         return;
@@ -4741,7 +4741,7 @@ static void sub_811E828(void)
     }
 
     spriteId = AddPseudoObjectEvent(
-        gSaveBlock2Ptr->playerGender == MALE ? EVENT_OBJ_GFX_RIVAL_BRENDAN_NORMAL : EVENT_OBJ_GFX_RIVAL_MAY_NORMAL,
+        gSaveBlock2Ptr->playerGender == MALE ? OBJ_EVENT_GFX_RIVAL_BRENDAN_NORMAL : OBJ_EVENT_GFX_RIVAL_MAY_NORMAL,
         SpriteCallbackDummy,
         52,
         40,

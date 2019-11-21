@@ -15,7 +15,7 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "EVENT_OBJ_GFX_OLD_MAN",
+      "graphics_id": "OBJ_EVENT_GFX_OLD_MAN",
       "x": 22,
       "y": 5,
       "elevation": 3,
@@ -28,7 +28,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_ARCHIE",
+      "graphics_id": "OBJ_EVENT_GFX_ARCHIE",
       "x": 23,
       "y": 6,
       "elevation": 3,
@@ -41,7 +41,7 @@
       "flag": "FLAG_HIDE_MT_PYRE_SUMMIT_ARCHIE"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_EXPERT_F",
+      "graphics_id": "OBJ_EVENT_GFX_EXPERT_F",
       "x": 23,
       "y": 5,
       "elevation": 3,
@@ -54,7 +54,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_AQUA_MEMBER_M",
+      "graphics_id": "OBJ_EVENT_GFX_AQUA_MEMBER_M",
       "x": 21,
       "y": 15,
       "elevation": 3,
@@ -67,7 +67,7 @@
       "flag": "FLAG_HIDE_MT_PYRE_SUMMIT_TEAM_AQUA"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_AQUA_MEMBER_M",
+      "graphics_id": "OBJ_EVENT_GFX_AQUA_MEMBER_M",
       "x": 25,
       "y": 18,
       "elevation": 3,
@@ -80,7 +80,7 @@
       "flag": "FLAG_HIDE_MT_PYRE_SUMMIT_TEAM_AQUA"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_AQUA_MEMBER_M",
+      "graphics_id": "OBJ_EVENT_GFX_AQUA_MEMBER_M",
       "x": 21,
       "y": 11,
       "elevation": 3,
@@ -93,7 +93,7 @@
       "flag": "FLAG_HIDE_MT_PYRE_SUMMIT_TEAM_AQUA"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_AQUA_MEMBER_F",
+      "graphics_id": "OBJ_EVENT_GFX_AQUA_MEMBER_F",
       "x": 25,
       "y": 11,
       "elevation": 3,
@@ -106,7 +106,7 @@
       "flag": "FLAG_HIDE_MT_PYRE_SUMMIT_TEAM_AQUA"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_MAXIE",
+      "graphics_id": "OBJ_EVENT_GFX_MAXIE",
       "x": 23,
       "y": 6,
       "elevation": 3,

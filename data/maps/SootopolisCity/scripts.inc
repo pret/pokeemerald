@@ -179,11 +179,11 @@ SootopolisCity_EventScript_PlayerFaceLegendaries:: @ 81E58E5
 	end
 
 SootopolisCity_EventScript_PlayerFaceLegendaries1:: @ 81E58FC
-	turnobject EVENT_OBJ_ID_PLAYER, DIR_NORTH
+	turnobject OBJ_EVENT_ID_PLAYER, DIR_NORTH
 	return
 
 SootopolisCity_EventScript_PlayerFaceLegendaries2:: @ 81E5901
-	turnobject EVENT_OBJ_ID_PLAYER, DIR_NORTH
+	turnobject OBJ_EVENT_ID_PLAYER, DIR_NORTH
 	setvar VAR_SKY_PILLAR_STATE, 3
 	return
 
@@ -210,7 +210,7 @@ SootopolisCity_EventScript_StartLegendariesScene:: @ 81E5926
 SootopolisCity_EventScript_LegendariesSceneFromPokeCenter:: @ 81E5946
 	delay 60
 	special SpawnCameraObject
-	applymovement EVENT_OBJ_ID_CAMERA, SootopolisCity_Movement_PanToActionFromPokeCenter
+	applymovement OBJ_EVENT_ID_CAMERA, SootopolisCity_Movement_PanToActionFromPokeCenter
 	waitmovement 0
 	special RemoveCameraObject
 	delay 60
@@ -269,7 +269,7 @@ SootopolisCity_EventScript_LegendariesSceneFromPokeCenter:: @ 81E5946
 	special SpawnCameraObject
 	applymovement 10, SootopolisCity_Movement_KyogreIdle
 	applymovement 9, SootopolisCity_Movement_GroudonIdle
-	applymovement EVENT_OBJ_ID_CAMERA, SootopolisCity_Movement_PanBackToPokeCenter
+	applymovement OBJ_EVENT_ID_CAMERA, SootopolisCity_Movement_PanBackToPokeCenter
 	waitmovement 0
 	special RemoveCameraObject
 	setvar VAR_SOOTOPOLIS_CITY_STATE, 2
@@ -310,7 +310,7 @@ SootopolisCity_Movement_PanBackToPokeCenter: @ 81E5A75
 SootopolisCity_EventScript_LegendariesSceneFromDive:: @ 81E5A82
 	delay 60
 	special SpawnCameraObject
-	applymovement EVENT_OBJ_ID_CAMERA, SootopolisCity_Movement_PanToActionFromDive
+	applymovement OBJ_EVENT_ID_CAMERA, SootopolisCity_Movement_PanToActionFromDive
 	waitmovement 0
 	special RemoveCameraObject
 	delay 60
@@ -369,7 +369,7 @@ SootopolisCity_EventScript_LegendariesSceneFromDive:: @ 81E5A82
 	special SpawnCameraObject
 	applymovement 10, SootopolisCity_Movement_KyogreIdle
 	applymovement 9, SootopolisCity_Movement_GroudonIdle
-	applymovement EVENT_OBJ_ID_CAMERA, SootopolisCity_Movement_PanBackToDive
+	applymovement OBJ_EVENT_ID_CAMERA, SootopolisCity_Movement_PanBackToDive
 	waitmovement 0
 	special RemoveCameraObject
 	setvar VAR_SOOTOPOLIS_CITY_STATE, 2
@@ -501,7 +501,7 @@ SootopolisCity_EventScript_StartRayquazaScene:: @ 81E5BFE
 SootopolisCity_EventScript_RayquazaSceneFromPokeCenter:: @ 81E5C1E
 	delay 60
 	special SpawnCameraObject
-	applymovement EVENT_OBJ_ID_CAMERA, SootopolisCity_Movement_PanToActionFromPokeCenter
+	applymovement OBJ_EVENT_ID_CAMERA, SootopolisCity_Movement_PanToActionFromPokeCenter
 	waitmovement 0
 	special RemoveCameraObject
 	delay 60
@@ -515,7 +515,7 @@ SootopolisCity_EventScript_RayquazaSceneFromPokeCenter:: @ 81E5C1E
 	waitstate
 	playse SE_T_KAMI
 	special SpawnCameraObject
-	applymovement EVENT_OBJ_ID_CAMERA, SootopolisCity_Movement_PanUp
+	applymovement OBJ_EVENT_ID_CAMERA, SootopolisCity_Movement_PanUp
 	waitmovement 0
 	waitse
 	playmoncry SPECIES_RAYQUAZA, 2
@@ -554,7 +554,7 @@ SootopolisCity_EventScript_RayquazaSceneFromPokeCenter:: @ 81E5C1E
 SootopolisCity_EventScript_RayquazaSceneFromDive:: @ 81E5CCE
 	delay 60
 	special SpawnCameraObject
-	applymovement EVENT_OBJ_ID_CAMERA, SootopolisCity_Movement_PanToActionFromDive
+	applymovement OBJ_EVENT_ID_CAMERA, SootopolisCity_Movement_PanToActionFromDive
 	waitmovement 0
 	special RemoveCameraObject
 	delay 60
@@ -567,8 +567,8 @@ SootopolisCity_EventScript_RayquazaSceneFromDive:: @ 81E5CCE
 	special Script_DoRayquazaScene
 	waitstate
 	special SpawnCameraObject
-	applymovement EVENT_OBJ_ID_CAMERA, SootopolisCity_Movement_PanUp
-	applymovement EVENT_OBJ_ID_PLAYER, SootopolisCity_Movement_PlayerApproachLegendaries
+	applymovement OBJ_EVENT_ID_CAMERA, SootopolisCity_Movement_PanUp
+	applymovement OBJ_EVENT_ID_PLAYER, SootopolisCity_Movement_PlayerApproachLegendaries
 	waitmovement 0
 	waitse
 	playmoncry SPECIES_RAYQUAZA, 2
@@ -972,18 +972,18 @@ SootopolisCity_EventScript_StevenLeadPlayerCaveOfOrigin:: @ 81E61CC
 	msgbox SootopolisCity_Text_DoesThisMakeYourFearPokemon, MSGBOX_DEFAULT
 	closemessage
 	applymovement 7, SootopolisCity_Movement_StevenWalkToCaveOfOrigin
-	applymovement EVENT_OBJ_ID_PLAYER, SootopolisCity_Movement_PlayerWalkToCaveOfOrigin
+	applymovement OBJ_EVENT_ID_PLAYER, SootopolisCity_Movement_PlayerWalkToCaveOfOrigin
 	waitmovement 0
 	delay 120
 	applymovement 1, SootopolisCity_Movement_ExpertMoveAside
 	waitmovement 0
 	applymovement 7, SootopolisCity_Movement_StevenArriveCaveEntrance
-	applymovement EVENT_OBJ_ID_PLAYER, SootopolisCity_Movement_PlayerArriveCaveEntrance
+	applymovement OBJ_EVENT_ID_PLAYER, SootopolisCity_Movement_PlayerArriveCaveEntrance
 	waitmovement 0
 	msgbox SootopolisCity_Text_HereWereAreHelpWallace, MSGBOX_DEFAULT
 	closemessage
 	setflag FLAG_STEVEN_GUIDES_TO_CAVE_OF_ORIGIN
-	applymovement EVENT_OBJ_ID_PLAYER, SootopolisCity_Movement_PlayerEnterCaveOfOrigin
+	applymovement OBJ_EVENT_ID_PLAYER, SootopolisCity_Movement_PlayerEnterCaveOfOrigin
 	waitmovement 0
 	warp MAP_CAVE_OF_ORIGIN_ENTRANCE, 255, 9, 20
 	waitstate
@@ -991,13 +991,13 @@ SootopolisCity_EventScript_StevenLeadPlayerCaveOfOrigin:: @ 81E61CC
 
 SootopolisCity_EventScript_StartWalkToCaveOfOriginWest:: @ 81E6243
 	applymovement 7, SootopolisCity_Movement_StevenStartWalkToCaveOfOrigin
-	applymovement EVENT_OBJ_ID_PLAYER, SootopolisCity_Movement_PlayerStartWalkToCaveOfOriginWest
+	applymovement OBJ_EVENT_ID_PLAYER, SootopolisCity_Movement_PlayerStartWalkToCaveOfOriginWest
 	waitmovement 0
 	return
 
 SootopolisCity_EventScript_StartWalkToCaveOfOriginNorth:: @ 81E6255
 	applymovement 7, SootopolisCity_Movement_StevenStartWalkToCaveOfOrigin
-	applymovement EVENT_OBJ_ID_PLAYER, SootopolisCity_Movement_PlayerStartWalkToCaveOfOriginNorth
+	applymovement OBJ_EVENT_ID_PLAYER, SootopolisCity_Movement_PlayerStartWalkToCaveOfOriginNorth
 	waitmovement 0
 	return
 

@@ -263,7 +263,7 @@ enum
     COLLISION_OUTSIDE_RANGE,
     COLLISION_IMPASSABLE,
     COLLISION_ELEVATION_MISMATCH,
-    COLLISION_EVENT_OBJECT,
+    COLLISION_OBJECT_EVENT,
     COLLISION_STOP_SURFING,
     COLLISION_LEDGE_JUMP,
     COLLISION_PUSHED_BOULDER,
@@ -320,7 +320,7 @@ struct Camera
     s32 y;
 };
 
-extern struct ObjectEvent gObjectEvents[EVENT_OBJECTS_COUNT];
+extern struct ObjectEvent gObjectEvents[OBJECT_EVENTS_COUNT];
 extern u8 gSelectedObjectEvent;
 extern struct MapHeader gMapHeader;
 extern struct PlayerAvatar gPlayerAvatar;

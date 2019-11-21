@@ -9,7 +9,7 @@ BattleFrontier_BattleFactoryLobby_MapScript2_2583F3: @ 82583F3
 
 BattleFrontier_BattleFactoryLobby_EventScript_2583FD:: @ 82583FD
 	setvar VAR_TEMP_1, 1
-	turnobject EVENT_OBJ_ID_PLAYER, DIR_NORTH
+	turnobject OBJ_EVENT_ID_PLAYER, DIR_NORTH
 	end
 
 BattleFrontier_BattleFactoryLobby_MapScript2_258407: @ 8258407
@@ -223,7 +223,7 @@ BattleFrontier_BattleFactoryLobby_EventScript_25871A:: @ 825871A
 	compare VAR_FRONTIER_BATTLE_MODE, 1
 	call_if_eq BattleFrontier_BattleFactoryLobby_EventScript_258762
 	applymovement VAR_LAST_TALKED, BattleFrontier_BattleFactoryLobby_Movement_2587A7
-	applymovement EVENT_OBJ_ID_PLAYER, BattleFrontier_BattleFactoryLobby_Movement_2587AC
+	applymovement OBJ_EVENT_ID_PLAYER, BattleFrontier_BattleFactoryLobby_Movement_2587AC
 	waitmovement 0
 	warp MAP_BATTLE_FRONTIER_BATTLE_FACTORY_PRE_BATTLE_ROOM, 255, 8, 13
 	setvar VAR_TEMP_0, 0
