@@ -28,28 +28,23 @@ BattleFrontier_BattlePyramidTop_EventScript_2550F3:: @ 82550F3
 	end
 
 BattleFrontier_BattlePyramidTop_MapScript1_2550F4: @ 82550F4
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_9
-	special CallFrontierUtilFunc
-	compare VAR_RESULT, 0
+	frontier_getbrainstatus
+	compare VAR_RESULT, FRONTIER_BRAIN_NOT_READY
 	goto_if_eq BattleFrontier_BattlePyramidTop_EventScript_25510C
 	call BattleFrontier_BattlePyramidTop_EventScript_242170
-
 BattleFrontier_BattlePyramidTop_EventScript_25510C:: @ 825510C
 	copyvar VAR_TEMP_C, VAR_RESULT
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_0
-	special CallFrontierUtilFunc
+	frontier_checkoutcome
 	switch VAR_TEMP_0
 	case 0, BattleFrontier_BattlePyramidTop_EventScript_255193
 	case 1, BattleFrontier_BattlePyramidTop_EventScript_252B66
 	case 2, BattleFrontier_BattlePyramidTop_EventScript_255193
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_1
-	setvar VAR_0x8005, 5
-	special CallFrontierUtilFunc
-	compare VAR_RESULT, 2
+	frontier_getbattleoutcome
+	compare VAR_RESULT, B_OUTCOME_LOST
 	goto_if_eq BattleFrontier_BattlePyramidTop_EventScript_252B42
-	compare VAR_RESULT, 3
+	compare VAR_RESULT, B_OUTCOME_DREW
 	goto_if_eq BattleFrontier_BattlePyramidTop_EventScript_252B42
-	compare VAR_RESULT, 9
+	compare VAR_RESULT, B_OUTCOME_FORFEITED
 	goto_if_eq BattleFrontier_BattlePyramidTop_EventScript_252B42
 	end
 
@@ -73,15 +68,13 @@ BattleFrontier_BattlePyramidTop_EventScript_255193:: @ 8255193
 	setvar VAR_0x8005, 1
 	special CallBattlePyramidFunction
 	special SavePlayerParty
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_2
+	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_SET_DATA
 	setvar VAR_0x8005, 0
 	setvar VAR_0x8006, 0
 	special CallFrontierUtilFunc
 	setvar VAR_0x8004, BATTLE_PYRAMID_FUNC_INIT_TRAINERS
 	special CallBattlePyramidFunction
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_LOAD_SELECTED_PARTY
-	setvar VAR_0x8005, FRONTIER_PARTY_SIZE
-	special CallFrontierUtilFunc
+	frontier_loadselectedmons
 	setvar VAR_TEMP_F, 1
 	end
 
@@ -90,7 +83,7 @@ BattleFrontier_BattlePyramidTop_EventScript_2551D0:: @ 82551D0
 	faceplayer
 	compare VAR_TEMP_D, 0
 	goto_if_ne BattleFrontier_BattlePyramidTop_EventScript_255236
-	compare VAR_TEMP_C, 0
+	compare VAR_TEMP_C, FRONTIER_BRAIN_NOT_READY
 	goto_if_ne BattleFrontier_BattlePyramidTop_EventScript_255240
 	msgbox BattleFrontier_BattlePyramidTop_Text_255410, MSGBOX_DEFAULT
 	closemessage
@@ -107,10 +100,7 @@ BattleFrontier_BattlePyramidTop_EventScript_2551D0:: @ 82551D0
 	closemessage
 
 BattleFrontier_BattlePyramidTop_EventScript_25521A:: @ 825521A
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_2
-	setvar VAR_0x8005, 0
-	setvar VAR_0x8006, 3
-	special CallFrontierUtilFunc
+	frontier_setchallengestatus CHALLENGE_STATUS_WON
 	warp MAP_BATTLE_FRONTIER_BATTLE_PYRAMID_LOBBY, 255, 7, 13
 	waitstate
 	end
@@ -130,10 +120,10 @@ BattleFrontier_BattlePyramidTop_EventScript_255240:: @ 8255240
 BattleFrontier_BattlePyramidTop_EventScript_255256:: @ 8255256
 	lockall
 	switch VAR_TEMP_C
-	case 2, BattleFrontier_BattlePyramidTop_EventScript_255335
-	case 3, BattleFrontier_BattlePyramidTop_EventScript_2552D0
-	case 4, BattleFrontier_BattlePyramidTop_EventScript_255388
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_1
+	case FRONTIER_BRAIN_GOLD, BattleFrontier_BattlePyramidTop_EventScript_255335
+	case FRONTIER_BRAIN_STREAK, BattleFrontier_BattlePyramidTop_EventScript_2552D0
+	case FRONTIER_BRAIN_STREAK_LONG, BattleFrontier_BattlePyramidTop_EventScript_255388
+	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_GET_DATA
 	setvar VAR_0x8005, 7
 	special CallFrontierUtilFunc
 	compare VAR_RESULT, 0
@@ -143,7 +133,7 @@ BattleFrontier_BattlePyramidTop_EventScript_255256:: @ 8255256
 	waitmovement 0
 	msgbox BattleFrontier_BattlePyramidTop_Text_255669, MSGBOX_DEFAULT
 	closemessage
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_2
+	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_SET_DATA
 	setvar VAR_0x8005, 7
 	special CallFrontierUtilFunc
 	applymovement 2, BattleFrontier_BattlePyramidTop_Movement_25540A
@@ -180,7 +170,7 @@ BattleFrontier_BattlePyramidTop_EventScript_2552FB:: @ 82552FB
 	goto BattleFrontier_BattlePyramidTop_EventScript_25521A
 
 BattleFrontier_BattlePyramidTop_EventScript_255335:: @ 8255335
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_1
+	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_GET_DATA
 	setvar VAR_0x8005, 7
 	special CallFrontierUtilFunc
 	compare VAR_RESULT, 0
@@ -190,7 +180,7 @@ BattleFrontier_BattlePyramidTop_EventScript_255335:: @ 8255335
 	waitmovement 0
 	msgbox BattleFrontier_BattlePyramidTop_Text_255951, MSGBOX_DEFAULT
 	closemessage
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_2
+	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_SET_DATA
 	setvar VAR_0x8005, 7
 	special CallFrontierUtilFunc
 	applymovement 2, BattleFrontier_BattlePyramidTop_Movement_25540A

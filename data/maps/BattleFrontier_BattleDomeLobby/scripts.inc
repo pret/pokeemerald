@@ -28,8 +28,7 @@ BattleFrontier_BattleDomeLobby_MapScript2_24980F: @ 824980F
 	.2byte 0
 
 BattleFrontier_BattleDomeLobby_EventScript_249839:: @ 8249839
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_0
-	special CallFrontierUtilFunc
+	frontier_checkoutcome
 	end
 
 BattleFrontier_BattleDomeLobby_EventScript_249842:: @ 8249842
@@ -48,7 +47,7 @@ BattleFrontier_BattleDomeLobby_EventScript_249842:: @ 8249842
 	setvar VAR_0x8005, 6
 	setvar VAR_0x8006, 1
 	special CallBattleDomeFunction
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_2
+	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_SET_DATA
 	setvar VAR_0x8005, 0
 	setvar VAR_0x8006, 0
 	special CallFrontierUtilFunc
@@ -77,9 +76,7 @@ BattleFrontier_BattleDomeLobby_EventScript_2498C9:: @ 82498C9
 	message BattleFrontier_BattleDomeLobby_Text_24A5D6
 	waitmessage
 	special LoadPlayerParty
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_LOAD_SELECTED_PARTY
-	setvar VAR_0x8005, FRONTIER_PARTY_SIZE
-	special CallFrontierUtilFunc
+	frontier_loadselectedmons
 	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_8
 	special CallFrontierUtilFunc
 	setvar VAR_0x8004, 2
@@ -104,9 +101,7 @@ BattleFrontier_BattleDomeLobby_EventScript_249940:: @ 8249940
 	message BattleFrontier_BattleDomeLobby_Text_24A5D6
 	waitmessage
 	special LoadPlayerParty
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_LOAD_SELECTED_PARTY
-	setvar VAR_0x8005, FRONTIER_PARTY_SIZE
-	special CallFrontierUtilFunc
+	frontier_loadselectedmons
 	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_8
 	special CallFrontierUtilFunc
 	setvar VAR_0x8004, 2
@@ -157,7 +152,7 @@ BattleFrontier_BattleDomeLobby_EventScript_2499F9:: @ 82499F9
 	special CallBattleDomeFunction
 	playse SE_SAVE
 	waitse
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_2
+	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_SET_DATA
 	setvar VAR_0x8005, 3
 	setvar VAR_0x8006, 0
 	special CallFrontierUtilFunc
@@ -211,7 +206,7 @@ BattleFrontier_BattleDomeLobby_EventScript_249ABF:: @ 8249ABF
 	special CallFrontierUtilFunc
 	compare VAR_0x8004, 1
 	goto_if_eq BattleFrontier_BattleDomeLobby_EventScript_249C15
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_2
+	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_SET_DATA
 	setvar VAR_0x8005, 1
 	copyvar VAR_0x8006, VAR_RESULT
 	special CallFrontierUtilFunc
@@ -232,16 +227,16 @@ BattleFrontier_BattleDomeLobby_EventScript_249ABF:: @ 8249ABF
 
 BattleFrontier_BattleDomeLobby_EventScript_249B60:: @ 8249B60
 	setvar VAR_TEMP_0, 0
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_2
+	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_SET_DATA
 	setvar VAR_0x8005, 4
 	special CallFrontierUtilFunc
 	setvar VAR_0x8004, 0
 	special CallBattleDomeFunction
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_2
+	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_SET_DATA
 	setvar VAR_0x8005, 0
 	setvar VAR_0x8006, 1
 	special CallFrontierUtilFunc
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_2
+	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_SET_DATA
 	setvar VAR_0x8005, 3
 	setvar VAR_0x8006, 0
 	special CallFrontierUtilFunc
@@ -257,9 +252,7 @@ BattleFrontier_BattleDomeLobby_EventScript_249B60:: @ 8249B60
 
 BattleFrontier_BattleDomeLobby_EventScript_249BC2:: @ 8249BC2
 	special SavePlayerParty
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_LOAD_SELECTED_PARTY
-	setvar VAR_0x8005, FRONTIER_PARTY_SIZE
-	special CallFrontierUtilFunc
+	frontier_loadselectedmons
 	setvar VAR_0x8004, 15
 	special CallBattleDomeFunction
 	msgbox BattleFrontier_BattleDomeLobby_Text_24A437, MSGBOX_DEFAULT
@@ -292,7 +285,7 @@ BattleFrontier_BattleDomeLobby_EventScript_249C3D:: @ 8249C3D
 	goto BattleFrontier_BattleDomeLobby_EventScript_249C6C
 
 BattleFrontier_BattleDomeLobby_EventScript_249C4A:: @ 8249C4A
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_2
+	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_SET_DATA
 	setvar VAR_0x8005, 0
 	setvar VAR_0x8006, 0
 	special CallFrontierUtilFunc
@@ -410,10 +403,7 @@ BattleFrontier_BattleDomeLobby_Movement_249D4E: @ 8249D4E
 
 BattleFrontier_BattleDomeLobby_EventScript_249D52:: @ 8249D52
 	lockall
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_RESULTS_WINDOW
-	setvar VAR_0x8005, 1
-	setvar VAR_0x8006, 0
-	special CallFrontierUtilFunc
+	frontier_results FRONTIER_FACILITY_DOME, FRONTIER_MODE_SINGLES
 	waitbuttonpress
 	special RemoveRecordsWindow
 	releaseall
@@ -421,10 +411,7 @@ BattleFrontier_BattleDomeLobby_EventScript_249D52:: @ 8249D52
 
 BattleFrontier_BattleDomeLobby_EventScript_249D6B:: @ 8249D6B
 	lockall
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_RESULTS_WINDOW
-	setvar VAR_0x8005, 1
-	setvar VAR_0x8006, 1
-	special CallFrontierUtilFunc
+	frontier_results FRONTIER_FACILITY_DOME, FRONTIER_MODE_DOUBLES
 	waitbuttonpress
 	special RemoveRecordsWindow
 	releaseall

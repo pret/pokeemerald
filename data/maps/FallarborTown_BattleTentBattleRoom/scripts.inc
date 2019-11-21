@@ -35,9 +35,7 @@ FallarborTown_BattleTentBattleRoom_EventScript_2008E7:: @ 82008E7
 	showobjectat 1, MAP_FALLARBOR_TOWN_BATTLE_TENT_BATTLE_ROOM
 	applymovement 1, FallarborTown_BattleTentBattleRoom_Movement_200B8D
 	waitmovement 0
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_1
-	setvar VAR_0x8005, 2
-	special CallFrontierUtilFunc
+	frontier_getbattlenum
 	compare VAR_RESULT, 0
 	goto_if_ne FallarborTown_BattleTentBattleRoom_EventScript_200B73
 
@@ -68,10 +66,7 @@ FallarborTown_BattleTentBattleRoom_EventScript_20090F:: @ 820090F
 	msgbox FallarborTown_BattleTentBattleRoom_Text_257CCE, MSGBOX_DEFAULT
 
 FallarborTown_BattleTentBattleRoom_EventScript_20097E:: @ 820097E
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_2
-	setvar VAR_0x8005, 0
-	setvar VAR_0x8006, 4
-	special CallFrontierUtilFunc
+	frontier_setchallengestatus CHALLENGE_STATUS_LOST
 	special LoadPlayerParty
 	warp MAP_FALLARBOR_TOWN_BATTLE_TENT_LOBBY, 255, 6, 6
 	waitstate
@@ -85,14 +80,9 @@ FallarborTown_BattleTentBattleRoom_EventScript_20099C:: @ 820099C
 	closemessage
 
 FallarborTown_BattleTentBattleRoom_EventScript_2009B3:: @ 82009B3
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_1
-	setvar VAR_0x8005, 2
-	special CallFrontierUtilFunc
+	frontier_getbattlenum
 	addvar VAR_RESULT, 1
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_2
-	setvar VAR_0x8005, 2
-	copyvar VAR_0x8006, VAR_RESULT
-	special CallFrontierUtilFunc
+	frontier_setbattlenum VAR_RESULT
 	switch VAR_RESULT
 	case 3, FallarborTown_BattleTentBattleRoom_EventScript_200AF3
 	applymovement 3, FallarborTown_BattleTentBattleRoom_Movement_200B9E
@@ -105,17 +95,13 @@ FallarborTown_BattleTentBattleRoom_EventScript_2009B3:: @ 82009B3
 	msgbox FallarborTown_BattleTentBattleRoom_Text_257CE9, MSGBOX_DEFAULT
 	special LoadPlayerParty
 	special SavePlayerParty
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_LOAD_SELECTED_PARTY
-	setvar VAR_0x8005, FRONTIER_PARTY_SIZE
-	special CallFrontierUtilFunc
+	frontier_loadselectedmons
 	playfanfare MUS_ME_ASA
 	waitfanfare
 	special HealPlayerParty
 
 FallarborTown_BattleTentBattleRoom_EventScript_200A2A:: @ 8200A2A
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_1
-	setvar VAR_0x8005, 2
-	special CallFrontierUtilFunc
+	frontier_getbattlenum
 	compare VAR_RESULT, 1
 	call_if_eq FallarborTown_BattleTentBattleRoom_EventScript_200B43
 	compare VAR_RESULT, 2
@@ -153,10 +139,7 @@ FallarborTown_BattleTentBattleRoom_EventScript_200AD8:: @ 8200AD8
 
 FallarborTown_BattleTentBattleRoom_EventScript_200AF3:: @ 8200AF3
 	delay 60
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_2
-	setvar VAR_0x8005, 0
-	setvar VAR_0x8006, 3
-	special CallFrontierUtilFunc
+	frontier_setchallengestatus CHALLENGE_STATUS_WON
 	special LoadPlayerParty
 	warp MAP_FALLARBOR_TOWN_BATTLE_TENT_LOBBY, 255, 6, 6
 	waitstate

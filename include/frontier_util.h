@@ -2,7 +2,7 @@
 #define GUARD_FRONTIER_UTIL_H
 
 void CallFrontierUtilFunc(void);
-u8 sub_81A3610(void);
+u8 GetFrontierBrainStatus(void);
 void CopyFrontierTrainerText(u8 whichText, u16 trainerId);
 void sub_81A3908(void);
 u32 GetCurrentFacilityWinStreak(void);

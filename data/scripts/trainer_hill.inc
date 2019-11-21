@@ -2,9 +2,7 @@ TrainerHill_OnResume: @ 82C8336
 	setvar VAR_TEMP_2, 0
 	setvar VAR_0x8004, TRAINER_HILL_FUNC_RESUME_TIMER
 	special CallTrainerHillFunction
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_1
-	setvar VAR_0x8005, 5
-	special CallFrontierUtilFunc
+	frontier_getbattleoutcome
 	compare VAR_RESULT, B_OUTCOME_LOST
 	goto_if_eq TrainerHill_1F_EventScript_Lost
 	compare VAR_RESULT, B_OUTCOME_DREW

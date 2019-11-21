@@ -323,7 +323,7 @@ struct BattleFrontier
     /*0xBE3*/ u8 field_BE0[POKEMON_NAME_LENGTH + 1];
     /*0xBEB*/ u8 field_BEB;
     /*0xBEC*/ struct BattleTowerEReaderTrainer ereaderTrainer;
-    /*0xCA8*/ u8 field_CA8;
+    /*0xCA8*/ u8 challengeOutcome;
     /*0xCA9*/ u8 lvlMode:2; // 0x1, 0x2 -> 0x3
     /*0xCA9*/ u8 field_CA9_a:1;   // 0x4
     /*0xCA9*/ u8 field_CA9_b:1;   // 0x8
@@ -338,7 +338,7 @@ struct BattleFrontier
     /*0xCDC*/ u32 field_CDC;
     /*0xCE0*/ u16 towerWinStreaks[4][2];
     /*0xCF0*/ u16 towerRecordWinStreaks[4][2];
-    /*0xD00*/ u16 field_D00;
+    /*0xD00*/ u16 symbolFlags;
     /*0xD02*/ u16 field_D02;
     /*0xD04*/ u16 field_D04;
     /*0xD06*/ u8 field_D06;

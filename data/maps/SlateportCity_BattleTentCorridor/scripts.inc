@@ -68,7 +68,7 @@ SlateportCity_BattleTentCorridor_EventScript_208EEE:: @ 8208EEE
 	special HealPlayerParty
 
 SlateportCity_BattleTentCorridor_EventScript_208F0D:: @ 8208F0D
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_1
+	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_GET_DATA
 	setvar VAR_0x8005, 2
 	special CallFrontierUtilFunc
 	compare VAR_RESULT, 1

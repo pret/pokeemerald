@@ -8,9 +8,7 @@ BattleFrontier_BattleDomeBattleRoom_MapScripts:: @ 824BC9C
 BattleFrontier_BattleDomeBattleRoom_MapScript1_24BCB1: @ 824BCB1
 	setvar VAR_0x8004, 10
 	special CallBattleDomeFunction
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_1
-	setvar VAR_0x8005, 2
-	special CallFrontierUtilFunc
+	frontier_getbattlenum
 	copyvar VAR_TEMP_F, VAR_RESULT
 	compare VAR_RESULT, 0
 	call_if_eq BattleFrontier_BattleDomeBattleRoom_EventScript_24C919
@@ -51,7 +49,7 @@ BattleFrontier_BattleDomeBattleRoom_EventScript_24BD0A:: @ 824BD0A
 	showobjectat 13, MAP_BATTLE_FRONTIER_BATTLE_DOME_BATTLE_ROOM
 	compare VAR_TEMP_F, 3
 	goto_if_ne BattleFrontier_BattleDomeBattleRoom_EventScript_24BD4E
-	compare VAR_TEMP_E, 0
+	compare VAR_TEMP_E, FRONTIER_BRAIN_NOT_READY
 	goto_if_ne BattleFrontier_BattleDomeBattleRoom_EventScript_24BD5A
 
 BattleFrontier_BattleDomeBattleRoom_EventScript_24BD4E:: @ 824BD4E
@@ -67,7 +65,7 @@ BattleFrontier_BattleDomeBattleRoom_EventScript_24BD61:: @ 824BD61
 	waitmovement 0
 	compare VAR_TEMP_F, 3
 	goto_if_ne BattleFrontier_BattleDomeBattleRoom_EventScript_24BD82
-	compare VAR_TEMP_E, 0
+	compare VAR_TEMP_E, FRONTIER_BRAIN_NOT_READY
 	goto_if_ne BattleFrontier_BattleDomeBattleRoom_EventScript_24C1CB
 
 BattleFrontier_BattleDomeBattleRoom_EventScript_24BD82:: @ 824BD82
@@ -134,10 +132,7 @@ BattleFrontier_BattleDomeBattleRoom_EventScript_24BE8D:: @ 824BE8D
 	special CallBattleDomeFunction
 
 BattleFrontier_BattleDomePreBattleRoom_EventScript_24BE9A:: @ 824BE9A
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_2
-	setvar VAR_0x8005, 0
-	setvar VAR_0x8006, 4
-	special CallFrontierUtilFunc
+	frontier_setchallengestatus CHALLENGE_STATUS_LOST
 	goto BattleFrontier_BattleDomeBattleRoom_EventScript_24C8F5
 @ 	goto BattleFrontier_BattleDomePreBattleRoom_EventScript_24C8F5
 
@@ -177,14 +172,9 @@ BattleFrontier_BattleDomeBattleRoom_EventScript_24BEE0:: @ 824BEE0
 	setvar VAR_0x8004, 12
 	setvar VAR_0x8005, 1
 	special CallBattleDomeFunction
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_1
-	setvar VAR_0x8005, 2
-	special CallFrontierUtilFunc
+	frontier_getbattlenum
 	addvar VAR_RESULT, 1
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_2
-	setvar VAR_0x8005, 2
-	copyvar VAR_0x8006, VAR_RESULT
-	special CallFrontierUtilFunc
+	frontier_setbattlenum VAR_RESULT
 	switch VAR_RESULT
 	case 4, BattleFrontier_BattleDomeBattleRoom_EventScript_24BF62
 	setvar VAR_0x8006, 1
@@ -194,7 +184,7 @@ BattleFrontier_BattleDomeBattleRoom_EventScript_24BEE0:: @ 824BEE0
 BattleFrontier_BattleDomeBattleRoom_EventScript_24BF62:: @ 824BF62
 	applymovement 13, BattleFrontier_BattleDomeBattleRoom_Movement_24C77D
 	waitmovement 0
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_1
+	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_GET_DATA
 	setvar VAR_0x8005, 1
 	special CallFrontierUtilFunc
 	switch VAR_RESULT
@@ -210,10 +200,7 @@ BattleFrontier_BattleDomeBattleRoom_EventScript_24BF9E:: @ 824BF9E
 	playse SE_W227B
 	call BattleFrontier_BattleDomeBattleRoom_EventScript_24C82E
 	delay 60
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_2
-	setvar VAR_0x8005, 0
-	setvar VAR_0x8006, 3
-	special CallFrontierUtilFunc
+	frontier_setchallengestatus CHALLENGE_STATUS_WON
 	goto BattleFrontier_BattleDomeBattleRoom_EventScript_24C8F5
 
 BattleFrontier_BattleDomeBattleRoom_EventScript_24BFC3:: @ 824BFC3
@@ -305,10 +292,10 @@ BattleFrontier_BattleDomeBattleRoom_EventScript_24C0C9:: @ 824C0C9
 	compare VAR_TEMP_F, 3
 	goto_if_ne BattleFrontier_BattleDomeBattleRoom_EventScript_24C105
 	switch VAR_TEMP_E
-	case 1, BattleFrontier_BattleDomeBattleRoom_EventScript_24C158
-	case 2, BattleFrontier_BattleDomeBattleRoom_EventScript_24C161
-	case 3, BattleFrontier_BattleDomeBattleRoom_EventScript_24C158
-	case 4, BattleFrontier_BattleDomeBattleRoom_EventScript_24C161
+	case FRONTIER_BRAIN_SILVER, BattleFrontier_BattleDomeBattleRoom_EventScript_24C158
+	case FRONTIER_BRAIN_GOLD, BattleFrontier_BattleDomeBattleRoom_EventScript_24C161
+	case FRONTIER_BRAIN_STREAK, BattleFrontier_BattleDomeBattleRoom_EventScript_24C158
+	case FRONTIER_BRAIN_STREAK_LONG, BattleFrontier_BattleDomeBattleRoom_EventScript_24C161
 
 BattleFrontier_BattleDomeBattleRoom_EventScript_24C105:: @ 824C105
 	call BattleFrontier_BattleDomeBattleRoom_EventScript_24C1BD
@@ -377,17 +364,15 @@ BattleFrontier_BattleDomeBattleRoom_EventScript_24C1B6:: @ 824C1B6
 	return
 
 BattleFrontier_BattleDomeBattleRoom_EventScript_24C1BD:: @ 824C1BD
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_1
-	setvar VAR_0x8005, 2
-	special CallFrontierUtilFunc
+	frontier_getbattlenum
 	return
 
 BattleFrontier_BattleDomeBattleRoom_EventScript_24C1CB:: @ 824C1CB
 	switch VAR_TEMP_E
-	case 1, BattleFrontier_BattleDomeBattleRoom_EventScript_24C1FC
-	case 2, BattleFrontier_BattleDomeBattleRoom_EventScript_24C209
-	case 3, BattleFrontier_BattleDomeBattleRoom_EventScript_24C1FC
-	case 4, BattleFrontier_BattleDomeBattleRoom_EventScript_24C209
+	case FRONTIER_BRAIN_SILVER, BattleFrontier_BattleDomeBattleRoom_EventScript_24C1FC
+	case FRONTIER_BRAIN_GOLD, BattleFrontier_BattleDomeBattleRoom_EventScript_24C209
+	case FRONTIER_BRAIN_STREAK, BattleFrontier_BattleDomeBattleRoom_EventScript_24C1FC
+	case FRONTIER_BRAIN_STREAK_LONG, BattleFrontier_BattleDomeBattleRoom_EventScript_24C209
 
 BattleFrontier_BattleDomeBattleRoom_EventScript_24C1FC:: @ 824C1FC
 	msgbox BattleFrontier_BattleDomeBattleRoom_Text_24CEDE, MSGBOX_DEFAULT
@@ -423,16 +408,16 @@ BattleFrontier_BattleDomeBattleRoom_EventScript_24C211:: @ 824C211
 	call BattleFrontier_BattleDomeBattleRoom_EventScript_24C82E
 	waitse
 	switch VAR_TEMP_E
-	case 2, BattleFrontier_BattleDomeBattleRoom_EventScript_24C346
-	case 3, BattleFrontier_BattleDomeBattleRoom_EventScript_24C2B9
-	case 4, BattleFrontier_BattleDomeBattleRoom_EventScript_24C373
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_1
+	case FRONTIER_BRAIN_GOLD, BattleFrontier_BattleDomeBattleRoom_EventScript_24C346
+	case FRONTIER_BRAIN_STREAK, BattleFrontier_BattleDomeBattleRoom_EventScript_24C2B9
+	case FRONTIER_BRAIN_STREAK_LONG, BattleFrontier_BattleDomeBattleRoom_EventScript_24C373
+	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_GET_DATA
 	setvar VAR_0x8005, 7
 	special CallFrontierUtilFunc
 	compare VAR_RESULT, 0
 	goto_if_ne BattleFrontier_BattleDomeBattleRoom_EventScript_24C2B9
 	msgbox BattleFrontier_BattleDomeBattleRoom_Text_24CFAE, MSGBOX_DEFAULT
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_2
+	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_SET_DATA
 	setvar VAR_0x8005, 7
 	special CallFrontierUtilFunc
 
@@ -465,13 +450,13 @@ BattleFrontier_BattleDomeBattleRoom_EventScript_24C2B9:: @ 824C2B9
 	goto BattleFrontier_BattleDomeBattleRoom_EventScript_24BF62
 
 BattleFrontier_BattleDomeBattleRoom_EventScript_24C346:: @ 824C346
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_1
+	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_GET_DATA
 	setvar VAR_0x8005, 7
 	special CallFrontierUtilFunc
 	compare VAR_RESULT, 0
 	goto_if_ne BattleFrontier_BattleDomeBattleRoom_EventScript_24C373
 	msgbox BattleFrontier_BattleDomeBattleRoom_Text_24D319, MSGBOX_DEFAULT
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_2
+	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_SET_DATA
 	setvar VAR_0x8005, 7
 	special CallFrontierUtilFunc
 
@@ -524,7 +509,7 @@ BattleFrontier_BattleDomeBattleRoom_EventScript_24C436:: @ 824C436
 	goto BattleFrontier_BattleDomeBattleRoom_EventScript_24BDF7
 
 BattleFrontier_BattleDomeBattleRoom_EventScript_24C440:: @ 824C440
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_2
+	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_SET_DATA
 	setvar VAR_0x8005, 6
 	setvar VAR_0x8006, 0
 	special CallFrontierUtilFunc
@@ -552,15 +537,12 @@ BattleFrontier_BattleDomeBattleRoom_EventScript_24C48B:: @ 824C48B
 	call BattleFrontier_BattleDomeBattleRoom_EventScript_24BCDC
 	setvar VAR_TEMP_1, 1
 	applymovement EVENT_OBJ_ID_PLAYER, BattleFrontier_BattleDomeBattleRoom_Movement_24C773
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_1
-	setvar VAR_0x8005, 2
-	special CallFrontierUtilFunc
+	frontier_getbattlenum
 	compare VAR_RESULT, 3
 	goto_if_ne BattleFrontier_BattleDomeBattleRoom_EventScript_24C4EF
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_9
-	special CallFrontierUtilFunc
+	frontier_getbrainstatus
 	copyvar VAR_TEMP_E, VAR_RESULT
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, FRONTIER_BRAIN_NOT_READY
 	goto_if_eq BattleFrontier_BattleDomeBattleRoom_EventScript_24C4EF
 	call BattleFrontier_BattleDomeBattleRoom_EventScript_242170
 	setobjectxyperm 15, 13, 9

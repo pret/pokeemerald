@@ -40,15 +40,13 @@ BattleFrontier_BattleArenaBattleRoom_EventScript_2574DC:: @ 82574DC
 	showobjectat 8, MAP_BATTLE_FRONTIER_BATTLE_ARENA_BATTLE_ROOM
 	applymovement 8, BattleFrontier_BattleArenaBattleRoom_Movement_257BE2
 	waitmovement 0
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_1
-	setvar VAR_0x8005, 2
-	special CallFrontierUtilFunc
+	frontier_getbattlenum
 	compare VAR_RESULT, 0
 	goto_if_eq BattleFrontier_BattleArenaBattleRoom_EventScript_25752E
 	applymovement 5, BattleFrontier_BattleArenaBattleRoom_Movement_257C08
 	applymovement 8, BattleFrontier_BattleArenaBattleRoom_Movement_257BEB
 	setvar VAR_TEMP_2, 1
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_2
+	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_SET_DATA
 	setvar VAR_0x8005, 6
 	setvar VAR_0x8006, 1
 	special CallFrontierUtilFunc
@@ -109,23 +107,15 @@ BattleFrontier_BattleArenaBattleRoom_EventScript_2575DB:: @ 82575DB
 	msgbox BattleFrontier_BattleArenaBattleRoom_Text_257CCE, MSGBOX_DEFAULT
 
 BattleFrontier_BattleArenaBattleRoom_EventScript_257615:: @ 8257615
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_2
-	setvar VAR_0x8005, 0
-	setvar VAR_0x8006, 4
-	special CallFrontierUtilFunc
+	frontier_setchallengestatus CHALLENGE_STATUS_LOST
 	warp MAP_BATTLE_FRONTIER_BATTLE_ARENA_LOBBY, 255, 7, 8
 	waitstate
 
 BattleFrontier_BattleArenaBattleRoom_EventScript_257630:: @ 8257630
 	call BattleFrontier_BattleArenaBattleRoom_EventScript_257BA9
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_1
-	setvar VAR_0x8005, 2
-	special CallFrontierUtilFunc
+	frontier_getbattlenum
 	addvar VAR_RESULT, 1
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_2
-	setvar VAR_0x8005, 2
-	copyvar VAR_0x8006, VAR_RESULT
-	special CallFrontierUtilFunc
+	frontier_setbattlenum VAR_RESULT
 	switch VAR_RESULT
 	case 7, BattleFrontier_BattleArenaBattleRoom_EventScript_257852
 	applymovement 8, BattleFrontier_BattleArenaBattleRoom_Movement_257BE7
@@ -138,22 +128,17 @@ BattleFrontier_BattleArenaBattleRoom_EventScript_257630:: @ 8257630
 	msgbox BattleFrontier_BattleArenaBattleRoom_Text_257CE9, MSGBOX_DEFAULT
 	special LoadPlayerParty
 	special SavePlayerParty
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_LOAD_SELECTED_PARTY
-	setvar VAR_0x8005, FRONTIER_PARTY_SIZE
-	special CallFrontierUtilFunc
+	frontier_loadselectedmons
 	playfanfare MUS_ME_ASA
 	waitfanfare
 	special HealPlayerParty
 
 BattleFrontier_BattleArenaBattleRoom_EventScript_2576B0:: @ 82576B0
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_9
-	special CallFrontierUtilFunc
+	frontier_getbrainstatus
 	copyvar VAR_TEMP_F, VAR_RESULT
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, FRONTIER_BRAIN_NOT_READY
 	goto_if_ne BattleFrontier_BattleArenaBattleRoom_EventScript_2578BC
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_1
-	setvar VAR_0x8005, 2
-	special CallFrontierUtilFunc
+	frontier_getbattlenum
 	compare VAR_RESULT, 1
 	call_if_eq BattleFrontier_BattleArenaBattleRoom_EventScript_257870
 	compare VAR_RESULT, 2
@@ -224,10 +209,7 @@ BattleFrontier_BattleArenaBattleRoom_EventScript_25783A:: @ 825783A
 
 BattleFrontier_BattleArenaBattleRoom_EventScript_257852:: @ 8257852
 	delay 60
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_2
-	setvar VAR_0x8005, 0
-	setvar VAR_0x8006, 3
-	special CallFrontierUtilFunc
+	frontier_setchallengestatus CHALLENGE_STATUS_WON
 	warp MAP_BATTLE_FRONTIER_BATTLE_ARENA_LOBBY, 255, 7, 8
 	waitstate
 
@@ -327,17 +309,17 @@ BattleFrontier_BattleArenaBattleRoom_EventScript_257961:: @ 8257961
 	applymovement 7, BattleFrontier_BattleArenaBattleRoom_Movement_257BF2
 	waitmovement 0
 	switch VAR_TEMP_F
-	case 2, BattleFrontier_BattleArenaBattleRoom_EventScript_257AA5
-	case 3, BattleFrontier_BattleArenaBattleRoom_EventScript_257A3F
-	case 4, BattleFrontier_BattleArenaBattleRoom_EventScript_257AF8
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_1
+	case FRONTIER_BRAIN_GOLD, BattleFrontier_BattleArenaBattleRoom_EventScript_257AA5
+	case FRONTIER_BRAIN_STREAK, BattleFrontier_BattleArenaBattleRoom_EventScript_257A3F
+	case FRONTIER_BRAIN_STREAK_LONG, BattleFrontier_BattleArenaBattleRoom_EventScript_257AF8
+	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_GET_DATA
 	setvar VAR_0x8005, 7
 	special CallFrontierUtilFunc
 	compare VAR_RESULT, 0
 	goto_if_ne BattleFrontier_BattleArenaBattleRoom_EventScript_257A3F
 	msgbox BattleFrontier_BattleArenaBattleRoom_Text_25801C, MSGBOX_DEFAULT
 	closemessage
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_2
+	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_SET_DATA
 	setvar VAR_0x8005, 7
 	special CallFrontierUtilFunc
 	applymovement 7, BattleFrontier_BattleArenaBattleRoom_Movement_257C30
@@ -374,14 +356,14 @@ BattleFrontier_BattleArenaBattleRoom_EventScript_257A5C:: @ 8257A5C
 	goto BattleFrontier_BattleArenaBattleRoom_EventScript_257852
 
 BattleFrontier_BattleArenaBattleRoom_EventScript_257AA5:: @ 8257AA5
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_1
+	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_GET_DATA
 	setvar VAR_0x8005, 7
 	special CallFrontierUtilFunc
 	compare VAR_RESULT, 0
 	goto_if_ne BattleFrontier_BattleArenaBattleRoom_EventScript_257AF8
 	msgbox BattleFrontier_BattleArenaBattleRoom_Text_258213, MSGBOX_DEFAULT
 	closemessage
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_2
+	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_SET_DATA
 	setvar VAR_0x8005, 7
 	special CallFrontierUtilFunc
 	applymovement 7, BattleFrontier_BattleArenaBattleRoom_Movement_257C30
@@ -426,7 +408,7 @@ BattleFrontier_BattleArenaBattleRoom_EventScript_257B6C:: @ 8257B6C
 FallarborTown_BattleTentBattleRoom_EventScript_257B6C:: @ 8257B6C
 	closemessage
 	setvar VAR_TEMP_2, 0
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_2
+	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_SET_DATA
 	setvar VAR_0x8005, 6
 	setvar VAR_0x8006, 0
 	special CallFrontierUtilFunc
@@ -438,8 +420,7 @@ FallarborTown_BattleTentBattleRoom_EventScript_257B6C:: @ 8257B6C
 	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_18
 	special CallFrontierUtilFunc
 	special HealPlayerParty
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_21
-	special CallFrontierUtilFunc
+	frontier_resetsketch
 	return
 
 BattleFrontier_BattleArenaBattleRoom_EventScript_257BA9:: @ 8257BA9

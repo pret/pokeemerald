@@ -73,11 +73,10 @@ BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259BA5:: @ 8259BA5
 	playfanfare MUS_ME_ASA
 	waitfanfare
 	special HealPlayerParty
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_9
-	special CallFrontierUtilFunc
-	compare VAR_RESULT, 0
+	frontier_getbrainstatus
+	compare VAR_RESULT, FRONTIER_BRAIN_NOT_READY
 	goto_if_eq BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259C26
-	playse 263
+	playse SE_TOREEYE
 	waitse
 	msgbox BattleFrontier_BattleFactoryPreBattleRoom_Text_25AC15, MSGBOX_DEFAULT
 	closemessage
@@ -94,13 +93,12 @@ BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259BA5:: @ 8259BA5
 	end
 
 BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259C13:: @ 8259C13
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_9
-	special CallFrontierUtilFunc
-	compare VAR_RESULT, 0
+	frontier_getbrainstatus
+	compare VAR_RESULT, FRONTIER_BRAIN_NOT_READY
 	goto_if_ne BattleFrontier_BattleFactoryPreBattleRoom_EventScript_25A0B9
 
 BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259C26:: @ 8259C26
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_1
+	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_GET_DATA
 	setvar VAR_0x8005, 2
 	special CallFrontierUtilFunc
 	compare VAR_RESULT, 1
@@ -240,7 +238,7 @@ BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259E69:: @ 8259E69
 	setvar VAR_0x8004, 10
 	setvar VAR_0x8005, 0
 	special CallBattleFactoryFunction
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_2
+	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_SET_DATA
 	setvar VAR_0x8005, 6
 	setvar VAR_0x8006, 1
 	special CallFrontierUtilFunc

@@ -30,6 +30,7 @@
 #include "scanline_effect.h"
 #include "script_pokemon_util_80F87D8.h"
 #include "graphics.h"
+#include "constants/frontier_util.h"
 #include "constants/species.h"
 #include "constants/moves.h"
 #include "constants/trainers.h"
@@ -2261,7 +2262,7 @@ static void InitDomeChallenge(void)
     u32 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
     u32 battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
 
-    gSaveBlock2Ptr->frontier.field_CA8 = 0;
+    gSaveBlock2Ptr->frontier.challengeOutcome = 0;
     gSaveBlock2Ptr->frontier.curChallengeBattleNum = 0;
     gSaveBlock2Ptr->frontier.field_CA9_a = 0;
     gSaveBlock2Ptr->frontier.field_CA9_b = 0;
@@ -2575,7 +2576,7 @@ static void InitDomeTrainers(void)
         }
     }
 
-    if (sub_81A3610())
+    if (GetFrontierBrainStatus() != FRONTIER_BRAIN_NOT_READY)
     {
         for (i = 0; i < DOME_TOURNAMENT_TRAINERS_COUNT; i++)
         {
@@ -3328,7 +3329,7 @@ static void SetDomeOpponentGraphicsId(void)
 
 static void sub_81902F8(void)
 {
-    gSaveBlock2Ptr->frontier.field_CA8 = gSpecialVar_0x8005;
+    gSaveBlock2Ptr->frontier.challengeOutcome = gSpecialVar_0x8005;
     VarSet(VAR_TEMP_0, 0);
     gSaveBlock2Ptr->frontier.field_CA9_a = 1;
     sub_81A4C30();
@@ -6016,7 +6017,7 @@ static void sub_8194F58(void)
     species[0] = 0;
     species[1] = 0;
     species[2] = 0;
-    if ((gSaveBlock2Ptr->frontier.field_D0A != -gSaveBlock2Ptr->frontier.field_D0B) && gSaveBlock2Ptr->frontier.field_CA8 != 1)
+    if ((gSaveBlock2Ptr->frontier.field_D0A != -gSaveBlock2Ptr->frontier.field_D0B) && gSaveBlock2Ptr->frontier.challengeOutcome != 1)
         return;
 
     statSums = AllocZeroed(sizeof(u16) * DOME_TOURNAMENT_TRAINERS_COUNT);
