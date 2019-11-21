@@ -1,5 +1,5 @@
-#ifndef GUARD_FIELD_OBJ_EVENT_H
-#define GUARD_FIELD_OBJ_EVENT_H
+#ifndef GUARD_OBJECT_EVENT_MOVEMENT_H
+#define GUARD_OBJECT_EVENT_MOVEMENT_H
 
 #define NUM_OBJECT_GRAPHICS_INFO 239
 #define SPRITE_VAR 240
@@ -423,4 +423,4 @@ void sub_8097BB4(u8 var1, u8 graphicsId);
 void sub_8097CC4(u8 var1, u8 var2);
 bool32 sub_8097D9C(u8 var);
 
-#endif //GUARD_FIELD_OBJ_EVENT_H
+#endif //GUARD_OBJECT_EVENT_MOVEMENT_H
