@@ -321,15 +321,15 @@ static u8 ObjectEventCB2_NoMovement2(void)
 
 void player_step(u8 direction, u16 newKeys, u16 heldKeys)
 {
-    struct ObjectEvent *playerEventObj = &gObjectEvents[gPlayerAvatar.objectEventId];
+    struct ObjectEvent *playerObjEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
 
-    sub_808C280(playerEventObj);
+    sub_808C280(playerObjEvent);
     if (gPlayerAvatar.preventStep == FALSE)
     {
         Bike_TryAcroBikeHistoryUpdate(newKeys, heldKeys);
-        if (TryInterruptObjectEventSpecialAnim(playerEventObj, direction) == 0)
+        if (TryInterruptObjectEventSpecialAnim(playerObjEvent, direction) == 0)
         {
-            npc_clear_strange_bits(playerEventObj);
+            npc_clear_strange_bits(playerObjEvent);
             DoPlayerAvatarTransition();
             if (TryDoMetatileBehaviorForcedMovement() == 0)
             {
@@ -340,16 +340,16 @@ void player_step(u8 direction, u16 newKeys, u16 heldKeys)
     }
 }
 
-static bool8 TryInterruptObjectEventSpecialAnim(struct ObjectEvent *playerEventObj, u8 direction)
+static bool8 TryInterruptObjectEventSpecialAnim(struct ObjectEvent *playerObjEvent, u8 direction)
 {
     u8 r5 = direction;
     u8 r6 = direction;
     r6++; r6--;
 
-    if (ObjectEventIsMovementOverridden(playerEventObj)
-     && !ObjectEventClearHeldMovementIfFinished(playerEventObj))
+    if (ObjectEventIsMovementOverridden(playerObjEvent)
+     && !ObjectEventClearHeldMovementIfFinished(playerObjEvent))
     {
-        u8 heldMovementActionId = ObjectEventGetHeldMovementActionId(playerEventObj);
+        u8 heldMovementActionId = ObjectEventGetHeldMovementActionId(playerObjEvent);
         if (heldMovementActionId > MOVEMENT_ACTION_WALK_FAST_RIGHT && heldMovementActionId < MOVEMENT_ACTION_WALK_IN_PLACE_NORMAL_DOWN)
         {
             if (direction == DIR_NONE)
@@ -357,15 +357,15 @@ static bool8 TryInterruptObjectEventSpecialAnim(struct ObjectEvent *playerEventO
                 return TRUE;
             }
 
-            if (playerEventObj->movementDirection != r5)
+            if (playerObjEvent->movementDirection != r5)
             {
-                ObjectEventClearHeldMovement(playerEventObj);
+                ObjectEventClearHeldMovement(playerObjEvent);
                 return FALSE;
             }
 
             if (!sub_808B028(r6))
             {
-                ObjectEventClearHeldMovement(playerEventObj);
+                ObjectEventClearHeldMovement(playerObjEvent);
                 return FALSE;
             }
         }
@@ -425,11 +425,11 @@ static bool8 ForcedMovement_None(void)
 {
     if (gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_6)
     {
-        struct ObjectEvent *playerEventObj = &gObjectEvents[gPlayerAvatar.objectEventId];
+        struct ObjectEvent *playerObjEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
 
-        playerEventObj->facingDirectionLocked = 0;
-        playerEventObj->enableAnim = 1;
-        SetObjectEventDirection(playerEventObj, playerEventObj->facingDirection);
+        playerObjEvent->facingDirectionLocked = 0;
+        playerObjEvent->enableAnim = 1;
+        SetObjectEventDirection(playerObjEvent, playerObjEvent->facingDirection);
         gPlayerAvatar.flags &= ~PLAYER_AVATAR_FLAG_6;
     }
     return FALSE;
@@ -467,10 +467,10 @@ static u8 DoForcedMovement(u8 direction, void (*b)(u8))
 
 static u8 DoForcedMovementInCurrentDirection(void (*a)(u8))
 {
-    struct ObjectEvent *playerEventObj = &gObjectEvents[gPlayerAvatar.objectEventId];
+    struct ObjectEvent *playerObjEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
 
-    playerEventObj->disableAnim = 1;
-    return DoForcedMovement(playerEventObj->movementDirection, a);
+    playerObjEvent->disableAnim = 1;
+    return DoForcedMovement(playerObjEvent->movementDirection, a);
 }
 
 static bool8 ForcedMovement_Slip(void)
@@ -520,10 +520,10 @@ static bool8 ForcedMovement_PushedEastByCurrent(void)
 
 u8 ForcedMovement_Slide(u8 direction, void (*b)(u8))
 {
-    struct ObjectEvent *playerEventObj = &gObjectEvents[gPlayerAvatar.objectEventId];
+    struct ObjectEvent *playerObjEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
 
-    playerEventObj->disableAnim = 1;
-    playerEventObj->facingDirectionLocked = 1;
+    playerObjEvent->disableAnim = 1;
+    playerObjEvent->facingDirectionLocked = 1;
     return DoForcedMovement(direction, b);
 }
 
@@ -561,12 +561,12 @@ static bool8 ForcedMovement_0xBC(void)
 
 static bool8 ForcedMovement_MuddySlope(void)
 {
-    struct ObjectEvent *playerEventObj = &gObjectEvents[gPlayerAvatar.objectEventId];
+    struct ObjectEvent *playerObjEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
 
-    if (playerEventObj->movementDirection != DIR_NORTH || GetPlayerSpeed() <= 3)
+    if (playerObjEvent->movementDirection != DIR_NORTH || GetPlayerSpeed() <= 3)
     {
         Bike_UpdateBikeCounterSpeed(0);
-        playerEventObj->facingDirectionLocked = 1;
+        playerObjEvent->facingDirectionLocked = 1;
         return DoForcedMovement(1, PlayerGoSpeed2);
     }
     else
@@ -657,23 +657,23 @@ static void PlayerNotOnBikeMoving(u8 direction, u16 heldKeys)
 static u8 CheckForPlayerAvatarCollision(u8 direction)
 {
     s16 x, y;
-    struct ObjectEvent *playerEventObj = &gObjectEvents[gPlayerAvatar.objectEventId];
+    struct ObjectEvent *playerObjEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
 
-    x = playerEventObj->currentCoords.x;
-    y = playerEventObj->currentCoords.y;
+    x = playerObjEvent->currentCoords.x;
+    y = playerObjEvent->currentCoords.y;
     MoveCoords(direction, &x, &y);
-    return CheckForObjectEventCollision(playerEventObj, x, y, direction, MapGridGetMetatileBehaviorAt(x, y));
+    return CheckForObjectEventCollision(playerObjEvent, x, y, direction, MapGridGetMetatileBehaviorAt(x, y));
 }
 
 static u8 sub_808B028(u8 direction)
 {
     s16 x, y;
-    struct ObjectEvent *playerEventObj = &gObjectEvents[gPlayerAvatar.objectEventId];
+    struct ObjectEvent *playerObjEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
 
-    x = playerEventObj->currentCoords.x;
-    y = playerEventObj->currentCoords.y;
+    x = playerObjEvent->currentCoords.x;
+    y = playerObjEvent->currentCoords.y;
     MoveCoords(direction, &x, &y);
-    return sub_808B164(playerEventObj, x, y, direction, MapGridGetMetatileBehaviorAt(x, y));
+    return sub_808B164(playerObjEvent, x, y, direction, MapGridGetMetatileBehaviorAt(x, y));
 }
 
 u8 CheckForObjectEventCollision(struct ObjectEvent *objectEvent, s16 x, s16 y, u8 direction, u8 metatileBehavior)
@@ -1208,10 +1208,10 @@ void sub_808BCE8(void)
 
 void sub_808BCF4(void)
 {
-    struct ObjectEvent *playerEventObj = &gObjectEvents[gPlayerAvatar.objectEventId];
+    struct ObjectEvent *playerObjEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
 
-    npc_clear_strange_bits(playerEventObj);
-    SetObjectEventDirection(playerEventObj, playerEventObj->facingDirection);
+    npc_clear_strange_bits(playerObjEvent);
+    SetObjectEventDirection(playerObjEvent, playerObjEvent->facingDirection);
     if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_MACH_BIKE | PLAYER_AVATAR_FLAG_ACRO_BIKE))
     {
         Bike_HandleBumpySlopeJump();
@@ -1307,12 +1307,12 @@ bool8 IsPlayerSurfingNorth(void)
 
 bool8 IsPlayerFacingSurfableFishableWater(void)
 {
-    struct ObjectEvent *playerEventObj = &gObjectEvents[gPlayerAvatar.objectEventId];
-    s16 x = playerEventObj->currentCoords.x;
-    s16 y = playerEventObj->currentCoords.y;
+    struct ObjectEvent *playerObjEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
+    s16 x = playerObjEvent->currentCoords.x;
+    s16 y = playerObjEvent->currentCoords.y;
 
-    MoveCoords(playerEventObj->facingDirection, &x, &y);
-    if (GetCollisionAtCoords(playerEventObj, x, y, playerEventObj->facingDirection) == COLLISION_ELEVATION_MISMATCH
+    MoveCoords(playerObjEvent->facingDirection, &x, &y);
+    if (GetCollisionAtCoords(playerObjEvent, x, y, playerObjEvent->facingDirection) == COLLISION_ELEVATION_MISMATCH
      && PlayerGetZCoord() == 3
      && MetatileBehavior_IsSurfableFishableWater(MapGridGetMetatileBehaviorAt(x, y)))
         return TRUE;
@@ -1366,23 +1366,23 @@ void SetPlayerAvatarExtraStateTransition(u8 graphicsId, u8 b)
 
 void InitPlayerAvatar(s16 x, s16 y, u8 direction, u8 gender)
 {
-    struct ObjectEventTemplate playerEventObjTemplate;
+    struct ObjectEventTemplate playerObjEventTemplate;
     u8 objectEventId;
     struct ObjectEvent *objectEvent;
 
-    playerEventObjTemplate.localId = OBJ_EVENT_ID_PLAYER;
-    playerEventObjTemplate.graphicsId = GetPlayerAvatarGraphicsIdByStateIdAndGender(PLAYER_AVATAR_STATE_NORMAL, gender);
-    playerEventObjTemplate.x = x - 7;
-    playerEventObjTemplate.y = y - 7;
-    playerEventObjTemplate.elevation = 0;
-    playerEventObjTemplate.movementType = MOVEMENT_TYPE_PLAYER;
-    playerEventObjTemplate.movementRangeX = 0;
-    playerEventObjTemplate.movementRangeY = 0;
-    playerEventObjTemplate.trainerType = 0;
-    playerEventObjTemplate.trainerRange_berryTreeId = 0;
-    playerEventObjTemplate.script = NULL;
-    playerEventObjTemplate.flagId = 0;
-    objectEventId = SpawnSpecialObjectEvent(&playerEventObjTemplate);
+    playerObjEventTemplate.localId = OBJ_EVENT_ID_PLAYER;
+    playerObjEventTemplate.graphicsId = GetPlayerAvatarGraphicsIdByStateIdAndGender(PLAYER_AVATAR_STATE_NORMAL, gender);
+    playerObjEventTemplate.x = x - 7;
+    playerObjEventTemplate.y = y - 7;
+    playerObjEventTemplate.elevation = 0;
+    playerObjEventTemplate.movementType = MOVEMENT_TYPE_PLAYER;
+    playerObjEventTemplate.movementRangeX = 0;
+    playerObjEventTemplate.movementRangeY = 0;
+    playerObjEventTemplate.trainerType = 0;
+    playerObjEventTemplate.trainerRange_berryTreeId = 0;
+    playerObjEventTemplate.script = NULL;
+    playerObjEventTemplate.flagId = 0;
+    objectEventId = SpawnSpecialObjectEvent(&playerObjEventTemplate);
     objectEvent = &gObjectEvents[objectEventId];
     objectEvent->isPlayer = 1;
     objectEvent->warpArrowSpriteId = CreateWarpArrowSprite();
@@ -1642,29 +1642,29 @@ static void CreateStopSurfingTask(u8 direction)
 
 static void Task_StopSurfingInit(u8 taskId)
 {
-    struct ObjectEvent *playerEventObj = &gObjectEvents[gPlayerAvatar.objectEventId];
+    struct ObjectEvent *playerObjEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
 
-    if (ObjectEventIsMovementOverridden(playerEventObj))
+    if (ObjectEventIsMovementOverridden(playerObjEvent))
     {
-        if (!ObjectEventClearHeldMovementIfFinished(playerEventObj))
+        if (!ObjectEventClearHeldMovementIfFinished(playerObjEvent))
             return;
     }
-    sub_81555AC(playerEventObj->fieldEffectSpriteId, 2);
-    ObjectEventSetHeldMovement(playerEventObj, GetJumpSpecialMovementAction((u8)gTasks[taskId].data[0]));
+    sub_81555AC(playerObjEvent->fieldEffectSpriteId, 2);
+    ObjectEventSetHeldMovement(playerObjEvent, GetJumpSpecialMovementAction((u8)gTasks[taskId].data[0]));
     gTasks[taskId].func = Task_WaitStopSurfing;
 }
 
 static void Task_WaitStopSurfing(u8 taskId)
 {
-    struct ObjectEvent *playerEventObj = &gObjectEvents[gPlayerAvatar.objectEventId];
+    struct ObjectEvent *playerObjEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
 
-    if (ObjectEventClearHeldMovementIfFinished(playerEventObj))
+    if (ObjectEventClearHeldMovementIfFinished(playerObjEvent))
     {
-        ObjectEventSetGraphicsId(playerEventObj, GetPlayerAvatarGraphicsIdByStateId(PLAYER_AVATAR_STATE_NORMAL));
-        ObjectEventSetHeldMovement(playerEventObj, GetFaceDirectionMovementAction(playerEventObj->facingDirection));
+        ObjectEventSetGraphicsId(playerObjEvent, GetPlayerAvatarGraphicsIdByStateId(PLAYER_AVATAR_STATE_NORMAL));
+        ObjectEventSetHeldMovement(playerObjEvent, GetFaceDirectionMovementAction(playerObjEvent->facingDirection));
         gPlayerAvatar.preventStep = FALSE;
         ScriptContext2_Disable();
-        DestroySprite(&gSprites[playerEventObj->fieldEffectSpriteId]);
+        DestroySprite(&gSprites[playerObjEvent->fieldEffectSpriteId]);
         DestroyTask(taskId);
     }
 }
@@ -1729,17 +1729,17 @@ static bool8 Fishing1(struct Task *task)
 
 static bool8 Fishing2(struct Task *task)
 {
-    struct ObjectEvent *playerEventObj;
+    struct ObjectEvent *playerObjEvent;
     const s16 arr1[] = {1, 1, 1};
     const s16 arr2[] = {1, 3, 6};
 
     task->tRoundsPlayed = 0;
     task->tMinRoundsRequired = arr1[task->tFishingRod] + (Random() % arr2[task->tFishingRod]);
     task->tPlayerGfxId = gObjectEvents[gPlayerAvatar.objectEventId].graphicsId;
-    playerEventObj = &gObjectEvents[gPlayerAvatar.objectEventId];
-    ObjectEventClearHeldMovementIfActive(playerEventObj);
-    playerEventObj->enableAnim = 1;
-    sub_808C15C(playerEventObj->facingDirection);
+    playerObjEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
+    ObjectEventClearHeldMovementIfActive(playerObjEvent);
+    playerObjEvent->enableAnim = 1;
+    sub_808C15C(playerObjEvent->facingDirection);
     task->tStep++;
     return FALSE;
 }
@@ -1928,10 +1928,10 @@ static bool8 Fishing11(struct Task *task)
     {
         if (!IsTextPrinterActive(0))
         {
-            struct ObjectEvent *playerEventObj = &gObjectEvents[gPlayerAvatar.objectEventId];
+            struct ObjectEvent *playerObjEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
 
-            ObjectEventSetGraphicsId(playerEventObj, task->tPlayerGfxId);
-            ObjectEventTurn(playerEventObj, playerEventObj->movementDirection);
+            ObjectEventSetGraphicsId(playerObjEvent, task->tPlayerGfxId);
+            ObjectEventTurn(playerObjEvent, playerObjEvent->movementDirection);
             if (gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_SURFING)
                 sub_8155604(gObjectEvents[gPlayerAvatar.objectEventId].fieldEffectSpriteId, 0, 0);
             gSprites[gPlayerAvatar.spriteId].pos2.x = 0;
@@ -1988,10 +1988,10 @@ static bool8 Fishing15(struct Task *task)
     AlignFishingAnimationFrames();
     if (gSprites[gPlayerAvatar.spriteId].animEnded)
     {
-        struct ObjectEvent *playerEventObj = &gObjectEvents[gPlayerAvatar.objectEventId];
+        struct ObjectEvent *playerObjEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
 
-        ObjectEventSetGraphicsId(playerEventObj, task->tPlayerGfxId);
-        ObjectEventTurn(playerEventObj, playerEventObj->movementDirection);
+        ObjectEventSetGraphicsId(playerObjEvent, task->tPlayerGfxId);
+        ObjectEventTurn(playerObjEvent, playerObjEvent->movementDirection);
         if (gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_SURFING)
             sub_8155604(gObjectEvents[gPlayerAvatar.objectEventId].fieldEffectSpriteId, 0, 0);
         gSprites[gPlayerAvatar.spriteId].pos2.x = 0;

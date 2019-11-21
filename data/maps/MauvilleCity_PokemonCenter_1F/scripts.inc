@@ -10,7 +10,7 @@ MauvilleCity_PokemonCenter_1F_OnTransition: @ 8210E66
 	end
 
 MauvilleCity_PokemonCenter_1F_EventScript_SetMauvilleOldManGfx:: @ 8210E74
-	special ScrSpecial_SetMauvilleOldManEventObjGfx
+	special ScrSpecial_SetMauvilleOldManObjEventGfx
 	end
 
 @ VAR_0x800B is the Nurse's object event id

@@ -1414,7 +1414,7 @@ void SetBattleFacilityTrainerGfxId(u16 trainerId, u8 tempVarId)
     }
     else if (trainerId == TRAINER_FRONTIER_BRAIN)
     {
-        SetFrontierBrainEventObjGfx_2();
+        SetFrontierBrainObjEventGfx_2();
         return;
     }
     else if (trainerId < TRAINER_RECORD_MIXING_FRIEND)

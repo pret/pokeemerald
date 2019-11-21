@@ -69,7 +69,7 @@ static bool8 IsCoordOutsideObjectEventMovementRange(struct ObjectEvent *, s16, s
 static bool8 IsMetatileDirectionallyImpassable(struct ObjectEvent *, s16, s16, u8);
 static bool8 DoesObjectCollideWithObjectAt(struct ObjectEvent *, s16, s16);
 static void sub_8096530(struct ObjectEvent *, struct Sprite *);
-static void UpdateEventObjSpriteVisibility(struct ObjectEvent *, struct Sprite *);
+static void UpdateObjEventSpriteVisibility(struct ObjectEvent *, struct Sprite *);
 static void ObjectEventUpdateMetatileBehaviors(struct ObjectEvent*);
 static void GetGroundEffectFlags_Reflection(struct ObjectEvent*, u32*);
 static void GetGroundEffectFlags_TallGrassOnSpawn(struct ObjectEvent*, u32*);
@@ -7559,7 +7559,7 @@ static void TryEnableObjectEventAnim(struct ObjectEvent *objectEvent, struct Spr
 static void UpdateObjectEventVisibility(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
     sub_8096530(objectEvent, sprite);
-    UpdateEventObjSpriteVisibility(objectEvent, sprite);
+    UpdateObjEventSpriteVisibility(objectEvent, sprite);
 }
 
 static void sub_8096530(struct ObjectEvent *objectEvent, struct Sprite *sprite)
@@ -7594,7 +7594,7 @@ static void sub_8096530(struct ObjectEvent *objectEvent, struct Sprite *sprite)
     }
 }
 
-static void UpdateEventObjSpriteVisibility(struct ObjectEvent *objectEvent, struct Sprite *sprite)
+static void UpdateObjEventSpriteVisibility(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
     sprite->invisible = FALSE;
     if (objectEvent->invisible || objectEvent->offScreen)

@@ -1229,27 +1229,27 @@ static void Task_WateringBerryTreeAnim_0(u8 taskId)
 
 static void Task_WateringBerryTreeAnim_1(u8 taskId)
 {
-    struct ObjectEvent *playerEventObj = &gObjectEvents[gPlayerAvatar.objectEventId];
+    struct ObjectEvent *playerObjEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
 
-    if (!ObjectEventIsMovementOverridden(playerEventObj)
-        || ObjectEventClearHeldMovementIfFinished(playerEventObj))
+    if (!ObjectEventIsMovementOverridden(playerObjEvent)
+        || ObjectEventClearHeldMovementIfFinished(playerObjEvent))
     {
         sub_808C228(GetPlayerFacingDirection());
-        ObjectEventSetHeldMovement(playerEventObj, GetWalkInPlaceNormalMovementAction(GetPlayerFacingDirection()));
+        ObjectEventSetHeldMovement(playerObjEvent, GetWalkInPlaceNormalMovementAction(GetPlayerFacingDirection()));
         gTasks[taskId].func = Task_WateringBerryTreeAnim_2;
     }
 }
 
 static void Task_WateringBerryTreeAnim_2(u8 taskId)
 {
-    struct ObjectEvent *playerEventObj = &gObjectEvents[gPlayerAvatar.objectEventId];
+    struct ObjectEvent *playerObjEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
 
-    if (ObjectEventClearHeldMovementIfFinished(playerEventObj))
+    if (ObjectEventClearHeldMovementIfFinished(playerObjEvent))
     {
         s16 value = gTasks[taskId].data[1]++;
 
         if (value < 10)
-            ObjectEventSetHeldMovement(playerEventObj, GetWalkInPlaceNormalMovementAction(GetPlayerFacingDirection()));
+            ObjectEventSetHeldMovement(playerObjEvent, GetWalkInPlaceNormalMovementAction(GetPlayerFacingDirection()));
 
         else
             gTasks[taskId].func = Task_WateringBerryTreeAnim_3;

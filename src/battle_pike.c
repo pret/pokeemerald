@@ -601,7 +601,7 @@ static void SetupRoomObjectEvents(void)
         setObjGfx1 = FALSE;
         break;
     case PIKE_ROOM_BRAIN:
-        SetFrontierBrainEventObjGfx(FRONTIER_FACILITY_PIKE);
+        SetFrontierBrainObjEventGfx(FRONTIER_FACILITY_PIKE);
         objGfx2 = OBJ_EVENT_GFX_LINK_RECEPTIONIST;
         setObjGfx1 = FALSE;
         setObjGfx2 = TRUE;

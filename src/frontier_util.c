@@ -663,7 +663,7 @@ static const struct WindowTemplate gUnknown_08611C84 =
 };
 
 // Second field - whether the character is female.
-static const u8 sFacilityToBrainEventObjGfx[][2] =
+static const u8 sFacilityToBrainObjEventGfx[][2] =
 {
     [FRONTIER_FACILITY_TOWER]   = {OBJ_EVENT_GFX_ANABEL,  TRUE},
     [FRONTIER_FACILITY_DOME]    = {OBJ_EVENT_GFX_TUCKER,  FALSE},
@@ -2201,7 +2201,7 @@ static void sub_81A447C(void)
 
 static void SetFacilityBrainObjectEvent(void)
 {
-    SetFrontierBrainEventObjGfx(VarGet(VAR_FRONTIER_FACILITY));
+    SetFrontierBrainObjEventGfx(VarGet(VAR_FRONTIER_FACILITY));
 }
 
 // Battle Frontier Ranking Hall records.
@@ -2460,13 +2460,13 @@ void CopyFrontierBrainTrainerName(u8 *dst)
 bool8 IsFrontierBrainFemale(void)
 {
     s32 facility = VarGet(VAR_FRONTIER_FACILITY);
-    return sFacilityToBrainEventObjGfx[facility][1];
+    return sFacilityToBrainObjEventGfx[facility][1];
 }
 
-void SetFrontierBrainEventObjGfx_2(void)
+void SetFrontierBrainObjEventGfx_2(void)
 {
     s32 facility = VarGet(VAR_FRONTIER_FACILITY);
-    VarSet(VAR_OBJ_GFX_ID_0, sFacilityToBrainEventObjGfx[facility][0]);
+    VarSet(VAR_OBJ_GFX_ID_0, sFacilityToBrainObjEventGfx[facility][0]);
 }
 
 #define FRONTIER_BRAIN_OTID 61226
@@ -2766,10 +2766,10 @@ u16 GetFrontierBrainMonSpecies(u8 monId)
     return sFrontierBrainsMons[facility][symbol][monId].species;
 }
 
-void SetFrontierBrainEventObjGfx(u8 facility)
+void SetFrontierBrainObjEventGfx(u8 facility)
 {
     gTrainerBattleOpponent_A = TRAINER_FRONTIER_BRAIN;
-    VarSet(VAR_OBJ_GFX_ID_0, sFacilityToBrainEventObjGfx[facility][0]);
+    VarSet(VAR_OBJ_GFX_ID_0, sFacilityToBrainObjEventGfx[facility][0]);
 }
 
 u16 GetFrontierBrainMonMove(u8 monId, u8 moveSlotId)
