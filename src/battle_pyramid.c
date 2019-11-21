@@ -29,7 +29,7 @@
 #include "constants/battle_frontier.h"
 #include "constants/battle_pyramid.h"
 #include "constants/event_objects.h"
-#include "constants/event_object_movement_constants.h"
+#include "constants/event_object_movement.h"
 #include "constants/items.h"
 #include "constants/layouts.h"
 #include "constants/maps.h"

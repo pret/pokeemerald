@@ -14,7 +14,7 @@
 #include "sprite.h"
 #include "task.h"
 #include "constants/event_objects.h"
-#include "constants/event_object_movement_constants.h"
+#include "constants/event_object_movement.h"
 #include "constants/field_specials.h"
 #include "constants/songs.h"
 #include "constants/vars.h"

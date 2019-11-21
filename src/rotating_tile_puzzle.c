@@ -4,7 +4,7 @@
 #include "malloc.h"
 #include "rotating_tile_puzzle.h"
 #include "script_movement.h"
-#include "constants/event_object_movement_constants.h"
+#include "constants/event_object_movement.h"
 #include "constants/event_objects.h"
 #include "constants/metatile_labels.h"
 

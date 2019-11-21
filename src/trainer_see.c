@@ -15,7 +15,7 @@
 #include "battle_pyramid.h"
 #include "constants/battle_setup.h"
 #include "constants/event_objects.h"
-#include "constants/event_object_movement_constants.h"
+#include "constants/event_object_movement.h"
 #include "constants/field_effects.h"
 
 // this file's functions

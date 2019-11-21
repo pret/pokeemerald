@@ -33,7 +33,7 @@
 #include "task.h"
 #include "tv.h"
 #include "window.h"
-#include "constants/bg_event_constants.h"
+#include "constants/event_bg.h"
 #include "constants/decorations.h"
 #include "constants/event_objects.h"
 #include "constants/items.h"

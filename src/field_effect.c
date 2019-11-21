@@ -27,7 +27,7 @@
 #include "trig.h"
 #include "util.h"
 #include "constants/field_effects.h"
-#include "constants/event_object_movement_constants.h"
+#include "constants/event_object_movement.h"
 #include "constants/rgb.h"
 #include "constants/songs.h"
 

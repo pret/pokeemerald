@@ -7,7 +7,7 @@
 #include "task.h"
 #include "union_room.h"
 #include "constants/event_objects.h"
-#include "constants/event_object_movement_constants.h"
+#include "constants/event_object_movement.h"
 #include "constants/flags.h"
 
 EWRAM_DATA struct UnkStruct_8019BA8 * gUnknown_02022C64 = NULL;

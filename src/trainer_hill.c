@@ -23,7 +23,7 @@
 #include "window.h"
 #include "util.h"
 #include "constants/battle_ai.h"
-#include "constants/event_object_movement_constants.h"
+#include "constants/event_object_movement.h"
 #include "constants/event_objects.h"
 #include "constants/items.h"
 #include "constants/layouts.h"
