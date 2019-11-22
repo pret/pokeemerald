@@ -14,7 +14,7 @@ void DoTVShow(void);
 void DoTVShowInSearchOfTrainers(void);
 void TryPutTreasureInvestigatorsOnAir(void);
 void TryPutLotteryWinnerReportOnAir(void);
-void sub_80EE72C(void);
+void TryPutTrainerFanClubOnAir(void);
 void IncrementDailyPlantedBerries(void);
 void IncrementDailyPickedBerries(void);
 void IncrementDailyBattlePoints(u16 delta);
