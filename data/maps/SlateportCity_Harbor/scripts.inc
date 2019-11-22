@@ -202,7 +202,7 @@ SlateportCity_Harbor_EventScript_Lilycove:: @ 820CB92
 	msgbox SlateportCity_Harbor_Text_LilycoveItIs, MSGBOX_YESNO
 	compare VAR_RESULT, NO
 	goto_if_eq SlateportCity_Harbor_EventScript_ChooseNewDestination
-	setvar VAR_PORTHOLE_STATE, 1
+	setvar VAR_SS_TIDAL_STATE, SS_TIDAL_BOARD_SLATEPORT
 	call SlateportCity_Harbor_EventScript_BoardFerry
 	warp MAP_SS_TIDAL_CORRIDOR, 255, 1, 10
 	waitstate

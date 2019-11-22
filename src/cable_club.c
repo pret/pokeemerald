@@ -203,7 +203,7 @@ static void sub_80B2634(u8 taskId)
     if (data[0] == 0)
     {
         OpenLinkTimed();
-        sub_800AB98();
+        ResetLinkPlayerCount();
         ResetLinkPlayers();
         data[5] = AddWindow(&gUnknown_08550594);
     }
@@ -678,23 +678,23 @@ static void sub_80B2EE4(u8 taskId)
     }
 }
 
-void sub_80B2FD8(void)
+void TryBerryBlenderLinkup(void)
 {
-    gLinkType = LINKTYPE_0x4411;
+    gLinkType = LINKTYPE_BERRY_BLENDER_SETUP;
     gBattleTypeFlags = 0;
     sub_80B236C(2, 4);
 }
 
-void sub_80B3000(void)
+void TryContestGModeLinkup(void)
 {
-    gLinkType = LINKTYPE_0x6601;
+    gLinkType = LINKTYPE_CONTEST_GMODE;
     gBattleTypeFlags = 0;
     sub_80B236C(4, 4);
 }
 
-void sub_80B3028(void)
+void TryContestEModeLinkup(void)
 {
-    gLinkType = LINKTYPE_0x6602;
+    gLinkType = LINKTYPE_CONTEST_EMODE;
     gBattleTypeFlags = 0;
     sub_80B236C(2, 4);
 }
@@ -970,7 +970,7 @@ void sub_80B360C(void)
     Overworld_ResetMapMusic();
     LoadPlayerParty();
     SavePlayerBag();
-    sub_813BF10();
+    UpdateTrainerFansAfterLinkBattle();
 
     if (gSpecialVar_0x8004 == USING_SINGLE_BATTLE || gSpecialVar_0x8004 == USING_DOUBLE_BATTLE)
     {

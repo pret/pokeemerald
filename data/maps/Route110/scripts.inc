@@ -309,11 +309,11 @@ Route110_EventScript_CyclingChallengeEnd:: @ 81EF661
 	lockall
 	applymovement 21, Common_Movement_WalkInPlaceFastestRight
 	waitmovement 0
-	call Route110_EventScript_1EF673
+	call Route110_EventScript_CyclingChallengeResults
 	releaseall
 	end
 
-Route110_EventScript_1EF673:: @ 81EF673
+Route110_EventScript_CyclingChallengeResults:: @ 81EF673
 	special FinishCyclingRoadChallenge
 	msgbox Route110_Text_CyclingChallengeResultSummary, MSGBOX_DEFAULT
 	switch VAR_RESULT

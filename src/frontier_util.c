@@ -29,6 +29,7 @@
 #include "load_save.h"
 #include "battle_dome.h"
 #include "constants/battle_frontier.h"
+#include "constants/frontier_util.h"
 #include "constants/trainers.h"
 #include "constants/species.h"
 #include "constants/game_stat.h"
@@ -51,26 +52,26 @@ struct FrontierBrainMon
 static void sub_81A17A0(void);
 static void sub_81A1830(void);
 static void sub_81A1968(void);
-static void sub_81A1AD4(void);
+static void LoadSelectedParty(void);
 static void DoSoftReset_(void);
-static void sub_81A1B28(void);
+static void SetFrontierTrainers(void);
 static void sub_81A1B38(void);
 static void ShowFacilityResultsWindow(void);
 static void sub_81A31FC(void);
 static void sub_81A35EC(void);
-static void sub_81A3B00(void);
+static void IsTrainerFrontierBrain(void);
 static void sub_81A3B64(void);
-static void sub_81A3D30(void);
-static void sub_81A3D58(void);
-static void sub_81A3DA0(void);
+static void GetFacilitySymbolCount(void);
+static void GiveFacilitySymbol(void);
+static void CheckBattleTypeFlag(void);
 static void sub_81A3FD4(void);
-static void sub_81A4224(void);
+static void ValidateVisitingTrainer(void);
 static void sub_81A4230(void);
 static void sub_81A43A8(void);
 static void sub_81A4410(void);
-static void sub_81A443C(void);
+static void BufferFrontierTrainerName(void);
 static void sub_81A447C(void);
-static void sub_81A457C(void);
+static void SetFacilityBrainEventObject(void);
 static void ShowTowerResultsWindow(u8);
 static void ShowDomeResultsWindow(u8);
 static void ShowPalaceResultsWindow(u8);
@@ -603,29 +604,29 @@ static const u16 gUnknown_08611BFC[][2] =
 
 static void (* const sFrontierUtilFuncs[])(void) =
 {
-    sub_81A17A0,
-    sub_81A1830,
-    sub_81A1968,
-    sub_81A1AD4,
-    DoSoftReset_,
-    sub_81A1B28,
-    sub_81A1B38,
-    ShowFacilityResultsWindow,
-    sub_81A31FC,
-    sub_81A35EC,
-    sub_81A3B00,
-    sub_81A3B64,
-    sub_81A3D30,
-    sub_81A3D58,
-    sub_81A3DA0,
-    sub_81A3FD4,
-    sub_81A4224,
-    sub_81A4230,
-    sub_81A43A8,
-    sub_81A4410,
-    sub_81A443C,
-    sub_81A447C,
-    sub_81A457C,
+    [FRONTIER_UTIL_FUNC_0]                     = sub_81A17A0,
+    [FRONTIER_UTIL_FUNC_1]                     = sub_81A1830,
+    [FRONTIER_UTIL_FUNC_2]                     = sub_81A1968,
+    [FRONTIER_UTIL_FUNC_LOAD_SELECTED_PARTY]   = LoadSelectedParty,
+    [FRONTIER_UTIL_FUNC_SOFT_RESET]            = DoSoftReset_,
+    [FRONTIER_UTIL_FUNC_SET_FRONTIER_TRAINERS] = SetFrontierTrainers,
+    [FRONTIER_UTIL_FUNC_6]                     = sub_81A1B38,
+    [FRONTIER_UTIL_FUNC_RESULTS_WINDOW]        = ShowFacilityResultsWindow,
+    [FRONTIER_UTIL_FUNC_8]                     = sub_81A31FC,
+    [FRONTIER_UTIL_FUNC_9]                     = sub_81A35EC,
+    [FRONTIER_UTIL_FUNC_IS_FRONTIER_BRAIN]     = IsTrainerFrontierBrain,
+    [FRONTIER_UTIL_FUNC_11]                    = sub_81A3B64,
+    [FRONTIER_UTIL_FUNC_GET_FACILITY_SYMBOLS]  = GetFacilitySymbolCount,
+    [FRONTIER_UTIL_FUNC_GIVE_FACILITY_SYMBOL]  = GiveFacilitySymbol,
+    [FRONTIER_UTIL_FUNC_CHECK_BATTLE_TYPE]     = CheckBattleTypeFlag,
+    [FRONTIER_UTIL_FUNC_15]                    = sub_81A3FD4,
+    [FRONTIER_UTIL_FUNC_CHECK_VISIT_TRAINER]   = ValidateVisitingTrainer,
+    [FRONTIER_UTIL_FUNC_17]                    = sub_81A4230,
+    [FRONTIER_UTIL_FUNC_18]                    = sub_81A43A8,
+    [FRONTIER_UTIL_FUNC_19]                    = sub_81A4410,
+    [FRONTIER_UTIL_FUNC_BUFFER_TRAINER_NAME]   = BufferFrontierTrainerName,
+    [FRONTIER_UTIL_FUNC_21]                    = sub_81A447C,
+    [FRONTIER_UTIL_FUNC_SET_BRAIN_OBJECT]      = SetFacilityBrainEventObject,
 };
 
 static const struct WindowTemplate gUnknown_08611C74 =
@@ -679,38 +680,38 @@ const u16 gFrontierBannedSpecies[] =
     SPECIES_KYOGRE, SPECIES_GROUDON, SPECIES_RAYQUAZA, SPECIES_JIRACHI, SPECIES_DEOXYS, 0xFFFF
 };
 
-static const u8 *const gUnknown_08611CB0[][2] =
+static const u8 *const sRecordsWindowChallengeTexts[][2] =
 {
-    {gText_BattleTower2,  gUnknown_085ED164},
-    {gText_BattleTower2,  gUnknown_085ED170},
-    {gText_BattleTower2,  gUnknown_085ED17C},
-    {gText_BattleDome,    gUnknown_085ED164},
-    {gText_BattlePalace,  gUnknown_085ED164},
-    {gText_BattleArena,   gUnknown_085ED190},
-    {gText_BattleFactory, gUnknown_085ED164},
-    {gText_BattlePike,    gUnknown_085ED190},
-    {gText_BattlePyramid, gUnknown_085ED190},
-    {gText_BattleTower2,  gUnknown_085ED188},
+    [RANKING_HALL_BATTLE_TOWER_SINGLES] = {gText_BattleTower2,  gText_FacilitySingle},
+    [RANKING_HALL_BATTLE_TOWER_DOUBLES] = {gText_BattleTower2,  gText_FacilityDouble},
+    [RANKING_HALL_BATTLE_TOWER_MULTIS]  = {gText_BattleTower2,  gText_FacilityMulti},
+    [RANKING_HALL_BATTLE_DOME]          = {gText_BattleDome,    gText_FacilitySingle},
+    [RANKING_HALL_BATTLE_PALACE]        = {gText_BattlePalace,  gText_FacilitySingle},
+    [RANKING_HALL_BATTLE_ARENA]         = {gText_BattleArena,   gText_Facility},
+    [RANKING_HALL_BATTLE_FACTORY]       = {gText_BattleFactory, gText_FacilitySingle},
+    [RANKING_HALL_BATTLE_PIKE]          = {gText_BattlePike,    gText_Facility},
+    [RANKING_HALL_BATTLE_PYRAMID]       = {gText_BattlePyramid, gText_Facility},
+    [RANKING_HALL_BATTLE_TOWER_LINK]    = {gText_BattleTower2,  gText_FacilityLink},
 };
 
-static const u8 *const gLevelModeText[] =
+static const u8 *const sLevelModeText[] =
 {
     gText_RecordsLv50,
     gText_RecordsOpenLevel,
 };
 
-static const u8 *const gHallFacilityToRecordsText[] =
+static const u8 *const sHallFacilityToRecordsText[] =
 {
-    gText_FrontierFacilityWinStreak,
-    gText_FrontierFacilityWinStreak,
-    gText_FrontierFacilityWinStreak,
-    gText_FrontierFacilityClearStreak,
-    gText_FrontierFacilityWinStreak,
-    gText_FrontierFacilityKOsStreak,
-    gText_FrontierFacilityWinStreak,
-    gText_FrontierFacilityRoomsCleared,
-    gText_FrontierFacilityFloorsCleared,
-    gText_FrontierFacilityWinStreak,
+    [RANKING_HALL_BATTLE_TOWER_SINGLES] = gText_FrontierFacilityWinStreak,
+    [RANKING_HALL_BATTLE_TOWER_DOUBLES] = gText_FrontierFacilityWinStreak,
+    [RANKING_HALL_BATTLE_TOWER_MULTIS]  = gText_FrontierFacilityWinStreak,
+    [RANKING_HALL_BATTLE_DOME]          = gText_FrontierFacilityClearStreak,
+    [RANKING_HALL_BATTLE_PALACE]        = gText_FrontierFacilityWinStreak,
+    [RANKING_HALL_BATTLE_ARENA]         = gText_FrontierFacilityKOsStreak,
+    [RANKING_HALL_BATTLE_FACTORY]       = gText_FrontierFacilityWinStreak,
+    [RANKING_HALL_BATTLE_PIKE]          = gText_FrontierFacilityRoomsCleared,
+    [RANKING_HALL_BATTLE_PYRAMID]       = gText_FrontierFacilityFloorsCleared,
+    [RANKING_HALL_BATTLE_TOWER_LINK]    = gText_FrontierFacilityWinStreak,
 };
 
 static const u16 gFacilityToBrainTrainerId[] =
@@ -880,7 +881,7 @@ static void sub_81A1968(void)
     }
 }
 
-static void sub_81A1AD4(void)
+static void LoadSelectedParty(void)
 {
     s32 i;
 
@@ -895,7 +896,7 @@ static void DoSoftReset_(void)
     DoSoftReset();
 }
 
-static void sub_81A1B28(void)
+static void SetFrontierTrainers(void)
 {
     gFacilityTrainers = gBattleFrontierTrainers;
 }
@@ -1827,7 +1828,7 @@ void sub_81A3ACC(void)
         gSaveBlock2Ptr->frontier.trainerIds[i] = 0xFFFF;
 }
 
-static void sub_81A3B00(void)
+static void IsTrainerFrontierBrain(void)
 {
     if (gTrainerBattleOpponent_A == TRAINER_FRONTIER_BRAIN)
         gSpecialVar_Result = TRUE;
@@ -1900,13 +1901,13 @@ static void sub_81A3B64(void)
     gSaveBlock2Ptr->frontier.field_EBA = points;
 }
 
-static void sub_81A3D30(void)
+static void GetFacilitySymbolCount(void)
 {
     s32 facility = VarGet(VAR_FRONTIER_FACILITY);
     gSpecialVar_Result = GetPlayerSymbolCountForFacility(facility);
 }
 
-static void sub_81A3D58(void)
+static void GiveFacilitySymbol(void)
 {
     s32 facility = VarGet(VAR_FRONTIER_FACILITY);
     if (GetPlayerSymbolCountForFacility(facility) == 0)
@@ -1915,7 +1916,7 @@ static void sub_81A3D58(void)
         FlagSet(FLAG_SYS_TOWER_GOLD + facility * 2);
 }
 
-static void sub_81A3DA0(void)
+static void CheckBattleTypeFlag(void)
 {
     if (gBattleTypeFlags & gSpecialVar_0x8005)
         gSpecialVar_Result = TRUE;
@@ -2087,7 +2088,7 @@ static void sub_81A3FD4(void)
     }
 }
 
-static void sub_81A4224(void)
+static void ValidateVisitingTrainer(void)
 {
     ValidateEReaderTrainer();
 }
@@ -2160,7 +2161,7 @@ static void sub_81A4410(void)
     gSaveBlock2Ptr->frontier.field_CA9_b = 1;
 }
 
-static void sub_81A443C(void)
+static void BufferFrontierTrainerName(void)
 {
     switch (gSpecialVar_0x8005)
     {
@@ -2198,7 +2199,7 @@ static void sub_81A447C(void)
     }
 }
 
-static void sub_81A457C(void)
+static void SetFacilityBrainEventObject(void)
 {
     SetFrontierBrainEventObjGfx(VarGet(VAR_FRONTIER_FACILITY));
 }
@@ -2219,8 +2220,8 @@ static void Print1PRecord(s32 position, s32 x, s32 y, struct RankingHall1P *hall
         if (winStreak > 9999)
             winStreak = 9999;
         ConvertIntToDecimalStringN(gStringVar2, winStreak, STR_CONV_MODE_RIGHT_ALIGN, 4);
-        StringExpandPlaceholders(gStringVar4, gHallFacilityToRecordsText[hallFacilityId]);
-        AddTextPrinterParameterized(gRecordsWindowId, 1, gStringVar4, GetStringRightAlignXOffset(1, gHallFacilityToRecordsText[hallFacilityId], 0xC8), (8 * (y + 5 * position)) + 1, TEXT_SPEED_FF, NULL);
+        StringExpandPlaceholders(gStringVar4, sHallFacilityToRecordsText[hallFacilityId]);
+        AddTextPrinterParameterized(gRecordsWindowId, 1, gStringVar4, GetStringRightAlignXOffset(1, sHallFacilityToRecordsText[hallFacilityId], 0xC8), (8 * (y + 5 * position)) + 1, TEXT_SPEED_FF, NULL);
     }
 }
 
@@ -2246,8 +2247,8 @@ static void Print2PRecord(s32 position, s32 x, s32 y, struct RankingHall2P *hall
         if (winStreak > 9999)
             winStreak = 9999;
         ConvertIntToDecimalStringN(gStringVar2, winStreak, STR_CONV_MODE_RIGHT_ALIGN, 4);
-        StringExpandPlaceholders(gStringVar4, gHallFacilityToRecordsText[9]);
-        AddTextPrinterParameterized(gRecordsWindowId, 1, gStringVar4, GetStringRightAlignXOffset(1, gHallFacilityToRecordsText[9], 0xC8), (8 * (y + 5 * position)) + 1, TEXT_SPEED_FF, NULL);
+        StringExpandPlaceholders(gStringVar4, sHallFacilityToRecordsText[RANKING_HALL_BATTLE_TOWER_LINK]);
+        AddTextPrinterParameterized(gRecordsWindowId, 1, gStringVar4, GetStringRightAlignXOffset(1, sHallFacilityToRecordsText[RANKING_HALL_BATTLE_TOWER_LINK], 0xC8), (8 * (y + 5 * position)) + 1, TEXT_SPEED_FF, NULL);
     }
 }
 
@@ -2326,12 +2327,12 @@ static void PrintHallRecords(s32 hallFacilityId, s32 lvlMode)
     struct RankingHall1P records1P[3];
     struct RankingHall2P records2P[3];
 
-    StringCopy(gStringVar1, gUnknown_08611CB0[hallFacilityId][0]);
-    StringExpandPlaceholders(gStringVar4, gUnknown_08611CB0[hallFacilityId][1]);
+    StringCopy(gStringVar1, sRecordsWindowChallengeTexts[hallFacilityId][0]);
+    StringExpandPlaceholders(gStringVar4, sRecordsWindowChallengeTexts[hallFacilityId][1]);
     AddTextPrinterParameterized(gRecordsWindowId, 1, gStringVar4, 0, 1, TEXT_SPEED_FF, NULL);
-    x = GetStringRightAlignXOffset(1, gLevelModeText[lvlMode], 0xD0);
-    AddTextPrinterParameterized(gRecordsWindowId, 1, gLevelModeText[lvlMode], x, 1, TEXT_SPEED_FF, NULL);
-    if (hallFacilityId == HALL_FACILITIES_COUNT)
+    x = GetStringRightAlignXOffset(1, sLevelModeText[lvlMode], 0xD0);
+    AddTextPrinterParameterized(gRecordsWindowId, 1, sLevelModeText[lvlMode], x, 1, TEXT_SPEED_FF, NULL);
+    if (hallFacilityId == RANKING_HALL_BATTLE_TOWER_LINK)
     {
         gSaveBlock2Ptr->frontier.opponentName[0][PLAYER_NAME_LENGTH] = EOS;
         gSaveBlock2Ptr->frontier.opponentName[1][PLAYER_NAME_LENGTH] = EOS;

@@ -24,7 +24,7 @@
       "movement_range_y": 0,
       "trainer_type": "1",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "SSTidalRooms_EventScript_23CA49",
+      "script": "SSTidalRooms_EventScript_Colton",
       "flag": "0"
     },
     {
@@ -37,7 +37,7 @@
       "movement_range_y": 0,
       "trainer_type": "1",
       "trainer_sight_or_berry_tree_id": "3",
-      "script": "SSTidalRooms_EventScript_23CA60",
+      "script": "SSTidalRooms_EventScript_Micah",
       "flag": "0"
     },
     {
@@ -50,7 +50,7 @@
       "movement_range_y": 0,
       "trainer_type": "1",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "SSTidalRooms_EventScript_23CA77",
+      "script": "SSTidalRooms_EventScript_Thomas",
       "flag": "0"
     },
     {
@@ -63,7 +63,7 @@
       "movement_range_y": 0,
       "trainer_type": "1",
       "trainer_sight_or_berry_tree_id": "1",
-      "script": "SSTidalRooms_EventScript_23CA8E",
+      "script": "SSTidalRooms_EventScript_Jed",
       "flag": "0"
     },
     {
@@ -76,7 +76,7 @@
       "movement_range_y": 0,
       "trainer_type": "1",
       "trainer_sight_or_berry_tree_id": "1",
-      "script": "SSTidalRooms_EventScript_23CAA9",
+      "script": "SSTidalRooms_EventScript_Lea",
       "flag": "0"
     },
     {
@@ -89,7 +89,7 @@
       "movement_range_y": 1,
       "trainer_type": "1",
       "trainer_sight_or_berry_tree_id": "3",
-      "script": "SSTidalRooms_EventScript_23CAC4",
+      "script": "SSTidalRooms_EventScript_Garret",
       "flag": "0"
     },
     {
@@ -102,7 +102,7 @@
       "movement_range_y": 0,
       "trainer_type": "1",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "SSTidalRooms_EventScript_23CADB",
+      "script": "SSTidalRooms_EventScript_Naomi",
       "flag": "0"
     },
     {
@@ -115,7 +115,7 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "SSTidalRooms_EventScript_23C9F2",
+      "script": "SSTidalRooms_EventScript_SnatchGiver",
       "flag": "FLAG_HIDE_SS_TIDAL_ROOMS_SNATCH_GIVER"
     }
   ],
@@ -213,7 +213,7 @@
       "y": 11,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "SSTidalRooms_EventScript_23CA33"
+      "script": "SSTidalRooms_EventScript_Bed"
     },
     {
       "type": "sign",
@@ -221,7 +221,7 @@
       "y": 12,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "SSTidalRooms_EventScript_23CA33"
+      "script": "SSTidalRooms_EventScript_Bed"
     }
   ]
 }

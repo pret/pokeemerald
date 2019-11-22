@@ -92,9 +92,9 @@ extern const u16 gEventObjectPalette17[];
 extern const u16 gEventObjectPalette33[];
 extern const u16 gEventObjectPalette34[];
 
-void UpdateMovedLilycoveFanClubMembers(void);
-void sub_813BF60(void);
-u16 GetNumMovedLilycoveFanClubMembers(void);
+void TryLoseFansFromPlayTime(void);
+void SetPlayerGotFirstFans(void);
+u16 GetNumFansOfPlayerInTrainerFanClub(void);
 
 static void RecordCyclingRoadResults(u32, u8);
 static void LoadLinkPartnerEventObjectSpritePalette(u8 graphicsId, u8 localEventId, u8 paletteNum);
@@ -131,10 +131,10 @@ static void WaitForDeoxysRockMovement(u8 taskId);
 static void sub_813B57C(u8 taskId);
 static void Task_LoopWingFlapSE(u8 taskId);
 static void Task_CloseBattlePikeCurtain(u8 taskId);
-static u8 sub_813BF44(void);
-static void sub_813BD84(void);
-static u16 sub_813BB74(void);
-static void sub_813BE30(struct LinkBattleRecords *linkRecords, u8 a, u8 b);
+static u8 DidPlayerGetFirstFans(void);
+static void SetInitialFansOfPlayer(void);
+static u16 PlayerGainRandomTrainerFan(void);
+static void BufferFanClubTrainerName_(struct LinkBattleRecords *linkRecords, u8 a, u8 b);
 
 void Special_ShowDiploma(void)
 {
@@ -303,9 +303,10 @@ void ResetSSTidalFlag(void)
     FlagClear(FLAG_SYS_CRUISE_MODE);
 }
 
+// Returns TRUE if the Cruise is over
 bool32 CountSSTidalStep(u16 delta)
 {
-    if (!FlagGet(FLAG_SYS_CRUISE_MODE) || (*GetVarPointer(VAR_CRUISE_STEP_COUNT) += delta) <= 0xcc)
+    if (!FlagGet(FLAG_SYS_CRUISE_MODE) || (*GetVarPointer(VAR_CRUISE_STEP_COUNT) += delta) < SS_TIDAL_MAX_STEPS)
     {
         return FALSE;
     }
@@ -315,21 +316,21 @@ bool32 CountSSTidalStep(u16 delta)
 u8 GetSSTidalLocation(s8 *mapGroup, s8 *mapNum, s16 *x, s16 *y)
 {
     u16 *varCruiseStepCount = GetVarPointer(VAR_CRUISE_STEP_COUNT);
-    switch (*GetVarPointer(VAR_PORTHOLE_STATE))
+    switch (*GetVarPointer(VAR_SS_TIDAL_STATE))
     {
-        case 1:
-        case 8:
+        case SS_TIDAL_BOARD_SLATEPORT:
+        case SS_TIDAL_LAND_SLATEPORT:
             return SS_TIDAL_LOCATION_SLATEPORT;
-        case 3:
-        case 9:
+        case SS_TIDAL_HALFWAY_LILYCOVE:
+        case SS_TIDAL_EXIT_CURRENTS_RIGHT:
             return SS_TIDAL_LOCATION_ROUTE131;
-        case 4:
-        case 5:
+        case SS_TIDAL_LAND_LILYCOVE:
+        case SS_TIDAL_BOARD_LILYCOVE:
             return SS_TIDAL_LOCATION_LILYCOVE;
-        case 6:
-        case 10:
+        case SS_TIDAL_DEPART_LILYCOVE:
+        case SS_TIDAL_EXIT_CURRENTS_LEFT:
             return SS_TIDAL_LOCATION_ROUTE124;
-        case 2:
+        case SS_TIDAL_DEPART_SLATEPORT:
             if (*varCruiseStepCount < 60)
             {
                 *mapNum = MAP_NUM(ROUTE134);
@@ -346,7 +347,7 @@ u8 GetSSTidalLocation(s8 *mapGroup, s8 *mapNum, s16 *x, s16 *y)
                 *x = *varCruiseStepCount - 140;
             }
             break;
-        case 7:
+        case SS_TIDAL_HALFWAY_SLATEPORT:
             if (*varCruiseStepCount < 66)
             {
                 *mapNum = MAP_NUM(ROUTE132);
@@ -395,9 +396,9 @@ bool32 ShouldDoWallyCall(void)
     return TRUE;
 }
 
-bool32 ShouldDoWinonaCall(void)
+bool32 ShouldDoScottFortreeCall(void)
 {
-    if (FlagGet(FLAG_REGISTER_WINONA_POKENAV))
+    if (FlagGet(FLAG_SCOTT_CALL_FORTREE_GYM))
     {
         switch (gMapHeader.mapType)
         {
@@ -405,7 +406,7 @@ bool32 ShouldDoWinonaCall(void)
             case MAP_TYPE_CITY:
             case MAP_TYPE_ROUTE:
             case MAP_TYPE_OCEAN_ROUTE:
-                if (++(*GetVarPointer(VAR_WINONA_CALL_STEP_COUNTER)) < 10)
+                if (++(*GetVarPointer(VAR_SCOTT_FORTREE_CALL_STEP_COUNTER)) < 10)
                 {
                     return FALSE;
                 }
@@ -422,9 +423,9 @@ bool32 ShouldDoWinonaCall(void)
     return TRUE;
 }
 
-bool32 ShouldDoScottCall(void)
+bool32 ShouldDoScottBattleFrontierCall(void)
 {
-    if (FlagGet(FLAG_SCOTT_CALL_NATIONAL_DEX))
+    if (FlagGet(FLAG_SCOTT_CALL_BATTLE_FRONTIER))
     {
         switch (gMapHeader.mapType)
         {
@@ -432,7 +433,7 @@ bool32 ShouldDoScottCall(void)
             case MAP_TYPE_CITY:
             case MAP_TYPE_ROUTE:
             case MAP_TYPE_OCEAN_ROUTE:
-                if (++(*GetVarPointer(VAR_SCOTT_CALL_STEP_COUNTER)) < 10)
+                if (++(*GetVarPointer(VAR_SCOTT_BF_CALL_STEP_COUNTER)) < 10)
                 {
                     return FALSE;
                 }
@@ -1410,9 +1411,9 @@ void GiveLeadMonEffortRibbon(void)
     ribbonSet = TRUE;
     leadMon = &gPlayerParty[GetLeadMonIndex()];
     SetMonData(leadMon, MON_DATA_EFFORT_RIBBON, &ribbonSet);
-    if (GetRibbonCount(leadMon) > 4)
+    if (GetRibbonCount(leadMon) > NUM_CUTIES_RIBBONS)
     {
-        sub_80EE4DC(leadMon, 0x47);
+        TryPutSpotTheCutiesOnAir(leadMon, 0x47);
     }
 }
 
@@ -2082,78 +2083,78 @@ void ShowFrontierManiacMessage(void)
     {
         [FRONTIER_MANIAC_BATTLE_TOWER_SINGLES] =
         { 
-            BattleFrontier_Lounge2_Text_260971, 
-            BattleFrontier_Lounge2_Text_260A1E, 
-            BattleFrontier_Lounge2_Text_260AE7 
+            BattleFrontier_Lounge2_Text_SalonMaidenIsThere, 
+            BattleFrontier_Lounge2_Text_SalonMaidenSilverMons, 
+            BattleFrontier_Lounge2_Text_SalonMaidenGoldMons 
         },
         [FRONTIER_MANIAC_BATTLE_TOWER_DOUBLES] =
         { 
-            BattleFrontier_Lounge2_Text_2619AC, 
-            BattleFrontier_Lounge2_Text_261A91, 
-            BattleFrontier_Lounge2_Text_261B0C 
+            BattleFrontier_Lounge2_Text_DoubleBattleAdvice1, 
+            BattleFrontier_Lounge2_Text_DoubleBattleAdvice2, 
+            BattleFrontier_Lounge2_Text_DoubleBattleAdvice3 
         },
         [FRONTIER_MANIAC_BATTLE_TOWER_MULTIS] = 
         { 
-            BattleFrontier_Lounge2_Text_261B95, 
-            BattleFrontier_Lounge2_Text_261B95, 
-            BattleFrontier_Lounge2_Text_261B95 
+            BattleFrontier_Lounge2_Text_MultiBattleAdvice, 
+            BattleFrontier_Lounge2_Text_MultiBattleAdvice, 
+            BattleFrontier_Lounge2_Text_MultiBattleAdvice 
         },
-        [FRONTIER_MANIAC_BATTLE_TOWER_LINK_MULTIS] =
+        [FRONTIER_MANIAC_BATTLE_TOWER_LINK] =
         { 
-            BattleFrontier_Lounge2_Text_261C1A, 
-            BattleFrontier_Lounge2_Text_261C1A, 
-            BattleFrontier_Lounge2_Text_261C1A 
+            BattleFrontier_Lounge2_Text_LinkMultiBattleAdvice, 
+            BattleFrontier_Lounge2_Text_LinkMultiBattleAdvice, 
+            BattleFrontier_Lounge2_Text_LinkMultiBattleAdvice 
         },
         [FRONTIER_MANIAC_BATTLE_DOME] =
         { 
-            BattleFrontier_Lounge2_Text_260BC4, 
-            BattleFrontier_Lounge2_Text_260C6D, 
-            BattleFrontier_Lounge2_Text_260D3A 
+            BattleFrontier_Lounge2_Text_DomeAceIsThere, 
+            BattleFrontier_Lounge2_Text_DomeAceSilverMons, 
+            BattleFrontier_Lounge2_Text_DomeAceGoldMons 
         },
         [FRONTIER_MANIAC_BATTLE_FACTORY] =
         { 
-            BattleFrontier_Lounge2_Text_260E1E, 
-            BattleFrontier_Lounge2_Text_260EC7, 
-            BattleFrontier_Lounge2_Text_260F74 
+            BattleFrontier_Lounge2_Text_FactoryHeadIsThere, 
+            BattleFrontier_Lounge2_Text_FactoryHeadSilverMons, 
+            BattleFrontier_Lounge2_Text_FactoryHeadGoldMons 
         },
         [FRONTIER_MANIAC_BATTLE_PALACE] =
         { 
-            BattleFrontier_Lounge2_Text_2614E6, 
-            BattleFrontier_Lounge2_Text_261591, 
-            BattleFrontier_Lounge2_Text_26166F 
+            BattleFrontier_Lounge2_Text_PalaceMavenIsThere, 
+            BattleFrontier_Lounge2_Text_PalaceMavenSilverMons, 
+            BattleFrontier_Lounge2_Text_PalaceMavenGoldMons 
         },
         [FRONTIER_MANIAC_BATTLE_ARENA] =
         { 
-            BattleFrontier_Lounge2_Text_261282, 
-            BattleFrontier_Lounge2_Text_261329, 
-            BattleFrontier_Lounge2_Text_261403 
+            BattleFrontier_Lounge2_Text_ArenaTycoonIsThere, 
+            BattleFrontier_Lounge2_Text_ArenaTycoonSilverMons, 
+            BattleFrontier_Lounge2_Text_ArenaTycoonGoldMons 
         },
         [FRONTIER_MANIAC_BATTLE_PIKE] = 
         { 
-            BattleFrontier_Lounge2_Text_261026, 
-            BattleFrontier_Lounge2_Text_2610CC, 
-            BattleFrontier_Lounge2_Text_261194 
+            BattleFrontier_Lounge2_Text_PikeQueenIsThere, 
+            BattleFrontier_Lounge2_Text_PikeQueenSilverMons, 
+            BattleFrontier_Lounge2_Text_PikeQueenGoldMons 
         },
         [FRONTIER_MANIAC_BATTLE_PYRAMID] =
         { 
-            BattleFrontier_Lounge2_Text_26174D, 
-            BattleFrontier_Lounge2_Text_2617F9, 
-            BattleFrontier_Lounge2_Text_2618C4 
+            BattleFrontier_Lounge2_Text_PyramidKingIsThere, 
+            BattleFrontier_Lounge2_Text_PyramidKingSilverMons, 
+            BattleFrontier_Lounge2_Text_PyramidKingGoldMons 
         },
     };
 
     static const u8 sFrontierManiacStreakThresholds[][FRONTIER_MANIAC_MESSAGE_COUNT - 1] = 
     {
-        [FRONTIER_MANIAC_BATTLE_TOWER_SINGLES]     = { 21, 56 },
-        [FRONTIER_MANIAC_BATTLE_TOWER_DOUBLES]     = { 21, 35 },
-        [FRONTIER_MANIAC_BATTLE_TOWER_MULTIS]      = { 255, 255 },
-        [FRONTIER_MANIAC_BATTLE_TOWER_LINK_MULTIS] = { 255, 255 },
-        [FRONTIER_MANIAC_BATTLE_DOME]              = { 2, 4 },
-        [FRONTIER_MANIAC_BATTLE_FACTORY]           = { 7, 21 },
-        [FRONTIER_MANIAC_BATTLE_PALACE]            = { 7, 21 },
-        [FRONTIER_MANIAC_BATTLE_ARENA]             = { 14, 28 },
-        [FRONTIER_MANIAC_BATTLE_PIKE]              = { 13, 112 }, //BUG: 112 (0x70) is probably a mistake; the Pike Queen is battled twice well before that
-        [FRONTIER_MANIAC_BATTLE_PYRAMID]           = { 7, 56 }
+        [FRONTIER_MANIAC_BATTLE_TOWER_SINGLES] = { 21, 56 },
+        [FRONTIER_MANIAC_BATTLE_TOWER_DOUBLES] = { 21, 35 },
+        [FRONTIER_MANIAC_BATTLE_TOWER_MULTIS]  = { 255, 255 },
+        [FRONTIER_MANIAC_BATTLE_TOWER_LINK]    = { 255, 255 },
+        [FRONTIER_MANIAC_BATTLE_DOME]          = { 2, 4 },
+        [FRONTIER_MANIAC_BATTLE_FACTORY]       = { 7, 21 },
+        [FRONTIER_MANIAC_BATTLE_PALACE]        = { 7, 21 },
+        [FRONTIER_MANIAC_BATTLE_ARENA]         = { 14, 28 },
+        [FRONTIER_MANIAC_BATTLE_PIKE]          = { 13, 112 }, //BUG: 112 (0x70) is probably a mistake; the Pike Queen is battled twice well before that
+        [FRONTIER_MANIAC_BATTLE_PYRAMID]       = { 7, 56 }
     };
 
     u8 i;
@@ -2165,7 +2166,7 @@ void ShowFrontierManiacMessage(void)
         case FRONTIER_MANIAC_BATTLE_TOWER_SINGLES:
         case FRONTIER_MANIAC_BATTLE_TOWER_DOUBLES:
         case FRONTIER_MANIAC_BATTLE_TOWER_MULTIS:
-        case FRONTIER_MANIAC_BATTLE_TOWER_LINK_MULTIS:
+        case FRONTIER_MANIAC_BATTLE_TOWER_LINK:
             if (gSaveBlock2Ptr->frontier.towerWinStreaks[facility][FRONTIER_LVL_50] 
                 >= gSaveBlock2Ptr->frontier.towerWinStreaks[facility][FRONTIER_LVL_OPEN])
             {
@@ -2903,18 +2904,18 @@ void ShowFrontierGamblerLookingMessage(void)
 {
     static const u8 *const sFrontierGamblerLookingMessages[] = 
     {
-        BattleFrontier_Lounge3_Text_262261,
-        BattleFrontier_Lounge3_Text_26230D,
-        BattleFrontier_Lounge3_Text_2623B9,
-        BattleFrontier_Lounge3_Text_262464,
-        BattleFrontier_Lounge3_Text_26250E,
-        BattleFrontier_Lounge3_Text_2625B8,
-        BattleFrontier_Lounge3_Text_26266A,
-        BattleFrontier_Lounge3_Text_26271C,
-        BattleFrontier_Lounge3_Text_2627C9,
-        BattleFrontier_Lounge3_Text_262876,
-        BattleFrontier_Lounge3_Text_26291A,
-        BattleFrontier_Lounge3_Text_2629BC,
+        BattleFrontier_Lounge3_Text_ChallengeBattleTowerSingle,
+        BattleFrontier_Lounge3_Text_ChallengeBattleTowerDouble,
+        BattleFrontier_Lounge3_Text_ChallengeBattleTowerMulti,
+        BattleFrontier_Lounge3_Text_ChallengeBattleDomeSingle,
+        BattleFrontier_Lounge3_Text_ChallengeBattleDomeDouble,
+        BattleFrontier_Lounge3_Text_ChallengeBattleFactorySingle,
+        BattleFrontier_Lounge3_Text_ChallengeBattleFactoryDouble,
+        BattleFrontier_Lounge3_Text_ChallengeBattlePalaceSingle,
+        BattleFrontier_Lounge3_Text_ChallengeBattlePalaceDouble,
+        BattleFrontier_Lounge3_Text_ChallengeBattleArena,
+        BattleFrontier_Lounge3_Text_ChallengeBattlePike,
+        BattleFrontier_Lounge3_Text_ChallengeBattlePyramid,
     };
 
     u16 challenge = VarGet(VAR_FRONTIER_GAMBLER_CHALLENGE);
@@ -2926,18 +2927,18 @@ void ShowFrontierGamblerGoMessage(void)
 {
     static const u8 *const sFrontierGamblerGoMessages[] = 
     {
-        BattleFrontier_Lounge3_Text_262C04,
-        BattleFrontier_Lounge3_Text_262C90,
-        BattleFrontier_Lounge3_Text_262D1C,
-        BattleFrontier_Lounge3_Text_262DA7,
-        BattleFrontier_Lounge3_Text_262E34,
-        BattleFrontier_Lounge3_Text_262EC1,
-        BattleFrontier_Lounge3_Text_262F56,
-        BattleFrontier_Lounge3_Text_262FEB,
-        BattleFrontier_Lounge3_Text_263078,
-        BattleFrontier_Lounge3_Text_263105,
-        BattleFrontier_Lounge3_Text_26318C,
-        BattleFrontier_Lounge3_Text_263211,
+        BattleFrontier_Lounge3_Text_GetToBattleTowerSingle,
+        BattleFrontier_Lounge3_Text_GetToBattleTowerDouble,
+        BattleFrontier_Lounge3_Text_GetToBattleTowerMulti,
+        BattleFrontier_Lounge3_Text_GetToBattleDomeSingle,
+        BattleFrontier_Lounge3_Text_GetToBattleDomeDouble,
+        BattleFrontier_Lounge3_Text_GetToBattleFactorySingle,
+        BattleFrontier_Lounge3_Text_GetToBattleFactoryDouble,
+        BattleFrontier_Lounge3_Text_GetToBattlePalaceSingle,
+        BattleFrontier_Lounge3_Text_GetToBattlePalaceDouble,
+        BattleFrontier_Lounge3_Text_GetToBattleArena,
+        BattleFrontier_Lounge3_Text_GetToBattlePike,
+        BattleFrontier_Lounge3_Text_GetToBattlePyramid,
     };
 
     ShowFieldMessage(sFrontierGamblerGoMessages[VarGet(VAR_FRONTIER_GAMBLER_SET_CHALLENGE)]);
@@ -3212,31 +3213,31 @@ static void ShowBattleFrontierTutorMoveDescription(u8 menu, u16 selection)
 {
     static const u8 *const sBattleFrontier_TutorMoveDescriptions1[] = 
     {
-        BattleFrontier_Lounge7_Text_265E30,
-        BattleFrontier_Lounge7_Text_265E5B,
-        BattleFrontier_Lounge7_Text_265E8A,
-        BattleFrontier_Lounge7_Text_265EC0,
-        BattleFrontier_Lounge7_Text_265EED,
-        BattleFrontier_Lounge7_Text_265F1C,
-        BattleFrontier_Lounge7_Text_265F47,
-        BattleFrontier_Lounge7_Text_265F77,
-        BattleFrontier_Lounge7_Text_265FAA,
-        BattleFrontier_Lounge7_Text_265FDD,
+        BattleFrontier_Lounge7_Text_SoftboiledDesc,
+        BattleFrontier_Lounge7_Text_SeismicTossDesc,
+        BattleFrontier_Lounge7_Text_DreamEaterDesc,
+        BattleFrontier_Lounge7_Text_MegaPunchDesc,
+        BattleFrontier_Lounge7_Text_MegaKickDesc,
+        BattleFrontier_Lounge7_Text_BodySlamDesc,
+        BattleFrontier_Lounge7_Text_RockSlideDesc,
+        BattleFrontier_Lounge7_Text_CounterDesc,
+        BattleFrontier_Lounge7_Text_ThunderWaveDesc,
+        BattleFrontier_Lounge7_Text_SwordsDanceDesc,
         gText_Exit,
     };
 
     static const u8 *const sBattleFrontier_TutorMoveDescriptions2[] = 
     {
-        BattleFrontier_Lounge7_Text_26600A,
-        BattleFrontier_Lounge7_Text_26603E,
-        BattleFrontier_Lounge7_Text_266070,
-        BattleFrontier_Lounge7_Text_2660A6,
-        BattleFrontier_Lounge7_Text_2660D0,
-        BattleFrontier_Lounge7_Text_2660FF,
-        BattleFrontier_Lounge7_Text_26612D,
-        BattleFrontier_Lounge7_Text_26615F,
-        BattleFrontier_Lounge7_Text_266185,
-        BattleFrontier_Lounge7_Text_2661B5,
+        BattleFrontier_Lounge7_Text_DefenseCurlDesc,
+        BattleFrontier_Lounge7_Text_SnoreDesc,
+        BattleFrontier_Lounge7_Text_MudSlapDesc,
+        BattleFrontier_Lounge7_Text_SwiftDesc,
+        BattleFrontier_Lounge7_Text_IcyWindDesc,
+        BattleFrontier_Lounge7_Text_EndureDesc,
+        BattleFrontier_Lounge7_Text_PsychUpDesc,
+        BattleFrontier_Lounge7_Text_IcePunchDesc,
+        BattleFrontier_Lounge7_Text_ThunderPunchDesc,
+        BattleFrontier_Lounge7_Text_FirePunchDesc,
         gText_Exit,
     };
 
@@ -4018,28 +4019,72 @@ bool8 InPokemonCenter(void)
     return FALSE;
 }
 
+/*  Summary of the Lilycove Trainer Fan Club, because it's a little messy
+    
+    ## The Fan Club room itself
+    There are initially 4 members of the Fan Club (+ an interviewer), none of whom are fans of the player
+    After becoming the champion there will be 8 members of the Fan Club, 3 of whom are automatically fans of the player
+    After this point, if a club member is a fan of the player they will sit at the front table and comment on the player
+    If they are not fans of the player, they will sit at the far table and can make comments about a different trainer (see BufferFanClubTrainerName)
+    
+    ## Gaining/losing fans
+    After every link battle the player will gain a fan if they won, or lose a fan if they lost
+    If the player has at least 3 fans, this is the only way to gain fans
+    If the player has fewer than 3 fans, they may also gain fans by completing certain tasks enough times (see TryGainNewFanFromCounter)
+    If the player has at least 5 fans, they can lose a fan every 12 real-time hours, or more often if the timer variable is reset (see TryLoseFansFromPlayTime)
+    If the player has only 1 fan left it cannot be lost
+
+    ## Variables
+    VAR_FANCLUB_FAN_COUNTER, a bitfield for tracking the fans
+      Bits  1-7: Counter for when to add new fans
+      Bit     8: Flag set after receiving the initial 3 fans
+      Bits 9-16: Flags for each of the 8 club members, set to 1 when theyre a fan of the player and 0 when theyre not
+
+    VAR_FANCLUB_LOSE_FAN_TIMER, a timer for when to lose fans
+      Compared against playTimeHours. When theyre equal, a fan is ready to be lost
+      For every fan thats lost this way 12 hours are added to the timer
+
+    VAR_LILYCOVE_FAN_CLUB_STATE
+      0: Player is not the champion yet
+      1: Player is the champion, ready to meet their initial fans
+      2: Player has met their initial fans
+*/
+
+#define FANCLUB_BITFIELD (gSaveBlock1Ptr->vars[VAR_FANCLUB_FAN_COUNTER - VARS_START])
+#define FANCLUB_COUNTER    0x007F
+#define FANCLUB_FAN_FLAGS  0xFF80
+
+#define GET_TRAINER_FAN_CLUB_FLAG(flag) (FANCLUB_BITFIELD >> (flag) & 1)
+#define SET_TRAINER_FAN_CLUB_FLAG(flag) (FANCLUB_BITFIELD |= 1 << (flag))
+#define FLIP_TRAINER_FAN_CLUB_FLAG(flag)(FANCLUB_BITFIELD ^= 1 << (flag))
+
+#define GET_TRAINER_FAN_CLUB_COUNTER        (FANCLUB_BITFIELD & FANCLUB_COUNTER)
+#define SET_TRAINER_FAN_CLUB_COUNTER(count) (FANCLUB_BITFIELD = (FANCLUB_BITFIELD & FANCLUB_FAN_FLAGS) | (count))
+#define INCR_TRAINER_FAN_CLUB_COUNTER(count)(FANCLUB_BITFIELD += (count))
+#define CLEAR_TRAINER_FAN_CLUB_COUNTER      (FANCLUB_BITFIELD &= ~(FANCLUB_COUNTER))
+
 void ResetFanClub(void)
 {
-    gSaveBlock1Ptr->vars[VAR_FANCLUB_UNKNOWN_1 - VARS_START] = 0;
-    gSaveBlock1Ptr->vars[VAR_FANCLUB_UNKNOWN_2 - VARS_START] = 0;
+    gSaveBlock1Ptr->vars[VAR_FANCLUB_FAN_COUNTER - VARS_START] = 0;
+    gSaveBlock1Ptr->vars[VAR_FANCLUB_LOSE_FAN_TIMER - VARS_START] = 0;
 }
 
-void sub_813BA30(void)
+void TryLoseFansFromPlayTimeAfterLinkBattle(void)
 {
-    if (sub_813BF44() != 0)
+    if (DidPlayerGetFirstFans())
     {
-        UpdateMovedLilycoveFanClubMembers();
-        gSaveBlock1Ptr->vars[VAR_FANCLUB_UNKNOWN_2 - VARS_START] = gSaveBlock2Ptr->playTimeHours;
+        TryLoseFansFromPlayTime();
+        gSaveBlock1Ptr->vars[VAR_FANCLUB_LOSE_FAN_TIMER - VARS_START] = gSaveBlock2Ptr->playTimeHours;
     }
 }
 
 void UpdateTrainerFanClubGameClear(void)
 {
-    if (!((gSaveBlock1Ptr->vars[VAR_FANCLUB_UNKNOWN_1 - VARS_START] >> 7) & 1))
+    if (!GET_TRAINER_FAN_CLUB_FLAG(FANCLUB_GOT_FIRST_FANS))
     {
-        sub_813BF60();
-        sub_813BD84();
-        gSaveBlock1Ptr->vars[VAR_FANCLUB_UNKNOWN_2 - VARS_START] = gSaveBlock2Ptr->playTimeHours;
+        SetPlayerGotFirstFans();
+        SetInitialFansOfPlayer();
+        gSaveBlock1Ptr->vars[VAR_FANCLUB_LOSE_FAN_TIMER - VARS_START] = gSaveBlock2Ptr->playTimeHours;
         FlagClear(FLAG_HIDE_FANCLUB_OLD_LADY);
         FlagClear(FLAG_HIDE_FANCLUB_BOY);
         FlagClear(FLAG_HIDE_FANCLUB_LITTLE_BOY);
@@ -4049,186 +4094,216 @@ void UpdateTrainerFanClubGameClear(void)
     }
 }
 
-u8 sub_813BADC(u8 a0)
+// If the player has < 3 fans, gain a new fan whenever the counter reaches 20+
+// Defeating Drake or participating in a Link Contest increments the counter by 2
+// Participating at Battle Tower or in a Secret Base battle increments the counter by 1
+u8 TryGainNewFanFromCounter(u8 incrementId)
 {
-    static const u8 gUnknown_085B3470[] = { 0x02, 0x01, 0x02, 0x01 };
+    static const u8 sCounterIncrements[] = { 2, 1, 2, 1 };
 
     if (VarGet(VAR_LILYCOVE_FAN_CLUB_STATE) == 2)
     {
-        if ((gSaveBlock1Ptr->vars[VAR_FANCLUB_UNKNOWN_1 - VARS_START] & 0x7F) + gUnknown_085B3470[a0] > 19)
+        if (GET_TRAINER_FAN_CLUB_COUNTER + sCounterIncrements[incrementId] > 19)
         {
-            if (GetNumMovedLilycoveFanClubMembers() < 3)
+            if (GetNumFansOfPlayerInTrainerFanClub() < 3)
             {
-                sub_813BB74();
-                gSaveBlock1Ptr->vars[VAR_FANCLUB_UNKNOWN_1 - VARS_START] &= 0xFF80;
+                PlayerGainRandomTrainerFan();
+                CLEAR_TRAINER_FAN_CLUB_COUNTER;
             }
             else
             {
-                gSaveBlock1Ptr->vars[VAR_FANCLUB_UNKNOWN_1 - VARS_START] = (gSaveBlock1Ptr->vars[VAR_FANCLUB_UNKNOWN_1 - VARS_START] & 0xFF80) | 0x14;
+                SET_TRAINER_FAN_CLUB_COUNTER(20);
             }
         }
         else
         {
-            gSaveBlock1Ptr->vars[VAR_FANCLUB_UNKNOWN_1 - VARS_START] += gUnknown_085B3470[a0];
+            INCR_TRAINER_FAN_CLUB_COUNTER(sCounterIncrements[incrementId]);
         }
     }
 
-    return gSaveBlock1Ptr->vars[VAR_FANCLUB_UNKNOWN_1 - VARS_START] & 0x7F;
+    return GET_TRAINER_FAN_CLUB_COUNTER;
 }
 
-static u16 sub_813BB74(void)
+
+// Loop through the fan club members, and if theyre not a fan of the player there is a 50% chance for them to become a fan
+// Stops when a fan is gained
+// If no new fan was gained while looping, the last non-fan in the list becomes a fan
+// If all the members are already fans of the player then this redundantly sets the first fan in the list to be a fan
+static u16 PlayerGainRandomTrainerFan(void)
 {
-    static const u8 gUnknown_085B3474[] = { 0x08, 0x09, 0x0a, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f };
+    static const u8 sFanClubMemberIds[NUM_TRAINER_FAN_CLUB_MEMBERS] = 
+    { 
+        FANCLUB_MEMBER1, 
+        FANCLUB_MEMBER2, 
+        FANCLUB_MEMBER3, 
+        FANCLUB_MEMBER4, 
+        FANCLUB_MEMBER5, 
+        FANCLUB_MEMBER6,
+        FANCLUB_MEMBER7, 
+        FANCLUB_MEMBER8 
+    };
 
     u8 i;
-    u8 retVal = 0;
+    u8 idx = 0;
 
-    for (i = 0; i < 8; i++)
+    for (i = 0; i < ARRAY_COUNT(sFanClubMemberIds); i++)
     {
-        if (!((gSaveBlock1Ptr->vars[VAR_FANCLUB_UNKNOWN_1 - VARS_START] >> gUnknown_085B3474[i]) & 1))
+        if (!GET_TRAINER_FAN_CLUB_FLAG(sFanClubMemberIds[i]))
         {
-            retVal = i;
-            if ((Random() & 1) != 0)
+            idx = i;
+            if (Random() & 1)
             {
-                gSaveBlock1Ptr->vars[VAR_FANCLUB_UNKNOWN_1 - VARS_START] |= 1 << gUnknown_085B3474[retVal];
-                return retVal;
+                SET_TRAINER_FAN_CLUB_FLAG(sFanClubMemberIds[idx]);
+                return idx;
             }
         }
     }
-    gSaveBlock1Ptr->vars[VAR_FANCLUB_UNKNOWN_1 - VARS_START] |= 1 << gUnknown_085B3474[retVal];
-    return retVal;
+    SET_TRAINER_FAN_CLUB_FLAG(sFanClubMemberIds[idx]);
+    return idx;
 }
 
-static u16 sub_813BC00(void)
+// Loops through the fan club members, and if theyre a fan of the player there is a 50% chance for them to stop being a fan
+// Stops if a fan is removed, or if the player has only one fan left
+// If no fan was lost while looping, the last current fan in the list will stop being a fan
+static u16 PlayerLoseRandomTrainerFan(void)
 {
-    static const u8 gUnknown_085B347C[] = { 0x08, 0x0d, 0x0e, 0x0b, 0x0a, 0x0c, 0x0f, 0x09 };
+    static const u8 sFanClubMemberIds[NUM_TRAINER_FAN_CLUB_MEMBERS] = 
+    { 
+        FANCLUB_MEMBER1, 
+        FANCLUB_MEMBER6, 
+        FANCLUB_MEMBER7, 
+        FANCLUB_MEMBER4, 
+        FANCLUB_MEMBER3, 
+        FANCLUB_MEMBER5, 
+        FANCLUB_MEMBER8, 
+        FANCLUB_MEMBER2 
+    };
 
     u8 i;
-    u8 retVal = 0;
+    u8 idx = 0;
 
-    if (GetNumMovedLilycoveFanClubMembers() == 1)
+    if (GetNumFansOfPlayerInTrainerFanClub() == 1)
     {
         return 0;
     }
 
-    for (i = 0; i < 8; i++)
+    for (i = 0; i < ARRAY_COUNT(sFanClubMemberIds); i++)
     {
-        if (((gSaveBlock1Ptr->vars[VAR_FANCLUB_UNKNOWN_1 - VARS_START] >> gUnknown_085B347C[i]) & 1) != 0)
+        if (GET_TRAINER_FAN_CLUB_FLAG(sFanClubMemberIds[i]))
         {
-            retVal = i;
-            if ((Random() & 1) != 0)
+            idx = i;
+            if (Random() & 1)
             {
-                gSaveBlock1Ptr->vars[VAR_FANCLUB_UNKNOWN_1 - VARS_START] ^= 1 << gUnknown_085B347C[retVal];
-                return retVal;
+                FLIP_TRAINER_FAN_CLUB_FLAG(sFanClubMemberIds[idx]);
+                return idx;
             }
         }
     }
 
-    if (((gSaveBlock1Ptr->vars[VAR_FANCLUB_UNKNOWN_1 - VARS_START] >> gUnknown_085B347C[retVal]) & 1))
+    if (GET_TRAINER_FAN_CLUB_FLAG(sFanClubMemberIds[idx]))
     {
-        gSaveBlock1Ptr->vars[VAR_FANCLUB_UNKNOWN_1 - VARS_START] ^= 1 << gUnknown_085B347C[retVal];
+        FLIP_TRAINER_FAN_CLUB_FLAG(sFanClubMemberIds[idx]);
     }
 
-    return retVal;
+    return idx;
 }
 
-u16 GetNumMovedLilycoveFanClubMembers(void)
+u16 GetNumFansOfPlayerInTrainerFanClub(void)
 {
     u8 i;
-    u8 retVal = 0;
+    u8 numFans = 0;
 
-    for (i = 0; i < 8; i++)
+    for (i = 0; i < NUM_TRAINER_FAN_CLUB_MEMBERS; i++)
     {
-        if (((gSaveBlock1Ptr->vars[VAR_FANCLUB_UNKNOWN_1 - VARS_START] >> (i + 8)) & 1) != 0)
-        {
-            retVal++;
-        }
+        if (GET_TRAINER_FAN_CLUB_FLAG(i + FANCLUB_MEMBER1))
+            numFans++;
     }
 
-    return retVal;
+    return numFans;
 }
 
-void UpdateMovedLilycoveFanClubMembers(void)
+// If the player has > 5 fans in the Trainer Fan Club, then lose 1 fan for every 12 hours since the last fan loss / timer reset
+void TryLoseFansFromPlayTime(void)
 {
     u8 i = 0;
     if (gSaveBlock2Ptr->playTimeHours < 999)
     {
         while (TRUE)
         {
-            if (GetNumMovedLilycoveFanClubMembers() < 5)
+            if (GetNumFansOfPlayerInTrainerFanClub() < 5)
             {
-                gSaveBlock1Ptr->vars[VAR_FANCLUB_UNKNOWN_2 - VARS_START] = gSaveBlock2Ptr->playTimeHours;
+                gSaveBlock1Ptr->vars[VAR_FANCLUB_LOSE_FAN_TIMER - VARS_START] = gSaveBlock2Ptr->playTimeHours;
                 break;
             }
-            else if (i == 8)
+            else if (i == NUM_TRAINER_FAN_CLUB_MEMBERS)
             {
                 break;
             }
-            else if (gSaveBlock2Ptr->playTimeHours - gSaveBlock1Ptr->vars[VAR_FANCLUB_UNKNOWN_2 - VARS_START] < 12)
+            else if (gSaveBlock2Ptr->playTimeHours - gSaveBlock1Ptr->vars[VAR_FANCLUB_LOSE_FAN_TIMER - VARS_START] < 12)
             {
                 return;
             }
-            sub_813BC00();
-            gSaveBlock1Ptr->vars[VAR_FANCLUB_UNKNOWN_2 - VARS_START] += 12;
+            PlayerLoseRandomTrainerFan();
+            gSaveBlock1Ptr->vars[VAR_FANCLUB_LOSE_FAN_TIMER - VARS_START] += 12;
             i++;
         }
     }
 }
 
-bool8 ShouldMoveLilycoveFanClubMember(void)
+bool8 IsFanClubMemberFanOfPlayer(void)
 {
-    return (gSaveBlock1Ptr->vars[VAR_FANCLUB_UNKNOWN_1 - VARS_START] >> gSpecialVar_0x8004) & 1;
+    return GET_TRAINER_FAN_CLUB_FLAG(gSpecialVar_0x8004);
 }
 
-static void sub_813BD84(void)
+static void SetInitialFansOfPlayer(void)
 {
-    gSaveBlock1Ptr->vars[VAR_FANCLUB_UNKNOWN_1 - VARS_START] |= 0x2000;
-    gSaveBlock1Ptr->vars[VAR_FANCLUB_UNKNOWN_1 - VARS_START] |= 0x100;
-    gSaveBlock1Ptr->vars[VAR_FANCLUB_UNKNOWN_1 - VARS_START] |= 0x400;
+    SET_TRAINER_FAN_CLUB_FLAG(FANCLUB_MEMBER6);
+    SET_TRAINER_FAN_CLUB_FLAG(FANCLUB_MEMBER1);
+    SET_TRAINER_FAN_CLUB_FLAG(FANCLUB_MEMBER3);
 }
 
-void BufferStreakTrainerText(void)
+void BufferFanClubTrainerName(void)
 {
-    u8 a = 0;
-    u8 b = 0;
+    u8 whichLinkTrainer = 0;
+    u8 whichNPCTrainer = 0;
     switch (gSpecialVar_0x8004)
     {
-        case 8:
+        case FANCLUB_MEMBER1:
             break;
-        case 9:
+        case FANCLUB_MEMBER2:
             break;
-        case 10:
-            a = 0;
-            b = 3;
+        case FANCLUB_MEMBER3:
+            whichLinkTrainer = 0;
+            whichNPCTrainer = 3;
             break;
-        case 11:
-            a = 0;
-            b = 1;
+        case FANCLUB_MEMBER4:
+            whichLinkTrainer = 0;
+            whichNPCTrainer = 1;
             break;
-        case 12:
-            a = 1;
-            b = 0;
+        case FANCLUB_MEMBER5:
+            whichLinkTrainer = 1;
+            whichNPCTrainer = 0;
             break;
-        case 13:
-            a = 0;
-            b = 4;
+        case FANCLUB_MEMBER6:
+            whichLinkTrainer = 0;
+            whichNPCTrainer = 4;
             break;
-        case 14:
-            a = 1;
-            b = 5;
+        case FANCLUB_MEMBER7:
+            whichLinkTrainer = 1;
+            whichNPCTrainer = 5;
             break;
-        case 15:
+        case FANCLUB_MEMBER8:
             break;
     }
-    sub_813BE30(&gSaveBlock1Ptr->linkBattleRecords, a, b);
+    BufferFanClubTrainerName_(&gSaveBlock1Ptr->linkBattleRecords, whichLinkTrainer, whichNPCTrainer);
 }
 
-static void sub_813BE30(struct LinkBattleRecords *linkRecords, u8 a, u8 b)
+static void BufferFanClubTrainerName_(struct LinkBattleRecords *linkRecords, u8 whichLinkTrainer, u8 whichNPCTrainer)
 {
-    struct LinkBattleRecord *record = &linkRecords->entries[a];
+    struct LinkBattleRecord *record = &linkRecords->entries[whichLinkTrainer];
     if (record->name[0] == EOS)
     {
-        switch (b)
+        switch (whichNPCTrainer)
         {
             case 0:
                 StringCopy(gStringVar1, gText_Wallace);
@@ -4255,39 +4330,36 @@ static void sub_813BE30(struct LinkBattleRecords *linkRecords, u8 a, u8 b)
     }
     else
     {
-        StringCopyN(gStringVar1, record->name, 7);
-        gStringVar1[7] = EOS;
-        ConvertInternationalString(gStringVar1, linkRecords->languages[a]);
+        StringCopyN(gStringVar1, record->name, PLAYER_NAME_LENGTH);
+        gStringVar1[PLAYER_NAME_LENGTH] = EOS;
+        ConvertInternationalString(gStringVar1, linkRecords->languages[whichLinkTrainer]);
     }
 }
 
-void sub_813BF10(void)
+void UpdateTrainerFansAfterLinkBattle(void)
 {
     if (VarGet(VAR_LILYCOVE_FAN_CLUB_STATE) == 2)
     {
-        sub_813BA30();
-        if (gBattleOutcome == 1)
-        {
-            sub_813BB74();
-        }
+        TryLoseFansFromPlayTimeAfterLinkBattle();
+        if (gBattleOutcome == B_OUTCOME_WON)
+            PlayerGainRandomTrainerFan();
         else
-        {
-            sub_813BC00();
-        }
+            PlayerLoseRandomTrainerFan();
     }
 }
 
-static bool8 sub_813BF44(void)
+static bool8 DidPlayerGetFirstFans(void)
 {
-    return (gSaveBlock1Ptr->vars[VAR_FANCLUB_UNKNOWN_1 - VARS_START] >> 7) & 1;
+    return GET_TRAINER_FAN_CLUB_FLAG(FANCLUB_GOT_FIRST_FANS);
 }
 
-void sub_813BF60(void)
+void SetPlayerGotFirstFans(void)
 {
-    gSaveBlock1Ptr->vars[VAR_FANCLUB_UNKNOWN_1 - VARS_START] |= 0x80;
+    SET_TRAINER_FAN_CLUB_FLAG(FANCLUB_GOT_FIRST_FANS);
 }
 
-u8 sub_813BF7C(void)
+// return value is always ignored
+u8 Script_TryGainNewFanFromCounter(void)
 {
-    return sub_813BADC(gSpecialVar_0x8004);
+    return TryGainNewFanFromCounter(gSpecialVar_0x8004);
 }

@@ -9,7 +9,7 @@ BattleFrontier_BattlePikeCorridor_MapScript2_25C77C: @ 825C77C
 
 BattleFrontier_BattlePikeCorridor_EventScript_25C786:: @ 825C786
 	delay 16
-	setvar VAR_0x8004, 2
+	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_2
 	setvar VAR_0x8005, 2
 	setvar VAR_0x8006, 1
 	special CallFrontierUtilFunc
@@ -27,7 +27,7 @@ BattleFrontier_BattlePikeCorridor_EventScript_25C786:: @ 825C786
 	releaseall
 	applymovement EVENT_OBJ_ID_PLAYER, BattleFrontier_BattlePikeCorridor_Movement_25C80E
 	waitmovement 0
-	setvar VAR_0x8004, 2
+	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_2
 	setvar VAR_0x8005, 0
 	setvar VAR_0x8006, 99
 	special CallFrontierUtilFunc

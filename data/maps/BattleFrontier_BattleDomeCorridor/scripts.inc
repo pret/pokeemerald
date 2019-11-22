@@ -9,7 +9,7 @@ BattleFrontier_BattleDomeCorridor_MapScript2_24B104: @ 824B104
 BattleFrontier_BattleDomeCorridor_EventScript_24B10E:: @ 824B10E
 	delay 16
 	setvar VAR_TEMP_0, 1
-	setvar VAR_0x8004, 1
+	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_1
 	setvar VAR_0x8005, 1
 	special CallFrontierUtilFunc
 	compare VAR_RESULT, 1

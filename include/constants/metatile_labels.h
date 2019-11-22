@@ -149,8 +149,8 @@
 #define METATILE_Fortree_SecretBase_LongGrass_BottomLeft  0x281
 #define METATILE_Fortree_SecretBase_LongGrass_BottomMid   0x282
 #define METATILE_Fortree_SecretBase_LongGrass_BottomRight 0x283
-#define METATILE_Fortree_WoodBridge_Kecleon0              0x297
-#define METATILE_Fortree_WoodBridge_Kecleon1              0x29F
+#define METATILE_Fortree_WoodBridge1_Top                  0x297
+#define METATILE_Fortree_WoodBridge1_Bottom               0x29F
 
 // gTileset_Sootopolis
 #define METATILE_Sootopolis_Door_Closed    0x248

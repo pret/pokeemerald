@@ -100,11 +100,11 @@ BattleFrontier_BattlePikeThreePathRoom_EventScript_2C3F6F:: @ 82C3F6F
 	setvar VAR_0x8005, 1
 	copyvar VAR_0x8006, VAR_RESULT
 	special CallBattlePikeFunction
-	setvar VAR_0x8004, 1
+	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_1
 	setvar VAR_0x8005, 2
 	special CallFrontierUtilFunc
 	addvar VAR_RESULT, 1
-	setvar VAR_0x8004, 2
+	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_2
 	setvar VAR_0x8005, 2
 	copyvar VAR_0x8006, VAR_RESULT
 	special CallFrontierUtilFunc
@@ -181,11 +181,11 @@ BattleFrontier_BattlePikeRandomRoom1_EventScript_2C40A2:: @ 82C40A2
 	setvar VAR_0x8005, 1
 	copyvar VAR_0x8006, VAR_RESULT
 	special CallBattlePikeFunction
-	setvar VAR_0x8004, 1
+	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_1
 	setvar VAR_0x8005, 2
 	special CallFrontierUtilFunc
 	addvar VAR_RESULT, 1
-	setvar VAR_0x8004, 2
+	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_2
 	setvar VAR_0x8005, 2
 	copyvar VAR_0x8006, VAR_RESULT
 	special CallFrontierUtilFunc
@@ -245,11 +245,11 @@ BattleFrontier_BattlePikeRandomRoom3_EventScript_2C4174:: @ 82C4174
 	setvar VAR_0x8005, 1
 	copyvar VAR_0x8006, VAR_RESULT
 	special CallBattlePikeFunction
-	setvar VAR_0x8004, 1
+	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_1
 	setvar VAR_0x8005, 2
 	special CallFrontierUtilFunc
 	addvar VAR_RESULT, 1
-	setvar VAR_0x8004, 2
+	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_2
 	setvar VAR_0x8005, 2
 	copyvar VAR_0x8006, VAR_RESULT
 	special CallFrontierUtilFunc
@@ -276,7 +276,7 @@ BattleFrontier_BattlePikeRandomRoom3_EventScript_2C420D:: @ 82C420D
 	end
 
 BattleFrontier_BattlePike_EventScript_Retire:: @ 82C4222
-	setvar VAR_0x8004, 2
+	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_2
 	setvar VAR_0x8005, 0
 	setvar VAR_0x8006, 4
 	special CallFrontierUtilFunc
@@ -287,7 +287,7 @@ BattleFrontier_BattlePike_EventScript_Retire:: @ 82C4222
 BattleFrontier_BattlePikeRandomRoom1_MapScript1_2C423E: @ 82C423E
 BattleFrontier_BattlePikeThreePathRoom_MapScript1_2C423E: @ 82C423E
 	setorcopyvar VAR_0x8006, VAR_RESULT
-	setvar VAR_0x8004, 1
+	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_1
 	setvar VAR_0x8005, 0
 	special CallFrontierUtilFunc
 	compare VAR_RESULT, 2
@@ -302,7 +302,7 @@ BattleFrontier_BattlePikeThreePathRoom_EventScript_2C426B:: @ 82C426B
 
 BattleFrontier_BattlePikeRandomRoom3_EventScript_2C4271:: @ 82C4271
 BattleFrontier_BattlePikeThreePathRoom_EventScript_2C4271:: @ 82C4271
-	setvar VAR_0x8004, 21
+	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_21
 	special CallFrontierUtilFunc
 	return
 

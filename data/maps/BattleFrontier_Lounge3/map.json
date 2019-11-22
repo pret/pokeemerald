@@ -24,7 +24,7 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "BattleFrontier_Lounge3_EventScript_261D83",
+      "script": "BattleFrontier_Lounge3_EventScript_Gambler",
       "flag": "0"
     },
     {
@@ -37,7 +37,7 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "BattleFrontier_Lounge3_EventScript_261FE1",
+      "script": "BattleFrontier_Lounge3_EventScript_FatMan",
       "flag": "0"
     },
     {
@@ -50,7 +50,7 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "BattleFrontier_Lounge3_EventScript_261FC1",
+      "script": "BattleFrontier_Lounge3_EventScript_Woman",
       "flag": "0"
     },
     {
@@ -63,7 +63,7 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "BattleFrontier_Lounge3_EventScript_261FD1",
+      "script": "BattleFrontier_Lounge3_EventScript_PokefanF",
       "flag": "0"
     },
     {
@@ -76,7 +76,7 @@
       "movement_range_y": 3,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "BattleFrontier_Lounge3_EventScript_261FB8",
+      "script": "BattleFrontier_Lounge3_EventScript_Man",
       "flag": "0"
     }
   ],
