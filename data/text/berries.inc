@@ -3,14 +3,14 @@ PetalburgCity_Gym_Text_GiveEnigmaBerry: @ 82A6D3D
 	.string "I just received a very rare BERRY.\n"
 	.string "I'd like you to have it.$"
 
-Route104_Text_2A6D86: @ 82A6D86
+Route104_Text_PlantBerriesInSoilTakeThis: @ 82A6D86
 	.string "If you see BERRIES growing in loamy\n"
 	.string "soil, feel free to take them.\p"
 	.string "But make sure you plant a BERRY in the\n"
 	.string "same spot. That's common courtesy.\p"
 	.string "Here, I'll share this with you.$"
 
-Route104_Text_2A6E32: @ 82A6E32
+Route104_Text_TrainersOftenMakeMonHoldBerries: @ 82A6E32
 	.string "The way you look, you must be a\n"
 	.string "TRAINER, no?\p"
 	.string "TRAINERS often make POKéMON hold\n"
@@ -18,72 +18,72 @@ Route104_Text_2A6E32: @ 82A6E32
 	.string "It's up to you whether to grow BERRIES\n"
 	.string "or use them.$"
 
-Route111_Text_2A6EBD: @ 82A6EBD
+Route111_Text_WateredPlantsEveryDayTakeBerry: @ 82A6EBD
 	.string "I watered the plants every day.\n"
 	.string "They grew lots of flowers.\p"
 	.string "And they gave me lots of BERRIES, too.\p"
 	.string "Here you go!\n"
 	.string "You can have it!$"
 
-Route111_Text_2A6F3D: @ 82A6F3D
+Route111_Text_GoingToTryToMakeDifferentColorBerries: @ 82A6F3D
 	.string "I'm going to try really hard and make\n"
 	.string "BERRIES in different colors.\p"
 	.string "I hope you try hard, too!$"
 
-Route111_Text_2A6F9A: @ 82A6F9A
+Route111_Text_WhatColorBerriesToLookForToday: @ 82A6F9A
 	.string "I wonder what color BERRIES I'll look\n"
 	.string "for today?$"
 
-Route114_Text_2A6FCB: @ 82A6FCB
+Route114_Text_LoveUsingBerryCrushShareBerry: @ 82A6FCB
 	.string "I love using the BERRY CRUSH machine,\n"
 	.string "so I'm collecting BERRIES.\p"
 	.string "I'll share one with you, if you'd like.$"
 
-Route114_Text_2A7034: @ 82A7034
+Route114_Text_TryBerryCrushWithFriends: @ 82A7034
 	.string "You should try the BERRY CRUSH\n"
 	.string "machine with your friends.$"
 
-Route114_Text_2A706E: @ 82A706E
+Route114_Text_FunToThinkAboutBerries: @ 82A706E
 	.string "Which BERRY should be planted?\n"
 	.string "Should you use or hoard BERRIES?\p"
 	.string "It's fun to think about.$"
 
-Route120_Text_2A70C7: @ 82A70C7
+Route120_Text_BerriesExpressionOfLoveIsntIt: @ 82A70C7
 	.string "BERRIES grow by soaking up sunlight.\p"
 	.string "We help the BERRIES grow by watering\n"
 	.string "them regularly.\p"
 	.string "It's an expression of love, isn't it?$"
 
-Route120_Text_2A7147: @ 82A7147
+Route120_Text_YesYouUnderstand: @ 82A7147
 	.string "Yes, yes.\n"
 	.string "You understand what I mean.\p"
 	.string "You should take this.$"
 
-Route120_Text_2A7183: @ 82A7183
+Route120_Text_MakeYourOwnImpressions: @ 82A7183
 	.string "Oh… But it is important to make your\n"
 	.string "own impressions, I guess…\p"
 	.string "You can have this.$"
 
-Route120_Text_2A71D5: @ 82A71D5
+Route120_Text_BerryIsRareRaiseItWithCare: @ 82A71D5
 	.string "I think that BERRY is rare.\n"
 	.string "I hope you raise it with loving care.$"
 
-Route120_Text_2A7217: @ 82A7217
+Route120_Text_IllGetMoreBerriesFromBerryMaster: @ 82A7217
 	.string "I'll get more BERRIES from\n"
 	.string "the BERRY MASTER.$"
 
-LilycoveCity_Text_2A7244: @ 82A7244
+LilycoveCity_Text_BerrySuitsYou: @ 82A7244
 	.string "When it gets right down to it…\p"
 	.string "The same way suits suit me perfectly,\n"
 	.string "a crisp breeze suits the sea.\p"
 	.string "And you, a BERRY suits you to a “T”…\p"
 	.string "Why should that be so?$"
 
-LilycoveCity_Text_2A72E3: @ 82A72E3
+LilycoveCity_Text_BecauseYoureTrainer: @ 82A72E3
 	.string "When it gets right down to it…\p"
 	.string "It's because you're a TRAINER!$"
 
-LilycoveCity_Text_2A7321: @ 82A7321
+LilycoveCity_Text_PokeblocksSuitPokemon: @ 82A7321
 	.string "When it gets right down to it…\p"
 	.string "The way dignified simplicity suits me,\n"
 	.string "{POKEBLOCK}S perfectly suit POKéMON.$"
@@ -199,7 +199,7 @@ Route104_PrettyPetalFlowerShop_Text_MachineMixesBerries: @ 82A7AF3
 	.string "for POKéMON.\p"
 	.string "I want some candy, too.$"
 
-SootopolisCity_Text_2A7BB0: @ 82A7BB0
+SootopolisCity_Text_NameIsKiriHaveOneOfThese: @ 82A7BB0
 	.string "Hi, what's your name?\p"
 	.string "… … …  … … …  … … …\n"
 	.string "Okay. That's nice!\p"
@@ -209,26 +209,26 @@ SootopolisCity_Text_2A7BB0: @ 82A7BB0
 	.string "That's what they wished.\p"
 	.string "You can have one of these.$"
 
-SootopolisCity_Text_2A7C7C: @ 82A7C7C
+SootopolisCity_Text_GiveYouThisBerryToo: @ 82A7C7C
 	.string "KIRI will give you this BERRY, too!\n"
 	.string "I really like it lots!$"
 
-SootopolisCity_Text_2A7CB7: @ 82A7CB7
+SootopolisCity_Text_WhatKindOfWishInYourName: @ 82A7CB7
 	.string "I wonder what kind of wish is included\n"
 	.string "in your name.$"
 
-SootopolisCity_Text_2A7CEC: @ 82A7CEC
+SootopolisCity_Text_LikeSeasonBornIn: @ 82A7CEC
 	.string "Spring, summer, autumn, and winter.\p"
 	.string "If you're born in springtime, do you like\n"
 	.string "the spring, and if you're born in the\l"
 	.string "summer, do you like the summer?$"
 
-SootopolisCity_Text_2A7D80: @ 82A7D80
+SootopolisCity_Text_ThenILoveAutumn: @ 82A7D80
 	.string "Then KIRI was born in the autumn,\n"
 	.string "so I love the autumn!\p"
 	.string "Which season do you like?$"
 
-SootopolisCity_Text_2A7DD2: @ 82A7DD2
+SootopolisCity_Text_OhDoesntMatter: @ 82A7DD2
 	.string "Oh…\n"
 	.string "It doesn't matter…\p"
 	.string "There's so much that I want to know…$"

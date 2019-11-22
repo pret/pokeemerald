@@ -63,7 +63,7 @@ SlateportCity_BattleTentBattleRoom_EventScript_2099BE:: @ 82099BE
 	case 1, SlateportCity_BattleTentBattleRoom_EventScript_209A39
 
 SlateportCity_BattleTentCorridor_EventScript_209A1B:: @ 8209A1B
-	setvar VAR_0x8004, 2
+	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_2
 	setvar VAR_0x8005, 0
 	setvar VAR_0x8006, 4
 	special CallFrontierUtilFunc
@@ -72,11 +72,11 @@ SlateportCity_BattleTentCorridor_EventScript_209A1B:: @ 8209A1B
 	waitstate
 
 SlateportCity_BattleTentBattleRoom_EventScript_209A39:: @ 8209A39
-	setvar VAR_0x8004, 1
+	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_1
 	setvar VAR_0x8005, 2
 	special CallFrontierUtilFunc
 	addvar VAR_RESULT, 1
-	setvar VAR_0x8004, 2
+	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_2
 	setvar VAR_0x8005, 2
 	copyvar VAR_0x8006, VAR_RESULT
 	special CallFrontierUtilFunc
@@ -89,7 +89,7 @@ SlateportCity_BattleTentBattleRoom_EventScript_209A39:: @ 8209A39
 
 SlateportCity_BattleTentBattleRoom_EventScript_209A7B:: @ 8209A7B
 SlateportCity_BattleTentCorridor_EventScript_209A7B:: @ 8209A7B
-	setvar VAR_0x8004, 2
+	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_2
 	setvar VAR_0x8005, 0
 	setvar VAR_0x8006, 3
 	special CallFrontierUtilFunc

@@ -749,10 +749,7 @@ Route110_TrickHouseEntrance_EventScript_DoHidingSpotSparkle3:: @ 826A449
 
 Route110_TrickHouseEntrance_EventScript_DoHidingSpotSparkle:: @ 826A459
 	setvar VAR_0x8006, 0
-	setfieldeffectargument 0, VAR_0x8004
-	setfieldeffectargument 1, VAR_0x8005
-	setfieldeffectargument 2, VAR_0x8006
-	dofieldeffect FLDEFF_SPARKLE
+	dofieldeffectsparkle VAR_0x8004, VAR_0x8005, VAR_0x8006
 	waitfieldeffect FLDEFF_SPARKLE
 	delay 10
 	return

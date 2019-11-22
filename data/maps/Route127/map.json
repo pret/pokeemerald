@@ -45,7 +45,7 @@
       "movement_range_y": 0,
       "trainer_type": "1",
       "trainer_sight_or_berry_tree_id": "2",
-      "script": "Route127_EventScript_1F6A35",
+      "script": "Route127_EventScript_Camden",
       "flag": "0"
     },
     {
@@ -58,7 +58,7 @@
       "movement_range_y": 0,
       "trainer_type": "1",
       "trainer_sight_or_berry_tree_id": "4",
-      "script": "Route127_EventScript_1F6A4C",
+      "script": "Route127_EventScript_Donny",
       "flag": "0"
     },
     {
@@ -97,7 +97,7 @@
       "movement_range_y": 1,
       "trainer_type": "1",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route127_EventScript_1F6A63",
+      "script": "Route127_EventScript_Jonah",
       "flag": "0"
     },
     {
@@ -110,7 +110,7 @@
       "movement_range_y": 1,
       "trainer_type": "1",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route127_EventScript_1F6A91",
+      "script": "Route127_EventScript_Roger",
       "flag": "0"
     },
     {
@@ -123,7 +123,7 @@
       "movement_range_y": 1,
       "trainer_type": "1",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route127_EventScript_1F6A7A",
+      "script": "Route127_EventScript_Henry",
       "flag": "0"
     },
     {
@@ -136,7 +136,7 @@
       "movement_range_y": 1,
       "trainer_type": "1",
       "trainer_sight_or_berry_tree_id": "2",
-      "script": "Route127_EventScript_1F6AA8",
+      "script": "Route127_EventScript_Aidan",
       "flag": "0"
     },
     {
@@ -149,7 +149,7 @@
       "movement_range_y": 1,
       "trainer_type": "1",
       "trainer_sight_or_berry_tree_id": "3",
-      "script": "Route127_EventScript_1F6AD6",
+      "script": "Route127_EventScript_Koji",
       "flag": "0"
     },
     {
@@ -162,7 +162,7 @@
       "movement_range_y": 1,
       "trainer_type": "1",
       "trainer_sight_or_berry_tree_id": "2",
-      "script": "Route127_EventScript_1F6ABF",
+      "script": "Route127_EventScript_Athena",
       "flag": "0"
     },
     {

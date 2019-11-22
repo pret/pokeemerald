@@ -87,13 +87,13 @@
 #define LINKTYPE_0x2288              0x2288  // battle?
 #define LINKTYPE_0x3311              0x3311
 #define LINKTYPE_0x3322              0x3322
-#define LINKTYPE_0x4411              0x4411
+#define LINKTYPE_BERRY_BLENDER_SETUP 0x4411
 #define LINKTYPE_BERRY_BLENDER       0x4422
 #define LINKTYPE_0x5501              0x5501  // mystery event
 #define LINKTYPE_0x5502              0x5502  // unused?
 #define LINKTYPE_0x5503              0x5503  // eReader
-#define LINKTYPE_0x6601              0x6601
-#define LINKTYPE_0x6602              0x6602
+#define LINKTYPE_CONTEST_GMODE       0x6601
+#define LINKTYPE_CONTEST_EMODE       0x6602
 
 struct LinkStatus
 {
@@ -290,7 +290,7 @@ void sub_800AF18(u32 status, u8 lastSendQueueCount, u8 lastRecvQueueCount, u8 un
 void sub_800B348(void);
 void sub_800B3A4(u32 who);
 bool32 sub_800A07C(void);
-void sub_800AB98(void);
+void ResetLinkPlayerCount(void);
 void sub_800AA04(u8 a0);
 void sub_800B4C0(void);
 bool32 sub_800B504(void);

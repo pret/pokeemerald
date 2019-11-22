@@ -397,11 +397,11 @@ struct BattleFrontier
     /*0xEBA*/ u16 field_EBA;
     /*0xEBC*/ u32 battlesCount;
     /*0xEC0*/ u16 field_EC0[16];
-    /*0xEE0*/ u8 field_EE0;
+    /*0xEE0*/ u8 trainerFlags;
     /*0xEE1*/ u8 opponentName[2][PLAYER_NAME_LENGTH + 1];
     /*0xEF1*/ u8 field_EF1[2][4];
-    /*0xEF9*/ u8 field_EF9_0:7;
-    /*0xEF9*/ u8 field_EF9_1:1;
+    /*0xEF9*/ u8 unk_EF9:7;
+    /*0xEF9*/ u8 savedGame:1;
     /*0xEFA*/ u8 field_EFA;
     /*0xEFB*/ u8 field_EFB;
     /*0xEFC*/ struct FrontierMonData field_EFC[3];
@@ -812,15 +812,15 @@ struct SaveTrainerHill
 {
     /*0x3D64*/ u32 timer;
     /*0x3D68*/ u32 bestTime;
-    /*0x3D6C*/ u8 field_3D6C;
+    /*0x3D6C*/ u8 unk_3D6C;
     /*0x3D6D*/ u8 unused;
-    /*0x3D6E*/ u16 field_3D6E_0a:1; // 1
-    /*0x3D6E*/ u16 field_3D6E_0b:1; // 2
-    /*0x3D6E*/ u16 field_3D6E_0c:1; // 4
-    /*0x3D6E*/ u16 hasLost:1; // 8
-    /*0x3D6E*/ u16 maybeECardScanDuringChallenge:1; // x10
-    /*0x3D6E*/ u16 field_3D6E_0f:1; // x20
-    /*0x3D6E*/ u16 tag:2; // x40, x80 = xC0
+    /*0x3D6E*/ u16 receivedPrize:1;
+    /*0x3D6E*/ u16 checkedFinalTime:1;
+    /*0x3D6E*/ u16 spokeToOwner:1;
+    /*0x3D6E*/ u16 hasLost:1;
+    /*0x3D6E*/ u16 maybeECardScanDuringChallenge:1;
+    /*0x3D6E*/ u16 field_3D6E_0f:1;
+    /*0x3D6E*/ u16 tag:2;
 };
 
 struct MysteryEventStruct

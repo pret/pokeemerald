@@ -45,7 +45,7 @@ gSpecials:: @ 81DBA64
 	def_special PlayerEnteredTradeSeat
 	def_special nullsub_37
 	def_special sub_80B3254
-	def_special sub_80B2FD8
+	def_special TryBerryBlenderLinkup
 	def_special GetLinkPartnerNames
 	def_special SpawnLinkPartnerEventObject
 	def_special SavePlayerParty
@@ -76,34 +76,34 @@ gSpecials:: @ 81DBA64
 	def_special TurnOffTVScreen
 	def_special DoTVShow
 	def_special DoPokeNews
-	def_special special_0x44
-	def_special special_0x45
+	def_special GetRandomActiveShowIdx
+	def_special GetSelectedTVShow
 	def_special InterviewBefore
 	def_special InterviewAfter
-	def_special sub_80EF8F8
+	def_special IsLeadMonNicknamedOrNotEnglish
 	def_special SetContestCategoryStringVarForInterview
-	def_special special_0x4a
+	def_special GetNextActiveShowIfMassOutbreak
 	def_special TV_IsScriptShowKindAlreadyInQueue
 	def_special CheckForBigMovieOrEmergencyNewsOnTV
 	def_special GetMomOrDadStringForTVMessage
 	def_special ResetTVShowState
-	def_special sub_80F831C
-	def_special sub_80F84B0
+	def_special GetContestWinnerId
+	def_special GetContestPlayerId
 	def_special sub_80F8814
-	def_special sub_80F834C
-	def_special sub_80F8390
-	def_special sub_80F8850
-	def_special sub_80F82B4
+	def_special BufferContestWinnerTrainerName
+	def_special BufferContestWinnerMonName
+	def_special BufferContestTrainerAndMonNames
+	def_special GetContestMonConditionRanking
 	def_special SetContestTrainerGfxIds
-	def_special sub_80F7F30
+	def_special TryEnterContestMon
 	def_special sub_80F8970
-	def_special sub_80F8AFC
-	def_special sub_80F82FC
-	def_special sub_80F7F7C
-	def_special sub_80F7FFC
-	def_special sub_80F8D24
+	def_special SetLinkContestPlayerGfx
+	def_special GetContestMonCondition
+	def_special HasMonWonThisContestBefore
+	def_special GiveMonContestRibbon
+	def_special IsContestDebugActive
 	def_special GiveMonArtistRibbon
-	def_special sub_80B3000
+	def_special TryContestGModeLinkup
 	def_special SaveGame
 	def_special DoWateringBerryTreeAnim
 	def_special ShowEasyChatScreen
@@ -145,8 +145,8 @@ gSpecials:: @ 81DBA64
 	def_special CalculatePlayerPartyCount
 	def_special CountPartyNonEggMons
 	def_special CountPartyAliveNonEggMons_IgnoreVar0x8004Slot
-	def_special sub_80F88E8
-	def_special sub_80F88DC
+	def_special ShouldReadyContestArtist
+	def_special SaveMuseumContestPainting
 	def_special sub_80F8864
 	def_special CountPlayerContestPaintings
 	def_special ShowContestWinner
@@ -243,7 +243,7 @@ gSpecials:: @ 81DBA64
 	def_special UpdateCyclingRoadState
 	def_special GetLeadMonFriendshipScore
 	def_special CallFrontierUtilFunc
-	def_special sub_8161F74
+	def_special CallBattleTowerFunc
 	def_special CallBattleDomeFunction
 	def_special CallBattlePalaceFunction
 	def_special CopyEReaderTrainerGreeting
@@ -281,7 +281,7 @@ gSpecials:: @ 81DBA64
 	def_special CheckLeadMonCute
 	def_special CheckLeadMonSmart
 	def_special CheckLeadMonTough
-	def_special sub_80FB7A4
+	def_special LookThroughPorthole
 	def_special DoSoftReset
 	def_special GameClear
 	def_special MoveElevator
@@ -310,7 +310,7 @@ gSpecials:: @ 81DBA64
 	def_special InitRoamer
 	def_special TryUpdateRusturfTunnelState
 	def_special IsGrassTypeInParty
-	def_special sub_80AFC60
+	def_special DoContestHallWarp
 	def_special PutZigzagoonInPlayerParty
 	def_special IsStarterInParty
 	def_special CopyCurSecretBaseOwnerName_StrVar1
@@ -331,7 +331,7 @@ gSpecials:: @ 81DBA64
 	def_special DoDiveWarp
 	def_special DoFallWarp
 	def_special ShowContestEntryMonPic
-	def_special sub_80F8EB8
+	def_special HideContestEntryMonPic
 	def_special SetEReaderTrainerGfxId
 	def_special BattleSetup_StartLatiBattle
 	def_special SetRoute119Weather
@@ -443,17 +443,17 @@ gSpecials:: @ 81DBA64
 	def_special OffsetCameraForBattle
 	def_special GetDeptStoreDefaultFloorChoice
 	def_special BufferVarsForIVRater
-	def_special sub_80F905C
+	def_special LinkContestWaitForConnection
 	def_special sub_800B518
-	def_special sub_80F90DC
-	def_special sub_80F910C
-	def_special sub_80F9160
+	def_special LinkContestTryShowWirelessIndicator
+	def_special LinkContestTryHideWirelessIndicator
+	def_special IsWirelessContest
 	def_special ShowRankingHallRecordsWindow
 	def_special ScrollRankingHallRecordsWindow
 	def_special ShowFrontierManiacMessage
-	def_special sub_80F9134
-	def_special sub_80F9154
-	def_special sub_80B3028
+	def_special IsContestWithRSPlayer
+	def_special ClearLinkContestFlags
+	def_special TryContestEModeLinkup
 	def_special ShowScrollableMultichoice
 	def_special sub_813A630
 	def_special BufferBattleTowerElevatorFloors
@@ -525,7 +525,7 @@ gSpecials:: @ 81DBA64
 	def_special TryGetWallpaperWithWaldaPhrase
 	def_special PlayerNotAtTrainerHillEntrance
 	def_special GetBattlePyramidHint
-	def_special sub_80F8B94
+	def_special LoadLinkContestPlayerPalettes
 	def_special ShowTrainerHillRecords
 	def_special PlayerFaceTrainerAfterBattle
 	def_special ResetHealLocationFromDewford

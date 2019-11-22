@@ -35,7 +35,7 @@ EventScript_SomeonesPCBoxFull:: @ 82737D4
 
 EventScript_TransferredLanettesPC:: @ 82737E6
 	specialvar VAR_RESULT, ShouldShowBoxWasFullMessage
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, TRUE
 	goto_if_eq EventScript_LanettesPCBoxFull
 	msgbox gText_PkmnTransferredLanettesPC, MSGBOX_DEFAULT
 	return

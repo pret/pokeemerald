@@ -1,25 +1,25 @@
 SecretBase_MapScripts::
-    map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, SecretBase_MapScript2_OnWarp
-    map_script MAP_SCRIPT_ON_TRANSITION, SecretBase_MapScript1_OnTransition
-    map_script MAP_SCRIPT_ON_FRAME_TABLE, SecretBase_MapScript2_OnFrame
-    map_script MAP_SCRIPT_ON_RESUME, SecretBase_MapScript1_OnResume
+    map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, SecretBase_OnWarp
+    map_script MAP_SCRIPT_ON_TRANSITION, SecretBase_OnTransition
+    map_script MAP_SCRIPT_ON_FRAME_TABLE, SecretBase_OnFrame
+    map_script MAP_SCRIPT_ON_RESUME, SecretBase_OnResume
     .byte 0
 
-SecretBase_MapScript2_OnWarp: @ 823B498
+SecretBase_OnWarp: @ 823B498
     map_script_2 VAR_SECRET_BASE_INITIALIZED, 0, SecretBase_EventScript_InitDecorations
     .2byte 0
 
-SecretBase_MapScript1_OnTransition: @ 823B4A2
+SecretBase_OnTransition: @ 823B4A2
     call SecretBase_EventScript_SetDecorationFlags
     special SetSecretBaseOwnerGfxId
     special InitSecretBaseVars
     end
 
-SecretBase_MapScript2_OnFrame: @ 823B4AE
+SecretBase_OnFrame: @ 823B4AE
     map_script_2 VAR_INIT_SECRET_BASE, 0, SecretBase_EventScript_FirstEntrance
     .2byte 0
 
-SecretBase_MapScript1_OnResume: @ 823B4B8
+SecretBase_OnResume: @ 823B4B8
     setstepcallback STEP_CB_SECRET_BASE
     end
 

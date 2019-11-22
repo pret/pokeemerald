@@ -1,7 +1,7 @@
 {
-  "id": "MAP_LINK_CONTEST_ROOM1",
-  "name": "LinkContestRoom1",
-  "layout": "LAYOUT_LINK_CONTEST_ROOM1",
+  "id": "MAP_CONTEST_HALL",
+  "name": "ContestHall",
+  "layout": "LAYOUT_CONTEST_HALL",
   "music": "MUS_CONTEST0",
   "region_map_section": "MAPSEC_DYNAMIC",
   "requires_flash": false,
@@ -181,7 +181,7 @@
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "0x0",
-      "flag": "FLAG_LINK_CONTEST_POKE_BALL"
+      "flag": "FLAG_HIDE_CONTEST_POKE_BALL"
     },
     {
       "graphics_id": "EVENT_OBJ_GFX_VAR_3",

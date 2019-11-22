@@ -4,7 +4,7 @@ VerdanturfTown_MapScripts:: @ 81EB566
 
 VerdanturfTown_OnTransition: @ 81EB56C
 	setflag FLAG_VISITED_VERDANTURF_TOWN
-	setvar VAR_LINK_CONTEST_ROOM_STATE, 0
+	setvar VAR_CONTEST_HALL_STATE, 0
 	end
 
 VerdanturfTown_EventScript_Twin:: @ 81EB575
