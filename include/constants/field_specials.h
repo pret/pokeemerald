@@ -13,6 +13,19 @@
 #define SS_TIDAL_LOCATION_ROUTE124  3
 #define SS_TIDAL_LOCATION_ROUTE131  4
 
+#define SS_TIDAL_BOARD_SLATEPORT     1
+#define SS_TIDAL_DEPART_SLATEPORT    2
+#define SS_TIDAL_HALFWAY_LILYCOVE    3
+#define SS_TIDAL_LAND_LILYCOVE       4
+#define SS_TIDAL_BOARD_LILYCOVE      5
+#define SS_TIDAL_DEPART_LILYCOVE     6
+#define SS_TIDAL_HALFWAY_SLATEPORT   7
+#define SS_TIDAL_LAND_SLATEPORT      8
+#define SS_TIDAL_EXIT_CURRENTS_RIGHT 9
+#define SS_TIDAL_EXIT_CURRENTS_LEFT  10
+
+#define SS_TIDAL_MAX_STEPS 205
+
 // Scrollable Multichoice Menus
 #define SCROLL_MULTI_NONE                                  0
 #define SCROLL_MULTI_GLASS_WORKSHOP_VENDOR                 1
@@ -48,5 +61,18 @@
 #define DEPT_STORE_FLOORNUM_10F      13
 #define DEPT_STORE_FLOORNUM_11F      14
 #define DEPT_STORE_FLOORNUM_ROOFTOP  15
+
+// Lilycove Pokemon Trainer Fan Club
+#define NUM_TRAINER_FAN_CLUB_MEMBERS  8
+
+#define FANCLUB_GOT_FIRST_FANS 7
+#define FANCLUB_MEMBER1        8
+#define FANCLUB_MEMBER2        9
+#define FANCLUB_MEMBER3        10
+#define FANCLUB_MEMBER4        11
+#define FANCLUB_MEMBER5        12
+#define FANCLUB_MEMBER6        13
+#define FANCLUB_MEMBER7        14
+#define FANCLUB_MEMBER8        15
 
 #endif // GUARD_CONSTANTS_FIELD_SPECIALS_H

@@ -1,9 +1,10 @@
 #include "constants/global.h"
 #include "constants/battle.h"
+#include "constants/battle_frontier.h"
 #include "constants/battle_pike.h"
 #include "constants/battle_pyramid.h"
-#include "constants/battle_frontier.h"
 #include "constants/battle_setup.h"
+#include "constants/battle_tower.h"
 #include "constants/berry.h"
 #include "constants/cable_club.h"
 #include "constants/coins.h"
@@ -18,6 +19,7 @@
 #include "constants/field_specials.h"
 #include "constants/field_tasks.h"
 #include "constants/flags.h"
+#include "constants/frontier_util.h"
 #include "constants/game_stat.h"
 #include "constants/item.h"
 #include "constants/items.h"
@@ -39,6 +41,7 @@
 #include "constants/trainer_hill.h"
 #include "constants/trainers.h"
 #include "constants/tv.h"
+#include "constants/union_room.h"
 #include "constants/vars.h"
 #include "constants/weather.h"
 	.include "asm/macros.inc"
@@ -86,7 +89,7 @@ gStdScripts:: @ 81DC2A0
 	.4byte Std_MsgboxAutoclose
 	.4byte Std_ObtainDecoration
 	.4byte Std_RegisteredInMatchCall
-	.4byte Std_9
+	.4byte Std_MsgboxGetPoints
 	.4byte Std_10
 gStdScripts_End:: @ 81DC2CC
 
@@ -441,18 +444,7 @@ gStdScripts_End:: @ 81DC2CC
 	.include "data/maps/TradeCenter/scripts.inc"
 	.include "data/maps/RecordCorner/scripts.inc"
 	.include "data/maps/BattleColosseum4P/scripts.inc"
-	.include "data/maps/LinkContestRoom1/scripts.inc"
-	.include "data/maps/UnknownLinkContestRoom_25_29/scripts.inc"
-	.include "data/maps/UnknownLinkContestRoom_25_30/scripts.inc"
-	.include "data/maps/UnknownLinkContestRoom_25_31/scripts.inc"
-	.include "data/maps/UnknownLinkContestRoom_25_32/scripts.inc"
-	.include "data/maps/UnknownLinkContestRoom_25_33/scripts.inc"
-	.include "data/maps/UnknownLinkContestRoom_25_34/scripts.inc"
-	.include "data/maps/LinkContestRoom2/scripts.inc"
-	.include "data/maps/LinkContestRoom3/scripts.inc"
-	.include "data/maps/LinkContestRoom4/scripts.inc"
-	.include "data/maps/LinkContestRoom5/scripts.inc"
-	.include "data/maps/LinkContestRoom6/scripts.inc"
+	.include "data/maps/ContestHall/scripts.inc"
 	.include "data/maps/InsideOfTruck/scripts.inc"
 	.include "data/maps/SSTidalCorridor/scripts.inc"
 	.include "data/maps/SSTidalLowerDeck/scripts.inc"
@@ -516,7 +508,7 @@ gStdScripts_End:: @ 81DC2CC
 	.include "data/maps/BattleFrontier_BattlePikeRandomRoom3/scripts.inc"
 	.include "data/maps/BattleFrontier_RankingHall/scripts.inc"
 	.include "data/maps/BattleFrontier_Lounge1/scripts.inc"
-	.include "data/maps/BattleFrontier_BattlePointExchangeServiceCorner/scripts.inc"
+	.include "data/maps/BattleFrontier_ExchangeServiceCorner/scripts.inc"
 	.include "data/maps/BattleFrontier_Lounge2/scripts.inc"
 	.include "data/maps/BattleFrontier_Lounge3/scripts.inc"
 	.include "data/maps/BattleFrontier_Lounge4/scripts.inc"
@@ -616,7 +608,7 @@ Std_MsgboxYesNo: @ 8271332
 	yesnobox 20, 8
 	return
 
-Std_9: @ 827133C
+Std_MsgboxGetPoints: @ 827133C
 	message 0x0
 	playfanfare MUS_ME_POINTGET
 	waitfanfare
@@ -1102,7 +1094,7 @@ Common_EventScript_LegendaryFlewAway:: @ 8273776
 	.include "data/scripts/day_care.inc"
 	.include "data/scripts/flash.inc"
 	.include "data/scripts/players_house.inc"
-	.include "data/scripts/pokeblocks.inc"
+	.include "data/scripts/berry_blender.inc"
 	.include "data/text/mauville_man.inc"
 	.include "data/text/trainers.inc"
 	.include "data/scripts/repel.inc"
@@ -1121,7 +1113,7 @@ Common_EventScript_LegendaryFlewAway:: @ 8273776
 	.include "data/scripts/apprentice.inc"
 	.include "data/text/battle_dome.inc"
 	.include "data/scripts/battle_pike.inc"
-	.include "data/text/contest_hall.inc"
+	.include "data/text/blend_master.inc"
 	.include "data/text/battle_tent.inc"
 	.include "data/text/event_ticket_2.inc"
 	.include "data/text/move_tutors.inc"

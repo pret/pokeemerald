@@ -40,13 +40,13 @@ BattleFrontier_BattlePyramidEmptySquare_EventScript_252A98:: @ 8252A98
 BattleFrontier_BattlePyramidEmptySquare_MapScript1_252AA2: @ 8252AA2
 	setvar VAR_0x8004, BATTLE_PYRAMID_FUNC_SET_FLOOR_PALETTE
 	special CallBattlePyramidFunction
-	setvar VAR_0x8004, 0
+	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_0
 	special CallFrontierUtilFunc
 	switch VAR_TEMP_0
 	case 0, BattleFrontier_BattlePyramidEmptySquare_EventScript_252B8D
 	case 1, BattleFrontier_BattlePyramidEmptySquare_EventScript_252B66
 	case 2, BattleFrontier_BattlePyramidEmptySquare_EventScript_252B8D
-	setvar VAR_0x8004, 1
+	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_1
 	setvar VAR_0x8005, 5
 	special CallFrontierUtilFunc
 	compare VAR_RESULT, 4
@@ -61,8 +61,8 @@ BattleFrontier_BattlePyramidEmptySquare_MapScript1_252AA2: @ 8252AA2
 	goto_if_eq BattleFrontier_BattlePyramidEmptySquare_EventScript_252B42
 	compare VAR_RESULT, 9
 	goto_if_eq BattleFrontier_BattlePyramidEmptySquare_EventScript_252B42
-	setvar VAR_0x8004, 14
-	setvar VAR_0x8005, 8
+	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_CHECK_BATTLE_TYPE
+	setvar VAR_0x8005, BATTLE_TYPE_TRAINER
 	special CallFrontierUtilFunc
 	setvar VAR_TEMP_D, 1
 
@@ -73,7 +73,7 @@ BattleFrontier_BattlePyramidEmptySquare_EventScript_252B39:: @ 8252B39
 
 BattleFrontier_BattlePyramidEmptySquare_EventScript_252B42:: @ 8252B42
 BattleFrontier_BattlePyramidTop_EventScript_252B42:: @ 8252B42
-	setvar VAR_0x8004, 2
+	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_2
 	setvar VAR_0x8005, 0
 	setvar VAR_0x8006, 4
 	special CallFrontierUtilFunc
@@ -100,14 +100,14 @@ BattleFrontier_BattlePyramidEmptySquare_EventScript_252B8D:: @ 8252B8D
 	setvar VAR_0x8005, 1
 	special CallBattlePyramidFunction
 	special SavePlayerParty
-	setvar VAR_0x8004, 2
+	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_2
 	setvar VAR_0x8005, 0
 	setvar VAR_0x8006, 0
 	special CallFrontierUtilFunc
 	setvar VAR_0x8004, BATTLE_PYRAMID_FUNC_INIT_TRAINERS
 	special CallBattlePyramidFunction
-	setvar VAR_0x8004, 3
-	setvar VAR_0x8005, 3
+	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_LOAD_SELECTED_PARTY
+	setvar VAR_0x8005, FRONTIER_PARTY_SIZE
 	special CallFrontierUtilFunc
 	setvar VAR_TEMP_F, 1
 	end
@@ -126,11 +126,11 @@ BattleFrontier_BattlePyramidEmptySquare_EventScript_252BD5:: @ 8252BD5
 
 BattleFrontier_BattlePyramidEmptySquare_EventScript_252BE8:: @ 8252BE8
 	call BattleFrontier_BattlePalaceBattleRoom_EventScript_241EBA
-	setvar VAR_0x8004, 1
+	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_1
 	setvar VAR_0x8005, 2
 	special CallFrontierUtilFunc
 	addvar VAR_RESULT, 1
-	setvar VAR_0x8004, 2
+	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_2
 	setvar VAR_0x8005, 2
 	copyvar VAR_0x8006, VAR_RESULT
 	special CallFrontierUtilFunc
@@ -138,7 +138,7 @@ BattleFrontier_BattlePyramidEmptySquare_EventScript_252BE8:: @ 8252BE8
 	goto_if_eq BattleFrontier_BattlePyramidEmptySquare_EventScript_252C45
 	setvar VAR_0x8004, BATTLE_PYRAMID_FUNC_SEED_FLOOR
 	special CallBattlePyramidFunction
-	setvar VAR_0x8004, 2
+	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_2
 	setvar VAR_0x8005, 0
 	setvar VAR_0x8006, 0
 	special CallFrontierUtilFunc
@@ -152,6 +152,7 @@ BattleFrontier_BattlePyramidEmptySquare_EventScript_252C45:: @ 8252C45
 	waitstate
 	end
 
+@ TRAINER_PHILLIP is used as a placeholder
 BattlePyramid_TrainerBattle:: @ 8252C4F
 	trainerbattle TRAINER_BATTLE_PYRAMID, TRAINER_PHILLIP, 0, BattleFacility_TrainerBattle_PlaceholderText, BattleFacility_TrainerBattle_PlaceholderText
 	setvar VAR_0x8004, BATTLE_PYRAMID_FUNC_SHOW_HINT_TEXT

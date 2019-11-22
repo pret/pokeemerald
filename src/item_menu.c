@@ -477,7 +477,7 @@ void CB2_ChooseBerry(void)
     GoToBagMenu(RETURN_LOCATION_FIELD_2, BERRIES_POCKET, CB2_ReturnToFieldContinueScript);
 }
 
-void sub_81AABF0(void (*callback)(void))
+void ChooseBerrySetCallback(void (*callback)(void))
 {
     GoToBagMenu(RETURN_LOCATION_FIELD_3, BERRIES_POCKET, callback);
 }

@@ -24,7 +24,7 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "SootopolisCity_EventScript_1E5E8D",
+      "script": "SootopolisCity_EventScript_CaveOfOriginExpert",
       "flag": "0"
     },
     {
@@ -37,7 +37,7 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "SootopolisCity_EventScript_1E5FE2",
+      "script": "SootopolisCity_EventScript_Woman2",
       "flag": "FLAG_HIDE_SOOTOPOLIS_CITY_RESIDENTS"
     },
     {
@@ -50,7 +50,7 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "SootopolisCity_EventScript_1E5ED8",
+      "script": "SootopolisCity_EventScript_Kiri",
       "flag": "0"
     },
     {
@@ -63,7 +63,7 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "SootopolisCity_EventScript_1E608E",
+      "script": "SootopolisCity_EventScript_NinjaBoy",
       "flag": "0"
     },
     {
@@ -76,7 +76,7 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "SootopolisCity_EventScript_1E60E3",
+      "script": "SootopolisCity_EventScript_Boy1",
       "flag": "0"
     },
     {
@@ -89,7 +89,7 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "SootopolisCity_EventScript_1E6017",
+      "script": "SootopolisCity_EventScript_Man",
       "flag": "FLAG_HIDE_SOOTOPOLIS_CITY_MAN_1"
     },
     {
@@ -102,7 +102,7 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "SootopolisCity_EventScript_1E6166",
+      "script": "SootopolisCity_EventScript_Steven",
       "flag": "FLAG_HIDE_SOOTOPOLIS_CITY_STEVEN"
     },
     {
@@ -115,7 +115,7 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "SootopolisCity_EventScript_1E6038",
+      "script": "SootopolisCity_EventScript_Woman1",
       "flag": "0"
     },
     {
@@ -167,7 +167,7 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "SootopolisCity_EventScript_1E6411",
+      "script": "SootopolisCity_EventScript_Maniac",
       "flag": "FLAG_HIDE_SOOTOPOLIS_CITY_RESIDENTS"
     },
     {
@@ -180,7 +180,7 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "SootopolisCity_EventScript_1E63DB",
+      "script": "SootopolisCity_EventScript_Girl",
       "flag": "FLAG_HIDE_SOOTOPOLIS_CITY_RESIDENTS"
     },
     {
@@ -193,7 +193,7 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "SootopolisCity_EventScript_1E6393",
+      "script": "SootopolisCity_EventScript_BlackBelt",
       "flag": "FLAG_HIDE_SOOTOPOLIS_CITY_RESIDENTS"
     },
     {
@@ -206,7 +206,7 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "SootopolisCity_EventScript_1E635D",
+      "script": "SootopolisCity_EventScript_Boy2",
       "flag": "FLAG_HIDE_SOOTOPOLIS_CITY_RESIDENTS"
     },
     {
@@ -219,7 +219,7 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "SootopolisCity_EventScript_1E64F2",
+      "script": "SootopolisCity_EventScript_Maxie",
       "flag": "FLAG_HIDE_SOOTOPOLIS_CITY_MAXIE"
     },
     {
@@ -232,7 +232,7 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "SootopolisCity_EventScript_1E651F",
+      "script": "SootopolisCity_EventScript_Archie",
       "flag": "FLAG_HIDE_SOOTOPOLIS_CITY_ARCHIE"
     },
     {
@@ -245,7 +245,7 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "SootopolisCity_EventScript_1E6446",
+      "script": "SootopolisCity_EventScript_Wallace",
       "flag": "FLAG_HIDE_SOOTOPOLIS_CITY_WALLACE"
     }
   ],
@@ -350,7 +350,7 @@
       "y": 34,
       "elevation": 3,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "SootopolisCity_EventScript_1E614B"
+      "script": "SootopolisCity_EventScript_GymSign"
     },
     {
       "type": "sign",
@@ -390,7 +390,7 @@
       "y": 37,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "SootopolisCity_EventScript_1E6154"
+      "script": "SootopolisCity_EventScript_CitySign"
     }
   ]
 }

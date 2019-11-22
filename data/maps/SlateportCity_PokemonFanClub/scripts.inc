@@ -4,7 +4,7 @@ SlateportCity_PokemonFanClub_MapScripts:: @ 8209E95
 SlateportCity_PokemonFanClub_EventScript_Chairman:: @ 8209E96
 	lock
 	faceplayer
-	goto_if_unset FLAG_ENTERED_LINK_CONTEST, SlateportCity_PokemonFanClub_EventScript_ChairmanNotEnteredContest
+	goto_if_unset FLAG_ENTERED_CONTEST, SlateportCity_PokemonFanClub_EventScript_ChairmanNotEnteredContest
 	call_if_unset FLAG_MET_SLATEPORT_FANCLUB_CHAIRMAN, SlateportCity_PokemonFanClub_EventScript_MeetChairman
 	switch VAR_SLATEPORT_FAN_CLUB_STATE
 	case 0, SlateportCity_PokemonFanClub_EventScript_ChairmanFirstAssessment

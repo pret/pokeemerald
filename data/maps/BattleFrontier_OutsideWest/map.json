@@ -30,7 +30,7 @@
       "movement_range_y": 2,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "BattleFrontier_OutsideWest_EventScript_23D50F",
+      "script": "BattleFrontier_OutsideWest_EventScript_Boy1",
       "flag": "0"
     },
     {
@@ -56,7 +56,7 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "BattleFrontier_OutsideWest_EventScript_23D3F0",
+      "script": "BattleFrontier_OutsideWest_EventScript_FerryAttendant",
       "flag": "0"
     },
     {
@@ -69,7 +69,7 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "BattleFrontier_OutsideWest_EventScript_23D68B",
+      "script": "BattleFrontier_OutsideWest_EventScript_ExpertM",
       "flag": "0"
     },
     {
@@ -82,7 +82,7 @@
       "movement_range_y": 3,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "BattleFrontier_OutsideWest_EventScript_23D52D",
+      "script": "BattleFrontier_OutsideWest_EventScript_Man1",
       "flag": "0"
     },
     {
@@ -95,7 +95,7 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "BattleFrontier_OutsideWest_EventScript_23D69D",
+      "script": "BattleFrontier_OutsideWest_EventScript_Woman1",
       "flag": "0"
     },
     {
@@ -108,7 +108,7 @@
       "movement_range_y": 3,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "BattleFrontier_OutsideWest_EventScript_23D6A6",
+      "script": "BattleFrontier_OutsideWest_EventScript_FatMan1",
       "flag": "0"
     },
     {
@@ -121,7 +121,7 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "BattleFrontier_OutsideWest_EventScript_23D679",
+      "script": "BattleFrontier_OutsideWest_EventScript_Gentleman",
       "flag": "0"
     },
     {
@@ -134,7 +134,7 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "BattleFrontier_OutsideWest_EventScript_23D536",
+      "script": "BattleFrontier_OutsideWest_EventScript_Maniac1",
       "flag": "0"
     },
     {
@@ -147,7 +147,7 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "BattleFrontier_OutsideWest_EventScript_23D53D",
+      "script": "BattleFrontier_OutsideWest_EventScript_Maniac2",
       "flag": "0"
     },
     {
@@ -160,7 +160,7 @@
       "movement_range_y": 2,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "BattleFrontier_OutsideWest_EventScript_23D694",
+      "script": "BattleFrontier_OutsideWest_EventScript_Man2",
       "flag": "0"
     },
     {
@@ -173,7 +173,7 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "BattleFrontier_OutsideWest_EventScript_23D5C6",
+      "script": "BattleFrontier_OutsideWest_EventScript_Girl",
       "flag": "0"
     },
     {
@@ -186,7 +186,7 @@
       "movement_range_y": 3,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "BattleFrontier_OutsideWest_EventScript_23D635",
+      "script": "BattleFrontier_OutsideWest_EventScript_Woman2",
       "flag": "0"
     },
     {
@@ -199,7 +199,7 @@
       "movement_range_y": 2,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "BattleFrontier_OutsideWest_EventScript_23D57F",
+      "script": "BattleFrontier_OutsideWest_EventScript_Camper",
       "flag": "0"
     },
     {
@@ -212,7 +212,7 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "BattleFrontier_OutsideWest_EventScript_23D682",
+      "script": "BattleFrontier_OutsideWest_EventScript_Lass",
       "flag": "0"
     },
     {
@@ -225,7 +225,7 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "BattleFrontier_OutsideWest_EventScript_249E19",
+      "script": "BattleFrontier_OutsideWest_EventScript_Man3",
       "flag": "0"
     },
     {
@@ -238,7 +238,7 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "BattleFrontier_OutsideWest_EventScript_23D667",
+      "script": "BattleFrontier_OutsideWest_EventScript_Fisherman1",
       "flag": "0"
     },
     {
@@ -251,7 +251,7 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "BattleFrontier_OutsideWest_EventScript_23D518",
+      "script": "BattleFrontier_OutsideWest_EventScript_Fisherman2",
       "flag": "0"
     },
     {
@@ -264,7 +264,7 @@
       "movement_range_y": 3,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "BattleFrontier_OutsideWest_EventScript_23D6AF",
+      "script": "BattleFrontier_OutsideWest_EventScript_FatMan2",
       "flag": "0"
     },
     {
@@ -277,7 +277,7 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "BattleFrontier_OutsideWest_EventScript_23D6B8",
+      "script": "BattleFrontier_OutsideWest_EventScript_Woman3",
       "flag": "0"
     },
     {
@@ -290,7 +290,7 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "BattleFrontier_OutsideWest_EventScript_23D6C3",
+      "script": "BattleFrontier_OutsideWest_EventScript_Boy2",
       "flag": "0"
     },
     {
@@ -303,7 +303,7 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "BattleFrontier_OutsideWest_EventScript_23D6CE",
+      "script": "BattleFrontier_OutsideWest_EventScript_OldMan",
       "flag": "0"
     },
     {
@@ -316,7 +316,7 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "BattleFrontier_OutsideWest_EventScript_23D6D7",
+      "script": "BattleFrontier_OutsideWest_EventScript_Man4",
       "flag": "0"
     },
     {
@@ -329,7 +329,7 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "BattleFrontier_OutsideWest_EventScript_23D6EE",
+      "script": "BattleFrontier_OutsideWest_EventScript_PokefanF",
       "flag": "0"
     }
   ],
@@ -420,7 +420,7 @@
       "y": 18,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "BattleFrontier_OutsideWest_EventScript_23D4E2"
+      "script": "BattleFrontier_OutsideWest_EventScript_BattleDomeSign"
     },
     {
       "type": "sign",
@@ -428,7 +428,7 @@
       "y": 30,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "BattleFrontier_OutsideWest_EventScript_23D4F4"
+      "script": "BattleFrontier_OutsideWest_EventScript_BattlePikeSign"
     },
     {
       "type": "sign",
@@ -436,7 +436,7 @@
       "y": 43,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "BattleFrontier_OutsideWest_EventScript_23D4EB"
+      "script": "BattleFrontier_OutsideWest_EventScript_BattleFactorySign"
     },
     {
       "type": "sign",

@@ -752,7 +752,7 @@ static void task0A_fade_n_map_maybe(u8 taskId)
     }
 }
 
-void sub_80AFC60(void)
+void DoContestHallWarp(void)
 {
     ScriptContext2_Enable();
     TryFadeOutOldMapMusic();

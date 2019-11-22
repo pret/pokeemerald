@@ -46,18 +46,30 @@
 
 #define MAX_BATTLE_FRONTIER_POINTS 9999
 
-// Frontier Maniac
-#define FRONTIER_MANIAC_BATTLE_TOWER_SINGLES       0
-#define FRONTIER_MANIAC_BATTLE_TOWER_DOUBLES       1
-#define FRONTIER_MANIAC_BATTLE_TOWER_MULTIS        2
-#define FRONTIER_MANIAC_BATTLE_TOWER_LINK_MULTIS   3
-#define FRONTIER_MANIAC_BATTLE_DOME                4
-#define FRONTIER_MANIAC_BATTLE_FACTORY             5
-#define FRONTIER_MANIAC_BATTLE_PALACE              6
-#define FRONTIER_MANIAC_BATTLE_ARENA               7
-#define FRONTIER_MANIAC_BATTLE_PIKE                8
-#define FRONTIER_MANIAC_BATTLE_PYRAMID             9
-#define FRONTIER_MANIAC_FACILITY_COUNT            10
+// These sets of facility ids would be redunant if the order was consistent
+// The order is important for this set so that all the non-link records can be continuous
+#define RANKING_HALL_BATTLE_TOWER_SINGLES   0
+#define RANKING_HALL_BATTLE_TOWER_DOUBLES   1
+#define RANKING_HALL_BATTLE_TOWER_MULTIS    2
+#define RANKING_HALL_BATTLE_DOME            3
+#define RANKING_HALL_BATTLE_PALACE          4
+#define RANKING_HALL_BATTLE_ARENA           5
+#define RANKING_HALL_BATTLE_FACTORY         6
+#define RANKING_HALL_BATTLE_PIKE            7
+#define RANKING_HALL_BATTLE_PYRAMID         8
+#define RANKING_HALL_BATTLE_TOWER_LINK      9
+
+#define FRONTIER_MANIAC_BATTLE_TOWER_SINGLES   0
+#define FRONTIER_MANIAC_BATTLE_TOWER_DOUBLES   1
+#define FRONTIER_MANIAC_BATTLE_TOWER_MULTIS    2
+#define FRONTIER_MANIAC_BATTLE_TOWER_LINK      3
+#define FRONTIER_MANIAC_BATTLE_DOME            4
+#define FRONTIER_MANIAC_BATTLE_FACTORY         5
+#define FRONTIER_MANIAC_BATTLE_PALACE          6
+#define FRONTIER_MANIAC_BATTLE_ARENA           7
+#define FRONTIER_MANIAC_BATTLE_PIKE            8
+#define FRONTIER_MANIAC_BATTLE_PYRAMID         9
+#define FRONTIER_MANIAC_FACILITY_COUNT        10
 
 #define FRONTIER_MANIAC_MESSAGE_COUNT 3
 
@@ -76,6 +88,11 @@
 
 // For 'ShowFacilityResultsWindow' function which is a part of the 'CallFrontierUtilFunc' special.
 #define RESULTS_LINK_CONTEST 7
+
+#define EXCHANGE_CORNER_DECOR1_CLERK     0
+#define EXCHANGE_CORNER_DECOR2_CLERK     1
+#define EXCHANGE_CORNER_VITAMIN_CLERK    2
+#define EXCHANGE_CORNER_HOLD_ITEM_CLERK  3
 
 #define F_EV_SPREAD_HP         (1 << 0)
 #define F_EV_SPREAD_ATTACK     (1 << 1)
