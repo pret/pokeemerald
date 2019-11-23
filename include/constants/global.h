@@ -18,12 +18,13 @@
 #define VERSION_GAMECUBE 15
 
 #define LANGUAGE_JAPANESE 1
-#define LANGUAGE_ENGLISH 2
-#define LANGUAGE_FRENCH 3
-#define LANGUAGE_ITALIAN 4
-#define LANGUAGE_GERMAN 5
-#define LANGUAGE_KOREAN 6 // 6 goes unused but the theory is it was meant to be Korean
-#define LANGUAGE_SPANISH 7
+#define LANGUAGE_ENGLISH  2
+#define LANGUAGE_FRENCH   3
+#define LANGUAGE_ITALIAN  4
+#define LANGUAGE_GERMAN   5
+#define LANGUAGE_KOREAN   6 // 6 goes unused but the theory is it was meant to be Korean
+#define LANGUAGE_SPANISH  7
+#define NUM_LANGUAGES     7
 
 #define GAME_VERSION (VERSION_EMERALD)
 #define GAME_LANGUAGE (LANGUAGE_ENGLISH)
@@ -48,6 +49,8 @@
 #define EVENT_OBJECT_TEMPLATES_COUNT 64
 #define DECOR_MAX_SECRET_BASE 16
 #define DECOR_MAX_PLAYERS_HOUSE 12
+#define APPRENTICE_COUNT 4
+#define APPRENTICE_MAX_QUESTIONS 9
 
 #define PYRAMID_BAG_ITEMS_COUNT 10
 #define HALL_FACILITIES_COUNT 9 // 7 facilities for single mode + tower double mode + tower multi mode.
@@ -63,6 +66,7 @@
 #define POKEMON_NAME_LENGTH 10
 #define PLAYER_NAME_LENGTH 7
 #define MAIL_WORDS_COUNT 9
+#define EASY_CHAT_BATTLE_WORDS_COUNT 6
 #define MOVE_NAME_LENGTH 12
 
 #define MALE 0

@@ -2400,6 +2400,10 @@ extern const u8 gUnknown_085EDC45[];
 extern const u8 gUnknown_085EDB00[];
 extern const u8 gUnknown_085EDC84[];
 
+// Apprentice
+extern const u8 gText_Give[];
+extern const u8 gText_NoNeed[];
+
 // Easy Chat Entry
 extern const u8 gText_StopGivingPkmnMail[];
 extern const u8 gText_LikeToQuitQuiz[];
