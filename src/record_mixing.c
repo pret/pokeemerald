@@ -1035,7 +1035,7 @@ static void GetSavedApprentices(struct Apprentice *dst, struct Apprentice *src)
     numMixApprentices = 0;
     for (i = 0; i < 2; i++)
     {
-        id = ((i + gSaveBlock2Ptr->playerApprentice.saveId) % 3) + 1;
+        id = ((i + gSaveBlock2Ptr->playerApprentice.saveId) % (APPRENTICE_COUNT - 1)) + 1;
         if (src[id].playerName[0] != EOS)
         {
             if (GetTrainerId(src[id].playerId) != GetTrainerId(gSaveBlock2Ptr->playerTrainerId))
@@ -1070,7 +1070,7 @@ static void GetSavedApprentices(struct Apprentice *dst, struct Apprentice *src)
         }
         else
         {
-            dst[1] = src[((gSaveBlock2Ptr->playerApprentice.saveId + 1) % 3 + 1)];
+            dst[1] = src[((gSaveBlock2Ptr->playerApprentice.saveId + 1) % (APPRENTICE_COUNT - 1) + 1)];
         }
         break;
     }
@@ -1156,15 +1156,15 @@ static void ReceiveApprenticeData(struct Apprentice *mixApprentice, size_t recor
     case 1:
         apprenticeSaveId = gSaveBlock2Ptr->playerApprentice.saveId + 1;
         gSaveBlock2Ptr->apprentices[apprenticeSaveId] = mixApprenticePtr[apprenticeId];
-        gSaveBlock2Ptr->playerApprentice.saveId = (gSaveBlock2Ptr->playerApprentice.saveId + 1) % 3;
+        gSaveBlock2Ptr->playerApprentice.saveId = (gSaveBlock2Ptr->playerApprentice.saveId + 1) % (APPRENTICE_COUNT - 1);
         break;
     case 2:
         for (i = 0; i < 2; i++)
         {
-            apprenticeSaveId = ((i ^ 1) + gSaveBlock2Ptr->playerApprentice.saveId) % 3 + 1;
+            apprenticeSaveId = ((i ^ 1) + gSaveBlock2Ptr->playerApprentice.saveId) % (APPRENTICE_COUNT - 1) + 1;
             gSaveBlock2Ptr->apprentices[apprenticeSaveId] = mixApprenticePtr[i];
         }
-        gSaveBlock2Ptr->playerApprentice.saveId = (gSaveBlock2Ptr->playerApprentice.saveId + 2) % 3;
+        gSaveBlock2Ptr->playerApprentice.saveId = (gSaveBlock2Ptr->playerApprentice.saveId + 2) % (APPRENTICE_COUNT - 1);
         break;
     }
 }
