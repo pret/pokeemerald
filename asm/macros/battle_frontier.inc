@@ -118,14 +118,11 @@ special CallApprenticeFunction
 .macro apprentice_buff  whichstringvar:req, tobuff:req
 setvar VAR_0x8004, APPRENTICE_FUNC_BUFFER_STRING
 setvar VAR_0x8005, \whichstringvar
-setvar VAR_0x8006, \tobuff
-special CallApprenticeFunction
-.endm
-
-.macro apprentice_buffv  whichstringvar:req tobuff:req
-setvar VAR_0x8004, APPRENTICE_FUNC_BUFFER_STRING
-setvar VAR_0x8005, \whichstringvar
+.if \tobuff >= VARS_START
 copyvar VAR_0x8006, \tobuff
+.else
+setvar VAR_0x8006, \tobuff
+.endif
 special CallApprenticeFunction
 .endm
 

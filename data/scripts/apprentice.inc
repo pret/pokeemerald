@@ -67,7 +67,7 @@ Apprentice_EventScript_UseWhichMon: @ 82B69D3
 	apprentice_getnumpartymons
 	compare VAR_RESULT, MULTI_PARTY_SIZE
 	call_if_eq Apprentice_EventScript_LastMonSelected
-	apprentice_buffv 0, VAR_0x8007
+	apprentice_buff 0, VAR_0x8007
 	apprentice_freequestion
 	apprentice_msg TRUE, APPRENTICE_MSG_THANKS_MON
 	call Apprentice_EventScript_SetHideFlags
@@ -162,7 +162,7 @@ Apprentice_EventScript_UseWhichMove: @ 82B6C77
 	call_if_eq Apprentice_EventScript_ChoseMove2
 	apprentice_setmove
 	apprentice_answeredquestion
-	apprentice_buffv 0, VAR_0x8007
+	apprentice_buff 0, VAR_0x8007
 	apprentice_freequestion
 	apprentice_msg TRUE, APPRENTICE_MSG_THANKS_MOVE
 	call Apprentice_EventScript_SetHideFlags
