@@ -8013,8 +8013,8 @@ HyperFangInContest:
 	goto HyperFangContinue
 
 Move_TRI_ATTACK:
-	loadspritegfx ANIM_TAG_TRI_FORCE_TRIANGLE
-	createsprite gTriForceTriangleSpriteTemplate, ANIM_TARGET, 2, 16, 0
+	loadspritegfx ANIM_TAG_TRI_ATTACK_TRIANGLE
+	createsprite gTriAttackTriangleSpriteTemplate, ANIM_TARGET, 2, 16, 0
 	playsewithpan SE_W161, SOUND_PAN_ATTACKER
 	delay 20
 	playsewithpan SE_W161, SOUND_PAN_ATTACKER
