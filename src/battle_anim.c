@@ -2808,12 +2808,12 @@ static void LoadMoveBg(u16 bgId)
         void *dmaDest;
 
         LZDecompressWram(tilemap, gDecompressionBuffer);
-        sub_80A4720(sub_80A6D94(), (void*)(gDecompressionBuffer), 0x100, 0);
+        sub_80A4720(GetPaletteOffset(), (void*)(gDecompressionBuffer), 0x100, 0);
         dmaSrc = gDecompressionBuffer;
         dmaDest = (void *)(BG_SCREEN_ADDR(26));
         DmaCopy32(3, dmaSrc, dmaDest, 0x800);
         LZDecompressVram(gBattleAnimBackgroundTable[bgId].image, (void *)(BG_SCREEN_ADDR(4)));
-        LoadCompressedPalette(gBattleAnimBackgroundTable[bgId].palette, sub_80A6D94() * 16, 32);
+        LoadCompressedPalette(gBattleAnimBackgroundTable[bgId].palette, GetPaletteOffset() * 16, 32);
     }
     else
     {

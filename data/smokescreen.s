@@ -13,11 +13,11 @@ gUnknown_0831C604:: @ 831C604
 	.byte 0x00, 0x00, 0x00, 0x00
 
 	.align 2
-gUnknown_0831C620:: @ 831C620
+gSmokescreenImpactSpriteSheet:: @ 831C620
 	obj_tiles gSmokescreenImpactTiles, 0x0180, 0xd6eb
 
 	.align 2
-gUnknown_0831C628:: @ 831C628
+gSmokescreenlImpactSpritePalette:: @ 831C628
 	obj_pal gSmokescreenImpactPalette, 0xd6eb
 
 	.align 2
@@ -48,8 +48,8 @@ gUnknown_0831C678:: @ 831C678
 	.4byte gUnknown_0831C668
 
 	.align 2
-gUnknown_0831C688:: @ 831C688
-	spr_template 0xd6eb, 0xd6eb, gUnknown_0831C630, gUnknown_0831C678, NULL, gDummySpriteAffineAnimTable, sub_80753B4
+gSmokescreenImpactSpriteTemplate:: @ 831C688
+	spr_template 0xd6eb, 0xd6eb, gUnknown_0831C630, gUnknown_0831C678, NULL, gDummySpriteAffineAnimTable, SpriteCB_DestroySprite
 
 	.align 2
 gSpriteSheet_EnemyShadow:: @ 831C6A0

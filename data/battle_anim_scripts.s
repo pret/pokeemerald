@@ -2266,7 +2266,7 @@ Move_SMOKESCREEN:
 	playsewithpan SE_W104, SOUND_PAN_ATTACKER
 	createsprite gBlackBallSpriteTemplate, ANIM_TARGET, 2, 20, 0, 0, 0, 35, -25
 	waitforvisualfinish
-	createvisualtask sub_815A160, 2
+	createvisualtask AnimTask_SmokescreenImpact, 2
 	delay 2
 	playsewithpan SE_W028, SOUND_PAN_TARGET
 	createsprite gBlackSmokeSpriteTemplate, ANIM_TARGET, 4, 0, -12, 104, 0, 75
@@ -3341,7 +3341,7 @@ Move_RAPID_SPIN:
 	loadspritegfx ANIM_TAG_RAPID_SPIN
 	monbg ANIM_ATTACKER
 	createsprite gRapidSpinSpriteTemplate, ANIM_ATTACKER, 2, 0, 0, 32, -32, 40, -2
-	createvisualtask sub_815ADB0, 2, 0, 2, 0
+	createvisualtask AnimTask_RapinSpinMonElevation, 2, 0, 2, 0
 	loopsewithpan SE_W013B, SOUND_PAN_ATTACKER, 8, 4
 	waitforvisualfinish
 	createsprite gBasicHitSplatSpriteTemplate, ANIM_TARGET, 2, 0, 0, 1, 2
@@ -3349,7 +3349,7 @@ Move_RAPID_SPIN:
 	playsewithpan SE_W003, SOUND_PAN_TARGET
 	waitforvisualfinish
 	delay 8
-	createvisualtask sub_815ADB0, 2, 0, 2, 1
+	createvisualtask AnimTask_RapinSpinMonElevation, 2, 0, 2, 1
 	loopsewithpan SE_W013B, SOUND_PAN_ATTACKER, 8, 4
 	waitforvisualfinish
 	clearmonbg ANIM_ATTACKER
@@ -3493,7 +3493,7 @@ Move_HAIL:
 Move_TORMENT:
 	loadspritegfx ANIM_TAG_ANGER
 	loadspritegfx ANIM_TAG_THOUGHT_BUBBLE
-	createvisualtask sub_815AFF0, 2
+	createvisualtask AnimTask_TormentAttacker, 2
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendMonInAndOut, 2, ANIM_TARGET, RGB_RED, 10, 1, 1
 	createsprite gAngerMarkSpriteTemplate, ANIM_TARGET, 2, 1, -20, -28
@@ -3906,7 +3906,7 @@ Move_LUSTER_PURGE:
 	loadspritegfx ANIM_TAG_IMPACT
 	fadetobg BG_PSYCHIC
 	waitbgfadeout
-	createvisualtask sub_815A5C8, 5
+	createvisualtask AnimTask_FadeScreenToWhite, 5
 	waitbgfadein
 	monbg ANIM_ATTACKER
 	setalpha 12, 8
@@ -8095,7 +8095,7 @@ Move_WILL_O_WISP:
 Move_ENCORE:
 	loadspritegfx ANIM_TAG_SPOTLIGHT
 	loadspritegfx ANIM_TAG_TAG_HAND
-	createvisualtask sub_815ABEC, 2
+	createvisualtask AnimTask_CreateSpotlight, 2
 	createvisualtask sub_8116960, 2, 248, 3, 0, 10, 0
 	waitforvisualfinish
 	createsprite gSpotlightSpriteTemplate, ANIM_TARGET, 2, 0, -8
@@ -8109,7 +8109,7 @@ Move_ENCORE:
 	waitforvisualfinish
 	createvisualtask sub_8116960, 2, 248, 3, 10, 0, 1
 	waitforvisualfinish
-	createvisualtask sub_815AC8C, 2
+	createvisualtask AnimTask_RemoveSpotlight, 2
 	end
 
 Move_TRICK:
@@ -8272,7 +8272,7 @@ Move_TRANSFORM:
 	monbg ANIM_ATTACKER
 	playsewithpan SE_W100, SOUND_PAN_ATTACKER
 	waitplaysewithpan SE_W107, SOUND_PAN_ATTACKER, 48
-	createvisualtask sub_815B7D0, 2, 0
+	createvisualtask AnimTask_TransformMon, 2, 0
 	waitforvisualfinish
 	clearmonbg ANIM_ATTACKER
 	end
@@ -8401,7 +8401,7 @@ Move_FLATTER:
 	loadspritegfx ANIM_TAG_SPOTLIGHT
 	loadspritegfx ANIM_TAG_CONFETTI
 	createvisualtask sub_8159244, 5, 223, SOUND_PAN_TARGET
-	createvisualtask sub_815ABEC, 2
+	createvisualtask AnimTask_CreateSpotlight, 2
 	createvisualtask sub_8116960, 2, 248, 3, 0, 10, 0
 	waitforvisualfinish
 	createsprite gFlatterSpotlightSpriteTemplate, ANIM_TARGET, 2, 0, -8, 80
@@ -8435,7 +8435,7 @@ Move_FLATTER:
 	waitforvisualfinish
 	createvisualtask sub_8116960, 2, 248, 3, 10, 0, 1
 	waitforvisualfinish
-	createvisualtask sub_815AC8C, 2
+	createvisualtask AnimTask_RemoveSpotlight, 2
 	end
 CreateFlatterConfetti:
 	createsprite gFlatterConfettiSpriteTemplate, ANIM_ATTACKER, 40, ANIM_ATTACKER
@@ -9523,7 +9523,7 @@ Move_PSYCHO_BOOST:
 	monbg ANIM_ATK_PARTNER
 	fadetobg BG_PSYCHIC
 	waitbgfadeout
-	createvisualtask sub_815A5C8, 5
+	createvisualtask AnimTask_FadeScreenToWhite, 5
 	waitbgfadein
 	delay 6
 	createvisualtask sub_8115A04, 2, 1, 2, 8, 0, 10, RGB_BLACK
@@ -10154,7 +10154,7 @@ ConfusionEffect:
 SetPsychicBackground:
 	fadetobg BG_PSYCHIC
 	waitbgfadeout
-	createvisualtask sub_815A504, 5
+	createvisualtask AnimTask_SetPsychicBackground, 5
 	waitbgfadein
 	return
 
@@ -10292,19 +10292,19 @@ Status_Nightmare:
 	end
 
 General_CastformChange:
-	createvisualtask sub_815BB18, 2
+	createvisualtask AnimTask_IsMonInvisible, 2
 	jumpreteq 1, AnimScript_82D7ECA
 	goto AnimScript_82D7EB2
 AnimScript_82D7EB2:
 	monbg ANIM_ATTACKER
 	playsewithpan SE_W100, SOUND_PAN_ATTACKER
 	waitplaysewithpan SE_W107, SOUND_PAN_ATTACKER, 48
-	createvisualtask sub_815B7D0, 2, 1
+	createvisualtask AnimTask_TransformMon, 2, 1
 	waitforvisualfinish
 	clearmonbg ANIM_ATTACKER
 	end
 AnimScript_82D7ECA:
-	createvisualtask sub_815BB58, 2, 1
+	createvisualtask AnimTask_CastformGfxChange, 2, 1
 	end
 
 General_StatsChange:
