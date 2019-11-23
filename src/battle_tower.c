@@ -1272,10 +1272,10 @@ static bool8 ChooseSpecialBattleTowerTrainer(void)
     if (battleMode == FRONTIER_MODE_SINGLES)
     {
         ValidateApprenticesChecksums();
-        for (i = 0; i < 4; i++)
+        for (i = 0; i < APPRENTICE_COUNT; i++)
         {
             if (gSaveBlock2Ptr->apprentices[i].lvlMode != 0
-                && gUnknown_085DF9EC[gSaveBlock2Ptr->apprentices[i].field_1] == winStreak
+                && gUnknown_085DF9EC[gSaveBlock2Ptr->apprentices[i].numQuestions] == winStreak
                 && gSaveBlock2Ptr->apprentices[i].lvlMode - 1 == lvlMode)
             {
                 trainerIds[idsCount] = i + TRAINER_RECORD_MIXING_APPRENTICE;
@@ -2000,7 +2000,7 @@ static void Unused_CreateApprenticeMons(u16 trainerId, u8 firstMonId)
     u8 fixedIV = 0;
     struct Apprentice *apprentice = &gSaveBlock2Ptr->apprentices[0];
 
-    if (apprentice->field_1 < 5)
+    if (apprentice->numQuestions < 5)
         fixedIV = 6;
     else
         fixedIV = 9;
@@ -2178,7 +2178,7 @@ static void sub_8163914(void)
     else if (trainerId < TRAINER_RECORD_MIXING_APPRENTICE)
         FrontierSpeechToString(gSaveBlock2Ptr->frontier.towerRecords[trainerId - TRAINER_RECORD_MIXING_FRIEND].greeting);
     else
-        CopyFriendsApprenticeChallengeText(trainerId - TRAINER_RECORD_MIXING_APPRENTICE);
+        BufferApprenticeChallengeText(trainerId - TRAINER_RECORD_MIXING_APPRENTICE);
 }
 
 static void HandleSpecialTrainerBattleEnd(void)
@@ -2569,10 +2569,10 @@ static void sub_81642A0(void)
 
     r10 = 0;
     ValidateApprenticesChecksums();
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < APPRENTICE_COUNT; i++)
     {
         if (gSaveBlock2Ptr->apprentices[i].lvlMode != 0
-            && gUnknown_085DF9EC[gSaveBlock2Ptr->apprentices[i].field_1] / 7 <= challengeNum
+            && gUnknown_085DF9EC[gSaveBlock2Ptr->apprentices[i].numQuestions] / 7 <= challengeNum
             && gSaveBlock2Ptr->apprentices[i].lvlMode - 1 == lvlMode)
         {
             k = 0;
@@ -3393,7 +3393,7 @@ static void ValidateApprenticesChecksums(void)
 {
     s32 i, j;
 
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < APPRENTICE_COUNT; i++)
     {
         u32 *data = (u32*) &gSaveBlock2Ptr->apprentices[i];
         u32 checksum = 0;

@@ -1,44 +1,40 @@
 BattleFrontier_BattleTowerLobby_MapScripts:: @ 823E67B
-	map_script MAP_SCRIPT_ON_RESUME, BattleFrontier_BattleTowerLobby_MapScript1_23E690
-	map_script MAP_SCRIPT_ON_TRANSITION, BattleFrontier_BattleTowerLobby_MapScript1_23E694
-	map_script MAP_SCRIPT_ON_FRAME_TABLE, BattleFrontier_BattleTowerLobby_MapScript2_23E6DD
-	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, BattleFrontier_BattleTowerLobby_MapScript2_23E6C9
+	map_script MAP_SCRIPT_ON_RESUME, BattleFrontier_BattleTowerLobby_OnResume
+	map_script MAP_SCRIPT_ON_TRANSITION, BattleFrontier_BattleTowerLobby_OnTransition
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, BattleFrontier_BattleTowerLobby_OnFrame
+	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, BattleFrontier_BattleTowerLobby_OnWarp
 	.byte 0
 
-BattleFrontier_BattleTowerLobby_MapScript1_23E690: @ 823E690
+BattleFrontier_BattleTowerLobby_OnResume: @ 823E690
 	special sub_81653CC
 	end
 
-BattleFrontier_BattleTowerLobby_MapScript1_23E694: @ 823E694
+BattleFrontier_BattleTowerLobby_OnTransition: @ 823E694
 	call BattleFrontier_BattleTowerLobby_EventScript_ShowOrHideReporter
-	setvar VAR_0x8004, 10
-	special CallApprenticeFunction
-	compare VAR_0x8004, 0
-	goto_if_eq BattleFrontier_BattleTowerLobby_EventScript_23E6B5
-	goto_if_set FLAG_DAILY_APPRENTICE_LEAVES, BattleFrontier_BattleTowerLobby_EventScript_23E6C1
-
-BattleFrontier_BattleTowerLobby_EventScript_23E6B5:: @ 823E6B5
+	apprentice_shouldcheckgone
+	compare VAR_0x8004, FALSE  @ Always TRUE here
+	goto_if_eq BattleFrontier_BattleTowerLobby_EventScript_ShowApprentice
+	goto_if_set FLAG_DAILY_APPRENTICE_LEAVES, BattleFrontier_BattleTowerLobby_EventScript_HideApprentice
+BattleFrontier_BattleTowerLobby_EventScript_ShowApprentice:: @ 823E6B5
 	clearflag FLAG_HIDE_APPRENTICE
-	setvar VAR_0x8004, 23
-	special CallApprenticeFunction
-
-BattleFrontier_BattleTowerLobby_EventScript_23E6C0:: @ 823E6C0
+	apprentice_setgfx
+BattleFrontier_BattleTowerLobby_EventScript_EndShowOrHideApprentice:: @ 823E6C0
 	end
 
-BattleFrontier_BattleTowerLobby_EventScript_23E6C1:: @ 823E6C1
+BattleFrontier_BattleTowerLobby_EventScript_HideApprentice:: @ 823E6C1
 	setflag FLAG_HIDE_APPRENTICE
-	goto BattleFrontier_BattleTowerLobby_EventScript_23E6C0
+	goto BattleFrontier_BattleTowerLobby_EventScript_EndShowOrHideApprentice
 
-BattleFrontier_BattleTowerLobby_MapScript2_23E6C9: @ 823E6C9
-	map_script_2 VAR_TEMP_1, 0, BattleFrontier_BattleTowerLobby_EventScript_23E6D3
+BattleFrontier_BattleTowerLobby_OnWarp: @ 823E6C9
+	map_script_2 VAR_TEMP_1, 0, BattleFrontier_BattleTowerLobby_EventScript_PlayerFaceNorth
 	.2byte 0
 
-BattleFrontier_BattleTowerLobby_EventScript_23E6D3:: @ 823E6D3
+BattleFrontier_BattleTowerLobby_EventScript_PlayerFaceNorth:: @ 823E6D3
 	setvar VAR_TEMP_1, 1
 	turnobject EVENT_OBJ_ID_PLAYER, DIR_NORTH
 	end
 
-BattleFrontier_BattleTowerLobby_MapScript2_23E6DD: @ 823E6DD
+BattleFrontier_BattleTowerLobby_OnFrame: @ 823E6DD
 	map_script_2 VAR_TEMP_0, 0, BattleFrontier_BattleTowerLobby_EventScript_23E707
 	map_script_2 VAR_TEMP_0, 1, BattleFrontier_BattleTowerLobby_EventScript_23E710
 	map_script_2 VAR_TEMP_0, 2, BattleFrontier_BattleTowerLobby_EventScript_23E8EE
