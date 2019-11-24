@@ -41,7 +41,7 @@ BattleFrontier_BattlePikeRoomNormal_EventScript_25D1C6:: @ 825D1C6
 	case 1, BattleFrontier_BattlePikeRoomNormal_EventScript_25D226
 
 BattleFrontier_BattlePikeRoomNormal_EventScript_25D20A:: @ 825D20A
-	frontier_setchallengestatus CHALLENGE_STATUS_LOST
+	frontier_set FRONTIER_DATA_CHALLENGE_STATUS, CHALLENGE_STATUS_LOST
 	warp MAP_BATTLE_FRONTIER_BATTLE_PIKE_LOBBY, 255, 5, 6
 	waitstate
 	end
@@ -138,16 +138,11 @@ BattleFrontier_BattlePikeRoomNormal_EventScript_25D2FB:: @ 825D2FB
 	case 2, BattleFrontier_BattlePikeRoomNormal_EventScript_25D416
 	case 3, BattleFrontier_BattlePikeRoomNormal_EventScript_25D3BD
 	case 4, BattleFrontier_BattlePikeRoomNormal_EventScript_25D443
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_GET_DATA
-	setvar VAR_0x8005, 7
-	special CallFrontierUtilFunc
-	compare VAR_RESULT, 0
+	frontier_get FRONTIER_DATA_HEARD_BRAIN_SPEECH
+	compare VAR_RESULT, FALSE
 	goto_if_ne BattleFrontier_BattlePikeRoomNormal_EventScript_25D3BD
 	msgbox BattleFrontier_BattlePikeRoomNormal_Text_25DED2, MSGBOX_DEFAULT
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_SET_DATA
-	setvar VAR_0x8005, 7
-	special CallFrontierUtilFunc
-
+	frontier_set FRONTIER_DATA_HEARD_BRAIN_SPEECH
 BattleFrontier_BattlePikeRoomNormal_EventScript_25D3BD:: @ 825D3BD
 	msgbox BattleFrontier_BattlePikeRoomNormal_Text_25DF71, MSGBOX_DEFAULT
 	call BattleFrontier_BattlePikeRoomNormal_EventScript_25D77B
@@ -156,8 +151,7 @@ BattleFrontier_BattlePikeRoomNormal_EventScript_25D3BD:: @ 825D3BD
 	goto BattleFrontier_BattlePikeRoomNormal_EventScript_25D20A
 
 BattleFrontier_BattlePikeRoomNormal_EventScript_25D3DA:: @ 825D3DA
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_GET_FACILITY_SYMBOLS
-	special CallFrontierUtilFunc
+	frontier_getsymbols
 	compare VAR_RESULT, 0
 	goto_if_ne BattleFrontier_BattlePikeRoomNormal_EventScript_25D49D
 	msgbox BattleFrontier_BattlePikeRoomNormal_Text_25DFA2, MSGBOX_DEFAULT
@@ -166,23 +160,17 @@ BattleFrontier_BattlePikeRoomNormal_EventScript_25D3DA:: @ 825D3DA
 	message BattleFrontier_BattlePikeRoomNormal_Text_25DFD0
 	waitmessage
 	waitfanfare
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_GIVE_FACILITY_SYMBOL
-	special CallFrontierUtilFunc
+	frontier_givesymbol
 	msgbox BattleFrontier_BattlePikeRoomNormal_Text_25E003, MSGBOX_DEFAULT
 	closemessage
 	goto BattleFrontier_BattlePikeRoomNormal_EventScript_25D49D
 
 BattleFrontier_BattlePikeRoomNormal_EventScript_25D416:: @ 825D416
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_GET_DATA
-	setvar VAR_0x8005, 7
-	special CallFrontierUtilFunc
-	compare VAR_RESULT, 0
+	frontier_get FRONTIER_DATA_HEARD_BRAIN_SPEECH
+	compare VAR_RESULT, FALSE
 	goto_if_ne BattleFrontier_BattlePikeRoomNormal_EventScript_25D443
 	msgbox BattleFrontier_BattlePikeRoomNormal_Text_25E02C, MSGBOX_DEFAULT
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_SET_DATA
-	setvar VAR_0x8005, 7
-	special CallFrontierUtilFunc
-
+	frontier_set FRONTIER_DATA_HEARD_BRAIN_SPEECH
 BattleFrontier_BattlePikeRoomNormal_EventScript_25D443:: @ 825D443
 	msgbox BattleFrontier_BattlePikeRoomNormal_Text_25E0E8, MSGBOX_DEFAULT
 	call BattleFrontier_BattlePikeRoomNormal_EventScript_25D77B
@@ -191,8 +179,7 @@ BattleFrontier_BattlePikeRoomNormal_EventScript_25D443:: @ 825D443
 	goto BattleFrontier_BattlePikeRoomNormal_EventScript_25D20A
 
 BattleFrontier_BattlePikeRoomNormal_EventScript_25D460:: @ 825D460
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_GET_FACILITY_SYMBOLS
-	special CallFrontierUtilFunc
+	frontier_getsymbols
 	compare VAR_RESULT, 2
 	goto_if_eq BattleFrontier_BattlePikeRoomNormal_EventScript_25D49D
 	msgbox BattleFrontier_BattlePikeRoomNormal_Text_25E0F6, MSGBOX_DEFAULT
@@ -201,8 +188,7 @@ BattleFrontier_BattlePikeRoomNormal_EventScript_25D460:: @ 825D460
 	message BattleFrontier_BattlePikeRoomNormal_Text_25E118
 	waitmessage
 	waitfanfare
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_GIVE_FACILITY_SYMBOL
-	special CallFrontierUtilFunc
+	frontier_givesymbol
 	msgbox BattleFrontier_BattlePikeRoomNormal_Text_25E140, MSGBOX_DEFAULT
 	closemessage
 	goto BattleFrontier_BattlePikeRoomNormal_EventScript_25D49D

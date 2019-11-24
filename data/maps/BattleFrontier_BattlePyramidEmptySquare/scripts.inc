@@ -17,7 +17,6 @@ BattleFrontier_BattlePyramidEmptySquare_EventScript_252A5D:: @ 8252A5D
 	setvar VAR_0x8006, 1
 	setvar VAR_0x8007, 55
 	setvar VAR_RESULT, 0
-
 BattleFrontier_BattlePyramidEmptySquare_EventScript_252A77:: @ 8252A77
 	special CallBattlePyramidFunction
 	delay 2
@@ -40,12 +39,12 @@ BattleFrontier_BattlePyramidEmptySquare_EventScript_252A98:: @ 8252A98
 BattleFrontier_BattlePyramidEmptySquare_MapScript1_252AA2: @ 8252AA2
 	setvar VAR_0x8004, BATTLE_PYRAMID_FUNC_SET_FLOOR_PALETTE
 	special CallBattlePyramidFunction
-	frontier_checkoutcome
+	frontier_getstatus
 	switch VAR_TEMP_0
 	case 0, BattleFrontier_BattlePyramidEmptySquare_EventScript_252B8D
-	case 1, BattleFrontier_BattlePyramidEmptySquare_EventScript_252B66
-	case 2, BattleFrontier_BattlePyramidEmptySquare_EventScript_252B8D
-	frontier_getbattleoutcome
+	case CHALLENGE_STATUS_SAVING, BattleFrontier_BattlePyramidEmptySquare_EventScript_252B66
+	case CHALLENGE_STATUS_PAUSED, BattleFrontier_BattlePyramidEmptySquare_EventScript_252B8D
+	frontier_get FRONTIER_DATA_BATTLE_OUTCOME
 	compare VAR_RESULT, B_OUTCOME_RAN
 	goto_if_eq BattleFrontier_BattlePyramidEmptySquare_EventScript_252B39
 	compare VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED
@@ -58,9 +57,7 @@ BattleFrontier_BattlePyramidEmptySquare_MapScript1_252AA2: @ 8252AA2
 	goto_if_eq BattleFrontier_BattlePyramidEmptySquare_EventScript_252B42
 	compare VAR_RESULT, B_OUTCOME_FORFEITED
 	goto_if_eq BattleFrontier_BattlePyramidEmptySquare_EventScript_252B42
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_CHECK_BATTLE_TYPE
-	setvar VAR_0x8005, BATTLE_TYPE_TRAINER
-	special CallFrontierUtilFunc
+	frontier_isbattletype BATTLE_TYPE_TRAINER  @ VAR_RESULT seems to be ignored here
 	setvar VAR_TEMP_D, 1
 BattleFrontier_BattlePyramidEmptySquare_EventScript_252B39:: @ 8252B39
 	setvar VAR_0x8004, BATTLE_PYRAMID_FUNC_RESTORE_PARTY
@@ -69,7 +66,7 @@ BattleFrontier_BattlePyramidEmptySquare_EventScript_252B39:: @ 8252B39
 
 BattleFrontier_BattlePyramidEmptySquare_EventScript_252B42:: @ 8252B42
 BattleFrontier_BattlePyramidTop_EventScript_252B42:: @ 8252B42
-	frontier_setchallengestatus CHALLENGE_STATUS_LOST
+	frontier_set FRONTIER_DATA_CHALLENGE_STATUS, CHALLENGE_STATUS_LOST
 	setvar VAR_0x8004, BATTLE_PYRAMID_FUNC_SET_DATA
 	setvar VAR_0x8005, 7
 	setvar VAR_0x8006, 255
@@ -93,13 +90,10 @@ BattleFrontier_BattlePyramidEmptySquare_EventScript_252B8D:: @ 8252B8D
 	setvar VAR_0x8005, 1
 	special CallBattlePyramidFunction
 	special SavePlayerParty
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_SET_DATA
-	setvar VAR_0x8005, 0
-	setvar VAR_0x8006, 0
-	special CallFrontierUtilFunc
+	frontier_set FRONTIER_DATA_CHALLENGE_STATUS, 0
 	setvar VAR_0x8004, BATTLE_PYRAMID_FUNC_INIT_TRAINERS
 	special CallBattlePyramidFunction
-	frontier_loadselectedmons
+	frontier_setpartyorder FRONTIER_PARTY_SIZE
 	setvar VAR_TEMP_F, 1
 	end
 
@@ -116,18 +110,15 @@ BattleFrontier_BattlePyramidEmptySquare_EventScript_252BD5:: @ 8252BD5
 	return
 
 BattleFrontier_BattlePyramidEmptySquare_EventScript_252BE8:: @ 8252BE8
-	call BattleFrontier_BattlePalaceBattleRoom_EventScript_241EBA
-	frontier_getbattlenum
+	call BattleFrontier_EventScript_IncrementWinStreak
+	frontier_get FRONTIER_DATA_BATTLE_NUM  @ Floor number
 	addvar VAR_RESULT, 1
-	frontier_setbattlenum VAR_RESULT
+	frontier_set FRONTIER_DATA_BATTLE_NUM, VAR_RESULT
 	compare VAR_RESULT, 7
 	goto_if_eq BattleFrontier_BattlePyramidEmptySquare_EventScript_252C45
 	setvar VAR_0x8004, BATTLE_PYRAMID_FUNC_SEED_FLOOR
 	special CallBattlePyramidFunction
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_SET_DATA
-	setvar VAR_0x8005, 0
-	setvar VAR_0x8006, 0
-	special CallFrontierUtilFunc
+	frontier_set FRONTIER_DATA_CHALLENGE_STATUS, 0
 	setvar VAR_RESULT, 0
 	warp MAP_BATTLE_FRONTIER_BATTLE_PYRAMID_EMPTY_SQUARE, 255, 1, 1
 	waitstate

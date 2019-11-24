@@ -33,10 +33,9 @@
 #define FRONTIER_MODE_LINK_MULTIS  3
 #define FRONTIER_MODE_COUNT        4
 
-// TODO
-#define CHALLENGE_STATUS_INACTIVE 0
-#define CHALLENGE_STATUS_CANCEL   1
-#define CHALLENGE_STATUS_ONGOING  2
+// Challenge Statuses
+#define CHALLENGE_STATUS_SAVING   1
+#define CHALLENGE_STATUS_PAUSED   2
 #define CHALLENGE_STATUS_WON      3
 #define CHALLENGE_STATUS_LOST     4
 
@@ -54,6 +53,7 @@
 #define SPECIAL_BATTLE_PYRAMID 10
 
 #define MAX_BATTLE_FRONTIER_POINTS 9999
+#define MAX_STREAK 9999
 
 // These sets of facility ids would be redunant if the order was consistent
 // The order is important for this set so that all the non-link records can be continuous

@@ -453,7 +453,7 @@ static void LinkTestProcessKeyInput(void)
     }
     if (gMain.newKeys & R_BUTTON)
     {
-        TrySavingData(1);
+        TrySavingData(SAVE_LINK);
     }
     if (gMain.newKeys & SELECT_BUTTON)
     {

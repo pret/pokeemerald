@@ -1,7 +1,7 @@
 TrainerHill_OnResume: @ 82C8336
 	setvar VAR_TEMP_2, 0
 	trainerhill_resumetimer
-	frontier_getbattleoutcome
+	frontier_get FRONTIER_DATA_BATTLE_OUTCOME
 	compare VAR_RESULT, B_OUTCOME_LOST
 	goto_if_eq TrainerHill_1F_EventScript_Lost
 	compare VAR_RESULT, B_OUTCOME_DREW

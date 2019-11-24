@@ -1094,9 +1094,9 @@ void GetPlayerHallRecords(struct PlayerHallRecords *dst)
     {
         dst->twoPlayers[j].language = GAME_LANGUAGE;
         CopyTrainerId(dst->twoPlayers[j].id1, gSaveBlock2Ptr->playerTrainerId);
-        CopyTrainerId(dst->twoPlayers[j].id2, gSaveBlock2Ptr->frontier.field_EF1[j]);
+        CopyTrainerId(dst->twoPlayers[j].id2, gSaveBlock2Ptr->frontier.opponentTrainerIds[j]);
         StringCopy(dst->twoPlayers[j].name1, gSaveBlock2Ptr->playerName);
-        StringCopy(dst->twoPlayers[j].name2, gSaveBlock2Ptr->frontier.opponentName[j]);
+        StringCopy(dst->twoPlayers[j].name2, gSaveBlock2Ptr->frontier.opponentNames[j]);
     }
 
     for (i = 0; i < 2; i++)

@@ -728,7 +728,7 @@ static void TrainerCard_GenerateCardForLinkPlayer(struct TrainerCard *trainerCar
     trainerCard->version = GAME_VERSION;
     SetPlayerCardData(trainerCard, CARD_TYPE_EMERALD);
     trainerCard->hasAllSymbols = HasAllFrontierSymbols();
-    trainerCard->frontierBP = gSaveBlock2Ptr->frontier.field_EBA;
+    trainerCard->frontierBP = gSaveBlock2Ptr->frontier.cardBattlePoints;
     if (trainerCard->hasAllSymbols)
         trainerCard->stars++;
 
@@ -744,7 +744,7 @@ void TrainerCard_GenerateCardForPlayer(struct TrainerCard *trainerCard)
     trainerCard->version = GAME_VERSION;
     SetPlayerCardData(trainerCard, CARD_TYPE_EMERALD);
     trainerCard->var_3A = HasAllFrontierSymbols();
-    *((u16*)&trainerCard->berryCrushPoints) = gSaveBlock2Ptr->frontier.field_EBA;
+    *((u16*)&trainerCard->berryCrushPoints) = gSaveBlock2Ptr->frontier.cardBattlePoints;
     if (trainerCard->var_3A)
         trainerCard->stars++;
 

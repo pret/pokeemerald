@@ -683,8 +683,8 @@ u8 HandleSavingData(u8 saveType)
         SaveSerializedGame();
         save_write_to_flash(0xFFFF, gRamSaveSectionLocations);
         break;
-    case SAVE_LINK: // _081532C4
-    case SAVE_LINK2:
+    case SAVE_LINK:  // Link and Battle Frontier
+    case SAVE_LINK2: // Unused
         SaveSerializedGame();
         for(i = 0; i < 5; i++)
             ClearSaveData_2(i, gRamSaveSectionLocations);
