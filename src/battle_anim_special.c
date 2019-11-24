@@ -403,7 +403,7 @@ const struct SpriteTemplate gBattleAnimSpriteTemplate_085E535C =
     .callback = sub_817330C,
 };
 
-extern const struct SpriteTemplate gUnknown_085CE388;
+extern const struct SpriteTemplate gWishStarSpriteTemplate;
 extern const struct SpriteTemplate gMiniTwinklingStarSpriteTemplate;
 
 void unref_sub_8170478(u8 taskId)
@@ -2081,7 +2081,7 @@ static void sub_8172FEC(u8 taskId)
     state = gTasks[taskId].data[11];
     if (state == 0)
     {
-        spriteId = CreateSprite(&gUnknown_085CE388, x, y, 5);
+        spriteId = CreateSprite(&gWishStarSpriteTemplate, x, y, 5);
     }
     else if (state >= 0 && gTasks[taskId].data[11] < 4)
     {

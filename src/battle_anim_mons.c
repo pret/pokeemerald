@@ -966,7 +966,7 @@ void sub_80A6D60(struct BattleAnimBgData *unk, const void *src, u32 arg2)
     CopyBgTilemapBufferToVram(unk->bgId);
 }
 
-u8 sub_80A6D94(void)
+u8 GetBattleBgPaletteNum(void)
 {
     if (IsContest())
         return 1;
@@ -1353,7 +1353,7 @@ u32 sub_80A75AC(u8 battleBackground, u8 attacker, u8 target, u8 attackerPartner,
         if (!IsContest())
             selectedPalettes = 0xe;
         else
-            selectedPalettes = 1 << sub_80A6D94();
+            selectedPalettes = 1 << GetBattleBgPaletteNum();
     }
     if (attacker)
     {
