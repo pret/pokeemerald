@@ -54,7 +54,7 @@ BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259AF9:: @ 8259AF9
 BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259B74:: @ 8259B74
 	msgbox BattleFrontier_BattleFactoryPreBattleRoom_Text_25AB96, MSGBOX_DEFAULT
 	closemessage
-	call BattleFrontier_BattleFactoryPreBattleRoom_EventScript_23F2B7
+	call BattleFrontier_EventScript_GetLvlMode
 	compare VAR_RESULT, 0
 	call_if_eq BattleFrontier_BattleFactoryPreBattleRoom_EventScript_25A17C
 	compare VAR_RESULT, 1
@@ -98,9 +98,7 @@ BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259C13:: @ 8259C13
 	goto_if_ne BattleFrontier_BattleFactoryPreBattleRoom_EventScript_25A0B9
 
 BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259C26:: @ 8259C26
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_GET_DATA
-	setvar VAR_0x8005, 2
-	special CallFrontierUtilFunc
+	frontier_get FRONTIER_DATA_BATTLE_NUM
 	compare VAR_RESULT, 1
 	call_if_eq BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259E1D
 	compare VAR_RESULT, 2
@@ -142,7 +140,7 @@ BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259CFC:: @ 8259CFC
 	case MULTI_B_PRESSED, BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259C13
 
 BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259D2E:: @ 8259D2E
-	call BattleFrontier_BattleFactoryPreBattleRoom_EventScript_23E8B4
+	call BattleFrontier_EventScript_SaveBattle
 	goto BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259C13
 
 BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259D38:: @ 8259D38
@@ -229,8 +227,7 @@ BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259E47:: @ 8259E47
 	playse SE_SAVE
 	waitse
 	fadescreen 1
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_SOFT_RESET
-	special CallFrontierUtilFunc
+	frontier_reset
 	end
 
 BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259E69:: @ 8259E69
@@ -239,7 +236,7 @@ BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259E69:: @ 8259E69
 	setvar VAR_0x8005, 0
 	special CallBattleFactoryFunction
 	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_SET_DATA
-	setvar VAR_0x8005, 6
+	setvar VAR_0x8005, FRONTIER_DATA_6
 	setvar VAR_0x8006, 1
 	special CallFrontierUtilFunc
 	special CalculatePlayerPartyCount

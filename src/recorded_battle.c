@@ -334,9 +334,9 @@ bool32 MoveRecordedBattleToSaveData(void)
     s32 i, j;
     bool32 ret;
     struct RecordedBattleSave *battleSave, *savSection;
-    u8 var;
+    u8 saveAttempts;
 
-    var = 0;
+    saveAttempts = 0;
     battleSave = AllocZeroed(sizeof(struct RecordedBattleSave));
     savSection = AllocZeroed(0x1000);
 
@@ -480,8 +480,8 @@ bool32 MoveRecordedBattleToSaveData(void)
         ret = RecordedBattleToSave(battleSave, savSection);
         if (ret == TRUE)
             break;
-        var++;
-        if (var >= 3)
+        saveAttempts++;
+        if (saveAttempts >= 3)
             break;
     }
 

@@ -92,9 +92,9 @@ BattleFrontier_BattlePikeThreePathRoom_EventScript_RoomWarp:: @ 82C3F6F
 	battlepike_getstreak
 	addvar VAR_RESULT, 1
 	battlepike_setstreak VAR_RESULT
-	frontier_getbattlenum
+	frontier_get FRONTIER_DATA_BATTLE_NUM
 	addvar VAR_RESULT, 1
-	frontier_setbattlenum VAR_RESULT
+	frontier_set FRONTIER_DATA_BATTLE_NUM, VAR_RESULT
 	battlepike_setnextroom
 	battlepike_getroomtype
 	switch VAR_RESULT
@@ -160,9 +160,9 @@ BattleFrontier_BattlePikeRoomNormal_EventScript_Exit:: @ 82C40A2
 	battlepike_getstreak
 	addvar VAR_RESULT, 1
 	battlepike_setstreak VAR_RESULT
-	frontier_getbattlenum
+	frontier_get FRONTIER_DATA_BATTLE_NUM
 	addvar VAR_RESULT, 1
-	frontier_setbattlenum VAR_RESULT
+	frontier_set FRONTIER_DATA_BATTLE_NUM, VAR_RESULT
 	battlepike_isfinalroom
 	compare VAR_RESULT, TRUE
 	call_if_eq BattleFrontier_BattlePikeRoom_EventScript_WarpToFinalRoom
@@ -204,9 +204,9 @@ BattleFrontier_BattlePikeRoomWildMons_EventScript_2C4174:: @ 82C4174
 	battlepike_getstreak
 	addvar VAR_RESULT, 1
 	battlepike_setstreak VAR_RESULT
-	frontier_getbattlenum
+	frontier_get FRONTIER_DATA_BATTLE_NUM
 	addvar VAR_RESULT, 1
-	frontier_setbattlenum VAR_RESULT
+	frontier_set FRONTIER_DATA_BATTLE_NUM, VAR_RESULT
 	battlepike_isfinalroom
 	compare VAR_RESULT, TRUE
 	call_if_eq BattleFrontier_BattlePikeRoom_EventScript_WarpToFinalRoom
@@ -229,17 +229,17 @@ BattleFrontier_BattlePikeRoomWildMons_EventScript_2C420D:: @ 82C420D
 	end
 
 BattleFrontier_BattlePike_EventScript_Retire:: @ 82C4222
-	frontier_setchallengestatus CHALLENGE_STATUS_LOST
+	frontier_set FRONTIER_DATA_CHALLENGE_STATUS CHALLENGE_STATUS_LOST
 	warp MAP_BATTLE_FRONTIER_BATTLE_PIKE_LOBBY, 255, 5, 6
 	waitstate
 	end
 
 BattleFrontier_BattlePikeRoom_OnResume: @ 82C423E
 	setorcopyvar VAR_0x8006, VAR_RESULT
-	frontier_getchallengestatus
-	compare VAR_RESULT, 2
+	frontier_get FRONTIER_DATA_CHALLENGE_STATUS
+	compare VAR_RESULT, CHALLENGE_STATUS_PAUSED
 	goto_if_eq BattleFrontier_BattlePikeThreePathRoom_EventScript_2C426B
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, CHALLENGE_STATUS_SAVING
 	goto_if_eq BattleFrontier_BattlePikeThreePathRoom_EventScript_2C426B
 	call BattleFrontier_BattlePikeRoom_EventScript_ResetSketchedMoves
 BattleFrontier_BattlePikeThreePathRoom_EventScript_2C426B:: @ 82C426B

@@ -35,7 +35,7 @@ FallarborTown_BattleTentBattleRoom_EventScript_2008E7:: @ 82008E7
 	showobjectat 1, MAP_FALLARBOR_TOWN_BATTLE_TENT_BATTLE_ROOM
 	applymovement 1, FallarborTown_BattleTentBattleRoom_Movement_200B8D
 	waitmovement 0
-	frontier_getbattlenum
+	frontier_get FRONTIER_DATA_BATTLE_NUM
 	compare VAR_RESULT, 0
 	goto_if_ne FallarborTown_BattleTentBattleRoom_EventScript_200B73
 
@@ -51,7 +51,7 @@ FallarborTown_BattleTentBattleRoom_EventScript_20090F:: @ 820090F
 	waitmovement 0
 	msgbox FallarborTown_BattleTentBattleRoom_Text_257C93, MSGBOX_DEFAULT
 	setvar VAR_0x8004, 4
-	special sub_81B99B4
+	special CallVerdanturfTentFunction
 	msgbox gStringVar4, MSGBOX_DEFAULT
 	waitmessage
 	call FallarborTown_BattleTentBattleRoom_EventScript_257B6C
@@ -62,11 +62,11 @@ FallarborTown_BattleTentBattleRoom_EventScript_20090F:: @ 820090F
 	waitse
 	waitmovement 0
 	setvar VAR_0x8004, 6
-	special sub_81B9B80
+	special CallFallarborTentFunction
 	msgbox FallarborTown_BattleTentBattleRoom_Text_257CCE, MSGBOX_DEFAULT
 
 FallarborTown_BattleTentBattleRoom_EventScript_20097E:: @ 820097E
-	frontier_setchallengestatus CHALLENGE_STATUS_LOST
+	frontier_set FRONTIER_DATA_CHALLENGE_STATUS, CHALLENGE_STATUS_LOST
 	special LoadPlayerParty
 	warp MAP_FALLARBOR_TOWN_BATTLE_TENT_LOBBY, 255, 6, 6
 	waitstate
@@ -80,9 +80,9 @@ FallarborTown_BattleTentBattleRoom_EventScript_20099C:: @ 820099C
 	closemessage
 
 FallarborTown_BattleTentBattleRoom_EventScript_2009B3:: @ 82009B3
-	frontier_getbattlenum
+	frontier_get FRONTIER_DATA_BATTLE_NUM
 	addvar VAR_RESULT, 1
-	frontier_setbattlenum VAR_RESULT
+	frontier_set FRONTIER_DATA_BATTLE_NUM, VAR_RESULT
 	switch VAR_RESULT
 	case 3, FallarborTown_BattleTentBattleRoom_EventScript_200AF3
 	applymovement 3, FallarborTown_BattleTentBattleRoom_Movement_200B9E
@@ -95,13 +95,13 @@ FallarborTown_BattleTentBattleRoom_EventScript_2009B3:: @ 82009B3
 	msgbox FallarborTown_BattleTentBattleRoom_Text_257CE9, MSGBOX_DEFAULT
 	special LoadPlayerParty
 	special SavePlayerParty
-	frontier_loadselectedmons
+	frontier_setpartyorder FRONTIER_PARTY_SIZE
 	playfanfare MUS_ME_ASA
 	waitfanfare
 	special HealPlayerParty
 
 FallarborTown_BattleTentBattleRoom_EventScript_200A2A:: @ 8200A2A
-	frontier_getbattlenum
+	frontier_get FRONTIER_DATA_BATTLE_NUM
 	compare VAR_RESULT, 1
 	call_if_eq FallarborTown_BattleTentBattleRoom_EventScript_200B43
 	compare VAR_RESULT, 2
@@ -139,14 +139,14 @@ FallarborTown_BattleTentBattleRoom_EventScript_200AD8:: @ 8200AD8
 
 FallarborTown_BattleTentBattleRoom_EventScript_200AF3:: @ 8200AF3
 	delay 60
-	frontier_setchallengestatus CHALLENGE_STATUS_WON
+	frontier_set FRONTIER_DATA_CHALLENGE_STATUS, CHALLENGE_STATUS_WON
 	special LoadPlayerParty
 	warp MAP_FALLARBOR_TOWN_BATTLE_TENT_LOBBY, 255, 6, 6
 	waitstate
 	setvar VAR_0x8004, 1
 	setvar VAR_0x8005, 1
 	special CallBattleArenaFunction
-	compare VAR_RESULT, 9999
+	compare VAR_RESULT, MAX_STREAK
 	goto_if_eq FallarborTown_BattleTentBattleRoom_EventScript_2009B3
 	addvar VAR_RESULT, 1
 	setvar VAR_0x8004, 2
@@ -169,12 +169,11 @@ FallarborTown_BattleTentBattleRoom_EventScript_200B51:: @ 8200B51
 	waitmessage
 	setvar VAR_0x8004, 3
 	setvar VAR_0x8005, 2
-	special sub_81B9B80
+	special CallFallarborTentFunction
 	playse SE_SAVE
 	waitse
 	fadescreen 1
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_SOFT_RESET
-	special CallFrontierUtilFunc
+	frontier_reset
 	end
 
 FallarborTown_BattleTentBattleRoom_EventScript_200B73:: @ 8200B73

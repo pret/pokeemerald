@@ -259,7 +259,7 @@ extern const u8 gText_Love[];
 extern const u8 gText_SpaceAndSpace[];
 extern const u8 gText_CommaSpace[];
 extern const u8 gText_Space2[];
-extern const u8 gText_ScrollTextUp[];
+extern const u8 gText_LineBreak[];
 extern const u8 gText_NewLine[];
 extern const u8 gText_Are[];
 extern const u8 gText_Are2[];

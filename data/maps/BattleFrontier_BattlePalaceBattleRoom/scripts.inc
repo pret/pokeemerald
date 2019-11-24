@@ -5,8 +5,7 @@ BattleFrontier_BattlePalaceBattleRoom_MapScripts:: @ 824F815
 	.byte 0
 
 BattleFrontier_BattlePalaceBattleRoom_MapScript1_24F825: @ 824F825
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_SET_FRONTIER_TRAINERS
-	special CallFrontierUtilFunc
+	frontier_settrainers
 	call BattleFrontier_BattlePalaceBattleRoom_EventScript_24F833
 	end
 
@@ -34,7 +33,7 @@ BattleFrontier_BattlePalaceBattleRoom_MapScript2_24F861: @ 824F861
 
 BattleFrontier_BattlePalaceBattleRoom_EventScript_24F86B:: @ 824F86B
 	showobjectat 1, MAP_BATTLE_FRONTIER_BATTLE_PALACE_BATTLE_ROOM
-	frontier_getbattlenum
+	frontier_get FRONTIER_DATA_BATTLE_NUM
 	compare VAR_RESULT, 0
 	goto_if_eq BattleFrontier_BattlePalaceBattleRoom_EventScript_24F8B5
 	applymovement 1, BattleFrontier_BattlePalaceBattleRoom_Movement_24FE9B
@@ -42,7 +41,7 @@ BattleFrontier_BattlePalaceBattleRoom_EventScript_24F86B:: @ 824F86B
 	applymovement 3, BattleFrontier_BattlePalaceBattleRoom_Movement_24FEAC
 	setvar VAR_TEMP_2, 1
 	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_SET_DATA
-	setvar VAR_0x8005, 6
+	setvar VAR_0x8005, FRONTIER_DATA_6
 	setvar VAR_0x8006, 1
 	special CallFrontierUtilFunc
 	goto BattleFrontier_BattlePalaceBattleRoom_EventScript_24F98A
@@ -66,14 +65,14 @@ BattleFrontier_BattlePalaceBattleRoom_EventScript_24F8BF:: @ 824F8BF
 	case 1, BattleFrontier_BattlePalaceBattleRoom_EventScript_24F911
 
 BattleFrontier_BattlePalaceBattleRoom_EventScript_24F8FA:: @ 824F8FA
-	frontier_setchallengestatus CHALLENGE_STATUS_LOST
+	frontier_set FRONTIER_DATA_CHALLENGE_STATUS, CHALLENGE_STATUS_LOST
 	goto BattleFrontier_BattlePalaceBattleRoom_EventScript_24FEBB
 
 BattleFrontier_BattlePalaceBattleRoom_EventScript_24F911:: @ 824F911
-	call BattleFrontier_BattlePalaceBattleRoom_EventScript_241EBA
-	frontier_getbattlenum
+	call BattleFrontier_EventScript_IncrementWinStreak
+	frontier_get FRONTIER_DATA_BATTLE_NUM
 	addvar VAR_RESULT, 1
-	frontier_setbattlenum VAR_RESULT
+	frontier_set FRONTIER_DATA_BATTLE_NUM, VAR_RESULT
 	switch VAR_RESULT
 	case 7, BattleFrontier_BattlePalaceBattleRoom_EventScript_24FB28
 	applymovement 2, BattleFrontier_BattlePalaceBattleRoom_Movement_24FEA7
@@ -85,7 +84,7 @@ BattleFrontier_BattlePalaceBattleRoom_EventScript_24F911:: @ 824F911
 	msgbox BattleFrontier_BattlePalaceBattleRoom_Text_24FF00, MSGBOX_DEFAULT
 	special LoadPlayerParty
 	special SavePlayerParty
-	frontier_loadselectedmons
+	frontier_setpartyorder FRONTIER_PARTY_SIZE
 	playfanfare MUS_ME_ASA
 	waitfanfare
 	special HealPlayerParty
@@ -95,7 +94,7 @@ BattleFrontier_BattlePalaceBattleRoom_EventScript_24F98A:: @ 824F98A
 	copyvar VAR_TEMP_F, VAR_RESULT
 	compare VAR_RESULT, FRONTIER_BRAIN_NOT_READY
 	goto_if_ne BattleFrontier_BattlePalaceBattleRoom_EventScript_24FB61
-	frontier_getbattlenum
+	frontier_get FRONTIER_DATA_BATTLE_NUM
 	compare VAR_RESULT, 1
 	call_if_eq BattleFrontier_BattlePalaceBattleRoom_EventScript_24FE66
 	compare VAR_RESULT, 2
@@ -137,7 +136,7 @@ BattleFrontier_BattlePalaceBattleRoom_EventScript_24FA78:: @ 824FA78
 	case MULTI_B_PRESSED, BattleFrontier_BattlePalaceBattleRoom_EventScript_24F98A
 
 BattleFrontier_BattlePalaceBattleRoom_EventScript_24FAAA:: @ 824FAAA
-	call BattleFrontier_BattlePalaceBattleRoom_EventScript_23E8B4
+	call BattleFrontier_EventScript_SaveBattle
 	goto BattleFrontier_BattlePalaceBattleRoom_EventScript_24F98A
 
 BattleFrontier_BattlePalaceBattleRoom_EventScript_24FAB4:: @ 824FAB4
@@ -163,7 +162,7 @@ BattleFrontier_BattlePalaceBattleRoom_EventScript_24FB14:: @ 824FB14
 	goto BattleFrontier_BattlePalaceBattleRoom_EventScript_24F8BF
 
 BattleFrontier_BattlePalaceBattleRoom_EventScript_24FB28:: @ 824FB28
-	frontier_setchallengestatus CHALLENGE_STATUS_WON
+	frontier_set FRONTIER_DATA_CHALLENGE_STATUS, CHALLENGE_STATUS_WON
 	goto BattleFrontier_BattlePalaceBattleRoom_EventScript_24FEBB
 
 BattleFrontier_BattlePalaceBattleRoom_EventScript_24FB3F:: @ 824FB3F
@@ -175,8 +174,7 @@ BattleFrontier_BattlePalaceBattleRoom_EventScript_24FB3F:: @ 824FB3F
 	playse SE_SAVE
 	waitse
 	fadescreen 1
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_SOFT_RESET
-	special CallFrontierUtilFunc
+	frontier_reset
 	end
 
 BattleFrontier_BattlePalaceBattleRoom_EventScript_24FB61:: @ 824FB61
@@ -208,7 +206,7 @@ BattleFrontier_BattlePalaceBattleRoom_EventScript_24FBD0:: @ 824FBD0
 	case MULTI_B_PRESSED, BattleFrontier_BattlePalaceBattleRoom_EventScript_24FB79
 
 BattleFrontier_BattlePalaceBattleRoom_EventScript_24FC06:: @ 824FC06
-	call BattleFrontier_BattlePalaceBattleRoom_EventScript_242170
+	call BattleFrontier_EventScript_SetBrainObjectGfx
 	msgbox BattleFrontier_BattlePalaceBattleRoom_Text_25017C, MSGBOX_DEFAULT
 	closemessage
 	applymovement 1, BattleFrontier_BattlePalaceBattleRoom_Movement_24FE97
@@ -226,16 +224,11 @@ BattleFrontier_BattlePalaceBattleRoom_EventScript_24FC06:: @ 824FC06
 	case FRONTIER_BRAIN_GOLD, BattleFrontier_BattlePalaceBattleRoom_EventScript_24FD3A
 	case FRONTIER_BRAIN_STREAK, BattleFrontier_BattlePalaceBattleRoom_EventScript_24FCAA
 	case FRONTIER_BRAIN_STREAK_LONG, BattleFrontier_BattlePalaceBattleRoom_EventScript_24FD67
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_GET_DATA
-	setvar VAR_0x8005, 7
-	special CallFrontierUtilFunc
-	compare VAR_RESULT, 0
+	frontier_get FRONTIER_DATA_HEARD_BRAIN_SPEECH
+	compare VAR_RESULT, FALSE
 	goto_if_ne BattleFrontier_BattlePalaceBattleRoom_EventScript_24FCAA
 	msgbox BattleFrontier_BattlePalaceBattleRoom_Text_2501C1, MSGBOX_DEFAULT
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_SET_DATA
-	setvar VAR_0x8005, 7
-	special CallFrontierUtilFunc
-
+	frontier_set FRONTIER_DATA_HEARD_BRAIN_SPEECH
 BattleFrontier_BattlePalaceBattleRoom_EventScript_24FCAA:: @ 824FCAA
 	msgbox BattleFrontier_BattlePalaceBattleRoom_Text_2502C4, MSGBOX_DEFAULT
 	call BattleFrontier_BattlePalaceBattleRoom_EventScript_24FDF7
@@ -246,8 +239,7 @@ BattleFrontier_BattlePalaceBattleRoom_EventScript_24FCAA:: @ 824FCAA
 BattleFrontier_BattlePalaceBattleRoom_EventScript_24FCC7:: @ 824FCC7
 	setvar VAR_0x8004, 6
 	special CallBattlePalaceFunction
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_GET_FACILITY_SYMBOLS
-	special CallFrontierUtilFunc
+	frontier_getsymbols
 	compare VAR_RESULT, 0
 	goto_if_ne BattleFrontier_BattlePalaceBattleRoom_EventScript_24FB28
 	msgbox BattleFrontier_BattlePalaceBattleRoom_Text_2502FF, MSGBOX_DEFAULT
@@ -258,8 +250,7 @@ BattleFrontier_BattlePalaceBattleRoom_EventScript_24FCC7:: @ 824FCC7
 	message BattleFrontier_BattlePalaceBattleRoom_Text_2503DC
 	waitmessage
 	waitfanfare
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_GIVE_FACILITY_SYMBOL
-	special CallFrontierUtilFunc
+	frontier_givesymbol
 	applymovement 2, Common_Movement_WalkInPlaceLeft
 	waitmovement 0
 	applymovement 1, Common_Movement_WalkInPlaceFastestRight
@@ -269,16 +260,11 @@ BattleFrontier_BattlePalaceBattleRoom_EventScript_24FCC7:: @ 824FCC7
 	goto BattleFrontier_BattlePalaceBattleRoom_EventScript_24FB28
 
 BattleFrontier_BattlePalaceBattleRoom_EventScript_24FD3A:: @ 824FD3A
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_GET_DATA
-	setvar VAR_0x8005, 7
-	special CallFrontierUtilFunc
-	compare VAR_RESULT, 0
+	frontier_get FRONTIER_DATA_HEARD_BRAIN_SPEECH
+	compare VAR_RESULT, FALSE
 	goto_if_ne BattleFrontier_BattlePalaceBattleRoom_EventScript_24FD67
 	msgbox BattleFrontier_BattlePalaceBattleRoom_Text_250485, MSGBOX_DEFAULT
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_SET_DATA
-	setvar VAR_0x8005, 7
-	special CallFrontierUtilFunc
-
+	frontier_set FRONTIER_DATA_HEARD_BRAIN_SPEECH
 BattleFrontier_BattlePalaceBattleRoom_EventScript_24FD67:: @ 824FD67
 	msgbox BattleFrontier_BattlePalaceBattleRoom_Text_250572, MSGBOX_DEFAULT
 	call BattleFrontier_BattlePalaceBattleRoom_EventScript_24FDF7
@@ -289,8 +275,7 @@ BattleFrontier_BattlePalaceBattleRoom_EventScript_24FD67:: @ 824FD67
 BattleFrontier_BattlePalaceBattleRoom_EventScript_24FD84:: @ 824FD84
 	setvar VAR_0x8004, 6
 	special CallBattlePalaceFunction
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_GET_FACILITY_SYMBOLS
-	special CallFrontierUtilFunc
+	frontier_getsymbols
 	compare VAR_RESULT, 2
 	goto_if_eq BattleFrontier_BattlePalaceBattleRoom_EventScript_24FB28
 	msgbox BattleFrontier_BattlePalaceBattleRoom_Text_25057E, MSGBOX_DEFAULT
@@ -301,8 +286,7 @@ BattleFrontier_BattlePalaceBattleRoom_EventScript_24FD84:: @ 824FD84
 	message BattleFrontier_BattlePalaceBattleRoom_Text_250699
 	waitmessage
 	waitfanfare
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_GIVE_FACILITY_SYMBOL
-	special CallFrontierUtilFunc
+	frontier_givesymbol
 	applymovement 2, Common_Movement_WalkInPlaceLeft
 	waitmovement 0
 	applymovement 1, Common_Movement_WalkInPlaceFastestRight
@@ -316,7 +300,7 @@ VerdanturfTown_BattleTentBattleRoom_EventScript_24FDF7:: @ 824FDF7
 	closemessage
 	setvar VAR_TEMP_2, 0
 	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_SET_DATA
-	setvar VAR_0x8005, 6
+	setvar VAR_0x8005, FRONTIER_DATA_6
 	setvar VAR_0x8006, 0
 	special CallFrontierUtilFunc
 	special HealPlayerParty
@@ -324,8 +308,7 @@ VerdanturfTown_BattleTentBattleRoom_EventScript_24FDF7:: @ 824FDF7
 	setvar VAR_0x8005, 0
 	special DoSpecialTrainerBattle
 	waitstate
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_18
-	special CallFrontierUtilFunc
+	frontier_restorehelditems
 	special HealPlayerParty
 	frontier_resetsketch
 	return
@@ -441,7 +424,7 @@ BattleFrontier_BattlePalaceBattleRoom_Movement_24FEB6: @ 824FEB6
 
 BattleFrontier_BattlePalaceBattleRoom_EventScript_24FEBB:: @ 824FEBB
 	copyvar VAR_RESULT, VAR_FRONTIER_BATTLE_MODE
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, FRONTIER_MODE_DOUBLES
 	goto_if_eq BattleFrontier_BattlePalaceBattleRoom_EventScript_24FED5
 	warp MAP_BATTLE_FRONTIER_BATTLE_PALACE_LOBBY, 255, 5, 7
 	waitstate

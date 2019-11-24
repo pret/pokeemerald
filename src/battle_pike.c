@@ -15,6 +15,7 @@
 #include "battle_setup.h"
 #include "constants/event_objects.h"
 #include "constants/battle_frontier.h"
+#include "constants/frontier_util.h"
 #include "constants/abilities.h"
 #include "constants/easy_chat.h"
 #include "constants/layouts.h"
@@ -537,7 +538,7 @@ static bool8 (* const sStatusInflictionScreenFadeFuncs[])(struct Task *) =
     StatusInflictionFadeOut, StatusInflictionFadeIn
 };
 
-static const u32 gUnknown_08612690[] = {0x400, 0x800};
+static const u32 sWinStreakFlags[] = {STREAK_PIKE_50, STREAK_PIKE_OPEN};
 
 // code
 void CallBattlePikeFunction(void)
@@ -636,9 +637,9 @@ static void GetBattlePikeData(void)
         break;
     case 4:
         if (lvlMode != FRONTIER_LVL_50)
-            gSpecialVar_Result = gSaveBlock2Ptr->frontier.field_CDC & 0x800;
+            gSpecialVar_Result = gSaveBlock2Ptr->frontier.winStreakActiveFlags & STREAK_PIKE_OPEN;
         else
-            gSpecialVar_Result = gSaveBlock2Ptr->frontier.field_CDC & 0x400;
+            gSpecialVar_Result = gSaveBlock2Ptr->frontier.winStreakActiveFlags & STREAK_PIKE_50;
         break;
     }
 }
@@ -653,31 +654,31 @@ static void SetBattlePikeData(void)
         gSaveBlock2Ptr->frontier.field_E02 = gSpecialVar_0x8006;
         break;
     case 1:
-        if (gSpecialVar_0x8006 <= 9999)
+        if (gSpecialVar_0x8006 <= MAX_STREAK)
             gSaveBlock2Ptr->frontier.pikeWinStreaks[gSaveBlock2Ptr->frontier.lvlMode] = gSpecialVar_0x8006;
         break;
     case 2:
-        if (gSpecialVar_0x8006 <= 9999 && gSaveBlock2Ptr->frontier.pikeRecordStreaks[gSaveBlock2Ptr->frontier.lvlMode] < gSpecialVar_0x8006)
+        if (gSpecialVar_0x8006 <= MAX_STREAK && gSaveBlock2Ptr->frontier.pikeRecordStreaks[gSaveBlock2Ptr->frontier.lvlMode] < gSpecialVar_0x8006)
             gSaveBlock2Ptr->frontier.pikeRecordStreaks[gSaveBlock2Ptr->frontier.lvlMode] = gSpecialVar_0x8006;
         break;
     case 3:
-        if (gSpecialVar_0x8006 <= 9999)
+        if (gSpecialVar_0x8006 <= MAX_STREAK)
             gSaveBlock2Ptr->frontier.pikeTotalStreaks[gSaveBlock2Ptr->frontier.lvlMode] = gSpecialVar_0x8006;
         break;
     case 4:
         if (lvlMode != FRONTIER_LVL_50)
         {
             if (gSpecialVar_0x8006)
-                gSaveBlock2Ptr->frontier.field_CDC |= 0x800;
+                gSaveBlock2Ptr->frontier.winStreakActiveFlags |= STREAK_PIKE_OPEN;
             else
-                gSaveBlock2Ptr->frontier.field_CDC &= ~(0x800);
+                gSaveBlock2Ptr->frontier.winStreakActiveFlags &= ~(STREAK_PIKE_OPEN);
         }
         else
         {
             if (gSpecialVar_0x8006)
-                gSaveBlock2Ptr->frontier.field_CDC |= 0x400;
+                gSaveBlock2Ptr->frontier.winStreakActiveFlags |= STREAK_PIKE_50;
             else
-                gSaveBlock2Ptr->frontier.field_CDC &= ~(0x400);
+                gSaveBlock2Ptr->frontier.winStreakActiveFlags &= ~(STREAK_PIKE_50);
         }
         break;
     }
@@ -708,9 +709,9 @@ static void sub_81A740C(void)
 
 static void sub_81A7418(void)
 {
-    gSaveBlock2Ptr->frontier.challengeOutcome = gSpecialVar_0x8005;
+    gSaveBlock2Ptr->frontier.challengeStatus = gSpecialVar_0x8005;
     VarSet(VAR_TEMP_0, 0);
-    gSaveBlock2Ptr->frontier.field_CA9_a = 1;
+    gSaveBlock2Ptr->frontier.challengePaused = TRUE;
     save_serialize_map();
     TrySavingData(SAVE_LINK);
 }
@@ -1587,7 +1588,7 @@ static void BackupMonHeldItems(void)
 {
     u8 i;
 
-    for (i = 0; i < 3; i++)
+    for (i = 0; i < FRONTIER_PARTY_SIZE; i++)
     {
         int heldItem = GetMonData(&gSaveBlock1Ptr->playerParty[gSaveBlock2Ptr->frontier.selectedPartyMons[i] - 1],
                                   MON_DATA_HELD_ITEM);
@@ -1599,7 +1600,7 @@ static void RestoreMonHeldItems(void)
 {
     u8 i;
 
-    for (i = 0; i < 3; i++)
+    for (i = 0; i < FRONTIER_PARTY_SIZE; i++)
     {
         SetMonData(&gPlayerParty[gSaveBlock2Ptr->frontier.selectedPartyMons[i] - 1],
                    MON_DATA_HELD_ITEM,
@@ -1611,10 +1612,10 @@ static void InitPikeChallenge(void)
 {
     u8 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
 
-    gSaveBlock2Ptr->frontier.challengeOutcome = 0;
+    gSaveBlock2Ptr->frontier.challengeStatus = 0;
     gSaveBlock2Ptr->frontier.curChallengeBattleNum = 0;
-    gSaveBlock2Ptr->frontier.field_CA9_a = 0;
-    if (!(gSaveBlock2Ptr->frontier.field_CDC & gUnknown_08612690[lvlMode]))
+    gSaveBlock2Ptr->frontier.challengePaused = FALSE;
+    if (!(gSaveBlock2Ptr->frontier.winStreakActiveFlags & sWinStreakFlags[lvlMode]))
         gSaveBlock2Ptr->frontier.pikeWinStreaks[lvlMode] = 0;
 
     gTrainerBattleOpponent_A = 0;

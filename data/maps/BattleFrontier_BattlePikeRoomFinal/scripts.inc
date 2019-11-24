@@ -11,7 +11,7 @@ BattleFrontier_BattlePikeRoomFinal_EventScript_25E3A7:: @ 825E3A7
 	delay 16
 	applymovement 1, BattleFrontier_BattlePikeRoomFinal_Movement_25E3DB
 	waitmovement 0
-	frontier_setchallengestatus CHALLENGE_STATUS_WON
+	frontier_set FRONTIER_DATA_CHALLENGE_STATUS, CHALLENGE_STATUS_WON
 	lockall
 	msgbox BattleFrontier_BattlePikeRoomFinal_Text_CongratsThisWayPlease, MSGBOX_DEFAULT
 	closemessage

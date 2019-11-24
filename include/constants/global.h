@@ -56,10 +56,15 @@
 #define HALL_FACILITIES_COUNT 9 // 7 facilities for single mode + tower double mode + tower multi mode.
 
 #define TRAINER_ID_LENGTH 4
-#define PARTY_SIZE 6
-#define FRONTIER_PARTY_SIZE 3
-#define MULTI_PARTY_SIZE PARTY_SIZE / 2
 #define MAX_MON_MOVES 4
+
+// party sizes
+#define PARTY_SIZE 6
+#define MULTI_PARTY_SIZE PARTY_SIZE / 2
+#define FRONTIER_PARTY_SIZE         3
+#define FRONTIER_DOUBLES_PARTY_SIZE 4
+#define FRONTIER_MULTI_PARTY_SIZE   2
+#define MAX_FRONTIER_PARTY_SIZE     FRONTIER_DOUBLES_PARTY_SIZE
 
 // string lengths
 #define ITEM_NAME_LENGTH 14

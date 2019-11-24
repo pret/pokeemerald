@@ -9,10 +9,7 @@ BattleFrontier_BattlePikeCorridor_MapScript2_25C77C: @ 825C77C
 
 BattleFrontier_BattlePikeCorridor_EventScript_25C786:: @ 825C786
 	delay 16
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_SET_DATA
-	setvar VAR_0x8005, 2
-	setvar VAR_0x8006, 1
-	special CallFrontierUtilFunc
+	frontier_set FRONTIER_DATA_BATTLE_NUM, 1
 	setvar VAR_0x8004, BATTLE_PIKE_FUNC_CLEAR_TRAINER_IDS
 	special CallBattlePikeFunction
 	battlepike_nohealing TRUE
@@ -25,10 +22,7 @@ BattleFrontier_BattlePikeCorridor_EventScript_25C786:: @ 825C786
 	releaseall
 	applymovement EVENT_OBJ_ID_PLAYER, BattleFrontier_BattlePikeCorridor_Movement_25C80E
 	waitmovement 0
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_SET_DATA
-	setvar VAR_0x8005, 0
-	setvar VAR_0x8006, 99
-	special CallFrontierUtilFunc
+	frontier_set FRONTIER_DATA_CHALLENGE_STATUS, 99
 	call BattleFrontier_BattlePike_EventScript_CloseCurtain
 	warpsilent MAP_BATTLE_FRONTIER_BATTLE_PIKE_THREE_PATH_ROOM, 255, 6, 10
 	waitstate

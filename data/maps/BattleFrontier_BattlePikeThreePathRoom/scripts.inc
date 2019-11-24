@@ -5,9 +5,9 @@ BattleFrontier_BattlePikeThreePathRoom_MapScripts:: @ 825C843
 	.byte 0
 
 BattleFrontier_BattlePikeThreePathRoom_OnFrame: @ 825C853
-	map_script_2 VAR_TEMP_0, 0, BattleFrontier_BattlePikeThreePathRoom_EventScript_CheckChallengeOutcome
-	map_script_2 VAR_TEMP_0, 1, BattleFrontier_BattlePikeThreePathRoom_EventScript_WarpToLobby
-	map_script_2 VAR_TEMP_0, 2, BattleFrontier_BattlePikeThreePathRoom_EventScript_25C8A4
+	map_script_2 VAR_TEMP_0, 0, BattleFrontier_BattlePikeThreePathRoom_EventScript_CheckChallengeStatus
+	map_script_2 VAR_TEMP_0, CHALLENGE_STATUS_SAVING, BattleFrontier_BattlePikeThreePathRoom_EventScript_WarpToLobby
+	map_script_2 VAR_TEMP_0, CHALLENGE_STATUS_PAUSED, BattleFrontier_BattlePikeThreePathRoom_EventScript_25C8A4
 	map_script_2 VAR_TEMP_5, 0, BattleFrontier_BattlePikeThreePathRoom_EventScript_25CA78
 	map_script_2 VAR_TEMP_5, 1, BattleFrontier_BattlePikeThreePathRoom_EventScript_25CA97
 	.2byte 0
@@ -21,8 +21,8 @@ BattleFrontier_BattlePikeThreePathRoom_EventScript_25C887:: @ 825C887
 	turnobject EVENT_OBJ_ID_PLAYER, DIR_NORTH
 	end
 
-BattleFrontier_BattlePikeThreePathRoom_EventScript_CheckChallengeOutcome:: @ 825C891
-	frontier_checkoutcome
+BattleFrontier_BattlePikeThreePathRoom_EventScript_CheckChallengeStatus:: @ 825C891
+	frontier_getstatus
 	end
 
 BattleFrontier_BattlePikeThreePathRoom_EventScript_WarpToLobby:: @ 825C89A
@@ -39,28 +39,19 @@ BattleFrontier_BattlePikeThreePathRoom_EventScript_25C8A4:: @ 825C8A4
 	special CallBattlePikeFunction
 	playse SE_SAVE
 	waitse
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_SET_DATA
-	setvar VAR_0x8005, 3
-	setvar VAR_0x8006, 0
-	special CallFrontierUtilFunc
+	frontier_set FRONTIER_DATA_PAUSED, FALSE
 	setvar VAR_TEMP_0, 255
 	special SavePlayerParty
-	frontier_loadselectedmons
+	frontier_setpartyorder FRONTIER_PARTY_SIZE
 	msgbox BattleFrontier_BattlePikeThreePathRoom_Text_PleaseEnjoyChallenge, MSGBOX_DEFAULT
 	closemessage
 	releaseall
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_SET_FRONTIER_TRAINERS
-	special CallFrontierUtilFunc
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_SET_DATA
-	setvar VAR_0x8005, 0
-	setvar VAR_0x8006, 99
-	special CallFrontierUtilFunc
+	frontier_settrainers
+	frontier_set FRONTIER_DATA_CHALLENGE_STATUS, 99
 	end
 
 BattleFrontier_BattlePikeThreePathRoom_EventScript_25C908:: @ 825C908
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_GET_DATA
-	setvar VAR_0x8005, 2
-	special CallFrontierUtilFunc
+	frontier_get FRONTIER_DATA_BATTLE_NUM  @ Room number
 	switch VAR_RESULT
 	case 1, BattleFrontier_BattlePikeThreePathRoom_EventScript_25C968
 	case 3, BattleFrontier_BattlePikeThreePathRoom_EventScript_25C978
@@ -129,8 +120,7 @@ BattleFrontier_BattlePikeThreePathRoom_EventScript_25C9D8:: @ 825C9D8
 	end
 
 BattleFrontier_BattlePikeThreePathRoom_EventScript_25C9FD:: @ 825C9FD
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_6
-	special CallFrontierUtilFunc
+	frontier_saveparty
 	message BattleFrontier_BattlePikeThreePathRoom_Text_SavingYourData
 	waitmessage
 	special LoadPlayerParty
@@ -140,8 +130,7 @@ BattleFrontier_BattlePikeThreePathRoom_EventScript_25C9FD:: @ 825C9FD
 	playse SE_SAVE
 	waitse
 	fadescreen 1
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_SOFT_RESET
-	special CallFrontierUtilFunc
+	frontier_reset
 	end
 
 BattleFrontier_BattlePikeThreePathRoom_EventScript_25CA2A:: @ 825CA2A

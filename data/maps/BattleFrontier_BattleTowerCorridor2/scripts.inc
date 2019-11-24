@@ -5,9 +5,9 @@ BattleFrontier_BattleTowerCorridor2_MapScripts:: @ 8248D4A
 	.byte 0
 
 BattleFrontier_BattleTowerCorridor2_MapScript1_248D5A: @ 8248D5A
-	compare VAR_FRONTIER_BATTLE_MODE, 2
+	compare VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_MULTIS
 	call_if_eq BattleFrontier_BattleTowerCorridor2_EventScript_248D71
-	compare VAR_FRONTIER_BATTLE_MODE, 3
+	compare VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_LINK_MULTIS
 	call_if_eq BattleFrontier_BattleTowerCorridor2_EventScript_248D91
 	end
 
@@ -87,13 +87,13 @@ BattleFrontier_BattleTowerCorridor2_EventScript_248DBC:: @ 8248DBC
 	end
 
 BattleFrontier_BattleTowerCorridor2_EventScript_248E71:: @ 8248E71
-	compare VAR_FRONTIER_BATTLE_MODE, 0
+	compare VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_SINGLES
 	call_if_eq BattleFrontier_BattleTowerCorridor2_EventScript_248E9E
-	compare VAR_FRONTIER_BATTLE_MODE, 1
+	compare VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_DOUBLES
 	call_if_eq BattleFrontier_BattleTowerCorridor2_EventScript_248E9E
-	compare VAR_FRONTIER_BATTLE_MODE, 2
+	compare VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_MULTIS
 	call_if_eq BattleFrontier_BattleTowerCorridor2_EventScript_248EA8
-	compare VAR_FRONTIER_BATTLE_MODE, 3
+	compare VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_LINK_MULTIS
 	call_if_eq BattleFrontier_BattleTowerCorridor2_EventScript_248EB2
 	return
 
