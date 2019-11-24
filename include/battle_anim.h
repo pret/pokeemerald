@@ -185,7 +185,7 @@ bool8 IsBattlerSpritePresent(u8 battlerId);
 void sub_80A6C68(u32 arg0);
 u8 GetAnimBattlerSpriteId(u8 wantedBattler);
 bool8 IsDoubleBattle(void);
-u8 GetPaletteOffset(void);
+u8 GetBattleBgPaletteNum(void);
 u8 GetBattlerSpriteBGPriorityRank(u8 battlerId);
 void StoreSpriteCallbackInData6(struct Sprite *sprite, void (*spriteCallback)(struct Sprite*));
 void SetSpritePrimaryCoordsFromSecondaryCoords(struct Sprite *sprite);
