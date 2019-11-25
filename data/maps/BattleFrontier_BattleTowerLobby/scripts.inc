@@ -181,9 +181,7 @@ BattleFrontier_BattlePalaceLobby_EventScript_23E8E0:: @ 823E8E0
 BattleFrontier_BattleTowerBattleRoom2_EventScript_23E8E0:: @ 823E8E0
 BattleFrontier_BattleTowerBattleRoom_EventScript_23E8E0:: @ 823E8E0
 BattleFrontier_BattleTowerLobby_EventScript_23E8E0:: @ 823E8E0
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_GET_DATA
-	setvar VAR_0x8005, FRONTIER_DATA_6
-	special CallFrontierUtilFunc
+	frontier_get FRONTIER_DATA_6
 	return
 
 BattleFrontier_BattleTowerLobby_EventScript_23E8EE:: @ 823E8EE

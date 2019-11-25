@@ -336,7 +336,7 @@ struct BattleFrontier
     /*0xCA9*/ u8 unused_CA9_d:1;
     /*0xCA9*/ u8 unused_CA9_e:1;
     /*0xCA9*/ u8 unused_CA9_f:1;
-    /*0xCB0*/ u16 selectedPartyMons[MAX_FRONTIER_PARTY_SIZE];
+    /*0xCAA*/ u16 selectedPartyMons[MAX_FRONTIER_PARTY_SIZE];
     /*0xCB2*/ u16 curChallengeBattleNum; // Battle number / room number (Pike) / floor number (Pyramid)
     /*0xCB4*/ u16 trainerIds[20];
     /*0xCDC*/ u32 winStreakActiveFlags;

@@ -28,10 +28,7 @@ BattleFrontier_BattleTowerBattleRoom_EventScript_241B6C:: @ 8241B6C
 	applymovement EVENT_OBJ_ID_PLAYER, BattleFrontier_BattleTowerBattleRoom_Movement_24217E
 	waitmovement 0
 	setvar VAR_TEMP_2, 1
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_SET_DATA
-	setvar VAR_0x8005, FRONTIER_DATA_6
-	setvar VAR_0x8006, 1
-	special CallFrontierUtilFunc
+	frontier_set FRONTIER_DATA_6, 1
 	goto BattleFrontier_BattleTowerBattleRoom_EventScript_241C8F
 
 BattleFrontier_BattleTowerBattleRoom_EventScript_241BC3:: @ 8241BC3
@@ -323,10 +320,7 @@ BattleFrontier_BattleTowerBattleRoom2_EventScript_24210E:: @ 824210E
 BattleFrontier_BattleTowerBattleRoom_EventScript_24210E:: @ 824210E
 	closemessage
 	setvar VAR_TEMP_2, 0
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_SET_DATA
-	setvar VAR_0x8005, FRONTIER_DATA_6
-	setvar VAR_0x8006, 0
-	special CallFrontierUtilFunc
+	frontier_set FRONTIER_DATA_6, 0
 	special HealPlayerParty
 	setvar VAR_0x8004, SPECIAL_BATTLE_TOWER
 	setvar VAR_0x8005, 0
