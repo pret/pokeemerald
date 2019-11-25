@@ -45,10 +45,7 @@ BattleFrontier_BattleArenaBattleRoom_EventScript_2574DC:: @ 82574DC
 	applymovement 5, BattleFrontier_BattleArenaBattleRoom_Movement_257C08
 	applymovement 8, BattleFrontier_BattleArenaBattleRoom_Movement_257BEB
 	setvar VAR_TEMP_2, 1
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_SET_DATA
-	setvar VAR_0x8005, FRONTIER_DATA_6
-	setvar VAR_0x8006, 1
-	special CallFrontierUtilFunc
+	frontier_set FRONTIER_DATA_6, 1
 	goto BattleFrontier_BattleArenaBattleRoom_EventScript_2576B0
 
 BattleFrontier_BattleArenaBattleRoom_EventScript_25752E:: @ 825752E
@@ -394,10 +391,7 @@ BattleFrontier_BattleArenaBattleRoom_EventScript_257B6C:: @ 8257B6C
 FallarborTown_BattleTentBattleRoom_EventScript_257B6C:: @ 8257B6C
 	closemessage
 	setvar VAR_TEMP_2, 0
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_SET_DATA
-	setvar VAR_0x8005, FRONTIER_DATA_6
-	setvar VAR_0x8006, 0
-	special CallFrontierUtilFunc
+	frontier_set FRONTIER_DATA_6, 0
 	special HealPlayerParty
 	setvar VAR_0x8004, SPECIAL_BATTLE_ARENA
 	setvar VAR_0x8005, 0

@@ -83,10 +83,7 @@ BattleFrontier_BattleFactoryBattleRoom_EventScript_25AEA7:: @ 825AEA7
 	msgbox gStringVar4, MSGBOX_DEFAULT
 	waitmessage
 	closemessage
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_SET_DATA
-	setvar VAR_0x8005, FRONTIER_DATA_6
-	setvar VAR_0x8006, 0
-	special CallFrontierUtilFunc
+	frontier_set FRONTIER_DATA_6, 0
 	special HealPlayerParty
 	setvar VAR_0x8004, SPECIAL_BATTLE_FACTORY
 	setvar VAR_0x8005, 0
@@ -191,10 +188,7 @@ BattleFrontier_BattleFactoryBattleRoom_EventScript_25B09B:: @ 825B09B
 
 BattleFrontier_BattleFactoryBattleRoom_EventScript_25B0E0:: @ 825B0E0
 	closemessage
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_SET_DATA
-	setvar VAR_0x8005, FRONTIER_DATA_6
-	setvar VAR_0x8006, 0
-	special CallFrontierUtilFunc
+	frontier_set FRONTIER_DATA_6, 0
 	special HealPlayerParty
 	setvar VAR_0x8004, SPECIAL_BATTLE_FACTORY
 	setvar VAR_0x8005, 0

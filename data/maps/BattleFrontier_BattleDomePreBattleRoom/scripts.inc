@@ -19,10 +19,7 @@ BattleFrontier_BattleDomePreBattleRoom_MapScript2_24B218: @ 824B218
 BattleFrontier_BattleDomePreBattleRoom_EventScript_24B222:: @ 824B222
 	compare VAR_0x8006, 1
 	goto_if_eq BattleFrontier_BattleDomePreBattleRoom_EventScript_24B5C7
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_SET_DATA
-	setvar VAR_0x8005, FRONTIER_DATA_6
-	setvar VAR_0x8006, 1
-	special CallFrontierUtilFunc
+	frontier_set FRONTIER_DATA_6, 1
 	setvar VAR_TEMP_0, 1
 	applymovement EVENT_OBJ_ID_PLAYER, BattleFrontier_BattleDomePreBattleRoom_Movement_24B652
 	waitmovement 0

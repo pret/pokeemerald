@@ -54,10 +54,7 @@ BattleFrontier_BattleTowerBattleRoom2_EventScript_248F4D:: @ 8248F4D
 	applymovement 5, BattleFrontier_BattleTowerBattleRoom2_Movement_249524
 	applymovement 6, BattleFrontier_BattleTowerBattleRoom2_Movement_249524
 	waitmovement 0
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_SET_DATA
-	setvar VAR_0x8005, FRONTIER_DATA_6
-	setvar VAR_0x8006, 1
-	special CallFrontierUtilFunc
+	frontier_set FRONTIER_DATA_6, 1
 	goto BattleFrontier_BattleTowerBattleRoom2_EventScript_249143
 
 BattleFrontier_BattleTowerBattleRoom2_EventScript_248FB4:: @ 8248FB4

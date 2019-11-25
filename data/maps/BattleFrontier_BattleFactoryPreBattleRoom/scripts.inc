@@ -235,10 +235,7 @@ BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259E69:: @ 8259E69
 	setvar VAR_0x8004, 10
 	setvar VAR_0x8005, 0
 	special CallBattleFactoryFunction
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_SET_DATA
-	setvar VAR_0x8005, FRONTIER_DATA_6
-	setvar VAR_0x8006, 1
-	special CallFrontierUtilFunc
+	frontier_set FRONTIER_DATA_6, 1
 	special CalculatePlayerPartyCount
 	goto BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259C13
 

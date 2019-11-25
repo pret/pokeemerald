@@ -40,10 +40,7 @@ BattleFrontier_BattlePalaceBattleRoom_EventScript_24F86B:: @ 824F86B
 	waitmovement 0
 	applymovement 3, BattleFrontier_BattlePalaceBattleRoom_Movement_24FEAC
 	setvar VAR_TEMP_2, 1
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_SET_DATA
-	setvar VAR_0x8005, FRONTIER_DATA_6
-	setvar VAR_0x8006, 1
-	special CallFrontierUtilFunc
+	frontier_set FRONTIER_DATA_6, 1
 	goto BattleFrontier_BattlePalaceBattleRoom_EventScript_24F98A
 
 BattleFrontier_BattlePalaceBattleRoom_EventScript_24F8B5:: @ 824F8B5
@@ -299,10 +296,7 @@ BattleFrontier_BattlePalaceBattleRoom_EventScript_24FDF7:: @ 824FDF7
 VerdanturfTown_BattleTentBattleRoom_EventScript_24FDF7:: @ 824FDF7
 	closemessage
 	setvar VAR_TEMP_2, 0
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_SET_DATA
-	setvar VAR_0x8005, FRONTIER_DATA_6
-	setvar VAR_0x8006, 0
-	special CallFrontierUtilFunc
+	frontier_set FRONTIER_DATA_6, 0
 	special HealPlayerParty
 	setvar VAR_0x8004, SPECIAL_BATTLE_PALACE
 	setvar VAR_0x8005, 0
