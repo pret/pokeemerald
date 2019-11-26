@@ -9,7 +9,9 @@
 #include "string_util.h"
 #include "constants/items.h"
 #include "constants/battle_frontier.h"
+#include "constants/battle_palace.h"
 #include "constants/frontier_util.h"
+#include "constants/trainers.h"
 
 // This file's functions.
 static void sub_8195980(void);
@@ -17,7 +19,7 @@ static void sub_8195A38(void);
 static void sub_8195AE4(void);
 static void sub_8195BB0(void);
 static void sub_8195C20(void);
-static void sub_8195C50(void);
+static void BufferOpponentIntroSpeech(void);
 static void sub_8195C7C(void);
 static void sub_8195CE4(void);
 static void sub_8195D28(void);
@@ -26,16 +28,16 @@ static void sub_8195DB8(void);
 // Const rom data.
 static void (* const sBattlePalaceFunctions[])(void) =
 {
-    sub_8195980,
-    sub_8195A38,
-    sub_8195AE4,
-    sub_8195BB0,
-    sub_8195C20,
-    sub_8195C50,
-    sub_8195C7C,
-    sub_8195CE4,
-    sub_8195D28,
-    sub_8195DB8,
+    [BATTLE_PALACE_FUNC_0] = sub_8195980,
+    [BATTLE_PALACE_FUNC_1] = sub_8195A38,
+    [BATTLE_PALACE_FUNC_2] = sub_8195AE4,
+    [BATTLE_PALACE_FUNC_3] = sub_8195BB0,
+    [BATTLE_PALACE_FUNC_4] = sub_8195C20,
+    [BATTLE_PALACE_FUNC_GET_OPPONENT_INTRO] = BufferOpponentIntroSpeech,
+    [BATTLE_PALACE_FUNC_6] = sub_8195C7C,
+    [BATTLE_PALACE_FUNC_7] = sub_8195CE4,
+    [BATTLE_PALACE_FUNC_8] = sub_8195D28,
+    [BATTLE_PALACE_FUNC_9] = sub_8195DB8,
 };
 
 static const u16 gUnknown_0860DE78[] = {ITEM_HP_UP, ITEM_PROTEIN, ITEM_IRON, ITEM_CALCIUM, ITEM_CARBOS, ITEM_ZINC};
@@ -135,9 +137,9 @@ static void sub_8195C20(void)
     SetBattleFacilityTrainerGfxId(gTrainerBattleOpponent_A, 0);
 }
 
-static void sub_8195C50(void)
+static void BufferOpponentIntroSpeech(void)
 {
-    if (gTrainerBattleOpponent_A < 300)
+    if (gTrainerBattleOpponent_A < TRAINER_RECORD_MIXING_FRIEND)
         FrontierSpeechToString(gFacilityTrainers[gTrainerBattleOpponent_A].speechBefore);
 }
 

@@ -147,8 +147,8 @@ BattleFrontier_BattleDomePreBattleRoom_EventScript_24B46D:: @ 824B46D
 	fadescreen 1
 	call BattleFrontier_EventScript_GetLvlMode
 	copyvar VAR_0x8004, VAR_RESULT
-	setvar VAR_0x8005, 2
-	special sub_80F9490
+	setvar VAR_0x8005, 2  @ 2 of the 3 party mons are selected for battle
+	special ChoosePartyForBattleFrontier
 	waitstate
 	frontier_resetsketch
 	compare VAR_RESULT, 0

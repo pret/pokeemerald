@@ -77,8 +77,7 @@ BattleFrontier_BattleFactoryBattleRoom_EventScript_25AE67:: @ 825AE67
 BattleFrontier_BattleFactoryBattleRoom_EventScript_25AEA7:: @ 825AEA7
 	compare VAR_TEMP_F, 0
 	goto_if_ne BattleFrontier_BattleFactoryBattleRoom_EventScript_25AF9C
-	setvar VAR_0x8004, 5
-	special CallBattlePalaceFunction
+	palace_getopponentintro
 	lockall
 	msgbox gStringVar4, MSGBOX_DEFAULT
 	waitmessage

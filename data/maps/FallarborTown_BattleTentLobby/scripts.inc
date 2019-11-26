@@ -139,8 +139,8 @@ FallarborTown_BattleTentLobby_EventScript_20005D:: @ 820005D
 	msgbox FallarborTown_BattleTentLobby_Text_2C4BC8, MSGBOX_DEFAULT
 	fadescreen 1
 	setvar VAR_0x8004, 2
-	setvar VAR_0x8005, 3
-	special sub_80F9490
+	setvar VAR_0x8005, FRONTIER_PARTY_SIZE
+	special ChoosePartyForBattleFrontier
 	waitstate
 	compare VAR_RESULT, 0
 	goto_if_eq FallarborTown_BattleTentLobby_EventScript_2001C2
@@ -272,12 +272,12 @@ FallarborTown_BattleTentLobby_EventScript_200245:: @ 8200245
 
 FallarborTown_BattleTentLobby_EventScript_20024F:: @ 820024F
 	lockall
-	msgbox FallarborTown_BattleTentLobby_Text_256DB8, MSGBOX_DEFAULT
+	msgbox BattleFrontier_BattleArenaLobby_Text_RulesAreListed, MSGBOX_DEFAULT
 	goto FallarborTown_BattleTentLobby_EventScript_20025E
 	end
 
 FallarborTown_BattleTentLobby_EventScript_20025E:: @ 820025E
-	message FallarborTown_BattleTentLobby_Text_256DDF
+	message BattleFrontier_BattleArenaLobby_Text_ReadWhichHeading
 	waitmessage
 	multichoice 17, 0, MULTI_FALLARBOR_TENT_RULES, 0
 	switch VAR_RESULT
@@ -296,22 +296,22 @@ FallarborTown_BattleTentLobby_EventScript_2002BC:: @ 82002BC
 	end
 
 FallarborTown_BattleTentLobby_EventScript_2002CA:: @ 82002CA
-	msgbox FallarborTown_BattleTentLobby_Text_256E02, MSGBOX_DEFAULT
+	msgbox BattleFrontier_BattleArenaLobby_Text_ExplainBattleRules, MSGBOX_DEFAULT
 	goto FallarborTown_BattleTentLobby_EventScript_20025E
 	end
 
 FallarborTown_BattleTentLobby_EventScript_2002D8:: @ 82002D8
-	msgbox FallarborTown_BattleTentLobby_Text_256F43, MSGBOX_DEFAULT
+	msgbox BattleFrontier_BattleArenaLobby_Text_ExplainMindRules, MSGBOX_DEFAULT
 	goto FallarborTown_BattleTentLobby_EventScript_20025E
 	end
 
 FallarborTown_BattleTentLobby_EventScript_2002E6:: @ 82002E6
-	msgbox FallarborTown_BattleTentLobby_Text_256FF2, MSGBOX_DEFAULT
+	msgbox BattleFrontier_BattleArenaLobby_Text_ExplainSkillRules, MSGBOX_DEFAULT
 	goto FallarborTown_BattleTentLobby_EventScript_20025E
 	end
 
 FallarborTown_BattleTentLobby_EventScript_2002F4:: @ 82002F4
-	msgbox FallarborTown_BattleTentLobby_Text_257202, MSGBOX_DEFAULT
+	msgbox BattleFrontier_BattleArenaLobby_Text_ExplainBodyRules, MSGBOX_DEFAULT
 	goto FallarborTown_BattleTentLobby_EventScript_20025E
 	end
 
