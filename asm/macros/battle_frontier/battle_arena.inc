@@ -1,6 +1,4 @@
-@ To be populated with macros for CallBattleArenaFunction
-
-    @ Initialize the Battle Arena challenge
+   @ Initialize the Battle Arena challenge
     .macro arena_init
     setvar VAR_0x8004, BATTLE_ARENA_FUNC_INIT
     special CallBattleArenaFunction
