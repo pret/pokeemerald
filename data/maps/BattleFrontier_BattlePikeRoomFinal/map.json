@@ -1,7 +1,7 @@
 {
-  "id": "MAP_BATTLE_FRONTIER_BATTLE_PIKE_RANDOM_ROOM2",
-  "name": "BattleFrontier_BattlePikeRandomRoom2",
-  "layout": "LAYOUT_BATTLE_FRONTIER_BATTLE_PIKE_RANDOM_ROOM2",
+  "id": "MAP_BATTLE_FRONTIER_BATTLE_PIKE_ROOM_FINAL",
+  "name": "BattleFrontier_BattlePikeRoomFinal",
+  "layout": "LAYOUT_BATTLE_FRONTIER_BATTLE_PIKE_ROOM_FINAL",
   "music": "MUS_B_TUBE",
   "region_map_section": "MAPSEC_BATTLE_FRONTIER",
   "requires_flash": false,

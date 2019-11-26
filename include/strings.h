@@ -1304,7 +1304,7 @@ extern const u8 gText_1st[];
 extern const u8 gText_SpaceAndSpace[];
 extern const u8 gText_CommaSpace[];
 extern const u8 gText_NewLine[];
-extern const u8 gText_ScrollTextUp[];
+extern const u8 gText_LineBreak[];
 extern const u8 gText_Space[];
 extern const u8 gText_Space2[];
 extern const u8 gText_Are[];
@@ -1326,34 +1326,35 @@ extern const u8 gText_FrontierFacilityRoomsCleared[];
 extern const u8 gText_FrontierFacilityKOsStreak[];
 extern const u8 gText_FrontierFacilityFloorsCleared[];
 
-extern const u8 gText_082C843F[];
-extern const u8 gText_082C848B[];
-extern const u8 gText_082C8628[];
-extern const u8 gText_082C85B4[];
-extern const u8 gText_082C8512[];
-extern const u8 gText_082C859D[];
-extern const u8 gText_082C86C3[];
-extern const u8 gText_082C8458[];
-extern const u8 gText_082C84C1[];
-extern const u8 gText_082C8662[];
-extern const u8 gText_082C85E3[];
-extern const u8 gText_082C853B[];
-extern const u8 gText_082C85A4[];
-extern const u8 gText_082C86FE[];
-extern const u8 gText_082C846C[];
-extern const u8 gText_082C84D0[];
-extern const u8 gText_082C8682[];
-extern const u8 gText_082C85F5[];
-extern const u8 gText_082C8561[];
-extern const u8 gText_082C85A9[];
-extern const u8 gText_082C8739[];
-extern const u8 gText_082C8480[];
-extern const u8 gText_082C84F7[];
-extern const u8 gText_082C86B3[];
-extern const u8 gText_082C8611[];
-extern const u8 gText_082C8589[];
-extern const u8 gText_082C85AE[];
-extern const u8 gText_082C877B[];
+// Frontier Brain
+extern const u8 gText_AnabelWonSilver[];
+extern const u8 gText_TuckerWonSilver[];
+extern const u8 gText_SpenserWonSilver[];
+extern const u8 gText_GretaWonSilver[];
+extern const u8 gText_NolandWonSilver[];
+extern const u8 gText_LucyWonSilver[];
+extern const u8 gText_BrandonWonSilver[];
+extern const u8 gText_AnabelDefeatSilver[];
+extern const u8 gText_TuckerDefeatSilver[];
+extern const u8 gText_SpenserDefeatSilver[];
+extern const u8 gText_GretaDefeatSilver[];
+extern const u8 gText_NolandDefeatSilver[];
+extern const u8 gText_LucyDefeatSilver[];
+extern const u8 gText_BrandonDefeatSilver[];
+extern const u8 gText_AnabelWonGold[];
+extern const u8 gText_TuckerWonGold[];
+extern const u8 gText_SpenserWonGold[];
+extern const u8 gText_GretaWonGold[];
+extern const u8 gText_NolandWonGold[];
+extern const u8 gText_LucyWonGold[];
+extern const u8 gText_BrandonWonGold[];
+extern const u8 gText_AnabelDefeatGold[];
+extern const u8 gText_TuckerDefeatGold[];
+extern const u8 gText_SpenserDefeatGold[];
+extern const u8 gText_GretaDefeatGold[];
+extern const u8 gText_NolandDefeatGold[];
+extern const u8 gText_LucyDefeatGold[];
+extern const u8 gText_BrandonDefeatGold[];
 
 // Battle Tower.
 extern const u8 BattleFrontier_BattleTowerMultiBattleRoom_Text_2479CE[];
@@ -2399,6 +2400,10 @@ extern const u8 gUnknown_085EDAF4[];
 extern const u8 gUnknown_085EDC45[];
 extern const u8 gUnknown_085EDB00[];
 extern const u8 gUnknown_085EDC84[];
+
+// Apprentice
+extern const u8 gText_Give[];
+extern const u8 gText_NoNeed[];
 
 // Easy Chat Entry
 extern const u8 gText_StopGivingPkmnMail[];

@@ -24,13 +24,13 @@ BattleFrontier_BattleTowerElevator_EventScript_2419F0:: @ 82419F0
 	end
 
 BattleFrontier_BattleTowerElevator_EventScript_241A28:: @ 8241A28
-	compare VAR_FRONTIER_BATTLE_MODE, 0
+	compare VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_SINGLES
 	call_if_eq BattleFrontier_BattleTowerElevator_EventScript_241A55
-	compare VAR_FRONTIER_BATTLE_MODE, 1
+	compare VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_DOUBLES
 	call_if_eq BattleFrontier_BattleTowerElevator_EventScript_241A55
-	compare VAR_FRONTIER_BATTLE_MODE, 2
+	compare VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_MULTIS
 	call_if_eq BattleFrontier_BattleTowerElevator_EventScript_241A5F
-	compare VAR_FRONTIER_BATTLE_MODE, 3
+	compare VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_LINK_MULTIS
 	call_if_eq BattleFrontier_BattleTowerElevator_EventScript_241A72
 	return
 

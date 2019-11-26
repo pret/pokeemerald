@@ -1,7 +1,7 @@
 {
-  "id": "MAP_BATTLE_FRONTIER_BATTLE_PIKE_RANDOM_ROOM3",
-  "name": "BattleFrontier_BattlePikeRandomRoom3",
-  "layout": "LAYOUT_BATTLE_FRONTIER_BATTLE_PIKE_RANDOM_ROOM3",
+  "id": "MAP_BATTLE_FRONTIER_BATTLE_PIKE_ROOM_WILD_MONS",
+  "name": "BattleFrontier_BattlePikeRoomWildMons",
+  "layout": "LAYOUT_BATTLE_FRONTIER_BATTLE_PIKE_ROOM_WILD_MONS",
   "music": "MUS_B_TUBE",
   "region_map_section": "MAPSEC_BATTLE_FRONTIER",
   "requires_flash": false,
@@ -23,7 +23,7 @@
       "elevation": 3,
       "var": "VAR_TEMP_1",
       "var_value": "0",
-      "script": "BattleFrontier_BattlePikeRandomRoom3_EventScript_2C4174"
+      "script": "BattleFrontier_BattlePikeRoomWildMons_EventScript_2C4174"
     },
     {
       "type": "trigger",
@@ -32,7 +32,7 @@
       "elevation": 3,
       "var": "VAR_TEMP_2",
       "var_value": "0",
-      "script": "BattleFrontier_BattlePikeRandomRoom3_EventScript_2C4202"
+      "script": "BattleFrontier_BattlePikeRoomWildMons_EventScript_2C4202"
     },
     {
       "type": "trigger",
@@ -41,7 +41,7 @@
       "elevation": 3,
       "var": "VAR_TEMP_2",
       "var_value": "0",
-      "script": "BattleFrontier_BattlePikeRandomRoom3_EventScript_2C4202"
+      "script": "BattleFrontier_BattlePikeRoomWildMons_EventScript_2C4202"
     },
     {
       "type": "trigger",
@@ -50,7 +50,7 @@
       "elevation": 3,
       "var": "VAR_TEMP_2",
       "var_value": "0",
-      "script": "BattleFrontier_BattlePikeRandomRoom3_EventScript_2C4202"
+      "script": "BattleFrontier_BattlePikeRoomWildMons_EventScript_2C4202"
     },
     {
       "type": "trigger",
@@ -59,7 +59,7 @@
       "elevation": 3,
       "var": "VAR_TEMP_3",
       "var_value": "1",
-      "script": "BattleFrontier_BattlePikeRandomRoom3_EventScript_2C420D"
+      "script": "BattleFrontier_BattlePikeRoomWildMons_EventScript_2C420D"
     },
     {
       "type": "trigger",
@@ -68,7 +68,7 @@
       "elevation": 3,
       "var": "VAR_TEMP_3",
       "var_value": "1",
-      "script": "BattleFrontier_BattlePikeRandomRoom3_EventScript_2C420D"
+      "script": "BattleFrontier_BattlePikeRoomWildMons_EventScript_2C420D"
     },
     {
       "type": "trigger",
@@ -77,7 +77,7 @@
       "elevation": 3,
       "var": "VAR_TEMP_3",
       "var_value": "1",
-      "script": "BattleFrontier_BattlePikeRandomRoom3_EventScript_2C420D"
+      "script": "BattleFrontier_BattlePikeRoomWildMons_EventScript_2C420D"
     }
   ],
   "bg_events": []

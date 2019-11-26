@@ -3512,24 +3512,24 @@
       "blockdata_filepath": "data/layouts/BattleFrontier_BattlePikeThreePathRoom/map.bin"
     },
     {
-      "id": "LAYOUT_BATTLE_FRONTIER_BATTLE_PIKE_RANDOM_ROOM1",
-      "name": "BattleFrontier_BattlePikeRandomRoom1_Layout",
+      "id": "LAYOUT_BATTLE_FRONTIER_BATTLE_PIKE_ROOM_NORMAL",
+      "name": "BattleFrontier_BattlePikeRoomNormal_Layout",
       "width": 9,
       "height": 8,
       "primary_tileset": "gTileset_Building",
       "secondary_tileset": "gTileset_BattlePike",
-      "border_filepath": "data/layouts/BattleFrontier_BattlePikeRandomRoom1/border.bin",
-      "blockdata_filepath": "data/layouts/BattleFrontier_BattlePikeRandomRoom1/map.bin"
+      "border_filepath": "data/layouts/BattleFrontier_BattlePikeRoomNormal/border.bin",
+      "blockdata_filepath": "data/layouts/BattleFrontier_BattlePikeRoomNormal/map.bin"
     },
     {
-      "id": "LAYOUT_BATTLE_FRONTIER_BATTLE_PIKE_RANDOM_ROOM2",
-      "name": "BattleFrontier_BattlePikeRandomRoom2_Layout",
+      "id": "LAYOUT_BATTLE_FRONTIER_BATTLE_PIKE_ROOM_FINAL",
+      "name": "BattleFrontier_BattlePikeRoomFinal_Layout",
       "width": 5,
       "height": 8,
       "primary_tileset": "gTileset_Building",
       "secondary_tileset": "gTileset_BattlePike",
-      "border_filepath": "data/layouts/BattleFrontier_BattlePikeRandomRoom2/border.bin",
-      "blockdata_filepath": "data/layouts/BattleFrontier_BattlePikeRandomRoom2/map.bin"
+      "border_filepath": "data/layouts/BattleFrontier_BattlePikeRoomFinal/border.bin",
+      "blockdata_filepath": "data/layouts/BattleFrontier_BattlePikeRoomFinal/map.bin"
     },
     {
       "id": "LAYOUT_BATTLE_FRONTIER_BATTLE_ARENA_LOBBY",
@@ -3572,14 +3572,14 @@
       "blockdata_filepath": "data/layouts/SootopolisCity_LegendsBattle/map.bin"
     },
     {
-      "id": "LAYOUT_BATTLE_FRONTIER_BATTLE_PIKE_RANDOM_ROOM3",
-      "name": "BattleFrontier_BattlePikeRandomRoom3_Layout",
+      "id": "LAYOUT_BATTLE_FRONTIER_BATTLE_PIKE_ROOM_WILD_MONS",
+      "name": "BattleFrontier_BattlePikeRoomWildMons_Layout",
       "width": 9,
       "height": 20,
       "primary_tileset": "gTileset_Building",
       "secondary_tileset": "gTileset_BattlePike",
-      "border_filepath": "data/layouts/BattleFrontier_BattlePikeRandomRoom3/border.bin",
-      "blockdata_filepath": "data/layouts/BattleFrontier_BattlePikeRandomRoom3/map.bin"
+      "border_filepath": "data/layouts/BattleFrontier_BattlePikeRoomWildMons/border.bin",
+      "blockdata_filepath": "data/layouts/BattleFrontier_BattlePikeRoomWildMons/map.bin"
     },
     {
       "id": "LAYOUT_UNKNOWN_084693AC",

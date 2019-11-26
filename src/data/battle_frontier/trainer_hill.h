@@ -847,7 +847,7 @@ static const struct TrHillFloor sDataTagNormal_Floors[] =
             [1] =
             {
                 .name = _("JAYDEN"),
-                .facilityClass = FACILITY_CLASS_POKEMON_BREEDER_F,
+                .facilityClass = FACILITY_CLASS_PKMN_BREEDER_F,
                 .unused = 0,
                 .speechBefore = {EC_WORD_SOME, EC_WORD_THINGS, EC_WORD_YOU, EC_WORD_CAN_T, EC_WORD_DO, EC_WORD_ALONE},
                 .speechWin = {EC_WORD_YOU, EC_WORD_WIN, EC_WORD_AS, EC_WORD_A, EC_WORD_GROUP, 0xFFFF},
@@ -1152,7 +1152,7 @@ static const struct TrHillFloor sDataTagNormal_Floors[] =
             [1] =
             {
                 .name = _("VERONICA"),
-                .facilityClass = FACILITY_CLASS_POKEMON_BREEDER_F,
+                .facilityClass = FACILITY_CLASS_PKMN_BREEDER_F,
                 .unused = 0,
                 .speechBefore = {EC_WORD_I_AM, EC_WORD_THE, EC_WORD_STRONG, EC_WORD_BEAUTY, EC_WORD_AROUND, EC_WORD_HERE},
                 .speechWin = {EC_WORD_I_AM, EC_WORD_STRONG, EC_WORD_THAT_S, EC_WORD_WHY, EC_WORD_EXCL, 0xFFFF},

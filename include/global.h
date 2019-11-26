@@ -214,14 +214,16 @@ struct ApprenticeMon
     u16 item;
 };
 
+// This is for past players Apprentices or Apprentices received via Record Mix.
+// For the current Apprentice, see struct PlayersApprentice
 struct Apprentice
 {
     u8 id:5;
     u8 lvlMode:2; // + 1
-    u8 field_1;
+    u8 numQuestions;
     u8 number;
     struct ApprenticeMon party[MULTI_PARTY_SIZE];
-    u16 easyChatWords[6];
+    u16 speechWon[EASY_CHAT_BATTLE_WORDS_COUNT];
     u8 playerId[TRAINER_ID_LENGTH];
     u8 playerName[PLAYER_NAME_LENGTH];
     u8 language;
@@ -264,12 +266,21 @@ struct EmeraldBattleTowerRecord
     /*0x02*/ u16 winStreak;
     /*0x04*/ u8 name[PLAYER_NAME_LENGTH + 1];
     /*0x0C*/ u8 trainerId[TRAINER_ID_LENGTH];
-    /*0x10*/ u16 greeting[6];
-    /*0x1C*/ u16 speechWon[6];
-    /*0x28*/ u16 speechLost[6];
-    /*0x34*/ struct BattleTowerPokemon party[4];
+    /*0x10*/ u16 greeting[EASY_CHAT_BATTLE_WORDS_COUNT];
+    /*0x1C*/ u16 speechWon[EASY_CHAT_BATTLE_WORDS_COUNT];
+    /*0x28*/ u16 speechLost[EASY_CHAT_BATTLE_WORDS_COUNT];
+    /*0x34*/ struct BattleTowerPokemon party[MAX_FRONTIER_PARTY_SIZE];
     /*0xE4*/ u8 language;
     /*0xE8*/ u32 checksum;
+};
+
+struct BattleTowerInterview
+{
+    u16 playerSpecies;
+    u16 opponentSpecies;
+    u8 opponentName[PLAYER_NAME_LENGTH + 1];
+    u8 opponentMonNickname[POKEMON_NAME_LENGTH + 1];
+    u8 opponentLanguage;
 };
 
 struct BattleTowerEReaderTrainer
@@ -279,9 +290,9 @@ struct BattleTowerEReaderTrainer
     /*0x02*/ u16 winStreak;
     /*0x04*/ u8 name[PLAYER_NAME_LENGTH + 1];
     /*0x0C*/ u8 trainerId[TRAINER_ID_LENGTH];
-    /*0x10*/ u16 greeting[6];
-    /*0x1C*/ u16 farewellPlayerLost[6];
-    /*0x28*/ u16 farewellPlayerWon[6];
+    /*0x10*/ u16 greeting[EASY_CHAT_BATTLE_WORDS_COUNT];
+    /*0x1C*/ u16 farewellPlayerLost[EASY_CHAT_BATTLE_WORDS_COUNT];
+    /*0x28*/ u16 farewellPlayerWon[EASY_CHAT_BATTLE_WORDS_COUNT];
     /*0x34*/ struct BattleTowerPokemon party[FRONTIER_PARTY_SIZE];
     /*0xB8*/ u32 checksum;
 };
@@ -315,32 +326,27 @@ struct BattleFrontier
 {
     /*0x64C*/ struct EmeraldBattleTowerRecord towerPlayer;
     /*0x738*/ struct EmeraldBattleTowerRecord towerRecords[5]; // From record mixing.
-    /*0xBD4*/ u16 field_BD4;
-    /*0xBD6*/ u16 field_BD6;
-    /*0xBD8*/ u8 field_BD8[PLAYER_NAME_LENGTH + 1];
-    /*0xBE3*/ u8 field_BE0[POKEMON_NAME_LENGTH + 1];
-    /*0xBEB*/ u8 field_BEB;
+    /*0xBEB*/ struct BattleTowerInterview towerInterview;
     /*0xBEC*/ struct BattleTowerEReaderTrainer ereaderTrainer;
-    /*0xCA8*/ u8 field_CA8;
-    /*0xCA9*/ u8 lvlMode:2; // 0x1, 0x2 -> 0x3
-    /*0xCA9*/ u8 field_CA9_a:1;   // 0x4
-    /*0xCA9*/ u8 field_CA9_b:1;   // 0x8
-    /*0xCA9*/ u8 field_CA9_c:1;   // 0x10
-    /*0xCA9*/ u8 field_CA9_d:1;   // 0x20
-    /*0xCA9*/ u8 field_CA9_e:1;   // 0x40
-    /*0xCA9*/ u8 field_CA9_f:1;   // 0x80
-    /*0xCAA*/ u16 selectedPartyMons[FRONTIER_PARTY_SIZE];
-    /*0xCB0*/ u16 field_CB0;
-    /*0xCB2*/ u16 curChallengeBattleNum; // In case of battle pyramid, the floor.
+    /*0xCA8*/ u8 challengeStatus;
+    /*0xCA9*/ u8 lvlMode:2;
+    /*0xCA9*/ u8 challengePaused:1;
+    /*0xCA9*/ u8 field_CA9_b:1;
+    /*0xCA9*/ u8 unused_CA9_c:1;
+    /*0xCA9*/ u8 unused_CA9_d:1;
+    /*0xCA9*/ u8 unused_CA9_e:1;
+    /*0xCA9*/ u8 unused_CA9_f:1;
+    /*0xCAA*/ u16 selectedPartyMons[MAX_FRONTIER_PARTY_SIZE];
+    /*0xCB2*/ u16 curChallengeBattleNum; // Battle number / room number (Pike) / floor number (Pyramid)
     /*0xCB4*/ u16 trainerIds[20];
-    /*0xCDC*/ u32 field_CDC;
+    /*0xCDC*/ u32 winStreakActiveFlags;
     /*0xCE0*/ u16 towerWinStreaks[4][2];
     /*0xCF0*/ u16 towerRecordWinStreaks[4][2];
-    /*0xD00*/ u16 field_D00;
-    /*0xD02*/ u16 field_D02;
-    /*0xD04*/ u16 field_D04;
-    /*0xD06*/ u8 field_D06;
-    /*0xD07*/ u8 field_D07;
+    /*0xD00*/ u16 battledBrainFlags;
+    /*0xD02*/ u16 towerSinglesStreak; // Never read
+    /*0xD04*/ u16 towerNumWins; // Increments to MAX_STREAK but never read otherwise
+    /*0xD06*/ u8 towerBattleOutcome;
+    /*0xD07*/ u8 towerLvlMode;
     /*0xD08*/ u8 field_D08_0:1;
     /*0xD08*/ u8 field_D08_1:1;
     /*0xD08*/ u8 field_D08_2:1;
@@ -386,41 +392,41 @@ struct BattleFrontier
     /*0xE6A*/ u16 field_E6A;
     /*0xE6C*/ u16 field_E6C;
     /*0xE6E*/ u16 field_E6E;
-    /*0xE70*/ struct RentalMon rentalMons[6];
+    /*0xE70*/ struct RentalMon rentalMons[PARTY_SIZE];
     /*0xEB8*/ u16 battlePoints;
-    /*0xEBA*/ u16 field_EBA;
+    /*0xEBA*/ u16 cardBattlePoints;
     /*0xEBC*/ u32 battlesCount;
     /*0xEC0*/ u16 field_EC0[16];
     /*0xEE0*/ u8 trainerFlags;
-    /*0xEE1*/ u8 opponentName[2][PLAYER_NAME_LENGTH + 1];
-    /*0xEF1*/ u8 field_EF1[2][4];
-    /*0xEF9*/ u8 unk_EF9:7;
+    /*0xEE1*/ u8 opponentNames[2][PLAYER_NAME_LENGTH + 1];
+    /*0xEF1*/ u8 opponentTrainerIds[2][TRAINER_ID_LENGTH];
+    /*0xEF9*/ u8 unk_EF9:7; // Never read
     /*0xEF9*/ u8 savedGame:1;
-    /*0xEFA*/ u8 field_EFA;
-    /*0xEFB*/ u8 field_EFB;
-    /*0xEFC*/ struct FrontierMonData field_EFC[3];
+    /*0xEFA*/ u8 unused_EFA;
+    /*0xEFB*/ u8 unused_EFB;
+    /*0xEFC*/ struct FrontierMonData field_EFC[FRONTIER_PARTY_SIZE];
 };
 
-struct Sav2_B8
+struct ApprenticeQuestion
 {
-    u8 unk0_0:2;
-    u8 unk0_1:2;
-    u8 unk0_2:2;
-    u8 unk0_3:2;
-    u16 unk2;
+    u8 questionId:2;
+    u8 monId:2;
+    u8 moveSlot:2;
+    u8 suggestedChange:2; // TRUE if told to use held item or second move, FALSE if told to use no item or first move
+    u16 data; // used both as an itemId and a moveId
 };
 
 struct PlayersApprentice
 {
     /*0xB0*/ u8 id;
-    /*0xB1*/ u8 activeLvlMode:2; // +1, 0 means not active
-    /*0xB1*/ u8 field_B1_1:4;
-    /*0xB1*/ u8 field_B1_2:2;
-    /*0xB2*/ u8 field_B2_0:3;
-    /*0xB2*/ u8 field_B2_1:2;
-    /*0xB3*/ u8 field_B3;
-    /*0xB4*/ u8 monIds[MULTI_PARTY_SIZE];
-    /*0xB8*/ struct Sav2_B8 field_B8[9];
+    /*0xB1*/ u8 lvlMode:2;  //0: Unassigned, 1: Lv 50, 2: Open Lv
+    /*0xB1*/ u8 questionsAnswered:4;
+    /*0xB1*/ u8 leadMonId:2;
+    /*0xB2*/ u8 party:3;
+    /*0xB2*/ u8 saveId:2; 
+    /*0xB3*/ u8 unused;
+    /*0xB4*/ u8 speciesIds[MULTI_PARTY_SIZE];
+    /*0xB8*/ struct ApprenticeQuestion questions[APPRENTICE_MAX_QUESTIONS];
 };
 
 struct RankingHall1P
@@ -465,7 +471,7 @@ struct SaveBlock2
     /*0xA8*/ u32 field_A8; // Written to, but never read.
     /*0xAC*/ u32 encryptionKey;
     /*0xB0*/ struct PlayersApprentice playerApprentice;
-    /*0xDC*/ struct Apprentice apprentices[4]; // From record mixing.
+    /*0xDC*/ struct Apprentice apprentices[APPRENTICE_COUNT];
     /*0x1EC*/ struct BerryCrush berryCrush;
     /*0x1FC*/ struct PokemonJumpResults pokeJump;
     /*0x20C*/ struct BerryPickingResults berryPick;
@@ -949,10 +955,10 @@ struct SaveBlock1
     /*0x2BA1*/ u8 outbreakPokemonProbability;
     /*0x2BA2*/ u16 outbreakDaysLeft;
     /*0x2BA4*/ struct GabbyAndTyData gabbyAndTyData;
-    /*0x2BB0*/ u16 easyChatProfile[6];
-    /*0x2BBC*/ u16 easyChatBattleStart[6];
-    /*0x2BC8*/ u16 easyChatBattleWon[6];
-    /*0x2BD4*/ u16 easyChatBattleLost[6];
+    /*0x2BB0*/ u16 easyChatProfile[EASY_CHAT_BATTLE_WORDS_COUNT];
+    /*0x2BBC*/ u16 easyChatBattleStart[EASY_CHAT_BATTLE_WORDS_COUNT];
+    /*0x2BC8*/ u16 easyChatBattleWon[EASY_CHAT_BATTLE_WORDS_COUNT];
+    /*0x2BD4*/ u16 easyChatBattleLost[EASY_CHAT_BATTLE_WORDS_COUNT];
     /*0x2BE0*/ struct MailStruct mail[MAIL_COUNT];
     /*0x2E20*/ u8 additionalPhrases[8]; // bitfield for 33 additional phrases in easy chat system
     /*0x2E28*/ OldMan oldMan;

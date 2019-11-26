@@ -562,9 +562,7 @@ LilycoveCity_ContestLobby_EventScript_BerryBlenderSpeedRecords:: @ 821A77A
 
 LilycoveCity_ContestLobby_EventScript_LinkContestResults:: @ 821A784
 	lockall
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_RESULTS_WINDOW
-	setvar VAR_0x8005, 7
-	special CallFrontierUtilFunc
+	frontier_results FACILITY_LINK_CONTEST
 	waitbuttonpress
 	special RemoveRecordsWindow
 	releaseall

@@ -22,6 +22,7 @@
 #include "constants/songs.h"
 #include "constants/battle_string_ids.h"
 #include "constants/battle_frontier.h"
+#include "constants/frontier_util.h"
 #include "constants/items.h"
 #include "constants/moves.h"
 #include "constants/rgb.h"
@@ -786,14 +787,14 @@ static void InitArenaChallenge(void)
     bool32 isCurrent;
     u32 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
 
-    gSaveBlock2Ptr->frontier.field_CA8 = 0;
+    gSaveBlock2Ptr->frontier.challengeStatus = 0;
     gSaveBlock2Ptr->frontier.curChallengeBattleNum = 0;
-    gSaveBlock2Ptr->frontier.field_CA9_a = 0;
+    gSaveBlock2Ptr->frontier.challengePaused = FALSE;
     gSaveBlock2Ptr->frontier.field_CA9_b = 0;
     if (lvlMode != FRONTIER_LVL_50)
-        isCurrent = gSaveBlock2Ptr->frontier.field_CDC & 0x80;
+        isCurrent = gSaveBlock2Ptr->frontier.winStreakActiveFlags & STREAK_ARENA_OPEN;
     else
-        isCurrent = gSaveBlock2Ptr->frontier.field_CDC & 0x40;
+        isCurrent = gSaveBlock2Ptr->frontier.winStreakActiveFlags & STREAK_ARENA_50;
 
     if (!isCurrent)
         gSaveBlock2Ptr->frontier.arenaWinStreaks[lvlMode] = 0;
@@ -816,9 +817,9 @@ static void GetArenaData(void)
         break;
     case 2:
         if (lvlMode != FRONTIER_LVL_50)
-            gSpecialVar_Result = gSaveBlock2Ptr->frontier.field_CDC & 0x80;
+            gSpecialVar_Result = gSaveBlock2Ptr->frontier.winStreakActiveFlags & STREAK_ARENA_OPEN;
         else
-            gSpecialVar_Result = gSaveBlock2Ptr->frontier.field_CDC & 0x40;
+            gSpecialVar_Result = gSaveBlock2Ptr->frontier.winStreakActiveFlags & STREAK_ARENA_50;
         break;
     }
 }
@@ -839,16 +840,16 @@ static void SetArenaData(void)
         if (lvlMode != FRONTIER_LVL_50)
         {
             if (gSpecialVar_0x8006)
-                gSaveBlock2Ptr->frontier.field_CDC |= 0x80;
+                gSaveBlock2Ptr->frontier.winStreakActiveFlags |= STREAK_ARENA_OPEN;
             else
-                gSaveBlock2Ptr->frontier.field_CDC &= ~(0x80);
+                gSaveBlock2Ptr->frontier.winStreakActiveFlags &= ~(STREAK_ARENA_OPEN);
         }
         else
         {
             if (gSpecialVar_0x8006)
-                gSaveBlock2Ptr->frontier.field_CDC |= 0x40;
+                gSaveBlock2Ptr->frontier.winStreakActiveFlags |= STREAK_ARENA_50;
             else
-                gSaveBlock2Ptr->frontier.field_CDC &= ~(0x40);
+                gSaveBlock2Ptr->frontier.winStreakActiveFlags &= ~(STREAK_ARENA_50);
         }
         break;
     }
@@ -856,10 +857,10 @@ static void SetArenaData(void)
 
 static void sub_81A5AC4(void)
 {
-    gSaveBlock2Ptr->frontier.field_CA8 = gSpecialVar_0x8005;
+    gSaveBlock2Ptr->frontier.challengeStatus = gSpecialVar_0x8005;
     VarSet(VAR_TEMP_0, 0);
-    gSaveBlock2Ptr->frontier.field_CA9_a = 1;
-    sub_81A4C30();
+    gSaveBlock2Ptr->frontier.challengePaused = TRUE;
+    SaveGameFrontier();
 }
 
 static void SetArenaRewardItem(void)

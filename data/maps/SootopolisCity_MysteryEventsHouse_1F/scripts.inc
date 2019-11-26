@@ -4,8 +4,7 @@ SootopolisCity_MysteryEventsHouse_1F_MapScripts:: @ 8227953
 	.byte 0
 
 SootopolisCity_MysteryEventsHouse_1F_OnTransition: @ 822795E
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_CHECK_VISIT_TRAINER
-	special CallFrontierUtilFunc
+	frontier_checkvisittrainer
 	compare VAR_RESULT, 0
 	call_if_eq SootopolisCity_MysteryEventsHouse_1F_EventScript_SetTrainerVisitingLayout
 	compare VAR_SOOTOPOLIS_MYSTERY_EVENTS_STATE, 0
@@ -74,8 +73,7 @@ SootopolisCity_MysteryEventsHouse_1F_Movement_OldManWalkBehindPlayer: @ 8227A21
 SootopolisCity_MysteryEventsHouse_1F_EventScript_OldMan:: @ 8227A24
 	lock
 	faceplayer
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_CHECK_VISIT_TRAINER
-	special CallFrontierUtilFunc
+	frontier_checkvisittrainer
 	compare VAR_RESULT, 1
 	goto_if_eq SootopolisCity_MysteryEventsHouse_1F_EventScript_InvalidVisitingTrainer
 	compare VAR_TEMP_1, 1

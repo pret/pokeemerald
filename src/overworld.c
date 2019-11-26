@@ -1715,7 +1715,7 @@ void CB2_ContinueSavedGame(void)
     StopMapMusic();
     ResetSafariZoneFlag_();
     if (gSaveFileStatus == 0xFF)
-        sub_81A3908();
+        ResetWinStreaks();
 
     LoadSaveblockMapHeader();
     ClearDiveAndHoleWarps();

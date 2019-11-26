@@ -1,7 +1,6 @@
 #include "global.h"
 #include "rtc.h"
 #include "overworld.h"
-#include "constants/maps.h"
 #include "random.h"
 #include "event_data.h"
 #include "fieldmap.h"
@@ -14,12 +13,9 @@
 #include "pokemon_storage_system.h"
 #include "field_message_box.h"
 #include "easy_chat.h"
-#include "constants/species.h"
-#include "constants/moves.h"
 #include "battle.h"
 #include "battle_tower.h"
 #include "contest.h"
-#include "constants/items.h"
 #include "item.h"
 #include "link.h"
 #include "main.h"
@@ -33,15 +29,20 @@
 #include "naming_screen.h"
 #include "malloc.h"
 #include "region_map.h"
-#include "constants/region_map_sections.h"
 #include "decoration.h"
 #include "secret_base.h"
 #include "tv.h"
 #include "data.h"
+#include "constants/battle_frontier.h"
 #include "constants/contest.h"
+#include "constants/items.h"
 #include "constants/layouts.h"
+#include "constants/maps.h"
 #include "constants/metatile_behaviors.h"
+#include "constants/moves.h"
+#include "constants/region_map_sections.h"
 #include "constants/script_menu.h"
+#include "constants/species.h"
 #include "constants/tv.h"
 
 // Static type declarations
@@ -1538,12 +1539,12 @@ static void InterviewAfter_BravoTrainerBattleTowerProfile(void)
     show->bravoTrainerTower.kind = TVSHOW_BRAVO_TRAINER_BATTLE_TOWER_PROFILE;
     show->bravoTrainerTower.active = TRUE;
     StringCopy(show->bravoTrainerTower.trainerName, gSaveBlock2Ptr->playerName);
-    StringCopy(show->bravoTrainerTower.pokemonName, gSaveBlock2Ptr->frontier.field_BD8);
-    show->bravoTrainerTower.species = gSaveBlock2Ptr->frontier.field_BD4;
-    show->bravoTrainerTower.defeatedSpecies = gSaveBlock2Ptr->frontier.field_BD6;
-    show->bravoTrainerTower.numFights = GetCurrentBattleTowerWinStreak(gSaveBlock2Ptr->frontier.field_D07, 0);
-    show->bravoTrainerTower.wonTheChallenge = gSaveBlock2Ptr->frontier.field_D06;
-    if (gSaveBlock2Ptr->frontier.field_D07 == 0)
+    StringCopy(show->bravoTrainerTower.pokemonName, gSaveBlock2Ptr->frontier.towerInterview.opponentName);
+    show->bravoTrainerTower.species = gSaveBlock2Ptr->frontier.towerInterview.playerSpecies;
+    show->bravoTrainerTower.defeatedSpecies = gSaveBlock2Ptr->frontier.towerInterview.opponentSpecies;
+    show->bravoTrainerTower.numFights = GetCurrentBattleTowerWinStreak(gSaveBlock2Ptr->frontier.towerLvlMode, 0);
+    show->bravoTrainerTower.wonTheChallenge = gSaveBlock2Ptr->frontier.towerBattleOutcome;
+    if (gSaveBlock2Ptr->frontier.towerLvlMode == FRONTIER_LVL_50)
     {
         show->bravoTrainerTower.btLevel = 50;
     }
@@ -1554,13 +1555,13 @@ static void InterviewAfter_BravoTrainerBattleTowerProfile(void)
     show->bravoTrainerTower.interviewResponse = gSpecialVar_0x8004;
     tv_store_id_2x(show);
     show->bravoTrainerTower.language = gGameLanguage;
-    if (show->bravoTrainerTower.language == LANGUAGE_JAPANESE || gSaveBlock2Ptr->frontier.field_BEB == LANGUAGE_JAPANESE)
+    if (show->bravoTrainerTower.language == LANGUAGE_JAPANESE || gSaveBlock2Ptr->frontier.towerInterview.opponentLanguage == LANGUAGE_JAPANESE)
     {
         show->bravoTrainerTower.pokemonNameLanguage = LANGUAGE_JAPANESE;
     }
     else
     {
-        show->bravoTrainerTower.pokemonNameLanguage = gSaveBlock2Ptr->frontier.field_BEB;
+        show->bravoTrainerTower.pokemonNameLanguage = gSaveBlock2Ptr->frontier.towerInterview.opponentLanguage;
     }
 }
 
@@ -2466,7 +2467,7 @@ bool8 ShouldHideFanClubInterviewer(void)
     return FALSE;
 }
 
-bool8 sub_80EE818(void)
+bool8 ShouldAirFrontierTVShow(void)
 {
     u32 playerId;
     u8 showIdx;
@@ -2494,7 +2495,7 @@ bool8 sub_80EE818(void)
     return TRUE;
 }
 
-void sub_80EE8C8(u16 winStreak, u8 facilityAndMode)
+void TryPutFrontierTVShowOnAir(u16 winStreak, u8 facilityAndMode)
 {
     TVShow *show;
 

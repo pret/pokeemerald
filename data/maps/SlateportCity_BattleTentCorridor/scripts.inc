@@ -32,15 +32,14 @@ SlateportCity_BattleTentCorridor_EventScript_208E65:: @ 8208E65
 	compare VAR_0x8006, 2
 	goto_if_eq SlateportCity_BattleTentCorridor_EventScript_209044
 	setvar VAR_0x8004, 9
-	special sub_81B9D08
+	special CallSlateportTentFunction
 	setvar VAR_0x8004, 8
-	special sub_81B9D08
+	special CallSlateportTentFunction
 	msgbox SlateportCity_BattleTentCorridor_Text_25A1C8, MSGBOX_DEFAULT
 	fadescreen 1
 	setvar VAR_0x8004, 6
-	special sub_81B9D08
+	special CallSlateportTentFunction
 	waitstate
-
 SlateportCity_BattleTentCorridor_EventScript_208EB4:: @ 8208EB4
 	msgbox SlateportCity_BattleTentCorridor_Text_25AB96, MSGBOX_DEFAULT
 	closemessage
@@ -66,11 +65,8 @@ SlateportCity_BattleTentCorridor_EventScript_208EEE:: @ 8208EEE
 	playfanfare MUS_ME_ASA
 	waitfanfare
 	special HealPlayerParty
-
 SlateportCity_BattleTentCorridor_EventScript_208F0D:: @ 8208F0D
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_1
-	setvar VAR_0x8005, 2
-	special CallFrontierUtilFunc
+	frontier_get FRONTIER_DATA_BATTLE_NUM
 	compare VAR_RESULT, 1
 	call_if_eq SlateportCity_BattleTentCorridor_EventScript_209014
 	compare VAR_RESULT, 2
@@ -99,7 +95,7 @@ SlateportCity_BattleTentCorridor_EventScript_208F89:: @ 8208F89
 
 SlateportCity_BattleTentCorridor_EventScript_208FBB:: @ 8208FBB
 	setvar VAR_0x8004, 8
-	special sub_81B9D08
+	special CallSlateportTentFunction
 	msgbox SlateportCity_BattleTentCorridor_Text_25AB2E, MSGBOX_YESNO
 	switch VAR_RESULT
 	case NO, SlateportCity_BattleTentCorridor_EventScript_208EB4
@@ -109,7 +105,7 @@ SlateportCity_BattleTentCorridor_EventScript_208FBB:: @ 8208FBB
 SlateportCity_BattleTentCorridor_EventScript_208FF1:: @ 8208FF1
 	fadescreen 1
 	setvar VAR_0x8004, 7
-	special sub_81B9D08
+	special CallSlateportTentFunction
 	waitstate
 	compare VAR_RESULT, 1
 	goto_if_eq SlateportCity_BattleTentCorridor_EventScript_208EB4
@@ -131,12 +127,11 @@ SlateportCity_BattleTentCorridor_EventScript_209022:: @ 8209022
 	waitmessage
 	setvar VAR_0x8004, 3
 	setvar VAR_0x8005, 2
-	special sub_81B9D08
+	special CallSlateportTentFunction
 	playse SE_SAVE
 	waitse
 	fadescreen 1
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_SOFT_RESET
-	special CallFrontierUtilFunc
+	frontier_reset
 	end
 
 SlateportCity_BattleTentCorridor_EventScript_209044:: @ 8209044
