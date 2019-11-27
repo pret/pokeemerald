@@ -53,8 +53,7 @@ BattleFrontier_BattlePalaceBattleRoom_EventScript_24F8BF:: @ 824F8BF
 	addobject 2
 	applymovement 2, BattleFrontier_BattlePalaceBattleRoom_Movement_24FEA1
 	waitmovement 0
-	setvar VAR_0x8004, 5
-	special CallBattlePalaceFunction
+	palace_getopponentintro
 	msgbox gStringVar4, MSGBOX_DEFAULT
 	waitmessage
 	call BattleFrontier_BattlePalaceBattleRoom_EventScript_24FDF7

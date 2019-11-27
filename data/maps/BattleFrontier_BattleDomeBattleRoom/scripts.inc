@@ -12,23 +12,22 @@ BattleFrontier_BattleDomeBattleRoom_MapScript1_24BCB1: @ 824BCB1
 	copyvar VAR_TEMP_F, VAR_RESULT
 	compare VAR_RESULT, 0
 	call_if_eq BattleFrontier_BattleDomeBattleRoom_EventScript_24C919
-	call BattleFrontier_BattleDomeBattleRoom_EventScript_24BCDC
+	call BattleFrontier_BattleDomeBattleRoom_EventScript_SetPlayerGfx
 	end
 
-BattleFrontier_BattleArenaBattleRoom_EventScript_24BCDC:: @ 824BCDC
-BattleFrontier_BattleDomeBattleRoom_EventScript_24BCDC:: @ 824BCDC
+BattleFrontier_BattleDomeBattleRoom_EventScript_SetPlayerGfx:: @ 824BCDC
 	checkplayergender
 	compare VAR_RESULT, MALE
-	goto_if_eq BattleFrontier_BattleDomeBattleRoom_EventScript_24BCF4
+	goto_if_eq BattleFrontier_BattleDomeBattleRoom_EventScript_SetPlayerGfxMale
 	compare VAR_RESULT, FEMALE
-	goto_if_eq BattleFrontier_BattleDomeBattleRoom_EventScript_24BCFA
+	goto_if_eq BattleFrontier_BattleDomeBattleRoom_EventScript_SetPlayerGfxFemale
 	return
 
-BattleFrontier_BattleDomeBattleRoom_EventScript_24BCF4:: @ 824BCF4
+BattleFrontier_BattleDomeBattleRoom_EventScript_SetPlayerGfxMale:: @ 824BCF4
 	setvar VAR_OBJ_GFX_ID_1, OBJ_EVENT_GFX_RIVAL_BRENDAN_NORMAL
 	return
 
-BattleFrontier_BattleDomeBattleRoom_EventScript_24BCFA:: @ 824BCFA
+BattleFrontier_BattleDomeBattleRoom_EventScript_SetPlayerGfxFemale:: @ 824BCFA
 	setvar VAR_OBJ_GFX_ID_1, OBJ_EVENT_GFX_RIVAL_MAY_NORMAL
 	return
 
@@ -511,9 +510,9 @@ BattleFrontier_BattleDomeBattleRoom_MapScript2_24C481: @ 824C481
 BattleFrontier_BattleDomeBattleRoom_EventScript_24C48B:: @ 824C48B
 	hideobjectat 13, MAP_BATTLE_FRONTIER_BATTLE_DOME_BATTLE_ROOM
 	call BattleFrontier_BattleDomeBattleRoom_EventScript_24C502
-	call BattleFrontier_BattleDomeBattleRoom_EventScript_24BCDC
+	call BattleFrontier_BattleDomeBattleRoom_EventScript_SetPlayerGfx
 	setvar VAR_TEMP_1, 1
-	applymovement OBJ_EVENT_ID_PLAYER, BattleFrontier_BattleDomeBattleRoom_Movement_24C773
+	applymovement OBJ_EVENT_ID_PLAYER, BattleFrontier_BattleDomeBattleRoom_Movement_SetInvisible
 	frontier_get FRONTIER_DATA_BATTLE_NUM
 	compare VAR_RESULT, 3
 	goto_if_ne BattleFrontier_BattleDomeBattleRoom_EventScript_24C4EF
@@ -626,8 +625,7 @@ BattleFrontier_BattleDomeBattleRoom_EventScript_24C652:: @ 824C652
 	createvobject OBJ_EVENT_GFX_WOMAN_5, 31, 8, 2, 3, DIR_SOUTH
 	return
 
-BattleFrontier_BattleArenaBattleRoom_Movement_24C773: @ 824C773
-BattleFrontier_BattleDomeBattleRoom_Movement_24C773: @ 824C773
+BattleFrontier_BattleDomeBattleRoom_Movement_SetInvisible: @ 824C773
 	set_invisible
 	step_end
 

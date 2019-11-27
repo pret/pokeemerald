@@ -140,8 +140,8 @@ VerdanturfTown_BattleTentLobby_EventScript_2018CF:: @ 82018CF
 	msgbox VerdanturfTown_BattleTentLobby_Text_2C5633, MSGBOX_DEFAULT
 	fadescreen 1
 	setvar VAR_0x8004, 1
-	setvar VAR_0x8005, 3
-	special sub_80F9490
+	setvar VAR_0x8005, FRONTIER_PARTY_SIZE
+	special ChoosePartyForBattleFrontier
 	waitstate
 	compare VAR_RESULT, 0
 	goto_if_eq VerdanturfTown_BattleTentLobby_EventScript_201A34
