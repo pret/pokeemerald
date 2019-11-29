@@ -29,9 +29,8 @@ EventScript_FrontierFieldWhiteOut:: @ 82736F8
 	message gText_PlayerWhitedOut
 	waitmessage
 	waitbuttonpress
-	setvar VAR_0x8004, BATTLE_PIKE_FUNC_IS_IN
-	special CallBattlePikeFunction
-	compare VAR_RESULT, 1
+	pike_inchallenge
+	compare VAR_RESULT, TRUE
 	goto_if_eq BattleFrontier_BattlePike_EventScript_Retire
 	setvar VAR_0x8004, BATTLE_PYRAMID_FUNC_IS_IN
 	special CallBattlePyramidFunction
