@@ -25,8 +25,8 @@
 #define BATTLE_DOME_FUNC_21                         21
 #define BATTLE_DOME_FUNC_INIT_TRAINERS              22
 
-#define DOME_DATA_STREAK 0
-#define DOME_DATA_STREAK_ACTIVE 1
+#define DOME_DATA_WIN_STREAK 0
+#define DOME_DATA_WIN_STREAK_ACTIVE 1
 #define DOME_DATA_2 2
 #define DOME_DATA_3 3
 #define DOME_DATA_4 4

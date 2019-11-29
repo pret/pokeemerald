@@ -6,8 +6,7 @@ BattleFrontier_BattleDomeBattleRoom_MapScripts:: @ 824BC9C
 	.byte 0
 
 BattleFrontier_BattleDomeBattleRoom_MapScript1_24BCB1: @ 824BCB1
-	setvar VAR_0x8004, BATTLE_DOME_FUNC_SET_OPPONENT_GFX
-	special CallBattleDomeFunction
+	dome_setopponentgfx
 	frontier_get FRONTIER_DATA_BATTLE_NUM
 	copyvar VAR_TEMP_F, VAR_RESULT
 	compare VAR_RESULT, 0
@@ -68,20 +67,16 @@ BattleFrontier_BattleDomeBattleRoom_EventScript_24BD61:: @ 824BD61
 	goto_if_ne BattleFrontier_BattleDomeBattleRoom_EventScript_24C1CB
 
 BattleFrontier_BattleDomeBattleRoom_EventScript_24BD82:: @ 824BD82
-	setvar VAR_0x8004, BATTLE_DOME_FUNC_GET_OPPONENT_NAME
-	special CallBattleDomeFunction
+	dome_getopponentname
 	msgbox BattleFrontier_BattleDomeBattleRoom_Text_24C990, MSGBOX_DEFAULT
 	closemessage
 	applymovement 13, BattleFrontier_BattleDomeBattleRoom_Movement_24C77B
 	applymovement 15, BattleFrontier_BattleDomeBattleRoom_Movement_24C789
 	waitmovement 0
-	setvar VAR_0x8004, BATTLE_TOWER_FUNC_7
-	setvar VAR_0x8005, 0
-	special CallBattleTowerFunc
+	tower_getopponentintro 0
 	msgbox gStringVar4, MSGBOX_DEFAULT
 	closemessage
-	setvar VAR_0x8004, BATTLE_DOME_FUNC_INIT_OPPONENT_PARTY
-	special CallBattleDomeFunction
+	dome_initopponentparty
 	call BattleFrontier_BattleDomeBattleRoom_EventScript_24C440
 	setvar VAR_TEMP_2, 0
 	switch VAR_RESULT
@@ -105,16 +100,14 @@ BattleFrontier_BattleDomeBattleRoom_EventScript_24BDF7:: @ 824BDF7
 	waitmovement 0
 	compare VAR_TEMP_2, 2
 	goto_if_eq BattleFrontier_BattleDomeBattleRoom_EventScript_24BE4F
-	setvar VAR_0x8004, BATTLE_DOME_FUNC_COMPARE_SEEDS
-	special CallBattleDomeFunction
+	dome_compareseeds
 	switch VAR_RESULT
 	case 1, BattleFrontier_BattleDomeBattleRoom_EventScript_24BEE0
 
 BattleFrontier_BattleDomeBattleRoom_EventScript_24BE4F:: @ 824BE4F
 	applymovement 1, Common_Movement_WalkInPlaceDown
 	waitmovement 0
-	setvar VAR_0x8004, BATTLE_DOME_FUNC_GET_OPPONENT_NAME
-	special CallBattleDomeFunction
+	dome_getopponentname
 	compare VAR_TEMP_2, 0
 	call_if_eq BattleFrontier_BattleDomeBattleRoom_EventScript_24BEB1
 	compare VAR_TEMP_2, 1
@@ -126,10 +119,7 @@ BattleFrontier_BattleDomeBattleRoom_EventScript_24BE4F:: @ 824BE4F
 	delay 60
 
 BattleFrontier_BattleDomeBattleRoom_EventScript_24BE8D:: @ 824BE8D
-	setvar VAR_0x8004, BATTLE_DOME_FUNC_RESOLVE_WINNERS
-	setvar VAR_0x8005, 2
-	special CallBattleDomeFunction
-
+	dome_resolvewinners 2
 BattleFrontier_BattleDomePreBattleRoom_EventScript_24BE9A:: @ 824BE9A
 	frontier_set FRONTIER_DATA_CHALLENGE_STATUS, CHALLENGE_STATUS_LOST
 	goto BattleFrontier_BattleDomeBattleRoom_EventScript_24C8F5
@@ -162,11 +152,8 @@ BattleFrontier_BattleDomeBattleRoom_EventScript_24BEE0:: @ 824BEE0
 	playse SE_W227B
 	call BattleFrontier_BattleDomeBattleRoom_EventScript_24C82E
 	delay 60
-	setvar VAR_0x8004, BATTLE_DOME_FUNC_GET_ROUND_TEXT
-	special CallBattleDomeFunction
-	setvar VAR_0x8004, BATTLE_DOME_FUNC_RESOLVE_WINNERS
-	setvar VAR_0x8005, 1
-	special CallBattleDomeFunction
+	dome_getroundtext
+	dome_resolvewinners 1
 	frontier_get FRONTIER_DATA_BATTLE_NUM
 	addvar VAR_RESULT, 1
 	frontier_set FRONTIER_DATA_BATTLE_NUM, VAR_RESULT
@@ -205,20 +192,14 @@ BattleFrontier_BattleDomeBattleRoom_EventScript_24BFCC:: @ 824BFCC
 	return
 
 BattleFrontier_BattleDomeBattleRoom_EventScript_24BFD5:: @ 824BFD5
-	setvar VAR_0x8004, BATTLE_DOME_FUNC_GET_DATA
-	setvar VAR_0x8005, DOME_DATA_6
-	special CallBattleDomeFunction
+	dome_get DOME_DATA_6
 	compare VAR_RESULT, 0
 	goto_if_eq BattleFrontier_BattleDomeBattleRoom_EventScript_24C023
-	setvar VAR_0x8004, BATTLE_DOME_FUNC_GET_DATA
-	setvar VAR_0x8005, DOME_DATA_7
-	special CallBattleDomeFunction
+	dome_get DOME_DATA_7
 	compare VAR_RESULT, 0
 	goto_if_eq BattleFrontier_BattleDomeBattleRoom_EventScript_24C076
-	setvar VAR_0x8004, BATTLE_DOME_FUNC_GET_DATA
-	setvar VAR_0x8005, DOME_DATA_STREAK_ACTIVE
-	special CallBattleDomeFunction
-	compare VAR_RESULT, 0
+	dome_get DOME_DATA_WIN_STREAK_ACTIVE
+	compare VAR_RESULT, FALSE
 	goto_if_eq BattleFrontier_BattleDomeBattleRoom_EventScript_24C16A
 	goto BattleFrontier_BattleDomeBattleRoom_EventScript_24C0C9
 	return
@@ -417,9 +398,7 @@ BattleFrontier_BattleDomeBattleRoom_EventScript_24C2B9:: @ 824C2B9
 	case 9, BattleFrontier_BattleDomeBattleRoom_EventScript_24C420
 	case 3, BattleFrontier_BattleDomeBattleRoom_EventScript_24C436
 	msgbox BattleFrontier_BattleDomeBattleRoom_Text_24D0F6, MSGBOX_DEFAULT
-	setvar VAR_0x8004, BATTLE_DOME_FUNC_RESOLVE_WINNERS
-	setvar VAR_0x8005, 1
-	special CallBattleDomeFunction
+	dome_resolvewinners 1
 	frontier_getsymbols
 	compare VAR_RESULT, 0
 	goto_if_ne BattleFrontier_BattleDomeBattleRoom_EventScript_24BF62
@@ -449,9 +428,7 @@ BattleFrontier_BattleDomeBattleRoom_EventScript_24C373:: @ 824C373
 	case 9, BattleFrontier_BattleDomeBattleRoom_EventScript_24C420
 	case 3, BattleFrontier_BattleDomeBattleRoom_EventScript_24C436
 	msgbox BattleFrontier_BattleDomeBattleRoom_Text_24D0F6, MSGBOX_DEFAULT
-	setvar VAR_0x8004, BATTLE_DOME_FUNC_RESOLVE_WINNERS
-	setvar VAR_0x8005, 1
-	special CallBattleDomeFunction
+	dome_resolvewinners 1
 	frontier_getsymbols
 	compare VAR_RESULT, 2
 	goto_if_eq BattleFrontier_BattleDomeBattleRoom_EventScript_24BF62
@@ -496,11 +473,9 @@ BattleFrontier_BattleDomeBattleRoom_EventScript_24C440:: @ 824C440
 	special DoSpecialTrainerBattle
 	waitstate
 	setvar VAR_TEMP_9, 0
-	setvar VAR_0x8004, BATTLE_DOME_FUNC_RESTORE_HELD_ITEMS
-	special CallBattleDomeFunction
+	dome_restorehelditems
 	special HealPlayerParty
-	setvar VAR_0x8004, BATTLE_DOME_FUNC_RESET_SKETCH
-	special CallBattleDomeFunction
+	dome_resetsketch
 	return
 
 BattleFrontier_BattleDomeBattleRoom_MapScript2_24C481: @ 824C481

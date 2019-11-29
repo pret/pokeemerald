@@ -28,8 +28,8 @@ BattleFrontier_BattlePalaceLobby_EventScript_24D7D0:: @ 824D7D0
 	lockall
 	msgbox BattleFrontier_BattlePalaceLobby_Text_24E636, MSGBOX_DEFAULT
 	closemessage
-	palace_set PALACE_DATA_STREAK, 0
-	palace_set PALACE_DATA_STREAK_ACTIVE, FALSE
+	palace_set PALACE_DATA_WIN_STREAK, 0
+	palace_set PALACE_DATA_WIN_STREAK_ACTIVE, FALSE
 	frontier_set FRONTIER_DATA_CHALLENGE_STATUS, 0
 	setvar VAR_TEMP_0, 255
 	releaseall
@@ -62,7 +62,7 @@ BattleFrontier_BattlePalaceLobby_EventScript_24D873:: @ 824D873
 	lockall
 	message BattleFrontier_BattlePalaceLobby_Text_24E41E
 	waitmessage
-	palace_set PALACE_DATA_STREAK_ACTIVE, FALSE
+	palace_set PALACE_DATA_WIN_STREAK_ACTIVE, FALSE
 	call BattleFrontier_BattlePalaceLobby_EventScript_24D8A1
 	msgbox BattleFrontier_BattlePalaceLobby_Text_24E0D8, MSGBOX_DEFAULT
 	closemessage
@@ -173,7 +173,7 @@ BattleFrontier_BattlePalaceLobby_EventScript_24DA87:: @ 824DA87
 	setvar VAR_TEMP_0, 0
 	frontier_set FRONTIER_DATA_SELECTED_MON_ORDER
 	palace_init
-	palace_set PALACE_DATA_STREAK_ACTIVE, TRUE
+	palace_set PALACE_DATA_WIN_STREAK_ACTIVE, TRUE
 	frontier_set FRONTIER_DATA_CHALLENGE_STATUS, CHALLENGE_STATUS_SAVING
 	frontier_set FRONTIER_DATA_PAUSED, FALSE
 	special LoadPlayerParty

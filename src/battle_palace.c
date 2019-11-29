@@ -107,10 +107,10 @@ static void GetPalaceData(void)
     case PALACE_DATA_PRIZE:
         gSpecialVar_Result = gSaveBlock2Ptr->frontier.palacePrize;
         break;
-    case PALACE_DATA_STREAK:
+    case PALACE_DATA_WIN_STREAK:
         gSpecialVar_Result = gSaveBlock2Ptr->frontier.palaceWinStreaks[battleMode][lvlMode];
         break;
-    case PALACE_DATA_STREAK_ACTIVE:
+    case PALACE_DATA_WIN_STREAK_ACTIVE:
         gSpecialVar_Result = ((gSaveBlock2Ptr->frontier.winStreakActiveFlags & sWinStreakFlags[battleMode][lvlMode]) != 0);
         break;
     }
@@ -126,10 +126,10 @@ static void SetPalaceData(void)
     case PALACE_DATA_PRIZE:
         gSaveBlock2Ptr->frontier.palacePrize = gSpecialVar_0x8006;
         break;
-    case PALACE_DATA_STREAK:
+    case PALACE_DATA_WIN_STREAK:
         gSaveBlock2Ptr->frontier.palaceWinStreaks[battleMode][lvlMode] = gSpecialVar_0x8006;
         break;
-    case PALACE_DATA_STREAK_ACTIVE:
+    case PALACE_DATA_WIN_STREAK_ACTIVE:
         if (gSpecialVar_0x8006)
             gSaveBlock2Ptr->frontier.winStreakActiveFlags |= sWinStreakFlags[battleMode][lvlMode];
         else

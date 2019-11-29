@@ -12,8 +12,8 @@
 #define BATTLE_PALACE_FUNC_SET_PRIZE            8
 #define BATTLE_PALACE_FUNC_GIVE_PRIZE           9
 
-#define PALACE_DATA_PRIZE           0
-#define PALACE_DATA_STREAK          1
-#define PALACE_DATA_STREAK_ACTIVE   2
+#define PALACE_DATA_PRIZE               0
+#define PALACE_DATA_WIN_STREAK          1
+#define PALACE_DATA_WIN_STREAK_ACTIVE   2
 
 #endif //GUARD_CONSTANTS_BATTLE_PALACE_H

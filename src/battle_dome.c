@@ -2274,10 +2274,10 @@ static void GetDomeData(void)
 
     switch (gSpecialVar_0x8005)
     {
-    case DOME_DATA_STREAK:
+    case DOME_DATA_WIN_STREAK:
         gSpecialVar_Result = gSaveBlock2Ptr->frontier.domeWinStreaks[battleMode][lvlMode];
         break;
-    case DOME_DATA_STREAK_ACTIVE:
+    case DOME_DATA_WIN_STREAK_ACTIVE:
         gSpecialVar_Result = ((gSaveBlock2Ptr->frontier.winStreakActiveFlags & sWinStreakFlags[battleMode][lvlMode]) != 0);
         break;
     case DOME_DATA_2:
@@ -2342,10 +2342,10 @@ static void SetDomeData(void)
 
     switch (gSpecialVar_0x8005)
     {
-    case DOME_DATA_STREAK:
+    case DOME_DATA_WIN_STREAK:
         gSaveBlock2Ptr->frontier.domeWinStreaks[battleMode][lvlMode] = gSpecialVar_0x8006;
         break;
-    case DOME_DATA_STREAK_ACTIVE:
+    case DOME_DATA_WIN_STREAK_ACTIVE:
         if (gSpecialVar_0x8006)
             gSaveBlock2Ptr->frontier.winStreakActiveFlags |= sWinStreakFlags[battleMode][lvlMode];
         else
