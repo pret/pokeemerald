@@ -40,8 +40,7 @@ FallarborTown_BattleTentBattleRoom_EventScript_2008E7:: @ 82008E7
 	goto_if_ne FallarborTown_BattleTentBattleRoom_EventScript_200B73
 
 FallarborTown_BattleTentBattleRoom_EventScript_20090F:: @ 820090F
-	setvar VAR_0x8004, BATTLE_TOWER_FUNC_CHOOSE_TRAINER
-	special CallBattleTowerFunc
+	tower_setopponent
 	addobject 3
 	applymovement 3, FallarborTown_BattleTentBattleRoom_Movement_200B96
 	waitmovement 0
@@ -143,17 +142,11 @@ FallarborTown_BattleTentBattleRoom_EventScript_200AF3:: @ 8200AF3
 	special LoadPlayerParty
 	warp MAP_FALLARBOR_TOWN_BATTLE_TENT_LOBBY, 255, 6, 6
 	waitstate
-	setvar VAR_0x8004, 1
-	setvar VAR_0x8005, 1
-	special CallBattleArenaFunction
+	arena_get ARENA_DATA_WIN_STREAK
 	compare VAR_RESULT, MAX_STREAK
 	goto_if_eq FallarborTown_BattleTentBattleRoom_EventScript_2009B3
 	addvar VAR_RESULT, 1
-	setvar VAR_0x8004, 2
-	setvar VAR_0x8005, 1
-	copyvar VAR_0x8006, VAR_RESULT
-	special CallBattleArenaFunction
-
+	arena_set ARENA_DATA_WIN_STREAK, VAR_RESULT
 FallarborTown_BattleTentBattleRoom_EventScript_200B43:: @ 8200B43
 	message BattleFrontier_BattleArenaBattleRoom_Text_ReadyFor2ndOpponent
 	waitmessage

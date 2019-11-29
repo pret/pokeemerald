@@ -82,17 +82,13 @@ BattleFrontier_BattleDomePreBattleRoom_EventScript_24B377:: @ 824B377
 	case MULTI_B_PRESSED, BattleFrontier_BattleDomePreBattleRoom_EventScript_24B24F
 
 BattleFrontier_BattleDomePreBattleRoom_EventScript_24B3A9:: @ 824B3A9
-	setvar VAR_0x8004, BATTLE_DOME_FUNC_RESOLVE_WINNERS
-	setvar VAR_0x8005, 9
-	special CallBattleDomeFunction
+	dome_resolvewinners 9
 	goto BattleFrontier_BattleDomePreBattleRoom_EventScript_24BE9A
 
 BattleFrontier_BattleDomePreBattleRoom_EventScript_24B3BB:: @ 824B3BB
 	message BattleFrontier_BattleDomePreBattleRoom_Text_24BAD3
 	waitmessage
-	setvar VAR_0x8004, BATTLE_DOME_FUNC_SAVE
-	setvar VAR_0x8005, CHALLENGE_STATUS_PAUSED
-	special CallBattleDomeFunction
+	dome_save CHALLENGE_STATUS_PAUSED
 	playse SE_SAVE
 	waitse
 	fadescreen 1
@@ -102,16 +98,14 @@ BattleFrontier_BattleDomePreBattleRoom_EventScript_24B3BB:: @ 824B3BB
 BattleFrontier_BattleDomePreBattleRoom_EventScript_24B3DD:: @ 824B3DD
 	msgbox BattleFrontier_BattleDomePreBattleRoom_Text_24B9B5, MSGBOX_DEFAULT
 	fadescreen 1
-	setvar VAR_0x8004, BATTLE_DOME_FUNC_SHOW_OPPONENT_INFO
-	special CallBattleDomeFunction
+	dome_showopponentinfo
 	waitstate
 	goto BattleFrontier_BattleDomePreBattleRoom_EventScript_24B24F
 
 BattleFrontier_BattleDomePreBattleRoom_EventScript_24B3F5:: @ 824B3F5
 	call BattleFrontier_BattleDomePreBattleRoom_EventScript_24B40A
 	fadescreen 1
-	setvar VAR_0x8004, BATTLE_DOME_FUNC_SHOW_TOURNEY_TREE
-	special CallBattleDomeFunction
+	dome_showtourneytree
 	waitstate
 	goto BattleFrontier_BattleDomePreBattleRoom_EventScript_24B24F
 
@@ -153,13 +147,9 @@ BattleFrontier_BattleDomePreBattleRoom_EventScript_24B46D:: @ 824B46D
 	frontier_resetsketch
 	compare VAR_RESULT, 0
 	goto_if_eq BattleFrontier_BattleDomePreBattleRoom_EventScript_24B24F
-	setvar VAR_0x8004, BATTLE_DOME_FUNC_SET_DATA
-	setvar VAR_0x8005, DOME_DATA_8
-	special CallBattleDomeFunction
-	setvar VAR_0x8004, BATTLE_DOME_FUNC_REDUCE_PARTY
-	special CallBattleDomeFunction
-	setvar VAR_0x8004, BATTLE_DOME_FUNC_SET_OPPONENT_ID
-	special CallBattleDomeFunction
+	dome_set DOME_DATA_8
+	dome_reduceparty
+	dome_setopponent
 	msgbox BattleFrontier_BattleDomePreBattleRoom_Text_24B748, MSGBOX_DEFAULT
 	closemessage
 	applymovement 1, BattleFrontier_BattleDomePreBattleRoom_Movement_24B64F
@@ -238,8 +228,7 @@ BattleFrontier_BattleDomePreBattleRoom_EventScript_24B5C7:: @ 824B5C7
 	special HealPlayerParty
 	call BattleFrontier_BattleDomePreBattleRoom_EventScript_24B600
 	fadescreen 1
-	setvar VAR_0x8004, BATTLE_DOME_FUNC_SHOW_STATIC_TOURNEY_TREE
-	special CallBattleDomeFunction
+	dome_showstatictourneytree
 	waitstate
 	goto BattleFrontier_BattleDomePreBattleRoom_EventScript_24B24F
 

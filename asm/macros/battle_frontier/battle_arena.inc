@@ -15,7 +15,11 @@
 	.macro arena_set data:req, val:req
 	setvar VAR_0x8004, BATTLE_ARENA_FUNC_SET_DATA
 	setvar VAR_0x8005, \data
+    .if \val >= VARS_START
+    copyvar VAR_0x8006, \val
+    .else
 	setvar VAR_0x8006, \val
+    .endif
 	special CallBattleArenaFunction
 	.endm
 
