@@ -47,7 +47,7 @@ static void sub_81B9EC0(void);
 static u16 sRandMonSetId;
 
 // const rom data
-void static (*const gUnknown_086160B4[])(void) =
+void static (*const sVerdanturfTentFuncs[])(void) =
 {
     sub_81B99D4,
     sub_81B9A28,
@@ -61,7 +61,7 @@ void static (*const gUnknown_086160B4[])(void) =
 
 static const u16 sVerdanturfTentRewards[] = {ITEM_NEST_BALL};
 
-void static (*const gUnknown_086160D8[])(void) =
+void static (*const sFallarborTentFuncs[])(void) =
 {
     sub_81B9BA0,
     sub_81B9BF4,
@@ -74,7 +74,7 @@ void static (*const gUnknown_086160D8[])(void) =
 
 static const u16 sFallarborTentRewards[] = {ITEM_HYPER_POTION};
 
-void static (*const gUnknown_086160F8[])(void) =
+void static (*const sSlateportTentFuncs[])(void) =
 {
     sub_81B9D28,
     sub_81B9D7C,
@@ -91,16 +91,16 @@ void static (*const gUnknown_086160F8[])(void) =
 static const u16 sSlateportTentRewards[] = {ITEM_FULL_HEAL};
 
 // code
-void sub_81B99B4(void)
+void CallVerdanturfTentFunction(void)
 {
-    gUnknown_086160B4[gSpecialVar_0x8004]();
+    sVerdanturfTentFuncs[gSpecialVar_0x8004]();
 }
 
 static void sub_81B99D4(void)
 {
-    gSaveBlock2Ptr->frontier.field_CA8 = 0;
+    gSaveBlock2Ptr->frontier.challengeStatus = 0;
     gSaveBlock2Ptr->frontier.curChallengeBattleNum = 0;
-    gSaveBlock2Ptr->frontier.field_CA9_a = FALSE;
+    gSaveBlock2Ptr->frontier.challengePaused = FALSE;
     SetDynamicWarp(0, gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum, -1);
 }
 
@@ -128,10 +128,10 @@ static void sub_81B9A90(void)
 
 static void sub_81B9ABC(void)
 {
-    gSaveBlock2Ptr->frontier.field_CA8 = gSpecialVar_0x8005;
+    gSaveBlock2Ptr->frontier.challengeStatus = gSpecialVar_0x8005;
     VarSet(VAR_TEMP_0, 0);
-    gSaveBlock2Ptr->frontier.field_CA9_a = TRUE;
-    sub_81A4C30();
+    gSaveBlock2Ptr->frontier.challengePaused = TRUE;
+    SaveGameFrontier();
 }
 
 static void sub_81B9B00(void)
@@ -153,16 +153,16 @@ static void sub_81B9B28(void)
     }
 }
 
-void sub_81B9B80(void)
+void CallFallarborTentFunction(void)
 {
-    gUnknown_086160D8[gSpecialVar_0x8004]();
+    sFallarborTentFuncs[gSpecialVar_0x8004]();
 }
 
 static void sub_81B9BA0(void)
 {
-    gSaveBlock2Ptr->frontier.field_CA8 = 0;
+    gSaveBlock2Ptr->frontier.challengeStatus = 0;
     gSaveBlock2Ptr->frontier.curChallengeBattleNum = 0;
-    gSaveBlock2Ptr->frontier.field_CA9_a = FALSE;
+    gSaveBlock2Ptr->frontier.challengePaused = FALSE;
     SetDynamicWarp(0, gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum, -1);
 }
 
@@ -178,10 +178,10 @@ static void sub_81B9C10(void)
 
 static void sub_81B9C2C(void)
 {
-    gSaveBlock2Ptr->frontier.field_CA8 = gSpecialVar_0x8005;
+    gSaveBlock2Ptr->frontier.challengeStatus = gSpecialVar_0x8005;
     VarSet(VAR_TEMP_0, 0);
-    gSaveBlock2Ptr->frontier.field_CA9_a = TRUE;
-    sub_81A4C30();
+    gSaveBlock2Ptr->frontier.challengePaused = TRUE;
+    SaveGameFrontier();
 }
 
 static void sub_81B9C70(void)
@@ -208,16 +208,16 @@ static void sub_81B9CF0(void)
     GetFrontierTrainerName(gStringVar1, gTrainerBattleOpponent_A);
 }
 
-void sub_81B9D08(void)
+void CallSlateportTentFunction(void)
 {
-    gUnknown_086160F8[gSpecialVar_0x8004]();
+    sSlateportTentFuncs[gSpecialVar_0x8004]();
 }
 
 static void sub_81B9D28(void)
 {
-    gSaveBlock2Ptr->frontier.field_CA8 = 0;
+    gSaveBlock2Ptr->frontier.challengeStatus = 0;
     gSaveBlock2Ptr->frontier.curChallengeBattleNum = 0;
-    gSaveBlock2Ptr->frontier.field_CA9_a = FALSE;
+    gSaveBlock2Ptr->frontier.challengePaused = FALSE;
     SetDynamicWarp(0, gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum, -1);
 }
 
@@ -233,10 +233,10 @@ static void sub_81B9D98(void)
 
 static void sub_81B9DB4(void)
 {
-    gSaveBlock2Ptr->frontier.field_CA8 = gSpecialVar_0x8005;
+    gSaveBlock2Ptr->frontier.challengeStatus = gSpecialVar_0x8005;
     VarSet(VAR_TEMP_0, 0);
-    gSaveBlock2Ptr->frontier.field_CA9_a = TRUE;
-    sub_81A4C30();
+    gSaveBlock2Ptr->frontier.challengePaused = TRUE;
+    SaveGameFrontier();
 }
 
 static void sub_81B9DF8(void)

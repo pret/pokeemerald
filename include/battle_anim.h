@@ -186,7 +186,7 @@ bool8 IsBattlerSpritePresent(u8 battlerId);
 void sub_80A6C68(u32 arg0);
 u8 GetAnimBattlerSpriteId(u8 wantedBattler);
 bool8 IsDoubleBattle(void);
-u8 sub_80A6D94(void);
+u8 GetBattleBgPaletteNum(void);
 u8 GetBattlerSpriteBGPriorityRank(u8 battlerId);
 void StoreSpriteCallbackInData6(struct Sprite *sprite, void (*spriteCallback)(struct Sprite*));
 void SetSpritePrimaryCoordsFromSecondaryCoords(struct Sprite *sprite);
@@ -248,7 +248,7 @@ void sub_8112B78(struct Sprite *sprite);
 extern const union AffineAnimCmd *const gUnknown_08596894[];
 
 // smokescreen.c
-u8 sub_807521C(s16 x, s16 y, u8 a3);
+u8 SmokescreenImpact(s16 x, s16 y, u8 a3);
 
 u32 UnpackSelectedBattleAnimPalettes(s16);
 

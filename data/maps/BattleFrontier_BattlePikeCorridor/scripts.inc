@@ -9,29 +9,21 @@ BattleFrontier_BattlePikeCorridor_MapScript2_25C77C: @ 825C77C
 
 BattleFrontier_BattlePikeCorridor_EventScript_25C786:: @ 825C786
 	delay 16
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_2
-	setvar VAR_0x8005, 2
-	setvar VAR_0x8006, 1
-	special CallFrontierUtilFunc
+	frontier_set FRONTIER_DATA_BATTLE_NUM, 1
 	setvar VAR_0x8004, BATTLE_PIKE_FUNC_CLEAR_TRAINER_IDS
 	special CallBattlePikeFunction
-	setvar VAR_0x8004, BATTLE_PIKE_FUNC_SET_HEALING_ROOMS_DISABLED
-	setvar VAR_0x8005, 1
-	special CallBattlePikeFunction
+	battlepike_nohealing TRUE
 	applymovement EVENT_OBJ_ID_PLAYER, BattleFrontier_BattlePikeCorridor_Movement_25C80B
 	applymovement 1, BattleFrontier_BattlePikeCorridor_Movement_25C812
 	waitmovement 0
 	lockall
-	msgbox BattleFrontier_BattlePikeCorridor_Text_25C817, MSGBOX_DEFAULT
+	msgbox BattleFrontier_BattlePikeCorridor_Text_YourChallengeHasBegun, MSGBOX_DEFAULT
 	closemessage
 	releaseall
 	applymovement EVENT_OBJ_ID_PLAYER, BattleFrontier_BattlePikeCorridor_Movement_25C80E
 	waitmovement 0
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_2
-	setvar VAR_0x8005, 0
-	setvar VAR_0x8006, 99
-	special CallFrontierUtilFunc
-	call BattleFrontier_BattlePikeCorridor_EventScript_25BB49
+	frontier_set FRONTIER_DATA_CHALLENGE_STATUS, 99
+	call BattleFrontier_BattlePike_EventScript_CloseCurtain
 	warpsilent MAP_BATTLE_FRONTIER_BATTLE_PIKE_THREE_PATH_ROOM, 255, 6, 10
 	waitstate
 	end
@@ -63,7 +55,7 @@ BattleFrontier_BattlePikeCorridor_Movement_25C812: @ 825C812
 	face_down
 	step_end
 
-BattleFrontier_BattlePikeCorridor_Text_25C817: @ 825C817
+BattleFrontier_BattlePikeCorridor_Text_YourChallengeHasBegun: @ 825C817
 	.string "Your Battle Choice challenge\n"
 	.string "has now begun…$"
 

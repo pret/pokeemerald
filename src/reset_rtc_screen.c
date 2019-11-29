@@ -608,7 +608,7 @@ static void Task_ResetRtcScreen(u8 taskId)
         }
         break;
     case 4:
-        if (TrySavingData(0) == 1)
+        if (TrySavingData(SAVE_NORMAL) == 1)
         {
             ShowMessage(gText_SaveCompleted);
             PlaySE(SE_PINPON);

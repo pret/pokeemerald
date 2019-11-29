@@ -4,12 +4,10 @@ TrainerHill_Roof_MapScripts:: @ 8268FA7
 	.byte 0
 
 TrainerHill_Roof_EventScript_Owner:: @ 8268FB2
-	setvar VAR_0x8004, TRAINER_HILL_FUNC_SET_ALL_TRAINER_FLAGS
-	special CallTrainerHillFunction
+	trainerhill_settrainerflags
 	lock
 	faceplayer
-	setvar VAR_0x8004, TRAINER_HILL_FUNC_GET_OWNER_STATE
-	special CallTrainerHillFunction
+	trainerhill_getownerstate
 	switch VAR_RESULT
 	case 0, TrainerHill_Roof_EventScript_Arrived
 	case 1, TrainerHill_Roof_EventScript_GivePrize
@@ -17,8 +15,7 @@ TrainerHill_Roof_EventScript_Owner:: @ 8268FB2
 TrainerHill_Roof_EventScript_Arrived:: @ 8268FEA
 	msgbox TrainerHill_Roof_Text_YouFinallyCameBravo, MSGBOX_DEFAULT
 TrainerHill_Roof_EventScript_GivePrize:: @ 8268FF2
-	setvar VAR_0x8004, TRAINER_HILL_FUNC_GIVE_PRIZE
-	special CallTrainerHillFunction
+	trainerhill_giveprize
 	switch VAR_RESULT
 	case 0, TrainerHill_Roof_EventScript_ReceivePrize
 	case 1, TrainerHill_Roof_EventScript_NoRoomForPrize
@@ -38,8 +35,7 @@ TrainerHill_Roof_EventScript_NoRoomForPrize:: @ 8269037
 	goto TrainerHill_Roof_EventScript_CheckFinalTime
 
 TrainerHill_Roof_EventScript_CheckFinalTime:: @ 8269054
-	setvar VAR_0x8004, TRAINER_HILL_FUNC_CHECK_FINAL_TIME
-	special CallTrainerHillFunction
+	trainerhill_finaltime
 	switch VAR_RESULT
 	case 0, TrainerHill_Roof_EventScript_NewRecord
 	case 1, TrainerHill_Roof_EventScript_NoNewRecord

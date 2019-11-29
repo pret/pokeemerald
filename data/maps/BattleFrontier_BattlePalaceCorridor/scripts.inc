@@ -25,10 +25,8 @@ BattleFrontier_BattlePalaceCorridor_EventScript_24F4B3:: @ 824F4B3
 	compare VAR_RESULT, 4
 	call_if_eq BattleFrontier_BattlePalaceCorridor_EventScript_24F5AF
 	closemessage
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_1
-	setvar VAR_0x8005, 1
-	special CallFrontierUtilFunc
-	compare VAR_RESULT, 1
+	frontier_get FRONTIER_DATA_LVL_MODE
+	compare VAR_RESULT, FRONTIER_LVL_OPEN
 	goto_if_eq BattleFrontier_BattlePalaceCorridor_EventScript_24F553
 	applymovement 1, BattleFrontier_BattlePalaceCorridor_Movement_24F5BD
 	applymovement EVENT_OBJ_ID_PLAYER, BattleFrontier_BattlePalaceCorridor_Movement_24F5C4
