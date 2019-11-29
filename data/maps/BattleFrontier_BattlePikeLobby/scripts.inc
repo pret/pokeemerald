@@ -25,16 +25,12 @@ BattleFrontier_BattlePikeLobby_EventScript_25B707:: @ 825B707
 
 BattleFrontier_BattlePikeLobby_EventScript_25B710:: @ 825B710
 	special HealPlayerParty
-	setvar VAR_0x8004, BATTLE_PIKE_FUNC_LOAD_MON_HELD_ITEMS
-	special CallBattlePikeFunction
+	pike_resethelditems
 	lockall
 	msgbox BattleFrontier_BattlePikeLobby_Text_25C2E0, MSGBOX_DEFAULT
 	closemessage
-	battlepike_setstreak 0
-	setvar VAR_0x8004, BATTLE_PIKE_FUNC_SET_DATA
-	setvar VAR_0x8005, 4
-	setvar VAR_0x8006, 0
-	special CallBattlePikeFunction
+	pike_set PIKE_DATA_WIN_STREAK 0
+	pike_set PIKE_DATA_WIN_STREAK_ACTIVE, FALSE
 	frontier_set FRONTIER_DATA_CHALLENGE_STATUS, 0
 	setvar VAR_TEMP_0, 255
 	releaseall
@@ -58,23 +54,15 @@ BattleFrontier_BattlePikeLobby_EventScript_25B78D:: @ 825B78D
 	frontier_givepoints
 	msgbox BattleFrontier_Text_ObtainedXBattlePoints, MSGBOX_GETPOINTS
 	frontier_checkairshow
-	setvar VAR_0x8004, BATTLE_PIKE_FUNC_GET_DATA
-	setvar VAR_0x8005, 3
-	special CallBattlePikeFunction
+	pike_get PIKE_DATA_TOTAL_STREAKS
 	addvar VAR_RESULT, 1
-	setvar VAR_0x8004, BATTLE_PIKE_FUNC_SET_DATA
-	setvar VAR_0x8005, 3
-	copyvar VAR_0x8006, VAR_RESULT
-	special CallBattlePikeFunction
+	pike_set PIKE_DATA_TOTAL_STREAKS, VAR_RESULT
 	special LoadPlayerParty
 	special HealPlayerParty
-	setvar VAR_0x8004, BATTLE_PIKE_FUNC_LOAD_MON_HELD_ITEMS
-	special CallBattlePikeFunction
+	pike_resethelditems
 	message BattleFrontier_BattlePikeLobby_Text_25C1DF
 	waitmessage
-	setvar VAR_0x8004, BATTLE_PIKE_FUNC_SAVE
-	setvar VAR_0x8005, 0
-	special CallBattlePikeFunction
+	pike_save 0
 	playse SE_SAVE
 	waitse
 	msgbox BattleFrontier_BattlePikeLobby_Text_25BE02, MSGBOX_DEFAULT
@@ -89,17 +77,11 @@ BattleFrontier_BattlePikeLobby_EventScript_25B806:: @ 825B806
 	waitmessage
 	frontier_checkairshow
 	frontier_set FRONTIER_DATA_BATTLE_NUM, 0
-	setvar VAR_0x8004, BATTLE_PIKE_FUNC_SET_DATA
-	setvar VAR_0x8005, 4
-	setvar VAR_0x8006, 0
-	special CallBattlePikeFunction
+	pike_set PIKE_DATA_WIN_STREAK_ACTIVE, FALSE
 	special LoadPlayerParty
 	special HealPlayerParty
-	setvar VAR_0x8004, BATTLE_PIKE_FUNC_LOAD_MON_HELD_ITEMS
-	special CallBattlePikeFunction
-	setvar VAR_0x8004, BATTLE_PIKE_FUNC_SAVE
-	setvar VAR_0x8005, 0
-	special CallBattlePikeFunction
+	pike_resethelditems
+	pike_save 0
 	playse SE_SAVE
 	waitse
 	msgbox BattleFrontier_BattlePikeLobby_Text_25BE02, MSGBOX_DEFAULT
@@ -156,23 +138,17 @@ BattleFrontier_BattlePikeLobby_EventScript_25B95C:: @ 825B95C
 	setvar VAR_TEMP_0, 0
 	setvar VAR_TEMP_1, 0
 	frontier_set FRONTIER_DATA_SELECTED_MON_ORDER
-	setvar VAR_0x8004, BATTLE_PIKE_FUNC_INIT_CHALLENGE
-	special CallBattlePikeFunction
+	pike_init
 	frontier_set FRONTIER_DATA_CHALLENGE_STATUS, CHALLENGE_STATUS_SAVING
-	setvar VAR_0x8004, BATTLE_PIKE_FUNC_SET_DATA
-	setvar VAR_0x8005, 4
-	setvar VAR_0x8006, 1
-	special CallBattlePikeFunction
-	setvar VAR_0x8004, BATTLE_PIKE_FUNC_SAVE_MON_HELD_ITEMS
-	special CallBattlePikeFunction
+	pike_set PIKE_DATA_WIN_STREAK_ACTIVE, TRUE
+	pike_savehelditems
 	frontier_set FRONTIER_DATA_PAUSED, FALSE
 	special LoadPlayerParty
 	closemessage
 	delay 2
 	call Common_EventScript_SaveGame
 	setvar VAR_TEMP_0, 255
-	setvar VAR_0x8004, BATTLE_PIKE_FUNC_SAVE_MON_HELD_ITEMS
-	special CallBattlePikeFunction
+	pike_savehelditems
 	compare VAR_RESULT, 0
 	goto_if_eq BattleFrontier_BattlePikeLobby_EventScript_25BA5C
 	special SavePlayerParty
