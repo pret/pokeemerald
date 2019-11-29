@@ -25,6 +25,7 @@
 #include "battle_factory.h"
 #include "constants/battle_frontier.h"
 #include "constants/battle_tower.h"
+#include "constants/frontier_util.h"
 #include "constants/items.h"
 #include "constants/trainers.h"
 #include "constants/event_objects.h"
@@ -200,7 +201,7 @@ const u8 gTowerFemaleFacilityClasses[20] =
     FACILITY_CLASS_PARASOL_LADY,
     FACILITY_CLASS_SWIMMER_F,
     FACILITY_CLASS_PICNICKER,
-    FACILITY_CLASS_POKEMON_BREEDER_F,
+    FACILITY_CLASS_PKMN_BREEDER_F,
     FACILITY_CLASS_PKMN_RANGER_F,
     FACILITY_CLASS_LASS
 };
@@ -263,83 +264,84 @@ const u8 gTowerFemaleTrainerGfxIds[20] =
     EVENT_OBJ_GFX_LASS
 };
 
-static const u8 sRubyFacilityClassToEmerald[][2] =
+// Excludes the unused RS_FACILITY_CLASS_BOARDER_1 and _2
+static const u8 sRubyFacilityClassToEmerald[RS_FACILITY_CLASSES_COUNT - 2][2] =
 {
-    {0x00, FACILITY_CLASS_AQUA_LEADER_ARCHIE},
-    {0x01, FACILITY_CLASS_AQUA_GRUNT_M},
-    {0x02, FACILITY_CLASS_AQUA_GRUNT_F},
-    {0x03, FACILITY_CLASS_AROMA_LADY},
-    {0x04, FACILITY_CLASS_RUIN_MANIAC},
-    {0x05, FACILITY_CLASS_INTERVIEWER},
-    {0x06, FACILITY_CLASS_TUBER_F},
-    {0x07, FACILITY_CLASS_TUBER_M},
-    {0x08, FACILITY_CLASS_COOLTRAINER_M},
-    {0x09, FACILITY_CLASS_COOLTRAINER_F},
-    {0x0a, FACILITY_CLASS_HEX_MANIAC},
-    {0x0b, FACILITY_CLASS_LADY},
-    {0x0c, FACILITY_CLASS_BEAUTY},
-    {0x0d, FACILITY_CLASS_RICH_BOY},
-    {0x0e, FACILITY_CLASS_POKEMANIAC},
-    {0x0f, FACILITY_CLASS_SWIMMER_M},
-    {0x10, FACILITY_CLASS_BLACK_BELT},
-    {0x11, FACILITY_CLASS_GUITARIST},
-    {0x12, FACILITY_CLASS_KINDLER},
-    {0x13, FACILITY_CLASS_CAMPER},
-    {0x14, FACILITY_CLASS_BUG_MANIAC},
-    {0x15, FACILITY_CLASS_PSYCHIC_M},
-    {0x16, FACILITY_CLASS_PSYCHIC_F},
-    {0x17, FACILITY_CLASS_GENTLEMAN},
-    {0x18, FACILITY_CLASS_ELITE_FOUR_SIDNEY},
-    {0x19, FACILITY_CLASS_ELITE_FOUR_PHOEBE},
-    {0x1a, FACILITY_CLASS_LEADER_ROXANNE},
-    {0x1b, FACILITY_CLASS_LEADER_BRAWLY},
-    {0x1c, FACILITY_CLASS_LEADER_TATE_AND_LIZA},
-    {0x1d, FACILITY_CLASS_SCHOOL_KID_M},
-    {0x1e, FACILITY_CLASS_SCHOOL_KID_F},
-    {0x1f, FACILITY_CLASS_SR_AND_JR},
-    {0x20, FACILITY_CLASS_POKEFAN_M},
-    {0x21, FACILITY_CLASS_POKEFAN_F},
-    {0x22, FACILITY_CLASS_EXPERT_M},
-    {0x23, FACILITY_CLASS_EXPERT_F},
-    {0x24, FACILITY_CLASS_YOUNGSTER},
-    {0x25, FACILITY_CLASS_CHAMPION_WALLACE},
-    {0x26, FACILITY_CLASS_FISHERMAN},
-    {0x27, FACILITY_CLASS_CYCLING_TRIATHLETE_M},
-    {0x28, FACILITY_CLASS_CYCLING_TRIATHLETE_F},
-    {0x29, FACILITY_CLASS_RUNNING_TRIATHLETE_M},
-    {0x2a, FACILITY_CLASS_RUNNING_TRIATHLETE_F},
-    {0x2b, FACILITY_CLASS_SWIMMING_TRIATHLETE_M},
-    {0x2c, FACILITY_CLASS_SWIMMING_TRIATHLETE_F},
-    {0x2d, FACILITY_CLASS_DRAGON_TAMER},
-    {0x2e, FACILITY_CLASS_BIRD_KEEPER},
-    {0x2f, FACILITY_CLASS_NINJA_BOY},
-    {0x30, FACILITY_CLASS_BATTLE_GIRL},
-    {0x31, FACILITY_CLASS_PARASOL_LADY},
-    {0x32, FACILITY_CLASS_SWIMMER_F},
-    {0x33, FACILITY_CLASS_PICNICKER},
-    {0x34, FACILITY_CLASS_TWINS},
-    {0x35, FACILITY_CLASS_SAILOR},
-    {0x38, FACILITY_CLASS_COLLECTOR},
-    {0x39, FACILITY_CLASS_WALLY},
-    {0x3a, FACILITY_CLASS_BRENDAN},
-    {0x3b, FACILITY_CLASS_BRENDAN_2},
-    {0x3c, FACILITY_CLASS_BRENDAN_3},
-    {0x3d, FACILITY_CLASS_MAY},
-    {0x3e, FACILITY_CLASS_MAY_2},
-    {0x3f, FACILITY_CLASS_MAY_3},
-    {0x40, FACILITY_CLASS_PKMN_BREEDER_M},
-    {0x41, FACILITY_CLASS_POKEMON_BREEDER_F},
-    {0x42, FACILITY_CLASS_PKMN_RANGER_M},
-    {0x43, FACILITY_CLASS_PKMN_RANGER_F},
-    {0x44, FACILITY_CLASS_MAGMA_LEADER_MAXIE},
-    {0x45, FACILITY_CLASS_MAGMA_GRUNT_M},
-    {0x46, FACILITY_CLASS_MAGMA_GRUNT_F},
-    {0x47, FACILITY_CLASS_LASS},
-    {0x48, FACILITY_CLASS_BUG_CATCHER},
-    {0x49, FACILITY_CLASS_HIKER},
-    {0x4a, FACILITY_CLASS_YOUNG_COUPLE},
-    {0x4b, FACILITY_CLASS_OLD_COUPLE},
-    {0x4c, FACILITY_CLASS_SIS_AND_BRO},
+    {RS_FACILITY_CLASS_AQUA_LEADER_ARCHIE, FACILITY_CLASS_AQUA_LEADER_ARCHIE},
+    {RS_FACILITY_CLASS_AQUA_GRUNT_M, FACILITY_CLASS_AQUA_GRUNT_M},
+    {RS_FACILITY_CLASS_AQUA_GRUNT_F, FACILITY_CLASS_AQUA_GRUNT_F},
+    {RS_FACILITY_CLASS_AROMA_LADY, FACILITY_CLASS_AROMA_LADY},
+    {RS_FACILITY_CLASS_RUIN_MANIAC, FACILITY_CLASS_RUIN_MANIAC},
+    {RS_FACILITY_CLASS_INTERVIEWER, FACILITY_CLASS_INTERVIEWER},
+    {RS_FACILITY_CLASS_TUBER_F, FACILITY_CLASS_TUBER_F},
+    {RS_FACILITY_CLASS_TUBER_M, FACILITY_CLASS_TUBER_M},
+    {RS_FACILITY_CLASS_COOLTRAINER_M, FACILITY_CLASS_COOLTRAINER_M},
+    {RS_FACILITY_CLASS_COOLTRAINER_F, FACILITY_CLASS_COOLTRAINER_F},
+    {RS_FACILITY_CLASS_HEX_MANIAC, FACILITY_CLASS_HEX_MANIAC},
+    {RS_FACILITY_CLASS_LADY, FACILITY_CLASS_LADY},
+    {RS_FACILITY_CLASS_BEAUTY, FACILITY_CLASS_BEAUTY},
+    {RS_FACILITY_CLASS_RICH_BOY, FACILITY_CLASS_RICH_BOY},
+    {RS_FACILITY_CLASS_POKEMANIAC, FACILITY_CLASS_POKEMANIAC},
+    {RS_FACILITY_CLASS_SWIMMER_M, FACILITY_CLASS_SWIMMER_M},
+    {RS_FACILITY_CLASS_BLACK_BELT, FACILITY_CLASS_BLACK_BELT},
+    {RS_FACILITY_CLASS_GUITARIST, FACILITY_CLASS_GUITARIST},
+    {RS_FACILITY_CLASS_KINDLER, FACILITY_CLASS_KINDLER},
+    {RS_FACILITY_CLASS_CAMPER, FACILITY_CLASS_CAMPER},
+    {RS_FACILITY_CLASS_BUG_MANIAC, FACILITY_CLASS_BUG_MANIAC},
+    {RS_FACILITY_CLASS_PSYCHIC_M, FACILITY_CLASS_PSYCHIC_M},
+    {RS_FACILITY_CLASS_PSYCHIC_F, FACILITY_CLASS_PSYCHIC_F},
+    {RS_FACILITY_CLASS_GENTLEMAN, FACILITY_CLASS_GENTLEMAN},
+    {RS_FACILITY_CLASS_ELITE_FOUR_M, FACILITY_CLASS_ELITE_FOUR_SIDNEY},
+    {RS_FACILITY_CLASS_ELITE_FOUR_F, FACILITY_CLASS_ELITE_FOUR_PHOEBE},
+    {RS_FACILITY_CLASS_LEADER_F, FACILITY_CLASS_LEADER_ROXANNE},
+    {RS_FACILITY_CLASS_LEADER_M, FACILITY_CLASS_LEADER_BRAWLY},
+    {RS_FACILITY_CLASS_LEADER_MF, FACILITY_CLASS_LEADER_TATE_AND_LIZA},
+    {RS_FACILITY_CLASS_SCHOOL_KID_M, FACILITY_CLASS_SCHOOL_KID_M},
+    {RS_FACILITY_CLASS_SCHOOL_KID_F, FACILITY_CLASS_SCHOOL_KID_F},
+    {RS_FACILITY_CLASS_SR_AND_JR, FACILITY_CLASS_SR_AND_JR},
+    {RS_FACILITY_CLASS_POKEFAN_M, FACILITY_CLASS_POKEFAN_M},
+    {RS_FACILITY_CLASS_POKEFAN_F, FACILITY_CLASS_POKEFAN_F},
+    {RS_FACILITY_CLASS_EXPERT_M, FACILITY_CLASS_EXPERT_M},
+    {RS_FACILITY_CLASS_EXPERT_F, FACILITY_CLASS_EXPERT_F},
+    {RS_FACILITY_CLASS_YOUNGSTER, FACILITY_CLASS_YOUNGSTER},
+    {RS_FACILITY_CLASS_CHAMPION, FACILITY_CLASS_CHAMPION_WALLACE},
+    {RS_FACILITY_CLASS_FISHERMAN, FACILITY_CLASS_FISHERMAN},
+    {RS_FACILITY_CLASS_CYCLING_TRIATHLETE_M, FACILITY_CLASS_CYCLING_TRIATHLETE_M},
+    {RS_FACILITY_CLASS_CYCLING_TRIATHLETE_F, FACILITY_CLASS_CYCLING_TRIATHLETE_F},
+    {RS_FACILITY_CLASS_RUNNING_TRIATHLETE_M, FACILITY_CLASS_RUNNING_TRIATHLETE_M},
+    {RS_FACILITY_CLASS_RUNNING_TRIATHLETE_F, FACILITY_CLASS_RUNNING_TRIATHLETE_F},
+    {RS_FACILITY_CLASS_SWIMMING_TRIATHLETE_M, FACILITY_CLASS_SWIMMING_TRIATHLETE_M},
+    {RS_FACILITY_CLASS_SWIMMING_TRIATHLETE_F, FACILITY_CLASS_SWIMMING_TRIATHLETE_F},
+    {RS_FACILITY_CLASS_DRAGON_TAMER, FACILITY_CLASS_DRAGON_TAMER},
+    {RS_FACILITY_CLASS_BIRD_KEEPER, FACILITY_CLASS_BIRD_KEEPER},
+    {RS_FACILITY_CLASS_NINJA_BOY, FACILITY_CLASS_NINJA_BOY},
+    {RS_FACILITY_CLASS_BATTLE_GIRL, FACILITY_CLASS_BATTLE_GIRL},
+    {RS_FACILITY_CLASS_PARASOL_LADY, FACILITY_CLASS_PARASOL_LADY},
+    {RS_FACILITY_CLASS_SWIMMER_F, FACILITY_CLASS_SWIMMER_F},
+    {RS_FACILITY_CLASS_PICNICKER, FACILITY_CLASS_PICNICKER},
+    {RS_FACILITY_CLASS_TWINS, FACILITY_CLASS_TWINS},
+    {RS_FACILITY_CLASS_SAILOR, FACILITY_CLASS_SAILOR},
+    {RS_FACILITY_CLASS_COLLECTOR, FACILITY_CLASS_COLLECTOR},
+    {RS_FACILITY_CLASS_WALLY, FACILITY_CLASS_WALLY},
+    {RS_FACILITY_CLASS_BRENDAN_1, FACILITY_CLASS_BRENDAN},
+    {RS_FACILITY_CLASS_BRENDAN_2, FACILITY_CLASS_BRENDAN_2},
+    {RS_FACILITY_CLASS_BRENDAN_3, FACILITY_CLASS_BRENDAN_3},
+    {RS_FACILITY_CLASS_MAY_1, FACILITY_CLASS_MAY},
+    {RS_FACILITY_CLASS_MAY_2, FACILITY_CLASS_MAY_2},
+    {RS_FACILITY_CLASS_MAY_3, FACILITY_CLASS_MAY_3},
+    {RS_FACILITY_CLASS_PKMN_BREEDER_M, FACILITY_CLASS_PKMN_BREEDER_M},
+    {RS_FACILITY_CLASS_PKMN_BREEDER_F, FACILITY_CLASS_PKMN_BREEDER_F},
+    {RS_FACILITY_CLASS_PKMN_RANGER_M, FACILITY_CLASS_PKMN_RANGER_M},
+    {RS_FACILITY_CLASS_PKMN_RANGER_F, FACILITY_CLASS_PKMN_RANGER_F},
+    {RS_FACILITY_CLASS_MAGMA_LEADER, FACILITY_CLASS_MAGMA_LEADER_MAXIE},
+    {RS_FACILITY_CLASS_MAGMA_GRUNT_M, FACILITY_CLASS_MAGMA_GRUNT_M},
+    {RS_FACILITY_CLASS_MAGMA_GRUNT_F, FACILITY_CLASS_MAGMA_GRUNT_F},
+    {RS_FACILITY_CLASS_LASS, FACILITY_CLASS_LASS},
+    {RS_FACILITY_CLASS_BUG_CATCHER, FACILITY_CLASS_BUG_CATCHER},
+    {RS_FACILITY_CLASS_HIKER, FACILITY_CLASS_HIKER},
+    {RS_FACILITY_CLASS_YOUNG_COUPLE, FACILITY_CLASS_YOUNG_COUPLE},
+    {RS_FACILITY_CLASS_OLD_COUPLE, FACILITY_CLASS_OLD_COUPLE},
+    {RS_FACILITY_CLASS_SIS_AND_BRO, FACILITY_CLASS_SIS_AND_BRO},
 };
 
 static const u8 *const gUnknown_085DCFD8[] =
@@ -986,7 +988,7 @@ struct
     {FACILITY_CLASS_PSYCHIC_M,             gUnknown_085DD44C},
     {FACILITY_CLASS_PSYCHIC_F,             gUnknown_085DD460},
     {FACILITY_CLASS_SCHOOL_KID_F,          gUnknown_085DD474},
-    {FACILITY_CLASS_POKEMON_BREEDER_F,     gUnknown_085DD488},
+    {FACILITY_CLASS_PKMN_BREEDER_F,        gUnknown_085DD488},
     {FACILITY_CLASS_POKEFAN_F,             gUnknown_085DD49C},
     {FACILITY_CLASS_SWIMMER_F,             gUnknown_085DD4B0},
     {FACILITY_CLASS_SWIMMING_TRIATHLETE_M, gUnknown_085DD4C4},
@@ -1072,20 +1074,20 @@ static void (* const sBattleTowerFuncs[])(void) =
     [BATTLE_TOWER_FUNC_15] = sub_8164E04,
 };
 
-static const u32 gUnknown_085DF9AC[][2] =
+static const u32 sWinStreakFlags[][2] =
 {
-    {0x00000001, 0x00000002},
-    {0x00004000, 0x00008000},
-    {0x00010000, 0x00020000},
-    {0x00040000, 0x00080000},
+    {STREAK_TOWER_SINGLES_50,     STREAK_TOWER_SINGLES_OPEN},
+    {STREAK_TOWER_DOUBLES_50,     STREAK_TOWER_DOUBLES_OPEN},
+    {STREAK_TOWER_MULTIS_50,      STREAK_TOWER_MULTIS_OPEN},
+    {STREAK_TOWER_LINK_MULTIS_50, STREAK_TOWER_LINK_MULTIS_OPEN},
 };
 
-static const u32 gUnknown_085DF9CC[][2] =
+static const u32 sWinStreakMasks[][2] =
 {
-    {0xfffffffe, 0xfffffffd},
-    {0xffffbfff, 0xffff7fff},
-    {0xfffeffff, 0xfffdffff},
-    {0xfffbffff, 0xfff7ffff},
+    {~(STREAK_TOWER_SINGLES_50),     ~(STREAK_TOWER_SINGLES_OPEN)},
+    {~(STREAK_TOWER_DOUBLES_50),     ~(STREAK_TOWER_DOUBLES_OPEN)},
+    {~(STREAK_TOWER_MULTIS_50),      ~(STREAK_TOWER_MULTIS_OPEN)},
+    {~(STREAK_TOWER_LINK_MULTIS_50), ~(STREAK_TOWER_LINK_MULTIS_OPEN)},
 };
 
 static const u8 gUnknown_085DF9EC[] =
@@ -1093,12 +1095,13 @@ static const u8 gUnknown_085DF9EC[] =
     0x01, 0x02, 0x03, 0x04, 0x05, 0x08, 0x09, 0x0a, 0x0b, 0x0c
 };
 
-static const u8 gUnknown_085DF9F6[] =
+// Unclear why this was duplicated
+static const u8 sBattleTowerPartySizes2[] =
 {
-    [FRONTIER_MODE_SINGLES] = 3,
-    [FRONTIER_MODE_DOUBLES] = 4,
-    [FRONTIER_MODE_MULTIS] = 2,
-    [FRONTIER_MODE_LINK_MULTIS] = 2,
+    [FRONTIER_MODE_SINGLES]     = FRONTIER_PARTY_SIZE,
+    [FRONTIER_MODE_DOUBLES]     = FRONTIER_DOUBLES_PARTY_SIZE,
+    [FRONTIER_MODE_MULTIS]      = FRONTIER_MULTI_PARTY_SIZE,
+    [FRONTIER_MODE_LINK_MULTIS] = FRONTIER_MULTI_PARTY_SIZE,
 };
 
 static const u16 gUnknown_085DF9FA[][2] =
@@ -1127,22 +1130,22 @@ static const u16 gUnknown_085DFA1A[][2] =
     {0x00c8, 0x00b7},
 };
 
-static const u8 gUnknown_085DFA42[4] =
+static const u8 sBattleTowerPartySizes[FRONTIER_MODE_COUNT] =
 {
-    [FRONTIER_MODE_SINGLES] = 3,
-    [FRONTIER_MODE_DOUBLES] = 4,
-    [FRONTIER_MODE_MULTIS] = 2,
-    [FRONTIER_MODE_LINK_MULTIS] = 2,
+    [FRONTIER_MODE_SINGLES]     = FRONTIER_PARTY_SIZE,
+    [FRONTIER_MODE_DOUBLES]     = FRONTIER_DOUBLES_PARTY_SIZE,
+    [FRONTIER_MODE_MULTIS]      = FRONTIER_MULTI_PARTY_SIZE,
+    [FRONTIER_MODE_LINK_MULTIS] = FRONTIER_MULTI_PARTY_SIZE,
 };
 
-static const u16 gUnknown_085DFA46[] =
+static const u16 sRecordTrainerSpeechWon[] =
 {
-    0x0c3a, 0x0c3a, 0x0c01, 0x0a2a, 0x0607, 0x0c01
+    EC_WORD_YAY, EC_WORD_YAY, EC_WORD_EXCL_EXCL, EC_WORD_I_VE, EC_WORD_WON, EC_WORD_EXCL_EXCL
 };
 
-static const u16 gUnknown_085DFA52[] =
+static const u16 sRecordTrainerSpeechLost[] =
 {
-    0x1039, 0x122e, 0x0c04, 0x0a3d, 0x0630, 0x0c04
+    EC_WORD_TOO, EC_WORD_BAD, EC_WORD_ELLIPSIS, EC_WORD_WE, EC_WORD_LOST, EC_WORD_ELLIPSIS
 };
 
 // code
@@ -1156,12 +1159,12 @@ static void sub_8161F94(void)
     u32 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
     u32 battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
 
-    gSaveBlock2Ptr->frontier.field_CA8 = 1;
+    gSaveBlock2Ptr->frontier.challengeStatus = CHALLENGE_STATUS_SAVING;
     gSaveBlock2Ptr->frontier.curChallengeBattleNum = 0;
-    gSaveBlock2Ptr->frontier.field_CA9_a = 0;
+    gSaveBlock2Ptr->frontier.challengePaused = FALSE;
     gSaveBlock2Ptr->frontier.field_CA9_b = 0;
-    sub_81A3ACC();
-    if (!(gSaveBlock2Ptr->frontier.field_CDC & gUnknown_085DF9AC[battleMode][lvlMode]))
+    ResetFrontierTrainerIds();
+    if (!(gSaveBlock2Ptr->frontier.winStreakActiveFlags & sWinStreakFlags[battleMode][lvlMode]))
         gSaveBlock2Ptr->frontier.towerWinStreaks[battleMode][lvlMode] = 0;
 
     ValidateBattleTowerRecordChecksums();
@@ -1182,10 +1185,10 @@ static void sub_8162054(void)
         gSpecialVar_Result = GetCurrentBattleTowerWinStreak(lvlMode, battleMode);
         break;
     case 2:
-        gSpecialVar_Result = ((gSaveBlock2Ptr->frontier.field_CDC & gUnknown_085DF9AC[battleMode][lvlMode]) != 0);
+        gSpecialVar_Result = ((gSaveBlock2Ptr->frontier.winStreakActiveFlags & sWinStreakFlags[battleMode][lvlMode]) != 0);
         break;
     case 3:
-        gSaveBlock2Ptr->frontier.field_D07 = gSaveBlock2Ptr->frontier.lvlMode;
+        gSaveBlock2Ptr->frontier.towerLvlMode = gSaveBlock2Ptr->frontier.lvlMode;
         break;
     }
 }
@@ -1204,12 +1207,12 @@ static void sub_81620F4(void)
         break;
     case 2:
         if (gSpecialVar_0x8006)
-            gSaveBlock2Ptr->frontier.field_CDC |= gUnknown_085DF9AC[battleMode][lvlMode];
+            gSaveBlock2Ptr->frontier.winStreakActiveFlags |= sWinStreakFlags[battleMode][lvlMode];
         else
-            gSaveBlock2Ptr->frontier.field_CDC &= gUnknown_085DF9CC[battleMode][lvlMode];
+            gSaveBlock2Ptr->frontier.winStreakActiveFlags &= sWinStreakMasks[battleMode][lvlMode];
         break;
     case 3:
-        gSaveBlock2Ptr->frontier.field_D07 = gSaveBlock2Ptr->frontier.lvlMode;
+        gSaveBlock2Ptr->frontier.towerLvlMode = gSaveBlock2Ptr->frontier.lvlMode;
         break;
     }
 }
@@ -1219,8 +1222,9 @@ static void sub_81621C0(void)
     if (gTrainerBattleOpponent_A == TRAINER_EREADER)
         ClearEReaderTrainer(&gSaveBlock2Ptr->frontier.ereaderTrainer);
 
-    if (gSaveBlock2Ptr->frontier.field_D04 < 9999)
-        gSaveBlock2Ptr->frontier.field_D04++;
+    // below field is never read outside this conditional
+    if (gSaveBlock2Ptr->frontier.towerNumWins < MAX_STREAK)
+        gSaveBlock2Ptr->frontier.towerNumWins++;
 
     gSaveBlock2Ptr->frontier.curChallengeBattleNum++;
     SaveCurrentWinStreak();
@@ -1258,7 +1262,7 @@ static bool8 ChooseSpecialBattleTowerTrainer(void)
                 validMons++;
         }
 
-        if (validMons >= gUnknown_085DF9F6[battleMode]
+        if (validMons >= sBattleTowerPartySizes2[battleMode]
             && gSaveBlock2Ptr->frontier.towerRecords[i].winStreak == winStreak
             && gSaveBlock2Ptr->frontier.towerRecords[i].lvlMode == lvlMode
             && recordHasData
@@ -1272,10 +1276,10 @@ static bool8 ChooseSpecialBattleTowerTrainer(void)
     if (battleMode == FRONTIER_MODE_SINGLES)
     {
         ValidateApprenticesChecksums();
-        for (i = 0; i < 4; i++)
+        for (i = 0; i < APPRENTICE_COUNT; i++)
         {
             if (gSaveBlock2Ptr->apprentices[i].lvlMode != 0
-                && gUnknown_085DF9EC[gSaveBlock2Ptr->apprentices[i].field_1] == winStreak
+                && gUnknown_085DF9EC[gSaveBlock2Ptr->apprentices[i].numQuestions] == winStreak
                 && gSaveBlock2Ptr->apprentices[i].lvlMode - 1 == lvlMode)
             {
                 trainerIds[idsCount] = i + TRAINER_RECORD_MIXING_APPRENTICE;
@@ -2000,7 +2004,7 @@ static void Unused_CreateApprenticeMons(u16 trainerId, u8 firstMonId)
     u8 fixedIV = 0;
     struct Apprentice *apprentice = &gSaveBlock2Ptr->apprentices[0];
 
-    if (apprentice->field_1 < 5)
+    if (apprentice->numQuestions < 5)
         fixedIV = 6;
     else
         fixedIV = 9;
@@ -2178,7 +2182,7 @@ static void sub_8163914(void)
     else if (trainerId < TRAINER_RECORD_MIXING_APPRENTICE)
         FrontierSpeechToString(gSaveBlock2Ptr->frontier.towerRecords[trainerId - TRAINER_RECORD_MIXING_FRIEND].greeting);
     else
-        CopyFriendsApprenticeChallengeText(trainerId - TRAINER_RECORD_MIXING_APPRENTICE);
+        BufferApprenticeChallengeText(trainerId - TRAINER_RECORD_MIXING_APPRENTICE);
 }
 
 static void HandleSpecialTrainerBattleEnd(void)
@@ -2244,21 +2248,21 @@ void DoSpecialTrainerBattle(void)
         switch (VarGet(VAR_FRONTIER_BATTLE_MODE))
         {
         case FRONTIER_MODE_SINGLES:
-            FillFrontierTrainerParty(3);
+            FillFrontierTrainerParty(FRONTIER_PARTY_SIZE);
             break;
         case FRONTIER_MODE_DOUBLES:
-            FillFrontierTrainerParty(4);
+            FillFrontierTrainerParty(FRONTIER_DOUBLES_PARTY_SIZE);
             gBattleTypeFlags |= BATTLE_TYPE_DOUBLE;
             break;
         case FRONTIER_MODE_MULTIS:
-            FillFrontierTrainersParties(2);
+            FillFrontierTrainersParties(FRONTIER_MULTI_PARTY_SIZE);
             gPartnerTrainerId = gSaveBlock2Ptr->frontier.trainerIds[17];
             FillPartnerParty(gPartnerTrainerId);
             gBattleTypeFlags |= BATTLE_TYPE_DOUBLE | BATTLE_TYPE_INGAME_PARTNER | BATTLE_TYPE_MULTI | BATTLE_TYPE_TWO_OPPONENTS;
             break;
         case FRONTIER_MODE_LINK_MULTIS:
             gBattleTypeFlags |= BATTLE_TYPE_DOUBLE | BATTLE_TYPE_LINK | BATTLE_TYPE_MULTI | BATTLE_TYPE_x800000;
-            FillFrontierTrainersParties(2);
+            FillFrontierTrainersParties(FRONTIER_MULTI_PARTY_SIZE);
             break;
         }
         CreateTask(Task_StartBattleAfterTransition, 1);
@@ -2300,9 +2304,9 @@ void DoSpecialTrainerBattle(void)
         if (VarGet(VAR_FRONTIER_BATTLE_MODE) == FRONTIER_MODE_DOUBLES)
             gBattleTypeFlags |= BATTLE_TYPE_DOUBLE;
         if (gSaveBlock2Ptr->frontier.lvlMode != FRONTIER_LVL_TENT)
-            FillFrontierTrainerParty(3);
+            FillFrontierTrainerParty(FRONTIER_PARTY_SIZE);
         else
-            FillTentTrainerParty(3);
+            FillTentTrainerParty(FRONTIER_PARTY_SIZE);
         CreateTask(Task_StartBattleAfterTransition, 1);
         PlayMapChosenOrBattleBGM(0);
         BattleTransition_StartOnField(sub_80B100C(4));
@@ -2310,9 +2314,9 @@ void DoSpecialTrainerBattle(void)
     case SPECIAL_BATTLE_ARENA:
         gBattleTypeFlags = BATTLE_TYPE_TRAINER | BATTLE_TYPE_ARENA;
         if (gSaveBlock2Ptr->frontier.lvlMode != FRONTIER_LVL_TENT)
-            FillFrontierTrainerParty(3);
+            FillFrontierTrainerParty(FRONTIER_PARTY_SIZE);
         else
-            FillTentTrainerParty(3);
+            FillTentTrainerParty(FRONTIER_PARTY_SIZE);
         CreateTask(Task_StartBattleAfterTransition, 1);
         PlayMapChosenOrBattleBGM(0);
         BattleTransition_StartOnField(sub_80B100C(5));
@@ -2328,14 +2332,14 @@ void DoSpecialTrainerBattle(void)
         break;
     case SPECIAL_BATTLE_PIKE_SINGLE:
         gBattleTypeFlags = BATTLE_TYPE_TRAINER | BATTLE_TYPE_BATTLE_TOWER;
-        FillFrontierTrainerParty(3);
+        FillFrontierTrainerParty(FRONTIER_PARTY_SIZE);
         CreateTask(Task_StartBattleAfterTransition, 1);
         PlayMapChosenOrBattleBGM(0);
         BattleTransition_StartOnField(sub_80B100C(7));
         break;
     case SPECIAL_BATTLE_PYRAMID:
         gBattleTypeFlags = BATTLE_TYPE_TRAINER | BATTLE_TYPE_PYRAMID;
-        FillFrontierTrainerParty(3);
+        FillFrontierTrainerParty(FRONTIER_PARTY_SIZE);
         CreateTask(Task_StartBattleAfterTransition, 1);
         PlayMapChosenOrBattleBGM(0);
         BattleTransition_StartOnField(sub_80B100C(10));
@@ -2408,7 +2412,7 @@ static void sub_8163EE4(void)
         playerRecord->speechLost[i] = gSaveBlock1Ptr->easyChatBattleLost[i];
     }
 
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < MAX_FRONTIER_PARTY_SIZE; i++)
     {
         if (gSaveBlock2Ptr->frontier.selectedPartyMons[i] != 0)
             sub_80686FC(&gPlayerParty[gSaveBlock2Ptr->frontier.selectedPartyMons[i] - 1], &playerRecord->party[i]);
@@ -2428,10 +2432,10 @@ static void SaveBattleTowerProgress(void)
     if (gSpecialVar_0x8005 == 0 && (challengeNum > 1 || gSaveBlock2Ptr->frontier.curChallengeBattleNum != 0))
         sub_8163EE4();
 
-    gSaveBlock2Ptr->frontier.field_CA8 =gSpecialVar_0x8005;
+    gSaveBlock2Ptr->frontier.challengeStatus = gSpecialVar_0x8005;
     VarSet(VAR_TEMP_0, 0);
-    gSaveBlock2Ptr->frontier.field_CA9_a = 1;
-    sub_81A4C30();
+    gSaveBlock2Ptr->frontier.challengePaused = TRUE;
+    SaveGameFrontier();
 }
 
 static void nullsub_61(void)
@@ -2569,10 +2573,10 @@ static void sub_81642A0(void)
 
     r10 = 0;
     ValidateApprenticesChecksums();
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < APPRENTICE_COUNT; i++)
     {
         if (gSaveBlock2Ptr->apprentices[i].lvlMode != 0
-            && gUnknown_085DF9EC[gSaveBlock2Ptr->apprentices[i].field_1] / 7 <= challengeNum
+            && gUnknown_085DF9EC[gSaveBlock2Ptr->apprentices[i].numQuestions] / 7 <= challengeNum
             && gSaveBlock2Ptr->apprentices[i].lvlMode - 1 == lvlMode)
         {
             k = 0;
@@ -2895,13 +2899,13 @@ static void sub_8164E04(void)
 
     GetFrontierTrainerName(text, gTrainerBattleOpponent_A);
     StripExtCtrlCodes(text);
-    StringCopy(gSaveBlock2Ptr->frontier.field_BD8, text);
-    GetBattleTowerTrainerLanguage(&gSaveBlock2Ptr->frontier.field_BEB, gTrainerBattleOpponent_A);
-    gSaveBlock2Ptr->frontier.field_BD6 = GetMonData(&gEnemyParty[gBattlerPartyIndexes[1]], MON_DATA_SPECIES, NULL);
-    gSaveBlock2Ptr->frontier.field_BD4 = GetMonData(&gPlayerParty[gBattlerPartyIndexes[0]], MON_DATA_SPECIES, NULL);
+    StringCopy(gSaveBlock2Ptr->frontier.towerInterview.opponentName, text);
+    GetBattleTowerTrainerLanguage(&gSaveBlock2Ptr->frontier.towerInterview.opponentLanguage, gTrainerBattleOpponent_A);
+    gSaveBlock2Ptr->frontier.towerInterview.opponentSpecies = GetMonData(&gEnemyParty[gBattlerPartyIndexes[1]], MON_DATA_SPECIES, NULL);
+    gSaveBlock2Ptr->frontier.towerInterview.playerSpecies = GetMonData(&gPlayerParty[gBattlerPartyIndexes[0]], MON_DATA_SPECIES, NULL);
     for (i = 0; i < POKEMON_NAME_LENGTH + 1; i++)
-        gSaveBlock2Ptr->frontier.field_BE0[i] = gBattleMons[0].nickname[i];
-    gSaveBlock2Ptr->frontier.field_D06 = gBattleOutcome;
+        gSaveBlock2Ptr->frontier.towerInterview.opponentMonNickname[i] = gBattleMons[0].nickname[i];
+    gSaveBlock2Ptr->frontier.towerBattleOutcome = gBattleOutcome;
 }
 
 static void ValidateBattleTowerRecordChecksums(void)
@@ -2968,13 +2972,13 @@ u16 GetCurrentBattleTowerWinStreak(u8 lvlMode, u8 battleMode)
 
 static u8 GetMonCountForBattleMode(u8 battleMode)
 {
-    u8 sp[ARRAY_COUNT(gUnknown_085DFA42)];
-    memcpy(sp, gUnknown_085DFA42, sizeof(gUnknown_085DFA42));
+    u8 partySizes[ARRAY_COUNT(sBattleTowerPartySizes)];
+    memcpy(partySizes, sBattleTowerPartySizes, sizeof(sBattleTowerPartySizes));
 
-    if (battleMode < ARRAY_COUNT(gUnknown_085DFA42))
-        return sp[battleMode];
+    if (battleMode < ARRAY_COUNT(sBattleTowerPartySizes))
+        return partySizes[battleMode];
     else
-        return 3;
+        return FRONTIER_PARTY_SIZE;
 }
 
 struct RibbonCounter
@@ -3158,7 +3162,7 @@ static void CopyEReaderTrainerFarewellMessage(void)
 
 void sub_81653CC(void)
 {
-    if (gSaveBlock2Ptr->frontier.field_CA8 == 1)
+    if (gSaveBlock2Ptr->frontier.challengeStatus == CHALLENGE_STATUS_SAVING)
         sub_80F01B8();
     if (FlagGet(FLAG_CANCEL_BATTLE_ROOM_CHALLENGE) == TRUE)
     {
@@ -3282,13 +3286,13 @@ bool32 RubyBattleTowerRecordToEmerald(struct RSBattleTowerRecord *src, struct Em
 {
     s32 i, validMons = 0;
 
-    for (i = 0; i < 3; i++)
+    for (i = 0; i < FRONTIER_PARTY_SIZE; i++)
     {
         if (src->party[i].species)
             validMons++;
     }
 
-    if (validMons != 3)
+    if (validMons != FRONTIER_PARTY_SIZE)
     {
         memset(dst, 0, sizeof(*dst));
         return FALSE;
@@ -3298,6 +3302,7 @@ bool32 RubyBattleTowerRecordToEmerald(struct RSBattleTowerRecord *src, struct Em
         dst->lvlMode = src->lvlMode;
         dst->winStreak = src->winStreak;
         // BUG: Reading outside the array. sRubyFacilityClassToEmerald has less than FACILITY_CLASSES_COUNT entries.
+        //      Fix by using ARRAY_COUNT(sRubyFacilityClassToEmerald)
         for (i = 0; i < FACILITY_CLASSES_COUNT; i++)
         {
             if (sRubyFacilityClassToEmerald[i][0] == src->facilityClass)
@@ -3312,16 +3317,16 @@ bool32 RubyBattleTowerRecordToEmerald(struct RSBattleTowerRecord *src, struct Em
             dst->name[i] = src->name[i];
         for (i = 0; i < TRAINER_ID_LENGTH; i++)
             dst->trainerId[i] = src->trainerId[i];
-        for (i = 0; i < 6; i++)
+        for (i = 0; i < EASY_CHAT_BATTLE_WORDS_COUNT; i++)
             dst->greeting[i] = src->greeting[i];
-        for (i = 0; i < 6; i++)
-            dst->speechWon[i] = gUnknown_085DFA46[i];
-        for (i = 0; i < 6; i++)
-            dst->speechLost[i] = gUnknown_085DFA52[i];
-        for (i = 0; i < 3; i++)
+        for (i = 0; i < EASY_CHAT_BATTLE_WORDS_COUNT; i++)
+            dst->speechWon[i] = sRecordTrainerSpeechWon[i];
+        for (i = 0; i < EASY_CHAT_BATTLE_WORDS_COUNT; i++)
+            dst->speechLost[i] = sRecordTrainerSpeechLost[i];
+        for (i = 0; i < FRONTIER_PARTY_SIZE; i++)
             dst->party[i] = src->party[i];
 
-        CpuFill32(0, &dst->party[3], sizeof(dst->party[3]));
+        CpuFill32(0, &dst->party[FRONTIER_PARTY_SIZE], sizeof(dst->party[FRONTIER_PARTY_SIZE]));
         CalcEmeraldBattleTowerChecksum(dst);
         return TRUE;
     }
@@ -3331,13 +3336,13 @@ bool32 EmeraldBattleTowerRecordToRuby(struct EmeraldBattleTowerRecord *src, stru
 {
     s32 i, validMons = 0;
 
-    for (i = 0; i < 3; i++)
+    for (i = 0; i < FRONTIER_PARTY_SIZE; i++)
     {
         if (src->party[i].species)
             validMons++;
     }
 
-    if (validMons != 3)
+    if (validMons != FRONTIER_PARTY_SIZE)
     {
         memset(dst, 0, sizeof(*dst));
         return FALSE;
@@ -3347,6 +3352,7 @@ bool32 EmeraldBattleTowerRecordToRuby(struct EmeraldBattleTowerRecord *src, stru
         dst->lvlMode = src->lvlMode;
         dst->winStreak = src->winStreak;
         // BUG: Reading outside the array. sRubyFacilityClassToEmerald has less than FACILITY_CLASSES_COUNT entries.
+        //      Fix by using ARRAY_COUNT(sRubyFacilityClassToEmerald) instead
         for (i = 0; i < FACILITY_CLASSES_COUNT; i++)
         {
             if (sRubyFacilityClassToEmerald[i][1] == src->facilityClass)
@@ -3355,15 +3361,15 @@ bool32 EmeraldBattleTowerRecordToRuby(struct EmeraldBattleTowerRecord *src, stru
         if (i != FACILITY_CLASSES_COUNT)
             dst->facilityClass = sRubyFacilityClassToEmerald[i][0];
         else
-            dst->facilityClass = 0x24; // FACILITY_CLASS_YOUNGSTER in Ruby/Sapphire.
+            dst->facilityClass = RS_FACILITY_CLASS_YOUNGSTER;
 
         for (i = 0; i < PLAYER_NAME_LENGTH + 1; i++)
             dst->name[i] = src->name[i];
         for (i = 0; i < TRAINER_ID_LENGTH; i++)
             dst->trainerId[i] = src->trainerId[i];
-        for (i = 0; i < 6; i++)
+        for (i = 0; i < EASY_CHAT_BATTLE_WORDS_COUNT; i++)
             dst->greeting[i] = src->greeting[i];
-        for (i = 0; i < 3; i++)
+        for (i = 0; i < FRONTIER_PARTY_SIZE; i++)
             dst->party[i] = src->party[i];
 
         CalcRubyBattleTowerChecksum(dst);
@@ -3393,7 +3399,7 @@ static void ValidateApprenticesChecksums(void)
 {
     s32 i, j;
 
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < APPRENTICE_COUNT; i++)
     {
         u32 *data = (u32*) &gSaveBlock2Ptr->apprentices[i];
         u32 checksum = 0;

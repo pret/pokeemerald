@@ -94,10 +94,7 @@ BattleFrontier_BattleTowerMultiBattleRoom_EventScript_243E7A:: @ 8243E7A
 	end
 
 BattleFrontier_BattleTowerMultiBattleRoom_EventScript_243E9D:: @ 8243E9D
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_2
-	setvar VAR_0x8005, 6
-	setvar VAR_0x8006, 1
-	special CallFrontierUtilFunc
+	frontier_set FRONTIER_DATA_6, 1
 	goto BattleFrontier_BattleTowerMultiBattleRoom_EventScript_241C03
 	end
 

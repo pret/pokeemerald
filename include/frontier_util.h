@@ -2,16 +2,16 @@
 #define GUARD_FRONTIER_UTIL_H
 
 void CallFrontierUtilFunc(void);
-u8 sub_81A3610(void);
+u8 GetFrontierBrainStatus(void);
 void CopyFrontierTrainerText(u8 whichText, u16 trainerId);
-void sub_81A3908(void);
+void ResetWinStreaks(void);
 u32 GetCurrentFacilityWinStreak(void);
-void sub_81A3ACC(void);
+void ResetFrontierTrainerIds(void);
 u8 GetPlayerSymbolCountForFacility(u8 facility);
 void ShowRankingHallRecordsWindow(void);
 void ScrollRankingHallRecordsWindow(void);
 void ClearRankingHallRecords(void);
-void sub_81A4C30(void);
+void SaveGameFrontier(void);
 u8 GetFrontierBrainTrainerPicIndex(void);
 u8 GetFrontierBrainTrainerClass(void);
 void CopyFrontierBrainTrainerName(u8 *dst);

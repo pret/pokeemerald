@@ -14,30 +14,23 @@ FallarborTown_BattleTentLobby_EventScript_1FFE7B:: @ 81FFE7B
 
 FallarborTown_BattleTentLobby_MapScript2_1FFE85: @ 81FFE85
 	map_script_2 VAR_TEMP_0, 0, FallarborTown_BattleTentLobby_EventScript_1FFEAF
-	map_script_2 VAR_TEMP_0, 1, FallarborTown_BattleTentLobby_EventScript_1FFEB8
-	map_script_2 VAR_TEMP_0, 2, FallarborTown_BattleTentLobby_EventScript_1FFFCD
-	map_script_2 VAR_TEMP_0, 3, FallarborTown_BattleTentLobby_EventScript_1FFEED
-	map_script_2 VAR_TEMP_0, 4, FallarborTown_BattleTentLobby_EventScript_1FFF93
+	map_script_2 VAR_TEMP_0, CHALLENGE_STATUS_SAVING, FallarborTown_BattleTentLobby_EventScript_1FFEB8
+	map_script_2 VAR_TEMP_0, CHALLENGE_STATUS_PAUSED, FallarborTown_BattleTentLobby_EventScript_1FFFCD
+	map_script_2 VAR_TEMP_0, CHALLENGE_STATUS_WON, FallarborTown_BattleTentLobby_EventScript_1FFEED
+	map_script_2 VAR_TEMP_0, CHALLENGE_STATUS_LOST, FallarborTown_BattleTentLobby_EventScript_1FFF93
 	.2byte 0
 
 FallarborTown_BattleTentLobby_EventScript_1FFEAF:: @ 81FFEAF
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_0
-	special CallFrontierUtilFunc
+	frontier_getstatus
 	end
 
 FallarborTown_BattleTentLobby_EventScript_1FFEB8:: @ 81FFEB8
 	lockall
 	msgbox FallarborTown_BattleTentLobby_Text_2C4DED, MSGBOX_DEFAULT
 	closemessage
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_2
-	setvar VAR_0x8005, 0
-	setvar VAR_0x8006, 0
-	special CallFrontierUtilFunc
+	frontier_set FRONTIER_DATA_CHALLENGE_STATUS, 0
 	setvar VAR_TEMP_0, 255
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_2
-	setvar VAR_0x8005, 1
-	setvar VAR_0x8006, 0
-	special CallFrontierUtilFunc
+	frontier_set FRONTIER_DATA_LVL_MODE, FRONTIER_LVL_50
 	releaseall
 	end
 
@@ -47,27 +40,21 @@ FallarborTown_BattleTentLobby_EventScript_1FFEED:: @ 81FFEED
 	message FallarborTown_BattleTentLobby_Text_2C4EFF
 	waitmessage
 	setvar VAR_0x8004, 4
-	special sub_81B9B80
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_2
-	setvar VAR_0x8005, 1
-	setvar VAR_0x8006, 0
-	special CallFrontierUtilFunc
+	special CallFallarborTentFunction
+	frontier_set FRONTIER_DATA_LVL_MODE, FRONTIER_LVL_50
 	setvar VAR_0x8004, 3
 	setvar VAR_0x8005, 0
-	special sub_81B9B80
+	special CallFallarborTentFunction
 	playse SE_SAVE
 	waitse
 
 FallarborTown_BattleTentLobby_EventScript_1FFF27:: @ 81FFF27
 	msgbox FallarborTown_BattleTentLobby_Text_2C4F22, MSGBOX_DEFAULT
 	setvar VAR_0x8004, 5
-	special sub_81B9B80
+	special CallFallarborTentFunction
 	switch VAR_RESULT
 	case 0, FallarborTown_BattleTentLobby_EventScript_1FFF73
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_2
-	setvar VAR_0x8005, 0
-	setvar VAR_0x8006, 0
-	special CallFrontierUtilFunc
+	frontier_set FRONTIER_DATA_CHALLENGE_STATUS, 0
 	message FallarborTown_BattleTentLobby_Text_2C4F69
 	waitmessage
 	playfanfare MUS_FANFA4
@@ -96,13 +83,10 @@ FallarborTown_BattleTentLobby_EventScript_1FFF93:: @ 81FFF93
 	lockall
 	message FallarborTown_BattleTentLobby_Text_2C4FD7
 	waitmessage
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_2
-	setvar VAR_0x8005, 1
-	setvar VAR_0x8006, 0
-	special CallFrontierUtilFunc
+	frontier_set FRONTIER_DATA_LVL_MODE, FRONTIER_LVL_50
 	setvar VAR_0x8004, 3
 	setvar VAR_0x8005, 0
-	special sub_81B9B80
+	special CallFallarborTentFunction
 	playse SE_SAVE
 	waitse
 	msgbox FallarborTown_BattleTentLobby_Text_2C501F, MSGBOX_DEFAULT
@@ -117,13 +101,10 @@ FallarborTown_BattleTentLobby_EventScript_1FFFCD:: @ 81FFFCD
 	waitmessage
 	setvar VAR_0x8004, 3
 	setvar VAR_0x8005, 1
-	special sub_81B9B80
+	special CallFallarborTentFunction
 	playse SE_SAVE
 	waitse
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_2
-	setvar VAR_0x8005, 3
-	setvar VAR_0x8006, 0
-	special CallFrontierUtilFunc
+	frontier_set FRONTIER_DATA_PAUSED, FALSE
 	setvar VAR_TEMP_0, 255
 	goto FallarborTown_BattleTentLobby_EventScript_20013C
 
@@ -131,7 +112,7 @@ FallarborTown_BattleTentLobby_EventScript_200001:: @ 8200001
 	lock
 	faceplayer
 	setvar VAR_0x8004, 1
-	special sub_81B9B80
+	special CallFallarborTentFunction
 	compare VAR_RESULT, 0
 	goto_if_ne FallarborTown_BattleTentLobby_EventScript_1FFF84
 	special SavePlayerParty
@@ -148,22 +129,18 @@ FallarborTown_BattleTentLobby_EventScript_200021:: @ 8200021
 	case MULTI_B_PRESSED, FallarborTown_BattleTentLobby_EventScript_2001C5
 
 FallarborTown_BattleTentLobby_EventScript_20005D:: @ 820005D
-	setvar VAR_FRONTIER_FACILITY, 3
-	setvar VAR_FRONTIER_BATTLE_MODE, 0
+	setvar VAR_FRONTIER_FACILITY, FRONTIER_FACILITY_ARENA
+	setvar VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_SINGLES
 	setvar VAR_RESULT, 2
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_15
-	special CallFrontierUtilFunc
-	compare VAR_0x8004, 1
+	frontier_checkineligible
+	compare VAR_0x8004, TRUE
 	goto_if_eq FallarborTown_BattleTentLobby_EventScript_200176
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_2
-	setvar VAR_0x8005, 1
-	setvar VAR_0x8006, 2
-	special CallFrontierUtilFunc
+	frontier_set FRONTIER_DATA_LVL_MODE, FRONTIER_LVL_TENT
 	msgbox FallarborTown_BattleTentLobby_Text_2C4BC8, MSGBOX_DEFAULT
 	fadescreen 1
 	setvar VAR_0x8004, 2
-	setvar VAR_0x8005, 3
-	special sub_80F9490
+	setvar VAR_0x8005, FRONTIER_PARTY_SIZE
+	special ChoosePartyForBattleFrontier
 	waitstate
 	compare VAR_RESULT, 0
 	goto_if_eq FallarborTown_BattleTentLobby_EventScript_2001C2
@@ -175,19 +152,11 @@ FallarborTown_BattleTentLobby_EventScript_20005D:: @ 820005D
 
 FallarborTown_BattleTentLobby_EventScript_2000E2:: @ 82000E2
 	setvar VAR_TEMP_0, 0
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_2
-	setvar VAR_0x8005, 4
-	special CallFrontierUtilFunc
+	frontier_set FRONTIER_DATA_SELECTED_MON_ORDER
 	setvar VAR_0x8004, 0
-	special sub_81B9B80
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_2
-	setvar VAR_0x8005, 0
-	setvar VAR_0x8006, 1
-	special CallFrontierUtilFunc
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_2
-	setvar VAR_0x8005, 3
-	setvar VAR_0x8006, 0
-	special CallFrontierUtilFunc
+	special CallFallarborTentFunction
+	frontier_set FRONTIER_DATA_CHALLENGE_STATUS, CHALLENGE_STATUS_SAVING
+	frontier_set FRONTIER_DATA_PAUSED, FALSE
 	special LoadPlayerParty
 	closemessage
 	delay 2
@@ -198,9 +167,7 @@ FallarborTown_BattleTentLobby_EventScript_2000E2:: @ 82000E2
 
 FallarborTown_BattleTentLobby_EventScript_20013C:: @ 820013C
 	special SavePlayerParty
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_LOAD_SELECTED_PARTY
-	setvar VAR_0x8005, FRONTIER_PARTY_SIZE
-	special CallFrontierUtilFunc
+	frontier_setpartyorder FRONTIER_PARTY_SIZE
 	msgbox FallarborTown_BattleTentLobby_Text_2C4DC3, MSGBOX_DEFAULT
 	closemessage
 	call FallarborTown_BattleTentLobby_EventScript_2001CF
@@ -215,8 +182,8 @@ FallarborTown_BattleTentLobby_EventScript_200169:: @ 8200169
 
 FallarborTown_BattleTentLobby_EventScript_200176:: @ 8200176
 	switch VAR_RESULT
-	case 0, FallarborTown_BattleTentLobby_EventScript_200191
-	case 1, FallarborTown_BattleTentLobby_EventScript_20019E
+	case FRONTIER_LVL_50, FallarborTown_BattleTentLobby_EventScript_200191
+	case FRONTIER_LVL_OPEN, FallarborTown_BattleTentLobby_EventScript_20019E
 
 FallarborTown_BattleTentLobby_EventScript_200191:: @ 8200191
 	msgbox FallarborTown_BattleTentLobby_Text_2C4BFA, MSGBOX_DEFAULT
@@ -227,10 +194,7 @@ FallarborTown_BattleTentLobby_EventScript_20019E:: @ 820019E
 	goto FallarborTown_BattleTentLobby_EventScript_2001CD
 
 FallarborTown_BattleTentLobby_EventScript_2001AB:: @ 82001AB
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_2
-	setvar VAR_0x8005, 0
-	setvar VAR_0x8006, 0
-	special CallFrontierUtilFunc
+	frontier_set FRONTIER_DATA_CHALLENGE_STATUS, 0
 	goto FallarborTown_BattleTentLobby_EventScript_2001C5
 
 FallarborTown_BattleTentLobby_EventScript_2001C2:: @ 82001C2
@@ -308,12 +272,12 @@ FallarborTown_BattleTentLobby_EventScript_200245:: @ 8200245
 
 FallarborTown_BattleTentLobby_EventScript_20024F:: @ 820024F
 	lockall
-	msgbox FallarborTown_BattleTentLobby_Text_256DB8, MSGBOX_DEFAULT
+	msgbox BattleFrontier_BattleArenaLobby_Text_RulesAreListed, MSGBOX_DEFAULT
 	goto FallarborTown_BattleTentLobby_EventScript_20025E
 	end
 
 FallarborTown_BattleTentLobby_EventScript_20025E:: @ 820025E
-	message FallarborTown_BattleTentLobby_Text_256DDF
+	message BattleFrontier_BattleArenaLobby_Text_ReadWhichHeading
 	waitmessage
 	multichoice 17, 0, MULTI_FALLARBOR_TENT_RULES, 0
 	switch VAR_RESULT
@@ -332,22 +296,22 @@ FallarborTown_BattleTentLobby_EventScript_2002BC:: @ 82002BC
 	end
 
 FallarborTown_BattleTentLobby_EventScript_2002CA:: @ 82002CA
-	msgbox FallarborTown_BattleTentLobby_Text_256E02, MSGBOX_DEFAULT
+	msgbox BattleFrontier_BattleArenaLobby_Text_ExplainBattleRules, MSGBOX_DEFAULT
 	goto FallarborTown_BattleTentLobby_EventScript_20025E
 	end
 
 FallarborTown_BattleTentLobby_EventScript_2002D8:: @ 82002D8
-	msgbox FallarborTown_BattleTentLobby_Text_256F43, MSGBOX_DEFAULT
+	msgbox BattleFrontier_BattleArenaLobby_Text_ExplainMindRules, MSGBOX_DEFAULT
 	goto FallarborTown_BattleTentLobby_EventScript_20025E
 	end
 
 FallarborTown_BattleTentLobby_EventScript_2002E6:: @ 82002E6
-	msgbox FallarborTown_BattleTentLobby_Text_256FF2, MSGBOX_DEFAULT
+	msgbox BattleFrontier_BattleArenaLobby_Text_ExplainSkillRules, MSGBOX_DEFAULT
 	goto FallarborTown_BattleTentLobby_EventScript_20025E
 	end
 
 FallarborTown_BattleTentLobby_EventScript_2002F4:: @ 82002F4
-	msgbox FallarborTown_BattleTentLobby_Text_257202, MSGBOX_DEFAULT
+	msgbox BattleFrontier_BattleArenaLobby_Text_ExplainBodyRules, MSGBOX_DEFAULT
 	goto FallarborTown_BattleTentLobby_EventScript_20025E
 	end
 

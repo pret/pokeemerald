@@ -5,9 +5,9 @@ BattleFrontier_BattlePikeLobby_MapScripts:: @ 825B6C6
 
 BattleFrontier_BattlePikeLobby_MapScript2_25B6D1: @ 825B6D1
 	map_script_2 VAR_TEMP_0, 0, BattleFrontier_BattlePikeLobby_EventScript_25B707
-	map_script_2 VAR_TEMP_0, 1, BattleFrontier_BattlePikeLobby_EventScript_25B710
-	map_script_2 VAR_TEMP_0, 3, BattleFrontier_BattlePikeLobby_EventScript_25B762
-	map_script_2 VAR_TEMP_0, 4, BattleFrontier_BattlePikeLobby_EventScript_25B806
+	map_script_2 VAR_TEMP_0, CHALLENGE_STATUS_SAVING, BattleFrontier_BattlePikeLobby_EventScript_25B710
+	map_script_2 VAR_TEMP_0, CHALLENGE_STATUS_WON, BattleFrontier_BattlePikeLobby_EventScript_25B762
+	map_script_2 VAR_TEMP_0, CHALLENGE_STATUS_LOST, BattleFrontier_BattlePikeLobby_EventScript_25B806
 	.2byte 0
 
 BattleFrontier_BattlePikeLobby_MapScript2_25B6F3: @ 825B6F3
@@ -20,8 +20,7 @@ BattleFrontier_BattlePikeLobby_EventScript_25B6FD:: @ 825B6FD
 	end
 
 BattleFrontier_BattlePikeLobby_EventScript_25B707:: @ 825B707
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_0
-	special CallFrontierUtilFunc
+	frontier_getstatus
 	end
 
 BattleFrontier_BattlePikeLobby_EventScript_25B710:: @ 825B710
@@ -31,26 +30,19 @@ BattleFrontier_BattlePikeLobby_EventScript_25B710:: @ 825B710
 	lockall
 	msgbox BattleFrontier_BattlePikeLobby_Text_25C2E0, MSGBOX_DEFAULT
 	closemessage
-	setvar VAR_0x8004, BATTLE_PIKE_FUNC_SET_DATA
-	setvar VAR_0x8005, 1
-	setvar VAR_0x8006, 0
-	special CallBattlePikeFunction
+	battlepike_setstreak 0
 	setvar VAR_0x8004, BATTLE_PIKE_FUNC_SET_DATA
 	setvar VAR_0x8005, 4
 	setvar VAR_0x8006, 0
 	special CallBattlePikeFunction
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_2
-	setvar VAR_0x8005, 0
-	setvar VAR_0x8006, 0
-	special CallFrontierUtilFunc
+	frontier_set FRONTIER_DATA_CHALLENGE_STATUS, 0
 	setvar VAR_TEMP_0, 255
 	releaseall
 	end
 
 BattleFrontier_BattlePikeLobby_EventScript_25B762:: @ 825B762
 	lockall
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_IS_FRONTIER_BRAIN
-	special CallFrontierUtilFunc
+	frontier_isbrain
 	compare VAR_RESULT, TRUE
 	goto_if_eq BattleFrontier_BattlePikeLobby_EventScript_25B784
 	msgbox BattleFrontier_BattlePikeLobby_Text_25C18A, MSGBOX_DEFAULT
@@ -63,11 +55,9 @@ BattleFrontier_BattlePikeLobby_EventScript_25B784:: @ 825B784
 
 BattleFrontier_BattlePikeLobby_EventScript_25B78D:: @ 825B78D
 	msgbox BattleFrontier_BattlePikeLobby_Text_25C3D9, MSGBOX_DEFAULT
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_11
-	special CallFrontierUtilFunc
+	frontier_givepoints
 	msgbox BattleFrontier_Text_ObtainedXBattlePoints, MSGBOX_GETPOINTS
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_8
-	special CallFrontierUtilFunc
+	frontier_checkairshow
 	setvar VAR_0x8004, BATTLE_PIKE_FUNC_GET_DATA
 	setvar VAR_0x8005, 3
 	special CallBattlePikeFunction
@@ -97,12 +87,8 @@ BattleFrontier_BattlePikeLobby_EventScript_25B806:: @ 825B806
 	lockall
 	message BattleFrontier_BattlePikeLobby_Text_25C146
 	waitmessage
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_8
-	special CallFrontierUtilFunc
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_2
-	setvar VAR_0x8005, 2
-	setvar VAR_0x8006, 0
-	special CallFrontierUtilFunc
+	frontier_checkairshow
+	frontier_set FRONTIER_DATA_BATTLE_NUM, 0
 	setvar VAR_0x8004, BATTLE_PIKE_FUNC_SET_DATA
 	setvar VAR_0x8005, 4
 	setvar VAR_0x8006, 0
@@ -125,8 +111,8 @@ BattleFrontier_BattlePikeLobby_EventScript_25B806:: @ 825B806
 BattleFrontier_BattlePikeLobby_EventScript_25B868:: @ 825B868
 	lock
 	faceplayer
-	setvar VAR_FRONTIER_FACILITY, 5
-	setvar VAR_FRONTIER_BATTLE_MODE, 0
+	setvar VAR_FRONTIER_FACILITY, FRONTIER_FACILITY_PIKE
+	setvar VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_SINGLES
 	special SavePlayerParty
 	msgbox BattleFrontier_BattlePikeLobby_Text_25BB52, MSGBOX_DEFAULT
 
@@ -145,22 +131,18 @@ BattleFrontier_BattlePikeLobby_EventScript_25B8BB:: @ 825B8BB
 	waitmessage
 	multichoice 17, 6, MULTI_LEVEL_MODE, 0
 	switch VAR_RESULT
-	case 2, BattleFrontier_BattlePikeLobby_EventScript_25BA76
+	case FRONTIER_LVL_TENT, BattleFrontier_BattlePikeLobby_EventScript_25BA76
 	case MULTI_B_PRESSED, BattleFrontier_BattlePikeLobby_EventScript_25BA76
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_15
-	special CallFrontierUtilFunc
-	compare VAR_0x8004, 1
+	frontier_checkineligible
+	compare VAR_0x8004, TRUE
 	goto_if_eq BattleFrontier_BattlePikeLobby_EventScript_25BA27
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_2
-	setvar VAR_0x8005, 1
-	copyvar VAR_0x8006, VAR_RESULT
-	special CallFrontierUtilFunc
+	frontier_set FRONTIER_DATA_LVL_MODE, VAR_RESULT
 	msgbox BattleFrontier_BattlePikeLobby_Text_25C094, MSGBOX_DEFAULT
 	fadescreen 1
-	call BattleFrontier_BattlePikeLobby_EventScript_23F2B7
+	call BattleFrontier_EventScript_GetLvlMode
 	copyvar VAR_0x8004, VAR_RESULT
-	setvar VAR_0x8005, 3
-	special sub_80F9490
+	setvar VAR_0x8005, FRONTIER_PARTY_SIZE
+	special ChoosePartyForBattleFrontier
 	waitstate
 	compare VAR_RESULT, 0
 	goto_if_eq BattleFrontier_BattlePikeLobby_EventScript_25BA73
@@ -173,25 +155,17 @@ BattleFrontier_BattlePikeLobby_EventScript_25B8BB:: @ 825B8BB
 BattleFrontier_BattlePikeLobby_EventScript_25B95C:: @ 825B95C
 	setvar VAR_TEMP_0, 0
 	setvar VAR_TEMP_1, 0
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_2
-	setvar VAR_0x8005, 4
-	special CallFrontierUtilFunc
+	frontier_set FRONTIER_DATA_SELECTED_MON_ORDER
 	setvar VAR_0x8004, BATTLE_PIKE_FUNC_INIT_CHALLENGE
 	special CallBattlePikeFunction
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_2
-	setvar VAR_0x8005, 0
-	setvar VAR_0x8006, 1
-	special CallFrontierUtilFunc
+	frontier_set FRONTIER_DATA_CHALLENGE_STATUS, CHALLENGE_STATUS_SAVING
 	setvar VAR_0x8004, BATTLE_PIKE_FUNC_SET_DATA
 	setvar VAR_0x8005, 4
 	setvar VAR_0x8006, 1
 	special CallBattlePikeFunction
 	setvar VAR_0x8004, BATTLE_PIKE_FUNC_SAVE_MON_HELD_ITEMS
 	special CallBattlePikeFunction
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_2
-	setvar VAR_0x8005, 3
-	setvar VAR_0x8006, 0
-	special CallFrontierUtilFunc
+	frontier_set FRONTIER_DATA_PAUSED, FALSE
 	special LoadPlayerParty
 	closemessage
 	delay 2
@@ -202,16 +176,13 @@ BattleFrontier_BattlePikeLobby_EventScript_25B95C:: @ 825B95C
 	compare VAR_RESULT, 0
 	goto_if_eq BattleFrontier_BattlePikeLobby_EventScript_25BA5C
 	special SavePlayerParty
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_LOAD_SELECTED_PARTY
-	setvar VAR_0x8005, FRONTIER_PARTY_SIZE
-	special CallFrontierUtilFunc
+	frontier_setpartyorder FRONTIER_PARTY_SIZE
 	msgbox BattleFrontier_BattlePikeLobby_Text_25C130, MSGBOX_DEFAULT
 	closemessage
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_SET_FRONTIER_TRAINERS
-	special CallFrontierUtilFunc
+	frontier_settrainers
 	call BattleFrontier_BattlePikeLobby_EventScript_25BA94
 	special HealPlayerParty
-	call BattleFrontier_BattlePikeLobby_EventScript_25BB49
+	call BattleFrontier_BattlePike_EventScript_CloseCurtain
 	warpsilent MAP_BATTLE_FRONTIER_BATTLE_PIKE_CORRIDOR, 255, 6, 7
 	setvar VAR_TEMP_0, 0
 	waitstate
@@ -223,8 +194,8 @@ BattleFrontier_BattlePikeLobby_EventScript_25BA1A:: @ 825BA1A
 
 BattleFrontier_BattlePikeLobby_EventScript_25BA27:: @ 825BA27
 	switch VAR_RESULT
-	case 0, BattleFrontier_BattlePikeLobby_EventScript_25BA42
-	case 1, BattleFrontier_BattlePikeLobby_EventScript_25BA4F
+	case FRONTIER_LVL_50, BattleFrontier_BattlePikeLobby_EventScript_25BA42
+	case FRONTIER_LVL_OPEN, BattleFrontier_BattlePikeLobby_EventScript_25BA4F
 
 BattleFrontier_BattlePikeLobby_EventScript_25BA42:: @ 825BA42
 	msgbox BattleFrontier_BattlePikeLobby_Text_25BE8C, MSGBOX_DEFAULT
@@ -235,27 +206,20 @@ BattleFrontier_BattlePikeLobby_EventScript_25BA4F:: @ 825BA4F
 	goto BattleFrontier_BattlePikeLobby_EventScript_25BA7E
 
 BattleFrontier_BattlePikeLobby_EventScript_25BA5C:: @ 825BA5C
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_2
-	setvar VAR_0x8005, 0
-	setvar VAR_0x8006, 0
-	special CallFrontierUtilFunc
+	frontier_set FRONTIER_DATA_CHALLENGE_STATUS, 0
 	goto BattleFrontier_BattlePikeLobby_EventScript_25BA76
 
 BattleFrontier_BattlePikeLobby_EventScript_25BA73:: @ 825BA73
 	special LoadPlayerParty
-
 BattleFrontier_BattlePikeLobby_EventScript_25BA76:: @ 825BA76
 	msgbox BattleFrontier_BattlePikeLobby_Text_25BE02, MSGBOX_DEFAULT
-
 BattleFrontier_BattlePikeLobby_EventScript_25BA7E:: @ 825BA7E
 	release
 	end
 
 BattleFrontier_BattlePikeLobby_EventScript_25BA80:: @ 825BA80
 	lockall
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_RESULTS_WINDOW
-	setvar VAR_0x8005, 5
-	special CallFrontierUtilFunc
+	frontier_results FRONTIER_FACILITY_PIKE
 	waitbuttonpress
 	special RemoveRecordsWindow
 	releaseall
@@ -325,10 +289,7 @@ BattleFrontier_BattlePikeLobby_EventScript_25BB47:: @ 825BB47
 	releaseall
 	end
 
-BattleFrontier_BattlePikeCorridor_EventScript_25BB49:: @ 825BB49
-BattleFrontier_BattlePikeLobby_EventScript_25BB49:: @ 825BB49
-BattleFrontier_BattlePikeRandomRoom1_EventScript_25BB49:: @ 825BB49
-BattleFrontier_BattlePikeThreePathRoom_EventScript_25BB49:: @ 825BB49
+BattleFrontier_BattlePike_EventScript_CloseCurtain:: @ 825BB49
 	playse SE_CURTAIN
 	special CloseBattlePikeCurtain
 	waitstate
