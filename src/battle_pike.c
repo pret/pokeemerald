@@ -57,7 +57,7 @@ static void SetupRoomEventObjects(void);
 static void GetRoomType(void);
 static void sub_81A7400(void);
 static void sub_81A740C(void);
-static void sub_81A7418(void);
+static void SavePikeChallenge(void);
 static void nullsub_76(void);
 static void nullsub_124(void);
 static void GetRoomInflictedStatus(void);
@@ -488,7 +488,7 @@ static void (* const sBattlePikeFunctions[])(void) =
     [BATTLE_PIKE_FUNC_GET_ROOM_TYPE] = GetRoomType,
     [BATTLE_PIKE_FUNC_6] = sub_81A7400,
     [BATTLE_PIKE_FUNC_7] = sub_81A740C,
-    [BATTLE_PIKE_FUNC_8] = sub_81A7418,
+    [BATTLE_PIKE_FUNC_SAVE] = SavePikeChallenge,
     [BATTLE_PIKE_FUNC_NULL_9] = nullsub_76,
     [BATTLE_PIKE_FUNC_NULL_10] = nullsub_124,
     [BATTLE_PIKE_FUNC_GET_ROOM_STATUS] = GetRoomInflictedStatus,
@@ -624,7 +624,7 @@ static void GetBattlePikeData(void)
     switch (gSpecialVar_0x8005)
     {
     case 0:
-        gSpecialVar_Result = gSaveBlock2Ptr->frontier.field_E02;
+        gSpecialVar_Result = gSaveBlock2Ptr->frontier.pikePrize;
         break;
     case 1:
         gSpecialVar_Result = gSaveBlock2Ptr->frontier.pikeWinStreaks[gSaveBlock2Ptr->frontier.lvlMode];
@@ -651,7 +651,7 @@ static void SetBattlePikeData(void)
     switch (gSpecialVar_0x8005)
     {
     case 0:
-        gSaveBlock2Ptr->frontier.field_E02 = gSpecialVar_0x8006;
+        gSaveBlock2Ptr->frontier.pikePrize = gSpecialVar_0x8006;
         break;
     case 1:
         if (gSpecialVar_0x8006 <= MAX_STREAK)
@@ -707,7 +707,7 @@ static void sub_81A740C(void)
     sUnknown_0300128E = FALSE;
 }
 
-static void sub_81A7418(void)
+static void SavePikeChallenge(void)
 {
     gSaveBlock2Ptr->frontier.challengeStatus = gSpecialVar_0x8005;
     VarSet(VAR_TEMP_0, 0);

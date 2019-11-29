@@ -51,11 +51,11 @@ BattleFrontier_BattleTowerLobby_EventScript_23E710:: @ 823E710
 	faceplayer
 	msgbox BattleFrontier_BattleTowerLobby_Text_23F583, MSGBOX_DEFAULT
 	closemessage
-	setvar VAR_0x8004, BATTLE_TOWER_FUNC_2
+	setvar VAR_0x8004, BATTLE_TOWER_FUNC_SET_DATA
 	setvar VAR_0x8005, 1
 	setvar VAR_0x8006, 0
 	special CallBattleTowerFunc
-	setvar VAR_0x8004, BATTLE_TOWER_FUNC_2
+	setvar VAR_0x8004, BATTLE_TOWER_FUNC_SET_DATA
 	setvar VAR_0x8005, 2
 	setvar VAR_0x8006, 0
 	special CallBattleTowerFunc
@@ -93,7 +93,7 @@ BattleFrontier_BattleTowerLobby_EventScript_23E7A5:: @ 823E7A5
 	frontier_givepoints
 	msgbox BattleFrontier_Text_ObtainedXBattlePoints, MSGBOX_GETPOINTS
 	call BattleFrontier_BattleTowerLobby_EventScript_23E84D
-	setvar VAR_0x8004, BATTLE_TOWER_FUNC_1
+	setvar VAR_0x8004, BATTLE_TOWER_FUNC_GET_DATA
 	setvar VAR_0x8005, 1
 	special CallBattleTowerFunc
 	compare VAR_RESULT, 49
@@ -111,14 +111,14 @@ BattleFrontier_BattleTowerLobby_EventScript_23E7F2:: @ 823E7F2
 	compare VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_MULTIS
 	goto_if_ne BattleFrontier_BattleTowerLobby_EventScript_23E81E
 	goto_if_set FLAG_CHOSEN_MULTI_BATTLE_NPC_PARTNER, BattleFrontier_BattleTowerLobby_EventScript_23E81E
-	setvar VAR_0x8004, BATTLE_TOWER_FUNC_1
+	setvar VAR_0x8004, BATTLE_TOWER_FUNC_GET_DATA
 	setvar VAR_0x8005, 1
 	special CallBattleTowerFunc
 	compare VAR_RESULT, 0
 	goto_if_ne BattleFrontier_BattleTowerLobby_EventScript_23E830
 
 BattleFrontier_BattleTowerLobby_EventScript_23E81E:: @ 823E81E
-	setvar VAR_0x8004, BATTLE_TOWER_FUNC_2
+	setvar VAR_0x8004, BATTLE_TOWER_FUNC_SET_DATA
 	setvar VAR_0x8005, 2
 	setvar VAR_0x8006, 0
 	special CallBattleTowerFunc
@@ -253,9 +253,9 @@ BattleFrontier_BattleTowerLobby_EventScript_23E984:: @ 823E984
 BattleFrontier_BattleTowerLobby_EventScript_23EA2A:: @ 823EA2A
 	frontier_set FRONTIER_DATA_SELECTED_MON_ORDER
 	setvar VAR_TEMP_0, 0
-	setvar VAR_0x8004, BATTLE_TOWER_FUNC_0
+	setvar VAR_0x8004, BATTLE_TOWER_FUNC_INIT
 	special CallBattleTowerFunc
-	setvar VAR_0x8004, BATTLE_TOWER_FUNC_2
+	setvar VAR_0x8004, BATTLE_TOWER_FUNC_SET_DATA
 	setvar VAR_0x8005, 2
 	setvar VAR_0x8006, 1
 	special CallBattleTowerFunc
@@ -324,9 +324,9 @@ BattleFrontier_BattleTowerLobby_EventScript_23EAED:: @ 823EAED
 BattleFrontier_BattleTowerLobby_EventScript_23EB93:: @ 823EB93
 	frontier_set FRONTIER_DATA_SELECTED_MON_ORDER
 	setvar VAR_TEMP_0, 0
-	setvar VAR_0x8004, BATTLE_TOWER_FUNC_0
+	setvar VAR_0x8004, BATTLE_TOWER_FUNC_INIT
 	special CallBattleTowerFunc
-	setvar VAR_0x8004, BATTLE_TOWER_FUNC_2
+	setvar VAR_0x8004, BATTLE_TOWER_FUNC_SET_DATA
 	setvar VAR_0x8005, 2
 	setvar VAR_0x8006, 1
 	special CallBattleTowerFunc
@@ -396,9 +396,9 @@ BattleFrontier_BattleTowerLobby_EventScript_23EC59:: @ 823EC59
 BattleFrontier_BattleTowerLobby_EventScript_23ECFF:: @ 823ECFF
 	frontier_set FRONTIER_DATA_SELECTED_MON_ORDER
 	setvar VAR_TEMP_0, 0
-	setvar VAR_0x8004, BATTLE_TOWER_FUNC_0
+	setvar VAR_0x8004, BATTLE_TOWER_FUNC_INIT
 	special CallBattleTowerFunc
-	setvar VAR_0x8004, BATTLE_TOWER_FUNC_2
+	setvar VAR_0x8004, BATTLE_TOWER_FUNC_SET_DATA
 	setvar VAR_0x8005, 2
 	setvar VAR_0x8006, 1
 	special CallBattleTowerFunc
@@ -467,9 +467,9 @@ BattleFrontier_BattleTowerLobby_EventScript_23EDC2:: @ 823EDC2
 BattleFrontier_BattleTowerLobby_EventScript_23EE68:: @ 823EE68
 	frontier_set FRONTIER_DATA_SELECTED_MON_ORDER
 	setvar VAR_TEMP_0, 0
-	setvar VAR_0x8004, BATTLE_TOWER_FUNC_0
+	setvar VAR_0x8004, BATTLE_TOWER_FUNC_INIT
 	special CallBattleTowerFunc
-	setvar VAR_0x8004, BATTLE_TOWER_FUNC_2
+	setvar VAR_0x8004, BATTLE_TOWER_FUNC_SET_DATA
 	setvar VAR_0x8005, 2
 	setvar VAR_0x8006, 1
 	special CallBattleTowerFunc

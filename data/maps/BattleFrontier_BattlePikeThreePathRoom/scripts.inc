@@ -34,8 +34,8 @@ BattleFrontier_BattlePikeThreePathRoom_EventScript_25C8A4:: @ 825C8A4
 	lockall
 	message BattleFrontier_BattlePikeThreePathRoom_Text_AwaitingReturnSaveBeforeResume
 	waitmessage
-	setvar VAR_0x8004, BATTLE_PIKE_FUNC_8
-	setvar VAR_0x8005, 1
+	setvar VAR_0x8004, BATTLE_PIKE_FUNC_SAVE
+	setvar VAR_0x8005, CHALLENGE_STATUS_SAVING
 	special CallBattlePikeFunction
 	playse SE_SAVE
 	waitse
@@ -124,8 +124,8 @@ BattleFrontier_BattlePikeThreePathRoom_EventScript_25C9FD:: @ 825C9FD
 	message BattleFrontier_BattlePikeThreePathRoom_Text_SavingYourData
 	waitmessage
 	special LoadPlayerParty
-	setvar VAR_0x8004, BATTLE_PIKE_FUNC_8
-	setvar VAR_0x8005, 2
+	setvar VAR_0x8004, BATTLE_PIKE_FUNC_SAVE
+	setvar VAR_0x8005, CHALLENGE_STATUS_PAUSED
 	special CallBattlePikeFunction
 	playse SE_SAVE
 	waitse

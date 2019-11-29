@@ -23,7 +23,7 @@ static bool8 sPerformedRentalSwap;
 static void InitFactoryChallenge(void);
 static void GetBattleFactoryData(void);
 static void SetBattleFactoryData(void);
-static void sub_81A613C(void);
+static void SaveFactoryChallenge(void);
 static void nullsub_75(void);
 static void nullsub_123(void);
 static void SelectInitialRentalMons(void);
@@ -116,7 +116,7 @@ static void (* const sBattleFactoryFunctions[])(void) =
     InitFactoryChallenge,
     GetBattleFactoryData,
     SetBattleFactoryData,
-    sub_81A613C,
+    SaveFactoryChallenge,
     nullsub_75,
     nullsub_123,
     SelectInitialRentalMons,
@@ -253,7 +253,7 @@ static void SetBattleFactoryData(void)
     }
 }
 
-static void sub_81A613C(void)
+static void SaveFactoryChallenge(void)
 {
     gSaveBlock2Ptr->frontier.challengeStatus = gSpecialVar_0x8005;
     VarSet(VAR_TEMP_0, 0);

@@ -164,9 +164,7 @@ BattleFrontier_BattlePalaceBattleRoom_EventScript_24FB28:: @ 824FB28
 BattleFrontier_BattlePalaceBattleRoom_EventScript_24FB3F:: @ 824FB3F
 	message BattleFrontier_BattlePalaceBattleRoom_Text_25007E
 	waitmessage
-	setvar VAR_0x8004, 7
-	setvar VAR_0x8005, 2
-	special CallBattlePalaceFunction
+	palace_save CHALLENGE_STATUS_PAUSED
 	playse SE_SAVE
 	waitse
 	fadescreen 1
@@ -233,8 +231,7 @@ BattleFrontier_BattlePalaceBattleRoom_EventScript_24FCAA:: @ 824FCAA
 	goto BattleFrontier_BattlePalaceBattleRoom_EventScript_24F8FA
 
 BattleFrontier_BattlePalaceBattleRoom_EventScript_24FCC7:: @ 824FCC7
-	setvar VAR_0x8004, 6
-	special CallBattlePalaceFunction
+	palace_incrementstreak
 	frontier_getsymbols
 	compare VAR_RESULT, 0
 	goto_if_ne BattleFrontier_BattlePalaceBattleRoom_EventScript_24FB28
@@ -269,8 +266,7 @@ BattleFrontier_BattlePalaceBattleRoom_EventScript_24FD67:: @ 824FD67
 	goto BattleFrontier_BattlePalaceBattleRoom_EventScript_24F8FA
 
 BattleFrontier_BattlePalaceBattleRoom_EventScript_24FD84:: @ 824FD84
-	setvar VAR_0x8004, 6
-	special CallBattlePalaceFunction
+	palace_incrementstreak
 	frontier_getsymbols
 	compare VAR_RESULT, 2
 	goto_if_eq BattleFrontier_BattlePalaceBattleRoom_EventScript_24FB28

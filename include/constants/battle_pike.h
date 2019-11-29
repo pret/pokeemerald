@@ -35,7 +35,7 @@
 #define BATTLE_PIKE_FUNC_GET_ROOM_TYPE                5
 #define BATTLE_PIKE_FUNC_6                            6
 #define BATTLE_PIKE_FUNC_7                            7
-#define BATTLE_PIKE_FUNC_8                            8
+#define BATTLE_PIKE_FUNC_SAVE                         8
 #define BATTLE_PIKE_FUNC_NULL_9                       9
 #define BATTLE_PIKE_FUNC_NULL_10                      10
 #define BATTLE_PIKE_FUNC_GET_ROOM_STATUS              11
