@@ -43,7 +43,7 @@ static const u8 gUnknown_0858D8EC[] = { 3, 4, 5, 14 };
 static void Task_ShowContestEntryMonPic(u8 taskId);
 static void Task_LinkContestWaitForConnection(u8 taskId);
 static void CB2_ReturnFromChooseHalfParty(void);
-static void sub_80F94B8(void);
+static void CB2_ReturnFromChooseBattleFrontierParty(void);
 
 void SetContestTrainerGfxIds(void)
 {
@@ -640,7 +640,7 @@ void CreateScriptedWildMon(u16 species, u8 level, u16 item)
     u8 heldItem[2];
 
     ZeroEnemyPartyMons();
-    CreateMon(&gEnemyParty[0], species, level, 0x20, 0, 0, OT_ID_PLAYER_ID, 0);
+    CreateMon(&gEnemyParty[0], species, level, 32, 0, 0, OT_ID_PLAYER_ID, 0);
     if (item)
     {
         heldItem[0] = item;
@@ -681,21 +681,21 @@ static void CB2_ReturnFromChooseHalfParty(void)
     SetMainCallback2(CB2_ReturnToFieldContinueScriptPlayMapMusic);
 }
 
-void sub_80F9490(void)
+void ChoosePartyForBattleFrontier(void)
 {
-    gMain.savedCallback = sub_80F94B8;
+    gMain.savedCallback = CB2_ReturnFromChooseBattleFrontierParty;
     InitChooseHalfPartyForBattle(gSpecialVar_0x8004 + 1);
 }
 
-static void sub_80F94B8(void)
+static void CB2_ReturnFromChooseBattleFrontierParty(void)
 {
     switch (gSelectedOrderFromParty[0])
     {
     case 0:
-        gSpecialVar_Result = 0;
+        gSpecialVar_Result = FALSE;
         break;
     default:
-        gSpecialVar_Result = 1;
+        gSpecialVar_Result = TRUE;
         break;
     }
 

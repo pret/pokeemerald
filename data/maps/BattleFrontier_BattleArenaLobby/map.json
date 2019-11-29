@@ -24,7 +24,7 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "BattleFrontier_BattleArenaLobby_EventScript_255DF4",
+      "script": "BattleFrontier_BattleArenaLobby_EventScript_Attendant",
       "flag": "0"
     },
     {
@@ -37,7 +37,7 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "BattleFrontier_BattleArenaLobby_EventScript_2560C1",
+      "script": "BattleFrontier_BattleArenaLobby_EventScript_Woman",
       "flag": "0"
     },
     {
@@ -50,7 +50,7 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "BattleFrontier_BattleArenaLobby_EventScript_2560AF",
+      "script": "BattleFrontier_BattleArenaLobby_EventScript_Man",
       "flag": "0"
     },
     {
@@ -63,7 +63,7 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "BattleFrontier_BattleArenaLobby_EventScript_2560B8",
+      "script": "BattleFrontier_BattleArenaLobby_EventScript_Camper",
       "flag": "0"
     },
     {
@@ -76,7 +76,7 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "BattleFrontier_BattleArenaLobby_EventScript_2560A6",
+      "script": "BattleFrontier_BattleArenaLobby_EventScript_Youngster",
       "flag": "0"
     }
   ],
@@ -97,7 +97,7 @@
       "y": 9,
       "elevation": 3,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
-      "script": "BattleFrontier_BattleArenaLobby_EventScript_256092"
+      "script": "BattleFrontier_BattleArenaLobby_EventScript_ShowResults"
     },
     {
       "type": "sign",
@@ -105,7 +105,7 @@
       "y": 7,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "BattleFrontier_BattleArenaLobby_EventScript_2560CA"
+      "script": "BattleFrontier_BattleArenaLobby_EventScript_RulesBoard"
     }
   ]
 }

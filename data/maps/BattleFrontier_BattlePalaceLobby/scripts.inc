@@ -14,15 +14,14 @@ BattleFrontier_BattlePalaceLobby_EventScript_24D793:: @ 824D793
 
 BattleFrontier_BattlePalaceLobby_MapScript2_24D79D: @ 824D79D
 	map_script_2 VAR_TEMP_0, 0, BattleFrontier_BattlePalaceLobby_EventScript_24D7C7
-	map_script_2 VAR_TEMP_0, 1, BattleFrontier_BattlePalaceLobby_EventScript_24D7D0
-	map_script_2 VAR_TEMP_0, 2, BattleFrontier_BattlePalaceLobby_EventScript_24D908
-	map_script_2 VAR_TEMP_0, 3, BattleFrontier_BattlePalaceLobby_EventScript_24D817
-	map_script_2 VAR_TEMP_0, 4, BattleFrontier_BattlePalaceLobby_EventScript_24D873
+	map_script_2 VAR_TEMP_0, CHALLENGE_STATUS_SAVING, BattleFrontier_BattlePalaceLobby_EventScript_24D7D0
+	map_script_2 VAR_TEMP_0, CHALLENGE_STATUS_PAUSED, BattleFrontier_BattlePalaceLobby_EventScript_24D908
+	map_script_2 VAR_TEMP_0, CHALLENGE_STATUS_WON, BattleFrontier_BattlePalaceLobby_EventScript_24D817
+	map_script_2 VAR_TEMP_0, CHALLENGE_STATUS_LOST, BattleFrontier_BattlePalaceLobby_EventScript_24D873
 	.2byte 0
 
 BattleFrontier_BattlePalaceLobby_EventScript_24D7C7:: @ 824D7C7
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_0
-	special CallFrontierUtilFunc
+	frontier_getstatus
 	end
 
 BattleFrontier_BattlePalaceLobby_EventScript_24D7D0:: @ 824D7D0
@@ -37,18 +36,14 @@ BattleFrontier_BattlePalaceLobby_EventScript_24D7D0:: @ 824D7D0
 	setvar VAR_0x8005, 2
 	setvar VAR_0x8006, 0
 	special CallBattlePalaceFunction
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_2
-	setvar VAR_0x8005, 0
-	setvar VAR_0x8006, 0
-	special CallFrontierUtilFunc
+	frontier_set FRONTIER_DATA_CHALLENGE_STATUS, 0
 	setvar VAR_TEMP_0, 255
 	releaseall
 	end
 
 BattleFrontier_BattlePalaceLobby_EventScript_24D817:: @ 824D817
 	lockall
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_IS_FRONTIER_BRAIN
-	special CallFrontierUtilFunc
+	frontier_isbrain
 	compare VAR_RESULT, TRUE
 	goto_if_eq BattleFrontier_BattlePalaceLobby_EventScript_24D838
 	msgbox BattleFrontier_BattlePalaceLobby_Text_24E497, MSGBOX_DEFAULT
@@ -59,8 +54,7 @@ BattleFrontier_BattlePalaceLobby_EventScript_24D838:: @ 824D838
 
 BattleFrontier_BattlePalaceLobby_EventScript_24D840:: @ 824D840
 	msgbox BattleFrontier_BattlePalaceLobby_Text_24EEB9, MSGBOX_DEFAULT
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_11
-	special CallFrontierUtilFunc
+	frontier_givepoints
 	msgbox BattleFrontier_Text_ObtainedXBattlePoints, MSGBOX_GETPOINTS
 	message BattleFrontier_BattlePalaceLobby_Text_24E4F7
 	waitmessage
@@ -87,8 +81,7 @@ BattleFrontier_BattlePalaceLobby_EventScript_24D873:: @ 824D873
 	end
 
 BattleFrontier_BattlePalaceLobby_EventScript_24D8A1:: @ 824D8A1
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_8
-	special CallFrontierUtilFunc
+	frontier_checkairshow
 	special LoadPlayerParty
 	special HealPlayerParty
 	setvar VAR_0x8004, 7
@@ -108,8 +101,7 @@ BattleFrontier_BattlePalaceLobby_EventScript_24D8A1:: @ 824D8A1
 	case MULTI_B_PRESSED, BattleFrontier_BattlePalaceLobby_EventScript_24D907
 
 BattleFrontier_BattlePalaceLobby_EventScript_24D902:: @ 824D902
-	call BattleFrontier_BattlePalaceLobby_EventScript_23E8B4
-
+	call BattleFrontier_EventScript_SaveBattle
 BattleFrontier_BattlePalaceLobby_EventScript_24D907:: @ 824D907
 	return
 
@@ -123,26 +115,23 @@ BattleFrontier_BattlePalaceLobby_EventScript_24D908:: @ 824D908
 	special CallBattlePalaceFunction
 	playse SE_SAVE
 	waitse
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_2
-	setvar VAR_0x8005, 3
-	setvar VAR_0x8006, 0
-	special CallFrontierUtilFunc
+	frontier_set FRONTIER_DATA_PAUSED, FALSE
 	setvar VAR_TEMP_0, 255
 	goto BattleFrontier_BattlePalaceLobby_EventScript_24DAF3
 
 BattleFrontier_BattlePalaceLobby_EventScript_24D944:: @ 824D944
 	lock
 	faceplayer
-	setvar VAR_FRONTIER_FACILITY, 2
-	setvar VAR_FRONTIER_BATTLE_MODE, 0
+	setvar VAR_FRONTIER_FACILITY, FRONTIER_FACILITY_PALACE
+	setvar VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_SINGLES
 	goto BattleFrontier_BattlePalaceLobby_EventScript_24D968
 	end
 
 BattleFrontier_BattlePalaceLobby_EventScript_24D956:: @ 824D956
 	lock
 	faceplayer
-	setvar VAR_FRONTIER_FACILITY, 2
-	setvar VAR_FRONTIER_BATTLE_MODE, 1
+	setvar VAR_FRONTIER_FACILITY, FRONTIER_FACILITY_PALACE
+	setvar VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_DOUBLES
 	goto BattleFrontier_BattlePalaceLobby_EventScript_24D968
 	end
 
@@ -153,15 +142,15 @@ BattleFrontier_BattlePalaceLobby_EventScript_24D968:: @ 824D968
 	compare VAR_RESULT, 0
 	goto_if_ne BattleFrontier_BattlePalaceLobby_EventScript_24D817
 	special SavePlayerParty
-	compare VAR_FRONTIER_BATTLE_MODE, 0
+	compare VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_SINGLES
 	call_if_eq BattleFrontier_BattlePalaceLobby_EventScript_24DB9E
-	compare VAR_FRONTIER_BATTLE_MODE, 1
+	compare VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_DOUBLES
 	call_if_eq BattleFrontier_BattlePalaceLobby_EventScript_24DBA7
 
 BattleFrontier_BattlePalaceLobby_EventScript_24D999:: @ 824D999
-	compare VAR_FRONTIER_BATTLE_MODE, 0
+	compare VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_SINGLES
 	call_if_eq BattleFrontier_BattlePalaceLobby_EventScript_24DBB0
-	compare VAR_FRONTIER_BATTLE_MODE, 1
+	compare VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_DOUBLES
 	call_if_eq BattleFrontier_BattlePalaceLobby_EventScript_24DBB6
 	waitmessage
 	multichoice 17, 6, MULTI_CHALLENGEINFO, 0
@@ -176,22 +165,18 @@ BattleFrontier_BattlePalaceLobby_EventScript_24D9E6:: @ 824D9E6
 	waitmessage
 	multichoice 17, 6, MULTI_LEVEL_MODE, 0
 	switch VAR_RESULT
-	case 2, BattleFrontier_BattlePalaceLobby_EventScript_24DB94
+	case FRONTIER_LVL_TENT, BattleFrontier_BattlePalaceLobby_EventScript_24DB94
 	case MULTI_B_PRESSED, BattleFrontier_BattlePalaceLobby_EventScript_24DB94
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_15
-	special CallFrontierUtilFunc
-	compare VAR_0x8004, 1
+	frontier_checkineligible
+	compare VAR_0x8004, TRUE
 	goto_if_eq BattleFrontier_BattlePalaceLobby_EventScript_24DB45
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_2
-	setvar VAR_0x8005, 1
-	copyvar VAR_0x8006, VAR_RESULT
-	special CallFrontierUtilFunc
+	frontier_set FRONTIER_DATA_LVL_MODE, VAR_RESULT
 	msgbox BattleFrontier_BattlePalaceLobby_Text_24E399, MSGBOX_DEFAULT
 	fadescreen 1
-	call BattleFrontier_BattlePalaceLobby_EventScript_23F2B7
+	call BattleFrontier_EventScript_GetLvlMode
 	copyvar VAR_0x8004, VAR_RESULT
-	setvar VAR_0x8005, 3
-	special sub_80F9490
+	setvar VAR_0x8005, FRONTIER_PARTY_SIZE
+	special ChoosePartyForBattleFrontier
 	waitstate
 	compare VAR_RESULT, 0
 	goto_if_eq BattleFrontier_BattlePalaceLobby_EventScript_24DB91
@@ -203,23 +188,15 @@ BattleFrontier_BattlePalaceLobby_EventScript_24D9E6:: @ 824D9E6
 
 BattleFrontier_BattlePalaceLobby_EventScript_24DA87:: @ 824DA87
 	setvar VAR_TEMP_0, 0
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_2
-	setvar VAR_0x8005, 4
-	special CallFrontierUtilFunc
+	frontier_set FRONTIER_DATA_SELECTED_MON_ORDER
 	setvar VAR_0x8004, 0
 	special CallBattlePalaceFunction
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 2
 	setvar VAR_0x8006, 1
 	special CallBattlePalaceFunction
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_2
-	setvar VAR_0x8005, 0
-	setvar VAR_0x8006, 1
-	special CallFrontierUtilFunc
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_2
-	setvar VAR_0x8005, 3
-	setvar VAR_0x8006, 0
-	special CallFrontierUtilFunc
+	frontier_set FRONTIER_DATA_CHALLENGE_STATUS, CHALLENGE_STATUS_SAVING
+	frontier_set FRONTIER_DATA_PAUSED, FALSE
 	special LoadPlayerParty
 	closemessage
 	delay 2
@@ -230,9 +207,7 @@ BattleFrontier_BattlePalaceLobby_EventScript_24DA87:: @ 824DA87
 
 BattleFrontier_BattlePalaceLobby_EventScript_24DAF3:: @ 824DAF3
 	special SavePlayerParty
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_LOAD_SELECTED_PARTY
-	setvar VAR_0x8005, FRONTIER_PARTY_SIZE
-	special CallFrontierUtilFunc
+	frontier_setpartyorder FRONTIER_PARTY_SIZE
 	msgbox BattleFrontier_BattlePalaceLobby_Text_24E408, MSGBOX_DEFAULT
 	closemessage
 	call BattleFrontier_BattlePalaceLobby_EventScript_24DBBC
@@ -242,7 +217,7 @@ BattleFrontier_BattlePalaceLobby_EventScript_24DAF3:: @ 824DAF3
 	end
 
 BattleFrontier_BattlePalaceLobby_EventScript_24DB20:: @ 824DB20
-	compare VAR_FRONTIER_BATTLE_MODE, 1
+	compare VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_DOUBLES
 	goto_if_eq BattleFrontier_BattlePalaceLobby_EventScript_24DB38
 	msgbox BattleFrontier_BattlePalaceLobby_Text_24DE17, MSGBOX_DEFAULT
 	goto BattleFrontier_BattlePalaceLobby_EventScript_24D999
@@ -253,8 +228,8 @@ BattleFrontier_BattlePalaceLobby_EventScript_24DB38:: @ 824DB38
 
 BattleFrontier_BattlePalaceLobby_EventScript_24DB45:: @ 824DB45
 	switch VAR_RESULT
-	case 0, BattleFrontier_BattlePalaceLobby_EventScript_24DB60
-	case 1, BattleFrontier_BattlePalaceLobby_EventScript_24DB6D
+	case FRONTIER_LVL_50, BattleFrontier_BattlePalaceLobby_EventScript_24DB60
+	case FRONTIER_LVL_OPEN, BattleFrontier_BattlePalaceLobby_EventScript_24DB6D
 
 BattleFrontier_BattlePalaceLobby_EventScript_24DB60:: @ 824DB60
 	msgbox BattleFrontier_BattlePalaceLobby_Text_24E173, MSGBOX_DEFAULT
@@ -265,10 +240,7 @@ BattleFrontier_BattlePalaceLobby_EventScript_24DB6D:: @ 824DB6D
 	goto BattleFrontier_BattlePalaceLobby_EventScript_24DB9C
 
 BattleFrontier_BattlePalaceLobby_EventScript_24DB7A:: @ 824DB7A
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_2
-	setvar VAR_0x8005, 0
-	setvar VAR_0x8006, 0
-	special CallFrontierUtilFunc
+	frontier_set FRONTIER_DATA_CHALLENGE_STATUS, 0
 	goto BattleFrontier_BattlePalaceLobby_EventScript_24DB94
 
 BattleFrontier_BattlePalaceLobby_EventScript_24DB91:: @ 824DB91
@@ -298,24 +270,24 @@ BattleFrontier_BattlePalaceLobby_EventScript_24DBB6:: @ 824DBB6
 	return
 
 BattleFrontier_BattlePalaceLobby_EventScript_24DBBC:: @ 824DBBC
-	compare VAR_FRONTIER_BATTLE_MODE, 0
+	compare VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_SINGLES
 	call_if_eq BattleFrontier_BattlePalaceLobby_EventScript_24DC23
-	compare VAR_FRONTIER_BATTLE_MODE, 1
+	compare VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_DOUBLES
 	call_if_eq BattleFrontier_BattlePalaceLobby_EventScript_24DC29
 	applymovement VAR_LAST_TALKED, BattleFrontier_BattlePalaceLobby_Movement_24DC47
 	applymovement EVENT_OBJ_ID_PLAYER, BattleFrontier_BattlePalaceLobby_Movement_24DC47
 	waitmovement 0
-	compare VAR_FRONTIER_BATTLE_MODE, 0
+	compare VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_SINGLES
 	call_if_eq BattleFrontier_BattlePalaceLobby_EventScript_24DC2F
-	compare VAR_FRONTIER_BATTLE_MODE, 1
+	compare VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_DOUBLES
 	call_if_eq BattleFrontier_BattlePalaceLobby_EventScript_24DC35
 	waitdooranim
 	applymovement VAR_LAST_TALKED, BattleFrontier_BattlePalaceLobby_Movement_24DC49
 	applymovement EVENT_OBJ_ID_PLAYER, BattleFrontier_BattlePalaceLobby_Movement_24DC4C
 	waitmovement 0
-	compare VAR_FRONTIER_BATTLE_MODE, 0
+	compare VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_SINGLES
 	call_if_eq BattleFrontier_BattlePalaceLobby_EventScript_24DC3B
-	compare VAR_FRONTIER_BATTLE_MODE, 1
+	compare VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_DOUBLES
 	call_if_eq BattleFrontier_BattlePalaceLobby_EventScript_24DC41
 	waitdooranim
 	return
@@ -361,10 +333,7 @@ BattleFrontier_BattlePalaceLobby_Movement_24DC4C: @ 824DC4C
 
 BattleFrontier_BattlePalaceLobby_EventScript_24DC50:: @ 824DC50
 	lockall
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_RESULTS_WINDOW
-	setvar VAR_0x8005, 2
-	setvar VAR_0x8006, 0
-	special CallFrontierUtilFunc
+	frontier_results FRONTIER_FACILITY_PALACE, FRONTIER_MODE_SINGLES
 	waitbuttonpress
 	special RemoveRecordsWindow
 	releaseall
@@ -372,10 +341,7 @@ BattleFrontier_BattlePalaceLobby_EventScript_24DC50:: @ 824DC50
 
 BattleFrontier_BattlePalaceLobby_EventScript_24DC69:: @ 824DC69
 	lockall
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_RESULTS_WINDOW
-	setvar VAR_0x8005, 2
-	setvar VAR_0x8006, 1
-	special CallFrontierUtilFunc
+	frontier_results FRONTIER_FACILITY_PALACE, FRONTIER_MODE_DOUBLES
 	waitbuttonpress
 	special RemoveRecordsWindow
 	releaseall

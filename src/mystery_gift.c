@@ -921,7 +921,7 @@ static bool32 mevent_save_game(u8 * state)
         (*state)++;
         break;
     case 1:
-        TrySavingData(0);
+        TrySavingData(SAVE_NORMAL);
         (*state)++;
         break;
     case 2:

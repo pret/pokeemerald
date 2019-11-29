@@ -11,6 +11,7 @@
 #include "constants/species.h"
 #include "constants/battle_ai.h"
 #include "constants/battle_frontier.h"
+#include "constants/frontier_util.h"
 #include "constants/layouts.h"
 #include "constants/trainers.h"
 #include "constants/moves.h"
@@ -131,16 +132,16 @@ static void (* const sBattleFactoryFunctions[])(void) =
     RestorePlayerPartyHeldItems,
 };
 
-static const u32 gUnknown_08612164[][2] =
+static const u32 sWinStreakFlags[][2] =
 {
-    {0x100, 0x200},
-    {0x1000000, 0x2000000},
+    {STREAK_FACTORY_SINGLES_50, STREAK_FACTORY_SINGLES_OPEN},
+    {STREAK_FACTORY_DOUBLES_50, STREAK_FACTORY_DOUBLES_OPEN},
 };
 
-static const u32 gUnknown_08612174[][2] =
+static const u32 sWinStreakMasks[][2] =
 {
-    {0xfffffeff, 0xfffffdff},
-    {0xfeffffff, 0xfdffffff},
+    {~(STREAK_FACTORY_SINGLES_50), ~(STREAK_FACTORY_SINGLES_OPEN)},
+    {~(STREAK_FACTORY_DOUBLES_50), ~(STREAK_FACTORY_DOUBLES_OPEN)},
 };
 
 static const u8 sFixedIVTable[][2] =
@@ -187,11 +188,11 @@ static void InitFactoryChallenge(void)
     u32 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
     u32 battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
 
-    gSaveBlock2Ptr->frontier.field_CA8 = 0;
+    gSaveBlock2Ptr->frontier.challengeStatus = 0;
     gSaveBlock2Ptr->frontier.curChallengeBattleNum = 0;
-    gSaveBlock2Ptr->frontier.field_CA9_a = 0;
+    gSaveBlock2Ptr->frontier.challengePaused = FALSE;
     gSaveBlock2Ptr->frontier.field_CA9_b = 0;
-    if (!(gSaveBlock2Ptr->frontier.field_CDC & gUnknown_08612164[battleMode][lvlMode]))
+    if (!(gSaveBlock2Ptr->frontier.winStreakActiveFlags & sWinStreakFlags[battleMode][lvlMode]))
     {
         gSaveBlock2Ptr->frontier.factoryWinStreaks[battleMode][lvlMode] = 0;
         gSaveBlock2Ptr->frontier.factoryRentsCount[battleMode][lvlMode] = 0;
@@ -218,7 +219,7 @@ static void GetBattleFactoryData(void)
         gSpecialVar_Result = gSaveBlock2Ptr->frontier.factoryWinStreaks[battleMode][lvlMode];
         break;
     case 2:
-        gSpecialVar_Result = ((gSaveBlock2Ptr->frontier.field_CDC & gUnknown_08612164[battleMode][lvlMode]) != 0);
+        gSpecialVar_Result = ((gSaveBlock2Ptr->frontier.winStreakActiveFlags & sWinStreakFlags[battleMode][lvlMode]) != 0);
         break;
     case 3:
         gSpecialVar_Result = gSaveBlock2Ptr->frontier.factoryRentsCount[battleMode][lvlMode];
@@ -238,9 +239,9 @@ static void SetBattleFactoryData(void)
         break;
     case 2:
         if (gSpecialVar_0x8006)
-            gSaveBlock2Ptr->frontier.field_CDC |= gUnknown_08612164[battleMode][lvlMode];
+            gSaveBlock2Ptr->frontier.winStreakActiveFlags |= sWinStreakFlags[battleMode][lvlMode];
         else
-            gSaveBlock2Ptr->frontier.field_CDC &= gUnknown_08612174[battleMode][lvlMode];
+            gSaveBlock2Ptr->frontier.winStreakActiveFlags &= sWinStreakMasks[battleMode][lvlMode];
         break;
     case 3:
         if (sPerformedRentalSwap == TRUE)
@@ -254,10 +255,10 @@ static void SetBattleFactoryData(void)
 
 static void sub_81A613C(void)
 {
-    gSaveBlock2Ptr->frontier.field_CA8 = gSpecialVar_0x8005;
+    gSaveBlock2Ptr->frontier.challengeStatus = gSpecialVar_0x8005;
     VarSet(VAR_TEMP_0, 0);
-    gSaveBlock2Ptr->frontier.field_CA9_a = 1;
-    sub_81A4C30();
+    gSaveBlock2Ptr->frontier.challengePaused = TRUE;
+    SaveGameFrontier();
 }
 
 static void nullsub_75(void)
