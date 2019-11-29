@@ -91,7 +91,7 @@ BattleFrontier_BattleTowerBattleRoom2_EventScript_249026:: @ 8249026
 	delay 15
 	applymovement 1, BattleFrontier_BattleTowerBattleRoom2_Movement_249545
 	waitmovement 0
-	messageautoscroll 0x2021fc4
+	messageautoscroll gStringVar4
 	waitmessage
 	delay 48
 	setvar VAR_0x8004, BATTLE_TOWER_FUNC_7
@@ -99,7 +99,7 @@ BattleFrontier_BattleTowerBattleRoom2_EventScript_249026:: @ 8249026
 	special CallBattleTowerFunc
 	applymovement 4, BattleFrontier_BattleTowerBattleRoom2_Movement_249545
 	waitmovement 0
-	messageautoscroll 0x2021fc4
+	messageautoscroll gStringVar4
 	waitmessage
 	delay 48
 
