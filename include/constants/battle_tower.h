@@ -1,9 +1,9 @@
 #ifndef GUARD_CONSTANTS_BATTLE_TOWER_H
 #define GUARD_CONSTANTS_BATTLE_TOWER_H
 
-#define BATTLE_TOWER_FUNC_0               0
-#define BATTLE_TOWER_FUNC_1               1
-#define BATTLE_TOWER_FUNC_2               2
+#define BATTLE_TOWER_FUNC_INIT            0
+#define BATTLE_TOWER_FUNC_GET_DATA        1
+#define BATTLE_TOWER_FUNC_SET_DATA        2
 #define BATTLE_TOWER_FUNC_CHOOSE_TRAINER  3
 #define BATTLE_TOWER_FUNC_4               4
 #define BATTLE_TOWER_FUNC_GIVE_RIBBONS    5

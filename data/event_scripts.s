@@ -2,6 +2,7 @@
 #include "constants/apprentice.h"
 #include "constants/battle.h"
 #include "constants/battle_arena.h"
+#include "constants/battle_dome.h"
 #include "constants/battle_frontier.h"
 #include "constants/battle_palace.h"
 #include "constants/battle_pike.h"

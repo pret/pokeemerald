@@ -71,9 +71,9 @@ struct PyramidTrainerEncounterMusic
 static void InitPyramidChallenge(void);
 static void GetBattlePyramidData(void);
 static void SetBattlePyramidData(void);
-static void sub_81A9134(void);
-static void SetBattlePyramidRewardItem(void);
-static void GiveBattlePyramidRewardItem(void);
+static void SavePyramidChallenge(void);
+static void SetBattlePyramidPrize(void);
+static void GiveBattlePyramidPrize(void);
 static void SeedPyramidFloor(void);
 static void SetPickupItem(void);
 static void HidePyramidItem(void);
@@ -790,9 +790,9 @@ static void (* const sBattlePyramidFunctions[])(void) =
     InitPyramidChallenge,
     GetBattlePyramidData,
     SetBattlePyramidData,
-    sub_81A9134,
-    SetBattlePyramidRewardItem,
-    GiveBattlePyramidRewardItem,
+    SavePyramidChallenge,
+    SetBattlePyramidPrize,
+    GiveBattlePyramidPrize,
     SeedPyramidFloor,
     SetPickupItem,
     HidePyramidItem,
@@ -869,7 +869,7 @@ static void GetBattlePyramidData(void)
     switch (gSpecialVar_0x8005)
     {
     case 0:
-        gSpecialVar_Result = gSaveBlock2Ptr->frontier.pyramidRewardItem;
+        gSpecialVar_Result = gSaveBlock2Ptr->frontier.pyramidPrize;
         break;
     case 1:
         gSpecialVar_Result = gSaveBlock2Ptr->frontier.pyramidWinStreaks[lvlMode];
@@ -902,7 +902,7 @@ static void SetBattlePyramidData(void)
     switch (gSpecialVar_0x8005)
     {
     case 0:
-        gSaveBlock2Ptr->frontier.pyramidRewardItem = gSpecialVar_0x8006;
+        gSaveBlock2Ptr->frontier.pyramidPrize = gSpecialVar_0x8006;
         break;
     case 1:
         gSaveBlock2Ptr->frontier.pyramidWinStreaks[lvlMode] = gSpecialVar_0x8006;
@@ -929,7 +929,7 @@ static void SetBattlePyramidData(void)
     }
 }
 
-static void sub_81A9134(void)
+static void SavePyramidChallenge(void)
 {
     gSaveBlock2Ptr->frontier.challengeStatus = gSpecialVar_0x8005;
     VarSet(VAR_TEMP_0, 0);
@@ -938,22 +938,22 @@ static void sub_81A9134(void)
     TrySavingData(SAVE_LINK);
 }
 
-static void SetBattlePyramidRewardItem(void)
+static void SetBattlePyramidPrize(void)
 {
     u32 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
 
     if (gSaveBlock2Ptr->frontier.pyramidWinStreaks[lvlMode] > 41)
-        gSaveBlock2Ptr->frontier.pyramidRewardItem = sLongStreakRewardItems[Random() % ARRAY_COUNT(sLongStreakRewardItems)];
+        gSaveBlock2Ptr->frontier.pyramidPrize = sLongStreakRewardItems[Random() % ARRAY_COUNT(sLongStreakRewardItems)];
     else
-        gSaveBlock2Ptr->frontier.pyramidRewardItem = sShortStreakRewardItems[Random() % ARRAY_COUNT(sShortStreakRewardItems)];
+        gSaveBlock2Ptr->frontier.pyramidPrize = sShortStreakRewardItems[Random() % ARRAY_COUNT(sShortStreakRewardItems)];
 }
 
-static void GiveBattlePyramidRewardItem(void)
+static void GiveBattlePyramidPrize(void)
 {
-    if (AddBagItem(gSaveBlock2Ptr->frontier.pyramidRewardItem, 1) == TRUE)
+    if (AddBagItem(gSaveBlock2Ptr->frontier.pyramidPrize, 1) == TRUE)
     {
-        CopyItemName(gSaveBlock2Ptr->frontier.pyramidRewardItem, gStringVar1);
-        gSaveBlock2Ptr->frontier.pyramidRewardItem = 0;
+        CopyItemName(gSaveBlock2Ptr->frontier.pyramidPrize, gStringVar1);
+        gSaveBlock2Ptr->frontier.pyramidPrize = 0;
         gSpecialVar_Result = TRUE;
     }
     else

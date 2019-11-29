@@ -48,7 +48,7 @@ BattleFrontier_BattleTowerBattleRoom_EventScript_241BC3:: @ 8241BC3
 BattleFrontier_BattleTowerBattleRoom_EventScript_241C03:: @ 8241C03
 BattleFrontier_BattleTowerMultiBattleRoom_EventScript_241C03:: @ 8241C03
 	frontier_set FRONTIER_DATA_CHALLENGE_STATUS, CHALLENGE_STATUS_LOST
-	setvar VAR_0x8004, BATTLE_TOWER_FUNC_2
+	setvar VAR_0x8004, BATTLE_TOWER_FUNC_SET_DATA
 	setvar VAR_0x8005, 3
 	special CallBattleTowerFunc
 	setvar VAR_0x8004, 3
@@ -141,7 +141,7 @@ BattleFrontier_BattleTowerBattleRoom_EventScript_241DDC:: @ 8241DDC
 
 BattleFrontier_BattleTowerBattleRoom_EventScript_241DF6:: @ 8241DF6
 	frontier_set FRONTIER_DATA_CHALLENGE_STATUS, CHALLENGE_STATUS_WON
-	setvar VAR_0x8004, BATTLE_TOWER_FUNC_2
+	setvar VAR_0x8004, BATTLE_TOWER_FUNC_SET_DATA
 	setvar VAR_0x8005, 3
 	special CallBattleTowerFunc
 	setvar VAR_0x8004, 3

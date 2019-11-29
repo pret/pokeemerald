@@ -5,7 +5,7 @@ BattleFrontier_BattleDomeLobby_MapScripts:: @ 82497E2
 	.byte 0
 
 BattleFrontier_BattleDomeLobby_MapScript1_2497F2: @ 82497F2
-	setvar VAR_0x8004, 21
+	setvar VAR_0x8004, BATTLE_DOME_FUNC_21
 	special CallBattleDomeFunction
 	end
 
@@ -35,16 +35,16 @@ BattleFrontier_BattleDomeLobby_EventScript_249842:: @ 8249842
 	lockall
 	msgbox BattleFrontier_BattleDomeLobby_Text_24A45F, MSGBOX_DEFAULT
 	closemessage
-	setvar VAR_0x8004, 2
-	setvar VAR_0x8005, 0
+	setvar VAR_0x8004, BATTLE_DOME_FUNC_SET_DATA
+	setvar VAR_0x8005, DOME_DATA_STREAK
 	setvar VAR_0x8006, 0
 	special CallBattleDomeFunction
-	setvar VAR_0x8004, 2
-	setvar VAR_0x8005, 1
-	setvar VAR_0x8006, 0
+	setvar VAR_0x8004, BATTLE_DOME_FUNC_SET_DATA
+	setvar VAR_0x8005, DOME_DATA_STREAK_ACTIVE
+	setvar VAR_0x8006, FALSE
 	special CallBattleDomeFunction
-	setvar VAR_0x8004, 2
-	setvar VAR_0x8005, 6
+	setvar VAR_0x8004, BATTLE_DOME_FUNC_SET_DATA
+	setvar VAR_0x8005, DOME_DATA_6
 	setvar VAR_0x8006, 1
 	special CallBattleDomeFunction
 	frontier_set FRONTIER_DATA_CHALLENGE_STATUS, 0
@@ -73,17 +73,17 @@ BattleFrontier_BattleDomeLobby_EventScript_2498C9:: @ 82498C9
 	special LoadPlayerParty
 	frontier_setpartyorder FRONTIER_PARTY_SIZE
 	frontier_checkairshow
-	setvar VAR_0x8004, 2
-	setvar VAR_0x8005, 6
+	setvar VAR_0x8004, BATTLE_DOME_FUNC_SET_DATA
+	setvar VAR_0x8005, DOME_DATA_6
 	setvar VAR_0x8006, 1
 	special CallBattleDomeFunction
-	setvar VAR_0x8004, 2
-	setvar VAR_0x8005, 7
+	setvar VAR_0x8004, BATTLE_DOME_FUNC_SET_DATA
+	setvar VAR_0x8005, DOME_DATA_7
 	setvar VAR_0x8006, 1
 	special CallBattleDomeFunction
-	setvar VAR_0x8004, 2
-	setvar VAR_0x8005, 1
-	setvar VAR_0x8006, 1
+	setvar VAR_0x8004, BATTLE_DOME_FUNC_SET_DATA
+	setvar VAR_0x8005, DOME_DATA_STREAK_ACTIVE
+	setvar VAR_0x8006, TRUE
 	special CallBattleDomeFunction
 	special LoadPlayerParty
 	special HealPlayerParty
@@ -97,19 +97,19 @@ BattleFrontier_BattleDomeLobby_EventScript_249940:: @ 8249940
 	special LoadPlayerParty
 	frontier_setpartyorder FRONTIER_PARTY_SIZE
 	frontier_checkairshow
-	setvar VAR_0x8004, 2
-	setvar VAR_0x8005, 1
-	setvar VAR_0x8006, 0
+	setvar VAR_0x8004, BATTLE_DOME_FUNC_SET_DATA
+	setvar VAR_0x8005, DOME_DATA_STREAK_ACTIVE
+	setvar VAR_0x8006, FALSE
 	special CallBattleDomeFunction
-	setvar VAR_0x8004, 2
-	setvar VAR_0x8005, 6
+	setvar VAR_0x8004, BATTLE_DOME_FUNC_SET_DATA
+	setvar VAR_0x8005, DOME_DATA_6
 	setvar VAR_0x8006, 1
 	special CallBattleDomeFunction
 	special LoadPlayerParty
 	special HealPlayerParty
 
 BattleFrontier_BattleDomeLobby_EventScript_249991:: @ 8249991
-	setvar VAR_0x8004, 13
+	setvar VAR_0x8004, BATTLE_DOME_FUNC_SAVE
 	setvar VAR_0x8005, 0
 	special CallBattleDomeFunction
 	playse SE_SAVE
@@ -139,8 +139,8 @@ BattleFrontier_BattleDomeLobby_EventScript_2499F9:: @ 82499F9
 	msgbox BattleFrontier_BattleDomeLobby_Text_24A5FE, MSGBOX_DEFAULT
 	message BattleFrontier_BattleDomeLobby_Text_24A61A
 	waitmessage
-	setvar VAR_0x8004, 13
-	setvar VAR_0x8005, 1
+	setvar VAR_0x8004, BATTLE_DOME_FUNC_SAVE
+	setvar VAR_0x8005, CHALLENGE_STATUS_SAVING
 	special CallBattleDomeFunction
 	playse SE_SAVE
 	waitse
@@ -213,7 +213,7 @@ BattleFrontier_BattleDomeLobby_EventScript_249ABF:: @ 8249ABF
 BattleFrontier_BattleDomeLobby_EventScript_249B60:: @ 8249B60
 	setvar VAR_TEMP_0, 0
 	frontier_set FRONTIER_DATA_SELECTED_MON_ORDER
-	setvar VAR_0x8004, 0
+	setvar VAR_0x8004, BATTLE_DOME_FUNC_INIT
 	special CallBattleDomeFunction
 	frontier_set FRONTIER_DATA_CHALLENGE_STATUS, CHALLENGE_STATUS_SAVING
 	frontier_set FRONTIER_DATA_PAUSED, FALSE
@@ -224,13 +224,13 @@ BattleFrontier_BattleDomeLobby_EventScript_249B60:: @ 8249B60
 	setvar VAR_TEMP_0, 255
 	compare VAR_RESULT, 0
 	goto_if_eq BattleFrontier_BattleDomeLobby_EventScript_249C4A
-	setvar VAR_0x8004, 22
+	setvar VAR_0x8004, BATTLE_DOME_FUNC_INIT_TRAINERS
 	special CallBattleDomeFunction
 
 BattleFrontier_BattleDomeLobby_EventScript_249BC2:: @ 8249BC2
 	special SavePlayerParty
 	frontier_setpartyorder FRONTIER_PARTY_SIZE
-	setvar VAR_0x8004, 15
+	setvar VAR_0x8004, BATTLE_DOME_FUNC_SET_TRAINERS
 	special CallBattleDomeFunction
 	msgbox BattleFrontier_BattleDomeLobby_Text_24A437, MSGBOX_DEFAULT
 	closemessage
@@ -392,8 +392,8 @@ BattleFrontier_BattleDomeLobby_EventScript_249D6B:: @ 8249D6B
 	end
 
 BattleFrontier_BattleDomeLobby_EventScript_249D84:: @ 8249D84
-	setvar VAR_0x8004, 1
-	setvar VAR_0x8005, 9
+	setvar VAR_0x8004, BATTLE_DOME_FUNC_GET_DATA
+	setvar VAR_0x8005, DOME_DATA_9
 	special CallBattleDomeFunction
 	compare VAR_RESULT, 0
 	call_if_eq BattleFrontier_BattleDomeLobby_EventScript_249DC9
@@ -404,7 +404,7 @@ BattleFrontier_BattleDomeLobby_EventScript_249D84:: @ 8249D84
 	compare VAR_RESULT, 3
 	call_if_eq BattleFrontier_BattleDomeLobby_EventScript_249DE4
 	fadescreen 1
-	setvar VAR_0x8004, 8
+	setvar VAR_0x8004, BATTLE_DOME_FUNC_SHOW_PREV_RESULTS_TREE
 	special CallBattleDomeFunction
 	waitstate
 	end
@@ -426,7 +426,7 @@ BattleFrontier_BattleDomeLobby_EventScript_249DE4:: @ 8249DE4
 	return
 
 BattleFrontier_BattleDomeLobby_EventScript_249DED:: @ 8249DED
-	setvar VAR_0x8004, 20
+	setvar VAR_0x8004, BATTLE_DOME_FUNC_GET_WINNER_NAME
 	special CallBattleDomeFunction
 	msgbox BattleFrontier_BattleDomeLobby_Text_24AA76, MSGBOX_NPC
 	end

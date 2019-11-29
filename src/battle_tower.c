@@ -45,13 +45,13 @@ EWRAM_DATA const struct FacilityMon *gFacilityTrainerMons = NULL;
 u16 gUnknown_03006298[4];
 
 // This file's functions.
-static void sub_8161F94(void);
-static void sub_8162054(void);
-static void sub_81620F4(void);
+static void InitTowerChallenge(void);
+static void GetTowerData(void);
+static void SetTowerData(void);
 static void ChooseNextBattleTowerTrainer(void);
 static void sub_81621C0(void);
 static void AwardBattleTowerRibbons(void);
-static void SaveBattleTowerProgress(void);
+static void SaveTowerChallenge(void);
 static void sub_8163914(void);
 static void nullsub_61(void);
 static void nullsub_116(void);
@@ -1056,13 +1056,13 @@ struct
 
 static void (* const sBattleTowerFuncs[])(void) =
 {
-    [BATTLE_TOWER_FUNC_0] = sub_8161F94,
-    [BATTLE_TOWER_FUNC_1] = sub_8162054,
-    [BATTLE_TOWER_FUNC_2] = sub_81620F4,
+    [BATTLE_TOWER_FUNC_INIT] = InitTowerChallenge,
+    [BATTLE_TOWER_FUNC_GET_DATA] = GetTowerData,
+    [BATTLE_TOWER_FUNC_SET_DATA] = SetTowerData,
     [BATTLE_TOWER_FUNC_CHOOSE_TRAINER] = ChooseNextBattleTowerTrainer,
     [BATTLE_TOWER_FUNC_4] = sub_81621C0,
     [BATTLE_TOWER_FUNC_GIVE_RIBBONS] = AwardBattleTowerRibbons,
-    [BATTLE_TOWER_FUNC_SAVE] = SaveBattleTowerProgress,
+    [BATTLE_TOWER_FUNC_SAVE] = SaveTowerChallenge,
     [BATTLE_TOWER_FUNC_7] = sub_8163914,
     [BATTLE_TOWER_FUNC_NOP] = nullsub_61,
     [BATTLE_TOWER_FUNC_NOP2] = nullsub_116,
@@ -1154,7 +1154,7 @@ void CallBattleTowerFunc(void)
     sBattleTowerFuncs[gSpecialVar_0x8004]();
 }
 
-static void sub_8161F94(void)
+static void InitTowerChallenge(void)
 {
     u32 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
     u32 battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
@@ -1172,7 +1172,7 @@ static void sub_8161F94(void)
     gTrainerBattleOpponent_A = 0;
 }
 
-static void sub_8162054(void)
+static void GetTowerData(void)
 {
     u32 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
     u32 battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
@@ -1193,7 +1193,7 @@ static void sub_8162054(void)
     }
 }
 
-static void sub_81620F4(void)
+static void SetTowerData(void)
 {
     u32 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
     u32 battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
@@ -2423,7 +2423,7 @@ static void sub_8163EE4(void)
     SaveCurrentWinStreak();
 }
 
-static void SaveBattleTowerProgress(void)
+static void SaveTowerChallenge(void)
 {
     u16 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
     u16 battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);

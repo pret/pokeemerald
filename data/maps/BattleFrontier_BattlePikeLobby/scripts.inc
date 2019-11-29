@@ -72,7 +72,7 @@ BattleFrontier_BattlePikeLobby_EventScript_25B78D:: @ 825B78D
 	special CallBattlePikeFunction
 	message BattleFrontier_BattlePikeLobby_Text_25C1DF
 	waitmessage
-	setvar VAR_0x8004, BATTLE_PIKE_FUNC_8
+	setvar VAR_0x8004, BATTLE_PIKE_FUNC_SAVE
 	setvar VAR_0x8005, 0
 	special CallBattlePikeFunction
 	playse SE_SAVE
@@ -97,7 +97,7 @@ BattleFrontier_BattlePikeLobby_EventScript_25B806:: @ 825B806
 	special HealPlayerParty
 	setvar VAR_0x8004, BATTLE_PIKE_FUNC_LOAD_MON_HELD_ITEMS
 	special CallBattlePikeFunction
-	setvar VAR_0x8004, BATTLE_PIKE_FUNC_8
+	setvar VAR_0x8004, BATTLE_PIKE_FUNC_SAVE
 	setvar VAR_0x8005, 0
 	special CallBattlePikeFunction
 	playse SE_SAVE
