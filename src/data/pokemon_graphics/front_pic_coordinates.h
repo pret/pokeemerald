@@ -4422,4 +4422,94 @@ const struct MonCoords gMonFrontPicCoords[] =
         .size = 0,
         .y_offset = 6,
     },
+    [SPECIES_ALOLAN_RATTATA] =
+    {
+        .size = 0x44,
+        .y_offset = 0xd,
+    },
+    [SPECIES_ALOLAN_RATICATE] =
+    {
+        .size = 0x66,
+        .y_offset = 0x6,
+    },
+    [SPECIES_ALOLAN_RAICHU] =
+    {
+        .size = 0x67,
+        .y_offset = 0x3,
+    },
+    [SPECIES_ALOLAN_SANDSHREW] =
+    {
+        .size = 0x55,
+        .y_offset = 0xb,
+    },
+    [SPECIES_ALOLAN_SANDSLASH] =
+    {
+        .size = 0x76,
+        .y_offset = 0x6,
+    },
+    [SPECIES_ALOLAN_VULPIX] =
+    {
+        .size = 0x65,
+        .y_offset = 0xb,
+    },
+    [SPECIES_ALOLAN_NINETALES] =
+    {
+        .size = 0x88,
+        .y_offset = 0x3,
+    },
+    [SPECIES_ALOLAN_DIGLETT] =
+    {
+        .size = 0x54,
+        .y_offset = 0x11,
+    },
+    [SPECIES_ALOLAN_DUGTRIO] =
+    {
+        .size = 0x75,
+        .y_offset = 0xb,
+    },
+    [SPECIES_ALOLAN_MEOWTH] =
+    {
+        .size = 0x55,
+        .y_offset = 0xa,
+    },
+    [SPECIES_ALOLAN_PERSIAN] =
+    {
+        .size = 0x77,
+        .y_offset = 0x4,
+    },
+    [SPECIES_ALOLAN_GEODUDE] =
+    {
+        .size = 0x54,
+        .y_offset = 0x13,
+    },
+    [SPECIES_ALOLAN_GRAVELER] =
+    {
+        .size = 0x87,
+        .y_offset = 0x9,
+    },
+    [SPECIES_ALOLAN_GOLEM] =
+    {
+        .size = 0x77,
+        .y_offset = 0x6,
+    },
+    [SPECIES_ALOLAN_GRIMER] =
+    {
+        .size = 0x65,
+        .y_offset = 0x9,
+    },
+    [SPECIES_ALOLAN_MUK] =
+    {
+        .size = 0x87,
+        .y_offset = 0x7,
+    },
+    [SPECIES_ALOLAN_EXEGGUTOR] =
+    {
+        .size = 0x88,
+        .y_offset = 0x0,
+    },
+    [SPECIES_ALOLAN_MAROWAK] =
+    {
+        .size = 0x76,
+        .y_offset = 0x8,
+    },
 };
