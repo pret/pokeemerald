@@ -787,24 +787,24 @@ static const u8 sHintTextTypes[] =
 
 static void (* const sBattlePyramidFunctions[])(void) =
 {
-    InitPyramidChallenge,
-    GetBattlePyramidData,
-    SetBattlePyramidData,
-    SavePyramidChallenge,
-    SetBattlePyramidPrize,
-    GiveBattlePyramidPrize,
-    SeedPyramidFloor,
-    SetPickupItem,
-    HidePyramidItem,
-    InitPyramidFacilityTrainers,
-    ShowPostBattleHintText,
-    UpdatePyramidWinStreak,
-    GetInBattlePyramid,
-    UpdatePyramidLightRadius,
-    ClearPyramidPartyHeldItems,
-    SetPyramidFloorPalette,
-    sub_81A9828,
-    RestorePyramidPlayerParty,
+    [BATTLE_PYRAMID_FUNC_INIT] = InitPyramidChallenge,
+    [BATTLE_PYRAMID_FUNC_GET_DATA] = GetBattlePyramidData,
+    [BATTLE_PYRAMID_FUNC_SET_DATA] = SetBattlePyramidData,
+    [BATTLE_PYRAMID_FUNC_SAVE] = SavePyramidChallenge,
+    [BATTLE_PYRAMID_FUNC_SET_PRIZE] = SetBattlePyramidPrize,
+    [BATTLE_PYRAMID_FUNC_GIVE_PRIZE] = GiveBattlePyramidPrize,
+    [BATTLE_PYRAMID_FUNC_SEED_FLOOR] = SeedPyramidFloor,
+    [BATTLE_PYRAMID_FUNC_SET_ITEM] = SetPickupItem,
+    [BATTLE_PYRAMID_FUNC_HIDE_ITEM] = HidePyramidItem,
+    [BATTLE_PYRAMID_FUNC_INIT_TRAINERS] = InitPyramidFacilityTrainers,
+    [BATTLE_PYRAMID_FUNC_SHOW_HINT_TEXT] = ShowPostBattleHintText,
+    [BATTLE_PYRAMID_FUNC_UPDATE_STREAK] = UpdatePyramidWinStreak,
+    [BATTLE_PYRAMID_FUNC_IS_IN] = GetInBattlePyramid,
+    [BATTLE_PYRAMID_FUNC_UPDATE_LIGHT] = UpdatePyramidLightRadius,
+    [BATTLE_PYRAMID_FUNC_CLEAR_HELD_ITEMS] = ClearPyramidPartyHeldItems,
+    [BATTLE_PYRAMID_FUNC_SET_FLOOR_PALETTE] = SetPyramidFloorPalette,
+    [BATTLE_PYRAMID_FUNC_16] = sub_81A9828,
+    [BATTLE_PYRAMID_FUNC_RESTORE_PARTY] = RestorePyramidPlayerParty,
 };
 
 static const u16 sShortStreakRewardItems[] = {ITEM_HP_UP, ITEM_PROTEIN, ITEM_IRON, ITEM_CALCIUM, ITEM_CARBOS, ITEM_ZINC};
@@ -868,28 +868,28 @@ static void GetBattlePyramidData(void)
 
     switch (gSpecialVar_0x8005)
     {
-    case 0:
+    case PYRAMID_DATA_PRIZE:
         gSpecialVar_Result = gSaveBlock2Ptr->frontier.pyramidPrize;
         break;
-    case 1:
+    case PYRAMID_DATA_WIN_STREAK:
         gSpecialVar_Result = gSaveBlock2Ptr->frontier.pyramidWinStreaks[lvlMode];
         break;
-    case 2:
+    case PYRAMID_DATA_WIN_STREAK_ACTIVE:
         if (lvlMode != FRONTIER_LVL_50)
             gSpecialVar_Result = gSaveBlock2Ptr->frontier.winStreakActiveFlags & STREAK_PYRAMID_OPEN;
         else
             gSpecialVar_Result = gSaveBlock2Ptr->frontier.winStreakActiveFlags & STREAK_PYRAMID_50;
         break;
-    case 3:
+    case PYRAMID_DATA_WIN_STREAK_50:
         gSpecialVar_Result = gSaveBlock2Ptr->frontier.pyramidWinStreaks[FRONTIER_LVL_50];
         break;
-    case 4:
+    case PYRAMID_DATA_WIN_STREAK_OPEN:
         gSpecialVar_Result = gSaveBlock2Ptr->frontier.pyramidWinStreaks[FRONTIER_LVL_OPEN];
         break;
-    case 5:
+    case PYRAMID_DATA_WIN_STREAK_ACTIVE_50:
         gSpecialVar_Result = gSaveBlock2Ptr->frontier.winStreakActiveFlags & STREAK_PYRAMID_50;
         break;
-    case 6:
+    case PYRAMID_DATA_WIN_STREAK_ACTIVE_OPEN:
         gSpecialVar_Result = gSaveBlock2Ptr->frontier.winStreakActiveFlags & STREAK_PYRAMID_OPEN;
         break;
     }
@@ -901,13 +901,13 @@ static void SetBattlePyramidData(void)
 
     switch (gSpecialVar_0x8005)
     {
-    case 0:
+    case PYRAMID_DATA_PRIZE:
         gSaveBlock2Ptr->frontier.pyramidPrize = gSpecialVar_0x8006;
         break;
-    case 1:
+    case PYRAMID_DATA_WIN_STREAK:
         gSaveBlock2Ptr->frontier.pyramidWinStreaks[lvlMode] = gSpecialVar_0x8006;
         break;
-    case 2:
+    case PYRAMID_DATA_WIN_STREAK_ACTIVE:
         if (lvlMode != FRONTIER_LVL_50)
         {
             if (gSpecialVar_0x8006)
@@ -923,7 +923,7 @@ static void SetBattlePyramidData(void)
                 gSaveBlock2Ptr->frontier.winStreakActiveFlags &= ~(STREAK_PYRAMID_50);
         }
         break;
-    case 7:
+    case PYRAMID_DATA_TRAINER_FLAGS:
         gSaveBlock2Ptr->frontier.pyramidTrainerFlags = gSpecialVar_0x8006;
         break;
     }
@@ -1004,6 +1004,7 @@ static void SetPickupItem(void)
     else
         gSpecialVar_0x8000 = sPickupItemsLvl50[round][sPickupItemSlots[i][1]];
 
+    // Quantity of item to give
     gSpecialVar_0x8001 = 1;
 }
 
@@ -1122,10 +1123,10 @@ static void UpdatePyramidLightRadius(void)
 {
     switch (gSpecialVar_0x8006)
     {
-    case 0:
+    case PYRAMID_LIGHT_SET_RADIUS:
         gSaveBlock2Ptr->frontier.pyramidLightRadius = gSpecialVar_0x8005;
         break;
-    case 1:
+    case PYRAMID_LIGHT_INCR_RADIUS:
         switch (gSpecialVar_Result)
         {
         case 0:

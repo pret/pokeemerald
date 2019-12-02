@@ -32,11 +32,10 @@ EventScript_FrontierFieldWhiteOut:: @ 82736F8
 	pike_inchallenge
 	compare VAR_RESULT, TRUE
 	goto_if_eq BattleFrontier_BattlePike_EventScript_Retire
-	setvar VAR_0x8004, BATTLE_PYRAMID_FUNC_IS_IN
-	special CallBattlePyramidFunction
-	compare VAR_RESULT, 1
+	pyramid_inchallenge
+	compare VAR_RESULT, 1  @ On Pyramid floor
 	goto_if_eq BattleFrontier_BattlePyramidTop_EventScript_252B42
-	compare VAR_RESULT, 2
+	compare VAR_RESULT, 2  @ On Pyramid peak
 	goto_if_eq BattleFrontier_BattlePyramidTop_EventScript_252B42
 	trainerhill_inchallenge
 	compare VAR_RESULT, TRUE

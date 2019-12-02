@@ -128,8 +128,7 @@ EventScript_PickUpItem:: @ 8271C3A
 	waitfanfare
 	waitmessage
 	bufferitemnameplural 1, VAR_0x8004, VAR_0x8005
-	setvar VAR_0x8004, BATTLE_PYRAMID_FUNC_IS_IN
-	special CallBattlePyramidFunction
+	pyramid_inchallenge
 	compare VAR_RESULT, 1
 	goto_if_eq EventScript_PutBattlePyramidItemInBag
 	msgbox gText_PutItemInPocket, MSGBOX_DEFAULT
