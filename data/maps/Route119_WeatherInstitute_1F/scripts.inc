@@ -36,7 +36,7 @@ Route119_WeatherInstitute_1F_EventScript_InstituteWorker1:: @ 826FAC8
 	call_if_set FLAG_DEFEATED_GROUDON, Route119_WeatherInstitute_1F_EventScript_LegendaryDefeated
 	compare VAR_0x8004, 2  @ Both defeated
 	goto_if_eq Route119_WeatherInstitute_1F_EventScript_StudyingRain
-	msgbox Route119_WeatherInstitute_1F_Text_NoticingUnusualWeather, MSGBOX_DEFAULT
+	msgbox Route119_WeatherInstitute_1F_Text_NoticingAbnormalWeather, MSGBOX_DEFAULT
 	release
 	end
 
@@ -116,7 +116,7 @@ Route119_WeatherInstitute_1F_Text_ProfStudyingRain: @ 826FD2E
 	.string "And thus, the PROFESSOR is studying\n"
 	.string "if the rain can be put to good use.$"
 
-Route119_WeatherInstitute_1F_Text_NoticingUnusualWeather: @ 826FDE8
+Route119_WeatherInstitute_1F_Text_NoticingAbnormalWeather: @ 826FDE8
 	.string "On the 2nd floor of the INSTITUTE,\n"
 	.string "we study the weather patterns over\l"
 	.string "the HOENN region.\p"

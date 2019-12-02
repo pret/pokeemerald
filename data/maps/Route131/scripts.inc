@@ -4,7 +4,7 @@ Route131_MapScripts:: @ 81F7404
 
 Route131_OnTransition: @ 81F740A
 	compare VAR_SOOTOPOLIS_CITY_STATE, 4
-	call_if_ge Route131_EventScript_CheckSetAlternatingWeather
+	call_if_ge Route131_EventScript_CheckSetAbnormalWeather
 	call Route131_EventScript_SetLayout
 	end
 
@@ -12,8 +12,8 @@ Route131_EventScript_SetLayout:: @ 81F741B
 	setmaplayoutindex LAYOUT_ROUTE131_SKY_PILLAR
 	return
 
-Route131_EventScript_CheckSetAlternatingWeather:: @ 81F741F
-	call_if_set FLAG_SYS_WEATHER_CTRL, Common_EventScript_SetAlternatingWeather
+Route131_EventScript_CheckSetAbnormalWeather:: @ 81F741F
+	call_if_set FLAG_SYS_WEATHER_CTRL, Common_EventScript_SetAbnormalWeather
 	return
 
 Route131_EventScript_Richard:: @ 81F7429

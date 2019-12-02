@@ -3,6 +3,6 @@ Underwater5_MapScripts:: @ 81F7731
 	.byte 0
 
 Underwater5_OnResume: @ 81F7737
-	call UnusualWeather_Underwater_SetupEscapeWarp
+	call AbnormalWeather_Underwater_SetupEscapeWarp
 	end
 

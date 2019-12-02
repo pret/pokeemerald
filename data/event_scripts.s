@@ -763,8 +763,8 @@ Common_EventScript_NoRoomForDecor:: @ 8272071
 	msgbox gText_NoRoomLeftForAnother, MSGBOX_DEFAULT
 	return
 
-Common_EventScript_SetAlternatingWeather:: @ 827207A
-	setweather WEATHER_ALTERNATING
+Common_EventScript_SetAbnormalWeather:: @ 827207A
+	setweather WEATHER_ABNORMAL
 	return
 
 Common_EventScript_PlayGymBadgeFanfare:: @ 827207E
@@ -1012,7 +1012,7 @@ gText_LegendaryFlewAway:: @ 8273204
 
 	.include "data/text/pc_transfer.inc"
 	.include "data/text/mevent.inc"
-	.include "data/text/unusual_weather.inc"
+	.include "data/text/abnormal_weather.inc"
 
 EventScript_SelectWithoutRegisteredItem:: @ 82736B3
 	msgbox gText_SelectWithoutRegisteredItem, MSGBOX_SIGN
@@ -1062,7 +1062,7 @@ Common_EventScript_LegendaryFlewAway:: @ 8273776
 
 	.include "data/scripts/pc_transfer.inc"
 	.include "data/scripts/mevent.inc"
-	.include "data/scripts/unusual_weather.inc"
+	.include "data/scripts/abnormal_weather.inc"
 	.include "data/scripts/trainer_script.inc"
 	.include "data/scripts/berry_tree.inc"
 	.include "data/scripts/secret_base.inc"

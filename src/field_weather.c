@@ -188,7 +188,7 @@ void StartWeather(void)
 
 void SetNextWeather(u8 weather)
 {
-    if (weather != WEATHER_RAIN_LIGHT && weather != WEATHER_RAIN_MED && weather != WEATHER_RAIN_HEAVY)
+    if (weather != WEATHER_RAIN && weather != WEATHER_RAIN_THUNDERSTORM && weather != WEATHER_DOWNPOUR)
     {
         PlayRainStoppingSoundEffect();
     }
@@ -371,11 +371,11 @@ static void FadeInScreenWithWeather(void)
 
     switch (gWeatherPtr->currWeather)
     {
-    case WEATHER_RAIN_LIGHT:
-    case WEATHER_RAIN_MED:
-    case WEATHER_RAIN_HEAVY:
+    case WEATHER_RAIN:
+    case WEATHER_RAIN_THUNDERSTORM:
+    case WEATHER_DOWNPOUR:
     case WEATHER_SNOW:
-    case WEATHER_SHADE:
+    case WEATHER_CLOUDY:
         if (FadeInScreen_RainShowShade() == FALSE)
         {
             gWeatherPtr->gammaIndex = 3;
@@ -389,17 +389,17 @@ static void FadeInScreenWithWeather(void)
             gWeatherPtr->palProcessingState = WEATHER_PAL_STATE_IDLE;
         }
         break;
-    case WEATHER_FOG_1:
+    case WEATHER_FOG_HORIZONTAL:
         if (FadeInScreen_Fog1() == FALSE)
         {
             gWeatherPtr->gammaIndex = 0;
             gWeatherPtr->palProcessingState = WEATHER_PAL_STATE_IDLE;
         }
         break;
-    case WEATHER_ASH:
+    case WEATHER_VOLCANIC_ASH:
     case WEATHER_SANDSTORM:
-    case WEATHER_FOG_2:
-    case WEATHER_FOG_3:
+    case WEATHER_FOG_DIAGONAL:
+    case WEATHER_UNDERWATER:
     default:
         if (!gPaletteFade.active)
         {
@@ -763,12 +763,12 @@ void FadeScreen(u8 mode, s8 delay)
 
     switch (gWeatherPtr->currWeather)
     {
-    case WEATHER_RAIN_LIGHT:
-    case WEATHER_RAIN_MED:
-    case WEATHER_RAIN_HEAVY:
+    case WEATHER_RAIN:
+    case WEATHER_RAIN_THUNDERSTORM:
+    case WEATHER_DOWNPOUR:
     case WEATHER_SNOW:
-    case WEATHER_FOG_1:
-    case WEATHER_SHADE:
+    case WEATHER_FOG_HORIZONTAL:
+    case WEATHER_CLOUDY:
     case WEATHER_DROUGHT:
         useWeatherPal = TRUE;
         break;
@@ -816,7 +816,7 @@ void UpdateSpritePaletteWithWeather(u8 spritePaletteIndex)
     case WEATHER_PAL_STATE_SCREEN_FADING_IN:
         if (gWeatherPtr->unknown_6CA != 0)
         {
-            if (gWeatherPtr->currWeather == WEATHER_FOG_1)
+            if (gWeatherPtr->currWeather == WEATHER_FOG_HORIZONTAL)
                 MarkFogSpritePalToLighten(paletteIndex);
             paletteIndex *= 16;
             for (i = 0; i < 16; i++)
@@ -831,7 +831,7 @@ void UpdateSpritePaletteWithWeather(u8 spritePaletteIndex)
     // WEATHER_PAL_STATE_CHANGING_WEATHER
     // WEATHER_PAL_STATE_CHANGING_IDLE
     default:
-        if (gWeatherPtr->currWeather != WEATHER_FOG_1)
+        if (gWeatherPtr->currWeather != WEATHER_FOG_HORIZONTAL)
         {
             ApplyGammaShift(paletteIndex, 1, gWeatherPtr->gammaIndex);
         }
@@ -995,34 +995,34 @@ void sub_80AC274(u8 a)
     switch (a)
     {
     case 1:
-        SetWeather(WEATHER_CLOUDS);
+        SetWeather(WEATHER_SUNNY_CLOUDS);
         break;
     case 2:
         SetWeather(WEATHER_SUNNY);
         break;
     case 3:
-        SetWeather(WEATHER_RAIN_LIGHT);
+        SetWeather(WEATHER_RAIN);
         break;
     case 4:
         SetWeather(WEATHER_SNOW);
         break;
     case 5:
-        SetWeather(WEATHER_RAIN_MED);
+        SetWeather(WEATHER_RAIN_THUNDERSTORM);
         break;
     case 6:
-        SetWeather(WEATHER_FOG_1);
+        SetWeather(WEATHER_FOG_HORIZONTAL);
         break;
     case 7:
-        SetWeather(WEATHER_FOG_2);
+        SetWeather(WEATHER_FOG_DIAGONAL);
         break;
     case 8:
-        SetWeather(WEATHER_ASH);
+        SetWeather(WEATHER_VOLCANIC_ASH);
         break;
     case 9:
         SetWeather(WEATHER_SANDSTORM);
         break;
     case 10:
-        SetWeather(WEATHER_SHADE);
+        SetWeather(WEATHER_CLOUDY);
         break;
     }
 }

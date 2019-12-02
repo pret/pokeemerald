@@ -5,7 +5,7 @@
   "music": "MUS_TOZAN",
   "region_map_section": "MAPSEC_SEAFLOOR_CAVERN",
   "requires_flash": false,
-  "weather": "WEATHER_FOG_1",
+  "weather": "WEATHER_FOG_HORIZONTAL",
   "map_type": "MAP_TYPE_UNDERGROUND",
   "allow_bike": false,
   "allow_escape_rope": true,

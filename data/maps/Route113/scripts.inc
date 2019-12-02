@@ -18,7 +18,7 @@ Route113_EventScript_CheckSetAshWeather:: @ 81F216A
 	goto_if_lt Route113_EventScript_DontSetAshWeather
 	compare VAR_TEMP_0, 84
 	goto_if_gt Route113_EventScript_DontSetAshWeather
-	setweather WEATHER_ASH
+	setweather WEATHER_VOLCANIC_ASH
 	return
 
 Route113_EventScript_DontSetAshWeather:: @ 81F2189
