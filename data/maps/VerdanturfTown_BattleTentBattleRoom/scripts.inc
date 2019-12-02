@@ -43,8 +43,7 @@ VerdanturfTown_BattleTentBattleRoom_EventScript_20236F:: @ 820236F
 	addobject 2
 	applymovement 2, VerdanturfTown_BattleTentBattleRoom_Movement_20257B
 	waitmovement 0
-	setvar VAR_0x8004, 4
-	special CallVerdanturfTentFunction
+	battletent_getopponentintro
 	msgbox gStringVar4, MSGBOX_DEFAULT
 	waitmessage
 	call VerdanturfTown_BattleTentBattleRoom_EventScript_24FDF7
@@ -121,9 +120,7 @@ VerdanturfTown_BattleTentBattleRoom_EventScript_202501:: @ 8202501
 VerdanturfTown_BattleTentBattleRoom_EventScript_20251F:: @ 820251F
 	message VerdanturfTown_BattleTentBattleRoom_Text_25007E
 	waitmessage
-	setvar VAR_0x8004, 5
-	setvar VAR_0x8005, 2
-	special CallVerdanturfTentFunction
+	verdanturftent_save CHALLENGE_STATUS_PAUSED
 	playse SE_SAVE
 	waitse
 	fadescreen 1

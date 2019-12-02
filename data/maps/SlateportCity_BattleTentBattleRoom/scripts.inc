@@ -47,8 +47,7 @@ SlateportCity_BattleTentBattleRoom_EventScript_2099BE:: @ 82099BE
 	addobject 2
 	applymovement 2, SlateportCity_BattleTentBattleRoom_Movement_209A9E
 	waitmovement 0
-	setvar VAR_0x8004, 4
-	special CallVerdanturfTentFunction
+	battletent_getopponentintro
 	lockall
 	msgbox gStringVar4, MSGBOX_DEFAULT
 	waitmessage
