@@ -11,6 +11,7 @@
 #include "battle_factory_screen.h"
 #include "frontier_util.h"
 #include "string_util.h"
+#include "constants/battle_tent.h"
 #include "constants/items.h"
 #include "constants/layouts.h"
 #include "constants/region_map_sections.h"
@@ -41,8 +42,18 @@ static void SetRandomSlateportTentPrize(void);
 static void GiveSlateportTentPrize(void);
 static void SelectInitialRentalMons(void);
 static void SwapRentalMons(void);
-static void sub_81BA040(void);
-static void sub_81B9EC0(void);
+static void GenerateOpponentMons(void);
+static void GenerateInitialRentalMons(void);
+
+/*
+ * Battle Tents are mini versions of particular Battle Frontier facilities
+ * As such they each share some scripts and functions with their counterpart
+ *
+ * Verdanturf Battle Tent: Battle Palace
+ * Fallarbor Battle Tent:  Battle Arena
+ * Slateport Battle Tent:  Battle Factory
+ *
+ */
 
 // IWRAM bss
 static u16 sRandMonSetId;
@@ -50,43 +61,43 @@ static u16 sRandMonSetId;
 // const rom data
 void static (*const sVerdanturfTentFuncs[])(void) =
 {
-    InitVerdanturfTentChallenge,
-    GetVerdanturfTentPrize,
-    SetVerdanturfTentPrize,
-    SetVerdanturfTentTrainerGfx,
-    BufferVerdanturfTentTrainerIntro,
-    SaveVerdanturfTentChallenge,
-    SetRandomVerdanturfTentPrize,
-    GiveVerdanturfTentPrize
+    [VERDANTURF_TENT_FUNC_INIT]               = InitVerdanturfTentChallenge,
+    [VERDANTURF_TENT_FUNC_GET_PRIZE]          = GetVerdanturfTentPrize,
+    [VERDANTURF_TENT_FUNC_SET_PRIZE]          = SetVerdanturfTentPrize,
+    [VERDANTURF_TENT_FUNC_SET_OPPONENT_GFX]   = SetVerdanturfTentTrainerGfx,
+    [VERDANTURF_TENT_FUNC_GET_OPPONENT_INTRO] = BufferVerdanturfTentTrainerIntro,
+    [VERDANTURF_TENT_FUNC_SAVE]               = SaveVerdanturfTentChallenge,
+    [VERDANTURF_TENT_FUNC_SET_RANDOM_PRIZE]   = SetRandomVerdanturfTentPrize,
+    [VERDANTURF_TENT_FUNC_GIVE_PRIZE]         = GiveVerdanturfTentPrize
 };
 
 static const u16 sVerdanturfTentRewards[] = {ITEM_NEST_BALL};
 
 void static (*const sFallarborTentFuncs[])(void) =
 {
-    InitFallarborTentChallenge,
-    GetFallarborTentPrize,
-    SetFallarborTentPrize,
-    SaveFallarborTentChallenge,
-    SetRandomFallarborTentPrize,
-    GiveFallarborTentPrize,
-    BufferFallarborTentTrainerName
+    [FALLARBOR_TENT_FUNC_INIT]              = InitFallarborTentChallenge,
+    [FALLARBOR_TENT_FUNC_GET_PRIZE]         = GetFallarborTentPrize,
+    [FALLARBOR_TENT_FUNC_SET_PRIZE]         = SetFallarborTentPrize,
+    [FALLARBOR_TENT_FUNC_SAVE]              = SaveFallarborTentChallenge,
+    [FALLARBOR_TENT_FUNC_SET_RANDOM_PRIZE]  = SetRandomFallarborTentPrize,
+    [FALLARBOR_TENT_FUNC_GIVE_PRIZE]        = GiveFallarborTentPrize,
+    [FALLARBOR_TENT_FUNC_GET_OPPONENT_NAME] = BufferFallarborTentTrainerName
 };
 
 static const u16 sFallarborTentRewards[] = {ITEM_HYPER_POTION};
 
 void static (*const sSlateportTentFuncs[])(void) =
 {
-    InitSlateportTentChallenge,
-    GetSlateportTentPrize,
-    SetSlateportTentPrize,
-    SaveSlateportTentChallenge,
-    SetRandomSlateportTentPrize,
-    GiveSlateportTentPrize,
-    SelectInitialRentalMons,
-    SwapRentalMons,
-    sub_81BA040,
-    sub_81B9EC0
+    [SLATEPORT_TENT_FUNC_INIT]                   = InitSlateportTentChallenge,
+    [SLATEPORT_TENT_FUNC_GET_PRIZE]              = GetSlateportTentPrize,
+    [SLATEPORT_TENT_FUNC_SET_PRIZE]              = SetSlateportTentPrize,
+    [SLATEPORT_TENT_FUNC_SAVE]                   = SaveSlateportTentChallenge,
+    [SLATEPORT_TENT_FUNC_SET_RANDOM_PRIZE]       = SetRandomSlateportTentPrize,
+    [SLATEPORT_TENT_FUNC_GIVE_PRIZE]             = GiveSlateportTentPrize,
+    [SLATEPORT_TENT_FUNC_SELECT_RENT_MONS]       = SelectInitialRentalMons,
+    [SLATEPORT_TENT_FUNC_SWAP_RENT_MONS]         = SwapRentalMons,
+    [SLATEPORT_TENT_FUNC_GENERATE_OPPONENT_MONS] = GenerateOpponentMons,
+    [SLATEPORT_TENT_FUNC_GENERATE_RENTAL_MONS]   = GenerateInitialRentalMons
 };
 
 static const u16 sSlateportTentRewards[] = {ITEM_FULL_HEAL};
@@ -276,7 +287,7 @@ bool8 InSlateportBattleTent(void)
            && (gMapHeader.mapLayoutId == LAYOUT_BATTLE_TENT_CORRIDOR || gMapHeader.mapLayoutId == LAYOUT_BATTLE_TENT_BATTLE_ROOM);
 }
 
-static void sub_81B9EC0(void)
+static void GenerateInitialRentalMons(void)
 {
     s32 i, j;
     u8 firstMonId;
@@ -338,13 +349,13 @@ static void sub_81B9EC0(void)
     }
 }
 
-static void sub_81BA040(void)
+static void GenerateOpponentMons(void)
 {
     u16 trainerId;
     s32 i, j, k;
     register const u16 *monSets asm("r9"); // Fix me. Compiler insists on moving that variable into stack.
-    u16 species[3];
-    u16 heldItems[3];
+    u16 species[FRONTIER_PARTY_SIZE];
+    u16 heldItems[FRONTIER_PARTY_SIZE];
     s32 setsCount = 0;
 
     gFacilityTrainers = gSlateportBattleTentTrainers;
@@ -375,7 +386,7 @@ static void sub_81BA040(void)
 
     monSets = gFacilityTrainers[gTrainerBattleOpponent_A].monSets;
     i = 0;
-    while (i != 3)
+    while (i != FRONTIER_PARTY_SIZE)
     {
         sRandMonSetId = monSets[Random() % setsCount];
         for (j = 0; j < 6; j++)

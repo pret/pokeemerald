@@ -49,8 +49,7 @@ FallarborTown_BattleTentBattleRoom_EventScript_20090F:: @ 820090F
 	waitse
 	waitmovement 0
 	msgbox BattleFrontier_BattleArenaBattleRoom_Text_SetKOTourneyBegin, MSGBOX_DEFAULT
-	setvar VAR_0x8004, 4
-	special CallVerdanturfTentFunction
+	battletent_getopponentintro
 	msgbox gStringVar4, MSGBOX_DEFAULT
 	waitmessage
 	call BattleFrontier_BattleArenaBattleRoom_EventScript_DoArenaBattle
@@ -60,8 +59,7 @@ FallarborTown_BattleTentBattleRoom_EventScript_20090F:: @ 820090F
 	playse SE_W173
 	waitse
 	waitmovement 0
-	setvar VAR_0x8004, 6
-	special CallFallarborTentFunction
+	fallarbortent_getopponentname
 	msgbox BattleFrontier_BattleArenaBattleRoom_Text_WinnerIsOpponent, MSGBOX_DEFAULT
 
 FallarborTown_BattleTentBattleRoom_EventScript_20097E:: @ 820097E
@@ -160,9 +158,7 @@ FallarborTown_BattleTentBattleRoom_EventScript_200B4A:: @ 8200B4A
 FallarborTown_BattleTentBattleRoom_EventScript_200B51:: @ 8200B51
 	message BattleFrontier_BattleArenaBattleRoom_Text_SavingPleaseWait
 	waitmessage
-	setvar VAR_0x8004, 3
-	setvar VAR_0x8005, 2
-	special CallFallarborTentFunction
+	fallarbortent_save CHALLENGE_STATUS_PAUSED
 	playse SE_SAVE
 	waitse
 	fadescreen 1

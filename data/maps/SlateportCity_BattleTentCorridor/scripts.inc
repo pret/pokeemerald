@@ -31,14 +31,11 @@ SlateportCity_BattleTentCorridor_EventScript_208E65:: @ 8208E65
 	waitmovement 0
 	compare VAR_0x8006, 2
 	goto_if_eq SlateportCity_BattleTentCorridor_EventScript_209044
-	setvar VAR_0x8004, 9
-	special CallSlateportTentFunction
-	setvar VAR_0x8004, 8
-	special CallSlateportTentFunction
+	slateporttent_generaterentalmons
+	slateporttent_generateopponentmons
 	msgbox SlateportCity_BattleTentCorridor_Text_25A1C8, MSGBOX_DEFAULT
 	fadescreen 1
-	setvar VAR_0x8004, 6
-	special CallSlateportTentFunction
+	slateporttent_rentmons
 	waitstate
 SlateportCity_BattleTentCorridor_EventScript_208EB4:: @ 8208EB4
 	msgbox SlateportCity_BattleTentCorridor_Text_25AB96, MSGBOX_DEFAULT
@@ -92,8 +89,7 @@ SlateportCity_BattleTentCorridor_EventScript_208F89:: @ 8208F89
 	case MULTI_B_PRESSED, SlateportCity_BattleTentCorridor_EventScript_208F0D
 
 SlateportCity_BattleTentCorridor_EventScript_208FBB:: @ 8208FBB
-	setvar VAR_0x8004, 8
-	special CallSlateportTentFunction
+	slateporttent_generateopponentmons
 	msgbox SlateportCity_BattleTentCorridor_Text_25AB2E, MSGBOX_YESNO
 	switch VAR_RESULT
 	case NO, SlateportCity_BattleTentCorridor_EventScript_208EB4
@@ -102,8 +98,7 @@ SlateportCity_BattleTentCorridor_EventScript_208FBB:: @ 8208FBB
 
 SlateportCity_BattleTentCorridor_EventScript_208FF1:: @ 8208FF1
 	fadescreen 1
-	setvar VAR_0x8004, 7
-	special CallSlateportTentFunction
+	slateporttent_swapmons
 	waitstate
 	compare VAR_RESULT, 1
 	goto_if_eq SlateportCity_BattleTentCorridor_EventScript_208EB4
@@ -123,9 +118,7 @@ SlateportCity_BattleTentCorridor_EventScript_20901B:: @ 820901B
 SlateportCity_BattleTentCorridor_EventScript_209022:: @ 8209022
 	message SlateportCity_BattleTentCorridor_Text_25ABAE
 	waitmessage
-	setvar VAR_0x8004, 3
-	setvar VAR_0x8005, 2
-	special CallSlateportTentFunction
+	slateporttent_save CHALLENGE_STATUS_PAUSED
 	playse SE_SAVE
 	waitse
 	fadescreen 1
