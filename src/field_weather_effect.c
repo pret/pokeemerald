@@ -14,7 +14,7 @@
 #include "gpu_regs.h"
 
 // EWRAM
-EWRAM_DATA static u8 gCurrentAlternatingWeather = 0;
+EWRAM_DATA static u8 gCurrentAbnormalWeather = 0;
 EWRAM_DATA static u16 gUnusedWeatherRelated = 0;
 
 // CONST
@@ -516,9 +516,9 @@ bool8 LightRain_Finish(void)
     switch (gWeatherPtr->finishStep)
     {
     case 0:
-        if (gWeatherPtr->nextWeather == WEATHER_RAIN_LIGHT
-         || gWeatherPtr->nextWeather == WEATHER_RAIN_MED
-         || gWeatherPtr->nextWeather == WEATHER_RAIN_HEAVY)
+        if (gWeatherPtr->nextWeather == WEATHER_RAIN
+         || gWeatherPtr->nextWeather == WEATHER_RAIN_THUNDERSTORM
+         || gWeatherPtr->nextWeather == WEATHER_DOWNPOUR)
         {
             gWeatherPtr->finishStep = 0xFF;
             return FALSE;
@@ -1178,9 +1178,9 @@ bool8 Rain_Finish(void)
         Rain_Main();
         if (gWeatherPtr->unknown_6EA)
         {
-            if (gWeatherPtr->nextWeather == WEATHER_RAIN_LIGHT
-             || gWeatherPtr->nextWeather == WEATHER_RAIN_MED
-             || gWeatherPtr->nextWeather == WEATHER_RAIN_HEAVY)
+            if (gWeatherPtr->nextWeather == WEATHER_RAIN
+             || gWeatherPtr->nextWeather == WEATHER_RAIN_THUNDERSTORM
+             || gWeatherPtr->nextWeather == WEATHER_DOWNPOUR)
                 return FALSE;
 
             gWeatherPtr->targetRainSpriteCount = 0;
@@ -1365,7 +1365,7 @@ void Fog1_Main(void)
     {
     case 0:
         CreateFog1Sprites();
-        if (gWeatherPtr->currWeather == WEATHER_FOG_1)
+        if (gWeatherPtr->currWeather == WEATHER_FOG_HORIZONTAL)
             Weather_SetTargetBlendCoeffs(12, 8, 3);
         else
             Weather_SetTargetBlendCoeffs(4, 16, 0);
@@ -2399,13 +2399,13 @@ static void UpdateBubbleSprite(struct Sprite *sprite)
 //------------------------------------------------------------------------------
 
 // Unused function.
-static void UnusedSetCurrentAlternatingWeather(u32 a0, u32 a1)
+static void UnusedSetCurrentAbnormalWeather(u32 a0, u32 a1)
 {
-    gCurrentAlternatingWeather = a0;
+    gCurrentAbnormalWeather = a0;
     gUnusedWeatherRelated = a1;
 }
 
-static void Task_DoAlternatingWeather(u8 taskId)
+static void Task_DoAbnormalWeather(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
 
@@ -2415,7 +2415,7 @@ static void Task_DoAlternatingWeather(u8 taskId)
         if (data[15]-- <= 0)
         {
             SetNextWeather(data[1]);
-            gCurrentAlternatingWeather = data[1];
+            gCurrentAbnormalWeather = data[1];
             data[15] = 600;
             data[0]++;
         }
@@ -2424,7 +2424,7 @@ static void Task_DoAlternatingWeather(u8 taskId)
         if (data[15]-- <= 0)
         {
             SetNextWeather(data[2]);
-            gCurrentAlternatingWeather = data[2];
+            gCurrentAbnormalWeather = data[2];
             data[15] = 600;
             data[0] = 0;
         }
@@ -2432,27 +2432,27 @@ static void Task_DoAlternatingWeather(u8 taskId)
     }
 }
 
-static void CreateAlternatingWeatherTask(void)
+static void CreateAbnormalWeatherTask(void)
 {
-    u8 taskId = CreateTask(Task_DoAlternatingWeather, 0);
+    u8 taskId = CreateTask(Task_DoAbnormalWeather, 0);
     s16 *data = gTasks[taskId].data;
 
     data[15] = 600;
-    if (gCurrentAlternatingWeather == WEATHER_RAIN_HEAVY)
+    if (gCurrentAbnormalWeather == WEATHER_DOWNPOUR)
     {
         data[1] = WEATHER_DROUGHT;
-        data[2] = WEATHER_RAIN_HEAVY;
+        data[2] = WEATHER_DOWNPOUR;
     }
-    else if (gCurrentAlternatingWeather == WEATHER_DROUGHT)
+    else if (gCurrentAbnormalWeather == WEATHER_DROUGHT)
     {
-        data[1] = WEATHER_RAIN_HEAVY;
+        data[1] = WEATHER_DOWNPOUR;
         data[2] = WEATHER_DROUGHT;
     }
     else
     {
-        gCurrentAlternatingWeather = WEATHER_RAIN_HEAVY;
+        gCurrentAbnormalWeather = WEATHER_DOWNPOUR;
         data[1] = WEATHER_DROUGHT;
-        data[2] = WEATHER_RAIN_HEAVY;
+        data[2] = WEATHER_DOWNPOUR;
     }
 }
 
@@ -2494,17 +2494,17 @@ void DoCurrentWeather(void)
 {
     u8 weather = GetSav1Weather();
 
-    if (weather == WEATHER_ALTERNATING)
+    if (weather == WEATHER_ABNORMAL)
     {
-        if (!FuncIsActiveTask(Task_DoAlternatingWeather))
-            CreateAlternatingWeatherTask();
-        weather = gCurrentAlternatingWeather;
+        if (!FuncIsActiveTask(Task_DoAbnormalWeather))
+            CreateAbnormalWeatherTask();
+        weather = gCurrentAbnormalWeather;
     }
     else
     {
-        if (FuncIsActiveTask(Task_DoAlternatingWeather))
-            DestroyTask(FindTaskIdByFunc(Task_DoAlternatingWeather));
-        gCurrentAlternatingWeather = WEATHER_RAIN_HEAVY;
+        if (FuncIsActiveTask(Task_DoAbnormalWeather))
+            DestroyTask(FindTaskIdByFunc(Task_DoAbnormalWeather));
+        gCurrentAbnormalWeather = WEATHER_DOWNPOUR;
     }
     SetNextWeather(weather);
 }
@@ -2513,17 +2513,17 @@ void ResumePausedWeather(void)
 {
     u8 weather = GetSav1Weather();
 
-    if (weather == WEATHER_ALTERNATING)
+    if (weather == WEATHER_ABNORMAL)
     {
-        if (!FuncIsActiveTask(Task_DoAlternatingWeather))
-            CreateAlternatingWeatherTask();
-        weather = gCurrentAlternatingWeather;
+        if (!FuncIsActiveTask(Task_DoAbnormalWeather))
+            CreateAbnormalWeatherTask();
+        weather = gCurrentAbnormalWeather;
     }
     else
     {
-        if (FuncIsActiveTask(Task_DoAlternatingWeather))
-            DestroyTask(FindTaskIdByFunc(Task_DoAlternatingWeather));
-        gCurrentAlternatingWeather = WEATHER_RAIN_HEAVY;
+        if (FuncIsActiveTask(Task_DoAbnormalWeather))
+            DestroyTask(FindTaskIdByFunc(Task_DoAbnormalWeather));
+        gCurrentAbnormalWeather = WEATHER_DOWNPOUR;
     }
     SetCurrentAndNextWeather(weather);
 }
@@ -2531,15 +2531,15 @@ void ResumePausedWeather(void)
 static const u8 sWeatherCycleRoute119[] =
 {
     WEATHER_SUNNY,
-    WEATHER_RAIN_LIGHT,
-    WEATHER_RAIN_MED,
-    WEATHER_RAIN_LIGHT,
+    WEATHER_RAIN,
+    WEATHER_RAIN_THUNDERSTORM,
+    WEATHER_RAIN,
 };
 static const u8 sWeatherCycleRoute123[] =
 {
     WEATHER_SUNNY,
     WEATHER_SUNNY,
-    WEATHER_RAIN_LIGHT,
+    WEATHER_RAIN,
     WEATHER_SUNNY,
 };
 
@@ -2547,25 +2547,25 @@ static u8 TranslateWeatherNum(u8 weather)
 {
     switch (weather)
     {
-    case WEATHER_NONE:           return WEATHER_NONE;
-    case WEATHER_CLOUDS:         return WEATHER_CLOUDS;
-    case WEATHER_SUNNY:          return WEATHER_SUNNY;
-    case WEATHER_RAIN_LIGHT:     return WEATHER_RAIN_LIGHT;
-    case WEATHER_SNOW:           return WEATHER_SNOW;
-    case WEATHER_RAIN_MED:       return WEATHER_RAIN_MED;
-    case WEATHER_FOG_1:          return WEATHER_FOG_1;
-    case WEATHER_ASH:            return WEATHER_ASH;
-    case WEATHER_SANDSTORM:      return WEATHER_SANDSTORM;
-    case WEATHER_FOG_2:          return WEATHER_FOG_2;
-    case WEATHER_FOG_3:          return WEATHER_FOG_3;
-    case WEATHER_SHADE:          return WEATHER_SHADE;
-    case WEATHER_DROUGHT:        return WEATHER_DROUGHT;
-    case WEATHER_RAIN_HEAVY:     return WEATHER_RAIN_HEAVY;
-    case WEATHER_BUBBLES:        return WEATHER_BUBBLES;
-    case WEATHER_ALTERNATING:    return WEATHER_ALTERNATING;
-    case WEATHER_ROUTE119_CYCLE: return sWeatherCycleRoute119[gSaveBlock1Ptr->weatherCycleStage];
-    case WEATHER_ROUTE123_CYCLE: return sWeatherCycleRoute123[gSaveBlock1Ptr->weatherCycleStage];
-    default:                     return WEATHER_NONE;
+    case WEATHER_NONE:               return WEATHER_NONE;
+    case WEATHER_SUNNY_CLOUDS:       return WEATHER_SUNNY_CLOUDS;
+    case WEATHER_SUNNY:              return WEATHER_SUNNY;
+    case WEATHER_RAIN:               return WEATHER_RAIN;
+    case WEATHER_SNOW:               return WEATHER_SNOW;
+    case WEATHER_RAIN_THUNDERSTORM:  return WEATHER_RAIN_THUNDERSTORM;
+    case WEATHER_FOG_HORIZONTAL:     return WEATHER_FOG_HORIZONTAL;
+    case WEATHER_VOLCANIC_ASH:       return WEATHER_VOLCANIC_ASH;
+    case WEATHER_SANDSTORM:          return WEATHER_SANDSTORM;
+    case WEATHER_FOG_DIAGONAL:       return WEATHER_FOG_DIAGONAL;
+    case WEATHER_UNDERWATER:         return WEATHER_UNDERWATER;
+    case WEATHER_CLOUDY:             return WEATHER_CLOUDY;
+    case WEATHER_DROUGHT:            return WEATHER_DROUGHT;
+    case WEATHER_DOWNPOUR:           return WEATHER_DOWNPOUR;
+    case WEATHER_UNDERWATER_BUBBLES: return WEATHER_UNDERWATER_BUBBLES;
+    case WEATHER_ABNORMAL:           return WEATHER_ABNORMAL;
+    case WEATHER_ROUTE119_CYCLE:     return sWeatherCycleRoute119[gSaveBlock1Ptr->weatherCycleStage];
+    case WEATHER_ROUTE123_CYCLE:     return sWeatherCycleRoute123[gSaveBlock1Ptr->weatherCycleStage];
+    default:                         return WEATHER_NONE;
     }
 }
 
@@ -2579,7 +2579,7 @@ void UpdateWeatherPerDay(u16 increment)
 static void UpdateRainCounter(u8 newWeather, u8 oldWeather)
 {
     if (newWeather != oldWeather
-     && (newWeather == WEATHER_RAIN_LIGHT || newWeather == WEATHER_RAIN_MED))
+     && (newWeather == WEATHER_RAIN || newWeather == WEATHER_RAIN_THUNDERSTORM))
         IncrementGameStat(GAME_STAT_GOT_RAINED_ON);
 }
 
