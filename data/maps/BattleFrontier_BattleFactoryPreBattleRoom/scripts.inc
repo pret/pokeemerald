@@ -31,33 +31,26 @@ BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259AF9:: @ 8259AF9
 	waitmovement 0
 	compare VAR_0x8006, 2
 	goto_if_eq BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259E69
-	setvar VAR_0x8004, 13
-	special CallBattleFactoryFunction
-	setvar VAR_0x8004, 12
-	special CallBattleFactoryFunction
-	setvar VAR_0x8004, 14
-	special CallBattleFactoryFunction
+	factory_generaterentalmons
+	factory_generateopponentmons
+	factory_getopponentmontype
 	setorcopyvar VAR_0x8005, VAR_RESULT
-	setvar VAR_0x8004, 15
-	special CallBattleFactoryFunction
+	factory_getopponentstyle
 	setorcopyvar VAR_0x8006, VAR_RESULT
 	call BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259E93
 	call BattleFrontier_BattleFactoryPreBattleRoom_EventScript_25A004
 	msgbox BattleFrontier_BattleFactoryPreBattleRoom_Text_25A1C8, MSGBOX_DEFAULT
 	fadescreen 1
-	setvar VAR_0x8004, 8
-	special CallBattleFactoryFunction
-	setvar VAR_0x8004, 6
-	special CallBattleFactoryFunction
+	factory_setswapped
+	factory_rentmons
 	waitstate
-
 BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259B74:: @ 8259B74
 	msgbox BattleFrontier_BattleFactoryPreBattleRoom_Text_25AB96, MSGBOX_DEFAULT
 	closemessage
 	call BattleFrontier_EventScript_GetLvlMode
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, FRONTIER_LVL_50
 	call_if_eq BattleFrontier_BattleFactoryPreBattleRoom_EventScript_25A17C
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, FRONTIER_LVL_OPEN
 	call_if_eq BattleFrontier_BattleFactoryPreBattleRoom_EventScript_25A18B
 	waitmovement 0
 	warp MAP_BATTLE_FRONTIER_BATTLE_FACTORY_BATTLE_ROOM, 255, 6, 11
@@ -65,10 +58,8 @@ BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259B74:: @ 8259B74
 	end
 
 BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259BA5:: @ 8259BA5
-	setvar VAR_0x8004, 9
-	special CallBattleFactoryFunction
-	setvar VAR_0x8004, 16
-	special CallBattleFactoryFunction
+	factory_setopponentmons
+	factory_resethelditems
 	msgbox BattleFrontier_BattleFactoryPreBattleRoom_Text_25A22D, MSGBOX_DEFAULT
 	playfanfare MUS_ME_ASA
 	waitfanfare
@@ -160,13 +151,10 @@ BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259D66:: @ 8259D66
 	case MULTI_B_PRESSED, BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259C13
 
 BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259D98:: @ 8259D98
-	setvar VAR_0x8004, 12
-	special CallBattleFactoryFunction
-	setvar VAR_0x8004, 14
-	special CallBattleFactoryFunction
+	factory_generateopponentmons
+	factory_getopponentmontype
 	setorcopyvar VAR_0x8005, VAR_RESULT
-	setvar VAR_0x8004, 15
-	special CallBattleFactoryFunction
+	factory_getopponentstyle
 	setorcopyvar VAR_0x8006, VAR_RESULT
 	call BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259E93
 	call BattleFrontier_BattleFactoryPreBattleRoom_EventScript_25A004
@@ -178,13 +166,11 @@ BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259D98:: @ 8259D98
 
 BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259DF2:: @ 8259DF2
 	fadescreen 1
-	setvar VAR_0x8004, 7
-	special CallBattleFactoryFunction
+	factory_swapmons
 	waitstate
 	compare VAR_RESULT, 1
 	goto_if_eq BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259B74
-	setvar VAR_0x8004, 8
-	special CallBattleFactoryFunction
+	factory_setswapped
 	msgbox BattleFrontier_BattleFactoryPreBattleRoom_Text_25AB6C, MSGBOX_DEFAULT
 	goto BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259B74
 
@@ -221,9 +207,7 @@ BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259E40:: @ 8259E40
 BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259E47:: @ 8259E47
 	message BattleFrontier_BattleFactoryPreBattleRoom_Text_25ABAE
 	waitmessage
-	setvar VAR_0x8004, 3
-	setvar VAR_0x8005, 2
-	special CallBattleFactoryFunction
+	factory_save CHALLENGE_STATUS_PAUSED
 	playse SE_SAVE
 	waitse
 	fadescreen 1
@@ -232,50 +216,48 @@ BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259E47:: @ 8259E47
 
 BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259E69:: @ 8259E69
 	special SavePlayerParty
-	setvar VAR_0x8004, 10
-	setvar VAR_0x8005, 0
-	special CallBattleFactoryFunction
+	factory_setparties 0
 	frontier_set FRONTIER_DATA_6, 1
 	special CalculatePlayerPartyCount
 	goto BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259C13
 
 BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259E93:: @ 8259E93
 	msgbox BattleFrontier_BattleFactoryPreBattleRoom_Text_25A3B4, MSGBOX_DEFAULT
-	compare VAR_0x8005, 0
+	compare VAR_0x8005, TYPE_NORMAL
 	call_if_eq BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259F62
-	compare VAR_0x8005, 1
+	compare VAR_0x8005, TYPE_FIGHTING
 	call_if_eq BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259F6B
-	compare VAR_0x8005, 2
+	compare VAR_0x8005, TYPE_FLYING
 	call_if_eq BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259F74
-	compare VAR_0x8005, 3
+	compare VAR_0x8005, TYPE_POISON
 	call_if_eq BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259F7D
-	compare VAR_0x8005, 4
+	compare VAR_0x8005, TYPE_GROUND
 	call_if_eq BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259F86
-	compare VAR_0x8005, 5
+	compare VAR_0x8005, TYPE_ROCK
 	call_if_eq BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259F8F
-	compare VAR_0x8005, 6
+	compare VAR_0x8005, TYPE_BUG
 	call_if_eq BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259F98
-	compare VAR_0x8005, 7
+	compare VAR_0x8005, TYPE_GHOST
 	call_if_eq BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259FA1
-	compare VAR_0x8005, 8
+	compare VAR_0x8005, TYPE_STEEL
 	call_if_eq BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259FAA
-	compare VAR_0x8005, 10
+	compare VAR_0x8005, TYPE_FIRE
 	call_if_eq BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259FB3
-	compare VAR_0x8005, 11
+	compare VAR_0x8005, TYPE_WATER
 	call_if_eq BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259FBC
-	compare VAR_0x8005, 12
+	compare VAR_0x8005, TYPE_GRASS
 	call_if_eq BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259FC5
-	compare VAR_0x8005, 13
+	compare VAR_0x8005, TYPE_ELECTRIC
 	call_if_eq BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259FCE
-	compare VAR_0x8005, 14
+	compare VAR_0x8005, TYPE_PSYCHIC
 	call_if_eq BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259FD7
-	compare VAR_0x8005, 15
+	compare VAR_0x8005, TYPE_ICE
 	call_if_eq BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259FE0
-	compare VAR_0x8005, 16
+	compare VAR_0x8005, TYPE_DRAGON
 	call_if_eq BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259FE9
-	compare VAR_0x8005, 17
+	compare VAR_0x8005, TYPE_DARK
 	call_if_eq BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259FF2
-	compare VAR_0x8005, 18
+	compare VAR_0x8005, NUMBER_OF_MON_TYPES
 	call_if_eq BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259FFB
 	return
 
@@ -352,23 +334,23 @@ BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259FFB:: @ 8259FFB
 	return
 
 BattleFrontier_BattleFactoryPreBattleRoom_EventScript_25A004:: @ 825A004
-	compare VAR_0x8006, 0
+	compare VAR_0x8006, FACTORY_STYLE_NONE
 	call_if_eq BattleFrontier_BattleFactoryPreBattleRoom_EventScript_25A068
-	compare VAR_0x8006, 1
+	compare VAR_0x8006, FACTORY_STYLE_PREPARATION
 	call_if_eq BattleFrontier_BattleFactoryPreBattleRoom_EventScript_25A071
-	compare VAR_0x8006, 2
+	compare VAR_0x8006, FACTORY_STYLE_SLOW_STEADY
 	call_if_eq BattleFrontier_BattleFactoryPreBattleRoom_EventScript_25A07A
-	compare VAR_0x8006, 3
+	compare VAR_0x8006, FACTORY_STYLE_ENDURANCE
 	call_if_eq BattleFrontier_BattleFactoryPreBattleRoom_EventScript_25A083
-	compare VAR_0x8006, 4
+	compare VAR_0x8006, FACTORY_STYLE_HIGH_RISK
 	call_if_eq BattleFrontier_BattleFactoryPreBattleRoom_EventScript_25A08C
-	compare VAR_0x8006, 5
+	compare VAR_0x8006, FACTORY_STYLE_WEAKENING
 	call_if_eq BattleFrontier_BattleFactoryPreBattleRoom_EventScript_25A095
-	compare VAR_0x8006, 6
+	compare VAR_0x8006, FACTORY_STYLE_UNPREDICTABLE
 	call_if_eq BattleFrontier_BattleFactoryPreBattleRoom_EventScript_25A09E
-	compare VAR_0x8006, 7
+	compare VAR_0x8006, FACTORY_STYLE_WEATHER
 	call_if_eq BattleFrontier_BattleFactoryPreBattleRoom_EventScript_25A0A7
-	compare VAR_0x8006, 8
+	compare VAR_0x8006, FACTORY_NUM_STYLES
 	call_if_eq BattleFrontier_BattleFactoryPreBattleRoom_EventScript_25A0B0
 	return
 
