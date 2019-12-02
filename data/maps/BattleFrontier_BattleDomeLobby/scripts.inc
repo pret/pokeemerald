@@ -5,8 +5,7 @@ BattleFrontier_BattleDomeLobby_MapScripts:: @ 82497E2
 	.byte 0
 
 BattleFrontier_BattleDomeLobby_MapScript1_2497F2: @ 82497F2
-	setvar VAR_0x8004, BATTLE_DOME_FUNC_21
-	special CallBattleDomeFunction
+	dome_21
 	end
 
 BattleFrontier_BattleDomeLobby_MapScript2_2497FB: @ 82497FB

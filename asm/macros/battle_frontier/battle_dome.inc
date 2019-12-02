@@ -133,6 +133,12 @@
 	special CallBattleDomeFunction
 	.endm
 
+	@ TODO: Document this macro and its function
+	.macro dome_21
+	setvar VAR_0x8004, BATTLE_DOME_FUNC_21
+	special CallBattleDomeFunction
+	.endm
+
 	@
 	.macro dome_inittrainers
 	setvar VAR_0x8004, BATTLE_DOME_FUNC_INIT_TRAINERS

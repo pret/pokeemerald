@@ -1,4 +1,4 @@
-@ TODO: Add explanatory comments
+@ TODO: Add explanatory comments to macros
 
 	@
 	.macro pike_setnextroom
@@ -6,14 +6,14 @@
 	special CallBattlePikeFunction
 	.endm
 
-	@
+	@ Get the value of some PIKE_DATA_*. See GetBattlePikeData for the data types that can be retrieved
 	.macro pike_get data:req
 	setvar VAR_0x8004, BATTLE_PIKE_FUNC_GET_DATA
 	setvar VAR_0x8005, \data
 	special CallBattlePikeFunction
 	.endm
 
-	@
+	@ Set some PIKE_DATA_* to val. See SetBattlePikeData for the data types that can be set
 	.macro pike_set data:req, val:req
 	setvar VAR_0x8004, BATTLE_PIKE_FUNC_SET_DATA
 	setvar VAR_0x8005, \data
@@ -166,7 +166,7 @@
 	special CallBattlePikeFunction
 	.endm
 
-	@ Initialize the Battle Arena challenge
+	@ Initialize the Battle Pike challenge
 	.macro pike_init
 	setvar VAR_0x8004, BATTLE_PIKE_FUNC_INIT
 	special CallBattlePikeFunction
