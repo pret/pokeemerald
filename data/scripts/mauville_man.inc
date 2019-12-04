@@ -289,7 +289,8 @@ MauvilleCity_PokemonCenter_1F_Text_HaveYouAnyLegendaryTales: @ 828E7EE
 	.string "Then tell me, have you any tales that\n"
 	.string "are even remotely legendary?$"
 
-MauvilleCity_PokemonCenter_1F_Text_28E844: @ 828E844
+@ Unused
+MauvilleCity_PokemonCenter_1F_Text_HearAnotherLegendaryTale: @ 828E844
 	.string "Incidentally… Would you care to hear\n"
 	.string "another legendary tale?$"
 

@@ -453,25 +453,25 @@ BattleFrontier_ExchangeServiceCorner_EventScript_ScopeLens:: @ 825F7A8
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Man:: @ 825F7CB
-	msgbox BattleFrontier_ExchangeServiceCorner_Text_260099, MSGBOX_NPC
+	msgbox BattleFrontier_ExchangeServiceCorner_Text_GoGetYourOwnDoll, MSGBOX_NPC
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Sailor:: @ 825F7D4
-	msgbox BattleFrontier_ExchangeServiceCorner_Text_26002E, MSGBOX_NPC
+	msgbox BattleFrontier_ExchangeServiceCorner_Text_ItemsWillGetMonTougher, MSGBOX_NPC
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_PokefanF:: @ 825F7DD
 	lock
-	msgbox BattleFrontier_ExchangeServiceCorner_Text_25FFD0, MSGBOX_DEFAULT
+	msgbox BattleFrontier_ExchangeServiceCorner_Text_GetYouAnythingYouWant, MSGBOX_DEFAULT
 	release
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_RichBoy:: @ 825F7E8
-	msgbox BattleFrontier_ExchangeServiceCorner_Text_25FF5D, MSGBOX_NPC
+	msgbox BattleFrontier_ExchangeServiceCorner_Text_WishIHadAllDolls, MSGBOX_NPC
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Girl:: @ 825F7F1
-	msgbox BattleFrontier_ExchangeServiceCorner_Text_26012D, MSGBOX_NPC
+	msgbox BattleFrontier_ExchangeServiceCorner_Text_MoreBattlePointsForRecord, MSGBOX_NPC
 	end
 
 BattleFrontier_ExchangeServiceCorner_Text_WelcomePleaseChoosePrize: @ 825F7FA
@@ -629,7 +629,7 @@ BattleFrontier_ExchangeServiceCorner_Text_ThankYouVisitWithPoints: @ 825FF12
 	.string "Please visit us when you have\n"
 	.string "saved up Battle Points.$"
 
-BattleFrontier_ExchangeServiceCorner_Text_25FF5D: @ 825FF5D
+BattleFrontier_ExchangeServiceCorner_Text_WishIHadAllDolls: @ 825FF5D
 	.string "Oh, they're so nice!\n"
 	.string "I wish I had them!\l"
 	.string "Cute cushions!\l"
@@ -637,18 +637,18 @@ BattleFrontier_ExchangeServiceCorner_Text_25FF5D: @ 825FF5D
 	.string "Little plush DOLLS!\l"
 	.string "I wish I had them all!$"
 
-BattleFrontier_ExchangeServiceCorner_Text_25FFD0: @ 825FFD0
+BattleFrontier_ExchangeServiceCorner_Text_GetYouAnythingYouWant: @ 825FFD0
 	.string "Leave it to your mommy!\p"
 	.string "If it's anything you want, I'll go\n"
 	.string "through anything to get it, honey!$"
 
-BattleFrontier_ExchangeServiceCorner_Text_26002E: @ 826002E
+BattleFrontier_ExchangeServiceCorner_Text_ItemsWillGetMonTougher: @ 826002E
 	.string "If I can get hold of the items here,\n"
 	.string "my POKéMON will get tougher.\p"
 	.string "You bet they will!\n"
 	.string "No question about it!$"
 
-BattleFrontier_ExchangeServiceCorner_Text_260099: @ 8260099
+BattleFrontier_ExchangeServiceCorner_Text_GoGetYourOwnDoll: @ 8260099
 	.string "Hah?\n"
 	.string "What are you gawking at?\p"
 	.string "I don't like you staring at my plush\n"
@@ -656,7 +656,7 @@ BattleFrontier_ExchangeServiceCorner_Text_260099: @ 8260099
 	.string "If you want it, go get one yourself!\n"
 	.string "Isn't that right, SMOOCHUM?$"
 
-BattleFrontier_ExchangeServiceCorner_Text_26012D: @ 826012D
+BattleFrontier_ExchangeServiceCorner_Text_MoreBattlePointsForRecord: @ 826012D
 	.string "Did you know?\p"
 	.string "If you stretch your record at any of\n"
 	.string "the BATTLE facilities, they start\l"
