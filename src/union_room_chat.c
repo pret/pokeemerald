@@ -461,8 +461,8 @@ const struct SpritePalette gUnknown_082F315C = {
 };
 
 const struct OamData gUnknown_082F3164 = {
-    .shape = ST_OAM_H_RECTANGLE,
-    .size = 3,
+    .shape = SPRITE_SHAPE(64x32),
+    .size = SPRITE_SIZE(64x32),
     .priority = 1
 };
 
@@ -504,8 +504,8 @@ const struct SpriteTemplate gUnknown_082F319C = {
 };
 
 const struct OamData gUnknown_082F31B4 = {
-    .shape = ST_OAM_V_RECTANGLE,
-    .size = 0,
+    .shape = SPRITE_SHAPE(8x16),
+    .size = SPRITE_SIZE(8x16),
     .priority = 2
 };
 
@@ -530,14 +530,14 @@ const struct SpriteTemplate gUnknown_082F31D4 = {
 };
 
 const struct OamData gUnknown_082F31EC = {
-    .shape = ST_OAM_SQUARE,
-    .size = 1,
+    .shape = SPRITE_SHAPE(16x16),
+    .size = SPRITE_SIZE(16x16),
     .priority = 2
 };
 
 const struct OamData gUnknown_082F31F4 = {
-    .shape = ST_OAM_H_RECTANGLE,
-    .size = 2,
+    .shape = SPRITE_SHAPE(32x16),
+    .size = SPRITE_SIZE(32x16),
     .priority = 2
 };
 

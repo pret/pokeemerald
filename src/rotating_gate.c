@@ -233,7 +233,7 @@ static const struct OamData sOamData_RotatingGateLarge =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_NORMAL,
-    .objMode = 0,
+    .objMode = ST_OAM_OBJ_NORMAL,
     .mosaic = 0,
     .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(64x64),
@@ -250,7 +250,7 @@ static const struct OamData sOamData_RotatingGateRegular =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_NORMAL,
-    .objMode = 0,
+    .objMode = ST_OAM_OBJ_NORMAL,
     .mosaic = 0,
     .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(32x32),
