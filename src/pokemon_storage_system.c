@@ -4569,7 +4569,7 @@ static void sub_80CB028(u8 boxId)
         for (boxPosition = 0; boxPosition < IN_BOX_COUNT; boxPosition++)
         {
             if (GetBoxMonDataAt(boxId, boxPosition, MON_DATA_HELD_ITEM) == 0)
-                sPSSData->boxMonsSprites[boxPosition]->oam.objMode = 1;
+                sPSSData->boxMonsSprites[boxPosition]->oam.objMode = ST_OAM_OBJ_BLEND;
         }
     }
 }
@@ -4586,7 +4586,7 @@ static void sub_80CB140(u8 boxPosition)
 
         sPSSData->boxMonsSprites[boxPosition] = CreateMonIconSprite(species, personality, x, y, 2, 19 - (boxPosition % IN_BOX_ROWS));
         if (sPSSData->boxOption == BOX_OPTION_MOVE_ITEMS)
-            sPSSData->boxMonsSprites[boxPosition]->oam.objMode = 1;
+            sPSSData->boxMonsSprites[boxPosition]->oam.objMode = ST_OAM_OBJ_BLEND;
     }
 }
 
@@ -4699,7 +4699,7 @@ static u8 sub_80CB2F8(u8 row, u16 times, s16 xDelta)
                     sPSSData->boxMonsSprites[boxPosition]->data[3] = xDest;
                     sPSSData->boxMonsSprites[boxPosition]->callback = sub_80CB234;
                     if (GetBoxMonDataAt(sPSSData->field_C5C, boxPosition, MON_DATA_HELD_ITEM) == 0)
-                        sPSSData->boxMonsSprites[boxPosition]->oam.objMode = 1;
+                        sPSSData->boxMonsSprites[boxPosition]->oam.objMode = ST_OAM_OBJ_BLEND;
                     count++;
                 }
             }
@@ -4846,7 +4846,7 @@ static void CreatePartyMonsSprites(bool8 arg0)
         for (i = 0; i < PARTY_SIZE; i++)
         {
             if (sPSSData->partySprites[i] != NULL && GetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM) == 0)
-                sPSSData->partySprites[i]->oam.objMode = 1;
+                sPSSData->partySprites[i]->oam.objMode = ST_OAM_OBJ_BLEND;
         }
     }
 }
@@ -5087,7 +5087,7 @@ static void sub_80CBF14(u8 mode, u8 position)
     if (*sPSSData->field_B04 != NULL)
     {
         InitSpriteAffineAnim(*sPSSData->field_B04);
-        (*sPSSData->field_B04)->oam.affineMode = 1;
+        (*sPSSData->field_B04)->oam.affineMode = ST_OAM_AFFINE_NORMAL;
         (*sPSSData->field_B04)->affineAnims = gSpriteAffineAnimTable_857291C;
         StartSpriteAffineAnim(*sPSSData->field_B04, 0);
     }

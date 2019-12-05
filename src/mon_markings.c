@@ -520,12 +520,12 @@ static void sub_811FC80(s16 x, s16 y, u16 baseTileTag, u16 basePaletteTag)
     if (spriteId != MAX_SPRITES)
     {
         sMenu->menuTextSprite = &gSprites[spriteId];
-        sMenu->menuTextSprite->oam.shape = ST_OAM_SQUARE;
-        sMenu->menuTextSprite->oam.size = 2;
+        sMenu->menuTextSprite->oam.shape = SPRITE_SHAPE(32x32);
+        sMenu->menuTextSprite->oam.size = SPRITE_SIZE(32x32);
         StartSpriteAnim(sMenu->menuTextSprite, 9);
         sMenu->menuTextSprite->pos1.x = x + MENU_TEXT_SPRITE_X_OFFSET;
         sMenu->menuTextSprite->pos1.y = y + 80;
-        CalcCenterToCornerVec(sMenu->menuTextSprite, 1, 2, 0);
+        CalcCenterToCornerVec(sMenu->menuTextSprite, SPRITE_SHAPE(32x16), SPRITE_SIZE(32x16), ST_OAM_AFFINE_OFF);
     }
     else
     {

@@ -1302,8 +1302,8 @@ void sub_8167760(void)
     if (spriteId != MAX_SPRITES)
     {
         gUnknown_0203BCAC->field_7B06[i] = spriteId;
-        gSprites[spriteId].oam.shape = 1;
-        gSprites[spriteId].oam.size = 2;
+        gSprites[spriteId].oam.shape = SPRITE_SHAPE(32x16);
+        gSprites[spriteId].oam.size = SPRITE_SIZE(32x16);
     }
     else
     {

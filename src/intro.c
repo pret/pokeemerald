@@ -2568,9 +2568,9 @@ static void sub_816F3A4(struct Sprite *sprite)
         sprite->data[2] = 1024;
         sprite->data[3] = 8 * (sprite->data[1] & 3);
         sprite->callback = sub_816F318;
-        sprite->oam.shape = 1;
-        sprite->oam.size = 3;
-        CalcCenterToCornerVec(sprite, 1, 3, 2);
+        sprite->oam.shape = SPRITE_SHAPE(64x32);
+        sprite->oam.size = SPRITE_SIZE(64x32);
+        CalcCenterToCornerVec(sprite, SPRITE_SHAPE(64x32), SPRITE_SIZE(64x32), ST_OAM_AFFINE_ERASE);
     }
     else
     {
@@ -2690,9 +2690,9 @@ static void SpriteCB_WaterDropFall(struct Sprite *sprite)
         sprite->data[2] = 1024;
         sprite->data[3] = 8 * (sprite->data[1] & 3);
         sprite->callback = sub_816F318;
-        sprite->oam.shape = 1;
-        sprite->oam.size = 3;
-        CalcCenterToCornerVec(sprite, 1, 3, 2);
+        sprite->oam.shape = SPRITE_SHAPE(64x32);
+        sprite->oam.size = SPRITE_SIZE(64x32);
+        CalcCenterToCornerVec(sprite, SPRITE_SHAPE(64x32), SPRITE_SIZE(64x32), ST_OAM_AFFINE_ERASE);
     }
 }
 
@@ -2713,9 +2713,9 @@ static void SpriteCB_WaterDropFall_2(struct Sprite *sprite)
         sprite->data[2] = 1024;
         sprite->data[3] = 8 * (sprite->data[1] & 3);
         sprite->callback = sub_816F318;
-        sprite->oam.shape = 1;
-        sprite->oam.size = 3;
-        CalcCenterToCornerVec(sprite, 1, 3, 2);
+        sprite->oam.shape = SPRITE_SHAPE(64x32);
+        sprite->oam.size = SPRITE_SIZE(64x32);
+        CalcCenterToCornerVec(sprite, SPRITE_SHAPE(64x32), SPRITE_SIZE(64x32), ST_OAM_AFFINE_ERASE);
     }
 }
 
@@ -2732,9 +2732,9 @@ static u8 CreateWaterDrop(s16 x, s16 y, u16 c, u16 d, u16 e, u8 fallImmediately)
     gSprites[spriteId].data[3] = c;
     gSprites[spriteId].data[5] = e;
     gSprites[spriteId].data[6] = c;
-    gSprites[spriteId].oam.affineMode = 3;
+    gSprites[spriteId].oam.affineMode = ST_OAM_AFFINE_DOUBLE;
     gSprites[spriteId].oam.matrixNum = d;
-    CalcCenterToCornerVec(&gSprites[spriteId], 0, 2, 2);
+    CalcCenterToCornerVec(&gSprites[spriteId], SPRITE_SHAPE(32x32), SPRITE_SIZE(32x32), ST_OAM_AFFINE_ERASE);
     StartSpriteAnim(&gSprites[spriteId], 2);
     if (!fallImmediately)
         gSprites[spriteId].callback = sub_816F454;
@@ -2745,18 +2745,18 @@ static u8 CreateWaterDrop(s16 x, s16 y, u16 c, u16 d, u16 e, u8 fallImmediately)
     spriteId = CreateSprite(&gIntroWaterDropSprite, x, y, 1);
     gSprites[spriteId].data[7] = oldSpriteId;
     gSprites[spriteId].data[1] = d + 1;
-    gSprites[spriteId].oam.affineMode = 3;
+    gSprites[spriteId].oam.affineMode = ST_OAM_AFFINE_DOUBLE;
     gSprites[spriteId].oam.matrixNum = d + 1;
-    CalcCenterToCornerVec(&gSprites[spriteId], 0, 2, 2);
+    CalcCenterToCornerVec(&gSprites[spriteId], SPRITE_SHAPE(32x32), SPRITE_SIZE(32x32), ST_OAM_AFFINE_ERASE);
     gSprites[spriteId].callback = sub_816F3A4;
 
     spriteId = CreateSprite(&gIntroWaterDropSprite, x, y, 1);
     gSprites[spriteId].data[7] = oldSpriteId;
     gSprites[spriteId].data[1] = d + 2;
     StartSpriteAnim(&gSprites[spriteId], 1);
-    gSprites[spriteId].oam.affineMode = 3;
+    gSprites[spriteId].oam.affineMode = ST_OAM_AFFINE_DOUBLE;
     gSprites[spriteId].oam.matrixNum = d + 2;
-    CalcCenterToCornerVec(&gSprites[spriteId], 0, 2, 2);
+    CalcCenterToCornerVec(&gSprites[spriteId], SPRITE_SHAPE(32x32), SPRITE_SIZE(32x32), ST_OAM_AFFINE_ERASE);
     gSprites[spriteId].callback = sub_816F3A4;
 
     SetOamMatrix(d, c + 32, 0, 0, c + 32);
@@ -2915,7 +2915,7 @@ static void sub_816FB38(struct Sprite *sprite)
         if (gIntroFrameCounter == 0x110)
         {
             StartSpriteAffineAnim(sprite, 2);
-            sprite->oam.objMode = 1;
+            sprite->oam.objMode = ST_OAM_OBJ_BLEND;
             sprite->data[0]++;
         }
         break;
@@ -3008,9 +3008,9 @@ static void sub_816FEDC(struct Sprite *sprite)
     {
     case 0:
     default:
-        sprite->oam.affineMode = 3;
+        sprite->oam.affineMode = ST_OAM_AFFINE_DOUBLE;
         sprite->oam.matrixNum = 1;
-        CalcCenterToCornerVec(sprite, 1, 3, 3);
+        CalcCenterToCornerVec(sprite, SPRITE_SHAPE(64x32), SPRITE_SIZE(64x32), ST_OAM_AFFINE_DOUBLE);
         sprite->invisible = FALSE;
         sprite->data[0] = 1;
         sprite->data[1] = 0x80;
@@ -3054,9 +3054,9 @@ static void SpriteCB_IntroRayquazaHyperbeam(struct Sprite *sprite)
     case 0:
     default:
         sprite->invisible = FALSE;
-        sprite->oam.affineMode = 3;
+        sprite->oam.affineMode = ST_OAM_AFFINE_DOUBLE;
         sprite->oam.matrixNum = 18;
-        CalcCenterToCornerVec(sprite, 0, 3, 3);
+        CalcCenterToCornerVec(sprite, SPRITE_SHAPE(64x64), SPRITE_SIZE(64x64), ST_OAM_AFFINE_DOUBLE);
         sprite->data[1] = 0;
         sprite->data[0] = 1;
         //fall through

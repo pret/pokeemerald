@@ -659,7 +659,7 @@ void sub_810F6B0(struct Sprite *sprite)
 
 static void sub_810F740(struct Sprite *sprite)
 {
-    sprite->oam.affineMode = 1;
+    sprite->oam.affineMode = ST_OAM_AFFINE_NORMAL;
     sprite->affineAnims = gUnknown_08596740;
     sprite->data[0] = 0;
     InitSpriteAffineAnim(sprite);
@@ -674,7 +674,7 @@ static void sub_810F774(struct Sprite *sprite)
         if (sprite->affineAnimEnded)
         {
             FreeOamMatrix(sprite->oam.matrixNum);
-            sprite->oam.affineMode = 0;
+            sprite->oam.affineMode = ST_OAM_AFFINE_OFF;
             sprite->data[1] = 18;
             sprite->data[0]++;
         }

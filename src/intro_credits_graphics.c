@@ -1026,7 +1026,7 @@ static void sub_817B698(u8 a, const struct IntroCreditsSpriteMetadata *b, const 
     for(i = 0; i < d; i++)
     {
         u8 sprite = CreateSprite(&gUnknown_085F504C, b[i].x, b[i].y, b[i].subpriority);
-        CalcCenterToCornerVec(&gSprites[sprite], b[i].shape, b[i].size, 0);
+        CalcCenterToCornerVec(&gSprites[sprite], b[i].shape, b[i].size, ST_OAM_AFFINE_OFF);
         gSprites[sprite].oam.priority = 3;
         gSprites[sprite].oam.shape = b[i].shape;
         gSprites[sprite].oam.size = b[i].size;
