@@ -76,7 +76,7 @@ void ToggleMatchCallArrows(struct PokenavSub17Substruct *a0, u32 a1);
 void sub_81C8FE0(struct PokenavSub17Substruct *a0);
 void sub_81C8EF8(struct MatchCallWindowState *a0, struct PokenavSub17Substruct *a1);
 void sub_81C8ED0(void);
-void sub_81C8E54(struct MatchCallWindowState *a0, struct PokenavSub17Substruct *a1, u32 a2);
+static void PrintMatchCallFlavorText(struct MatchCallWindowState *a0, struct PokenavSub17Substruct *a1, u32 a2);
 void PrintMatchCallFieldNames(struct PokenavSub17Substruct *a0, u32 a1);
 void sub_81C8D4C(struct MatchCallWindowState *a0, struct PokenavSub17Substruct *a1);
 void sub_81C8CB4(struct MatchCallWindowState *a0, struct PokenavSub17Substruct *a1);
@@ -558,22 +558,22 @@ u32 LoopedTask_sub_81C8958(s32 state)
         PrintMatchCallFieldNames(&structPtr->unk0, 0);
         break;
     case 2:
-        sub_81C8E54(&structPtr->unk888, &structPtr->unk0, 0);
+        PrintMatchCallFlavorText(&structPtr->unk888, &structPtr->unk0, CHECK_PAGE_STRATEGY);
         break;
     case 3:
         PrintMatchCallFieldNames(&structPtr->unk0, 1);
         break;
     case 4:
-        sub_81C8E54(&structPtr->unk888, &structPtr->unk0, 1);
+        PrintMatchCallFlavorText(&structPtr->unk888, &structPtr->unk0, CHECK_PAGE_POKEMON);
         break;
     case 5:
         PrintMatchCallFieldNames(&structPtr->unk0, 2);
         break;
     case 6:
-        sub_81C8E54(&structPtr->unk888, &structPtr->unk0, 2);
+        PrintMatchCallFlavorText(&structPtr->unk888, &structPtr->unk0, CHECK_PAGE_INTRO_1);
         break;
     case 7:
-        sub_81C8E54(&structPtr->unk888, &structPtr->unk0, 3);
+        PrintMatchCallFlavorText(&structPtr->unk888, &structPtr->unk0, CHECK_PAGE_INTRO_2);
         break;
     default:
         return LT_FINISH;
@@ -705,7 +705,7 @@ void sub_81C8C64(struct UnknownSubSubStruct_0203CF40 *a0, u32 a1)
 
 void sub_81C8CB4(struct MatchCallWindowState *a0, struct PokenavSub17Substruct *a1)
 {
-    u8 colors[3] = {0, 2, 5};
+    u8 colors[3] = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_DARK_GREY, TEXT_COLOR_LIGHT_RED};
 
     a1->unk34(a0->unk10 + a0->unkC * a0->windowTopIndex, a1->unkTextBuffer);
     a1->unk38(a1->unk0.windowId, a0->windowTopIndex, a1->unk0.unkA);
@@ -727,7 +727,7 @@ void sub_81C8D4C(struct MatchCallWindowState *a0, struct PokenavSub17Substruct *
 void PrintMatchCallFieldNames(struct PokenavSub17Substruct *a0, u32 fieldId)
 {
     const u8 *fieldNames[] = {gText_PokenavMatchCall_Strategy, gText_PokenavMatchCall_TrainerPokemon, gText_PokenavMatchCall_SelfIntroduction};
-    u8 colors[3] = {1, 4, 5};
+    u8 colors[3] = {TEXT_COLOR_WHITE, TEXT_COLOR_RED, TEXT_COLOR_LIGHT_RED};
     u32 top = (a0->unk0.unkA + 1 + (fieldId * 2)) & 0xF;
 
     FillWindowPixelRect(a0->unk0.windowId, PIXEL_FILL(1), 0, top << 4, a0->unk0.unk4, 16);
@@ -735,11 +735,19 @@ void PrintMatchCallFieldNames(struct PokenavSub17Substruct *a0, u32 fieldId)
     CopyWindowRectToVram(a0->unk0.windowId, 2, 0, top << 1, a0->unk0.unk4, 2);
 }
 
-void sub_81C8E54(struct MatchCallWindowState *a0, struct PokenavSub17Substruct *a1, u32 a2)
+static void PrintMatchCallFlavorText(struct MatchCallWindowState *a0, struct PokenavSub17Substruct *a1, u32 checkPageEntry)
 {
-    static const u8 array[] = {2, 4, 6, 7};
-    u32 r6 = (a1->unk0.unkA + array[a2]) & 0xF;
-    const u8 *str = sub_81CAFD8(a0->windowTopIndex, a2);
+    // lines 1, 3, and 5 are the field names printed by PrintMatchCallFieldNames
+    static const u8 lineOffsets[CHECK_PAGE_ENTRY_COUNT] = 
+    {
+        [CHECK_PAGE_STRATEGY] = 2, 
+        [CHECK_PAGE_POKEMON]  = 4, 
+        [CHECK_PAGE_INTRO_1]  = 6, 
+        [CHECK_PAGE_INTRO_2]  = 7
+    };
+
+    u32 r6 = (a1->unk0.unkA + lineOffsets[checkPageEntry]) & 0xF;
+    const u8 *str = GetMatchCallFlavorText(a0->windowTopIndex, checkPageEntry);
 
     if (str != NULL)
     {

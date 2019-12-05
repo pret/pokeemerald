@@ -151,9 +151,9 @@ static u32 (*sub_81C93EC(void))(struct Pokenav1Struct*)
     default:
     case POKENAV_MODE_NORMAL:
         return sub_81C943C;
-    case POKENAV_MODE_FORCE_CALL_1:
+    case POKENAV_MODE_FORCE_CALL_READY:
         return sub_81C9520;
-    case POKENAV_MODE_FORCE_CALL_2:
+    case POKENAV_MODE_FORCE_CALL_EXIT:
         return sub_81C9588;
     }
 }

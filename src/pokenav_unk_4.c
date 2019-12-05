@@ -197,11 +197,11 @@ const struct WindowTemplate gUnknown_086227E0 =
     .baseBlock = 38
 };
 
-const u8 *const gUnknown_086227E8[] = 
+static const u8 *const sMatchCallOptionTexts[MATCH_CALL_OPTION_COUNT] = 
 {
-    gUnknown_085EC017,
-    gUnknown_085EC01C,
-    gUnknown_085EC022
+    [MATCH_CALL_OPTION_CALL]   = gText_Call,
+    [MATCH_CALL_OPTION_CHECK]  = gText_Check,
+    [MATCH_CALL_OPTION_CANCEL] = gText_Cancel6
 };
 
 const u8 gUnknown_086227F4[] = _("·{PAUSE 0x04}·{PAUSE 0x04}·{PAUSE 0x04}·{PAUSE 0x04}·\p");
@@ -1022,13 +1022,13 @@ static void sub_81CBF60(struct Pokenav4Struct *state)
     u32 i;
 
     FillWindowPixelBuffer(state->unk12, PIXEL_FILL(1));
-    for (i = 0; i < 3; i++)
+    for (i = 0; i < MATCH_CALL_OPTION_COUNT; i++)
     {
-        int messageId = sub_81CB02C(i);
-        if (messageId == 3)
+        int optionText = sub_81CB02C(i);
+        if (optionText == MATCH_CALL_OPTION_COUNT)
             break;
 
-        AddTextPrinterParameterized(state->unk12, 7, gUnknown_086227E8[messageId], 16, i * 16 + 1, TEXT_SPEED_FF, NULL);
+        AddTextPrinterParameterized(state->unk12, 7, sMatchCallOptionTexts[optionText], 16, i * 16 + 1, TEXT_SPEED_FF, NULL);
     }
 
     CopyWindowToVram(state->unk12, 2);
@@ -1226,11 +1226,11 @@ static struct Sprite *sub_81CC370(void)
 static void sub_81CC39C(struct Pokenav4Struct *state)
 {
     u16 cursor;
-    int trainerId = sub_81CAF04(GetSelectedMatchCall());
-    if (trainerId >= 0)
+    int trainerPic = GetMatchCallTrainerPic(GetSelectedMatchCall());
+    if (trainerPic >= 0)
     {
-        DecompressPicFromTable(&gTrainerFrontPicTable[trainerId], state->unk1828, SPECIES_NONE);
-        LZ77UnCompWram(gTrainerFrontPicPaletteTable[trainerId].data, state->unk2028);
+        DecompressPicFromTable(&gTrainerFrontPicTable[trainerPic], state->unk1828, SPECIES_NONE);
+        LZ77UnCompWram(gTrainerFrontPicPaletteTable[trainerPic].data, state->unk2028);
         cursor = RequestDma3Copy(state->unk1828, state->unk1824, 0x800, 1);
         LoadPalette(state->unk2028, state->unk1A, 0x20);
         state->unk20->data[0] = 0;

@@ -7,11 +7,12 @@
 
 typedef u32 (*LoopedTask)(s32 state);
 
+// TODO: This struct is also used generally by Match Call, should probably be renamed
 struct PokenavMonList
 {
-    u8 boxId;
-    u8 monId;
-    u16 unk6;
+    u8 id1;
+    u8 id2;
+    u16 data;
 };
 
 struct PokenavSub18
@@ -32,8 +33,8 @@ struct PokenavSub18
 enum
 {
     POKENAV_MODE_NORMAL, // Chosen from Start menu.
-    POKENAV_MODE_FORCE_CALL_1, // Used for the script's special. Has to choose Match Call and make a call.
-    POKENAV_MODE_FORCE_CALL_2, // Set after making a call, has to exit Pokenav.
+    POKENAV_MODE_FORCE_CALL_READY, // When player is forced to call Mr. Stone for pokenav tutorial
+    POKENAV_MODE_FORCE_CALL_EXIT,     // Forced to exit fter being calling Mr. Stone for pokenav tutorial
 };
 
 #define POKENAV_MENU_IDS_START 100000
@@ -81,6 +82,28 @@ enum
 	MC_HEADER_WALLACE,
 	MC_HEADER_COUNT
 };
+
+enum
+{
+    MATCH_CALL_OPTION_CALL,
+    MATCH_CALL_OPTION_CHECK,
+    MATCH_CALL_OPTION_CANCEL,
+    MATCH_CALL_OPTION_COUNT
+};
+
+enum
+{
+    CHECK_PAGE_STRATEGY,
+    CHECK_PAGE_POKEMON,
+    CHECK_PAGE_INTRO_1,
+    CHECK_PAGE_INTRO_2,
+    CHECK_PAGE_ENTRY_COUNT
+};
+
+#define MCFLAVOR(name) {[CHECK_PAGE_STRATEGY] = gText_MatchCall##name##_Strategy, \
+                        [CHECK_PAGE_POKEMON]  = gText_MatchCall##name##_Pokemon,  \
+                        [CHECK_PAGE_INTRO_1]  = gText_MatchCall##name##_Intro1,   \
+                        [CHECK_PAGE_INTRO_2]  = gText_MatchCall##name##_Intro2}
 
 // pokenav.c
 void sub_81C7694(u32);
@@ -207,14 +230,14 @@ int sub_81CAE48(void);
 struct PokenavMonList *sub_81CAE94(void);
 u16 sub_81CAEA4(int);
 bool32 sub_81CAEBC(int index);
-int sub_81CAF04(int index);
-const u8 *sub_81CAFD8(int index, int textType);
+int GetMatchCallTrainerPic(int index);
+const u8 *GetMatchCallFlavorText(int index, int textType);
 u16 sub_81CB01C(void);
 u16 sub_81CB02C(int arg0);
 void sub_81CB050(struct PokenavMonList * arg0, u8 *str);
 u8 sub_81CB0C8(int rematchIndex);
 int sub_81CB0E4(int index);
-bool32 sub_81CAE08(int);
+bool32 IsRematchEntryRegistered(int index);
 int sub_81CB128(int index);
 
 // pokenav_unk_4.c

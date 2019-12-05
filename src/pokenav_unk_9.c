@@ -8,6 +8,9 @@
 #include "international_string_util.h"
 #include "constants/songs.h"
 
+#define boxId id1 // naming multi-purpose field
+#define monId id2 // naming multi-purpose field
+
 struct PokenavSub9
 {
     u32 (*unk0)(struct PokenavSub9*);
@@ -218,7 +221,7 @@ static s32 sub_81CFB48(void)
 {
     struct PokenavSub9 * ptr = GetSubstructPtr(9);
     s32 idx = GetSelectedMatchCall();
-    return ptr->unk1C->unk4[idx].unk6;
+    return ptr->unk1C->unk4[idx].data;
 }
 
 static s32 sub_81CFB64(void)
@@ -240,7 +243,7 @@ static u32 sub_81CFB8C(s32 state)
 
     ptr->unk1C->unk0 = 0;
     ptr->unk1C->unk2 = 0;
-    item.boxId = 14;
+    item.boxId = TOTAL_BOXES_COUNT;
     for (i = 0; i < PARTY_SIZE; i++)
     {
         struct Pokemon * pokemon = &gPlayerParty[i];
@@ -252,7 +255,7 @@ static u32 sub_81CFB8C(s32 state)
             if (ribbonCount != 0)
             {
                 item.monId = i;
-                item.unk6 = ribbonCount;
+                item.data = ribbonCount;
                 sub_81CFCEC(ptr, &item);
             }
         }
@@ -288,13 +291,13 @@ static u32 sub_81CFC40(s32 state)
                 {
                     item.boxId = boxId;
                     item.monId = monId;
-                    item.unk6 = ribbonCount;
+                    item.data = ribbonCount;
                     sub_81CFCEC(ptr, &item);
                 }
             }
             boxCount++;
             monId++;
-            if (boxCount > 14)
+            if (boxCount > TOTAL_BOXES_COUNT)
             {
                 ptr->unkC = boxId;
                 ptr->unk10 = monId;
@@ -317,7 +320,7 @@ static void sub_81CFCEC(struct PokenavSub9 *structPtr, struct PokenavMonList *it
 
     while (right != insertionIdx)
     {
-        if (item->unk6 > structPtr->unk1C->unk4[insertionIdx].unk6)
+        if (item->data > structPtr->unk1C->unk4[insertionIdx].data)
             right = insertionIdx;
         else
             left = insertionIdx + 1;
@@ -688,7 +691,7 @@ static void sub_81D035C(struct PokenavMonList * item0, u8 * dest)
     u8 * s;
     const u8 * genderStr;
     struct PokenavMonList * item = item0;
-    if (item->boxId == 14)
+    if (item->boxId == TOTAL_BOXES_COUNT)
     {
         struct Pokemon * mon = &gPlayerParty[item->monId];
         gender = GetMonGender(mon);
@@ -722,5 +725,5 @@ static void sub_81D035C(struct PokenavMonList * item0, u8 * dest)
     *s++ = 5; // LV
     ConvertIntToDecimalStringN(s, level, STR_CONV_MODE_LEFT_ALIGN, 3);
     dest = sub_81DB494(dest, 1, gStringVar1, 54);
-    ConvertIntToDecimalStringN(dest, item->unk6, STR_CONV_MODE_RIGHT_ALIGN, 2);
+    ConvertIntToDecimalStringN(dest, item->data, STR_CONV_MODE_RIGHT_ALIGN, 2);
 }

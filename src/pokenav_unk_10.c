@@ -13,6 +13,9 @@
 #include "window.h"
 #include "constants/songs.h"
 
+#define boxId id1 // naming multi-purpose field
+#define monId id2 // naming multi-purpose field
+
 struct PokenavSub13
 {
     u8 filler0[0x8];
