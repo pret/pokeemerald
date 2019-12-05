@@ -41,7 +41,7 @@ static const struct OamData gUnknown_0860B064 =
 
 static const struct OamData gUnknown_0860B06C =
 {
-    .affineMode = 1,
+    .affineMode = ST_OAM_AFFINE_NORMAL,
     .shape = SPRITE_SHAPE(64x64),
     .size = SPRITE_SIZE(64x64)
 };

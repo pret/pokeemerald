@@ -3557,8 +3557,8 @@ static void sub_802DD08(void)
     struct UnkStruct3 unkStruct;
     struct UnkStruct3 *ptr = &unkStruct; // This temp variable is needed to match, don't ask me why.
 
-    ptr->shape = 0;
-    ptr->size = 0;
+    ptr->shape = SPRITE_SHAPE(8x8);
+    ptr->size = SPRITE_SIZE(8x8);
     ptr->field_0_0 = 0;
     ptr->priority = 1;
     ptr->field_1 = 5;
