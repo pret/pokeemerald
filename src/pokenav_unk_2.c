@@ -1030,7 +1030,7 @@ static void sub_81CA4AC(struct Sprite * sprite)
             {
                 sprite->invisible = TRUE;
                 FreeOamMatrix(sprite->oam.matrixNum);
-                CalcCenterToCornerVec(sprite, sprite->oam.shape, sprite->oam.size, 0);
+                CalcCenterToCornerVec(sprite, sprite->oam.shape, sprite->oam.size, ST_OAM_AFFINE_OFF);
                 sprite->oam.affineMode = ST_OAM_AFFINE_OFF;
                 sprite->oam.objMode = ST_OAM_OBJ_NORMAL;
                 sprite->callback = SpriteCallbackDummy;

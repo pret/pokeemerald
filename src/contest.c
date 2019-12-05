@@ -414,16 +414,16 @@ const struct Subsprite gSubspriteTable_8587B78[] =
     {
         .x = -28,
         .y = -4,
-        .shape = ST_OAM_H_RECTANGLE,
-        .size = 1,
+        .shape = SPRITE_SHAPE(32x8),
+        .size = SPRITE_SIZE(32x8),
         .tileOffset = 0,
         .priority = 0
     },
     {
         .x = 4,
         .y = -4,
-        .shape = ST_OAM_H_RECTANGLE,
-        .size = 1,
+        .shape = SPRITE_SHAPE(32x8),
+        .size = SPRITE_SIZE(32x8),
         .tileOffset = 4,
         .priority = 0
     }
@@ -5021,7 +5021,7 @@ static void sub_80DE69C(u8 a)
     for (i = 0; i < CONTESTANT_COUNT; i++)
     {
         gSprites[gContestResources->field_14[i].unk0].oam.matrixNum = AllocOamMatrix();
-        gSprites[gContestResources->field_14[i].unk0].oam.affineMode = 1;
+        gSprites[gContestResources->field_14[i].unk0].oam.affineMode = ST_OAM_AFFINE_NORMAL;
         StartSpriteAffineAnim(&gSprites[gContestResources->field_14[i].unk0], a);
         if (a == 2)
         {

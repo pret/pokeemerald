@@ -189,7 +189,7 @@ static void sub_8034EFC(struct UnkStruct2 *arg0)
 
     oamId--;
     gMain.oamBuffer[oamId].x = arg0->x - arg0->xDelta;
-    gMain.oamBuffer[oamId].affineMode = 2;
+    gMain.oamBuffer[oamId].affineMode = ST_OAM_AFFINE_ERASE;
     gMain.oamBuffer[oamId].tileNum = arg0->tileStart + (arg0->field_9 * 10);
 }
 
@@ -244,9 +244,9 @@ static void sub_80350B0(struct UnkStruct2 *arg0, s32 arg1, bool32 arg2)
     }
 
     if (arg2)
-        gMain.oamBuffer[oamId].affineMode = 0;
+        gMain.oamBuffer[oamId].affineMode = ST_OAM_AFFINE_OFF;
     else
-        gMain.oamBuffer[oamId].affineMode = 2;
+        gMain.oamBuffer[oamId].affineMode = ST_OAM_AFFINE_ERASE;
 }
 
 static void sub_8035164(struct UnkStruct2 *arg0, s32 arg1, bool32 arg2)
@@ -265,14 +265,14 @@ static void sub_8035164(struct UnkStruct2 *arg0, s32 arg1, bool32 arg2)
         if (r4 != 0 || gUnknown_03000DDC != -1 || r5 == 0)
         {
             gMain.oamBuffer[gUnknown_03000DD4].tileNum = (r4 * arg0->field_9) + arg0->tileStart;
-            gMain.oamBuffer[gUnknown_03000DD4].affineMode = 0;
+            gMain.oamBuffer[gUnknown_03000DD4].affineMode = ST_OAM_AFFINE_OFF;
 
             if (gUnknown_03000DDC == -1)
                 gUnknown_03000DDC = gUnknown_03000DD8;
         }
         else
         {
-            gMain.oamBuffer[gUnknown_03000DD4].affineMode = 2;
+            gMain.oamBuffer[gUnknown_03000DD4].affineMode = ST_OAM_AFFINE_ERASE;
         }
 
         gUnknown_03000DD4++;
@@ -281,12 +281,12 @@ static void sub_8035164(struct UnkStruct2 *arg0, s32 arg1, bool32 arg2)
 
     if (arg2)
     {
-        gMain.oamBuffer[gUnknown_03000DD4].affineMode = 0;
+        gMain.oamBuffer[gUnknown_03000DD4].affineMode = ST_OAM_AFFINE_OFF;
         gMain.oamBuffer[gUnknown_03000DD4].x = arg0->x + ((gUnknown_03000DDC - 1) * arg0->xDelta);
     }
     else
     {
-        gMain.oamBuffer[gUnknown_03000DD4].affineMode = 2;
+        gMain.oamBuffer[gUnknown_03000DD4].affineMode = ST_OAM_AFFINE_ERASE;
     }
 }
 
@@ -307,7 +307,7 @@ static void sub_80352C0(struct UnkStruct2 *arg0, s32 arg1, bool32 arg2)
         {
             var_28 = 1;
             gMain.oamBuffer[oamId].tileNum = (r4 * arg0->field_9) + arg0->tileStart;
-            gMain.oamBuffer[oamId].affineMode = 0;
+            gMain.oamBuffer[oamId].affineMode = ST_OAM_AFFINE_OFF;
 
             oamId++;
             r9++;
@@ -316,15 +316,15 @@ static void sub_80352C0(struct UnkStruct2 *arg0, s32 arg1, bool32 arg2)
 
     while (r9 < arg0->oamCount)
     {
-        gMain.oamBuffer[oamId].affineMode = 2;
+        gMain.oamBuffer[oamId].affineMode = ST_OAM_AFFINE_ERASE;
         oamId++;
         r9++;
     }
 
     if (arg2)
-        gMain.oamBuffer[oamId].affineMode = 0;
+        gMain.oamBuffer[oamId].affineMode = ST_OAM_AFFINE_OFF;
     else
-        gMain.oamBuffer[oamId].affineMode = 2;
+        gMain.oamBuffer[oamId].affineMode = ST_OAM_AFFINE_ERASE;
 }
 
 void sub_80353DC(u32 id)
@@ -340,7 +340,7 @@ void sub_80353DC(u32 id)
     oamId = gUnknown_02022E10->array[id].firstOamId;
 
     for (i = 0; i < oamCount; i++, oamId++)
-        gMain.oamBuffer[oamId].affineMode = 2;
+        gMain.oamBuffer[oamId].affineMode = ST_OAM_AFFINE_ERASE;
 
     if (!SharesTileWithAnyActive(id))
         FreeSpriteTilesByTag(gUnknown_02022E10->array[id].tileTag);
@@ -364,12 +364,12 @@ void sub_803547C(u32 id, bool32 arg1)
     if (arg1)
     {
         for (i = 0; i < oamCount; i++, oamId++)
-            gMain.oamBuffer[oamId].affineMode = 2;
+            gMain.oamBuffer[oamId].affineMode = ST_OAM_AFFINE_ERASE;
     }
     else
     {
         for (i = 0; i < oamCount; i++, oamId++)
-            gMain.oamBuffer[oamId].affineMode = 0;
+            gMain.oamBuffer[oamId].affineMode = ST_OAM_AFFINE_OFF;
 
         sub_8035044(id, gUnknown_02022E10->array[id].field_18);
     }

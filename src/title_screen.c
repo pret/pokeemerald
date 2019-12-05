@@ -353,7 +353,7 @@ static void SpriteCB_VersionBannerLeft(struct Sprite *sprite)
 {
     if (gTasks[sprite->data[1]].data[1] != 0)
     {
-        sprite->oam.objMode = 0;
+        sprite->oam.objMode = ST_OAM_OBJ_NORMAL;
         sprite->pos1.y = VERSION_BANNER_Y_GOAL;
     }
     else
@@ -370,7 +370,7 @@ static void SpriteCB_VersionBannerRight(struct Sprite *sprite)
 {
     if (gTasks[sprite->data[1]].data[1] != 0)
     {
-        sprite->oam.objMode = 0;
+        sprite->oam.objMode = ST_OAM_OBJ_NORMAL;
         sprite->pos1.y = VERSION_BANNER_Y_GOAL;
     }
     else
@@ -484,22 +484,22 @@ static void StartPokemonLogoShine(u8 flashBg)
     case 0:
     case 2:
         spriteId = CreateSprite(&sPokemonLogoShineSpriteTemplate, 0, 68, 0);
-        gSprites[spriteId].oam.objMode = 2;
+        gSprites[spriteId].oam.objMode = ST_OAM_OBJ_WINDOW;
         gSprites[spriteId].data[0] = flashBg;
         break;
     case 1:
         spriteId = CreateSprite(&sPokemonLogoShineSpriteTemplate, 0, 68, 0);
-        gSprites[spriteId].oam.objMode = 2;
+        gSprites[spriteId].oam.objMode = ST_OAM_OBJ_WINDOW;
         gSprites[spriteId].data[0] = flashBg;
         gSprites[spriteId].invisible = TRUE;
 
         spriteId = CreateSprite(&sPokemonLogoShineSpriteTemplate, 0, 68, 0);
         gSprites[spriteId].callback = SpriteCB_PokemonLogoShine2;
-        gSprites[spriteId].oam.objMode = 2;
+        gSprites[spriteId].oam.objMode = ST_OAM_OBJ_WINDOW;
 
         spriteId = CreateSprite(&sPokemonLogoShineSpriteTemplate, -80, 68, 0);
         gSprites[spriteId].callback = SpriteCB_PokemonLogoShine2;
-        gSprites[spriteId].oam.objMode = 2;
+        gSprites[spriteId].oam.objMode = ST_OAM_OBJ_WINDOW;
         break;
     }
 }

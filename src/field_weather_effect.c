@@ -1245,7 +1245,7 @@ static const struct OamData gOamData_839AB2C =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
-    .objMode = 1,
+    .objMode = ST_OAM_OBJ_BLEND,
     .mosaic = 0,
     .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(64x64),
@@ -2137,14 +2137,14 @@ static void CreateSwirlSandstormSprites(void)
             if (spriteId != MAX_SPRITES)
             {
                 gWeatherPtr->sprites.s2.sandstormSprites2[i] = &gSprites[spriteId];
-                gWeatherPtr->sprites.s2.sandstormSprites2[i]->oam.size = 2;
+                gWeatherPtr->sprites.s2.sandstormSprites2[i]->oam.size = ST_OAM_SIZE_2;
                 gWeatherPtr->sprites.s2.sandstormSprites2[i]->tSpriteRow = i * 51;
                 gWeatherPtr->sprites.s2.sandstormSprites2[i]->tRadius = 8;
                 gWeatherPtr->sprites.s2.sandstormSprites2[i]->tRadiusCounter = 0;
                 gWeatherPtr->sprites.s2.sandstormSprites2[i]->data[4] = 0x6730; // unused value
                 gWeatherPtr->sprites.s2.sandstormSprites2[i]->tEntranceDelay = sSwirlEntranceDelays[i];
                 StartSpriteAnim(gWeatherPtr->sprites.s2.sandstormSprites2[i], 1);
-                CalcCenterToCornerVec(gWeatherPtr->sprites.s2.sandstormSprites2[i], 0, 2, 0);
+                CalcCenterToCornerVec(gWeatherPtr->sprites.s2.sandstormSprites2[i], SPRITE_SHAPE(32x32), SPRITE_SIZE(32x32), ST_OAM_AFFINE_OFF);
                 gWeatherPtr->sprites.s2.sandstormSprites2[i]->callback = WaitSandSwirlSpriteEntrance;
             }
             else

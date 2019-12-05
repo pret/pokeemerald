@@ -4043,7 +4043,7 @@ static void sub_81446DC(struct Sprite *sprite)
     gUnknown_0203AB88->var3C[55] = CreateSprite(&gSpriteTemplate_85B79F8, 36, -12, 50);
     gUnknown_0203AB88->var3C[56] = CreateSprite(&gSpriteTemplate_85B7ABC[0], s[sprite->data[0]][0], s[sprite->data[0]][1], 59);
     gUnknown_0203AB88->var3C[57] = CreateSprite(&gSpriteTemplate_85B7ABC[1], 36, 140, 51);
-    gSprites[gUnknown_0203AB88->var3C[57]].oam.objMode = 1;
+    gSprites[gUnknown_0203AB88->var3C[57]].oam.objMode = ST_OAM_OBJ_BLEND;
     for (i = 0; i < 3; i++)
     {
         gSprites[gUnknown_0203AB88->var3C[i + 55]].coordOffsetEnabled = FALSE;

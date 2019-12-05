@@ -2045,8 +2045,8 @@ static void sub_81D81A4(u8 taskId)
                                    (sUnknown_0862AAB8[data[0]][1] * 4) + 80,
                                    0);
         gSprites[spriteId].data[0] = (s8)(data[0]);
-        gSprites[spriteId].oam.objMode = 1;
-        gSprites[spriteId].oam.affineMode = 3;
+        gSprites[spriteId].oam.objMode = ST_OAM_OBJ_BLEND;
+        gSprites[spriteId].oam.affineMode = ST_OAM_AFFINE_DOUBLE;
         gSprites[spriteId].oam.priority = 2;
         InitSpriteAffineAnim(&gSprites[spriteId]);
         if (data[0] == 9)

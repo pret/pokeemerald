@@ -406,20 +406,76 @@ const struct SpriteFrameImage gSpriteImageTable_855C294[] =
 
 const struct Subsprite gSubspriteTable_855C29C[] =
 {
-    {.x = -12, .y = -8, .priority = 2, .tileOffset = 0, .shape = 1, .size = 0},
-    {.x =   4, .y = -8, .priority = 2, .tileOffset = 2, .shape = 0, .size = 0},
-    {.x = -12, .y =  0, .priority = 2, .tileOffset = 3, .shape = 1, .size = 0},
-    {.x =   4, .y =  0, .priority = 2, .tileOffset = 5, .shape = 0, .size = 0}
+    {
+        .x = -12, 
+        .y =  -8, 
+        .shape = SPRITE_SHAPE(16x8), 
+        .size = SPRITE_SIZE(16x8),
+        .tileOffset = 0, 
+        .priority = 2
+    },
+    {
+        .x =  4, 
+        .y = -8,
+        .shape = SPRITE_SHAPE(8x8), 
+        .size = SPRITE_SIZE(8x8), 
+        .tileOffset = 2, 
+        .priority = 2 
+    },
+    {
+        .x = -12, 
+        .y =   0, 
+        .shape = SPRITE_SHAPE(16x8), 
+        .size = SPRITE_SIZE(16x8),
+        .tileOffset = 3, 
+        .priority = 2
+    },
+    {
+        .x = 4, 
+        .y = 0, 
+        .shape = SPRITE_SHAPE(8x8), 
+        .size = SPRITE_SIZE(8x8), 
+        .tileOffset = 5, 
+        .priority = 2
+    }
 };
 
 const struct SubspriteTable gUnknown_0855C2AC = subsprite_table(gSubspriteTable_855C29C);
 
 const struct Subsprite gSubspriteTable_855C2B4[] =
 {
-    {.x = -32, .y = -8, .priority = 2, .tileOffset =  0, .shape = 1, .size = 1},
-    {.x =   0, .y = -8, .priority = 2, .tileOffset =  4, .shape = 1, .size = 1},
-    {.x = -32, .y =  0, .priority = 2, .tileOffset =  8, .shape = 1, .size = 1},
-    {.x =   0, .y =  0, .priority = 2, .tileOffset = 12, .shape = 1, .size = 1}
+    {
+        .x = -32, 
+        .y = -8, 
+        .shape = SPRITE_SHAPE(32x8), 
+        .size = SPRITE_SIZE(32x8),
+        .tileOffset = 0, 
+        .priority = 2
+    },
+    {
+        .x =  0, 
+        .y = -8, 
+        .shape = SPRITE_SHAPE(32x8), 
+        .size = SPRITE_SIZE(32x8),
+        .tileOffset = 4, 
+        .priority = 2
+    },
+    {
+        .x = -32, 
+        .y =  0, 
+        .shape = SPRITE_SHAPE(32x8), 
+        .size = SPRITE_SIZE(32x8),
+        .tileOffset = 8, 
+        .priority = 2
+    },
+    {
+        .x =   0, 
+        .y =  0, 
+        .shape = SPRITE_SHAPE(32x8), 
+        .size = SPRITE_SIZE(32x8),
+        .tileOffset = 12, 
+        .priority = 2
+    }
 };
 
 const struct SubspriteTable gUnknown_0855C2C4 = subsprite_table(gSubspriteTable_855C2B4);
@@ -870,7 +926,7 @@ u8 CreateMonSprite_FieldMove(u16 species, u32 d, u32 g, s16 x, s16 y, u8 subprio
 void FreeResourcesAndDestroySprite(struct Sprite *sprite, u8 spriteId)
 {
     ResetPreservedPalettesInWeather();
-    if (sprite->oam.affineMode != 0)
+    if (sprite->oam.affineMode != ST_OAM_AFFINE_OFF)
     {
         FreeOamMatrix(sprite->oam.matrixNum);
     }
@@ -1473,7 +1529,7 @@ static bool8 sub_80B6BCC(struct Task *task) // gUnknown_0855C3C8[0]
     task->data[4] = playerSprite->subspriteMode;
     playerObject->fixedPriority = 1;
     playerSprite->oam.priority = 1;
-    playerSprite->subspriteMode = 2;
+    playerSprite->subspriteMode = SUBSPRITES_IGNORE_PRIORITY;
     task->data[0]++;
     return TRUE;
 }
@@ -2021,7 +2077,7 @@ static bool8 sub_80B7704(struct Task *task, struct EventObject *eventObject, str
         task->data[5]++;
         eventObject->fixedPriority = 1;
         sprite->oam.priority = 1;
-        sprite->subspriteMode = 2;
+        sprite->subspriteMode = SUBSPRITES_IGNORE_PRIORITY;
     }
     if (task->data[1] == 0 && task->data[4] != 0)
     {
@@ -2396,9 +2452,9 @@ static void TeleportFieldEffectTask3(struct Task *task)
     {
         task->data[3] <<= 1;
     }
-    if (task->data[4] > 8 && (sprite->oam.priority = 1, sprite->subspriteMode != 0))
+    if (task->data[4] > 8 && (sprite->oam.priority = 1, sprite->subspriteMode != SUBSPRITES_OFF))
     {
-        sprite->subspriteMode = 2;
+        sprite->subspriteMode = SUBSPRITES_IGNORE_PRIORITY;
     }
     if (task->data[4] >= 0xa8)
     {
@@ -2487,9 +2543,9 @@ static void sub_80B830C(struct Task *task)
     } else
     {
         sprite->oam.priority = 1;
-        if (sprite->subspriteMode != 0)
+        if (sprite->subspriteMode != SUBSPRITES_OFF)
         {
-            sprite->subspriteMode = 2;
+            sprite->subspriteMode = SUBSPRITES_IGNORE_PRIORITY;
         }
     }
     if (sprite->pos2.y >= -0x30 && task->data[1] > 1 && !(sprite->pos2.y & 1))
@@ -3284,7 +3340,7 @@ static void sub_80B957C(struct Sprite *sprite)
     {
         if (sprite->data[0] == 0)
         {
-            sprite->oam.affineMode = 3;
+            sprite->oam.affineMode = ST_OAM_AFFINE_DOUBLE;
             sprite->affineAnims = gSpriteAffineAnimTable_0855C548;
             InitSpriteAffineAnim(sprite);
             StartSpriteAffineAnim(sprite, 0);
@@ -3304,9 +3360,9 @@ static void sub_80B957C(struct Sprite *sprite)
         if (sprite->data[1] > 0x81)
         {
             sprite->data[7]++;
-            sprite->oam.affineMode = 0;
+            sprite->oam.affineMode = ST_OAM_AFFINE_OFF;
             FreeOamMatrix(sprite->oam.matrixNum);
-            CalcCenterToCornerVec(sprite, sprite->oam.shape, sprite->oam.size, 0);
+            CalcCenterToCornerVec(sprite, sprite->oam.shape, sprite->oam.size, ST_OAM_AFFINE_OFF);
         }
     }
 }
@@ -3337,7 +3393,7 @@ void sub_80B96B0(struct Sprite *sprite)
     {
         if (sprite->data[0] == 0)
         {
-            sprite->oam.affineMode = 3;
+            sprite->oam.affineMode = ST_OAM_AFFINE_DOUBLE;
             sprite->affineAnims = gSpriteAffineAnimTable_0855C548;
             InitSpriteAffineAnim(sprite);
             StartSpriteAffineAnim(sprite, 1);
@@ -3368,7 +3424,7 @@ void sub_80B96B0(struct Sprite *sprite)
         if (sprite->data[3] >= 60)
         {
             sprite->data[7]++;
-            sprite->oam.affineMode = 0;
+            sprite->oam.affineMode = ST_OAM_AFFINE_OFF;
             FreeOamMatrix(sprite->oam.matrixNum);
             sprite->invisible = TRUE;
         }

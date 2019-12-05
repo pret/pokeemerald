@@ -928,7 +928,7 @@ static void sub_8136470(struct Sprite *sprite)
     switch (sprite->data[0])
     {
     case 0:
-        sprite->oam.affineMode = 1;
+        sprite->oam.affineMode = ST_OAM_AFFINE_NORMAL;
         sprite->affineAnims = sSpriteAffineAnimTable_85B26F0;
         InitSpriteAffineAnim(sprite);
         sprite->data[0] = 1;
@@ -937,7 +937,7 @@ static void sub_8136470(struct Sprite *sprite)
     case 1:
         if (++sprite->data[1] > 11)
         {
-            sprite->oam.affineMode = 0;
+            sprite->oam.affineMode = ST_OAM_AFFINE_OFF;
             sprite->data[0] = 0;
             sprite->data[1] = 0;
             FreeOamMatrix(sprite->oam.matrixNum);

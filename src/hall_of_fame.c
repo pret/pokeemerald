@@ -580,7 +580,7 @@ static void Task_Hof_PrintMonInfoAfterAnimating(u8 taskId)
 
     if (monSprite->callback == SpriteCallbackDummy)
     {
-        monSprite->oam.affineMode = 0;
+        monSprite->oam.affineMode = ST_OAM_AFFINE_OFF;
         HallOfFame_PrintMonInfo(currMon, 0, 14);
         gTasks[taskId].tFrameCount = 120;
         gTasks[taskId].func = Task_Hof_TryDisplayAnotherMon;

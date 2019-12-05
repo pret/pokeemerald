@@ -1416,14 +1416,14 @@ void CreateRegionMapCursor(u16 tileTag, u16 paletteTag)
         gRegionMap->cursorSprite = &gSprites[spriteId];
         if (gRegionMap->zoomed == TRUE)
         {
-            gRegionMap->cursorSprite->oam.size = 2;
+            gRegionMap->cursorSprite->oam.size = SPRITE_SIZE(32x32);
             gRegionMap->cursorSprite->pos1.x -= 8;
             gRegionMap->cursorSprite->pos1.y -= 8;
             StartSpriteAnim(gRegionMap->cursorSprite, 1);
         }
         else
         {
-            gRegionMap->cursorSprite->oam.size = 1;
+            gRegionMap->cursorSprite->oam.size = SPRITE_SIZE(16x16);
             gRegionMap->cursorSprite->pos1.x = 8 * gRegionMap->cursorPosX + 4;
             gRegionMap->cursorSprite->pos1.y = 8 * gRegionMap->cursorPosY + 4;
         }
@@ -1863,15 +1863,15 @@ static void sub_8124AD4(void)
         y = (y + MAPCURSOR_Y_MIN) * 8 + 4;
         if (width == 2)
         {
-            shape = ST_OAM_H_RECTANGLE;
+            shape = SPRITE_SHAPE(16x8);
         }
         else if (height == 2)
         {
-            shape = ST_OAM_V_RECTANGLE;
+            shape = SPRITE_SHAPE(8x16);
         }
         else
         {
-            shape = ST_OAM_SQUARE;
+            shape = SPRITE_SHAPE(8x8);
         }
         spriteId = CreateSprite(&gUnknown_085A1F7C, x, y, 10);
         if (spriteId != MAX_SPRITES)
@@ -1913,7 +1913,7 @@ static void sub_8124BE4(void)
             spriteId = CreateSprite(&gUnknown_085A1F7C, x, y, 10);
             if (spriteId != MAX_SPRITES)
             {
-                gSprites[spriteId].oam.size = 1;
+                gSprites[spriteId].oam.size = SPRITE_SIZE(16x16);
                 gSprites[spriteId].callback = sub_8124CBC;
                 StartSpriteAnim(&gSprites[spriteId], 6);
                 gSprites[spriteId].data[0] = mapSecId;

@@ -492,7 +492,7 @@ static void UpdateSwitchPocketRotatingBallCoords(struct Sprite *sprite)
 
 static void SpriteCB_SwitchPocketRotatingBallInit(struct Sprite *sprite)
 {
-    sprite->oam.affineMode = 1;
+    sprite->oam.affineMode = ST_OAM_AFFINE_NORMAL;
     if (sprite->data[0] == -1)
         sprite->affineAnims = sRotatingBallAnimCmds;
     else
