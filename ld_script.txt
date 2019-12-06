@@ -113,7 +113,7 @@ SECTIONS {
         src/field_player_avatar.o(.text);
         src/event_object_movement.o(.text);
         src/field_message_box.o(.text);
-        src/event_obj_lock.o(.text);
+        src/event_object_lock.o(.text);
         src/text_window.o(.text);
         src/script.o(.text);
         src/scrcmd.o(.text);

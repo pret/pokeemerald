@@ -1,5 +1,5 @@
-#ifndef GUARD_EVENT_OBJ_LOCK_H
-#define GUARD_EVENT_OBJ_LOCK_H
+#ifndef GUARD_EVENT_OBJECT_LOCK_H
+#define GUARD_EVENT_OBJECT_LOCK_H
 
 bool8 sub_80983C4(void);
 void ScriptFreezeObjectEvents(void);
@@ -10,4 +10,4 @@ bool8 sub_8098734(void);
 void ScriptUnfreezeObjectEvents(void);
 void sub_8098524(void);
 
-#endif // GUARD_EVENT_OBJ_LOCK_H
+#endif // GUARD_EVENT_OBJECT_LOCK_H

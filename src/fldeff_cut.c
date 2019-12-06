@@ -1,5 +1,5 @@
 #include "global.h"
-#include "event_obj_lock.h"
+#include "event_object_lock.h"
 #include "event_object_movement.h"
 #include "faraway_island.h"
 #include "field_camera.h"

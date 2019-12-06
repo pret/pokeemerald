@@ -5,6 +5,7 @@
 #include "field_camera.h"
 #include "field_door.h"
 #include "field_effect.h"
+#include "event_object_lock.h"
 #include "event_object_movement.h"
 #include "field_player_avatar.h"
 #include "field_screen_effect.h"
@@ -17,7 +18,6 @@
 #include "main.h"
 #include "menu.h"
 #include "mirage_tower.h"
-#include "event_obj_lock.h"
 #include "metatile_behavior.h"
 #include "palette.h"
 #include "overworld.h"
@@ -31,7 +31,6 @@
 #include "constants/songs.h"
 #include "constants/rgb.h"
 #include "trainer_hill.h"
-#include "event_obj_lock.h"
 #include "fldeff.h"
 
 extern const u16 gOrbEffectBackgroundLayerFlags[];

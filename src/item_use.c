@@ -9,6 +9,7 @@
 #include "coins.h"
 #include "data.h"
 #include "event_data.h"
+#include "event_object_lock.h"
 #include "event_object_movement.h"
 #include "fieldmap.h"
 #include "field_effect.h"
@@ -41,7 +42,6 @@
 #include "constants/items.h"
 #include "constants/songs.h"
 #include "constants/vars.h"
-#include "event_obj_lock.h"
 
 extern u8 BerryTree_EventScript_ItemUsePlantBerry[];
 extern u8 BerryTree_EventScript_ItemUseWailmerPail[];

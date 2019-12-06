@@ -5,7 +5,7 @@
 #include "bg.h"
 #include "event_data.h"
 #include "event_object_movement.h"
-#include "event_obj_lock.h"
+#include "event_object_lock.h"
 #include "event_scripts.h"
 #include "fieldmap.h"
 #include "field_effect.h"
