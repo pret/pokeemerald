@@ -105,6 +105,23 @@ enum
                         [CHECK_PAGE_INTRO_1]  = gText_MatchCall##name##_Intro1,   \
                         [CHECK_PAGE_INTRO_2]  = gText_MatchCall##name##_Intro2}
 
+#define POKENAV_MC_FUNC_NONE   0
+#define POKENAV_MC_FUNC_DOWN   1
+#define POKENAV_MC_FUNC_UP   2
+#define POKENAV_MC_FUNC_PG_DOWN   3
+#define POKENAV_MC_FUNC_PG_UP   4
+#define POKENAV_MC_FUNC_SELECT   5
+#define POKENAV_MC_FUNC_6   6
+#define POKENAV_MC_FUNC_7   7
+#define POKENAV_MC_FUNC_CALL_MSG   8
+#define POKENAV_MC_FUNC_NEARBY_MSG   9
+#define POKENAV_MC_FUNC_10  10
+#define POKENAV_MC_FUNC_11  11
+#define POKENAV_MC_FUNC_12  12
+#define POKENAV_MC_FUNC_13  13
+#define POKENAV_MC_FUNC_14  14
+#define POKENAV_MC_FUNC_EXIT  15
+
 // pokenav.c
 void sub_81C7694(u32);
 u32 sub_81C76AC(void);
@@ -207,7 +224,6 @@ bool32 PokenavCallback_Init_3(void);
 u32 sub_81C941C(void);
 void sub_81C9430(void);
 int sub_81C9894(void);
-const u8 *sub_81CAF78(int index, u8 *arg1);
 int sub_81C98A4(void);
 int sub_81C98B4(void);
 u16 sub_81C98C4(void);
@@ -232,6 +248,7 @@ u16 sub_81CAEA4(int);
 bool32 sub_81CAEBC(int index);
 int GetMatchCallTrainerPic(int index);
 const u8 *GetMatchCallFlavorText(int index, int textType);
+const u8 *GetMatchCallMessageText(int index, u8 *arg1);
 u16 sub_81CB01C(void);
 u16 sub_81CB02C(int arg0);
 void sub_81CB050(struct PokenavMonList * arg0, u8 *str);
@@ -240,7 +257,7 @@ int sub_81CB0E4(int index);
 bool32 IsRematchEntryRegistered(int index);
 int sub_81CB128(int index);
 
-// pokenav_unk_4.c
+// POKENAV_MC.c
 bool32 sub_81CB260(void);
 void sub_81CB29C(s32 index);
 u32 sub_81CB2CC(void);

@@ -66,7 +66,7 @@ enum {
     REMATCH_TRENT,
     REMATCH_SAWYER,
     REMATCH_KIRA_AND_DAN,
-    REMATCH_WALLY_3,
+    REMATCH_WALLY_3,  // Entries above WALLY are considered normal NPCs
     REMATCH_ROXANNE,
     REMATCH_BRAWLY,
     REMATCH_WATTSON,
@@ -82,6 +82,9 @@ enum {
     REMATCH_WALLACE,
     REMATCH_TABLE_ENTRIES // The total number of rematch entries. Must be last in enum
 };
+
+#define REMATCH_NORMAL_NPC_END     REMATCH_WALLY_3
+#define REMATCH_ELITE_FOUR_ENTRIES REMATCH_SIDNEY
 
 void UpdateGymLeaderRematch(void);
 

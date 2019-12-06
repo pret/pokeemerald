@@ -85,13 +85,13 @@ static u32 CB2_HandleMatchCallInput(struct Pokenav3Struct *state)
     int selection;
 
     if (gMain.newAndRepeatedKeys & DPAD_UP)
-        return 2;
+        return POKENAV_MC_FUNC_UP;
     if (gMain.newAndRepeatedKeys & DPAD_DOWN)
-        return 1;
+        return POKENAV_MC_FUNC_DOWN;
     if (gMain.newAndRepeatedKeys & DPAD_LEFT)
-        return 4;
+        return POKENAV_MC_FUNC_PG_UP;
     if (gMain.newAndRepeatedKeys & DPAD_RIGHT)
-        return 3;
+        return POKENAV_MC_FUNC_PG_DOWN;
 
     if (gMain.newKeys & A_BUTTON)
     {
@@ -109,7 +109,7 @@ static u32 CB2_HandleMatchCallInput(struct Pokenav3Struct *state)
             state->unk2 = 1;
         }
 
-        return 5;
+        return POKENAV_MC_FUNC_SELECT;
     }
 
     if (gMain.newKeys & B_BUTTON)
@@ -117,15 +117,16 @@ static u32 CB2_HandleMatchCallInput(struct Pokenav3Struct *state)
         if (GetPokenavMode() != POKENAV_MODE_FORCE_CALL_READY)
         {
             state->callback = sub_81CABFC;
-            return 15;
+            return POKENAV_MC_FUNC_EXIT;
         }
         else
         {
+            // Cant exit Match Call menu before calling Mr Stone during tutorial
             PlaySE(SE_HAZURE);
         }
     }
 
-    return 0;
+    return POKENAV_MC_FUNC_NONE;
 }
 
 static u32 sub_81CABFC(struct Pokenav3Struct *state)
@@ -138,13 +139,13 @@ static u32 sub_81CAC04(struct Pokenav3Struct *state)
     if ((gMain.newKeys & DPAD_UP) && state->unk0)
     {
         state->unk0--;
-        return 6;
+        return POKENAV_MC_FUNC_6;
     }
 
     if ((gMain.newKeys & DPAD_DOWN) && state->unk0 < state->unk2)
     {
         state->unk0++;
-        return 6;
+        return POKENAV_MC_FUNC_6;
     }
 
     if (gMain.newKeys & A_BUTTON)
@@ -153,45 +154,45 @@ static u32 sub_81CAC04(struct Pokenav3Struct *state)
         {
         case MATCH_CALL_OPTION_CANCEL:
             state->callback = CB2_HandleMatchCallInput;
-            return 7;
+            return POKENAV_MC_FUNC_7;
         case MATCH_CALL_OPTION_CALL:
             if (GetPokenavMode() == POKENAV_MODE_FORCE_CALL_READY)
                 SetPokenavMode(POKENAV_MODE_FORCE_CALL_EXIT);
 
             state->callback = sub_81CACF8;
             if (sub_81CB1D0())
-                return 9;
+                return POKENAV_MC_FUNC_NEARBY_MSG;
 
-            return 8;
+            return POKENAV_MC_FUNC_CALL_MSG;
         case MATCH_CALL_OPTION_CHECK:
             state->callback = sub_81CACB8;
-            return 11;
+            return POKENAV_MC_FUNC_11;
         }
     }
 
     if (gMain.newKeys & B_BUTTON)
     {
         state->callback = CB2_HandleMatchCallInput;
-        return 7;
+        return POKENAV_MC_FUNC_7;
     }
 
-    return 0;
+    return POKENAV_MC_FUNC_NONE;
 }
 
 static u32 sub_81CACB8(struct Pokenav3Struct *state)
 {
     if (gMain.newAndRepeatedKeys & DPAD_UP)
-        return 12;
+        return POKENAV_MC_FUNC_12;
     if (gMain.newAndRepeatedKeys & DPAD_DOWN)
-        return 13;
+        return POKENAV_MC_FUNC_13;
 
     if (gMain.newKeys & B_BUTTON)
     {
         state->callback = CB2_HandleMatchCallInput;
-        return 14;
+        return POKENAV_MC_FUNC_14;
     }
 
-    return 0;
+    return POKENAV_MC_FUNC_NONE;
 }
 
 static u32 sub_81CACF8(struct Pokenav3Struct *state)
@@ -199,10 +200,10 @@ static u32 sub_81CACF8(struct Pokenav3Struct *state)
     if (gMain.newKeys & (A_BUTTON | B_BUTTON))
     {
         state->callback = CB2_HandleMatchCallInput;
-        return 10;
+        return POKENAV_MC_FUNC_10;
     }
 
-    return 0;
+    return POKENAV_MC_FUNC_NONE;
 }
 
 static u32 sub_81CAD20(s32 taskState)
@@ -349,7 +350,7 @@ int GetMatchCallTrainerPic(int index)
     return gFacilityClassToPicIndex[index];
 }
 
-const u8 *sub_81CAF78(int index, u8 *arg1)
+const u8 *GetMatchCallMessageText(int index, u8 *arg1)
 {
     struct Pokenav3Struct *state = GetSubstructPtr(5);
     *arg1 = 0;

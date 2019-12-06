@@ -1060,7 +1060,7 @@ static bool32 SelectMatchCallTrainer(void)
 static u32 GetNumRegisteredNPCs(void)
 {
     u32 i, count;
-    for (i = 0, count = 0; i < 64; i++)
+    for (i = 0, count = 0; i < REMATCH_NORMAL_NPC_END; i++)
     {
         if (FlagGet(FLAG_MATCH_CALL_REGISTERED + i))
             count++;
@@ -1072,7 +1072,7 @@ static u32 GetNumRegisteredNPCs(void)
 static u32 GetActiveMatchCallTrainerId(u32 activeMatchCallId)
 {
     u32 i;
-    for (i = 0; i < 64; i++)
+    for (i = 0; i < REMATCH_NORMAL_NPC_END; i++)
     {
         if (FlagGet(FLAG_MATCH_CALL_REGISTERED + i))
         {
@@ -1384,7 +1384,7 @@ static u16 GetRematchTrainerLocation(int matchCallId)
 static u32 GetNumRematchTrainersFought(void)
 {
     u32 i, count;
-    for (i = 0, count = 0; i < 64; i++)
+    for (i = 0, count = 0; i < REMATCH_NORMAL_NPC_END; i++)
     {
         if (HasTrainerBeenFought(gRematchTable[i].trainerIds[0]))
             count++;
