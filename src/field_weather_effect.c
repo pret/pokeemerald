@@ -2558,7 +2558,7 @@ static u8 TranslateWeatherNum(u8 weather)
     case WEATHER_SANDSTORM:          return WEATHER_SANDSTORM;
     case WEATHER_FOG_DIAGONAL:       return WEATHER_FOG_DIAGONAL;
     case WEATHER_UNDERWATER:         return WEATHER_UNDERWATER;
-    case WEATHER_CLOUDY:             return WEATHER_CLOUDY;
+    case WEATHER_SHADE:              return WEATHER_SHADE;
     case WEATHER_DROUGHT:            return WEATHER_DROUGHT;
     case WEATHER_DOWNPOUR:           return WEATHER_DOWNPOUR;
     case WEATHER_UNDERWATER_BUBBLES: return WEATHER_UNDERWATER_BUBBLES;
