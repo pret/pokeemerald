@@ -3,8 +3,8 @@ BattleFrontier_BattlePikeRoomNormal_MapScripts_2C3E1B: @ 82C3E1B
 	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, BattleFrontier_BattlePikeRoom_OnWarp
 
 BattleFrontier_BattlePikeRoom_OnTransition: @ 82C3E25
-	battlepike_setroomobjects
-	battlepike_getroomtype
+	pike_setroomobjects
+	pike_getroomtype
 	switch VAR_RESULT
 	case PIKE_ROOM_SINGLE_BATTLE, BattleFrontier_BattlePikeRoomNormal_EventScript_2C3EB1
 	case PIKE_ROOM_HEAL_FULL, BattleFrontier_BattlePikeRoomNormal_EventScript_2C3EB1
@@ -48,7 +48,7 @@ BattleFrontier_BattlePikeRoom_OnWarp: @ 82C3EDE
 BattleFrontier_BattlePikeRoomNormal_EventScript_EnterRoom:: @ 82C3EE8
 	setvar VAR_OBJ_GFX_ID_1, OBJ_EVENT_GFX_LINK_RECEPTIONIST
 	setvar VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_LINK_RECEPTIONIST
-	battlepike_getroomtype
+	pike_getroomtype
 	compare VAR_RESULT, PIKE_ROOM_STATUS
 	goto_if_eq BattleFrontier_BattlePikeRoomNormal_EventScript_2C3F35
 	compare VAR_RESULT, PIKE_ROOM_HARD_BATTLE
@@ -89,14 +89,14 @@ BattleFrontier_BattlePikeThreePathRoom_EventScript_RightRoomWarp:: @ 82C3F64
 	end
 
 BattleFrontier_BattlePikeThreePathRoom_EventScript_RoomWarp:: @ 82C3F6F
-	battlepike_getstreak
+	pike_get PIKE_DATA_WIN_STREAK
 	addvar VAR_RESULT, 1
-	battlepike_setstreak VAR_RESULT
+	pike_set PIKE_DATA_WIN_STREAK, VAR_RESULT
 	frontier_get FRONTIER_DATA_BATTLE_NUM
 	addvar VAR_RESULT, 1
 	frontier_set FRONTIER_DATA_BATTLE_NUM, VAR_RESULT
-	battlepike_setnextroom
-	battlepike_getroomtype
+	pike_setnextroom
+	pike_getroomtype
 	switch VAR_RESULT
 	case PIKE_ROOM_SINGLE_BATTLE, BattleFrontier_BattlePikeThreePathRoom_EventScript_WarpNPCRoom
 	case PIKE_ROOM_HEAL_FULL, BattleFrontier_BattlePikeThreePathRoom_EventScript_WarpNPCRoom
@@ -152,18 +152,18 @@ BattleFrontier_BattlePikeRoomNormal_EventScript_2C408D:: @ 82C408D
 	end
 
 BattleFrontier_BattlePikeRoomNormal_EventScript_Exit:: @ 82C40A2
-	battlepike_ispartyfullhealth
+	pike_ispartyfullhealth
 	compare VAR_RESULT, TRUE
 	call_if_eq BattleFrontier_BattlePikeRoom_EventScript_DisableHealing
 	compare VAR_RESULT, TRUE
 	call_if_ne BattleFrontier_BattlePikeRoom_EventScript_EnableHealing
-	battlepike_getstreak
+	pike_get PIKE_DATA_WIN_STREAK
 	addvar VAR_RESULT, 1
-	battlepike_setstreak VAR_RESULT
+	pike_set PIKE_DATA_WIN_STREAK, VAR_RESULT
 	frontier_get FRONTIER_DATA_BATTLE_NUM
 	addvar VAR_RESULT, 1
 	frontier_set FRONTIER_DATA_BATTLE_NUM, VAR_RESULT
-	battlepike_isfinalroom
+	pike_isfinalroom
 	compare VAR_RESULT, TRUE
 	call_if_eq BattleFrontier_BattlePikeRoom_EventScript_WarpToFinalRoom
 	compare VAR_RESULT, FALSE
@@ -172,11 +172,11 @@ BattleFrontier_BattlePikeRoomNormal_EventScript_Exit:: @ 82C40A2
 	end
 
 BattleFrontier_BattlePikeRoom_EventScript_DisableHealing:: @ 82C4128
-	battlepike_nohealing TRUE
+	pike_nohealing TRUE
 	return
 
 BattleFrontier_BattlePikeRoom_EventScript_EnableHealing:: @ 82C4136
-	battlepike_nohealing FALSE
+	pike_nohealing FALSE
 	return
 
 BattleFrontier_BattlePikeRoom_EventScript_WarpToFinalRoom:: @ 82C4144
@@ -194,20 +194,19 @@ BattleFrontier_BattlePikeRoom_EventScript_WarpToThreePathRoom:: @ 82C415C
 	return
 
 BattleFrontier_BattlePikeRoomWildMons_EventScript_2C4174:: @ 82C4174
-	setvar VAR_0x8004, BATTLE_PIKE_FUNC_7
-	special CallBattlePikeFunction
-	battlepike_ispartyfullhealth
+	pike_exitwildmonroom
+	pike_ispartyfullhealth
 	compare VAR_RESULT, TRUE
 	call_if_eq BattleFrontier_BattlePikeRoom_EventScript_DisableHealing
 	compare VAR_RESULT, TRUE
 	call_if_ne BattleFrontier_BattlePikeRoom_EventScript_EnableHealing
-	battlepike_getstreak
+	pike_get PIKE_DATA_WIN_STREAK
 	addvar VAR_RESULT, 1
-	battlepike_setstreak VAR_RESULT
+	pike_set PIKE_DATA_WIN_STREAK, VAR_RESULT
 	frontier_get FRONTIER_DATA_BATTLE_NUM
 	addvar VAR_RESULT, 1
 	frontier_set FRONTIER_DATA_BATTLE_NUM, VAR_RESULT
-	battlepike_isfinalroom
+	pike_isfinalroom
 	compare VAR_RESULT, TRUE
 	call_if_eq BattleFrontier_BattlePikeRoom_EventScript_WarpToFinalRoom
 	compare VAR_RESULT, FALSE

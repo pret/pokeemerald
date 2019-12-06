@@ -28,14 +28,8 @@ BattleFrontier_BattlePalaceLobby_EventScript_24D7D0:: @ 824D7D0
 	lockall
 	msgbox BattleFrontier_BattlePalaceLobby_Text_24E636, MSGBOX_DEFAULT
 	closemessage
-	setvar VAR_0x8004, 2
-	setvar VAR_0x8005, 1
-	setvar VAR_0x8006, 0
-	special CallBattlePalaceFunction
-	setvar VAR_0x8004, 2
-	setvar VAR_0x8005, 2
-	setvar VAR_0x8006, 0
-	special CallBattlePalaceFunction
+	palace_set PALACE_DATA_WIN_STREAK, 0
+	palace_set PALACE_DATA_WIN_STREAK_ACTIVE, FALSE
 	frontier_set FRONTIER_DATA_CHALLENGE_STATUS, 0
 	setvar VAR_TEMP_0, 255
 	releaseall
@@ -51,7 +45,6 @@ BattleFrontier_BattlePalaceLobby_EventScript_24D817:: @ 824D817
 
 BattleFrontier_BattlePalaceLobby_EventScript_24D838:: @ 824D838
 	msgbox BattleFrontier_BattlePalaceLobby_Text_24EE81, MSGBOX_DEFAULT
-
 BattleFrontier_BattlePalaceLobby_EventScript_24D840:: @ 824D840
 	msgbox BattleFrontier_BattlePalaceLobby_Text_24EEB9, MSGBOX_DEFAULT
 	frontier_givepoints
@@ -69,10 +62,7 @@ BattleFrontier_BattlePalaceLobby_EventScript_24D873:: @ 824D873
 	lockall
 	message BattleFrontier_BattlePalaceLobby_Text_24E41E
 	waitmessage
-	setvar VAR_0x8004, 2
-	setvar VAR_0x8005, 2
-	setvar VAR_0x8006, 0
-	special CallBattlePalaceFunction
+	palace_set PALACE_DATA_WIN_STREAK_ACTIVE, FALSE
 	call BattleFrontier_BattlePalaceLobby_EventScript_24D8A1
 	msgbox BattleFrontier_BattlePalaceLobby_Text_24E0D8, MSGBOX_DEFAULT
 	closemessage
@@ -84,9 +74,7 @@ BattleFrontier_BattlePalaceLobby_EventScript_24D8A1:: @ 824D8A1
 	frontier_checkairshow
 	special LoadPlayerParty
 	special HealPlayerParty
-	setvar VAR_0x8004, 7
-	setvar VAR_0x8005, 0
-	special CallBattlePalaceFunction
+	palace_save 0
 	playse SE_SAVE
 	waitse
 	call BattleFrontier_BattlePalaceLobby_EventScript_23E8E0
@@ -110,9 +98,7 @@ BattleFrontier_BattlePalaceLobby_EventScript_24D908:: @ 824D908
 	msgbox BattleFrontier_BattlePalaceLobby_Text_24E5D8, MSGBOX_DEFAULT
 	message BattleFrontier_BattlePalaceLobby_Text_24E5F6
 	waitmessage
-	setvar VAR_0x8004, 7
-	setvar VAR_0x8005, 1
-	special CallBattlePalaceFunction
+	palace_save CHALLENGE_STATUS_SAVING
 	playse SE_SAVE
 	waitse
 	frontier_set FRONTIER_DATA_PAUSED, FALSE
@@ -136,17 +122,14 @@ BattleFrontier_BattlePalaceLobby_EventScript_24D956:: @ 824D956
 	end
 
 BattleFrontier_BattlePalaceLobby_EventScript_24D968:: @ 824D968
-	setvar VAR_0x8004, 1
-	setvar VAR_0x8005, 0
-	special CallBattlePalaceFunction
-	compare VAR_RESULT, 0
+	palace_get PALACE_DATA_PRIZE
+	compare VAR_RESULT, ITEM_NONE
 	goto_if_ne BattleFrontier_BattlePalaceLobby_EventScript_24D817
 	special SavePlayerParty
 	compare VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_SINGLES
 	call_if_eq BattleFrontier_BattlePalaceLobby_EventScript_24DB9E
 	compare VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_DOUBLES
 	call_if_eq BattleFrontier_BattlePalaceLobby_EventScript_24DBA7
-
 BattleFrontier_BattlePalaceLobby_EventScript_24D999:: @ 824D999
 	compare VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_SINGLES
 	call_if_eq BattleFrontier_BattlePalaceLobby_EventScript_24DBB0
@@ -189,12 +172,8 @@ BattleFrontier_BattlePalaceLobby_EventScript_24D9E6:: @ 824D9E6
 BattleFrontier_BattlePalaceLobby_EventScript_24DA87:: @ 824DA87
 	setvar VAR_TEMP_0, 0
 	frontier_set FRONTIER_DATA_SELECTED_MON_ORDER
-	setvar VAR_0x8004, 0
-	special CallBattlePalaceFunction
-	setvar VAR_0x8004, 2
-	setvar VAR_0x8005, 2
-	setvar VAR_0x8006, 1
-	special CallBattlePalaceFunction
+	palace_init
+	palace_set PALACE_DATA_WIN_STREAK_ACTIVE, TRUE
 	frontier_set FRONTIER_DATA_CHALLENGE_STATUS, CHALLENGE_STATUS_SAVING
 	frontier_set FRONTIER_DATA_PAUSED, FALSE
 	special LoadPlayerParty
@@ -245,10 +224,8 @@ BattleFrontier_BattlePalaceLobby_EventScript_24DB7A:: @ 824DB7A
 
 BattleFrontier_BattlePalaceLobby_EventScript_24DB91:: @ 824DB91
 	special LoadPlayerParty
-
 BattleFrontier_BattlePalaceLobby_EventScript_24DB94:: @ 824DB94
 	msgbox BattleFrontier_BattlePalaceLobby_Text_24E0D8, MSGBOX_DEFAULT
-
 BattleFrontier_BattlePalaceLobby_EventScript_24DB9C:: @ 824DB9C
 	release
 	end

@@ -38,18 +38,14 @@ SlateportCity_BattleTentLobby_EventScript_2087B7:: @ 82087B7
 	lockall
 	message SlateportCity_BattleTentLobby_Text_2C5C6F
 	waitmessage
-	setvar VAR_0x8004, 4
-	special CallSlateportTentFunction
+	slateporttent_setrandomprize
 	frontier_set FRONTIER_DATA_LVL_MODE, FRONTIER_LVL_50
-	setvar VAR_0x8004, 3
-	setvar VAR_0x8005, 0
-	special CallSlateportTentFunction
+	slateporttent_save 0
 	playse SE_SAVE
 	waitse
 SlateportCity_BattleTentLobby_EventScript_2087E9:: @ 82087E9
 	msgbox SlateportCity_BattleTentLobby_Text_2C5D14, MSGBOX_DEFAULT
-	setvar VAR_0x8004, 5
-	special CallSlateportTentFunction
+	slateporttent_giveprize
 	switch VAR_RESULT
 	case 0, SlateportCity_BattleTentLobby_EventScript_20882A
 	frontier_set FRONTIER_DATA_CHALLENGE_STATUS, 0
@@ -68,9 +64,7 @@ SlateportCity_BattleTentLobby_EventScript_208837:: @ 8208837
 	message SlateportCity_BattleTentLobby_Text_2C5BA2
 	waitmessage
 	frontier_set FRONTIER_DATA_LVL_MODE, FRONTIER_LVL_50
-	setvar VAR_0x8004, 3
-	setvar VAR_0x8005, 0
-	special CallSlateportTentFunction
+	slateporttent_save 0
 	playse SE_SAVE
 	waitse
 
@@ -85,9 +79,7 @@ SlateportCity_BattleTentLobby_EventScript_208871:: @ 8208871
 	lockall
 	message SlateportCity_BattleTentLobby_Text_2C5DA7
 	waitmessage
-	setvar VAR_0x8004, 3
-	setvar VAR_0x8005, 1
-	special CallSlateportTentFunction
+	slateporttent_save CHALLENGE_STATUS_SAVING
 	playse SE_SAVE
 	waitse
 	frontier_set FRONTIER_DATA_PAUSED, FALSE
@@ -98,13 +90,11 @@ SlateportCity_BattleTentLobby_EventScript_208871:: @ 8208871
 SlateportCity_BattleTentLobby_EventScript_2088AA:: @ 82088AA
 	lock
 	faceplayer
-	setvar VAR_0x8004, 1
-	special CallSlateportTentFunction
+	slateporttent_getprize
 	compare VAR_RESULT, 0
 	goto_if_ne SlateportCity_BattleTentLobby_EventScript_2087E9
 	special SavePlayerParty
 	msgbox SlateportCity_BattleTentLobby_Text_2C5810, MSGBOX_DEFAULT
-
 SlateportCity_BattleTentLobby_EventScript_2088CA:: @ 82088CA
 	message SlateportCity_BattleTentLobby_Text_2C586A
 	waitmessage
@@ -128,8 +118,7 @@ SlateportCity_BattleTentLobby_EventScript_208906:: @ 8208906
 SlateportCity_BattleTentLobby_EventScript_208950:: @ 8208950
 	setvar VAR_TEMP_0, 0
 	frontier_set FRONTIER_DATA_SELECTED_MON_ORDER
-	setvar VAR_0x8004, 0
-	special CallSlateportTentFunction
+	slateporttent_init
 	frontier_set FRONTIER_DATA_CHALLENGE_STATUS, CHALLENGE_STATUS_SAVING
 	frontier_set FRONTIER_DATA_PAUSED, FALSE
 	closemessage

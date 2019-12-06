@@ -34,9 +34,7 @@ BattleFrontier_BattlePikeThreePathRoom_EventScript_25C8A4:: @ 825C8A4
 	lockall
 	message BattleFrontier_BattlePikeThreePathRoom_Text_AwaitingReturnSaveBeforeResume
 	waitmessage
-	setvar VAR_0x8004, BATTLE_PIKE_FUNC_8
-	setvar VAR_0x8005, 1
-	special CallBattlePikeFunction
+	pike_save CHALLENGE_STATUS_SAVING
 	playse SE_SAVE
 	waitse
 	frontier_set FRONTIER_DATA_PAUSED, FALSE
@@ -124,9 +122,7 @@ BattleFrontier_BattlePikeThreePathRoom_EventScript_25C9FD:: @ 825C9FD
 	message BattleFrontier_BattlePikeThreePathRoom_Text_SavingYourData
 	waitmessage
 	special LoadPlayerParty
-	setvar VAR_0x8004, BATTLE_PIKE_FUNC_8
-	setvar VAR_0x8005, 2
-	special CallBattlePikeFunction
+	pike_save CHALLENGE_STATUS_PAUSED
 	playse SE_SAVE
 	waitse
 	fadescreen 1
@@ -152,9 +148,8 @@ BattleFrontier_BattlePikeThreePathRoom_EventScript_25CA5A:: @ 825CA5A
 	end
 
 BattleFrontier_BattlePikeThreePathRoom_EventScript_25CA78:: @ 825CA78
-	setvar VAR_0x8004, BATTLE_PIKE_FUNC_SET_HINT_ROOM
-	special CallBattlePikeFunction
-	compare VAR_RESULT, 1
+	pike_sethintroom
+	compare VAR_RESULT, TRUE
 	goto_if_eq BattleFrontier_BattlePikeThreePathRoom_EventScript_25CA91
 	setvar VAR_TEMP_5, 255
 	end
@@ -175,7 +170,7 @@ BattleFrontier_BattlePikeThreePathRoom_EventScript_25CA97:: @ 825CA97
 	end
 
 BattleFrontier_BattlePikeThreePathRoom_EventScript_HintGiver:: @ 825CABB
-	battlepike_gethint
+	pike_gethint
 	compare VAR_RESULT, PIKE_HINT_BRAIN
 	goto_if_eq BattleFrontier_BattlePikeThreePathRoom_EventScript_GiveBrainHint
 	lock
@@ -194,8 +189,7 @@ BattleFrontier_BattlePikeThreePathRoom_EventScript_DeclineHint:: @ 825CB00
 	end
 
 BattleFrontier_BattlePikeThreePathRoom_EventScript_AcceptHint:: @ 825CB0A
-	setvar VAR_0x8004, BATTLE_PIKE_FUNC_GET_HINT_ROOM_ID
-	special CallBattlePikeFunction
+	pike_gethintroomid
 	switch VAR_RESULT
 	case PIKE_ROOM_LEFT, BattleFrontier_BattlePikeThreePathRoom_EventScript_GiveLeftRoomHint
 	case PIKE_ROOM_CENTER, BattleFrontier_BattlePikeThreePathRoom_EventScript_GiveCenterRoomHint
@@ -215,7 +209,7 @@ BattleFrontier_BattlePikeThreePathRoom_EventScript_GiveRightRoomHint:: @ 825CB53
 	goto BattleFrontier_BattlePikeThreePathRoom_EventScript_GiveHint
 
 BattleFrontier_BattlePikeThreePathRoom_EventScript_GiveHint:: @ 825CB60
-	battlepike_gethint
+	pike_gethint
 	switch VAR_RESULT
 	case PIKE_HINT_NOSTALGIA, BattleFrontier_BattlePikeThreePathRoom_EventScript_HintNostalgia
 	case PIKE_HINT_WHISPERING, BattleFrontier_BattlePikeThreePathRoom_EventScript_HintWhispering

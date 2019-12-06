@@ -49,7 +49,7 @@ CableClub_EventScript_DistributeEonTicket:: @ 8276B23
 	end
 
 @ Unused?
-OldaleTown_PokemonCenter_2F_EventScript_276B62:: @ 8276B62
+CableClub_EventScript_MysteryGiftThankYou2:: @ 8276B62
 	msgbox gText_ThankYouForAccessingMysteryGift, MSGBOX_DEFAULT
 	release
 	end
@@ -301,7 +301,7 @@ CableClub_EventScript_Colosseum:: @ 8276EB7
 	end
 
 CableClub_EventScript_SelectBattleMode:: @ 8276EC2
-	message CableClub_Text_WhichBattleMode
+	message CableClub_Text_PlayWhichBattleMode
 	waitmessage
 	multichoice 0, 0, MULTI_BATTLE_MODE, 0
 	switch VAR_RESULT
@@ -795,39 +795,40 @@ EventScript_TradeCenter_Chair3:: @ 8277413
 	waitstate
 	end
 
+@ VAR_TEMP_1 for below scripts set by ReceiveGiftItem
 EventScript_RecordCenter_Spot0:: @ 827741D
 	setvar VAR_0x8005, 0
 	special RecordMixingPlayerSpotTriggered
 	waitstate
-	compare VAR_TEMP_1, 0
-	goto_if_ne RecordCorner_EventScript_277471
+	compare VAR_TEMP_1, ITEM_NONE
+	goto_if_ne RecordCorner_EventScript_ReceivedGiftItem
 	end
 
 EventScript_RecordCenter_Spot1:: @ 8277432
 	setvar VAR_0x8005, 1
 	special RecordMixingPlayerSpotTriggered
 	waitstate
-	compare VAR_TEMP_1, 0
-	goto_if_ne RecordCorner_EventScript_277471
+	compare VAR_TEMP_1, ITEM_NONE
+	goto_if_ne RecordCorner_EventScript_ReceivedGiftItem
 	end
 
 EventScript_RecordCenter_Spot2:: @ 8277447
 	setvar VAR_0x8005, 2
 	special RecordMixingPlayerSpotTriggered
 	waitstate
-	compare VAR_TEMP_1, 0
-	goto_if_ne RecordCorner_EventScript_277471
+	compare VAR_TEMP_1, ITEM_NONE
+	goto_if_ne RecordCorner_EventScript_ReceivedGiftItem
 	end
 
 EventScript_RecordCenter_Spot3:: @ 827745C
 	setvar VAR_0x8005, 3
 	special RecordMixingPlayerSpotTriggered
 	waitstate
-	compare VAR_TEMP_1, 0
-	goto_if_ne RecordCorner_EventScript_277471
+	compare VAR_TEMP_1, ITEM_NONE
+	goto_if_ne RecordCorner_EventScript_ReceivedGiftItem
 	end
 
-RecordCorner_EventScript_277471:: @ 8277471
+RecordCorner_EventScript_ReceivedGiftItem:: @ 8277471
 	bufferitemname 1, VAR_TEMP_1
 	message RecordCorner_Text_PlayerSentOverOneX
 	waitmessage
@@ -868,7 +869,7 @@ TradeCenter_EventScript_Attendant:: @ 82774B6
 	closemessage
 	end
 
-RecordCorner_EventScript_2774C6:: @ 82774C6
+RecordCorner_EventScript_Attendant:: @ 82774C6
 	compare VAR_TEMP_0, 0
 	goto_if_ne RecordCorner_EventScript_AlreadyMixed
 	special Script_FacePlayer
@@ -1090,7 +1091,7 @@ CableClub_EventScript_WirelessTrade:: @ 827780D
 	end
 
 CableClub_EventScript_WirelessBattleSelect:: @ 827783B
-	message CableClub_Text_WhichBattleMode
+	message CableClub_Text_PlayWhichBattleMode
 	waitmessage
 	multichoice 0, 0, MULTI_BATTLE_MODE, 0
 	switch VAR_RESULT

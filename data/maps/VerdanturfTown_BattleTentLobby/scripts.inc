@@ -39,19 +39,15 @@ VerdanturfTown_BattleTentLobby_EventScript_201757:: @ 8201757
 	msgbox VerdanturfTown_BattleTentLobby_Text_2C5731, MSGBOX_DEFAULT
 	message VerdanturfTown_BattleTentLobby_Text_2C5791
 	waitmessage
-	setvar VAR_0x8004, 6
-	special CallVerdanturfTentFunction
+	verdanturftent_setrandomprize
 	frontier_set FRONTIER_DATA_LVL_MODE, FRONTIER_LVL_50
-	setvar VAR_0x8004, 5
-	setvar VAR_0x8005, 0
-	special CallVerdanturfTentFunction
+	verdanturftent_save 0
 	playse SE_SAVE
 	waitse
 
 VerdanturfTown_BattleTentLobby_EventScript_201791:: @ 8201791
 	msgbox VerdanturfTown_BattleTentLobby_Text_2C57CD, MSGBOX_DEFAULT
-	setvar VAR_0x8004, 7
-	special CallVerdanturfTentFunction
+	verdanturftent_giveprize
 	switch VAR_RESULT
 	case 0, VerdanturfTown_BattleTentLobby_EventScript_2017DD
 	frontier_set FRONTIER_DATA_CHALLENGE_STATUS, 0
@@ -84,9 +80,7 @@ VerdanturfTown_BattleTentLobby_EventScript_2017FD:: @ 82017FD
 	message VerdanturfTown_BattleTentLobby_Text_2C56B8
 	waitmessage
 	frontier_set FRONTIER_DATA_LVL_MODE, FRONTIER_LVL_50
-	setvar VAR_0x8004, 5
-	setvar VAR_0x8005, 0
-	special CallVerdanturfTentFunction
+	verdanturftent_save 0
 	playse SE_SAVE
 	waitse
 	msgbox VerdanturfTown_BattleTentLobby_Text_2C539A, MSGBOX_DEFAULT
@@ -100,9 +94,7 @@ VerdanturfTown_BattleTentLobby_EventScript_201837:: @ 8201837
 	msgbox VerdanturfTown_BattleTentLobby_Text_24E5D8, MSGBOX_DEFAULT
 	message VerdanturfTown_BattleTentLobby_Text_24E5F6
 	waitmessage
-	setvar VAR_0x8004, 5
-	setvar VAR_0x8005, 1
-	special CallVerdanturfTentFunction
+	verdanturftent_save CHALLENGE_STATUS_SAVING
 	playse SE_SAVE
 	waitse
 	frontier_set FRONTIER_DATA_PAUSED, FALSE
@@ -112,8 +104,7 @@ VerdanturfTown_BattleTentLobby_EventScript_201837:: @ 8201837
 VerdanturfTown_BattleTentLobby_EventScript_201873:: @ 8201873
 	lock
 	faceplayer
-	setvar VAR_0x8004, 1
-	special CallVerdanturfTentFunction
+	verdanturftent_getprize
 	compare VAR_RESULT, 0
 	goto_if_ne VerdanturfTown_BattleTentLobby_EventScript_2017EE
 	special SavePlayerParty
@@ -154,8 +145,7 @@ VerdanturfTown_BattleTentLobby_EventScript_2018CF:: @ 82018CF
 VerdanturfTown_BattleTentLobby_EventScript_201954:: @ 8201954
 	setvar VAR_TEMP_0, 0
 	frontier_set FRONTIER_DATA_SELECTED_MON_ORDER
-	setvar VAR_0x8004, 0
-	special CallVerdanturfTentFunction
+	verdanturftent_init
 	frontier_set FRONTIER_DATA_CHALLENGE_STATUS, CHALLENGE_STATUS_SAVING
 	frontier_set FRONTIER_DATA_PAUSED, FALSE
 	special LoadPlayerParty

@@ -11,8 +11,7 @@ BattleFrontier_BattlePikeRoomWildMons_MapScript2_25E42A: @ 825E42A
 
 BattleFrontier_BattlePikeRoomWildMons_EventScript_25E43C:: @ 825E43C
 	setvar VAR_TEMP_0, 1
-	setvar VAR_0x8004, BATTLE_PIKE_FUNC_6
-	special CallBattlePikeFunction
+	pike_inwildmonroom
 	end
 
 BattleFrontier_BattlePikeRoomWildMons_EventScript_25E44A:: @ 825E44A

@@ -66,8 +66,7 @@ BattleFrontier_BattleFactoryBattleRoom_EventScript_25AE67:: @ 825AE67
 	applymovement OBJ_EVENT_ID_PLAYER, BattleFrontier_BattleFactoryBattleRoom_Movement_25B17B
 	waitmovement 0
 	call BattleFrontier_BattleFactoryBattleRoom_EventScript_25B1B4
-	setvar VAR_0x8004, 11
-	special CallBattleFactoryFunction
+	factory_setopponentgfx
 	removeobject 2
 	setobjectxyperm 2, 7, 1
 	addobject 2
@@ -90,7 +89,6 @@ BattleFrontier_BattleFactoryBattleRoom_EventScript_25AEA7:: @ 825AEA7
 	waitstate
 	switch VAR_RESULT
 	case 1, BattleFrontier_BattleFactoryBattleRoom_EventScript_25AF0F
-
 BattleFrontier_BattleFactoryBattleRoom_EventScript_25AEF8:: @ 825AEF8
 BattleFrontier_BattleFactoryPreBattleRoom_EventScript_25AEF8:: @ 825AEF8
 	frontier_set FRONTIER_DATA_CHALLENGE_STATUS, CHALLENGE_STATUS_LOST
@@ -98,16 +96,12 @@ BattleFrontier_BattleFactoryPreBattleRoom_EventScript_25AEF8:: @ 825AEF8
 @ 	goto BattleFrontier_BattleFactoryPreBattleRoom_EventScript_25B190
 
 BattleFrontier_BattleFactoryBattleRoom_EventScript_25AF0F:: @ 825AF0F
-	setvar VAR_0x8004, 1
-	setvar VAR_0x8005, 3
-	special CallBattleFactoryFunction
+	factory_get FACTORY_DATA_WIN_STREAK_SWAPS
 	compare VAR_RESULT, MAX_STREAK
 	goto_if_eq BattleFrontier_BattleFactoryBattleRoom_EventScript_25AF3E
 	addvar VAR_RESULT, 1
 	setorcopyvar VAR_0x8006, VAR_RESULT
-	setvar VAR_0x8004, 2
-	setvar VAR_0x8005, 3
-	special CallBattleFactoryFunction
+	factory_set FACTORY_DATA_WIN_STREAK_SWAPS  @ uses VAR_0x8006 above
 BattleFrontier_BattleFactoryBattleRoom_EventScript_25AF3E:: @ 825AF3E
 	call BattleFrontier_EventScript_IncrementWinStreak
 BattleFrontier_BattleFactoryBattleRoom_EventScript_25AF43:: @ 825AF43
@@ -196,26 +190,17 @@ BattleFrontier_BattleFactoryBattleRoom_EventScript_25B0E0:: @ 825B0E0
 	return
 
 BattleFrontier_BattleFactoryBattleRoom_EventScript_25B105:: @ 825B105
-	setvar VAR_0x8004, 1
-	setvar VAR_0x8005, 3
-	special CallBattleFactoryFunction
+	factory_get FACTORY_DATA_WIN_STREAK_SWAPS
 	compare VAR_RESULT, MAX_STREAK
 	goto_if_eq BattleFrontier_BattleFactoryBattleRoom_EventScript_25AF3E
 	addvar VAR_RESULT, 1
 	setorcopyvar VAR_0x8006, VAR_RESULT
-	setvar VAR_0x8004, 2
-	setvar VAR_0x8005, 3
-	special CallBattleFactoryFunction
-	setvar VAR_0x8004, 1
-	setvar VAR_0x8005, 1
-	special CallBattleFactoryFunction
+	factory_set FACTORY_DATA_WIN_STREAK_SWAPS  @ uses VAR_0x8006 above
+	factory_get FACTORY_DATA_WIN_STREAK
 	compare VAR_RESULT, MAX_STREAK
 	goto_if_eq BattleFrontier_BattleFactoryBattleRoom_EventScript_25AF43
 	addvar VAR_RESULT, 1
-	setvar VAR_0x8004, 2
-	setvar VAR_0x8005, 1
-	copyvar VAR_0x8006, VAR_RESULT
-	special CallBattleFactoryFunction
+	factory_set FACTORY_DATA_WIN_STREAK, VAR_RESULT
 	frontier_get FRONTIER_DATA_BATTLE_NUM
 	addvar VAR_RESULT, 1
 	goto BattleFrontier_BattleFactoryBattleRoom_EventScript_25AF85

@@ -51,14 +51,8 @@ BattleFrontier_BattleTowerLobby_EventScript_23E710:: @ 823E710
 	faceplayer
 	msgbox BattleFrontier_BattleTowerLobby_Text_23F583, MSGBOX_DEFAULT
 	closemessage
-	setvar VAR_0x8004, BATTLE_TOWER_FUNC_2
-	setvar VAR_0x8005, 1
-	setvar VAR_0x8006, 0
-	special CallBattleTowerFunc
-	setvar VAR_0x8004, BATTLE_TOWER_FUNC_2
-	setvar VAR_0x8005, 2
-	setvar VAR_0x8006, 0
-	special CallBattleTowerFunc
+	tower_set TOWER_DATA_WIN_STREAK, 0
+	tower_set TOWER_DATA_WIN_STREAK_ACTIVE, FALSE
 	frontier_set FRONTIER_DATA_CHALLENGE_STATUS, 0
 	setvar VAR_TEMP_0, 255
 	release
@@ -78,24 +72,20 @@ BattleFrontier_BattleTowerLobby_EventScript_23E778:: @ 823E778
 	msgbox BattleFrontier_BattleTowerLobby_Text_241486, MSGBOX_DEFAULT
 
 BattleFrontier_BattleTowerLobby_EventScript_23E780:: @ 823E780
-	setvar VAR_0x8004, BATTLE_TOWER_FUNC_GIVE_RIBBONS
-	special CallBattleTowerFunc
-	compare VAR_RESULT, 0
+	tower_giveribbons
+	compare VAR_RESULT, FALSE
 	goto_if_eq BattleFrontier_BattleTowerLobby_EventScript_23E7A5
 	message BattleFrontier_BattleTowerLobby_Text_23F844
 	waitmessage
 	playfanfare MUS_FANFA4
 	waitfanfare
 	msgbox BattleFrontier_BattleTowerLobby_Text_23F89F, MSGBOX_DEFAULT
-
 BattleFrontier_BattleTowerLobby_EventScript_23E7A5:: @ 823E7A5
 	msgbox BattleFrontier_BattleTowerLobby_Text_2414D4, MSGBOX_DEFAULT
 	frontier_givepoints
 	msgbox BattleFrontier_Text_ObtainedXBattlePoints, MSGBOX_GETPOINTS
 	call BattleFrontier_BattleTowerLobby_EventScript_23E84D
-	setvar VAR_0x8004, BATTLE_TOWER_FUNC_1
-	setvar VAR_0x8005, 1
-	special CallBattleTowerFunc
+	tower_get TOWER_DATA_WIN_STREAK
 	compare VAR_RESULT, 49
 	goto_if_ne BattleFrontier_BattleTowerLobby_EventScript_23E7E2
 	msgbox BattleFrontier_BattleTowerLobby_Text_23F79D, MSGBOX_DEFAULT
@@ -111,18 +101,12 @@ BattleFrontier_BattleTowerLobby_EventScript_23E7F2:: @ 823E7F2
 	compare VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_MULTIS
 	goto_if_ne BattleFrontier_BattleTowerLobby_EventScript_23E81E
 	goto_if_set FLAG_CHOSEN_MULTI_BATTLE_NPC_PARTNER, BattleFrontier_BattleTowerLobby_EventScript_23E81E
-	setvar VAR_0x8004, BATTLE_TOWER_FUNC_1
-	setvar VAR_0x8005, 1
-	special CallBattleTowerFunc
+	tower_get TOWER_DATA_WIN_STREAK
 	compare VAR_RESULT, 0
 	goto_if_ne BattleFrontier_BattleTowerLobby_EventScript_23E830
 
 BattleFrontier_BattleTowerLobby_EventScript_23E81E:: @ 823E81E
-	setvar VAR_0x8004, BATTLE_TOWER_FUNC_2
-	setvar VAR_0x8005, 2
-	setvar VAR_0x8006, 0
-	special CallBattleTowerFunc
-
+	tower_set TOWER_DATA_WIN_STREAK_ACTIVE, FALSE
 BattleFrontier_BattleTowerLobby_EventScript_23E830:: @ 823E830
 	lock
 	faceplayer
@@ -141,9 +125,7 @@ BattleFrontier_BattleTowerLobby_EventScript_23E84D:: @ 823E84D
 	frontier_checkairshow
 	special LoadPlayerParty
 	special HealPlayerParty
-	setvar VAR_0x8004, BATTLE_TOWER_FUNC_SAVE
-	setvar VAR_0x8005, 0
-	special CallBattleTowerFunc
+	tower_save 0
 	playse SE_SAVE
 	waitse
 	call BattleFrontier_BattleTowerLobby_EventScript_23E8E0
@@ -193,9 +175,7 @@ BattleFrontier_BattleTowerLobby_EventScript_23E8EE:: @ 823E8EE
 	waitmessage
 	message BattleFrontier_BattleTowerLobby_Text_23F754
 	waitmessage
-	setvar VAR_0x8004, BATTLE_TOWER_FUNC_SAVE
-	setvar VAR_0x8005, 1
-	special CallBattleTowerFunc
+	tower_save CHALLENGE_STATUS_SAVING
 	playse SE_SAVE
 	waitse
 	frontier_set FRONTIER_DATA_PAUSED, FALSE
@@ -253,12 +233,8 @@ BattleFrontier_BattleTowerLobby_EventScript_23E984:: @ 823E984
 BattleFrontier_BattleTowerLobby_EventScript_23EA2A:: @ 823EA2A
 	frontier_set FRONTIER_DATA_SELECTED_MON_ORDER
 	setvar VAR_TEMP_0, 0
-	setvar VAR_0x8004, BATTLE_TOWER_FUNC_0
-	special CallBattleTowerFunc
-	setvar VAR_0x8004, BATTLE_TOWER_FUNC_2
-	setvar VAR_0x8005, 2
-	setvar VAR_0x8006, 1
-	special CallBattleTowerFunc
+	tower_init
+	tower_set TOWER_DATA_WIN_STREAK_ACTIVE, TRUE
 	frontier_set FRONTIER_DATA_PAUSED, FALSE
 	special LoadPlayerParty
 	closemessage
@@ -324,12 +300,8 @@ BattleFrontier_BattleTowerLobby_EventScript_23EAED:: @ 823EAED
 BattleFrontier_BattleTowerLobby_EventScript_23EB93:: @ 823EB93
 	frontier_set FRONTIER_DATA_SELECTED_MON_ORDER
 	setvar VAR_TEMP_0, 0
-	setvar VAR_0x8004, BATTLE_TOWER_FUNC_0
-	special CallBattleTowerFunc
-	setvar VAR_0x8004, BATTLE_TOWER_FUNC_2
-	setvar VAR_0x8005, 2
-	setvar VAR_0x8006, 1
-	special CallBattleTowerFunc
+	tower_init
+	tower_set TOWER_DATA_WIN_STREAK_ACTIVE, TRUE
 	frontier_set FRONTIER_DATA_PAUSED, FALSE
 	special LoadPlayerParty
 	closemessage
@@ -396,12 +368,8 @@ BattleFrontier_BattleTowerLobby_EventScript_23EC59:: @ 823EC59
 BattleFrontier_BattleTowerLobby_EventScript_23ECFF:: @ 823ECFF
 	frontier_set FRONTIER_DATA_SELECTED_MON_ORDER
 	setvar VAR_TEMP_0, 0
-	setvar VAR_0x8004, BATTLE_TOWER_FUNC_0
-	special CallBattleTowerFunc
-	setvar VAR_0x8004, BATTLE_TOWER_FUNC_2
-	setvar VAR_0x8005, 2
-	setvar VAR_0x8006, 1
-	special CallBattleTowerFunc
+	tower_init
+	tower_set TOWER_DATA_WIN_STREAK_ACTIVE, TRUE
 	frontier_set FRONTIER_DATA_PAUSED, FALSE
 	special LoadPlayerParty
 	closemessage
@@ -467,19 +435,13 @@ BattleFrontier_BattleTowerLobby_EventScript_23EDC2:: @ 823EDC2
 BattleFrontier_BattleTowerLobby_EventScript_23EE68:: @ 823EE68
 	frontier_set FRONTIER_DATA_SELECTED_MON_ORDER
 	setvar VAR_TEMP_0, 0
-	setvar VAR_0x8004, BATTLE_TOWER_FUNC_0
-	special CallBattleTowerFunc
-	setvar VAR_0x8004, BATTLE_TOWER_FUNC_2
-	setvar VAR_0x8005, 2
-	setvar VAR_0x8006, 1
-	special CallBattleTowerFunc
+	tower_init
+	tower_set TOWER_DATA_WIN_STREAK_ACTIVE, TRUE
 	frontier_set FRONTIER_DATA_PAUSED, FALSE
 	special LoadPlayerParty
 	closemessage
 	delay 2
-	setvar VAR_0x8004, BATTLE_TOWER_FUNC_SAVE
-	setvar VAR_0x8005, 0
-	special CallBattleTowerFunc
+	tower_save 0
 	call Common_EventScript_SaveGame
 	setvar VAR_TEMP_0, 255
 	compare VAR_RESULT, 0
@@ -909,9 +871,7 @@ BattleFrontier_BattleTowerLobby_EventScript_23F3AF:: @ 823F3AF
 	setvar VAR_BRAVO_TRAINER_BATTLE_TOWER_ON, 0
 	message BattleFrontier_BattleTowerLobby_Text_24144D
 	waitmessage
-	setvar VAR_0x8004, BATTLE_TOWER_FUNC_SAVE
-	setvar VAR_0x8005, 1
-	special CallBattleTowerFunc
+	tower_save CHALLENGE_STATUS_SAVING
 	special sub_80A08CC
 	waitstate
 	playse SE_SAVE
@@ -972,9 +932,7 @@ BattleFrontier_BattleTowerLobby_EventScript_23F496:: @ 823F496
 	setvar VAR_BRAVO_TRAINER_BATTLE_TOWER_ON, 0
 	message BattleFrontier_BattleTowerLobby_Text_24144D
 	waitmessage
-	setvar VAR_0x8004, BATTLE_TOWER_FUNC_SAVE
-	setvar VAR_0x8005, 1
-	special CallBattleTowerFunc
+	tower_save CHALLENGE_STATUS_SAVING
 	special sub_80A08CC
 	waitstate
 	playse SE_SAVE
