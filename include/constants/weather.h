@@ -12,7 +12,7 @@
 #define WEATHER_SANDSTORM               8
 #define WEATHER_FOG_DIAGONAL            9
 #define WEATHER_UNDERWATER              10
-#define WEATHER_SHADE                   11
+#define WEATHER_SHADE                   11  // original name was closer to WEATHER_CLOUDY/OVERCAST
 #define WEATHER_DROUGHT                 12
 #define WEATHER_DOWNPOUR                13
 #define WEATHER_UNDERWATER_BUBBLES      14
