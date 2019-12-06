@@ -375,7 +375,7 @@ static void FadeInScreenWithWeather(void)
     case WEATHER_RAIN_THUNDERSTORM:
     case WEATHER_DOWNPOUR:
     case WEATHER_SNOW:
-    case WEATHER_CLOUDY:
+    case WEATHER_SHADE:
         if (FadeInScreen_RainShowShade() == FALSE)
         {
             gWeatherPtr->gammaIndex = 3;
@@ -768,7 +768,7 @@ void FadeScreen(u8 mode, s8 delay)
     case WEATHER_DOWNPOUR:
     case WEATHER_SNOW:
     case WEATHER_FOG_HORIZONTAL:
-    case WEATHER_CLOUDY:
+    case WEATHER_SHADE:
     case WEATHER_DROUGHT:
         useWeatherPal = TRUE;
         break;
@@ -1022,7 +1022,7 @@ void sub_80AC274(u8 a)
         SetWeather(WEATHER_SANDSTORM);
         break;
     case 10:
-        SetWeather(WEATHER_CLOUDY);
+        SetWeather(WEATHER_SHADE);
         break;
     }
 }
