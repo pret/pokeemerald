@@ -2061,7 +2061,8 @@ static const struct Subsprite gUnknown_0858C02C[] =
         .tileOffset = 5,     
         .priority = 1
     },
-    {.x =  12,  
+    {
+        .x =  12,  
         .y = -4,  
         .shape = SPRITE_SHAPE(8x8),  
         .size = SPRITE_SIZE(8x8),
