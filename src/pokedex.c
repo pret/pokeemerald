@@ -206,7 +206,7 @@ void sub_80C01CC(struct Sprite *sprite);
 static void PrintMonInfo(u32 num, u32, u32 owned, u32 newEntry);
 static void PrintMonHeight(u16 height, u8 left, u8 top);
 static void PrintMonWeight(u16 weight, u8 left, u8 top);
-static void ResetOtherRegisters(u16);
+static void ResetOtherVideoRegisters(u16);
 u8 sub_80C0B44(u8, u16, u8, u8);
 static void PrintFootprint(u8 windowId, u16 dexNum);
 u16 sub_80C0EF8(u16, s16, s16, s8);
@@ -1323,7 +1323,7 @@ void CB2_Pokedex(void)
         case 0:
         default:
             SetVBlankCallback(NULL);
-            ResetOtherRegisters(0);
+            ResetOtherVideoRegisters(0);
             DmaFillLarge16(3, 0, (u8 *)VRAM, VRAM_SIZE, 0x1000);
             DmaClear32(3, OAM, OAM_SIZE);
             DmaClear16(3, PLTT, PLTT_SIZE);
@@ -1776,7 +1776,7 @@ bool8 sub_80BC514(u8 a)
                 return 0;
             SetVBlankCallback(NULL);
             sPokedexView->unk64A = a;
-            ResetOtherRegisters(0);
+            ResetOtherVideoRegisters(0);
             SetGpuReg(REG_OFFSET_BG2VOFS, sPokedexView->initialVOffset);
             ResetBgsAndClearDma3BusyFlags(0);
             InitBgsFromTemplates(0, sPokedex_BgTemplate, 4);
@@ -2927,7 +2927,7 @@ void LoadInfoScreen(u8 taskId)
                     r2 += DISPCNT_OBJ_ON;
                 if (gTasks[taskId].data[2] != 0)
                     r2 |= DISPCNT_BG1_ON;
-                ResetOtherRegisters(r2);
+                ResetOtherVideoRegisters(r2);
                 gMain.state = 1;
             }
             break;
@@ -2970,13 +2970,13 @@ void LoadInfoScreen(u8 taskId)
             break;
         case 6:
             {
-                u32 paletteIndex = 0;
+                u32 preservedPalettes = 0;
 
                 if (gTasks[taskId].data[2] != 0)
-                    paletteIndex = 0x14; // each bit represents a palette index
+                    preservedPalettes = 0x14; // each bit represents a palette index
                 if (gTasks[taskId].data[1] != 0)
-                    paletteIndex |= (1 << (gSprites[gTasks[taskId].tMonSpriteId].oam.paletteNum + 16));
-                BeginNormalPaletteFade(~paletteIndex, 0, 16, 0, RGB_BLACK);
+                    preservedPalettes |= (1 << (gSprites[gTasks[taskId].tMonSpriteId].oam.paletteNum + 16));
+                BeginNormalPaletteFade(~preservedPalettes, 0, 16, 0, RGB_BLACK);
                 SetVBlankCallback(gUnknown_030060B4);
                 gMain.state++;
             }
@@ -3164,7 +3164,7 @@ void LoadAreaScreen(u8 taskId)
                 sPokedexView->unk64A = 5;
                 gUnknown_030060B4 = gMain.vblankCallback;
                 SetVBlankCallback(NULL);
-                ResetOtherRegisters(DISPCNT_BG1_ON);
+                ResetOtherVideoRegisters(DISPCNT_BG1_ON);
                 sPokedexView->selectedScreen = AREA_SCREEN;
                 gMain.state = 1;
             }
@@ -3222,7 +3222,7 @@ void LoadCryScreen(u8 taskId)
                 sPokedexView->unk64A = 6;
                 gUnknown_030060B4 = gMain.vblankCallback;
                 SetVBlankCallback(NULL);
-                ResetOtherRegisters(DISPCNT_BG1_ON);
+                ResetOtherVideoRegisters(DISPCNT_BG1_ON);
                 sPokedexView->selectedScreen = CRY_SCREEN;
                 gMain.state = 1;
             }
@@ -3416,7 +3416,7 @@ void LoadSizeScreen(u8 taskId)
                 sPokedexView->unk64A = 7;
                 gUnknown_030060B4 = gMain.vblankCallback;
                 SetVBlankCallback(NULL);
-                ResetOtherRegisters(DISPCNT_BG1_ON);
+                ResetOtherVideoRegisters(DISPCNT_BG1_ON);
                 sPokedexView->selectedScreen = SIZE_SCREEN;
                 gMain.state = 1;
             }
@@ -3761,7 +3761,7 @@ static void Task_DisplayNewMonData(u8 taskId)
             {
                 gUnknown_030060B4 = gMain.vblankCallback;
                 SetVBlankCallback(NULL);
-                ResetOtherRegisters(DISPCNT_BG0_ON);
+                ResetOtherVideoRegisters(DISPCNT_BG0_ON);
                 ResetBgsAndClearDma3BusyFlags(0);
                 InitBgsFromTemplates(0, sNewEntryInfoScreen_BgTemplate, 2);
                 SetBgTilemapBuffer(3, AllocZeroed(0x800));
@@ -4436,7 +4436,7 @@ bool16 HasAllMons(void)
     return TRUE;
 }
 
-static void ResetOtherRegisters(u16 a)
+static void ResetOtherVideoRegisters(u16 a)
 {
     if (!(a & DISPCNT_BG0_ON))
     {
@@ -4803,7 +4803,7 @@ void Task_LoadSearchMenu(u8 taskId)
             if (!gPaletteFade.active)
             {
                 sPokedexView->unk64A = 2;
-                ResetOtherRegisters(0);
+                ResetOtherVideoRegisters(0);
                 ResetBgsAndClearDma3BusyFlags(0);
                 InitBgsFromTemplates(0, sSearchMenu_BgTemplate, 4);
                 SetBgTilemapBuffer(3, AllocZeroed(0x800));
