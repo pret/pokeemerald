@@ -6,7 +6,7 @@ BattleFrontier_BattlePalaceBattleRoom_MapScripts:: @ 824F815
 
 	@ On this map the player (OBJ_EVENT_ID_PLAYER) is hidden
 	@ The player is represented instead by object event 1, which has the gfx id VAR_OBJ_GFX_ID_0
-	@ The opponent is represented by objct event 2, which has the gfx id VAR_OBJ_GFX_ID_1
+	@ The opponent is represented by object event 2, which has the gfx id VAR_OBJ_GFX_ID_1
 
 BattleFrontier_BattlePalaceBattleRoom_OnTransition: @ 824F825
 	frontier_settrainers
