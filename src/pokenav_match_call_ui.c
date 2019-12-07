@@ -91,7 +91,7 @@ u32 LoopedTask_sub_81C83F0(s32 state);
 u32 LoopedTask_sub_81C85A0(s32 state);
 u32 LoopedTask_sub_81C8870(s32 state);
 u32 LoopedTask_sub_81C8A28(s32 state);
-u32 LoopedTask_sub_81C8958(s32 state);
+u32 LoopedTask_PrintCheckPageInfo(s32 state);
 
 static const u16 sMatchcallArrowPaletteData[] = INCBIN_U16("graphics/pokenav/arrows_matchcall.gbapal");
 static const u32 sMatchcallArrowSpriteSheetData[] = INCBIN_U32("graphics/pokenav/arrows_matchcall.4bpp.lz");
@@ -467,12 +467,12 @@ void sub_81C877C(void)
     structPtr->unk8A0 = CreateLoopedTask(LoopedTask_sub_81C8870, 6);
 }
 
-void sub_81C87AC(s16 a0)
+void PrintCheckPageInfo(s16 a0)
 {
     struct PokenavSub17 *structPtr = GetSubstructPtr(17);
     structPtr->unk888.windowTopIndex += a0;
     structPtr->unk89C = 0;
-    structPtr->unk8A0 = CreateLoopedTask(LoopedTask_sub_81C8958, 6);
+    structPtr->unk8A0 = CreateLoopedTask(LoopedTask_PrintCheckPageInfo, 6);
 }
 
 void sub_81C87F0(void)
@@ -496,6 +496,7 @@ void sub_81C8838(void)
     CopyWindowToVram(structPtr->unk0.unk0.windowId, 1);
 }
 
+// TODO:
 u32 LoopedTask_sub_81C8870(s32 state)
 {
     struct PokenavSub17 *structPtr = GetSubstructPtr(17);
@@ -543,7 +544,7 @@ u32 LoopedTask_sub_81C8870(s32 state)
     return LT_FINISH;
 }
 
-u32 LoopedTask_sub_81C8958(s32 state)
+u32 LoopedTask_PrintCheckPageInfo(s32 state)
 {
     struct PokenavSub17 *structPtr = GetSubstructPtr(17);
     if (IsDma3ManagerBusyWithBgCopy())
@@ -683,7 +684,7 @@ void sub_81C8B70(struct UnknownSubSubStruct_0203CF40 *a0, s32 a1, s32 a2)
     }
 
     for (a2--; a2 != -1; a1 = (a1 + 1) & 0xF, a2--)
-        sub_81CBD48(a0->windowId, a1);
+        ClearRematchPokeballIcon(a0->windowId, a1);
 
     CopyWindowToVram(a0->windowId, 1);
 }

@@ -576,7 +576,7 @@ u32 sub_81D0A6C(s32 state)
         return LT_PAUSE;
     case 7:
         sub_81D12D8(structPtr);
-        sub_81C7BA4(10);
+        PrintHelpBarText(HELPBAR_RIBBONS_LIST);
         return LT_INC_AND_PAUSE;
     case 8:
         if (!IsDma3ManagerBusyWithBgCopy())
@@ -670,7 +670,7 @@ u32 sub_81D0D2C(s32 state)
         if (!sub_81D1524(structPtr))
         {
             sub_81D0EFC(structPtr);
-            sub_81C7BA4(11);
+            PrintHelpBarText(HELPBAR_RIBBONS_CHECK);
             return LT_INC_AND_PAUSE;
         }
         return LT_PAUSE;
@@ -724,7 +724,7 @@ u32 sub_81D0E00(s32 state)
         if (!sub_81D1524(structPtr))
         {
             sub_81D0E84(structPtr);
-            sub_81C7BA4(10);
+            PrintHelpBarText(HELPBAR_RIBBONS_LIST);
             return LT_INC_AND_PAUSE;
         }
         return LT_PAUSE;

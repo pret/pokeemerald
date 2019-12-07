@@ -435,7 +435,7 @@ static u32 sub_81CF418(s32 state)
         if (sub_81C8224())
             return LT_PAUSE;
         sub_81CF7C8(unk);
-        sub_81C7BA4(3);
+        PrintHelpBarText(HELPBAR_CONDITION_MON_LIST);
         return LT_INC_AND_PAUSE;
     case 4:
         if (free_temp_tile_data_buffers_if_possible())

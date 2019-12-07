@@ -15,17 +15,18 @@
 #include "constants/flags.h"
 #include "constants/songs.h"
 
-//#define ??  id1
-#define mapSec      id2  // naming multi-purpose field   
-#define headerId    data // naming multi-purpose field
+// naming multi-purpose fields
+#define isSpecialTrainer  id1  // Gym Leaders, for example. As opposed to regular NPC
+#define mapSec            id2  
+#define headerId          data 
 
 struct Pokenav3Struct
 {
-    u16 unk0;
-    u16 unk2;
+    u16 optionCursorPos;
+    u16 maxOptionId;
     const u8 *matchCallOptions;
     u16 headerId;
-    u16 unkA;
+    u16 numRegistered;
     u16 unkC;
     u32 unk10;
     u32 unk14;
@@ -35,9 +36,9 @@ struct Pokenav3Struct
 
 static u32 CB2_HandleMatchCallInput(struct Pokenav3Struct *);
 static u32 sub_81CABFC(struct Pokenav3Struct *);
-static u32 sub_81CAC04(struct Pokenav3Struct *);
-static u32 sub_81CACB8(struct Pokenav3Struct *);
-static u32 sub_81CACF8(struct Pokenav3Struct *);
+static u32 CB2_HandleMatchCallOptionsInput(struct Pokenav3Struct *);
+static u32 CB2_HandleCheckPageInput(struct Pokenav3Struct *);
+static u32 CB2_HandleCallInput(struct Pokenav3Struct *);
 static u32 sub_81CAD20(s32);
 static bool32 sub_81CB1D0(void);
 
@@ -95,18 +96,19 @@ static u32 CB2_HandleMatchCallInput(struct Pokenav3Struct *state)
 
     if (gMain.newKeys & A_BUTTON)
     {
-        state->callback = sub_81CAC04;
-        state->unk0 = 0;
+        state->callback = CB2_HandleMatchCallOptionsInput;
+        state->optionCursorPos = 0;
         selection = GetSelectedMatchCall();
-        if (!state->matchCallEntries[selection].id1 || MatchCall_HasCheckPage(state->matchCallEntries[selection].headerId))
+
+        if (!state->matchCallEntries[selection].isSpecialTrainer || MatchCall_HasCheckPage(state->matchCallEntries[selection].headerId))
         {
             state->matchCallOptions = sMatchCallOptionsHasCheckPage;
-            state->unk2 = 2;
+            state->maxOptionId = ARRAY_COUNT(sMatchCallOptionsHasCheckPage) - 1;
         }
         else
         {
             state->matchCallOptions = sMatchCallOptionsNoCheckPage;
-            state->unk2 = 1;
+            state->maxOptionId = ARRAY_COUNT(sMatchCallOptionsNoCheckPage) - 1;
         }
 
         return POKENAV_MC_FUNC_SELECT;
@@ -134,68 +136,68 @@ static u32 sub_81CABFC(struct Pokenav3Struct *state)
     return POKENAV_MENU_4;
 }
 
-static u32 sub_81CAC04(struct Pokenav3Struct *state)
+static u32 CB2_HandleMatchCallOptionsInput(struct Pokenav3Struct *state)
 {
-    if ((gMain.newKeys & DPAD_UP) && state->unk0)
+    if ((gMain.newKeys & DPAD_UP) && state->optionCursorPos)
     {
-        state->unk0--;
-        return POKENAV_MC_FUNC_6;
+        state->optionCursorPos--;
+        return POKENAV_MC_FUNC_MOVE_OPTIONS_CURSOR;
     }
 
-    if ((gMain.newKeys & DPAD_DOWN) && state->unk0 < state->unk2)
+    if ((gMain.newKeys & DPAD_DOWN) && state->optionCursorPos < state->maxOptionId)
     {
-        state->unk0++;
-        return POKENAV_MC_FUNC_6;
+        state->optionCursorPos++;
+        return POKENAV_MC_FUNC_MOVE_OPTIONS_CURSOR;
     }
 
     if (gMain.newKeys & A_BUTTON)
     {
-        switch (state->matchCallOptions[state->unk0])
+        switch (state->matchCallOptions[state->optionCursorPos])
         {
         case MATCH_CALL_OPTION_CANCEL:
             state->callback = CB2_HandleMatchCallInput;
-            return POKENAV_MC_FUNC_7;
+            return POKENAV_MC_FUNC_CANCEL;
         case MATCH_CALL_OPTION_CALL:
             if (GetPokenavMode() == POKENAV_MODE_FORCE_CALL_READY)
                 SetPokenavMode(POKENAV_MODE_FORCE_CALL_EXIT);
 
-            state->callback = sub_81CACF8;
+            state->callback = CB2_HandleCallInput;
             if (sub_81CB1D0())
                 return POKENAV_MC_FUNC_NEARBY_MSG;
 
             return POKENAV_MC_FUNC_CALL_MSG;
         case MATCH_CALL_OPTION_CHECK:
-            state->callback = sub_81CACB8;
-            return POKENAV_MC_FUNC_11;
+            state->callback = CB2_HandleCheckPageInput;
+            return POKENAV_MC_FUNC_SHOW_CHECK_PAGE;
         }
     }
 
     if (gMain.newKeys & B_BUTTON)
     {
         state->callback = CB2_HandleMatchCallInput;
-        return POKENAV_MC_FUNC_7;
+        return POKENAV_MC_FUNC_CANCEL;
     }
 
     return POKENAV_MC_FUNC_NONE;
 }
 
-static u32 sub_81CACB8(struct Pokenav3Struct *state)
+static u32 CB2_HandleCheckPageInput(struct Pokenav3Struct *state)
 {
     if (gMain.newAndRepeatedKeys & DPAD_UP)
-        return POKENAV_MC_FUNC_12;
+        return POKENAV_MC_FUNC_CHECK_PAGE_UP;
     if (gMain.newAndRepeatedKeys & DPAD_DOWN)
-        return POKENAV_MC_FUNC_13;
+        return POKENAV_MC_FUNC_CHECK_PAGE_DOWN;
 
     if (gMain.newKeys & B_BUTTON)
     {
         state->callback = CB2_HandleMatchCallInput;
-        return POKENAV_MC_FUNC_14;
+        return POKENAV_MC_FUNC_EXIT_CHECK_PAGE;
     }
 
     return POKENAV_MC_FUNC_NONE;
 }
 
-static u32 sub_81CACF8(struct Pokenav3Struct *state)
+static u32 CB2_HandleCallInput(struct Pokenav3Struct *state)
 {
     if (gMain.newKeys & (A_BUTTON | B_BUTTON))
     {
@@ -214,17 +216,17 @@ static u32 sub_81CAD20(s32 taskState)
     {
     case 0:
         state->headerId = 0;
-        state->unkA = 0;
+        state->numRegistered = 0;
         return LT_INC_AND_CONTINUE;
     case 1:
         for (i = 0, j = state->headerId; i < 30; i++, j++)
         {
-            if (MatchCallFlagGetByIndex(j))
+            if (MatchCall_GetEnabled(j))
             {
-                state->matchCallEntries[state->unkA].headerId = j;
-                state->matchCallEntries[state->unkA].id1 = TRUE;
-                state->matchCallEntries[state->unkA].mapSec = MatchCallMapSecGetByIndex(j);
-                state->unkA++;
+                state->matchCallEntries[state->numRegistered].headerId = j;
+                state->matchCallEntries[state->numRegistered].isSpecialTrainer = TRUE;
+                state->matchCallEntries[state->numRegistered].mapSec = MatchCall_GetMapSec(j);
+                state->numRegistered++;
             }
 
             if (++state->headerId >= MC_HEADER_COUNT)
@@ -239,12 +241,12 @@ static u32 sub_81CAD20(s32 taskState)
     case 2:
         for (i = 0, j = state->headerId; i < 30; i++, j++)
         {
-            if (!sub_81D1BF8(state->headerId) && IsRematchEntryRegistered(state->headerId))
+            if (!MatchCall_HasRematchId(state->headerId) && IsRematchEntryRegistered(state->headerId))
             {
-                state->matchCallEntries[state->unkA].headerId = state->headerId;
-                state->matchCallEntries[state->unkA].id1 = FALSE;
-                state->matchCallEntries[state->unkA].mapSec = sub_81CB0C8(j);
-                state->unkA++;
+                state->matchCallEntries[state->numRegistered].headerId = state->headerId;
+                state->matchCallEntries[state->numRegistered].isSpecialTrainer = FALSE;
+                state->matchCallEntries[state->numRegistered].mapSec = sub_81CB0C8(j);
+                state->numRegistered++;
             }
 
             if (++state->headerId > REMATCH_TABLE_ENTRIES - 1)
@@ -274,10 +276,10 @@ int sub_81CAE28(void)
     return state->unk10;
 }
 
-int sub_81CAE38(void)
+int GetNumberRegistered(void)
 {
     struct Pokenav3Struct *state = GetSubstructPtr(5);
-    return state->unkA;
+    return state->numRegistered;
 }
 
 int sub_81CAE48(void)
@@ -289,14 +291,14 @@ int sub_81CAE48(void)
 int unref_sub_81CAE58(void)
 {
     struct Pokenav3Struct *state = GetSubstructPtr(5);
-    return state->unkA - state->unkC;
+    return state->numRegistered - state->unkC;
 }
 
 int unref_sub_81CAE6C(int arg0)
 {
     struct Pokenav3Struct *state = GetSubstructPtr(5);
     arg0 += state->unkC;
-    if (arg0 >= state->unkA)
+    if (arg0 >= state->numRegistered)
         return REMATCH_TABLE_ENTRIES;
 
     return state->matchCallEntries[arg0].headerId;
@@ -308,16 +310,16 @@ struct PokenavMonList *sub_81CAE94(void)
     return state->matchCallEntries;
 }
 
-u16 sub_81CAEA4(int index)
+u16 GetMatchCallMapSec(int index)
 {
     struct Pokenav3Struct *state = GetSubstructPtr(5);
     return state->matchCallEntries[index].mapSec;
 }
 
-bool32 sub_81CAEBC(int index)
+bool32 ShouldDrawRematchPokeballIcon(int index)
 {
     struct Pokenav3Struct *state = GetSubstructPtr(5);
-    if (!state->matchCallEntries[index].id1)
+    if (!state->matchCallEntries[index].isSpecialTrainer)
         index = state->matchCallEntries[index].headerId;
     else
         index = MatchCall_GetRematchTableIdx(state->matchCallEntries[index].headerId);
@@ -332,7 +334,7 @@ int GetMatchCallTrainerPic(int index)
 {
     int var0;
     struct Pokenav3Struct *state = GetSubstructPtr(5);
-    if (!state->matchCallEntries[index].id1)
+    if (!state->matchCallEntries[index].isSpecialTrainer)
     {
         index = GetTrainerIdxByRematchIdx(state->matchCallEntries[index].headerId);
         return gTrainers[index].trainerPic;
@@ -357,7 +359,7 @@ const u8 *GetMatchCallMessageText(int index, u8 *arg1)
     if (!Overworld_MapTypeAllowsTeleportAndFly(gMapHeader.mapType))
         return gText_CallCantBeMadeHere;
 
-    if (!state->matchCallEntries[index].id1)
+    if (!state->matchCallEntries[index].isSpecialTrainer)
         *arg1 = SelectMatchCallMessage(GetTrainerIdxByRematchIdx(state->matchCallEntries[index].headerId), gStringVar4);
     else
         MatchCall_GetMessage(state->matchCallEntries[index].headerId, gStringVar4);
@@ -369,7 +371,7 @@ const u8 *GetMatchCallFlavorText(int index, int checkPageEntry)
 {
     int rematchId;
     struct Pokenav3Struct *state = GetSubstructPtr(5);
-    if (state->matchCallEntries[index].id1)
+    if (state->matchCallEntries[index].isSpecialTrainer)
     {
         rematchId = MatchCall_GetRematchTableIdx(state->matchCallEntries[index].headerId);
         if (rematchId == REMATCH_TABLE_ENTRIES)
@@ -383,28 +385,28 @@ const u8 *GetMatchCallFlavorText(int index, int checkPageEntry)
     return gMatchCallFlavorTexts[rematchId][checkPageEntry];
 }
 
-u16 sub_81CB01C(void)
+u16 GetMatchCallOptionCursorPos(void)
 {
     struct Pokenav3Struct *state = GetSubstructPtr(5);
-    return state->unk0;
+    return state->optionCursorPos;
 }
 
-u16 sub_81CB02C(int arg0)
+u16 GetMatchCallOptionId(int optionId)
 {
     struct Pokenav3Struct *state = GetSubstructPtr(5);
-    if (state->unk2 < arg0)
+    if (state->maxOptionId < optionId)
         return MATCH_CALL_OPTION_COUNT;
 
-    return state->matchCallOptions[arg0];
+    return state->matchCallOptions[optionId];
 }
 
-void sub_81CB050(struct PokenavMonList * arg0, u8 *str)
+void BufferMatchCallNameAndDesc(struct PokenavMonList *matchCallEntry, u8 *str)
 {
     const u8 *trainerName;
     const u8 *className;
-    if (!arg0->id1)
+    if (!matchCallEntry->isSpecialTrainer)
     {
-        int index = GetTrainerIdxByRematchIdx(arg0->headerId);
+        int index = GetTrainerIdxByRematchIdx(matchCallEntry->headerId);
         const struct Trainer *trainer = &gTrainers[index];
         int class = trainer->trainerClass;
         className = gTrainerClassNames[class];
@@ -412,7 +414,7 @@ void sub_81CB050(struct PokenavMonList * arg0, u8 *str)
     }
     else
     {
-        sub_81D1A78(arg0->headerId, &className, &trainerName);
+        MatchCall_GetNameAndDesc(matchCallEntry->headerId, &className, &trainerName);
     }
 
     if (className && trainerName)
@@ -433,13 +435,13 @@ u8 sub_81CB0C8(int rematchIndex)
     return Overworld_GetMapHeaderByGroupAndId(mapGroup, mapNum)->regionMapSectionId;
 }
 
-int sub_81CB0E4(int index)
+int GetIndexDeltaOfNextCheckPageDown(int index)
 {
     struct Pokenav3Struct *state = GetSubstructPtr(5);
     int count = 1;
-    while (++index < state->unkA)
+    while (++index < state->numRegistered)
     {
-        if (!state->matchCallEntries[index].id1)
+        if (!state->matchCallEntries[index].isSpecialTrainer)
             return count;
         if (MatchCall_HasCheckPage(state->matchCallEntries[index].headerId))
             return count;
@@ -450,13 +452,13 @@ int sub_81CB0E4(int index)
     return 0;
 }
 
-int sub_81CB128(int index)
+int GetIndexDeltaOfNextCheckPageUp(int index)
 {
     struct Pokenav3Struct *state = GetSubstructPtr(5);
     int count = -1;
     while (--index >= 0)
     {
-        if (!state->matchCallEntries[index].id1)
+        if (!state->matchCallEntries[index].isSpecialTrainer)
             return count;
         if (MatchCall_HasCheckPage(state->matchCallEntries[index].headerId))
             return count;
@@ -479,7 +481,7 @@ bool32 unref_sub_81CB16C(void)
 
     for (i = 0; i < MC_HEADER_COUNT; i++)
     {
-        if (MatchCallFlagGetByIndex(i))
+        if (MatchCall_GetEnabled(i))
         {
             int index = MatchCall_GetRematchTableIdx(i);
             if (gSaveBlock1Ptr->trainerRematches[index])
@@ -494,9 +496,9 @@ static bool32 sub_81CB1D0(void)
 {
     struct Pokenav3Struct *state = GetSubstructPtr(5);
     int selection = GetSelectedMatchCall();
-    if (!state->matchCallEntries[selection].id1)
+    if (!state->matchCallEntries[selection].isSpecialTrainer)
     {
-        if (sub_81CAEA4(selection) == gMapHeader.regionMapSectionId)
+        if (GetMatchCallMapSec(selection) == gMapHeader.regionMapSectionId)
         {
             if (!gSaveBlock1Ptr->trainerRematches[state->matchCallEntries[selection].headerId])
                 return TRUE;
@@ -506,7 +508,7 @@ static bool32 sub_81CB1D0(void)
     {
         if (state->matchCallEntries[selection].headerId == MC_HEADER_WATTSON)
         {
-            if (sub_81CAEA4(selection) == gMapHeader.regionMapSectionId
+            if (GetMatchCallMapSec(selection) == gMapHeader.regionMapSectionId
              && FlagGet(FLAG_BADGE05_GET) == TRUE)
             {
                 if (!FlagGet(FLAG_WATTSON_REMATCH_AVAILABLE))

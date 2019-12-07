@@ -448,7 +448,7 @@ static u32 sub_81CFEB8(s32 state)
             return LT_PAUSE;
         ShowBg(2);
         HideBg(3);
-        sub_81C7BA4(9);
+        PrintHelpBarText(HELPBAR_RIBBONS_MON_LIST);
         sub_81C7AC0(1);
         if (!unk->unkC)
         {
