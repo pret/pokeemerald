@@ -55,7 +55,7 @@ EverGrandeCity_DrakesRoom_EventScript_PostBattleSpeech:: @ 822871A
 
 EverGrandeCity_DrakesRoom_EventScript_Defeated:: @ 8228724
 	setvar VAR_0x8004, 0
-	special sub_813BF7C
+	special Script_TryGainNewFanFromCounter
 	setflag FLAG_DEFEATED_ELITE_4_DRAKE
 	call PokemonLeague_EliteFour_SetAdvanceToNextRoomMetatiles
 	msgbox EverGrandeCity_DrakesRoom_Text_PostBattleSpeech, MSGBOX_DEFAULT

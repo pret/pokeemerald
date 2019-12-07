@@ -1,9 +1,16 @@
 #include "constants/global.h"
+#include "constants/apprentice.h"
 #include "constants/battle.h"
+#include "constants/battle_arena.h"
+#include "constants/battle_dome.h"
+#include "constants/battle_factory.h"
+#include "constants/battle_frontier.h"
+#include "constants/battle_palace.h"
 #include "constants/battle_pike.h"
 #include "constants/battle_pyramid.h"
-#include "constants/battle_frontier.h"
 #include "constants/battle_setup.h"
+#include "constants/battle_tent.h"
+#include "constants/battle_tower.h"
 #include "constants/berry.h"
 #include "constants/cable_club.h"
 #include "constants/coins.h"
@@ -88,7 +95,7 @@ gStdScripts:: @ 81DC2A0
 	.4byte Std_MsgboxAutoclose
 	.4byte Std_ObtainDecoration
 	.4byte Std_RegisteredInMatchCall
-	.4byte Std_9
+	.4byte Std_MsgboxGetPoints
 	.4byte Std_10
 gStdScripts_End:: @ 81DC2CC
 
@@ -449,21 +456,6 @@ gStdScripts_End:: @ 81DC2CC
 	.include "data/maps/SSTidalLowerDeck/scripts.inc"
 	.include "data/maps/SSTidalRooms/scripts.inc"
 	.include "data/maps/BattlePyramidSquare01/scripts.inc"
-	.include "data/maps/BattlePyramidSquare02/scripts.inc"
-	.include "data/maps/BattlePyramidSquare03/scripts.inc"
-	.include "data/maps/BattlePyramidSquare04/scripts.inc"
-	.include "data/maps/BattlePyramidSquare05/scripts.inc"
-	.include "data/maps/BattlePyramidSquare06/scripts.inc"
-	.include "data/maps/BattlePyramidSquare07/scripts.inc"
-	.include "data/maps/BattlePyramidSquare08/scripts.inc"
-	.include "data/maps/BattlePyramidSquare09/scripts.inc"
-	.include "data/maps/BattlePyramidSquare10/scripts.inc"
-	.include "data/maps/BattlePyramidSquare11/scripts.inc"
-	.include "data/maps/BattlePyramidSquare12/scripts.inc"
-	.include "data/maps/BattlePyramidSquare13/scripts.inc"
-	.include "data/maps/BattlePyramidSquare14/scripts.inc"
-	.include "data/maps/BattlePyramidSquare15/scripts.inc"
-	.include "data/maps/BattlePyramidSquare16/scripts.inc"
 	.include "data/maps/UnionRoom/scripts.inc"
 	.include "data/maps/SafariZone_Northwest/scripts.inc"
 	.include "data/maps/SafariZone_North/scripts.inc"
@@ -502,9 +494,9 @@ gStdScripts_End:: @ 81DC2CC
 	.include "data/maps/BattleFrontier_BattlePikeLobby/scripts.inc"
 	.include "data/maps/BattleFrontier_BattlePikeCorridor/scripts.inc"
 	.include "data/maps/BattleFrontier_BattlePikeThreePathRoom/scripts.inc"
-	.include "data/maps/BattleFrontier_BattlePikeRandomRoom1/scripts.inc"
-	.include "data/maps/BattleFrontier_BattlePikeRandomRoom2/scripts.inc"
-	.include "data/maps/BattleFrontier_BattlePikeRandomRoom3/scripts.inc"
+	.include "data/maps/BattleFrontier_BattlePikeRoomNormal/scripts.inc"
+	.include "data/maps/BattleFrontier_BattlePikeRoomFinal/scripts.inc"
+	.include "data/maps/BattleFrontier_BattlePikeRoomWildMons/scripts.inc"
 	.include "data/maps/BattleFrontier_RankingHall/scripts.inc"
 	.include "data/maps/BattleFrontier_Lounge1/scripts.inc"
 	.include "data/maps/BattleFrontier_ExchangeServiceCorner/scripts.inc"
@@ -607,7 +599,7 @@ Std_MsgboxYesNo: @ 8271332
 	yesnobox 20, 8
 	return
 
-Std_9: @ 827133C
+Std_MsgboxGetPoints: @ 827133C
 	message 0x0
 	playfanfare MUS_ME_POINTGET
 	waitfanfare
@@ -1110,6 +1102,7 @@ Common_EventScript_LegendaryFlewAway:: @ 8273776
 	.include "data/scripts/lilycove_lady.inc"
 	.include "data/text/match_call.inc"
 	.include "data/scripts/apprentice.inc"
+	.include "data/text/apprentice.inc"
 	.include "data/text/battle_dome.inc"
 	.include "data/scripts/battle_pike.inc"
 	.include "data/text/blend_master.inc"

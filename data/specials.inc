@@ -174,14 +174,14 @@ gSpecials:: @ 81DBA64
 	def_special GetFirstFreePokeblockSlot
 	def_special DoBerryBlending
 	def_special PlayRoulette
-	def_special ShouldMoveLilycoveFanClubMember
-	def_special GetNumMovedLilycoveFanClubMembers
-	def_special BufferStreakTrainerText
-	def_special sub_813BA30
-	def_special UpdateMovedLilycoveFanClubMembers
-	def_special sub_813BF60
+	def_special IsFanClubMemberFanOfPlayer
+	def_special GetNumFansOfPlayerInTrainerFanClub
+	def_special BufferFanClubTrainerName
+	def_special TryLoseFansFromPlayTimeAfterLinkBattle
+	def_special TryLoseFansFromPlayTime
+	def_special SetPlayerGotFirstFans
 	def_special UpdateTrainerFanClubGameClear
-	def_special sub_813BF7C
+	def_special Script_TryGainNewFanFromCounter
 	def_special RockSmashWildEncounter
 	def_special GabbyAndTyGetBattleNum
 	def_special GabbyAndTyAfterInterview
@@ -243,7 +243,7 @@ gSpecials:: @ 81DBA64
 	def_special UpdateCyclingRoadState
 	def_special GetLeadMonFriendshipScore
 	def_special CallFrontierUtilFunc
-	def_special sub_8161F74
+	def_special CallBattleTowerFunc
 	def_special CallBattleDomeFunction
 	def_special CallBattlePalaceFunction
 	def_special CopyEReaderTrainerGreeting
@@ -253,10 +253,10 @@ gSpecials:: @ 81DBA64
 	def_special CallBattlePikeFunction
 	def_special CallBattlePyramidFunction
 	def_special StopMapMusic
-	def_special sub_81B99B4
-	def_special sub_81B9B80
-	def_special sub_81B9D08
-	def_special sub_80F9490
+	def_special CallVerdanturfTentFunction
+	def_special CallFallarborTentFunction
+	def_special CallSlateportTentFunction
+	def_special ChoosePartyForBattleFrontier
 	def_special ValidateEReaderTrainer
 	def_special GetBestBattleTowerStreak
 	def_special ReducePlayerPartyToSelectedMons
@@ -354,8 +354,8 @@ gSpecials:: @ 81DBA64
 	def_special SetChampionSaveWarp
 	def_special TryPutTreasureInvestigatorsOnAir
 	def_special TryPutLotteryWinnerReportOnAir
-	def_special sub_80EE72C
-	def_special sub_80EE7C0
+	def_special TrySetUpTrainerFanClubSpecial
+	def_special ShouldHideFanClubInterviewer
 	def_special ShowGlassWorkshopMenu
 	def_special PutFanClubSpecialOnTheAir
 	def_special IncrementDailyPlantedBerries

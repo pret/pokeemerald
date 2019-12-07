@@ -334,9 +334,9 @@ bool32 MoveRecordedBattleToSaveData(void)
     s32 i, j;
     bool32 ret;
     struct RecordedBattleSave *battleSave, *savSection;
-    u8 var;
+    u8 saveAttempts;
 
-    var = 0;
+    saveAttempts = 0;
     battleSave = AllocZeroed(sizeof(struct RecordedBattleSave));
     savSection = AllocZeroed(0x1000);
 
@@ -409,12 +409,12 @@ bool32 MoveRecordedBattleToSaveData(void)
 
         if (sBattleOutcome == B_OUTCOME_WON)
         {
-            for (i = 0; i < 6; i++)
+            for (i = 0; i < EASY_CHAT_BATTLE_WORDS_COUNT; i++)
                 battleSave->easyChatSpeech[i] = gSaveBlock2Ptr->frontier.towerRecords[gTrainerBattleOpponent_A - TRAINER_RECORD_MIXING_FRIEND].speechLost[i];
         }
         else
         {
-            for (i = 0; i < 6; i++)
+            for (i = 0; i < EASY_CHAT_BATTLE_WORDS_COUNT; i++)
                 battleSave->easyChatSpeech[i] = gSaveBlock2Ptr->frontier.towerRecords[gTrainerBattleOpponent_A - TRAINER_RECORD_MIXING_FRIEND].speechWon[i];
         }
         battleSave->recordMixFriendLanguage = gSaveBlock2Ptr->frontier.towerRecords[gTrainerBattleOpponent_A - TRAINER_RECORD_MIXING_FRIEND].language;
@@ -427,12 +427,12 @@ bool32 MoveRecordedBattleToSaveData(void)
 
         if (sBattleOutcome == B_OUTCOME_WON)
         {
-            for (i = 0; i < 6; i++)
+            for (i = 0; i < EASY_CHAT_BATTLE_WORDS_COUNT; i++)
                 battleSave->easyChatSpeech[i] = gSaveBlock2Ptr->frontier.towerRecords[gTrainerBattleOpponent_B - TRAINER_RECORD_MIXING_FRIEND].speechLost[i];
         }
         else
         {
-            for (i = 0; i < 6; i++)
+            for (i = 0; i < EASY_CHAT_BATTLE_WORDS_COUNT; i++)
                 battleSave->easyChatSpeech[i] = gSaveBlock2Ptr->frontier.towerRecords[gTrainerBattleOpponent_B - TRAINER_RECORD_MIXING_FRIEND].speechWon[i];
         }
         battleSave->recordMixFriendLanguage = gSaveBlock2Ptr->frontier.towerRecords[gTrainerBattleOpponent_B - TRAINER_RECORD_MIXING_FRIEND].language;
@@ -449,15 +449,15 @@ bool32 MoveRecordedBattleToSaveData(void)
     if (gTrainerBattleOpponent_A >= TRAINER_RECORD_MIXING_APPRENTICE)
     {
         battleSave->apprenticeId = gSaveBlock2Ptr->apprentices[gTrainerBattleOpponent_A - TRAINER_RECORD_MIXING_APPRENTICE].id;
-        for (i = 0; i < 6; i++)
-            battleSave->easyChatSpeech[i] = gSaveBlock2Ptr->apprentices[gTrainerBattleOpponent_A - TRAINER_RECORD_MIXING_APPRENTICE].easyChatWords[i];
+        for (i = 0; i < EASY_CHAT_BATTLE_WORDS_COUNT; i++)
+            battleSave->easyChatSpeech[i] = gSaveBlock2Ptr->apprentices[gTrainerBattleOpponent_A - TRAINER_RECORD_MIXING_APPRENTICE].speechWon[i];
         battleSave->apprenticeLanguage = gSaveBlock2Ptr->apprentices[gTrainerBattleOpponent_A - TRAINER_RECORD_MIXING_APPRENTICE].language;
     }
     else if (gTrainerBattleOpponent_B >= TRAINER_RECORD_MIXING_APPRENTICE)
     {
         battleSave->apprenticeId = gSaveBlock2Ptr->apprentices[gTrainerBattleOpponent_B - TRAINER_RECORD_MIXING_APPRENTICE].id;
-        for (i = 0; i < 6; i++)
-            battleSave->easyChatSpeech[i] = gSaveBlock2Ptr->apprentices[gTrainerBattleOpponent_B - TRAINER_RECORD_MIXING_APPRENTICE].easyChatWords[i];
+        for (i = 0; i < EASY_CHAT_BATTLE_WORDS_COUNT; i++)
+            battleSave->easyChatSpeech[i] = gSaveBlock2Ptr->apprentices[gTrainerBattleOpponent_B - TRAINER_RECORD_MIXING_APPRENTICE].speechWon[i];
         battleSave->apprenticeLanguage = gSaveBlock2Ptr->apprentices[gTrainerBattleOpponent_B - TRAINER_RECORD_MIXING_APPRENTICE].language;
     }
     else if (gPartnerTrainerId >= TRAINER_RECORD_MIXING_APPRENTICE)
@@ -480,8 +480,8 @@ bool32 MoveRecordedBattleToSaveData(void)
         ret = RecordedBattleToSave(battleSave, savSection);
         if (ret == TRUE)
             break;
-        var++;
-        if (var >= 3)
+        saveAttempts++;
+        if (saveAttempts >= 3)
             break;
     }
 

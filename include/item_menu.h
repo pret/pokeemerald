@@ -71,7 +71,7 @@ extern u16 gSpecialVar_ItemId;
 void sub_81AAC14(void);
 void FavorLadyOpenBagMenu(void);
 void QuizLadyOpenBagMenu(void);
-void sub_81AAC28(void);
+void ApprenticeOpenBagMenu(void);
 void sub_81AABB0(void);
 void SetInitialScrollAndCursorPositions(u8 pocketId);
 void bag_menu_mail_related(void);

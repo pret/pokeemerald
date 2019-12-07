@@ -12,7 +12,8 @@
 #define FRONTIER_FACILITY_PIKE     5
 #define FRONTIER_FACILITY_PYRAMID  6
 #define NUM_FRONTIER_FACILITIES    7
-// The multiplayer battle colosseum rooms re-use VAR_FRONTIER_FACILITY.
+// VAR_FRONTIER_FACILITY is re-used for the below facilities as well
+#define FACILITY_LINK_CONTEST      7
 #define FACILITY_UNION_ROOM        8
 #define FACILITY_MULTI_OR_EREADER  9  // Direct Corner multi battles, multi battle with Steven, and e-Reader battles
 
@@ -21,15 +22,22 @@
 #define TENT_SLATEPORT 4
 
 // Battle Frontier lvl modes.
-#define FRONTIER_LVL_50 0
+#define FRONTIER_LVL_50   0
 #define FRONTIER_LVL_OPEN 1
 #define FRONTIER_LVL_TENT 2
 
 // Battle Frontier battle modes.
-#define FRONTIER_MODE_SINGLES 0
-#define FRONTIER_MODE_DOUBLES 1
-#define FRONTIER_MODE_MULTIS 2
-#define FRONTIER_MODE_LINK_MULTIS 3
+#define FRONTIER_MODE_SINGLES      0
+#define FRONTIER_MODE_DOUBLES      1
+#define FRONTIER_MODE_MULTIS       2
+#define FRONTIER_MODE_LINK_MULTIS  3
+#define FRONTIER_MODE_COUNT        4
+
+// Challenge Statuses
+#define CHALLENGE_STATUS_SAVING   1
+#define CHALLENGE_STATUS_PAUSED   2
+#define CHALLENGE_STATUS_WON      3
+#define CHALLENGE_STATUS_LOST     4
 
 // Special trainer battles.
 #define SPECIAL_BATTLE_TOWER 0
@@ -45,19 +53,32 @@
 #define SPECIAL_BATTLE_PYRAMID 10
 
 #define MAX_BATTLE_FRONTIER_POINTS 9999
+#define MAX_STREAK 9999
 
-// Frontier Maniac
-#define FRONTIER_MANIAC_BATTLE_TOWER_SINGLES       0
-#define FRONTIER_MANIAC_BATTLE_TOWER_DOUBLES       1
-#define FRONTIER_MANIAC_BATTLE_TOWER_MULTIS        2
-#define FRONTIER_MANIAC_BATTLE_TOWER_LINK_MULTIS   3
-#define FRONTIER_MANIAC_BATTLE_DOME                4
-#define FRONTIER_MANIAC_BATTLE_FACTORY             5
-#define FRONTIER_MANIAC_BATTLE_PALACE              6
-#define FRONTIER_MANIAC_BATTLE_ARENA               7
-#define FRONTIER_MANIAC_BATTLE_PIKE                8
-#define FRONTIER_MANIAC_BATTLE_PYRAMID             9
-#define FRONTIER_MANIAC_FACILITY_COUNT            10
+// These sets of facility ids would be redunant if the order was consistent
+// The order is important for this set so that all the non-link records can be continuous
+#define RANKING_HALL_BATTLE_TOWER_SINGLES   0
+#define RANKING_HALL_BATTLE_TOWER_DOUBLES   1
+#define RANKING_HALL_BATTLE_TOWER_MULTIS    2
+#define RANKING_HALL_BATTLE_DOME            3
+#define RANKING_HALL_BATTLE_PALACE          4
+#define RANKING_HALL_BATTLE_ARENA           5
+#define RANKING_HALL_BATTLE_FACTORY         6
+#define RANKING_HALL_BATTLE_PIKE            7
+#define RANKING_HALL_BATTLE_PYRAMID         8
+#define RANKING_HALL_BATTLE_TOWER_LINK      9
+
+#define FRONTIER_MANIAC_BATTLE_TOWER_SINGLES   0
+#define FRONTIER_MANIAC_BATTLE_TOWER_DOUBLES   1
+#define FRONTIER_MANIAC_BATTLE_TOWER_MULTIS    2
+#define FRONTIER_MANIAC_BATTLE_TOWER_LINK      3
+#define FRONTIER_MANIAC_BATTLE_DOME            4
+#define FRONTIER_MANIAC_BATTLE_FACTORY         5
+#define FRONTIER_MANIAC_BATTLE_PALACE          6
+#define FRONTIER_MANIAC_BATTLE_ARENA           7
+#define FRONTIER_MANIAC_BATTLE_PIKE            8
+#define FRONTIER_MANIAC_BATTLE_PYRAMID         9
+#define FRONTIER_MANIAC_FACILITY_COUNT        10
 
 #define FRONTIER_MANIAC_MESSAGE_COUNT 3
 
@@ -73,9 +94,6 @@
 #define FRONTIER_GAMBLER_BET_CANCEL 3
 
 #define FRONTIER_GAMBLER_CHALLENGE_COUNT 12
-
-// For 'ShowFacilityResultsWindow' function which is a part of the 'CallFrontierUtilFunc' special.
-#define RESULTS_LINK_CONTEST 7
 
 #define EXCHANGE_CORNER_DECOR1_CLERK     0
 #define EXCHANGE_CORNER_DECOR2_CLERK     1

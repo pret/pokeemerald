@@ -201,14 +201,15 @@ CableClub_Text_CanMixRecords:: @ 8278831
 	.string "The records of two to four players\n"
 	.string "can be mixed together.$"
 
-OldaleTown_PokemonCenter_2F_Text_27886B: @ 827886B
+CableClub_Text_GuideToVariousServices: @ 827886B
 	.string "A guide to the Wireless Club's\n"
 	.string "various services.$"
 
 CableClub_Text_CancelSelectedItem:: @ 827889C
 	.string "Cancels the selected Menu item.$"
 
-OldaleTown_PokemonCenter_2F_Text_2788BC: @ 82788BC
+@ Unused
+CableClub_Text_WhichBattleMode: @ 82788BC
 	.string "Which battle mode would you like?$"
 
 @ Unused
@@ -340,7 +341,7 @@ CableClub_Text_WelcomeWhichDirectCornerRoom: @ 8279013
 CableClub_Text_TradePokemon: @ 827909D
 	.string "Would you like to trade Pokémon?$"
 
-CableClub_Text_WhichBattleMode: @ 82790BE
+CableClub_Text_PlayWhichBattleMode: @ 82790BE
 	.string "Which Battle Mode would you like\n"
 	.string "to play?$"
 

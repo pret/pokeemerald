@@ -1,10 +1,7 @@
 TrainerHill_OnResume: @ 82C8336
 	setvar VAR_TEMP_2, 0
-	setvar VAR_0x8004, TRAINER_HILL_FUNC_RESUME_TIMER
-	special CallTrainerHillFunction
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_1
-	setvar VAR_0x8005, 5
-	special CallFrontierUtilFunc
+	trainerhill_resumetimer
+	frontier_get FRONTIER_DATA_BATTLE_OUTCOME
 	compare VAR_RESULT, B_OUTCOME_LOST
 	goto_if_eq TrainerHill_1F_EventScript_Lost
 	compare VAR_RESULT, B_OUTCOME_DREW
@@ -28,16 +25,14 @@ TrainerHill_OnFrame: @ 82C8381
 
 EventScript_TrainerHillTimer:: @ 82C8393
 	lockall
-	setvar VAR_0x8004, TRAINER_HILL_FUNC_GET_CHALLENGE_TIME
-	special CallTrainerHillFunction
+	trainerhill_gettime
 	msgbox TrainerHill_Entrance_Text_ChallengeTime, MSGBOX_DEFAULT
 	releaseall
 	end
 
 TrainerHill_1F_EventScript_DummyWarpToEntranceCounter:: @ 82C83A6
 	setvar VAR_TEMP_2, 1
-	setvar VAR_0x8004, TRAINER_HILL_FUNC_CLEAR_RESULT
-	special CallTrainerHillFunction
+	trainerhill_clearresult
 	compare VAR_RESULT, 1  @ VAR_RESULT always 0 here
 	goto_if_eq TrainerHill_1F_EventScript_WarpSilentToEntranceCounter
 	end
@@ -49,10 +44,8 @@ TrainerHill_1F_EventScript_WarpSilentToEntranceCounter:: @ 82C83BF
 	end
 
 TrainerHill_1F_EventScript_Lost:: @ 82C83C9
-	setvar VAR_0x8004, TRAINER_HILL_FUNC_SET_ALL_TRAINER_FLAGS
-	special CallTrainerHillFunction
-	setvar VAR_0x8004, TRAINER_HILL_FUNC_SET_LOST
-	special CallTrainerHillFunction
+	trainerhill_settrainerflags
+	trainerhill_lost
 	setvar VAR_TEMP_1, 1
 	end
 
@@ -70,8 +63,7 @@ TrainerHill_1F_Movement_SetInvisible:: @ 82C83EE
 @ TRAINER_PHILLIP is an actual Trainer on the SS Tidal, but is used as a placeholder here
 TrainerHill_EventScript_TrainerBattle:: @ 82C83F0
 	trainerbattle TRAINER_BATTLE_HILL, TRAINER_PHILLIP, 0, BattleFacility_TrainerBattle_PlaceholderText, BattleFacility_TrainerBattle_PlaceholderText
-	setvar VAR_0x8004, TRAINER_HILL_FUNC_POST_BATTLE_TEXT
-	special CallTrainerHillFunction
+	trainerhill_postbattletext
 	waitmessage
 	waitbuttonpress
 	closemessage
