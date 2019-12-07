@@ -2092,7 +2092,7 @@ static void sub_808D094(u8 taskId)
             object->fixedPriority = TRUE;
             sprite->oam.priority = 0;
             sprite->subpriority = 0;
-            sprite->subspriteMode = 0;
+            sprite->subspriteMode = SUBSPRITES_OFF;
             data[0]++;
         case 1:
             sub_808D38C(object, &data[1]);
@@ -2156,7 +2156,7 @@ static void sub_808D1FC(u8 taskId)
             object->fixedPriority = TRUE;
             sprite->oam.priority = 1;
             sprite->subpriority = 0;
-            sprite->subspriteMode = 0;
+            sprite->subspriteMode = SUBSPRITES_OFF;
             data[0]++;
         case 1:
             sub_808D38C(object, &data[1]);

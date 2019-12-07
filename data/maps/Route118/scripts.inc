@@ -6,23 +6,23 @@ Route118_MapScripts:: @ 81F3DBC
 
 Route118_OnTransition: @ 81F3DCC
 	call GabbyAndTy_EventScript_UpdateLocation
-	compare VAR_SHOULD_END_UNUSUAL_WEATHER, 1
-	call_if_eq UnusualWeather_EventScript_HideMapNamePopup
-	compare VAR_UNUSUAL_WEATHER_LOCATION, UNUSUAL_WEATHER_ROUTE_118_EAST
-	call_if_eq UnusualWeather_StartGroudonWeather
-	compare VAR_UNUSUAL_WEATHER_LOCATION, UNUSUAL_WEATHER_ROUTE_118_WEST
-	call_if_eq UnusualWeather_StartGroudonWeather
+	compare VAR_SHOULD_END_ABNORMAL_WEATHER, 1
+	call_if_eq AbnormalWeather_EventScript_HideMapNamePopup
+	compare VAR_ABNORMAL_WEATHER_LOCATION, ABNORMAL_WEATHER_ROUTE_118_EAST
+	call_if_eq AbnormalWeather_StartGroudonWeather
+	compare VAR_ABNORMAL_WEATHER_LOCATION, ABNORMAL_WEATHER_ROUTE_118_WEST
+	call_if_eq AbnormalWeather_StartGroudonWeather
 	end
 
 Route118_OnLoad: @ 81F3DF3
-	compare VAR_UNUSUAL_WEATHER_LOCATION, UNUSUAL_WEATHER_ROUTE_118_EAST
-	call_if_eq UnusualWeather_EventScript_PlaceTilesRoute118East
-	compare VAR_UNUSUAL_WEATHER_LOCATION, UNUSUAL_WEATHER_ROUTE_118_WEST
-	call_if_eq UnusualWeather_EventScript_PlaceTilesRoute118West
+	compare VAR_ABNORMAL_WEATHER_LOCATION, ABNORMAL_WEATHER_ROUTE_118_EAST
+	call_if_eq AbnormalWeather_EventScript_PlaceTilesRoute118East
+	compare VAR_ABNORMAL_WEATHER_LOCATION, ABNORMAL_WEATHER_ROUTE_118_WEST
+	call_if_eq AbnormalWeather_EventScript_PlaceTilesRoute118West
 	end
 
 Route118_OnFrame: @ 81F3E0A
-	map_script_2 VAR_SHOULD_END_UNUSUAL_WEATHER, 1, UnusualWeather_EventScript_EndEventAndCleanup_1
+	map_script_2 VAR_SHOULD_END_ABNORMAL_WEATHER, 1, AbnormalWeather_EventScript_EndEventAndCleanup_1
 	.2byte 0
 
 Route118_EventScript_GoodRodFisherman:: @ 81F3E14

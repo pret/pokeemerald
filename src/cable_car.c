@@ -307,7 +307,7 @@ static void CableCarMainCallback_Setup(void)
         gMain.state++;
         break;
     case 5:
-        if (sCableCar->weather == WEATHER_ASH)
+        if (sCableCar->weather == WEATHER_VOLCANIC_ASH)
         {
             gMain.state++;
         }
@@ -425,7 +425,7 @@ static void sub_81503E4(u8 taskId)
     case 1:
         switch (sCableCar->weather)
         {
-        case WEATHER_ASH:
+        case WEATHER_VOLCANIC_ASH:
             if (gWeatherPtr->sprites.s2.ashSprites[0] != NULL && gWeatherPtr->sprites.s2.ashSprites[0]->oam.priority != 0)
             {
                 for (; i < NUM_ASH_SPRITES; i++)
@@ -815,7 +815,7 @@ static void LoadCableCarSprites(void)
             gSprites[spriteId].pos2.y = 4;
             gSprites[spriteId].data[0] = 200;
             gSprites[spriteId].data[1] = 99;
-            sCableCar->weather = WEATHER_ASH;
+            sCableCar->weather = WEATHER_VOLCANIC_ASH;
             sCableCar->unk4 = 0x15e;
             SetCurrentAndNextWeatherNoDelay(WEATHER_SUNNY);
             break;
@@ -841,7 +841,7 @@ static void LoadCableCarSprites(void)
             gSprites[spriteId].data[1] = 0x41;
             sCableCar->weather = WEATHER_SUNNY;
             sCableCar->unk4 = 0x109;
-            SetCurrentAndNextWeatherNoDelay(WEATHER_ASH);
+            SetCurrentAndNextWeatherNoDelay(WEATHER_VOLCANIC_ASH);
             break;
     }
     for (i = 0; i < 9; i++)

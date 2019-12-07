@@ -5,7 +5,7 @@
   "music": "MUS_DEEPDEEP",
   "region_map_section": "MAPSEC_UNDERWATER_127",
   "requires_flash": false,
-  "weather": "WEATHER_BUBBLES",
+  "weather": "WEATHER_UNDERWATER_BUBBLES",
   "map_type": "MAP_TYPE_UNDERWATER",
   "allow_bike": true,
   "allow_escape_rope": false,

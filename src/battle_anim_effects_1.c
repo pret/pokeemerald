@@ -4947,8 +4947,8 @@ void AnimMoon(struct Sprite* sprite)
         sprite->pos1.y = gBattleAnimArgs[1];
     }
 
-    sprite->oam.shape = 0;
-    sprite->oam.size = 3;
+    sprite->oam.shape = SPRITE_SHAPE(64x64);
+    sprite->oam.size = SPRITE_SIZE(64x64);
     sprite->data[0] = 0;
     sprite->callback = AnimMoonStep;
 }

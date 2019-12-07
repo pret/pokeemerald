@@ -206,10 +206,38 @@ const struct SpriteTemplate gUnknown_0853EF18 =
 
 static const struct Subsprite gUnknown_0853EF30[] =
 {
-    {.x = -16, .y = -16, .shape = ST_OAM_SQUARE,      .size = 3, .tileOffset =   0, .priority = 2},
-    {.x = -16, .y =  48, .shape = ST_OAM_H_RECTANGLE, .size = 3, .tileOffset =  64, .priority = 2},
-    {.x =  48, .y = -16, .shape = ST_OAM_V_RECTANGLE, .size = 3, .tileOffset =  96, .priority = 2},
-    {.x =  48, .y =  48, .shape = ST_OAM_SQUARE,      .size = 2, .tileOffset = 128, .priority = 2},
+    {
+        .x = -16, 
+        .y = -16, 
+        .shape = SPRITE_SHAPE(64x64),      
+        .size = SPRITE_SIZE(64x64), 
+        .tileOffset = 0, 
+        .priority = 2
+    },
+    {
+        .x = -16, 
+        .y =  48, 
+        .shape = SPRITE_SHAPE(64x32), 
+        .size = SPRITE_SIZE(64x32), 
+        .tileOffset = 64, 
+        .priority = 2
+    },
+    {
+        .x =  48, 
+        .y = -16, 
+        .shape = SPRITE_SHAPE(32x64), 
+        .size = SPRITE_SIZE(32x64),
+        .tileOffset = 96, 
+        .priority = 2
+    },
+    {
+        .x =  48, 
+        .y =  48, 
+        .shape = SPRITE_SHAPE(32x32),   
+        .size = SPRITE_SIZE(32x32), 
+        .tileOffset = 128, 
+        .priority = 2
+    },
 };
 
 static const struct SubspriteTable gUnknown_0853EF40[] =

@@ -299,9 +299,9 @@ const s16 gUnknown_085DFD28[][2] =
 const struct OamData gOamData_085DFD3C = 
 {
     .y = 0,
-    .affineMode = 0,
-    .objMode = 0,
-    .bpp = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(32x16),
     .x = 0,
     .size = SPRITE_SIZE(32x16),
@@ -342,9 +342,9 @@ const struct SpriteTemplate gSpriteTemplate_085DFD5C =
 const struct OamData gOamData_085DFD74 = 
 {
     .y = 0,
-    .affineMode = 0,
-    .objMode = 0,
-    .bpp = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(64x32),
     .x = 0,
     .size = SPRITE_SIZE(64x32),
@@ -1302,8 +1302,8 @@ void sub_8167760(void)
     if (spriteId != MAX_SPRITES)
     {
         gUnknown_0203BCAC->field_7B06[i] = spriteId;
-        gSprites[spriteId].oam.shape = 1;
-        gSprites[spriteId].oam.size = 2;
+        gSprites[spriteId].oam.shape = SPRITE_SHAPE(32x16);
+        gSprites[spriteId].oam.size = SPRITE_SIZE(32x16);
     }
     else
     {

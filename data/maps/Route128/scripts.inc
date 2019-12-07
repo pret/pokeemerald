@@ -4,7 +4,7 @@ Route128_MapScripts:: @ 81F6B38
 	.byte 0
 
 Route128_OnTransition: @ 81F6B43
-	call_if_set FLAG_SYS_WEATHER_CTRL, Common_EventScript_SetAlternatingWeather
+	call_if_set FLAG_SYS_WEATHER_CTRL, Common_EventScript_SetAbnormalWeather
 	end
 
 Route128_OnFrame: @ 81F6B4D

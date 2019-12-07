@@ -264,23 +264,26 @@ static const s32 sUnknown_082EC6F4[3][4][2] =
 
 static const struct OamDimensions sOamDimensions[3][4] =
 {
-    {   // square
-        {  8,  8 },
-        { 16, 16 },
-        { 32, 32 },
-        { 64, 64 },
+    [ST_OAM_SQUARE] = 
+    {
+        [SPRITE_SIZE(8x8)]   = {  8,  8 },
+        [SPRITE_SIZE(16x16)] = { 16, 16 },
+        [SPRITE_SIZE(32x32)] = { 32, 32 },
+        [SPRITE_SIZE(64x64)] = { 64, 64 },
     },
-    {   // horizontal rectangle
-        { 16,  8 },
-        { 32,  8 },
-        { 32, 16 },
-        { 64, 32 },
+    [ST_OAM_H_RECTANGLE] =
+    {
+        [SPRITE_SIZE(16x8)]  = { 16,  8 },
+        [SPRITE_SIZE(32x8)]  = { 32,  8 },
+        [SPRITE_SIZE(32x16)] = { 32, 16 },
+        [SPRITE_SIZE(64x32)] = { 64, 32 },
     },
-    {   // vertical rectangle
-        {  8, 16 },
-        {  8, 32 },
-        { 16, 32 },
-        { 32, 64 },
+    [ST_OAM_V_RECTANGLE] = 
+    {
+        [SPRITE_SIZE(8x16)]  = {  8, 16 },
+        [SPRITE_SIZE(8x32)]  = {  8, 32 },
+        [SPRITE_SIZE(16x32)] = { 16, 32 },
+        [SPRITE_SIZE(32x64)] = { 32, 64 },
     },
 };
 
@@ -406,10 +409,10 @@ void SortSprites(void)
             sprite2Y = sprite2Y - 256;
 
         if (sprite1->oam.affineMode == ST_OAM_AFFINE_DOUBLE
-         && sprite1->oam.size == 3)
+         && sprite1->oam.size == ST_OAM_SIZE_3)
         {
             u32 shape = sprite1->oam.shape;
-            if (shape == ST_OAM_SQUARE || shape == 2)
+            if (shape == ST_OAM_SQUARE || shape == ST_OAM_V_RECTANGLE)
             {
                 if (sprite1Y > 128)
                     sprite1Y = sprite1Y - 256;
@@ -417,7 +420,7 @@ void SortSprites(void)
         }
 
         if (sprite2->oam.affineMode == ST_OAM_AFFINE_DOUBLE
-         && sprite2->oam.size == 3)
+         && sprite2->oam.size == ST_OAM_SIZE_3)
         {
             u32 shape = sprite2->oam.shape;
             if (shape == ST_OAM_SQUARE || shape == ST_OAM_V_RECTANGLE)
@@ -455,7 +458,7 @@ void SortSprites(void)
                 sprite2Y = sprite2Y - 256;
 
             if (sprite1->oam.affineMode == ST_OAM_AFFINE_DOUBLE
-             && sprite1->oam.size == 3)
+             && sprite1->oam.size == ST_OAM_SIZE_3)
             {
                 u32 shape = sprite1->oam.shape;
                 if (shape == ST_OAM_SQUARE || shape == ST_OAM_V_RECTANGLE)
@@ -466,7 +469,7 @@ void SortSprites(void)
             }
 
             if (sprite2->oam.affineMode == ST_OAM_AFFINE_DOUBLE
-             && sprite2->oam.size == 3)
+             && sprite2->oam.size == ST_OAM_SIZE_3)
             {
                 u32 shape = sprite2->oam.shape;
                 if (shape == ST_OAM_SQUARE || shape == ST_OAM_V_RECTANGLE)

@@ -1121,13 +1121,13 @@ void ResetObjectEvents(void)
 static void CreateReflectionEffectSprites(void)
 {
     u8 spriteId = CreateSpriteAtEnd(gFieldEffectObjectTemplatePointers[21], 0, 0, 31);
-    gSprites[spriteId].oam.affineMode = 1;
+    gSprites[spriteId].oam.affineMode = ST_OAM_AFFINE_NORMAL;
     InitSpriteAffineAnim(&gSprites[spriteId]);
     StartSpriteAffineAnim(&gSprites[spriteId], 0);
     gSprites[spriteId].invisible = TRUE;
 
     spriteId = CreateSpriteAtEnd(gFieldEffectObjectTemplatePointers[21], 0, 0, 31);
-    gSprites[spriteId].oam.affineMode = 1;
+    gSprites[spriteId].oam.affineMode = ST_OAM_AFFINE_NORMAL;
     InitSpriteAffineAnim(&gSprites[spriteId]);
     StartSpriteAffineAnim(&gSprites[spriteId], 1);
     gSprites[spriteId].invisible = TRUE;
@@ -1676,7 +1676,7 @@ u8 AddPseudoObjectEvent(u16 graphicsId, void (*callback)(struct Sprite *), s16 x
     {
         sprite = &gSprites[spriteId];
         SetSubspriteTables(sprite, subspriteTables);
-        sprite->subspriteMode = 2;
+        sprite->subspriteMode = SUBSPRITES_IGNORE_PRIORITY;
     }
     return spriteId;
 }
@@ -1721,7 +1721,7 @@ u8 sprite_new(u8 graphicsId, u8 a1, s16 x, s16 y, u8 z, u8 direction)
         if (subspriteTables != NULL)
         {
             SetSubspriteTables(sprite, subspriteTables);
-            sprite->subspriteMode = 2;
+            sprite->subspriteMode = SUBSPRITES_IGNORE_PRIORITY;
         }
         InitObjectPriorityByZCoord(sprite, z);
         SetObjectSubpriorityByZCoord(z, sprite, 1);
@@ -4586,7 +4586,7 @@ void MovementType_Hidden(struct Sprite *sprite)
     if (!sprite->data[7])
     {
         gObjectEvents[sprite->data[0]].fixedPriority = TRUE;
-        sprite->subspriteMode = 2;
+        sprite->subspriteMode = SUBSPRITES_IGNORE_PRIORITY;
         sprite->oam.priority = 3;
         sprite->data[7]++;
     }
@@ -6814,7 +6814,7 @@ bool8 MovementAction_InitAffineAnim_Step0(struct ObjectEvent *objectEvent, struc
     sprite->oam.affineMode = ST_OAM_AFFINE_DOUBLE;
     InitSpriteAffineAnim(sprite);
     sprite->affineAnimPaused = TRUE;
-    sprite->subspriteMode = 0;
+    sprite->subspriteMode = SUBSPRITES_OFF;
     return TRUE;
 }
 
@@ -8844,12 +8844,12 @@ void sub_8097BB4(u8 var1, u8 graphicsId)
         {
             sprite->subspriteTables = NULL;
             sprite->subspriteTableNum = 0;
-            sprite->subspriteMode = 0;
+            sprite->subspriteMode = SUBSPRITES_OFF;
         }
         else
         {
             SetSubspriteTables(sprite, graphicsInfo->subspriteTables);
-            sprite->subspriteMode = 2;
+            sprite->subspriteMode = SUBSPRITES_IGNORE_PRIORITY;
         }
         StartSpriteAnim(sprite, 0);
     }

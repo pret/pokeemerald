@@ -633,7 +633,7 @@ static const u32 sTradeTilemap_WirelessSignal[] = INCBIN_U32("graphics/trade/wir
 
 static const struct OamData sTradeOamData_16x16 =
 {
-    .affineMode = 1,
+    .affineMode = ST_OAM_AFFINE_NORMAL,
     .shape = SPRITE_SHAPE(16x16),
     .size = SPRITE_SIZE(16x16)
 };
@@ -735,8 +735,8 @@ static const struct SpriteTemplate gSpriteTemplate_8338D28 =
 
 static const struct OamData sTradeOamData_32x32 =
 {
-    .affineMode = 1,
-    .objMode = 1,
+    .affineMode = ST_OAM_AFFINE_NORMAL,
+    .objMode = ST_OAM_OBJ_BLEND,
     .shape = SPRITE_SHAPE(32x32),
     .size = SPRITE_SIZE(32x32),
     .priority = 1
