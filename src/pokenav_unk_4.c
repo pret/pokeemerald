@@ -110,10 +110,6 @@ u32 ShowCheckPageDown(s32);
 u32 ExitCheckPage(s32);
 u32 ExitMatchCall(s32);
 
-extern const struct WindowTemplate sCallMsgBoxWindowTemplate;
-extern const struct SpriteTemplate sOptionsCursorSpriteTemplate;
-extern const struct SpriteTemplate sTrainerPicSpriteTemplate;
-
 static const u16 sMatchCallUI_Pal[] = INCBIN_U16("graphics/pokenav/ui_matchcall.gbapal");
 static const u32 sMatchCallUI_Gfx[] = INCBIN_U32("graphics/pokenav/ui_matchcall.4bpp.lz");
 static const u32 sMatchCallUI_Tilemap[] = INCBIN_U32("graphics/pokenav/ui_matchcall.bin.lz");
@@ -207,7 +203,7 @@ static const u8 *const sMatchCallOptionTexts[MATCH_CALL_OPTION_COUNT] =
 // The series of 5 dots that appear when someone is called with Match Call
 static const u8 sText_CallingDots[] = _("·{PAUSE 0x04}·{PAUSE 0x04}·{PAUSE 0x04}·{PAUSE 0x04}·\p");
 
-const struct WindowTemplate sCallMsgBoxWindowTemplate = 
+static const struct WindowTemplate sCallMsgBoxWindowTemplate = 
 {
     .bg = 1,
     .tilemapLeft = 1,
