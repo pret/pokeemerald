@@ -34,7 +34,7 @@ struct Pokenav4Struct
     u8 unkF;
     u16 locWindowId;
     u16 infoBoxWindowId;
-    u16 msgBoxWindowId; //windowId
+    u16 msgBoxWindowId;
     s16 unk16;
     u8 unused18;
     u8 unk19;
@@ -157,16 +157,16 @@ const struct BgTemplate gUnknown_0862278C[3] =
 
 static const LoopedTask sMatchCallLoopTaskFuncs[] = 
 {
-    [POKENAV_MC_FUNC_NONE]  = NULL,
-    [POKENAV_MC_FUNC_DOWN]  = MatchCallListCursorDown,
-    [POKENAV_MC_FUNC_UP]  = MatchCallListCursorUp,
-    [POKENAV_MC_FUNC_PG_DOWN]  = MatchCallListPageDown,
-    [POKENAV_MC_FUNC_PG_UP]  = MatchCallListPageUp,
-    [POKENAV_MC_FUNC_SELECT]  = SelectMatchCallEntry,
-    [POKENAV_MC_FUNC_MOVE_OPTIONS_CURSOR]  = MoveMatchCallOptionsCursor,
-    [POKENAV_MC_FUNC_CANCEL]  = CancelMatchCallSelection,
-    [POKENAV_MC_FUNC_CALL_MSG]  = DoMatchCallMessage,
-    [POKENAV_MC_FUNC_NEARBY_MSG]  = DoTrainerCloseByMessage,
+    [POKENAV_MC_FUNC_NONE] = NULL,
+    [POKENAV_MC_FUNC_DOWN] = MatchCallListCursorDown,
+    [POKENAV_MC_FUNC_UP] = MatchCallListCursorUp,
+    [POKENAV_MC_FUNC_PG_DOWN] = MatchCallListPageDown,
+    [POKENAV_MC_FUNC_PG_UP] = MatchCallListPageUp,
+    [POKENAV_MC_FUNC_SELECT] = SelectMatchCallEntry,
+    [POKENAV_MC_FUNC_MOVE_OPTIONS_CURSOR] = MoveMatchCallOptionsCursor,
+    [POKENAV_MC_FUNC_CANCEL] = CancelMatchCallSelection,
+    [POKENAV_MC_FUNC_CALL_MSG] = DoMatchCallMessage,
+    [POKENAV_MC_FUNC_NEARBY_MSG] = DoTrainerCloseByMessage,
     [POKENAV_MC_FUNC_10] = sub_81CB888,
     [POKENAV_MC_FUNC_SHOW_CHECK_PAGE] = ShowCheckPage,
     [POKENAV_MC_FUNC_CHECK_PAGE_UP] = ShowCheckPageUp,

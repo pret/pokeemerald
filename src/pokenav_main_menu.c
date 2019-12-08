@@ -642,10 +642,10 @@ void sub_81C7AC0(s32 a0)
         BeginNormalPaletteFade(structPtr->unk14, -2, 16, 0, RGB_BLACK);
         break;
     case 2:
-        BeginNormalPaletteFade(0xFFFFFFFF, -2, 0, 16, RGB_BLACK); //out
+        BeginNormalPaletteFade(0xFFFFFFFF, -2, 0, 16, RGB_BLACK);
         break;
     case 3:
-        BeginNormalPaletteFade(0xFFFFFFFF, -2, 16, 0, RGB_BLACK); //in
+        BeginNormalPaletteFade(0xFFFFFFFF, -2, 16, 0, RGB_BLACK);
         break;
     }
 }

@@ -66,7 +66,7 @@ enum {
     REMATCH_TRENT,
     REMATCH_SAWYER,
     REMATCH_KIRA_AND_DAN,
-    REMATCH_WALLY_3,  // Entries above WALLY are considered normal NPCs, from Wally below are special trainers
+    REMATCH_WALLY_3,  // Entries above WALLY are considered normal trainers, from Wally below are special trainers
     REMATCH_ROXANNE,
     REMATCH_BRAWLY,
     REMATCH_WATTSON,

@@ -16,7 +16,7 @@
 #include "constants/songs.h"
 
 // naming multi-purpose fields
-#define isSpecialTrainer  id1  // Gym Leaders, for example. As opposed to regular NPC
+#define isSpecialTrainer  id1  // Entries with their own match call header in pokenav_match_call_data.c
 #define mapSec            id2  
 #define headerId          data 
 
@@ -332,7 +332,7 @@ bool32 ShouldDrawRematchPokeballIcon(int index)
 
 int GetMatchCallTrainerPic(int index)
 {
-    int var0;
+    int headerId;
     struct Pokenav3Struct *state = GetSubstructPtr(5);
     if (!state->matchCallEntries[index].isSpecialTrainer)
     {
@@ -340,15 +340,15 @@ int GetMatchCallTrainerPic(int index)
         return gTrainers[index].trainerPic;
     }
 
-    var0 = state->matchCallEntries[index].headerId;
-    index = MatchCall_GetRematchTableIdx(var0);
+    headerId = state->matchCallEntries[index].headerId;
+    index = MatchCall_GetRematchTableIdx(headerId);
     if (index != REMATCH_TABLE_ENTRIES)
     {
         index = GetTrainerIdxByRematchIdx(index);
         return gTrainers[index].trainerPic;
     }
 
-    index = MatchCall_GetOverrideFacilityClass(var0);
+    index = MatchCall_GetOverrideFacilityClass(headerId);
     return gFacilityClassToPicIndex[index];
 }
 
