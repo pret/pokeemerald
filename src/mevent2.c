@@ -132,8 +132,8 @@ void DestroyWonderCard(void)
     sub_801B368();
     sub_801B9F8();
     ClearRamScript();
-    sub_809D4D8();
-    sub_809D570();
+    ClearMysteryEventFlags();
+    ClearMysteryEventVars();
     ClearEReaderTrainer(&gSaveBlock2Ptr->frontier.ereaderTrainer);
 }
 
