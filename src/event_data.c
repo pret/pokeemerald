@@ -108,7 +108,7 @@ bool32 IsMysteryGiftEnabled(void)
     return FlagGet(FLAG_SYS_MYSTERY_GIFT_ENABLE);
 }
 
-void sub_809D4D8(void)
+void ClearMysteryEventFlags(void)
 {
     FlagClear(FLAG_MYSTERY_EVENT_DONE);
     FlagClear(FLAG_MYSTERY_EVENT_1);
@@ -128,7 +128,7 @@ void sub_809D4D8(void)
     FlagClear(FLAG_MYSTERY_EVENT_15);
 }
 
-void sub_809D570(void)
+void ClearMysteryEventVars(void)
 {
     VarSet(VAR_EVENT_PICHU_SLOT, 0);
     VarSet(VAR_NEVER_READ_0x40DE, 0);
