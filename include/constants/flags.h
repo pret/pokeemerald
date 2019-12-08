@@ -1566,6 +1566,7 @@
 #define FLAG_UNUSED_0x91F                           (SYSTEM_FLAGS + 0xBF) // Unused Flag
 
 // Daily Flags
+#define DAILY_FLAGS_START                           FLAG_DAILY_0x920
 #define FLAG_DAILY_0x920                            (SYSTEM_FLAGS + 0xC0)
 #define FLAG_DAILY_CONTEST_LOBBY_RECEIVED_BERRY     (SYSTEM_FLAGS + 0xC1)
 #define FLAG_DAILY_SECRET_BASE                      (SYSTEM_FLAGS + 0xC2)
