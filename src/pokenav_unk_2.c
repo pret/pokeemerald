@@ -243,9 +243,9 @@ static const u8 gUnknown_0862030F[] = {6, 8, 7, 0, 0};
 static const struct OamData gUnknown_08620314 =
 {
     .y = 0,
-    .affineMode = 0,
-    .objMode = 0,
-    .bpp = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(32x16),
     .x = 0,
     .size = SPRITE_SIZE(32x16),
@@ -287,9 +287,9 @@ static const struct SpriteTemplate gUnknown_0862034C =
 static const struct OamData gUnknown_08620364 =
 {
     .y = 0,
-    .affineMode = 0,
-    .objMode = 0,
-    .bpp = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(32x16),
     .x = 0,
     .size = SPRITE_SIZE(32x16),
@@ -1030,7 +1030,7 @@ static void sub_81CA4AC(struct Sprite * sprite)
             {
                 sprite->invisible = TRUE;
                 FreeOamMatrix(sprite->oam.matrixNum);
-                CalcCenterToCornerVec(sprite, sprite->oam.shape, sprite->oam.size, 0);
+                CalcCenterToCornerVec(sprite, sprite->oam.shape, sprite->oam.size, ST_OAM_AFFINE_OFF);
                 sprite->oam.affineMode = ST_OAM_AFFINE_OFF;
                 sprite->oam.objMode = ST_OAM_OBJ_NORMAL;
                 sprite->callback = SpriteCallbackDummy;

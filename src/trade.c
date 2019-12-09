@@ -3672,8 +3672,8 @@ static bool8 AnimateTradeSequenceCable(void)
         if (!IsMonSpriteNotFlipped(sTradeData->monSpecies[TRADE_PLAYER]))
         {
             gSprites[sTradeData->pokePicSpriteIdxs[TRADE_PLAYER]].affineAnims = gSpriteAffineAnimTable_8338ECC;
-            gSprites[sTradeData->pokePicSpriteIdxs[TRADE_PLAYER]].oam.affineMode = 3;
-            CalcCenterToCornerVec(&gSprites[sTradeData->pokePicSpriteIdxs[TRADE_PLAYER]], 0, 3, 3);
+            gSprites[sTradeData->pokePicSpriteIdxs[TRADE_PLAYER]].oam.affineMode = ST_OAM_AFFINE_DOUBLE;
+            CalcCenterToCornerVec(&gSprites[sTradeData->pokePicSpriteIdxs[TRADE_PLAYER]], SPRITE_SHAPE(64x64), SPRITE_SIZE(64x64), ST_OAM_AFFINE_DOUBLE);
             StartSpriteAffineAnim(&gSprites[sTradeData->pokePicSpriteIdxs[TRADE_PLAYER]], 0);
         }
         else
@@ -4170,8 +4170,8 @@ static bool8 AnimateTradeSequenceWireless(void)
         if (!IsMonSpriteNotFlipped(sTradeData->monSpecies[TRADE_PLAYER]))
         {
             gSprites[sTradeData->pokePicSpriteIdxs[TRADE_PLAYER]].affineAnims = gSpriteAffineAnimTable_8338ECC;
-            gSprites[sTradeData->pokePicSpriteIdxs[TRADE_PLAYER]].oam.affineMode = 3;
-            CalcCenterToCornerVec(&gSprites[sTradeData->pokePicSpriteIdxs[TRADE_PLAYER]], 0, 3, 3);
+            gSprites[sTradeData->pokePicSpriteIdxs[TRADE_PLAYER]].oam.affineMode = ST_OAM_AFFINE_DOUBLE;
+            CalcCenterToCornerVec(&gSprites[sTradeData->pokePicSpriteIdxs[TRADE_PLAYER]], SPRITE_SHAPE(64x64), SPRITE_SIZE(64x64), ST_OAM_AFFINE_DOUBLE);
             StartSpriteAffineAnim(&gSprites[sTradeData->pokePicSpriteIdxs[TRADE_PLAYER]], 0);
         }
         else

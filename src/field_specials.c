@@ -3542,36 +3542,36 @@ bool8 IsDestinationBoxFull(void)
     return FALSE;
 }
 
-void CreateUnusualWeatherEvent(void)
+void CreateAbnormalWeatherEvent(void)
 {
     u16 randomValue = Random();
-    VarSet(VAR_UNUSUAL_WEATHER_STEP_COUNTER, 0);
+    VarSet(VAR_ABNORMAL_WEATHER_STEP_COUNTER, 0);
 
     if (FlagGet(FLAG_DEFEATED_KYOGRE) == TRUE)
     {
-        VarSet(VAR_UNUSUAL_WEATHER_LOCATION, (randomValue % UNUSUAL_WEATHER_COUNT_PER_LEGENDARY) + UNUSUAL_WEATHER_GROUDON_LOCATIONS_START);
+        VarSet(VAR_ABNORMAL_WEATHER_LOCATION, (randomValue % ABNORMAL_WEATHER_COUNT_PER_LEGENDARY) + ABNORMAL_WEATHER_GROUDON_LOCATIONS_START);
     }
     else if (FlagGet(FLAG_DEFEATED_GROUDON) == TRUE)
     {
-        VarSet(VAR_UNUSUAL_WEATHER_LOCATION, (randomValue % UNUSUAL_WEATHER_COUNT_PER_LEGENDARY) + UNUSUAL_WEATHER_KYOGRE_LOCATIONS_START);
+        VarSet(VAR_ABNORMAL_WEATHER_LOCATION, (randomValue % ABNORMAL_WEATHER_COUNT_PER_LEGENDARY) + ABNORMAL_WEATHER_KYOGRE_LOCATIONS_START);
     }
     else if ((randomValue & 1) == 0)
     {
         randomValue = Random();
-        VarSet(VAR_UNUSUAL_WEATHER_LOCATION, (randomValue % UNUSUAL_WEATHER_COUNT_PER_LEGENDARY) + UNUSUAL_WEATHER_GROUDON_LOCATIONS_START);
+        VarSet(VAR_ABNORMAL_WEATHER_LOCATION, (randomValue % ABNORMAL_WEATHER_COUNT_PER_LEGENDARY) + ABNORMAL_WEATHER_GROUDON_LOCATIONS_START);
     }
     else
     {
         randomValue = Random();
-        VarSet(VAR_UNUSUAL_WEATHER_LOCATION, (randomValue % UNUSUAL_WEATHER_COUNT_PER_LEGENDARY) + UNUSUAL_WEATHER_KYOGRE_LOCATIONS_START);
+        VarSet(VAR_ABNORMAL_WEATHER_LOCATION, (randomValue % ABNORMAL_WEATHER_COUNT_PER_LEGENDARY) + ABNORMAL_WEATHER_KYOGRE_LOCATIONS_START);
     }
 }
 
-// Saves the map name for the current unusual weather location in gStringVar1, then
+// Saves the map name for the current abnormal weather location in gStringVar1, then
 // returns TRUE if the weather is for Kyogre, and FALSE if it's for Groudon.
-bool32 GetUnusualWeatherMapNameAndType(void)
+bool32 GetAbnormalWeatherMapNameAndType(void)
 {
-    static const u8 sUnusualWeatherMapNumbers[] = {
+    static const u8 sAbnormalWeatherMapNumbers[] = {
         MAP_NUM(ROUTE114),
         MAP_NUM(ROUTE114),
         MAP_NUM(ROUTE115),
@@ -3590,11 +3590,11 @@ bool32 GetUnusualWeatherMapNameAndType(void)
         MAP_NUM(ROUTE129)
     };
 
-    u16 unusualWeather = VarGet(VAR_UNUSUAL_WEATHER_LOCATION);
+    u16 abnormalWeather = VarGet(VAR_ABNORMAL_WEATHER_LOCATION);
 
-    GetMapName(gStringVar1, sUnusualWeatherMapNumbers[unusualWeather - 1], 0);
+    GetMapName(gStringVar1, sAbnormalWeatherMapNumbers[abnormalWeather - 1], 0);
 
-    if (unusualWeather < UNUSUAL_WEATHER_KYOGRE_LOCATIONS_START)
+    if (abnormalWeather < ABNORMAL_WEATHER_KYOGRE_LOCATIONS_START)
     {
         return FALSE;
     }
@@ -3604,10 +3604,10 @@ bool32 GetUnusualWeatherMapNameAndType(void)
     }
 }
 
-bool8 UnusualWeatherHasExpired(void)
+bool8 AbnormalWeatherHasExpired(void)
 {
     // Duplicate array.
-    static const u8 sUnusualWeatherMapNumbers_2[] = {
+    static const u8 sAbnormalWeatherMapNumbers[] = {
         MAP_NUM(ROUTE114),
         MAP_NUM(ROUTE114),
         MAP_NUM(ROUTE115),
@@ -3626,17 +3626,17 @@ bool8 UnusualWeatherHasExpired(void)
         MAP_NUM(ROUTE129)
     };
 
-    u16 steps = VarGet(VAR_UNUSUAL_WEATHER_STEP_COUNTER);
-    u16 unusualWeather = VarGet(VAR_UNUSUAL_WEATHER_LOCATION);
+    u16 steps = VarGet(VAR_ABNORMAL_WEATHER_STEP_COUNTER);
+    u16 abnormalWeather = VarGet(VAR_ABNORMAL_WEATHER_LOCATION);
 
-    if (unusualWeather == UNUSUAL_WEATHER_NONE)
+    if (abnormalWeather == ABNORMAL_WEATHER_NONE)
     {
         return FALSE;
     }
 
     if (++steps > 999)
     {
-        VarSet(VAR_UNUSUAL_WEATHER_STEP_COUNTER, 0);
+        VarSet(VAR_ABNORMAL_WEATHER_STEP_COUNTER, 0);
         if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(UNDERWATER_MARINE_CAVE))
         {
             switch (gSaveBlock1Ptr->location.mapNum)
@@ -3646,7 +3646,7 @@ bool8 UnusualWeatherHasExpired(void)
                 case MAP_NUM(MARINE_CAVE_END):
                 case MAP_NUM(TERRA_CAVE_ENTRANCE):
                 case MAP_NUM(TERRA_CAVE_END):
-                    VarSet(VAR_SHOULD_END_UNUSUAL_WEATHER, 1);
+                    VarSet(VAR_SHOULD_END_ABNORMAL_WEATHER, 1);
                     return FALSE;
                 default:
                     break;
@@ -3661,27 +3661,27 @@ bool8 UnusualWeatherHasExpired(void)
                 case MAP_NUM(UNDERWATER5):
                 case MAP_NUM(UNDERWATER6):
                 case MAP_NUM(UNDERWATER7):
-                    VarSet(VAR_SHOULD_END_UNUSUAL_WEATHER, 1);
+                    VarSet(VAR_SHOULD_END_ABNORMAL_WEATHER, 1);
                     return FALSE;
                 default:
                     break;
             }
         }
 
-        if (gSaveBlock1Ptr->location.mapNum == sUnusualWeatherMapNumbers_2[unusualWeather - 1] &&
+        if (gSaveBlock1Ptr->location.mapNum == sAbnormalWeatherMapNumbers[abnormalWeather - 1] &&
             gSaveBlock1Ptr->location.mapGroup == 0)
         {
             return TRUE;
         }
         else
         {
-            VarSet(VAR_UNUSUAL_WEATHER_LOCATION, UNUSUAL_WEATHER_NONE);
+            VarSet(VAR_ABNORMAL_WEATHER_LOCATION, ABNORMAL_WEATHER_NONE);
             return FALSE;
         }
     }
     else
     {
-        VarSet(VAR_UNUSUAL_WEATHER_STEP_COUNTER, steps);
+        VarSet(VAR_ABNORMAL_WEATHER_STEP_COUNTER, steps);
         return FALSE;
     }
 }

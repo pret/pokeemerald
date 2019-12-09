@@ -33,8 +33,8 @@ static void InitArenaChallenge(void);
 static void GetArenaData(void);
 static void SetArenaData(void);
 static void SaveArenaChallenge(void);
-static void SetArenaRewardItem(void);
-static void GiveArenaRewardItem(void);
+static void SetArenaPrize(void);
+static void GiveArenaPrize(void);
 static void BufferArenaOpponentName(void);
 static void SpriteCb_JudgmentIcon(struct Sprite *sprite);
 static void ShowJudgmentSprite(u8 x, u8 y, u8 category, u8 battler);
@@ -404,10 +404,10 @@ static const s8 sMindRatings[] =
 static const struct OamData sJudgementIconOamData =
 {
     .y = 0,
-    .affineMode = 0,
-    .objMode = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
     .mosaic = 0,
-    .bpp = 0,
+    .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(16x16),
     .x = 0,
     .matrixNum = 0,
@@ -473,12 +473,12 @@ static void (* const sArenaFunctions[])(void) =
     [BATTLE_ARENA_FUNC_GET_DATA]         = GetArenaData,
     [BATTLE_ARENA_FUNC_SET_DATA]         = SetArenaData,
     [BATTLE_ARENA_FUNC_SAVE]             = SaveArenaChallenge,
-    [BATTLE_ARENA_FUNC_SET_REWARD]       = SetArenaRewardItem,
-    [BATTLE_ARENA_FUNC_GIVE_REWARD]      = GiveArenaRewardItem,
+    [BATTLE_ARENA_FUNC_SET_PRIZE]        = SetArenaPrize,
+    [BATTLE_ARENA_FUNC_GIVE_PRIZE]       = GiveArenaPrize,
     [BATTLE_ARENA_FUNC_GET_TRAINER_NAME] = BufferArenaOpponentName,
 };
 
-static const u16 sShortStreakRewardItems[] =
+static const u16 sShortStreakPrizeItems[] =
 {
     ITEM_HP_UP,
     ITEM_PROTEIN,
@@ -488,7 +488,7 @@ static const u16 sShortStreakRewardItems[] =
     ITEM_ZINC,
 };
 
-static const u16 sLongStreakRewardItems[] =
+static const u16 sLongStreakPrizeItems[] =
 {
     ITEM_BRIGHT_POWDER,
     ITEM_WHITE_HERB,
@@ -810,8 +810,8 @@ static void GetArenaData(void)
 
     switch (gSpecialVar_0x8005)
     {
-    case ARENA_DATA_REWARD:
-        gSpecialVar_Result = gSaveBlock2Ptr->frontier.arenaRewardItem;
+    case ARENA_DATA_PRIZE:
+        gSpecialVar_Result = gSaveBlock2Ptr->frontier.arenaPrize;
         break;
     case ARENA_DATA_WIN_STREAK:
         gSpecialVar_Result = gSaveBlock2Ptr->frontier.arenaWinStreaks[lvlMode];
@@ -831,8 +831,8 @@ static void SetArenaData(void)
 
     switch (gSpecialVar_0x8005)
     {
-    case ARENA_DATA_REWARD:
-        gSaveBlock2Ptr->frontier.arenaRewardItem = gSpecialVar_0x8006;
+    case ARENA_DATA_PRIZE:
+        gSaveBlock2Ptr->frontier.arenaPrize = gSpecialVar_0x8006;
         break;
     case ARENA_DATA_WIN_STREAK:
         gSaveBlock2Ptr->frontier.arenaWinStreaks[lvlMode] = gSpecialVar_0x8006;
@@ -864,22 +864,22 @@ static void SaveArenaChallenge(void)
     SaveGameFrontier();
 }
 
-static void SetArenaRewardItem(void)
+static void SetArenaPrize(void)
 {
     u32 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
 
     if (gSaveBlock2Ptr->frontier.arenaWinStreaks[lvlMode] > 41)
-        gSaveBlock2Ptr->frontier.arenaRewardItem = sLongStreakRewardItems[Random() % ARRAY_COUNT(sLongStreakRewardItems)];
+        gSaveBlock2Ptr->frontier.arenaPrize = sLongStreakPrizeItems[Random() % ARRAY_COUNT(sLongStreakPrizeItems)];
     else
-        gSaveBlock2Ptr->frontier.arenaRewardItem = sShortStreakRewardItems[Random() % ARRAY_COUNT(sShortStreakRewardItems)];
+        gSaveBlock2Ptr->frontier.arenaPrize = sShortStreakPrizeItems[Random() % ARRAY_COUNT(sShortStreakPrizeItems)];
 }
 
-static void GiveArenaRewardItem(void)
+static void GiveArenaPrize(void)
 {
-    if (AddBagItem(gSaveBlock2Ptr->frontier.arenaRewardItem, 1) == TRUE)
+    if (AddBagItem(gSaveBlock2Ptr->frontier.arenaPrize, 1) == TRUE)
     {
-        CopyItemName(gSaveBlock2Ptr->frontier.arenaRewardItem, gStringVar1);
-        gSaveBlock2Ptr->frontier.arenaRewardItem = ITEM_NONE;
+        CopyItemName(gSaveBlock2Ptr->frontier.arenaPrize, gStringVar1);
+        gSaveBlock2Ptr->frontier.arenaPrize = ITEM_NONE;
         gSpecialVar_Result = TRUE;
     }
     else

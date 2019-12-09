@@ -2364,10 +2364,10 @@ static const struct SpeciesItem sAlteringCaveWildMonHeldItems[] =
 static const struct OamData sOamData_8329F20 =
 {
     .y = 0,
-    .affineMode = 0,
-    .objMode = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
     .mosaic = 0,
-    .bpp = 0,
+    .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(64x64),
     .x = 0,
     .matrixNum = 0,
@@ -5790,7 +5790,7 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 type, u16 evolutionItem)
                 break;
             case EVO_LEVEL_RAIN:
                 j = GetCurrentWeather();
-                if (j == WEATHER_RAIN_LIGHT || j == WEATHER_RAIN_MED || j == WEATHER_RAIN_HEAVY)
+                if (j == WEATHER_RAIN || j == WEATHER_RAIN_THUNDERSTORM || j == WEATHER_DOWNPOUR)
                     targetSpecies = gEvolutionTable[species][i].targetSpecies;
                 break;
             case EVO_MAP:

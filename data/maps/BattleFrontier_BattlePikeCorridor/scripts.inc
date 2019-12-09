@@ -10,9 +10,8 @@ BattleFrontier_BattlePikeCorridor_MapScript2_25C77C: @ 825C77C
 BattleFrontier_BattlePikeCorridor_EventScript_25C786:: @ 825C786
 	delay 16
 	frontier_set FRONTIER_DATA_BATTLE_NUM, 1
-	setvar VAR_0x8004, BATTLE_PIKE_FUNC_CLEAR_TRAINER_IDS
-	special CallBattlePikeFunction
-	battlepike_nohealing TRUE
+	pike_cleartrainerids
+	pike_nohealing TRUE
 	applymovement EVENT_OBJ_ID_PLAYER, BattleFrontier_BattlePikeCorridor_Movement_25C80B
 	applymovement 1, BattleFrontier_BattlePikeCorridor_Movement_25C812
 	waitmovement 0

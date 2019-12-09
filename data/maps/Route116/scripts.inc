@@ -6,12 +6,12 @@ Route116_MapScripts:: @ 81F2C0C
 
 Route116_OnTransition: @ 81F2C1C
 	call_if_set FLAG_RECOVERED_DEVON_GOODS, Route116_EventScript_SetWandasBoyfriendPos
-	compare VAR_SHOULD_END_UNUSUAL_WEATHER, 1
-	call_if_eq UnusualWeather_EventScript_HideMapNamePopup
-	compare VAR_UNUSUAL_WEATHER_LOCATION, UNUSUAL_WEATHER_ROUTE_116_NORTH
-	call_if_eq UnusualWeather_StartGroudonWeather
-	compare VAR_UNUSUAL_WEATHER_LOCATION, UNUSUAL_WEATHER_ROUTE_116_SOUTH
-	call_if_eq UnusualWeather_StartGroudonWeather
+	compare VAR_SHOULD_END_ABNORMAL_WEATHER, 1
+	call_if_eq AbnormalWeather_EventScript_HideMapNamePopup
+	compare VAR_ABNORMAL_WEATHER_LOCATION, ABNORMAL_WEATHER_ROUTE_116_NORTH
+	call_if_eq AbnormalWeather_StartGroudonWeather
+	compare VAR_ABNORMAL_WEATHER_LOCATION, ABNORMAL_WEATHER_ROUTE_116_SOUTH
+	call_if_eq AbnormalWeather_StartGroudonWeather
 	end
 
 Route116_EventScript_SetWandasBoyfriendPos:: @ 81F2C47
@@ -19,14 +19,14 @@ Route116_EventScript_SetWandasBoyfriendPos:: @ 81F2C47
 	return
 
 Route116_OnLoad: @ 81F2C4F
-	compare VAR_UNUSUAL_WEATHER_LOCATION, UNUSUAL_WEATHER_ROUTE_116_NORTH
-	call_if_eq UnusualWeather_EventScript_PlaceTilesRoute116North
-	compare VAR_UNUSUAL_WEATHER_LOCATION, UNUSUAL_WEATHER_ROUTE_116_SOUTH
-	call_if_eq UnusualWeather_EventScript_PlaceTilesRoute116South
+	compare VAR_ABNORMAL_WEATHER_LOCATION, ABNORMAL_WEATHER_ROUTE_116_NORTH
+	call_if_eq AbnormalWeather_EventScript_PlaceTilesRoute116North
+	compare VAR_ABNORMAL_WEATHER_LOCATION, ABNORMAL_WEATHER_ROUTE_116_SOUTH
+	call_if_eq AbnormalWeather_EventScript_PlaceTilesRoute116South
 	end
 
 Route116_OnFrame: @ 81F2C66
-	map_script_2 VAR_SHOULD_END_UNUSUAL_WEATHER, 1, UnusualWeather_EventScript_EndEventAndCleanup_1
+	map_script_2 VAR_SHOULD_END_ABNORMAL_WEATHER, 1, AbnormalWeather_EventScript_EndEventAndCleanup_1
 	.2byte 0
 
 Route116_EventScript_WandasBoyfriend:: @ 81F2C70
