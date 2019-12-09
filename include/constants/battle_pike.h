@@ -23,8 +23,8 @@
 #define PIKE_HINT_BRAIN      4
 
 // For the room with a status effect.
-#define PIKE_STATUS_KIRLIA   0
-#define PIKE_STATUS_DUSCLOPS 1
+#define PIKE_STATUSMON_KIRLIA   0
+#define PIKE_STATUSMON_DUSCLOPS 1
 
 #define PIKE_STATUS_FREEZE      0
 #define PIKE_STATUS_BURN        1
@@ -48,7 +48,7 @@
 #define BATTLE_PIKE_FUNC_GET_ROOM_STATUS_MON       12
 #define BATTLE_PIKE_FUNC_HEAL_ONE_TWO_MONS         13
 #define BATTLE_PIKE_FUNC_BUFFER_NPC_MSG            14
-#define BATTLE_PIKE_FUNC_STATUS_SCREEN_FADE        15
+#define BATTLE_PIKE_FUNC_STATUS_SCREEN_FLASH       15
 #define BATTLE_PIKE_FUNC_IS_IN                     16
 #define BATTLE_PIKE_FUNC_SET_HINT_ROOM             17
 #define BATTLE_PIKE_FUNC_GET_HINT_ROOM_ID          18
