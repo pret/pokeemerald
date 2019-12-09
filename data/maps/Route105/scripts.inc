@@ -6,10 +6,10 @@ Route105_MapScripts:: @ 81EE1DB
 
 Route105_OnLoad: @ 81EE1EB
 	call_if_unset FLAG_REGI_DOORS_OPENED, Route105_CloseRegiEntrance
-	compare VAR_UNUSUAL_WEATHER_LOCATION, UNUSUAL_WEATHER_ROUTE_105_NORTH
-	call_if_eq UnusualWeather_EventScript_PlaceTilesRoute105North
-	compare VAR_UNUSUAL_WEATHER_LOCATION, UNUSUAL_WEATHER_ROUTE_105_SOUTH
-	call_if_eq UnusualWeather_EventScript_PlaceTilesRoute105South
+	compare VAR_ABNORMAL_WEATHER_LOCATION, ABNORMAL_WEATHER_ROUTE_105_NORTH
+	call_if_eq AbnormalWeather_EventScript_PlaceTilesRoute105North
+	compare VAR_ABNORMAL_WEATHER_LOCATION, ABNORMAL_WEATHER_ROUTE_105_SOUTH
+	call_if_eq AbnormalWeather_EventScript_PlaceTilesRoute105South
 	end
 
 Route105_CloseRegiEntrance:: @ 81EE20B
@@ -18,16 +18,16 @@ Route105_CloseRegiEntrance:: @ 81EE20B
 	return
 
 Route105_OnTransition: @ 81EE21E
-	compare VAR_SHOULD_END_UNUSUAL_WEATHER, 1
-	call_if_eq UnusualWeather_EventScript_HideMapNamePopup
-	compare VAR_UNUSUAL_WEATHER_LOCATION, UNUSUAL_WEATHER_ROUTE_105_NORTH
-	call_if_eq UnusualWeather_StartKyogreWeather
-	compare VAR_UNUSUAL_WEATHER_LOCATION, UNUSUAL_WEATHER_ROUTE_105_SOUTH
-	call_if_eq UnusualWeather_StartKyogreWeather
+	compare VAR_SHOULD_END_ABNORMAL_WEATHER, 1
+	call_if_eq AbnormalWeather_EventScript_HideMapNamePopup
+	compare VAR_ABNORMAL_WEATHER_LOCATION, ABNORMAL_WEATHER_ROUTE_105_NORTH
+	call_if_eq AbnormalWeather_StartKyogreWeather
+	compare VAR_ABNORMAL_WEATHER_LOCATION, ABNORMAL_WEATHER_ROUTE_105_SOUTH
+	call_if_eq AbnormalWeather_StartKyogreWeather
 	end
 
 Route105_OnFrame: @ 81EE240
-	map_script_2 VAR_SHOULD_END_UNUSUAL_WEATHER, 1, UnusualWeather_EventScript_EndEventAndCleanup_1
+	map_script_2 VAR_SHOULD_END_ABNORMAL_WEATHER, 1, AbnormalWeather_EventScript_EndEventAndCleanup_1
 	.2byte 0
 
 Route105_EventScript_Foster:: @ 81EE24A

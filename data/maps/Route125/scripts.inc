@@ -5,24 +5,24 @@ Route125_MapScripts:: @ 81F6748
 	.byte 0
 
 Route125_OnTransition: @ 81F6758
-	call_if_set FLAG_SYS_WEATHER_CTRL, Common_EventScript_SetAlternatingWeather
-	compare VAR_SHOULD_END_UNUSUAL_WEATHER, 1
-	call_if_eq UnusualWeather_EventScript_HideMapNamePopup
-	compare VAR_UNUSUAL_WEATHER_LOCATION, UNUSUAL_WEATHER_ROUTE_125_WEST
-	call_if_eq UnusualWeather_StartKyogreWeather
-	compare VAR_UNUSUAL_WEATHER_LOCATION, UNUSUAL_WEATHER_ROUTE_125_EAST
-	call_if_eq UnusualWeather_StartKyogreWeather
+	call_if_set FLAG_SYS_WEATHER_CTRL, Common_EventScript_SetAbnormalWeather
+	compare VAR_SHOULD_END_ABNORMAL_WEATHER, 1
+	call_if_eq AbnormalWeather_EventScript_HideMapNamePopup
+	compare VAR_ABNORMAL_WEATHER_LOCATION, ABNORMAL_WEATHER_ROUTE_125_WEST
+	call_if_eq AbnormalWeather_StartKyogreWeather
+	compare VAR_ABNORMAL_WEATHER_LOCATION, ABNORMAL_WEATHER_ROUTE_125_EAST
+	call_if_eq AbnormalWeather_StartKyogreWeather
 	end
 
 Route125_OnLoad: @ 81F6783
-	compare VAR_UNUSUAL_WEATHER_LOCATION, UNUSUAL_WEATHER_ROUTE_125_WEST
-	call_if_eq UnusualWeather_EventScript_PlaceTilesRoute125West
-	compare VAR_UNUSUAL_WEATHER_LOCATION, UNUSUAL_WEATHER_ROUTE_125_EAST
-	call_if_eq UnusualWeather_EventScript_PlaceTilesRoute125East
+	compare VAR_ABNORMAL_WEATHER_LOCATION, ABNORMAL_WEATHER_ROUTE_125_WEST
+	call_if_eq AbnormalWeather_EventScript_PlaceTilesRoute125West
+	compare VAR_ABNORMAL_WEATHER_LOCATION, ABNORMAL_WEATHER_ROUTE_125_EAST
+	call_if_eq AbnormalWeather_EventScript_PlaceTilesRoute125East
 	end
 
 Route125_OnFrame: @ 81F679A
-	map_script_2 VAR_SHOULD_END_UNUSUAL_WEATHER, 1, UnusualWeather_EventScript_EndEventAndCleanup_1
+	map_script_2 VAR_SHOULD_END_ABNORMAL_WEATHER, 1, AbnormalWeather_EventScript_EndEventAndCleanup_1
 	.2byte 0
 
 Route125_EventScript_Nolen:: @ 81F67A4

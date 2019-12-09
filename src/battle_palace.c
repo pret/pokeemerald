@@ -14,34 +14,54 @@
 #include "constants/trainers.h"
 
 // This file's functions.
-static void sub_8195980(void);
-static void sub_8195A38(void);
-static void sub_8195AE4(void);
-static void sub_8195BB0(void);
-static void sub_8195C20(void);
+static void InitPalaceChallenge(void);
+static void GetPalaceData(void);
+static void SetPalaceData(void);
+static void GetPalaceCommentId(void);
+static void SetPalaceOpponent(void);
 static void BufferOpponentIntroSpeech(void);
-static void sub_8195C7C(void);
-static void sub_8195CE4(void);
-static void sub_8195D28(void);
-static void sub_8195DB8(void);
+static void IncrementPalaceStreak(void);
+static void SavePalaceChallenge(void);
+static void SetRandomPalacePrize(void);
+static void GivePalacePrize(void);
 
 // Const rom data.
 static void (* const sBattlePalaceFunctions[])(void) =
 {
-    [BATTLE_PALACE_FUNC_0] = sub_8195980,
-    [BATTLE_PALACE_FUNC_1] = sub_8195A38,
-    [BATTLE_PALACE_FUNC_2] = sub_8195AE4,
-    [BATTLE_PALACE_FUNC_3] = sub_8195BB0,
-    [BATTLE_PALACE_FUNC_4] = sub_8195C20,
+    [BATTLE_PALACE_FUNC_INIT]               = InitPalaceChallenge,
+    [BATTLE_PALACE_FUNC_GET_DATA]           = GetPalaceData,
+    [BATTLE_PALACE_FUNC_SET_DATA]           = SetPalaceData,
+    [BATTLE_PALACE_FUNC_GET_COMMENT_ID]     = GetPalaceCommentId,
+    [BATTLE_PALACE_FUNC_SET_OPPONENT]       = SetPalaceOpponent,
     [BATTLE_PALACE_FUNC_GET_OPPONENT_INTRO] = BufferOpponentIntroSpeech,
-    [BATTLE_PALACE_FUNC_6] = sub_8195C7C,
-    [BATTLE_PALACE_FUNC_7] = sub_8195CE4,
-    [BATTLE_PALACE_FUNC_8] = sub_8195D28,
-    [BATTLE_PALACE_FUNC_9] = sub_8195DB8,
+    [BATTLE_PALACE_FUNC_INCREMENT_STREAK]   = IncrementPalaceStreak,
+    [BATTLE_PALACE_FUNC_SAVE]               = SavePalaceChallenge,
+    [BATTLE_PALACE_FUNC_SET_PRIZE]          = SetRandomPalacePrize,
+    [BATTLE_PALACE_FUNC_GIVE_PRIZE]         = GivePalacePrize,
 };
 
-static const u16 gUnknown_0860DE78[] = {ITEM_HP_UP, ITEM_PROTEIN, ITEM_IRON, ITEM_CALCIUM, ITEM_CARBOS, ITEM_ZINC};
-static const u16 gUnknown_0860DE84[] = {ITEM_BRIGHT_POWDER, ITEM_WHITE_HERB, ITEM_QUICK_CLAW, ITEM_LEFTOVERS, ITEM_MENTAL_HERB, ITEM_KINGS_ROCK, ITEM_FOCUS_BAND, ITEM_SCOPE_LENS, ITEM_CHOICE_BAND};
+static const u16 sBattlePalaceEarlyPrizes[] = 
+{
+    ITEM_HP_UP, 
+    ITEM_PROTEIN, 
+    ITEM_IRON, 
+    ITEM_CALCIUM, 
+    ITEM_CARBOS, 
+    ITEM_ZINC
+};
+
+static const u16 sBattlePalaceLatePrizes[] = 
+{
+    ITEM_BRIGHT_POWDER, 
+    ITEM_WHITE_HERB, 
+    ITEM_QUICK_CLAW, 
+    ITEM_LEFTOVERS, 
+    ITEM_MENTAL_HERB, 
+    ITEM_KINGS_ROCK, 
+    ITEM_FOCUS_BAND, 
+    ITEM_SCOPE_LENS, 
+    ITEM_CHOICE_BAND
+};
 
 static const u32 sWinStreakFlags[][2] =
 {
@@ -61,7 +81,7 @@ void CallBattlePalaceFunction(void)
     sBattlePalaceFunctions[gSpecialVar_0x8004]();
 }
 
-static void sub_8195980(void)
+static void InitPalaceChallenge(void)
 {
     u32 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
     u32 battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
@@ -77,39 +97,39 @@ static void sub_8195980(void)
     gTrainerBattleOpponent_A = 0;
 }
 
-static void sub_8195A38(void)
+static void GetPalaceData(void)
 {
     u32 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
     u32 battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
 
     switch (gSpecialVar_0x8005)
     {
-    case 0:
-        gSpecialVar_Result = gSaveBlock2Ptr->frontier.field_DC6;
+    case PALACE_DATA_PRIZE:
+        gSpecialVar_Result = gSaveBlock2Ptr->frontier.palacePrize;
         break;
-    case 1:
+    case PALACE_DATA_WIN_STREAK:
         gSpecialVar_Result = gSaveBlock2Ptr->frontier.palaceWinStreaks[battleMode][lvlMode];
         break;
-    case 2:
+    case PALACE_DATA_WIN_STREAK_ACTIVE:
         gSpecialVar_Result = ((gSaveBlock2Ptr->frontier.winStreakActiveFlags & sWinStreakFlags[battleMode][lvlMode]) != 0);
         break;
     }
 }
 
-static void sub_8195AE4(void)
+static void SetPalaceData(void)
 {
     u32 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
     u32 battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
 
     switch (gSpecialVar_0x8005)
     {
-    case 0:
-        gSaveBlock2Ptr->frontier.field_DC6 = gSpecialVar_0x8006;
+    case PALACE_DATA_PRIZE:
+        gSaveBlock2Ptr->frontier.palacePrize = gSpecialVar_0x8006;
         break;
-    case 1:
+    case PALACE_DATA_WIN_STREAK:
         gSaveBlock2Ptr->frontier.palaceWinStreaks[battleMode][lvlMode] = gSpecialVar_0x8006;
         break;
-    case 2:
+    case PALACE_DATA_WIN_STREAK_ACTIVE:
         if (gSpecialVar_0x8006)
             gSaveBlock2Ptr->frontier.winStreakActiveFlags |= sWinStreakFlags[battleMode][lvlMode];
         else
@@ -118,7 +138,7 @@ static void sub_8195AE4(void)
     }
 }
 
-static void sub_8195BB0(void)
+static void GetPalaceCommentId(void)
 {
     u32 battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
     u32 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
@@ -131,7 +151,7 @@ static void sub_8195BB0(void)
         gSpecialVar_Result = 4;
 }
 
-static void sub_8195C20(void)
+static void SetPalaceOpponent(void)
 {
     gTrainerBattleOpponent_A = 5 *(Random() % 255) / 64u;
     SetBattleFacilityTrainerGfxId(gTrainerBattleOpponent_A, 0);
@@ -143,7 +163,7 @@ static void BufferOpponentIntroSpeech(void)
         FrontierSpeechToString(gFacilityTrainers[gTrainerBattleOpponent_A].speechBefore);
 }
 
-static void sub_8195C7C(void)
+static void IncrementPalaceStreak(void)
 {
     u8 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
     u8 battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
@@ -158,7 +178,7 @@ static void sub_8195C7C(void)
     }
 }
 
-static void sub_8195CE4(void)
+static void SavePalaceChallenge(void)
 {
     gSaveBlock2Ptr->frontier.challengeStatus = gSpecialVar_0x8005;
     VarSet(VAR_TEMP_0, 0);
@@ -166,23 +186,23 @@ static void sub_8195CE4(void)
     SaveGameFrontier();
 }
 
-static void sub_8195D28(void)
+static void SetRandomPalacePrize(void)
 {
     u32 battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
     u32 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
 
     if (gSaveBlock2Ptr->frontier.palaceWinStreaks[battleMode][lvlMode] > 41)
-        gSaveBlock2Ptr->frontier.field_DC6 = gUnknown_0860DE84[Random() % ARRAY_COUNT(gUnknown_0860DE84)];
+        gSaveBlock2Ptr->frontier.palacePrize = sBattlePalaceLatePrizes[Random() % ARRAY_COUNT(sBattlePalaceLatePrizes)];
     else
-        gSaveBlock2Ptr->frontier.field_DC6 = gUnknown_0860DE78[Random() % ARRAY_COUNT(gUnknown_0860DE78)];
+        gSaveBlock2Ptr->frontier.palacePrize = sBattlePalaceEarlyPrizes[Random() % ARRAY_COUNT(sBattlePalaceEarlyPrizes)];
 }
 
-static void sub_8195DB8(void)
+static void GivePalacePrize(void)
 {
-    if (AddBagItem(gSaveBlock2Ptr->frontier.field_DC6, 1) == TRUE)
+    if (AddBagItem(gSaveBlock2Ptr->frontier.palacePrize, 1) == TRUE)
     {
-        CopyItemName(gSaveBlock2Ptr->frontier.field_DC6, gStringVar1);
-        gSaveBlock2Ptr->frontier.field_DC6 = 0;
+        CopyItemName(gSaveBlock2Ptr->frontier.palacePrize, gStringVar1);
+        gSaveBlock2Ptr->frontier.palacePrize = 0;
         gSpecialVar_Result = TRUE;
     }
     else

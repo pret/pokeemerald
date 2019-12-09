@@ -558,9 +558,9 @@ static bool8 TryStartStepCountScript(u16 metatileBehavior)
             ScriptContext1_SetupScript(EventScript_EggHatch);
             return TRUE;
         }
-        if (UnusualWeatherHasExpired() == TRUE)
+        if (AbnormalWeatherHasExpired() == TRUE)
         {
-            ScriptContext1_SetupScript(UnusualWeather_EventScript_EndEventAndCleanup_1);
+            ScriptContext1_SetupScript(AbnormalWeather_EventScript_EndEventAndCleanup_1);
             return TRUE;
         }
         if (ShouldDoBrailleRegicePuzzle() == TRUE)

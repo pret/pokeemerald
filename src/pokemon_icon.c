@@ -1004,28 +1004,26 @@ const union AffineAnimCmd *const sMonIconAffineAnims[] =
 
 const u16 sSpriteImageSizes[3][4] =
 {
-    // square
+    [ST_OAM_SQUARE] = 
     {
-         0x20, // 1×1
-         0x80, // 2×2
-        0x200, // 4×4
-        0x800, // 8×8
+        [SPRITE_SIZE(8x8)]   =  0x20,
+        [SPRITE_SIZE(16x16)] =  0x80,
+        [SPRITE_SIZE(32x32)] = 0x200,
+        [SPRITE_SIZE(64x64)] = 0x800,
     },
-
-    // horizontal rectangle
+    [ST_OAM_H_RECTANGLE] = 
     {
-         0x40, // 2×1
-         0x80, // 4×1
-        0x100, // 4×2
-        0x400, // 8×4
+        [SPRITE_SIZE(16x8)]  =  0x40,
+        [SPRITE_SIZE(32x8)]  =  0x80,
+        [SPRITE_SIZE(32x16)] = 0x100,
+        [SPRITE_SIZE(64x32)] = 0x400,
     },
-
-    // vertical rectangle
+    [ST_OAM_V_RECTANGLE] = 
     {
-         0x40, // 1×2
-         0x80, // 1×4
-        0x100, // 2×4
-        0x400, // 4×8
+        [SPRITE_SIZE(8x16)]  =  0x40,
+        [SPRITE_SIZE(8x32)]  =  0x80,
+        [SPRITE_SIZE(16x32)] = 0x100,
+        [SPRITE_SIZE(32x64)] = 0x400,
     },
 };
 

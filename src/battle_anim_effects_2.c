@@ -2124,7 +2124,7 @@ static void CreateMinimizeSprite(struct Task* task, u8 taskId)
             gSprites[spriteId].data[2] = 6;
             gSprites[spriteId].callback = ClonedMinizeSprite_Step;
             SetSpriteRotScale(spriteId, task->data[4], task->data[4], 0);
-            gSprites[spriteId].oam.affineMode = 1;
+            gSprites[spriteId].oam.affineMode = ST_OAM_AFFINE_NORMAL;
             CalcCenterToCornerVec(&gSprites[spriteId], gSprites[spriteId].oam.shape, gSprites[spriteId].oam.size, gSprites[spriteId].oam.affineMode);
         }
     }
