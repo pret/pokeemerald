@@ -499,27 +499,6 @@ static const struct SpriteSheet sStatusSummaryBallsSpriteSheet =
     gBattleInterface_BallDisplayGfx, 0x80, TAG_STATUS_SUMMARY_BALLS_TILE
 };
 
-<<<<<<< HEAD
-=======
-// unused oam data
-static const struct OamData sUnknown_0832C354 =
-{
-    .y = 0,
-    .affineMode = ST_OAM_AFFINE_OFF,
-    .objMode = ST_OAM_OBJ_NORMAL,
-    .mosaic = 0,
-    .bpp = ST_OAM_4BPP,
-    .shape = SPRITE_SHAPE(64x32),
-    .x = 0,
-    .matrixNum = 0,
-    .size = SPRITE_SIZE(64x32),
-    .tileNum = 0,
-    .priority = 1,
-    .paletteNum = 0,
-    .affineParam = 0,
-};
-
->>>>>>> 47ea65b96e4575a335d3197483841041cb361541
 static const struct OamData sOamData_StatusSummaryBalls =
 {
     .y = 0,

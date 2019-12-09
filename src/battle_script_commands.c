@@ -4673,7 +4673,7 @@ static void Cmd_moveend(void)
             if (gBattleMoves[gCurrentMove].flags & FLAG_DANCE)
             {
                 u8 battler, nextDancer = 0;
-                
+
                 if (!(gBattleStruct->lastMoveFailed & gBitTable[gBattlerAttacker]
                     || (!gSpecialStatuses[gBattlerAttacker].dancerUsedMove
                         && gProtectStructs[gBattlerAttacker].usesBouncedMove)))
@@ -4690,14 +4690,14 @@ static void Cmd_moveend(void)
                         if (GetBattlerAbility(battler) == ABILITY_DANCER && !gSpecialStatuses[battler].dancerUsedMove)
                         {
                             if (!nextDancer || (gBattleMons[battler].speed < gBattleMons[nextDancer & 0x3].speed))
-                                nextDancer = battler | 0x4;                            
+                                nextDancer = battler | 0x4;
                         }
                     }
                     if (nextDancer && AbilityBattleEffects(ABILITYEFFECT_MOVE_END_OTHER, nextDancer & 0x3, 0, 0, 0))
                         effect = TRUE;
                 }
             }
-            gBattleScripting.atk49_state++;
+            gBattleScripting.moveendState++;
             break;
         case MOVEEND_CLEAR_BITS: // Clear bits active while using a move for all targets and all hits.
             if (gSpecialStatuses[gBattlerAttacker].instructedChosenTarget)
