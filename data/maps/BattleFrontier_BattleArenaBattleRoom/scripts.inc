@@ -52,8 +52,7 @@ BattleFrontier_BattleArenaBattleRoom_EventScript_EnterRoom:: @ 82574DC
 	goto BattleFrontier_BattleArenaBattleRoom_EventScript_AskReadyForOpponent
 
 BattleFrontier_BattleArenaBattleRoom_EventScript_AnnounceTrainers:: @ 825752E
-	setvar VAR_0x8004, BATTLE_TOWER_FUNC_CHOOSE_TRAINER
-	special CallBattleTowerFunc
+	tower_setopponent
 	addobject 7
 	applymovement 7, BattleFrontier_BattleArenaBattleRoom_Movement_OpponentEnter
 	waitmovement 0

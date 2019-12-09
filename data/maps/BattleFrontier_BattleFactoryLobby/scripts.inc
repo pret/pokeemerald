@@ -28,20 +28,10 @@ BattleFrontier_BattleFactoryLobby_EventScript_25843A:: @ 825843A
 	lockall
 	msgbox BattleFrontier_BattleFactoryLobby_Text_258ECA, MSGBOX_DEFAULT
 	closemessage
-	setvar VAR_0x8004, 8
-	special CallBattleFactoryFunction
-	setvar VAR_0x8004, 2
-	setvar VAR_0x8005, 3
-	setvar VAR_0x8006, 0
-	special CallBattleFactoryFunction
-	setvar VAR_0x8004, 2
-	setvar VAR_0x8005, 1
-	setvar VAR_0x8006, 0
-	special CallBattleFactoryFunction
-	setvar VAR_0x8004, 2
-	setvar VAR_0x8005, 2
-	setvar VAR_0x8006, 0
-	special CallBattleFactoryFunction
+	factory_setswapped
+	factory_set FACTORY_DATA_WIN_STREAK_SWAPS, 0
+	factory_set FACTORY_DATA_WIN_STREAK, 0
+	factory_set FACTORY_DATA_WIN_STREAK_ACTIVE, FALSE
 	frontier_set FRONTIER_DATA_CHALLENGE_STATUS, 0
 	setvar VAR_TEMP_0, 255
 	releaseall
@@ -68,9 +58,7 @@ BattleFrontier_BattleFactoryLobby_EventScript_2584C6:: @ 82584C6
 	waitmessage
 	frontier_checkairshow
 	special LoadPlayerParty
-	setvar VAR_0x8004, 3
-	setvar VAR_0x8005, 0
-	special CallBattleFactoryFunction
+	factory_save 0
 	playse SE_SAVE
 	waitse
 	goto BattleFrontier_BattleFactoryLobby_EventScript_25853B
@@ -82,13 +70,8 @@ BattleFrontier_BattleFactoryLobby_EventScript_258506:: @ 8258506
 	waitmessage
 	frontier_checkairshow
 	special LoadPlayerParty
-	setvar VAR_0x8004, 2
-	setvar VAR_0x8005, 2
-	setvar VAR_0x8006, 0
-	special CallBattleFactoryFunction
-	setvar VAR_0x8004, 3
-	setvar VAR_0x8005, 0
-	special CallBattleFactoryFunction
+	factory_set FACTORY_DATA_WIN_STREAK_ACTIVE, FALSE
+	factory_save 0
 	playse SE_SAVE
 	waitse
 
@@ -117,9 +100,7 @@ BattleFrontier_BattleFactoryLobby_EventScript_258592:: @ 8258592
 	lockall
 	message BattleFrontier_BattleFactoryLobby_Text_258E77
 	waitmessage
-	setvar VAR_0x8004, 3
-	setvar VAR_0x8005, 1
-	special CallBattleFactoryFunction
+	factory_save CHALLENGE_STATUS_SAVING
 	playse SE_SAVE
 	waitse
 	frontier_set FRONTIER_DATA_PAUSED, FALSE
@@ -177,13 +158,9 @@ BattleFrontier_BattleFactoryLobby_EventScript_258653:: @ 8258653
 
 BattleFrontier_BattleFactoryLobby_EventScript_2586B9:: @ 82586B9
 	setvar VAR_TEMP_0, 0
-	setvar VAR_0x8004, 0
-	special CallBattleFactoryFunction
+	factory_init
 	frontier_set FRONTIER_DATA_CHALLENGE_STATUS, CHALLENGE_STATUS_SAVING
-	setvar VAR_0x8004, 2
-	setvar VAR_0x8005, 2
-	setvar VAR_0x8006, 1
-	special CallBattleFactoryFunction
+	factory_set FACTORY_DATA_WIN_STREAK_ACTIVE, TRUE
 	frontier_set FRONTIER_DATA_PAUSED, FALSE
 	closemessage
 	delay 2

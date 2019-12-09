@@ -708,10 +708,10 @@ static const u32 sUnknown_0831C2E8[] = INCBIN_U32("graphics/battle_interface/unk
 static const struct OamData sOamData_MonIconOnLvlUpBox =
 {
     .y = 0,
-    .affineMode = 0,
-    .objMode = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
     .mosaic = 0,
-    .bpp = 0,
+    .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(32x32),
     .x = 0,
     .matrixNum = 0,

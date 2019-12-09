@@ -262,7 +262,7 @@ Route117_PokemonDayCare_Movement_RetrieveDaycareMon: @ 8291F47
 	step_end
 
 @ Unused. Possibly a commented script, or a typo end added to the above Movement script
-Route117_PokemonDayCare_EventScript_291F5B:: @ 8291F5B
+Route117_PokemonDayCare_EventScript_UnusedEnd:: @ 8291F5B
 	end
 
 Route117_PokemonDayCare_EventScript_TwoMonsInDaycare:: @ 8291F5C
@@ -279,7 +279,7 @@ Route117_PokemonDayCare_EventScript_TwoMonsInDaycare:: @ 8291F5C
 	end
 
 @ Unused
-Route117_PokemonDayCare_EventScript_291F95:: @ 8291F95
+Route117_PokemonDayCare_EventScript_UnusedRetrieveMon:: @ 8291F95
 	special ShowDaycareLevelMenu
 	waitstate
 	compare VAR_RESULT, 2

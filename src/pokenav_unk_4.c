@@ -231,9 +231,9 @@ const struct SpritePalette gUnknown_08622818[] =
 const struct OamData gUnknown_08622828 = 
 {
     .y = 0,
-    .affineMode = 0,
-    .objMode = 0,
-    .bpp = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(8x16),
     .x = 0,
     .size = SPRITE_SIZE(8x16),
@@ -256,9 +256,9 @@ const struct SpriteTemplate gUnknown_08622830 =
 const struct OamData gUnknown_08622848 = 
 {
     .y = 0,
-    .affineMode = 0,
-    .objMode = 0,
-    .bpp = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(64x64),
     .x = 0,
     .size = SPRITE_SIZE(64x64),

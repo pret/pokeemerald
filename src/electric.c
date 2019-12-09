@@ -757,13 +757,13 @@ static void sub_810A9DC(struct Sprite *sprite)
 {
     if (!sprite->data[0])
     {
-        sprite->oam.shape = 2;
-        sprite->oam.size = 0;
+        sprite->oam.shape = SPRITE_SHAPE(8x16);
+        sprite->oam.size = SPRITE_SIZE(8x16);
     }
     else
     {
-        sprite->oam.shape = 0;
-        sprite->oam.size = 1;
+        sprite->oam.shape = SPRITE_SHAPE(16x16);
+        sprite->oam.size = SPRITE_SIZE(16x16);
     }
     if (++sprite->data[1] == 15)
         DestroySprite(sprite);

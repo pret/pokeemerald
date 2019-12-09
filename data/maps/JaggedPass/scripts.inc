@@ -26,7 +26,7 @@ JaggedPass_OnTransition: @ 823068B
 	end
 
 JaggedPass_EventScript_SetWeatherAsh:: @ 8230697
-	setweather WEATHER_ASH
+	setweather WEATHER_VOLCANIC_ASH
 	doweather
 	return
 

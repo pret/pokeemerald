@@ -11,7 +11,7 @@ BattleFrontier_BattlePikeRoomNormal_OnFrame: @ 825D167
 
 BattleFrontier_BattlePikeRoomNormal_EventScript_25D171:: @ 825D171
 	setvar VAR_TEMP_0, 1
-	battlepike_getroomtype
+	pike_getroomtype
 	switch VAR_RESULT
 	case PIKE_ROOM_SINGLE_BATTLE, BattleFrontier_BattlePikeRoomNormal_EventScript_25D1C6
 	case PIKE_ROOM_HEAL_FULL, BattleFrontier_BattlePikeRoomNormal_EventScript_25D50E
@@ -26,9 +26,7 @@ BattleFrontier_BattlePikeRoomNormal_EventScript_25D1C6:: @ 825D1C6
 	delay 16
 	applymovement 1, BattleFrontier_BattlePikeRoomNormal_Movement_25D795
 	waitmovement 0
-	setvar VAR_0x8004, BATTLE_PIKE_FUNC_BUFFER_RECORD_MIX_MSG
-	setvar VAR_0x8005, 0
-	special CallBattlePikeFunction
+	pike_gettrainerintro 0
 	msgbox gStringVar4, MSGBOX_DEFAULT
 	waitmessage
 	closemessage
@@ -39,7 +37,6 @@ BattleFrontier_BattlePikeRoomNormal_EventScript_25D1C6:: @ 825D1C6
 	waitstate
 	switch VAR_RESULT
 	case 1, BattleFrontier_BattlePikeRoomNormal_EventScript_25D226
-
 BattleFrontier_BattlePikeRoomNormal_EventScript_25D20A:: @ 825D20A
 	frontier_set FRONTIER_DATA_CHALLENGE_STATUS, CHALLENGE_STATUS_LOST
 	warp MAP_BATTLE_FRONTIER_BATTLE_PIKE_LOBBY, 255, 5, 6
@@ -59,9 +56,7 @@ BattleFrontier_BattlePikeRoomNormal_EventScript_25D231:: @ 825D231
 	closemessage
 	applymovement 1, BattleFrontier_BattlePikeRoomNormal_Movement_25D795
 	waitmovement 0
-	setvar VAR_0x8004, BATTLE_PIKE_FUNC_BUFFER_RECORD_MIX_MSG
-	setvar VAR_0x8005, 0
-	special CallBattlePikeFunction
+	pike_gettrainerintro 0
 	msgbox gStringVar4, MSGBOX_DEFAULT
 	waitmessage
 	closemessage
@@ -98,8 +93,7 @@ BattleFrontier_BattlePikeRoomNormal_EventScript_25D2BF:: @ 825D2BF
 	lockall
 	applymovement 2, BattleFrontier_BattlePikeRoomNormal_Movement_25D7DF
 	waitmovement 0
-	setvar VAR_0x8004, BATTLE_PIKE_FUNC_HEAL_MONS_BEFORE_QUEEN
-	special CallBattlePikeFunction
+	pike_prequeenheal
 	switch VAR_RESULT
 	case 0, BattleFrontier_BattlePikeRoomNormal_EventScript_25D4DC
 	case 1, BattleFrontier_BattlePikeRoomNormal_EventScript_25D4EA
@@ -112,7 +106,7 @@ BattleFrontier_BattlePikeRoomNormal_EventScript_25D2FB:: @ 825D2FB
 	applymovement EVENT_OBJ_ID_CAMERA, BattleFrontier_BattlePikeRoomNormal_Movement_25D9B0
 	applymovement 2, BattleFrontier_BattlePikeRoomNormal_Movement_25D7E2
 	waitmovement 0
-	playse 267
+	playse SE_CURTAIN
 	call BattleFrontier_BattlePikeRoomNormal_EventScript_25D8E7
 	delay 4
 	call BattleFrontier_BattlePikeRoomNormal_EventScript_25D8A4
@@ -121,7 +115,7 @@ BattleFrontier_BattlePikeRoomNormal_EventScript_25D2FB:: @ 825D2FB
 	delay 4
 	waitse
 	delay 60
-	playse 268
+	playse SE_CURTAIN1
 	delay 65
 	call BattleFrontier_BattlePikeRoomNormal_EventScript_25D8A4
 	showobjectat 1, MAP_BATTLE_FRONTIER_BATTLE_PIKE_ROOM_NORMAL
@@ -132,12 +126,11 @@ BattleFrontier_BattlePikeRoomNormal_EventScript_25D2FB:: @ 825D2FB
 	waitse
 	applymovement 1, BattleFrontier_BattlePikeRoomNormal_Movement_25D7E7
 	waitmovement 0
-	setvar VAR_0x8004, BATTLE_PIKE_FUNC_GET_QUEEN_FIGHT_TYPE
-	special CallBattlePikeFunction
+	pike_getbrainstatus
 	switch VAR_RESULT
-	case 2, BattleFrontier_BattlePikeRoomNormal_EventScript_25D416
-	case 3, BattleFrontier_BattlePikeRoomNormal_EventScript_25D3BD
-	case 4, BattleFrontier_BattlePikeRoomNormal_EventScript_25D443
+	case FRONTIER_BRAIN_GOLD, BattleFrontier_BattlePikeRoomNormal_EventScript_25D416
+	case FRONTIER_BRAIN_STREAK, BattleFrontier_BattlePikeRoomNormal_EventScript_25D3BD
+	case FRONTIER_BRAIN_STREAK_LONG, BattleFrontier_BattlePikeRoomNormal_EventScript_25D443
 	frontier_get FRONTIER_DATA_HEARD_BRAIN_SPEECH
 	compare VAR_RESULT, FALSE
 	goto_if_ne BattleFrontier_BattlePikeRoomNormal_EventScript_25D3BD
@@ -199,9 +192,9 @@ BattleFrontier_BattlePikeRoomNormal_EventScript_25D49D:: @ 825D49D
 	waitmovement 0
 	applymovement EVENT_OBJ_ID_PLAYER, BattleFrontier_BattlePikeRoomNormal_Movement_25D7DC
 	waitmovement 0
-	battlepike_getstreak
+	pike_get PIKE_DATA_WIN_STREAK
 	addvar VAR_RESULT, 1
-	battlepike_setstreak VAR_RESULT
+	pike_set PIKE_DATA_WIN_STREAK VAR_RESULT
 	call BattleFrontier_BattlePikeRoom_EventScript_WarpToFinalRoom
 	waitstate
 	end
@@ -256,17 +249,13 @@ BattleFrontier_BattlePikeRoomNormal_EventScript_25D53E:: @ 825D53E
 	waitmovement 0
 	applymovement EVENT_OBJ_ID_PLAYER, BattleFrontier_BattlePikeRoomNormal_Movement_25D7BB
 	waitmovement 0
-	setvar VAR_0x8004, BATTLE_PIKE_FUNC_BUFFER_RECORD_MIX_MSG
-	setvar VAR_0x8005, 0
-	special CallBattlePikeFunction
+	pike_gettrainerintro 0
 	msgbox gStringVar4, MSGBOX_DEFAULT
 	closemessage
 	delay 16
 	applymovement EVENT_OBJ_ID_PLAYER, BattleFrontier_BattlePikeRoomNormal_Movement_25D7BD
 	waitmovement 0
-	setvar VAR_0x8004, BATTLE_PIKE_FUNC_BUFFER_RECORD_MIX_MSG
-	setvar VAR_0x8005, 1
-	special CallBattlePikeFunction
+	pike_gettrainerintro 1
 	msgbox gStringVar4, MSGBOX_DEFAULT
 	closemessage
 	setvar VAR_0x8004, SPECIAL_BATTLE_PIKE_DOUBLE
@@ -294,12 +283,11 @@ BattleFrontier_BattlePikeRoomNormal_EventScript_25D605:: @ 825D605
 	message BattleFrontier_BattlePikeRoomNormal_Text_25DBD1
 	applymovement 2, BattleFrontier_BattlePikeRoomNormal_Movement_25D7AA
 	waitmovement 0
-	setvar VAR_0x8004, BATTLE_PIKE_FUNC_GET_ROOM_STATUS_MON
-	special CallBattlePikeFunction
+	pike_getstatusmon
 	copyvar VAR_0x8004, VAR_RESULT
-	compare VAR_0x8004, 0
+	compare VAR_0x8004, PIKE_STATUS_KIRLIA
 	call_if_eq BattleFrontier_BattlePikeRoomNormal_EventScript_25D643
-	compare VAR_0x8004, 1
+	compare VAR_0x8004, PIKE_STATUS_DUSCLOPS
 	call_if_eq BattleFrontier_BattlePikeRoomNormal_EventScript_25D6D5
 	msgbox BattleFrontier_BattlePikeRoomNormal_Text_25DD3F, MSGBOX_DEFAULT
 	closemessage
@@ -312,18 +300,16 @@ BattleFrontier_BattlePikeRoomNormal_EventScript_25D643:: @ 825D643
 	waitse
 	playmoncry SPECIES_KIRLIA, 0
 	waitmoncry
-	setvar VAR_0x8004, BATTLE_PIKE_FUNC_GET_ROOM_STATUS
-	special CallBattlePikeFunction
-	compare VAR_RESULT, 2
+	pike_getstatus
+	compare VAR_RESULT, PIKE_STATUS_TOXIC
 	call_if_eq BattleFrontier_BattlePikeRoomNormal_EventScript_25D751
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, PIKE_STATUS_BURN
 	call_if_eq BattleFrontier_BattlePikeRoomNormal_EventScript_25D758
-	compare VAR_RESULT, 3
+	compare VAR_RESULT, PIKE_STATUS_PARALYSIS
 	call_if_eq BattleFrontier_BattlePikeRoomNormal_EventScript_25D75F
-	compare VAR_RESULT, 4
+	compare VAR_RESULT, PIKE_STATUS_SLEEP
 	call_if_eq BattleFrontier_BattlePikeRoomNormal_EventScript_25D766
-	setvar VAR_0x8004, BATTLE_PIKE_FUNC_STATUS_SCREEN_FADE
-	special CallBattlePikeFunction
+	pike_fadescreen
 	waitstate
 	applymovement 1, BattleFrontier_BattlePikeRoomNormal_Movement_25D7A2
 	waitmovement 0
@@ -349,14 +335,12 @@ BattleFrontier_BattlePikeRoomNormal_EventScript_25D6D5:: @ 825D6D5
 	waitse
 	playmoncry SPECIES_DUSCLOPS, 0
 	waitmoncry
-	setvar VAR_0x8004, BATTLE_PIKE_FUNC_GET_ROOM_STATUS
-	special CallBattlePikeFunction
-	compare VAR_RESULT, 0
+	pike_getstatus
+	compare VAR_RESULT, PIKE_STATUS_FREEZE
 	call_if_eq BattleFrontier_BattlePikeRoomNormal_EventScript_25D76D
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, PIKE_STATUS_BURN
 	call_if_eq BattleFrontier_BattlePikeRoomNormal_EventScript_25D774
-	setvar VAR_0x8004, BATTLE_PIKE_FUNC_STATUS_SCREEN_FADE
-	special CallBattlePikeFunction
+	pike_fadescreen
 	waitstate
 	applymovement 1, BattleFrontier_BattlePikeRoomNormal_Movement_25D7A2
 	waitmovement 0
@@ -555,7 +539,7 @@ BattleFrontier_BattlePikeRoomNormal_Movement_25D7EA: @ 825D7EA
 	step_end
 
 BattleFrontier_BattlePikeRoomNormal_EventScript_25D7ED:: @ 825D7ED
-	battlepike_getroomtype
+	pike_getroomtype
 	switch VAR_RESULT
 	case PIKE_ROOM_NPC, BattleFrontier_BattlePikeRoomNormal_EventScript_25D81B
 	case PIKE_ROOM_STATUS, BattleFrontier_BattlePikeRoomNormal_EventScript_25D831
@@ -563,8 +547,7 @@ BattleFrontier_BattlePikeRoomNormal_EventScript_25D7ED:: @ 825D7ED
 BattleFrontier_BattlePikeRoomNormal_EventScript_25D81B:: @ 825D81B
 	lock
 	faceplayer
-	setvar VAR_0x8004, BATTLE_PIKE_FUNC_BUFFER_NPC_MSG
-	special CallBattlePikeFunction
+	pike_getnpcmsg
 	msgbox gStringVar4, MSGBOX_DEFAULT
 	waitmessage
 	closemessage
@@ -580,8 +563,7 @@ BattleFrontier_BattlePikeRoomNormal_EventScript_25D831:: @ 825D831
 	end
 
 BattleFrontier_BattlePikeRoomNormal_EventScript_25D83E:: @ 825D83E
-	setvar VAR_0x8004, BATTLE_PIKE_FUNC_HEAL_ONE_TWO_MONS
-	special CallBattlePikeFunction
+	pike_healonetwomons
 	compare VAR_RESULT, 2
 	call_if_eq BattleFrontier_BattlePikeRoomNormal_EventScript_25D881
 	compare VAR_RESULT, 1

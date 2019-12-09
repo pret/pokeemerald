@@ -540,7 +540,7 @@ void sub_810E2C8(struct Sprite *sprite)
         if (sprite->oam.affineMode & ST_OAM_AFFINE_ON_MASK)
         {
             FreeOamMatrix(sprite->oam.matrixNum);
-            sprite->oam.affineMode = 0;
+            sprite->oam.affineMode = ST_OAM_AFFINE_OFF;
         }
 
         DestroySprite(sprite);

@@ -201,10 +201,10 @@ static void Task_FreeAbilityPopUpGfx(u8 taskId);
 static const struct OamData sUnknown_0832C138 =
 {
     .y = 0,
-    .affineMode = 0,
-    .objMode = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
     .mosaic = 0,
-    .bpp = 0,
+    .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(64x32),
     .x = 0,
     .matrixNum = 0,
@@ -273,10 +273,10 @@ static const struct SpriteTemplate sHealthboxSafariSpriteTemplate =
 static const struct OamData sOamData_Healthbar =
 {
     .y = 0,
-    .affineMode = 0,
-    .objMode = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
     .mosaic = 0,
-    .bpp = 0,
+    .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(32x8),
     .x = 0,
     .matrixNum = 0,
@@ -329,15 +329,50 @@ static const struct SpriteTemplate sHealthbarSpriteTemplates[MAX_BATTLERS_COUNT]
 
 static const struct Subsprite sUnknown_0832C258[] =
 {
-    {240,   0,  1,  1,  0,      1},
-    {16,    0,  1,  1,  4,      1}
+    {
+        .x = 240,
+        .y = 0,
+        .shape = SPRITE_SHAPE(32x8),
+        .size = SPRITE_SIZE(32x8),
+        .tileOffset = 0,
+        .priority = 1
+    },
+    {
+        .x = 16,
+        .y = 0,
+        .shape = SPRITE_SHAPE(32x8),
+        .size = SPRITE_SIZE(32x8),
+        .tileOffset = 4,
+        .priority = 1
+    }
 };
 
 static const struct Subsprite sUnknown_0832C260[] =
 {
-    {240,   0,  1,  1,  0,      1},
-    {16,    0,  1,  1,  4,      1},
-    {224,   0,  0,  0,  8,      1}
+    {
+        .x = 240,
+        .y = 0,
+        .shape = SPRITE_SHAPE(32x8),
+        .size = SPRITE_SIZE(32x8),
+        .tileOffset = 0,
+        .priority = 1
+    },
+    {
+        .x = 16,
+        .y = 0,
+        .shape = SPRITE_SHAPE(32x8),
+        .size = SPRITE_SIZE(32x8),
+        .tileOffset = 4,
+        .priority = 1
+    },
+    {
+        .x = 224,
+        .y = 0,
+        .shape = SPRITE_SHAPE(8x8),
+        .size = SPRITE_SIZE(8x8),
+        .tileOffset = 8,
+        .priority = 1
+    }
 };
 
 static const struct SubspriteTable sUnknown_0832C28C[] =
@@ -348,20 +383,90 @@ static const struct SubspriteTable sUnknown_0832C28C[] =
 
 static const struct Subsprite sStatusSummaryBar_Subsprites_0[] =
 {
-    {160,   0,  1,  1,  0,      1},
-    {192,   0,  1,  1,  4,      1},
-    {224,   0,  1,  1,  8,      1},
-    {0,     0,  1,  1,  12,     1}
+    {
+        .x = 160,
+        .y = 0,
+        .shape = SPRITE_SHAPE(32x8),
+        .size = SPRITE_SIZE(32x8),
+        .tileOffset = 0,
+        .priority = 1
+    },
+    {
+        .x = 192,
+        .y = 0,
+        .shape = SPRITE_SHAPE(32x8),
+        .size = SPRITE_SIZE(32x8),
+        .tileOffset = 4,
+        .priority = 1
+    },
+    {
+        .x = 224,
+        .y = 0,
+        .shape = SPRITE_SHAPE(32x8),
+        .size = SPRITE_SIZE(32x8),
+        .tileOffset = 8,
+        .priority = 1
+    },
+    {
+        .x = 0,
+        .y = 0,
+        .shape = SPRITE_SHAPE(32x8),
+        .size = SPRITE_SIZE(32x8),
+        .tileOffset = 12,
+        .priority = 1
+    }
 };
 
 static const struct Subsprite sUnknown_0832C2AC[] =
 {
-    {160,   0,  1,  1,  0,      1},
-    {192,   0,  1,  1,  4,      1},
-    {224,   0,  1,  1,  8,      1},
-    {0,     0,  1,  1,  8,      1},
-    {32,    0,  1,  1,  8,      1},
-    {64,    0,  1,  1,  12,     1}
+    {
+        .x = 160,
+        .y = 0,
+        .shape = SPRITE_SHAPE(32x8),
+        .size = SPRITE_SIZE(32x8),
+        .tileOffset = 0,
+        .priority = 1
+    },
+    {
+        .x = 192,
+        .y = 0,
+        .shape = SPRITE_SHAPE(32x8),
+        .size = SPRITE_SIZE(32x8),
+        .tileOffset = 4,
+        .priority = 1
+    },
+    {
+        .x = 224,
+        .y = 0,
+        .shape = SPRITE_SHAPE(32x8),
+        .size = SPRITE_SIZE(32x8),
+        .tileOffset = 8,
+        .priority = 1
+    },
+    {
+        .x = 0,
+        .y = 0,
+        .shape = SPRITE_SHAPE(32x8),
+        .size = SPRITE_SIZE(32x8),
+        .tileOffset = 8,
+        .priority = 1
+    },
+    {
+        .x = 32,
+        .y = 0,
+        .shape = SPRITE_SHAPE(32x8),
+        .size = SPRITE_SIZE(32x8),
+        .tileOffset = 8,
+        .priority = 1
+    },
+    {
+        .x = 64,
+        .y = 0,
+        .shape = SPRITE_SHAPE(32x8),
+        .size = SPRITE_SIZE(32x8),
+        .tileOffset = 12,
+        .priority = 1
+    }
 };
 
 static const struct SubspriteTable sStatusSummaryBar_SubspriteTable[] =
@@ -394,13 +499,34 @@ static const struct SpriteSheet sStatusSummaryBallsSpriteSheet =
     gBattleInterface_BallDisplayGfx, 0x80, TAG_STATUS_SUMMARY_BALLS_TILE
 };
 
+<<<<<<< HEAD
+=======
+// unused oam data
+static const struct OamData sUnknown_0832C354 =
+{
+    .y = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .mosaic = 0,
+    .bpp = ST_OAM_4BPP,
+    .shape = SPRITE_SHAPE(64x32),
+    .x = 0,
+    .matrixNum = 0,
+    .size = SPRITE_SIZE(64x32),
+    .tileNum = 0,
+    .priority = 1,
+    .paletteNum = 0,
+    .affineParam = 0,
+};
+
+>>>>>>> 47ea65b96e4575a335d3197483841041cb361541
 static const struct OamData sOamData_StatusSummaryBalls =
 {
     .y = 0,
-    .affineMode = 0,
-    .objMode = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
     .mosaic = 0,
-    .bpp = 0,
+    .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(8x8),
     .x = 0,
     .matrixNum = 0,
@@ -624,9 +750,9 @@ u8 CreateBattlerHealthboxSprites(u8 battlerId)
             healthboxLeftSpriteId = CreateSprite(&sHealthboxPlayerSpriteTemplates[0], 240, 160, 1);
             healthboxRightSpriteId = CreateSpriteAtEnd(&sHealthboxPlayerSpriteTemplates[0], 240, 160, 1);
 
-            gSprites[healthboxLeftSpriteId].oam.shape = 0;
+            gSprites[healthboxLeftSpriteId].oam.shape = ST_OAM_SQUARE;
 
-            gSprites[healthboxRightSpriteId].oam.shape = 0;
+            gSprites[healthboxRightSpriteId].oam.shape = ST_OAM_SQUARE;
             gSprites[healthboxRightSpriteId].oam.tileNum += 64;
         }
         else
@@ -676,7 +802,7 @@ u8 CreateBattlerHealthboxSprites(u8 battlerId)
     healthbarSpriteId = CreateSpriteAtEnd(&sHealthbarSpriteTemplates[gBattlerPositions[battlerId]], 140, 60, 0);
     healthBarSpritePtr = &gSprites[healthbarSpriteId];
     SetSubspriteTables(healthBarSpritePtr, &sUnknown_0832C28C[GetBattlerSide(battlerId)]);
-    healthBarSpritePtr->subspriteMode = 2;
+    healthBarSpritePtr->subspriteMode = SUBSPRITES_IGNORE_PRIORITY;
     healthBarSpritePtr->oam.priority = 1;
 
     CpuCopy32(GetHealthboxElementGfxPtr(HEALTHBOX_GFX_1), (void*)(OBJ_VRAM0 + healthBarSpritePtr->oam.tileNum * TILE_SIZE_4BPP), 64);
@@ -708,8 +834,8 @@ u8 CreateSafariPlayerHealthboxSprites(void)
     healthboxLeftSpriteId = CreateSprite(&sHealthboxSafariSpriteTemplate, 240, 160, 1);
     healthboxRightSpriteId = CreateSpriteAtEnd(&sHealthboxSafariSpriteTemplate, 240, 160, 1);
 
-    gSprites[healthboxLeftSpriteId].oam.shape = 0;
-    gSprites[healthboxRightSpriteId].oam.shape = 0;
+    gSprites[healthboxLeftSpriteId].oam.shape = ST_OAM_SQUARE;
+    gSprites[healthboxRightSpriteId].oam.shape = ST_OAM_SQUARE;
 
     gSprites[healthboxRightSpriteId].oam.tileNum += 64;
 
@@ -1658,9 +1784,9 @@ void Task_HidePartyStatusSummary(u8 taskId)
     gTasks[taskId].tData15 = 16;
 
     for (i = 0; i < PARTY_SIZE; i++)
-        gSprites[ballIconSpriteIds[i]].oam.objMode = 1;
+        gSprites[ballIconSpriteIds[i]].oam.objMode = ST_OAM_OBJ_BLEND;
 
-    gSprites[summaryBarSpriteId].oam.objMode = 1;
+    gSprites[summaryBarSpriteId].oam.objMode = ST_OAM_OBJ_BLEND;
 
     if (isBattleStart)
     {

@@ -12,8 +12,7 @@ BattleFrontier_BattlePalaceCorridor_EventScript_24F4B3:: @ 824F4B3
 	applymovement EVENT_OBJ_ID_PLAYER, BattleFrontier_BattlePalaceCorridor_Movement_24F5B8
 	waitmovement 0
 	lockall
-	setvar VAR_0x8004, 3
-	special CallBattlePalaceFunction
+	palace_getcomment
 	compare VAR_RESULT, 0
 	call_if_eq BattleFrontier_BattlePalaceCorridor_EventScript_24F58B
 	compare VAR_RESULT, 1

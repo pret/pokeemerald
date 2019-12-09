@@ -42,17 +42,17 @@ EWRAM_DATA const struct BattleFrontierTrainer *gFacilityTrainers = NULL;
 EWRAM_DATA const struct FacilityMon *gFacilityTrainerMons = NULL;
 
 // IWRAM common
-u16 gUnknown_03006298[4];
+u16 gUnknown_03006298[MAX_FRONTIER_PARTY_SIZE];
 
 // This file's functions.
-static void sub_8161F94(void);
-static void sub_8162054(void);
-static void sub_81620F4(void);
-static void ChooseNextBattleTowerTrainer(void);
-static void sub_81621C0(void);
+static void InitTowerChallenge(void);
+static void GetTowerData(void);
+static void SetTowerData(void);
+static void SetNextFacilityOpponent(void);
+static void SetTowerBattleWon(void);
 static void AwardBattleTowerRibbons(void);
-static void SaveBattleTowerProgress(void);
-static void sub_8163914(void);
+static void SaveTowerChallenge(void);
+static void GetOpponentIntroSpeech(void);
 static void nullsub_61(void);
 static void nullsub_116(void);
 static void sub_81642A0(void);
@@ -60,11 +60,11 @@ static void sub_8164828(void);
 static void sub_8164B74(void);
 static void sub_8164DCC(void);
 static void sub_8164DE4(void);
-static void sub_8164E04(void);
+static void SetTowerInterviewData(void);
 static void ValidateBattleTowerRecordChecksums(void);
 static void SaveCurrentWinStreak(void);
 static void ValidateApprenticesChecksums(void);
-static void sub_8165E18(void);
+static void SetNextBattleTentOpponent(void);
 static void CopyEReaderTrainerFarewellMessage(void);
 static void ClearBattleTowerRecord(struct EmeraldBattleTowerRecord *record);
 static void FillTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount);
@@ -1056,14 +1056,14 @@ struct
 
 static void (* const sBattleTowerFuncs[])(void) =
 {
-    [BATTLE_TOWER_FUNC_0] = sub_8161F94,
-    [BATTLE_TOWER_FUNC_1] = sub_8162054,
-    [BATTLE_TOWER_FUNC_2] = sub_81620F4,
-    [BATTLE_TOWER_FUNC_CHOOSE_TRAINER] = ChooseNextBattleTowerTrainer,
-    [BATTLE_TOWER_FUNC_4] = sub_81621C0,
+    [BATTLE_TOWER_FUNC_INIT] = InitTowerChallenge,
+    [BATTLE_TOWER_FUNC_GET_DATA] = GetTowerData,
+    [BATTLE_TOWER_FUNC_SET_DATA] = SetTowerData,
+    [BATTLE_TOWER_FUNC_SET_OPPONENT] = SetNextFacilityOpponent,
+    [BATTLE_TOWER_FUNC_SET_BATTLE_WON] = SetTowerBattleWon,
     [BATTLE_TOWER_FUNC_GIVE_RIBBONS] = AwardBattleTowerRibbons,
-    [BATTLE_TOWER_FUNC_SAVE] = SaveBattleTowerProgress,
-    [BATTLE_TOWER_FUNC_7] = sub_8163914,
+    [BATTLE_TOWER_FUNC_SAVE] = SaveTowerChallenge,
+    [BATTLE_TOWER_FUNC_GET_OPPONENT_INTRO] = GetOpponentIntroSpeech,
     [BATTLE_TOWER_FUNC_NOP] = nullsub_61,
     [BATTLE_TOWER_FUNC_NOP2] = nullsub_116,
     [BATTLE_TOWER_FUNC_10] = sub_81642A0,
@@ -1071,7 +1071,7 @@ static void (* const sBattleTowerFuncs[])(void) =
     [BATTLE_TOWER_FUNC_12] = sub_8164B74,
     [BATTLE_TOWER_FUNC_13] = sub_8164DCC,
     [BATTLE_TOWER_FUNC_14] = sub_8164DE4,
-    [BATTLE_TOWER_FUNC_15] = sub_8164E04,
+    [BATTLE_TOWER_FUNC_SET_INTERVIEW_DATA] = SetTowerInterviewData,
 };
 
 static const u32 sWinStreakFlags[][2] =
@@ -1154,7 +1154,7 @@ void CallBattleTowerFunc(void)
     sBattleTowerFuncs[gSpecialVar_0x8004]();
 }
 
-static void sub_8161F94(void)
+static void InitTowerChallenge(void)
 {
     u32 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
     u32 battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
@@ -1172,7 +1172,7 @@ static void sub_8161F94(void)
     gTrainerBattleOpponent_A = 0;
 }
 
-static void sub_8162054(void)
+static void GetTowerData(void)
 {
     u32 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
     u32 battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
@@ -1181,19 +1181,19 @@ static void sub_8162054(void)
     {
     case 0:
         break;
-    case 1:
+    case TOWER_DATA_WIN_STREAK:
         gSpecialVar_Result = GetCurrentBattleTowerWinStreak(lvlMode, battleMode);
         break;
-    case 2:
+    case TOWER_DATA_WIN_STREAK_ACTIVE:
         gSpecialVar_Result = ((gSaveBlock2Ptr->frontier.winStreakActiveFlags & sWinStreakFlags[battleMode][lvlMode]) != 0);
         break;
-    case 3:
+    case TOWER_DATA_LVL_MODE:
         gSaveBlock2Ptr->frontier.towerLvlMode = gSaveBlock2Ptr->frontier.lvlMode;
         break;
     }
 }
 
-static void sub_81620F4(void)
+static void SetTowerData(void)
 {
     u32 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
     u32 battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
@@ -1202,27 +1202,27 @@ static void sub_81620F4(void)
     {
     case 0:
         break;
-    case 1:
+    case TOWER_DATA_WIN_STREAK:
         gSaveBlock2Ptr->frontier.towerWinStreaks[battleMode][lvlMode] = gSpecialVar_0x8006;
         break;
-    case 2:
+    case TOWER_DATA_WIN_STREAK_ACTIVE:
         if (gSpecialVar_0x8006)
             gSaveBlock2Ptr->frontier.winStreakActiveFlags |= sWinStreakFlags[battleMode][lvlMode];
         else
             gSaveBlock2Ptr->frontier.winStreakActiveFlags &= sWinStreakMasks[battleMode][lvlMode];
         break;
-    case 3:
+    case TOWER_DATA_LVL_MODE:
         gSaveBlock2Ptr->frontier.towerLvlMode = gSaveBlock2Ptr->frontier.lvlMode;
         break;
     }
 }
 
-static void sub_81621C0(void)
+static void SetTowerBattleWon(void)
 {
     if (gTrainerBattleOpponent_A == TRAINER_EREADER)
         ClearEReaderTrainer(&gSaveBlock2Ptr->frontier.ereaderTrainer);
 
-    // below field is never read outside this conditional
+    // towerNumWins is never read outside this conditional
     if (gSaveBlock2Ptr->frontier.towerNumWins < MAX_STREAK)
         gSaveBlock2Ptr->frontier.towerNumWins++;
 
@@ -1299,12 +1299,12 @@ static bool8 ChooseSpecialBattleTowerTrainer(void)
     }
 }
 
-static void ChooseNextBattleTowerTrainer(void)
+static void SetNextFacilityOpponent(void)
 {
     u32 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
     if (lvlMode == FRONTIER_LVL_TENT)
     {
-        sub_8165E18();
+        SetNextBattleTentOpponent();
     }
     else
     {
@@ -2105,7 +2105,7 @@ static void FillFactoryFrontierTrainerParty(u16 trainerId, u8 firstMonId)
 
     level = SetFacilityPtrsGetLevel();
     otID = T1_READ_32(gSaveBlock2Ptr->playerTrainerId);
-    for (i = 0; i < 3; i++)
+    for (i = 0; i < FRONTIER_PARTY_SIZE; i++)
     {
         u16 monSetId = gUnknown_03006298[i];
         CreateMonWithEVSpreadNatureOTID(&gEnemyParty[firstMonId + i],
@@ -2133,7 +2133,7 @@ static void FillFactoryTentTrainerParty(u16 trainerId, u8 firstMonId)
     u8 fixedIV = 0;
     u32 otID = T1_READ_32(gSaveBlock2Ptr->playerTrainerId);
 
-    for (i = 0; i < 3; i++)
+    for (i = 0; i < FRONTIER_PARTY_SIZE; i++)
     {
         u16 monSetId = gUnknown_03006298[i];
         CreateMonWithEVSpreadNatureOTID(&gEnemyParty[firstMonId + i],
@@ -2174,7 +2174,7 @@ void FrontierSpeechToString(const u16 *words)
     }
 }
 
-static void sub_8163914(void)
+static void GetOpponentIntroSpeech(void)
 {
     u16 trainerId;
     SetFacilityPtrsGetLevel();
@@ -2467,7 +2467,7 @@ static void sub_8163EE4(void)
     SaveCurrentWinStreak();
 }
 
-static void SaveBattleTowerProgress(void)
+static void SaveTowerChallenge(void)
 {
     u16 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
     u16 battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
@@ -2933,7 +2933,7 @@ static void sub_8164DE4(void)
     SetBattleFacilityTrainerGfxId(gSaveBlock2Ptr->frontier.trainerIds[17], 0xF);
 }
 
-static void sub_8164E04(void)
+static void SetTowerInterviewData(void)
 {
     s32 i;
     u8 text[32];
@@ -3672,7 +3672,7 @@ static u8 SetTentPtrsGetLevel(void)
     return level;
 }
 
-static void sub_8165E18(void)
+static void SetNextBattleTentOpponent(void)
 {
     s32 i;
     u16 trainerId;

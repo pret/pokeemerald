@@ -10,7 +10,7 @@ u16 GetPCBoxToSendMon(void);
 bool8 InMultiBattleRoom(void);
 void UpdateTrainerFansAfterLinkBattle(void);
 void IncrementBirthIslandRockStepCount(void);
-bool8 UnusualWeatherHasExpired(void);
+bool8 AbnormalWeatherHasExpired(void);
 bool8 ShouldDoBrailleRegicePuzzle(void);
 bool32 ShouldDoWallyCall(void);
 bool32 ShouldDoScottFortreeCall(void);

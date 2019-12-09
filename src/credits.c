@@ -1053,10 +1053,10 @@ static const struct SpritePalette gUnknown_085E702C[] = {
 static const struct OamData gUnknown_085E703C =
 {
     .y = 160,
-    .affineMode = 0,
-    .objMode = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
     .mosaic = 0,
-    .bpp = 0,
+    .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(64x64),
     .x = 0,
     .matrixNum = 0,
@@ -2183,7 +2183,7 @@ static void sub_8177050(struct Sprite *sprite)
     {
     case 0:
     default:
-        sprite->oam.affineMode = 1;
+        sprite->oam.affineMode = ST_OAM_AFFINE_NORMAL;
         sprite->oam.matrixNum = sprite->data[1];
         sprite->data[2] = 16;
         SetOamMatrix(sprite->data[1], 0x10000 / sprite->data[2], 0, 0, 0x10000 / sprite->data[2]);
@@ -2225,7 +2225,7 @@ static void sub_8177050(struct Sprite *sprite)
         {
             SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_BG0 | BLDCNT_TGT2_BG1 | BLDCNT_TGT2_BG2 | BLDCNT_TGT2_BG3);
             SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(16, 0));
-            sprite->oam.objMode = 1;
+            sprite->oam.objMode = ST_OAM_OBJ_BLEND;
             sprite->data[3] = 16;
             sprite->data[0] += 1;
         }

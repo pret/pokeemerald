@@ -30,6 +30,7 @@
 #include "scanline_effect.h"
 #include "script_pokemon_util_80F87D8.h"
 #include "graphics.h"
+#include "constants/battle_dome.h"
 #include "constants/frontier_util.h"
 #include "constants/species.h"
 #include "constants/moves.h"
@@ -38,13 +39,6 @@
 #include "constants/songs.h"
 #include "constants/battle_frontier.h"
 #include "constants/rgb.h"
-
-#define DOME_ROUND1 0
-#define DOME_ROUND2 1
-#define DOME_QUARTERFINAL 1 // Different name for the same round.
-#define DOME_SEMIFINAL 2
-#define DOME_FINAL 3
-#define DOME_ROUNDS_COUNT 4
 
 struct BattleDomeStruct
 {
@@ -107,9 +101,9 @@ static void SetDomeOpponentId(void);
 static void SetDomeOpponentGraphicsId(void);
 static void ShowNonInteractiveDomeTourneyTree(void);
 static void ResolveDomeRoundWinners(void);
-static void sub_81902F8(void);
-static void UpdateDomeStreaks(void);
-static void RestoreDomePlayerParty(void);
+static void SaveDomeChallenge(void);
+static void IncrementDomeStreaks(void);
+static void ResetSketchedMoves(void);
 static void RestoreDomePlayerPartyHeldItems(void);
 static void ReduceDomePlayerPartyTo3Mons(void);
 static void GetPlayerSeededBeforeOpponent(void);
@@ -866,10 +860,10 @@ static const struct CompressedSpritePalette gUnknown_0860CF60[] =
 static const struct OamData gUnknown_0860CF70 =
 {
     .y = 0,
-    .affineMode = 0,
-    .objMode = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
     .mosaic = 0,
-    .bpp = 0,
+    .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(16x16),
     .x = 0,
     .matrixNum = 0,
@@ -883,10 +877,10 @@ static const struct OamData gUnknown_0860CF70 =
 static const struct OamData gUnknown_0860CF78 =
 {
     .y = 0,
-    .affineMode = 0,
-    .objMode = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
     .mosaic = 0,
-    .bpp = 0,
+    .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(32x16),
     .x = 0,
     .matrixNum = 0,
@@ -900,10 +894,10 @@ static const struct OamData gUnknown_0860CF78 =
 static const struct OamData gUnknown_0860CF80 =
 {
     .y = 0,
-    .affineMode = 0,
-    .objMode = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
     .mosaic = 0,
-    .bpp = 0,
+    .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(16x8),
     .x = 0,
     .matrixNum = 0,
@@ -917,10 +911,10 @@ static const struct OamData gUnknown_0860CF80 =
 static const struct OamData gUnknown_0860CF88 =
 {
     .y = 0,
-    .affineMode = 0,
-    .objMode = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
     .mosaic = 0,
-    .bpp = 0,
+    .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(8x16),
     .x = 0,
     .matrixNum = 0,
@@ -1079,29 +1073,29 @@ static const u8 sTourneyTreeTrainerIds[] = {0, 8, 12, 4, 7, 15, 11, 3, 2, 10, 14
 
 static void (* const sBattleDomeFunctions[])(void) =
 {
-    InitDomeChallenge,
-    GetDomeData,
-    SetDomeData,
-    BufferDomeRoundText,
-    BufferDomeOpponentName,
-    InitDomeOpponentParty,
-    ShowDomeOpponentInfo,
-    ShowDomeTourneyTree,
-    ShowPreviousDomeResultsTourneyTree,
-    SetDomeOpponentId,
-    SetDomeOpponentGraphicsId,
-    ShowNonInteractiveDomeTourneyTree,
-    ResolveDomeRoundWinners,
-    sub_81902F8,
-    UpdateDomeStreaks,
-    InitDomeFacilityTrainersAndMons,
-    RestoreDomePlayerParty,
-    RestoreDomePlayerPartyHeldItems,
-    ReduceDomePlayerPartyTo3Mons,
-    GetPlayerSeededBeforeOpponent,
-    BufferLastDomeWinnerName,
-    sub_8194F58,
-    InitDomeTrainers,
+    [BATTLE_DOME_FUNC_INIT]                     = InitDomeChallenge,
+    [BATTLE_DOME_FUNC_GET_DATA]                 = GetDomeData,
+    [BATTLE_DOME_FUNC_SET_DATA]                 = SetDomeData,
+    [BATTLE_DOME_FUNC_GET_ROUND_TEXT]           = BufferDomeRoundText,
+    [BATTLE_DOME_FUNC_GET_OPPONENT_NAME]        = BufferDomeOpponentName,
+    [BATTLE_DOME_FUNC_INIT_OPPONENT_PARTY]      = InitDomeOpponentParty,
+    [BATTLE_DOME_FUNC_SHOW_OPPONENT_INFO]       = ShowDomeOpponentInfo,
+    [BATTLE_DOME_FUNC_SHOW_TOURNEY_TREE]        = ShowDomeTourneyTree,
+    [BATTLE_DOME_FUNC_SHOW_PREV_RESULTS_TREE]   = ShowPreviousDomeResultsTourneyTree,
+    [BATTLE_DOME_FUNC_SET_OPPONENT_ID]          = SetDomeOpponentId,
+    [BATTLE_DOME_FUNC_SET_OPPONENT_GFX]         = SetDomeOpponentGraphicsId,
+    [BATTLE_DOME_FUNC_SHOW_STATIC_TOURNEY_TREE] = ShowNonInteractiveDomeTourneyTree,
+    [BATTLE_DOME_FUNC_RESOLVE_WINNERS]          = ResolveDomeRoundWinners,
+    [BATTLE_DOME_FUNC_SAVE]                     = SaveDomeChallenge,
+    [BATTLE_DOME_FUNC_INCREMENT_STREAK]         = IncrementDomeStreaks,
+    [BATTLE_DOME_FUNC_SET_TRAINERS]             = InitDomeFacilityTrainersAndMons,
+    [BATTLE_DOME_FUNC_RESET_SKETCH]             = ResetSketchedMoves,
+    [BATTLE_DOME_FUNC_RESTORE_HELD_ITEMS]       = RestoreDomePlayerPartyHeldItems,
+    [BATTLE_DOME_FUNC_REDUCE_PARTY]             = ReduceDomePlayerPartyTo3Mons,
+    [BATTLE_DOME_FUNC_COMPARE_SEEDS]            = GetPlayerSeededBeforeOpponent,
+    [BATTLE_DOME_FUNC_GET_WINNER_NAME]          = BufferLastDomeWinnerName,
+    [BATTLE_DOME_FUNC_21]                       = sub_8194F58,
+    [BATTLE_DOME_FUNC_INIT_TRAINERS]            = InitDomeTrainers,
 };
 
 static const u32 sWinStreakFlags[][2] =
@@ -2280,25 +2274,25 @@ static void GetDomeData(void)
 
     switch (gSpecialVar_0x8005)
     {
-    case 0:
+    case DOME_DATA_WIN_STREAK:
         gSpecialVar_Result = gSaveBlock2Ptr->frontier.domeWinStreaks[battleMode][lvlMode];
         break;
-    case 1:
+    case DOME_DATA_WIN_STREAK_ACTIVE:
         gSpecialVar_Result = ((gSaveBlock2Ptr->frontier.winStreakActiveFlags & sWinStreakFlags[battleMode][lvlMode]) != 0);
         break;
-    case 2:
+    case DOME_DATA_2:
         gSpecialVar_Result = gSaveBlock2Ptr->frontier.field_D08_0;
         break;
-    case 3:
+    case DOME_DATA_3:
         gSpecialVar_Result = gSaveBlock2Ptr->frontier.field_D08_1;
         break;
-    case 4:
+    case DOME_DATA_4:
         gSpecialVar_Result = gSaveBlock2Ptr->frontier.field_D08_2;
         break;
-    case 5:
+    case DOME_DATA_5:
         gSpecialVar_Result = gSaveBlock2Ptr->frontier.field_D08_3;
         break;
-    case 6:
+    case DOME_DATA_6:
         if (VarGet(VAR_FRONTIER_BATTLE_MODE) == FRONTIER_MODE_DOUBLES)
         {
             if (lvlMode)
@@ -2314,7 +2308,7 @@ static void GetDomeData(void)
                 gSpecialVar_Result = gSaveBlock2Ptr->frontier.field_D08_0;
         }
         break;
-    case 7:
+    case DOME_DATA_7:
         if (VarGet(VAR_FRONTIER_BATTLE_MODE) == FRONTIER_MODE_DOUBLES)
         {
             if (lvlMode)
@@ -2330,12 +2324,12 @@ static void GetDomeData(void)
                 gSpecialVar_Result = gSaveBlock2Ptr->frontier.field_D08_2;
         }
         break;
-    case 8:
+    case DOME_DATA_8:
         ClearSelectedPartyOrder();
         gSelectedOrderFromParty[0] = gSaveBlock2Ptr->frontier.selectedPartyMons[3];
         gSelectedOrderFromParty[1] = gSaveBlock2Ptr->frontier.selectedPartyMons[3] >> 8;
         break;
-    case 9:
+    case DOME_DATA_9:
         gSpecialVar_Result = (gSaveBlock2Ptr->frontier.field_D0A * 2) - 3 + gSaveBlock2Ptr->frontier.field_D0B;
         break;
     }
@@ -2348,28 +2342,28 @@ static void SetDomeData(void)
 
     switch (gSpecialVar_0x8005)
     {
-    case 0:
+    case DOME_DATA_WIN_STREAK:
         gSaveBlock2Ptr->frontier.domeWinStreaks[battleMode][lvlMode] = gSpecialVar_0x8006;
         break;
-    case 1:
+    case DOME_DATA_WIN_STREAK_ACTIVE:
         if (gSpecialVar_0x8006)
             gSaveBlock2Ptr->frontier.winStreakActiveFlags |= sWinStreakFlags[battleMode][lvlMode];
         else
             gSaveBlock2Ptr->frontier.winStreakActiveFlags &= sWinStreakMasks[battleMode][lvlMode];
         break;
-    case 2:
+    case DOME_DATA_2:
         gSaveBlock2Ptr->frontier.field_D08_0 = gSpecialVar_0x8006;
         break;
-    case 3:
+    case DOME_DATA_3:
         gSaveBlock2Ptr->frontier.field_D08_1 = gSpecialVar_0x8006;
         break;
-    case 4:
+    case DOME_DATA_4:
         gSaveBlock2Ptr->frontier.field_D08_2 = gSpecialVar_0x8006;
         break;
-    case 5:
+    case DOME_DATA_5:
         gSaveBlock2Ptr->frontier.field_D08_3 = gSpecialVar_0x8006;
         break;
-    case 6:
+    case DOME_DATA_6:
         if (VarGet(VAR_FRONTIER_BATTLE_MODE) == FRONTIER_MODE_DOUBLES)
         {
             if (lvlMode)
@@ -2385,7 +2379,7 @@ static void SetDomeData(void)
                 gSaveBlock2Ptr->frontier.field_D08_0 = gSpecialVar_0x8006;
         }
         break;
-    case 7:
+    case DOME_DATA_7:
         if (VarGet(VAR_FRONTIER_BATTLE_MODE) == FRONTIER_MODE_DOUBLES)
         {
             if (lvlMode)
@@ -2401,7 +2395,7 @@ static void SetDomeData(void)
                 gSaveBlock2Ptr->frontier.field_D08_2 = gSpecialVar_0x8006;
         }
         break;
-    case 8:
+    case DOME_DATA_8:
         gSaveBlock2Ptr->frontier.selectedPartyMons[3] = T1_READ_16(gSelectedOrderFromParty);
         break;
     }
@@ -2411,7 +2405,7 @@ static void InitDomeTrainers(void)
 {
     int i, j, k;
     int monLevel;
-    int species[3];
+    int species[FRONTIER_PARTY_SIZE];
     int monTypesBits, monTypesCount;
     int trainerId;
     int monSetId;
@@ -2472,7 +2466,7 @@ static void InitDomeTrainers(void)
             gSaveBlock2Ptr->frontier.domeTrainers[i].trainerId = trainerId;
         }
 
-        for (j = 0; j < 3; j++)
+        for (j = 0; j < FRONTIER_PARTY_SIZE; j++)
         {
             // Make sure the mon is valid.
             do
@@ -2528,7 +2522,7 @@ static void InitDomeTrainers(void)
         monTypesBits = 0;
         statSums[i] = 0;
         ivs = GetDomeTrainerMonIvs(gSaveBlock2Ptr->frontier.domeTrainers[i].trainerId);
-        for (j = 0; j < 3; j++)
+        for (j = 0; j < FRONTIER_PARTY_SIZE; j++)
         {
             CalcDomeMonStats(gFacilityTrainerMons[gSaveBlock2Ptr->frontier.domeMonIds[i][j]].species,
                              monLevel, ivs,
@@ -2595,7 +2589,7 @@ static void InitDomeTrainers(void)
             gSaveBlock2Ptr->frontier.domeTrainers[j].trainerId = TRAINER_FRONTIER_BRAIN;
         }
 
-        for (i = 0; i < 3; i++)
+        for (i = 0; i < FRONTIER_PARTY_SIZE; i++)
             gSaveBlock2Ptr->frontier.domeMonIds[j][i] = GetFrontierBrainMonSpecies(i);
     }
 
@@ -2765,14 +2759,14 @@ int GetDomeTrainerMonCountInBits(u16 tournamentTrainerId)
 static int sub_818FCBC(u16 tournamentTrainerId, bool8 arg1)
 {
     int i, moveId, playerMonId;
-    int array[3];
+    int array[FRONTIER_PARTY_SIZE];
 
-    for (i = 0; i < 3; i++)
+    for (i = 0; i < FRONTIER_PARTY_SIZE; i++)
     {
         array[i] = 0;
         for (moveId = 0; moveId < MAX_MON_MOVES; moveId++)
         {
-            for (playerMonId = 0; playerMonId < 3; playerMonId++)
+            for (playerMonId = 0; playerMonId < FRONTIER_PARTY_SIZE; playerMonId++)
             {
                 if (gSaveBlock2Ptr->frontier.domeTrainers[tournamentTrainerId].trainerId == TRAINER_FRONTIER_BRAIN)
                 {
@@ -2793,14 +2787,14 @@ static int sub_818FCBC(u16 tournamentTrainerId, bool8 arg1)
 static int sub_818FDB8(u16 tournamentTrainerId, bool8 arg1)
 {
     int i, moveId, playerMonId;
-    int array[3];
+    int array[FRONTIER_PARTY_SIZE];
 
-    for (i = 0; i < 3; i++)
+    for (i = 0; i < FRONTIER_PARTY_SIZE; i++)
     {
         array[i] = 0;
         for (moveId = 0; moveId < MAX_MON_MOVES; moveId++)
         {
-            for (playerMonId = 0; playerMonId < 3; playerMonId++)
+            for (playerMonId = 0; playerMonId < FRONTIER_PARTY_SIZE; playerMonId++)
             {
                 if (gSaveBlock2Ptr->frontier.domeTrainers[tournamentTrainerId].trainerId == TRAINER_FRONTIER_BRAIN)
                 {
@@ -3073,7 +3067,7 @@ static void SetDomeOpponentGraphicsId(void)
     SetBattleFacilityTrainerGfxId(gTrainerBattleOpponent_A, 0);
 }
 
-static void sub_81902F8(void)
+static void SaveDomeChallenge(void)
 {
     gSaveBlock2Ptr->frontier.challengeStatus = gSpecialVar_0x8005;
     VarSet(VAR_TEMP_0, 0);
@@ -3081,7 +3075,7 @@ static void sub_81902F8(void)
     SaveGameFrontier();
 }
 
-static void UpdateDomeStreaks(void)
+static void IncrementDomeStreaks(void)
 {
     u8 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
     u8 battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
@@ -5683,7 +5677,7 @@ static void InitDomeFacilityTrainersAndMons(void)
     gFacilityTrainers = gBattleFrontierTrainers;
 }
 
-static void RestoreDomePlayerParty(void)
+static void ResetSketchedMoves(void)
 {
     int i, moveSlot;
 
@@ -5751,7 +5745,7 @@ static void sub_8194F58(void)
 {
     int i, j, k;
     int monLevel;
-    int species[3];
+    int species[FRONTIER_PARTY_SIZE];
     int monTypesBits;
     int trainerId;
     int monSetId;
@@ -5767,7 +5761,7 @@ static void sub_8194F58(void)
         return;
 
     statSums = AllocZeroed(sizeof(u16) * DOME_TOURNAMENT_TRAINERS_COUNT);
-    statValues = AllocZeroed(sizeof(int) * 6);
+    statValues = AllocZeroed(sizeof(int) * NUM_STATS);
     lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
     gSaveBlock2Ptr->frontier.lvlMode = 0;
     // This one, I'd like to call a 'C fakematching'.
@@ -5796,7 +5790,7 @@ static void sub_8194F58(void)
         } while (j != i);
 
         gSaveBlock2Ptr->frontier.domeTrainers[i].trainerId = trainerId;
-        for (j = 0; j < 3; j++)
+        for (j = 0; j < FRONTIER_PARTY_SIZE; j++)
         {
             // Make sure the mon is valid.
             do
@@ -5827,7 +5821,7 @@ static void sub_8194F58(void)
         monTypesBits = 0;
         statSums[i] = 0;
         ivs = GetDomeTrainerMonIvs(gSaveBlock2Ptr->frontier.domeTrainers[i].trainerId);
-        for (j = 0; j < 3; j++)
+        for (j = 0; j < FRONTIER_PARTY_SIZE; j++)
         {
             CalcDomeMonStats(gFacilityTrainerMons[gSaveBlock2Ptr->frontier.domeMonIds[i][j]].species,
                              monLevel, ivs,
